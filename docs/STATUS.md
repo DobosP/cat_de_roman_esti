@@ -1,16 +1,21 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-06-21. Update whenever `main` or the test baseline moves._
+_As of 2026-06-22. Update whenever `main` or the test baseline moves._
 
 ## Phase
 
-**v1.1 — playable Romanian "semantic network hop" game (expanded).** Terminal CLI **and** a
-modern animated **web app**, backed by a curated multi-category knowledge graph, served by a
-**server-authoritative FastAPI backend-for-frontend** that reuses the tested game engine.
-Offline-first (bundled fixture); a live `ro_data_server` is optional via `ROEDU_API_URL`.
+**v1.2 — text word-game arcade (web).** The web app was pivoted from the graph-based hop
+game to a **text-only arcade of three server-authoritative word games** over the same KG
+(no graph visualization): **Alchimie** (Infinite-Craft combine), **Cald sau Rece**
+(Contexto hot/cold), **Lanțul Cuvintelor** (word-ladder). Backed by
+`cat_de_roman_esti/wordgames/` (a shared `service.py` over the offline KG + one
+`APIRouter` per game under `/api/wordgames/*`). The old graph SPA + its `/api/games`
+endpoints were removed (`react-force-graph-2d` dropped; bundle 482→289 KB).
 
-**v1.1 adds:** a much larger fact-checked KG (249 nodes / 417 edges / 148 puzzles),
-**undo**, **multi-puzzle sessions** with a running tally, an offline **leaderboard**,
+The **terminal CLI** remains the original `easy|hard` semantic-hop game (engine/graph/data
+untouched). The KG itself is the v1.1 expansion below.
+
+**v1.1 (still in place):** a fact-checked KG of **249 nodes / 417 edges / 148 puzzles**,
 **pinned web deps** for reproducible deploys, and a **GitHub Actions CI** gate.
 
 ## What's built

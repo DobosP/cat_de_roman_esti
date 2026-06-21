@@ -7,11 +7,20 @@ shown) and **hard** (decoys kept, labels + hints hidden).
 
 The name is a pun on *"cât de român ești"* — "how Romanian are you".
 
-The animated web app adds **undo** (Backspace), **multi-puzzle sessions** with a running
-score tally, and an offline **leaderboard** (your best score/hops per category+mode and
-best session, kept in the browser — no account, no server). The bundled knowledge graph
-spans **249 concepts / 417 links / 148 puzzles** across 8 categories plus cross-category
-*mixed* puzzles.
+## Web app — the word-game arcade
+
+The web app is a **text-only arcade** of three word games over the same Romanian concept
+graph (**~249 concepts / 417 links**, no graph visualization). All three are
+**server-authoritative** (the BFF validates moves and hides answers):
+
+- **Alchimie** *(à la Infinite Craft)* — combine two concepts into a new one (their shared
+  link) and keep crafting until you reach the target.
+- **Cald sau Rece** *(à la Contexto/Semantle)* — a hidden secret concept; each guess tells
+  you how close you are (hot ↔ cold); find it.
+- **Lanțul Cuvintelor** *(à la The Wiki Game)* — type a concept linked to the current one
+  and hop word-by-word to the target in as few moves as possible.
+
+The terminal CLI below is the original semantic-hop game.
 
 ## Stack
 

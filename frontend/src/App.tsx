@@ -1,74 +1,63 @@
-import { useCallback, useEffect, useReducer, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import type { GameState } from "./api/types";
-import { Menu } from "./screens/Menu";
-import { Game } from "./screens/Game";
-import { Win } from "./screens/Win";
+import Alchimie from "./screens/Alchimie";
+import CaldRece from "./screens/CaldRece";
+import Lant from "./screens/Lant";
+import { SoundToggle } from "./components/SoundToggle";
 import { ToastStack, type ToastData, type ToastKind } from "./components/Toast";
-import { recordRun } from "./leaderboard";
+import { sound } from "./sound";
 
-// ---------------------------------------------------------------- state machine
-// A tiny screen router as a useReducer FSM (zustand-free). Screens: menu -> game -> win.
-// The active GameState lives here so Game/Win share one server-authoritative object.
-//
-// A "run" is a multi-puzzle session: starting from the Menu opens a fresh run, and each
-// "Urmatoarea" (Next) keeps playing within it. We tally how many distinct puzzles were
-// solved and the cumulative score; each won game is counted exactly once (keyed by
-// game_id, so replaying the same puzzle never double-counts).
+// ---------------------------------------------------------------- arcade router
+// The whole app is now a text-only word-game arcade over the Romanian concept graph —
+// no graph visualization. A tiny screen router (home -> one of three games) holds the
+// active game key; each game is a self-contained server-authoritative screen.
 
-type Screen = "menu" | "game" | "win";
+type GameKey = "alchimie" | "contexto" | "lant";
 
-export interface RunState {
-  solved: number;
-  total: number;
-  /** game_ids already counted into this run (avoids double-counting on replay/resync). */
-  counted: string[];
+interface GameDef {
+  key: GameKey;
+  title: string;
+  tag: string; // the Twitch-familiar concept it riffs on
+  blurb: string;
+  accent: string;
+  glow: string;
+  icon: string;
 }
 
-const EMPTY_RUN: RunState = { solved: 0, total: 0, counted: [] };
+const GAMES: GameDef[] = [
+  {
+    key: "alchimie",
+    title: "Alchimie",
+    tag: "à la Infinite Craft",
+    blurb:
+      "Combina doua concepte ca sa descoperi unul nou. Creste-ti inventarul pas cu pas pana cand croiesti conceptul-tinta.",
+    accent: "#c08bff",
+    glow: "#dcc0ff",
+    icon: "⚗️",
+  },
+  {
+    key: "contexto",
+    title: "Cald sau Rece",
+    tag: "à la Contexto",
+    blurb:
+      "Un concept secret te asteapta. Fiecare incercare iti spune cat de aproape esti — de la inghetat la fierbinte. Gaseste-l.",
+    accent: "#ff7a59",
+    glow: "#ffc7a0",
+    icon: "🔥",
+  },
+  {
+    key: "lant",
+    title: "Lantul Cuvintelor",
+    tag: "à la The Wiki Game",
+    blurb:
+      "De la START la TINTA: scrie de fiecare data un concept legat de cel curent si sari din cuvant in cuvant, in cat mai putine miscari.",
+    accent: "#56d4dd",
+    glow: "#a3eef2",
+    icon: "🔗",
+  },
+];
 
-interface AppState {
-  screen: Screen;
-  game: GameState | null;
-  run: RunState;
-}
-
-type Action =
-  | { type: "to_menu" }
-  // `fresh` starts a NEW run (from the Menu); otherwise we keep the current run (Next).
-  | { type: "start"; game: GameState; fresh: boolean }
-  | { type: "sync"; game: GameState };
-
-function reducer(state: AppState, action: Action): AppState {
-  switch (action.type) {
-    case "to_menu":
-      return { screen: "menu", game: null, run: EMPTY_RUN };
-    case "start":
-      return {
-        screen: "game",
-        game: action.game,
-        run: action.fresh ? EMPTY_RUN : state.run,
-      };
-    case "sync": {
-      // The server tells us when the game is won; route to Win on the won transition.
-      const screen: Screen = action.game.won ? "win" : "game";
-      let run = state.run;
-      if (action.game.won && !run.counted.includes(action.game.game_id)) {
-        run = {
-          solved: run.solved + 1,
-          total: run.total + action.game.score,
-          counted: [...run.counted, action.game.game_id],
-        };
-      }
-      return { screen, game: action.game, run };
-    }
-    default:
-      return state;
-  }
-}
-
-const SCREEN_TRANSITION = { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const };
-
+const SCREEN_TRANSITION = { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const };
 const variants = {
   initial: { opacity: 0, scale: 0.985, y: 14 },
   enter: { opacity: 1, scale: 1, y: 0 },
@@ -76,11 +65,7 @@ const variants = {
 };
 
 export default function App() {
-  const [state, dispatch] = useReducer(reducer, {
-    screen: "menu",
-    game: null,
-    run: EMPTY_RUN,
-  });
+  const [active, setActive] = useState<GameKey | null>(null);
   const [toasts, setToasts] = useState<ToastData[]>([]);
   const toastId = useRef(0);
 
@@ -97,38 +82,20 @@ export default function App() {
     [dismissToast],
   );
 
-  // Bank the run as a possible best as soon as it grows — recordRun only overwrites a
-  // strictly higher total, so recording on every win (not just on exit) is safe and
-  // means a strong run isn't lost if the player closes/reloads without hitting "Meniu".
-  useEffect(() => {
-    if (state.run.total > 0) recordRun(state.run.solved, state.run.total);
-  }, [state.run.total, state.run.solved]);
-
-  // From the Menu: a brand-new run.
-  const handleStart = useCallback((game: GameState) => {
-    dispatch({ type: "start", game, fresh: true });
+  const openGame = useCallback((key: GameKey) => {
+    sound.unlockAudio();
+    sound.playSelect();
+    setActive(key);
   }, []);
 
-  const handleSync = useCallback((game: GameState) => {
-    dispatch({ type: "sync", game });
-  }, []);
-
-  const handleMenu = useCallback(() => {
-    dispatch({ type: "to_menu" });
-  }, []);
-
-  // Replay (same puzzle) / Next (new puzzle) continue the CURRENT run; the Win screen
-  // owns the reset/create call and hands us back the fresh state to route to the board.
-  const handleReplay = useCallback((game: GameState) => {
-    dispatch({ type: "start", game, fresh: false });
-  }, []);
+  const goHome = useCallback(() => setActive(null), []);
 
   return (
     <div className="app-shell">
       <AnimatePresence mode="wait">
-        {state.screen === "menu" && (
+        {active === null && (
           <motion.div
-            key="menu"
+            key="home"
             className="screen"
             variants={variants}
             initial="initial"
@@ -136,52 +103,155 @@ export default function App() {
             exit="exit"
             transition={SCREEN_TRANSITION}
           >
-            <Menu onStart={handleStart} onError={(m) => pushToast(m, "error")} />
+            <Home onOpen={openGame} />
           </motion.div>
         )}
 
-        {state.screen === "game" && state.game && (
-          <motion.div
-            key="game"
-            className="screen"
-            variants={variants}
-            initial="initial"
-            animate="enter"
-            exit="exit"
-            transition={SCREEN_TRANSITION}
-          >
-            <Game
-              game={state.game}
-              run={state.run}
-              onSync={handleSync}
-              onExit={handleMenu}
-              onToast={pushToast}
-            />
+        {active === "alchimie" && (
+          <motion.div key="alchimie" className="screen" variants={variants} initial="initial" animate="enter" exit="exit" transition={SCREEN_TRANSITION}>
+            <Alchimie onExit={goHome} onToast={pushToast} />
           </motion.div>
         )}
 
-        {state.screen === "win" && state.game && (
-          <motion.div
-            key="win"
-            className="screen"
-            variants={variants}
-            initial="initial"
-            animate="enter"
-            exit="exit"
-            transition={SCREEN_TRANSITION}
-          >
-            <Win
-              game={state.game}
-              run={state.run}
-              onReplay={handleReplay}
-              onMenu={handleMenu}
-              onToast={pushToast}
-            />
+        {active === "contexto" && (
+          <motion.div key="contexto" className="screen" variants={variants} initial="initial" animate="enter" exit="exit" transition={SCREEN_TRANSITION}>
+            <CaldRece onExit={goHome} onToast={pushToast} />
+          </motion.div>
+        )}
+
+        {active === "lant" && (
+          <motion.div key="lant" className="screen" variants={variants} initial="initial" animate="enter" exit="exit" transition={SCREEN_TRANSITION}>
+            <Lant onExit={goHome} onToast={pushToast} />
           </motion.div>
         )}
       </AnimatePresence>
 
       <ToastStack toasts={toasts} onDismiss={dismissToast} />
+    </div>
+  );
+}
+
+// ------------------------------------------------------------------------- home
+function Home({ onOpen }: { onOpen: (key: GameKey) => void }) {
+  return (
+    <div className="screen-pad fill" style={{ overflowY: "auto" }}>
+      <div className="container col" style={{ gap: 28, paddingBlock: 16 }}>
+        <header className="col" style={{ gap: 10 }}>
+          <div className="row spread" style={{ gap: 12, alignItems: "flex-start" }}>
+            <motion.h1
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              style={{ fontSize: "clamp(2rem, 5vw, 3.4rem)", lineHeight: 1.02 }}
+            >
+              cat de roman{" "}
+              <span
+                style={{
+                  background: "linear-gradient(120deg, var(--accent), var(--accent-2))",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                }}
+              >
+                esti
+              </span>
+              ?
+            </motion.h1>
+            <SoundToggle />
+          </div>
+          <motion.p
+            className="muted"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.15, duration: 0.5 }}
+            style={{ maxWidth: 640, fontSize: "1.05rem", margin: 0 }}
+          >
+            Trei jocuri de cuvinte peste reteaua semantica a culturii romanesti. Combina,
+            ghiceste sau inlantuie concepte — si ajunge la destinatie.
+          </motion.p>
+        </header>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 280px), 1fr))",
+            gap: 16,
+          }}
+        >
+          {GAMES.map((g, i) => (
+            <motion.button
+              key={g.key}
+              type="button"
+              onClick={() => onOpen(g.key)}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.06 * i, duration: 0.4 }}
+              whileHover={{ y: -4 }}
+              whileTap={{ scale: 0.98 }}
+              className="card"
+              style={{
+                textAlign: "left",
+                padding: 22,
+                cursor: "pointer",
+                position: "relative",
+                overflow: "hidden",
+                borderColor: "var(--surface-border)",
+                boxShadow: "var(--shadow-card)",
+                display: "grid",
+                gap: 10,
+              }}
+            >
+              <div
+                aria-hidden
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: `radial-gradient(160px 110px at 100% 0%, ${g.glow}22, transparent 70%)`,
+                  pointerEvents: "none",
+                }}
+              />
+              <div className="row spread" style={{ position: "relative" }}>
+                <span style={{ fontSize: "1.9rem" }} aria-hidden>
+                  {g.icon}
+                </span>
+                <span className="chip" style={{ fontSize: "0.7rem", borderColor: g.accent, color: g.accent }}>
+                  {g.tag}
+                </span>
+              </div>
+              <strong
+                style={{
+                  position: "relative",
+                  fontFamily: "var(--font-display)",
+                  fontSize: "1.3rem",
+                  color: g.accent,
+                }}
+              >
+                {g.title}
+              </strong>
+              <p className="muted" style={{ position: "relative", margin: 0, fontSize: "0.9rem" }}>
+                {g.blurb}
+              </p>
+              <span
+                className="row"
+                style={{
+                  position: "relative",
+                  gap: 6,
+                  marginTop: 4,
+                  color: g.accent,
+                  fontWeight: 600,
+                  fontSize: "0.9rem",
+                }}
+              >
+                Joaca →
+              </span>
+            </motion.button>
+          ))}
+        </div>
+
+        <p className="faint" style={{ fontSize: "0.8rem" }}>
+          Toate cele trei jocuri ruleaza pe acelasi graf de ~250 de concepte romanesti.
+        </p>
+      </div>
     </div>
   );
 }

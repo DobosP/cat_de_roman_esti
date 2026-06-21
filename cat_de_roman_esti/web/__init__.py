@@ -1,11 +1,9 @@
-"""Web backend-for-frontend (BFF) for the cat_de_roman_esti semantic-hop game.
+"""Web backend-for-frontend (BFF) for the cat_de_roman_esti word-game arcade.
 
-A FastAPI app that serves the built React SPA at ``/`` and a small JSON ``/api``
-surface that is SERVER-AUTHORITATIVE: every hop is validated and scored through the
-existing tested :class:`cat_de_roman_esti.engine.HopGame`; the cat-de-roman-dev API
-key never reaches the browser. The data source is the bundled OFFLINE fixture by
-default, or the live ``ro_data_server`` when ``ROEDU_API_URL`` is set and reachable
-(fail-soft to offline otherwise).
+A FastAPI app that serves the built React SPA at ``/`` and three SERVER-AUTHORITATIVE
+text word-games under ``/api/wordgames/*`` (alchimie / contexto / lant), all backed by
+the bundled offline knowledge graph via :mod:`cat_de_roman_esti.wordgames.service`. Game
+logic and secrets never reach the browser.
 
 Public entry point:
 
