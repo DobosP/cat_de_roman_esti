@@ -143,6 +143,11 @@ ruff check
 Tests run entirely against a fake in-process client / the bundled fixture — **no live
 server required**.
 
+## Contributing
+
+`main` is PR-only — **no direct commits, merges, or pushes to `main`**. Work on a feature
+branch and open a reviewed pull request that passes CI. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
 ## Docs
 
 - [`docs/KG_CONTRACT.md`](docs/KG_CONTRACT.md) — the authoritative KG contract v1.

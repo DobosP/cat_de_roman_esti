@@ -59,7 +59,8 @@ Offline-first (bundled fixture); a live `ro_data_server` is optional via `ROEDU_
   `docker-compose.yml`, one-command `run.sh` + `Makefile` (`run`/`dev`/`docker`).
 
 ### Docs
-- `KG_CONTRACT.md`, `ARCHITECTURE.md`, `ROEDU_INTEGRATION.md`, `README.md`, this file.
+- `KG_CONTRACT.md`, `ARCHITECTURE.md`, `ROEDU_INTEGRATION.md`, `README.md`, this file,
+  and `CONTRIBUTING.md` (branch/PR policy: **`main` is PR-only — no direct merge/push**).
 
 ## Tests / quality
 - **69 pytest pass** (incl. new engine + BFF undo tests); `validate_fixture.py` **GREEN (0/148)**;
