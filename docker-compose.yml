@@ -1,0 +1,40 @@
+# docker-compose.yml — one service for the cat_de_roman_esti web app.
+#
+#   docker compose up --build      # build + run, then open http://localhost:8000
+#   docker compose down            # stop + remove
+#
+# By default the app plays fully OFFLINE against the bundled fixture (no ROEDU_API_URL).
+# To point it at a live ro_data_server, uncomment the env vars below (or set them in a
+# .env file / your shell — compose substitutes ${VAR} from the environment).
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cat-de-roman-esti:latest
+    container_name: cat-de-roman-esti
+    # Map host:container. Override the host port with `PORT=9000 docker compose up`.
+    ports:
+      - "${PORT:-8000}:8000"
+    environment:
+      # The app binds this port inside the container (Dockerfile CMD honors it).
+      PORT: "8000"
+      # --- Live RO-EDU server (OPTIONAL) ---------------------------------------
+      # Leave BOTH unset/commented for offline fixture play (the default).
+      # ROEDU_API_URL passthrough: if set in your shell/.env it is forwarded; the
+      # `:-` defaults keep these empty (offline) when unset.
+      ROEDU_API_URL: "${ROEDU_API_URL:-}"
+      ROEDU_API_KEY: "${ROEDU_API_KEY:-cat-de-roman-dev}"
+    restart: unless-stopped
+    # Surface the image's own HEALTHCHECK to `docker compose ps`.
+    healthcheck:
+      test:
+        - "CMD"
+        - "python"
+        - "-c"
+        - "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/health',timeout=3).status==200 else 1)"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

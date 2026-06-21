@@ -1,0 +1,64 @@
+# .dockerignore — keep the Docker build context small and reproducible.
+#
+# We deliberately DO send: the cat_de_roman_esti/ package (with fixtures), the
+# frontend/ source (built in stage 1), pyproject.toml and README.md. Everything below
+# is noise that would bloat the context, bust the layer cache, or leak local state.
+
+# --- Version control / CI ---
+.git
+.gitignore
+.github
+
+# --- Python build + caches ---
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# --- Virtualenvs (never ship a host venv into the image) ---
+.venv/
+venv/
+env/
+
+# --- Node / frontend build artifacts (stage 1 rebuilds these) ---
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+**/node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# NOTE: we do NOT ignore cat_de_roman_esti/web/static — but stage 1 always rebuilds
+# it from source, so a stale local copy in the context is harmless (it is overwritten
+# in the image). Listing it here would be safe too; left in so a host-only build works.
+
+# --- Local env / secrets (compose injects these at runtime instead) ---
+.env
+.env.local
+*.local
+
+# --- Screenshots / scratch / docs not needed at runtime ---
+frontend/screenshots/
+screenshots/
+docs/
+scripts/
+
+# --- Editor / OS junk ---
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# --- Docker's own files (no need to copy into the context) ---
+Dockerfile
+.dockerignore
+docker-compose.yml
