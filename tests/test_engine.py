@@ -255,3 +255,49 @@ def test_unwon_game_scores_zero():
     b = _bundle()
     game = HopGame.load(b.graph, _puzzle(b, "pz_hard_ist"), "hard")
     assert game.score() == 0
+
+
+# ---------------------------------------------------------------- undo
+
+
+def test_undo_steps_back_one_hop():
+    b = _bundle()
+    pz = _puzzle(b, "pz_easy_ist")  # stefan -> moldova -> unirea_1600
+    game = HopGame.load(b.graph, pz, "easy")
+    assert game.hop("n_moldova").ok
+    assert game.hop("n_unirea_1600").ok
+    assert game.won and game.hops == 2
+    # undo the winning hop: back on n_moldova, no longer won, move count drops.
+    res = game.undo()
+    assert res.ok and res.won is False
+    assert game.current_id == "n_moldova"
+    assert game.hops == 1
+    assert game.won is False
+    # undo again: back at the start.
+    assert game.undo().ok
+    assert game.current_id == "n_stefan_cel_mare"
+    assert game.hops == 0
+
+
+def test_undo_at_start_is_rejected():
+    b = _bundle()
+    game = HopGame.load(b.graph, _puzzle(b, "pz_easy_ist"), "easy")
+    res = game.undo()
+    assert res.ok is False
+    assert "nothing to undo" in res.reason
+    assert game.hops == 0
+    assert game.path == ["n_stefan_cel_mare"]
+
+
+def test_undo_then_replay_to_win():
+    # Undo is the inverse of hop: after undoing, the player can re-hop and still win.
+    b = _bundle()
+    pz = _puzzle(b, "pz_easy_ist")
+    game = HopGame.load(b.graph, pz, "easy")
+    assert game.hop("n_putna").ok  # a detour off the optimal path
+    assert game.undo().ok  # take it back
+    assert game.current_id == "n_stefan_cel_mare"
+    # now play the optimal solution
+    assert game.hop("n_moldova").ok
+    assert game.hop("n_unirea_1600").ok
+    assert game.won and game.hops == 2 and game.score() == 1000

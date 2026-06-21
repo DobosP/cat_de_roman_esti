@@ -9,6 +9,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useAnimationControls } from "framer-motion";
 import type { GameState } from "../api/types";
+import type { RunState } from "../App";
 import { api, ApiError } from "../api/client";
 import { GraphMap } from "../components/GraphMap";
 import { Hud } from "../components/Hud";
@@ -18,11 +19,13 @@ import { SoundToggle } from "../components/SoundToggle";
 
 export function Game({
   game,
+  run,
   onSync,
   onExit,
   onToast,
 }: {
   game: GameState;
+  run: RunState;
   onSync: (game: GameState) => void;
   onExit: () => void;
   onToast: (message: string, kind?: ToastKind) => void;
@@ -73,7 +76,31 @@ export function Game({
     [busy, game.won, game.neighbors, game.game_id, onSync, onToast, shake],
   );
 
-  // Keyboard: number keys 1..9 hop to the listed neighbours.
+  const canUndo = !busy && !game.won && game.hops > 0;
+
+  const doUndo = useCallback(async () => {
+    if (busy || game.won || game.hops === 0) return;
+    setBusy(true);
+    try {
+      const next = await api.undoHop(game.game_id);
+      if (!next.last_error) {
+        lastErrShown.current = null;
+        sound.playUndo();
+      }
+      onSync(next);
+    } catch (err) {
+      onToast(
+        err instanceof ApiError
+          ? `Pasul inapoi a esuat (${err.status}).`
+          : "Pasul inapoi a esuat.",
+        "error",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }, [busy, game.won, game.hops, game.game_id, onSync, onToast]);
+
+  // Keyboard: number keys 1..9 hop to the listed neighbours; Backspace steps back.
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key >= "1" && e.key <= "9") {
@@ -83,11 +110,14 @@ export function Game({
           e.preventDefault();
           void doHop(target);
         }
+      } else if (e.key === "Backspace") {
+        e.preventDefault();
+        void doUndo();
       }
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [game.neighbors, doHop]);
+  }, [game.neighbors, doHop, doUndo]);
 
   async function handleReset() {
     if (busy) return;
@@ -131,6 +161,24 @@ export function Game({
             ← Meniu
           </button>
           <div className="row" style={{ gap: 10 }}>
+            {run.solved > 0 && (
+              <span
+                className="badge"
+                title="Enigme rezolvate · scor total in aceasta sesiune"
+                style={{ fontVariantNumeric: "tabular-nums" }}
+              >
+                ✓ {run.solved} · {run.total} pct
+              </span>
+            )}
+            <button
+              type="button"
+              className="btn btn-ghost"
+              onClick={() => void doUndo()}
+              disabled={!canUndo}
+              title="Pas inapoi (Backspace)"
+            >
+              ↶ Inapoi
+            </button>
             <button
               type="button"
               className="btn btn-ghost"

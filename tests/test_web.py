@@ -283,6 +283,45 @@ def test_reset_restarts_same_puzzle(client: TestClient):
     assert rstate["puzzle"]["id"] == state["puzzle"]["id"]
 
 
+# ----------------------------------------------------------------- undo
+def test_undo_steps_back_one_hop(client: TestClient):
+    state = client.post(
+        "/api/games", json={"category": "istorie", "difficulty": "easy"}
+    ).json()
+    game_id = state["game_id"]
+    # hop forward twice to the win, then undo back to n_moldova.
+    client.post(f"/api/games/{game_id}/hop", json={"to": "n_moldova"})
+    won = client.post(f"/api/games/{game_id}/hop", json={"to": "n_unirea_1600"}).json()
+    assert won["won"] is True and won["hops"] == 2
+
+    undo = client.post(f"/api/games/{game_id}/undo")
+    assert undo.status_code == 200
+    ustate = undo.json()
+    assert ustate["last_error"] is None
+    assert ustate["current_id"] == "n_moldova"
+    assert ustate["hops"] == 1
+    assert ustate["won"] is False
+    assert ustate["path"] == ["n_stefan_cel_mare", "n_moldova"]
+
+
+def test_undo_at_start_sets_last_error_and_does_not_advance(client: TestClient):
+    state = client.post(
+        "/api/games", json={"category": "istorie", "difficulty": "easy"}
+    ).json()
+    game_id = state["game_id"]
+    resp = client.post(f"/api/games/{game_id}/undo")
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["last_error"]  # nothing to undo at the start
+    assert body["current_id"] == "n_stefan_cel_mare"
+    assert body["hops"] == 0
+    assert body["path"] == ["n_stefan_cel_mare"]
+
+
+def test_undo_unknown_game_404(client: TestClient):
+    assert client.post("/api/games/does-not-exist/undo").status_code == 404
+
+
 # ----------------------------------------------------------- mode view rules
 def test_easy_view_excludes_distractors_and_exposes_hint(client: TestClient):
     state = client.post(

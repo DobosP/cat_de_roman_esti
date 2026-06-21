@@ -1,0 +1,86 @@
+name: CI
+
+# Gate every push + PR on the same checks the repo holds to locally:
+#   - fixture is valid (validate_fixture.py — the committed KG content gate)
+#   - pytest green (engine + loader + BFF, all offline against the bundled fixture)
+#   - ruff clean (lint)
+#   - the SPA type-checks (tsc --noEmit), builds (vite), and lints (eslint)
+#
+# Everything runs offline against the bundled fixture — no live ro_data_server, no
+# secrets. The web deps are installed PINNED via constraints.txt so CI matches deploy.
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+# A newer push to the same ref cancels the older in-flight run.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    name: backend (py${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 3.11 = the python:3.11-slim deploy runtime; 3.12 = a forward check.
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install (dev + web, web pinned via constraints.txt)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -c constraints.txt -e ".[dev,web]"
+
+      - name: Validate KG fixture (content gate)
+        run: python scripts/validate_fixture.py
+
+      - name: Lint (ruff)
+        run: ruff check
+
+      - name: Tests (pytest, offline fixture)
+        run: pytest -q
+
+  frontend:
+    name: frontend (build + lint)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install (npm ci)
+        run: npm ci
+
+      - name: Lint (eslint)
+        run: npm run lint
+
+      - name: Build (tsc --noEmit && vite build)
+        # vite.config.ts emits into ../cat_de_roman_esti/web/static; assert the SPA
+        # shell landed (mirrors the Dockerfile's build-time check).
+        run: |
+          npm run build
+          test -f ../cat_de_roman_esti/web/static/index.html
+          ls ../cat_de_roman_esti/web/static/assets/*.js >/dev/null

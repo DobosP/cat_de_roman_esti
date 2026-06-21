@@ -1,37 +1,66 @@
-import { useCallback, useReducer, useRef, useState } from "react";
+import { useCallback, useEffect, useReducer, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { GameState } from "./api/types";
 import { Menu } from "./screens/Menu";
 import { Game } from "./screens/Game";
 import { Win } from "./screens/Win";
 import { ToastStack, type ToastData, type ToastKind } from "./components/Toast";
+import { recordRun } from "./leaderboard";
 
 // ---------------------------------------------------------------- state machine
 // A tiny screen router as a useReducer FSM (zustand-free). Screens: menu -> game -> win.
 // The active GameState lives here so Game/Win share one server-authoritative object.
+//
+// A "run" is a multi-puzzle session: starting from the Menu opens a fresh run, and each
+// "Urmatoarea" (Next) keeps playing within it. We tally how many distinct puzzles were
+// solved and the cumulative score; each won game is counted exactly once (keyed by
+// game_id, so replaying the same puzzle never double-counts).
 
 type Screen = "menu" | "game" | "win";
+
+export interface RunState {
+  solved: number;
+  total: number;
+  /** game_ids already counted into this run (avoids double-counting on replay/resync). */
+  counted: string[];
+}
+
+const EMPTY_RUN: RunState = { solved: 0, total: 0, counted: [] };
 
 interface AppState {
   screen: Screen;
   game: GameState | null;
+  run: RunState;
 }
 
 type Action =
   | { type: "to_menu" }
-  | { type: "start"; game: GameState }
+  // `fresh` starts a NEW run (from the Menu); otherwise we keep the current run (Next).
+  | { type: "start"; game: GameState; fresh: boolean }
   | { type: "sync"; game: GameState };
 
 function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
     case "to_menu":
-      return { screen: "menu", game: null };
+      return { screen: "menu", game: null, run: EMPTY_RUN };
     case "start":
-      return { screen: "game", game: action.game };
+      return {
+        screen: "game",
+        game: action.game,
+        run: action.fresh ? EMPTY_RUN : state.run,
+      };
     case "sync": {
       // The server tells us when the game is won; route to Win on the won transition.
       const screen: Screen = action.game.won ? "win" : "game";
-      return { screen, game: action.game };
+      let run = state.run;
+      if (action.game.won && !run.counted.includes(action.game.game_id)) {
+        run = {
+          solved: run.solved + 1,
+          total: run.total + action.game.score,
+          counted: [...run.counted, action.game.game_id],
+        };
+      }
+      return { screen, game: action.game, run };
     }
     default:
       return state;
@@ -47,7 +76,11 @@ const variants = {
 };
 
 export default function App() {
-  const [state, dispatch] = useReducer(reducer, { screen: "menu", game: null });
+  const [state, dispatch] = useReducer(reducer, {
+    screen: "menu",
+    game: null,
+    run: EMPTY_RUN,
+  });
   const [toasts, setToasts] = useState<ToastData[]>([]);
   const toastId = useRef(0);
 
@@ -64,8 +97,16 @@ export default function App() {
     [dismissToast],
   );
 
+  // Bank the run as a possible best as soon as it grows — recordRun only overwrites a
+  // strictly higher total, so recording on every win (not just on exit) is safe and
+  // means a strong run isn't lost if the player closes/reloads without hitting "Meniu".
+  useEffect(() => {
+    if (state.run.total > 0) recordRun(state.run.solved, state.run.total);
+  }, [state.run.total, state.run.solved]);
+
+  // From the Menu: a brand-new run.
   const handleStart = useCallback((game: GameState) => {
-    dispatch({ type: "start", game });
+    dispatch({ type: "start", game, fresh: true });
   }, []);
 
   const handleSync = useCallback((game: GameState) => {
@@ -76,10 +117,10 @@ export default function App() {
     dispatch({ type: "to_menu" });
   }, []);
 
-  // Replay restarts the same puzzle; the Game screen owns the reset call and hands us
-  // back the fresh state through onSync, so here we just route back to the board.
+  // Replay (same puzzle) / Next (new puzzle) continue the CURRENT run; the Win screen
+  // owns the reset/create call and hands us back the fresh state to route to the board.
   const handleReplay = useCallback((game: GameState) => {
-    dispatch({ type: "start", game });
+    dispatch({ type: "start", game, fresh: false });
   }, []);
 
   return (
@@ -111,6 +152,7 @@ export default function App() {
           >
             <Game
               game={state.game}
+              run={state.run}
               onSync={handleSync}
               onExit={handleMenu}
               onToast={pushToast}
@@ -130,6 +172,7 @@ export default function App() {
           >
             <Win
               game={state.game}
+              run={state.run}
               onReplay={handleReplay}
               onMenu={handleMenu}
               onToast={pushToast}

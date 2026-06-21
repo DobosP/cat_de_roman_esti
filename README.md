@@ -7,6 +7,12 @@ shown) and **hard** (decoys kept, labels + hints hidden).
 
 The name is a pun on *"cât de român ești"* — "how Romanian are you".
 
+The animated web app adds **undo** (Backspace), **multi-puzzle sessions** with a running
+score tally, and an offline **leaderboard** (your best score/hops per category+mode and
+best session, kept in the browser — no account, no server). The bundled knowledge graph
+spans **249 concepts / 417 links / 148 puzzles** across 8 categories plus cross-category
+*mixed* puzzles.
+
 ## Stack
 
 - **Python >= 3.11**, standard library only at runtime (no hard deps).

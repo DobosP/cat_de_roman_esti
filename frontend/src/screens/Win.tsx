@@ -1,10 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import type { GameState } from "../api/types";
+import type { RunState } from "../App";
 import { api, ApiError } from "../api/client";
 import { categoryColor, categoryLabel } from "../theme/tokens";
 import type { ToastKind } from "../components/Toast";
 import { sound } from "../sound";
+import { recordResult, type RecordOutcome } from "../leaderboard";
 
 // Win screen: a framer-motion confetti burst, a score count-up, and Replay / Next.
 // Replay restarts the SAME puzzle (server reset); Next starts a fresh puzzle of the
@@ -100,24 +102,49 @@ function ConfettiBurst() {
 
 export function Win({
   game,
+  run,
   onReplay,
   onMenu,
   onToast,
 }: {
   game: GameState;
+  run: RunState;
   onReplay: (game: GameState) => void;
   onMenu: () => void;
   onToast: (message: string, kind?: ToastKind) => void;
 }) {
   const score = useCountUp(game.score);
   const [busy, setBusy] = useState<"replay" | "next" | null>(null);
+  const [outcome, setOutcome] = useState<RecordOutcome | null>(null);
   const catColor = categoryColor(game.category);
   const perfect = game.hops <= game.puzzle.par;
 
-  // Triumphant rising arpeggio when the Win screen mounts (once per win).
+  // On mount (once per win): record the result to the offline leaderboard, play the win
+  // arpeggio, and — on a new personal best — layer a brighter "record" sparkle. The ref
+  // guards against React StrictMode's double-invoked effect double-recording in dev.
+  const recorded = useRef(false);
   useEffect(() => {
+    if (recorded.current) return;
+    recorded.current = true;
+    setOutcome(
+      recordResult(game.category, game.mode, {
+        score: game.score,
+        hops: game.hops,
+        par: game.puzzle.par,
+      }),
+    );
     sound.playWin();
-  }, []);
+  }, [game.category, game.mode, game.score, game.hops, game.puzzle.par]);
+
+  // Record sparkle on a new best — a SEPARATE effect keyed on the outcome so that
+  // StrictMode's cleanup-then-rerun reschedules it (scheduling it inside the guarded
+  // mount effect above would be cancelled by the first cleanup and never replayed).
+  const isRecord = outcome?.isNewBest ?? false;
+  useEffect(() => {
+    if (!isRecord) return;
+    const t = window.setTimeout(() => sound.playRecord(), 450);
+    return () => window.clearTimeout(t);
+  }, [isRecord]);
 
   async function handleReplay() {
     setBusy("replay");
@@ -229,6 +256,26 @@ export function Win({
           </span>
         </motion.div>
 
+        {isRecord && (
+          <motion.div
+            initial={{ scale: 0, rotate: -8, opacity: 0 }}
+            animate={{ scale: 1, rotate: 0, opacity: 1 }}
+            transition={{ delay: 0.35, type: "spring", stiffness: 300, damping: 13 }}
+            className="badge"
+            style={{
+              justifySelf: "center",
+              borderColor: "var(--warn)",
+              color: "var(--warn)",
+              fontWeight: 700,
+              letterSpacing: "0.04em",
+              boxShadow: "0 0 24px -6px var(--warn)",
+            }}
+          >
+            ★ Record personal!
+            {outcome?.prev ? ` (vechiul: ${outcome.prev.score})` : ""}
+          </motion.div>
+        )}
+
         <div
           className="row center wrap"
           style={{ gap: 8, color: "var(--text-dim)", fontSize: "0.85rem" }}
@@ -238,6 +285,14 @@ export function Win({
           </span>
           <span className="badge">{game.mode === "hard" ? "Greu" : "Usor"}</span>
         </div>
+
+        {run.solved > 1 && (
+          <p className="muted" style={{ margin: 0, fontSize: "0.85rem" }}>
+            În această sesiune:{" "}
+            <strong style={{ color: "var(--text)" }}>{run.solved}</strong> enigme ·{" "}
+            <strong style={{ color: "var(--warn)" }}>{run.total}</strong> puncte
+          </p>
+        )}
 
         <div className="row center wrap" style={{ gap: 12, marginTop: 6 }}>
           <button

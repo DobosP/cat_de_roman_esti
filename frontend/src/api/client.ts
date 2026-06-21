@@ -100,6 +100,13 @@ export function hop(gameId: string, to: string): Promise<GameState> {
   );
 }
 
+/** POST /api/games/{id}/undo — step back one hop along the trail. */
+export function undoHop(gameId: string): Promise<GameState> {
+  return postJson<GameState>(
+    `/api/games/${encodeURIComponent(gameId)}/undo`,
+  );
+}
+
 /** POST /api/games/{id}/reset — restart the same puzzle. */
 export function resetGame(gameId: string): Promise<GameState> {
   return postJson<GameState>(
@@ -113,5 +120,6 @@ export const api = {
   createGame,
   getGame,
   hop,
+  undoHop,
   resetGame,
 };

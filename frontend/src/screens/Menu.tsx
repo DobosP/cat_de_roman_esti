@@ -5,6 +5,7 @@ import { api, ApiError } from "../api/client";
 import { categoryStyle } from "../theme/tokens";
 import { sound } from "../sound";
 import { SoundToggle } from "../components/SoundToggle";
+import { bestFor, bestRun } from "../leaderboard";
 
 // Menu: animated category cards (from /api/catalog) + an easy/hard toggle with
 // descriptions, and a Start button. The toggle exposes the contract's "4 levers"
@@ -65,6 +66,10 @@ export function Menu({
   const selectedRow = catalog?.find((c) => c.category === selected) ?? null;
   const availableForMode = selectedRow ? selectedRow[mode] : 0;
   const canStart = !!selected && availableForMode > 0 && !loading;
+
+  // Offline personal bests (localStorage): best for the current selection + best run.
+  const best = selected ? bestFor(selected, mode) : null;
+  const run = bestRun();
 
   async function handleStart() {
     if (!selected) return;
@@ -353,6 +358,29 @@ export function Menu({
             })}
           </div>
         </div>
+
+        {/* personal records (offline, localStorage) */}
+        {(best || run.total > 0) && (
+          <div className="row wrap" style={{ gap: 10, alignItems: "center" }}>
+            <span className="muted" style={{ fontSize: "0.82rem" }}>
+              Recorduri
+            </span>
+            {best && (
+              <span
+                className="badge"
+                title="Cel mai bun rezultat al tau pentru aceasta categorie si dificultate"
+                style={{ borderColor: "var(--warn)", color: "var(--warn)" }}
+              >
+                ★ {best.score} pct · {best.hops}/par {best.par}
+              </span>
+            )}
+            {run.total > 0 && (
+              <span className="badge" title="Cea mai buna sesiune (enigme rezolvate la rand)">
+                ✓ sesiune: {run.solved} enigme · {run.total} pct
+              </span>
+            )}
+          </div>
+        )}
 
         {/* start */}
         <div className="row" style={{ gap: 14, paddingBottom: 24 }}>

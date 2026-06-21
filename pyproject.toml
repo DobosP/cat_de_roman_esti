@@ -16,7 +16,12 @@ keywords = ["romania", "knowledge-graph", "game", "roedu"]
 dependencies = []
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "ruff>=0.5"]
+# httpx is required by fastapi/starlette's TestClient (test_web.py) — without it the
+# BFF tests error at TestClient construction. Floats like the other dev tools.
+dev = ["pytest>=8", "ruff>=0.5", "httpx>=0.27"]
+# Loose floors so local dev floats forward; for REPRODUCIBLE deploys pin the exact
+# resolved closure via the committed constraints file:
+#   pip install -c constraints.txt ".[web]"   (the Dockerfile does exactly this)
 web = ["fastapi>=0.110", "uvicorn>=0.29"]
 
 [project.scripts]

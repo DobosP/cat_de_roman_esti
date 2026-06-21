@@ -227,6 +227,20 @@ class HopGame:
         self.path.append(dst_id)
         return HopResult(ok=True, won=self.won)
 
+    def undo(self) -> HopResult:
+        """Step back one hop, dropping the last node from the path.
+
+        The inverse of :meth:`hop`: it pops the current node so the player returns to the
+        previous node on their trail (the move count drops by one). Undoing from the start
+        node is rejected (there is nothing to undo). Because the popped node can only have
+        been the target on a *won* game, an undo always lands on a non-target node, so the
+        resulting state is never ``won``.
+        """
+        if len(self.path) <= 1:
+            return HopResult(ok=False, reason="already at the start — nothing to undo")
+        self.path.pop()
+        return HopResult(ok=True, won=self.won)
+
     # --------------------------------------------------------------- score
     def score(self) -> int:
         """Score the (won) game vs par.

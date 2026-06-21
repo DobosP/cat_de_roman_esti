@@ -12,7 +12,7 @@ const STORAGE_KEY = "cat_sound_muted";
 /** Event fired (on `window`) whenever the mute flag changes, so UI toggles can sync. */
 export const SOUND_MUTED_EVENT = "cat-sound-muted-change";
 
-type SfxName = "hop" | "error" | "win" | "select";
+type SfxName = "hop" | "error" | "win" | "select" | "undo" | "record";
 
 let ctx: AudioContext | null = null;
 let master: GainNode | null = null;
@@ -287,11 +287,36 @@ function renderSelect(c: AudioContext, dest: AudioNode): void {
   });
 }
 
+function renderUndo(c: AudioContext, dest: AudioNode): void {
+  // Soft DOWNWARD blip — the mirror image of the hop (which glides up). Clearly a
+  // "step back" without the harshness of the error buzz.
+  playTone(c, dest, {
+    freq: 540,
+    glideTo: 360,
+    at: 0,
+    dur: 0.12,
+    type: "sine",
+    gain: 0.24,
+  });
+}
+
+function renderRecord(c: AudioContext, dest: AudioNode): void {
+  // Bright sparkle for a NEW personal best — a quick rising 5th + an octave shimmer
+  // on top, distinct from (and a touch brighter than) the win arpeggio.
+  const notes = [659.25, 987.77, 1318.51]; // E5 B5 E6
+  notes.forEach((f, i) => {
+    playTone(c, dest, { freq: f, at: i * 0.07, dur: 0.2, type: "triangle", gain: 0.24 });
+    playTone(c, dest, { freq: f * 2, at: i * 0.07, dur: 0.12, type: "sine", gain: 0.07 });
+  });
+}
+
 const BANK: Record<SfxName, (c: AudioContext, dest: AudioNode) => void> = {
   hop: renderHop,
   error: renderError,
   win: renderWin,
   select: renderSelect,
+  undo: renderUndo,
+  record: renderRecord,
 };
 
 // ------------------------------------------------------------------ public play API
@@ -322,6 +347,8 @@ export const sound = {
   playError: () => playSfx("error"),
   playWin: () => playSfx("win"),
   playSelect: () => playSfx("select"),
+  playUndo: () => playSfx("undo"),
+  playRecord: () => playSfx("record"),
   isMuted,
   setMuted,
   toggleMuted,

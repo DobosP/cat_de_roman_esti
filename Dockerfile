@@ -36,7 +36,8 @@ COPY cat_de_roman_esti/ ./cat_de_roman_esti/
 WORKDIR /build/frontend
 # `npm run build` = tsc --noEmit && vite build -> /build/cat_de_roman_esti/web/static
 RUN npm run build \
-    && test -f /build/cat_de_roman_esti/web/static/index.html
+    && test -f /build/cat_de_roman_esti/web/static/index.html \
+    && ls /build/cat_de_roman_esti/web/static/assets/*.js >/dev/null
 
 # ---------------------------------------------------------------------------
 # Stage 2: slim python runtime
@@ -55,17 +56,18 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 # Copy packaging metadata + the python package (with bundled fixtures).
-COPY pyproject.toml README.md ./
+# constraints.txt pins the exact `[web]` install closure for reproducible builds.
+COPY pyproject.toml README.md constraints.txt ./
 COPY cat_de_roman_esti/ ./cat_de_roman_esti/
 
 # Bring in the SPA built in stage 1 (overwrites any copy that rode along in the package
 # dir so the image always ships a fresh build).
 COPY --from=frontend /build/cat_de_roman_esti/web/static/ ./cat_de_roman_esti/web/static/
 
-# Install the package WITH its web extra (fastapi + uvicorn). Package-data in
-# pyproject.toml ships fixtures/*.json and web/static/** into site-packages, so the
-# installed copy is self-contained.
-RUN pip install ".[web]" \
+# Install the package WITH its web extra (fastapi + uvicorn), PINNED via constraints.txt
+# for a reproducible build. Package-data in pyproject.toml ships fixtures/*.json and
+# web/static/** into site-packages, so the installed copy is self-contained.
+RUN pip install -c constraints.txt ".[web]" \
     && python -c "import cat_de_roman_esti.web, fastapi, uvicorn; print('install OK')"
 
 # Drop privileges: create a non-root user and own /app.

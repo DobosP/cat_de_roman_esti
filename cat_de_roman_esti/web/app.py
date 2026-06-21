@@ -233,6 +233,17 @@ def create_app() -> FastAPI:
                 return game_state(session, last_error=result.reason)
             return game_state(session)
 
+    @app.post("/api/games/{game_id}/undo")
+    def undo(game_id: str) -> dict:
+        session = store.get(game_id)
+        if session is None:
+            raise HTTPException(status_code=404, detail="game not found")
+        with session.lock:
+            result = session.game.undo()
+            if not result.ok:
+                return game_state(session, last_error=result.reason)
+            return game_state(session)
+
     @app.post("/api/games/{game_id}/reset")
     def reset(game_id: str) -> dict:
         session = store.get(game_id)
