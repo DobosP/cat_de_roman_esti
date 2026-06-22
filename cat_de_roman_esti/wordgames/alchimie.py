@@ -36,11 +36,23 @@ MAX_BUILD_ATTEMPTS = 400
 SEED_MIN, SEED_MAX = 5, 7
 # Only consider reasonably salient (recognizable) nodes as seeds.
 SEED_SALIENCE_FLOOR = 0.4
+# Seeds must be recognizable AND have a couple of real edges so they are combinable.
+SEED_MIN_DEGREE = 2
+# A "good" instance offers several openings: at least this many of the seed-inventory
+# pairs must already yield a fresh discovery, so a player never has to brute-force all
+# pairs to find their first move.
+MIN_OPENING_PAIRS = 2
+# Targets should themselves be recognizable, not obscure intermediates.
+TARGET_SALIENCE_FLOOR = 0.4
+# Greu targets can otherwise sprawl very deep (gen 7+); cap so a game stays finishable.
+GREU_MAX_GENERATION = 5
+# How many consecutive fruitless combines before a gentle nudge becomes available.
+NUDGE_AFTER_FRUITLESS = 3
 
 # Difficulty -> (target generation policy, seed-count range).
 #   usor : shallow target (generation 2) but a wide 6-7 seed inventory (more options).
 #   normal: target at generation 2-3 with the default 5-7 seeds.
-#   greu : deepest available target (>=3) with a lean 5-seed inventory.
+#   greu : deepest available target (3..GREU_MAX) with a lean 5-seed inventory.
 DIFFICULTIES = {"usor", "normal", "greu"}
 DEFAULT_DIFFICULTY = "normal"
 
@@ -50,7 +62,7 @@ def _difficulty_params(difficulty: str) -> tuple[int, int | None, int, int]:
     if difficulty == "usor":
         return (2, 2, 6, 7)
     if difficulty == "greu":
-        return (3, None, 5, 5)
+        return (3, GREU_MAX_GENERATION, 5, 5)
     return (2, 3, SEED_MIN, SEED_MAX)
 
 
@@ -68,6 +80,10 @@ class AlchimieSession:
     owned: dict[str, tuple[str, str] | None] = field(default_factory=dict)
     order: list[str] = field(default_factory=list)
     moves: int = 0
+    # Consecutive combines that discovered nothing — drives the nudge offer.
+    fruitless_streak: int = 0
+    # Number of hints (nudges) the player has revealed; each costs a little score.
+    hints_used: int = 0
 
     @property
     def won(self) -> bool:
@@ -75,9 +91,13 @@ class AlchimieSession:
 
     @property
     def score(self) -> int:
-        """Reward few combines. Perfect (==target depth) gives 1000; floor of 100."""
+        """Reward few combines. Perfect (==target depth) gives 1000; floor of 100.
+
+        Each combine beyond the optimal depth costs 120 pts; each revealed hint costs
+        150 pts. Score never drops below the 100 floor for a finished game.
+        """
         extra = max(0, self.moves - self.target_depth)
-        return max(100, 1000 - 120 * extra)
+        return max(100, 1000 - 120 * extra - 150 * self.hints_used)
 
     def add(self, node_id: str, parents: tuple[str, str] | None) -> None:
         if node_id not in self.owned:
@@ -116,18 +136,73 @@ def _closure_with_generations(seeds: list[str]) -> dict[str, int]:
     return gen
 
 
+def _opening_pair_count(seeds: list[str]) -> int:
+    """How many of the seed-inventory pairs already yield a *fresh* common neighbour.
+
+    A high count means the player has several visible openings and never has to
+    brute-force every pair to find a first productive move.
+    """
+    svc = get_service()
+    owned = set(seeds)
+    count = 0
+    for a, b in combinations(sorted(owned), 2):
+        if any(c not in owned for c in svc.common_neighbors(a, b)):
+            count += 1
+    return count
+
+
+def _grow_seed_set(rng: random.Random, k: int, pool: list[str]) -> list[str] | None:
+    """Grow a *connected, combinable* seed set of size ``k``.
+
+    Start from a salient, well-connected node, then keep adding nodes that introduce a
+    NEW productive pair with something already owned. This avoids the old failure mode
+    where seeds were sampled independently and most shared nothing (dead weight), leaving
+    only a single productive pairing in the whole inventory.
+    """
+    svc = get_service()
+    starts = [n for n in pool if svc.degree(n) >= 3]
+    if not starts or len(pool) < k:
+        return None
+    owned = [rng.choice(starts)]
+    attempts = 0
+    # Shuffle a working list so additions are deterministic per rng but varied.
+    while len(owned) < k and attempts < 4000:
+        attempts += 1
+        cand = rng.choice(pool)
+        if cand in owned:
+            continue
+        # Seed the first companion freely; afterwards require it to wire into the set.
+        creates_link = len(owned) < 2 or any(
+            c not in owned and c != cand
+            for o in owned
+            for c in svc.common_neighbors(cand, o)
+        )
+        if creates_link:
+            owned.append(cand)
+    return owned if len(owned) == k else None
+
+
 def _build_session(
     rng: random.Random, difficulty: str = DEFAULT_DIFFICULTY, daily: str | None = None
 ) -> AlchimieSession:
-    """Sample a solvable instance: a recognizable seed set + a target at a difficulty-
+    """Sample a *satisfying*, solvable instance.
 
-    tuned depth in the seed combine-closure.
+    Guarantees:
+      * seeds are recognizable (salience floor) and combinable (min degree);
+      * the inventory forms a connected web with several opening moves
+        (``>= MIN_OPENING_PAIRS`` fresh pairs) so progress never needs brute force;
+      * the target is reachable through the combine-closure at the difficulty's depth
+        window and is itself recognizable (``TARGET_SALIENCE_FLOOR``).
     """
     svc = get_service()
     min_gen, max_gen, seed_min, seed_max = _difficulty_params(difficulty)
-    pool = [nid for nid in svc.by_salience(minimum=SEED_SALIENCE_FLOOR)]
+    pool = [
+        nid
+        for nid in svc.by_salience(minimum=SEED_SALIENCE_FLOOR)
+        if svc.degree(nid) >= SEED_MIN_DEGREE
+    ]
     if len(pool) < seed_max:
-        pool = svc.all_ids()
+        pool = [nid for nid in svc.all_ids() if svc.degree(nid) >= SEED_MIN_DEGREE]
 
     def _finish(seeds: list[str], target: str, depth: int) -> AlchimieSession:
         session = AlchimieSession(
@@ -141,33 +216,78 @@ def _build_session(
             session.add(s, None)
         return session
 
+    best_relaxed: tuple[list[str], str, int] | None = None
     for _ in range(MAX_BUILD_ATTEMPTS):
         k = rng.randint(seed_min, min(seed_max, len(pool)))
-        seeds = rng.sample(pool, k)
+        seeds = _grow_seed_set(rng, k, pool)
+        if seeds is None:
+            continue
+        openings = _opening_pair_count(seeds)
         gen = _closure_with_generations(seeds)
-        # Candidates satisfying this difficulty's generation window.
+        # Candidates satisfying this difficulty's depth window AND recognizable.
         cands = [
             nid
             for nid, depth in gen.items()
-            if depth >= min_gen and (max_gen is None or depth <= max_gen)
+            if depth >= min_gen
+            and (max_gen is None or depth <= max_gen)
+            and nid not in seeds
+            and svc.node(nid) is not None
+            and svc.node(nid).salience >= TARGET_SALIENCE_FLOOR
         ]
         if not cands:
             continue
         if difficulty == "greu":
-            # Deepest available target (>=3) for the most satisfying multi-combine puzzle.
+            # Pick the deepest *recognizable* target for a meatier multi-combine puzzle.
             max_depth = max(gen[nid] for nid in cands)
             cands = [nid for nid in cands if gen[nid] == max_depth]
         target = rng.choice(cands)
-        return _finish(seeds, target, gen[target])
+        if openings >= MIN_OPENING_PAIRS:
+            return _finish(seeds, target, gen[target])
+        # Keep the first viable-but-thin instance as a fallback if nothing better lands.
+        if best_relaxed is None:
+            best_relaxed = (seeds, target, gen[target])
 
-    # Fallback: relax to the global MIN_TARGET_GENERATION over the full id pool.
-    seeds = rng.sample(svc.all_ids(), min(seed_max, len(svc.all_ids())))
+    if best_relaxed is not None:
+        return _finish(*best_relaxed)
+
+    # Last-resort fallback: relax everything over the full id pool so we never 500.
+    fallback_pool = [nid for nid in svc.all_ids() if svc.degree(nid) >= SEED_MIN_DEGREE]
+    seeds = rng.sample(fallback_pool, min(seed_max, len(fallback_pool)))
     gen = _closure_with_generations(seeds)
-    deep = [nid for nid, depth in gen.items() if depth >= MIN_TARGET_GENERATION]
+    deep = [
+        nid
+        for nid, depth in gen.items()
+        if depth >= MIN_TARGET_GENERATION and nid not in seeds
+    ]
     if not deep:
         raise HTTPException(status_code=500, detail="Nu am putut genera un joc solvabil.")
     target = rng.choice(deep)
     return _finish(seeds, target, gen[target])
+
+
+def _useful_pair(session: AlchimieSession) -> tuple[str, str] | None:
+    """A currently-owned pair that makes *forward progress* toward the target.
+
+    Returns the lexicographically-first owned pair whose fresh discovery strictly lowers
+    the number of remaining combine-generations to the target. ``None`` if the target is
+    already owned or somehow unreachable from the current inventory (shouldn't happen for
+    built instances). Used to power the gentle nudge after fruitless combines.
+    """
+    if session.won:
+        return None
+    svc = get_service()
+    owned = set(session.owned)
+    base_gen = _closure_with_generations(list(owned)).get(session.target)
+    if base_gen is None or base_gen == 0:
+        return None
+    for a, b in combinations(sorted(owned), 2):
+        fresh = [c for c in svc.common_neighbors(a, b) if c not in owned]
+        if not fresh:
+            continue
+        new_gen = _closure_with_generations(list(owned | set(fresh))).get(session.target)
+        if new_gen is not None and new_gen < base_gen:
+            return (a, b)
+    return None
 
 
 # ----------------------------------------------------------------------------- schemas
@@ -220,12 +340,15 @@ def _target_payload(session: AlchimieSession) -> dict[str, object]:
 
 def _share_line(session: AlchimieSession) -> str:
     """A short Wordle-style shareable result line for a won game."""
-    perfect = session.moves <= session.target_depth
+    # "Perfect" == solved in the optimal number of combines with no hints.
+    perfect = session.moves <= session.target_depth and session.hints_used == 0
     medal = "✨" if perfect else "⚗️"
     lines = [
         "cat_de_roman_esti · Alchimie",
         f"⚗️ {session.moves} combinatii · {session.score} pct {medal}",
     ]
+    if session.hints_used:
+        lines.append(f"💡 x{session.hints_used}")
     if session.daily:
         lines.append(session.daily)
     return "\n".join(lines)
@@ -242,6 +365,11 @@ def _state_payload(game_id: str, session: AlchimieSession) -> dict[str, object]:
         "difficulty": session.difficulty,
         "target_depth": session.target_depth,
         "won": session.won,
+        "hints_used": session.hints_used,
+        # A gentle nudge unlocks only after several fruitless combines in a row.
+        "hint_available": (
+            not session.won and session.fruitless_streak >= NUDGE_AFTER_FRUITLESS
+        ),
     }
     if session.daily:
         payload["daily"] = session.daily
@@ -294,7 +422,14 @@ def combine(game_id: str, body: CombineBody) -> dict[str, object]:
     svc = get_service()
     session = _require(game_id)
 
-    a, b = body.a, body.b
+    # A finished game is read-only: never count extra moves or mutate a won score.
+    if session.won:
+        payload = _state_payload(game_id, session)
+        payload["discovered"] = []
+        payload["message"] = "Jocul s-a terminat — ai craftat deja tinta."
+        return payload
+
+    a, b = (body.a or "").strip(), (body.b or "").strip()
     if a not in session.owned or b not in session.owned:
         raise HTTPException(
             status_code=400, detail="Ambele concepte trebuie sa fie in inventar."
@@ -308,6 +443,12 @@ def combine(game_id: str, body: CombineBody) -> dict[str, object]:
     discovered = [c for c in svc.common_neighbors(a, b) if c not in session.owned]
     for c in discovered:
         session.add(c, (a, b))
+
+    # Track dry spells so the nudge can surface only when the player is genuinely stuck.
+    if discovered:
+        session.fruitless_streak = 0
+    else:
+        session.fruitless_streak += 1
 
     if not discovered:
         message = "Nicio combinatie noua."
@@ -325,6 +466,43 @@ def combine(game_id: str, body: CombineBody) -> dict[str, object]:
     return payload
 
 
+@router.post("/games/{game_id}/hint")
+def hint_game(game_id: str) -> dict[str, object]:
+    """Reveal a gentle nudge: a pair of owned concepts that makes forward progress.
+
+    Only allowed once the player has been genuinely stuck (``NUDGE_AFTER_FRUITLESS``
+    fruitless combines in a row). Each hint costs score and resets the dry-spell counter
+    so it can't be spammed. Makes the "discovered nothing" path feel fair without handing
+    over the answer — it points at a useful *pair*, never the target itself.
+    """
+    session = _require(game_id)
+    if session.won:
+        raise HTTPException(status_code=400, detail="Jocul s-a terminat deja.")
+    if session.fruitless_streak < NUDGE_AFTER_FRUITLESS:
+        need = NUDGE_AFTER_FRUITLESS - session.fruitless_streak
+        raise HTTPException(
+            status_code=400,
+            detail=f"Mai incearca {need} combinatii inainte de un indiciu.",
+        )
+    pair = _useful_pair(session)
+    session.fruitless_streak = 0
+    if pair is None:
+        # Defensive: no forward pair (shouldn't happen for built instances).
+        payload = _state_payload(game_id, session)
+        payload["hint"] = None
+        payload["message"] = "Niciun indiciu disponibil acum."
+        return payload
+    session.hints_used += 1
+    a, b = pair
+    payload = _state_payload(game_id, session)
+    payload["hint"] = [_concept(a), _concept(b)]
+    payload["message"] = (
+        f"Indiciu: incearca sa combini {get_service().label(a)} + "
+        f"{get_service().label(b)}."
+    )
+    return payload
+
+
 @router.post("/games/{game_id}/reset")
 def reset_game(game_id: str) -> dict[str, object]:
     """Reset the SAME instance back to its original seed inventory (target unchanged)."""
@@ -332,6 +510,8 @@ def reset_game(game_id: str) -> dict[str, object]:
     session.owned.clear()
     session.order.clear()
     session.moves = 0
+    session.fruitless_streak = 0
+    session.hints_used = 0
     for s in session.seeds:
         session.add(s, None)
     return _state_payload(game_id, session)

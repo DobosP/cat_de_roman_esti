@@ -12,6 +12,9 @@ import {
 } from "../api/lant";
 import { ApiError } from "../api/client";
 import type { ToastKind } from "../components/Toast";
+import { GameShell } from "../components/GameShell";
+import { ResultCard } from "../components/ResultCard";
+import { DifficultyPicker } from "../components/DifficultyPicker";
 import { sound } from "../sound";
 import { bestScore, recordScore } from "../scores";
 import { copyResult, todayLocal } from "../share";
@@ -137,11 +140,27 @@ export default function Lant({
     if (state && !state.won) inputRef.current?.focus();
   }, [state]);
 
+  // On the win screen, Enter starts a fresh chain (keeps the keyboard flow going).
+  useEffect(() => {
+    if (!state?.won) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        setState(null);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [state?.won]);
+
   const won = state?.won ?? false;
-  const remaining = useMemo(() => {
+  // Moves relative to par. Positive => still within/at optimal budget; negative => over par.
+  const overPar = useMemo(() => {
     if (!state) return 0;
-    return Math.max(0, state.optimal - state.moves);
+    return state.moves - state.optimal;
   }, [state]);
+  // True distance left, learned from the most recent hint for THIS current node.
+  const hintRemaining = hint?.hint && hint.remaining !== undefined ? hint.remaining : null;
 
   async function submit() {
     if (!state || busy || won) return;
@@ -244,16 +263,17 @@ export default function Lant({
     return (
       <div className="screen-pad fill">
         <div className="container col" style={{ gap: 18 }}>
-          <div className="spread row" style={{ alignItems: "center" }}>
-            <button type="button" className="btn btn-ghost" onClick={onExit}>
-              ← Meniu
-            </button>
+          <GameShell onExit={onExit} accent={ACCENT}>
             {best && (
-              <span className="badge" title="Cel mai bun scor">
-                Record: {best.score}
+              <span
+                className="badge"
+                title="Cel mai bun scor"
+                style={{ fontVariantNumeric: "tabular-nums" }}
+              >
+                🏆 {best.score}
               </span>
             )}
-          </div>
+          </GameShell>
 
           <motion.div
             className="card col"
@@ -277,28 +297,14 @@ export default function Lant({
               </p>
             </div>
 
-            <div className="col" style={{ gap: 8 }}>
-              <span className="faint" style={{ fontSize: "0.72rem" }}>
-                DIFICULTATE
-              </span>
-              <div className="row wrap" style={{ gap: 8 }}>
-                {DIFFICULTIES.map((d) => (
-                  <button
-                    key={d.key}
-                    type="button"
-                    className={`btn ${
-                      difficulty === d.key ? "btn-primary" : "btn-ghost"
-                    }`}
-                    onClick={() => setDifficulty(d.key)}
-                  >
-                    {d.label}
-                    <span className="faint" style={{ marginLeft: 6, fontSize: "0.7rem" }}>
-                      {d.hint}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
+            <DifficultyPicker
+              options={DIFFICULTIES.map((d) => ({ id: d.key, label: d.label, hint: d.hint }))}
+              value={difficulty}
+              onChange={(id) => {
+                sound.playSelect();
+                setDifficulty(id);
+              }}
+            />
 
             <div className="row wrap" style={{ gap: 12, marginTop: 4 }}>
               <button
@@ -327,28 +333,27 @@ export default function Lant({
     <div className="screen-pad fill">
       <div className="container col" style={{ gap: 18 }}>
         {/* header */}
-        <div className="spread row" style={{ alignItems: "center" }}>
-          <button type="button" className="btn btn-ghost" onClick={onExit}>
-            ← Meniu
-          </button>
-          <div className="row" style={{ gap: 8 }}>
+        <GameShell onExit={onExit} accent={ACCENT} title="Lantul Cuvintelor">
             {state.daily && (
               <span className="badge" title="Provocarea zilei">
                 ⭐ {state.daily}
               </span>
             )}
             <span className="badge" title="Mutari facute">
-              {state.moves} mutari
+              {state.moves} {state.moves === 1 ? "mutare" : "mutari"}
             </span>
             <span
               className="badge"
-              style={{ borderColor: ACCENT, color: ACCENT }}
+              style={{
+                borderColor: overPar > 0 ? "var(--warn)" : ACCENT,
+                color: overPar > 0 ? "var(--warn)" : ACCENT,
+              }}
               title="Numarul minim de salturi"
             >
               optim {state.optimal}
+              {overPar > 0 ? ` (+${overPar})` : ""}
             </span>
-          </div>
-        </div>
+        </GameShell>
 
         {/* start -> target */}
         <div className="card col" style={{ gap: 12, padding: 18 }}>
@@ -407,80 +412,22 @@ export default function Lant({
 
         {/* input + actions OR win */}
         {won ? (
-          <motion.div
-            className="card center col"
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 240, damping: 18 }}
-            style={{
-              gap: 12,
-              padding: 24,
-              borderColor: TARGET_COLOR,
-              boxShadow: `0 0 50px -16px ${TARGET_COLOR}`,
-            }}
+          <ResultCard
+            icon={state.moves <= state.optimal ? "★" : "✦"}
+            title={state.moves <= state.optimal ? "Lant perfect!" : "Ai reusit!"}
+            accent={TARGET_COLOR}
+            score={state.score}
+            isRecord={scored?.isBest ?? false}
+            shareText={state.share}
+            onCopy={() => void handleCopy()}
+            onReplay={() => setState(null)}
+            onExit={onExit}
+            replayLabel="Lant nou →"
           >
-            <div style={{ fontSize: "2.4rem" }} aria-hidden>
-              {state.moves <= state.optimal ? "★" : "✦"}
-            </div>
-            <h2 style={{ margin: 0 }}>
-              {state.moves <= state.optimal ? "Lant perfect!" : "Ai reusit!"}
-            </h2>
-            <p className="muted" style={{ margin: 0 }}>
-              Ai ajuns la <strong>{state.target.label}</strong> in{" "}
-              <strong style={{ color: "var(--text)" }}>{state.moves}</strong>{" "}
-              salturi (optim {state.optimal}).
-            </p>
-
-            {state.score !== undefined && (
-              <div className="col center" style={{ gap: 4 }}>
-                <span className="faint" style={{ fontSize: "0.72rem" }}>
-                  SCOR
-                </span>
-                <div
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontWeight: 800,
-                    fontSize: "2rem",
-                    color: TARGET_COLOR,
-                  }}
-                >
-                  {state.score}
-                </div>
-                {scored?.isBest && (
-                  <motion.span
-                    className="badge"
-                    initial={{ scale: 0.6, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    style={{ borderColor: TARGET_COLOR, color: TARGET_COLOR }}
-                  >
-                    🏆 Record!
-                  </motion.span>
-                )}
-              </div>
-            )}
-
-            <div className="row wrap center" style={{ gap: 12, marginTop: 4 }}>
-              {state.share && (
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={() => void handleCopy()}
-                >
-                  Copiaza rezultatul
-                </button>
-              )}
-              <button
-                type="button"
-                className="btn btn-ghost"
-                onClick={() => setState(null)}
-              >
-                Lant nou →
-              </button>
-              <button type="button" className="btn btn-ghost" onClick={onExit}>
-                Meniu
-              </button>
-            </div>
-          </motion.div>
+            Ai ajuns la <strong style={{ color: "var(--text)" }}>{state.target.label}</strong>{" "}
+            in <strong style={{ color: "var(--text)" }}>{state.moves}</strong> salturi (optim{" "}
+            {state.optimal}).
+          </ResultCard>
         ) : (
           <motion.div
             key={shake}
@@ -492,23 +439,22 @@ export default function Lant({
             <div className="row" style={{ gap: 8 }}>
               <input
                 ref={inputRef}
-                className="fill"
+                className="field fill"
                 placeholder="scrie urmatorul concept…"
                 value={text}
                 disabled={busy}
                 onChange={(e) => setText(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") void submit();
+                  else if (e.key === "Escape") setText("");
                 }}
-                style={{
-                  flex: 1,
-                  padding: "12px 14px",
-                  borderRadius: 12,
-                  border: "1px solid var(--border)",
-                  background: "var(--surface)",
-                  color: "var(--text)",
-                  fontSize: "1rem",
-                }}
+                autoComplete="off"
+                autoCapitalize="off"
+                autoCorrect="off"
+                spellCheck={false}
+                enterKeyHint="send"
+                aria-label="Urmatorul concept"
+                style={{ flex: 1 }}
               />
               <button
                 type="button"
@@ -538,9 +484,13 @@ export default function Lant({
                 💡 Indiciu
               </button>
               <span className="muted" style={{ alignSelf: "center" }}>
-                {remaining > 0
-                  ? `~${remaining} salturi pe drumul cel scurt`
-                  : "esti la un pas!"}
+                {hintRemaining !== null
+                  ? hintRemaining <= 1
+                    ? "esti la un pas de tinta!"
+                    : `${hintRemaining} salturi pana la tinta`
+                  : overPar > 0
+                    ? `peste par cu ${overPar} — incearca ↶ Inapoi`
+                    : `tinta la ~${state.optimal - state.moves} salturi`}
               </span>
             </div>
 
@@ -553,21 +503,40 @@ export default function Lant({
                   className="card"
                   style={{ padding: 12, borderColor: "var(--warn)" }}
                 >
-                  <span className="muted" style={{ fontSize: "0.85rem" }}>
-                    Incearca:{" "}
-                    <strong
-                      style={{ color: "var(--warn)", cursor: "pointer" }}
-                      onClick={() => {
-                        if (hint.hint) setText(hint.hint.label);
-                        inputRef.current?.focus();
-                      }}
-                    >
-                      {hint.hint.label}
-                    </strong>
-                    {hint.relation ? (
-                      <span className="faint"> ({hint.relation})</span>
+                  <div className="col" style={{ gap: 4 }}>
+                    <span className="muted" style={{ fontSize: "0.85rem" }}>
+                      Incearca:{" "}
+                      <button
+                        type="button"
+                        title="Pune in casuta"
+                        onClick={() => {
+                          if (hint.hint) setText(hint.hint.label);
+                          inputRef.current?.focus();
+                        }}
+                        style={{
+                          background: "none",
+                          border: "none",
+                          padding: 0,
+                          font: "inherit",
+                          fontWeight: 700,
+                          color: "var(--warn)",
+                          cursor: "pointer",
+                          textDecoration: "underline",
+                        }}
+                      >
+                        {hint.hint.label}
+                      </button>
+                      {hint.relation ? (
+                        <span className="faint"> ({hint.relation})</span>
+                      ) : null}
+                    </span>
+                    {hint.alternatives && hint.alternatives > 1 ? (
+                      <span className="faint" style={{ fontSize: "0.72rem" }}>
+                        {hint.alternatives} variante bune de aici — exista mai multe
+                        drumuri.
+                      </span>
                     ) : null}
-                  </span>
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>

@@ -114,11 +114,25 @@ export function getConexiuni(gameId: string): Promise<ConexiuniState> {
   return getJson<ConexiuniState>(`${BASE}/games/${encodeURIComponent(gameId)}`);
 }
 
-/** POST /games/{id}/guess — submit exactly 4 distinct tile ids. */
+/** The board is always 4 groups of 4; a guess is exactly this many distinct tiles. */
+export const GROUP_SIZE = 4;
+
+/**
+ * POST /games/{id}/guess — submit exactly 4 distinct tile ids.
+ *
+ * The server is authoritative, but we reject a malformed selection up front (wrong
+ * count or duplicates) so the UI can't waste a life on an input the backend would 400.
+ */
 export function guessConexiuni(gameId: string, ids: string[]): Promise<GuessResult> {
+  const distinct = new Set(ids);
+  if (ids.length !== GROUP_SIZE || distinct.size !== GROUP_SIZE) {
+    return Promise.reject(
+      new ApiError(400, `Alege exact ${GROUP_SIZE} concepte distincte`),
+    );
+  }
   return postJson<GuessResult>(
     `${BASE}/games/${encodeURIComponent(gameId)}/guess`,
-    { ids },
+    { ids: [...ids] },
   );
 }
 

@@ -11,12 +11,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ApiError } from "../api/client";
 import {
   conexiuniApi,
+  GROUP_SIZE,
   type ConexiuniState,
   type Difficulty,
   type GuessResult,
   type SolvedGroup,
 } from "../api/conexiuni";
 import type { ToastKind } from "../components/Toast";
+import { GameShell } from "../components/GameShell";
+import { ResultCard } from "../components/ResultCard";
+import { DifficultyPicker } from "../components/DifficultyPicker";
 import { sound } from "../sound";
 import { categoryColor } from "../theme/tokens";
 import { recordScore, bestScore } from "../scores";
@@ -48,6 +52,12 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const [difficulty, setDifficulty] = useState<Difficulty>("normal");
   const [recordHit, setRecordHit] = useState(false);
   const [shake, setShake] = useState(0);
+  // Client-only display order for the remaining tiles (the "shuffle" button reorders
+  // these; the authoritative grouping never changes). Keyed by tile id.
+  const [shuffleNonce, setShuffleNonce] = useState(0);
+  // Transient inline hint shown under the board (e.g. "one away") so feedback persists
+  // past the toast — cleared on the next selection change.
+  const [hint, setHint] = useState<string | null>(null);
 
   // Recompute the persisted best whenever the game state changes (e.g. after a
   // finished round writes a new record and we return to the start screen).
@@ -65,6 +75,9 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
             : await conexiuniApi.create({ difficulty: mode.difficulty });
         setState(s);
         setSelected([]);
+        setHint(null);
+        setShuffleNonce(0);
+        setShake(0);
       } catch (err) {
         onToast(
           err instanceof ApiError
@@ -86,10 +99,20 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     return s;
   }, [state]);
 
-  const remainingTiles = useMemo(
-    () => (state ? state.tiles.filter((t) => !solvedIds.has(t.id)) : []),
-    [state, solvedIds],
-  );
+  const remainingTiles = useMemo(() => {
+    const base = state ? state.tiles.filter((t) => !solvedIds.has(t.id)) : [];
+    if (shuffleNonce === 0) return base;
+    // Deterministic-ish shuffle driven by the nonce so re-renders are stable until the
+    // player presses "Amesteca" again. Purely cosmetic — ids/grouping are untouched.
+    const arr = [...base];
+    let seed = shuffleNonce * 2654435761;
+    for (let i = arr.length - 1; i > 0; i--) {
+      seed = (seed * 1103515245 + 12345) & 0x7fffffff;
+      const j = seed % (i + 1);
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }, [state, solvedIds, shuffleNonce]);
 
   const finished = (state?.won ?? false) || (state?.lost ?? false);
 
@@ -112,15 +135,31 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const toggle = useCallback(
     (id: string) => {
       if (busy || finished) return;
-      sound.playSelect();
+      setHint(null);
+      // Decide outside the updater so the sound side-effect stays StrictMode-safe and
+      // fires only on a real change (selecting/deselecting, not a capped 5th click).
+      const wasSelected = selected.includes(id);
+      const changed = wasSelected || selected.length < 4;
+      if (changed) sound.playSelect();
       setSelected((prev) => {
         if (prev.includes(id)) return prev.filter((x) => x !== id);
         if (prev.length >= 4) return prev;
         return [...prev, id];
       });
     },
-    [busy, finished],
+    [busy, finished, selected],
   );
+
+  const clearSelection = useCallback(() => {
+    if (busy || finished) return;
+    setSelected([]);
+  }, [busy, finished]);
+
+  const shuffle = useCallback(() => {
+    if (busy || finished) return;
+    sound.playSelect();
+    setShuffleNonce((n) => n + 1);
+  }, [busy, finished]);
 
   const submit = useCallback(async () => {
     if (!state || selected.length !== 4 || busy) return;
@@ -130,17 +169,23 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       if (res.correct) {
         sound.playWin();
         setSelected([]);
+        setHint(null);
         // refresh authoritative state
         const fresh = await conexiuniApi.get(state.game_id);
         setState(fresh);
         if (!fresh.won && res.category) {
-          onToast(`Grup gasit: ${res.category.label}!`, "info");
+          onToast(`Grup gasit: ${res.category.label}!`, "success");
         }
       } else {
         sound.playError();
         setShake((n) => n + 1);
-        if (res.one_away) onToast("Aproape! 3 din 4.", "info");
-        else onToast("Gresit.", "info");
+        if (res.one_away) {
+          setHint("Aproape! 3 din 4 sunt din aceeasi categorie.");
+          onToast("Aproape! 3 din 4.", "info");
+        } else {
+          setHint("Niciun grup complet — incearca alta combinatie.");
+          onToast("Gresit.", "info");
+        }
         // refresh authoritative state (lives, lost, solution)
         const fresh = await conexiuniApi.get(state.game_id);
         setState(fresh);
@@ -166,19 +211,38 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     else onToast("Nu am putut copia.", "error");
   }, [state, onToast]);
 
+  // Keyboard: Enter submits a full selection, Escape/Backspace clears it. Inert when
+  // no board is active, while a request is in flight, or once the game is finished.
+  useEffect(() => {
+    if (!state || finished) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (busy) return;
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (e.key === "Enter" && selected.length === 4) {
+        e.preventDefault();
+        void submit();
+      } else if (e.key === "Escape" || e.key === "Backspace") {
+        if (selected.length > 0) {
+          e.preventDefault();
+          clearSelection();
+        }
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [state, finished, busy, selected, submit, clearSelection]);
+
   // ----------------------------------------------------------------- INTRO
   if (!state) {
     return (
       <div className="screen-pad fill" style={{ overflowY: "auto" }}>
         <div className="container col" style={{ gap: 18, paddingBottom: 32 }}>
-          <div className="row spread wrap" style={{ gap: 12 }}>
-            <button type="button" className="btn btn-ghost" onClick={onExit}>
-              ← Meniu
-            </button>
+          <GameShell onExit={onExit} accent={ACCENT}>
             <span className="badge" style={{ borderColor: ACCENT, color: ACCENT }}>
               🔗 Conexiuni
             </span>
-          </div>
+          </GameShell>
 
           <motion.div
             className="card col"
@@ -198,28 +262,17 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
             )}
           </motion.div>
 
-          <div className="col" style={{ gap: 8 }}>
-            <span className="faint" style={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}>
-              DIFICULTATE
-            </span>
-            <div className="row wrap" style={{ gap: 8 }}>
-              {(["usor", "normal", "greu"] as Difficulty[]).map((d) => (
-                <button
-                  key={d}
-                  type="button"
-                  className="btn"
-                  onClick={() => setDifficulty(d)}
-                  style={{
-                    borderColor: difficulty === d ? ACCENT : "var(--surface-border)",
-                    color: difficulty === d ? ACCENT : undefined,
-                    fontWeight: difficulty === d ? 700 : 500,
-                  }}
-                >
-                  {DIFF_LABEL[d]}
-                </button>
-              ))}
-            </div>
-          </div>
+          <DifficultyPicker
+            options={(["usor", "normal", "greu"] as Difficulty[]).map((d) => ({
+              id: d,
+              label: DIFF_LABEL[d],
+            }))}
+            value={difficulty}
+            onChange={(d) => {
+              sound.playSelect();
+              setDifficulty(d);
+            }}
+          />
 
           <div className="row wrap center" style={{ gap: 12, marginTop: 8 }}>
             <button
@@ -252,25 +305,17 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     <div className="screen-pad fill" style={{ overflowY: "auto" }}>
       <div className="container col" style={{ gap: 16, paddingBottom: 32 }}>
         {/* Header */}
-        <div className="row spread wrap" style={{ gap: 12 }}>
-          <button type="button" className="btn btn-ghost" onClick={onExit}>
-            ← Meniu
-          </button>
-          <div className="row wrap" style={{ gap: 8, alignItems: "center" }}>
-            <span className="badge" style={{ borderColor: ACCENT, color: ACCENT }}>
-              🔗 Conexiuni
-            </span>
+        <GameShell onExit={onExit} accent={ACCENT} title="Conexiuni">
             {state.daily && <span className="badge">★ {state.daily}</span>}
             <span className="badge">{DIFF_LABEL[state.difficulty]}</span>
-            <span className="row" style={{ gap: 4 }} aria-label={`${state.lives} vieti`}>
+            <span className="row" style={{ gap: 4 }} aria-label={`${state.lives} vieti ramase`}>
               {lifeDots.map((alive, i) => (
                 <span key={i} aria-hidden style={{ opacity: alive ? 1 : 0.25 }}>
                   {alive ? "●" : "○"}
                 </span>
               ))}
             </span>
-          </div>
-        </div>
+        </GameShell>
 
         {/* Solved groups as locked coloured rows */}
         <AnimatePresence initial={false}>
@@ -308,14 +353,17 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                     transition={{ type: "spring", stiffness: 320, damping: 20 }}
                     onClick={() => toggle(t.id)}
                     disabled={busy}
+                    aria-pressed={isSel}
+                    title={t.label}
                     className="card center"
                     style={{
                       padding: "12px 6px",
                       minHeight: 64,
-                      cursor: "pointer",
+                      cursor: busy ? "default" : "pointer",
                       textAlign: "center",
                       fontSize: "0.82rem",
                       lineHeight: 1.15,
+                      opacity: busy && !isSel ? 0.55 : 1,
                       borderColor: isSel ? ACCENT : "var(--surface-border)",
                       background: isSel
                         ? `color-mix(in srgb, var(--surface) 65%, ${ACCENT})`
@@ -333,29 +381,57 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
           </motion.div>
         )}
 
+        {/* Inline feedback (persists past the toast until next selection) */}
+        <AnimatePresence>
+          {!finished && hint && (
+            <motion.p
+              key={hint}
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="muted center"
+              style={{ margin: 0, fontSize: "0.85rem" }}
+            >
+              {hint}
+            </motion.p>
+          )}
+        </AnimatePresence>
+
         {/* Controls */}
         {!finished && (
-          <div className="row center wrap" style={{ gap: 12 }}>
-            <span className="faint">{selected.length}/4 selectate</span>
-            {selected.length > 0 && (
+          <div className="col" style={{ gap: 8 }}>
+            <div className="row center wrap" style={{ gap: 12 }}>
+              <span className="faint">{selected.length}/4 selectate</span>
               <button
                 type="button"
                 className="btn btn-ghost"
-                disabled={busy}
-                onClick={() => setSelected([])}
+                disabled={busy || remainingTiles.length <= GROUP_SIZE}
+                onClick={shuffle}
+                title="Amesteca pozitiile tiglelor"
+              >
+                Amesteca
+              </button>
+              <button
+                type="button"
+                className="btn btn-ghost"
+                disabled={busy || selected.length === 0}
+                onClick={clearSelection}
               >
                 Goleste
               </button>
-            )}
-            <button
-              type="button"
-              className="btn btn-primary"
-              disabled={busy || selected.length !== 4}
-              onClick={submit}
-              style={{ borderColor: ACCENT }}
-            >
-              {busy ? "…" : "Verifica"}
-            </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                disabled={busy || selected.length !== 4}
+                onClick={submit}
+                style={{ borderColor: ACCENT }}
+              >
+                {busy ? "…" : "Verifica"}
+              </button>
+            </div>
+            <span className="faint center" style={{ fontSize: "0.72rem", opacity: 0.7 }}>
+              Enter = verifica · Esc = goleste
+            </span>
           </div>
         )}
 
@@ -374,57 +450,20 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         {/* Finish banner */}
         <AnimatePresence>
           {finished && (
-            <motion.div
-              className="card center col"
-              initial={{ scale: 0.85, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 240, damping: 18 }}
-              style={{
-                padding: 22,
-                textAlign: "center",
-                gap: 6,
-                borderColor: state.won ? ACCENT : "var(--surface-border)",
-                boxShadow: state.won ? `0 0 60px -18px ${ACCENT}` : undefined,
-              }}
+            <ResultCard
+              icon={state.won ? "🎉" : "💔"}
+              title={state.won ? "Toate grupurile gasite!" : "Ai ramas fara vieti."}
+              accent={ACCENT}
+              won={state.won}
+              score={state.score}
+              isRecord={recordHit}
+              shareText={state.share}
+              onCopy={copyShare}
+              onReplay={() => void start({ kind: "seed", difficulty })}
+              onExit={onExit}
             >
-              <div style={{ fontSize: "2.2rem" }} aria-hidden>
-                {state.won ? "🎉" : "💔"}
-              </div>
-              <h2 style={{ margin: 0, color: state.won ? ACCENT : "var(--text)" }}>
-                {state.won ? "Toate grupurile gasite!" : "Ai ramas fara vieti."}
-              </h2>
-              <p className="muted" style={{ margin: 0 }}>
-                Scor: <strong style={{ color: "var(--text)" }}>{state.score}</strong> ·{" "}
-                {state.mistakes} greseli
-              </p>
-              {recordHit && (
-                <motion.p
-                  initial={{ scale: 0.6, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  style={{ margin: 0, color: "#ffd166", fontWeight: 700 }}
-                >
-                  ★ Record!
-                </motion.p>
-              )}
-              <div className="row center wrap" style={{ gap: 12, marginTop: 14 }}>
-                {state.share && (
-                  <button type="button" className="btn btn-ghost" onClick={copyShare}>
-                    Copiaza rezultatul
-                  </button>
-                )}
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={() => void start({ kind: "seed", difficulty })}
-                  style={{ borderColor: ACCENT }}
-                >
-                  Joc nou →
-                </button>
-                <button type="button" className="btn btn-ghost" onClick={onExit}>
-                  Meniu
-                </button>
-              </div>
-            </motion.div>
+              {state.mistakes} {state.mistakes === 1 ? "greseala" : "greseli"}
+            </ResultCard>
           )}
         </AnimatePresence>
       </div>

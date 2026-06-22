@@ -17,7 +17,7 @@ from dataclasses import dataclass, field
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
-from .service import SessionStore, daily_seed, get_service
+from .service import SessionStore, daily_seed, get_service, normalize
 
 router = APIRouter(prefix="/api/wordgames/lant", tags=["lant"])
 
@@ -31,9 +31,19 @@ _DIFFICULTY_BANDS: dict[str, tuple[int, int]] = {
 }
 _DEFAULT_DIFFICULTY = "normal"
 
-# How many random start/target draws we attempt before giving up (always succeeds in
-# practice — the KG has thousands of pairs in range).
-_MAX_DRAWS = 400
+# How many candidate STARTS we sample before settling for the best pair found so far.
+_MAX_STARTS = 140
+# How many reachable targets we evaluate per start (a slice of the shuffled reachables).
+_TARGETS_PER_START = 24
+# Minimum endpoint degree: avoid leaf (degree-1) starts/targets — a leaf endpoint forces
+# the first/last hop and makes the ladder feel like a single rail.
+_MIN_ENDPOINT_DEGREE = 2
+# A puzzle is "satisfying" only if the player has a real branch at the first hop AND no
+# intermediate shortest-path layer collapses to a single forced node.
+_MIN_FIRST_HOP_CHOICES = 2
+_MIN_LAYER_WIDTH = 2
+# Once we have found enough genuinely-good candidates we stop early (keeps latency low).
+_ENOUGH_GOOD = 6
 
 
 def _score_for(moves: int, optimal: int) -> int:
@@ -79,6 +89,32 @@ class MoveBody(BaseModel):
 
 
 # --------------------------------------------------------------------- serializers
+def _resolve_neighbor(text: str, current: str) -> str | None:
+    """Resolve player text to a node, disambiguating by what is linked to ``current``.
+
+    The shared index maps a normalized label to a *single* node id, so when two concepts
+    share a label (e.g. two "Moldova" nodes) a literal resolve can pick the one that is
+    NOT linked to the current node and a perfectly valid guess gets wrongly rejected.
+    Here we look at every node carrying the typed label and prefer one that is an actual
+    neighbour of ``current`` (excluding ``current`` itself), so disambiguation favours a
+    legal hop.
+    """
+    svc = get_service()
+    primary = svc.resolve(text)
+    if primary is not None and primary != current and svc.link(current, primary) is not None:
+        return primary
+    key = normalize(text)
+    if not key:
+        return primary
+    # Scan for same-label siblings that ARE a legal hop from here.
+    for nid in svc.all_ids():
+        if nid == current:
+            continue
+        if normalize(svc.label(nid)) == key and svc.link(current, nid) is not None:
+            return nid
+    return primary
+
+
 def _concept(node_id: str) -> dict[str, str]:
     svc = get_service()
     return {"id": node_id, "label": svc.label(node_id)}
@@ -121,30 +157,106 @@ def _state(game_id: str, session: LantSession) -> dict:
 
 
 # --------------------------------------------------------------------- puzzle picking
+def _salience(node_id: str) -> float:
+    node = get_service().node(node_id)
+    return node.salience if node else 0.0
+
+
+def _branch_profile(
+    start: str, target: str, optimal: int, dist_from_target: dict[str, int]
+) -> tuple[int, int, int]:
+    """Measure how branchy the shortest-path "diamond" between start and target is.
+
+    Returns ``(first_hop_choices, min_layer_width, total_on_path)`` where:
+
+    * ``first_hop_choices`` — neighbours of START that are one hop closer to the target
+      (i.e. genuine, correct first moves). >1 means the opening is not a forced rail.
+    * ``min_layer_width`` — the narrowest shortest-path layer between the endpoints. A
+      width of 1 anywhere means every solver is funnelled through that single node.
+    * ``total_on_path`` — count of intermediate nodes lying on *some* shortest path; a
+      bigger web means more legitimate routes and a more satisfying solve.
+    """
+    svc = get_service()
+    dist_from_start = svc.distances_from(start)
+    layers: dict[int, int] = {}
+    for nid, ds in dist_from_start.items():
+        dt = dist_from_target.get(nid)
+        if dt is not None and ds + dt == optimal:
+            layers[ds] = layers.get(ds, 0) + 1
+    intermediate = [layers.get(k, 0) for k in range(1, optimal)]
+    min_width = min(intermediate) if intermediate else 1
+    total_on_path = sum(intermediate)
+    first_hop = sum(
+        1
+        for nb in svc.neighbor_ids(start)
+        if dist_from_target.get(nb) == optimal - 1
+    )
+    return first_hop, min_width, total_on_path
+
+
+def _pair_score(start: str, target: str, first_hop: int, min_width: int, total: int) -> float:
+    """Rank candidate pairs: reward branchiness, salient endpoints and richer webs."""
+    salience = (_salience(start) + _salience(target)) / 2
+    return min_width * 10 + first_hop * 3 + total + salience * 4
+
+
 def _pick_pair(rng: random.Random, lo: int, hi: int) -> tuple[str, str, int]:
     """Pick a (start, target) whose distance is in [lo, hi].
 
-    Prefer reasonably salient, well-connected concepts so the ladder is meaningful and
-    the player has real choices at every hop. Guaranteed solvable by construction.
+    We don't take the first reachable pair: we *playtest* candidates and keep the most
+    satisfying one. A good ladder has REAL choices at the opening hop, never funnels
+    every solver through a single forced node, prefers salient (recognisable) endpoints
+    and avoids leaf (degree-1) endpoints. The search is bounded and deterministic in the
+    seed, and degrades gracefully — if nothing clears the "genuinely good" bar we keep
+    the best-scoring pair seen, and as a last resort accept any reachable pair.
     """
     svc = get_service()
-    # Candidate starts: decently connected nodes (degree >= 2) so a hop is always possible.
-    candidates = [nid for nid in svc.all_ids() if svc.degree(nid) >= 2]
+    candidates = [nid for nid in svc.all_ids() if svc.degree(nid) >= _MIN_ENDPOINT_DEGREE]
     if not candidates:
-        candidates = svc.all_ids()
+        candidates = [nid for nid in svc.all_ids() if svc.degree(nid) >= 1]
+    if not candidates:
+        raise HTTPException(status_code=503, detail="Graful nu are noduri jucabile.")
 
-    for _ in range(_MAX_DRAWS):
+    best_good: tuple[float, str, str, int] | None = None
+    good_count = 0
+    # Fallback if no pair clears the satisfying bar: best-scoring, else any reachable.
+    best_any: tuple[float, str, str, int] | None = None
+    fallback: tuple[str, str, int] | None = None
+
+    for _ in range(_MAX_STARTS):
         start = rng.choice(candidates)
         dist_map = svc.distances_from(start)
         reachable = [
-            nid
+            (nid, d)
             for nid, d in dist_map.items()
-            if lo <= d <= hi and svc.degree(nid) >= 1
+            if lo <= d <= hi and svc.degree(nid) >= _MIN_ENDPOINT_DEGREE
         ]
         if not reachable:
             continue
-        target = rng.choice(reachable)
-        return start, target, dist_map[target]
+        rng.shuffle(reachable)
+        for target, optimal in reachable[:_TARGETS_PER_START]:
+            if fallback is None:
+                fallback = (start, target, optimal)
+            dist_from_target = svc.distances_from(target)
+            first_hop, min_width, total = _branch_profile(
+                start, target, optimal, dist_from_target
+            )
+            score = _pair_score(start, target, first_hop, min_width, total)
+            if best_any is None or score > best_any[0]:
+                best_any = (score, start, target, optimal)
+            if first_hop >= _MIN_FIRST_HOP_CHOICES and min_width >= _MIN_LAYER_WIDTH:
+                if best_good is None or score > best_good[0]:
+                    best_good = (score, start, target, optimal)
+                good_count += 1
+        if good_count >= _ENOUGH_GOOD:
+            break
+
+    chosen = best_good or best_any
+    if chosen is not None:
+        _, start, target, optimal = chosen
+        return start, target, optimal
+    if fallback is not None:
+        return fallback
 
     raise HTTPException(
         status_code=503,
@@ -195,11 +307,14 @@ def move(game_id: str, body: MoveBody) -> dict:
         return {"ok": True, **_state(game_id, session)}
 
     svc = get_service()
-    guess = svc.resolve(body.text)
+    if not body.text or not body.text.strip():
+        return {"ok": False, "last_error": "Scrie un concept"}
+
+    prev = session.current
+    guess = _resolve_neighbor(body.text, prev)
     if guess is None:
         return {"ok": False, "last_error": "Nu cunosc acest concept"}
 
-    prev = session.current
     if guess == prev:
         return {"ok": False, "last_error": "Esti deja aici"}
     if svc.link(prev, guess) is None:
@@ -250,14 +365,23 @@ def hint(game_id: str) -> dict:
         # but be defensive): suggest stepping back.
         return {"hint": None, "message": "Nicio scurtatura de aici — incearca sa revii."}
 
-    # A neighbour that lies on a shortest path: one hop closer to the target.
-    for neighbor in svc.neighbor_ids(cur):
-        nd = svc.distance(neighbor, session.target)
-        if nd is not None and nd == remaining - 1:
-            return {
-                "hint": _concept(neighbor),
-                "relation": svc.link_label(cur, neighbor),
-                "remaining": remaining,
-            }
+    # All neighbours that lie on a shortest path (one hop closer to the target). When
+    # several exist, suggest the most salient (most recognisable) one so the hint is
+    # genuinely helpful rather than an obscure node the player has never heard of.
+    on_path = [
+        nb
+        for nb in svc.neighbor_ids(cur)
+        if svc.distance(nb, session.target) == remaining - 1
+    ]
+    if on_path:
+        on_path.sort(key=lambda nb: (_salience(nb), nb), reverse=True)
+        best = on_path[0]
+        return {
+            "hint": _concept(best),
+            "relation": svc.link_label(cur, best),
+            "remaining": remaining,
+            # When >1 such neighbour exists, the player genuinely had a choice here.
+            "alternatives": len(on_path),
+        }
 
     return {"hint": None, "message": "Niciun indiciu disponibil."}

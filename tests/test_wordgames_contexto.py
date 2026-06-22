@@ -250,3 +250,96 @@ def test_no_score_or_share_before_win() -> None:
     body = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()
     assert "score" not in body
     assert "share" not in body
+
+
+# ----------------------------------------------- new: instance quality (playtest floor)
+
+
+@pytest.mark.parametrize("difficulty", ["usor", "normal", "greu"])
+def test_every_target_has_a_responsive_warm_band(difficulty: str) -> None:
+    """No degenerate "everything is Inghetat" secret ships in any tier.
+
+    Each generated target must clear the responsive-zone floor: a healthy count of
+    concepts at distance 1..5 so guesses spread across temperatures. We exercise many
+    seeds (deterministic) and assert the floor holds for all of them.
+    """
+    from cat_de_roman_esti.wordgames.contexto import (
+        MIN_RESPONSIVE,
+        _pick_target,
+        _responsive_count,
+    )
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    svc = get_service()
+    for seed in range(60):
+        session = _pick_target(seed, difficulty)
+        near = _responsive_count(svc.distances_from(session.target))
+        assert near >= MIN_RESPONSIVE, (
+            f"{difficulty} seed={seed} target={session.target} "
+            f"responsive={near} < {MIN_RESPONSIVE}"
+        )
+
+
+def test_seeds_yield_varied_targets() -> None:
+    """The seeded selection still produces wide variety, not one repeated target."""
+    from cat_de_roman_esti.wordgames.contexto import _pick_target
+
+    targets = {_pick_target(seed, "normal").target for seed in range(40)}
+    assert len(targets) >= 15
+
+
+def test_usor_targets_are_more_famous_than_greu() -> None:
+    """'usor' must skew to well-known concepts; 'greu' to obscure ones."""
+    from cat_de_roman_esti.wordgames.contexto import _pick_target
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    svc = get_service()
+
+    def avg_salience(diff: str) -> float:
+        sals = [svc.node(_pick_target(s, diff).target).salience for s in range(40)]
+        return sum(sals) / len(sals)
+
+    assert avg_salience("usor") > avg_salience("greu")
+
+
+# ------------------------------------------------- new: closeness mapping correctness
+
+
+def test_only_the_win_reads_closeness_100() -> None:
+    """A near miss must never report 100 — that is reserved for the actual target.
+
+    Otherwise a distance-1 guess can read 100 and be ambiguous with a win. We pick a
+    target, then drive a distance-1 neighbour guess and assert its closeness is < 100.
+    """
+    from cat_de_roman_esti.wordgames.contexto import _pick_target
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    svc = get_service()
+    session = _pick_target(SEED, "normal")  # n_dunarea
+    target = session.target
+    neighbour = svc.neighbor_ids(target)[0]
+
+    c = make_client()
+    gid = c.post(
+        "/api/wordgames/contexto/games", params={"seed": SEED}
+    ).json()["game_id"]
+    body = c.post(
+        f"/api/wordgames/contexto/games/{gid}/guess",
+        json={"text": svc.label(neighbour)},
+    ).json()
+    assert body["ok"] is True
+    assert body["guess"]["distance"] == 1
+    assert body["guess"]["temperature"] == "Fierbinte"
+    assert body["guess"]["closeness"] < 100
+
+
+def test_closeness_three_way_split_reachable_vs_unreachable() -> None:
+    """closeness distinguishes win (100), reachable (1..99), unreachable (0)."""
+    from cat_de_roman_esti.wordgames.contexto import _pick_target, closeness_for
+
+    session = _pick_target(SEED, "normal")
+    assert closeness_for(session, 0) == 100  # the target
+    assert closeness_for(session, None) == 0  # unreachable / disconnected
+    # the coldest *reachable* bucket stays >= 1, so it is visibly warmer than unreachable
+    coldest = max(session.dist_hist)
+    assert 1 <= closeness_for(session, coldest) <= 99

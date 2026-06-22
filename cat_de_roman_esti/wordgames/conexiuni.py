@@ -14,11 +14,13 @@ from __future__ import annotations
 
 import random
 from dataclasses import dataclass, field
+from functools import lru_cache
+from itertools import combinations
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
-from .service import SessionStore, daily_seed, get_service
+from .service import SessionStore, WordGameService, daily_seed, get_service
 
 router = APIRouter(prefix="/api/wordgames/conexiuni", tags=["conexiuni"])
 
@@ -85,64 +87,200 @@ def _usable_categories() -> list[str]:
     return [c for c in KNOWN_CATEGORIES if len(svc.by_category(c)) >= GROUP_SIZE]
 
 
-def _pick_board(rng: random.Random, difficulty: str) -> ConexiuniSession:
-    """Pick 4 categories + 4 concepts each, deterministically from ``rng``.
+def _salience(svc: WordGameService, node_id: str) -> float:
+    node = svc.node(node_id)
+    return node.salience if node else 0.0
 
-    Difficulty shapes both which categories and which concepts are chosen:
-      - usor:   the 4 highest-salience-average categories (most distinct themes) and the
-                highest-salience (most familiar) concepts within each.
-      - normal: random categories, random concepts.
-      - greu:   subtler (lower-salience-average) categories and lower-salience concepts.
+
+def _neighbors(svc: WordGameService, node_id: str) -> set[str]:
+    """Non-distractor neighbour set via the public service API (no internals)."""
+    return set(svc.neighbor_ids(node_id))
+
+
+@lru_cache(maxsize=1)
+def _category_entanglement() -> dict[tuple[str, str], float]:
+    """Pairwise theme-overlap between whole categories on the non-distractor KG.
+
+    For each pair we count cross-category edges and normalise by the geometric mean of
+    the category sizes. High = the two categories are semantically entangled (their
+    concepts plausibly belong together), so a board mixing them yields fun red-herrings;
+    low = the two themes are clearly distinct (easy to tell apart). Computed once.
     """
     svc = get_service()
     usable = _usable_categories()
-    if len(usable) < NUM_GROUPS:
+    members = {c: set(svc.by_category(c)) for c in usable}
+    out: dict[tuple[str, str], float] = {}
+    for a, b in combinations(usable, 2):
+        cross = sum(len(_neighbors(svc, x) & members[b]) for x in members[a])
+        norm = (len(members[a]) * len(members[b])) ** 0.5 or 1.0
+        out[(a, b)] = cross / norm
+    return out
+
+
+def _set_entanglement(cats: tuple[str, ...]) -> float:
+    """Total pairwise entanglement of a 4-category set (higher = trickier board)."""
+    ent = _category_entanglement()
+    return sum(ent.get(tuple(sorted((a, b))), 0.0) for a, b in combinations(cats, 2))
+
+
+@lru_cache(maxsize=1)
+def _ranked_category_sets() -> list[tuple[str, ...]]:
+    """All usable 4-category combinations, ascending by entanglement (clean -> tricky)."""
+    usable = _usable_categories()
+    return sorted(
+        (tuple(sorted(c)) for c in combinations(usable, NUM_GROUPS)),
+        key=lambda s: (_set_entanglement(s), s),
+    )
+
+
+def _choose_categories(rng: random.Random, difficulty: str) -> tuple[str, ...]:
+    """Pick a 4-category set sized to the difficulty, with seed-driven variety.
+
+    'usor' samples from the cleanest (least entangled) third of all sets so the four
+    themes are unmistakable; 'greu' samples from the most entangled third for plausible
+    red-herrings; 'normal' samples uniformly. Sampling (not a fixed top-N) means the
+    board actually varies with the seed at every difficulty.
+    """
+    ranked = _ranked_category_sets()
+    n = len(ranked)
+    if n == 0:
         raise HTTPException(
             status_code=503,
             detail="Nu exista suficiente categorii pentru un joc.",
         )
+    third = max(1, n // 3)
+    if difficulty == "usor":
+        pool = ranked[:third]
+    elif difficulty == "greu":
+        pool = ranked[-third:]
+    else:  # normal
+        pool = ranked
+    return rng.choice(pool)
 
-    def avg_salience(cat: str) -> float:
-        ids = svc.by_category(cat)
-        if not ids:
-            return 0.0
-        return sum((svc.node(i).salience if svc.node(i) else 0.0) for i in ids) / len(ids)
+
+def _tile_ambiguity(
+    svc: WordGameService, node_id: str, own: set[str], foreign: set[str]
+) -> int:
+    """How much a tile pulls toward a *foreign* on-board group vs. its own.
+
+    Returns the count of foreign-on-board neighbours minus own-on-board neighbours.
+    A positive value means the tile links more strongly to another group than its own —
+    a genuinely unfair tile that we avoid on every difficulty.
+    """
+    nbrs = _neighbors(svc, node_id)
+    own_n = len(nbrs & (own - {node_id}))
+    foreign_n = len(nbrs & foreign)
+    return foreign_n - own_n
+
+
+def _pick_tiles_for_category(
+    svc: WordGameService,
+    rng: random.Random,
+    cat: str,
+    foreign: set[str],
+    difficulty: str,
+) -> list[str]:
+    """Pick GROUP_SIZE tiles for one category, biased by difficulty and de-confused.
+
+    We never let a tile that links more to a *foreign* category than its own onto the
+    board (that would be unfair). Among the fair candidates: 'usor' prefers the most
+    salient/recognisable concepts, 'greu' the subtler ones, 'normal' samples randomly.
+    Falls back to the full pool if too few fair tiles exist (keeps generation total).
+    """
+    ids = svc.by_category(cat)
+    own = set(ids)
+    fair = [i for i in ids if _tile_ambiguity(svc, i, own, foreign) <= 0]
+    pool = fair if len(fair) >= GROUP_SIZE else list(ids)
 
     if difficulty == "usor":
-        ranked = sorted(usable, key=lambda c: (-avg_salience(c), c))
-        chosen_cats = ranked[:NUM_GROUPS]
-    elif difficulty == "greu":
-        ranked = sorted(usable, key=lambda c: (avg_salience(c), c))
-        chosen_cats = ranked[:NUM_GROUPS]
-    else:  # normal
-        pool = list(usable)
-        rng.shuffle(pool)
-        chosen_cats = pool[:NUM_GROUPS]
+        ordered = sorted(pool, key=lambda i: (-_salience(svc, i), i))
+        return sorted(ordered[:GROUP_SIZE])
+    if difficulty == "greu":
+        ordered = sorted(pool, key=lambda i: (_salience(svc, i), i))
+        return sorted(ordered[:GROUP_SIZE])
+    shuffled = list(pool)
+    rng.shuffle(shuffled)
+    return sorted(shuffled[:GROUP_SIZE])
 
-    # Deterministic order of the four chosen categories.
-    chosen_cats = sorted(chosen_cats)
+
+def _build_board(rng: random.Random, difficulty: str) -> ConexiuniSession:
+    chosen_cats = sorted(_choose_categories(rng, difficulty))
+    svc = get_service()
 
     groups: dict[str, list[str]] = {}
+    # Iterate in a difficulty-independent order; pick each category's tiles while
+    # treating the already-placed tiles as the known "foreign" pool to avoid.
+    placed: set[str] = set()
     for cat in chosen_cats:
-        ids = svc.by_category(cat)  # already sorted by id
-        if difficulty == "usor":
-            # most salient (most familiar) tiles first
-            ids = sorted(ids, key=lambda i: (-(svc.node(i).salience if svc.node(i) else 0.0), i))
-            picked = ids[:GROUP_SIZE]
-        elif difficulty == "greu":
-            # least salient (subtler) tiles first
-            ids = sorted(ids, key=lambda i: ((svc.node(i).salience if svc.node(i) else 0.0), i))
-            picked = ids[:GROUP_SIZE]
-        else:  # normal — random four
-            pool = list(ids)
-            rng.shuffle(pool)
-            picked = sorted(pool[:GROUP_SIZE])
+        foreign = placed  # tiles already on the board belong to other categories
+        picked = _pick_tiles_for_category(svc, rng, cat, foreign, difficulty)
         groups[cat] = picked
+        placed |= set(picked)
 
     order = [nid for ids in groups.values() for nid in ids]
     rng.shuffle(order)
-
     return ConexiuniSession(groups=groups, order=order, difficulty=difficulty)
+
+
+def _board_quality(session: ConexiuniSession) -> tuple[bool, int]:
+    """Validate a generated board. Returns (ok, residual_ambiguity).
+
+    Rejects degenerate boards: wrong tile count, duplicate tiles, or any tile that —
+    given the *actual* four groups on this board — links more to a foreign group than
+    its own (an unwinnable/unfair tile). residual_ambiguity counts borderline (equal)
+    tiles, used only to pick the least-confusing board among retries.
+    """
+    all_ids = [nid for ids in session.groups.values() for nid in ids]
+    if len(all_ids) != GROUP_SIZE * NUM_GROUPS:
+        return False, 1_000_000
+    if len(set(all_ids)) != len(all_ids):
+        return False, 1_000_000
+
+    svc = get_service()
+    member_cat = {nid: cat for cat, ids in session.groups.items() for nid in ids}
+    residual = 0
+    for nid, own_cat in member_cat.items():
+        nbrs = _neighbors(svc, nid)
+        own_n = sum(1 for x in nbrs if member_cat.get(x) == own_cat and x != nid)
+        worst_foreign = 0
+        for cat in session.groups:
+            if cat == own_cat:
+                continue
+            fn = sum(1 for x in nbrs if member_cat.get(x) == cat)
+            worst_foreign = max(worst_foreign, fn)
+        if worst_foreign > own_n:
+            return False, 1_000_000  # unfair tile -> reject outright
+        if worst_foreign == own_n and own_n > 0:
+            residual += 1
+    return True, residual
+
+
+def _pick_board(rng: random.Random, difficulty: str) -> ConexiuniSession:
+    """Pick 4 categories + 4 concepts each, deterministically from ``rng``.
+
+    Difficulty shapes the board:
+      - usor:   the cleanest (least entangled) category sets + most recognisable tiles.
+      - normal: any category set, random tiles.
+      - greu:   the most entangled category sets + subtler tiles (plausible red-herrings)
+                that are still individually reasoned-about (never strictly unfair).
+
+    Generation is validated and retried: we draw several candidate boards from ``rng``
+    and keep the first strictly-fair one (lowest residual ambiguity), so a degenerate or
+    unwinnable board is never returned. Deterministic for a fixed seed/difficulty.
+    """
+    best: ConexiuniSession | None = None
+    best_residual = 1_000_000
+    for _ in range(12):
+        candidate = _build_board(rng, difficulty)
+        ok, residual = _board_quality(candidate)
+        if ok and residual == 0:
+            return candidate
+        if ok and residual < best_residual:
+            best, best_residual = candidate, residual
+        elif best is None:
+            # keep something even if every candidate is borderline/unfair
+            best = candidate
+    return best  # type: ignore[return-value]
 
 
 # --------------------------------------------------------------------- serializers

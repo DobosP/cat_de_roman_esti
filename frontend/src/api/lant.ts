@@ -62,6 +62,8 @@ export interface HintResult {
   hint: Concept | null;
   relation?: string;
   remaining?: number;
+  /** How many distinct neighbours lie on a shortest path (>1 => you had a real choice). */
+  alternatives?: number;
   message?: string;
 }
 

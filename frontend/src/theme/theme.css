@@ -129,6 +129,27 @@ a {
   color: var(--accent);
 }
 
+/* ------------------------------------------------------------------ focus a11y */
+/* Remove the default ring for mouse/touch but show a strong, consistent ring for
+   keyboard navigation (focus-visible). Applies arcade-wide to every interactive el. */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Inputs keep a subtle focus glow in addition to the ring. */
+.field:focus-visible,
+input:focus-visible {
+  outline-offset: 0;
+  border-color: var(--accent);
+  box-shadow: var(--glow-soft) rgba(124, 139, 255, 0.35);
+}
+
 /* ------------------------------------------------------------------ layout */
 .app-shell {
   position: relative;
@@ -214,6 +235,85 @@ a {
   border-color: var(--surface-border);
 }
 
+/* ------------------------------------------------------------------ inputs */
+/* Shared text-input look so every game's typing field matches the card surfaces. */
+.field {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  border-radius: var(--radius);
+  border: 1px solid var(--surface-border-strong);
+  background: var(--surface);
+  color: var(--text);
+  outline: none;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.field::placeholder {
+  color: var(--text-faint);
+}
+
+.field:disabled {
+  opacity: 0.55;
+}
+
+/* ------------------------------------------------------------------ segmented picker */
+/* A uniform difficulty / mode selector used on every game's intro card. */
+.segment {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 6px;
+  padding: 4px;
+  border-radius: var(--radius);
+  border: 1px solid var(--surface-border);
+  background: rgba(10, 11, 20, 0.4);
+}
+
+.segment-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 8px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-dim);
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.segment-item:hover:not([aria-pressed="true"]) {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.segment-item[aria-pressed="true"] {
+  color: var(--text);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #0a0b14;
+}
+
+.segment-item .seg-hint {
+  font-size: 0.68rem;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+@media (pointer: coarse) {
+  .segment-item {
+    min-height: 48px;
+  }
+}
+
 /* ------------------------------------------------------------------ badges/chips */
 .badge {
   display: inline-flex;
@@ -247,6 +347,19 @@ a {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   backdrop-filter: blur(14px);
+}
+
+.card-hover,
+.game-card {
+  transition:
+    transform 0.18s ease,
+    border-color 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.game-card:hover {
+  border-color: var(--surface-border-strong);
+  box-shadow: var(--shadow-pop);
 }
 
 .muted {
@@ -350,6 +463,12 @@ a {
     justify-content: center;
   }
 
+  /* The inline game title next to the back-button is redundant on phones — the game
+     card/heading already names it — so reclaim the header width for status badges. */
+  .game-shell-title {
+    display: none;
+  }
+
   /* On phones the HUD can get tall; let the game column scroll so the hop-trail and
      graph are always reachable instead of being clipped by overflow:hidden. */
   .game-layout {
@@ -364,8 +483,12 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

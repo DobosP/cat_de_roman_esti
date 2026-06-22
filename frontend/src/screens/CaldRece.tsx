@@ -8,6 +8,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { ToastKind } from "../components/Toast";
+import { GameShell } from "../components/GameShell";
+import { ResultCard } from "../components/ResultCard";
+import { DifficultyPicker } from "../components/DifficultyPicker";
 import { sound } from "../sound";
 import {
   contextoApi,
@@ -49,7 +52,16 @@ const TEMP_ICON: Record<Temperature, string> = {
   Inghetat: "🧊",
 };
 
-/** Blend the colour by closeness so the bar reads hot→cold within a tier too. */
+// Short, encouraging gloss per tier so the latest verdict reads as feedback, not a number.
+const TEMP_HINT: Record<Temperature, string> = {
+  Gasit: "Exact!",
+  Fierbinte: "Arde! Esti la un pas.",
+  Cald: "Foarte aproape.",
+  Caldut: "Te apropii.",
+  Rece: "Cam departe.",
+  Inghetat: "Inghetat — alta directie.",
+};
+
 function barColor(g: Guess): string {
   return TEMP_COLOR[g.temperature] ?? "#9aa3b2";
 }
@@ -268,8 +280,26 @@ export default function CaldRece({
     onToast(ok ? "Copiat!" : "Nu am putut copia.", ok ? "info" : "error");
   }, [state, onToast]);
 
+  // On the intro screen: Enter starts the chosen difficulty (no mouse needed).
+  useEffect(() => {
+    if (!showIntro) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Enter" && !busy) {
+        e.preventDefault();
+        void start({ difficulty });
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [showIntro, busy, difficulty, start]);
+
   const guesses = state?.guesses ?? [];
   const bestGuess = guesses[0];
+  // The most recently played guess (may sort anywhere in the list) — surfaced as an
+  // explicit verdict so feedback is always visible, not buried by best-first sorting.
+  const latestGuess = latestId
+    ? (guesses.find((g) => g.id === latestId) ?? null)
+    : null;
 
   // ---- Intro: difficulty picker + daily challenge + personal best. ----
   if (showIntro) {
@@ -279,19 +309,18 @@ export default function CaldRece({
           className="container col fill center"
           style={{ gap: 18, paddingBlock: 8, justifyContent: "center" }}
         >
-          <div className="row spread wrap" style={{ gap: 10, width: "100%" }}>
-            <button type="button" className="btn btn-ghost" onClick={onExit}>
-              ← Meniu
-            </button>
-            {best && (
-              <span
-                className="badge"
-                title="Recordul tau"
-                style={{ fontVariantNumeric: "tabular-nums" }}
-              >
-                🏆 {best.score}
-              </span>
-            )}
+          <div style={{ width: "100%" }}>
+            <GameShell onExit={onExit} accent="#ff7a59">
+              {best && (
+                <span
+                  className="badge"
+                  title="Recordul tau"
+                  style={{ fontVariantNumeric: "tabular-nums" }}
+                >
+                  🏆 {best.score}
+                </span>
+              )}
+            </GameShell>
           </div>
 
           <motion.div
@@ -316,35 +345,15 @@ export default function CaldRece({
             </p>
           </motion.div>
 
-          <div className="col" style={{ gap: 8, width: "100%", maxWidth: 420 }}>
-            <span
-              className="faint"
-              style={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}
-            >
-              DIFICULTATE
-            </span>
-            <div className="row" style={{ gap: 8 }}>
-              {DIFFICULTIES.map((d) => {
-                const sel = d.id === difficulty;
-                return (
-                  <button
-                    key={d.id}
-                    type="button"
-                    className={sel ? "btn btn-primary fill" : "btn btn-ghost fill"}
-                    onClick={() => {
-                      sound.playSelect();
-                      setDifficulty(d.id);
-                    }}
-                    style={{ flexDirection: "column", gap: 2, padding: "10px 6px" }}
-                  >
-                    <span style={{ fontWeight: 700 }}>{d.label}</span>
-                    <span className="faint" style={{ fontSize: "0.7rem" }}>
-                      {d.hint}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+          <div style={{ width: "100%", maxWidth: 420 }}>
+            <DifficultyPicker
+              options={DIFFICULTIES}
+              value={difficulty}
+              onChange={(id) => {
+                sound.playSelect();
+                setDifficulty(id);
+              }}
+            />
           </div>
 
           <div
@@ -381,16 +390,7 @@ export default function CaldRece({
         style={{ gap: 16, minHeight: 0, paddingBlock: 8 }}
       >
         {/* header */}
-        <div className="row spread wrap" style={{ gap: 10 }}>
-          <button
-            type="button"
-            className="btn btn-ghost"
-            onClick={onExit}
-            disabled={busy && !state}
-          >
-            ← Meniu
-          </button>
-          <div className="row" style={{ gap: 10, alignItems: "center" }}>
+        <GameShell onExit={onExit} accent="#ff7a59" title="Cald sau Rece">
             <span className="badge" title="Mod de joc">
               {state?.daily ? `📅 ${state.daily}` : (state?.difficulty ?? difficulty)}
             </span>
@@ -418,8 +418,7 @@ export default function CaldRece({
             >
               ↻ Nou
             </button>
-          </div>
-        </div>
+        </GameShell>
 
         {/* title */}
         <div className="col" style={{ gap: 4 }}>
@@ -436,21 +435,23 @@ export default function CaldRece({
         <form onSubmit={handleGuess} className="row" style={{ gap: 8 }}>
           <input
             ref={inputRef}
-            className="card fill"
-            style={{
-              padding: "12px 14px",
-              fontSize: "1rem",
-              background: "var(--surface)",
-              color: "var(--text)",
-              outline: "none",
-            }}
+            className="field fill"
             placeholder={finished ? "Joc terminat" : "Scrie un concept…"}
             value={text}
             onChange={(e) => setText(e.target.value)}
+            onKeyDown={(e) => {
+              // Escape clears a half-typed guess without leaving the field.
+              if (e.key === "Escape" && text) {
+                e.preventDefault();
+                setText("");
+              }
+            }}
             disabled={busy || finished}
             autoComplete="off"
+            autoFocus
             spellCheck={false}
             aria-label="Concept de ghicit"
+            enterKeyHint="send"
           />
           <button
             type="submit"
@@ -461,88 +462,68 @@ export default function CaldRece({
           </button>
         </form>
 
+        {/* latest verdict — always-visible feedback for the last guess */}
+        <AnimatePresence mode="wait">
+          {!finished && latestGuess && (
+            <motion.div
+              key={`${latestGuess.id}-${latestGuess.distance}`}
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ type: "spring", stiffness: 320, damping: 24 }}
+              className="row spread"
+              style={{
+                gap: 10,
+                alignItems: "center",
+                padding: "8px 12px",
+                borderRadius: 10,
+                border: `1px solid ${barColor(latestGuess)}`,
+                background: `${barColor(latestGuess)}1a`,
+              }}
+              aria-live="polite"
+            >
+              <span className="row" style={{ gap: 8, alignItems: "center" }}>
+                <span aria-hidden style={{ fontSize: "1.2rem" }}>
+                  {TEMP_ICON[latestGuess.temperature]}
+                </span>
+                <span style={{ fontSize: "0.9rem" }}>
+                  <strong>{latestGuess.label}</strong>{" "}
+                  <span className="muted">— {TEMP_HINT[latestGuess.temperature]}</span>
+                </span>
+              </span>
+              <strong
+                style={{
+                  color: barColor(latestGuess),
+                  fontVariantNumeric: "tabular-nums",
+                }}
+              >
+                {latestGuess.closeness}
+              </strong>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* win / giveup banner */}
         <AnimatePresence>
           {finished && state?.target && (
-            <motion.div
-              key="result"
-              initial={{ opacity: 0, scale: 0.92, y: -8 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ type: "spring", stiffness: 260, damping: 20 }}
-              className="card"
-              style={{
-                padding: "16px 18px",
-                display: "grid",
-                gap: 6,
-                borderColor: won ? "var(--good)" : "var(--warn)",
-                boxShadow: `0 0 40px -16px ${won ? "var(--good)" : "var(--warn)"}`,
-                textAlign: "center",
-              }}
+            <ResultCard
+              icon={won ? "🎯" : "🫥"}
+              title={won ? "Ai gasit conceptul!" : "Conceptul secret era:"}
+              accent={won ? "var(--good)" : "var(--warn)"}
+              won={won}
+              score={won ? state.score : undefined}
+              isRecord={isRecord}
+              shareText={won ? state.share : null}
+              onCopy={() => void handleCopy()}
+              onReplay={() => setShowIntro(true)}
             >
-              <div style={{ fontSize: "2rem" }} aria-hidden>
-                {won ? "🎯" : "🫥"}
-              </div>
-              <strong style={{ fontSize: "1.2rem" }}>
-                {won ? "Ai gasit conceptul!" : "Conceptul secret era:"}
-              </strong>
-              <span style={{ fontSize: "1.4rem", color: "var(--text)" }}>
+              <span style={{ fontSize: "1.4rem", color: "var(--text)", display: "block" }}>
                 {state.target.label}
               </span>
               {state.target.description && (
-                <span className="muted" style={{ fontSize: "0.85rem" }}>
-                  {state.target.description}
-                </span>
+                <span style={{ fontSize: "0.85rem" }}>{state.target.description}</span>
               )}
-
-              {/* score + record (win only) */}
-              {won && state.score !== undefined && (
-                <div className="col center" style={{ gap: 4, marginTop: 6 }}>
-                  <span
-                    className="badge"
-                    style={{
-                      fontVariantNumeric: "tabular-nums",
-                      borderColor: "var(--good)",
-                      color: "var(--good)",
-                      fontWeight: 700,
-                    }}
-                  >
-                    Scor {state.score}
-                  </span>
-                  {isRecord && (
-                    <motion.span
-                      initial={{ scale: 0.6, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ type: "spring", stiffness: 300, damping: 16 }}
-                      style={{ fontWeight: 800, color: "var(--good)" }}
-                    >
-                      🏆 Record!
-                    </motion.span>
-                  )}
-                </div>
-              )}
-
-              <div className="row center wrap" style={{ gap: 10, marginTop: 10 }}>
-                {won && state.share && (
-                  <button
-                    type="button"
-                    className="btn btn-ghost"
-                    onClick={() => void handleCopy()}
-                    disabled={busy}
-                  >
-                    Copiaza rezultatul
-                  </button>
-                )}
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={() => setShowIntro(true)}
-                  disabled={busy}
-                >
-                  Joc nou →
-                </button>
-              </div>
-            </motion.div>
+            </ResultCard>
           )}
         </AnimatePresence>
 

@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import Alchimie from "./screens/Alchimie";
 import CaldRece from "./screens/CaldRece";
 import Lant from "./screens/Lant";
@@ -102,6 +102,7 @@ export default function App() {
   const goHome = useCallback(() => setActive(null), []);
 
   return (
+    <MotionConfig reducedMotion="user">
     <div className="app-shell">
       <AnimatePresence mode="wait">
         {active === null && (
@@ -145,6 +146,7 @@ export default function App() {
 
       <ToastStack toasts={toasts} onDismiss={dismissToast} />
     </div>
+    </MotionConfig>
   );
 }
 
@@ -183,8 +185,8 @@ function Home({ onOpen }: { onOpen: (key: GameKey) => void }) {
             transition={{ delay: 0.15, duration: 0.5 }}
             style={{ maxWidth: 640, fontSize: "1.05rem", margin: 0 }}
           >
-            Trei jocuri de cuvinte peste reteaua semantica a culturii romanesti. Combina,
-            ghiceste sau inlantuie concepte — si ajunge la destinatie.
+            Patru jocuri de cuvinte peste reteaua semantica a culturii romanesti. Combina,
+            ghiceste, inlantuie sau grupeaza concepte — si ajunge la destinatie.
           </motion.p>
         </header>
 
@@ -200,12 +202,13 @@ function Home({ onOpen }: { onOpen: (key: GameKey) => void }) {
               key={g.key}
               type="button"
               onClick={() => onOpen(g.key)}
+              aria-label={`Joaca ${g.title} — ${g.tag}`}
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.06 * i, duration: 0.4 }}
               whileHover={{ y: -4 }}
               whileTap={{ scale: 0.98 }}
-              className="card"
+              className="card game-card"
               style={{
                 textAlign: "left",
                 padding: 22,
@@ -266,7 +269,7 @@ function Home({ onOpen }: { onOpen: (key: GameKey) => void }) {
         </div>
 
         <p className="faint" style={{ fontSize: "0.8rem" }}>
-          Toate cele trei jocuri ruleaza pe acelasi graf de ~250 de concepte romanesti.
+          Toate cele patru jocuri ruleaza pe acelasi graf de ~250 de concepte romanesti.
         </p>
       </div>
     </div>

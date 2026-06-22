@@ -30,6 +30,17 @@ _DEFAULT_DIFFICULTY = "normal"
 # A target needs a large reachable set so almost every guess gets a meaningful distance.
 MIN_REACHABLE = 120
 
+# In practice almost every node reaches the whole graph (~200 nodes), so MIN_REACHABLE
+# alone never rejects a poor target. The signal that actually makes a game feel good is
+# the "responsive zone": how many concepts sit at a graph distance the player can FEEL
+# (1..5 hops -> Fierbinte..Rece). A target whose responsive zone is tiny pushes almost
+# every guess into "Inghetat", which gives flat, unsatisfying feedback. We therefore
+# require a minimum responsive-zone size so a guess is likely to land somewhere with a
+# real temperature gradient. (Playtested: this floor removes the degenerate long-thin-tail
+# targets — e.g. n_plumb / n_emil_racovita — while keeping wide variety per difficulty.)
+RESPONSIVE_MAX_HOPS = 5
+MIN_RESPONSIVE = 40
+
 
 # --------------------------------------------------------------------------- session
 @dataclass
@@ -112,7 +123,11 @@ def closeness_for(session: ContextoSession, distance: int | None) -> int:
         # Distance larger than any reachable bucket (shouldn't happen for reachable
         # guesses) -> treat as the coldest.
         farther = 0
-    return max(0, min(100, round(100 * farther / (total - 1))))
+    raw = round(100 * farther / (total - 1))
+    # Only the target itself (distance 0, handled above) earns 100. A near miss can
+    # otherwise saturate to 100 when nothing else is closer, which is ambiguous with a
+    # win and reads as "you got it" when you didn't. Cap non-wins at 99.
+    return max(1, min(99, raw))
 
 
 # --------------------------------------------------------------------------- selection
@@ -180,6 +195,21 @@ def _difficulty_pool(svc, difficulty: str) -> list[str]:
     return svc.all_ids()
 
 
+def _responsive_count(dist: dict[str, int]) -> int:
+    """How many reachable concepts sit in the player-perceptible temperature band.
+
+    These are the concepts at 1..RESPONSIVE_MAX_HOPS hops — i.e. everything that comes
+    back warmer than "Inghetat". A larger band means guesses spread across more tiers and
+    the game feels responsive instead of flatly frozen.
+    """
+    return sum(1 for d in dist.values() if 1 <= d <= RESPONSIVE_MAX_HOPS)
+
+
+def _is_good_target(dist: dict[str, int]) -> bool:
+    """A target is good if it is both broadly reachable and has a real warm band."""
+    return len(dist) >= MIN_REACHABLE and _responsive_count(dist) >= MIN_RESPONSIVE
+
+
 def _build_session(target: str, difficulty: str, daily: str | None) -> ContextoSession:
     svc = get_service()
     dist = svc.distances_from(target)
@@ -200,10 +230,19 @@ def _pick_target(
     difficulty: str = _DEFAULT_DIFFICULTY,
     daily: str | None = None,
 ) -> ContextoSession:
-    """Choose a solvable secret target of the requested difficulty.
+    """Choose a solvable, *satisfying* secret target of the requested difficulty.
 
-    The reachability floor (``MIN_REACHABLE``) is always enforced so even an "obscure"
-    target still gives almost every guess a meaningful distance.
+    Selection is deterministic for a given seed (so the daily challenge is stable) and
+    enforces two quality floors so no degenerate instance ships:
+
+    * reachability (``MIN_REACHABLE``) — almost every guess gets a real distance; and
+    * a responsive warm band (``MIN_RESPONSIVE``) — enough concepts land at 1..5 hops
+      that guesses spread across temperatures instead of all reading "Inghetat".
+
+    We walk the seeded-shuffled candidate pool and take the FIRST target that clears both
+    floors. Taking the first (rather than the best) keeps the per-seed variety wide while
+    still guaranteeing quality. Fallbacks degrade gracefully: relax to reachability-only,
+    then to the single most-reachable node, so a game is always returned.
     """
     svc = get_service()
     rng = random.Random(seed)
@@ -212,11 +251,20 @@ def _pick_target(
     # seeded shuffle picks within it -> same date+difficulty => same target.
     candidates = list(candidates)
     rng.shuffle(candidates)
+
+    fallback: str | None = None  # first node clearing reachability but not the warm band
     for nid in candidates:
-        if len(svc.distances_from(nid)) >= MIN_REACHABLE:
-            return _build_session(nid, difficulty, daily)
-    # Fallback: nothing in this tier met the threshold — take the most-reachable node so
-    # we still return a solvable game.
+        dist = svc.distances_from(nid)
+        if not _is_good_target(dist):
+            if fallback is None and len(dist) >= MIN_REACHABLE:
+                fallback = nid
+            continue
+        return _build_session(nid, difficulty, daily)
+
+    if fallback is not None:
+        return _build_session(fallback, difficulty, daily)
+    # Last resort: nothing in this tier met even the reachability floor — take the
+    # most-reachable node so we still return a solvable game.
     best = max(svc.all_ids(), key=lambda n: len(svc.distances_from(n)))
     return _build_session(best, difficulty, daily)
 

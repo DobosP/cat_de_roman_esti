@@ -9,13 +9,17 @@ pytest.importorskip("fastapi")
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from cat_de_roman_esti.wordgames.lant import router
+from cat_de_roman_esti.wordgames import lant
+from cat_de_roman_esti.wordgames.lant import LantSession, router, store
+from cat_de_roman_esti.wordgames.service import get_service
 
 app = FastAPI()
 app.include_router(router)
 c = TestClient(app)
 
 SEED = 7
+
+_BANDS = {"usor": (2, 3), "normal": (3, 4), "greu": (4, 6)}
 
 
 def _create(seed: int = SEED, **params):
@@ -204,3 +208,232 @@ def test_unknown_game_404():
     )
     assert c.post("/api/wordgames/lant/games/does-not-exist/hint").status_code == 404
     assert c.post("/api/wordgames/lant/games/does-not-exist/undo").status_code == 404
+
+
+# --------------------------------------------------------------------- hardening: selection
+def _first_hop_choices(svc, start: str, target: str, optimal: int) -> int:
+    """Neighbours of start that are one hop closer to the target (genuine first moves)."""
+    dist_t = svc.distances_from(target)
+    return sum(1 for nb in svc.neighbor_ids(start) if dist_t.get(nb) == optimal - 1)
+
+
+def test_selection_is_branchy_not_a_forced_rail():
+    """Generated puzzles must offer a real choice at the opening hop (no single rail).
+
+    Regression for the v1 selection, where ~85% of instances had exactly one neighbour
+    that moved you closer — the ladder was a forced single path.
+    """
+    svc = get_service()
+    forced = 0
+    samples = 0
+    for diff in _BANDS:
+        for seed in range(40):
+            g = _create(seed=seed, difficulty=diff)
+            samples += 1
+            if _first_hop_choices(svc, g["start"]["id"], g["target"]["id"], g["optimal"]) < 2:
+                forced += 1
+    # Allow a tiny tail for sparse corners of the graph, but it must be rare.
+    assert forced <= samples * 0.05, f"{forced}/{samples} forced first hops"
+
+
+def test_selection_avoids_leaf_endpoints():
+    """Neither start nor target should be a degree-1 leaf (it forces the first/last hop)."""
+    svc = get_service()
+    for diff in _BANDS:
+        for seed in range(40):
+            g = _create(seed=seed, difficulty=diff)
+            assert svc.degree(g["start"]["id"]) >= 2, (diff, seed, g["start"]["id"])
+            assert svc.degree(g["target"]["id"]) >= 2, (diff, seed, g["target"]["id"])
+
+
+def test_selection_prefers_salient_endpoints():
+    """Average endpoint salience should be comfortably above the obscure floor."""
+    svc = get_service()
+    for diff in _BANDS:
+        for seed in range(30):
+            g = _create(seed=seed, difficulty=diff)
+            s = svc.node(g["start"]["id"]).salience
+            t = svc.node(g["target"]["id"]).salience
+            assert (s + t) / 2 >= 0.25, (diff, seed, s, t)
+
+
+def test_bands_respected_across_many_seeds():
+    for diff, (lo, hi) in _BANDS.items():
+        for seed in range(30):
+            g = _create(seed=seed, difficulty=diff)
+            assert lo <= g["optimal"] <= hi, (diff, seed, g["optimal"])
+
+
+# --------------------------------------------------------------------- hardening: moves
+def test_empty_and_whitespace_input_rejected():
+    game = _create()
+    gid = game["game_id"]
+    for txt in ("", "   ", "\t\n"):
+        res = c.post(f"/api/wordgames/lant/games/{gid}/move", json={"text": txt})
+        assert res.status_code == 200
+        body = res.json()
+        assert body["ok"] is False
+        assert body["last_error"] == "Scrie un concept"
+    # State is untouched.
+    assert c.get(f"/api/wordgames/lant/games/{gid}").json()["moves"] == 0
+
+
+def test_staying_put_rejected():
+    game = _create()
+    gid = game["game_id"]
+    res = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        json={"text": game["start"]["label"]},
+    )
+    body = res.json()
+    assert body["ok"] is False
+    assert body["last_error"] == "Esti deja aici"
+
+
+def test_move_on_won_game_is_idempotent():
+    game = _create()
+    body = _win(game)
+    gid = game["game_id"]
+    assert body["won"] is True
+    # Any further move on a finished game returns ok + the final state, no extra hop.
+    after = c.post(f"/api/wordgames/lant/games/{gid}/move", json={"text": "orice"}).json()
+    assert after["ok"] is True
+    assert after["won"] is True
+    assert after["moves"] == body["moves"]
+
+
+def test_label_collision_disambiguates_to_a_linked_node():
+    """Two nodes share the label 'Moldova'; resolve() picks one, but a move should accept
+    whichever same-label node is actually linked to the current concept.
+
+    Regression: from a node linked only to the *other* Moldova, typing 'Moldova' used to
+    be wrongly rejected as 'no direct link'.
+    """
+    svc = get_service()
+    start = "n_stefan_cel_mare"
+    linked = "n_moldova"  # the one resolve() does NOT return
+    other = "n_moldova_reg"
+    # Sanity: the fixture still matches the regression's assumptions.
+    assert svc.resolve("Moldova") == other
+    assert svc.link(start, linked) is not None
+    assert svc.link(start, other) is None
+
+    session = LantSession(
+        start=start,
+        target=linked,
+        optimal=1,
+        chain=[start],
+    )
+    gid = store.create(session)
+    res = c.post(f"/api/wordgames/lant/games/{gid}/move", json={"text": "Moldova"})
+    body = res.json()
+    assert body["ok"] is True, body
+    assert body["current"]["id"] == linked
+    assert body["won"] is True
+
+
+# --------------------------------------------------------------------- hardening: hint
+def test_hint_is_on_a_shortest_path_and_reports_remaining():
+    game = _create()
+    gid = game["game_id"]
+    svc = get_service()
+    h = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    assert h["hint"] is not None
+    assert h["remaining"] == game["optimal"]
+    # The suggested neighbour is one hop closer to the target.
+    dist_t = svc.distances_from(game["target"]["id"])
+    assert dist_t.get(h["hint"]["id"]) == game["optimal"] - 1
+    # It is a genuine neighbour of the current node.
+    assert h["hint"]["id"] in svc.neighbor_ids(game["start"]["id"])
+    # alternatives counts the on-path neighbours and is at least 1.
+    assert h["alternatives"] >= 1
+
+
+def test_hint_prefers_the_most_salient_next_step():
+    """When several neighbours lie on a shortest path, the hint suggests the salient one."""
+    svc = get_service()
+    found = False
+    for diff in _BANDS:
+        for seed in range(40):
+            g = _create(seed=seed, difficulty=diff)
+            gid = g["game_id"]
+            cur = g["start"]["id"]
+            dist_t = svc.distances_from(g["target"]["id"])
+            on_path = [
+                nb
+                for nb in svc.neighbor_ids(cur)
+                if dist_t.get(nb) == g["optimal"] - 1
+            ]
+            if len(on_path) < 2:
+                continue
+            found = True
+            best = max(on_path, key=lambda nb: (svc.node(nb).salience, nb))
+            h = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+            assert h["hint"]["id"] == best, (diff, seed, on_path)
+            assert h["alternatives"] == len(on_path)
+            break
+        if found:
+            break
+    assert found, "expected at least one puzzle with multiple shortest-path neighbours"
+
+
+def test_hint_on_won_game_returns_message():
+    game = _create()
+    _win(game)
+    h = c.post(f"/api/wordgames/lant/games/{game['game_id']}/hint").json()
+    assert h["hint"] is None
+    assert h["message"]
+
+
+# --------------------------------------------------------------------- hardening: score
+def _detour_neighbor(svc, start: str, target: str, optimal: int) -> str | None:
+    """A legal neighbour of start that does NOT move closer to the target (a real detour)."""
+    dist_t = svc.distances_from(target)
+    for nb in svc.neighbor_ids(start):
+        d = dist_t.get(nb)
+        if d is not None and d >= optimal:  # not closer than the start itself
+            return nb
+    return None
+
+
+def test_over_par_lowers_score_but_never_below_floor():
+    """A genuine detour (a non-shortest hop) increases moves and reduces the score."""
+    svc = get_service()
+    # Find a puzzle that actually has a detour neighbour available.
+    for seed in range(60):
+        game = _create(seed=seed, difficulty="greu")
+        detour = _detour_neighbor(
+            svc, game["start"]["id"], game["target"]["id"], game["optimal"]
+        )
+        if detour:
+            break
+    else:  # pragma: no cover - the greu graph always has one in practice
+        pytest.skip("no detour neighbour found in sampled puzzles")
+
+    gid = game["game_id"]
+    optimal = game["optimal"]
+    step = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        json={"text": svc.label(detour)},
+    ).json()
+    assert step["ok"] is True
+
+    # Now follow hints from the detour to the target; total moves must exceed optimal.
+    body = step
+    while not body.get("won"):
+        h = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()["hint"]
+        assert h is not None
+        body = c.post(
+            f"/api/wordgames/lant/games/{gid}/move", json={"text": h["label"]}
+        ).json()
+
+    assert body["moves"] > optimal
+    expected = max(100, round(1000 * optimal / max(body["moves"], optimal)))
+    assert body["score"] == expected
+    assert 100 <= body["score"] < 1000
+
+
+def test_score_for_helper_floor_and_cap():
+    assert lant._score_for(0, 5) == 1000  # sub-optimal optimal can't exceed cap
+    assert lant._score_for(5, 5) == 1000
+    assert lant._score_for(1000, 3) == 100  # huge detour clamps to the floor

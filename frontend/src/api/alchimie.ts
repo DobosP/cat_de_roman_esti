@@ -36,6 +36,10 @@ export interface AlchimieState {
   difficulty: Difficulty;
   target_depth: number;
   won: boolean;
+  /** How many nudges the player has revealed (each costs score). */
+  hints_used: number;
+  /** True once the player is genuinely stuck and a nudge can be requested. */
+  hint_available: boolean;
   daily?: string;
   /** Present only when won === true. */
   score?: number;
@@ -45,6 +49,13 @@ export interface AlchimieState {
 /** Returned by /combine — the base state plus what this combine produced. */
 export interface CombineResult extends AlchimieState {
   discovered: Concept[];
+  message: string;
+}
+
+/** Returned by /hint — the base state plus the suggested pair (null if none). */
+export interface HintResult extends AlchimieState {
+  /** The two concepts the nudge suggests combining, or null if unavailable. */
+  hint: [Concept, Concept] | null;
   message: string;
 }
 
@@ -132,12 +143,20 @@ export function resetAlchimie(gameId: string): Promise<AlchimieState> {
   );
 }
 
+/** POST /games/{id}/hint — reveal a useful pair after several fruitless combines. */
+export function hintAlchimie(gameId: string): Promise<HintResult> {
+  return postJson<HintResult>(
+    `${BASE}/games/${encodeURIComponent(gameId)}/hint`,
+  );
+}
+
 export const alchimieApi = {
   create: createAlchimie,
   createGame: createAlchimie,
   get: getAlchimie,
   combine: combineAlchimie,
   reset: resetAlchimie,
+  hint: hintAlchimie,
 };
 
 export { ApiError };

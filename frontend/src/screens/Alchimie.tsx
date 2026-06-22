@@ -15,6 +15,9 @@ import {
   type InventoryItem,
 } from "../api/alchimie";
 import type { ToastKind } from "../components/Toast";
+import { GameShell } from "../components/GameShell";
+import { ResultCard } from "../components/ResultCard";
+import { DifficultyPicker } from "../components/DifficultyPicker";
 import { sound } from "../sound";
 import { bestScore, recordScore } from "../scores";
 import { copyResult, todayLocal } from "../share";
@@ -43,6 +46,8 @@ export default function Alchimie({
   const [selected, setSelected] = useState<string[]>([]);
   // ids discovered by the most recent combine — used to animate them in.
   const [freshIds, setFreshIds] = useState<Set<string>>(new Set());
+  // The pair the most recent nudge suggested — gets a glowing outline.
+  const [hintIds, setHintIds] = useState<Set<string>>(new Set());
   const [lastMessage, setLastMessage] = useState<string | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>("normal");
   const [isRecord, setIsRecord] = useState(false);
@@ -59,6 +64,7 @@ export default function Alchimie({
         setState(s);
         setSelected([]);
         setFreshIds(new Set());
+        setHintIds(new Set());
         setLastMessage(null);
         setIsRecord(false);
         recordedFor.current = null;
@@ -111,6 +117,11 @@ export default function Alchimie({
     [busy, won],
   );
 
+  const clearSelection = useCallback(() => {
+    setSelected([]);
+    setHintIds(new Set());
+  }, []);
+
   const doCombine = useCallback(async () => {
     if (!state || selected.length !== 2 || busy) return;
     setBusy(true);
@@ -119,6 +130,7 @@ export default function Alchimie({
       const res = await alchimieApi.combine(state.game_id, a, b);
       setState(res);
       setSelected([]);
+      setHintIds(new Set());
       setLastMessage(res.message);
       if (res.discovered.length > 0) {
         setFreshIds(new Set(res.discovered.map((d: Concept) => d.id)));
@@ -127,7 +139,10 @@ export default function Alchimie({
       } else {
         setFreshIds(new Set());
         sound.playUndo();
-        onToast("Nicio combinatie noua din aceasta pereche.", "info");
+        const hint = res.hint_available
+          ? " Apasa „Indiciu” daca te-ai blocat."
+          : "";
+        onToast(`Nicio combinatie noua din aceasta pereche.${hint}`, "info");
       }
     } catch (err) {
       sound.playError();
@@ -150,6 +165,7 @@ export default function Alchimie({
       setState(s);
       setSelected([]);
       setFreshIds(new Set());
+      setHintIds(new Set());
       setLastMessage(null);
       sound.playUndo();
     } catch (err) {
@@ -163,6 +179,37 @@ export default function Alchimie({
       setBusy(false);
     }
   }, [state, busy, onToast]);
+
+  // Ask for a gentle nudge: the server points at a useful pair (it costs some score).
+  const doHint = useCallback(async () => {
+    if (!state || busy || won) return;
+    setBusy(true);
+    try {
+      const res = await alchimieApi.hint(state.game_id);
+      setState(res);
+      setLastMessage(res.message);
+      if (res.hint) {
+        const ids = res.hint.map((c) => c.id);
+        setHintIds(new Set(ids));
+        // Pre-select the suggested pair so the player can just press Combina.
+        setSelected(ids);
+        sound.playSelect();
+      } else {
+        setHintIds(new Set());
+        onToast(res.message, "info");
+      }
+    } catch (err) {
+      sound.playError();
+      onToast(
+        err instanceof ApiError
+          ? err.message || `Niciun indiciu (${err.status}).`
+          : "Niciun indiciu.",
+        "error",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }, [state, busy, won, onToast]);
 
   const handleCopy = useCallback(async () => {
     if (!state?.share) return;
@@ -188,6 +235,23 @@ export default function Alchimie({
     [selected, inventory],
   );
 
+  // Keyboard: Enter combines a ready pair, Escape clears the bench. Ignored while
+  // typing in an input (none here) or once the game is finished.
+  useEffect(() => {
+    if (!state || won) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Enter" && selected.length === 2 && !busy) {
+        e.preventDefault();
+        void doCombine();
+      } else if (e.key === "Escape" && selected.length > 0) {
+        e.preventDefault();
+        clearSelection();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [state, won, selected, busy, doCombine, clearSelection]);
+
   if (loading) {
     return (
       <div className="screen-pad fill center">
@@ -201,10 +265,7 @@ export default function Alchimie({
     return (
       <div className="screen-pad fill">
         <div className="container col" style={{ gap: 18 }}>
-          <div className="spread row" style={{ alignItems: "center" }}>
-            <button type="button" className="btn btn-ghost" onClick={onExit}>
-              ← Meniu
-            </button>
+          <GameShell onExit={onExit} accent={ACCENT}>
             {best && (
               <span
                 className="badge"
@@ -214,7 +275,7 @@ export default function Alchimie({
                 🏆 {best.score}
               </span>
             )}
-          </div>
+          </GameShell>
 
           <motion.div
             className="card col"
@@ -239,34 +300,14 @@ export default function Alchimie({
               </p>
             </div>
 
-            <div className="col" style={{ gap: 8 }}>
-              <span className="faint" style={{ fontSize: "0.72rem" }}>
-                DIFICULTATE
-              </span>
-              <div className="row wrap" style={{ gap: 8 }}>
-                {DIFFICULTIES.map((d) => (
-                  <button
-                    key={d.id}
-                    type="button"
-                    className={`btn ${
-                      difficulty === d.id ? "btn-primary" : "btn-ghost"
-                    }`}
-                    onClick={() => {
-                      sound.playSelect();
-                      setDifficulty(d.id);
-                    }}
-                  >
-                    {d.label}
-                    <span
-                      className="faint"
-                      style={{ marginLeft: 6, fontSize: "0.7rem" }}
-                    >
-                      {d.hint}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
+            <DifficultyPicker
+              options={DIFFICULTIES}
+              value={difficulty}
+              onChange={(id) => {
+                sound.playSelect();
+                setDifficulty(id);
+              }}
+            />
 
             <div className="row wrap" style={{ gap: 12, marginTop: 4 }}>
               <button
@@ -296,11 +337,7 @@ export default function Alchimie({
     <div className="screen-pad fill" style={{ overflowY: "auto" }}>
       <div className="container col" style={{ gap: 18, paddingBottom: 32 }}>
         {/* Header */}
-        <div className="row spread wrap" style={{ gap: 12 }}>
-          <button type="button" className="btn btn-ghost" onClick={onExit}>
-            ← Meniu
-          </button>
-          <div className="row wrap" style={{ gap: 8 }}>
+        <GameShell onExit={onExit} accent={ACCENT} title="Alchimie">
             {state.daily ? (
               <span
                 className="badge"
@@ -322,8 +359,12 @@ export default function Alchimie({
             <span className="badge" style={{ borderColor: GOLD, color: GOLD }}>
               ✦ {state.discovered_count} descoperite
             </span>
-          </div>
-        </div>
+            {state.hints_used > 0 && (
+              <span className="badge" title="Indicii folosite">
+                💡 {state.hints_used}
+              </span>
+            )}
+        </GameShell>
 
         {/* Target */}
         <motion.div
@@ -387,9 +428,22 @@ export default function Alchimie({
                   type="button"
                   className="btn btn-ghost"
                   disabled={busy}
-                  onClick={() => setSelected([])}
+                  onClick={clearSelection}
+                  title="Goleste alambicul (Esc)"
                 >
                   Goleste
+                </button>
+              )}
+              {state.hint_available && (
+                <button
+                  type="button"
+                  className="btn btn-ghost"
+                  disabled={busy}
+                  onClick={() => void doHint()}
+                  title="Iti arata o pereche utila (costa putin scor)"
+                  style={{ borderColor: GOLD, color: GOLD }}
+                >
+                  💡 Indiciu
                 </button>
               )}
               <button
@@ -397,6 +451,8 @@ export default function Alchimie({
                 className="btn btn-primary"
                 disabled={busy || selected.length !== 2}
                 onClick={doCombine}
+                title="Combina cele doua concepte (Enter)"
+                aria-label="Combina cele doua concepte selectate"
                 style={{ borderColor: ACCENT }}
               >
                 {busy ? "…" : "⚗ Combina"}
@@ -434,6 +490,7 @@ export default function Alchimie({
               {inventory.map((item) => {
                 const isSel = selected.includes(item.id);
                 const isFresh = freshIds.has(item.id);
+                const isHint = hintIds.has(item.id);
                 const isCrafted = item.parents !== null;
                 const title = parentsOf(item) ?? "Concept de start";
                 return (
@@ -442,19 +499,29 @@ export default function Alchimie({
                     type="button"
                     layout
                     initial={isFresh ? { scale: 0.4, opacity: 0 } : false}
-                    animate={{ scale: 1, opacity: 1 }}
+                    animate={{
+                      scale: 1,
+                      opacity: 1,
+                      // Suggested-by-hint chips give a soft attention pulse.
+                      ...(isHint && !isSel
+                        ? { scale: [1, 1.08, 1] }
+                        : {}),
+                    }}
                     transition={{ type: "spring", stiffness: 320, damping: 18 }}
                     onClick={() => toggle(item.id)}
                     disabled={won || busy}
+                    aria-pressed={isSel}
                     title={title}
                     className="chip"
                     style={{
                       cursor: won ? "default" : "pointer",
                       borderColor: isSel
                         ? ACCENT
-                        : isFresh
+                        : isHint
                           ? GOLD
-                          : "var(--surface-border)",
+                          : isFresh
+                            ? GOLD
+                            : "var(--surface-border)",
                       background: isSel
                         ? "color-mix(in srgb, var(--surface) 70%, " +
                           ACCENT +
@@ -466,7 +533,8 @@ export default function Alchimie({
                           : undefined,
                       color: isSel || isFresh ? "var(--text)" : undefined,
                       fontWeight: isCrafted ? 600 : 500,
-                      boxShadow: isFresh ? `0 0 16px -4px ${GOLD}` : undefined,
+                      boxShadow:
+                        isFresh || isHint ? `0 0 16px -4px ${GOLD}` : undefined,
                     }}
                   >
                     {isCrafted ? "✦ " : ""}
@@ -501,89 +569,20 @@ export default function Alchimie({
         {/* Win banner */}
         <AnimatePresence>
           {won && (
-            <motion.div
-              className="card center col"
-              initial={{ scale: 0.85, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 240, damping: 18 }}
-              style={{
-                gap: 10,
-                padding: 22,
-                textAlign: "center",
-                borderColor: GOLD,
-                boxShadow: `0 0 60px -18px ${GOLD}`,
-              }}
+            <ResultCard
+              icon="★"
+              title="Ai craftat tinta!"
+              accent={GOLD}
+              score={state.score}
+              isRecord={isRecord}
+              shareText={state.share}
+              onCopy={() => void handleCopy()}
+              onReplay={() => setState(null)}
+              onExit={onExit}
             >
-              <div style={{ fontSize: "2.4rem" }} aria-hidden>
-                ★
-              </div>
-              <h2 style={{ margin: "6px 0", color: GOLD }}>Ai craftat tinta!</h2>
-              <p className="muted" style={{ margin: 0 }}>
-                <strong style={{ color: "var(--text)" }}>
-                  {state.target.label}
-                </strong>{" "}
-                in {state.moves} combinari · {state.discovered_count} concepte
-                descoperite.
-              </p>
-
-              {state.score !== undefined && (
-                <div className="col center" style={{ gap: 4, marginTop: 4 }}>
-                  <span className="faint" style={{ fontSize: "0.72rem" }}>
-                    SCOR
-                  </span>
-                  <div
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      fontWeight: 800,
-                      fontSize: "2rem",
-                      color: GOLD,
-                    }}
-                  >
-                    {state.score}
-                  </div>
-                  {isRecord && (
-                    <motion.span
-                      className="badge"
-                      initial={{ scale: 0.6, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 16,
-                      }}
-                      style={{ borderColor: GOLD, color: GOLD, fontWeight: 800 }}
-                    >
-                      ★ Record!
-                    </motion.span>
-                  )}
-                </div>
-              )}
-
-              <div
-                className="row center wrap"
-                style={{ gap: 12, marginTop: 12 }}
-              >
-                {state.share && (
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={() => void handleCopy()}
-                  >
-                    Copiaza rezultatul
-                  </button>
-                )}
-                <button
-                  type="button"
-                  className="btn btn-ghost"
-                  onClick={() => setState(null)}
-                >
-                  Joc nou →
-                </button>
-                <button type="button" className="btn btn-ghost" onClick={onExit}>
-                  Meniu
-                </button>
-              </div>
-            </motion.div>
+              <strong style={{ color: "var(--text)" }}>{state.target.label}</strong> in{" "}
+              {state.moves} combinari · {state.discovered_count} concepte descoperite.
+            </ResultCard>
           )}
         </AnimatePresence>
       </div>
