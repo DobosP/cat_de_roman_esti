@@ -289,29 +289,53 @@ def test_greu_target_depth_is_capped(client: TestClient) -> None:
 # ----------------------------------------------------------------- nudges + edge cases
 
 
+def _barren_owned_pair(svc, ids: list[str]) -> tuple[str, str] | None:
+    """The first owned pair with NO fresh common neighbour, computed via the service.
+
+    Combining such a pair always discovers nothing, so it deterministically grows the
+    fruitless streak without ever accidentally crafting a concept.
+    """
+    owned = set(ids)
+    for a, b in combinations(sorted(owned), 2):
+        if not [c for c in svc.common_neighbors(a, b) if c not in owned]:
+            return (a, b)
+    return None
+
+
 def _force_fruitless(client: TestClient, state: dict) -> dict:
-    """Repeatedly combine a barren pair until a hint becomes available."""
+    """Drive a game into the "stuck" state by combining a barren owned pair.
+
+    Picks a pair of owned concepts whose common-neighbour set is empty (via the service)
+    and combines it ``NUDGE_AFTER_FRUITLESS`` times so a hint becomes available. Uses the
+    seed inventory directly — no inventory mutation happens because the pair is barren.
+    """
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    svc = get_service()
     gid = state["game_id"]
     ids = [i["id"] for i in state["inventory"]]
-    barren: tuple[str, str] | None = None
-    for a, b in combinations(ids, 2):
-        res = client.post(f"{BASE}/games/{gid}/combine", json={"a": a, "b": b}).json()
-        if not res["discovered"]:
-            barren = (a, b)
-            state = res
-            break
-        # Restart on a fresh instance to keep a clean inventory for probing.
-        state = _create(client, seed=7)
-        gid = state["game_id"]
-        ids = [i["id"] for i in state["inventory"]]
-    assert barren is not None
-    client.post(f"{BASE}/games/{gid}/reset")
-    a, b = barren
+    pair = _barren_owned_pair(svc, ids)
+    assert pair is not None, "expected a barren owned pair to force fruitless combines"
+    a, b = pair
     while not state["hint_available"]:
         state = client.post(
             f"{BASE}/games/{gid}/combine", json={"a": a, "b": b}
         ).json()
+        assert state["discovered"] == [], "barren pair unexpectedly discovered a concept"
     return state
+
+
+def _closure_distance_to_target(client: TestClient, gid: str, owned: set[str]) -> int | None:
+    """Combine-closure generation of the (server-secret) target from ``owned`` ids.
+
+    Reuses the engine's own closure so the test measures the SAME notion of distance the
+    nudge optimises, and reads the hidden target id from the in-process session store.
+    """
+    from cat_de_roman_esti.wordgames import alchimie as _A
+
+    session = _A.store.get(gid)
+    assert session is not None
+    return _A._closure_with_generations(list(owned)).get(session.target)
 
 
 def test_hint_unavailable_until_stuck(client: TestClient) -> None:
@@ -323,11 +347,34 @@ def test_hint_unavailable_until_stuck(client: TestClient) -> None:
     assert res.status_code == 400
 
 
+def _seed_with_useful_and_barren(client: TestClient) -> dict:
+    """Find a game whose seed inventory has BOTH a forward-progress pair and a barren one.
+
+    On the dense graph most seeds qualify, but a few degenerate instances have no single
+    owned pair that strictly shortens the path to the target (the engine correctly returns
+    no hint there). We scan a handful of seeds and pick one where a hint must materialise,
+    so the test exercises the real nudge path without hard-coding a magic seed.
+    """
+    from cat_de_roman_esti.wordgames import alchimie as _A
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    svc = get_service()
+    for seed in range(40):
+        state = _create(client, seed=seed)
+        ids = [i["id"] for i in state["inventory"]]
+        if _barren_owned_pair(svc, ids) is None:
+            continue
+        session = _A.store.get(state["game_id"])
+        if _A._useful_pair(session) is not None:
+            return state
+    raise AssertionError("no seed offered both a barren and a forward-progress pair")
+
+
 def test_hint_after_fruitless_returns_useful_pair(client: TestClient) -> None:
     from cat_de_roman_esti.wordgames.service import get_service
 
     svc = get_service()
-    state = _force_fruitless(client, _create(client, seed=7))
+    state = _force_fruitless(client, _seed_with_useful_and_barren(client))
     assert state["hint_available"] is True
     gid = state["game_id"]
     res = client.post(f"{BASE}/games/{gid}/hint").json()
@@ -339,6 +386,12 @@ def test_hint_after_fruitless_returns_useful_pair(client: TestClient) -> None:
     assert a_id in owned and b_id in owned
     fresh = [c for c in svc.common_neighbors(a_id, b_id) if c not in owned]
     assert fresh, "hint pointed at a barren pair"
+    # ...and it must STRICTLY reduce the distance to the target, not just discover noise.
+    base_gen = _closure_distance_to_target(client, gid, owned)
+    new_gen = _closure_distance_to_target(client, gid, owned | set(fresh))
+    assert new_gen is not None and base_gen is not None and new_gen < base_gen, (
+        "hint did not shorten the path to the target"
+    )
     # The nudge resets the dry spell so it can't be spammed.
     assert res["hint_available"] is False
 

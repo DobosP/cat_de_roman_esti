@@ -16,9 +16,33 @@ def make_client() -> TestClient:
     return TestClient(app)
 
 
-# With seed=1 the secret target is "Dunărea" (id n_dunarea); "Banat" is a distance-1
-# neighbour. These are stable properties of the bundled offline KG.
 SEED = 1
+
+
+def _target_of(seed: int = SEED, difficulty: str = "normal"):
+    """The id + a distance-1 neighbour of the seeded secret, read from the engine.
+
+    Specific labels/distances drift as the bundled KG is regenerated, so tests derive
+    them from the engine's own selection rather than pinning to a hand-named id.
+    """
+    from cat_de_roman_esti.wordgames.contexto import _pick_target
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    svc = get_service()
+    session = _pick_target(seed, difficulty)
+    neighbour = svc.neighbor_ids(session.target)[0]
+    return session.target, svc.label(session.target), neighbour, svc.label(neighbour)
+
+
+def _reveal_target_label(client, *, seed: int = SEED, difficulty: str = "normal", daily=None):
+    """Reveal the secret label via giveup on a throwaway game with the same instance."""
+    params: dict = {"difficulty": difficulty}
+    if daily is not None:
+        params["daily"] = daily
+    else:
+        params["seed"] = seed
+    gid = client.post("/api/wordgames/contexto/games", params=params).json()["game_id"]
+    return client.post(f"/api/wordgames/contexto/games/{gid}/giveup").json()["target"]["label"]
 
 
 def test_create_game_hides_target() -> None:
@@ -49,19 +73,23 @@ def test_unknown_concept_not_counted() -> None:
 
 def test_guess_reports_temperature_and_closeness() -> None:
     c = make_client()
+    target_id, _, neighbour_id, neighbour_label = _target_of()
     gid = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()["game_id"]
     res = c.post(
         f"/api/wordgames/contexto/games/{gid}/guess",
-        json={"text": "Banat"},
+        json={"text": neighbour_label},
     )
     assert res.status_code == 200
     body = res.json()
     assert body["ok"] is True
     g = body["guess"]
-    assert g["id"] == "n_banat"
+    # A distance-1 neighbour of the secret reads as "Fierbinte" and is internally
+    # consistent: non-zero distance, a real (sub-win) closeness in bounds.
+    assert g["id"] == neighbour_id
     assert g["distance"] == 1
     assert g["temperature"] == "Fierbinte"
     assert 0 <= g["closeness"] <= 100
+    assert g["closeness"] < 100  # only the actual target reads 100
     assert body["attempts"] == 1
     assert body["won"] is False
     assert "target" not in body
@@ -69,12 +97,15 @@ def test_guess_reports_temperature_and_closeness() -> None:
 
 def test_winning_playthrough_reveals_target() -> None:
     c = make_client()
+    target_id, _, neighbour_id, neighbour_label = _target_of()
+    # Reveal the secret label on a separate (same-seed) game, then play it for real.
+    target_label = _reveal_target_label(c)
     gid = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()["game_id"]
-    # one cold-ish guess first, then the exact target (accent-insensitive)
-    c.post(f"/api/wordgames/contexto/games/{gid}/guess", json={"text": "Banat"})
+    # one warm guess first, then the exact target (accent-insensitive resolution)
+    c.post(f"/api/wordgames/contexto/games/{gid}/guess", json={"text": neighbour_label})
     res = c.post(
         f"/api/wordgames/contexto/games/{gid}/guess",
-        json={"text": "Dunarea"},
+        json={"text": target_label},
     )
     body = res.json()
     assert body["ok"] is True
@@ -82,7 +113,7 @@ def test_winning_playthrough_reveals_target() -> None:
     assert body["guess"]["distance"] == 0
     assert body["guess"]["temperature"] == "Gasit"
     assert body["guess"]["closeness"] == 100
-    assert body["target"]["id"] == "n_dunarea"
+    assert body["target"]["id"] == target_id
     # guesses are sorted best-first: the winning guess leads.
     assert body["guesses"][0]["distance"] == 0
 
@@ -98,14 +129,15 @@ def test_duplicate_guess_not_double_counted() -> None:
 def test_giveup_reveals_target() -> None:
     c = make_client()
     gid = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()["game_id"]
+    target_id, _, _, neighbour_label = _target_of()
     res = c.post(f"/api/wordgames/contexto/games/{gid}/giveup")
     assert res.status_code == 200
     body = res.json()
     assert body["gave_up"] is True
-    assert body["target"]["id"] == "n_dunarea"
+    assert body["target"]["id"] == target_id
     # cannot guess after giving up
     after = c.post(
-        f"/api/wordgames/contexto/games/{gid}/guess", json={"text": "Banat"}
+        f"/api/wordgames/contexto/games/{gid}/guess", json={"text": neighbour_label}
     )
     assert after.status_code == 400
 
@@ -194,12 +226,14 @@ def test_daily_differs_by_date() -> None:
 
 def test_win_includes_score_and_share() -> None:
     c = make_client()
+    _, _, _, neighbour_label = _target_of()
+    target_label = _reveal_target_label(c)
     gid = c.post(
         "/api/wordgames/contexto/games", params={"seed": SEED}
     ).json()["game_id"]
-    c.post(f"/api/wordgames/contexto/games/{gid}/guess", json={"text": "Banat"})
+    c.post(f"/api/wordgames/contexto/games/{gid}/guess", json={"text": neighbour_label})
     body = c.post(
-        f"/api/wordgames/contexto/games/{gid}/guess", json={"text": "Dunarea"}
+        f"/api/wordgames/contexto/games/{gid}/guess", json={"text": target_label}
     ).json()
     assert body["won"] is True
     # 2 attempts -> 1000 - 60 = 940
@@ -215,11 +249,12 @@ def test_win_includes_score_and_share() -> None:
 
 def test_score_rewards_fewer_attempts() -> None:
     c = make_client()
+    target_label = _reveal_target_label(c)
     gid = c.post(
         "/api/wordgames/contexto/games", params={"seed": SEED}
     ).json()["game_id"]
     body = c.post(
-        f"/api/wordgames/contexto/games/{gid}/guess", json={"text": "Dunarea"}
+        f"/api/wordgames/contexto/games/{gid}/guess", json={"text": target_label}
     ).json()
     assert body["won"] is True
     assert body["score"] == 1000  # solved on the first attempt

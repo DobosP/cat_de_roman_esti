@@ -4,19 +4,31 @@ _As of 2026-06-22. Update whenever `main` or the test baseline moves._
 
 ## Phase
 
-**v1.2 — text word-game arcade (web).** The web app was pivoted from the graph-based hop
-game to a **text-only arcade of three server-authoritative word games** over the same KG
-(no graph visualization): **Alchimie** (Infinite-Craft combine), **Cald sau Rece**
-(Contexto hot/cold), **Lanțul Cuvintelor** (word-ladder). Backed by
-`cat_de_roman_esti/wordgames/` (a shared `service.py` over the offline KG + one
-`APIRouter` per game under `/api/wordgames/*`). The old graph SPA + its `/api/games`
-endpoints were removed (`react-force-graph-2d` dropped; bundle 482→289 KB).
+**v1.2 — text word-game arcade (web), on a densified KG.** The web app is a **text-only
+arcade of four server-authoritative word games** over the KG (no graph visualization):
+**Alchimie** (Infinite-Craft combine), **Cald sau Rece** (Contexto hot/cold), **Lanțul
+Cuvintelor** (word-ladder), **Conexiuni** (NYT-Connections grouping). Each has difficulty
+tiers, a seeded **daily challenge**, score + shareable result, and an offline leaderboard.
+Backed by `cat_de_roman_esti/wordgames/` (shared `service.py` over the offline KG + one
+`APIRouter` per game under `/api/wordgames/*`). The old graph SPA + `/api/games` endpoints
+were removed (`react-force-graph-2d` dropped).
 
-The **terminal CLI** remains the original `easy|hard` semantic-hop game (engine/graph/data
-untouched). The KG itself is the v1.1 expansion below.
+**KG densified for richer play** (`scripts/densify_content.py` + `scripts/dense_data.json`):
+**314 nodes / 711 edges / 108 puzzles**, mean non-distractor degree **2.95 → 4.18** (more
+shared neighbours = easier "combine"/"connect" play), incl. **131 cross-category bridges**,
+all fact-checked. Puzzles are regenerated on the dense graph (validator-green by
+construction). NOTE: the legacy `kg_puzzles`/`HopGame`/CLI are unused by the word games but
+still validated; fixture-coupled tests were refactored to be content-agnostic.
 
-**v1.1 (still in place):** a fact-checked KG of **249 nodes / 417 edges / 148 puzzles**,
-**pinned web deps** for reproducible deploys, and a **GitHub Actions CI** gate.
+_Pipeline note:_ the `romania_scraper → ro_data_server` corpus path was probed but is
+**blocked** — `/mnt/roedu/data/processed/*` corpus files are permission-restricted
+(mixed root/dobo ownership), so `index-build` can't read them and `kg build` only sees
+`curriculum.db` (78 nodes). The curated **densification above is the delivered path**.
+
+The **terminal CLI** remains the original `easy|hard` semantic-hop game.
+
+**Earlier (still in place):** **pinned web deps** for reproducible deploys + a **GitHub
+Actions CI** gate.
 
 ## What's built
 

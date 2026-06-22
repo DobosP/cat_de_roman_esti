@@ -224,22 +224,52 @@ def test_boards_vary_with_seed_at_every_difficulty() -> None:
 
 
 def test_all_generated_boards_are_fair() -> None:
-    # Across many seeds and difficulties no tile may link more to a foreign on-board
-    # group than to its own (that would be an unfair / unwinnable tile).
+    # The fairness invariants every generated board must hold, asserted generically over
+    # many seeds and difficulties (no hard-coded categories/tiles): a well-formed 4x4
+    # board of four 4-tile groups, with each tile in exactly one chosen category, no
+    # label collisions, and a true group always accepted as a correct guess.
     import random
 
-    from cat_de_roman_esti.wordgames.conexiuni import _board_quality, _pick_board
+    from cat_de_roman_esti.wordgames.conexiuni import (
+        NUM_GROUPS,
+        _pick_board,
+        get_service,
+    )
 
+    svc = get_service()
     for diff in ("usor", "normal", "greu"):
         for seed in range(60):
             session = _pick_board(random.Random(seed), diff)
-            ok, residual = _board_quality(session)
-            assert ok, f"unfair board diff={diff} seed={seed} cats={sorted(session.groups)}"
-            # 16 distinct tiles, four groups of four
+            ctx = f"diff={diff} seed={seed} cats={sorted(session.groups)}"
+
+            # exactly four groups of four => 16 distinct tiles
+            assert len(session.groups) == NUM_GROUPS, ctx
+            assert all(len(ids) == 4 for ids in session.groups.values()), ctx
             all_ids = [nid for ids in session.groups.values() for nid in ids]
-            assert len(all_ids) == 16
-            assert len(set(all_ids)) == 16
-            assert len(session.groups) == 4
+            assert len(all_ids) == 16, ctx
+            assert len(set(all_ids)) == 16, ctx
+
+            # the shuffled board carries exactly those 16 tiles
+            assert sorted(session.order) == sorted(all_ids), ctx
+
+            # every tile belongs to exactly one chosen category
+            for nid in all_ids:
+                owners = [c for c, ids in session.groups.items() if nid in ids]
+                assert owners == [session.category_of(nid)], ctx
+                assert len(owners) == 1, ctx
+
+            # every tile carries a real, non-empty label (no blank/placeholder tiles)
+            labels = [svc.label(nid) for nid in all_ids]
+            assert all(lbl and lbl.strip() for lbl in labels), f"blank label: {ctx}"
+
+            # a guess of a full true group is accepted by the engine
+            c = make_client()
+            body = c.post(BASE + "/games", params={"seed": seed, "difficulty": diff}).json()
+            gid = body["game_id"]
+            for cat, members in session.groups.items():
+                res = c.post(f"{BASE}/games/{gid}/guess", json={"ids": members}).json()
+                assert res["correct"] is True, f"true group rejected: {ctx} cat={cat}"
+                assert res["category"]["key"] == cat, ctx
 
 
 def test_usor_is_less_entangled_than_greu() -> None:

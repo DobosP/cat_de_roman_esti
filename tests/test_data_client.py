@@ -93,11 +93,37 @@ def test_fail_closed_blocked_nodes_means_unplayable(kg_raw):
 
 
 def test_end_to_end_via_fake_client(fake_client):
-    """Full game playthrough sourced from the fake server, not the fixture loader."""
+    """Full game playthrough sourced from the fake server, not the fixture loader.
+
+    Selects a puzzle dynamically rather than hard-coding an id: the bundled KG fixture's
+    puzzle ids are regenerated (``pz_<category>_<difficulty>_<n>``), so the test pins
+    behaviour, not naming. We pick any hard-mode puzzle that is fully playable on the
+    loaded graph (start, target, and every solution-path edge present in the hard view),
+    walk its canonical solution, and assert the loader -> fake-client round-trip yields a
+    winnable game that scores a perfect 1000 (solution length == par for these puzzles).
+    """
     bundle = load_from_client(fake_client)
-    pz = next(p for p in bundle.puzzles if p.id == "pz_hard_lit")
+    assert bundle.puzzles, "fake client should serve at least one puzzle"
+
+    def playable(pz) -> bool:
+        if not (bundle.graph.has_node(pz.start_id) and bundle.graph.has_node(pz.target_id)):
+            return False
+        # Every consecutive hop along the solution must be a real edge in the hard view.
+        path = pz.solution_path
+        for a, b in zip(path, path[1:], strict=False):
+            if bundle.graph.edge_between(a, b, include_distractors=True) is None:
+                return False
+        return len(path) >= 2
+
+    pz = next(
+        (p for p in bundle.puzzles if p.difficulty == "hard" and playable(p)),
+        None,
+    )
+    assert pz is not None, "expected at least one playable hard puzzle from the bundle"
+
     game = HopGame.load(bundle.graph, pz, "hard")
     for nid in pz.solution_path[1:]:
-        assert game.hop(nid).ok
+        assert game.hop(nid).ok, f"hop to {nid} should be valid for {pz.id}"
     assert game.won
+    # Walking the canonical solution reaches the target at par -> a perfect score.
     assert game.score() == 1000
