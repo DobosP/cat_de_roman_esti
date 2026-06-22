@@ -2,16 +2,17 @@
 
 ## Branch & merge policy
 
-**No direct commits, merges, or pushes to `main`.** `main` is integration-only and moves
-**exclusively through reviewed pull requests**.
+**Direct local merges to `main` are allowed.** Prefer a **feature branch** for substantial
+work, then fast-forward / merge it into `main` locally once the gate is green.
 
-- Do all work on a **feature branch** (e.g. `feat/…`, `fix/…`).
-- Open a **pull request** into `main`; never `git merge`/`git push` straight to `main`,
-  and never fast-forward `main` locally to sidestep the PR.
-- A PR may merge only when **CI is green** (`.github/workflows/ci.yml`: fixture validation
-  + ruff + pytest on py3.11/3.12, and the frontend eslint + build) and it has been reviewed.
-- This applies to automated assistants too: commit to the feature branch, then **stop and
-  hand off** — do not push or merge to `main` without an explicit request.
+- Do substantial work on a **feature branch** (e.g. `feat/…`, `fix/…`); trivial changes may
+  land on `main` directly.
+- Merge into `main` only when the gate is green (`.github/workflows/ci.yml`: fixture
+  validation + ruff + pytest on py3.11/3.12, and the frontend eslint + build).
+- **Pushing to `origin` is still opt-in:** assistants must NOT `git push` or open a remote
+  PR without an explicit request — local merges to `main` are fine, publishing is not.
+
+_(Relaxed 2026-06-22 from the earlier PR-only rule, by request.)_
 
 ## Local quality gate (run before opening a PR)
 
