@@ -17,16 +17,37 @@ from dataclasses import dataclass, field
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
-from .service import SessionStore, get_service
+from .service import SessionStore, daily_seed, get_service
 
 router = APIRouter(prefix="/api/wordgames/lant", tags=["lant"])
 
-# A satisfying ladder: not trivial, not a marathon.
-_MIN_DISTANCE = 3
-_MAX_DISTANCE = 5
+GAME_KEY = "lant"
+
+# Difficulty -> the (min, max) start/target distance band.
+_DIFFICULTY_BANDS: dict[str, tuple[int, int]] = {
+    "usor": (2, 3),
+    "normal": (3, 4),
+    "greu": (4, 6),
+}
+_DEFAULT_DIFFICULTY = "normal"
+
 # How many random start/target draws we attempt before giving up (always succeeds in
 # practice — the KG has thousands of pairs in range).
 _MAX_DRAWS = 400
+
+
+def _score_for(moves: int, optimal: int) -> int:
+    """Par-relative score: playing at optimal -> 1000, never below 100."""
+    moves = max(moves, 1)
+    return max(100, round(1000 * optimal / max(moves, optimal)))
+
+
+def _share_line(moves: int, optimal: int, daily: str | None) -> str:
+    return (
+        "cat_de_roman_esti · Lantul Cuvintelor\n"
+        f"🔗 {moves}/{optimal} mutari\n"
+        f"{daily or ''}"
+    )
 
 
 @dataclass
@@ -34,6 +55,8 @@ class LantSession:
     start: str
     target: str
     optimal: int
+    difficulty: str = _DEFAULT_DIFFICULTY
+    daily: str | None = None
     # The chain of node ids walked so far; chain[0] is always the start.
     chain: list[str] = field(default_factory=list)
     won: bool = False
@@ -74,7 +97,7 @@ def _path(session: LantSession) -> list[dict[str, str]]:
 
 def _state(game_id: str, session: LantSession) -> dict:
     svc = get_service()
-    return {
+    state = {
         "game_id": game_id,
         "start": _concept(session.start),
         "target": {
@@ -87,12 +110,19 @@ def _state(game_id: str, session: LantSession) -> dict:
         "moves": session.moves,
         "optimal": session.optimal,
         "won": session.won,
+        "difficulty": session.difficulty,
     }
+    if session.daily is not None:
+        state["daily"] = session.daily
+    if session.won:
+        state["score"] = _score_for(session.moves, session.optimal)
+        state["share"] = _share_line(session.moves, session.optimal, session.daily)
+    return state
 
 
 # --------------------------------------------------------------------- puzzle picking
-def _pick_pair(rng: random.Random) -> tuple[str, str, int]:
-    """Pick a (start, target) whose distance is in [_MIN_DISTANCE, _MAX_DISTANCE].
+def _pick_pair(rng: random.Random, lo: int, hi: int) -> tuple[str, str, int]:
+    """Pick a (start, target) whose distance is in [lo, hi].
 
     Prefer reasonably salient, well-connected concepts so the ladder is meaningful and
     the player has real choices at every hop. Guaranteed solvable by construction.
@@ -109,7 +139,7 @@ def _pick_pair(rng: random.Random) -> tuple[str, str, int]:
         reachable = [
             nid
             for nid, d in dist_map.items()
-            if _MIN_DISTANCE <= d <= _MAX_DISTANCE and svc.degree(nid) >= 1
+            if lo <= d <= hi and svc.degree(nid) >= 1
         ]
         if not reachable:
             continue
@@ -124,10 +154,26 @@ def _pick_pair(rng: random.Random) -> tuple[str, str, int]:
 
 # --------------------------------------------------------------------- endpoints
 @router.post("/games")
-def create_game(seed: int | None = None) -> dict:
+def create_game(
+    seed: int | None = None,
+    difficulty: str = _DEFAULT_DIFFICULTY,
+    daily: str | None = None,
+) -> dict:
+    if difficulty not in _DIFFICULTY_BANDS:
+        difficulty = _DEFAULT_DIFFICULTY
+    lo, hi = _DIFFICULTY_BANDS[difficulty]
+    if daily is not None:
+        seed = daily_seed(daily, GAME_KEY)
     rng = random.Random(seed)
-    start, target, optimal = _pick_pair(rng)
-    session = LantSession(start=start, target=target, optimal=optimal, chain=[start])
+    start, target, optimal = _pick_pair(rng, lo, hi)
+    session = LantSession(
+        start=start,
+        target=target,
+        optimal=optimal,
+        difficulty=difficulty,
+        daily=daily,
+        chain=[start],
+    )
     game_id = store.create(session)
     return _state(game_id, session)
 
@@ -162,7 +208,7 @@ def move(game_id: str, body: MoveBody) -> dict:
     session.chain.append(guess)
     session.won = guess == session.target
 
-    return {
+    result = {
         "ok": True,
         "current": _concept(guess),
         "relation": svc.link_label(prev, guess),
@@ -170,6 +216,10 @@ def move(game_id: str, body: MoveBody) -> dict:
         "moves": session.moves,
         "won": session.won,
     }
+    if session.won:
+        result["score"] = _score_for(session.moves, session.optimal)
+        result["share"] = _share_line(session.moves, session.optimal, session.daily)
+    return result
 
 
 @router.post("/games/{game_id}/undo")

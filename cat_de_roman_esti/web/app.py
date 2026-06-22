@@ -23,6 +23,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
 from ..wordgames.alchimie import router as alchimie_router
+from ..wordgames.conexiuni import router as conexiuni_router
 from ..wordgames.contexto import router as contexto_router
 from ..wordgames.lant import router as lant_router
 from ..wordgames.service import get_service
@@ -47,6 +48,11 @@ GAMES = [
         "key": "lant",
         "label": "Lantul Cuvintelor",
         "blurb": "Scrie un concept legat de cel curent si sari din cuvant in cuvant pana la tinta.",
+    },
+    {
+        "key": "conexiuni",
+        "label": "Conexiuni",
+        "blurb": "Grupeaza cele 16 concepte in cele 4 categorii ascunse, cate 4 fiecare.",
     },
 ]
 
@@ -114,6 +120,7 @@ def create_app() -> FastAPI:
     app.include_router(alchimie_router)
     app.include_router(contexto_router)
     app.include_router(lant_router)
+    app.include_router(conexiuni_router)
 
     # ----------------------------------------------------------------- static
     index_html = STATIC_DIR / "index.html"

@@ -147,3 +147,84 @@ def test_unknown_game_is_404(client: TestClient) -> None:
         f"{BASE}/games/does-not-exist/combine", json={"a": "x", "b": "y"}
     )
     assert res.status_code == 404
+
+
+# --------------------------------------------------------------- difficulty + daily + score
+
+
+def _play_to_win(client: TestClient, state: dict) -> dict:
+    """Greedily combine pairs until the target is crafted; return the won state."""
+    gid = state["game_id"]
+    tried: set[tuple[str, str]] = set()
+    while not state["won"]:
+        ids = [item["id"] for item in state["inventory"]]
+        progressed = False
+        for a, b in combinations(ids, 2):
+            if (a, b) in tried:
+                continue
+            tried.add((a, b))
+            res = client.post(f"{BASE}/games/{gid}/combine", json={"a": a, "b": b})
+            assert res.status_code == 200, res.text
+            state = res.json()
+            if state["discovered"] or state["won"]:
+                progressed = True
+                break
+        assert progressed, "ran out of combinations without winning"
+    return state
+
+
+@pytest.mark.parametrize("difficulty", ["usor", "normal", "greu"])
+def test_difficulty_is_accepted(client: TestClient, difficulty: str) -> None:
+    res = client.post(f"{BASE}/games?seed=7&difficulty={difficulty}")
+    assert res.status_code == 200, res.text
+    state = res.json()
+    assert state["difficulty"] == difficulty
+    assert state["target_depth"] >= 2
+    # usor offers a wide inventory; greu is lean.
+    if difficulty == "usor":
+        assert 6 <= state["seed_count"] <= 7
+    if difficulty == "greu":
+        assert state["seed_count"] == 5
+        assert state["target_depth"] >= 3
+
+
+def test_unknown_difficulty_falls_back_to_normal(client: TestClient) -> None:
+    res = client.post(f"{BASE}/games?seed=7&difficulty=imposibil")
+    assert res.status_code == 200
+    assert res.json()["difficulty"] == "normal"
+
+
+def test_daily_is_deterministic_and_echoed(client: TestClient) -> None:
+    date = "2026-06-21"
+    a = client.post(f"{BASE}/games?daily={date}").json()
+    b = client.post(f"{BASE}/games?daily={date}").json()
+    assert a["daily"] == date
+    assert a["target"]["label"] == b["target"]["label"]
+    assert [i["id"] for i in a["inventory"]] == [i["id"] for i in b["inventory"]]
+    # A different date yields a (very likely) different instance and is echoed.
+    other = client.post(f"{BASE}/games?daily=2026-01-01").json()
+    assert other["daily"] == "2026-01-01"
+
+
+def test_in_progress_state_has_no_score_or_share(client: TestClient) -> None:
+    state = _create(client, seed=7)
+    assert "score" not in state
+    assert "share" not in state
+
+
+def test_win_includes_score_and_share(client: TestClient) -> None:
+    state = _play_to_win(client, _create(client, seed=7))
+    assert state["won"] is True
+    assert isinstance(state["score"], int)
+    assert 100 <= state["score"] <= 1000
+    share = state["share"]
+    assert "Alchimie" in share
+    assert "combinatii" in share
+    assert "⚗️" in share
+
+
+def test_daily_win_share_includes_date(client: TestClient) -> None:
+    date = "2026-06-21"
+    state = _play_to_win(client, client.post(f"{BASE}/games?daily={date}").json())
+    assert date in state["share"]
+    assert isinstance(state["score"], int)

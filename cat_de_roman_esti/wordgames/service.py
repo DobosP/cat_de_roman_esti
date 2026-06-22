@@ -12,6 +12,7 @@ the weak decoy edges (``is_distractor``) are ignored so the games stay meaningfu
 
 from __future__ import annotations
 
+import hashlib
 import threading
 import unicodedata
 import uuid
@@ -141,6 +142,17 @@ class WordGameService:
 
     def degree(self, node_id: str) -> int:
         return len(self._adj.get(node_id, ()))
+
+
+def daily_seed(date_str: str, salt: str = "") -> int:
+    """Deterministic seed from a calendar date (+ per-game salt).
+
+    The client passes its LOCAL date (``YYYY-MM-DD``) so a game's "daily" instance is the
+    same for everyone that day, but differs per game (via ``salt``). Pure function of its
+    inputs — no server clock — so it is reproducible and testable.
+    """
+    digest = hashlib.blake2b(f"{date_str}:{salt}".encode(), digest_size=8).digest()
+    return int.from_bytes(digest, "big")
 
 
 @lru_cache(maxsize=1)

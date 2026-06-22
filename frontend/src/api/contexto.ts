@@ -74,6 +74,8 @@ export interface RevealedTarget {
   description: string;
 }
 
+export type Difficulty = "usor" | "normal" | "greu";
+
 /** Full game state (GET /games/{id} and POST /games). */
 export interface ContextoState {
   game_id: string;
@@ -81,10 +83,17 @@ export interface ContextoState {
   won: boolean;
   gave_up: boolean;
   reachable_count: number;
+  difficulty: Difficulty;
+  /** Present only for a "Provocarea zilei" game (YYYY-MM-DD). */
+  daily?: string;
   /** Past guesses, sorted best-first by the server. */
   guesses: Guess[];
   /** Present only once won or given up. */
   target?: RevealedTarget;
+  /** Present only once won (higher = better). */
+  score?: number;
+  /** Present only once won: a shareable, Wordle-style line. */
+  share?: string;
 }
 
 /** A rejected guess (unknown concept) — not counted as an attempt. */
@@ -106,6 +115,10 @@ export interface GuessAccepted {
   won: boolean;
   reachable_count: number;
   target?: RevealedTarget;
+  /** Present only once won (higher = better). */
+  score?: number;
+  /** Present only once won: a shareable, Wordle-style line. */
+  share?: string;
 }
 
 export type GuessResult = GuessRejected | GuessAccepted;
@@ -114,10 +127,21 @@ export type GuessResult = GuessRejected | GuessAccepted;
 
 const BASE = "/api/wordgames/contexto";
 
+export interface CreateOpts {
+  seed?: number;
+  difficulty?: Difficulty;
+  /** "YYYY-MM-DD" — start the deterministic daily challenge for that date. */
+  daily?: string;
+}
+
 /** POST /games — start a new game with a hidden secret target. */
-export function createGame(seed?: number): Promise<ContextoState> {
-  const q = seed === undefined ? "" : `?seed=${encodeURIComponent(seed)}`;
-  return postJson<ContextoState>(`${BASE}/games${q}`);
+export function createGame(opts: CreateOpts = {}): Promise<ContextoState> {
+  const params = new URLSearchParams();
+  if (opts.seed !== undefined) params.set("seed", String(opts.seed));
+  if (opts.difficulty) params.set("difficulty", opts.difficulty);
+  if (opts.daily) params.set("daily", opts.daily);
+  const q = params.toString();
+  return postJson<ContextoState>(`${BASE}/games${q ? `?${q}` : ""}`);
 }
 
 /** GET /games/{id} — resume an existing game (target hidden unless finished). */

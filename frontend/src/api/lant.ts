@@ -26,6 +26,8 @@ export interface LantTarget {
   description: string;
 }
 
+export type Difficulty = "usor" | "normal" | "greu";
+
 export interface LantState {
   game_id: string;
   start: Concept;
@@ -35,6 +37,11 @@ export interface LantState {
   moves: number;
   optimal: number;
   won: boolean;
+  difficulty: Difficulty;
+  daily?: string;
+  /** Present only when won === true. */
+  score?: number;
+  share?: string;
 }
 
 export interface MoveResult {
@@ -46,6 +53,9 @@ export interface MoveResult {
   path?: PathStep[];
   moves?: number;
   won?: boolean;
+  /** Present only when won === true. */
+  score?: number;
+  share?: string;
 }
 
 export interface HintResult {
@@ -93,9 +103,17 @@ async function postJson<T>(url: string, body?: unknown): Promise<T> {
 }
 
 // ---------------------------------------------------------------------- endpoints
-/** POST /games — start a fresh ladder (optional seed for deterministic puzzles). */
-export function createLant(seed?: number): Promise<LantState> {
-  const q = seed === undefined ? "" : `?seed=${encodeURIComponent(seed)}`;
+/** POST /games — start a fresh ladder. */
+export function createLant(opts?: {
+  seed?: number;
+  difficulty?: Difficulty;
+  daily?: string;
+}): Promise<LantState> {
+  const params = new URLSearchParams();
+  if (opts?.seed !== undefined) params.set("seed", String(opts.seed));
+  if (opts?.difficulty) params.set("difficulty", opts.difficulty);
+  if (opts?.daily) params.set("daily", opts.daily);
+  const q = params.toString() ? `?${params.toString()}` : "";
   return postJson<LantState>(`${PREFIX}/games${q}`);
 }
 

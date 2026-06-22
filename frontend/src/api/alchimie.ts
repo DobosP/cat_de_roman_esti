@@ -24,6 +24,8 @@ export interface TargetView {
   revealed: boolean;
 }
 
+export type Difficulty = "usor" | "normal" | "greu";
+
 export interface AlchimieState {
   game_id: string;
   target: TargetView;
@@ -31,13 +33,26 @@ export interface AlchimieState {
   discovered_count: number;
   seed_count: number;
   moves: number;
+  difficulty: Difficulty;
+  target_depth: number;
   won: boolean;
+  daily?: string;
+  /** Present only when won === true. */
+  score?: number;
+  share?: string;
 }
 
 /** Returned by /combine — the base state plus what this combine produced. */
 export interface CombineResult extends AlchimieState {
   discovered: Concept[];
   message: string;
+}
+
+/** Options for starting a new game. */
+export interface CreateOpts {
+  seed?: number;
+  difficulty?: Difficulty;
+  daily?: string;
 }
 
 const JSON_HEADERS = { "Content-Type": "application/json" } as const;
@@ -79,9 +94,17 @@ async function postJson<T>(url: string, body?: unknown): Promise<T> {
   );
 }
 
-/** POST /games — start a new game (optional seed for deterministic instances). */
-export function createAlchimie(seed?: number): Promise<AlchimieState> {
-  const q = seed === undefined ? "" : `?seed=${encodeURIComponent(seed)}`;
+/** POST /games — start a new game.
+ *
+ * `?difficulty=` in {usor,normal,greu} tunes target depth + seed count, `?daily=YYYY-MM-DD`
+ * makes a shared deterministic daily instance, and `?seed=` makes it reproducible.
+ */
+export function createAlchimie(opts: CreateOpts = {}): Promise<AlchimieState> {
+  const params = new URLSearchParams();
+  if (opts.seed !== undefined) params.set("seed", String(opts.seed));
+  if (opts.difficulty) params.set("difficulty", opts.difficulty);
+  if (opts.daily) params.set("daily", opts.daily);
+  const q = params.toString() ? `?${params.toString()}` : "";
   return postJson<AlchimieState>(`${BASE}/games${q}`);
 }
 
@@ -111,7 +134,10 @@ export function resetAlchimie(gameId: string): Promise<AlchimieState> {
 
 export const alchimieApi = {
   create: createAlchimie,
+  createGame: createAlchimie,
   get: getAlchimie,
   combine: combineAlchimie,
   reset: resetAlchimie,
 };
+
+export { ApiError };

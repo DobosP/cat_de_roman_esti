@@ -19,9 +19,13 @@ from dataclasses import dataclass, field
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
-from .service import SessionStore, get_service
+from .service import SessionStore, daily_seed, get_service
 
 router = APIRouter(prefix="/api/wordgames/contexto", tags=["contexto"])
+
+GAME_KEY = "contexto"
+_DIFFICULTIES = ("usor", "normal", "greu")
+_DEFAULT_DIFFICULTY = "normal"
 
 # A target needs a large reachable set so almost every guess gets a meaningful distance.
 MIN_REACHABLE = 120
@@ -46,9 +50,13 @@ class ContextoSession:
     # how many reachable nodes are STRICTLY farther than distance d (for ranking)
     farther_than: dict[int, int] = field(default_factory=dict)
     guesses: dict[str, GuessRecord] = field(default_factory=dict)
+    # guess ids in the chronological order they were first played (for the share trail)
+    order: list[str] = field(default_factory=list)
     attempts: int = 0
     won: bool = False
     gave_up: bool = False
+    difficulty: str = _DEFAULT_DIFFICULTY
+    daily: str | None = None
 
     def __post_init__(self) -> None:
         # Precompute, for each distance value, how many reachable nodes are farther.
@@ -108,27 +116,109 @@ def closeness_for(session: ContextoSession, distance: int | None) -> int:
 
 
 # --------------------------------------------------------------------------- selection
-def _pick_target(seed: int | None) -> ContextoSession:
-    """Choose a solvable secret target with a sufficiently large reachable set."""
+# Hot/cold emoji trail for the shareable line: coldest -> hottest, plus a bullseye.
+_TRAIL_FOUND = "🎯"
+_TRAIL_HOT = "🟩"
+_TRAIL_WARM = "🟨"
+_TRAIL_COOL = "🟧"
+_TRAIL_COLD = "🟥"
+
+
+def score_for(attempts: int) -> int:
+    """Reward few attempts: optimal (1 attempt) -> 1000, never below 50."""
+    attempts = max(attempts, 1)
+    return max(50, 1000 - 60 * (attempts - 1))
+
+
+def _trail_emoji(record: GuessRecord) -> str:
+    """One hot/cold square per guess, based on its closeness to the secret."""
+    if record.distance == 0:
+        return _TRAIL_FOUND
+    c = record.closeness
+    if c >= 75:
+        return _TRAIL_HOT
+    if c >= 50:
+        return _TRAIL_WARM
+    if c >= 25:
+        return _TRAIL_COOL
+    return _TRAIL_COLD
+
+
+def share_line(session: ContextoSession) -> str:
+    """Wordle-style shareable line with a hot/cold emoji trail of the guesses."""
+    trail = "".join(_trail_emoji(session.guesses[gid]) for gid in session.order)
+    lines = [
+        "cat_de_roman_esti · Cald sau Rece",
+        trail,
+        f"{session.attempts} incercari",
+    ]
+    if session.daily is not None:
+        lines.append(session.daily)
+    return "\n".join(lines)
+
+
+def _difficulty_pool(svc, difficulty: str) -> list[str]:
+    """Candidate target ids for a difficulty tier (before the reachability filter).
+
+    usor  -> high-salience, well-known targets (salience >= 0.6).
+    greu  -> low-salience / obscure targets (the bottom of the salience order).
+    normal-> the full pool (the historical default; any reachable concept).
+
+    ``normal`` keeps the original ``all_ids`` candidate set so the long-standing
+    seeded instances stay stable; only ``usor``/``greu`` bias the selection.
+    """
+    if difficulty == "usor":
+        high = svc.by_salience(minimum=0.6)
+        return high or svc.all_ids()
+    if difficulty == "greu":
+        # obscure: lowest salience first, restricted to the less-prominent half so a
+        # "greu" target is genuinely off the beaten path.
+        by_sal = svc.by_salience(descending=True)  # high -> low
+        obscure = list(reversed(by_sal))
+        return obscure[: max(1, len(obscure) // 2)] or obscure
+    # normal: the historical default candidate set.
+    return svc.all_ids()
+
+
+def _build_session(target: str, difficulty: str, daily: str | None) -> ContextoSession:
     svc = get_service()
-    rng = random.Random(seed)
-    candidates = [nid for nid in svc.all_ids()]
-    rng.shuffle(candidates)
-    for nid in candidates:
-        dist = svc.distances_from(nid)
-        if len(dist) >= MIN_REACHABLE:
-            hist: dict[int, int] = {}
-            for d in dist.values():
-                hist[d] = hist.get(d, 0) + 1
-            return ContextoSession(target=nid, dist_hist=hist, reachable=len(dist))
-    # Fallback: no node met the threshold (impossible for the bundled KG) — take the
-    # best available so we still return a solvable game.
-    best = max(svc.all_ids(), key=lambda n: len(svc.distances_from(n)))
-    dist = svc.distances_from(best)
-    hist = {}
+    dist = svc.distances_from(target)
+    hist: dict[int, int] = {}
     for d in dist.values():
         hist[d] = hist.get(d, 0) + 1
-    return ContextoSession(target=best, dist_hist=hist, reachable=len(dist))
+    return ContextoSession(
+        target=target,
+        dist_hist=hist,
+        reachable=len(dist),
+        difficulty=difficulty,
+        daily=daily,
+    )
+
+
+def _pick_target(
+    seed: int | None,
+    difficulty: str = _DEFAULT_DIFFICULTY,
+    daily: str | None = None,
+) -> ContextoSession:
+    """Choose a solvable secret target of the requested difficulty.
+
+    The reachability floor (``MIN_REACHABLE``) is always enforced so even an "obscure"
+    target still gives almost every guess a meaningful distance.
+    """
+    svc = get_service()
+    rng = random.Random(seed)
+    candidates = _difficulty_pool(svc, difficulty)
+    # Deterministic ordering: for daily/seeded runs the pool order is fixed, then a
+    # seeded shuffle picks within it -> same date+difficulty => same target.
+    candidates = list(candidates)
+    rng.shuffle(candidates)
+    for nid in candidates:
+        if len(svc.distances_from(nid)) >= MIN_REACHABLE:
+            return _build_session(nid, difficulty, daily)
+    # Fallback: nothing in this tier met the threshold — take the most-reachable node so
+    # we still return a solvable game.
+    best = max(svc.all_ids(), key=lambda n: len(svc.distances_from(n)))
+    return _build_session(best, difficulty, daily)
 
 
 # --------------------------------------------------------------------------- schemas
@@ -161,8 +251,11 @@ def _state(game_id: str, session: ContextoSession) -> dict:
         "won": session.won,
         "gave_up": session.gave_up,
         "reachable_count": session.reachable,
+        "difficulty": session.difficulty,
         "guesses": _sorted_guesses(session),
     }
+    if session.daily is not None:
+        body["daily"] = session.daily
     if session.won or session.gave_up:
         svc = get_service()
         body["target"] = {
@@ -170,13 +263,24 @@ def _state(game_id: str, session: ContextoSession) -> dict:
             "label": svc.label(session.target),
             "description": svc.description(session.target),
         }
+    if session.won:
+        body["score"] = score_for(session.attempts)
+        body["share"] = share_line(session)
     return body
 
 
 # --------------------------------------------------------------------------- endpoints
 @router.post("/games")
-def create_game(seed: int | None = None) -> dict:
-    session = _pick_target(seed)
+def create_game(
+    seed: int | None = None,
+    difficulty: str = _DEFAULT_DIFFICULTY,
+    daily: str | None = None,
+) -> dict:
+    if difficulty not in _DIFFICULTIES:
+        difficulty = _DEFAULT_DIFFICULTY
+    if daily is not None:
+        seed = daily_seed(daily, GAME_KEY)
+    session = _pick_target(seed, difficulty, daily)
     game_id = store.create(session)
     return _state(game_id, session)
 
@@ -232,6 +336,7 @@ def guess(game_id: str, body: GuessBody) -> dict:
     session.guesses[node_id] = record
     if is_new:
         session.attempts += 1
+        session.order.append(node_id)
 
     if distance == 0:
         session.won = True
@@ -256,6 +361,8 @@ def guess(game_id: str, body: GuessBody) -> dict:
             "label": svc.label(session.target),
             "description": svc.description(session.target),
         }
+        result["score"] = score_for(session.attempts)
+        result["share"] = share_line(session)
     return result
 
 

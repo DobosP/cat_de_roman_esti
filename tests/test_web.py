@@ -1,7 +1,7 @@
 """Smoke tests for the word-game arcade BFF (offline, server-authoritative).
 
 Per-game behaviour is covered by tests/test_wordgames_*.py; this asserts the app factory
-mounts all three game routers + the health surface + the static fallback.
+mounts all game routers + the health surface + the static fallback.
 """
 
 from __future__ import annotations
@@ -21,16 +21,16 @@ def client() -> TestClient:
     return TestClient(create_app())
 
 
-def test_health_lists_the_three_games(client: TestClient):
+def test_health_lists_the_games(client: TestClient):
     body = client.get("/api/health").json()
     assert body["ok"] is True
     assert body["source"] == "offline"
     assert body["concepts"] > 100
     keys = {g["key"] for g in body["games"]}
-    assert keys == {"alchimie", "contexto", "lant"}
+    assert keys == {"alchimie", "contexto", "lant", "conexiuni"}
 
 
-@pytest.mark.parametrize("game", ["alchimie", "contexto", "lant"])
+@pytest.mark.parametrize("game", ["alchimie", "contexto", "lant", "conexiuni"])
 def test_each_game_router_is_mounted(client: TestClient, game: str):
     # A new game can be created through the mounted router (deterministic via seed).
     resp = client.post(f"/api/wordgames/{game}/games?seed=1")

@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Alchimie from "./screens/Alchimie";
 import CaldRece from "./screens/CaldRece";
 import Lant from "./screens/Lant";
+import Conexiuni from "./screens/Conexiuni";
 import { SoundToggle } from "./components/SoundToggle";
 import { ToastStack, type ToastData, type ToastKind } from "./components/Toast";
 import { sound } from "./sound";
@@ -12,7 +13,7 @@ import { sound } from "./sound";
 // no graph visualization. A tiny screen router (home -> one of three games) holds the
 // active game key; each game is a self-contained server-authoritative screen.
 
-type GameKey = "alchimie" | "contexto" | "lant";
+type GameKey = "alchimie" | "contexto" | "lant" | "conexiuni";
 
 interface GameDef {
   key: GameKey;
@@ -54,6 +55,16 @@ const GAMES: GameDef[] = [
     accent: "#56d4dd",
     glow: "#a3eef2",
     icon: "🔗",
+  },
+  {
+    key: "conexiuni",
+    title: "Conexiuni",
+    tag: "à la NYT Connections",
+    blurb:
+      "Saisprezece concepte, patru categorii ascunse. Grupeaza-le cate patru — ai voie la patru greseli.",
+    accent: "#5fd99b",
+    glow: "#a7f0c8",
+    icon: "🧩",
   },
 ];
 
@@ -122,6 +133,12 @@ export default function App() {
         {active === "lant" && (
           <motion.div key="lant" className="screen" variants={variants} initial="initial" animate="enter" exit="exit" transition={SCREEN_TRANSITION}>
             <Lant onExit={goHome} onToast={pushToast} />
+          </motion.div>
+        )}
+
+        {active === "conexiuni" && (
+          <motion.div key="conexiuni" className="screen" variants={variants} initial="initial" animate="enter" exit="exit" transition={SCREEN_TRANSITION}>
+            <Conexiuni onExit={goHome} onToast={pushToast} />
           </motion.div>
         )}
       </AnimatePresence>

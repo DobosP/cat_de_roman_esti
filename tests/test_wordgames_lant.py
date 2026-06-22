@@ -18,10 +18,28 @@ c = TestClient(app)
 SEED = 7
 
 
-def _create(seed: int = SEED):
-    res = c.post(f"/api/wordgames/lant/games?seed={seed}")
+def _create(seed: int = SEED, **params):
+    q = f"?seed={seed}"
+    for k, v in params.items():
+        q += f"&{k}={v}"
+    res = c.post(f"/api/wordgames/lant/games{q}")
     assert res.status_code == 200, res.text
     return res.json()
+
+
+def _win(game: dict) -> dict:
+    """Follow shortest-path hints to a win; return the final move response body."""
+    gid = game["game_id"]
+    body = {}
+    for _ in range(game["optimal"]):
+        hint = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()["hint"]
+        assert hint is not None
+        body = c.post(
+            f"/api/wordgames/lant/games/{gid}/move",
+            json={"text": hint["label"]},
+        ).json()
+    assert body["won"] is True
+    return body
 
 
 def test_create_is_solvable_and_seed_deterministic():
@@ -112,6 +130,67 @@ def test_undo_does_not_go_below_start():
     after_undo = c.post(f"/api/wordgames/lant/games/{gid}/undo").json()
     assert after_undo["moves"] == 0
     assert after_undo["current"]["id"] == game["start"]["id"]
+
+
+def test_difficulty_bands_accepted_and_respected():
+    bands = {"usor": (2, 3), "normal": (3, 4), "greu": (4, 6)}
+    for diff, (lo, hi) in bands.items():
+        g = _create(seed=11, difficulty=diff)
+        assert g["difficulty"] == diff
+        assert lo <= g["optimal"] <= hi, (diff, g["optimal"])
+
+
+def test_invalid_difficulty_falls_back_to_normal():
+    g = _create(difficulty="impossible")
+    assert g["difficulty"] == "normal"
+    assert 3 <= g["optimal"] <= 4
+
+
+def test_win_includes_score_and_share():
+    game = _create()
+    body = _win(game)
+    assert "score" in body and isinstance(body["score"], int)
+    # Optimal play -> max score of 1000; score is always at least 100.
+    assert body["score"] == 1000
+    assert body["score"] >= 100
+    assert "share" in body
+    share = body["share"]
+    assert "Lantul Cuvintelor" in share
+    assert "🔗" in share
+    assert f"{body['moves']}/{game['optimal']} mutari" in share
+
+    # Final GET state also surfaces score + share.
+    final = c.get(f"/api/wordgames/lant/games/{game['game_id']}").json()
+    assert final["score"] == body["score"]
+    assert final["share"] == body["share"]
+
+
+def test_score_formula_holds_on_win():
+    game = _create()
+    optimal = game["optimal"]
+    body = _win(game)
+    # Hint-following wins in exactly `optimal` moves -> the maximum score.
+    assert body["moves"] == optimal
+    assert body["score"] == max(
+        100, round(1000 * optimal / max(body["moves"], optimal))
+    )
+
+
+def test_daily_is_deterministic_and_echoed():
+    a = _create(daily="2026-06-21")
+    b = _create(daily="2026-06-21")
+    assert a["daily"] == "2026-06-21"
+    assert a["start"]["id"] == b["start"]["id"]
+    assert a["target"]["id"] == b["target"]["id"]
+    # A different date generally yields a different puzzle.
+    diff = _create(daily="2026-01-01")
+    assert (diff["start"]["id"], diff["target"]["id"]) != (
+        a["start"]["id"],
+        a["target"]["id"],
+    )
+    # Daily win share embeds the date.
+    body = _win(a)
+    assert "2026-06-21" in body["share"]
 
 
 def test_unknown_game_404():

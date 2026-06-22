@@ -3,65 +3,100 @@
 // Server-authoritative: we render whatever the backend returns and never know the target
 // id until the server reveals it on a win.
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ApiError } from "../api/client";
 import {
   alchimieApi,
+  ApiError,
   type AlchimieState,
   type Concept,
+  type CreateOpts,
+  type Difficulty,
   type InventoryItem,
 } from "../api/alchimie";
 import type { ToastKind } from "../components/Toast";
 import { sound } from "../sound";
+import { bestScore, recordScore } from "../scores";
+import { copyResult, todayLocal } from "../share";
+
+const GAME_KEY = "alchimie";
 
 const ACCENT = "#c08bff"; // arta_cultura purple — the "alchemy" accent.
 const GOLD = "#ffd166";
 
-interface SelfProps {
-  onExit: () => void;
-  onToast: (message: string, kind?: ToastKind) => void;
-}
+const DIFFICULTIES: { id: Difficulty; label: string; hint: string }[] = [
+  { id: "usor", label: "Usor", hint: "tinta apropiata" },
+  { id: "normal", label: "Normal", hint: "echilibrat" },
+  { id: "greu", label: "Greu", hint: "tinta adanca" },
+];
 
-export default function Alchimie({ onExit, onToast }: SelfProps) {
+export default function Alchimie({
+  onExit,
+  onToast,
+}: {
+  onExit: () => void;
+  onToast: (m: string, k?: ToastKind) => void;
+}) {
   const [state, setState] = useState<AlchimieState | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [busy, setBusy] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
   // ids discovered by the most recent combine — used to animate them in.
   const [freshIds, setFreshIds] = useState<Set<string>>(new Set());
   const [lastMessage, setLastMessage] = useState<string | null>(null);
+  const [difficulty, setDifficulty] = useState<Difficulty>("normal");
+  const [isRecord, setIsRecord] = useState(false);
+  // Guards against recording the same finished game twice.
+  const recordedFor = useRef<string | null>(null);
 
-  const start = useCallback(async () => {
-    setLoading(true);
-    try {
-      const s = await alchimieApi.create();
-      setState(s);
-      setSelected([]);
-      setFreshIds(new Set());
-      setLastMessage(null);
-    } catch (err) {
-      onToast(
-        err instanceof ApiError
-          ? `Nu am putut porni jocul (${err.status}).`
-          : "Nu am putut porni jocul.",
-        "error",
-      );
-    } finally {
-      setLoading(false);
-    }
-  }, [onToast]);
+  const best = useMemo(() => bestScore(GAME_KEY), []);
 
-  // Create the game on mount.
-  useEffect(() => {
-    void start();
-  }, [start]);
+  const start = useCallback(
+    async (opts: CreateOpts = {}) => {
+      setLoading(true);
+      try {
+        const s = await alchimieApi.create(opts);
+        setState(s);
+        setSelected([]);
+        setFreshIds(new Set());
+        setLastMessage(null);
+        setIsRecord(false);
+        recordedFor.current = null;
+      } catch (err) {
+        onToast(
+          err instanceof ApiError
+            ? `Nu am putut porni jocul (${err.status}).`
+            : "Nu am putut porni jocul.",
+          "error",
+        );
+      } finally {
+        setLoading(false);
+      }
+    },
+    [onToast],
+  );
+
+  const won = state?.won ?? false;
 
   // Win arpeggio fires once when we transition into the won state.
-  const won = state?.won ?? false;
   useEffect(() => {
     if (won) sound.playWin();
   }, [won]);
+
+  // Record the score exactly once when a game is won.
+  useEffect(() => {
+    if (!state || !state.won || state.score === undefined) return;
+    if (recordedFor.current === state.game_id) return;
+    recordedFor.current = state.game_id;
+    const detail = state.daily
+      ? `Zilnic ${state.daily} · ${state.moves} combinari`
+      : `${state.difficulty} · ${state.moves} combinari`;
+    const { isBest } = recordScore(GAME_KEY, state.score, detail);
+    if (isBest) {
+      setIsRecord(true);
+      sound.playRecord();
+    }
+  }, [state]);
 
   const toggle = useCallback(
     (id: string) => {
@@ -87,11 +122,8 @@ export default function Alchimie({ onExit, onToast }: SelfProps) {
       setLastMessage(res.message);
       if (res.discovered.length > 0) {
         setFreshIds(new Set(res.discovered.map((d: Concept) => d.id)));
-        if (res.won) {
-          // win sound handled by the won effect
-        } else {
-          sound.playHop();
-        }
+        if (!res.won) sound.playHop();
+        // win sound handled by the won effect
       } else {
         setFreshIds(new Set());
         sound.playUndo();
@@ -132,6 +164,12 @@ export default function Alchimie({ onExit, onToast }: SelfProps) {
     }
   }, [state, busy, onToast]);
 
+  const handleCopy = useCallback(async () => {
+    if (!state?.share) return;
+    const ok = await copyResult(state.share);
+    onToast(ok ? "Copiat!" : "Nu am putut copia.", ok ? "info" : "error");
+  }, [state, onToast]);
+
   // Reveal a parent hint on hover/long-press: which two concepts produced a chip.
   const parentsOf = useCallback(
     (item: InventoryItem): string | null =>
@@ -143,18 +181,112 @@ export default function Alchimie({ onExit, onToast }: SelfProps) {
 
   const inventory = useMemo(() => state?.inventory ?? [], [state]);
   const selectedItems = useMemo(
-    () => selected.map((id) => inventory.find((i) => i.id === id)).filter(Boolean) as InventoryItem[],
+    () =>
+      selected
+        .map((id) => inventory.find((i) => i.id === id))
+        .filter(Boolean) as InventoryItem[],
     [selected, inventory],
   );
 
-  if (loading || !state) {
+  if (loading) {
     return (
       <div className="screen-pad fill center">
         <p className="muted">Se prepara alambicul…</p>
-        <div className="row center" style={{ marginTop: 16 }}>
-          <button type="button" className="btn btn-ghost" onClick={onExit}>
-            ← Meniu
-          </button>
+      </div>
+    );
+  }
+
+  // ---- Intro: difficulty picker + daily challenge + personal best. ----
+  if (!state) {
+    return (
+      <div className="screen-pad fill">
+        <div className="container col" style={{ gap: 18 }}>
+          <div className="spread row" style={{ alignItems: "center" }}>
+            <button type="button" className="btn btn-ghost" onClick={onExit}>
+              ← Meniu
+            </button>
+            {best && (
+              <span
+                className="badge"
+                title="Recordul tau"
+                style={{ fontVariantNumeric: "tabular-nums" }}
+              >
+                🏆 {best.score}
+              </span>
+            )}
+          </div>
+
+          <motion.div
+            className="card col"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            style={{ gap: 16, padding: 22 }}
+          >
+            <div className="col" style={{ gap: 4 }}>
+              <h1
+                style={{
+                  margin: 0,
+                  fontFamily: "var(--font-display)",
+                  color: ACCENT,
+                }}
+              >
+                ⚗ Alchimie
+              </h1>
+              <p className="muted" style={{ margin: 0 }}>
+                Combina doua concepte ca sa descoperi vecinii lor comuni si
+                ajunge la tinta ascunsa. Cu cat mai putine combinari, cu atat
+                scor mai mare.
+              </p>
+            </div>
+
+            <div className="col" style={{ gap: 8 }}>
+              <span className="faint" style={{ fontSize: "0.72rem" }}>
+                DIFICULTATE
+              </span>
+              <div className="row wrap" style={{ gap: 8 }}>
+                {DIFFICULTIES.map((d) => (
+                  <button
+                    key={d.id}
+                    type="button"
+                    className={`btn ${
+                      difficulty === d.id ? "btn-primary" : "btn-ghost"
+                    }`}
+                    onClick={() => {
+                      sound.playSelect();
+                      setDifficulty(d.id);
+                    }}
+                  >
+                    {d.label}
+                    <span
+                      className="faint"
+                      style={{ marginLeft: 6, fontSize: "0.7rem" }}
+                    >
+                      {d.hint}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="row wrap" style={{ gap: 12, marginTop: 4 }}>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => void start({ difficulty })}
+                style={{ borderColor: ACCENT }}
+              >
+                Joaca →
+              </button>
+              <button
+                type="button"
+                className="btn btn-ghost"
+                onClick={() => void start({ daily: todayLocal() })}
+                title="Aceeasi tinta pentru toata lumea, azi"
+              >
+                📅 Provocarea zilei
+              </button>
+            </div>
+          </motion.div>
         </div>
       </div>
     );
@@ -169,9 +301,23 @@ export default function Alchimie({ onExit, onToast }: SelfProps) {
             ← Meniu
           </button>
           <div className="row wrap" style={{ gap: 8 }}>
-            <span className="badge" style={{ borderColor: ACCENT, color: ACCENT }}>
-              ⚗ Alchimie
-            </span>
+            {state.daily ? (
+              <span
+                className="badge"
+                style={{ borderColor: ACCENT, color: ACCENT }}
+                title="Provocarea zilei"
+              >
+                📅 {state.daily}
+              </span>
+            ) : (
+              <span
+                className="badge"
+                style={{ borderColor: ACCENT, color: ACCENT }}
+                title="Dificultate"
+              >
+                ⚗ {state.difficulty}
+              </span>
+            )}
             <span className="badge">Combinari: {state.moves}</span>
             <span className="badge" style={{ borderColor: GOLD, color: GOLD }}>
               ✦ {state.discovered_count} descoperite
@@ -193,7 +339,10 @@ export default function Alchimie({ onExit, onToast }: SelfProps) {
           }}
         >
           <div className="col" style={{ gap: 6 }}>
-            <span className="faint" style={{ letterSpacing: "0.08em", fontSize: "0.72rem" }}>
+            <span
+              className="faint"
+              style={{ letterSpacing: "0.08em", fontSize: "0.72rem" }}
+            >
               {won ? "TINTA CRAFTATA" : "TINTA DE CRAFTAT"}
             </span>
             <div className="row" style={{ gap: 10, alignItems: "baseline" }}>
@@ -218,9 +367,16 @@ export default function Alchimie({ onExit, onToast }: SelfProps) {
             className="card row spread wrap"
             style={{ padding: 14, gap: 12, alignItems: "center" }}
           >
-            <div className="row wrap" style={{ gap: 8, alignItems: "center", minHeight: 38 }}>
+            <div
+              className="row wrap"
+              style={{ gap: 8, alignItems: "center", minHeight: 38 }}
+            >
               <Slot item={selectedItems[0]} />
-              <span className="faint" style={{ fontSize: "1.4rem" }} aria-hidden>
+              <span
+                className="faint"
+                style={{ fontSize: "1.4rem" }}
+                aria-hidden
+              >
                 +
               </span>
               <Slot item={selectedItems[1]} />
@@ -267,7 +423,10 @@ export default function Alchimie({ onExit, onToast }: SelfProps) {
 
         {/* Inventory */}
         <div className="col" style={{ gap: 8 }}>
-          <span className="faint" style={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}>
+          <span
+            className="faint"
+            style={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}
+          >
             INVENTAR ({inventory.length})
           </span>
           <div className="wrap" style={{ display: "flex", gap: 8 }}>
@@ -295,13 +454,15 @@ export default function Alchimie({ onExit, onToast }: SelfProps) {
                         ? ACCENT
                         : isFresh
                           ? GOLD
-                          : isCrafted
-                            ? "var(--border)"
-                            : "var(--border)",
+                          : "var(--surface-border)",
                       background: isSel
-                        ? "color-mix(in srgb, var(--panel) 70%, " + ACCENT + ")"
+                        ? "color-mix(in srgb, var(--surface) 70%, " +
+                          ACCENT +
+                          ")"
                         : isFresh
-                          ? "color-mix(in srgb, var(--panel) 80%, " + GOLD + ")"
+                          ? "color-mix(in srgb, var(--surface) 80%, " +
+                            GOLD +
+                            ")"
                           : undefined,
                       color: isSel || isFresh ? "var(--text)" : undefined,
                       fontWeight: isCrafted ? 600 : 500,
@@ -319,10 +480,20 @@ export default function Alchimie({ onExit, onToast }: SelfProps) {
 
         {/* Footer actions */}
         <div className="row center wrap" style={{ gap: 12, marginTop: 8 }}>
-          <button type="button" className="btn btn-ghost" disabled={busy} onClick={doReset}>
+          <button
+            type="button"
+            className="btn btn-ghost"
+            disabled={busy}
+            onClick={doReset}
+          >
             ↻ Reia (acelasi joc)
           </button>
-          <button type="button" className="btn btn-ghost" disabled={busy} onClick={() => void start()}>
+          <button
+            type="button"
+            className="btn btn-ghost"
+            disabled={busy}
+            onClick={() => setState(null)}
+          >
             ⚂ Joc nou
           </button>
         </div>
@@ -331,11 +502,12 @@ export default function Alchimie({ onExit, onToast }: SelfProps) {
         <AnimatePresence>
           {won && (
             <motion.div
-              className="card center"
+              className="card center col"
               initial={{ scale: 0.85, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", stiffness: 240, damping: 18 }}
               style={{
+                gap: 10,
                 padding: 22,
                 textAlign: "center",
                 borderColor: GOLD,
@@ -347,11 +519,64 @@ export default function Alchimie({ onExit, onToast }: SelfProps) {
               </div>
               <h2 style={{ margin: "6px 0", color: GOLD }}>Ai craftat tinta!</h2>
               <p className="muted" style={{ margin: 0 }}>
-                <strong style={{ color: "var(--text)" }}>{state.target.label}</strong> in{" "}
-                {state.moves} combinari · {state.discovered_count} concepte descoperite.
+                <strong style={{ color: "var(--text)" }}>
+                  {state.target.label}
+                </strong>{" "}
+                in {state.moves} combinari · {state.discovered_count} concepte
+                descoperite.
               </p>
-              <div className="row center wrap" style={{ gap: 12, marginTop: 16 }}>
-                <button type="button" className="btn btn-primary" onClick={() => void start()}>
+
+              {state.score !== undefined && (
+                <div className="col center" style={{ gap: 4, marginTop: 4 }}>
+                  <span className="faint" style={{ fontSize: "0.72rem" }}>
+                    SCOR
+                  </span>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontWeight: 800,
+                      fontSize: "2rem",
+                      color: GOLD,
+                    }}
+                  >
+                    {state.score}
+                  </div>
+                  {isRecord && (
+                    <motion.span
+                      className="badge"
+                      initial={{ scale: 0.6, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 16,
+                      }}
+                      style={{ borderColor: GOLD, color: GOLD, fontWeight: 800 }}
+                    >
+                      ★ Record!
+                    </motion.span>
+                  )}
+                </div>
+              )}
+
+              <div
+                className="row center wrap"
+                style={{ gap: 12, marginTop: 12 }}
+              >
+                {state.share && (
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => void handleCopy()}
+                  >
+                    Copiaza rezultatul
+                  </button>
+                )}
+                <button
+                  type="button"
+                  className="btn btn-ghost"
+                  onClick={() => setState(null)}
+                >
                   Joc nou →
                 </button>
                 <button type="button" className="btn btn-ghost" onClick={onExit}>
@@ -371,7 +596,11 @@ function Slot({ item }: { item: InventoryItem | undefined }) {
     return (
       <span
         className="chip faint"
-        style={{ borderStyle: "dashed", minWidth: 90, justifyContent: "center" }}
+        style={{
+          borderStyle: "dashed",
+          minWidth: 90,
+          justifyContent: "center",
+        }}
       >
         alege…
       </span>

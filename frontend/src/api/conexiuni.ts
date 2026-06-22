@@ -1,0 +1,129 @@
+// Typed, same-origin fetch wrappers for the Conexiuni (NYT Connections) word game.
+// Server-authoritative: the per-category grouping + the full solution are only revealed
+// by the backend once the game is won or lost. The client renders what it returns.
+
+import { ApiError } from "./client";
+
+export type Difficulty = "usor" | "normal" | "greu";
+
+export interface Tile {
+  id: string;
+  label: string;
+}
+
+export interface SolvedGroup {
+  key: string;
+  label: string;
+  tiles: Tile[];
+}
+
+export interface ConexiuniState {
+  game_id: string;
+  tiles: Tile[];
+  solved: SolvedGroup[];
+  lives: number;
+  mistakes: number;
+  won: boolean;
+  lost: boolean;
+  difficulty: Difficulty;
+  daily?: string;
+  // present only once finished:
+  score?: number;
+  share?: string;
+  solution?: SolvedGroup[];
+}
+
+/** Result of a /guess call. */
+export interface GuessResult {
+  ok: true;
+  correct: boolean;
+  // correct === true:
+  category?: { key: string; label: string };
+  tiles?: Tile[];
+  solved?: SolvedGroup[];
+  won?: boolean;
+  // correct === false:
+  one_away?: boolean;
+  mistakes?: number;
+  lost?: boolean;
+  // shared:
+  lives: number;
+  // present on finish (win or loss):
+  score?: number;
+  share?: string;
+  solution?: SolvedGroup[];
+}
+
+const JSON_HEADERS = { "Content-Type": "application/json" } as const;
+const BASE = "/api/wordgames/conexiuni";
+
+async function parse<T>(res: Response): Promise<T> {
+  const text = await res.text();
+  let body: unknown = null;
+  if (text) {
+    try {
+      body = JSON.parse(text);
+    } catch {
+      body = text;
+    }
+  }
+  if (!res.ok) {
+    const detail =
+      body && typeof body === "object" && "detail" in body
+        ? String((body as { detail: unknown }).detail)
+        : typeof body === "string" && body
+          ? body
+          : res.statusText;
+    throw new ApiError(res.status, detail || `request failed (${res.status})`);
+  }
+  return body as T;
+}
+
+async function getJson<T>(url: string): Promise<T> {
+  return parse<T>(await fetch(url, { headers: { Accept: "application/json" } }));
+}
+
+async function postJson<T>(url: string, body?: unknown): Promise<T> {
+  return parse<T>(
+    await fetch(url, {
+      method: "POST",
+      headers: JSON_HEADERS,
+      body: body === undefined ? undefined : JSON.stringify(body),
+    }),
+  );
+}
+
+export interface CreateOpts {
+  seed?: number;
+  difficulty?: Difficulty;
+  daily?: string;
+}
+
+/** POST /games — start a new board. */
+export function createConexiuni(opts: CreateOpts = {}): Promise<ConexiuniState> {
+  const q = new URLSearchParams();
+  if (opts.seed !== undefined) q.set("seed", String(opts.seed));
+  if (opts.difficulty) q.set("difficulty", opts.difficulty);
+  if (opts.daily) q.set("daily", opts.daily);
+  const qs = q.toString();
+  return postJson<ConexiuniState>(`${BASE}/games${qs ? `?${qs}` : ""}`);
+}
+
+/** GET /games/{id} — full current state (solution hidden until won/lost). */
+export function getConexiuni(gameId: string): Promise<ConexiuniState> {
+  return getJson<ConexiuniState>(`${BASE}/games/${encodeURIComponent(gameId)}`);
+}
+
+/** POST /games/{id}/guess — submit exactly 4 distinct tile ids. */
+export function guessConexiuni(gameId: string, ids: string[]): Promise<GuessResult> {
+  return postJson<GuessResult>(
+    `${BASE}/games/${encodeURIComponent(gameId)}/guess`,
+    { ids },
+  );
+}
+
+export const conexiuniApi = {
+  create: createConexiuni,
+  get: getConexiuni,
+  guess: guessConexiuni,
+};

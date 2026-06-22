@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
+  type Difficulty,
   type HintResult,
   type LantState,
   type PathStep,
@@ -12,6 +13,16 @@ import {
 import { ApiError } from "../api/client";
 import type { ToastKind } from "../components/Toast";
 import { sound } from "../sound";
+import { bestScore, recordScore } from "../scores";
+import { copyResult, todayLocal } from "../share";
+
+const GAME_KEY = "lant";
+
+const DIFFICULTIES: { key: Difficulty; label: string; hint: string }[] = [
+  { key: "usor", label: "Usor", hint: "2-3 salturi" },
+  { key: "normal", label: "Normal", hint: "3-4 salturi" },
+  { key: "greu", label: "Greu", hint: "4-6 salturi" },
+];
 
 // Lantul Cuvintelor — a text-only word-ladder. The player types a concept directly
 // linked to the CURRENT one, hopping toward the TARGET in as few moves as possible.
@@ -72,35 +83,55 @@ export default function Lant({
   onToast: (message: string, kind?: ToastKind) => void;
 }) {
   const [state, setState] = useState<LantState | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
   const [shake, setShake] = useState(0);
   const [hint, setHint] = useState<HintResult | null>(null);
+  const [difficulty, setDifficulty] = useState<Difficulty>("normal");
+  const [scored, setScored] = useState<{ score: number; isBest: boolean } | null>(
+    null,
+  );
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const start = useCallback(async () => {
-    setLoading(true);
-    setHint(null);
-    try {
-      const fresh = await createLant();
-      setState(fresh);
-      setText("");
-    } catch (err) {
-      onToast(
-        err instanceof ApiError
-          ? `Nu am putut porni jocul (${err.status}).`
-          : "Nu am putut porni jocul.",
-        "error",
-      );
-    } finally {
-      setLoading(false);
-    }
-  }, [onToast]);
+  const best = useMemo(() => bestScore(GAME_KEY), []);
 
+  const start = useCallback(
+    async (opts?: { difficulty?: Difficulty; daily?: string }) => {
+      setLoading(true);
+      setHint(null);
+      setScored(null);
+      try {
+        const fresh = await createLant({
+          difficulty: opts?.difficulty ?? difficulty,
+          daily: opts?.daily,
+        });
+        setState(fresh);
+        setText("");
+      } catch (err) {
+        onToast(
+          err instanceof ApiError
+            ? `Nu am putut porni jocul (${err.status}).`
+            : "Nu am putut porni jocul.",
+          "error",
+        );
+      } finally {
+        setLoading(false);
+      }
+    },
+    [onToast, difficulty],
+  );
+
+  // Record the score exactly once when the game is won.
   useEffect(() => {
-    void start();
-  }, [start]);
+    if (!state?.won || state.score === undefined || scored) return;
+    const detail = `${state.moves}/${state.optimal} mutari${
+      state.daily ? ` · ${state.daily}` : ""
+    }`;
+    const { isBest } = recordScore(GAME_KEY, state.score, detail);
+    setScored({ score: state.score, isBest });
+    if (isBest) sound.playRecord();
+  }, [state, scored]);
 
   useEffect(() => {
     if (state && !state.won) inputRef.current?.focus();
@@ -135,6 +166,8 @@ export default function Lant({
               path: res.path ?? prev.path,
               moves: res.moves ?? prev.moves,
               won: res.won ?? prev.won,
+              score: res.score ?? prev.score,
+              share: res.share ?? prev.share,
             }
           : prev,
       );
@@ -191,10 +224,101 @@ export default function Lant({
     }
   }
 
-  if (loading || !state) {
+  async function handleCopy() {
+    if (!state?.share) return;
+    const ok = await copyResult(state.share);
+    if (ok) onToast("Copiat!", "info");
+    else onToast("Nu am putut copia.", "error");
+  }
+
+  if (loading) {
     return (
       <div className="screen-pad fill center">
         <p className="muted">Se pregateste lantul…</p>
+      </div>
+    );
+  }
+
+  // Intro: difficulty picker + daily challenge.
+  if (!state) {
+    return (
+      <div className="screen-pad fill">
+        <div className="container col" style={{ gap: 18 }}>
+          <div className="spread row" style={{ alignItems: "center" }}>
+            <button type="button" className="btn btn-ghost" onClick={onExit}>
+              ← Meniu
+            </button>
+            {best && (
+              <span className="badge" title="Cel mai bun scor">
+                Record: {best.score}
+              </span>
+            )}
+          </div>
+
+          <motion.div
+            className="card col"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            style={{ gap: 16, padding: 22 }}
+          >
+            <div className="col" style={{ gap: 4 }}>
+              <h1
+                style={{
+                  margin: 0,
+                  fontFamily: "var(--font-display)",
+                  color: ACCENT,
+                }}
+              >
+                Lantul Cuvintelor
+              </h1>
+              <p className="muted" style={{ margin: 0 }}>
+                Sari de la un concept la altul prin legaturi reale, pana la tinta.
+                Cu cat mai putine salturi, cu atat scor mai mare.
+              </p>
+            </div>
+
+            <div className="col" style={{ gap: 8 }}>
+              <span className="faint" style={{ fontSize: "0.72rem" }}>
+                DIFICULTATE
+              </span>
+              <div className="row wrap" style={{ gap: 8 }}>
+                {DIFFICULTIES.map((d) => (
+                  <button
+                    key={d.key}
+                    type="button"
+                    className={`btn ${
+                      difficulty === d.key ? "btn-primary" : "btn-ghost"
+                    }`}
+                    onClick={() => setDifficulty(d.key)}
+                  >
+                    {d.label}
+                    <span className="faint" style={{ marginLeft: 6, fontSize: "0.7rem" }}>
+                      {d.hint}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="row wrap" style={{ gap: 12, marginTop: 4 }}>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => void start({ difficulty })}
+              >
+                Joaca →
+              </button>
+              <button
+                type="button"
+                className="btn btn-ghost"
+                onClick={() => void start({ difficulty, daily: todayLocal() })}
+                title="Acelasi lant pentru toata lumea, azi"
+              >
+                ⭐ Provocarea zilei
+              </button>
+            </div>
+          </motion.div>
+        </div>
       </div>
     );
   }
@@ -208,6 +332,11 @@ export default function Lant({
             ← Meniu
           </button>
           <div className="row" style={{ gap: 8 }}>
+            {state.daily && (
+              <span className="badge" title="Provocarea zilei">
+                ⭐ {state.daily}
+              </span>
+            )}
             <span className="badge" title="Mutari facute">
               {state.moves} mutari
             </span>
@@ -301,11 +430,49 @@ export default function Lant({
               <strong style={{ color: "var(--text)" }}>{state.moves}</strong>{" "}
               salturi (optim {state.optimal}).
             </p>
+
+            {state.score !== undefined && (
+              <div className="col center" style={{ gap: 4 }}>
+                <span className="faint" style={{ fontSize: "0.72rem" }}>
+                  SCOR
+                </span>
+                <div
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 800,
+                    fontSize: "2rem",
+                    color: TARGET_COLOR,
+                  }}
+                >
+                  {state.score}
+                </div>
+                {scored?.isBest && (
+                  <motion.span
+                    className="badge"
+                    initial={{ scale: 0.6, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    style={{ borderColor: TARGET_COLOR, color: TARGET_COLOR }}
+                  >
+                    🏆 Record!
+                  </motion.span>
+                )}
+              </div>
+            )}
+
             <div className="row wrap center" style={{ gap: 12, marginTop: 4 }}>
+              {state.share && (
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => void handleCopy()}
+                >
+                  Copiaza rezultatul
+                </button>
+              )}
               <button
                 type="button"
-                className="btn btn-primary"
-                onClick={() => void start()}
+                className="btn btn-ghost"
+                onClick={() => setState(null)}
               >
                 Lant nou →
               </button>
