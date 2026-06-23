@@ -14,9 +14,11 @@ from __future__ import annotations
 
 import hashlib
 import threading
+import time
 import unicodedata
 import uuid
-from collections import deque
+from collections import OrderedDict, deque
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from functools import lru_cache
 from typing import Generic, TypeVar
@@ -165,28 +167,114 @@ def get_service() -> WordGameService:
 # --------------------------------------------------------------------- sessions
 S = TypeVar("S")
 
+# Every POST /games mints a fresh uuid-keyed session and nothing ever removed them, so a
+# long-lived server (or a bot spamming /games) would leak memory without bound. The store
+# therefore self-trims: idle sessions pass a TTL and a hard cap evicts the
+# least-recently-used once too many pile up. Defaults are generous — a sitting fits inside
+# the TTL and the cap only bites under abuse — but both are tunable per store.
+DEFAULT_SESSION_TTL_SECONDS = 6 * 60 * 60  # 6h: long enough to finish, then reclaim.
+DEFAULT_MAX_SESSIONS = 10_000  # hard ceiling so a flood of /games can't exhaust memory.
+
 
 class SessionStore(Generic[S]):
-    """Thread-safe uuid4-keyed store for one game's in-progress sessions."""
+    """Thread-safe uuid4-keyed store for one game's in-progress sessions.
 
-    def __init__(self) -> None:
-        self._sessions: dict[str, S] = {}
+    Bounded in two complementary ways so it cannot grow without limit:
+
+    * **TTL (sliding):** a session untouched for ``ttl_seconds`` is treated as abandoned
+      and reclaimed. Every :meth:`get` refreshes the deadline, so an actively played game
+      never expires mid-session — only idle ones do. Pass ``ttl_seconds=None`` to disable
+      time-based expiry.
+    * **Max size (LRU):** at most ``max_sessions`` live at once; creating beyond the cap
+      evicts the least-recently-used entry. Pass ``max_sessions=None`` to disable the cap.
+
+    Eviction is lazy — it runs inside :meth:`create`/:meth:`get`/:meth:`__len__` under the
+    lock, so there is no background thread to manage. Entries are held in least- to
+    most-recently-used order; with a uniform TTL the oldest are always at the front, which
+    makes both the TTL sweep and the cap eviction cheap front-pops. ``clock`` is injectable
+    (defaults to :func:`time.monotonic`, which is immune to wall-clock jumps) purely so
+    tests can drive expiry deterministically without sleeping.
+    """
+
+    def __init__(
+        self,
+        *,
+        ttl_seconds: float | None = DEFAULT_SESSION_TTL_SECONDS,
+        max_sessions: int | None = DEFAULT_MAX_SESSIONS,
+        clock: Callable[[], float] = time.monotonic,
+    ) -> None:
+        if max_sessions is not None and max_sessions < 1:
+            raise ValueError("max_sessions must be >= 1 or None")
+        # sid -> (session, last_access_time); insertion/access order == LRU order.
+        self._sessions: OrderedDict[str, tuple[S, float]] = OrderedDict()
+        self._ttl = ttl_seconds
+        self._max = max_sessions
+        self._clock = clock
         self._lock = threading.Lock()
 
+    # ----------------------------------------------------------- internal (lock held)
+    def _purge_expired(self, now: float) -> int:
+        """Drop sessions past their sliding TTL; returns how many were removed.
+
+        Entries sit in least-recently-used order, so with a uniform TTL the soonest to
+        expire are at the front: pop from the front until one is still alive.
+        """
+        if self._ttl is None:
+            return 0
+        removed = 0
+        while self._sessions:
+            sid = next(iter(self._sessions))
+            _session, last = self._sessions[sid]
+            if now - last <= self._ttl:
+                break
+            self._sessions.popitem(last=False)
+            removed += 1
+        return removed
+
+    def _evict_to_cap(self) -> None:
+        """Drop the least-recently-used entries until the size cap is satisfied."""
+        if self._max is None:
+            return
+        while len(self._sessions) > self._max:
+            self._sessions.popitem(last=False)
+
+    # ----------------------------------------------------------- public API
     def create(self, session: S) -> str:
         sid = str(uuid.uuid4())
         with self._lock:
-            self._sessions[sid] = session
+            now = self._clock()
+            self._purge_expired(now)
+            self._sessions[sid] = (session, now)  # newest -> most-recently-used (at end)
+            self._evict_to_cap()
         return sid
 
     def get(self, sid: str) -> S | None:
         with self._lock:
-            return self._sessions.get(sid)
+            now = self._clock()
+            self._purge_expired(now)
+            entry = self._sessions.get(sid)
+            if entry is None:
+                return None
+            session, _last = entry
+            # Sliding TTL: a touched session is alive and becomes most-recently-used.
+            self._sessions[sid] = (session, now)
+            self._sessions.move_to_end(sid)
+            return session
 
     def delete(self, sid: str) -> bool:
         with self._lock:
             return self._sessions.pop(sid, None) is not None
 
+    def purge_expired(self) -> int:
+        """Evict every session past its TTL now; returns the count removed.
+
+        Runs automatically on each access; exposed for an optional periodic sweep and
+        for tests.
+        """
+        with self._lock:
+            return self._purge_expired(self._clock())
+
     def __len__(self) -> int:
         with self._lock:
+            self._purge_expired(self._clock())
             return len(self._sessions)
