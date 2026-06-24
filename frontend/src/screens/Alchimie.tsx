@@ -20,7 +20,7 @@ import { ResultCard } from "../components/ResultCard";
 import { DifficultyPicker } from "../components/DifficultyPicker";
 import { sound } from "../sound";
 import { bestScore, recordScore } from "../scores";
-import { copyResult, todayLocal } from "../share";
+import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 
 const GAME_KEY = "alchimie";
 
@@ -51,6 +51,7 @@ export default function Alchimie({
   const [lastMessage, setLastMessage] = useState<string | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>("normal");
   const [isRecord, setIsRecord] = useState(false);
+  const [isPuzzleRecord, setIsPuzzleRecord] = useState(false);
   // Guards against recording the same finished game twice.
   const recordedFor = useRef<string | null>(null);
 
@@ -67,6 +68,7 @@ export default function Alchimie({
         setHintIds(new Set());
         setLastMessage(null);
         setIsRecord(false);
+        setIsPuzzleRecord(false);
         recordedFor.current = null;
       } catch (err) {
         onToast(
@@ -84,6 +86,31 @@ export default function Alchimie({
 
   const won = state?.won ?? false;
 
+  const puzzleKey = useMemo(() => {
+    if (!state?.won || !state.target.id) return null;
+    const seeds = state.inventory
+      .filter((item) => item.parents === null)
+      .map((item) => item.id)
+      .sort()
+      .join(",");
+    return stableKey([
+      GAME_KEY,
+      state.daily ? `daily-${state.daily}` : state.difficulty,
+      state.target.id,
+      seeds,
+    ]);
+  }, [state]);
+
+  const sharePayload = useMemo(() => {
+    if (!state?.won || !state.share) return null;
+    return buildSharePayload({
+      gameTitle: "Alchimie",
+      serverShare: state.share,
+      score: state.score,
+      puzzleKey,
+    });
+  }, [state, puzzleKey]);
+
   // Win arpeggio fires once when we transition into the won state.
   useEffect(() => {
     if (won) sound.playWin();
@@ -97,12 +124,17 @@ export default function Alchimie({
     const detail = state.daily
       ? `Zilnic ${state.daily} · ${state.moves} combinari`
       : `${state.difficulty} · ${state.moves} combinari`;
-    const { isBest } = recordScore(GAME_KEY, state.score, detail);
+    const { isBest, isPuzzleBest } = recordScore(GAME_KEY, state.score, detail, {
+      puzzleKey,
+    });
+    setIsPuzzleRecord(isPuzzleBest);
     if (isBest) {
       setIsRecord(true);
       sound.playRecord();
+    } else if (isPuzzleBest) {
+      sound.playRecord();
     }
-  }, [state]);
+  }, [state, puzzleKey]);
 
   const toggle = useCallback(
     (id: string) => {
@@ -212,10 +244,10 @@ export default function Alchimie({
   }, [state, busy, won, onToast]);
 
   const handleCopy = useCallback(async () => {
-    if (!state?.share) return;
-    const ok = await copyResult(state.share);
+    if (!sharePayload) return;
+    const ok = await copyResult(sharePayload);
     onToast(ok ? "Copiat!" : "Nu am putut copia.", ok ? "info" : "error");
-  }, [state, onToast]);
+  }, [sharePayload, onToast]);
 
   // Reveal a parent hint on hover/long-press: which two concepts produced a chip.
   const parentsOf = useCallback(
@@ -575,7 +607,8 @@ export default function Alchimie({
               accent={GOLD}
               score={state.score}
               isRecord={isRecord}
-              shareText={state.share}
+              isPuzzleRecord={isPuzzleRecord}
+              shareText={sharePayload}
               onCopy={() => void handleCopy()}
               onReplay={() => setState(null)}
               onExit={onExit}

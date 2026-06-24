@@ -5,7 +5,7 @@
 // The server is the only source of truth (it holds the secret + sorts the guess list
 // best-first); this component only renders what it returns and surfaces errors as toasts.
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { ToastKind } from "../components/Toast";
 import { GameShell } from "../components/GameShell";
@@ -23,7 +23,7 @@ import {
   type Temperature,
 } from "../api/contexto";
 import { recordScore, bestScore } from "../scores";
-import { copyResult, todayLocal } from "../share";
+import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 
 const GAME_KEY = "contexto";
 
@@ -147,6 +147,7 @@ export default function CaldRece({
   // Intro is shown until the player picks how to start.
   const [showIntro, setShowIntro] = useState(true);
   const [isRecord, setIsRecord] = useState(false);
+  const [isPuzzleRecord, setIsPuzzleRecord] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   // The score recorded for the current finished game (guards against double-record).
   const recordedFor = useRef<string | null>(null);
@@ -162,6 +163,7 @@ export default function CaldRece({
         setLatestId(null);
         setText("");
         setIsRecord(false);
+        setIsPuzzleRecord(false);
         recordedFor.current = null;
         setShowIntro(false);
         inputRef.current?.focus();
@@ -183,6 +185,25 @@ export default function CaldRece({
   const gaveUp = state?.gave_up ?? false;
   const finished = won || gaveUp;
 
+  const puzzleKey = useMemo(() => {
+    if (!state?.won || !state.target) return null;
+    return stableKey([
+      GAME_KEY,
+      state.daily ? `daily-${state.daily}` : state.difficulty,
+      state.target.id,
+    ]);
+  }, [state]);
+
+  const sharePayload = useMemo(() => {
+    if (!state?.won || !state.share) return null;
+    return buildSharePayload({
+      gameTitle: "Cald sau Rece",
+      serverShare: state.share,
+      score: state.score,
+      puzzleKey,
+    });
+  }, [state, puzzleKey]);
+
   // Record the score exactly once when a game is won.
   useEffect(() => {
     if (!state || !state.won || state.score === undefined) return;
@@ -191,12 +212,17 @@ export default function CaldRece({
     const detail = state.daily
       ? `Zilnic ${state.daily} · ${state.attempts} incercari`
       : `${difficulty} · ${state.attempts} incercari`;
-    const { isBest } = recordScore(GAME_KEY, state.score, detail);
+    const { isBest, isPuzzleBest } = recordScore(GAME_KEY, state.score, detail, {
+      puzzleKey,
+    });
+    setIsPuzzleRecord(isPuzzleBest);
     if (isBest) {
       setIsRecord(true);
       sound.playRecord();
+    } else if (isPuzzleBest) {
+      sound.playRecord();
     }
-  }, [state, difficulty]);
+  }, [state, difficulty, puzzleKey]);
 
   const handleGuess = useCallback(
     async (e?: React.FormEvent) => {
@@ -275,10 +301,10 @@ export default function CaldRece({
   }, [state, busy, finished, onToast]);
 
   const handleCopy = useCallback(async () => {
-    if (!state?.share) return;
-    const ok = await copyResult(state.share);
+    if (!sharePayload) return;
+    const ok = await copyResult(sharePayload);
     onToast(ok ? "Copiat!" : "Nu am putut copia.", ok ? "info" : "error");
-  }, [state, onToast]);
+  }, [sharePayload, onToast]);
 
   // On the intro screen: Enter starts the chosen difficulty (no mouse needed).
   useEffect(() => {
@@ -513,7 +539,8 @@ export default function CaldRece({
               won={won}
               score={won ? state.score : undefined}
               isRecord={isRecord}
-              shareText={won ? state.share : null}
+              isPuzzleRecord={isPuzzleRecord}
+              shareText={sharePayload}
               onCopy={() => void handleCopy()}
               onReplay={() => setShowIntro(true)}
             >

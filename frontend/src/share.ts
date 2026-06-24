@@ -1,6 +1,39 @@
-// share.ts — copy a Wordle-style result string to the clipboard. Uses the async
-// Clipboard API with a hidden-textarea fallback (older browsers / non-secure contexts).
-// Returns whether the copy succeeded; never throws.
+// share.ts — deterministic local share helpers. The server owns the game result text;
+// the client wraps it with a stable app URL + puzzle id for a richer copy payload.
+// Clipboard writes use the async API with a hidden-textarea fallback and never throw.
+
+export interface SharePayloadOptions {
+  gameTitle: string;
+  serverShare: string;
+  score?: number;
+  puzzleKey?: string | null;
+  appUrl?: string;
+}
+
+export function appUrl(): string {
+  if (typeof window === "undefined") return "cat_de_roman_esti";
+  return `${window.location.origin}${window.location.pathname}`;
+}
+
+export function stableKey(parts: Array<string | number | null | undefined>): string {
+  return parts
+    .filter((part): part is string | number => part !== null && part !== undefined && part !== "")
+    .map((part) => String(part).trim().toLowerCase())
+    .join(":");
+}
+
+export function buildSharePayload({
+  gameTitle,
+  serverShare,
+  score,
+  puzzleKey,
+  appUrl: url = appUrl(),
+}: SharePayloadOptions): string {
+  const lines = [serverShare.trim(), "", `Joaca: ${url}`];
+  if (score !== undefined) lines.push(`Scor: ${score}`);
+  if (puzzleKey) lines.push(`Puzzle: ${gameTitle} · ${puzzleKey}`);
+  return lines.join("\n");
+}
 
 export async function copyResult(text: string): Promise<boolean> {
   try {

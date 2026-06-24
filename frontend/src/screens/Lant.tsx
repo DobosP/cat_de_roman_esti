@@ -17,7 +17,7 @@ import { ResultCard } from "../components/ResultCard";
 import { DifficultyPicker } from "../components/DifficultyPicker";
 import { sound } from "../sound";
 import { bestScore, recordScore } from "../scores";
-import { copyResult, todayLocal } from "../share";
+import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 
 const GAME_KEY = "lant";
 
@@ -92,12 +92,35 @@ export default function Lant({
   const [shake, setShake] = useState(0);
   const [hint, setHint] = useState<HintResult | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>("normal");
-  const [scored, setScored] = useState<{ score: number; isBest: boolean } | null>(
-    null,
-  );
+  const [scored, setScored] = useState<{
+    score: number;
+    isBest: boolean;
+    isPuzzleBest: boolean;
+  } | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const best = useMemo(() => bestScore(GAME_KEY), []);
+
+  const puzzleKey = useMemo(() => {
+    if (!state?.won) return null;
+    return stableKey([
+      GAME_KEY,
+      state.daily ? `daily-${state.daily}` : state.difficulty,
+      state.start.id,
+      state.target.id,
+      state.optimal,
+    ]);
+  }, [state]);
+
+  const sharePayload = useMemo(() => {
+    if (!state?.won || !state.share) return null;
+    return buildSharePayload({
+      gameTitle: "Lantul Cuvintelor",
+      serverShare: state.share,
+      score: state.score,
+      puzzleKey,
+    });
+  }, [state, puzzleKey]);
 
   const start = useCallback(
     async (opts?: { difficulty?: Difficulty; daily?: string }) => {
@@ -131,10 +154,12 @@ export default function Lant({
     const detail = `${state.moves}/${state.optimal} mutari${
       state.daily ? ` · ${state.daily}` : ""
     }`;
-    const { isBest } = recordScore(GAME_KEY, state.score, detail);
-    setScored({ score: state.score, isBest });
-    if (isBest) sound.playRecord();
-  }, [state, scored]);
+    const { isBest, isPuzzleBest } = recordScore(GAME_KEY, state.score, detail, {
+      puzzleKey,
+    });
+    setScored({ score: state.score, isBest, isPuzzleBest });
+    if (isBest || isPuzzleBest) sound.playRecord();
+  }, [state, scored, puzzleKey]);
 
   useEffect(() => {
     if (state && !state.won) inputRef.current?.focus();
@@ -244,8 +269,8 @@ export default function Lant({
   }
 
   async function handleCopy() {
-    if (!state?.share) return;
-    const ok = await copyResult(state.share);
+    if (!sharePayload) return;
+    const ok = await copyResult(sharePayload);
     if (ok) onToast("Copiat!", "info");
     else onToast("Nu am putut copia.", "error");
   }
@@ -418,7 +443,8 @@ export default function Lant({
             accent={TARGET_COLOR}
             score={state.score}
             isRecord={scored?.isBest ?? false}
-            shareText={state.share}
+            isPuzzleRecord={scored?.isPuzzleBest ?? false}
+            shareText={sharePayload}
             onCopy={() => void handleCopy()}
             onReplay={() => setState(null)}
             onExit={onExit}

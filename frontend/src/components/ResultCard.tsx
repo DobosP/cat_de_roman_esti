@@ -18,6 +18,7 @@ export function ResultCard({
   score,
   scoreLabel = "SCOR",
   isRecord = false,
+  isPuzzleRecord = false,
   shareText,
   onCopy,
   onReplay,
@@ -39,6 +40,8 @@ export function ResultCard({
   scoreLabel?: string;
   /** Show the personal-best celebration badge. */
   isRecord?: boolean;
+  /** Show that this run is the local best for this exact puzzle. */
+  isPuzzleRecord?: boolean;
   /** When present (and onCopy given), renders a "Copiaza rezultatul" button. */
   shareText?: string | null;
   onCopy?: () => void;
@@ -101,6 +104,17 @@ export function ResultCard({
               style={{ borderColor: "var(--warn)", color: "var(--warn)", fontWeight: 800 }}
             >
               ★ Record!
+            </motion.span>
+          )}
+          {!isRecord && isPuzzleRecord && (
+            <motion.span
+              className="badge"
+              initial={{ scale: 0.6, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 300, damping: 16 }}
+              style={{ borderColor: "var(--good)", color: "var(--good)", fontWeight: 800 }}
+            >
+              ★ Record puzzle
             </motion.span>
           )}
         </div>

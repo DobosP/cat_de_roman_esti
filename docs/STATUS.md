@@ -63,9 +63,11 @@ Actions CI** gate.
   `cat_de_roman_esti/web/static/`.
 - **v1.1 UX:** an **Undo** button + Backspace (server-authoritative `/api/games/{id}/undo`),
   **multi-puzzle runs** (a session tally of solved-count + cumulative score, each win counted
-  once), an offline **leaderboard** (`leaderboard.ts`, localStorage best score/hops per
-  category+mode + best run, shown on Menu + a "record personal" badge on Win), and **sound +
-  animation polish** (undo blip, new-record sparkle).
+  once), an offline **leaderboard** (`scores.ts`, localStorage best score + recent runs),
+  and **sound + animation polish** (undo blip, new-record sparkle).
+- **v1.2 UX:** completed word-game runs copy a deterministic share payload that wraps the
+  server-authored result with the app URL, score, and stable completed-puzzle key; the local
+  leaderboard now also tracks per-puzzle personal bests and surfaces a "Record puzzle" badge.
 
 ### Hardening
 - `scripts/validate_fixture.py` — stdlib CI-gate validator, **13 invariant classes** (incl. the
@@ -115,4 +117,4 @@ Consumes `kg_nodes` / `kg_edges` / `kg_puzzles` from `ro_data_server` via the ve
 - **Live end-to-end smoke** against a running `ro_data_server` (only the offline path is exercised
   here). _(needs a live server)_
 - **More content still:** keep expanding nodes/puzzles/bridges via `scripts/expand_content.py`.
-- **UX:** undo-redo history, shareable run results, richer leaderboard (per-puzzle bests).
+- **UX:** undo-redo history, richer leaderboard views/history import-export.

@@ -24,7 +24,7 @@ import { DifficultyPicker } from "../components/DifficultyPicker";
 import { sound } from "../sound";
 import { categoryColor } from "../theme/tokens";
 import { recordScore, bestScore } from "../scores";
-import { copyResult, todayLocal } from "../share";
+import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 
 const GAME_KEY = "conexiuni";
 const ACCENT = "#5fd99b";
@@ -51,6 +51,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const [selected, setSelected] = useState<string[]>([]);
   const [difficulty, setDifficulty] = useState<Difficulty>("normal");
   const [recordHit, setRecordHit] = useState(false);
+  const [puzzleRecordHit, setPuzzleRecordHit] = useState(false);
   const [shake, setShake] = useState(0);
   // Client-only display order for the remaining tiles (the "shuffle" button reorders
   // these; the authoritative grouping never changes). Keyed by tile id.
@@ -68,6 +69,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     async (mode: StartMode) => {
       setLoading(true);
       setRecordHit(false);
+      setPuzzleRecordHit(false);
       try {
         const s =
           mode.kind === "daily"
@@ -116,21 +118,51 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
 
   const finished = (state?.won ?? false) || (state?.lost ?? false);
 
+  const puzzleKey = useMemo(() => {
+    if (!state || !finished) return null;
+    const groups = state.solution ?? (state.won ? state.solved : []);
+    if (groups.length === 0) return null;
+    const groupKey = groups
+      .map((group) => `${group.key}=${group.tiles.map((tile) => tile.id).sort().join(",")}`)
+      .sort()
+      .join("|");
+    return stableKey([
+      GAME_KEY,
+      state.daily ? `daily-${state.daily}` : state.difficulty,
+      groupKey,
+    ]);
+  }, [state, finished]);
+
+  const sharePayload = useMemo(() => {
+    if (!state || !finished || !state.share) return null;
+    return buildSharePayload({
+      gameTitle: "Conexiuni",
+      serverShare: state.share,
+      score: state.score,
+      puzzleKey,
+    });
+  }, [state, finished, puzzleKey]);
+
   // Record the score + best once, on transition into a finished state.
   useEffect(() => {
     if (!state || !finished || state.score === undefined) return;
     const detail = state.won
       ? `${state.mistakes} greseli`
       : `pierdut · ${state.mistakes} greseli`;
-    const { isBest } = recordScore(GAME_KEY, state.score, detail);
+    const { isBest, isPuzzleBest } = recordScore(GAME_KEY, state.score, detail, {
+      puzzleKey,
+    });
     if (state.won) sound.playWin();
     else sound.playError();
     if (isBest) {
       setRecordHit(true);
       sound.playRecord();
+    } else if (isPuzzleBest) {
+      sound.playRecord();
     }
+    setPuzzleRecordHit(isPuzzleBest);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [finished, state?.score]);
+  }, [finished, state?.score, puzzleKey]);
 
   const toggle = useCallback(
     (id: string) => {
@@ -205,11 +237,11 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   }, [state, selected, busy, onToast]);
 
   const copyShare = useCallback(async () => {
-    if (!state?.share) return;
-    const ok = await copyResult(state.share);
+    if (!sharePayload) return;
+    const ok = await copyResult(sharePayload);
     if (ok) onToast("Copiat!", "info");
     else onToast("Nu am putut copia.", "error");
-  }, [state, onToast]);
+  }, [sharePayload, onToast]);
 
   // Keyboard: Enter submits a full selection, Escape/Backspace clears it. Inert when
   // no board is active, while a request is in flight, or once the game is finished.
@@ -457,7 +489,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               won={state.won}
               score={state.score}
               isRecord={recordHit}
-              shareText={state.share}
+              isPuzzleRecord={puzzleRecordHit}
+              shareText={sharePayload}
               onCopy={copyShare}
               onReplay={() => void start({ kind: "seed", difficulty })}
               onExit={onExit}
