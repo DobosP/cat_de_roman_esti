@@ -208,14 +208,15 @@ def _build_board(rng: random.Random, difficulty: str) -> ConexiuniSession:
     svc = get_service()
 
     groups: dict[str, list[str]] = {}
-    # Iterate in a difficulty-independent order; pick each category's tiles while
-    # treating the already-placed tiles as the known "foreign" pool to avoid.
-    placed: set[str] = set()
+    category_members = {cat: set(svc.by_category(cat)) for cat in chosen_cats}
+    all_chosen_members = set().union(*category_members.values())
+    # Iterate in a difficulty-independent order. Each category sees the full member
+    # pool for the other chosen categories, so early categories do not unknowingly pick
+    # bridge tiles that validation will later reject once the whole board is assembled.
     for cat in chosen_cats:
-        foreign = placed  # tiles already on the board belong to other categories
+        foreign = all_chosen_members - category_members[cat]
         picked = _pick_tiles_for_category(svc, rng, cat, foreign, difficulty)
         groups[cat] = picked
-        placed |= set(picked)
 
     order = [nid for ids in groups.values() for nid in ids]
     rng.shuffle(order)
@@ -265,8 +266,9 @@ def _pick_board(rng: random.Random, difficulty: str) -> ConexiuniSession:
                 that are still individually reasoned-about (never strictly unfair).
 
     Generation is validated and retried: we draw several candidate boards from ``rng``
-    and keep the first strictly-fair one (lowest residual ambiguity), so a degenerate or
-    unwinnable board is never returned. Deterministic for a fixed seed/difficulty.
+    and keep the first strictly-fair one (lowest residual ambiguity). If validation
+    cannot produce a fair board, fail closed instead of returning a degenerate or
+    unwinnable board. Deterministic for a fixed seed/difficulty.
     """
     best: ConexiuniSession | None = None
     best_residual = 1_000_000
@@ -277,10 +279,12 @@ def _pick_board(rng: random.Random, difficulty: str) -> ConexiuniSession:
             return candidate
         if ok and residual < best_residual:
             best, best_residual = candidate, residual
-        elif best is None:
-            # keep something even if every candidate is borderline/unfair
-            best = candidate
-    return best  # type: ignore[return-value]
+    if best is not None:
+        return best
+    raise HTTPException(
+        status_code=503,
+        detail="Nu am putut genera o tabla valida; reincearca.",
+    )
 
 
 # --------------------------------------------------------------------- serializers
