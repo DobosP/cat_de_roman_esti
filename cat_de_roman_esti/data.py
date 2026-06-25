@@ -23,6 +23,19 @@ from .graph import Graph
 
 FIXTURE_DIR = Path(__file__).resolve().parent / "fixtures"
 DEFAULT_FIXTURE = FIXTURE_DIR / "kg_sample.json"
+DEFAULT_MAX_NODES = 10_000
+DEFAULT_MAX_EDGES = 50_000
+DEFAULT_MAX_PUZZLES = 5_000
+APP_PACK_APP = "cat_de_roman_esti"
+APP_PACK_LAYER = "redistributable"
+APP_PACK_SCHEMA_VERSION = 1
+KG_PRODUCTS = ("kg_nodes", "kg_edges", "kg_puzzles")
+APP_PACK_IDS = {
+    "roedu:cat_de_roman_esti:kg_nodes:v1": "kg_nodes",
+    "roedu:cat_de_roman_esti:kg_edges:v1": "kg_edges",
+    "roedu:cat_de_roman_esti:kg_puzzles:v1": "kg_puzzles",
+}
+PUBLIC_ACCESS_TYPES = {"public_document", "open_license", "public_domain"}
 
 
 class ClientLike(Protocol):
@@ -70,6 +83,78 @@ def _bundle_from_records(
     return KgBundle(graph=graph, puzzles=parsed)
 
 
+def _legal_public_item(rec: Mapping[str, object]) -> bool:
+    return (
+        bool(rec.get("redistributable") is True)
+        and str(rec.get("access_type") or "") in PUBLIC_ACCESS_TYPES
+        and bool(str(rec.get("legal_basis") or "").strip())
+        and rec.get("gdpr_relevant") is False
+    )
+
+
+def _without_public_unsafe_fields(rec: Mapping[str, object]) -> dict[str, object]:
+    """Copy one public app-pack item without internal-only provenance details."""
+    out = dict(rec)
+    provenance = out.get("provenance")
+    if isinstance(provenance, Mapping):
+        out["provenance"] = {
+            key: value
+            for key, value in provenance.items()
+            if key not in {"source_url", "sha256", "internal_path", "llms_txt"}
+        }
+    return out
+
+
+def records_from_app_packs(raw: Mapping[str, object]) -> dict[str, list[dict[str, object]]]:
+    """Normalize tagged app-pack JSON into the legacy per-product record lists.
+
+    The accepted public layer is intentionally narrow: unknown/missing legal metadata,
+    GDPR-relevant records, non-redistributable records, and internal layers are withheld
+    from the app bundle. The caller gets only redistributable KG records grouped under
+    ``kg_nodes`` / ``kg_edges`` / ``kg_puzzles``.
+    """
+    packs_obj = raw.get("packs", raw)
+    packs = packs_obj if isinstance(packs_obj, list) else [packs_obj]
+    records: dict[str, list[dict[str, object]]] = {name: [] for name in KG_PRODUCTS}
+
+    for pack_obj in packs:
+        if not isinstance(pack_obj, Mapping):
+            continue
+        if pack_obj.get("app") != APP_PACK_APP:
+            continue
+        if pack_obj.get("layer") != APP_PACK_LAYER:
+            continue
+        if pack_obj.get("schema_version") != APP_PACK_SCHEMA_VERSION:
+            continue
+        pack_product = APP_PACK_IDS.get(str(pack_obj.get("pack_id") or ""))
+        if pack_product is None:
+            continue
+        for item_obj in pack_obj.get("items", []) or []:
+            if not isinstance(item_obj, Mapping):
+                continue
+            kind = str(item_obj.get("kind") or "")
+            product = {
+                "kg_node": "kg_nodes",
+                "kg_edge": "kg_edges",
+                "kg_puzzle": "kg_puzzles",
+            }.get(kind)
+            if product is None or product != pack_product or not _legal_public_item(item_obj):
+                continue
+            records[product].append(_without_public_unsafe_fields(item_obj))
+    return records
+
+
+def load_app_pack_fixture(path: str | Path) -> KgBundle:
+    """Load a synthetic app-pack fixture shaped like ro_data_server app packs."""
+    raw = json.loads(Path(path).read_text(encoding="utf-8"))
+    records = records_from_app_packs(raw)
+    return _bundle_from_records(
+        records["kg_nodes"],
+        records["kg_edges"],
+        records["kg_puzzles"],
+    )
+
+
 def load_fixture(path: str | Path | None = None) -> KgBundle:
     """Load a bundled KG snapshot from JSON (offline play / tests)."""
     fpath = Path(path) if path else DEFAULT_FIXTURE
@@ -100,7 +185,9 @@ def load_from_client(
     *,
     category: str | None = None,
     difficulty: str | None = None,
-    max_nodes: int | None = None,
+    max_nodes: int | None = DEFAULT_MAX_NODES,
+    max_edges: int | None = DEFAULT_MAX_EDGES,
+    max_puzzles: int | None = DEFAULT_MAX_PUZZLES,
 ) -> KgBundle:
     """Pull the KG products from a live server (or fake) into a bundle.
 
@@ -134,7 +221,10 @@ def load_from_client(
     puzzles: list[Mapping[str, object]] = []
     seen_pids: set[str] = set()
     for pf in puzzle_filters:
-        for rec in client.iter("kg_puzzles", **pf):
+        remaining = None if max_puzzles is None else max(0, max_puzzles - len(puzzles))
+        if remaining == 0:
+            break
+        for rec in client.iter("kg_puzzles", max_records=remaining, **pf):
             pid = str(rec.get("id"))
             if pid in seen_pids:
                 continue
@@ -154,5 +244,5 @@ def load_from_client(
     # Edges are not category-scoped at the product level; pull all and let the graph
     # index them. Cross-category edges are harmless — neighbours() skips out-of-scope
     # destinations that aren't loaded as nodes.
-    edges = list(client.iter("kg_edges"))
+    edges = list(client.iter("kg_edges", max_records=max_edges))
     return _bundle_from_records(nodes, edges, puzzles)

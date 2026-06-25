@@ -45,6 +45,10 @@ class Node:
     salience: float = 0.0
     difficulty_tier: str = ""
     degree: int = 0
+    tags: tuple[str, ...] = ()
+    facets: Mapping[str, object] = field(default_factory=dict)
+    source: str = ""
+    redistributable: bool = False
 
     @classmethod
     def from_record(cls, rec: Mapping[str, object]) -> Node:
@@ -57,6 +61,10 @@ class Node:
             salience=_as_float(rec.get("salience")),
             difficulty_tier=str(rec.get("difficulty_tier") or ""),
             degree=int(_as_float(rec.get("degree"))),
+            tags=tuple(str(t) for t in rec.get("tags", []) or []),
+            facets=dict(rec.get("facets", {}) or {}),
+            source=str(rec.get("source") or ""),
+            redistributable=_as_bool(rec.get("redistributable", False)),
         )
 
 
@@ -76,6 +84,10 @@ class Edge:
     strength: float = 0.0
     is_distractor: bool = False
     bidirectional: bool = True
+    tags: tuple[str, ...] = ()
+    facets: Mapping[str, object] = field(default_factory=dict)
+    source: str = ""
+    redistributable: bool = False
 
     @classmethod
     def from_record(cls, rec: Mapping[str, object]) -> Edge:
@@ -88,6 +100,10 @@ class Edge:
             strength=_as_float(rec.get("strength")),
             is_distractor=_as_bool(rec.get("is_distractor", 0)),
             bidirectional=_as_bool(rec.get("bidirectional", 1)),
+            tags=tuple(str(t) for t in rec.get("tags", []) or []),
+            facets=dict(rec.get("facets", {}) or {}),
+            source=str(rec.get("source") or ""),
+            redistributable=_as_bool(rec.get("redistributable", False)),
         )
 
 

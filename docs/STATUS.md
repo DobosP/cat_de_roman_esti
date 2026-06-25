@@ -104,6 +104,16 @@ Consumes `kg_nodes` / `kg_edges` / `kg_puzzles` from `ro_data_server` via the ve
 `RoeduClient` (api key `cat-de-roman-dev`, scope-isolated). The producer `kg.db` + the three
 `kg_*` dataapi products + the auth key live in `romania_scraper` (landed on its `main`).
 
+Tagged app-pack ingest is now fixture-backed for the shared RO-EDU contract:
+`roedu:cat_de_roman_esti:kg_nodes:v1`, `roedu:cat_de_roman_esti:kg_edges:v1`, and
+`roedu:cat_de_roman_esti:kg_puzzles:v1` with `app=cat_de_roman_esti`,
+`layer=redistributable`, `schema_version=1`. The consumer retains `tags`/`facets` on
+nodes, edges, and puzzles for topic/category/difficulty/source selection, accepts only
+redistributable public/legal-safe records, strips internal provenance keys, and withholds
+missing/unknown legal or GDPR metadata. Internal/all packs are not exposed over HTTP here.
+The app-pack path currently depends on synthetic fixtures, not a live producer endpoint.
+Live product pulls are capped by default at 10,000 nodes, 50,000 edges, and 5,000 puzzles.
+
 ## Done in v1.1
 - **Pinned web deps** (`constraints.txt`, applied in the Dockerfile) for reproducible deploys.
 - **More content:** +54 nodes / +115 edges / +72 puzzles, additive + fact-checked (above).

@@ -1,0 +1,158 @@
+{
+  "packs": [
+    {
+      "pack_id": "roedu:cat_de_roman_esti:kg_nodes:v1",
+      "app": "cat_de_roman_esti",
+      "layer": "redistributable",
+      "schema_version": 1,
+      "items": [
+        {
+          "id": "n_dacia_pack",
+          "kind": "kg_node",
+          "title": "Dacia",
+          "node_type": "place",
+          "label_ro": "Dacia",
+          "canonical_name": "dacia",
+          "category": "istorie",
+          "description": "Regat antic din spatiul romanesc.",
+          "salience": 0.72,
+          "difficulty_tier": "easy",
+          "degree": 1,
+          "tags": ["topic:istorie", "category:istorie", "difficulty:easy", "source:synthetic"],
+          "facets": {
+            "grade": null,
+            "discipline": "istorie",
+            "topic": "daci",
+            "difficulty": "easy",
+            "city": null,
+            "category": "istorie"
+          },
+          "source": "synthetic-contract-fixture",
+          "provenance": {"proc_key": null},
+          "license": "synthetic redistributable fixture",
+          "access_type": "open_license",
+          "legal_basis": "synthetic fixture; redistributable test data",
+          "gdpr_relevant": false,
+          "redistributable": true,
+          "confidence": 1.0
+        },
+        {
+          "id": "n_traian_pack",
+          "kind": "kg_node",
+          "title": "Traian",
+          "node_type": "person",
+          "label_ro": "Traian",
+          "canonical_name": "traian",
+          "category": "istorie",
+          "description": "Imparat roman asociat cu razboaiele dacice.",
+          "salience": 0.68,
+          "difficulty_tier": "easy",
+          "degree": 1,
+          "tags": ["topic:istorie", "category:istorie", "difficulty:easy", "source:synthetic"],
+          "facets": {
+            "grade": null,
+            "discipline": "istorie",
+            "topic": "roma antica",
+            "difficulty": "easy",
+            "city": null,
+            "category": "istorie"
+          },
+          "source": "synthetic-contract-fixture",
+          "provenance": {"proc_key": null},
+          "license": "synthetic redistributable fixture",
+          "access_type": "open_license",
+          "legal_basis": "synthetic fixture; redistributable test data",
+          "gdpr_relevant": false,
+          "redistributable": true,
+          "confidence": 1.0
+        }
+      ],
+      "pagination": {"next_cursor": null},
+      "withheld": 0,
+      "errors": []
+    },
+    {
+      "pack_id": "roedu:cat_de_roman_esti:kg_edges:v1",
+      "app": "cat_de_roman_esti",
+      "layer": "redistributable",
+      "schema_version": 1,
+      "items": [
+        {
+          "id": "e_dacia_traian_pack",
+          "kind": "kg_edge",
+          "title": "Dacia - Traian",
+          "src_id": "n_dacia_pack",
+          "dst_id": "n_traian_pack",
+          "relation": "related_to",
+          "label_ro": "este legata de",
+          "strength": 0.91,
+          "is_distractor": 0,
+          "bidirectional": 1,
+          "tags": ["topic:istorie", "category:istorie", "difficulty:easy", "source:synthetic"],
+          "facets": {
+            "grade": null,
+            "discipline": "istorie",
+            "topic": "daci",
+            "difficulty": "easy",
+            "city": null,
+            "category": "istorie"
+          },
+          "source": "synthetic-contract-fixture",
+          "provenance": {"proc_key": null},
+          "license": "synthetic redistributable fixture",
+          "access_type": "open_license",
+          "legal_basis": "synthetic fixture; redistributable test data",
+          "gdpr_relevant": false,
+          "redistributable": true,
+          "confidence": 1.0
+        }
+      ],
+      "pagination": {"next_cursor": null},
+      "withheld": 0,
+      "errors": []
+    },
+    {
+      "pack_id": "roedu:cat_de_roman_esti:kg_puzzles:v1",
+      "app": "cat_de_roman_esti",
+      "layer": "redistributable",
+      "schema_version": 1,
+      "items": [
+        {
+          "id": "pz_dacia_traian_pack",
+          "kind": "kg_puzzle",
+          "title": "Dacia spre Traian",
+          "start_id": "n_dacia_pack",
+          "target_id": "n_traian_pack",
+          "category": "istorie",
+          "difficulty": "easy",
+          "optimal_hops": 1,
+          "par": 1,
+          "solution_path": ["n_dacia_pack", "n_traian_pack"],
+          "hint_neighbors": ["n_traian_pack"],
+          "start_salience": 0.72,
+          "target_salience": 0.68,
+          "tags": ["topic:istorie", "category:istorie", "difficulty:easy", "source:synthetic"],
+          "facets": {
+            "grade": null,
+            "discipline": "istorie",
+            "topic": "daci",
+            "difficulty": "easy",
+            "city": null,
+            "category": "istorie"
+          },
+          "source": "synthetic-contract-fixture",
+          "provenance": {"proc_key": null},
+          "license": "synthetic redistributable fixture",
+          "access_type": "open_license",
+          "legal_basis": "synthetic fixture; redistributable test data",
+          "gdpr_relevant": false,
+          "redistributable": true,
+          "confidence": 1.0
+        }
+      ],
+      "pagination": {"next_cursor": null},
+      "withheld": 0,
+      "errors": []
+    }
+  ]
+}

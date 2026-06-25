@@ -28,7 +28,14 @@ class FakeRoeduClient:
     refusal), and ``iter`` over them must yield nothing.
     """
 
-    def __init__(self, raw: dict, *, blocked: set[str] | None = None, page_size: int = 2):
+    def __init__(
+        self,
+        raw: dict,
+        *,
+        blocked: set[str] | None = None,
+        page_size: int = 2,
+        api_key: str = "cat-de-roman-dev",
+    ):
         self._data = {
             "kg_nodes": list(raw.get("kg_nodes", [])),
             "kg_edges": list(raw.get("kg_edges", [])),
@@ -36,6 +43,7 @@ class FakeRoeduClient:
         }
         self.blocked = blocked or set()
         self.page_size = page_size
+        self.api_key = api_key
         self.calls: list[tuple[str, dict]] = []
 
     def health(self) -> dict:
@@ -43,7 +51,11 @@ class FakeRoeduClient:
 
     def products(self) -> list[dict]:
         return [
-            {"name": name, "available": name not in self.blocked}
+            {
+                "name": name,
+                "available": name not in self.blocked
+                and not (name.startswith("kg_") and self.api_key != "cat-de-roman-dev"),
+            }
             for name in self._data
         ]
 
@@ -58,6 +70,8 @@ class FakeRoeduClient:
     def page(self, product: str, *, cursor=None, limit: int = 200, **filters) -> dict:
         self.calls.append((product, dict(filters, cursor=cursor, limit=limit)))
         if product in self.blocked or product not in self._data:
+            return {"available": False, "records": [], "next_cursor": None}
+        if product.startswith("kg_") and self.api_key != "cat-de-roman-dev":
             return {"available": False, "records": [], "next_cursor": None}
         records = self._filter(self._data[product], filters)
         start = int(cursor or 0)
