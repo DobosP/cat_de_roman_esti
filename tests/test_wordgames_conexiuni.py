@@ -272,6 +272,37 @@ def test_all_generated_boards_are_fair() -> None:
                 assert res["category"]["key"] == cat, ctx
 
 
+def test_board_generation_fails_closed_when_every_candidate_is_invalid(monkeypatch) -> None:
+    """Never ship a hidden unfair board if validation rejects every retry."""
+    import random
+
+    from fastapi import HTTPException
+
+    from cat_de_roman_esti.wordgames import conexiuni as C
+
+    fallback = C.ConexiuniSession(
+        groups={"istorie": ["a", "b", "c", "d"]},
+        order=["a", "b", "c", "d"],
+    )
+    monkeypatch.setattr(C, "_build_board", lambda rng, difficulty: fallback)
+    monkeypatch.setattr(C, "_board_quality", lambda session: (False, 1_000_000))
+
+    with pytest.raises(HTTPException) as exc:
+        C._pick_board(random.Random(0), "normal")
+
+    assert exc.value.status_code == 503
+
+
+def test_usor_generation_uses_full_category_context_for_bridge_tiles() -> None:
+    """Seed 7 used to pick cross-category bridge tiles before all groups were known."""
+    import random
+
+    from cat_de_roman_esti.wordgames.conexiuni import _board_quality, _pick_board
+
+    board = _pick_board(random.Random(7), "usor")
+    assert _board_quality(board) == (True, 0)
+
+
 def test_usor_is_less_entangled_than_greu() -> None:
     # 'usor' should pick clearly-distinct themes; 'greu' the trickier culture-clusters.
     from cat_de_roman_esti.wordgames.conexiuni import _set_entanglement
