@@ -15,6 +15,33 @@ the Romanian knowledge graph; we read three products and play a game on top of t
 We use only the **read** transport: `GET /v1/health`, `GET /v1/products`,
 `GET /v1/products/{name}` with `cursor` + `limit` pagination.
 
+## Tagged app-pack contract
+
+The repo also has fixture-backed support for the shared RO-EDU app-pack envelope while
+the real `ro_data_server` endpoint is being integrated. The expected public packs are:
+
+- `pack_id`: `roedu:cat_de_roman_esti:kg_nodes:v1`,
+  `roedu:cat_de_roman_esti:kg_edges:v1`, `roedu:cat_de_roman_esti:kg_puzzles:v1`
+- `app`: `cat_de_roman_esti`
+- `layer`: `redistributable`
+- `schema_version`: `1`
+- top-level fields used: `items`, `pagination.next_cursor`, `withheld`, `errors`
+- item fields used by the game contract: `id`, `kind`, `title`, `tags`, `facets`,
+  `source`, `provenance`, `license`, `access_type`, `legal_basis`, `gdpr_relevant`,
+  `redistributable`, `confidence`, plus the KG-specific node/edge/puzzle fields below
+
+`kind` maps to products as `kg_node` -> `kg_nodes`, `kg_edge` -> `kg_edges`,
+`kg_puzzle` -> `kg_puzzles`. `tags` and `facets` are retained on `Node`, `Edge`, and
+`Puzzle` so puzzle selectors can use topic/category/difficulty/source facets without
+re-reading producer internals.
+
+Public ingestion is fail-closed. The consumer accepts only `layer=redistributable`,
+`redistributable=true`, `access_type` in `public_document|open_license|public_domain`,
+non-empty `legal_basis`, and `gdpr_relevant=false`. Missing or unknown metadata,
+`tdm_exception`, non-redistributable records, and `internal` packs are withheld from the
+game bundle. Public records also drop internal-only provenance keys such as `source_url`,
+`sha256`, internal paths, and `llms.txt` references.
+
 ## API key
 
 ```
@@ -45,6 +72,7 @@ issued separately.
 | `salience` | `Node.salience` | 0..1 obscurity lever |
 | `difficulty_tier` | `Node.difficulty_tier` | easy/medium/hard band |
 | `degree` | `Node.degree` | centrality proxy |
+| `tags`,`facets`,`source`,`redistributable` | same | retained for app-pack puzzle selection |
 
 `kg_edges` → `graph.Edge`:
 
@@ -56,6 +84,7 @@ issued separately.
 | `strength` | `Edge.strength` | 0..1 |
 | `is_distractor` | `Edge.is_distractor` | coerced 1/0/"true" → bool (lever 4) |
 | `bidirectional` | `Edge.bidirectional` | coerced; default True |
+| `tags`,`facets`,`source`,`redistributable` | same | retained for app-pack puzzle selection |
 
 `kg_puzzles` → `engine.Puzzle`:
 
@@ -65,6 +94,7 @@ issued separately.
 | `optimal_hops`,`par` | same | lever 1 |
 | `solution_path` | `Puzzle.solution_path` | json-array string OR list → list[str] |
 | `hint_neighbors` | `Puzzle.hint_neighbors` | json-array string OR list → list[str] |
+| `tags`,`facets`,`source`,`redistributable` | same | retained for app-pack puzzle selection |
 
 `solution_path` / `hint_neighbors` are tolerated as either a JSON-array **string**
 (as stored in SQLite/served) or an already-parsed list — see `engine._as_id_list`.
@@ -78,6 +108,8 @@ vendored client trusts the server but is itself fail-closed: `RoeduClient.iter` 
 immediately on any page with `available=false`, so a gate refusal or an unbuilt store
 yields **zero** records. `data.load_from_client` therefore degrades to a smaller (never
 fabricated) bundle, and `HopGame.load` refuses puzzles whose nodes aren't present.
+Client pulls are bounded by default (`10_000` nodes, `50_000` edges, `5_000` puzzles);
+callers may override those caps for tests or controlled deployments.
 
 ## Offline fixture
 
@@ -87,6 +119,10 @@ plays against it; the CLI also auto-falls-back to it if the server probe (`/v1/h
 fails. The test suite drives a **fake in-process client** (`tests/conftest.py::FakeRoeduClient`)
 that re-implements the page/cursor/availability contract over the same sample — so the
 loader, pagination, and fail-closed path are all exercised with no network.
+
+`tests/fixtures/kg_app_pack_sample.json` is a synthetic redistributable app-pack
+fixture. It contains no internal source URLs, checksums, internal paths, `llms.txt`
+entries, or TDM-only item bodies.
 
 ## Running against a live server
 

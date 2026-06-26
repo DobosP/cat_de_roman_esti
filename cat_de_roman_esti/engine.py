@@ -26,7 +26,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass, field
 from enum import StrEnum
 
-from .graph import Graph, Neighbor, Node
+from .graph import Graph, Neighbor, Node, _as_bool
 
 
 class Mode(StrEnum):
@@ -56,6 +56,10 @@ class Puzzle:
     par: int
     solution_path: list[str] = field(default_factory=list)
     hint_neighbors: list[str] = field(default_factory=list)
+    tags: tuple[str, ...] = ()
+    facets: Mapping[str, object] = field(default_factory=dict)
+    source: str = ""
+    redistributable: bool = False
 
     @classmethod
     def from_record(cls, rec: Mapping[str, object]) -> Puzzle:
@@ -69,6 +73,10 @@ class Puzzle:
             par=int(rec.get("par", rec.get("optimal_hops", 0)) or 0),
             solution_path=_as_id_list(rec.get("solution_path")),
             hint_neighbors=_as_id_list(rec.get("hint_neighbors")),
+            tags=tuple(str(t) for t in rec.get("tags", []) or []),
+            facets=dict(rec.get("facets", {}) or {}),
+            source=str(rec.get("source") or ""),
+            redistributable=_as_bool(rec.get("redistributable", False)),
         )
 
 
