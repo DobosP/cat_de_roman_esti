@@ -3,11 +3,21 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from cat_de_roman_esti.data import load_app_pack_fixture, load_from_client, records_from_app_packs
+from cat_de_roman_esti.data import (
+    APP_PACK_APP,
+    APP_PACK_MANIFEST_VERSION,
+    APP_PACK_SCHEMA_VERSION,
+    content_hash,
+    fixture_manifest,
+    load_app_pack_fixture,
+    load_from_client,
+    records_from_app_packs,
+)
 
 from .conftest import FakeRoeduClient
 
 FIXTURE = Path(__file__).parent / "fixtures" / "kg_app_pack_sample.json"
+KG_SAMPLE = Path(__file__).parent / "fixtures" / "kg_sample.json"
 
 
 def test_app_pack_fixture_preserves_tags_facets_for_selection():
@@ -180,3 +190,52 @@ def test_client_load_caps_all_product_reads(kg_raw):
     assert len(bundle.graph.nodes) <= 5
     assert len(bundle.graph.edges) <= 7
     assert len(bundle.puzzles) <= 3
+
+
+# --------------------------------------------------------------------------- manifest
+# A mobile client trusts the fixture manifest to detect a stale offline bundle and pick
+# the right generated types; these pin the manifest's shape, determinism and hash rules.
+
+
+def test_fixture_manifest_shape_and_counts(kg_raw):
+    manifest = fixture_manifest(KG_SAMPLE)
+
+    assert manifest["app"] == APP_PACK_APP
+    assert manifest["schema_version"] == APP_PACK_SCHEMA_VERSION
+    assert manifest["manifest_version"] == APP_PACK_MANIFEST_VERSION
+    assert manifest["build_version"]  # non-empty human-facing label
+    assert manifest["content_hash"].startswith("sha256:")
+    assert len(manifest["content_hash"].split(":", 1)[1]) == 64  # full sha256 hex
+    # counts mirror the actual fixture payload
+    assert manifest["counts"] == {
+        "nodes": len(kg_raw["kg_nodes"]),
+        "edges": len(kg_raw["kg_edges"]),
+        "puzzles": len(kg_raw["kg_puzzles"]),
+    }
+
+
+def test_fixture_manifest_is_deterministic():
+    # Pure function of the content: same fixture -> byte-identical manifest every time.
+    assert fixture_manifest(KG_SAMPLE) == fixture_manifest(KG_SAMPLE)
+
+
+def test_content_hash_is_order_independent(kg_raw):
+    nodes, edges, puzzles = kg_raw["kg_nodes"], kg_raw["kg_edges"], kg_raw["kg_puzzles"]
+    base = content_hash(nodes, edges, puzzles)
+    # Reversing record order must NOT change the hash (canonicalised by id + sorted keys).
+    shuffled = content_hash(list(reversed(nodes)), list(reversed(edges)), list(reversed(puzzles)))
+    assert base == shuffled
+
+
+def test_content_hash_changes_when_content_changes(kg_raw):
+    nodes, edges, puzzles = kg_raw["kg_nodes"], kg_raw["kg_edges"], kg_raw["kg_puzzles"]
+    base = content_hash(nodes, edges, puzzles)
+    mutated = [dict(nodes[0], label_ro=nodes[0]["label_ro"] + " (changed)"), *nodes[1:]]
+    assert content_hash(mutated, edges, puzzles) != base
+
+
+def test_fixture_manifest_matches_bundled_copies():
+    # The two byte-identical fixture copies must yield the same trust manifest.
+    repo_root = Path(__file__).resolve().parents[1]
+    package_copy = repo_root / "cat_de_roman_esti" / "fixtures" / "kg_sample.json"
+    assert fixture_manifest(KG_SAMPLE) == fixture_manifest(package_copy)

@@ -20,8 +20,10 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
+from fastapi.routing import APIRoute
 from fastapi.staticfiles import StaticFiles
 
+from ..data import fixture_manifest
 from ..wordgames.alchimie import router as alchimie_router
 from ..wordgames.conexiuni import router as conexiuni_router
 from ..wordgames.contexto import router as contexto_router
@@ -90,12 +92,34 @@ _PLACEHOLDER_HTML = """<!doctype html>
 """
 
 
+def _operation_id(route: APIRoute) -> str:
+    """Stable, generator-friendly OpenAPI operationId: ``<tag>_<endpoint-name>``.
+
+    FastAPI's default operationId bakes the full HTTP path into the name (e.g.
+    ``guess_api_wordgames_contexto_games__game_id__guess_post``), so a generated
+    TypeScript client gets long, churny method names that break the moment a path
+    changes. Every game router carries a single tag (its game key) and unique endpoint
+    function names, so ``<tag>_<name>`` is globally unique, readable and path-independent
+    — yielding client methods like ``contextoGuess`` / ``alchimieCombine`` that stay
+    stable across route refactors. Routes are unchanged; only the operationId metadata is.
+    """
+    tag = str(route.tags[0]) if route.tags else "api"
+    return f"{tag}_{route.name}"
+
+
 def create_app() -> FastAPI:
     # Build the shared KG service once at startup (offline fixture) so the first request
     # doesn't pay the load, and a missing/broken fixture fails fast here.
     get_service()
+    # The offline fixture is immutable at runtime, so compute its trust manifest once.
+    manifest_payload = fixture_manifest()
 
-    app = FastAPI(title="cat_de_roman_esti", version="1.1.0")
+    app = FastAPI(
+        title="cat_de_roman_esti",
+        # 1.2.0: additive /api/manifest endpoint + stable operationIds for mobile clients.
+        version="1.2.0",
+        generate_unique_id_function=_operation_id,
+    )
 
     # CORS for dev: the Vite dev server runs on a different localhost origin.
     app.add_middleware(
@@ -106,7 +130,7 @@ def create_app() -> FastAPI:
         allow_credentials=True,
     )
 
-    @app.get("/api/health")
+    @app.get("/api/health", tags=["meta"])
     def health() -> dict:
         svc = get_service()
         return {
@@ -115,6 +139,16 @@ def create_app() -> FastAPI:
             "concepts": len(svc.all_ids()),
             "games": GAMES,
         }
+
+    @app.get("/api/manifest", tags=["meta"])
+    def manifest() -> dict:
+        """Trust manifest for the bundled offline KG (version + schema + content hash).
+
+        A mobile client fetches this to detect whether its cached offline app-pack is in
+        sync with the server (compare ``content_hash``) and which ``schema_version`` to
+        decode. Deterministic and side-effect free — see ``data.fixture_manifest``.
+        """
+        return manifest_payload
 
     # The three text games (each self-contained, server-authoritative).
     app.include_router(alchimie_router)

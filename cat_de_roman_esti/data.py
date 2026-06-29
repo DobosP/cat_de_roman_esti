@@ -12,6 +12,7 @@ Both return the same ``KgBundle`` so the CLI and engine are source-agnostic.
 
 from __future__ import annotations
 
+import hashlib
 import json
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
@@ -29,6 +30,9 @@ DEFAULT_MAX_PUZZLES = 5_000
 APP_PACK_APP = "cat_de_roman_esti"
 APP_PACK_LAYER = "redistributable"
 APP_PACK_SCHEMA_VERSION = 1
+# Shape version of the manifest dict itself (bump when the manifest keys change, so a
+# mobile client can detect a manifest it does not understand without parsing further).
+APP_PACK_MANIFEST_VERSION = 1
 KG_PRODUCTS = ("kg_nodes", "kg_edges", "kg_puzzles")
 APP_PACK_IDS = {
     "roedu:cat_de_roman_esti:kg_nodes:v1": "kg_nodes",
@@ -163,6 +167,89 @@ def load_fixture(path: str | Path | None = None) -> KgBundle:
         raw.get("kg_nodes", []),
         raw.get("kg_edges", []),
         raw.get("kg_puzzles", []),
+    )
+
+
+# --------------------------------------------------------------------------- manifest
+def _canonical_content_bytes(
+    nodes: Sequence[Mapping[str, object]],
+    edges: Sequence[Mapping[str, object]],
+    puzzles: Sequence[Mapping[str, object]],
+) -> bytes:
+    """Stable serialization of the KG payload for hashing.
+
+    Records are sorted by ``id`` and each record is serialized with sorted keys, so the
+    digest depends only on CONTENT — never on file formatting, key order, or the order
+    records happen to appear in. This makes the hash a reliable cache key for a mobile
+    client comparing its bundled offline copy against the server's.
+    """
+
+    def _by_id(rec: Mapping[str, object]) -> str:
+        return str(rec.get("id", ""))
+
+    payload = {
+        "kg_nodes": sorted((dict(n) for n in nodes), key=_by_id),
+        "kg_edges": sorted((dict(e) for e in edges), key=_by_id),
+        "kg_puzzles": sorted((dict(p) for p in puzzles), key=_by_id),
+    }
+    return json.dumps(
+        payload, sort_keys=True, ensure_ascii=False, separators=(",", ":")
+    ).encode("utf-8")
+
+
+def content_hash(
+    nodes: Sequence[Mapping[str, object]],
+    edges: Sequence[Mapping[str, object]],
+    puzzles: Sequence[Mapping[str, object]],
+) -> str:
+    """Deterministic ``sha256:<hex>`` digest over the canonical KG content."""
+    digest = hashlib.sha256(_canonical_content_bytes(nodes, edges, puzzles)).hexdigest()
+    return f"sha256:{digest}"
+
+
+def manifest_from_records(
+    nodes: Sequence[Mapping[str, object]],
+    edges: Sequence[Mapping[str, object]],
+    puzzles: Sequence[Mapping[str, object]],
+    *,
+    build_version: str = "unknown",
+    generated_at: str = "",
+) -> dict[str, object]:
+    """Build the trust manifest from already-loaded KG records (pure function)."""
+    return {
+        "app": APP_PACK_APP,
+        "schema_version": APP_PACK_SCHEMA_VERSION,
+        "manifest_version": APP_PACK_MANIFEST_VERSION,
+        "build_version": build_version,
+        "generated_at": generated_at,
+        "content_hash": content_hash(nodes, edges, puzzles),
+        "counts": {
+            "nodes": len(nodes),
+            "edges": len(edges),
+            "puzzles": len(puzzles),
+        },
+    }
+
+
+def fixture_manifest(path: str | Path | None = None) -> dict[str, object]:
+    """Deterministic trust manifest for the bundled offline fixture.
+
+    A generated mobile client can rely on this to (a) pick the right generated types via
+    ``schema_version``, (b) detect a stale cached offline bundle by comparing
+    ``content_hash`` against the server's, and (c) surface the human-facing
+    ``build_version`` / ``generated_at``. It is a pure function of the fixture content —
+    no clock, no env, cheap to recompute — so the same fixture always yields the same
+    manifest and a regeneration that changes any record changes the hash.
+    """
+    fpath = Path(path) if path else DEFAULT_FIXTURE
+    raw = json.loads(fpath.read_text(encoding="utf-8"))
+    meta = raw.get("meta") if isinstance(raw.get("meta"), Mapping) else {}
+    return manifest_from_records(
+        raw.get("kg_nodes", []),
+        raw.get("kg_edges", []),
+        raw.get("kg_puzzles", []),
+        build_version=str(meta.get("build_version") or "unknown"),
+        generated_at=str(meta.get("generated_at") or ""),
     )
 
 
