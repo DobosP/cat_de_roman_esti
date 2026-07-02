@@ -1,4 +1,10 @@
-# Architecture — cat_de_roman_esti
+# Architecture — the terminal hop game (CLI)
+
+> **Scope (2026-07-02):** this document covers only the original **terminal
+> semantic-hop game** (`cli.py` + `engine.py`). The **web product is the text
+> word-game arcade** (`/api/wordgames/*`, no graph UI) — see
+> [`adr/0001-pivot-to-word-game-arcade.md`](adr/0001-pivot-to-word-game-arcade.md)
+> and [`STATUS.md`](STATUS.md).
 
 A thin, stdlib-only consumer of the Romanian KG products. It builds an in-memory
 semantic graph from served records and runs a terminal "semantic network hop" game.

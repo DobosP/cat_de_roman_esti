@@ -73,8 +73,7 @@ body {
   position: fixed;
   inset: 0;
   width: 100%;
-  /* Block the iOS/Android double-tap-to-zoom + pinch jank on the page chrome. The
-     GraphMap canvas re-enables its own gestures locally (see .graph-canvas). */
+  /* Block the iOS/Android double-tap-to-zoom + pinch jank on the page chrome. */
   touch-action: manipulation;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
@@ -420,13 +419,6 @@ input:focus-visible {
   .coarse-only {
     display: inline;
   }
-}
-
-/* The force-graph canvas owns its own pan/zoom/pinch gestures; let the browser pass
-   touch gestures straight to it instead of scrolling/zooming the page. */
-.graph-canvas,
-.graph-canvas canvas {
-  touch-action: none;
 }
 
 /* Comfortable tap targets on touch devices (>=44px per WCAG / platform guidance). */

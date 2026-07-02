@@ -9,9 +9,10 @@ The name is a pun on *"cât de român ești"* — "how Romanian are you".
 
 ## Web app — the word-game arcade
 
-The web app is a **text-only arcade** of three word games over the same Romanian concept
-graph (**~249 concepts / 417 links**, no graph visualization). All three are
-**server-authoritative** (the BFF validates moves and hides answers):
+The web app is a **text-only arcade** of four word games over the same Romanian concept
+graph (**314 concepts / 711 links / 108 puzzles**, `fixture-v4-dense` — no graph
+visualization). All four are **server-authoritative** (the BFF validates moves and hides
+answers):
 
 - **Alchimie** *(à la Infinite Craft)* — combine two concepts into a new one (their shared
   link) and keep crafting until you reach the target.
@@ -19,6 +20,8 @@ graph (**~249 concepts / 417 links**, no graph visualization). All three are
   you how close you are (hot ↔ cold); find it.
 - **Lanțul Cuvintelor** *(à la The Wiki Game)* — type a concept linked to the current one
   and hop word-by-word to the target in as few moves as possible.
+- **Conexiuni** *(à la NYT Connections)* — group 16 concepts into 4 hidden categories,
+  4 mistakes allowed.
 
 The terminal CLI below is the original semantic-hop game.
 
@@ -154,12 +157,15 @@ server required**.
 
 ## Contributing
 
-`main` is PR-only — **no direct commits, merges, or pushes to `main`**. Work on a feature
-branch and open a reviewed pull request that passes CI. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Direct **local** merges to `main` are allowed once the CI gate is green; **pushing to
+`origin` stays explicit-request-only**. See [`CONTRIBUTING.md`](CONTRIBUTING.md) and
+[`docs/adr/0004-branch-merge-policy.md`](docs/adr/0004-branch-merge-policy.md).
 
 ## Docs
 
-- [`docs/KG_CONTRACT.md`](docs/KG_CONTRACT.md) — the authoritative KG contract v1.
-- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — game model + how difficulty maps to data.
+- [`docs/KG_CONTRACT.md`](docs/KG_CONTRACT.md) — the authoritative KG contract v1 (ADR-0002).
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — the **terminal hop game** architecture; the web product is the word-game arcade (ADR-0001).
+- [`docs/MOBILE_CONTRACT.md`](docs/MOBILE_CONTRACT.md) — stable operationIds + `GET /api/manifest` for the generated mobile client (ADR-0003).
 - [`docs/ROEDU_INTEGRATION.md`](docs/ROEDU_INTEGRATION.md) — products, key, field mapping, fail-closed gate, offline fixture.
 - [`docs/STATUS.md`](docs/STATUS.md) — phase / built / wired / blockers / next.
+- [`docs/adr/`](docs/adr/) — architecture decision records (0001 = arcade pivot, no graph UI).

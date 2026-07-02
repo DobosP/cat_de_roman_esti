@@ -1,6 +1,6 @@
-// Design tokens shared between CSS (via :root vars) and TS (canvas / inline styles).
-// The category color map is the single source of truth for node/edge/badge coloring;
-// the force-graph canvas reads it directly (it can't see CSS variables).
+// Design tokens shared between CSS (via :root vars) and TS (inline styles).
+// The category color map is the single source of truth for category/badge coloring
+// wherever TS needs a concrete value (CSS variables are invisible to inline/JS code).
 
 export interface CategoryStyle {
   /** Human, Romanian-flavoured menu label. */
@@ -89,7 +89,7 @@ export function categoryLabel(category: string): string {
   return categoryStyle(category).label;
 }
 
-/** Canvas palette the force-graph reads (CSS vars are invisible to <canvas>). */
+/** Concrete color palette for TS/canvas consumers (CSS vars are invisible to <canvas>). */
 export const CANVAS = {
   background: "#0a0b14",
   edge: "rgba(150, 162, 196, 0.22)",
