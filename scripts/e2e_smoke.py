@@ -6,30 +6,86 @@ CLI uses, then has the ``HopGame`` engine auto-play the served ``solution_path``
 by hop and asserts a win at par. No interactive input, no fixture — this exercises
 the whole chain (transport -> products -> client -> graph -> engine).
 
-    ROEDU_API_URL=http://127.0.0.1:8077 ROEDU_API_KEY=cat-de-roman-dev \
-        python scripts/e2e_smoke.py [easy|hard]
+    ROEDU_API_URL=<ro_data_server_url> ROEDU_API_KEY=<api_key> \
+        python scripts/e2e_smoke.py --require-live [easy|hard]
 """
 
 from __future__ import annotations
 
+import argparse
+import json
 import os
 import sys
+import urllib.error
+from pathlib import Path
+
+SKIP_EXIT = 77
+RERUN_COMMAND = (
+    "ROEDU_API_URL=<ro_data_server_url> ROEDU_API_KEY=<api_key> "
+    "python scripts/e2e_smoke.py --require-live easy"
+)
+
+if sys.version_info < (3, 11):
+    version = ".".join(str(part) for part in sys.version_info[:3])
+    print(f"[FAIL] Python >=3.11 is required for this smoke script; got {version}")
+    print(f"[hint] rerun with: {RERUN_COMMAND}")
+    raise SystemExit(1)
+
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
 
 from cat_de_roman_esti.data import load_from_client
 from cat_de_roman_esti.engine import HopGame, Mode
 from cat_de_roman_esti.roedu_client import RoeduClient
 
 
-def main(difficulty: str = "easy") -> int:
+def _unavailable(exc: BaseException, *, require_live: bool) -> int:
+    status = "FAIL" if require_live else "SKIP"
+    detail = f"{type(exc).__name__}: {exc}"
+    print(f"[{status}] live ro_data_server unavailable or unhealthy ({detail})")
+    print(f"[hint] rerun with: {RERUN_COMMAND}")
+    if require_live:
+        return 1
+    return SKIP_EXIT
+
+
+def _parse_args(argv: list[str]) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "difficulty",
+        nargs="?",
+        default="easy",
+        choices=("easy", "hard"),
+        help="Puzzle difficulty to smoke through.",
+    )
+    parser.add_argument(
+        "--require-live",
+        action="store_true",
+        help=(
+            "Exit 1 instead of the skip code when ro_data_server is unavailable. "
+            "Use this for release gates on hosts where live infrastructure is expected."
+        ),
+    )
+    return parser.parse_args(argv)
+
+
+def main(difficulty: str = "easy", *, require_live: bool = False) -> int:
     url = os.environ.get("ROEDU_API_URL", "http://127.0.0.1:8077")
     key = os.environ.get("ROEDU_API_KEY", "cat-de-roman-dev")
     client = RoeduClient(url, api_key=key)
 
-    health = client.health()
+    try:
+        health = client.health()
+    except (OSError, TimeoutError, urllib.error.URLError, json.JSONDecodeError) as exc:
+        return _unavailable(exc, require_live=require_live)
     print(f"[health] {health.get('status')} | kg_nodes available="
           f"{health.get('products', {}).get('kg_nodes')}")
 
-    bundle = load_from_client(client, difficulty=difficulty)
+    try:
+        bundle = load_from_client(client, difficulty=difficulty)
+    except (OSError, TimeoutError, urllib.error.URLError, json.JSONDecodeError) as exc:
+        return _unavailable(exc, require_live=require_live)
     print(f"[load] graph: {len(bundle.graph.nodes)} nodes, "
           f"{len(bundle.graph.edges)} edges | puzzles: {len(bundle.puzzles)}")
 
@@ -76,5 +132,5 @@ def main(difficulty: str = "easy") -> int:
 
 
 if __name__ == "__main__":
-    diff = sys.argv[1] if len(sys.argv) > 1 else "easy"
-    raise SystemExit(main(diff))
+    args = _parse_args(sys.argv[1:])
+    raise SystemExit(main(args.difficulty, require_live=args.require_live))

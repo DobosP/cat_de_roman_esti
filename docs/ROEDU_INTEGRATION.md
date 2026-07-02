@@ -132,3 +132,25 @@ cp .env.example .env            # ROEDU_API_URL + ROEDU_API_KEY=cat-de-roman-dev
 #   ROEDU_DATA_DIR=/path/to/data python -m ro_data_server --port 8077
 cat-de-roman --category istorie --difficulty hard
 ```
+
+## Live e2e smoke
+
+The release smoke uses the real transport and loader path; it does not fall back to the
+offline fixture. Run it only when a live `ro_data_server` is available:
+
+```bash
+ROEDU_API_URL=<ro_data_server_url> ROEDU_API_KEY=<api_key> \
+  python scripts/e2e_smoke.py --require-live easy
+```
+
+On PowerShell:
+
+```powershell
+$env:ROEDU_API_URL = "<ro_data_server_url>"
+$env:ROEDU_API_KEY = "<api_key>"
+python scripts/e2e_smoke.py --require-live easy
+```
+
+Without `--require-live`, an unavailable or unhealthy live server exits with skip code
+`77` and prints the rerun command. With `--require-live`, the same condition exits
+`1` so a release gate can fail clearly instead of silently passing.
