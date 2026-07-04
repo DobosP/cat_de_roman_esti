@@ -11,6 +11,12 @@ test("contexto client exposes the bounded category clue route", () => {
   assert.match(source, /clue_available: boolean/);
 });
 
+test("contexto guesses expose the server-authored rank field", () => {
+  const guess = source.match(/export interface Guess[\s\S]*?\n}/);
+  assert.ok(guess);
+  assert.match(guess[0], /rank: number/);
+});
+
 test("clue result does not type a revealed target as part of the direct response", () => {
   const clueResult = source.match(/export interface ClueResult[\s\S]*?\n}/);
   assert.ok(clueResult);

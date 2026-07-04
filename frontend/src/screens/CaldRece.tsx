@@ -1,7 +1,7 @@
 // CaldRece — "Cald sau Rece" (Contexto/Semantle-style) screen.
 //
 // A hidden secret concept lives on the server. The player types concept guesses; each
-// guess comes back with a graph DISTANCE, a temperature tier, and a 0..100 closeness.
+// guess comes back with a rank, graph distance, temperature tier, and 0..100 closeness.
 // The server is the only source of truth (it holds the secret + sorts the guess list
 // best-first); this component only renders what it returns and surfaces errors as toasts.
 
@@ -108,6 +108,18 @@ function GuessRow({ g, isLatest }: { g: Guess; isLatest: boolean }) {
           <strong style={{ fontSize: "0.98rem" }}>{g.label}</strong>
         </span>
         <span className="row" style={{ gap: 8, alignItems: "center" }}>
+          <span
+            className="badge"
+            style={{
+              borderColor: color,
+              color,
+              fontWeight: 800,
+              fontVariantNumeric: "tabular-nums",
+            }}
+            title="Rang fata de conceptul secret"
+          >
+            #{g.rank}
+          </span>
           <span
             className="badge"
             style={{ borderColor: color, color, fontWeight: 700 }}
@@ -599,7 +611,7 @@ export default function CaldRece({
                   fontVariantNumeric: "tabular-nums",
                 }}
               >
-                {latestGuess.closeness}
+                #{latestGuess.rank} · {latestGuess.closeness}
               </strong>
             </motion.div>
           )}
@@ -637,7 +649,7 @@ export default function CaldRece({
             <strong style={{ color: barColor(bestGuess) }}>
               {bestGuess.label}
             </strong>{" "}
-            ({bestGuess.closeness}/100)
+            (#{bestGuess.rank}, {bestGuess.closeness}/100)
           </p>
         )}
 

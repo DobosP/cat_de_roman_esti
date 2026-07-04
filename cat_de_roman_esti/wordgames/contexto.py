@@ -8,7 +8,9 @@ a "temperature" tier (Fierbinte … Inghetat) and a 0..100 closeness score deriv
 the guess ranks within the precomputed distance distribution of all reachable concepts.
 
 Server-authoritative: the target id is NEVER returned to the client until the game is won
-or given up. Sessions live in-memory in a :class:`SessionStore`.
+or given up. Public guess views are built through a reveal gate so rank feedback stays
+useful without accidentally serializing the hidden answer. Sessions live in-memory in a
+:class:`SessionStore`.
 """
 
 from __future__ import annotations
@@ -66,6 +68,7 @@ class GuessRecord:
     distance: int
     temperature: str
     closeness: int
+    rank: int
 
 
 @dataclass
@@ -76,6 +79,8 @@ class ContextoSession:
     reachable: int
     # how many reachable nodes are STRICTLY farther than distance d (for ranking)
     farther_than: dict[int, int] = field(default_factory=dict)
+    # how many reachable nodes are STRICTLY closer than distance d (rank = this + 1)
+    closer_than: dict[int, int] = field(default_factory=dict)
     guesses: dict[str, GuessRecord] = field(default_factory=dict)
     # guess ids in the chronological order they were first played (for the share trail)
     order: list[str] = field(default_factory=list)
@@ -94,8 +99,10 @@ class ContextoSession:
         # sorted distances ascending
         cumulative = 0
         self.farther_than = {}
+        self.closer_than = {}
         for d in sorted(self.dist_hist):
             count_at = self.dist_hist[d]
+            self.closer_than[d] = cumulative
             # nodes farther than d = total - (nodes at distance <= d)
             self.farther_than[d] = total - (cumulative + count_at)
             cumulative += count_at
@@ -146,6 +153,17 @@ def closeness_for(session: ContextoSession, distance: int | None) -> int:
     # otherwise saturate to 100 when nothing else is closer, which is ambiguous with a
     # win and reads as "you got it" when you didn't. Cap non-wins at 99.
     return max(1, min(99, raw))
+
+
+def rank_for(session: ContextoSession, distance: int | None) -> int:
+    """One-based Contexto rank for a guess; lower is better and rank 1 is the target.
+
+    Ties share the best rank for their distance bucket. Unreachable guesses are placed
+    one slot after the reachable set, so the value is bounded by ``reachable + 1``.
+    """
+    if distance is None:
+        return session.reachable + 1
+    return session.closer_than.get(distance, session.reachable) + 1
 
 
 # --------------------------------------------------------------------------- selection
@@ -294,22 +312,27 @@ class GuessBody(BaseModel):
     text: str
 
 
-def _sorted_guesses(session: ContextoSession) -> list[dict]:
-    """Past guesses serialized best-first (smallest distance, then highest closeness)."""
+def _guess_payload(record: GuessRecord, *, reveal: bool, target: str) -> dict:
+    """Public guess view, guarded against pre-reveal target serialization."""
+    if not reveal and record.id == target:
+        raise RuntimeError("refusing to serialize the Contexto target before reveal")
+    return {
+        "id": record.id,
+        "label": record.label,
+        "distance": record.distance,
+        "rank": record.rank,
+        "temperature": record.temperature,
+        "closeness": record.closeness,
+    }
+
+
+def _sorted_guesses(session: ContextoSession, *, reveal: bool) -> list[dict]:
+    """Past guesses serialized best-first (smallest rank, then highest closeness)."""
     records = sorted(
         session.guesses.values(),
-        key=lambda g: (g.distance, -g.closeness, g.label),
+        key=lambda g: (g.rank, g.distance, -g.closeness, g.label),
     )
-    return [
-        {
-            "id": g.id,
-            "label": g.label,
-            "distance": g.distance,
-            "temperature": g.temperature,
-            "closeness": g.closeness,
-        }
-        for g in records
-    ]
+    return [_guess_payload(g, reveal=reveal, target=session.target) for g in records]
 
 
 def _clue_payload(session: ContextoSession) -> dict:
@@ -324,6 +347,7 @@ def _clue_payload(session: ContextoSession) -> dict:
 
 
 def _state(game_id: str, session: ContextoSession) -> dict:
+    reveal = session.won or session.gave_up
     body: dict = {
         "game_id": game_id,
         "attempts": session.attempts,
@@ -338,13 +362,13 @@ def _state(game_id: str, session: ContextoSession) -> dict:
             and not session.clue_revealed
             and session.attempts >= MIN_CLUE_ATTEMPTS
         ),
-        "guesses": _sorted_guesses(session),
+        "guesses": _sorted_guesses(session, reveal=reveal),
     }
     if session.daily is not None:
         body["daily"] = session.daily
     if session.clue_revealed:
         body["clue"] = _clue_payload(session)
-    if session.won or session.gave_up:
+    if reveal:
         svc = get_service()
         body["target"] = {
             "id": session.target,
@@ -400,7 +424,7 @@ def guess(game_id: str, body: GuessBody) -> dict:
         return {
             "ok": False,
             "message": "Nu cunosc acest concept",
-            "guesses": _sorted_guesses(session),
+            "guesses": _sorted_guesses(session, reveal=False),
             "attempts": session.attempts,
             "won": session.won,
             "reachable_count": session.reachable,
@@ -414,6 +438,7 @@ def guess(game_id: str, body: GuessBody) -> dict:
     distance = svc.distance(node_id, session.target)
     temperature = temperature_for(distance)
     closeness = closeness_for(session, distance)
+    rank = rank_for(session, distance)
     # distance is None when the guess is in a disconnected part of the graph — we still
     # store it (as the coldest possible) so a repeated guess shows the same verdict.
     stored_distance = distance if distance is not None else 999
@@ -424,6 +449,7 @@ def guess(game_id: str, body: GuessBody) -> dict:
         distance=stored_distance,
         temperature=temperature,
         closeness=closeness,
+        rank=rank,
     )
     is_new = node_id not in session.guesses
     session.guesses[node_id] = record
@@ -433,17 +459,12 @@ def guess(game_id: str, body: GuessBody) -> dict:
 
     if distance == 0:
         session.won = True
+    reveal = session.won or session.gave_up
 
     result: dict = {
         "ok": True,
-        "guess": {
-            "id": record.id,
-            "label": record.label,
-            "distance": record.distance,
-            "temperature": record.temperature,
-            "closeness": record.closeness,
-        },
-        "guesses": _sorted_guesses(session),
+        "guess": _guess_payload(record, reveal=reveal, target=session.target),
+        "guesses": _sorted_guesses(session, reveal=reveal),
         "attempts": session.attempts,
         "won": session.won,
         "reachable_count": session.reachable,
