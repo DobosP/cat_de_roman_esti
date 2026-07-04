@@ -156,6 +156,8 @@ export default function Lant({
     }`;
     const { isBest, isPuzzleBest } = recordScore(GAME_KEY, state.score, detail, {
       puzzleKey,
+      difficulty: state.difficulty,
+      daily: state.daily,
     });
     setScored({ score: state.score, isBest, isPuzzleBest });
     if (isBest || isPuzzleBest) sound.playRecord();

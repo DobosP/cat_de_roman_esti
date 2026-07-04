@@ -151,6 +151,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       : `pierdut · ${state.mistakes} greseli`;
     const { isBest, isPuzzleBest } = recordScore(GAME_KEY, state.score, detail, {
       puzzleKey,
+      difficulty: state.difficulty,
+      daily: state.daily,
     });
     if (state.won) sound.playWin();
     else sound.playError();

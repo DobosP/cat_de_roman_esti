@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import Alchimie from "./screens/Alchimie";
 import CaldRece from "./screens/CaldRece";
@@ -7,6 +7,14 @@ import Conexiuni from "./screens/Conexiuni";
 import { SoundToggle } from "./components/SoundToggle";
 import { ToastStack, type ToastData, type ToastKind } from "./components/Toast";
 import { sound } from "./sound";
+import {
+  exportScores,
+  importScores,
+  scoreBoard,
+  type GameScoreEntry,
+  type ScoreEntry,
+} from "./scores";
+import { todayLocal } from "./share";
 
 // ---------------------------------------------------------------- arcade router
 // The whole app is now a text-only word-game arcade over the Romanian concept graph —
@@ -115,7 +123,7 @@ export default function App() {
             exit="exit"
             transition={SCREEN_TRANSITION}
           >
-            <Home onOpen={openGame} />
+            <Home onOpen={openGame} onToast={pushToast} />
           </motion.div>
         )}
 
@@ -151,7 +159,89 @@ export default function App() {
 }
 
 // ------------------------------------------------------------------------- home
-function Home({ onOpen }: { onOpen: (key: GameKey) => void }) {
+type HistoryTab = "top" | "today" | "recent";
+
+const GAME_TITLES: Record<GameKey, string> = {
+  alchimie: "Alchimie",
+  contexto: "Cald sau Rece",
+  lant: "Lantul Cuvintelor",
+  conexiuni: "Conexiuni",
+};
+
+function Home({
+  onOpen,
+  onToast,
+}: {
+  onOpen: (key: GameKey) => void;
+  onToast: (message: string, kind?: ToastKind) => void;
+}) {
+  const [historyTab, setHistoryTab] = useState<HistoryTab>("top");
+  const [gameFilter, setGameFilter] = useState<GameKey | "all">("all");
+  const [board, setBoard] = useState(() => scoreBoard());
+  const fileRef = useRef<HTMLInputElement>(null);
+  const today = todayLocal();
+  const totals = useMemo(
+    () => GAMES.map((game) => ({ ...game, record: board[game.key] })),
+    [board],
+  );
+  const allRows = useMemo(
+    () =>
+      Object.entries(board)
+        .flatMap(([game, record]) => record.recent.map((entry) => ({ ...entry, game })))
+        .sort((a, b) => b.at - a.at),
+    [board],
+  );
+  const topRows = useMemo(
+    () =>
+      Object.entries(board)
+        .flatMap(([game, record]) => (record.best ? [{ ...record.best, game }] : []))
+        .sort((a, b) => b.score - a.score || b.at - a.at)
+        .slice(0, 12),
+    [board],
+  );
+  const todayRows = useMemo(
+    () => allRows.filter((entry) => entry.daily === today).slice(0, 20),
+    [allRows, today],
+  );
+  const recentRows = useMemo(
+    () =>
+      allRows
+        .filter((entry) => gameFilter === "all" || entry.game === gameFilter)
+        .slice(0, 30),
+    [allRows, gameFilter],
+  );
+  const playedTotal = totals.reduce((sum, row) => sum + (row.record?.played ?? 0), 0);
+
+  const handleExport = useCallback(() => {
+    const blob = new Blob([exportScores()], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `cat-de-roman-istoric-${todayLocal()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    onToast("Istoricul local a fost exportat.", "success");
+  }, [onToast]);
+
+  const handleImport = useCallback(
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      event.target.value = "";
+      if (!file) return;
+      try {
+        const outcome = importScores(await file.text());
+        setBoard(scoreBoard());
+        onToast(
+          `Importat: ${outcome.entries} rezultate in ${outcome.games} jocuri.`,
+          "success",
+        );
+      } catch (err) {
+        onToast(err instanceof Error ? err.message : "Import invalid.", "error");
+      }
+    },
+    [onToast],
+  );
+
   return (
     <div className="screen-pad fill" style={{ overflowY: "auto" }}>
       <div className="container col" style={{ gap: 28, paddingBlock: 16 }}>
@@ -268,10 +358,182 @@ function Home({ onOpen }: { onOpen: (key: GameKey) => void }) {
           ))}
         </div>
 
+        <section className="col" style={{ gap: 14 }}>
+          <div className="row spread wrap" style={{ gap: 12, alignItems: "center" }}>
+            <div className="row wrap" style={{ gap: 8 }}>
+              {(["top", "today", "recent"] as const).map((tab) => (
+                <button
+                  key={tab}
+                  type="button"
+                  className={`btn ${historyTab === tab ? "btn-primary" : "btn-ghost"}`}
+                  onClick={() => setHistoryTab(tab)}
+                  style={{ padding: "9px 13px", borderRadius: 12 }}
+                >
+                  {tab === "top" ? "Top" : tab === "today" ? "Azi" : "Istoric"}
+                </button>
+              ))}
+            </div>
+            <div className="row wrap" style={{ gap: 8 }}>
+              <button
+                type="button"
+                className="btn btn-ghost"
+                onClick={handleExport}
+                disabled={playedTotal === 0}
+                style={{ padding: "9px 13px", borderRadius: 12 }}
+              >
+                <span aria-hidden>⬇</span> Export
+              </button>
+              <button
+                type="button"
+                className="btn btn-ghost"
+                onClick={() => fileRef.current?.click()}
+                style={{ padding: "9px 13px", borderRadius: 12 }}
+              >
+                <span aria-hidden>⬆</span> Import
+              </button>
+              <input
+                ref={fileRef}
+                type="file"
+                accept="application/json,.json"
+                onChange={handleImport}
+                style={{ display: "none" }}
+              />
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 170px), 1fr))",
+              gap: 10,
+            }}
+          >
+            {totals.map((row) => (
+              <div key={row.key} className="card" style={{ padding: 14, display: "grid", gap: 8 }}>
+                <div className="row spread" style={{ gap: 8 }}>
+                  <span className="chip" style={{ borderColor: row.accent, color: row.accent }}>
+                    {row.title}
+                  </span>
+                  <strong style={{ fontVariantNumeric: "tabular-nums" }}>
+                    {row.record?.played ?? 0}
+                  </strong>
+                </div>
+                <ScoreLine entry={row.record?.best ?? null} accent={row.accent} empty="Fara scor" />
+              </div>
+            ))}
+          </div>
+
+          {historyTab === "recent" && (
+            <label className="row" style={{ gap: 8, alignSelf: "flex-start" }}>
+              <span className="faint" style={{ fontSize: "0.78rem" }}>Joc</span>
+              <select
+                value={gameFilter}
+                onChange={(event) => setGameFilter(event.target.value as GameKey | "all")}
+                className="field"
+                style={{ width: 210, padding: "9px 12px" }}
+              >
+                <option value="all">Toate</option>
+                {GAMES.map((game) => (
+                  <option key={game.key} value={game.key}>
+                    {game.title}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
+
+          <HistoryRows
+            rows={
+              historyTab === "top"
+                ? topRows
+                : historyTab === "today"
+                  ? todayRows
+                  : recentRows
+            }
+            empty={
+              historyTab === "top"
+                ? "Nu ai scoruri locale inca."
+                : historyTab === "today"
+                  ? "Niciun zilnic terminat azi."
+                  : "Istoricul local este gol."
+            }
+          />
+        </section>
+
         <p className="faint" style={{ fontSize: "0.8rem" }}>
-          Toate cele patru jocuri ruleaza pe acelasi graf de ~250 de concepte romanesti.
+          Toate cele patru jocuri ruleaza pe acelasi graf de 325 de concepte romanesti.
         </p>
       </div>
     </div>
   );
+}
+
+function HistoryRows({ rows, empty }: { rows: GameScoreEntry[]; empty: string }) {
+  if (rows.length === 0) {
+    return (
+      <div className="card center muted" style={{ minHeight: 82, padding: 18 }}>
+        {empty}
+      </div>
+    );
+  }
+  return (
+    <div className="col" style={{ gap: 8 }}>
+      {rows.map((entry, index) => (
+        <div
+          key={`${entry.game}-${entry.at}-${entry.score}-${index}`}
+          className="card row spread wrap"
+          style={{ gap: 12, padding: "12px 14px", alignItems: "center" }}
+        >
+          <div className="row" style={{ gap: 10, minWidth: 0 }}>
+            <span className="faint" style={{ width: 24, textAlign: "right" }}>
+              {index + 1}
+            </span>
+            <div className="col" style={{ gap: 2, minWidth: 0 }}>
+              <strong>{GAME_TITLES[entry.game as GameKey] ?? entry.game}</strong>
+              <span className="muted" style={{ fontSize: "0.84rem" }}>
+                {entry.detail}
+              </span>
+            </div>
+          </div>
+          <div className="row" style={{ gap: 12, alignItems: "center" }}>
+            <span className="faint" style={{ fontSize: "0.78rem" }}>
+              {formatWhen(entry.at)}
+            </span>
+            <strong style={{ fontVariantNumeric: "tabular-nums" }}>{entry.score}</strong>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ScoreLine({
+  entry,
+  accent,
+  empty,
+}: {
+  entry: ScoreEntry | null;
+  accent: string;
+  empty: string;
+}) {
+  if (!entry) return <span className="muted" style={{ fontSize: "0.86rem" }}>{empty}</span>;
+  return (
+    <div className="row spread" style={{ gap: 8, alignItems: "baseline" }}>
+      <span className="muted" style={{ fontSize: "0.82rem" }}>
+        {entry.detail}
+      </span>
+      <strong style={{ color: accent, fontVariantNumeric: "tabular-nums" }}>
+        {entry.score}
+      </strong>
+    </div>
+  );
+}
+
+function formatWhen(ms: number): string {
+  return new Intl.DateTimeFormat("ro-RO", {
+    day: "2-digit",
+    month: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(ms));
 }

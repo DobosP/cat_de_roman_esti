@@ -214,6 +214,8 @@ export default function CaldRece({
       : `${difficulty} · ${state.attempts} incercari`;
     const { isBest, isPuzzleBest } = recordScore(GAME_KEY, state.score, detail, {
       puzzleKey,
+      difficulty: state.difficulty,
+      daily: state.daily,
     });
     setIsPuzzleRecord(isPuzzleBest);
     if (isBest) {

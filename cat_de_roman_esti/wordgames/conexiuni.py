@@ -42,6 +42,7 @@ KNOWN_CATEGORIES = (
 GROUP_SIZE = 4
 NUM_GROUPS = 4
 MAX_LIVES = 4
+BOARD_PICK_RETRIES = 16
 
 DIFFICULTIES = ("usor", "normal", "greu")
 
@@ -272,7 +273,7 @@ def _pick_board(rng: random.Random, difficulty: str) -> ConexiuniSession:
     """
     best: ConexiuniSession | None = None
     best_residual = 1_000_000
-    for _ in range(12):
+    for _ in range(BOARD_PICK_RETRIES):
         candidate = _build_board(rng, difficulty)
         ok, residual = _board_quality(candidate)
         if ok and residual == 0:

@@ -519,6 +519,94 @@
    "category": "stiinta",
    "description": "Resursa naturala importanta in Romania; rafinaria de la Ploiesti si procedeul Edeleanu au marcat industria petroliera.",
    "salience": 0.6
+  },
+  {
+   "id": "n_cinematografia_romaneasca",
+   "node_type": "concept",
+   "label_ro": "Cinematografia romaneasca",
+   "category": "arta_cultura",
+   "description": "Traditie de film romanesc dezvoltata de la productiile clasice la Noul Val Romanesc.",
+   "salience": 0.62
+  },
+  {
+   "id": "n_liviu_ciulei",
+   "node_type": "person",
+   "label_ro": "Liviu Ciulei",
+   "category": "personalitati",
+   "description": "Regizor de teatru si film roman (1923-2011), premiat la Cannes pentru Padurea spanzuratilor.",
+   "salience": 0.56
+  },
+  {
+   "id": "n_padurea_spanzuratilor_film",
+   "node_type": "work",
+   "label_ro": "Padurea spanzuratilor (film)",
+   "category": "arta_cultura",
+   "description": "Film romanesc regizat de Liviu Ciulei dupa romanul lui Liviu Rebreanu, premiat pentru regie la Cannes in 1965.",
+   "salience": 0.54
+  },
+  {
+   "id": "n_teatrul_bulandra",
+   "node_type": "org",
+   "label_ro": "Teatrul Bulandra",
+   "category": "arta_cultura",
+   "description": "Teatru bucurestean fondat in 1947 ca Teatrul Municipal, asociat cu Lucia Sturdza-Bulandra si Liviu Ciulei.",
+   "salience": 0.52
+  },
+  {
+   "id": "n_lucian_pintilie",
+   "node_type": "person",
+   "label_ro": "Lucian Pintilie",
+   "category": "personalitati",
+   "description": "Regizor roman de teatru si film, autor al filmului Reconstituirea si figura majora a cinemaului romanesc.",
+   "salience": 0.52
+  },
+  {
+   "id": "n_reconstituirea_film",
+   "node_type": "work",
+   "label_ro": "Reconstituirea",
+   "category": "arta_cultura",
+   "description": "Film romanesc din 1968 regizat de Lucian Pintilie, reper critic al cinemaului romanesc.",
+   "salience": 0.48
+  },
+  {
+   "id": "n_noul_val_romanesc",
+   "node_type": "concept",
+   "label_ro": "Noul Val Romanesc",
+   "category": "arta_cultura",
+   "description": "Directie realista si minimalista a filmului romanesc afirmata international dupa anii 2000.",
+   "salience": 0.58
+  },
+  {
+   "id": "n_cristian_mungiu",
+   "node_type": "person",
+   "label_ro": "Cristian Mungiu",
+   "category": "personalitati",
+   "description": "Regizor roman, castigator al Palme d'Or in 2007 pentru 4 luni, 3 saptamani si 2 zile.",
+   "salience": 0.56
+  },
+  {
+   "id": "n_patru_luni_trei_saptamani",
+   "node_type": "work",
+   "label_ro": "4 luni, 3 saptamani si 2 zile",
+   "category": "arta_cultura",
+   "description": "Film romanesc din 2007 regizat de Cristian Mungiu, distins cu Palme d'Or la Cannes.",
+   "salience": 0.56
+  },
+  {
+   "id": "n_cristi_puiu",
+   "node_type": "person",
+   "label_ro": "Cristi Puiu",
+   "category": "personalitati",
+   "description": "Regizor roman asociat cu Noul Val Romanesc, autor al filmului Moartea domnului Lazarescu.",
+   "salience": 0.5
+  },
+  {
+   "id": "n_moartea_domnului_lazarescu",
+   "node_type": "work",
+   "label_ro": "Moartea domnului Lazarescu",
+   "category": "arta_cultura",
+   "description": "Film romanesc din 2005 regizat de Cristi Puiu, premiat in sectiunea Un Certain Regard la Cannes.",
+   "salience": 0.5
   }
  ],
  "edges": [
@@ -3165,6 +3253,213 @@
    "relation": "located_in",
    "label_ro": "pesteri studiate in",
    "strength": 0.4,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_cinematografia_romaneasca",
+   "dst": "n_arta_plastica",
+   "relation": "related_to",
+   "label_ro": "arta vizuala",
+   "strength": 0.45,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_cinematografia_romaneasca",
+   "dst": "n_bucuresti",
+   "relation": "located_in",
+   "label_ro": "industrie culturala in",
+   "strength": 0.45,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_liviu_ciulei",
+   "dst": "n_cinematografia_romaneasca",
+   "relation": "related_to",
+   "label_ro": "regizor de film",
+   "strength": 0.75,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_liviu_ciulei",
+   "dst": "n_teatrul_bulandra",
+   "relation": "related_to",
+   "label_ro": "director artistic",
+   "strength": 0.75,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_padurea_spanzuratilor_film",
+   "dst": "n_liviu_ciulei",
+   "relation": "created_by",
+   "label_ro": "regizat de",
+   "strength": 0.95,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_padurea_spanzuratilor_film",
+   "dst": "n_liviu_rebreanu",
+   "relation": "adapted_from",
+   "label_ro": "dupa romanul lui",
+   "strength": 0.9,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_padurea_spanzuratilor_film",
+   "dst": "n_cinematografia_romaneasca",
+   "relation": "instance_of",
+   "label_ro": "film romanesc",
+   "strength": 0.85,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_teatrul_bulandra",
+   "dst": "n_bucuresti",
+   "relation": "located_in",
+   "label_ro": "se afla in",
+   "strength": 0.8,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_teatrul_bulandra",
+   "dst": "n_ion_luca_caragiale",
+   "relation": "related_to",
+   "label_ro": "repertoriu teatral",
+   "strength": 0.45,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_lucian_pintilie",
+   "dst": "n_cinematografia_romaneasca",
+   "relation": "related_to",
+   "label_ro": "regizor de film",
+   "strength": 0.75,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_reconstituirea_film",
+   "dst": "n_lucian_pintilie",
+   "relation": "created_by",
+   "label_ro": "regizat de",
+   "strength": 0.95,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_reconstituirea_film",
+   "dst": "n_comunismul_in_romania",
+   "relation": "related_to",
+   "label_ro": "critica sociala",
+   "strength": 0.65,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_reconstituirea_film",
+   "dst": "n_cinematografia_romaneasca",
+   "relation": "instance_of",
+   "label_ro": "film romanesc",
+   "strength": 0.85,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_noul_val_romanesc",
+   "dst": "n_cinematografia_romaneasca",
+   "relation": "part_of",
+   "label_ro": "directie a",
+   "strength": 0.9,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_noul_val_romanesc",
+   "dst": "n_comunismul_in_romania",
+   "relation": "related_to",
+   "label_ro": "memorie postcomunista",
+   "strength": 0.55,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_cristian_mungiu",
+   "dst": "n_noul_val_romanesc",
+   "relation": "related_to",
+   "label_ro": "regizor asociat",
+   "strength": 0.85,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_patru_luni_trei_saptamani",
+   "dst": "n_cristian_mungiu",
+   "relation": "created_by",
+   "label_ro": "regizat de",
+   "strength": 0.95,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_patru_luni_trei_saptamani",
+   "dst": "n_nicolae_ceausescu",
+   "relation": "related_to",
+   "label_ro": "plasat in epoca",
+   "strength": 0.55,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_patru_luni_trei_saptamani",
+   "dst": "n_noul_val_romanesc",
+   "relation": "instance_of",
+   "label_ro": "film al",
+   "strength": 0.9,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_cristi_puiu",
+   "dst": "n_noul_val_romanesc",
+   "relation": "related_to",
+   "label_ro": "regizor asociat",
+   "strength": 0.85,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_moartea_domnului_lazarescu",
+   "dst": "n_cristi_puiu",
+   "relation": "created_by",
+   "label_ro": "regizat de",
+   "strength": 0.95,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_moartea_domnului_lazarescu",
+   "dst": "n_medicina",
+   "relation": "related_to",
+   "label_ro": "sistem medical",
+   "strength": 0.55,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_moartea_domnului_lazarescu",
+   "dst": "n_noul_val_romanesc",
+   "relation": "instance_of",
+   "label_ro": "film al",
+   "strength": 0.9,
    "is_distractor": 0,
    "bidirectional": 1
   }

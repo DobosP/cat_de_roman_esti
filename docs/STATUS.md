@@ -1,7 +1,7 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-07-02 (main @ `c9bc21b`). Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-02_
+_As of 2026-07-04. Update whenever `main` or the test baseline moves._
+_Last verified: 2026-07-04_
 
 ## Phase
 
@@ -9,15 +9,15 @@ _Last verified: 2026-07-02_
 arcade of four server-authoritative word games** over the KG (no graph visualization):
 **Alchimie** (Infinite-Craft combine), **Cald sau Rece** (Contexto hot/cold), **Lanțul
 Cuvintelor** (word-ladder), **Conexiuni** (NYT-Connections grouping). Each has difficulty
-tiers, a seeded **daily challenge**, score + shareable result, and an offline leaderboard.
+tiers, a seeded **daily challenge**, score + shareable result, and offline leaderboard/history.
 Backed by `cat_de_roman_esti/wordgames/` (shared `service.py` over the offline KG + one
 `APIRouter` per game under `/api/wordgames/*`). The old graph SPA and its game-session
 API were **removed in `7308ce9` (2026-06-22)**; see `docs/adr/0001-pivot-to-word-game-arcade.md` —
 **no graph UI unless Paul explicitly reopens it**.
 
 **KG densified for richer play** (`scripts/densify_content.py` + `scripts/dense_data.json`):
-**314 nodes / 711 edges / 108 puzzles** in `fixtures/kg_sample.json` (byte-identical copy in
-`tests/fixtures/`), mean non-distractor degree **2.95 → 4.18**, incl. **131 cross-category
+**325 nodes / 734 edges / 108 puzzles** in `fixtures/kg_sample.json` (byte-identical copy in
+`tests/fixtures/`), mean non-distractor degree **2.95 → 4.18**, incl. **199 cross-category
 bridges**, all fact-checked, validator-green by construction. NOTE: the legacy
 `kg_puzzles`/`HopGame`/CLI are unused by the word games but still validated.
 
@@ -42,15 +42,17 @@ The **terminal CLI** remains the original `easy|hard` semantic-hop game.
   and `/api/manifest` (offline-KG trust manifest: version + `schema_version` + content hash);
   stable OpenAPI operationIds (`<tag>_<name>`, e.g. `contexto_guess`); serves the built SPA
   (placeholder page if the build is absent). Offline KG loaded once at startup; live
-  ro_data_server pull stays optional + fail-soft.
+  ro_data_server pull stays optional + fail-soft. Conexiuni fair-board generation remains
+  bounded at 16 validated samples after the denser graph/content batch.
 - `frontend/` — React 18 + Vite + TS SPA: arcade home (animated game cards) + four screens
   (`Alchimie.tsx`, `CaldRece.tsx`, `Lant.tsx`, `Conexiuni.tsx`) sharing `GameShell`,
   `DifficultyPicker`, `ResultCard`, `Toast`, `SoundToggle`; `framer-motion` transitions,
   Web-Audio SFX + persisted mute (`sound.ts`). Lean deps on purpose: `react`, `react-dom`,
   `framer-motion`. Builds into `cat_de_roman_esti/web/static/`.
 - **v1.2 UX:** run-complete share/copy payload (`share.ts` — app URL + score + stable
-  puzzle key around the server-authored result); offline localStorage leaderboard with
-  per-puzzle personal bests + "Record puzzle" badge (`scores.ts`).
+  puzzle key around the server-authored result); offline localStorage leaderboard/history
+  with per-game top scores, daily and recent slices, bounded per-puzzle personal bests,
+  "Record puzzle" badge, and JSON import/export (`scores.ts`, arcade home).
 
 ### Mobile contract (2026-06-29, `125a357`)
 - `docs/MOBILE_CONTRACT.md`: stable operationIds + `GET /api/manifest` + hidden-answer
@@ -106,4 +108,3 @@ itself is still unexercised.
   exercised here). _(needs a live server)_
 - **More content:** keep expanding nodes/puzzles/bridges via `scripts/expand_content.py` /
   `scripts/densify_content.py`.
-- **UX:** richer leaderboard views / history import-export.
