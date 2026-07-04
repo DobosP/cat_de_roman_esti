@@ -19,6 +19,41 @@ def make_client() -> TestClient:
 SEED = 1
 
 
+def _collect_key_values(obj: object, key_name: str) -> list[object]:
+    found: list[object] = []
+    if isinstance(obj, dict):
+        for key, value in obj.items():
+            if key == key_name:
+                found.append(value)
+            else:
+                found.extend(_collect_key_values(value, key_name))
+    elif isinstance(obj, list):
+        for item in obj:
+            found.extend(_collect_key_values(item, key_name))
+    return found
+
+
+def _collect_strings(obj: object) -> set[str]:
+    found: set[str] = set()
+    if isinstance(obj, str):
+        found.add(obj)
+    elif isinstance(obj, dict):
+        for value in obj.values():
+            found |= _collect_strings(value)
+    elif isinstance(obj, list):
+        for item in obj:
+            found |= _collect_strings(item)
+    return found
+
+
+def _assert_secret_hidden(body: dict, target_id: str, target_label: str) -> None:
+    assert "target" not in body
+    assert "solution" not in body
+    assert not _collect_key_values(body, "solution")
+    assert target_id not in _collect_key_values(body, "id")
+    assert target_label not in _collect_strings(body)
+
+
 def _target_of(seed: int = SEED, difficulty: str = "normal"):
     """The id + a distance-1 neighbour of the seeded secret, read from the engine.
 
@@ -47,6 +82,7 @@ def _reveal_target_label(client, *, seed: int = SEED, difficulty: str = "normal"
 
 def test_create_game_hides_target() -> None:
     c = make_client()
+    target_id, target_label, _, _ = _target_of()
     res = c.post("/api/wordgames/contexto/games", params={"seed": SEED})
     assert res.status_code == 200
     body = res.json()
@@ -54,7 +90,7 @@ def test_create_game_hides_target() -> None:
     assert body["won"] is False
     assert body["guesses"] == []
     assert body["reachable_count"] >= 120
-    assert "target" not in body  # secret never leaks before win/giveup
+    _assert_secret_hidden(body, target_id, target_label)
 
 
 def test_unknown_concept_not_counted() -> None:
@@ -87,12 +123,14 @@ def test_guess_reports_temperature_and_closeness() -> None:
     # consistent: non-zero distance, a real (sub-win) closeness in bounds.
     assert g["id"] == neighbour_id
     assert g["distance"] == 1
+    assert 1 < g["rank"] <= body["reachable_count"]
     assert g["temperature"] == "Fierbinte"
     assert 0 <= g["closeness"] <= 100
     assert g["closeness"] < 100  # only the actual target reads 100
     assert body["attempts"] == 1
     assert body["won"] is False
     assert "target" not in body
+    assert body["guesses"][0]["rank"] == g["rank"]
 
 
 def test_winning_playthrough_reveals_target() -> None:
@@ -111,6 +149,7 @@ def test_winning_playthrough_reveals_target() -> None:
     assert body["ok"] is True
     assert body["won"] is True
     assert body["guess"]["distance"] == 0
+    assert body["guess"]["rank"] == 1
     assert body["guess"]["temperature"] == "Gasit"
     assert body["guess"]["closeness"] == 100
     assert body["target"]["id"] == target_id
@@ -144,10 +183,31 @@ def test_giveup_reveals_target() -> None:
 
 def test_get_state_keeps_target_hidden() -> None:
     c = make_client()
+    target_id, target_label, _, _ = _target_of()
     gid = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()["game_id"]
     res = c.get(f"/api/wordgames/contexto/games/{gid}")
     assert res.status_code == 200
-    assert "target" not in res.json()
+    _assert_secret_hidden(res.json(), target_id, target_label)
+
+
+def test_rank_view_model_hides_secret_until_reveal_boundary() -> None:
+    c = make_client()
+    target_id, target_label, _, _ = _target_of()
+    gid = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()["game_id"]
+
+    before = _make_counted_guesses(c, gid, 3)
+    _assert_secret_hidden(before, target_id, target_label)
+    assert before["guesses"]
+    assert all("rank" in guess for guess in before["guesses"])
+    assert all(1 < guess["rank"] <= before["reachable_count"] + 1 for guess in before["guesses"])
+
+    clue = c.post(f"/api/wordgames/contexto/games/{gid}/clue").json()
+    _assert_secret_hidden(clue, target_id, target_label)
+
+    over = c.post(f"/api/wordgames/contexto/games/{gid}/giveup").json()
+    assert over["gave_up"] is True
+    assert over["target"]["id"] == target_id
+    assert over["target"]["label"] == target_label
 
 
 def test_unknown_game_404() -> None:

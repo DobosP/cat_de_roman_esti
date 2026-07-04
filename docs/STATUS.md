@@ -45,10 +45,12 @@ The **terminal CLI** remains the original `easy|hard` semantic-hop game.
   (placeholder page if the build is absent). Offline KG loaded once at startup; live
   ro_data_server pull stays optional + fail-soft. Conexiuni fair-board generation remains
   bounded at 16 validated samples after the denser graph/content batch. Contexto exposes a
-  one-use category clue after 3 counted guesses, with a score penalty and no target id/label
-  reveal before win/give-up. Conexiuni exposes a one-use redacted category-label pattern
-  after two mistakes, with a score penalty and no category key/full label, tile membership,
-  or solution reveal before win/loss.
+  one-use category clue after 3 counted guesses, with a score penalty and a
+  hidden-answer rank view-model: guesses expose rank/temperature/closeness, while target
+  id/label/description and any solution payload stay absent until win/give-up. Conexiuni
+  exposes a one-use redacted category-label pattern after two mistakes, with a score
+  penalty and no category key/full label, tile membership, or solution reveal before
+  win/loss.
 - `frontend/` — React 18 + Vite + TS SPA: arcade home (animated game cards) + four screens
   (`Alchimie.tsx`, `CaldRece.tsx`, `Lant.tsx`, `Conexiuni.tsx`) sharing `GameShell`,
   `DifficultyPicker`, `ResultCard`, `Toast`, `SoundToggle`; `framer-motion` transitions,
@@ -59,9 +61,10 @@ The **terminal CLI** remains the original `easy|hard` semantic-hop game.
   with per-game top scores, daily and recent slices, bounded per-puzzle personal bests,
   "Record puzzle" badge, and JSON import/export (`scores.ts`, arcade home).
 
-### Mobile contract (2026-06-29, `125a357`)
+### Mobile contract (2026-07-04)
 - `docs/MOBILE_CONTRACT.md`: stable operationIds + `GET /api/manifest` + hidden-answer
-  invariants for roedu-mobile; exports via `scripts/export_openapi.py` and
+  invariants for roedu-mobile, including Contexto rank-bearing guesses with pre-reveal
+  target id/label/solution absence; exports via `scripts/export_openapi.py` and
   `scripts/export_mobile_app_pack.py` (ADR-0006). Guarded by mobile/app-pack tests.
 
 ### Hardening

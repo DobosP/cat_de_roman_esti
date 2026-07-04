@@ -49,7 +49,7 @@ in the code; the tests are regression guards that also assert the *reveal* bound
 
 | Game | Secret | Pre-win exposure | Revealed when |
 |------|--------|------------------|---------------|
-| contexto | target id/label | no `target` key; id absent everywhere | won / gave up |
+| contexto | target id/label/solution | no `target` or `solution` key; target id/label absent everywhere; guesses carry rank feedback | won / gave up |
 | alchimie | target id | `target.id = null`, `revealed = false` (label shown as the goal by design) | crafted (won) |
 | lant | solution path | only `start` + `target` ids exposed; no intermediate path node; hint is on-demand | per-hop, by playing / `…/hint` |
 | conexiuni | category grouping | no `solution`; tiles carry only `{id,label}`; optional clue returns one redacted category-label pattern only, with no category key/label or tile membership | won / lost |
@@ -58,7 +58,28 @@ Seeds/daily are deterministic by design (shared daily challenge); offline play i
 the whole KG, so this guards the **API surface**, keeping gameplay server-authoritative rather
 than claiming the offline answer is unknowable.
 
-## 4. Conexiuni clue endpoint
+## 4. Contexto rank view-model
+
+Contexto guess responses expose a bounded rank view of the player's own guesses without
+shipping the hidden answer. Each accepted guess has:
+
+```json
+{
+  "id": "n_banat",
+  "label": "Banat",
+  "distance": 1,
+  "rank": 2,
+  "temperature": "Fierbinte",
+  "closeness": 99
+}
+```
+
+`rank` is one-based (`1` is the secret target), ties share the same rank for a distance
+bucket, and unreachable guesses rank after the reachable set. Pre-reveal responses keep
+the target id, target label, and any `solution` payload absent across create/get/guess/clue.
+The exact target object appears only on win or give-up.
+
+## 5. Conexiuni clue endpoint
 
 `POST /api/wordgames/conexiuni/games/{game_id}/clue` is additive. It unlocks after two
 mistakes, can be used once, applies a score penalty, and returns:
@@ -76,7 +97,7 @@ mistakes, can be used once, applies a score penalty, and returns:
 The clue payload is intentionally redacted: no category `key`, exact category label, tile ids,
 or solution membership appears before win/loss.
 
-## 5. Public app-pack fixture for roedu-mobile
+## 6. Public app-pack fixture for roedu-mobile
 
 `scripts/export_mobile_app_pack.py` exports a deterministic, public-only app-pack snapshot
 from the bundled KG (ADR-0008). The checked-in cat fixture is:

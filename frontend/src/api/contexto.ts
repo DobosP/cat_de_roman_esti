@@ -63,6 +63,8 @@ export interface Guess {
   id: string;
   label: string;
   distance: number;
+  /** 1 is the hidden target; unreachable guesses sort after the reachable set. */
+  rank: number;
   temperature: Temperature;
   /** 0..100 — how close (beats this % of reachable concepts). */
   closeness: number;

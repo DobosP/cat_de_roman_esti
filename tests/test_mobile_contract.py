@@ -58,11 +58,26 @@ def _collect_ids(obj: object) -> set[str]:
     return found
 
 
+def _collect_strings(obj: object) -> set[str]:
+    """Every string value in a response body, for exact hidden-label checks."""
+    found: set[str] = set()
+    if isinstance(obj, str):
+        found.add(obj)
+    elif isinstance(obj, dict):
+        for value in obj.values():
+            found |= _collect_strings(value)
+    elif isinstance(obj, list):
+        for item in obj:
+            found |= _collect_strings(item)
+    return found
+
+
 # --------------------------------------------------------------- hidden-answer guards
 def test_contexto_does_not_leak_target_before_win() -> None:
     from cat_de_roman_esti.wordgames.contexto import _pick_target
 
     secret = _pick_target(SEED, "normal").target
+    secret_label = get_service().label(secret)
     c = client()
     created = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()
     gid = created["game_id"]
@@ -70,28 +85,41 @@ def test_contexto_does_not_leak_target_before_win() -> None:
 
     for body in (created, fetched):
         assert "target" not in body  # dedicated reveal key absent pre-win
+        assert "solution" not in body
         assert secret not in _collect_ids(body)  # ...and the id leaks nowhere else
+        assert secret_label not in _collect_strings(body)
 
     # Boundary for the optional category clue: it may reveal the broad category, but not
     # the secret concept id/label/description.
     svc = get_service()
+    last_guess = None
     for nid in svc.all_ids():
         if nid == secret:
             continue
-        c.post(
+        last_guess = c.post(
             f"/api/wordgames/contexto/games/{gid}/guess",
             json={"text": svc.label(nid)},
-        )
+        ).json()
+        assert last_guess["ok"] is True
+        assert "target" not in last_guess
+        assert "solution" not in last_guess
+        assert secret not in _collect_ids(last_guess)
+        assert secret_label not in _collect_strings(last_guess)
+        assert "rank" in last_guess["guess"]
         if c.get(f"/api/wordgames/contexto/games/{gid}").json()["attempts"] >= 3:
             break
+    assert last_guess is not None
     clue = c.post(f"/api/wordgames/contexto/games/{gid}/clue").json()
     assert "target" not in clue
+    assert "solution" not in clue
     assert secret not in _collect_ids(clue)
+    assert secret_label not in _collect_strings(clue)
     assert set(clue["clue"]) == {"category", "message"}
 
-    # Boundary: giving up reveals the secret target id.
+    # Boundary: giving up reveals the secret target id and label.
     over = c.post(f"/api/wordgames/contexto/games/{gid}/giveup").json()
     assert over["target"]["id"] == secret
+    assert over["target"]["label"] == secret_label
 
 
 def _alchimie_play_to_win(c: TestClient, state: dict) -> dict:
