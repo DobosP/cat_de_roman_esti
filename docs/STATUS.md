@@ -26,9 +26,8 @@ validator-green by construction. NOTE: the legacy
 
 _Pipeline note:_ the `romania_scraper → ro_data_server` corpus path is **blocked**
 (`/mnt/roedu/data/processed/*` permission-restricted; `kg build` only sees `curriculum.db`,
-78 nodes) — the curated **densification above is the delivered path**.
-
-The **terminal CLI** remains the original `easy|hard` semantic-hop game.
+78 nodes) — the curated **densification above is the delivered path**. The **terminal CLI**
+remains the original `easy|hard` semantic-hop game.
 
 ## What's built
 
@@ -48,18 +47,17 @@ The **terminal CLI** remains the original `easy|hard` semantic-hop game.
   one-use category clue after 3 counted guesses, with a score penalty and a
   hidden-answer rank view-model: guesses expose rank/temperature/closeness, while target
   id/label/description and any solution payload stay absent until win/give-up. Conexiuni
-  exposes a one-use redacted category-label pattern after two mistakes, with a score
-  penalty and no category key/full label, tile membership, or solution reveal before
-  win/loss.
-- `frontend/` — React 18 + Vite + TS SPA: arcade home (animated game cards) + four screens
-  (`Alchimie.tsx`, `CaldRece.tsx`, `Lant.tsx`, `Conexiuni.tsx`) sharing `GameShell`,
-  `DifficultyPicker`, `ResultCard`, `Toast`, `SoundToggle`; `framer-motion` transitions,
-  Web-Audio SFX + persisted mute (`sound.ts`). Lean deps on purpose: `react`, `react-dom`,
-  `framer-motion`. Builds into `cat_de_roman_esti/web/static/`.
-- **v1.2 UX:** run-complete share/copy payload (`share.ts` — app URL + score + stable
-  puzzle key around the server-authored result); offline localStorage leaderboard/history
-  with per-game top scores, daily and recent slices, bounded per-puzzle personal bests,
-  "Record puzzle" badge, and JSON import/export (`scores.ts`, arcade home).
+  uses a hidden-answer-safe public view model: before win/loss responses expose only
+  public remaining tiles, solved/remaining counts, status/clue fields, and safe guess
+  feedback; category keys, full category labels, solved group membership, and solution
+  arrays are reveal-gated until terminal state. Its one-use redacted category-label
+  pattern after two mistakes keeps the same score penalty and leak boundary.
+- `frontend/` — React 18 + Vite + TS SPA: arcade home + four screens sharing `GameShell`,
+  `DifficultyPicker`, `ResultCard`, `Toast`, `SoundToggle`; `framer-motion`, Web-Audio SFX,
+  persisted mute, and lean deps (`react`, `react-dom`, `framer-motion`). Builds into
+  `cat_de_roman_esti/web/static/`.
+- **v1.2 UX:** share/copy payloads, offline localStorage leaderboard/history, daily/recent
+  slices, bounded per-puzzle bests, "Record puzzle" badge, JSON import/export.
 
 ### Mobile contract (2026-07-04)
 - `docs/MOBILE_CONTRACT.md`: stable operationIds + `GET /api/manifest` + hidden-answer
@@ -71,15 +69,14 @@ The **terminal CLI** remains the original `easy|hard` semantic-hop game.
 - `scripts/validate_fixture.py` — stdlib CI-gate validator, **13 invariant classes** (incl.
   no-distractor-shortcut-below-par); `tests/test_fixture_invariants.py` runs it every test.
 
-### Deploy / docs
-- Multi-stage Docker, `run.sh`/`Makefile`, pinned web deps, and the existing docs/ADR set
-  remain current; `docs/STATUS.md` is the current-truth index.
+- Deploy/docs: Multi-stage Docker, `run.sh`/`Makefile`, pinned web deps, and the existing
+  docs/ADR set remain current; `docs/STATUS.md` is the current-truth index.
 
 ## Tests / quality
-- Suite spans 12 pytest modules (engine/graph/CLI/data-client, fixture invariants, web BFF,
-  the four wordgames, session store, mobile + app-pack contracts).
-- **CI** (`.github/workflows/ci.yml`) gates backend (`validate_fixture.py`, ruff, pytest on
-  py3.11/3.12) and frontend (`npm ci`, eslint, `npm run build`).
+- Suite spans engine/graph/CLI/data-client, fixture invariants, web BFF, the four wordgames,
+  session store, mobile + app-pack contracts.
+- **CI** gates backend (`validate_fixture.py`, ruff, pytest on py3.11/3.12) and frontend
+  (`npm ci`, eslint, `npm run build`).
 
 ## Run
 ```
@@ -98,9 +95,6 @@ unexercised here.
 
 ## Next / future work
 - **Real graph data:** run `romania-scraper kg build --commit` on the RO fleet host and point
-  `ROEDU_API_URL` at a live `ro_data_server` to swap the curated fixture for a corpus-scale
-  KG. _(blocked on fleet-host infra)_
-- **Live end-to-end smoke** against a running `ro_data_server` (only the offline path is
-  exercised here). _(needs a live server)_
-- **More content:** keep expanding nodes/puzzles/bridges via `scripts/expand_content.py` /
-  `scripts/densify_content.py`.
+  `ROEDU_API_URL` at live `ro_data_server`. _(blocked on fleet-host infra)_
+- **Live end-to-end smoke** against `ro_data_server`. _(needs a live server)_
+- **More content:** keep expanding nodes/puzzles/bridges via the content scripts.

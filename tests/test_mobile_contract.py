@@ -72,6 +72,19 @@ def _collect_strings(obj: object) -> set[str]:
     return found
 
 
+def _collect_keys(obj: object) -> set[str]:
+    """Every object key in a response body."""
+    found: set[str] = set()
+    if isinstance(obj, dict):
+        found |= set(obj)
+        for value in obj.values():
+            found |= _collect_keys(value)
+    elif isinstance(obj, list):
+        for item in obj:
+            found |= _collect_keys(item)
+    return found
+
+
 # --------------------------------------------------------------- hidden-answer guards
 def test_contexto_does_not_leak_target_before_win() -> None:
     from cat_de_roman_esti.wordgames.contexto import _pick_target
@@ -219,8 +232,30 @@ def test_conexiuni_hides_solution_until_over() -> None:
         for tile in body["tiles"]:
             assert set(tile) == {"id", "label"}
 
+    # A correct non-terminal group may update counts and remove those public tiles from
+    # the board, but still must not expose category keys/labels or solved membership.
+    first_members = next(iter(groups.values()))
+    correct_body = c.post(
+        f"/api/wordgames/conexiuni/games/{gid}/guess",
+        json={"ids": first_members},
+    ).json()
+    assert correct_body["correct"] is True
+    assert correct_body["won"] is False
+    assert "category" not in correct_body
+    assert "solution" not in correct_body
+    assert correct_body["solved"] == []
+    assert correct_body["solved_count"] == 1
+    assert "key" not in _collect_keys(correct_body)
+    assert {tile["id"] for tile in correct_body["tiles"]}.isdisjoint(first_members)
+    strings = _collect_strings(correct_body)
+    assert all(cat not in strings for cat in groups)
+    assert all(_category_label(cat) not in strings for cat in groups)
+
     # Boundary for the optional clue: after enough mistakes it may reveal a redacted
     # label pattern, but never category keys, exact category labels, or tile membership.
+    groups = _pick_board(random.Random(SEED + 1), "normal").groups
+    created = c.post("/api/wordgames/conexiuni/games", params={"seed": SEED + 1}).json()
+    gid = created["game_id"]
     cats = list(groups)
     one_from_each = [groups[cats[i]][0] for i in range(NUM_GROUPS)]
     for _ in range(MIN_CLUE_MISTAKES):

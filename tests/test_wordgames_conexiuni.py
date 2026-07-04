@@ -20,6 +20,23 @@ SEED = 1
 BASE = "/api/wordgames/conexiuni"
 
 
+PUBLIC_STATE_KEYS = {
+    "game_id",
+    "tiles",
+    "solved",
+    "solved_count",
+    "remaining_groups",
+    "lives",
+    "mistakes",
+    "won",
+    "lost",
+    "difficulty",
+    "clues_used",
+    "clue_available",
+    "clues",
+}
+
+
 def _groups_for(seed: int = SEED, difficulty: str = "normal") -> dict[str, list[str]]:
     """Reach into the server-side session to learn the true grouping (test-only)."""
     from cat_de_roman_esti.wordgames.conexiuni import store
@@ -31,6 +48,50 @@ def _groups_for(seed: int = SEED, difficulty: str = "normal") -> dict[str, list[
     return c, body, {cat: list(ids) for cat, ids in session.groups.items()}
 
 
+def _strings(obj: object) -> set[str]:
+    found: set[str] = set()
+    if isinstance(obj, str):
+        found.add(obj)
+    elif isinstance(obj, dict):
+        for value in obj.values():
+            found |= _strings(value)
+    elif isinstance(obj, list):
+        for item in obj:
+            found |= _strings(item)
+    return found
+
+
+def _keys(obj: object) -> set[str]:
+    found: set[str] = set()
+    if isinstance(obj, dict):
+        found |= set(obj)
+        for value in obj.values():
+            found |= _keys(value)
+    elif isinstance(obj, list):
+        for item in obj:
+            found |= _keys(item)
+    return found
+
+
+def _assert_preterminal_public(body: dict, groups: dict[str, list[str]] | None = None) -> None:
+    from cat_de_roman_esti.wordgames.conexiuni import _category_label
+
+    allowed = set(PUBLIC_STATE_KEYS)
+    allowed.update({"ok", "correct", "one_away", "clue", "daily"})
+    assert set(body) <= allowed
+    assert "solution" not in body
+    assert "score" not in body
+    assert "share" not in body
+    assert "category" not in body
+    assert body["solved"] == []
+    assert all(set(tile) == {"id", "label"} for tile in body["tiles"])
+    assert "key" not in _keys(body)
+    if groups is not None:
+        strings = _strings(body)
+        assert all(cat not in strings for cat in groups)
+        assert all(_category_label(cat) not in strings for cat in groups)
+
+
 def test_create_board_shape() -> None:
     c = make_client()
     res = c.post(BASE + "/games", params={"seed": SEED})
@@ -39,6 +100,8 @@ def test_create_board_shape() -> None:
     assert len(b["tiles"]) == 16
     assert len({t["id"] for t in b["tiles"]}) == 16
     assert b["solved"] == []
+    assert b["solved_count"] == 0
+    assert b["remaining_groups"] == 4
     assert b["lives"] == 4
     assert b["mistakes"] == 0
     assert b["won"] is False
@@ -50,6 +113,7 @@ def test_create_board_shape() -> None:
     # secret solution not leaked at start
     assert "solution" not in b
     assert "score" not in b
+    _assert_preterminal_public(b)
 
 
 def test_difficulty_accepted() -> None:
@@ -90,19 +154,27 @@ def test_guess_requires_exactly_four_distinct() -> None:
     assert c.post(f"{BASE}/games/{gid}/guess", json={"ids": bad}).status_code == 400
 
 
-def test_correct_group_reveals_category() -> None:
+def test_correct_group_hides_category_until_terminal() -> None:
     c, b, groups = _groups_for()
     gid = b["game_id"]
-    cat, members = next(iter(groups.items()))
+    _, members = next(iter(groups.items()))
     res = c.post(f"{BASE}/games/{gid}/guess", json={"ids": members})
     assert res.status_code == 200
     body = res.json()
     assert body["correct"] is True
-    assert body["category"]["key"] == cat
     assert body["lives"] == 4
-    assert {t["id"] for t in body["tiles"]} == set(members)
-    assert len(body["solved"]) == 1
     assert body["won"] is False
+    assert body["solved_count"] == 1
+    assert body["remaining_groups"] == 3
+    assert {t["id"] for t in body["tiles"]}.isdisjoint(members)
+    assert len(body["tiles"]) == 12
+    _assert_preterminal_public(body, groups)
+
+    state = c.get(f"{BASE}/games/{gid}").json()
+    assert state["solved_count"] == 1
+    assert state["remaining_groups"] == 3
+    assert {t["id"] for t in state["tiles"]}.isdisjoint(members)
+    _assert_preterminal_public(state, groups)
 
 
 def test_one_away_flag() -> None:
@@ -117,6 +189,7 @@ def test_one_away_flag() -> None:
     assert res["lives"] == 3
     assert res["mistakes"] == 1
     assert res["lost"] is False
+    _assert_preterminal_public(res, groups)
 
 
 def test_two_two_split_not_one_away() -> None:
@@ -127,6 +200,7 @@ def test_two_two_split_not_one_away() -> None:
     res = c.post(f"{BASE}/games/{gid}/guess", json={"ids": mixed}).json()
     assert res["correct"] is False
     assert res["one_away"] is False
+    _assert_preterminal_public(res, groups)
 
 
 def test_winning_playthrough_score_and_share() -> None:
@@ -171,6 +245,7 @@ def test_state_hides_solution_until_finished() -> None:
     state = c.get(f"{BASE}/games/{gid}").json()
     assert "solution" not in state
     assert "score" not in state
+    _assert_preterminal_public(state)
 
 
 def test_unknown_game_404() -> None:
@@ -198,6 +273,7 @@ def test_clue_unlocks_after_two_mistakes_without_solution_membership() -> None:
     state = c.get(f"{BASE}/games/{gid}").json()
     assert state["mistakes"] == 2
     assert state["clue_available"] is True
+    _assert_preterminal_public(state, groups)
 
     clue = c.post(f"{BASE}/games/{gid}/clue").json()
     assert clue["ok"] is True
@@ -207,6 +283,7 @@ def test_clue_unlocks_after_two_mistakes_without_solution_membership() -> None:
     assert clue["clue"] == clue["clues"][0]
     assert "solution" not in clue
     assert "tiles" in clue
+    _assert_preterminal_public(clue, groups)
 
     # The clue is a redacted category-label pattern only: no category key, no exact
     # category label, and no tile ids/membership are returned through the clue payload.
@@ -259,6 +336,20 @@ def test_guess_rejects_already_solved_tile() -> None:
     reused = [groups[cats[0]][0], *groups[cats[1]][:3]]
     res = c.post(f"{BASE}/games/{gid}/guess", json={"ids": reused})
     assert res.status_code == 400
+
+
+def test_serializer_fail_closed_for_group_payloads_before_terminal() -> None:
+    from cat_de_roman_esti.wordgames import conexiuni as C
+
+    _, _, groups = _groups_for()
+    order = [nid for ids in groups.values() for nid in ids]
+    session = C.ConexiuniSession(groups=groups, order=order)
+    session.solved.append(next(iter(groups)))
+
+    with pytest.raises(RuntimeError, match="solved groups before reveal"):
+        C._solved_groups(session, reveal=False)
+    with pytest.raises(RuntimeError, match="solution before reveal"):
+        C._full_solution(session, reveal=False)
 
 
 # --------------------------------------------------------------------- generation
@@ -327,7 +418,11 @@ def test_all_generated_boards_are_fair() -> None:
             for cat, members in session.groups.items():
                 res = c.post(f"{BASE}/games/{gid}/guess", json={"ids": members}).json()
                 assert res["correct"] is True, f"true group rejected: {ctx} cat={cat}"
-                assert res["category"]["key"] == cat, ctx
+                if res["won"]:
+                    assert res["category"]["key"] == cat, ctx
+                else:
+                    assert "category" not in res, ctx
+                    assert res["solved"] == [], ctx
 
 
 def test_board_generation_fails_closed_when_every_candidate_is_invalid(monkeypatch) -> None:

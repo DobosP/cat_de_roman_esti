@@ -26,6 +26,8 @@ export interface ConexiuniState {
   game_id: string;
   tiles: Tile[];
   solved: SolvedGroup[];
+  solved_count: number;
+  remaining_groups: number;
   lives: number;
   mistakes: number;
   won: boolean;
@@ -45,17 +47,24 @@ export interface ConexiuniState {
 export interface GuessResult {
   ok: true;
   correct: boolean;
-  // correct === true:
+  // present only on the terminal winning response:
   category?: { key: string; label: string };
-  tiles?: Tile[];
-  solved?: SolvedGroup[];
-  won?: boolean;
   // correct === false:
   one_away?: boolean;
-  mistakes?: number;
-  lost?: boolean;
-  // shared:
+  // shared public state:
+  tiles: Tile[];
+  solved: SolvedGroup[];
+  solved_count: number;
+  remaining_groups: number;
   lives: number;
+  mistakes: number;
+  won: boolean;
+  lost: boolean;
+  difficulty: Difficulty;
+  clues_used: number;
+  clue_available: boolean;
+  clues: ConexiuniClue[];
+  daily?: string;
   // present on finish (win or loss):
   score?: number;
   share?: string;
