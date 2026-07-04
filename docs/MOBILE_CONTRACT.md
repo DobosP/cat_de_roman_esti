@@ -57,3 +57,32 @@ in the code; the tests are regression guards that also assert the *reveal* bound
 Seeds/daily are deterministic by design (shared daily challenge); offline play inherently ships
 the whole KG, so this guards the **API surface**, keeping gameplay server-authoritative rather
 than claiming the offline answer is unknowable.
+
+## 4. Public app-pack fixture for roedu-mobile
+
+`scripts/export_mobile_app_pack.py` exports a deterministic, public-only app-pack snapshot
+from the bundled KG (ADR-0006). The checked-in cat fixture is:
+
+```text
+tests/fixtures/cat_mobile_app_pack_contract.json
+```
+
+It is copied into roedu-mobile as:
+
+```text
+apps/cat-mobile/src/fixtures/cat-contract-fixture.json
+```
+
+The fixture intentionally uses the cat-exported field names mobile must consume:
+
+| Section | Public fields |
+|---------|---------------|
+| `manifest` | `app`, `schema_version`, `manifest_version`, `build_version`, `generated_at`, `content_hash`, `counts` |
+| `kg_nodes` | `id`, `label_ro` |
+| `kg_edges` | `id`, `src_id`, `dst_id` |
+| `kg_puzzles` | `id`, `start_id`, `target_id`, `difficulty` |
+
+Hidden gameplay helper fields such as `solution_path` and `hint_neighbors` are excluded.
+The fixture's `content_hash` is computed over the normalized public mobile projection
+(`label`, undirected edge pairs, `start`/`target`) so roedu-mobile can verify its importer
+without importing Python code or contacting a live server.
