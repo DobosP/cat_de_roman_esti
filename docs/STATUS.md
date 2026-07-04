@@ -8,7 +8,8 @@ _Last verified: 2026-07-04_
 **v1.2 — text word-game arcade (web), on a densified KG.** The web app is a **text-only
 arcade of four server-authoritative word games** over the KG (no graph visualization):
 **Alchimie** (Infinite-Craft combine), **Cald sau Rece** (Contexto hot/cold + bounded
-category clue), **Lanțul Cuvintelor** (word-ladder), **Conexiuni** (NYT-Connections grouping). Each has difficulty
+category clue), **Lanțul Cuvintelor** (word-ladder), **Conexiuni** (NYT-Connections
+grouping + one redacted label-pattern clue after two mistakes). Each has difficulty
 tiers, a seeded **daily challenge**, score + shareable result, and offline leaderboard/history.
 Backed by `cat_de_roman_esti/wordgames/` (shared `service.py` over the offline KG + one
 `APIRouter` per game under `/api/wordgames/*`). The old graph SPA and its game-session
@@ -45,7 +46,9 @@ The **terminal CLI** remains the original `easy|hard` semantic-hop game.
   ro_data_server pull stays optional + fail-soft. Conexiuni fair-board generation remains
   bounded at 16 validated samples after the denser graph/content batch. Contexto exposes a
   one-use category clue after 3 counted guesses, with a score penalty and no target id/label
-  reveal before win/give-up.
+  reveal before win/give-up. Conexiuni exposes a one-use redacted category-label pattern
+  after two mistakes, with a score penalty and no category key/full label, tile membership,
+  or solution reveal before win/loss.
 - `frontend/` — React 18 + Vite + TS SPA: arcade home (animated game cards) + four screens
   (`Alchimie.tsx`, `CaldRece.tsx`, `Lant.tsx`, `Conexiuni.tsx`) sharing `GameShell`,
   `DifficultyPicker`, `ResultCard`, `Toast`, `SoundToggle`; `framer-motion` transitions,

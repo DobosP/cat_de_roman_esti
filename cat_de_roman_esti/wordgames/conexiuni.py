@@ -43,6 +43,9 @@ GROUP_SIZE = 4
 NUM_GROUPS = 4
 MAX_LIVES = 4
 BOARD_PICK_RETRIES = 16
+MIN_CLUE_MISTAKES = 2
+MAX_CLUES = 1
+CLUE_SCORE_PENALTY = 100
 
 DIFFICULTIES = ("usor", "normal", "greu")
 
@@ -64,6 +67,10 @@ class ConexiuniSession:
     lost: bool = False
     difficulty: str = "normal"
     daily: str | None = None
+    # Redacted label-pattern clues already revealed. They never include category keys,
+    # exact labels, tile ids, or membership.
+    clues: list[dict[str, str]] = field(default_factory=list)
+    clues_used: int = 0
     # history of guesses (each a list of 4 ids) for the share grid
     history: list[list[str]] = field(default_factory=list)
 
@@ -344,7 +351,7 @@ def _full_solution(session: ConexiuniSession) -> list[dict]:
 
 
 def _score(session: ConexiuniSession) -> int:
-    return max(0, 1000 - 250 * session.mistakes)
+    return max(0, 1000 - 250 * session.mistakes - CLUE_SCORE_PENALTY * session.clues_used)
 
 
 def _share(session: ConexiuniSession) -> str:
@@ -361,10 +368,50 @@ def _share(session: ConexiuniSession) -> str:
         lines.append(row)
     header = "cat_de_roman_esti · Conexiuni · "
     header += f"{session.mistakes} greseli"
+    if session.clues_used:
+        header += f" · indiciu x{session.clues_used}"
     if session.daily:
         header += f" · {session.daily}"
     body = "\n".join(lines) if lines else "—"
     return f"{header}\n{body}"
+
+
+def _label_pattern(label: str) -> str:
+    """Redact a category label to first letters + lengths, preserving separators."""
+    out: list[str] = []
+    at_word_start = True
+    for ch in label:
+        if ch.isalpha():
+            if at_word_start:
+                out.append(ch.upper())
+                at_word_start = False
+            else:
+                out.append("_")
+        else:
+            out.append(ch)
+            at_word_start = ch.isspace()
+    return "".join(out)
+
+
+def _clue_available(session: ConexiuniSession) -> bool:
+    return (
+        not session.won
+        and not session.lost
+        and session.clues_used < MAX_CLUES
+        and session.mistakes >= MIN_CLUE_MISTAKES
+        and len(session.solved) < len(session.groups)
+    )
+
+
+def _next_clue(session: ConexiuniSession) -> dict[str, str]:
+    """Pick a deterministic redacted label-pattern clue for one unsolved group."""
+    unsolved = [cat for cat in sorted(session.groups) if cat not in session.solved]
+    cat = unsolved[0]
+    pattern = _label_pattern(_category_label(cat))
+    return {
+        "pattern": pattern,
+        "message": f"Un grup ramas are eticheta: {pattern}.",
+    }
 
 
 def _state(game_id: str, session: ConexiuniSession) -> dict:
@@ -377,6 +424,9 @@ def _state(game_id: str, session: ConexiuniSession) -> dict:
         "won": session.won,
         "lost": session.lost,
         "difficulty": session.difficulty,
+        "clues_used": session.clues_used,
+        "clue_available": _clue_available(session),
+        "clues": list(session.clues),
     }
     if session.daily:
         body["daily"] = session.daily
@@ -481,3 +531,25 @@ def guess(game_id: str, body: GuessBody) -> dict:
         result["score"] = _score(session)
         result["share"] = _share(session)
     return result
+
+
+@router.post("/games/{game_id}/clue")
+def clue(game_id: str) -> dict:
+    session = store.get(game_id)
+    if session is None:
+        raise HTTPException(status_code=404, detail="Joc inexistent")
+    if session.won or session.lost:
+        raise HTTPException(status_code=400, detail="Jocul s-a terminat")
+    if session.clues_used >= MAX_CLUES:
+        raise HTTPException(status_code=400, detail="Indiciul a fost deja folosit")
+    if session.mistakes < MIN_CLUE_MISTAKES:
+        need = MIN_CLUE_MISTAKES - session.mistakes
+        raise HTTPException(
+            status_code=400,
+            detail=f"Mai greseste {need} incercari inainte de indiciu.",
+        )
+
+    clue_payload = _next_clue(session)
+    session.clues.append(clue_payload)
+    session.clues_used += 1
+    return {"ok": True, "clue": clue_payload, **_state(game_id, session)}

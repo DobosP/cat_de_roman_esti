@@ -9,7 +9,7 @@ manifest tests in `tests/test_app_pack_contract.py`.
 
 The app pins operationIds via `generate_unique_id_function` (`web/app.py:_operation_id`) to
 `<tag>_<endpoint-name>`, e.g. `contexto_guess`, `alchimie_combine`, `lant_move`,
-`conexiuni_guess`, `meta_manifest`. A generated TS client turns these into method names
+`conexiuni_guess`, `conexiuni_clue`, `meta_manifest`. A generated TS client turns these into method names
 (`contextoGuess`, …). Unlike FastAPI's default, they do **not** bake in the HTTP path, so a
 route refactor never churns the client surface. The full expected set is asserted in
 `test_openapi_operation_ids_are_stable`.
@@ -52,8 +52,26 @@ in the code; the tests are regression guards that also assert the *reveal* bound
 | contexto | target id/label | no `target` key; id absent everywhere | won / gave up |
 | alchimie | target id | `target.id = null`, `revealed = false` (label shown as the goal by design) | crafted (won) |
 | lant | solution path | only `start` + `target` ids exposed; no intermediate path node; hint is on-demand | per-hop, by playing / `…/hint` |
-| conexiuni | category grouping | no `solution`; tiles carry only `{id,label}` | won / lost |
+| conexiuni | category grouping | no `solution`; tiles carry only `{id,label}`; optional clue returns one redacted category-label pattern only, with no category key/label or tile membership | won / lost |
 
 Seeds/daily are deterministic by design (shared daily challenge); offline play inherently ships
 the whole KG, so this guards the **API surface**, keeping gameplay server-authoritative rather
 than claiming the offline answer is unknowable.
+
+## 4. Conexiuni clue endpoint
+
+`POST /api/wordgames/conexiuni/games/{game_id}/clue` is additive. It unlocks after two
+mistakes, can be used once, applies a score penalty, and returns:
+
+```json
+{
+  "ok": true,
+  "clue": { "pattern": "L_________", "message": "Un grup ramas are eticheta: L_________." },
+  "clues_used": 1,
+  "clue_available": false,
+  "clues": [{ "pattern": "L_________", "message": "Un grup ramas are eticheta: L_________." }]
+}
+```
+
+The clue payload is intentionally redacted: no category `key`, exact category label, tile ids,
+or solution membership appears before win/loss.

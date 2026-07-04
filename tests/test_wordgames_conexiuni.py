@@ -44,6 +44,9 @@ def test_create_board_shape() -> None:
     assert b["won"] is False
     assert b["lost"] is False
     assert b["difficulty"] == "normal"
+    assert b["clue_available"] is False
+    assert b["clues_used"] == 0
+    assert b["clues"] == []
     # secret solution not leaked at start
     assert "solution" not in b
     assert "score" not in b
@@ -177,6 +180,61 @@ def test_unknown_game_404() -> None:
         c.post(f"{BASE}/games/nope/guess", json={"ids": ["a", "b", "c", "d"]}).status_code
         == 404
     )
+    assert c.post(f"{BASE}/games/nope/clue").status_code == 404
+
+
+def test_clue_unlocks_after_two_mistakes_without_solution_membership() -> None:
+    c, b, groups = _groups_for()
+    gid = b["game_id"]
+    cats = list(groups.keys())
+    wrong = [groups[cats[0]][0], groups[cats[1]][0], groups[cats[2]][0], groups[cats[3]][0]]
+
+    early = c.post(f"{BASE}/games/{gid}/clue")
+    assert early.status_code == 400
+
+    c.post(f"{BASE}/games/{gid}/guess", json={"ids": wrong})
+    assert c.get(f"{BASE}/games/{gid}").json()["clue_available"] is False
+    c.post(f"{BASE}/games/{gid}/guess", json={"ids": wrong})
+    state = c.get(f"{BASE}/games/{gid}").json()
+    assert state["mistakes"] == 2
+    assert state["clue_available"] is True
+
+    clue = c.post(f"{BASE}/games/{gid}/clue").json()
+    assert clue["ok"] is True
+    assert clue["clues_used"] == 1
+    assert clue["clue_available"] is False
+    assert set(clue["clue"]) == {"pattern", "message"}
+    assert clue["clue"] == clue["clues"][0]
+    assert "solution" not in clue
+    assert "tiles" in clue
+
+    # The clue is a redacted category-label pattern only: no category key, no exact
+    # category label, and no tile ids/membership are returned through the clue payload.
+    payload_text = f"{clue['clue']['pattern']} {clue['clue']['message']}"
+    assert all(cat not in payload_text for cat in groups)
+    from cat_de_roman_esti.wordgames.conexiuni import _category_label
+
+    assert all(_category_label(cat) not in payload_text for cat in groups)
+    assert all(nid not in payload_text for ids in groups.values() for nid in ids)
+    assert c.post(f"{BASE}/games/{gid}/clue").status_code == 400
+
+
+def test_clue_penalizes_score_and_share() -> None:
+    c, b, groups = _groups_for()
+    gid = b["game_id"]
+    cats = list(groups.keys())
+    wrong = [groups[cats[0]][0], groups[cats[1]][0], groups[cats[2]][0], groups[cats[3]][0]]
+    c.post(f"{BASE}/games/{gid}/guess", json={"ids": wrong})
+    c.post(f"{BASE}/games/{gid}/guess", json={"ids": wrong})
+    c.post(f"{BASE}/games/{gid}/clue")
+
+    last = None
+    for members in groups.values():
+        last = c.post(f"{BASE}/games/{gid}/guess", json={"ids": members}).json()
+
+    assert last["won"] is True
+    assert last["score"] == 400  # two mistakes (500 pts) + one clue penalty (100 pts)
+    assert "indiciu x1" in last["share"]
 
 
 # --------------------------------------------------------------------- input hardening
