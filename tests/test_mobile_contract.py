@@ -169,7 +169,13 @@ def test_lant_exposes_only_start_and_target_not_the_path() -> None:
 def test_conexiuni_hides_solution_until_over() -> None:
     import random
 
-    from cat_de_roman_esti.wordgames.conexiuni import MAX_LIVES, NUM_GROUPS, _pick_board
+    from cat_de_roman_esti.wordgames.conexiuni import (
+        MAX_LIVES,
+        MIN_CLUE_MISTAKES,
+        NUM_GROUPS,
+        _category_label,
+        _pick_board,
+    )
 
     groups = _pick_board(random.Random(SEED), "normal").groups
     c = client()
@@ -185,11 +191,25 @@ def test_conexiuni_hides_solution_until_over() -> None:
         for tile in body["tiles"]:
             assert set(tile) == {"id", "label"}
 
-    # Boundary: exhausting lives (4 wrong guesses) reveals the full solution.
+    # Boundary for the optional clue: after enough mistakes it may reveal a redacted
+    # label pattern, but never category keys, exact category labels, or tile membership.
     cats = list(groups)
     one_from_each = [groups[cats[i]][0] for i in range(NUM_GROUPS)]
-    last = None
-    for _ in range(MAX_LIVES):
+    for _ in range(MIN_CLUE_MISTAKES):
+        c.post(
+            f"/api/wordgames/conexiuni/games/{gid}/guess", json={"ids": one_from_each}
+        )
+    clue = c.post(f"/api/wordgames/conexiuni/games/{gid}/clue").json()
+    assert "solution" not in clue
+    assert set(clue["clue"]) == {"pattern", "message"}
+    clue_text = f"{clue['clue']['pattern']} {clue['clue']['message']}"
+    assert all(cat not in clue_text for cat in groups)
+    assert all(_category_label(cat) not in clue_text for cat in groups)
+    assert all(nid not in clue_text for ids in groups.values() for nid in ids)
+
+    # Boundary: exhausting lives (4 wrong guesses) reveals the full solution.
+    last = clue
+    for _ in range(MAX_LIVES - MIN_CLUE_MISTAKES):
         last = c.post(
             f"/api/wordgames/conexiuni/games/{gid}/guess", json={"ids": one_from_each}
         ).json()
@@ -219,6 +239,7 @@ EXPECTED_OPERATION_IDS = {
     "conexiuni_create_game",
     "conexiuni_get_game",
     "conexiuni_guess",
+    "conexiuni_clue",
 }
 
 

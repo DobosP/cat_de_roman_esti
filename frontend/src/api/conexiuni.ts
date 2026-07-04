@@ -17,6 +17,11 @@ export interface SolvedGroup {
   tiles: Tile[];
 }
 
+export interface ConexiuniClue {
+  pattern: string;
+  message: string;
+}
+
 export interface ConexiuniState {
   game_id: string;
   tiles: Tile[];
@@ -26,6 +31,9 @@ export interface ConexiuniState {
   won: boolean;
   lost: boolean;
   difficulty: Difficulty;
+  clues_used: number;
+  clue_available: boolean;
+  clues: ConexiuniClue[];
   daily?: string;
   // present only once finished:
   score?: number;
@@ -52,6 +60,11 @@ export interface GuessResult {
   score?: number;
   share?: string;
   solution?: SolvedGroup[];
+}
+
+export interface ClueResult extends ConexiuniState {
+  ok: true;
+  clue: ConexiuniClue;
 }
 
 const JSON_HEADERS = { "Content-Type": "application/json" } as const;
@@ -136,8 +149,14 @@ export function guessConexiuni(gameId: string, ids: string[]): Promise<GuessResu
   );
 }
 
+/** POST /games/{id}/clue — reveal one redacted remaining category-label pattern. */
+export function clueConexiuni(gameId: string): Promise<ClueResult> {
+  return postJson<ClueResult>(`${BASE}/games/${encodeURIComponent(gameId)}/clue`);
+}
+
 export const conexiuniApi = {
   create: createConexiuni,
   get: getConexiuni,
   guess: guessConexiuni,
+  clue: clueConexiuni,
 };

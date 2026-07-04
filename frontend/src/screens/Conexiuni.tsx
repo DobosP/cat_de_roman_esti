@@ -238,6 +238,28 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     }
   }, [state, selected, busy, onToast]);
 
+  const requestClue = useCallback(async () => {
+    if (!state || busy || finished || !state.clue_available) return;
+    setBusy(true);
+    try {
+      const res = await conexiuniApi.clue(state.game_id);
+      sound.playSelect();
+      setState(res);
+      setHint(res.clue.message);
+      onToast("Indiciu deblocat.", "info");
+    } catch (err) {
+      sound.playError();
+      onToast(
+        err instanceof ApiError
+          ? err.message || `Indiciu respins (${err.status}).`
+          : "Indiciu respins.",
+        "error",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }, [state, busy, finished, onToast]);
+
   const copyShare = useCallback(async () => {
     if (!sharePayload) return;
     const ok = await copyResult(sharePayload);
@@ -431,11 +453,41 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
           )}
         </AnimatePresence>
 
+        {/* Server-authored redacted clues */}
+        <AnimatePresence>
+          {!finished &&
+            state.clues.map((clue) => (
+              <motion.p
+                key={clue.pattern}
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="muted center"
+                style={{ margin: 0, fontSize: "0.85rem" }}
+              >
+                {clue.message}
+              </motion.p>
+            ))}
+        </AnimatePresence>
+
         {/* Controls */}
         {!finished && (
           <div className="col" style={{ gap: 8 }}>
             <div className="row center wrap" style={{ gap: 12 }}>
               <span className="faint">{selected.length}/4 selectate</span>
+              <button
+                type="button"
+                className="btn btn-ghost"
+                disabled={busy || !state.clue_available}
+                onClick={() => void requestClue()}
+                title={
+                  state.clue_available
+                    ? "Arata un indiciu redactionat"
+                    : "Disponibil dupa doua greseli"
+                }
+              >
+                Indiciu
+              </button>
               <button
                 type="button"
                 className="btn btn-ghost"
