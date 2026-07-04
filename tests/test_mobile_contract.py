@@ -72,6 +72,23 @@ def test_contexto_does_not_leak_target_before_win() -> None:
         assert "target" not in body  # dedicated reveal key absent pre-win
         assert secret not in _collect_ids(body)  # ...and the id leaks nowhere else
 
+    # Boundary for the optional category clue: it may reveal the broad category, but not
+    # the secret concept id/label/description.
+    svc = get_service()
+    for nid in svc.all_ids():
+        if nid == secret:
+            continue
+        c.post(
+            f"/api/wordgames/contexto/games/{gid}/guess",
+            json={"text": svc.label(nid)},
+        )
+        if c.get(f"/api/wordgames/contexto/games/{gid}").json()["attempts"] >= 3:
+            break
+    clue = c.post(f"/api/wordgames/contexto/games/{gid}/clue").json()
+    assert "target" not in clue
+    assert secret not in _collect_ids(clue)
+    assert set(clue["clue"]) == {"category", "message"}
+
     # Boundary: giving up reveals the secret target id.
     over = c.post(f"/api/wordgames/contexto/games/{gid}/giveup").json()
     assert over["target"]["id"] == secret
@@ -192,6 +209,7 @@ EXPECTED_OPERATION_IDS = {
     "contexto_create_game",
     "contexto_get_game",
     "contexto_guess",
+    "contexto_clue",
     "contexto_give_up",
     "lant_create_game",
     "lant_get_game",

@@ -10,7 +10,7 @@ The name is a pun on *"cât de român ești"* — "how Romanian are you".
 ## Web app — the word-game arcade
 
 The web app is a **text-only arcade** of four word games over the same Romanian concept
-graph (**325 concepts / 734 links / 108 puzzles**, `fixture-v4-dense` — no graph
+graph (**330 concepts / 750 links / 108 puzzles**, `fixture-v4-dense` — no graph
 visualization). All four are **server-authoritative** (the BFF validates moves and hides
 answers):
 

@@ -1,6 +1,6 @@
 """FastAPI app factory for the cat_de_roman_esti word-game arcade (BFF).
 
-``create_app()`` mounts three server-authoritative TEXT mini-games over the bundled
+``create_app()`` mounts four server-authoritative TEXT mini-games over the bundled
 Romanian knowledge graph (no graph visualization) and serves the built SPA:
 
   * ``/api/wordgames/alchimie``  — combine two concepts into a new one until you craft the target.
@@ -150,7 +150,7 @@ def create_app() -> FastAPI:
         """
         return manifest_payload
 
-    # The three text games (each self-contained, server-authoritative).
+    # The four text games (each self-contained, server-authoritative).
     app.include_router(alchimie_router)
     app.include_router(contexto_router)
     app.include_router(lant_router)

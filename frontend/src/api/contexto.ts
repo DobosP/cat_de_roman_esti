@@ -76,6 +76,14 @@ export interface RevealedTarget {
 
 export type Difficulty = "usor" | "normal" | "greu";
 
+export interface CategoryClue {
+  category: {
+    key: string;
+    label: string;
+  };
+  message: string;
+}
+
 /** Full game state (GET /games/{id} and POST /games). */
 export interface ContextoState {
   game_id: string;
@@ -84,6 +92,10 @@ export interface ContextoState {
   gave_up: boolean;
   reachable_count: number;
   difficulty: Difficulty;
+  clues_used: number;
+  clue_available: boolean;
+  /** Present only after the player asks for the clue. */
+  clue?: CategoryClue;
   /** Present only for a "Provocarea zilei" game (YYYY-MM-DD). */
   daily?: string;
   /** Past guesses, sorted best-first by the server. */
@@ -104,6 +116,9 @@ export interface GuessRejected {
   attempts: number;
   won: boolean;
   reachable_count: number;
+  clues_used: number;
+  clue_available: boolean;
+  clue?: CategoryClue;
 }
 
 /** An accepted guess. */
@@ -114,6 +129,9 @@ export interface GuessAccepted {
   attempts: number;
   won: boolean;
   reachable_count: number;
+  clues_used: number;
+  clue_available: boolean;
+  clue?: CategoryClue;
   target?: RevealedTarget;
   /** Present only once won (higher = better). */
   score?: number;
@@ -122,6 +140,12 @@ export interface GuessAccepted {
 }
 
 export type GuessResult = GuessRejected | GuessAccepted;
+
+export interface ClueResult extends ContextoState {
+  ok: true;
+  category: CategoryClue["category"];
+  message: string;
+}
 
 // --------------------------------------------------------------------- endpoints
 
@@ -162,6 +186,13 @@ export function submitGuess(
   );
 }
 
+/** POST /games/{id}/clue — reveal the broad target category, not the target itself. */
+export function requestClue(gameId: string): Promise<ClueResult> {
+  return postJson<ClueResult>(
+    `${BASE}/games/${encodeURIComponent(gameId)}/clue`,
+  );
+}
+
 /** POST /games/{id}/giveup — reveal the target and end the game. */
 export function giveUp(gameId: string): Promise<ContextoState> {
   return postJson<ContextoState>(
@@ -173,5 +204,6 @@ export const contextoApi = {
   createGame,
   getGame,
   submitGuess,
+  requestClue,
   giveUp,
 };

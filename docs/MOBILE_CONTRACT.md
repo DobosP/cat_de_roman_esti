@@ -34,7 +34,7 @@ the right generated types. Deterministic, side-effect-free (`data.fixture_manife
   "build_version": "fixture-v4-dense",
   "generated_at": "2026-06-21T00:00:00Z",
   "content_hash": "sha256:…",   // canonical hash over kg_nodes+kg_edges+kg_puzzles
-  "counts": { "nodes": 314, "edges": 711, "puzzles": 108 }
+  "counts": { "nodes": 330, "edges": 750, "puzzles": 108 }
 }
 ```
 
