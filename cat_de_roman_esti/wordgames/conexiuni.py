@@ -6,8 +6,9 @@ share a single (still-unsolved) category, surfacing an ``one_away`` flag when ex
 of the 4 belong to one category. Four mistakes are allowed; the game is won when all 4
 groups are found and lost at 0 lives (then the full solution is revealed).
 
-Server-authoritative: the per-category membership and the shuffled order live here, and
-the solution is only echoed back once the game is won or lost. Sessions are in-memory.
+Server-authoritative: the per-category membership and the shuffled order live here. Public
+responses are serialized through a terminal-state reveal gate so category keys, full labels,
+and membership are only echoed back once the game is won or lost. Sessions are in-memory.
 """
 
 from __future__ import annotations
@@ -296,12 +297,23 @@ def _pick_board(rng: random.Random, difficulty: str) -> ConexiuniSession:
 
 
 # --------------------------------------------------------------------- serializers
-def _tiles(session: ConexiuniSession) -> list[dict[str, str]]:
+def _tiles(session: ConexiuniSession, *, include_solved: bool = False) -> list[dict[str, str]]:
     svc = get_service()
-    return [{"id": nid, "label": svc.label(nid)} for nid in session.order]
+    solved_ids = {
+        nid
+        for cat in session.solved
+        for nid in session.groups[cat]
+    }
+    return [
+        {"id": nid, "label": svc.label(nid)}
+        for nid in session.order
+        if include_solved or nid not in solved_ids
+    ]
 
 
-def _solved_groups(session: ConexiuniSession) -> list[dict]:
+def _solved_groups(session: ConexiuniSession, *, reveal: bool) -> list[dict]:
+    if not reveal:
+        raise RuntimeError("refusing to serialize Conexiuni solved groups before reveal")
     svc = get_service()
     out: list[dict] = []
     for cat in session.solved:
@@ -332,7 +344,9 @@ def _category_label(cat: str) -> str:
     return labels.get(cat, cat)
 
 
-def _full_solution(session: ConexiuniSession) -> list[dict]:
+def _full_solution(session: ConexiuniSession, *, reveal: bool) -> list[dict]:
+    if not reveal:
+        raise RuntimeError("refusing to serialize Conexiuni solution before reveal")
     svc = get_service()
     out: list[dict] = []
     # stable order: solved first (in found order), then the rest alphabetically
@@ -415,10 +429,13 @@ def _next_clue(session: ConexiuniSession) -> dict[str, str]:
 
 
 def _state(game_id: str, session: ConexiuniSession) -> dict:
+    reveal = session.won or session.lost
     body: dict = {
         "game_id": game_id,
-        "tiles": _tiles(session),
-        "solved": _solved_groups(session),
+        "tiles": _tiles(session, include_solved=reveal),
+        "solved": _solved_groups(session, reveal=True) if reveal else [],
+        "solved_count": len(session.solved),
+        "remaining_groups": len(session.groups) - len(session.solved),
         "lives": session.lives,
         "mistakes": session.mistakes,
         "won": session.won,
@@ -430,10 +447,10 @@ def _state(game_id: str, session: ConexiuniSession) -> dict:
     }
     if session.daily:
         body["daily"] = session.daily
-    if session.won or session.lost:
+    if reveal:
         body["score"] = _score(session)
         body["share"] = _share(session)
-        body["solution"] = _full_solution(session)
+        body["solution"] = _full_solution(session, reveal=True)
     return body
 
 
@@ -493,19 +510,16 @@ def guess(game_id: str, body: GuessBody) -> dict:
 
     if shared is not None and shared not in session.solved:
         session.solved.append(shared)
-        svc = get_service()
         session.won = len(session.solved) == NUM_GROUPS
-        return {
+        state = _state(game_id, session)
+        result = {
             "ok": True,
             "correct": True,
-            "category": {"key": shared, "label": _category_label(shared)},
-            "tiles": [{"id": nid, "label": svc.label(nid)} for nid in session.groups[shared]],
-            "solved": _solved_groups(session),
-            "lives": session.lives,
-            "won": session.won,
-            **({"score": _score(session), "share": _share(session)} if session.won else {}),
-            **({"solution": _full_solution(session)} if session.won else {}),
+            **state,
         }
+        if session.won:
+            result["category"] = {"key": shared, "label": _category_label(shared)}
+        return result
 
     # wrong guess
     session.mistakes += 1
@@ -522,14 +536,8 @@ def guess(game_id: str, body: GuessBody) -> dict:
         "ok": True,
         "correct": False,
         "one_away": one_away,
-        "lives": session.lives,
-        "mistakes": session.mistakes,
-        "lost": session.lost,
+        **_state(game_id, session),
     }
-    if session.lost:
-        result["solution"] = _full_solution(session)
-        result["score"] = _score(session)
-        result["share"] = _share(session)
     return result
 
 

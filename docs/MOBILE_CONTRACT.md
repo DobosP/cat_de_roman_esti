@@ -52,7 +52,7 @@ in the code; the tests are regression guards that also assert the *reveal* bound
 | contexto | target id/label/solution | no `target` or `solution` key; target id/label absent everywhere; guesses carry rank feedback | won / gave up |
 | alchimie | target id | `target.id = null`, `revealed = false` (label shown as the goal by design) | crafted (won) |
 | lant | solution path | only `start` + `target` ids exposed; no intermediate path node; hint is on-demand | per-hop, by playing / `…/hint` |
-| conexiuni | category grouping | no `solution`; tiles carry only `{id,label}`; optional clue returns one redacted category-label pattern only, with no category key/label or tile membership | won / lost |
+| conexiuni | category grouping | no `solution`; tiles carry only `{id,label}` for the remaining public board; solved groups are counts only; optional clue returns one redacted category-label pattern only, with no category key/label or tile membership | won / lost |
 
 Seeds/daily are deterministic by design (shared daily challenge); offline play inherently ships
 the whole KG, so this guards the **API surface**, keeping gameplay server-authoritative rather
@@ -96,6 +96,13 @@ mistakes, can be used once, applies a score penalty, and returns:
 
 The clue payload is intentionally redacted: no category `key`, exact category label, tile ids,
 or solution membership appears before win/loss.
+
+Pre-terminal Conexiuni create/get/guess/clue responses use the same public view model:
+`tiles` contains only public tile `{id,label}` objects still playable on the board,
+`solved` stays `[]`, and progress is exposed through `solved_count` and
+`remaining_groups`. Correct guesses may return `correct: true`, but category `key`,
+category `label`, solved group tiles, and `solution` are reveal-gated until `won` or
+`lost`.
 
 ## 6. Public app-pack fixture for roedu-mobile
 
