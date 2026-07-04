@@ -461,7 +461,7 @@ function Home({
         </section>
 
         <p className="faint" style={{ fontSize: "0.8rem" }}>
-          Toate cele patru jocuri ruleaza pe acelasi graf de 325 de concepte romanesti.
+          Toate cele patru jocuri ruleaza pe acelasi graf de 330 de concepte romanesti.
         </p>
       </div>
     </div>

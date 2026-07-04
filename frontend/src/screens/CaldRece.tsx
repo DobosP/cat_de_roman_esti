@@ -243,7 +243,14 @@ export default function CaldRece({
           onToast(res.message, "error");
           setState((prev) =>
             prev
-              ? { ...prev, guesses: res.guesses, attempts: res.attempts }
+              ? {
+                  ...prev,
+                  guesses: res.guesses,
+                  attempts: res.attempts,
+                  clues_used: res.clues_used,
+                  clue_available: res.clue_available,
+                  clue: res.clue ?? prev.clue,
+                }
               : prev,
           );
           return;
@@ -257,6 +264,9 @@ export default function CaldRece({
                 guesses: res.guesses,
                 attempts: res.attempts,
                 won: res.won,
+                clues_used: res.clues_used,
+                clue_available: res.clue_available,
+                clue: res.clue ?? prev.clue,
                 target: res.target ?? prev.target,
                 score: res.score ?? prev.score,
                 share: res.share ?? prev.share,
@@ -282,6 +292,28 @@ export default function CaldRece({
     },
     [state, busy, finished, text, onToast],
   );
+
+  const handleClue = useCallback(async () => {
+    if (!state || busy || finished || !state.clue_available) return;
+    setBusy(true);
+    try {
+      const res = await contextoApi.requestClue(state.game_id);
+      sound.playSelect();
+      setState(res);
+      onToast(res.message, "info");
+    } catch (err) {
+      sound.playError();
+      onToast(
+        err instanceof ApiError
+          ? `Indiciul nu este disponibil (${err.status}).`
+          : "Nu am putut cere indiciul.",
+        "error",
+      );
+    } finally {
+      setBusy(false);
+      inputRef.current?.focus();
+    }
+  }, [state, busy, finished, onToast]);
 
   const handleGiveUp = useCallback(async () => {
     if (!state || busy || finished) return;
@@ -429,6 +461,28 @@ export default function CaldRece({
             >
               {state?.attempts ?? 0} incercari
             </span>
+            {(state?.clues_used ?? 0) > 0 && (
+              <span
+                className="badge"
+                title="Indicii folosite"
+                style={{ fontVariantNumeric: "tabular-nums" }}
+              >
+                indiciu x{state?.clues_used}
+              </span>
+            )}
+            <button
+              type="button"
+              className="btn btn-ghost"
+              onClick={() => void handleClue()}
+              disabled={busy || finished || !state?.clue_available}
+              title={
+                state?.clue_available
+                  ? "Arata categoria conceptului secret"
+                  : "Disponibil dupa 3 incercari"
+              }
+            >
+              Indiciu
+            </button>
             <button
               type="button"
               className="btn btn-ghost"
@@ -489,6 +543,26 @@ export default function CaldRece({
             Ghiceste
           </button>
         </form>
+
+        {state?.clue && !finished && (
+          <div
+            className="row spread"
+            style={{
+              gap: 10,
+              alignItems: "center",
+              padding: "8px 12px",
+              borderRadius: 10,
+              border: "1px solid var(--border)",
+              background: "rgba(255,255,255,0.04)",
+            }}
+            aria-live="polite"
+          >
+            <span className="muted" style={{ fontSize: "0.88rem" }}>
+              Categoria secretului
+            </span>
+            <strong>{state.clue.category.label}</strong>
+          </div>
+        )}
 
         {/* latest verdict — always-visible feedback for the last guess */}
         <AnimatePresence mode="wait">

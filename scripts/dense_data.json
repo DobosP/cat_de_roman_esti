@@ -607,6 +607,46 @@
    "category": "arta_cultura",
    "description": "Film romanesc din 2005 regizat de Cristi Puiu, premiat in sectiunea Un Certain Regard la Cannes.",
    "salience": 0.5
+  },
+  {
+   "id": "n_vuia_i",
+   "node_type": "work",
+   "label_ro": "Vuia I",
+   "category": "stiinta",
+   "description": "Aeroplan construit de Traian Vuia si testat la Montesson in 1906, cunoscut pentru decolarea cu mijloace proprii.",
+   "salience": 0.48
+  },
+  {
+   "id": "n_vlaicu_ii",
+   "node_type": "work",
+   "label_ro": "Vlaicu II",
+   "category": "stiinta",
+   "description": "Aeroplan proiectat si construit de Aurel Vlaicu, cu rezultate premiate la concursul aviatic de la Aspern din 1912.",
+   "salience": 0.46
+  },
+  {
+   "id": "n_coanda_1910",
+   "node_type": "work",
+   "label_ro": "Coanda-1910",
+   "category": "stiinta",
+   "description": "Aeroplan experimental prezentat de Henri Coanda la Salonul Aeronautic de la Paris in 1910.",
+   "salience": 0.5
+  },
+  {
+   "id": "n_aeroportul_baneasa",
+   "node_type": "place",
+   "label_ro": "Aeroportul Baneasa Aurel Vlaicu",
+   "category": "geografie",
+   "description": "Aeroport bucurestean istoric, numit dupa pionierul aviatiei Aurel Vlaicu.",
+   "salience": 0.45
+  },
+  {
+   "id": "n_muzeul_aviatiei_romane",
+   "node_type": "org",
+   "label_ro": "Muzeul National al Aviatiei Romane",
+   "category": "arta_cultura",
+   "description": "Muzeu din Bucuresti dedicat istoriei aviatiei romanesti si patrimoniului aeronautic.",
+   "salience": 0.44
   }
  ],
  "edges": [
@@ -3460,6 +3500,150 @@
    "relation": "instance_of",
    "label_ro": "film al",
    "strength": 0.9,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_vuia_i",
+   "dst": "n_traian_vuia",
+   "relation": "created_by",
+   "label_ro": "construit de",
+   "strength": 0.95,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_vuia_i",
+   "dst": "n_aviatie",
+   "relation": "instance_of",
+   "label_ro": "aeroplan",
+   "strength": 0.9,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_vuia_i",
+   "dst": "n_aerodinamica",
+   "relation": "related_to",
+   "label_ro": "principii de zbor",
+   "strength": 0.7,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_vlaicu_ii",
+   "dst": "n_aurel_vlaicu",
+   "relation": "created_by",
+   "label_ro": "construit de",
+   "strength": 0.95,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_vlaicu_ii",
+   "dst": "n_aviatie",
+   "relation": "instance_of",
+   "label_ro": "aeroplan",
+   "strength": 0.9,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_vlaicu_ii",
+   "dst": "n_avionul_vlaicu",
+   "relation": "related_to",
+   "label_ro": "aceeasi serie tehnica",
+   "strength": 0.78,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_coanda_1910",
+   "dst": "n_henri_coanda",
+   "relation": "created_by",
+   "label_ro": "proiectat de",
+   "strength": 0.95,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_coanda_1910",
+   "dst": "n_aviatie",
+   "relation": "instance_of",
+   "label_ro": "aeroplan",
+   "strength": 0.9,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_coanda_1910",
+   "dst": "n_efectul_coanda",
+   "relation": "related_to",
+   "label_ro": "asociat cu",
+   "strength": 0.65,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_aeroportul_baneasa",
+   "dst": "n_bucuresti",
+   "relation": "located_in",
+   "label_ro": "se afla in",
+   "strength": 0.9,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_aeroportul_baneasa",
+   "dst": "n_aurel_vlaicu",
+   "relation": "named_after",
+   "label_ro": "numit dupa",
+   "strength": 0.9,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_aeroportul_baneasa",
+   "dst": "n_aviatie",
+   "relation": "related_to",
+   "label_ro": "infrastructura aeronautica",
+   "strength": 0.82,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_muzeul_aviatiei_romane",
+   "dst": "n_bucuresti",
+   "relation": "located_in",
+   "label_ro": "se afla in",
+   "strength": 0.85,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_muzeul_aviatiei_romane",
+   "dst": "n_aviatie",
+   "relation": "about",
+   "label_ro": "dedicat aviatiei",
+   "strength": 0.9,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_muzeul_aviatiei_romane",
+   "dst": "n_aeroportul_baneasa",
+   "relation": "related_to",
+   "label_ro": "patrimoniu aviatic bucurestean",
+   "strength": 0.72,
+   "is_distractor": 0,
+   "bidirectional": 1
+  },
+  {
+   "src": "n_muzeul_aviatiei_romane",
+   "dst": "n_romania_stat",
+   "relation": "part_of",
+   "label_ro": "patrimoniu national",
+   "strength": 0.62,
    "is_distractor": 0,
    "bidirectional": 1
   }

@@ -1,7 +1,7 @@
 """Web backend-for-frontend (BFF) for the cat_de_roman_esti word-game arcade.
 
-A FastAPI app that serves the built React SPA at ``/`` and three SERVER-AUTHORITATIVE
-text word-games under ``/api/wordgames/*`` (alchimie / contexto / lant), all backed by
+A FastAPI app that serves the built React SPA at ``/`` and four SERVER-AUTHORITATIVE
+text word-games under ``/api/wordgames/*``, all backed by
 the bundled offline knowledge graph via :mod:`cat_de_roman_esti.wordgames.service`. Game
 logic and secrets never reach the browser.
 

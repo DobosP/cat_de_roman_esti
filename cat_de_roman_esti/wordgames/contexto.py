@@ -41,6 +41,22 @@ MIN_REACHABLE = 120
 RESPONSIVE_MAX_HOPS = 5
 MIN_RESPONSIVE = 40
 
+# A clue should help a stuck player without making the opening trivial. It reveals only
+# the target's broad KG category, never the hidden id/label/description.
+MIN_CLUE_ATTEMPTS = 3
+CLUE_SCORE_PENALTY = 120
+
+CATEGORY_LABELS = {
+    "arta_cultura": "Arta & Cultura",
+    "geografie": "Geografie",
+    "istorie": "Istorie",
+    "limba": "Limba",
+    "literatura": "Literatura",
+    "personalitati": "Personalitati",
+    "societate": "Societate",
+    "stiinta": "Stiinta",
+}
+
 
 # --------------------------------------------------------------------------- session
 @dataclass
@@ -66,6 +82,8 @@ class ContextoSession:
     attempts: int = 0
     won: bool = False
     gave_up: bool = False
+    clue_revealed: bool = False
+    clues_used: int = 0
     difficulty: str = _DEFAULT_DIFFICULTY
     daily: str | None = None
 
@@ -139,10 +157,10 @@ _TRAIL_COOL = "🟧"
 _TRAIL_COLD = "🟥"
 
 
-def score_for(attempts: int) -> int:
+def score_for(attempts: int, clues_used: int = 0) -> int:
     """Reward few attempts: optimal (1 attempt) -> 1000, never below 50."""
     attempts = max(attempts, 1)
-    return max(50, 1000 - 60 * (attempts - 1))
+    return max(50, 1000 - 60 * (attempts - 1) - CLUE_SCORE_PENALTY * clues_used)
 
 
 def _trail_emoji(record: GuessRecord) -> str:
@@ -167,6 +185,8 @@ def share_line(session: ContextoSession) -> str:
         trail,
         f"{session.attempts} incercari",
     ]
+    if session.clues_used:
+        lines.append(f"indiciu x{session.clues_used}")
     if session.daily is not None:
         lines.append(session.daily)
     return "\n".join(lines)
@@ -292,6 +312,17 @@ def _sorted_guesses(session: ContextoSession) -> list[dict]:
     ]
 
 
+def _clue_payload(session: ContextoSession) -> dict:
+    svc = get_service()
+    node = svc.node(session.target)
+    category = node.category if node is not None else ""
+    label = CATEGORY_LABELS.get(category, category)
+    return {
+        "category": {"key": category, "label": label},
+        "message": f"Categoria secretului: {label}.",
+    }
+
+
 def _state(game_id: str, session: ContextoSession) -> dict:
     body: dict = {
         "game_id": game_id,
@@ -300,10 +331,19 @@ def _state(game_id: str, session: ContextoSession) -> dict:
         "gave_up": session.gave_up,
         "reachable_count": session.reachable,
         "difficulty": session.difficulty,
+        "clues_used": session.clues_used,
+        "clue_available": (
+            not session.won
+            and not session.gave_up
+            and not session.clue_revealed
+            and session.attempts >= MIN_CLUE_ATTEMPTS
+        ),
         "guesses": _sorted_guesses(session),
     }
     if session.daily is not None:
         body["daily"] = session.daily
+    if session.clue_revealed:
+        body["clue"] = _clue_payload(session)
     if session.won or session.gave_up:
         svc = get_service()
         body["target"] = {
@@ -312,7 +352,7 @@ def _state(game_id: str, session: ContextoSession) -> dict:
             "description": svc.description(session.target),
         }
     if session.won:
-        body["score"] = score_for(session.attempts)
+        body["score"] = score_for(session.attempts, session.clues_used)
         body["share"] = share_line(session)
     return body
 
@@ -364,6 +404,11 @@ def guess(game_id: str, body: GuessBody) -> dict:
             "attempts": session.attempts,
             "won": session.won,
             "reachable_count": session.reachable,
+            "clues_used": session.clues_used,
+            "clue_available": (
+                not session.clue_revealed
+                and session.attempts >= MIN_CLUE_ATTEMPTS
+            ),
         }
 
     distance = svc.distance(node_id, session.target)
@@ -402,16 +447,43 @@ def guess(game_id: str, body: GuessBody) -> dict:
         "attempts": session.attempts,
         "won": session.won,
         "reachable_count": session.reachable,
+        "clues_used": session.clues_used,
+        "clue_available": (
+            not session.won
+            and not session.clue_revealed
+            and session.attempts >= MIN_CLUE_ATTEMPTS
+        ),
     }
+    if session.clue_revealed:
+        result["clue"] = _clue_payload(session)
     if session.won:
         result["target"] = {
             "id": session.target,
             "label": svc.label(session.target),
             "description": svc.description(session.target),
         }
-        result["score"] = score_for(session.attempts)
+        result["score"] = score_for(session.attempts, session.clues_used)
         result["share"] = share_line(session)
     return result
+
+
+@router.post("/games/{game_id}/clue")
+def clue(game_id: str) -> dict:
+    session = store.get(game_id)
+    if session is None:
+        raise HTTPException(status_code=404, detail="Joc inexistent")
+    if session.won or session.gave_up:
+        raise HTTPException(status_code=400, detail="Jocul s-a terminat")
+    if session.attempts < MIN_CLUE_ATTEMPTS and not session.clue_revealed:
+        need = MIN_CLUE_ATTEMPTS - session.attempts
+        raise HTTPException(
+            status_code=400,
+            detail=f"Mai incearca {need} concepte inainte de indiciu.",
+        )
+    if not session.clue_revealed:
+        session.clue_revealed = True
+        session.clues_used += 1
+    return {"ok": True, **_clue_payload(session), **_state(game_id, session)}
 
 
 @router.post("/games/{game_id}/giveup")

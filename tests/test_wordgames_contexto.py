@@ -260,6 +260,86 @@ def test_score_rewards_fewer_attempts() -> None:
     assert body["score"] == 1000  # solved on the first attempt
 
 
+# --------------------------------------------------------------- category clue
+
+
+def _make_counted_guesses(client, gid: str, count: int) -> dict:
+    """Submit distinct non-target guesses until ``count`` counted attempts exist."""
+    from cat_de_roman_esti.wordgames.contexto import store
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    svc = get_service()
+    session = store.get(gid)
+    assert session is not None
+    state = {}
+    for nid in svc.all_ids():
+        if nid == session.target:
+            continue
+        state = client.post(
+            f"/api/wordgames/contexto/games/{gid}/guess",
+            json={"text": svc.label(nid)},
+        ).json()
+        assert state["ok"] is True
+        assert "target" not in state
+        if state["attempts"] >= count:
+            return state
+    raise AssertionError("could not build enough counted guesses")
+
+
+def test_category_clue_unlocks_after_three_attempts_without_target_leak() -> None:
+    from cat_de_roman_esti.wordgames.contexto import _pick_target
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    c = make_client()
+    gid = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()["game_id"]
+    early = c.post(f"/api/wordgames/contexto/games/{gid}/clue")
+    assert early.status_code == 400
+
+    before = _make_counted_guesses(c, gid, 3)
+    assert before["clue_available"] is True
+    assert before["clues_used"] == 0
+    assert "target" not in before
+
+    clue = c.post(f"/api/wordgames/contexto/games/{gid}/clue")
+    assert clue.status_code == 200, clue.text
+    body = clue.json()
+    secret = _pick_target(SEED, "normal").target
+    target_node = get_service().node(secret)
+    assert body["clues_used"] == 1
+    assert body["clue_available"] is False
+    assert body["clue"]["category"]["key"] == target_node.category
+    assert body["clue"]["category"]["label"]
+    assert secret not in str(body)
+    assert "target" not in body
+
+    again = c.post(f"/api/wordgames/contexto/games/{gid}/clue").json()
+    assert again["clues_used"] == 1  # repeated reads do not stack penalties
+
+
+def test_category_clue_penalizes_final_score_and_share() -> None:
+    c = make_client()
+    target_label = _reveal_target_label(c)
+    gid = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()["game_id"]
+    _make_counted_guesses(c, gid, 3)
+    c.post(f"/api/wordgames/contexto/games/{gid}/clue")
+    body = c.post(
+        f"/api/wordgames/contexto/games/{gid}/guess",
+        json={"text": target_label},
+    ).json()
+    assert body["won"] is True
+    assert body["clues_used"] == 1
+    assert body["score"] == 1000 - 60 * (body["attempts"] - 1) - 120
+    assert "indiciu x1" in body["share"]
+
+
+def test_clue_is_unavailable_after_giveup() -> None:
+    c = make_client()
+    gid = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()["game_id"]
+    _make_counted_guesses(c, gid, 3)
+    c.post(f"/api/wordgames/contexto/games/{gid}/giveup")
+    assert c.post(f"/api/wordgames/contexto/games/{gid}/clue").status_code == 400
+
+
 def test_daily_win_share_includes_date() -> None:
     c = make_client()
     date = "2026-06-21"

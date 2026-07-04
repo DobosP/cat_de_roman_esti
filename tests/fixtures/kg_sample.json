@@ -4,18 +4,18 @@
     "generated_at": "2026-06-21T00:00:00Z",
     "note": "Densified Romanian KG fixture for the word-game arcade. v4 merges a fact-checked dense content batch (new nodes + many edges incl. cross-category bridges) onto the v3 graph to raise mean degree (richer 'combine'/'connect' play), then REGENERATES the whole kg_puzzles layer on the dense graph via the same direction-aware BFS that validate_fixture.py re-derives (par==optimal_hops==len(path)-1, easy [2,3]/hard [4,7], hint_neighbors==solution_path[1:], in-category scope, no distractor shortcut; mixed crosses >=2 categories). degree = incident-edge count; tier from salience band.",
     "counts": {
-      "nodes": 325,
-      "edges": 734,
+      "nodes": 330,
+      "edges": 750,
       "puzzles": 108,
       "by_category": {
-        "arta_cultura": 38,
-        "geografie": 38,
+        "arta_cultura": 39,
+        "geografie": 39,
         "istorie": 43,
         "limba": 38,
         "literatura": 41,
         "personalitati": 47,
         "societate": 40,
-        "stiinta": 40
+        "stiinta": 43
       },
       "puzzles_by_cat_diff": {
         "arta_cultura/easy": 6,
@@ -598,7 +598,7 @@
       "description": "Capitala României, în Muntenia.",
       "salience": 0.6391,
       "difficulty_tier": "medium",
-      "degree": 14
+      "degree": 16
     },
     {
       "id": "n_carpati",
@@ -1318,7 +1318,7 @@
       "description": "Ramura a fizicii care studiaza miscarea aerului si fortele asupra corpurilor.",
       "salience": 0.3871,
       "difficulty_tier": "medium",
-      "degree": 3
+      "degree": 4
     },
     {
       "id": "n_anghel_saligny",
@@ -1338,7 +1338,7 @@
       "description": "Inginer si pionier al aviatiei romane, constructor al avioanelor Vlaicu.",
       "salience": 0.6243,
       "difficulty_tier": "medium",
-      "degree": 6
+      "degree": 8
     },
     {
       "id": "n_aviatie",
@@ -1348,7 +1348,7 @@
       "description": "Domeniul constructiei si zborului aparatelor mai grele decat aerul.",
       "salience": 0.5029,
       "difficulty_tier": "medium",
-      "degree": 7
+      "degree": 12
     },
     {
       "id": "n_avionul_vlaicu",
@@ -1358,7 +1358,7 @@
       "description": "Aparat de zbor proiectat si construit de Aurel Vlaicu in 1910.",
       "salience": 0.3271,
       "difficulty_tier": "hard",
-      "degree": 2
+      "degree": 3
     },
     {
       "id": "n_biologie_celulara",
@@ -1398,7 +1398,7 @@
       "description": "Fenomen aerodinamic prin care un jet de fluid adera la o suprafata vecina.",
       "salience": 0.5943,
       "difficulty_tier": "medium",
-      "degree": 6
+      "degree": 7
     },
     {
       "id": "n_emil_racovita",
@@ -1438,7 +1438,7 @@
       "description": "Inginer si inventator roman, pionier al aviatiei cu reactie.",
       "salience": 0.6843,
       "difficulty_tier": "easy",
-      "degree": 8
+      "degree": 9
     },
     {
       "id": "n_insulina",
@@ -1548,7 +1548,7 @@
       "description": "Inventator roman, autor al unui aparat de zbor cu decolare proprie (1906).",
       "salience": 0.5357,
       "difficulty_tier": "medium",
-      "degree": 6
+      "degree": 7
     },
     {
       "id": "n_victor_babes",
@@ -1758,7 +1758,7 @@
       "description": "Stat national, suveran, unitar si indivizibil, organizat ca republica semiprezidentiala.",
       "salience": 0.77,
       "difficulty_tier": "easy",
-      "degree": 15
+      "degree": 16
     },
     {
       "id": "n_uniunea_europeana",
@@ -3289,6 +3289,56 @@
       "salience": 0.5,
       "difficulty_tier": "medium",
       "degree": 3
+    },
+    {
+      "id": "n_vuia_i",
+      "node_type": "work",
+      "label_ro": "Vuia I",
+      "category": "stiinta",
+      "description": "Aeroplan construit de Traian Vuia si testat la Montesson in 1906, cunoscut pentru decolarea cu mijloace proprii.",
+      "salience": 0.48,
+      "difficulty_tier": "medium",
+      "degree": 3
+    },
+    {
+      "id": "n_vlaicu_ii",
+      "node_type": "work",
+      "label_ro": "Vlaicu II",
+      "category": "stiinta",
+      "description": "Aeroplan proiectat si construit de Aurel Vlaicu, cu rezultate premiate la concursul aviatic de la Aspern din 1912.",
+      "salience": 0.46,
+      "difficulty_tier": "medium",
+      "degree": 3
+    },
+    {
+      "id": "n_coanda_1910",
+      "node_type": "work",
+      "label_ro": "Coanda-1910",
+      "category": "stiinta",
+      "description": "Aeroplan experimental prezentat de Henri Coanda la Salonul Aeronautic de la Paris in 1910.",
+      "salience": 0.5,
+      "difficulty_tier": "medium",
+      "degree": 3
+    },
+    {
+      "id": "n_aeroportul_baneasa",
+      "node_type": "place",
+      "label_ro": "Aeroportul Baneasa Aurel Vlaicu",
+      "category": "geografie",
+      "description": "Aeroport bucurestean istoric, numit dupa pionierul aviatiei Aurel Vlaicu.",
+      "salience": 0.45,
+      "difficulty_tier": "medium",
+      "degree": 4
+    },
+    {
+      "id": "n_muzeul_aviatiei_romane",
+      "node_type": "org",
+      "label_ro": "Muzeul National al Aviatiei Romane",
+      "category": "arta_cultura",
+      "description": "Muzeu din Bucuresti dedicat istoriei aviatiei romanesti si patrimoniului aeronautic.",
+      "salience": 0.44,
+      "difficulty_tier": "medium",
+      "degree": 4
     }
   ],
   "kg_edges": [
@@ -10629,6 +10679,166 @@
       "relation": "instance_of",
       "label_ro": "film al",
       "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de314",
+      "src_id": "n_vuia_i",
+      "dst_id": "n_traian_vuia",
+      "relation": "created_by",
+      "label_ro": "construit de",
+      "strength": 0.95,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de315",
+      "src_id": "n_vuia_i",
+      "dst_id": "n_aviatie",
+      "relation": "instance_of",
+      "label_ro": "aeroplan",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de316",
+      "src_id": "n_vuia_i",
+      "dst_id": "n_aerodinamica",
+      "relation": "related_to",
+      "label_ro": "principii de zbor",
+      "strength": 0.7,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de317",
+      "src_id": "n_vlaicu_ii",
+      "dst_id": "n_aurel_vlaicu",
+      "relation": "created_by",
+      "label_ro": "construit de",
+      "strength": 0.95,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de318",
+      "src_id": "n_vlaicu_ii",
+      "dst_id": "n_aviatie",
+      "relation": "instance_of",
+      "label_ro": "aeroplan",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de319",
+      "src_id": "n_vlaicu_ii",
+      "dst_id": "n_avionul_vlaicu",
+      "relation": "related_to",
+      "label_ro": "aceeasi serie tehnica",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de320",
+      "src_id": "n_coanda_1910",
+      "dst_id": "n_henri_coanda",
+      "relation": "created_by",
+      "label_ro": "proiectat de",
+      "strength": 0.95,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de321",
+      "src_id": "n_coanda_1910",
+      "dst_id": "n_aviatie",
+      "relation": "instance_of",
+      "label_ro": "aeroplan",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de322",
+      "src_id": "n_coanda_1910",
+      "dst_id": "n_efectul_coanda",
+      "relation": "related_to",
+      "label_ro": "asociat cu",
+      "strength": 0.65,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de323",
+      "src_id": "n_aeroportul_baneasa",
+      "dst_id": "n_bucuresti",
+      "relation": "located_in",
+      "label_ro": "se afla in",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de324",
+      "src_id": "n_aeroportul_baneasa",
+      "dst_id": "n_aurel_vlaicu",
+      "relation": "named_after",
+      "label_ro": "numit dupa",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de325",
+      "src_id": "n_aeroportul_baneasa",
+      "dst_id": "n_aviatie",
+      "relation": "related_to",
+      "label_ro": "infrastructura aeronautica",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de326",
+      "src_id": "n_muzeul_aviatiei_romane",
+      "dst_id": "n_bucuresti",
+      "relation": "located_in",
+      "label_ro": "se afla in",
+      "strength": 0.85,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de327",
+      "src_id": "n_muzeul_aviatiei_romane",
+      "dst_id": "n_aviatie",
+      "relation": "about",
+      "label_ro": "dedicat aviatiei",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de328",
+      "src_id": "n_muzeul_aviatiei_romane",
+      "dst_id": "n_aeroportul_baneasa",
+      "relation": "related_to",
+      "label_ro": "patrimoniu aviatic bucurestean",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de329",
+      "src_id": "n_muzeul_aviatiei_romane",
+      "dst_id": "n_romania_stat",
+      "relation": "part_of",
+      "label_ro": "patrimoniu national",
+      "strength": 0.62,
       "is_distractor": 0,
       "bidirectional": 1
     }
