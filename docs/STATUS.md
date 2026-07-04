@@ -61,8 +61,8 @@ The **terminal CLI** remains the original `easy|hard` semantic-hop game.
 
 ### Mobile contract (2026-06-29, `125a357`)
 - `docs/MOBILE_CONTRACT.md`: stable operationIds + `GET /api/manifest` + hidden-answer
-  invariants for the generated Track A client (roedu-mobile); offline schema export via
-  `scripts/export_openapi.py`. Guarded by the mobile/app-pack contract tests.
+  invariants for roedu-mobile; exports via `scripts/export_openapi.py` and
+  `scripts/export_mobile_app_pack.py` (ADR-0006). Guarded by mobile/app-pack tests.
 
 ### Hardening
 - `scripts/validate_fixture.py` — stdlib CI-gate validator, **13 invariant classes** (incl.

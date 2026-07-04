@@ -11,6 +11,8 @@ from cat_de_roman_esti.data import (
     fixture_manifest,
     load_app_pack_fixture,
     load_from_client,
+    mobile_app_pack_content_hash,
+    mobile_app_pack_snapshot,
     records_from_app_packs,
 )
 
@@ -18,6 +20,9 @@ from .conftest import FakeRoeduClient
 
 FIXTURE = Path(__file__).parent / "fixtures" / "kg_app_pack_sample.json"
 KG_SAMPLE = Path(__file__).parent / "fixtures" / "kg_sample.json"
+MOBILE_CONTRACT_FIXTURE = (
+    Path(__file__).parent / "fixtures" / "cat_mobile_app_pack_contract.json"
+)
 
 
 def test_app_pack_fixture_preserves_tags_facets_for_selection():
@@ -239,3 +244,42 @@ def test_fixture_manifest_matches_bundled_copies():
     repo_root = Path(__file__).resolve().parents[1]
     package_copy = repo_root / "cat_de_roman_esti" / "fixtures" / "kg_sample.json"
     assert fixture_manifest(KG_SAMPLE) == fixture_manifest(package_copy)
+
+
+# ------------------------------------------------------------- mobile app-pack snapshot
+# roedu-mobile consumes this checked-in fixture in its own Jest contract tests. These
+# guards keep it generated from the cat fixture, public-only, and hash-compatible with
+# the mobile verifier without importing mobile code or starting a server.
+
+
+def test_mobile_app_pack_contract_snapshot_matches_generator():
+    checked_in = json.loads(MOBILE_CONTRACT_FIXTURE.read_text(encoding="utf-8"))
+    assert checked_in == mobile_app_pack_snapshot(KG_SAMPLE)
+
+
+def test_mobile_app_pack_contract_snapshot_is_public_only(kg_raw):
+    snapshot = json.loads(MOBILE_CONTRACT_FIXTURE.read_text(encoding="utf-8"))
+
+    assert snapshot["manifest"]["counts"] == {
+        "nodes": len(kg_raw["kg_nodes"]),
+        "edges": len(kg_raw["kg_edges"]),
+        "puzzles": len(kg_raw["kg_puzzles"]),
+    }
+    assert all(set(node) == {"id", "label_ro"} for node in snapshot["kg_nodes"])
+    assert all(set(edge) == {"id", "src_id", "dst_id"} for edge in snapshot["kg_edges"])
+    assert all(
+        set(puzzle) == {"id", "start_id", "target_id", "difficulty"}
+        for puzzle in snapshot["kg_puzzles"]
+    )
+    serialized = json.dumps(snapshot, ensure_ascii=False)
+    assert "solution_path" not in serialized
+    assert "hint_neighbors" not in serialized
+
+
+def test_mobile_app_pack_contract_hash_matches_public_projection():
+    snapshot = json.loads(MOBILE_CONTRACT_FIXTURE.read_text(encoding="utf-8"))
+    assert snapshot["manifest"]["content_hash"] == mobile_app_pack_content_hash(
+        snapshot["kg_nodes"],
+        snapshot["kg_edges"],
+        snapshot["kg_puzzles"],
+    )

@@ -75,3 +75,32 @@ mistakes, can be used once, applies a score penalty, and returns:
 
 The clue payload is intentionally redacted: no category `key`, exact category label, tile ids,
 or solution membership appears before win/loss.
+
+## 5. Public app-pack fixture for roedu-mobile
+
+`scripts/export_mobile_app_pack.py` exports a deterministic, public-only app-pack snapshot
+from the bundled KG (ADR-0008). The checked-in cat fixture is:
+
+```text
+tests/fixtures/cat_mobile_app_pack_contract.json
+```
+
+It is copied into roedu-mobile as:
+
+```text
+apps/cat-mobile/src/fixtures/cat-contract-fixture.json
+```
+
+The fixture intentionally uses the cat-exported field names mobile must consume:
+
+| Section | Public fields |
+|---------|---------------|
+| `manifest` | `app`, `schema_version`, `manifest_version`, `build_version`, `generated_at`, `content_hash`, `counts` |
+| `kg_nodes` | `id`, `label_ro` |
+| `kg_edges` | `id`, `src_id`, `dst_id` |
+| `kg_puzzles` | `id`, `start_id`, `target_id`, `difficulty` |
+
+Hidden gameplay helper fields such as `solution_path` and `hint_neighbors` are excluded.
+The fixture's `content_hash` is computed over the normalized public mobile projection
+(`label`, undirected edge pairs, `start`/`target`) so roedu-mobile can verify its importer
+without importing Python code or contacting a live server.

@@ -33,6 +33,7 @@ APP_PACK_SCHEMA_VERSION = 1
 # Shape version of the manifest dict itself (bump when the manifest keys change, so a
 # mobile client can detect a manifest it does not understand without parsing further).
 APP_PACK_MANIFEST_VERSION = 1
+MOBILE_APP_PACK_CONTRACT = "cat_de_roman_esti.mobile_app_pack.v1"
 KG_PRODUCTS = ("kg_nodes", "kg_edges", "kg_puzzles")
 APP_PACK_IDS = {
     "roedu:cat_de_roman_esti:kg_nodes:v1": "kg_nodes",
@@ -251,6 +252,146 @@ def fixture_manifest(path: str | Path | None = None) -> dict[str, object]:
         build_version=str(meta.get("build_version") or "unknown"),
         generated_at=str(meta.get("generated_at") or ""),
     )
+
+
+# ------------------------------------------------------------- mobile app-pack snapshot
+def _mobile_public_records(raw: Mapping[str, object]) -> tuple[
+    list[dict[str, object]],
+    list[dict[str, object]],
+    list[dict[str, object]],
+]:
+    """Project a KG fixture into the public field names exported to mobile.
+
+    The source KG puzzle records include server-side helper fields such as
+    ``solution_path`` and ``hint_neighbors``. They are deliberately excluded here: mobile
+    gets the public graph and puzzle endpoints only, then derives gameplay locally.
+    """
+
+    nodes = [
+        {
+            "id": str(rec.get("id") or ""),
+            "label_ro": str(rec.get("label_ro") or rec.get("title") or rec.get("id") or ""),
+        }
+        for rec in raw.get("kg_nodes", [])
+        if isinstance(rec, Mapping) and rec.get("id")
+    ]
+    edges = [
+        {
+            "id": str(rec.get("id") or ""),
+            "src_id": str(rec.get("src_id") or ""),
+            "dst_id": str(rec.get("dst_id") or ""),
+        }
+        for rec in raw.get("kg_edges", [])
+        if isinstance(rec, Mapping) and rec.get("src_id") and rec.get("dst_id")
+    ]
+    puzzles = [
+        {
+            "id": str(rec.get("id") or ""),
+            "start_id": str(rec.get("start_id") or ""),
+            "target_id": str(rec.get("target_id") or ""),
+            "difficulty": str(rec.get("difficulty") or ""),
+        }
+        for rec in raw.get("kg_puzzles", [])
+        if (
+            isinstance(rec, Mapping)
+            and rec.get("id")
+            and rec.get("start_id")
+            and rec.get("target_id")
+        )
+    ]
+    return (
+        sorted(nodes, key=lambda rec: str(rec["id"])),
+        sorted(edges, key=lambda rec: str(rec["id"])),
+        sorted(puzzles, key=lambda rec: str(rec["id"])),
+    )
+
+
+def _mobile_normalized_records(
+    nodes: Sequence[Mapping[str, object]],
+    edges: Sequence[Mapping[str, object]],
+    puzzles: Sequence[Mapping[str, object]],
+) -> tuple[list[dict[str, object]], list[list[str]], list[dict[str, object]]]:
+    """Normalize cat-exported field names to the mobile verifier's hash projection."""
+
+    mobile_nodes = [
+        {
+            "id": str(rec.get("id") or ""),
+            "label": str(rec.get("label") or rec.get("label_ro") or ""),
+        }
+        for rec in nodes
+    ]
+    mobile_edges = [
+        sorted([str(rec.get("src_id") or ""), str(rec.get("dst_id") or "")])
+        for rec in edges
+    ]
+    mobile_puzzles = [
+        {
+            "id": str(rec.get("id") or ""),
+            "start": str(rec.get("start") or rec.get("start_id") or ""),
+            "target": str(rec.get("target") or rec.get("target_id") or ""),
+            "difficulty": str(rec.get("difficulty") or ""),
+        }
+        for rec in puzzles
+    ]
+    return mobile_nodes, mobile_edges, mobile_puzzles
+
+
+def mobile_app_pack_content_hash(
+    nodes: Sequence[Mapping[str, object]],
+    edges: Sequence[Mapping[str, object]],
+    puzzles: Sequence[Mapping[str, object]],
+) -> str:
+    """Hash the public mobile app-pack projection.
+
+    This intentionally matches ``apps/cat-mobile/src/cat/manifest.ts``: node/puzzle
+    records are sorted by id, edge pairs are undirected and sorted, object keys are
+    sorted, and no hidden puzzle helper fields participate.
+    """
+
+    mobile_nodes, mobile_edges, mobile_puzzles = _mobile_normalized_records(
+        nodes, edges, puzzles
+    )
+
+    def _by_id(rec: Mapping[str, object]) -> str:
+        return str(rec.get("id", ""))
+
+    payload = {
+        "kg_nodes": sorted(mobile_nodes, key=_by_id),
+        "kg_edges": sorted(mobile_edges, key=lambda edge: "|".join(edge)),
+        "kg_puzzles": sorted(mobile_puzzles, key=_by_id),
+    }
+    canonical = json.dumps(
+        payload, sort_keys=True, ensure_ascii=False, separators=(",", ":")
+    ).encode("utf-8")
+    return f"sha256:{hashlib.sha256(canonical).hexdigest()}"
+
+
+def mobile_app_pack_snapshot(path: str | Path | None = None) -> dict[str, object]:
+    """Deterministic public app-pack snapshot consumed by roedu-mobile tests."""
+
+    fpath = Path(path) if path else DEFAULT_FIXTURE
+    raw = json.loads(fpath.read_text(encoding="utf-8"))
+    meta = raw.get("meta") if isinstance(raw.get("meta"), Mapping) else {}
+    nodes, edges, puzzles = _mobile_public_records(raw)
+    return {
+        "contract": MOBILE_APP_PACK_CONTRACT,
+        "manifest": {
+            "app": APP_PACK_APP,
+            "schema_version": APP_PACK_SCHEMA_VERSION,
+            "manifest_version": APP_PACK_MANIFEST_VERSION,
+            "build_version": str(meta.get("build_version") or "unknown"),
+            "generated_at": str(meta.get("generated_at") or ""),
+            "content_hash": mobile_app_pack_content_hash(nodes, edges, puzzles),
+            "counts": {
+                "nodes": len(nodes),
+                "edges": len(edges),
+                "puzzles": len(puzzles),
+            },
+        },
+        "kg_nodes": nodes,
+        "kg_edges": edges,
+        "kg_puzzles": puzzles,
+    }
 
 
 def _puzzle_node_ids(puzzles: Sequence[Mapping[str, object]]) -> set[str]:
