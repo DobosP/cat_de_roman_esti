@@ -11,8 +11,11 @@ arcade of four server-authoritative word games** over the KG (no graph visualiza
 category clue), **Lanțul Cuvintelor** (word-ladder), **Conexiuni** (NYT-Connections
 grouping + one redacted label-pattern clue after two mistakes). Each has difficulty
 tiers, a seeded **daily challenge**, score + shareable result, and offline leaderboard/history.
-Backed by `cat_de_roman_esti/wordgames/` (shared `service.py` over the offline KG + one
-DRF views per game under `/api/wordgames/*`). The old graph SPA and its game-session
+Backed by `cat_de_roman_esti/wordgames/` (shared `service.py` over the offline KG + DRF
+views per game under `/api/wordgames/*`). The BFF is **Django 5.2 + DRF** as of
+2026-07-06 (`claude/django-backend` — fleet operational uniformity; ported from FastAPI
+with a byte-compatible contract, verified against 46 golden flows + 194 tests; stateless
+Django: no DB/migrations, WhiteNoise serves the SPA, uvicorn ASGI single-process). The old graph SPA and its game-session
 API were **removed in `7308ce9` (2026-06-22)**; see `docs/adr/0001-pivot-to-word-game-arcade.md` —
 **no graph UI unless Paul explicitly reopens it**.
 

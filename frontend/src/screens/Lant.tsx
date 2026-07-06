@@ -7,6 +7,7 @@ import {
   type LantState,
   type PathStep,
   createLant,
+  getLant,
   hintLant,
   moveLant,
   undoLant,
@@ -17,6 +18,7 @@ import { GameIntro } from "../components/GameIntro";
 import { Hud, StatBadge } from "../components/Hud";
 import { ResultCard } from "../components/ResultCard";
 import { DifficultyPicker } from "../components/DifficultyPicker";
+import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
 import { sound } from "../sound";
 import { bestScore } from "../scores";
@@ -89,8 +91,9 @@ export default function Lant({
   onExit: () => void;
   onToast: (message: string, kind?: ToastKind) => void;
 }) {
+  const active = useActiveGame(GAME_KEY);
   const [state, setState] = useState<LantState | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(() => active.peek() !== null);
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
   const [shake, setShake] = useState(0);
@@ -102,6 +105,7 @@ export default function Lant({
     isPuzzleBest: boolean;
   } | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const resumeTried = useRef(false);
 
   const best = useMemo(() => bestScore(GAME_KEY), []);
   const recordOnce = useRecordScore("lant");
@@ -137,6 +141,7 @@ export default function Lant({
           difficulty: opts?.difficulty ?? difficulty,
           daily: opts?.daily,
         });
+        active.remember(fresh.game_id);
         setState(fresh);
         setText("");
       } catch (err) {
@@ -150,12 +155,41 @@ export default function Lant({
         setLoading(false);
       }
     },
-    [onToast, difficulty],
+    [onToast, difficulty, active],
   );
+
+  useEffect(() => {
+    if (resumeTried.current) return;
+    resumeTried.current = true;
+    const id = active.peek();
+    if (!id) return;
+
+    setLoading(true);
+    void (async () => {
+      try {
+        const fresh = await getLant(id);
+        if (fresh.won) {
+          active.forget();
+          return;
+        }
+        setHint(null);
+        setScored(null);
+        setDifficulty(fresh.difficulty);
+        setState(fresh);
+        setText("");
+        onToast("Joc reluat.", "info");
+      } catch {
+        active.forget();
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [active, onToast]);
 
   // Record the score exactly once when the game is won.
   useEffect(() => {
     if (!state?.won || state.score === undefined) return;
+    active.forget();
     const detail = `${state.moves}/${state.optimal} mutari${
       state.daily ? ` · ${state.daily}` : ""
     }`;
@@ -168,7 +202,7 @@ export default function Lant({
     const { isBest, isPuzzleBest } = outcome;
     setScored({ score: state.score, isBest, isPuzzleBest });
     if (isBest || isPuzzleBest) sound.playRecord();
-  }, [state, puzzleKey, recordOnce]);
+  }, [state, puzzleKey, recordOnce, active]);
 
   useEffect(() => {
     if (state && !state.won) inputRef.current?.focus();
@@ -180,12 +214,13 @@ export default function Lant({
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Enter") {
         e.preventDefault();
+        active.forget();
         setState(null);
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [state?.won]);
+  }, [state?.won, active]);
 
   const won = state?.won ?? false;
   // Moves relative to par. Positive => still within/at optimal budget; negative => over par.
@@ -427,7 +462,10 @@ export default function Lant({
             isPuzzleRecord={scored?.isPuzzleBest ?? false}
             shareText={sharePayload}
             onCopy={() => void handleCopy()}
-            onReplay={() => setState(null)}
+            onReplay={() => {
+              active.forget();
+              setState(null);
+            }}
             onExit={onExit}
             replayLabel="Lant nou →"
           >
