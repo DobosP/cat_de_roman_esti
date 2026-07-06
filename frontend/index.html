@@ -2,12 +2,14 @@
 <html lang="ro">
   <head>
     <meta charset="UTF-8" />
+    <!-- Pinch-zoom stays enabled (WCAG 1.4.4); double-tap jank is handled in CSS via
+         touch-action, not by locking the viewport. -->
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
     <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#0a0b14" />
+    <meta name="theme-color" content="#0d0b20" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta
@@ -16,17 +18,9 @@
     />
     <meta
       name="description"
-      content="cat_de_roman_esti — joc de navigare prin reteaua semantica a culturii romanesti."
+      content="cat_de_roman_esti — patru jocuri de cuvinte peste reteaua semantica a culturii romanesti."
     />
-    <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
-    />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fonts are self-hosted via @fontsource (offline-first image; no network fonts). -->
     <title>cat de roman esti</title>
   </head>
   <body>

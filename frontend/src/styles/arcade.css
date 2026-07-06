@@ -1,0 +1,639 @@
+/* arcade.css — cat_de_roman_esti's bespoke styling layer on top of @roedu/ui.
+ *
+ * Structural rules:
+ *  - Themeable values come from the design-system tokens: var(--roedu-*), set by
+ *    ThemeProvider (src/theme.ts). Never restyle a roedu component — override tokens.
+ *  - App-specific color data (per-game accents, KG categories, the tricolor wordmark)
+ *    lives here as --game-* / --cat-* / --brand-* variables, mirrored in TS where JS
+ *    needs concrete values (src/games.ts, src/categories.ts).
+ *  - Legacy utility classes (.btn, .card, .chip, …) are kept as a bridge for screens
+ *    not yet migrated to @roedu/ui components; they read the same tokens so the whole
+ *    app re-themes at once.
+ */
+
+/* ------------------------------------------------------------------ document */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+html,
+body {
+  /* Mobile: no rubber-band bounce; the app is a fixed full-viewport shell. */
+  overscroll-behavior: none;
+  height: 100dvh;
+}
+
+body {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  /* Kill double-tap-to-zoom jank while leaving pinch-zoom available (a11y). */
+  touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  background: #0d0b20; /* pre-hydration paint; the shell owns the real backdrop */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ------------------------------------------------------------------ app shell */
+/* ThemeProvider renders .roedu-root — that's the app shell and the first place the
+   design-system tokens exist. Everything below inherits from it. */
+.roedu-root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  color: var(--roedu-color-text);
+  font-family: var(--roedu-font-body);
+  background:
+    radial-gradient(1100px 750px at 8% -12%, rgba(255, 84, 112, 0.16), transparent 60%),
+    radial-gradient(950px 700px at 102% -4%, rgba(198, 137, 255, 0.17), transparent 55%),
+    radial-gradient(900px 900px at 50% 125%, rgba(78, 168, 255, 0.12), transparent 62%),
+    linear-gradient(165deg, #14102e, #0d0b20 55%, #080614);
+  background-attachment: fixed;
+  color-scheme: dark;
+
+  /* --- app-specific palette ------------------------------------------------ */
+  /* tricolor-flavoured brand ramp (gold -> coral -> cobalt) */
+  --brand-gold: #ffd166;
+  --brand-coral: #ff5470;
+  --brand-cobalt: #4ea8ff;
+  --brand-gradient: linear-gradient(100deg, var(--brand-gold), var(--brand-coral) 52%, var(--brand-cobalt));
+
+  /* per-game identities (mirrors src/games.ts) */
+  --game-alchimie: #c689ff;
+  --game-alchimie-glow: #e3ccff;
+  --game-contexto: #ff8a5c;
+  --game-contexto-glow: #ffc9a3;
+  --game-lant: #4fd8e0;
+  --game-lant-glow: #a9f0f5;
+  --game-conexiuni: #54e39d;
+  --game-conexiuni-glow: #abf2cd;
+
+  /* KG category map (mirrors src/categories.ts) */
+  --cat-istorie: #f4a259;
+  --cat-literatura: #8ec5ff;
+  --cat-geografie: #5fd99b;
+  --cat-personalitati: #f178b6;
+  --cat-arta_cultura: #c08bff;
+  --cat-stiinta: #56d4dd;
+  --cat-societate: #ffd166;
+  --cat-limba: #7bdff2;
+  --cat-mixed: #b8b8d1;
+
+  /* --- legacy bridge aliases (screens not yet on @roedu/ui components) ----- */
+  --bg-0: #080614;
+  --bg-1: #0d0b20;
+  --surface: var(--roedu-color-surface);
+  --surface-strong: rgba(38, 33, 76, 0.92);
+  --surface-border: var(--roedu-color-border);
+  --surface-border-strong: rgba(190, 178, 255, 0.34);
+  --text: var(--roedu-color-text);
+  --text-dim: var(--roedu-color-text-muted);
+  --text-faint: #7d76a6;
+  --accent: var(--roedu-color-primary);
+  --accent-2: var(--roedu-color-accent);
+  --good: var(--roedu-color-success);
+  --bad: var(--roedu-color-danger);
+  --warn: #ffd166;
+  --glow-soft: 0 0 18px;
+  --glow-strong: 0 0 36px;
+  --shadow-card: var(--roedu-shadow-md);
+  --shadow-pop: var(--roedu-shadow-lg);
+  --radius-sm: var(--roedu-radius-sm);
+  --radius: var(--roedu-radius-md);
+  --radius-lg: var(--roedu-radius-lg);
+  --font-display: var(--roedu-font-heading);
+  --font-body: var(--roedu-font-body);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--roedu-font-heading);
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  color: inherit;
+}
+
+a {
+  color: var(--brand-gold);
+}
+
+/* ------------------------------------------------------------------ focus a11y */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--roedu-color-focus);
+  outline-offset: 3px;
+  border-radius: var(--roedu-radius-sm);
+}
+
+.field:focus-visible,
+input:focus-visible {
+  outline-offset: 0;
+  border-color: var(--roedu-color-accent);
+  box-shadow: 0 0 18px rgba(255, 209, 102, 0.25);
+}
+
+/* ------------------------------------------------------------------ layout */
+.app-shell {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+.screen-pad {
+  padding: clamp(16px, 4vw, 48px);
+  padding-top: max(clamp(16px, 4vw, 48px), env(safe-area-inset-top));
+  padding-left: max(clamp(16px, 4vw, 48px), env(safe-area-inset-left));
+  padding-right: max(clamp(16px, 4vw, 48px), env(safe-area-inset-right));
+  padding-bottom: max(clamp(16px, 4vw, 48px), env(safe-area-inset-bottom));
+}
+
+.container {
+  width: min(1100px, 100%);
+  margin-inline: auto;
+}
+
+/* ------------------------------------------------------------------ wordmark */
+.wordmark-gradient {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ------------------------------------------------------------------ buttons (legacy bridge) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--surface-border-strong);
+  background: var(--roedu-color-surface);
+  color: var(--roedu-color-text);
+  padding: 12px 20px;
+  border-radius: var(--roedu-radius-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    filter 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  border-color: var(--roedu-color-accent);
+  box-shadow: 0 0 18px rgba(255, 209, 102, 0.28);
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--brand-coral), #ff8a5c 78%, var(--brand-gold));
+  border-color: transparent;
+  color: #2b0714;
+  font-weight: 700;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 32px rgba(255, 84, 112, 0.45);
+  filter: saturate(1.08);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--roedu-color-border);
+}
+
+/* ------------------------------------------------------------------ inputs (legacy bridge) */
+.field {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  border-radius: var(--roedu-radius-md);
+  border: 1px solid var(--surface-border-strong);
+  background: var(--roedu-color-surface);
+  color: var(--roedu-color-text);
+  outline: none;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.field::placeholder {
+  color: var(--text-faint);
+}
+
+.field:disabled {
+  opacity: 0.55;
+}
+
+/* ------------------------------------------------------------------ segmented picker */
+.segment {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 6px;
+  padding: 4px;
+  border-radius: var(--roedu-radius-md);
+  border: 1px solid var(--roedu-color-border);
+  background: rgba(8, 6, 20, 0.45);
+}
+
+.segment-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 8px;
+  border: 1px solid transparent;
+  border-radius: var(--roedu-radius-sm);
+  background: transparent;
+  color: var(--roedu-color-text-muted);
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.segment-item:hover:not([aria-pressed="true"]) {
+  color: var(--roedu-color-text);
+  background: var(--roedu-color-surface);
+}
+
+.segment-item[aria-pressed="true"] {
+  background: linear-gradient(135deg, var(--brand-coral), #ff8a5c 78%, var(--brand-gold));
+  color: #2b0714;
+}
+
+.segment-item .seg-hint {
+  font-size: 0.68rem;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+@media (pointer: coarse) {
+  .segment-item {
+    min-height: 48px;
+  }
+}
+
+/* ------------------------------------------------------------------ badges/chips (legacy bridge) */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--roedu-radius-pill);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border: 1px solid var(--surface-border-strong);
+  background: var(--roedu-color-surface);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  background: var(--roedu-color-surface);
+  border: 1px solid var(--roedu-color-border);
+}
+
+/* ------------------------------------------------------------------ surfaces (legacy bridge) */
+.card {
+  background: var(--roedu-color-surface);
+  border: 1px solid var(--roedu-color-border);
+  border-radius: var(--roedu-radius-lg);
+  box-shadow: var(--roedu-shadow-md);
+  backdrop-filter: blur(14px);
+}
+
+.card-hover,
+.game-card {
+  transition:
+    transform 0.18s ease,
+    border-color 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.game-card:hover {
+  border-color: var(--surface-border-strong);
+  box-shadow: var(--roedu-shadow-lg);
+}
+
+.muted {
+  color: var(--roedu-color-text-muted);
+}
+
+.faint {
+  color: var(--text-faint);
+}
+
+/* ------------------------------------------------------------------ utilities */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.spread {
+  justify-content: space-between;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.fill {
+  flex: 1;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* ------------------------------------------------------------------ touch / pointer */
+.coarse-only {
+  display: none;
+}
+@media (pointer: coarse) {
+  .fine-only {
+    display: none !important;
+  }
+  .coarse-only {
+    display: inline;
+  }
+}
+
+@media (pointer: coarse) {
+  .btn {
+    min-height: 44px;
+  }
+  .chip {
+    min-height: 36px;
+    padding: 8px 14px;
+  }
+}
+
+.sound-toggle {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ------------------------------------------------------------------ home / hero */
+.hero-title {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.35em;
+  font-size: clamp(2.1rem, 5.5vw, 3.6rem);
+  line-height: 1.05;
+  font-weight: 600;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 16px;
+}
+
+.game-card {
+  text-align: left;
+  padding: 22px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: 10px;
+}
+
+.game-card-halo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.game-card-icon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  font-size: 1.7rem;
+  border-radius: 16px;
+  border: 1px solid transparent;
+}
+
+.game-card-title {
+  position: relative;
+  font-family: var(--roedu-font-heading);
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.game-card-blurb {
+  position: relative;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.game-card-footer {
+  position: relative;
+  margin-top: 4px;
+  align-items: baseline;
+}
+
+.game-card-cta {
+  font-weight: 700;
+  font-size: 0.92rem;
+  transition: letter-spacing 0.15s ease;
+}
+
+.game-card:hover .game-card-cta {
+  letter-spacing: 0.03em;
+}
+
+.totals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+  gap: 10px;
+}
+
+.history-tabs {
+  min-width: 220px;
+}
+
+/* ------------------------------------------------------------------ game intro */
+.game-intro {
+  align-self: center;
+  justify-self: center;
+  width: min(560px, 100%);
+  margin-inline: auto;
+  padding: clamp(22px, 4vw, 34px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.game-intro-icon {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  font-size: 2.3rem;
+  border-radius: 22px;
+  border: 1px solid transparent;
+}
+
+.game-intro-description {
+  margin: 0;
+  font-size: 0.95rem;
+  max-width: 46ch;
+}
+
+.game-intro-extras {
+  width: 100%;
+  gap: 12px;
+}
+
+/* ------------------------------------------------------------------ HUD stat badges */
+.stat-badge {
+  gap: 7px;
+}
+
+.stat-badge-label {
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+}
+
+.stat-badge-value {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--roedu-color-text);
+}
+
+/* ------------------------------------------------------------------ confetti */
+.confetti-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -12px;
+  width: 10px;
+  height: 14px;
+  border-radius: 3px;
+  will-change: transform, opacity;
+}
+
+/* ------------------------------------------------------------------ narrow screens */
+@media (max-width: 640px) {
+  .screen-pad {
+    padding: max(14px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right))
+      max(14px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+  }
+  .row.spread.stack-sm {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .row.spread.stack-sm > .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .game-shell-title {
+    display: none;
+  }
+
+  .game-layout {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+  .graph-card {
+    min-height: 56vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

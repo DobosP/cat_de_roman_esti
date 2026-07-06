@@ -19,7 +19,10 @@ FROM node:18-slim AS frontend
 WORKDIR /build
 
 # Copy ONLY the manifests first so `npm ci` is cached unless deps change.
+# The vendored @roedu/ui tarball is a file: dependency, so it must exist before
+# `npm ci` (it rides with the manifests; bumping it busts this cache layer, correctly).
 COPY frontend/package.json frontend/package-lock.json ./frontend/
+COPY frontend/vendor/ ./frontend/vendor/
 WORKDIR /build/frontend
 # Prefer the reproducible `npm ci` (needs package-lock.json); fall back to install.
 RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
