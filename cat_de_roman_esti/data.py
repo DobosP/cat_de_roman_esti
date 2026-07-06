@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
@@ -24,6 +25,15 @@ from .graph import Graph
 
 FIXTURE_DIR = Path(__file__).resolve().parent / "fixtures"
 DEFAULT_FIXTURE = FIXTURE_DIR / "kg_sample.json"
+
+
+def _resolve_fixture(path: str | Path | None) -> Path:
+    """Offline-fixture path: explicit arg > ``CAT_KG_FIXTURE`` env > bundled default.
+
+    The env override lets a deployment (e.g. the Docker image) ship real corpus data
+    as the default offline bundle (``fixtures/kg_real.json``) without touching the
+    curated ``kg_sample.json`` or any call site."""
+    return Path(path or os.environ.get("CAT_KG_FIXTURE") or DEFAULT_FIXTURE)
 DEFAULT_MAX_NODES = 10_000
 DEFAULT_MAX_EDGES = 50_000
 DEFAULT_MAX_PUZZLES = 5_000
@@ -162,7 +172,7 @@ def load_app_pack_fixture(path: str | Path) -> KgBundle:
 
 def load_fixture(path: str | Path | None = None) -> KgBundle:
     """Load a bundled KG snapshot from JSON (offline play / tests)."""
-    fpath = Path(path) if path else DEFAULT_FIXTURE
+    fpath = _resolve_fixture(path)
     raw = json.loads(fpath.read_text(encoding="utf-8"))
     return _bundle_from_records(
         raw.get("kg_nodes", []),
@@ -242,7 +252,7 @@ def fixture_manifest(path: str | Path | None = None) -> dict[str, object]:
     no clock, no env, cheap to recompute — so the same fixture always yields the same
     manifest and a regeneration that changes any record changes the hash.
     """
-    fpath = Path(path) if path else DEFAULT_FIXTURE
+    fpath = _resolve_fixture(path)
     raw = json.loads(fpath.read_text(encoding="utf-8"))
     meta = raw.get("meta") if isinstance(raw.get("meta"), Mapping) else {}
     return manifest_from_records(
@@ -369,7 +379,7 @@ def mobile_app_pack_content_hash(
 def mobile_app_pack_snapshot(path: str | Path | None = None) -> dict[str, object]:
     """Deterministic public app-pack snapshot consumed by roedu-mobile tests."""
 
-    fpath = Path(path) if path else DEFAULT_FIXTURE
+    fpath = _resolve_fixture(path)
     raw = json.loads(fpath.read_text(encoding="utf-8"))
     meta = raw.get("meta") if isinstance(raw.get("meta"), Mapping) else {}
     nodes, edges, puzzles = _mobile_public_records(raw)
