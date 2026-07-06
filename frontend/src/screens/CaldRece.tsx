@@ -7,8 +7,10 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import type { ToastKind } from "../components/Toast";
+import { Button, type ToastKind } from "@roedu/ui";
 import { GameShell } from "../components/GameShell";
+import { GameIntro } from "../components/GameIntro";
+import { Hud, StatBadge } from "../components/Hud";
 import { ResultCard } from "../components/ResultCard";
 import { DifficultyPicker } from "../components/DifficultyPicker";
 import { sound } from "../sound";
@@ -22,10 +24,13 @@ import {
   type GuessResult,
   type Temperature,
 } from "../api/contexto";
-import { recordScore, bestScore } from "../scores";
+import { bestScore } from "../scores";
+import { useRecordScore } from "../hooks/useRecordScore";
+import { gameByKey } from "../games";
 import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 
 const GAME_KEY = "contexto";
+const DEF = gameByKey("contexto");
 
 const DIFFICULTIES: { id: Difficulty; label: string; hint: string }[] = [
   { id: "usor", label: "Ușor", hint: "concept cunoscut" },
@@ -161,8 +166,7 @@ export default function CaldRece({
   const [isRecord, setIsRecord] = useState(false);
   const [isPuzzleRecord, setIsPuzzleRecord] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  // The score recorded for the current finished game (guards against double-record).
-  const recordedFor = useRef<string | null>(null);
+  const recordOnce = useRecordScore("contexto");
 
   const best = bestScore(GAME_KEY);
 
@@ -176,7 +180,6 @@ export default function CaldRece({
         setText("");
         setIsRecord(false);
         setIsPuzzleRecord(false);
-        recordedFor.current = null;
         setShowIntro(false);
         inputRef.current?.focus();
       } catch (err) {
@@ -209,7 +212,7 @@ export default function CaldRece({
   const sharePayload = useMemo(() => {
     if (!state?.won || !state.share) return null;
     return buildSharePayload({
-      gameTitle: "Cald sau Rece",
+      gameTitle: DEF.title,
       serverShare: state.share,
       score: state.score,
       puzzleKey,
@@ -219,16 +222,16 @@ export default function CaldRece({
   // Record the score exactly once when a game is won.
   useEffect(() => {
     if (!state || !state.won || state.score === undefined) return;
-    if (recordedFor.current === state.game_id) return;
-    recordedFor.current = state.game_id;
     const detail = state.daily
       ? `Zilnic ${state.daily} · ${state.attempts} incercari`
       : `${difficulty} · ${state.attempts} incercari`;
-    const { isBest, isPuzzleBest } = recordScore(GAME_KEY, state.score, detail, {
+    const outcome = recordOnce(state.game_id, state.score, detail, {
       puzzleKey,
       difficulty: state.difficulty,
       daily: state.daily,
     });
+    if (!outcome) return;
+    const { isBest, isPuzzleBest } = outcome;
     setIsPuzzleRecord(isPuzzleBest);
     if (isBest) {
       setIsRecord(true);
@@ -236,7 +239,7 @@ export default function CaldRece({
     } else if (isPuzzleBest) {
       sound.playRecord();
     }
-  }, [state, difficulty, puzzleKey]);
+  }, [state, difficulty, puzzleKey, recordOnce]);
 
   const handleGuess = useCallback(
     async (e?: React.FormEvent) => {
@@ -352,18 +355,6 @@ export default function CaldRece({
     onToast(ok ? "Copiat!" : "Nu am putut copia.", ok ? "info" : "error");
   }, [sharePayload, onToast]);
 
-  // On the intro screen: Enter starts the chosen difficulty (no mouse needed).
-  useEffect(() => {
-    if (!showIntro) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Enter" && !busy) {
-        e.preventDefault();
-        void start({ difficulty });
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [showIntro, busy, difficulty, start]);
 
   const guesses = state?.guesses ?? [];
   const bestGuess = guesses[0];
@@ -382,74 +373,40 @@ export default function CaldRece({
           style={{ gap: 18, paddingBlock: 8, justifyContent: "center" }}
         >
           <div style={{ width: "100%" }}>
-            <GameShell onExit={onExit} accent="#ff7a59">
-              {best && (
-                <span
-                  className="badge"
-                  title="Recordul tau"
-                  style={{ fontVariantNumeric: "tabular-nums" }}
-                >
-                  🏆 {best.score}
-                </span>
-              )}
-            </GameShell>
+            <GameShell onExit={onExit} accent={DEF.accent} />
           </div>
 
-          <motion.div
-            className="col center"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            style={{ gap: 8, textAlign: "center" }}
+          <GameIntro
+            icon={`${DEF.icon}🧊`}
+            title={DEF.title}
+            tag={DEF.tag}
+            accent={DEF.accent}
+            glow={DEF.glow}
+            description={
+              <p style={{ margin: 0 }}>
+                Exista un concept secret. Scrie ce-ti vine in minte — iti spun cat
+                de aproape esti. Cu cat mai putine incercari, cu atat scorul e mai
+                mare.
+              </p>
+            }
+            best={best}
+            startLabel="Joaca"
+            onStart={() => void start({ difficulty })}
+            onDaily={() => void start({ daily: todayLocal() })}
+            dailyLabel="Provocarea zilei"
+            starting={busy}
           >
-            <div style={{ fontSize: "2.4rem" }} aria-hidden>
-              🔥🧊
+            <div style={{ width: "100%", maxWidth: 420 }}>
+              <DifficultyPicker
+                options={DIFFICULTIES}
+                value={difficulty}
+                onChange={(id) => {
+                  sound.playSelect();
+                  setDifficulty(id);
+                }}
+              />
             </div>
-            <h1 style={{ fontSize: "clamp(1.6rem, 5vw, 2.4rem)", margin: 0 }}>
-              Cald sau Rece
-            </h1>
-            <p
-              className="muted"
-              style={{ margin: 0, maxWidth: 460, fontSize: "0.92rem" }}
-            >
-              Exista un concept secret. Scrie ce-ti vine in minte — iti spun cat
-              de aproape esti. Cu cat mai putine incercari, cu atat scorul e mai
-              mare.
-            </p>
-          </motion.div>
-
-          <div style={{ width: "100%", maxWidth: 420 }}>
-            <DifficultyPicker
-              options={DIFFICULTIES}
-              value={difficulty}
-              onChange={(id) => {
-                sound.playSelect();
-                setDifficulty(id);
-              }}
-            />
-          </div>
-
-          <div
-            className="col center"
-            style={{ gap: 10, width: "100%", maxWidth: 420 }}
-          >
-            <button
-              type="button"
-              className="btn btn-primary fill"
-              disabled={busy}
-              onClick={() => void start({ difficulty })}
-            >
-              Joaca
-            </button>
-            <button
-              type="button"
-              className="btn btn-ghost fill"
-              disabled={busy}
-              onClick={() => void start({ daily: todayLocal() })}
-              title="Acelasi concept secret pentru toata lumea azi"
-            >
-              📅 Provocarea zilei
-            </button>
-          </div>
+          </GameIntro>
         </div>
       </div>
     );
@@ -462,29 +419,32 @@ export default function CaldRece({
         style={{ gap: 16, minHeight: 0, paddingBlock: 8 }}
       >
         {/* header */}
-        <GameShell onExit={onExit} accent="#ff7a59" title="Cald sau Rece">
-            <span className="badge" title="Mod de joc">
-              {state?.daily ? `📅 ${state.daily}` : (state?.difficulty ?? difficulty)}
-            </span>
-            <span
-              className="badge"
+        <GameShell onExit={onExit} accent={DEF.accent} title={DEF.title}>
+          <Hud>
+            <StatBadge
+              label="Mod"
+              value={state?.daily ? `📅 ${state.daily}` : (state?.difficulty ?? difficulty)}
+              accent={DEF.accent}
+              title="Mod de joc"
+            />
+            <StatBadge
+              label="Incercari"
+              value={`${state?.attempts ?? 0} incercari`}
+              accent={DEF.accent}
               title="Incercari"
-              style={{ fontVariantNumeric: "tabular-nums" }}
-            >
-              {state?.attempts ?? 0} incercari
-            </span>
+            />
             {(state?.clues_used ?? 0) > 0 && (
-              <span
-                className="badge"
+              <StatBadge
+                label="Indiciu"
+                value={`x${state?.clues_used}`}
+                accent={DEF.accent}
                 title="Indicii folosite"
-                style={{ fontVariantNumeric: "tabular-nums" }}
-              >
-                indiciu x{state?.clues_used}
-              </span>
+              />
             )}
-            <button
+            <Button
               type="button"
-              className="btn btn-ghost"
+              variant="secondary"
+              size="sm"
               onClick={() => void handleClue()}
               disabled={busy || finished || !state?.clue_available}
               title={
@@ -494,30 +454,33 @@ export default function CaldRece({
               }
             >
               Indiciu
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
-              className="btn btn-ghost"
+              variant="secondary"
+              size="sm"
               onClick={() => void handleGiveUp()}
               disabled={busy || finished || !state}
             >
               Renunta
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
-              className="btn btn-ghost"
+              variant="secondary"
+              size="sm"
               onClick={() => setShowIntro(true)}
               disabled={busy}
               title="Joc nou"
             >
               ↻ Nou
-            </button>
+            </Button>
+          </Hud>
         </GameShell>
 
         {/* title */}
         <div className="col" style={{ gap: 4 }}>
           <h1 style={{ fontSize: "clamp(1.5rem, 4vw, 2.2rem)", margin: 0 }}>
-            Cald sau Rece
+            {DEF.title}
           </h1>
           <p className="muted" style={{ margin: 0, fontSize: "0.9rem" }}>
             Exista un concept secret. Scrie ce-ti vine in minte — iti spun cat
@@ -547,13 +510,12 @@ export default function CaldRece({
             aria-label="Concept de ghicit"
             enterKeyHint="send"
           />
-          <button
+          <Button
             type="submit"
-            className="btn btn-primary"
             disabled={busy || finished || !text.trim()}
           >
             Ghiceste
-          </button>
+          </Button>
         </form>
 
         {state?.clue && !finished && (

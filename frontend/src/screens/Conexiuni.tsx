@@ -17,17 +17,21 @@ import {
   type GuessResult,
   type SolvedGroup,
 } from "../api/conexiuni";
-import type { ToastKind } from "../components/Toast";
+import { Button, type ToastKind } from "@roedu/ui";
 import { GameShell } from "../components/GameShell";
+import { GameIntro } from "../components/GameIntro";
+import { Hud, StatBadge } from "../components/Hud";
 import { ResultCard } from "../components/ResultCard";
 import { DifficultyPicker } from "../components/DifficultyPicker";
+import { useRecordScore } from "../hooks/useRecordScore";
 import { sound } from "../sound";
-import { categoryColor } from "../theme/tokens";
-import { recordScore, bestScore } from "../scores";
+import { categoryColor } from "../categories";
+import { bestScore } from "../scores";
+import { gameByKey } from "../games";
 import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 
 const GAME_KEY = "conexiuni";
-const ACCENT = "#5fd99b";
+const DEF = gameByKey("conexiuni");
 
 interface SelfProps {
   onExit: () => void;
@@ -59,6 +63,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   // Transient inline hint shown under the board (e.g. "one away") so feedback persists
   // past the toast — cleared on the next selection change.
   const [hint, setHint] = useState<string | null>(null);
+  const recordOnce = useRecordScore(GAME_KEY);
 
   // Recompute the persisted best whenever the game state changes (e.g. after a
   // finished round writes a new record and we return to the start screen).
@@ -136,7 +141,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const sharePayload = useMemo(() => {
     if (!state || !finished || !state.share) return null;
     return buildSharePayload({
-      gameTitle: "Conexiuni",
+      gameTitle: DEF.title,
       serverShare: state.share,
       score: state.score,
       puzzleKey,
@@ -149,11 +154,13 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     const detail = state.won
       ? `${state.mistakes} greseli`
       : `pierdut · ${state.mistakes} greseli`;
-    const { isBest, isPuzzleBest } = recordScore(GAME_KEY, state.score, detail, {
+    const outcome = recordOnce(state.game_id, state.score, detail, {
       puzzleKey,
       difficulty: state.difficulty,
       daily: state.daily,
     });
+    if (!outcome) return;
+    const { isBest, isPuzzleBest } = outcome;
     if (state.won) sound.playWin();
     else sound.playError();
     if (isBest) {
@@ -163,8 +170,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       sound.playRecord();
     }
     setPuzzleRecordHit(isPuzzleBest);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [finished, state?.score, puzzleKey]);
+  }, [finished, puzzleKey, recordOnce, state]);
 
   const toggle = useCallback(
     (id: string) => {
@@ -294,61 +300,39 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     return (
       <div className="screen-pad fill" style={{ overflowY: "auto" }}>
         <div className="container col" style={{ gap: 18, paddingBottom: 32 }}>
-          <GameShell onExit={onExit} accent={ACCENT}>
-            <span className="badge" style={{ borderColor: ACCENT, color: ACCENT }}>
-              🔗 Conexiuni
-            </span>
-          </GameShell>
+          <GameShell onExit={onExit} accent={DEF.accent} />
 
-          <motion.div
-            className="card col"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            style={{ padding: 20, gap: 12, borderColor: ACCENT }}
-          >
-            <h2 style={{ margin: 0 }}>Conexiuni</h2>
-            <p className="muted" style={{ margin: 0 }}>
-              16 concepte, 4 grupuri ascunse. Alege exact 4 care impart o categorie. Ai 4
-              vieti — gaseste toate grupurile!
-            </p>
-            {best && (
-              <p className="faint" style={{ margin: 0 }}>
-                Record: {best.score} pct · {best.detail}
+          <GameIntro
+            icon={DEF.icon}
+            title={DEF.title}
+            tag={DEF.tag}
+            accent={DEF.accent}
+            glow={DEF.glow}
+            description={
+              <p style={{ margin: 0 }}>
+                16 concepte, 4 grupuri ascunse. Alege exact 4 care impart o categorie. Ai 4
+                vieti — gaseste toate grupurile!
               </p>
-            )}
-          </motion.div>
-
-          <DifficultyPicker
-            options={(["usor", "normal", "greu"] as Difficulty[]).map((d) => ({
-              id: d,
-              label: DIFF_LABEL[d],
-            }))}
-            value={difficulty}
-            onChange={(d) => {
-              sound.playSelect();
-              setDifficulty(d);
-            }}
-          />
-
-          <div className="row wrap center" style={{ gap: 12, marginTop: 8 }}>
-            <button
-              type="button"
-              className="btn btn-primary"
-              disabled={loading}
-              onClick={() => void start({ kind: "seed", difficulty })}
-              style={{ borderColor: ACCENT }}
-            >
-              {loading ? "…" : "Joaca"}
-            </button>
-            <button
-              type="button"
-              className="btn btn-ghost"
-              disabled={loading}
-              onClick={() => void start({ kind: "daily" })}
-            >
-              ★ Provocarea zilei
-            </button>
-          </div>
+            }
+            best={best}
+            startLabel="Joaca"
+            onStart={() => void start({ kind: "seed", difficulty })}
+            onDaily={() => void start({ kind: "daily" })}
+            dailyLabel="Provocarea zilei"
+            starting={loading}
+          >
+            <DifficultyPicker
+              options={(["usor", "normal", "greu"] as Difficulty[]).map((d) => ({
+                id: d,
+                label: DIFF_LABEL[d],
+              }))}
+              value={difficulty}
+              onChange={(d) => {
+                sound.playSelect();
+                setDifficulty(d);
+              }}
+            />
+          </GameIntro>
         </div>
       </div>
     );
@@ -361,16 +345,26 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     <div className="screen-pad fill" style={{ overflowY: "auto" }}>
       <div className="container col" style={{ gap: 16, paddingBottom: 32 }}>
         {/* Header */}
-        <GameShell onExit={onExit} accent={ACCENT} title="Conexiuni">
-            {state.daily && <span className="badge">★ {state.daily}</span>}
-            <span className="badge">{DIFF_LABEL[state.difficulty]}</span>
-            <span className="row" style={{ gap: 4 }} aria-label={`${state.lives} vieti ramase`}>
-              {lifeDots.map((alive, i) => (
-                <span key={i} aria-hidden style={{ opacity: alive ? 1 : 0.25 }}>
-                  {alive ? "●" : "○"}
+        <GameShell onExit={onExit} accent={DEF.accent} title={DEF.title}>
+          <Hud>
+            {state.daily && (
+              <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} title="Provocarea zilei" />
+            )}
+            <StatBadge label="DIFICULTATE" value={DIFF_LABEL[state.difficulty]} accent={DEF.accent} />
+            <StatBadge
+              label="VIETI"
+              value={
+                <span className="row" style={{ gap: 4 }} aria-label={`${state.lives} vieti ramase`}>
+                  {lifeDots.map((alive, i) => (
+                    <span key={i} aria-hidden style={{ opacity: alive ? 1 : 0.25 }}>
+                      {alive ? "●" : "○"}
+                    </span>
+                  ))}
                 </span>
-              ))}
-            </span>
+              }
+              accent={DEF.accent}
+            />
+          </Hud>
         </GameShell>
 
         {/* Solved groups as locked coloured rows */}
@@ -420,13 +414,13 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                       fontSize: "0.82rem",
                       lineHeight: 1.15,
                       opacity: busy && !isSel ? 0.55 : 1,
-                      borderColor: isSel ? ACCENT : "var(--surface-border)",
+                      borderColor: isSel ? DEF.accent : "var(--surface-border)",
                       background: isSel
-                        ? `color-mix(in srgb, var(--surface) 65%, ${ACCENT})`
+                        ? `color-mix(in srgb, var(--surface) 65%, ${DEF.accent})`
                         : undefined,
                       color: isSel ? "var(--text)" : undefined,
                       fontWeight: isSel ? 700 : 500,
-                      boxShadow: isSel ? `0 0 18px -6px ${ACCENT}` : undefined,
+                      boxShadow: isSel ? `0 0 18px -6px ${DEF.accent}` : undefined,
                     }}
                   >
                     {t.label}
@@ -475,9 +469,9 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
           <div className="col" style={{ gap: 8 }}>
             <div className="row center wrap" style={{ gap: 12 }}>
               <span className="faint">{selected.length}/4 selectate</span>
-              <button
+              <Button
                 type="button"
-                className="btn btn-ghost"
+                variant="secondary"
                 disabled={busy || !state.clue_available}
                 onClick={() => void requestClue()}
                 title={
@@ -487,33 +481,32 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                 }
               >
                 Indiciu
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
-                className="btn btn-ghost"
+                variant="secondary"
                 disabled={busy || remainingTiles.length <= GROUP_SIZE}
                 onClick={shuffle}
                 title="Amesteca pozitiile tiglelor"
               >
                 Amesteca
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
-                className="btn btn-ghost"
+                variant="secondary"
                 disabled={busy || selected.length === 0}
                 onClick={clearSelection}
               >
                 Goleste
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
-                className="btn btn-primary"
                 disabled={busy || selected.length !== 4}
                 onClick={submit}
-                style={{ borderColor: ACCENT }}
+                style={{ borderColor: DEF.accent }}
               >
                 {busy ? "…" : "Verifica"}
-              </button>
+              </Button>
             </div>
             <span className="faint center" style={{ fontSize: "0.72rem", opacity: 0.7 }}>
               Enter = verifica · Esc = goleste
@@ -539,7 +532,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
             <ResultCard
               icon={state.won ? "🎉" : "💔"}
               title={state.won ? "Toate grupurile gasite!" : "Ai ramas fara vieti."}
-              accent={ACCENT}
+              accent={DEF.accent}
               won={state.won}
               score={state.score}
               isRecord={recordHit}

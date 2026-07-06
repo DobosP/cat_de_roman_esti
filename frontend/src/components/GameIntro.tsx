@@ -78,7 +78,12 @@ export function GameIntro({
           {startLabel}
         </Button>
         {onDaily && (
-          <Button variant="secondary" onClick={onDaily} disabled={starting}>
+          <Button
+            variant="secondary"
+            onClick={onDaily}
+            disabled={starting}
+            title="Acelasi puzzle pentru toata lumea, azi"
+          >
             <span aria-hidden>📅</span> {dailyLabel}
           </Button>
         )}

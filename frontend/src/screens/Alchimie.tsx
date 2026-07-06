@@ -3,8 +3,9 @@
 // Server-authoritative: we render whatever the backend returns and never know the target
 // id until the server reveals it on a win.
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Button, Spinner, type ToastKind } from "@roedu/ui";
 import {
   alchimieApi,
   ApiError,
@@ -14,17 +15,20 @@ import {
   type Difficulty,
   type InventoryItem,
 } from "../api/alchimie";
-import type { ToastKind } from "../components/Toast";
 import { GameShell } from "../components/GameShell";
 import { ResultCard } from "../components/ResultCard";
+import { GameIntro } from "../components/GameIntro";
+import { Hud, StatBadge } from "../components/Hud";
 import { DifficultyPicker } from "../components/DifficultyPicker";
+import { useRecordScore } from "../hooks/useRecordScore";
+import { gameByKey } from "../games";
 import { sound } from "../sound";
-import { bestScore, recordScore } from "../scores";
+import { bestScore } from "../scores";
 import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 
 const GAME_KEY = "alchimie";
+const DEF = gameByKey("alchimie");
 
-const ACCENT = "#c08bff"; // arta_cultura purple — the "alchemy" accent.
 const GOLD = "#ffd166";
 
 const DIFFICULTIES: { id: Difficulty; label: string; hint: string }[] = [
@@ -52,8 +56,7 @@ export default function Alchimie({
   const [difficulty, setDifficulty] = useState<Difficulty>("normal");
   const [isRecord, setIsRecord] = useState(false);
   const [isPuzzleRecord, setIsPuzzleRecord] = useState(false);
-  // Guards against recording the same finished game twice.
-  const recordedFor = useRef<string | null>(null);
+  const recordOnce = useRecordScore("alchimie");
 
   const best = useMemo(() => bestScore(GAME_KEY), []);
 
@@ -69,7 +72,6 @@ export default function Alchimie({
         setLastMessage(null);
         setIsRecord(false);
         setIsPuzzleRecord(false);
-        recordedFor.current = null;
       } catch (err) {
         onToast(
           err instanceof ApiError
@@ -119,16 +121,16 @@ export default function Alchimie({
   // Record the score exactly once when a game is won.
   useEffect(() => {
     if (!state || !state.won || state.score === undefined) return;
-    if (recordedFor.current === state.game_id) return;
-    recordedFor.current = state.game_id;
     const detail = state.daily
       ? `Zilnic ${state.daily} · ${state.moves} combinari`
       : `${state.difficulty} · ${state.moves} combinari`;
-    const { isBest, isPuzzleBest } = recordScore(GAME_KEY, state.score, detail, {
+    const outcome = recordOnce(state.game_id, state.score, detail, {
       puzzleKey,
       difficulty: state.difficulty,
       daily: state.daily,
     });
+    if (!outcome) return;
+    const { isBest, isPuzzleBest } = outcome;
     setIsPuzzleRecord(isPuzzleBest);
     if (isBest) {
       setIsRecord(true);
@@ -136,7 +138,7 @@ export default function Alchimie({
     } else if (isPuzzleBest) {
       sound.playRecord();
     }
-  }, [state, puzzleKey]);
+  }, [state, puzzleKey, recordOnce]);
 
   const toggle = useCallback(
     (id: string) => {
@@ -289,7 +291,7 @@ export default function Alchimie({
   if (loading) {
     return (
       <div className="screen-pad fill center">
-        <p className="muted">Se prepara alambicul…</p>
+        <Spinner size="lg" label="Se incarca..." />
       </div>
     );
   }
@@ -299,41 +301,28 @@ export default function Alchimie({
     return (
       <div className="screen-pad fill">
         <div className="container col" style={{ gap: 18 }}>
-          <GameShell onExit={onExit} accent={ACCENT}>
-            {best && (
-              <span
-                className="badge"
-                title="Recordul tau"
-                style={{ fontVariantNumeric: "tabular-nums" }}
-              >
-                🏆 {best.score}
-              </span>
-            )}
-          </GameShell>
+          <GameShell onExit={onExit} accent={DEF.accent} />
 
-          <motion.div
-            className="card col"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            style={{ gap: 16, padding: 22 }}
-          >
-            <div className="col" style={{ gap: 4 }}>
-              <h1
-                style={{
-                  margin: 0,
-                  fontFamily: "var(--font-display)",
-                  color: ACCENT,
-                }}
-              >
-                ⚗ Alchimie
-              </h1>
-              <p className="muted" style={{ margin: 0 }}>
+          <GameIntro
+            icon={DEF.icon}
+            title={DEF.title}
+            tag={DEF.tag}
+            accent={DEF.accent}
+            glow={DEF.glow}
+            best={best}
+            description={
+              <p style={{ margin: 0 }}>
                 Combina doua concepte ca sa descoperi vecinii lor comuni si
                 ajunge la tinta ascunsa. Cu cat mai putine combinari, cu atat
                 scor mai mare.
               </p>
-            </div>
-
+            }
+            startLabel="Joaca →"
+            onStart={() => void start({ difficulty })}
+            onDaily={() => void start({ daily: todayLocal() })}
+            dailyLabel="Provocarea zilei"
+            starting={loading}
+          >
             <DifficultyPicker
               options={DIFFICULTIES}
               value={difficulty}
@@ -342,26 +331,7 @@ export default function Alchimie({
                 setDifficulty(id);
               }}
             />
-
-            <div className="row wrap" style={{ gap: 12, marginTop: 4 }}>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => void start({ difficulty })}
-                style={{ borderColor: ACCENT }}
-              >
-                Joaca →
-              </button>
-              <button
-                type="button"
-                className="btn btn-ghost"
-                onClick={() => void start({ daily: todayLocal() })}
-                title="Aceeasi tinta pentru toata lumea, azi"
-              >
-                📅 Provocarea zilei
-              </button>
-            </div>
-          </motion.div>
+          </GameIntro>
         </div>
       </div>
     );
@@ -371,33 +341,38 @@ export default function Alchimie({
     <div className="screen-pad fill" style={{ overflowY: "auto" }}>
       <div className="container col" style={{ gap: 18, paddingBottom: 32 }}>
         {/* Header */}
-        <GameShell onExit={onExit} accent={ACCENT} title="Alchimie">
+        <GameShell onExit={onExit} accent={DEF.accent} title={DEF.title}>
+          <Hud>
             {state.daily ? (
-              <span
-                className="badge"
-                style={{ borderColor: ACCENT, color: ACCENT }}
+              <StatBadge
+                label="Zi"
+                value={state.daily}
+                accent={DEF.accent}
                 title="Provocarea zilei"
-              >
-                📅 {state.daily}
-              </span>
+              />
             ) : (
-              <span
-                className="badge"
-                style={{ borderColor: ACCENT, color: ACCENT }}
+              <StatBadge
+                label="Mod"
+                value={state.difficulty}
+                accent={DEF.accent}
                 title="Dificultate"
-              >
-                ⚗ {state.difficulty}
-              </span>
+              />
             )}
-            <span className="badge">Combinari: {state.moves}</span>
-            <span className="badge" style={{ borderColor: GOLD, color: GOLD }}>
-              ✦ {state.discovered_count} descoperite
-            </span>
+            <StatBadge label="Combinari" value={state.moves} accent={DEF.accent} />
+            <StatBadge
+              label="Descoperite"
+              value={state.discovered_count}
+              accent={DEF.accent}
+            />
             {state.hints_used > 0 && (
-              <span className="badge" title="Indicii folosite">
-                💡 {state.hints_used}
-              </span>
+              <StatBadge
+                label="Indicii"
+                value={state.hints_used}
+                accent={DEF.accent}
+                title="Indicii folosite"
+              />
             )}
+          </Hud>
         </GameShell>
 
         {/* Target */}
@@ -407,10 +382,10 @@ export default function Alchimie({
           animate={{ opacity: 1, y: 0 }}
           style={{
             padding: 18,
-            borderColor: won ? GOLD : ACCENT,
+            borderColor: won ? GOLD : DEF.accent,
             boxShadow: won
               ? `0 0 50px -16px ${GOLD}`
-              : `0 0 36px -20px ${ACCENT}`,
+              : `0 0 36px -20px ${DEF.accent}`,
           }}
         >
           <div className="col" style={{ gap: 6 }}>
@@ -458,39 +433,38 @@ export default function Alchimie({
             </div>
             <div className="row wrap" style={{ gap: 8 }}>
               {selected.length > 0 && (
-                <button
+                <Button
                   type="button"
-                  className="btn btn-ghost"
+                  variant="secondary"
                   disabled={busy}
                   onClick={clearSelection}
                   title="Goleste alambicul (Esc)"
                 >
                   Goleste
-                </button>
+                </Button>
               )}
               {state.hint_available && (
-                <button
+                <Button
                   type="button"
-                  className="btn btn-ghost"
+                  variant="secondary"
                   disabled={busy}
                   onClick={() => void doHint()}
                   title="Iti arata o pereche utila (costa putin scor)"
                   style={{ borderColor: GOLD, color: GOLD }}
                 >
                   💡 Indiciu
-                </button>
+                </Button>
               )}
-              <button
+              <Button
                 type="button"
-                className="btn btn-primary"
                 disabled={busy || selected.length !== 2}
                 onClick={doCombine}
                 title="Combina cele doua concepte (Enter)"
                 aria-label="Combina cele doua concepte selectate"
-                style={{ borderColor: ACCENT }}
+                style={{ borderColor: DEF.accent }}
               >
                 {busy ? "…" : "⚗ Combina"}
-              </button>
+              </Button>
             </div>
           </div>
         )}
@@ -550,7 +524,7 @@ export default function Alchimie({
                     style={{
                       cursor: won ? "default" : "pointer",
                       borderColor: isSel
-                        ? ACCENT
+                        ? DEF.accent
                         : isHint
                           ? GOLD
                           : isFresh
@@ -558,7 +532,7 @@ export default function Alchimie({
                             : "var(--surface-border)",
                       background: isSel
                         ? "color-mix(in srgb, var(--surface) 70%, " +
-                          ACCENT +
+                          DEF.accent +
                           ")"
                         : isFresh
                           ? "color-mix(in srgb, var(--surface) 80%, " +
@@ -582,22 +556,22 @@ export default function Alchimie({
 
         {/* Footer actions */}
         <div className="row center wrap" style={{ gap: 12, marginTop: 8 }}>
-          <button
+          <Button
             type="button"
-            className="btn btn-ghost"
+            variant="secondary"
             disabled={busy}
             onClick={doReset}
           >
             ↻ Reia (acelasi joc)
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
-            className="btn btn-ghost"
+            variant="secondary"
             disabled={busy}
             onClick={() => setState(null)}
           >
             ⚂ Joc nou
-          </button>
+          </Button>
         </div>
 
         {/* Win banner */}
@@ -641,7 +615,7 @@ function Slot({ item }: { item: InventoryItem | undefined }) {
     );
   }
   return (
-    <span className="chip" style={{ borderColor: ACCENT, color: "var(--text)" }}>
+    <span className="chip" style={{ borderColor: DEF.accent, color: "var(--text)" }}>
       {item.parents ? "✦ " : ""}
       {item.label}
     </span>
