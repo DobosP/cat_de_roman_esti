@@ -52,6 +52,7 @@ class SPAStaticFiles(StaticFiles):
                 return await super().get_response("index.html", scope)
             raise
 
+
 # Arcade metadata — the home screen mirrors this (kept here so /api/health can report it).
 GAMES = [
     {
