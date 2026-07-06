@@ -18,12 +18,13 @@ from dataclasses import dataclass, field
 from functools import lru_cache
 from itertools import combinations
 
-from fastapi import APIRouter, HTTPException
+from django.urls import path
+from drf_spectacular.utils import extend_schema
 from pydantic import BaseModel
+from rest_framework.response import Response
 
+from ..web.http import ContractAPIView, http_error, parse_body, query_int, query_str
 from .service import SessionStore, WordGameService, daily_seed, get_service
-
-router = APIRouter(prefix="/api/wordgames/conexiuni", tags=["conexiuni"])
 
 GAME_KEY = "conexiuni"
 
@@ -153,9 +154,9 @@ def _choose_categories(rng: random.Random, difficulty: str) -> tuple[str, ...]:
     ranked = _ranked_category_sets()
     n = len(ranked)
     if n == 0:
-        raise HTTPException(
-            status_code=503,
-            detail="Nu exista suficiente categorii pentru un joc.",
+        raise http_error(
+            503,
+            "Nu exista suficiente categorii pentru un joc.",
         )
     third = max(1, n // 3)
     if difficulty == "usor":
@@ -290,9 +291,9 @@ def _pick_board(rng: random.Random, difficulty: str) -> ConexiuniSession:
             best, best_residual = candidate, residual
     if best is not None:
         return best
-    raise HTTPException(
-        status_code=503,
-        detail="Nu am putut genera o tabla valida; reincearca.",
+    raise http_error(
+        503,
+        "Nu am putut genera o tabla valida; reincearca.",
     )
 
 
@@ -455,109 +456,122 @@ def _state(game_id: str, session: ConexiuniSession) -> dict:
 
 
 # --------------------------------------------------------------------- endpoints
-@router.post("/games")
-def create_game(
-    seed: int | None = None,
-    difficulty: str = "normal",
-    daily: str | None = None,
-) -> dict:
-    if difficulty not in DIFFICULTIES:
-        difficulty = "normal"
-    if daily:
-        rng = random.Random(daily_seed(daily, GAME_KEY))
-    else:
-        rng = random.Random(seed)
-    session = _pick_board(rng, difficulty)
-    session.daily = daily
-    game_id = store.create(session)
-    return _state(game_id, session)
+class CreateGameView(ContractAPIView):
+    @extend_schema(operation_id="conexiuni_create_game", tags=["conexiuni"])
+    def post(self, request):
+        seed = query_int(request, "seed")
+        difficulty = query_str(request, "difficulty", "normal")
+        daily = query_str(request, "daily")
+        if difficulty not in DIFFICULTIES:
+            difficulty = "normal"
+        if daily:
+            rng = random.Random(daily_seed(daily, GAME_KEY))
+        else:
+            rng = random.Random(seed)
+        session = _pick_board(rng, difficulty)
+        session.daily = daily
+        game_id = store.create(session)
+        return Response(_state(game_id, session))
 
 
-@router.get("/games/{game_id}")
-def get_game(game_id: str) -> dict:
-    session = store.get(game_id)
-    if session is None:
-        raise HTTPException(status_code=404, detail="Joc inexistent")
-    return _state(game_id, session)
+class GetGameView(ContractAPIView):
+    @extend_schema(operation_id="conexiuni_get_game", tags=["conexiuni"])
+    def get(self, request, game_id: str):
+        session = store.get(game_id)
+        if session is None:
+            raise http_error(404, "Joc inexistent")
+        return Response(_state(game_id, session))
 
 
-@router.post("/games/{game_id}/guess")
-def guess(game_id: str, body: GuessBody) -> dict:
-    session = store.get(game_id)
-    if session is None:
-        raise HTTPException(status_code=404, detail="Joc inexistent")
-    if session.won or session.lost:
-        raise HTTPException(status_code=400, detail="Jocul s-a terminat")
+class GuessView(ContractAPIView):
+    @extend_schema(operation_id="conexiuni_guess", tags=["conexiuni"])
+    def post(self, request, game_id: str):
+        body = parse_body(request, GuessBody)
+        session = store.get(game_id)
+        if session is None:
+            raise http_error(404, "Joc inexistent")
+        if session.won or session.lost:
+            raise http_error(400, "Jocul s-a terminat")
 
-    ids = body.ids or []
-    # must be exactly 4 distinct ids
-    if len(ids) != GROUP_SIZE or len(set(ids)) != GROUP_SIZE:
-        raise HTTPException(status_code=400, detail="Alege exact 4 concepte distincte")
+        ids = body.ids or []
+        # must be exactly 4 distinct ids
+        if len(ids) != GROUP_SIZE or len(set(ids)) != GROUP_SIZE:
+            raise http_error(400, "Alege exact 4 concepte distincte")
 
-    solved_ids = {nid for cat in session.solved for nid in session.groups[cat]}
-    board_ids = set(session.order)
-    for nid in ids:
-        if nid not in board_ids:
-            raise HTTPException(status_code=400, detail="Concept care nu e pe tabla")
-        if nid in solved_ids:
-            raise HTTPException(status_code=400, detail="Concept deja rezolvat")
+        solved_ids = {nid for cat in session.solved for nid in session.groups[cat]}
+        board_ids = set(session.order)
+        for nid in ids:
+            if nid not in board_ids:
+                raise http_error(400, "Concept care nu e pe tabla")
+            if nid in solved_ids:
+                raise http_error(400, "Concept deja rezolvat")
 
-    session.history.append(list(ids))
+        session.history.append(list(ids))
 
-    # which (unsolved) category do all four share, if any?
-    cats = [session.category_of(nid) for nid in ids]
-    shared = cats[0] if cats and all(c == cats[0] for c in cats) else None
+        # which (unsolved) category do all four share, if any?
+        cats = [session.category_of(nid) for nid in ids]
+        shared = cats[0] if cats and all(c == cats[0] for c in cats) else None
 
-    if shared is not None and shared not in session.solved:
-        session.solved.append(shared)
-        session.won = len(session.solved) == NUM_GROUPS
-        state = _state(game_id, session)
-        result = {
+        if shared is not None and shared not in session.solved:
+            session.solved.append(shared)
+            session.won = len(session.solved) == NUM_GROUPS
+            state = _state(game_id, session)
+            result = {
+                "ok": True,
+                "correct": True,
+                **state,
+            }
+            if session.won:
+                result["category"] = {"key": shared, "label": _category_label(shared)}
+            return Response(result)
+
+        # wrong guess
+        session.mistakes += 1
+        session.lives -= 1
+        # one_away: some category has exactly 3 of the 4 selected
+        counts: dict[str, int] = {}
+        for c in cats:
+            if c is not None:
+                counts[c] = counts.get(c, 0) + 1
+        one_away = any(v == GROUP_SIZE - 1 for v in counts.values())
+        session.lost = session.lives <= 0
+
+        result: dict = {
             "ok": True,
-            "correct": True,
-            **state,
+            "correct": False,
+            "one_away": one_away,
+            **_state(game_id, session),
         }
-        if session.won:
-            result["category"] = {"key": shared, "label": _category_label(shared)}
-        return result
-
-    # wrong guess
-    session.mistakes += 1
-    session.lives -= 1
-    # one_away: some category has exactly 3 of the 4 selected
-    counts: dict[str, int] = {}
-    for c in cats:
-        if c is not None:
-            counts[c] = counts.get(c, 0) + 1
-    one_away = any(v == GROUP_SIZE - 1 for v in counts.values())
-    session.lost = session.lives <= 0
-
-    result: dict = {
-        "ok": True,
-        "correct": False,
-        "one_away": one_away,
-        **_state(game_id, session),
-    }
-    return result
+        return Response(result)
 
 
-@router.post("/games/{game_id}/clue")
-def clue(game_id: str) -> dict:
-    session = store.get(game_id)
-    if session is None:
-        raise HTTPException(status_code=404, detail="Joc inexistent")
-    if session.won or session.lost:
-        raise HTTPException(status_code=400, detail="Jocul s-a terminat")
-    if session.clues_used >= MAX_CLUES:
-        raise HTTPException(status_code=400, detail="Indiciul a fost deja folosit")
-    if session.mistakes < MIN_CLUE_MISTAKES:
-        need = MIN_CLUE_MISTAKES - session.mistakes
-        raise HTTPException(
-            status_code=400,
-            detail=f"Mai greseste {need} incercari inainte de indiciu.",
-        )
+class ClueView(ContractAPIView):
+    @extend_schema(operation_id="conexiuni_clue", tags=["conexiuni"])
+    def post(self, request, game_id: str):
+        session = store.get(game_id)
+        if session is None:
+            raise http_error(404, "Joc inexistent")
+        if session.won or session.lost:
+            raise http_error(400, "Jocul s-a terminat")
+        if session.clues_used >= MAX_CLUES:
+            raise http_error(400, "Indiciul a fost deja folosit")
+        if session.mistakes < MIN_CLUE_MISTAKES:
+            need = MIN_CLUE_MISTAKES - session.mistakes
+            raise http_error(
+                400,
+                f"Mai greseste {need} incercari inainte de indiciu.",
+            )
 
-    clue_payload = _next_clue(session)
-    session.clues.append(clue_payload)
-    session.clues_used += 1
-    return {"ok": True, "clue": clue_payload, **_state(game_id, session)}
+        clue_payload = _next_clue(session)
+        session.clues.append(clue_payload)
+        session.clues_used += 1
+        return Response({"ok": True, "clue": clue_payload, **_state(game_id, session)})
+
+
+_BASE = "api/wordgames/conexiuni"
+urlpatterns = [
+    path(f"{_BASE}/games", CreateGameView.as_view()),
+    path(f"{_BASE}/games/<str:game_id>", GetGameView.as_view()),
+    path(f"{_BASE}/games/<str:game_id>/guess", GuessView.as_view()),
+    path(f"{_BASE}/games/<str:game_id>/clue", ClueView.as_view()),
+]
