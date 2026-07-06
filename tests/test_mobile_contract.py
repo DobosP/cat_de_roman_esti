@@ -19,22 +19,25 @@ from __future__ import annotations
 
 import pytest
 
-pytest.importorskip("fastapi")
+pytest.importorskip("django")
 
-from fastapi.testclient import TestClient  # noqa: E402
+from django.test import Client  # noqa: E402
 
 from cat_de_roman_esti.data import (  # noqa: E402
     APP_PACK_SCHEMA_VERSION,
     fixture_manifest,
 )
-from cat_de_roman_esti.web import create_app  # noqa: E402
 from cat_de_roman_esti.wordgames.service import get_service  # noqa: E402
 
 SEED = 1
 
 
-def client() -> TestClient:
-    return TestClient(create_app())
+def client() -> Client:
+    return Client()
+
+
+def _post_json(c: Client, url: str, payload: dict) -> dict:
+    return c.post(url, payload, content_type="application/json").json()
 
 
 def _collect_ids(obj: object) -> set[str]:
@@ -92,7 +95,7 @@ def test_contexto_does_not_leak_target_before_win() -> None:
     secret = _pick_target(SEED, "normal").target
     secret_label = get_service().label(secret)
     c = client()
-    created = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()
+    created = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()
     gid = created["game_id"]
     fetched = c.get(f"/api/wordgames/contexto/games/{gid}").json()
 
@@ -109,10 +112,11 @@ def test_contexto_does_not_leak_target_before_win() -> None:
     for nid in svc.all_ids():
         if nid == secret:
             continue
-        last_guess = c.post(
+        last_guess = _post_json(
+            c,
             f"/api/wordgames/contexto/games/{gid}/guess",
-            json={"text": svc.label(nid)},
-        ).json()
+            {"text": svc.label(nid)},
+        )
         assert last_guess["ok"] is True
         assert "target" not in last_guess
         assert "solution" not in last_guess
@@ -135,7 +139,7 @@ def test_contexto_does_not_leak_target_before_win() -> None:
     assert over["target"]["label"] == secret_label
 
 
-def _alchimie_play_to_win(c: TestClient, state: dict) -> dict:
+def _alchimie_play_to_win(c: Client, state: dict) -> dict:
     """Greedily combine every owned pair until the target is crafted; return won state."""
     gid = state["game_id"]
     while not state["won"]:
@@ -143,10 +147,11 @@ def _alchimie_play_to_win(c: TestClient, state: dict) -> dict:
         progressed = False
         for i in range(len(ids)):
             for j in range(i + 1, len(ids)):
-                res = c.post(
+                res = _post_json(
+                    c,
                     f"/api/wordgames/alchimie/games/{gid}/combine",
-                    json={"a": ids[i], "b": ids[j]},
-                ).json()
+                    {"a": ids[i], "b": ids[j]},
+                )
                 if res["discovered"] or res["won"]:
                     state = res
                     progressed = True
@@ -164,7 +169,7 @@ def test_alchimie_hides_target_id_until_win() -> None:
 
     secret = _build_session(random.Random(SEED), "normal").target
     c = client()
-    created = c.post("/api/wordgames/alchimie/games", params={"seed": SEED}).json()
+    created = c.post(f"/api/wordgames/alchimie/games?seed={SEED}").json()
     gid = created["game_id"]
     fetched = c.get(f"/api/wordgames/alchimie/games/{gid}").json()
 
@@ -184,7 +189,7 @@ def test_alchimie_hides_target_id_until_win() -> None:
 
 def test_lant_exposes_only_start_and_target_not_the_path() -> None:
     c = client()
-    created = c.post("/api/wordgames/lant/games", params={"seed": SEED}).json()
+    created = c.post(f"/api/wordgames/lant/games?seed={SEED}").json()
     start, target, optimal = created["start"]["id"], created["target"]["id"], created["optimal"]
 
     # A fresh game exposes exactly the two public endpoints — never an intermediate node
@@ -220,7 +225,7 @@ def test_conexiuni_hides_solution_until_over() -> None:
 
     groups = _pick_board(random.Random(SEED), "normal").groups
     c = client()
-    created = c.post("/api/wordgames/conexiuni/games", params={"seed": SEED}).json()
+    created = c.post(f"/api/wordgames/conexiuni/games?seed={SEED}").json()
     gid = created["game_id"]
     fetched = c.get(f"/api/wordgames/conexiuni/games/{gid}").json()
 
@@ -235,10 +240,9 @@ def test_conexiuni_hides_solution_until_over() -> None:
     # A correct non-terminal group may update counts and remove those public tiles from
     # the board, but still must not expose category keys/labels or solved membership.
     first_members = next(iter(groups.values()))
-    correct_body = c.post(
-        f"/api/wordgames/conexiuni/games/{gid}/guess",
-        json={"ids": first_members},
-    ).json()
+    correct_body = _post_json(
+        c, f"/api/wordgames/conexiuni/games/{gid}/guess", {"ids": first_members}
+    )
     assert correct_body["correct"] is True
     assert correct_body["won"] is False
     assert "category" not in correct_body
@@ -254,14 +258,12 @@ def test_conexiuni_hides_solution_until_over() -> None:
     # Boundary for the optional clue: after enough mistakes it may reveal a redacted
     # label pattern, but never category keys, exact category labels, or tile membership.
     groups = _pick_board(random.Random(SEED + 1), "normal").groups
-    created = c.post("/api/wordgames/conexiuni/games", params={"seed": SEED + 1}).json()
+    created = c.post(f"/api/wordgames/conexiuni/games?seed={SEED + 1}").json()
     gid = created["game_id"]
     cats = list(groups)
     one_from_each = [groups[cats[i]][0] for i in range(NUM_GROUPS)]
     for _ in range(MIN_CLUE_MISTAKES):
-        c.post(
-            f"/api/wordgames/conexiuni/games/{gid}/guess", json={"ids": one_from_each}
-        )
+        _post_json(c, f"/api/wordgames/conexiuni/games/{gid}/guess", {"ids": one_from_each})
     clue = c.post(f"/api/wordgames/conexiuni/games/{gid}/clue").json()
     assert "solution" not in clue
     assert set(clue["clue"]) == {"pattern", "message"}
@@ -273,9 +275,9 @@ def test_conexiuni_hides_solution_until_over() -> None:
     # Boundary: exhausting lives (4 wrong guesses) reveals the full solution.
     last = clue
     for _ in range(MAX_LIVES - MIN_CLUE_MISTAKES):
-        last = c.post(
-            f"/api/wordgames/conexiuni/games/{gid}/guess", json={"ids": one_from_each}
-        ).json()
+        last = _post_json(
+            c, f"/api/wordgames/conexiuni/games/{gid}/guess", {"ids": one_from_each}
+        )
     assert last["lost"] is True
     assert len(last["solution"]) == NUM_GROUPS
 
@@ -307,15 +309,17 @@ EXPECTED_OPERATION_IDS = {
 
 
 def test_openapi_operation_ids_are_stable() -> None:
-    schema = create_app().openapi()
+    from drf_spectacular.generators import SchemaGenerator
+
+    schema = SchemaGenerator().get_schema(request=None, public=True)
     ops = {
         op["operationId"]
         for methods in schema["paths"].values()
         for op in methods.values()
-        if "operationId" in op
+        if isinstance(op, dict) and "operationId" in op
     }
     assert ops == EXPECTED_OPERATION_IDS
-    # The HTTP path must NOT be baked into the operationId (the churny FastAPI default we
+    # The HTTP path must NOT be baked into the operationId (the churny default we
     # replaced) — so a generated client's method names survive a route refactor.
     assert not any("wordgames" in op for op in ops)
 

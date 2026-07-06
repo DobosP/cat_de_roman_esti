@@ -2,18 +2,17 @@
 
 import pytest
 
-pytest.importorskip("fastapi")
+pytest.importorskip("django")
 
-from fastapi import FastAPI
-from fastapi.testclient import TestClient
+from django.test import Client
 
 
-def make_client() -> TestClient:
-    app = FastAPI()
-    from cat_de_roman_esti.wordgames.conexiuni import router
+def make_client() -> Client:
+    return Client()
 
-    app.include_router(router)
-    return TestClient(app)
+
+def _post_json(c: Client, url: str, payload: dict):
+    return c.post(url, payload, content_type="application/json")
 
 
 SEED = 1
@@ -42,7 +41,7 @@ def _groups_for(seed: int = SEED, difficulty: str = "normal") -> dict[str, list[
     from cat_de_roman_esti.wordgames.conexiuni import store
 
     c = make_client()
-    body = c.post(BASE + "/games", params={"seed": seed, "difficulty": difficulty}).json()
+    body = c.post(f"{BASE}/games?seed={seed}&difficulty={difficulty}").json()
     session = store.get(body["game_id"])
     assert session is not None
     return c, body, {cat: list(ids) for cat, ids in session.groups.items()}
@@ -94,7 +93,7 @@ def _assert_preterminal_public(body: dict, groups: dict[str, list[str]] | None =
 
 def test_create_board_shape() -> None:
     c = make_client()
-    res = c.post(BASE + "/games", params={"seed": SEED})
+    res = c.post(f"{BASE}/games?seed={SEED}")
     assert res.status_code == 200
     b = res.json()
     assert len(b["tiles"]) == 16
@@ -119,46 +118,46 @@ def test_create_board_shape() -> None:
 def test_difficulty_accepted() -> None:
     c = make_client()
     for diff in ("usor", "normal", "greu"):
-        res = c.post(BASE + "/games", params={"seed": SEED, "difficulty": diff})
+        res = c.post(f"{BASE}/games?seed={SEED}&difficulty={diff}")
         assert res.status_code == 200
         assert res.json()["difficulty"] == diff
     # unknown difficulty falls back to normal
-    res = c.post(BASE + "/games", params={"seed": SEED, "difficulty": "ploaie"})
+    res = c.post(f"{BASE}/games?seed={SEED}&difficulty=ploaie")
     assert res.json()["difficulty"] == "normal"
 
 
 def test_daily_is_deterministic() -> None:
     c = make_client()
-    a = c.post(BASE + "/games", params={"daily": "2026-06-21"}).json()
-    b = c.post(BASE + "/games", params={"daily": "2026-06-21"}).json()
+    a = c.post(f"{BASE}/games?daily=2026-06-21").json()
+    b = c.post(f"{BASE}/games?daily=2026-06-21").json()
     assert [t["id"] for t in a["tiles"]] == [t["id"] for t in b["tiles"]]
     assert a["daily"] == "2026-06-21"
     assert b["daily"] == "2026-06-21"
     # different date -> (almost surely) different board / at least carries its date
-    other = c.post(BASE + "/games", params={"daily": "2026-06-22"}).json()
+    other = c.post(f"{BASE}/games?daily=2026-06-22").json()
     assert other["daily"] == "2026-06-22"
 
 
 def test_guess_requires_exactly_four_distinct() -> None:
     c = make_client()
-    b = c.post(BASE + "/games", params={"seed": SEED}).json()
+    b = c.post(f"{BASE}/games?seed={SEED}").json()
     gid = b["game_id"]
     ids = [t["id"] for t in b["tiles"]]
-    assert c.post(f"{BASE}/games/{gid}/guess", json={"ids": ids[:3]}).status_code == 400
-    assert c.post(f"{BASE}/games/{gid}/guess", json={"ids": ids[:5]}).status_code == 400
+    assert _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": ids[:3]}).status_code == 400
+    assert _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": ids[:5]}).status_code == 400
     # duplicates are not 4 distinct
     dup = [ids[0], ids[0], ids[1], ids[2]]
-    assert c.post(f"{BASE}/games/{gid}/guess", json={"ids": dup}).status_code == 400
+    assert _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": dup}).status_code == 400
     # an id not on the board
     bad = [ids[0], ids[1], ids[2], "n_does_not_exist"]
-    assert c.post(f"{BASE}/games/{gid}/guess", json={"ids": bad}).status_code == 400
+    assert _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": bad}).status_code == 400
 
 
 def test_correct_group_hides_category_until_terminal() -> None:
     c, b, groups = _groups_for()
     gid = b["game_id"]
     _, members = next(iter(groups.items()))
-    res = c.post(f"{BASE}/games/{gid}/guess", json={"ids": members})
+    res = _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": members})
     assert res.status_code == 200
     body = res.json()
     assert body["correct"] is True
@@ -183,7 +182,7 @@ def test_one_away_flag() -> None:
     cats = list(groups.keys())
     # 3 from one group + 1 from another => one_away True
     near = groups[cats[0]][:3] + [groups[cats[1]][0]]
-    res = c.post(f"{BASE}/games/{gid}/guess", json={"ids": near}).json()
+    res = _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": near}).json()
     assert res["correct"] is False
     assert res["one_away"] is True
     assert res["lives"] == 3
@@ -197,7 +196,7 @@ def test_two_two_split_not_one_away() -> None:
     gid = b["game_id"]
     cats = list(groups.keys())
     mixed = groups[cats[0]][:2] + groups[cats[1]][:2]
-    res = c.post(f"{BASE}/games/{gid}/guess", json={"ids": mixed}).json()
+    res = _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": mixed}).json()
     assert res["correct"] is False
     assert res["one_away"] is False
     _assert_preterminal_public(res, groups)
@@ -208,7 +207,7 @@ def test_winning_playthrough_score_and_share() -> None:
     gid = b["game_id"]
     last = None
     for members in groups.values():
-        last = c.post(f"{BASE}/games/{gid}/guess", json={"ids": members}).json()
+        last = _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": members}).json()
     assert last["won"] is True
     # perfect game: no mistakes -> top score
     assert last["score"] == 1000
@@ -219,7 +218,7 @@ def test_winning_playthrough_score_and_share() -> None:
     assert len(last["solution"]) == 4
     # cannot guess after the game is over
     members = next(iter(groups.values()))
-    assert c.post(f"{BASE}/games/{gid}/guess", json={"ids": members}).status_code == 400
+    assert _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": members}).status_code == 400
 
 
 def test_losing_reveals_solution_and_scores_by_mistakes() -> None:
@@ -230,7 +229,7 @@ def test_losing_reveals_solution_and_scores_by_mistakes() -> None:
     wrong = [groups[cats[0]][0], groups[cats[1]][0], groups[cats[2]][0], groups[cats[3]][0]]
     last = None
     for _ in range(4):
-        last = c.post(f"{BASE}/games/{gid}/guess", json={"ids": wrong}).json()
+        last = _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": wrong}).json()
     assert last["lost"] is True
     assert last["lives"] == 0
     assert last["mistakes"] == 4
@@ -241,7 +240,7 @@ def test_losing_reveals_solution_and_scores_by_mistakes() -> None:
 
 def test_state_hides_solution_until_finished() -> None:
     c = make_client()
-    gid = c.post(BASE + "/games", params={"seed": SEED}).json()["game_id"]
+    gid = c.post(f"{BASE}/games?seed={SEED}").json()["game_id"]
     state = c.get(f"{BASE}/games/{gid}").json()
     assert "solution" not in state
     assert "score" not in state
@@ -252,7 +251,7 @@ def test_unknown_game_404() -> None:
     c = make_client()
     assert c.get(f"{BASE}/games/nope").status_code == 404
     assert (
-        c.post(f"{BASE}/games/nope/guess", json={"ids": ["a", "b", "c", "d"]}).status_code
+        _post_json(c, f"{BASE}/games/nope/guess", {"ids": ["a", "b", "c", "d"]}).status_code
         == 404
     )
     assert c.post(f"{BASE}/games/nope/clue").status_code == 404
@@ -267,9 +266,9 @@ def test_clue_unlocks_after_two_mistakes_without_solution_membership() -> None:
     early = c.post(f"{BASE}/games/{gid}/clue")
     assert early.status_code == 400
 
-    c.post(f"{BASE}/games/{gid}/guess", json={"ids": wrong})
+    _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": wrong})
     assert c.get(f"{BASE}/games/{gid}").json()["clue_available"] is False
-    c.post(f"{BASE}/games/{gid}/guess", json={"ids": wrong})
+    _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": wrong})
     state = c.get(f"{BASE}/games/{gid}").json()
     assert state["mistakes"] == 2
     assert state["clue_available"] is True
@@ -301,13 +300,13 @@ def test_clue_penalizes_score_and_share() -> None:
     gid = b["game_id"]
     cats = list(groups.keys())
     wrong = [groups[cats[0]][0], groups[cats[1]][0], groups[cats[2]][0], groups[cats[3]][0]]
-    c.post(f"{BASE}/games/{gid}/guess", json={"ids": wrong})
-    c.post(f"{BASE}/games/{gid}/guess", json={"ids": wrong})
+    _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": wrong})
+    _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": wrong})
     c.post(f"{BASE}/games/{gid}/clue")
 
     last = None
     for members in groups.values():
-        last = c.post(f"{BASE}/games/{gid}/guess", json={"ids": members}).json()
+        last = _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": members}).json()
 
     assert last["won"] is True
     assert last["score"] == 400  # two mistakes (500 pts) + one clue penalty (100 pts)
@@ -317,13 +316,13 @@ def test_clue_penalizes_score_and_share() -> None:
 # --------------------------------------------------------------------- input hardening
 def test_guess_rejects_empty_and_malformed_bodies() -> None:
     c = make_client()
-    gid = c.post(BASE + "/games", params={"seed": SEED}).json()["game_id"]
+    gid = c.post(f"{BASE}/games?seed={SEED}").json()["game_id"]
     # empty list -> our 400 (not 4 distinct)
-    assert c.post(f"{BASE}/games/{gid}/guess", json={"ids": []}).status_code == 400
+    assert _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": []}).status_code == 400
     # missing field / null / wrong element type -> pydantic 422
-    assert c.post(f"{BASE}/games/{gid}/guess", json={}).status_code == 422
-    assert c.post(f"{BASE}/games/{gid}/guess", json={"ids": None}).status_code == 422
-    assert c.post(f"{BASE}/games/{gid}/guess", json={"ids": [1, 2, 3, 4]}).status_code == 422
+    assert _post_json(c, f"{BASE}/games/{gid}/guess", {}).status_code == 422
+    assert _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": None}).status_code == 422
+    assert _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": [1, 2, 3, 4]}).status_code == 422
 
 
 def test_guess_rejects_already_solved_tile() -> None:
@@ -331,10 +330,10 @@ def test_guess_rejects_already_solved_tile() -> None:
     gid = b["game_id"]
     cats = list(groups.keys())
     # solve the first group
-    c.post(f"{BASE}/games/{gid}/guess", json={"ids": groups[cats[0]]})
+    _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": groups[cats[0]]})
     # reusing a solved tile in a new guess is rejected
     reused = [groups[cats[0]][0], *groups[cats[1]][:3]]
-    res = c.post(f"{BASE}/games/{gid}/guess", json={"ids": reused})
+    res = _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": reused})
     assert res.status_code == 400
 
 
@@ -357,9 +356,7 @@ def _board_cats(seed: int, difficulty: str) -> tuple[str, ...]:
     from cat_de_roman_esti.wordgames.conexiuni import store
 
     c = make_client()
-    body = c.post(
-        BASE + "/games", params={"seed": seed, "difficulty": difficulty}
-    ).json()
+    body = c.post(f"{BASE}/games?seed={seed}&difficulty={difficulty}").json()
     session = store.get(body["game_id"])
     assert session is not None
     return tuple(sorted(session.groups))
@@ -413,10 +410,10 @@ def test_all_generated_boards_are_fair() -> None:
 
             # a guess of a full true group is accepted by the engine
             c = make_client()
-            body = c.post(BASE + "/games", params={"seed": seed, "difficulty": diff}).json()
+            body = c.post(f"{BASE}/games?seed={seed}&difficulty={diff}").json()
             gid = body["game_id"]
             for cat, members in session.groups.items():
-                res = c.post(f"{BASE}/games/{gid}/guess", json={"ids": members}).json()
+                res = _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": members}).json()
                 assert res["correct"] is True, f"true group rejected: {ctx} cat={cat}"
                 if res["won"]:
                     assert res["category"]["key"] == cat, ctx
@@ -429,8 +426,7 @@ def test_board_generation_fails_closed_when_every_candidate_is_invalid(monkeypat
     """Never ship a hidden unfair board if validation rejects every retry."""
     import random
 
-    from fastapi import HTTPException
-
+    from cat_de_roman_esti.web.http import ApiHttpError
     from cat_de_roman_esti.wordgames import conexiuni as C
 
     fallback = C.ConexiuniSession(
@@ -440,7 +436,7 @@ def test_board_generation_fails_closed_when_every_candidate_is_invalid(monkeypat
     monkeypatch.setattr(C, "_build_board", lambda rng, difficulty: fallback)
     monkeypatch.setattr(C, "_board_quality", lambda session: (False, 1_000_000))
 
-    with pytest.raises(HTTPException) as exc:
+    with pytest.raises(ApiHttpError) as exc:
         C._pick_board(random.Random(0), "normal")
 
     assert exc.value.status_code == 503
@@ -470,8 +466,8 @@ def test_usor_is_less_entangled_than_greu() -> None:
 def test_daily_differs_by_difficulty_independent_of_clock() -> None:
     # The daily seed is a pure function of (date, game-key) — same date is reproducible.
     c = make_client()
-    a = c.post(BASE + "/games", params={"daily": "2026-06-21"}).json()
-    b = c.post(BASE + "/games", params={"daily": "2026-06-21"}).json()
+    a = c.post(f"{BASE}/games?daily=2026-06-21").json()
+    b = c.post(f"{BASE}/games?daily=2026-06-21").json()
     assert [t["id"] for t in a["tiles"]] == [t["id"] for t in b["tiles"]]
 
 
@@ -481,10 +477,10 @@ def test_share_grid_has_one_row_per_guess() -> None:
     cats = list(groups.keys())
     # one wrong guess, then win the rest
     wrong = [groups[cats[0]][0], groups[cats[1]][0], groups[cats[2]][0], groups[cats[3]][0]]
-    c.post(f"{BASE}/games/{gid}/guess", json={"ids": wrong})
+    _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": wrong})
     last = None
     for members in groups.values():
-        last = c.post(f"{BASE}/games/{gid}/guess", json={"ids": members}).json()
+        last = _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": members}).json()
     assert last["won"] is True
     assert last["score"] == 750  # one mistake
     share = last["share"]

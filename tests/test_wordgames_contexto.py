@@ -2,18 +2,17 @@
 
 import pytest
 
-pytest.importorskip("fastapi")
+pytest.importorskip("django")
 
-from fastapi import FastAPI
-from fastapi.testclient import TestClient
+from django.test import Client  # noqa: E402
 
 
-def make_client() -> TestClient:
-    app = FastAPI()
-    from cat_de_roman_esti.wordgames.contexto import router
+def make_client() -> Client:
+    return Client()
 
-    app.include_router(router)
-    return TestClient(app)
+
+def _post_json(c: Client, url: str, payload: dict) -> dict:
+    return c.post(url, payload, content_type="application/json").json()
 
 
 SEED = 1
@@ -71,19 +70,18 @@ def _target_of(seed: int = SEED, difficulty: str = "normal"):
 
 def _reveal_target_label(client, *, seed: int = SEED, difficulty: str = "normal", daily=None):
     """Reveal the secret label via giveup on a throwaway game with the same instance."""
-    params: dict = {"difficulty": difficulty}
     if daily is not None:
-        params["daily"] = daily
+        url = f"/api/wordgames/contexto/games?difficulty={difficulty}&daily={daily}"
     else:
-        params["seed"] = seed
-    gid = client.post("/api/wordgames/contexto/games", params=params).json()["game_id"]
+        url = f"/api/wordgames/contexto/games?difficulty={difficulty}&seed={seed}"
+    gid = client.post(url).json()["game_id"]
     return client.post(f"/api/wordgames/contexto/games/{gid}/giveup").json()["target"]["label"]
 
 
 def test_create_game_hides_target() -> None:
     c = make_client()
     target_id, target_label, _, _ = _target_of()
-    res = c.post("/api/wordgames/contexto/games", params={"seed": SEED})
+    res = c.post(f"/api/wordgames/contexto/games?seed={SEED}")
     assert res.status_code == 200
     body = res.json()
     assert body["attempts"] == 0
@@ -95,10 +93,11 @@ def test_create_game_hides_target() -> None:
 
 def test_unknown_concept_not_counted() -> None:
     c = make_client()
-    gid = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()["game_id"]
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
     res = c.post(
         f"/api/wordgames/contexto/games/{gid}/guess",
-        json={"text": "zzz nu exista zzz"},
+        {"text": "zzz nu exista zzz"},
+        content_type="application/json",
     )
     assert res.status_code == 200
     body = res.json()
@@ -110,10 +109,11 @@ def test_unknown_concept_not_counted() -> None:
 def test_guess_reports_temperature_and_closeness() -> None:
     c = make_client()
     target_id, _, neighbour_id, neighbour_label = _target_of()
-    gid = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()["game_id"]
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
     res = c.post(
         f"/api/wordgames/contexto/games/{gid}/guess",
-        json={"text": neighbour_label},
+        {"text": neighbour_label},
+        content_type="application/json",
     )
     assert res.status_code == 200
     body = res.json()
@@ -138,12 +138,17 @@ def test_winning_playthrough_reveals_target() -> None:
     target_id, _, neighbour_id, neighbour_label = _target_of()
     # Reveal the secret label on a separate (same-seed) game, then play it for real.
     target_label = _reveal_target_label(c)
-    gid = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()["game_id"]
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
     # one warm guess first, then the exact target (accent-insensitive resolution)
-    c.post(f"/api/wordgames/contexto/games/{gid}/guess", json={"text": neighbour_label})
+    _post_json(
+        c,
+        f"/api/wordgames/contexto/games/{gid}/guess",
+        {"text": neighbour_label},
+    )
     res = c.post(
         f"/api/wordgames/contexto/games/{gid}/guess",
-        json={"text": target_label},
+        {"text": target_label},
+        content_type="application/json",
     )
     body = res.json()
     assert body["ok"] is True
@@ -159,15 +164,15 @@ def test_winning_playthrough_reveals_target() -> None:
 
 def test_duplicate_guess_not_double_counted() -> None:
     c = make_client()
-    gid = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()["game_id"]
-    c.post(f"/api/wordgames/contexto/games/{gid}/guess", json={"text": "Banat"})
-    res = c.post(f"/api/wordgames/contexto/games/{gid}/guess", json={"text": "Banat"})
-    assert res.json()["attempts"] == 1
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
+    _post_json(c, f"/api/wordgames/contexto/games/{gid}/guess", {"text": "Banat"})
+    res = _post_json(c, f"/api/wordgames/contexto/games/{gid}/guess", {"text": "Banat"})
+    assert res["attempts"] == 1
 
 
 def test_giveup_reveals_target() -> None:
     c = make_client()
-    gid = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()["game_id"]
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
     target_id, _, _, neighbour_label = _target_of()
     res = c.post(f"/api/wordgames/contexto/games/{gid}/giveup")
     assert res.status_code == 200
@@ -176,7 +181,9 @@ def test_giveup_reveals_target() -> None:
     assert body["target"]["id"] == target_id
     # cannot guess after giving up
     after = c.post(
-        f"/api/wordgames/contexto/games/{gid}/guess", json={"text": neighbour_label}
+        f"/api/wordgames/contexto/games/{gid}/guess",
+        {"text": neighbour_label},
+        content_type="application/json",
     )
     assert after.status_code == 400
 
@@ -184,7 +191,7 @@ def test_giveup_reveals_target() -> None:
 def test_get_state_keeps_target_hidden() -> None:
     c = make_client()
     target_id, target_label, _, _ = _target_of()
-    gid = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()["game_id"]
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
     res = c.get(f"/api/wordgames/contexto/games/{gid}")
     assert res.status_code == 200
     _assert_secret_hidden(res.json(), target_id, target_label)
@@ -193,7 +200,7 @@ def test_get_state_keeps_target_hidden() -> None:
 def test_rank_view_model_hides_secret_until_reveal_boundary() -> None:
     c = make_client()
     target_id, target_label, _, _ = _target_of()
-    gid = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()["game_id"]
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
 
     before = _make_counted_guesses(c, gid, 3)
     _assert_secret_hidden(before, target_id, target_label)
@@ -215,7 +222,9 @@ def test_unknown_game_404() -> None:
     assert c.get("/api/wordgames/contexto/games/nope").status_code == 404
     assert (
         c.post(
-            "/api/wordgames/contexto/games/nope/guess", json={"text": "Banat"}
+            "/api/wordgames/contexto/games/nope/guess",
+            {"text": "Banat"},
+            content_type="application/json",
         ).status_code
         == 404
     )
@@ -227,7 +236,7 @@ def test_unknown_game_404() -> None:
 
 def test_create_defaults_to_normal_and_exposes_difficulty() -> None:
     c = make_client()
-    body = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()
+    body = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()
     assert body["difficulty"] == "normal"
     assert "daily" not in body  # only present for daily challenges
 
@@ -235,10 +244,7 @@ def test_create_defaults_to_normal_and_exposes_difficulty() -> None:
 @pytest.mark.parametrize("difficulty", ["usor", "normal", "greu"])
 def test_difficulty_accepted_and_reachable(difficulty: str) -> None:
     c = make_client()
-    body = c.post(
-        "/api/wordgames/contexto/games",
-        params={"seed": SEED, "difficulty": difficulty},
-    ).json()
+    body = c.post(f"/api/wordgames/contexto/games?seed={SEED}&difficulty={difficulty}").json()
     assert body["difficulty"] == difficulty
     # every tier (incl. obscure "greu") still yields a richly reachable target
     assert body["reachable_count"] >= 120
@@ -246,10 +252,7 @@ def test_difficulty_accepted_and_reachable(difficulty: str) -> None:
 
 def test_unknown_difficulty_falls_back_to_normal() -> None:
     c = make_client()
-    body = c.post(
-        "/api/wordgames/contexto/games",
-        params={"seed": SEED, "difficulty": "imposibil"},
-    ).json()
+    body = c.post(f"/api/wordgames/contexto/games?seed={SEED}&difficulty=imposibil").json()
     assert body["difficulty"] == "normal"
 
 
@@ -259,8 +262,8 @@ def test_unknown_difficulty_falls_back_to_normal() -> None:
 def test_daily_is_deterministic_and_echoed() -> None:
     c = make_client()
     date = "2026-06-21"
-    a = c.post("/api/wordgames/contexto/games", params={"daily": date})
-    b = c.post("/api/wordgames/contexto/games", params={"daily": date})
+    a = c.post(f"/api/wordgames/contexto/games?daily={date}")
+    b = c.post(f"/api/wordgames/contexto/games?daily={date}")
     assert a.status_code == 200 and b.status_code == 200
     abody, bbody = a.json(), b.json()
     # same date -> same instance: reveal the secret via giveup and compare.
@@ -273,8 +276,8 @@ def test_daily_is_deterministic_and_echoed() -> None:
 
 def test_daily_differs_by_date() -> None:
     c = make_client()
-    g1 = c.post("/api/wordgames/contexto/games", params={"daily": "2026-06-21"}).json()
-    g2 = c.post("/api/wordgames/contexto/games", params={"daily": "2026-09-09"}).json()
+    g1 = c.post("/api/wordgames/contexto/games?daily=2026-06-21").json()
+    g2 = c.post("/api/wordgames/contexto/games?daily=2026-09-09").json()
     t1 = c.post(f"/api/wordgames/contexto/games/{g1['game_id']}/giveup").json()
     t2 = c.post(f"/api/wordgames/contexto/games/{g2['game_id']}/giveup").json()
     # Overwhelmingly likely to differ across these two unrelated dates.
@@ -288,13 +291,17 @@ def test_win_includes_score_and_share() -> None:
     c = make_client()
     _, _, _, neighbour_label = _target_of()
     target_label = _reveal_target_label(c)
-    gid = c.post(
-        "/api/wordgames/contexto/games", params={"seed": SEED}
-    ).json()["game_id"]
-    c.post(f"/api/wordgames/contexto/games/{gid}/guess", json={"text": neighbour_label})
-    body = c.post(
-        f"/api/wordgames/contexto/games/{gid}/guess", json={"text": target_label}
-    ).json()
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
+    _post_json(
+        c,
+        f"/api/wordgames/contexto/games/{gid}/guess",
+        {"text": neighbour_label},
+    )
+    body = _post_json(
+        c,
+        f"/api/wordgames/contexto/games/{gid}/guess",
+        {"text": target_label},
+    )
     assert body["won"] is True
     # 2 attempts -> 1000 - 60 = 940
     assert body["score"] == 940
@@ -310,12 +317,12 @@ def test_win_includes_score_and_share() -> None:
 def test_score_rewards_fewer_attempts() -> None:
     c = make_client()
     target_label = _reveal_target_label(c)
-    gid = c.post(
-        "/api/wordgames/contexto/games", params={"seed": SEED}
-    ).json()["game_id"]
-    body = c.post(
-        f"/api/wordgames/contexto/games/{gid}/guess", json={"text": target_label}
-    ).json()
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
+    body = _post_json(
+        c,
+        f"/api/wordgames/contexto/games/{gid}/guess",
+        {"text": target_label},
+    )
     assert body["won"] is True
     assert body["score"] == 1000  # solved on the first attempt
 
@@ -337,7 +344,8 @@ def _make_counted_guesses(client, gid: str, count: int) -> dict:
             continue
         state = client.post(
             f"/api/wordgames/contexto/games/{gid}/guess",
-            json={"text": svc.label(nid)},
+            {"text": svc.label(nid)},
+            content_type="application/json",
         ).json()
         assert state["ok"] is True
         assert "target" not in state
@@ -351,7 +359,7 @@ def test_category_clue_unlocks_after_three_attempts_without_target_leak() -> Non
     from cat_de_roman_esti.wordgames.service import get_service
 
     c = make_client()
-    gid = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()["game_id"]
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
     early = c.post(f"/api/wordgames/contexto/games/{gid}/clue")
     assert early.status_code == 400
 
@@ -361,7 +369,7 @@ def test_category_clue_unlocks_after_three_attempts_without_target_leak() -> Non
     assert "target" not in before
 
     clue = c.post(f"/api/wordgames/contexto/games/{gid}/clue")
-    assert clue.status_code == 200, clue.text
+    assert clue.status_code == 200, clue.content.decode()
     body = clue.json()
     secret = _pick_target(SEED, "normal").target
     target_node = get_service().node(secret)
@@ -379,12 +387,13 @@ def test_category_clue_unlocks_after_three_attempts_without_target_leak() -> Non
 def test_category_clue_penalizes_final_score_and_share() -> None:
     c = make_client()
     target_label = _reveal_target_label(c)
-    gid = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()["game_id"]
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
     _make_counted_guesses(c, gid, 3)
     c.post(f"/api/wordgames/contexto/games/{gid}/clue")
     body = c.post(
         f"/api/wordgames/contexto/games/{gid}/guess",
-        json={"text": target_label},
+        {"text": target_label},
+        content_type="application/json",
     ).json()
     assert body["won"] is True
     assert body["clues_used"] == 1
@@ -394,7 +403,7 @@ def test_category_clue_penalizes_final_score_and_share() -> None:
 
 def test_clue_is_unavailable_after_giveup() -> None:
     c = make_client()
-    gid = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()["game_id"]
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
     _make_counted_guesses(c, gid, 3)
     c.post(f"/api/wordgames/contexto/games/{gid}/giveup")
     assert c.post(f"/api/wordgames/contexto/games/{gid}/clue").status_code == 400
@@ -403,26 +412,24 @@ def test_clue_is_unavailable_after_giveup() -> None:
 def test_daily_win_share_includes_date() -> None:
     c = make_client()
     date = "2026-06-21"
-    gid = c.post(
-        "/api/wordgames/contexto/games", params={"daily": date}
-    ).json()["game_id"]
+    gid = c.post(f"/api/wordgames/contexto/games?daily={date}").json()["game_id"]
     # reveal the secret, then guess it to win cleanly
     target = c.post(f"/api/wordgames/contexto/games/{gid}/giveup")
     # giveup ends the game; start a fresh daily and win it via the revealed label.
     label = target.json()["target"]["label"]
-    gid2 = c.post(
-        "/api/wordgames/contexto/games", params={"daily": date}
-    ).json()["game_id"]
-    body = c.post(
-        f"/api/wordgames/contexto/games/{gid2}/guess", json={"text": label}
-    ).json()
+    gid2 = c.post(f"/api/wordgames/contexto/games?daily={date}").json()["game_id"]
+    body = _post_json(
+        c,
+        f"/api/wordgames/contexto/games/{gid2}/guess",
+        {"text": label},
+    )
     assert body["won"] is True
     assert date in body["share"]
 
 
 def test_no_score_or_share_before_win() -> None:
     c = make_client()
-    body = c.post("/api/wordgames/contexto/games", params={"seed": SEED}).json()
+    body = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()
     assert "score" not in body
     assert "share" not in body
 
@@ -495,12 +502,11 @@ def test_only_the_win_reads_closeness_100() -> None:
     neighbour = svc.neighbor_ids(target)[0]
 
     c = make_client()
-    gid = c.post(
-        "/api/wordgames/contexto/games", params={"seed": SEED}
-    ).json()["game_id"]
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
     body = c.post(
         f"/api/wordgames/contexto/games/{gid}/guess",
-        json={"text": svc.label(neighbour)},
+        {"text": svc.label(neighbour)},
+        content_type="application/json",
     ).json()
     assert body["ok"] is True
     assert body["guess"]["distance"] == 1
