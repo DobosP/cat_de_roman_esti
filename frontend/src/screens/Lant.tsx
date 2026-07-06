@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Button, Spinner, type ToastKind } from "@roedu/ui";
 import {
   type Difficulty,
   type HintResult,
@@ -11,15 +12,19 @@ import {
   undoLant,
 } from "../api/lant";
 import { ApiError } from "../api/client";
-import type { ToastKind } from "../components/Toast";
 import { GameShell } from "../components/GameShell";
+import { GameIntro } from "../components/GameIntro";
+import { Hud, StatBadge } from "../components/Hud";
 import { ResultCard } from "../components/ResultCard";
 import { DifficultyPicker } from "../components/DifficultyPicker";
+import { useRecordScore } from "../hooks/useRecordScore";
 import { sound } from "../sound";
-import { bestScore, recordScore } from "../scores";
+import { bestScore } from "../scores";
+import { gameByKey } from "../games";
 import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 
 const GAME_KEY = "lant";
+const DEF = gameByKey("lant");
 
 const DIFFICULTIES: { key: Difficulty; label: string; hint: string }[] = [
   { key: "usor", label: "Usor", hint: "2-3 salturi" },
@@ -31,7 +36,6 @@ const DIFFICULTIES: { key: Difficulty; label: string; hint: string }[] = [
 // linked to the CURRENT one, hopping toward the TARGET in as few moves as possible.
 // All logic is server-authoritative; this screen only renders state + sends actions.
 
-const ACCENT = "#56d4dd"; // teal "chain" accent
 const TARGET_COLOR = "#f178b6";
 
 function Breadcrumb({ path }: { path: PathStep[] }) {
@@ -62,8 +66,8 @@ function Breadcrumb({ path }: { path: PathStep[] }) {
               style={
                 i === path.length - 1
                   ? {
-                      borderColor: ACCENT,
-                      color: ACCENT,
+                      borderColor: DEF.accent,
+                      color: DEF.accent,
                       fontWeight: 700,
                     }
                   : undefined
@@ -100,6 +104,7 @@ export default function Lant({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const best = useMemo(() => bestScore(GAME_KEY), []);
+  const recordOnce = useRecordScore("lant");
 
   const puzzleKey = useMemo(() => {
     if (!state?.won) return null;
@@ -150,18 +155,20 @@ export default function Lant({
 
   // Record the score exactly once when the game is won.
   useEffect(() => {
-    if (!state?.won || state.score === undefined || scored) return;
+    if (!state?.won || state.score === undefined) return;
     const detail = `${state.moves}/${state.optimal} mutari${
       state.daily ? ` · ${state.daily}` : ""
     }`;
-    const { isBest, isPuzzleBest } = recordScore(GAME_KEY, state.score, detail, {
+    const outcome = recordOnce(state.game_id, state.score, detail, {
       puzzleKey,
       difficulty: state.difficulty,
       daily: state.daily,
     });
+    if (!outcome) return;
+    const { isBest, isPuzzleBest } = outcome;
     setScored({ score: state.score, isBest, isPuzzleBest });
     if (isBest || isPuzzleBest) sound.playRecord();
-  }, [state, scored, puzzleKey]);
+  }, [state, puzzleKey, recordOnce]);
 
   useEffect(() => {
     if (state && !state.won) inputRef.current?.focus();
@@ -280,7 +287,7 @@ export default function Lant({
   if (loading) {
     return (
       <div className="screen-pad fill center">
-        <p className="muted">Se pregateste lantul…</p>
+        <Spinner size="lg" label="Se incarca..." />
       </div>
     );
   }
@@ -290,40 +297,27 @@ export default function Lant({
     return (
       <div className="screen-pad fill">
         <div className="container col" style={{ gap: 18 }}>
-          <GameShell onExit={onExit} accent={ACCENT}>
-            {best && (
-              <span
-                className="badge"
-                title="Cel mai bun scor"
-                style={{ fontVariantNumeric: "tabular-nums" }}
-              >
-                🏆 {best.score}
-              </span>
-            )}
-          </GameShell>
+          <GameShell onExit={onExit} accent={DEF.accent} />
 
-          <motion.div
-            className="card col"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            style={{ gap: 16, padding: 22 }}
-          >
-            <div className="col" style={{ gap: 4 }}>
-              <h1
-                style={{
-                  margin: 0,
-                  fontFamily: "var(--font-display)",
-                  color: ACCENT,
-                }}
-              >
-                Lantul Cuvintelor
-              </h1>
-              <p className="muted" style={{ margin: 0 }}>
+          <GameIntro
+            icon={DEF.icon}
+            title={DEF.title}
+            tag={DEF.tag}
+            accent={DEF.accent}
+            glow={DEF.glow}
+            description={
+              <p style={{ margin: 0 }}>
                 Sari de la un concept la altul prin legaturi reale, pana la tinta.
                 Cu cat mai putine salturi, cu atat scor mai mare.
               </p>
-            </div>
-
+            }
+            best={best}
+            startLabel="Joaca →"
+            onStart={() => void start({ difficulty })}
+            onDaily={() => void start({ difficulty, daily: todayLocal() })}
+            dailyLabel="Provocarea zilei"
+            starting={loading}
+          >
             <DifficultyPicker
               options={DIFFICULTIES.map((d) => ({ id: d.key, label: d.label, hint: d.hint }))}
               value={difficulty}
@@ -332,25 +326,7 @@ export default function Lant({
                 setDifficulty(id);
               }}
             />
-
-            <div className="row wrap" style={{ gap: 12, marginTop: 4 }}>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => void start({ difficulty })}
-              >
-                Joaca →
-              </button>
-              <button
-                type="button"
-                className="btn btn-ghost"
-                onClick={() => void start({ difficulty, daily: todayLocal() })}
-                title="Acelasi lant pentru toata lumea, azi"
-              >
-                ⭐ Provocarea zilei
-              </button>
-            </div>
-          </motion.div>
+          </GameIntro>
         </div>
       </div>
     );
@@ -360,26 +336,29 @@ export default function Lant({
     <div className="screen-pad fill">
       <div className="container col" style={{ gap: 18 }}>
         {/* header */}
-        <GameShell onExit={onExit} accent={ACCENT} title="Lantul Cuvintelor">
+        <GameShell onExit={onExit} accent={DEF.accent} title={DEF.title}>
+          <Hud>
             {state.daily && (
-              <span className="badge" title="Provocarea zilei">
-                ⭐ {state.daily}
-              </span>
+              <StatBadge
+                label="ZI"
+                value={state.daily}
+                accent={DEF.accent}
+                title="Provocarea zilei"
+              />
             )}
-            <span className="badge" title="Mutari facute">
-              {state.moves} {state.moves === 1 ? "mutare" : "mutari"}
-            </span>
-            <span
-              className="badge"
-              style={{
-                borderColor: overPar > 0 ? "var(--warn)" : ACCENT,
-                color: overPar > 0 ? "var(--warn)" : ACCENT,
-              }}
+            <StatBadge
+              label="MUTARI"
+              value={`${state.moves} ${state.moves === 1 ? "mutare" : "mutari"}`}
+              accent={DEF.accent}
+              title="Mutari facute"
+            />
+            <StatBadge
+              label="OPTIM"
+              value={<>{state.optimal}{overPar > 0 ? ` (+${overPar})` : ""}</>}
+              accent={DEF.accent}
               title="Numarul minim de salturi"
-            >
-              optim {state.optimal}
-              {overPar > 0 ? ` (+${overPar})` : ""}
-            </span>
+            />
+          </Hud>
         </GameShell>
 
         {/* start -> target */}
@@ -426,8 +405,8 @@ export default function Lant({
                 fontFamily: "var(--font-display)",
                 fontWeight: 800,
                 fontSize: "clamp(1.8rem, 6vw, 3rem)",
-                color: won ? TARGET_COLOR : ACCENT,
-                textShadow: `0 0 30px ${won ? TARGET_COLOR : ACCENT}55`,
+                color: won ? TARGET_COLOR : DEF.accent,
+                textShadow: `0 0 30px ${won ? TARGET_COLOR : DEF.accent}55`,
                 lineHeight: 1.1,
                 textAlign: "center",
               }}
@@ -484,33 +463,32 @@ export default function Lant({
                 aria-label="Urmatorul concept"
                 style={{ flex: 1 }}
               />
-              <button
+              <Button
                 type="button"
-                className="btn btn-primary"
                 disabled={busy || !text.trim()}
                 onClick={() => void submit()}
               >
                 {busy ? "…" : "Salt"}
-              </button>
+              </Button>
             </div>
 
             <div className="row wrap" style={{ gap: 8 }}>
-              <button
+              <Button
                 type="button"
-                className="btn btn-ghost"
+                variant="secondary"
                 disabled={busy || state.moves === 0}
                 onClick={() => void handleUndo()}
               >
                 ↶ Inapoi
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
-                className="btn btn-ghost"
+                variant="secondary"
                 disabled={busy}
                 onClick={() => void handleHint()}
               >
                 💡 Indiciu
-              </button>
+              </Button>
               <span className="muted" style={{ alignSelf: "center" }}>
                 {hintRemaining !== null
                   ? hintRemaining <= 1

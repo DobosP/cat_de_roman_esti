@@ -1,13 +1,15 @@
 // ResultCard — the shared end-of-game card used by every word game so winning, losing,
 // the score read-out, the "Record!" celebration, and the share/copy + replay actions all
-// look and behave identically across the arcade.
+// look and behave identically across the arcade. Wins get a confetti burst (skipped
+// under reduced motion).
 //
 // It is presentational only: the host owns the game state and passes in the copy handler,
-// the replay handler, and onExit. Honours prefers-reduced-motion via framer's MotionConfig
-// (set arcade-wide in App.tsx) so the pop-in is skipped when requested.
+// the replay handler, and onExit.
 
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
+import { Badge, Button } from "@roedu/ui";
+import { Confetti } from "./Confetti";
 
 export function ResultCard({
   icon,
@@ -31,7 +33,7 @@ export function ResultCard({
   title: ReactNode;
   /** Game accent colour for the border glow + score number. */
   accent: string;
-  /** Win vs. loss styling (loss drops the glow). */
+  /** Win vs. loss styling (loss drops the glow + confetti). */
   won?: boolean;
   /** Free-form body (recap line, target reveal, …). */
   children?: ReactNode;
@@ -64,13 +66,22 @@ export function ResultCard({
         gap: 10,
         padding: 24,
         textAlign: "center",
+        position: "relative",
+        overflow: "hidden",
         borderColor: ring,
         boxShadow: won ? `0 0 60px -18px ${accent}` : "var(--shadow-pop)",
       }}
     >
-      <div style={{ fontSize: "2.4rem", lineHeight: 1 }} aria-hidden>
+      {won && <Confetti accent={accent} />}
+      <motion.div
+        style={{ fontSize: "2.6rem", lineHeight: 1 }}
+        aria-hidden
+        initial={{ scale: 0.4, rotate: won ? -14 : 0 }}
+        animate={{ scale: 1, rotate: 0 }}
+        transition={{ type: "spring", stiffness: 260, damping: 14, delay: 0.08 }}
+      >
         {icon}
-      </div>
+      </motion.div>
       <h2 style={{ margin: "2px 0", color: won ? accent : "var(--text)" }}>{title}</h2>
 
       {children && (
@@ -84,57 +95,56 @@ export function ResultCard({
           <span className="faint" style={{ fontSize: "0.72rem", letterSpacing: "0.08em" }}>
             {scoreLabel}
           </span>
-          <div
+          <motion.div
+            initial={{ scale: 0.7 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 300, damping: 15, delay: 0.15 }}
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 800,
-              fontSize: "2rem",
+              fontWeight: 700,
+              fontSize: "2.2rem",
               color: won ? accent : "var(--text)",
               fontVariantNumeric: "tabular-nums",
             }}
           >
             {score}
-          </div>
+          </motion.div>
           {isRecord && (
             <motion.span
-              className="badge"
               initial={{ scale: 0.6, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 300, damping: 16 }}
-              style={{ borderColor: "var(--warn)", color: "var(--warn)", fontWeight: 800 }}
+              transition={{ type: "spring", stiffness: 300, damping: 16, delay: 0.25 }}
             >
-              ★ Record!
+              <Badge color="var(--warn)">★ Record!</Badge>
             </motion.span>
           )}
           {!isRecord && isPuzzleRecord && (
             <motion.span
-              className="badge"
               initial={{ scale: 0.6, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 300, damping: 16 }}
-              style={{ borderColor: "var(--good)", color: "var(--good)", fontWeight: 800 }}
+              transition={{ type: "spring", stiffness: 300, damping: 16, delay: 0.25 }}
             >
-              ★ Record puzzle
+              <Badge tone="success">★ Record puzzle</Badge>
             </motion.span>
           )}
         </div>
       )}
 
-      <div className="row center wrap" style={{ gap: 12, marginTop: 12 }}>
+      <div className="row center wrap" style={{ gap: 12, marginTop: 12, position: "relative" }}>
         {shareText && onCopy && (
-          <button type="button" className="btn btn-primary" onClick={onCopy}>
+          <Button onClick={onCopy}>
             <span aria-hidden>📋</span> Copiaza rezultatul
-          </button>
+          </Button>
         )}
         {onReplay && (
-          <button type="button" className="btn btn-ghost" onClick={onReplay}>
+          <Button variant="secondary" onClick={onReplay}>
             {replayLabel}
-          </button>
+          </Button>
         )}
         {onExit && (
-          <button type="button" className="btn btn-ghost" onClick={onExit}>
+          <Button variant="secondary" onClick={onExit}>
             Meniu
-          </button>
+          </Button>
         )}
       </div>
     </motion.div>

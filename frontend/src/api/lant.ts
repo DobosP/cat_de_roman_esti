@@ -2,10 +2,9 @@
 // Server-authoritative: the chain, optimal distance and validation live in the backend;
 // these helpers only shuttle JSON. All URLs are relative (Vite proxies /api in dev).
 
-import { ApiError } from "./client";
+import { getJson, postJson } from "./client";
 
 const PREFIX = "/api/wordgames/lant";
-const JSON_HEADERS = { "Content-Type": "application/json" } as const;
 
 // ---------------------------------------------------------------------- types
 export interface Concept {
@@ -65,43 +64,6 @@ export interface HintResult {
   /** How many distinct neighbours lie on a shortest path (>1 => you had a real choice). */
   alternatives?: number;
   message?: string;
-}
-
-// ---------------------------------------------------------------------- transport
-async function parse<T>(res: Response): Promise<T> {
-  const text = await res.text();
-  let body: unknown = null;
-  if (text) {
-    try {
-      body = JSON.parse(text);
-    } catch {
-      body = text;
-    }
-  }
-  if (!res.ok) {
-    const detail =
-      body && typeof body === "object" && "detail" in body
-        ? String((body as { detail: unknown }).detail)
-        : typeof body === "string" && body
-          ? body
-          : res.statusText;
-    throw new ApiError(res.status, detail || `request failed (${res.status})`);
-  }
-  return body as T;
-}
-
-async function getJson<T>(url: string): Promise<T> {
-  return parse<T>(await fetch(url, { headers: { Accept: "application/json" } }));
-}
-
-async function postJson<T>(url: string, body?: unknown): Promise<T> {
-  return parse<T>(
-    await fetch(url, {
-      method: "POST",
-      headers: JSON_HEADERS,
-      body: body === undefined ? undefined : JSON.stringify(body),
-    }),
-  );
 }
 
 // ---------------------------------------------------------------------- endpoints

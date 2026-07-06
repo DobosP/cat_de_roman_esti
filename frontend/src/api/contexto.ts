@@ -1,53 +1,9 @@
-// Typed, same-origin fetch wrappers for the "Cald sau Rece" (contexto) word game.
+// Typed API wrappers for the "Cald sau Rece" (contexto) word game.
 // Server-authoritative: the secret target is never sent until the game is won or
 // given up. All URLs are relative ("/api/..."), so they hit the SPA's origin.
 
-export class ApiError extends Error {
-  readonly status: number;
-  constructor(status: number, message: string) {
-    super(message);
-    this.name = "ApiError";
-    this.status = status;
-  }
-}
-
-const JSON_HEADERS = { "Content-Type": "application/json" } as const;
-
-async function parse<T>(res: Response): Promise<T> {
-  const text = await res.text();
-  let body: unknown = null;
-  if (text) {
-    try {
-      body = JSON.parse(text);
-    } catch {
-      body = text;
-    }
-  }
-  if (!res.ok) {
-    const detail =
-      body && typeof body === "object" && "detail" in body
-        ? String((body as { detail: unknown }).detail)
-        : typeof body === "string" && body
-          ? body
-          : res.statusText;
-    throw new ApiError(res.status, detail || `request failed (${res.status})`);
-  }
-  return body as T;
-}
-
-async function getJson<T>(url: string): Promise<T> {
-  return parse<T>(await fetch(url, { headers: { Accept: "application/json" } }));
-}
-
-async function postJson<T>(url: string, body?: unknown): Promise<T> {
-  return parse<T>(
-    await fetch(url, {
-      method: "POST",
-      headers: JSON_HEADERS,
-      body: body === undefined ? undefined : JSON.stringify(body),
-    }),
-  );
-}
+import { getJson, postJson } from "./client";
+export { ApiError } from "./client";
 
 // ----------------------------------------------------------------------- types
 

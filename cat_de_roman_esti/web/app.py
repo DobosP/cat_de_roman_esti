@@ -22,6 +22,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.routing import APIRoute
 from fastapi.staticfiles import StaticFiles
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from ..data import fixture_manifest
 from ..wordgames.alchimie import router as alchimie_router
@@ -33,6 +34,24 @@ from ..wordgames.service import get_service
 log = logging.getLogger("cat_de_roman_esti.web")
 
 STATIC_DIR = Path(__file__).resolve().parent / "static"
+
+
+class SPAStaticFiles(StaticFiles):
+    """StaticFiles with an SPA fallback: unknown non-API paths serve index.html.
+
+    The SPA uses real URL routing (/alchimie, /cald-rece, /lant, /conexiuni), so a
+    refresh or shared deep link must land on the app shell instead of a 404. API
+    paths are exempt so a bad /api/* call still returns its JSON 404.
+    """
+
+    async def get_response(self, path: str, scope):  # type: ignore[override]
+        try:
+            return await super().get_response(path, scope)
+        except StarletteHTTPException as exc:
+            if exc.status_code == 404 and not path.startswith("api"):
+                return await super().get_response("index.html", scope)
+            raise
+
 
 # Arcade metadata — the home screen mirrors this (kept here so /api/health can report it).
 GAMES = [
@@ -159,8 +178,8 @@ def create_app() -> FastAPI:
     # ----------------------------------------------------------------- static
     index_html = STATIC_DIR / "index.html"
     if index_html.exists():
-        app.mount("/", StaticFiles(directory=str(STATIC_DIR), html=True), name="spa")
-        log.info("mounted built SPA from %s", STATIC_DIR)
+        app.mount("/", SPAStaticFiles(directory=str(STATIC_DIR), html=True), name="spa")
+        log.info("mounted built SPA (with deep-link fallback) from %s", STATIC_DIR)
     else:
         @app.get("/", response_class=HTMLResponse)
         def placeholder() -> HTMLResponse:

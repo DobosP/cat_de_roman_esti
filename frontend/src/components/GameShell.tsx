@@ -2,10 +2,11 @@
 //
 // Renders a consistent "← Meniu" back-button (left) and a right-aligned slot for the
 // game's status badges (moves, difficulty, lives, …). The optional `accent` tints the
-// back-button hover/title so each game keeps its own colour identity while sharing the
-// exact same layout, tap-targets, and accessibility wiring.
+// title so each game keeps its own colour identity while sharing the exact same
+// layout, tap-targets, and accessibility wiring.
 
 import type { ReactNode } from "react";
+import { Button } from "@roedu/ui";
 
 export function GameShell({
   onExit,
@@ -25,14 +26,9 @@ export function GameShell({
   return (
     <div className="row spread wrap game-shell-header" style={{ gap: 12 }}>
       <div className="row" style={{ gap: 10, alignItems: "center" }}>
-        <button
-          type="button"
-          className="btn btn-ghost"
-          onClick={onExit}
-          aria-label="Inapoi la meniu"
-        >
+        <Button variant="secondary" size="sm" onClick={onExit} aria-label="Inapoi la meniu">
           <span aria-hidden>←</span> Meniu
-        </button>
+        </Button>
         {title && (
           <strong
             className="game-shell-title"

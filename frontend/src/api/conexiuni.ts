@@ -2,7 +2,7 @@
 // Server-authoritative: the per-category grouping + the full solution are only revealed
 // by the backend once the game is won or lost. The client renders what it returns.
 
-import { ApiError } from "./client";
+import { ApiError, getJson, postJson } from "./client";
 
 export type Difficulty = "usor" | "normal" | "greu";
 
@@ -76,44 +76,7 @@ export interface ClueResult extends ConexiuniState {
   clue: ConexiuniClue;
 }
 
-const JSON_HEADERS = { "Content-Type": "application/json" } as const;
 const BASE = "/api/wordgames/conexiuni";
-
-async function parse<T>(res: Response): Promise<T> {
-  const text = await res.text();
-  let body: unknown = null;
-  if (text) {
-    try {
-      body = JSON.parse(text);
-    } catch {
-      body = text;
-    }
-  }
-  if (!res.ok) {
-    const detail =
-      body && typeof body === "object" && "detail" in body
-        ? String((body as { detail: unknown }).detail)
-        : typeof body === "string" && body
-          ? body
-          : res.statusText;
-    throw new ApiError(res.status, detail || `request failed (${res.status})`);
-  }
-  return body as T;
-}
-
-async function getJson<T>(url: string): Promise<T> {
-  return parse<T>(await fetch(url, { headers: { Accept: "application/json" } }));
-}
-
-async function postJson<T>(url: string, body?: unknown): Promise<T> {
-  return parse<T>(
-    await fetch(url, {
-      method: "POST",
-      headers: JSON_HEADERS,
-      body: body === undefined ? undefined : JSON.stringify(body),
-    }),
-  );
-}
 
 export interface CreateOpts {
   seed?: number;
@@ -149,7 +112,9 @@ export function guessConexiuni(gameId: string, ids: string[]): Promise<GuessResu
   const distinct = new Set(ids);
   if (ids.length !== GROUP_SIZE || distinct.size !== GROUP_SIZE) {
     return Promise.reject(
-      new ApiError(400, `Alege exact ${GROUP_SIZE} concepte distincte`),
+      new ApiError(`Alege exact ${GROUP_SIZE} concepte distincte`, 400, {
+        detail: `Alege exact ${GROUP_SIZE} concepte distincte`,
+      }),
     );
   }
   return postJson<GuessResult>(

@@ -1,12 +1,38 @@
-// Shared HTTP error type for the word-game API wrappers. Each game's api/<game>.ts has
-// its own tiny fetch helpers and throws this on a non-2xx response so screens can show a
-// status-aware message. The BFF is server-authoritative; no secrets ever live client-side.
+// api/client.ts — the app's single HTTP transport, built on @roedu/ui's shared
+// createApiClient (replaces the per-game fetch plumbing). Same-origin BFF: Vite
+// proxies /api in dev, FastAPI serves the SPA in prod. No secrets client-side.
+//
+// FastAPI signals user-facing failures as {"detail": "..."} — normalize that into
+// ApiError.message once, here, so screens can just show err.message.
 
-export class ApiError extends Error {
-  readonly status: number;
-  constructor(status: number, message: string) {
-    super(message);
-    this.name = "ApiError";
-    this.status = status;
+import { createApiClient, ApiError } from "@roedu/ui";
+
+const client = createApiClient({ baseUrl: "" });
+
+function rethrowFriendly(err: unknown): never {
+  if (err instanceof ApiError) {
+    const detail = (err.body as { detail?: unknown } | null)?.detail;
+    if (typeof detail === "string" && detail.trim()) {
+      throw new ApiError(detail, err.status, err.body);
+    }
+  }
+  throw err;
+}
+
+export async function getJson<T>(path: string): Promise<T> {
+  try {
+    return await client.get<T>(path);
+  } catch (err) {
+    rethrowFriendly(err);
   }
 }
+
+export async function postJson<T>(path: string, body?: unknown): Promise<T> {
+  try {
+    return await client.post<T>(path, body);
+  } catch (err) {
+    rethrowFriendly(err);
+  }
+}
+
+export { ApiError };
