@@ -1,7 +1,7 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-07-04. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-04_
+_As of 2026-07-06. Update whenever `main` or the test baseline moves._
+_Last verified: 2026-07-06_
 
 ## Phase
 
@@ -12,7 +12,7 @@ category clue), **Lanțul Cuvintelor** (word-ladder), **Conexiuni** (NYT-Connect
 grouping + one redacted label-pattern clue after two mistakes). Each has difficulty
 tiers, a seeded **daily challenge**, score + shareable result, and offline leaderboard/history.
 Backed by `cat_de_roman_esti/wordgames/` (shared `service.py` over the offline KG + one
-`APIRouter` per game under `/api/wordgames/*`). The old graph SPA and its game-session
+DRF views per game under `/api/wordgames/*`). The old graph SPA and its game-session
 API were **removed in `7308ce9` (2026-06-22)**; see `docs/adr/0001-pivot-to-word-game-arcade.md` —
 **no graph UI unless Paul explicitly reopens it**.
 
@@ -36,7 +36,7 @@ remains the original `easy|hard` semantic-hop game.
   remain the original offline/live semantic-hop core.
 
 ### Web app
-- `cat_de_roman_esti/web/` — FastAPI BFF (`create_app`): mounts the four wordgame routers
+- `cat_de_roman_esti/web/` — Django 5.2 + DRF BFF (fleet-uniform): urls.py mounts the four wordgame view modules
   under `/api/wordgames/{alchimie,contexto,lant,conexiuni}` (server-authoritative: hidden
   answers, bounded in-memory game stores, fail-closed board generation), plus `/api/health`
   and `/api/manifest` (offline-KG trust manifest: version + `schema_version` + content hash);

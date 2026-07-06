@@ -7,10 +7,10 @@ manifest tests in `tests/test_app_pack_contract.py`.
 
 ## 1. Stable OpenAPI operationIds
 
-The app pins operationIds via `generate_unique_id_function` (`web/app.py:_operation_id`) to
-`<tag>_<endpoint-name>`, e.g. `contexto_guess`, `alchimie_combine`, `lant_move`,
+The app pins operationIds via `@extend_schema(operation_id=...)` on every DRF view
+(drf-spectacular; see `cat_de_roman_esti/wordgames/*.py`) to `<tag>_<endpoint-name>`, e.g. `contexto_guess`, `alchimie_combine`, `lant_move`,
 `conexiuni_guess`, `conexiuni_clue`, `meta_manifest`. A generated TS client turns these into method names
-(`contextoGuess`, …). Unlike FastAPI's default, they do **not** bake in the HTTP path, so a
+(`contextoGuess`, …). Unlike a framework default, they do **not** bake in the HTTP path, so a
 route refactor never churns the client surface. The full expected set is asserted in
 `test_openapi_operation_ids_are_stable`.
 

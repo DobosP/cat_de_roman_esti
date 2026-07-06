@@ -8,7 +8,7 @@
 #                      (fixtures + the built SPA from stage 1), run uvicorn as non-root.
 #
 # The runtime image needs ONLY: python 3.11 + the cat_de_roman_esti package + its
-# [web] extra (fastapi + uvicorn) + the bundled fixtures + the built SPA static.
+# [web] extra (django + DRF + uvicorn) + the bundled fixtures + the built SPA static.
 # roedu_client is stdlib-only; romania_scraper is NOT needed at runtime.
 
 # ---------------------------------------------------------------------------
@@ -67,11 +67,11 @@ COPY cat_de_roman_esti/ ./cat_de_roman_esti/
 # dir so the image always ships a fresh build).
 COPY --from=frontend /build/cat_de_roman_esti/web/static/ ./cat_de_roman_esti/web/static/
 
-# Install the package WITH its web extra (fastapi + uvicorn), PINNED via constraints.txt
+# Install the package WITH its web extra (django + DRF + uvicorn), PINNED via constraints.txt
 # for a reproducible build. Package-data in pyproject.toml ships fixtures/*.json and
 # web/static/** into site-packages, so the installed copy is self-contained.
 RUN pip install -c constraints.txt ".[web]" \
-    && python -c "import cat_de_roman_esti.web, fastapi, uvicorn; print('install OK')"
+    && python -c "import cat_de_roman_esti.web, django, rest_framework, uvicorn; print('install OK')"
 
 # Drop privileges: create a non-root user and own /app.
 RUN useradd --create-home --uid 10001 appuser \

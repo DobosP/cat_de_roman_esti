@@ -40,7 +40,7 @@ die()  { printf '\033[1;31m[run]\033[0m %s\n' "$*" >&2; exit 1; }
 have() { command -v "$1" >/dev/null 2>&1; }
 
 # Pick the interpreter: prefer the configured venv python, else fall back to any
-# python3 that can import fastapi/uvicorn (so `./run.sh` still works elsewhere).
+# python3 that can import django/uvicorn (so `./run.sh` still works elsewhere).
 resolve_python() {
   if [ -x "$CDR_PYTHON" ]; then
     echo "$CDR_PYTHON"; return 0
@@ -48,7 +48,7 @@ resolve_python() {
   if have python3; then
     echo "python3"; return 0
   fi
-  die "no python interpreter found (set CDR_PYTHON to a python with fastapi+uvicorn)"
+  die "no python interpreter found (set CDR_PYTHON to a python with django+uvicorn)"
 }
 
 # Is a TCP port free on $HOST? Uses python's socket so we need no extra tools.
