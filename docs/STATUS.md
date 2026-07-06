@@ -97,6 +97,26 @@ Live pulls are capped (10k nodes / 50k edges / 5k puzzles); the live path itself
 unexercised here.
 
 ## Next / future work
+Post Django-port (2026-07-06 — that session was code-only by direction; these remain):
+- **Docker gate:** the image has NOT been built since the FastAPI→Django port; the first
+  `docker compose up --build` (or the CI docker job) validates the new `[web]` closure +
+  unchanged CMD. Expected no-op — verify once, then drop this line.
+- **Manual browser pass of session resume:** the resume flow (refresh/deep-link →
+  "Joc reluat.") is verified at API level + typecheck only; click through all four games
+  once in a real browser, incl. the expired-session fallback to the intro.
+- **Regenerate the mobile TS client** from `scripts/export_openapi.py` when mobile work
+  resumes: operationIds/paths are identical, but drf-spectacular's schema differs
+  cosmetically from FastAPI's (component naming / nullability style).
+- **Daily-puzzle discontinuity (one-time, accepted):** the BFS determinism fix maps
+  seeds/dailies to different — now stable — puzzles than the FastAPI era.
+- **Scaling constraint:** live games are in-memory (`SessionStore`) — the server MUST stay
+  single-process (uvicorn 1 worker / gunicorn `--workers 1`). If real load arrives, move
+  session state to shared storage (redis) before adding workers.
+- **@roedu/ui consumption:** the vendored tarball (`frontend/vendor/roedu-ui-0.3.0.tgz`)
+  is the working pattern; GitHub Packages publishing (PAT + publish step) remains the
+  documented upgrade path if the fleet standardizes on it.
+
+Standing items:
 - **Real graph data:** run `romania-scraper kg build --commit` on the RO fleet host and point
   `ROEDU_API_URL` at live `ro_data_server`. _(blocked on fleet-host infra)_
 - **Live end-to-end smoke** against `ro_data_server`. _(needs a live server)_
