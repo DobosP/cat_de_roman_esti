@@ -6,31 +6,27 @@ from itertools import combinations
 
 import pytest
 
-pytest.importorskip("fastapi")
+pytest.importorskip("django")
 
-from fastapi import FastAPI  # noqa: E402
-from fastapi.testclient import TestClient  # noqa: E402
+from django.test import Client  # noqa: E402
 
 from cat_de_roman_esti.wordgames import alchimie as A  # noqa: E402
-from cat_de_roman_esti.wordgames.alchimie import router  # noqa: E402
 
 BASE = "/api/wordgames/alchimie"
 
 
 @pytest.fixture()
-def client() -> TestClient:
-    app = FastAPI()
-    app.include_router(router)
-    return TestClient(app)
+def client() -> Client:
+    return Client()
 
 
-def _create(client: TestClient, seed: int = 7) -> dict:
+def _create(client: Client, seed: int = 7) -> dict:
     res = client.post(f"{BASE}/games?seed={seed}")
-    assert res.status_code == 200, res.text
+    assert res.status_code == 200, res.content.decode()
     return res.json()
 
 
-def test_create_returns_hidden_target_and_seed_inventory(client: TestClient) -> None:
+def test_create_returns_hidden_target_and_seed_inventory(client: Client) -> None:
     state = _create(client)
     assert state["game_id"]
     assert state["won"] is False
@@ -47,14 +43,14 @@ def test_create_returns_hidden_target_and_seed_inventory(client: TestClient) -> 
         assert item["parents"] is None
 
 
-def test_deterministic_for_same_seed(client: TestClient) -> None:
+def test_deterministic_for_same_seed(client: Client) -> None:
     a = _create(client, seed=42)
     b = _create(client, seed=42)
     assert a["target"]["label"] == b["target"]["label"]
     assert [i["id"] for i in a["inventory"]] == [i["id"] for i in b["inventory"]]
 
 
-def test_winning_play_through(client: TestClient) -> None:
+def test_winning_play_through(client: Client) -> None:
     """Greedily combine every owned pair until the target is crafted."""
     state = _create(client, seed=7)
     gid = state["game_id"]
@@ -67,8 +63,12 @@ def test_winning_play_through(client: TestClient) -> None:
             if (a, b) in tried:
                 continue
             tried.add((a, b))
-            res = client.post(f"{BASE}/games/{gid}/combine", json={"a": a, "b": b})
-            assert res.status_code == 200, res.text
+            res = client.post(
+                f"{BASE}/games/{gid}/combine",
+                {"a": a, "b": b},
+                content_type="application/json",
+            )
+            assert res.status_code == 200, res.content.decode()
             state = res.json()
             if state["discovered"] or state["won"]:
                 progressed = True
@@ -87,7 +87,7 @@ def test_winning_play_through(client: TestClient) -> None:
         assert len(item["parents"]) == 2
 
 
-def test_combine_with_no_discovery_counts_move(client: TestClient) -> None:
+def test_combine_with_no_discovery_counts_move(client: Client) -> None:
     """A combine with no shared neighbour still counts as a move with a clear message."""
     state = _create(client, seed=7)
     gid = state["game_id"]
@@ -96,7 +96,11 @@ def test_combine_with_no_discovery_counts_move(client: TestClient) -> None:
     # Find a barren pair (no common neighbours) among the seeds.
     barren: tuple[str, str] | None = None
     for a, b in combinations(ids, 2):
-        res = client.post(f"{BASE}/games/{gid}/combine", json={"a": a, "b": b})
+        res = client.post(
+            f"{BASE}/games/{gid}/combine",
+            {"a": a, "b": b},
+            content_type="application/json",
+        )
         body = res.json()
         if not body["discovered"]:
             barren = (a, b)
@@ -109,30 +113,40 @@ def test_combine_with_no_discovery_counts_move(client: TestClient) -> None:
     assert barren is not None
 
 
-def test_combine_unowned_is_400(client: TestClient) -> None:
+def test_combine_unowned_is_400(client: Client) -> None:
     state = _create(client)
     gid = state["game_id"]
     a = state["inventory"][0]["id"]
     res = client.post(
-        f"{BASE}/games/{gid}/combine", json={"a": a, "b": "n_nonexistent_node"}
+        f"{BASE}/games/{gid}/combine",
+        {"a": a, "b": "n_nonexistent_node"},
+        content_type="application/json",
     )
     assert res.status_code == 400
 
 
-def test_combine_same_concept_is_400(client: TestClient) -> None:
+def test_combine_same_concept_is_400(client: Client) -> None:
     state = _create(client)
     gid = state["game_id"]
     a = state["inventory"][0]["id"]
-    res = client.post(f"{BASE}/games/{gid}/combine", json={"a": a, "b": a})
+    res = client.post(
+        f"{BASE}/games/{gid}/combine",
+        {"a": a, "b": a},
+        content_type="application/json",
+    )
     assert res.status_code == 400
 
 
-def test_reset_restores_seed_inventory(client: TestClient) -> None:
+def test_reset_restores_seed_inventory(client: Client) -> None:
     state = _create(client, seed=7)
     gid = state["game_id"]
     ids = [item["id"] for item in state["inventory"]]
     # Make some progress.
-    client.post(f"{BASE}/games/{gid}/combine", json={"a": ids[0], "b": ids[1]})
+    client.post(
+        f"{BASE}/games/{gid}/combine",
+        {"a": ids[0], "b": ids[1]},
+        content_type="application/json",
+    )
 
     res = client.post(f"{BASE}/games/{gid}/reset")
     assert res.status_code == 200
@@ -142,10 +156,12 @@ def test_reset_restores_seed_inventory(client: TestClient) -> None:
     assert [i["id"] for i in reset["inventory"]] == ids
 
 
-def test_unknown_game_is_404(client: TestClient) -> None:
+def test_unknown_game_is_404(client: Client) -> None:
     assert client.get(f"{BASE}/games/does-not-exist").status_code == 404
     res = client.post(
-        f"{BASE}/games/does-not-exist/combine", json={"a": "x", "b": "y"}
+        f"{BASE}/games/does-not-exist/combine",
+        {"a": "x", "b": "y"},
+        content_type="application/json",
     )
     assert res.status_code == 404
 
@@ -153,7 +169,7 @@ def test_unknown_game_is_404(client: TestClient) -> None:
 # --------------------------------------------------------------- difficulty + daily + score
 
 
-def _play_to_win(client: TestClient, state: dict) -> dict:
+def _play_to_win(client: Client, state: dict) -> dict:
     """Greedily combine pairs until the target is crafted; return the won state."""
     gid = state["game_id"]
     tried: set[tuple[str, str]] = set()
@@ -164,8 +180,12 @@ def _play_to_win(client: TestClient, state: dict) -> dict:
             if (a, b) in tried:
                 continue
             tried.add((a, b))
-            res = client.post(f"{BASE}/games/{gid}/combine", json={"a": a, "b": b})
-            assert res.status_code == 200, res.text
+            res = client.post(
+                f"{BASE}/games/{gid}/combine",
+                {"a": a, "b": b},
+                content_type="application/json",
+            )
+            assert res.status_code == 200, res.content.decode()
             state = res.json()
             if state["discovered"] or state["won"]:
                 progressed = True
@@ -175,9 +195,9 @@ def _play_to_win(client: TestClient, state: dict) -> dict:
 
 
 @pytest.mark.parametrize("difficulty", ["usor", "normal", "greu"])
-def test_difficulty_is_accepted(client: TestClient, difficulty: str) -> None:
+def test_difficulty_is_accepted(client: Client, difficulty: str) -> None:
     res = client.post(f"{BASE}/games?seed=7&difficulty={difficulty}")
-    assert res.status_code == 200, res.text
+    assert res.status_code == 200, res.content.decode()
     state = res.json()
     assert state["difficulty"] == difficulty
     assert state["target_depth"] >= 2
@@ -189,13 +209,13 @@ def test_difficulty_is_accepted(client: TestClient, difficulty: str) -> None:
         assert state["target_depth"] >= 3
 
 
-def test_unknown_difficulty_falls_back_to_normal(client: TestClient) -> None:
+def test_unknown_difficulty_falls_back_to_normal(client: Client) -> None:
     res = client.post(f"{BASE}/games?seed=7&difficulty=imposibil")
     assert res.status_code == 200
     assert res.json()["difficulty"] == "normal"
 
 
-def test_daily_is_deterministic_and_echoed(client: TestClient) -> None:
+def test_daily_is_deterministic_and_echoed(client: Client) -> None:
     date = "2026-06-21"
     a = client.post(f"{BASE}/games?daily={date}").json()
     b = client.post(f"{BASE}/games?daily={date}").json()
@@ -207,13 +227,13 @@ def test_daily_is_deterministic_and_echoed(client: TestClient) -> None:
     assert other["daily"] == "2026-01-01"
 
 
-def test_in_progress_state_has_no_score_or_share(client: TestClient) -> None:
+def test_in_progress_state_has_no_score_or_share(client: Client) -> None:
     state = _create(client, seed=7)
     assert "score" not in state
     assert "share" not in state
 
 
-def test_win_includes_score_and_share(client: TestClient) -> None:
+def test_win_includes_score_and_share(client: Client) -> None:
     state = _play_to_win(client, _create(client, seed=7))
     assert state["won"] is True
     assert isinstance(state["score"], int)
@@ -224,7 +244,7 @@ def test_win_includes_score_and_share(client: TestClient) -> None:
     assert "⚗️" in share
 
 
-def test_daily_win_share_includes_date(client: TestClient) -> None:
+def test_daily_win_share_includes_date(client: Client) -> None:
     date = "2026-06-21"
     state = _play_to_win(client, client.post(f"{BASE}/games?daily={date}").json())
     assert date in state["share"]
@@ -249,7 +269,7 @@ def _opening_pairs_from_state(state: dict) -> int:
 
 
 @pytest.mark.parametrize("difficulty", ["usor", "normal", "greu"])
-def test_instances_have_several_openings(client: TestClient, difficulty: str) -> None:
+def test_instances_have_several_openings(client: Client, difficulty: str) -> None:
     """Across many seeds, every generated instance must offer >= 2 opening moves so the
 
     player never has to brute-force every pair to make a first discovery.
@@ -264,7 +284,7 @@ def test_instances_have_several_openings(client: TestClient, difficulty: str) ->
 
 
 @pytest.mark.parametrize("difficulty", ["usor", "normal", "greu"])
-def test_target_is_recognizable(client: TestClient, difficulty: str) -> None:
+def test_target_is_recognizable(client: Client, difficulty: str) -> None:
     """The hidden target should be a recognizable concept, not an obscure intermediate."""
     from cat_de_roman_esti.wordgames.service import get_service
 
@@ -277,7 +297,7 @@ def test_target_is_recognizable(client: TestClient, difficulty: str) -> None:
     assert session.target not in session.seeds
 
 
-def test_greu_target_depth_is_capped(client: TestClient) -> None:
+def test_greu_target_depth_is_capped(client: Client) -> None:
     """Greu targets are deep (>=3) but capped so the game stays finishable."""
     import random as _random
 
@@ -302,7 +322,7 @@ def _barren_owned_pair(svc, ids: list[str]) -> tuple[str, str] | None:
     return None
 
 
-def _force_fruitless(client: TestClient, state: dict) -> dict:
+def _force_fruitless(client: Client, state: dict) -> dict:
     """Drive a game into the "stuck" state by combining a barren owned pair.
 
     Picks a pair of owned concepts whose common-neighbour set is empty (via the service)
@@ -319,13 +339,15 @@ def _force_fruitless(client: TestClient, state: dict) -> dict:
     a, b = pair
     while not state["hint_available"]:
         state = client.post(
-            f"{BASE}/games/{gid}/combine", json={"a": a, "b": b}
+            f"{BASE}/games/{gid}/combine",
+            {"a": a, "b": b},
+            content_type="application/json",
         ).json()
         assert state["discovered"] == [], "barren pair unexpectedly discovered a concept"
     return state
 
 
-def _closure_distance_to_target(client: TestClient, gid: str, owned: set[str]) -> int | None:
+def _closure_distance_to_target(client: Client, gid: str, owned: set[str]) -> int | None:
     """Combine-closure generation of the (server-secret) target from ``owned`` ids.
 
     Reuses the engine's own closure so the test measures the SAME notion of distance the
@@ -338,7 +360,7 @@ def _closure_distance_to_target(client: TestClient, gid: str, owned: set[str]) -
     return _A._closure_with_generations(list(owned)).get(session.target)
 
 
-def test_hint_unavailable_until_stuck(client: TestClient) -> None:
+def test_hint_unavailable_until_stuck(client: Client) -> None:
     state = _create(client, seed=7)
     assert state["hint_available"] is False
     assert state["hints_used"] == 0
@@ -347,7 +369,7 @@ def test_hint_unavailable_until_stuck(client: TestClient) -> None:
     assert res.status_code == 400
 
 
-def _seed_with_useful_and_barren(client: TestClient) -> dict:
+def _seed_with_useful_and_barren(client: Client) -> dict:
     """Find a game whose seed inventory has BOTH a forward-progress pair and a barren one.
 
     On the dense graph most seeds qualify, but a few degenerate instances have no single
@@ -370,7 +392,7 @@ def _seed_with_useful_and_barren(client: TestClient) -> dict:
     raise AssertionError("no seed offered both a barren and a forward-progress pair")
 
 
-def test_hint_after_fruitless_returns_useful_pair(client: TestClient) -> None:
+def test_hint_after_fruitless_returns_useful_pair(client: Client) -> None:
     from cat_de_roman_esti.wordgames.service import get_service
 
     svc = get_service()
@@ -412,7 +434,7 @@ def test_hint_penalizes_score() -> None:
     assert base.score == 100
 
 
-def test_combine_after_win_is_readonly(client: TestClient) -> None:
+def test_combine_after_win_is_readonly(client: Client) -> None:
     """Combining a finished game must not advance moves or corrupt the score."""
     state = _play_to_win(client, _create(client, seed=7))
     gid = state["game_id"]
@@ -420,7 +442,9 @@ def test_combine_after_win_is_readonly(client: TestClient) -> None:
     score_at_win = state["score"]
     ids = [i["id"] for i in state["inventory"]]
     res = client.post(
-        f"{BASE}/games/{gid}/combine", json={"a": ids[0], "b": ids[1]}
+        f"{BASE}/games/{gid}/combine",
+        {"a": ids[0], "b": ids[1]},
+        content_type="application/json",
     ).json()
     assert res["won"] is True
     assert res["moves"] == moves_at_win
@@ -428,32 +452,38 @@ def test_combine_after_win_is_readonly(client: TestClient) -> None:
     assert res["discovered"] == []
 
 
-def test_hint_on_won_game_is_400(client: TestClient) -> None:
+def test_hint_on_won_game_is_400(client: Client) -> None:
     state = _play_to_win(client, _create(client, seed=7))
     res = client.post(f"{BASE}/games/{state['game_id']}/hint")
     assert res.status_code == 400
 
 
-def test_combine_trims_whitespace_inputs(client: TestClient) -> None:
+def test_combine_trims_whitespace_inputs(client: Client) -> None:
     """Padded ids resolve to owned concepts rather than spuriously 400-ing."""
     state = _create(client, seed=7)
     gid = state["game_id"]
     a, b = state["inventory"][0]["id"], state["inventory"][1]["id"]
     res = client.post(
-        f"{BASE}/games/{gid}/combine", json={"a": f"  {a} ", "b": f" {b}  "}
+        f"{BASE}/games/{gid}/combine",
+        {"a": f"  {a} ", "b": f" {b}  "},
+        content_type="application/json",
     )
-    assert res.status_code == 200, res.text
+    assert res.status_code == 200, res.content.decode()
 
 
-def test_empty_input_is_400(client: TestClient) -> None:
+def test_empty_input_is_400(client: Client) -> None:
     state = _create(client, seed=7)
     gid = state["game_id"]
     a = state["inventory"][0]["id"]
-    res = client.post(f"{BASE}/games/{gid}/combine", json={"a": a, "b": ""})
+    res = client.post(
+        f"{BASE}/games/{gid}/combine",
+        {"a": a, "b": ""},
+        content_type="application/json",
+    )
     assert res.status_code == 400
 
 
-def test_reset_clears_hints_and_streak(client: TestClient) -> None:
+def test_reset_clears_hints_and_streak(client: Client) -> None:
     state = _force_fruitless(client, _create(client, seed=7))
     gid = state["game_id"]
     client.post(f"{BASE}/games/{gid}/hint")

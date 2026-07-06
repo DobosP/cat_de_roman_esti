@@ -108,7 +108,9 @@ class WordGameService:
         frontier: deque[tuple[str, int]] = deque([(a, 0)])
         while frontier:
             cur, d = frontier.popleft()
-            for nxt in self._adj.get(cur, ()):  # noqa: SIM118
+            # sorted(): set iteration is hash-randomized per process; deterministic
+            # order keeps everything derived from BFS reproducible across restarts.
+            for nxt in sorted(self._adj.get(cur, ())):
                 if nxt in seen:
                     continue
                 if nxt == b:
@@ -118,12 +120,19 @@ class WordGameService:
         return None
 
     def distances_from(self, source: str) -> dict[str, int]:
-        """Every node's BFS distance from ``source`` (only reachable nodes included)."""
+        """Every node's BFS distance from ``source`` (only reachable nodes included).
+
+        Key order is deterministic (BFS layers, sorted within each expansion): puzzle
+        generators sample/slice from this order, so it MUST NOT depend on per-process
+        set/hash order — otherwise the same seed (and the shared daily!) produces a
+        different puzzle after every server restart, which is exactly the bug this
+        sorted() fixes.
+        """
         dist = {source: 0}
         frontier: deque[str] = deque([source])
         while frontier:
             cur = frontier.popleft()
-            for nxt in self._adj.get(cur, ()):  # noqa: SIM118
+            for nxt in sorted(self._adj.get(cur, ())):
                 if nxt not in dist:
                     dist[nxt] = dist[cur] + 1
                     frontier.append(nxt)

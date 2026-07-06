@@ -3,7 +3,7 @@
 // Server-authoritative: we render whatever the backend returns and never know the target
 // id until the server reveals it on a win.
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button, Spinner, type ToastKind } from "@roedu/ui";
 import {
@@ -20,6 +20,7 @@ import { ResultCard } from "../components/ResultCard";
 import { GameIntro } from "../components/GameIntro";
 import { Hud, StatBadge } from "../components/Hud";
 import { DifficultyPicker } from "../components/DifficultyPicker";
+import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
 import { gameByKey } from "../games";
 import { sound } from "../sound";
@@ -56,9 +57,46 @@ export default function Alchimie({
   const [difficulty, setDifficulty] = useState<Difficulty>("normal");
   const [isRecord, setIsRecord] = useState(false);
   const [isPuzzleRecord, setIsPuzzleRecord] = useState(false);
+  const resumeAttempted = useRef(false);
+  const active = useActiveGame("alchimie");
   const recordOnce = useRecordScore("alchimie");
 
   const best = useMemo(() => bestScore(GAME_KEY), []);
+
+  useEffect(() => {
+    if (resumeAttempted.current) return;
+    resumeAttempted.current = true;
+    const id = active.peek();
+    if (!id) return;
+
+    // No abort/cleanup on purpose: the ref guard blocks StrictMode's second run, so
+    // the FIRST run's result must be allowed to land (a cancelled-flag cleanup would
+    // discard it and resume would never happen in dev). Post-unmount setState is a
+    // React 18 no-op.
+    setLoading(true);
+    void (async () => {
+      try {
+        const s = await alchimieApi.get(id);
+        if (s.won === true) {
+          active.forget();
+          return;
+        }
+        setState(s);
+        setDifficulty(s.difficulty);
+        setSelected([]);
+        setFreshIds(new Set());
+        setHintIds(new Set());
+        setLastMessage(null);
+        setIsRecord(false);
+        setIsPuzzleRecord(false);
+        onToast("Joc reluat.", "info");
+      } catch {
+        active.forget();
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [active, onToast]);
 
   const start = useCallback(
     async (opts: CreateOpts = {}) => {
@@ -66,6 +104,7 @@ export default function Alchimie({
       try {
         const s = await alchimieApi.create(opts);
         setState(s);
+        active.remember(s.game_id);
         setSelected([]);
         setFreshIds(new Set());
         setHintIds(new Set());
@@ -83,7 +122,7 @@ export default function Alchimie({
         setLoading(false);
       }
     },
-    [onToast],
+    [active, onToast],
   );
 
   const won = state?.won ?? false;
@@ -121,6 +160,7 @@ export default function Alchimie({
   // Record the score exactly once when a game is won.
   useEffect(() => {
     if (!state || !state.won || state.score === undefined) return;
+    active.forget();
     const detail = state.daily
       ? `Zilnic ${state.daily} · ${state.moves} combinari`
       : `${state.difficulty} · ${state.moves} combinari`;
@@ -138,7 +178,7 @@ export default function Alchimie({
     } else if (isPuzzleBest) {
       sound.playRecord();
     }
-  }, [state, puzzleKey, recordOnce]);
+  }, [state, puzzleKey, recordOnce, active]);
 
   const toggle = useCallback(
     (id: string) => {
@@ -199,6 +239,7 @@ export default function Alchimie({
     try {
       const s = await alchimieApi.reset(state.game_id);
       setState(s);
+      active.remember(s.game_id);
       setSelected([]);
       setFreshIds(new Set());
       setHintIds(new Set());
@@ -214,7 +255,12 @@ export default function Alchimie({
     } finally {
       setBusy(false);
     }
-  }, [state, busy, onToast]);
+  }, [state, busy, active, onToast]);
+
+  const newGame = useCallback(() => {
+    active.forget();
+    setState(null);
+  }, [active]);
 
   // Ask for a gentle nudge: the server points at a useful pair (it costs some score).
   const doHint = useCallback(async () => {
@@ -568,7 +614,7 @@ export default function Alchimie({
             type="button"
             variant="secondary"
             disabled={busy}
-            onClick={() => setState(null)}
+            onClick={newGame}
           >
             ⚂ Joc nou
           </Button>
@@ -586,7 +632,7 @@ export default function Alchimie({
               isPuzzleRecord={isPuzzleRecord}
               shareText={sharePayload}
               onCopy={() => void handleCopy()}
-              onReplay={() => setState(null)}
+              onReplay={newGame}
               onExit={onExit}
             >
               <strong style={{ color: "var(--text)" }}>{state.target.label}</strong> in{" "}

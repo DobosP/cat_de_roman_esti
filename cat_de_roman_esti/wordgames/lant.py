@@ -14,12 +14,13 @@ from __future__ import annotations
 import random
 from dataclasses import dataclass, field
 
-from fastapi import APIRouter, HTTPException
+from django.urls import path
+from drf_spectacular.utils import extend_schema
 from pydantic import BaseModel
+from rest_framework.response import Response
 
+from ..web.http import ContractAPIView, http_error, parse_body, query_int, query_str
 from .service import SessionStore, daily_seed, get_service, normalize
-
-router = APIRouter(prefix="/api/wordgames/lant", tags=["lant"])
 
 GAME_KEY = "lant"
 
@@ -215,7 +216,7 @@ def _pick_pair(rng: random.Random, lo: int, hi: int) -> tuple[str, str, int]:
     if not candidates:
         candidates = [nid for nid in svc.all_ids() if svc.degree(nid) >= 1]
     if not candidates:
-        raise HTTPException(status_code=503, detail="Graful nu are noduri jucabile.")
+        raise http_error(503, "Graful nu are noduri jucabile.")
 
     best_good: tuple[float, str, str, int] | None = None
     good_count = 0
@@ -258,130 +259,146 @@ def _pick_pair(rng: random.Random, lo: int, hi: int) -> tuple[str, str, int]:
     if fallback is not None:
         return fallback
 
-    raise HTTPException(
-        status_code=503,
-        detail="Nu am putut genera un lant valid; reincearca.",
-    )
+    raise http_error(503, "Nu am putut genera un lant valid; reincearca.")
 
 
 # --------------------------------------------------------------------- endpoints
-@router.post("/games")
-def create_game(
-    seed: int | None = None,
-    difficulty: str = _DEFAULT_DIFFICULTY,
-    daily: str | None = None,
-) -> dict:
-    if difficulty not in _DIFFICULTY_BANDS:
-        difficulty = _DEFAULT_DIFFICULTY
-    lo, hi = _DIFFICULTY_BANDS[difficulty]
-    if daily is not None:
-        seed = daily_seed(daily, GAME_KEY)
-    rng = random.Random(seed)
-    start, target, optimal = _pick_pair(rng, lo, hi)
-    session = LantSession(
-        start=start,
-        target=target,
-        optimal=optimal,
-        difficulty=difficulty,
-        daily=daily,
-        chain=[start],
-    )
-    game_id = store.create(session)
-    return _state(game_id, session)
+class CreateGameView(ContractAPIView):
+    @extend_schema(operation_id="lant_create_game", tags=["lant"])
+    def post(self, request):
+        seed = query_int(request, "seed")
+        difficulty = query_str(request, "difficulty", _DEFAULT_DIFFICULTY)
+        daily = query_str(request, "daily")
+        if difficulty not in _DIFFICULTY_BANDS:
+            difficulty = _DEFAULT_DIFFICULTY
+        lo, hi = _DIFFICULTY_BANDS[difficulty]
+        if daily is not None:
+            seed = daily_seed(daily, GAME_KEY)
+        rng = random.Random(seed)
+        start, target, optimal = _pick_pair(rng, lo, hi)
+        session = LantSession(
+            start=start,
+            target=target,
+            optimal=optimal,
+            difficulty=difficulty,
+            daily=daily,
+            chain=[start],
+        )
+        game_id = store.create(session)
+        return Response(_state(game_id, session))
 
 
-@router.get("/games/{game_id}")
-def get_game(game_id: str) -> dict:
-    session = store.get(game_id)
-    if session is None:
-        raise HTTPException(status_code=404, detail="Joc inexistent")
-    return _state(game_id, session)
+class GetGameView(ContractAPIView):
+    @extend_schema(operation_id="lant_get_game", tags=["lant"])
+    def get(self, request, game_id: str):
+        session = store.get(game_id)
+        if session is None:
+            raise http_error(404, "Joc inexistent")
+        return Response(_state(game_id, session))
 
 
-@router.post("/games/{game_id}/move")
-def move(game_id: str, body: MoveBody) -> dict:
-    session = store.get(game_id)
-    if session is None:
-        raise HTTPException(status_code=404, detail="Joc inexistent")
-    if session.won:
-        return {"ok": True, **_state(game_id, session)}
+class MoveView(ContractAPIView):
+    @extend_schema(operation_id="lant_move", tags=["lant"])
+    def post(self, request, game_id: str):
+        body = parse_body(request, MoveBody)
+        session = store.get(game_id)
+        if session is None:
+            raise http_error(404, "Joc inexistent")
+        if session.won:
+            return Response({"ok": True, **_state(game_id, session)})
 
-    svc = get_service()
-    if not body.text or not body.text.strip():
-        return {"ok": False, "last_error": "Scrie un concept"}
+        svc = get_service()
+        if not body.text or not body.text.strip():
+            return Response({"ok": False, "last_error": "Scrie un concept"})
 
-    prev = session.current
-    guess = _resolve_neighbor(body.text, prev)
-    if guess is None:
-        return {"ok": False, "last_error": "Nu cunosc acest concept"}
+        prev = session.current
+        guess = _resolve_neighbor(body.text, prev)
+        if guess is None:
+            return Response({"ok": False, "last_error": "Nu cunosc acest concept"})
 
-    if guess == prev:
-        return {"ok": False, "last_error": "Esti deja aici"}
-    if svc.link(prev, guess) is None:
-        return {"ok": False, "last_error": "Nu exista o legatura directa"}
+        if guess == prev:
+            return Response({"ok": False, "last_error": "Esti deja aici"})
+        if svc.link(prev, guess) is None:
+            return Response({"ok": False, "last_error": "Nu exista o legatura directa"})
 
-    session.chain.append(guess)
-    session.won = guess == session.target
+        session.chain.append(guess)
+        session.won = guess == session.target
 
-    result = {
-        "ok": True,
-        "current": _concept(guess),
-        "relation": svc.link_label(prev, guess),
-        "path": _path(session),
-        "moves": session.moves,
-        "won": session.won,
-    }
-    if session.won:
-        result["score"] = _score_for(session.moves, session.optimal)
-        result["share"] = _share_line(session.moves, session.optimal, session.daily)
-    return result
-
-
-@router.post("/games/{game_id}/undo")
-def undo(game_id: str) -> dict:
-    session = store.get(game_id)
-    if session is None:
-        raise HTTPException(status_code=404, detail="Joc inexistent")
-    # Never step below the start.
-    if len(session.chain) > 1:
-        session.chain.pop()
-        session.won = session.current == session.target
-    return _state(game_id, session)
-
-
-@router.post("/games/{game_id}/hint")
-def hint(game_id: str) -> dict:
-    session = store.get(game_id)
-    if session is None:
-        raise HTTPException(status_code=404, detail="Joc inexistent")
-    if session.won:
-        return {"hint": None, "message": "Ai ajuns deja la tinta."}
-
-    svc = get_service()
-    cur = session.current
-    remaining = svc.distance(cur, session.target)
-    if remaining is None:
-        # Player wandered into a dead end (shouldn't happen on the connected subgraph,
-        # but be defensive): suggest stepping back.
-        return {"hint": None, "message": "Nicio scurtatura de aici — incearca sa revii."}
-
-    # All neighbours that lie on a shortest path (one hop closer to the target). When
-    # several exist, suggest the most salient (most recognisable) one so the hint is
-    # genuinely helpful rather than an obscure node the player has never heard of.
-    on_path = [
-        nb
-        for nb in svc.neighbor_ids(cur)
-        if svc.distance(nb, session.target) == remaining - 1
-    ]
-    if on_path:
-        on_path.sort(key=lambda nb: (_salience(nb), nb), reverse=True)
-        best = on_path[0]
-        return {
-            "hint": _concept(best),
-            "relation": svc.link_label(cur, best),
-            "remaining": remaining,
-            # When >1 such neighbour exists, the player genuinely had a choice here.
-            "alternatives": len(on_path),
+        result = {
+            "ok": True,
+            "current": _concept(guess),
+            "relation": svc.link_label(prev, guess),
+            "path": _path(session),
+            "moves": session.moves,
+            "won": session.won,
         }
+        if session.won:
+            result["score"] = _score_for(session.moves, session.optimal)
+            result["share"] = _share_line(session.moves, session.optimal, session.daily)
+        return Response(result)
 
-    return {"hint": None, "message": "Niciun indiciu disponibil."}
+
+class UndoView(ContractAPIView):
+    @extend_schema(operation_id="lant_undo", tags=["lant"])
+    def post(self, request, game_id: str):
+        session = store.get(game_id)
+        if session is None:
+            raise http_error(404, "Joc inexistent")
+        # Never step below the start.
+        if len(session.chain) > 1:
+            session.chain.pop()
+            session.won = session.current == session.target
+        return Response(_state(game_id, session))
+
+
+class HintView(ContractAPIView):
+    @extend_schema(operation_id="lant_hint", tags=["lant"])
+    def post(self, request, game_id: str):
+        session = store.get(game_id)
+        if session is None:
+            raise http_error(404, "Joc inexistent")
+        if session.won:
+            return Response({"hint": None, "message": "Ai ajuns deja la tinta."})
+
+        svc = get_service()
+        cur = session.current
+        remaining = svc.distance(cur, session.target)
+        if remaining is None:
+            # Player wandered into a dead end (shouldn't happen on the connected subgraph,
+            # but be defensive): suggest stepping back.
+            return Response(
+                {"hint": None, "message": "Nicio scurtatura de aici — incearca sa revii."}
+            )
+
+        # All neighbours that lie on a shortest path (one hop closer to the target). When
+        # several exist, suggest the most salient (most recognisable) one so the hint is
+        # genuinely helpful rather than an obscure node the player has never heard of.
+        on_path = [
+            nb
+            for nb in svc.neighbor_ids(cur)
+            if svc.distance(nb, session.target) == remaining - 1
+        ]
+        if on_path:
+            on_path.sort(key=lambda nb: (_salience(nb), nb), reverse=True)
+            best = on_path[0]
+            return Response(
+                {
+                    "hint": _concept(best),
+                    "relation": svc.link_label(cur, best),
+                    "remaining": remaining,
+                    # When >1 such neighbour exists, the player genuinely had a choice here.
+                    "alternatives": len(on_path),
+                }
+            )
+
+        return Response({"hint": None, "message": "Niciun indiciu disponibil."})
+
+
+_BASE = "api/wordgames/lant"
+urlpatterns = [
+    path(f"{_BASE}/games", CreateGameView.as_view()),
+    path(f"{_BASE}/games/<str:game_id>", GetGameView.as_view()),
+    path(f"{_BASE}/games/<str:game_id>/move", MoveView.as_view()),
+    path(f"{_BASE}/games/<str:game_id>/undo", UndoView.as_view()),
+    path(f"{_BASE}/games/<str:game_id>/hint", HintView.as_view()),
+]

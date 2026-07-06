@@ -56,7 +56,7 @@ offline fixture.
 
 ## Run (web app)
 
-The animated SPA + FastAPI BFF play **fully offline** against the bundled fixture — no
+The animated SPA + Django BFF play **fully offline** against the bundled fixture — no
 server, no API key. Pick whichever of the three paths suits you.
 
 ### One command (local)

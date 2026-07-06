@@ -18,12 +18,13 @@ from __future__ import annotations
 import random
 from dataclasses import dataclass, field
 
-from fastapi import APIRouter, HTTPException
+from django.urls import path
+from drf_spectacular.utils import extend_schema
 from pydantic import BaseModel
+from rest_framework.response import Response
 
+from ..web.http import ContractAPIView, http_error, parse_body, query_int, query_str
 from .service import SessionStore, daily_seed, get_service
-
-router = APIRouter(prefix="/api/wordgames/contexto", tags=["contexto"])
 
 GAME_KEY = "contexto"
 _DIFFICULTIES = ("usor", "normal", "greu")
@@ -382,135 +383,152 @@ def _state(game_id: str, session: ContextoSession) -> dict:
 
 
 # --------------------------------------------------------------------------- endpoints
-@router.post("/games")
-def create_game(
-    seed: int | None = None,
-    difficulty: str = _DEFAULT_DIFFICULTY,
-    daily: str | None = None,
-) -> dict:
-    if difficulty not in _DIFFICULTIES:
-        difficulty = _DEFAULT_DIFFICULTY
-    if daily is not None:
-        seed = daily_seed(daily, GAME_KEY)
-    session = _pick_target(seed, difficulty, daily)
-    game_id = store.create(session)
-    return _state(game_id, session)
+class CreateGameView(ContractAPIView):
+    @extend_schema(operation_id="contexto_create_game", tags=["contexto"])
+    def post(self, request):
+        seed = query_int(request, "seed")
+        difficulty = query_str(request, "difficulty", _DEFAULT_DIFFICULTY)
+        daily = query_str(request, "daily")
+        if difficulty not in _DIFFICULTIES:
+            difficulty = _DEFAULT_DIFFICULTY
+        if daily is not None:
+            seed = daily_seed(daily, GAME_KEY)
+        session = _pick_target(seed, difficulty, daily)
+        game_id = store.create(session)
+        return Response(_state(game_id, session))
 
 
-@router.get("/games/{game_id}")
-def get_game(game_id: str) -> dict:
-    session = store.get(game_id)
-    if session is None:
-        raise HTTPException(status_code=404, detail="Joc inexistent")
-    return _state(game_id, session)
+class GetGameView(ContractAPIView):
+    @extend_schema(operation_id="contexto_get_game", tags=["contexto"])
+    def get(self, request, game_id: str):
+        session = store.get(game_id)
+        if session is None:
+            raise http_error(404, "Joc inexistent")
+        return Response(_state(game_id, session))
 
 
-@router.post("/games/{game_id}/guess")
-def guess(game_id: str, body: GuessBody) -> dict:
-    session = store.get(game_id)
-    if session is None:
-        raise HTTPException(status_code=404, detail="Joc inexistent")
-    if session.won or session.gave_up:
-        raise HTTPException(status_code=400, detail="Jocul s-a terminat")
+class GuessView(ContractAPIView):
+    @extend_schema(operation_id="contexto_guess", tags=["contexto"])
+    def post(self, request, game_id: str):
+        body = parse_body(request, GuessBody)
+        session = store.get(game_id)
+        if session is None:
+            raise http_error(404, "Joc inexistent")
+        if session.won or session.gave_up:
+            raise http_error(400, "Jocul s-a terminat")
 
-    svc = get_service()
-    text = (body.text or "").strip()
-    if not text:
-        raise HTTPException(status_code=400, detail="Scrie un concept")
+        svc = get_service()
+        text = (body.text or "").strip()
+        if not text:
+            raise http_error(400, "Scrie un concept")
 
-    node_id = svc.resolve(text)
-    if node_id is None:
-        # Unknown concept: do NOT count it as an attempt.
-        return {
-            "ok": False,
-            "message": "Nu cunosc acest concept",
-            "guesses": _sorted_guesses(session, reveal=False),
+        node_id = svc.resolve(text)
+        if node_id is None:
+            # Unknown concept: do NOT count it as an attempt.
+            return Response(
+                {
+                    "ok": False,
+                    "message": "Nu cunosc acest concept",
+                    "guesses": _sorted_guesses(session, reveal=False),
+                    "attempts": session.attempts,
+                    "won": session.won,
+                    "reachable_count": session.reachable,
+                    "clues_used": session.clues_used,
+                    "clue_available": (
+                        not session.clue_revealed
+                        and session.attempts >= MIN_CLUE_ATTEMPTS
+                    ),
+                }
+            )
+
+        distance = svc.distance(node_id, session.target)
+        temperature = temperature_for(distance)
+        closeness = closeness_for(session, distance)
+        rank = rank_for(session, distance)
+        # distance is None when the guess is in a disconnected part of the graph — we still
+        # store it (as the coldest possible) so a repeated guess shows the same verdict.
+        stored_distance = distance if distance is not None else 999
+
+        record = GuessRecord(
+            id=node_id,
+            label=svc.label(node_id),
+            distance=stored_distance,
+            temperature=temperature,
+            closeness=closeness,
+            rank=rank,
+        )
+        is_new = node_id not in session.guesses
+        session.guesses[node_id] = record
+        if is_new:
+            session.attempts += 1
+            session.order.append(node_id)
+
+        if distance == 0:
+            session.won = True
+        reveal = session.won or session.gave_up
+
+        result: dict = {
+            "ok": True,
+            "guess": _guess_payload(record, reveal=reveal, target=session.target),
+            "guesses": _sorted_guesses(session, reveal=reveal),
             "attempts": session.attempts,
             "won": session.won,
             "reachable_count": session.reachable,
             "clues_used": session.clues_used,
             "clue_available": (
-                not session.clue_revealed
+                not session.won
+                and not session.clue_revealed
                 and session.attempts >= MIN_CLUE_ATTEMPTS
             ),
         }
-
-    distance = svc.distance(node_id, session.target)
-    temperature = temperature_for(distance)
-    closeness = closeness_for(session, distance)
-    rank = rank_for(session, distance)
-    # distance is None when the guess is in a disconnected part of the graph — we still
-    # store it (as the coldest possible) so a repeated guess shows the same verdict.
-    stored_distance = distance if distance is not None else 999
-
-    record = GuessRecord(
-        id=node_id,
-        label=svc.label(node_id),
-        distance=stored_distance,
-        temperature=temperature,
-        closeness=closeness,
-        rank=rank,
-    )
-    is_new = node_id not in session.guesses
-    session.guesses[node_id] = record
-    if is_new:
-        session.attempts += 1
-        session.order.append(node_id)
-
-    if distance == 0:
-        session.won = True
-    reveal = session.won or session.gave_up
-
-    result: dict = {
-        "ok": True,
-        "guess": _guess_payload(record, reveal=reveal, target=session.target),
-        "guesses": _sorted_guesses(session, reveal=reveal),
-        "attempts": session.attempts,
-        "won": session.won,
-        "reachable_count": session.reachable,
-        "clues_used": session.clues_used,
-        "clue_available": (
-            not session.won
-            and not session.clue_revealed
-            and session.attempts >= MIN_CLUE_ATTEMPTS
-        ),
-    }
-    if session.clue_revealed:
-        result["clue"] = _clue_payload(session)
-    if session.won:
-        result["target"] = {
-            "id": session.target,
-            "label": svc.label(session.target),
-            "description": svc.description(session.target),
-        }
-        result["score"] = score_for(session.attempts, session.clues_used)
-        result["share"] = share_line(session)
-    return result
+        if session.clue_revealed:
+            result["clue"] = _clue_payload(session)
+        if session.won:
+            result["target"] = {
+                "id": session.target,
+                "label": svc.label(session.target),
+                "description": svc.description(session.target),
+            }
+            result["score"] = score_for(session.attempts, session.clues_used)
+            result["share"] = share_line(session)
+        return Response(result)
 
 
-@router.post("/games/{game_id}/clue")
-def clue(game_id: str) -> dict:
-    session = store.get(game_id)
-    if session is None:
-        raise HTTPException(status_code=404, detail="Joc inexistent")
-    if session.won or session.gave_up:
-        raise HTTPException(status_code=400, detail="Jocul s-a terminat")
-    if session.attempts < MIN_CLUE_ATTEMPTS and not session.clue_revealed:
-        need = MIN_CLUE_ATTEMPTS - session.attempts
-        raise HTTPException(
-            status_code=400,
-            detail=f"Mai incearca {need} concepte inainte de indiciu.",
-        )
-    if not session.clue_revealed:
-        session.clue_revealed = True
-        session.clues_used += 1
-    return {"ok": True, **_clue_payload(session), **_state(game_id, session)}
+class ClueView(ContractAPIView):
+    @extend_schema(operation_id="contexto_clue", tags=["contexto"])
+    def post(self, request, game_id: str):
+        session = store.get(game_id)
+        if session is None:
+            raise http_error(404, "Joc inexistent")
+        if session.won or session.gave_up:
+            raise http_error(400, "Jocul s-a terminat")
+        if session.attempts < MIN_CLUE_ATTEMPTS and not session.clue_revealed:
+            need = MIN_CLUE_ATTEMPTS - session.attempts
+            raise http_error(
+                400,
+                f"Mai incearca {need} concepte inainte de indiciu.",
+            )
+        if not session.clue_revealed:
+            session.clue_revealed = True
+            session.clues_used += 1
+        return Response({"ok": True, **_clue_payload(session), **_state(game_id, session)})
 
 
-@router.post("/games/{game_id}/giveup")
-def give_up(game_id: str) -> dict:
-    session = store.get(game_id)
-    if session is None:
-        raise HTTPException(status_code=404, detail="Joc inexistent")
-    session.gave_up = True
-    return _state(game_id, session)
+class GiveUpView(ContractAPIView):
+    @extend_schema(operation_id="contexto_give_up", tags=["contexto"])
+    def post(self, request, game_id: str):
+        session = store.get(game_id)
+        if session is None:
+            raise http_error(404, "Joc inexistent")
+        session.gave_up = True
+        return Response(_state(game_id, session))
+
+
+_BASE = "api/wordgames/contexto"
+urlpatterns = [
+    path(f"{_BASE}/games", CreateGameView.as_view()),
+    path(f"{_BASE}/games/<str:game_id>", GetGameView.as_view()),
+    path(f"{_BASE}/games/<str:game_id>/guess", GuessView.as_view()),
+    path(f"{_BASE}/games/<str:game_id>/clue", ClueView.as_view()),
+    path(f"{_BASE}/games/<str:game_id>/giveup", GiveUpView.as_view()),
+]

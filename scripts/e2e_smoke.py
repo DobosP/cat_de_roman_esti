@@ -25,7 +25,7 @@ RERUN_COMMAND = (
     "python scripts/e2e_smoke.py --require-live easy"
 )
 
-if sys.version_info < (3, 11):
+if sys.version_info < (3, 11):  # noqa: UP036 — friendly message on old interpreters
     version = ".".join(str(part) for part in sys.version_info[:3])
     print(f"[FAIL] Python >=3.11 is required for this smoke script; got {version}")
     print(f"[hint] rerun with: {RERUN_COMMAND}")
@@ -35,9 +35,9 @@ _REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from cat_de_roman_esti.data import load_from_client
-from cat_de_roman_esti.engine import HopGame, Mode
-from cat_de_roman_esti.roedu_client import RoeduClient
+from cat_de_roman_esti.data import load_from_client  # noqa: E402 — after sys.path setup
+from cat_de_roman_esti.engine import HopGame, Mode  # noqa: E402
+from cat_de_roman_esti.roedu_client import RoeduClient  # noqa: E402
 
 
 def _unavailable(exc: BaseException, *, require_live: bool) -> int:

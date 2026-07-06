@@ -1,7 +1,7 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-07-04. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-04_
+_As of 2026-07-06. Update whenever `main` or the test baseline moves._
+_Last verified: 2026-07-06_
 
 ## Phase
 
@@ -11,8 +11,11 @@ arcade of four server-authoritative word games** over the KG (no graph visualiza
 category clue), **Lanțul Cuvintelor** (word-ladder), **Conexiuni** (NYT-Connections
 grouping + one redacted label-pattern clue after two mistakes). Each has difficulty
 tiers, a seeded **daily challenge**, score + shareable result, and offline leaderboard/history.
-Backed by `cat_de_roman_esti/wordgames/` (shared `service.py` over the offline KG + one
-`APIRouter` per game under `/api/wordgames/*`). The old graph SPA and its game-session
+Backed by `cat_de_roman_esti/wordgames/` (shared `service.py` over the offline KG + DRF
+views per game under `/api/wordgames/*`). The BFF is **Django 5.2 + DRF** as of
+2026-07-06 (`claude/django-backend` — fleet operational uniformity; ported from FastAPI
+with a byte-compatible contract, verified against 46 golden flows + 194 tests; stateless
+Django: no DB/migrations, WhiteNoise serves the SPA, uvicorn ASGI single-process). The old graph SPA and its game-session
 API were **removed in `7308ce9` (2026-06-22)**; see `docs/adr/0001-pivot-to-word-game-arcade.md` —
 **no graph UI unless Paul explicitly reopens it**.
 
@@ -36,7 +39,7 @@ remains the original `easy|hard` semantic-hop game.
   remain the original offline/live semantic-hop core.
 
 ### Web app
-- `cat_de_roman_esti/web/` — FastAPI BFF (`create_app`): mounts the four wordgame routers
+- `cat_de_roman_esti/web/` — Django 5.2 + DRF BFF (fleet-uniform): urls.py mounts the four wordgame view modules
   under `/api/wordgames/{alchimie,contexto,lant,conexiuni}` (server-authoritative: hidden
   answers, bounded in-memory game stores, fail-closed board generation), plus `/api/health`
   and `/api/manifest` (offline-KG trust manifest: version + `schema_version` + content hash);
@@ -94,6 +97,26 @@ Live pulls are capped (10k nodes / 50k edges / 5k puzzles); the live path itself
 unexercised here.
 
 ## Next / future work
+Post Django-port (2026-07-06 — that session was code-only by direction; these remain):
+- **Docker gate:** the image has NOT been built since the FastAPI→Django port; the first
+  `docker compose up --build` (or the CI docker job) validates the new `[web]` closure +
+  unchanged CMD. Expected no-op — verify once, then drop this line.
+- **Manual browser pass of session resume:** the resume flow (refresh/deep-link →
+  "Joc reluat.") is verified at API level + typecheck only; click through all four games
+  once in a real browser, incl. the expired-session fallback to the intro.
+- **Regenerate the mobile TS client** from `scripts/export_openapi.py` when mobile work
+  resumes: operationIds/paths are identical, but drf-spectacular's schema differs
+  cosmetically from FastAPI's (component naming / nullability style).
+- **Daily-puzzle discontinuity (one-time, accepted):** the BFS determinism fix maps
+  seeds/dailies to different — now stable — puzzles than the FastAPI era.
+- **Scaling constraint:** live games are in-memory (`SessionStore`) — the server MUST stay
+  single-process (uvicorn 1 worker / gunicorn `--workers 1`). If real load arrives, move
+  session state to shared storage (redis) before adding workers.
+- **@roedu/ui consumption:** the vendored tarball (`frontend/vendor/roedu-ui-0.3.0.tgz`)
+  is the working pattern; GitHub Packages publishing (PAT + publish step) remains the
+  documented upgrade path if the fleet standardizes on it.
+
+Standing items:
 - **Real graph data:** run `romania-scraper kg build --commit` on the RO fleet host and point
   `ROEDU_API_URL` at live `ro_data_server`. _(blocked on fleet-host infra)_
 - **Live end-to-end smoke** against `ro_data_server`. _(needs a live server)_

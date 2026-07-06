@@ -6,7 +6,7 @@
 // Server-authoritative: the grouping + solution live on the server; this component renders
 // what it returns and surfaces a personal best + a shareable result on finish.
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ApiError } from "../api/client";
 import {
@@ -23,6 +23,7 @@ import { GameIntro } from "../components/GameIntro";
 import { Hud, StatBadge } from "../components/Hud";
 import { ResultCard } from "../components/ResultCard";
 import { DifficultyPicker } from "../components/DifficultyPicker";
+import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
 import { sound } from "../sound";
 import { categoryColor } from "../categories";
@@ -49,8 +50,10 @@ type StartMode =
   | { kind: "daily" };
 
 export default function Conexiuni({ onExit, onToast }: SelfProps) {
+  const active = useActiveGame(GAME_KEY);
+  const resumeOnce = useRef(false);
   const [state, setState] = useState<ConexiuniState | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(() => active.peek() !== null);
   const [busy, setBusy] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [difficulty, setDifficulty] = useState<Difficulty>("normal");
@@ -81,6 +84,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
             ? await conexiuniApi.create({ daily: todayLocal() })
             : await conexiuniApi.create({ difficulty: mode.difficulty });
         setState(s);
+        active.remember(s.game_id);
         setSelected([]);
         setHint(null);
         setShuffleNonce(0);
@@ -96,7 +100,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         setLoading(false);
       }
     },
-    [onToast],
+    [active, onToast],
   );
 
   // Solved-id set so solved tiles drop out of the grid.
@@ -122,6 +126,41 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   }, [state, solvedIds, shuffleNonce]);
 
   const finished = (state?.won ?? false) || (state?.lost ?? false);
+
+  useEffect(() => {
+    if (resumeOnce.current) return;
+    resumeOnce.current = true;
+
+    const id = active.peek();
+    if (!id) {
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
+    void (async () => {
+      try {
+        const s = await conexiuniApi.get(id);
+        if (s.won || s.lost) {
+          active.forget();
+          return;
+        }
+        setState(s);
+        setDifficulty(s.difficulty);
+        setRecordHit(false);
+        setPuzzleRecordHit(false);
+        setSelected([]);
+        setHint(null);
+        setShuffleNonce(0);
+        setShake(0);
+        onToast("Joc reluat.", "info");
+      } catch {
+        active.forget();
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [active, onToast]);
 
   const puzzleKey = useMemo(() => {
     if (!state || !finished) return null;
@@ -151,6 +190,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   // Record the score + best once, on transition into a finished state.
   useEffect(() => {
     if (!state || !finished || state.score === undefined) return;
+    active.forget();
     const detail = state.won
       ? `${state.mistakes} greseli`
       : `pierdut · ${state.mistakes} greseli`;
@@ -170,7 +210,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       sound.playRecord();
     }
     setPuzzleRecordHit(isPuzzleBest);
-  }, [finished, puzzleKey, recordOnce, state]);
+  }, [active, finished, puzzleKey, recordOnce, state]);
 
   const toggle = useCallback(
     (id: string) => {

@@ -18,12 +18,13 @@ import random
 from dataclasses import dataclass, field
 from itertools import combinations
 
-from fastapi import APIRouter, HTTPException
+from django.urls import path
+from drf_spectacular.utils import extend_schema
 from pydantic import BaseModel
+from rest_framework.response import Response
 
+from ..web.http import ContractAPIView, http_error, parse_body, query_int, query_str
 from .service import SessionStore, daily_seed, get_service
-
-router = APIRouter(prefix="/api/wordgames/alchimie", tags=["alchimie"])
 
 GAME_KEY = "alchimie"
 
@@ -260,7 +261,7 @@ def _build_session(
         if depth >= MIN_TARGET_GENERATION and nid not in seeds
     ]
     if not deep:
-        raise HTTPException(status_code=500, detail="Nu am putut genera un joc solvabil.")
+        raise http_error(500, "Nu am putut genera un joc solvabil.")
     target = rng.choice(deep)
     return _finish(seeds, target, gen[target])
 
@@ -382,136 +383,144 @@ def _state_payload(game_id: str, session: AlchimieSession) -> dict[str, object]:
 def _require(game_id: str) -> AlchimieSession:
     session = store.get(game_id)
     if session is None:
-        raise HTTPException(status_code=404, detail="Joc inexistent.")
+        raise http_error(404, "Joc inexistent.")
     return session
 
 
 # --------------------------------------------------------------------------- endpoints
-@router.post("/games")
-def create_game(
-    seed: int | None = None,
-    difficulty: str = DEFAULT_DIFFICULTY,
-    daily: str | None = None,
-) -> dict[str, object]:
-    """Start a new Alchimie game.
+class CreateGameView(ContractAPIView):
+    @extend_schema(operation_id="alchimie_create_game", tags=["alchimie"])
+    def post(self, request):
+        """Start a new Alchimie game.
 
-    ``?difficulty=`` in {usor,normal,greu} tunes the target depth + seed count.
-    ``?daily=YYYY-MM-DD`` makes a shared, deterministic daily instance (ignores seed).
-    Otherwise an optional ``?seed=`` makes the instance reproducible.
-    """
-    if difficulty not in DIFFICULTIES:
-        difficulty = DEFAULT_DIFFICULTY
-    if daily:
-        rng = random.Random(daily_seed(daily, GAME_KEY))
-    else:
-        rng = random.Random(seed)
-    session = _build_session(rng, difficulty=difficulty, daily=daily)
-    game_id = store.create(session)
-    return _state_payload(game_id, session)
-
-
-@router.get("/games/{game_id}")
-def get_game(game_id: str) -> dict[str, object]:
-    """Full current state of an existing game."""
-    return _state_payload(game_id, _require(game_id))
+        ``?difficulty=`` in {usor,normal,greu} tunes the target depth + seed count.
+        ``?daily=YYYY-MM-DD`` makes a shared, deterministic daily instance (ignores seed).
+        Otherwise an optional ``?seed=`` makes the instance reproducible.
+        """
+        seed = query_int(request, "seed")
+        difficulty = query_str(request, "difficulty", DEFAULT_DIFFICULTY)
+        daily = query_str(request, "daily")
+        if difficulty not in DIFFICULTIES:
+            difficulty = DEFAULT_DIFFICULTY
+        if daily:
+            rng = random.Random(daily_seed(daily, GAME_KEY))
+        else:
+            rng = random.Random(seed)
+        session = _build_session(rng, difficulty=difficulty, daily=daily)
+        game_id = store.create(session)
+        return Response(_state_payload(game_id, session))
 
 
-@router.post("/games/{game_id}/combine")
-def combine(game_id: str, body: CombineBody) -> dict[str, object]:
-    """Combine two owned concepts; append any newly-discovered shared neighbours."""
-    svc = get_service()
-    session = _require(game_id)
+class GetGameView(ContractAPIView):
+    @extend_schema(operation_id="alchimie_get_game", tags=["alchimie"])
+    def get(self, request, game_id: str):
+        """Full current state of an existing game."""
+        return Response(_state_payload(game_id, _require(game_id)))
 
-    # A finished game is read-only: never count extra moves or mutate a won score.
-    if session.won:
+
+class CombineView(ContractAPIView):
+    @extend_schema(operation_id="alchimie_combine", tags=["alchimie"])
+    def post(self, request, game_id: str):
+        """Combine two owned concepts; append any newly-discovered shared neighbours."""
+        body = parse_body(request, CombineBody)
+        svc = get_service()
+        session = _require(game_id)
+
+        # A finished game is read-only: never count extra moves or mutate a won score.
+        if session.won:
+            payload = _state_payload(game_id, session)
+            payload["discovered"] = []
+            payload["message"] = "Jocul s-a terminat — ai craftat deja tinta."
+            return Response(payload)
+
+        a, b = (body.a or "").strip(), (body.b or "").strip()
+        if a not in session.owned or b not in session.owned:
+            raise http_error(400, "Ambele concepte trebuie sa fie in inventar.")
+        if a == b:
+            raise http_error(400, "Alege doua concepte diferite.")
+
+        session.moves += 1
+        discovered = [c for c in svc.common_neighbors(a, b) if c not in session.owned]
+        for c in discovered:
+            session.add(c, (a, b))
+
+        # Track dry spells so the nudge can surface only when the player is genuinely stuck.
+        if discovered:
+            session.fruitless_streak = 0
+        else:
+            session.fruitless_streak += 1
+
+        if not discovered:
+            message = "Nicio combinatie noua."
+        elif session.target in discovered:
+            message = f"Ai descoperit tinta: {svc.label(session.target)}!"
+        elif len(discovered) == 1:
+            message = f"Ai descoperit: {svc.label(discovered[0])}."
+        else:
+            names = ", ".join(svc.label(c) for c in discovered)
+            message = f"Ai descoperit {len(discovered)} concepte: {names}."
+
         payload = _state_payload(game_id, session)
-        payload["discovered"] = []
-        payload["message"] = "Jocul s-a terminat — ai craftat deja tinta."
-        return payload
+        payload["discovered"] = [_concept(c) for c in discovered]
+        payload["message"] = message
+        return Response(payload)
 
-    a, b = (body.a or "").strip(), (body.b or "").strip()
-    if a not in session.owned or b not in session.owned:
-        raise HTTPException(
-            status_code=400, detail="Ambele concepte trebuie sa fie in inventar."
-        )
-    if a == b:
-        raise HTTPException(
-            status_code=400, detail="Alege doua concepte diferite."
-        )
 
-    session.moves += 1
-    discovered = [c for c in svc.common_neighbors(a, b) if c not in session.owned]
-    for c in discovered:
-        session.add(c, (a, b))
+class HintGameView(ContractAPIView):
+    @extend_schema(operation_id="alchimie_hint_game", tags=["alchimie"])
+    def post(self, request, game_id: str):
+        """Reveal a gentle nudge: a pair of owned concepts that makes forward progress.
 
-    # Track dry spells so the nudge can surface only when the player is genuinely stuck.
-    if discovered:
+        Only allowed once the player has been genuinely stuck (``NUDGE_AFTER_FRUITLESS``
+        fruitless combines in a row). Each hint costs score and resets the dry-spell counter
+        so it can't be spammed. Makes the "discovered nothing" path feel fair without handing
+        over the answer — it points at a useful *pair*, never the target itself.
+        """
+        session = _require(game_id)
+        if session.won:
+            raise http_error(400, "Jocul s-a terminat deja.")
+        if session.fruitless_streak < NUDGE_AFTER_FRUITLESS:
+            need = NUDGE_AFTER_FRUITLESS - session.fruitless_streak
+            raise http_error(400, f"Mai incearca {need} combinatii inainte de un indiciu.")
+        pair = _useful_pair(session)
         session.fruitless_streak = 0
-    else:
-        session.fruitless_streak += 1
-
-    if not discovered:
-        message = "Nicio combinatie noua."
-    elif session.target in discovered:
-        message = f"Ai descoperit tinta: {svc.label(session.target)}!"
-    elif len(discovered) == 1:
-        message = f"Ai descoperit: {svc.label(discovered[0])}."
-    else:
-        names = ", ".join(svc.label(c) for c in discovered)
-        message = f"Ai descoperit {len(discovered)} concepte: {names}."
-
-    payload = _state_payload(game_id, session)
-    payload["discovered"] = [_concept(c) for c in discovered]
-    payload["message"] = message
-    return payload
-
-
-@router.post("/games/{game_id}/hint")
-def hint_game(game_id: str) -> dict[str, object]:
-    """Reveal a gentle nudge: a pair of owned concepts that makes forward progress.
-
-    Only allowed once the player has been genuinely stuck (``NUDGE_AFTER_FRUITLESS``
-    fruitless combines in a row). Each hint costs score and resets the dry-spell counter
-    so it can't be spammed. Makes the "discovered nothing" path feel fair without handing
-    over the answer — it points at a useful *pair*, never the target itself.
-    """
-    session = _require(game_id)
-    if session.won:
-        raise HTTPException(status_code=400, detail="Jocul s-a terminat deja.")
-    if session.fruitless_streak < NUDGE_AFTER_FRUITLESS:
-        need = NUDGE_AFTER_FRUITLESS - session.fruitless_streak
-        raise HTTPException(
-            status_code=400,
-            detail=f"Mai incearca {need} combinatii inainte de un indiciu.",
-        )
-    pair = _useful_pair(session)
-    session.fruitless_streak = 0
-    if pair is None:
-        # Defensive: no forward pair (shouldn't happen for built instances).
+        if pair is None:
+            # Defensive: no forward pair (shouldn't happen for built instances).
+            payload = _state_payload(game_id, session)
+            payload["hint"] = None
+            payload["message"] = "Niciun indiciu disponibil acum."
+            return Response(payload)
+        session.hints_used += 1
+        a, b = pair
         payload = _state_payload(game_id, session)
-        payload["hint"] = None
-        payload["message"] = "Niciun indiciu disponibil acum."
-        return payload
-    session.hints_used += 1
-    a, b = pair
-    payload = _state_payload(game_id, session)
-    payload["hint"] = [_concept(a), _concept(b)]
-    payload["message"] = (
-        f"Indiciu: incearca sa combini {get_service().label(a)} + "
-        f"{get_service().label(b)}."
-    )
-    return payload
+        payload["hint"] = [_concept(a), _concept(b)]
+        payload["message"] = (
+            f"Indiciu: incearca sa combini {get_service().label(a)} + "
+            f"{get_service().label(b)}."
+        )
+        return Response(payload)
 
 
-@router.post("/games/{game_id}/reset")
-def reset_game(game_id: str) -> dict[str, object]:
-    """Reset the SAME instance back to its original seed inventory (target unchanged)."""
-    session = _require(game_id)
-    session.owned.clear()
-    session.order.clear()
-    session.moves = 0
-    session.fruitless_streak = 0
-    session.hints_used = 0
-    for s in session.seeds:
-        session.add(s, None)
-    return _state_payload(game_id, session)
+class ResetGameView(ContractAPIView):
+    @extend_schema(operation_id="alchimie_reset_game", tags=["alchimie"])
+    def post(self, request, game_id: str):
+        """Reset the SAME instance back to its original seed inventory (target unchanged)."""
+        session = _require(game_id)
+        session.owned.clear()
+        session.order.clear()
+        session.moves = 0
+        session.fruitless_streak = 0
+        session.hints_used = 0
+        for s in session.seeds:
+            session.add(s, None)
+        return Response(_state_payload(game_id, session))
+
+
+_BASE = "api/wordgames/alchimie"
+urlpatterns = [
+    path(f"{_BASE}/games", CreateGameView.as_view()),
+    path(f"{_BASE}/games/<str:game_id>", GetGameView.as_view()),
+    path(f"{_BASE}/games/<str:game_id>/combine", CombineView.as_view()),
+    path(f"{_BASE}/games/<str:game_id>/hint", HintGameView.as_view()),
+    path(f"{_BASE}/games/<str:game_id>/reset", ResetGameView.as_view()),
+]

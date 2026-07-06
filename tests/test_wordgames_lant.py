@@ -4,18 +4,15 @@ from __future__ import annotations
 
 import pytest
 
-pytest.importorskip("fastapi")
+pytest.importorskip("django")
 
-from fastapi import FastAPI
-from fastapi.testclient import TestClient
+from django.test import Client
 
 from cat_de_roman_esti.wordgames import lant
-from cat_de_roman_esti.wordgames.lant import LantSession, router, store
+from cat_de_roman_esti.wordgames.lant import LantSession, store
 from cat_de_roman_esti.wordgames.service import get_service
 
-app = FastAPI()
-app.include_router(router)
-c = TestClient(app)
+c = Client()
 
 SEED = 7
 
@@ -27,7 +24,7 @@ def _create(seed: int = SEED, **params):
     for k, v in params.items():
         q += f"&{k}={v}"
     res = c.post(f"/api/wordgames/lant/games{q}")
-    assert res.status_code == 200, res.text
+    assert res.status_code == 200, res.content.decode()
     return res.json()
 
 
@@ -40,7 +37,8 @@ def _win(game: dict) -> dict:
         assert hint is not None
         body = c.post(
             f"/api/wordgames/lant/games/{gid}/move",
-            json={"text": hint["label"]},
+            {"text": hint["label"]},
+            content_type="application/json",
         ).json()
     assert body["won"] is True
     return body
@@ -70,15 +68,16 @@ def test_winning_playthrough_by_following_hints():
     # Following the shortest-path hint each turn must win in exactly `optimal` moves.
     for _ in range(optimal):
         hres = c.post(f"/api/wordgames/lant/games/{gid}/hint")
-        assert hres.status_code == 200, hres.text
+        assert hres.status_code == 200, hres.content.decode()
         hint = hres.json()["hint"]
-        assert hint is not None, hres.text
+        assert hint is not None, hres.content.decode()
 
         mres = c.post(
             f"/api/wordgames/lant/games/{gid}/move",
-            json={"text": hint["label"]},
+            {"text": hint["label"]},
+            content_type="application/json",
         )
-        assert mres.status_code == 200, mres.text
+        assert mres.status_code == 200, mres.content.decode()
         body = mres.json()
         assert body["ok"] is True, body
         assert body["relation"] != "" or True  # relation label may be empty for some edges
@@ -96,7 +95,8 @@ def test_unknown_concept_rejected():
     gid = game["game_id"]
     res = c.post(
         f"/api/wordgames/lant/games/{gid}/move",
-        json={"text": "qwerty nonexistent xyz"},
+        {"text": "qwerty nonexistent xyz"},
+        content_type="application/json",
     )
     assert res.status_code == 200
     body = res.json()
@@ -110,7 +110,8 @@ def test_non_neighbor_rejected():
     # The target is (>=3 hops away) definitely not a direct neighbour of the start.
     res = c.post(
         f"/api/wordgames/lant/games/{gid}/move",
-        json={"text": game["target"]["label"]},
+        {"text": game["target"]["label"]},
+        content_type="application/json",
     )
     assert res.status_code == 200
     body = res.json()
@@ -130,7 +131,11 @@ def test_undo_does_not_go_below_start():
 
     # Make one valid hinted move, then undo back to start.
     hint = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()["hint"]
-    c.post(f"/api/wordgames/lant/games/{gid}/move", json={"text": hint["label"]})
+    c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": hint["label"]},
+        content_type="application/json",
+    )
     after_undo = c.post(f"/api/wordgames/lant/games/{gid}/undo").json()
     assert after_undo["moves"] == 0
     assert after_undo["current"]["id"] == game["start"]["id"]
@@ -202,7 +207,8 @@ def test_unknown_game_404():
     assert (
         c.post(
             "/api/wordgames/lant/games/does-not-exist/move",
-            json={"text": "x"},
+            {"text": "x"},
+            content_type="application/json",
         ).status_code
         == 404
     )
@@ -269,7 +275,11 @@ def test_empty_and_whitespace_input_rejected():
     game = _create()
     gid = game["game_id"]
     for txt in ("", "   ", "\t\n"):
-        res = c.post(f"/api/wordgames/lant/games/{gid}/move", json={"text": txt})
+        res = c.post(
+            f"/api/wordgames/lant/games/{gid}/move",
+            {"text": txt},
+            content_type="application/json",
+        )
         assert res.status_code == 200
         body = res.json()
         assert body["ok"] is False
@@ -283,7 +293,8 @@ def test_staying_put_rejected():
     gid = game["game_id"]
     res = c.post(
         f"/api/wordgames/lant/games/{gid}/move",
-        json={"text": game["start"]["label"]},
+        {"text": game["start"]["label"]},
+        content_type="application/json",
     )
     body = res.json()
     assert body["ok"] is False
@@ -296,7 +307,11 @@ def test_move_on_won_game_is_idempotent():
     gid = game["game_id"]
     assert body["won"] is True
     # Any further move on a finished game returns ok + the final state, no extra hop.
-    after = c.post(f"/api/wordgames/lant/games/{gid}/move", json={"text": "orice"}).json()
+    after = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": "orice"},
+        content_type="application/json",
+    ).json()
     assert after["ok"] is True
     assert after["won"] is True
     assert after["moves"] == body["moves"]
@@ -325,7 +340,11 @@ def test_label_collision_disambiguates_to_a_linked_node():
         chain=[start],
     )
     gid = store.create(session)
-    res = c.post(f"/api/wordgames/lant/games/{gid}/move", json={"text": "Moldova"})
+    res = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": "Moldova"},
+        content_type="application/json",
+    )
     body = res.json()
     assert body["ok"] is True, body
     assert body["current"]["id"] == linked
@@ -414,7 +433,8 @@ def test_over_par_lowers_score_but_never_below_floor():
     optimal = game["optimal"]
     step = c.post(
         f"/api/wordgames/lant/games/{gid}/move",
-        json={"text": svc.label(detour)},
+        {"text": svc.label(detour)},
+        content_type="application/json",
     ).json()
     assert step["ok"] is True
 
@@ -424,7 +444,9 @@ def test_over_par_lowers_score_but_never_below_floor():
         h = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()["hint"]
         assert h is not None
         body = c.post(
-            f"/api/wordgames/lant/games/{gid}/move", json={"text": h["label"]}
+            f"/api/wordgames/lant/games/{gid}/move",
+            {"text": h["label"]},
+            content_type="application/json",
         ).json()
 
     assert body["moves"] > optimal

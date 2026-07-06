@@ -26,6 +26,7 @@ import {
 } from "../api/contexto";
 import { bestScore } from "../scores";
 import { useRecordScore } from "../hooks/useRecordScore";
+import { useActiveGame } from "../hooks/useActiveGame";
 import { gameByKey } from "../games";
 import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 
@@ -167,6 +168,8 @@ export default function CaldRece({
   const [isPuzzleRecord, setIsPuzzleRecord] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const recordOnce = useRecordScore("contexto");
+  const active = useActiveGame("contexto");
+  const resumeOnce = useRef(false);
 
   const best = bestScore(GAME_KEY);
 
@@ -176,6 +179,7 @@ export default function CaldRece({
       try {
         const fresh = await contextoApi.createGame(opts);
         setState(fresh);
+        active.remember(fresh.game_id);
         setLatestId(null);
         setText("");
         setIsRecord(false);
@@ -193,8 +197,42 @@ export default function CaldRece({
         setBusy(false);
       }
     },
-    [onToast],
+    [active, onToast],
   );
+
+  useEffect(() => {
+    if (resumeOnce.current) return;
+    resumeOnce.current = true;
+
+    const id = active.peek();
+    if (!id) return;
+
+    const resume = async () => {
+      setBusy(true);
+      try {
+        const saved = await contextoApi.getGame(id);
+        if (saved.won || saved.gave_up) {
+          active.forget();
+          return;
+        }
+        setState(saved);
+        setDifficulty(saved.difficulty);
+        setLatestId(null);
+        setText("");
+        setIsRecord(false);
+        setIsPuzzleRecord(false);
+        setShowIntro(false);
+        window.setTimeout(() => inputRef.current?.focus(), 0);
+        onToast("Joc reluat.", "info");
+      } catch {
+        active.forget();
+      } finally {
+        setBusy(false);
+      }
+    };
+
+    void resume();
+  }, [active, onToast]);
 
   const won = state?.won ?? false;
   const gaveUp = state?.gave_up ?? false;
@@ -221,7 +259,9 @@ export default function CaldRece({
 
   // Record the score exactly once when a game is won.
   useEffect(() => {
-    if (!state || !state.won || state.score === undefined) return;
+    if (!state || (!state.won && !state.gave_up)) return;
+    active.forget();
+    if (!state.won || state.score === undefined) return;
     const detail = state.daily
       ? `Zilnic ${state.daily} · ${state.attempts} incercari`
       : `${difficulty} · ${state.attempts} incercari`;
@@ -239,7 +279,7 @@ export default function CaldRece({
     } else if (isPuzzleBest) {
       sound.playRecord();
     }
-  }, [state, difficulty, puzzleKey, recordOnce]);
+  }, [state, difficulty, puzzleKey, recordOnce, active]);
 
   const handleGuess = useCallback(
     async (e?: React.FormEvent) => {
@@ -468,7 +508,10 @@ export default function CaldRece({
               type="button"
               variant="secondary"
               size="sm"
-              onClick={() => setShowIntro(true)}
+              onClick={() => {
+                active.forget();
+                setShowIntro(true);
+              }}
               disabled={busy}
               title="Joc nou"
             >
@@ -592,7 +635,10 @@ export default function CaldRece({
               isPuzzleRecord={isPuzzleRecord}
               shareText={sharePayload}
               onCopy={() => void handleCopy()}
-              onReplay={() => setShowIntro(true)}
+              onReplay={() => {
+                active.forget();
+                setShowIntro(true);
+              }}
             >
               <span style={{ fontSize: "1.4rem", color: "var(--text)", display: "block" }}>
                 {state.target.label}

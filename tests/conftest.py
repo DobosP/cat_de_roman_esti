@@ -8,9 +8,20 @@ real ``ro_data_server`` — including the fail-closed ``available=false`` path.
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 import pytest
+
+# Bootstrap Django once for the whole suite (the BFF tests exercise the Django app
+# via django.test.Client; no database is used, so plain pytest suffices).
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cat_de_roman_esti.web.settings")
+try:
+    import django
+
+    django.setup()
+except ImportError:  # engine-only environments without the [web] extra
+    pass
 
 FIXTURE = Path(__file__).parent / "fixtures" / "kg_sample.json"
 

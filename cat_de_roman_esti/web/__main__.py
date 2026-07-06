@@ -1,9 +1,12 @@
-"""uvicorn launcher for the cat_de_roman_esti BFF.
+"""uvicorn launcher for the cat_de_roman_esti BFF (Django ASGI).
 
     python -m cat_de_roman_esti.web --host 127.0.0.1 --port 8000
 
-Serves the built SPA at ``/`` and the ``/api`` routes. By default it plays against the
-bundled offline fixture; set ``ROEDU_API_URL`` to use the live ro_data_server.
+Serves the built SPA at ``/`` and the ``/api`` routes. By default it plays against
+the bundled offline fixture; set ``CAT_KG_FIXTURE`` to point at another bundle.
+
+Single process on purpose: live game sessions are in-memory (SessionStore), so
+never scale by adding uvicorn workers — scale reads by putting a cache in front.
 """
 
 from __future__ import annotations
@@ -13,8 +16,6 @@ import logging
 from collections.abc import Sequence
 
 import uvicorn
-
-from .app import create_app
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -35,18 +36,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
 
-    if args.reload:
-        # Reload needs an import string, not an app instance.
-        uvicorn.run(
-            "cat_de_roman_esti.web.app:create_app",
-            factory=True,
-            host=args.host,
-            port=args.port,
-            reload=True,
-            log_level=args.log_level,
-        )
-    else:
-        uvicorn.run(create_app(), host=args.host, port=args.port, log_level=args.log_level)
+    uvicorn.run(
+        "cat_de_roman_esti.web.asgi:application",
+        host=args.host,
+        port=args.port,
+        reload=args.reload,
+        log_level=args.log_level,
+    )
     return 0
 
 
