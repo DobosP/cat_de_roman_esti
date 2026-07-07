@@ -23,6 +23,8 @@ import { useRecordScore } from "../hooks/useRecordScore";
 import { sound } from "../sound";
 import { bestScore } from "../scores";
 import { gameByKey } from "../games";
+import { categoryColor, categoryLabel } from "../categories";
+import { CategoryPicker } from "../components/CategoryPicker";
 import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 
 const GAME_KEY = "lant";
@@ -99,6 +101,7 @@ export default function Lant({
   const [shake, setShake] = useState(0);
   const [hint, setHint] = useState<HintResult | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>("normal");
+  const [category, setCategory] = useState<string | null>(null);
   const [scored, setScored] = useState<{
     score: number;
     isBest: boolean;
@@ -118,6 +121,7 @@ export default function Lant({
       state.start.id,
       state.target.id,
       state.optimal,
+      state.board_category,
     ]);
   }, [state]);
 
@@ -140,6 +144,8 @@ export default function Lant({
         const fresh = await createLant({
           difficulty: opts?.difficulty ?? difficulty,
           daily: opts?.daily,
+          // The theme applies to picked games only; the daily stays the shared classic.
+          category: opts?.daily ? undefined : (category ?? undefined),
         });
         active.remember(fresh.game_id);
         setState(fresh);
@@ -155,7 +161,7 @@ export default function Lant({
         setLoading(false);
       }
     },
-    [onToast, difficulty, active],
+    [onToast, difficulty, category, active],
   );
 
   useEffect(() => {
@@ -197,6 +203,7 @@ export default function Lant({
       puzzleKey,
       difficulty: state.difficulty,
       daily: state.daily,
+      category: state.board_category,
     });
     if (!outcome) return;
     const { isBest, isPuzzleBest } = outcome;
@@ -361,6 +368,15 @@ export default function Lant({
                 setDifficulty(id);
               }}
             />
+            <CategoryPicker
+              game="lant"
+              value={category}
+              onChange={(key) => {
+                sound.playSelect();
+                setCategory(key);
+              }}
+              accent={DEF.accent}
+            />
           </GameIntro>
         </div>
       </div>
@@ -379,6 +395,13 @@ export default function Lant({
                 value={state.daily}
                 accent={DEF.accent}
                 title="Provocarea zilei"
+              />
+            )}
+            {state.board_category && (
+              <StatBadge
+                label="CATEGORIE"
+                value={categoryLabel(state.board_category)}
+                accent={categoryColor(state.board_category)}
               />
             )}
             <StatBadge

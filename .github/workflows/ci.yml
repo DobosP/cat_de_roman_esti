@@ -49,6 +49,9 @@ jobs:
       - name: Validate KG fixture (content gate)
         run: python scripts/validate_fixture.py
 
+      - name: Validate curated games pack (content gate)
+        run: python scripts/validate_games_pack.py
+
       - name: Lint (ruff)
         run: ruff check
 

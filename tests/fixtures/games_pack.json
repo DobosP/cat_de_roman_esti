@@ -1,0 +1,188 @@
+{
+ "meta": {
+  "pack_version": 1,
+  "note": "Starter curated pack (ADR-0011): exercises the pipeline until the generated content lands.",
+  "counts": {
+   "conexiuni": 2,
+   "contexto": 2,
+   "lant": 2,
+   "alchimie": 1
+  }
+ },
+ "conexiuni": [
+  {
+   "id": "cx_istorie_001",
+   "category": "istorie",
+   "difficulty": "normal",
+   "source": "ai",
+   "status": "approved",
+   "groups": {
+    "voievozi": [
+     "n_stefan_cel_mare",
+     "n_mihai_viteazul",
+     "n_vlad_tepes",
+     "n_mircea_cel_batran"
+    ],
+    "moderni": [
+     "n_alexandru_ioan_cuza",
+     "n_carol_i",
+     "n_ferdinand_i",
+     "n_mihai_i"
+    ],
+    "dacia": [
+     "n_decebal",
+     "n_burebista",
+     "n_sarmizegetusa",
+     "n_geto_daci"
+    ],
+    "uniri": [
+     "n_unirea_1600",
+     "n_mica_unire_1859",
+     "n_marea_unire_1918",
+     "n_principatele_unite"
+    ]
+   },
+   "group_labels": {
+    "voievozi": "Voievozi medievali",
+    "moderni": "Conducatori ai Romaniei moderne",
+    "dacia": "Lumea dacica",
+    "uniri": "Momente ale Unirii"
+   },
+   "order": [
+    "n_mircea_cel_batran",
+    "n_principatele_unite",
+    "n_mica_unire_1859",
+    "n_geto_daci",
+    "n_marea_unire_1918",
+    "n_sarmizegetusa",
+    "n_stefan_cel_mare",
+    "n_decebal",
+    "n_mihai_i",
+    "n_alexandru_ioan_cuza",
+    "n_ferdinand_i",
+    "n_carol_i",
+    "n_unirea_1600",
+    "n_vlad_tepes",
+    "n_mihai_viteazul",
+    "n_burebista"
+   ]
+  },
+  {
+   "id": "cx_geografie_001",
+   "category": "geografie",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "approved",
+   "groups": {
+    "rauri": [
+     "n_olt",
+     "n_mures",
+     "n_siret",
+     "n_prut"
+    ],
+    "munti": [
+     "n_carpati",
+     "n_muntii_fagaras",
+     "n_bucegi",
+     "n_muntii_apuseni"
+    ],
+    "orase": [
+     "n_bucuresti",
+     "n_iasi",
+     "n_cluj_napoca",
+     "n_timisoara"
+    ],
+    "regiuni": [
+     "n_dobrogea",
+     "n_muntenia",
+     "n_oltenia",
+     "n_banat"
+    ]
+   },
+   "group_labels": {
+    "rauri": "Rauri",
+    "munti": "Munti",
+    "orase": "Orase mari",
+    "regiuni": "Regiuni istorice"
+   },
+   "order": [
+    "n_muntii_fagaras",
+    "n_dobrogea",
+    "n_bucuresti",
+    "n_cluj_napoca",
+    "n_prut",
+    "n_iasi",
+    "n_olt",
+    "n_mures",
+    "n_bucegi",
+    "n_banat",
+    "n_timisoara",
+    "n_siret",
+    "n_muntenia",
+    "n_carpati",
+    "n_oltenia",
+    "n_muntii_apuseni"
+   ]
+  }
+ ],
+ "contexto": [
+  {
+   "id": "ct_istorie_001",
+   "category": "istorie",
+   "difficulty": "normal",
+   "source": "ai",
+   "status": "approved",
+   "target": "n_stefan_cel_mare"
+  },
+  {
+   "id": "ct_geografie_001",
+   "category": "geografie",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "approved",
+   "target": "n_bucuresti"
+  }
+ ],
+ "lant": [
+  {
+   "id": "lt_istorie_001",
+   "category": "istorie",
+   "difficulty": "normal",
+   "source": "ai_corpus",
+   "status": "approved",
+   "start": "n_vlad_tepes",
+   "target": "n_marea_unire_1918",
+   "optimal": 4
+  },
+  {
+   "id": "lt_geografie_001",
+   "category": "geografie",
+   "difficulty": "normal",
+   "source": "ai_corpus",
+   "status": "approved",
+   "start": "n_clima_temperat_continentala",
+   "target": "n_iasi",
+   "optimal": 4
+  }
+ ],
+ "alchimie": [
+  {
+   "id": "al_istorie_001",
+   "category": "istorie",
+   "difficulty": "normal",
+   "source": "ai_corpus",
+   "status": "approved",
+   "seeds": [
+    "n_imperiul_otoman",
+    "n_traian",
+    "n_imperiul_roman",
+    "n_burebista",
+    "n_regatul_romaniei",
+    "n_carol_i",
+    "n_mihai_i"
+   ],
+   "target": "n_decebal",
+   "target_depth": 3
+  }
+ ]
+}

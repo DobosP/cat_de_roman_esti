@@ -24,6 +24,9 @@ from pydantic import BaseModel
 from rest_framework.response import Response
 
 from ..web.http import ContractAPIView, http_error, parse_body, query_int, query_str
+from .categories import CATEGORY_LABELS as _SHARED_CATEGORY_LABELS
+from .categories import category_label, is_known
+from .packs import get_pack
 from .service import SessionStore, daily_seed, get_service
 
 GAME_KEY = "contexto"
@@ -49,16 +52,7 @@ MIN_RESPONSIVE = 40
 MIN_CLUE_ATTEMPTS = 3
 CLUE_SCORE_PENALTY = 120
 
-CATEGORY_LABELS = {
-    "arta_cultura": "Arta & Cultura",
-    "geografie": "Geografie",
-    "istorie": "Istorie",
-    "limba": "Limba",
-    "literatura": "Literatura",
-    "personalitati": "Personalitati",
-    "societate": "Societate",
-    "stiinta": "Stiinta",
-}
+CATEGORY_LABELS = _SHARED_CATEGORY_LABELS
 
 
 # --------------------------------------------------------------------------- session
@@ -92,6 +86,9 @@ class ContextoSession:
     clues_used: int = 0
     difficulty: str = _DEFAULT_DIFFICULTY
     daily: str | None = None
+    # Player-picked board theme + curated-pack provenance (None for mined games).
+    category: str | None = None
+    pack_id: str | None = None
 
     def __post_init__(self) -> None:
         # Precompute, for each distance value, how many reachable nodes are farther.
@@ -199,8 +196,11 @@ def _trail_emoji(record: GuessRecord) -> str:
 def share_line(session: ContextoSession) -> str:
     """Wordle-style shareable line with a hot/cold emoji trail of the guesses."""
     trail = "".join(_trail_emoji(session.guesses[gid]) for gid in session.order)
+    header = "cat_de_roman_esti · Cald sau Rece"
+    if session.category:
+        header += f" · {category_label(session.category)}"
     lines = [
-        "cat_de_roman_esti · Cald sau Rece",
+        header,
         trail,
         f"{session.attempts} incercari",
     ]
@@ -211,7 +211,7 @@ def share_line(session: ContextoSession) -> str:
     return "\n".join(lines)
 
 
-def _difficulty_pool(svc, difficulty: str) -> list[str]:
+def _difficulty_pool(svc, difficulty: str, category: str | None = None) -> list[str]:
     """Candidate target ids for a difficulty tier (before the reachability filter).
 
     usor  -> high-salience, well-known targets (salience >= 0.6).
@@ -220,18 +220,24 @@ def _difficulty_pool(svc, difficulty: str) -> list[str]:
 
     ``normal`` keeps the original ``all_ids`` candidate set so the long-standing
     seeded instances stay stable; only ``usor``/``greu`` bias the selection.
+    An explicit ``category`` intersects any tier with that category's members.
     """
     if difficulty == "usor":
         high = svc.by_salience(minimum=0.6)
-        return high or svc.all_ids()
-    if difficulty == "greu":
+        pool = high or svc.all_ids()
+    elif difficulty == "greu":
         # obscure: lowest salience first, restricted to the less-prominent half so a
         # "greu" target is genuinely off the beaten path.
         by_sal = svc.by_salience(descending=True)  # high -> low
         obscure = list(reversed(by_sal))
-        return obscure[: max(1, len(obscure) // 2)] or obscure
-    # normal: the historical default candidate set.
-    return svc.all_ids()
+        pool = obscure[: max(1, len(obscure) // 2)] or obscure
+    else:
+        # normal: the historical default candidate set.
+        pool = svc.all_ids()
+    if category is not None:
+        members = set(svc.by_category(category))
+        pool = [nid for nid in pool if nid in members]
+    return pool
 
 
 def _responsive_count(dist: dict[str, int]) -> int:
@@ -249,7 +255,14 @@ def _is_good_target(dist: dict[str, int]) -> bool:
     return len(dist) >= MIN_REACHABLE and _responsive_count(dist) >= MIN_RESPONSIVE
 
 
-def _build_session(target: str, difficulty: str, daily: str | None) -> ContextoSession:
+def _build_session(
+    target: str,
+    difficulty: str,
+    daily: str | None,
+    *,
+    category: str | None = None,
+    pack_id: str | None = None,
+) -> ContextoSession:
     svc = get_service()
     dist = svc.distances_from(target)
     hist: dict[int, int] = {}
@@ -261,6 +274,8 @@ def _build_session(target: str, difficulty: str, daily: str | None) -> ContextoS
         reachable=len(dist),
         difficulty=difficulty,
         daily=daily,
+        category=category,
+        pack_id=pack_id,
     )
 
 
@@ -268,6 +283,7 @@ def _pick_target(
     seed: int | None,
     difficulty: str = _DEFAULT_DIFFICULTY,
     daily: str | None = None,
+    category: str | None = None,
 ) -> ContextoSession:
     """Choose a solvable, *satisfying* secret target of the requested difficulty.
 
@@ -285,7 +301,9 @@ def _pick_target(
     """
     svc = get_service()
     rng = random.Random(seed)
-    candidates = _difficulty_pool(svc, difficulty)
+    candidates = _difficulty_pool(svc, difficulty, category)
+    if category is not None and not candidates:
+        raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
     # Deterministic ordering: for daily/seeded runs the pool order is fixed, then a
     # seeded shuffle picks within it -> same date+difficulty => same target.
     candidates = list(candidates)
@@ -298,10 +316,17 @@ def _pick_target(
             if fallback is None and len(dist) >= MIN_REACHABLE:
                 fallback = nid
             continue
-        return _build_session(nid, difficulty, daily)
+        return _build_session(nid, difficulty, daily, category=category)
 
     if fallback is not None:
-        return _build_session(fallback, difficulty, daily)
+        return _build_session(fallback, difficulty, daily, category=category)
+    if category is not None:
+        # A category pool stays within itself: never silently swap in an off-theme
+        # target when the theme cannot make a playable game.
+        best_in_cat = max(candidates, key=lambda n: len(svc.distances_from(n)))
+        if len(svc.distances_from(best_in_cat)) >= MIN_REACHABLE:
+            return _build_session(best_in_cat, difficulty, daily, category=category)
+        raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
     # Last resort: nothing in this tier met even the reachability floor — take the
     # most-reachable node so we still return a solvable game.
     best = max(svc.all_ids(), key=lambda n: len(svc.distances_from(n)))
@@ -367,6 +392,8 @@ def _state(game_id: str, session: ContextoSession) -> dict:
     }
     if session.daily is not None:
         body["daily"] = session.daily
+    if session.category:
+        body["board_category"] = session.category
     if session.clue_revealed:
         body["clue"] = _clue_payload(session)
     if reveal:
@@ -386,14 +413,42 @@ def _state(game_id: str, session: ContextoSession) -> dict:
 class CreateGameView(ContractAPIView):
     @extend_schema(operation_id="contexto_create_game", tags=["contexto"])
     def post(self, request):
+        """Start a game. Optional ``?category=`` prefers a curated target for that
+        theme and otherwise mines within the category; the daily prefers a curated
+        target whenever one is approved (ADR-0011)."""
         seed = query_int(request, "seed")
         difficulty = query_str(request, "difficulty", _DEFAULT_DIFFICULTY)
         daily = query_str(request, "daily")
+        category = query_str(request, "category")
         if difficulty not in _DIFFICULTIES:
             difficulty = _DEFAULT_DIFFICULTY
+        if category is not None and not is_known(category):
+            raise http_error(400, "Categorie necunoscuta.")
         if daily is not None:
             seed = daily_seed(daily, GAME_KEY)
-        session = _pick_target(seed, difficulty, daily)
+            curated = get_pack().pick_daily(
+                GAME_KEY, daily, category=category, difficulty=difficulty
+            )
+        else:
+            curated = (
+                get_pack().pick_seeded(
+                    GAME_KEY, random.Random(seed), category=category, difficulty=difficulty
+                )
+                if category is not None
+                else None
+            )
+        if curated is not None:
+            # session.category echoes only a player-REQUESTED theme. A curated daily
+            # stays themeless: exposing the theme for free would spoil the paid clue.
+            session = _build_session(
+                str(curated.payload["target"]),
+                difficulty,
+                daily,
+                category=category,
+                pack_id=curated.id,
+            )
+        else:
+            session = _pick_target(seed, difficulty, daily, category)
         game_id = store.create(session)
         return Response(_state(game_id, session))
 

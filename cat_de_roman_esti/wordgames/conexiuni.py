@@ -24,22 +24,15 @@ from pydantic import BaseModel
 from rest_framework.response import Response
 
 from ..web.http import ContractAPIView, http_error, parse_body, query_int, query_str
+from .categories import category_label, is_known, known_keys
+from .packs import CuratedItem, get_pack
 from .service import SessionStore, WordGameService, daily_seed, get_service
 
 GAME_KEY = "conexiuni"
 
-# The 8 known KG categories. We derive which are usable (>=4 nodes) at pick time so the
-# game keeps working even if the fixture changes.
-KNOWN_CATEGORIES = (
-    "arta_cultura",
-    "geografie",
-    "istorie",
-    "limba",
-    "literatura",
-    "personalitati",
-    "societate",
-    "stiinta",
-)
+# Every known category (serious + pop). We derive which are usable (>=4 nodes) at pick
+# time so the game keeps working even if the fixture changes.
+KNOWN_CATEGORIES = known_keys()
 
 GROUP_SIZE = 4
 NUM_GROUPS = 4
@@ -75,6 +68,11 @@ class ConexiuniSession:
     clues_used: int = 0
     # history of guesses (each a list of 4 ids) for the share grid
     history: list[list[str]] = field(default_factory=list)
+    # Curated boards carry authored group labels (group key -> display label) and the
+    # pack provenance; mined boards leave all three unset (ADR-0011).
+    group_labels: dict[str, str] | None = None
+    category: str | None = None
+    pack_id: str | None = None
 
     def category_of(self, node_id: str) -> str | None:
         for cat, ids in self.groups.items():
@@ -321,7 +319,7 @@ def _solved_groups(session: ConexiuniSession, *, reveal: bool) -> list[dict]:
         out.append(
             {
                 "key": cat,
-                "label": _category_label(cat),
+                "label": _group_label(session, cat),
                 "tiles": [
                     {"id": nid, "label": svc.label(nid)} for nid in session.groups[cat]
                 ],
@@ -331,18 +329,15 @@ def _solved_groups(session: ConexiuniSession, *, reveal: bool) -> list[dict]:
 
 
 def _category_label(cat: str) -> str:
-    # Romanian-friendly display names mirroring the frontend theme tokens.
-    labels = {
-        "arta_cultura": "Arta & Cultura",
-        "geografie": "Geografie",
-        "istorie": "Istorie",
-        "limba": "Limba",
-        "literatura": "Literatura",
-        "personalitati": "Personalitati",
-        "societate": "Societate",
-        "stiinta": "Stiinta",
-    }
-    return labels.get(cat, cat)
+    # Romanian-friendly display names (shared taxonomy; unknown keys echo back).
+    return category_label(cat)
+
+
+def _group_label(session: ConexiuniSession, cat: str) -> str:
+    """Display label for one board group: authored (curated boards) or taxonomy."""
+    if session.group_labels and cat in session.group_labels:
+        return session.group_labels[cat]
+    return _category_label(cat)
 
 
 def _full_solution(session: ConexiuniSession, *, reveal: bool) -> list[dict]:
@@ -356,7 +351,7 @@ def _full_solution(session: ConexiuniSession, *, reveal: bool) -> list[dict]:
         out.append(
             {
                 "key": cat,
-                "label": _category_label(cat),
+                "label": _group_label(session, cat),
                 "tiles": [
                     {"id": nid, "label": svc.label(nid)} for nid in session.groups[cat]
                 ],
@@ -382,6 +377,8 @@ def _share(session: ConexiuniSession) -> str:
             row += _GROUP_EMOJI[idx % len(_GROUP_EMOJI)]
         lines.append(row)
     header = "cat_de_roman_esti · Conexiuni · "
+    if session.category:
+        header += f"{category_label(session.category)} · "
     header += f"{session.mistakes} greseli"
     if session.clues_used:
         header += f" · indiciu x{session.clues_used}"
@@ -422,7 +419,7 @@ def _next_clue(session: ConexiuniSession) -> dict[str, str]:
     """Pick a deterministic redacted label-pattern clue for one unsolved group."""
     unsolved = [cat for cat in sorted(session.groups) if cat not in session.solved]
     cat = unsolved[0]
-    pattern = _label_pattern(_category_label(cat))
+    pattern = _label_pattern(_group_label(session, cat))
     return {
         "pattern": pattern,
         "message": f"Un grup ramas are eticheta: {pattern}.",
@@ -448,6 +445,10 @@ def _state(game_id: str, session: ConexiuniSession) -> dict:
     }
     if session.daily:
         body["daily"] = session.daily
+    # Board theme (player-picked category). Distinct name: "category" already means
+    # "the group you just solved" in the win response of the guess endpoint.
+    if session.category:
+        body["board_category"] = session.category
     if reveal:
         body["score"] = _score(session)
         body["share"] = _share(session)
@@ -455,21 +456,62 @@ def _state(game_id: str, session: ConexiuniSession) -> dict:
     return body
 
 
+def _session_from_curated(
+    item: CuratedItem, daily: str | None, requested_category: str | None
+) -> ConexiuniSession:
+    """Materialize a curated board as a live session (deep-copied, pack untouched).
+
+    ``category`` echoes only a player-REQUESTED theme; a curated daily stays
+    themeless so the reveal gate / clue economy keeps its value.
+    """
+    groups = {key: list(ids) for key, ids in item.payload["groups"].items()}
+    return ConexiuniSession(
+        groups=groups,
+        order=list(item.payload["order"]),
+        difficulty=item.difficulty,
+        daily=daily,
+        group_labels=dict(item.payload["group_labels"]),
+        category=requested_category,
+        pack_id=item.id,
+    )
+
+
 # --------------------------------------------------------------------- endpoints
 class CreateGameView(ContractAPIView):
     @extend_schema(operation_id="conexiuni_create_game", tags=["conexiuni"])
     def post(self, request):
+        """Start a game. Optional ``?category=`` serves a curated board for that theme
+        (503 when none is approved yet — Conexiuni boards cannot be mined per-category);
+        the daily prefers a curated board whenever one exists (ADR-0011)."""
         seed = query_int(request, "seed")
         difficulty = query_str(request, "difficulty", "normal")
         daily = query_str(request, "daily")
+        category = query_str(request, "category")
         if difficulty not in DIFFICULTIES:
             difficulty = "normal"
+        if category is not None and not is_known(category):
+            raise http_error(400, "Categorie necunoscuta.")
         if daily:
             rng = random.Random(daily_seed(daily, GAME_KEY))
+            curated = get_pack().pick_daily(
+                GAME_KEY, daily, category=category, difficulty=difficulty
+            )
         else:
             rng = random.Random(seed)
-        session = _pick_board(rng, difficulty)
-        session.daily = daily
+            curated = (
+                get_pack().pick_seeded(
+                    GAME_KEY, rng, category=category, difficulty=difficulty
+                )
+                if category is not None
+                else None
+            )
+        if curated is not None:
+            session = _session_from_curated(curated, daily, category)
+        elif category is not None:
+            raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
+        else:
+            session = _pick_board(rng, difficulty)
+            session.daily = daily
         game_id = store.create(session)
         return Response(_state(game_id, session))
 
@@ -522,7 +564,7 @@ class GuessView(ContractAPIView):
                 **state,
             }
             if session.won:
-                result["category"] = {"key": shared, "label": _category_label(shared)}
+                result["category"] = {"key": shared, "label": _group_label(session, shared)}
             return Response(result)
 
         # wrong guess

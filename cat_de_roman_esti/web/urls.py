@@ -10,12 +10,13 @@ from __future__ import annotations
 from django.urls import path, re_path
 from drf_spectacular.views import SpectacularJSONAPIView
 
-from ..wordgames import alchimie, conexiuni, contexto, lant
+from ..wordgames import alchimie, conexiuni, contexto, lant, submissions
 from . import meta, spa
 
 urlpatterns = [
     path("api/health", meta.HealthView.as_view()),
     path("api/manifest", meta.ManifestView.as_view()),
+    path("api/categories", meta.CategoriesView.as_view()),
     path("healthz", meta.healthz),
     # Same schema location the FastAPI app exposed (mobile clients generate from it).
     path("openapi.json", SpectacularJSONAPIView.as_view(), name="schema"),
@@ -23,6 +24,7 @@ urlpatterns = [
     *contexto.urlpatterns,
     *lant.urlpatterns,
     *conexiuni.urlpatterns,
+    *submissions.urlpatterns,
     re_path(r"^api/", meta.api_not_found),
     re_path(r"^.*$", spa.spa_index),
 ]

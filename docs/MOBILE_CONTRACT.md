@@ -14,6 +14,13 @@ The app pins operationIds via `@extend_schema(operation_id=...)` on every DRF vi
 route refactor never churns the client surface. The full expected set is asserted in
 `test_openapi_operation_ids_are_stable`.
 
+Additive since 2026-07-07 (ADR-0011): `meta_categories` (`GET /api/categories` — category
+taxonomy + per-game availability) and `submissions_create` (`POST /api/submissions` —
+user-submitted games; 503 unless the deployment enables `CAT_SUBMISSIONS_DIR`). Game create
+endpoints accept an optional `?category=` query param; when (and only when) it is sent, game
+state gains an optional `board_category` string. All pre-existing routes, fields, and
+hidden-answer invariants are unchanged.
+
 Export the schema for client generation (deterministic, offline — no server/live data):
 
 ```bash

@@ -14,8 +14,14 @@ from drf_spectacular.utils import extend_schema
 from rest_framework.response import Response
 
 from ..data import fixture_manifest
+from ..wordgames.categories import CATEGORIES
+from ..wordgames.packs import get_pack
 from ..wordgames.service import get_service
 from .http import ContractAPIView
+
+# Loose per-game node floors under which mining a category-scoped game is hopeless;
+# the UI uses `available` to only offer categories that will actually start.
+_MINE_FLOORS = {"contexto": 10, "lant": 10, "alchimie": 8}
 
 # Arcade metadata — the SPA home screen mirrors this (kept here so /api/health can
 # report it).
@@ -71,6 +77,40 @@ class HealthView(ContractAPIView):
                 "games": GAMES,
             }
         )
+
+
+class CategoriesView(ContractAPIView):
+    @extend_schema(operation_id="meta_categories", tags=["meta"])
+    def get(self, request) -> Response:
+        """The category taxonomy + per-game availability (curated counts included).
+
+        ``available.<game>`` is true when the game can actually start for that
+        category: a curated instance is approved, or (except Conexiuni, whose
+        boards cannot be mined per-category) the fixture has enough nodes to mine.
+        """
+        svc = get_service()
+        pack = get_pack()
+        out = []
+        for key, (label, kind) in CATEGORIES.items():
+            curated = pack.counts(category=key)
+            nodes = len(svc.by_category(key))
+            available = {
+                "conexiuni": curated["conexiuni"] > 0,
+                "contexto": curated["contexto"] > 0 or nodes >= _MINE_FLOORS["contexto"],
+                "lant": curated["lant"] > 0 or nodes >= _MINE_FLOORS["lant"],
+                "alchimie": curated["alchimie"] > 0 or nodes >= _MINE_FLOORS["alchimie"],
+            }
+            out.append(
+                {
+                    "key": key,
+                    "label": label,
+                    "kind": kind,
+                    "node_count": nodes,
+                    "curated": curated,
+                    "available": available,
+                }
+            )
+        return Response({"categories": out})
 
 
 class ManifestView(ContractAPIView):

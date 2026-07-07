@@ -28,6 +28,8 @@ import { bestScore } from "../scores";
 import { useRecordScore } from "../hooks/useRecordScore";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { gameByKey } from "../games";
+import { categoryColor, categoryLabel } from "../categories";
+import { CategoryPicker } from "../components/CategoryPicker";
 import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 
 const GAME_KEY = "contexto";
@@ -162,6 +164,7 @@ export default function CaldRece({
   const [busy, setBusy] = useState(false);
   const [latestId, setLatestId] = useState<string | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>("normal");
+  const [category, setCategory] = useState<string | null>(null);
   // Intro is shown until the player picks how to start.
   const [showIntro, setShowIntro] = useState(true);
   const [isRecord, setIsRecord] = useState(false);
@@ -244,6 +247,7 @@ export default function CaldRece({
       GAME_KEY,
       state.daily ? `daily-${state.daily}` : state.difficulty,
       state.target.id,
+      state.board_category,
     ]);
   }, [state]);
 
@@ -269,6 +273,7 @@ export default function CaldRece({
       puzzleKey,
       difficulty: state.difficulty,
       daily: state.daily,
+      category: state.board_category,
     });
     if (!outcome) return;
     const { isBest, isPuzzleBest } = outcome;
@@ -431,7 +436,7 @@ export default function CaldRece({
             }
             best={best}
             startLabel="Joaca"
-            onStart={() => void start({ difficulty })}
+            onStart={() => void start({ difficulty, category: category ?? undefined })}
             onDaily={() => void start({ daily: todayLocal() })}
             dailyLabel="Provocarea zilei"
             starting={busy}
@@ -444,6 +449,17 @@ export default function CaldRece({
                   sound.playSelect();
                   setDifficulty(id);
                 }}
+              />
+            </div>
+            <div style={{ width: "100%", maxWidth: 420 }}>
+              <CategoryPicker
+                game="contexto"
+                value={category}
+                onChange={(key) => {
+                  sound.playSelect();
+                  setCategory(key);
+                }}
+                accent={DEF.accent}
               />
             </div>
           </GameIntro>
@@ -467,6 +483,13 @@ export default function CaldRece({
               accent={DEF.accent}
               title="Mod de joc"
             />
+            {state?.board_category && (
+              <StatBadge
+                label="Categorie"
+                value={categoryLabel(state.board_category)}
+                accent={categoryColor(state.board_category)}
+              />
+            )}
             <StatBadge
               label="Incercari"
               value={`${state?.attempts ?? 0} incercari`}

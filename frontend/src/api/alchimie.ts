@@ -41,6 +41,8 @@ export interface AlchimieState {
   /** True once the player is genuinely stuck and a nudge can be requested. */
   hint_available: boolean;
   daily?: string;
+  /** Echoed only when the game was started with an explicit category. */
+  board_category?: string;
   /** Present only when won === true. */
   score?: number;
   share?: string;
@@ -64,6 +66,8 @@ export interface CreateOpts {
   seed?: number;
   difficulty?: Difficulty;
   daily?: string;
+  /** Curated category/theme (ADR-0011); omit for the classic full-graph game. */
+  category?: string;
 }
 
 const BASE = "/api/wordgames/alchimie";
@@ -78,6 +82,7 @@ export function createAlchimie(opts: CreateOpts = {}): Promise<AlchimieState> {
   if (opts.seed !== undefined) params.set("seed", String(opts.seed));
   if (opts.difficulty) params.set("difficulty", opts.difficulty);
   if (opts.daily) params.set("daily", opts.daily);
+  if (opts.category) params.set("category", opts.category);
   const q = params.toString() ? `?${params.toString()}` : "";
   return postJson<AlchimieState>(`${BASE}/games${q}`);
 }
