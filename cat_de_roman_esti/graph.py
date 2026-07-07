@@ -45,6 +45,9 @@ class Node:
     salience: float = 0.0
     difficulty_tier: str = ""
     degree: int = 0
+    # Alternate exact surface forms (inflections, synonyms, short titles) the text
+    # resolver accepts for this concept (ADR-0012). Labels win over aliases.
+    aliases: tuple[str, ...] = ()
     tags: tuple[str, ...] = ()
     facets: Mapping[str, object] = field(default_factory=dict)
     source: str = ""
@@ -61,6 +64,7 @@ class Node:
             salience=_as_float(rec.get("salience")),
             difficulty_tier=str(rec.get("difficulty_tier") or ""),
             degree=int(_as_float(rec.get("degree"))),
+            aliases=tuple(str(a) for a in rec.get("aliases", []) or []),
             tags=tuple(str(t) for t in rec.get("tags", []) or []),
             facets=dict(rec.get("facets", {}) or {}),
             source=str(rec.get("source") or ""),

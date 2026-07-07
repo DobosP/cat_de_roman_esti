@@ -50,6 +50,13 @@ class WordGameService:
         for node in self.graph.nodes.values():
             self._index[normalize(node.label_ro)] = node.id
             self._index[normalize(node.id)] = node.id
+        # Aliases (ADR-0012): alternate exact surface forms — inflections, synonyms,
+        # short titles — resolve to the same node. Labels/ids always win, and the
+        # deterministic (sorted) order makes any residual collision stable; the
+        # fixture validator forbids collisions in shipped data.
+        for nid in sorted(self.graph.nodes):
+            for alias in self.graph.nodes[nid].aliases:
+                self._index.setdefault(normalize(alias), nid)
         # Undirected non-distractor adjacency for distance/closure math.
         for nid in self.graph.nodes:
             nbrs = self.graph.neighbors(nid, include_distractors=False)

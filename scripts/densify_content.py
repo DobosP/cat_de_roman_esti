@@ -104,20 +104,46 @@ def run(dense: dict, build_version: str, note: str) -> int:
         if n["category"] not in CATEGORIES:
             die(f"new node {nid!r} category {n['category']!r} not a game category")
         sal = round(float(n["salience"]), 4)
-        nodes.append(
-            {
-                "id": nid,
-                "node_type": n["node_type"],
-                "label_ro": n["label_ro"],
-                "category": n["category"],
-                "description": n["description"],
-                "salience": sal,
-                "difficulty_tier": tier_for_salience(sal),
-                "degree": 0,
-            }
-        )
+        record = {
+            "id": nid,
+            "node_type": n["node_type"],
+            "label_ro": n["label_ro"],
+            "category": n["category"],
+            "description": n["description"],
+            "salience": sal,
+            "difficulty_tier": tier_for_salience(sal),
+            "degree": 0,
+        }
+        new_aliases = [str(a).strip() for a in n.get("aliases", []) or [] if str(a).strip()]
+        if new_aliases:
+            record["aliases"] = new_aliases
+        nodes.append(record)
         seen_new.add(nid)
     node_ids |= seen_new
+
+    # ---- merge aliases onto EXISTING nodes (ADR-0012) ----
+    # dense["aliases"] = {node_id: [surface forms]} extends a node's alias list;
+    # per-node duplicates (vs its label or existing aliases) are dropped here, and
+    # cross-node collisions are caught by the validator afterwards.
+    alias_map = dense.get("aliases", {}) or {}
+    added_aliases = 0
+    if alias_map:
+        by_id = {n["id"]: n for n in nodes}
+        for nid, incoming in alias_map.items():
+            node = by_id.get(str(nid))
+            if node is None:
+                continue
+            current = list(node.get("aliases", []) or [])
+            seen = {a.strip().casefold() for a in current}
+            seen.add(str(node["label_ro"]).strip().casefold())
+            for alias in incoming or []:
+                text = str(alias).strip()
+                if text and text.casefold() not in seen:
+                    current.append(text)
+                    seen.add(text.casefold())
+                    added_aliases += 1
+            if current:
+                node["aliases"] = current
 
     # ---- merge new edges (resolve + dedup) ----
     edge_seq = 0
@@ -270,6 +296,7 @@ def run(dense: dict, build_version: str, note: str) -> int:
     nd_mean = sum(1 for e in edges if not e["is_distractor"]) * 2 / max(1, len(nodes))
     print("densify_content: wrote both fixture copies")
     print(f"  nodes:   +{len(seen_new):<3} -> {len(nodes)}")
+    print(f"  aliases: +{added_aliases}")
     print(f"  edges:   +{added_edges:<3} -> {len(edges)}  (skipped {skipped_edges} dup/invalid)")
     print(f"  puzzles: regenerated -> {len(puzzles)}")
     print(f"  by bucket: {dict(sorted(gen_counter.items()))}")

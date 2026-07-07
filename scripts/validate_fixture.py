@@ -77,6 +77,8 @@ ERROR_CLASSES = (
     "field_shapes",
     "unique_ids",
     "node_tier_bands",
+    "alias_unique",
+    "label_style",
     "meta_counts",
     "puzzle_par",
     "puzzle_hop_band",
@@ -86,6 +88,21 @@ ERROR_CLASSES = (
     "puzzle_category_scope",
     "puzzle_distractor_shortcut",
 )
+
+# Concept labels must stay SHORT (playable, typeable): at most this many words.
+# Proper titles/official names (work/org/event/...) are exempt — they carry short
+# aliases instead. Aliases themselves always obey the cap.
+LABEL_MAX_WORDS = 5
+
+
+def normalize_text(text: str) -> str:
+    """Accent-stripped, casefolded, whitespace-collapsed form (mirrors
+    ``cat_de_roman_esti.wordgames.service.normalize`` — the resolver's key)."""
+    import unicodedata
+
+    decomposed = unicodedata.normalize("NFKD", text)
+    no_accents = "".join(c for c in decomposed if not unicodedata.combining(c))
+    return " ".join(no_accents.casefold().split())
 
 
 def tier_for_salience(salience: float) -> str:
@@ -247,10 +264,20 @@ def validate(fixture_path: str | Path = DEFAULT_FIXTURE) -> list[str]:
             errors.append(f"field_shapes: kg_nodes[{i}] is not an object")
             continue
         keys = set(n.keys())
-        if keys != NODE_FIELDS:
+        # ``aliases`` is the one OPTIONAL node field (ADR-0012): alternate exact
+        # surface forms (inflections/synonyms/short titles) the resolver accepts.
+        if keys - {"aliases"} != NODE_FIELDS:
             errors.append(
                 f"field_shapes: node {n.get('id', i)!r} has fields {sorted(keys)}, "
-                f"expected {sorted(NODE_FIELDS)} (8 fields)"
+                f"expected {sorted(NODE_FIELDS)} (8 fields, plus optional 'aliases')"
+            )
+        if "aliases" in n and (
+            not isinstance(n["aliases"], list)
+            or any(not isinstance(a, str) or not a.strip() for a in n["aliases"])
+        ):
+            errors.append(
+                f"field_shapes: node {n.get('id', i)!r} aliases must be a list of "
+                "non-empty strings"
             )
         if not isinstance(n.get("id"), str) or not n.get("id"):
             errors.append(f"field_shapes: node at index {i} has non-string/empty id")
@@ -344,6 +371,56 @@ def validate(fixture_path: str | Path = DEFAULT_FIXTURE) -> list[str]:
                 f"node_tier_bands: node {n['id']!r} salience={sal} -> tier "
                 f"{expected!r} but fixture says {n['difficulty_tier']!r}"
             )
+
+    # --- aliases resolve unambiguously (ADR-0012) -------------------------------
+    # The resolver keys on the normalized form; an alias must never collide with a
+    # node label/id (labels always win) or with another node's alias — a typed word
+    # has exactly one meaning.
+    label_owner: dict[str, str] = {}
+    for n in nodes:
+        label_owner.setdefault(normalize_text(str(n["label_ro"])), str(n["id"]))
+        label_owner.setdefault(normalize_text(str(n["id"])), str(n["id"]))
+    alias_owner: dict[str, str] = {}
+    for n in nodes:
+        for alias in n.get("aliases", []) or []:
+            key = normalize_text(str(alias))
+            if not key:
+                errors.append(f"alias_unique: node {n['id']!r} has a blank alias")
+                continue
+            owner = label_owner.get(key)
+            if owner is not None and owner != n["id"]:
+                errors.append(
+                    f"alias_unique: node {n['id']!r} alias {alias!r} collides with "
+                    f"the label/id of node {owner!r}"
+                )
+            elif owner == n["id"]:
+                errors.append(
+                    f"alias_unique: node {n['id']!r} alias {alias!r} is redundant "
+                    "with its own label/id"
+                )
+            prev = alias_owner.get(key)
+            if prev is not None and prev != n["id"]:
+                errors.append(
+                    f"alias_unique: alias {alias!r} claimed by both {prev!r} "
+                    f"and {n['id']!r}"
+                )
+            alias_owner.setdefault(key, str(n["id"]))
+
+    # --- label style: short, typeable concepts (ADR-0012) -----------------------
+    # Concept labels stay <= LABEL_MAX_WORDS words; proper titles/official names
+    # (work/org/event/...) are exempt but their aliases obey the cap too.
+    for n in nodes:
+        if n.get("node_type") == "concept" and len(str(n["label_ro"]).split()) > LABEL_MAX_WORDS:
+            errors.append(
+                f"label_style: concept {n['id']!r} label {n['label_ro']!r} exceeds "
+                f"{LABEL_MAX_WORDS} words"
+            )
+        for alias in n.get("aliases", []) or []:
+            if len(str(alias).split()) > LABEL_MAX_WORDS:
+                errors.append(
+                    f"label_style: node {n['id']!r} alias {alias!r} exceeds "
+                    f"{LABEL_MAX_WORDS} words"
+                )
 
     # --- meta counts match actual ----------------------------------------------
     counts = meta.get("counts", {}) if isinstance(meta, dict) else {}
