@@ -91,6 +91,12 @@ remains the original `easy|hard` semantic-hop game.
   ~3,427 edges, mean degree 8.0** — degree≤2 dead-ends fell 170 → 13, so Cald sau Rece
   and Lanțul stay responsive. `scripts/import_enrichment.py` re-derives the whole pack
   on any graph merge.
+- **Batch v7 (rounds 2+3, 2026-07-07)**: +867 aliases / +139 vocab nodes / +781 edges
+  (vocab gap-fill) then a full round-2 instance batch on the dense graph. Graph now
+  **~995 nodes / ~4,107 edges / 3,696 aliases**. Pack grew to **554 instances**
+  (173 cx / 198 ct / 165 lt / 18 al — Alchimie pool tripled on the denser graph;
+  ~390 approved, ~360 pending review). Known gap: universal guess-words ("mâncare",
+  "apă", "muzică", "pădure") still absent — a targeted core-vocab fleet is the next batch.
 
 ### Hardening
 - `scripts/validate_fixture.py` — stdlib CI-gate validator, **13 invariant classes** (incl.
