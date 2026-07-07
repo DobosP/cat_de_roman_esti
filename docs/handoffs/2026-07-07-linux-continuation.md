@@ -1,34 +1,48 @@
 # Handoff — curated-games content program → Linux continuation
 
-Valid until: the round-2/round-3 content batches land on `main` and Paul reviews the
-pending pool — then treat as history.
+Valid until: the core-vocab batch lands on `main` and Paul reviews the pending pool —
+then treat as history.
 
 Written 2026-07-07 on the Windows box (Claude Code session, ADR-0011 + ADR-0012 work).
+Last updated after batch v7 landed.
 
 ## Where main is
 
-- `main` @ `e80a6e7` (pushed): curated games layer (ADR-0011) + alias/play-density
-  enrichment (ADR-0012). All gates green: pytest, ruff, `validate_fixture.py`,
-  `validate_games_pack.py`, eslint, vite build.
-- Graph: ~856 nodes / ~3,427 edges / 2,829 aliases, mean degree 8.0 (`fixture-v6-enriched`).
-- Pack: 184+ approved instances (90 cx / 114 ct / 91 lt / 8 al) + ~116 `pending`.
+- `main` @ `1936c37` (pushed): curated games (ADR-0011) + alias/density (ADR-0012) +
+  batch v7 (round-2 instances + vocab gap-fill). All gates green: pytest, ruff,
+  `validate_fixture.py`, `validate_games_pack.py`, eslint, vite build.
+- Graph: **~995 nodes / ~4,107 edges / 3,696 aliases**, mean degree ~7.8.
+- Pack: **554 instances** — 173 cx / 198 ct / 165 lt / 18 al (~390 approved, ~360
+  `pending` review; Alchimie pool tripled from 7 → 18 on the dense graph).
 - Docs of record: `docs/STATUS.md`, `docs/adr/0011-*.md`, `docs/adr/0012-*.md`.
 
 ## In flight at write time (Windows session)
 
-Two codex-fleet batches were generating when this was written; the session intended to
-import + land them (check `git log origin/main` — if you see a commit mentioning
-"round-2 instances" / "vocab gap-fill v7", they LANDED and this section is history):
+**One codex-fleet batch running** — `cat-core-vocab` (run id in `/workflows`). Check
+`git log origin/main`: a commit mentioning "core-vocab" means it LANDED and this
+section is history.
 
-1. **Round-2 instances** (`cat-instances-round2`): 6 cx / 6 ct / 8 lt / 8 al per
-   category on the dense graph — meant to fatten the thin pools (alchimie 8, știință
-   conexiuni 0, meme_net lant 0).
-2. **Vocab gap-fill round 3** (`cat-vocab-round3`): ≤10 everyday guess-words/category,
-   ≤40 extra aliases/category, 30–70 edges lifting the last 63 degree≤3 nodes.
+- **Core universal guess-words** (`cat-core-vocab`): 20–30 everyday words per category
+  (mâncare/apă/pădure/muzică/biserică/masă class — the words a player types FIRST that
+  were STILL missing after v7), each with 2–4 inflection aliases and **3–6 edges to
+  existing anchor nodes** so they're findable, not islands. Verifier flags near-islands
+  (<2 edges) as `fix`. Every node carries an explicit `category` (one of the 14).
+- **Land it with:** `python scripts/import_enrichment.py --dir <scratch>/vocab4`
+  (nodes+edges+aliases → graph merge → pack re-derivation → both validators). Then
+  regenerate the mobile snapshot and run the full gate (see pipeline below).
 
-If they did NOT land: the raw outputs live only in this Windows session's scratchpad —
-**regenerate on Linux instead of hunting for them** (cheap, ~30 min of Codex): the whole
-pipeline is in the repo, see next section.
+If it did NOT land: the raw outputs live only in this Windows session's scratchpad —
+**regenerate on Linux instead of hunting for them** (~30 min of Codex). The reusable
+workflow script is saved at
+`.claude/.../workflows/scripts/cat-core-vocab-wf_bce79175-63d.js`; or just re-author the
+brief (it's short) — the whole pipeline is in the repo, see next section.
+
+### Known remaining gap this batch targets
+After v7, `svc.resolve()` still returned None for "mâncare", "apă", "muzică", "pădure",
+"biserică", "masă", "copil", "automobil" — the category workers added domain concepts but
+skipped the truly universal vocabulary. `cat-core-vocab` is the fix. After landing, smoke-
+test: `svc.resolve("mancare")` etc. should return a node, and Contexto guesses of those
+words should come back warm instead of "Nu cunosc acest concept".
 
 ## The content pipeline (all committed, OS-agnostic)
 
