@@ -16,7 +16,8 @@
 
 ## Safety
 - Never read or print secret values.
-- Do not push or merge unless Paul explicitly asks.
+- Direct merge + push to `main` is allowed once the test gate is green (owner
+  decision 2026-07-07, development phase). Never land a red suite.
 - Keep game/session fixes narrow and test-backed.
 
 ## Commands
