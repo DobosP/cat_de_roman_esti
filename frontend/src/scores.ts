@@ -15,6 +15,8 @@ export interface ScoreEntry {
   daily?: string;
   /** Difficulty tier for non-daily runs. */
   difficulty?: string;
+  /** Category/theme key when the run was category-scoped (ADR-0011). */
+  category?: string;
 }
 
 export interface GameRecord {
@@ -68,6 +70,8 @@ export interface RecordScoreOptions {
   difficulty?: string | null;
   /** YYYY-MM-DD for daily history filtering. */
   daily?: string | null;
+  /** Category/theme key for category-scoped runs. */
+  category?: string | null;
 }
 
 /** Record a finished game for `game`. New best = strictly higher score. */
@@ -88,6 +92,7 @@ export function recordScore(
     puzzleKey: puzzleKey ?? undefined,
     difficulty: options.difficulty?.trim() || undefined,
     daily: options.daily?.trim() || undefined,
+    category: options.category?.trim() || undefined,
   });
   if (!entry) return { isBest: false, isPuzzleBest: false, prev, prevPuzzle: null };
   const isBest = prev === null || score > prev.score;
@@ -242,6 +247,9 @@ function normalizeEntry(value: unknown): ScoreEntry | null {
       : {}),
     ...(typeof value.difficulty === "string" && value.difficulty.trim()
       ? { difficulty: value.difficulty.trim().slice(0, 20) }
+      : {}),
+    ...(typeof value.category === "string" && value.category.trim()
+      ? { category: value.category.trim().slice(0, 40) }
       : {}),
   };
 }

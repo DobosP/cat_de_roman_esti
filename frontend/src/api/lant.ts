@@ -38,6 +38,8 @@ export interface LantState {
   won: boolean;
   difficulty: Difficulty;
   daily?: string;
+  /** Echoed only when the game was started with an explicit category. */
+  board_category?: string;
   /** Present only when won === true. */
   score?: number;
   share?: string;
@@ -72,11 +74,14 @@ export function createLant(opts?: {
   seed?: number;
   difficulty?: Difficulty;
   daily?: string;
+  /** Curated category/theme (ADR-0011); omit for the classic full-graph ladder. */
+  category?: string;
 }): Promise<LantState> {
   const params = new URLSearchParams();
   if (opts?.seed !== undefined) params.set("seed", String(opts.seed));
   if (opts?.difficulty) params.set("difficulty", opts.difficulty);
   if (opts?.daily) params.set("daily", opts.daily);
+  if (opts?.category) params.set("category", opts.category);
   const q = params.toString() ? `?${params.toString()}` : "";
   return postJson<LantState>(`${PREFIX}/games${q}`);
 }

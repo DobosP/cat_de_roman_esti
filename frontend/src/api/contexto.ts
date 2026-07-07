@@ -56,6 +56,8 @@ export interface ContextoState {
   clue?: CategoryClue;
   /** Present only for a "Provocarea zilei" game (YYYY-MM-DD). */
   daily?: string;
+  /** Echoed only when the game was started with an explicit category. */
+  board_category?: string;
   /** Past guesses, sorted best-first by the server. */
   guesses: Guess[];
   /** Present only once won or given up. */
@@ -114,6 +116,8 @@ export interface CreateOpts {
   difficulty?: Difficulty;
   /** "YYYY-MM-DD" — start the deterministic daily challenge for that date. */
   daily?: string;
+  /** Curated category/theme (ADR-0011); omit for the classic full-graph game. */
+  category?: string;
 }
 
 /** POST /games — start a new game with a hidden secret target. */
@@ -122,6 +126,7 @@ export function createGame(opts: CreateOpts = {}): Promise<ContextoState> {
   if (opts.seed !== undefined) params.set("seed", String(opts.seed));
   if (opts.difficulty) params.set("difficulty", opts.difficulty);
   if (opts.daily) params.set("daily", opts.daily);
+  if (opts.category) params.set("category", opts.category);
   const q = params.toString();
   return postJson<ContextoState>(`${BASE}/games${q ? `?${q}` : ""}`);
 }

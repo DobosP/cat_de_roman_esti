@@ -286,6 +286,9 @@ def test_conexiuni_hides_solution_until_over() -> None:
 EXPECTED_OPERATION_IDS = {
     "meta_health",
     "meta_manifest",
+    # Additive (ADR-0011): category taxonomy + user-submitted-game intake.
+    "meta_categories",
+    "submissions_create",
     "alchimie_create_game",
     "alchimie_get_game",
     "alchimie_combine",

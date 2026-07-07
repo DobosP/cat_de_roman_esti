@@ -30,6 +30,12 @@ services:
       # `:-` defaults keep these empty (offline) when unset.
       ROEDU_API_URL: "${ROEDU_API_URL:-}"
       ROEDU_API_KEY: "${ROEDU_API_KEY:-cat-de-roman-dev}"
+      # --- User-submitted games (OPTIONAL, ADR-0011) ---------------------------
+      # Points at the mounted volume below so POST /api/submissions persists its
+      # pending queue across restarts. Unset to disable the endpoint (503).
+      CAT_SUBMISSIONS_DIR: "${CAT_SUBMISSIONS_DIR:-/data/submissions}"
+    volumes:
+      - submissions:/data/submissions
     restart: unless-stopped
     # Surface the image's own HEALTHCHECK to `docker compose ps`.
     healthcheck:
@@ -42,3 +48,6 @@ services:
       timeout: 5s
       retries: 3
       start_period: 10s
+
+volumes:
+  submissions:

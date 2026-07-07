@@ -24,6 +24,8 @@ from pydantic import BaseModel
 from rest_framework.response import Response
 
 from ..web.http import ContractAPIView, http_error, parse_body, query_int, query_str
+from .categories import category_label, is_known
+from .packs import get_pack
 from .service import SessionStore, daily_seed, get_service
 
 GAME_KEY = "alchimie"
@@ -85,6 +87,9 @@ class AlchimieSession:
     fruitless_streak: int = 0
     # Number of hints (nudges) the player has revealed; each costs a little score.
     hints_used: int = 0
+    # Player-picked board theme + curated-pack provenance (None for mined games).
+    category: str | None = None
+    pack_id: str | None = None
 
     @property
     def won(self) -> bool:
@@ -184,7 +189,10 @@ def _grow_seed_set(rng: random.Random, k: int, pool: list[str]) -> list[str] | N
 
 
 def _build_session(
-    rng: random.Random, difficulty: str = DEFAULT_DIFFICULTY, daily: str | None = None
+    rng: random.Random,
+    difficulty: str = DEFAULT_DIFFICULTY,
+    daily: str | None = None,
+    category: str | None = None,
 ) -> AlchimieSession:
     """Sample a *satisfying*, solvable instance.
 
@@ -197,13 +205,24 @@ def _build_session(
     """
     svc = get_service()
     min_gen, max_gen, seed_min, seed_max = _difficulty_params(difficulty)
+    members = set(svc.by_category(category)) if category is not None else None
+
+    def _in_scope(nid: str) -> bool:
+        return members is None or nid in members
+
     pool = [
         nid
         for nid in svc.by_salience(minimum=SEED_SALIENCE_FLOOR)
-        if svc.degree(nid) >= SEED_MIN_DEGREE
+        if svc.degree(nid) >= SEED_MIN_DEGREE and _in_scope(nid)
     ]
     if len(pool) < seed_max:
-        pool = [nid for nid in svc.all_ids() if svc.degree(nid) >= SEED_MIN_DEGREE]
+        pool = [
+            nid
+            for nid in svc.all_ids()
+            if svc.degree(nid) >= SEED_MIN_DEGREE and _in_scope(nid)
+        ]
+    if category is not None and len(pool) < seed_min:
+        raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
 
     def _finish(seeds: list[str], target: str, depth: int) -> AlchimieSession:
         session = AlchimieSession(
@@ -251,8 +270,12 @@ def _build_session(
     if best_relaxed is not None:
         return _finish(*best_relaxed)
 
-    # Last-resort fallback: relax everything over the full id pool so we never 500.
-    fallback_pool = [nid for nid in svc.all_ids() if svc.degree(nid) >= SEED_MIN_DEGREE]
+    # Last-resort fallback: relax everything over the full in-scope pool so we never 500.
+    fallback_pool = [
+        nid
+        for nid in svc.all_ids()
+        if svc.degree(nid) >= SEED_MIN_DEGREE and _in_scope(nid)
+    ]
     seeds = rng.sample(fallback_pool, min(seed_max, len(fallback_pool)))
     gen = _closure_with_generations(seeds)
     deep = [
@@ -261,6 +284,8 @@ def _build_session(
         if depth >= MIN_TARGET_GENERATION and nid not in seeds
     ]
     if not deep:
+        if category is not None:
+            raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
         raise http_error(500, "Nu am putut genera un joc solvabil.")
     target = rng.choice(deep)
     return _finish(seeds, target, gen[target])
@@ -344,8 +369,11 @@ def _share_line(session: AlchimieSession) -> str:
     # "Perfect" == solved in the optimal number of combines with no hints.
     perfect = session.moves <= session.target_depth and session.hints_used == 0
     medal = "✨" if perfect else "⚗️"
+    header = "cat_de_roman_esti · Alchimie"
+    if session.category:
+        header += f" · {category_label(session.category)}"
     lines = [
-        "cat_de_roman_esti · Alchimie",
+        header,
         f"⚗️ {session.moves} combinatii · {session.score} pct {medal}",
     ]
     if session.hints_used:
@@ -374,6 +402,8 @@ def _state_payload(game_id: str, session: AlchimieSession) -> dict[str, object]:
     }
     if session.daily:
         payload["daily"] = session.daily
+    if session.category:
+        payload["board_category"] = session.category
     if session.won:
         payload["score"] = session.score
         payload["share"] = _share_line(session)
@@ -400,13 +430,41 @@ class CreateGameView(ContractAPIView):
         seed = query_int(request, "seed")
         difficulty = query_str(request, "difficulty", DEFAULT_DIFFICULTY)
         daily = query_str(request, "daily")
+        category = query_str(request, "category")
         if difficulty not in DIFFICULTIES:
             difficulty = DEFAULT_DIFFICULTY
+        if category is not None and not is_known(category):
+            raise http_error(400, "Categorie necunoscuta.")
         if daily:
             rng = random.Random(daily_seed(daily, GAME_KEY))
+            curated = get_pack().pick_daily(
+                GAME_KEY, daily, category=category, difficulty=difficulty
+            )
         else:
             rng = random.Random(seed)
-        session = _build_session(rng, difficulty=difficulty, daily=daily)
+            curated = (
+                get_pack().pick_seeded(
+                    GAME_KEY, rng, category=category, difficulty=difficulty
+                )
+                if category is not None
+                else None
+            )
+        if curated is not None:
+            session = AlchimieSession(
+                seeds=[str(s) for s in curated.payload["seeds"]],
+                target=str(curated.payload["target"]),
+                target_depth=int(curated.payload["target_depth"]),
+                difficulty=difficulty,
+                daily=daily,
+                # Echo only a player-requested theme (curated dailies stay themeless).
+                category=category,
+                pack_id=curated.id,
+            )
+            for s in session.seeds:
+                session.add(s, None)
+        else:
+            session = _build_session(rng, difficulty=difficulty, daily=daily, category=category)
+            session.category = category
         game_id = store.create(session)
         return Response(_state_payload(game_id, session))
 

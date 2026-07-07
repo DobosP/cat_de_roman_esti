@@ -72,13 +72,20 @@ def _edge_key(src: str, dst: str, relation: str) -> tuple:
 
 
 def main() -> int:
+    if not DENSE_DATA.exists():
+        die(f"dense data not found: {DENSE_DATA}")
+    dense = json.loads(DENSE_DATA.read_text(encoding="utf-8"))
+    return run(dense, NEW_BUILD_VERSION, NEW_NOTE)
+
+
+def run(dense: dict, build_version: str, note: str) -> int:
+    """Merge a dense content batch into the fixture (both copies), regenerate the
+    puzzle layer, self-validate and roll back on failure. Reused by
+    ``import_candidates.py`` to land generated curated-content subgraphs."""
     base_raw = PACKAGE_FIXTURE.read_text(encoding="utf-8")
     tests_base = TESTS_FIXTURE.read_text(encoding="utf-8")
     data = json.loads(base_raw)
 
-    if not DENSE_DATA.exists():
-        die(f"dense data not found: {DENSE_DATA}")
-    dense = json.loads(DENSE_DATA.read_text(encoding="utf-8"))
     new_nodes_in: list[dict] = dense.get("nodes", [])
     new_edges_in: list[dict] = dense.get("edges", [])
 
@@ -242,8 +249,8 @@ def main() -> int:
     # ---- rebuild meta ----
     by_cat = dict(sorted(Counter(n["category"] for n in nodes).items()))
     pcd = dict(sorted(Counter(f"{p['category']}/{p['difficulty']}" for p in puzzles).items()))
-    data["meta"]["build_version"] = NEW_BUILD_VERSION
-    data["meta"]["note"] = NEW_NOTE
+    data["meta"]["build_version"] = build_version
+    data["meta"]["note"] = note
     data["meta"]["counts"] = {
         "nodes": len(nodes),
         "edges": len(edges),

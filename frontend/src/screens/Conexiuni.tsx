@@ -26,7 +26,8 @@ import { DifficultyPicker } from "../components/DifficultyPicker";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
 import { sound } from "../sound";
-import { categoryColor } from "../categories";
+import { categoryColor, categoryLabel } from "../categories";
+import { CategoryPicker } from "../components/CategoryPicker";
 import { bestScore } from "../scores";
 import { gameByKey } from "../games";
 import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
@@ -57,6 +58,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const [busy, setBusy] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [difficulty, setDifficulty] = useState<Difficulty>("normal");
+  const [category, setCategory] = useState<string | null>(null);
   const [recordHit, setRecordHit] = useState(false);
   const [puzzleRecordHit, setPuzzleRecordHit] = useState(false);
   const [shake, setShake] = useState(0);
@@ -81,8 +83,12 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       try {
         const s =
           mode.kind === "daily"
-            ? await conexiuniApi.create({ daily: todayLocal() })
-            : await conexiuniApi.create({ difficulty: mode.difficulty });
+            ? // Daily carries difficulty like the other games (shared board, no theme).
+              await conexiuniApi.create({ daily: todayLocal(), difficulty })
+            : await conexiuniApi.create({
+                difficulty: mode.difficulty,
+                category: category ?? undefined,
+              });
         setState(s);
         active.remember(s.game_id);
         setSelected([]);
@@ -100,7 +106,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         setLoading(false);
       }
     },
-    [active, onToast],
+    [active, onToast, category, difficulty],
   );
 
   // Solved-id set so solved tiles drop out of the grid.
@@ -174,6 +180,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       GAME_KEY,
       state.daily ? `daily-${state.daily}` : state.difficulty,
       groupKey,
+      state.board_category,
     ]);
   }, [state, finished]);
 
@@ -198,6 +205,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       puzzleKey,
       difficulty: state.difficulty,
       daily: state.daily,
+      category: state.board_category,
     });
     if (!outcome) return;
     const { isBest, isPuzzleBest } = outcome;
@@ -372,6 +380,15 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                 setDifficulty(d);
               }}
             />
+            <CategoryPicker
+              game="conexiuni"
+              value={category}
+              onChange={(key) => {
+                sound.playSelect();
+                setCategory(key);
+              }}
+              accent={DEF.accent}
+            />
           </GameIntro>
         </div>
       </div>
@@ -391,6 +408,13 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} title="Provocarea zilei" />
             )}
             <StatBadge label="DIFICULTATE" value={DIFF_LABEL[state.difficulty]} accent={DEF.accent} />
+            {state.board_category && (
+              <StatBadge
+                label="CATEGORIE"
+                value={categoryLabel(state.board_category)}
+                accent={categoryColor(state.board_category)}
+              />
+            )}
             <StatBadge
               label="VIETI"
               value={

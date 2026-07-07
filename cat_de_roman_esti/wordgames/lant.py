@@ -20,6 +20,8 @@ from pydantic import BaseModel
 from rest_framework.response import Response
 
 from ..web.http import ContractAPIView, http_error, parse_body, query_int, query_str
+from .categories import category_label, is_known
+from .packs import get_pack
 from .service import SessionStore, daily_seed, get_service, normalize
 
 GAME_KEY = "lant"
@@ -53,12 +55,11 @@ def _score_for(moves: int, optimal: int) -> int:
     return max(100, round(1000 * optimal / max(moves, optimal)))
 
 
-def _share_line(moves: int, optimal: int, daily: str | None) -> str:
-    return (
-        "cat_de_roman_esti · Lantul Cuvintelor\n"
-        f"🔗 {moves}/{optimal} mutari\n"
-        f"{daily or ''}"
-    )
+def _share_line(moves: int, optimal: int, daily: str | None, category: str | None = None) -> str:
+    header = "cat_de_roman_esti · Lantul Cuvintelor"
+    if category:
+        header += f" · {category_label(category)}"
+    return f"{header}\n🔗 {moves}/{optimal} mutari\n{daily or ''}"
 
 
 @dataclass
@@ -71,6 +72,9 @@ class LantSession:
     # The chain of node ids walked so far; chain[0] is always the start.
     chain: list[str] = field(default_factory=list)
     won: bool = False
+    # Player-picked board theme + curated-pack provenance (None for mined games).
+    category: str | None = None
+    pack_id: str | None = None
 
     @property
     def current(self) -> str:
@@ -90,30 +94,40 @@ class MoveBody(BaseModel):
 
 
 # --------------------------------------------------------------------- serializers
-def _resolve_neighbor(text: str, current: str) -> str | None:
+def _resolve_neighbor(text: str, current: str, target: str) -> str | None:
     """Resolve player text to a node, disambiguating by what is linked to ``current``.
 
     The shared index maps a normalized label to a *single* node id, so when two concepts
     share a label (e.g. two "Moldova" nodes) a literal resolve can pick the one that is
     NOT linked to the current node and a perfectly valid guess gets wrongly rejected.
-    Here we look at every node carrying the typed label and prefer one that is an actual
-    neighbour of ``current`` (excluding ``current`` itself), so disambiguation favours a
-    legal hop.
+    Here we look at every node carrying the typed label and keep the ones that are an
+    actual neighbour of ``current`` (excluding ``current`` itself). When SEVERAL
+    same-label nodes are legal hops (the dense graph has genuine homonyms), the typed
+    text is truly ambiguous — disambiguation favours the player: hop to the candidate
+    closest to the target, deterministically.
     """
     svc = get_service()
     primary = svc.resolve(text)
-    if primary is not None and primary != current and svc.link(current, primary) is not None:
-        return primary
     key = normalize(text)
     if not key:
         return primary
-    # Scan for same-label siblings that ARE a legal hop from here.
-    for nid in svc.all_ids():
-        if nid == current:
-            continue
-        if normalize(svc.label(nid)) == key and svc.link(current, nid) is not None:
-            return nid
-    return primary
+    legal = [
+        nid
+        for nid in svc.all_ids()
+        if nid != current
+        and normalize(svc.label(nid)) == key
+        and svc.link(current, nid) is not None
+    ]
+    if not legal:
+        return primary
+    if len(legal) == 1:
+        return legal[0]
+
+    def _closeness(nid: str) -> tuple[int, str]:
+        d = svc.distance(nid, target)
+        return (d if d is not None else 1_000_000, nid)
+
+    return min(legal, key=_closeness)
 
 
 def _concept(node_id: str) -> dict[str, str]:
@@ -151,9 +165,13 @@ def _state(game_id: str, session: LantSession) -> dict:
     }
     if session.daily is not None:
         state["daily"] = session.daily
+    if session.category:
+        state["board_category"] = session.category
     if session.won:
         state["score"] = _score_for(session.moves, session.optimal)
-        state["share"] = _share_line(session.moves, session.optimal, session.daily)
+        state["share"] = _share_line(
+            session.moves, session.optimal, session.daily, session.category
+        )
     return state
 
 
@@ -201,7 +219,9 @@ def _pair_score(start: str, target: str, first_hop: int, min_width: int, total: 
     return min_width * 10 + first_hop * 3 + total + salience * 4
 
 
-def _pick_pair(rng: random.Random, lo: int, hi: int) -> tuple[str, str, int]:
+def _pick_pair(
+    rng: random.Random, lo: int, hi: int, category: str | None = None
+) -> tuple[str, str, int]:
     """Pick a (start, target) whose distance is in [lo, hi].
 
     We don't take the first reachable pair: we *playtest* candidates and keep the most
@@ -210,13 +230,18 @@ def _pick_pair(rng: random.Random, lo: int, hi: int) -> tuple[str, str, int]:
     and avoids leaf (degree-1) endpoints. The search is bounded and deterministic in the
     seed, and degrades gracefully — if nothing clears the "genuinely good" bar we keep
     the best-scoring pair seen, and as a last resort accept any reachable pair.
+    With a ``category``, both endpoints stay in that category (the walk may wander).
     """
     svc = get_service()
-    candidates = [nid for nid in svc.all_ids() if svc.degree(nid) >= _MIN_ENDPOINT_DEGREE]
+    pool = svc.by_category(category) if category is not None else svc.all_ids()
+    candidates = [nid for nid in pool if svc.degree(nid) >= _MIN_ENDPOINT_DEGREE]
+    if not candidates and category is None:
+        candidates = [nid for nid in pool if svc.degree(nid) >= 1]
     if not candidates:
-        candidates = [nid for nid in svc.all_ids() if svc.degree(nid) >= 1]
-    if not candidates:
+        if category is not None:
+            raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
         raise http_error(503, "Graful nu are noduri jucabile.")
+    endpoint_ok = set(candidates)
 
     best_good: tuple[float, str, str, int] | None = None
     good_count = 0
@@ -230,7 +255,9 @@ def _pick_pair(rng: random.Random, lo: int, hi: int) -> tuple[str, str, int]:
         reachable = [
             (nid, d)
             for nid, d in dist_map.items()
-            if lo <= d <= hi and svc.degree(nid) >= _MIN_ENDPOINT_DEGREE
+            if lo <= d <= hi
+            and svc.degree(nid) >= _MIN_ENDPOINT_DEGREE
+            and nid in endpoint_ok
         ]
         if not reachable:
             continue
@@ -259,6 +286,8 @@ def _pick_pair(rng: random.Random, lo: int, hi: int) -> tuple[str, str, int]:
     if fallback is not None:
         return fallback
 
+    if category is not None:
+        raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
     raise http_error(503, "Nu am putut genera un lant valid; reincearca.")
 
 
@@ -266,16 +295,40 @@ def _pick_pair(rng: random.Random, lo: int, hi: int) -> tuple[str, str, int]:
 class CreateGameView(ContractAPIView):
     @extend_schema(operation_id="lant_create_game", tags=["lant"])
     def post(self, request):
+        """Start a game. Optional ``?category=`` prefers a curated pair for that
+        theme and otherwise mines with both endpoints inside the category; the
+        daily prefers a curated pair whenever one is approved (ADR-0011)."""
         seed = query_int(request, "seed")
         difficulty = query_str(request, "difficulty", _DEFAULT_DIFFICULTY)
         daily = query_str(request, "daily")
+        category = query_str(request, "category")
         if difficulty not in _DIFFICULTY_BANDS:
             difficulty = _DEFAULT_DIFFICULTY
+        if category is not None and not is_known(category):
+            raise http_error(400, "Categorie necunoscuta.")
         lo, hi = _DIFFICULTY_BANDS[difficulty]
         if daily is not None:
             seed = daily_seed(daily, GAME_KEY)
-        rng = random.Random(seed)
-        start, target, optimal = _pick_pair(rng, lo, hi)
+            curated = get_pack().pick_daily(
+                GAME_KEY, daily, category=category, difficulty=difficulty
+            )
+        else:
+            curated = (
+                get_pack().pick_seeded(
+                    GAME_KEY, random.Random(seed), category=category, difficulty=difficulty
+                )
+                if category is not None
+                else None
+            )
+        if curated is not None:
+            start = str(curated.payload["start"])
+            target = str(curated.payload["target"])
+            optimal = int(curated.payload["optimal"])
+            pack_id: str | None = curated.id
+        else:
+            rng = random.Random(seed)
+            start, target, optimal = _pick_pair(rng, lo, hi, category)
+            pack_id = None
         session = LantSession(
             start=start,
             target=target,
@@ -283,6 +336,9 @@ class CreateGameView(ContractAPIView):
             difficulty=difficulty,
             daily=daily,
             chain=[start],
+            # Echo only a player-requested theme (curated dailies stay themeless).
+            category=category,
+            pack_id=pack_id,
         )
         game_id = store.create(session)
         return Response(_state(game_id, session))
@@ -312,7 +368,7 @@ class MoveView(ContractAPIView):
             return Response({"ok": False, "last_error": "Scrie un concept"})
 
         prev = session.current
-        guess = _resolve_neighbor(body.text, prev)
+        guess = _resolve_neighbor(body.text, prev, session.target)
         if guess is None:
             return Response({"ok": False, "last_error": "Nu cunosc acest concept"})
 
@@ -334,7 +390,9 @@ class MoveView(ContractAPIView):
         }
         if session.won:
             result["score"] = _score_for(session.moves, session.optimal)
-            result["share"] = _share_line(session.moves, session.optimal, session.daily)
+            result["share"] = _share_line(
+                session.moves, session.optimal, session.daily, session.category
+            )
         return Response(result)
 
 

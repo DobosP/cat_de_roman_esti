@@ -25,6 +25,8 @@ import { useRecordScore } from "../hooks/useRecordScore";
 import { gameByKey } from "../games";
 import { sound } from "../sound";
 import { bestScore } from "../scores";
+import { categoryColor, categoryLabel } from "../categories";
+import { CategoryPicker } from "../components/CategoryPicker";
 import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 
 const GAME_KEY = "alchimie";
@@ -55,6 +57,7 @@ export default function Alchimie({
   const [hintIds, setHintIds] = useState<Set<string>>(new Set());
   const [lastMessage, setLastMessage] = useState<string | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>("normal");
+  const [category, setCategory] = useState<string | null>(null);
   const [isRecord, setIsRecord] = useState(false);
   const [isPuzzleRecord, setIsPuzzleRecord] = useState(false);
   const resumeAttempted = useRef(false);
@@ -139,6 +142,7 @@ export default function Alchimie({
       state.daily ? `daily-${state.daily}` : state.difficulty,
       state.target.id,
       seeds,
+      state.board_category,
     ]);
   }, [state]);
 
@@ -168,6 +172,7 @@ export default function Alchimie({
       puzzleKey,
       difficulty: state.difficulty,
       daily: state.daily,
+      category: state.board_category,
     });
     if (!outcome) return;
     const { isBest, isPuzzleBest } = outcome;
@@ -364,7 +369,7 @@ export default function Alchimie({
               </p>
             }
             startLabel="Joaca →"
-            onStart={() => void start({ difficulty })}
+            onStart={() => void start({ difficulty, category: category ?? undefined })}
             onDaily={() => void start({ daily: todayLocal() })}
             dailyLabel="Provocarea zilei"
             starting={loading}
@@ -376,6 +381,15 @@ export default function Alchimie({
                 sound.playSelect();
                 setDifficulty(id);
               }}
+            />
+            <CategoryPicker
+              game="alchimie"
+              value={category}
+              onChange={(key) => {
+                sound.playSelect();
+                setCategory(key);
+              }}
+              accent={DEF.accent}
             />
           </GameIntro>
         </div>
@@ -402,6 +416,13 @@ export default function Alchimie({
                 value={state.difficulty}
                 accent={DEF.accent}
                 title="Dificultate"
+              />
+            )}
+            {state.board_category && (
+              <StatBadge
+                label="Categorie"
+                value={categoryLabel(state.board_category)}
+                accent={categoryColor(state.board_category)}
               />
             )}
             <StatBadge label="Combinari" value={state.moves} accent={DEF.accent} />

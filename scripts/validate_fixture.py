@@ -44,6 +44,9 @@ MIXED_CATEGORY = "mixed"
 CATEGORIES = (
     "istorie", "literatura", "geografie", "personalitati",
     "arta_cultura", "stiinta", "societate", "limba",
+    # Pop-culture shelf (ADR-0011). Mirrors cat_de_roman_esti.wordgames.categories —
+    # tests/test_games_pack_invariants.py asserts the two never drift.
+    "muzica", "film_tv", "meme_net", "sport", "viata_de_roman", "gastronomie",
 )
 DIFFICULTY_TIERS = ("easy", "medium", "hard")
 GAME_MODES = ("easy", "hard")

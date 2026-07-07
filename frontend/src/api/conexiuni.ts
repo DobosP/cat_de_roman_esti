@@ -37,6 +37,8 @@ export interface ConexiuniState {
   clue_available: boolean;
   clues: ConexiuniClue[];
   daily?: string;
+  /** Echoed only when the game was started with an explicit category. */
+  board_category?: string;
   // present only once finished:
   score?: number;
   share?: string;
@@ -82,6 +84,8 @@ export interface CreateOpts {
   seed?: number;
   difficulty?: Difficulty;
   daily?: string;
+  /** Curated category/theme (ADR-0011); omit for the classic mixed board. */
+  category?: string;
 }
 
 /** POST /games — start a new board. */
@@ -90,6 +94,7 @@ export function createConexiuni(opts: CreateOpts = {}): Promise<ConexiuniState> 
   if (opts.seed !== undefined) q.set("seed", String(opts.seed));
   if (opts.difficulty) q.set("difficulty", opts.difficulty);
   if (opts.daily) q.set("daily", opts.daily);
+  if (opts.category) q.set("category", opts.category);
   const qs = q.toString();
   return postJson<ConexiuniState>(`${BASE}/games${qs ? `?${qs}` : ""}`);
 }

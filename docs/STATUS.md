@@ -1,7 +1,7 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-07-06. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-06_
+_As of 2026-07-07. Update whenever `main` or the test baseline moves._
+_Last verified: 2026-07-07_
 
 ## Phase
 
@@ -67,6 +67,23 @@ remains the original `easy|hard` semantic-hop game.
   invariants for roedu-mobile, including Contexto rank-bearing guesses with pre-reveal
   target id/label/solution absence; exports via `scripts/export_openapi.py` and
   `scripts/export_mobile_app_pack.py` (ADR-0006). Guarded by mobile/app-pack tests.
+
+### Curated games layer (ADR-0011, 2026-07-07)
+- `fixtures/games_pack.json` (+ byte-identical tests copy): curated instances per game with
+  `category` / `source` (`user|ai|ai_corpus`) / `status`; only `approved` served. Taxonomy =
+  8 KG categories + pop-culture shelf (`muzica`, `film_tv`, `meme_net`, `sport`,
+  `viata_de_roman`, `gastronomie`) — single source `wordgames/categories.py`.
+- All four create endpoints take additive `?category=`: curated-first, mined fallback
+  (Conexiuni = curated-only per category, with authored `group_labels`); shared daily goes
+  curated via rendezvous hash once a pool reaches 8. `GET /api/categories` feeds the SPA's
+  CategoryPicker. `POST /api/submissions` (opt-in via `CAT_SUBMISSIONS_DIR`, pending queue)
+  + `scripts/review_submissions.py` promote/reject. CI gate: `scripts/validate_games_pack.py`.
+- **Content batch v5 (2026-07-07)**: codex-fleet generated, dual-verified (factual +
+  game-quality Sonnet lenses), imported via `scripts/import_candidates.py` (re-derives all
+  numbers on the merged graph; blocks cascade; factual-fix demotes to pending). Fixture now
+  **~660 nodes / ~1870 edges / 168 puzzles** (`fixture-v5-pop`); pack ships **184 approved**
+  (90 Conexiuni / 114 Contexto / 94 Lanț / 9 Alchimie) + 116 pending for review. All 6 pop
+  categories playable in all four games. Lanț text-resolve is now target-aware for homonyms.
 
 ### Hardening
 - `scripts/validate_fixture.py` — stdlib CI-gate validator, **13 invariant classes** (incl.

@@ -21,6 +21,13 @@ export const CATEGORY_STYLES: Record<string, CategoryStyle> = {
   societate: { label: "Societate", color: "#ffd166", glow: "#ffe6a8" },
   limba: { label: "Limba", color: "#7bdff2", glow: "#b8eef9" },
   mixed: { label: "Mixt", color: "#b8b8d1", glow: "#e0e0f0" },
+  // pop-culture shelf (ADR-0011)
+  muzica: { label: "Muzică", color: "#ff6f91", glow: "#ffb3c6" },
+  film_tv: { label: "Film & Seriale", color: "#7c83ff", glow: "#c0c4ff" },
+  meme_net: { label: "Internet & Meme", color: "#b5e48c", glow: "#d9f7be" },
+  sport: { label: "Sport", color: "#f95738", glow: "#ffb59f" },
+  viata_de_roman: { label: "Viața de român", color: "#e07a5f", glow: "#f2b9a7" },
+  gastronomie: { label: "Gastronomie", color: "#d4a373", glow: "#ecd5b8" },
 };
 
 const FALLBACK: CategoryStyle = { label: "Necunoscut", color: "#9aa3b2", glow: "#c9d0db" };
