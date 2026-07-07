@@ -84,6 +84,13 @@ remains the original `easy|hard` semantic-hop game.
   **~660 nodes / ~1870 edges / 168 puzzles** (`fixture-v5-pop`); pack ships **184 approved**
   (90 Conexiuni / 114 Contexto / 94 Lanț / 9 Alchimie) + 116 pending for review. All 6 pop
   categories playable in all four games. Lanț text-resolve is now target-aware for homonyms.
+- **Alias + play-density batch v6 (ADR-0012, 2026-07-07)**: every node carries exact alias
+  surface forms (inflections/synonyms/short titles — **2,829 aliases**, resolver-indexed,
+  labels win; `alias_unique` + `label_style` validator classes, concepts ≤5 words); 161
+  guess-vocabulary hub nodes + ~1,575 intuitive edges lift the graph to **~856 nodes /
+  ~3,427 edges, mean degree 8.0** — degree≤2 dead-ends fell 170 → 13, so Cald sau Rece
+  and Lanțul stay responsive. `scripts/import_enrichment.py` re-derives the whole pack
+  on any graph merge.
 
 ### Hardening
 - `scripts/validate_fixture.py` — stdlib CI-gate validator, **13 invariant classes** (incl.
