@@ -34,15 +34,26 @@ def _strings(obj: object) -> set[str]:
 
 
 # --------------------------------------------------------------------------- pack
-def test_starter_pack_loads_and_pools_filter():
+def test_pack_loads_and_pools_filter():
     pack = get_pack()
-    assert pack.counts() == {"conexiuni": 2, "contexto": 2, "lant": 2, "alchimie": 1}
-    assert [i.id for i in pack.pool("conexiuni", category="istorie")] == ["cx_istorie_001"]
-    assert pack.pool("conexiuni", category="muzica") == []
-    assert pack.pool("contexto", category="istorie", difficulty="greu") == []
+    counts = pack.counts()
+    # The bundled pack always carries at least the istorie/geografie starters.
+    assert counts["conexiuni"] >= 1 and counts["contexto"] >= 1
+    assert all(i.approved for game in counts for i in pack.pool(game))
+    istorie = pack.pool("conexiuni", category="istorie")
+    assert istorie and all(i.category == "istorie" for i in istorie)
+    assert "cx_istorie_001" in {i.id for i in istorie}
+    for i in pack.pool("contexto", difficulty="usor"):
+        assert i.difficulty == "usor"
 
 
 # ---------------------------------------------------------------------- conexiuni
+def _pack_item(game: str, item_id: str):
+    matches = [i for i in get_pack().pool(game) if i.id == item_id]
+    assert matches, f"pack item {item_id} not found"
+    return matches[0]
+
+
 def test_conexiuni_curated_board_by_category():
     from cat_de_roman_esti.wordgames.conexiuni import store
 
@@ -51,11 +62,12 @@ def test_conexiuni_curated_board_by_category():
     assert body["board_category"] == "istorie"
     assert len(body["tiles"]) == 16
     session = store.get(body["game_id"])
-    assert session.pack_id == "cx_istorie_001"
-    assert session.group_labels["voievozi"] == "Voievozi medievali"
+    item = _pack_item("conexiuni", session.pack_id)
+    assert item.category == "istorie"
+    assert session.group_labels == item.payload["group_labels"]
     # Authored labels and group keys stay reveal-gated pre-terminal.
     public = _strings(body)
-    for hidden in ("Voievozi medievali", "Lumea dacica", "voievozi", "dacia"):
+    for hidden in [*session.group_labels.values(), *session.groups.keys()]:
         assert hidden not in public
 
 
@@ -66,6 +78,7 @@ def test_conexiuni_curated_solution_reveals_authored_labels():
     body = c.post("/api/wordgames/conexiuni/games?seed=5&category=istorie").json()
     gid = body["game_id"]
     session = store.get(gid)
+    authored = set(session.group_labels.values())
     for ids in session.groups.values():
         body = c.post(
             f"/api/wordgames/conexiuni/games/{gid}/guess",
@@ -74,29 +87,38 @@ def test_conexiuni_curated_solution_reveals_authored_labels():
         ).json()
     assert body["won"] is True
     labels = {group["label"] for group in body["solution"]}
-    assert labels == {
-        "Voievozi medievali",
-        "Conducatori ai Romaniei moderne",
-        "Lumea dacica",
-        "Momente ale Unirii",
-    }
+    assert labels == authored
     assert "Istorie" in body["share"]
 
 
 def test_conexiuni_unknown_category_400_and_empty_category_503():
     c = Client()
     assert c.post("/api/wordgames/conexiuni/games?category=nope").status_code == 400
-    assert c.post("/api/wordgames/conexiuni/games?category=muzica").status_code == 503
+    # A known category with no approved boards fails closed with a clear message.
+    empty = next(
+        (
+            key
+            for key in ("muzica", "film_tv", "meme_net", "sport", "societate", "limba")
+            if not get_pack().pool("conexiuni", category=key)
+        ),
+        None,
+    )
+    if empty is not None:
+        assert c.post(f"/api/wordgames/conexiuni/games?category={empty}").status_code == 503
 
 
-def test_daily_stays_mined_while_curated_pool_is_thin():
+def test_daily_curated_floor_matches_pool_size():
     from cat_de_roman_esti.wordgames.conexiuni import store
+    from cat_de_roman_esti.wordgames.packs import CURATED_DAILY_MIN_POOL
 
     c = Client()
-    body = c.post("/api/wordgames/conexiuni/games?daily=2026-07-07").json()
-    # Starter pack has 1 board per category — far below CURATED_DAILY_MIN_POOL,
-    # so the shared daily keeps the historical mined behavior (variety guard).
-    assert store.get(body["game_id"]).pack_id is None
+    body = c.post("/api/wordgames/conexiuni/games?daily=2026-07-07&difficulty=normal").json()
+    session = store.get(body["game_id"])
+    pool = get_pack().pool("conexiuni", difficulty="normal")
+    if len(pool) >= CURATED_DAILY_MIN_POOL:
+        assert session.pack_id is not None  # deep pool -> curated daily
+    else:
+        assert session.pack_id is None  # thin pool -> historical mined daily
 
 
 def test_daily_prefers_curated_once_the_pool_is_deep(monkeypatch):
@@ -139,18 +161,20 @@ def test_contexto_curated_target_by_category_stays_hidden():
     body = c.post("/api/wordgames/contexto/games?seed=1&category=istorie").json()
     assert body["board_category"] == "istorie"
     session = store.get(body["game_id"])
-    assert session.pack_id == "ct_istorie_001"
-    assert session.target == "n_stefan_cel_mare"
-    assert "n_stefan_cel_mare" not in _strings(body)
+    item = _pack_item("contexto", session.pack_id)
+    assert session.target == item.payload["target"]
+    assert session.target not in _strings(body)
 
 
-def test_contexto_mined_fallback_stays_inside_category():
-    from cat_de_roman_esti.wordgames.contexto import store
+def test_contexto_mined_fallback_stays_inside_category(monkeypatch):
+    from cat_de_roman_esti.wordgames import contexto
+    from cat_de_roman_esti.wordgames.packs import GamesPack
     from cat_de_roman_esti.wordgames.service import get_service
 
+    monkeypatch.setattr(contexto, "get_pack", lambda: GamesPack([]))  # force mining
     c = Client()
     body = c.post("/api/wordgames/contexto/games?seed=7&category=literatura").json()
-    session = store.get(body["game_id"])
+    session = contexto.store.get(body["game_id"])
     assert session.pack_id is None
     assert session.target in set(get_service().by_category("literatura"))
 
@@ -163,20 +187,21 @@ def test_lant_curated_pair_by_category():
     body = c.post("/api/wordgames/lant/games?seed=3&category=istorie").json()
     assert body["board_category"] == "istorie"
     session = store.get(body["game_id"])
-    assert session.pack_id == "lt_istorie_001"
-    pack_item = get_pack().pool("lant", category="istorie")[0]
-    assert session.start == pack_item.payload["start"]
-    assert session.target == pack_item.payload["target"]
-    assert session.optimal == pack_item.payload["optimal"]
+    item = _pack_item("lant", session.pack_id)
+    assert session.start == item.payload["start"]
+    assert session.target == item.payload["target"]
+    assert session.optimal == item.payload["optimal"]
 
 
-def test_lant_mined_fallback_keeps_endpoints_in_category():
-    from cat_de_roman_esti.wordgames.lant import store
+def test_lant_mined_fallback_keeps_endpoints_in_category(monkeypatch):
+    from cat_de_roman_esti.wordgames import lant
+    from cat_de_roman_esti.wordgames.packs import GamesPack
     from cat_de_roman_esti.wordgames.service import get_service
 
+    monkeypatch.setattr(lant, "get_pack", lambda: GamesPack([]))  # force mining
     c = Client()
     body = c.post("/api/wordgames/lant/games?seed=9&category=stiinta").json()
-    session = store.get(body["game_id"])
+    session = lant.store.get(body["game_id"])
     members = set(get_service().by_category("stiinta"))
     assert session.pack_id is None
     assert session.start in members and session.target in members
@@ -191,10 +216,9 @@ def test_alchimie_curated_instance_by_category():
     assert body["board_category"] == "istorie"
     assert body["target"]["id"] is None  # still hidden pre-win
     session = store.get(body["game_id"])
-    pack_item = get_pack().pool("alchimie", category="istorie")[0]
-    assert session.pack_id == "al_istorie_001"
-    assert session.seeds == pack_item.payload["seeds"]
-    assert session.target_depth == pack_item.payload["target_depth"]
+    item = _pack_item("alchimie", session.pack_id)
+    assert session.seeds == item.payload["seeds"]
+    assert session.target_depth == item.payload["target_depth"]
 
 
 # -------------------------------------------------------------------- /api/categories
@@ -207,13 +231,13 @@ def test_categories_endpoint_reports_taxonomy_and_availability():
     assert by_key["istorie"]["kind"] == "serious"
     # istorie: curated everywhere -> every game available.
     assert all(by_key["istorie"]["available"].values())
-    assert by_key["istorie"]["curated"]["conexiuni"] == 1
-    # muzica: no nodes, no curated content yet -> nothing available.
-    assert not any(by_key["muzica"]["available"].values())
-    assert by_key["muzica"]["node_count"] == 0
-    # literatura: no curated boards, but minable for the three minable games.
-    assert by_key["literatura"]["available"]["conexiuni"] is False
-    assert by_key["literatura"]["available"]["contexto"] is True
+    assert by_key["istorie"]["curated"]["conexiuni"] >= 1
+    # The serving rule itself: Conexiuni availability == an approved curated board
+    # exists (it cannot be mined per-category); counts mirror the loaded pack.
+    pack = get_pack()
+    for key, entry in by_key.items():
+        assert entry["available"]["conexiuni"] == (entry["curated"]["conexiuni"] > 0)
+        assert entry["curated"]["conexiuni"] == len(pack.pool("conexiuni", category=key))
 
 
 # ------------------------------------------------------------------- /api/submissions
