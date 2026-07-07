@@ -53,6 +53,15 @@ from cat_de_roman_esti.wordgames.service import WordGameService  # noqa: E402
 
 PACK_COPIES = (validate_games_pack.PACKAGE_PACK, validate_games_pack.TESTS_PACK)
 PREFIX = {"conexiuni": "cx", "contexto": "ct", "lant": "lt", "alchimie": "al"}
+
+# Generated nodes that duplicate an existing concept under another id: the new node
+# definition is dropped and every reference (edges, tiles, targets, seeds) is remapped
+# to the canonical id, so the graph never grows same-label twins of one concept.
+DUPLICATE_ALIASES = {
+    "n_ftv_cristian_mungiu": "n_cristian_mungiu",
+    "n_net_lasa_ca_merge_si_asa": "n_vdr_lasa_ca_merge",
+}
+
 LANT_BANDS = {"usor": (2, 3), "normal": (3, 4), "greu": (4, 6)}
 ALCH_BANDS = {"usor": (2, 2), "normal": (2, 3), "greu": (3, 5)}
 BUILD_VERSION = "fixture-v5-pop"
@@ -65,6 +74,32 @@ NOTE = (
 
 def _load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _apply_aliases(cand: dict) -> dict:
+    """Remap DUPLICATE_ALIASES ids everywhere and drop the aliased node definitions."""
+    if not DUPLICATE_ALIASES:
+        return cand
+
+    def rm(value: object) -> str:
+        return DUPLICATE_ALIASES.get(str(value), str(value))
+
+    cand["nodes"] = [
+        n for n in cand.get("nodes", []) or [] if str(n.get("id")) not in DUPLICATE_ALIASES
+    ]
+    for e in cand.get("edges", []) or []:
+        e["src"], e["dst"] = rm(e.get("src")), rm(e.get("dst"))
+    for inst in cand.get("conexiuni", []) or []:
+        for g in inst.get("groups") or []:
+            g["tiles"] = [rm(t) for t in (g.get("tiles") or [])]
+    for inst in cand.get("contexto", []) or []:
+        inst["target"] = rm(inst.get("target"))
+    for inst in cand.get("lant", []) or []:
+        inst["start"], inst["target"] = rm(inst.get("start")), rm(inst.get("target"))
+    for inst in cand.get("alchimie", []) or []:
+        inst["seeds"] = [rm(s) for s in (inst.get("seeds") or [])]
+        inst["target"] = rm(inst.get("target"))
+    return cand
 
 
 def _band_for(actual: int, declared: str, bands: dict[str, tuple[int, int]]) -> str | None:
@@ -114,7 +149,7 @@ def main(argv: list[str]) -> int:
 
     for cat in categories:
         cdir = gen_dir / cat
-        cand = _load(cdir / "candidates.json")
+        cand = _apply_aliases(_load(cdir / "candidates.json"))
         fpath = cdir / "verify_factual.json"
         qpath = cdir / "verify_quality.json"
         factual = _load(fpath) if fpath.exists() else {}

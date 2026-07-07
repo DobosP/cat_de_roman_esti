@@ -78,6 +78,12 @@ remains the original `easy|hard` semantic-hop game.
   curated via rendezvous hash once a pool reaches 8. `GET /api/categories` feeds the SPA's
   CategoryPicker. `POST /api/submissions` (opt-in via `CAT_SUBMISSIONS_DIR`, pending queue)
   + `scripts/review_submissions.py` promote/reject. CI gate: `scripts/validate_games_pack.py`.
+- **Content batch v5 (2026-07-07)**: codex-fleet generated, dual-verified (factual +
+  game-quality Sonnet lenses), imported via `scripts/import_candidates.py` (re-derives all
+  numbers on the merged graph; blocks cascade; factual-fix demotes to pending). Fixture now
+  **~660 nodes / ~1870 edges / 168 puzzles** (`fixture-v5-pop`); pack ships **184 approved**
+  (90 Conexiuni / 114 Contexto / 94 Lanț / 9 Alchimie) + 116 pending for review. All 6 pop
+  categories playable in all four games. Lanț text-resolve is now target-aware for homonyms.
 
 ### Hardening
 - `scripts/validate_fixture.py` — stdlib CI-gate validator, **13 invariant classes** (incl.

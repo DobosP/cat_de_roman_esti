@@ -94,30 +94,40 @@ class MoveBody(BaseModel):
 
 
 # --------------------------------------------------------------------- serializers
-def _resolve_neighbor(text: str, current: str) -> str | None:
+def _resolve_neighbor(text: str, current: str, target: str) -> str | None:
     """Resolve player text to a node, disambiguating by what is linked to ``current``.
 
     The shared index maps a normalized label to a *single* node id, so when two concepts
     share a label (e.g. two "Moldova" nodes) a literal resolve can pick the one that is
     NOT linked to the current node and a perfectly valid guess gets wrongly rejected.
-    Here we look at every node carrying the typed label and prefer one that is an actual
-    neighbour of ``current`` (excluding ``current`` itself), so disambiguation favours a
-    legal hop.
+    Here we look at every node carrying the typed label and keep the ones that are an
+    actual neighbour of ``current`` (excluding ``current`` itself). When SEVERAL
+    same-label nodes are legal hops (the dense graph has genuine homonyms), the typed
+    text is truly ambiguous — disambiguation favours the player: hop to the candidate
+    closest to the target, deterministically.
     """
     svc = get_service()
     primary = svc.resolve(text)
-    if primary is not None and primary != current and svc.link(current, primary) is not None:
-        return primary
     key = normalize(text)
     if not key:
         return primary
-    # Scan for same-label siblings that ARE a legal hop from here.
-    for nid in svc.all_ids():
-        if nid == current:
-            continue
-        if normalize(svc.label(nid)) == key and svc.link(current, nid) is not None:
-            return nid
-    return primary
+    legal = [
+        nid
+        for nid in svc.all_ids()
+        if nid != current
+        and normalize(svc.label(nid)) == key
+        and svc.link(current, nid) is not None
+    ]
+    if not legal:
+        return primary
+    if len(legal) == 1:
+        return legal[0]
+
+    def _closeness(nid: str) -> tuple[int, str]:
+        d = svc.distance(nid, target)
+        return (d if d is not None else 1_000_000, nid)
+
+    return min(legal, key=_closeness)
 
 
 def _concept(node_id: str) -> dict[str, str]:
@@ -358,7 +368,7 @@ class MoveView(ContractAPIView):
             return Response({"ok": False, "last_error": "Scrie un concept"})
 
         prev = session.current
-        guess = _resolve_neighbor(body.text, prev)
+        guess = _resolve_neighbor(body.text, prev, session.target)
         if guess is None:
             return Response({"ok": False, "last_error": "Nu cunosc acest concept"})
 
