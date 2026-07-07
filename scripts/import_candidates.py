@@ -112,6 +112,43 @@ def _band_for(actual: int, declared: str, bands: dict[str, tuple[int, int]]) -> 
     return None
 
 
+def rederive_existing_items(pack: dict, svc, report: list[str]) -> dict[str, list[dict]]:
+    """Re-derive every pack item's graph-dependent numbers on the CURRENT graph.
+
+    New edges shorten BFS distances and deepen combine closures, so Lant optimal /
+    Alchimie target_depth must be recomputed after any graph merge; items that no
+    longer hold a playable shape are dropped (reported). Shared by
+    ``import_candidates`` and ``import_enrichment``.
+    """
+    survivors: dict[str, list[dict]] = {g: [] for g in GAME_KINDS}
+    for game in GAME_KINDS:
+        for rec in pack.get(game, []):
+            rec = dict(rec)
+            if game == "lant":
+                actual = svc.distance(str(rec["start"]), str(rec["target"]))
+                band = _band_for(actual, str(rec["difficulty"]), LANT_BANDS) if actual else None
+                if band is None:
+                    report.append(f"DROPPED {rec['id']}: distance now {actual} (out of band)")
+                    continue
+                rec["optimal"], rec["difficulty"] = actual, band
+            elif game == "alchimie":
+                depth = _closure_generations(svc, [str(s) for s in rec["seeds"]]).get(
+                    str(rec["target"])
+                )
+                band = _band_for(depth, str(rec["difficulty"]), ALCH_BANDS) if depth else None
+                if band is None or _opening_pairs(svc, [str(s) for s in rec["seeds"]]) < 2:
+                    report.append(f"DROPPED {rec['id']}: closure depth now {depth}")
+                    continue
+                rec["target_depth"], rec["difficulty"] = depth, band
+            if validate_envelope(rec, game) or (
+                rec.get("status") == "approved" and validate_payload(rec, game, svc)
+            ):
+                report.append(f"DROPPED {rec['id']}: no longer validates on merged graph")
+                continue
+            survivors[game].append(rec)
+    return survivors
+
+
 def _instance_refs(issues: list[dict], game: str) -> dict[int, str]:
     """Map instance index -> worst severity for refs like 'conexiuni[3]'."""
     out: dict[int, str] = {}
@@ -211,32 +248,7 @@ def main(argv: list[str]) -> int:
     pack = json.loads(pack_originals[validate_games_pack.PACKAGE_PACK].decode("utf-8"))
 
     # Existing items: re-derive graph-dependent numbers; drop what no longer holds.
-    survivors: dict[str, list[dict]] = {g: [] for g in GAME_KINDS}
-    for game in GAME_KINDS:
-        for rec in pack.get(game, []):
-            rec = dict(rec)
-            if game == "lant":
-                actual = svc.distance(str(rec["start"]), str(rec["target"]))
-                band = _band_for(actual, str(rec["difficulty"]), LANT_BANDS) if actual else None
-                if band is None:
-                    report.append(f"DROPPED {rec['id']}: distance now {actual} (out of band)")
-                    continue
-                rec["optimal"], rec["difficulty"] = actual, band
-            elif game == "alchimie":
-                depth = _closure_generations(svc, [str(s) for s in rec["seeds"]]).get(
-                    str(rec["target"])
-                )
-                band = _band_for(depth, str(rec["difficulty"]), ALCH_BANDS) if depth else None
-                if band is None or _opening_pairs(svc, [str(s) for s in rec["seeds"]]) < 2:
-                    report.append(f"DROPPED {rec['id']}: closure depth now {depth}")
-                    continue
-                rec["target_depth"], rec["difficulty"] = depth, band
-            if validate_envelope(rec, game) or (
-                rec.get("status") == "approved" and validate_payload(rec, game, svc)
-            ):
-                report.append(f"DROPPED {rec['id']}: no longer validates on merged graph")
-                continue
-            survivors[game].append(rec)
+    survivors = rederive_existing_items(pack, svc, report)
 
     counters = {g: len(survivors[g]) for g in GAME_KINDS}
     stats = {"approved": 0, "pending": 0, "skipped": 0}
