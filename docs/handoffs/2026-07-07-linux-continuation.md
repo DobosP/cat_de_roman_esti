@@ -6,6 +6,22 @@ then treat as history.
 Written 2026-07-07 on the Windows box (Claude Code session, ADR-0011 + ADR-0012 work).
 Last updated after batch v7 landed.
 
+## How the graph travels between machines (Windows ⇄ Linux)
+
+**The graph IS data committed to this repo — it travels through git, not the machine.**
+- The whole graph is four tracked files: `cat_de_roman_esti/fixtures/kg_sample.json` +
+  `tests/fixtures/kg_sample.json` (KG: nodes/edges/aliases) and the two
+  `fixtures/games_pack.json` copies (curated games). All pushed to `origin/main`.
+- On Linux: `git pull` gives you the **byte-identical** graph. No machine-local state,
+  no export step. Same when you return to this Windows box later.
+- **What does NOT travel:** the raw Codex fleet outputs (`candidates.json` etc.) live in
+  the Windows session's scratchpad (`%TEMP%\claude\...\<session-id>\scratchpad`), which is
+  session- and machine-local. A batch only persists once it is IMPORTED into the fixture
+  and committed. So: land fleets before relying on them; never plan to `git pull` raw
+  fleet output — regenerate it instead (cheap, reproducible; see the pipeline below).
+- The importers write BOTH copies of each fixture and both are validated as byte-identical
+  — never hand-edit one copy.
+
 ## Where main is
 
 - `main` @ `1936c37` (pushed): curated games (ADR-0011) + alias/density (ADR-0012) +
