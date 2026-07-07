@@ -122,22 +122,35 @@ def main(argv: list[str]) -> int:
         issues = list(factual.get("issues", []))
 
         node_ids_here = {str(n["id"]) for n in cand.get("nodes", [])}
+        blocked_edges: set[tuple[str, str]] = set()
         for issue in issues:
             ref = str(issue.get("ref", ""))
-            if issue.get("severity") == "block" and ref in node_ids_here:
+            severity = issue.get("severity")
+            edge_ref = re.search(r"(\S+?)\s*->\s*(\S+)", ref)
+            if severity == "block" and ref in node_ids_here:
                 blocked_nodes.add(ref)
                 report.append(f"BLOCKED node {ref} ({cat}): {issue.get('issue')}")
-            elif issue.get("severity") == "fix":
+            elif severity == "block" and edge_ref:
+                blocked_edges.add((edge_ref.group(1), edge_ref.group(2)))
+                report.append(f"BLOCKED edge {ref} ({cat}): {issue.get('issue')}")
+            elif severity == "fix":
                 report.append(
                     f"REVIEW ({cat}) {ref}: {issue.get('issue')} -> {issue.get('correction')}"
                 )
 
-        kept_nodes = [n for n in cand.get("nodes", []) if str(n["id"]) not in blocked_nodes]
-        kept_edges = [
-            e
-            for e in cand.get("edges", [])
-            if str(e.get("src")) not in blocked_nodes and str(e.get("dst")) not in blocked_nodes
+        def _edge_ok(e: dict, blocked_pairs: set[tuple[str, str]] = blocked_edges) -> bool:
+            src, dst = str(e.get("src")), str(e.get("dst"))
+            if src in blocked_nodes or dst in blocked_nodes:
+                return False
+            return (src, dst) not in blocked_pairs and (dst, src) not in blocked_pairs
+
+        # The generator emits nodes without a category (it is implicit per file).
+        kept_nodes = [
+            {**n, "category": str(n.get("category") or cat)}
+            for n in cand.get("nodes", [])
+            if str(n["id"]) not in blocked_nodes
         ]
+        kept_edges = [e for e in cand.get("edges", []) if _edge_ok(e)]
         all_nodes.extend(kept_nodes)
         all_edges.extend(kept_edges)
 
@@ -217,6 +230,10 @@ def main(argv: list[str]) -> int:
                 if verdict == "drop" or factual_flags.get(idx) == "block":
                     stats["skipped"] += 1
                     continue
+                # A factual 'fix' flag demotes a keep to pending: only items that are
+                # BOTH quality-kept and factually clean ship as approved.
+                if factual_flags.get(idx) == "fix":
+                    verdict = "fix"
                 if game == "conexiuni":
                     groups_in = inst.get("groups") or []
                     tiles = [str(t) for g in groups_in for t in (g.get("tiles") or [])]
