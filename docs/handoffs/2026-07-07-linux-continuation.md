@@ -37,19 +37,21 @@ Last updated after batch v7 landed.
   `scripts/import_candidates.py --skip-merge` (instance-only, no graph change).
 - Docs of record: `docs/STATUS.md`, `docs/adr/0011-*.md`, `docs/adr/0012-*.md`.
 
-## ⚠️ Alchimie is degraded on the dense graph (needs a design fix before growing its pool)
+## ✅ Alchimie fixed — category-scoped combines (ADR-0013, batch v10)
 
-The combine-closure (`_closure_generations`) now reaches **~the whole graph (1,299 of 1,304
-nodes) from 6 seeds** — mean degree 8 means common-neighbors cascade everywhere. Consequences:
-(1) every target is craftable in ~2 generations, so the game loses its "deliberate steps"
-structure and becomes trivial; (2) each closure takes ~1–2s, so validating/mining Alchimie is
-slow (a batch of 140 timed out; runtime `_build_session` mining fallback is also slow). v9
-therefore **dropped 140 new Alchimie candidates** and kept only the 15 existing curated ones.
-**Fix options (pick one before minting more Alchimie):** compute the closure over the
-node's CATEGORY subgraph instead of the full graph (restores sparsity + speed); or cap
-closure size / generation depth; or gate Alchimie combines to stronger edges only
-(`strength ≥ τ`). This is a `wordgames/alchimie.py` + `wordgames/packs.py` change, then a
-category-scoped Alchimie generation round. Until then Alchimie ships its 15 curated games.
+RESOLVED. The dense-graph closure explosion (1,299 nodes / ~1.5s → trivial+slow) is fixed:
+combines are now scoped to the game's category via
+`WordGameService.common_neighbors(a, b, category=…)`. Closure is ~90 nodes / 0.005s with
+targets spread across generations 1–5. Every Alchimie game is themed (mined games pick a
+category); `AlchimieSession.category` is always set + echoed (Alchimie shows the target, so
+the theme isn't secret). Pool regrown **9 → 48 approved** via algorithmically-minted,
+quality-judged scoped instances (mint = repeated `_build_session`, then a Codex quality
+pass). Closure math is mirrored in `wordgames/alchimie.py` (runtime) and `wordgames/packs.py`
+(validation) — both take `category`; keep them in lockstep.
+
+Perf note: `import_candidates --skip-merge` now takes ~3 min mostly because the Contexto
+re-derivation runs a full `distances_from` BFS per item (275 items). Fine for now; if it
+grows, cache per-target distance maps or skip re-deriving unchanged Contexto targets.
 
 ## In flight at write time (Windows session)
 

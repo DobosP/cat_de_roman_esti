@@ -113,6 +113,13 @@ remains the original `easy|hard` semantic-hop game.
   structure AND closure validation is slow. 140 new Alchimie candidates were dropped; the
   15 curated ones stay. Alchimie needs a design fix (closure over the CATEGORY subgraph, or
   a size cap) before its pool grows — see the handoff.
+- **Batch v10 (ADR-0013, 2026-07-07) — Alchimie fixed.** Combines are now category-scoped:
+  `common_neighbors(a,b,category=…)` restricts the closure to a theme (~90 nodes / 0.005s
+  vs the whole graph / 1.5s), so targets regain real depth (gens 1–5). Every Alchimie game
+  is themed; mined games pick a category. Pack re-derived under scoping (4 legacy dropped),
+  then the pool regrown from **9 → 48 approved** (+48 pending) via algorithmically-minted,
+  quality-judged scoped instances. Pack now **818 instances / 620 approved**. All four games
+  are now healthy on the dense graph.
 
 ### Hardening
 - `scripts/validate_fixture.py` — stdlib CI-gate validator, **15 invariant classes** (incl.
