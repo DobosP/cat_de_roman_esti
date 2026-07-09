@@ -97,6 +97,12 @@ remains the original `easy|hard` semantic-hop game.
   (173 cx / 198 ct / 165 lt / 18 al — Alchimie pool tripled on the denser graph;
   ~390 approved, ~360 pending review). Known gap: universal guess-words ("mâncare",
   "apă", "muzică", "pădure") still absent — a targeted core-vocab fleet is the next batch.
+- **Batch v8 core-vocab (2026-07-07)**: +309 everyday guess-word nodes / +842 aliases /
+  +1,294 edges wired to anchors — the universal words a player types first ("mâncare",
+  "apă", "pădure", "muzică", "biserică", "masă", "copil"…) now RESOLVE and come back warm
+  in Cald sau Rece (verified). Graph **~1,304 nodes / ~5,400 edges / 4,538 aliases**.
+  Perf: `densify_content` mixed-bucket puzzle regen is now capped (MIXED_POOL_CAP) so
+  imports stay ~1 min instead of O(n²) blowup — kg_puzzles is legacy (terminal CLI only).
 
 ### Hardening
 - `scripts/validate_fixture.py` — stdlib CI-gate validator, **13 invariant classes** (incl.

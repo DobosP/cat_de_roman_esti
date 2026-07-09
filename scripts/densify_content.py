@@ -49,6 +49,15 @@ NEW_BUILD_VERSION = "fixture-v4-dense"
 # How many puzzles to (re)generate per (category, difficulty) bucket + mixed.
 PUZZLES_PER_BUCKET = {"easy": 6, "hard": 6}
 SALIENCE_ANCHOR = 0.42  # at least one puzzle endpoint must be reasonably recognizable
+# The `mixed` bucket would otherwise pair EVERY node with every other (O(n^2) BFS) —
+# ~900k pairs at ~1,350 nodes, which exhausts the machine. Puzzles are ranked by
+# combined endpoint salience and only the top PUZZLES_PER_BUCKET are kept, and every
+# puzzle needs an endpoint with salience >= SALIENCE_ANCHOR, so the winners always come
+# from the salient head; capping the mixed generation pool to the top-N most salient
+# nodes yields the same puzzles in O(N^2). Per-category pools are already small and stay
+# uncapped. (kg_puzzles is legacy — only the terminal HopGame reads it; validate_fixture
+# VALIDATES existing puzzles, it does not regenerate them, so a bounded pool stays green.)
+MIXED_POOL_CAP = 150
 
 NEW_NOTE = (
     "Densified Romanian KG fixture for the word-game arcade. v4 merges a fact-checked "
@@ -241,6 +250,11 @@ def run(dense: dict, build_version: str, note: str) -> int:
     for cat in [*CATEGORIES, MIXED_CATEGORY]:
         adj_play, adj_all = pick(cat)
         pool = sorted(nodes_by_cat.get(cat, [])) if cat != MIXED_CATEGORY else all_ids_sorted
+        if cat == MIXED_CATEGORY and len(pool) > MIXED_POOL_CAP:
+            # Keep the most-salient head (deterministic), then restore id-order so pair
+            # iteration/tie-breaking matches the uncapped path for the retained nodes.
+            top = sorted(pool, key=lambda nid: (-sal_by[nid], nid))[:MIXED_POOL_CAP]
+            pool = sorted(top)
         for diff in ("easy", "hard"):
             lo, hi = HOP_BANDS[diff]
             found: list[tuple] = []

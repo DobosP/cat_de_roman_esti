@@ -83,6 +83,25 @@ inventory export (ad-hoc python over fixtures/kg_sample.json — see the TSV sha
 - After ANY fixture change: `python scripts/export_mobile_app_pack.py
   tests/fixtures/cat_mobile_app_pack_contract.json` (snapshot test fails otherwise).
 
+## ⚠️ Scaling bottleneck discovered at ~1,350 nodes (densify puzzle regen)
+
+`densify_content.run()` regenerates the whole `kg_puzzles` layer by doing an ALL-PAIRS
+BFS per category **plus the `mixed` bucket over every node pair** — O(n²) BFS. At ~1,350
+nodes the mixed bucket alone is ~900k pairs and the import blew past a 10-min foreground
+cap (had to run it backgrounded: `python scripts/import_enrichment.py --dir … &`, then
+gate). Each future batch makes this worse.
+
+**The fix is safe and cheap** (do it before the next big batch): `kg_puzzles` is LEGACY —
+only the terminal `HopGame`/CLI reads it; the web word games ignore it entirely
+(`WordGameService` uses the graph, never `KgBundle.puzzles`). So the puzzle layer is now
+pure validator overhead. Options: (a) cap the mixed-bucket pool in
+`densify_content.run()` to high-salience nodes (puzzles already need `salience ≥ 0.42`
+on an endpoint and only 6/bucket are kept — the validator VALIDATES existing puzzles, it
+does NOT regenerate, so shrinking the generation pool is safe and won't fail
+`validate_fixture.py`); or (b) stop regenerating puzzles for categories that already have
+6 valid in-band ones. Either drops the import back to seconds. Don't touch the validator's
+puzzle checks — only the generator in densify.
+
 ## Follow-ups, in priority order
 
 1. **Review the ~116 `pending` pack items** (many failed one rubric axis only).
