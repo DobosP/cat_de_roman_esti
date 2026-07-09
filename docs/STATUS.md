@@ -105,8 +105,10 @@ remains the original `easy|hard` semantic-hop game.
   imports stay ~1 min instead of O(n²) blowup — kg_puzzles is legacy (terminal CLI only).
 
 ### Hardening
-- `scripts/validate_fixture.py` — stdlib CI-gate validator, **13 invariant classes** (incl.
-  no-distractor-shortcut-below-par); `tests/test_fixture_invariants.py` runs it every test.
+- `scripts/validate_fixture.py` — stdlib CI-gate validator, **15 invariant classes** (incl.
+  no-distractor-shortcut-below-par, plus `alias_unique` + `label_style` from ADR-0012);
+  `tests/test_fixture_invariants.py` runs it every test. `scripts/validate_games_pack.py`
+  is the sibling gate for the curated pack.
 
 - Deploy/docs: Multi-stage Docker, `run.sh`/`Makefile`, pinned web deps, and the existing
   docs/ADR set remain current; `docs/STATUS.md` is the current-truth index.

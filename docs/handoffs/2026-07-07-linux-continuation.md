@@ -1,7 +1,7 @@
 # Handoff — curated-games content program → Linux continuation
 
-Valid until: the core-vocab batch lands on `main` and Paul reviews the pending pool —
-then treat as history.
+Valid until: Paul reviews the ~360-item pending pool — then treat as history.
+(The core-vocab batch v8 LANDED on `main` `72f49d8`; the "in flight" section below is history.)
 
 Written 2026-07-07 on the Windows box (Claude Code session, ADR-0011 + ADR-0012 work).
 Last updated after batch v7 landed.
@@ -24,12 +24,14 @@ Last updated after batch v7 landed.
 
 ## Where main is
 
-- `main` @ `1936c37` (pushed): curated games (ADR-0011) + alias/density (ADR-0012) +
-  batch v7 (round-2 instances + vocab gap-fill). All gates green: pytest, ruff,
-  `validate_fixture.py`, `validate_games_pack.py`, eslint, vite build.
-- Graph: **~995 nodes / ~4,107 edges / 3,696 aliases**, mean degree ~7.8.
+- `main` @ `72f49d8` (pushed): curated games (ADR-0011) + alias/density (ADR-0012) +
+  batch v7 (round-2 instances + vocab gap-fill) + batch v8 (core-vocab). All gates green:
+  pytest, ruff, `validate_fixture.py`, `validate_games_pack.py`, eslint, vite build.
+- Graph: **~1,304 nodes / ~5,400 edges / 4,538 aliases**, mean degree ~7.9, degree≤2: 20.
 - Pack: **554 instances** — 173 cx / 198 ct / 165 lt / 18 al (~390 approved, ~360
   `pending` review; Alchimie pool tripled from 7 → 18 on the dense graph).
+- Core complaint FIXED: everyday guess-words (mâncare/apă/pădure/muzică/biserică/masă/
+  copil/film/carte/munte/drum/bani…) resolve and return warm in Cald sau Rece.
 - Docs of record: `docs/STATUS.md`, `docs/adr/0011-*.md`, `docs/adr/0012-*.md`.
 
 ## In flight at write time (Windows session)
