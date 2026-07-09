@@ -1,9 +1,30 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-09. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-09 (225 tests green)._
+_Last verified: 2026-07-09 (v12.1 diacritics: data gates green — `validate_games_pack.py` + `validate_fixture.py`
++ 81 stdlib pytest; the Django/DRF web-layer suite needs a Django venv, absent on this host, and runs in CI)._
 
-**Latest — v11 curation-fix pass (2026-07-09):** 130 editorial fixes to the v11 batch (label
+**Latest — v12.1 KG-diacritics pass (2026-07-09):** restored Romanian diacritics on **134 KG node labels**
+that were stored ASCII-folded (`Stefan cel Mare`→`Ștefan cel Mare`, `Tara Romaneasca`→`Țara Românească`,
+`Nadia Comaneci`→`Nadia Comăneci`, `Romania`→`România`…) via a 16-worker Codex fleet, each fix gated by the
+invariant `normalize(new)==normalize(old)` (diacritics/case only — 0 letter changes, so `alias_unique`/resolver
+are provably unaffected since both key on the accent-stripped form). Display-only quality: no resolution/pack
+change (games reference node ids). Mobile app-pack snapshot regenerated; same fixes mirrored into
+`scripts/dense_data.json` (+43) / `expansion_data.json` (+17) so rebuilds don't regress. Remaining v12.1 work
+(member-swaps, tier recalibration, 15 modify calls) still in `docs/handoffs/2026-07-09-v12-continuation.md`.
+
+**v12 quality-consolidation pass (2026-07-09):** a full Codex-fleet editorial audit of all 865
+games (56 game×category workers) → **adversarial re-check** (53 defender/skeptic workers, which overturned
+**35% of flags as false positives** — e.g. the correct "Ioni de manual" boards, since I.L. = _Ion_ Luca
+Caragiale) → exact-duplicate scan. Structural apply: **removed 101** (92 exact duplicates incl. 78
+same-target Contexto, + 9 confirmed-broken approved boards e.g. Paris/Medicină miscategorised as
+"personalități"), **demoted 29** off-theme approved boards to pending, **promoted 86** independently-verified
+pending candidates. Pack **865 → 764 games (657 → 638 approved / 126 pending)**, redundancy-free; every
+category keeps ≥3 approved boards per game. Graph unchanged (**1,453 nodes / 5,644 edges / 4,684 aliases**).
+Deferred to **v12.1** (35 content fixes incl. a systemic KG missing-diacritics finding + 15 modify calls):
+`docs/handoffs/2026-07-09-v12-continuation.md`.
+
+**v11 curation-fix pass (2026-07-09):** 130 editorial fixes to the v11 batch (label
 precision, alias hygiene, distractor-relation correctness, board fairness; 2 correct overrides of
 verifier false-positives) via a two-round codex fix → independent-reverify pipeline, rebuilt from the
 pre-v11 base through `import_candidates.py`. Graph **1,453 nodes / 5,644 edges / 4,684 aliases**; pack
@@ -143,6 +164,18 @@ remains the original `easy|hard` semantic-hop game.
   import dropped 6 duplicate-label nodes + 36 colliding aliases. Graph now **1,449 nodes
   / 5,632 edges**; pack **836 (631 approved / 205 pending)**. Tiers stay balanced
   (easy 479 / med 634 / hard 336).
+- **Batch v12 (2026-07-09) — quality consolidation (audit → adversarial verify → apply).**
+  Two Codex fleets: (1) 56 workers audited every game per game×category on a resolved
+  (id→label+description) view; (2) 53 workers independently re-checked the 249 highest-stakes
+  verdicts with a **defender bias on served content / skeptic bias on promotes** — overturning
+  **35%** as false positives (the load-bearing safeguard: the first pass confidently mis-flagged
+  correct boards). Applied structurally to both pack copies (status/existence only, no content
+  authoring): **−101 remove** (exact-dedup 92 + 9 verified-broken), **−29 demote**, **+86 promote**.
+  Contexto same-target duplicates were the dominant defect (78 removed — no two served Contexto games
+  now share a hidden target). Pack **764 (638 approved / 126 pending)**; per-game approved:
+  195 cx / 182 ct / 186 lt / 75 al. Pure data change — `validate_games_pack.py` (playability of all
+  approved via the same runtime functions the server uses) + `validate_fixture.py` green. Deferred
+  content fixes (diacritics/member-swaps/tier recalibration/modifies) tracked for v12.1.
 
 ### Hardening
 - `scripts/validate_fixture.py` — stdlib CI-gate validator, **15 invariant classes** (incl.

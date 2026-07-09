@@ -15,7 +15,7 @@ def test_graph_builds_nodes_and_edges():
 
     g = _bundle().graph
     assert g.has_node("n_stefan_cel_mare")
-    assert g.node("n_stefan_cel_mare").label_ro == "Stefan cel Mare"
+    assert g.node("n_stefan_cel_mare").label_ro == "Ștefan cel Mare"
     assert g.node("nonexistent") is None
     # The graph loads every fixture node (count derived from the bundled fixture so this
     # invariant tracks the assembled fixture rather than a hard-coded snapshot).
