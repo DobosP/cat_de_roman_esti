@@ -13,31 +13,45 @@
 #   python -m venv /tmp/freeze && /tmp/freeze/bin/pip install ".[web]"
 #   /tmp/freeze/bin/pip freeze --exclude cat-de-roman-esti > constraints.txt  (keep this header)
 #
-# Resolved 2026-07-06 against PyPI for CPython 3.11 (the python:3.11-slim runtime).
-# Django 5.2.15 / DRF 3.17.1 match the fleet pins (social_media_activities_app).
+# Resolved 2026-07-09 against PyPI for CPython 3.11 (the python:3.11-slim runtime).
+# Django 5.2 / DRF 3.17.1 match the fleet pins (social_media_activities_app).
+# Now includes the ACCOUNTS closure (django-allauth + dj-database-url + psycopg +
+# requests/pyjwt/oauthlib/cryptography) — inert unless CAT_ACCOUNTS_ENABLED=1.
 
 annotated-types==0.7.0
 asgiref==3.11.1
 attrs==26.1.0
+certifi==2026.6.17
+cffi==2.1.0
+charset-normalizer==3.4.9
 click==8.4.2
-colorama==0.4.6
-Django==5.2.15
+cryptography==49.0.0
+dj-database-url==3.1.2
+django==5.2.16
+django-allauth==65.18.0
 django-cors-headers==4.9.0
 djangorestframework==3.17.1
 drf-spectacular==0.30.0
 h11==0.16.0
+idna==3.18
 inflection==0.5.1
 jsonschema==4.26.0
 jsonschema-specifications==2025.9.1
+oauthlib==3.3.1
+psycopg==3.3.4
+psycopg-binary==3.3.4
+pycparser==3.0
 pydantic==2.13.4
-pydantic_core==2.46.4
-PyYAML==6.0.3
+pydantic-core==2.46.4
+pyjwt==2.13.0
+pyyaml==6.0.3
 referencing==0.37.0
+requests==2.34.2
 rpds-py==2026.6.3
 sqlparse==0.5.5
+typing-extensions==4.16.0
 typing-inspection==0.4.2
-typing_extensions==4.16.0
-tzdata==2026.2
 uritemplate==4.2.0
-uvicorn==0.50.2
+urllib3==2.7.0
+uvicorn==0.51.0
 whitenoise==6.12.0

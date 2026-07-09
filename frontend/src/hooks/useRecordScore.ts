@@ -5,6 +5,7 @@
 
 import { useCallback, useRef } from "react";
 import { recordScore, type RecordOutcome, type RecordScoreOptions } from "../scores";
+import { pushLatest } from "../scoreSync";
 
 export type RecordOnce = (
   gameId: string,
@@ -19,7 +20,10 @@ export function useRecordScore(game: string): RecordOnce {
     (gameId, score, detail, options) => {
       if (!gameId || recorded.current === gameId) return null;
       recorded.current = gameId;
-      return recordScore(game, score, detail, options);
+      const outcome = recordScore(game, score, detail, options);
+      // Mirror to the account when signed in + consented (no-op otherwise).
+      void pushLatest(game);
+      return outcome;
     },
     [game],
   );

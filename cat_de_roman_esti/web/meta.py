@@ -125,6 +125,11 @@ def healthz(request: HttpRequest) -> JsonResponse:
     return JsonResponse({"ok": True})
 
 
+def me_disabled(request: HttpRequest) -> JsonResponse:
+    """`/api/me` when accounts are OFF: report the feature disabled so the SPA hides login."""
+    return JsonResponse({"accounts_enabled": False, "authenticated": False, "user": None})
+
+
 def api_not_found(request: HttpRequest, *args, **kwargs) -> JsonResponse:
     """Unknown /api/* paths stay JSON 404 (starlette-parity, byte-identical), never the SPA."""
     return JsonResponse(

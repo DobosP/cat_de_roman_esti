@@ -22,6 +22,11 @@ htmlcov/
 # Local env / secrets (the example is committed; the real one is not)
 .env
 .env.local
+.env.prod
+
+# Accounts-mode local dev database (never committed)
+*.sqlite3
+cat_accounts.sqlite3
 
 # Editor / OS
 .idea/

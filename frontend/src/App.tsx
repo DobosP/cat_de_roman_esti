@@ -12,6 +12,7 @@ import Alchimie from "./screens/Alchimie";
 import CaldRece from "./screens/CaldRece";
 import Lant from "./screens/Lant";
 import Conexiuni from "./screens/Conexiuni";
+import AccountBar from "./components/AccountBar";
 
 export type { ToastKind };
 
@@ -61,6 +62,7 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <div className="app-shell">
+        <AccountBar />
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route

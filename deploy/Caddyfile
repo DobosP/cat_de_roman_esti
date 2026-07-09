@@ -1,0 +1,22 @@
+# Caddy reverse proxy for cât-de-român-ești (docker-compose.prod.yml).
+#
+# Terminates TLS for $CAT_DOMAIN and proxies to the app container. Caddy sets
+# X-Forwarded-Proto, which Django reads via SECURE_PROXY_SSL_HEADER.
+#
+# TLS options (see docs/DEPLOY.md):
+#   • Quick start — Cloudflare DNS-only (grey cloud): Caddy obtains its own Let's Encrypt
+#     certificate automatically (this default works out of the box). $TLS_EMAIL is used for
+#     ACME registration/expiry notices.
+#   • Production — Cloudflare proxied (orange cloud) on "Full (strict)": issue a Cloudflare
+#     Origin Certificate, mount it, and replace the site's auto-TLS with:
+#         tls /etc/caddy/origin.pem /etc/caddy/origin-key.pem
+#     (keeps Cloudflare's WAF/DDoS in front while TLS to origin stays valid).
+
+{
+	email {$TLS_EMAIL}
+}
+
+{$CAT_DOMAIN} {
+	encode zstd gzip
+	reverse_proxy app:8000
+}

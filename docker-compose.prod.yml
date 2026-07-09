@@ -1,0 +1,82 @@
+# docker-compose.prod.yml — cât-de-român-ești production stack (accounts + Google login).
+#
+#   Caddy (TLS/proxy)  ──►  app (Django/uvicorn, single process)  ──►  db (Postgres)
+#
+# Usage on the host (e.g. a Hetzner CX22, EU):
+#   cp .env.prod.example .env.prod   # then fill in the secrets (see docs/DEPLOY.md)
+#   docker compose -f docker-compose.prod.yml --env-file .env.prod up -d --build
+#
+# The anonymous arcade needs none of this — it runs from the plain `docker-compose.yml`.
+# This stack turns on CAT_ACCOUNTS_ENABLED=1; do not point it at real users until the
+# go-live compliance checklist in docs/DEPLOY.md is satisfied.
+
+name: cat-de-roman-esti
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-cat}
+      POSTGRES_USER: ${POSTGRES_USER:-cat}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env.prod}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-cat} -d ${POSTGRES_DB:-cat}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cat-de-roman-esti:latest
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DJANGO_SETTINGS_MODULE: cat_de_roman_esti.web.settings
+      PORT: "8000"
+      CAT_ACCOUNTS_ENABLED: "1"
+      CAT_DEBUG: "0"
+      CAT_DOMAIN: ${CAT_DOMAIN:?set CAT_DOMAIN in .env.prod}
+      CAT_SECRET_KEY: ${CAT_SECRET_KEY:?set CAT_SECRET_KEY in .env.prod}
+      CAT_DATABASE_URL: postgres://${POSTGRES_USER:-cat}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-cat}
+      CAT_DB_SSL: "0" # in-cluster DB over the private compose network
+      GOOGLE_OAUTH_CLIENT_ID: ${GOOGLE_OAUTH_CLIENT_ID:?set GOOGLE_OAUTH_CLIENT_ID in .env.prod}
+      GOOGLE_OAUTH_CLIENT_SECRET: ${GOOGLE_OAUTH_CLIENT_SECRET:?set GOOGLE_OAUTH_CLIENT_SECRET in .env.prod}
+      CAT_KG_FIXTURE: ${CAT_KG_FIXTURE:-cat_de_roman_esti/fixtures/kg_real.json}
+      CAT_HSTS_SECONDS: ${CAT_HSTS_SECONDS:-0}
+      CAT_CONSENT_VERSION: ${CAT_CONSENT_VERSION:-2026-07-09}
+      CAT_SUBMISSIONS_DIR: /data/submissions
+    volumes:
+      - ./deploy/entrypoint.sh:/app/entrypoint.sh:ro
+      - submissions:/data/submissions
+    command: ["sh", "/app/entrypoint.sh"]
+    expose:
+      - "8000" # reachable only by Caddy over the compose network (no host port)
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2-alpine
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      CAT_DOMAIN: ${CAT_DOMAIN:?set CAT_DOMAIN in .env.prod}
+      TLS_EMAIL: ${TLS_EMAIL:-}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  submissions:
+  caddy_data:
+  caddy_config:

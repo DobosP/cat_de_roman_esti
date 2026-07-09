@@ -19,6 +19,11 @@ export default defineConfig({
         target: "http://127.0.0.1:8000",
         changeOrigin: true,
       },
+      // allauth login/callback (Sign-in-with-Google) when CAT_ACCOUNTS_ENABLED=1.
+      "/accounts": {
+        target: "http://127.0.0.1:8000",
+        changeOrigin: true,
+      },
     },
   },
 });

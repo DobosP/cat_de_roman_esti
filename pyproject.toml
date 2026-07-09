@@ -16,12 +16,17 @@ keywords = ["romania", "knowledge-graph", "game", "roedu"]
 dependencies = []
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "ruff>=0.5"]
+dev = ["pytest>=8", "pytest-django>=4.8", "ruff>=0.5"]
 # Loose floors so local dev floats forward; for REPRODUCIBLE deploys pin the exact
 # resolved closure via the committed constraints file:
 #   pip install -c constraints.txt ".[web]"   (the Dockerfile does exactly this)
 # Django 5.2 + DRF for fleet operational uniformity; pydantic stays for the request
 # models + FastAPI-parity validation errors (see web/http.py).
+#
+# allauth + dj-database-url + psycopg are the ACCOUNTS extras: only exercised when
+# CAT_ACCOUNTS_ENABLED=1 (Sign-in-with-Google + saved progress). They import cleanly
+# but are inert in the default stateless deployment, so they ride in [web] to keep the
+# single install closure the Dockerfile already uses.
 web = [
     "django>=5.2,<5.3",
     "djangorestframework>=3.16",
@@ -30,6 +35,9 @@ web = [
     "whitenoise>=6.7",
     "pydantic>=2.7",
     "uvicorn>=0.29",
+    "django-allauth[socialaccount]>=65,<66",
+    "dj-database-url>=2.2",
+    "psycopg[binary]>=3.2",
 ]
 
 [project.scripts]
@@ -53,6 +61,8 @@ cat_de_roman_esti = ["fixtures/*.json"]
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+# Django writes these; they are machine-generated and not hand-maintained.
+extend-exclude = ["**/migrations/*"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
@@ -60,3 +70,8 @@ select = ["E", "F", "I", "UP", "B"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+# The BFF tests bootstrap Django via this settings module (tests/conftest.py also sets
+# it). The default suite runs with CAT_ACCOUNTS_ENABLED unset -> stateless, no DB.
+# The accounts suite (tests/accounts/, collect-ignored unless CAT_ACCOUNTS_ENABLED=1)
+# opts into pytest-django's DB via the django_db marker.
+DJANGO_SETTINGS_MODULE = "cat_de_roman_esti.web.settings"

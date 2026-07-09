@@ -80,6 +80,20 @@ def parse_body(request, model: type[M]) -> M:
         raise _validation_error(exc.errors(include_url=False), "body") from exc
 
 
+def parse_data(request, model: type[M]) -> M:
+    """Validate DRF's already-parsed ``request.data`` against a pydantic model.
+
+    Use this (instead of :func:`parse_body`) in views that authenticate via
+    ``SessionAuthentication``: enforcing CSRF reads ``request.POST``, which consumes the
+    raw stream and makes ``request.body`` unreadable. ``request.data`` is DRF's parsed body
+    and is safe to read afterwards. Same FastAPI-parity 422 error shape as ``parse_body``.
+    """
+    try:
+        return model.model_validate(request.data)
+    except pydantic.ValidationError as exc:
+        raise _validation_error(exc.errors(include_url=False), "body") from exc
+
+
 def query_int(request, name: str) -> int | None:
     """Optional integer query param; non-integers get FastAPI's 422 shape."""
     raw = request.query_params.get(name)

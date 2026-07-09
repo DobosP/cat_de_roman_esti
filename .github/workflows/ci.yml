@@ -55,8 +55,11 @@ jobs:
       - name: Lint (ruff)
         run: ruff check
 
-      - name: Tests (pytest, offline fixture)
+      - name: Tests (pytest, offline fixture — accounts OFF / stateless)
         run: pytest -q
+
+      - name: Tests (accounts ON — Google login + saved progress, sqlite)
+        run: CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 pytest -q tests/accounts
 
   frontend:
     name: frontend (build + lint)
