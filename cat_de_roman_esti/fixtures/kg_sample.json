@@ -1,27 +1,27 @@
 {
   "meta": {
-    "build_version": "fixture-v11-refined",
+    "build_version": "fixture-v5-pop",
     "generated_at": "2026-06-21T00:00:00Z",
-    "note": "v11: merged duplicate concepts (edges+games redirected to the survivor) and recalibrated salience (declared + degree-centrality blend, rank-normalized) so the usor/normal/greu tiers are balanced and difficulty selection is meaningful.",
+    "note": "v5: pop-culture + serious curated-content batch (ADR-0011) — AI-generated, fact/quality-verified subgraph merged on the v4 dense graph; kg_puzzles regenerated on the merged graph via the validator-mirroring BFS builder.",
     "counts": {
-      "nodes": 1294,
-      "edges": 5370,
+      "nodes": 1449,
+      "edges": 5632,
       "puzzles": 180,
       "by_category": {
-        "arta_cultura": 89,
-        "film_tv": 90,
-        "gastronomie": 92,
-        "geografie": 101,
-        "istorie": 104,
-        "limba": 98,
-        "literatura": 91,
-        "meme_net": 88,
-        "muzica": 84,
-        "personalitati": 96,
-        "societate": 98,
-        "sport": 88,
-        "stiinta": 99,
-        "viata_de_roman": 76
+        "arta_cultura": 99,
+        "film_tv": 102,
+        "gastronomie": 104,
+        "geografie": 112,
+        "istorie": 116,
+        "limba": 110,
+        "literatura": 102,
+        "meme_net": 99,
+        "muzica": 96,
+        "personalitati": 105,
+        "societate": 109,
+        "sport": 100,
+        "stiinta": 109,
+        "viata_de_roman": 86
       },
       "puzzles_by_cat_diff": {
         "arta_cultura/easy": 6,
@@ -111,7 +111,7 @@
       "description": "Primul rege al Romaniei (1881-1914).",
       "salience": 0.5379,
       "difficulty_tier": "medium",
-      "degree": 17,
+      "degree": 18,
       "aliases": [
         "Carol Întâi",
         "Carol de Hohenzollern",
@@ -126,7 +126,7 @@
       "description": "Monument roman care infatiseaza razboaiele cu dacii.",
       "salience": 0.2482,
       "difficulty_tier": "hard",
-      "degree": 10,
+      "degree": 11,
       "aliases": [
         "columna Traiană",
         "stâlpul lui Traian",
@@ -201,7 +201,7 @@
       "description": "Unirea Transilvaniei, Basarabiei si Bucovinei cu Romania.",
       "salience": 0.6014,
       "difficulty_tier": "medium",
-      "degree": 26,
+      "degree": 27,
       "aliases": [
         "Unirea de la 1918",
         "1 Decembrie 1918",
@@ -216,7 +216,7 @@
       "description": "Unirea Moldovei cu Tara Romaneasca in 1859.",
       "salience": 0.4263,
       "difficulty_tier": "medium",
-      "degree": 12,
+      "degree": 13,
       "aliases": [
         "Unirea din 1859",
         "Unirea Principatelor 1859",
@@ -231,7 +231,7 @@
       "description": "Domnitor, prima unire a Tarilor Romane (1600).",
       "salience": 0.6182,
       "difficulty_tier": "medium",
-      "degree": 16,
+      "degree": 17,
       "aliases": [
         "Mihai Bravu",
         "Mihai Voievod",
@@ -248,7 +248,7 @@
       "description": "Tara romaneasca istorica.",
       "salience": 0.7192,
       "difficulty_tier": "easy",
-      "degree": 18,
+      "degree": 19,
       "aliases": [
         "Moldova istorică",
         "Țara Moldovei",
@@ -314,7 +314,7 @@
       "description": "Revolutia care a inlaturat regimul comunist din Romania.",
       "salience": 0.6188,
       "difficulty_tier": "medium",
-      "degree": 19,
+      "degree": 22,
       "aliases": [
         "Revoluția română",
         "Decembrie 1989",
@@ -329,7 +329,7 @@
       "description": "Capitala regatului dac din Muntii Orastiei.",
       "salience": 0.2912,
       "difficulty_tier": "hard",
-      "degree": 10,
+      "degree": 11,
       "aliases": [
         "Sarmizegetusa",
         "Sarmizegetusei",
@@ -360,7 +360,7 @@
       "description": "Stat medieval romanesc la sud de Carpati.",
       "salience": 0.5864,
       "difficulty_tier": "medium",
-      "degree": 19,
+      "degree": 22,
       "aliases": [
         "Valahia",
         "principatul muntean"
@@ -389,7 +389,7 @@
       "description": "Regiune istorica romaneasca.",
       "salience": 0.9779,
       "difficulty_tier": "easy",
-      "degree": 46,
+      "degree": 54,
       "aliases": [
         "Ardealul",
         "Transilvaniei",
@@ -469,7 +469,7 @@
       "description": "Roman de Mihail Sadoveanu (1930).",
       "salience": 0.1632,
       "difficulty_tier": "hard",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "Baltagul lui Sadoveanu",
         "romanul Baltagul",
@@ -575,7 +575,7 @@
       "description": "Dramaturg roman, maestru al comediei, membru al Junimii.",
       "salience": 0.5625,
       "difficulty_tier": "medium",
-      "degree": 15,
+      "degree": 17,
       "aliases": [
         "Caragiale",
         "I.L.C.",
@@ -592,7 +592,7 @@
       "description": "Roman realist de Liviu Rebreanu (1920) despre taranul ardelean.",
       "salience": 0.2578,
       "difficulty_tier": "hard",
-      "degree": 9,
+      "degree": 10,
       "aliases": [
         "romanul Ion",
         "Ion de Rebreanu",
@@ -624,7 +624,7 @@
       "description": "Romancier roman, intemeietor al romanului realist obiectiv.",
       "salience": 0.3766,
       "difficulty_tier": "medium",
-      "degree": 8,
+      "degree": 9,
       "aliases": [
         "Rebreanu",
         "L. Rebreanu",
@@ -639,7 +639,7 @@
       "description": "Poem romantic de Mihai Eminescu.",
       "salience": 0.4767,
       "difficulty_tier": "medium",
-      "degree": 13,
+      "degree": 14,
       "aliases": [
         "Luceafărul eminescian",
         "poemul Luceafărul",
@@ -670,7 +670,7 @@
       "description": "Romancier roman din perioada postbelica.",
       "salience": 0.2502,
       "difficulty_tier": "hard",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "Preda",
         "Marin Preda prozatorul",
@@ -700,7 +700,7 @@
       "description": "Prozator roman, autor de romane istorice si rurale.",
       "salience": 0.4275,
       "difficulty_tier": "medium",
-      "degree": 11,
+      "degree": 12,
       "aliases": [
         "Sadoveanu",
         "M. Sadoveanu",
@@ -745,7 +745,7 @@
       "description": "Roman de Marin Preda despre lumea satului romanesc.",
       "salience": 0.3058,
       "difficulty_tier": "hard",
-      "degree": 11,
+      "degree": 12,
       "aliases": [
         "Moromeții lui Preda",
         "romanul Moromeții",
@@ -761,7 +761,7 @@
       "description": "Poezie simbolista emblematica a lui George Bacovia.",
       "salience": 0.2557,
       "difficulty_tier": "hard",
-      "degree": 10,
+      "degree": 11,
       "aliases": [
         "poezia Plumb",
         "Plumbul bacovian",
@@ -841,7 +841,7 @@
       "description": "Critic literar, mentor al Junimii.",
       "salience": 0.3023,
       "difficulty_tier": "hard",
-      "degree": 10,
+      "degree": 11,
       "aliases": [
         "Maiorescu",
         "T. Maiorescu",
@@ -887,7 +887,7 @@
       "description": "Masiv montan din Carpații Meridionali, lângă Prahova.",
       "salience": 0.3018,
       "difficulty_tier": "hard",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "Bucegii",
         "masivul Bucegi",
@@ -903,7 +903,7 @@
       "description": "Capitala României, în Muntenia.",
       "salience": 0.6721,
       "difficulty_tier": "easy",
-      "degree": 47,
+      "degree": 71,
       "aliases": [
         "Bucureștiul",
         "Capitala României",
@@ -952,7 +952,7 @@
       "description": "Oraș important din Transilvania, pe Someș.",
       "salience": 0.4989,
       "difficulty_tier": "medium",
-      "degree": 13,
+      "degree": 18,
       "aliases": [
         "Clujul",
         "municipiul Cluj-Napoca",
@@ -968,7 +968,7 @@
       "description": "Oraș-port la Marea Neagră, în Dobrogea.",
       "salience": 0.5067,
       "difficulty_tier": "medium",
-      "degree": 17,
+      "degree": 19,
       "aliases": [
         "Constanța oraș",
         "municipiul Constanța",
@@ -984,7 +984,7 @@
       "description": "Deltă la vărsarea Dunării, rezervație a biosferei.",
       "salience": 0.5966,
       "difficulty_tier": "medium",
-      "degree": 18,
+      "degree": 19,
       "aliases": [
         "Deltei Dunării",
         "delta de la Dunăre",
@@ -999,7 +999,7 @@
       "description": "Regiune între Dunăre și Marea Neagră.",
       "salience": 0.4845,
       "difficulty_tier": "medium",
-      "degree": 16,
+      "degree": 19,
       "aliases": [
         "Dobrogei",
         "regiunea Dobrogea",
@@ -1015,7 +1015,7 @@
       "description": "Cel mai mare fluviu al României, granița sudică.",
       "salience": 0.8949,
       "difficulty_tier": "easy",
-      "degree": 31,
+      "degree": 32,
       "aliases": [
         "Dunării",
         "fluviul Dunărea",
@@ -1079,7 +1079,7 @@
       "description": "Regiune istorică din estul României.",
       "salience": 0.5978,
       "difficulty_tier": "medium",
-      "degree": 24,
+      "degree": 29,
       "aliases": [
         "Moldova românească",
         "regiunea Moldovei",
@@ -1095,7 +1095,7 @@
       "description": "Regiune istorică din sudul României (Țara Românească).",
       "salience": 0.403,
       "difficulty_tier": "medium",
-      "degree": 10,
+      "degree": 11,
       "aliases": [
         "Munteniei",
         "regiunea Muntenia",
@@ -1156,7 +1156,7 @@
       "description": "Regiune istorică din sud-vestul României.",
       "salience": 0.4197,
       "difficulty_tier": "medium",
-      "degree": 15,
+      "degree": 21,
       "aliases": [
         "Olteniei",
         "regiunea Oltenia",
@@ -1219,7 +1219,7 @@
       "description": "Șosea spectaculoasă peste Munții Făgăraș (DN7C).",
       "salience": 0.3886,
       "difficulty_tier": "medium",
-      "degree": 9,
+      "degree": 10,
       "aliases": [
         "Transfăgărășanul",
         "DN7C",
@@ -1251,7 +1251,7 @@
       "description": "Medic roman, pionier al gerontologiei (Gerovital).",
       "salience": 0.3008,
       "difficulty_tier": "hard",
-      "degree": 12,
+      "degree": 13,
       "aliases": [
         "Aslan",
         "doctorița Aslan"
@@ -1280,7 +1280,7 @@
       "description": "Sculptor roman, pionier al sculpturii moderne.",
       "salience": 0.8675,
       "difficulty_tier": "easy",
-      "degree": 32,
+      "degree": 33,
       "aliases": [
         "Brâncuși",
         "C. Brâncuși",
@@ -1371,7 +1371,7 @@
       "description": "Compozitor, violonist si dirijor roman.",
       "salience": 0.8366,
       "difficulty_tier": "easy",
-      "degree": 34,
+      "degree": 35,
       "aliases": [
         "Enescu",
         "G. Enescu",
@@ -1386,7 +1386,7 @@
       "description": "Fotbalist roman, supranumit Regele.",
       "salience": 0.5607,
       "difficulty_tier": "medium",
-      "degree": 23,
+      "degree": 24,
       "aliases": [
         "Hagi",
         "Gică Hagi",
@@ -1431,7 +1431,7 @@
       "description": "Tenismen roman, numarul 1 mondial in anii 1970.",
       "salience": 0.3598,
       "difficulty_tier": "medium",
-      "degree": 9,
+      "degree": 10,
       "aliases": [
         "Năstase",
         "Ilie N.",
@@ -1447,7 +1447,7 @@
       "description": "Stiinta tratarii si prevenirii bolilor.",
       "salience": 0.3898,
       "difficulty_tier": "medium",
-      "degree": 21,
+      "degree": 22,
       "aliases": [
         "medicina românească",
         "știința medicală",
@@ -1462,7 +1462,7 @@
       "description": "Istoric al religiilor si scriitor roman.",
       "salience": 0.3496,
       "difficulty_tier": "medium",
-      "degree": 7,
+      "degree": 9,
       "aliases": [
         "Eliade",
         "M. Eliade",
@@ -1505,7 +1505,7 @@
       "description": "Gimnasta romana, primul 10 perfect olimpic.",
       "salience": 0.6128,
       "difficulty_tier": "medium",
-      "degree": 20,
+      "degree": 22,
       "aliases": [
         "Nadia",
         "Comăneci",
@@ -1536,7 +1536,7 @@
       "description": "Capitala Frantei, centru al exilului romanesc.",
       "salience": 0.8261,
       "difficulty_tier": "easy",
-      "degree": 26,
+      "degree": 28,
       "aliases": [
         "Parisul",
         "capitala Franței",
@@ -1566,7 +1566,7 @@
       "description": "Lucrari orchestrale celebre de George Enescu.",
       "salience": 0.1728,
       "difficulty_tier": "hard",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "Rapsodiile lui Enescu",
         "cele două rapsodii române",
@@ -1596,7 +1596,7 @@
       "description": "Tenismena romana, numarul 1 mondial WTA.",
       "salience": 0.5055,
       "difficulty_tier": "medium",
-      "degree": 14,
+      "degree": 17,
       "aliases": [
         "Halep",
         "Simo Halep",
@@ -1671,7 +1671,7 @@
       "description": "Nuanta de albastru a frescelor de la Voronet.",
       "salience": 0.2466,
       "difficulty_tier": "hard",
-      "degree": 10,
+      "degree": 11,
       "aliases": [
         "albastrul de Voroneț",
         "albastrul Voronețului",
@@ -1687,7 +1687,7 @@
       "description": "Ansamblul sculptural creat de Brancusi la Targu Jiu.",
       "salience": 0.316,
       "difficulty_tier": "hard",
-      "degree": 8,
+      "degree": 9,
       "aliases": [
         "ansamblul de la Târgu Jiu",
         "ansamblul lui Brâncuși",
@@ -1753,7 +1753,7 @@
       "description": "Cantec liric traditional romanesc, in patrimoniul UNESCO.",
       "salience": 0.3976,
       "difficulty_tier": "medium",
-      "degree": 18,
+      "degree": 19,
       "aliases": [
         "doine",
         "doina românească",
@@ -1783,7 +1783,7 @@
       "description": "Traditia populara romaneasca: muzica, dans, obiceiuri.",
       "salience": 0.5295,
       "difficulty_tier": "medium",
-      "degree": 38,
+      "degree": 39,
       "aliases": [
         "folclorul românesc",
         "tradiția populară românească",
@@ -1860,7 +1860,7 @@
       "description": "Sculptura de Brancusi din Ansamblul de la Targu Jiu.",
       "salience": 0.3478,
       "difficulty_tier": "medium",
-      "degree": 8,
+      "degree": 9,
       "aliases": [
         "Masa tăcerii de Brâncuși",
         "lucrarea Masa Tăcerii"
@@ -1923,7 +1923,7 @@
       "description": "Lucrare orchestrala de George Enescu inspirata din folclor.",
       "salience": 0.4419,
       "difficulty_tier": "medium",
-      "degree": 11,
+      "degree": 13,
       "aliases": [
         "Rapsodia de Enescu",
         "Rapsodia română nr. 1",
@@ -1987,7 +1987,7 @@
       "description": "Ramura a fizicii care studiaza miscarea aerului si fortele asupra corpurilor.",
       "salience": 0.318,
       "difficulty_tier": "hard",
-      "degree": 15,
+      "degree": 16,
       "aliases": [
         "aerodinamicii",
         "mecanica aerului",
@@ -2019,7 +2019,7 @@
       "description": "Inginer si pionier al aviatiei romane, constructor al avioanelor Vlaicu.",
       "salience": 0.4815,
       "difficulty_tier": "medium",
-      "degree": 10,
+      "degree": 11,
       "aliases": [
         "A. Vlaicu",
         "Vlaicu",
@@ -2035,7 +2035,7 @@
       "description": "Domeniul constructiei si zborului aparatelor mai grele decat aerul.",
       "salience": 0.4971,
       "difficulty_tier": "medium",
-      "degree": 20,
+      "degree": 22,
       "aliases": [
         "aviației",
         "zborul cu aparate",
@@ -2134,7 +2134,7 @@
       "description": "Biolog si explorator roman, fondatorul biospeologiei.",
       "salience": 0.4671,
       "difficulty_tier": "medium",
-      "degree": 16,
+      "degree": 17,
       "aliases": [
         "E. Racoviță",
         "Emil Racoviță biologul",
@@ -2152,7 +2152,7 @@
       "description": "Biolog roman, laureat Nobel pentru medicina (1974), pionier al biologiei celulare.",
       "salience": 0.4545,
       "difficulty_tier": "medium",
-      "degree": 11,
+      "degree": 12,
       "aliases": [
         "G. E. Palade",
         "George Palade",
@@ -2268,7 +2268,7 @@
       "description": "Pod feroviar peste Dunare, inaugurat in 1895, opera lui Anghel Saligny.",
       "salience": 0.2107,
       "difficulty_tier": "hard",
-      "degree": 7,
+      "degree": 9,
       "aliases": [
         "Podul Cernavodă",
         "podul Saligny",
@@ -2334,7 +2334,7 @@
       "description": "Matematician, astronom si reformator al invatamantului romanesc.",
       "salience": 0.2006,
       "difficulty_tier": "hard",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "S. Haret",
         "Haret",
@@ -2382,7 +2382,7 @@
       "description": "Medic si bacteriolog roman, pionier al microbiologiei moderne.",
       "salience": 0.4407,
       "difficulty_tier": "medium",
-      "degree": 12,
+      "degree": 13,
       "aliases": [
         "V. Babeș",
         "Victor Babeș bacteriologul",
@@ -2398,7 +2398,7 @@
       "description": "Cel mai inalt for de stiinta si cultura din Romania, infiintat in 1866.",
       "salience": 0.7002,
       "difficulty_tier": "easy",
-      "degree": 33,
+      "degree": 37,
       "aliases": [
         "Academia",
         "Academiei Române",
@@ -2530,7 +2530,7 @@
       "description": "Forma de guvernamant bazata pe suveranitatea poporului si statul de drept.",
       "salience": 0.4773,
       "difficulty_tier": "medium",
-      "degree": 18,
+      "degree": 19,
       "aliases": [
         "democrația",
         "regim democratic",
@@ -2708,7 +2708,7 @@
       "description": "Stat national, suveran, unitar si indivizibil, organizat ca republica semiprezidentiala.",
       "salience": 0.7986,
       "difficulty_tier": "easy",
-      "degree": 43,
+      "degree": 44,
       "aliases": [
         "statul român",
         "țara noastră",
@@ -2740,7 +2740,7 @@
       "description": "Dreptul cetatenilor de a alege si a fi alesi, exercitat prin sufragiu universal.",
       "salience": 0.346,
       "difficulty_tier": "medium",
-      "degree": 10,
+      "degree": 12,
       "aliases": [
         "votul",
         "sufragiu",
@@ -3016,7 +3016,7 @@
       "description": "Norma lingvistica oficiala stabilita de Academia Romana pentru limba romana.",
       "salience": 0.2269,
       "difficulty_tier": "hard",
-      "degree": 9,
+      "degree": 10,
       "aliases": [
         "norma academică",
         "norma limbii române",
@@ -3160,7 +3160,7 @@
       "description": "Grupa montana din Carpatii Occidentali, cunoscuta pentru pesteri si Tara Motilor.",
       "salience": 0.3706,
       "difficulty_tier": "medium",
-      "degree": 10,
+      "degree": 11,
       "aliases": [
         "Apusenii",
         "Munților Apuseni",
@@ -3176,7 +3176,7 @@
       "description": "Oras din Moldova, fosta capitala a Principatului Moldovei si important centru cultural.",
       "salience": 0.5139,
       "difficulty_tier": "medium",
-      "degree": 14,
+      "degree": 20,
       "aliases": [
         "Iașul",
         "municipiul Iași",
@@ -3192,7 +3192,7 @@
       "description": "Oras principal din Banat, vestul Romaniei, unde a inceput Revolutia din 1989.",
       "salience": 0.3406,
       "difficulty_tier": "medium",
-      "degree": 8,
+      "degree": 9,
       "aliases": [
         "Timișoarei",
         "municipiul Timișoara",
@@ -3208,7 +3208,7 @@
       "description": "Rau afluent al Dunarii, formeaza granita de est a Romaniei cu Republica Moldova.",
       "salience": 0.2274,
       "difficulty_tier": "hard",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "râul Prut",
         "Prutul",
@@ -3223,7 +3223,7 @@
       "description": "Rau cu cel mai mare bazin hidrografic din Romania, afluent al Dunarii, curge prin Moldova.",
       "salience": 0.1566,
       "difficulty_tier": "hard",
-      "degree": 5,
+      "degree": 6,
       "aliases": [
         "râul Siret",
         "Siretul",
@@ -3254,7 +3254,7 @@
       "description": "Cea mai intinsa campie a Romaniei, in sudul tarii, intre Carpati si Dunare.",
       "salience": 0.2729,
       "difficulty_tier": "hard",
-      "degree": 9,
+      "degree": 10,
       "aliases": [
         "Câmpiei Române",
         "Câmpia Valahă",
@@ -3317,7 +3317,7 @@
       "description": "Lider comunist al Romaniei (1965-1989), inlaturat de la putere in Revolutia din 1989.",
       "salience": 0.3448,
       "difficulty_tier": "medium",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "Ceaușescu",
         "dictatorul Ceaușescu",
@@ -3366,7 +3366,7 @@
       "description": "Ultimul rege al Romaniei (1927-1930, 1940-1947), nepot al lui Ferdinand I.",
       "salience": 0.3436,
       "difficulty_tier": "medium",
-      "degree": 15,
+      "degree": 16,
       "aliases": [
         "Mihai întâi",
         "regele Mihai",
@@ -3511,7 +3511,7 @@
       "description": "Roman modernist publicat in 1930 de Camil Petrescu, roman al experientei si al analizei psihologice.",
       "salience": 0.2077,
       "difficulty_tier": "hard",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "Ultima noapte",
         "romanul Ultima noapte",
@@ -4004,7 +4004,7 @@
       "description": "Muzeu de arta din Sibiu, deschis in 1817, unul dintre cele mai vechi muzee din Europa.",
       "salience": 0.3934,
       "difficulty_tier": "medium",
-      "degree": 9,
+      "degree": 10,
       "aliases": [
         "Muzeul Brukenthal",
         "Brukenthal",
@@ -4020,7 +4020,7 @@
       "description": "Mestesug traditional de olarit din Oltenia, inscris in patrimoniul imaterial UNESCO in 2012.",
       "salience": 0.4863,
       "difficulty_tier": "medium",
-      "degree": 12,
+      "degree": 13,
       "aliases": [
         "ceramica Horezu",
         "olăritul de Horezu",
@@ -4038,7 +4038,7 @@
       "description": "Curent al sculpturii moderne initiat de Brancusi, bazat pe esentializarea formei si abstractizare.",
       "salience": 0.4911,
       "difficulty_tier": "medium",
-      "degree": 8,
+      "degree": 9,
       "aliases": [
         "sculptură brâncușiană",
         "arta lui Brâncuși",
@@ -4054,7 +4054,7 @@
       "description": "Opera muzicala a celui mai important compozitor roman, intemeietor al scolii nationale de muzica culta.",
       "salience": 0.5025,
       "difficulty_tier": "medium",
-      "degree": 8,
+      "degree": 9,
       "aliases": [
         "creația lui Enescu",
         "opera muzicală enesciană",
@@ -4070,7 +4070,7 @@
       "description": "Oras din centrul Romaniei, la poalele Carpatilor, important centru turistic si industrial.",
       "salience": 0.3074,
       "difficulty_tier": "hard",
-      "degree": 8,
+      "degree": 12,
       "aliases": [
         "Brașovul",
         "municipiul Brașov",
@@ -4086,7 +4086,7 @@
       "description": "Oras din Transilvania, fost centru sas, capitala culturala europeana in 2007.",
       "salience": 0.3144,
       "difficulty_tier": "hard",
-      "degree": 7,
+      "degree": 11,
       "aliases": [
         "Sibiul",
         "municipiul Sibiu",
@@ -4272,7 +4272,7 @@
       "description": "Conflict mondial (1914-1918); Romania a participat din 1916, urmat de Marea Unire.",
       "salience": 0.4923,
       "difficulty_tier": "medium",
-      "degree": 10,
+      "degree": 12,
       "aliases": [
         "Marele Război",
         "Războiul cel Mare",
@@ -4289,7 +4289,7 @@
       "description": "Regimul comunist instaurat dupa 1947, condus in final de Nicolae Ceausescu pana in 1989.",
       "salience": 0.5259,
       "difficulty_tier": "medium",
-      "degree": 14,
+      "degree": 18,
       "aliases": [
         "regimul comunist românesc",
         "comunismul românesc",
@@ -4319,7 +4319,7 @@
       "description": "Domnitor al Moldovei si carturar (1673-1723), autor de opere istorice si lingvistice, membru al Academiei din Berlin.",
       "salience": 0.2896,
       "difficulty_tier": "hard",
-      "degree": 5,
+      "degree": 6,
       "aliases": [
         "D. Cantemir",
         "Cantemir voievodul",
@@ -4334,7 +4334,7 @@
       "description": "Miscare culturala iluminista din Transilvania (sec. XVIII-XIX) ce a sustinut originea latina a limbii romane.",
       "salience": 0.3418,
       "difficulty_tier": "medium",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "Școala latinistă ardeleană",
         "mișcarea ardeleană latinistă",
@@ -4349,7 +4349,7 @@
       "description": "Scriitor si filolog (1802-1872), primul presedinte al Academiei Romane, promotor al alfabetului latin.",
       "salience": 0.2993,
       "difficulty_tier": "hard",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "I. Heliade Rădulescu",
         "Heliade Rădulescu",
@@ -4379,7 +4379,7 @@
       "description": "Lingvist (1877-1948), coordonator al dictionarului-tezaur al limbii romane si al Atlasului lingvistic roman.",
       "salience": 0.2137,
       "difficulty_tier": "hard",
-      "degree": 5,
+      "degree": 6,
       "aliases": [
         "S. Pușcariu",
         "Pușcariu lingvistul",
@@ -4446,7 +4446,7 @@
       "description": "Comedie de I.L. Caragiale (1884), satira a vietii politice romanesti.",
       "salience": 0.6344,
       "difficulty_tier": "medium",
-      "degree": 15,
+      "degree": 16,
       "aliases": [
         "piesa O scrisoare pierdută",
         "O scrisoare pierdută 1884",
@@ -4514,7 +4514,7 @@
       "description": "Poet modernist si matematician (1895-1961), autor al volumului Joc secund.",
       "salience": 0.2608,
       "difficulty_tier": "hard",
-      "degree": 9,
+      "degree": 10,
       "aliases": [
         "Barbu",
         "Ion Barbu poetul",
@@ -4574,7 +4574,7 @@
       "description": "Grup de intelectuali romani afirmati intre cele doua razboaie mondiale (1918-1939).",
       "salience": 0.3814,
       "difficulty_tier": "medium",
-      "degree": 8,
+      "degree": 9,
       "aliases": [
         "generația dintre războaie",
         "intelectualii interbelici",
@@ -4604,7 +4604,7 @@
       "description": "Fenomenul plecarii unor mari personalitati romane in strainatate, mai ales spre Franta si SUA.",
       "salience": 0.2335,
       "difficulty_tier": "hard",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "exil românesc",
         "emigrația română",
@@ -4619,7 +4619,7 @@
       "description": "Procesul de formare a statului roman modern prin unirea Moldovei si Tarii Romanesti, baza statalitatii actuale.",
       "salience": 0.3778,
       "difficulty_tier": "medium",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "Mica Unire",
         "Unirea de la 1859",
@@ -4651,7 +4651,7 @@
       "description": "Sistemul de educatie din Romania, organizat pe niveluri: prescolar, primar, gimnazial, liceal si universitar.",
       "salience": 0.6098,
       "difficulty_tier": "medium",
-      "degree": 17,
+      "degree": 19,
       "aliases": [
         "educația românească",
         "sistemul de învățământ",
@@ -4669,7 +4669,7 @@
       "description": "Una dintre cele mai vechi si prestigioase universitati din Romania, infiintata in 1864.",
       "salience": 0.5768,
       "difficulty_tier": "medium",
-      "degree": 16,
+      "degree": 21,
       "aliases": [
         "UB",
         "Universitatea București",
@@ -4704,7 +4704,7 @@
       "description": "Drepturi fundamentale garantate fiecarei persoane, protejate de Constitutie si tratate internationale.",
       "salience": 0.4899,
       "difficulty_tier": "medium",
-      "degree": 11,
+      "degree": 12,
       "aliases": [
         "drepturi ale omului",
         "drepturilor omului",
@@ -4737,7 +4737,7 @@
       "description": "Banca centrala a Romaniei, infiintata in 1880, care emite moneda nationala si conduce politica monetara.",
       "salience": 0.3185,
       "difficulty_tier": "hard",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "BNR",
         "Banca Națională",
@@ -4772,7 +4772,7 @@
       "description": "Comunitati etnice din Romania (maghiari, romi, germani, altele) cu drepturi recunoscute constitutional.",
       "salience": 0.2097,
       "difficulty_tier": "hard",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "minorități naționale",
         "minoritățile",
@@ -4889,7 +4889,7 @@
       "description": "Traditie de film romanesc dezvoltata de la productiile clasice la Noul Val Romanesc.",
       "salience": 0.6332,
       "difficulty_tier": "medium",
-      "degree": 51,
+      "degree": 52,
       "aliases": [
         "film românesc",
         "cinema românesc",
@@ -4920,7 +4920,7 @@
       "description": "Film romanesc regizat de Liviu Ciulei dupa romanul lui Liviu Rebreanu, premiat pentru regie la Cannes in 1965.",
       "salience": 0.2304,
       "difficulty_tier": "hard",
-      "degree": 5,
+      "degree": 6,
       "aliases": [
         "filmul Pădurea spânzuraților",
         "Pădurea spânzuraților de Ciulei",
@@ -4997,7 +4997,7 @@
       "description": "Regizor roman, castigator al Palme d'Or in 2007 pentru 4 luni, 3 saptamani si 2 zile.",
       "salience": 0.2603,
       "difficulty_tier": "hard",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "Mungiu",
         "C. Mungiu",
@@ -5012,7 +5012,7 @@
       "description": "Film romanesc din 2007 regizat de Cristian Mungiu, distins cu Palme d'Or la Cannes.",
       "salience": 0.2775,
       "difficulty_tier": "hard",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "4 luni 3 săptămâni",
         "Patru luni trei săptămâni",
@@ -5107,7 +5107,7 @@
       "description": "Aeroport bucurestean istoric, numit dupa pionierul aviatiei Aurel Vlaicu.",
       "salience": 0.2001,
       "difficulty_tier": "hard",
-      "degree": 6,
+      "degree": 8,
       "aliases": [
         "Aeroportul Băneasa",
         "Băneasa Aurel Vlaicu",
@@ -5123,7 +5123,7 @@
       "description": "Muzeu din Bucuresti dedicat istoriei aviatiei romanesti si patrimoniului aeronautic.",
       "salience": 0.2649,
       "difficulty_tier": "hard",
-      "degree": 8,
+      "degree": 9,
       "aliases": [
         "Muzeul Aviației",
         "Muzeul Aviației Române",
@@ -5157,7 +5157,7 @@
       "description": "Tradiția scenică românească, de la comedia clasică la regia modernă și instituțiile de repertoriu.",
       "salience": 0.6134,
       "difficulty_tier": "medium",
-      "degree": 21,
+      "degree": 24,
       "aliases": [
         "teatru românesc",
         "scena românească",
@@ -5188,7 +5188,7 @@
       "description": "Serie de sculpturi de Constantin Brâncuși inspirată de pasărea miraculoasă din basmele românești.",
       "salience": 0.2355,
       "difficulty_tier": "hard",
-      "degree": 8,
+      "degree": 9,
       "aliases": [
         "Măiastra lui Brâncuși",
         "seria Pasărea măiastră",
@@ -5204,7 +5204,7 @@
       "description": "Serial românesc de comedie difuzat de Pro TV, plasat într-un sat fictiv.",
       "salience": 0.9744,
       "difficulty_tier": "easy",
-      "degree": 18,
+      "degree": 19,
       "aliases": [
         "serialul Las Fierbinți",
         "Las Fierbinți serialul",
@@ -5234,7 +5234,7 @@
       "description": "Personaj din Las Fierbinți, celebru pentru monoloagele sale de cârciumă.",
       "salience": 0.7607,
       "difficulty_tier": "easy",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "Celentano din Fierbinți",
         "Celentano din Las Fierbinți",
@@ -5460,7 +5460,7 @@
       "description": "Talk-show de divertisment asociat cu Teo Trandafir, difuzat la Kanal D.",
       "salience": 0.3089,
       "difficulty_tier": "hard",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "emisiunea Teo Show",
         "show-ul lui Teo",
@@ -5520,7 +5520,7 @@
       "description": "Emisiune de divertisment și stand-up difuzată de Antena 1.",
       "salience": 0.5541,
       "difficulty_tier": "medium",
-      "degree": 11,
+      "degree": 12,
       "aliases": [
         "emisiunea iUmor",
         "show-ul iUmor",
@@ -5550,7 +5550,7 @@
       "description": "Reality-show românesc difuzat de Antena 1, adaptare după Temptation Island.",
       "salience": 0.4563,
       "difficulty_tier": "medium",
-      "degree": 9,
+      "degree": 10,
       "aliases": [
         "emisiunea Insula Iubirii",
         "show-ul Insula Iubirii",
@@ -5670,7 +5670,7 @@
       "description": "Ecranizare românească din 1987 după romanul lui Marin Preda.",
       "salience": 0.4587,
       "difficulty_tier": "medium",
-      "degree": 10,
+      "degree": 11,
       "aliases": [
         "filmul Moromeții",
         "Moromeții ecranizarea",
@@ -5700,7 +5700,7 @@
       "description": "Actor român legendar, creatorul personajului Nea Mărin pe ecran.",
       "salience": 0.871,
       "difficulty_tier": "easy",
-      "degree": 8,
+      "degree": 9,
       "aliases": [
         "Pellea Amza",
         "actorul Amza Pellea",
@@ -5760,7 +5760,7 @@
       "description": "Actor român foarte popular, cunoscut pentru roluri de film și scenă.",
       "salience": 0.7621,
       "difficulty_tier": "easy",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "Piersic Florin",
         "actorul Florin Piersic",
@@ -5850,7 +5850,7 @@
       "description": "Gala anuală care premiază realizările din cinematografia românească.",
       "salience": 0.4162,
       "difficulty_tier": "medium",
-      "degree": 11,
+      "degree": 12,
       "aliases": [
         "Gala Gopo",
         "gala Premiilor Gopo",
@@ -5925,7 +5925,7 @@
       "description": "Foi de varză sau viță umplute cu carne și orez, reper al meselor românești de sărbătoare.",
       "salience": 0.9793,
       "difficulty_tier": "easy",
-      "degree": 24,
+      "degree": 26,
       "aliases": [
         "sarmalele",
         "sarmaua",
@@ -5942,7 +5942,7 @@
       "description": "Mititei fripți pe grătar, asociați popular cu muștar, pâine și ieșiri de 1 Mai.",
       "salience": 0.9765,
       "difficulty_tier": "easy",
-      "degree": 25,
+      "degree": 27,
       "aliases": [
         "mititei",
         "micii",
@@ -5976,7 +5976,7 @@
       "description": "Ritual urban și de picnic: mici, fum, muștar și aglomerație la iarbă verde.",
       "salience": 0.8036,
       "difficulty_tier": "easy",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "grătar de 1 Mai",
         "1 Mai la grătar"
@@ -6036,7 +6036,7 @@
       "description": "Aluat dulce cu nucă, cacao sau rahat, nelipsit de la Crăciun și Paște.",
       "salience": 0.9737,
       "difficulty_tier": "easy",
-      "degree": 21,
+      "degree": 22,
       "aliases": [
         "cozonacul",
         "cozonaci",
@@ -6100,7 +6100,7 @@
       "description": "Ciorbă cu pui, smântână și usturoi, asociată cu Rădăuți și Bucovina.",
       "salience": 0.8816,
       "difficulty_tier": "easy",
-      "degree": 12,
+      "degree": 13,
       "aliases": [
         "rădăuțeană",
         "ciorbă ca la Rădăuți",
@@ -6195,7 +6195,7 @@
       "description": "Băutură caldă cu scorțișoară și mirodenii, prezentă la târgurile de iarnă.",
       "salience": 0.5385,
       "difficulty_tier": "medium",
-      "degree": 10,
+      "degree": 11,
       "aliases": [
         "vinul fiert",
         "vin fiert aromat",
@@ -6210,7 +6210,7 @@
       "description": "Distilat tradițional din prune, servit ca aperitiv în multe gospodării.",
       "salience": 0.8324,
       "difficulty_tier": "easy",
-      "degree": 12,
+      "degree": 13,
       "aliases": [
         "țuicuță",
         "țuică de prună",
@@ -6225,7 +6225,7 @@
       "description": "Distilat tare din fructe, emblematic mai ales în Transilvania și Maramureș.",
       "salience": 0.3694,
       "difficulty_tier": "medium",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "pălincuță",
         "horincă",
@@ -6286,7 +6286,7 @@
       "description": "Masă festivă cu porc, cozonac, sarmale, piftie și multe platouri reci.",
       "salience": 0.9659,
       "difficulty_tier": "easy",
-      "degree": 16,
+      "degree": 17,
       "aliases": [
         "masa Crăciunului",
         "cina de Crăciun",
@@ -6458,7 +6458,7 @@
       "description": "Reper bucureștean de mici la grătar, coadă și muștar în Piața Obor.",
       "salience": 0.4641,
       "difficulty_tier": "medium",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "micii de la Obor",
         "mititei Obor",
@@ -6520,7 +6520,7 @@
       "description": "Fel ardelenesc stratificat cu varză, carne și orez, asemănat cu sarmalele desfăcute.",
       "salience": 0.5846,
       "difficulty_tier": "medium",
-      "degree": 8,
+      "degree": 10,
       "aliases": [
         "varză ca la Cluj",
         "varză clujeană stratificată"
@@ -6534,7 +6534,7 @@
       "description": "Preparat tradițional de porc, fiert în maț, prezent pe masa de Crăciun.",
       "salience": 0.4593,
       "difficulty_tier": "medium",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "caltaboșul",
         "caltaboși",
@@ -6568,7 +6568,7 @@
       "description": "Mezel tradițional din porc, în membrană, servit rece la masa de Crăciun.",
       "salience": 0.4833,
       "difficulty_tier": "medium",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "toba de porc",
         "toba tradițională",
@@ -6693,7 +6693,7 @@
       "description": "Ouă vopsite pentru Paște, ciocnite la masa festivă.",
       "salience": 0.7544,
       "difficulty_tier": "easy",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "ouăle roșii",
         "oul roșu",
@@ -6709,7 +6709,7 @@
       "description": "Oraș transilvănean de pe râul Mureș, centru important al județului Mureș.",
       "salience": 0.1773,
       "difficulty_tier": "hard",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "Târgu-Mureș",
         "Tg. Mureș",
@@ -6757,7 +6757,7 @@
       "description": "Stațiune de pe Valea Prahovei, la poalele Bucegilor, cunoscută pentru Peleș.",
       "salience": 0.2972,
       "difficulty_tier": "hard",
-      "degree": 6,
+      "degree": 8,
       "aliases": [
         "Sinaia oraș",
         "stațiunea Sinaia",
@@ -6773,7 +6773,7 @@
       "description": "Oraș-stațiune montană din județul Brașov, între Valea Prahovei și Țara Bârsei.",
       "salience": 0.1829,
       "difficulty_tier": "hard",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "Predealul",
         "stațiunea Predeal",
@@ -7022,7 +7022,7 @@
       "description": "Orașul în care Sfatul Țării a votat unirea Basarabiei cu România la 27 martie 1918.",
       "salience": 0.1657,
       "difficulty_tier": "hard",
-      "degree": 4,
+      "degree": 6,
       "aliases": [
         "Chișinăul",
         "orașul Chișinău",
@@ -7067,7 +7067,7 @@
       "description": "Cuvânt românesc pentru dorință amestecată cu melancolie, frecvent invocat ca greu de tradus exact.",
       "salience": 0.6988,
       "difficulty_tier": "easy",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "dorul",
         "dor românesc",
@@ -7377,7 +7377,7 @@
       "description": "Cârciumarul din Moara cu noroc, prins între dorința de avere și degradarea morală.",
       "salience": 0.2046,
       "difficulty_tier": "hard",
-      "degree": 5,
+      "degree": 6,
       "aliases": [
         "Ghiță din Moara",
         "cârciumarul Ghiță",
@@ -7422,7 +7422,7 @@
       "description": "Spațiul online românesc, de la forumuri și bloguri la YouTube, TikTok și meme-uri.",
       "salience": 0.9512,
       "difficulty_tier": "easy",
-      "degree": 24,
+      "degree": 25,
       "aliases": [
         "internet românesc",
         "netul românesc",
@@ -7699,7 +7699,7 @@
       "description": "Cioban devenit faimos prin reclamele Vodafone, apoi reper de internet rural simpatic.",
       "salience": 0.6458,
       "difficulty_tier": "medium",
-      "degree": 11,
+      "degree": 13,
       "aliases": [
         "Ghiță cioban",
         "ciobanul Ghiță",
@@ -7716,7 +7716,7 @@
       "description": "Campanie publicitară Vodafone România construită în jurul lui Ghiță Ciobanul.",
       "salience": 0.5954,
       "difficulty_tier": "medium",
-      "degree": 11,
+      "degree": 12,
       "aliases": [
         "reclama cu Ghiță",
         "campania cu Ghiță",
@@ -7809,7 +7809,7 @@
       "description": "Persona online a lui Matei Dima, asociată cu sketch-uri, parodii și comedie video.",
       "salience": 0.5918,
       "difficulty_tier": "medium",
-      "degree": 12,
+      "degree": 13,
       "aliases": [
         "Matei Dima",
         "Matei Dima BRomania",
@@ -7839,7 +7839,7 @@
       "description": "Serial românesc de animație online creat de Creative Monkeyz, cu limbaj și umor devenite meme.",
       "salience": 0.7361,
       "difficulty_tier": "easy",
-      "degree": 13,
+      "degree": 14,
       "aliases": [
         "serialul RObotzi",
         "RObotzi Creative Monkeyz",
@@ -7886,7 +7886,7 @@
       "description": "Numele de scenă al lui Cosmin Nedelcu, comediant de stand-up și gazdă de podcast.",
       "salience": 0.6194,
       "difficulty_tier": "medium",
-      "degree": 12,
+      "degree": 13,
       "aliases": [
         "Cosmin Nedelcu",
         "Cosmin Micutzu",
@@ -7902,7 +7902,7 @@
       "description": "Trio de comedianți important pentru stand-up-ul românesc modern.",
       "salience": 0.319,
       "difficulty_tier": "hard",
-      "degree": 6,
+      "degree": 8,
       "aliases": [
         "Teo Vio Costel",
         "trio Teo Vio Costel",
@@ -7962,7 +7962,7 @@
       "description": "Canal culinar românesc foarte popular pe YouTube, reper pentru rețete explicate clar.",
       "salience": 0.5487,
       "difficulty_tier": "medium",
-      "degree": 11,
+      "degree": 13,
       "aliases": [
         "JamilaCuisine",
         "canalul Jamila",
@@ -7979,7 +7979,7 @@
       "description": "Publicație video online din România, cunoscută pentru reportaje și documentare.",
       "salience": 0.4953,
       "difficulty_tier": "medium",
-      "degree": 9,
+      "degree": 11,
       "aliases": [
         "Recorder.ro",
         "publicația Recorder",
@@ -8045,7 +8045,7 @@
       "description": "Clip în care creatorul comentează alt conținut, iar expresia feței devine parte din poantă.",
       "salience": 0.5217,
       "difficulty_tier": "medium",
-      "degree": 14,
+      "degree": 15,
       "aliases": [
         "reaction video",
         "clip de reacție",
@@ -8190,7 +8190,7 @@
       "description": "Pop radio românesc post-2000, între televiziune, streaming și concerte mari.",
       "salience": 0.8394,
       "difficulty_tier": "easy",
-      "degree": 28,
+      "degree": 29,
       "aliases": [
         "pop radio românesc",
         "pop românesc comercial",
@@ -8268,7 +8268,7 @@
       "description": "Cântăreț român de manele, celebru pentru vocea sa și pentru concertele de petrecere.",
       "salience": 0.8134,
       "difficulty_tier": "easy",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "Florin Salam manelistul",
         "Salam manelistul",
@@ -8283,7 +8283,7 @@
       "description": "Cântăreț român de manele, figură centrală a scenei din anii 2000.",
       "salience": 0.6995,
       "difficulty_tier": "easy",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "Adrian Copilul Minune",
         "Adrian Simionescu",
@@ -8392,7 +8392,7 @@
       "description": "Trio pop din Republica Moldova care a dus „Dragostea din tei” în topuri internaționale.",
       "salience": 0.883,
       "difficulty_tier": "easy",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "O Zone",
         "trupa O-Zone",
@@ -8423,7 +8423,7 @@
       "description": "Cântăreață română devenită cunoscută global cu „Mr. Saxobeat”.",
       "salience": 0.6002,
       "difficulty_tier": "medium",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "Alexandra Ioana Stan",
         "Alexandra Stan cântăreața",
@@ -8453,7 +8453,7 @@
       "description": "Cântăreț și producător român, figură majoră a popului radio și TV.",
       "salience": 0.7677,
       "difficulty_tier": "easy",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "Andrei Maria",
         "Tiberiu Andrei Maria",
@@ -8515,7 +8515,7 @@
       "description": "Trupă românească de rock, reper al folk-rockului și al mitologiei muzicale autohtone.",
       "salience": 0.6918,
       "difficulty_tier": "easy",
-      "degree": 8,
+      "degree": 9,
       "aliases": [
         "trupa Phoenix",
         "formația Phoenix",
@@ -8531,7 +8531,7 @@
       "description": "Trupă românească de rock, cunoscută pentru balade și concerte de arenă.",
       "salience": 0.5511,
       "difficulty_tier": "medium",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "trupa Iris",
         "formația Iris",
@@ -8546,7 +8546,7 @@
       "description": "Trupă românească de rock din Timișoara, celebră pentru piesa „Ploaia”.",
       "salience": 0.6834,
       "difficulty_tier": "easy",
-      "degree": 10,
+      "degree": 12,
       "aliases": [
         "trupa Cargo",
         "formația Cargo",
@@ -8820,7 +8820,7 @@
       "description": "Festival muzical organizat la Bonțida, lângă Castelul Bánffy.",
       "salience": 0.6862,
       "difficulty_tier": "easy",
-      "degree": 8,
+      "degree": 9,
       "aliases": [
         "festivalul Electric Castle",
         "Electric Castle Bonțida",
@@ -8838,7 +8838,7 @@
       "description": "Festival-concurs muzical de la Brașov, lansat în perioada televiziunii clasice.",
       "salience": 0.7305,
       "difficulty_tier": "easy",
-      "degree": 16,
+      "degree": 17,
       "aliases": [
         "festivalul Cerbul de Aur",
         "Cerbul de Aur Brașov",
@@ -8947,7 +8947,7 @@
       "description": "Oraș de la Marea Neagră, legat de reședința preferată a Reginei Maria.",
       "salience": 0.1702,
       "difficulty_tier": "hard",
-      "degree": 5,
+      "degree": 6,
       "aliases": [
         "Balcicul",
         "Balchik",
@@ -8964,7 +8964,7 @@
       "description": "Reședință regală de la Sinaia, strâns asociată cu Regina Maria.",
       "salience": 0.1788,
       "difficulty_tier": "hard",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "Pelișorul",
         "Palatul Pelișor",
@@ -8994,7 +8994,7 @@
       "description": "Lucrare celebră a lui Nicolae Iorga despre continuitatea culturală bizantină după 1453.",
       "salience": 0.1551,
       "difficulty_tier": "hard",
-      "degree": 3,
+      "degree": 4,
       "aliases": [
         "Byzance après Byzance",
         "studiul Bizanț după Bizanț",
@@ -9055,7 +9055,7 @@
       "description": "Universitate publică majoră din Cluj-Napoca, cu rădăcini academice în Transilvania.",
       "salience": 0.2092,
       "difficulty_tier": "hard",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "UBB",
         "Babeș-Bolyai",
@@ -9071,7 +9071,7 @@
       "description": "Prima universitate modernă a României, fondată la Iași în 1860.",
       "salience": 0.2588,
       "difficulty_tier": "hard",
-      "degree": 5,
+      "degree": 6,
       "aliases": [
         "UAIC",
         "Universitatea Cuza",
@@ -9088,7 +9088,7 @@
       "description": "Universitate tehnică bucureșteană, reper pentru ingineria românească.",
       "salience": 0.2461,
       "difficulty_tier": "hard",
-      "degree": 5,
+      "degree": 6,
       "aliases": [
         "UPB",
         "Politehnica București",
@@ -9169,7 +9169,7 @@
       "description": "Oraș argeșean asociat puternic cu industria auto Dacia.",
       "salience": 0.2259,
       "difficulty_tier": "hard",
-      "degree": 5,
+      "degree": 7,
       "aliases": [
         "orașul Pitești",
         "municipiul Pitești",
@@ -9185,7 +9185,7 @@
       "description": "Oraș important al Olteniei, cu tradiție industrială și universitară.",
       "salience": 0.2406,
       "difficulty_tier": "hard",
-      "degree": 5,
+      "degree": 6,
       "aliases": [
         "orașul Craiova",
         "municipiul Craiova",
@@ -9217,7 +9217,7 @@
       "description": "Oraș dunărean și port, asociat cu siderurgia românească.",
       "salience": 0.2345,
       "difficulty_tier": "hard",
-      "degree": 5,
+      "degree": 6,
       "aliases": [
         "orașul Galați",
         "municipiul Galați",
@@ -9391,7 +9391,7 @@
       "description": "Echipa Steaua București care a câștigat Cupa Campionilor Europeni în 1986.",
       "salience": 0.9188,
       "difficulty_tier": "easy",
-      "degree": 11,
+      "degree": 12,
       "aliases": [
         "Steaua București 1986",
         "Steaua campioana Europei",
@@ -9519,7 +9519,7 @@
       "description": "Club turc unde Hagi și Gică Popescu au fost figuri importante la finalul anilor 1990.",
       "salience": 0.4084,
       "difficulty_tier": "medium",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "Galatasaray Istanbul",
         "Galatasaray SK",
@@ -9534,7 +9534,7 @@
       "description": "Nota 10 obținută de Nadia Comăneci la Montreal 1976, premieră olimpică în gimnastică.",
       "salience": 0.9484,
       "difficulty_tier": "easy",
-      "degree": 10,
+      "degree": 11,
       "aliases": [
         "nota 10 de la Montreal",
         "zecele Nadiei",
@@ -9597,7 +9597,7 @@
       "description": "Al doilea titlu de Grand Slam al Simonei Halep, câștigat pe iarba londoneză.",
       "salience": 0.9118,
       "difficulty_tier": "easy",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "titlul Wimbledon 2019",
         "Halep Wimbledon 2019",
@@ -9629,7 +9629,7 @@
       "description": "Turneul de Grand Slam de la Paris, câștigat de Simona Halep în 2018.",
       "salience": 0.6392,
       "difficulty_tier": "medium",
-      "degree": 10,
+      "degree": 12,
       "aliases": [
         "French Open",
         "Openul Franței",
@@ -9647,7 +9647,7 @@
       "description": "Turneul de Grand Slam pe iarbă câștigat de Simona Halep în 2019.",
       "salience": 0.7537,
       "difficulty_tier": "easy",
-      "degree": 11,
+      "degree": 13,
       "aliases": [
         "The Championships",
         "turneul de la Wimbledon",
@@ -9665,7 +9665,7 @@
       "description": "Primul titlu de Grand Slam la simplu câștigat de Ilie Năstase.",
       "salience": 0.412,
       "difficulty_tier": "medium",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "US Open-ul din 1972",
         "Openul american 1972",
@@ -9989,7 +9989,7 @@
       "description": "Tradiție academică în care apar Haret, Pompeiu, Țițeica, Moisil și Dan Barbilian.",
       "salience": 0.2957,
       "difficulty_tier": "hard",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "matematicii românești",
         "matematica din România",
@@ -10005,7 +10005,7 @@
       "description": "Matematician și logician român, asociat cu începuturile informaticii românești.",
       "salience": 0.2375,
       "difficulty_tier": "hard",
-      "degree": 5,
+      "degree": 6,
       "aliases": [
         "G. Moisil",
         "Gr. C. Moisil",
@@ -10167,7 +10167,7 @@
       "description": "Program școlar românesc de distribuire a laptelui și cornului pentru elevi.",
       "salience": 0.8331,
       "difficulty_tier": "easy",
-      "degree": 11,
+      "degree": 12,
       "aliases": [
         "corn și lapte",
         "programul lapte și corn",
@@ -10492,7 +10492,7 @@
       "description": "Băutură tradițională din prune, asociată cu gospodăria rurală și mesele de familie.",
       "salience": 0.635,
       "difficulty_tier": "medium",
-      "degree": 8,
+      "degree": 9,
       "aliases": [
         "țuica casei",
         "țuică făcută acasă",
@@ -10508,7 +10508,7 @@
       "description": "Obicei rural de iarnă înaintea Crăciunului, legat de pregătirea cărnii.",
       "salience": 0.8064,
       "difficulty_tier": "easy",
-      "degree": 11,
+      "degree": 13,
       "aliases": [
         "tăiatul porcului",
         "tăierea porcului",
@@ -10623,7 +10623,7 @@
       "description": "Fel de sărbătoare cu varză, carne și oală mare, nelipsit pe multe mese românești.",
       "salience": 0.9603,
       "difficulty_tier": "easy",
-      "degree": 13,
+      "degree": 14,
       "aliases": [
         "sarmale de Crăciun",
         "sarmalele festive",
@@ -10639,7 +10639,7 @@
       "description": "Ritual domestic de primăvară, cu spălat geamuri, covoare și ordine generală.",
       "salience": 0.7185,
       "difficulty_tier": "easy",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "curățenia pascală",
         "curățenie de Paște",
@@ -10671,7 +10671,7 @@
       "description": "Obicei de Crăciun în care grupuri cântă colinde pe la case.",
       "salience": 0.7839,
       "difficulty_tier": "easy",
-      "degree": 7,
+      "degree": 9,
       "aliases": [
         "mersul cu colindul",
         "cântatul colindelor",
@@ -10982,7 +10982,7 @@
       "description": "Artă scenică bazată pe joc actoricesc, regie și spectacol public.",
       "salience": 0.8654,
       "difficulty_tier": "easy",
-      "degree": 13,
+      "degree": 14,
       "aliases": [
         "scenă teatrală",
         "artă dramatică",
@@ -11195,7 +11195,7 @@
       "description": "Gen de film sau emisiune construit pentru umor.",
       "salience": 0.921,
       "difficulty_tier": "easy",
-      "degree": 17,
+      "degree": 20,
       "aliases": [
         "film comic",
         "umor pe ecran",
@@ -11296,7 +11296,7 @@
       "description": "Produs lactat folosit în feluri sărate, deserturi și gustări.",
       "salience": 0.9238,
       "difficulty_tier": "easy",
-      "degree": 9,
+      "degree": 10,
       "aliases": [
         "brânzeturi",
         "brânzeturile",
@@ -11445,7 +11445,7 @@
       "description": "Mâncare cumpărată rapid de la chioșc, tarabă sau fast-food.",
       "salience": 0.7037,
       "difficulty_tier": "easy",
-      "degree": 10,
+      "degree": 11,
       "aliases": [
         "street food",
         "mâncare de stradă",
@@ -12030,7 +12030,7 @@
       "description": "Tubercul alimentar, numit regional barabulă în unele zone.",
       "salience": 0.7178,
       "difficulty_tier": "easy",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "cartoful",
         "cartofi",
@@ -12138,7 +12138,7 @@
       "description": "Grup sau cerc în care se citesc și se discută texte literare.",
       "salience": 0.3538,
       "difficulty_tier": "medium",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "cenaclul literar",
         "cenacluri literare",
@@ -12154,7 +12154,7 @@
       "description": "Direcție artistică experimentală, opusă convențiilor tradiționale.",
       "salience": 0.1854,
       "difficulty_tier": "hard",
-      "degree": 3,
+      "degree": 4,
       "aliases": [
         "mișcare avangardistă",
         "avangarde literare",
@@ -12170,7 +12170,7 @@
       "description": "Spațiu rural frecvent în proza și poezia românească.",
       "salience": 0.8781,
       "difficulty_tier": "easy",
-      "degree": 13,
+      "degree": 14,
       "aliases": [
         "satul românesc",
         "lumea satului"
@@ -12297,7 +12297,7 @@
       "description": "Video scurt sau lung despre rețete, gătit și prezentare de mâncare.",
       "salience": 0.3796,
       "difficulty_tier": "medium",
-      "degree": 5,
+      "degree": 6,
       "aliases": [
         "video culinar",
         "clip de gătit",
@@ -12669,7 +12669,7 @@
       "description": "Familia și instituția monarhică a României moderne.",
       "salience": 0.5463,
       "difficulty_tier": "medium",
-      "degree": 7,
+      "degree": 9,
       "aliases": [
         "familia regală"
       ]
@@ -12745,7 +12745,7 @@
       "description": "Organizație cu rol public, administrativ, educațional sau civic.",
       "salience": 0.8071,
       "difficulty_tier": "easy",
-      "degree": 20,
+      "degree": 21,
       "aliases": [
         "instituția",
         "organ public",
@@ -12881,7 +12881,7 @@
       "description": "Loc amenajat pentru acostarea navelor și schimbul de mărfuri.",
       "salience": 0.3664,
       "difficulty_tier": "medium",
-      "degree": 5,
+      "degree": 6,
       "aliases": [
         "portul",
         "terminal portuar",
@@ -12899,7 +12899,7 @@
       "description": "Instituția militară responsabilă de apărarea unei țări.",
       "salience": 0.3784,
       "difficulty_tier": "medium",
-      "degree": 4,
+      "degree": 6,
       "aliases": [
         "forțele armate",
         "armata națională",
@@ -13293,7 +13293,7 @@
       "description": "Mașină electronică folosită pentru prelucrarea informației.",
       "salience": 0.7424,
       "difficulty_tier": "easy",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "calculatorul",
         "PC",
@@ -13595,7 +13595,7 @@
       "description": "Sculptură care reprezintă o persoană, ființă sau simbol.",
       "salience": 0.2289,
       "difficulty_tier": "hard",
-      "degree": 2,
+      "degree": 3,
       "aliases": [
         "statuia",
         "statui",
@@ -13672,7 +13672,7 @@
       "description": "Textul care descrie acțiunea, replicile și scenele unui film.",
       "salience": 0.4479,
       "difficulty_tier": "medium",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "scenariul",
         "scenarii",
@@ -13762,7 +13762,7 @@
       "description": "Film non-ficțional despre persoane, locuri sau evenimente reale.",
       "salience": 0.2527,
       "difficulty_tier": "hard",
-      "degree": 1,
+      "degree": 2,
       "aliases": [
         "film documentar",
         "documentarul",
@@ -13806,7 +13806,7 @@
       "description": "Cartofi tăiați și prăjiți în ulei, serviți ca garnitură sau gustare.",
       "salience": 0.6932,
       "difficulty_tier": "easy",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "cartofi pai",
         "cartofii prăjiți"
@@ -13863,7 +13863,7 @@
       "description": "Băutură alcoolică fermentată din malț, hamei, drojdie și apă.",
       "salience": 0.6296,
       "difficulty_tier": "medium",
-      "degree": 5,
+      "degree": 6,
       "aliases": [
         "berea",
         "beri",
@@ -13935,7 +13935,7 @@
       "description": "Teritoriu cu populație, granițe și autoritate politică.",
       "salience": 0.8985,
       "difficulty_tier": "easy",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "țări",
         "țările"
@@ -13964,7 +13964,7 @@
       "description": "Întindere uriașă de apă sărată între continente.",
       "salience": 0.6062,
       "difficulty_tier": "medium",
-      "degree": 2,
+      "degree": 3,
       "aliases": [
         "oceane",
         "oceanul",
@@ -14374,7 +14374,7 @@
       "description": "Obiect tipărit sau digital care conține un text literar ori informativ.",
       "salience": 0.973,
       "difficulty_tier": "easy",
-      "degree": 14,
+      "degree": 16,
       "aliases": [
         "cartea",
         "cărți",
@@ -14723,7 +14723,7 @@
       "description": "Instrument muzical cu clape și corzi lovite de ciocănele.",
       "salience": 0.3508,
       "difficulty_tier": "medium",
-      "degree": 2,
+      "degree": 3,
       "aliases": [
         "pianul",
         "piane",
@@ -14770,7 +14770,7 @@
       "description": "Material video realizat pentru promovarea unei melodii.",
       "salience": 0.3652,
       "difficulty_tier": "medium",
-      "degree": 3,
+      "degree": 4,
       "aliases": [
         "videoclipul",
         "videoclipuri",
@@ -14861,7 +14861,7 @@
       "description": "Artist care creează imagini cu culoare pe pânză, lemn, hârtie sau zid.",
       "salience": 0.6122,
       "difficulty_tier": "medium",
-      "degree": 4,
+      "degree": 6,
       "aliases": [
         "pictorul",
         "pictori",
@@ -14891,7 +14891,7 @@
       "description": "Persoană implicată în conducerea statului, partide sau decizii publice.",
       "salience": 0.4341,
       "difficulty_tier": "medium",
-      "degree": 3,
+      "degree": 4,
       "aliases": [
         "politicieni",
         "om politic",
@@ -15000,7 +15000,7 @@
       "description": "Instituție de învățământ pentru educația copiilor și tinerilor.",
       "salience": 0.9181,
       "difficulty_tier": "easy",
-      "degree": 8,
+      "degree": 9,
       "aliases": [
         "școli",
         "școlile",
@@ -15015,7 +15015,7 @@
       "description": "Instituție medicală pentru îngrijirea și tratarea pacienților.",
       "salience": 0.7059,
       "difficulty_tier": "easy",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "spitalul",
         "spitale",
@@ -15031,7 +15031,7 @@
       "description": "Instituție locală care administrează o comună, un oraș sau un municipiu.",
       "salience": 0.7558,
       "difficulty_tier": "easy",
-      "degree": 5,
+      "degree": 6,
       "aliases": [
         "primăria",
         "primăriei",
@@ -15079,7 +15079,7 @@
       "description": "Canale publice de informare, precum presa, radioul, televiziunea și online-ul.",
       "salience": 0.4719,
       "difficulty_tier": "medium",
-      "degree": 5,
+      "degree": 7,
       "aliases": [
         "media",
         "presa",
@@ -15095,7 +15095,7 @@
       "description": "Acțiune publică prin care oamenii își exprimă nemulțumirea sau revendicările.",
       "salience": 0.4893,
       "difficulty_tier": "medium",
-      "degree": 6,
+      "degree": 8,
       "aliases": [
         "proteste",
         "manifestație",
@@ -15379,7 +15379,7 @@
       "description": "Corp ceresc care orbitează o stea și nu produce lumină proprie.",
       "salience": 0.4245,
       "difficulty_tier": "medium",
-      "degree": 2,
+      "degree": 3,
       "aliases": [
         "planete",
         "planetele"
@@ -15408,7 +15408,7 @@
       "description": "Moleculă care poartă informația genetică a organismelor.",
       "salience": 0.4653,
       "difficulty_tier": "medium",
-      "degree": 3,
+      "degree": 5,
       "aliases": [
         "acid dezoxiribonucleic",
         "ADN-ul",
@@ -15439,7 +15439,7 @@
       "description": "Așteptarea la rând pentru acte, plăți sau servicii.",
       "salience": 0.6248,
       "difficulty_tier": "medium",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "coadă la ghișeu",
         "coada de la ghișeu",
@@ -15455,7 +15455,7 @@
       "description": "Dosar de carton cerut frecvent pentru hârtii și acte.",
       "salience": 0.5157,
       "difficulty_tier": "medium",
-      "degree": 3,
+      "degree": 5,
       "aliases": [
         "dosarul cu șină",
         "dosare cu șină",
@@ -15471,7 +15471,7 @@
       "description": "Hârtii sau plăți lunare pentru utilități și servicii.",
       "salience": 0.5589,
       "difficulty_tier": "medium",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "factura",
         "facturile",
@@ -15534,7 +15534,7 @@
       "description": "Pauză de la muncă petrecută adesea în vacanță sau la rude.",
       "salience": 0.6798,
       "difficulty_tier": "easy",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "concediu la mare",
         "vacanță la mare",
@@ -15611,7 +15611,7 @@
       "description": "Proprietate vizuală folosită în pictură, design și decor.",
       "salience": 0.7881,
       "difficulty_tier": "easy",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "culoarea",
         "culori",
@@ -15788,7 +15788,7 @@
       "description": "Totalitatea creațiilor și obiceiurilor populare transmise oral.",
       "salience": 0.8401,
       "difficulty_tier": "easy",
-      "degree": 5,
+      "degree": 6,
       "aliases": [
         "folclorul",
         "folclorului"
@@ -15846,7 +15846,7 @@
       "description": "Cântec tradițional cântat de obicei la sărbători de iarnă.",
       "salience": 0.6302,
       "difficulty_tier": "medium",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "colindul",
         "colinde",
@@ -15861,7 +15861,7 @@
       "description": "Grup de persoane care cântă împreună piese vocale.",
       "salience": 0.8443,
       "difficulty_tier": "easy",
-      "degree": 8,
+      "degree": 9,
       "aliases": [
         "corul",
         "coruri",
@@ -16007,7 +16007,7 @@
       "description": "Mesaj publicitar difuzat între programe sau în pauze TV.",
       "salience": 0.4965,
       "difficulty_tier": "medium",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "reclame",
         "reclamele"
@@ -16051,7 +16051,7 @@
       "description": "Program TV care prezintă informații și evenimente actuale.",
       "salience": 0.7965,
       "difficulty_tier": "easy",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "știrile",
         "jurnal de știri",
@@ -16066,7 +16066,7 @@
       "description": "Film sau serial realizat prin animație, adesea pentru copii.",
       "salience": 0.7227,
       "difficulty_tier": "easy",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "desenul animat",
         "desene animate",
@@ -16258,7 +16258,7 @@
       "description": "Concept general pentru alimente și preparate consumate zilnic.",
       "salience": 0.9301,
       "difficulty_tier": "easy",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "mâncarea",
         "mâncăruri",
@@ -16508,7 +16508,7 @@
       "description": "Băutură alcoolică din struguri, servită la mese sau fiartă cu mirodenii.",
       "salience": 0.6742,
       "difficulty_tier": "easy",
-      "degree": 4,
+      "degree": 6,
       "aliases": [
         "vinul",
         "vinuri",
@@ -16523,7 +16523,7 @@
       "description": "Spațiu și domeniu al pregătirii mâncării.",
       "salience": 0.8809,
       "difficulty_tier": "easy",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "bucătăria",
         "bucătării",
@@ -16568,7 +16568,7 @@
       "description": "Așezare rurală cu locuințe și gospodării.",
       "salience": 0.8971,
       "difficulty_tier": "easy",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "satul",
         "sate",
@@ -16933,7 +16933,7 @@
       "description": "Cale urbană de circulație mărginită de clădiri.",
       "salience": 0.8788,
       "difficulty_tier": "easy",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "străzi",
         "străzile"
@@ -17095,7 +17095,7 @@
       "description": "Clădire mare folosită ca reședință domnească sau regală.",
       "salience": 0.5223,
       "difficulty_tier": "medium",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "palatul",
         "palate",
@@ -17375,7 +17375,7 @@
       "description": "Ridicare violentă a unei mulțimi împotriva unei stăpâniri.",
       "salience": 0.4431,
       "difficulty_tier": "medium",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "răscoale",
         "răscoalele"
@@ -17779,7 +17779,7 @@
       "description": "Schimb de replici între două sau mai multe persoane.",
       "salience": 0.397,
       "difficulty_tier": "medium",
-      "degree": 3,
+      "degree": 4,
       "aliases": [
         "dialogul",
         "dialoguri",
@@ -18043,7 +18043,7 @@
       "description": "Text cu însemnări personale așezate pe zile.",
       "salience": 0.3412,
       "difficulty_tier": "medium",
-      "degree": 3,
+      "degree": 4,
       "aliases": [
         "jurnalul",
         "jurnale",
@@ -18058,7 +18058,7 @@
       "description": "Publicație periodică în care pot apărea texte literare.",
       "salience": 0.2593,
       "difficulty_tier": "hard",
-      "degree": 3,
+      "degree": 4,
       "aliases": [
         "ziarul",
         "ziare",
@@ -18249,7 +18249,7 @@
       "description": "Conținut publicat pe o platformă socială, vizibil în feed.",
       "salience": 0.7445,
       "difficulty_tier": "easy",
-      "degree": 3,
+      "degree": 4,
       "aliases": [
         "postarea",
         "postări",
@@ -18444,7 +18444,7 @@
       "description": "Sunet produs de om, folosit la cântat și interpretare.",
       "salience": 0.8085,
       "difficulty_tier": "easy",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "vocea",
         "voci",
@@ -18459,7 +18459,7 @@
       "description": "Parte repetată a unei piese, ușor de ținut minte.",
       "salience": 0.7691,
       "difficulty_tier": "easy",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "refrenul",
         "refrene",
@@ -18635,7 +18635,7 @@
       "description": "Gen muzical popular, cu melodii accesibile și refrene memorabile.",
       "salience": 0.7733,
       "difficulty_tier": "easy",
-      "degree": 5,
+      "degree": 6,
       "aliases": [
         "popul",
         "popului",
@@ -18650,7 +18650,7 @@
       "description": "Muzică tradițională cântată în comunități și la sărbători.",
       "salience": 0.5421,
       "difficulty_tier": "medium",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "muzicii populare"
       ]
@@ -18708,7 +18708,7 @@
       "description": "Persoană foarte cunoscută publicului larg.",
       "salience": 0.8099,
       "difficulty_tier": "easy",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "celebritatea",
         "celebrități",
@@ -18752,7 +18752,7 @@
       "description": "Aptitudine remarcabilă într-un domeniu artistic, sportiv sau științific.",
       "salience": 0.774,
       "difficulty_tier": "easy",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "talentul",
         "talente",
@@ -18991,7 +18991,7 @@
       "description": "Instituție religioasă și loc de cult pentru comunitate.",
       "salience": 0.715,
       "difficulty_tier": "easy",
-      "degree": 3,
+      "degree": 5,
       "aliases": [
         "biserici",
         "bisericile"
@@ -19005,7 +19005,7 @@
       "description": "Grup social format din rude sau persoane care trăiesc împreună.",
       "salience": 0.9097,
       "difficulty_tier": "easy",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "familia",
         "familii",
@@ -19020,7 +19020,7 @@
       "description": "Activitate prin care oamenii produc bunuri, servicii sau venit.",
       "salience": 0.8963,
       "difficulty_tier": "easy",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "munci",
         "muncile"
@@ -19181,7 +19181,7 @@
       "description": "Ceremonie și sărbătoare prin care se marchează o căsătorie.",
       "salience": 0.4467,
       "difficulty_tier": "medium",
-      "degree": 3,
+      "degree": 4,
       "aliases": [
         "nunți",
         "nunțile"
@@ -19239,7 +19239,7 @@
       "description": "Vehicul de transport public pentru mai mulți pasageri.",
       "salience": 0.5762,
       "difficulty_tier": "medium",
-      "degree": 3,
+      "degree": 4,
       "aliases": [
         "autobuzul",
         "autobuze",
@@ -19388,7 +19388,7 @@
       "description": "Arenă mare pentru meciuri, competiții și spectatori.",
       "salience": 0.7466,
       "difficulty_tier": "easy",
-      "degree": 3,
+      "degree": 4,
       "aliases": [
         "stadionul",
         "stadioane",
@@ -19985,7 +19985,7 @@
       "description": "Material cu luciu, conductivitate și maleabilitate ridicate.",
       "salience": 0.5679,
       "difficulty_tier": "medium",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "metalul",
         "metale",
@@ -20122,6 +20122,1957 @@
         "baia",
         "băi",
         "băile"
+      ]
+    },
+    {
+      "id": "n_v11art_tnb",
+      "node_type": "org",
+      "label_ro": "Teatrul Național",
+      "category": "arta_cultura",
+      "description": "Instituție teatrală emblematică a Bucureștiului, legată de scena modernă românească.",
+      "salience": 0.72,
+      "difficulty_tier": "easy",
+      "degree": 2,
+      "aliases": [
+        "TNB",
+        "Naționalul bucureștean"
+      ]
+    },
+    {
+      "id": "n_v11art_muzeul_taranului",
+      "node_type": "org",
+      "label_ro": "Muzeul Țăranului",
+      "category": "arta_cultura",
+      "description": "Muzeu bucureștean dedicat culturii țărănești și artei populare.",
+      "salience": 0.68,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "MȚR",
+        "Muzeul Țăranului Român"
+      ]
+    },
+    {
+      "id": "n_v11art_tiff",
+      "node_type": "event",
+      "label_ro": "TIFF",
+      "category": "arta_cultura",
+      "description": "Festival internațional de film de la Cluj, lansat în 2002.",
+      "salience": 0.61,
+      "difficulty_tier": "medium",
+      "degree": 2,
+      "aliases": [
+        "Transilvania IFF",
+        "Festivalul TIFF"
+      ]
+    },
+    {
+      "id": "n_v11art_fits",
+      "node_type": "event",
+      "label_ro": "FITS",
+      "category": "arta_cultura",
+      "description": "Festival Internațional de Teatru de la Sibiu, reper european.",
+      "salience": 0.55,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Festivalul de la Sibiu",
+        "Festivalul Internațional de Teatru Sibiu"
+      ]
+    },
+    {
+      "id": "n_v11art_pal_culturii",
+      "node_type": "place",
+      "label_ro": "Palatul Culturii",
+      "category": "arta_cultura",
+      "description": "Palat simbol al Iașiului, cu muzee și arhitectură neogotică.",
+      "salience": 0.62,
+      "difficulty_tier": "medium",
+      "degree": 2,
+      "aliases": [
+        "Palatul Culturii Iași"
+      ]
+    },
+    {
+      "id": "n_v11art_cimitirul_vesel",
+      "node_type": "place",
+      "label_ro": "Cimitirul Vesel",
+      "category": "arta_cultura",
+      "description": "Cimitirul din Săpânța, faimos pentru crucile pictate și epitafuri.",
+      "salience": 0.7,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "Cimitirul de la Săpânța"
+      ]
+    },
+    {
+      "id": "n_v11art_nicolae_tonitza",
+      "node_type": "person",
+      "label_ro": "Nicolae Tonitza",
+      "category": "arta_cultura",
+      "description": "Pictor român modern, cunoscut pentru portrete de copii și cromatică expresivă.",
+      "salience": 0.58,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Tonitza"
+      ]
+    },
+    {
+      "id": "n_v11art_victor_brauner",
+      "node_type": "person",
+      "label_ro": "Victor Brauner",
+      "category": "arta_cultura",
+      "description": "Artist avangardist român asociat suprarealismului european.",
+      "salience": 0.49,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Brauner"
+      ]
+    },
+    {
+      "id": "n_v11art_dinu_lipatti",
+      "node_type": "person",
+      "label_ro": "Dinu Lipatti",
+      "category": "arta_cultura",
+      "description": "Pianist și compozitor român, reper al interpretării clasice.",
+      "salience": 0.56,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Lipatti"
+      ]
+    },
+    {
+      "id": "n_v11art_ion_andreescu",
+      "node_type": "person",
+      "label_ro": "Ion Andreescu",
+      "category": "arta_cultura",
+      "description": "Pictor român din secolul al XIX-lea, important peisagist și portretist.",
+      "salience": 0.48,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Andreescu"
+      ]
+    },
+    {
+      "id": "n_v11fil_teleenciclopedia",
+      "node_type": "work",
+      "label_ro": "Teleenciclopedia",
+      "category": "film_tv",
+      "description": "Emisiune documentară TVR, reper de duminică pentru generații.",
+      "salience": 0.84,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "Teleenciclopedia TVR"
+      ]
+    },
+    {
+      "id": "n_v11fil_romanii_au_talent",
+      "node_type": "work",
+      "label_ro": "Românii au talent",
+      "category": "film_tv",
+      "description": "Talent-show de la Pro TV, adaptarea locală a formatului Got Talent.",
+      "salience": 0.88,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "Got Talent România"
+      ]
+    },
+    {
+      "id": "n_v11fil_vocea_romaniei",
+      "node_type": "work",
+      "label_ro": "Vocea României",
+      "category": "film_tv",
+      "description": "Concurs vocal TV, versiunea românească a formatului The Voice.",
+      "salience": 0.78,
+      "difficulty_tier": "easy",
+      "degree": 2,
+      "aliases": [
+        "The Voice România"
+      ]
+    },
+    {
+      "id": "n_v11fil_cronica_carcotasilor",
+      "node_type": "work",
+      "label_ro": "Cronica Cârcotașilor",
+      "category": "film_tv",
+      "description": "Emisiune satirică TV cunoscută pentru montajele cu gafe din media.",
+      "salience": 0.66,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "Cârcotașii"
+      ]
+    },
+    {
+      "id": "n_v11fil_teambuilding",
+      "node_type": "work",
+      "label_ro": "Teambuilding",
+      "category": "film_tv",
+      "description": "Comedie românească din 2022, succes major de box-office.",
+      "salience": 0.68,
+      "difficulty_tier": "easy",
+      "degree": 2,
+      "aliases": [
+        "Team Building"
+      ]
+    },
+    {
+      "id": "n_v11fil_toate_panzele_sus",
+      "node_type": "work",
+      "label_ro": "Toate pânzele sus",
+      "category": "film_tv",
+      "description": "Serial de aventuri după romanul lui Radu Tudoran.",
+      "salience": 0.69,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "Toate pinzele sus"
+      ]
+    },
+    {
+      "id": "n_v11fil_pistruiatul",
+      "node_type": "work",
+      "label_ro": "Pistruiatul",
+      "category": "film_tv",
+      "description": "Serial TV de aventuri cu un copil curajos în anii războiului.",
+      "salience": 0.61,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11fil_secretul_lui_bachus",
+      "node_type": "work",
+      "label_ro": "Secretul lui Bachus",
+      "category": "film_tv",
+      "description": "Comedie satirică din 1984 despre fraude cu băuturi și afaceriști.",
+      "salience": 0.56,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Bachus"
+      ]
+    },
+    {
+      "id": "n_v11fil_aferim",
+      "node_type": "work",
+      "label_ro": "Aferim!",
+      "category": "film_tv",
+      "description": "Film de Radu Jude, premiat la Berlin pentru regie.",
+      "salience": 0.6,
+      "difficulty_tier": "medium",
+      "degree": 2,
+      "aliases": [
+        "Aferim"
+      ]
+    },
+    {
+      "id": "n_v11fil_pozitia_copilului",
+      "node_type": "work",
+      "label_ro": "Poziția copilului",
+      "category": "film_tv",
+      "description": "Film românesc premiat cu Ursul de Aur la Berlin în 2013.",
+      "salience": 0.58,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11fil_dupa_dealuri",
+      "node_type": "work",
+      "label_ro": "După dealuri",
+      "category": "film_tv",
+      "description": "Film de Cristian Mungiu inspirat de cazul de la Tanacu.",
+      "salience": 0.55,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11fil_colectiv",
+      "node_type": "work",
+      "label_ro": "Colectiv",
+      "category": "film_tv",
+      "description": "Documentar de Alexander Nanau despre ancheta de după incendiul Colectiv.",
+      "salience": 0.62,
+      "difficulty_tier": "medium",
+      "degree": 2,
+      "aliases": [
+        "Collective"
+      ]
+    },
+    {
+      "id": "n_v11gas_salam_sibiu",
+      "node_type": "concept",
+      "label_ro": "Salam de Sibiu",
+      "category": "gastronomie",
+      "description": "Salam crud-uscat emblematic, asociat cu Sibiu și cu mezelurile fine românești.",
+      "salience": 0.82,
+      "difficulty_tier": "easy",
+      "degree": 2,
+      "aliases": [
+        "salam sibian"
+      ]
+    },
+    {
+      "id": "n_v11gas_magiun_topoloveni",
+      "node_type": "concept",
+      "label_ro": "Magiun de Topoloveni",
+      "category": "gastronomie",
+      "description": "Magiun de prune cu indicație geografică protejată, produs celebru din Argeș.",
+      "salience": 0.62,
+      "difficulty_tier": "medium",
+      "degree": 0,
+      "aliases": [
+        "magiun Topoloveni"
+      ]
+    },
+    {
+      "id": "n_v11gas_ciorba_perisoare",
+      "node_type": "concept",
+      "label_ro": "Ciorbă de perișoare",
+      "category": "gastronomie",
+      "description": "Ciorbă acrișoară cu perișoare de carne, clasic de restaurant și de casă.",
+      "salience": 0.86,
+      "difficulty_tier": "easy",
+      "degree": 0,
+      "aliases": [
+        "ciorbă cu perișoare"
+      ]
+    },
+    {
+      "id": "n_v11gas_tochitura_moldoveneasca",
+      "node_type": "concept",
+      "label_ro": "Tochitură moldovenească",
+      "category": "gastronomie",
+      "description": "Tocană consistentă cu carne, mămăligă, brânză și ou, asociată Moldovei.",
+      "salience": 0.68,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "tochitură"
+      ]
+    },
+    {
+      "id": "n_v11gas_placinta_dobrogeana",
+      "node_type": "concept",
+      "label_ro": "Plăcintă dobrogeană",
+      "category": "gastronomie",
+      "description": "Plăcintă sărată cu brânză, produs tradițional cu nume protejat european.",
+      "salience": 0.61,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "plăcintă cu brânză dobrogeană"
+      ]
+    },
+    {
+      "id": "n_v11gas_casa_capsa",
+      "node_type": "place",
+      "label_ro": "Casa Capșa",
+      "category": "gastronomie",
+      "description": "Cofetărie și restaurant istoric bucureștean, reper al elitei urbane.",
+      "salience": 0.58,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Capșa"
+      ]
+    },
+    {
+      "id": "n_v11gas_caru_cu_bere",
+      "node_type": "place",
+      "label_ro": "Caru' cu Bere",
+      "category": "gastronomie",
+      "description": "Restaurant istoric din Centrul Vechi al Bucureștiului, celebru pentru decor și bere.",
+      "salience": 0.66,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "Carul cu Bere"
+      ]
+    },
+    {
+      "id": "n_v11gas_joffre",
+      "node_type": "concept",
+      "label_ro": "Joffre",
+      "category": "gastronomie",
+      "description": "Prăjitură de ciocolată legată de tradiția cofetăriei Capșa.",
+      "salience": 0.44,
+      "difficulty_tier": "medium",
+      "degree": 0,
+      "aliases": [
+        "prăjitura Joffre"
+      ]
+    },
+    {
+      "id": "n_v11gas_sanda_marin",
+      "node_type": "person",
+      "label_ro": "Sanda Marin",
+      "category": "gastronomie",
+      "description": "Autoarea celei mai cunoscute cărți românești de bucate din secolul XX.",
+      "salience": 0.6,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Cecilia Maria Zapan"
+      ]
+    },
+    {
+      "id": "n_v11gas_radu_anton_roman",
+      "node_type": "person",
+      "label_ro": "Radu Anton Roman",
+      "category": "gastronomie",
+      "description": "Scriitor și realizator TV, autor al volumului Bucate, vinuri și obiceiuri românești.",
+      "salience": 0.57,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "R. A. Roman"
+      ]
+    },
+    {
+      "id": "n_v11gas_pastorel_teodoreanu",
+      "node_type": "person",
+      "label_ro": "Păstorel Teodoreanu",
+      "category": "gastronomie",
+      "description": "Scriitor, epigramist și cunoscător celebru al vinului și gastronomiei.",
+      "salience": 0.52,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Alexandru O. Teodoreanu"
+      ]
+    },
+    {
+      "id": "n_v11gas_alivenci",
+      "node_type": "concept",
+      "label_ro": "Alivenci",
+      "category": "gastronomie",
+      "description": "Prăjitură moldovenească din mălai și brânză, mai cunoscută regional.",
+      "salience": 0.45,
+      "difficulty_tier": "medium",
+      "degree": 0,
+      "aliases": [
+        "alivenchi"
+      ]
+    },
+    {
+      "id": "n_v11geo_maramures",
+      "node_type": "place",
+      "label_ro": "Maramureș",
+      "category": "geografie",
+      "description": "Regiune istorică din nord, asociată cu sate de lemn și Țara Maramureșului.",
+      "salience": 0.58,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Țara Maramureșului"
+      ]
+    },
+    {
+      "id": "n_v11geo_suceava",
+      "node_type": "place",
+      "label_ro": "Suceava",
+      "category": "geografie",
+      "description": "Oraș din nordul Moldovei, fostă capitală medievală și poartă spre Bucovina.",
+      "salience": 0.54,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "cetatea Sucevei"
+      ]
+    },
+    {
+      "id": "n_v11geo_oradea",
+      "node_type": "place",
+      "label_ro": "Oradea",
+      "category": "geografie",
+      "description": "Oraș de pe Crișul Repede, cunoscut pentru arhitectura secession.",
+      "salience": 0.49,
+      "difficulty_tier": "medium",
+      "degree": 0,
+      "aliases": [
+        "Oradea Mare"
+      ]
+    },
+    {
+      "id": "n_v11geo_tulcea",
+      "node_type": "place",
+      "label_ro": "Tulcea",
+      "category": "geografie",
+      "description": "Oraș-port la Dunăre, principală poartă urbană spre Delta Dunării.",
+      "salience": 0.5,
+      "difficulty_tier": "medium",
+      "degree": 0,
+      "aliases": [
+        "poarta Deltei"
+      ]
+    },
+    {
+      "id": "n_v11geo_mamaia",
+      "node_type": "place",
+      "label_ro": "Mamaia",
+      "category": "geografie",
+      "description": "Stațiune de litoral lângă Constanța, reper clasic al vacanțelor la mare.",
+      "salience": 0.57,
+      "difficulty_tier": "medium",
+      "degree": 0,
+      "aliases": [
+        "stațiunea Mamaia"
+      ]
+    },
+    {
+      "id": "n_v11geo_ceahlau",
+      "node_type": "place",
+      "label_ro": "Ceahlău",
+      "category": "geografie",
+      "description": "Masiv din Carpații Orientali, încărcat de legende și trasee montane.",
+      "salience": 0.46,
+      "difficulty_tier": "medium",
+      "degree": 0,
+      "aliases": [
+        "Masivul Ceahlău"
+      ]
+    },
+    {
+      "id": "n_v11geo_portile_fier",
+      "node_type": "place",
+      "label_ro": "Porțile de Fier",
+      "category": "geografie",
+      "description": "Defileu al Dunării la granița cu Serbia, legat și de hidrocentrala omonimă.",
+      "salience": 0.53,
+      "difficulty_tier": "medium",
+      "degree": 0,
+      "aliases": [
+        "Defileul Dunării"
+      ]
+    },
+    {
+      "id": "n_v11geo_cazanele_dunarii",
+      "node_type": "place",
+      "label_ro": "Cazanele Dunării",
+      "category": "geografie",
+      "description": "Sector spectaculos al Dunării unde fluviul se îngustează între pereți stâncoși.",
+      "salience": 0.48,
+      "difficulty_tier": "medium",
+      "degree": 0,
+      "aliases": [
+        "Cazanele Mari",
+        "Cazanele Mici"
+      ]
+    },
+    {
+      "id": "n_v11geo_baragan",
+      "node_type": "place",
+      "label_ro": "Bărăgan",
+      "category": "geografie",
+      "description": "Câmpie întinsă din sud-est, emblematică pentru peisajul stepic românesc.",
+      "salience": 0.45,
+      "difficulty_tier": "medium",
+      "degree": 0,
+      "aliases": [
+        "Câmpia Bărăganului"
+      ]
+    },
+    {
+      "id": "n_v11geo_tampa",
+      "node_type": "place",
+      "label_ro": "Tâmpa",
+      "category": "geografie",
+      "description": "Muntele de lângă centrul Brașovului, reper vizibil al orașului.",
+      "salience": 0.42,
+      "difficulty_tier": "medium",
+      "degree": 0,
+      "aliases": [
+        "Muntele Tâmpa"
+      ]
+    },
+    {
+      "id": "n_v11geo_sulina",
+      "node_type": "place",
+      "label_ro": "Sulina",
+      "category": "geografie",
+      "description": "Oraș-port la vărsarea Dunării în Marea Neagră, la capătul brațului Sulina.",
+      "salience": 0.47,
+      "difficulty_tier": "medium",
+      "degree": 0,
+      "aliases": [
+        "brațul Sulina"
+      ]
+    },
+    {
+      "id": "n_v11ist_tudor_vladimirescu",
+      "node_type": "person",
+      "label_ro": "Tudor Vladimirescu",
+      "category": "istorie",
+      "description": "Conducătorul mișcării de la 1821 și simbol al pandurilor.",
+      "salience": 0.7,
+      "difficulty_tier": "easy",
+      "degree": 2,
+      "aliases": [
+        "Tudor din Vladimiri"
+      ]
+    },
+    {
+      "id": "n_v11ist_revolutia_1848",
+      "node_type": "event",
+      "label_ro": "Revoluția 1848",
+      "category": "istorie",
+      "description": "Val de revoluții pașoptiste în Țările Române și Transilvania.",
+      "salience": 0.66,
+      "difficulty_tier": "easy",
+      "degree": 2,
+      "aliases": [
+        "revoluția pașoptistă",
+        "pașoptism"
+      ]
+    },
+    {
+      "id": "n_v11ist_rascoala_1907",
+      "node_type": "event",
+      "label_ro": "Răscoala 1907",
+      "category": "istorie",
+      "description": "Răscoală țărănească majoră reprimată dur în Regatul României.",
+      "salience": 0.64,
+      "difficulty_tier": "medium",
+      "degree": 2,
+      "aliases": [
+        "răscoala țărănească din 1907"
+      ]
+    },
+    {
+      "id": "n_v11ist_rascoala_1784",
+      "node_type": "event",
+      "label_ro": "Răscoala 1784",
+      "category": "istorie",
+      "description": "Răscoala transilvăneană condusă de Horea, Cloșca și Crișan.",
+      "salience": 0.58,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Horea, Cloșca și Crișan",
+        "Răscoala lui Horea"
+      ]
+    },
+    {
+      "id": "n_v11ist_ion_antonescu",
+      "node_type": "person",
+      "label_ro": "Ion Antonescu",
+      "category": "istorie",
+      "description": "Mareșal și conducător al României în anii celui de-al Doilea Război Mondial.",
+      "salience": 0.64,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "mareșalul Antonescu"
+      ]
+    },
+    {
+      "id": "n_v11ist_mihail_kogalniceanu",
+      "node_type": "person",
+      "label_ro": "Mihail Kogălniceanu",
+      "category": "istorie",
+      "description": "Om politic unionist, premier și susținător al reformelor lui Cuza.",
+      "salience": 0.62,
+      "difficulty_tier": "medium",
+      "degree": 2,
+      "aliases": [
+        "Kogălniceanu"
+      ]
+    },
+    {
+      "id": "n_v11ist_epoca_fanariota",
+      "node_type": "concept",
+      "label_ro": "Epoca fanariotă",
+      "category": "istorie",
+      "description": "Perioada domniilor fanariote în Moldova și Țara Românească.",
+      "salience": 0.56,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "domnii fanariote",
+        "fanarioți"
+      ]
+    },
+    {
+      "id": "n_v11ist_basarabia",
+      "node_type": "place",
+      "label_ro": "Basarabia",
+      "category": "istorie",
+      "description": "Regiune istorică dintre Prut și Nistru, cu rol major în istoria românilor.",
+      "salience": 0.61,
+      "difficulty_tier": "medium",
+      "degree": 2,
+      "aliases": [
+        "Basarabia istorică"
+      ]
+    },
+    {
+      "id": "n_v11ist_pacea_adrianopol",
+      "node_type": "event",
+      "label_ro": "Pacea de la Adrianopol",
+      "category": "istorie",
+      "description": "Tratatul din 1829 care a schimbat statutul Principatelor dunărene.",
+      "salience": 0.44,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Tratatul de la Adrianopol"
+      ]
+    },
+    {
+      "id": "n_v11ist_memorandumul",
+      "node_type": "work",
+      "label_ro": "Memorandumul",
+      "category": "istorie",
+      "description": "Petiția românilor transilvăneni din 1892 către împăratul de la Viena.",
+      "salience": 0.47,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Memorandumul românilor"
+      ]
+    },
+    {
+      "id": "n_v11ist_coroana_de_otel",
+      "node_type": "work",
+      "label_ro": "Coroana de Oțel",
+      "category": "istorie",
+      "description": "Coroana regală făcută din oțel de tun, simbol al Independenței.",
+      "salience": 0.52,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "coroana regală de oțel"
+      ]
+    },
+    {
+      "id": "n_v11ist_dictatul_viena",
+      "node_type": "event",
+      "label_ro": "Dictatul de la Viena",
+      "category": "istorie",
+      "description": "Arbitrajul din 1940 prin care nordul Transilvaniei a fost cedat Ungariei.",
+      "salience": 0.55,
+      "difficulty_tier": "medium",
+      "degree": 2
+    },
+    {
+      "id": "n_v11lim_doom",
+      "node_type": "work",
+      "label_ro": "DOOM",
+      "category": "limba",
+      "description": "Dicționar ortografic, ortoepic și morfologic; reper normativ actual.",
+      "salience": 0.72,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "Dicționarul ortografic",
+        "DOOM2",
+        "DOOM3"
+      ]
+    },
+    {
+      "id": "n_v11lim_scrisoarea_neacsu",
+      "node_type": "work",
+      "label_ro": "Scrisoarea lui Neacșu",
+      "category": "limba",
+      "description": "Text din 1521, cea mai veche scriere păstrată în română.",
+      "salience": 0.74,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "Scrisoarea Neacșu",
+        "Scrisoarea de la Câmpulung"
+      ]
+    },
+    {
+      "id": "n_v11lim_coresi",
+      "node_type": "person",
+      "label_ro": "Diaconul Coresi",
+      "category": "limba",
+      "description": "Tipograf al secolului XVI, a răspândit cărți românești la Brașov.",
+      "salience": 0.62,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Coresi"
+      ]
+    },
+    {
+      "id": "n_v11lim_biblia_bucuresti",
+      "node_type": "work",
+      "label_ro": "Biblia București",
+      "category": "limba",
+      "description": "Traducere integrală tipărită în 1688, reper pentru limba literară.",
+      "salience": 0.68,
+      "difficulty_tier": "easy",
+      "degree": 2,
+      "aliases": [
+        "Biblia de la București",
+        "Biblia 1688"
+      ]
+    },
+    {
+      "id": "n_v11lim_cazania_varlaam",
+      "node_type": "work",
+      "label_ro": "Cazania lui Varlaam",
+      "category": "limba",
+      "description": "Carte românească tipărită la Iași în 1643, importantă pentru limba veche.",
+      "salience": 0.56,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Carte românească de învățătură"
+      ]
+    },
+    {
+      "id": "n_v11lim_samuil_micu",
+      "node_type": "person",
+      "label_ro": "Samuil Micu",
+      "category": "limba",
+      "description": "Cărturar al Școlii Ardelene, coautor la prima gramatică românească tipărită.",
+      "salience": 0.5,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Samuil Micu-Klein"
+      ]
+    },
+    {
+      "id": "n_v11lim_gheorghe_sincai",
+      "node_type": "person",
+      "label_ro": "Gheorghe Șincai",
+      "category": "limba",
+      "description": "Cărturar ardelean, coautor al gramaticii Elementa linguae daco-romanae.",
+      "salience": 0.49,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11lim_elementa_linguae",
+      "node_type": "work",
+      "label_ro": "Elementa linguae",
+      "category": "limba",
+      "description": "Gramatică românească tipărită la Viena în 1780 de Micu și Șincai.",
+      "salience": 0.45,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Elementa linguae daco-romanae",
+        "Elementa linguae daco-romanae sive valachicae"
+      ]
+    },
+    {
+      "id": "n_v11lim_alexandru_rosetti",
+      "node_type": "person",
+      "label_ro": "Alexandru Rosetti",
+      "category": "limba",
+      "description": "Lingvist și istoric al limbii române, profesor la Universitatea din București.",
+      "salience": 0.46,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Al. Rosetti"
+      ]
+    },
+    {
+      "id": "n_v11lim_alexandru_graur",
+      "node_type": "person",
+      "label_ro": "Alexandru Graur",
+      "category": "limba",
+      "description": "Lingvist cunoscut pentru lucrări de normă, etimologie și popularizare.",
+      "salience": 0.43,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Al. Graur"
+      ]
+    },
+    {
+      "id": "n_v11lim_mioara_avram",
+      "node_type": "person",
+      "label_ro": "Mioara Avram",
+      "category": "limba",
+      "description": "Lingvistă, autoare de lucrări normative despre gramatica și ortografia românei.",
+      "salience": 0.42,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "M. Avram"
+      ]
+    },
+    {
+      "id": "n_v11lim_lazar_saineanu",
+      "node_type": "person",
+      "label_ro": "Lazăr Șăineanu",
+      "category": "limba",
+      "description": "Filolog și lexicograf, autorul Dicționarului universal al limbii române.",
+      "salience": 0.42,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Lazare Sainéan"
+      ]
+    },
+    {
+      "id": "n_v11lit_la_tiganci",
+      "node_type": "work",
+      "label_ro": "La țigănci",
+      "category": "literatura",
+      "description": "Nuvelă fantastică de Mircea Eliade, reper al prozei postbelice.",
+      "salience": 0.6,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11lit_maitreyi",
+      "node_type": "work",
+      "label_ro": "Maitreyi",
+      "category": "literatura",
+      "description": "Roman al lui Mircea Eliade, inspirat de experiența indiană.",
+      "salience": 0.58,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11lit_iona",
+      "node_type": "work",
+      "label_ro": "Iona",
+      "category": "literatura",
+      "description": "Dramă parabolică de Marin Sorescu, cu motivul captivității.",
+      "salience": 0.56,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11lit_marin_sorescu",
+      "node_type": "person",
+      "label_ro": "Marin Sorescu",
+      "category": "literatura",
+      "description": "Poet și dramaturg, autorul piesei Iona și al volumului La lilieci.",
+      "salience": 0.55,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11lit_mara",
+      "node_type": "work",
+      "label_ro": "Mara",
+      "category": "literatura",
+      "description": "Roman realist de Ioan Slavici, centrat pe viața ardelenească.",
+      "salience": 0.53,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11lit_rascoala",
+      "node_type": "work",
+      "label_ro": "Romanul Răscoala",
+      "category": "literatura",
+      "description": "Roman de Liviu Rebreanu despre tensiuni sociale rurale.",
+      "salience": 0.5,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11lit_cel_mai_iubit",
+      "node_type": "work",
+      "label_ro": "Cel mai iubit",
+      "category": "literatura",
+      "description": "Roman final al lui Marin Preda, publicat în 1980.",
+      "salience": 0.55,
+      "difficulty_tier": "medium",
+      "degree": 0,
+      "aliases": [
+        "Cel mai iubit dintre pământeni"
+      ]
+    },
+    {
+      "id": "n_v11lit_dacia_literara",
+      "node_type": "work",
+      "label_ro": "Dacia literară",
+      "category": "literatura",
+      "description": "Revistă ieșeană din 1840, asociată cu programul lui Kogălniceanu.",
+      "salience": 0.52,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11lit_craii",
+      "node_type": "work",
+      "label_ro": "Craii de Curtea-Veche",
+      "category": "literatura",
+      "description": "Roman de Mateiu Caragiale, celebru pentru stilul decadent.",
+      "salience": 0.46,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Craii de Curtea Veche"
+      ]
+    },
+    {
+      "id": "n_v11lit_patul_lui_procust",
+      "node_type": "work",
+      "label_ro": "Patul lui Procust",
+      "category": "literatura",
+      "description": "Roman modernist de Camil Petrescu, construit din perspective multiple.",
+      "salience": 0.54,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11lit_padurea_spanzuratilor",
+      "node_type": "work",
+      "label_ro": "Pădurea spânzuraților",
+      "category": "literatura",
+      "description": "Roman de Liviu Rebreanu despre drama războiului și a identității.",
+      "salience": 0.6,
+      "difficulty_tier": "medium",
+      "degree": 2
+    },
+    {
+      "id": "n_v11mem_times_new_roman",
+      "node_type": "org",
+      "label_ro": "Times New Roman",
+      "category": "meme_net",
+      "description": "Publicație online de satiră și știri parodice, foarte citată în meme românești.",
+      "salience": 0.64,
+      "difficulty_tier": "medium",
+      "degree": 3,
+      "aliases": [
+        "TNR"
+      ]
+    },
+    {
+      "id": "n_v11mem_sector_7",
+      "node_type": "org",
+      "label_ro": "Sector 7",
+      "category": "meme_net",
+      "description": "Grup și canal românesc de sketch-uri online, asociat cu valul de comedie digitală.",
+      "salience": 0.58,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Sector7"
+      ]
+    },
+    {
+      "id": "n_v11mem_noaptea_tarziu",
+      "node_type": "org",
+      "label_ro": "Noaptea Târziu",
+      "category": "meme_net",
+      "description": "Trio/canal cunoscut pentru parodii muzicale românești distribuite masiv online.",
+      "salience": 0.57,
+      "difficulty_tier": "medium",
+      "degree": 2
+    },
+    {
+      "id": "n_v11mem_dorian_popa",
+      "node_type": "person",
+      "label_ro": "Dorian Popa",
+      "category": "meme_net",
+      "description": "Cântăreț, actor și influencer devenit recurent în cultura online românească.",
+      "salience": 0.74,
+      "difficulty_tier": "easy",
+      "degree": 3,
+      "aliases": [
+        "Hatz",
+        "Dorian"
+      ]
+    },
+    {
+      "id": "n_v11mem_mihai_bendeac",
+      "node_type": "person",
+      "label_ro": "Mihai Bendeac",
+      "category": "meme_net",
+      "description": "Actor și comedian TV cu replici și personaje preluate frecvent în online.",
+      "salience": 0.62,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Bendeac"
+      ]
+    },
+    {
+      "id": "n_v11mem_george_buhnici",
+      "node_type": "person",
+      "label_ro": "George Buhnici",
+      "category": "meme_net",
+      "description": "Jurnalist tech și vlogger, reper al review-urilor de gadgeturi în română.",
+      "salience": 0.55,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Buhnici"
+      ]
+    },
+    {
+      "id": "n_v11mem_zoso",
+      "node_type": "person",
+      "label_ro": "Zoso",
+      "category": "meme_net",
+      "description": "Blogger român vechi și influent, legat de cultura blogurilor și comentariilor online.",
+      "salience": 0.45,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Vali Petcu"
+      ]
+    },
+    {
+      "id": "n_v11mem_mikey_hash",
+      "node_type": "person",
+      "label_ro": "Mikey Hash",
+      "category": "meme_net",
+      "description": "Creator online asociat cu primele valuri mari de YouTube românesc.",
+      "salience": 0.52,
+      "difficulty_tier": "medium",
+      "degree": 0,
+      "aliases": [
+        "Mihai Holhoș"
+      ]
+    },
+    {
+      "id": "n_v11mem_doza_de_has",
+      "node_type": "work",
+      "label_ro": "Doza de Haș",
+      "category": "meme_net",
+      "description": "Show online popular din anii de început ai YouTube-ului românesc.",
+      "salience": 0.5,
+      "difficulty_tier": "medium",
+      "degree": 0
+    },
+    {
+      "id": "n_v11mem_faiar",
+      "node_type": "person",
+      "label_ro": "Faiăr",
+      "category": "meme_net",
+      "description": "Streamer și comentator online cunoscut pentru live-uri, reacții și umor politic.",
+      "salience": 0.48,
+      "difficulty_tier": "medium",
+      "degree": 0
+    },
+    {
+      "id": "n_v11mem_backpackyourlife",
+      "node_type": "work",
+      "label_ro": "BackPackYourLife",
+      "category": "meme_net",
+      "description": "Canal românesc de vloguri de călătorie, cu public construit puternic pe YouTube.",
+      "salience": 0.44,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "BackPack Your Life"
+      ]
+    },
+    {
+      "id": "n_v11muz_compact",
+      "node_type": "org",
+      "label_ro": "Compact",
+      "category": "muzica",
+      "description": "Trupă pop-rock pornită la Cluj-Napoca, cunoscută pentru balade de stadion.",
+      "salience": 0.66,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "Compact B"
+      ]
+    },
+    {
+      "id": "n_v11muz_voltaj",
+      "node_type": "org",
+      "label_ro": "Voltaj",
+      "category": "muzica",
+      "description": "Trupă pop-rock din București, reprezentantă a României la Eurovision 2015.",
+      "salience": 0.74,
+      "difficulty_tier": "easy",
+      "degree": 1
+    },
+    {
+      "id": "n_v11muz_taxi",
+      "node_type": "org",
+      "label_ro": "Taxi",
+      "category": "muzica",
+      "description": "Trupă pop-rock cu versuri ironice, fondată de Dan Teodorescu.",
+      "salience": 0.58,
+      "difficulty_tier": "medium",
+      "degree": 2,
+      "aliases": [
+        "Trupa Taxi"
+      ]
+    },
+    {
+      "id": "n_v11muz_vita_de_vie",
+      "node_type": "org",
+      "label_ro": "Vița de Vie",
+      "category": "muzica",
+      "description": "Trupă alternative rock din București, activă din anii 90.",
+      "salience": 0.59,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11muz_sfinx",
+      "node_type": "org",
+      "label_ro": "Sfinx",
+      "category": "muzica",
+      "description": "Trupă rock progresivă, reper al scenei românești din anii 60-80.",
+      "salience": 0.52,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Formația Sfinx"
+      ]
+    },
+    {
+      "id": "n_v11muz_tudor_gheorghe",
+      "node_type": "person",
+      "label_ro": "Tudor Gheorghe",
+      "category": "muzica",
+      "description": "Artist asociat cu folclorul, poezia cântată și Oltenia.",
+      "salience": 0.7,
+      "difficulty_tier": "easy",
+      "degree": 1
+    },
+    {
+      "id": "n_v11muz_pasarea_colibri",
+      "node_type": "org",
+      "label_ro": "Pasărea Colibri",
+      "category": "muzica",
+      "description": "Supergrup folk legat de Mircea Baniciu, Mircea Vintilă și Florian Pittiș.",
+      "salience": 0.55,
+      "difficulty_tier": "medium",
+      "degree": 0
+    },
+    {
+      "id": "n_v11muz_taraf_haidouks",
+      "node_type": "org",
+      "label_ro": "Taraf de Haidouks",
+      "category": "muzica",
+      "description": "Formație de lăutari din Clejani, celebră pe scene internaționale.",
+      "salience": 0.47,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11muz_zdob_zdub",
+      "node_type": "org",
+      "label_ro": "Zdob și Zdub",
+      "category": "muzica",
+      "description": "Trupă rock din Chișinău, cunoscută în România și la Eurovision.",
+      "salience": 0.64,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11muz_madrigal",
+      "node_type": "org",
+      "label_ro": "Madrigal",
+      "category": "muzica",
+      "description": "Cor cameral românesc fondat de Marin Constantin.",
+      "salience": 0.6,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Corul Madrigal"
+      ]
+    },
+    {
+      "id": "n_v11muz_festivalul_mamaia",
+      "node_type": "event",
+      "label_ro": "Festivalul Mamaia",
+      "category": "muzica",
+      "description": "Festival-concurs de muzică ușoară lansat pe litoral.",
+      "salience": 0.62,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Mamaia muzicală"
+      ]
+    },
+    {
+      "id": "n_v11muz_cenaclul_flacara",
+      "node_type": "event",
+      "label_ro": "Cenaclul Flacăra",
+      "category": "muzica",
+      "description": "Fenomen cultural-muzical itinerant condus de Adrian Păunescu.",
+      "salience": 0.65,
+      "difficulty_tier": "medium",
+      "degree": 2
+    },
+    {
+      "id": "n_v11per_gheorghe_zamfir",
+      "node_type": "person",
+      "label_ro": "Gheorghe Zamfir",
+      "category": "personalitati",
+      "description": "Naist virtuoz, asociat internațional cu sunetul naiului românesc.",
+      "salience": 0.58,
+      "difficulty_tier": "medium",
+      "degree": 2,
+      "aliases": [
+        "Zamfir",
+        "regele naiului"
+      ]
+    },
+    {
+      "id": "n_v11per_hariclea_darclee",
+      "node_type": "person",
+      "label_ro": "Hariclea Darclée",
+      "category": "personalitati",
+      "description": "Soprană celebră, prima Floria Tosca pe scena mondială.",
+      "salience": 0.44,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Darclée"
+      ]
+    },
+    {
+      "id": "n_v11per_radu_beligan",
+      "node_type": "person",
+      "label_ro": "Radu Beligan",
+      "category": "personalitati",
+      "description": "Actor și om de teatru cu una dintre cele mai lungi cariere românești.",
+      "salience": 0.57,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Beligan"
+      ]
+    },
+    {
+      "id": "n_v11per_elisabeta_rizea",
+      "node_type": "person",
+      "label_ro": "Elisabeta Rizea",
+      "category": "personalitati",
+      "description": "Simbol al rezistenței anticomuniste din Nucșoara.",
+      "salience": 0.49,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Rizea"
+      ]
+    },
+    {
+      "id": "n_v11per_doina_cornea",
+      "node_type": "person",
+      "label_ro": "Doina Cornea",
+      "category": "personalitati",
+      "description": "Disidentă anticomunistă și voce civică a anilor 1980.",
+      "salience": 0.48,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Cornea"
+      ]
+    },
+    {
+      "id": "n_v11per_smaranda_braescu",
+      "node_type": "person",
+      "label_ro": "Smaranda Brăescu",
+      "category": "personalitati",
+      "description": "Aviatoare și parașutistă, recordmenă mondială în anii 1930.",
+      "salience": 0.45,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11per_carol_davila",
+      "node_type": "person",
+      "label_ro": "Carol Davila",
+      "category": "personalitati",
+      "description": "Medic care a organizat învățământul medical modern din România.",
+      "salience": 0.55,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Davila",
+        "Carol Davilla"
+      ]
+    },
+    {
+      "id": "n_v11per_corneliu_coposu",
+      "node_type": "person",
+      "label_ro": "Corneliu Coposu",
+      "category": "personalitati",
+      "description": "Lider țărănist și simbol al opoziției democratice postcomuniste.",
+      "salience": 0.56,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Seniorul",
+        "Coposu"
+      ]
+    },
+    {
+      "id": "n_v11per_iuliu_maniu",
+      "node_type": "person",
+      "label_ro": "Iuliu Maniu",
+      "category": "personalitati",
+      "description": "Lider politic transilvănean, legat de Marea Unire și PNȚ.",
+      "salience": 0.6,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Maniu",
+        "Sfinxul de la Bădăcin"
+      ]
+    },
+    {
+      "id": "n_v11soc_securitatea",
+      "node_type": "org",
+      "label_ro": "Securitatea",
+      "category": "societate",
+      "description": "Poliția politică a regimului comunist din România.",
+      "salience": 0.78,
+      "difficulty_tier": "easy",
+      "degree": 2,
+      "aliases": [
+        "Departamentul Securității Statului"
+      ]
+    },
+    {
+      "id": "n_v11soc_mineriadele",
+      "node_type": "event",
+      "label_ro": "Mineriadele",
+      "category": "societate",
+      "description": "Intervenții violente ale minerilor în București, în tranziția anilor 1990.",
+      "salience": 0.58,
+      "difficulty_tier": "medium",
+      "degree": 2,
+      "aliases": [
+        "Mineriada"
+      ]
+    },
+    {
+      "id": "n_v11soc_diaspora",
+      "node_type": "concept",
+      "label_ro": "Diaspora",
+      "category": "societate",
+      "description": "Comunitățile de români stabilite în afara țării.",
+      "salience": 0.72,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "diaspora românească"
+      ]
+    },
+    {
+      "id": "n_v11soc_buletin",
+      "node_type": "concept",
+      "label_ro": "Buletin",
+      "category": "societate",
+      "description": "Actul de identitate folosit zi de zi de cetățeni.",
+      "salience": 0.7,
+      "difficulty_tier": "easy",
+      "degree": 2,
+      "aliases": [
+        "carte de identitate",
+        "CI"
+      ]
+    },
+    {
+      "id": "n_v11soc_cnp",
+      "node_type": "concept",
+      "label_ro": "CNP",
+      "category": "societate",
+      "description": "Codul numeric personal, identificator unic pentru fiecare cetățean.",
+      "salience": 0.62,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "cod numeric personal"
+      ]
+    },
+    {
+      "id": "n_v11soc_anaf",
+      "node_type": "org",
+      "label_ro": "ANAF",
+      "category": "societate",
+      "description": "Agenția fiscală care colectează taxe și impozite.",
+      "salience": 0.68,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "Agenția Națională de Administrare Fiscală"
+      ]
+    },
+    {
+      "id": "n_v11soc_smurd",
+      "node_type": "org",
+      "label_ro": "SMURD",
+      "category": "societate",
+      "description": "Serviciu mobil de urgență, reanimare și descarcerare.",
+      "salience": 0.65,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Serviciul Mobil de Urgență"
+      ]
+    },
+    {
+      "id": "n_v11soc_dna",
+      "node_type": "org",
+      "label_ro": "DNA",
+      "category": "societate",
+      "description": "Direcția Națională Anticorupție, parchet specializat.",
+      "salience": 0.63,
+      "difficulty_tier": "medium",
+      "degree": 2,
+      "aliases": [
+        "Direcția Națională Anticorupție"
+      ]
+    },
+    {
+      "id": "n_v11soc_jandarmeria",
+      "node_type": "org",
+      "label_ro": "Jandarmeria",
+      "category": "societate",
+      "description": "Forță de ordine publică prezentă la proteste și evenimente.",
+      "salience": 0.61,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Jandarmeria Română"
+      ]
+    },
+    {
+      "id": "n_v11soc_cfr",
+      "node_type": "org",
+      "label_ro": "CFR",
+      "category": "societate",
+      "description": "Compania feroviară națională, simbol al călătoriilor cu trenul.",
+      "salience": 0.76,
+      "difficulty_tier": "easy",
+      "degree": 2,
+      "aliases": [
+        "Căile Ferate Române"
+      ]
+    },
+    {
+      "id": "n_v11soc_sri",
+      "node_type": "org",
+      "label_ro": "SRI",
+      "category": "societate",
+      "description": "Serviciul Român de Informații, instituția civilă de informații.",
+      "salience": 0.6,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Serviciul Român de Informații"
+      ]
+    },
+    {
+      "id": "n_v11spo_arena_nationala",
+      "node_type": "place",
+      "label_ro": "Arena Națională",
+      "category": "sport",
+      "description": "Stadionul mare al Bucureștiului, gazdă pentru națională și finale.",
+      "salience": 0.86,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "Stadionul Național"
+      ]
+    },
+    {
+      "id": "n_v11spo_rapid_bucuresti",
+      "node_type": "org",
+      "label_ro": "Rapid București",
+      "category": "sport",
+      "description": "Club istoric din Giulești, cu identitate feroviară și suporteri celebri.",
+      "salience": 0.82,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "Rapid",
+        "Giulești"
+      ]
+    },
+    {
+      "id": "n_v11spo_dinamo_bucuresti",
+      "node_type": "org",
+      "label_ro": "Dinamo București",
+      "category": "sport",
+      "description": "Club bucureștean major, rival tradițional pentru Steaua și Rapid.",
+      "salience": 0.81,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "Dinamo"
+      ]
+    },
+    {
+      "id": "n_v11spo_universitatea_craiova",
+      "node_type": "org",
+      "label_ro": "Universitatea Craiova",
+      "category": "sport",
+      "description": "Clubul emblematic al Olteniei, asociat cu fotbalul alb-albastru.",
+      "salience": 0.76,
+      "difficulty_tier": "easy",
+      "degree": 2,
+      "aliases": [
+        "U Craiova"
+      ]
+    },
+    {
+      "id": "n_v11spo_nicolae_dobrin",
+      "node_type": "person",
+      "label_ro": "Nicolae Dobrin",
+      "category": "sport",
+      "description": "Fotbalist legendar al lui FC Argeș, supranumit Prințul din Trivale.",
+      "salience": 0.72,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "Gâscanul",
+        "Prințul din Trivale"
+      ]
+    },
+    {
+      "id": "n_v11spo_mircea_lucescu",
+      "node_type": "person",
+      "label_ro": "Mircea Lucescu",
+      "category": "sport",
+      "description": "Antrenor român cu trofee europene și carieră lungă în fotbalul internațional.",
+      "salience": 0.73,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "Il Luce"
+      ]
+    },
+    {
+      "id": "n_v11spo_marius_lacatus",
+      "node_type": "person",
+      "label_ro": "Marius Lăcătuș",
+      "category": "sport",
+      "description": "Atacant emblematic al Stelei, simbol al generației post-Sevilla.",
+      "salience": 0.7,
+      "difficulty_tier": "easy",
+      "degree": 0,
+      "aliases": [
+        "Fiara"
+      ]
+    },
+    {
+      "id": "n_v11spo_elisabeta_lipa",
+      "node_type": "person",
+      "label_ro": "Elisabeta Lipă",
+      "category": "sport",
+      "description": "Canotoare cu cinci titluri olimpice, una dintre marile campioane ale României.",
+      "salience": 0.67,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "Elisabeta Oleniuc-Lipă"
+      ]
+    },
+    {
+      "id": "n_v11spo_gabriela_szabo",
+      "node_type": "person",
+      "label_ro": "Gabriela Szabó",
+      "category": "sport",
+      "description": "Campioană olimpică la 5000 m la Sydney 2000.",
+      "salience": 0.62,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Gabi Szabó"
+      ]
+    },
+    {
+      "id": "n_v11spo_ana_maria_branza",
+      "node_type": "person",
+      "label_ro": "Ana Maria Brânză",
+      "category": "sport",
+      "description": "Spadasină română, aur olimpic cu echipa și lider mondial al probei.",
+      "salience": 0.58,
+      "difficulty_tier": "medium",
+      "degree": 2,
+      "aliases": [
+        "Ana Maria Popescu"
+      ]
+    },
+    {
+      "id": "n_v11spo_leonard_doroftei",
+      "node_type": "person",
+      "label_ro": "Leonard Doroftei",
+      "category": "sport",
+      "description": "Boxer român, campion mondial WBA și medalist olimpic.",
+      "salience": 0.61,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Moșu"
+      ]
+    },
+    {
+      "id": "n_v11spo_oina",
+      "node_type": "concept",
+      "label_ro": "Oină",
+      "category": "sport",
+      "description": "Joc sportiv tradițional românesc, cu bâtă și minge.",
+      "salience": 0.56,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "jocul de oină"
+      ]
+    },
+    {
+      "id": "n_v11sti_stefania_maracineanu",
+      "node_type": "person",
+      "label_ro": "Ștefania Mărăcineanu",
+      "category": "stiinta",
+      "description": "Fiziciană română asociată cercetărilor despre radioactivitate.",
+      "salience": 0.52,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11sti_institutul_cantacuzino",
+      "node_type": "org",
+      "label_ro": "Institutul Cantacuzino",
+      "category": "stiinta",
+      "description": "Institut bucureștean de microbiologie și vaccinuri.",
+      "salience": 0.62,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Cantacuzino"
+      ]
+    },
+    {
+      "id": "n_v11sti_gerovital",
+      "node_type": "work",
+      "label_ro": "Gerovital",
+      "category": "stiinta",
+      "description": "Produs antiîmbătrânire popularizat de Ana Aslan.",
+      "salience": 0.6,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Gerovital H3"
+      ]
+    },
+    {
+      "id": "n_v11sti_observatorul_urseanu",
+      "node_type": "org",
+      "label_ro": "Observatorul Urseanu",
+      "category": "stiinta",
+      "description": "Observator astronomic public din București.",
+      "salience": 0.47,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "Observatorul Vasile Urseanu"
+      ]
+    },
+    {
+      "id": "n_v11sti_elie_carafoli",
+      "node_type": "person",
+      "label_ro": "Elie Carafoli",
+      "category": "stiinta",
+      "description": "Inginer și pionier al aerodinamicii românești.",
+      "salience": 0.45,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11sti_dimitrie_brandza",
+      "node_type": "person",
+      "label_ro": "Dimitrie Brândză",
+      "category": "stiinta",
+      "description": "Botanist legat de Grădina Botanică din București.",
+      "salience": 0.42,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11sti_dragomir_hurmuzescu",
+      "node_type": "person",
+      "label_ro": "Dragomir Hurmuzescu",
+      "category": "stiinta",
+      "description": "Fizician și promotor al învățământului electrotehnic.",
+      "salience": 0.43,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11sti_horia_hulubei",
+      "node_type": "person",
+      "label_ro": "Horia Hulubei",
+      "category": "stiinta",
+      "description": "Fizician, fondator de școală în fizica atomică românească.",
+      "salience": 0.46,
+      "difficulty_tier": "medium",
+      "degree": 1
+    },
+    {
+      "id": "n_v11sti_iar_80",
+      "node_type": "work",
+      "label_ro": "IAR 80",
+      "category": "stiinta",
+      "description": "Avion de vânătoare românesc din al Doilea Război Mondial.",
+      "salience": 0.57,
+      "difficulty_tier": "medium",
+      "degree": 2,
+      "aliases": [
+        "IAR-80"
+      ]
+    },
+    {
+      "id": "n_v11sti_laserul_magurele",
+      "node_type": "work",
+      "label_ro": "Laserul Măgurele",
+      "category": "stiinta",
+      "description": "Laser de mare putere al infrastructurii ELI-NP.",
+      "salience": 0.54,
+      "difficulty_tier": "medium",
+      "degree": 2,
+      "aliases": [
+        "ELI-NP"
+      ]
+    },
+    {
+      "id": "n_v11via_viza_flotant",
+      "node_type": "concept",
+      "label_ro": "Viză de flotant",
+      "category": "viata_de_roman",
+      "description": "Dovada temporară de reședință, celebră la chirii și înscrieri.",
+      "salience": 0.48,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "flotant",
+        "reședință temporară"
+      ]
+    },
+    {
+      "id": "n_v11via_nunta_la_cort",
+      "node_type": "event",
+      "label_ro": "Nuntă la cort",
+      "category": "viata_de_roman",
+      "description": "Petrecere mare de familie, cu mese lungi, muzică și satul invitat.",
+      "salience": 0.72,
+      "difficulty_tier": "easy",
+      "degree": 1,
+      "aliases": [
+        "nuntă la țară"
+      ]
+    },
+    {
+      "id": "n_v11via_botez_familie",
+      "node_type": "event",
+      "label_ro": "Botez în familie",
+      "category": "viata_de_roman",
+      "description": "Ceremonie religioasă urmată de masă și poze cu tot neamul.",
+      "salience": 0.61,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "botez"
+      ]
+    },
+    {
+      "id": "n_v11via_pomana",
+      "node_type": "event",
+      "label_ro": "Pomană",
+      "category": "viata_de_roman",
+      "description": "Masă și împărțeli făcute pentru pomenirea morților.",
+      "salience": 0.57,
+      "difficulty_tier": "medium",
+      "degree": 1,
+      "aliases": [
+        "parastas",
+        "pomenire"
+      ]
+    },
+    {
+      "id": "n_v11via_valea_prahovei",
+      "node_type": "place",
+      "label_ro": "Valea Prahovei",
+      "category": "viata_de_roman",
+      "description": "Ruta clasică de weekend spre Sinaia, Bușteni, Azuga și Predeal.",
+      "salience": 0.74,
+      "difficulty_tier": "easy",
+      "degree": 2,
+      "aliases": [
+        "DN1",
+        "stațiunile Prahovei"
+      ]
+    },
+    {
+      "id": "n_v11via_itp",
+      "node_type": "concept",
+      "label_ro": "ITP",
+      "category": "viata_de_roman",
+      "description": "Inspecția periodică fără de care mașina nu circulă legal.",
+      "salience": 0.62,
+      "difficulty_tier": "medium",
+      "degree": 0,
+      "aliases": [
+        "inspecție tehnică periodică"
+      ]
+    },
+    {
+      "id": "n_v11via_rabla",
+      "node_type": "concept",
+      "label_ro": "Programul Rabla",
+      "category": "viata_de_roman",
+      "description": "Program de casare prin care mașinile vechi sunt schimbate cu unele noi.",
+      "salience": 0.53,
+      "difficulty_tier": "medium",
+      "degree": 0,
+      "aliases": [
+        "Rabla"
+      ]
+    },
+    {
+      "id": "n_v11via_bacsis",
+      "node_type": "concept",
+      "label_ro": "Bacșiș",
+      "category": "viata_de_roman",
+      "description": "Suma lăsată peste nota de plată pentru servicii.",
+      "salience": 0.65,
+      "difficulty_tier": "medium",
+      "degree": 0,
+      "aliases": [
+        "ciubuc"
+      ]
+    },
+    {
+      "id": "n_v11via_gratar_iarba",
+      "node_type": "event",
+      "label_ro": "Grătar la iarbă",
+      "category": "viata_de_roman",
+      "description": "Ieșire cu mici, fum și pătură pe marginea orașului.",
+      "salience": 0.79,
+      "difficulty_tier": "easy",
+      "degree": 2,
+      "aliases": [
+        "grătar la iarbă verde",
+        "ieșire la grătar"
+      ]
+    },
+    {
+      "id": "n_v11via_spritz_terasa",
+      "node_type": "concept",
+      "label_ro": "Șpriț la terasă",
+      "category": "viata_de_roman",
+      "description": "Vin lungit cu apă minerală sau sifon, băut pe îndelete.",
+      "salience": 0.49,
+      "difficulty_tier": "medium",
+      "degree": 2,
+      "aliases": [
+        "șpriț",
+        "vin cu sifon"
       ]
     }
   ],
@@ -73824,6 +75775,2626 @@
       "label_ro": "contează la",
       "strength": 0.72,
       "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de104",
+      "src_id": "n_v11art_tnb",
+      "dst_id": "n_bucuresti",
+      "relation": "located_in",
+      "label_ro": "scena Capitalei",
+      "strength": 0.87,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de110",
+      "src_id": "n_v11art_muzeul_taranului",
+      "dst_id": "n_bucuresti",
+      "relation": "located_in",
+      "label_ro": "muzeu din București",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de111",
+      "src_id": "n_v11art_tiff",
+      "dst_id": "n_cluj_napoca",
+      "relation": "located_in",
+      "label_ro": "festival clujean",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de120",
+      "src_id": "n_v11art_fits",
+      "dst_id": "n_sibiu",
+      "relation": "located_in",
+      "label_ro": "festival sibian",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de122",
+      "src_id": "n_v11art_pal_culturii",
+      "dst_id": "n_iasi",
+      "relation": "located_in",
+      "label_ro": "simbol al Iașiului",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de126",
+      "src_id": "n_v11art_cimitirul_vesel",
+      "dst_id": "n_v4geo_sat",
+      "relation": "located_in",
+      "label_ro": "la Săpânța",
+      "strength": 0.55,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de127",
+      "src_id": "n_v11art_dinu_lipatti",
+      "dst_id": "n_v3muz_pian",
+      "relation": "related_to",
+      "label_ro": "pianist celebru",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de163",
+      "src_id": "n_v11art_nicolae_tonitza",
+      "dst_id": "n_v3per_pictor",
+      "relation": "is_a",
+      "label_ro": "pictor modern",
+      "strength": 0.74,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de165",
+      "src_id": "n_v11art_ion_andreescu",
+      "dst_id": "n_v3per_pictor",
+      "relation": "is_a",
+      "label_ro": "pictor peisagist",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de169",
+      "src_id": "n_v11art_victor_brauner",
+      "dst_id": "n_v2lit_avangarda",
+      "relation": "related_to",
+      "label_ro": "avangardă suprarealistă",
+      "strength": 0.62,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de195",
+      "src_id": "n_george_enescu_compozitor",
+      "dst_id": "n_george_enescu",
+      "relation": "related_to",
+      "label_ro": "muzica autorului",
+      "strength": 0.85,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de196",
+      "src_id": "n_ansamblul_targu_jiu",
+      "dst_id": "n_oltenia",
+      "relation": "located_in",
+      "label_ro": "în Oltenia",
+      "strength": 0.73,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de200",
+      "src_id": "n_ceramica_de_horezu",
+      "dst_id": "n_oltenia",
+      "relation": "related_to",
+      "label_ro": "meșteșug oltenesc",
+      "strength": 0.76,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd201",
+      "src_id": "n_v11art_tiff",
+      "dst_id": "n_gas_varza_a_la_cluj",
+      "relation": "related_to",
+      "label_ro": "Cluj, alt registru",
+      "strength": 0.25,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd202",
+      "src_id": "n_v11art_pal_culturii",
+      "dst_id": "n_v4ist_palat",
+      "relation": "related_to",
+      "label_ro": "doar cuvânt comun",
+      "strength": 0.22,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd203",
+      "src_id": "n_v11art_tnb",
+      "dst_id": "n_bnr",
+      "relation": "related_to",
+      "label_ro": "instituții centrale",
+      "strength": 0.3,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd204",
+      "src_id": "n_albastru_de_voronet",
+      "dst_id": "n_lbax_dor",
+      "relation": "related_to",
+      "label_ro": "simbol românesc vag",
+      "strength": 0.28,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "de266",
+      "src_id": "n_v11fil_teleenciclopedia",
+      "dst_id": "n_v3soc_mass_media",
+      "relation": "part_of",
+      "label_ro": "televiziune publică",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de275",
+      "src_id": "n_v11fil_romanii_au_talent",
+      "dst_id": "n_v4per_talent",
+      "relation": "related_to",
+      "label_ro": "concurs de talente",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de1798",
+      "src_id": "n_v11fil_vocea_romaniei",
+      "dst_id": "n_v4muz_voce",
+      "relation": "related_to",
+      "label_ro": "concurs vocal",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de1855",
+      "src_id": "n_v11fil_cronica_carcotasilor",
+      "dst_id": "n_net_reactie_video",
+      "relation": "related_to",
+      "label_ro": "umor din media",
+      "strength": 0.58,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de1942",
+      "src_id": "n_v11fil_teambuilding",
+      "dst_id": "n_net_bromania",
+      "relation": "created_by",
+      "label_ro": "co-regizat de",
+      "strength": 0.68,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de1943",
+      "src_id": "n_v11fil_teambuilding",
+      "dst_id": "n_v4soc_munca",
+      "relation": "related_to",
+      "label_ro": "satiră de birou",
+      "strength": 0.62,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de1973",
+      "src_id": "n_v11fil_toate_panzele_sus",
+      "dst_id": "n_v3geo_ocean",
+      "relation": "related_to",
+      "label_ro": "aventură pe mare",
+      "strength": 0.54,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de1982",
+      "src_id": "n_v11fil_pistruiatul",
+      "dst_id": "n_comunismul_in_romania",
+      "relation": "part_of",
+      "label_ro": "produs în epocă",
+      "strength": 0.57,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de2082",
+      "src_id": "n_v11fil_secretul_lui_bachus",
+      "dst_id": "n_v4gas_vin",
+      "relation": "related_to",
+      "label_ro": "afaceri cu vin",
+      "strength": 0.68,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de2083",
+      "src_id": "n_v11fil_aferim",
+      "dst_id": "n_tara_romaneasca",
+      "relation": "located_in",
+      "label_ro": "drum prin Valahia",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de2384",
+      "src_id": "n_v11fil_aferim",
+      "dst_id": "n_minoritati_nationale",
+      "relation": "related_to",
+      "label_ro": "temă etnică",
+      "strength": 0.58,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de2396",
+      "src_id": "n_v11fil_pozitia_copilului",
+      "dst_id": "n_v4soc_familie",
+      "relation": "related_to",
+      "label_ro": "dramă de familie",
+      "strength": 0.7,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de2399",
+      "src_id": "n_v11fil_dupa_dealuri",
+      "dst_id": "n_moldova_reg",
+      "relation": "located_in",
+      "label_ro": "cazul Tanacu",
+      "strength": 0.66,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de2422",
+      "src_id": "n_v11fil_colectiv",
+      "dst_id": "n_v3soc_spital",
+      "relation": "related_to",
+      "label_ro": "sistem medical",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de2433",
+      "src_id": "n_v11fil_colectiv",
+      "dst_id": "n_drepturile_omului",
+      "relation": "related_to",
+      "label_ro": "responsabilitate publică",
+      "strength": 0.55,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de3049",
+      "src_id": "n_ftv_morometii_film",
+      "dst_id": "n_marin_preda",
+      "relation": "influenced",
+      "label_ro": "după roman",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de3130",
+      "src_id": "n_ftv_florin_piersic",
+      "dst_id": "n_cluj_napoca",
+      "relation": "located_in",
+      "label_ro": "născut la Cluj",
+      "strength": 0.76,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4795",
+      "src_id": "n_ftv_premiile_gopo",
+      "dst_id": "n_cinematografia_romaneasca",
+      "relation": "part_of",
+      "label_ro": "premii de film",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4796",
+      "src_id": "n_ftv_insula_iubirii",
+      "dst_id": "n_delta_dunarii",
+      "relation": "related_to",
+      "label_ro": "are «insulă»",
+      "strength": 0.22,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4797",
+      "src_id": "n_ftv_las_fierbinti",
+      "dst_id": "n_gas_vin_fiert",
+      "relation": "related_to",
+      "label_ro": "sună a fierbinte",
+      "strength": 0.2,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4798",
+      "src_id": "n_v11fil_vocea_romaniei",
+      "dst_id": "n_vot",
+      "relation": "related_to",
+      "label_ro": "voce vs vot",
+      "strength": 0.18,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4799",
+      "src_id": "n_ftv_celentano",
+      "dst_id": "n_muz_adrian_minune",
+      "relation": "related_to",
+      "label_ro": "nume de scenă",
+      "strength": 0.27,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4800",
+      "src_id": "n_v11gas_salam_sibiu",
+      "dst_id": "n_sibiu",
+      "relation": "related_to",
+      "label_ro": "nume de oraș",
+      "strength": 0.84,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4801",
+      "src_id": "n_v11gas_tochitura_moldoveneasca",
+      "dst_id": "n_moldova_reg",
+      "relation": "related_to",
+      "label_ro": "specialitate moldovenească",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4802",
+      "src_id": "n_v11gas_placinta_dobrogeana",
+      "dst_id": "n_dobrogea",
+      "relation": "related_to",
+      "label_ro": "produs dobrogean",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4803",
+      "src_id": "n_v11gas_casa_capsa",
+      "dst_id": "n_bucuresti",
+      "relation": "located_in",
+      "label_ro": "în București",
+      "strength": 0.88,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de4804",
+      "src_id": "n_v11gas_caru_cu_bere",
+      "dst_id": "n_bucuresti",
+      "relation": "located_in",
+      "label_ro": "în Centrul Vechi",
+      "strength": 0.88,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de4805",
+      "src_id": "n_gas_mititei_obor",
+      "dst_id": "n_bucuresti",
+      "relation": "related_to",
+      "label_ro": "Obor bucureștean",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4806",
+      "src_id": "n_gas_toba",
+      "dst_id": "n_vdr_taiatul_porcului",
+      "relation": "part_of",
+      "label_ro": "porcul de Ignat",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de4807",
+      "src_id": "n_gas_caltabos",
+      "dst_id": "n_vdr_taiatul_porcului",
+      "relation": "part_of",
+      "label_ro": "porcul de Ignat",
+      "strength": 0.84,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de4808",
+      "src_id": "n_gas_oua_rosii",
+      "dst_id": "n_vdr_curatenia_paste",
+      "relation": "related_to",
+      "label_ro": "Paște în casă",
+      "strength": 0.6,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4809",
+      "src_id": "n_v11gas_pastorel_teodoreanu",
+      "dst_id": "n_generatia_interbelica",
+      "relation": "part_of",
+      "label_ro": "spirit interbelic",
+      "strength": 0.7,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4810",
+      "src_id": "n_v11gas_radu_anton_roman",
+      "dst_id": "n_v3lit_carte",
+      "relation": "related_to",
+      "label_ro": "autor gastronomic",
+      "strength": 0.64,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4811",
+      "src_id": "n_v11gas_sanda_marin",
+      "dst_id": "n_v3lit_carte",
+      "relation": "related_to",
+      "label_ro": "carte de bucate",
+      "strength": 0.68,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4812",
+      "src_id": "n_v2gas_mancare_stradala",
+      "dst_id": "n_v4geo_strada",
+      "relation": "related_to",
+      "label_ro": "mâncat pe stradă",
+      "strength": 0.62,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4813",
+      "src_id": "n_v11gas_salam_sibiu",
+      "dst_id": "n_muz_florin_salam",
+      "relation": "related_to",
+      "label_ro": "doar același cuvânt",
+      "strength": 0.18,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4814",
+      "src_id": "n_gas_masa_craciun",
+      "dst_id": "n_masa_tacerii",
+      "relation": "related_to",
+      "label_ro": "doar cuvântul masă",
+      "strength": 0.22,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4815",
+      "src_id": "n_gas_sarmale",
+      "dst_id": "n_sarmizegetusa",
+      "relation": "related_to",
+      "label_ro": "început de cuvânt",
+      "strength": 0.18,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4816",
+      "src_id": "n_gas_mici",
+      "dst_id": "n_mica_unire_1859",
+      "relation": "related_to",
+      "label_ro": "mic versus mică",
+      "strength": 0.16,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4817",
+      "src_id": "n_gas_ciorba_radauteana",
+      "dst_id": "n_v11geo_suceava",
+      "relation": "related_to",
+      "label_ro": "Rădăuți în Suceava",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4818",
+      "src_id": "n_gas_palinca",
+      "dst_id": "n_v11geo_maramures",
+      "relation": "related_to",
+      "label_ro": "asociere maramureșeană",
+      "strength": 0.64,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4819",
+      "src_id": "n_aurel_vlaicu",
+      "dst_id": "n_aeroportul_baneasa",
+      "relation": "related_to",
+      "label_ro": "nume de aeroport",
+      "strength": 0.66,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4820",
+      "src_id": "n_baltagul",
+      "dst_id": "n_moldova_reg",
+      "relation": "related_to",
+      "label_ro": "Moldova montană",
+      "strength": 0.63,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4821",
+      "src_id": "n_morometii",
+      "dst_id": "n_campia_romana",
+      "relation": "related_to",
+      "label_ro": "sat din câmpie",
+      "strength": 0.64,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4822",
+      "src_id": "n_gas_varza_a_la_cluj",
+      "dst_id": "n_brasov",
+      "relation": "related_to",
+      "label_ro": "capcană ardeleană",
+      "strength": 0.22,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4823",
+      "src_id": "n_muz_cerbul_de_aur",
+      "dst_id": "n_sibiu",
+      "relation": "located_in",
+      "label_ro": "nu e festival sibian",
+      "strength": 0.2,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4824",
+      "src_id": "n_simona_halep",
+      "dst_id": "n_timisoara",
+      "relation": "related_to",
+      "label_ro": "oraș sportiv, nu natal",
+      "strength": 0.18,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4825",
+      "src_id": "n_muzeul_brukenthal",
+      "dst_id": "n_bucuresti",
+      "relation": "located_in",
+      "label_ro": "capcană de muzeu național",
+      "strength": 0.23,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4826",
+      "src_id": "n_v11ist_tudor_vladimirescu",
+      "dst_id": "n_oltenia",
+      "relation": "related_to",
+      "label_ro": "panduri olteni",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4827",
+      "src_id": "n_v11ist_tudor_vladimirescu",
+      "dst_id": "n_v2soc_armata",
+      "relation": "related_to",
+      "label_ro": "oaste de panduri",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4828",
+      "src_id": "n_v11ist_revolutia_1848",
+      "dst_id": "n_vot",
+      "relation": "influenced",
+      "label_ro": "drepturi politice",
+      "strength": 0.7,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4829",
+      "src_id": "n_v11ist_revolutia_1848",
+      "dst_id": "n_v3soc_protest",
+      "relation": "related_to",
+      "label_ro": "mobilizare civică",
+      "strength": 0.76,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4830",
+      "src_id": "n_v11ist_rascoala_1907",
+      "dst_id": "n_v2lit_sat_romanesc",
+      "relation": "related_to",
+      "label_ro": "tensiuni rurale",
+      "strength": 0.7,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4831",
+      "src_id": "n_v11ist_rascoala_1907",
+      "dst_id": "n_ion_roman",
+      "relation": "related_to",
+      "label_ro": "lumea țărănească",
+      "strength": 0.55,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4832",
+      "src_id": "n_v11ist_rascoala_1784",
+      "dst_id": "n_muntii_apuseni",
+      "relation": "located_in",
+      "label_ro": "zona răscoalei",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4833",
+      "src_id": "n_v11ist_ion_antonescu",
+      "dst_id": "n_v2soc_armata",
+      "relation": "related_to",
+      "label_ro": "conducere militară",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4834",
+      "src_id": "n_v11ist_mihail_kogalniceanu",
+      "dst_id": "n_iasi",
+      "relation": "located_in",
+      "label_ro": "născut la Iași",
+      "strength": 0.76,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4835",
+      "src_id": "n_v11ist_mihail_kogalniceanu",
+      "dst_id": "n_unirea_principatelor",
+      "relation": "influenced",
+      "label_ro": "program unionist",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4836",
+      "src_id": "n_v11ist_epoca_fanariota",
+      "dst_id": "n_perx_bizant_dupa_bizant",
+      "relation": "related_to",
+      "label_ro": "moștenire bizantină",
+      "strength": 0.52,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4837",
+      "src_id": "n_v11ist_basarabia",
+      "dst_id": "n_prut",
+      "relation": "related_to",
+      "label_ro": "râu de hotar",
+      "strength": 0.84,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4838",
+      "src_id": "n_v11ist_basarabia",
+      "dst_id": "n_moldova_reg",
+      "relation": "part_of",
+      "label_ro": "Moldova istorică",
+      "strength": 0.77,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4839",
+      "src_id": "n_v11ist_pacea_adrianopol",
+      "dst_id": "n_dunarea",
+      "relation": "influenced",
+      "label_ro": "navigație dunăreană",
+      "strength": 0.68,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4840",
+      "src_id": "n_v11ist_memorandumul",
+      "dst_id": "n_v3soc_protest",
+      "relation": "related_to",
+      "label_ro": "petiție politică",
+      "strength": 0.65,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4841",
+      "src_id": "n_v11ist_coroana_de_otel",
+      "dst_id": "n_v2per_casa_regala",
+      "relation": "part_of",
+      "label_ro": "simbol regal",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4842",
+      "src_id": "n_v11ist_dictatul_viena",
+      "dst_id": "n_cluj_napoca",
+      "relation": "related_to",
+      "label_ro": "oraș cedat",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4843",
+      "src_id": "n_v11ist_dictatul_viena",
+      "dst_id": "n_geox_targu_mures",
+      "relation": "related_to",
+      "label_ro": "Transilvania de Nord",
+      "strength": 0.68,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4844",
+      "src_id": "n_carol_i",
+      "dst_id": "n_geox_sinaia",
+      "relation": "related_to",
+      "label_ro": "reședință regală",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4845",
+      "src_id": "n_mihai_i",
+      "dst_id": "n_v2per_casa_regala",
+      "relation": "part_of",
+      "label_ro": "Casa Regală",
+      "strength": 0.83,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4846",
+      "src_id": "n_columna_traian",
+      "dst_id": "n_v3art_statuie",
+      "relation": "related_to",
+      "label_ro": "monument sculptat",
+      "strength": 0.31,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4847",
+      "src_id": "n_mihai_viteazul",
+      "dst_id": "n_ftv_amza_pellea",
+      "relation": "related_to",
+      "label_ro": "rol cinematografic",
+      "strength": 0.34,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4848",
+      "src_id": "n_v11lim_scrisoarea_neacsu",
+      "dst_id": "n_brasov",
+      "relation": "related_to",
+      "label_ro": "adresată Brașovului",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4849",
+      "src_id": "n_v11lim_coresi",
+      "dst_id": "n_brasov",
+      "relation": "located_in",
+      "label_ro": "tipar la Brașov",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4850",
+      "src_id": "n_v11lim_cazania_varlaam",
+      "dst_id": "n_iasi",
+      "relation": "located_in",
+      "label_ro": "tipărită la Iași",
+      "strength": 0.79,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4851",
+      "src_id": "n_v11lim_biblia_bucuresti",
+      "dst_id": "n_bucuresti",
+      "relation": "located_in",
+      "label_ro": "tipărită la București",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4852",
+      "src_id": "n_v11lim_biblia_bucuresti",
+      "dst_id": "n_tara_romaneasca",
+      "relation": "related_to",
+      "label_ro": "ediție munteană",
+      "strength": 0.6,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4853",
+      "src_id": "n_v11lim_doom",
+      "dst_id": "n_academia_romana",
+      "relation": "created_by",
+      "label_ro": "normă academică",
+      "strength": 0.84,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4854",
+      "src_id": "n_v11lim_samuil_micu",
+      "dst_id": "n_transilvania",
+      "relation": "related_to",
+      "label_ro": "cărturar ardelean",
+      "strength": 0.74,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4855",
+      "src_id": "n_v11lim_gheorghe_sincai",
+      "dst_id": "n_transilvania",
+      "relation": "related_to",
+      "label_ro": "cărturar ardelean",
+      "strength": 0.74,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4856",
+      "src_id": "n_scoala_ardeleana",
+      "dst_id": "n_transilvania",
+      "relation": "part_of",
+      "label_ro": "iluminism ardelean",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4857",
+      "src_id": "n_v11lim_elementa_linguae",
+      "dst_id": "n_transilvania",
+      "relation": "related_to",
+      "label_ro": "program ardelean",
+      "strength": 0.65,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4858",
+      "src_id": "n_v11lim_alexandru_rosetti",
+      "dst_id": "n_universitatea_bucuresti",
+      "relation": "related_to",
+      "label_ro": "profesor universitar",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4859",
+      "src_id": "n_v11lim_mioara_avram",
+      "dst_id": "n_academia_romana",
+      "relation": "related_to",
+      "label_ro": "Institutul Academiei",
+      "strength": 0.68,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4860",
+      "src_id": "n_v11lim_alexandru_graur",
+      "dst_id": "n_universitatea_bucuresti",
+      "relation": "related_to",
+      "label_ro": "profesor universitar",
+      "strength": 0.7,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4861",
+      "src_id": "n_v11lim_lazar_saineanu",
+      "dst_id": "n_paris",
+      "relation": "related_to",
+      "label_ro": "exil la Paris",
+      "strength": 0.55,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4862",
+      "src_id": "n_sextil_puscariu",
+      "dst_id": "n_cluj_napoca",
+      "relation": "related_to",
+      "label_ro": "muzeul limbii",
+      "strength": 0.75,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4863",
+      "src_id": "n_dimitrie_cantemir",
+      "dst_id": "n_moldova",
+      "relation": "related_to",
+      "label_ro": "domn al Moldovei",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4864",
+      "src_id": "n_ion_heliade_radulescu",
+      "dst_id": "n_tara_romaneasca",
+      "relation": "related_to",
+      "label_ro": "pașoptist muntean",
+      "strength": 0.66,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4865",
+      "src_id": "n_v2lim_cartof",
+      "dst_id": "n_v3gas_cartofi_prajiti",
+      "relation": "related_to",
+      "label_ro": "același aliment",
+      "strength": 0.3,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4866",
+      "src_id": "n_v4lim_dialog",
+      "dst_id": "n_v3fil_scenariu",
+      "relation": "part_of",
+      "label_ro": "replici în scenariu",
+      "strength": 0.32,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4867",
+      "src_id": "n_v11lit_la_tiganci",
+      "dst_id": "n_mircea_eliade",
+      "relation": "created_by",
+      "label_ro": "autorul nuvelei",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4868",
+      "src_id": "n_v11lit_maitreyi",
+      "dst_id": "n_mircea_eliade",
+      "relation": "created_by",
+      "label_ro": "autorul romanului",
+      "strength": 0.84,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4869",
+      "src_id": "n_v11lit_iona",
+      "dst_id": "n_artx_teatru_romanesc",
+      "relation": "part_of",
+      "label_ro": "dramă canonică",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4870",
+      "src_id": "n_v11lit_marin_sorescu",
+      "dst_id": "n_oltenia",
+      "relation": "related_to",
+      "label_ro": "rădăcini oltene",
+      "strength": 0.68,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4871",
+      "src_id": "n_v11lit_mara",
+      "dst_id": "n_transilvania",
+      "relation": "related_to",
+      "label_ro": "spațiu ardelean",
+      "strength": 0.67,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4872",
+      "src_id": "n_v11lit_rascoala",
+      "dst_id": "n_v4ist_rascoala",
+      "relation": "related_to",
+      "label_ro": "tema răscoalei",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4873",
+      "src_id": "n_v11lit_dacia_literara",
+      "dst_id": "n_iasi",
+      "relation": "located_in",
+      "label_ro": "revistă ieșeană",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4874",
+      "src_id": "n_v11lit_craii",
+      "dst_id": "n_bucuresti",
+      "relation": "located_in",
+      "label_ro": "București decadent",
+      "strength": 0.75,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4875",
+      "src_id": "n_v11lit_patul_lui_procust",
+      "dst_id": "n_bucuresti",
+      "relation": "related_to",
+      "label_ro": "modernitate urbană",
+      "strength": 0.6,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4876",
+      "src_id": "n_v11lit_padurea_spanzuratilor",
+      "dst_id": "n_padurea_spanzuratilor_film",
+      "relation": "related_to",
+      "label_ro": "adaptare cinematografică",
+      "strength": 0.88,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4877",
+      "src_id": "n_v11lit_padurea_spanzuratilor",
+      "dst_id": "n_primul_razboi_mondial",
+      "relation": "related_to",
+      "label_ro": "fundal de război",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4878",
+      "src_id": "n_ultima_noapte",
+      "dst_id": "n_primul_razboi_mondial",
+      "relation": "related_to",
+      "label_ro": "frontul romanului",
+      "strength": 0.84,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4879",
+      "src_id": "n_ion_barbu",
+      "dst_id": "n_stix_matematica_romaneasca",
+      "relation": "related_to",
+      "label_ro": "poet matematician",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4880",
+      "src_id": "n_titu_maiorescu",
+      "dst_id": "n_academia_romana",
+      "relation": "related_to",
+      "label_ro": "membru al Academiei",
+      "strength": 0.74,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4881",
+      "src_id": "n_ion_luca_caragiale",
+      "dst_id": "n_artx_teatru_romanesc",
+      "relation": "influenced",
+      "label_ro": "dramaturgie canonică",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4882",
+      "src_id": "n_liviu_rebreanu",
+      "dst_id": "n_transilvania",
+      "relation": "related_to",
+      "label_ro": "origini ardelene",
+      "strength": 0.67,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4883",
+      "src_id": "n_mihail_sadoveanu",
+      "dst_id": "n_moldova_reg",
+      "relation": "related_to",
+      "label_ro": "imaginar moldav",
+      "strength": 0.68,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4884",
+      "src_id": "n_plumb",
+      "dst_id": "n_v4sti_metal",
+      "relation": "related_to",
+      "label_ro": "omonim chimic",
+      "strength": 0.3,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4885",
+      "src_id": "n_luceafarul",
+      "dst_id": "n_v3sti_planeta",
+      "relation": "related_to",
+      "label_ro": "Luceafărul-Venus",
+      "strength": 0.28,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4886",
+      "src_id": "n_o_scrisoare_pierduta",
+      "dst_id": "n_v4mem_postare",
+      "relation": "related_to",
+      "label_ro": "text trimis",
+      "strength": 0.22,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4887",
+      "src_id": "n_net_ghita_ciobanul",
+      "dst_id": "n_sibiu",
+      "relation": "located_in",
+      "label_ro": "Mărginimea Sibiului",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4888",
+      "src_id": "n_net_reclamele_vodafone_ghita",
+      "dst_id": "n_v4fil_reclama",
+      "relation": "is_a",
+      "label_ro": "campanie publicitară",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4889",
+      "src_id": "n_net_jamila_cuisine",
+      "dst_id": "n_v4gas_bucatarie",
+      "relation": "related_to",
+      "label_ro": "rețete video",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4890",
+      "src_id": "n_net_jamila_cuisine",
+      "dst_id": "n_gas_cozonac",
+      "relation": "related_to",
+      "label_ro": "rețetă căutată",
+      "strength": 0.64,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4891",
+      "src_id": "n_v2mem_clip_culinar",
+      "dst_id": "n_v4gas_mancare",
+      "relation": "related_to",
+      "label_ro": "format culinar",
+      "strength": 0.69,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4892",
+      "src_id": "n_net_recorder",
+      "dst_id": "n_v3soc_mass_media",
+      "relation": "is_a",
+      "label_ro": "redacție online",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4893",
+      "src_id": "n_net_recorder",
+      "dst_id": "n_v3fil_documentar",
+      "relation": "related_to",
+      "label_ro": "documentare video",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4894",
+      "src_id": "n_net_robotzi",
+      "dst_id": "n_v4fil_desen_animat",
+      "relation": "is_a",
+      "label_ro": "serial animat",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4895",
+      "src_id": "n_v11mem_times_new_roman",
+      "dst_id": "n_v4lit_ziar",
+      "relation": "is_a",
+      "label_ro": "ziar satiric online",
+      "strength": 0.7,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4896",
+      "src_id": "n_v11mem_times_new_roman",
+      "dst_id": "n_ion_luca_caragiale",
+      "relation": "related_to",
+      "label_ro": "satiră socială",
+      "strength": 0.55,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4897",
+      "src_id": "n_v11mem_sector_7",
+      "dst_id": "n_v2fil_comedie",
+      "relation": "related_to",
+      "label_ro": "sketch-uri comice",
+      "strength": 0.77,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4898",
+      "src_id": "n_v11mem_noaptea_tarziu",
+      "dst_id": "n_v3muz_videoclip",
+      "relation": "related_to",
+      "label_ro": "parodii muzicale",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4899",
+      "src_id": "n_v11mem_noaptea_tarziu",
+      "dst_id": "n_v4muz_refren",
+      "relation": "related_to",
+      "label_ro": "refrene parodiate",
+      "strength": 0.62,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4900",
+      "src_id": "n_v11mem_dorian_popa",
+      "dst_id": "n_muz_pop_mainstream_ro",
+      "relation": "related_to",
+      "label_ro": "artist pop",
+      "strength": 0.73,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4901",
+      "src_id": "n_v11mem_dorian_popa",
+      "dst_id": "n_v4per_celebritate",
+      "relation": "is_a",
+      "label_ro": "vedetă online",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4902",
+      "src_id": "n_v11mem_mihai_bendeac",
+      "dst_id": "n_ftv_iumor",
+      "relation": "related_to",
+      "label_ro": "jurat TV",
+      "strength": 0.79,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4903",
+      "src_id": "n_net_micutzu",
+      "dst_id": "n_v2fil_comedie",
+      "relation": "related_to",
+      "label_ro": "comedian stand-up",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4904",
+      "src_id": "n_net_teo_vio_costel",
+      "dst_id": "n_v2fil_comedie",
+      "relation": "related_to",
+      "label_ro": "stand-up comedy",
+      "strength": 0.73,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4905",
+      "src_id": "n_v11mem_george_buhnici",
+      "dst_id": "n_v2sti_calculator",
+      "relation": "related_to",
+      "label_ro": "tehnologie explicată",
+      "strength": 0.65,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4906",
+      "src_id": "n_v11mem_backpackyourlife",
+      "dst_id": "n_v3geo_tara",
+      "relation": "related_to",
+      "label_ro": "vloguri de călătorie",
+      "strength": 0.58,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4907",
+      "src_id": "n_v11mem_zoso",
+      "dst_id": "n_v4lit_jurnal",
+      "relation": "related_to",
+      "label_ro": "blog personal",
+      "strength": 0.57,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4908",
+      "src_id": "n_net_teo_vio_costel",
+      "dst_id": "n_ftv_teo_show",
+      "relation": "related_to",
+      "label_ro": "capcană de nume",
+      "strength": 0.22,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4909",
+      "src_id": "n_net_ghita_ciobanul",
+      "dst_id": "n_litx_ghita_slavici",
+      "relation": "related_to",
+      "label_ro": "alt Ghiță",
+      "strength": 0.24,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4910",
+      "src_id": "n_v11mem_times_new_roman",
+      "dst_id": "n_rapsodia_romana",
+      "relation": "related_to",
+      "label_ro": "roman nu română",
+      "strength": 0.2,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4911",
+      "src_id": "n_v11mem_dorian_popa",
+      "dst_id": "n_v4muz_pop",
+      "relation": "related_to",
+      "label_ro": "Popa nu e pop",
+      "strength": 0.19,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4912",
+      "src_id": "n_muz_electric_castle",
+      "dst_id": "n_transilvania",
+      "relation": "located_in",
+      "label_ro": "castel transilvănean",
+      "strength": 0.7,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4913",
+      "src_id": "n_v11muz_festivalul_mamaia",
+      "dst_id": "n_constanta",
+      "relation": "located_in",
+      "label_ro": "litoral constănțean",
+      "strength": 0.74,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4914",
+      "src_id": "n_v11muz_sfinx",
+      "dst_id": "n_bucuresti",
+      "relation": "related_to",
+      "label_ro": "formată la București",
+      "strength": 0.74,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4915",
+      "src_id": "n_v11muz_compact",
+      "dst_id": "n_cluj_napoca",
+      "relation": "related_to",
+      "label_ro": "formată la Cluj",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4916",
+      "src_id": "n_v11muz_voltaj",
+      "dst_id": "n_bucuresti",
+      "relation": "related_to",
+      "label_ro": "formată la București",
+      "strength": 0.76,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4917",
+      "src_id": "n_v11muz_vita_de_vie",
+      "dst_id": "n_bucuresti",
+      "relation": "related_to",
+      "label_ro": "scenă bucureșteană",
+      "strength": 0.76,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4918",
+      "src_id": "n_v11muz_taxi",
+      "dst_id": "n_bucuresti",
+      "relation": "related_to",
+      "label_ro": "formată la București",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4919",
+      "src_id": "n_muz_ozone",
+      "dst_id": "n_istx_chisinau",
+      "relation": "related_to",
+      "label_ro": "formată la Chișinău",
+      "strength": 0.84,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4920",
+      "src_id": "n_v11muz_zdob_zdub",
+      "dst_id": "n_istx_chisinau",
+      "relation": "related_to",
+      "label_ro": "trupă din Chișinău",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4921",
+      "src_id": "n_muz_alexandra_stan",
+      "dst_id": "n_constanta",
+      "relation": "related_to",
+      "label_ro": "născută la Constanța",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4922",
+      "src_id": "n_muz_smiley",
+      "dst_id": "n_socx_pitesti",
+      "relation": "related_to",
+      "label_ro": "originar din Pitești",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4923",
+      "src_id": "n_v11muz_madrigal",
+      "dst_id": "n_v4art_cor",
+      "relation": "is_a",
+      "label_ro": "cor cameral",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4924",
+      "src_id": "n_v11muz_tudor_gheorghe",
+      "dst_id": "n_oltenia",
+      "relation": "related_to",
+      "label_ro": "voce oltenească",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4925",
+      "src_id": "n_v11muz_taraf_haidouks",
+      "dst_id": "n_v4art_folclor",
+      "relation": "related_to",
+      "label_ro": "lăutărie și folclor",
+      "strength": 0.68,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4926",
+      "src_id": "n_v11muz_cenaclul_flacara",
+      "dst_id": "n_comunismul_in_romania",
+      "relation": "related_to",
+      "label_ro": "fenomen al epocii",
+      "strength": 0.68,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4927",
+      "src_id": "n_v11muz_cenaclul_flacara",
+      "dst_id": "n_v2lit_cenaclu_literar",
+      "relation": "related_to",
+      "label_ro": "format de cenaclu",
+      "strength": 0.62,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4928",
+      "src_id": "n_muz_phoenix",
+      "dst_id": "n_artx_pasarea_maiastra",
+      "relation": "related_to",
+      "label_ro": "pasăre în nume",
+      "strength": 0.28,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4929",
+      "src_id": "n_muz_cargo",
+      "dst_id": "n_v2soc_port",
+      "relation": "related_to",
+      "label_ro": "cargo spre port",
+      "strength": 0.24,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4930",
+      "src_id": "n_muz_iris",
+      "dst_id": "n_v4art_culoare",
+      "relation": "related_to",
+      "label_ro": "iris ca nuanță",
+      "strength": 0.22,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4931",
+      "src_id": "n_v11muz_taxi",
+      "dst_id": "n_v4soc_autobuz",
+      "relation": "related_to",
+      "label_ro": "transport urban",
+      "strength": 0.29,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4932",
+      "src_id": "n_v11per_gheorghe_zamfir",
+      "dst_id": "n_v4muz_muzica_populara",
+      "relation": "related_to",
+      "label_ro": "nai și folclor",
+      "strength": 0.68,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4933",
+      "src_id": "n_v11per_hariclea_darclee",
+      "dst_id": "n_v2art_teatru",
+      "relation": "related_to",
+      "label_ro": "scenă de operă",
+      "strength": 0.52,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4934",
+      "src_id": "n_v11per_radu_beligan",
+      "dst_id": "n_artx_teatru_romanesc",
+      "relation": "related_to",
+      "label_ro": "actorie de scenă",
+      "strength": 0.75,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4935",
+      "src_id": "n_v11per_elisabeta_rizea",
+      "dst_id": "n_comunismul_in_romania",
+      "relation": "related_to",
+      "label_ro": "rezistență anticomunistă",
+      "strength": 0.84,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4936",
+      "src_id": "n_v11per_doina_cornea",
+      "dst_id": "n_revolutia_1989",
+      "relation": "related_to",
+      "label_ro": "voce civică",
+      "strength": 0.7,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4937",
+      "src_id": "n_v11per_corneliu_coposu",
+      "dst_id": "n_democratie",
+      "relation": "influenced",
+      "label_ro": "opoziție democratică",
+      "strength": 0.73,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4938",
+      "src_id": "n_v11per_iuliu_maniu",
+      "dst_id": "n_marea_unire_1918",
+      "relation": "related_to",
+      "label_ro": "lider ardelean",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4939",
+      "src_id": "n_v11per_smaranda_braescu",
+      "dst_id": "n_aviatie",
+      "relation": "related_to",
+      "label_ro": "parașutism și zbor",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4940",
+      "src_id": "n_v11per_carol_davila",
+      "dst_id": "n_invatamant_romanesc",
+      "relation": "influenced",
+      "label_ro": "școală medicală",
+      "strength": 0.7,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4941",
+      "src_id": "n_rapsodiile_romane",
+      "dst_id": "n_rapsodia_romana",
+      "relation": "related_to",
+      "label_ro": "rapsodie românească",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4942",
+      "src_id": "n_constantin_brancusi",
+      "dst_id": "n_brancusi_concept",
+      "relation": "influenced",
+      "label_ro": "sculptură modernă",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4943",
+      "src_id": "n_perx_castelul_pelisor",
+      "dst_id": "n_geox_sinaia",
+      "relation": "located_in",
+      "label_ro": "castel la Sinaia",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4944",
+      "src_id": "n_perx_balcic",
+      "dst_id": "n_dobrogea",
+      "relation": "located_in",
+      "label_ro": "Balcic dobrogean",
+      "strength": 0.63,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4945",
+      "src_id": "n_cristian_mungiu",
+      "dst_id": "n_patru_luni_trei_saptamani",
+      "relation": "related_to",
+      "label_ro": "film regizat",
+      "strength": 0.89,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4946",
+      "src_id": "n_simona_halep",
+      "dst_id": "n_spt_steaua_1986",
+      "relation": "related_to",
+      "label_ro": "campioană roș-albastră",
+      "strength": 0.24,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4947",
+      "src_id": "n_gheorghe_hagi",
+      "dst_id": "n_spt_wimbledon",
+      "relation": "related_to",
+      "label_ro": "mare finală",
+      "strength": 0.18,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4948",
+      "src_id": "n_nadia_comaneci",
+      "dst_id": "n_spt_roland_garros",
+      "relation": "related_to",
+      "label_ro": "zece pe zgură",
+      "strength": 0.16,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4949",
+      "src_id": "n_v11per_gheorghe_zamfir",
+      "dst_id": "n_aerodinamica",
+      "relation": "related_to",
+      "label_ro": "aer și suflu",
+      "strength": 0.22,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4950",
+      "src_id": "n_v11soc_securitatea",
+      "dst_id": "n_comunismul_in_romania",
+      "relation": "part_of",
+      "label_ro": "poliția politică a regimului",
+      "strength": 0.88,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4951",
+      "src_id": "n_v11soc_securitatea",
+      "dst_id": "n_nicolae_ceausescu",
+      "relation": "related_to",
+      "label_ro": "instrument al regimului Ceaușescu",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4952",
+      "src_id": "n_v11soc_mineriadele",
+      "dst_id": "n_bucuresti",
+      "relation": "located_in",
+      "label_ro": "violențe în Capitală",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4953",
+      "src_id": "n_v11soc_mineriadele",
+      "dst_id": "n_revolutia_1989",
+      "relation": "related_to",
+      "label_ro": "tranziția post-1989",
+      "strength": 0.67,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4954",
+      "src_id": "n_v11soc_diaspora",
+      "dst_id": "n_emigratie_romaneasca",
+      "relation": "related_to",
+      "label_ro": "români plecați peste hotare",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4955",
+      "src_id": "n_v11soc_cfr",
+      "dst_id": "n_podul_cernavoda",
+      "relation": "related_to",
+      "label_ro": "cale ferată peste Dunăre",
+      "strength": 0.69,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4956",
+      "src_id": "n_v11soc_smurd",
+      "dst_id": "n_medicina",
+      "relation": "related_to",
+      "label_ro": "urgență medicală",
+      "strength": 0.76,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4957",
+      "src_id": "n_v11soc_anaf",
+      "dst_id": "n_v3via_facturi",
+      "relation": "related_to",
+      "label_ro": "taxe, chitanțe și datorii",
+      "strength": 0.56,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4958",
+      "src_id": "n_v11soc_buletin",
+      "dst_id": "n_v3via_dosar_sina",
+      "relation": "related_to",
+      "label_ro": "acte la ghișeu",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4959",
+      "src_id": "n_v11soc_jandarmeria",
+      "dst_id": "n_v4spo_stadion",
+      "relation": "related_to",
+      "label_ro": "ordine publică la meciuri",
+      "strength": 0.52,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4960",
+      "src_id": "n_v11soc_dna",
+      "dst_id": "n_v3per_politician",
+      "relation": "related_to",
+      "label_ro": "dosare de corupție politică",
+      "strength": 0.64,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4961",
+      "src_id": "n_v11soc_sri",
+      "dst_id": "n_revolutia_1989",
+      "relation": "related_to",
+      "label_ro": "instituție apărută după 1989",
+      "strength": 0.55,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4962",
+      "src_id": "n_academia_romana",
+      "dst_id": "n_norma_academiei",
+      "relation": "related_to",
+      "label_ro": "autoritate de normare",
+      "strength": 0.88,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4963",
+      "src_id": "n_v11soc_cnp",
+      "dst_id": "n_v3sti_adn",
+      "relation": "related_to",
+      "label_ro": "acronime de trei litere",
+      "strength": 0.28,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4964",
+      "src_id": "n_v11soc_cfr",
+      "dst_id": "n_muz_cargo",
+      "relation": "related_to",
+      "label_ro": "tren versus trupă rock",
+      "strength": 0.25,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4965",
+      "src_id": "n_v11soc_dna",
+      "dst_id": "n_v3sti_adn",
+      "relation": "related_to",
+      "label_ro": "confuzie DNA/ADN",
+      "strength": 0.22,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4966",
+      "src_id": "n_v11soc_buletin",
+      "dst_id": "n_v4fil_stiri",
+      "relation": "related_to",
+      "label_ro": "buletin de știri",
+      "strength": 0.3,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4967",
+      "src_id": "n_v11spo_arena_nationala",
+      "dst_id": "n_bucuresti",
+      "relation": "located_in",
+      "label_ro": "stadion în București",
+      "strength": 0.88,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4968",
+      "src_id": "n_v11spo_rapid_bucuresti",
+      "dst_id": "n_bucuresti",
+      "relation": "located_in",
+      "label_ro": "club din Capitală",
+      "strength": 0.84,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4969",
+      "src_id": "n_v11spo_dinamo_bucuresti",
+      "dst_id": "n_bucuresti",
+      "relation": "located_in",
+      "label_ro": "club din Capitală",
+      "strength": 0.83,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4970",
+      "src_id": "n_v11spo_universitatea_craiova",
+      "dst_id": "n_socx_craiova",
+      "relation": "located_in",
+      "label_ro": "echipa orașului",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4971",
+      "src_id": "n_v11spo_universitatea_craiova",
+      "dst_id": "n_oltenia",
+      "relation": "related_to",
+      "label_ro": "simbol oltenesc",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4972",
+      "src_id": "n_v11spo_nicolae_dobrin",
+      "dst_id": "n_socx_pitesti",
+      "relation": "related_to",
+      "label_ro": "Prințul din Trivale",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4973",
+      "src_id": "n_v11spo_mircea_lucescu",
+      "dst_id": "n_bucuresti",
+      "relation": "related_to",
+      "label_ro": "născut în București",
+      "strength": 0.62,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4974",
+      "src_id": "n_v11spo_elisabeta_lipa",
+      "dst_id": "n_siret",
+      "relation": "related_to",
+      "label_ro": "născută la Siret",
+      "strength": 0.74,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4975",
+      "src_id": "n_v11spo_gabriela_szabo",
+      "dst_id": "n_transilvania",
+      "relation": "related_to",
+      "label_ro": "campioană transilvăneană",
+      "strength": 0.52,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4976",
+      "src_id": "n_v11spo_ana_maria_branza",
+      "dst_id": "n_bucuresti",
+      "relation": "related_to",
+      "label_ro": "născută în București",
+      "strength": 0.57,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4977",
+      "src_id": "n_v11spo_leonard_doroftei",
+      "dst_id": "n_romania_stat",
+      "relation": "related_to",
+      "label_ro": "campion mondial român",
+      "strength": 0.6,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4978",
+      "src_id": "n_v11spo_oina",
+      "dst_id": "n_folclor_romanesc",
+      "relation": "related_to",
+      "label_ro": "joc tradițional",
+      "strength": 0.68,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4979",
+      "src_id": "n_spt_nadia_zecele_perfect",
+      "dst_id": "n_nadia_comaneci",
+      "relation": "created_by",
+      "label_ro": "reușita Nadiei",
+      "strength": 0.88,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4980",
+      "src_id": "n_spt_simona_wimbledon_2019",
+      "dst_id": "n_simona_halep",
+      "relation": "created_by",
+      "label_ro": "trofeul Simonei",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4981",
+      "src_id": "n_spt_wimbledon",
+      "dst_id": "n_paris",
+      "relation": "located_in",
+      "label_ro": "momeală de Grand Slam",
+      "strength": 0.24,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4982",
+      "src_id": "n_spt_roland_garros",
+      "dst_id": "n_bucuresti",
+      "relation": "located_in",
+      "label_ro": "momeală de oraș",
+      "strength": 0.21,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4983",
+      "src_id": "n_spt_nastase_us_open_1972",
+      "dst_id": "n_ilie_nastase",
+      "relation": "created_by",
+      "label_ro": "titlul lui Năstase",
+      "strength": 0.84,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4984",
+      "src_id": "n_spt_galatasaray",
+      "dst_id": "n_socx_galati",
+      "relation": "related_to",
+      "label_ro": "sună ca Galați",
+      "strength": 0.28,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd4985",
+      "src_id": "n_v11spo_ana_maria_branza",
+      "dst_id": "n_v2gas_branza",
+      "relation": "related_to",
+      "label_ro": "omograf culinar",
+      "strength": 0.3,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4986",
+      "src_id": "n_v11sti_gerovital",
+      "dst_id": "n_ana_aslan",
+      "relation": "created_by",
+      "label_ro": "dezvoltat de",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4987",
+      "src_id": "n_v11sti_institutul_cantacuzino",
+      "dst_id": "n_bucuresti",
+      "relation": "located_in",
+      "label_ro": "institut bucureștean",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4988",
+      "src_id": "n_v11sti_observatorul_urseanu",
+      "dst_id": "n_bucuresti",
+      "relation": "located_in",
+      "label_ro": "observator în oraș",
+      "strength": 0.85,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4989",
+      "src_id": "n_v11sti_elie_carafoli",
+      "dst_id": "n_socx_universitatea_politehnica_bucuresti",
+      "relation": "related_to",
+      "label_ro": "profesor la Politehnică",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4990",
+      "src_id": "n_v11sti_dimitrie_brandza",
+      "dst_id": "n_universitatea_bucuresti",
+      "relation": "related_to",
+      "label_ro": "profesor universitar",
+      "strength": 0.68,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4991",
+      "src_id": "n_v11sti_dragomir_hurmuzescu",
+      "dst_id": "n_socx_universitatea_cuza_iasi",
+      "relation": "related_to",
+      "label_ro": "profesor la Iași",
+      "strength": 0.64,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4992",
+      "src_id": "n_v11sti_horia_hulubei",
+      "dst_id": "n_universitatea_bucuresti",
+      "relation": "related_to",
+      "label_ro": "profesor de fizică",
+      "strength": 0.7,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4993",
+      "src_id": "n_v11sti_iar_80",
+      "dst_id": "n_brasov",
+      "relation": "located_in",
+      "label_ro": "fabricat la Brașov",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4994",
+      "src_id": "n_v11sti_laserul_magurele",
+      "dst_id": "n_muntenia",
+      "relation": "located_in",
+      "label_ro": "Măgurele în Muntenia",
+      "strength": 0.55,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4995",
+      "src_id": "n_v11sti_stefania_maracineanu",
+      "dst_id": "n_bucuresti",
+      "relation": "located_in",
+      "label_ro": "născută la București",
+      "strength": 0.66,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4996",
+      "src_id": "n_emil_racovita",
+      "dst_id": "n_iasi",
+      "relation": "located_in",
+      "label_ro": "născut la Iași",
+      "strength": 0.75,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4997",
+      "src_id": "n_george_palade",
+      "dst_id": "n_iasi",
+      "relation": "located_in",
+      "label_ro": "născut la Iași",
+      "strength": 0.73,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4998",
+      "src_id": "n_victor_babes",
+      "dst_id": "n_socx_universitatea_babes_bolyai",
+      "relation": "related_to",
+      "label_ro": "nume universitar",
+      "strength": 0.77,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de4999",
+      "src_id": "n_aviatie",
+      "dst_id": "n_muzeul_aviatiei_romane",
+      "relation": "related_to",
+      "label_ro": "muzeu dedicat",
+      "strength": 0.76,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5000",
+      "src_id": "n_podul_cernavoda",
+      "dst_id": "n_dobrogea",
+      "relation": "related_to",
+      "label_ro": "legătură cu Dobrogea",
+      "strength": 0.68,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5001",
+      "src_id": "n_spiru_haret",
+      "dst_id": "n_invatamant_romanesc",
+      "relation": "influenced",
+      "label_ro": "reforma educației",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5002",
+      "src_id": "n_stix_grigore_moisil",
+      "dst_id": "n_universitatea_bucuresti",
+      "relation": "related_to",
+      "label_ro": "profesor la București",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd5003",
+      "src_id": "n_v11sti_iar_80",
+      "dst_id": "n_aeroportul_baneasa",
+      "relation": "related_to",
+      "label_ro": "capcană aviatică",
+      "strength": 0.28,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd5004",
+      "src_id": "n_v11sti_laserul_magurele",
+      "dst_id": "n_net_internet_romanesc",
+      "relation": "related_to",
+      "label_ro": "capcană tehnologică",
+      "strength": 0.24,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5005",
+      "src_id": "n_v11via_valea_prahovei",
+      "dst_id": "n_bucegi",
+      "relation": "related_to",
+      "label_ro": "sub Bucegi",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5006",
+      "src_id": "n_v11via_valea_prahovei",
+      "dst_id": "n_geox_predeal",
+      "relation": "related_to",
+      "label_ro": "stațiune pe vale",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5007",
+      "src_id": "n_v3via_concediul",
+      "dst_id": "n_transfagarasan",
+      "relation": "related_to",
+      "label_ro": "drum de vacanță",
+      "strength": 0.67,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5008",
+      "src_id": "n_v11via_gratar_iarba",
+      "dst_id": "n_gas_gratar_1_mai",
+      "relation": "related_to",
+      "label_ro": "zi liberă cu fum",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5009",
+      "src_id": "n_v11via_gratar_iarba",
+      "dst_id": "n_gas_mici",
+      "relation": "related_to",
+      "label_ro": "meniul clasic",
+      "strength": 0.84,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5010",
+      "src_id": "n_vdr_sarmale_craciun",
+      "dst_id": "n_gas_sarmale",
+      "relation": "is_a",
+      "label_ro": "varianta festivă",
+      "strength": 0.88,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5011",
+      "src_id": "n_vdr_tuica_de_casa",
+      "dst_id": "n_gas_tuica",
+      "relation": "is_a",
+      "label_ro": "distilat de casă",
+      "strength": 0.84,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5012",
+      "src_id": "n_v11via_spritz_terasa",
+      "dst_id": "n_v4gas_vin",
+      "relation": "related_to",
+      "label_ro": "vin cu sifon",
+      "strength": 0.69,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5013",
+      "src_id": "n_v11via_nunta_la_cort",
+      "dst_id": "n_v4soc_nunta",
+      "relation": "is_a",
+      "label_ro": "petrecere mare",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5014",
+      "src_id": "n_v11via_pomana",
+      "dst_id": "n_v4soc_biserica",
+      "relation": "related_to",
+      "label_ro": "ritual de pomenire",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5015",
+      "src_id": "n_v11via_botez_familie",
+      "dst_id": "n_v4soc_biserica",
+      "relation": "related_to",
+      "label_ro": "taină și masă",
+      "strength": 0.7,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5016",
+      "src_id": "n_v11via_viza_flotant",
+      "dst_id": "n_bucuresti",
+      "relation": "related_to",
+      "label_ro": "chirie și domiciliu",
+      "strength": 0.58,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5017",
+      "src_id": "n_v3via_dosar_sina",
+      "dst_id": "n_v2soc_institutie",
+      "relation": "related_to",
+      "label_ro": "hârtii la ghișeu",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5018",
+      "src_id": "n_v3via_coada",
+      "dst_id": "n_v3soc_primarie",
+      "relation": "related_to",
+      "label_ro": "coadă la ghișeu",
+      "strength": 0.67,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5019",
+      "src_id": "n_vdr_lapte_si_corn",
+      "dst_id": "n_v3soc_scoala",
+      "relation": "part_of",
+      "label_ro": "program școlar",
+      "strength": 0.77,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de5020",
+      "src_id": "n_vdr_colindatul",
+      "dst_id": "n_v4art_colind",
+      "relation": "is_a",
+      "label_ro": "cântec de iarnă",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd5021",
+      "src_id": "n_v11via_spritz_terasa",
+      "dst_id": "n_v3gas_bere",
+      "relation": "related_to",
+      "label_ro": "băutură la terasă",
+      "strength": 0.27,
+      "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "dd5022",
+      "src_id": "n_vdr_colindatul",
+      "dst_id": "n_doina",
+      "relation": "related_to",
+      "label_ro": "cântec tradițional",
+      "strength": 0.3,
+      "is_distractor": 1,
       "bidirectional": 1
     }
   ],

@@ -131,6 +131,11 @@ remains the original `easy|hard` semantic-hop game.
   `docs/COMPARISON.md` positions the game vs NYT Connections / Contexto / Infinite
   Craft / Wordle RO (only 4-format curated-RO-cultural game; verified-bounded vs
   uncurated-infinite).
+- **v11 content add**: +145 high-interest nodes (realistic salience — anti-inflation
+  verifier) + cross-category bridges + 23 premium Conexiuni boards; alias hygiene on
+  import dropped 6 duplicate-label nodes + 36 colliding aliases. Graph now **1,449 nodes
+  / 5,632 edges**; pack **836 (631 approved / 205 pending)**. Tiers stay balanced
+  (easy 479 / med 634 / hard 336).
 
 ### Hardening
 - `scripts/validate_fixture.py` — stdlib CI-gate validator, **15 invariant classes** (incl.
