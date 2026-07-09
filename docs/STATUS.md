@@ -120,6 +120,17 @@ remains the original `easy|hard` semantic-hop game.
   then the pool regrown from **9 → 48 approved** (+48 pending) via algorithmically-minted,
   quality-judged scoped instances. Pack now **818 instances / 620 approved**. All four games
   are now healthy on the dense graph.
+- **Batch v11 (2026-07-07) — refinement + difficulty calibration + comparison.**
+  Audit-driven: merged **10 duplicate concepts** (survivor absorbs edges+aliases;
+  games redirected; Moldova kept as homonym); **recalibrated salience** (declared +
+  degree blend, rank-normalized) so tiers are balanced (easy 441 / med 517 / **hard
+  336**, was 906/382/**16**). Difficulty now selects meaningfully: Contexto usor 0.77
+  → greu 0.32; Lanț endpoint-salience weighted per tier (usor 16 / normal 9 / greu 2).
+  `scripts/refine_dataset.py` (+ extracted `densify_content.rebuild`). Graph now
+  **1,294 nodes / 5,370 edges / 4,538 aliases**; pack **815 (619 approved)**.
+  `docs/COMPARISON.md` positions the game vs NYT Connections / Contexto / Infinite
+  Craft / Wordle RO (only 4-format curated-RO-cultural game; verified-bounded vs
+  uncurated-infinite).
 
 ### Hardening
 - `scripts/validate_fixture.py` — stdlib CI-gate validator, **15 invariant classes** (incl.
