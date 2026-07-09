@@ -51,11 +51,16 @@ on the accent-stripped form). Mobile snapshot regenerated; mirrored into `dense_
 game "fixes"** below (e.g. `ct_geografie_030/031/033/137` targets, `cx_viata_de_roman_089/173`, `cx_meme_net_204`).
 Method: `scripts` in the session scratchpad (`prep_diacritics.py` / `apply_diacritics.py`) — regenerable.
 
-### Remaining upheld fixes (~25 after the diacritics pass rescued the label-class ones)
-17 difficulty-tier recalibrations (simple `difficulty` field edits — but re-run `validate_games_pack.py`
-after: Lant optimal-band / Contexto warm-band floors are tier-dependent, so a tier change can flip playability),
-7 Conexiuni member-swaps (need a KG node id for the replacement), 1 category. The ~10 diacritics-class fixes
-are DONE (v12.1 above). Full list with the exact instruction per id: see the `detail` field in the actions JSON, or:
+### Fixes status (updated 2026-07-10)
+DONE: ~10 diacritics-class (auto-fixed by the KG pass), **17 difficulty-tier recalibrations** (applied +
+revalidated green), **2 member-swaps** whose replacement node already existed (`cx_istorie_034` Anghel
+Saligny→Elie Carafoli, `cx_societate_068` Avocatul Poporului→Drepturi civile), **2 group-label rewrites**
+(`cx_gastronomie_018`, `cx_literatura_042`).
+STILL DEFERRED (need a NEW KG node — create the node first, then swap + revalidate the board):
+`cx_geografie_109` (Mila 23 / Crișan), `cx_istorie_181` (Imperiul Țarist), `cx_muzica_273` (Ducu Bertzi),
+`cx_gastronomie_172` (→"Emisiune TV" — held: too generic, reconsider), `cx_istorie_115` (Colonizarea romană),
+`cx_istorie_118` (Procesul Ceaușescu). Plus `ct_film_tv_018` node-category (personalitati→film_tv, KG edit).
+Full per-id instructions: the `detail` field in the actions JSON.
 
 <!-- BEGIN fixes table -->
 (see 2026-07-09-v12-actions.json; representative rows)
@@ -66,10 +71,13 @@ are DONE (v12.1 above). Full list with the exact instruction per id: see the `de
 - 17× difficulty tier moves (al_istorie_001, ct_istorie_042, lt_societate_153, …)
 <!-- END fixes table -->
 
-### 15 modify calls (verifier proposed a *different* action than the first pass)
-Notable: `cx_meme_net_137` — change "Nadia Comaneci"→"Nadia Comăneci" but **do NOT demote** (verifier rescued it);
-`lt_geografie_024` — keep approved (not demote), just fix copy; `cx_istorie_115/118` — specific member swaps;
-`ct_limba_149`/`ct_literatura_228`/`lt_geografie_168` — promote *after* a small fix. Full text in the actions JSON.
+### 15 modify calls — partially DONE (2026-07-10)
+DONE: the 4 "reject not promote" calls (`cx_geografie_176`, `cx_limba_191`, `cx_meme_net_135`, `lt_film_tv_162`)
+were removed from the pending pool; the diacritics-class ones (`cx_meme_net_137` Nadia Comăneci, `cx_viata_de_roman_169`
+Amintiri din copilărie) were auto-fixed by the KG pass and their "do NOT demote" is honoured (they stay approved).
+STILL DEFERRED: `cx_istorie_115/118` (member swaps needing new nodes — see above); `lt_geografie_024` — keep
+approved, fix its node description copy; `ct_limba_149`/`ct_literatura_228`/`lt_geografie_168`/`ct_societate_088`
+— promote *after* a small clue/label fix. Full text in the actions JSON.
 
 ### Low-stakes, regenerable
 - **22 audit-only pending rejects** (Conexiuni boards the audit disliked; not adversarially re-checked because

@@ -1,10 +1,19 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-09. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-09 (v12.1 diacritics: data gates green — `validate_games_pack.py` + `validate_fixture.py`
-+ 81 stdlib pytest; the Django/DRF web-layer suite needs a Django venv, absent on this host, and runs in CI)._
+_Last verified: 2026-07-10 (v12.1 on merged `main`: data gates green — `validate_games_pack.py` +
+`validate_fixture.py` + 81 stdlib pytest; the Django/DRF web-layer suite needs a Django venv, absent on this
+host, and runs in CI. NOTE: local `pytest` aborts collection on `tests/test_accounts_offmode.py`, which imports
+Django without an `importorskip` guard — harmless in CI; run with `--continue-on-collection-errors` locally.)_
 
-**Latest — v12.1 KG-diacritics pass (2026-07-09):** restored Romanian diacritics on **134 KG node labels**
+**Latest — v12/v12.1 merged to `main` + v12.1 content fixes (2026-07-10):** merged the v12 consolidation and
+v12.1 diacritics branch into `main` alongside the parallel `feat(accounts)`+`feat(ranking)` work (disjoint
+files → 0-conflict merge). Applied the remaining verified v12.1 fixes: **17 difficulty-tier recalibrations**,
+**2 Conexiuni member-swaps** (Anghel Saligny→Elie Carafoli in an aviation group; Avocatul Poporului→Drepturi
+civile in a rights group), **2 group-label rewrites**, **4 pending-rejects** (verifier overturned promote→reject).
+Pack **764 → 760**. Deferred tail (3 swaps needing new nodes, node-category, promote-after-fix): see the handoff.
+
+**v12.1 KG-diacritics pass (2026-07-09):** restored Romanian diacritics on **134 KG node labels**
 that were stored ASCII-folded (`Stefan cel Mare`→`Ștefan cel Mare`, `Tara Romaneasca`→`Țara Românească`,
 `Nadia Comaneci`→`Nadia Comăneci`, `Romania`→`România`…) via a 16-worker Codex fleet, each fix gated by the
 invariant `normalize(new)==normalize(old)` (diacritics/case only — 0 letter changes, so `alias_unique`/resolver
