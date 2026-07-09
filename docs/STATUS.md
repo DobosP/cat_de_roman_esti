@@ -6,12 +6,15 @@ _Last verified: 2026-07-10 (v12.1 on merged `main`: data gates green — `valida
 host, and runs in CI. NOTE: local `pytest` aborts collection on `tests/test_accounts_offmode.py`, which imports
 Django without an `importorskip` guard — harmless in CI; run with `--continue-on-collection-errors` locally.)_
 
-**Latest — v12/v12.1 merged to `main` + v12.1 content fixes (2026-07-10):** merged the v12 consolidation and
-v12.1 diacritics branch into `main` alongside the parallel `feat(accounts)`+`feat(ranking)` work (disjoint
-files → 0-conflict merge). Applied the remaining verified v12.1 fixes: **17 difficulty-tier recalibrations**,
-**2 Conexiuni member-swaps** (Anghel Saligny→Elie Carafoli in an aviation group; Avocatul Poporului→Drepturi
-civile in a rights group), **2 group-label rewrites**, **4 pending-rejects** (verifier overturned promote→reject).
-Pack **764 → 760**. Deferred tail (3 swaps needing new nodes, node-category, promote-after-fix): see the handoff.
+**Latest — v12/v12.1 merged to `main` + v12.1 content fixes complete (2026-07-10):** merged the v12
+consolidation and v12.1 diacritics branch into `main` alongside the parallel `feat(accounts)`+`feat(ranking)`
+work (disjoint files → 0-conflict merge). Applied ALL verified v12.1 fixes: **17 difficulty-tier recalibrations**,
+**2 group-label rewrites**, **4 pending-rejects**, then closed the tail — **created 6 KG nodes** (Mila 23, Crișan,
+Imperiul Țarist, Ducu Bertzi, Colonizarea romană, Procesul Ceaușescu; leaf-connected via 12 edges so no existing
+path shifts) enabling **7 total Conexiuni member-swaps** (e.g. Anghel Saligny→Elie Carafoli, generic
+"Imperiu"→Imperiul Țarist, "Vers"→Ducu Bertzi), **4 node desc/label fixes + 4 promote-after-fix**. Graph
+**1,453→1,459 nodes / 5,644→5,656 edges**; pack **764 → 760 (642 approved / 118 pending)**. Only intentional
+skip: recategorising Cristian Mungiu (personalitati↔film_tv — ambiguous, cross-cutting). Gates green.
 
 **v12.1 KG-diacritics pass (2026-07-09):** restored Romanian diacritics on **134 KG node labels**
 that were stored ASCII-folded (`Stefan cel Mare`→`Ștefan cel Mare`, `Tara Romaneasca`→`Țara Românească`,

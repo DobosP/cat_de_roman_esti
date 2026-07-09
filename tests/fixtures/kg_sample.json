@@ -4,23 +4,23 @@
     "generated_at": "2026-06-21T00:00:00Z",
     "note": "v5: pop-culture + serious curated-content batch (ADR-0011) — AI-generated, fact/quality-verified subgraph merged on the v4 dense graph; kg_puzzles regenerated on the merged graph via the validator-mirroring BFS builder.",
     "counts": {
-      "nodes": 1453,
-      "edges": 5644,
+      "nodes": 1459,
+      "edges": 5656,
       "puzzles": 180,
       "by_category": {
+        "istorie": 119,
+        "literatura": 102,
+        "geografie": 115,
+        "personalitati": 105,
         "arta_cultura": 99,
+        "stiinta": 109,
+        "societate": 109,
+        "limba": 110,
         "film_tv": 102,
         "gastronomie": 104,
-        "geografie": 113,
-        "istorie": 116,
-        "limba": 110,
-        "literatura": 102,
         "meme_net": 100,
-        "muzica": 96,
-        "personalitati": 105,
-        "societate": 109,
+        "muzica": 97,
         "sport": 102,
-        "stiinta": 109,
         "viata_de_roman": 86
       },
       "puzzles_by_cat_diff": {
@@ -201,7 +201,7 @@
       "description": "Unirea Transilvaniei, Basarabiei si Bucovinei cu Romania.",
       "salience": 0.6014,
       "difficulty_tier": "medium",
-      "degree": 27,
+      "degree": 28,
       "aliases": [
         "Unirea de la 1918",
         "1 Decembrie 1918",
@@ -278,7 +278,7 @@
       "description": "Conflictele dintre Dacia si Roma (101-102, 105-106).",
       "salience": 0.379,
       "difficulty_tier": "medium",
-      "degree": 12,
+      "degree": 13,
       "aliases": [
         "războaiele cu dacii",
         "războaiele dacice",
@@ -314,7 +314,7 @@
       "description": "Revolutia care a inlaturat regimul comunist din Romania.",
       "salience": 0.6188,
       "difficulty_tier": "medium",
-      "degree": 22,
+      "degree": 23,
       "aliases": [
         "Revoluția română",
         "Decembrie 1989",
@@ -984,7 +984,7 @@
       "description": "Deltă la vărsarea Dunării, rezervație a biosferei.",
       "salience": 0.5966,
       "difficulty_tier": "medium",
-      "degree": 20,
+      "degree": 22,
       "aliases": [
         "Deltei Dunării",
         "delta de la Dunăre",
@@ -2000,7 +2000,7 @@
       "node_type": "person",
       "label_ro": "Anghel Saligny",
       "category": "stiinta",
-      "description": "Inginer roman, constructor al podului de la Cernavoda.",
+      "description": "Inginer român, constructor al podului de la Cernavodă.",
       "salience": 0.3084,
       "difficulty_tier": "hard",
       "degree": 8,
@@ -2737,7 +2737,7 @@
       "node_type": "concept",
       "label_ro": "Drept de vot",
       "category": "societate",
-      "description": "Dreptul cetatenilor de a alege si a fi alesi, exercitat prin sufragiu universal.",
+      "description": "Dreptul cetățenilor de a alege, exercitat prin vot sau sufragiu.",
       "salience": 0.346,
       "difficulty_tier": "medium",
       "degree": 12,
@@ -3269,7 +3269,7 @@
       "description": "Imperiu impotriva caruia au luptat domnitorii romani; a impus suzeranitatea asupra Tarilor Romane.",
       "salience": 0.5613,
       "difficulty_tier": "medium",
-      "degree": 14,
+      "degree": 15,
       "aliases": [
         "Poarta Otomană",
         "Înalta Poartă",
@@ -3317,7 +3317,7 @@
       "description": "Lider comunist al Romaniei (1965-1989), inlaturat de la putere in Revolutia din 1989.",
       "salience": 0.3448,
       "difficulty_tier": "medium",
-      "degree": 8,
+      "degree": 9,
       "aliases": [
         "Ceaușescu",
         "dictatorul Ceaușescu",
@@ -4197,7 +4197,7 @@
       "description": "Procesul de formare a poporului roman din daci si colonisti romani, prin romanizare.",
       "salience": 0.3094,
       "difficulty_tier": "hard",
-      "degree": 7,
+      "degree": 8,
       "aliases": [
         "formarea poporului român",
         "etnogeneza românilor",
@@ -4391,7 +4391,7 @@
       "node_type": "concept",
       "label_ro": "Etimologie",
       "category": "limba",
-      "description": "Studiul originii si evolutiei cuvintelor; in romana majoritatea fondului principal provine din latina.",
+      "description": "Studiul originii și evoluției cuvintelor.",
       "salience": 0.2927,
       "difficulty_tier": "hard",
       "degree": 8,
@@ -9890,7 +9890,7 @@
       "description": "Canoist român din Delta Dunării, multiplu campion olimpic la canoe.",
       "salience": 0.8471,
       "difficulty_tier": "easy",
-      "degree": 10,
+      "degree": 11,
       "aliases": [
         "Patzaichin",
         "Ivan Patzaichin canoistul",
@@ -12040,7 +12040,7 @@
     {
       "id": "n_v2lit_roman_literar",
       "node_type": "concept",
-      "label_ro": "Roman literar",
+      "label_ro": "Roman (specie literară)",
       "category": "literatura",
       "description": "Specie epică amplă, cu personaje și acțiune complexă.",
       "salience": 0.9702,
@@ -21348,7 +21348,7 @@
       "description": "Artist asociat cu folclorul, poezia cântată și Oltenia.",
       "salience": 0.7,
       "difficulty_tier": "easy",
-      "degree": 1
+      "degree": 2
     },
     {
       "id": "n_v11muz_pasarea_colibri",
@@ -21381,7 +21381,7 @@
       "description": "Fenomen cultural-muzical itinerant condus de Adrian Păunescu.",
       "salience": 0.65,
       "difficulty_tier": "medium",
-      "degree": 2
+      "degree": 3
     },
     {
       "id": "n_v11muz_taraf_haidouks",
@@ -22104,6 +22104,76 @@
       "aliases": [
         "șpriț",
         "vin cu sifon"
+      ]
+    },
+    {
+      "id": "n_mila_23",
+      "node_type": "place",
+      "label_ro": "Mila 23",
+      "category": "geografie",
+      "description": "Sat de pescari lipovenesc din Delta Dunării, locul natal al lui Ivan Patzaichin.",
+      "salience": 0.34,
+      "difficulty_tier": "medium",
+      "degree": 3
+    },
+    {
+      "id": "n_crisan",
+      "node_type": "place",
+      "label_ro": "Crișan",
+      "category": "geografie",
+      "description": "Sat în Delta Dunării, pe brațul Sulina, important punct turistic.",
+      "salience": 0.29,
+      "difficulty_tier": "hard",
+      "degree": 2
+    },
+    {
+      "id": "n_imperiul_tarist",
+      "node_type": "org",
+      "label_ro": "Imperiul Țarist",
+      "category": "istorie",
+      "description": "Imperiul Rus, mare putere care a anexat Basarabia (1812); vecin al spațiului românesc.",
+      "salience": 0.37,
+      "difficulty_tier": "medium",
+      "degree": 2,
+      "aliases": [
+        "Imperiul Rus",
+        "Rusia țaristă"
+      ]
+    },
+    {
+      "id": "n_ducu_bertzi",
+      "node_type": "person",
+      "label_ro": "Ducu Bertzi",
+      "category": "muzica",
+      "description": "Cantautor român de muzică folk, figură a Cenaclului Flacăra.",
+      "salience": 0.33,
+      "difficulty_tier": "medium",
+      "degree": 2,
+      "aliases": [
+        "Bertzi"
+      ]
+    },
+    {
+      "id": "n_colonizarea_romana",
+      "node_type": "event",
+      "label_ro": "Colonizarea romană",
+      "category": "istorie",
+      "description": "Aducerea de coloniști romani în Dacia după cucerirea din 106, motor al romanizării.",
+      "salience": 0.3,
+      "difficulty_tier": "hard",
+      "degree": 2
+    },
+    {
+      "id": "n_procesul_ceausescu",
+      "node_type": "event",
+      "label_ro": "Procesul Ceaușescu",
+      "category": "istorie",
+      "description": "Procesul sumar și execuția soților Ceaușescu, 25 decembrie 1989.",
+      "salience": 0.34,
+      "difficulty_tier": "medium",
+      "degree": 2,
+      "aliases": [
+        "Procesul de la Târgoviște"
       ]
     }
   ],
@@ -78546,6 +78616,126 @@
       "label_ro": "cântec tradițional",
       "strength": 0.3,
       "is_distractor": 1,
+      "bidirectional": 1
+    },
+    {
+      "id": "e_v121_01",
+      "src_id": "n_mila_23",
+      "dst_id": "n_delta_dunarii",
+      "relation": "located_in",
+      "label_ro": "se află în",
+      "strength": 0.6,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "e_v121_02",
+      "src_id": "n_mila_23",
+      "dst_id": "n_spt_ivan_patzaichin",
+      "relation": "associated_with",
+      "label_ro": "loc natal al",
+      "strength": 0.6,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "e_v121_03",
+      "src_id": "n_crisan",
+      "dst_id": "n_delta_dunarii",
+      "relation": "located_in",
+      "label_ro": "se află în",
+      "strength": 0.6,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "e_v121_04",
+      "src_id": "n_crisan",
+      "dst_id": "n_mila_23",
+      "relation": "associated_with",
+      "label_ro": "sat vecin în deltă",
+      "strength": 0.6,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "e_v121_05",
+      "src_id": "n_imperiul_tarist",
+      "dst_id": "n_imperiul_otoman",
+      "relation": "associated_with",
+      "label_ro": "mare putere rivală",
+      "strength": 0.6,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "e_v121_06",
+      "src_id": "n_imperiul_tarist",
+      "dst_id": "n_marea_unire_1918",
+      "relation": "associated_with",
+      "label_ro": "context al Unirii Basarabiei",
+      "strength": 0.6,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "e_v121_07",
+      "src_id": "n_ducu_bertzi",
+      "dst_id": "n_v11muz_cenaclul_flacara",
+      "relation": "associated_with",
+      "label_ro": "a cântat în",
+      "strength": 0.6,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "e_v121_08",
+      "src_id": "n_ducu_bertzi",
+      "dst_id": "n_v11muz_tudor_gheorghe",
+      "relation": "associated_with",
+      "label_ro": "coleg de folk",
+      "strength": 0.6,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "e_v121_09",
+      "src_id": "n_colonizarea_romana",
+      "dst_id": "n_razboaiele_daco_romane",
+      "relation": "associated_with",
+      "label_ro": "urmare a",
+      "strength": 0.6,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "e_v121_10",
+      "src_id": "n_colonizarea_romana",
+      "dst_id": "n_etnogeneza_romaneasca",
+      "relation": "associated_with",
+      "label_ro": "contribuie la",
+      "strength": 0.6,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "e_v121_11",
+      "src_id": "n_procesul_ceausescu",
+      "dst_id": "n_revolutia_1989",
+      "relation": "associated_with",
+      "label_ro": "moment al",
+      "strength": 0.6,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "e_v121_12",
+      "src_id": "n_procesul_ceausescu",
+      "dst_id": "n_nicolae_ceausescu",
+      "relation": "associated_with",
+      "label_ro": "judecarea lui",
+      "strength": 0.6,
+      "is_distractor": 0,
       "bidirectional": 1
     }
   ],

@@ -56,11 +56,13 @@ DONE: ~10 diacritics-class (auto-fixed by the KG pass), **17 difficulty-tier rec
 revalidated green), **2 member-swaps** whose replacement node already existed (`cx_istorie_034` Anghel
 Saligny→Elie Carafoli, `cx_societate_068` Avocatul Poporului→Drepturi civile), **2 group-label rewrites**
 (`cx_gastronomie_018`, `cx_literatura_042`).
-STILL DEFERRED (need a NEW KG node — create the node first, then swap + revalidate the board):
+DONE 2026-07-10 (tail closed): created 6 leaf-connected KG nodes and applied the swaps that needed them —
 `cx_geografie_109` (Mila 23 / Crișan), `cx_istorie_181` (Imperiul Țarist), `cx_muzica_273` (Ducu Bertzi),
-`cx_gastronomie_172` (→"Emisiune TV" — held: too generic, reconsider), `cx_istorie_115` (Colonizarea romană),
-`cx_istorie_118` (Procesul Ceaușescu). Plus `ct_film_tv_018` node-category (personalitati→film_tv, KG edit).
-Full per-id instructions: the `detail` field in the actions JSON.
+`cx_istorie_115` (Colonizarea romană), `cx_istorie_118` (Procesul Ceaușescu). Also 4 node desc/label fixes +
+4 promote-after-fix (`ct_limba_149`, `ct_literatura_228`, `lt_geografie_168`, `ct_societate_088`).
+INTENTIONALLY SKIPPED: `cx_gastronomie_172` (swap → generic "Emisiune TV" weakens the board — left as-is);
+`ct_film_tv_018` node-category (Cristian Mungiu personalitati↔film_tv is genuinely dual, and node-category
+changes are cross-cutting — not worth the churn). **v12.1 is complete; this handoff is now history.**
 
 <!-- BEGIN fixes table -->
 (see 2026-07-09-v12-actions.json; representative rows)
