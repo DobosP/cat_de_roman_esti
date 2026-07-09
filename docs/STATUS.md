@@ -1,10 +1,19 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-09. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-09 (v12 apply: data gates green — `validate_games_pack.py` + `validate_fixture.py`
+_Last verified: 2026-07-09 (v12.1 diacritics: data gates green — `validate_games_pack.py` + `validate_fixture.py`
 + 81 stdlib pytest; the Django/DRF web-layer suite needs a Django venv, absent on this host, and runs in CI)._
 
-**Latest — v12 quality-consolidation pass (2026-07-09):** a full Codex-fleet editorial audit of all 865
+**Latest — v12.1 KG-diacritics pass (2026-07-09):** restored Romanian diacritics on **134 KG node labels**
+that were stored ASCII-folded (`Stefan cel Mare`→`Ștefan cel Mare`, `Tara Romaneasca`→`Țara Românească`,
+`Nadia Comaneci`→`Nadia Comăneci`, `Romania`→`România`…) via a 16-worker Codex fleet, each fix gated by the
+invariant `normalize(new)==normalize(old)` (diacritics/case only — 0 letter changes, so `alias_unique`/resolver
+are provably unaffected since both key on the accent-stripped form). Display-only quality: no resolution/pack
+change (games reference node ids). Mobile app-pack snapshot regenerated; same fixes mirrored into
+`scripts/dense_data.json` (+43) / `expansion_data.json` (+17) so rebuilds don't regress. Remaining v12.1 work
+(member-swaps, tier recalibration, 15 modify calls) still in `docs/handoffs/2026-07-09-v12-continuation.md`.
+
+**v12 quality-consolidation pass (2026-07-09):** a full Codex-fleet editorial audit of all 865
 games (56 game×category workers) → **adversarial re-check** (53 defender/skeptic workers, which overturned
 **35% of flags as false positives** — e.g. the correct "Ioni de manual" boards, since I.L. = _Ion_ Luca
 Caragiale) → exact-duplicate scan. Structural apply: **removed 101** (92 exact duplicates incl. 78

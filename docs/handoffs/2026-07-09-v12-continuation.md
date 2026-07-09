@@ -41,19 +41,21 @@ Before pushing, run the full suite in a Django venv (`pip install -c constraints
 These need content authoring and/or KG edits + re-derivation, so they were held out of the structural pass.
 Each was **upheld by the adversarial verifier** unless marked from a `modify` call.
 
-### Systemic finding: KG labels are ASCII-folded (missing diacritics)
-Several "fixes" are really the same root defect — node `label_ro` values stored without diacritics:
-`Ion Creanga`→`Creangă`, `Mircea cel Batran`→`Bătrân`, `Stefan cel Mare`→`Ștefan`, `Nadia Comaneci`→`Comăneci`,
-`Folclor romanesc`, `Calusarii`, `Limba romana`, `Constitutia Romaniei`, `Amintiri din copilarie`. This is a
-**graph-wide** issue, not per-game — worth a dedicated diacritics-restoration pass over `kg_sample.json`
-`kg_nodes[].label_ro` (+ re-derive the pack via `import_candidates.py`, keep `alias_unique`/`label_style` green).
-Fixing the node labels auto-fixes every board that references them.
+### Systemic finding: KG labels were ASCII-folded (missing diacritics) — ✅ DONE (v12.1, 2026-07-09)
+Several "fixes" were the same root defect — node `label_ro` values stored without diacritics. RESOLVED by a
+16-worker Codex diacritics fleet: **134 labels** restored in both `kg_sample.json` copies (`Ion Creangă`,
+`Ștefan cel Mare`, `Nadia Comăneci`, `Lacul Roșu`, `Munții Apuseni`, `Țara Românească`, `România`…), each gated
+by the invariant `normalize(new)==normalize(old)` so `alias_unique`/resolver are provably unaffected (both key
+on the accent-stripped form). Mobile snapshot regenerated; mirrored into `dense_data.json`/`expansion_data.json`.
+**Because boards reference node ids (display resolves `label_ro` at runtime), this auto-fixed the diacritics-class
+game "fixes"** below (e.g. `ct_geografie_030/031/033/137` targets, `cx_viata_de_roman_089/173`, `cx_meme_net_204`).
+Method: `scripts` in the session scratchpad (`prep_diacritics.py` / `apply_diacritics.py`) — regenerable.
 
-### 35 upheld fixes
+### Remaining upheld fixes (~25 after the diacritics pass rescued the label-class ones)
 17 difficulty-tier recalibrations (simple `difficulty` field edits — but re-run `validate_games_pack.py`
 after: Lant optimal-band / Contexto warm-band floors are tier-dependent, so a tier change can flip playability),
-~10 diacritics (see above — KG-level), 7 Conexiuni member-swaps (need a KG node id for the replacement),
-1 category. Full list with the exact instruction per id: see the `detail` field in the actions JSON, or:
+7 Conexiuni member-swaps (need a KG node id for the replacement), 1 category. The ~10 diacritics-class fixes
+are DONE (v12.1 above). Full list with the exact instruction per id: see the `detail` field in the actions JSON, or:
 
 <!-- BEGIN fixes table -->
 (see 2026-07-09-v12-actions.json; representative rows)
