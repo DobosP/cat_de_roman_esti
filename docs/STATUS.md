@@ -103,6 +103,16 @@ remains the original `easy|hard` semantic-hop game.
   in Cald sau Rece (verified). Graph **~1,304 nodes / ~5,400 edges / 4,538 aliases**.
   Perf: `densify_content` mixed-bucket puzzle regen is now capped (MIXED_POOL_CAP) so
   imports stay ~1 min instead of O(n²) blowup — kg_puzzles is legacy (terminal CLI only).
+- **Batch v9 (2026-07-07)** — quality consolidation + premium content. Re-reviewed all 258
+  pending games (4 Codex judges, strict per-game rubric): **154 promoted to approved**, 36
+  rejected, 68 kept pending (`scripts/apply_rereview.py`). Plus a premium instance batch
+  (dual-verified) on the dense graph: +135 approved Conexiuni/Contexto/Lanț. Pack now
+  **737 instances — 585 approved / 152 pending** (238 cx / 275 ct / 209 lt / 15 al).
+  ⚠️ **Alchimie deferred on the dense graph:** the combine-closure now reaches ~the whole
+  graph (1,299 nodes from 6 seeds), so every target is craftable in ~2 gens — the game loses
+  structure AND closure validation is slow. 140 new Alchimie candidates were dropped; the
+  15 curated ones stay. Alchimie needs a design fix (closure over the CATEGORY subgraph, or
+  a size cap) before its pool grows — see the handoff.
 
 ### Hardening
 - `scripts/validate_fixture.py` — stdlib CI-gate validator, **15 invariant classes** (incl.

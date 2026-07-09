@@ -24,15 +24,32 @@ Last updated after batch v7 landed.
 
 ## Where main is
 
-- `main` @ `72f49d8` (pushed): curated games (ADR-0011) + alias/density (ADR-0012) +
-  batch v7 (round-2 instances + vocab gap-fill) + batch v8 (core-vocab). All gates green:
-  pytest, ruff, `validate_fixture.py`, `validate_games_pack.py`, eslint, vite build.
+- `main` @ (v9 commit — see `git log`): curated games (ADR-0011) + alias/density (ADR-0012)
+  + batches v5–v9. All gates green: pytest, ruff, `validate_fixture.py`,
+  `validate_games_pack.py`, eslint, vite build.
 - Graph: **~1,304 nodes / ~5,400 edges / 4,538 aliases**, mean degree ~7.9, degree≤2: 20.
-- Pack: **554 instances** — 173 cx / 198 ct / 165 lt / 18 al (~390 approved, ~360
-  `pending` review; Alchimie pool tripled from 7 → 18 on the dense graph).
+- Pack (after v9): **737 instances — 585 approved / 152 pending** (238 cx / 275 ct /
+  209 lt / 15 al). v9 re-reviewed all pending (154 promoted, 36 rejected) + added 135
+  premium approved.
 - Core complaint FIXED: everyday guess-words (mâncare/apă/pădure/muzică/biserică/masă/
   copil/film/carte/munte/drum/bani…) resolve and return warm in Cald sau Rece.
+- Tools: `scripts/apply_rereview.py` (promote/reject pending from `<game>_verdicts.json`),
+  `scripts/import_candidates.py --skip-merge` (instance-only, no graph change).
 - Docs of record: `docs/STATUS.md`, `docs/adr/0011-*.md`, `docs/adr/0012-*.md`.
+
+## ⚠️ Alchimie is degraded on the dense graph (needs a design fix before growing its pool)
+
+The combine-closure (`_closure_generations`) now reaches **~the whole graph (1,299 of 1,304
+nodes) from 6 seeds** — mean degree 8 means common-neighbors cascade everywhere. Consequences:
+(1) every target is craftable in ~2 generations, so the game loses its "deliberate steps"
+structure and becomes trivial; (2) each closure takes ~1–2s, so validating/mining Alchimie is
+slow (a batch of 140 timed out; runtime `_build_session` mining fallback is also slow). v9
+therefore **dropped 140 new Alchimie candidates** and kept only the 15 existing curated ones.
+**Fix options (pick one before minting more Alchimie):** compute the closure over the
+node's CATEGORY subgraph instead of the full graph (restores sparsity + speed); or cap
+closure size / generation depth; or gate Alchimie combines to stronger edges only
+(`strength ≥ τ`). This is a `wordgames/alchimie.py` + `wordgames/packs.py` change, then a
+category-scoped Alchimie generation round. Until then Alchimie ships its 15 curated games.
 
 ## In flight at write time (Windows session)
 
