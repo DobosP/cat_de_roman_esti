@@ -3,9 +3,9 @@
   "pack_version": 1,
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
   "counts": {
-   "conexiuni": 261,
+   "conexiuni": 289,
    "contexto": 275,
-   "lant": 205,
+   "lant": 206,
    "alchimie": 95
   }
  },
@@ -920,7 +920,7 @@
    "id": "cx_arta_cultura_239",
    "category": "arta_cultura",
    "source": "ai",
-   "status": "pending"
+   "status": "approved"
   },
   {
    "difficulty": "normal",
@@ -933,40 +933,40 @@
     ],
     "g2": [
      "n_v11art_pal_culturii",
-     "n_iasi",
+     "n_ion_creanga",
      "n_junimea",
      "n_convorbiri_literare"
     ],
     "g3": [
      "n_muzeul_brukenthal",
      "n_v11art_fits",
-     "n_sibiu",
-     "n_transilvania"
+     "n_astra",
+     "n_lucian_blaga"
     ],
     "g4": [
      "n_ansamblul_targu_jiu",
      "n_poarta_sarutului",
      "n_masa_tacerii",
-     "n_oltenia"
+     "n_coloana_infinitului"
     ]
    },
    "group_labels": {
     "g1": "București cultural",
     "g2": "Iași literar-muzeal",
     "g3": "Sibiu și Transilvania",
-    "g4": "Oltenia lui Brâncuși"
+    "g4": "Brâncuși la Târgu Jiu"
    },
    "order": [
     "n_v11art_pal_culturii",
     "n_ateneul_roman",
     "n_v11art_tnb",
-    "n_transilvania",
+    "n_lucian_blaga",
     "n_junimea",
-    "n_sibiu",
-    "n_iasi",
+    "n_astra",
+    "n_ion_creanga",
     "n_masa_tacerii",
     "n_v11art_muzeul_taranului",
-    "n_oltenia",
+    "n_coloana_infinitului",
     "n_v11art_fits",
     "n_muzeul_brukenthal",
     "n_ansamblul_targu_jiu",
@@ -977,7 +977,7 @@
    "id": "cx_arta_cultura_240",
    "category": "arta_cultura",
    "source": "ai",
-   "status": "pending"
+   "status": "approved"
   },
   {
    "difficulty": "greu",
@@ -1040,7 +1040,7 @@
    "difficulty": "greu",
    "groups": {
     "g1": [
-     "n_patrimoniu_unesco",
+     "n_martisor",
      "n_ceramica_de_horezu",
      "n_calusarii",
      "n_doina"
@@ -1065,14 +1065,14 @@
     ]
    },
    "group_labels": {
-    "g1": "UNESCO și imaterial",
+    "g1": "Patrimoniu imaterial UNESCO",
     "g2": "Bucovina pictată",
-    "g3": "Folclor performat",
+    "g3": "Noțiuni generale de folclor",
     "g4": "Locuri cu poveste"
    },
    "order": [
     "n_artx_hora",
-    "n_patrimoniu_unesco",
+    "n_martisor",
     "n_manastiri_pictate_bucovina",
     "n_albastru_de_voronet",
     "n_voronet",
@@ -2177,6 +2177,234 @@
    "status": "approved"
   },
   {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_patru_luni_trei_saptamani",
+     "n_moartea_domnului_lazarescu",
+     "n_v11fil_dupa_dealuri",
+     "n_v11fil_pozitia_copilului"
+    ],
+    "g2": [
+     "n_ftv_las_fierbinti",
+     "n_v11fil_teleenciclopedia",
+     "n_v11fil_toate_panzele_sus",
+     "n_v11fil_pistruiatul"
+    ],
+    "g3": [
+     "n_ftv_nea_marin_miliardar",
+     "n_ftv_filantropica",
+     "n_v11fil_teambuilding",
+     "n_v11fil_secretul_lui_bachus"
+    ],
+    "g4": [
+     "n_ftv_chefi_la_cutite",
+     "n_ftv_vrei_sa_fii_milionar",
+     "n_v11fil_romanii_au_talent",
+     "n_v11fil_vocea_romaniei"
+    ]
+   },
+   "group_labels": {
+    "g1": "Filme românești de autor",
+    "g2": "Seriale și repere TV",
+    "g3": "Comedii de cinema",
+    "g4": "Concursuri TV"
+   },
+   "order": [
+    "n_ftv_las_fierbinti",
+    "n_v11fil_pozitia_copilului",
+    "n_v11fil_toate_panzele_sus",
+    "n_moartea_domnului_lazarescu",
+    "n_ftv_nea_marin_miliardar",
+    "n_v11fil_pistruiatul",
+    "n_v11fil_teambuilding",
+    "n_ftv_chefi_la_cutite",
+    "n_patru_luni_trei_saptamani",
+    "n_v11fil_romanii_au_talent",
+    "n_v11fil_secretul_lui_bachus",
+    "n_v11fil_dupa_dealuri",
+    "n_ftv_filantropica",
+    "n_ftv_vrei_sa_fii_milionar",
+    "n_v11fil_teleenciclopedia",
+    "n_v11fil_vocea_romaniei"
+   ],
+   "id": "cx_film_tv_243",
+   "category": "film_tv",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "greu",
+   "groups": {
+    "g1": [
+     "n_ftv_vacanta_mare",
+     "n_ftv_mugur_mihaescu",
+     "n_ftv_leana",
+     "n_ftv_costel_vacanta_mare"
+    ],
+    "g2": [
+     "n_ftv_las_fierbinti",
+     "n_ftv_bobita",
+     "n_ftv_celentano",
+     "n_ftv_fierbinti_sat"
+    ],
+    "g3": [
+     "n_ftv_liceenii",
+     "n_ftv_stefan_banica_jr",
+     "n_ftv_oana_sarbu",
+     "n_ftv_isoscel"
+    ],
+    "g4": [
+     "n_ftv_bd_la_munte_si_la_mare",
+     "n_ftv_toma_caragiu",
+     "n_ftv_dem_radulescu",
+     "n_ftv_jean_constantin"
+    ]
+   },
+   "group_labels": {
+    "g1": "Vacanța Mare",
+    "g2": "Las Fierbinți",
+    "g3": "Liceenii",
+    "g4": "Brigada Diverse"
+   },
+   "order": [
+    "n_ftv_oana_sarbu",
+    "n_ftv_dem_radulescu",
+    "n_ftv_leana",
+    "n_ftv_vacanta_mare",
+    "n_ftv_las_fierbinti",
+    "n_ftv_celentano",
+    "n_ftv_bobita",
+    "n_ftv_stefan_banica_jr",
+    "n_ftv_fierbinti_sat",
+    "n_ftv_costel_vacanta_mare",
+    "n_ftv_isoscel",
+    "n_ftv_liceenii",
+    "n_ftv_jean_constantin",
+    "n_ftv_toma_caragiu",
+    "n_ftv_bd_la_munte_si_la_mare",
+    "n_ftv_mugur_mihaescu"
+   ],
+   "id": "cx_film_tv_244",
+   "category": "film_tv",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "greu",
+   "groups": {
+    "g1": [
+     "n_cristi_puiu",
+     "n_cristian_mungiu",
+     "n_lucian_pintilie",
+     "n_liviu_ciulei"
+    ],
+    "g2": [
+     "n_patru_luni_trei_saptamani",
+     "n_moartea_domnului_lazarescu",
+     "n_v11fil_pozitia_copilului",
+     "n_v11fil_colectiv"
+    ],
+    "g3": [
+     "n_comunismul_in_romania",
+     "n_tara_romaneasca",
+     "n_mihai_viteazul",
+     "n_revolutia_1989"
+    ],
+    "g4": [
+     "n_marin_preda",
+     "n_morometii",
+     "n_liviu_rebreanu",
+     "n_padurea_spanzuratilor_film"
+    ]
+   },
+   "group_labels": {
+    "g1": "Regizori canonici",
+    "g2": "Filme cu ecou internațional",
+    "g3": "Istorie pe peliculă",
+    "g4": "Preda și Rebreanu pe ecran"
+   },
+   "order": [
+    "n_mihai_viteazul",
+    "n_morometii",
+    "n_lucian_pintilie",
+    "n_revolutia_1989",
+    "n_padurea_spanzuratilor_film",
+    "n_v11fil_colectiv",
+    "n_cristi_puiu",
+    "n_v11fil_pozitia_copilului",
+    "n_marin_preda",
+    "n_patru_luni_trei_saptamani",
+    "n_cristian_mungiu",
+    "n_moartea_domnului_lazarescu",
+    "n_liviu_rebreanu",
+    "n_comunismul_in_romania",
+    "n_tara_romaneasca",
+    "n_liviu_ciulei"
+   ],
+   "id": "cx_film_tv_245",
+   "category": "film_tv",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_ftv_pro_tv",
+     "n_ftv_tvr",
+     "n_ftv_antena_1",
+     "n_ftv_kanal_d"
+    ],
+    "g2": [
+     "n_ftv_andreea_marin",
+     "n_ftv_catalin_maruta",
+     "n_ftv_teo_trandafir",
+     "n_ftv_virgil_iantu"
+    ],
+    "g3": [
+     "n_ftv_surprize_surprize",
+     "n_ftv_la_maruta",
+     "n_ftv_teo_show",
+     "n_ftv_iumor"
+    ],
+    "g4": [
+     "n_v4fil_televizor",
+     "n_v4fil_telecomanda",
+     "n_vdr_teletext",
+     "n_v4fil_ecran"
+    ]
+   },
+   "group_labels": {
+    "g1": "Posturi TV",
+    "g2": "Prezentatori TV",
+    "g3": "Emisiuni de divertisment",
+    "g4": "Obiecte și tehnologii TV"
+   },
+   "order": [
+    "n_ftv_surprize_surprize",
+    "n_ftv_antena_1",
+    "n_ftv_iumor",
+    "n_v4fil_televizor",
+    "n_ftv_teo_show",
+    "n_ftv_virgil_iantu",
+    "n_ftv_pro_tv",
+    "n_vdr_teletext",
+    "n_ftv_tvr",
+    "n_ftv_catalin_maruta",
+    "n_v4fil_ecran",
+    "n_ftv_la_maruta",
+    "n_ftv_teo_trandafir",
+    "n_v4fil_telecomanda",
+    "n_ftv_andreea_marin",
+    "n_ftv_kanal_d"
+   ],
+   "id": "cx_film_tv_246",
+   "category": "film_tv",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
    "difficulty": "usor",
    "groups": {
     "g1": [
@@ -2973,6 +3201,234 @@
    "category": "gastronomie",
    "source": "ai",
    "status": "pending"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_gas_sarmale",
+     "n_gas_cozonac",
+     "n_gas_piftie",
+     "n_gas_vin_fiert"
+    ],
+    "g2": [
+     "n_v2gas_ciorba",
+     "n_gas_ciorba_burta",
+     "n_gas_ciorba_radauteana",
+     "n_v11gas_ciorba_perisoare"
+    ],
+    "g3": [
+     "n_gas_mici",
+     "n_v2gas_gratar",
+     "n_gas_mustar",
+     "n_gas_mujdei"
+    ],
+    "g4": [
+     "n_v2gas_branza",
+     "n_gas_telemea",
+     "n_gas_urda",
+     "n_gas_cascaval_pane"
+    ]
+   },
+   "group_labels": {
+    "g1": "Masa de Crăciun",
+    "g2": "Ciorbe și acritură",
+    "g3": "La grătar",
+    "g4": "Brânzeturi și preparate"
+   },
+   "order": [
+    "n_gas_piftie",
+    "n_gas_ciorba_burta",
+    "n_gas_cozonac",
+    "n_gas_mujdei",
+    "n_gas_vin_fiert",
+    "n_gas_ciorba_radauteana",
+    "n_gas_cascaval_pane",
+    "n_gas_mustar",
+    "n_gas_urda",
+    "n_v11gas_ciorba_perisoare",
+    "n_v2gas_branza",
+    "n_v2gas_ciorba",
+    "n_gas_telemea",
+    "n_v2gas_gratar",
+    "n_gas_mici",
+    "n_gas_sarmale"
+   ],
+   "id": "cx_gastronomie_247",
+   "category": "gastronomie",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_gas_covrigi_buzau",
+     "n_gas_varza_a_la_cluj",
+     "n_v11gas_salam_sibiu",
+     "n_v11gas_magiun_topoloveni"
+    ],
+    "g2": [
+     "n_gas_baclava_dobrogeana",
+     "n_v11gas_placinta_dobrogeana",
+     "n_dobrogea",
+     "n_constanta"
+    ],
+    "g3": [
+     "n_gas_bucovina_gastronomica",
+     "n_gas_placinte_poale_brau",
+     "n_v11gas_tochitura_moldoveneasca",
+     "n_moldova_reg"
+    ],
+    "g4": [
+     "n_gas_mititei_obor",
+     "n_gas_hanul_lui_manuc",
+     "n_v11gas_caru_cu_bere",
+     "n_v11gas_casa_capsa"
+    ]
+   },
+   "group_labels": {
+    "g1": "Orașe în numele mâncării",
+    "g2": "Dobrogea",
+    "g3": "Moldova și Bucovina",
+    "g4": "București de masă"
+   },
+   "order": [
+    "n_gas_placinte_poale_brau",
+    "n_gas_varza_a_la_cluj",
+    "n_v11gas_caru_cu_bere",
+    "n_gas_covrigi_buzau",
+    "n_gas_bucovina_gastronomica",
+    "n_gas_hanul_lui_manuc",
+    "n_moldova_reg",
+    "n_v11gas_placinta_dobrogeana",
+    "n_dobrogea",
+    "n_gas_baclava_dobrogeana",
+    "n_v11gas_casa_capsa",
+    "n_v11gas_tochitura_moldoveneasca",
+    "n_constanta",
+    "n_v11gas_salam_sibiu",
+    "n_gas_mititei_obor",
+    "n_v11gas_magiun_topoloveni"
+   ],
+   "id": "cx_gastronomie_248",
+   "category": "gastronomie",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "greu",
+   "groups": {
+    "g1": [
+     "n_v11gas_sanda_marin",
+     "n_v11gas_radu_anton_roman",
+     "n_v11gas_pastorel_teodoreanu",
+     "n_net_jamila_cuisine"
+    ],
+    "g2": [
+     "n_gas_toba",
+     "n_gas_caltabos",
+     "n_gas_lebar",
+     "n_gas_sorici"
+    ],
+    "g3": [
+     "n_gas_zacusca",
+     "n_gas_muraturi",
+     "n_v2gas_conserve_iarna",
+     "n_v11gas_magiun_topoloveni"
+    ],
+    "g4": [
+     "n_v4gas_masa",
+     "n_masa_tacerii",
+     "n_v2via_masa_in_familie",
+     "n_gas_mese_sarbatori"
+    ]
+   },
+   "group_labels": {
+    "g1": "Nume proprii culinare",
+    "g2": "Porcul de Ignat",
+    "g3": "Cămara de iarnă",
+    "g4": "Cuvântul masă"
+   },
+   "order": [
+    "n_v11gas_radu_anton_roman",
+    "n_v4gas_masa",
+    "n_v11gas_pastorel_teodoreanu",
+    "n_gas_muraturi",
+    "n_gas_toba",
+    "n_gas_caltabos",
+    "n_gas_zacusca",
+    "n_v11gas_sanda_marin",
+    "n_gas_mese_sarbatori",
+    "n_v11gas_magiun_topoloveni",
+    "n_masa_tacerii",
+    "n_gas_sorici",
+    "n_gas_lebar",
+    "n_net_jamila_cuisine",
+    "n_v2gas_conserve_iarna",
+    "n_v2via_masa_in_familie"
+   ],
+   "id": "cx_gastronomie_249",
+   "category": "gastronomie",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "greu",
+   "groups": {
+    "g1": [
+     "n_gas_sarmale",
+     "n_gas_baclava_dobrogeana",
+     "n_gas_ardei_umpluti",
+     "n_gas_ciorba_burta"
+    ],
+    "g2": [
+     "n_gas_salata_boeuf",
+     "n_v11gas_joffre",
+     "n_v11gas_casa_capsa",
+     "n_paris"
+    ],
+    "g3": [
+     "n_gas_papanasi",
+     "n_gas_placinte_poale_brau",
+     "n_v11gas_alivenci",
+     "n_gas_branza_smantana"
+    ],
+    "g4": [
+     "n_v11gas_salam_sibiu",
+     "n_muz_florin_salam",
+     "n_gas_masa_craciun",
+     "n_masa_tacerii"
+    ]
+   },
+   "group_labels": {
+    "g1": "Filieră balcanic-otomană",
+    "g2": "Legături franceze",
+    "g3": "Brânză în rol principal",
+    "g4": "Două perechi-capcană"
+   },
+   "order": [
+    "n_gas_baclava_dobrogeana",
+    "n_v11gas_joffre",
+    "n_masa_tacerii",
+    "n_v11gas_salam_sibiu",
+    "n_gas_ciorba_burta",
+    "n_muz_florin_salam",
+    "n_gas_placinte_poale_brau",
+    "n_paris",
+    "n_gas_branza_smantana",
+    "n_gas_sarmale",
+    "n_gas_ardei_umpluti",
+    "n_gas_masa_craciun",
+    "n_gas_salata_boeuf",
+    "n_v11gas_alivenci",
+    "n_v11gas_casa_capsa",
+    "n_gas_papanasi"
+   ],
+   "id": "cx_gastronomie_250",
+   "category": "gastronomie",
+   "source": "ai",
+   "status": "approved"
   },
   {
    "id": "cx_geografie_001",
@@ -3938,7 +4394,7 @@
     "n_dunarea",
     "n_mures"
    ],
-   "id": "cx_geografie_243",
+   "id": "cx_geografie_251",
    "category": "geografie",
    "source": "ai",
    "status": "approved"
@@ -3972,7 +4428,7 @@
     ]
    },
    "group_labels": {
-    "g1": "Mâncăruri cu geografie în nume",
+    "g1": "Mâncăruri și băuturi regionale",
     "g2": "Festivaluri cu loc puternic",
     "g3": "Locuri de litoral și deltă",
     "g4": "Cultură pe hartă"
@@ -3995,10 +4451,10 @@
     "n_voronet",
     "n_muz_neversea"
    ],
-   "id": "cx_geografie_244",
+   "id": "cx_geografie_252",
    "category": "geografie",
    "source": "ai",
-   "status": "pending"
+   "status": "approved"
   },
   {
    "difficulty": "greu",
@@ -4010,7 +4466,7 @@
      "n_siret"
     ],
     "g2": [
-     "n_moldova",
+     "n_v11ist_basarabia",
      "n_transilvania",
      "n_tara_romaneasca",
      "n_dacia"
@@ -4037,7 +4493,7 @@
    "order": [
     "n_olt",
     "n_tara_romaneasca",
-    "n_moldova",
+    "n_v11ist_basarabia",
     "n_mures",
     "n_municipiu",
     "n_romania_stat",
@@ -4052,10 +4508,10 @@
     "n_siret",
     "n_v3geo_tara"
    ],
-   "id": "cx_geografie_245",
+   "id": "cx_geografie_253",
    "category": "geografie",
    "source": "ai",
-   "status": "approved"
+   "status": "pending"
   },
   {
    "difficulty": "normal",
@@ -4109,7 +4565,7 @@
     "n_v2geo_drum_montan",
     "n_lacul_rosu"
    ],
-   "id": "cx_geografie_246",
+   "id": "cx_geografie_254",
    "category": "geografie",
    "source": "ai",
    "status": "approved"
@@ -5192,7 +5648,7 @@
     "n_revolutia_1989",
     "n_nicolae_ceausescu"
    ],
-   "id": "cx_istorie_247",
+   "id": "cx_istorie_255",
    "category": "istorie",
    "source": "ai",
    "status": "approved"
@@ -5228,8 +5684,8 @@
    "group_labels": {
     "g1": "Nume istorice devenite stil sau culoare",
     "g2": "Cercul Reginei Maria",
-    "g3": "Instituții ale modernizării",
-    "g4": "Memorie în piatră și zid"
+    "g3": "Instituții academice și monetare",
+    "g4": "Repere patrimoniale culturale"
    },
    "order": [
     "n_bnr",
@@ -5249,10 +5705,10 @@
     "n_perx_memorii_regina_maria",
     "n_ansamblul_targu_jiu"
    ],
-   "id": "cx_istorie_248",
+   "id": "cx_istorie_256",
    "category": "istorie",
    "source": "ai",
-   "status": "approved"
+   "status": "pending"
   },
   {
    "difficulty": "greu",
@@ -5306,7 +5762,7 @@
     "n_ion_creanga",
     "n_nicolae_ceausescu"
    ],
-   "id": "cx_istorie_249",
+   "id": "cx_istorie_257",
    "category": "istorie",
    "source": "ai",
    "status": "approved"
@@ -5315,16 +5771,16 @@
    "difficulty": "normal",
    "groups": {
     "g1": [
+     "n_dacia",
      "n_transilvania",
      "n_moldova",
-     "n_tara_romaneasca",
-     "n_v11ist_basarabia"
+     "n_tara_romaneasca"
     ],
     "g2": [
      "n_banat",
      "n_dobrogea",
-     "n_oltenia",
-     "n_muntenia"
+     "n_bucovina",
+     "n_v11ist_basarabia"
     ],
     "g3": [
      "n_prut",
@@ -5340,9 +5796,9 @@
     ]
    },
    "group_labels": {
-    "g1": "Provincii istorice din lecții",
-    "g2": "Regiuni geografice",
-    "g3": "Râuri cu miză de hotar",
+    "g1": "Formațiuni politice vechi",
+    "g2": "Provincii de margine",
+    "g3": "Râuri-reper în istorie",
     "g4": "Orașe ale unor momente istorice"
    },
    "order": [
@@ -5352,21 +5808,21 @@
     "n_olt",
     "n_prut",
     "n_istx_cernauti",
-    "n_muntenia",
-    "n_moldova",
-    "n_alba_iulia",
-    "n_tara_romaneasca",
-    "n_oltenia",
     "n_v11ist_basarabia",
+    "n_transilvania",
+    "n_alba_iulia",
+    "n_moldova",
+    "n_bucovina",
+    "n_tara_romaneasca",
     "n_mures",
     "n_banat",
     "n_istx_chisinau",
-    "n_transilvania"
+    "n_dacia"
    ],
-   "id": "cx_istorie_250",
+   "id": "cx_istorie_258",
    "category": "istorie",
    "source": "ai",
-   "status": "pending"
+   "status": "approved"
   },
   {
    "difficulty": "usor",
@@ -6222,6 +6678,234 @@
    "category": "limba",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_v4lim_punct",
+     "n_v4lim_virgula",
+     "n_v4lim_semn_intrebare",
+     "n_v4lim_semn_exclamare"
+    ],
+    "g2": [
+     "n_substantiv",
+     "n_verb",
+     "n_adjectiv",
+     "n_pronume"
+    ],
+    "g3": [
+     "n_v4lim_subiect",
+     "n_v4lim_predicat",
+     "n_v4lim_complement",
+     "n_v3lim_propozitie"
+    ],
+    "g4": [
+     "n_caz_gramatical",
+     "n_conjugare",
+     "n_declinare",
+     "n_v4lim_timp_verbal"
+    ]
+   },
+   "group_labels": {
+    "g1": "Semne de punctuație",
+    "g2": "Părți de vorbire",
+    "g3": "Propoziția și părțile ei",
+    "g4": "Noțiuni de flexiune"
+   },
+   "order": [
+    "n_v3lim_propozitie",
+    "n_v4lim_timp_verbal",
+    "n_v4lim_semn_intrebare",
+    "n_verb",
+    "n_v4lim_complement",
+    "n_adjectiv",
+    "n_v4lim_predicat",
+    "n_v4lim_subiect",
+    "n_caz_gramatical",
+    "n_v4lim_punct",
+    "n_v4lim_virgula",
+    "n_conjugare",
+    "n_substantiv",
+    "n_v4lim_semn_exclamare",
+    "n_pronume",
+    "n_declinare"
+   ],
+   "id": "cx_limba_259",
+   "category": "limba",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_v11lim_scrisoarea_neacsu",
+     "n_v11lim_coresi",
+     "n_v11lim_cazania_varlaam",
+     "n_v11lim_biblia_bucuresti"
+    ],
+    "g2": [
+     "n_dex",
+     "n_v11lim_doom",
+     "n_norma_academiei",
+     "n_ortografie"
+    ],
+    "g3": [
+     "n_scoala_ardeleana",
+     "n_v11lim_samuil_micu",
+     "n_v11lim_gheorghe_sincai",
+     "n_v11lim_elementa_linguae"
+    ],
+    "g4": [
+     "n_sextil_puscariu",
+     "n_bogdan_petriceicu_hasdeu",
+     "n_v11lim_alexandru_rosetti",
+     "n_v11lim_lazar_saineanu"
+    ]
+   },
+   "group_labels": {
+    "g1": "Repere ale limbii vechi",
+    "g2": "Dicționar și normă",
+    "g3": "Școala Ardeleană",
+    "g4": "Filologie istorică"
+   },
+   "order": [
+    "n_bogdan_petriceicu_hasdeu",
+    "n_ortografie",
+    "n_v11lim_doom",
+    "n_v11lim_biblia_bucuresti",
+    "n_v11lim_scrisoarea_neacsu",
+    "n_v11lim_alexandru_rosetti",
+    "n_scoala_ardeleana",
+    "n_sextil_puscariu",
+    "n_norma_academiei",
+    "n_v11lim_gheorghe_sincai",
+    "n_dex",
+    "n_v11lim_elementa_linguae",
+    "n_v11lim_samuil_micu",
+    "n_v11lim_coresi",
+    "n_v11lim_lazar_saineanu",
+    "n_v11lim_cazania_varlaam"
+   ],
+   "id": "cx_limba_260",
+   "category": "limba",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "greu",
+   "groups": {
+    "g1": [
+     "n_brasov",
+     "n_iasi",
+     "n_bucuresti",
+     "n_cluj_napoca"
+    ],
+    "g2": [
+     "n_academia_romana",
+     "n_universitatea_bucuresti",
+     "n_socx_universitatea_cuza_iasi",
+     "n_junimea"
+    ],
+    "g3": [
+     "n_v2lim_cartof",
+     "n_lbax_regionalism_barabula",
+     "n_v2lim_varza",
+     "n_lbax_regionalism_curechi"
+    ],
+    "g4": [
+     "n_limba_latina",
+     "n_substrat_dacic",
+     "n_imprumuturi_slave",
+     "n_neologisme_franceze"
+    ]
+   },
+   "group_labels": {
+    "g1": "Orașe cu miză lingvistică",
+    "g2": "Instituții și cercuri",
+    "g3": "Standard și regionalism alimentar",
+    "g4": "Straturi istorice ale lexicului"
+   },
+   "order": [
+    "n_lbax_regionalism_barabula",
+    "n_neologisme_franceze",
+    "n_academia_romana",
+    "n_bucuresti",
+    "n_limba_latina",
+    "n_universitatea_bucuresti",
+    "n_iasi",
+    "n_brasov",
+    "n_v2lim_cartof",
+    "n_substrat_dacic",
+    "n_v2lim_varza",
+    "n_junimea",
+    "n_cluj_napoca",
+    "n_socx_universitatea_cuza_iasi",
+    "n_lbax_regionalism_curechi",
+    "n_imprumuturi_slave"
+   ],
+   "id": "cx_limba_261",
+   "category": "limba",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "greu",
+   "groups": {
+    "g1": [
+     "n_v3fil_subtitrare",
+     "n_v3fil_dublaj",
+     "n_v4lim_dialog",
+     "n_v4lim_traducere"
+    ],
+    "g2": [
+     "n_v3mem_copypasta",
+     "n_v4mem_comentariu",
+     "n_v3mem_hashtag",
+     "n_v4lim_text"
+    ],
+    "g3": [
+     "n_cuvinte_potrivite",
+     "n_luceafarul",
+     "n_plumb",
+     "n_o_scrisoare_pierduta"
+    ],
+    "g4": [
+     "n_v3lit_rima",
+     "n_v3lit_strofa",
+     "n_v3lit_vers",
+     "n_v2lit_limbaj_poetic"
+    ]
+   },
+   "group_labels": {
+    "g1": "Limbaj pe ecran",
+    "g2": "Text online",
+    "g3": "Titluri literare-capcană",
+    "g4": "Poezie și versificație"
+   },
+   "order": [
+    "n_v3lit_rima",
+    "n_v4lim_traducere",
+    "n_luceafarul",
+    "n_v3fil_subtitrare",
+    "n_v4lim_text",
+    "n_v3lit_strofa",
+    "n_v3mem_hashtag",
+    "n_plumb",
+    "n_v4mem_comentariu",
+    "n_cuvinte_potrivite",
+    "n_v3mem_copypasta",
+    "n_o_scrisoare_pierduta",
+    "n_v4lim_dialog",
+    "n_v2lit_limbaj_poetic",
+    "n_v3lit_vers",
+    "n_v3fil_dublaj"
+   ],
+   "id": "cx_limba_262",
+   "category": "limba",
+   "source": "ai",
+   "status": "pending"
   },
   {
    "difficulty": "usor",
@@ -7188,6 +7872,234 @@
     "n_v2lit_critic_literar"
    ],
    "id": "cx_literatura_198",
+   "category": "literatura",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_mihai_eminescu",
+     "n_ion_creanga",
+     "n_ion_luca_caragiale",
+     "n_ioan_slavici"
+    ],
+    "g2": [
+     "n_ion_roman",
+     "n_morometii",
+     "n_enigma_otiliei",
+     "n_v11lit_cel_mai_iubit"
+    ],
+    "g3": [
+     "n_litx_nae_catavencu",
+     "n_litx_stefan_tipatescu",
+     "n_litx_zoe_trahanache",
+     "n_litx_ghita_pristanda"
+    ],
+    "g4": [
+     "n_tudor_arghezi",
+     "n_george_bacovia",
+     "n_nichita_stanescu",
+     "n_ion_barbu"
+    ]
+   },
+   "group_labels": {
+    "g1": "Mari clasici",
+    "g2": "Romane canonice",
+    "g3": "Personaje caragialiene",
+    "g4": "Poeți moderni"
+   },
+   "order": [
+    "n_ion_creanga",
+    "n_george_bacovia",
+    "n_nichita_stanescu",
+    "n_ioan_slavici",
+    "n_morometii",
+    "n_v11lit_cel_mai_iubit",
+    "n_tudor_arghezi",
+    "n_litx_nae_catavencu",
+    "n_ion_luca_caragiale",
+    "n_litx_ghita_pristanda",
+    "n_litx_stefan_tipatescu",
+    "n_ion_roman",
+    "n_ion_barbu",
+    "n_enigma_otiliei",
+    "n_mihai_eminescu",
+    "n_litx_zoe_trahanache"
+   ],
+   "id": "cx_literatura_263",
+   "category": "literatura",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_junimea",
+     "n_convorbiri_literare",
+     "n_v11lit_dacia_literara",
+     "n_sburatorul"
+    ],
+    "g2": [
+     "n_ion_roman",
+     "n_morometii",
+     "n_v11lit_rascoala",
+     "n_v11lit_mara"
+    ],
+    "g3": [
+     "n_camil_petrescu",
+     "n_eugen_lovinescu",
+     "n_hortensia_papadat_bengescu",
+     "n_ion_barbu"
+    ],
+    "g4": [
+     "n_iasi",
+     "n_bucuresti",
+     "n_transilvania",
+     "n_primul_razboi_mondial"
+    ]
+   },
+   "group_labels": {
+    "g1": "Reviste și cenacluri",
+    "g2": "Romane realiste",
+    "g3": "Moderniști interbelici",
+    "g4": "Locuri și timpuri"
+   },
+   "order": [
+    "n_hortensia_papadat_bengescu",
+    "n_ion_barbu",
+    "n_v11lit_dacia_literara",
+    "n_primul_razboi_mondial",
+    "n_sburatorul",
+    "n_bucuresti",
+    "n_camil_petrescu",
+    "n_iasi",
+    "n_eugen_lovinescu",
+    "n_convorbiri_literare",
+    "n_transilvania",
+    "n_v11lit_rascoala",
+    "n_ion_roman",
+    "n_v11lit_mara",
+    "n_morometii",
+    "n_junimea"
+   ],
+   "id": "cx_literatura_264",
+   "category": "literatura",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "greu",
+   "groups": {
+    "g1": [
+     "n_luceafarul",
+     "n_litx_sarmanul_dionis",
+     "n_litx_fat_frumos_din_lacrima",
+     "n_v11lit_la_tiganci"
+    ],
+    "g2": [
+     "n_v11lit_mara",
+     "n_ion_roman",
+     "n_v11lit_maitreyi",
+     "n_enigma_otiliei"
+    ],
+    "g3": [
+     "n_o_scrisoare_pierduta",
+     "n_v11lit_iona",
+     "n_v2lit_dramaturgie",
+     "n_artx_teatru_romanesc"
+    ],
+    "g4": [
+     "n_v4sti_metal",
+     "n_v3sti_planeta",
+     "n_v4mem_postare",
+     "n_v3lim_dictionar"
+    ]
+   },
+   "group_labels": {
+    "g1": "Fantastic literar",
+    "g2": "Romane cu nume",
+    "g3": "Pentru scenă",
+    "g4": "Sensuri neliterare"
+   },
+   "order": [
+    "n_v11lit_la_tiganci",
+    "n_v3sti_planeta",
+    "n_o_scrisoare_pierduta",
+    "n_ion_roman",
+    "n_luceafarul",
+    "n_litx_sarmanul_dionis",
+    "n_v11lit_maitreyi",
+    "n_artx_teatru_romanesc",
+    "n_v11lit_mara",
+    "n_v3lim_dictionar",
+    "n_litx_fat_frumos_din_lacrima",
+    "n_v2lit_dramaturgie",
+    "n_enigma_otiliei",
+    "n_v4sti_metal",
+    "n_v4mem_postare",
+    "n_v11lit_iona"
+   ],
+   "id": "cx_literatura_265",
+   "category": "literatura",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "greu",
+   "groups": {
+    "g1": [
+     "n_morometii",
+     "n_ftv_morometii_film",
+     "n_v11lit_padurea_spanzuratilor",
+     "n_padurea_spanzuratilor_film"
+    ],
+    "g2": [
+     "n_v11lit_rascoala",
+     "n_v4ist_rascoala",
+     "n_ultima_noapte",
+     "n_primul_razboi_mondial"
+    ],
+    "g3": [
+     "n_ion_barbu",
+     "n_stix_matematica_romaneasca",
+     "n_mircea_eliade",
+     "n_filozofie"
+    ],
+    "g4": [
+     "n_o_scrisoare_pierduta",
+     "n_ion_luca_caragiale",
+     "n_teatrul_bulandra",
+     "n_v2lit_dramaturgie"
+    ]
+   },
+   "group_labels": {
+    "g1": "Carte și ecran",
+    "g2": "Literatură și istorie",
+    "g3": "Scriitori și discipline",
+    "g4": "Teatru românesc"
+   },
+   "order": [
+    "n_filozofie",
+    "n_v4ist_rascoala",
+    "n_mircea_eliade",
+    "n_morometii",
+    "n_ftv_morometii_film",
+    "n_v11lit_rascoala",
+    "n_primul_razboi_mondial",
+    "n_ultima_noapte",
+    "n_padurea_spanzuratilor_film",
+    "n_v2lit_dramaturgie",
+    "n_ion_barbu",
+    "n_teatrul_bulandra",
+    "n_ion_luca_caragiale",
+    "n_v11lit_padurea_spanzuratilor",
+    "n_stix_matematica_romaneasca",
+    "n_o_scrisoare_pierduta"
+   ],
+   "id": "cx_literatura_266",
    "category": "literatura",
    "source": "ai",
    "status": "pending"
@@ -8294,7 +9206,7 @@
      "n_v4mem_like",
      "n_v4mem_share",
      "n_v4mem_comentariu",
-     "n_v4mem_distribuire"
+     "n_v11meme_net_urmarire"
     ],
     "g4": [
      "n_net_robotzi",
@@ -8322,15 +9234,15 @@
     "n_v4mem_share",
     "n_net_creative_monkeyz",
     "n_v4mem_like",
-    "n_v4mem_distribuire",
+    "n_v11meme_net_urmarire",
     "n_net_challenge_online",
     "n_net_reactie_video",
     "n_v4mem_comentariu"
    ],
-   "id": "cx_meme_net_251",
+   "id": "cx_meme_net_267",
    "category": "meme_net",
    "source": "ai",
-   "status": "pending"
+   "status": "approved"
   },
   {
    "difficulty": "normal",
@@ -8384,7 +9296,7 @@
     "n_v2mem_sunet_viral",
     "n_net_reclamele_vodafone_ghita"
    ],
-   "id": "cx_meme_net_252",
+   "id": "cx_meme_net_268",
    "category": "meme_net",
    "source": "ai",
    "status": "approved"
@@ -8401,7 +9313,7 @@
     "g2": [
      "n_net_jamila_cuisine",
      "n_v2mem_clip_culinar",
-     "n_gas_cozonac",
+     "n_v4gas_mancare",
      "n_v4gas_bucatarie"
     ],
     "g3": [
@@ -8413,15 +9325,15 @@
     "g4": [
      "n_net_ghita_ciobanul",
      "n_sibiu",
-     "n_net_mircea_bravo",
-     "n_cluj_napoca"
+     "n_net_reclamele_vodafone_ghita",
+     "n_net_vodafone_romania"
     ]
    },
    "group_labels": {
-    "g1": "Satiră socială, veche și nouă",
+    "g1": "Satiră și comedie românească",
     "g2": "Bucătărie pe ecran",
-    "g3": "Investigație și documentar civic",
-    "g4": "Geografie devenită decor online"
+    "g3": "Presă, documentar, protest",
+    "g4": "Ghiță, Sibiu și Vodafone"
    },
    "order": [
     "n_v4gas_bucatarie",
@@ -8430,18 +9342,18 @@
     "n_v2mem_clip_culinar",
     "n_v3soc_mass_media",
     "n_net_jamila_cuisine",
-    "n_cluj_napoca",
+    "n_net_vodafone_romania",
     "n_ion_luca_caragiale",
-    "n_net_mircea_bravo",
+    "n_net_reclamele_vodafone_ghita",
     "n_v3soc_protest",
     "n_v3fil_documentar",
-    "n_gas_cozonac",
+    "n_v4gas_mancare",
     "n_net_ghita_ciobanul",
     "n_net_recorder",
     "n_v11mem_times_new_roman",
     "n_sibiu"
    ],
-   "id": "cx_meme_net_253",
+   "id": "cx_meme_net_269",
    "category": "meme_net",
    "source": "ai",
    "status": "pending"
@@ -8458,14 +9370,14 @@
     "g2": [
      "n_v11mem_faiar",
      "n_net_live_stream_ro",
-     "n_v4mem_live",
+     "n_net_comentarii_online",
      "n_net_reactie_video"
     ],
     "g3": [
      "n_v11mem_zoso",
      "n_v11mem_george_buhnici",
      "n_v2sti_calculator",
-     "n_v3mem_screenshot"
+     "n_v4mem_telefon"
     ],
     "g4": [
      "n_net_5gang",
@@ -8475,9 +9387,9 @@
     ]
    },
    "group_labels": {
-    "g1": "Canale YouTube de autor",
+    "g1": "YouTube românesc de autor",
     "g2": "Comentariu live și reacții",
-    "g3": "Blog, tech și review",
+    "g3": "Blog, tech și gadgeturi",
     "g4": "Muzică intrată în feed"
    },
    "order": [
@@ -8494,14 +9406,14 @@
     "n_v11mem_george_buhnici",
     "n_v11mem_zoso",
     "n_net_zaiafet",
-    "n_v3mem_screenshot",
-    "n_v4mem_live",
+    "n_v4mem_telefon",
+    "n_net_comentarii_online",
     "n_v11mem_doza_de_has"
    ],
-   "id": "cx_meme_net_254",
+   "id": "cx_meme_net_270",
    "category": "meme_net",
    "source": "ai",
-   "status": "pending"
+   "status": "approved"
   },
   {
    "difficulty": "usor",
@@ -9490,8 +10402,8 @@
     "g3": [
      "n_v2muz_hit_de_vara",
      "n_v2muz_refren_de_vara",
-     "n_v2muz_scena_festival",
-     "n_muz_festivaluri_muzicale"
+     "n_v4muz_hit",
+     "n_v4muz_refren"
     ],
     "g4": [
      "n_v2muz_concert",
@@ -9503,8 +10415,8 @@
    "group_labels": {
     "g1": "Festivaluri cu hartă clară",
     "g2": "Locuri care le trag de mânecă",
-    "g3": "Vara de pe afiș",
-    "g4": "Publicul, nu headlinerul"
+    "g3": "Hituri și refrene",
+    "g4": "Evenimente cu public"
    },
    "order": [
     "n_v2muz_hit_de_vara",
@@ -9513,9 +10425,9 @@
     "n_brasov",
     "n_v4art_spectacol",
     "n_muz_electric_castle",
-    "n_muz_festivaluri_muzicale",
+    "n_v4muz_refren",
     "n_constanta",
-    "n_v2muz_scena_festival",
+    "n_v4muz_hit",
     "n_v4art_festival",
     "n_muz_neversea",
     "n_cluj_napoca",
@@ -9524,7 +10436,7 @@
     "n_muz_untold",
     "n_muz_cerbul_de_aur"
    ],
-   "id": "cx_muzica_255",
+   "id": "cx_muzica_271",
    "category": "muzica",
    "source": "ai",
    "status": "approved"
@@ -9558,8 +10470,8 @@
     ]
    },
    "group_labels": {
-    "g1": "Trupe rock canonice",
-    "g2": "Pop-rock de radio",
+    "g1": "Rock clasic și hard",
+    "g2": "Pop-rock și alternative",
     "g3": "Semnele chitării",
     "g4": "Orașe trase în legendă"
    },
@@ -9581,7 +10493,7 @@
     "n_v11muz_voltaj",
     "n_v2muz_trupa_rock"
    ],
-   "id": "cx_muzica_256",
+   "id": "cx_muzica_272",
    "category": "muzica",
    "source": "ai",
    "status": "pending"
@@ -9638,7 +10550,7 @@
     "n_oedipe",
     "n_v3lit_vers"
    ],
-   "id": "cx_muzica_257",
+   "id": "cx_muzica_273",
    "category": "muzica",
    "source": "ai",
    "status": "approved"
@@ -9695,7 +10607,7 @@
     "n_muz_refren_viral",
     "n_v2muz_hit_de_vara"
    ],
-   "id": "cx_muzica_258",
+   "id": "cx_muzica_274",
    "category": "muzica",
    "source": "ai",
    "status": "approved"
@@ -10668,6 +11580,177 @@
    "category": "personalitati",
    "source": "ai",
    "status": "pending"
+  },
+  {
+   "difficulty": "greu",
+   "groups": {
+    "g1": [
+     "n_alexandru_ioan_cuza",
+     "n_carol_i",
+     "n_ferdinand_i",
+     "n_mihai_i"
+    ],
+    "g2": [
+     "n_perx_regina_maria",
+     "n_perx_castelul_pelisor",
+     "n_perx_balcic",
+     "n_perx_memorii_regina_maria"
+    ],
+    "g3": [
+     "n_perx_nicolae_titulescu",
+     "n_perx_mica_antanta",
+     "n_perx_liga_natiunilor",
+     "n_tratatul_trianon"
+    ],
+    "g4": [
+     "n_primul_razboi_mondial",
+     "n_marea_unire_1918",
+     "n_istx_batalia_marasesti",
+     "n_razboiul_independenta_1877"
+    ]
+   },
+   "group_labels": {
+    "g1": "Figuri de stat",
+    "g2": "Cercul Reginei Maria",
+    "g3": "Diplomație interbelică",
+    "g4": "Războaie și uniri"
+   },
+   "order": [
+    "n_marea_unire_1918",
+    "n_mihai_i",
+    "n_perx_regina_maria",
+    "n_alexandru_ioan_cuza",
+    "n_perx_memorii_regina_maria",
+    "n_primul_razboi_mondial",
+    "n_tratatul_trianon",
+    "n_perx_mica_antanta",
+    "n_perx_castelul_pelisor",
+    "n_perx_liga_natiunilor",
+    "n_perx_nicolae_titulescu",
+    "n_razboiul_independenta_1877",
+    "n_istx_batalia_marasesti",
+    "n_perx_balcic",
+    "n_ferdinand_i",
+    "n_carol_i"
+   ],
+   "id": "cx_personalitati_275",
+   "category": "personalitati",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_henri_coanda",
+     "n_aurel_vlaicu",
+     "n_traian_vuia",
+     "n_v11per_smaranda_braescu"
+    ],
+    "g2": [
+     "n_efectul_coanda",
+     "n_coanda_1910",
+     "n_avionul_vlaicu",
+     "n_vlaicu_ii"
+    ],
+    "g3": [
+     "n_ana_aslan",
+     "n_victor_babes",
+     "n_grigore_antipa",
+     "n_v11per_carol_davila"
+    ],
+    "g4": [
+     "n_muzeul_antipa",
+     "n_socx_universitatea_babes_bolyai",
+     "n_socx_universitatea_politehnica_bucuresti",
+     "n_muzeul_aviatiei_romane"
+    ]
+   },
+   "group_labels": {
+    "g1": "Pionieri ai zborului",
+    "g2": "Repere aviatice",
+    "g3": "Științe ale vieții",
+    "g4": "Instituții cu miză științifică"
+   },
+   "order": [
+    "n_aurel_vlaicu",
+    "n_coanda_1910",
+    "n_muzeul_antipa",
+    "n_socx_universitatea_babes_bolyai",
+    "n_socx_universitatea_politehnica_bucuresti",
+    "n_muzeul_aviatiei_romane",
+    "n_ana_aslan",
+    "n_victor_babes",
+    "n_efectul_coanda",
+    "n_v11per_smaranda_braescu",
+    "n_avionul_vlaicu",
+    "n_henri_coanda",
+    "n_traian_vuia",
+    "n_grigore_antipa",
+    "n_v11per_carol_davila",
+    "n_vlaicu_ii"
+   ],
+   "id": "cx_personalitati_276",
+   "category": "personalitati",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "greu",
+   "groups": {
+    "g1": [
+     "n_v11per_elisabeta_rizea",
+     "n_v11per_doina_cornea",
+     "n_v11per_corneliu_coposu",
+     "n_v11per_iuliu_maniu"
+    ],
+    "g2": [
+     "n_v11per_radu_beligan",
+     "n_artx_teatru_romanesc",
+     "n_teatrul_bulandra",
+     "n_v2art_teatru"
+    ],
+    "g3": [
+     "n_maria_tanase",
+     "n_v11per_gheorghe_zamfir",
+     "n_v4muz_muzica_populara",
+     "n_doina"
+    ],
+    "g4": [
+     "n_reconstituirea_film",
+     "n_moartea_domnului_lazarescu",
+     "n_patru_luni_trei_saptamani",
+     "n_cinematografia_romaneasca"
+    ]
+   },
+   "group_labels": {
+    "g1": "Opoziție anticomunistă",
+    "g2": "Lumea teatrului românesc",
+    "g3": "Folclor pe scenă",
+    "g4": "Cinema incomod"
+   },
+   "order": [
+    "n_v11per_corneliu_coposu",
+    "n_v4muz_muzica_populara",
+    "n_teatrul_bulandra",
+    "n_artx_teatru_romanesc",
+    "n_patru_luni_trei_saptamani",
+    "n_moartea_domnului_lazarescu",
+    "n_v11per_iuliu_maniu",
+    "n_v11per_radu_beligan",
+    "n_v11per_gheorghe_zamfir",
+    "n_cinematografia_romaneasca",
+    "n_v2art_teatru",
+    "n_v11per_doina_cornea",
+    "n_reconstituirea_film",
+    "n_v11per_elisabeta_rizea",
+    "n_maria_tanase",
+    "n_doina"
+   ],
+   "id": "cx_personalitati_277",
+   "category": "personalitati",
+   "source": "ai",
+   "status": "approved"
   },
   {
    "difficulty": "usor",
@@ -11747,7 +12830,7 @@
     "n_v11soc_sri",
     "n_v11soc_cnp"
    ],
-   "id": "cx_societate_259",
+   "id": "cx_societate_278",
    "category": "societate",
    "source": "ai",
    "status": "approved"
@@ -11804,10 +12887,10 @@
     "n_iasi",
     "n_socx_automobile_dacia"
    ],
-   "id": "cx_societate_260",
+   "id": "cx_societate_279",
    "category": "societate",
    "source": "ai",
-   "status": "approved"
+   "status": "pending"
   },
   {
    "difficulty": "greu",
@@ -11841,7 +12924,7 @@
     "g1": "Puteri și control",
     "g2": "Drepturi scrise",
     "g3": "Norma limbii",
-    "g4": "Funcții publice"
+    "g4": "Roluri politice și funcții publice"
    },
    "order": [
     "n_conventia_drepturilor_omului",
@@ -11861,7 +12944,7 @@
     "n_constitutia",
     "n_presedintele"
    ],
-   "id": "cx_societate_261",
+   "id": "cx_societate_280",
    "category": "societate",
    "source": "ai",
    "status": "approved"
@@ -12834,6 +13917,234 @@
    "category": "sport",
    "source": "ai",
    "status": "pending"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_spt_steaua_1986",
+     "n_spt_finala_sevilla_1986",
+     "n_spt_helmut_duckadam",
+     "n_spt_cupa_campionilor_1986"
+    ],
+    "g2": [
+     "n_spt_generatia_de_aur",
+     "n_spt_world_cup_1994",
+     "n_spt_romania_argentina_1994",
+     "n_spt_columbia_romania_1994"
+    ],
+    "g3": [
+     "n_simona_halep",
+     "n_spt_simona_wimbledon_2019",
+     "n_spt_simona_roland_garros_2018",
+     "n_spt_finala_wimbledon_serena"
+    ],
+    "g4": [
+     "n_nadia_comaneci",
+     "n_spt_nadia_zecele_perfect",
+     "n_montreal_1976",
+     "n_spt_paralele_gimnastica"
+    ]
+   },
+   "group_labels": {
+    "g1": "Sevilla 1986",
+    "g2": "Mondialul american",
+    "g3": "Dubla Simonei",
+    "g4": "Zecele Nadiei"
+   },
+   "order": [
+    "n_simona_halep",
+    "n_montreal_1976",
+    "n_spt_helmut_duckadam",
+    "n_spt_nadia_zecele_perfect",
+    "n_spt_generatia_de_aur",
+    "n_spt_simona_roland_garros_2018",
+    "n_spt_finala_sevilla_1986",
+    "n_spt_simona_wimbledon_2019",
+    "n_spt_steaua_1986",
+    "n_nadia_comaneci",
+    "n_spt_finala_wimbledon_serena",
+    "n_spt_columbia_romania_1994",
+    "n_spt_cupa_campionilor_1986",
+    "n_spt_romania_argentina_1994",
+    "n_spt_world_cup_1994",
+    "n_spt_paralele_gimnastica"
+   ],
+   "id": "cx_sport_281",
+   "category": "sport",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_v11spo_arena_nationala",
+     "n_spt_stadionul_ghencea",
+     "n_v11spo_rapid_bucuresti",
+     "n_v11spo_dinamo_bucuresti"
+    ],
+    "g2": [
+     "n_v11spo_universitatea_craiova",
+     "n_socx_craiova",
+     "n_oltenia",
+     "n_socx_electroputere_craiova"
+    ],
+    "g3": [
+     "n_gheorghe_hagi",
+     "n_simona_halep",
+     "n_constanta",
+     "n_dobrogea"
+    ],
+    "g4": [
+     "n_spt_ivan_patzaichin",
+     "n_spt_delta_pagaia",
+     "n_spt_canoe",
+     "n_dunarea"
+    ]
+   },
+   "group_labels": {
+    "g1": "București sportiv",
+    "g2": "Craiova și Oltenia",
+    "g3": "Dobrogea de campioni",
+    "g4": "Pagaie pe ape"
+   },
+   "order": [
+    "n_v11spo_arena_nationala",
+    "n_dunarea",
+    "n_spt_canoe",
+    "n_spt_stadionul_ghencea",
+    "n_v11spo_rapid_bucuresti",
+    "n_spt_delta_pagaia",
+    "n_constanta",
+    "n_socx_craiova",
+    "n_v11spo_universitatea_craiova",
+    "n_gheorghe_hagi",
+    "n_spt_ivan_patzaichin",
+    "n_simona_halep",
+    "n_oltenia",
+    "n_dobrogea",
+    "n_socx_electroputere_craiova",
+    "n_v11spo_dinamo_bucuresti"
+   ],
+   "id": "cx_sport_282",
+   "category": "sport",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_v11spo_elisabeta_lipa",
+     "n_v11spo_cinci_aururi_lipa",
+     "n_v11spo_canotaj",
+     "n_v2spo_campion_olimpic"
+    ],
+    "g2": [
+     "n_ilie_nastase",
+     "n_spt_nastase_numarul_1",
+     "n_spt_nastase_us_open_1972",
+     "n_v2spo_clasament_atp"
+    ],
+    "g3": [
+     "n_spt_david_popovici",
+     "n_spt_record_100m_liber_2022",
+     "n_spt_200m_liber",
+     "n_spt_bazin_olimpic"
+    ],
+    "g4": [
+     "n_spt_helmut_duckadam",
+     "n_spt_patru_penaltyuri",
+     "n_v2spo_penalty",
+     "n_v2spo_portar"
+    ]
+   },
+   "group_labels": {
+    "g1": "Cinci aururi Lipă",
+    "g2": "Numărul 1 ATP",
+    "g3": "100/200 liber",
+    "g4": "Patru la 11 m"
+   },
+   "order": [
+    "n_v2spo_penalty",
+    "n_v2spo_campion_olimpic",
+    "n_ilie_nastase",
+    "n_spt_200m_liber",
+    "n_spt_david_popovici",
+    "n_spt_bazin_olimpic",
+    "n_spt_nastase_us_open_1972",
+    "n_spt_nastase_numarul_1",
+    "n_spt_helmut_duckadam",
+    "n_v11spo_canotaj",
+    "n_spt_record_100m_liber_2022",
+    "n_v2spo_portar",
+    "n_v11spo_cinci_aururi_lipa",
+    "n_spt_patru_penaltyuri",
+    "n_v2spo_clasament_atp",
+    "n_v11spo_elisabeta_lipa"
+   ],
+   "id": "cx_sport_283",
+   "category": "sport",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "greu",
+   "groups": {
+    "g1": [
+     "n_bucuresti",
+     "n_v11spo_arena_nationala",
+     "n_v11spo_rapid_bucuresti",
+     "n_v11spo_dinamo_bucuresti"
+    ],
+    "g2": [
+     "n_ilie_nastase",
+     "n_ion_tiriac",
+     "n_simona_halep",
+     "n_tenis"
+    ],
+    "g3": [
+     "n_v11spo_elisabeta_lipa",
+     "n_spt_ivan_patzaichin",
+     "n_spt_canoe",
+     "n_dunarea"
+    ],
+    "g4": [
+     "n_v11spo_oina",
+     "n_doina",
+     "n_v2via_jocuri_copilarie",
+     "n_folclor_romanesc"
+    ]
+   },
+   "group_labels": {
+    "g1": "București sportiv",
+    "g2": "Tenis românesc",
+    "g3": "Pe ape",
+    "g4": "Tradițional, nu modern"
+   },
+   "order": [
+    "n_tenis",
+    "n_ilie_nastase",
+    "n_spt_canoe",
+    "n_bucuresti",
+    "n_v11spo_elisabeta_lipa",
+    "n_v11spo_arena_nationala",
+    "n_v2via_jocuri_copilarie",
+    "n_spt_ivan_patzaichin",
+    "n_folclor_romanesc",
+    "n_v11spo_rapid_bucuresti",
+    "n_ion_tiriac",
+    "n_v11spo_dinamo_bucuresti",
+    "n_simona_halep",
+    "n_v11spo_oina",
+    "n_doina",
+    "n_dunarea"
+   ],
+   "id": "cx_sport_284",
+   "category": "sport",
+   "source": "ai",
+   "status": "approved"
   },
   {
    "difficulty": "usor",
@@ -13862,6 +15173,177 @@
    "status": "approved"
   },
   {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_henri_coanda",
+     "n_aurel_vlaicu",
+     "n_traian_vuia",
+     "n_v11sti_elie_carafoli"
+    ],
+    "g2": [
+     "n_coanda_1910",
+     "n_vuia_i",
+     "n_avionul_vlaicu",
+     "n_v11sti_iar_80"
+    ],
+    "g3": [
+     "n_aeroportul_baneasa",
+     "n_muzeul_aviatiei_romane",
+     "n_brasov",
+     "n_bucuresti"
+    ],
+    "g4": [
+     "n_aerodinamica",
+     "n_stix_mecanica_fluidelor",
+     "n_efectul_coanda",
+     "n_v4sti_aer"
+    ]
+   },
+   "group_labels": {
+    "g1": "Pionieri ai aviației",
+    "g2": "Aparate de zbor românești",
+    "g3": "Locuri ale aviației românești",
+    "g4": "Fizica zborului"
+   },
+   "order": [
+    "n_v11sti_elie_carafoli",
+    "n_traian_vuia",
+    "n_bucuresti",
+    "n_henri_coanda",
+    "n_coanda_1910",
+    "n_brasov",
+    "n_v11sti_iar_80",
+    "n_efectul_coanda",
+    "n_aerodinamica",
+    "n_vuia_i",
+    "n_muzeul_aviatiei_romane",
+    "n_avionul_vlaicu",
+    "n_v4sti_aer",
+    "n_aeroportul_baneasa",
+    "n_aurel_vlaicu",
+    "n_stix_mecanica_fluidelor"
+   ],
+   "id": "cx_stiinta_285",
+   "category": "stiinta",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_george_palade",
+     "n_ribozom",
+     "n_biologie_celulara",
+     "n_nobel_medicina"
+    ],
+    "g2": [
+     "n_victor_babes",
+     "n_stix_ion_cantacuzino",
+     "n_microbiologie",
+     "n_v3sti_vaccin"
+    ],
+    "g3": [
+     "n_nicolae_paulescu",
+     "n_insulina",
+     "n_diabet",
+     "n_v2sti_hormon"
+    ],
+    "g4": [
+     "n_ana_aslan",
+     "n_v11sti_gerovital",
+     "n_gheorghe_marinescu",
+     "n_bucuresti"
+    ]
+   },
+   "group_labels": {
+    "g1": "Palade și celula",
+    "g2": "Microbi și vaccinuri",
+    "g3": "Diabet și metabolism",
+    "g4": "Medicină la București"
+   },
+   "order": [
+    "n_v2sti_hormon",
+    "n_v3sti_vaccin",
+    "n_victor_babes",
+    "n_biologie_celulara",
+    "n_gheorghe_marinescu",
+    "n_nicolae_paulescu",
+    "n_george_palade",
+    "n_stix_ion_cantacuzino",
+    "n_diabet",
+    "n_nobel_medicina",
+    "n_bucuresti",
+    "n_v11sti_gerovital",
+    "n_microbiologie",
+    "n_ana_aslan",
+    "n_ribozom",
+    "n_insulina"
+   ],
+   "id": "cx_stiinta_286",
+   "category": "stiinta",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "greu",
+   "groups": {
+    "g1": [
+     "n_podul_cernavoda",
+     "n_dunarea",
+     "n_delta_dunarii",
+     "n_dobrogea"
+    ],
+    "g2": [
+     "n_emil_racovita",
+     "n_grigore_antipa",
+     "n_v11sti_dimitrie_brandza",
+     "n_muzeul_antipa"
+    ],
+    "g3": [
+     "n_petrol",
+     "n_lazar_edeleanu",
+     "n_procedeul_edeleanu",
+     "n_v2sti_chimie"
+    ],
+    "g4": [
+     "n_muntenia",
+     "n_moldova_reg",
+     "n_banat",
+     "n_oltenia"
+    ]
+   },
+   "group_labels": {
+    "g1": "Dunăre și Dobrogea",
+    "g2": "Naturaliști și natură",
+    "g3": "Petrol și chimie",
+    "g4": "Regiuni istorice fără litoral"
+   },
+   "order": [
+    "n_moldova_reg",
+    "n_procedeul_edeleanu",
+    "n_muntenia",
+    "n_v11sti_dimitrie_brandza",
+    "n_oltenia",
+    "n_dobrogea",
+    "n_podul_cernavoda",
+    "n_muzeul_antipa",
+    "n_petrol",
+    "n_banat",
+    "n_lazar_edeleanu",
+    "n_dunarea",
+    "n_emil_racovita",
+    "n_delta_dunarii",
+    "n_v2sti_chimie",
+    "n_grigore_antipa"
+   ],
+   "id": "cx_stiinta_287",
+   "category": "stiinta",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
    "difficulty": "usor",
    "groups": {
     "g1": [
@@ -14883,6 +16365,120 @@
     "n_articol_hotarat"
    ],
    "id": "cx_viata_de_roman_238",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_vdr_sarmale_craciun",
+     "n_vdr_miros_de_cozonac",
+     "n_gas_masa_craciun",
+     "n_vdr_colindatul"
+    ],
+    "g2": [
+     "n_vdr_curatenia_paste",
+     "n_gas_masa_paste",
+     "n_gas_oua_rosii",
+     "n_gas_drob_miel"
+    ],
+    "g3": [
+     "n_vdr_borcane_zacusca",
+     "n_gas_zacusca",
+     "n_gas_muraturi",
+     "n_vdr_portbagaj_plin"
+    ],
+    "g4": [
+     "n_gas_gratar_1_mai",
+     "n_gas_mici",
+     "n_v3gas_bere",
+     "n_v11via_gratar_iarba"
+    ]
+   },
+   "group_labels": {
+    "g1": "Crăciun acasă",
+    "g2": "Paște pregătit",
+    "g3": "Provizii de acasă",
+    "g4": "1 Mai la iarbă"
+   },
+   "order": [
+    "n_gas_muraturi",
+    "n_vdr_portbagaj_plin",
+    "n_v11via_gratar_iarba",
+    "n_gas_mici",
+    "n_gas_gratar_1_mai",
+    "n_gas_oua_rosii",
+    "n_vdr_borcane_zacusca",
+    "n_v3gas_bere",
+    "n_vdr_colindatul",
+    "n_gas_drob_miel",
+    "n_gas_masa_craciun",
+    "n_vdr_miros_de_cozonac",
+    "n_vdr_sarmale_craciun",
+    "n_gas_masa_paste",
+    "n_vdr_curatenia_paste",
+    "n_gas_zacusca"
+   ],
+   "id": "cx_viata_de_roman_288",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_vdr_bloc",
+     "n_vdr_scara_blocului",
+     "n_vdr_interfon",
+     "n_vdr_avizier_bloc"
+    ],
+    "g2": [
+     "n_vdr_ulita_satului",
+     "n_vdr_gospodaria_bunicilor",
+     "n_vdr_fantana_din_curte",
+     "n_vdr_gaina_din_curte"
+    ],
+    "g3": [
+     "n_v11via_nunta_la_cort",
+     "n_v11via_botez_familie",
+     "n_v11via_pomana",
+     "n_v4soc_biserica"
+    ],
+    "g4": [
+     "n_vdr_colindatul",
+     "n_vdr_plugusorul",
+     "n_v4art_colind",
+     "n_artx_hora"
+    ]
+   },
+   "group_labels": {
+    "g1": "Blocul vorbitor",
+    "g2": "Curtea bunicilor",
+    "g3": "În jurul ritualurilor de familie",
+    "g4": "Tradiții cântate și dansate"
+   },
+   "order": [
+    "n_v11via_pomana",
+    "n_vdr_interfon",
+    "n_artx_hora",
+    "n_vdr_gospodaria_bunicilor",
+    "n_vdr_gaina_din_curte",
+    "n_vdr_colindatul",
+    "n_vdr_ulita_satului",
+    "n_vdr_bloc",
+    "n_v11via_botez_familie",
+    "n_v11via_nunta_la_cort",
+    "n_vdr_avizier_bloc",
+    "n_v4art_colind",
+    "n_vdr_scara_blocului",
+    "n_vdr_plugusorul",
+    "n_v4soc_biserica",
+    "n_vdr_fantana_din_curte"
+   ],
+   "id": "cx_viata_de_roman_289",
    "category": "viata_de_roman",
    "source": "ai",
    "status": "approved"
@@ -17285,7 +18881,7 @@
    "difficulty": "usor",
    "start": "n_ftv_chefi_la_cutite",
    "target": "n_net_jamila_cuisine",
-   "optimal": 2,
+   "optimal": 3,
    "id": "lt_film_tv_098",
    "category": "film_tv",
    "source": "ai",
@@ -17447,6 +19043,16 @@
    "target": "n_vdr_punga_cu_pungi",
    "optimal": 2,
    "id": "lt_gastronomie_104",
+   "category": "gastronomie",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "start": "n_gas_cozonac",
+   "target": "n_net_jamila_cuisine",
+   "optimal": 2,
+   "id": "lt_gastronomie_105",
    "category": "gastronomie",
    "source": "ai",
    "status": "approved"

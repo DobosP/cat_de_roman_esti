@@ -1,6 +1,6 @@
 # cat_de_roman_esti vs. existing word games — quantity & quality
 
-_As of v11 (2026-07-07). Positions the game against the formats it borrows from._
+_As of the v11 curation-fix pass (2026-07-09). Positions the game against the formats it borrows from._
 
 ## The one-paragraph read
 
@@ -16,13 +16,13 @@ format + cultural specificity* it is ahead of every comparator.
 
 | Game | Formats | Content scale | Source | Curation |
 |------|---------|---------------|--------|----------|
-| **cat_de_roman_esti** | **4** (Conexiuni, Cald sau Rece, Lanțul, Alchimie) | **619 approved curated games** (168 / 235 / 168 / 48) + 196 pending; **1,294 nodes / 5,370 edges / 4,538 aliases**; 14 categories | Curated Romanian KG | Dual-verified (factual + game-quality), every item |
+| **cat_de_roman_esti** | **4** (Conexiuni, Cald sau Rece, Lanțul, Alchimie) | **657 approved curated games** (207 / 235 / 167 / 48) + 208 pending; **1,453 nodes / 5,644 edges / 4,684 aliases**; 14 categories | Curated Romanian KG | Dual-verified (factual + game-quality), every item |
 | NYT Connections | 1 (grouping) | ~1,116 puzzles (1/day since Jun 2023) | Human editors | Gold-standard, hand-authored |
 | Contexto | 1 (semantic hot/cold) | 1 word/day; ranks over the **whole language** via word embeddings | ML embeddings | None per-puzzle (model-driven) |
 | Infinite Craft | 1 (combine) | "Infinite" — LLM generates elements on the fly (millions of recipes) | Llama LLM, live | **None** — accepts hallucinations |
-| Wordle RO | 1 (letter guess) | 1 five-letter RO word/day | Word list | Simple dictionary |
+| Wordle | 1 (letter guess) | 1 five-letter word/day | Word list | Simple dictionary |
 
-**What 619 curated games means in practice:** across 4 games × 14 categories with difficulty
+**What 657 curated games means in practice:** across 4 games × 14 categories with difficulty
 tiers and a daily, that is **months of fresh daily content** without repeating a board — plus
 the mined fallback for the three graph-derived games extends it further. It is not "infinite,"
 by deliberate choice: uncurated infinity (Infinite Craft) ships nonsense, and per-puzzle-only
@@ -33,7 +33,7 @@ games (Contexto/Wordle) give you exactly one puzzle a day.
 | Dimension | cat_de_roman_esti | Best comparator | Where cat stands |
 |-----------|-------------------|-----------------|------------------|
 | Factual correctness | Every node/edge/board fact-verified; wrong-referent + false-attribution blocks dropped | NYT (human editors) | **On par** with the gold standard, at a fraction of the human cost |
-| Difficulty calibration | Salience recalibrated to balanced tiers (easy 441 / med 517 / hard 336); per-game difficulty selection (Lanț endpoint-salience by tier, Contexto salience pools, Conexiuni entanglement) | NYT (purple = hardest) | **Ahead** — explicit, data-driven, 3 tiers × 4 games |
+| Difficulty calibration | Salience recalibrated to balanced tiers (easy 479 / med 638 / hard 336); per-game difficulty selection (Lanț endpoint-salience by tier, Contexto salience pools, Conexiuni entanglement) | NYT (purple = hardest) | **Ahead** — explicit, data-driven, 3 tiers × 4 games |
 | Answer integrity | Server-authoritative, hidden answers, reveal-gated (no client-side leak) | NYT / Contexto | **On par / ahead** (formal invariants + tests) |
 | Input forgiveness | 4,538 exact aliases (inflections/synonyms/short titles) so natural typing resolves | Contexto (embeddings tolerate anything) | Behind embeddings on raw recall, but **exact + predictable** (no arbitrary "close" rankings) |
 | Cultural specificity | Romanian history/literature/geography + 6 **pop-culture** shelves (manele, Las Fierbinți, meme, sport, viața de bloc, gastronomie) | none | **Unique** — no comparator is Romanian-cultural |
@@ -42,7 +42,7 @@ games (Contexto/Wordle) give you exactly one puzzle a day.
 ## Honest weaknesses (and why they're acceptable)
 
 - **Smaller vocabulary than Contexto.** Contexto ranks the *entire language* via embeddings; cat
-  guesses against a ~1,300-node KG. Mitigated by the alias layer + a core-vocabulary pass so the
+  guesses against a ~1,450-node KG. Mitigated by the alias layer + a core-vocabulary pass so the
   words a player types first resolve — but a rare word Contexto knows, cat may not. Trade: cat's
   distances are *sharp and explainable* (real graph hops), not a black-box similarity score.
 - **Not infinite like Infinite Craft.** By design — infinity there means uncurated LLM output.
@@ -63,4 +63,4 @@ games (Contexto/Wordle) give you exactly one puzzle a day.
 Sources: [NYT Connections archive](https://connectionsplus.io/nyt-archive) ·
 [Contexto (embeddings, daily)](https://contexto.uk/) ·
 [Infinite Craft (Neal.fun, LLM)](https://en.wikipedia.org/wiki/Infinite_Craft) ·
-[Wordle RO](https://wordlero.vercel.app/)
+[Wordle (NYT)](https://www.nytimes.com/games/wordle/index.html)

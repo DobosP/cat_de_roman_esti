@@ -1,7 +1,14 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-07-07. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-07_
+_As of 2026-07-09. Update whenever `main` or the test baseline moves._
+_Last verified: 2026-07-09 (225 tests green)._
+
+**Latest — v11 curation-fix pass (2026-07-09):** 130 editorial fixes to the v11 batch (label
+precision, alias hygiene, distractor-relation correctness, board fairness; 2 correct overrides of
+verifier false-positives) via a two-round codex fix → independent-reverify pipeline, rebuilt from the
+pre-v11 base through `import_candidates.py`. Graph **1,453 nodes / 5,644 edges / 4,684 aliases**; pack
+**865 games (657 approved / 208 pending)** — the fixes rescued 28 boards the first import had dropped.
+`docs/COMPARISON.md` + artifact comparators updated to the English originals (Wordle RO → Wordle).
 
 ## Phase
 
