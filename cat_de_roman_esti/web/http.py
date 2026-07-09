@@ -20,10 +20,25 @@ import json
 from typing import TypeVar
 
 import pydantic
+from rest_framework.authentication import SessionAuthentication
 from rest_framework.exceptions import MethodNotAllowed
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.views import exception_handler as drf_exception_handler
+
+
+class OptionalSessionAuth(SessionAuthentication):
+    """Identify a signed-in player from the session cookie WITHOUT enforcing CSRF.
+
+    The word-game endpoints stay anonymous + CSRF-free (starting/guessing a game mutates
+    only an ephemeral in-memory session, never account state). This lets a create/finish
+    view read ``request.user`` for the avoid-repeats feature; anonymous requests resolve to
+    no user. In the stateless (accounts-off) deployment there is no auth middleware, so this
+    simply finds no user — the endpoints behave exactly as before.
+    """
+
+    def enforce_csrf(self, request):  # noqa: D401 - intentionally a no-op
+        return None
 
 
 class ContractAPIView(APIView):

@@ -23,7 +23,15 @@ from drf_spectacular.utils import extend_schema
 from pydantic import BaseModel
 from rest_framework.response import Response
 
-from ..web.http import ContractAPIView, http_error, parse_body, query_int, query_str
+from ..web.http import (
+    ContractAPIView,
+    OptionalSessionAuth,
+    http_error,
+    parse_body,
+    query_int,
+    query_str,
+)
+from ._progress import excluded_pack_ids, record_finished
 from .categories import category_label, is_known, known_keys
 from .packs import get_pack
 from .service import SessionStore, daily_seed, get_service
@@ -445,6 +453,8 @@ def _require(game_id: str) -> AlchimieSession:
 
 # --------------------------------------------------------------------------- endpoints
 class CreateGameView(ContractAPIView):
+    authentication_classes = [OptionalSessionAuth]
+
     @extend_schema(operation_id="alchimie_create_game", tags=["alchimie"])
     def post(self, request):
         """Start a new Alchimie game.
@@ -470,7 +480,11 @@ class CreateGameView(ContractAPIView):
             rng = random.Random(seed)
             curated = (
                 get_pack().pick_seeded(
-                    GAME_KEY, rng, category=category, difficulty=difficulty
+                    GAME_KEY,
+                    rng,
+                    category=category,
+                    difficulty=difficulty,
+                    exclude_ids=excluded_pack_ids(request, GAME_KEY),
                 )
                 if category is not None
                 else None
@@ -504,6 +518,8 @@ class GetGameView(ContractAPIView):
 
 
 class CombineView(ContractAPIView):
+    authentication_classes = [OptionalSessionAuth]
+
     @extend_schema(operation_id="alchimie_combine", tags=["alchimie"])
     def post(self, request, game_id: str):
         """Combine two owned concepts; append any newly-discovered shared neighbours."""
@@ -534,6 +550,8 @@ class CombineView(ContractAPIView):
         ]
         for c in discovered:
             session.add(c, (a, b))
+        if session.won:
+            record_finished(request, GAME_KEY, session.pack_id)
 
         # Track dry spells so the nudge can surface only when the player is genuinely stuck.
         if discovered:

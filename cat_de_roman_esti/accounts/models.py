@@ -107,3 +107,31 @@ class ScoreEntry(models.Model):
 
     def __str__(self) -> str:  # pragma: no cover
         return f"Score<{self.user_id}:{self.game}:{self.score}>"
+
+
+class PlayedPuzzle(models.Model):
+    """A curated puzzle a signed-in player has FINISHED (won or gave up).
+
+    Powers "don't serve me the same game again": the create endpoints exclude a player's
+    finished ``pack_id``s. Only curated instances (which have a stable opaque id) are tracked
+    — mined/random boards draw from a huge pool, so repeats there are already rare, and their
+    identity can encode the hidden answer, so we never persist it. Never stores the solution.
+    """
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="cat_played"
+    )
+    game = models.CharField(max_length=20)
+    pack_id = models.CharField(max_length=64)
+    finished_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        indexes = [models.Index(fields=["user", "game"])]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "game", "pack_id"], name="uniq_user_played"
+            )
+        ]
+
+    def __str__(self) -> str:  # pragma: no cover
+        return f"Played<{self.user_id}:{self.game}:{self.pack_id}>"

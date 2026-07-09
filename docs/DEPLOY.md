@@ -10,14 +10,22 @@ Two shippable shapes:
 This document covers publishing the **accounts** stack on a single EU VPS (Hetzner), fronted
 by Cloudflare, with TLS via Caddy. The anonymous arcade is a subset (skip Postgres/OAuth).
 
-**Product model.** The game is **always free to play without an account.** An account exists
-for one reason: **to appear on the public ranking** (`/clasament`) with a chosen nickname +
-score — anyone can *view* the ranking, you only need to sign in to *appear* on it. Money comes
-from **donations**: set `CAT_DONATE_URL` to your donation page and a "Donează" button shows in
-both modes (real provider/ONG page is an owner task). The ranking shows a **nickname, never the
-real name/email**, is opt-in (`show_on_ranking`, toggle in the account menu), and under-16
-self-service accounts stay blocked — so v1's ranking is effectively 16+. Letting minors rank
-(pseudonymously, with verifiable parental consent) is a **new DPIA** — see `docs/compliance/`.
+**Product model.** The game is **always free to play without an account.** Signing in (Google)
+does two personal things — no real name is ever used or shown:
+
+1. **Keep your progress** across devices (history synced to your account).
+2. **Don't get the same game again** — once you *finish* a curated puzzle (win or give up), the
+   server won't offer it to you anymore (`PlayedPuzzle`; daily challenges are exempt; mined/random
+   boards draw from a huge pool so repeats there are already rare — and their identity can encode
+   the answer, so it is never persisted).
+
+An account also lets you **appear on the public ranking** (`/clasament`) with a **chosen nickname
+(never the real name/email)** + score — anyone can *view* it, you only sign in to *appear*, and it
+is opt-in (`show_on_ranking`, toggled in the account menu). Money comes from **donations**: set
+`CAT_DONATE_URL` and a "Donează" button shows in both modes (real provider/ONG page is an owner
+task). Under-16 self-service accounts stay blocked — so v1's ranking is effectively 16+; letting
+minors rank (pseudonymously, with verifiable parental consent) is a **new DPIA** — see
+`docs/compliance/`.
 
 > **Go-live gate.** The accounts stack collects personal data from possibly-minor users. Do
 > **not** point real users at it until the [Go-live compliance checklist](#go-live-compliance-checklist)

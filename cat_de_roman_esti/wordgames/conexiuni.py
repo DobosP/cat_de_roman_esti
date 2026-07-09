@@ -23,7 +23,15 @@ from drf_spectacular.utils import extend_schema
 from pydantic import BaseModel
 from rest_framework.response import Response
 
-from ..web.http import ContractAPIView, http_error, parse_body, query_int, query_str
+from ..web.http import (
+    ContractAPIView,
+    OptionalSessionAuth,
+    http_error,
+    parse_body,
+    query_int,
+    query_str,
+)
+from ._progress import excluded_pack_ids, record_finished
 from .categories import category_label, is_known, known_keys
 from .packs import CuratedItem, get_pack
 from .service import SessionStore, WordGameService, daily_seed, get_service
@@ -478,6 +486,8 @@ def _session_from_curated(
 
 # --------------------------------------------------------------------- endpoints
 class CreateGameView(ContractAPIView):
+    authentication_classes = [OptionalSessionAuth]
+
     @extend_schema(operation_id="conexiuni_create_game", tags=["conexiuni"])
     def post(self, request):
         """Start a game. Optional ``?category=`` serves a curated board for that theme
@@ -500,7 +510,11 @@ class CreateGameView(ContractAPIView):
             rng = random.Random(seed)
             curated = (
                 get_pack().pick_seeded(
-                    GAME_KEY, rng, category=category, difficulty=difficulty
+                    GAME_KEY,
+                    rng,
+                    category=category,
+                    difficulty=difficulty,
+                    exclude_ids=excluded_pack_ids(request, GAME_KEY),
                 )
                 if category is not None
                 else None
@@ -526,6 +540,8 @@ class GetGameView(ContractAPIView):
 
 
 class GuessView(ContractAPIView):
+    authentication_classes = [OptionalSessionAuth]
+
     @extend_schema(operation_id="conexiuni_guess", tags=["conexiuni"])
     def post(self, request, game_id: str):
         body = parse_body(request, GuessBody)
@@ -557,6 +573,8 @@ class GuessView(ContractAPIView):
         if shared is not None and shared not in session.solved:
             session.solved.append(shared)
             session.won = len(session.solved) == NUM_GROUPS
+            if session.won:
+                record_finished(request, GAME_KEY, session.pack_id)
             state = _state(game_id, session)
             result = {
                 "ok": True,
@@ -577,6 +595,8 @@ class GuessView(ContractAPIView):
                 counts[c] = counts.get(c, 0) + 1
         one_away = any(v == GROUP_SIZE - 1 for v in counts.values())
         session.lost = session.lives <= 0
+        if session.lost:
+            record_finished(request, GAME_KEY, session.pack_id)
 
         result: dict = {
             "ok": True,
