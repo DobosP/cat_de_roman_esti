@@ -252,15 +252,34 @@ def test_selection_avoids_leaf_endpoints():
             assert svc.degree(g["target"]["id"]) >= 2, (diff, seed, g["target"]["id"])
 
 
-def test_selection_prefers_salient_endpoints():
-    """Average endpoint salience should be comfortably above the obscure floor."""
+def test_selection_prefers_salient_endpoints_by_difficulty():
+    """Endpoint salience tracks difficulty (v11): easier games favour recognizable
+    endpoints, ``greu`` tolerates obscure ones. Assert the AVERAGE over many seeds so a
+    single obscure endpoint on a very branchy board doesn't fail the intent."""
     svc = get_service()
+    # minimum mean endpoint salience expected per difficulty
+    floors = {"usor": 0.60, "normal": 0.45, "greu": 0.0}
     for diff in _BANDS:
+        means = []
         for seed in range(30):
             g = _create(seed=seed, difficulty=diff)
             s = svc.node(g["start"]["id"]).salience
             t = svc.node(g["target"]["id"]).salience
-            assert (s + t) / 2 >= 0.25, (diff, seed, s, t)
+            means.append((s + t) / 2)
+        avg = sum(means) / len(means)
+        assert avg >= floors[diff], (diff, avg)
+    # sanity: usor endpoints are, on average, more salient than greu ones.
+    usor_avg = sum(
+        (svc.node(_create(seed=s, difficulty="usor")["start"]["id"]).salience
+         + svc.node(_create(seed=s, difficulty="usor")["target"]["id"]).salience) / 2
+        for s in range(15)
+    ) / 15
+    greu_avg = sum(
+        (svc.node(_create(seed=s, difficulty="greu")["start"]["id"]).salience
+         + svc.node(_create(seed=s, difficulty="greu")["target"]["id"]).salience) / 2
+        for s in range(15)
+    ) / 15
+    assert usor_avg > greu_avg
 
 
 def test_bands_respected_across_many_seeds():

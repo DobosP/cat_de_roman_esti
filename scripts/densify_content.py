@@ -192,13 +192,34 @@ def run(dense: dict, build_version: str, note: str) -> int:
         )
         added_edges += 1
 
-    # ---- recompute degree (= incident-edge count) ----
+    print("densify_content: merged batch")
+    print(f"  nodes:   +{len(seen_new):<3} -> {len(nodes)}")
+    print(f"  aliases: +{added_aliases}")
+    print(f"  edges:   +{added_edges:<3} -> {len(edges)}  (skipped {skipped_edges} dup/invalid)")
+    return rebuild(data, nodes, edges, build_version, note, base_raw, tests_base)
+
+
+def rebuild(
+    data: dict,
+    nodes: list[dict],
+    edges: list[dict],
+    build_version: str,
+    note: str,
+    base_raw: str,
+    tests_base: str,
+) -> int:
+    """Recompute degree/tier, regenerate the puzzle layer, rebuild meta, write both
+    fixture copies, validate, and roll back on failure. The shared finalize step for
+    ``run()`` (content merges) and ``refine_dataset.py`` (in-place refinement) so the
+    puzzle-regeneration rules never diverge between the two paths."""
+    # ---- recompute degree (= incident-edge count) + tier from salience ----
     deg: Counter[str] = Counter()
     for e in edges:
         deg[e["src_id"]] += 1
         deg[e["dst_id"]] += 1
     for n in nodes:
         n["degree"] = deg.get(n["id"], 0)
+        n["difficulty_tier"] = tier_for_salience(float(n["salience"]))
 
     cat_by_id = {n["id"]: n["category"] for n in nodes}
     sal_by = {n["id"]: n["salience"] for n in nodes}
@@ -309,10 +330,7 @@ def run(dense: dict, build_version: str, note: str) -> int:
     mean_deg = sum(deg.values()) / max(1, len(nodes))
     nd_mean = sum(1 for e in edges if not e["is_distractor"]) * 2 / max(1, len(nodes))
     print("densify_content: wrote both fixture copies")
-    print(f"  nodes:   +{len(seen_new):<3} -> {len(nodes)}")
-    print(f"  aliases: +{added_aliases}")
-    print(f"  edges:   +{added_edges:<3} -> {len(edges)}  (skipped {skipped_edges} dup/invalid)")
-    print(f"  puzzles: regenerated -> {len(puzzles)}")
+    print(f"  nodes: {len(nodes)} | edges: {len(edges)} | puzzles regenerated: {len(puzzles)}")
     print(f"  by bucket: {dict(sorted(gen_counter.items()))}")
     print(f"  mean degree (all): {mean_deg:.2f} | non-distractor: {nd_mean:.2f}")
 

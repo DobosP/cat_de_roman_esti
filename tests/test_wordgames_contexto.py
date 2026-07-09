@@ -64,7 +64,13 @@ def _target_of(seed: int = SEED, difficulty: str = "normal"):
 
     svc = get_service()
     session = _pick_target(seed, difficulty)
-    neighbour = svc.neighbor_ids(session.target)[0]
+    # A genuine distance-1 neighbour: the service adjacency is DIRECTED (one-way edges
+    # like created_by exist), so neighbor_ids[0] is not always symmetric distance-1 —
+    # pick the first neighbour that really is one BFS hop away.
+    neighbour = next(
+        (nb for nb in svc.neighbor_ids(session.target) if svc.distance(nb, session.target) == 1),
+        svc.neighbor_ids(session.target)[0],
+    )
     return session.target, svc.label(session.target), neighbour, svc.label(neighbour)
 
 
@@ -497,9 +503,13 @@ def test_only_the_win_reads_closeness_100() -> None:
     from cat_de_roman_esti.wordgames.service import get_service
 
     svc = get_service()
-    session = _pick_target(SEED, "normal")  # n_dunarea
+    session = _pick_target(SEED, "normal")
     target = session.target
-    neighbour = svc.neighbor_ids(target)[0]
+    # directed adjacency: pick a neighbour that is truly one BFS hop away (see _target_of).
+    neighbour = next(
+        (nb for nb in svc.neighbor_ids(target) if svc.distance(nb, target) == 1),
+        svc.neighbor_ids(target)[0],
+    )
 
     c = make_client()
     gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]

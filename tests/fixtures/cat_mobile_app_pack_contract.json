@@ -4,12 +4,12 @@
     "app": "cat_de_roman_esti",
     "schema_version": 1,
     "manifest_version": 1,
-    "build_version": "fixture-v6-enriched",
+    "build_version": "fixture-v11-refined",
     "generated_at": "2026-06-21T00:00:00Z",
-    "content_hash": "sha256:4302ac1757b141487fed584ec66ab731f662b1ce996850457e8c8b1046f78cf6",
+    "content_hash": "sha256:24927475b4ec712800074824582e1e4d09c05a22f6705cb03a7170d6ab61dcdd",
     "counts": {
-      "nodes": 1304,
-      "edges": 5400,
+      "nodes": 1294,
+      "edges": 5370,
       "puzzles": 180
     }
   },
@@ -56,10 +56,6 @@
     },
     {
       "id": "n_amintiri_copilarie",
-      "label_ro": "Amintiri din copilarie"
-    },
-    {
-      "id": "n_amintiri_din_copilarie",
       "label_ro": "Amintiri din copilarie"
     },
     {
@@ -227,10 +223,6 @@
       "label_ro": "Cheile Bicazului"
     },
     {
-      "id": "n_chirilica_romaneasca",
-      "label_ro": "Alfabetul chirilic romanesc"
-    },
-    {
       "id": "n_cibernetica",
       "label_ro": "Cibernetica"
     },
@@ -343,14 +335,6 @@
       "label_ro": "Dacia"
     },
     {
-      "id": "n_dacoromana",
-      "label_ro": "Dialectul dacoroman"
-    },
-    {
-      "id": "n_dadaism",
-      "label_ro": "Dadaism"
-    },
-    {
       "id": "n_dadaism_lit",
       "label_ro": "Dadaism"
     },
@@ -428,10 +412,6 @@
     },
     {
       "id": "n_emil_racovita",
-      "label_ro": "Emil Racovita"
-    },
-    {
-      "id": "n_emil_racovita_pers",
       "label_ro": "Emil Racovita"
     },
     {
@@ -991,10 +971,6 @@
       "label_ro": "Henri Coanda"
     },
     {
-      "id": "n_henri_coanda_pers",
-      "label_ro": "Henri Coanda"
-    },
-    {
       "id": "n_hermann_oberth",
       "label_ro": "Hermann Oberth"
     },
@@ -1049,10 +1025,6 @@
     {
       "id": "n_imprumuturi_slave",
       "label_ro": "Imprumuturile slave"
-    },
-    {
-      "id": "n_independenta_1877",
-      "label_ro": "Razboiul de Independenta 1877"
     },
     {
       "id": "n_insulina",
@@ -1843,10 +1815,6 @@
       "label_ro": "Nicolae Paulescu"
     },
     {
-      "id": "n_nobel",
-      "label_ro": "Premiul Nobel"
-    },
-    {
       "id": "n_nobel_medicina",
       "label_ro": "Premiul Nobel pentru Medicina"
     },
@@ -2105,10 +2073,6 @@
     {
       "id": "n_scoala_ardeleana",
       "label_ro": "Scoala Ardeleana"
-    },
-    {
-      "id": "n_scrisoarea_pierduta",
-      "label_ro": "O scrisoare pierduta"
     },
     {
       "id": "n_sculptura",
@@ -2516,10 +2480,6 @@
     },
     {
       "id": "n_tratatul_trianon",
-      "label_ro": "Tratatul de la Trianon"
-    },
-    {
-      "id": "n_trianon_1920",
       "label_ro": "Tratatul de la Trianon"
     },
     {
@@ -5280,7 +5240,7 @@
     {
       "id": "ae107",
       "src_id": "n_tristan_tzara",
-      "dst_id": "n_dadaism"
+      "dst_id": "n_dadaism_lit"
     },
     {
       "id": "ae108",
@@ -5290,7 +5250,7 @@
     {
       "id": "ae109",
       "src_id": "n_herta_muller",
-      "dst_id": "n_nobel"
+      "dst_id": "n_premiul_nobel"
     },
     {
       "id": "ae11",
@@ -5364,7 +5324,7 @@
     },
     {
       "id": "ae122",
-      "src_id": "n_dadaism",
+      "src_id": "n_dadaism_lit",
       "dst_id": "n_sculptura"
     },
     {
@@ -6235,7 +6195,7 @@
     {
       "id": "ae30",
       "src_id": "n_ion_luca_caragiale",
-      "dst_id": "n_scrisoarea_pierduta"
+      "dst_id": "n_o_scrisoare_pierduta"
     },
     {
       "id": "ae31",
@@ -6874,7 +6834,7 @@
     },
     {
       "id": "dd160",
-      "src_id": "n_chirilica_romaneasca",
+      "src_id": "n_alfabetul_chirilic",
       "dst_id": "n_voronet"
     },
     {
@@ -7144,7 +7104,7 @@
     },
     {
       "id": "dd2459",
-      "src_id": "n_dadaism",
+      "src_id": "n_dadaism_lit",
       "dst_id": "n_muzica_clasica"
     },
     {
@@ -7788,11 +7748,6 @@
       "dst_id": "n_limba_romana"
     },
     {
-      "id": "de104",
-      "src_id": "n_independenta_1877",
-      "dst_id": "n_carol_i"
-    },
-    {
       "id": "de1040",
       "src_id": "n_muz_pop_dance_ro",
       "dst_id": "n_paris"
@@ -7844,7 +7799,7 @@
     },
     {
       "id": "de105",
-      "src_id": "n_independenta_1877",
+      "src_id": "n_razboiul_independenta_1877",
       "dst_id": "n_imperiul_otoman"
     },
     {
@@ -7899,7 +7854,7 @@
     },
     {
       "id": "de106",
-      "src_id": "n_independenta_1877",
+      "src_id": "n_razboiul_independenta_1877",
       "dst_id": "n_regatul_romaniei"
     },
     {
@@ -8010,7 +7965,7 @@
     {
       "id": "de108",
       "src_id": "n_primul_razboi_mondial",
-      "dst_id": "n_trianon_1920"
+      "dst_id": "n_tratatul_trianon"
     },
     {
       "id": "de1080",
@@ -8123,11 +8078,6 @@
       "dst_id": "n_nicolae_grigorescu"
     },
     {
-      "id": "de110",
-      "src_id": "n_trianon_1920",
-      "dst_id": "n_transilvania"
-    },
-    {
       "id": "de1100",
       "src_id": "n_socx_universitatea_babes_bolyai",
       "dst_id": "n_cluj_napoca"
@@ -8176,11 +8126,6 @@
       "id": "de1109",
       "src_id": "n_socx_industria_romaneasca",
       "dst_id": "n_socx_combinatul_galati"
-    },
-    {
-      "id": "de111",
-      "src_id": "n_trianon_1920",
-      "dst_id": "n_marea_unire_1918"
     },
     {
       "id": "de1110",
@@ -8678,11 +8623,6 @@
       "dst_id": "n_impresionism"
     },
     {
-      "id": "de120",
-      "src_id": "n_dacoromana",
-      "dst_id": "n_limba_romana"
-    },
-    {
       "id": "de1200",
       "src_id": "n_ilie_nastase",
       "dst_id": "n_spt_nastase_numarul_1"
@@ -8786,11 +8726,6 @@
       "id": "de1219",
       "src_id": "n_spt_cristina_neagu",
       "dst_id": "n_spt_liga_campionilor_handbal"
-    },
-    {
-      "id": "de122",
-      "src_id": "n_aromana",
-      "dst_id": "n_dacoromana"
     },
     {
       "id": "de1220",
@@ -8955,7 +8890,7 @@
     {
       "id": "de125",
       "src_id": "n_limba_literara",
-      "dst_id": "n_dacoromana"
+      "dst_id": "n_dialectul_dacoroman"
     },
     {
       "id": "de1250",
@@ -9008,11 +8943,6 @@
       "dst_id": "n_v2art_dans_popular"
     },
     {
-      "id": "de126",
-      "src_id": "n_chirilica_romaneasca",
-      "dst_id": "n_limba_romana"
-    },
-    {
       "id": "de1260",
       "src_id": "n_festivalul_enescu",
       "dst_id": "n_v2art_muzica_culta"
@@ -9061,11 +8991,6 @@
       "id": "de1269",
       "src_id": "n_insulina",
       "dst_id": "n_medicina"
-    },
-    {
-      "id": "de127",
-      "src_id": "n_chirilica_romaneasca",
-      "dst_id": "n_alfabetul_latin"
     },
     {
       "id": "de1270",
@@ -9320,7 +9245,7 @@
     {
       "id": "de1315",
       "src_id": "n_vdr_copilaria_anilor_90",
-      "dst_id": "n_amintiri_din_copilarie"
+      "dst_id": "n_amintiri_copilarie"
     },
     {
       "id": "de1316",
@@ -11063,11 +10988,6 @@
       "dst_id": "n_gas_masa_paste"
     },
     {
-      "id": "de163",
-      "src_id": "n_ion_creanga",
-      "dst_id": "n_amintiri_din_copilarie"
-    },
-    {
       "id": "de1630",
       "src_id": "n_gas_masa_paste",
       "dst_id": "n_gas_ciorba_radauteana"
@@ -11119,7 +11039,7 @@
     },
     {
       "id": "de164",
-      "src_id": "n_amintiri_din_copilarie",
+      "src_id": "n_amintiri_copilarie",
       "dst_id": "n_moldova_reg"
     },
     {
@@ -11171,11 +11091,6 @@
       "id": "de1649",
       "src_id": "n_v2gas_desert",
       "dst_id": "n_ftv_chefi_la_cutite"
-    },
-    {
-      "id": "de165",
-      "src_id": "n_ion_luca_caragiale",
-      "dst_id": "n_o_scrisoare_pierduta"
     },
     {
       "id": "de1650",
@@ -11391,11 +11306,6 @@
       "id": "de1689",
       "src_id": "n_geox_retezat",
       "dst_id": "n_relief_romaniei"
-    },
-    {
-      "id": "de169",
-      "src_id": "n_tristan_tzara",
-      "dst_id": "n_dadaism_lit"
     },
     {
       "id": "de1690",
@@ -11993,11 +11903,6 @@
       "dst_id": "n_v2ist_razboi"
     },
     {
-      "id": "de1798",
-      "src_id": "n_razboiul_independenta_1877",
-      "dst_id": "n_regatul_romaniei"
-    },
-    {
       "id": "de1799",
       "src_id": "n_razboiul_independenta_1877",
       "dst_id": "n_v2ist_unire"
@@ -12313,11 +12218,6 @@
       "dst_id": "n_tratatul_trianon"
     },
     {
-      "id": "de1855",
-      "src_id": "n_v2ist_tratat",
-      "dst_id": "n_trianon_1920"
-    },
-    {
       "id": "de1856",
       "src_id": "n_v2ist_tratat",
       "dst_id": "n_perx_diplomatie"
@@ -12619,7 +12519,7 @@
     },
     {
       "id": "de191",
-      "src_id": "n_henri_coanda_pers",
+      "src_id": "n_henri_coanda",
       "dst_id": "n_inventator"
     },
     {
@@ -12798,16 +12698,6 @@
       "dst_id": "n_v2lim_scriere"
     },
     {
-      "id": "de1942",
-      "src_id": "n_alfabetul_chirilic",
-      "dst_id": "n_ortografie"
-    },
-    {
-      "id": "de1943",
-      "src_id": "n_alfabetul_chirilic",
-      "dst_id": "n_chirilica_romaneasca"
-    },
-    {
       "id": "de1944",
       "src_id": "n_lbax_dor",
       "dst_id": "n_v2lim_cuvant"
@@ -12836,11 +12726,6 @@
       "id": "de1949",
       "src_id": "n_istroromana",
       "dst_id": "n_v2lim_dialect"
-    },
-    {
-      "id": "de195",
-      "src_id": "n_efectul_coanda",
-      "dst_id": "n_henri_coanda_pers"
     },
     {
       "id": "de1950",
@@ -12891,11 +12776,6 @@
       "id": "de1959",
       "src_id": "n_morfologie",
       "dst_id": "n_v2lim_flexiune"
-    },
-    {
-      "id": "de196",
-      "src_id": "n_henri_coanda_pers",
-      "dst_id": "n_henri_coanda"
     },
     {
       "id": "de1960",
@@ -12949,7 +12829,7 @@
     },
     {
       "id": "de197",
-      "src_id": "n_henri_coanda_pers",
+      "src_id": "n_henri_coanda",
       "dst_id": "n_paris"
     },
     {
@@ -12966,11 +12846,6 @@
       "id": "de1972",
       "src_id": "n_amintiri_copilarie",
       "dst_id": "n_v2lit_roman_literar"
-    },
-    {
-      "id": "de1973",
-      "src_id": "n_amintiri_copilarie",
-      "dst_id": "n_vdr_copilaria_anilor_90"
     },
     {
       "id": "de1974",
@@ -13009,18 +12884,13 @@
     },
     {
       "id": "de1980",
-      "src_id": "n_scrisoarea_pierduta",
+      "src_id": "n_o_scrisoare_pierduta",
       "dst_id": "n_v2fil_comedie"
     },
     {
       "id": "de1981",
-      "src_id": "n_scrisoarea_pierduta",
+      "src_id": "n_o_scrisoare_pierduta",
       "dst_id": "n_v2lit_dramaturgie"
-    },
-    {
-      "id": "de1982",
-      "src_id": "n_scrisoarea_pierduta",
-      "dst_id": "n_artx_teatru_romanesc"
     },
     {
       "id": "de1983",
@@ -13123,11 +12993,6 @@
       "dst_id": "n_george_enescu"
     },
     {
-      "id": "de200",
-      "src_id": "n_emil_racovita_pers",
-      "dst_id": "n_emil_racovita"
-    },
-    {
       "id": "de2000",
       "src_id": "n_litx_zoe_trahanache",
       "dst_id": "n_litx_stefan_tipatescu"
@@ -13179,7 +13044,7 @@
     },
     {
       "id": "de201",
-      "src_id": "n_emil_racovita_pers",
+      "src_id": "n_emil_racovita",
       "dst_id": "n_cluj_napoca"
     },
     {
@@ -13234,7 +13099,7 @@
     },
     {
       "id": "de202",
-      "src_id": "n_emil_racovita_pers",
+      "src_id": "n_emil_racovita",
       "dst_id": "n_academia_romana"
     },
     {
@@ -13369,12 +13234,12 @@
     },
     {
       "id": "de2044",
-      "src_id": "n_amintiri_din_copilarie",
+      "src_id": "n_amintiri_copilarie",
       "dst_id": "n_v2lit_roman_literar"
     },
     {
       "id": "de2045",
-      "src_id": "n_amintiri_din_copilarie",
+      "src_id": "n_amintiri_copilarie",
       "dst_id": "n_v2lit_sat_romanesc"
     },
     {
@@ -13576,16 +13441,6 @@
       "id": "de2081",
       "src_id": "n_ion_creanga",
       "dst_id": "n_v2lit_sat_romanesc"
-    },
-    {
-      "id": "de2082",
-      "src_id": "n_o_scrisoare_pierduta",
-      "dst_id": "n_v2fil_comedie"
-    },
-    {
-      "id": "de2083",
-      "src_id": "n_o_scrisoare_pierduta",
-      "dst_id": "n_v2lit_dramaturgie"
     },
     {
       "id": "de2084",
@@ -15210,7 +15065,7 @@
     {
       "id": "de2376",
       "src_id": "n_v2per_scriitor_nobel",
-      "dst_id": "n_nobel"
+      "dst_id": "n_premiul_nobel"
     },
     {
       "id": "de2377",
@@ -15250,11 +15105,6 @@
     {
       "id": "de2383",
       "src_id": "n_tristan_tzara",
-      "dst_id": "n_v2lit_avangarda"
-    },
-    {
-      "id": "de2384",
-      "src_id": "n_dadaism",
       "dst_id": "n_v2lit_avangarda"
     },
     {
@@ -15318,11 +15168,6 @@
       "dst_id": "n_v2per_olimpiada"
     },
     {
-      "id": "de2396",
-      "src_id": "n_dadaism",
-      "dst_id": "n_modernism"
-    },
-    {
       "id": "de2397",
       "src_id": "n_herta_muller",
       "dst_id": "n_emigratie_romaneasca"
@@ -15331,11 +15176,6 @@
       "id": "de2398",
       "src_id": "n_herta_muller",
       "dst_id": "n_banat"
-    },
-    {
-      "id": "de2399",
-      "src_id": "n_nobel",
-      "dst_id": "n_premiul_nobel"
     },
     {
       "id": "de24",
@@ -15350,7 +15190,7 @@
     {
       "id": "de2400",
       "src_id": "n_nobel_medicina",
-      "dst_id": "n_nobel"
+      "dst_id": "n_premiul_nobel"
     },
     {
       "id": "de2401",
@@ -15468,13 +15308,8 @@
       "dst_id": "n_inventator"
     },
     {
-      "id": "de2422",
-      "src_id": "n_emil_racovita_pers",
-      "dst_id": "n_speologie"
-    },
-    {
       "id": "de2423",
-      "src_id": "n_emil_racovita_pers",
+      "src_id": "n_emil_racovita",
       "dst_id": "n_muzeul_antipa"
     },
     {
@@ -15528,13 +15363,8 @@
       "dst_id": "n_artx_hora"
     },
     {
-      "id": "de2433",
-      "src_id": "n_henri_coanda_pers",
-      "dst_id": "n_aviatie"
-    },
-    {
       "id": "de2434",
-      "src_id": "n_henri_coanda_pers",
+      "src_id": "n_henri_coanda",
       "dst_id": "n_aerodinamica"
     },
     {
@@ -16783,11 +16613,6 @@
       "dst_id": "n_v2spo_finala_sportiva"
     },
     {
-      "id": "de266",
-      "src_id": "n_henri_coanda",
-      "dst_id": "n_paris"
-    },
-    {
       "id": "de2660",
       "src_id": "n_spt_simona_wimbledon_2019",
       "dst_id": "n_v2spo_turneu_grand_slam"
@@ -17281,11 +17106,6 @@
       "id": "de2749",
       "src_id": "n_stefan_procopiu",
       "dst_id": "n_v2sti_fizica"
-    },
-    {
-      "id": "de275",
-      "src_id": "n_emil_racovita",
-      "dst_id": "n_cluj_napoca"
     },
     {
       "id": "de2750",
@@ -18820,7 +18640,7 @@
     {
       "id": "de3025",
       "src_id": "n_v3ist_independenta",
-      "dst_id": "n_independenta_1877"
+      "dst_id": "n_razboiul_independenta_1877"
     },
     {
       "id": "de3026",
@@ -18946,11 +18766,6 @@
       "id": "de3048",
       "src_id": "n_iancu_de_hunedoara",
       "dst_id": "n_transilvania"
-    },
-    {
-      "id": "de3049",
-      "src_id": "n_independenta_1877",
-      "dst_id": "n_razboiul_independenta_1877"
     },
     {
       "id": "de305",
@@ -19401,11 +19216,6 @@
       "id": "de313",
       "src_id": "n_moartea_domnului_lazarescu",
       "dst_id": "n_noul_val_romanesc"
-    },
-    {
-      "id": "de3130",
-      "src_id": "n_amintiri_copilarie",
-      "dst_id": "n_v2lit_sat_romanesc"
     },
     {
       "id": "de3131",
@@ -20194,7 +20004,7 @@
     },
     {
       "id": "de3273",
-      "src_id": "n_dadaism",
+      "src_id": "n_dadaism_lit",
       "dst_id": "n_generatia_interbelica"
     },
     {
@@ -26320,7 +26130,7 @@
     {
       "id": "de4376",
       "src_id": "n_v4per_geniu",
-      "dst_id": "n_henri_coanda_pers"
+      "dst_id": "n_henri_coanda"
     },
     {
       "id": "de4377",
@@ -26370,7 +26180,7 @@
     {
       "id": "de4385",
       "src_id": "n_v4ist_erou",
-      "dst_id": "n_henri_coanda_pers"
+      "dst_id": "n_henri_coanda"
     },
     {
       "id": "de4386",
@@ -26405,7 +26215,7 @@
     {
       "id": "de4391",
       "src_id": "n_v4per_profesor",
-      "dst_id": "n_emil_racovita_pers"
+      "dst_id": "n_emil_racovita"
     },
     {
       "id": "de4392",
@@ -26420,12 +26230,12 @@
     {
       "id": "de4394",
       "src_id": "n_v4per_savant",
-      "dst_id": "n_emil_racovita_pers"
+      "dst_id": "n_emil_racovita"
     },
     {
       "id": "de4395",
       "src_id": "n_v4per_savant",
-      "dst_id": "n_henri_coanda_pers"
+      "dst_id": "n_henri_coanda"
     },
     {
       "id": "de4396",
@@ -26440,7 +26250,7 @@
     {
       "id": "de4398",
       "src_id": "n_v4per_cercetator",
-      "dst_id": "n_emil_racovita_pers"
+      "dst_id": "n_emil_racovita"
     },
     {
       "id": "de4399",
@@ -26460,7 +26270,7 @@
     {
       "id": "de4400",
       "src_id": "n_v4per_cercetator",
-      "dst_id": "n_henri_coanda_pers"
+      "dst_id": "n_henri_coanda"
     },
     {
       "id": "de4401",
@@ -26490,12 +26300,12 @@
     {
       "id": "de4406",
       "src_id": "n_v4per_om_de_stiinta",
-      "dst_id": "n_emil_racovita_pers"
+      "dst_id": "n_emil_racovita"
     },
     {
       "id": "de4407",
       "src_id": "n_v4per_om_de_stiinta",
-      "dst_id": "n_henri_coanda_pers"
+      "dst_id": "n_henri_coanda"
     },
     {
       "id": "de4408",
@@ -29830,7 +29640,7 @@
     {
       "id": "de693",
       "src_id": "n_limba_romana",
-      "dst_id": "n_dacoromana"
+      "dst_id": "n_dialectul_dacoroman"
     },
     {
       "id": "de694",
@@ -29890,7 +29700,7 @@
     {
       "id": "de703",
       "src_id": "n_ortografie",
-      "dst_id": "n_chirilica_romaneasca"
+      "dst_id": "n_alfabetul_chirilic"
     },
     {
       "id": "de704",
@@ -32237,145 +32047,145 @@
     {
       "id": "pz_arta_cultura_easy_1",
       "start_id": "n_v3art_arta",
-      "target_id": "n_v4art_muzica",
+      "target_id": "n_v4art_scena",
       "difficulty": "easy"
     },
     {
       "id": "pz_arta_cultura_easy_2",
-      "start_id": "n_v3art_arta",
-      "target_id": "n_v4art_dans",
+      "start_id": "n_v4art_muzica",
+      "target_id": "n_v4art_scena",
       "difficulty": "easy"
     },
     {
       "id": "pz_arta_cultura_easy_3",
-      "start_id": "n_v4art_dans",
+      "start_id": "n_v3art_arta",
       "target_id": "n_v4art_muzica",
       "difficulty": "easy"
     },
     {
       "id": "pz_arta_cultura_easy_4",
-      "start_id": "n_v3art_arta",
-      "target_id": "n_v3art_cultura",
+      "start_id": "n_v4art_scena",
+      "target_id": "n_v4art_spectacol",
       "difficulty": "easy"
     },
     {
       "id": "pz_arta_cultura_easy_5",
       "start_id": "n_v3art_arta",
-      "target_id": "n_v4art_literatura",
+      "target_id": "n_v3art_cultura",
       "difficulty": "easy"
     },
     {
       "id": "pz_arta_cultura_easy_6",
-      "start_id": "n_v3art_cultura",
-      "target_id": "n_v4art_muzica",
+      "start_id": "n_v3art_arta",
+      "target_id": "n_v4art_spectacol",
       "difficulty": "easy"
     },
     {
       "id": "pz_arta_cultura_hard_1",
-      "start_id": "n_v4art_culoare",
-      "target_id": "n_v4art_muzica",
+      "start_id": "n_v3art_cultura",
+      "target_id": "n_v4art_scena",
       "difficulty": "hard"
     },
     {
       "id": "pz_arta_cultura_hard_2",
-      "start_id": "n_v4art_culoare",
-      "target_id": "n_v4art_dans",
+      "start_id": "n_v4art_dans",
+      "target_id": "n_v4art_scena",
       "difficulty": "hard"
     },
     {
       "id": "pz_arta_cultura_hard_3",
-      "start_id": "n_v4art_dans",
+      "start_id": "n_v3art_cultura",
       "target_id": "n_v4art_spectacol",
       "difficulty": "hard"
     },
     {
       "id": "pz_arta_cultura_hard_4",
       "start_id": "n_v4art_dans",
-      "target_id": "n_v4art_scena",
+      "target_id": "n_v4art_spectacol",
       "difficulty": "hard"
     },
     {
       "id": "pz_arta_cultura_hard_5",
-      "start_id": "n_v3art_artist",
-      "target_id": "n_v4art_muzica",
+      "start_id": "n_v4art_basm",
+      "target_id": "n_v4art_scena",
       "difficulty": "hard"
     },
     {
       "id": "pz_arta_cultura_hard_6",
       "start_id": "n_v3art_cultura",
-      "target_id": "n_v4art_spectacol",
+      "target_id": "n_v4art_festival",
       "difficulty": "hard"
     },
     {
       "id": "pz_film_tv_easy_1",
-      "start_id": "n_ftv_las_fierbinti",
-      "target_id": "n_v4fil_televizor",
+      "start_id": "n_v2fil_actor",
+      "target_id": "n_v3fil_film",
       "difficulty": "easy"
     },
     {
       "id": "pz_film_tv_easy_2",
-      "start_id": "n_v3fil_film",
-      "target_id": "n_v4fil_televizor",
+      "start_id": "n_v2fil_televiziune",
+      "target_id": "n_v3fil_film",
       "difficulty": "easy"
     },
     {
       "id": "pz_film_tv_easy_3",
       "start_id": "n_ftv_las_fierbinti",
-      "target_id": "n_v4fil_ecran",
+      "target_id": "n_v2fil_televiziune",
       "difficulty": "easy"
     },
     {
       "id": "pz_film_tv_easy_4",
-      "start_id": "n_ftv_las_fierbinti",
-      "target_id": "n_v4fil_stiri",
+      "start_id": "n_v2fil_actor",
+      "target_id": "n_v2fil_televiziune",
       "difficulty": "easy"
     },
     {
       "id": "pz_film_tv_easy_5",
-      "start_id": "n_ftv_las_fierbinti",
-      "target_id": "n_ftv_toma_caragiu",
+      "start_id": "n_v2fil_emisiune_tv",
+      "target_id": "n_v3fil_film",
       "difficulty": "easy"
     },
     {
       "id": "pz_film_tv_easy_6",
       "start_id": "n_ftv_las_fierbinti",
-      "target_id": "n_v2fil_televiziune",
+      "target_id": "n_v2fil_emisiune_tv",
       "difficulty": "easy"
     },
     {
       "id": "pz_film_tv_hard_1",
-      "start_id": "n_ftv_amza_pellea",
-      "target_id": "n_v4fil_televizor",
+      "start_id": "n_ftv_pro_tv",
+      "target_id": "n_ftv_toma_caragiu",
       "difficulty": "hard"
     },
     {
       "id": "pz_film_tv_hard_2",
       "start_id": "n_ftv_toma_caragiu",
-      "target_id": "n_v4fil_televizor",
+      "target_id": "n_ftv_tvr",
       "difficulty": "hard"
     },
     {
       "id": "pz_film_tv_hard_3",
-      "start_id": "n_ftv_amza_pellea",
-      "target_id": "n_v4fil_stiri",
+      "start_id": "n_ftv_tvr",
+      "target_id": "n_v2fil_comedie",
       "difficulty": "hard"
     },
     {
       "id": "pz_film_tv_hard_4",
       "start_id": "n_ftv_toma_caragiu",
-      "target_id": "n_v4fil_stiri",
+      "target_id": "n_v4fil_canal_tv",
       "difficulty": "hard"
     },
     {
       "id": "pz_film_tv_hard_5",
-      "start_id": "n_ftv_amza_pellea",
-      "target_id": "n_v4fil_canal_tv",
+      "start_id": "n_ftv_dem_radulescu",
+      "target_id": "n_ftv_pro_tv",
       "difficulty": "hard"
     },
     {
       "id": "pz_film_tv_hard_6",
-      "start_id": "n_ftv_toma_caragiu",
-      "target_id": "n_v4fil_canal_tv",
+      "start_id": "n_ftv_amza_pellea",
+      "target_id": "n_ftv_tvr",
       "difficulty": "hard"
     },
     {
@@ -32392,26 +32202,26 @@
     },
     {
       "id": "pz_gastronomie_easy_3",
-      "start_id": "n_gas_mamaliga",
-      "target_id": "n_gas_mici",
+      "start_id": "n_gas_sarmale",
+      "target_id": "n_gas_zacusca",
       "difficulty": "easy"
     },
     {
       "id": "pz_gastronomie_easy_4",
-      "start_id": "n_gas_sarmale",
-      "target_id": "n_v4gas_apa",
+      "start_id": "n_gas_mese_sarbatori",
+      "target_id": "n_gas_mici",
       "difficulty": "easy"
     },
     {
       "id": "pz_gastronomie_easy_5",
-      "start_id": "n_gas_mici",
+      "start_id": "n_gas_sarmale",
       "target_id": "n_v4gas_apa",
       "difficulty": "easy"
     },
     {
       "id": "pz_gastronomie_easy_6",
-      "start_id": "n_gas_sarmale",
-      "target_id": "n_v4gas_paine",
+      "start_id": "n_gas_mici",
+      "target_id": "n_gas_zacusca",
       "difficulty": "easy"
     },
     {
@@ -32428,176 +32238,176 @@
     },
     {
       "id": "pz_gastronomie_hard_3",
-      "start_id": "n_v3gas_pizza",
-      "target_id": "n_v4gas_apa",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_gastronomie_hard_4",
-      "start_id": "n_v4gas_carne",
-      "target_id": "n_v4gas_supa",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_gastronomie_hard_5",
       "start_id": "n_v4gas_masa",
       "target_id": "n_v4gas_paine",
       "difficulty": "hard"
     },
     {
+      "id": "pz_gastronomie_hard_4",
+      "start_id": "n_v3gas_clatite",
+      "target_id": "n_v4gas_apa",
+      "difficulty": "hard"
+    },
+    {
+      "id": "pz_gastronomie_hard_5",
+      "start_id": "n_gas_tuica",
+      "target_id": "n_v4gas_lapte",
+      "difficulty": "hard"
+    },
+    {
       "id": "pz_gastronomie_hard_6",
-      "start_id": "n_v4gas_apa",
-      "target_id": "n_v4gas_dulce",
+      "start_id": "n_v3gas_pizza",
+      "target_id": "n_v4gas_apa",
       "difficulty": "hard"
     },
     {
       "id": "pz_geografie_easy_1",
-      "start_id": "n_v3geo_tara",
-      "target_id": "n_v4geo_padure",
+      "start_id": "n_v2geo_munte",
+      "target_id": "n_v2geo_oras",
       "difficulty": "easy"
     },
     {
       "id": "pz_geografie_easy_2",
-      "start_id": "n_v3geo_tara",
-      "target_id": "n_v4geo_drum",
+      "start_id": "n_v2geo_oras",
+      "target_id": "n_v2geo_rau",
       "difficulty": "easy"
     },
     {
       "id": "pz_geografie_easy_3",
-      "start_id": "n_v3geo_tara",
-      "target_id": "n_v4geo_sat",
+      "start_id": "n_v2geo_munte",
+      "target_id": "n_v2geo_rau",
       "difficulty": "easy"
     },
     {
       "id": "pz_geografie_easy_4",
-      "start_id": "n_v4geo_padure",
-      "target_id": "n_v4geo_sat",
+      "start_id": "n_v2geo_oras",
+      "target_id": "n_v3geo_tara",
       "difficulty": "easy"
     },
     {
       "id": "pz_geografie_easy_5",
-      "start_id": "n_v4geo_drum",
-      "target_id": "n_v4geo_sat",
+      "start_id": "n_v2geo_oras",
+      "target_id": "n_v3geo_mare",
       "difficulty": "easy"
     },
     {
       "id": "pz_geografie_easy_6",
-      "start_id": "n_v3geo_tara",
-      "target_id": "n_v4geo_camp",
+      "start_id": "n_v2geo_munte",
+      "target_id": "n_v3geo_tara",
       "difficulty": "easy"
     },
     {
       "id": "pz_geografie_hard_1",
-      "start_id": "n_v4geo_drum",
-      "target_id": "n_v4geo_padure",
+      "start_id": "n_v2geo_munte",
+      "target_id": "n_v4geo_sat",
       "difficulty": "hard"
     },
     {
       "id": "pz_geografie_hard_2",
-      "start_id": "n_v3geo_continent",
-      "target_id": "n_v4geo_padure",
+      "start_id": "n_v2geo_munte",
+      "target_id": "n_v4geo_strada",
       "difficulty": "hard"
     },
     {
       "id": "pz_geografie_hard_3",
-      "start_id": "n_v4geo_padure",
-      "target_id": "n_v4geo_plaja",
+      "start_id": "n_v2geo_lac",
+      "target_id": "n_v3geo_tara",
       "difficulty": "hard"
     },
     {
       "id": "pz_geografie_hard_4",
-      "start_id": "n_v3geo_continent",
-      "target_id": "n_v4geo_drum",
+      "start_id": "n_v2geo_rau",
+      "target_id": "n_v3geo_continent",
       "difficulty": "hard"
     },
     {
       "id": "pz_geografie_hard_5",
-      "start_id": "n_v3geo_continent",
+      "start_id": "n_v2geo_lac",
       "target_id": "n_v4geo_sat",
       "difficulty": "hard"
     },
     {
       "id": "pz_geografie_hard_6",
-      "start_id": "n_v4geo_camp",
-      "target_id": "n_v4geo_drum",
+      "start_id": "n_v4geo_sat",
+      "target_id": "n_v4geo_teren",
       "difficulty": "hard"
     },
     {
       "id": "pz_istorie_easy_1",
       "start_id": "n_transilvania",
-      "target_id": "n_v4ist_istorie",
+      "target_id": "n_v2ist_razboi",
       "difficulty": "easy"
     },
     {
       "id": "pz_istorie_easy_2",
-      "start_id": "n_v4ist_istorie",
-      "target_id": "n_v4ist_trecut",
+      "start_id": "n_transilvania",
+      "target_id": "n_v4ist_erou",
       "difficulty": "easy"
     },
     {
       "id": "pz_istorie_easy_3",
-      "start_id": "n_transilvania",
-      "target_id": "n_v4ist_trecut",
+      "start_id": "n_v2ist_razboi",
+      "target_id": "n_v4ist_erou",
       "difficulty": "easy"
     },
     {
       "id": "pz_istorie_easy_4",
-      "start_id": "n_v2ist_razboi",
-      "target_id": "n_v4ist_istorie",
+      "start_id": "n_transilvania",
+      "target_id": "n_v2ist_batalie",
       "difficulty": "easy"
     },
     {
       "id": "pz_istorie_easy_5",
-      "start_id": "n_v4ist_erou",
-      "target_id": "n_v4ist_istorie",
+      "start_id": "n_v2ist_batalie",
+      "target_id": "n_v4ist_erou",
       "difficulty": "easy"
     },
     {
       "id": "pz_istorie_easy_6",
-      "start_id": "n_v4ist_istorie",
-      "target_id": "n_v4ist_popor",
+      "start_id": "n_transilvania",
+      "target_id": "n_v2ist_unire",
       "difficulty": "easy"
     },
     {
       "id": "pz_istorie_hard_1",
-      "start_id": "n_transilvania",
-      "target_id": "n_v4ist_regim",
+      "start_id": "n_v2ist_razboi",
+      "target_id": "n_v2ist_rege",
       "difficulty": "hard"
     },
     {
       "id": "pz_istorie_hard_2",
-      "start_id": "n_v4ist_istorie",
-      "target_id": "n_v4ist_tron",
+      "start_id": "n_v2ist_razboi",
+      "target_id": "n_v2ist_revolutie",
       "difficulty": "hard"
     },
     {
       "id": "pz_istorie_hard_3",
-      "start_id": "n_v4ist_an",
-      "target_id": "n_v4ist_erou",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_istorie_hard_4",
       "start_id": "n_v4ist_erou",
       "target_id": "n_v4ist_pace",
       "difficulty": "hard"
     },
     {
+      "id": "pz_istorie_hard_4",
+      "start_id": "n_v4ist_an",
+      "target_id": "n_v4ist_erou",
+      "difficulty": "hard"
+    },
+    {
       "id": "pz_istorie_hard_5",
-      "start_id": "n_v4ist_regim",
-      "target_id": "n_v4ist_trecut",
+      "start_id": "n_v2ist_batalie",
+      "target_id": "n_v2ist_revolutie",
       "difficulty": "hard"
     },
     {
       "id": "pz_istorie_hard_6",
-      "start_id": "n_v4ist_boier",
-      "target_id": "n_v4ist_istorie",
+      "start_id": "n_transilvania",
+      "target_id": "n_v4ist_regim",
       "difficulty": "hard"
     },
     {
       "id": "pz_limba_easy_1",
-      "start_id": "n_v3lim_limba",
-      "target_id": "n_v3lim_litera",
+      "start_id": "n_v2lim_cuvant",
+      "target_id": "n_v2lim_scriere",
       "difficulty": "easy"
     },
     {
@@ -32608,98 +32418,98 @@
     },
     {
       "id": "pz_limba_easy_3",
-      "start_id": "n_v3lim_limba",
-      "target_id": "n_v3lim_propozitie",
+      "start_id": "n_v2lim_scriere",
+      "target_id": "n_v4lim_sunet",
       "difficulty": "easy"
     },
     {
       "id": "pz_limba_easy_4",
       "start_id": "n_v3lim_limba",
-      "target_id": "n_v4lim_intrebare",
-      "difficulty": "easy"
-    },
-    {
-      "id": "pz_limba_easy_5",
-      "start_id": "n_v3lim_limba",
-      "target_id": "n_v4lim_nume",
-      "difficulty": "easy"
-    },
-    {
-      "id": "pz_limba_easy_6",
-      "start_id": "n_v3lim_limba",
       "target_id": "n_v4lim_sunet",
       "difficulty": "easy"
     },
     {
+      "id": "pz_limba_easy_5",
+      "start_id": "n_v2lim_cuvant",
+      "target_id": "n_v2lim_vocabular",
+      "difficulty": "easy"
+    },
+    {
+      "id": "pz_limba_easy_6",
+      "start_id": "n_v2lim_scriere",
+      "target_id": "n_v3lim_limba",
+      "difficulty": "easy"
+    },
+    {
       "id": "pz_limba_hard_1",
-      "start_id": "n_v3lim_litera",
-      "target_id": "n_v4lim_nume",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_limba_hard_2",
-      "start_id": "n_v3lim_limba",
-      "target_id": "n_v4lim_plural",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_limba_hard_3",
-      "start_id": "n_v3lim_limba",
-      "target_id": "n_v4lim_singular",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_limba_hard_4",
-      "start_id": "n_v3lim_litera",
-      "target_id": "n_v4lim_plural",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_limba_hard_5",
-      "start_id": "n_v3lim_litera",
-      "target_id": "n_v4lim_sens",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_limba_hard_6",
       "start_id": "n_v2lim_parte_de_vorbire",
       "target_id": "n_v3lim_litera",
       "difficulty": "hard"
     },
     {
-      "id": "pz_literatura_easy_1",
-      "start_id": "n_v3lit_carte",
-      "target_id": "n_v3lit_scriitor",
-      "difficulty": "easy"
+      "id": "pz_limba_hard_2",
+      "start_id": "n_v2lim_cartof",
+      "target_id": "n_v2lim_cuvant",
+      "difficulty": "hard"
     },
     {
-      "id": "pz_literatura_easy_2",
+      "id": "pz_limba_hard_3",
+      "start_id": "n_v2lim_cartof",
+      "target_id": "n_v2lim_scriere",
+      "difficulty": "hard"
+    },
+    {
+      "id": "pz_limba_hard_4",
+      "start_id": "n_v2lim_cuvant",
+      "target_id": "n_v2lim_varza",
+      "difficulty": "hard"
+    },
+    {
+      "id": "pz_limba_hard_5",
+      "start_id": "n_v2lim_scriere",
+      "target_id": "n_v2lim_varza",
+      "difficulty": "hard"
+    },
+    {
+      "id": "pz_limba_hard_6",
+      "start_id": "n_v2lim_cartof",
+      "target_id": "n_v4lim_text",
+      "difficulty": "hard"
+    },
+    {
+      "id": "pz_literatura_easy_1",
       "start_id": "n_v2lit_personaj_literar",
       "target_id": "n_v3lit_carte",
       "difficulty": "easy"
     },
     {
+      "id": "pz_literatura_easy_2",
+      "start_id": "n_v2lit_personaj_literar",
+      "target_id": "n_v2lit_roman_literar",
+      "difficulty": "easy"
+    },
+    {
       "id": "pz_literatura_easy_3",
       "start_id": "n_v3lit_carte",
-      "target_id": "n_v4lit_tema",
+      "target_id": "n_v3lit_scriitor",
       "difficulty": "easy"
     },
     {
       "id": "pz_literatura_easy_4",
+      "start_id": "n_v2lit_roman_literar",
+      "target_id": "n_v3lit_scriitor",
+      "difficulty": "easy"
+    },
+    {
+      "id": "pz_literatura_easy_5",
       "start_id": "n_v2lit_poezie_lirica",
       "target_id": "n_v3lit_carte",
       "difficulty": "easy"
     },
     {
-      "id": "pz_literatura_easy_5",
-      "start_id": "n_v3lit_autor",
-      "target_id": "n_v3lit_carte",
-      "difficulty": "easy"
-    },
-    {
       "id": "pz_literatura_easy_6",
-      "start_id": "n_v3lit_carte",
-      "target_id": "n_v4lit_proza",
+      "start_id": "n_v2lit_poezie_lirica",
+      "target_id": "n_v2lit_roman_literar",
       "difficulty": "easy"
     },
     {
@@ -32710,20 +32520,20 @@
     },
     {
       "id": "pz_literatura_hard_2",
-      "start_id": "n_v3lit_autor",
-      "target_id": "n_v4lit_titlu",
+      "start_id": "n_v4lit_mesaj",
+      "target_id": "n_v4lit_piesa",
       "difficulty": "hard"
     },
     {
       "id": "pz_literatura_hard_3",
-      "start_id": "n_v4lit_piesa",
-      "target_id": "n_v4lit_titlu",
+      "start_id": "n_v2lit_personaj_literar",
+      "target_id": "n_v3lit_vers",
       "difficulty": "hard"
     },
     {
       "id": "pz_literatura_hard_4",
-      "start_id": "n_v4lit_pagina",
-      "target_id": "n_v4lit_piesa",
+      "start_id": "n_v4lit_piesa",
+      "target_id": "n_v4lit_titlu",
       "difficulty": "hard"
     },
     {
@@ -32734,80 +32544,80 @@
     },
     {
       "id": "pz_literatura_hard_6",
-      "start_id": "n_v4lit_revista",
-      "target_id": "n_v4lit_titlu",
+      "start_id": "n_v2lit_limbaj_poetic",
+      "target_id": "n_v4lit_piesa",
       "difficulty": "hard"
     },
     {
       "id": "pz_meme_net_easy_1",
-      "start_id": "n_v4mem_internet",
-      "target_id": "n_v4mem_mema",
+      "start_id": "n_net_dorel",
+      "target_id": "n_net_internet_romanesc",
       "difficulty": "easy"
     },
     {
       "id": "pz_meme_net_easy_2",
-      "start_id": "n_v4mem_internet",
-      "target_id": "n_v4mem_video",
+      "start_id": "n_net_internet_romanesc",
+      "target_id": "n_v2mem_canal_youtube",
       "difficulty": "easy"
     },
     {
       "id": "pz_meme_net_easy_3",
-      "start_id": "n_v4mem_mema",
-      "target_id": "n_v4mem_video",
+      "start_id": "n_net_meme_romanesc",
+      "target_id": "n_v2mem_canal_youtube",
       "difficulty": "easy"
     },
     {
       "id": "pz_meme_net_easy_4",
-      "start_id": "n_v4mem_gluma",
-      "target_id": "n_v4mem_internet",
+      "start_id": "n_net_internet_romanesc",
+      "target_id": "n_v2mem_comedie_online",
       "difficulty": "easy"
     },
     {
       "id": "pz_meme_net_easy_5",
-      "start_id": "n_v4mem_gluma",
-      "target_id": "n_v4mem_mema",
+      "start_id": "n_net_internet_romanesc",
+      "target_id": "n_v2mem_replici_memorabile",
       "difficulty": "easy"
     },
     {
       "id": "pz_meme_net_easy_6",
-      "start_id": "n_v4mem_internet",
-      "target_id": "n_v4mem_postare",
+      "start_id": "n_net_meme_romanesc",
+      "target_id": "n_net_youtube_ro",
       "difficulty": "easy"
     },
     {
       "id": "pz_meme_net_hard_1",
-      "start_id": "n_v4mem_gluma",
-      "target_id": "n_v4mem_video",
+      "start_id": "n_net_dorel",
+      "target_id": "n_v4mem_like",
       "difficulty": "hard"
     },
     {
       "id": "pz_meme_net_hard_2",
-      "start_id": "n_v4mem_gluma",
-      "target_id": "n_v4mem_postare",
+      "start_id": "n_v2mem_comedie_online",
+      "target_id": "n_v4mem_like",
       "difficulty": "hard"
     },
     {
       "id": "pz_meme_net_hard_3",
-      "start_id": "n_v4mem_clip",
+      "start_id": "n_v2mem_feed_online",
       "target_id": "n_v4mem_gluma",
       "difficulty": "hard"
     },
     {
       "id": "pz_meme_net_hard_4",
-      "start_id": "n_v4mem_gluma",
-      "target_id": "n_v4mem_like",
+      "start_id": "n_v2mem_like_share",
+      "target_id": "n_v4mem_gluma",
       "difficulty": "hard"
     },
     {
       "id": "pz_meme_net_hard_5",
-      "start_id": "n_v4mem_gluma",
-      "target_id": "n_v4mem_viral",
+      "start_id": "n_v2mem_personaj_memetic",
+      "target_id": "n_v4mem_like",
       "difficulty": "hard"
     },
     {
       "id": "pz_meme_net_hard_6",
       "start_id": "n_v4mem_gluma",
-      "target_id": "n_v4mem_poza",
+      "target_id": "n_v4mem_video",
       "difficulty": "hard"
     },
     {
@@ -32818,248 +32628,248 @@
     },
     {
       "id": "pz_mixed_easy_2",
-      "start_id": "n_ftv_las_fierbinti",
-      "target_id": "n_gas_sarmale",
+      "start_id": "n_gas_mici",
+      "target_id": "n_v3fil_film",
       "difficulty": "easy"
     },
     {
       "id": "pz_mixed_easy_3",
-      "start_id": "n_ftv_las_fierbinti",
-      "target_id": "n_gas_mici",
+      "start_id": "n_gas_sarmale",
+      "target_id": "n_vdr_viata_de_roman",
       "difficulty": "easy"
     },
     {
       "id": "pz_mixed_easy_4",
-      "start_id": "n_gas_cozonac",
-      "target_id": "n_gas_sarmale",
+      "start_id": "n_gas_mici",
+      "target_id": "n_transilvania",
       "difficulty": "easy"
     },
     {
       "id": "pz_mixed_easy_5",
-      "start_id": "n_gas_sarmale",
-      "target_id": "n_v3geo_tara",
+      "start_id": "n_ftv_las_fierbinti",
+      "target_id": "n_gas_sarmale",
       "difficulty": "easy"
     },
     {
       "id": "pz_mixed_easy_6",
-      "start_id": "n_gas_sarmale",
-      "target_id": "n_v3lit_carte",
+      "start_id": "n_transilvania",
+      "target_id": "n_vdr_viata_de_roman",
       "difficulty": "easy"
     },
     {
       "id": "pz_mixed_hard_1",
-      "start_id": "n_gas_sarmale",
-      "target_id": "n_v4art_muzica",
+      "start_id": "n_v3fil_film",
+      "target_id": "n_v3muz_melodie",
       "difficulty": "hard"
     },
     {
       "id": "pz_mixed_hard_2",
-      "start_id": "n_gas_sarmale",
-      "target_id": "n_v4mem_internet",
+      "start_id": "n_transilvania",
+      "target_id": "n_v3muz_melodie",
       "difficulty": "hard"
     },
     {
       "id": "pz_mixed_hard_3",
-      "start_id": "n_gas_sarmale",
-      "target_id": "n_v4mem_mema",
+      "start_id": "n_v3fil_film",
+      "target_id": "n_vdr_viata_de_roman",
       "difficulty": "hard"
     },
     {
       "id": "pz_mixed_hard_4",
-      "start_id": "n_gas_sarmale",
-      "target_id": "n_v4soc_copil",
+      "start_id": "n_v3fil_film",
+      "target_id": "n_v3sti_experiment",
       "difficulty": "hard"
     },
     {
       "id": "pz_mixed_hard_5",
-      "start_id": "n_gas_mici",
-      "target_id": "n_spt_nadia_zecele_perfect",
+      "start_id": "n_v3muz_melodie",
+      "target_id": "n_vdr_viata_de_roman",
       "difficulty": "hard"
     },
     {
       "id": "pz_mixed_hard_6",
-      "start_id": "n_gas_mici",
-      "target_id": "n_v3lit_carte",
+      "start_id": "n_gas_sarmale",
+      "target_id": "n_vdr_viata_la_bloc",
       "difficulty": "hard"
     },
     {
       "id": "pz_muzica_easy_1",
-      "start_id": "n_muz_manele",
+      "start_id": "n_v2muz_concert",
       "target_id": "n_v3muz_melodie",
       "difficulty": "easy"
     },
     {
       "id": "pz_muzica_easy_2",
-      "start_id": "n_muz_ozone",
+      "start_id": "n_v3muz_chitara",
       "target_id": "n_v3muz_melodie",
       "difficulty": "easy"
     },
     {
       "id": "pz_muzica_easy_3",
-      "start_id": "n_v3muz_chitara",
-      "target_id": "n_v3muz_melodie",
+      "start_id": "n_muz_dragostea_din_tei",
+      "target_id": "n_v2muz_concert",
       "difficulty": "easy"
     },
     {
       "id": "pz_muzica_easy_4",
-      "start_id": "n_v3muz_melodie",
-      "target_id": "n_v4muz_voce",
-      "difficulty": "easy"
-    },
-    {
-      "id": "pz_muzica_easy_5",
-      "start_id": "n_muz_dragostea_din_tei",
-      "target_id": "n_muz_manele",
-      "difficulty": "easy"
-    },
-    {
-      "id": "pz_muzica_easy_6",
-      "start_id": "n_muz_dragostea_din_tei",
+      "start_id": "n_v2muz_concert",
       "target_id": "n_v3muz_chitara",
       "difficulty": "easy"
     },
     {
+      "id": "pz_muzica_easy_5",
+      "start_id": "n_v2muz_muzica_dance",
+      "target_id": "n_v3muz_melodie",
+      "difficulty": "easy"
+    },
+    {
+      "id": "pz_muzica_easy_6",
+      "start_id": "n_muz_muzica_petrecere",
+      "target_id": "n_v3muz_melodie",
+      "difficulty": "easy"
+    },
+    {
       "id": "pz_muzica_hard_1",
-      "start_id": "n_muz_dragostea_din_tei",
-      "target_id": "n_v4muz_voce",
+      "start_id": "n_v2muz_concert",
+      "target_id": "n_v2muz_rap_romanesc",
       "difficulty": "hard"
     },
     {
       "id": "pz_muzica_hard_2",
-      "start_id": "n_muz_ozone",
+      "start_id": "n_v2muz_muzica_dance",
       "target_id": "n_v3muz_chitara",
       "difficulty": "hard"
     },
     {
       "id": "pz_muzica_hard_3",
-      "start_id": "n_muz_ozone",
-      "target_id": "n_v4muz_voce",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_muzica_hard_4",
-      "start_id": "n_v3muz_chitara",
-      "target_id": "n_v4muz_voce",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_muzica_hard_5",
-      "start_id": "n_muz_bug_mafia",
+      "start_id": "n_v2muz_rap_romanesc",
       "target_id": "n_v3muz_chitara",
       "difficulty": "hard"
     },
     {
+      "id": "pz_muzica_hard_4",
+      "start_id": "n_muz_ozone",
+      "target_id": "n_v3muz_chitara",
+      "difficulty": "hard"
+    },
+    {
+      "id": "pz_muzica_hard_5",
+      "start_id": "n_v2muz_rap_romanesc",
+      "target_id": "n_v2muz_trupa_rock",
+      "difficulty": "hard"
+    },
+    {
       "id": "pz_muzica_hard_6",
-      "start_id": "n_muz_bug_mafia",
-      "target_id": "n_v4muz_voce",
+      "start_id": "n_muz_hip_hop_ro",
+      "target_id": "n_v3muz_chitara",
       "difficulty": "hard"
     },
     {
       "id": "pz_personalitati_easy_1",
-      "start_id": "n_v3per_personalitate",
-      "target_id": "n_v4per_om",
+      "start_id": "n_perx_regina_maria",
+      "target_id": "n_v2per_olimpiada",
       "difficulty": "easy"
     },
     {
       "id": "pz_personalitati_easy_2",
-      "start_id": "n_v4per_barbat",
-      "target_id": "n_v4per_om",
+      "start_id": "n_perx_regina_maria",
+      "target_id": "n_v4per_jucator",
       "difficulty": "easy"
     },
     {
       "id": "pz_personalitati_easy_3",
-      "start_id": "n_v4per_femeie",
-      "target_id": "n_v4per_om",
+      "start_id": "n_v2per_olimpiada",
+      "target_id": "n_v4per_jucator",
       "difficulty": "easy"
     },
     {
       "id": "pz_personalitati_easy_4",
-      "start_id": "n_v3per_personalitate",
-      "target_id": "n_v4per_barbat",
+      "start_id": "n_perx_regina_maria",
+      "target_id": "n_v4per_campion",
       "difficulty": "easy"
     },
     {
       "id": "pz_personalitati_easy_5",
-      "start_id": "n_v3per_personalitate",
-      "target_id": "n_v4per_femeie",
+      "start_id": "n_constantin_brancusi",
+      "target_id": "n_perx_regina_maria",
       "difficulty": "easy"
     },
     {
       "id": "pz_personalitati_easy_6",
-      "start_id": "n_v4per_barbat",
-      "target_id": "n_v4per_femeie",
+      "start_id": "n_constantin_brancusi",
+      "target_id": "n_v2per_olimpiada",
       "difficulty": "easy"
     },
     {
       "id": "pz_personalitati_hard_1",
-      "start_id": "n_v3per_pictor",
-      "target_id": "n_v4per_om",
+      "start_id": "n_paris",
+      "target_id": "n_v2per_olimpiada",
       "difficulty": "hard"
     },
     {
       "id": "pz_personalitati_hard_2",
-      "start_id": "n_v4per_om",
-      "target_id": "n_v4per_om_de_stiinta",
+      "start_id": "n_v2per_olimpiada",
+      "target_id": "n_v2per_opera",
       "difficulty": "hard"
     },
     {
       "id": "pz_personalitati_hard_3",
-      "start_id": "n_v3per_personalitate",
-      "target_id": "n_v3per_pictor",
+      "start_id": "n_paris",
+      "target_id": "n_v4per_jucator",
       "difficulty": "hard"
     },
     {
       "id": "pz_personalitati_hard_4",
-      "start_id": "n_v3per_pictor",
-      "target_id": "n_v4per_barbat",
+      "start_id": "n_paris",
+      "target_id": "n_v4per_campion",
       "difficulty": "hard"
     },
     {
       "id": "pz_personalitati_hard_5",
-      "start_id": "n_v3per_compozitor",
-      "target_id": "n_v4per_celebritate",
+      "start_id": "n_v2per_olimpiada",
+      "target_id": "n_v4per_profesor",
       "difficulty": "hard"
     },
     {
       "id": "pz_personalitati_hard_6",
-      "start_id": "n_v3per_personalitate",
-      "target_id": "n_v4per_om_de_stiinta",
+      "start_id": "n_perx_nicolae_iorga",
+      "target_id": "n_v2per_olimpiada",
       "difficulty": "hard"
     },
     {
       "id": "pz_societate_easy_1",
-      "start_id": "n_v4soc_copil",
-      "target_id": "n_v4soc_familie",
+      "start_id": "n_v3soc_lege",
+      "target_id": "n_v3soc_scoala",
       "difficulty": "easy"
     },
     {
       "id": "pz_societate_easy_2",
-      "start_id": "n_v4soc_bani",
-      "target_id": "n_v4soc_familie",
+      "start_id": "n_v2soc_stat",
+      "target_id": "n_v3soc_scoala",
       "difficulty": "easy"
     },
     {
       "id": "pz_societate_easy_3",
-      "start_id": "n_v4soc_casa",
-      "target_id": "n_v4soc_copil",
+      "start_id": "n_v3soc_lege",
+      "target_id": "n_v4soc_familie",
       "difficulty": "easy"
     },
     {
       "id": "pz_societate_easy_4",
-      "start_id": "n_v4soc_casa",
-      "target_id": "n_v4soc_familie",
-      "difficulty": "easy"
-    },
-    {
-      "id": "pz_societate_easy_5",
       "start_id": "n_v3soc_lege",
       "target_id": "n_v4soc_copil",
       "difficulty": "easy"
     },
     {
-      "id": "pz_societate_easy_6",
-      "start_id": "n_v3soc_lege",
+      "id": "pz_societate_easy_5",
+      "start_id": "n_v2soc_stat",
       "target_id": "n_v4soc_familie",
+      "difficulty": "easy"
+    },
+    {
+      "id": "pz_societate_easy_6",
+      "start_id": "n_v2soc_stat",
+      "target_id": "n_v4soc_copil",
       "difficulty": "easy"
     },
     {
@@ -33070,14 +32880,14 @@
     },
     {
       "id": "pz_societate_hard_2",
-      "start_id": "n_v4soc_bani",
-      "target_id": "n_v4soc_casa",
+      "start_id": "n_v4soc_copil",
+      "target_id": "n_v4soc_munca",
       "difficulty": "hard"
     },
     {
       "id": "pz_societate_hard_3",
-      "start_id": "n_v4soc_copil",
-      "target_id": "n_v4soc_munca",
+      "start_id": "n_v4soc_bani",
+      "target_id": "n_v4soc_casa",
       "difficulty": "hard"
     },
     {
@@ -33088,56 +32898,56 @@
     },
     {
       "id": "pz_societate_hard_5",
-      "start_id": "n_v3soc_politie",
-      "target_id": "n_v4soc_casa",
+      "start_id": "n_v2soc_alegeri",
+      "target_id": "n_v4soc_bani",
       "difficulty": "hard"
     },
     {
       "id": "pz_societate_hard_6",
-      "start_id": "n_v4soc_biserica",
+      "start_id": "n_v2soc_alegeri",
       "target_id": "n_v4soc_munca",
       "difficulty": "hard"
     },
     {
       "id": "pz_sport_easy_1",
-      "start_id": "n_spt_romania_argentina_1994",
-      "target_id": "n_v4spo_sport",
+      "start_id": "n_spt_generatia_de_aur",
+      "target_id": "n_v3spo_meci",
       "difficulty": "easy"
     },
     {
       "id": "pz_sport_easy_2",
-      "start_id": "n_v4spo_echipa",
-      "target_id": "n_v4spo_sport",
+      "start_id": "n_spt_nadia_zecele_perfect",
+      "target_id": "n_v3spo_meci",
       "difficulty": "easy"
     },
     {
       "id": "pz_sport_easy_3",
-      "start_id": "n_spt_romania_argentina_1994",
-      "target_id": "n_v4spo_echipa",
+      "start_id": "n_spt_world_cup_1994",
+      "target_id": "n_v3spo_meci",
       "difficulty": "easy"
     },
     {
       "id": "pz_sport_easy_4",
-      "start_id": "n_v3spo_minge",
-      "target_id": "n_v4spo_sport",
+      "start_id": "n_v2spo_campion_olimpic",
+      "target_id": "n_v3spo_meci",
       "difficulty": "easy"
     },
     {
       "id": "pz_sport_easy_5",
       "start_id": "n_spt_generatia_de_aur",
-      "target_id": "n_v4spo_sport",
+      "target_id": "n_spt_romania_argentina_1994",
       "difficulty": "easy"
     },
     {
       "id": "pz_sport_easy_6",
-      "start_id": "n_spt_nadia_zecele_perfect",
-      "target_id": "n_spt_simona_wimbledon_2019",
+      "start_id": "n_v2spo_baschet",
+      "target_id": "n_v3spo_meci",
       "difficulty": "easy"
     },
     {
       "id": "pz_sport_hard_1",
-      "start_id": "n_spt_nadia_zecele_perfect",
-      "target_id": "n_v4spo_sport",
+      "start_id": "n_spt_generatia_de_aur",
+      "target_id": "n_spt_nadia_zecele_perfect",
       "difficulty": "hard"
     },
     {
@@ -33149,103 +32959,103 @@
     {
       "id": "pz_sport_hard_3",
       "start_id": "n_spt_nadia_zecele_perfect",
-      "target_id": "n_v4spo_echipa",
+      "target_id": "n_spt_world_cup_1994",
       "difficulty": "hard"
     },
     {
       "id": "pz_sport_hard_4",
-      "start_id": "n_spt_generatia_de_aur",
-      "target_id": "n_spt_nadia_zecele_perfect",
+      "start_id": "n_spt_david_popovici",
+      "target_id": "n_v3spo_meci",
       "difficulty": "hard"
     },
     {
       "id": "pz_sport_hard_5",
-      "start_id": "n_spt_simona_wimbledon_2019",
-      "target_id": "n_v4spo_sport",
+      "start_id": "n_spt_generatia_de_aur",
+      "target_id": "n_spt_simona_wimbledon_2019",
       "difficulty": "hard"
     },
     {
       "id": "pz_sport_hard_6",
-      "start_id": "n_spt_nadia_zecele_perfect",
-      "target_id": "n_v4spo_stadion",
+      "start_id": "n_spt_helmut_duckadam",
+      "target_id": "n_spt_nadia_zecele_perfect",
       "difficulty": "hard"
     },
     {
       "id": "pz_stiinta_easy_1",
-      "start_id": "n_v3sti_experiment",
-      "target_id": "n_v4sti_aer",
+      "start_id": "n_v2sti_biologie",
+      "target_id": "n_v2sti_fizica",
       "difficulty": "easy"
     },
     {
       "id": "pz_stiinta_easy_2",
-      "start_id": "n_v4sti_aer",
-      "target_id": "n_v4sti_animal",
+      "start_id": "n_v2sti_chimie",
+      "target_id": "n_v2sti_fizica",
       "difficulty": "easy"
     },
     {
       "id": "pz_stiinta_easy_3",
-      "start_id": "n_v3sti_energie",
-      "target_id": "n_v4sti_aer",
+      "start_id": "n_v2sti_biologie",
+      "target_id": "n_v2sti_chimie",
       "difficulty": "easy"
     },
     {
       "id": "pz_stiinta_easy_4",
-      "start_id": "n_v4sti_aer",
-      "target_id": "n_v4sti_foc",
+      "start_id": "n_v2sti_fizica",
+      "target_id": "n_v2sti_matematica",
       "difficulty": "easy"
     },
     {
       "id": "pz_stiinta_easy_5",
-      "start_id": "n_v4sti_aer",
-      "target_id": "n_v4sti_planta",
+      "start_id": "n_v2sti_biologie",
+      "target_id": "n_v2sti_matematica",
       "difficulty": "easy"
     },
     {
       "id": "pz_stiinta_easy_6",
-      "start_id": "n_v3sti_experiment",
-      "target_id": "n_v4sti_animal",
+      "start_id": "n_v2sti_avion",
+      "target_id": "n_v3sti_experiment",
       "difficulty": "easy"
     },
     {
       "id": "pz_stiinta_hard_1",
-      "start_id": "n_v4sti_aer",
-      "target_id": "n_v4sti_microb",
+      "start_id": "n_v2sti_avion",
+      "target_id": "n_v2sti_matematica",
       "difficulty": "hard"
     },
     {
       "id": "pz_stiinta_hard_2",
-      "start_id": "n_v3sti_adn",
-      "target_id": "n_v4sti_aer",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_stiinta_hard_3",
-      "start_id": "n_v4sti_aer",
-      "target_id": "n_v4sti_peste",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_stiinta_hard_4",
-      "start_id": "n_v4sti_aer",
-      "target_id": "n_v4sti_piele",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_stiinta_hard_5",
       "start_id": "n_v2sti_avion",
       "target_id": "n_v4sti_animal",
       "difficulty": "hard"
     },
     {
+      "id": "pz_stiinta_hard_3",
+      "start_id": "n_v2sti_avion",
+      "target_id": "n_v4sti_virus",
+      "difficulty": "hard"
+    },
+    {
+      "id": "pz_stiinta_hard_4",
+      "start_id": "n_v2sti_avion",
+      "target_id": "n_v4sti_corp",
+      "difficulty": "hard"
+    },
+    {
+      "id": "pz_stiinta_hard_5",
+      "start_id": "n_v2sti_avion",
+      "target_id": "n_v2sti_celula",
+      "difficulty": "hard"
+    },
+    {
       "id": "pz_stiinta_hard_6",
-      "start_id": "n_v3sti_planeta",
-      "target_id": "n_v4sti_animal",
+      "start_id": "n_v2sti_avion",
+      "target_id": "n_v4sti_microb",
       "difficulty": "hard"
     },
     {
       "id": "pz_viata_de_roman_easy_1",
-      "start_id": "n_vdr_ciocolata_rom",
-      "target_id": "n_vdr_viata_de_roman",
+      "start_id": "n_vdr_copilaria_anilor_90",
+      "target_id": "n_vdr_viata_la_bloc",
       "difficulty": "easy"
     },
     {
@@ -33256,62 +33066,62 @@
     },
     {
       "id": "pz_viata_de_roman_easy_3",
-      "start_id": "n_v2via_sarbatori_familie",
-      "target_id": "n_vdr_viata_de_roman",
+      "start_id": "n_vdr_sarmale_craciun",
+      "target_id": "n_vdr_viata_la_bloc",
       "difficulty": "easy"
     },
     {
       "id": "pz_viata_de_roman_easy_4",
-      "start_id": "n_v4via_usa",
-      "target_id": "n_vdr_viata_de_roman",
+      "start_id": "n_vdr_lasa_ca_merge",
+      "target_id": "n_vdr_viata_la_bloc",
       "difficulty": "easy"
     },
     {
       "id": "pz_viata_de_roman_easy_5",
+      "start_id": "n_vdr_copilaria_anilor_90",
+      "target_id": "n_vdr_sarmale_craciun",
+      "difficulty": "easy"
+    },
+    {
+      "id": "pz_viata_de_roman_easy_6",
       "start_id": "n_vdr_bloc",
       "target_id": "n_vdr_viata_de_roman",
       "difficulty": "easy"
     },
     {
-      "id": "pz_viata_de_roman_easy_6",
-      "start_id": "n_vdr_eugenia",
-      "target_id": "n_vdr_viata_de_roman",
-      "difficulty": "easy"
-    },
-    {
       "id": "pz_viata_de_roman_hard_1",
-      "start_id": "n_v4via_usa",
-      "target_id": "n_vdr_ciocolata_rom",
+      "start_id": "n_v2via_sarbatori_familie",
+      "target_id": "n_vdr_bloc",
       "difficulty": "hard"
     },
     {
       "id": "pz_viata_de_roman_hard_2",
-      "start_id": "n_v4via_usa",
-      "target_id": "n_vdr_sarmale_craciun",
+      "start_id": "n_vdr_bloc",
+      "target_id": "n_vdr_gospodaria_bunicilor",
       "difficulty": "hard"
     },
     {
       "id": "pz_viata_de_roman_hard_3",
-      "start_id": "n_v4via_baie",
-      "target_id": "n_vdr_ciocolata_rom",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_viata_de_roman_hard_4",
-      "start_id": "n_vdr_cheia_de_la_gat",
-      "target_id": "n_vdr_sarmale_craciun",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_viata_de_roman_hard_5",
       "start_id": "n_v2via_jocuri_copilarie",
       "target_id": "n_vdr_sarmale_craciun",
       "difficulty": "hard"
     },
     {
+      "id": "pz_viata_de_roman_hard_4",
+      "start_id": "n_v2via_masa_in_familie",
+      "target_id": "n_vdr_copilaria_anilor_90",
+      "difficulty": "hard"
+    },
+    {
+      "id": "pz_viata_de_roman_hard_5",
+      "start_id": "n_vdr_eugenia",
+      "target_id": "n_vdr_punga_cu_pungi",
+      "difficulty": "hard"
+    },
+    {
       "id": "pz_viata_de_roman_hard_6",
-      "start_id": "n_v2via_sarbatori_familie",
-      "target_id": "n_v4via_usa",
+      "start_id": "n_v2via_jocuri_copilarie",
+      "target_id": "n_vdr_punga_cu_pungi",
       "difficulty": "hard"
     }
   ]

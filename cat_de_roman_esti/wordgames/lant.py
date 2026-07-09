@@ -213,14 +213,34 @@ def _branch_profile(
     return first_hop, min_width, total_on_path
 
 
-def _pair_score(start: str, target: str, first_hop: int, min_width: int, total: int) -> float:
-    """Rank candidate pairs: reward branchiness, salient endpoints and richer webs."""
+# Per-difficulty weight on endpoint salience (v11): easier tiers strongly prefer
+# recognizable endpoints; ``greu`` mostly ignores fame so it can pick obscure endpoints.
+# Meaningful now that salience is recalibrated into balanced tiers (ADR-none; STATUS v11).
+_SALIENCE_WEIGHT = {"usor": 16.0, "normal": 9.0, "greu": 2.0}
+
+
+def _pair_score(
+    start: str,
+    target: str,
+    first_hop: int,
+    min_width: int,
+    total: int,
+    salience_weight: float = 4.0,
+) -> float:
+    """Rank candidate pairs: reward branchiness, salient endpoints and richer webs.
+
+    ``salience_weight`` is set by difficulty so easier games favour famous endpoints.
+    """
     salience = (_salience(start) + _salience(target)) / 2
-    return min_width * 10 + first_hop * 3 + total + salience * 4
+    return min_width * 10 + first_hop * 3 + total + salience * salience_weight
 
 
 def _pick_pair(
-    rng: random.Random, lo: int, hi: int, category: str | None = None
+    rng: random.Random,
+    lo: int,
+    hi: int,
+    category: str | None = None,
+    difficulty: str = _DEFAULT_DIFFICULTY,
 ) -> tuple[str, str, int]:
     """Pick a (start, target) whose distance is in [lo, hi].
 
@@ -242,6 +262,7 @@ def _pick_pair(
             raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
         raise http_error(503, "Graful nu are noduri jucabile.")
     endpoint_ok = set(candidates)
+    sal_weight = _SALIENCE_WEIGHT.get(difficulty, 4.0)
 
     best_good: tuple[float, str, str, int] | None = None
     good_count = 0
@@ -269,7 +290,7 @@ def _pick_pair(
             first_hop, min_width, total = _branch_profile(
                 start, target, optimal, dist_from_target
             )
-            score = _pair_score(start, target, first_hop, min_width, total)
+            score = _pair_score(start, target, first_hop, min_width, total, sal_weight)
             if best_any is None or score > best_any[0]:
                 best_any = (score, start, target, optimal)
             if first_hop >= _MIN_FIRST_HOP_CHOICES and min_width >= _MIN_LAYER_WIDTH:
@@ -327,7 +348,7 @@ class CreateGameView(ContractAPIView):
             pack_id: str | None = curated.id
         else:
             rng = random.Random(seed)
-            start, target, optimal = _pick_pair(rng, lo, hi, category)
+            start, target, optimal = _pick_pair(rng, lo, hi, category, difficulty)
             pack_id = None
         session = LantSession(
             start=start,
