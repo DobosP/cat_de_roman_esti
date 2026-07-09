@@ -10,4 +10,8 @@ from django.test import Client
 
 def test_me_reports_accounts_disabled():
     body = Client().get("/api/me").json()
-    assert body == {"accounts_enabled": False, "authenticated": False, "user": None}
+    assert body["accounts_enabled"] is False
+    assert body["authenticated"] is False
+    assert body["user"] is None
+    # donate_url is surfaced in both modes so the anonymous arcade can show the button.
+    assert "donate_url" in body

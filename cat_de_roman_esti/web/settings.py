@@ -265,3 +265,8 @@ LOGGING = {
 CAT_MIN_SELF_CONSENT_AGE = int(os.environ.get("CAT_MIN_SELF_CONSENT_AGE", "16"))
 # Version stamp stored on every consent record so a policy change can force re-consent.
 CAT_CONSENT_VERSION = os.environ.get("CAT_CONSENT_VERSION", "2026-07-09")
+
+# Donations are the monetisation strategy (ONG donation-first). When set, the SPA shows a
+# "Donează" button linking here (both modes). Empty = the button is hidden. The real
+# donation page/provider (Stripe / redirecționează.ro / the ONG's link) is an owner task.
+CAT_DONATE_URL = os.environ.get("CAT_DONATE_URL", "").strip()

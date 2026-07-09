@@ -12,6 +12,7 @@ import Alchimie from "./screens/Alchimie";
 import CaldRece from "./screens/CaldRece";
 import Lant from "./screens/Lant";
 import Conexiuni from "./screens/Conexiuni";
+import Ranking from "./screens/Ranking";
 import AccountBar from "./components/AccountBar";
 
 export type { ToastKind };
@@ -102,6 +103,14 @@ export default function App() {
               element={
                 <ScreenFrame>
                   <Conexiuni onExit={goHome} onToast={pushToast} />
+                </ScreenFrame>
+              }
+            />
+            <Route
+              path="/clasament"
+              element={
+                <ScreenFrame>
+                  <Ranking />
                 </ScreenFrame>
               }
             />

@@ -735,3 +735,21 @@ input:focus-visible {
 .account-check { display: flex; gap: 0.5rem; align-items: flex-start; margin-bottom: 0.6rem; font-size: 0.95rem; }
 .account-check a { color: var(--brand-cobalt, #4ea8ff); }
 .account-actions { display: flex; justify-content: flex-end; gap: 0.6rem; margin-top: 1rem; }
+
+/* ── Ranking + donate additions ───────────────────────────────────────────────────── */
+.account-anchor { position: relative; display: inline-flex; }
+.account-btn--donate { background: var(--brand-coral, #ff5470); color: #fff; border: none; text-decoration: none; }
+.account-btn { text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; }
+
+.rank-row { transition: border-color 0.15s ease; }
+.rank-row--me {
+  border-color: var(--brand-gold, #ffd166);
+  box-shadow: 0 0 0 1px var(--brand-gold, #ffd166) inset;
+}
+.rank-num {
+  min-width: 2rem; text-align: center; font-weight: 800;
+  font-variant-numeric: tabular-nums; color: var(--text-dim, #a99fd0);
+}
+.rank-num--1 { color: #ffd166; }
+.rank-num--2 { color: #cfd8e3; }
+.rank-num--3 { color: #e0a06a; }

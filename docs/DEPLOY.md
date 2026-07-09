@@ -10,6 +10,15 @@ Two shippable shapes:
 This document covers publishing the **accounts** stack on a single EU VPS (Hetzner), fronted
 by Cloudflare, with TLS via Caddy. The anonymous arcade is a subset (skip Postgres/OAuth).
 
+**Product model.** The game is **always free to play without an account.** An account exists
+for one reason: **to appear on the public ranking** (`/clasament`) with a chosen nickname +
+score — anyone can *view* the ranking, you only need to sign in to *appear* on it. Money comes
+from **donations**: set `CAT_DONATE_URL` to your donation page and a "Donează" button shows in
+both modes (real provider/ONG page is an owner task). The ranking shows a **nickname, never the
+real name/email**, is opt-in (`show_on_ranking`, toggle in the account menu), and under-16
+self-service accounts stay blocked — so v1's ranking is effectively 16+. Letting minors rank
+(pseudonymously, with verifiable parental consent) is a **new DPIA** — see `docs/compliance/`.
+
 > **Go-live gate.** The accounts stack collects personal data from possibly-minor users. Do
 > **not** point real users at it until the [Go-live compliance checklist](#go-live-compliance-checklist)
 > is satisfied and the `docs/compliance/` drafts have been completed + lawyer-reviewed. Until
@@ -130,6 +139,11 @@ The accounts stack must not serve real users until these are done (see `docs/com
 - [ ] **DSAR + deletion** verified on a demo account (the app exposes account deletion; also
       document the export/erasure request path + SLA).
 - [ ] **72h breach** runbook + incident + DSAR registers in place; contact email published.
+- [ ] **Public ranking** reviewed: it shows chosen nicknames only (no real name/email),
+      is opt-in, and — if you want under-16 players to rank — a new DPIA + parental-consent
+      flow is done (otherwise ranking stays 16+).
+- [ ] **Donations**: `CAT_DONATE_URL` points at the real donation page (Stripe link /
+      redirecționează.ro / ONG page); the receiving entity + tax treatment confirmed.
 - [ ] `manage.py check --deploy` clean; secure cookies, CSRF, rate-limit on `/accounts/*` and
       `/api/me/*` confirmed; no OAuth tokens logged.
 - [ ] Backup taken **and a restore drill proven**.

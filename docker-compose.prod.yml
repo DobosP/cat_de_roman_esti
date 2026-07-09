@@ -50,6 +50,7 @@ services:
       CAT_KG_FIXTURE: ${CAT_KG_FIXTURE:-cat_de_roman_esti/fixtures/kg_real.json}
       CAT_HSTS_SECONDS: ${CAT_HSTS_SECONDS:-0}
       CAT_CONSENT_VERSION: ${CAT_CONSENT_VERSION:-2026-07-09}
+      CAT_DONATE_URL: ${CAT_DONATE_URL:-}
       CAT_SUBMISSIONS_DIR: /data/submissions
     volumes:
       - ./deploy/entrypoint.sh:/app/entrypoint.sh:ro

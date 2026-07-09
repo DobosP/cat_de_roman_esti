@@ -19,6 +19,7 @@ from __future__ import annotations
 import pydantic
 from django.conf import settings
 from django.contrib.auth import logout as django_logout
+from django.db.models import Max
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -50,20 +51,25 @@ def _google_extra(user) -> dict:
         return {}
 
 
+def _default_handle(user, extra: dict) -> str:
+    """A first-name-ish default handle for the ranking (user can change it)."""
+    given = (extra.get("given_name") or extra.get("name") or "").strip()
+    return (given or (user.email or "").split("@")[0] or "").strip()[:80]
+
+
 def _user_payload(user) -> dict:
     profile = _profile_for(user)
     extra = _google_extra(user)
-    name = (
-        profile.display_name
-        or extra.get("name")
-        or (user.get_full_name() or "").strip()
-        or (user.email or "").split("@")[0]
-    )
     return {
         "id": user.id,
         "email": user.email or extra.get("email", ""),
-        "name": name,
+        # `name` = the account holder's name (for the chip); `ranking_name` = the public
+        # handle shown on the leaderboard (a nickname, never the email).
+        "name": profile.display_name or extra.get("name") or _default_handle(user, extra),
         "avatar": extra.get("picture", ""),
+        "ranking_name": profile.ranking_name(),
+        "display_name": profile.display_name,
+        "show_on_ranking": profile.show_on_ranking,
         "consent_completed": profile.consent_completed,
         "can_save_progress": profile.can_save_progress(),
         "is_minor": profile.is_minor,
@@ -85,6 +91,7 @@ class MeView(_SessionAuthedView):
         base = {
             "accounts_enabled": True,
             "min_self_consent_age": settings.CAT_MIN_SELF_CONSENT_AGE,
+            "donate_url": getattr(settings, "CAT_DONATE_URL", ""),
         }
         if request.user and request.user.is_authenticated:
             return Response({**base, "authenticated": True, "user": _user_payload(request.user)})
@@ -103,6 +110,8 @@ class _ConsentBody(pydantic.BaseModel):
     birth_year: int = pydantic.Field(ge=1900, le=2100)
     accept_privacy: bool
     accept_tos: bool
+    # Optional ranking handle chosen at sign-up (a nickname). Defaulted from Google if blank.
+    display_name: str = pydantic.Field(default="", max_length=80)
 
 
 class ConsentView(_SessionAuthedView):
@@ -139,9 +148,38 @@ class ConsentView(_SessionAuthedView):
         profile.parental_consent_required = False
         profile.consent_completed = True
         profile.consent_version = version
+        # Set the ranking handle: the chosen nickname, else a first-name default.
+        chosen = body.display_name.strip()
+        profile.display_name = chosen or profile.display_name or _default_handle(
+            request.user, _google_extra(request.user)
+        )
         profile.save()
         for doc in (ConsentRecord.PRIVACY, ConsentRecord.TOS):
             ConsentRecord.objects.create(user=request.user, document=doc, version=version)
+        return Response({"status": "ok", "user": _user_payload(request.user)})
+
+
+class _ProfileBody(pydantic.BaseModel):
+    display_name: str | None = pydantic.Field(default=None, max_length=80)
+    show_on_ranking: bool | None = None
+
+
+class ProfileView(_SessionAuthedView):
+    """Update the ranking handle + visibility (POST /api/me/profile)."""
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request) -> Response:
+        body = parse_data(request, _ProfileBody)
+        profile = _profile_for(request.user)
+        if body.display_name is not None:
+            handle = body.display_name.strip()
+            if not handle:
+                raise http_error(400, "Numele din clasament nu poate fi gol.")
+            profile.display_name = handle[:80]
+        if body.show_on_ranking is not None:
+            profile.show_on_ranking = body.show_on_ranking
+        profile.save()
         return Response({"status": "ok", "user": _user_payload(request.user)})
 
 
@@ -211,3 +249,46 @@ class DeleteAccountView(_SessionAuthedView):
         django_logout(request)
         user.delete()
         return Response({"ok": True})
+
+
+_RANKING_MAX = 200
+
+
+class RankingView(_SessionAuthedView):
+    """Public leaderboard — anyone can VIEW it; you only need an account to APPEAR on it.
+
+    Shows the best score per opted-in, consented player (their chosen nickname, never the
+    email/avatar), highest first. When the requester is signed in, ``me`` carries their own
+    rank + best score so the SPA can show "you are #N".
+    """
+
+    permission_classes = [AllowAny]
+
+    def get(self, request) -> Response:
+        game = (request.query_params.get("game") or "").strip()
+        try:
+            limit = int(request.query_params.get("limit") or 50)
+        except ValueError:
+            limit = 50
+        limit = max(1, min(limit, _RANKING_MAX))
+
+        eligible = {
+            p.user_id: p
+            for p in Profile.objects.filter(consent_completed=True, show_on_ranking=True)
+        }
+        qs = ScoreEntry.objects.filter(user_id__in=list(eligible.keys()))
+        if game:
+            qs = qs.filter(game=game)
+        best = list(qs.values("user").annotate(best=Max("score")).order_by("-best", "user"))
+
+        entries = [
+            {"rank": i, "name": eligible[row["user"]].ranking_name(), "score": row["best"]}
+            for i, row in enumerate(best[:limit], start=1)
+        ]
+        me = None
+        if getattr(request, "user", None) and request.user.is_authenticated:
+            for i, row in enumerate(best, start=1):
+                if row["user"] == request.user.id:
+                    me = {"rank": i, "score": row["best"]}
+                    break
+        return Response({"game": game or None, "entries": entries, "me": me})

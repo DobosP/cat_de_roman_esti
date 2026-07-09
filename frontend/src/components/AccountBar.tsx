@@ -1,17 +1,19 @@
-// AccountBar — the top-right account affordance for the arcade (accounts ON only).
+// AccountBar — the fixed top-right cluster: Donează (if configured), Clasament link
+// (when accounts are on), and the account affordance (Sign in with Google → RO age-16
+// consent gate → signed-in chip). Renders one useAuth() for the whole bar.
 //
-// Renders nothing when accounts are disabled or still loading, so the anonymous/offline
-// arcade is visually unchanged. Otherwise: a "Sign in with Google" button, the RO age-16
-// consent gate for freshly-signed-in users, a restricted notice for under-age accounts, or
-// the signed-in chip (name/avatar + logout + delete-my-data).
+// Anonymous/offline play is never gated: you only need an account to APPEAR on the ranking.
+// When accounts are disabled the bar shows just the Donează button (if a URL is set).
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   type AuthUser,
   deleteAccount,
   loginWithGoogle,
   logout,
   submitConsent,
+  updateProfile,
 } from "../api/auth";
 import { useAuth } from "../hooks/useAuth";
 
@@ -19,26 +21,53 @@ const CURRENT_YEAR = new Date().getFullYear();
 
 export default function AccountBar() {
   const { me, loading, refresh } = useAuth();
-  if (loading || !me || !me.accounts_enabled) return null;
+  if (loading || !me) return null;
 
+  const donate = me.donate_url ? (
+    <a
+      className="account-btn account-btn--donate"
+      href={me.donate_url}
+      target="_blank"
+      rel="noreferrer"
+    >
+      ♥ Donează
+    </a>
+  ) : null;
+
+  const ranking = me.accounts_enabled ? (
+    <Link className="account-btn" to="/clasament">
+      🏆 Clasament
+    </Link>
+  ) : null;
+
+  return (
+    <div className="account-bar">
+      {donate}
+      {ranking}
+      {me.accounts_enabled && <AccountSection me={me} refresh={refresh} />}
+    </div>
+  );
+}
+
+function AccountSection({
+  me,
+  refresh,
+}: {
+  me: { authenticated: boolean; user: AuthUser | null; min_self_consent_age?: number };
+  refresh: () => Promise<void>;
+}) {
   if (!me.authenticated || !me.user) {
     return (
-      <div className="account-bar">
-        <button type="button" className="account-btn account-btn--google" onClick={loginWithGoogle}>
-          Intră cu Google
-        </button>
-      </div>
+      <button type="button" className="account-btn account-btn--google" onClick={loginWithGoogle}>
+        Intră cu Google
+      </button>
     );
   }
-
   const user = me.user;
   if (!user.consent_completed) {
-    if (user.parental_consent_required) {
-      return <RestrictedNotice onLogout={refresh} />;
-    }
+    if (user.parental_consent_required) return <RestrictedNotice onLogout={refresh} />;
     return <ConsentGate minAge={me.min_self_consent_age ?? 16} onResolved={refresh} />;
   }
-
   return <UserChip user={user} onChanged={refresh} />;
 }
 
@@ -49,8 +78,7 @@ function RestrictedNotice({ onLogout }: { onLogout: () => Promise<void> }) {
         <h2>Cont restricționat</h2>
         <p>
           Conform legii, copiii sub 16 ani au nevoie de acordul unui părinte pentru a-și crea
-          un cont. Poți juca în continuare fără cont — progresul se salvează pe acest
-          dispozitiv.
+          un cont. Poți juca în continuare fără cont — nu apari însă în clasament.
         </p>
         <p className="account-muted">
           Un flux de consimțământ al părintelui va fi disponibil în curând.
@@ -74,6 +102,7 @@ function RestrictedNotice({ onLogout }: { onLogout: () => Promise<void> }) {
 
 function ConsentGate({ minAge, onResolved }: { minAge: number; onResolved: () => Promise<void> }) {
   const [birthYear, setBirthYear] = useState("");
+  const [handle, setHandle] = useState("");
   const [accepted, setAccepted] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -91,7 +120,7 @@ function ConsentGate({ minAge, onResolved }: { minAge: number; onResolved: () =>
     setBusy(true);
     setError(null);
     try {
-      await submitConsent(year, true);
+      await submitConsent(year, true, handle.trim());
     } finally {
       setBusy(false);
       await onResolved();
@@ -102,7 +131,17 @@ function ConsentGate({ minAge, onResolved }: { minAge: number; onResolved: () =>
     <div className="account-overlay">
       <div className="account-card">
         <h2>Un pas rapid</h2>
-        <p>Pentru a-ți salva progresul în cont, confirmă vârsta și acceptă regulile.</p>
+        <p>Ca să apari în clasament, confirmă vârsta, alege un nume și acceptă regulile.</p>
+        <label className="account-field">
+          <span>Numele din clasament (poți folosi o poreclă)</span>
+          <input
+            type="text"
+            maxLength={80}
+            value={handle}
+            onChange={(e) => setHandle(e.target.value)}
+            placeholder="ex. VulpeaIsteata"
+          />
+        </label>
         <label className="account-field">
           <span>Anul nașterii</span>
           <input
@@ -116,11 +155,7 @@ function ConsentGate({ minAge, onResolved }: { minAge: number; onResolved: () =>
           />
         </label>
         <label className="account-check">
-          <input
-            type="checkbox"
-            checked={accepted}
-            onChange={(e) => setAccepted(e.target.checked)}
-          />
+          <input type="checkbox" checked={accepted} onChange={(e) => setAccepted(e.target.checked)} />
           <span>
             Am citit și accept{" "}
             <a href="/legal/privacy" target="_blank" rel="noreferrer">
@@ -133,9 +168,7 @@ function ConsentGate({ minAge, onResolved }: { minAge: number; onResolved: () =>
             .
           </span>
         </label>
-        <p className="account-muted">
-          Copiii sub {minAge} ani au nevoie de acordul unui părinte.
-        </p>
+        <p className="account-muted">Copiii sub {minAge} ani au nevoie de acordul unui părinte.</p>
         {error && <p className="account-error">{error}</p>}
         <div className="account-actions">
           <button
@@ -164,10 +197,22 @@ function ConsentGate({ minAge, onResolved }: { minAge: number; onResolved: () =>
 
 function UserChip({ user, onChanged }: { user: AuthUser; onChanged: () => Promise<void> }) {
   const [open, setOpen] = useState(false);
-  const initial = (user.name || user.email || "?").slice(0, 1).toUpperCase();
+  const initial = (user.ranking_name || user.name || "?").slice(0, 1).toUpperCase();
+
+  const editName = async () => {
+    const next = window.prompt("Numele afișat în clasament:", user.ranking_name);
+    if (next === null || !next.trim()) return;
+    await updateProfile({ display_name: next.trim() });
+    await onChanged();
+  };
+
+  const toggleRanking = async () => {
+    await updateProfile({ show_on_ranking: !user.show_on_ranking });
+    await onChanged();
+  };
 
   return (
-    <div className="account-bar">
+    <div className="account-anchor">
       <button
         type="button"
         className="account-chip"
@@ -180,10 +225,16 @@ function UserChip({ user, onChanged }: { user: AuthUser; onChanged: () => Promis
         ) : (
           <span className="account-avatar account-avatar--letter">{initial}</span>
         )}
-        <span className="account-name">{user.name}</span>
+        <span className="account-name">{user.ranking_name}</span>
       </button>
       {open && (
         <div className="account-menu" role="menu">
+          <button type="button" role="menuitem" onClick={editName}>
+            Editează numele
+          </button>
+          <button type="button" role="menuitem" onClick={toggleRanking}>
+            {user.show_on_ranking ? "Ascunde-mă din clasament" : "Apari în clasament"}
+          </button>
           <a href="/legal/privacy" target="_blank" rel="noreferrer" role="menuitem">
             Confidențialitate
           </a>

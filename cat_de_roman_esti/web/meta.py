@@ -126,8 +126,20 @@ def healthz(request: HttpRequest) -> JsonResponse:
 
 
 def me_disabled(request: HttpRequest) -> JsonResponse:
-    """`/api/me` when accounts are OFF: report the feature disabled so the SPA hides login."""
-    return JsonResponse({"accounts_enabled": False, "authenticated": False, "user": None})
+    """`/api/me` when accounts are OFF: report the feature disabled so the SPA hides login.
+
+    Still carries ``donate_url`` so the anonymous arcade can show the Donează button.
+    """
+    from django.conf import settings
+
+    return JsonResponse(
+        {
+            "accounts_enabled": False,
+            "authenticated": False,
+            "user": None,
+            "donate_url": getattr(settings, "CAT_DONATE_URL", ""),
+        }
+    )
 
 
 def api_not_found(request: HttpRequest, *args, **kwargs) -> JsonResponse:

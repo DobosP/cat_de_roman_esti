@@ -9,6 +9,10 @@ export interface AuthUser {
   email: string;
   name: string;
   avatar: string;
+  /** Public handle shown on the ranking (a nickname, never the email). */
+  ranking_name: string;
+  display_name: string;
+  show_on_ranking: boolean;
   consent_completed: boolean;
   can_save_progress: boolean;
   is_minor: boolean;
@@ -20,6 +24,20 @@ export interface MeResponse {
   authenticated: boolean;
   user: AuthUser | null;
   min_self_consent_age?: number;
+  /** When set, the SPA shows a "Donează" button (both modes). */
+  donate_url?: string;
+}
+
+export interface RankingRow {
+  rank: number;
+  name: string;
+  score: number;
+}
+
+export interface RankingResponse {
+  game: string | null;
+  entries: RankingRow[];
+  me: { rank: number; score: number } | null;
 }
 
 export class AuthError extends Error {
@@ -76,12 +94,30 @@ export interface ConsentResponse {
   min_self_consent_age?: number;
 }
 
-export const submitConsent = (birthYear: number, accept: boolean): Promise<ConsentResponse> =>
+export const submitConsent = (
+  birthYear: number,
+  accept: boolean,
+  displayName?: string,
+): Promise<ConsentResponse> =>
   request<ConsentResponse>("POST", "/api/me/consent", {
     birth_year: birthYear,
     accept_privacy: accept,
     accept_tos: accept,
+    display_name: displayName ?? "",
   });
+
+export const updateProfile = (patch: {
+  display_name?: string;
+  show_on_ranking?: boolean;
+}): Promise<{ status: string; user: AuthUser }> =>
+  request("POST", "/api/me/profile", patch);
+
+export const getRanking = (game?: string, limit = 50): Promise<RankingResponse> => {
+  const q = new URLSearchParams();
+  if (game) q.set("game", game);
+  q.set("limit", String(limit));
+  return request<RankingResponse>("GET", `/api/ranking?${q.toString()}`);
+};
 
 export const deleteAccount = (): Promise<{ ok: boolean }> =>
   request<{ ok: boolean }>("POST", "/api/me/delete");

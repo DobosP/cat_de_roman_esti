@@ -35,13 +35,22 @@ class Profile(models.Model):
     # Under-threshold accounts cannot save progress until a verifiable parental-consent
     # flow is completed (not yet implemented; see docs/compliance/consent-and-age-gate-spec).
     parental_consent_required = models.BooleanField(default=False)
+    # Public handle shown on the ranking (a chosen nickname, NOT the real Google name;
+    # defaulted from the Google given name at consent but freely editable).
     display_name = models.CharField(max_length=80, blank=True)
+    # Whether this player appears on the public ranking. The whole point of an account is
+    # to be on the ranking, so it defaults on; users can opt out (privacy) at any time.
+    show_on_ranking = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def can_save_progress(self) -> bool:
         """Progress persistence is gated on a completed adult/self consent."""
         return self.consent_completed and not self.parental_consent_required
+
+    def ranking_name(self) -> str:
+        """The label to show on the public ranking (never the email)."""
+        return (self.display_name or "").strip() or f"Jucător {self.user_id}"
 
     def __str__(self) -> str:  # pragma: no cover - admin/repr convenience
         return f"Profile<{self.user_id}>"
