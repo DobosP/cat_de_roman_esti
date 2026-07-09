@@ -24,7 +24,7 @@ from pydantic import BaseModel
 from rest_framework.response import Response
 
 from ..web.http import ContractAPIView, http_error, parse_body, query_int, query_str
-from .categories import category_label, is_known
+from .categories import category_label, is_known, known_keys
 from .packs import get_pack
 from .service import SessionStore, daily_seed, get_service
 
@@ -115,12 +115,29 @@ store: SessionStore[AlchimieSession] = SessionStore()
 
 
 # --------------------------------------------------------------------- instance builder
-def _closure_with_generations(seeds: list[str]) -> dict[str, int]:
+# A themed Alchimie game needs a category with enough combinable nodes to reach a target
+# a few generations deep. Every known category (~80-100 nodes) clears this comfortably.
+_SCOPE_MIN_NODES = SEED_MAX + 4
+
+
+def _pick_scope_category(rng: random.Random, svc) -> str | None:
+    """Deterministically pick a themed category for a mined (un-requested) game."""
+    usable = sorted(c for c in known_keys() if len(svc.by_category(c)) >= _SCOPE_MIN_NODES)
+    return rng.choice(usable) if usable else None
+
+
+def _closure_with_generations(
+    seeds: list[str], category: str | None = None
+) -> dict[str, int]:
     """Combine-closure of ``seeds`` mapping every reachable id -> its generation.
 
     Generation 0 are the seeds; generation 1 are direct common neighbours of two seeds;
     generation N nodes first appear when combining items available after generation N-1.
     Fixpoint loop: keep combining all owned pairs until nothing new appears.
+
+    ``category`` scopes every combine to that category's subgraph (ADR-0013): the game is
+    always themed, so on the dense graph the closure stays ~a category (bounded, with real
+    depth) instead of exploding to the whole graph (everything craftable in ~2 gens).
     """
     svc = get_service()
     gen: dict[str, int] = {s: 0 for s in seeds}
@@ -132,7 +149,7 @@ def _closure_with_generations(seeds: list[str]) -> dict[str, int]:
         g += 1
         fresh: set[str] = set()
         for a, b in combinations(sorted(owned), 2):
-            for c in svc.common_neighbors(a, b):
+            for c in svc.common_neighbors(a, b, category=category):
                 if c not in owned and c not in fresh:
                     fresh.add(c)
                     gen.setdefault(c, g)
@@ -142,7 +159,7 @@ def _closure_with_generations(seeds: list[str]) -> dict[str, int]:
     return gen
 
 
-def _opening_pair_count(seeds: list[str]) -> int:
+def _opening_pair_count(seeds: list[str], category: str | None = None) -> int:
     """How many of the seed-inventory pairs already yield a *fresh* common neighbour.
 
     A high count means the player has several visible openings and never has to
@@ -152,18 +169,21 @@ def _opening_pair_count(seeds: list[str]) -> int:
     owned = set(seeds)
     count = 0
     for a, b in combinations(sorted(owned), 2):
-        if any(c not in owned for c in svc.common_neighbors(a, b)):
+        if any(c not in owned for c in svc.common_neighbors(a, b, category=category)):
             count += 1
     return count
 
 
-def _grow_seed_set(rng: random.Random, k: int, pool: list[str]) -> list[str] | None:
+def _grow_seed_set(
+    rng: random.Random, k: int, pool: list[str], category: str | None = None
+) -> list[str] | None:
     """Grow a *connected, combinable* seed set of size ``k``.
 
     Start from a salient, well-connected node, then keep adding nodes that introduce a
     NEW productive pair with something already owned. This avoids the old failure mode
     where seeds were sampled independently and most shared nothing (dead weight), leaving
-    only a single productive pairing in the whole inventory.
+    only a single productive pairing in the whole inventory. Combines are category-scoped
+    (ADR-0013) so seeds are wired to each other *within the theme*.
     """
     svc = get_service()
     starts = [n for n in pool if svc.degree(n) >= 3]
@@ -181,7 +201,7 @@ def _grow_seed_set(rng: random.Random, k: int, pool: list[str]) -> list[str] | N
         creates_link = len(owned) < 2 or any(
             c not in owned and c != cand
             for o in owned
-            for c in svc.common_neighbors(cand, o)
+            for c in svc.common_neighbors(cand, o, category=category)
         )
         if creates_link:
             owned.append(cand)
@@ -205,6 +225,10 @@ def _build_session(
     """
     svc = get_service()
     min_gen, max_gen, seed_min, seed_max = _difficulty_params(difficulty)
+    # Alchimie is ALWAYS themed (ADR-0013): if no category was requested, pick one so the
+    # combine-closure stays bounded to a category subgraph instead of the whole dense graph.
+    if category is None:
+        category = _pick_scope_category(rng, svc)
     members = set(svc.by_category(category)) if category is not None else None
 
     def _in_scope(nid: str) -> bool:
@@ -231,6 +255,7 @@ def _build_session(
             target_depth=depth,
             difficulty=difficulty,
             daily=daily,
+            category=category,
         )
         for s in seeds:
             session.add(s, None)
@@ -239,11 +264,11 @@ def _build_session(
     best_relaxed: tuple[list[str], str, int] | None = None
     for _ in range(MAX_BUILD_ATTEMPTS):
         k = rng.randint(seed_min, min(seed_max, len(pool)))
-        seeds = _grow_seed_set(rng, k, pool)
+        seeds = _grow_seed_set(rng, k, pool, category)
         if seeds is None:
             continue
-        openings = _opening_pair_count(seeds)
-        gen = _closure_with_generations(seeds)
+        openings = _opening_pair_count(seeds, category)
+        gen = _closure_with_generations(seeds, category)
         # Candidates satisfying this difficulty's depth window AND recognizable.
         cands = [
             nid
@@ -277,7 +302,7 @@ def _build_session(
         if svc.degree(nid) >= SEED_MIN_DEGREE and _in_scope(nid)
     ]
     seeds = rng.sample(fallback_pool, min(seed_max, len(fallback_pool)))
-    gen = _closure_with_generations(seeds)
+    gen = _closure_with_generations(seeds, category)
     deep = [
         nid
         for nid, depth in gen.items()
@@ -302,15 +327,16 @@ def _useful_pair(session: AlchimieSession) -> tuple[str, str] | None:
     if session.won:
         return None
     svc = get_service()
+    cat = session.category
     owned = set(session.owned)
-    base_gen = _closure_with_generations(list(owned)).get(session.target)
+    base_gen = _closure_with_generations(list(owned), cat).get(session.target)
     if base_gen is None or base_gen == 0:
         return None
     for a, b in combinations(sorted(owned), 2):
-        fresh = [c for c in svc.common_neighbors(a, b) if c not in owned]
+        fresh = [c for c in svc.common_neighbors(a, b, category=cat) if c not in owned]
         if not fresh:
             continue
-        new_gen = _closure_with_generations(list(owned | set(fresh))).get(session.target)
+        new_gen = _closure_with_generations(list(owned | set(fresh)), cat).get(session.target)
         if new_gen is not None and new_gen < base_gen:
             return (a, b)
     return None
@@ -456,15 +482,16 @@ class CreateGameView(ContractAPIView):
                 target_depth=int(curated.payload["target_depth"]),
                 difficulty=difficulty,
                 daily=daily,
-                # Echo only a player-requested theme (curated dailies stay themeless).
-                category=category,
+                # The item's OWN category scopes combines (ADR-0013); Alchimie shows the
+                # target label so the theme is not a hidden secret — always set + echoed.
+                category=curated.category,
                 pack_id=curated.id,
             )
             for s in session.seeds:
                 session.add(s, None)
         else:
+            # _build_session always resolves a scope category (picks one if none requested).
             session = _build_session(rng, difficulty=difficulty, daily=daily, category=category)
-            session.category = category
         game_id = store.create(session)
         return Response(_state_payload(game_id, session))
 
@@ -498,7 +525,13 @@ class CombineView(ContractAPIView):
             raise http_error(400, "Alege doua concepte diferite.")
 
         session.moves += 1
-        discovered = [c for c in svc.common_neighbors(a, b) if c not in session.owned]
+        # Combines are scoped to the game's category (ADR-0013) so the reachable set
+        # matches the closure the target_depth/score were computed against.
+        discovered = [
+            c
+            for c in svc.common_neighbors(a, b, category=session.category)
+            if c not in session.owned
+        ]
         for c in discovered:
             session.add(c, (a, b))
 

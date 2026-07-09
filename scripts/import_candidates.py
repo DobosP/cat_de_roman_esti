@@ -132,12 +132,14 @@ def rederive_existing_items(pack: dict, svc, report: list[str]) -> dict[str, lis
                     continue
                 rec["optimal"], rec["difficulty"] = actual, band
             elif game == "alchimie":
-                depth = _closure_generations(svc, [str(s) for s in rec["seeds"]]).get(
-                    str(rec["target"])
-                )
+                # Combines are category-scoped (ADR-0013): re-derive the depth in-category
+                # and drop items whose target is no longer craftable within the theme.
+                cat = str(rec.get("category") or "") or None
+                seeds = [str(s) for s in rec["seeds"]]
+                depth = _closure_generations(svc, seeds, cat).get(str(rec["target"]))
                 band = _band_for(depth, str(rec["difficulty"]), ALCH_BANDS) if depth else None
-                if band is None or _opening_pairs(svc, [str(s) for s in rec["seeds"]]) < 2:
-                    report.append(f"DROPPED {rec['id']}: closure depth now {depth}")
+                if band is None or _opening_pairs(svc, seeds, cat) < 2:
+                    report.append(f"DROPPED {rec['id']}: in-category closure depth now {depth}")
                     continue
                 rec["target_depth"], rec["difficulty"] = depth, band
             if validate_envelope(rec, game) or (

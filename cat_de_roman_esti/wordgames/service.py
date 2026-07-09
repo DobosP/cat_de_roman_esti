@@ -45,11 +45,16 @@ class WordGameService:
     # normalized label / id -> node id (built once)
     _index: dict[str, str] = field(default_factory=dict)
     _adj: dict[str, set[str]] = field(default_factory=dict)
+    # category -> its node ids (for category-scoped combine math; ADR-0013)
+    _cat_members: dict[str, frozenset[str]] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
+        cat_members: dict[str, set[str]] = {}
         for node in self.graph.nodes.values():
             self._index[normalize(node.label_ro)] = node.id
             self._index[normalize(node.id)] = node.id
+            cat_members.setdefault(node.category, set()).add(node.id)
+        self._cat_members = {c: frozenset(ids) for c, ids in cat_members.items()}
         # Aliases (ADR-0012): alternate exact surface forms — inflections, synonyms,
         # short titles — resolve to the same node. Labels/ids always win, and the
         # deterministic (sorted) order makes any residual collision stable; the
@@ -99,11 +104,20 @@ class WordGameService:
         e = self.link(a, b)
         return e.label_ro if e else ""
 
-    def common_neighbors(self, a: str, b: str) -> list[str]:
-        """Nodes adjacent (non-distractor) to BOTH a and b — the 'combine' result set."""
+    def common_neighbors(self, a: str, b: str, *, category: str | None = None) -> list[str]:
+        """Nodes adjacent (non-distractor) to BOTH a and b — the 'combine' result set.
+
+        With ``category``, the result is restricted to nodes in that category. Alchimie
+        uses this so the combine-closure stays within a theme (ADR-0013): on the dense
+        graph the unscoped closure reaches ~the whole graph (every target craftable in
+        ~2 gens, and slow); a category subgraph (~90 nodes) restores deliberate steps.
+        """
         if a not in self._adj or b not in self._adj:
             return []
-        return sorted(self._adj[a] & self._adj[b])
+        common = self._adj[a] & self._adj[b]
+        if category is not None:
+            common = common & self._cat_members.get(category, frozenset())
+        return sorted(common)
 
     def distance(self, a: str, b: str) -> int | None:
         """BFS hop count on the non-distractor subgraph, or None if unreachable."""

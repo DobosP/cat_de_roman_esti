@@ -89,8 +89,14 @@ def item_fields(game: str) -> set[str]:
 
 
 # --------------------------------------------------------------------- validation
-def _closure_generations(svc: WordGameService, seeds: list[str]) -> dict[str, int]:
-    """Combine-closure generation map (mirrors the Alchimie instance builder)."""
+def _closure_generations(
+    svc: WordGameService, seeds: list[str], category: str | None = None
+) -> dict[str, int]:
+    """Combine-closure generation map (mirrors the Alchimie instance builder).
+
+    ``category`` scopes every combine to that category's subgraph (ADR-0013), matching
+    the runtime game — an unscoped closure reaches ~the whole dense graph.
+    """
     gen: dict[str, int] = {s: 0 for s in seeds}
     owned = set(seeds)
     g = 0
@@ -100,7 +106,7 @@ def _closure_generations(svc: WordGameService, seeds: list[str]) -> dict[str, in
         g += 1
         fresh: set[str] = set()
         for a, b in combinations(sorted(owned), 2):
-            for c in svc.common_neighbors(a, b):
+            for c in svc.common_neighbors(a, b, category=category):
                 if c not in owned and c not in fresh:
                     fresh.add(c)
                     gen.setdefault(c, g)
@@ -110,11 +116,11 @@ def _closure_generations(svc: WordGameService, seeds: list[str]) -> dict[str, in
     return gen
 
 
-def _opening_pairs(svc: WordGameService, seeds: list[str]) -> int:
+def _opening_pairs(svc: WordGameService, seeds: list[str], category: str | None = None) -> int:
     owned = set(seeds)
     count = 0
     for a, b in combinations(sorted(owned), 2):
-        if any(c not in owned for c in svc.common_neighbors(a, b)):
+        if any(c not in owned for c in svc.common_neighbors(a, b, category=category)):
             count += 1
     return count
 
@@ -232,6 +238,8 @@ def _validate_alchimie(rec: dict, svc: WordGameService) -> list[str]:
     seeds = [str(s) for s in rec.get("seeds") or []]
     target = str(rec.get("target") or "")
     depth = rec.get("target_depth")
+    # Combines are scoped to the item's category (ADR-0013) — validate the same way.
+    category = str(rec.get("category") or "") or None
     errors: list[str] = []
     lo, hi = ALCHIMIE_SEED_RANGE
     if not lo <= len(seeds) <= hi or len(set(seeds)) != len(seeds):
@@ -243,13 +251,13 @@ def _validate_alchimie(rec: dict, svc: WordGameService) -> list[str]:
         return errors
     if target in seeds:
         return ["target must not be a seed"]
-    gen = _closure_generations(svc, seeds)
+    gen = _closure_generations(svc, seeds, category)
     actual = gen.get(target)
     if actual is None:
-        return ["target is not craftable from the seeds"]
+        return ["target is not craftable from the seeds (in-category)"]
     if not isinstance(depth, int) or depth != actual:
         errors.append(f"target_depth must equal the closure depth ({actual})")
-    if _opening_pairs(svc, seeds) < ALCHIMIE_MIN_OPENING_PAIRS:
+    if _opening_pairs(svc, seeds, category) < ALCHIMIE_MIN_OPENING_PAIRS:
         errors.append(
             f"seed set offers fewer than {ALCHIMIE_MIN_OPENING_PAIRS} opening pairs"
         )
