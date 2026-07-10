@@ -19,7 +19,15 @@ from drf_spectacular.utils import extend_schema
 from pydantic import BaseModel
 from rest_framework.response import Response
 
-from ..web.http import ContractAPIView, http_error, parse_body, query_int, query_str
+from ..web.http import (
+    ContractAPIView,
+    OptionalSessionAuth,
+    http_error,
+    parse_body,
+    query_int,
+    query_str,
+)
+from ._progress import excluded_pack_ids, record_finished
 from .categories import category_label, is_known
 from .packs import get_pack
 from .service import SessionStore, daily_seed, get_service, normalize
@@ -314,6 +322,8 @@ def _pick_pair(
 
 # --------------------------------------------------------------------- endpoints
 class CreateGameView(ContractAPIView):
+    authentication_classes = [OptionalSessionAuth]
+
     @extend_schema(operation_id="lant_create_game", tags=["lant"])
     def post(self, request):
         """Start a game. Optional ``?category=`` prefers a curated pair for that
@@ -336,7 +346,11 @@ class CreateGameView(ContractAPIView):
         else:
             curated = (
                 get_pack().pick_seeded(
-                    GAME_KEY, random.Random(seed), category=category, difficulty=difficulty
+                    GAME_KEY,
+                    random.Random(seed),
+                    category=category,
+                    difficulty=difficulty,
+                    exclude_ids=excluded_pack_ids(request, GAME_KEY),
                 )
                 if category is not None
                 else None
@@ -375,6 +389,8 @@ class GetGameView(ContractAPIView):
 
 
 class MoveView(ContractAPIView):
+    authentication_classes = [OptionalSessionAuth]
+
     @extend_schema(operation_id="lant_move", tags=["lant"])
     def post(self, request, game_id: str):
         body = parse_body(request, MoveBody)
@@ -400,6 +416,8 @@ class MoveView(ContractAPIView):
 
         session.chain.append(guess)
         session.won = guess == session.target
+        if session.won:
+            record_finished(request, GAME_KEY, session.pack_id)
 
         result = {
             "ok": True,

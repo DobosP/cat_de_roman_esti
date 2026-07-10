@@ -23,7 +23,15 @@ from drf_spectacular.utils import extend_schema
 from pydantic import BaseModel
 from rest_framework.response import Response
 
-from ..web.http import ContractAPIView, http_error, parse_body, query_int, query_str
+from ..web.http import (
+    ContractAPIView,
+    OptionalSessionAuth,
+    http_error,
+    parse_body,
+    query_int,
+    query_str,
+)
+from ._progress import excluded_pack_ids, record_finished
 from .categories import CATEGORY_LABELS as _SHARED_CATEGORY_LABELS
 from .categories import category_label, is_known
 from .packs import get_pack
@@ -411,11 +419,14 @@ def _state(game_id: str, session: ContextoSession) -> dict:
 
 # --------------------------------------------------------------------------- endpoints
 class CreateGameView(ContractAPIView):
+    authentication_classes = [OptionalSessionAuth]
+
     @extend_schema(operation_id="contexto_create_game", tags=["contexto"])
     def post(self, request):
         """Start a game. Optional ``?category=`` prefers a curated target for that
         theme and otherwise mines within the category; the daily prefers a curated
-        target whenever one is approved (ADR-0011)."""
+        target whenever one is approved (ADR-0011). For a signed-in player, curated
+        instances they have already finished are excluded (dailies are exempt)."""
         seed = query_int(request, "seed")
         difficulty = query_str(request, "difficulty", _DEFAULT_DIFFICULTY)
         daily = query_str(request, "daily")
@@ -432,7 +443,11 @@ class CreateGameView(ContractAPIView):
         else:
             curated = (
                 get_pack().pick_seeded(
-                    GAME_KEY, random.Random(seed), category=category, difficulty=difficulty
+                    GAME_KEY,
+                    random.Random(seed),
+                    category=category,
+                    difficulty=difficulty,
+                    exclude_ids=excluded_pack_ids(request, GAME_KEY),
                 )
                 if category is not None
                 else None
@@ -463,6 +478,8 @@ class GetGameView(ContractAPIView):
 
 
 class GuessView(ContractAPIView):
+    authentication_classes = [OptionalSessionAuth]
+
     @extend_schema(operation_id="contexto_guess", tags=["contexto"])
     def post(self, request, game_id: str):
         body = parse_body(request, GuessBody)
@@ -520,6 +537,7 @@ class GuessView(ContractAPIView):
 
         if distance == 0:
             session.won = True
+            record_finished(request, GAME_KEY, session.pack_id)
         reveal = session.won or session.gave_up
 
         result: dict = {
@@ -570,12 +588,15 @@ class ClueView(ContractAPIView):
 
 
 class GiveUpView(ContractAPIView):
+    authentication_classes = [OptionalSessionAuth]
+
     @extend_schema(operation_id="contexto_give_up", tags=["contexto"])
     def post(self, request, game_id: str):
         session = store.get(game_id)
         if session is None:
             raise http_error(404, "Joc inexistent")
         session.gave_up = True
+        record_finished(request, GAME_KEY, session.pack_id)
         return Response(_state(game_id, session))
 
 

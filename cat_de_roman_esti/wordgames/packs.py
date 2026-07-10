@@ -282,12 +282,16 @@ class GamesPack:
         *,
         category: str | None = None,
         difficulty: str | None = None,
+        exclude_ids: set[str] | None = None,
     ) -> list[CuratedItem]:
         out = self._items.get(game, [])
         if category is not None:
             out = [i for i in out if i.category == category]
         if difficulty is not None:
             out = [i for i in out if i.difficulty == difficulty]
+        if exclude_ids:
+            # Avoid-repeats: drop instances a signed-in player has already finished.
+            out = [i for i in out if i.id not in exclude_ids]
         return out
 
     def counts(self, *, category: str | None = None) -> dict[str, int]:
@@ -300,8 +304,11 @@ class GamesPack:
         *,
         category: str | None = None,
         difficulty: str | None = None,
+        exclude_ids: set[str] | None = None,
     ) -> CuratedItem | None:
-        pool = self.pool(game, category=category, difficulty=difficulty)
+        pool = self.pool(
+            game, category=category, difficulty=difficulty, exclude_ids=exclude_ids
+        )
         return rng.choice(pool) if pool else None
 
     def pick_daily(
