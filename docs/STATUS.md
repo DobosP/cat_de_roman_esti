@@ -1,8 +1,8 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-10. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-10 (v14 Alchimie: full backend suite + ruff + both
-validators green; v13 frontend test/build/lint remains the frontend baseline.)_
+_Last verified: 2026-07-10 (v14 mechanics: full backend suite + ruff + both validators
+green; v13 remains the frontend test/build/lint baseline.)_
 
 ## Latest — v14 fair-play foundation
 
@@ -11,6 +11,11 @@ parallel closure rounds. Seven approved and six pending pars were corrected; eve
 served board can now earn 1,000 points/✨. The shared category-scoped BFS is deterministic
 and capped at six actions / 50,000 states, and the importer now restores the missing
 category scope before deriving new candidates (ADR-0015). Session bounds are unchanged.
+
+Lanț now computes distance-to-target by reverse BFS, including directed edges, and
+requires two valid openings plus width two on every intermediate shortest-path layer.
+The 98 forced-rail boards moved to pending review; 89 stronger boards remain across all 14
+categories, with the branch-aware miner as bounded fallback (ADR-0016).
 
 Ordinary no-category starts use the reviewed pack in all four games: seeded deterministic
 selection, signed-in avoid-repeats, and bounded-miner fallback. Daily rendezvous hashing
@@ -40,10 +45,10 @@ puzzle ids, public ranking handles, leaderboard scores, and donations.
 |---|---:|---:|---|
 | Conexiuni | 195 | 90 | curated first; mixed-board miner fallback only |
 | Cald sau Rece | 185 | 4 | curated first; category-scoped miner fallback |
-| Lanțul Cuvintelor | 187 | 8 | curated first; branch-aware miner fallback |
+| Lanțul Cuvintelor | 89 | 106 | curated first; branch-aware miner fallback |
 | Alchimie | 75 | 16 | curated first; category-scoped closure fallback |
 
-Pack total: **760 instances = 642 approved + 118 pending**, across 14 categories.
+Pack total: **760 instances = 544 approved + 216 pending**, across 14 categories.
 Bundled KG: **1,459 nodes / 5,656 edges / 4,688 aliases / 180 legacy puzzles**;
 both fixture copies and both pack copies are byte-identical. V12 removed 101 duplicates
 or broken games and completed difficulty, member, label, description, and diacritics fixes.
@@ -87,8 +92,6 @@ These are audit findings, not accepted decisions:
 
 - Repair the v11 enrichment tail: 183 nodes currently have non-distractor degree ≤2
   (157 are `n_v11*`), below the play-density direction in ADR-0012.
-- Close the remaining curated/mined mechanics drift: 98/187 approved Lanț pairs miss the
-  miner's branch-width floor, whose reverse-distance audit must respect directed edges.
 - Improve Contexto's compressed BFS feedback (approved targets have only 6–9 non-win
   distance buckets) without weakening its target reveal boundary.
 - Build the visible replay loop: home daily progress, consistent same-filter replay, and

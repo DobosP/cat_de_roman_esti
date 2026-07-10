@@ -14,9 +14,9 @@ Curation policy (quality over quantity):
   * quality verdict ``keep`` -> imported as ``status: approved``; ``fix`` ->
     imported as ``status: pending`` (invisible to players until reviewed);
     ``drop``/missing -> not imported;
-  * every surviving instance is re-derived against the MERGED graph (Lant optimal
-    via BFS, Alchimie closure depth + opening pairs, Contexto floors, Conexiuni
-    board shape) — the generator's numbers are never trusted;
+  * every surviving instance is re-derived against the MERGED graph (Lanț distance +
+    branch floor, Alchimie exact action par + opening pairs, Contexto floors,
+    Conexiuni board shape) — the generator's numbers are never trusted;
   * existing pack items are re-derived too (the denser graph can shorten paths).
 
 Steps: merge accepted nodes/edges via densify_content.run() (fixture regenerated +

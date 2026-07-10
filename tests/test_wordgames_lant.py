@@ -221,7 +221,7 @@ def test_unknown_game_404():
 # --------------------------------------------------------------------- hardening: selection
 def _first_hop_choices(svc, start: str, target: str, optimal: int) -> int:
     """Neighbours of start that are one hop closer to the target (genuine first moves)."""
-    dist_t = svc.distances_from(target)
+    dist_t = svc.distances_to(target)
     return sum(1 for nb in svc.neighbor_ids(start) if dist_t.get(nb) == optimal - 1)
 
 
@@ -251,6 +251,81 @@ def test_selection_is_branchy_not_a_forced_rail():
                 forced += 1
     # Allow a tiny tail for sparse corners of the graph, but it must be rare.
     assert forced <= samples * 0.05, f"{forced}/{samples} forced first hops"
+
+
+def test_reverse_distance_and_branch_profile_respect_directed_edges():
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames.packs import lant_branch_profile
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    nodes = [
+        {"id": node_id, "label_ro": node_id, "category": "test"}
+        for node_id in ("start", "a", "b", "target")
+    ]
+    edges = [
+        {
+            "id": f"e_{src}_{dst}",
+            "src_id": src,
+            "dst_id": dst,
+            "bidirectional": 0,
+            "is_distractor": 0,
+        }
+        for src, dst in (
+            ("start", "a"),
+            ("start", "b"),
+            ("a", "target"),
+            ("b", "target"),
+        )
+    ]
+    svc = WordGameService(Graph.from_records(nodes, edges))
+
+    assert svc.distances_from("target") == {"target": 0}
+    assert svc.distances_to("target") == {
+        "target": 0,
+        "a": 1,
+        "b": 1,
+        "start": 2,
+    }
+    assert lant_branch_profile(svc, "start", "target", 2) == (2, 2, 2)
+
+
+def test_pack_gate_rejects_a_mid_path_funnel():
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames.packs import _validate_lant, lant_branch_profile
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    nodes = [
+        {"id": node_id, "label_ro": node_id, "category": "test"}
+        for node_id in ("start", "a", "b", "funnel", "target")
+    ]
+    edges = [
+        {
+            "id": f"e_{src}_{dst}",
+            "src_id": src,
+            "dst_id": dst,
+            "bidirectional": 0,
+            "is_distractor": 0,
+        }
+        for src, dst in (
+            ("start", "a"),
+            ("start", "b"),
+            ("a", "funnel"),
+            ("b", "funnel"),
+            ("funnel", "target"),
+        )
+    ]
+    svc = WordGameService(Graph.from_records(nodes, edges))
+
+    assert lant_branch_profile(svc, "start", "target", 3) == (2, 1, 3)
+    assert _validate_lant(
+        {
+            "start": "start",
+            "target": "target",
+            "optimal": 3,
+            "difficulty": "normal",
+        },
+        svc,
+    ) == ["narrowest shortest-path layer has width 1 (< 2)"]
 
 
 def test_selection_avoids_leaf_endpoints():
@@ -390,7 +465,7 @@ def test_hint_is_on_a_shortest_path_and_reports_remaining():
     assert h["hint"] is not None
     assert h["remaining"] == game["optimal"]
     # The suggested neighbour is one hop closer to the target.
-    dist_t = svc.distances_from(game["target"]["id"])
+    dist_t = svc.distances_to(game["target"]["id"])
     assert dist_t.get(h["hint"]["id"]) == game["optimal"] - 1
     # It is a genuine neighbour of the current node.
     assert h["hint"]["id"] in svc.neighbor_ids(game["start"]["id"])
@@ -407,7 +482,7 @@ def test_hint_prefers_the_most_salient_next_step():
             g = _create(seed=seed, difficulty=diff)
             gid = g["game_id"]
             cur = g["start"]["id"]
-            dist_t = svc.distances_from(g["target"]["id"])
+            dist_t = svc.distances_to(g["target"]["id"])
             on_path = [
                 nb
                 for nb in svc.neighbor_ids(cur)
@@ -437,7 +512,7 @@ def test_hint_on_won_game_returns_message():
 # --------------------------------------------------------------------- hardening: score
 def _detour_neighbor(svc, start: str, target: str, optimal: int) -> str | None:
     """A legal neighbour of start that does NOT move closer to the target (a real detour)."""
-    dist_t = svc.distances_from(target)
+    dist_t = svc.distances_to(target)
     for nb in svc.neighbor_ids(start):
         d = dist_t.get(nb)
         if d is not None and d >= optimal:  # not closer than the start itself

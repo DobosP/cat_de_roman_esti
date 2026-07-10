@@ -204,7 +204,7 @@ def test_lant_exposes_only_start_and_target_not_the_path() -> None:
     # And there genuinely IS a hidden middle to protect: at least one intermediate node
     # lies on a shortest path, and none of them are present in the response.
     svc = get_service()
-    ds, dt = svc.distances_from(start), svc.distances_from(target)
+    ds, dt = svc.distances_from(start), svc.distances_to(target)
     on_path = [
         nid
         for nid in svc.all_ids()

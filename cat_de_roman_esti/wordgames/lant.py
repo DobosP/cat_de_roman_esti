@@ -29,7 +29,12 @@ from ..web.http import (
 )
 from ._progress import excluded_pack_ids, record_finished
 from .categories import category_label, is_known
-from .packs import get_pack
+from .packs import (
+    LANT_MIN_FIRST_HOP_CHOICES,
+    LANT_MIN_LAYER_WIDTH,
+    get_pack,
+    lant_branch_profile,
+)
 from .service import SessionStore, daily_seed, get_service, normalize
 
 GAME_KEY = "lant"
@@ -51,8 +56,8 @@ _TARGETS_PER_START = 24
 _MIN_ENDPOINT_DEGREE = 2
 # A puzzle is "satisfying" only if the player has a real branch at the first hop AND no
 # intermediate shortest-path layer collapses to a single forced node.
-_MIN_FIRST_HOP_CHOICES = 2
-_MIN_LAYER_WIDTH = 2
+_MIN_FIRST_HOP_CHOICES = LANT_MIN_FIRST_HOP_CHOICES
+_MIN_LAYER_WIDTH = LANT_MIN_LAYER_WIDTH
 # Once we have found enough genuinely-good candidates we stop early (keeps latency low).
 _ENOUGH_GOOD = 6
 
@@ -131,8 +136,10 @@ def _resolve_neighbor(text: str, current: str, target: str) -> str | None:
     if len(legal) == 1:
         return legal[0]
 
+    dist_to_target = svc.distances_to(target)
+
     def _closeness(nid: str) -> tuple[int, str]:
-        d = svc.distance(nid, target)
+        d = dist_to_target.get(nid)
         return (d if d is not None else 1_000_000, nid)
 
     return min(legal, key=_closeness)
@@ -187,38 +194,6 @@ def _state(game_id: str, session: LantSession) -> dict:
 def _salience(node_id: str) -> float:
     node = get_service().node(node_id)
     return node.salience if node else 0.0
-
-
-def _branch_profile(
-    start: str, target: str, optimal: int, dist_from_target: dict[str, int]
-) -> tuple[int, int, int]:
-    """Measure how branchy the shortest-path "diamond" between start and target is.
-
-    Returns ``(first_hop_choices, min_layer_width, total_on_path)`` where:
-
-    * ``first_hop_choices`` — neighbours of START that are one hop closer to the target
-      (i.e. genuine, correct first moves). >1 means the opening is not a forced rail.
-    * ``min_layer_width`` — the narrowest shortest-path layer between the endpoints. A
-      width of 1 anywhere means every solver is funnelled through that single node.
-    * ``total_on_path`` — count of intermediate nodes lying on *some* shortest path; a
-      bigger web means more legitimate routes and a more satisfying solve.
-    """
-    svc = get_service()
-    dist_from_start = svc.distances_from(start)
-    layers: dict[int, int] = {}
-    for nid, ds in dist_from_start.items():
-        dt = dist_from_target.get(nid)
-        if dt is not None and ds + dt == optimal:
-            layers[ds] = layers.get(ds, 0) + 1
-    intermediate = [layers.get(k, 0) for k in range(1, optimal)]
-    min_width = min(intermediate) if intermediate else 1
-    total_on_path = sum(intermediate)
-    first_hop = sum(
-        1
-        for nb in svc.neighbor_ids(start)
-        if dist_from_target.get(nb) == optimal - 1
-    )
-    return first_hop, min_width, total_on_path
 
 
 # Per-difficulty weight on endpoint salience (v11): easier tiers strongly prefer
@@ -294,9 +269,8 @@ def _pick_pair(
         for target, optimal in reachable[:_TARGETS_PER_START]:
             if fallback is None:
                 fallback = (start, target, optimal)
-            dist_from_target = svc.distances_from(target)
-            first_hop, min_width, total = _branch_profile(
-                start, target, optimal, dist_from_target
+            first_hop, min_width, total = lant_branch_profile(
+                svc, start, target, optimal
             )
             score = _pair_score(start, target, first_hop, min_width, total, sal_weight)
             if best_any is None or score > best_any[0]:
@@ -455,7 +429,8 @@ class HintView(ContractAPIView):
 
         svc = get_service()
         cur = session.current
-        remaining = svc.distance(cur, session.target)
+        dist_to_target = svc.distances_to(session.target)
+        remaining = dist_to_target.get(cur)
         if remaining is None:
             # Player wandered into a dead end (shouldn't happen on the connected subgraph,
             # but be defensive): suggest stepping back.
@@ -469,7 +444,7 @@ class HintView(ContractAPIView):
         on_path = [
             nb
             for nb in svc.neighbor_ids(cur)
-            if svc.distance(nb, session.target) == remaining - 1
+            if dist_to_target.get(nb) == remaining - 1
         ]
         if on_path:
             on_path.sort(key=lambda nb: (_salience(nb), nb), reverse=True)
