@@ -2,10 +2,11 @@
 
 There is a hidden SECRET target concept in the Romanian knowledge graph. The player
 types concept guesses; each guess reports how CLOSE it is to the target, measured as the
-BFS graph distance on the shared non-distractor subgraph (:mod:`.service`). Distance 0
-means the guess IS the target — the player wins. Otherwise the game maps the distance to
-a "temperature" tier (Fierbinte … Inghetat) and a 0..100 closeness score derived from how
-the guess ranks within the precomputed distance distribution of all reachable concepts.
+directed BFS graph distance from guess to target on the shared non-distractor subgraph
+(:mod:`.service`). Distance 0 means the guess IS the target — the player wins. Otherwise
+the game maps the distance to a "temperature" tier (Fierbinte … Inghetat) and a 0..100
+closeness score derived from how the guess ranks within the precomputed inbound-distance
+distribution of all reachable concepts.
 
 Server-authoritative: the target id is NEVER returned to the client until the game is won
 or given up. Public guess views are built through a reveal gate so rank feedback stays
@@ -41,14 +42,15 @@ GAME_KEY = "contexto"
 _DIFFICULTIES = ("usor", "normal", "greu")
 _DEFAULT_DIFFICULTY = "normal"
 
-# A target needs a large reachable set so almost every guess gets a meaningful distance.
+# A target needs a large inbound-reachable set so almost every guess gets a meaningful
+# directed distance to the secret.
 MIN_REACHABLE = 120
 
-# In practice almost every node reaches the whole graph (~200 nodes), so MIN_REACHABLE
-# alone never rejects a poor target. The signal that actually makes a game feel good is
-# the "responsive zone": how many concepts sit at a graph distance the player can FEEL
-# (1..5 hops -> Fierbinte..Rece). A target whose responsive zone is tiny pushes almost
-# every guess into "Inghetat", which gives flat, unsatisfying feedback. We therefore
+# In practice almost every concept can reach most targets, so MIN_REACHABLE alone rarely
+# rejects a poor target. The signal that actually makes a game feel good is the
+# "responsive zone": how many guesses sit 1..5 directed hops from the target — a distance
+# the player can FEEL (Fierbinte..Rece). A target whose responsive zone is tiny pushes
+# almost every guess into "Inghetat", which gives flat, unsatisfying feedback. We therefore
 # require a minimum responsive-zone size so a guess is likely to land somewhere with a
 # real temperature gradient. (Playtested: this floor removes the degenerate long-thin-tail
 # targets — e.g. n_plumb / n_emil_racovita — while keeping wide variety per difficulty.)
@@ -77,7 +79,7 @@ class GuessRecord:
 @dataclass
 class ContextoSession:
     target: str
-    # distance (from target) -> count of reachable nodes at that distance
+    # directed distance (guess -> target) -> count of guesses at that distance
     dist_hist: dict[int, int]
     reachable: int
     # how many reachable nodes are STRICTLY farther than distance d (for ranking)
@@ -251,9 +253,9 @@ def _difficulty_pool(svc, difficulty: str, category: str | None = None) -> list[
 def _responsive_count(dist: dict[str, int]) -> int:
     """How many reachable concepts sit in the player-perceptible temperature band.
 
-    These are the concepts at 1..RESPONSIVE_MAX_HOPS hops — i.e. everything that comes
-    back warmer than "Inghetat". A larger band means guesses spread across more tiers and
-    the game feels responsive instead of flatly frozen.
+    These are the guesses that can reach the target in 1..RESPONSIVE_MAX_HOPS hops —
+    i.e. everything that comes back warmer than "Inghetat". A larger band means guesses
+    spread across more tiers and the game feels responsive instead of flatly frozen.
     """
     return sum(1 for d in dist.values() if 1 <= d <= RESPONSIVE_MAX_HOPS)
 
@@ -272,7 +274,10 @@ def _build_session(
     pack_id: str | None = None,
 ) -> ContextoSession:
     svc = get_service()
-    dist = svc.distances_from(target)
+    # Runtime guesses are scored with distance(guess, target), so the histogram must use
+    # that same direction. On one-way edges, distances_from(target) answers the opposite
+    # question and produces internally inconsistent ranks/closeness.
+    dist = svc.distances_to(target)
     hist: dict[int, int] = {}
     for d in dist.values():
         hist[d] = hist.get(d, 0) + 1
@@ -305,7 +310,7 @@ def _pick_target(
     We walk the seeded-shuffled candidate pool and take the FIRST target that clears both
     floors. Taking the first (rather than the best) keeps the per-seed variety wide while
     still guaranteeing quality. Fallbacks degrade gracefully: relax to reachability-only,
-    then to the single most-reachable node, so a game is always returned.
+    then to the single most inbound-reachable node, so a game is always returned.
     """
     svc = get_service()
     rng = random.Random(seed)
@@ -319,7 +324,7 @@ def _pick_target(
 
     fallback: str | None = None  # first node clearing reachability but not the warm band
     for nid in candidates:
-        dist = svc.distances_from(nid)
+        dist = svc.distances_to(nid)
         if not _is_good_target(dist):
             if fallback is None and len(dist) >= MIN_REACHABLE:
                 fallback = nid
@@ -331,13 +336,13 @@ def _pick_target(
     if category is not None:
         # A category pool stays within itself: never silently swap in an off-theme
         # target when the theme cannot make a playable game.
-        best_in_cat = max(candidates, key=lambda n: len(svc.distances_from(n)))
-        if len(svc.distances_from(best_in_cat)) >= MIN_REACHABLE:
+        best_in_cat = max(candidates, key=lambda n: len(svc.distances_to(n)))
+        if len(svc.distances_to(best_in_cat)) >= MIN_REACHABLE:
             return _build_session(best_in_cat, difficulty, daily, category=category)
         raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
     # Last resort: nothing in this tier met even the reachability floor — take the
-    # most-reachable node so we still return a solvable game.
-    best = max(svc.all_ids(), key=lambda n: len(svc.distances_from(n)))
+    # most inbound-reachable node so we still return a solvable game.
+    best = max(svc.all_ids(), key=lambda n: len(svc.distances_to(n)))
     return _build_session(best, difficulty, daily)
 
 

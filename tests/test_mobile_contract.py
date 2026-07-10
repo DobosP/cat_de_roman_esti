@@ -101,8 +101,14 @@ def test_contexto_does_not_leak_target_before_win() -> None:
     session = store.get(gid)
     assert session is not None
     secret = session.target
-    secret_label = get_service().label(secret)
+    svc = get_service()
+    secret_label = svc.label(secret)
     fetched = c.get(f"/api/wordgames/contexto/games/{gid}").json()
+
+    # Public rank metadata describes the directed population of guesses that can reach
+    # the target. The map itself remains server-side and does not expose the answer.
+    assert session.reachable == len(svc.distances_to(secret))
+    assert created["reachable_count"] == session.reachable
 
     for body in (created, fetched):
         assert "target" not in body  # dedicated reveal key absent pre-win
@@ -112,7 +118,6 @@ def test_contexto_does_not_leak_target_before_win() -> None:
 
     # Boundary for the optional category clue: it may reveal the broad category, but not
     # the secret concept id/label/description.
-    svc = get_service()
     last_guess = None
     for nid in svc.all_ids():
         if nid == secret:
