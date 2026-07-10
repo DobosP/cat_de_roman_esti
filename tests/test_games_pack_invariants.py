@@ -65,6 +65,8 @@ def test_game_constant_mirrors_do_not_drift():
     from cat_de_roman_esti.wordgames import alchimie, contexto, lant, packs
 
     assert packs.LANT_BANDS == lant._DIFFICULTY_BANDS
+    assert packs.LANT_MIN_FIRST_HOP_CHOICES == lant._MIN_FIRST_HOP_CHOICES == 2
+    assert packs.LANT_MIN_LAYER_WIDTH == lant._MIN_LAYER_WIDTH == 2
     assert packs.CONTEXTO_MIN_REACHABLE == contexto.MIN_REACHABLE
     assert packs.CONTEXTO_MIN_RESPONSIVE == contexto.MIN_RESPONSIVE
     assert packs.CONTEXTO_RESPONSIVE_MAX_HOPS == contexto.RESPONSIVE_MAX_HOPS
@@ -113,6 +115,31 @@ def test_alchimie_par_counts_sequential_actions_not_parallel_rounds():
         svc,
     )
     assert errors == ["target_depth must equal the exact action par (3)"]
+
+
+def test_every_approved_lant_has_real_shortest_path_choices():
+    pytest.importorskip("django")
+    from cat_de_roman_esti.wordgames.packs import (
+        LANT_MIN_FIRST_HOP_CHOICES,
+        LANT_MIN_LAYER_WIDTH,
+        get_pack,
+        lant_branch_profile,
+    )
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    svc = get_service()
+    items = get_pack().pool("lant")
+    assert len(items) == 89
+    assert "lt_stiinta_200" not in {item.id for item in items}
+    for item in items:
+        first_hop, min_width, _ = lant_branch_profile(
+            svc,
+            item.payload["start"],
+            item.payload["target"],
+            item.payload["optimal"],
+        )
+        assert first_hop >= LANT_MIN_FIRST_HOP_CHOICES, item.id
+        assert min_width >= LANT_MIN_LAYER_WIDTH, item.id
 
 
 def test_unresolvable_items_are_pruned_at_load():

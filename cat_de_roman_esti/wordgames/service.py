@@ -45,6 +45,7 @@ class WordGameService:
     # normalized label / id -> node id (built once)
     _index: dict[str, str] = field(default_factory=dict)
     _adj: dict[str, set[str]] = field(default_factory=dict)
+    _rev_adj: dict[str, set[str]] = field(default_factory=dict)
     # category -> its node ids (for category-scoped combine math; ADR-0013)
     _cat_members: dict[str, frozenset[str]] = field(default_factory=dict)
 
@@ -62,10 +63,15 @@ class WordGameService:
         for nid in sorted(self.graph.nodes):
             for alias in self.graph.nodes[nid].aliases:
                 self._index.setdefault(normalize(alias), nid)
-        # Undirected non-distractor adjacency for distance/closure math.
+        # Traversable non-distractor adjacency. Directed fixture edges remain directed;
+        # keep a reverse index as well so "distance to target" math is exact.
         for nid in self.graph.nodes:
             nbrs = self.graph.neighbors(nid, include_distractors=False)
             self._adj[nid] = {nb.node.id for nb in nbrs}
+            self._rev_adj.setdefault(nid, set())
+        for src, destinations in self._adj.items():
+            for dst in destinations:
+                self._rev_adj.setdefault(dst, set()).add(src)
 
     # --------------------------------------------------------------- lookup
     def node(self, node_id: str) -> Node | None:
@@ -157,6 +163,26 @@ class WordGameService:
                 if nxt not in dist:
                     dist[nxt] = dist[cur] + 1
                     frontier.append(nxt)
+        return dist
+
+    def distances_to(self, target: str) -> dict[str, int]:
+        """Every node's directed BFS distance *to* ``target``.
+
+        This is a reverse traversal over the same non-distractor graph used by
+        :meth:`distance`. On a fully bidirectional graph it equals
+        ``distances_from(target)``; on directed edges it answers the distinct question
+        Lanț needs: which forward moves can still reach the target, and in how many hops.
+        Ordering is deterministic for the same daily/seed guarantees as
+        :meth:`distances_from`.
+        """
+        dist = {target: 0}
+        frontier: deque[str] = deque([target])
+        while frontier:
+            cur = frontier.popleft()
+            for previous in sorted(self._rev_adj.get(cur, ())):
+                if previous not in dist:
+                    dist[previous] = dist[cur] + 1
+                    frontier.append(previous)
         return dist
 
     # --------------------------------------------------------------- pools

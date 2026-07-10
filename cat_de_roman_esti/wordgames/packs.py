@@ -43,6 +43,8 @@ DIFFICULTIES = ("usor", "normal", "greu")
 
 # Mirrored game constants (single-source tests guard the originals against drift).
 LANT_BANDS = {"usor": (2, 3), "normal": (3, 4), "greu": (4, 6)}
+LANT_MIN_FIRST_HOP_CHOICES = 2
+LANT_MIN_LAYER_WIDTH = 2
 CONTEXTO_MIN_REACHABLE = 120
 CONTEXTO_MIN_RESPONSIVE = 40
 CONTEXTO_RESPONSIVE_MAX_HOPS = 5
@@ -129,6 +131,34 @@ def _opening_pairs(svc: WordGameService, seeds: list[str], category: str | None 
         if any(c not in owned for c in svc.common_neighbors(a, b, category=category)):
             count += 1
     return count
+
+
+def lant_branch_profile(
+    svc: WordGameService, start: str, target: str, optimal: int
+) -> tuple[int, int, int]:
+    """Return Lanț shortest-path branch quality for a directed graph.
+
+    The tuple is ``(valid first-hop choices, narrowest intermediate layer,
+    total intermediate nodes on any shortest path)``. Distances from the start use
+    forward edges; distances to the target use reverse BFS, which is essential for the
+    fixture's directed relations.
+    """
+    dist_from_start = svc.distances_from(start)
+    dist_to_target = svc.distances_to(target)
+    layers: dict[int, int] = {}
+    for node_id, from_start in dist_from_start.items():
+        to_target = dist_to_target.get(node_id)
+        if to_target is not None and from_start + to_target == optimal:
+            layers[from_start] = layers.get(from_start, 0) + 1
+    intermediate = [layers.get(layer, 0) for layer in range(1, optimal)]
+    min_width = min(intermediate) if intermediate else 1
+    total_on_path = sum(intermediate)
+    first_hop = sum(
+        1
+        for neighbor in svc.neighbor_ids(start)
+        if dist_to_target.get(neighbor) == optimal - 1
+    )
+    return first_hop, min_width, total_on_path
 
 
 def minimum_alchimie_actions(
@@ -294,6 +324,17 @@ def _validate_lant(rec: dict, svc: WordGameService) -> list[str]:
     if not lo <= actual <= hi:
         errors.append(
             f"distance {actual} outside the {rec.get('difficulty')} band [{lo},{hi}]"
+        )
+    first_hop, min_width, _ = lant_branch_profile(svc, start, target, actual)
+    if first_hop < LANT_MIN_FIRST_HOP_CHOICES:
+        errors.append(
+            f"only {first_hop} valid first-hop choice(s) "
+            f"(< {LANT_MIN_FIRST_HOP_CHOICES})"
+        )
+    if min_width < LANT_MIN_LAYER_WIDTH:
+        errors.append(
+            f"narrowest shortest-path layer has width {min_width} "
+            f"(< {LANT_MIN_LAYER_WIDTH})"
         )
     return errors
 

@@ -3,9 +3,9 @@
 
 Validates both bundled pack copies (package + tests) against their sibling KG
 fixture: packaging shape, per-item field shapes + enums, id uniqueness, and —
-for every ``approved`` item — full playability (node resolution, Lant BFS
-distance == optimal within its band, Contexto reachability/warm-band floors,
-Alchimie closure depth). Non-approved items (``pending`` / ``rejected``) only
+for every ``approved`` item — full playability (node resolution, Lanț BFS distance +
+shortest-path branch floor, Contexto reachability/warm-band floors, Alchimie exact
+action par). Non-approved items (``pending`` / ``rejected``) only
 need a valid envelope: they are review inventory, not served content.
 
 The deep checks are the SAME functions the server and the submissions endpoint
