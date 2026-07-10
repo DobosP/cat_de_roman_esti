@@ -21,7 +21,7 @@ import { todayLocal } from "../share";
 type HistoryTab = "top" | "today" | "recent";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const TITLE_WORDS = ["cat", "de", "roman", "esti?"];
+const TITLE_WORDS = ["Cât", "de", "român", "ești?"];
 
 export default function Home({
   onToast,
@@ -96,7 +96,7 @@ export default function Home({
         const outcome = importScores(await file.text());
         setBoard(scoreBoard());
         onToast(
-          `Importat: ${outcome.entries} rezultate in ${outcome.games} jocuri.`,
+          `Importat: ${outcome.entries} rezultate în ${outcome.games} jocuri.`,
           "success",
         );
       } catch (err) {
@@ -111,11 +111,11 @@ export default function Home({
       <div className="container col" style={{ gap: 28, paddingBlock: 16 }}>
         <header className="col" style={{ gap: 10 }}>
           <div className="row spread" style={{ gap: 12, alignItems: "flex-start" }}>
-            <h1 className="hero-title" aria-label="cat de roman esti?">
+            <h1 className="hero-title" aria-label="Cât de român ești?">
               {TITLE_WORDS.map((word, i) => (
                 <motion.span
                   key={word}
-                  className={word === "esti?" ? "wordmark-gradient" : undefined}
+                  className={word === "ești?" ? "wordmark-gradient" : undefined}
                   initial={{ opacity: 0, y: 26, rotate: i % 2 ? 3 : -3 }}
                   animate={{ opacity: 1, y: 0, rotate: 0 }}
                   transition={{
@@ -138,8 +138,8 @@ export default function Home({
             transition={{ delay: 0.35, duration: 0.5 }}
             style={{ maxWidth: 640, fontSize: "1.05rem", margin: 0 }}
           >
-            Patru jocuri de cuvinte peste reteaua semantica a culturii romanesti. Combina,
-            ghiceste, inlantuie sau grupeaza concepte — si ajunge la destinatie.
+            Patru jocuri de cuvinte în limba română, cu oameni, locuri și idei din
+            cultura și viața de aici. Combină, ghicește, leagă sau grupează.
           </motion.p>
         </header>
 
@@ -149,7 +149,7 @@ export default function Home({
               key={g.key}
               type="button"
               onClick={() => openGame(g)}
-              aria-label={`Joaca ${g.title} — ${g.tag}`}
+              aria-label={`Joacă ${g.title} — ${g.tag}`}
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 + 0.07 * i, duration: 0.4, ease: EASE }}
@@ -182,7 +182,7 @@ export default function Home({
               <p className="muted game-card-blurb">{g.blurb}</p>
               <span className="row game-card-footer" style={{ gap: 10 }}>
                 <span className="game-card-cta" style={{ color: g.accent }}>
-                  Joaca →
+                  Joacă →
                 </span>
                 {board[g.key]?.best && (
                   <span className="faint" style={{ fontSize: "0.8rem" }}>
@@ -237,7 +237,7 @@ export default function Home({
                     {row.record?.played ?? 0}
                   </strong>
                 </div>
-                <ScoreLine entry={row.record?.best ?? null} accent={row.accent} empty="Fara scor" />
+                <ScoreLine entry={row.record?.best ?? null} accent={row.accent} empty="Fără scor" />
               </div>
             ))}
           </div>
@@ -271,16 +271,16 @@ export default function Home({
             }
             empty={
               historyTab === "top"
-                ? "Nu ai scoruri locale inca."
+                ? "Nu ai încă scoruri locale."
                 : historyTab === "today"
-                  ? "Niciun zilnic terminat azi."
+                  ? "Nicio provocare zilnică terminată azi."
                   : "Istoricul local este gol."
             }
           />
         </section>
 
         <p className="faint" style={{ fontSize: "0.8rem" }}>
-          Toate cele patru jocuri ruleaza pe acelasi graf de 330 de concepte romanesti.
+          Toate cele patru jocuri folosesc aceeași hartă de legături culturale românești.
         </p>
       </div>
     </div>

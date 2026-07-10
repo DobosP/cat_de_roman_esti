@@ -26,7 +26,7 @@ export function SoundToggle({ compact = false }: { compact?: boolean }) {
     if (!next) playSfx("select");
   }
 
-  const label = muted ? "Activeaza sunetul" : "Dezactiveaza sunetul";
+  const label = muted ? "Activează sunetul" : "Dezactivează sunetul";
 
   return (
     <button

@@ -92,7 +92,7 @@ function RestrictedNotice({ onLogout }: { onLogout: () => Promise<void> }) {
               await onLogout();
             }}
           >
-            Închide contul
+            Continuă fără cont
           </button>
         </div>
       </div>
@@ -139,7 +139,7 @@ function ConsentGate({ minAge, onResolved }: { minAge: number; onResolved: () =>
             maxLength={80}
             value={handle}
             onChange={(e) => setHandle(e.target.value)}
-            placeholder="ex. VulpeaIsteata"
+            placeholder="ex. VulpeaIsteață"
           />
         </label>
         <label className="account-field">
@@ -233,7 +233,7 @@ function UserChip({ user, onChanged }: { user: AuthUser; onChanged: () => Promis
             Editează numele
           </button>
           <button type="button" role="menuitem" onClick={toggleRanking}>
-            {user.show_on_ranking ? "Ascunde-mă din clasament" : "Apari în clasament"}
+            {user.show_on_ranking ? "Ascunde-mă din clasament" : "Arată-mă în clasament"}
           </button>
           <a href="/legal/privacy" target="_blank" rel="noreferrer" role="menuitem">
             Confidențialitate

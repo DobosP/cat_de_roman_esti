@@ -24,12 +24,14 @@ export function ResultCard({
   shareText,
   onCopy,
   onReplay,
+  onOptions,
   onExit,
-  replayLabel = "Joc nou →",
+  replayLabel = "Încă unul →",
+  optionsLabel = "Schimbă opțiunile",
 }: {
   /** Big celebratory glyph. */
   icon: ReactNode;
-  /** Headline (e.g. "Ai craftat tinta!"). */
+  /** Headline (e.g. "Ai făurit ținta!"). */
   title: ReactNode;
   /** Game accent colour for the border glow + score number. */
   accent: string;
@@ -44,14 +46,17 @@ export function ResultCard({
   isRecord?: boolean;
   /** Show that this run is the local best for this exact puzzle. */
   isPuzzleRecord?: boolean;
-  /** When present (and onCopy given), renders a "Copiaza rezultatul" button. */
+  /** When present (and onCopy given), renders a "Copiază rezultatul" button. */
   shareText?: string | null;
   onCopy?: () => void;
   /** Start a fresh game. */
   onReplay?: () => void;
+  /** Return to the setup screen without leaving the game. */
+  onOptions?: () => void;
   /** Return to the arcade. */
   onExit?: () => void;
   replayLabel?: string;
+  optionsLabel?: string;
 }) {
   const ring = won ? accent : "var(--surface-border-strong)";
   return (
@@ -124,7 +129,7 @@ export function ResultCard({
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", stiffness: 300, damping: 16, delay: 0.25 }}
             >
-              <Badge tone="success">★ Record puzzle</Badge>
+              <Badge tone="success">★ Recordul acestei provocări</Badge>
             </motion.span>
           )}
         </div>
@@ -133,12 +138,17 @@ export function ResultCard({
       <div className="row center wrap" style={{ gap: 12, marginTop: 12, position: "relative" }}>
         {shareText && onCopy && (
           <Button onClick={onCopy}>
-            <span aria-hidden>📋</span> Copiaza rezultatul
+            <span aria-hidden>📋</span> Copiază rezultatul
           </Button>
         )}
         {onReplay && (
           <Button variant="secondary" onClick={onReplay}>
             {replayLabel}
+          </Button>
+        )}
+        {onOptions && (
+          <Button variant="secondary" onClick={onOptions}>
+            {optionsLabel}
           </Button>
         )}
         {onExit && (

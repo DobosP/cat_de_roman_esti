@@ -34,10 +34,16 @@ const DEF = gameByKey("alchimie");
 
 const GOLD = "#ffd166";
 
+const DIFFICULTY_LABEL: Record<Difficulty, string> = {
+  usor: "Ușor",
+  normal: "Normal",
+  greu: "Greu",
+};
+
 const DIFFICULTIES: { id: Difficulty; label: string; hint: string }[] = [
-  { id: "usor", label: "Usor", hint: "tinta apropiata" },
+  { id: "usor", label: DIFFICULTY_LABEL.usor, hint: "țintă apropiată" },
   { id: "normal", label: "Normal", hint: "echilibrat" },
-  { id: "greu", label: "Greu", hint: "tinta adanca" },
+  { id: "greu", label: DIFFICULTY_LABEL.greu, hint: "țintă îndepărtată" },
 ];
 
 export default function Alchimie({
@@ -86,6 +92,7 @@ export default function Alchimie({
         }
         setState(s);
         setDifficulty(s.difficulty);
+        setCategory(s.board_category ?? null);
         setSelected([]);
         setFreshIds(new Set());
         setHintIds(new Set());
@@ -165,9 +172,10 @@ export default function Alchimie({
   useEffect(() => {
     if (!state || !state.won || state.score === undefined) return;
     active.forget();
+    const movesLabel = state.moves === 1 ? "combinație" : "combinații";
     const detail = state.daily
-      ? `Zilnic ${state.daily} · ${state.moves} combinari`
-      : `${state.difficulty} · ${state.moves} combinari`;
+      ? `Zilnic ${state.daily} · ${state.moves} ${movesLabel}`
+      : `${DIFFICULTY_LABEL[state.difficulty]} · ${state.moves} ${movesLabel}`;
     const outcome = recordOnce(state.game_id, state.score, detail, {
       puzzleKey,
       difficulty: state.difficulty,
@@ -221,16 +229,16 @@ export default function Alchimie({
         setFreshIds(new Set());
         sound.playUndo();
         const hint = res.hint_available
-          ? " Apasa „Indiciu” daca te-ai blocat."
+          ? " Apasă „Indiciu” dacă te-ai blocat."
           : "";
-        onToast(`Nicio combinatie noua din aceasta pereche.${hint}`, "info");
+        onToast(`Nicio combinație nouă din această pereche.${hint}`, "info");
       }
     } catch (err) {
       sound.playError();
       onToast(
         err instanceof ApiError
-          ? err.message || `Combinatie respinsa (${err.status}).`
-          : "Combinatie respinsa.",
+          ? err.message || `Combinație respinsă (${err.status}).`
+          : "Combinație respinsă.",
         "error",
       );
     } finally {
@@ -342,7 +350,7 @@ export default function Alchimie({
   if (loading) {
     return (
       <div className="screen-pad fill center">
-        <Spinner size="lg" label="Se incarca..." />
+        <Spinner size="lg" label="Se încarcă…" />
       </div>
     );
   }
@@ -363,14 +371,14 @@ export default function Alchimie({
             best={best}
             description={
               <p style={{ margin: 0 }}>
-                Combina doua concepte ca sa descoperi vecinii lor comuni si
-                ajunge la tinta ascunsa. Cu cat mai putine combinari, cu atat
-                scor mai mare.
+                Combină două concepte ca să le descoperi vecinii comuni și ajungi
+                la ținta afișată. Cu cât folosești mai puține combinații, cu atât
+                scorul este mai mare.
               </p>
             }
-            startLabel="Joaca →"
+            startLabel="Joacă →"
             onStart={() => void start({ difficulty, category: category ?? undefined })}
-            onDaily={() => void start({ daily: todayLocal() })}
+            onDaily={() => void start({ difficulty, daily: todayLocal() })}
             dailyLabel="Provocarea zilei"
             starting={loading}
           >
@@ -413,7 +421,7 @@ export default function Alchimie({
             ) : (
               <StatBadge
                 label="Mod"
-                value={state.difficulty}
+                value={DIFFICULTY_LABEL[state.difficulty]}
                 accent={DEF.accent}
                 title="Dificultate"
               />
@@ -425,7 +433,7 @@ export default function Alchimie({
                 accent={categoryColor(state.board_category)}
               />
             )}
-            <StatBadge label="Combinari" value={state.moves} accent={DEF.accent} />
+            <StatBadge label="Combinații" value={state.moves} accent={DEF.accent} />
             <StatBadge
               label="Descoperite"
               value={state.discovered_count}
@@ -460,7 +468,7 @@ export default function Alchimie({
               className="faint"
               style={{ letterSpacing: "0.08em", fontSize: "0.72rem" }}
             >
-              {won ? "TINTA CRAFTATA" : "TINTA DE CRAFTAT"}
+              {won ? "ȚINTA FĂURITĂ" : "ȚINTA DE FĂURIT"}
             </span>
             <div className="row" style={{ gap: 10, alignItems: "baseline" }}>
               <span style={{ fontSize: "1.5rem" }} aria-hidden>
@@ -505,9 +513,9 @@ export default function Alchimie({
                   variant="secondary"
                   disabled={busy}
                   onClick={clearSelection}
-                  title="Goleste alambicul (Esc)"
+                  title="Golește alambicul (Esc)"
                 >
-                  Goleste
+                  Golește
                 </Button>
               )}
               {state.hint_available && (
@@ -516,7 +524,7 @@ export default function Alchimie({
                   variant="secondary"
                   disabled={busy}
                   onClick={() => void doHint()}
-                  title="Iti arata o pereche utila (costa putin scor)"
+                  title="Îți arată o pereche utilă (costă puțin din scor)"
                   style={{ borderColor: GOLD, color: GOLD }}
                 >
                   💡 Indiciu
@@ -526,11 +534,11 @@ export default function Alchimie({
                 type="button"
                 disabled={busy || selected.length !== 2}
                 onClick={doCombine}
-                title="Combina cele doua concepte (Enter)"
-                aria-label="Combina cele doua concepte selectate"
+                title="Combină cele două concepte (Enter)"
+                aria-label="Combină cele două concepte selectate"
                 style={{ borderColor: DEF.accent }}
               >
-                {busy ? "…" : "⚗ Combina"}
+                {busy ? "…" : "⚗ Combină"}
               </Button>
             </div>
           </div>
@@ -629,7 +637,7 @@ export default function Alchimie({
             disabled={busy}
             onClick={doReset}
           >
-            ↻ Reia (acelasi joc)
+            ↻ Reia același joc
           </Button>
           <Button
             type="button"
@@ -637,7 +645,7 @@ export default function Alchimie({
             disabled={busy}
             onClick={newGame}
           >
-            ⚂ Joc nou
+            ⚙ Schimbă opțiunile
           </Button>
         </div>
 
@@ -646,18 +654,25 @@ export default function Alchimie({
           {won && (
             <ResultCard
               icon="★"
-              title="Ai craftat tinta!"
+              title="Ai făurit ținta!"
               accent={GOLD}
               score={state.score}
               isRecord={isRecord}
               isPuzzleRecord={isPuzzleRecord}
               shareText={sharePayload}
               onCopy={() => void handleCopy()}
-              onReplay={newGame}
+              onReplay={() =>
+                void start({
+                  difficulty: state.difficulty,
+                  category: category ?? undefined,
+                })
+              }
+              onOptions={newGame}
               onExit={onExit}
             >
-              <strong style={{ color: "var(--text)" }}>{state.target.label}</strong> in{" "}
-              {state.moves} combinari · {state.discovered_count} concepte descoperite.
+              <strong style={{ color: "var(--text)" }}>{state.target.label}</strong> în{" "}
+              {state.moves} {state.moves === 1 ? "combinație" : "combinații"} ·{" "}
+              {state.discovered_count} concepte descoperite.
             </ResultCard>
           )}
         </AnimatePresence>

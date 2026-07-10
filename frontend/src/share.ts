@@ -1,5 +1,5 @@
 // share.ts — deterministic local share helpers. The server owns the game result text;
-// the client wraps it with a stable app URL + puzzle id for a richer copy payload.
+// the client wraps it with a stable app URL and Romanian-facing brand copy.
 // Clipboard writes use the async API with a hidden-textarea fallback and never throw.
 
 export interface SharePayloadOptions {
@@ -23,15 +23,15 @@ export function stableKey(parts: Array<string | number | null | undefined>): str
 }
 
 export function buildSharePayload({
-  gameTitle,
   serverShare,
   score,
-  puzzleKey,
   appUrl: url = appUrl(),
 }: SharePayloadOptions): string {
-  const lines = [serverShare.trim(), "", `Joaca: ${url}`];
+  const result = serverShare.trim().replace(/^cat_de_roman_esti/u, "Cât de român ești?");
+  const lines = [result, "", `Joacă: ${url}`];
   if (score !== undefined) lines.push(`Scor: ${score}`);
-  if (puzzleKey) lines.push(`Puzzle: ${gameTitle} · ${puzzleKey}`);
+  // gameTitle/puzzleKey remain input metadata for call-site compatibility and local
+  // records, but internal puzzle ids are deliberately absent from human-facing shares.
   return lines.join("\n");
 }
 
