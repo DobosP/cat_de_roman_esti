@@ -19,20 +19,20 @@ from __future__ import annotations
 CATEGORIES: dict[str, tuple[str, str]] = {
     # pop culture — the viral shelf
     "muzica": ("Muzică", "pop"),
-    "film_tv": ("Film & Seriale", "pop"),
-    "meme_net": ("Internet & Meme", "pop"),
+    "film_tv": ("Film și seriale", "pop"),
+    "meme_net": ("Internet și meme", "pop"),
     "sport": ("Sport", "pop"),
-    "viata_de_roman": ("Viața de român", "pop"),
+    "viata_de_roman": ("Viața în România", "pop"),
     "gastronomie": ("Gastronomie", "pop"),
-    # serious — labels byte-identical to the pre-existing per-game maps
-    "arta_cultura": ("Arta & Cultura", "serious"),
+    # serious — shared Romanian display labels
+    "arta_cultura": ("Artă și cultură", "serious"),
     "geografie": ("Geografie", "serious"),
     "istorie": ("Istorie", "serious"),
-    "limba": ("Limba", "serious"),
-    "literatura": ("Literatura", "serious"),
-    "personalitati": ("Personalitati", "serious"),
+    "limba": ("Limbă", "serious"),
+    "literatura": ("Literatură", "serious"),
+    "personalitati": ("Personalități", "serious"),
     "societate": ("Societate", "serious"),
-    "stiinta": ("Stiinta", "serious"),
+    "stiinta": ("Știință", "serious"),
 }
 
 CATEGORY_LABELS: dict[str, str] = {key: label for key, (label, _kind) in CATEGORIES.items()}

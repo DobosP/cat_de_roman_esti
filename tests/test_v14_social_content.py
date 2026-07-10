@@ -1,0 +1,156 @@
+"""Regression guards for the v14 broad-audience Romanian content pass (ADR-0019)."""
+
+from __future__ import annotations
+
+import json
+from collections import Counter
+from pathlib import Path
+
+_ROOT = Path(__file__).resolve().parent.parent
+_PACK_PATH = _ROOT / "tests" / "fixtures" / "games_pack.json"
+_KG_PATH = _ROOT / "tests" / "fixtures" / "kg_sample.json"
+
+_EXPECTED_INVENTORY = {
+    "conexiuni": (286, 181, 105),
+    "contexto": (197, 192, 5),
+    "lant": (195, 89, 106),
+    "alchimie": (91, 75, 16),
+}
+
+_NEW_CONTEXTO_TARGETS = {
+    "ct_societate_290": "n_v11soc_diaspora",
+    "ct_societate_291": "n_minoritati_nationale",
+    "ct_societate_292": "n_avocatul_poporului",
+    "ct_societate_293": "n_v3soc_protest",
+    "ct_societate_294": "n_v3soc_mass_media",
+    "ct_stiinta_295": "n_v3sti_vaccin",
+    "ct_societate_296": "n_v3soc_scoala",
+    "ct_meme_net_297": "n_v4mem_internet",
+}
+
+_QUARANTINED_CONEXIUNI = {
+    "cx_sport_281",
+    "cx_muzica_274",
+    "cx_film_tv_010",
+    "cx_film_tv_246",
+    "cx_film_tv_098",
+    "cx_geografie_001",
+    "cx_literatura_129",
+    "cx_muzica_056",
+    "cx_sport_071",
+    "cx_film_tv_015",
+    "cx_film_tv_164",
+    "cx_meme_net_268",
+    "cx_gastronomie_172",
+    "cx_stiinta_230",
+    "cx_istorie_185",
+}
+
+
+def _load(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _by_id(records: list[dict]) -> dict[str, dict]:
+    return {record["id"]: record for record in records}
+
+
+def test_v14_pack_inventory_and_review_split():
+    pack = _load(_PACK_PATH)
+
+    assert pack["meta"]["counts"] == {
+        game: expected[0] for game, expected in _EXPECTED_INVENTORY.items()
+    }
+    for game, (total, approved, pending) in _EXPECTED_INVENTORY.items():
+        records = pack[game]
+        assert len(records) == total
+        assert Counter(record["status"] for record in records) == {
+            "approved": approved,
+            "pending": pending,
+        }
+
+    assert sum(expected[0] for expected in _EXPECTED_INVENTORY.values()) == 769
+    assert sum(expected[1] for expected in _EXPECTED_INVENTORY.values()) == 537
+    assert sum(expected[2] for expected in _EXPECTED_INVENTORY.values()) == 232
+
+
+def test_v14_adds_contemporary_civic_education_science_and_digital_play():
+    pack = _load(_PACK_PATH)
+    conexiuni = _by_id(pack["conexiuni"])
+    contexto = _by_id(pack["contexto"])
+
+    board = conexiuni["cx_societate_290"]
+    assert board["status"] == "approved"
+    assert board["category"] == "societate"
+    assert board["groups"] == {
+        "g1": ["n_v2soc_alegeri", "n_v3soc_protest", "n_societatea_civila", "n_vot"],
+        "g2": ["n_v4soc_elev", "n_v4soc_student", "n_v3soc_scoala", "n_v2soc_universitate"],
+        "g3": [
+            "n_stix_ion_cantacuzino",
+            "n_microbiologie",
+            "n_v3sti_vaccin",
+            "n_v2sti_bacterie",
+        ],
+        "g4": [
+            "n_v2mem_feed_online",
+            "n_v3mem_hashtag",
+            "n_v3mem_repost",
+            "n_v3mem_scroll_infinit",
+        ],
+    }
+    assert board["group_labels"] == {
+        "g1": "Participare civică",
+        "g2": "De la școală la facultate",
+        "g3": "Sănătate publică și microbiologie",
+        "g4": "În feed, la nesfârșit",
+    }
+    assert len(board["order"]) == len(set(board["order"])) == 16
+    assert set(board["order"]) == {
+        node_id for group in board["groups"].values() for node_id in group
+    }
+
+    for item_id, target in _NEW_CONTEXTO_TARGETS.items():
+        assert contexto[item_id]["target"] == target
+        assert contexto[item_id]["status"] == "approved"
+
+
+def test_v14_quarantined_content_is_not_in_approved_pools():
+    pack = _load(_PACK_PATH)
+    conexiuni = _by_id(pack["conexiuni"])
+    contexto = _by_id(pack["contexto"])
+
+    quarantined = {
+        item_id
+        for item_id in _QUARANTINED_CONEXIUNI
+        if conexiuni[item_id]["status"] == "pending"
+    }
+    assert quarantined == _QUARANTINED_CONEXIUNI
+    assert contexto["ct_meme_net_238"]["status"] == "pending"
+
+    approved_conexiuni = {
+        record["id"] for record in pack["conexiuni"] if record["status"] == "approved"
+    }
+    approved_contexto = {
+        record["id"] for record in pack["contexto"] if record["status"] == "approved"
+    }
+    assert _QUARANTINED_CONEXIUNI.isdisjoint(approved_conexiuni)
+    assert "ct_meme_net_238" not in approved_contexto
+
+
+def test_v14_uses_neutral_everyday_labels_and_descriptions():
+    nodes = _by_id(_load(_KG_PATH)["kg_nodes"])
+
+    everyday = nodes["n_vdr_viata_de_roman"]
+    assert everyday["label_ro"] == "Viața în România"
+    assert everyday["description"] == (
+        "Umbrela de obiceiuri, reflexe și amintiri cotidiene recognoscibile în România."
+    )
+    assert "Viața de român" in everyday["aliases"]
+
+    resourcefulness = nodes["n_vdr_descurcare_romaneasca"]
+    assert resourcefulness["label_ro"] == "Descurcăreala de zi cu zi"
+    assert resourcefulness["description"] == (
+        "Capacitatea de a găsi soluții practice și improvizate când timpul sau "
+        "resursele sunt limitate."
+    )
+    assert "Descurcăreala românească" in resourcefulness["aliases"]

@@ -1,10 +1,9 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-10. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-10 (v14 mechanics: full backend + ruff + both validators green;
-v14 Romanian-first frontend test/build/typecheck/lint green.)_
+_Last verified: 2026-07-10 (v14 full backend/frontend, Ruff, both validators, mobile contract, and session gates green.)_
 
-## Latest — v14 fair-play and Romanian-first foundation
+## Latest — v14 fair-play, Romanian-first UX, and broad-audience content
 
 Alchimie now scores against the exact minimum number of sequential combines rather than
 parallel closure rounds. Seven approved and six pending pars were corrected; every
@@ -26,13 +25,14 @@ Cald sau Rece now builds rank and closeness from directed guess-to-target distan
 same direction used for each typed guess. All 189 curated/review targets remain valid;
 hidden-answer and API-shape boundaries are unchanged (ADR-0018).
 
+The reviewed pool now favors contemporary civic participation, education, science,
+public health, diaspora, and digital life. Neutral labels replace essentializing ones;
+15 duplicate or broad-audience-mismatched Conexiuni boards and one profanity-centered
+target moved to pending rather than being deleted (ADR-0019).
+
 Ordinary no-category starts use the reviewed pack in all four games: seeded deterministic
 selection, signed-in avoid-repeats, and bounded-miner fallback. Daily rendezvous hashing
 and explicit category filters are unchanged (ADR-0011).
-
-Conexiuni exposes each authored label and four tiles only once solved; unsolved groups stay
-hidden. Duplicate unordered guesses return 409 without mutation, and the SPA applies the
-guess response directly. ADR-0014 supersedes ADR-0010's terminal-only reveal rule.
 
 ## Product phase
 
@@ -51,12 +51,12 @@ accounts add Google sign-in, saved puzzle ids, ranking handles, scores, and dona
 
 | Game | Approved | Pending | Runtime source |
 |---|---:|---:|---|
-| Conexiuni | 195 | 90 | curated first; mixed-board miner fallback only |
-| Cald sau Rece | 185 | 4 | curated first; category-scoped miner fallback |
+| Conexiuni | 181 | 105 | curated first; mixed-board miner fallback only |
+| Cald sau Rece | 192 | 5 | curated first; category-scoped miner fallback |
 | Lanțul Cuvintelor | 89 | 106 | curated first; branch-aware miner fallback |
 | Alchimie | 75 | 16 | curated first; category-scoped closure fallback |
 
-Pack total: **760 instances = 544 approved + 216 pending**, across 14 categories.
+Pack total: **769 instances = 537 approved + 232 pending**, across 14 categories.
 Bundled KG: **1,459 nodes / 5,656 edges / 4,688 aliases / 180 legacy puzzles**;
 both fixture copies and both pack copies are byte-identical.
 
