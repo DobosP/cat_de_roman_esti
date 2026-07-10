@@ -353,12 +353,11 @@ def test_serializer_fail_closed_for_group_payloads_before_terminal() -> None:
 
 # --------------------------------------------------------------------- generation
 def _board_cats(seed: int, difficulty: str) -> tuple[str, ...]:
-    from cat_de_roman_esti.wordgames.conexiuni import store
+    import random
 
-    c = make_client()
-    body = c.post(f"{BASE}/games?seed={seed}&difficulty={difficulty}").json()
-    session = store.get(body["game_id"])
-    assert session is not None
+    from cat_de_roman_esti.wordgames.conexiuni import _pick_board
+
+    session = _pick_board(random.Random(seed), difficulty)
     return tuple(sorted(session.groups))
 
 
@@ -380,6 +379,7 @@ def test_all_generated_boards_are_fair() -> None:
         NUM_GROUPS,
         _pick_board,
         get_service,
+        store,
     )
 
     svc = get_service()
@@ -410,8 +410,7 @@ def test_all_generated_boards_are_fair() -> None:
 
             # a guess of a full true group is accepted by the engine
             c = make_client()
-            body = c.post(f"{BASE}/games?seed={seed}&difficulty={diff}").json()
-            gid = body["game_id"]
+            gid = store.create(session)
             for cat, members in session.groups.items():
                 res = _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": members}).json()
                 assert res["correct"] is True, f"true group rejected: {ctx} cat={cat}"

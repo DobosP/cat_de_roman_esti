@@ -59,19 +59,25 @@ def _target_of(seed: int = SEED, difficulty: str = "normal"):
     Specific labels/distances drift as the bundled KG is regenerated, so tests derive
     them from the engine's own selection rather than pinning to a hand-named id.
     """
+    import random
+
     from cat_de_roman_esti.wordgames.contexto import _pick_target
+    from cat_de_roman_esti.wordgames.packs import get_pack
     from cat_de_roman_esti.wordgames.service import get_service
 
     svc = get_service()
-    session = _pick_target(seed, difficulty)
+    curated = get_pack().pick_seeded(
+        "contexto", random.Random(seed), difficulty=difficulty
+    )
+    target = str(curated.payload["target"]) if curated else _pick_target(seed, difficulty).target
     # A genuine distance-1 neighbour: the service adjacency is DIRECTED (one-way edges
     # like created_by exist), so neighbor_ids[0] is not always symmetric distance-1 —
     # pick the first neighbour that really is one BFS hop away.
     neighbour = next(
-        (nb for nb in svc.neighbor_ids(session.target) if svc.distance(nb, session.target) == 1),
-        svc.neighbor_ids(session.target)[0],
+        (nb for nb in svc.neighbor_ids(target) if svc.distance(nb, target) == 1),
+        svc.neighbor_ids(target)[0],
     )
-    return session.target, svc.label(session.target), neighbour, svc.label(neighbour)
+    return target, svc.label(target), neighbour, svc.label(neighbour)
 
 
 def _reveal_target_label(client, *, seed: int = SEED, difficulty: str = "normal", daily=None):
@@ -361,7 +367,7 @@ def _make_counted_guesses(client, gid: str, count: int) -> dict:
 
 
 def test_category_clue_unlocks_after_three_attempts_without_target_leak() -> None:
-    from cat_de_roman_esti.wordgames.contexto import _pick_target
+    from cat_de_roman_esti.wordgames.contexto import store
     from cat_de_roman_esti.wordgames.service import get_service
 
     c = make_client()
@@ -377,7 +383,9 @@ def test_category_clue_unlocks_after_three_attempts_without_target_leak() -> Non
     clue = c.post(f"/api/wordgames/contexto/games/{gid}/clue")
     assert clue.status_code == 200, clue.content.decode()
     body = clue.json()
-    secret = _pick_target(SEED, "normal").target
+    session = store.get(gid)
+    assert session is not None
+    secret = session.target
     target_node = get_service().node(secret)
     assert body["clues_used"] == 1
     assert body["clue_available"] is False
@@ -499,18 +507,11 @@ def test_only_the_win_reads_closeness_100() -> None:
     Otherwise a distance-1 guess can read 100 and be ambiguous with a win. We pick a
     target, then drive a distance-1 neighbour guess and assert its closeness is < 100.
     """
-    from cat_de_roman_esti.wordgames.contexto import _pick_target
     from cat_de_roman_esti.wordgames.service import get_service
 
     svc = get_service()
-    session = _pick_target(SEED, "normal")
-    target = session.target
+    _, _, neighbour, _ = _target_of()
     # directed adjacency: pick a neighbour that is truly one BFS hop away (see _target_of).
-    neighbour = next(
-        (nb for nb in svc.neighbor_ids(target) if svc.distance(nb, target) == 1),
-        svc.neighbor_ids(target)[0],
-    )
-
     c = make_client()
     gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
     body = c.post(

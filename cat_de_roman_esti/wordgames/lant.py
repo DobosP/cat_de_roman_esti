@@ -344,16 +344,12 @@ class CreateGameView(ContractAPIView):
                 GAME_KEY, daily, category=category, difficulty=difficulty
             )
         else:
-            curated = (
-                get_pack().pick_seeded(
-                    GAME_KEY,
-                    random.Random(seed),
-                    category=category,
-                    difficulty=difficulty,
-                    exclude_ids=excluded_pack_ids(request, GAME_KEY),
-                )
-                if category is not None
-                else None
+            curated = get_pack().pick_seeded(
+                GAME_KEY,
+                random.Random(seed),
+                category=category,
+                difficulty=difficulty,
+                exclude_ids=excluded_pack_ids(request, GAME_KEY),
             )
         if curated is not None:
             start = str(curated.payload["start"])

@@ -1,10 +1,15 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-07-09. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-10 (v12.1 on merged `main`: data gates green — `validate_games_pack.py` +
-`validate_fixture.py` + 81 stdlib pytest; the Django/DRF web-layer suite needs a Django venv, absent on this
-host, and runs in CI. NOTE: local `pytest` aborts collection on `tests/test_accounts_offmode.py`, which imports
-Django without an `importorskip` guard — harmless in CI; run with `--continue-on-collection-errors` locally.)_
+_As of 2026-07-10. Update whenever `main` or the test baseline moves._
+_Last verified: 2026-07-10 (v13 curated-first routing: 148 focused Django/game/mobile/session tests green;
+`validate_games_pack.py` + `validate_fixture.py` green; frontend test/build/lint green on the v12 baseline.)_
+
+**Latest — v13 curated-first ordinary play (2026-07-10):** fixed a routing gap that made all four ordinary
+no-category starts bypass the reviewed games pack. Random play now draws deterministically from the **642
+v12-approved instances** (195 Conexiuni / 185 Contexto / 187 Lanț / 75 Alchimie), applies signed-in
+avoid-repeats there, and uses bounded deterministic mining only when the matching curated pool is empty.
+Daily rendezvous selection, category filtering, hidden-answer boundaries, and the per-game session policy
+(6-hour sliding TTL / 10,000-session LRU cap) are unchanged. This restores ADR-0011's curated-first contract.
 
 **Latest — v12/v12.1 merged to `main` + v12.1 content fixes complete (2026-07-10):** merged the v12
 consolidation and v12.1 diacritics branch into `main` alongside the parallel `feat(accounts)`+`feat(ranking)`
