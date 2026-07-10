@@ -1,22 +1,24 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-10. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-10 (v13: full 235-test pytest suite + ruff +
-`validate_games_pack.py` + `validate_fixture.py` green; frontend test/build/lint green.)_
+_Last verified: 2026-07-10 (v14 Alchimie: full backend suite + ruff + both
+validators green; v13 frontend test/build/lint remains the frontend baseline.)_
 
-## Latest — v13 play-loop foundation
+## Latest — v14 fair-play foundation
 
-Ordinary no-category starts now use the reviewed curated pack in all four games. This
-fixes a routing gap that made default play bypass all 642 v12-approved instances.
-Selection is seeded and deterministic; signed-in avoid-repeats applies; the existing
-bounded miner remains the fallback when a matching curated pool is empty. Daily
-rendezvous hashing and explicit category filters are unchanged (ADR-0011).
+Alchimie now scores against the exact minimum number of sequential combines rather than
+parallel closure rounds. Seven approved and six pending pars were corrected; every
+served board can now earn 1,000 points/✨. The shared category-scoped BFS is deterministic
+and capped at six actions / 50,000 states, and the importer now restores the missing
+category scope before deriving new candidates (ADR-0015). Session bounds are unchanged.
 
-Conexiuni now exposes an authored label and four tiles only after that group is solved,
-so correct groups persist as colored locked rows while every unsolved group stays hidden.
-Re-submitting the same unordered four-tile set returns 409 without consuming a life or
-advancing the clue. The SPA applies the authoritative guess response directly instead of
-issuing a follow-up GET. ADR-0014 supersedes ADR-0010's terminal-only solved-group rule.
+Ordinary no-category starts use the reviewed pack in all four games: seeded deterministic
+selection, signed-in avoid-repeats, and bounded-miner fallback. Daily rendezvous hashing
+and explicit category filters are unchanged (ADR-0011).
+
+Conexiuni exposes each authored label and four tiles only once solved; unsolved groups stay
+hidden. Duplicate unordered guesses return 409 without mutation, and the SPA applies the
+guess response directly. ADR-0014 supersedes ADR-0010's terminal-only reveal rule.
 
 ## Product phase
 
@@ -44,9 +46,7 @@ puzzle ids, public ranking handles, leaderboard scores, and donations.
 Pack total: **760 instances = 642 approved + 118 pending**, across 14 categories.
 Bundled KG: **1,459 nodes / 5,656 edges / 4,688 aliases / 180 legacy puzzles**;
 both fixture copies and both pack copies are byte-identical. V12 removed 101 duplicates
-or broken games, adversarially rechecked high-stakes verdicts, then v12.1 completed
-difficulty, member, label, description, and Romanian-diacritics fixes. Its dated handoff
-is expired history.
+or broken games and completed difficulty, member, label, description, and diacritics fixes.
 
 The curated fixture path is the delivered content source. The `romania_scraper →
 ro_data_server` corpus path remains blocked by restricted processed-data access; live
@@ -81,16 +81,14 @@ The shared session-only command remains:
 `PYTHONPATH=. /home/dobo/work/romania_scraper/.venv/bin/python -m pytest
 tests/test_wordgames_session_store.py -q` (10 passed). Do not commit generated SPA assets.
 
-## Verified v13 follow-up candidates
+## Verified v14 follow-up candidates
 
 These are audit findings, not accepted decisions:
 
 - Repair the v11 enrichment tail: 183 nodes currently have non-distractor degree ≤2
   (157 are `n_v11*`), below the play-density direction in ADR-0012.
-- Close curated/mined mechanics drift before expanding content: 98/187 approved Lanț
-  pairs miss the miner's branch-width floor; Alchimie's stored closure generation is not
-  always the true minimum action count; category-scoped importer depth needs its missing
-  category argument restored.
+- Close the remaining curated/mined mechanics drift: 98/187 approved Lanț pairs miss the
+  miner's branch-width floor, whose reverse-distance audit must respect directed edges.
 - Improve Contexto's compressed BFS feedback (approved targets have only 6–9 non-win
   distance buckets) without weakening its target reveal boundary.
 - Build the visible replay loop: home daily progress, consistent same-filter replay, and

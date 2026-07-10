@@ -43,9 +43,11 @@ import validate_games_pack  # noqa: E402
 
 from cat_de_roman_esti.data import load_fixture  # noqa: E402
 from cat_de_roman_esti.wordgames.packs import (  # noqa: E402
+    ALCHIMIE_MAX_ACTIONS,
     GAME_KINDS,
     _closure_generations,
     _opening_pairs,
+    minimum_alchimie_actions,
     validate_envelope,
     validate_payload,
 )
@@ -141,7 +143,19 @@ def rederive_existing_items(pack: dict, svc, report: list[str]) -> dict[str, lis
                 if band is None or _opening_pairs(svc, seeds, cat) < 2:
                     report.append(f"DROPPED {rec['id']}: in-category closure depth now {depth}")
                     continue
-                rec["target_depth"], rec["difficulty"] = depth, band
+                par = minimum_alchimie_actions(
+                    svc,
+                    seeds,
+                    str(rec["target"]),
+                    cat,
+                    max_actions=ALCHIMIE_MAX_ACTIONS,
+                )
+                if par is None:
+                    report.append(
+                        f"DROPPED {rec['id']}: target exceeds the {ALCHIMIE_MAX_ACTIONS}-action cap"
+                    )
+                    continue
+                rec["target_depth"], rec["difficulty"] = par, band
             if validate_envelope(rec, game) or (
                 rec.get("status") == "approved" and validate_payload(rec, game, svc)
             ):
@@ -330,7 +344,9 @@ def main(argv: list[str]) -> int:
                     if not ok or not svc.exists(target):
                         stats["skipped"] += 1
                         continue
-                    depth = _closure_generations(svc, seeds[:7]).get(target)
+                    # New candidates use the same category scope and exact sequential
+                    # action par as runtime play and validation.
+                    depth = _closure_generations(svc, seeds[:7], cat).get(target)
                     band = (
                         _band_for(depth, str(inst.get("difficulty", "normal")), ALCH_BANDS)
                         if depth
@@ -339,11 +355,21 @@ def main(argv: list[str]) -> int:
                     if band is None:
                         stats["skipped"] += 1
                         continue
+                    par = minimum_alchimie_actions(
+                        svc,
+                        seeds[:7],
+                        target,
+                        cat,
+                        max_actions=ALCHIMIE_MAX_ACTIONS,
+                    )
+                    if par is None:
+                        stats["skipped"] += 1
+                        continue
                     rec = {
                         "difficulty": band,
                         "seeds": seeds[:7],
                         "target": target,
-                        "target_depth": depth,
+                        "target_depth": par,
                     }
                 add_item(game, cat, rec, verdict)
 

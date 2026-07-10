@@ -33,7 +33,7 @@ from ..web.http import (
 )
 from ._progress import excluded_pack_ids, record_finished
 from .categories import category_label, is_known, known_keys
-from .packs import get_pack
+from .packs import ALCHIMIE_MAX_ACTIONS, get_pack, minimum_alchimie_actions
 from .service import SessionStore, daily_seed, get_service
 
 GAME_KEY = "alchimie"
@@ -83,7 +83,7 @@ class AlchimieSession:
 
     seeds: list[str]
     target: str
-    # The generation depth of the target in the seed closure == minimum combines to win.
+    # Stable API name; value is the exact minimum number of sequential combines (par).
     target_depth: int = MIN_TARGET_GENERATION
     difficulty: str = DEFAULT_DIFFICULTY
     daily: str | None = None
@@ -256,11 +256,20 @@ def _build_session(
     if category is not None and len(pool) < seed_min:
         raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
 
-    def _finish(seeds: list[str], target: str, depth: int) -> AlchimieSession:
+    def _finish(seeds: list[str], target: str) -> AlchimieSession | None:
+        par = minimum_alchimie_actions(
+            svc,
+            seeds,
+            target,
+            category,
+            max_actions=ALCHIMIE_MAX_ACTIONS,
+        )
+        if par is None:
+            return None
         session = AlchimieSession(
             seeds=list(seeds),
             target=target,
-            target_depth=depth,
+            target_depth=par,
             difficulty=difficulty,
             daily=daily,
             category=category,
@@ -269,7 +278,7 @@ def _build_session(
             session.add(s, None)
         return session
 
-    best_relaxed: tuple[list[str], str, int] | None = None
+    best_relaxed: AlchimieSession | None = None
     for _ in range(MAX_BUILD_ATTEMPTS):
         k = rng.randint(seed_min, min(seed_max, len(pool)))
         seeds = _grow_seed_set(rng, k, pool, category)
@@ -294,14 +303,17 @@ def _build_session(
             max_depth = max(gen[nid] for nid in cands)
             cands = [nid for nid in cands if gen[nid] == max_depth]
         target = rng.choice(cands)
+        session = _finish(seeds, target)
+        if session is None:
+            continue
         if openings >= MIN_OPENING_PAIRS:
-            return _finish(seeds, target, gen[target])
+            return session
         # Keep the first viable-but-thin instance as a fallback if nothing better lands.
         if best_relaxed is None:
-            best_relaxed = (seeds, target, gen[target])
+            best_relaxed = session
 
     if best_relaxed is not None:
-        return _finish(*best_relaxed)
+        return best_relaxed
 
     # Last-resort fallback: relax everything over the full in-scope pool so we never 500.
     fallback_pool = [
@@ -320,8 +332,15 @@ def _build_session(
         if category is not None:
             raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
         raise http_error(500, "Nu am putut genera un joc solvabil.")
-    target = rng.choice(deep)
-    return _finish(seeds, target, gen[target])
+    rng.shuffle(deep)
+    for target in deep:
+        session = _finish(seeds, target)
+        if session is not None:
+            return session
+    raise http_error(
+        503,
+        f"Nu exista inca o tinta rezolvabila in cel mult {ALCHIMIE_MAX_ACTIONS} mutari.",
+    )
 
 
 def _useful_pair(session: AlchimieSession) -> tuple[str, str] | None:
