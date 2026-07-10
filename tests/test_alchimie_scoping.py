@@ -32,6 +32,7 @@ def test_common_neighbors_category_scope_restricts_results():
 
 def test_mined_alchimie_is_always_themed_and_bounded():
     from cat_de_roman_esti.wordgames.alchimie import _closure_with_generations, store
+    from cat_de_roman_esti.wordgames.packs import minimum_alchimie_actions
 
     c = Client()
     # No category requested -> the builder must still pick one (ADR-0013).
@@ -43,8 +44,15 @@ def test_mined_alchimie_is_always_themed_and_bounded():
     svc = get_service()
     assert len(closure) <= len(svc.by_category(session.category)) + len(session.seeds)
     assert session.target in closure
-    # target_depth matches the in-category closure depth.
-    assert closure[session.target] == session.target_depth
+    # target_depth is the exact sequential-action par; closure depth is only its
+    # parallel-round lower bound and may be smaller.
+    assert closure[session.target] <= session.target_depth
+    assert (
+        minimum_alchimie_actions(
+            svc, session.seeds, session.target, session.category
+        )
+        == session.target_depth
+    )
 
 
 def test_category_scoped_alchimie_is_winnable():

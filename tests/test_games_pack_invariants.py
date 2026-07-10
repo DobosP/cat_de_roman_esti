@@ -70,7 +70,49 @@ def test_game_constant_mirrors_do_not_drift():
     assert packs.CONTEXTO_RESPONSIVE_MAX_HOPS == contexto.RESPONSIVE_MAX_HOPS
     assert packs.ALCHIMIE_MIN_OPENING_PAIRS == alchimie.MIN_OPENING_PAIRS
     assert packs.ALCHIMIE_SEED_RANGE == (alchimie.SEED_MIN, alchimie.SEED_MAX)
+    assert packs.ALCHIMIE_MAX_ACTIONS == 6
+    assert packs.ALCHIMIE_MAX_SEARCH_STATES == 50_000
     assert packs.CONEXIUNI_GROUPS == 4 and packs.CONEXIUNI_GROUP_SIZE == 4
+
+
+def test_alchimie_par_counts_sequential_actions_not_parallel_rounds():
+    from cat_de_roman_esti.wordgames import packs
+
+    class RecipeService:
+        nodes = {"a", "b", "c", "d", "e", "x", "y", "target"}
+        recipes = {
+            frozenset(("a", "b")): ["x"],
+            frozenset(("c", "d")): ["y"],
+            frozenset(("x", "y")): ["target"],
+        }
+
+        def exists(self, node_id):
+            return node_id in self.nodes
+
+        def common_neighbors(self, a, b, *, category=None):
+            assert category == "societate"
+            return self.recipes.get(frozenset((a, b)), [])
+
+    svc = RecipeService()
+    seeds = ["a", "b", "c", "d", "e"]
+    assert packs._closure_generations(svc, seeds, "societate")["target"] == 2
+    assert packs.minimum_alchimie_actions(
+        svc, seeds, "target", "societate", max_actions=2
+    ) is None
+    assert packs.minimum_alchimie_actions(
+        svc, seeds, "target", "societate", max_actions=3
+    ) == 3
+
+    errors = packs._validate_alchimie(
+        {
+            "seeds": seeds,
+            "target": "target",
+            "target_depth": 2,
+            "category": "societate",
+        },
+        svc,
+    )
+    assert errors == ["target_depth must equal the exact action par (3)"]
 
 
 def test_unresolvable_items_are_pruned_at_load():

@@ -298,12 +298,39 @@ def test_target_is_recognizable(client: Client, difficulty: str) -> None:
 
 
 def test_greu_target_depth_is_capped(client: Client) -> None:
-    """Greu targets are deep (>=3) but capped so the game stays finishable."""
+    """Greu targets are deep but their exact sequential par stays bounded."""
     import random as _random
 
     for seed in range(30):
         session = A._build_session(_random.Random(seed), difficulty="greu")
-        assert 3 <= session.target_depth <= A.GREU_MAX_GENERATION
+        closure_depth = A._closure_with_generations(
+            session.seeds, session.category
+        )[session.target]
+        assert 3 <= closure_depth <= A.GREU_MAX_GENERATION
+        assert closure_depth <= session.target_depth <= A.ALCHIMIE_MAX_ACTIONS
+
+
+def test_curated_par_makes_the_perfect_score_achievable() -> None:
+    """A former closure-depth undercount now prices the real six-action optimum."""
+    from cat_de_roman_esti.wordgames.packs import get_pack, minimum_alchimie_actions
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    item = next(i for i in get_pack().pool("alchimie") if i.id == "al_film_tv_023")
+    par = minimum_alchimie_actions(
+        get_service(),
+        item.payload["seeds"],
+        item.payload["target"],
+        item.category,
+    )
+    assert par == item.payload["target_depth"] == 6
+    session = A.AlchimieSession(
+        seeds=item.payload["seeds"],
+        target=item.payload["target"],
+        target_depth=par,
+    )
+    session.moves = par
+    assert session.score == 1000
+    assert "✨" in A._share_line(session)
 
 
 # ----------------------------------------------------------------- nudges + edge cases

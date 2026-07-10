@@ -48,6 +48,12 @@ CONTEXTO_MIN_RESPONSIVE = 40
 CONTEXTO_RESPONSIVE_MAX_HOPS = 5
 ALCHIMIE_MIN_OPENING_PAIRS = 2
 ALCHIMIE_SEED_RANGE = (5, 7)
+# Alchimie score/par uses sequential pair selections, not parallel closure rounds.
+# Six is the reviewed content ceiling: it keeps exact search and every game bounded.
+ALCHIMIE_MAX_ACTIONS = 6
+# Exact inventory BFS is also state-bounded. The reviewed pack's worst board stays well
+# below this ceiling; adversarial mined candidates fail closed instead of stalling a request.
+ALCHIMIE_MAX_SEARCH_STATES = 50_000
 CONEXIUNI_GROUPS = 4
 CONEXIUNI_GROUP_SIZE = 4
 
@@ -123,6 +129,64 @@ def _opening_pairs(svc: WordGameService, seeds: list[str], category: str | None 
         if any(c not in owned for c in svc.common_neighbors(a, b, category=category)):
             count += 1
     return count
+
+
+def minimum_alchimie_actions(
+    svc: WordGameService,
+    seeds: list[str],
+    target: str,
+    category: str | None = None,
+    *,
+    max_actions: int = ALCHIMIE_MAX_ACTIONS,
+    max_states: int = ALCHIMIE_MAX_SEARCH_STATES,
+) -> int | None:
+    """Exact minimum sequential combines needed to own ``target``.
+
+    A closure generation applies every productive pair in parallel, while one real
+    Alchimie move selects exactly one pair and receives all of that pair's fresh common
+    neighbours.  Breadth-first search over owned inventories mirrors that real action.
+    The search is deterministic (sorted inventories/pairs) and deliberately stops at the
+    reviewed six-action content ceiling, keeping validation and mined play bounded.
+
+    ``None`` means the target was not certified within the action/state bounds. Callers
+    that need to distinguish globally unreachable targets can inspect
+    ``_closure_generations``.
+    """
+    if max_actions < 0 or max_states < 1:
+        raise ValueError("max_actions must be non-negative and max_states must be positive")
+    start = frozenset(str(seed) for seed in seeds)
+    if target in start:
+        return 0
+
+    frontier: set[frozenset[str]] = {start}
+    seen: set[frozenset[str]] = {start}
+    state_count = 1
+    for actions in range(1, max_actions + 1):
+        next_layer: set[frozenset[str]] = set()
+        for owned in sorted(frontier, key=lambda state: tuple(sorted(state))):
+            for a, b in combinations(sorted(owned), 2):
+                fresh = frozenset(
+                    node
+                    for node in svc.common_neighbors(a, b, category=category)
+                    if node not in owned
+                )
+                if not fresh:
+                    continue
+                if target in fresh:
+                    return actions
+                state = owned | fresh
+                if state not in seen and state not in next_layer:
+                    state_count += 1
+                    if state_count > max_states:
+                        return None
+                    next_layer.add(state)
+
+        if not next_layer:
+            return None
+
+        frontier = next_layer
+        seen.update(frontier)
+    return None
 
 
 def validate_envelope(rec: dict, game: str) -> list[str]:
@@ -252,11 +316,17 @@ def _validate_alchimie(rec: dict, svc: WordGameService) -> list[str]:
     if target in seeds:
         return ["target must not be a seed"]
     gen = _closure_generations(svc, seeds, category)
-    actual = gen.get(target)
-    if actual is None:
+    closure_depth = gen.get(target)
+    if closure_depth is None:
         return ["target is not craftable from the seeds (in-category)"]
-    if not isinstance(depth, int) or depth != actual:
-        errors.append(f"target_depth must equal the closure depth ({actual})")
+    actual = minimum_alchimie_actions(svc, seeds, target, category)
+    if actual is None:
+        errors.append(
+            "target is not certified within the bounded exact-action search "
+            f"({ALCHIMIE_MAX_ACTIONS} actions / {ALCHIMIE_MAX_SEARCH_STATES} states)"
+        )
+    elif not isinstance(depth, int) or depth != actual:
+        errors.append(f"target_depth must equal the exact action par ({actual})")
     if _opening_pairs(svc, seeds, category) < ALCHIMIE_MIN_OPENING_PAIRS:
         errors.append(
             f"seed set offers fewer than {ALCHIMIE_MIN_OPENING_PAIRS} opening pairs"
