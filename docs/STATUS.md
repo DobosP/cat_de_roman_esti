@@ -22,6 +22,10 @@ describes Alchimie's visible target truthfully. All dailies honor selected diffi
 categories are explicitly free-play-only. Results offer immediate same-filter replay,
 separate options, and menu actions in all four games (ADR-0017).
 
+Cald sau Rece now builds rank and closeness from directed guess-to-target distance, the
+same direction used for each typed guess. All 189 curated/review targets remain valid;
+hidden-answer and API-shape boundaries are unchanged (ADR-0018).
+
 Ordinary no-category starts use the reviewed pack in all four games: seeded deterministic
 selection, signed-in avoid-repeats, and bounded-miner fallback. Daily rendezvous hashing
 and explicit category filters are unchanged (ADR-0011).
@@ -93,5 +97,3 @@ tests/test_wordgames_session_store.py -q` (10 passed). Do not commit generated S
 
 - Repair the v11 enrichment tail: 183 nodes currently have non-distractor degree ≤2
   (157 are `n_v11*`), below the play-density direction in ADR-0012.
-- Improve Contexto's compressed BFS feedback (approved targets have only 6–9 non-win
-  distance buckets) without weakening its target reveal boundary.

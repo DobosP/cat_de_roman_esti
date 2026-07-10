@@ -82,9 +82,11 @@ shipping the hidden answer. Each accepted guess has:
 ```
 
 `rank` is one-based (`1` is the secret target), ties share the same rank for a distance
-bucket, and unreachable guesses rank after the reachable set. Pre-reveal responses keep
-the target id, target label, and any `solution` payload absent across create/get/guess/clue.
-The exact target object appears only on win or give-up.
+bucket, and unreachable guesses rank after the reachable set. Distances are directed from
+the guess to the target; `rank`, `closeness`, and `reachable_count` use that same inbound
+distance population. Pre-reveal responses keep the target id, target label, and any
+`solution` payload absent across create/get/guess/clue. The exact target object appears only
+on win or give-up.
 
 ## 5. Conexiuni earned state and clue endpoint
 

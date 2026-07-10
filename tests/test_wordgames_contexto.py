@@ -70,12 +70,10 @@ def _target_of(seed: int = SEED, difficulty: str = "normal"):
         "contexto", random.Random(seed), difficulty=difficulty
     )
     target = str(curated.payload["target"]) if curated else _pick_target(seed, difficulty).target
-    # A genuine distance-1 neighbour: the service adjacency is DIRECTED (one-way edges
-    # like created_by exist), so neighbor_ids[0] is not always symmetric distance-1 —
-    # pick the first neighbour that really is one BFS hop away.
+    # A genuine incoming distance-1 guess. Contexto distance is directed guess -> target,
+    # so an outgoing target neighbour is not necessarily a valid hot guess.
     neighbour = next(
-        (nb for nb in svc.neighbor_ids(target) if svc.distance(nb, target) == 1),
-        svc.neighbor_ids(target)[0],
+        nid for nid, distance in svc.distances_to(target).items() if distance == 1
     )
     return target, svc.label(target), neighbour, svc.label(neighbour)
 
@@ -469,11 +467,59 @@ def test_every_target_has_a_responsive_warm_band(difficulty: str) -> None:
     svc = get_service()
     for seed in range(60):
         session = _pick_target(seed, difficulty)
-        near = _responsive_count(svc.distances_from(session.target))
+        near = _responsive_count(svc.distances_to(session.target))
         assert near >= MIN_RESPONSIVE, (
             f"{difficulty} seed={seed} target={session.target} "
             f"responsive={near} < {MIN_RESPONSIVE}"
         )
+
+
+def test_session_histogram_uses_directed_guess_to_target_distances(monkeypatch) -> None:
+    """One-way outbound nodes must not enter Contexto's inbound rank population."""
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames import contexto
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    nodes = [
+        {"id": node_id, "label_ro": node_id, "category": "test"}
+        for node_id in ("far", "near", "target", "outbound")
+    ]
+    edges = [
+        {
+            "id": f"e_{src}_{dst}",
+            "src_id": src,
+            "dst_id": dst,
+            "bidirectional": 0,
+            "is_distractor": 0,
+        }
+        for src, dst in (
+            ("far", "near"),
+            ("near", "target"),
+            ("target", "outbound"),
+        )
+    ]
+    svc = WordGameService(Graph.from_records(nodes, edges))
+    monkeypatch.setattr(contexto, "get_service", lambda: svc)
+
+    session = contexto._build_session("target", "normal", None)
+
+    assert svc.distances_from("target") == {"target": 0, "outbound": 1}
+    assert svc.distances_to("target") == {"target": 0, "near": 1, "far": 2}
+    assert session.reachable == 3
+    assert session.dist_hist == {0: 1, 1: 1, 2: 1}
+    assert contexto.rank_for(session, svc.distance("near", "target")) == 2
+    assert contexto.closeness_for(session, svc.distance("near", "target")) == 50
+
+    # Seed 0 keeps this two-item order. Forward traversal would wrongly accept `far`
+    # because it can reach the rest of the graph; inbound traversal correctly skips it.
+    monkeypatch.setattr(contexto, "MIN_REACHABLE", 3)
+    monkeypatch.setattr(contexto, "MIN_RESPONSIVE", 2)
+    monkeypatch.setattr(
+        contexto,
+        "_difficulty_pool",
+        lambda _svc, _difficulty, _category=None: ["far", "target"],
+    )
+    assert contexto._pick_target(0).target == "target"
 
 
 def test_seeds_yield_varied_targets() -> None:

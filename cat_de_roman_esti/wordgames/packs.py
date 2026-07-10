@@ -287,14 +287,17 @@ def _validate_contexto(rec: dict, svc: WordGameService) -> list[str]:
     target = str(rec.get("target") or "")
     if not svc.exists(target):
         return [f"unknown target node id: {target}"]
-    dist = svc.distances_from(target)
+    # Contexto scores distance(guess, target), so validation must measure the same
+    # directed relation as runtime session histograms and guesses.
+    dist = svc.distances_to(target)
     responsive = sum(
         1 for d in dist.values() if 1 <= d <= CONTEXTO_RESPONSIVE_MAX_HOPS
     )
     errors: list[str] = []
     if len(dist) < CONTEXTO_MIN_REACHABLE:
         errors.append(
-            f"target reaches only {len(dist)} nodes (< {CONTEXTO_MIN_REACHABLE})"
+            f"only {len(dist)} nodes can reach the target "
+            f"(< {CONTEXTO_MIN_REACHABLE})"
         )
     if responsive < CONTEXTO_MIN_RESPONSIVE:
         errors.append(

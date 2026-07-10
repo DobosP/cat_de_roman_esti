@@ -77,6 +77,37 @@ def test_game_constant_mirrors_do_not_drift():
     assert packs.CONEXIUNI_GROUPS == 4 and packs.CONEXIUNI_GROUP_SIZE == 4
 
 
+def test_contexto_validator_uses_directed_guess_to_target_distances(monkeypatch):
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames import packs
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    nodes = [
+        {"id": node_id, "label_ro": node_id, "category": "test"}
+        for node_id in ("far", "near", "target", "outbound")
+    ]
+    edges = [
+        {
+            "id": f"e_{src}_{dst}",
+            "src_id": src,
+            "dst_id": dst,
+            "bidirectional": 0,
+            "is_distractor": 0,
+        }
+        for src, dst in (
+            ("far", "near"),
+            ("near", "target"),
+            ("target", "outbound"),
+        )
+    ]
+    svc = WordGameService(Graph.from_records(nodes, edges))
+    monkeypatch.setattr(packs, "CONTEXTO_MIN_REACHABLE", 3)
+    monkeypatch.setattr(packs, "CONTEXTO_MIN_RESPONSIVE", 2)
+
+    assert len(svc.distances_from("target")) == 2  # wrong direction would fail the floor
+    assert packs._validate_contexto({"target": "target"}, svc) == []
+
+
 def test_alchimie_par_counts_sequential_actions_not_parallel_rounds():
     from cat_de_roman_esti.wordgames import packs
 
