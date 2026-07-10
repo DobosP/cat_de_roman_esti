@@ -90,13 +90,15 @@ def _collect_keys(obj: object) -> set[str]:
 
 # --------------------------------------------------------------- hidden-answer guards
 def test_contexto_does_not_leak_target_before_win() -> None:
-    from cat_de_roman_esti.wordgames.contexto import _pick_target
+    from cat_de_roman_esti.wordgames.contexto import store
 
-    secret = _pick_target(SEED, "normal").target
-    secret_label = get_service().label(secret)
     c = client()
     created = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()
     gid = created["game_id"]
+    session = store.get(gid)
+    assert session is not None
+    secret = session.target
+    secret_label = get_service().label(secret)
     fetched = c.get(f"/api/wordgames/contexto/games/{gid}").json()
 
     for body in (created, fetched):
@@ -163,14 +165,14 @@ def _alchimie_play_to_win(c: Client, state: dict) -> dict:
 
 
 def test_alchimie_hides_target_id_until_win() -> None:
-    import random
+    from cat_de_roman_esti.wordgames.alchimie import store
 
-    from cat_de_roman_esti.wordgames.alchimie import _build_session
-
-    secret = _build_session(random.Random(SEED), "normal").target
     c = client()
     created = c.post(f"/api/wordgames/alchimie/games?seed={SEED}").json()
     gid = created["game_id"]
+    session = store.get(gid)
+    assert session is not None
+    secret = session.target
     fetched = c.get(f"/api/wordgames/alchimie/games/{gid}").json()
 
     for body in (created, fetched):
@@ -213,20 +215,20 @@ def test_lant_exposes_only_start_and_target_not_the_path() -> None:
 
 
 def test_conexiuni_hides_solution_until_over() -> None:
-    import random
-
     from cat_de_roman_esti.wordgames.conexiuni import (
         MAX_LIVES,
         MIN_CLUE_MISTAKES,
         NUM_GROUPS,
         _category_label,
-        _pick_board,
+        store,
     )
 
-    groups = _pick_board(random.Random(SEED), "normal").groups
     c = client()
     created = c.post(f"/api/wordgames/conexiuni/games?seed={SEED}").json()
     gid = created["game_id"]
+    session = store.get(gid)
+    assert session is not None
+    groups = session.groups
     fetched = c.get(f"/api/wordgames/conexiuni/games/{gid}").json()
 
     for body in (created, fetched):
@@ -257,9 +259,11 @@ def test_conexiuni_hides_solution_until_over() -> None:
 
     # Boundary for the optional clue: after enough mistakes it may reveal a redacted
     # label pattern, but never category keys, exact category labels, or tile membership.
-    groups = _pick_board(random.Random(SEED + 1), "normal").groups
     created = c.post(f"/api/wordgames/conexiuni/games?seed={SEED + 1}").json()
     gid = created["game_id"]
+    session = store.get(gid)
+    assert session is not None
+    groups = session.groups
     cats = list(groups)
     one_from_each = [groups[cats[i]][0] for i in range(NUM_GROUPS)]
     for _ in range(MIN_CLUE_MISTAKES):

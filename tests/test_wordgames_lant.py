@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import random
+
 import pytest
 
 pytest.importorskip("django")
@@ -223,6 +225,15 @@ def _first_hop_choices(svc, start: str, target: str, optimal: int) -> int:
     return sum(1 for nb in svc.neighbor_ids(start) if dist_t.get(nb) == optimal - 1)
 
 
+def _generated_pair(seed: int, difficulty: str) -> dict[str, object]:
+    """Exercise the mined fallback directly; ordinary endpoint play is curated-first."""
+    lo, hi = _BANDS[difficulty]
+    start, target, optimal = lant._pick_pair(
+        random.Random(seed), lo, hi, difficulty=difficulty
+    )
+    return {"start": {"id": start}, "target": {"id": target}, "optimal": optimal}
+
+
 def test_selection_is_branchy_not_a_forced_rail():
     """Generated puzzles must offer a real choice at the opening hop (no single rail).
 
@@ -234,7 +245,7 @@ def test_selection_is_branchy_not_a_forced_rail():
     samples = 0
     for diff in _BANDS:
         for seed in range(40):
-            g = _create(seed=seed, difficulty=diff)
+            g = _generated_pair(seed, diff)
             samples += 1
             if _first_hop_choices(svc, g["start"]["id"], g["target"]["id"], g["optimal"]) < 2:
                 forced += 1
@@ -247,7 +258,7 @@ def test_selection_avoids_leaf_endpoints():
     svc = get_service()
     for diff in _BANDS:
         for seed in range(40):
-            g = _create(seed=seed, difficulty=diff)
+            g = _generated_pair(seed, diff)
             assert svc.degree(g["start"]["id"]) >= 2, (diff, seed, g["start"]["id"])
             assert svc.degree(g["target"]["id"]) >= 2, (diff, seed, g["target"]["id"])
 
@@ -262,7 +273,7 @@ def test_selection_prefers_salient_endpoints_by_difficulty():
     for diff in _BANDS:
         means = []
         for seed in range(30):
-            g = _create(seed=seed, difficulty=diff)
+            g = _generated_pair(seed, diff)
             s = svc.node(g["start"]["id"]).salience
             t = svc.node(g["target"]["id"]).salience
             means.append((s + t) / 2)
@@ -270,13 +281,13 @@ def test_selection_prefers_salient_endpoints_by_difficulty():
         assert avg >= floors[diff], (diff, avg)
     # sanity: usor endpoints are, on average, more salient than greu ones.
     usor_avg = sum(
-        (svc.node(_create(seed=s, difficulty="usor")["start"]["id"]).salience
-         + svc.node(_create(seed=s, difficulty="usor")["target"]["id"]).salience) / 2
+        (svc.node(_generated_pair(s, "usor")["start"]["id"]).salience
+         + svc.node(_generated_pair(s, "usor")["target"]["id"]).salience) / 2
         for s in range(15)
     ) / 15
     greu_avg = sum(
-        (svc.node(_create(seed=s, difficulty="greu")["start"]["id"]).salience
-         + svc.node(_create(seed=s, difficulty="greu")["target"]["id"]).salience) / 2
+        (svc.node(_generated_pair(s, "greu")["start"]["id"]).salience
+         + svc.node(_generated_pair(s, "greu")["target"]["id"]).salience) / 2
         for s in range(15)
     ) / 15
     assert usor_avg > greu_avg
@@ -285,7 +296,7 @@ def test_selection_prefers_salient_endpoints_by_difficulty():
 def test_bands_respected_across_many_seeds():
     for diff, (lo, hi) in _BANDS.items():
         for seed in range(30):
-            g = _create(seed=seed, difficulty=diff)
+            g = _generated_pair(seed, diff)
             assert lo <= g["optimal"] <= hi, (diff, seed, g["optimal"])
 
 

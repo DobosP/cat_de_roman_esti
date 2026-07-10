@@ -9,6 +9,7 @@ targets stay hidden, curated dailies stay themeless).
 
 from __future__ import annotations
 
+import importlib
 import json
 
 import pytest
@@ -52,6 +53,43 @@ def _pack_item(game: str, item_id: str):
     matches = [i for i in get_pack().pool(game) if i.id == item_id]
     assert matches, f"pack item {item_id} not found"
     return matches[0]
+
+
+@pytest.mark.parametrize("game", ("conexiuni", "contexto", "lant", "alchimie"))
+def test_default_play_prefers_curated_pack_deterministically(game: str):
+    """Ordinary play must benefit from the reviewed v12 pack, not bypass it."""
+    module = importlib.import_module(f"cat_de_roman_esti.wordgames.{game}")
+    url = f"/api/wordgames/{game}/games?seed=131&difficulty=normal"
+
+    first = Client().post(url)
+    second = Client().post(url)
+    assert first.status_code == second.status_code == 200
+
+    first_session = module.store.get(first.json()["game_id"])
+    second_session = module.store.get(second.json()["game_id"])
+    assert first_session is not None and second_session is not None
+    assert first_session.pack_id is not None
+    assert first_session.pack_id == second_session.pack_id
+    assert first_session.pack_id in {
+        item.id for item in get_pack().pool(game, difficulty="normal")
+    }
+
+
+@pytest.mark.parametrize("game", ("conexiuni", "contexto", "lant", "alchimie"))
+def test_default_play_mines_only_when_curated_pool_is_empty(game: str, monkeypatch):
+    """The deterministic generators remain a fail-soft fallback for a thin pack."""
+    from cat_de_roman_esti.wordgames.packs import GamesPack
+
+    module = importlib.import_module(f"cat_de_roman_esti.wordgames.{game}")
+    monkeypatch.setattr(module, "get_pack", lambda: GamesPack([]))
+
+    response = Client().post(
+        f"/api/wordgames/{game}/games?seed=137&difficulty=normal"
+    )
+    assert response.status_code == 200
+    session = module.store.get(response.json()["game_id"])
+    assert session is not None
+    assert session.pack_id is None
 
 
 def test_conexiuni_curated_board_by_category():
