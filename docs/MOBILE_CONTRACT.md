@@ -2,8 +2,9 @@
 
 This is the contract a **generated mobile client** (Track A: Expo / React Native + TS)
 depends on. It is additive over the existing `/api/wordgames/*` routes — no route paths,
-methods, or gameplay semantics changed. Guarded by `tests/test_mobile_contract.py` and the
-manifest tests in `tests/test_app_pack_contract.py`.
+or methods changed. Conexiuni's earned-group semantics are defined by
+[ADR-0014](adr/0014-conexiuni-earned-group-reveal.md). Guarded by
+`tests/test_mobile_contract.py` and the manifest tests in `tests/test_app_pack_contract.py`.
 
 ## 1. Stable OpenAPI operationIds
 
@@ -18,8 +19,7 @@ Additive since 2026-07-07 (ADR-0011): `meta_categories` (`GET /api/categories` �
 taxonomy + per-game availability) and `submissions_create` (`POST /api/submissions` —
 user-submitted games; 503 unless the deployment enables `CAT_SUBMISSIONS_DIR`). Game create
 endpoints accept an optional `?category=` query param; when (and only when) it is sent, game
-state gains an optional `board_category` string. All pre-existing routes, fields, and
-hidden-answer invariants are unchanged.
+state gains an optional `board_category` string.
 
 Export the schema for client generation (deterministic, offline — no server/live data):
 
@@ -38,10 +38,10 @@ the right generated types. Deterministic, side-effect-free (`data.fixture_manife
   "app": "cat_de_roman_esti",
   "schema_version": 1,          // KG record schema (APP_PACK_SCHEMA_VERSION)
   "manifest_version": 1,        // shape of THIS manifest
-  "build_version": "fixture-v4-dense",
+  "build_version": "fixture-v5-pop",
   "generated_at": "2026-06-21T00:00:00Z",
   "content_hash": "sha256:…",   // canonical hash over kg_nodes+kg_edges+kg_puzzles
-  "counts": { "nodes": 330, "edges": 750, "puzzles": 108 }
+  "counts": { "nodes": 1459, "edges": 5656, "puzzles": 180 }
 }
 ```
 
@@ -51,15 +51,15 @@ record changes the hash; a mobile client compares it against its cached bundle t
 
 ## 3. Hidden-answer invariant (server-authoritative gameplay)
 
-No game's public responses leak its secret answer before the win/lose state. This already held
-in the code; the tests are regression guards that also assert the *reveal* boundary:
+No game's public responses leak an unearned secret answer. Tests guard both the hidden and
+positive reveal boundaries:
 
 | Game | Secret | Pre-win exposure | Revealed when |
 |------|--------|------------------|---------------|
 | contexto | target id/label/solution | no `target` or `solution` key; target id/label absent everywhere; guesses carry rank feedback | won / gave up |
 | alchimie | target id | `target.id = null`, `revealed = false` (label shown as the goal by design) | crafted (won) |
 | lant | solution path | only `start` + `target` ids exposed; no intermediate path node; hint is on-demand | per-hop, by playing / `…/hint` |
-| conexiuni | category grouping | no `solution`; tiles carry only `{id,label}` for the remaining public board; solved groups are counts only; optional clue returns one redacted category-label pattern only, with no category key/label or tile membership | won / lost |
+| conexiuni | unsolved category grouping | no `solution`; remaining tiles carry only `{id,label}`; each correctly solved group exposes its own key/label/tiles; the optional clue stays redacted | that group: correct guess; full solution: won / lost |
 
 Seeds/daily are deterministic by design (shared daily challenge); offline play inherently ships
 the whole KG, so this guards the **API surface**, keeping gameplay server-authoritative rather
@@ -86,7 +86,7 @@ bucket, and unreachable guesses rank after the reachable set. Pre-reveal respons
 the target id, target label, and any `solution` payload absent across create/get/guess/clue.
 The exact target object appears only on win or give-up.
 
-## 5. Conexiuni clue endpoint
+## 5. Conexiuni earned state and clue endpoint
 
 `POST /api/wordgames/conexiuni/games/{game_id}/clue` is additive. It unlocks after two
 mistakes, can be used once, applies a score penalty, and returns:
@@ -101,15 +101,16 @@ mistakes, can be used once, applies a score penalty, and returns:
 }
 ```
 
-The clue payload is intentionally redacted: no category `key`, exact category label, tile ids,
-or solution membership appears before win/loss.
+The clue payload itself stays redacted: it contains no category `key`, exact category label,
+tile ids, or membership.
 
 Pre-terminal Conexiuni create/get/guess/clue responses use the same public view model:
 `tiles` contains only public tile `{id,label}` objects still playable on the board,
-`solved` stays `[]`, and progress is exposed through `solved_count` and
-`remaining_groups`. Correct guesses may return `correct: true`, but category `key`,
-category `label`, solved group tiles, and `solution` are reveal-gated until `won` or
-`lost`.
+and `solved` contains only groups already accepted as correct, each shaped as
+`{key,label,tiles}`. Unsolved keys, labels, membership, and the full `solution` remain
+absent until win/loss. A correct guess also returns its earned `{key,label}` in
+`category`. Re-submitting the same four ids in another order returns HTTP 409 and leaves
+lives, mistakes, clues, score, and history unchanged.
 
 ## 6. Public app-pack fixture for roedu-mobile
 

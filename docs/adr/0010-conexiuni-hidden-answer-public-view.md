@@ -1,7 +1,7 @@
 # ADR-0010: Conexiuni Hidden-Answer Public View
 
 Date: 2026-07-04
-Status: accepted
+Status: superseded-by ADR-0014
 
 ## Decision
 Conexiuni create/get/guess/clue responses must use one hidden-answer-safe public view

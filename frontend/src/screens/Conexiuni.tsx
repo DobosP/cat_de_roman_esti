@@ -46,6 +46,8 @@ const DIFF_LABEL: Record<Difficulty, string> = {
   greu: "Greu",
 };
 
+const GROUP_COLORS = ["#f4c95d", "#70c1b3", "#5aa9e6", "#a78bfa"] as const;
+
 type StartMode =
   | { kind: "seed"; difficulty: Difficulty }
   | { kind: "daily" };
@@ -254,14 +256,12 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     setBusy(true);
     try {
       const res: GuessResult = await conexiuniApi.guess(state.game_id, selected);
+      setState(res);
       if (res.correct) {
         sound.playWin();
         setSelected([]);
         setHint(null);
-        // refresh authoritative state
-        const fresh = await conexiuniApi.get(state.game_id);
-        setState(fresh);
-        if (!fresh.won && res.category) {
+        if (!res.won && res.category) {
           onToast(`Grup gasit: ${res.category.label}!`, "success");
         }
       } else {
@@ -274,19 +274,16 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
           setHint("Niciun grup complet — incearca alta combinatie.");
           onToast("Gresit.", "info");
         }
-        // refresh authoritative state (lives, lost, solution)
-        const fresh = await conexiuniApi.get(state.game_id);
-        setState(fresh);
         setSelected([]);
       }
     } catch (err) {
       sound.playError();
-      onToast(
+      const message =
         err instanceof ApiError
           ? err.message || `Verificare respinsa (${err.status}).`
-          : "Verificare respinsa.",
-        "error",
-      );
+          : "Verificare respinsa.";
+      if (err instanceof ApiError && err.status === 409) setHint(message);
+      onToast(message, err instanceof ApiError && err.status === 409 ? "info" : "error");
     } finally {
       setBusy(false);
     }
@@ -433,8 +430,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
 
         {/* Solved groups as locked coloured rows */}
         <AnimatePresence initial={false}>
-          {state.solved.map((g) => (
-            <SolvedRow key={g.key} group={g} />
+          {state.solved.map((g, index) => (
+            <SolvedRow key={g.key} group={g} color={GROUP_COLORS[index]} />
           ))}
         </AnimatePresence>
 
@@ -582,11 +579,18 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         {state.lost && state.solution && (
           <div className="col" style={{ gap: 8 }}>
             <span className="faint" style={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}>
-              SOLUTIA
+              GRUPURILE RĂMASE
             </span>
-            {state.solution.map((g) => (
-              <SolvedRow key={g.key} group={g} dim />
-            ))}
+            {state.solution
+              .filter((group) => !state.solved.some((solved) => solved.key === group.key))
+              .map((g, index) => (
+                <SolvedRow
+                  key={g.key}
+                  group={g}
+                  color={GROUP_COLORS[state.solved.length + index]}
+                  dim
+                />
+              ))}
           </div>
         )}
 
@@ -615,8 +619,15 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   );
 }
 
-function SolvedRow({ group, dim }: { group: SolvedGroup; dim?: boolean }) {
-  const color = categoryColor(group.key);
+function SolvedRow({
+  group,
+  color,
+  dim,
+}: {
+  group: SolvedGroup;
+  color: string;
+  dim?: boolean;
+}) {
   return (
     <motion.div
       layout

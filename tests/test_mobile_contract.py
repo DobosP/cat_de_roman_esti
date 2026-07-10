@@ -4,10 +4,8 @@ These tests pin the contract a *generated mobile client* depends on, independent
 the per-game behaviour tests in ``test_wordgames_*.py``:
 
 * **Hidden-answer exposure** — no game's public responses may leak its secret answer
-  (contexto's target, alchimie's target id, lant's solution path, conexiuni's grouping)
-  before the win/lose state. Each test also asserts the *positive* boundary: the answer
-  IS revealed once the game is over, so we are testing a boundary, not blanket
-  suppression.
+  (contexto's target, alchimie's target id, lant's solution path, or an unsolved
+  Conexiuni group). Each test also asserts the positive reveal boundary.
 * **Stable OpenAPI operationIds** — the generated TypeScript client's method names come
   from ``operationId``s; these must stay ``<game>_<action>`` and never bake in the HTTP
   path (which would churn on any route refactor).
@@ -86,6 +84,11 @@ def _collect_keys(obj: object) -> set[str]:
         for item in obj:
             found |= _collect_keys(item)
     return found
+
+
+def _cross_group_guess(groups: dict[str, list[str]], index: int) -> list[str]:
+    """Build one of four distinct Conexiuni mistakes (one tile from each group)."""
+    return [members[index % len(members)] for members in groups.values()]
 
 
 # --------------------------------------------------------------- hidden-answer guards
@@ -220,6 +223,7 @@ def test_conexiuni_hides_solution_until_over() -> None:
         MIN_CLUE_MISTAKES,
         NUM_GROUPS,
         _category_label,
+        _group_label,
         store,
     )
 
@@ -239,23 +243,28 @@ def test_conexiuni_hides_solution_until_over() -> None:
         for tile in body["tiles"]:
             assert set(tile) == {"id", "label"}
 
-    # A correct non-terminal group may update counts and remove those public tiles from
-    # the board, but still must not expose category keys/labels or solved membership.
-    first_members = next(iter(groups.values()))
+    # A correct group becomes public because the player earned it; every unsolved group
+    # and the full solution remain hidden.
+    first_cat, first_members = next(iter(groups.items()))
     correct_body = _post_json(
         c, f"/api/wordgames/conexiuni/games/{gid}/guess", {"ids": first_members}
     )
     assert correct_body["correct"] is True
     assert correct_body["won"] is False
-    assert "category" not in correct_body
+    assert correct_body["category"] == {
+        "key": first_cat,
+        "label": _group_label(session, first_cat),
+    }
     assert "solution" not in correct_body
-    assert correct_body["solved"] == []
+    assert [group["key"] for group in correct_body["solved"]] == [first_cat]
+    assert {tile["id"] for tile in correct_body["solved"][0]["tiles"]} == set(first_members)
     assert correct_body["solved_count"] == 1
-    assert "key" not in _collect_keys(correct_body)
     assert {tile["id"] for tile in correct_body["tiles"]}.isdisjoint(first_members)
     strings = _collect_strings(correct_body)
-    assert all(cat not in strings for cat in groups)
-    assert all(_category_label(cat) not in strings for cat in groups)
+    hidden = set(groups) - {first_cat}
+    assert all(cat not in strings for cat in hidden)
+    assert all(_category_label(cat) not in strings for cat in hidden)
+    assert all(_group_label(session, cat) not in strings for cat in hidden)
 
     # Boundary for the optional clue: after enough mistakes it may reveal a redacted
     # label pattern, but never category keys, exact category labels, or tile membership.
@@ -264,10 +273,12 @@ def test_conexiuni_hides_solution_until_over() -> None:
     session = store.get(gid)
     assert session is not None
     groups = session.groups
-    cats = list(groups)
-    one_from_each = [groups[cats[i]][0] for i in range(NUM_GROUPS)]
-    for _ in range(MIN_CLUE_MISTAKES):
-        _post_json(c, f"/api/wordgames/conexiuni/games/{gid}/guess", {"ids": one_from_each})
+    for index in range(MIN_CLUE_MISTAKES):
+        _post_json(
+            c,
+            f"/api/wordgames/conexiuni/games/{gid}/guess",
+            {"ids": _cross_group_guess(groups, index)},
+        )
     clue = c.post(f"/api/wordgames/conexiuni/games/{gid}/clue").json()
     assert "solution" not in clue
     assert set(clue["clue"]) == {"pattern", "message"}
@@ -278,9 +289,11 @@ def test_conexiuni_hides_solution_until_over() -> None:
 
     # Boundary: exhausting lives (4 wrong guesses) reveals the full solution.
     last = clue
-    for _ in range(MAX_LIVES - MIN_CLUE_MISTAKES):
+    for index in range(MIN_CLUE_MISTAKES, MAX_LIVES):
         last = _post_json(
-            c, f"/api/wordgames/conexiuni/games/{gid}/guess", {"ids": one_from_each}
+            c,
+            f"/api/wordgames/conexiuni/games/{gid}/guess",
+            {"ids": _cross_group_guess(groups, index)},
         )
     assert last["lost"] is True
     assert len(last["solution"]) == NUM_GROUPS
