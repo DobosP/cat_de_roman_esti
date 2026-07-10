@@ -1,6 +1,6 @@
 // Typed, same-origin fetch wrappers for the Conexiuni (NYT Connections) word game.
-// Server-authoritative: the per-category grouping + the full solution are only revealed
-// by the backend once the game is won or lost. The client renders what it returns.
+// Server-authoritative: solved groups are revealed as they are earned; unsolved groups
+// and the full solution remain hidden until the game is won or lost.
 
 import { ApiError, getJson, postJson } from "./client";
 
@@ -45,32 +45,14 @@ export interface ConexiuniState {
   solution?: SolvedGroup[];
 }
 
-/** Result of a /guess call. */
-export interface GuessResult {
+/** Result of a /guess call: authoritative state plus feedback for this selection. */
+export interface GuessResult extends ConexiuniState {
   ok: true;
   correct: boolean;
-  // present only on the terminal winning response:
+  // present after every correct selection (the group has now been earned):
   category?: { key: string; label: string };
   // correct === false:
   one_away?: boolean;
-  // shared public state:
-  tiles: Tile[];
-  solved: SolvedGroup[];
-  solved_count: number;
-  remaining_groups: number;
-  lives: number;
-  mistakes: number;
-  won: boolean;
-  lost: boolean;
-  difficulty: Difficulty;
-  clues_used: number;
-  clue_available: boolean;
-  clues: ConexiuniClue[];
-  daily?: string;
-  // present on finish (win or loss):
-  score?: number;
-  share?: string;
-  solution?: SolvedGroup[];
 }
 
 export interface ClueResult extends ConexiuniState {
@@ -99,7 +81,7 @@ export function createConexiuni(opts: CreateOpts = {}): Promise<ConexiuniState> 
   return postJson<ConexiuniState>(`${BASE}/games${qs ? `?${qs}` : ""}`);
 }
 
-/** GET /games/{id} — full current state (solution hidden until won/lost). */
+/** GET /games/{id} — earned groups plus current state; unsolved solution stays hidden. */
 export function getConexiuni(gameId: string): Promise<ConexiuniState> {
   return getJson<ConexiuniState>(`${BASE}/games/${encodeURIComponent(gameId)}`);
 }

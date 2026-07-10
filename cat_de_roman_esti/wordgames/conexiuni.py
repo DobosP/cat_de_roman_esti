@@ -6,9 +6,10 @@ share a single (still-unsolved) category, surfacing an ``one_away`` flag when ex
 of the 4 belong to one category. Four mistakes are allowed; the game is won when all 4
 groups are found and lost at 0 lives (then the full solution is revealed).
 
-Server-authoritative: the per-category membership and the shuffled order live here. Public
-responses are serialized through a terminal-state reveal gate so category keys, full labels,
-and membership are only echoed back once the game is won or lost. Sessions are in-memory.
+Server-authoritative: the per-category membership and shuffled order live here. Public
+responses reveal a group's key, label and members only after the player has solved that
+group; every unsolved group and the full solution remain hidden until win/loss. Sessions
+are in-memory.
 """
 
 from __future__ import annotations
@@ -318,9 +319,8 @@ def _tiles(session: ConexiuniSession, *, include_solved: bool = False) -> list[d
     ]
 
 
-def _solved_groups(session: ConexiuniSession, *, reveal: bool) -> list[dict]:
-    if not reveal:
-        raise RuntimeError("refusing to serialize Conexiuni solved groups before reveal")
+def _solved_groups(session: ConexiuniSession) -> list[dict]:
+    """Serialize only groups the player has already earned with a correct guess."""
     svc = get_service()
     out: list[dict] = []
     for cat in session.solved:
@@ -439,7 +439,7 @@ def _state(game_id: str, session: ConexiuniSession) -> dict:
     body: dict = {
         "game_id": game_id,
         "tiles": _tiles(session, include_solved=reveal),
-        "solved": _solved_groups(session, reveal=True) if reveal else [],
+        "solved": _solved_groups(session),
         "solved_count": len(session.solved),
         "remaining_groups": len(session.groups) - len(session.solved),
         "lives": session.lives,
@@ -560,6 +560,13 @@ class GuessView(ContractAPIView):
             if nid in solved_ids:
                 raise http_error(400, "Concept deja rezolvat")
 
+        # A selection is a set, regardless of click order. Re-submitting the same wrong
+        # set should not consume another life or unlock a clue: reject it without any
+        # mutation. Terminal thresholds bound accepted history to at most seven guesses.
+        guess_key = frozenset(ids)
+        if any(frozenset(previous) == guess_key for previous in session.history):
+            raise http_error(409, "Ai încercat deja această combinație.")
+
         session.history.append(list(ids))
 
         # which (unsolved) category do all four share, if any?
@@ -575,10 +582,9 @@ class GuessView(ContractAPIView):
             result = {
                 "ok": True,
                 "correct": True,
+                "category": {"key": shared, "label": _group_label(session, shared)},
                 **state,
             }
-            if session.won:
-                result["category"] = {"key": shared, "label": _group_label(session, shared)}
             return Response(result)
 
         # wrong guess
