@@ -1,5 +1,5 @@
 // Conexiuni — NYT Connections over the Romanian KG. Text-only: a 4x4 grid of selectable
-// tile buttons. Pick exactly 4 and "Verifica"; the server says whether they share a
+// tile buttons. Pick exactly 4 and "Verifică"; the server says whether they share a
 // category (locks it as a coloured row) or not (one_away feedback + a lost life). Win when
 // all 4 groups are found; lose at 0 lives — then the full solution is revealed.
 //
@@ -41,7 +41,7 @@ interface SelfProps {
 }
 
 const DIFF_LABEL: Record<Difficulty, string> = {
-  usor: "Usor",
+  usor: "Ușor",
   normal: "Normal",
   greu: "Greu",
 };
@@ -122,7 +122,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     const base = state ? state.tiles.filter((t) => !solvedIds.has(t.id)) : [];
     if (shuffleNonce === 0) return base;
     // Deterministic-ish shuffle driven by the nonce so re-renders are stable until the
-    // player presses "Amesteca" again. Purely cosmetic — ids/grouping are untouched.
+    // player presses "Amestecă" again. Purely cosmetic — ids/grouping are untouched.
     const arr = [...base];
     let seed = shuffleNonce * 2654435761;
     for (let i = arr.length - 1; i > 0; i--) {
@@ -155,6 +155,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         }
         setState(s);
         setDifficulty(s.difficulty);
+        setCategory(s.board_category ?? null);
         setRecordHit(false);
         setPuzzleRecordHit(false);
         setSelected([]);
@@ -201,8 +202,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     if (!state || !finished || state.score === undefined) return;
     active.forget();
     const detail = state.won
-      ? `${state.mistakes} greseli`
-      : `pierdut · ${state.mistakes} greseli`;
+      ? `${state.mistakes} greșeli`
+      : `pierdut · ${state.mistakes} greșeli`;
     const outcome = recordOnce(state.game_id, state.score, detail, {
       puzzleKey,
       difficulty: state.difficulty,
@@ -262,17 +263,17 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         setSelected([]);
         setHint(null);
         if (!res.won && res.category) {
-          onToast(`Grup gasit: ${res.category.label}!`, "success");
+          onToast(`Grup găsit: ${res.category.label}!`, "success");
         }
       } else {
         sound.playError();
         setShake((n) => n + 1);
         if (res.one_away) {
-          setHint("Aproape! 3 din 4 sunt din aceeasi categorie.");
+          setHint("Aproape! 3 din 4 sunt din aceeași categorie.");
           onToast("Aproape! 3 din 4.", "info");
         } else {
-          setHint("Niciun grup complet — incearca alta combinatie.");
-          onToast("Gresit.", "info");
+          setHint("Niciun grup complet — încearcă altă combinație.");
+          onToast("Nu e grupul — mai încearcă.", "info");
         }
         setSelected([]);
       }
@@ -280,8 +281,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       sound.playError();
       const message =
         err instanceof ApiError
-          ? err.message || `Verificare respinsa (${err.status}).`
-          : "Verificare respinsa.";
+          ? err.message || `Verificare respinsă (${err.status}).`
+          : "Verificare respinsă.";
       if (err instanceof ApiError && err.status === 409) setHint(message);
       onToast(message, err instanceof ApiError && err.status === 409 ? "info" : "error");
     } finally {
@@ -355,12 +356,12 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
             glow={DEF.glow}
             description={
               <p style={{ margin: 0 }}>
-                16 concepte, 4 grupuri ascunse. Alege exact 4 care impart o categorie. Ai 4
-                vieti — gaseste toate grupurile!
+                16 concepte, 4 grupuri ascunse. Alege exact 4 care împart o categorie. Ai 4
+                vieți — găsește toate grupurile!
               </p>
             }
             best={best}
-            startLabel="Joaca"
+            startLabel="Joacă"
             onStart={() => void start({ kind: "seed", difficulty })}
             onDaily={() => void start({ kind: "daily" })}
             dailyLabel="Provocarea zilei"
@@ -413,9 +414,9 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               />
             )}
             <StatBadge
-              label="VIETI"
+              label="VIEȚI"
               value={
-                <span className="row" style={{ gap: 4 }} aria-label={`${state.lives} vieti ramase`}>
+                <span className="row" style={{ gap: 4 }} aria-label={`${state.lives} vieți rămase`}>
                   {lifeDots.map((alive, i) => (
                     <span key={i} aria-hidden style={{ opacity: alive ? 1 : 0.25 }}>
                       {alive ? "●" : "○"}
@@ -537,8 +538,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                 onClick={() => void requestClue()}
                 title={
                   state.clue_available
-                    ? "Arata un indiciu redactionat"
-                    : "Disponibil dupa doua greseli"
+                    ? "Arată începutul unei categorii"
+                    : "Disponibil după două greșeli"
                 }
               >
                 Indiciu
@@ -548,9 +549,9 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                 variant="secondary"
                 disabled={busy || remainingTiles.length <= GROUP_SIZE}
                 onClick={shuffle}
-                title="Amesteca pozitiile tiglelor"
+                title="Amestecă pozițiile pieselor"
               >
-                Amesteca
+                Amestecă
               </Button>
               <Button
                 type="button"
@@ -558,7 +559,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                 disabled={busy || selected.length === 0}
                 onClick={clearSelection}
               >
-                Goleste
+                Golește
               </Button>
               <Button
                 type="button"
@@ -566,11 +567,11 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                 onClick={submit}
                 style={{ borderColor: DEF.accent }}
               >
-                {busy ? "…" : "Verifica"}
+                {busy ? "…" : "Verifică"}
               </Button>
             </div>
             <span className="faint center" style={{ fontSize: "0.72rem", opacity: 0.7 }}>
-              Enter = verifica · Esc = goleste
+              Enter = verifică · Esc = golește
             </span>
           </div>
         )}
@@ -599,7 +600,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
           {finished && (
             <ResultCard
               icon={state.won ? "🎉" : "💔"}
-              title={state.won ? "Toate grupurile gasite!" : "Ai ramas fara vieti."}
+              title={state.won ? "Ai găsit toate grupurile!" : "Ai rămas fără vieți."}
               accent={DEF.accent}
               won={state.won}
               score={state.score}
@@ -608,9 +609,13 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               shareText={sharePayload}
               onCopy={copyShare}
               onReplay={() => void start({ kind: "seed", difficulty })}
+              onOptions={() => {
+                active.forget();
+                setState(null);
+              }}
               onExit={onExit}
             >
-              {state.mistakes} {state.mistakes === 1 ? "greseala" : "greseli"}
+              {state.mistakes} {state.mistakes === 1 ? "greșeală" : "greșeli"}
             </ResultCard>
           )}
         </AnimatePresence>

@@ -1,10 +1,10 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-10. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-10 (v14 mechanics: full backend suite + ruff + both validators
-green; v13 remains the frontend test/build/lint baseline.)_
+_Last verified: 2026-07-10 (v14 mechanics: full backend + ruff + both validators green;
+v14 Romanian-first frontend test/build/typecheck/lint green.)_
 
-## Latest — v14 fair-play foundation
+## Latest — v14 fair-play and Romanian-first foundation
 
 Alchimie now scores against the exact minimum number of sequential combines rather than
 parallel closure rounds. Seven approved and six pending pars were corrected; every
@@ -16,6 +16,11 @@ Lanț now computes distance-to-target by reverse BFS, including directed edges, 
 requires two valid openings plus width two on every intermediate shortest-path layer.
 The 98 forced-rail boards moved to pending review; 89 stronger boards remain across all 14
 categories, with the branch-aware miner as bounded fallback (ADR-0016).
+
+The SPA now uses Romanian diacritics and native hooks, removes the stale graph count, and
+describes Alchimie's visible target truthfully. All dailies honor selected difficulty;
+categories are explicitly free-play-only. Results offer immediate same-filter replay,
+separate options, and menu actions in all four games (ADR-0017).
 
 Ordinary no-category starts use the reviewed pack in all four games: seeded deterministic
 selection, signed-in avoid-repeats, and bounded-miner fallback. Daily rendezvous hashing
@@ -35,9 +40,8 @@ play, score/share output, categories, and bounded local history. The old graph S
 removed; no graph UI unless the owner reopens ADR-0001.
 
 Backend: Django 5.2 + DRF, stateless by default, WhiteNoise SPA serving, uvicorn ASGI.
-Frontend: React 18 + Vite + TypeScript, shared game shell/HUD/result components,
-animations and Web-Audio feedback. Optional accounts add Google sign-in, saved completed
-puzzle ids, public ranking handles, leaderboard scores, and donations.
+Frontend: React 18 + Vite + TypeScript, shared shell/HUD/results and Web-Audio. Optional
+accounts add Google sign-in, saved puzzle ids, ranking handles, scores, and donations.
 
 ## Shipped content
 
@@ -50,8 +54,7 @@ puzzle ids, public ranking handles, leaderboard scores, and donations.
 
 Pack total: **760 instances = 544 approved + 216 pending**, across 14 categories.
 Bundled KG: **1,459 nodes / 5,656 edges / 4,688 aliases / 180 legacy puzzles**;
-both fixture copies and both pack copies are byte-identical. V12 removed 101 duplicates
-or broken games and completed difficulty, member, label, description, and diacritics fixes.
+both fixture copies and both pack copies are byte-identical.
 
 The curated fixture path is the delivered content source. The `romania_scraper →
 ro_data_server` corpus path remains blocked by restricted processed-data access; live
@@ -88,11 +91,7 @@ tests/test_wordgames_session_store.py -q` (10 passed). Do not commit generated S
 
 ## Verified v14 follow-up candidates
 
-These are audit findings, not accepted decisions:
-
 - Repair the v11 enrichment tail: 183 nodes currently have non-distractor degree ≤2
   (157 are `n_v11*`), below the play-density direction in ADR-0012.
 - Improve Contexto's compressed BFS feedback (approved targets have only 6–9 non-win
   distance buckets) without weakening its target reveal boundary.
-- Build the visible replay loop: home daily progress, consistent same-filter replay, and
-  Romanian-first onboarding/mobile copy. Remove stale hard-coded content counts in README/UI.

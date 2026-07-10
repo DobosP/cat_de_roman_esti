@@ -5,7 +5,7 @@
 export interface ScoreEntry {
   /** Numeric score, higher is better. */
   score: number;
-  /** Short human summary of the run (e.g. "3 incercari", "1000 pct"). */
+  /** Short human summary of the run (e.g. "3 încercări", "1000 pct"). */
   detail: string;
   /** ms epoch. */
   at: number;

@@ -35,10 +35,16 @@ import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 const GAME_KEY = "contexto";
 const DEF = gameByKey("contexto");
 
+const DIFFICULTY_LABEL: Record<Difficulty, string> = {
+  usor: "Ușor",
+  normal: "Normal",
+  greu: "Greu",
+};
+
 const DIFFICULTIES: { id: Difficulty; label: string; hint: string }[] = [
-  { id: "usor", label: "Ușor", hint: "concept cunoscut" },
+  { id: "usor", label: DIFFICULTY_LABEL.usor, hint: "concept cunoscut" },
   { id: "normal", label: "Normal", hint: "echilibrat" },
-  { id: "greu", label: "Greu", hint: "concept obscur" },
+  { id: "greu", label: DIFFICULTY_LABEL.greu, hint: "concept mai rar" },
 ];
 
 // Temperature -> colour on a hot/cold gradient (hot = red/orange, cold = blue).
@@ -60,14 +66,24 @@ const TEMP_ICON: Record<Temperature, string> = {
   Inghetat: "🧊",
 };
 
+// API tokens stay ASCII for compatibility; only their player-facing labels are localized.
+const TEMP_LABEL: Record<Temperature, string> = {
+  Gasit: "Găsit",
+  Fierbinte: "Fierbinte",
+  Cald: "Cald",
+  Caldut: "Călduț",
+  Rece: "Rece",
+  Inghetat: "Înghețat",
+};
+
 // Short, encouraging gloss per tier so the latest verdict reads as feedback, not a number.
 const TEMP_HINT: Record<Temperature, string> = {
   Gasit: "Exact!",
-  Fierbinte: "Arde! Esti la un pas.",
+  Fierbinte: "Arde! Ești la un pas.",
   Cald: "Foarte aproape.",
   Caldut: "Te apropii.",
   Rece: "Cam departe.",
-  Inghetat: "Inghetat — alta directie.",
+  Inghetat: "Înghețat — încearcă altă direcție.",
 };
 
 function barColor(g: Guess): string {
@@ -124,7 +140,7 @@ function GuessRow({ g, isLatest }: { g: Guess; isLatest: boolean }) {
               fontWeight: 800,
               fontVariantNumeric: "tabular-nums",
             }}
-            title="Rang fata de conceptul secret"
+            title="Rang față de conceptul secret"
           >
             #{g.rank}
           </span>
@@ -132,7 +148,7 @@ function GuessRow({ g, isLatest }: { g: Guess; isLatest: boolean }) {
             className="badge"
             style={{ borderColor: color, color, fontWeight: 700 }}
           >
-            {g.temperature}
+            {TEMP_LABEL[g.temperature]}
           </span>
           <span
             className="muted"
@@ -142,9 +158,9 @@ function GuessRow({ g, isLatest }: { g: Guess; isLatest: boolean }) {
               minWidth: 38,
               textAlign: "right",
             }}
-            title={`Distanta ${g.distance} salturi`}
+            title={`Distanță: ${g.distance} salturi`}
           >
-            {g.closeness}
+            {g.closeness}/100
           </span>
         </span>
       </div>
@@ -193,7 +209,7 @@ export default function CaldRece({
         onToast(
           err instanceof ApiError
             ? `Nu am putut porni jocul (${err.status}).`
-            : "Nu am putut porni jocul. Verifica serverul.",
+            : "Nu am putut porni jocul. Verifică serverul.",
           "error",
         );
       } finally {
@@ -220,6 +236,7 @@ export default function CaldRece({
         }
         setState(saved);
         setDifficulty(saved.difficulty);
+        setCategory(saved.board_category ?? null);
         setLatestId(null);
         setText("");
         setIsRecord(false);
@@ -266,9 +283,10 @@ export default function CaldRece({
     if (!state || (!state.won && !state.gave_up)) return;
     active.forget();
     if (!state.won || state.score === undefined) return;
+    const attemptsLabel = state.attempts === 1 ? "încercare" : "încercări";
     const detail = state.daily
-      ? `Zilnic ${state.daily} · ${state.attempts} incercari`
-      : `${difficulty} · ${state.attempts} incercari`;
+      ? `Zilnic ${state.daily} · ${state.attempts} ${attemptsLabel}`
+      : `${DIFFICULTY_LABEL[state.difficulty]} · ${state.attempts} ${attemptsLabel}`;
     const outcome = recordOnce(state.game_id, state.score, detail, {
       puzzleKey,
       difficulty: state.difficulty,
@@ -284,7 +302,7 @@ export default function CaldRece({
     } else if (isPuzzleBest) {
       sound.playRecord();
     }
-  }, [state, difficulty, puzzleKey, recordOnce, active]);
+  }, [state, puzzleKey, recordOnce, active]);
 
   const handleGuess = useCallback(
     async (e?: React.FormEvent) => {
@@ -341,8 +359,8 @@ export default function CaldRece({
       } catch (err) {
         onToast(
           err instanceof ApiError
-            ? `Ghicirea a esuat (${err.status}).`
-            : "Ghicirea a esuat. Verifica serverul.",
+            ? `Încercarea a eșuat (${err.status}).`
+            : "Încercarea a eșuat. Verifică serverul.",
           "error",
         );
       } finally {
@@ -385,8 +403,8 @@ export default function CaldRece({
     } catch (err) {
       onToast(
         err instanceof ApiError
-          ? `Nu am putut renunta (${err.status}).`
-          : "Nu am putut renunta.",
+          ? `Nu am putut renunța (${err.status}).`
+          : "Nu am putut renunța.",
         "error",
       );
     } finally {
@@ -400,6 +418,10 @@ export default function CaldRece({
     onToast(ok ? "Copiat!" : "Nu am putut copia.", ok ? "info" : "error");
   }, [sharePayload, onToast]);
 
+  const showOptions = useCallback(() => {
+    active.forget();
+    setShowIntro(true);
+  }, [active]);
 
   const guesses = state?.guesses ?? [];
   const bestGuess = guesses[0];
@@ -429,15 +451,15 @@ export default function CaldRece({
             glow={DEF.glow}
             description={
               <p style={{ margin: 0 }}>
-                Exista un concept secret. Scrie ce-ti vine in minte — iti spun cat
-                de aproape esti. Cu cat mai putine incercari, cu atat scorul e mai
-                mare.
+                Există un concept secret. Scrie ce-ți vine în minte — îți spun cât
+                de aproape ești. Cu cât folosești mai puține încercări, cu atât
+                scorul este mai mare.
               </p>
             }
             best={best}
-            startLabel="Joaca"
+            startLabel="Joacă"
             onStart={() => void start({ difficulty, category: category ?? undefined })}
-            onDaily={() => void start({ daily: todayLocal() })}
+            onDaily={() => void start({ difficulty, daily: todayLocal() })}
             dailyLabel="Provocarea zilei"
             starting={busy}
           >
@@ -479,7 +501,11 @@ export default function CaldRece({
           <Hud>
             <StatBadge
               label="Mod"
-              value={state?.daily ? `📅 ${state.daily}` : (state?.difficulty ?? difficulty)}
+              value={
+                state?.daily
+                  ? `📅 ${state.daily}`
+                  : DIFFICULTY_LABEL[state?.difficulty ?? difficulty]
+              }
               accent={DEF.accent}
               title="Mod de joc"
             />
@@ -491,10 +517,10 @@ export default function CaldRece({
               />
             )}
             <StatBadge
-              label="Incercari"
-              value={`${state?.attempts ?? 0} incercari`}
+              label="Încercări"
+              value={`${state?.attempts ?? 0} ${state?.attempts === 1 ? "încercare" : "încercări"}`}
               accent={DEF.accent}
-              title="Incercari"
+              title="Încercări"
             />
             {(state?.clues_used ?? 0) > 0 && (
               <StatBadge
@@ -512,8 +538,8 @@ export default function CaldRece({
               disabled={busy || finished || !state?.clue_available}
               title={
                 state?.clue_available
-                  ? "Arata categoria conceptului secret"
-                  : "Disponibil dupa 3 incercari"
+                  ? "Arată categoria conceptului secret"
+                  : "Disponibil după 3 încercări"
               }
             >
               Indiciu
@@ -525,20 +551,17 @@ export default function CaldRece({
               onClick={() => void handleGiveUp()}
               disabled={busy || finished || !state}
             >
-              Renunta
+              Arată răspunsul
             </Button>
             <Button
               type="button"
               variant="secondary"
               size="sm"
-              onClick={() => {
-                active.forget();
-                setShowIntro(true);
-              }}
+              onClick={showOptions}
               disabled={busy}
-              title="Joc nou"
+              title="Schimbă opțiunile"
             >
-              ↻ Nou
+              ⚙ Opțiuni
             </Button>
           </Hud>
         </GameShell>
@@ -549,8 +572,8 @@ export default function CaldRece({
             {DEF.title}
           </h1>
           <p className="muted" style={{ margin: 0, fontSize: "0.9rem" }}>
-            Exista un concept secret. Scrie ce-ti vine in minte — iti spun cat
-            de aproape esti. 🔥 fierbinte … 🧊 inghetat.
+            Există un concept secret. Scrie ce-ți vine în minte — îți spun cât
+            de aproape ești. 🔥 fierbinte … 🧊 înghețat.
           </p>
         </div>
 
@@ -580,7 +603,7 @@ export default function CaldRece({
             type="submit"
             disabled={busy || finished || !text.trim()}
           >
-            Ghiceste
+            Ghicește
           </Button>
         </form>
 
@@ -650,7 +673,7 @@ export default function CaldRece({
           {finished && state?.target && (
             <ResultCard
               icon={won ? "🎯" : "🫥"}
-              title={won ? "Ai gasit conceptul!" : "Conceptul secret era:"}
+              title={won ? "Ai găsit conceptul!" : "Conceptul secret era:"}
               accent={won ? "var(--good)" : "var(--warn)"}
               won={won}
               score={won ? state.score : undefined}
@@ -658,10 +681,14 @@ export default function CaldRece({
               isPuzzleRecord={isPuzzleRecord}
               shareText={sharePayload}
               onCopy={() => void handleCopy()}
-              onReplay={() => {
-                active.forget();
-                setShowIntro(true);
-              }}
+              onReplay={() =>
+                void start({
+                  difficulty: state.difficulty,
+                  category: category ?? undefined,
+                })
+              }
+              onOptions={showOptions}
+              onExit={onExit}
             >
               <span style={{ fontSize: "1.4rem", color: "var(--text)", display: "block" }}>
                 {state.target.label}
@@ -691,7 +718,7 @@ export default function CaldRece({
         >
           {guesses.length === 0 && !finished && (
             <p className="faint center" style={{ marginTop: 24 }}>
-              Nicio incercare inca. Incepe cu orice idee!
+              Nicio încercare încă. Începe cu orice idee!
             </p>
           )}
           <AnimatePresence initial={false}>

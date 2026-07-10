@@ -1,5 +1,5 @@
 // CategoryPicker — chip row for choosing a game's category/theme (ADR-0011).
-// "Mix clasic" (no category) keeps the historical mined behavior; the rest come
+// The unfiltered mix (no category) keeps the curated-first default; the rest come
 // from /api/categories filtered to what THIS game can actually start. Renders
 // nothing while loading or when the endpoint is unavailable — the picker is an
 // additive layer, never a blocker.
@@ -15,7 +15,7 @@ export function CategoryPicker({
   accent,
 }: {
   game: GameKey;
-  /** Selected category key, or null for the classic mix. */
+  /** Selected category key, or null for all available themes. */
   value: string | null;
   onChange: (key: string | null) => void;
   accent: string;
@@ -82,12 +82,15 @@ export function CategoryPicker({
         CATEGORIE
       </span>
       <div className="row wrap" role="group" aria-labelledby="category-label" style={{ gap: 6 }}>
-        {chip(null, "Mix clasic", accent)}
+        {chip(null, "Toate temele", accent)}
         {pop.map((c) => chip(c.key, categoryStyle(c.key).label, categoryStyle(c.key).color, c.kind))}
         {serious.map((c) =>
           chip(c.key, categoryStyle(c.key).label, categoryStyle(c.key).color, c.kind),
         )}
       </div>
+      <span className="faint" style={{ fontSize: "0.72rem" }}>
+        Categoria se aplică doar jocurilor libere.
+      </span>
     </div>
   );
 }

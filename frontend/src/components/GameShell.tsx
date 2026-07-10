@@ -26,7 +26,7 @@ export function GameShell({
   return (
     <div className="row spread wrap game-shell-header" style={{ gap: 12 }}>
       <div className="row" style={{ gap: 10, alignItems: "center" }}>
-        <Button variant="secondary" size="sm" onClick={onExit} aria-label="Inapoi la meniu">
+        <Button variant="secondary" size="sm" onClick={onExit} aria-label="Înapoi la meniu">
           <span aria-hidden>←</span> Meniu
         </Button>
         {title && (

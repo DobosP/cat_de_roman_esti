@@ -31,12 +31,12 @@ const GAME_KEY = "lant";
 const DEF = gameByKey("lant");
 
 const DIFFICULTIES: { key: Difficulty; label: string; hint: string }[] = [
-  { key: "usor", label: "Usor", hint: "2-3 salturi" },
-  { key: "normal", label: "Normal", hint: "3-4 salturi" },
-  { key: "greu", label: "Greu", hint: "4-6 salturi" },
+  { key: "usor", label: "Ușor", hint: "2–3 salturi" },
+  { key: "normal", label: "Normal", hint: "3–4 salturi" },
+  { key: "greu", label: "Greu", hint: "4–6 salturi" },
 ];
 
-// Lantul Cuvintelor — a text-only word-ladder. The player types a concept directly
+// Lanțul Cuvintelor — a text-only word-ladder. The player types a concept directly
 // linked to the CURRENT one, hopping toward the TARGET in as few moves as possible.
 // All logic is server-authoritative; this screen only renders state + sends actions.
 
@@ -128,7 +128,7 @@ export default function Lant({
   const sharePayload = useMemo(() => {
     if (!state?.won || !state.share) return null;
     return buildSharePayload({
-      gameTitle: "Lantul Cuvintelor",
+      gameTitle: "Lanțul Cuvintelor",
       serverShare: state.share,
       score: state.score,
       puzzleKey,
@@ -181,6 +181,7 @@ export default function Lant({
         setHint(null);
         setScored(null);
         setDifficulty(fresh.difficulty);
+        setCategory(fresh.board_category ?? null);
         setState(fresh);
         setText("");
         onToast("Joc reluat.", "info");
@@ -196,7 +197,7 @@ export default function Lant({
   useEffect(() => {
     if (!state?.won || state.score === undefined) return;
     active.forget();
-    const detail = `${state.moves}/${state.optimal} mutari${
+    const detail = `${state.moves}/${state.optimal} mutări${
       state.daily ? ` · ${state.daily}` : ""
     }`;
     const outcome = recordOnce(state.game_id, state.score, detail, {
@@ -215,22 +216,21 @@ export default function Lant({
     if (state && !state.won) inputRef.current?.focus();
   }, [state]);
 
-  // On the win screen, Enter starts a fresh chain (keeps the keyboard flow going).
+  // On the win screen, Enter starts another chain with the same free-play filters.
   useEffect(() => {
     if (!state?.won) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Enter") {
         e.preventDefault();
-        active.forget();
-        setState(null);
+        void start({ difficulty: state.difficulty });
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [state?.won, active]);
+  }, [state?.won, state?.difficulty, start]);
 
   const won = state?.won ?? false;
-  // Moves relative to par. Positive => still within/at optimal budget; negative => over par.
+  // Moves spent beyond the optimal path length from the original start.
   const overPar = useMemo(() => {
     if (!state) return 0;
     return state.moves - state.optimal;
@@ -249,7 +249,7 @@ export default function Lant({
       if (!res.ok) {
         sound.playError();
         setShake((s) => s + 1);
-        onToast(res.last_error ?? "Mutare invalida", "error");
+        onToast(res.last_error ?? "Mutare invalidă", "error");
         return;
       }
       // Successful hop: server returns the partial state — fold it into our full state.
@@ -269,7 +269,7 @@ export default function Lant({
       setText("");
       if (res.won) {
         sound.playWin();
-        onToast("Ai ajuns la tinta!", "success");
+        onToast("Ai ajuns la țintă!", "success");
       } else {
         sound.playHop();
       }
@@ -277,7 +277,7 @@ export default function Lant({
       onToast(
         err instanceof ApiError
           ? `Eroare server (${err.status}).`
-          : "Eroare de retea.",
+          : "Eroare de rețea.",
         "error",
       );
     } finally {
@@ -313,7 +313,7 @@ export default function Lant({
         onToast(res.message ?? "Niciun indiciu.", "info");
       }
     } catch {
-      onToast("Nu am putut obtine un indiciu.", "error");
+      onToast("Nu am putut obține un indiciu.", "error");
     } finally {
       setBusy(false);
     }
@@ -329,7 +329,7 @@ export default function Lant({
   if (loading) {
     return (
       <div className="screen-pad fill center">
-        <Spinner size="lg" label="Se incarca..." />
+        <Spinner size="lg" label="Se încarcă…" />
       </div>
     );
   }
@@ -349,12 +349,12 @@ export default function Lant({
             glow={DEF.glow}
             description={
               <p style={{ margin: 0 }}>
-                Sari de la un concept la altul prin legaturi reale, pana la tinta.
-                Cu cat mai putine salturi, cu atat scor mai mare.
+                Sari de la un concept la altul prin legături reale, până la țintă.
+                Cu cât folosești mai puține salturi, cu atât scorul este mai mare.
               </p>
             }
             best={best}
-            startLabel="Joaca →"
+            startLabel="Joacă →"
             onStart={() => void start({ difficulty })}
             onDaily={() => void start({ difficulty, daily: todayLocal() })}
             dailyLabel="Provocarea zilei"
@@ -405,16 +405,16 @@ export default function Lant({
               />
             )}
             <StatBadge
-              label="MUTARI"
-              value={`${state.moves} ${state.moves === 1 ? "mutare" : "mutari"}`}
+              label="MUTĂRI"
+              value={`${state.moves} ${state.moves === 1 ? "mutare" : "mutări"}`}
               accent={DEF.accent}
-              title="Mutari facute"
+              title="Mutări făcute"
             />
             <StatBadge
               label="OPTIM"
               value={<>{state.optimal}{overPar > 0 ? ` (+${overPar})` : ""}</>}
               accent={DEF.accent}
-              title="Numarul minim de salturi"
+              title="Numărul minim de salturi"
             />
           </Hud>
         </GameShell>
@@ -433,7 +433,7 @@ export default function Lant({
             </span>
             <div className="col" style={{ gap: 2, textAlign: "right" }}>
               <span className="faint" style={{ fontSize: "0.7rem" }}>
-                TINTA
+                ȚINTĂ
               </span>
               <strong style={{ color: TARGET_COLOR }}>
                 {state.target.label}
@@ -450,7 +450,7 @@ export default function Lant({
         {/* current concept — big */}
         <div className="col center" style={{ gap: 6 }}>
           <span className="faint" style={{ fontSize: "0.72rem" }}>
-            EsTI ACUM LA
+            EȘTI ACUM LA
           </span>
           <AnimatePresence mode="wait">
             <motion.div
@@ -478,22 +478,23 @@ export default function Lant({
         {won ? (
           <ResultCard
             icon={state.moves <= state.optimal ? "★" : "✦"}
-            title={state.moves <= state.optimal ? "Lant perfect!" : "Ai reusit!"}
+            title={state.moves <= state.optimal ? "Lanț perfect!" : "Ai reușit!"}
             accent={TARGET_COLOR}
             score={state.score}
             isRecord={scored?.isBest ?? false}
             isPuzzleRecord={scored?.isPuzzleBest ?? false}
             shareText={sharePayload}
             onCopy={() => void handleCopy()}
-            onReplay={() => {
+            onReplay={() => void start({ difficulty: state.difficulty })}
+            onOptions={() => {
               active.forget();
               setState(null);
             }}
             onExit={onExit}
-            replayLabel="Lant nou →"
+            replayLabel="Încă un lanț →"
           >
             Ai ajuns la <strong style={{ color: "var(--text)" }}>{state.target.label}</strong>{" "}
-            in <strong style={{ color: "var(--text)" }}>{state.moves}</strong> salturi (optim{" "}
+            în <strong style={{ color: "var(--text)" }}>{state.moves}</strong> salturi (optim{" "}
             {state.optimal}).
           </ResultCard>
         ) : (
@@ -508,7 +509,7 @@ export default function Lant({
               <input
                 ref={inputRef}
                 className="field fill"
-                placeholder="scrie urmatorul concept…"
+                placeholder="scrie următorul concept…"
                 value={text}
                 disabled={busy}
                 onChange={(e) => setText(e.target.value)}
@@ -521,7 +522,7 @@ export default function Lant({
                 autoCorrect="off"
                 spellCheck={false}
                 enterKeyHint="send"
-                aria-label="Urmatorul concept"
+                aria-label="Următorul concept"
                 style={{ flex: 1 }}
               />
               <Button
@@ -540,7 +541,7 @@ export default function Lant({
                 disabled={busy || state.moves === 0}
                 onClick={() => void handleUndo()}
               >
-                ↶ Inapoi
+                ↶ Înapoi
               </Button>
               <Button
                 type="button"
@@ -553,11 +554,13 @@ export default function Lant({
               <span className="muted" style={{ alignSelf: "center" }}>
                 {hintRemaining !== null
                   ? hintRemaining <= 1
-                    ? "esti la un pas de tinta!"
-                    : `${hintRemaining} salturi pana la tinta`
+                    ? "ești la un pas de țintă!"
+                    : `${hintRemaining} salturi până la țintă`
                   : overPar > 0
-                    ? `peste par cu ${overPar} — incearca ↶ Inapoi`
-                    : `tinta la ~${state.optimal - state.moves} salturi`}
+                    ? `cu ${overPar} peste optim — încearcă ↶ Înapoi`
+                    : state.moves === state.optimal
+                      ? "ai atins reperul optim; ținta este încă înainte"
+                      : `drumul optim de la start: ${state.optimal} salturi`}
               </span>
             </div>
 
@@ -572,10 +575,10 @@ export default function Lant({
                 >
                   <div className="col" style={{ gap: 4 }}>
                     <span className="muted" style={{ fontSize: "0.85rem" }}>
-                      Incearca:{" "}
+                      Încearcă:{" "}
                       <button
                         type="button"
-                        title="Pune in casuta"
+                        title="Pune în căsuță"
                         onClick={() => {
                           if (hint.hint) setText(hint.hint.label);
                           inputRef.current?.focus();
@@ -599,7 +602,7 @@ export default function Lant({
                     </span>
                     {hint.alternatives && hint.alternatives > 1 ? (
                       <span className="faint" style={{ fontSize: "0.72rem" }}>
-                        {hint.alternatives} variante bune de aici — exista mai multe
+                        {hint.alternatives} variante bune de aici — există mai multe
                         drumuri.
                       </span>
                     ) : null}
@@ -613,7 +616,7 @@ export default function Lant({
         {/* path breadcrumb */}
         <div className="col" style={{ gap: 6 }}>
           <span className="faint" style={{ fontSize: "0.72rem" }}>
-            DRUMUL TAU
+            DRUMUL TĂU
           </span>
           <Breadcrumb path={state.path} />
         </div>

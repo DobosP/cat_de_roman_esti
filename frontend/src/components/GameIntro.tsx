@@ -19,7 +19,7 @@ export function GameIntro({
   description,
   best,
   children,
-  startLabel = "Incepe →",
+  startLabel = "Începe →",
   onStart,
   onDaily,
   dailyLabel = "Provocarea zilei",
@@ -82,7 +82,7 @@ export function GameIntro({
             variant="secondary"
             onClick={onDaily}
             disabled={starting}
-            title="Acelasi puzzle pentru toata lumea, azi"
+            title="Aceeași provocare pentru toată lumea, la dificultatea aleasă. Categoria se aplică doar jocurilor libere."
           >
             <span aria-hidden>📅</span> {dailyLabel}
           </Button>
@@ -91,7 +91,7 @@ export function GameIntro({
 
       {best && (
         <p className="faint" style={{ margin: 0, fontSize: "0.82rem" }}>
-          Recordul tau: <strong style={{ color: accent }}>{best.score}</strong> · {best.detail}
+          Recordul tău: <strong style={{ color: accent }}>{best.score}</strong> · {best.detail}
         </p>
       )}
     </motion.div>
