@@ -63,7 +63,8 @@ Pick your host, e.g. `joc.<yourdomain>.ro`, and set it as `CAT_DOMAIN`.
 **Quick start (works out of the box):**
 1. Cloudflare → DNS → add an **A record** `joc` → your server's IPv4, **Proxy status: DNS only
    (grey cloud)**.
-2. Caddy will obtain a Let's Encrypt certificate automatically on first boot (uses `TLS_EMAIL`).
+2. Caddy 2.11 will obtain a Let's Encrypt certificate automatically on first boot (uses
+   `TLS_EMAIL`) and applies `CAT_MAX_REQUEST_BYTES` before proxying a body to Django.
 
 **Production (recommended — keeps Cloudflare WAF/DDoS in front):**
 1. Set the `joc` record to **Proxied (orange cloud)**; SSL/TLS mode **Full (strict)**.

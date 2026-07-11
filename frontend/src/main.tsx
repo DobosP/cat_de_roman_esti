@@ -5,8 +5,7 @@ import { ThemeProvider } from "@roedu/ui";
 
 // Order matters: design-system base first, then self-hosted fonts, then the app layer.
 import "@roedu/ui/styles.css";
-import "@fontsource-variable/fredoka";
-import "@fontsource-variable/inter";
+import "./styles/fonts.css";
 import "./styles/arcade.css";
 
 import App from "./App";

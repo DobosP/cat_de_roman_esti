@@ -7,14 +7,14 @@
 #   stage 2 (python) : pip install the package with its [web] extra, copy in the package
 #                      (fixtures + the built SPA from stage 1), run uvicorn as non-root.
 #
-# The runtime image needs ONLY: python 3.11 + the cat_de_roman_esti package + its
+# The runtime image needs ONLY: python 3.12 + the cat_de_roman_esti package + its
 # [web] extra (django + DRF + uvicorn) + the bundled fixtures + the built SPA static.
 # roedu_client is stdlib-only; romania_scraper is NOT needed at runtime.
 
 # ---------------------------------------------------------------------------
 # Stage 1: build the React/Vite SPA into cat_de_roman_esti/web/static
 # ---------------------------------------------------------------------------
-FROM node:18-slim AS frontend
+FROM node:24-slim AS frontend
 
 WORKDIR /build
 
@@ -45,7 +45,7 @@ RUN npm run build \
 # ---------------------------------------------------------------------------
 # Stage 2: slim python runtime
 # ---------------------------------------------------------------------------
-FROM python:3.11-slim AS runtime
+FROM python:3.12-slim AS runtime
 
 # - PYTHONDONTWRITEBYTECODE: no .pyc clutter in the image
 # - PYTHONUNBUFFERED: logs flush immediately (good for `docker logs`)
@@ -64,7 +64,10 @@ COPY pyproject.toml README.md constraints.txt ./
 COPY cat_de_roman_esti/ ./cat_de_roman_esti/
 
 # Bring in the SPA built in stage 1 (overwrites any copy that rode along in the package
-# dir so the image always ships a fresh build).
+# dir so the image always ships a fresh build). Remove the source-tree release bundle
+# first: Docker COPY merges directories and would otherwise retain a stale hashed asset.
+RUN rm -rf ./cat_de_roman_esti/web/static \
+    && mkdir -p ./cat_de_roman_esti/web/static
 COPY --from=frontend /build/cat_de_roman_esti/web/static/ ./cat_de_roman_esti/web/static/
 
 # Install the package WITH its web extra (django + DRF + uvicorn), PINNED via constraints.txt

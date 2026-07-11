@@ -8,6 +8,11 @@ const alchimie = read("../src/screens/Alchimie.tsx");
 const caldRece = read("../src/screens/CaldRece.tsx");
 const lant = read("../src/screens/Lant.tsx");
 const conexiuni = read("../src/screens/Conexiuni.tsx");
+const app = read("../src/App.tsx");
+
+test("route presence keys the direct Suspense child so exit animations can finish", () => {
+  assert.match(app, /<AnimatePresence mode="wait">\s*<Suspense\s+key=\{location\.pathname\}/);
+});
 
 test("daily games consistently carry the selected difficulty", () => {
   assert.match(

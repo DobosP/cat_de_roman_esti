@@ -16,6 +16,8 @@ from cat_de_roman_esti.wordgames.service import (
     DEFAULT_MAX_SESSIONS,
     DEFAULT_SESSION_TTL_SECONDS,
     SessionStore,
+    _positive_env_float,
+    _positive_env_int,
 )
 
 
@@ -48,8 +50,8 @@ def test_defaults_are_bounded():
     store: SessionStore[str] = SessionStore()
     assert store._ttl == DEFAULT_SESSION_TTL_SECONDS
     assert store._max == DEFAULT_MAX_SESSIONS
-    assert DEFAULT_MAX_SESSIONS is not None and DEFAULT_MAX_SESSIONS >= 1
-    assert DEFAULT_SESSION_TTL_SECONDS > 0
+    assert DEFAULT_MAX_SESSIONS == 1_000
+    assert DEFAULT_SESSION_TTL_SECONDS == 2 * 60 * 60
 
 
 def test_ttl_expires_idle_session():
@@ -131,6 +133,23 @@ def test_max_size_holds_under_a_flood():
 def test_invalid_max_sessions_rejected():
     with pytest.raises(ValueError):
         SessionStore(max_sessions=0)
+
+
+def test_session_environment_bounds_require_positive_finite_values(monkeypatch):
+    monkeypatch.setenv("TEST_CAT_TTL", "90.5")
+    monkeypatch.setenv("TEST_CAT_CAP", "250")
+    assert _positive_env_float("TEST_CAT_TTL", 1) == 90.5
+    assert _positive_env_int("TEST_CAT_CAP", 1) == 250
+
+    for bad in ("0", "-1", "nan", "inf", "not-a-number"):
+        monkeypatch.setenv("TEST_CAT_TTL", bad)
+        with pytest.raises(ValueError, match="positive number"):
+            _positive_env_float("TEST_CAT_TTL", 1)
+
+    for bad in ("0", "-1", "1.5", "not-a-number"):
+        monkeypatch.setenv("TEST_CAT_CAP", bad)
+        with pytest.raises(ValueError, match="positive integer"):
+            _positive_env_int("TEST_CAT_CAP", 1)
 
 
 def test_thread_safety_under_concurrent_creates():

@@ -4,7 +4,7 @@
 
 import { useCallback, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Badge, Button, type ToastKind } from "@roedu/ui";
 import { GAMES, GAME_TITLES, type GameDef, type GameKey } from "../games";
 import { SoundToggle } from "../components/SoundToggle";
@@ -113,7 +113,7 @@ export default function Home({
           <div className="row spread" style={{ gap: 12, alignItems: "flex-start" }}>
             <h1 className="hero-title" aria-label="Cât de român ești?">
               {TITLE_WORDS.map((word, i) => (
-                <motion.span
+                <m.span
                   key={word}
                   className={word === "ești?" ? "wordmark-gradient" : undefined}
                   initial={{ opacity: 0, y: 26, rotate: i % 2 ? 3 : -3 }}
@@ -126,12 +126,12 @@ export default function Home({
                   }}
                 >
                   {word}
-                </motion.span>
+                </m.span>
               ))}
             </h1>
             <SoundToggle />
           </div>
-          <motion.p
+          <m.p
             className="muted"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -140,12 +140,12 @@ export default function Home({
           >
             Patru jocuri de cuvinte în limba română, cu oameni, locuri și idei din
             cultura și viața de aici. Combină, ghicește, leagă sau grupează.
-          </motion.p>
+          </m.p>
         </header>
 
         <div className="games-grid">
           {GAMES.map((g, i) => (
-            <motion.button
+            <m.button
               key={g.key}
               type="button"
               onClick={() => openGame(g)}
@@ -190,7 +190,7 @@ export default function Home({
                   </span>
                 )}
               </span>
-            </motion.button>
+            </m.button>
           ))}
         </div>
 

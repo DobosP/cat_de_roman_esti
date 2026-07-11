@@ -20,6 +20,8 @@ import json
 from typing import TypeVar
 
 import pydantic
+from django.conf import settings
+from django.core.exceptions import RequestDataTooBig
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.exceptions import MethodNotAllowed
 from rest_framework.response import Response
@@ -50,6 +52,24 @@ class ContractAPIView(APIView):
     """
 
     metadata_class = None
+
+    def initial(self, request, *args, **kwargs):
+        """Reject declared oversized bodies before auth or endpoint parsing.
+
+        DRF's JSON parser reads its stream directly and does not necessarily touch
+        Django's ``request.body`` size check, so enforce the same ceiling for both
+        ``parse_body`` game commands and ``parse_data`` account commands here.
+        """
+        limit = settings.DATA_UPLOAD_MAX_MEMORY_SIZE
+        raw_length = request.META.get("CONTENT_LENGTH")
+        if limit is not None and raw_length:
+            try:
+                content_length = int(raw_length)
+            except (TypeError, ValueError):
+                content_length = 0
+            if content_length > limit:
+                raise ApiHttpError(413, "Request body too large")
+        return super().initial(request, *args, **kwargs)
 
 
 class ApiHttpError(Exception):
@@ -143,4 +163,6 @@ def exception_handler(exc, context):
     if isinstance(exc, MethodNotAllowed):
         # starlette parity: fixed detail string, no method name interpolation.
         return Response({"detail": "Method Not Allowed"}, status=405)
+    if isinstance(exc, RequestDataTooBig):
+        return Response({"detail": "Request body too large"}, status=413)
     return drf_exception_handler(exc, context)

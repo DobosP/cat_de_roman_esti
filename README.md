@@ -89,7 +89,7 @@ docker compose up --build             # same, via compose
 # open http://localhost:8000
 ```
 
-Multi-stage build: stage 1 (`node:18-slim`) builds the SPA; stage 2 (`python:3.11-slim`)
+Multi-stage build: stage 1 (`node:24-slim`) builds the SPA; stage 2 (`python:3.12-slim`)
 `pip install`s the package with its `web` extra and runs `uvicorn` as a non-root user on
 port **8000**. `docker compose down` stops it. Override the host port with
 `PORT=9000 docker compose up`.

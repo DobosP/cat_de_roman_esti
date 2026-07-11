@@ -1,10 +1,11 @@
 # constraints.txt — pinned versions for REPRODUCIBLE deploys of the `[web]` extra.
 #
 # pyproject.toml keeps deliberately loose ranges (django>=5.2, uvicorn>=0.29, ...) so
-# local dev can float forward. This file pins the EXACT resolved closure of `.[web]`
+# local dev can float forward. This file pins the exact resolved closure of `.[web]`
 # (Django + DRF + drf-spectacular + uvicorn + their transitive deps, incl. pydantic)
-# so a Docker build months from now installs byte-for-byte the same wheels. The
-# Dockerfile applies it with `pip install -c constraints.txt ".[web]"`.
+# for version-repeatable installs on compatible platforms. It does not hash artifacts;
+# package-index availability and wheel build metadata remain external inputs. The Dockerfile
+# applies it with `pip install -c constraints.txt ".[web]"`.
 #
 # Runtime is otherwise standard-library only (the vendored roedu_client uses urllib;
 # the engine/graph are pure stdlib). These pins exist ONLY for the optional web server.
@@ -13,7 +14,7 @@
 #   python -m venv /tmp/freeze && /tmp/freeze/bin/pip install ".[web]"
 #   /tmp/freeze/bin/pip freeze --exclude cat-de-roman-esti > constraints.txt  (keep this header)
 #
-# Resolved 2026-07-09 against PyPI for CPython 3.11 (the python:3.11-slim runtime).
+# Resolved 2026-07-11 against PyPI; verified for the CPython 3.12 deploy runtime.
 # Django 5.2 / DRF 3.17.1 match the fleet pins (social_media_activities_app).
 # Now includes the ACCOUNTS closure (django-allauth + dj-database-url + psycopg +
 # requests/pyjwt/oauthlib/cryptography) — inert unless CAT_ACCOUNTS_ENABLED=1.

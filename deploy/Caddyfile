@@ -18,5 +18,8 @@
 
 {$CAT_DOMAIN} {
 	encode zstd gzip
+	request_body {
+		max_size {$CAT_MAX_REQUEST_BYTES}
+	}
 	reverse_proxy app:8000
 }

@@ -13,6 +13,8 @@ the weak decoy edges (``is_distractor``) are ignored so the games stay meaningfu
 from __future__ import annotations
 
 import hashlib
+import math
+import os
 import threading
 import time
 import unicodedata
@@ -228,8 +230,41 @@ S = TypeVar("S")
 # therefore self-trims: idle sessions pass a TTL and a hard cap evicts the
 # least-recently-used once too many pile up. Defaults are generous — a sitting fits inside
 # the TTL and the cap only bites under abuse — but both are tunable per store.
-DEFAULT_SESSION_TTL_SECONDS = 6 * 60 * 60  # 6h: long enough to finish, then reclaim.
-DEFAULT_MAX_SESSIONS = 10_000  # hard ceiling so a flood of /games can't exhaust memory.
+
+
+def _positive_env_float(name: str, default: float) -> float:
+    raw = os.environ.get(name)
+    if raw is None:
+        return default
+    try:
+        value = float(raw)
+    except ValueError:
+        raise ValueError(f"{name} must be a positive number") from None
+    if not math.isfinite(value) or value <= 0:
+        raise ValueError(f"{name} must be a positive number")
+    return value
+
+
+def _positive_env_int(name: str, default: int) -> int:
+    raw = os.environ.get(name)
+    if raw is None:
+        return default
+    try:
+        value = int(raw)
+    except ValueError:
+        raise ValueError(f"{name} must be a positive integer") from None
+    if value <= 0:
+        raise ValueError(f"{name} must be a positive integer")
+    return value
+
+
+# Two hours is ample for a short word game. A 1,000-entry cap per game keeps the
+# worst-case live-session footprint modest on a 4 GB launch VM; operators can
+# raise either bound explicitly after observing real concurrency.
+DEFAULT_SESSION_TTL_SECONDS = _positive_env_float(
+    "CAT_SESSION_TTL_SECONDS", 2 * 60 * 60
+)
+DEFAULT_MAX_SESSIONS = _positive_env_int("CAT_MAX_SESSIONS_PER_GAME", 1_000)
 
 
 class SessionStore(Generic[S]):

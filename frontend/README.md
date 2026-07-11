@@ -1,11 +1,11 @@
 # cat_de_roman_esti — frontend
 
-Text-only word-game arcade SPA: **React 18 + Vite + TypeScript** (no graph
+Text-only word-game arcade SPA: **React 19.2 + Vite 8.1 + TypeScript** (no graph
 visualization — the old force-graph SPA was removed 2026-06-22, see
 `../docs/adr/0001-pivot-to-word-game-arcade.md`).
 
 Four word games over the Romanian concept graph, all **server-authoritative**: the
-FastAPI BFF owns the KG, validates every move, and hides answers under
+Django BFF owns the KG, validates every move, and hides answers under
 `/api/wordgames/*`; the SPA only renders responses. No API key, no game logic, and
 no secrets ever live in the client.
 
@@ -21,29 +21,31 @@ origin). Start the BFF first, e.g. from the repo root:
 
 ```bash
 make dev             # vite + uvicorn --reload together
-# or just the BFF:  uvicorn cat_de_roman_esti.web.app:create_app --factory --port 8000
+# or just the BFF:  python -m cat_de_roman_esti.web --port 8000
 ```
 
 ## Build
 
 ```bash
+npm run lint         # ESLint 10 flat-config checks
 npm run typecheck    # tsc --noEmit
-npm run build        # tsc --noEmit && vite build
+npm run build        # typecheck + Vite build + initial-transfer/font gates
 ```
 
 `vite build` emits the static SPA into `../cat_de_roman_esti/web/static`
-(`build.outDir`, `emptyOutDir: true`) — exactly where the FastAPI app mounts
-`StaticFiles(html=True)` at `/`. If that build is absent the BFF serves a "run npm
-run build" placeholder instead of 500-ing.
+(`build.outDir`, `emptyOutDir: true`) — exactly where Django/WhiteNoise serves it.
+The post-build check follows recursive static imports in Vite's manifest, enforces
+the 120 KiB initial JS/CSS gzip ceiling, and verifies that only Latin + Latin
+Extended Fredoka/Inter fonts shipped (ADR-0020). If the build is absent the BFF
+serves a "run npm run build" placeholder instead of 500-ing.
 
 ## Layout
 
 ```
 src/
   main.tsx            React root.
-  App.tsx             Arcade router — home screen (animated game cards) -> one of the
-                      four game screens, with framer-motion AnimatePresence
-                      transitions. Owns the toast stack + sound toggle.
+  App.tsx             Arcade router — eager home shell + lazy game/ranking routes,
+                      LazyMotion/AnimatePresence transitions, and the toast stack.
   api/
     client.ts         Shared ApiError type for the per-game fetch wrappers.
     alchimie.ts       Typed same-origin wrappers, one module per game, matching the
@@ -63,21 +65,24 @@ src/
     GameShell.tsx     Shared per-game header: back-to-menu + status-badge slot.
     DifficultyPicker.tsx  Shared segmented difficulty control.
     ResultCard.tsx    Shared end-of-game card: score, "Record!", share/copy, replay.
-    Toast.tsx         Toast stack; SoundToggle.tsx persisted mute control.
+    AccountBar.tsx    Optional account/ranking controls.
+    SoundToggle.tsx   Persisted mute control.
   scores.ts           Offline localStorage personal-best store (per game + per puzzle).
   share.ts            Deterministic share/copy payload around the server-authored result.
   sound.ts            Web-Audio synthesized SFX (no audio assets).
-  theme/
-    theme.css         Deep dark gradient palette, CSS-variable tokens, glow/shadow,
-                      category color map, fonts. (Plain CSS — no Tailwind/postcss.)
-    tokens.ts         Category style map (label/color/glow/blurb) shared with TS.
+  styles/
+    arcade.css        Deep dark palette, CSS-variable tokens, layout, and game styles.
+    fonts.css         Explicit Romanian-capable Latin/Latin Extended font faces.
+  theme.ts            @roedu/ui theme override.
 ```
 
 ## Notes
 
-- Lean dependency set on purpose (install reliability): `react`, `react-dom`,
-  `framer-motion` + Vite/TS/ESLint dev tooling. **No Tailwind** — styling is plain
-  CSS with CSS variables (no postcss setup).
+- Styling is plain CSS with CSS variables; there is no Tailwind/PostCSS layer.
+- Tooling is pinned by the lockfile to ESLint 10.7 flat config, typescript-eslint
+  8.63, and TypeScript 5.9; TypeScript 7 is not yet in typescript-eslint's peer range.
+- Per ADR-0020, frontend source changes include the matching tracked `web/static`
+  bundle and `.vite/manifest.json`; backend-only changes leave that bundle alone.
 - The BFF also exposes `GET /api/health` and `GET /api/manifest` (offline-KG trust
   manifest with stable OpenAPI operationIds) — the mobile client contract lives in
   `../docs/MOBILE_CONTRACT.md`.

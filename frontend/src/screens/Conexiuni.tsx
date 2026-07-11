@@ -7,7 +7,7 @@
 // what it returns and surfaces a personal best + a shareable result on finish.
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { ApiError } from "../api/client";
 import {
   conexiuniApi,
@@ -438,7 +438,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
 
         {/* Active board */}
         {!finished && (
-          <motion.div
+          <m.div
             key={shake}
             animate={shake ? { x: [0, -8, 8, -6, 6, 0] } : {}}
             transition={{ duration: 0.4 }}
@@ -452,7 +452,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               {remainingTiles.map((t) => {
                 const isSel = selected.includes(t.id);
                 return (
-                  <motion.button
+                  <m.button
                     key={t.id}
                     type="button"
                     layout
@@ -486,17 +486,17 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                     }}
                   >
                     {t.label}
-                  </motion.button>
+                  </m.button>
                 );
               })}
             </AnimatePresence>
-          </motion.div>
+          </m.div>
         )}
 
         {/* Inline feedback (persists past the toast until next selection) */}
         <AnimatePresence>
           {!finished && hint && (
-            <motion.p
+            <m.p
               key={hint}
               initial={{ opacity: 0, y: -4 }}
               animate={{ opacity: 1, y: 0 }}
@@ -505,7 +505,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               style={{ margin: 0, fontSize: "0.85rem" }}
             >
               {hint}
-            </motion.p>
+            </m.p>
           )}
         </AnimatePresence>
 
@@ -513,7 +513,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         <AnimatePresence>
           {!finished &&
             state.clues.map((clue) => (
-              <motion.p
+              <m.p
                 key={clue.pattern}
                 initial={{ opacity: 0, y: -4 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -522,7 +522,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                 style={{ margin: 0, fontSize: "0.85rem" }}
               >
                 {clue.message}
-              </motion.p>
+              </m.p>
             ))}
         </AnimatePresence>
 
@@ -634,7 +634,7 @@ function SolvedRow({
   dim?: boolean;
 }) {
   return (
-    <motion.div
+    <m.div
       layout
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: dim ? 0.7 : 1 }}
@@ -657,6 +657,6 @@ function SolvedRow({
           </span>
         ))}
       </div>
-    </motion.div>
+    </m.div>
   );
 }

@@ -4,7 +4,7 @@
 // id until the server reveals it on a win.
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { Button, Spinner, type ToastKind } from "@roedu/ui";
 import {
   alchimieApi,
@@ -80,8 +80,8 @@ export default function Alchimie({
 
     // No abort/cleanup on purpose: the ref guard blocks StrictMode's second run, so
     // the FIRST run's result must be allowed to land (a cancelled-flag cleanup would
-    // discard it and resume would never happen in dev). Post-unmount setState is a
-    // React 18 no-op.
+    // discard it and resume would never happen in dev). Modern React ignores a
+    // post-unmount state update.
     setLoading(true);
     void (async () => {
       try {
@@ -451,7 +451,7 @@ export default function Alchimie({
         </GameShell>
 
         {/* Target */}
-        <motion.div
+        <m.div
           className="card"
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -484,7 +484,7 @@ export default function Alchimie({
               </p>
             )}
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Combine bench */}
         {!won && (
@@ -547,7 +547,7 @@ export default function Alchimie({
         {/* Last combine feedback */}
         <AnimatePresence mode="wait">
           {lastMessage && (
-            <motion.p
+            <m.p
               key={lastMessage + state.moves}
               className="muted center"
               initial={{ opacity: 0, y: 4 }}
@@ -556,7 +556,7 @@ export default function Alchimie({
               style={{ margin: 0, fontSize: "0.92rem" }}
             >
               {lastMessage}
-            </motion.p>
+            </m.p>
           )}
         </AnimatePresence>
 
@@ -577,7 +577,7 @@ export default function Alchimie({
                 const isCrafted = item.parents !== null;
                 const title = parentsOf(item) ?? "Concept de start";
                 return (
-                  <motion.button
+                  <m.button
                     key={item.id}
                     type="button"
                     layout
@@ -622,7 +622,7 @@ export default function Alchimie({
                   >
                     {isCrafted ? "✦ " : ""}
                     {item.label}
-                  </motion.button>
+                  </m.button>
                 );
               })}
             </AnimatePresence>

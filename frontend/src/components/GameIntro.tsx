@@ -6,7 +6,7 @@
 // global key listener (which used to collide across screens).
 
 import type { ReactNode } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Badge, Button } from "@roedu/ui";
 import type { ScoreEntry } from "../scores";
 
@@ -45,7 +45,7 @@ export function GameIntro({
   starting?: boolean;
 }) {
   return (
-    <motion.div
+    <m.div
       className="card game-intro"
       initial={{ opacity: 0, y: 18, scale: 0.98 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -94,6 +94,6 @@ export function GameIntro({
           Recordul tău: <strong style={{ color: accent }}>{best.score}</strong> · {best.detail}
         </p>
       )}
-    </motion.div>
+    </m.div>
   );
 }

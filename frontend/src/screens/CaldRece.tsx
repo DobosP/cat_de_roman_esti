@@ -6,7 +6,7 @@
 // best-first); this component only renders what it returns and surfaces errors as toasts.
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { Button, type ToastKind } from "@roedu/ui";
 import { GameShell } from "../components/GameShell";
 import { GameIntro } from "../components/GameIntro";
@@ -94,7 +94,7 @@ function GuessRow({ g, isLatest }: { g: Guess; isLatest: boolean }) {
   const color = barColor(g);
   const pct = Math.max(2, Math.min(100, g.closeness));
   return (
-    <motion.div
+    <m.div
       layout
       initial={isLatest ? { opacity: 0, y: -10, scale: 0.97 } : false}
       animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -164,7 +164,7 @@ function GuessRow({ g, isLatest }: { g: Guess; isLatest: boolean }) {
           </span>
         </span>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -630,7 +630,7 @@ export default function CaldRece({
         {/* latest verdict — always-visible feedback for the last guess */}
         <AnimatePresence mode="wait">
           {!finished && latestGuess && (
-            <motion.div
+            <m.div
               key={`${latestGuess.id}-${latestGuess.distance}`}
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
@@ -664,7 +664,7 @@ export default function CaldRece({
               >
                 #{latestGuess.rank} · {latestGuess.closeness}
               </strong>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
 

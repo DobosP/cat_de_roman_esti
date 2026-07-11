@@ -7,7 +7,7 @@
 // the replay handler, and onExit.
 
 import type { ReactNode } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Badge, Button } from "@roedu/ui";
 import { Confetti } from "./Confetti";
 
@@ -60,7 +60,7 @@ export function ResultCard({
 }) {
   const ring = won ? accent : "var(--surface-border-strong)";
   return (
-    <motion.div
+    <m.div
       className="card center col"
       initial={{ scale: 0.88, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
@@ -78,7 +78,7 @@ export function ResultCard({
       }}
     >
       {won && <Confetti accent={accent} />}
-      <motion.div
+      <m.div
         style={{ fontSize: "2.6rem", lineHeight: 1 }}
         aria-hidden
         initial={{ scale: 0.4, rotate: won ? -14 : 0 }}
@@ -86,7 +86,7 @@ export function ResultCard({
         transition={{ type: "spring", stiffness: 260, damping: 14, delay: 0.08 }}
       >
         {icon}
-      </motion.div>
+      </m.div>
       <h2 style={{ margin: "2px 0", color: won ? accent : "var(--text)" }}>{title}</h2>
 
       {children && (
@@ -100,7 +100,7 @@ export function ResultCard({
           <span className="faint" style={{ fontSize: "0.72rem", letterSpacing: "0.08em" }}>
             {scoreLabel}
           </span>
-          <motion.div
+          <m.div
             initial={{ scale: 0.7 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 300, damping: 15, delay: 0.15 }}
@@ -113,24 +113,24 @@ export function ResultCard({
             }}
           >
             {score}
-          </motion.div>
+          </m.div>
           {isRecord && (
-            <motion.span
+            <m.span
               initial={{ scale: 0.6, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", stiffness: 300, damping: 16, delay: 0.25 }}
             >
               <Badge color="var(--warn)">★ Record!</Badge>
-            </motion.span>
+            </m.span>
           )}
           {!isRecord && isPuzzleRecord && (
-            <motion.span
+            <m.span
               initial={{ scale: 0.6, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", stiffness: 300, damping: 16, delay: 0.25 }}
             >
               <Badge tone="success">★ Recordul acestei provocări</Badge>
-            </motion.span>
+            </m.span>
           )}
         </div>
       )}
@@ -157,6 +157,6 @@ export function ResultCard({
           </Button>
         )}
       </div>
-    </motion.div>
+    </m.div>
   );
 }

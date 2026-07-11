@@ -22,6 +22,7 @@ all follow from statelessness; the ON mode restores the full production-safe pos
 from __future__ import annotations
 
 import os
+import re
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent  # cat_de_roman_esti/web
@@ -30,6 +31,19 @@ STATIC_DIR = BASE_DIR / "static"  # the built SPA (Vite outDir; shipped in the w
 
 def _env_bool(name: str, default: str = "0") -> bool:
     return os.environ.get(name, default).strip().lower() in {"1", "true", "yes", "on"}
+
+
+def _env_positive_int(name: str, default: int) -> int:
+    raw = os.environ.get(name)
+    if raw is None:
+        return default
+    try:
+        value = int(raw)
+    except ValueError:
+        raise RuntimeError(f"{name} must be a positive integer") from None
+    if value <= 0:
+        raise RuntimeError(f"{name} must be a positive integer")
+    return value
 
 
 def _env_list(name: str) -> list[str]:
@@ -216,6 +230,10 @@ REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "cat_de_roman_esti.web.http.exception_handler",
 }
 
+# Every API body in this BFF is a small JSON command. Reject oversized requests
+# before parsing them so anonymous game endpoints cannot consume megabytes per hit.
+DATA_UPLOAD_MAX_MEMORY_SIZE = _env_positive_int("CAT_MAX_REQUEST_BYTES", 64 * 1024)
+
 SPECTACULAR_SETTINGS = {
     "TITLE": "cat_de_roman_esti",
     "DESCRIPTION": "Server-authoritative word-game arcade over the Romanian knowledge graph.",
@@ -246,8 +264,23 @@ if ACCOUNTS_ENABLED and not DEBUG:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = _env_bool("CAT_HSTS_SUBDOMAINS")
     SECURE_HSTS_PRELOAD = _env_bool("CAT_HSTS_PRELOAD")
 
-# WhiteNoise serves the built SPA from the URL root (hashed /assets/* get immutable
-# caching automatically); deep links fall through to the SPA catch-all view.
+# WhiteNoise's default immutable-name detector expects Django's 12-hex manifest
+# format. Vite emits an 8-character URL-safe hash after a dash, so declare that
+# format explicitly; otherwise versioned assets receive only a one-minute cache.
+_VITE_HASHED_ASSET = re.compile(
+    r"^/assets/.+-[A-Za-z0-9_-]{8}\.(?:css|js|woff|woff2)$"
+)
+
+
+def _vite_asset_is_immutable(path: str, url: str) -> bool:
+    del path
+    return _VITE_HASHED_ASSET.fullmatch(url) is not None
+
+
+WHITENOISE_IMMUTABLE_FILE_TEST = _vite_asset_is_immutable
+
+# WhiteNoise serves the built SPA from the URL root; deep links fall through to
+# the SPA catch-all view.
 WHITENOISE_ROOT = str(STATIC_DIR)
 WHITENOISE_INDEX_FILE = True
 STATIC_URL = "/static/"  # required by Django; the SPA is served from "/" by WhiteNoise

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { Button, Spinner, type ToastKind } from "@roedu/ui";
 import {
   type Difficulty,
@@ -47,7 +47,7 @@ function Breadcrumb({ path }: { path: PathStep[] }) {
     <div className="row wrap" style={{ gap: 6, alignItems: "center" }}>
       <AnimatePresence initial={false}>
         {path.map((step, i) => (
-          <motion.span
+          <m.span
             key={`${step.id}-${i}`}
             layout
             initial={{ opacity: 0, scale: 0.8, y: -6 }}
@@ -79,7 +79,7 @@ function Breadcrumb({ path }: { path: PathStep[] }) {
             >
               {step.label}
             </span>
-          </motion.span>
+          </m.span>
         ))}
       </AnimatePresence>
     </div>
@@ -453,7 +453,7 @@ export default function Lant({
             EȘTI ACUM LA
           </span>
           <AnimatePresence mode="wait">
-            <motion.div
+            <m.div
               key={state.current.id}
               initial={{ opacity: 0, y: 14, scale: 0.92 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -470,7 +470,7 @@ export default function Lant({
               }}
             >
               {state.current.label}
-            </motion.div>
+            </m.div>
           </AnimatePresence>
         </div>
 
@@ -498,7 +498,7 @@ export default function Lant({
             {state.optimal}).
           </ResultCard>
         ) : (
-          <motion.div
+          <m.div
             key={shake}
             animate={shake ? { x: [0, -8, 8, -6, 6, 0] } : {}}
             transition={{ duration: 0.32 }}
@@ -566,7 +566,7 @@ export default function Lant({
 
             <AnimatePresence>
               {hint?.hint && (
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
@@ -607,10 +607,10 @@ export default function Lant({
                       </span>
                     ) : null}
                   </div>
-                </motion.div>
+                </m.div>
               )}
             </AnimatePresence>
-          </motion.div>
+          </m.div>
         )}
 
         {/* path breadcrumb */}

@@ -34,6 +34,10 @@ services:
       # Points at the mounted volume below so POST /api/submissions persists its
       # pending queue across restarts. Unset to disable the endpoint (503).
       CAT_SUBMISSIONS_DIR: "${CAT_SUBMISSIONS_DIR:-/data/submissions}"
+      # Low-resource launch bounds (ADR-0020). Raise only after measuring real load.
+      CAT_SESSION_TTL_SECONDS: "${CAT_SESSION_TTL_SECONDS:-7200}"
+      CAT_MAX_SESSIONS_PER_GAME: "${CAT_MAX_SESSIONS_PER_GAME:-1000}"
+      CAT_MAX_REQUEST_BYTES: "${CAT_MAX_REQUEST_BYTES:-65536}"
     volumes:
       - submissions:/data/submissions
     restart: unless-stopped

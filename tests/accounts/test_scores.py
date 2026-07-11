@@ -3,8 +3,21 @@
 from __future__ import annotations
 
 import pytest
+from django.test import override_settings
 
 pytestmark = pytest.mark.django_db
+
+
+@override_settings(DATA_UPLOAD_MAX_MEMORY_SIZE=64)
+def test_account_json_body_uses_the_global_size_ceiling(auth_client):
+    response = auth_client.post(
+        "/api/me/scores",
+        data={"entries": [{"game": "contexto", "detail": "x" * 100}]},
+        content_type="application/json",
+    )
+    assert response.status_code == 413
+    assert response.json() == {"detail": "Request body too large"}
+
 
 _ENTRY = {
     "game": "contexto",

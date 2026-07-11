@@ -80,7 +80,7 @@ pick_port() {
 
 # Build the SPA into cat_de_roman_esti/web/static.
 build_frontend() {
-  have npm || die "npm not found — install Node 18+ to build the frontend"
+  have npm || die "npm not found — install Node 24 LTS to build the frontend"
   log "building SPA (npm) -> cat_de_roman_esti/web/static ..."
   ( cd "$FRONTEND_DIR"
     if [ -f package-lock.json ]; then npm ci; else npm install; fi
@@ -122,7 +122,7 @@ cmd_run() {
 }
 
 cmd_dev() {
-  have npm || die "npm not found — install Node 18+ for dev mode"
+  have npm || die "npm not found — install Node 24 LTS for dev mode"
   local py port
   py="$(resolve_python)"
   # uvicorn on the BFF port (vite proxies /api here — see vite.config.ts default 8000).

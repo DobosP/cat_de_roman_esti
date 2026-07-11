@@ -47,7 +47,7 @@ cat-de-roman = "cat_de_roman_esti.cli:main"
 include = ["cat_de_roman_esti*"]
 
 # Ship the curated offline fixture AND the built SPA inside the wheel so that a clean
-# `pip install .` followed by `python -m cat_de_roman_esti.web` works with no source
+# `pip install ".[web]"` followed by `python -m cat_de_roman_esti.web` works with no source
 # tree present. The static bundle is produced by the frontend build (Docker stage 1 /
 # `npm run build`) before packaging; the recursive globs cover the hashed assets/.
 [tool.setuptools.package-data]

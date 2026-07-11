@@ -1,19 +1,22 @@
 // App.tsx — routing shell for the word-game arcade. Every screen is a real URL
-// (shareable/bookmarkable; the FastAPI BFF serves index.html on deep links) and
+// (shareable/bookmarkable; the Django BFF serves index.html on deep links) and
 // screen changes animate through AnimatePresence. Game logic lives per screen;
 // the shell owns only toasts + transitions.
 
-import { useCallback, useRef, useState, type ReactNode } from "react";
+import { lazy, Suspense, useCallback, useRef, useState, type ReactNode } from "react";
 import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { AnimatePresence, motion, MotionConfig } from "framer-motion";
+import { AnimatePresence, domAnimation, LazyMotion, m, MotionConfig } from "framer-motion";
 import { ToastStack, type ToastData, type ToastKind } from "@roedu/ui";
 import Home from "./screens/Home";
-import Alchimie from "./screens/Alchimie";
-import CaldRece from "./screens/CaldRece";
-import Lant from "./screens/Lant";
-import Conexiuni from "./screens/Conexiuni";
-import Ranking from "./screens/Ranking";
 import AccountBar from "./components/AccountBar";
+
+// Home is the only screen every visitor needs. Each game is deliberately loaded
+// on first play so low-end devices do not parse all four game engines up front.
+const Alchimie = lazy(() => import("./screens/Alchimie"));
+const CaldRece = lazy(() => import("./screens/CaldRece"));
+const Lant = lazy(() => import("./screens/Lant"));
+const Conexiuni = lazy(() => import("./screens/Conexiuni"));
+const Ranking = lazy(() => import("./screens/Ranking"));
 
 export type { ToastKind };
 
@@ -26,7 +29,7 @@ const variants = {
 
 function ScreenFrame({ children }: { children: ReactNode }) {
   return (
-    <motion.div
+    <m.div
       className="screen"
       variants={variants}
       initial="initial"
@@ -35,7 +38,7 @@ function ScreenFrame({ children }: { children: ReactNode }) {
       transition={SCREEN_TRANSITION}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -62,10 +65,19 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="app-shell">
-        <AccountBar />
-        <AnimatePresence mode="wait">
-          <Routes location={location} key={location.pathname}>
+      <LazyMotion features={domAnimation} strict>
+        <div className="app-shell">
+          <AccountBar />
+          <AnimatePresence mode="wait">
+            <Suspense
+              key={location.pathname}
+              fallback={
+                <div className="screen" role="status" aria-live="polite">
+                  Se încarcă jocul…
+                </div>
+              }
+            >
+              <Routes location={location} key={location.pathname}>
             <Route
               path="/"
               element={
@@ -114,12 +126,14 @@ export default function App() {
                 </ScreenFrame>
               }
             />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </AnimatePresence>
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </Suspense>
+          </AnimatePresence>
 
-        <ToastStack toasts={toasts} onDismiss={dismissToast} />
-      </div>
+          <ToastStack toasts={toasts} onDismiss={dismissToast} />
+        </div>
+      </LazyMotion>
     </MotionConfig>
   );
 }
