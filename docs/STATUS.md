@@ -3,6 +3,21 @@
 _As of 2026-07-12. Update whenever `main` or the test baseline moves._
 _Last verified: 2026-07-12 (backend 271 + accounts 28, Ruff, both validators, anon+prod compose config render; frontend lint/typecheck/test/build + bundle gate last ran green at b245886 — untouched since.)_
 
+## Latest — v16 KG enrichment + content promotion (2026-07-12)
+
+443 adversarially-verified high-quality edges + 57 aliases imported across all 14
+categories via `scripts/import_enrichment.py` (14 author agents, 14 reviewer agents;
+13 factually-weak edges and 78 collision-prone aliases blocked pre-import). Weak tail
+(non-distractor degree ≤2) drops **180 → 4 nodes, zero isolated**; generic `related_to`
+share 64.6% → 59.3%; mean non-distractor degree 6.9 → 7.97; edges 5,656 → 6,099.
+`kg_puzzles` regenerated; all pack items re-derived (one approved greu Lanț board retired —
+new shortcuts pulled its optimal below its band). Then an Opus judge fleet reviewed the
+135 pending pack items that validate on the denser graph (9 Lanț boards newly clear the
+ADR-0016 branch floor): **70 promoted, 62 kept pending, 3 rejected — approved served
+content 537 → 606** (conexiuni 240, contexto 195, lant 93, alchimie 78). Judge/author
+verdict archives live in the deploy-session scratchpad, applied via
+`scripts/apply_rereview.py`.
+
 ## Latest — graded similarity feel + fuzzy input (2026-07-12, ADR-0021)
 
 Cald sau Rece and Lanțul Cuvintelor now feel smarter without any frontend or API-shape
