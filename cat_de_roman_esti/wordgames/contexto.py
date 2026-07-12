@@ -541,6 +541,14 @@ class GuessView(ContractAPIView):
             raise http_error(400, "Scrie un concept")
 
         node_id = svc.resolve(text)
+        corrected = False
+        if node_id is None:
+            # Confident auto-accept (ADR-0022): a high-confidence, unambiguous near-miss
+            # is played as the corrected concept — attempts count normally, and if the
+            # correction IS the target that is a legitimate win (a typo'd answer is still
+            # the answer). Anything weaker falls through to the advisory suggestions.
+            node_id = svc.resolve_fuzzy(text)
+            corrected = node_id is not None
         if node_id is None:
             # Unknown concept: do NOT count it as an attempt. Offer fuzzy "did you mean"
             # hints, but NEVER one that resolves to the hidden target (ADR-0009/0021).
@@ -611,6 +619,11 @@ class GuessView(ContractAPIView):
                 and session.attempts >= MIN_CLUE_ATTEMPTS
             ),
         }
+        if corrected:
+            # Tell the player what we understood. On a non-win the corrected node can
+            # never be the target (correction == target implies distance 0, a win), so
+            # this message cannot leak the hidden answer (ADR-0009).
+            result["message"] = f"Am înțeles: {record.label}."
         if session.clue_revealed:
             result["clue"] = _clue_payload(session)
         if session.won:

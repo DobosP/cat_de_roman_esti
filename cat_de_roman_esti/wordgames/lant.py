@@ -88,6 +88,10 @@ class LantSession:
     # Player-picked board theme + curated-pack provenance (None for mined games).
     category: str | None = None
     pack_id: str | None = None
+    # Hint requests per exact chain state (ADR-0022): the SECOND ask from the same
+    # position also names alternatives, so "still stuck here" is well-defined even
+    # across undo walks. Bounded by positions actually visited in one session.
+    hint_requests: dict[tuple[str, ...], int] = field(default_factory=dict)
 
     @property
     def current(self) -> str:
@@ -389,6 +393,13 @@ class MoveView(ContractAPIView):
 
         prev = session.current
         guess = _resolve_neighbor(body.text, prev, session.target)
+        corrected = False
+        if guess is None:
+            # Confident auto-accept (ADR-0022): a high-confidence, unambiguous near-miss
+            # is played as the corrected concept and goes through the exact same
+            # legality checks below (neighbour -> move, target -> win).
+            guess = svc.resolve_fuzzy(body.text)
+            corrected = guess is not None
         if guess is None:
             # Unknown concept: offer fuzzy "did you mean" hints. Lanț's target is public
             # (ADR-0021), so no suggestion needs to be withheld here.
@@ -400,15 +411,33 @@ class MoveView(ContractAPIView):
                 {"ok": False, "last_error": last_error, "suggestions": suggestions}
             )
 
+        # On a correction every verdict names what we understood, so a rejected move
+        # blames the corrected concept and not the player's raw typo.
+        understood = f"Am înțeles: {svc.label(guess)}. " if corrected else ""
         if guess == prev:
-            return Response({"ok": False, "last_error": "Esti deja aici"})
+            return Response({"ok": False, "last_error": f"{understood}Esti deja aici"})
         if svc.link(prev, guess) is None:
-            return Response({"ok": False, "last_error": "Nu exista o legatura directa"})
+            return Response(
+                {"ok": False, "last_error": f"{understood}Nu exista o legatura directa"}
+            )
 
         session.chain.append(guess)
         session.won = guess == session.target
         if session.won:
             record_finished(request, GAME_KEY, session.pack_id)
+
+        notes: list[str] = []
+        if corrected:
+            notes.append(f"Am înțeles: {svc.label(guess)}.")
+        # Early dead-end warning (ADR-0022): the move is legal, but from here the target
+        # is unreachable on the directed graph — say so now instead of letting the
+        # player discover it hints later (pairs with the hint's backtrack escape).
+        dead_end = (
+            not session.won
+            and svc.distances_to(session.target).get(guess) is None
+        )
+        if dead_end:
+            notes.append("Atenție: fundătură — de aici ținta nu mai e accesibilă.")
 
         result = {
             "ok": True,
@@ -418,6 +447,10 @@ class MoveView(ContractAPIView):
             "moves": session.moves,
             "won": session.won,
         }
+        if dead_end:
+            result["dead_end"] = True
+        if notes:
+            result["message"] = " ".join(notes)
         if session.won:
             result["score"] = _score_for(session.moves, session.optimal)
             result["share"] = _share_line(
@@ -450,6 +483,12 @@ class HintView(ContractAPIView):
 
         svc = get_service()
         cur = session.current
+        # Count asks per exact chain state (ADR-0022): asking AGAIN without having moved
+        # means the first hint did not unstick the player, so the second answer also
+        # names the alternative on-path hops.
+        state_key = tuple(session.chain)
+        asks_here = session.hint_requests.get(state_key, 0) + 1
+        session.hint_requests[state_key] = asks_here
         dist_to_target = svc.distances_to(session.target)
         remaining = dist_to_target.get(cur)
         if remaining is None:
@@ -469,25 +508,37 @@ class HintView(ContractAPIView):
             )
 
         # All neighbours that lie on a shortest path (one hop closer to the target). When
-        # several exist, suggest the most salient (most recognisable) one so the hint is
-        # genuinely helpful rather than an obscure node the player has never heard of.
+        # several exist, suggest the strongest-edged hop first (ADR-0022) — the tight
+        # semantic link is the association a player can actually see — with salience
+        # (recognisability) breaking strength ties, then id for determinism.
         on_path = [
             nb
             for nb in svc.neighbor_ids(cur)
             if dist_to_target.get(nb) == remaining - 1
         ]
         if on_path:
-            on_path.sort(key=lambda nb: (_salience(nb), nb), reverse=True)
+
+            def _hop_strength(nb: str) -> float:
+                edge = svc.link(cur, nb)
+                return edge.strength if edge is not None else 0.0
+
+            on_path.sort(key=lambda nb: (-_hop_strength(nb), -_salience(nb), nb))
             best = on_path[0]
-            return Response(
-                {
-                    "hint": _concept(best),
-                    "relation": svc.link_label(cur, best),
-                    "remaining": remaining,
-                    # When >1 such neighbour exists, the player genuinely had a choice here.
-                    "alternatives": len(on_path),
-                }
-            )
+            payload = {
+                "hint": _concept(best),
+                "relation": svc.link_label(cur, best),
+                "remaining": remaining,
+                # When >1 such neighbour exists, the player genuinely had a choice here.
+                "alternatives": len(on_path),
+            }
+            if asks_here >= 2:
+                # Second ask from the same position: SHOW the branchiness the ADR-0016
+                # floor guarantees — up to 3 alternative on-path hops beside the best.
+                labels = [svc.label(nb) for nb in on_path[1:4]]
+                payload["alternatives_labels"] = labels
+                if labels:
+                    payload["message"] = "Alte variante: " + ", ".join(labels) + "."
+            return Response(payload)
 
         return Response({"hint": None, "message": "Niciun indiciu disponibil."})
 

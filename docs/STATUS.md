@@ -1,7 +1,21 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-13. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-13 (backend 271 + accounts 28, Ruff, both validators; frontend lint/typecheck/test/build + bundle gate last ran green at b245886 — untouched since.)_
+_Last verified: 2026-07-13 (backend 280 + accounts 28, Ruff, both validators; frontend lint/typecheck/test/build + bundle gate last ran green at b245886 — untouched since.)_
+
+## Latest — engine feel v2: auto-accept + Lanț guidance (2026-07-13, ADR-0022)
+
+Playability round on top of ADR-0021, backend-only and API-additive. New
+`WordGameService.resolve_fuzzy()` confidently auto-corrects a typo (difflib ratio ≥ 0.90
+on normalized keys, no second distinct node within 0.06, deterministic): Contexto guesses
+and Lanț moves play the corrected node as if typed (attempts/moves count normally;
+additive message "Am înțeles: <label>."), and a corrected typo OF THE ANSWER is a
+legitimate win in both games; weaker/ambiguous input keeps ADR-0021's advisory
+suggestions (target still stripped, ADR-0009). Lanț hints now pick the strongest-edged
+on-path hop (salience only breaks ties), a SECOND hint request from the same chain state
+adds `alternatives_labels` (≤3) + "Alte variante: …", and a legal move onto a node that
+can no longer reach the target returns additive `dead_end: true` plus a warning.
+Hidden-answer, clue, score_for and operationIds pinned unchanged; backend suite 271 → 280.
 
 ## Latest — v19 meme/trend expansion (2026-07-13)
 

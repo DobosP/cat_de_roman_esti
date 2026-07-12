@@ -473,8 +473,14 @@ def test_hint_is_on_a_shortest_path_and_reports_remaining():
     assert h["alternatives"] >= 1
 
 
-def test_hint_prefers_the_most_salient_next_step():
-    """When several neighbours lie on a shortest path, the hint suggests the salient one."""
+def _hop_strength(svc, cur: str, nb: str) -> float:
+    edge = svc.link(cur, nb)
+    return edge.strength if edge is not None else 0.0
+
+
+def test_hint_prefers_the_strongest_edge_next_step():
+    """Among shortest-path neighbours the hint takes the strongest hop (ADR-0022):
+    edge strength first, salience only breaking ties, id for determinism."""
     svc = get_service()
     found = False
     for diff in _BANDS:
@@ -491,7 +497,10 @@ def test_hint_prefers_the_most_salient_next_step():
             if len(on_path) < 2:
                 continue
             found = True
-            best = max(on_path, key=lambda nb: (svc.node(nb).salience, nb))
+            best = sorted(
+                on_path,
+                key=lambda nb: (-_hop_strength(svc, cur, nb), -svc.node(nb).salience, nb),
+            )[0]
             h = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
             assert h["hint"]["id"] == best, (diff, seed, on_path)
             assert h["alternatives"] == len(on_path)
@@ -499,6 +508,62 @@ def test_hint_prefers_the_most_salient_next_step():
         if found:
             break
     assert found, "expected at least one puzzle with multiple shortest-path neighbours"
+
+
+def _branchy_hint_service():
+    """A tiny graph where the salient hop and the strong hop differ (ADR-0022)."""
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    nodes = [
+        {"id": "start", "label_ro": "START", "category": "test", "salience": 0.5},
+        # `famous` is the more recognisable hop, but its edge is weak; `tight` must win.
+        {"id": "famous", "label_ro": "FAMOUS", "category": "test", "salience": 0.95},
+        {"id": "tight", "label_ro": "TIGHT", "category": "test", "salience": 0.1},
+        {"id": "target", "label_ro": "TARGET", "category": "test", "salience": 0.5},
+    ]
+    edges = [
+        {"id": "e1", "src_id": "start", "dst_id": "famous", "bidirectional": 1, "strength": 0.2},
+        {"id": "e2", "src_id": "start", "dst_id": "tight", "bidirectional": 1, "strength": 0.9},
+        {"id": "e3", "src_id": "famous", "dst_id": "target", "bidirectional": 1, "strength": 0.5},
+        {"id": "e4", "src_id": "tight", "dst_id": "target", "bidirectional": 1, "strength": 0.5},
+    ]
+    return WordGameService(Graph.from_records(nodes, edges))
+
+
+def test_hint_strength_beats_salience(monkeypatch):
+    svc = _branchy_hint_service()
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+    session = LantSession(start="start", target="target", optimal=2, chain=["start"])
+    gid = store.create(session)
+    h = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    assert h["hint"]["id"] == "tight"  # strong edge outranks higher salience
+    assert h["alternatives"] == 2
+    assert "alternatives_labels" not in h  # first ask stays a single nudge
+
+
+def test_second_hint_from_same_position_names_alternatives(monkeypatch):
+    """Asking again without moving reveals up to 3 alternative on-path labels."""
+    svc = _branchy_hint_service()
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+    session = LantSession(start="start", target="target", optimal=2, chain=["start"])
+    gid = store.create(session)
+    first = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    assert "alternatives_labels" not in first
+    assert "message" not in first
+    second = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    assert second["hint"]["id"] == first["hint"]["id"]  # the nudge itself is stable
+    assert second["alternatives_labels"] == ["FAMOUS"]
+    assert second["message"] == "Alte variante: FAMOUS."
+    # After moving, the NEW position starts over with a single nudge.
+    mv = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": "TIGHT"},
+        content_type="application/json",
+    ).json()
+    assert mv["ok"] is True
+    third = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    assert "alternatives_labels" not in third
 
 
 def test_hint_on_won_game_returns_message():
@@ -568,20 +633,25 @@ def test_score_for_helper_floor_and_cap():
 
 # --------------------------------------------------------------------- fuzzy suggestions
 def test_unknown_move_offers_fuzzy_suggestions():
-    """A typo of a real concept surfaces a "did you mean" hint on the move endpoint."""
+    """A mangled concept surfaces a "did you mean" hint on the move endpoint.
+
+    Updated for ADR-0022: a light typo now usually auto-corrects, so the advisory path
+    is driven with a heavier typo that resolve_fuzzy() must NOT accept.
+    """
     game = _create()
     gid = game["game_id"]
     svc = get_service()
-    # A concept whose one-char-dropped form no longer resolves but stays fuzzy-close.
+    # A concept whose two-char-dropped form stays suggestible but is not auto-corrected.
     concept = next(
         nid
         for nid in svc.all_ids()
-        if len(svc.label(nid)) >= 6
-        and svc.resolve(svc.label(nid)[:3] + svc.label(nid)[4:]) is None
-        and svc.suggest(svc.label(nid)[:3] + svc.label(nid)[4:])
+        if len(svc.label(nid)) >= 7
+        and svc.resolve(svc.label(nid)[:3] + svc.label(nid)[5:]) is None
+        and svc.resolve_fuzzy(svc.label(nid)[:3] + svc.label(nid)[5:]) is None
+        and svc.label(nid) in svc.suggest(svc.label(nid)[:3] + svc.label(nid)[5:])
     )
     label = svc.label(concept)
-    typo = label[:3] + label[4:]
+    typo = label[:3] + label[5:]
     body = c.post(
         f"/api/wordgames/lant/games/{gid}/move",
         {"text": typo},
@@ -604,7 +674,148 @@ def test_no_suggestion_keeps_the_plain_unknown_error():
     assert res["suggestions"] == []
 
 
+# --------------------------------------------------------------------- confident auto-accept
+def _drop_mid(label: str) -> str:
+    """Drop one interior character: high-confidence fuzzy-close to the original."""
+    mid = len(label) // 2
+    return label[:mid] + label[mid + 1 :]
+
+
+def _find_correctable_hop(svc) -> tuple[str, str, str]:
+    """(cur, nb, typo): nb is a neighbour of cur whose typo confidently auto-corrects."""
+    for cur in svc.all_ids():
+        for nb in svc.neighbor_ids(cur):
+            label = svc.label(nb)
+            if len(label) < 7:
+                continue
+            typo = _drop_mid(label)
+            if svc.resolve(typo) is None and svc.resolve_fuzzy(typo) == nb:
+                return cur, nb, typo
+    raise AssertionError("no auto-correctable neighbour label found in the fixture")
+
+
+def test_move_typo_auto_accepts_and_names_the_correction():
+    """A unique high-confidence typo of a legal neighbour moves there (ADR-0022)."""
+    svc = get_service()
+    cur, nb, typo = _find_correctable_hop(svc)
+    # Any concept still reachable FROM nb keeps this move off the dead-end path.
+    target = next(t for t in svc.distances_from(nb) if t not in (cur, nb))
+    session = LantSession(start=cur, target=target, optimal=2, chain=[cur])
+    gid = store.create(session)
+    body = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": typo},
+        content_type="application/json",
+    ).json()
+    assert body["ok"] is True, body
+    assert body["current"]["id"] == nb
+    assert body["moves"] == 1  # auto-accepted moves count normally
+    assert body["message"] == f"Am înțeles: {svc.label(nb)}."
+    assert "dead_end" not in body
+
+
+def test_move_typo_that_reaches_the_target_wins():
+    """A typo'd target next door is still the answer: correction + win in one move."""
+    svc = get_service()
+    cur, nb, typo = _find_correctable_hop(svc)
+    session = LantSession(start=cur, target=nb, optimal=1, chain=[cur])
+    gid = store.create(session)
+    body = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": typo},
+        content_type="application/json",
+    ).json()
+    assert body["ok"] is True, body
+    assert body["won"] is True
+    assert body["message"] == f"Am înțeles: {svc.label(nb)}."
+    assert body["score"] == 1000
+
+
+def test_move_typo_of_a_non_neighbor_names_the_correction():
+    """An auto-corrected concept that is NOT linked is rejected BY ITS CORRECTED NAME."""
+    svc = get_service()
+    game = _create()
+    gid = game["game_id"]
+    cur = game["start"]["id"]
+    found = None
+    for nid in svc.all_ids():
+        if nid == cur or svc.link(cur, nid) is not None:
+            continue
+        label = svc.label(nid)
+        if len(label) < 7:
+            continue
+        typo = _drop_mid(label)
+        if svc.resolve(typo) is None and svc.resolve_fuzzy(typo) == nid:
+            found = (nid, typo)
+            break
+    assert found, "no auto-correctable non-neighbour found in the fixture"
+    nid, typo = found
+    body = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": typo},
+        content_type="application/json",
+    ).json()
+    assert body["ok"] is False
+    assert body["last_error"] == (
+        f"Am înțeles: {svc.label(nid)}. Nu exista o legatura directa"
+    )
+    # A rejected correction changes nothing.
+    assert c.get(f"/api/wordgames/lant/games/{gid}").json()["moves"] == 0
+
+
 # --------------------------------------------------------------------- dead-end escape
+def test_move_into_a_dead_end_sets_flag_and_warns(monkeypatch):
+    """A legal move onto a node that can no longer reach the target says so at once."""
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    nodes = [
+        {"id": n, "label_ro": n.upper(), "category": "test"}
+        for n in ("start", "mid", "dead", "target")
+    ]
+    edges = [
+        {"id": "e1", "src_id": "start", "dst_id": "mid", "bidirectional": 1},
+        {"id": "e2", "src_id": "mid", "dst_id": "target", "bidirectional": 1},
+        {"id": "e3", "src_id": "mid", "dst_id": "dead", "bidirectional": 0},
+    ]
+    svc = WordGameService(Graph.from_records(nodes, edges))
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+
+    session = LantSession(
+        start="start", target="target", optimal=2, chain=["start", "mid"]
+    )
+    gid = store.create(session)
+    body = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": "DEAD"},
+        content_type="application/json",
+    ).json()
+    assert body["ok"] is True
+    assert body["dead_end"] is True
+    assert "fundătură" in body["message"]
+
+    # A move that stays on a live path never carries the flag or the warning.
+    session2 = LantSession(start="start", target="target", optimal=2, chain=["start"])
+    gid2 = store.create(session2)
+    ok = c.post(
+        f"/api/wordgames/lant/games/{gid2}/move",
+        {"text": "MID"},
+        content_type="application/json",
+    ).json()
+    assert ok["ok"] is True
+    assert "dead_end" not in ok
+    assert "message" not in ok
+
+    # Nor does the winning move (the game is over, not stuck).
+    win = c.post(
+        f"/api/wordgames/lant/games/{gid2}/move",
+        {"text": "TARGET"},
+        content_type="application/json",
+    ).json()
+    assert win["won"] is True
+    assert "dead_end" not in win
+
+
 def test_hint_dead_end_names_a_reachable_chain_ancestor(monkeypatch):
     """From a dead end the hint points back to the nearest visited node that can still
     reach the target — naming only a node the player already walked through."""
