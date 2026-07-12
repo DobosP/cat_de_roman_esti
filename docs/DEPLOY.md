@@ -65,10 +65,15 @@ docker compose -f docker-compose.anon.yml logs -f app   # watch boot (no migrati
 **4. Smoke test:**
 
 ```bash
-curl -fsS https://<CAT_DOMAIN>/api/health        # {"ok": true, ...}
+curl -fsS https://<CAT_DOMAIN>/api/health        # {"ok": true, "concepts": 1459, ...}
 curl -fsS https://<CAT_DOMAIN>/healthz           # container-internal healthcheck endpoint
 curl -fsS https://<CAT_DOMAIN>/api/me            # {"accounts_enabled": false, ...}
+curl -fsS https://<CAT_DOMAIN>/api/categories    # every category: "available" true + non-zero "curated"
 ```
+
+If `/api/categories` shows `node_count: 0` / all-false `available`, the app loaded the
+wrong KG fixture — `CAT_KG_FIXTURE` must point at the curated `kg_sample.json` (the
+default); the games pack's node ids do not exist in other fixtures.
 
 **Single-process constraint** still applies: game sessions live in memory
 (`SessionStore`), so the app must stay one process (see the

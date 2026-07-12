@@ -9,12 +9,22 @@ _Last verified: 2026-07-12 (backend 255+6 legal + accounts 28, Ruff, both valida
 `934765e` via `docker-compose.anon.yml` on a Netcup VPS (Debian 13, 2 vCPU / 3.8 GiB,
 Docker 29.6.1; ufw 22/80/443 + fail2ban + key-only SSH; Docker json-file logs capped
 10 MiB×3 as the access-log/IP retention bound). Cloudflare DNS-only (grey cloud), Caddy
-Let's Encrypt. Public smoke green: `/api/health` (932 concepts), `/healthz`, `/api/me`
+Let's Encrypt. Public smoke green: `/api/health` (1,459 concepts), `/healthz`, `/api/me`
 `accounts_enabled:false`, HTTP→308→HTTPS, homepage, `/legal/privacy` with real operator +
 `contact@dobolabs.ro` (no placeholders), and a gameplay round created through the public
 URL. Owner-side: Cloudflare Email Routing rule for `contact@` (pending confirmation);
 donations unset (button hidden). Post-launch follow-ups: raise `CAT_HSTS_SECONDS` once
 stable, consider Cloudflare proxy flip per DEPLOY.md production path, uptime monitoring.
+
+**Launch-day content incident (fixed same day):** the prod compose/env defaults pointed
+`CAT_KG_FIXTURE` at `kg_real.json` — a stale thin corpus export (932 nodes / 135 edges)
+whose node ids the curated games pack does not reference — so the live site served zero
+curated games and every category showed `available: false` while the daily/miner fallback
+still played. The canonical shipped KG is the curated `kg_sample.json` (1,459 nodes /
+5,656 edges; the pack's node ids). Fixed live via `.env.anon` override, and the defaults
+in all three compose files + `.env.prod.example` now point at `kg_sample.json`; the
+DEPLOY.md smoke tests now include the `/api/categories` non-empty check that would have
+caught this.
 
 The v1 public launch ships the anonymous arcade (accounts OFF), per the go-live gate below
 and in docs/DEPLOY.md. New `docker-compose.anon.yml` (app + Caddy only: no Postgres, no

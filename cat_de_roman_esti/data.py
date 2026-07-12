@@ -30,9 +30,10 @@ DEFAULT_FIXTURE = FIXTURE_DIR / "kg_sample.json"
 def _resolve_fixture(path: str | Path | None) -> Path:
     """Offline-fixture path: explicit arg > ``CAT_KG_FIXTURE`` env > bundled default.
 
-    The env override lets a deployment (e.g. the Docker image) ship real corpus data
-    as the default offline bundle (``fixtures/kg_real.json``) without touching the
-    curated ``kg_sample.json`` or any call site."""
+    The env override lets a deployment swap the offline bundle without touching call
+    sites. Caution: the curated ``kg_sample.json`` (the bundled default) is what the
+    games pack's node ids reference — pointing at another fixture (e.g. the stale
+    ``kg_real.json`` corpus export) silently empties every category's curated games."""
     return Path(path or os.environ.get("CAT_KG_FIXTURE") or DEFAULT_FIXTURE)
 DEFAULT_MAX_NODES = 10_000
 DEFAULT_MAX_EDGES = 50_000

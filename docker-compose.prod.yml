@@ -47,7 +47,7 @@ services:
       CAT_DB_SSL: "0" # in-cluster DB over the private compose network
       GOOGLE_OAUTH_CLIENT_ID: ${GOOGLE_OAUTH_CLIENT_ID:?set GOOGLE_OAUTH_CLIENT_ID in .env.prod}
       GOOGLE_OAUTH_CLIENT_SECRET: ${GOOGLE_OAUTH_CLIENT_SECRET:?set GOOGLE_OAUTH_CLIENT_SECRET in .env.prod}
-      CAT_KG_FIXTURE: ${CAT_KG_FIXTURE:-cat_de_roman_esti/fixtures/kg_real.json}
+      CAT_KG_FIXTURE: ${CAT_KG_FIXTURE:-cat_de_roman_esti/fixtures/kg_sample.json}
       CAT_HSTS_SECONDS: ${CAT_HSTS_SECONDS:-0}
       CAT_CONSENT_VERSION: ${CAT_CONSENT_VERSION:-2026-07-09}
       CAT_DONATE_URL: ${CAT_DONATE_URL:-}

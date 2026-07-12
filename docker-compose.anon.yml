@@ -28,7 +28,7 @@ services:
       CAT_DEBUG: "0"
       CAT_DOMAIN: ${CAT_DOMAIN:?set CAT_DOMAIN in .env.anon}
       CAT_SECRET_KEY: ${CAT_SECRET_KEY:-}
-      CAT_KG_FIXTURE: ${CAT_KG_FIXTURE:-cat_de_roman_esti/fixtures/kg_real.json}
+      CAT_KG_FIXTURE: ${CAT_KG_FIXTURE:-cat_de_roman_esti/fixtures/kg_sample.json}
       CAT_HSTS_SECONDS: ${CAT_HSTS_SECONDS:-0}
       CAT_CONSENT_VERSION: ${CAT_CONSENT_VERSION:-2026-07-09}
       CAT_DONATE_URL: ${CAT_DONATE_URL:-}

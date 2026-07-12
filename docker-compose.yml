@@ -20,10 +20,12 @@ services:
     environment:
       # The app binds this port inside the container (Dockerfile CMD honors it).
       PORT: "8000"
-      # Offline bundle: real KG built from the corpus (kg_real.json), baked into the
-      # image. Unset to fall back to the curated kg_sample.json. Override the path to
-      # use any other bundled fixture.
-      CAT_KG_FIXTURE: "${CAT_KG_FIXTURE:-cat_de_roman_esti/fixtures/kg_real.json}"
+      # Offline bundle: the curated kg_sample.json is the canonical shipped KG — the
+      # games pack references its node ids, so pointing anywhere else empties every
+      # category's curated games. kg_real.json is a stale thin corpus export (932
+      # nodes / 135 edges); only swap it back once the corpus lane regenerates it AND
+      # the pack is rebuilt against it (scripts/gen_real_fixture.py).
+      CAT_KG_FIXTURE: "${CAT_KG_FIXTURE:-cat_de_roman_esti/fixtures/kg_sample.json}"
       # --- Live RO-EDU server (OPTIONAL) ---------------------------------------
       # Leave BOTH unset/commented for offline fixture play (the default).
       # ROEDU_API_URL passthrough: if set in your shell/.env it is forwarded; the
