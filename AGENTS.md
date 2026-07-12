@@ -3,6 +3,18 @@
 ## Project summary
 `cat_de_roman_esti` is a Romanian-language app/game project in the RO-EDU fleet. Word-game/session behavior should stay bounded, deterministic, and test-covered.
 
+## Fleet context
+- Role: Romanian word-game arcade (Alchimie/Contexto/Lanț/Conexiuni) over the concept graph.
+- Upstream: `ro_data_server` (KG products: kg_nodes/kg_edges/kg_puzzles), `roedu-ui` (vendored `@roedu/ui`) · Downstream: none.
+- Fleet map + parallel-agent protocol: `~/work/AGENTS.md` (agent-ops ADR-0025).
+
+## Parallel work (mandatory)
+- This shared checkout stays on `main`, clean — never switch branches or commit task work here.
+- One task = one branch (`<type>/<slug>`) = one worktree under `~/work/_worktrees/cat_de_roman_esti/`:
+  `python3 ~/work/agent-ops/scripts/create_task_worktree.py --repo ~/work/cat_de_roman_esti --branch <type>/<slug> --task "..." --write`
+- Never create worktrees under `/tmp`. Workers never push; the orchestrating session lands green
+  work on `main` (ADR-0014) and backs up unlanded branches to origin. Deletion is human-confirmed only.
+
 ## Read first
 1. `docs/STATUS.md` for durable status.
 2. `README.md` if present.
