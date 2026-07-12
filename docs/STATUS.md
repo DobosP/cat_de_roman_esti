@@ -3,6 +3,19 @@
 _As of 2026-07-12. Update whenever `main` or the test baseline moves._
 _Last verified: 2026-07-12 (backend 271 + accounts 28, Ruff, both validators, anon+prod compose config render; frontend lint/typecheck/test/build + bundle gate last ran green at b245886 — untouched since.)_
 
+## Latest — v17 Fable-authored concept expansion (2026-07-12)
+
+131 NEW concepts + 638 edges + 438 aliases across all 14 categories, authored by Fable 5
+agents (owner-requested model) and adversarially verified by Opus reviewers (1 node,
+4 edges, 13 aliases blocked pre-import; the importer's duplicate-folding remapped 8 more
+nodes onto existing concepts and dropped 20 colliding aliases). ADR-0019's editorial
+boundary was part of the authoring brief. Graph: **1,459 → 1,590 nodes, 6,099 → 6,730
+edges, ZERO nodes under non-distractor degree 3** (weak tail fully eliminated);
+`related_to` share 59.3% → 56.5%; categories balanced at 93–128 nodes. Pack counts
+unchanged (765 = 592 approved + 173 pending), all items re-derived green on the larger
+graph; `kg_puzzles` regenerated; mobile app-pack snapshot regenerated. NOT yet deployed —
+owner asked to land only; the server stays at the v16 build (`473ee63`).
+
 ## Latest — v16 KG enrichment + content promotion (2026-07-12)
 
 443 adversarially-verified high-quality edges + 57 aliases imported across all 14
