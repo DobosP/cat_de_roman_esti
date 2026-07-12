@@ -1,9 +1,21 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-07-11. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-11 (v15 backend 255 + accounts 28, Ruff, both validators, clean frontend install, lint/typecheck/test/build, bundle gate, and complete npm plus constrained-Python audits with zero known vulnerabilities green.)_
+_As of 2026-07-12. Update whenever `main` or the test baseline moves._
+_Last verified: 2026-07-12 (backend 255+6 legal + accounts 28, Ruff, both validators, anon+prod compose config render; frontend lint/typecheck/test/build + bundle gate last ran green at b245886 — untouched since.)_
 
-## Latest — v15 low-resource launch baseline
+## Latest — anonymous v1 production deploy path (2026-07-12)
+
+The v1 public launch ships the anonymous arcade (accounts OFF), per the go-live gate below
+and in docs/DEPLOY.md. New `docker-compose.anon.yml` (app + Caddy only: no Postgres, no
+OAuth, no submissions volume — zero persisted user data) with `.env.anon.example` and an
+"Anonymous arcade (v1) launch" section in docs/DEPLOY.md. The served legal pages'
+operator identity and privacy contact are now deploy-time configurable via
+`CAT_LEGAL_OPERATOR` + `CAT_LEGAL_CONTACT_EMAIL` (web/legal.py; HTML-escaped; DRAFT
+banner keeps the lawyer-review wording always, drops the "not finalized" sentence only
+when both are set; `tests/test_legal.py`). Accounts/ranking remain staging-only (see
+Product phase below).
+
+## v15 low-resource launch baseline
 
 The deploy now targets Python 3.12 and Node 24 LTS; the SPA is on React 19.2 and Vite 8.1.
 Each game/ranking route is a dynamic chunk and Motion loads only its DOM feature pack.

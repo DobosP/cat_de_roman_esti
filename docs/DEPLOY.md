@@ -81,8 +81,9 @@ this mode, and progress lives only in the player's browser. There is nothing to 
 **Go-live items that still apply anonymously** (a short subset of the
 [checklist below](#go-live-compliance-checklist), since there are no accounts/PII to
 protect): the legal pages (`/legal/privacy`, `/legal/terms`) still need a real
-controller/operator identity and contact filled in (no `[[PLACEHOLDER]]` left) — a
-parallel task owns this; and if you set `CAT_DONATE_URL`, point it at the real donation
+controller/operator identity and contact — set `CAT_LEGAL_OPERATOR` and
+`CAT_LEGAL_CONTACT_EMAIL` in `.env.anon` (while either is empty the pages keep the DRAFT
+`[[PLACEHOLDER]]` wording); and if you set `CAT_DONATE_URL`, point it at the real donation
 page/provider with the receiving entity + tax treatment confirmed.
 
 ---
