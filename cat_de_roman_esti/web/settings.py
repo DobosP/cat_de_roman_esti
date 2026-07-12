@@ -303,3 +303,8 @@ CAT_CONSENT_VERSION = os.environ.get("CAT_CONSENT_VERSION", "2026-07-09")
 # "Donează" button linking here (both modes). Empty = the button is hidden. The real
 # donation page/provider (Stripe / redirecționează.ro / the ONG's link) is an owner task.
 CAT_DONATE_URL = os.environ.get("CAT_DONATE_URL", "").strip()
+
+# Operator identity + privacy contact shown on /legal/privacy and /legal/terms (web/legal.py).
+# Empty = the pages keep the DRAFT placeholder wording until an owner sets these before go-live.
+CAT_LEGAL_OPERATOR = os.environ.get("CAT_LEGAL_OPERATOR", "").strip()
+CAT_LEGAL_CONTACT_EMAIL = os.environ.get("CAT_LEGAL_CONTACT_EMAIL", "").strip()
