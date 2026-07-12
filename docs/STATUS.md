@@ -3,6 +3,18 @@
 _As of 2026-07-13. Update whenever `main` or the test baseline moves._
 _Last verified: 2026-07-13 (backend 271 + accounts 28, Ruff, both validators; frontend lint/typecheck/test/build + bundle gate last ran green at b245886 — untouched since.)_
 
+## Latest — v20 duplicate cleanup (2026-07-13)
+
+New committed tool `scripts/merge_duplicates.py` (parameterized generalization of
+refine_dataset.py's v11 merge machinery: survivor absorbs the duplicate's label+aliases,
+edges redirected+deduped, pack payloads rewritten and re-derived, atomic validate+rollback;
+salience untouched). A 144-pair similarity scan was judged by five Fable 5 agents
+("when in doubt, keep"; the Moldova homonym stays split): **4 true duplicates merged**
+(Filosofie→Filozofie, viral-phenomenon twins, sports-final twins, and v19's
+specialty-coffee entering under two categories), 140 pairs confirmed distinct. One
+approved usor Alchimie board retired (target became one-action craftable post-merge):
+pack 763 = 590 approved + 173 pending. Mobile snapshot + pins refreshed.
+
 ## Latest — v19 meme/trend expansion (2026-07-13)
 
 84 new pop concepts + 273 edges + 263 aliases, meme/trend-focused: meme_net covered by TWO

@@ -15,11 +15,13 @@ _KG_PATH = _ROOT / "tests" / "fixtures" / "kg_sample.json"
 # was reasserted (editorial pending status, regardless of factual quality).
 # v18 (2026-07-13): the pop-culture enrichment retired one more approved normal Lanț board
 # (lt_viata_de_roman_164 — new shortcuts pulled its optimal below its band).
+# v20 (2026-07-13): the duplicate-concept cleanup retired al_sport_082 (approved usor
+# Alchimie — its target became one-action craftable after the sports-final merge).
 _EXPECTED_INVENTORY = {
     "conexiuni": (283, 227, 56),
     "contexto": (197, 194, 3),
     "lant": (193, 92, 101),
-    "alchimie": (91, 78, 13),
+    "alchimie": (90, 77, 13),
 }
 
 _NEW_CONTEXTO_TARGETS = {
@@ -75,8 +77,8 @@ def test_v14_pack_inventory_and_review_split():
         }
 
     # v16: 769 − 3 judge-rejected − 1 retired greu Lanț = 765; v18: − 1 retired normal Lanț.
-    assert sum(expected[0] for expected in _EXPECTED_INVENTORY.values()) == 764
-    assert sum(expected[1] for expected in _EXPECTED_INVENTORY.values()) == 591
+    assert sum(expected[0] for expected in _EXPECTED_INVENTORY.values()) == 763
+    assert sum(expected[1] for expected in _EXPECTED_INVENTORY.values()) == 590
     assert sum(expected[2] for expected in _EXPECTED_INVENTORY.values()) == 173
 
 
