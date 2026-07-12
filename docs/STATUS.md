@@ -5,6 +5,17 @@ _Last verified: 2026-07-12 (backend 255+6 legal + accounts 28, Ruff, both valida
 
 ## Latest — anonymous v1 production deploy path (2026-07-12)
 
+**LIVE 2026-07-12: <https://cat-de-roman-esti.dobolabs.ro>** — anonymous v1 deployed from
+`934765e` via `docker-compose.anon.yml` on a Netcup VPS (Debian 13, 2 vCPU / 3.8 GiB,
+Docker 29.6.1; ufw 22/80/443 + fail2ban + key-only SSH; Docker json-file logs capped
+10 MiB×3 as the access-log/IP retention bound). Cloudflare DNS-only (grey cloud), Caddy
+Let's Encrypt. Public smoke green: `/api/health` (932 concepts), `/healthz`, `/api/me`
+`accounts_enabled:false`, HTTP→308→HTTPS, homepage, `/legal/privacy` with real operator +
+`contact@dobolabs.ro` (no placeholders), and a gameplay round created through the public
+URL. Owner-side: Cloudflare Email Routing rule for `contact@` (pending confirmation);
+donations unset (button hidden). Post-launch follow-ups: raise `CAT_HSTS_SECONDS` once
+stable, consider Cloudflare proxy flip per DEPLOY.md production path, uptime monitoring.
+
 The v1 public launch ships the anonymous arcade (accounts OFF), per the go-live gate below
 and in docs/DEPLOY.md. New `docker-compose.anon.yml` (app + Caddy only: no Postgres, no
 OAuth, no submissions volume — zero persisted user data) with `.env.anon.example` and an
