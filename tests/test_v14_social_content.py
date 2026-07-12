@@ -13,10 +13,12 @@ _KG_PATH = _ROOT / "tests" / "fixtures" / "kg_sample.json"
 # v16 (2026-07-12): KG-enrichment re-derivation retired one approved greu Lanț board, a
 # judge fleet promoted 70 pending items / rejected 3, and the ADR-0019 quarantine below
 # was reasserted (editorial pending status, regardless of factual quality).
+# v18 (2026-07-13): the pop-culture enrichment retired one more approved normal Lanț board
+# (lt_viata_de_roman_164 — new shortcuts pulled its optimal below its band).
 _EXPECTED_INVENTORY = {
     "conexiuni": (283, 227, 56),
     "contexto": (197, 194, 3),
-    "lant": (194, 93, 101),
+    "lant": (193, 92, 101),
     "alchimie": (91, 78, 13),
 }
 
@@ -72,9 +74,9 @@ def test_v14_pack_inventory_and_review_split():
             "pending": pending,
         }
 
-    # v16: 769 − 3 judge-rejected − 1 re-derivation-retired greu Lanț board = 765.
-    assert sum(expected[0] for expected in _EXPECTED_INVENTORY.values()) == 765
-    assert sum(expected[1] for expected in _EXPECTED_INVENTORY.values()) == 592
+    # v16: 769 − 3 judge-rejected − 1 retired greu Lanț = 765; v18: − 1 retired normal Lanț.
+    assert sum(expected[0] for expected in _EXPECTED_INVENTORY.values()) == 764
+    assert sum(expected[1] for expected in _EXPECTED_INVENTORY.values()) == 591
     assert sum(expected[2] for expected in _EXPECTED_INVENTORY.values()) == 173
 
 

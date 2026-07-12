@@ -1,7 +1,24 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-07-12. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-12 (backend 271 + accounts 28, Ruff, both validators, anon+prod compose config render; frontend lint/typecheck/test/build + bundle gate last ran green at b245886 — untouched since.)_
+_As of 2026-07-13. Update whenever `main` or the test baseline moves._
+_Last verified: 2026-07-13 (backend 271 + accounts 28, Ruff, both validators; frontend lint/typecheck/test/build + bundle gate last ran green at b245886 — untouched since.)_
+
+## Latest — v18 web-grounded pop-culture expansion (2026-07-13)
+
+72 new pop-shelf concepts + 238 edges + 240 aliases across the 6 pop categories (muzica,
+film_tv, meme_net, sport, viata_de_roman, gastronomie), authored by Fable 5 agents that
+did LIVE WEB RESEARCH first (Romanian pop culture 2025-2026, staying-power filter) and
+verified by Opus reviewers WITH web access — any post-2024 claim that could not be
+verified against sources was blocked (13 nodes, 47 edges, 28 aliases blocked; importer
+folded 5 more duplicate nodes, dropped 8 colliding aliases). Current-relevant content now
+in the graph: Spotify Wrapped 2024/2025 toppers, the Babasha–Coldplay moment, Beach
+Please at European-largest scale, Eurovision 2026, TikTok-viral hits, and equivalents in
+the other pop categories. Graph: **1,590 → 1,662 nodes, 6,730 → 6,966 edges** (pop shelf
+now 720 nodes); 3 v18 nodes sit below degree 3 after their edges were partially blocked —
+follow-up candidate. Re-derivation retired one more approved normal Lanț board
+(lt_viata_de_roman_164): pack now 764 = 591 approved + 173 pending, all green;
+`kg_puzzles` + mobile snapshot regenerated. Landed only — server intentionally remains on
+the v16 build (`473ee63`) per owner deploy policy.
 
 ## Latest — v17 Fable-authored concept expansion (2026-07-12)
 

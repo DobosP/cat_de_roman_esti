@@ -160,8 +160,8 @@ def test_every_approved_lant_has_real_shortest_path_choices():
 
     svc = get_service()
     items = get_pack().pool("lant")
-    # 88 v14-era boards (one greu board retired by the v16 re-derivation) + 5 promoted.
-    assert len(items) == 93
+    # 88 v14-era boards (one greu retired by v16) + 5 promoted − 1 retired by v18.
+    assert len(items) == 92
     assert "lt_stiinta_200" not in {item.id for item in items}
     for item in items:
         first_hop, min_width, _ = lant_branch_profile(
