@@ -1,4 +1,5 @@
-# Caddy reverse proxy for cât-de-român-ești (docker-compose.prod.yml).
+# Caddy reverse proxy for cât-de-român-ești (docker-compose.prod.yml and
+# docker-compose.anon.yml).
 #
 # Terminates TLS for $CAT_DOMAIN and proxies to the app container. Caddy sets
 # X-Forwarded-Proto, which Django reads via SECURE_PROXY_SSL_HEADER.

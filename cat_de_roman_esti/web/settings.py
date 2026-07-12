@@ -59,11 +59,12 @@ ACCOUNTS_ENABLED = _env_bool("CAT_ACCOUNTS_ENABLED")
 CAT_DOMAIN = os.environ.get("CAT_DOMAIN", "").strip()
 
 # --- Secret key -----------------------------------------------------------------------
-# Nothing is signed in the stateless OFF mode, so the insecure default is tolerated there
-# (and in DEBUG). A real key is REQUIRED once accounts are on in production (it signs the
-# session + CSRF cookies that now carry auth state).
+# Nothing is signed in the stateless OFF mode, so a missing or empty key falls back to the
+# insecure placeholder there (and in DEBUG). A real key is REQUIRED once accounts are on in
+# production (it signs the session + CSRF cookies that now carry auth state); empty counts
+# as unset so a blank CAT_SECRET_KEY= line still trips the guard below.
 _INSECURE_SECRET = "insecure-stateless-cat-de-roman-esti"  # noqa: S105 (placeholder, OFF-mode only)
-SECRET_KEY = os.environ.get("CAT_SECRET_KEY", _INSECURE_SECRET)
+SECRET_KEY = os.environ.get("CAT_SECRET_KEY", "").strip() or _INSECURE_SECRET
 if ACCOUNTS_ENABLED and not DEBUG and SECRET_KEY == _INSECURE_SECRET:
     raise RuntimeError(
         "CAT_SECRET_KEY must be set to a real secret when CAT_ACCOUNTS_ENABLED=1 and "
