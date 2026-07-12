@@ -3,6 +3,20 @@
 _As of 2026-07-13. Update whenever `main` or the test baseline moves._
 _Last verified: 2026-07-13 (backend 271 + accounts 28, Ruff, both validators; frontend lint/typecheck/test/build + bundle gate last ran green at b245886 — untouched since.)_
 
+## Latest — v19 meme/trend expansion (2026-07-13)
+
+84 new pop concepts + 273 edges + 263 aliases, meme/trend-focused: meme_net covered by TWO
+web-grounded Fable 5 lenses (viral memes/expressions — "Ursul, băăă!", Dedeman-as-meme,
+sigma/skibidi Gen-Alpha slang, AI-manele; and creators/platforms — Godină, DA BRAVO!),
+plus trend briefs for the other five pop categories. Same verification rail as v18 (Opus
+with web access; unverifiable post-2024 = block: 2 nodes, 9 edges, 15 aliases blocked;
+1 cross-lens duplicate dropped at assembly, 3 more folded by the importer). Staying-power
+rule (≥6 months) + strict ADR-0019 meme boundary in the briefs. Graph: **1,662 → 1,746
+nodes, 6,966 → 7,237 edges** (pop shelf 804, meme_net 141); v18's three under-connected
+nodes repaired (1 weak node remains — follow-up). No pack items retired this time
+(764 = 591 approved unchanged, re-derived green); `kg_puzzles` + mobile snapshot
+regenerated. Landed only — server remains on the v16 build (`473ee63`).
+
 ## Latest — v18 web-grounded pop-culture expansion (2026-07-13)
 
 72 new pop-shelf concepts + 238 edges + 240 aliases across the 6 pop categories (muzica,
