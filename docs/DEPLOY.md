@@ -30,7 +30,60 @@ minors rank (pseudonymously, with verifiable parental consent) is a **new DPIA**
 > **Go-live gate.** The accounts stack collects personal data from possibly-minor users. Do
 > **not** point real users at it until the [Go-live compliance checklist](#go-live-compliance-checklist)
 > is satisfied and the `docs/compliance/` drafts have been completed + lawyer-reviewed. Until
-> then, run it on a staging host, or deploy the anonymous arcade first and flip the flag later.
+> then, run it on a staging host, or deploy the
+> [anonymous arcade (v1) launch](#anonymous-arcade-v1-launch) first and flip the flag later.
+
+---
+
+## Anonymous arcade (v1) launch
+
+The v1 public launch ships **accounts OFF** (`CAT_ACCOUNTS_ENABLED=0`, the default): a
+stateless app container + Caddy TLS, no Postgres, no Google OAuth, no PII. This is the
+fastest, lowest-compliance path to a public URL — use it first, and flip to the accounts
+stack (below) only once its go-live checklist is done.
+
+**1. Provision the server** — same as [section 1](#1-provision-the-server-hetzner) below
+(Hetzner CX22, EU location, Docker + Compose plugin, clone the repo).
+
+**2. DNS + TLS (Cloudflare)** — same quick start as [section 2](#2-dns--tls-cloudflare)
+below: add an **A record** for your chosen host (e.g. `joc.<yourdomain>.ro`) pointed at the
+server, **Proxy status: DNS only (grey cloud)**; Caddy 2.11 obtains its own Let's Encrypt
+certificate automatically on first boot (uses `TLS_EMAIL`). Skip Google OAuth (section 3)
+and Postgres entirely — this mode needs neither.
+
+**3. Configure + launch:**
+
+```bash
+cd ~/cat_de_roman_esti
+cp .env.anon.example .env.anon
+# Fill in: CAT_DOMAIN, TLS_EMAIL (CAT_SECRET_KEY optional — settings only enforce it
+# when CAT_ACCOUNTS_ENABLED=1).
+docker compose -f docker-compose.anon.yml --env-file .env.anon up -d --build
+docker compose -f docker-compose.anon.yml logs -f app   # watch boot (no migrations to run)
+```
+
+**4. Smoke test:**
+
+```bash
+curl -fsS https://<CAT_DOMAIN>/api/health        # {"ok": true, ...}
+curl -fsS https://<CAT_DOMAIN>/healthz           # container-internal healthcheck endpoint
+curl -fsS https://<CAT_DOMAIN>/api/me            # {"accounts_enabled": false, ...}
+```
+
+**Single-process constraint** still applies: game sessions live in memory
+(`SessionStore`), so the app must stay one process (see the
+[note below](#single-process-constraint)) — do not add extra workers.
+
+**No user data is persisted.** `docker-compose.anon.yml` deliberately has no `db` service
+and no `CAT_SUBMISSIONS_DIR`/submissions volume — `POST /api/submissions` returns 503 in
+this mode, and progress lives only in the player's browser. There is nothing to back up.
+
+**Go-live items that still apply anonymously** (a short subset of the
+[checklist below](#go-live-compliance-checklist), since there are no accounts/PII to
+protect): the legal pages (`/legal/privacy`, `/legal/terms`) still need a real
+controller/operator identity and contact filled in (no `[[PLACEHOLDER]]` left) — a
+parallel task owns this; and if you set `CAT_DONATE_URL`, point it at the real donation
+page/provider with the receiving entity + tax treatment confirmed.
 
 ---
 
