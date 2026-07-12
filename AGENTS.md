@@ -7,6 +7,7 @@
 - Role: Romanian word-game arcade (Alchimie/Contexto/Lanț/Conexiuni) over the concept graph.
 - Upstream: `ro_data_server` (KG products: kg_nodes/kg_edges/kg_puzzles), `roedu-ui` (vendored `@roedu/ui`) · Downstream: none.
 - Fleet map + parallel-agent protocol: `~/work/AGENTS.md` (agent-ops ADR-0025).
+- Secrets: registry `agent-ops/secrets/secrets.manifest.yaml`; shared values deploy via `agent-ops/secrets/deploy-secrets.sh` (ADR-0027); never commit values.
 
 ## Parallel work (mandatory)
 - This shared checkout stays on `main`, clean — never switch branches or commit task work here.
