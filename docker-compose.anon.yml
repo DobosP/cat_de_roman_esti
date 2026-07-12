@@ -1,0 +1,63 @@
+# docker-compose.anon.yml — cât-de-român-ești ANONYMOUS ARCADE production stack (v1 launch).
+#
+#   Caddy (TLS/proxy)  ──►  app (Django/uvicorn, single process)
+#
+# No Postgres, no Google OAuth, no PII: the app is stateless (progress lives in the
+# browser) and the stack persists zero user data.
+#
+# Usage on the host (e.g. a Hetzner CX22, EU):
+#   cp .env.anon.example .env.anon   # then fill in CAT_DOMAIN / TLS_EMAIL (see docs/DEPLOY.md)
+#   docker compose -f docker-compose.anon.yml --env-file .env.anon up -d --build
+#
+# The accounts + Google login stack (CAT_ACCOUNTS_ENABLED=1, Postgres, migrations) is
+# docker-compose.prod.yml — do not point that one at real users until the go-live
+# compliance checklist in docs/DEPLOY.md is satisfied.
+
+name: cat-de-roman-esti-anon
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cat-de-roman-esti:latest
+    environment:
+      DJANGO_SETTINGS_MODULE: cat_de_roman_esti.web.settings
+      PORT: "8000"
+      CAT_ACCOUNTS_ENABLED: "0"
+      CAT_DEBUG: "0"
+      CAT_DOMAIN: ${CAT_DOMAIN:?set CAT_DOMAIN in .env.anon}
+      CAT_SECRET_KEY: ${CAT_SECRET_KEY:-}
+      CAT_KG_FIXTURE: ${CAT_KG_FIXTURE:-cat_de_roman_esti/fixtures/kg_real.json}
+      CAT_HSTS_SECONDS: ${CAT_HSTS_SECONDS:-0}
+      CAT_CONSENT_VERSION: ${CAT_CONSENT_VERSION:-2026-07-09}
+      CAT_DONATE_URL: ${CAT_DONATE_URL:-}
+      CAT_SESSION_TTL_SECONDS: ${CAT_SESSION_TTL_SECONDS:-7200}
+      CAT_MAX_SESSIONS_PER_GAME: ${CAT_MAX_SESSIONS_PER_GAME:-1000}
+      CAT_MAX_REQUEST_BYTES: ${CAT_MAX_REQUEST_BYTES:-65536}
+      # No CAT_SUBMISSIONS_DIR / submissions volume on purpose: the anonymous v1 launch
+      # keeps POST /api/submissions disabled (503) so the stack stores zero user data.
+    expose:
+      - "8000" # reachable only by Caddy over the compose network (no host port)
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2.11-alpine
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      CAT_DOMAIN: ${CAT_DOMAIN:?set CAT_DOMAIN in .env.anon}
+      TLS_EMAIL: ${TLS_EMAIL:-}
+      CAT_MAX_REQUEST_BYTES: ${CAT_MAX_REQUEST_BYTES:-65536}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:
