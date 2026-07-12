@@ -3,6 +3,18 @@
 _As of 2026-07-13. Update whenever `main` or the test baseline moves._
 _Last verified: 2026-07-13 (backend 271 + accounts 28, Ruff, both validators; frontend lint/typecheck/test/build + bundle gate last ran green at b245886 — untouched since.)_
 
+## Latest — v20 all-category content batch (2026-07-13)
+
+157 new concepts + 549 edges + 509 aliases across ALL 14 categories (Fable 5 authors:
+web-grounded trends for the pop six, canonical-gap depth for the classic eight; Opus
+web-verifiers blocked 2 nodes / 8 edges / 10 aliases; 3 duplicate nodes folded by the
+importer incl. a cross-batch Babasha re-add). Assembly now NORMALIZES freeform relation
+names to the house vocabulary (109 edges mapped, incl. direction flips for created→
+created_by) and remaps edges referencing merged-away duplicate ids. Graph: **1,746+ →
+1,899 nodes, 7,237+ → 7,770 edges** (post-dedup baseline), 2 weak nodes (follow-up).
+Re-derivation retired lt_istorie_115 + lt_stiinta_162 (approved Lanț; optimal below
+band): pack 761 = 588 approved + 173 pending. Mobile snapshot + pins refreshed.
+
 ## Latest — v20 duplicate cleanup (2026-07-13)
 
 New committed tool `scripts/merge_duplicates.py` (parameterized generalization of
