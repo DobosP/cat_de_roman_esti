@@ -1,11 +1,11 @@
 {
   "meta": {
-    "build_version": "fixture-v6-enriched",
+    "build_version": "fixture-v20-dedup",
     "generated_at": "2026-06-21T00:00:00Z",
-    "note": "v6: alias + play-density enrichment (ADR-0012) — exact alias surface forms on most nodes, guess-vocabulary hub concepts, and intuitive edges lifting low-degree nodes, so Cald sau Rece and Lantul Cuvintelor stay responsive; kg_puzzles regenerated on the enriched graph.",
+    "note": "merged judged duplicate concepts (v20 cleanup)",
     "counts": {
-      "nodes": 1746,
-      "edges": 7237,
+      "nodes": 1742,
+      "edges": 7227,
       "puzzles": 180,
       "by_category": {
         "arta_cultura": 109,
@@ -15,13 +15,13 @@
         "istorie": 128,
         "limba": 119,
         "literatura": 111,
-        "meme_net": 141,
+        "meme_net": 140,
         "muzica": 130,
-        "personalitati": 113,
+        "personalitati": 112,
         "societate": 119,
-        "sport": 140,
+        "sport": 139,
         "stiinta": 118,
-        "viata_de_roman": 119
+        "viata_de_roman": 118
       },
       "puzzles_by_cat_diff": {
         "arta_cultura/easy": 6,
@@ -1311,7 +1311,7 @@
       "description": "Filosof si eseist roman stabilit la Paris.",
       "salience": 0.5289,
       "difficulty_tier": "medium",
-      "degree": 14,
+      "degree": 13,
       "aliases": [
         "Cioran",
         "E. Cioran",
@@ -1331,21 +1331,6 @@
         "Eugène Ionesco",
         "Ionesco",
         "E. Ionescu"
-      ]
-    },
-    {
-      "id": "n_filosofie",
-      "node_type": "concept",
-      "label_ro": "Filosofie",
-      "category": "personalitati",
-      "description": "Domeniu al cunoasterii despre existenta si sens.",
-      "salience": 0.1991,
-      "difficulty_tier": "hard",
-      "degree": 7,
-      "aliases": [
-        "filosofia",
-        "gândire filosofică",
-        "filosofie românească"
       ]
     },
     {
@@ -1462,7 +1447,7 @@
       "description": "Istoric al religiilor si scriitor roman.",
       "salience": 0.3496,
       "difficulty_tier": "medium",
-      "degree": 10,
+      "degree": 9,
       "aliases": [
         "Eliade",
         "M. Eliade",
@@ -3604,7 +3589,7 @@
       "description": "Filosof roman, figura centrala a Scolii de la Paltinis (1909-1987).",
       "salience": 0.232,
       "difficulty_tier": "hard",
-      "degree": 8,
+      "degree": 7,
       "aliases": [
         "Noica",
         "C. Noica",
@@ -4594,11 +4579,15 @@
       "description": "Disciplina care studiaza existenta, cunoasterea si valorile umane.",
       "salience": 0.2264,
       "difficulty_tier": "hard",
-      "degree": 6,
+      "degree": 7,
       "aliases": [
         "filozofia",
         "gândire filozofică",
-        "filozofie românească"
+        "filozofie românească",
+        "Filosofie",
+        "filosofia",
+        "gândire filosofică",
+        "filosofie românească"
       ]
     },
     {
@@ -7465,14 +7454,18 @@
       "description": "Clip, replică sau imagine care sare repede din feed în conversațiile de zi cu zi.",
       "salience": 0.8724,
       "difficulty_tier": "easy",
-      "degree": 39,
+      "degree": 38,
       "aliases": [
         "viral online",
         "fenomen de internet",
         "viral românesc",
         "clip viral",
         "conținut viral",
-        "viral pe internet"
+        "viral pe internet",
+        "Viral",
+        "viralul",
+        "virale",
+        "viralurile"
       ]
     },
     {
@@ -8090,7 +8083,7 @@
       "description": "Lista și senzația că un subiect a prins brusc la publicul online românesc.",
       "salience": 0.6362,
       "difficulty_tier": "medium",
-      "degree": 23,
+      "degree": 22,
       "aliases": [
         "trending românesc",
         "în trending",
@@ -12295,7 +12288,7 @@
       "description": "Fragment audio refolosit masiv în clipuri scurte și trenduri.",
       "salience": 0.5319,
       "difficulty_tier": "medium",
-      "degree": 8,
+      "degree": 7,
       "aliases": [
         "audio viral",
         "sound viral",
@@ -13114,13 +13107,16 @@
       "description": "Ultimul meci sau act decisiv al unei competiții sportive.",
       "salience": 0.8717,
       "difficulty_tier": "easy",
-      "degree": 21,
+      "degree": 22,
       "aliases": [
         "ultimul act",
         "meci decisiv",
         "finala unui turneu",
         "finală de turneu",
-        "meciul final"
+        "meciul final",
+        "finală",
+        "finale",
+        "finalele"
       ]
     },
     {
@@ -18319,21 +18315,6 @@
       ]
     },
     {
-      "id": "n_v4mem_viral",
-      "node_type": "concept",
-      "label_ro": "Viral",
-      "category": "meme_net",
-      "description": "Conținut care se răspândește rapid și ajunge la foarte mulți oameni.",
-      "salience": 0.7431,
-      "difficulty_tier": "easy",
-      "degree": 3,
-      "aliases": [
-        "viralul",
-        "virale",
-        "viralurile"
-      ]
-    },
-    {
       "id": "n_v4mem_trend",
       "node_type": "concept",
       "label_ro": "Trend",
@@ -18874,7 +18855,7 @@
       "description": "Persoană care studiază și formulează idei filosofice.",
       "salience": 0.4713,
       "difficulty_tier": "medium",
-      "degree": 4,
+      "degree": 3,
       "aliases": [
         "filozoful",
         "filozofi",
@@ -19657,20 +19638,6 @@
       "degree": 3,
       "aliases": [
         "înotul"
-      ]
-    },
-    {
-      "id": "n_v4spo_finala",
-      "node_type": "concept",
-      "label_ro": "finală",
-      "category": "sport",
-      "description": "Ultimul meci sau ultima probă care decide câștigătorul.",
-      "salience": 0.6827,
-      "difficulty_tier": "easy",
-      "degree": 3,
-      "aliases": [
-        "finale",
-        "finalele"
       ]
     },
     {
@@ -24583,7 +24550,7 @@
       "description": "Cea mai mare rețea de cafenele din România și din Europa de Est: circa 720 de cafenele în 160 de orașe la finalul lui 2025. Fondată la București în 2015, pe modelul prețurilor mici fixe și al cafelei la pachet.",
       "salience": 0.64,
       "difficulty_tier": "medium",
-      "degree": 6,
+      "degree": 5,
       "aliases": [
         "5togo",
         "five to go",
@@ -25732,11 +25699,14 @@
       "description": "Valul cafenelelor artizanale cu boabe de origine unică și prăjitorii locale, consolidat în orașele mari din România în anii 2020. A schimbat felul în care românii urbani beau și discută despre cafea.",
       "salience": 0.55,
       "difficulty_tier": "medium",
-      "degree": 4,
+      "degree": 6,
       "aliases": [
         "specialty coffee",
         "cafenea de specialitate",
-        "cafea specialty"
+        "cafea specialty",
+        "Cafeneaua de specialitate",
+        "cafenea artizanală",
+        "flat white"
       ]
     },
     {
@@ -26670,20 +26640,6 @@
         "cabana cu ciubăr",
         "ciubărul cu apă caldă",
         "cabana A-frame"
-      ]
-    },
-    {
-      "id": "n_v19via_cafenea_specialitate",
-      "node_type": "concept",
-      "label_ro": "Cafeneaua de specialitate",
-      "category": "viata_de_roman",
-      "description": "Cafenelele artizanale, cu cafea de origine și baristi, s-au înmulțit în orașele mari începând cu anii 2010. România figurează cu peste 300 de unități pe harta europeană a cafenelelor de specialitate, iar cafeaua a devenit prilej de socializare urbană.",
-      "salience": 0.48,
-      "difficulty_tier": "medium",
-      "degree": 3,
-      "aliases": [
-        "cafenea artizanală",
-        "flat white"
       ]
     }
   ],
@@ -27951,7 +27907,7 @@
     {
       "id": "ae101",
       "src_id": "n_emil_cioran",
-      "dst_id": "n_filosofie",
+      "dst_id": "n_filozofie",
       "relation": "related_to",
       "label_ro": "a scris",
       "strength": 0.85,
@@ -27971,7 +27927,7 @@
     {
       "id": "ae103",
       "src_id": "n_mircea_eliade",
-      "dst_id": "n_filosofie",
+      "dst_id": "n_filozofie",
       "relation": "related_to",
       "label_ro": "apropiat de",
       "strength": 0.5,
@@ -28150,7 +28106,7 @@
     },
     {
       "id": "ae121",
-      "src_id": "n_filosofie",
+      "src_id": "n_filozofie",
       "dst_id": "n_muzica_clasica",
       "relation": "related_to",
       "label_ro": "co-mentionat",
@@ -30271,7 +30227,7 @@
     {
       "id": "xe57",
       "src_id": "n_constantin_noica",
-      "dst_id": "n_filosofie",
+      "dst_id": "n_filozofie",
       "relation": "related_to",
       "label_ro": "a scris",
       "strength": 0.85,
@@ -32809,26 +32765,6 @@
       "bidirectional": 1
     },
     {
-      "id": "de209",
-      "src_id": "n_constantin_noica",
-      "dst_id": "n_filozofie",
-      "relation": "related_to",
-      "label_ro": "filozof",
-      "strength": 0.8,
-      "is_distractor": 0,
-      "bidirectional": 1
-    },
-    {
-      "id": "de210",
-      "src_id": "n_emil_cioran",
-      "dst_id": "n_filozofie",
-      "relation": "related_to",
-      "label_ro": "filozof",
-      "strength": 0.8,
-      "is_distractor": 0,
-      "bidirectional": 1
-    },
-    {
       "id": "de211",
       "src_id": "n_emil_cioran",
       "dst_id": "n_generatia_interbelica",
@@ -32937,16 +32873,6 @@
       "strength": 0.5,
       "is_distractor": 0,
       "bidirectional": 0
-    },
-    {
-      "id": "de222",
-      "src_id": "n_mircea_eliade",
-      "dst_id": "n_filozofie",
-      "relation": "related_to",
-      "label_ro": "istoric al religiilor",
-      "strength": 0.5,
-      "is_distractor": 0,
-      "bidirectional": 1
     },
     {
       "id": "de223",
@@ -55669,18 +55595,8 @@
       "bidirectional": 1
     },
     {
-      "id": "de2424",
-      "src_id": "n_filosofie",
-      "dst_id": "n_filozofie",
-      "relation": "same_category",
-      "label_ro": "variantă ortografică",
-      "strength": 0.98,
-      "is_distractor": 0,
-      "bidirectional": 1
-    },
-    {
       "id": "de2425",
-      "src_id": "n_filosofie",
+      "src_id": "n_filozofie",
       "dst_id": "n_lucian_blaga",
       "relation": "related_to",
       "label_ro": "filosof român",
@@ -74419,36 +74335,6 @@
       "bidirectional": 1
     },
     {
-      "id": "de4198",
-      "src_id": "n_v4mem_viral",
-      "dst_id": "n_net_fenomen_viral",
-      "relation": "same_category",
-      "label_ro": "răspândire rapidă",
-      "strength": 0.9,
-      "is_distractor": 0,
-      "bidirectional": 1
-    },
-    {
-      "id": "de4199",
-      "src_id": "n_v4mem_viral",
-      "dst_id": "n_net_trending_ro",
-      "relation": "related_to",
-      "label_ro": "devine trend",
-      "strength": 0.84,
-      "is_distractor": 0,
-      "bidirectional": 1
-    },
-    {
-      "id": "de4200",
-      "src_id": "n_v4mem_viral",
-      "dst_id": "n_v2mem_sunet_viral",
-      "relation": "related_to",
-      "label_ro": "sunet popular",
-      "strength": 0.78,
-      "is_distractor": 0,
-      "bidirectional": 1
-    },
-    {
       "id": "de4201",
       "src_id": "n_v4mem_trend",
       "dst_id": "n_net_trending_ro",
@@ -76481,16 +76367,6 @@
     {
       "id": "de4404",
       "src_id": "n_v4per_filozof",
-      "dst_id": "n_filosofie",
-      "relation": "same_category",
-      "label_ro": "domeniu de idei",
-      "strength": 0.82,
-      "is_distractor": 0,
-      "bidirectional": 1
-    },
-    {
-      "id": "de4405",
-      "src_id": "n_v4per_filozof",
       "dst_id": "n_filozofie",
       "relation": "same_category",
       "label_ro": "domeniu de idei",
@@ -78419,18 +78295,8 @@
       "bidirectional": 1
     },
     {
-      "id": "de4598",
-      "src_id": "n_v4spo_finala",
-      "dst_id": "n_v2spo_finala_sportiva",
-      "relation": "is_a",
-      "label_ro": "ultimă etapă",
-      "strength": 0.9,
-      "is_distractor": 0,
-      "bidirectional": 1
-    },
-    {
       "id": "de4599",
-      "src_id": "n_v4spo_finala",
+      "src_id": "n_v2spo_finala_sportiva",
       "dst_id": "n_spt_finala_sevilla_1986",
       "relation": "related_to",
       "label_ro": "exemplu celebru",
@@ -78440,7 +78306,7 @@
     },
     {
       "id": "de4600",
-      "src_id": "n_v4spo_finala",
+      "src_id": "n_v2spo_finala_sportiva",
       "dst_id": "n_spt_finala_wimbledon_serena",
       "relation": "related_to",
       "label_ro": "exemplu de tenis",
@@ -98771,7 +98637,7 @@
     {
       "id": "de6544",
       "src_id": "n_v19via_munca_de_acasa",
-      "dst_id": "n_v19via_cafenea_specialitate",
+      "dst_id": "n_v19gas_cafea_specialitate",
       "relation": "associated_with",
       "label_ro": "lucrul cu laptopul din cafenea",
       "strength": 0.5,
@@ -98940,21 +98806,11 @@
     },
     {
       "id": "de6561",
-      "src_id": "n_v19via_cafenea_specialitate",
+      "src_id": "n_v19gas_cafea_specialitate",
       "dst_id": "n_v3gas_cafea",
       "relation": "associated_with",
       "label_ro": "cafea de origine, atent preparată",
       "strength": 0.75,
-      "is_distractor": 0,
-      "bidirectional": 1
-    },
-    {
-      "id": "de6562",
-      "src_id": "n_v19via_cafenea_specialitate",
-      "dst_id": "n_v18gas_5_to_go",
-      "relation": "related_to",
-      "label_ro": "lanț vs. cafenea artizanală",
-      "strength": 0.5,
       "is_distractor": 0,
       "bidirectional": 1
     },
