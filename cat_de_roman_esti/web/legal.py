@@ -14,6 +14,7 @@ from __future__ import annotations
 
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
+from django.utils.html import escape
 
 _SHELL = """<!doctype html>
 <html lang="ro"><head>
@@ -38,15 +39,37 @@ _SHELL = """<!doctype html>
 </main></body></html>
 """
 
-_DRAFT = (
-    '<div class="draft"><strong>DRAFT — text în lucru.</strong> Acest document trebuie '
-    "completat și verificat de un avocat specializat în protecția datelor înainte de "
-    "publicare. Operatorul și datele de contact nu sunt încă finalizate.</div>"
-)
 
-_PRIVACY_BODY = f"""
+def _draft_banner(*, show_unfinalized: bool) -> str:
+    # The draft / lawyer-review-pending wording always applies; the "not finalized yet"
+    # sentence only holds while the operator identity and contact are unset (CAT_LEGAL_OPERATOR
+    # / CAT_LEGAL_CONTACT_EMAIL, see web/settings.py).
+    unfinalized = (
+        " Operatorul și datele de contact nu sunt încă finalizate." if show_unfinalized else ""
+    )
+    return (
+        '<div class="draft"><strong>DRAFT — text în lucru.</strong> Acest document trebuie '
+        "completat și verificat de un avocat specializat în protecția datelor înainte de "
+        f"publicare.{unfinalized}</div>"
+    )
+
+
+def _contact_html(contact_email: str) -> str:
+    if not contact_email:
+        return "<code>[[PLACEHOLDER: contact]]</code>"
+    safe = escape(contact_email)
+    return f'<a href="mailto:{safe}">{safe}</a>'
+
+
+def _operator_line_html(operator: str) -> str:
+    if not operator:
+        return ""
+    return f"Operatorul serviciului este <strong>{escape(operator)}</strong>. "
+
+
+_PRIVACY_BODY = """
 <h1>Politica de confidențialitate</h1>
-{_DRAFT}
+{draft}
 <p><em>cât-de-român-ești</em> este un joc de cuvinte gratuit, în limba română. Poți juca
 <strong>fără cont</strong>; progresul se salvează local în browser. Dacă folosești
 „Intră cu Google”, îți putem salva progresul și pe server.</p>
@@ -81,15 +104,15 @@ cookie-uri de publicitate sau de urmărire.</p>
 <h2>Drepturile tale</h2>
 <p>Ai dreptul de acces, rectificare, ștergere, portabilitate, opoziție și de retragere a
 consimțământului. Îți poți <strong>șterge contul și tot progresul</strong> direct din meniul
-contului. Pentru orice cerere sau plângere: <code>[[PLACEHOLDER: contact]]</code>. Te poți
+contului. {operator_line}Pentru orice cerere sau plângere: {contact}. Te poți
 adresa și autorității de supraveghere, <strong>ANSPDCP</strong>.</p>
 
 <p>Documentul complet (draft): <code>docs/compliance/privacy-notice.md</code>.</p>
 """
 
-_TERMS_BODY = f"""
+_TERMS_BODY = """
 <h1>Termeni și condiții</h1>
-{_DRAFT}
+{draft}
 <h2>1. Serviciul</h2>
 <p><em>cât-de-român-ești</em> este un joc educațional gratuit. Poți juca fără cont; contul
 prin Google este opțional și servește doar la salvarea progresului.</p>
@@ -124,8 +147,20 @@ def _page(title: str, body: str) -> HttpResponse:
 
 
 def privacy(request: HttpRequest) -> HttpResponse:
-    return _page("Confidențialitate", _PRIVACY_BODY)
+    operator = (getattr(settings, "CAT_LEGAL_OPERATOR", "") or "").strip()
+    contact_email = (getattr(settings, "CAT_LEGAL_CONTACT_EMAIL", "") or "").strip()
+    body = _PRIVACY_BODY.format(
+        draft=_draft_banner(show_unfinalized=not (operator and contact_email)),
+        operator_line=_operator_line_html(operator),
+        contact=_contact_html(contact_email),
+    )
+    return _page("Confidențialitate", body)
 
 
 def terms(request: HttpRequest) -> HttpResponse:
-    return _page("Termeni", _TERMS_BODY)
+    operator = (getattr(settings, "CAT_LEGAL_OPERATOR", "") or "").strip()
+    contact_email = (getattr(settings, "CAT_LEGAL_CONTACT_EMAIL", "") or "").strip()
+    body = _TERMS_BODY.format(
+        draft=_draft_banner(show_unfinalized=not (operator and contact_email)),
+    )
+    return _page("Termeni", body)
