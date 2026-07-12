@@ -13,10 +13,14 @@ share 64.6% → 59.3%; mean non-distractor degree 6.9 → 7.97; edges 5,656 → 
 `kg_puzzles` regenerated; all pack items re-derived (one approved greu Lanț board retired —
 new shortcuts pulled its optimal below its band). Then an Opus judge fleet reviewed the
 135 pending pack items that validate on the denser graph (9 Lanț boards newly clear the
-ADR-0016 branch floor): **70 promoted, 62 kept pending, 3 rejected — approved served
-content 537 → 606** (conexiuni 240, contexto 195, lant 93, alchimie 78). Judge/author
-verdict archives live in the deploy-session scratchpad, applied via
-`scripts/apply_rereview.py`.
+ADR-0016 branch floor): 70 promoted, 62 kept pending, 3 rejected — then the ADR-0019
+editorial quarantine was REASSERTED over the judges' factual verdicts (13 conexiuni + 1
+contexto returned to pending; that boundary is the owner's, not a quality call). Net
+**approved served content 537 → 592** (conexiuni 227, contexto 194, lant 93, alchimie 78;
+pack total 765). Lanț `usor` now hard-filters endpoint candidates to salience ≥ 0.6
+(mirroring Contexto's pool — the enrichment made low-fame nodes branchy enough to win on
+structure alone). Mobile app-pack contract snapshot regenerated. Judge/author verdict
+archives live in the deploy-session scratchpad, applied via `scripts/apply_rereview.py`.
 
 ## Latest — graded similarity feel + fuzzy input (2026-07-12, ADR-0021)
 

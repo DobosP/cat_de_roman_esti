@@ -10,11 +10,14 @@ _ROOT = Path(__file__).resolve().parent.parent
 _PACK_PATH = _ROOT / "tests" / "fixtures" / "games_pack.json"
 _KG_PATH = _ROOT / "tests" / "fixtures" / "kg_sample.json"
 
+# v16 (2026-07-12): KG-enrichment re-derivation retired one approved greu Lanț board, a
+# judge fleet promoted 70 pending items / rejected 3, and the ADR-0019 quarantine below
+# was reasserted (editorial pending status, regardless of factual quality).
 _EXPECTED_INVENTORY = {
-    "conexiuni": (286, 181, 105),
-    "contexto": (197, 192, 5),
-    "lant": (195, 89, 106),
-    "alchimie": (91, 75, 16),
+    "conexiuni": (283, 227, 56),
+    "contexto": (197, 194, 3),
+    "lant": (194, 93, 101),
+    "alchimie": (91, 78, 13),
 }
 
 _NEW_CONTEXTO_TARGETS = {
@@ -69,9 +72,10 @@ def test_v14_pack_inventory_and_review_split():
             "pending": pending,
         }
 
-    assert sum(expected[0] for expected in _EXPECTED_INVENTORY.values()) == 769
-    assert sum(expected[1] for expected in _EXPECTED_INVENTORY.values()) == 537
-    assert sum(expected[2] for expected in _EXPECTED_INVENTORY.values()) == 232
+    # v16: 769 − 3 judge-rejected − 1 re-derivation-retired greu Lanț board = 765.
+    assert sum(expected[0] for expected in _EXPECTED_INVENTORY.values()) == 765
+    assert sum(expected[1] for expected in _EXPECTED_INVENTORY.values()) == 592
+    assert sum(expected[2] for expected in _EXPECTED_INVENTORY.values()) == 173
 
 
 def test_v14_adds_contemporary_civic_education_science_and_digital_play():

@@ -201,6 +201,14 @@ def _salience(node_id: str) -> float:
 # Meaningful now that salience is recalibrated into balanced tiers (ADR-none; STATUS v11).
 _SALIENCE_WEIGHT = {"usor": 16.0, "normal": 9.0, "greu": 2.0}
 
+# Hard endpoint-salience floor per difficulty (mirrors Contexto's ``usor`` target pool).
+# Score weighting alone kept famous endpoints dominant only while low-salience nodes were
+# poorly connected; after the v16 enrichment those nodes are branchy enough to win on
+# structure, so ``usor`` filters the candidate pool outright. Applied only when enough
+# candidates survive, so thin category pools degrade gracefully instead of 503-ing.
+_SALIENCE_FLOOR = {"usor": 0.6}
+_MIN_SALIENT_POOL = 8
+
 
 def _pair_score(
     start: str,
@@ -244,6 +252,11 @@ def _pick_pair(
         if category is not None:
             raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
         raise http_error(503, "Graful nu are noduri jucabile.")
+    sal_floor = _SALIENCE_FLOOR.get(difficulty, 0.0)
+    if sal_floor:
+        salient = [nid for nid in candidates if _salience(nid) >= sal_floor]
+        if len(salient) >= _MIN_SALIENT_POOL:
+            candidates = salient
     endpoint_ok = set(candidates)
     sal_weight = _SALIENCE_WEIGHT.get(difficulty, 4.0)
 
