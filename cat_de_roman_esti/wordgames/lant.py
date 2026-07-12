@@ -377,7 +377,15 @@ class MoveView(ContractAPIView):
         prev = session.current
         guess = _resolve_neighbor(body.text, prev, session.target)
         if guess is None:
-            return Response({"ok": False, "last_error": "Nu cunosc acest concept"})
+            # Unknown concept: offer fuzzy "did you mean" hints. Lanț's target is public
+            # (ADR-0021), so no suggestion needs to be withheld here.
+            suggestions = svc.suggest(body.text)
+            last_error = "Nu cunosc acest concept"
+            if suggestions:
+                last_error = f"Nu cunosc acest concept. Poate cautai: {suggestions[0]}?"
+            return Response(
+                {"ok": False, "last_error": last_error, "suggestions": suggestions}
+            )
 
         if guess == prev:
             return Response({"ok": False, "last_error": "Esti deja aici"})
@@ -432,8 +440,17 @@ class HintView(ContractAPIView):
         dist_to_target = svc.distances_to(session.target)
         remaining = dist_to_target.get(cur)
         if remaining is None:
-            # Player wandered into a dead end (shouldn't happen on the connected subgraph,
-            # but be defensive): suggest stepping back.
+            # Player wandered into a dead end: the target is unreachable from here. Point
+            # them back to the nearest node ON THEIR OWN CHAIN that can still reach the
+            # target — naming only a node they have already visited (never a hidden one).
+            for nid in reversed(session.chain):
+                if nid != cur and dist_to_target.get(nid) is not None:
+                    return Response(
+                        {
+                            "hint": None,
+                            "message": f"Fundatura — intoarce-te la {svc.label(nid)}.",
+                        }
+                    )
             return Response(
                 {"hint": None, "message": "Nicio scurtatura de aici — incearca sa revii."}
             )

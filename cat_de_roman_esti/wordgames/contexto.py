@@ -17,6 +17,7 @@ useful without accidentally serializing the hidden answer. Sessions live in-memo
 from __future__ import annotations
 
 import random
+from bisect import bisect_left
 from dataclasses import dataclass, field
 
 from django.urls import path
@@ -86,6 +87,11 @@ class ContextoSession:
     farther_than: dict[int, int] = field(default_factory=dict)
     # how many reachable nodes are STRICTLY closer than distance d (rank = this + 1)
     closer_than: dict[int, int] = field(default_factory=dict)
+    # graded (Dijkstra) distance for every reachable node, and — per hop bucket — the
+    # sorted list of those distances. Together they refine the rank WITHIN a hop bucket so
+    # a tighter (stronger-edged) path of the same hop count ranks better (ADR-0021).
+    weighted_dist: dict[str, float] = field(default_factory=dict)
+    sorted_weighted: dict[int, list[float]] = field(default_factory=dict)
     guesses: dict[str, GuessRecord] = field(default_factory=dict)
     # guess ids in the chronological order they were first played (for the share trail)
     order: list[str] = field(default_factory=list)
@@ -120,29 +126,42 @@ store: SessionStore[ContextoSession] = SessionStore()
 
 
 # --------------------------------------------------------------------------- scoring
-def temperature_for(distance: int | None) -> str:
-    """Map a BFS distance to a Romanian temperature tier."""
+def rank_for(
+    session: ContextoSession,
+    distance: int | None,
+    weighted_distance: float | None = None,
+) -> int:
+    """One-based Contexto rank for a guess; lower is better and rank 1 is the target.
+
+    Refined rank (ADR-0021): the hop bucket sets the coarse band and the graded
+    (Dijkstra) distance orders guesses WITHIN it —
+    ``closer_than[d] + bisect_left(sorted_weighted[d], weighted) + 1``. Because a guess's
+    own weighted distance is a member of its bucket, the offset stays in
+    ``[0, len(bucket) - 1]``, so every bucket-``d`` rank is strictly less than every
+    bucket-``d+1`` rank (hop ordering is preserved) while ties are broken by path tightness.
+    Omitting ``weighted_distance`` falls back to the bucket's best (coarse hop) rank.
+    Unreachable guesses sit one slot past the reachable set, bounded by ``reachable + 1``.
+    """
     if distance is None:
-        return "Inghetat"
-    if distance == 0:
-        return "Gasit"
-    if distance == 1:
-        return "Fierbinte"
-    if distance == 2:
-        return "Cald"
-    if distance == 3:
-        return "Caldut"
-    if distance in (4, 5):
-        return "Rece"
-    return "Inghetat"
+        return session.reachable + 1
+    base = session.closer_than.get(distance, session.reachable)
+    if weighted_distance is None:
+        return base + 1
+    bucket = session.sorted_weighted.get(distance, ())
+    return base + bisect_left(bucket, weighted_distance) + 1
 
 
-def closeness_for(session: ContextoSession, distance: int | None) -> int:
-    """0..100 closeness: the percentage of reachable concepts this guess beats.
+def closeness_for(
+    session: ContextoSession,
+    distance: int | None,
+    weighted_distance: float | None = None,
+) -> int:
+    """0..100 closeness derived from the refined rank (ADR-0021).
 
-    A guess at distance ``d`` is "closer than" every reachable node strictly farther
-    than ``d``. We express that as a percentage of the reachable set, so the target
-    itself (distance 0) is 100 and the most distant nodes approach 0.
+    ``round(100 * (reachable - rank) / (reachable - 1))``, clamped to ``[1, 99]`` for
+    non-wins: the target (distance 0) alone reads 100, and an unreachable guess reads 0 so
+    it stays visibly colder than the coldest reachable bucket. A near miss can no longer
+    saturate to 100 (which would be ambiguous with a win).
     """
     if distance is None:
         return 0
@@ -151,27 +170,43 @@ def closeness_for(session: ContextoSession, distance: int | None) -> int:
     total = session.reachable
     if total <= 1:
         return 0
-    farther = session.farther_than.get(distance)
-    if farther is None:
-        # Distance larger than any reachable bucket (shouldn't happen for reachable
-        # guesses) -> treat as the coldest.
-        farther = 0
-    raw = round(100 * farther / (total - 1))
-    # Only the target itself (distance 0, handled above) earns 100. A near miss can
-    # otherwise saturate to 100 when nothing else is closer, which is ambiguous with a
-    # win and reads as "you got it" when you didn't. Cap non-wins at 99.
+    rank = rank_for(session, distance, weighted_distance)
+    raw = round(100 * (total - rank) / (total - 1))
     return max(1, min(99, raw))
 
 
-def rank_for(session: ContextoSession, distance: int | None) -> int:
-    """One-based Contexto rank for a guess; lower is better and rank 1 is the target.
+# Warmth tiers as fractions of the refined rank over the reachable set (ADR-0021). Replaces
+# the old fixed hop table, which piled ~74% of guesses into one "Rece" bucket regardless of
+# target. Ordered coldest-last; the exact Romanian labels are unchanged.
+def temperature_for(
+    session: ContextoSession,
+    distance: int | None,
+    weighted_distance: float | None = None,
+) -> str:
+    """Map a guess to a Romanian temperature tier by its refined-rank percentile.
 
-    Ties share the best rank for their distance bucket. Unreachable guesses are placed
-    one slot after the reachable set, so the value is bounded by ``reachable + 1``.
+    ``d == 0`` -> "Gasit"; unreachable -> "Inghetat". Otherwise, with
+    ``pct = rank / reachable``: a distance-1 guess or ``pct <= 0.005`` -> "Fierbinte";
+    ``<= 0.03`` -> "Cald"; ``<= 0.10`` -> "Caldut"; ``<= 0.40`` -> "Rece"; else "Inghetat".
+    Warmth is monotonically non-increasing in rank (hop ordering is preserved by rank_for,
+    so the distance-1 override never inverts a colder-ranked guess).
     """
     if distance is None:
-        return session.reachable + 1
-    return session.closer_than.get(distance, session.reachable) + 1
+        return "Inghetat"
+    if distance == 0:
+        return "Gasit"
+    total = session.reachable
+    rank = rank_for(session, distance, weighted_distance)
+    pct = rank / total if total else 1.0
+    if distance == 1 or pct <= 0.005:
+        return "Fierbinte"
+    if pct <= 0.03:
+        return "Cald"
+    if pct <= 0.10:
+        return "Caldut"
+    if pct <= 0.40:
+        return "Rece"
+    return "Inghetat"
 
 
 # --------------------------------------------------------------------------- selection
@@ -278,13 +313,23 @@ def _build_session(
     # that same direction. On one-way edges, distances_from(target) answers the opposite
     # question and produces internally inconsistent ranks/closeness.
     dist = svc.distances_to(target)
+    # Graded distance over the SAME reachable set (ADR-0021): one O(N log N) pass at create.
+    wdist = svc.weighted_distances_to(target)
     hist: dict[int, int] = {}
-    for d in dist.values():
+    buckets: dict[int, list[float]] = {}
+    for nid, d in dist.items():
         hist[d] = hist.get(d, 0) + 1
+        # Reachability is identical to the hop BFS; fall back to the hop count only if a
+        # node were ever missing from the Dijkstra map (it is not, in practice).
+        buckets.setdefault(d, []).append(wdist.get(nid, float(d)))
+    for values in buckets.values():
+        values.sort()
     return ContextoSession(
         target=target,
         dist_hist=hist,
         reachable=len(dist),
+        weighted_dist=wdist,
+        sorted_weighted=buckets,
         difficulty=difficulty,
         daily=daily,
         category=category,
@@ -497,11 +542,21 @@ class GuessView(ContractAPIView):
 
         node_id = svc.resolve(text)
         if node_id is None:
-            # Unknown concept: do NOT count it as an attempt.
+            # Unknown concept: do NOT count it as an attempt. Offer fuzzy "did you mean"
+            # hints, but NEVER one that resolves to the hidden target (ADR-0009/0021).
+            suggestions = [
+                label
+                for label in svc.suggest(text)
+                if svc.resolve(label) != session.target
+            ]
+            message = "Nu cunosc acest concept"
+            if suggestions:
+                message = f"Nu cunosc acest concept. Poate cautai: {suggestions[0]}?"
             return Response(
                 {
                     "ok": False,
-                    "message": "Nu cunosc acest concept",
+                    "message": message,
+                    "suggestions": suggestions,
                     "guesses": _sorted_guesses(session, reveal=False),
                     "attempts": session.attempts,
                     "won": session.won,
@@ -515,9 +570,10 @@ class GuessView(ContractAPIView):
             )
 
         distance = svc.distance(node_id, session.target)
-        temperature = temperature_for(distance)
-        closeness = closeness_for(session, distance)
-        rank = rank_for(session, distance)
+        weighted = session.weighted_dist.get(node_id)
+        temperature = temperature_for(session, distance, weighted)
+        closeness = closeness_for(session, distance, weighted)
+        rank = rank_for(session, distance, weighted)
         # distance is None when the guess is in a disconnected part of the graph — we still
         # store it (as the coldest possible) so a repeated guess shows the same verdict.
         stored_distance = distance if distance is not None else 999
