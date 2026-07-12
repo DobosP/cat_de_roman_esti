@@ -564,3 +564,75 @@ def test_score_for_helper_floor_and_cap():
     assert lant._score_for(0, 5) == 1000  # sub-optimal optimal can't exceed cap
     assert lant._score_for(5, 5) == 1000
     assert lant._score_for(1000, 3) == 100  # huge detour clamps to the floor
+
+
+# --------------------------------------------------------------------- fuzzy suggestions
+def test_unknown_move_offers_fuzzy_suggestions():
+    """A typo of a real concept surfaces a "did you mean" hint on the move endpoint."""
+    game = _create()
+    gid = game["game_id"]
+    svc = get_service()
+    # A concept whose one-char-dropped form no longer resolves but stays fuzzy-close.
+    concept = next(
+        nid
+        for nid in svc.all_ids()
+        if len(svc.label(nid)) >= 6
+        and svc.resolve(svc.label(nid)[:3] + svc.label(nid)[4:]) is None
+        and svc.suggest(svc.label(nid)[:3] + svc.label(nid)[4:])
+    )
+    label = svc.label(concept)
+    typo = label[:3] + label[4:]
+    body = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": typo},
+        content_type="application/json",
+    ).json()
+    assert body["ok"] is False
+    assert "Poate cautai" in body["last_error"]
+    assert label in body["suggestions"]
+
+
+def test_no_suggestion_keeps_the_plain_unknown_error():
+    """Gibberish with no close match keeps the exact legacy error and an empty list."""
+    game = _create()
+    res = c.post(
+        f"/api/wordgames/lant/games/{game['game_id']}/move",
+        {"text": "qwerty nonexistent xyz"},
+        content_type="application/json",
+    ).json()
+    assert res["last_error"] == "Nu cunosc acest concept"
+    assert res["suggestions"] == []
+
+
+# --------------------------------------------------------------------- dead-end escape
+def test_hint_dead_end_names_a_reachable_chain_ancestor(monkeypatch):
+    """From a dead end the hint points back to the nearest visited node that can still
+    reach the target — naming only a node the player already walked through."""
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    nodes = [
+        {"id": n, "label_ro": n.upper(), "category": "test"}
+        for n in ("start", "mid", "dead", "target")
+    ]
+    edges = [
+        {"id": "e1", "src_id": "start", "dst_id": "mid", "bidirectional": 1},
+        {"id": "e2", "src_id": "mid", "dst_id": "target", "bidirectional": 1},
+        # A one-way step into a sink: reachable from `mid`, but nothing leads on to target.
+        {"id": "e3", "src_id": "mid", "dst_id": "dead", "bidirectional": 0},
+    ]
+    svc = WordGameService(Graph.from_records(nodes, edges))
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+    # Sanity: the current node truly cannot reach the target, but `mid` can.
+    dt = svc.distances_to("target")
+    assert dt.get("dead") is None
+    assert dt.get("mid") == 1
+
+    session = LantSession(
+        start="start", target="target", optimal=2, chain=["start", "mid", "dead"]
+    )
+    gid = store.create(session)
+    body = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    assert body["hint"] is None
+    assert body["message"].startswith("Fundatura")
+    assert svc.label("mid") in body["message"]

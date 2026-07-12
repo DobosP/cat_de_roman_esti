@@ -1,7 +1,28 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-12. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-12 (backend 255+6 legal + accounts 28, Ruff, both validators, anon+prod compose config render; frontend lint/typecheck/test/build + bundle gate last ran green at b245886 — untouched since.)_
+_Last verified: 2026-07-12 (backend 271 + accounts 28, Ruff, both validators, anon+prod compose config render; frontend lint/typecheck/test/build + bundle gate last ran green at b245886 — untouched since.)_
+
+## Latest — graded similarity feel + fuzzy input (2026-07-12, ADR-0021)
+
+Cald sau Rece and Lanțul Cuvintelor now feel smarter without any frontend or API-shape
+change. New service primitives: `WordGameService.suggest(text, limit=3)` (difflib fuzzy
+"did you mean" over the resolution index; `resolve()` stays exact-match) and
+`weighted_distances_to(target)` (Dijkstra over the same reversed non-distractor adjacency as
+ADR-0018, edge cost `2.0 − clamp(strength,0,1)`, missing/invalid strength → 1.5). Contexto
+guesses now rank *within* a hop bucket by path tightness (refined rank =
+`closer_than[d] + bisect_left(sorted_weighted[d], w) + 1`, precomputed once per session in
+O(N log N)); closeness derives from that rank and temperature is a per-target rank
+percentile, so tiers spread across all six labels instead of piling into "Rece". Hop
+ordering across buckets, the win-100/Găsit invariants, `reachable_count`, ADR-0009 hidden
+answer, ADR-0005 clue penalties, `score_for` (2 attempts → 940), MIN_REACHABLE/MIN_RESPONSIVE
+floors, the packs validator (still unweighted `distances_to`), operationIds and session
+bounds are all unchanged. Unknown guesses/moves now carry an additive `suggestions: [labels]`
+array and embed the top hint in the existing Romanian message — Contexto strips any
+suggestion that resolves to the secret (ADR-0009); unresolved guesses still never count.
+Lanț's hint dead-end now names the nearest reachable node on the player's own chain
+("Fundătură — întoarce-te la <label>") instead of a bare "step back". Adds 10 tests
+(backend 261 → 271). See ADR-0021.
 
 ## Latest — anonymous v1 production deploy path (2026-07-12)
 

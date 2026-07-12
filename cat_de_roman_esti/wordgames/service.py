@@ -12,7 +12,9 @@ the weak decoy edges (``is_distractor``) are ignored so the games stay meaningfu
 
 from __future__ import annotations
 
+import difflib
 import hashlib
+import heapq
 import math
 import os
 import threading
@@ -27,6 +29,19 @@ from typing import Generic, TypeVar
 
 from ..data import load_fixture
 from ..graph import Edge, Graph, Node
+
+
+def _edge_cost(strength: float) -> float:
+    """Dijkstra cost for a semantic edge, from its ``strength`` (see ADR-0021).
+
+    A strong link is cheap to traverse (feels closer), a weak one is dear:
+    ``cost = 2.0 - clamp(strength, 0, 1)`` so strength 1.0 -> 1.0 and strength 0.0 -> 2.0.
+    A missing/invalid strength (non-finite or non-positive) has no signal, so it takes the
+    neutral middle cost 1.5 rather than being punished as the weakest possible edge.
+    """
+    if not math.isfinite(strength) or strength <= 0.0:
+        return 1.5
+    return 2.0 - min(max(strength, 0.0), 1.0)
 
 
 def normalize(text: str) -> str:
@@ -48,6 +63,8 @@ class WordGameService:
     _index: dict[str, str] = field(default_factory=dict)
     _adj: dict[str, set[str]] = field(default_factory=dict)
     _rev_adj: dict[str, set[str]] = field(default_factory=dict)
+    # forward edge Dijkstra cost: src -> {dst: cost} over the strongest non-distractor edge
+    _fwd_cost: dict[str, dict[str, float]] = field(default_factory=dict)
     # category -> its node ids (for category-scoped combine math; ADR-0013)
     _cat_members: dict[str, frozenset[str]] = field(default_factory=dict)
 
@@ -70,6 +87,9 @@ class WordGameService:
         for nid in self.graph.nodes:
             nbrs = self.graph.neighbors(nid, include_distractors=False)
             self._adj[nid] = {nb.node.id for nb in nbrs}
+            # Per-edge cost for the graded (Dijkstra) distance (ADR-0021); the hop-count
+            # BFS in distances_to() deliberately ignores this and stays unweighted.
+            self._fwd_cost[nid] = {nb.node.id: _edge_cost(nb.edge.strength) for nb in nbrs}
             self._rev_adj.setdefault(nid, set())
         for src, destinations in self._adj.items():
             for dst in destinations:
@@ -96,6 +116,34 @@ class WordGameService:
             return None
         key = normalize(text)
         return self._index.get(key)
+
+    def suggest(self, text: str, limit: int = 3) -> list[str]:
+        """Fuzzy "did you mean" labels for a typo that :meth:`resolve` could not place.
+
+        Runs :func:`difflib.get_close_matches` over the same normalized index keys
+        resolution uses (labels, ids and aliases), maps each matched key back to its node's
+        display label, and de-duplicates so a node that matched via several surface forms
+        is offered once. Order is the close-match ranking (best first); ties are broken by
+        label then id so the result is deterministic. :meth:`resolve` stays exact-match —
+        this only powers advisory hints, never silent acceptance.
+        """
+        key = normalize(text)
+        if not key:
+            return []
+        # A generous pool of candidate keys, then collapse to distinct nodes preserving
+        # difflib's best-first order (its score already ranks closeness).
+        matches = difflib.get_close_matches(key, self._index.keys(), n=limit * 4, cutoff=0.78)
+        seen: set[str] = set()
+        out: list[str] = []
+        for matched_key in matches:
+            nid = self._index.get(matched_key)
+            if nid is None or nid in seen:
+                continue
+            seen.add(nid)
+            out.append(self.label(nid))
+            if len(out) >= limit:
+                break
+        return out
 
     # --------------------------------------------------------------- graph ops
     def neighbor_ids(self, node_id: str, *, include_distractors: bool = False) -> list[str]:
@@ -185,6 +233,33 @@ class WordGameService:
                 if previous not in dist:
                     dist[previous] = dist[cur] + 1
                     frontier.append(previous)
+        return dist
+
+    def weighted_distances_to(self, target: str) -> dict[str, float]:
+        """Graded directed distance *to* ``target`` — Dijkstra, not hop count (ADR-0021).
+
+        Same reversed non-distractor adjacency as :meth:`distances_to` (guess -> target,
+        ADR-0018), but each edge carries the cost from :func:`_edge_cost` (strong links are
+        cheap, weak ones dear). Two guesses the same number of hops away are thus separated
+        by how *tight* their path is, which is what makes Contexto rank within a hop bucket.
+        Reaches exactly the same node set as the hop-count BFS. Tie-breaking is deterministic
+        (the heap orders equal costs by node id), so the same target yields the same map.
+        """
+        dist: dict[str, float] = {target: 0.0}
+        # (cumulative_cost, node); node in the key makes equal-cost pops deterministic.
+        heap: list[tuple[float, str]] = [(0.0, target)]
+        while heap:
+            d, cur = heapq.heappop(heap)
+            if d > dist.get(cur, math.inf):
+                continue
+            for previous in sorted(self._rev_adj.get(cur, ())):
+                # Edge is the FORWARD link previous -> cur; its cost is what a guess sitting
+                # at ``previous`` pays to move one step toward the target.
+                step = self._fwd_cost.get(previous, {}).get(cur, 1.5)
+                nd = d + step
+                if nd < dist.get(previous, math.inf):
+                    dist[previous] = nd
+                    heapq.heappush(heap, (nd, previous))
         return dist
 
     # --------------------------------------------------------------- pools

@@ -581,3 +581,163 @@ def test_closeness_three_way_split_reachable_vs_unreachable() -> None:
     # the coldest *reachable* bucket stays >= 1, so it is visibly warmer than unreachable
     coldest = max(session.dist_hist)
     assert 1 <= closeness_for(session, coldest) <= 99
+
+
+# ----------------------------------------------- new: fuzzy suggestions (ADR-0021)
+
+
+def _typo(label: str) -> str:
+    """Drop an interior character so the text no longer resolves but stays fuzzy-close."""
+    mid = len(label) // 2
+    return label[:mid] + label[mid + 1 :]
+
+
+def test_unknown_guess_returns_fuzzy_suggestions_and_stays_uncounted() -> None:
+    """A typo of a real non-target concept yields a "did you mean" hint, no attempt spent."""
+    from cat_de_roman_esti.wordgames.contexto import store
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    c = make_client()
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
+    svc = get_service()
+    target = store.get(gid).target
+    # A non-target concept with a long-enough label to survive one dropped character.
+    concept = next(
+        nid
+        for nid in svc.all_ids()
+        if nid != target and len(svc.label(nid)) >= 6 and svc.resolve(_typo(svc.label(nid)))
+        is None and svc.suggest(_typo(svc.label(nid)))
+    )
+    label = svc.label(concept)
+    body = c.post(
+        f"/api/wordgames/contexto/games/{gid}/guess",
+        {"text": _typo(label)},
+        content_type="application/json",
+    ).json()
+    assert body["ok"] is False
+    assert body["attempts"] == 0  # unresolved guesses never count (pinned)
+    assert label in body["suggestions"]
+    assert "Poate cautai" in body["message"]
+
+
+def test_fuzzy_suggestions_never_leak_the_target_label() -> None:
+    """The secret's own label must never be offered as a suggestion (ADR-0009/0021)."""
+    from cat_de_roman_esti.wordgames.contexto import store
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    c = make_client()
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
+    svc = get_service()
+    target = store.get(gid).target
+    target_label = svc.label(target)
+    typo = _typo(target_label)
+    if svc.resolve(typo) is not None or not svc.suggest(typo):
+        pytest.skip("secret label does not produce a fuzzy near-miss on this fixture")
+    # The raw fuzzy matcher WOULD surface the secret; the endpoint must strip it.
+    assert target_label in svc.suggest(typo)
+    body = c.post(
+        f"/api/wordgames/contexto/games/{gid}/guess",
+        {"text": typo},
+        content_type="application/json",
+    ).json()
+    assert body["ok"] is False
+    assert body["attempts"] == 0
+    assert target_label not in body["suggestions"]
+    _assert_secret_hidden(body, target, target_label)
+
+
+def test_service_suggest_dedupes_and_is_deterministic() -> None:
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    svc = get_service()
+    a = svc.suggest("Bucuresti")
+    b = svc.suggest("Bucuresti")
+    assert a == b  # deterministic
+    assert len(a) == len(set(a))  # each node offered once
+    assert svc.suggest("xxqqzznope") == []  # nothing close -> empty
+
+
+# ----------------------------------------- new: graded similarity ranking (ADR-0021)
+
+
+def test_within_bucket_rank_is_finer_when_strengths_differ(monkeypatch) -> None:
+    """Two guesses the same hop count away split by path tightness (edge strength)."""
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames import contexto
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    nodes = [
+        {"id": n, "label_ro": n, "category": "test"} for n in ("strong", "weak", "far", "target")
+    ]
+    edges = [
+        # both `strong` and `weak` are one hop to target, but via edges of different strength
+        {"id": "e_s", "src_id": "strong", "dst_id": "target", "bidirectional": 0, "strength": 0.9},
+        {"id": "e_w", "src_id": "weak", "dst_id": "target", "bidirectional": 0, "strength": 0.2},
+        # `far` is two hops (through `strong`)
+        {"id": "e_f", "src_id": "far", "dst_id": "strong", "bidirectional": 0, "strength": 0.9},
+    ]
+    svc = WordGameService(Graph.from_records(nodes, edges))
+    monkeypatch.setattr(contexto, "get_service", lambda: svc)
+    session = contexto._build_session("target", "normal", None)
+
+    r_strong = contexto.rank_for(session, 1, svc.weighted_distances_to("target")["strong"])
+    r_weak = contexto.rank_for(session, 1, svc.weighted_distances_to("target")["weak"])
+    r_far = contexto.rank_for(session, 2, svc.weighted_distances_to("target")["far"])
+    # tighter path ranks strictly better within the bucket...
+    assert r_strong < r_weak
+    # ...and the whole hop bucket still outranks the next hop bucket (hop ordering kept).
+    assert r_weak < r_far
+
+
+def test_hop_ordering_is_preserved_across_buckets() -> None:
+    """Every bucket-d rank is strictly smaller than every bucket-(d+1) rank."""
+    from cat_de_roman_esti.wordgames.contexto import _pick_target, rank_for
+
+    session = _pick_target(SEED, "normal")
+    prev_max = -1
+    for d in sorted(session.sorted_weighted):
+        ranks = [rank_for(session, d, w) for w in session.sorted_weighted[d]]
+        assert min(ranks) > prev_max
+        prev_max = max(ranks)
+
+
+def test_temperature_is_monotonic_and_pins_found_and_win() -> None:
+    """Warmth never rises as rank grows; only d==0 is Gasit and only the win reads 100."""
+    from cat_de_roman_esti.wordgames.contexto import (
+        _pick_target,
+        closeness_for,
+        rank_for,
+        temperature_for,
+    )
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    warmth = {"Gasit": 6, "Fierbinte": 5, "Cald": 4, "Caldut": 3, "Rece": 2, "Inghetat": 1}
+    svc = get_service()
+    session = _pick_target(SEED, "normal")
+    dist = svc.distances_to(session.target)
+    pairs = sorted(
+        (
+            rank_for(session, d, session.weighted_dist[nid]),
+            warmth[temperature_for(session, d, session.weighted_dist[nid])],
+        )
+        for nid, d in dist.items()
+    )
+    assert all(pairs[i][1] >= pairs[i + 1][1] for i in range(len(pairs) - 1))
+    # Invariants at the extremes.
+    assert temperature_for(session, 0) == "Gasit"
+    assert rank_for(session, 0, 0.0) == 1
+    assert closeness_for(session, 0) == 100
+    # A non-win reachable guess never reads 100.
+    assert all(closeness_for(session, d, session.weighted_dist[nid]) < 100
+               for nid, d in dist.items() if d != 0)
+
+
+def test_ranks_are_deterministic_for_the_same_instance() -> None:
+    """Two sessions on the same seed produce identical precomputed rank structure."""
+    from cat_de_roman_esti.wordgames.contexto import _pick_target
+
+    a = _pick_target(SEED, "normal")
+    b = _pick_target(SEED, "normal")
+    assert a.target == b.target
+    assert a.sorted_weighted == b.sorted_weighted
+    assert a.closer_than == b.closer_than
