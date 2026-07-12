@@ -5,7 +5,7 @@
   "counts": {
    "conexiuni": 286,
    "contexto": 197,
-   "lant": 195,
+   "lant": 194,
    "alchimie": 91
   }
  },
@@ -12779,6 +12779,63 @@
    "status": "approved"
   },
   {
+   "id": "cx_societate_290",
+   "category": "societate",
+   "difficulty": "normal",
+   "source": "ai",
+   "status": "approved",
+   "groups": {
+    "g1": [
+     "n_v2soc_alegeri",
+     "n_v3soc_protest",
+     "n_societatea_civila",
+     "n_vot"
+    ],
+    "g2": [
+     "n_v4soc_elev",
+     "n_v4soc_student",
+     "n_v3soc_scoala",
+     "n_v2soc_universitate"
+    ],
+    "g3": [
+     "n_stix_ion_cantacuzino",
+     "n_microbiologie",
+     "n_v3sti_vaccin",
+     "n_v2sti_bacterie"
+    ],
+    "g4": [
+     "n_v2mem_feed_online",
+     "n_v3mem_hashtag",
+     "n_v3mem_repost",
+     "n_v3mem_scroll_infinit"
+    ]
+   },
+   "group_labels": {
+    "g1": "Participare civică",
+    "g2": "De la școală la facultate",
+    "g3": "Sănătate publică și microbiologie",
+    "g4": "În feed, la nesfârșit"
+   },
+   "order": [
+    "n_v3mem_scroll_infinit",
+    "n_v4soc_student",
+    "n_v3soc_protest",
+    "n_stix_ion_cantacuzino",
+    "n_v2mem_feed_online",
+    "n_v3soc_scoala",
+    "n_vot",
+    "n_v3sti_vaccin",
+    "n_v3mem_repost",
+    "n_v2soc_alegeri",
+    "n_microbiologie",
+    "n_v4soc_elev",
+    "n_societatea_civila",
+    "n_v2soc_universitate",
+    "n_v3mem_hashtag",
+    "n_v2sti_bacterie"
+   ]
+  },
+  {
    "difficulty": "usor",
    "groups": {
     "g1": [
@@ -16254,63 +16311,6 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "approved"
-  },
-  {
-   "id": "cx_societate_290",
-   "category": "societate",
-   "difficulty": "normal",
-   "source": "ai",
-   "status": "approved",
-   "groups": {
-    "g1": [
-     "n_v2soc_alegeri",
-     "n_v3soc_protest",
-     "n_societatea_civila",
-     "n_vot"
-    ],
-    "g2": [
-     "n_v4soc_elev",
-     "n_v4soc_student",
-     "n_v3soc_scoala",
-     "n_v2soc_universitate"
-    ],
-    "g3": [
-     "n_stix_ion_cantacuzino",
-     "n_microbiologie",
-     "n_v3sti_vaccin",
-     "n_v2sti_bacterie"
-    ],
-    "g4": [
-     "n_v2mem_feed_online",
-     "n_v3mem_hashtag",
-     "n_v3mem_repost",
-     "n_v3mem_scroll_infinit"
-    ]
-   },
-   "group_labels": {
-    "g1": "Participare civică",
-    "g2": "De la școală la facultate",
-    "g3": "Sănătate publică și microbiologie",
-    "g4": "În feed, la nesfârșit"
-   },
-   "order": [
-    "n_v3mem_scroll_infinit",
-    "n_v4soc_student",
-    "n_v3soc_protest",
-    "n_stix_ion_cantacuzino",
-    "n_v2mem_feed_online",
-    "n_v3soc_scoala",
-    "n_vot",
-    "n_v3sti_vaccin",
-    "n_v3mem_repost",
-    "n_v2soc_alegeri",
-    "n_microbiologie",
-    "n_v4soc_elev",
-    "n_societatea_civila",
-    "n_v2soc_universitate",
-    "n_v3mem_hashtag",
-    "n_v2sti_bacterie"
-   ]
   }
  ],
  "contexto": [
@@ -17180,6 +17180,14 @@
   },
   {
    "difficulty": "usor",
+   "target": "n_v4mem_internet",
+   "id": "ct_meme_net_297",
+   "category": "meme_net",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
    "target": "n_muz_dragostea_din_tei",
    "id": "ct_muzica_067",
    "category": "muzica",
@@ -17476,6 +17484,54 @@
   },
   {
    "difficulty": "usor",
+   "target": "n_v11soc_diaspora",
+   "id": "ct_societate_290",
+   "category": "societate",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "greu",
+   "target": "n_minoritati_nationale",
+   "id": "ct_societate_291",
+   "category": "societate",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "greu",
+   "target": "n_avocatul_poporului",
+   "id": "ct_societate_292",
+   "category": "societate",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "target": "n_v3soc_protest",
+   "id": "ct_societate_293",
+   "category": "societate",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "target": "n_v3soc_mass_media",
+   "id": "ct_societate_294",
+   "category": "societate",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "target": "n_v3soc_scoala",
+   "id": "ct_societate_296",
+   "category": "societate",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
    "target": "n_spt_romania_argentina_1994",
    "id": "ct_sport_091",
    "category": "sport",
@@ -17715,6 +17771,14 @@
    "status": "approved"
   },
   {
+   "difficulty": "normal",
+   "target": "n_v3sti_vaccin",
+   "id": "ct_stiinta_295",
+   "category": "stiinta",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
    "difficulty": "usor",
    "target": "n_vdr_cheia_de_la_gat",
    "id": "ct_viata_de_roman_107",
@@ -17823,70 +17887,6 @@
    "target": "n_vdr_calendar_obiceiuri",
    "id": "ct_viata_de_roman_275",
    "category": "viata_de_roman",
-   "source": "ai",
-   "status": "approved"
-  },
-  {
-   "difficulty": "usor",
-   "target": "n_v11soc_diaspora",
-   "id": "ct_societate_290",
-   "category": "societate",
-   "source": "ai",
-   "status": "approved"
-  },
-  {
-   "difficulty": "greu",
-   "target": "n_minoritati_nationale",
-   "id": "ct_societate_291",
-   "category": "societate",
-   "source": "ai",
-   "status": "approved"
-  },
-  {
-   "difficulty": "greu",
-   "target": "n_avocatul_poporului",
-   "id": "ct_societate_292",
-   "category": "societate",
-   "source": "ai",
-   "status": "approved"
-  },
-  {
-   "difficulty": "normal",
-   "target": "n_v3soc_protest",
-   "id": "ct_societate_293",
-   "category": "societate",
-   "source": "ai",
-   "status": "approved"
-  },
-  {
-   "difficulty": "normal",
-   "target": "n_v3soc_mass_media",
-   "id": "ct_societate_294",
-   "category": "societate",
-   "source": "ai",
-   "status": "approved"
-  },
-  {
-   "difficulty": "normal",
-   "target": "n_v3sti_vaccin",
-   "id": "ct_stiinta_295",
-   "category": "stiinta",
-   "source": "ai",
-   "status": "approved"
-  },
-  {
-   "difficulty": "usor",
-   "target": "n_v3soc_scoala",
-   "id": "ct_societate_296",
-   "category": "societate",
-   "source": "ai",
-   "status": "approved"
-  },
-  {
-   "difficulty": "usor",
-   "target": "n_v4mem_internet",
-   "id": "ct_meme_net_297",
-   "category": "meme_net",
    "source": "ai",
    "status": "approved"
   }
@@ -19058,16 +19058,6 @@
    "target": "n_muz_pop_dance_ro",
    "optimal": 3,
    "id": "lt_muzica_135",
-   "category": "muzica",
-   "source": "ai",
-   "status": "approved"
-  },
-  {
-   "difficulty": "greu",
-   "start": "n_vdr_bloc",
-   "target": "n_muz_dupa_blocuri",
-   "optimal": 5,
-   "id": "lt_muzica_136",
    "category": "muzica",
    "source": "ai",
    "status": "approved"
