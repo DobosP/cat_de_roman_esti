@@ -592,8 +592,19 @@ def _typo(label: str) -> str:
     return label[:mid] + label[mid + 1 :]
 
 
+def _heavy_typo(label: str) -> str:
+    """Drop two interior characters: still close enough for :meth:`suggest` but below
+    the confident auto-accept bar (ADR-0022), so the ADVISORY path stays exercised."""
+    mid = len(label) // 2
+    return label[:mid] + label[mid + 2 :]
+
+
 def test_unknown_guess_returns_fuzzy_suggestions_and_stays_uncounted() -> None:
-    """A typo of a real non-target concept yields a "did you mean" hint, no attempt spent."""
+    """A mangled non-target concept yields a "did you mean" hint, no attempt spent.
+
+    Updated for ADR-0022: a single dropped character now usually auto-corrects, so the
+    advisory path is driven with a heavier typo that resolve_fuzzy() must NOT accept.
+    """
     from cat_de_roman_esti.wordgames.contexto import store
     from cat_de_roman_esti.wordgames.service import get_service
 
@@ -601,17 +612,21 @@ def test_unknown_guess_returns_fuzzy_suggestions_and_stays_uncounted() -> None:
     gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
     svc = get_service()
     target = store.get(gid).target
-    # A non-target concept with a long-enough label to survive one dropped character.
+    # A non-target concept whose two-char-dropped label stays suggestible but is NOT
+    # confidently auto-correctable (the advisory path must be the one that answers).
     concept = next(
         nid
         for nid in svc.all_ids()
-        if nid != target and len(svc.label(nid)) >= 6 and svc.resolve(_typo(svc.label(nid)))
-        is None and svc.suggest(_typo(svc.label(nid)))
+        if nid != target
+        and 6 <= len(svc.label(nid)) <= 10
+        and svc.resolve(_heavy_typo(svc.label(nid))) is None
+        and svc.resolve_fuzzy(_heavy_typo(svc.label(nid))) is None
+        and svc.label(nid) in svc.suggest(_heavy_typo(svc.label(nid)))
     )
     label = svc.label(concept)
     body = c.post(
         f"/api/wordgames/contexto/games/{gid}/guess",
-        {"text": _typo(label)},
+        {"text": _heavy_typo(label)},
         content_type="application/json",
     ).json()
     assert body["ok"] is False
@@ -621,18 +636,29 @@ def test_unknown_guess_returns_fuzzy_suggestions_and_stays_uncounted() -> None:
 
 
 def test_fuzzy_suggestions_never_leak_the_target_label() -> None:
-    """The secret's own label must never be offered as a suggestion (ADR-0009/0021)."""
-    from cat_de_roman_esti.wordgames.contexto import store
+    """The secret's own label must never be offered as a suggestion (ADR-0009/0021).
+
+    Updated for ADR-0022: the typo must fall BELOW the auto-accept bar — a confidently
+    corrected target typo is now a legitimate win instead (covered separately). The
+    session is built directly on a target whose heavy typo stays advisory, so this
+    boundary is always exercised instead of depending on the seeded target's label.
+    """
+    from cat_de_roman_esti.wordgames.contexto import _build_session, store
     from cat_de_roman_esti.wordgames.service import get_service
 
     c = make_client()
-    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
     svc = get_service()
-    target = store.get(gid).target
+    target = next(
+        nid
+        for nid in svc.all_ids()
+        if 6 <= len(svc.label(nid)) <= 10
+        and svc.resolve(_heavy_typo(svc.label(nid))) is None
+        and svc.resolve_fuzzy(_heavy_typo(svc.label(nid))) is None
+        and svc.label(nid) in svc.suggest(_heavy_typo(svc.label(nid)))
+    )
     target_label = svc.label(target)
-    typo = _typo(target_label)
-    if svc.resolve(typo) is not None or not svc.suggest(typo):
-        pytest.skip("secret label does not produce a fuzzy near-miss on this fixture")
+    typo = _heavy_typo(target_label)
+    gid = store.create(_build_session(target, "normal", None))
     # The raw fuzzy matcher WOULD surface the secret; the endpoint must strip it.
     assert target_label in svc.suggest(typo)
     body = c.post(
@@ -655,6 +681,106 @@ def test_service_suggest_dedupes_and_is_deterministic() -> None:
     assert a == b  # deterministic
     assert len(a) == len(set(a))  # each node offered once
     assert svc.suggest("xxqqzznope") == []  # nothing close -> empty
+
+
+# ----------------------------------------- new: confident auto-accept (ADR-0022)
+
+
+def _auto_correctable_concept(svc, exclude: str) -> tuple[str, str]:
+    """A (node id, typo) pair whose one-char-dropped label confidently auto-corrects."""
+    for nid in svc.all_ids():
+        if nid == exclude:
+            continue
+        label = svc.label(nid)
+        if len(label) < 7:
+            continue
+        typo = _typo(label)
+        if svc.resolve(typo) is None and svc.resolve_fuzzy(typo) == nid:
+            return nid, typo
+    raise AssertionError("no auto-correctable label found in the fixture")
+
+
+def test_resolve_fuzzy_confident_unique_ambiguous_and_below_bar() -> None:
+    """The auto-accept resolver fires only on a high-confidence, unambiguous near-miss."""
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    nodes = [
+        {"id": "n_u", "label_ro": "strugure", "category": "test"},
+        # Two distinct nodes one character apart: any typo between them is ambiguous.
+        {"id": "n_a", "label_ro": "portocala", "category": "test"},
+        {"id": "n_b", "label_ro": "portocale", "category": "test"},
+    ]
+    svc = WordGameService(Graph.from_records(nodes, []))
+    # High-confidence unique typo (ratio 14/15 ≈ 0.93, nothing else close) -> corrected.
+    assert svc.resolve_fuzzy("strugur") == "n_u"
+    assert svc.resolve_fuzzy("strugur") == "n_u"  # deterministic
+    # Equidistant between two distinct nodes (both 0.94) -> ambiguous -> None.
+    assert svc.resolve_fuzzy("portocal") is None
+    # Close enough for suggest() but below the 0.90 bar (10/13 ≈ 0.77+) -> None.
+    assert svc.resolve_fuzzy("strug") is None
+    # Exact input still resolves exactly; empty input never resolves.
+    assert svc.resolve_fuzzy("Strugure") == "n_u"
+    assert svc.resolve_fuzzy("") is None
+
+
+def test_typo_auto_accepts_counts_attempt_and_names_correction() -> None:
+    """A unique high-confidence typo is played as the corrected concept (ADR-0022)."""
+    from cat_de_roman_esti.wordgames.contexto import store
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    c = make_client()
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
+    svc = get_service()
+    target = store.get(gid).target
+    concept, typo = _auto_correctable_concept(svc, exclude=target)
+    label = svc.label(concept)
+    body = c.post(
+        f"/api/wordgames/contexto/games/{gid}/guess",
+        {"text": typo},
+        content_type="application/json",
+    ).json()
+    assert body["ok"] is True
+    assert body["guess"]["id"] == concept
+    assert body["guess"]["label"] == label
+    assert body["message"] == f"Am înțeles: {label}."
+    assert body["attempts"] == 1  # auto-accepted guesses count normally
+    assert body["won"] is False
+    assert "target" not in body
+    # The same typo replayed maps to the same node: deduplicated like any repeat guess.
+    again = c.post(
+        f"/api/wordgames/contexto/games/{gid}/guess",
+        {"text": typo},
+        content_type="application/json",
+    ).json()
+    assert again["attempts"] == 1
+
+
+def test_typo_of_the_target_is_a_legitimate_win() -> None:
+    """A confidently corrected target typo WINS — a typo must not rob the answer."""
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    c = make_client()
+    svc = get_service()
+    target_label = _reveal_target_label(c)
+    target = svc.resolve(target_label)
+    typo = _typo(target_label)
+    if svc.resolve(typo) is not None or svc.resolve_fuzzy(typo) != target:
+        pytest.skip("secret label does not confidently auto-correct on this fixture")
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
+    body = c.post(
+        f"/api/wordgames/contexto/games/{gid}/guess",
+        {"text": typo},
+        content_type="application/json",
+    ).json()
+    assert body["ok"] is True
+    assert body["won"] is True
+    assert body["guess"]["distance"] == 0
+    assert body["guess"]["closeness"] == 100
+    assert body["message"] == f"Am înțeles: {target_label}."
+    assert body["attempts"] == 1
+    assert body["target"]["id"] == target
+    assert body["score"] == 1000  # solved on the first (auto-accepted) attempt
 
 
 # ----------------------------------------- new: graded similarity ranking (ADR-0021)

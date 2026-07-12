@@ -44,6 +44,13 @@ def _edge_cost(strength: float) -> float:
     return 2.0 - min(max(strength, 0.0), 1.0)
 
 
+# Confident auto-accept thresholds (ADR-0022): a fuzzy correction is played silently only
+# when the best candidate is BOTH high-confidence (ratio floor) AND unambiguous (no second
+# distinct node scores within the margin of it). Everything weaker stays advisory.
+AUTO_ACCEPT_RATIO = 0.90
+AUTO_ACCEPT_MARGIN = 0.06
+
+
 def normalize(text: str) -> str:
     """Canonical form for fuzzy matching: strip accents, casefold, collapse whitespace.
 
@@ -125,7 +132,8 @@ class WordGameService:
         display label, and de-duplicates so a node that matched via several surface forms
         is offered once. Order is the close-match ranking (best first); ties are broken by
         label then id so the result is deterministic. :meth:`resolve` stays exact-match —
-        this only powers advisory hints, never silent acceptance.
+        this only powers advisory hints; silent acceptance is :meth:`resolve_fuzzy`'s
+        (much stricter) job.
         """
         key = normalize(text)
         if not key:
@@ -144,6 +152,52 @@ class WordGameService:
             if len(out) >= limit:
                 break
         return out
+
+    def resolve_fuzzy(self, text: str) -> str | None:
+        """Confidently auto-correct a near-miss to its node id, or None (ADR-0022).
+
+        Where :meth:`suggest` is advisory, this is the resolver the games may ACT on:
+        it scores every normalized index key (labels, ids, aliases) against the
+        normalized input with :class:`difflib.SequenceMatcher` and keeps each node's
+        best ratio. The correction is returned only when the top node clears
+        ``AUTO_ACCEPT_RATIO`` **and** no second distinct node scores within
+        ``AUTO_ACCEPT_MARGIN`` of it; anything weaker or ambiguous returns None so the
+        caller falls back to the advisory suggestion flow. Deterministic: ratios are
+        pure functions of the keys, and an exact tie between two nodes always reads as
+        ambiguity rather than an arbitrary pick.
+        """
+        key = normalize(text)
+        if not key:
+            return None
+        exact = self._index.get(key)
+        if exact is not None:
+            return exact
+        # Any node able to win — or to block a winner as a close second — scores at
+        # least this floor, so the scan can skip everything below it cheaply.
+        floor = AUTO_ACCEPT_RATIO - AUTO_ACCEPT_MARGIN
+        matcher = difflib.SequenceMatcher()
+        matcher.set_seq2(key)
+        best: dict[str, float] = {}
+        for cand in self._index:
+            matcher.set_seq1(cand)
+            # The same cheap upper bounds difflib.get_close_matches applies.
+            if matcher.real_quick_ratio() < floor or matcher.quick_ratio() < floor:
+                continue
+            ratio = matcher.ratio()
+            if ratio < floor:
+                continue
+            nid = self._index[cand]
+            if ratio > best.get(nid, 0.0):
+                best[nid] = ratio
+        if not best:
+            return None
+        ranked = sorted(best.items(), key=lambda item: (-item[1], item[0]))
+        top_id, top_ratio = ranked[0]
+        if top_ratio < AUTO_ACCEPT_RATIO:
+            return None
+        if len(ranked) > 1 and top_ratio - ranked[1][1] <= AUTO_ACCEPT_MARGIN:
+            return None
+        return top_id
 
     # --------------------------------------------------------------- graph ops
     def neighbor_ids(self, node_id: str, *, include_distractors: bool = False) -> list[str]:
