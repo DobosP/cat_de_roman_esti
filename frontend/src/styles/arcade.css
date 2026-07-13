@@ -185,6 +185,14 @@ input:focus-visible {
   padding-left: max(clamp(16px, 4vw, 48px), env(safe-area-inset-left));
   padding-right: max(clamp(16px, 4vw, 48px), env(safe-area-inset-right));
   padding-bottom: max(clamp(16px, 4vw, 48px), env(safe-area-inset-bottom));
+  /* Every screen fills a fixed, absolutely-positioned .screen inside an
+     overflow:hidden .app-shell — so the screen-pad must own the vertical scroll,
+     or any content taller than the viewport (e.g. the difficulty-select intro on a
+     phone) clips and its actions become unreachable. Playing screens used to set
+     this inline; making it the default keeps every screen reachable. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .container {

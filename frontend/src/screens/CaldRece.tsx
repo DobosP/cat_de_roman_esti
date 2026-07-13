@@ -434,10 +434,10 @@ export default function CaldRece({
   // ---- Intro: difficulty picker + daily challenge + personal best. ----
   if (showIntro) {
     return (
-      <div className="screen-pad fill" style={{ display: "flex" }}>
+      <div className="screen-pad fill">
         <div
-          className="container col fill center"
-          style={{ gap: 18, paddingBlock: 8, justifyContent: "center" }}
+          className="container col"
+          style={{ gap: 18, paddingBlock: 8, minHeight: "100%", justifyContent: "center" }}
         >
           <div style={{ width: "100%" }}>
             <GameShell onExit={onExit} accent={DEF.accent} />

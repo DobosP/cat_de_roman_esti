@@ -1,7 +1,25 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-13. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-13 (backend 280 + accounts 28, Ruff, both validators; frontend lint/typecheck/test/build + bundle gate last ran green at b245886 — untouched since.)_
+_Last verified: 2026-07-13 (backend 280 + accounts 28, Ruff, both validators; frontend lint/typecheck/test 12/12/build + bundle gate 115.35 KiB green after the mobile-scroll fix below.)_
+
+## Latest — mobile intro scroll fix (2026-07-13)
+
+Phone bug: on the difficulty-select intro screens the card could exceed the
+viewport, and with nothing owning the vertical scroll the **Joacă/Începe** button
+was clipped and unreachable. Root cause: every `.screen` is `position:absolute;
+inset:0` inside an `overflow:hidden` `.app-shell`, but `.screen-pad` was not a
+scroll container — playing screens masked it with inline `overflowY:auto` while the
+Alchimie/Lanț/CaldRece intros did not. Fix: `.screen-pad` now defaults to
+`overflow-y:auto` + `overscroll-behavior:contain` + touch scrolling
+(`frontend/src/styles/arcade.css`), and CaldRece's intro drops the `fill center`
+flex-centering trap for `minHeight:100%`+`justify-content:center` so it still
+centers when short but scrolls when tall (`frontend/src/screens/CaldRece.tsx`).
+Verified via headless-Chrome CDP at 360×460: all three intros overflow, scroll, and
+the start button is reachable (autofocus even auto-scrolls it into view). SPA rebuilt
+into `web/static`. Frontend gate green (lint/typecheck/12 tests/build, bundle 115.35
+KiB). Deploy: push + VPS `git pull && docker compose -f docker-compose.anon.yml
+--env-file .env.anon up -d --build`.
 
 ## Latest — v21 precision batch + promotions + dedup audit (2026-07-13)
 
