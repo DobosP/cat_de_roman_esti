@@ -18,8 +18,11 @@ centers when short but scrolls when tall (`frontend/src/screens/CaldRece.tsx`).
 Verified via headless-Chrome CDP at 360×460: all three intros overflow, scroll, and
 the start button is reachable (autofocus even auto-scrolls it into view). SPA rebuilt
 into `web/static`. Frontend gate green (lint/typecheck/12 tests/build, bundle 115.35
-KiB). Deploy: push + VPS `git pull && docker compose -f docker-compose.anon.yml
---env-file .env.anon up -d --build`.
+KiB). **DEPLOYED LIVE 2026-07-13** from `0b68f4e`: VPS `git pull` + `docker compose
+-f docker-compose.anon.yml --env-file .env.anon up -d --build`; app healthy, public
+smoke green (`/api/health` 2012 concepts, `/api/categories` all 14 available with
+non-zero curated per game, live CSS bundle carries the `.screen-pad{overflow-y:auto}`
+rule).
 
 ## Latest — v21 precision batch + promotions + dedup audit (2026-07-13)
 
