@@ -134,33 +134,21 @@ function GuessRow({ g, isLatest }: { g: Guess; isLatest: boolean }) {
         <span className="row" style={{ gap: 8, alignItems: "center" }}>
           <span
             className="badge"
+            style={{ borderColor: color, color, fontWeight: 700 }}
+          >
+            {TEMP_LABEL[g.temperature]}
+          </span>
+          <span
+            className="badge"
             style={{
               borderColor: color,
               color,
               fontWeight: 800,
               fontVariantNumeric: "tabular-nums",
             }}
-            title="Rang față de conceptul secret"
+            title="Al câtelea cel mai apropiat de conceptul secret (#1 = secretul)"
           >
             #{g.rank}
-          </span>
-          <span
-            className="badge"
-            style={{ borderColor: color, color, fontWeight: 700 }}
-          >
-            {TEMP_LABEL[g.temperature]}
-          </span>
-          <span
-            className="muted"
-            style={{
-              fontVariantNumeric: "tabular-nums",
-              fontSize: "0.82rem",
-              minWidth: 38,
-              textAlign: "right",
-            }}
-            title={`Distanță: ${g.distance} salturi`}
-          >
-            {g.closeness}/100
           </span>
         </span>
       </div>
@@ -423,6 +411,14 @@ export default function CaldRece({
     setShowIntro(true);
   }, [active]);
 
+  // Leaving to the menu is permanent: drop the resume token so the game does not
+  // silently reappear when the player comes back (they start fresh from the intro).
+  // A genuine page refresh — which never calls this — still resumes via useActiveGame.
+  const handleExit = useCallback(() => {
+    active.forget();
+    onExit();
+  }, [active, onExit]);
+
   const guesses = state?.guesses ?? [];
   const bestGuess = guesses[0];
   // The most recently played guess (may sort anywhere in the list) — surfaced as an
@@ -440,7 +436,7 @@ export default function CaldRece({
           style={{ gap: 18, paddingBlock: 8, minHeight: "100%", justifyContent: "center" }}
         >
           <div style={{ width: "100%" }}>
-            <GameShell onExit={onExit} accent={DEF.accent} />
+            <GameShell onExit={handleExit} accent={DEF.accent} />
           </div>
 
           <GameIntro
@@ -491,13 +487,15 @@ export default function CaldRece({
   }
 
   return (
-    <div className="screen-pad fill" style={{ display: "flex" }}>
-      <div
-        className="container col fill"
-        style={{ gap: 16, minHeight: 0, paddingBlock: 8 }}
-      >
+    // Whole-screen scroll (the .screen-pad owns overflow-y): the header/title flow
+    // and scroll away, only the input bar stays pinned. The old fixed-header +
+    // inner-scroll-list layout collapsed the list to ~0px on short/phone viewports
+    // (worst with the keyboard up), stranding the guesses; single-scroll keeps every
+    // guess reachable at any height.
+    <div className="screen-pad fill">
+      <div className="container col" style={{ gap: 16, paddingBlock: 8 }}>
         {/* header */}
-        <GameShell onExit={onExit} accent={DEF.accent} title={DEF.title}>
+        <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title}>
           <Hud>
             <StatBadge
               label="Mod"
@@ -577,8 +575,8 @@ export default function CaldRece({
           </p>
         </div>
 
-        {/* input */}
-        <form onSubmit={handleGuess} className="row" style={{ gap: 8 }}>
+        {/* input — sticky so it stays reachable while the guess list scrolls under it */}
+        <form onSubmit={handleGuess} className="row contexto-input-bar" style={{ gap: 8 }}>
           <input
             ref={inputRef}
             className="field fill"
@@ -661,8 +659,9 @@ export default function CaldRece({
                   color: barColor(latestGuess),
                   fontVariantNumeric: "tabular-nums",
                 }}
+                title="Al câtelea cel mai apropiat de conceptul secret (#1 = secretul)"
               >
-                #{latestGuess.rank} · {latestGuess.closeness}
+                #{latestGuess.rank}
               </strong>
             </m.div>
           )}
@@ -688,7 +687,7 @@ export default function CaldRece({
                 })
               }
               onOptions={showOptions}
-              onExit={onExit}
+              onExit={handleExit}
             >
               <span style={{ fontSize: "1.4rem", color: "var(--text)", display: "block" }}>
                 {state.target.label}
@@ -707,15 +706,14 @@ export default function CaldRece({
             <strong style={{ color: barColor(bestGuess) }}>
               {bestGuess.label}
             </strong>{" "}
-            (#{bestGuess.rank}, {bestGuess.closeness}/100)
+            <span title="Al câtelea cel mai apropiat de conceptul secret (#1 = secretul)">
+              (#{bestGuess.rank})
+            </span>
           </p>
         )}
 
-        {/* guess list (server-sorted best-first) */}
-        <div
-          className="col fill"
-          style={{ gap: 8, overflowY: "auto", minHeight: 0, paddingRight: 4 }}
-        >
+        {/* guess list (server-sorted best-first) — flows in the page scroll */}
+        <div className="col" style={{ gap: 8 }}>
           {guesses.length === 0 && !finished && (
             <p className="faint center" style={{ marginTop: 24 }}>
               Nicio încercare încă. Începe cu orice idee!

@@ -200,6 +200,22 @@ input:focus-visible {
   margin-inline: auto;
 }
 
+/* Sticky guess-input bar (Cald sau Rece): stays pinned to the top of the
+   scrolling screen-pad so the player can always type while the best-first guess
+   list scrolls beneath it. The app is dark-only (color-scheme: dark), so a dark
+   translucent fill + blur reads as a floating bar over the shell backdrop. The
+   top row-gap is folded into the bar's own padding so scrolled content passes
+   cleanly under an opaque edge instead of peeking through the flex gap. */
+.contexto-input-bar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  padding-block: 10px;
+  background: rgba(13, 11, 32, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
 /* ------------------------------------------------------------------ wordmark */
 .wordmark-gradient {
   background: var(--brand-gradient);

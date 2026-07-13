@@ -1,7 +1,34 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-07-13. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-13 (backend 280 + accounts 28, Ruff, both validators; frontend lint/typecheck/test 12/12/build + bundle gate 115.35 KiB green after the mobile-scroll fix below.)_
+_As of 2026-07-14. Update whenever `main` or the test baseline moves._
+_Last verified: 2026-07-14 (backend 280 + accounts 28, Ruff, both validators; frontend lint/typecheck/test 12/12/build + bundle gate 115.38 KiB green after the Cald sau Rece playability fix below.)_
+
+## Latest — Cald sau Rece playability: scroll + score + leave (2026-07-14)
+
+Three player-reported mobile bugs on the Contexto game (`frontend/src/screens/CaldRece.tsx`
++ `frontend/src/styles/arcade.css`):
+1. **Guesses unreachable / "buggy scroll".** The playing view pinned a tall header
+   (Meniu + badge/button rows + title + description + input + best-line) and let only
+   the guess list scroll in the leftover space; on a phone that space collapsed to
+   ~0–130px (measured 0px with the keyboard up), stranding the guesses with no outer
+   scroll. Fix: the whole screen scrolls (via the ADR-less `.screen-pad{overflow-y:auto}`
+   default) and the input is a `position:sticky` `.contexto-input-bar` pinned to the top,
+   so every guess is reachable at any height while typing stays available. Verified by
+   headless-Chrome CDP at 375×330/360×430/390×620 with a 40-guess game: outer scrolls,
+   input stays pinned, last guess reachable in all.
+2. **Confusing score.** Each guess showed BOTH `#rank` and `closeness/100` — the two are
+   derived from each other and point opposite ways. Per owner choice (2026-07-14) the row
+   now shows temperature + `#rank` only (`#1` = the secret; tooltip "al câtelea cel mai
+   apropiat"); the `/100` number is dropped everywhere (row, latest-verdict, best-so-far).
+   The colored proximity bar (still driven by closeness) stays as the visual cue.
+3. **Leaving not permanent.** "← Meniu" navigated home without dropping the resume token,
+   so returning silently re-resumed the game ("Joc reluat." + intro flash). New
+   `handleExit` calls `active.forget()` before exiting (menu button on intro + playing,
+   and the result card); a genuine page refresh still resumes via `useActiveGame`.
+   Verified: exit clears localStorage and the return shows a fresh intro.
+
+Frontend gate green (lint/typecheck/12 tests/build, bundle 115.38 KiB). SPA rebuilt into
+`web/static`.
 
 ## Latest — mobile intro scroll fix (2026-07-13)
 
