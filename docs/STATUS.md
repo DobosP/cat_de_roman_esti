@@ -3,6 +3,19 @@
 _As of 2026-07-13. Update whenever `main` or the test baseline moves._
 _Last verified: 2026-07-13 (backend 280 + accounts 28, Ruff, both validators; frontend lint/typecheck/test/build + bundle gate last ran green at b245886 — untouched since.)_
 
+## Latest — v21 precision batch + promotions + dedup audit (2026-07-13)
+
+Precision content pass: 113 new concepts + 412 edges + 360 aliases across all 14
+categories (Fable authors, quality-only brief incl. "do not pad"; Opus web-verifiers
+blocked 2 nodes / 11 edges / 22 aliases; 2 folded). Gaps filled include the missing
+Babasha artist node, Nicole Cherry, Vlăduța Lupău, Direcția 5, SAGA Festival. Dedup
+audit of the 12 v20-involving similarity pairs: ZERO true duplicates (all distinct —
+Peleș/Pelișor, dish-vs-ingredient etc.). Four pending Lanț boards newly clearing the
+ADR-0016 floor were judge-promoted (1 kept): lant approved 90 → 94. Graph: **1,899 →
+2,012 nodes, 7,770 → 8,178 edges**, 2 weak nodes. No re-derivation retirements.
+Pack 761 = 592 approved + 169 pending; snapshot + pins refreshed. This lands the
+publish train: v17-v21 deploy together (owner call).
+
 ## Latest — engine feel v2: auto-accept + Lanț guidance (2026-07-13, ADR-0022)
 
 Playability round on top of ADR-0021, backend-only and API-additive. New
