@@ -21,7 +21,7 @@ _KG_PATH = _ROOT / "tests" / "fixtures" / "kg_sample.json"
 _EXPECTED_INVENTORY = {
     "conexiuni": (283, 227, 56),
     "contexto": (197, 194, 3),
-    "lant": (191, 90, 101),
+    "lant": (191, 94, 97),
     "alchimie": (90, 77, 13),
 }
 
@@ -79,8 +79,8 @@ def test_v14_pack_inventory_and_review_split():
 
     # v16: 769 − 3 judge-rejected − 1 retired greu Lanț = 765; v18: − 1 retired normal Lanț.
     assert sum(expected[0] for expected in _EXPECTED_INVENTORY.values()) == 761
-    assert sum(expected[1] for expected in _EXPECTED_INVENTORY.values()) == 588
-    assert sum(expected[2] for expected in _EXPECTED_INVENTORY.values()) == 173
+    assert sum(expected[1] for expected in _EXPECTED_INVENTORY.values()) == 592
+    assert sum(expected[2] for expected in _EXPECTED_INVENTORY.values()) == 169
 
 
 def test_v14_adds_contemporary_civic_education_science_and_digital_play():
