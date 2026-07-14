@@ -4,10 +4,8 @@
 `cat_de_roman_esti` is a Romanian-language app/game project in the RO-EDU fleet. Word-game/session behavior should stay bounded, deterministic, and test-covered.
 
 ## Fleet context
-- Role: Romanian word-game arcade (Alchimie/Contexto/Lanț/Conexiuni) over the concept graph.
-- Upstream: `ro_data_server` (KG products: kg_nodes/kg_edges/kg_puzzles), `roedu-ui` (vendored `@roedu/ui`) · Downstream: none.
+- Canonical role/status/next for this repo: the vault note `dobo-brain/paul-brain/projects/cat-de-roman-esti.md` (fleet view: the vault's `projects/index.md` + `NOW.md`; agent-ops ADR-0032, vault adr-0001).
 - Fleet map + parallel-agent protocol: `~/work/AGENTS.md` (agent-ops ADR-0025).
-- Secrets: registry `agent-ops/secrets/secrets.manifest.yaml`; shared values deploy via `agent-ops/secrets/deploy-secrets.sh` (ADR-0027); never commit values.
 
 ## Parallel work (mandatory)
 - This shared checkout stays on `main`, clean — never switch branches or commit task work here.
