@@ -1,7 +1,36 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-07-14. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-14 (backend 280 + accounts 28, Ruff, both validators; frontend lint/typecheck/test 12/12/build + bundle gate 115.38 KiB green after the Cald sau Rece playability fix below.)_
+_As of 2026-07-15. Update whenever `main` or the test baseline moves._
+_Last verified: 2026-07-15 (backend 296 after the critique-gate tests below, Ruff, both
+validators, `git diff --check`; frontend untouched — last frontend gate 2026-07-14:
+lint/typecheck/test 12/12/build + bundle 115.38 KiB.)_
+
+## Latest — content critique gate (2026-07-15, ADR-0023)
+
+Player-reported quality drops (an approved "festival" group holding Untold/Neversea/
+Electric Castle + the *village* Bonțida — cx_meme_net_136/203; festivals mirrored 1:1
+against their host cities plus a generic-abstraction group — cx_muzica_271/206; Contexto
+targets nobody free-associates to — Sonicitate 0.15, Meglenoromână, Pagaia din Deltă)
+exposed that the pack validator checks solvability only, and that the mined-board
+fairness rule (`conexiuni._board_quality`) never applied to curated boards. New
+two-layer gate, backend-only: **`scripts/critique_pack.py`** (deterministic lints —
+type-compatible tile fairness with raw engine parity in dossiers, red-herring budget <4,
+mirrored groups ≥3, 3+1/2+2 node_type mixes, duplicate quads, salience floors
+0.60/0.35/0.20 per difficulty, member overuse >8; `--strict` FAILs block promotion,
+`--dossier` emits per-item judge dossiers) and **`.claude/workflows/critique-games.js`**
+(fleet-routed judges: Sonnet critics → Opus adversarial verifiers with live
+Romanian-relevance web checks) per **`docs/CRITIQUE_RUBRIC.md`**. Durable verdict
+contract in ADR-0023 (apply_rereview vocabulary; sweeps over approved stock emit
+owner proposals only; ADR-0019 stays above the gate). First full lint run over the
+existing stock: **127 tile-fairness FAILs, 689 duplicate/near-duplicate WARNs,
+254 salience WARNs, 83 mirrored-group WARNs** — the sweep queue. Backend suite
+280 → 296 (`tests/test_critique_pack.py`). Promotion-time command:
+`PYTHONPATH=. .venv/bin/python scripts/critique_pack.py --ids <batch> --strict`.
+Pilot judge sweep ran same day (34 approved items incl. the player-reported boards,
+65 agents, all verified or 1-in-4 sampled): quality proposals **18/20 conexiuni
+demote + 2 revise; contexto 4 demote, 5 revise, 5 keep** — famous-but-low-salience
+controls (Cuza, Sarmale, Transilvania) correctly kept. Verdict archive in the
+session scratchpad (v16 convention); demotions are owner decisions, pack unchanged.
 
 ## Latest — Cald sau Rece playability: scroll + score + leave (2026-07-14)
 
