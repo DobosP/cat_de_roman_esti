@@ -39,6 +39,14 @@ owner — approved content is never auto-demoted.
 - **A6 Freshness.** Not a re-skin of an already-approved item (same mechanic + same
   concepts under a new label). Lint `duplicate_groups` / shared-member counts are the
   signal; the judge decides if the overlap is a re-skin.
+- **A7 Distinctive association.** Any connection the gameplay leans on must be true of
+  X *specifically*, not of the whole country or class. "Sarmale → Moldova" is
+  true-but-generic (sarmale is pan-Romanian; the same claim works for every region) —
+  it makes region guesses rank warm arbitrarily and groups read as fake-regional.
+  Biographic/definitional links (Eminescu → Moldova, Ciorbă rădăuțeană → Bucovina)
+  are distinctive and fine. Lints: `generic_region_link` (item),
+  `nondistinctive_region_link` (KG inventory); judges settle flagged cases with the
+  section-D distinctiveness check.
 
 ## B. Conexiuni boards (4 groups × 4 tiles, labels hidden until solved, 4 mistakes)
 
@@ -118,6 +126,10 @@ A verifier with web access confirms A1/A2/C2 by checking ≥2 independent signal
 5. **Trends**: sustained (multi-year, not one spike) Google Trends RO interest.
 6. **Cross-generational test** ("ar ști-o și mama"): documented presence both pre-2010
    and current. Single-cohort or single-subculture legibility → fails A2 for usor/normal.
+7. **Distinctiveness (A7)**: for a claimed X↔Y association, check whether sources tie X
+   to Y *more than to the rest of Romania* (regional-cuisine overviews, biography,
+   origin). If the same claim would hold for any region/class member, it is generic →
+   the item fails A7.
 
 ## E. Judge-fleet protocol (fleet skill routing)
 
@@ -142,6 +154,8 @@ A verifier with web access confirms A1/A2/C2 by checking ≥2 independent signal
 | `type_coherence` | conexiuni | WARN | 3+1 type outlier or 2+2 type split in a group |
 | `duplicate_groups` | conexiuni | FAIL (new) / WARN (stock) | exact 4-member quad already in an approved board; near-duplicate (3 shared members with an approved quad) always WARN |
 | `salience_floor` | contexto, lant, alchimie | WARN | target/endpoint salience below difficulty band (C6) |
+| `generic_region_link` | conexiuni, contexto | WARN | gameplay leans on a non-distinctive region association (A7): board pairs regions with generically-linked tiles; target is (or is polluted by) a pan-Romanian concept claiming a region |
+| `nondistinctive_region_link` | pack-wide | WARN | KG inventory of A7-suspect edges (≥2-region fan-out, or national-salience concept with a generic `related_to` region edge) — the edge-cleanup queue |
 | `member_overuse` | pack-wide | WARN | node appears in >8 approved conexiuni boards |
 
 FAIL blocks promotion (`--strict` exits 1). WARN routes the item to the judge fleet —

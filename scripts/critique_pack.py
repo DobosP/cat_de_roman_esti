@@ -56,6 +56,13 @@ RED_HERRING_WARN = 2
 RED_HERRING_FAIL = 4
 # Rubric A6: reuse ceiling for one node across approved Conexiuni boards.
 MEMBER_OVERUSE = 8
+# Rubric A7: non-distinctive region association ("true of all Romania").
+REGION_LABELS = frozenset({
+    "Moldova", "Transilvania", "Oltenia", "Muntenia", "Dobrogea",
+    "Banat", "Bucovina", "Maramureș", "Crișana", "Ardeal",
+})
+REGION_FANOUT = 2          # linked to >= this many distinct regions = provably generic
+NATIONAL_SALIENCE = 0.70   # a concept this famous claiming ONE region is suspect
 
 
 # --------------------------------------------------------------------- pure helpers
@@ -72,6 +79,35 @@ def classify_type_mix(types: list[str]) -> str | None:
         return "3+1"
     if len(types) == 4 and counts == [2, 2]:
         return "2+2"
+    return None
+
+
+def classify_generic_region(
+    node_type: str, salience: float, links: list[tuple[str, str, float]]
+) -> str | None:
+    """Rubric A7: why a node's region link(s) look non-distinctive (None = fine).
+
+    ``links`` is [(region_label, relation, strength), ...]. Two provable smells:
+    a node tied to >= REGION_FANOUT distinct regions (Sarmale -> Moldova AND
+    Transilvania: true of all Romania), and a national-salience *concept* claiming
+    one region via a generic ``related_to`` edge (Mămăligă -> Moldova). Biographic
+    or definitional links (person/work/org/place -> region) are left alone —
+    Eminescu -> Moldova is distinctive. Judges settle flagged cases on the web.
+    """
+    if not links:
+        return None
+    regions = sorted({r for r, _, _ in links})
+    if len(regions) >= REGION_FANOUT:
+        return f"linked to {len(regions)} regions ({', '.join(regions)})"
+    if (
+        node_type == "concept"
+        and salience >= NATIONAL_SALIENCE
+        and any(rel == "related_to" for _, rel, _ in links)
+    ):
+        return (
+            f"national-salience concept ({salience:.2f}) with generic "
+            f"related_to edge to {regions[0]}"
+        )
     return None
 
 
@@ -139,16 +175,39 @@ def load_all(pack_path: Path, kg_path: Path):
     svc = WordGameService(graph=load_fixture(kg_path).graph)
 
     strong = defaultdict(dict)  # symmetric strong-edge map (rubric B5)
+    node_by_id = {n["id"]: n for n in kg_raw["kg_nodes"]}
+    region_ids = {
+        nid for nid, n in node_by_id.items()
+        if n.get("node_type") == "place" and n.get("label_ro") in REGION_LABELS
+    }
+    region_links = defaultdict(list)  # non-place node -> [(region_label, rel, s)]
     for e in kg_raw["kg_edges"]:
         if e.get("is_distractor"):
             continue
         s = float(e.get("strength") or 0.0)
+        a, b = e["src_id"], e["dst_id"]
+        for x, y in ((a, b), (b, a)):
+            if y in region_ids and x not in region_ids:
+                xn = node_by_id.get(x, {})
+                if xn.get("node_type") != "place":
+                    region_links[x].append(
+                        (node_by_id[y]["label_ro"], e.get("relation", ""), s)
+                    )
         if s < STRONG_EDGE:
             continue
-        a, b = e["src_id"], e["dst_id"]
         strong[a][b] = max(strong[a].get(b, 0.0), s)
         strong[b][a] = max(strong[b].get(a, 0.0), s)
-    return pack, svc, strong
+
+    generic_nodes = {}  # rubric A7 flags
+    for nid, links in region_links.items():
+        n = node_by_id.get(nid, {})
+        reason = classify_generic_region(
+            n.get("node_type", "?"), float(n.get("salience") or 0.0), links
+        )
+        if reason:
+            generic_nodes[nid] = reason
+    regions = {"region_ids": region_ids, "generic_nodes": generic_nodes}
+    return pack, svc, strong, regions
 
 
 def node_brief(svc: WordGameService, nid: str) -> dict:
@@ -168,6 +227,49 @@ def node_brief(svc: WordGameService, nid: str) -> dict:
 
 
 # --------------------------------------------------------------------- per-item checks
+def check_generic_region(rec: dict, game: str, svc: WordGameService,
+                         strong: dict, regions: dict) -> list[dict]:
+    """Rubric A7 item-level flags: gameplay leaning on a non-distinctive region link."""
+    generic = regions["generic_nodes"]
+    region_ids = regions["region_ids"]
+    findings = []
+    if game == "conexiuni":
+        board = [n for ids in rec["groups"].values() for n in ids]
+        flagged = [n for n in board if n in generic]
+        on_board_regions = [n for n in board if n in region_ids]
+        if flagged and on_board_regions:
+            pairs = ", ".join(
+                f"{node_brief(svc, n)['label']} ({generic[n]})" for n in flagged
+            )
+            findings.append({
+                "check": "generic_region_link", "level": "WARN",
+                "detail": "board pairs region tiles ("
+                          + ", ".join(node_brief(svc, n)["label"] for n in on_board_regions)
+                          + f") with non-distinctive region-linked tiles: {pairs}",
+            })
+    elif game == "contexto":
+        target = rec["target"]
+        if target in generic:
+            findings.append({
+                "check": "generic_region_link", "level": "WARN",
+                "detail": f"target {node_brief(svc, target)['label']}: {generic[target]}"
+                          " — region guesses rank warm without being distinctive",
+            })
+        elif target in region_ids:
+            polluted = [
+                node_brief(svc, b)["label"]
+                for b in strong.get(target, ())
+                if b in generic
+            ]
+            if len(polluted) >= 2:
+                findings.append({
+                    "check": "generic_region_link", "level": "WARN",
+                    "detail": "region target's warm zone carries non-distinctive "
+                              f"national concepts: {', '.join(sorted(polluted))}",
+                })
+    return findings
+
+
 def check_conexiuni(rec: dict, svc: WordGameService, strong: dict,
                     approved_quads: dict[frozenset, list[str]]) -> list[dict]:
     findings = []
@@ -260,12 +362,28 @@ def check_target_salience(rec: dict, svc: WordGameService, *targets: str) -> lis
 
 # --------------------------------------------------------------------- dossiers
 def build_dossier(rec: dict, game: str, svc: WordGameService, strong: dict,
-                  findings: list[dict]) -> dict:
+                  findings: list[dict], regions: dict | None = None) -> dict:
     dossier = {
         "id": rec["id"], "game": game, "category": rec.get("category"),
         "difficulty": rec.get("difficulty"), "status": rec.get("status"),
         "lint_findings": findings,
     }
+    if regions:  # rubric A7 context for judges
+        involved = set()
+        if game == "conexiuni":
+            involved = {n for ids in rec["groups"].values() for n in ids}
+        elif game == "contexto":
+            involved = {rec["target"]}
+        elif game == "lant":
+            involved = {rec["start"], rec["target"]}
+        elif game == "alchimie":
+            involved = {rec["target"], *rec["seeds"]}
+        flags = {
+            node_brief(svc, n)["label"]: regions["generic_nodes"][n]
+            for n in involved if n in regions["generic_nodes"]
+        }
+        if flags:
+            dossier["nondistinctive_region_links"] = flags
     if game == "conexiuni":
         group_labels = rec.get("group_labels") or {}
         member_group = {n: g for g, ids in rec["groups"].items() for n in ids}
@@ -323,7 +441,7 @@ def build_dossier(rec: dict, game: str, svc: WordGameService, strong: dict,
 
 
 # --------------------------------------------------------------------- main
-def run(pack: dict, svc: WordGameService, strong: dict,
+def run(pack: dict, svc: WordGameService, strong: dict, regions: dict,
         games: list[str], statuses: set[str], ids: set[str] | None):
     approved_quads: dict[frozenset, list[str]] = defaultdict(list)
     for rec in pack["conexiuni"]:
@@ -347,6 +465,7 @@ def run(pack: dict, svc: WordGameService, strong: dict,
                 findings = check_target_salience(rec, svc, rec["start"], rec["target"])
             else:  # alchimie
                 findings = check_target_salience(rec, svc, rec["target"])
+            findings.extend(check_generic_region(rec, game, svc, strong, regions))
             selected.append((game, rec, findings))
             if findings:
                 items[rec["id"]] = {
@@ -389,8 +508,14 @@ def main(argv: list[str]) -> int:
     statuses = set((args.status or "approved,pending").split(","))
     ids = set(args.ids.split(",")) if args.ids else None
 
-    pack, svc, strong = load_all(PACKAGE_PACK, PACKAGE_KG)
-    items, pack_findings, selected = run(pack, svc, strong, games, statuses, ids)
+    pack, svc, strong, regions = load_all(PACKAGE_PACK, PACKAGE_KG)
+    items, pack_findings, selected = run(pack, svc, strong, regions, games, statuses, ids)
+    if ids is None:  # pack-level A7 inventory for edge-cleanup batches
+        for nid, reason in sorted(regions["generic_nodes"].items()):
+            pack_findings.append({
+                "check": "nondistinctive_region_link", "level": "WARN",
+                "detail": f"{node_brief(svc, nid)['label']}: {reason}",
+            })
 
     by_check = Counter()
     fails = 0
@@ -415,6 +540,7 @@ def main(argv: list[str]) -> int:
             "salience_floors": SALIENCE_FLOORS, "strong_edge": STRONG_EDGE,
             "mirror_pairs": MIRROR_PAIRS, "red_herring_warn": RED_HERRING_WARN,
             "red_herring_fail": RED_HERRING_FAIL, "member_overuse": MEMBER_OVERUSE,
+            "region_fanout": REGION_FANOUT, "national_salience": NATIONAL_SALIENCE,
         },
         "items": items,
         "pack_findings": pack_findings,
@@ -428,7 +554,7 @@ def main(argv: list[str]) -> int:
         ddir = Path(args.dossier)
         ddir.mkdir(parents=True, exist_ok=True)
         for game, rec, findings in selected:
-            dossier = build_dossier(rec, game, svc, strong, findings)
+            dossier = build_dossier(rec, game, svc, strong, findings, regions)
             (ddir / f"{rec['id']}.json").write_text(
                 json.dumps(dossier, ensure_ascii=False, indent=1) + "\n",
                 encoding="utf-8",

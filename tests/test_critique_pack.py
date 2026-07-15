@@ -10,6 +10,7 @@ import pytest
 _REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_REPO_ROOT / "scripts"))
 
+import apply_demotions  # noqa: E402
 import critique_pack  # noqa: E402
 
 
@@ -87,6 +88,75 @@ def test_salience_floors_cover_every_difficulty_band():
     assert floors["usor"] > floors["normal"] > floors["greu"]
 
 
+def test_generic_region_flags_multi_region_fanout():
+    # The reported failure: Sarmale -> Moldova AND Transilvania (true of all Romania).
+    reason = critique_pack.classify_generic_region(
+        "concept", 0.98,
+        [("Moldova", "related_to", 0.52), ("Transilvania", "related_to", 0.50)],
+    )
+    assert reason and "2 regions" in reason
+
+
+def test_generic_region_flags_national_concept_single_region():
+    # Mămăligă (national staple) claiming Moldova via a generic related_to edge.
+    reason = critique_pack.classify_generic_region(
+        "concept", 0.97, [("Moldova", "related_to", 0.83)]
+    )
+    assert reason and "national-salience" in reason
+
+
+def test_generic_region_leaves_biographic_links_alone():
+    # Eminescu -> Moldova is distinctive (born Botoșani); persons are never flagged
+    # on a single region link.
+    assert critique_pack.classify_generic_region(
+        "person", 0.83, [("Moldova", "related_to", 0.80)]
+    ) is None
+
+
+def test_generic_region_ignores_low_salience_single_region():
+    assert critique_pack.classify_generic_region(
+        "concept", 0.30, [("Bucovina", "related_to", 0.70)]
+    ) is None
+
+
+# --------------------------------------------------------------------- demote path
+def _mini_pack():
+    return {
+        "meta": {"counts": {"conexiuni": 2, "contexto": 1, "lant": 0, "alchimie": 0}},
+        "conexiuni": [
+            {"id": "cx_a", "status": "approved"},
+            {"id": "cx_b", "status": "approved"},
+        ],
+        "contexto": [{"id": "ct_a", "status": "pending"}],
+        "lant": [],
+        "alchimie": [],
+    }
+
+
+def test_apply_demotions_moves_approved_to_pending_only():
+    pack, stats = apply_demotions.apply(_mini_pack(), {"cx_a": "demote"})
+    assert stats["demote"] == 1
+    by_id = {it["id"]: it for game in ("conexiuni", "contexto") for it in pack[game]}
+    assert by_id["cx_a"]["status"] == "pending"  # demoted, never deleted
+    assert by_id["cx_b"]["status"] == "approved"
+
+
+def test_apply_demotions_never_touches_pending_items():
+    # The mirror-image safety of apply_rereview: a stray demote verdict on a pending
+    # item is a no-op, so the two scripts can never fight over the same item.
+    pack, stats = apply_demotions.apply(_mini_pack(), {"ct_a": "demote"})
+    assert stats["demote"] == 0
+    assert pack["contexto"][0]["status"] == "pending"
+
+
+def test_apply_demotions_keep_and_counts():
+    pack, stats = apply_demotions.apply(
+        _mini_pack(), {"cx_a": "keep", "cx_b": "demote"}
+    )
+    assert stats["demote"] == 1 and "unknown_verdict" not in stats
+    assert pack["meta"]["counts"]["conexiuni"] == 2  # totals unchanged by demotion
+
+
 # --------------------------------------------------------------------- integration
 @pytest.fixture(scope="module")
 def loaded():
@@ -94,29 +164,39 @@ def loaded():
 
 
 def test_run_over_real_pack_is_bounded_and_typed(loaded):
-    pack, svc, strong = loaded
+    pack, svc, strong, regions = loaded
     items, pack_findings, selected = critique_pack.run(
-        pack, svc, strong, ["contexto"], {"approved"}, None
+        pack, svc, strong, regions, ["contexto"], {"approved"}, None
     )
     assert len(selected) > 0
     for info in items.values():
         assert info["game"] == "contexto"
         for finding in info["findings"]:
-            assert finding["check"] == "salience_floor"
+            assert finding["check"] in ("salience_floor", "generic_region_link")
             assert finding["level"] == "WARN"
 
 
+def test_sarmale_region_links_flagged_in_real_kg(loaded):
+    _, _, _, regions = loaded
+    pack, svc, strong, _ = loaded
+    flagged_labels = {
+        critique_pack.node_brief(svc, nid)["label"]
+        for nid in regions["generic_nodes"]
+    }
+    assert "Sarmale" in flagged_labels
+
+
 def test_ids_filter_selects_exactly_the_requested_items(loaded):
-    pack, svc, strong = loaded
+    pack, svc, strong, regions = loaded
     target = pack["conexiuni"][0]["id"]
     _, _, selected = critique_pack.run(
-        pack, svc, strong, ["conexiuni"], {"approved", "pending"}, {target}
+        pack, svc, strong, regions, ["conexiuni"], {"approved", "pending"}, {target}
     )
     assert [rec["id"] for _, rec, _ in selected] == [target]
 
 
 def test_duplicate_groups_flags_exact_and_near_duplicates(loaded):
-    pack, svc, strong = loaded
+    pack, svc, strong, _ = loaded
     rec = {**pack["conexiuni"][0], "status": "pending"}
     groups = rec["groups"]
     first_key = sorted(groups)[0]
@@ -135,7 +215,7 @@ def test_duplicate_groups_flags_exact_and_near_duplicates(loaded):
 
 
 def test_null_group_labels_do_not_crash(loaded):
-    pack, svc, strong = loaded
+    pack, svc, strong, _ = loaded
     rec = {**pack["conexiuni"][0], "group_labels": None}
     critique_pack.check_conexiuni(rec, svc, strong, {})
     dossier = critique_pack.build_dossier(rec, "conexiuni", svc, strong, [])
@@ -143,7 +223,7 @@ def test_null_group_labels_do_not_crash(loaded):
 
 
 def test_dossier_carries_judge_context(loaded):
-    pack, svc, strong = loaded
+    pack, svc, strong, _ = loaded
     rec = pack["conexiuni"][0]
     dossier = critique_pack.build_dossier(rec, "conexiuni", svc, strong, [])
     assert dossier["id"] == rec["id"]

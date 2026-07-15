@@ -1,9 +1,31 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-15. Update whenever `main` or the test baseline moves._
-_Last verified: 2026-07-15 (backend 296 after the critique-gate tests below, Ruff, both
-validators, `git diff --check`; frontend untouched — last frontend gate 2026-07-14:
+_Last verified: 2026-07-15 (backend 304 after the A7 filter + demotion batch below, Ruff,
+both validators, `git diff --check`; frontend untouched — last frontend gate 2026-07-14:
 lint/typecheck/test 12/12/build + bundle 115.38 KiB.)_
+
+## Latest — A7 distinctiveness + first owner demotion batch (2026-07-15, ADR-0024)
+
+Owner-reported: region connections that are "true of all Romania" (Sarmale ↔ Moldova
+AND Transilvania in the KG) make region guesses rank warm arbitrarily and regional
+groups read fake. New rubric criterion **A7 Distinctive association** + lints:
+`nondistinctive_region_link` (KG inventory — 16 flagged nodes incl. Sarmale, Mămăligă,
+Țuică, sat, mare; the future edge-cleanup queue) and `generic_region_link` (10 items).
+A7 judge batch (10 items, 18 agents, web-verified): all 5 contexto targets KEEP —
+gameplay does not lean on the generic edge (no region node in their warm zones;
+Ciorbă rădăuțeană→Bucovina confirmed distinctive) — while 4 conexiuni boards that pair
+region tiles with generically-linked dishes → demote, 1 revise. New
+**`scripts/apply_demotions.py`** (owner demote path ADR-0023 left open: approved →
+pending only, never deletes, mirror-image of apply_rereview, atomic validate+rollback).
+First owner-approved batch applied (Paul, in-session 2026-07-15): **20 status flips**
+(18 conexiuni + 2 contexto; cx_film_tv_168 was already pending) = pilot demote class +
+A7-condemned boards. Approved now **conexiuni 209, contexto 192, lant 94, alchimie 77
+(572 total)**; every conexiuni category keeps ≥12 approved, no category×difficulty
+cell emptied, daily-pool floor 8 unaffected. v14 inventory pins updated. The 12
+revise-class items (5 conexiuni incl. cx_geografie_110, 5 contexto, from both judge
+runs) stay served pending revision batches. Backend suite 296 → 304. Landed only —
+the live server keeps serving its current build until the next deploy.
 
 ## Latest — content critique gate (2026-07-15, ADR-0023)
 

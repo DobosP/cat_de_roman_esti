@@ -55,7 +55,7 @@ Read, in this order:
 
 Then:
 - Simulate an average Romanian player (not a specialist). For conexiuni: labels are HIDDEN during play — can the player partition the 16 tiles from the tiles alone, and does each solved group feel earned and consistent? For contexto: would the player ever converge on this target by free association, and does getting warmer feel legible?
-- Walk every rubric criterion; name each violated failure mode exactly (e.g. "B1 Predicate Inconsistency", "C1 Nameable-thing", "B5 mirrored groups").
+- Walk every rubric criterion; name each violated failure mode exactly (e.g. "B1 Predicate Inconsistency", "C1 Nameable-thing", "B5 mirrored groups", "A7 non-distinctive association" — check the dossier's nondistinctive_region_links block).
 - Be hard: "technically valid but no Romanian would enjoy it" is a failing item. The bar is a prime-time-audience puzzle, not a graph exercise.
 - ADR-0019 triggers (adult/profanity/alcohol/insensitive-humor/near-duplicate): ${MODE === 'gate' ? 'propose "keep" and say so — that boundary is the owner\'s.' : 'flag them in your reasoning but still return your honest QUALITY verdict — in sweep mode every verdict is already only an owner proposal; never soften to "keep" out of deference.'}
 - Mode=${MODE}: propose one of ${JSON.stringify(VOCAB)}. ${MODE === 'gate' ? '"promote" only when the item is genuinely good; when in doubt, "keep" (stays pending).' : '"demote" = should leave the served pool; "revise" = good bones, one group/target swap fixes it; "keep" = genuinely fine.'}
