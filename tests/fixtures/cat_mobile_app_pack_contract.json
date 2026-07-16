@@ -4,12 +4,12 @@
     "app": "cat_de_roman_esti",
     "schema_version": 1,
     "manifest_version": 1,
-    "build_version": "fixture-v6-enriched",
+    "build_version": "fixture-v5-pop",
     "generated_at": "2026-06-21T00:00:00Z",
-    "content_hash": "sha256:0ec9fafc96fe71714cc11188569779233d61dbb00d4d147e9f230612aa248a0a",
+    "content_hash": "sha256:0fceb63242b36edc2c552b2cebe392ac0a38700808a45154638e6c4934aff6e8",
     "counts": {
-      "nodes": 2012,
-      "edges": 8178,
+      "nodes": 2034,
+      "edges": 8256,
       "puzzles": 180
     }
   },
@@ -5389,6 +5389,94 @@
     {
       "id": "n_v21via_reabilitare_termica",
       "label_ro": "Reabilitarea termică a blocului"
+    },
+    {
+      "id": "n_v23lit_capra_cu_trei_iezi",
+      "label_ro": "Capra cu trei iezi"
+    },
+    {
+      "id": "n_v23lit_fat_frumos",
+      "label_ro": "Făt-Frumos"
+    },
+    {
+      "id": "n_v23lit_greuceanu",
+      "label_ro": "Greuceanu"
+    },
+    {
+      "id": "n_v23lit_ileana_cosanzeana",
+      "label_ro": "Ileana Cosânzeana"
+    },
+    {
+      "id": "n_v23lit_povestea_porcului",
+      "label_ro": "Povestea porcului"
+    },
+    {
+      "id": "n_v23lit_praslea_cel_voinic",
+      "label_ro": "Prâslea cel voinic și merele de aur"
+    },
+    {
+      "id": "n_v23lit_punguta_cu_doi_bani",
+      "label_ro": "Punguța cu doi bani"
+    },
+    {
+      "id": "n_v23lit_tinerete_fara_batranete",
+      "label_ro": "Tinerețe fără bătrânețe și viață fără de moarte"
+    },
+    {
+      "id": "n_v23lit_ursul_pacalit_de_vulpe",
+      "label_ro": "Ursul păcălit de vulpe"
+    },
+    {
+      "id": "n_v23lit_zmeul",
+      "label_ro": "Zmeul"
+    },
+    {
+      "id": "n_v23via_abecedar",
+      "label_ro": "Abecedar"
+    },
+    {
+      "id": "n_v23via_elasticul",
+      "label_ro": "Elasticul"
+    },
+    {
+      "id": "n_v23via_ghiozdan",
+      "label_ro": "Ghiozdan"
+    },
+    {
+      "id": "n_v23via_moara_joc",
+      "label_ro": "Moară (joc)"
+    },
+    {
+      "id": "n_v23via_nu_te_supara_frate",
+      "label_ro": "Nu te supăra, frate!"
+    },
+    {
+      "id": "n_v23via_pacalicii",
+      "label_ro": "Păcălici"
+    },
+    {
+      "id": "n_v23via_penar",
+      "label_ro": "Penar"
+    },
+    {
+      "id": "n_v23via_piticot",
+      "label_ro": "Piticot"
+    },
+    {
+      "id": "n_v23via_ratele_si_vinatorii",
+      "label_ro": "Rațele și vânătorii"
+    },
+    {
+      "id": "n_v23via_tabla_scolara",
+      "label_ro": "Tablă școlară"
+    },
+    {
+      "id": "n_v23via_tara_tara_vrem_ostasi",
+      "label_ro": "Țară, țară, vrem ostași!"
+    },
+    {
+      "id": "n_v23via_telefonul_fara_fir",
+      "label_ro": "Telefonul fără fir"
     },
     {
       "id": "n_v2art_arhitectura",
@@ -46820,9 +46908,89 @@
       "dst_id": "n_v17via_grup_whatsapp_parinti"
     },
     {
+      "id": "de7514",
+      "src_id": "n_v23lit_capra_cu_trei_iezi",
+      "dst_id": "n_v23lit_punguta_cu_doi_bani"
+    },
+    {
+      "id": "de7515",
+      "src_id": "n_v23lit_punguta_cu_doi_bani",
+      "dst_id": "n_v23lit_ursul_pacalit_de_vulpe"
+    },
+    {
+      "id": "de7516",
+      "src_id": "n_v23lit_ursul_pacalit_de_vulpe",
+      "dst_id": "n_v23lit_povestea_porcului"
+    },
+    {
+      "id": "de7517",
+      "src_id": "n_v23lit_povestea_porcului",
+      "dst_id": "n_v23lit_capra_cu_trei_iezi"
+    },
+    {
+      "id": "de7518",
+      "src_id": "n_v23lit_capra_cu_trei_iezi",
+      "dst_id": "n_ion_creanga"
+    },
+    {
+      "id": "de7519",
+      "src_id": "n_v23lit_capra_cu_trei_iezi",
+      "dst_id": "n_v3lit_poveste"
+    },
+    {
       "id": "de752",
       "src_id": "n_net_internet_romanesc",
       "dst_id": "n_net_umor_autoironic"
+    },
+    {
+      "id": "de7520",
+      "src_id": "n_v23lit_capra_cu_trei_iezi",
+      "dst_id": "n_v3lit_carte"
+    },
+    {
+      "id": "de7521",
+      "src_id": "n_v23lit_capra_cu_trei_iezi",
+      "dst_id": "n_v4soc_copil"
+    },
+    {
+      "id": "de7522",
+      "src_id": "n_v23lit_punguta_cu_doi_bani",
+      "dst_id": "n_ion_creanga"
+    },
+    {
+      "id": "de7523",
+      "src_id": "n_v23lit_punguta_cu_doi_bani",
+      "dst_id": "n_v3lit_poveste"
+    },
+    {
+      "id": "de7524",
+      "src_id": "n_v23lit_punguta_cu_doi_bani",
+      "dst_id": "n_v3lit_carte"
+    },
+    {
+      "id": "de7525",
+      "src_id": "n_v23lit_punguta_cu_doi_bani",
+      "dst_id": "n_v4soc_copil"
+    },
+    {
+      "id": "de7526",
+      "src_id": "n_v23lit_ursul_pacalit_de_vulpe",
+      "dst_id": "n_ion_creanga"
+    },
+    {
+      "id": "de7527",
+      "src_id": "n_v23lit_ursul_pacalit_de_vulpe",
+      "dst_id": "n_v3lit_poveste"
+    },
+    {
+      "id": "de7528",
+      "src_id": "n_v23lit_ursul_pacalit_de_vulpe",
+      "dst_id": "n_v3lit_carte"
+    },
+    {
+      "id": "de7529",
+      "src_id": "n_v23lit_ursul_pacalit_de_vulpe",
+      "dst_id": "n_v4soc_copil"
     },
     {
       "id": "de753",
@@ -46830,9 +46998,109 @@
       "dst_id": "n_limba_romana"
     },
     {
+      "id": "de7530",
+      "src_id": "n_v23lit_povestea_porcului",
+      "dst_id": "n_ion_creanga"
+    },
+    {
+      "id": "de7531",
+      "src_id": "n_v23lit_povestea_porcului",
+      "dst_id": "n_v3lit_poveste"
+    },
+    {
+      "id": "de7532",
+      "src_id": "n_v23lit_povestea_porcului",
+      "dst_id": "n_v3lit_carte"
+    },
+    {
+      "id": "de7533",
+      "src_id": "n_v23lit_povestea_porcului",
+      "dst_id": "n_v4soc_copil"
+    },
+    {
+      "id": "de7534",
+      "src_id": "n_v23lit_praslea_cel_voinic",
+      "dst_id": "n_v17lit_petre_ispirescu"
+    },
+    {
+      "id": "de7535",
+      "src_id": "n_v23lit_praslea_cel_voinic",
+      "dst_id": "n_v4art_basm"
+    },
+    {
+      "id": "de7536",
+      "src_id": "n_v23lit_praslea_cel_voinic",
+      "dst_id": "n_v3lit_carte"
+    },
+    {
+      "id": "de7537",
+      "src_id": "n_v23lit_praslea_cel_voinic",
+      "dst_id": "n_v4soc_copil"
+    },
+    {
+      "id": "de7538",
+      "src_id": "n_v23lit_tinerete_fara_batranete",
+      "dst_id": "n_v17lit_petre_ispirescu"
+    },
+    {
+      "id": "de7539",
+      "src_id": "n_v23lit_tinerete_fara_batranete",
+      "dst_id": "n_v4art_basm"
+    },
+    {
       "id": "de754",
       "src_id": "n_net_internet_romanesc",
       "dst_id": "n_romania_stat"
+    },
+    {
+      "id": "de7540",
+      "src_id": "n_v23lit_tinerete_fara_batranete",
+      "dst_id": "n_v3lit_carte"
+    },
+    {
+      "id": "de7541",
+      "src_id": "n_v23lit_greuceanu",
+      "dst_id": "n_v17lit_petre_ispirescu"
+    },
+    {
+      "id": "de7542",
+      "src_id": "n_v23lit_greuceanu",
+      "dst_id": "n_v4art_basm"
+    },
+    {
+      "id": "de7543",
+      "src_id": "n_v23lit_greuceanu",
+      "dst_id": "n_v3lit_carte"
+    },
+    {
+      "id": "de7544",
+      "src_id": "n_v23lit_fat_frumos",
+      "dst_id": "n_v4art_basm"
+    },
+    {
+      "id": "de7545",
+      "src_id": "n_v23lit_fat_frumos",
+      "dst_id": "n_v3lit_poveste"
+    },
+    {
+      "id": "de7546",
+      "src_id": "n_v23lit_ileana_cosanzeana",
+      "dst_id": "n_v4art_basm"
+    },
+    {
+      "id": "de7547",
+      "src_id": "n_v23lit_ileana_cosanzeana",
+      "dst_id": "n_v23lit_fat_frumos"
+    },
+    {
+      "id": "de7548",
+      "src_id": "n_v23lit_zmeul",
+      "dst_id": "n_v4art_basm"
+    },
+    {
+      "id": "de7549",
+      "src_id": "n_v23lit_zmeul",
+      "dst_id": "n_v23lit_fat_frumos"
     },
     {
       "id": "de755",
@@ -46840,9 +47108,109 @@
       "dst_id": "n_net_fenomen_viral"
     },
     {
+      "id": "de7550",
+      "src_id": "n_v23lit_zmeul",
+      "dst_id": "n_v23lit_greuceanu"
+    },
+    {
+      "id": "de7551",
+      "src_id": "n_v23lit_zmeul",
+      "dst_id": "n_v23lit_praslea_cel_voinic"
+    },
+    {
+      "id": "de7552",
+      "src_id": "n_v23lit_zmeul",
+      "dst_id": "n_v23lit_ileana_cosanzeana"
+    },
+    {
+      "id": "de7553",
+      "src_id": "n_v23lit_tinerete_fara_batranete",
+      "dst_id": "n_v23lit_fat_frumos"
+    },
+    {
+      "id": "de7554",
+      "src_id": "n_v23via_elasticul",
+      "dst_id": "n_v23via_tara_tara_vrem_ostasi"
+    },
+    {
+      "id": "de7555",
+      "src_id": "n_v23via_tara_tara_vrem_ostasi",
+      "dst_id": "n_v23via_ratele_si_vinatorii"
+    },
+    {
+      "id": "de7556",
+      "src_id": "n_v23via_ratele_si_vinatorii",
+      "dst_id": "n_vdr_sotron"
+    },
+    {
+      "id": "de7557",
+      "src_id": "n_vdr_sotron",
+      "dst_id": "n_v23via_elasticul"
+    },
+    {
+      "id": "de7558",
+      "src_id": "n_v23via_nu_te_supara_frate",
+      "dst_id": "n_v23via_piticot"
+    },
+    {
+      "id": "de7559",
+      "src_id": "n_v23via_piticot",
+      "dst_id": "n_v23via_moara_joc"
+    },
+    {
       "id": "de756",
       "src_id": "n_net_meme_romanesc",
       "dst_id": "n_net_umor_autoironic"
+    },
+    {
+      "id": "de7560",
+      "src_id": "n_v23via_moara_joc",
+      "dst_id": "n_v23via_pacalicii"
+    },
+    {
+      "id": "de7561",
+      "src_id": "n_v23via_pacalicii",
+      "dst_id": "n_v23via_nu_te_supara_frate"
+    },
+    {
+      "id": "de7562",
+      "src_id": "n_v23via_abecedar",
+      "dst_id": "n_v23via_ghiozdan"
+    },
+    {
+      "id": "de7563",
+      "src_id": "n_v23via_ghiozdan",
+      "dst_id": "n_v23via_penar"
+    },
+    {
+      "id": "de7564",
+      "src_id": "n_v23via_penar",
+      "dst_id": "n_v23via_tabla_scolara"
+    },
+    {
+      "id": "de7565",
+      "src_id": "n_v23via_tabla_scolara",
+      "dst_id": "n_v23via_abecedar"
+    },
+    {
+      "id": "de7566",
+      "src_id": "n_v23via_elasticul",
+      "dst_id": "n_v2via_jocuri_copilarie"
+    },
+    {
+      "id": "de7567",
+      "src_id": "n_v23via_tara_tara_vrem_ostasi",
+      "dst_id": "n_v2via_jocuri_copilarie"
+    },
+    {
+      "id": "de7568",
+      "src_id": "n_v23via_ratele_si_vinatorii",
+      "dst_id": "n_v2via_jocuri_copilarie"
+    },
+    {
+      "id": "de7569",
+      "src_id": "n_v23via_nu_te_supara_frate",
+      "dst_id": "n_v4soc_copil"
     },
     {
       "id": "de757",
@@ -46850,14 +47218,124 @@
       "dst_id": "n_net_parodie_online"
     },
     {
+      "id": "de7570",
+      "src_id": "n_v23via_piticot",
+      "dst_id": "n_v4soc_copil"
+    },
+    {
+      "id": "de7571",
+      "src_id": "n_v23via_moara_joc",
+      "dst_id": "n_v4soc_copil"
+    },
+    {
+      "id": "de7572",
+      "src_id": "n_v23via_pacalicii",
+      "dst_id": "n_v4soc_copil"
+    },
+    {
+      "id": "de7573",
+      "src_id": "n_v23via_telefonul_fara_fir",
+      "dst_id": "n_v2via_jocuri_copilarie"
+    },
+    {
+      "id": "de7574",
+      "src_id": "n_v23via_telefonul_fara_fir",
+      "dst_id": "n_v4soc_copil"
+    },
+    {
+      "id": "de7575",
+      "src_id": "n_v23via_abecedar",
+      "dst_id": "n_v3soc_scoala"
+    },
+    {
+      "id": "de7576",
+      "src_id": "n_v23via_abecedar",
+      "dst_id": "n_v3lit_carte"
+    },
+    {
+      "id": "de7577",
+      "src_id": "n_v23via_abecedar",
+      "dst_id": "n_v4soc_copil"
+    },
+    {
+      "id": "de7578",
+      "src_id": "n_v23via_ghiozdan",
+      "dst_id": "n_v3soc_scoala"
+    },
+    {
+      "id": "de7579",
+      "src_id": "n_v23via_ghiozdan",
+      "dst_id": "n_v3lit_carte"
+    },
+    {
       "id": "de758",
       "src_id": "n_net_meme_romanesc",
       "dst_id": "n_net_sketch_online"
     },
     {
+      "id": "de7580",
+      "src_id": "n_v23via_ghiozdan",
+      "dst_id": "n_v4soc_copil"
+    },
+    {
+      "id": "de7581",
+      "src_id": "n_v23via_penar",
+      "dst_id": "n_v3soc_scoala"
+    },
+    {
+      "id": "de7582",
+      "src_id": "n_v23via_penar",
+      "dst_id": "n_v3lit_carte"
+    },
+    {
+      "id": "de7583",
+      "src_id": "n_v23via_penar",
+      "dst_id": "n_v4soc_copil"
+    },
+    {
+      "id": "de7584",
+      "src_id": "n_v23via_tabla_scolara",
+      "dst_id": "n_v3soc_scoala"
+    },
+    {
+      "id": "de7585",
+      "src_id": "n_v23via_tabla_scolara",
+      "dst_id": "n_v3lit_carte"
+    },
+    {
+      "id": "de7586",
+      "src_id": "n_v23via_tabla_scolara",
+      "dst_id": "n_v4soc_copil"
+    },
+    {
+      "id": "de7587",
+      "src_id": "n_v23via_nu_te_supara_frate",
+      "dst_id": "n_vdr_copilaria_anilor_90"
+    },
+    {
+      "id": "de7588",
+      "src_id": "n_v23via_piticot",
+      "dst_id": "n_vdr_copilaria_anilor_90"
+    },
+    {
+      "id": "de7589",
+      "src_id": "n_v23via_moara_joc",
+      "dst_id": "n_vdr_copilaria_anilor_90"
+    },
+    {
       "id": "de759",
       "src_id": "n_net_meme_romanesc",
       "dst_id": "n_net_dorel"
+    },
+    {
+      "id": "de7590",
+      "src_id": "n_v23via_pacalicii",
+      "dst_id": "n_vdr_copilaria_anilor_90"
+    },
+    {
+      "id": "de7591",
+      "src_id": "n_v23via_telefonul_fara_fir",
+      "dst_id": "n_vdr_copilaria_anilor_90"
     },
     {
       "id": "de76",
@@ -49426,38 +49904,38 @@
     },
     {
       "id": "pz_literatura_hard_1",
+      "start_id": "n_v23lit_fat_frumos",
+      "target_id": "n_v2lit_poezie_lirica",
+      "difficulty": "hard"
+    },
+    {
+      "id": "pz_literatura_hard_2",
       "start_id": "n_v3lit_carte",
       "target_id": "n_v4lit_piesa",
       "difficulty": "hard"
     },
     {
-      "id": "pz_literatura_hard_2",
-      "start_id": "n_v21lit_o_noapte_furtunoasa",
-      "target_id": "n_v3lit_carte",
-      "difficulty": "hard"
-    },
-    {
       "id": "pz_literatura_hard_3",
-      "start_id": "n_v20lit_delavrancea",
-      "target_id": "n_v3lit_carte",
+      "start_id": "n_v23lit_zmeul",
+      "target_id": "n_v3lit_scriitor",
       "difficulty": "hard"
     },
     {
       "id": "pz_literatura_hard_4",
-      "start_id": "n_v4lit_mesaj",
-      "target_id": "n_v4lit_piesa",
+      "start_id": "n_v23lit_zmeul",
+      "target_id": "n_v2lit_poezie_lirica",
       "difficulty": "hard"
     },
     {
       "id": "pz_literatura_hard_5",
-      "start_id": "n_v2lit_personaj_literar",
-      "target_id": "n_v3lit_vers",
+      "start_id": "n_v23lit_ileana_cosanzeana",
+      "target_id": "n_v2lit_roman_literar",
       "difficulty": "hard"
     },
     {
       "id": "pz_literatura_hard_6",
-      "start_id": "n_v4lit_piesa",
-      "target_id": "n_v4lit_titlu",
+      "start_id": "n_v23lit_ileana_cosanzeana",
+      "target_id": "n_v3lit_scriitor",
       "difficulty": "hard"
     },
     {

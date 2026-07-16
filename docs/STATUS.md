@@ -1,9 +1,9 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-16. This file is the repository's current source of truth._
-_Last verified: 2026-07-16 (backend 321; targeted Contexto/session 52; Ruff; both
-validators; workflow syntax; frontend lint/typecheck/26 tests/build; bundle 115.38 KiB;
-`git diff --check`.)_
+_Last verified: 2026-07-16 (backend 324; session-store 11; exact v23 critique 7;
+Ruff; both validators; workflow syntax; frontend lint/typecheck/26 tests/build;
+bundle 115.38 KiB; `git diff --check`.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -33,11 +33,13 @@ Cald sau Rece renders target-filtered typo suggestions as fill-only buttons and 
 accepted correction messages, including wins. All three remain server-authoritative;
 score, secrecy, TTL, and the 1,000-session caps are unchanged.
 
-## Current outcome — v22 web-grounded authoring session
+## Current outcome — v23 critique-informed childhood wave (ADR-0030)
 
-The external session still holds **12 candidate nodes, 53 candidate edges, and one 16-tile
-Conexiuni board**. Nothing is imported or approved pending factual review and both judges;
-one earlier group was rejected as a near-duplicate of `cx_arta_cultura_242`.
+A new batch adds **22 nodes, 78 edges, and seven pending game items**: one Conexiuni,
+two Contexto, two Lanț, and two Alchimie. Familiar childhood games, school objects,
+Creangă/Ispirescu stories, and fairy-tale archetypes avoid saturated celebrity/tourism
+quads. Exact-ID deterministic critique is clean (zero WARN/FAIL); nothing is served
+until the bound analyst plus adversarial-verifier gate reviews the final dossiers.
 
 ## Product and deployment
 
@@ -52,13 +54,13 @@ remain staging-only: scores are client-authored and visibility needs opt-in by d
 
 | Game | Total | Approved | Pending | Runtime source |
 |---|---:|---:|---:|---|
-| Conexiuni | 283 | 209 | 74 | curated first; mixed-board miner fallback |
-| Cald sau Rece | 197 | 192 | 5 | curated first; category miner fallback |
-| Lanțul Cuvintelor | 191 | 94 | 97 | curated first; branch-aware miner fallback |
-| Alchimie | 90 | 77 | 13 | curated first; category closure fallback |
+| Conexiuni | 284 | 209 | 75 | curated first; mixed-board miner fallback |
+| Cald sau Rece | 199 | 192 | 7 | curated first; category miner fallback |
+| Lanțul Cuvintelor | 193 | 94 | 99 | curated first; branch-aware miner fallback |
+| Alchimie | 92 | 77 | 15 | curated first; category closure fallback |
 
-Pack: **761 items = 572 approved + 189 pending**, across 14 categories.
-Bundled KG: **2,012 nodes / 8,178 edges / 6,564 aliases / 180 legacy puzzles**.
+Pack: **768 items = 572 approved + 196 pending**, across 14 categories.
+Bundled KG: **2,034 nodes / 8,256 edges / 6,589 aliases / 180 legacy puzzles**.
 Both fixture copies and both pack copies are byte-identical and validator-green.
 
 ## Runtime contracts and safety
@@ -90,8 +92,8 @@ session-store target remains `tests/test_wordgames_session_store.py` (11 tests).
 ## Next verified work
 
 - Playtest Lanț recovery: measure invalid moves, hint reuse, undo, and abandonment.
-- Adversarially review v22 facts/edges, import into a disposable copy, then run exact-ID
-  strict critique and version-2 gate artifacts before any promotion.
+- Review the external v22 batch, and run the bound judge gate over the seven exact v23
+  pending IDs; keep both Alchimie closure-size profiles under adversarial review.
 - Work the approved-stock critique/A7 queues; generic regional KG edges remain a cleanup
   inventory, while owner demotions stay explicit proposals.
 - Deploy the landed v17+ content and critique improvements when the owner opens a deploy.

@@ -3,16 +3,16 @@
   "pack_version": 1,
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
   "counts": {
-   "conexiuni": 283,
-   "contexto": 197,
-   "lant": 191,
-   "alchimie": 90
+   "conexiuni": 284,
+   "contexto": 199,
+   "lant": 193,
+   "alchimie": 92
   },
   "id_high_water": {
-   "conexiuni": 290,
-   "contexto": 297,
-   "lant": 209,
-   "alchimie": 96
+   "conexiuni": 291,
+   "contexto": 299,
+   "lant": 211,
+   "alchimie": 98
   }
  },
  "conexiuni": [
@@ -16146,6 +16146,63 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_v23via_elasticul",
+     "n_v23via_tara_tara_vrem_ostasi",
+     "n_v23via_ratele_si_vinatorii",
+     "n_vdr_sotron"
+    ],
+    "g2": [
+     "n_v23via_nu_te_supara_frate",
+     "n_v23via_piticot",
+     "n_v23via_moara_joc",
+     "n_v23via_pacalicii"
+    ],
+    "g3": [
+     "n_v23via_abecedar",
+     "n_v23via_ghiozdan",
+     "n_v23via_penar",
+     "n_v23via_tabla_scolara"
+    ],
+    "g4": [
+     "n_v23lit_capra_cu_trei_iezi",
+     "n_v23lit_punguta_cu_doi_bani",
+     "n_v23lit_ursul_pacalit_de_vulpe",
+     "n_v23lit_povestea_porcului"
+    ]
+   },
+   "group_labels": {
+    "g1": "Jocuri de mișcare în aer liber",
+    "g2": "Jocuri clasice de masă",
+    "g3": "Obiecte întâlnite la școală",
+    "g4": "Povești scrise de Ion Creangă"
+   },
+   "order": [
+    "n_v23via_penar",
+    "n_v23via_tabla_scolara",
+    "n_v23lit_povestea_porcului",
+    "n_v23lit_punguta_cu_doi_bani",
+    "n_v23lit_capra_cu_trei_iezi",
+    "n_v23via_moara_joc",
+    "n_v23via_abecedar",
+    "n_v23lit_ursul_pacalit_de_vulpe",
+    "n_vdr_sotron",
+    "n_v23via_pacalicii",
+    "n_v23via_ratele_si_vinatorii",
+    "n_v23via_tara_tara_vrem_ostasi",
+    "n_v23via_elasticul",
+    "n_v23via_piticot",
+    "n_v23via_nu_te_supara_frate",
+    "n_v23via_ghiozdan"
+   ],
+   "id": "cx_viata_de_roman_291",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "pending"
   }
  ],
  "contexto": [
@@ -16900,6 +16957,14 @@
    "category": "literatura",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "target": "n_v23lit_capra_cu_trei_iezi",
+   "id": "ct_literatura_298",
+   "category": "literatura",
+   "source": "ai",
+   "status": "pending"
   },
   {
    "difficulty": "usor",
@@ -17724,6 +17789,14 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "target": "n_v23via_abecedar",
+   "id": "ct_viata_de_roman_299",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "pending"
   }
  ],
  "lant": [
@@ -18689,6 +18762,16 @@
   },
   {
    "difficulty": "usor",
+   "start": "n_v23via_abecedar",
+   "target": "n_v23lit_praslea_cel_voinic",
+   "optimal": 2,
+   "id": "lt_literatura_210",
+   "category": "literatura",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "usor",
    "start": "n_net_bunica_mircea_bravo",
    "target": "n_net_robotzi",
    "optimal": 2,
@@ -19636,6 +19719,16 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "start": "n_v23via_ghiozdan",
+   "target": "n_v23lit_capra_cu_trei_iezi",
+   "optimal": 2,
+   "id": "lt_viata_de_roman_211",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "pending"
   }
  ],
  "alchimie": [
@@ -20426,6 +20519,23 @@
    "status": "approved"
   },
   {
+   "difficulty": "normal",
+   "seeds": [
+    "n_v23lit_praslea_cel_voinic",
+    "n_v23lit_tinerete_fara_batranete",
+    "n_v23lit_greuceanu",
+    "n_v23lit_capra_cu_trei_iezi",
+    "n_v23lit_punguta_cu_doi_bani",
+    "n_v23lit_ursul_pacalit_de_vulpe"
+   ],
+   "target": "n_v23lit_fat_frumos",
+   "target_depth": 2,
+   "id": "al_literatura_097",
+   "category": "literatura",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
    "difficulty": "usor",
    "seeds": [
     "n_v3mem_repost",
@@ -21170,6 +21280,23 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "seeds": [
+    "n_v23via_elasticul",
+    "n_v23via_tara_tara_vrem_ostasi",
+    "n_v23via_ratele_si_vinatorii",
+    "n_vdr_sotron",
+    "n_v23via_nu_te_supara_frate",
+    "n_v23via_piticot"
+   ],
+   "target": "n_v23via_telefonul_fara_fir",
+   "target_depth": 3,
+   "id": "al_viata_de_roman_098",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "pending"
   }
  ]
 }

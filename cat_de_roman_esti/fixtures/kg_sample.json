@@ -1,11 +1,11 @@
 {
   "meta": {
-    "build_version": "fixture-v6-enriched",
+    "build_version": "fixture-v5-pop",
     "generated_at": "2026-06-21T00:00:00Z",
-    "note": "v6: alias + play-density enrichment (ADR-0012) — exact alias surface forms on most nodes, guess-vocabulary hub concepts, and intuitive edges lifting low-degree nodes, so Cald sau Rece and Lantul Cuvintelor stay responsive; kg_puzzles regenerated on the enriched graph.",
+    "note": "v5: pop-culture + serious curated-content batch (ADR-0011) — AI-generated, fact/quality-verified subgraph merged on the v4 dense graph; kg_puzzles regenerated on the merged graph via the validator-mirroring BFS builder.",
     "counts": {
-      "nodes": 2012,
-      "edges": 8178,
+      "nodes": 2034,
+      "edges": 8256,
       "puzzles": 180,
       "by_category": {
         "arta_cultura": 128,
@@ -14,14 +14,14 @@
         "geografie": 146,
         "istorie": 148,
         "limba": 141,
-        "literatura": 133,
+        "literatura": 143,
         "meme_net": 158,
         "muzica": 146,
         "personalitati": 129,
         "societate": 139,
         "sport": 160,
         "stiinta": 137,
-        "viata_de_roman": 136
+        "viata_de_roman": 148
       },
       "puzzles_by_cat_diff": {
         "arta_cultura/easy": 6,
@@ -561,7 +561,7 @@
       "description": "Scriitor roman, autor al Amintirilor din copilarie.",
       "salience": 0.5583,
       "difficulty_tier": "medium",
-      "degree": 15,
+      "degree": 19,
       "aliases": [
         "Creangă",
         "Ion Creangă povestitorul",
@@ -10105,7 +10105,7 @@
       "description": "Nostalgia copiilor crescuți între cheia de la gât, jocuri la bloc și dulciuri de chioșc.",
       "salience": 0.9688,
       "difficulty_tier": "easy",
-      "degree": 20,
+      "degree": 25,
       "aliases": [
         "copilărie în anii 90",
         "copilăria nouăzecistă",
@@ -10221,7 +10221,7 @@
       "description": "Joc de copii desenat cu cretă pe asfalt, cu pătrate sărite într-un picior.",
       "salience": 0.3802,
       "difficulty_tier": "medium",
-      "degree": 5,
+      "degree": 7,
       "aliases": [
         "șotron",
         "jocul șotron",
@@ -13336,7 +13336,7 @@
       "description": "Jocuri simple practicate de copii în curte, la școală sau între blocuri.",
       "salience": 0.8935,
       "difficulty_tier": "easy",
-      "degree": 11,
+      "degree": 15,
       "aliases": [
         "jocuri din copilărie",
         "jocuri de copii",
@@ -14400,7 +14400,7 @@
       "description": "Obiect tipărit sau digital care conține un text literar ori informativ.",
       "salience": 0.973,
       "difficulty_tier": "easy",
-      "degree": 17,
+      "degree": 28,
       "aliases": [
         "cartea",
         "cărți",
@@ -14460,7 +14460,7 @@
       "description": "Narațiune cu întâmplări și personaje.",
       "salience": 0.4659,
       "difficulty_tier": "medium",
-      "degree": 6,
+      "degree": 11,
       "aliases": [
         "povestea",
         "povești",
@@ -15027,7 +15027,7 @@
       "description": "Instituție de învățământ pentru educația copiilor și tinerilor.",
       "salience": 0.9181,
       "difficulty_tier": "easy",
-      "degree": 19,
+      "degree": 23,
       "aliases": [
         "școli",
         "școlile",
@@ -15653,7 +15653,7 @@
       "description": "Narațiune populară cu întâmplări fantastice și personaje imaginare.",
       "salience": 0.8928,
       "difficulty_tier": "easy",
-      "degree": 10,
+      "degree": 16,
       "aliases": [
         "basmul",
         "basme",
@@ -19296,7 +19296,7 @@
       "description": "Persoană aflată la vârsta copilăriei sau fiu ori fiică.",
       "salience": 0.909,
       "difficulty_tier": "easy",
-      "degree": 8,
+      "degree": 22,
       "aliases": [
         "copilul",
         "copii",
@@ -23278,7 +23278,7 @@
       "description": "Tipograf și folclorist bucureștean, cel mai important culegător de basme populare românești. Volumul său Legende sau basmele românilor include Tinerețe fără bătrânețe și viață fără de moarte.",
       "salience": 0.38,
       "difficulty_tier": "medium",
-      "degree": 4,
+      "degree": 7,
       "aliases": [
         "Ispirescu",
         "P. Ispirescu",
@@ -30749,6 +30749,292 @@
         "afterschool",
         "after-ul",
         "școala de după școală"
+      ]
+    },
+    {
+      "id": "n_v23lit_capra_cu_trei_iezi",
+      "node_type": "work",
+      "label_ro": "Capra cu trei iezi",
+      "category": "literatura",
+      "description": "Poveste publicată de Ion Creangă în 1875, despre o capră, cei trei iezi ai ei și lupul care încearcă să intre în casă.",
+      "salience": 0.92,
+      "difficulty_tier": "easy",
+      "degree": 6,
+      "aliases": [
+        "capra cu 3 iezi"
+      ]
+    },
+    {
+      "id": "n_v23lit_punguta_cu_doi_bani",
+      "node_type": "work",
+      "label_ro": "Punguța cu doi bani",
+      "category": "literatura",
+      "description": "Poveste de Ion Creangă despre cocoșul moșneagului, care pornește să-și recupereze punguța cu doi bani.",
+      "salience": 0.88,
+      "difficulty_tier": "easy",
+      "degree": 6
+    },
+    {
+      "id": "n_v23lit_ursul_pacalit_de_vulpe",
+      "node_type": "work",
+      "label_ro": "Ursul păcălit de vulpe",
+      "category": "literatura",
+      "description": "Poveste de Ion Creangă în care vulpea îl păcălește pe urs să încerce să prindă pește cu coada.",
+      "salience": 0.86,
+      "difficulty_tier": "easy",
+      "degree": 6
+    },
+    {
+      "id": "n_v23lit_povestea_porcului",
+      "node_type": "work",
+      "label_ro": "Povestea porcului",
+      "category": "literatura",
+      "description": "Basm cult de Ion Creangă despre un fiu fermecat cu înfățișare de porc și drumul soției sale pentru a-l regăsi.",
+      "salience": 0.62,
+      "difficulty_tier": "medium",
+      "degree": 6,
+      "aliases": [
+        "povestea porcului de Creangă"
+      ]
+    },
+    {
+      "id": "n_v23lit_praslea_cel_voinic",
+      "node_type": "work",
+      "label_ro": "Prâslea cel voinic și merele de aur",
+      "category": "literatura",
+      "description": "Basm popular cules de Petre Ispirescu, în care fiul cel mic al împăratului urmărește hoții merelor de aur.",
+      "salience": 0.82,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "Prâslea cel voinic"
+      ]
+    },
+    {
+      "id": "n_v23lit_tinerete_fara_batranete",
+      "node_type": "work",
+      "label_ro": "Tinerețe fără bătrânețe și viață fără de moarte",
+      "category": "literatura",
+      "description": "Basm popular cules de Petre Ispirescu despre un prinț care pornește în căutarea tinereții veșnice.",
+      "salience": 0.82,
+      "difficulty_tier": "easy",
+      "degree": 4,
+      "aliases": [
+        "Tinerețe fără bătrânețe"
+      ]
+    },
+    {
+      "id": "n_v23lit_greuceanu",
+      "node_type": "work",
+      "label_ro": "Greuceanu",
+      "category": "literatura",
+      "description": "Basm popular cules de Petre Ispirescu despre eroul care înfruntă zmeii și readuce soarele și luna pe cer.",
+      "salience": 0.7,
+      "difficulty_tier": "easy",
+      "degree": 4,
+      "aliases": [
+        "basmul Greuceanu"
+      ]
+    },
+    {
+      "id": "n_v23lit_ileana_cosanzeana",
+      "node_type": "concept",
+      "label_ro": "Ileana Cosânzeana",
+      "category": "literatura",
+      "description": "Personaj feminin arhetipal din basmele românești, adesea prințesă și pereche a lui Făt-Frumos.",
+      "salience": 0.8,
+      "difficulty_tier": "easy",
+      "degree": 3
+    },
+    {
+      "id": "n_v23lit_zmeul",
+      "node_type": "concept",
+      "label_ro": "Zmeul",
+      "category": "literatura",
+      "description": "Adversar supranatural din basmele românești, înfruntat de eroi precum Făt-Frumos, Prâslea sau Greuceanu.",
+      "salience": 0.85,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "zmeu",
+        "zmeul din basme"
+      ]
+    },
+    {
+      "id": "n_v23lit_fat_frumos",
+      "node_type": "concept",
+      "label_ro": "Făt-Frumos",
+      "category": "literatura",
+      "description": "Erou arhetipal al basmelor românești, cunoscut pentru curaj și pentru confruntările cu zmei și alte încercări.",
+      "salience": 0.9,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "Făt Frumos"
+      ]
+    },
+    {
+      "id": "n_v23via_elasticul",
+      "node_type": "concept",
+      "label_ro": "Elasticul",
+      "category": "viata_de_roman",
+      "description": "Joc de mișcare în care copiii execută sărituri peste un elastic întins între picioarele a doi participanți.",
+      "salience": 0.75,
+      "difficulty_tier": "easy",
+      "degree": 3,
+      "aliases": [
+        "jocul cu elasticul",
+        "elastic"
+      ]
+    },
+    {
+      "id": "n_v23via_tara_tara_vrem_ostasi",
+      "node_type": "concept",
+      "label_ro": "Țară, țară, vrem ostași!",
+      "category": "viata_de_roman",
+      "description": "Joc de echipă al copilăriei în care două șiruri de jucători se cheamă pe rând și încearcă să rupă lanțul advers.",
+      "salience": 0.72,
+      "difficulty_tier": "easy",
+      "degree": 3,
+      "aliases": [
+        "țară țară vrem ostași",
+        "tara tara vrem ostasi"
+      ]
+    },
+    {
+      "id": "n_v23via_ratele_si_vinatorii",
+      "node_type": "concept",
+      "label_ro": "Rațele și vânătorii",
+      "category": "viata_de_roman",
+      "description": "Joc cu mingea în care jucătorii din centru evită aruncările celor aflați la marginile terenului.",
+      "salience": 0.68,
+      "difficulty_tier": "easy",
+      "degree": 3
+    },
+    {
+      "id": "n_v23via_telefonul_fara_fir",
+      "node_type": "concept",
+      "label_ro": "Telefonul fără fir",
+      "category": "viata_de_roman",
+      "description": "Joc de comunicare în care un mesaj este șoptit din jucător în jucător și comparat la final cu forma inițială.",
+      "salience": 0.8,
+      "difficulty_tier": "easy",
+      "degree": 3,
+      "aliases": [
+        "telefonul stricat",
+        "jocul telefonul fără fir"
+      ]
+    },
+    {
+      "id": "n_v23via_nu_te_supara_frate",
+      "node_type": "concept",
+      "label_ro": "Nu te supăra, frate!",
+      "category": "viata_de_roman",
+      "description": "Joc de masă din familia Ludo, în care pionii înaintează pe traseu în funcție de aruncarea zarului.",
+      "salience": 0.82,
+      "difficulty_tier": "easy",
+      "degree": 4,
+      "aliases": [
+        "nu te supăra frate",
+        "nu te supara frate"
+      ]
+    },
+    {
+      "id": "n_v23via_piticot",
+      "node_type": "concept",
+      "label_ro": "Piticot",
+      "category": "viata_de_roman",
+      "description": "Joc de masă pentru copii în care pionii avansează cu zarul pe un traseu ilustrat până la căsuța finală.",
+      "salience": 0.68,
+      "difficulty_tier": "easy",
+      "degree": 4,
+      "aliases": [
+        "jocul Piticot",
+        "joc de Piticot"
+      ]
+    },
+    {
+      "id": "n_v23via_moara_joc",
+      "node_type": "concept",
+      "label_ro": "Moară (joc)",
+      "category": "viata_de_roman",
+      "description": "Joc de strategie pentru doi jucători, cunoscut și ca țintar, în care trei piese aliniate formează o moară.",
+      "salience": 0.58,
+      "difficulty_tier": "medium",
+      "degree": 4,
+      "aliases": [
+        "Țintar",
+        "jocul de moară",
+        "moara"
+      ]
+    },
+    {
+      "id": "n_v23via_pacalicii",
+      "node_type": "concept",
+      "label_ro": "Păcălici",
+      "category": "viata_de_roman",
+      "description": "Joc de cărți pentru copii în care se formează perechi, iar jucătorul rămas cu cartea Păcălici pierde.",
+      "salience": 0.62,
+      "difficulty_tier": "medium",
+      "degree": 4,
+      "aliases": [
+        "jocul Păcălici"
+      ]
+    },
+    {
+      "id": "n_v23via_abecedar",
+      "node_type": "concept",
+      "label_ro": "Abecedar",
+      "category": "viata_de_roman",
+      "description": "Manual școlar folosit la începutul învățării cititului și scrisului, organizat în jurul literelor și al textelor scurte.",
+      "salience": 0.86,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "abecedarul",
+        "carte de citire"
+      ]
+    },
+    {
+      "id": "n_v23via_ghiozdan",
+      "node_type": "concept",
+      "label_ro": "Ghiozdan",
+      "category": "viata_de_roman",
+      "description": "Geantă purtată pe spate în care elevii își duc la școală manualele, caietele și rechizitele.",
+      "salience": 0.84,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "ghiozdanul",
+        "rucsac școlar"
+      ]
+    },
+    {
+      "id": "n_v23via_penar",
+      "node_type": "concept",
+      "label_ro": "Penar",
+      "category": "viata_de_roman",
+      "description": "Etui pentru instrumentele de scris, întâlnit în mod obișnuit printre rechizitele unui elev.",
+      "salience": 0.78,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "penarul",
+        "trusă de creioane"
+      ]
+    },
+    {
+      "id": "n_v23via_tabla_scolara",
+      "node_type": "concept",
+      "label_ro": "Tablă școlară",
+      "category": "viata_de_roman",
+      "description": "Suprafață de scris folosită de profesor și elevi în sala de clasă, cu cretă sau markere.",
+      "salience": 0.82,
+      "difficulty_tier": "easy",
+      "degree": 5,
+      "aliases": [
+        "tabla de la școală",
+        "tablă de clasă"
       ]
     }
   ],
@@ -112532,6 +112818,786 @@
       "strength": 0.5,
       "is_distractor": 0,
       "bidirectional": 1
+    },
+    {
+      "id": "de7514",
+      "src_id": "n_v23lit_capra_cu_trei_iezi",
+      "dst_id": "n_v23lit_punguta_cu_doi_bani",
+      "relation": "same_category",
+      "label_ro": "povești pentru copii de Ion Creangă",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7515",
+      "src_id": "n_v23lit_punguta_cu_doi_bani",
+      "dst_id": "n_v23lit_ursul_pacalit_de_vulpe",
+      "relation": "same_category",
+      "label_ro": "povești cu animale de Ion Creangă",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7516",
+      "src_id": "n_v23lit_ursul_pacalit_de_vulpe",
+      "dst_id": "n_v23lit_povestea_porcului",
+      "relation": "same_category",
+      "label_ro": "povești clasice de Ion Creangă",
+      "strength": 0.76,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7517",
+      "src_id": "n_v23lit_povestea_porcului",
+      "dst_id": "n_v23lit_capra_cu_trei_iezi",
+      "relation": "same_category",
+      "label_ro": "povești clasice de Ion Creangă",
+      "strength": 0.76,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7518",
+      "src_id": "n_v23lit_capra_cu_trei_iezi",
+      "dst_id": "n_ion_creanga",
+      "relation": "created_by",
+      "label_ro": "scrisă de",
+      "strength": 0.96,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7519",
+      "src_id": "n_v23lit_capra_cu_trei_iezi",
+      "dst_id": "n_v3lit_poveste",
+      "relation": "is_a",
+      "label_ro": "este poveste",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7520",
+      "src_id": "n_v23lit_capra_cu_trei_iezi",
+      "dst_id": "n_v3lit_carte",
+      "relation": "is_a",
+      "label_ro": "apare în cărți pentru copii",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7521",
+      "src_id": "n_v23lit_capra_cu_trei_iezi",
+      "dst_id": "n_v4soc_copil",
+      "relation": "related_to",
+      "label_ro": "lectură cunoscută copiilor",
+      "strength": 0.84,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7522",
+      "src_id": "n_v23lit_punguta_cu_doi_bani",
+      "dst_id": "n_ion_creanga",
+      "relation": "created_by",
+      "label_ro": "scrisă de",
+      "strength": 0.96,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7523",
+      "src_id": "n_v23lit_punguta_cu_doi_bani",
+      "dst_id": "n_v3lit_poveste",
+      "relation": "is_a",
+      "label_ro": "este poveste",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7524",
+      "src_id": "n_v23lit_punguta_cu_doi_bani",
+      "dst_id": "n_v3lit_carte",
+      "relation": "is_a",
+      "label_ro": "apare în cărți pentru copii",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7525",
+      "src_id": "n_v23lit_punguta_cu_doi_bani",
+      "dst_id": "n_v4soc_copil",
+      "relation": "related_to",
+      "label_ro": "lectură cunoscută copiilor",
+      "strength": 0.84,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7526",
+      "src_id": "n_v23lit_ursul_pacalit_de_vulpe",
+      "dst_id": "n_ion_creanga",
+      "relation": "created_by",
+      "label_ro": "scrisă de",
+      "strength": 0.96,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7527",
+      "src_id": "n_v23lit_ursul_pacalit_de_vulpe",
+      "dst_id": "n_v3lit_poveste",
+      "relation": "is_a",
+      "label_ro": "este poveste",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7528",
+      "src_id": "n_v23lit_ursul_pacalit_de_vulpe",
+      "dst_id": "n_v3lit_carte",
+      "relation": "is_a",
+      "label_ro": "apare în cărți pentru copii",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7529",
+      "src_id": "n_v23lit_ursul_pacalit_de_vulpe",
+      "dst_id": "n_v4soc_copil",
+      "relation": "related_to",
+      "label_ro": "lectură cunoscută copiilor",
+      "strength": 0.84,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7530",
+      "src_id": "n_v23lit_povestea_porcului",
+      "dst_id": "n_ion_creanga",
+      "relation": "created_by",
+      "label_ro": "scrisă de",
+      "strength": 0.96,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7531",
+      "src_id": "n_v23lit_povestea_porcului",
+      "dst_id": "n_v3lit_poveste",
+      "relation": "is_a",
+      "label_ro": "este poveste",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7532",
+      "src_id": "n_v23lit_povestea_porcului",
+      "dst_id": "n_v3lit_carte",
+      "relation": "is_a",
+      "label_ro": "apare în cărți de povești",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7533",
+      "src_id": "n_v23lit_povestea_porcului",
+      "dst_id": "n_v4soc_copil",
+      "relation": "related_to",
+      "label_ro": "poveste pentru copii",
+      "strength": 0.76,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7534",
+      "src_id": "n_v23lit_praslea_cel_voinic",
+      "dst_id": "n_v17lit_petre_ispirescu",
+      "relation": "created_by",
+      "label_ro": "cules și publicat de",
+      "strength": 0.94,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7535",
+      "src_id": "n_v23lit_praslea_cel_voinic",
+      "dst_id": "n_v4art_basm",
+      "relation": "is_a",
+      "label_ro": "este basm popular",
+      "strength": 0.92,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7536",
+      "src_id": "n_v23lit_praslea_cel_voinic",
+      "dst_id": "n_v3lit_carte",
+      "relation": "is_a",
+      "label_ro": "apare în culegeri de basme",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7537",
+      "src_id": "n_v23lit_praslea_cel_voinic",
+      "dst_id": "n_v4soc_copil",
+      "relation": "related_to",
+      "label_ro": "basm cunoscut copiilor",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7538",
+      "src_id": "n_v23lit_tinerete_fara_batranete",
+      "dst_id": "n_v17lit_petre_ispirescu",
+      "relation": "created_by",
+      "label_ro": "cules și publicat de",
+      "strength": 0.94,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7539",
+      "src_id": "n_v23lit_tinerete_fara_batranete",
+      "dst_id": "n_v4art_basm",
+      "relation": "is_a",
+      "label_ro": "este basm popular",
+      "strength": 0.92,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7540",
+      "src_id": "n_v23lit_tinerete_fara_batranete",
+      "dst_id": "n_v3lit_carte",
+      "relation": "is_a",
+      "label_ro": "apare în culegeri de basme",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7541",
+      "src_id": "n_v23lit_greuceanu",
+      "dst_id": "n_v17lit_petre_ispirescu",
+      "relation": "created_by",
+      "label_ro": "cules și publicat de",
+      "strength": 0.94,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7542",
+      "src_id": "n_v23lit_greuceanu",
+      "dst_id": "n_v4art_basm",
+      "relation": "is_a",
+      "label_ro": "este basm popular",
+      "strength": 0.92,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7543",
+      "src_id": "n_v23lit_greuceanu",
+      "dst_id": "n_v3lit_carte",
+      "relation": "is_a",
+      "label_ro": "apare în culegeri de basme",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7544",
+      "src_id": "n_v23lit_fat_frumos",
+      "dst_id": "n_v4art_basm",
+      "relation": "part_of",
+      "label_ro": "erou al basmului românesc",
+      "strength": 0.94,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7545",
+      "src_id": "n_v23lit_fat_frumos",
+      "dst_id": "n_v3lit_poveste",
+      "relation": "part_of",
+      "label_ro": "personaj de poveste",
+      "strength": 0.88,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7546",
+      "src_id": "n_v23lit_ileana_cosanzeana",
+      "dst_id": "n_v4art_basm",
+      "relation": "part_of",
+      "label_ro": "personaj al basmului românesc",
+      "strength": 0.92,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7547",
+      "src_id": "n_v23lit_ileana_cosanzeana",
+      "dst_id": "n_v23lit_fat_frumos",
+      "relation": "related_to",
+      "label_ro": "pereche în numeroase basme",
+      "strength": 0.84,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7548",
+      "src_id": "n_v23lit_zmeul",
+      "dst_id": "n_v4art_basm",
+      "relation": "part_of",
+      "label_ro": "adversar din basme",
+      "strength": 0.92,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7549",
+      "src_id": "n_v23lit_zmeul",
+      "dst_id": "n_v23lit_fat_frumos",
+      "relation": "related_to",
+      "label_ro": "adversar tradițional",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7550",
+      "src_id": "n_v23lit_zmeul",
+      "dst_id": "n_v23lit_greuceanu",
+      "relation": "part_of",
+      "label_ro": "adversar în basmul Greuceanu",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7551",
+      "src_id": "n_v23lit_zmeul",
+      "dst_id": "n_v23lit_praslea_cel_voinic",
+      "relation": "part_of",
+      "label_ro": "adversar în basmul lui Prâslea",
+      "strength": 0.88,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7552",
+      "src_id": "n_v23lit_zmeul",
+      "dst_id": "n_v23lit_ileana_cosanzeana",
+      "relation": "related_to",
+      "label_ro": "personaje opuse în multe basme",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7553",
+      "src_id": "n_v23lit_tinerete_fara_batranete",
+      "dst_id": "n_v23lit_fat_frumos",
+      "relation": "related_to",
+      "label_ro": "erou de tip Făt-Frumos",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7554",
+      "src_id": "n_v23via_elasticul",
+      "dst_id": "n_v23via_tara_tara_vrem_ostasi",
+      "relation": "same_category",
+      "label_ro": "jocuri de mișcare ale copilăriei",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7555",
+      "src_id": "n_v23via_tara_tara_vrem_ostasi",
+      "dst_id": "n_v23via_ratele_si_vinatorii",
+      "relation": "same_category",
+      "label_ro": "jocuri de echipă în aer liber",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7556",
+      "src_id": "n_v23via_ratele_si_vinatorii",
+      "dst_id": "n_vdr_sotron",
+      "relation": "same_category",
+      "label_ro": "jocuri tradiționale de afară",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7557",
+      "src_id": "n_vdr_sotron",
+      "dst_id": "n_v23via_elasticul",
+      "relation": "same_category",
+      "label_ro": "jocuri bazate pe sărituri",
+      "strength": 0.76,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7558",
+      "src_id": "n_v23via_nu_te_supara_frate",
+      "dst_id": "n_v23via_piticot",
+      "relation": "same_category",
+      "label_ro": "jocuri de masă cu pion și zar",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7559",
+      "src_id": "n_v23via_piticot",
+      "dst_id": "n_v23via_moara_joc",
+      "relation": "same_category",
+      "label_ro": "jocuri clasice de masă",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7560",
+      "src_id": "n_v23via_moara_joc",
+      "dst_id": "n_v23via_pacalicii",
+      "relation": "same_category",
+      "label_ro": "jocuri tradiționale de interior",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7561",
+      "src_id": "n_v23via_pacalicii",
+      "dst_id": "n_v23via_nu_te_supara_frate",
+      "relation": "same_category",
+      "label_ro": "jocuri pentru familie",
+      "strength": 0.74,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7562",
+      "src_id": "n_v23via_abecedar",
+      "dst_id": "n_v23via_ghiozdan",
+      "relation": "same_category",
+      "label_ro": "obiecte ale începutului de școală",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7563",
+      "src_id": "n_v23via_ghiozdan",
+      "dst_id": "n_v23via_penar",
+      "relation": "same_category",
+      "label_ro": "rechizite purtate la școală",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7564",
+      "src_id": "n_v23via_penar",
+      "dst_id": "n_v23via_tabla_scolara",
+      "relation": "same_category",
+      "label_ro": "obiecte folosite pentru scris la școală",
+      "strength": 0.76,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7565",
+      "src_id": "n_v23via_tabla_scolara",
+      "dst_id": "n_v23via_abecedar",
+      "relation": "same_category",
+      "label_ro": "instrumente pentru învățarea literelor",
+      "strength": 0.76,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7566",
+      "src_id": "n_v23via_elasticul",
+      "dst_id": "n_v2via_jocuri_copilarie",
+      "relation": "is_a",
+      "label_ro": "este joc de copilărie",
+      "strength": 0.88,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7567",
+      "src_id": "n_v23via_tara_tara_vrem_ostasi",
+      "dst_id": "n_v2via_jocuri_copilarie",
+      "relation": "is_a",
+      "label_ro": "este joc de copilărie",
+      "strength": 0.88,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7568",
+      "src_id": "n_v23via_ratele_si_vinatorii",
+      "dst_id": "n_v2via_jocuri_copilarie",
+      "relation": "is_a",
+      "label_ro": "este joc de copilărie",
+      "strength": 0.88,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7569",
+      "src_id": "n_v23via_nu_te_supara_frate",
+      "dst_id": "n_v4soc_copil",
+      "relation": "related_to",
+      "label_ro": "joc cunoscut de copii",
+      "strength": 0.76,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7570",
+      "src_id": "n_v23via_piticot",
+      "dst_id": "n_v4soc_copil",
+      "relation": "related_to",
+      "label_ro": "joc pentru copii",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7571",
+      "src_id": "n_v23via_moara_joc",
+      "dst_id": "n_v4soc_copil",
+      "relation": "related_to",
+      "label_ro": "joc învățat în familie",
+      "strength": 0.7,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7572",
+      "src_id": "n_v23via_pacalicii",
+      "dst_id": "n_v4soc_copil",
+      "relation": "related_to",
+      "label_ro": "joc de cărți pentru copii",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7573",
+      "src_id": "n_v23via_telefonul_fara_fir",
+      "dst_id": "n_v2via_jocuri_copilarie",
+      "relation": "is_a",
+      "label_ro": "este joc de copilărie",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7574",
+      "src_id": "n_v23via_telefonul_fara_fir",
+      "dst_id": "n_v4soc_copil",
+      "relation": "related_to",
+      "label_ro": "joc de comunicare între copii",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7575",
+      "src_id": "n_v23via_abecedar",
+      "dst_id": "n_v3soc_scoala",
+      "relation": "part_of",
+      "label_ro": "manual folosit la școală",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7576",
+      "src_id": "n_v23via_abecedar",
+      "dst_id": "n_v3lit_carte",
+      "relation": "is_a",
+      "label_ro": "este carte pentru învățarea cititului",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7577",
+      "src_id": "n_v23via_abecedar",
+      "dst_id": "n_v4soc_copil",
+      "relation": "related_to",
+      "label_ro": "prima carte de citire a copilului",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7578",
+      "src_id": "n_v23via_ghiozdan",
+      "dst_id": "n_v3soc_scoala",
+      "relation": "related_to",
+      "label_ro": "purtat la școală",
+      "strength": 0.88,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7579",
+      "src_id": "n_v23via_ghiozdan",
+      "dst_id": "n_v3lit_carte",
+      "relation": "related_to",
+      "label_ro": "conține cărți și manuale",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7580",
+      "src_id": "n_v23via_ghiozdan",
+      "dst_id": "n_v4soc_copil",
+      "relation": "related_to",
+      "label_ro": "folosit de elevi",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7581",
+      "src_id": "n_v23via_penar",
+      "dst_id": "n_v3soc_scoala",
+      "relation": "related_to",
+      "label_ro": "rechizită școlară",
+      "strength": 0.86,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7582",
+      "src_id": "n_v23via_penar",
+      "dst_id": "n_v3lit_carte",
+      "relation": "related_to",
+      "label_ro": "păstrat lângă caiete și cărți",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7583",
+      "src_id": "n_v23via_penar",
+      "dst_id": "n_v4soc_copil",
+      "relation": "related_to",
+      "label_ro": "folosit de elevi",
+      "strength": 0.82,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7584",
+      "src_id": "n_v23via_tabla_scolara",
+      "dst_id": "n_v3soc_scoala",
+      "relation": "part_of",
+      "label_ro": "se află în sala de clasă",
+      "strength": 0.9,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7585",
+      "src_id": "n_v23via_tabla_scolara",
+      "dst_id": "n_v3lit_carte",
+      "relation": "related_to",
+      "label_ro": "susține lecția din manual",
+      "strength": 0.72,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7586",
+      "src_id": "n_v23via_tabla_scolara",
+      "dst_id": "n_v4soc_copil",
+      "relation": "related_to",
+      "label_ro": "folosită în clasa elevilor",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7587",
+      "src_id": "n_v23via_nu_te_supara_frate",
+      "dst_id": "n_vdr_copilaria_anilor_90",
+      "relation": "related_to",
+      "label_ro": "joc emblematic al copilăriei anilor 90",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7588",
+      "src_id": "n_v23via_piticot",
+      "dst_id": "n_vdr_copilaria_anilor_90",
+      "relation": "related_to",
+      "label_ro": "joc cunoscut din copilăria anilor 90",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7589",
+      "src_id": "n_v23via_moara_joc",
+      "dst_id": "n_vdr_copilaria_anilor_90",
+      "relation": "related_to",
+      "label_ro": "joc transmis între generații",
+      "strength": 0.7,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7590",
+      "src_id": "n_v23via_pacalicii",
+      "dst_id": "n_vdr_copilaria_anilor_90",
+      "relation": "related_to",
+      "label_ro": "joc de cărți al copilăriei",
+      "strength": 0.76,
+      "is_distractor": 0,
+      "bidirectional": 1
+    },
+    {
+      "id": "de7591",
+      "src_id": "n_v23via_telefonul_fara_fir",
+      "dst_id": "n_vdr_copilaria_anilor_90",
+      "relation": "related_to",
+      "label_ro": "joc cunoscut din copilăria anilor 90",
+      "strength": 0.78,
+      "is_distractor": 0,
+      "bidirectional": 1
     }
   ],
   "kg_puzzles": [
@@ -112931,6 +113997,30 @@
     },
     {
       "id": "pz_literatura_hard_1",
+      "start_id": "n_v23lit_fat_frumos",
+      "target_id": "n_v2lit_poezie_lirica",
+      "category": "literatura",
+      "difficulty": "hard",
+      "optimal_hops": 4,
+      "par": 4,
+      "solution_path": [
+        "n_v23lit_fat_frumos",
+        "n_v23lit_tinerete_fara_batranete",
+        "n_v3lit_carte",
+        "n_v3lit_lectura",
+        "n_v2lit_poezie_lirica"
+      ],
+      "hint_neighbors": [
+        "n_v23lit_tinerete_fara_batranete",
+        "n_v3lit_carte",
+        "n_v3lit_lectura",
+        "n_v2lit_poezie_lirica"
+      ],
+      "start_salience": 0.9,
+      "target_salience": 0.9294
+    },
+    {
+      "id": "pz_literatura_hard_2",
       "start_id": "n_v3lit_carte",
       "target_id": "n_v4lit_piesa",
       "category": "literatura",
@@ -112954,124 +114044,100 @@
       "target_salience": 0.8352
     },
     {
-      "id": "pz_literatura_hard_2",
-      "start_id": "n_v21lit_o_noapte_furtunoasa",
-      "target_id": "n_v3lit_carte",
-      "category": "literatura",
-      "difficulty": "hard",
-      "optimal_hops": 4,
-      "par": 4,
-      "solution_path": [
-        "n_v21lit_o_noapte_furtunoasa",
-        "n_ion_luca_caragiale",
-        "n_junimea",
-        "n_v4lit_manuscris",
-        "n_v3lit_carte"
-      ],
-      "hint_neighbors": [
-        "n_ion_luca_caragiale",
-        "n_junimea",
-        "n_v4lit_manuscris",
-        "n_v3lit_carte"
-      ],
-      "start_salience": 0.75,
-      "target_salience": 0.973
-    },
-    {
       "id": "pz_literatura_hard_3",
-      "start_id": "n_v20lit_delavrancea",
-      "target_id": "n_v3lit_carte",
+      "start_id": "n_v23lit_zmeul",
+      "target_id": "n_v3lit_scriitor",
       "category": "literatura",
       "difficulty": "hard",
       "optimal_hops": 4,
       "par": 4,
       "solution_path": [
-        "n_v20lit_delavrancea",
-        "n_ion_luca_caragiale",
-        "n_junimea",
-        "n_v4lit_manuscris",
-        "n_v3lit_carte"
+        "n_v23lit_zmeul",
+        "n_v23lit_fat_frumos",
+        "n_v3lit_poveste",
+        "n_v20lit_panait_istrati",
+        "n_v3lit_scriitor"
       ],
       "hint_neighbors": [
-        "n_ion_luca_caragiale",
-        "n_junimea",
-        "n_v4lit_manuscris",
-        "n_v3lit_carte"
+        "n_v23lit_fat_frumos",
+        "n_v3lit_poveste",
+        "n_v20lit_panait_istrati",
+        "n_v3lit_scriitor"
       ],
-      "start_salience": 0.68,
-      "target_salience": 0.973
+      "start_salience": 0.85,
+      "target_salience": 0.9371
     },
     {
       "id": "pz_literatura_hard_4",
-      "start_id": "n_v4lit_mesaj",
-      "target_id": "n_v4lit_piesa",
+      "start_id": "n_v23lit_zmeul",
+      "target_id": "n_v2lit_poezie_lirica",
       "category": "literatura",
       "difficulty": "hard",
       "optimal_hops": 4,
       "par": 4,
       "solution_path": [
-        "n_v4lit_mesaj",
-        "n_v2lit_basm_cult",
-        "n_litx_harap_alb",
-        "n_v2lit_personaj_literar",
-        "n_v4lit_piesa"
+        "n_v23lit_zmeul",
+        "n_v23lit_greuceanu",
+        "n_v3lit_carte",
+        "n_v3lit_lectura",
+        "n_v2lit_poezie_lirica"
       ],
       "hint_neighbors": [
-        "n_v2lit_basm_cult",
-        "n_litx_harap_alb",
-        "n_v2lit_personaj_literar",
-        "n_v4lit_piesa"
+        "n_v23lit_greuceanu",
+        "n_v3lit_carte",
+        "n_v3lit_lectura",
+        "n_v2lit_poezie_lirica"
       ],
-      "start_salience": 0.812,
-      "target_salience": 0.8352
+      "start_salience": 0.85,
+      "target_salience": 0.9294
     },
     {
       "id": "pz_literatura_hard_5",
-      "start_id": "n_v2lit_personaj_literar",
-      "target_id": "n_v3lit_vers",
+      "start_id": "n_v23lit_ileana_cosanzeana",
+      "target_id": "n_v2lit_roman_literar",
       "category": "literatura",
       "difficulty": "hard",
       "optimal_hops": 4,
       "par": 4,
       "solution_path": [
-        "n_v2lit_personaj_literar",
-        "n_litx_harap_alb",
-        "n_litx_fat_frumos_din_lacrima",
-        "n_v2lit_poezie_lirica",
-        "n_v3lit_vers"
+        "n_v23lit_ileana_cosanzeana",
+        "n_v23lit_fat_frumos",
+        "n_v23lit_tinerete_fara_batranete",
+        "n_v3lit_carte",
+        "n_v2lit_roman_literar"
       ],
       "hint_neighbors": [
-        "n_litx_harap_alb",
-        "n_litx_fat_frumos_din_lacrima",
-        "n_v2lit_poezie_lirica",
-        "n_v3lit_vers"
+        "n_v23lit_fat_frumos",
+        "n_v23lit_tinerete_fara_batranete",
+        "n_v3lit_carte",
+        "n_v2lit_roman_literar"
       ],
-      "start_salience": 0.947,
-      "target_salience": 0.6981
+      "start_salience": 0.8,
+      "target_salience": 0.9702
     },
     {
       "id": "pz_literatura_hard_6",
-      "start_id": "n_v4lit_piesa",
-      "target_id": "n_v4lit_titlu",
+      "start_id": "n_v23lit_ileana_cosanzeana",
+      "target_id": "n_v3lit_scriitor",
       "category": "literatura",
       "difficulty": "hard",
       "optimal_hops": 4,
       "par": 4,
       "solution_path": [
-        "n_v4lit_piesa",
-        "n_ion_luca_caragiale",
-        "n_realism",
-        "n_moara_cu_noroc",
-        "n_v4lit_titlu"
+        "n_v23lit_ileana_cosanzeana",
+        "n_v23lit_fat_frumos",
+        "n_v3lit_poveste",
+        "n_v20lit_panait_istrati",
+        "n_v3lit_scriitor"
       ],
       "hint_neighbors": [
-        "n_ion_luca_caragiale",
-        "n_realism",
-        "n_moara_cu_noroc",
-        "n_v4lit_titlu"
+        "n_v23lit_fat_frumos",
+        "n_v3lit_poveste",
+        "n_v20lit_panait_istrati",
+        "n_v3lit_scriitor"
       ],
-      "start_salience": 0.8352,
-      "target_salience": 0.8015
+      "start_salience": 0.8,
+      "target_salience": 0.9371
     },
     {
       "id": "pz_geografie_easy_1",

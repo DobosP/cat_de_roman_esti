@@ -21,11 +21,13 @@ _KG_PATH = _ROOT / "tests" / "fixtures" / "kg_sample.json"
 # 2026-07-15 (ADR-0023/0024): the first owner-approved critique-gate demotion batch moved
 # 18 conexiuni boards + 2 contexto targets from approved to pending (player-reported
 # fairness/relevance failures + A7 non-distinctive region associations); nothing deleted.
+# 2026-07-16 (ADR-0030): the v23 childhood wave staged seven more items as pending;
+# approved inventory and serving remain unchanged.
 _EXPECTED_INVENTORY = {
-    "conexiuni": (283, 209, 74),
-    "contexto": (197, 192, 5),
-    "lant": (191, 94, 97),
-    "alchimie": (90, 77, 13),
+    "conexiuni": (284, 209, 75),
+    "contexto": (199, 192, 7),
+    "lant": (193, 94, 99),
+    "alchimie": (92, 77, 15),
 }
 
 _NEW_CONTEXTO_TARGETS = {
@@ -82,9 +84,9 @@ def test_v14_pack_inventory_and_review_split():
 
     # v16: 769 − 3 judge-rejected − 1 retired greu Lanț = 765; v18: − 1 retired normal Lanț.
     # 2026-07-15: 592 − 20 critique-gate demotions (ADR-0023/0024) = 572 approved.
-    assert sum(expected[0] for expected in _EXPECTED_INVENTORY.values()) == 761
+    assert sum(expected[0] for expected in _EXPECTED_INVENTORY.values()) == 768
     assert sum(expected[1] for expected in _EXPECTED_INVENTORY.values()) == 572
-    assert sum(expected[2] for expected in _EXPECTED_INVENTORY.values()) == 189
+    assert sum(expected[2] for expected in _EXPECTED_INVENTORY.values()) == 196
 
 
 def test_v14_adds_contemporary_civic_education_science_and_digital_play():
