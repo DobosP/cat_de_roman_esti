@@ -1,7 +1,7 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-16. This file is the repository's current source of truth._
-_Last verified: 2026-07-16 (backend 324; session-store 11; exact v23 critique 7; Ruff; both validators; workflow syntax; frontend lint/typecheck/31 tests/build; bundle 116.11 KiB; 320/390/1280 px visual review; `git diff --check`.)_
+_Last verified: 2026-07-16 (anonymous live deploy `2746be3`: healthy container; health, manifest, deep link, and four game creates green; 2,034 concepts / 14 available categories; exact release assets and 390 px visual smoke. Local gate: backend 324; session-store 11; exact v23 critique 7; Ruff; both validators; workflow syntax; frontend lint/typecheck/31 tests/build; bundle 116.11 KiB; 320/390/1280 px visual review; `git diff --check`.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -43,9 +43,9 @@ until the bound analyst plus adversarial-verifier gate reviews the final dossier
 The Romanian arcade has four server-authoritative games: Alchimie, Cald sau Rece, Lanțul
 Cuvintelor, and Conexiuni, using Django 5.2/DRF and React 19/Vite 8 over the offline KG.
 
-Anonymous v1 is live at <https://cat-de-roman-esti.dobolabs.ro>. The last recorded live
-deploy is `0b68f4e` from 2026-07-13; later work awaits an owner deploy. Accounts/rankings
-remain staging-only: scores are client-authored and visibility needs opt-in by default.
+Anonymous v1 at <https://cat-de-roman-esti.dobolabs.ro> runs release `2746be3`, deployed
+and smoke-verified on 2026-07-16. Accounts/rankings remain staging-only: scores are
+client-authored and visibility needs opt-in by default.
 
 ## Shipped content
 
@@ -94,6 +94,5 @@ session-store target remains `tests/test_wordgames_session_store.py` (11 tests).
   pending IDs; keep both Alchimie closure-size profiles under adversarial review.
 - Work the approved-stock critique/A7 queues; generic regional KG edges remain a cleanup
   inventory, while owner demotions stay explicit proposals.
-- Deploy the landed v17+ content and critique improvements when the owner opens a deploy.
 - Make ranking scores server-authored, bound retained score history, and default ranking
   visibility off before enabling public accounts.
