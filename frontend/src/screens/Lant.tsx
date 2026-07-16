@@ -42,6 +42,12 @@ const DIFFICULTIES: { key: Difficulty; label: string; hint: string }[] = [
 
 const TARGET_COLOR = "#f178b6";
 
+type RecoveryFeedback = {
+  message: string;
+  choices: string[];
+  tone: "info" | "warning";
+};
+
 function Breadcrumb({ path }: { path: PathStep[] }) {
   return (
     <div className="row wrap" style={{ gap: 6, alignItems: "center" }}>
@@ -100,6 +106,7 @@ export default function Lant({
   const [busy, setBusy] = useState(false);
   const [shake, setShake] = useState(0);
   const [hint, setHint] = useState<HintResult | null>(null);
+  const [recovery, setRecovery] = useState<RecoveryFeedback | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>("normal");
   const [category, setCategory] = useState<string | null>(null);
   const [scored, setScored] = useState<{
@@ -139,6 +146,7 @@ export default function Lant({
     async (opts?: { difficulty?: Difficulty; daily?: string }) => {
       setLoading(true);
       setHint(null);
+      setRecovery(null);
       setScored(null);
       try {
         const fresh = await createLant({
@@ -244,12 +252,18 @@ export default function Lant({
     if (!value) return;
     setBusy(true);
     setHint(null);
+    setRecovery(null);
     try {
       const res = await moveLant(state.game_id, value);
       if (!res.ok) {
         sound.playError();
         setShake((s) => s + 1);
-        onToast(res.last_error ?? "Mutare invalidă", "error");
+        const message = res.last_error ?? "Mutare invalidă";
+        setRecovery({
+          message,
+          choices: res.suggestions ?? [],
+          tone: "warning",
+        });
         return;
       }
       // Successful hop: server returns the partial state — fold it into our full state.
@@ -267,6 +281,13 @@ export default function Lant({
           : prev,
       );
       setText("");
+      if (res.message) {
+        setRecovery({
+          message: res.message,
+          choices: [],
+          tone: res.dead_end ? "warning" : "info",
+        });
+      }
       if (res.won) {
         sound.playWin();
         onToast("Ai ajuns la țintă!", "success");
@@ -289,6 +310,7 @@ export default function Lant({
     if (!state || busy || state.moves === 0) return;
     setBusy(true);
     setHint(null);
+    setRecovery(null);
     try {
       const fresh = await undoLant(state.game_id);
       setState(fresh);
@@ -304,13 +326,15 @@ export default function Lant({
   async function handleHint() {
     if (!state || busy || won) return;
     setBusy(true);
+    setRecovery(null);
     try {
       const res = await hintLant(state.game_id);
       setHint(res);
       if (res.hint) {
         sound.playSelect();
       } else {
-        onToast(res.message ?? "Niciun indiciu.", "info");
+        const message = res.message ?? "Niciun indiciu.";
+        setRecovery({ message, choices: [], tone: "warning" });
       }
     } catch {
       onToast("Nu am putut obține un indiciu.", "error");
@@ -474,6 +498,15 @@ export default function Lant({
           </AnimatePresence>
         </div>
 
+        <span
+          className="visually-hidden"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          {recovery?.message ?? ""}
+        </span>
+
         {/* input + actions OR win */}
         {won ? (
           <ResultCard
@@ -496,6 +529,14 @@ export default function Lant({
             Ai ajuns la <strong style={{ color: "var(--text)" }}>{state.target.label}</strong>{" "}
             în <strong style={{ color: "var(--text)" }}>{state.moves}</strong> salturi (optim{" "}
             {state.optimal}).
+            {recovery?.message ? (
+              <span className="muted" style={{ display: "block", marginTop: 8 }}>
+                <span aria-hidden="true" style={{ marginRight: 6 }}>
+                  ℹ
+                </span>
+                {recovery.message}
+              </span>
+            ) : null}
           </ResultCard>
         ) : (
           <m.div
@@ -565,6 +606,50 @@ export default function Lant({
             </div>
 
             <AnimatePresence>
+              {recovery && (
+                <m.div
+                  key={`${recovery.tone}-${recovery.message}`}
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  className="card"
+                  style={{
+                    padding: 12,
+                    borderColor:
+                      recovery.tone === "warning" ? "var(--bad)" : DEF.accent,
+                  }}
+                >
+                  <div className="col" style={{ gap: 8 }}>
+                    <span>
+                      <span aria-hidden="true" style={{ marginRight: 6 }}>
+                        {recovery.tone === "warning" ? "⚠" : "ℹ"}
+                      </span>
+                      {recovery.message}
+                    </span>
+                    {recovery.choices.length > 0 ? (
+                      <div className="row wrap" style={{ gap: 8 }}>
+                        <span className="faint">Ai vrut să scrii:</span>
+                        {recovery.choices.map((choice) => (
+                          <Button
+                            key={choice}
+                            type="button"
+                            variant="secondary"
+                            onClick={() => {
+                              setText(choice);
+                              inputRef.current?.focus();
+                            }}
+                          >
+                            {choice}
+                          </Button>
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+                </m.div>
+              )}
+            </AnimatePresence>
+
+            <AnimatePresence>
               {hint?.hint && (
                 <m.div
                   initial={{ opacity: 0, height: 0 }}
@@ -605,6 +690,26 @@ export default function Lant({
                         {hint.alternatives} variante bune de aici — există mai multe
                         drumuri.
                       </span>
+                    ) : null}
+                    {hint.alternatives_labels?.length ? (
+                      <div className="row wrap" style={{ gap: 8 }}>
+                        <span className="faint" style={{ fontSize: "0.78rem" }}>
+                          Alte drumuri:
+                        </span>
+                        {hint.alternatives_labels.map((label) => (
+                          <Button
+                            key={label}
+                            type="button"
+                            variant="secondary"
+                            onClick={() => {
+                              setText(label);
+                              inputRef.current?.focus();
+                            }}
+                          >
+                            {label}
+                          </Button>
+                        ))}
+                      </div>
                     ) : null}
                   </div>
                 </m.div>

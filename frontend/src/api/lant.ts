@@ -49,6 +49,12 @@ export interface MoveResult {
   ok: boolean;
   /** Present only when ok === false. */
   last_error?: string;
+  /** Server-authored recovery copy for a correction or a legal dead-end move. */
+  message?: string;
+  /** True when the accepted hop can no longer reach the target. */
+  dead_end?: boolean;
+  /** Bounded canonical labels offered after an unknown concept. */
+  suggestions?: string[];
   current?: Concept;
   relation?: string;
   path?: PathStep[];
@@ -65,6 +71,8 @@ export interface HintResult {
   remaining?: number;
   /** How many distinct neighbours lie on a shortest path (>1 => you had a real choice). */
   alternatives?: number;
+  /** Named alternatives appear only after a second hint request from the same position. */
+  alternatives_labels?: string[];
   message?: string;
 }
 
