@@ -52,6 +52,11 @@ type StartMode =
   | { kind: "seed"; difficulty: Difficulty }
   | { kind: "daily" };
 
+const selectionKey = (ids: readonly string[]) => JSON.stringify([...ids].sort());
+const ONE_AWAY_GUIDANCE =
+  "Aproape! 3 din 4 sunt din aceeași categorie. Schimbă cel puțin o piesă și verifică din nou.";
+type BlockedGuess = { key: string; oneAway: boolean };
+
 export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const active = useActiveGame(GAME_KEY);
   const resumeOnce = useRef(false);
@@ -59,6 +64,9 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const [loading, setLoading] = useState(() => active.peek() !== null);
   const [busy, setBusy] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
+  // A server-confirmed one-away or duplicate set that must change before resubmission.
+  // Only the oneAway flag may surface the stronger 3-of-4 guidance.
+  const [blockedGuess, setBlockedGuess] = useState<BlockedGuess | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>("normal");
   const [category, setCategory] = useState<string | null>(null);
   const [recordHit, setRecordHit] = useState(false);
@@ -67,8 +75,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   // Client-only display order for the remaining tiles (the "shuffle" button reorders
   // these; the authoritative grouping never changes). Keyed by tile id.
   const [shuffleNonce, setShuffleNonce] = useState(0);
-  // Transient inline hint shown under the board (e.g. "one away") so feedback persists
-  // past the toast — cleared on the next selection change.
+  // Transient inline hint shown under the board. One-away recovery stays visible while
+  // the player swaps a tile; other feedback clears on the next selection change.
   const [hint, setHint] = useState<string | null>(null);
   const recordOnce = useRecordScore(GAME_KEY);
 
@@ -94,6 +102,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         setState(s);
         active.remember(s.game_id);
         setSelected([]);
+        setBlockedGuess(null);
         setHint(null);
         setShuffleNonce(0);
         setShake(0);
@@ -134,6 +143,11 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   }, [state, solvedIds, shuffleNonce]);
 
   const finished = (state?.won ?? false) || (state?.lost ?? false);
+  const exactBlockedRetry =
+    selected.length === GROUP_SIZE &&
+    blockedGuess !== null &&
+    selectionKey(selected) === blockedGuess.key;
+  const feedback = blockedGuess?.oneAway ? ONE_AWAY_GUIDANCE : hint;
 
   useEffect(() => {
     if (resumeOnce.current) return;
@@ -159,6 +173,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         setRecordHit(false);
         setPuzzleRecordHit(false);
         setSelected([]);
+        setBlockedGuess(null);
         setHint(null);
         setShuffleNonce(0);
         setShake(0);
@@ -226,7 +241,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const toggle = useCallback(
     (id: string) => {
       if (busy || finished) return;
-      setHint(null);
+      if (blockedGuess === null) setHint(null);
       // Decide outside the updater so the sound side-effect stays StrictMode-safe and
       // fires only on a real change (selecting/deselecting, not a capped 5th click).
       const wasSelected = selected.includes(id);
@@ -238,13 +253,14 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         return [...prev, id];
       });
     },
-    [busy, finished, selected],
+    [busy, finished, blockedGuess, selected],
   );
 
   const clearSelection = useCallback(() => {
     if (busy || finished) return;
     setSelected([]);
-  }, [busy, finished]);
+    if (blockedGuess === null) setHint(null);
+  }, [busy, finished, blockedGuess]);
 
   const shuffle = useCallback(() => {
     if (busy || finished) return;
@@ -253,14 +269,17 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   }, [busy, finished]);
 
   const submit = useCallback(async () => {
-    if (!state || selected.length !== 4 || busy) return;
+    if (!state || selected.length !== GROUP_SIZE || busy || exactBlockedRetry) return;
+    const guess = [...selected];
+    const guessKey = selectionKey(guess);
     setBusy(true);
     try {
-      const res: GuessResult = await conexiuniApi.guess(state.game_id, selected);
+      const res: GuessResult = await conexiuniApi.guess(state.game_id, guess);
       setState(res);
       if (res.correct) {
         sound.playWin();
         setSelected([]);
+        setBlockedGuess(null);
         setHint(null);
         if (!res.won && res.category) {
           onToast(`Grup găsit: ${res.category.label}!`, "success");
@@ -268,14 +287,25 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       } else {
         sound.playError();
         setShake((n) => n + 1);
+        const recoverableOneAway = Boolean(res.one_away && !res.lost);
         if (res.one_away) {
-          setHint("Aproape! 3 din 4 sunt din aceeași categorie.");
+          setHint(
+            recoverableOneAway
+              ? ONE_AWAY_GUIDANCE
+              : "Aproape! 3 din 4 sunt din aceeași categorie.",
+          );
           onToast("Aproape! 3 din 4.", "info");
         } else {
           setHint("Niciun grup complet — încearcă altă combinație.");
           onToast("Nu e grupul — mai încearcă.", "info");
         }
-        setSelected([]);
+        if (recoverableOneAway) {
+          setSelected(guess);
+          setBlockedGuess({ key: guessKey, oneAway: true });
+        } else {
+          setSelected([]);
+          setBlockedGuess(null);
+        }
       }
     } catch (err) {
       sound.playError();
@@ -283,12 +313,16 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         err instanceof ApiError
           ? err.message || `Verificare respinsă (${err.status}).`
           : "Verificare respinsă.";
-      if (err instanceof ApiError && err.status === 409) setHint(message);
+      if (err instanceof ApiError && err.status === 409) {
+        setSelected(guess);
+        setBlockedGuess({ key: guessKey, oneAway: false });
+        setHint(`${message} Schimbă cel puțin o piesă înainte de o nouă verificare.`);
+      }
       onToast(message, err instanceof ApiError && err.status === 409 ? "info" : "error");
     } finally {
       setBusy(false);
     }
-  }, [state, selected, busy, onToast]);
+  }, [state, selected, busy, exactBlockedRetry, onToast]);
 
   const requestClue = useCallback(async () => {
     if (!state || busy || finished || !state.clue_available) return;
@@ -327,7 +361,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       if (busy) return;
       const tag = (e.target as HTMLElement | null)?.tagName;
       if (tag === "INPUT" || tag === "TEXTAREA") return;
-      if (e.key === "Enter" && selected.length === 4) {
+      if (e.key === "Enter" && selected.length === GROUP_SIZE && !exactBlockedRetry) {
         e.preventDefault();
         void submit();
       } else if (e.key === "Escape" || e.key === "Backspace") {
@@ -339,7 +373,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [state, finished, busy, selected, submit, clearSelection]);
+  }, [state, finished, busy, selected, exactBlockedRetry, submit, clearSelection]);
 
   // ----------------------------------------------------------------- INTRO
   if (!state) {
@@ -493,18 +527,18 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
           </m.div>
         )}
 
-        {/* Inline feedback (persists past the toast until next selection) */}
+        {/* Inline feedback persists past the toast; one-away guidance survives a swap. */}
         <AnimatePresence>
-          {!finished && hint && (
+          {!finished && feedback && (
             <m.p
-              key={hint}
+              key={feedback}
               initial={{ opacity: 0, y: -4 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               className="muted center"
               style={{ margin: 0, fontSize: "0.85rem" }}
             >
-              {hint}
+              {feedback}
             </m.p>
           )}
         </AnimatePresence>
@@ -563,11 +597,11 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               </Button>
               <Button
                 type="button"
-                disabled={busy || selected.length !== 4}
+                disabled={busy || selected.length !== GROUP_SIZE || exactBlockedRetry}
                 onClick={submit}
                 style={{ borderColor: DEF.accent }}
               >
-                {busy ? "…" : "Verifică"}
+                {busy ? "…" : exactBlockedRetry ? "Schimbă o piesă" : "Verifică"}
               </Button>
             </div>
             <span className="faint center" style={{ fontSize: "0.72rem", opacity: 0.7 }}>

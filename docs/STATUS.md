@@ -1,9 +1,9 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-16. This file is the repository's current source of truth._
-_Last verified: 2026-07-16 (backend 321; targeted Lanț/session 46; focused critique 41;
-Ruff; both validators; workflow syntax; binding smoke; candidate structure; frontend
-lint/typecheck/16 tests/build; bundle 115.38 KiB; `git diff --check`.)_
+_Last verified: 2026-07-16 (backend 321; targeted Conexiuni/session 35; Ruff; both
+validators; workflow syntax; frontend lint/typecheck/21 tests/build; bundle 115.38 KiB;
+`git diff --check`.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -24,14 +24,14 @@ The critique layer now fails closed from generation through promotion:
 - `import_candidates.py` maps accepted generator output to `pending`; per-game ID
   high-water marks persist in pack metadata, so retired IDs are never reused later.
 
-## Current outcome — Lanț recovery feedback (ADR-0027)
+## Current outcome — browser recovery (ADR-0027 and ADR-0028)
 
-The browser now preserves server-authored dead-end, autocorrection, and unknown-concept
-guidance in a polite live status. Bounded fuzzy suggestions and second-request path
-alternatives are keyboard buttons that fill but never submit the input. Hints stay
-voluntary; score, path secrecy, two-hour TTL, and the 1,000-entry cap are unchanged.
-
-Evidence and candidate slices are in the managed v23 session; validate the UI in playtests.
+The browser preserves server-authored Lanț recovery guidance in a polite live status;
+bounded suggestions and second-request path alternatives fill but never submit the input.
+Hints stay voluntary; score, path secrecy, TTL, and the 1,000-entry cap are unchanged.
+After a nonterminal Conexiuni one-away response, the four tiles remain selected for a
+one-tile swap. The unchanged set is blocked; correct, ordinary-wrong, terminal, new, and
+restored states clear recovery; mistake/duplicate, secrecy, TTL, and capacity stay unchanged.
 
 ## Current outcome — v22 web-grounded authoring session
 
