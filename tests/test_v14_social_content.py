@@ -22,8 +22,9 @@ _KG_PATH = _ROOT / "tests" / "fixtures" / "kg_sample.json"
 # 18 conexiuni boards + 2 contexto targets from approved to pending (player-reported
 # fairness/relevance failures + A7 non-distinctive region associations); nothing deleted.
 # 2026-07-16 (ADR-0030): the v23 childhood wave staged seven more items as pending;
-# approved inventory and serving remain unchanged.
-_EXPECTED_INVENTORY = {
+# approved inventory and serving remain unchanged. Later pending-only waves may grow
+# these totals, so this older-wave guard is a floor while the approved split stays exact.
+_V23_INVENTORY_FLOOR = {
     "conexiuni": (284, 209, 75),
     "contexto": (199, 192, 7),
     "lant": (193, 94, 99),
@@ -72,21 +73,21 @@ def test_v14_pack_inventory_and_review_split():
     pack = _load(_PACK_PATH)
 
     assert pack["meta"]["counts"] == {
-        game: expected[0] for game, expected in _EXPECTED_INVENTORY.items()
+        game: len(pack[game]) for game in _V23_INVENTORY_FLOOR
     }
-    for game, (total, approved, pending) in _EXPECTED_INVENTORY.items():
+    for game, (minimum_total, approved, minimum_pending) in _V23_INVENTORY_FLOOR.items():
         records = pack[game]
-        assert len(records) == total
-        assert Counter(record["status"] for record in records) == {
-            "approved": approved,
-            "pending": pending,
-        }
+        statuses = Counter(record["status"] for record in records)
+        assert len(records) >= minimum_total
+        assert statuses["approved"] == approved
+        assert statuses["pending"] >= minimum_pending
+        assert set(statuses) <= {"approved", "pending"}
 
     # v16: 769 − 3 judge-rejected − 1 retired greu Lanț = 765; v18: − 1 retired normal Lanț.
     # 2026-07-15: 592 − 20 critique-gate demotions (ADR-0023/0024) = 572 approved.
-    assert sum(expected[0] for expected in _EXPECTED_INVENTORY.values()) == 768
-    assert sum(expected[1] for expected in _EXPECTED_INVENTORY.values()) == 572
-    assert sum(expected[2] for expected in _EXPECTED_INVENTORY.values()) == 196
+    assert sum(expected[0] for expected in _V23_INVENTORY_FLOOR.values()) == 768
+    assert sum(expected[1] for expected in _V23_INVENTORY_FLOOR.values()) == 572
+    assert sum(expected[2] for expected in _V23_INVENTORY_FLOOR.values()) == 196
 
 
 def test_v14_adds_contemporary_civic_education_science_and_digital_play():

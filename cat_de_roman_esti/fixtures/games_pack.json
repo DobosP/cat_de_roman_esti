@@ -3,16 +3,16 @@
   "pack_version": 1,
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
   "counts": {
-   "conexiuni": 284,
-   "contexto": 199,
-   "lant": 193,
-   "alchimie": 92
+   "conexiuni": 288,
+   "contexto": 207,
+   "lant": 201,
+   "alchimie": 98
   },
   "id_high_water": {
-   "conexiuni": 291,
-   "contexto": 299,
-   "lant": 211,
-   "alchimie": 98
+   "conexiuni": 295,
+   "contexto": 307,
+   "lant": 219,
+   "alchimie": 104
   }
  },
  "conexiuni": [
@@ -16203,6 +16203,234 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "pending"
+  },
+  {
+   "id": "cx_gastronomie_292",
+   "category": "gastronomie",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "groups": {
+    "g1": [
+     "n_v24_food_pantry_zahar",
+     "n_v24_food_pantry_faina",
+     "n_v24_food_pantry_ulei",
+     "n_v4gas_sare"
+    ],
+    "g2": [
+     "n_v24_food_breakfast_unt",
+     "n_v24_food_breakfast_iaurt",
+     "n_v24_food_breakfast_miere",
+     "n_v3gas_cafea"
+    ],
+    "g3": [
+     "n_v24_food_orchard_mar",
+     "n_v24_food_orchard_para",
+     "n_v24_food_orchard_pruna",
+     "n_v24_food_small_fruit_cireasa"
+    ],
+    "g4": [
+     "n_v24_food_salad_veg_morcov",
+     "n_v24_food_salad_veg_ardei",
+     "n_v24_food_salad_veg_castravete",
+     "n_v4gas_rosie"
+    ]
+   },
+   "group_labels": {
+    "g1": "Ingrediente de bază pentru gătit",
+    "g2": "La micul dejun",
+    "g3": "Fructe de livadă",
+    "g4": "Legume pentru salată"
+   },
+   "order": [
+    "n_v24_food_pantry_zahar",
+    "n_v24_food_breakfast_unt",
+    "n_v24_food_orchard_mar",
+    "n_v24_food_salad_veg_morcov",
+    "n_v24_food_pantry_faina",
+    "n_v24_food_breakfast_iaurt",
+    "n_v24_food_orchard_para",
+    "n_v24_food_salad_veg_ardei",
+    "n_v24_food_pantry_ulei",
+    "n_v24_food_breakfast_miere",
+    "n_v24_food_orchard_pruna",
+    "n_v24_food_salad_veg_castravete",
+    "n_v4gas_sare",
+    "n_v3gas_cafea",
+    "n_v24_food_small_fruit_cireasa",
+    "n_v4gas_rosie"
+   ]
+  },
+  {
+   "id": "cx_viata_de_roman_293",
+   "category": "viata_de_roman",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "groups": {
+    "g1": [
+     "n_v24_home_rooms_camera",
+     "n_v24_home_rooms_sufragerie",
+     "n_v4via_baie",
+     "n_v4gas_bucatarie"
+    ],
+    "g2": [
+     "n_v24_home_bed_pat",
+     "n_v24_home_bed_saltea",
+     "n_v24_home_bed_perna",
+     "n_v24_home_textiles_patura"
+    ],
+    "g3": [
+     "n_v24_school_writing_caiet",
+     "n_v24_school_writing_creion",
+     "n_v24_school_writing_pix",
+     "n_v24_school_supplies_stilou"
+    ],
+    "g4": [
+     "n_v24_school_classroom_clasa_scolara",
+     "n_v24_school_classroom_banca_scolara",
+     "n_v23via_tabla_scolara",
+     "n_v4per_profesor"
+    ]
+   },
+   "group_labels": {
+    "g1": "Camere ale locuinței",
+    "g2": "Pentru somn",
+    "g3": "În ghiozdan, pentru scris",
+    "g4": "În sala de clasă"
+   },
+   "order": [
+    "n_v24_home_rooms_camera",
+    "n_v24_home_bed_pat",
+    "n_v24_school_writing_caiet",
+    "n_v24_school_classroom_clasa_scolara",
+    "n_v24_home_rooms_sufragerie",
+    "n_v24_home_bed_saltea",
+    "n_v24_school_writing_creion",
+    "n_v24_school_classroom_banca_scolara",
+    "n_v4via_baie",
+    "n_v24_home_bed_perna",
+    "n_v24_school_writing_pix",
+    "n_v23via_tabla_scolara",
+    "n_v4gas_bucatarie",
+    "n_v24_home_textiles_patura",
+    "n_v24_school_supplies_stilou",
+    "n_v4per_profesor"
+   ]
+  },
+  {
+   "id": "cx_societate_294",
+   "category": "societate",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "groups": {
+    "g1": [
+     "n_v24_people_parents_mama",
+     "n_v24_people_parents_tata",
+     "n_v24_people_descendants_fiu",
+     "n_v24_people_descendants_fiica"
+    ],
+    "g2": [
+     "n_v24_people_grandparents_bunica",
+     "n_v24_people_grandparents_bunic",
+     "n_v24_people_relatives_unchi",
+     "n_v24_people_grandparents_matusa"
+    ],
+    "g3": [
+     "n_v4sti_ochi",
+     "n_v4sti_ureche",
+     "n_v24_body_face_nas",
+     "n_v24_body_face_gura"
+    ],
+    "g4": [
+     "n_v24_transport_road_camion",
+     "n_v24_transport_road_duba",
+     "n_v24_transport_personal_masina",
+     "n_v24_transport_personal_motocicleta"
+    ]
+   },
+   "group_labels": {
+    "g1": "Părinți și copii",
+    "g2": "Rude din familia extinsă",
+    "g3": "Pe cap și pe față",
+    "g4": "Vehicule rutiere"
+   },
+   "order": [
+    "n_v24_people_parents_mama",
+    "n_v24_people_grandparents_bunica",
+    "n_v4sti_ochi",
+    "n_v24_transport_road_camion",
+    "n_v24_people_parents_tata",
+    "n_v24_people_grandparents_bunic",
+    "n_v4sti_ureche",
+    "n_v24_transport_road_duba",
+    "n_v24_people_descendants_fiu",
+    "n_v24_people_relatives_unchi",
+    "n_v24_body_face_nas",
+    "n_v24_transport_personal_masina",
+    "n_v24_people_descendants_fiica",
+    "n_v24_people_grandparents_matusa",
+    "n_v24_body_face_gura",
+    "n_v24_transport_personal_motocicleta"
+   ]
+  },
+  {
+   "id": "cx_societate_295",
+   "category": "societate",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "groups": {
+    "g1": [
+     "n_v24_transport_rail_tren",
+     "n_v24_transport_rail_tramvai",
+     "n_v24_transport_rail_metrou",
+     "n_v24_transport_road_microbuz"
+    ],
+    "g2": [
+     "n_v24_transport_terminals_gara",
+     "n_v24_transport_terminals_aeroport",
+     "n_v24_transport_terminals_statie",
+     "n_v2soc_port"
+    ],
+    "g3": [
+     "n_v24_places_public_parc",
+     "n_v24_places_public_farmacie",
+     "n_v24_places_public_restaurant",
+     "n_v4soc_magazin"
+    ],
+    "g4": [
+     "n_v24_weather_precipitation_ploaie",
+     "n_v24_weather_precipitation_zapada",
+     "n_v24_weather_air_vant",
+     "n_v24_weather_air_nor"
+    ]
+   },
+   "group_labels": {
+    "g1": "Vehicule de transport public",
+    "g2": "Locuri de plecare și sosire",
+    "g3": "Destinații cotidiene în oraș",
+    "g4": "Fenomene meteo"
+   },
+   "order": [
+    "n_v24_transport_rail_tren",
+    "n_v24_transport_terminals_gara",
+    "n_v24_places_public_parc",
+    "n_v24_weather_precipitation_ploaie",
+    "n_v24_transport_rail_tramvai",
+    "n_v24_transport_terminals_aeroport",
+    "n_v24_places_public_farmacie",
+    "n_v24_weather_precipitation_zapada",
+    "n_v24_transport_rail_metrou",
+    "n_v24_transport_terminals_statie",
+    "n_v24_places_public_restaurant",
+    "n_v24_weather_air_vant",
+    "n_v24_transport_road_microbuz",
+    "n_v2soc_port",
+    "n_v4soc_magazin",
+    "n_v24_weather_air_nor"
+   ]
   }
  ],
  "contexto": [
@@ -17797,6 +18025,70 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "pending"
+  },
+  {
+   "id": "ct_gastronomie_300",
+   "category": "gastronomie",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "target": "n_v4gas_mancare"
+  },
+  {
+   "id": "ct_gastronomie_301",
+   "category": "gastronomie",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "target": "n_v24_food_salad_veg_morcov"
+  },
+  {
+   "id": "ct_viata_de_roman_302",
+   "category": "viata_de_roman",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "target": "n_v24_home_appliances_frigider"
+  },
+  {
+   "id": "ct_societate_303",
+   "category": "societate",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "target": "n_v4soc_familie"
+  },
+  {
+   "id": "ct_viata_de_roman_304",
+   "category": "viata_de_roman",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "target": "n_v24_school_writing_creion"
+  },
+  {
+   "id": "ct_societate_305",
+   "category": "societate",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "target": "n_v24_places_public_farmacie"
+  },
+  {
+   "id": "ct_stiinta_306",
+   "category": "stiinta",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "target": "n_v24_weather_precipitation_ploaie"
+  },
+  {
+   "id": "ct_limba_307",
+   "category": "limba",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "target": "n_v24_action_language_a_citi"
   }
  ],
  "lant": [
@@ -19729,6 +20021,86 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "pending"
+  },
+  {
+   "id": "lt_gastronomie_212",
+   "category": "gastronomie",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "start": "n_v4gas_bucatarie",
+   "target": "n_v24_food_salad_veg_morcov",
+   "optimal": 2
+  },
+  {
+   "id": "lt_viata_de_roman_213",
+   "category": "viata_de_roman",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "start": "n_v23via_ghiozdan",
+   "target": "n_v24_school_classroom_lectie",
+   "optimal": 2
+  },
+  {
+   "id": "lt_viata_de_roman_214",
+   "category": "viata_de_roman",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "start": "n_v4via_baie",
+   "target": "n_v24_home_rooms_camera",
+   "optimal": 2
+  },
+  {
+   "id": "lt_stiinta_215",
+   "category": "stiinta",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "start": "n_v4per_om",
+   "target": "n_v24_body_face_nas",
+   "optimal": 2
+  },
+  {
+   "id": "lt_stiinta_216",
+   "category": "stiinta",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "start": "n_v4gas_apa",
+   "target": "n_v24_weather_air_nor",
+   "optimal": 2
+  },
+  {
+   "id": "lt_viata_de_roman_217",
+   "category": "viata_de_roman",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "start": "n_v24_home_seating_scaun",
+   "target": "n_v24_home_rooms_dormitor",
+   "optimal": 3
+  },
+  {
+   "id": "lt_gastronomie_218",
+   "category": "gastronomie",
+   "difficulty": "normal",
+   "source": "ai",
+   "status": "pending",
+   "start": "n_v2gas_ciorba",
+   "target": "n_v24_food_salad_veg_morcov",
+   "optimal": 4
+  },
+  {
+   "id": "lt_stiinta_219",
+   "category": "stiinta",
+   "difficulty": "normal",
+   "source": "ai",
+   "status": "pending",
+   "start": "n_v4sti_corp",
+   "target": "n_v24_weather_precipitation_zapada",
+   "optimal": 4
   }
  ],
  "alchimie": [
@@ -21297,6 +21669,114 @@
    "category": "viata_de_roman",
    "source": "ai",
    "status": "pending"
+  },
+  {
+   "id": "al_viata_de_roman_099",
+   "category": "viata_de_roman",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "seeds": [
+    "n_v24_action_routine_a_dormi",
+    "n_v24_action_routine_a_invata",
+    "n_v24_home_rooms_camera",
+    "n_v24_school_classroom_banca_scolara",
+    "n_v24_school_writing_caiet",
+    "n_v24_school_writing_creion",
+    "n_v4via_usa"
+   ],
+   "target": "n_v24_home_bed_perna",
+   "target_depth": 2
+  },
+  {
+   "id": "al_viata_de_roman_100",
+   "category": "viata_de_roman",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "seeds": [
+    "n_v24_action_routine_a_dormi",
+    "n_v24_action_routine_a_invata",
+    "n_v24_home_rooms_camera",
+    "n_v24_school_classroom_clasa_scolara",
+    "n_v24_school_writing_caiet",
+    "n_v24_school_writing_creion",
+    "n_v4via_usa"
+   ],
+   "target": "n_v24_home_seating_fotoliu",
+   "target_depth": 3
+  },
+  {
+   "id": "al_viata_de_roman_101",
+   "category": "viata_de_roman",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "seeds": [
+    "n_v24_action_routine_a_dormi",
+    "n_v24_action_routine_a_invata",
+    "n_v24_home_bed_pat",
+    "n_v24_school_classroom_banca_scolara",
+    "n_v24_school_writing_caiet",
+    "n_v24_school_writing_creion",
+    "n_v4via_usa"
+   ],
+   "target": "n_v24_home_rooms_sufragerie",
+   "target_depth": 3
+  },
+  {
+   "id": "al_viata_de_roman_102",
+   "category": "viata_de_roman",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "seeds": [
+    "n_v24_action_routine_a_dormi",
+    "n_v24_action_routine_a_invata",
+    "n_v24_home_bed_pat",
+    "n_v24_school_classroom_clasa_scolara",
+    "n_v24_school_writing_caiet",
+    "n_v24_school_writing_creion",
+    "n_v4via_usa"
+   ],
+   "target": "n_v24_school_assessment_examen",
+   "target_depth": 3
+  },
+  {
+   "id": "al_viata_de_roman_103",
+   "category": "viata_de_roman",
+   "difficulty": "normal",
+   "source": "ai",
+   "status": "pending",
+   "seeds": [
+    "n_v24_action_routine_a_dormi",
+    "n_v24_action_routine_a_invata",
+    "n_v24_home_rooms_sufragerie",
+    "n_v24_school_classroom_banca_scolara",
+    "n_v24_school_writing_caiet",
+    "n_v24_school_writing_creion",
+    "n_v4via_usa"
+   ],
+   "target": "n_v24_school_assessment_catalog_scolar",
+   "target_depth": 4
+  },
+  {
+   "id": "al_viata_de_roman_104",
+   "category": "viata_de_roman",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "seeds": [
+    "n_v24_action_routine_a_dormi",
+    "n_v24_action_routine_a_invata",
+    "n_v24_home_rooms_sufragerie",
+    "n_v24_school_classroom_banca_scolara",
+    "n_v24_school_classroom_clasa_scolara",
+    "n_v24_school_writing_caiet",
+    "n_v4via_usa"
+   ],
+   "target": "n_v24_home_textiles_covor",
+   "target_depth": 3
   }
  ]
 }

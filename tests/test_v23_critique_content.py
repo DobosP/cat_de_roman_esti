@@ -43,6 +43,7 @@ _NODE_IDS = {
     "n_v23lit_zmeul",
     "n_v23lit_fat_frumos",
 }
+_EDGE_IDS = {f"de{number}" for number in range(7514, 7592)}
 
 
 def test_v23_items_remain_pending_until_the_bound_judge_gate():
@@ -63,15 +64,15 @@ def test_v23_items_remain_pending_until_the_bound_judge_gate():
 
 def test_v23_graph_wave_has_the_reviewed_size_and_no_duplicate_moara_node():
     nodes = {node["id"]: node for node in _KG["kg_nodes"]}
-    edges = [
-        edge
-        for edge in _KG["kg_edges"]
-        if edge["src_id"] in _NODE_IDS or edge["dst_id"] in _NODE_IDS
-    ]
+    edges = {edge["id"]: edge for edge in _KG["kg_edges"] if edge["id"] in _EDGE_IDS}
 
     assert _NODE_IDS <= set(nodes)
     assert len(_NODE_IDS) == 22
-    assert len(edges) == 78
+    assert set(edges) == _EDGE_IDS
+    assert all(
+        edge["src_id"] in _NODE_IDS or edge["dst_id"] in _NODE_IDS
+        for edge in edges.values()
+    )
     assert nodes["n_v23via_moara_joc"]["aliases"] == ["Țintar", "jocul de moară", "moara"]
     assert not any(node["label_ro"] == "Țintar" for node in _KG["kg_nodes"])
 
