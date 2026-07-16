@@ -47,6 +47,12 @@ const DIFFICULTIES: { id: Difficulty; label: string; hint: string }[] = [
   { id: "greu", label: DIFFICULTY_LABEL.greu, hint: "concept mai rar" },
 ];
 
+type GuessRecovery = {
+  message: string;
+  choices: string[];
+  tone: "info" | "warning";
+};
+
 // Temperature -> colour on a hot/cold gradient (hot = red/orange, cold = blue).
 const TEMP_COLOR: Record<Temperature, string> = {
   Gasit: "#5fd99b",
@@ -167,6 +173,7 @@ export default function CaldRece({
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
   const [latestId, setLatestId] = useState<string | null>(null);
+  const [recovery, setRecovery] = useState<GuessRecovery | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>("normal");
   const [category, setCategory] = useState<string | null>(null);
   // Intro is shown until the player picks how to start.
@@ -189,6 +196,7 @@ export default function CaldRece({
         active.remember(fresh.game_id);
         setLatestId(null);
         setText("");
+        setRecovery(null);
         setIsRecord(false);
         setIsPuzzleRecord(false);
         setShowIntro(false);
@@ -227,6 +235,7 @@ export default function CaldRece({
         setCategory(saved.board_category ?? null);
         setLatestId(null);
         setText("");
+        setRecovery(null);
         setIsRecord(false);
         setIsPuzzleRecord(false);
         setShowIntro(false);
@@ -299,6 +308,7 @@ export default function CaldRece({
       const q = text.trim();
       if (!q) return;
       setBusy(true);
+      setRecovery(null);
       try {
         const res: GuessResult = await contextoApi.submitGuess(
           state.game_id,
@@ -306,7 +316,11 @@ export default function CaldRece({
         );
         if (!res.ok) {
           sound.playError();
-          onToast(res.message, "error");
+          setRecovery({
+            message: res.message,
+            choices: res.suggestions,
+            tone: "warning",
+          });
           setState((prev) =>
             prev
               ? {
@@ -323,6 +337,9 @@ export default function CaldRece({
         }
         setText("");
         setLatestId(res.guess.id);
+        if (res.message) {
+          setRecovery({ message: res.message, choices: [], tone: "info" });
+        }
         setState((prev) =>
           prev
             ? {
@@ -362,6 +379,7 @@ export default function CaldRece({
   const handleClue = useCallback(async () => {
     if (!state || busy || finished || !state.clue_available) return;
     setBusy(true);
+    setRecovery(null);
     try {
       const res = await contextoApi.requestClue(state.game_id);
       sound.playSelect();
@@ -384,6 +402,7 @@ export default function CaldRece({
   const handleGiveUp = useCallback(async () => {
     if (!state || busy || finished) return;
     setBusy(true);
+    setRecovery(null);
     try {
       const res = await contextoApi.giveUp(state.game_id);
       sound.playUndo();
@@ -408,6 +427,7 @@ export default function CaldRece({
 
   const showOptions = useCallback(() => {
     active.forget();
+    setRecovery(null);
     setShowIntro(true);
   }, [active]);
 
@@ -585,9 +605,10 @@ export default function CaldRece({
             onChange={(e) => setText(e.target.value)}
             onKeyDown={(e) => {
               // Escape clears a half-typed guess without leaving the field.
-              if (e.key === "Escape" && text) {
+              if (e.key === "Escape" && (text || recovery)) {
                 e.preventDefault();
                 setText("");
+                setRecovery(null);
               }
             }}
             disabled={busy || finished}
@@ -604,6 +625,59 @@ export default function CaldRece({
             Ghicește
           </Button>
         </form>
+
+        <span
+          className="visually-hidden"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          {!finished ? (recovery?.message ?? "") : ""}
+        </span>
+
+        <AnimatePresence>
+          {!finished && recovery && (
+            <m.div
+              key={`${recovery.tone}-${recovery.message}`}
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              className="card"
+              style={{
+                padding: 12,
+                borderColor: recovery.tone === "warning" ? "var(--warn)" : DEF.accent,
+              }}
+            >
+              <div className="col" style={{ gap: 8 }}>
+                <span>
+                  <span aria-hidden="true" style={{ marginRight: 6 }}>
+                    {recovery.tone === "warning" ? "⚠" : "ℹ"}
+                  </span>
+                  {recovery.message}
+                </span>
+                {recovery.choices.length > 0 ? (
+                  <div className="row wrap" style={{ gap: 8 }}>
+                    <span className="faint">Ai vrut să scrii:</span>
+                    {recovery.choices.map((choice) => (
+                      <Button
+                        key={choice}
+                        type="button"
+                        variant="secondary"
+                        onClick={() => {
+                          sound.playSelect();
+                          setText(choice);
+                          inputRef.current?.focus();
+                        }}
+                      >
+                        {choice}
+                      </Button>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            </m.div>
+          )}
+        </AnimatePresence>
 
         {state?.clue && !finished && (
           <div
@@ -695,6 +769,14 @@ export default function CaldRece({
               {state.target.description && (
                 <span style={{ fontSize: "0.85rem" }}>{state.target.description}</span>
               )}
+              {won && recovery?.message ? (
+                <span className="muted" style={{ display: "block", marginTop: 8 }}>
+                  <span aria-hidden="true" style={{ marginRight: 6 }}>
+                    ℹ
+                  </span>
+                  {recovery.message}
+                </span>
+              ) : null}
             </ResultCard>
           )}
         </AnimatePresence>

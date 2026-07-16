@@ -72,6 +72,8 @@ export interface ContextoState {
 export interface GuessRejected {
   ok: false;
   message: string;
+  /** Bounded, server-filtered labels; the hidden target is never included. */
+  suggestions: string[];
   guesses: Guess[];
   attempts: number;
   won: boolean;
@@ -84,6 +86,8 @@ export interface GuessRejected {
 /** An accepted guess. */
 export interface GuessAccepted {
   ok: true;
+  /** Present only when the server confidently accepted a corrected label. */
+  message?: string;
   guess: Guess;
   guesses: Guess[];
   attempts: number;
