@@ -13,6 +13,7 @@ import { GameIntro } from "../components/GameIntro";
 import { Hud, StatBadge } from "../components/Hud";
 import { ResultCard } from "../components/ResultCard";
 import { DifficultyPicker } from "../components/DifficultyPicker";
+import { NextMove } from "../components/PlayGuide";
 import { sound } from "../sound";
 import {
   contextoApi,
@@ -42,7 +43,7 @@ const DIFFICULTY_LABEL: Record<Difficulty, string> = {
 };
 
 const DIFFICULTIES: { id: Difficulty; label: string; hint: string }[] = [
-  { id: "usor", label: DIFFICULTY_LABEL.usor, hint: "concept cunoscut" },
+  { id: "usor", label: DIFFICULTY_LABEL.usor, hint: "recomandat" },
   { id: "normal", label: "Normal", hint: "echilibrat" },
   { id: "greu", label: DIFFICULTY_LABEL.greu, hint: "concept mai rar" },
 ];
@@ -112,7 +113,7 @@ function GuessRow({ g, isLatest }: { g: Guess; isLatest: boolean }) {
         padding: "10px 14px",
         display: "grid",
         gap: 8,
-        borderColor: isLatest ? color : "var(--border)",
+        borderColor: isLatest ? color : "var(--surface-border)",
         boxShadow: isLatest ? `0 0 22px -10px ${color}` : undefined,
       }}
     >
@@ -174,7 +175,7 @@ export default function CaldRece({
   const [busy, setBusy] = useState(false);
   const [latestId, setLatestId] = useState<string | null>(null);
   const [recovery, setRecovery] = useState<GuessRecovery | null>(null);
-  const [difficulty, setDifficulty] = useState<Difficulty>("normal");
+  const [difficulty, setDifficulty] = useState<Difficulty>("usor");
   const [category, setCategory] = useState<string | null>(null);
   // Intro is shown until the player picks how to start.
   const [showIntro, setShowIntro] = useState(true);
@@ -452,8 +453,8 @@ export default function CaldRece({
     return (
       <div className="screen-pad fill">
         <div
-          className="container col"
-          style={{ gap: 18, paddingBlock: 8, minHeight: "100%", justifyContent: "center" }}
+          className="container col game-container"
+          style={{ gap: 18, paddingBlock: 8 }}
         >
           <div style={{ width: "100%" }}>
             <GameShell onExit={handleExit} accent={DEF.accent} />
@@ -467,11 +468,14 @@ export default function CaldRece({
             glow={DEF.glow}
             description={
               <p style={{ margin: 0 }}>
-                Există un concept secret. Scrie ce-ți vine în minte — îți spun cât
-                de aproape ești. Cu cât folosești mai puține încercări, cu atât
-                scorul este mai mare.
+                Găsește secretul urmărind cât de cald e fiecare cuvânt.
               </p>
             }
+            steps={[
+              { icon: "⌨️", label: "Scrie un cuvânt" },
+              { icon: "🔥", label: "Vezi căldura" },
+              { icon: "🎯", label: "Apropie-te" },
+            ]}
             best={best}
             startLabel="Joacă"
             onStart={() => void start({ difficulty, category: category ?? undefined })}
@@ -513,7 +517,7 @@ export default function CaldRece({
     // (worst with the keyboard up), stranding the guesses; single-scroll keeps every
     // guess reachable at any height.
     <div className="screen-pad fill">
-      <div className="container col" style={{ gap: 16, paddingBlock: 8 }}>
+      <div className="container col game-container" style={{ gap: 16, paddingBlock: 8 }}>
         {/* header */}
         <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title}>
           <Hud>
@@ -584,23 +588,28 @@ export default function CaldRece({
           </Hud>
         </GameShell>
 
-        {/* title */}
-        <div className="col" style={{ gap: 4 }}>
-          <h1 style={{ fontSize: "clamp(1.5rem, 4vw, 2.2rem)", margin: 0 }}>
-            {DEF.title}
-          </h1>
-          <p className="muted" style={{ margin: 0, fontSize: "0.9rem" }}>
-            Există un concept secret. Scrie ce-ți vine în minte — îți spun cât
-            de aproape ești. 🔥 fierbinte … 🧊 înghețat.
-          </p>
-        </div>
+        <NextMove
+          icon={latestGuess ? TEMP_ICON[latestGuess.temperature] : "⌨️"}
+          title={latestGuess ? "Urmează căldura" : "Încearcă un cuvânt"}
+          detail={
+            latestGuess
+              ? `${TEMP_HINT[latestGuess.temperature]} Încearcă ceva înrudit.`
+              : "Sensul contează, nu literele."
+          }
+          progress={`${state?.attempts ?? 0} încercări`}
+          accent={latestGuess ? barColor(latestGuess) : DEF.accent}
+          ready={Boolean(latestGuess && latestGuess.rank <= 10)}
+        />
+        <p className="rank-legend faint" style={{ margin: 0 }}>
+          Număr mai mic = mai aproape · #1 = răspunsul
+        </p>
 
         {/* input — sticky so it stays reachable while the guess list scrolls under it */}
         <form onSubmit={handleGuess} className="row contexto-input-bar" style={{ gap: 8 }}>
           <input
             ref={inputRef}
             className="field fill"
-            placeholder={finished ? "Joc terminat" : "Scrie un concept…"}
+            placeholder={finished ? "Joc terminat" : "Încearcă un cuvânt…"}
             value={text}
             onChange={(e) => setText(e.target.value)}
             onKeyDown={(e) => {
@@ -687,7 +696,7 @@ export default function CaldRece({
               alignItems: "center",
               padding: "8px 12px",
               borderRadius: 10,
-              border: "1px solid var(--border)",
+              border: "1px solid var(--surface-border)",
               background: "rgba(255,255,255,0.04)",
             }}
             aria-live="polite"

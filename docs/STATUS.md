@@ -1,28 +1,18 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-16. This file is the repository's current source of truth._
-_Last verified: 2026-07-16 (backend 324; session-store 11; exact v23 critique 7;
-Ruff; both validators; workflow syntax; frontend lint/typecheck/26 tests/build;
-bundle 115.38 KiB; `git diff --check`.)_
+_Last verified: 2026-07-16 (backend 324; session-store 11; exact v23 critique 7; Ruff; both validators; workflow syntax; frontend lint/typecheck/31 tests/build; bundle 116.11 KiB; 320/390/1280 px visual review; `git diff --check`.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
 The critique layer now fails closed from generation through promotion:
 
-- `critique_pack.py` rejects bad explicit IDs, checks selected pending boards against one
-  another, projects batch member overuse, and emits directed Contexto dossiers with live degree.
-- Gate-mode `.claude/workflows/critique-games.js` verifies every item with the
-  adversarial layer. Only clean approved-stock sweeps may use deterministic 1-in-4
-  sampling. Returned IDs must match requested IDs.
-- Lanț and Alchimie now have explicit judge criteria plus branch-choice and craft-choice
-  dossier profiles; all four games have game-specific quality review.
-- Version-2 artifacts bind the exact batch, canonical dossier content, and rubric digest.
-  Apply rebuilds those dossiers, rejects stale/unverified/hand-combined artifacts, and
-  reruns deterministic critique over the exact promotion set before writing.
-- Re-review and demotion apply paths validate game, status, ID, and verdict before
-  mutation and restore both pack copies on validator errors, red returns, or exceptions.
-- `import_candidates.py` maps accepted generator output to `pending`; per-game ID
-  high-water marks persist in pack metadata, so retired IDs are never reused later.
+- `critique_pack.py` validates explicit IDs, cross-board reuse, projected member overuse, and directed Contexto dossiers with live degree.
+- Gate mode verifies every item adversarially; only clean approved-stock sweeps may sample 1-in-4, and returned IDs must match requested IDs.
+- Lanț and Alchimie have explicit branch/craft judge criteria; all four games have game-specific review.
+- Version-2 artifacts bind the exact batch, dossiers, and rubric; apply rebuilds and reruns them before writing.
+- Re-review/demotion validates identity and verdict, restoring both pack copies on any red or exception.
+- Imports enter `pending`; persistent per-game high-water marks prevent retired ID reuse.
 
 ## Current outcome — browser recovery (ADR-0027 through ADR-0029)
 
@@ -32,6 +22,13 @@ one-tile swaps and blocks the unchanged set without inferring hidden membership.
 Cald sau Rece renders target-filtered typo suggestions as fill-only buttons and preserves
 accepted correction messages, including wins. All three remain server-authoritative;
 score, secrecy, TTL, and the 1,000-session caps are unchanged.
+
+## Current outcome — beginner mobile interface (ADR-0031)
+
+All four games now default to `Ușor`, teach their loop with three terse actions, and show
+one live `ACUM` cue instead of repeating rules. Mobile gets 44 px targets, scrollable
+status/theme rails, readable long labels, reachable primary actions, visible rank meaning,
+and safe keyboard shortcuts; desktop retains the same focused play column.
 
 ## Current outcome — v23 critique-informed childhood wave (ADR-0030)
 
@@ -91,7 +88,8 @@ session-store target remains `tests/test_wordgames_session_store.py` (11 tests).
 
 ## Next verified work
 
-- Playtest Lanț recovery: measure invalid moves, hint reuse, undo, and abandonment.
+- Playtest the beginner UI at 320–390 px and Lanț recovery; measure first action, invalid
+  moves, hint reuse, undo, completion, and abandonment.
 - Review the external v22 batch, and run the bound judge gate over the seven exact v23
   pending IDs; keep both Alchimie closure-size profiles under adversarial review.
 - Work the approved-stock critique/A7 queues; generic regional KG edges remain a cleanup

@@ -24,8 +24,8 @@ export function GameShell({
   children?: ReactNode;
 }) {
   return (
-    <div className="row spread wrap game-shell-header" style={{ gap: 12 }}>
-      <div className="row" style={{ gap: 10, alignItems: "center" }}>
+    <div className="row spread game-shell-header" style={{ gap: 12 }}>
+      <div className="row game-shell-main" style={{ gap: 10, alignItems: "center" }}>
         <Button variant="secondary" size="sm" onClick={onExit} aria-label="Înapoi la meniu">
           <span aria-hidden>←</span> Meniu
         </Button>
@@ -39,7 +39,7 @@ export function GameShell({
         )}
       </div>
       {children && (
-        <div className="row wrap" style={{ gap: 8, alignItems: "center" }}>
+        <div className="game-shell-status">
           {children}
         </div>
       )}

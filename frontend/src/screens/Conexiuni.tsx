@@ -23,6 +23,7 @@ import { GameIntro } from "../components/GameIntro";
 import { Hud, StatBadge } from "../components/Hud";
 import { ResultCard } from "../components/ResultCard";
 import { DifficultyPicker } from "../components/DifficultyPicker";
+import { NextMove } from "../components/PlayGuide";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
 import { sound } from "../sound";
@@ -67,7 +68,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   // A server-confirmed one-away or duplicate set that must change before resubmission.
   // Only the oneAway flag may surface the stronger 3-of-4 guidance.
   const [blockedGuess, setBlockedGuess] = useState<BlockedGuess | null>(null);
-  const [difficulty, setDifficulty] = useState<Difficulty>("normal");
+  const [difficulty, setDifficulty] = useState<Difficulty>("usor");
   const [category, setCategory] = useState<string | null>(null);
   const [recordHit, setRecordHit] = useState(false);
   const [puzzleRecordHit, setPuzzleRecordHit] = useState(false);
@@ -359,8 +360,16 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     if (!state || finished) return;
     const onKey = (e: KeyboardEvent) => {
       if (busy) return;
-      const tag = (e.target as HTMLElement | null)?.tagName;
-      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      const target = e.target instanceof Element ? e.target : null;
+      if (
+        e.defaultPrevented ||
+        (e.key === "Enter" &&
+          target?.closest(
+            'button, a, input, textarea, select, [role="button"], [contenteditable="true"]',
+          ))
+      ) {
+        return;
+      }
       if (e.key === "Enter" && selected.length === GROUP_SIZE && !exactBlockedRetry) {
         e.preventDefault();
         void submit();
@@ -379,7 +388,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   if (!state) {
     return (
       <div className="screen-pad fill" style={{ overflowY: "auto" }}>
-        <div className="container col" style={{ gap: 18, paddingBottom: 32 }}>
+        <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
           <GameShell onExit={onExit} accent={DEF.accent} />
 
           <GameIntro
@@ -390,10 +399,14 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
             glow={DEF.glow}
             description={
               <p style={{ margin: 0 }}>
-                16 concepte, 4 grupuri ascunse. Alege exact 4 care împart o categorie. Ai 4
-                vieți — găsește toate grupurile!
+                Găsește patru grupuri ascunse printre cele 16 cuvinte.
               </p>
             }
+            steps={[
+              { icon: "👆", label: "Alege patru" },
+              { icon: "✓", label: "Verifică" },
+              { icon: "🧩", label: "Găsește grupul" },
+            ]}
             best={best}
             startLabel="Joacă"
             onStart={() => void start({ kind: "seed", difficulty })}
@@ -405,6 +418,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               options={(["usor", "normal", "greu"] as Difficulty[]).map((d) => ({
                 id: d,
                 label: DIFF_LABEL[d],
+                hint: d === "usor" ? "recomandat" : undefined,
               }))}
               value={difficulty}
               onChange={(d) => {
@@ -428,11 +442,9 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   }
 
   // ----------------------------------------------------------------- BOARD
-  const lifeDots = Array.from({ length: 4 }, (_, i) => i < state.lives);
-
   return (
     <div className="screen-pad fill" style={{ overflowY: "auto" }}>
-      <div className="container col" style={{ gap: 16, paddingBottom: 32 }}>
+      <div className="container col game-container" style={{ gap: 16, paddingBottom: 32 }}>
         {/* Header */}
         <GameShell onExit={onExit} accent={DEF.accent} title={DEF.title}>
           <Hud>
@@ -448,16 +460,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               />
             )}
             <StatBadge
-              label="VIEȚI"
-              value={
-                <span className="row" style={{ gap: 4 }} aria-label={`${state.lives} vieți rămase`}>
-                  {lifeDots.map((alive, i) => (
-                    <span key={i} aria-hidden style={{ opacity: alive ? 1 : 0.25 }}>
-                      {alive ? "●" : "○"}
-                    </span>
-                  ))}
-                </span>
-              }
+              label="GREȘELI"
+              value={`${state.lives} rămase`}
               accent={DEF.accent}
             />
           </Hud>
@@ -470,15 +474,51 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
           ))}
         </AnimatePresence>
 
+        {!finished && (
+          <NextMove
+            icon={selected.length === GROUP_SIZE ? "✓" : "👆"}
+            title={
+              exactBlockedRetry
+                ? "Schimbă o piesă"
+                : selected.length === 0
+                  ? "Alege 4 care merg împreună"
+                  : selected.length < GROUP_SIZE
+                    ? `Încă ${GROUP_SIZE - selected.length}`
+                    : "Grup gata"
+            }
+            detail={
+              exactBlockedRetry
+                ? "Aceeași combinație a fost deja verificată."
+                : selected.length === GROUP_SIZE
+                  ? "Apasă Verifică."
+                  : "Caută o categorie comună."
+            }
+            progress={`${selected.length}/${GROUP_SIZE}`}
+            accent={DEF.accent}
+            ready={selected.length === GROUP_SIZE && !exactBlockedRetry}
+            className="connections-coach"
+            action={
+              <Button
+                type="button"
+                disabled={busy || selected.length !== GROUP_SIZE || exactBlockedRetry}
+                onClick={submit}
+                style={{ borderColor: DEF.accent }}
+              >
+                {busy ? "…" : exactBlockedRetry ? "Schimbă o piesă" : "Verifică"}
+              </Button>
+            }
+          />
+        )}
+
         {/* Active board */}
         {!finished && (
           <m.div
             key={shake}
             animate={shake ? { x: [0, -8, 8, -6, 6, 0] } : {}}
             transition={{ duration: 0.4 }}
+            className="connections-grid"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
               gap: 8,
             }}
           >
@@ -501,7 +541,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                     disabled={busy}
                     aria-pressed={isSel}
                     title={t.label}
-                    className="card center"
+                    className="card center connection-tile"
                     style={{
                       padding: "12px 6px",
                       minHeight: 64,
@@ -537,6 +577,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               exit={{ opacity: 0 }}
               className="muted center"
               style={{ margin: 0, fontSize: "0.85rem" }}
+              role="status"
+              aria-live="polite"
             >
               {feedback}
             </m.p>
@@ -554,6 +596,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                 exit={{ opacity: 0 }}
                 className="muted center"
                 style={{ margin: 0, fontSize: "0.85rem" }}
+                role="status"
+                aria-live="polite"
               >
                 {clue.message}
               </m.p>
@@ -562,9 +606,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
 
         {/* Controls */}
         {!finished && (
-          <div className="col" style={{ gap: 8 }}>
-            <div className="row center wrap" style={{ gap: 12 }}>
-              <span className="faint">{selected.length}/4 selectate</span>
+          <div className="col game-action-dock connections-actions" style={{ gap: 8 }}>
+            <div className="row center wrap game-action-buttons" style={{ gap: 12 }}>
               <Button
                 type="button"
                 variant="secondary"
@@ -595,16 +638,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               >
                 Golește
               </Button>
-              <Button
-                type="button"
-                disabled={busy || selected.length !== GROUP_SIZE || exactBlockedRetry}
-                onClick={submit}
-                style={{ borderColor: DEF.accent }}
-              >
-                {busy ? "…" : exactBlockedRetry ? "Schimbă o piesă" : "Verifică"}
-              </Button>
             </div>
-            <span className="faint center" style={{ fontSize: "0.72rem", opacity: 0.7 }}>
+            <span className="faint center fine-only" style={{ fontSize: "0.72rem", opacity: 0.7 }}>
               Enter = verifică · Esc = golește
             </span>
           </div>

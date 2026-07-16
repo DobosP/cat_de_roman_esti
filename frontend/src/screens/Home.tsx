@@ -138,8 +138,7 @@ export default function Home({
             transition={{ delay: 0.35, duration: 0.5 }}
             style={{ maxWidth: 640, fontSize: "1.05rem", margin: 0 }}
           >
-            Patru jocuri de cuvinte în limba română, cu oameni, locuri și idei din
-            cultura și viața de aici. Combină, ghicește, leagă sau grupează.
+            Patru jocuri românești. Alege unul și intri direct în ritm.
           </m.p>
         </header>
 

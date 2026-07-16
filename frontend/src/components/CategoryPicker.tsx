@@ -81,15 +81,20 @@ export function CategoryPicker({
       >
         CATEGORIE
       </span>
-      <div className="row wrap" role="group" aria-labelledby="category-label" style={{ gap: 6 }}>
+      <div
+        className="row wrap category-picker-options"
+        role="group"
+        aria-labelledby="category-label"
+        style={{ gap: 6 }}
+      >
         {chip(null, "Toate temele", accent)}
         {pop.map((c) => chip(c.key, categoryStyle(c.key).label, categoryStyle(c.key).color, c.kind))}
         {serious.map((c) =>
           chip(c.key, categoryStyle(c.key).label, categoryStyle(c.key).color, c.kind),
         )}
       </div>
-      <span className="faint" style={{ fontSize: "0.72rem" }}>
-        Categoria se aplică doar jocurilor libere.
+      <span className="faint category-picker-note" style={{ fontSize: "0.72rem" }}>
+        Tema se aplică doar jocurilor libere.
       </span>
     </div>
   );

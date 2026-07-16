@@ -19,6 +19,7 @@ import { GameShell } from "../components/GameShell";
 import { ResultCard } from "../components/ResultCard";
 import { GameIntro } from "../components/GameIntro";
 import { Hud, StatBadge } from "../components/Hud";
+import { NextMove } from "../components/PlayGuide";
 import { DifficultyPicker } from "../components/DifficultyPicker";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
@@ -41,7 +42,7 @@ const DIFFICULTY_LABEL: Record<Difficulty, string> = {
 };
 
 const DIFFICULTIES: { id: Difficulty; label: string; hint: string }[] = [
-  { id: "usor", label: DIFFICULTY_LABEL.usor, hint: "țintă apropiată" },
+  { id: "usor", label: DIFFICULTY_LABEL.usor, hint: "recomandat" },
   { id: "normal", label: "Normal", hint: "echilibrat" },
   { id: "greu", label: DIFFICULTY_LABEL.greu, hint: "țintă îndepărtată" },
 ];
@@ -62,7 +63,7 @@ export default function Alchimie({
   // The pair the most recent nudge suggested — gets a glowing outline.
   const [hintIds, setHintIds] = useState<Set<string>>(new Set());
   const [lastMessage, setLastMessage] = useState<string | null>(null);
-  const [difficulty, setDifficulty] = useState<Difficulty>("normal");
+  const [difficulty, setDifficulty] = useState<Difficulty>("usor");
   const [category, setCategory] = useState<string | null>(null);
   const [isRecord, setIsRecord] = useState(false);
   const [isPuzzleRecord, setIsPuzzleRecord] = useState(false);
@@ -335,6 +336,16 @@ export default function Alchimie({
   useEffect(() => {
     if (!state || won) return;
     const onKey = (e: KeyboardEvent) => {
+      const target = e.target instanceof Element ? e.target : null;
+      if (
+        e.defaultPrevented ||
+        (e.key === "Enter" &&
+          target?.closest(
+            'button, a, input, textarea, select, [role="button"], [contenteditable="true"]',
+          ))
+      ) {
+        return;
+      }
       if (e.key === "Enter" && selected.length === 2 && !busy) {
         e.preventDefault();
         void doCombine();
@@ -359,7 +370,7 @@ export default function Alchimie({
   if (!state) {
     return (
       <div className="screen-pad fill">
-        <div className="container col" style={{ gap: 18 }}>
+        <div className="container col game-container" style={{ gap: 18 }}>
           <GameShell onExit={onExit} accent={DEF.accent} />
 
           <GameIntro
@@ -371,11 +382,14 @@ export default function Alchimie({
             best={best}
             description={
               <p style={{ margin: 0 }}>
-                Combină două concepte ca să le descoperi vecinii comuni și ajungi
-                la ținta afișată. Cu cât folosești mai puține combinații, cu atât
-                scorul este mai mare.
+                Combină două concepte și ajungi la ținta afișată.
               </p>
             }
+            steps={[
+              { icon: "👆", label: "Alege două" },
+              { icon: "⚗️", label: "Combină" },
+              { icon: "✨", label: "Descoperă" },
+            ]}
             startLabel="Joacă →"
             onStart={() => void start({ difficulty, category: category ?? undefined })}
             onDaily={() => void start({ difficulty, daily: todayLocal() })}
@@ -407,7 +421,7 @@ export default function Alchimie({
 
   return (
     <div className="screen-pad fill" style={{ overflowY: "auto" }}>
-      <div className="container col" style={{ gap: 18, paddingBottom: 32 }}>
+      <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
         {/* Header */}
         <GameShell onExit={onExit} accent={DEF.accent} title={DEF.title}>
           <Hud>
@@ -486,10 +500,33 @@ export default function Alchimie({
           </div>
         </m.div>
 
+        {!won && (
+          <NextMove
+            icon={selected.length === 2 ? "✨" : "👆"}
+            title={
+              selected.length === 0
+                ? "Alege două concepte"
+                : selected.length === 1
+                  ? "Mai alege unul"
+                  : "Pereche gata"
+            }
+            detail={
+              selected.length === 1
+                ? `${selectedItems[0]?.label ?? "Primul concept"} este ales.`
+                : selected.length === 2
+                  ? "Apasă Combină."
+                  : "Pornește din inventar."
+            }
+            progress={`${selected.length}/2`}
+            accent={DEF.accent}
+            ready={selected.length === 2}
+          />
+        )}
+
         {/* Combine bench */}
         {!won && (
           <div
-            className="card row spread wrap"
+            className="card row spread wrap alchemy-bench"
             style={{ padding: 14, gap: 12, alignItems: "center" }}
           >
             <div
@@ -554,6 +591,8 @@ export default function Alchimie({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               style={{ margin: 0, fontSize: "0.92rem" }}
+              role="status"
+              aria-live="polite"
             >
               {lastMessage}
             </m.p>
@@ -566,7 +605,7 @@ export default function Alchimie({
             className="faint"
             style={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}
           >
-            INVENTAR ({inventory.length})
+            ALEGE DIN INVENTAR ({inventory.length})
           </span>
           <div className="wrap" style={{ display: "flex", gap: 8 }}>
             <AnimatePresence initial={false}>
@@ -685,7 +724,7 @@ function Slot({ item }: { item: InventoryItem | undefined }) {
   if (!item) {
     return (
       <span
-        className="chip faint"
+        className="chip faint alchemy-slot"
         style={{
           borderStyle: "dashed",
           minWidth: 90,
@@ -697,9 +736,13 @@ function Slot({ item }: { item: InventoryItem | undefined }) {
     );
   }
   return (
-    <span className="chip" style={{ borderColor: DEF.accent, color: "var(--text)" }}>
-      {item.parents ? "✦ " : ""}
-      {item.label}
+    <span
+      className="chip alchemy-slot"
+      style={{ borderColor: DEF.accent, color: "var(--text)" }}
+      title={item.label}
+    >
+      {item.parents ? <span aria-hidden>✦</span> : null}
+      <span className="alchemy-slot-label">{item.label}</span>
     </span>
   );
 }

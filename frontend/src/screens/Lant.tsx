@@ -18,6 +18,7 @@ import { GameIntro } from "../components/GameIntro";
 import { Hud, StatBadge } from "../components/Hud";
 import { ResultCard } from "../components/ResultCard";
 import { DifficultyPicker } from "../components/DifficultyPicker";
+import { NextMove } from "../components/PlayGuide";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
 import { sound } from "../sound";
@@ -31,7 +32,7 @@ const GAME_KEY = "lant";
 const DEF = gameByKey("lant");
 
 const DIFFICULTIES: { key: Difficulty; label: string; hint: string }[] = [
-  { key: "usor", label: "Ușor", hint: "2–3 salturi" },
+  { key: "usor", label: "Ușor", hint: "recomandat" },
   { key: "normal", label: "Normal", hint: "3–4 salturi" },
   { key: "greu", label: "Greu", hint: "4–6 salturi" },
 ];
@@ -50,7 +51,7 @@ type RecoveryFeedback = {
 
 function Breadcrumb({ path }: { path: PathStep[] }) {
   return (
-    <div className="row wrap" style={{ gap: 6, alignItems: "center" }}>
+    <div className="row wrap breadcrumb-trail" style={{ gap: 6, alignItems: "center" }}>
       <AnimatePresence initial={false}>
         {path.map((step, i) => (
           <m.span
@@ -107,7 +108,7 @@ export default function Lant({
   const [shake, setShake] = useState(0);
   const [hint, setHint] = useState<HintResult | null>(null);
   const [recovery, setRecovery] = useState<RecoveryFeedback | null>(null);
-  const [difficulty, setDifficulty] = useState<Difficulty>("normal");
+  const [difficulty, setDifficulty] = useState<Difficulty>("usor");
   const [category, setCategory] = useState<string | null>(null);
   const [scored, setScored] = useState<{
     score: number;
@@ -228,6 +229,13 @@ export default function Lant({
   useEffect(() => {
     if (!state?.won) return;
     const onKey = (e: KeyboardEvent) => {
+      const target = e.target instanceof Element ? e.target : null;
+      if (
+        e.defaultPrevented ||
+        target?.closest('button, a, input, textarea, select, [role="button"], [contenteditable="true"]')
+      ) {
+        return;
+      }
       if (e.key === "Enter") {
         e.preventDefault();
         void start({ difficulty: state.difficulty });
@@ -362,7 +370,7 @@ export default function Lant({
   if (!state) {
     return (
       <div className="screen-pad fill">
-        <div className="container col" style={{ gap: 18 }}>
+        <div className="container col game-container" style={{ gap: 18 }}>
           <GameShell onExit={onExit} accent={DEF.accent} />
 
           <GameIntro
@@ -373,10 +381,14 @@ export default function Lant({
             glow={DEF.glow}
             description={
               <p style={{ margin: 0 }}>
-                Sari de la un concept la altul prin legături reale, până la țintă.
-                Cu cât folosești mai puține salturi, cu atât scorul este mai mare.
+                Ajungi la țintă prin concepte legate direct.
               </p>
             }
+            steps={[
+              { icon: "⌨️", label: "Scrie un vecin" },
+              { icon: "🔗", label: "Fă un salt" },
+              { icon: "🎯", label: "Ajungi la țintă" },
+            ]}
             best={best}
             startLabel="Joacă →"
             onStart={() => void start({ difficulty })}
@@ -409,7 +421,7 @@ export default function Lant({
 
   return (
     <div className="screen-pad fill">
-      <div className="container col" style={{ gap: 18 }}>
+      <div className="container col game-container" style={{ gap: 18 }}>
         {/* header */}
         <GameShell onExit={onExit} accent={DEF.accent} title={DEF.title}>
           <Hud>
@@ -435,8 +447,8 @@ export default function Lant({
               title="Mutări făcute"
             />
             <StatBadge
-              label="OPTIM"
-              value={<>{state.optimal}{overPar > 0 ? ` (+${overPar})` : ""}</>}
+              label="REPER"
+              value={<>{state.optimal} salturi{overPar > 0 ? ` (+${overPar})` : ""}</>}
               accent={DEF.accent}
               title="Numărul minim de salturi"
             />
@@ -444,7 +456,7 @@ export default function Lant({
         </GameShell>
 
         {/* start -> target */}
-        <div className="card col" style={{ gap: 12, padding: 18 }}>
+        <div className="card col route-card" style={{ gap: 12, padding: 18 }}>
           <div className="spread row wrap" style={{ gap: 12, alignItems: "center" }}>
             <div className="col" style={{ gap: 2 }}>
               <span className="faint" style={{ fontSize: "0.7rem" }}>
@@ -498,6 +510,16 @@ export default function Lant({
           </AnimatePresence>
         </div>
 
+        {!won && (
+          <NextMove
+            icon="🔗"
+            title={`Leagă-te de ${state.current.label}`}
+            detail="Scrie un concept legat direct."
+            progress={`→ ${state.target.label}`}
+            accent={DEF.accent}
+          />
+        )}
+
         <span
           className="visually-hidden"
           role="status"
@@ -546,11 +568,11 @@ export default function Lant({
             className="col"
             style={{ gap: 10 }}
           >
-            <div className="row" style={{ gap: 8 }}>
+            <div className="row word-hop-input" style={{ gap: 8 }}>
               <input
                 ref={inputRef}
                 className="field fill"
-                placeholder="scrie următorul concept…"
+                placeholder="Scrie un concept legat…"
                 value={text}
                 disabled={busy}
                 onChange={(e) => setText(e.target.value)}
@@ -657,12 +679,15 @@ export default function Lant({
                   exit={{ opacity: 0, height: 0 }}
                   className="card"
                   style={{ padding: 12, borderColor: "var(--warn)" }}
+                  role="status"
+                  aria-live="polite"
                 >
                   <div className="col" style={{ gap: 4 }}>
                     <span className="muted" style={{ fontSize: "0.85rem" }}>
                       Încearcă:{" "}
                       <button
                         type="button"
+                        className="hint-fill-button"
                         title="Pune în căsuță"
                         onClick={() => {
                           if (hint.hint) setText(hint.hint.label);

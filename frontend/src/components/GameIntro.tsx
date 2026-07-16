@@ -9,6 +9,7 @@ import type { ReactNode } from "react";
 import { m } from "framer-motion";
 import { Badge, Button } from "@roedu/ui";
 import type { ScoreEntry } from "../scores";
+import { PlayGuide, type PlayGuideStep } from "./PlayGuide";
 
 export function GameIntro({
   icon,
@@ -17,6 +18,7 @@ export function GameIntro({
   accent,
   glow,
   description,
+  steps,
   best,
   children,
   startLabel = "Începe →",
@@ -32,6 +34,8 @@ export function GameIntro({
   glow?: string;
   /** How-to copy (free-form). */
   description: ReactNode;
+  /** Three terse actions that teach the loop without a rules wall. */
+  steps?: PlayGuideStep[];
   /** Personal best, if any (renders the record line). */
   best?: ScoreEntry | null;
   /** Difficulty picker + any game-specific extras. */
@@ -70,10 +74,11 @@ export function GameIntro({
         )}
       </div>
       <div className="muted game-intro-description">{description}</div>
+      {steps && <PlayGuide steps={steps} />}
 
       {children && <div className="col game-intro-extras">{children}</div>}
 
-      <div className="row center wrap" style={{ gap: 12, marginTop: 6 }}>
+      <div className="row center wrap game-intro-actions" style={{ gap: 12, marginTop: 6 }}>
         <Button autoFocus onClick={onStart} disabled={starting} size="lg">
           {startLabel}
         </Button>
