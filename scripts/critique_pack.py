@@ -14,7 +14,7 @@ neighbours in a foreign group than in its own — curated boards historically by
 it); ``red_herring_budget`` counts contested tiles; ``mirrored_groups`` detects group
 pairs in >=3-way 1:1 strong-edge correspondence (festivals <-> host cities);
 ``type_coherence`` flags 3+1 / 2+2 node_type mixes inside a group;
-``duplicate_groups`` flags quads already used by an approved board;
+``duplicate_groups`` flags quads already used by an approved or selected batch board;
 ``salience_floor`` flags Contexto/Lant/Alchimie targets below their difficulty band;
 ``member_overuse`` flags nodes reused across too many approved Conexiuni boards.
 
@@ -23,27 +23,41 @@ Usage::
     python scripts/critique_pack.py [--game G] [--status S] [--ids a,b] \
         [--json OUT] [--dossier DIR] [--strict]
 
-Default is a report over the whole pack (exit 0). ``--dossier`` writes one JSON
-dossier per selected item for judge-fleet consumption.
+Default is a report over the whole pack (exit 0). Explicit IDs are exact: unknown or
+filter-excluded IDs exit 2. ``--dossier`` writes one JSON dossier per selected item for
+judge-fleet consumption.
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from collections import Counter, defaultdict
+from functools import lru_cache
+from itertools import combinations
 from pathlib import Path
 
 _REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_REPO_ROOT))
 
 from cat_de_roman_esti.data import load_fixture  # noqa: E402
-from cat_de_roman_esti.wordgames.packs import GAME_KINDS  # noqa: E402
+from cat_de_roman_esti.wordgames.packs import (  # noqa: E402
+    ALCHIMIE_MAX_ACTIONS,
+    ALCHIMIE_MAX_SEARCH_STATES,
+    GAME_KINDS,
+    STATUSES,
+    _closure_generations,
+    _opening_pairs,
+    lant_branch_profile,
+)
 from cat_de_roman_esti.wordgames.service import WordGameService  # noqa: E402
 
 PACKAGE_PACK = _REPO_ROOT / "cat_de_roman_esti" / "fixtures" / "games_pack.json"
 PACKAGE_KG = _REPO_ROOT / "cat_de_roman_esti" / "fixtures" / "kg_sample.json"
+RUBRIC_PATH = _REPO_ROOT / "docs" / "CRITIQUE_RUBRIC.md"
+REVIEW_BINDING_VERSION = 1
 
 # Rubric C6: WARN floor for target/endpoint salience per declared difficulty.
 SALIENCE_FLOORS = {"usor": 0.60, "normal": 0.35, "greu": 0.20}
@@ -214,21 +228,22 @@ def node_brief(svc: WordGameService, nid: str) -> dict:
     node = svc.node(nid)
     if node is None:
         return {"id": nid, "label": "<missing>", "node_type": "?", "category": "?",
-                "salience": 0.0, "degree": 0, "description": ""}
+                "salience": 0.0, "degree": 0, "incoming_degree": 0, "description": ""}
     return {
         "id": nid,
         "label": node.label_ro,
         "node_type": node.node_type,
         "category": node.category,
         "salience": node.salience,
-        "degree": node.degree,
+        "degree": len(svc.neighbor_ids(nid)),
+        "incoming_degree": len(svc.predecessor_ids(nid)),
         "description": node.description,
     }
 
 
 # --------------------------------------------------------------------- per-item checks
 def check_generic_region(rec: dict, game: str, svc: WordGameService,
-                         strong: dict, regions: dict) -> list[dict]:
+                         regions: dict) -> list[dict]:
     """Rubric A7 item-level flags: gameplay leaning on a non-distinctive region link."""
     generic = regions["generic_nodes"]
     region_ids = regions["region_ids"]
@@ -256,11 +271,11 @@ def check_generic_region(rec: dict, game: str, svc: WordGameService,
                           " — region guesses rank warm without being distinctive",
             })
         elif target in region_ids:
-            polluted = [
-                node_brief(svc, b)["label"]
-                for b in strong.get(target, ())
-                if b in generic
-            ]
+            polluted = []
+            for predecessor in svc.predecessor_ids(target):
+                edge = svc.link(predecessor, target)
+                if predecessor in generic and edge and edge.strength >= STRONG_EDGE:
+                    polluted.append(node_brief(svc, predecessor)['label'])
             if len(polluted) >= 2:
                 findings.append({
                     "check": "generic_region_link", "level": "WARN",
@@ -328,7 +343,7 @@ def check_conexiuni(rec: dict, svc: WordGameService, strong: dict,
             findings.append({
                 "check": "duplicate_groups",
                 "level": "WARN" if rec.get("status") == "approved" else "FAIL",
-                "detail": f'group "{labels.get(gk, gk)}" reuses an approved quad '
+                "detail": f'group "{labels.get(gk, gk)}" reuses an approved/selected quad '
                           f"(also in: {', '.join(sorted(others))})",
             })
             continue
@@ -341,7 +356,7 @@ def check_conexiuni(rec: dict, svc: WordGameService, strong: dict,
             findings.append({
                 "check": "duplicate_groups", "level": "WARN",
                 "detail": f'group "{labels.get(gk, gk)}" shares 3 members with an '
-                          f"approved quad (near-duplicate; see: {', '.join(near)})",
+                          f"approved/selected quad (near-duplicate; see: {', '.join(near)})",
             })
     return findings
 
@@ -361,11 +376,229 @@ def check_target_salience(rec: dict, svc: WordGameService, *targets: str) -> lis
 
 
 # --------------------------------------------------------------------- dossiers
+def canonical_json_sha256(value: object) -> str:
+    '''Stable SHA-256 for JSON-shaped review inputs.'''
+    canonical = json.dumps(
+        value, ensure_ascii=False, sort_keys=True, separators=(',', ':'),
+    ).encode('utf-8')
+    return hashlib.sha256(canonical).hexdigest()
+
+
+def normalized_text_sha256(path: Path) -> str:
+    '''Platform-stable text digest for tracked rubric/fixture files.'''
+    text = path.read_text(encoding='utf-8').replace('\r\n', '\n').replace('\r', '\n')
+    return hashlib.sha256(text.encode('utf-8')).hexdigest()
+
+
+@lru_cache(maxsize=1)
+def rubric_sha256() -> str:
+    '''Platform-stable digest of the rubric (normalize checkout line endings).'''
+    return normalized_text_sha256(RUBRIC_PATH)
+
+
+@lru_cache(maxsize=1)
+def kg_sha256() -> str:
+    '''Bind judgments to the exact graph snapshot used to build their dossiers.'''
+    return normalized_text_sha256(PACKAGE_KG)
+
+
+def dossier_review_binding(dossier: dict) -> str:
+    '''Hash the exact judge input plus the current rubric, excluding the hash itself.'''
+    payload = {
+        'version': REVIEW_BINDING_VERSION,
+        'rubric_sha256': rubric_sha256(),
+        'dossier': {
+            key: value for key, value in dossier.items()
+            if key not in {'review_binding', 'rubric_sha256'}
+        },
+    }
+    canonical = json.dumps(
+        payload, ensure_ascii=False, sort_keys=True, separators=(',', ':'),
+    ).encode('utf-8')
+    return 'sha256:' + hashlib.sha256(canonical).hexdigest()
+
+
+def bind_dossier(dossier: dict) -> dict:
+    '''Attach the rubric digest and canonical review binding consumed by the gate.'''
+    dossier['rubric_sha256'] = rubric_sha256()
+    dossier['review_binding'] = dossier_review_binding(dossier)
+    return dossier
+
+
+def _concept_ref(svc: WordGameService, node_id: str) -> dict:
+    brief = node_brief(svc, node_id)
+    return {'id': node_id, 'label': brief['label']}
+
+
+def representative_shortest_paths(
+    svc: WordGameService, start: str, target: str, optimal: int, limit: int = 3,
+) -> list[dict]:
+    '''Return bounded deterministic shortest paths with judge-visible edge semantics.'''
+    if optimal < 1 or limit < 1:
+        return []
+    to_target = svc.distances_to(target)
+    node_paths: list[list[str]] = []
+
+    def ordered_next(node_id: str, remaining: int) -> list[str]:
+        candidates = [
+            neighbor for neighbor in svc.neighbor_ids(node_id)
+            if to_target.get(neighbor) == remaining - 1
+        ]
+        candidates.sort(key=lambda neighbor: (
+            -(svc.link(node_id, neighbor).strength if svc.link(node_id, neighbor) else 0),
+            neighbor,
+        ))
+        return candidates
+
+    def complete(node_id: str, path: list[str]) -> list[str] | None:
+        if node_id == target:
+            return path
+        remaining = optimal - len(path) + 1
+        for neighbor in ordered_next(node_id, remaining):
+            completed = complete(neighbor, [*path, neighbor])
+            if completed is not None:
+                return completed
+        return None
+
+    # One witness per first-hop branch lets judges inspect the actual alternatives
+    # behind branch_profile.valid_first_hops instead of seeing one dense subtree thrice.
+    for first_hop in ordered_next(start, optimal)[:limit]:
+        completed = complete(first_hop, [start, first_hop])
+        if completed is not None:
+            node_paths.append(completed)
+    evidence = []
+    for path in node_paths:
+        edges = []
+        for src, dst in zip(path, path[1:], strict=False):
+            edge = svc.link(src, dst)
+            edges.append({
+                'from': _concept_ref(svc, src),
+                'to': _concept_ref(svc, dst),
+                'relation': edge.relation if edge else '',
+                'label': edge.label_ro if edge else '',
+                'strength': round(edge.strength, 2) if edge else 0.0,
+            })
+        evidence.append({'nodes': [_concept_ref(svc, nid) for nid in path], 'edges': edges})
+    return evidence
+
+
+def productive_opening_pairs(
+    svc: WordGameService, seeds: list[str], category: str | None, limit: int = 6,
+) -> list[dict]:
+    '''Bounded seed-pair outcomes for judging whether Alchimie openings are intuitive.'''
+    owned = set(seeds)
+    candidates = []
+    for left, right in combinations(sorted(owned), 2):
+        fresh = [
+            node_id for node_id in svc.common_neighbors(left, right, category=category)
+            if node_id not in owned
+        ]
+        if fresh:
+            fresh.sort(key=lambda node_id: (
+                -node_brief(svc, node_id)['salience'], node_id,
+            ))
+            candidates.append({
+                'pair': [_concept_ref(svc, left), _concept_ref(svc, right)],
+                'result_count': len(fresh),
+                'results': [_concept_ref(svc, node_id) for node_id in fresh[:4]],
+            })
+    candidates.sort(key=lambda item: (
+        -item['result_count'], item['pair'][0]['id'], item['pair'][1]['id'],
+    ))
+    return candidates[:limit]
+
+
+def minimum_alchimie_recipe(
+    svc: WordGameService,
+    seeds: list[str],
+    target: str,
+    category: str | None,
+    max_actions: int,
+) -> list[dict] | None:
+    '''One deterministic minimum-action recipe, mirroring the bounded runtime BFS.'''
+    max_actions = min(max_actions, ALCHIMIE_MAX_ACTIONS)
+    start = frozenset(seeds)
+    frontier: set[frozenset[str]] = {start}
+    seen: set[frozenset[str]] = {start}
+    parents: dict[
+        frozenset[str], tuple[frozenset[str], tuple[str, str], frozenset[str]]
+    ] = {}
+    state_count = 1
+
+    def render_step(
+        pair: tuple[str, str], fresh: frozenset[str], required: set[str],
+    ) -> dict:
+        required_ranked = sorted(required)
+        optional = sorted(
+            fresh - required,
+            key=lambda node_id: (-node_brief(svc, node_id)['salience'], node_id),
+        )
+        ranked = [*required_ranked, *optional]
+        preview_size = max(6, len(required_ranked))
+        return {
+            'pair': [_concept_ref(svc, pair[0]), _concept_ref(svc, pair[1])],
+            'result_count': len(fresh),
+            'results': [_concept_ref(svc, node_id) for node_id in ranked[:preview_size]],
+        }
+
+    def reconstruct(
+        state: frozenset[str], final_pair: tuple[str, str], final_fresh: frozenset[str],
+    ) -> list[dict]:
+        raw_steps = [(final_pair, final_fresh)]
+        while state != start:
+            previous, pair, fresh = parents[state]
+            raw_steps.append((pair, fresh))
+            state = previous
+        raw_steps.reverse()
+        steps = []
+        for index, (pair, fresh) in enumerate(raw_steps):
+            later_inputs = {
+                node_id
+                for later_pair, _ in raw_steps[index + 1:]
+                for node_id in later_pair
+            }
+            required = set(fresh & later_inputs)
+            if target in fresh:
+                required.add(target)
+            steps.append(render_step(pair, fresh, required))
+        return steps
+
+    for _action in range(1, max_actions + 1):
+        next_layer: set[frozenset[str]] = set()
+        for owned in sorted(frontier, key=lambda state: tuple(sorted(state))):
+            for left, right in combinations(sorted(owned), 2):
+                fresh = frozenset(
+                    node_id
+                    for node_id in svc.common_neighbors(left, right, category=category)
+                    if node_id not in owned
+                )
+                if not fresh:
+                    continue
+                pair = (left, right)
+                if target in fresh:
+                    return reconstruct(owned, pair, fresh)
+                state = owned | fresh
+                if state in seen or state in next_layer:
+                    continue
+                state_count += 1
+                if state_count > ALCHIMIE_MAX_SEARCH_STATES:
+                    return None
+                parents[state] = (owned, pair, fresh)
+                next_layer.add(state)
+        if not next_layer:
+            return None
+        frontier = next_layer
+        seen.update(frontier)
+    return None
+
+
 def build_dossier(rec: dict, game: str, svc: WordGameService, strong: dict,
                   findings: list[dict], regions: dict | None = None) -> dict:
     dossier = {
         "id": rec["id"], "game": game, "category": rec.get("category"),
         "difficulty": rec.get("difficulty"), "status": rec.get("status"),
+        "record_sha256": canonical_json_sha256(rec),
+        "kg_sha256": kg_sha256(),
         "lint_findings": findings,
     }
     if regions:  # rubric A7 context for judges
@@ -380,7 +613,7 @@ def build_dossier(rec: dict, game: str, svc: WordGameService, strong: dict,
             involved = {rec["target"], *rec["seeds"]}
         flags = {
             node_brief(svc, n)["label"]: regions["generic_nodes"][n]
-            for n in involved if n in regions["generic_nodes"]
+            for n in sorted(involved) if n in regions["generic_nodes"]
         }
         if flags:
             dossier["nondistinctive_region_links"] = flags
@@ -418,26 +651,67 @@ def build_dossier(rec: dict, game: str, svc: WordGameService, strong: dict,
                         "strength": round(s, 2),
                     })
         dossier["cross_group_strong_edges"] = sorted(
-            cross, key=lambda c: -c["strength"]
+            cross, key=lambda c: (-c["strength"], c["a"], c["b"])
         )
     elif game == "contexto":
         target = rec["target"]
         dossier["target"] = node_brief(svc, target)
         dossier["reachable"] = len(svc.distances_to(target))
-        neigh = [
-            {**node_brief(svc, b), "strength": round(s, 2)}
-            for b, s in sorted(strong.get(target, {}).items(), key=lambda kv: -kv[1])
-        ]
-        dossier["strong_neighbors"] = neigh[:10]
+        neigh = []
+        for predecessor in svc.predecessor_ids(target):
+            edge = svc.link(predecessor, target)
+            if edge and edge.strength >= STRONG_EDGE:
+                neigh.append({
+                    **node_brief(svc, predecessor),
+                    "strength": round(edge.strength, 2),
+                })
+        dossier["strong_neighbors"] = sorted(
+            neigh, key=lambda item: (-item["strength"], item["id"])
+        )[:10]
     elif game == "lant":
         dossier["start"] = node_brief(svc, rec["start"])
         dossier["target"] = node_brief(svc, rec["target"])
         dossier["optimal"] = rec.get("optimal")
+        optimal = rec.get('optimal')
+        if (
+            isinstance(optimal, int)
+            and svc.exists(str(rec.get('start')))
+            and svc.exists(str(rec.get('target')))
+        ):
+            first_hops, min_width, total_nodes = lant_branch_profile(
+                svc, str(rec['start']), str(rec['target']), optimal,
+            )
+            dossier['branch_profile'] = {
+                'valid_first_hops': first_hops,
+                'narrowest_shortest_path_layer': min_width,
+                'total_intermediate_shortest_path_nodes': total_nodes,
+            }
+            dossier['representative_shortest_paths'] = representative_shortest_paths(
+                svc, str(rec['start']), str(rec['target']), optimal,
+            )
     elif game == "alchimie":
         dossier["target"] = node_brief(svc, rec["target"])
         dossier["seeds"] = [node_brief(svc, s) for s in rec["seeds"]]
         dossier["target_depth"] = rec.get("target_depth")
-    return dossier
+        seeds = [str(seed) for seed in rec.get('seeds', [])]
+        target = str(rec.get('target', ''))
+        category = str(rec.get('category') or '') or None
+        if target and all(svc.exists(nid) for nid in [*seeds, target]):
+            generations = _closure_generations(svc, seeds, category)
+            dossier['craft_profile'] = {
+                'opening_pairs': _opening_pairs(svc, seeds, category),
+                'closure_size': len(generations),
+                'target_generation': generations.get(target),
+            }
+            dossier['productive_openings'] = productive_opening_pairs(
+                svc, seeds, category,
+            )
+            target_depth = rec.get('target_depth')
+            if isinstance(target_depth, int):
+                dossier['minimum_action_recipe'] = minimum_alchimie_recipe(
+                    svc, seeds, target, category, target_depth,
+                )
+    return bind_dossier(dossier)
 
 
 # --------------------------------------------------------------------- main
@@ -445,9 +719,26 @@ def run(pack: dict, svc: WordGameService, strong: dict, regions: dict,
         games: list[str], statuses: set[str], ids: set[str] | None):
     approved_quads: dict[frozenset, list[str]] = defaultdict(list)
     for rec in pack["conexiuni"]:
-        if rec.get("status") == "approved":
+        compare_selected = (
+            ids is not None
+            and rec.get('status') in statuses
+            and rec.get('id') in ids
+        )
+        if rec.get('status') == 'approved' or compare_selected:
             for g in rec["groups"].values():
                 approved_quads[frozenset(g)].append(rec["id"])
+
+    approved_use = Counter()
+    for rec in pack['conexiuni']:
+        if rec.get('status') == 'approved':
+            for group in rec['groups'].values():
+                approved_use.update(group)
+    projected_use = approved_use.copy()
+    if ids is not None:
+        for rec in pack['conexiuni']:
+            if rec.get('status') == 'pending' and rec.get('id') in ids:
+                for group in rec['groups'].values():
+                    projected_use.update(group)
 
     items: dict[str, dict] = {}
     selected: list[tuple[str, dict, list[dict]]] = []
@@ -459,13 +750,27 @@ def run(pack: dict, svc: WordGameService, strong: dict, regions: dict,
                 continue
             if game == "conexiuni":
                 findings = check_conexiuni(rec, svc, strong, approved_quads)
+                if ids is not None:
+                    board = {nid for group in rec['groups'].values() for nid in group}
+                    overused = [
+                        f'{node_brief(svc, nid)["label"]} ({projected_use[nid]})'
+                        for nid in sorted(board)
+                        if projected_use[nid] > MEMBER_OVERUSE
+                    ]
+                    if overused:
+                        findings.append({
+                            'check': 'member_overuse',
+                            'level': 'WARN',
+                            'detail': 'projected approved-batch use exceeds '
+                                      f'{MEMBER_OVERUSE}: ' + ', '.join(overused),
+                        })
             elif game == "contexto":
                 findings = check_target_salience(rec, svc, rec["target"])
             elif game == "lant":
                 findings = check_target_salience(rec, svc, rec["start"], rec["target"])
             else:  # alchimie
                 findings = check_target_salience(rec, svc, rec["target"])
-            findings.extend(check_generic_region(rec, game, svc, strong, regions))
+            findings.extend(check_generic_region(rec, game, svc, regions))
             selected.append((game, rec, findings))
             if findings:
                 items[rec["id"]] = {
@@ -475,12 +780,7 @@ def run(pack: dict, svc: WordGameService, strong: dict, regions: dict,
 
     pack_findings = []
     if "conexiuni" in games and ids is None:
-        use = Counter()
-        for rec in pack["conexiuni"]:
-            if rec.get("status") == "approved":
-                for g in rec["groups"].values():
-                    use.update(g)
-        for nid, count in use.most_common():
+        for nid, count in approved_use.most_common():
             if count <= MEMBER_OVERUSE:
                 break
             pack_findings.append({
@@ -491,13 +791,37 @@ def run(pack: dict, svc: WordGameService, strong: dict, regions: dict,
     return items, pack_findings, selected
 
 
+def selection_errors(pack: dict, games: list[str], statuses: set[str], ids: set[str] | None,
+                     selected: list[tuple[str, dict, list[dict]]]) -> list[str]:
+    '''Explain explicit ids that the active filters did not check.'''
+    if ids is None:
+        return []
+    locations = {
+        str(rec.get('id')): (game, str(rec.get('status')))
+        for game in GAME_KINDS for rec in pack.get(game, [])
+    }
+    selected_ids = {str(rec['id']) for _, rec, _ in selected}
+    errors = []
+    for iid in sorted(ids):
+        location = locations.get(iid)
+        if location is None:
+            errors.append(f'unknown item id: {iid}')
+        elif location[0] not in games:
+            errors.append(f'{iid} belongs to game {location[0]!r}, excluded by --game')
+        elif location[1] not in statuses:
+            errors.append(f'{iid} has status {location[1]!r}, excluded by --status')
+        elif iid not in selected_ids:
+            errors.append(f'{iid} was not checked')
+    return errors
+
+
 def main(argv: list[str]) -> int:
     if hasattr(sys.stdout, "reconfigure"):  # Romanian labels on Windows consoles
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--game", choices=GAME_KINDS, help="limit to one game")
     parser.add_argument("--status", help="comma list (default: approved,pending)")
-    parser.add_argument("--ids", help="comma list of item ids to check")
+    parser.add_argument('--ids', help='comma list of item ids to check')
     parser.add_argument("--json", help="write the machine-readable report here")
     parser.add_argument("--dossier", help="write per-item judge dossiers to this dir")
     parser.add_argument("--strict", action="store_true",
@@ -505,11 +829,29 @@ def main(argv: list[str]) -> int:
     args = parser.parse_args(argv[1:])
 
     games = [args.game] if args.game else list(GAME_KINDS)
-    statuses = set((args.status or "approved,pending").split(","))
-    ids = set(args.ids.split(",")) if args.ids else None
+    statuses = {
+        part.strip()
+        for part in (args.status or 'approved,pending').split(',')
+        if part.strip()
+    }
+    invalid_statuses = statuses - set(STATUSES)
+    if invalid_statuses:
+        parser.error('unknown --status value(s): ' + ', '.join(sorted(invalid_statuses)))
+    ids = (
+        {part.strip() for part in args.ids.split(',') if part.strip()}
+        if args.ids is not None
+        else None
+    )
+    if args.ids is not None and not ids:
+        parser.error('--ids must contain at least one item id')
 
     pack, svc, strong, regions = load_all(PACKAGE_PACK, PACKAGE_KG)
     items, pack_findings, selected = run(pack, svc, strong, regions, games, statuses, ids)
+    missing = selection_errors(pack, games, statuses, ids, selected)
+    if missing:
+        for error in missing:
+            print(f'critique_pack: ERROR: {error}', file=sys.stderr)
+        return 2
     if ids is None:  # pack-level A7 inventory for edge-cleanup batches
         for nid, reason in sorted(regions["generic_nodes"].items()):
             pack_findings.append({

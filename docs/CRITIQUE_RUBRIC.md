@@ -8,17 +8,16 @@ this rubric checks whether the item is **fair, recognizable, and fun for a broad
 Romanian audience**. ADR-0019's editorial boundary sits ABOVE this rubric: a judge
 verdict never overrides it.
 
-Verdict vocabulary (durable contract, consumed by `scripts/apply_rereview.py`):
-`{"game": "<kind>", "verdicts": {"<item_id>": "promote|reject|keep"}}` for pending
-items. Sweeps over `approved` items output *proposals* (`keep|demote|revise`) for the
-owner — approved content is never auto-demoted.
+Gate artifacts use version-2 batch/binding/coverage metadata (section G4) and the final
+vocabulary `promote|reject|keep` for pending items. Sweeps over `approved` items output
+*proposals* (`keep|demote|revise`) for the owner — approved content is never auto-demoted.
 
 ## A. Universal kill criteria (all four games)
 
 - **A1 Recognition floor.** The concepts a player must produce or recognize are things
   an average Romanian (non-specialist, cross-generational) has actually heard of.
   Operational test: would it be unremarkable in a prime-time TV quiz? Judges verify
-  doubtful cases on the web (see D). One deliberate deep-cut per item is allowed on
+  doubtful cases on the web (see F). One deliberate deep-cut per item is allowed on
   `greu` only, and only when the rest of the item carries it.
 - **A2 Social relevance.** The item's theme is something Romanians actively think or
   talk about (school canon, national media, charts, living memory, current internet
@@ -46,7 +45,7 @@ owner — approved content is never auto-demoted.
   Biographic/definitional links (Eminescu → Moldova, Ciorbă rădăuțeană → Bucovina)
   are distinctive and fine. Lints: `generic_region_link` (item),
   `nondistinctive_region_link` (KG inventory); judges settle flagged cases with the
-  section-D distinctiveness check.
+  section-F distinctiveness check.
 
 ## B. Conexiuni boards (4 groups × 4 tiles, labels hidden until solved, 4 mistakes)
 
@@ -112,7 +111,34 @@ embeddings; Semantle's uncurated pool is the cautionary tale.
   greu <0.20 — a flag for judge review, not an auto-kill (KG salience under-rates
   some famous nodes, e.g. Insulina 0.25).
 
-## D. Romanian-relevance web checks (judge protocol, doubtful cases)
+## D. Lanțul Cuvintelor boards (directed semantic ladder)
+
+- **D1 Recognizable endpoints.** Start and target independently pass A1; obscurity is
+  never a substitute for route difficulty.
+- **D2 Legible steps.** A plausible shortest route reads as a sequence of nameable
+  associations. A path held together only by generic co-occurrence or taxonomy = kill.
+- **D3 Real choice.** The dossier branch profile must leave multiple credible first hops
+  and no single-node intermediate choke point; validator floors are necessary, not proof
+  that the alternatives feel meaningful.
+- **D4 Honest difficulty.** Difficulty comes from hop count and competing good routes,
+  not from an unguessable endpoint or arbitrary directed edge.
+- **D5 Satisfying arc.** Start and target are different enough to make the bridge feel
+  discovered, while still belonging to a theme an average player can reason about.
+
+## E. Alchimie boards (pair-combination crafting)
+
+- **E1 Seed quality.** The 5–7 seeds are recognizable, category-coherent, and each looks
+  potentially useful; no filler included only to satisfy the count.
+- **E2 Intuitive openings.** At least two opening pairs produce outcomes a player could
+  plausibly anticipate. The dossier count is a floor; judges assess semantic legibility.
+- **E3 Inferable target.** The target is not merely present in graph closure: a short
+  sequence of pair ideas gives a satisfying route toward it.
+- **E4 No free answer.** The target is not a seed, alias, near-synonym, or obvious
+  one-pair restatement. Difficulty comes from purposeful sequencing, not obscurity.
+- **E5 Bounded choice.** The craft profile should offer options without exploding into
+  a noisy closure where almost any pair works and the theme stops mattering.
+
+## F. Romanian-relevance web checks (judge protocol, doubtful cases)
 
 A verifier with web access confirms A1/A2/C2 by checking ≥2 independent signals:
 1. **ro.wikipedia.org** article exists with non-trivial content; pageviews not a
@@ -131,20 +157,31 @@ A verifier with web access confirms A1/A2/C2 by checking ≥2 independent signal
    origin). If the same claim would hold for any region/class member, it is generic →
    the item fails A7.
 
-## E. Judge-fleet protocol (fleet skill routing)
+## G. Judge-fleet protocol (fleet skill routing)
 
-1. **Dossier**: `scripts/critique_pack.py --dossier <dir>` emits one JSON per item
-   (members, node types, salience, descriptions, cross-group strong edges, lint flags).
-2. **Critique** (analyst / Sonnet): per item, walk B or C above, simulate a player,
-   name failure modes, propose a verdict + which claims need web verification.
+1. **Dossier**: `scripts/critique_pack.py --status pending --ids <exact-ids>
+   --strict --dossier <dir>` emits one JSON per item and fails on unknown or
+   filter-excluded IDs. Dossier degrees and Contexto neighbors use the runtime directed
+   non-distractor graph. Each dossier carries the canonical pack-record and KG-snapshot
+   digests plus `review_binding`, a SHA-256 over that dossier and the current rubric.
+2. **Critique** (analyst / Sonnet): per item, walk B, C, D, or E above, simulate a player,
+   name failure modes, and use the dossier's labeled routes or pair/recipe evidence for
+   Lanț/Alchimie before proposing a verdict + claims needing web verification.
 3. **Adversarial verify** (Opus, web access): refute-first — try to overturn the
-   critique; run section-D checks on every A1/A2/C2 claim; settle the verdict.
-   Escalation, not majority vote, on disagreement (fleet skill rule 2).
-4. **Apply**: pending items → `apply_rereview.py` verdict files; approved items →
-   proposal list for the owner. Verdict archives stay in the session scratchpad
-   (v16 precedent); the *contract* above is durable.
+   critique; run section-F checks on every A1/A2/C2 claim; settle the verdict. Gate
+   mode verifies every item; only clean approved-stock sweeps may use the stable
+   one-in-four sample. Model-returned IDs and review bindings must match the request.
+4. **Batch-bound apply**: `import_candidates.py` stages every surviving new item as
+   `pending`. Save each entry under the gate workflow result's `artifacts` key as
+   `<game>_verdicts.json`; the version-2 artifact binds the exact cross-game input IDs,
+   canonical dossier/rubric digest, every per-item final verdict, and complete verifier
+   coverage. Legacy, stale, unverified, partially lost, or hand-combined batches fail
+   closed. `apply_rereview.py` rebuilds the exact-batch dossiers, compares their bindings,
+   then re-runs strict deterministic critique over the exact `promote` set before either
+   pack copy is written. Approved-stock sweep proposals remain an owner decision.
+   Verdict archives stay in the session scratchpad (v16 precedent). See ADR-0025.
 
-## F. Lint reference (`scripts/critique_pack.py`)
+## H. Lint reference (`scripts/critique_pack.py`)
 
 | Check | Games | Level | Meaning |
 |---|---|---|---|
@@ -152,11 +189,11 @@ A verifier with web access confirms A1/A2/C2 by checking ≥2 independent signal
 | `red_herring_budget` | conexiuni | WARN ≥2, FAIL ≥4 | contested tiles (foreign pull == own pull > 0) |
 | `mirrored_groups` | conexiuni | WARN | group pair with ≥3 disjoint strong (≥0.6) cross edges |
 | `type_coherence` | conexiuni | WARN | 3+1 type outlier or 2+2 type split in a group |
-| `duplicate_groups` | conexiuni | FAIL (new) / WARN (stock) | exact 4-member quad already in an approved board; near-duplicate (3 shared members with an approved quad) always WARN |
+| `duplicate_groups` | conexiuni | FAIL (new) / WARN (stock) | exact quad already in an approved or same-batch selected board; near-duplicates (3 shared members) always WARN |
 | `salience_floor` | contexto, lant, alchimie | WARN | target/endpoint salience below difficulty band (C6) |
 | `generic_region_link` | conexiuni, contexto | WARN | gameplay leans on a non-distinctive region association (A7): board pairs regions with generically-linked tiles; target is (or is polluted by) a pan-Romanian concept claiming a region |
 | `nondistinctive_region_link` | pack-wide | WARN | KG inventory of A7-suspect edges (≥2-region fan-out, or national-salience concept with a generic `related_to` region edge) — the edge-cleanup queue |
-| `member_overuse` | pack-wide | WARN | node appears in >8 approved conexiuni boards |
+| `member_overuse` | pack-wide / selected batch | WARN | node appears in >8 approved boards, including projected promotion of selected pending candidates |
 
 FAIL blocks promotion (`--strict` exits 1). WARN routes the item to the judge fleet —
 it may pass with justification recorded in the verdict reasoning.

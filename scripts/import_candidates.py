@@ -11,9 +11,9 @@ verification pipeline of ADR-0011):
 Curation policy (quality over quantity):
   * factual ``block`` on a node -> the node, its edges and every instance touching
     it are dropped; ``block`` on an instance -> that instance is dropped;
-  * quality verdict ``keep`` -> imported as ``status: approved``; ``fix`` ->
-    imported as ``status: pending`` (invisible to players until reviewed);
-    ``drop``/missing -> not imported;
+  * quality verdict ``keep`` / ``fix`` -> imported as ``status: pending``;
+    ADR-0023's strict lint + two-agent judge gate is the only promotion path;
+    ``drop`` / missing / unknown -> not imported;
   * every surviving instance is re-derived against the MERGED graph (Lanț distance +
     branch floor, Alchimie exact action par + opening pairs, Contexto floors,
     Conexiuni board shape) — the generator's numbers are never trusted;
@@ -76,6 +76,43 @@ NOTE = (
 
 def _load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def candidate_import_status(verdict: str) -> str | None:
+    '''Stage pre-screened candidates pending; critique is the only promotion path.'''
+    return 'pending' if verdict in {'keep', 'fix'} else None
+
+
+def next_item_number(items: list[dict], prefix: str) -> int:
+    '''Allocate after the highest occupied global suffix, never after list length.'''
+    numbers = []
+    for item in items:
+        iid = str(item.get('id', ''))
+        head, separator, suffix = iid.rpartition('_')
+        if separator and head.startswith(f'{prefix}_') and suffix.isdigit():
+            numbers.append(int(suffix))
+    return max(numbers, default=0) + 1
+
+
+def item_high_water(pack: dict) -> dict[str, int]:
+    '''Merge observed suffixes with persistent marks so retired IDs stay reserved.'''
+    persisted = pack.get('meta', {}).get('id_high_water', {})
+    if not isinstance(persisted, dict):
+        persisted = {}
+    result = {}
+    for game in GAME_KINDS:
+        observed = next_item_number(list(pack.get(game, [])), PREFIX[game]) - 1
+        try:
+            prior = max(0, int(persisted.get(game, 0)))
+        except (TypeError, ValueError):
+            prior = 0
+        result[game] = max(observed, prior)
+    return result
+
+
+def initial_item_numbers(pack: dict) -> dict[str, int]:
+    '''Allocate strictly above observed or persistently reserved suffixes.'''
+    return {game: mark + 1 for game, mark in item_high_water(pack).items()}
 
 
 def _apply_aliases(cand: dict) -> dict:
@@ -266,21 +303,24 @@ def main(argv: list[str]) -> int:
     # Existing items: re-derive graph-dependent numbers; drop what no longer holds.
     survivors = rederive_existing_items(pack, svc, report)
 
-    counters = {g: len(survivors[g]) for g in GAME_KINDS}
+    # Persist the original/reserved high-water marks before re-derivation can retire
+    # an ID. Future import sessions must never reuse progress/editorial identifiers.
+    high_water = item_high_water(pack)
+    next_numbers = {game: mark + 1 for game, mark in high_water.items()}
     stats = {"approved": 0, "pending": 0, "skipped": 0}
 
-    def add_item(game: str, cat: str, rec: dict, verdict: str) -> None:
-        counters[game] += 1
-        rec["id"] = f"{PREFIX[game]}_{cat}_{counters[game]:03d}"
+    def add_item(game: str, cat: str, rec: dict, status: str) -> None:
+        rec["id"] = f"{PREFIX[game]}_{cat}_{next_numbers[game]:03d}"
         rec["category"] = cat
         rec["source"] = "ai"
-        rec["status"] = "approved" if verdict == "keep" else "pending"
+        rec["status"] = status
         errors = validate_envelope(rec, game) or validate_payload(rec, game, svc)
         if errors:
-            counters[game] -= 1
             stats["skipped"] += 1
             report.append(f"INVALID {game} candidate ({cat}): {errors[:2]}")
             return
+        next_numbers[game] += 1
+        high_water[game] = max(high_water[game], next_numbers[game] - 1)
         survivors[game].append(rec)
         stats[rec["status"]] += 1
 
@@ -290,13 +330,10 @@ def main(argv: list[str]) -> int:
             factual_flags = bundle["factual_by_game"][game]
             for idx, inst in enumerate(cand.get(game, []) or []):
                 verdict = verdicts.get(f"{game}[{idx}]", "drop")
-                if verdict == "drop" or factual_flags.get(idx) == "block":
+                status = candidate_import_status(verdict)
+                if status is None or factual_flags.get(idx) == "block":
                     stats["skipped"] += 1
                     continue
-                # A factual 'fix' flag demotes a keep to pending: only items that are
-                # BOTH quality-kept and factually clean ship as approved.
-                if factual_flags.get(idx) == "fix":
-                    verdict = "fix"
                 if game == "conexiuni":
                     groups_in = inst.get("groups") or []
                     tiles = [str(t) for g in groups_in for t in (g.get("tiles") or [])]
@@ -371,11 +408,12 @@ def main(argv: list[str]) -> int:
                         "target": target,
                         "target_depth": par,
                     }
-                add_item(game, cat, rec, verdict)
+                add_item(game, cat, rec, status)
 
     for game in GAME_KINDS:
         pack[game] = sorted(survivors[game], key=lambda r: r["id"])
     pack["meta"]["counts"] = {g: len(pack[g]) for g in GAME_KINDS}
+    pack['meta']['id_high_water'] = high_water
     pack["meta"]["note"] = (
         "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + "
         "hand-crafted starters. Only status=approved items are served."

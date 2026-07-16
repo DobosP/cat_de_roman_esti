@@ -206,6 +206,10 @@ class WordGameService:
         nbrs = self.graph.neighbors(node_id, include_distractors=True)
         return sorted({nb.node.id for nb in nbrs})
 
+    def predecessor_ids(self, node_id: str) -> list[str]:
+        '''Direct non-distractor predecessors in the runtime directed graph.'''
+        return sorted(self._rev_adj.get(node_id, set()))
+
     def link(self, a: str, b: str, *, include_distractors: bool = False) -> Edge | None:
         """The (strongest) real edge a->b in the chosen view, or None if not linked."""
         return self.graph.edge_between(a, b, include_distractors=include_distractors)

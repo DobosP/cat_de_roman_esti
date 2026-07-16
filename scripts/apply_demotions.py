@@ -12,9 +12,9 @@ BOTH bundled pack copies:
 * `keep` / absent → left untouched.
 
 Only items currently `status: approved` are eligible — the mirror image of
-`apply_rereview.py`, which only touches `pending`, so the two scripts can never fight
-over the same item. Refreshes `meta.counts`, runs the full pack validator, and ROLLS
-BACK both copies on any failure (the densify idiom).
+`apply_rereview.py`. Filename/game scope, verdict enum, item ownership and status are
+validated before mutation. The full pack validator then runs and both copies ROLL BACK
+on a red return or exception.
 
     python scripts/apply_demotions.py --dir <verdicts_dir>
 """
@@ -66,29 +66,57 @@ def main(argv: list[str]) -> int:
     args = parser.parse_args(argv[1:])
     vdir = Path(args.dir)
 
+    baseline = json.loads(PACK_COPIES[0].read_text(encoding='utf-8'))
+    locations = {
+        str(item.get('id')): (game, str(item.get('status')))
+        for game in GAME_KINDS for item in baseline.get(game, [])
+    }
+
     verdicts: dict[str, str] = {}
     for game in GAME_KINDS:
         vpath = vdir / f"{game}_demotions.json"
         if not vpath.exists():
             continue
         data = json.loads(vpath.read_text(encoding="utf-8"))
-        for iid, verdict in (data.get("verdicts") or {}).items():
-            verdicts[str(iid)] = str(verdict)
+        if data.get('game') != game or not isinstance(data.get('verdicts'), dict):
+            raise SystemExit(f'invalid demotion contract in {vpath}')
+        for iid, verdict in data['verdicts'].items():
+            iid, verdict = str(iid), str(verdict)
+            if verdict not in {'demote', 'keep'}:
+                raise SystemExit(f'invalid verdict for {iid}: {verdict}')
+            if iid in verdicts:
+                raise SystemExit(f'duplicate verdict id: {iid}')
+            if iid not in locations:
+                raise SystemExit(f'unknown verdict id: {iid}')
+            item_game, status = locations[iid]
+            if item_game != game or status != 'approved':
+                raise SystemExit(
+                    f'{iid} is {item_game}/{status}, expected {game}/approved'
+                )
+            verdicts[iid] = verdict
     if not verdicts:
         raise SystemExit(f"no demotion verdicts found under {vdir}")
 
     originals = {copy: copy.read_bytes() for copy in PACK_COPIES}
     stats: Counter = Counter()
-    for copy in PACK_COPIES:
-        pack = json.loads(originals[copy].decode("utf-8"))
-        pack, copy_stats = apply(pack, verdicts)
-        stats.update(copy_stats)
-        copy.write_text(json.dumps(pack, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    try:
+        for copy in PACK_COPIES:
+            pack = json.loads(originals[copy].decode('utf-8'))
+            pack, copy_stats = apply(pack, verdicts)
+            stats.update(copy_stats)
+            copy.write_text(
+                json.dumps(pack, ensure_ascii=False, indent=1) + '\n', encoding='utf-8'
+            )
+        validation_rc = validate_games_pack.main(['validate_games_pack.py'])
+    except BaseException:
+        for copy, blob in originals.items():
+            copy.write_bytes(blob)
+        raise
 
     # stats double-counted across the two identical copies — halve for the report.
     applied = {k: v // 2 for k, v in stats.items()}
 
-    if validate_games_pack.main(["validate_games_pack.py"]) != 0:
+    if validation_rc != 0:
         for copy, blob in originals.items():
             copy.write_bytes(blob)
         raise SystemExit("pack validation failed — ROLLED BACK both copies")

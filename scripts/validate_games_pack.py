@@ -51,7 +51,10 @@ ERROR_CLASSES = (
     "unique_ids",
     "playability",
     "meta_counts",
+    "id_high_water",
 )
+
+ID_PREFIX = {"conexiuni": "cx", "contexto": "ct", "lant": "lt", "alchimie": "al"}
 
 
 def validate(pack_path: Path, kg_path: Path) -> list[str]:
@@ -107,6 +110,27 @@ def validate(pack_path: Path, kg_path: Path) -> list[str]:
             if declared.get(game) != actual:
                 errors.append(
                     f"meta_counts: counts.{game} is {declared.get(game)!r}, actual {actual}"
+                )
+
+    high_water = raw['meta'].get('id_high_water')
+    if not isinstance(high_water, dict):
+        errors.append('id_high_water: meta.id_high_water must be an object')
+    else:
+        for game in GAME_KINDS:
+            observed = 0
+            for rec in raw[game]:
+                rid = str(rec.get('id', '')) if isinstance(rec, dict) else ''
+                head, separator, suffix = rid.rpartition('_')
+                if separator and head.startswith(f'{ID_PREFIX[game]}_') and suffix.isdigit():
+                    observed = max(observed, int(suffix))
+            reserved = high_water.get(game)
+            if isinstance(reserved, bool) or not isinstance(reserved, int):
+                errors.append(
+                    f'id_high_water: {game} mark must be an integer, got {reserved!r}'
+                )
+            elif reserved < observed:
+                errors.append(
+                    f'id_high_water: {game} mark {reserved} is below observed {observed}'
                 )
 
     return errors
