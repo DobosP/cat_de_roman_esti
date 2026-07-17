@@ -98,6 +98,61 @@ def test_productive_combine_lineage_is_exact_ordered_and_persistent(client: Clie
         pytest.fail("seed 7 has no productive seed pair")
 
 
+def test_combine_is_symmetric_and_lineage_preserves_request_order(client: Client) -> None:
+    """Pair results are unordered while recorded parents retain the submitted order."""
+    forward_state = _create(client, seed=7)
+    reverse_state = _create(client, seed=7)
+    assert forward_state["inventory"] == reverse_state["inventory"]
+
+    before = {item["id"]: item for item in forward_state["inventory"]}
+    owned = set(before)
+    category = forward_state.get("board_category")
+    pair = next(
+        (
+            (a, b)
+            for a, b in combinations(before, 2)
+            if [
+                node_id
+                for node_id in A.get_service().common_neighbors(a, b, category=category)
+                if node_id not in owned
+            ]
+        ),
+        None,
+    )
+    assert pair is not None, "seed 7 has no productive seed pair"
+    a, b = pair
+
+    forward_res = client.post(
+        f"{BASE}/games/{forward_state['game_id']}/combine",
+        {"a": a, "b": b},
+        content_type="application/json",
+    )
+    reverse_res = client.post(
+        f"{BASE}/games/{reverse_state['game_id']}/combine",
+        {"a": b, "b": a},
+        content_type="application/json",
+    )
+    assert forward_res.status_code == reverse_res.status_code == 200
+    forward, reverse = forward_res.json(), reverse_res.json()
+
+    assert forward["discovered"]
+    assert reverse["discovered"] == forward["discovered"]
+    assert forward["moves"] == reverse["moves"] == 1
+    assert forward["target"]["id"] is reverse["target"]["id"] is None
+
+    forward_inventory = {item["id"]: item for item in forward["inventory"]}
+    reverse_inventory = {item["id"]: item for item in reverse["inventory"]}
+    forward_parents = [
+        {"id": a, "label": before[a]["label"]},
+        {"id": b, "label": before[b]["label"]},
+    ]
+    reverse_parents = list(reversed(forward_parents))
+    for discovered in forward["discovered"]:
+        node_id = discovered["id"]
+        assert forward_inventory[node_id]["parents"] == forward_parents
+        assert reverse_inventory[node_id]["parents"] == reverse_parents
+
+
 def test_winning_play_through(client: Client) -> None:
     """Greedily combine every owned pair until the target is crafted."""
     state = _create(client, seed=7)
@@ -420,6 +475,33 @@ def _force_fruitless(client: Client, state: dict) -> dict:
         ).json()
         assert state["discovered"] == [], "barren pair unexpectedly discovered a concept"
     return state
+
+
+def test_repeated_empty_pair_is_accepted_charged_and_unlocks_hint(client: Client) -> None:
+    """The same barren pair remains valid and counts toward the three-try nudge."""
+    state = _create(client, seed=7)
+    gid = state["game_id"]
+    inventory = state["inventory"]
+    ids = [item["id"] for item in inventory]
+    pair = _barren_owned_pair(A.get_service(), ids)
+    assert pair is not None, "expected seed 7 to expose a barren owned pair"
+    a, b = pair
+
+    for attempt in range(1, A.NUDGE_AFTER_FRUITLESS + 1):
+        res = client.post(
+            f"{BASE}/games/{gid}/combine",
+            {"a": a, "b": b},
+            content_type="application/json",
+        )
+        assert res.status_code == 200, res.content.decode()
+        body = res.json()
+        assert body["discovered"] == []
+        assert body["inventory"] == inventory
+        assert body["message"] == "Nicio combinatie noua."
+        assert body["moves"] == attempt
+        assert body["won"] is False
+        assert body["target"]["id"] is None
+        assert body["hint_available"] is (attempt == A.NUDGE_AFTER_FRUITLESS)
 
 
 def _closure_distance_to_target(client: Client, gid: str, owned: set[str]) -> int | None:

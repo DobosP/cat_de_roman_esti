@@ -1,7 +1,7 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-17. This file is the repository's current source of truth._
-_Last verified: 2026-07-17 (local v26 gate: backend 346; targeted Alchimie/scoping/session 47; frontend lint/typecheck/36 tests/build; initial bundle 116.12 KiB; Ruff; both validators; workflow syntax; `git diff --check`. Production remains release `2746be3`, smoke-verified 2026-07-16.)_
+_Last verified: 2026-07-17 (local v27 gate: backend 348; targeted Alchimie/scoping/session 49; frontend lint/typecheck/41 tests/build; initial bundle 116.12 KiB; Ruff; both validators; workflow syntax; `git diff --check`. Production remains release `2746be3`, smoke-verified 2026-07-16.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -14,13 +14,13 @@ The critique layer now fails closed from generation through promotion:
 - Re-review/demotion validates identity and verdict, restoring both pack copies on any red or exception.
 - Imports enter `pending`; persistent per-game high-water marks prevent retired ID reuse.
 
-## Current outcome — browser recovery (ADR-0027 through ADR-0029, ADR-0034)
+## Current outcome — browser recovery (ADR-0027 through ADR-0029, ADR-0034, ADR-0035)
 
 Lanț renders server-authored recovery; bounded spelling and path choices fill but never
 submit. Conexiuni retains one-away selections for one-tile swaps and blocks unchanged
 sets without inferring membership. Cald sau Rece keeps target-filtered typo suggestions and accepted corrections.
-Alchimie restores a newest-first, 12-reaction journal from recorded
-parents: latest visible, older collapsed, results fill-only, and winning lineage terminal.
+Alchimie restores a newest-first, 12-reaction journal and retains an authoritative empty pair
+for one visible swap; either 44 px bench slot removes an ingredient and unchanged/duplicate submission is blocked.
 All four remain server-authoritative; score, secrecy, TTL, and caps are unchanged.
 
 ## Current outcome — beginner mobile interface (ADR-0031)
@@ -89,7 +89,7 @@ session-store target remains `tests/test_wordgames_session_store.py` (11 tests).
 
 ## Next verified work
 
-- Playtest the beginner UI, Alchimie journal, and Lanț recovery at 320–390 px; measure
+- Playtest the beginner UI, Alchimie journal/empty-pair swap, and Lanț recovery at 320–390 px; measure
   first action, invalid moves, hint reuse, undo, completion, and abandonment.
 - Run bound subjective review over the exact 33 v23/v24 pending IDs; inspect Contexto
   ordering after v25, route meaning, Conexiuni predicates, and Alchimie recipe intuition.

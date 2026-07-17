@@ -45,7 +45,7 @@ test("journal result controls only fill the bench and keep 44px targets", () => 
 test("accepted empty combines use one persistent feedback path", () => {
   assert.match(
     screen,
-    /const feedback =[\s\S]*?res\.message \+ " Apasă „Indiciu” dacă te-ai blocat\."[\s\S]*?setLastMessage\(feedback\)/,
+    /let feedback = res\.message;[\s\S]*?feedback \+= " Perechea rămâne în alambic — schimbă un ingredient\.";[\s\S]*?feedback \+= " Apasă „Indiciu” dacă te-ai blocat\.";[\s\S]*?setLastMessage\(feedback\)/,
   );
   const discovered = screen.indexOf("if (res.discovered.length > 0)");
   const empty = screen.indexOf("} else {", discovered);
@@ -58,7 +58,11 @@ test("accepted empty combines use one persistent feedback path", () => {
 });
 
 test("combine feedback has one nonterminal and one terminal announcement owner", () => {
-  assert.match(screen, /<NextMove[\s\S]{0,700}announce=\{false\}/);
+  const nextMove = screen.slice(
+    screen.indexOf("<NextMove"),
+    screen.indexOf("/>", screen.indexOf("<NextMove")),
+  );
+  assert.match(nextMove, /announce=\{false\}/);
   assert.match(guide, /role=\{announce \? "status" : undefined\}/);
   assert.match(screen, /\{lastMessage && !won && \(/);
   assert.match(

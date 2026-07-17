@@ -69,6 +69,10 @@ function buildReactionLog(inventory: InventoryItem[]): Reaction[] {
   return chronological.slice(-REACTION_LOG_LIMIT).reverse();
 }
 
+function pairKey(ids: readonly string[]): string | null {
+  return ids.length === 2 ? JSON.stringify([...ids].sort()) : null;
+}
+
 const DIFFICULTY_LABEL: Record<Difficulty, string> = {
   usor: "Ușor",
   normal: "Normal",
@@ -92,6 +96,8 @@ export default function Alchimie({
   const [loading, setLoading] = useState(false);
   const [busy, setBusy] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
+  const [emptyPairKey, setEmptyPairKey] = useState<string | null>(null);
+  const [emptyRecoveryActive, setEmptyRecoveryActive] = useState(false);
   // ids discovered by the most recent combine — used to animate them in.
   const [freshIds, setFreshIds] = useState<Set<string>>(new Set());
   // The pair the most recent nudge suggested — gets a glowing outline.
@@ -102,6 +108,8 @@ export default function Alchimie({
   const [isRecord, setIsRecord] = useState(false);
   const [isPuzzleRecord, setIsPuzzleRecord] = useState(false);
   const resumeAttempted = useRef(false);
+  const combineInFlight = useRef(false);
+  const inventoryButtons = useRef(new Map<string, HTMLButtonElement>());
   const active = useActiveGame("alchimie");
   const recordOnce = useRecordScore("alchimie");
 
@@ -129,6 +137,8 @@ export default function Alchimie({
         setDifficulty(s.difficulty);
         setCategory(s.board_category ?? null);
         setSelected([]);
+        setEmptyPairKey(null);
+        setEmptyRecoveryActive(false);
         setFreshIds(new Set());
         setHintIds(new Set());
         setLastMessage(null);
@@ -151,6 +161,8 @@ export default function Alchimie({
         setState(s);
         active.remember(s.game_id);
         setSelected([]);
+        setEmptyPairKey(null);
+        setEmptyRecoveryActive(false);
         setFreshIds(new Set());
         setHintIds(new Set());
         setLastMessage(null);
@@ -171,6 +183,9 @@ export default function Alchimie({
   );
 
   const won = state?.won ?? false;
+  const selectedPairKey = pairKey(selected);
+  const isEmptyRetry =
+    selectedPairKey !== null && selectedPairKey === emptyPairKey;
 
   const puzzleKey = useMemo(() => {
     if (!state?.won || !state.target.id) return null;
@@ -232,33 +247,79 @@ export default function Alchimie({
     (id: string) => {
       if (busy || won) return;
       sound.playSelect();
+      if (emptyRecoveryActive) {
+        const nextSelectionCount = selected.includes(id)
+          ? selected.length - 1
+          : Math.min(selected.length + 1, 2);
+        setLastMessage(
+          nextSelectionCount === 0
+            ? "Alambicul este gol. Alege două concepte."
+            : nextSelectionCount === 1
+              ? "Un concept este ales. Alege încă unul."
+              : "Perechea nouă este gata. Apasă Combină.",
+        );
+      }
+      setEmptyPairKey(null);
       setSelected((prev) => {
         if (prev.includes(id)) return prev.filter((x) => x !== id);
         if (prev.length >= 2) return [prev[1], id];
         return [...prev, id];
       });
     },
-    [busy, won],
+    [busy, won, emptyRecoveryActive, selected],
   );
 
   const clearSelection = useCallback(() => {
+    if (emptyRecoveryActive) {
+      setLastMessage("Alambicul este gol. Alege două concepte.");
+    }
     setSelected([]);
+    setEmptyPairKey(null);
     setHintIds(new Set());
-  }, []);
+  }, [emptyRecoveryActive]);
+
+  const removeFromBench = useCallback(
+    (id: string) => {
+      toggle(id);
+      requestAnimationFrame(() => inventoryButtons.current.get(id)?.focus());
+    },
+    [toggle],
+  );
 
   const doCombine = useCallback(async () => {
-    if (!state || selected.length !== 2 || busy) return;
+    if (
+      !state ||
+      selected.length !== 2 ||
+      busy ||
+      isEmptyRetry ||
+      combineInFlight.current
+    ) {
+      return;
+    }
+    combineInFlight.current = true;
     setBusy(true);
     const [a, b] = selected;
     try {
       const res = await alchimieApi.combine(state.game_id, a, b);
       setState(res);
-      setSelected([]);
+      const recoverableEmpty = res.discovered.length === 0 && !res.won;
+      if (recoverableEmpty) {
+        setSelected([a, b]);
+        setEmptyPairKey(pairKey([a, b]));
+        setEmptyRecoveryActive(true);
+      } else {
+        setSelected([]);
+        setEmptyPairKey(null);
+        setEmptyRecoveryActive(false);
+      }
       setHintIds(new Set());
-      const feedback =
-        res.discovered.length === 0 && res.hint_available
-          ? res.message + " Apasă „Indiciu” dacă te-ai blocat."
-          : res.message;
+      let feedback = res.message;
+      if (recoverableEmpty) {
+        feedback += " Perechea rămâne în alambic — schimbă un ingredient.";
+        if (res.hint_available) {
+          feedback += " Apasă „Indiciu” dacă te-ai blocat.";
+        }
+      }
       setLastMessage(feedback);
       if (res.discovered.length > 0) {
         setFreshIds(new Set(res.discovered.map((d: Concept) => d.id)));
@@ -277,9 +338,10 @@ export default function Alchimie({
         "error",
       );
     } finally {
+      combineInFlight.current = false;
       setBusy(false);
     }
-  }, [state, selected, busy, onToast]);
+  }, [state, selected, busy, isEmptyRetry, onToast]);
 
   const doReset = useCallback(async () => {
     if (!state || busy) return;
@@ -289,6 +351,8 @@ export default function Alchimie({
       setState(s);
       active.remember(s.game_id);
       setSelected([]);
+      setEmptyPairKey(null);
+      setEmptyRecoveryActive(false);
       setFreshIds(new Set());
       setHintIds(new Set());
       setLastMessage(null);
@@ -307,6 +371,9 @@ export default function Alchimie({
 
   const newGame = useCallback(() => {
     active.forget();
+    setSelected([]);
+    setEmptyPairKey(null);
+    setEmptyRecoveryActive(false);
     setState(null);
   }, [active]);
 
@@ -317,6 +384,8 @@ export default function Alchimie({
     try {
       const res = await alchimieApi.hint(state.game_id);
       setState(res);
+      setEmptyPairKey(null);
+      setEmptyRecoveryActive(false);
       setLastMessage(res.message);
       if (res.hint) {
         const ids = res.hint.map((c) => c.id);
@@ -388,7 +457,12 @@ export default function Alchimie({
       ) {
         return;
       }
-      if (e.key === "Enter" && selected.length === 2 && !busy) {
+      if (
+        e.key === "Enter" &&
+        selected.length === 2 &&
+        !busy &&
+        !isEmptyRetry
+      ) {
         e.preventDefault();
         void doCombine();
       } else if (e.key === "Escape" && selected.length > 0) {
@@ -398,7 +472,7 @@ export default function Alchimie({
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [state, won, selected, busy, doCombine, clearSelection]);
+  }, [state, won, selected, busy, isEmptyRetry, doCombine, clearSelection]);
 
   if (loading) {
     return (
@@ -544,24 +618,28 @@ export default function Alchimie({
 
         {!won && (
           <NextMove
-            icon={selected.length === 2 ? "✨" : "👆"}
+            icon={isEmptyRetry ? "↔" : selected.length === 2 ? "✨" : "👆"}
             title={
-              selected.length === 0
+              isEmptyRetry
+                ? "Schimbă un ingredient"
+                : selected.length === 0
                 ? "Alege două concepte"
                 : selected.length === 1
                   ? "Mai alege unul"
                   : "Pereche gata"
             }
             detail={
-              selected.length === 1
+              isEmptyRetry
+                ? "Perechea aceasta nu a descoperit nimic."
+                : selected.length === 1
                 ? `${selectedItems[0]?.label ?? "Primul concept"} este ales.`
                 : selected.length === 2
                   ? "Apasă Combină."
                   : "Pornește din inventar."
             }
-            progress={`${selected.length}/2`}
+            progress={isEmptyRetry ? "schimbă 1" : `${selected.length}/2`}
             accent={DEF.accent}
-            ready={selected.length === 2}
+            ready={selected.length === 2 && !isEmptyRetry}
             announce={false}
           />
         )}
@@ -576,7 +654,11 @@ export default function Alchimie({
               className="row wrap"
               style={{ gap: 8, alignItems: "center", minHeight: 38 }}
             >
-              <Slot item={selectedItems[0]} />
+              <Slot
+                item={selectedItems[0]}
+                onRemove={removeFromBench}
+                disabled={busy}
+              />
               <span
                 className="faint"
                 style={{ fontSize: "1.4rem" }}
@@ -584,7 +666,11 @@ export default function Alchimie({
               >
                 +
               </span>
-              <Slot item={selectedItems[1]} />
+              <Slot
+                item={selectedItems[1]}
+                onRemove={removeFromBench}
+                disabled={busy}
+              />
             </div>
             <div className="row wrap" style={{ gap: 8 }}>
               {selected.length > 0 && (
@@ -612,9 +698,13 @@ export default function Alchimie({
               )}
               <Button
                 type="button"
-                disabled={busy || selected.length !== 2}
+                disabled={busy || selected.length !== 2 || isEmptyRetry}
                 onClick={doCombine}
-                title="Combină cele două concepte (Enter)"
+                title={
+                  isEmptyRetry
+                    ? "Schimbă un ingredient înainte de o nouă combinare"
+                    : "Combină cele două concepte (Enter)"
+                }
                 aria-label="Combină cele două concepte selectate"
                 style={{ borderColor: DEF.accent }}
               >
@@ -726,6 +816,10 @@ export default function Alchimie({
                 return (
                   <m.button
                     key={item.id}
+                    ref={(node) => {
+                      if (node) inventoryButtons.current.set(item.id, node);
+                      else inventoryButtons.current.delete(item.id);
+                    }}
                     type="button"
                     layout
                     initial={isFresh ? { scale: 0.4, opacity: 0 } : false}
@@ -903,7 +997,15 @@ function ReactionRow({
   );
 }
 
-function Slot({ item }: { item: InventoryItem | undefined }) {
+function Slot({
+  item,
+  onRemove,
+  disabled,
+}: {
+  item: InventoryItem | undefined;
+  onRemove: (id: string) => void;
+  disabled: boolean;
+}) {
   if (!item) {
     return (
       <span
@@ -919,13 +1021,18 @@ function Slot({ item }: { item: InventoryItem | undefined }) {
     );
   }
   return (
-    <span
+    <button
+      type="button"
       className="chip alchemy-slot"
-      style={{ borderColor: DEF.accent, color: "var(--text)" }}
-      title={item.label}
+      style={{ borderColor: DEF.accent, color: "var(--text)", minHeight: 44 }}
+      onClick={() => onRemove(item.id)}
+      disabled={disabled}
+      title={`Scoate ${item.label} din alambic`}
+      aria-label={`Scoate ${item.label} din alambic`}
     >
       {item.parents ? <span aria-hidden>✦</span> : null}
       <span className="alchemy-slot-label">{item.label}</span>
-    </span>
+      <span aria-hidden>×</span>
+    </button>
   );
 }
