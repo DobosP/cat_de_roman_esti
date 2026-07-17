@@ -4,12 +4,12 @@
     "app": "cat_de_roman_esti",
     "schema_version": 1,
     "manifest_version": 1,
-    "build_version": "fixture-v29-extended-basic-words",
+    "build_version": "fixture-v30-farm-wardrobe-kitchen",
     "generated_at": "2026-06-21T00:00:00Z",
-    "content_hash": "sha256:bf8baa35a2eea57deb9409b62fb215e0f90d833926cf5ac01a7e56743d0ad8ed",
+    "content_hash": "sha256:dc128c127b1288421935f53fdfb746590a40bc85b4774ce7ab81901e18e8fa31",
     "counts": {
-      "nodes": 2216,
-      "edges": 8909,
+      "nodes": 2234,
+      "edges": 8963,
       "puzzles": 180
     }
   },
@@ -6849,6 +6849,78 @@
     {
       "id": "n_v2via_vecini",
       "label_ro": "Vecini"
+    },
+    {
+      "id": "n_v30_animal_farm_cal",
+      "label_ro": "Cal"
+    },
+    {
+      "id": "n_v30_animal_farm_capra",
+      "label_ro": "Capră"
+    },
+    {
+      "id": "n_v30_animal_farm_oaie",
+      "label_ro": "Oaie"
+    },
+    {
+      "id": "n_v30_animal_farm_vaca",
+      "label_ro": "Vacă"
+    },
+    {
+      "id": "n_v30_animal_field_iepure",
+      "label_ro": "Iepure"
+    },
+    {
+      "id": "n_v30_clothing_everyday_fusta",
+      "label_ro": "Fustă"
+    },
+    {
+      "id": "n_v30_clothing_everyday_pantaloni",
+      "label_ro": "Pantaloni"
+    },
+    {
+      "id": "n_v30_clothing_everyday_rochie",
+      "label_ro": "Rochie"
+    },
+    {
+      "id": "n_v30_clothing_footwear_pantof",
+      "label_ro": "Pantof"
+    },
+    {
+      "id": "n_v30_clothing_footwear_soseta",
+      "label_ro": "Șosetă"
+    },
+    {
+      "id": "n_v30_clothing_outer_geaca",
+      "label_ro": "Geacă"
+    },
+    {
+      "id": "n_v30_kitchen_cookware_oala",
+      "label_ro": "Oală"
+    },
+    {
+      "id": "n_v30_kitchen_cookware_tigaie",
+      "label_ro": "Tigaie"
+    },
+    {
+      "id": "n_v30_kitchen_drink_cana",
+      "label_ro": "Cană"
+    },
+    {
+      "id": "n_v30_kitchen_table_castron",
+      "label_ro": "Castron"
+    },
+    {
+      "id": "n_v30_kitchen_table_farfurie",
+      "label_ro": "Farfurie"
+    },
+    {
+      "id": "n_v30_kitchen_utensil_furculita",
+      "label_ro": "Furculiță"
+    },
+    {
+      "id": "n_v30_kitchen_utensil_lingura",
+      "label_ro": "Lingură"
     },
     {
       "id": "n_v3art_arta",
@@ -51696,9 +51768,84 @@
       "dst_id": "n_v29_city_street_trotuar"
     },
     {
+      "id": "de8245",
+      "src_id": "n_v30_animal_farm_vaca",
+      "dst_id": "n_v30_animal_farm_oaie"
+    },
+    {
+      "id": "de8246",
+      "src_id": "n_v30_animal_farm_oaie",
+      "dst_id": "n_v30_animal_farm_capra"
+    },
+    {
+      "id": "de8247",
+      "src_id": "n_v30_animal_farm_capra",
+      "dst_id": "n_v30_animal_farm_cal"
+    },
+    {
+      "id": "de8248",
+      "src_id": "n_v30_animal_farm_cal",
+      "dst_id": "n_v30_animal_field_iepure"
+    },
+    {
+      "id": "de8249",
+      "src_id": "n_v30_animal_field_iepure",
+      "dst_id": "n_v30_animal_farm_vaca"
+    },
+    {
       "id": "de825",
       "src_id": "n_net_standup_ro",
       "dst_id": "n_net_umor_autoironic"
+    },
+    {
+      "id": "de8250",
+      "src_id": "n_v30_animal_farm_vaca",
+      "dst_id": "n_v30_animal_farm_capra"
+    },
+    {
+      "id": "de8251",
+      "src_id": "n_v30_animal_farm_oaie",
+      "dst_id": "n_v30_animal_farm_cal"
+    },
+    {
+      "id": "de8252",
+      "src_id": "n_v30_animal_field_iepure",
+      "dst_id": "n_v30_animal_farm_oaie"
+    },
+    {
+      "id": "de8253",
+      "src_id": "n_v30_animal_farm_cal",
+      "dst_id": "n_v30_animal_farm_vaca"
+    },
+    {
+      "id": "de8254",
+      "src_id": "n_v30_animal_farm_capra",
+      "dst_id": "n_v30_animal_field_iepure"
+    },
+    {
+      "id": "de8255",
+      "src_id": "n_v4sti_animal",
+      "dst_id": "n_v30_animal_farm_vaca"
+    },
+    {
+      "id": "de8256",
+      "src_id": "n_v4sti_animal",
+      "dst_id": "n_v30_animal_farm_cal"
+    },
+    {
+      "id": "de8257",
+      "src_id": "n_v4sti_animal",
+      "dst_id": "n_v30_animal_farm_oaie"
+    },
+    {
+      "id": "de8258",
+      "src_id": "n_v24_nature_plant_parts_iarba",
+      "dst_id": "n_v30_animal_farm_capra"
+    },
+    {
+      "id": "de8259",
+      "src_id": "n_v24_food_salad_veg_morcov",
+      "dst_id": "n_v30_animal_field_iepure"
     },
     {
       "id": "de826",
@@ -51706,9 +51853,109 @@
       "dst_id": "n_net_sketch_online"
     },
     {
+      "id": "de8260",
+      "src_id": "n_v30_clothing_everyday_pantaloni",
+      "dst_id": "n_v30_clothing_footwear_soseta"
+    },
+    {
+      "id": "de8261",
+      "src_id": "n_v30_clothing_footwear_soseta",
+      "dst_id": "n_v30_clothing_outer_geaca"
+    },
+    {
+      "id": "de8262",
+      "src_id": "n_v30_clothing_outer_geaca",
+      "dst_id": "n_v30_clothing_everyday_rochie"
+    },
+    {
+      "id": "de8263",
+      "src_id": "n_v30_clothing_everyday_rochie",
+      "dst_id": "n_v30_clothing_footwear_pantof"
+    },
+    {
+      "id": "de8264",
+      "src_id": "n_v30_clothing_footwear_pantof",
+      "dst_id": "n_v30_clothing_everyday_fusta"
+    },
+    {
+      "id": "de8265",
+      "src_id": "n_v30_clothing_everyday_fusta",
+      "dst_id": "n_v30_clothing_everyday_pantaloni"
+    },
+    {
+      "id": "de8266",
+      "src_id": "n_v30_clothing_everyday_pantaloni",
+      "dst_id": "n_v30_clothing_outer_geaca"
+    },
+    {
+      "id": "de8267",
+      "src_id": "n_v30_clothing_footwear_soseta",
+      "dst_id": "n_v30_clothing_footwear_pantof"
+    },
+    {
+      "id": "de8268",
+      "src_id": "n_v30_clothing_everyday_rochie",
+      "dst_id": "n_v30_clothing_everyday_fusta"
+    },
+    {
+      "id": "de8269",
+      "src_id": "n_v30_clothing_outer_geaca",
+      "dst_id": "n_v30_clothing_footwear_pantof"
+    },
+    {
       "id": "de827",
       "src_id": "n_net_standup_ro",
       "dst_id": "n_bucuresti"
+    },
+    {
+      "id": "de8270",
+      "src_id": "n_v30_clothing_footwear_pantof",
+      "dst_id": "n_v30_clothing_everyday_pantaloni"
+    },
+    {
+      "id": "de8271",
+      "src_id": "n_v30_clothing_everyday_fusta",
+      "dst_id": "n_v30_clothing_footwear_soseta"
+    },
+    {
+      "id": "de8272",
+      "src_id": "n_v29_clothing_everyday_haina",
+      "dst_id": "n_v30_clothing_everyday_pantaloni"
+    },
+    {
+      "id": "de8273",
+      "src_id": "n_v29_clothing_everyday_haina",
+      "dst_id": "n_v30_clothing_everyday_rochie"
+    },
+    {
+      "id": "de8274",
+      "src_id": "n_v29_clothing_everyday_haina",
+      "dst_id": "n_v30_clothing_everyday_fusta"
+    },
+    {
+      "id": "de8275",
+      "src_id": "n_v4soc_magazin",
+      "dst_id": "n_v30_clothing_footwear_pantof"
+    },
+    {
+      "id": "de8276",
+      "src_id": "n_v24_action_home_a_spala",
+      "dst_id": "n_v30_clothing_footwear_soseta"
+    },
+    {
+      "id": "de8277",
+      "src_id": "n_v24_home_storage_dulap",
+      "dst_id": "n_v30_clothing_outer_geaca"
+    },
+    {
+      "id": "de8278",
+      "src_id": "n_v30_kitchen_drink_cana",
+      "dst_id": "n_v30_kitchen_table_farfurie"
+    },
+    {
+      "id": "de8279",
+      "src_id": "n_v30_kitchen_table_farfurie",
+      "dst_id": "n_v30_kitchen_cookware_tigaie"
     },
     {
       "id": "de828",
@@ -51716,9 +51963,104 @@
       "dst_id": "n_limba_romana"
     },
     {
+      "id": "de8280",
+      "src_id": "n_v30_kitchen_cookware_tigaie",
+      "dst_id": "n_v30_kitchen_cookware_oala"
+    },
+    {
+      "id": "de8281",
+      "src_id": "n_v30_kitchen_cookware_oala",
+      "dst_id": "n_v30_kitchen_table_castron"
+    },
+    {
+      "id": "de8282",
+      "src_id": "n_v30_kitchen_table_castron",
+      "dst_id": "n_v30_kitchen_utensil_furculita"
+    },
+    {
+      "id": "de8283",
+      "src_id": "n_v30_kitchen_utensil_furculita",
+      "dst_id": "n_v30_kitchen_utensil_lingura"
+    },
+    {
+      "id": "de8284",
+      "src_id": "n_v30_kitchen_utensil_lingura",
+      "dst_id": "n_v30_kitchen_drink_cana"
+    },
+    {
+      "id": "de8285",
+      "src_id": "n_v30_kitchen_drink_cana",
+      "dst_id": "n_v30_kitchen_table_castron"
+    },
+    {
+      "id": "de8286",
+      "src_id": "n_v30_kitchen_table_farfurie",
+      "dst_id": "n_v30_kitchen_utensil_furculita"
+    },
+    {
+      "id": "de8287",
+      "src_id": "n_v30_kitchen_utensil_lingura",
+      "dst_id": "n_v30_kitchen_cookware_oala"
+    },
+    {
+      "id": "de8288",
+      "src_id": "n_v30_kitchen_utensil_furculita",
+      "dst_id": "n_v30_kitchen_cookware_tigaie"
+    },
+    {
+      "id": "de8289",
+      "src_id": "n_v30_kitchen_cookware_tigaie",
+      "dst_id": "n_v30_kitchen_table_castron"
+    },
+    {
       "id": "de829",
       "src_id": "n_net_micutzu",
       "dst_id": "n_net_ceva_marunt"
+    },
+    {
+      "id": "de8290",
+      "src_id": "n_v30_kitchen_cookware_oala",
+      "dst_id": "n_v30_kitchen_table_farfurie"
+    },
+    {
+      "id": "de8291",
+      "src_id": "n_v30_kitchen_table_castron",
+      "dst_id": "n_v30_kitchen_utensil_lingura"
+    },
+    {
+      "id": "de8292",
+      "src_id": "n_v4gas_masa",
+      "dst_id": "n_v30_kitchen_table_farfurie"
+    },
+    {
+      "id": "de8293",
+      "src_id": "n_v4gas_supa",
+      "dst_id": "n_v30_kitchen_utensil_lingura"
+    },
+    {
+      "id": "de8294",
+      "src_id": "n_v4gas_mancare",
+      "dst_id": "n_v30_kitchen_utensil_furculita"
+    },
+    {
+      "id": "de8295",
+      "src_id": "n_v4gas_bucatarie",
+      "dst_id": "n_v30_kitchen_cookware_oala"
+    },
+    {
+      "id": "de8296",
+      "src_id": "n_v24_home_appliances_aragaz",
+      "dst_id": "n_v30_kitchen_cookware_tigaie"
+    },
+    {
+      "id": "de8297",
+      "src_id": "n_v24_food_snack_ceai",
+      "dst_id": "n_v30_kitchen_drink_cana"
+    },
+    {
+      "id": "de8298",
+      "src_id": "n_v2gas_ciorba",
+      "dst_id": "n_v30_kitchen_table_castron"
     },
     {
       "id": "de83",
@@ -53610,37 +53952,37 @@
     {
       "id": "pz_gastronomie_hard_1",
       "start_id": "n_gas_mici",
-      "target_id": "n_v29_kitchen_table_cutit",
+      "target_id": "n_v30_kitchen_table_farfurie",
       "difficulty": "hard"
     },
     {
       "id": "pz_gastronomie_hard_2",
-      "start_id": "n_gas_zacusca",
-      "target_id": "n_v29_kitchen_table_cutit",
+      "start_id": "n_gas_cozonac",
+      "target_id": "n_v30_kitchen_utensil_lingura",
       "difficulty": "hard"
     },
     {
       "id": "pz_gastronomie_hard_3",
       "start_id": "n_gas_zacusca",
-      "target_id": "n_v24_food_orchard_mar",
+      "target_id": "n_v30_kitchen_utensil_lingura",
       "difficulty": "hard"
     },
     {
       "id": "pz_gastronomie_hard_4",
-      "start_id": "n_gas_zacusca",
-      "target_id": "n_v24_food_orchard_para",
+      "start_id": "n_gas_mamaliga",
+      "target_id": "n_v30_kitchen_utensil_lingura",
       "difficulty": "hard"
     },
     {
       "id": "pz_gastronomie_hard_5",
-      "start_id": "n_gas_zacusca",
-      "target_id": "n_v24_food_orchard_pruna",
+      "start_id": "n_gas_masa_craciun",
+      "target_id": "n_v30_kitchen_utensil_lingura",
       "difficulty": "hard"
     },
     {
       "id": "pz_gastronomie_hard_6",
-      "start_id": "n_gas_mamaliga",
-      "target_id": "n_v24_food_orchard_mar",
+      "start_id": "n_gas_cozonac",
+      "target_id": "n_v30_kitchen_cookware_tigaie",
       "difficulty": "hard"
     },
     {
