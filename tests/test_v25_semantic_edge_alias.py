@@ -54,14 +54,14 @@ def _pack() -> dict:
     return json.loads(_PACKAGE_PACK.read_text(encoding="utf-8"))
 
 
-def test_v25_inventory_and_mirrors_are_exact():
+def test_v25_inventory_floor_and_mirrors_survive_later_additive_waves():
     fixture = json.loads(_PACKAGE_KG.read_text(encoding="utf-8"))
     aliases = sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"])
 
-    assert fixture["meta"]["build_version"] == DATA.BUILD_VERSION
-    assert (len(fixture["kg_nodes"]), len(fixture["kg_edges"])) == (2184, 8792)
+    assert len(fixture["kg_nodes"]) >= 2184
+    assert len(fixture["kg_edges"]) >= 8792
     assert len(fixture["kg_puzzles"]) == 180
-    assert aliases == 7033
+    assert aliases >= 7033
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert _PACKAGE_PACK.read_bytes() == _TEST_PACK.read_bytes()
 
@@ -86,17 +86,14 @@ def test_v25_all_168_aliases_resolve_to_the_declared_owner_without_blocked_forms
     assert svc.resolve("mănânci") == "n_v24_action_food_a_manca"
 
 
-def test_v25_beginner_probe_improves_only_through_same_referent_vecin_alias():
+def test_v25_beginner_probe_keeps_its_219_floor_without_aliasing_missing_concepts():
     svc = _service()
     deferred = {normalize(value) for value in DATA.DEFERRED_AMBIGUOUS_TERMS}
     eligible = [
         term for term in DATA.BEGINNER_BENCHMARK if normalize(term) not in deferred
     ]
-    unresolved = [term for term in eligible if svc.resolve(term) is None]
-
-    assert len(eligible) == 234
-    assert len(eligible) - len(unresolved) == 219
-    assert unresolved == [
+    resolved = [term for term in eligible if svc.resolve(term) is not None]
+    v25_missing_concepts = {
         "conopidă",
         "spanac",
         "dinte",
@@ -112,7 +109,13 @@ def test_v25_beginner_probe_improves_only_through_same_referent_vecin_alias():
         "speranță",
         "iubire",
         "liniște",
-    ]
+    }
+    authored_aliases = {normalize(alias) for alias, _node_id in DATA.ALIAS_PROBES}
+
+    assert len(eligible) == 234
+    assert len(resolved) >= 219
+    assert normalize("vecin") in authored_aliases
+    assert not ({normalize(term) for term in v25_missing_concepts} & authored_aliases)
 
 
 def test_v25_semantic_edges_land_with_the_exact_reviewed_predicates():
@@ -197,18 +200,17 @@ def test_v25_intended_topology_changes_stay_inside_reviewed_game_bounds():
         target = by_id[item_id]["target"]
         distances = svc.distances_to(target)
         responsive = sum(1 for distance in distances.values() if 1 <= distance <= 5)
-        assert len(distances) == 2184
+        assert len(distances) >= 2184
         assert responsive >= responsive_floor
 
 
-def test_v25_mobile_contract_is_refreshed_in_the_same_transaction():
+def test_v25_mobile_contract_stays_current_after_later_additive_waves():
     checked_in = json.loads(_MOBILE_CONTRACT.read_text(encoding="utf-8"))
     assert checked_in == mobile_app_pack_snapshot(_PACKAGE_KG)
-    assert checked_in["manifest"]["counts"] == {
-        "nodes": 2184,
-        "edges": 8792,
-        "puzzles": 180,
-    }
+    counts = checked_in["manifest"]["counts"]
+    assert counts["nodes"] >= 2184
+    assert counts["edges"] >= 8792
+    assert counts["puzzles"] == 180
 
 
 def test_v25_mobile_refresh_failure_restores_all_five_transaction_files(

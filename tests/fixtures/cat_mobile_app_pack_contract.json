@@ -4,12 +4,12 @@
     "app": "cat_de_roman_esti",
     "schema_version": 1,
     "manifest_version": 1,
-    "build_version": "fixture-v25-semantic-aliases",
+    "build_version": "fixture-v28-basic-words",
     "generated_at": "2026-06-21T00:00:00Z",
-    "content_hash": "sha256:bcfa417228ce063753d66454ba3472d4abe6427e78b5fee335729376b7f2e256",
+    "content_hash": "sha256:ae7611186af8c2b301683e4a159e399dfa9b8ec09e8807296fc0af1b155a1770",
     "counts": {
-      "nodes": 2184,
-      "edges": 8792,
+      "nodes": 2199,
+      "edges": 8845,
       "puzzles": 180
     }
   },
@@ -6077,6 +6077,66 @@
     {
       "id": "n_v24_weather_storm_tunet",
       "label_ro": "Tunet"
+    },
+    {
+      "id": "n_v28_body_mouth_dinte",
+      "label_ro": "Dinte"
+    },
+    {
+      "id": "n_v28_feeling_positive_iubire",
+      "label_ro": "Iubire"
+    },
+    {
+      "id": "n_v28_feeling_positive_liniste",
+      "label_ro": "Liniște"
+    },
+    {
+      "id": "n_v28_feeling_positive_speranta",
+      "label_ro": "Speranță"
+    },
+    {
+      "id": "n_v28_feeling_social_mandrie",
+      "label_ro": "Mândrie"
+    },
+    {
+      "id": "n_v28_feeling_social_rusine",
+      "label_ro": "Rușine"
+    },
+    {
+      "id": "n_v28_feeling_social_surpriza",
+      "label_ro": "Surpriză"
+    },
+    {
+      "id": "n_v28_food_vegetable_conopida",
+      "label_ro": "Conopidă"
+    },
+    {
+      "id": "n_v28_food_vegetable_spanac",
+      "label_ro": "Spanac"
+    },
+    {
+      "id": "n_v28_nature_material_piatra",
+      "label_ro": "Piatră"
+    },
+    {
+      "id": "n_v28_nature_weather_curcubeu",
+      "label_ro": "Curcubeu"
+    },
+    {
+      "id": "n_v28_time_calendar_luna_calendaristica",
+      "label_ro": "Lună calendaristică"
+    },
+    {
+      "id": "n_v28_time_calendar_saptamana",
+      "label_ro": "Săptămână"
+    },
+    {
+      "id": "n_v28_transport_water_vapor",
+      "label_ro": "Vapor"
+    },
+    {
+      "id": "n_v28_work_occupation_meserie",
+      "label_ro": "Meserie"
     },
     {
       "id": "n_v2art_arhitectura",
@@ -50918,9 +50978,69 @@
       "dst_id": "n_v4gas_apa"
     },
     {
+      "id": "de8128",
+      "src_id": "n_v28_food_vegetable_conopida",
+      "dst_id": "n_v4gas_legume"
+    },
+    {
+      "id": "de8129",
+      "src_id": "n_v4gas_mancare",
+      "dst_id": "n_v28_food_vegetable_conopida"
+    },
+    {
       "id": "de813",
       "src_id": "n_net_vlogging_ro",
       "dst_id": "n_net_challenge_online"
+    },
+    {
+      "id": "de8130",
+      "src_id": "n_v28_food_vegetable_conopida",
+      "dst_id": "n_v3gas_salata"
+    },
+    {
+      "id": "de8131",
+      "src_id": "n_v28_food_vegetable_conopida",
+      "dst_id": "n_v28_food_vegetable_spanac"
+    },
+    {
+      "id": "de8132",
+      "src_id": "n_v28_food_vegetable_spanac",
+      "dst_id": "n_v4gas_legume"
+    },
+    {
+      "id": "de8133",
+      "src_id": "n_v4gas_mancare",
+      "dst_id": "n_v28_food_vegetable_spanac"
+    },
+    {
+      "id": "de8134",
+      "src_id": "n_v28_food_vegetable_spanac",
+      "dst_id": "n_v3gas_salata"
+    },
+    {
+      "id": "de8135",
+      "src_id": "n_v24_food_garden_veg_mazare",
+      "dst_id": "n_v28_food_vegetable_spanac"
+    },
+    {
+      "id": "de8136",
+      "src_id": "n_v24_body_face_gura",
+      "dst_id": "n_v28_body_mouth_dinte"
+    },
+    {
+      "id": "de8137",
+      "src_id": "n_v28_body_mouth_dinte",
+      "dst_id": "n_v4sti_corp"
+    },
+    {
+      "id": "de8138",
+      "src_id": "n_v28_body_mouth_dinte",
+      "dst_id": "n_v24_action_food_a_manca"
+    },
+    {
+      "id": "de8139",
+      "src_id": "n_v28_body_mouth_dinte",
+      "dst_id": "n_v3per_medic"
     },
     {
       "id": "de814",
@@ -50928,9 +51048,109 @@
       "dst_id": "n_net_creator_de_continut"
     },
     {
+      "id": "de8140",
+      "src_id": "n_v24_weather_precipitation_ploaie",
+      "dst_id": "n_v28_nature_weather_curcubeu"
+    },
+    {
+      "id": "de8141",
+      "src_id": "n_v24_nature_sky_soare",
+      "dst_id": "n_v28_nature_weather_curcubeu"
+    },
+    {
+      "id": "de8142",
+      "src_id": "n_v28_nature_weather_curcubeu",
+      "dst_id": "n_v24_nature_world_cer"
+    },
+    {
+      "id": "de8143",
+      "src_id": "n_v28_nature_weather_curcubeu",
+      "dst_id": "n_v4art_culoare"
+    },
+    {
+      "id": "de8144",
+      "src_id": "n_v2geo_munte",
+      "dst_id": "n_v28_nature_material_piatra"
+    },
+    {
+      "id": "de8145",
+      "src_id": "n_v28_nature_material_piatra",
+      "dst_id": "n_v24_nature_world_pamant"
+    },
+    {
+      "id": "de8146",
+      "src_id": "n_v28_nature_material_piatra",
+      "dst_id": "n_v24_nature_world_natura"
+    },
+    {
+      "id": "de8147",
+      "src_id": "n_v28_nature_material_piatra",
+      "dst_id": "n_v4sti_solid"
+    },
+    {
+      "id": "de8148",
+      "src_id": "n_v28_transport_water_vapor",
+      "dst_id": "n_v2soc_port"
+    },
+    {
+      "id": "de8149",
+      "src_id": "n_v28_transport_water_vapor",
+      "dst_id": "n_v3geo_mare"
+    },
+    {
       "id": "de815",
       "src_id": "n_net_live_stream_ro",
       "dst_id": "n_net_comentarii_online"
+    },
+    {
+      "id": "de8150",
+      "src_id": "n_v24_transport_rail_tren",
+      "dst_id": "n_v28_transport_water_vapor"
+    },
+    {
+      "id": "de8151",
+      "src_id": "n_v24_transport_personal_masina",
+      "dst_id": "n_v28_transport_water_vapor"
+    },
+    {
+      "id": "de8152",
+      "src_id": "n_v4per_profesor",
+      "dst_id": "n_v28_work_occupation_meserie"
+    },
+    {
+      "id": "de8153",
+      "src_id": "n_v28_work_occupation_meserie",
+      "dst_id": "n_v4soc_serviciu"
+    },
+    {
+      "id": "de8154",
+      "src_id": "n_v28_work_occupation_meserie",
+      "dst_id": "n_v4soc_salariu"
+    },
+    {
+      "id": "de8155",
+      "src_id": "n_v28_work_occupation_meserie",
+      "dst_id": "n_v24_action_routine_a_lucra"
+    },
+    {
+      "id": "de8156",
+      "src_id": "n_v24_time_day_zi",
+      "dst_id": "n_v28_time_calendar_saptamana"
+    },
+    {
+      "id": "de8157",
+      "src_id": "n_v28_time_calendar_saptamana",
+      "dst_id": "n_v28_time_calendar_luna_calendaristica"
+    },
+    {
+      "id": "de8158",
+      "src_id": "n_v28_time_calendar_saptamana",
+      "dst_id": "n_v4ist_an"
+    },
+    {
+      "id": "de8159",
+      "src_id": "n_v24_time_day_ora",
+      "dst_id": "n_v28_time_calendar_saptamana"
     },
     {
       "id": "de816",
@@ -50938,14 +51158,119 @@
       "dst_id": "n_net_algoritm_social"
     },
     {
+      "id": "de8160",
+      "src_id": "n_v4ist_an",
+      "dst_id": "n_v28_time_calendar_luna_calendaristica"
+    },
+    {
+      "id": "de8161",
+      "src_id": "n_v28_time_calendar_luna_calendaristica",
+      "dst_id": "n_v24_time_day_zi"
+    },
+    {
+      "id": "de8162",
+      "src_id": "n_v28_time_calendar_luna_calendaristica",
+      "dst_id": "n_v24_time_day_ora"
+    },
+    {
+      "id": "de8163",
+      "src_id": "n_v24_feeling_joy_bucurie",
+      "dst_id": "n_v28_feeling_social_surpriza"
+    },
+    {
+      "id": "de8164",
+      "src_id": "n_v24_feeling_difficult_frica",
+      "dst_id": "n_v28_feeling_social_surpriza"
+    },
+    {
+      "id": "de8165",
+      "src_id": "n_v28_feeling_social_surpriza",
+      "dst_id": "n_v24_feeling_difficult_tristete"
+    },
+    {
+      "id": "de8166",
+      "src_id": "n_v28_feeling_social_surpriza",
+      "dst_id": "n_v28_feeling_positive_liniste"
+    },
+    {
+      "id": "de8167",
+      "src_id": "n_v24_feeling_difficult_tristete",
+      "dst_id": "n_v28_feeling_social_rusine"
+    },
+    {
+      "id": "de8168",
+      "src_id": "n_v28_feeling_social_rusine",
+      "dst_id": "n_v24_feeling_difficult_frica"
+    },
+    {
+      "id": "de8169",
+      "src_id": "n_v28_feeling_social_rusine",
+      "dst_id": "n_v28_feeling_social_mandrie"
+    },
+    {
       "id": "de817",
       "src_id": "n_net_comentarii_online",
       "dst_id": "n_net_reactie_video"
     },
     {
+      "id": "de8170",
+      "src_id": "n_v28_feeling_positive_iubire",
+      "dst_id": "n_v28_feeling_social_rusine"
+    },
+    {
+      "id": "de8171",
+      "src_id": "n_v28_feeling_social_mandrie",
+      "dst_id": "n_v24_feeling_joy_bucurie"
+    },
+    {
+      "id": "de8172",
+      "src_id": "n_v4soc_familie",
+      "dst_id": "n_v28_feeling_social_mandrie"
+    },
+    {
+      "id": "de8173",
+      "src_id": "n_v28_feeling_social_mandrie",
+      "dst_id": "n_v28_feeling_positive_iubire"
+    },
+    {
+      "id": "de8174",
+      "src_id": "n_v24_feeling_joy_a_iubi",
+      "dst_id": "n_v28_feeling_positive_iubire"
+    },
+    {
+      "id": "de8175",
+      "src_id": "n_v28_feeling_positive_iubire",
+      "dst_id": "n_v28_feeling_positive_speranta"
+    },
+    {
+      "id": "de8176",
+      "src_id": "n_v24_feeling_joy_bucurie",
+      "dst_id": "n_v28_feeling_positive_speranta"
+    },
+    {
+      "id": "de8177",
+      "src_id": "n_v28_feeling_positive_speranta",
+      "dst_id": "n_v24_feeling_difficult_frica"
+    },
+    {
+      "id": "de8178",
+      "src_id": "n_v28_feeling_positive_speranta",
+      "dst_id": "n_v28_feeling_positive_liniste"
+    },
+    {
+      "id": "de8179",
+      "src_id": "n_v28_feeling_positive_liniste",
+      "dst_id": "n_v24_feeling_needs_oboseala"
+    },
+    {
       "id": "de818",
       "src_id": "n_net_comentarii_online",
       "dst_id": "n_net_umor_autoironic"
+    },
+    {
+      "id": "de8180",
+      "src_id": "n_v28_feeling_positive_liniste",
+      "dst_id": "n_v24_feeling_difficult_furie"
     },
     {
       "id": "de819",
@@ -53508,74 +53833,74 @@
     },
     {
       "id": "pz_societate_easy_1",
-      "start_id": "n_v3soc_lege",
-      "target_id": "n_v3soc_scoala",
+      "start_id": "n_v24_time_day_ceas",
+      "target_id": "n_v28_time_calendar_luna_calendaristica",
       "difficulty": "easy"
     },
     {
       "id": "pz_societate_easy_2",
-      "start_id": "n_v2soc_stat",
-      "target_id": "n_v3soc_scoala",
+      "start_id": "n_v24_time_day_ceas",
+      "target_id": "n_v28_time_calendar_saptamana",
       "difficulty": "easy"
     },
     {
       "id": "pz_societate_easy_3",
-      "start_id": "n_v3soc_lege",
-      "target_id": "n_v4soc_familie",
+      "start_id": "n_v24_time_day_ora",
+      "target_id": "n_v28_time_calendar_luna_calendaristica",
       "difficulty": "easy"
     },
     {
       "id": "pz_societate_easy_4",
-      "start_id": "n_v3soc_lege",
-      "target_id": "n_v4soc_copil",
+      "start_id": "n_v24_time_day_zi",
+      "target_id": "n_v28_time_calendar_luna_calendaristica",
       "difficulty": "easy"
     },
     {
       "id": "pz_societate_easy_5",
-      "start_id": "n_v2soc_stat",
-      "target_id": "n_v4soc_familie",
+      "start_id": "n_v28_time_calendar_luna_calendaristica",
+      "target_id": "n_v28_time_calendar_saptamana",
       "difficulty": "easy"
     },
     {
       "id": "pz_societate_easy_6",
-      "start_id": "n_v2soc_stat",
-      "target_id": "n_v4soc_copil",
+      "start_id": "n_v3soc_lege",
+      "target_id": "n_v3soc_scoala",
       "difficulty": "easy"
     },
     {
       "id": "pz_societate_hard_1",
-      "start_id": "n_v20soc_biserica_ortodoxa_romana",
-      "target_id": "n_v24_people_parents_bebelus",
+      "start_id": "n_v24_transport_personal_masina",
+      "target_id": "n_v3soc_lege",
       "difficulty": "hard"
     },
     {
       "id": "pz_societate_hard_2",
-      "start_id": "n_v20soc_biserica_ortodoxa_romana",
-      "target_id": "n_v24_people_parents_mama",
+      "start_id": "n_v24_transport_rail_tren",
+      "target_id": "n_v3soc_lege",
       "difficulty": "hard"
     },
     {
       "id": "pz_societate_hard_3",
-      "start_id": "n_v20soc_biserica_ortodoxa_romana",
-      "target_id": "n_v24_people_parents_tata",
+      "start_id": "n_v24_transport_personal_masina",
+      "target_id": "n_v2soc_stat",
       "difficulty": "hard"
     },
     {
       "id": "pz_societate_hard_4",
-      "start_id": "n_v20soc_biserica_ortodoxa_romana",
-      "target_id": "n_v24_time_day_ceas",
+      "start_id": "n_v24_transport_rail_tren",
+      "target_id": "n_v2soc_stat",
       "difficulty": "hard"
     },
     {
       "id": "pz_societate_hard_5",
-      "start_id": "n_v20soc_biserica_ortodoxa_romana",
-      "target_id": "n_v24_time_day_ora",
+      "start_id": "n_v24_transport_personal_masina",
+      "target_id": "n_v24_transport_rail_metrou",
       "difficulty": "hard"
     },
     {
       "id": "pz_societate_hard_6",
-      "start_id": "n_v20soc_biserica_ortodoxa_romana",
-      "target_id": "n_v24_time_day_zi",
+      "start_id": "n_v24_transport_personal_masina",
+      "target_id": "n_v24_transport_rail_tramvai",
       "difficulty": "hard"
     },
     {
@@ -53658,68 +53983,68 @@
     },
     {
       "id": "pz_stiinta_easy_2",
-      "start_id": "n_v2sti_chimie",
-      "target_id": "n_v2sti_fizica",
-      "difficulty": "easy"
-    },
-    {
-      "id": "pz_stiinta_easy_3",
-      "start_id": "n_v2sti_biologie",
-      "target_id": "n_v2sti_chimie",
-      "difficulty": "easy"
-    },
-    {
-      "id": "pz_stiinta_easy_4",
-      "start_id": "n_v2sti_fizica",
-      "target_id": "n_v2sti_matematica",
-      "difficulty": "easy"
-    },
-    {
-      "id": "pz_stiinta_easy_5",
-      "start_id": "n_v2sti_biologie",
-      "target_id": "n_v2sti_matematica",
-      "difficulty": "easy"
-    },
-    {
-      "id": "pz_stiinta_easy_6",
-      "start_id": "n_v2sti_avion",
+      "start_id": "n_v24_body_face_gura",
       "target_id": "n_v3sti_experiment",
       "difficulty": "easy"
     },
     {
-      "id": "pz_stiinta_hard_1",
-      "start_id": "n_v24_nature_plant_parts_iarba",
+      "id": "pz_stiinta_easy_3",
+      "start_id": "n_v28_body_mouth_dinte",
+      "target_id": "n_v3sti_experiment",
+      "difficulty": "easy"
+    },
+    {
+      "id": "pz_stiinta_easy_4",
+      "start_id": "n_v28_nature_material_piatra",
+      "target_id": "n_v3sti_experiment",
+      "difficulty": "easy"
+    },
+    {
+      "id": "pz_stiinta_easy_5",
+      "start_id": "n_v24_body_face_gura",
       "target_id": "n_v2sti_stiinta",
+      "difficulty": "easy"
+    },
+    {
+      "id": "pz_stiinta_easy_6",
+      "start_id": "n_v28_body_mouth_dinte",
+      "target_id": "n_v2sti_stiinta",
+      "difficulty": "easy"
+    },
+    {
+      "id": "pz_stiinta_hard_1",
+      "start_id": "n_v24_body_face_cap",
+      "target_id": "n_v3sti_experiment",
       "difficulty": "hard"
     },
     {
       "id": "pz_stiinta_hard_2",
-      "start_id": "n_v24_nature_plant_parts_iarba",
-      "target_id": "n_v2sti_fizica",
+      "start_id": "n_v24_body_face_nas",
+      "target_id": "n_v3sti_experiment",
       "difficulty": "hard"
     },
     {
       "id": "pz_stiinta_hard_3",
-      "start_id": "n_v2sti_avion",
-      "target_id": "n_v2sti_matematica",
+      "start_id": "n_v24_body_face_cap",
+      "target_id": "n_v2sti_stiinta",
       "difficulty": "hard"
     },
     {
       "id": "pz_stiinta_hard_4",
-      "start_id": "n_v24_nature_plant_parts_iarba",
-      "target_id": "n_v24_nature_sky_luna",
+      "start_id": "n_v24_body_face_nas",
+      "target_id": "n_v2sti_stiinta",
       "difficulty": "hard"
     },
     {
       "id": "pz_stiinta_hard_5",
-      "start_id": "n_v24_nature_plant_parts_iarba",
-      "target_id": "n_v24_nature_sky_soare",
+      "start_id": "n_v24_body_face_cap",
+      "target_id": "n_v2sti_fizica",
       "difficulty": "hard"
     },
     {
       "id": "pz_stiinta_hard_6",
-      "start_id": "n_v24_nature_plant_parts_iarba",
-      "target_id": "n_v24_nature_sky_stea",
+      "start_id": "n_v24_body_face_gura",
+      "target_id": "n_v2sti_fizica",
       "difficulty": "hard"
     },
     {
