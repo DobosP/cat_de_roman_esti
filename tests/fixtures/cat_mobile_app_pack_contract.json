@@ -4,12 +4,12 @@
     "app": "cat_de_roman_esti",
     "schema_version": 1,
     "manifest_version": 1,
-    "build_version": "fixture-v24-common-words",
+    "build_version": "fixture-v25-semantic-aliases",
     "generated_at": "2026-06-21T00:00:00Z",
-    "content_hash": "sha256:cea66fbf3134d5734b720aac855d38b6b6f75be007cdc7d04aeec597e7e08e6c",
+    "content_hash": "sha256:bcfa417228ce063753d66454ba3472d4abe6427e78b5fee335729376b7f2e256",
     "counts": {
       "nodes": 2184,
-      "edges": 8767,
+      "edges": 8792,
       "puzzles": 180
     }
   },
@@ -50783,14 +50783,139 @@
       "dst_id": "n_v24_weather_air_nor"
     },
     {
+      "id": "de8103",
+      "src_id": "n_v24_home_appliances_frigider",
+      "dst_id": "n_v4gas_bucatarie"
+    },
+    {
+      "id": "de8104",
+      "src_id": "n_v24_home_appliances_aragaz",
+      "dst_id": "n_v4gas_bucatarie"
+    },
+    {
+      "id": "de8105",
+      "src_id": "n_v4gas_mancare",
+      "dst_id": "n_v24_action_food_a_manca"
+    },
+    {
+      "id": "de8106",
+      "src_id": "n_v4gas_apa",
+      "dst_id": "n_v24_action_food_a_bea"
+    },
+    {
+      "id": "de8107",
+      "src_id": "n_v4gas_bucatarie",
+      "dst_id": "n_v24_action_food_a_gati"
+    },
+    {
+      "id": "de8108",
+      "src_id": "n_v4sti_ochi",
+      "dst_id": "n_v24_action_senses_a_vedea"
+    },
+    {
+      "id": "de8109",
+      "src_id": "n_v4sti_ureche",
+      "dst_id": "n_v24_action_senses_a_auzi"
+    },
+    {
       "id": "de811",
       "src_id": "n_net_vlogging_ro",
       "dst_id": "n_net_creator_de_continut"
     },
     {
+      "id": "de8110",
+      "src_id": "n_v24_body_face_gura",
+      "dst_id": "n_v24_action_senses_a_vorbi"
+    },
+    {
+      "id": "de8111",
+      "src_id": "n_v3lit_carte",
+      "dst_id": "n_v24_action_language_a_citi"
+    },
+    {
+      "id": "de8112",
+      "src_id": "n_v24_school_writing_caiet",
+      "dst_id": "n_v24_action_language_a_scrie"
+    },
+    {
+      "id": "de8113",
+      "src_id": "n_v4via_usa",
+      "dst_id": "n_v24_action_home_a_deschide"
+    },
+    {
+      "id": "de8114",
+      "src_id": "n_v4via_usa",
+      "dst_id": "n_v24_action_home_a_inchide"
+    },
+    {
+      "id": "de8115",
+      "src_id": "n_v24_home_bed_pat",
+      "dst_id": "n_v24_action_routine_a_dormi"
+    },
+    {
+      "id": "de8116",
+      "src_id": "n_v4soc_serviciu",
+      "dst_id": "n_v24_action_routine_a_lucra"
+    },
+    {
+      "id": "de8117",
+      "src_id": "n_v3soc_scoala",
+      "dst_id": "n_v24_action_routine_a_invata"
+    },
+    {
+      "id": "de8118",
+      "src_id": "n_v24_transport_terminals_gara",
+      "dst_id": "n_v24_transport_rail_tren"
+    },
+    {
+      "id": "de8119",
+      "src_id": "n_v24_transport_terminals_aeroport",
+      "dst_id": "n_v2sti_avion"
+    },
+    {
       "id": "de812",
       "src_id": "n_net_vlogging_ro",
       "dst_id": "n_net_thumbnail_cu_sageata"
+    },
+    {
+      "id": "de8120",
+      "src_id": "n_v24_feeling_needs_oboseala",
+      "dst_id": "n_v24_action_routine_a_dormi"
+    },
+    {
+      "id": "de8121",
+      "src_id": "n_v24_school_supplies_radiera",
+      "dst_id": "n_v24_school_writing_creion"
+    },
+    {
+      "id": "de8122",
+      "src_id": "n_v4sti_copac",
+      "dst_id": "n_v24_nature_plant_parts_ramura"
+    },
+    {
+      "id": "de8123",
+      "src_id": "n_v4sti_copac",
+      "dst_id": "n_v24_nature_plant_parts_radacina"
+    },
+    {
+      "id": "de8124",
+      "src_id": "n_v24_nature_plant_parts_ramura",
+      "dst_id": "n_v4sti_frunza"
+    },
+    {
+      "id": "de8125",
+      "src_id": "n_v24_weather_air_nor",
+      "dst_id": "n_v24_weather_precipitation_ploaie"
+    },
+    {
+      "id": "de8126",
+      "src_id": "n_v24_feeling_needs_foame",
+      "dst_id": "n_v4gas_mancare"
+    },
+    {
+      "id": "de8127",
+      "src_id": "n_v24_feeling_needs_sete",
+      "dst_id": "n_v4gas_apa"
     },
     {
       "id": "de813",
@@ -53563,38 +53688,38 @@
     },
     {
       "id": "pz_stiinta_hard_1",
+      "start_id": "n_v24_nature_plant_parts_iarba",
+      "target_id": "n_v2sti_stiinta",
+      "difficulty": "hard"
+    },
+    {
+      "id": "pz_stiinta_hard_2",
+      "start_id": "n_v24_nature_plant_parts_iarba",
+      "target_id": "n_v2sti_fizica",
+      "difficulty": "hard"
+    },
+    {
+      "id": "pz_stiinta_hard_3",
       "start_id": "n_v2sti_avion",
       "target_id": "n_v2sti_matematica",
       "difficulty": "hard"
     },
     {
-      "id": "pz_stiinta_hard_2",
-      "start_id": "n_v2sti_avion",
-      "target_id": "n_v4sti_animal",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_stiinta_hard_3",
-      "start_id": "n_v21sti_centrala_cernavoda",
+      "id": "pz_stiinta_hard_4",
+      "start_id": "n_v24_nature_plant_parts_iarba",
       "target_id": "n_v24_nature_sky_luna",
       "difficulty": "hard"
     },
     {
-      "id": "pz_stiinta_hard_4",
-      "start_id": "n_v21sti_centrala_cernavoda",
+      "id": "pz_stiinta_hard_5",
+      "start_id": "n_v24_nature_plant_parts_iarba",
       "target_id": "n_v24_nature_sky_soare",
       "difficulty": "hard"
     },
     {
-      "id": "pz_stiinta_hard_5",
-      "start_id": "n_v21sti_centrala_cernavoda",
-      "target_id": "n_v24_nature_sky_stea",
-      "difficulty": "hard"
-    },
-    {
       "id": "pz_stiinta_hard_6",
-      "start_id": "n_v21sti_centrala_cernavoda",
-      "target_id": "n_v24_body_face_cap",
+      "start_id": "n_v24_nature_plant_parts_iarba",
+      "target_id": "n_v24_nature_sky_stea",
       "difficulty": "hard"
     },
     {

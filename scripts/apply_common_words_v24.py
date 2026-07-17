@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Apply the v24 common-word graph wave as one rollback-protected transaction.
+"""Apply a common-word graph wave as one rollback-protected transaction.
 
-The authored data stays in :mod:`common_words_v24_data`.  This entry point is the
-only writer: it rejects duplicate/ambiguous concepts before calling the established
+The default authored data stays in :mod:`common_words_v24_data`; later audited waves may
+select another local data module with ``--data-module``. This entry point is the only
+writer: it rejects duplicate/ambiguous concepts before calling the established
 ``densify_content`` puzzle rebuild, proves that existing approved pack records keep
-their exact payload and status, validates both fixture/pack mirrors, and restores all
-four files if any step fails.
+their exact payload and status, refreshes the public mobile snapshot, validates both
+fixture/pack mirrors, and restores all five files if any step fails.
 
 New game items are intentionally optional.  They are staged only when the data module
 exports explicit, full pack records through ``GAME_ITEMS`` or the builder's
@@ -42,7 +43,11 @@ from validate_fixture import (  # noqa: E402
     validate as validate_fixture,
 )
 
-from cat_de_roman_esti.data import content_hash, load_fixture  # noqa: E402
+from cat_de_roman_esti.data import (  # noqa: E402
+    content_hash,
+    load_fixture,
+    mobile_app_pack_snapshot,
+)
 from cat_de_roman_esti.wordgames.packs import (  # noqa: E402
     GAME_KINDS,
     validate_envelope,
@@ -52,7 +57,8 @@ from cat_de_roman_esti.wordgames.service import WordGameService  # noqa: E402
 
 FIXTURE_COPIES = (densify_content.PACKAGE_FIXTURE, densify_content.TESTS_FIXTURE)
 PACK_COPIES = (validate_games_pack.PACKAGE_PACK, validate_games_pack.TESTS_PACK)
-TRANSACTION_FILES = (*FIXTURE_COPIES, *PACK_COPIES)
+MOBILE_CONTRACT = _REPO_ROOT / "tests" / "fixtures" / "cat_mobile_app_pack_contract.json"
+TRANSACTION_FILES = (*FIXTURE_COPIES, *PACK_COPIES, MOBILE_CONTRACT)
 DEFAULT_BUILD_VERSION = "fixture-v24-common-words"
 DEFAULT_NOTE = (
     "v24 common-word graph wave: beginner-recognizable Romanian vocabulary, "
@@ -159,6 +165,19 @@ def _assert_mirrors_identical() -> None:
         fail("fixture mirrors are not byte-identical")
     if PACK_COPIES[0].read_bytes() != PACK_COPIES[1].read_bytes():
         fail("games-pack mirrors are not byte-identical")
+
+
+def _refresh_mobile_contract() -> None:
+    payload = mobile_app_pack_snapshot(FIXTURE_COPIES[0])
+    blob = (json.dumps(payload, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    _atomic_write(MOBILE_CONTRACT, blob)
+
+
+def _assert_mobile_contract_current() -> None:
+    checked_in = _load_json(MOBILE_CONTRACT.read_bytes(), "mobile app-pack contract")
+    expected = mobile_app_pack_snapshot(FIXTURE_COPIES[0])
+    if checked_in != expected:
+        fail("mobile app-pack contract does not match the merged fixture")
 
 
 def _module_constant(module: ModuleType, *names: str, default: object = None) -> object:
@@ -286,14 +305,14 @@ def _unpack_builder_result(result: object) -> tuple[object, object, object, obje
     fail("build_nodes_and_edges() must return a mapping or a two/three-item sequence")
 
 
-def _load_batch() -> Batch:
+def _load_batch(module_name: str = "common_words_v24_data") -> Batch:
     try:
-        module = importlib.import_module("common_words_v24_data")
+        module = importlib.import_module(module_name)
     except (ImportError, SyntaxError) as exc:
-        fail(f"cannot import common_words_v24_data: {exc}")
+        fail(f"cannot import {module_name}: {exc}")
     builder = getattr(module, "build_nodes_and_edges", None)
     if not callable(builder):
-        fail("common_words_v24_data must export build_nodes_and_edges()")
+        fail(f"{module_name} must export build_nodes_and_edges()")
     nodes_raw, edges_raw, aliases_raw, built_game_items = _unpack_builder_result(builder())
     if not isinstance(nodes_raw, (list, tuple)) or not isinstance(edges_raw, (list, tuple)):
         fail("builder nodes and edges must be sequences")
@@ -435,7 +454,7 @@ def _detect_already_applied(batch: Batch, fixture: dict) -> None:
         and aliases_applied
     )
     if fixture.get("meta", {}).get("build_version") == batch.build_version or content_applied:
-        fail(f"v24 common-word wave is already applied ({batch.build_version})")
+        fail(f"common-word wave is already applied ({batch.build_version})")
 
 
 def _preflight(batch: Batch, fixture: dict) -> ProbePlan:
@@ -807,23 +826,26 @@ def _fixture_content_hash(fixture: dict) -> str:
     return content_hash(fixture["kg_nodes"], fixture["kg_edges"], fixture["kg_puzzles"])
 
 
-def apply(*, dry_run: bool = False) -> None:
+def apply(*, dry_run: bool = False, module_name: str = "common_words_v24_data") -> None:
     snapshots = _snapshot()
     try:
         _assert_mirrors_identical()
         baseline_fixture = _load_json(snapshots[FIXTURE_COPIES[0]], "package fixture")
         baseline_pack = _load_json(snapshots[PACK_COPIES[0]], "package games pack")
-        batch = _load_batch()
+        batch = _load_batch(module_name)
         _detect_already_applied(batch, baseline_fixture)
         plan = _preflight(batch, baseline_fixture)
         print(
-            "apply_common_words_v24: preflight GREEN — "
+            f"apply_common_words_v24[{module_name}]: preflight GREEN — "
             f"{len(batch.nodes)} nodes, {len(batch.edges)} edges, "
             f"{len(batch.beginner_benchmark)} beginner probes, "
             f"{len(batch.intuitive_pairs)} intuitive-link probes"
         )
         if dry_run:
-            print("apply_common_words_v24: dry-run complete; no repository files changed")
+            print(
+                f"apply_common_words_v24[{module_name}]: dry-run complete; "
+                "no repository files changed"
+            )
             return
 
         rc = densify_content.run(
@@ -845,7 +867,9 @@ def apply(*, dry_run: bool = False) -> None:
         elif any(path.read_bytes() != snapshots[path] for path in PACK_COPIES):
             fail("games pack changed even though the data module supplied no game items")
 
+        _refresh_mobile_contract()
         _validate_repository()
+        _assert_mobile_contract_current()
         final_pack = _load_json(PACK_COPIES[0].read_bytes(), "final games pack")
         if _approved_projection(final_pack) != _approved_projection(baseline_pack):
             fail("approved pack payload/status semantics changed after final validation")
@@ -854,7 +878,7 @@ def apply(*, dry_run: bool = False) -> None:
         if before_hash == after_hash:
             fail("fixture content checksum did not change after applying a non-empty wave")
         print(
-            "apply_common_words_v24: GREEN — "
+            f"apply_common_words_v24[{module_name}]: GREEN — "
             f"build={batch.build_version}, content_hash={after_hash}, "
             f"staged_items={list(staged_ids)}"
         )
@@ -869,11 +893,16 @@ def apply(*, dry_run: bool = False) -> None:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
+        "--data-module",
+        default="common_words_v24_data",
+        help="importable local wave module (default: common_words_v24_data)",
+    )
+    parser.add_argument(
         "--dry-run", action="store_true", help="run all non-mutating preflight checks only"
     )
     args = parser.parse_args(argv)
     try:
-        apply(dry_run=args.dry_run)
+        apply(dry_run=args.dry_run, module_name=args.data_module)
     except KeyboardInterrupt:
         print("apply_common_words_v24: interrupted; transaction restored", file=sys.stderr)
         return 130

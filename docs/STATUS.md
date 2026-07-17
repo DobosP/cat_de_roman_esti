@@ -1,7 +1,7 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-17. This file is the repository's current source of truth._
-_Last verified: 2026-07-17 (local v24 gate: backend 336; session-store 11; v24 quality 12; exact critique 26 v24 + 7 v23; Ruff; both validators; mobile snapshot; workflow syntax; `git diff --check`. Production remains release `2746be3`, smoke-verified 2026-07-16.)_
+_Last verified: 2026-07-17 (local v25 gate: backend 345; session-store 11; semantic/alias quality 9; exact critique 33; Ruff; both validators; mobile rollback transaction; workflow syntax; `git diff --check`. Production remains release `2746be3`, smoke-verified 2026-07-16.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -30,14 +30,15 @@ one live `ACUM` cue instead of repeating rules. Mobile gets 44 px targets, scrol
 status/theme rails, readable long labels, reachable primary actions, visible rank meaning,
 and safe keyboard shortcuts; desktop retains the same focused play column.
 
-## Current outcome — beginner vocabulary waves (ADR-0030, ADR-0032)
+## Current outcome — beginner vocabulary waves (ADR-0030, ADR-0032, ADR-0033)
 
 V23 retains 22 childhood/story nodes, 78 owned edges, and seven pending items. V24 adds
 **150 everyday nodes, 511 edges, 276 aliases, and 26 pending items**: four Conexiuni,
-eight Cald sau Rece, eight Lanț, and six Alchimie. Exact intended resolution is now
-**218/234 (93.2%)** after excluding two recorded collision risks from the 236-surface
-benchmark. All 26 exact v24 dossiers and the seven affected v23 dossiers are
-deterministically clean; nothing new is served before bound subjective review.
+eight Cald sau Rece, eight Lanț, and six Alchimie. V25 adds **168 collision-safe aliases
+and 25 concrete semantic links** without new boards or nodes. Exact intended resolution is
+**219/234 (93.6%)**; all 33 affected pending dossiers are deterministically clean and all
+572 approved records remain unchanged. No new boards are served before bound review;
+the alias and semantic-link corrections apply to the existing graph immediately.
 
 ## Product and deployment
 
@@ -58,7 +59,7 @@ client-authored and visibility needs opt-in by default.
 | Alchimie | 98 | 77 | 21 | curated first; category closure fallback |
 
 Pack: **794 items = 572 approved + 222 pending**, across 14 categories.
-Bundled KG: **2,184 nodes / 8,767 edges / 6,865 aliases / 180 legacy puzzles**.
+Bundled KG: **2,184 nodes / 8,792 edges / 7,033 aliases / 180 legacy puzzles**.
 Both fixture copies and both pack copies are byte-identical and validator-green.
 
 ## Runtime contracts and safety
@@ -91,8 +92,8 @@ session-store target remains `tests/test_wordgames_session_store.py` (11 tests).
 
 - Playtest the beginner UI at 320–390 px and Lanț recovery; measure first action, invalid
   moves, hint reuse, undo, completion, and abandonment.
-- Run bound subjective review over the exact 26 v24 and seven v23 pending IDs; inspect
-  Conexiuni predicates, route meaning, Contexto ordering, and Alchimie recipe intuition.
+- Run bound subjective review over the exact 33 v23/v24 pending IDs; inspect Contexto
+  ordering after v25, route meaning, Conexiuni predicates, and Alchimie recipe intuition.
 - Work the approved-stock critique/A7 queues; generic regional KG edges remain a cleanup
   inventory, while owner demotions stay explicit proposals.
 - Make ranking scores server-authored, bound retained score history, and default ranking
