@@ -34,6 +34,40 @@ const GAME_KEY = "alchimie";
 const DEF = gameByKey("alchimie");
 
 const GOLD = "#ffd166";
+const REACTION_LOG_LIMIT = 12;
+
+type CraftedItem = InventoryItem & { parents: [Concept, Concept] };
+
+interface Reaction {
+  ingredientKey: string;
+  parents: [Concept, Concept];
+  results: CraftedItem[];
+}
+
+function isCraftedItem(item: InventoryItem): item is CraftedItem {
+  return item.parents !== null;
+}
+
+function buildReactionLog(inventory: InventoryItem[]): Reaction[] {
+  const chronological: Reaction[] = [];
+
+  for (const item of inventory) {
+    if (!isCraftedItem(item)) continue;
+    const ingredientKey = JSON.stringify(item.parents.map((parent) => parent.id).sort());
+    const previous = chronological[chronological.length - 1];
+    if (previous?.ingredientKey === ingredientKey) {
+      previous.results.push(item);
+    } else {
+      chronological.push({
+        ingredientKey,
+        parents: item.parents,
+        results: [item],
+      });
+    }
+  }
+
+  return chronological.slice(-REACTION_LOG_LIMIT).reverse();
+}
 
 const DIFFICULTY_LABEL: Record<Difficulty, string> = {
   usor: "Ușor",
@@ -221,7 +255,11 @@ export default function Alchimie({
       setState(res);
       setSelected([]);
       setHintIds(new Set());
-      setLastMessage(res.message);
+      const feedback =
+        res.discovered.length === 0 && res.hint_available
+          ? res.message + " Apasă „Indiciu” dacă te-ai blocat."
+          : res.message;
+      setLastMessage(feedback);
       if (res.discovered.length > 0) {
         setFreshIds(new Set(res.discovered.map((d: Concept) => d.id)));
         if (!res.won) sound.playHop();
@@ -229,10 +267,6 @@ export default function Alchimie({
       } else {
         setFreshIds(new Set());
         sound.playUndo();
-        const hint = res.hint_available
-          ? " Apasă „Indiciu” dacă te-ai blocat."
-          : "";
-        onToast(`Nicio combinație nouă din această pereche.${hint}`, "info");
       }
     } catch (err) {
       sound.playError();
@@ -330,6 +364,14 @@ export default function Alchimie({
         .filter(Boolean) as InventoryItem[],
     [selected, inventory],
   );
+  const reactionLog = useMemo(() => buildReactionLog(inventory), [inventory]);
+  const winningTargetId = state?.target.id;
+  const winningReaction =
+    won && winningTargetId
+      ? (reactionLog.find((reaction) =>
+          reaction.results.some((item) => item.id === winningTargetId),
+        ) ?? null)
+      : null;
 
   // Keyboard: Enter combines a ready pair, Escape clears the bench. Ignored while
   // typing in an input (none here) or once the game is finished.
@@ -520,6 +562,7 @@ export default function Alchimie({
             progress={`${selected.length}/2`}
             accent={DEF.accent}
             ready={selected.length === 2}
+            announce={false}
           />
         )}
 
@@ -583,7 +626,7 @@ export default function Alchimie({
 
         {/* Last combine feedback */}
         <AnimatePresence mode="wait">
-          {lastMessage && (
+          {lastMessage && !won && (
             <m.p
               key={lastMessage + state.moves}
               className="muted center"
@@ -593,11 +636,76 @@ export default function Alchimie({
               style={{ margin: 0, fontSize: "0.92rem" }}
               role="status"
               aria-live="polite"
+              aria-atomic="true"
             >
               {lastMessage}
             </m.p>
           )}
         </AnimatePresence>
+
+        {/* Server-authored lineage: latest stays visible, older reactions opt in. */}
+        {!won && reactionLog.length > 0 && (
+          <section
+            className="card col"
+            aria-labelledby="alchemy-reaction-log-title"
+            style={{ gap: 10, padding: 14 }}
+          >
+            <div className="row spread wrap" style={{ gap: 8, alignItems: "center" }}>
+              <span
+                id="alchemy-reaction-log-title"
+                className="faint"
+                style={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}
+              >
+                ULTIMA DESCOPERIRE
+              </span>
+              <span className="muted" style={{ fontSize: "0.78rem" }}>
+                {reactionLog.length === 1
+                  ? "1 reacție păstrată"
+                  : reactionLog.length + " reacții păstrate"}
+              </span>
+            </div>
+
+            <ReactionRow
+              reaction={reactionLog[0]}
+              selected={selected}
+              freshIds={freshIds}
+              busy={busy}
+              onSelect={toggle}
+            />
+
+            {reactionLog.length > 1 && (
+              <details className="alchemy-reaction-log">
+                <summary
+                  className="chip alchemy-reaction-log-toggle"
+                  style={{
+                    cursor: "pointer",
+                    minHeight: 44,
+                    width: "fit-content",
+                    maxWidth: "100%",
+                  }}
+                >
+                  Vezi jurnalul ({reactionLog.length})
+                </summary>
+                <div className="col" style={{ gap: 8, marginTop: 10 }}>
+                  {reactionLog.slice(1).map((reaction) => (
+                    <ReactionRow
+                      key={
+                        reaction.ingredientKey +
+                        ":" +
+                        reaction.results.map((item) => item.id).join(",")
+                      }
+                      reaction={reaction}
+                      selected={selected}
+                      freshIds={freshIds}
+                      busy={busy}
+                      onSelect={toggle}
+                    />
+                  ))}
+                </div>
+              </details>
+            )}
+          </section>
+        )}
 
         {/* Inventory */}
         <div className="col" style={{ gap: 8 }}>
@@ -709,13 +817,88 @@ export default function Alchimie({
               onOptions={newGame}
               onExit={onExit}
             >
-              <strong style={{ color: "var(--text)" }}>{state.target.label}</strong> în{" "}
-              {state.moves} {state.moves === 1 ? "combinație" : "combinații"} ·{" "}
-              {state.discovered_count} concepte descoperite.
+              <>
+                <strong style={{ color: "var(--text)" }}>{state.target.label}</strong> în{" "}
+                {state.moves} {state.moves === 1 ? "combinație" : "combinații"} ·{" "}
+                {state.discovered_count} concepte descoperite.
+                {winningReaction && (
+                  <span style={{ display: "block", marginTop: 8 }}>
+                    <span
+                      className="faint"
+                      style={{ display: "block", fontSize: "0.72rem" }}
+                    >
+                      CUM AI FĂURIT-O
+                    </span>
+                    {winningReaction.parents[0].label} +{" "}
+                    {winningReaction.parents[1].label} →{" "}
+                    <strong style={{ color: "var(--text)" }}>
+                      {winningReaction.results.map((item) => item.label).join(", ")}
+                    </strong>
+                  </span>
+                )}
+              </>
             </ResultCard>
           )}
         </AnimatePresence>
       </div>
+    </div>
+  );
+}
+
+function ReactionRow({
+  reaction,
+  selected,
+  freshIds,
+  busy,
+  onSelect,
+}: {
+  reaction: Reaction;
+  selected: string[];
+  freshIds: Set<string>;
+  busy: boolean;
+  onSelect: (id: string) => void;
+}) {
+  return (
+    <div
+      className="row wrap"
+      style={{
+        gap: 8,
+        alignItems: "center",
+        overflowWrap: "anywhere",
+      }}
+    >
+      <span className="muted" style={{ lineHeight: 1.45 }}>
+        {reaction.parents[0].label} + {reaction.parents[1].label} →
+      </span>
+      <span className="row wrap" style={{ gap: 6 }}>
+        {reaction.results.map((item) => {
+          const isSelected = selected.includes(item.id);
+          const isFresh = freshIds.has(item.id);
+          return (
+            <button
+              key={item.id}
+              type="button"
+              className="chip alchemy-reaction-result"
+              disabled={busy}
+              aria-pressed={isSelected}
+              aria-label={"Alege " + item.label + " din jurnalul de descoperiri"}
+              onClick={() => onSelect(item.id)}
+              style={{
+                cursor: busy ? "default" : "pointer",
+                minHeight: 44,
+                maxWidth: "100%",
+                overflowWrap: "anywhere",
+                borderColor: isSelected ? DEF.accent : isFresh ? GOLD : undefined,
+                color: isSelected || isFresh ? "var(--text)" : undefined,
+                fontWeight: 700,
+              }}
+            >
+              {isFresh ? "NOU · " : ""}
+              {item.label}
+            </button>
+          );
+        })}
+      </span>
     </div>
   );
 }

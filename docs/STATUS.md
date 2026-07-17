@@ -1,7 +1,7 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-17. This file is the repository's current source of truth._
-_Last verified: 2026-07-17 (local v25 gate: backend 345; session-store 11; semantic/alias quality 9; exact critique 33; Ruff; both validators; mobile rollback transaction; workflow syntax; `git diff --check`. Production remains release `2746be3`, smoke-verified 2026-07-16.)_
+_Last verified: 2026-07-17 (local v26 gate: backend 346; targeted Alchimie/scoping/session 47; frontend lint/typecheck/36 tests/build; initial bundle 116.12 KiB; Ruff; both validators; workflow syntax; `git diff --check`. Production remains release `2746be3`, smoke-verified 2026-07-16.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -14,14 +14,14 @@ The critique layer now fails closed from generation through promotion:
 - Re-review/demotion validates identity and verdict, restoring both pack copies on any red or exception.
 - Imports enter `pending`; persistent per-game high-water marks prevent retired ID reuse.
 
-## Current outcome — browser recovery (ADR-0027 through ADR-0029)
+## Current outcome — browser recovery (ADR-0027 through ADR-0029, ADR-0034)
 
-Lanț renders server-authored recovery in a polite status; bounded spelling and path
-choices fill but never submit. Conexiuni retains nonterminal one-away selections for
-one-tile swaps and blocks the unchanged set without inferring hidden membership.
-Cald sau Rece renders target-filtered typo suggestions as fill-only buttons and preserves
-accepted correction messages, including wins. All three remain server-authoritative;
-score, secrecy, TTL, and the 1,000-session caps are unchanged.
+Lanț renders server-authored recovery; bounded spelling and path choices fill but never
+submit. Conexiuni retains one-away selections for one-tile swaps and blocks unchanged
+sets without inferring membership. Cald sau Rece keeps target-filtered typo suggestions and accepted corrections.
+Alchimie restores a newest-first, 12-reaction journal from recorded
+parents: latest visible, older collapsed, results fill-only, and winning lineage terminal.
+All four remain server-authoritative; score, secrecy, TTL, and caps are unchanged.
 
 ## Current outcome — beginner mobile interface (ADR-0031)
 
@@ -84,14 +84,13 @@ PYTHONPATH=. .venv/bin/python scripts/validate_fixture.py
 node --check .claude/workflows/critique-games.js
 git diff --check
 ```
-
 Run frontend lint/typecheck/test/build only when frontend files change. The shared
 session-store target remains `tests/test_wordgames_session_store.py` (11 tests).
 
 ## Next verified work
 
-- Playtest the beginner UI at 320–390 px and Lanț recovery; measure first action, invalid
-  moves, hint reuse, undo, completion, and abandonment.
+- Playtest the beginner UI, Alchimie journal, and Lanț recovery at 320–390 px; measure
+  first action, invalid moves, hint reuse, undo, completion, and abandonment.
 - Run bound subjective review over the exact 33 v23/v24 pending IDs; inspect Contexto
   ordering after v25, route meaning, Conexiuni predicates, and Alchimie recipe intuition.
 - Work the approved-stock critique/A7 queues; generic regional KG edges remain a cleanup

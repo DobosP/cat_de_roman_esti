@@ -36,6 +36,7 @@ export function NextMove({
   progress,
   accent,
   ready = false,
+  announce = true,
   action,
   className,
 }: {
@@ -45,6 +46,7 @@ export function NextMove({
   progress?: string;
   accent: string;
   ready?: boolean;
+  announce?: boolean;
   action?: ReactNode;
   className?: string;
 }) {
@@ -56,7 +58,12 @@ export function NextMove({
       <span className="next-move-icon" aria-hidden>
         {icon}
       </span>
-      <span className="next-move-copy" role="status" aria-live="polite" aria-atomic="true">
+      <span
+        className="next-move-copy"
+        role={announce ? "status" : undefined}
+        aria-live={announce ? "polite" : undefined}
+        aria-atomic={announce ? "true" : undefined}
+      >
         <span className="next-move-label">ACUM</span>
         <strong>{title}</strong>
         {detail && <span className="muted">{detail}</span>}

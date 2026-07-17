@@ -50,6 +50,54 @@ def test_deterministic_for_same_seed(client: Client) -> None:
     assert [i["id"] for i in a["inventory"]] == [i["id"] for i in b["inventory"]]
 
 
+def test_productive_combine_lineage_is_exact_ordered_and_persistent(client: Client) -> None:
+    """The browser journal may use inventory order and exact server-recorded parents."""
+    state = _create(client, seed=7)
+    seed_ids = [item["id"] for item in state["inventory"]]
+
+    for a, b in combinations(seed_ids, 2):
+        gid = state["game_id"]
+        before = {item["id"]: item for item in state["inventory"]}
+        res = client.post(
+            f"{BASE}/games/{gid}/combine",
+            {"a": a, "b": b},
+            content_type="application/json",
+        )
+        assert res.status_code == 200, res.content.decode()
+        body = res.json()
+        if not body["discovered"]:
+            state = _create(client, seed=7)
+            continue
+
+        assert body["won"] is False
+        assert body["target"]["id"] is None
+        assert [item["id"] for item in body["inventory"][: body["seed_count"]]] == seed_ids
+        assert [item["id"] for item in body["inventory"][-len(body["discovered"]) :]] == [
+            item["id"] for item in body["discovered"]
+        ]
+
+        inventory = {item["id"]: item for item in body["inventory"]}
+        expected_parents = [
+            {"id": a, "label": before[a]["label"]},
+            {"id": b, "label": before[b]["label"]},
+        ]
+        for discovered in body["discovered"]:
+            assert inventory[discovered["id"]]["parents"] == expected_parents
+
+        resumed = client.get(f"{BASE}/games/{gid}")
+        assert resumed.status_code == 200
+        assert resumed.json()["inventory"] == body["inventory"]
+
+        reset = client.post(f"{BASE}/games/{gid}/reset")
+        assert reset.status_code == 200
+        reset_body = reset.json()
+        assert [item["id"] for item in reset_body["inventory"]] == seed_ids
+        assert all(item["parents"] is None for item in reset_body["inventory"])
+        break
+    else:
+        pytest.fail("seed 7 has no productive seed pair")
+
+
 def test_winning_play_through(client: Client) -> None:
     """Greedily combine every owned pair until the target is crafted."""
     state = _create(client, seed=7)
