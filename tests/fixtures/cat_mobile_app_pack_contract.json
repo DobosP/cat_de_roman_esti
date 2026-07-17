@@ -4,12 +4,12 @@
     "app": "cat_de_roman_esti",
     "schema_version": 1,
     "manifest_version": 1,
-    "build_version": "fixture-v28-basic-words",
+    "build_version": "fixture-v29-extended-basic-words",
     "generated_at": "2026-06-21T00:00:00Z",
-    "content_hash": "sha256:ae7611186af8c2b301683e4a159e399dfa9b8ec09e8807296fc0af1b155a1770",
+    "content_hash": "sha256:bf8baa35a2eea57deb9409b62fb215e0f90d833926cf5ac01a7e56743d0ad8ed",
     "counts": {
-      "nodes": 2199,
-      "edges": 8845,
+      "nodes": 2216,
+      "edges": 8909,
       "puzzles": 180
     }
   },
@@ -6137,6 +6137,74 @@
     {
       "id": "n_v28_work_occupation_meserie",
       "label_ro": "Meserie"
+    },
+    {
+      "id": "n_v29_animal_farm_gaina",
+      "label_ro": "Găină"
+    },
+    {
+      "id": "n_v29_animal_farm_porc",
+      "label_ro": "Porc"
+    },
+    {
+      "id": "n_v29_animal_pets_caine",
+      "label_ro": "Câine"
+    },
+    {
+      "id": "n_v29_animal_pets_pisica",
+      "label_ro": "Pisică"
+    },
+    {
+      "id": "n_v29_body_upper_gat",
+      "label_ro": "Gât"
+    },
+    {
+      "id": "n_v29_city_street_trotuar",
+      "label_ro": "Trotuar"
+    },
+    {
+      "id": "n_v29_clothing_everyday_camasa",
+      "label_ro": "Cămașă"
+    },
+    {
+      "id": "n_v29_clothing_everyday_haina",
+      "label_ro": "Haină"
+    },
+    {
+      "id": "n_v29_kitchen_table_cutit",
+      "label_ro": "Cuțit"
+    },
+    {
+      "id": "n_v29_kitchen_table_pahar",
+      "label_ro": "Pahar"
+    },
+    {
+      "id": "n_v29_people_coleg",
+      "label_ro": "Coleg"
+    },
+    {
+      "id": "n_v29_routine_shopping_cumparaturi",
+      "label_ro": "Cumpărături"
+    },
+    {
+      "id": "n_v29_time_calendar",
+      "label_ro": "Calendar"
+    },
+    {
+      "id": "n_v29_time_daily_noapte",
+      "label_ro": "Noapte"
+    },
+    {
+      "id": "n_v29_time_units_minut",
+      "label_ro": "Minut"
+    },
+    {
+      "id": "n_v29_time_units_secunda",
+      "label_ro": "Secundă"
+    },
+    {
+      "id": "n_v29_time_weekly_weekend",
+      "label_ro": "Weekend"
     },
     {
       "id": "n_v2art_arhitectura",
@@ -51273,9 +51341,104 @@
       "dst_id": "n_v24_feeling_difficult_furie"
     },
     {
+      "id": "de8181",
+      "src_id": "n_v29_animal_pets_caine",
+      "dst_id": "n_v4sti_animal"
+    },
+    {
+      "id": "de8182",
+      "src_id": "n_v29_animal_pets_caine",
+      "dst_id": "n_v24_home_outdoor_curte"
+    },
+    {
+      "id": "de8183",
+      "src_id": "n_v29_animal_pets_caine",
+      "dst_id": "n_v29_animal_pets_pisica"
+    },
+    {
+      "id": "de8184",
+      "src_id": "n_v4soc_copil",
+      "dst_id": "n_v29_animal_pets_caine"
+    },
+    {
+      "id": "de8185",
+      "src_id": "n_v29_animal_pets_pisica",
+      "dst_id": "n_v4sti_animal"
+    },
+    {
+      "id": "de8186",
+      "src_id": "n_v29_animal_pets_pisica",
+      "dst_id": "n_v4soc_casa"
+    },
+    {
+      "id": "de8187",
+      "src_id": "n_v4soc_copil",
+      "dst_id": "n_v29_animal_pets_pisica"
+    },
+    {
+      "id": "de8188",
+      "src_id": "n_v29_animal_farm_porc",
+      "dst_id": "n_v4sti_animal"
+    },
+    {
+      "id": "de8189",
+      "src_id": "n_v29_animal_farm_porc",
+      "dst_id": "n_v29_animal_farm_gaina"
+    },
+    {
       "id": "de819",
       "src_id": "n_net_comentarii_online",
       "dst_id": "n_net_trending_ro"
+    },
+    {
+      "id": "de8190",
+      "src_id": "n_v29_animal_farm_porc",
+      "dst_id": "n_v4geo_sat"
+    },
+    {
+      "id": "de8191",
+      "src_id": "n_v24_home_outdoor_curte",
+      "dst_id": "n_v29_animal_farm_porc"
+    },
+    {
+      "id": "de8192",
+      "src_id": "n_v29_animal_farm_gaina",
+      "dst_id": "n_v4sti_pasare"
+    },
+    {
+      "id": "de8193",
+      "src_id": "n_v29_animal_farm_gaina",
+      "dst_id": "n_v4gas_ou"
+    },
+    {
+      "id": "de8194",
+      "src_id": "n_v29_animal_farm_gaina",
+      "dst_id": "n_v24_home_outdoor_curte"
+    },
+    {
+      "id": "de8195",
+      "src_id": "n_v29_clothing_everyday_camasa",
+      "dst_id": "n_v29_clothing_everyday_haina"
+    },
+    {
+      "id": "de8196",
+      "src_id": "n_v29_clothing_everyday_haina",
+      "dst_id": "n_v24_home_storage_dulap"
+    },
+    {
+      "id": "de8197",
+      "src_id": "n_v29_clothing_everyday_haina",
+      "dst_id": "n_v24_action_home_a_spala"
+    },
+    {
+      "id": "de8198",
+      "src_id": "n_v29_clothing_everyday_haina",
+      "dst_id": "n_v4sti_corp"
+    },
+    {
+      "id": "de8199",
+      "src_id": "n_v24_home_storage_dulap",
+      "dst_id": "n_v29_clothing_everyday_camasa"
     },
     {
       "id": "de82",
@@ -51288,9 +51451,109 @@
       "dst_id": "n_net_podcast_ro"
     },
     {
+      "id": "de8200",
+      "src_id": "n_v29_clothing_everyday_camasa",
+      "dst_id": "n_v24_action_home_a_spala"
+    },
+    {
+      "id": "de8201",
+      "src_id": "n_v29_clothing_everyday_camasa",
+      "dst_id": "n_v3art_costum_popular"
+    },
+    {
+      "id": "de8202",
+      "src_id": "n_v29_kitchen_table_cutit",
+      "dst_id": "n_v4gas_bucatarie"
+    },
+    {
+      "id": "de8203",
+      "src_id": "n_v29_kitchen_table_cutit",
+      "dst_id": "n_v4gas_mancare"
+    },
+    {
+      "id": "de8204",
+      "src_id": "n_v29_kitchen_table_cutit",
+      "dst_id": "n_v4gas_paine"
+    },
+    {
+      "id": "de8205",
+      "src_id": "n_v4gas_masa",
+      "dst_id": "n_v29_kitchen_table_cutit"
+    },
+    {
+      "id": "de8206",
+      "src_id": "n_v29_kitchen_table_pahar",
+      "dst_id": "n_v4gas_apa"
+    },
+    {
+      "id": "de8207",
+      "src_id": "n_v29_kitchen_table_pahar",
+      "dst_id": "n_v4gas_lapte"
+    },
+    {
+      "id": "de8208",
+      "src_id": "n_v29_kitchen_table_pahar",
+      "dst_id": "n_v4gas_masa"
+    },
+    {
+      "id": "de8209",
+      "src_id": "n_v4gas_bucatarie",
+      "dst_id": "n_v29_kitchen_table_pahar"
+    },
+    {
       "id": "de821",
       "src_id": "n_net_standup_ro",
       "dst_id": "n_net_micutzu"
+    },
+    {
+      "id": "de8210",
+      "src_id": "n_v29_body_upper_gat",
+      "dst_id": "n_v4sti_corp"
+    },
+    {
+      "id": "de8211",
+      "src_id": "n_v29_body_upper_gat",
+      "dst_id": "n_v24_body_face_cap"
+    },
+    {
+      "id": "de8212",
+      "src_id": "n_v29_body_upper_gat",
+      "dst_id": "n_v24_body_face_gura"
+    },
+    {
+      "id": "de8213",
+      "src_id": "n_v3per_medic",
+      "dst_id": "n_v29_body_upper_gat"
+    },
+    {
+      "id": "de8214",
+      "src_id": "n_v29_time_units_minut",
+      "dst_id": "n_v24_time_day_ora"
+    },
+    {
+      "id": "de8215",
+      "src_id": "n_v29_time_units_minut",
+      "dst_id": "n_v29_time_units_secunda"
+    },
+    {
+      "id": "de8216",
+      "src_id": "n_v29_time_units_minut",
+      "dst_id": "n_v24_time_day_zi"
+    },
+    {
+      "id": "de8217",
+      "src_id": "n_v24_time_day_ceas",
+      "dst_id": "n_v29_time_units_minut"
+    },
+    {
+      "id": "de8218",
+      "src_id": "n_v29_time_units_secunda",
+      "dst_id": "n_v24_time_day_ora"
+    },
+    {
+      "id": "de8219",
+      "src_id": "n_v29_time_units_secunda",
+      "dst_id": "n_v24_time_day_ceas"
     },
     {
       "id": "de822",
@@ -51298,14 +51561,139 @@
       "dst_id": "n_net_teo_vio_costel"
     },
     {
+      "id": "de8220",
+      "src_id": "n_v4spo_alergare",
+      "dst_id": "n_v29_time_units_secunda"
+    },
+    {
+      "id": "de8221",
+      "src_id": "n_v29_time_daily_noapte",
+      "dst_id": "n_v24_time_day_zi"
+    },
+    {
+      "id": "de8222",
+      "src_id": "n_v29_time_daily_noapte",
+      "dst_id": "n_v24_action_routine_a_dormi"
+    },
+    {
+      "id": "de8223",
+      "src_id": "n_v29_time_daily_noapte",
+      "dst_id": "n_v24_nature_sky_luna"
+    },
+    {
+      "id": "de8224",
+      "src_id": "n_v28_time_calendar_saptamana",
+      "dst_id": "n_v29_time_daily_noapte"
+    },
+    {
+      "id": "de8225",
+      "src_id": "n_v29_time_weekly_weekend",
+      "dst_id": "n_v28_time_calendar_saptamana"
+    },
+    {
+      "id": "de8226",
+      "src_id": "n_v29_time_weekly_weekend",
+      "dst_id": "n_v4soc_familie"
+    },
+    {
+      "id": "de8227",
+      "src_id": "n_v29_time_weekly_weekend",
+      "dst_id": "n_v24_action_movement_a_se_juca"
+    },
+    {
+      "id": "de8228",
+      "src_id": "n_v21via_minivacanta",
+      "dst_id": "n_v29_time_weekly_weekend"
+    },
+    {
+      "id": "de8229",
+      "src_id": "n_v29_time_calendar",
+      "dst_id": "n_v28_time_calendar_luna_calendaristica"
+    },
+    {
       "id": "de823",
       "src_id": "n_net_standup_ro",
       "dst_id": "n_net_ceva_marunt"
     },
     {
+      "id": "de8230",
+      "src_id": "n_v29_time_calendar",
+      "dst_id": "n_v4ist_an"
+    },
+    {
+      "id": "de8231",
+      "src_id": "n_v29_time_calendar",
+      "dst_id": "n_v28_time_calendar_saptamana"
+    },
+    {
+      "id": "de8232",
+      "src_id": "n_v24_time_day_zi",
+      "dst_id": "n_v29_time_calendar"
+    },
+    {
+      "id": "de8233",
+      "src_id": "n_v29_routine_shopping_cumparaturi",
+      "dst_id": "n_v29_clothing_everyday_haina"
+    },
+    {
+      "id": "de8234",
+      "src_id": "n_v29_routine_shopping_cumparaturi",
+      "dst_id": "n_v29_clothing_everyday_camasa"
+    },
+    {
+      "id": "de8235",
+      "src_id": "n_v29_routine_shopping_cumparaturi",
+      "dst_id": "n_v18via_mersul_la_mall"
+    },
+    {
+      "id": "de8236",
+      "src_id": "n_v4soc_magazin",
+      "dst_id": "n_v29_routine_shopping_cumparaturi"
+    },
+    {
+      "id": "de8237",
+      "src_id": "n_v29_people_coleg",
+      "dst_id": "n_v4soc_serviciu"
+    },
+    {
+      "id": "de8238",
+      "src_id": "n_v29_people_coleg",
+      "dst_id": "n_v3soc_scoala"
+    },
+    {
+      "id": "de8239",
+      "src_id": "n_v29_people_coleg",
+      "dst_id": "n_v4soc_elev"
+    },
+    {
       "id": "de824",
       "src_id": "n_net_standup_ro",
       "dst_id": "n_net_podcast_ro"
+    },
+    {
+      "id": "de8240",
+      "src_id": "n_v4per_profesor",
+      "dst_id": "n_v29_people_coleg"
+    },
+    {
+      "id": "de8241",
+      "src_id": "n_v29_city_street_trotuar",
+      "dst_id": "n_v4geo_strada"
+    },
+    {
+      "id": "de8242",
+      "src_id": "n_v29_city_street_trotuar",
+      "dst_id": "n_v2geo_oras"
+    },
+    {
+      "id": "de8243",
+      "src_id": "n_v4per_om",
+      "dst_id": "n_v29_city_street_trotuar"
+    },
+    {
+      "id": "de8244",
+      "src_id": "n_v4soc_copil",
+      "dst_id": "n_v29_city_street_trotuar"
     },
     {
       "id": "de825",
@@ -53221,38 +53609,38 @@
     },
     {
       "id": "pz_gastronomie_hard_1",
-      "start_id": "n_gas_zacusca",
-      "target_id": "n_v24_food_orchard_mar",
+      "start_id": "n_gas_mici",
+      "target_id": "n_v29_kitchen_table_cutit",
       "difficulty": "hard"
     },
     {
       "id": "pz_gastronomie_hard_2",
       "start_id": "n_gas_zacusca",
-      "target_id": "n_v24_food_orchard_para",
+      "target_id": "n_v29_kitchen_table_cutit",
       "difficulty": "hard"
     },
     {
       "id": "pz_gastronomie_hard_3",
       "start_id": "n_gas_zacusca",
-      "target_id": "n_v24_food_orchard_pruna",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_gastronomie_hard_4",
-      "start_id": "n_gas_mamaliga",
       "target_id": "n_v24_food_orchard_mar",
       "difficulty": "hard"
     },
     {
-      "id": "pz_gastronomie_hard_5",
-      "start_id": "n_gas_mamaliga",
+      "id": "pz_gastronomie_hard_4",
+      "start_id": "n_gas_zacusca",
       "target_id": "n_v24_food_orchard_para",
+      "difficulty": "hard"
+    },
+    {
+      "id": "pz_gastronomie_hard_5",
+      "start_id": "n_gas_zacusca",
+      "target_id": "n_v24_food_orchard_pruna",
       "difficulty": "hard"
     },
     {
       "id": "pz_gastronomie_hard_6",
       "start_id": "n_gas_mamaliga",
-      "target_id": "n_v24_food_orchard_pruna",
+      "target_id": "n_v24_food_orchard_mar",
       "difficulty": "hard"
     },
     {
@@ -53293,38 +53681,38 @@
     },
     {
       "id": "pz_geografie_hard_1",
+      "start_id": "n_v29_city_street_trotuar",
+      "target_id": "n_v2geo_munte",
+      "difficulty": "hard"
+    },
+    {
+      "id": "pz_geografie_hard_2",
+      "start_id": "n_v29_city_street_trotuar",
+      "target_id": "n_v2geo_rau",
+      "difficulty": "hard"
+    },
+    {
+      "id": "pz_geografie_hard_3",
       "start_id": "n_v2geo_munte",
       "target_id": "n_v4geo_strada",
       "difficulty": "hard"
     },
     {
-      "id": "pz_geografie_hard_2",
+      "id": "pz_geografie_hard_4",
+      "start_id": "n_v29_city_street_trotuar",
+      "target_id": "n_v2geo_lac",
+      "difficulty": "hard"
+    },
+    {
+      "id": "pz_geografie_hard_5",
       "start_id": "n_v2geo_lac",
       "target_id": "n_v3geo_tara",
       "difficulty": "hard"
     },
     {
-      "id": "pz_geografie_hard_3",
+      "id": "pz_geografie_hard_6",
       "start_id": "n_v2geo_rau",
       "target_id": "n_v3geo_continent",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_geografie_hard_4",
-      "start_id": "n_v2geo_lac",
-      "target_id": "n_v4geo_sat",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_geografie_hard_5",
-      "start_id": "n_v4geo_sat",
-      "target_id": "n_v4geo_teren",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_geografie_hard_6",
-      "start_id": "n_v20geo_insula_serpilor",
-      "target_id": "n_v2geo_munte",
       "difficulty": "hard"
     },
     {
@@ -53833,38 +54221,38 @@
     },
     {
       "id": "pz_societate_easy_1",
-      "start_id": "n_v24_time_day_ceas",
-      "target_id": "n_v28_time_calendar_luna_calendaristica",
+      "start_id": "n_v29_people_coleg",
+      "target_id": "n_v3soc_lege",
       "difficulty": "easy"
     },
     {
       "id": "pz_societate_easy_2",
-      "start_id": "n_v24_time_day_ceas",
-      "target_id": "n_v28_time_calendar_saptamana",
+      "start_id": "n_v29_people_coleg",
+      "target_id": "n_v2soc_stat",
       "difficulty": "easy"
     },
     {
       "id": "pz_societate_easy_3",
-      "start_id": "n_v24_time_day_ora",
+      "start_id": "n_v24_time_day_ceas",
       "target_id": "n_v28_time_calendar_luna_calendaristica",
       "difficulty": "easy"
     },
     {
       "id": "pz_societate_easy_4",
-      "start_id": "n_v24_time_day_zi",
-      "target_id": "n_v28_time_calendar_luna_calendaristica",
-      "difficulty": "easy"
-    },
-    {
-      "id": "pz_societate_easy_5",
-      "start_id": "n_v28_time_calendar_luna_calendaristica",
+      "start_id": "n_v24_time_day_ceas",
       "target_id": "n_v28_time_calendar_saptamana",
       "difficulty": "easy"
     },
     {
+      "id": "pz_societate_easy_5",
+      "start_id": "n_v24_time_day_ceas",
+      "target_id": "n_v29_time_daily_noapte",
+      "difficulty": "easy"
+    },
+    {
       "id": "pz_societate_easy_6",
-      "start_id": "n_v3soc_lege",
-      "target_id": "n_v3soc_scoala",
+      "start_id": "n_v24_time_day_ora",
+      "target_id": "n_v28_time_calendar_luna_calendaristica",
       "difficulty": "easy"
     },
     {
@@ -53977,38 +54365,38 @@
     },
     {
       "id": "pz_stiinta_easy_1",
-      "start_id": "n_v2sti_biologie",
-      "target_id": "n_v2sti_fizica",
+      "start_id": "n_v29_animal_pets_caine",
+      "target_id": "n_v3sti_experiment",
       "difficulty": "easy"
     },
     {
       "id": "pz_stiinta_easy_2",
-      "start_id": "n_v24_body_face_gura",
+      "start_id": "n_v29_animal_pets_pisica",
       "target_id": "n_v3sti_experiment",
       "difficulty": "easy"
     },
     {
       "id": "pz_stiinta_easy_3",
-      "start_id": "n_v28_body_mouth_dinte",
-      "target_id": "n_v3sti_experiment",
+      "start_id": "n_v2sti_biologie",
+      "target_id": "n_v2sti_fizica",
       "difficulty": "easy"
     },
     {
       "id": "pz_stiinta_easy_4",
-      "start_id": "n_v28_nature_material_piatra",
+      "start_id": "n_v24_body_face_gura",
       "target_id": "n_v3sti_experiment",
       "difficulty": "easy"
     },
     {
       "id": "pz_stiinta_easy_5",
-      "start_id": "n_v24_body_face_gura",
-      "target_id": "n_v2sti_stiinta",
+      "start_id": "n_v28_body_mouth_dinte",
+      "target_id": "n_v3sti_experiment",
       "difficulty": "easy"
     },
     {
       "id": "pz_stiinta_easy_6",
-      "start_id": "n_v28_body_mouth_dinte",
-      "target_id": "n_v2sti_stiinta",
+      "start_id": "n_v28_nature_material_piatra",
+      "target_id": "n_v3sti_experiment",
       "difficulty": "easy"
     },
     {
@@ -54085,38 +54473,38 @@
     },
     {
       "id": "pz_viata_de_roman_hard_1",
-      "start_id": "n_v2via_sarbatori_familie",
-      "target_id": "n_vdr_bloc",
+      "start_id": "n_v29_routine_shopping_cumparaturi",
+      "target_id": "n_vdr_viata_de_roman",
       "difficulty": "hard"
     },
     {
       "id": "pz_viata_de_roman_hard_2",
-      "start_id": "n_vdr_bloc",
-      "target_id": "n_vdr_gospodaria_bunicilor",
+      "start_id": "n_v29_routine_shopping_cumparaturi",
+      "target_id": "n_vdr_viata_la_bloc",
       "difficulty": "hard"
     },
     {
       "id": "pz_viata_de_roman_hard_3",
-      "start_id": "n_v2via_jocuri_copilarie",
-      "target_id": "n_vdr_sarmale_craciun",
-      "difficulty": "hard"
-    },
-    {
-      "id": "pz_viata_de_roman_hard_4",
-      "start_id": "n_v2via_masa_in_familie",
+      "start_id": "n_v29_routine_shopping_cumparaturi",
       "target_id": "n_vdr_copilaria_anilor_90",
       "difficulty": "hard"
     },
     {
+      "id": "pz_viata_de_roman_hard_4",
+      "start_id": "n_v29_routine_shopping_cumparaturi",
+      "target_id": "n_vdr_sarmale_craciun",
+      "difficulty": "hard"
+    },
+    {
       "id": "pz_viata_de_roman_hard_5",
-      "start_id": "n_vdr_eugenia",
-      "target_id": "n_vdr_punga_cu_pungi",
+      "start_id": "n_v29_routine_shopping_cumparaturi",
+      "target_id": "n_vdr_lasa_ca_merge",
       "difficulty": "hard"
     },
     {
       "id": "pz_viata_de_roman_hard_6",
-      "start_id": "n_v24_action_routine_a_dormi",
-      "target_id": "n_v24_home_rooms_sufragerie",
+      "start_id": "n_v2via_sarbatori_familie",
+      "target_id": "n_vdr_bloc",
       "difficulty": "hard"
     }
   ]

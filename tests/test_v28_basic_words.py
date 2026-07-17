@@ -45,15 +45,15 @@ def _service() -> WordGameService:
     return WordGameService(load_fixture(_PACKAGE_KG).graph)
 
 
-def test_v28_exact_inventory_build_and_mirrors():
+def test_v28_inventory_floor_and_mirrors_survive_later_additive_waves():
     fixture = _fixture()
     alias_count = sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"])
 
-    assert fixture["meta"]["build_version"] == DATA.BUILD_VERSION
     assert DATA.BUILD_VERSION == "fixture-v28-basic-words"
-    assert (len(fixture["kg_nodes"]), len(fixture["kg_edges"])) == (2199, 8845)
+    assert len(fixture["kg_nodes"]) >= 2199
+    assert len(fixture["kg_edges"]) >= 8845
     assert len(fixture["kg_puzzles"]) == 180
-    assert alias_count == 7077
+    assert alias_count >= 7077
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert _PACKAGE_PACK.read_bytes() == _TEST_PACK.read_bytes()
 
@@ -77,7 +77,7 @@ def test_v28_all_15_nodes_and_44_aliases_have_exact_owners():
         assert committed["category"] == concept.category
         assert committed["description"] == concept.description
         assert math.isclose(float(committed["salience"]), concept.salience)
-        assert tuple(committed.get("aliases", ())) == concept.aliases
+        assert set(concept.aliases) <= set(committed.get("aliases", ()))
         assert svc.resolve(concept.label) == concept.node_id
         for alias in concept.aliases:
             normalized = normalize(alias)
@@ -149,8 +149,8 @@ def test_v28_exact_53_semantic_edges_and_topology():
     }
 
     assert len(DATA.SEMANTIC_EDGES) == len(expected) == 53
-    assert len(incident_edges) == len(actual) == 53
-    assert set(actual) == set(expected)
+    assert len(incident_edges) == len(actual) >= 53
+    assert set(expected) <= set(actual)
     for key, authored in expected.items():
         committed = actual[key]
         assert committed["label_ro"] == authored.label_ro
@@ -181,8 +181,8 @@ def test_v28_exact_53_semantic_edges_and_topology():
             if svc.node(neighbor_id) is not None
             and svc.node(neighbor_id).category == svc.node(node_id).category
         }
-        assert by_id[node_id]["degree"] == degree
-        assert len(incident) == degree
+        assert by_id[node_id]["degree"] >= degree
+        assert len(incident) >= degree
         assert len(same_category) >= 2
 
 
@@ -207,17 +207,15 @@ def test_v28_keeps_the_entire_game_pack_byte_stable_and_unpromoted():
     assert statuses == {"approved": 572, "pending": 222}
 
 
-def test_v28_mobile_contract_is_exact_current_and_contains_the_new_nodes():
+def test_v28_mobile_contract_stays_current_and_contains_the_v28_nodes():
     checked_in = json.loads(_MOBILE_CONTRACT.read_text(encoding="utf-8"))
     mobile_by_id = {node["id"]: node for node in checked_in["kg_nodes"]}
 
     assert checked_in == mobile_app_pack_snapshot(_PACKAGE_KG)
-    assert checked_in["manifest"]["build_version"] == DATA.BUILD_VERSION
-    assert checked_in["manifest"]["counts"] == {
-        "nodes": 2199,
-        "edges": 8845,
-        "puzzles": 180,
-    }
+    counts = checked_in["manifest"]["counts"]
+    assert counts["nodes"] >= 2199
+    assert counts["edges"] >= 8845
+    assert counts["puzzles"] == 180
     for concept in DATA.CONCEPTS:
         assert mobile_by_id[concept.node_id] == {
             "id": concept.node_id,
