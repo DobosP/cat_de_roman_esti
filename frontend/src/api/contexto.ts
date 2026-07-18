@@ -42,6 +42,15 @@ export interface CategoryClue {
   message: string;
 }
 
+export interface WarmClue {
+  label: string;
+  /** Strictly better than the player's best rank when the clue was issued; never 1. */
+  rank: number;
+  message: string;
+}
+
+export type NextClueKind = "category" | "warmer";
+
 /** Full game state (GET /games/{id} and POST /games). */
 export interface ContextoState {
   game_id: string;
@@ -52,8 +61,12 @@ export interface ContextoState {
   difficulty: Difficulty;
   clues_used: number;
   clue_available: boolean;
+  /** The next bounded clue stage; absent when no safe clue remains. */
+  next_clue_kind?: NextClueKind;
   /** Present only after the player asks for the clue. */
   clue?: CategoryClue;
+  /** Present only after the server issues one guaranteed-warmer, non-target word. */
+  warm_clue?: WarmClue;
   /** Present only for a "Provocarea zilei" game (YYYY-MM-DD). */
   daily?: string;
   /** Echoed only when the game was started with an explicit category. */
@@ -80,7 +93,9 @@ export interface GuessRejected {
   reachable_count: number;
   clues_used: number;
   clue_available: boolean;
+  next_clue_kind?: NextClueKind;
   clue?: CategoryClue;
+  warm_clue?: WarmClue;
 }
 
 /** An accepted guess. */
@@ -95,7 +110,9 @@ export interface GuessAccepted {
   reachable_count: number;
   clues_used: number;
   clue_available: boolean;
+  next_clue_kind?: NextClueKind;
   clue?: CategoryClue;
+  warm_clue?: WarmClue;
   target?: RevealedTarget;
   /** Present only once won (higher = better). */
   score?: number;
@@ -107,7 +124,11 @@ export type GuessResult = GuessRejected | GuessAccepted;
 
 export interface ClueResult extends ContextoState {
   ok: true;
-  category: CategoryClue["category"];
+  clue_kind: NextClueKind;
+  /** Direct category result for the first, unthemed clue stage. */
+  category?: CategoryClue["category"];
+  /** Direct warmer-word result for the second stage. */
+  word?: WarmClue;
   message: string;
 }
 

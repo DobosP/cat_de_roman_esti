@@ -1,26 +1,23 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-18. This file is the repository's current source of truth._
-_Last verified: 2026-07-18 (local v33 gate: backend 391; v25/v28/v29/v30/v31/v32/v33 52 and session 11; exact critique 33/33 and full pending report byte-identical; Ruff, both validators, workflow syntax, whitespace; no frontend code changed; mobile importer 4 and full verify 227/26. Live release remains `f40fa8bc1b8880637aeeb01816c612ea850f73c0`: healthy image `sha256:3ed5fc61a95ec08417f1ebb68f329bf85779ab0988dffdcc7537c5d769dc6e9a`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles; all 14 categories positive, available, and curated; four `usor` creates at seed 32032; anonymous/account-disabled mode and expected submissions 503; homepage plus four deep routes byte-matched the built index; all 12 Vite assets returned non-empty 200 responses with immutable caching; privacy and terms passed without placeholders.)_
+_Last verified: 2026-07-18 (local Contexto broad-guidance gate: backend 403; focused Contexto 53 and Contexto/mobile/session 70; Ruff, both validators, workflow syntax, and whitespace; frontend lint, typecheck, 10 source-test files, temporary production build, and 116.12 KiB initial gzip budget; KG/pack mirrors byte-identical. Live release remains V32 `f40fa8bc1b8880637aeeb01816c612ea850f73c0`, healthy image `sha256:3ed5fc61a95ec08417f1ebb68f329bf85779ab0988dffdcc7537c5d769dc6e9a`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
 The critique layer now fails closed from generation through promotion:
 
-- `critique_pack.py` validates explicit IDs, cross-board reuse, projected member overuse, and directed Contexto dossiers with live degree.
-- Gate mode verifies every item adversarially; only clean approved-stock sweeps may sample 1-in-4, and returned IDs must match requested IDs.
-- Lanț and Alchimie have explicit branch/craft judge criteria; all four games have game-specific review.
-- Version-2 artifacts bind the exact batch, dossiers, and rubric; apply rebuilds and reruns them before writing.
-- Re-review/demotion validates identity and verdict, restoring both pack copies on any red or exception.
+- `critique_pack.py` validates IDs, reuse, overuse, live degree, and game-specific judge criteria.
+- Version-2 artifacts bind the exact batch, dossiers, and rubric; apply rebuilds and reruns
+  them before writing, while re-review restores both copies on any red or exception.
 - Imports enter `pending`; persistent per-game high-water marks prevent retired ID reuse.
 
 ## Current outcome — browser recovery (ADR-0027 through ADR-0029, ADR-0034, ADR-0035)
 
 Lanț renders server-authored recovery; bounded spelling and path choices fill but never
 submit. Conexiuni retains one-away selections for one-tile swaps and blocks unchanged
-sets without inferring membership. Cald sau Rece keeps target-filtered typo suggestions and accepted corrections.
-Alchimie restores a newest-first, 12-reaction journal and retains an authoritative empty pair
-for one visible swap; either 44 px bench slot removes an ingredient and unchanged/duplicate submission is blocked.
+sets without inferring membership. Cald sau Rece keeps target-filtered typo recovery.
+Alchimie keeps a 12-reaction journal, an authoritative empty pair, and 44 px bench slots.
 All four remain server-authoritative; score, secrecy, TTL, and caps are unchanged.
 
 ## Current outcome — beginner mobile interface (ADR-0031)
@@ -29,6 +26,12 @@ All four games now default to `Ușor`, teach their loop with three terse actions
 one live `ACUM` cue instead of repeating rules. Mobile gets 44 px targets, scrollable
 status/theme rails, readable long labels, reachable primary actions, visible rank meaning,
 and safe keyboard shortcuts; desktop retains the same focused play column.
+
+## Current outcome — broad Contexto guidance (ADR-0042)
+
+Cald sau Rece accepts **444 collision-screened everyday guesses across 26 domains** through
+89 reviewed KG anchors without changing graph/pack bytes or creating projection wins.
+Clues progress from category to one strictly warmer familiar word; themed boards skip category.
 
 ## Current outcome — beginner vocabulary waves (ADR-0030, ADR-0032, ADR-0033, ADR-0036 through ADR-0041)
 
@@ -49,9 +52,8 @@ curated records remain unchanged.
 The Romanian arcade has four server-authoritative games: Alchimie, Cald sau Rece, Lanțul
 Cuvintelor, and Conexiuni, using Django 5.2/DRF and React 19/Vite 8 over the offline KG.
 
-Anonymous v1 at <https://cat-de-roman-esti.dobolabs.ro> runs release `f40fa8b`, deployed
-and smoke-verified on 2026-07-18. Accounts/rankings remain staging-only: scores are
-client-authored and visibility needs opt-in by default.
+Anonymous v1 at <https://cat-de-roman-esti.dobolabs.ro> runs release `f40fa8b`, verified
+2026-07-18. Accounts/rankings remain staging-only and client-authored.
 
 ## Shipped content
 
@@ -93,8 +95,6 @@ session-store target remains `tests/test_wordgames_session_store.py` (11 tests).
 
 ## Next verified work
 
-- Playtest the beginner UI and recovery flows at 320–390 px; measure friction and abandonment.
-- Complete adversarial review over the exact 33 v23/v24 pending IDs; inspect Contexto
-  ordering after v33, route meaning, Conexiuni predicates, and Alchimie recipe intuition.
-- Work the approved-stock critique/A7 queues; generic regional KG edges remain cleanup inventory, while owner demotions stay explicit proposals.
-- Make ranking scores server-authored, bound retained score history, and default ranking visibility off before enabling public accounts.
+- Playtest beginner guidance at 320–390 px, including projected Contexto terms and clues.
+- Continue exact pending/approved-stock adversarial review and generic-edge cleanup.
+- Make rankings server-authored, bounded, and private-by-default before public accounts.
