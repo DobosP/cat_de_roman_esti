@@ -1,7 +1,7 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-18. This file is the repository's current source of truth._
-_Last verified: 2026-07-18 (local v32 gate: backend 383; v25/v28/v29/v30/v31/v32 44 and session 11; exact critique 33/33 and full pending report byte-identical; Ruff, both validators, workflow syntax, whitespace; frontend lint/typecheck/9 suites/build at 116.12 KiB gzip; mobile importer 4 and full verify 227/26. Live release `f40fa8bc1b8880637aeeb01816c612ea850f73c0`: healthy image `sha256:3ed5fc61a95ec08417f1ebb68f329bf85779ab0988dffdcc7537c5d769dc6e9a`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles; all 14 categories positive, available, and curated; four `usor` creates at seed 32032; anonymous/account-disabled mode and expected submissions 503; homepage plus four deep routes byte-matched the built index; all 12 Vite assets returned non-empty 200 responses with immutable caching; privacy and terms passed without placeholders.)_
+_Last verified: 2026-07-18 (local v33 gate: backend 391; v25/v28/v29/v30/v31/v32/v33 52 and session 11; exact critique 33/33 and full pending report byte-identical; Ruff, both validators, workflow syntax, whitespace; no frontend code changed; mobile importer 4 and full verify 227/26. Live release remains `f40fa8bc1b8880637aeeb01816c612ea850f73c0`: healthy image `sha256:3ed5fc61a95ec08417f1ebb68f329bf85779ab0988dffdcc7537c5d769dc6e9a`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles; all 14 categories positive, available, and curated; four `usor` creates at seed 32032; anonymous/account-disabled mode and expected submissions 503; homepage plus four deep routes byte-matched the built index; all 12 Vite assets returned non-empty 200 responses with immutable caching; privacy and terms passed without placeholders.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -30,19 +30,19 @@ one live `ACUM` cue instead of repeating rules. Mobile gets 44 px targets, scrol
 status/theme rails, readable long labels, reachable primary actions, visible rank meaning,
 and safe keyboard shortcuts; desktop retains the same focused play column.
 
-## Current outcome — beginner vocabulary waves (ADR-0030, ADR-0032, ADR-0033, ADR-0036 through ADR-0040)
+## Current outcome — beginner vocabulary waves (ADR-0030, ADR-0032, ADR-0033, ADR-0036 through ADR-0041)
 
-V23 retains 22 childhood/story nodes, 78 owned edges, and seven pending items. V24 adds
-**150 everyday nodes, 511 edges, 276 aliases, and 26 pending items**; V25 adds **168
-collision-safe aliases and 25 concrete semantic links**. V28 completes the eligible
-beginner benchmark with **15 concepts, 44 safe inflections, and 53 explicit links**,
-reaching **234/234**. V29 adds **17 concepts, 66 inflections, and 64 links**. V30 adds
-**18 farm, clothing, and kitchen concepts, 60 inflections, and 54 links** in three
-inbound-reachable one-way meshes. V31 adds **17 hygiene, lower-limb, and cleaning concepts,
+V23 retains 22 childhood/story nodes and 78 edges. V24 adds **150 everyday nodes, 511
+edges, 276 aliases, and 26 pending items**; V25 adds **168 safe aliases and 25 links**.
+V28 completes the eligible beginner benchmark with **15 concepts, 44 inflections, and 53
+links**, reaching **234/234**. V29 adds **17 concepts, 66 inflections, and 64 links**.
+V30 adds **18 farm, clothing, and kitchen concepts, 60 inflections, and 54 links** in
+three inbound-reachable meshes. V31 adds **17 hygiene, lower-limb, and cleaning concepts,
 61 inflections, and 51 links**. V32 adds **18 face, workshop, and garden concepts, 69
-inflections, and 54 links**; combined eligible probes resolve **304/304**.
-All 33 affected pending dossiers stay clean, the full pending critique report is
-byte-identical, and all 794 curated records remain unchanged.
+inflections, and 54 links**. V33 adds **18 bathroom, household-electrical, and forest
+concepts, 67 inflections, and 54 links**; combined eligible probes resolve **322/322**.
+All 33 affected pending dossiers and the full report stay unchanged and clean; all 794
+curated records remain unchanged.
 
 ## Product and deployment
 
@@ -63,7 +63,7 @@ client-authored and visibility needs opt-in by default.
 | Alchimie | 98 | 77 | 21 | curated first; category closure fallback |
 
 Pack: **794 items = 572 approved + 222 pending**, across 14 categories.
-Bundled KG: **2,269 nodes / 9,068 edges / 7,333 aliases / 180 legacy puzzles**.
+Bundled KG: **2,287 nodes / 9,122 edges / 7,400 aliases / 180 legacy puzzles**.
 Both fixture copies and both pack copies are byte-identical and validator-green.
 
 ## Runtime contracts and safety
@@ -95,6 +95,6 @@ session-store target remains `tests/test_wordgames_session_store.py` (11 tests).
 
 - Playtest the beginner UI and recovery flows at 320–390 px; measure friction and abandonment.
 - Complete adversarial review over the exact 33 v23/v24 pending IDs; inspect Contexto
-  ordering after v32, route meaning, Conexiuni predicates, and Alchimie recipe intuition.
+  ordering after v33, route meaning, Conexiuni predicates, and Alchimie recipe intuition.
 - Work the approved-stock critique/A7 queues; generic regional KG edges remain cleanup inventory, while owner demotions stay explicit proposals.
 - Make ranking scores server-authored, bound retained score history, and default ranking visibility off before enabling public accounts.

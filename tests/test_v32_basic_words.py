@@ -70,7 +70,7 @@ def _reachable_locally(start: str, adjacency: dict[str, set[str]]) -> frozenset[
     return frozenset(seen)
 
 
-def test_v32_exact_source_inventory_build_and_mirrors():
+def test_v32_source_inventory_floor_and_mirrors_survive_additive_waves():
     fixture = _fixture()
     alias_count = sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"])
     surfaces = [
@@ -86,10 +86,10 @@ def test_v32_exact_source_inventory_build_and_mirrors():
     assert sum(len(concept.aliases) for concept in DATA.CONCEPTS) == 69
     assert len(surfaces) == len(set(surfaces)) == 87
     assert len(DATA.SEMANTIC_EDGES) == len(edge_keys) == _EXPECTED_EDGE_COUNT
-    assert fixture["meta"]["build_version"] == DATA.BUILD_VERSION
-    assert (len(fixture["kg_nodes"]), len(fixture["kg_edges"])) == (2269, 9068)
+    assert len(fixture["kg_nodes"]) >= 2269
+    assert len(fixture["kg_edges"]) >= 9068
     assert len(fixture["kg_puzzles"]) == 180
-    assert alias_count == 7333
+    assert alias_count >= 7333
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert _PACKAGE_PACK.read_bytes() == _TEST_PACK.read_bytes()
 
@@ -218,8 +218,9 @@ def test_v32_exact_semantic_edges_and_inbound_beginner_topology():
     legacy_new_neighbors: dict[str, set[str]] = {}
     local_adjacency = {node_id: set() for node_id in new_ids}
 
-    assert len(incident) == len(actual) == len(expected) == _EXPECTED_EDGE_COUNT
-    assert set(actual) == set(expected)
+    assert len(incident) == len(actual) >= _EXPECTED_EDGE_COUNT
+    assert len(expected) == _EXPECTED_EDGE_COUNT
+    assert set(expected) <= set(actual)
     assert len(local_edges) == _EXPECTED_LOCAL_EDGE_COUNT
     assert len(legacy_bridges) == 18
     assert all(edge.target in new_ids for edge in DATA.SEMANTIC_EDGES)
@@ -302,17 +303,15 @@ def test_v32_keeps_the_entire_game_pack_byte_stable_and_unpromoted():
     assert statuses == {"approved": 572, "pending": 222}
 
 
-def test_v32_mobile_contract_is_exact_current_and_public():
+def test_v32_mobile_contract_stays_current_and_keeps_v32_public():
     checked_in = json.loads(_MOBILE_CONTRACT.read_text(encoding="utf-8"))
     mobile_by_id = {node["id"]: node for node in checked_in["kg_nodes"]}
 
     assert checked_in == mobile_app_pack_snapshot(_PACKAGE_KG)
-    assert checked_in["manifest"]["build_version"] == DATA.BUILD_VERSION
-    assert checked_in["manifest"]["counts"] == {
-        "nodes": 2269,
-        "edges": 9068,
-        "puzzles": 180,
-    }
+    counts = checked_in["manifest"]["counts"]
+    assert counts["nodes"] >= 2269
+    assert counts["edges"] >= 9068
+    assert counts["puzzles"] == 180
     for concept in DATA.CONCEPTS:
         assert mobile_by_id[concept.node_id] == {
             "id": concept.node_id,

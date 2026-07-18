@@ -4,12 +4,12 @@
     "app": "cat_de_roman_esti",
     "schema_version": 1,
     "manifest_version": 1,
-    "build_version": "fixture-v32-face-workshop-garden",
+    "build_version": "fixture-v33-bathroom-electric-forest",
     "generated_at": "2026-06-21T00:00:00Z",
-    "content_hash": "sha256:141a74e23835c69c58566f7d8206a914b8740d0d87045d26f808ec6c785a793c",
+    "content_hash": "sha256:e96ab3e847b60b4503e7367ec13b64df41b2f1c2263938b9814c7e352b61c1e2",
     "counts": {
-      "nodes": 2269,
-      "edges": 9068,
+      "nodes": 2287,
+      "edges": 9122,
       "puzzles": 180
     }
   },
@@ -7061,6 +7061,78 @@
     {
       "id": "n_v32_workshop_hand_surubelnita",
       "label_ro": "Șurubelniță"
+    },
+    {
+      "id": "n_v33_bathroom_clothing_halat_baie",
+      "label_ro": "Halat de baie"
+    },
+    {
+      "id": "n_v33_bathroom_fixture_cada_baie",
+      "label_ro": "Cadă de baie"
+    },
+    {
+      "id": "n_v33_bathroom_fixture_chiuveta",
+      "label_ro": "Chiuvetă"
+    },
+    {
+      "id": "n_v33_bathroom_fixture_robinet",
+      "label_ro": "Robinet"
+    },
+    {
+      "id": "n_v33_bathroom_fixture_vas_toaleta",
+      "label_ro": "Vas de toaletă"
+    },
+    {
+      "id": "n_v33_bathroom_supply_hartie_igienica",
+      "label_ro": "Hârtie igienică"
+    },
+    {
+      "id": "n_v33_electric_control_intrerupator",
+      "label_ro": "Întrerupător de lumină"
+    },
+    {
+      "id": "n_v33_electric_extension_prelungitor",
+      "label_ro": "Prelungitor electric"
+    },
+    {
+      "id": "n_v33_electric_light_bec",
+      "label_ro": "Bec"
+    },
+    {
+      "id": "n_v33_electric_outlet_priza",
+      "label_ro": "Priză electrică"
+    },
+    {
+      "id": "n_v33_electric_plug_stecher",
+      "label_ro": "Ștecher"
+    },
+    {
+      "id": "n_v33_electric_wire_cablu",
+      "label_ro": "Cablu electric"
+    },
+    {
+      "id": "n_v33_forest_animal_caprioara",
+      "label_ro": "Căprioară"
+    },
+    {
+      "id": "n_v33_forest_animal_cerb",
+      "label_ro": "Cerb"
+    },
+    {
+      "id": "n_v33_forest_animal_lup",
+      "label_ro": "Lup"
+    },
+    {
+      "id": "n_v33_forest_animal_urs",
+      "label_ro": "Urs"
+    },
+    {
+      "id": "n_v33_forest_animal_veverita",
+      "label_ro": "Veveriță"
+    },
+    {
+      "id": "n_v33_forest_animal_vulpe",
+      "label_ro": "Vulpe"
     },
     {
       "id": "n_v3art_arta",
@@ -52793,9 +52865,89 @@
       "dst_id": "n_v32_garden_water_furtun"
     },
     {
+      "id": "de8404",
+      "src_id": "n_v33_bathroom_fixture_chiuveta",
+      "dst_id": "n_v33_bathroom_fixture_robinet"
+    },
+    {
+      "id": "de8405",
+      "src_id": "n_v33_bathroom_fixture_chiuveta",
+      "dst_id": "n_v33_bathroom_fixture_cada_baie"
+    },
+    {
+      "id": "de8406",
+      "src_id": "n_v33_bathroom_fixture_robinet",
+      "dst_id": "n_v33_bathroom_fixture_cada_baie"
+    },
+    {
+      "id": "de8407",
+      "src_id": "n_v33_bathroom_fixture_robinet",
+      "dst_id": "n_v33_bathroom_fixture_vas_toaleta"
+    },
+    {
+      "id": "de8408",
+      "src_id": "n_v33_bathroom_fixture_cada_baie",
+      "dst_id": "n_v33_bathroom_clothing_halat_baie"
+    },
+    {
+      "id": "de8409",
+      "src_id": "n_v33_bathroom_fixture_cada_baie",
+      "dst_id": "n_v33_bathroom_fixture_chiuveta"
+    },
+    {
       "id": "de841",
       "src_id": "n_net_reclama_cult",
       "dst_id": "n_net_reclamele_vodafone_ghita"
+    },
+    {
+      "id": "de8410",
+      "src_id": "n_v33_bathroom_clothing_halat_baie",
+      "dst_id": "n_v33_bathroom_fixture_vas_toaleta"
+    },
+    {
+      "id": "de8411",
+      "src_id": "n_v33_bathroom_clothing_halat_baie",
+      "dst_id": "n_v33_bathroom_supply_hartie_igienica"
+    },
+    {
+      "id": "de8412",
+      "src_id": "n_v33_bathroom_fixture_vas_toaleta",
+      "dst_id": "n_v33_bathroom_supply_hartie_igienica"
+    },
+    {
+      "id": "de8413",
+      "src_id": "n_v33_bathroom_fixture_vas_toaleta",
+      "dst_id": "n_v33_bathroom_fixture_robinet"
+    },
+    {
+      "id": "de8414",
+      "src_id": "n_v33_bathroom_supply_hartie_igienica",
+      "dst_id": "n_v33_bathroom_fixture_chiuveta"
+    },
+    {
+      "id": "de8415",
+      "src_id": "n_v33_bathroom_supply_hartie_igienica",
+      "dst_id": "n_v33_bathroom_clothing_halat_baie"
+    },
+    {
+      "id": "de8416",
+      "src_id": "n_v4via_baie",
+      "dst_id": "n_v33_bathroom_fixture_chiuveta"
+    },
+    {
+      "id": "de8417",
+      "src_id": "n_v4via_baie",
+      "dst_id": "n_v33_bathroom_fixture_cada_baie"
+    },
+    {
+      "id": "de8418",
+      "src_id": "n_v4gas_apa",
+      "dst_id": "n_v33_bathroom_fixture_robinet"
+    },
+    {
+      "id": "de8419",
+      "src_id": "n_v4soc_casa",
+      "dst_id": "n_v33_bathroom_fixture_vas_toaleta"
     },
     {
       "id": "de842",
@@ -52803,9 +52955,109 @@
       "dst_id": "n_net_reclamele_vodafone_ghita"
     },
     {
+      "id": "de8420",
+      "src_id": "n_v4via_baie",
+      "dst_id": "n_v33_bathroom_supply_hartie_igienica"
+    },
+    {
+      "id": "de8421",
+      "src_id": "n_v31_hygiene_bath_prosop",
+      "dst_id": "n_v33_bathroom_clothing_halat_baie"
+    },
+    {
+      "id": "de8422",
+      "src_id": "n_v33_electric_light_bec",
+      "dst_id": "n_v33_electric_control_intrerupator"
+    },
+    {
+      "id": "de8423",
+      "src_id": "n_v33_electric_light_bec",
+      "dst_id": "n_v33_electric_wire_cablu"
+    },
+    {
+      "id": "de8424",
+      "src_id": "n_v33_electric_control_intrerupator",
+      "dst_id": "n_v33_electric_wire_cablu"
+    },
+    {
+      "id": "de8425",
+      "src_id": "n_v33_electric_control_intrerupator",
+      "dst_id": "n_v33_electric_light_bec"
+    },
+    {
+      "id": "de8426",
+      "src_id": "n_v33_electric_wire_cablu",
+      "dst_id": "n_v33_electric_plug_stecher"
+    },
+    {
+      "id": "de8427",
+      "src_id": "n_v33_electric_wire_cablu",
+      "dst_id": "n_v33_electric_extension_prelungitor"
+    },
+    {
+      "id": "de8428",
+      "src_id": "n_v33_electric_plug_stecher",
+      "dst_id": "n_v33_electric_outlet_priza"
+    },
+    {
+      "id": "de8429",
+      "src_id": "n_v33_electric_plug_stecher",
+      "dst_id": "n_v33_electric_extension_prelungitor"
+    },
+    {
       "id": "de843",
       "src_id": "n_net_ghita_ciobanul",
       "dst_id": "n_net_reclamele_vodafone_ghita"
+    },
+    {
+      "id": "de8430",
+      "src_id": "n_v33_electric_outlet_priza",
+      "dst_id": "n_v33_electric_extension_prelungitor"
+    },
+    {
+      "id": "de8431",
+      "src_id": "n_v33_electric_outlet_priza",
+      "dst_id": "n_v33_electric_control_intrerupator"
+    },
+    {
+      "id": "de8432",
+      "src_id": "n_v33_electric_extension_prelungitor",
+      "dst_id": "n_v33_electric_light_bec"
+    },
+    {
+      "id": "de8433",
+      "src_id": "n_v33_electric_extension_prelungitor",
+      "dst_id": "n_v33_electric_outlet_priza"
+    },
+    {
+      "id": "de8434",
+      "src_id": "n_v24_home_appliances_lampa",
+      "dst_id": "n_v33_electric_light_bec"
+    },
+    {
+      "id": "de8435",
+      "src_id": "n_v3sti_electricitate",
+      "dst_id": "n_v33_electric_outlet_priza"
+    },
+    {
+      "id": "de8436",
+      "src_id": "n_v2sti_calculator",
+      "dst_id": "n_v33_electric_plug_stecher"
+    },
+    {
+      "id": "de8437",
+      "src_id": "n_v3sti_electricitate",
+      "dst_id": "n_v33_electric_control_intrerupator"
+    },
+    {
+      "id": "de8438",
+      "src_id": "n_v4soc_casa",
+      "dst_id": "n_v33_electric_extension_prelungitor"
+    },
+    {
+      "id": "de8439",
+      "src_id": "n_v3sti_electricitate",
+      "dst_id": "n_v33_electric_wire_cablu"
     },
     {
       "id": "de844",
@@ -52813,9 +53065,99 @@
       "dst_id": "n_net_vodafone_romania"
     },
     {
+      "id": "de8440",
+      "src_id": "n_v33_forest_animal_urs",
+      "dst_id": "n_v33_forest_animal_lup"
+    },
+    {
+      "id": "de8441",
+      "src_id": "n_v33_forest_animal_urs",
+      "dst_id": "n_v33_forest_animal_vulpe"
+    },
+    {
+      "id": "de8442",
+      "src_id": "n_v33_forest_animal_lup",
+      "dst_id": "n_v33_forest_animal_vulpe"
+    },
+    {
+      "id": "de8443",
+      "src_id": "n_v33_forest_animal_lup",
+      "dst_id": "n_v33_forest_animal_cerb"
+    },
+    {
+      "id": "de8444",
+      "src_id": "n_v33_forest_animal_vulpe",
+      "dst_id": "n_v33_forest_animal_veverita"
+    },
+    {
+      "id": "de8445",
+      "src_id": "n_v33_forest_animal_vulpe",
+      "dst_id": "n_v33_forest_animal_caprioara"
+    },
+    {
+      "id": "de8446",
+      "src_id": "n_v33_forest_animal_veverita",
+      "dst_id": "n_v33_forest_animal_caprioara"
+    },
+    {
+      "id": "de8447",
+      "src_id": "n_v33_forest_animal_veverita",
+      "dst_id": "n_v33_forest_animal_urs"
+    },
+    {
+      "id": "de8448",
+      "src_id": "n_v33_forest_animal_caprioara",
+      "dst_id": "n_v33_forest_animal_cerb"
+    },
+    {
+      "id": "de8449",
+      "src_id": "n_v33_forest_animal_caprioara",
+      "dst_id": "n_v33_forest_animal_lup"
+    },
+    {
       "id": "de845",
       "src_id": "n_net_ghita_ciobanul",
       "dst_id": "n_net_internet_romanesc"
+    },
+    {
+      "id": "de8450",
+      "src_id": "n_v33_forest_animal_cerb",
+      "dst_id": "n_v33_forest_animal_urs"
+    },
+    {
+      "id": "de8451",
+      "src_id": "n_v33_forest_animal_cerb",
+      "dst_id": "n_v33_forest_animal_veverita"
+    },
+    {
+      "id": "de8452",
+      "src_id": "n_v4geo_padure",
+      "dst_id": "n_v33_forest_animal_urs"
+    },
+    {
+      "id": "de8453",
+      "src_id": "n_v4geo_padure",
+      "dst_id": "n_v33_forest_animal_lup"
+    },
+    {
+      "id": "de8454",
+      "src_id": "n_v4geo_padure",
+      "dst_id": "n_v33_forest_animal_vulpe"
+    },
+    {
+      "id": "de8455",
+      "src_id": "n_v24_nature_plant_parts_iarba",
+      "dst_id": "n_v33_forest_animal_cerb"
+    },
+    {
+      "id": "de8456",
+      "src_id": "n_v24_nature_plant_parts_iarba",
+      "dst_id": "n_v33_forest_animal_caprioara"
+    },
+    {
+      "id": "de8457",
+      "src_id": "n_v4sti_copac",
+      "dst_id": "n_v33_forest_animal_veverita"
     },
     {
       "id": "de846",
@@ -55420,26 +55762,26 @@
     },
     {
       "id": "pz_stiinta_hard_3",
-      "start_id": "n_v2sti_fizica",
-      "target_id": "n_v31_body_lower_genunchi",
+      "start_id": "n_v2sti_stiinta",
+      "target_id": "n_v33_forest_animal_lup",
       "difficulty": "hard"
     },
     {
       "id": "pz_stiinta_hard_4",
       "start_id": "n_v2sti_fizica",
-      "target_id": "n_v32_body_face_buza",
+      "target_id": "n_v31_body_lower_genunchi",
       "difficulty": "hard"
     },
     {
       "id": "pz_stiinta_hard_5",
-      "start_id": "n_v24_body_face_cap",
-      "target_id": "n_v2sti_stiinta",
+      "start_id": "n_v2sti_fizica",
+      "target_id": "n_v32_body_face_buza",
       "difficulty": "hard"
     },
     {
       "id": "pz_stiinta_hard_6",
-      "start_id": "n_v24_body_face_nas",
-      "target_id": "n_v2sti_stiinta",
+      "start_id": "n_v2sti_fizica",
+      "target_id": "n_v33_forest_animal_lup",
       "difficulty": "hard"
     },
     {
@@ -55492,26 +55834,26 @@
     },
     {
       "id": "pz_viata_de_roman_hard_3",
-      "start_id": "n_v29_routine_shopping_cumparaturi",
-      "target_id": "n_vdr_copilaria_anilor_90",
+      "start_id": "n_v31_hygiene_bath_sapun",
+      "target_id": "n_v33_bathroom_fixture_chiuveta",
       "difficulty": "hard"
     },
     {
       "id": "pz_viata_de_roman_hard_4",
-      "start_id": "n_v29_routine_shopping_cumparaturi",
-      "target_id": "n_vdr_sarmale_craciun",
+      "start_id": "n_v31_hygiene_bath_sapun",
+      "target_id": "n_v33_bathroom_fixture_robinet",
       "difficulty": "hard"
     },
     {
       "id": "pz_viata_de_roman_hard_5",
-      "start_id": "n_v29_clothing_everyday_haina",
-      "target_id": "n_v31_cleaning_floor_aspirator",
+      "start_id": "n_v31_hygiene_oral_pasta_dinti",
+      "target_id": "n_v33_bathroom_fixture_chiuveta",
       "difficulty": "hard"
     },
     {
       "id": "pz_viata_de_roman_hard_6",
-      "start_id": "n_v29_routine_shopping_cumparaturi",
-      "target_id": "n_vdr_lasa_ca_merge",
+      "start_id": "n_v31_hygiene_oral_pasta_dinti",
+      "target_id": "n_v33_bathroom_fixture_robinet",
       "difficulty": "hard"
     }
   ]

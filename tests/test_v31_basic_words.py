@@ -6,6 +6,7 @@ import hashlib
 import importlib.util
 import json
 import math
+import re
 import sys
 import unicodedata
 from collections import Counter
@@ -136,6 +137,13 @@ def test_v31_exact_semantic_edges_and_inbound_beginner_topology():
     new_ids = set(DATA.NEW_NODE_IDS)
     by_id = {node["id"]: node for node in fixture["kg_nodes"]}
     legacy_ids = set(by_id) - new_ids
+    later_wave_ids = {
+        node_id
+        for node_id in legacy_ids
+        if (match := re.match(r"n_v(\d+)_", node_id))
+        and int(match.group(1)) > 31
+    }
+    mature_legacy_ids = legacy_ids - later_wave_ids
     incident = [
         edge
         for edge in fixture["kg_edges"]
@@ -185,7 +193,7 @@ def test_v31_exact_semantic_edges_and_inbound_beginner_topology():
             sum(1 for distance in inbound.values() if 1 <= distance <= RESPONSIVE_MAX_HOPS)
             >= MIN_RESPONSIVE
         )
-        assert not (legacy_ids & set(svc.distances_from(node_id)))
+        assert not (mature_legacy_ids & set(svc.distances_from(node_id)))
 
 
 def test_v31_preserves_prior_coverage_and_resolves_its_extension():
