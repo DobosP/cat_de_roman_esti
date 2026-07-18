@@ -135,6 +135,11 @@ def test_guess_reports_temperature_and_closeness() -> None:
     assert g["closeness"] < 100  # only the actual target reads 100
     assert body["attempts"] == 1
     assert body["won"] is False
+    assert g["attempt_number"] == 1
+    assert body["feedback"] == {
+        "kind": "first",
+        "message": f"Primul reper: #{g['rank']}.",
+    }
     assert "target" not in body
     assert body["guesses"][0]["rank"] == g["rank"]
 
@@ -163,6 +168,11 @@ def test_winning_playthrough_reveals_target() -> None:
     assert body["guess"]["rank"] == 1
     assert body["guess"]["temperature"] == "Gasit"
     assert body["guess"]["closeness"] == 100
+    assert body["guess"]["attempt_number"] == 2
+    assert body["feedback"] == {
+        "kind": "found",
+        "message": "Exact — ai găsit răspunsul!",
+    }
     assert body["target"]["id"] == target_id
     # guesses are sorted best-first: the winning guess leads.
     assert body["guesses"][0]["distance"] == 0
@@ -171,9 +181,117 @@ def test_winning_playthrough_reveals_target() -> None:
 def test_duplicate_guess_not_double_counted() -> None:
     c = make_client()
     gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
-    _post_json(c, f"/api/wordgames/contexto/games/{gid}/guess", {"text": "Banat"})
+    first = _post_json(c, f"/api/wordgames/contexto/games/{gid}/guess", {"text": "Banat"})
     res = _post_json(c, f"/api/wordgames/contexto/games/{gid}/guess", {"text": "Banat"})
     assert res["attempts"] == 1
+    assert first["guess"]["attempt_number"] == 1
+    assert res["guess"]["attempt_number"] == 1
+    assert res["feedback"] == {
+        "kind": "repeat",
+        "message": f"Deja încercat — rămâne #{res['guess']['rank']}.",
+    }
+    assert res["guesses"] == first["guesses"]
+
+
+def test_comparative_feedback_covers_public_rank_movements_only() -> None:
+    from cat_de_roman_esti.wordgames.contexto import (
+        GuessRecord,
+        _guess_feedback_payload,
+        _pick_target,
+    )
+
+    session = _pick_target(SEED, "normal")
+
+    def record(node_id: str, rank: int, attempt_number: int) -> GuessRecord:
+        return GuessRecord(
+            id=node_id,
+            label=node_id,
+            distance=2,
+            temperature="Rece",
+            closeness=50,
+            rank=rank,
+            anchor_id=node_id,
+            attempt_number=attempt_number,
+        )
+
+    first = record("first", 100, 1)
+    assert _guess_feedback_payload(session, first, is_new=True, found=False)["kind"] == "first"
+    session.guesses[first.id] = first
+    session.order.append(first.id)
+
+    best = record("best", 40, 2)
+    best_feedback = _guess_feedback_payload(session, best, is_new=True, found=False)
+    assert best_feedback == {
+        "kind": "new-best",
+        "message": "Cel mai bun: cu 60 locuri mai aproape.",
+        "rank_delta": 60,
+    }
+    session.guesses[best.id] = best
+    session.order.append(best.id)
+
+    colder = record("colder", 90, 3)
+    assert _guess_feedback_payload(session, colder, is_new=True, found=False) == {
+        "kind": "colder",
+        "message": "Mai rece cu 50 locuri.",
+        "rank_delta": -50,
+    }
+    session.guesses[colder.id] = colder
+    session.order.append(colder.id)
+
+    warmer = record("warmer", 70, 4)
+    assert _guess_feedback_payload(session, warmer, is_new=True, found=False) == {
+        "kind": "warmer",
+        "message": "Mai cald cu 20 locuri.",
+        "rank_delta": 20,
+    }
+    session.guesses[warmer.id] = warmer
+    session.order.append(warmer.id)
+
+    same = record("same", 70, 5)
+    assert _guess_feedback_payload(session, same, is_new=True, found=False) == {
+        "kind": "same",
+        "message": "La fel de aproape ca încercarea trecută.",
+        "rank_delta": 0,
+    }
+    assert set(_guess_feedback_payload(session, same, is_new=True, found=False)) == {
+        "kind",
+        "message",
+        "rank_delta",
+    }
+
+
+def test_distinct_attempt_numbers_survive_best_first_resorting_and_get() -> None:
+    from cat_de_roman_esti.wordgames.contexto import store
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    c = make_client()
+    created = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()
+    gid = created["game_id"]
+    session = store.get(gid)
+    assert session is not None
+    svc = get_service()
+
+    accepted: list[dict] = []
+    for node_id in svc.all_ids():
+        label = svc.label(node_id)
+        if node_id == session.target or svc.resolve(label) != node_id:
+            continue
+        body = _post_json(
+            c,
+            f"/api/wordgames/contexto/games/{gid}/guess",
+            {"text": label},
+        )
+        if body["ok"] and body["attempts"] > len(accepted):
+            accepted.append(body["guess"])
+        if len(accepted) == 2:
+            break
+
+    assert [guess["attempt_number"] for guess in accepted] == [1, 2]
+    fetched = c.get(f"/api/wordgames/contexto/games/{gid}").json()
+    by_id = {guess["id"]: guess["attempt_number"] for guess in fetched["guesses"]}
+    assert by_id[accepted[0]["id"]] == 1
+    assert by_id[accepted[1]["id"]] == 2
+    assert {guess["attempt_number"] for guess in fetched["guesses"]} == {1, 2}
 
 
 def test_giveup_reveals_target() -> None:
@@ -514,6 +632,7 @@ def test_warmer_clues_prefer_familiar_words_on_approved_easy_targets() -> None:
             closeness=0,
             rank=session.reachable + 1,
             anchor_id="test-cold",
+            attempt_number=1,
         )
         clue = _warmer_clue_candidate(session)
         assert clue is not None
