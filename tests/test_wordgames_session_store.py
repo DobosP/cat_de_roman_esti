@@ -15,6 +15,7 @@ import pytest
 from cat_de_roman_esti.wordgames.service import (
     DEFAULT_MAX_SESSIONS,
     DEFAULT_SESSION_TTL_SECONDS,
+    SessionCapacityError,
     SessionStore,
     _positive_env_float,
     _positive_env_int,
@@ -170,3 +171,136 @@ def test_thread_safety_under_concurrent_creates():
 
     # 1600 creates total, but the cap holds and the structure is intact.
     assert len(store) == cap
+
+
+def test_transaction_serializes_same_session_and_releases_after_exception():
+    store: SessionStore[dict[str, int]] = SessionStore(ttl_seconds=None)
+    sid = store.create({"value": 0})
+    start = threading.Barrier(3)
+    overlap = threading.Barrier(2)
+    guard = threading.Lock()
+    active = 0
+    max_active = 0
+
+    def worker() -> None:
+        nonlocal active, max_active
+        start.wait()
+        with store.transaction(sid) as session:
+            assert session is not None
+            with guard:
+                active += 1
+                max_active = max(max_active, active)
+            try:
+                # Same-session callers cannot rendezvous here: one times out, then the
+                # queued caller enters after the first transaction releases its lock.
+                overlap.wait(timeout=0.15)
+            except threading.BrokenBarrierError:
+                pass
+            session["value"] += 1
+            with guard:
+                active -= 1
+
+    threads = [threading.Thread(target=worker) for _ in range(2)]
+    for thread in threads:
+        thread.start()
+    start.wait()
+    for thread in threads:
+        thread.join(timeout=2)
+        assert not thread.is_alive()
+
+    assert max_active == 1
+    assert store.get(sid) == {"value": 2}
+
+    with pytest.raises(RuntimeError, match="probe"):
+        with store.transaction(sid):
+            raise RuntimeError("probe")
+    with store.transaction(sid) as session:
+        assert session == {"value": 2}
+
+
+def test_transactions_for_different_sessions_run_in_parallel():
+    store: SessionStore[str] = SessionStore(ttl_seconds=None)
+    ids = [store.create("a"), store.create("b")]
+    start = threading.Barrier(3)
+    overlap = threading.Barrier(2)
+    entered: list[str] = []
+
+    def worker(sid: str) -> None:
+        start.wait()
+        with store.transaction(sid) as session:
+            assert session is not None
+            entered.append(session)
+            overlap.wait(timeout=1)
+
+    threads = [
+        threading.Thread(target=worker, args=(sid,))
+        for sid in ids
+    ]
+    for thread in threads:
+        thread.start()
+    start.wait()
+    for thread in threads:
+        thread.join(timeout=2)
+        assert not thread.is_alive()
+
+    assert sorted(entered) == ["a", "b"]
+    assert overlap.broken is False
+
+
+def test_borrowed_session_survives_ttl_and_lru_until_transaction_finishes():
+    clock = FakeClock()
+    store: SessionStore[str] = SessionStore(
+        ttl_seconds=10,
+        max_sessions=2,
+        clock=clock,
+    )
+    borrowed = store.create("borrowed")
+    idle = store.create("idle")
+
+    with store.transaction(borrowed) as session:
+        assert session == "borrowed"
+        clock.advance(11)
+        assert store.purge_expired() == 1  # the idle sibling expires
+        assert len(store) == 1  # the borrowed session remains pinned past its TTL
+        replacement = store.create("replacement")
+        assert len(store) == 2
+
+    # Access was linearized when the transaction acquired its lock, so once no request
+    # borrows it the old session is again eligible for the existing lazy TTL sweep.
+    assert store.purge_expired() == 1
+    assert store.get(borrowed) is None
+    assert store.get(replacement) == "replacement"
+    assert store.get(idle) is None
+
+
+def test_entry_owned_lock_count_stays_within_session_cap_and_missing_ids_add_none():
+    cap = 8
+    store: SessionStore[int] = SessionStore(max_sessions=cap, ttl_seconds=None)
+    for value in range(50):
+        store.create(value)
+    for value in range(50):
+        assert store.get(f"missing-{value}") is None
+        with store.transaction(f"missing-{value}") as session:
+            assert session is None
+
+    assert len(store) == cap
+    assert len({id(entry.transaction_lock) for entry in store._sessions.values()}) == cap
+
+
+def test_all_borrowed_cap_and_delete_fail_fast_then_recover_without_overshoot():
+    store: SessionStore[str] = SessionStore(max_sessions=1, ttl_seconds=None)
+    original = store.create("original")
+
+    with store.transaction(original) as session:
+        assert session == "original"
+        with pytest.raises(SessionCapacityError, match="slots.*busy"):
+            store.create("blocked")
+        assert store.delete(original) is False
+        assert len(store) == 1
+        assert len(store._sessions) == 1
+
+    replacement = store.create("replacement")
+    assert len(store) == 1
+    assert store.get(original) is None
+    assert store.get(replacement) == "replacement"
+    assert len({id(entry.transaction_lock) for entry in store._sessions.values()}) == 1

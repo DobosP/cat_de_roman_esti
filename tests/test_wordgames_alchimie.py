@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import random
+import threading
 from itertools import combinations
 
 import pytest
@@ -550,6 +551,64 @@ def test_repeated_barren_pair_is_authoritative_free_and_resettable(
     ).json()
     assert after_reset["already_tried"] is False
     assert after_reset["moves"] == after_reset["attempted_count"] == 1
+
+
+def test_concurrent_duplicate_pair_is_charged_exactly_once(client: Client) -> None:
+    """Two simultaneous requests linearize into one experiment and one free repeat."""
+    state = _create(client, seed=7)
+    gid = state["game_id"]
+    session = A.store.get(gid)
+    assert session is not None
+    ids = [item["id"] for item in state["inventory"]]
+    pairs = _barren_owned_pairs(session, ids)
+    assert pairs
+    a, b = pairs[0]
+
+    rendezvous = threading.Barrier(2)
+
+    class RendezvousSet(set):
+        def __contains__(self, item: object) -> bool:
+            present = super().__contains__(item)
+            try:
+                # Without the session transaction both requests capture False and meet
+                # here. With it, the first times out and the queued request later sees
+                # the committed pair through the now-broken barrier.
+                rendezvous.wait(timeout=0.15)
+            except threading.BrokenBarrierError:
+                pass
+            return present
+
+    session.attempted_pairs = RendezvousSet()
+    start = threading.Barrier(3)
+    responses: list[dict] = []
+
+    def submit(left: str, right: str) -> None:
+        request_client = Client()
+        start.wait()
+        response = request_client.post(
+            f"{BASE}/games/{gid}/combine",
+            {"a": left, "b": right},
+            content_type="application/json",
+        )
+        assert response.status_code == 200, response.content.decode()
+        responses.append(response.json())
+
+    threads = [
+        threading.Thread(target=submit, args=(a, b)),
+        threading.Thread(target=submit, args=(b, a)),
+    ]
+    for thread in threads:
+        thread.start()
+    start.wait()
+    for thread in threads:
+        thread.join(timeout=2)
+        assert not thread.is_alive()
+
+    assert sorted(body["already_tried"] for body in responses) == [False, True]
+    assert {body["moves"] for body in responses} == {1}
+    assert {body["attempted_count"] for body in responses} == {1}
+    assert session.moves == len(session.attempted_pairs) == 1
+    assert session.fruitless_streak == 1
 
 
 def test_repeated_productive_pair_is_free_and_does_not_replay_discovery(

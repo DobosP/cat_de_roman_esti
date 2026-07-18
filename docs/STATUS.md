@@ -1,9 +1,10 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-19. This file is the repository's current source of truth._
-_Last verified: 2026-07-19 (V35 integrated suite, Lanț bounded-path 51/51, frontend
-68/68, lint, typecheck, and production build green at 117.04/120 KiB with four font
-subsets; final session-hardening gate pending. Live is V32 `f40fa8b`; V33–V35 are not deployed.)_
+_Last verified: 2026-07-19 (V35 atomic regressions 20/20, all-four-game/mobile suite,
+Lanț bounded-path 51/51, session store 16/16, frontend 68/68, lint, and typecheck green;
+production build is 117.04/120 KiB with four font subsets. Final integrated gate pending.
+Live is V32 `f40fa8b`; V33–V35 are not pushed or deployed.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -67,8 +68,9 @@ Both fixture copies and both pack copies are byte-identical and validator-green.
 
 ## Runtime contracts and safety
 
-- Sessions keep a validated 7,200-second sliding TTL and 1,000-entry LRU cap; cleanup stays
-  lazy, lock-protected, monotonic, and deterministic. Lanț caps paths at 64 moves / 65 nodes.
+- Sessions keep a validated 7,200-second sliding TTL and 1,000-entry LRU cap. Entry locks
+  serialize each request transaction while other sessions stay concurrent; all-borrowed
+  capacity fails with 503; Lanț retains at most 64 moves / 65 nodes (ADR-0049/0050).
 - Request bodies default to a 64 KiB Caddy plus ASGI receive ceiling.
 - Hidden answers stay pinned: Contexto hides its target; Alchimie hides target ID; Lanț
   reveals earned/hinted hops; Conexiuni hides unsolved membership/full solution until terminal.
@@ -86,7 +88,7 @@ PYTHONPATH=. .venv/bin/python scripts/validate_fixture.py
 node --check .claude/workflows/critique-games.js
 git diff --check
 ```
-Run frontend gates when frontend changes; session-store target: `tests/test_wordgames_session_store.py` (11).
+Run frontend gates when frontend changes; session-store target: `tests/test_wordgames_session_store.py` (16).
 
 ## Next verified work
 
