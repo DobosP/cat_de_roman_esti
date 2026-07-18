@@ -45,11 +45,12 @@ test("Conexiuni blocks unchanged retries in submit, keyboard, and button paths",
   assert.match(screen, /exactBlockedRetry \? "Schimbă o piesă" : "Verifică"/);
 });
 
-test("Conexiuni remembers a server-rejected duplicate and preserves terminal resets", () => {
+test("Conexiuni preserves only a still-visible server-rejected duplicate", () => {
   assert.match(
     screen,
-    /err\.status === 409\) \{\s*if \(!fresh\?\.won && !fresh\?\.lost\) \{\s*setSelected\(guess\);\s*setBlockedGuess\(\{ key: guessKey, oneAway: false \}\);/,
+    /err\.status === 409\) \{[\s\S]{0,240}guess\.every\(\(id\) => freshAvailable\.has\(id\)\);\s*if \(!fresh\?\.won && !fresh\?\.lost && retryStillVisible\) \{\s*setSelected\(guess\);/,
   );
+  assert.match(screen, /const unsolvedTileIds = \(fresh: ConexiuniState\)/);
   assert.match(
     screen,
     /if \(res\.correct\) \{[\s\S]{0,180}setSelected\(\[\]\);\s*setBlockedGuess\(null\);/,

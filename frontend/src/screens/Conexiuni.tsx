@@ -58,6 +58,15 @@ const ONE_AWAY_GUIDANCE =
   "Aproape: 3 din 4. Schimbă o piesă.";
 type BlockedGuess = { key: string; oneAway: boolean };
 
+const unsolvedTileIds = (fresh: ConexiuniState) => {
+  const solved = new Set(
+    fresh.solved.flatMap((group) => group.tiles.map((tile) => tile.id)),
+  );
+  return new Set(
+    fresh.tiles.filter((tile) => !solved.has(tile.id)).map((tile) => tile.id),
+  );
+};
+
 export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const active = useActiveGame(GAME_KEY);
   const resumeOnce = useRef(false);
@@ -155,12 +164,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   );
 
   const applyAuthoritativeState = useCallback((fresh: ConexiuniState) => {
-    const solved = new Set(
-      fresh.solved.flatMap((group) => group.tiles.map((tile) => tile.id)),
-    );
-    const available = new Set(
-      fresh.tiles.filter((tile) => !solved.has(tile.id)).map((tile) => tile.id),
-    );
+    const available = unsolvedTileIds(fresh);
     setState(fresh);
     setSelected((current) =>
       fresh.won || fresh.lost ? [] : current.filter((id) => available.has(id)),
@@ -350,7 +354,10 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
           ? await refreshAuthoritativeState(state.game_id)
           : null;
       if (err instanceof ApiError && err.status === 409) {
-        if (!fresh?.won && !fresh?.lost) {
+        const freshAvailable = fresh ? unsolvedTileIds(fresh) : null;
+        const retryStillVisible =
+          freshAvailable === null || guess.every((id) => freshAvailable.has(id));
+        if (!fresh?.won && !fresh?.lost && retryStillVisible) {
           setSelected(guess);
           setBlockedGuess({ key: guessKey, oneAway: false });
           setHint(`${message} Schimbă cel puțin o piesă înainte de o nouă verificare.`);
