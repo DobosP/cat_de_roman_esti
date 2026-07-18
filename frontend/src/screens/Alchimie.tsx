@@ -81,6 +81,14 @@ function pairKey(ids: readonly string[]): string | null {
   return ids.length === 2 ? JSON.stringify([...ids].sort()) : null;
 }
 
+function normalizeInventorySearch(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "")
+    .toLocaleLowerCase("ro-RO")
+    .trim();
+}
+
 const DIFFICULTY_LABEL: Record<Difficulty, string> = {
   usor: "Ușor",
   normal: "Normal",
@@ -111,6 +119,7 @@ export default function Alchimie({
   // The pair the most recent nudge suggested — gets a glowing outline.
   const [hintIds, setHintIds] = useState<Set<string>>(new Set());
   const [inventoryView, setInventoryView] = useState<InventoryView>("useful");
+  const [inventoryQuery, setInventoryQuery] = useState("");
   const [lastMessage, setLastMessage] = useState<string | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>("usor");
   const [category, setCategory] = useState<string | null>(null);
@@ -151,6 +160,7 @@ export default function Alchimie({
         setFreshIds(new Set());
         setHintIds(new Set());
         setInventoryView("useful");
+        setInventoryQuery("");
         setLastMessage(null);
         setIsRecord(false);
         setIsPuzzleRecord(false);
@@ -176,6 +186,7 @@ export default function Alchimie({
         setFreshIds(new Set());
         setHintIds(new Set());
         setInventoryView("useful");
+        setInventoryQuery("");
         setLastMessage(null);
         setIsRecord(false);
         setIsPuzzleRecord(false);
@@ -325,16 +336,17 @@ export default function Alchimie({
       }
       setHintIds(new Set());
       let feedback = res.message;
-      if (recoverableEmpty) {
+      if (recoverableEmpty && !res.already_tried) {
         feedback += " Perechea rămâne în alambic — schimbă un ingredient.";
-        if (res.hint_available) {
-          feedback += " Apasă „Indiciu” dacă te-ai blocat.";
-        }
+      }
+      if (recoverableEmpty && res.hint_available) {
+        feedback += " Apasă „Indiciu” dacă te-ai blocat.";
       }
       setLastMessage(feedback);
       if (res.discovered.length > 0) {
         setFreshIds(new Set(res.discovered.map((d: Concept) => d.id)));
         setInventoryView("recent");
+        setInventoryQuery("");
         if (!res.won) sound.playHop();
         // win sound handled by the won effect
       } else {
@@ -368,6 +380,7 @@ export default function Alchimie({
       setFreshIds(new Set());
       setHintIds(new Set());
       setInventoryView("useful");
+      setInventoryQuery("");
       setLastMessage(null);
       sound.playUndo();
     } catch (err) {
@@ -388,6 +401,7 @@ export default function Alchimie({
     setEmptyPairKey(null);
     setEmptyRecoveryActive(false);
     setInventoryView("useful");
+    setInventoryQuery("");
     setState(null);
   }, [active]);
 
@@ -401,6 +415,7 @@ export default function Alchimie({
       setEmptyPairKey(null);
       setEmptyRecoveryActive(false);
       setLastMessage(res.message);
+      setInventoryQuery("");
       if (res.hint) {
         const ids = res.hint.map((c) => c.id);
         setHintIds(new Set(ids));
@@ -453,14 +468,21 @@ export default function Alchimie({
     }),
     [inventory],
   );
+  const normalizedInventoryQuery = useMemo(
+    () => normalizeInventorySearch(inventoryQuery),
+    [inventoryQuery],
+  );
   const visibleInventory = useMemo(
     () =>
       inventory.filter((item) => {
+        if (normalizedInventoryQuery) {
+          return normalizeInventorySearch(item.label).includes(normalizedInventoryQuery);
+        }
         if (inventoryView === "all") return true;
         if (inventoryView === "recent") return item.recent && !item.depleted;
         return item.useful && !item.depleted;
       }),
-    [inventory, inventoryView],
+    [inventory, inventoryView, normalizedInventoryQuery],
   );
   const selectedItems = useMemo(
     () =>
@@ -848,11 +870,16 @@ export default function Alchimie({
             >
               INVENTAR · {state.inventory_summary.active} ÎN JOC
             </span>
-            {state.inventory_summary.depleted > 0 && (
+            <span className="row wrap" style={{ gap: 10 }}>
               <span className="muted" style={{ fontSize: "0.76rem" }}>
-                {state.inventory_summary.depleted} puse deoparte
+                <span aria-hidden="true">●</span> pereche gata
               </span>
-            )}
+              {state.inventory_summary.depleted > 0 && (
+                <span className="muted" style={{ fontSize: "0.76rem" }}>
+                  {state.inventory_summary.depleted} puse deoparte
+                </span>
+              )}
+            </span>
           </div>
           <div
             className="alchemy-inventory-tabs"
@@ -878,6 +905,23 @@ export default function Alchimie({
               </button>
             ))}
           </div>
+          <input
+            type="search"
+            className="field alchemy-inventory-search"
+            value={inventoryQuery}
+            onChange={(event) => setInventoryQuery(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Escape" && inventoryQuery) {
+                event.preventDefault();
+                event.stopPropagation();
+                setInventoryQuery("");
+              }
+            }}
+            placeholder="Caută în toate…"
+            aria-label="Caută în toate conceptele descoperite"
+            autoComplete="off"
+            spellCheck={false}
+          />
           <div className="alchemy-inventory-grid">
             <AnimatePresence initial={false}>
               {visibleInventory.map((item) => {
@@ -959,6 +1003,11 @@ export default function Alchimie({
                 );
               })}
             </AnimatePresence>
+            {normalizedInventoryQuery && visibleInventory.length === 0 && (
+              <p className="faint center" style={{ gridColumn: "1 / -1", margin: 8 }}>
+                Niciun concept găsit.
+              </p>
+            )}
           </div>
         </section>
 

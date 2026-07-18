@@ -72,6 +72,9 @@ than claiming the offline answer is unknowable.
 Alchimie inventory entries add the boolean view metadata `recent`, `useful`, `ready`, and
 `depleted`; `inventory_summary` carries only active/depleted/total counts. `recipe_summary`
 contains only bounded pair/route/result counts — recipe ids and full routes are never public.
+`attempted_count` is the only public experiment-history aggregate. A combine response adds
+`already_tried` for its submitted unordered pair; a repeat changes no move, score, dry-spell,
+hint, or inventory state, and no response serializes attempted ingredient IDs or results.
 The first progressive hint has `hint_kind = output|category`, `hint = null`, and may include
 only a non-target output **label** in `hint_output`; later hints may return one owned pair with
 `hint_kind = pair`. Until win, none of these additive fields may contain the hidden target id.

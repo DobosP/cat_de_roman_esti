@@ -1,7 +1,7 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-19. This file is the repository's current source of truth._
-_Last verified: 2026-07-19 (local V34 gate: backend 420/420; session store 11/11; Ruff, both validators, workflow syntax, whitespace, fixture/pack mirrors; frontend lint, typecheck, 11/11 source tests, production build, 116.48/120 KiB initial gzip, and four Romanian font subsets. Live release remains V32 `f40fa8bc1b8880637aeeb01816c612ea850f73c0`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles; V33/V34 are not pushed or deployed.)_
+_Last verified: 2026-07-19 (local V35 gate: backend 422/422; session store 11/11; Ruff and whitespace; frontend lint, typecheck, and 11/11 source-test suites. Per task scope, no static bundle was built. Live release remains V32 `f40fa8bc1b8880637aeeb01816c612ea850f73c0`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles; V33–V35 are not pushed or deployed.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -12,12 +12,12 @@ The critique layer now fails closed from generation through promotion:
   them before writing, while re-review restores both copies on any red or exception.
 - Imports enter `pending`; persistent per-game high-water marks prevent retired ID reuse.
 
-## Current outcome — browser recovery (ADR-0027 through ADR-0029, ADR-0034, ADR-0035)
+## Current outcome — browser recovery (ADR-0027 through ADR-0029, ADR-0034, ADR-0047)
 
-Lanț exposes up to three private-corridor choices plus safe detours as ID-free label/relation
-chips; visible homonyms bind exactly, all direct hops stay legal, and hints prefer safe forward
-routes before free undo. Other recovery remains bounded. All games remain server-authoritative;
-score, undo, secrecy, TTL, and caps are unchanged.
+Lanț exposes private-corridor choices plus safe detours as ID-free label/relation chips; visible
+homonyms bind exactly, direct hops stay legal, and hints prefer safe routes before free undo.
+Alchimie remembers at most 496 unordered experiments; retries are free and inert, reset clears
+them, and only their count is public. Score, secrecy, TTL, and session cap remain unchanged.
 
 ## Current outcome — beginner mobile interface (ADR-0031)
 

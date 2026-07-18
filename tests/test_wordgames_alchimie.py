@@ -32,6 +32,7 @@ def test_create_returns_hidden_target_and_seed_inventory(client: Client) -> None
     assert state["game_id"]
     assert state["won"] is False
     assert state["moves"] == 0
+    assert state["attempted_count"] == 0
     # A recognizable seed inventory of 5-7 concepts.
     assert 5 <= state["seed_count"] <= 7
     assert len(state["inventory"]) == state["seed_count"]
@@ -71,6 +72,8 @@ def test_productive_combine_lineage_is_exact_ordered_and_persistent(client: Clie
             continue
 
         assert body["won"] is False
+        assert body["already_tried"] is False
+        assert body["attempted_count"] == 1
         assert body["target"]["id"] is None
         assert [item["id"] for item in body["inventory"][: body["seed_count"]]] == seed_ids
         assert [item["id"] for item in body["inventory"][-len(body["discovered"]) :]] == [
@@ -135,6 +138,8 @@ def test_combine_is_symmetric_and_lineage_preserves_request_order(client: Client
 
     assert forward["discovered"]
     assert reverse["discovered"] == forward["discovered"]
+    assert forward["already_tried"] is reverse["already_tried"] is False
+    assert forward["attempted_count"] == reverse["attempted_count"] == 1
     assert forward["moves"] == reverse["moves"] == 1
     assert forward["target"]["id"] is reverse["target"]["id"] is None
 
@@ -206,6 +211,7 @@ def test_combine_with_no_discovery_counts_move(client: Client) -> None:
         if not body["discovered"]:
             barren = (a, b)
             assert body["message"] == "Nicio combinatie noua."
+            assert body["already_tried"] is False
             assert body["moves"] >= 1
             break
         # Re-create to keep a clean inventory for the next probe.
@@ -253,6 +259,7 @@ def test_reset_restores_seed_inventory(client: Client) -> None:
     assert res.status_code == 200
     reset = res.json()
     assert reset["moves"] == 0
+    assert reset["attempted_count"] == 0
     assert reset["won"] is False
     assert [i["id"] for i in reset["inventory"]] == ids
 
@@ -432,74 +439,206 @@ def test_curated_par_makes_the_perfect_score_achievable() -> None:
 # ----------------------------------------------------------------- nudges + edge cases
 
 
-def _barren_owned_pair(session, ids: list[str]) -> tuple[str, str] | None:
-    """The first owned pair with no fresh result in the private recipe projection.
+def _barren_owned_pairs(
+    session: A.AlchimieSession, ids: list[str]
+) -> list[tuple[str, str]]:
+    """Untried owned pairs with no fresh result in the private recipe projection.
 
-    Combining such a pair always discovers nothing, so it deterministically grows the
-    fruitless streak without ever accidentally crafting a concept.
+    Each pair can grow the fruitless streak exactly once: experiment memory makes later
+    submissions free and inert, so hint tests deliberately use distinct barren pairs.
     """
     owned = set(ids)
-    for a, b in combinations(sorted(owned), 2):
-        if not [
+    return [
+        (a, b)
+        for a, b in combinations(sorted(owned), 2)
+        if A._pair_key(a, b) not in session.attempted_pairs
+        and not [
             result
             for result in session.recipes.get(A._pair_key(a, b), ())
             if result not in owned
-        ]:
-            return (a, b)
-    return None
+        ]
+    ]
 
 
 def _force_fruitless(client: Client, state: dict) -> dict:
-    """Drive a game into the "stuck" state by combining a barren owned pair.
+    """Drive a game into the "stuck" state with distinct barren owned pairs.
 
-    Picks a pair of owned concepts whose common-neighbour set is empty (via the service)
-    and combines it ``NUDGE_AFTER_FRUITLESS`` times so a hint becomes available. Uses the
-    seed inventory directly — no inventory mutation happens because the pair is barren.
+    Experiment memory prevents a retry from inflating the dry-spell counter, so every
+    accepted fruitless combine here represents a genuinely new experiment.
     """
     gid = state["game_id"]
     session = A.store.get(gid)
     assert session is not None
     ids = [i["id"] for i in state["inventory"]]
-    pair = _barren_owned_pair(session, ids)
-    assert pair is not None, "expected a barren owned pair to force fruitless combines"
-    a, b = pair
-    while not state["hint_available"]:
+    pairs = _barren_owned_pairs(session, ids)
+    assert len(pairs) >= A.NUDGE_AFTER_FRUITLESS, (
+        "expected enough distinct barren pairs to force fruitless combines"
+    )
+    for a, b in pairs:
+        if state["hint_available"]:
+            break
         state = client.post(
             f"{BASE}/games/{gid}/combine",
             {"a": a, "b": b},
             content_type="application/json",
         ).json()
         assert state["discovered"] == [], "barren pair unexpectedly discovered a concept"
+        assert state["already_tried"] is False
+    assert state["hint_available"] is True
     return state
 
 
-def test_repeated_empty_pair_is_accepted_charged_and_unlocks_hint(client: Client) -> None:
-    """The same barren pair remains valid and counts toward the three-try nudge."""
+def test_repeated_barren_pair_is_authoritative_free_and_resettable(
+    client: Client,
+) -> None:
+    """One unordered barren experiment costs once; reset intentionally forgets it."""
     state = _create(client, seed=7)
     gid = state["game_id"]
     inventory = state["inventory"]
     ids = [item["id"] for item in inventory]
     session = A.store.get(gid)
     assert session is not None
-    pair = _barren_owned_pair(session, ids)
-    assert pair is not None, "expected seed 7 to expose a barren owned pair"
+    pairs = _barren_owned_pairs(session, ids)
+    assert pairs, "expected seed 7 to expose a barren owned pair"
+    a, b = pairs[0]
+
+    first_res = client.post(
+        f"{BASE}/games/{gid}/combine",
+        {"a": a, "b": b},
+        content_type="application/json",
+    )
+    assert first_res.status_code == 200, first_res.content.decode()
+    first = first_res.json()
+    assert first["discovered"] == []
+    assert first["inventory"] == inventory
+    assert first["message"] == "Nicio combinatie noua."
+    assert first["already_tried"] is False
+    assert first["moves"] == first["attempted_count"] == 1
+    assert first["hint_available"] is False
+
+    score = session.score
+    fruitless = session.fruitless_streak
+    hints_used = session.hints_used
+    retry_res = client.post(
+        f"{BASE}/games/{gid}/combine",
+        {"a": b, "b": a},
+        content_type="application/json",
+    )
+    assert retry_res.status_code == 200, retry_res.content.decode()
+    retry = retry_res.json()
+    assert retry["discovered"] == []
+    assert retry["inventory"] == inventory
+    assert retry["message"] == "Deja încercată · fără cost. Schimbă un ingredient."
+    assert retry["already_tried"] is True
+    assert retry["moves"] == retry["attempted_count"] == 1
+    assert retry["hint_available"] is False
+    assert retry["hints_used"] == hints_used
+    assert session.fruitless_streak == fruitless
+    assert session.score == score
+
+    resumed = client.get(f"{BASE}/games/{gid}").json()
+    assert resumed["attempted_count"] == 1
+    assert "attempted_pairs" not in resumed
+
+    reset = client.post(f"{BASE}/games/{gid}/reset").json()
+    assert reset["moves"] == reset["attempted_count"] == 0
+    assert session.attempted_pairs == set()
+    after_reset = client.post(
+        f"{BASE}/games/{gid}/combine",
+        {"a": b, "b": a},
+        content_type="application/json",
+    ).json()
+    assert after_reset["already_tried"] is False
+    assert after_reset["moves"] == after_reset["attempted_count"] == 1
+
+
+def test_repeated_productive_pair_is_free_and_does_not_replay_discovery(
+    client: Client,
+) -> None:
+    """A formerly productive experiment is remembered after its output is owned."""
+    state = _create(client, seed=7)
+    gid = state["game_id"]
+    session = A.store.get(gid)
+    assert session is not None
+    pair = A._useful_pair(session)
+    assert pair is not None
     a, b = pair
 
-    for attempt in range(1, A.NUDGE_AFTER_FRUITLESS + 1):
-        res = client.post(
+    first = client.post(
+        f"{BASE}/games/{gid}/combine",
+        {"a": a, "b": b},
+        content_type="application/json",
+    ).json()
+    assert first["discovered"]
+    assert first["already_tried"] is False
+    assert first["attempted_count"] == first["moves"] == 1
+    snapshot = {
+        "inventory": first["inventory"],
+        "moves": first["moves"],
+        "attempted_count": first["attempted_count"],
+        "hints_used": first["hints_used"],
+        "hint_available": first["hint_available"],
+        "fruitless_streak": session.fruitless_streak,
+        "score": session.score,
+    }
+
+    retry = client.post(
+        f"{BASE}/games/{gid}/combine",
+        {"a": b, "b": a},
+        content_type="application/json",
+    ).json()
+    assert retry["discovered"] == []
+    assert retry["already_tried"] is True
+    assert retry["message"] == "Deja încercată · fără cost. Schimbă un ingredient."
+    for key in ("inventory", "moves", "attempted_count", "hints_used", "hint_available"):
+        assert retry[key] == snapshot[key]
+    assert session.fruitless_streak == snapshot["fruitless_streak"]
+    assert session.score == snapshot["score"]
+
+
+def test_attempt_memory_is_exactly_bounded_to_all_32_concept_pairs(
+    client: Client,
+) -> None:
+    """The private set has a structural 496-pair ceiling and leaks only its count."""
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    ids = list(get_service().all_ids())[:34]
+    assert len(ids) == 34
+    owned, extra, target = ids[:32], ids[32], ids[33]
+    session = A.AlchimieSession(seeds=owned, target=target, recipes={})
+    for node_id in owned:
+        session.add(node_id, None)
+    gid = A.store.create(session)
+    pairs = list(combinations(owned, 2))
+    assert len(pairs) == A.MAX_ATTEMPTED_PAIRS == 496
+
+    last: dict | None = None
+    for expected, (a, b) in enumerate(pairs, start=1):
+        response = client.post(
             f"{BASE}/games/{gid}/combine",
             {"a": a, "b": b},
             content_type="application/json",
         )
-        assert res.status_code == 200, res.content.decode()
-        body = res.json()
-        assert body["discovered"] == []
-        assert body["inventory"] == inventory
-        assert body["message"] == "Nicio combinatie noua."
-        assert body["moves"] == attempt
-        assert body["won"] is False
-        assert body["target"]["id"] is None
-        assert body["hint_available"] is (attempt == A.NUDGE_AFTER_FRUITLESS)
+        assert response.status_code == 200, response.content.decode()
+        last = response.json()
+        assert last["already_tried"] is False
+        assert last["attempted_count"] == expected
+
+    assert last is not None
+    assert last["moves"] == last["attempted_count"] == A.MAX_ATTEMPTED_PAIRS
+    assert len(session.attempted_pairs) == A.MAX_ATTEMPTED_PAIRS
+    assert not {"attempted_pairs", "experiments", "recipes", "routes"} & set(last)
+
+    # A malformed 33-concept session still fails closed instead of growing the set.
+    session.add(extra, None)
+    overflow = client.post(
+        f"{BASE}/games/{gid}/combine",
+        {"a": owned[0], "b": extra},
+        content_type="application/json",
+    )
+    assert overflow.status_code == 409
+    assert len(session.attempted_pairs) == A.MAX_ATTEMPTED_PAIRS
+    assert session.moves == A.MAX_ATTEMPTED_PAIRS
 
 
 def _projected_distance_to_target(gid: str, owned: set[str]) -> int | None:
@@ -534,7 +673,11 @@ def _seed_with_useful_and_barren(client: Client) -> dict:
         state = _create(client, seed=seed)
         ids = [i["id"] for i in state["inventory"]]
         session = _A.store.get(state["game_id"])
-        if session is None or _barren_owned_pair(session, ids) is None:
+        if (
+            session is None
+            or len(_barren_owned_pairs(session, ids))
+            < 2 * _A.NUDGE_AFTER_FRUITLESS
+        ):
             continue
         if _A._useful_pair(session) is not None:
             return state
@@ -618,6 +761,7 @@ def test_combine_after_win_is_readonly(client: Client) -> None:
     assert res["moves"] == moves_at_win
     assert res["score"] == score_at_win
     assert res["discovered"] == []
+    assert isinstance(res["already_tried"], bool)
 
 
 def test_hint_on_won_game_is_400(client: Client) -> None:
@@ -659,3 +803,4 @@ def test_reset_clears_hints_and_streak(client: Client) -> None:
     assert reset["hints_used"] == 0
     assert reset["hint_available"] is False
     assert reset["moves"] == 0
+    assert reset["attempted_count"] == 0

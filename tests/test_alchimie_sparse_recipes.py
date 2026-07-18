@@ -228,12 +228,14 @@ def test_inventory_views_are_additive_bounded_and_do_not_expose_recipes() -> Non
     assert set(body["inventory_summary"]) == {"active", "depleted", "total"}
     assert body["inventory_summary"]["total"] == len(body["inventory"])
     assert body["inventory_summary"]["active"] <= A.MAX_PROJECTED_CONCEPTS
+    assert body["attempted_count"] == 0
     assert body["recipe_summary"] == {
         "pairs": len(session.recipes),
         "routes": len(session.routes),
         "max_results": max(map(len, session.recipes.values())),
     }
     assert "recipes" not in body and "routes" not in body
+    assert "attempted_pairs" not in body
     for item in body["inventory"]:
         assert {"recent", "useful", "ready", "depleted"} <= set(item)
         assert item["depleted"] is (not item["useful"])
@@ -245,5 +247,7 @@ def test_inventory_views_are_additive_bounded_and_do_not_expose_recipes() -> Non
         {"a": pair[0], "b": pair[1]},
         content_type="application/json",
     ).json()
+    assert combined["already_tried"] is False
+    assert combined["attempted_count"] == 1
     assert 1 <= len(combined["discovered"]) <= A.MAX_RESULTS_PER_RECIPE
     assert combined["inventory_summary"]["total"] == len(combined["inventory"])
