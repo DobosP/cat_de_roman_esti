@@ -1,10 +1,10 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-19. This file is the repository's current source of truth._
-_Last verified: 2026-07-19 (V35 atomic regressions 20/20, all-four-game/mobile suite,
-Lanț bounded-path 51/51, session store 16/16, frontend 68/68, lint, and typecheck green;
-production build is 117.04/120 KiB with four font subsets. Final integrated gate pending.
-Live is V32 `f40fa8b`; V33–V35 are not pushed or deployed.)_
+_Last verified: 2026-07-19 (local V35: backend 438/438, required session store 16/16,
+frontend 68/68, static/mobile 11/11, Ruff, both validators, workflow syntax, lint,
+typecheck, whitespace, and artifact paths green; production build is 117.04/120 KiB with
+four font subsets. Live is V32 `f40fa8b`; V33–V35 are not pushed or deployed.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
