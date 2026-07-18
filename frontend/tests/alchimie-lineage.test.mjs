@@ -50,7 +50,7 @@ test("journal result controls only fill the bench and keep 44px targets", () => 
 test("accepted empty combines use one persistent feedback path", () => {
   assert.match(
     screen,
-    /let feedback = res\.message;[\s\S]*?feedback \+= " Perechea rămâne în alambic — schimbă un ingredient\.";[\s\S]*?feedback \+= " Apasă „Indiciu” dacă te-ai blocat\.";[\s\S]*?setLastMessage\(feedback\)/,
+    /let feedback = res\.message;[\s\S]*?recoverableEmpty && !res\.already_tried[\s\S]*?feedback \+= " Perechea rămâne în alambic — schimbă un ingredient\.";[\s\S]*?recoverableEmpty && res\.hint_available[\s\S]*?feedback \+= " Apasă „Indiciu” dacă te-ai blocat\.";[\s\S]*?setLastMessage\(feedback\)/,
   );
   const discovered = screen.indexOf("if (res.discovered.length > 0)");
   const empty = screen.indexOf("} else {", discovered);

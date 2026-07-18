@@ -32,7 +32,11 @@ test("only authoritative nonterminal empty responses retain the submitted pair",
   );
   assert.match(
     combine,
-    /Perechea rămâne în alambic — schimbă un ingredient\./,
+    /recoverableEmpty && !res\.already_tried[\s\S]*?Perechea rămâne în alambic — schimbă un ingredient\./,
+  );
+  assert.match(
+    combine,
+    /recoverableEmpty && res\.hint_available[\s\S]*?Apasă „Indiciu” dacă te-ai blocat\./,
   );
 
   const rejected = combine.slice(combine.indexOf("} catch (err)"));

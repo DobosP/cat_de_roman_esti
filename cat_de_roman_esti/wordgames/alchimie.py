@@ -75,6 +75,10 @@ MAX_ROUTE_CANDIDATES = 128
 MAX_RECIPE_PAIRS = 24
 MAX_RESULTS_PER_RECIPE = 2
 MAX_PROJECTED_CONCEPTS = 32
+# Every remembered experiment is one unordered pair of projected concepts.  Because a
+# session can own at most 32 projected concepts, the complete memory is structurally
+# bounded at C(32, 2) rather than relying on eviction that could make repeats costly again.
+MAX_ATTEMPTED_PAIRS = MAX_PROJECTED_CONCEPTS * (MAX_PROJECTED_CONCEPTS - 1) // 2
 RECENT_INVENTORY_LIMIT = 8
 PREFERRED_RECIPE_STRENGTH = 0.55
 
@@ -149,6 +153,9 @@ class AlchimieSession:
     # Private sparse recipe projection.  It is deliberately never serialized.
     recipes: dict[RecipePair, tuple[str, ...]] = field(default_factory=dict)
     routes: tuple[RecipeRoute, ...] = ()
+    # Private experiment memory.  Unordered ids are never serialized; clients receive
+    # only its bounded count and the verdict for the pair they just submitted.
+    attempted_pairs: set[RecipePair] = field(default_factory=set)
 
     @property
     def won(self) -> bool:
@@ -791,6 +798,7 @@ def _state_payload(game_id: str, session: AlchimieSession) -> dict[str, object]:
         "discovered_count": max(0, len(session.order) - len(session.seeds)),
         "seed_count": len(session.seeds),
         "moves": session.moves,
+        "attempted_count": len(session.attempted_pairs),
         "difficulty": session.difficulty,
         "target_depth": session.target_depth,
         "won": session.won,
@@ -911,26 +919,42 @@ class CombineView(ContractAPIView):
         body = parse_body(request, CombineBody)
         svc = get_service()
         session = _require(game_id)
+        a, b = (body.a or "").strip(), (body.b or "").strip()
 
         # A finished game is read-only: never count extra moves or mutate a won score.
         if session.won:
             payload = _state_payload(game_id, session)
             payload["discovered"] = []
+            payload["already_tried"] = (
+                bool(a and b and a != b) and _pair_key(a, b) in session.attempted_pairs
+            )
             payload["message"] = "Jocul s-a terminat — ai craftat deja tinta."
             return Response(payload)
 
-        a, b = (body.a or "").strip(), (body.b or "").strip()
         if a not in session.owned or b not in session.owned:
             raise http_error(400, "Ambele concepte trebuie sa fie in inventar.")
         if a == b:
             raise http_error(400, "Alege doua concepte diferite.")
 
+        pair = _pair_key(a, b)
+        if pair in session.attempted_pairs:
+            payload = _state_payload(game_id, session)
+            payload["discovered"] = []
+            payload["already_tried"] = True
+            payload["message"] = "Deja încercată · fără cost. Schimbă un ingredient."
+            return Response(payload)
+        # Defensive fail-closed guard.  Valid projected sessions can reach this exact
+        # size only after trying every possible pair, so a 497th distinct key would mean
+        # the 32-concept construction invariant was violated elsewhere.
+        if len(session.attempted_pairs) >= MAX_ATTEMPTED_PAIRS:
+            raise http_error(409, "Limita de experimente a jocului a fost atinsă.")
+        session.attempted_pairs.add(pair)
         session.moves += 1
         # The category graph was used only to build this private, target-useful recipe
         # book. Runtime never reopens the broad common-neighbour space.
         discovered = [
             c
-            for c in session.recipes.get(_pair_key(a, b), ())
+            for c in session.recipes.get(pair, ())
             if c not in session.owned
         ]
         for c in discovered:
@@ -956,6 +980,7 @@ class CombineView(ContractAPIView):
 
         payload = _state_payload(game_id, session)
         payload["discovered"] = [_concept(c) for c in discovered]
+        payload["already_tried"] = False
         payload["message"] = message
         return Response(payload)
 
@@ -1039,6 +1064,7 @@ class ResetGameView(ContractAPIView):
         session.moves = 0
         session.fruitless_streak = 0
         session.hints_used = 0
+        session.attempted_pairs.clear()
         for s in session.seeds:
             session.add(s, None)
         return Response(_state_payload(game_id, session))

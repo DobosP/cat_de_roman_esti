@@ -54,6 +54,8 @@ export interface AlchimieState {
   /** Only bounded counts are public; recipe ids/routes stay server-side. */
   recipe_summary: RecipeSummary;
   discovered_count: number;
+  /** Number of distinct unordered pairs tried in this bounded session. */
+  attempted_count: number;
   seed_count: number;
   moves: number;
   difficulty: Difficulty;
@@ -76,6 +78,8 @@ export interface AlchimieState {
 /** Returned by /combine — the base state plus what this combine produced. */
 export interface CombineResult extends AlchimieState {
   discovered: Concept[];
+  /** True when this unordered pair was already remembered and cost no move. */
+  already_tried: boolean;
   message: string;
 }
 

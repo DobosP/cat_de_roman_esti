@@ -1,7 +1,7 @@
 # ADR-0035: Retain empty Alchimie pairs for immediate correction
 
 Date: 2026-07-17
-Status: accepted
+Status: superseded-by ADR-0047
 
 ## Decision
 

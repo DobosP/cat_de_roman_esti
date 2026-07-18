@@ -1045,6 +1045,12 @@ input:focus-visible {
   cursor: pointer;
 }
 
+.alchemy-inventory-search {
+  width: min(100%, 280px);
+  min-height: 44px;
+  align-self: flex-end;
+}
+
 .alchemy-inventory-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
@@ -1242,6 +1248,11 @@ input:focus-visible {
 
   .alchemy-inventory-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .alchemy-inventory-search {
+    width: 100%;
+    align-self: stretch;
   }
 
   .word-hop-input {

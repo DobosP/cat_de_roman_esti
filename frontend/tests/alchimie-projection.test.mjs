@@ -22,6 +22,27 @@ test("inventory offers short recent/useful/all views from server metadata", () =
   assert.match(screen, /visibleInventory\.map/);
 });
 
+test("compact search opens the full accent-insensitive encyclopedia", () => {
+  assert.match(
+    screen,
+    /function normalizeInventorySearch[\s\S]*?normalize\("NFD"\)[\s\S]*?replace\(\/\\p\{M\}\/gu, ""\)[\s\S]*?toLocaleLowerCase\("ro-RO"\)/,
+  );
+  assert.match(screen, /type="search"/);
+  assert.match(screen, /placeholder="Caută în toate…"/);
+  assert.match(screen, /aria-label="Caută în toate conceptele descoperite"/);
+  assert.match(
+    screen,
+    /if \(normalizedInventoryQuery\) \{[\s\S]*?normalizeInventorySearch\(item\.label\)\.includes\(normalizedInventoryQuery\)[\s\S]*?if \(inventoryView === "all"\)/,
+  );
+  assert.match(screen, /event\.key === "Escape" && inventoryQuery/);
+  assert.match(screen, /Niciun concept găsit\./);
+  assert.match(css, /\.alchemy-inventory-search[\s\S]*?min-height: 44px/);
+  assert.match(
+    css,
+    /@media \(max-width: 640px\)[\s\S]*?\.alchemy-inventory-search[\s\S]*?width: 100%/,
+  );
+});
+
 test("depleted ingredients leave the active workspace but remain in all", () => {
   assert.match(
     screen,
@@ -36,7 +57,14 @@ test("ready markers explain their meaning without polluting accessible names", (
   assert.match(screen, /item\.ready[\s\S]*?gata pentru o combinație utilă/);
   assert.match(screen, /aria-label=\{accessibleLabel\}/);
   assert.match(screen, /<span aria-hidden="true">● <\/span>/);
+  assert.match(screen, /<span aria-hidden="true">●<\/span> pereche gata/);
   assert.match(screen, /item\.depleted[\s\S]*?\$\{item\.label\}, pus deoparte/);
+});
+
+test("combine contract exposes only bounded memory count and current retry verdict", () => {
+  assert.match(api, /attempted_count: number/);
+  assert.match(api, /already_tried: boolean/);
+  assert.doesNotMatch(api, /attempted_pairs|attempted_partner|recipe_ids/);
 });
 
 test("mobile inventory is a two-column 44px chip grid", () => {

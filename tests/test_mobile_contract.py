@@ -210,13 +210,15 @@ def test_alchimie_hides_target_id_until_win() -> None:
         assert body["target"]["label"]  # goal is still shown to the player
         assert secret not in _collect_ids(body)
         assert "recipes" not in body and "routes" not in body
+        assert body["attempted_count"] == 0
+        assert "attempted_pairs" not in _collect_keys(body)
         for item in body["inventory"]:
             assert {"recent", "useful", "ready", "depleted"} <= set(item)
 
     # Progressive hints expose no target id and no hidden route: the first response is
     # output/theme-only; only a later response may name one currently-owned pair.
     owned = [item["id"] for item in created["inventory"]]
-    barren = next(
+    barren_pairs = [
         pair
         for pair in combinations(sorted(owned), 2)
         if not [
@@ -224,18 +226,27 @@ def test_alchimie_hides_target_id_until_win() -> None:
             for output in session.recipes.get(_pair_key(*pair), ())
             if output not in owned
         ]
-    )
+    ]
+    assert len(barren_pairs) >= 2 * NUDGE_AFTER_FRUITLESS
     state = created
-    for expected_kind in ("output", "pair"):
-        for _ in range(NUDGE_AFTER_FRUITLESS):
+    attempted = 0
+    for hint_index, expected_kind in enumerate(("output", "pair")):
+        start = hint_index * NUDGE_AFTER_FRUITLESS
+        for barren in barren_pairs[start : start + NUDGE_AFTER_FRUITLESS]:
             state = _post_json(
                 c,
                 f"/api/wordgames/alchimie/games/{gid}/combine",
                 {"a": barren[0], "b": barren[1]},
             )
+            attempted += 1
+            assert state["already_tried"] is False
+            assert state["attempted_count"] == attempted
+            assert "attempted_pairs" not in _collect_keys(state)
         state = c.post(f"/api/wordgames/alchimie/games/{gid}/hint").json()
         assert secret not in _collect_ids(state)
         assert "recipes" not in state and "routes" not in state
+        assert state["attempted_count"] == attempted
+        assert "attempted_pairs" not in _collect_keys(state)
         if expected_kind == "output":
             assert state["hint_kind"] in {"output", "category"}
             assert state["hint"] is None
