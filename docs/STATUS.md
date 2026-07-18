@@ -1,25 +1,23 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-19. This file is the repository's current source of truth._
-_Last verified: 2026-07-19 (V35 integrated backend suite and frontend 67/67, lint,
-typecheck, and production build green at 117.04/120 KiB with four font subsets; final
-session-hardening gate pending. Live remains V32 `f40fa8b`; V33–V35 are not deployed.)_
+_Last verified: 2026-07-19 (V35 integrated suite, Lanț bounded-path 51/51, frontend
+68/68, lint, typecheck, and production build green at 117.04/120 KiB with four font
+subsets; final session-hardening gate pending. Live is V32 `f40fa8b`; V33–V35 are not deployed.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
-The critique layer now fails closed from generation through promotion:
-
 - `critique_pack.py` validates IDs, reuse, overuse, live degree, and game-specific judge criteria.
-- Version-2 artifacts bind the exact batch, dossiers, and rubric; apply rebuilds and reruns
-  them before writing, while re-review restores both copies on any red or exception.
+- Version-2 artifacts bind the batch, dossiers, and rubric; apply rebuilds and reruns them
+  before writing, while re-review restores both copies on any red or exception.
 - Imports enter `pending`; persistent per-game high-water marks prevent retired ID reuse.
 
 ## Current outcome — browser recovery (ADR-0027 through ADR-0029, ADR-0034, ADR-0047)
 
-Lanț exposes private-corridor choices plus safe detours as ID-free label/relation chips;
-visible homonyms bind exactly and every direct hop stays legal. Easy hops add only a coarse
-direction; after two non-improving moves, one boolean emphasizes free undo. Hints remain
-staged and route-private; score, undo, secrecy, TTL, and caps are unchanged (ADR-0043/0046).
+Lanț exposes ID-free corridor/detour choices; homonyms bind exactly and direct hops stay legal.
+Easy hops add coarse direction and recommend free undo after two non-improving moves. A chain
+retains at most 64 moves / 65 earned nodes; the cap offers undo, and a 64th-hop win scores
+normally. Hints and routes stay private; TTL/store caps are unchanged (ADR-0043/0046/0050).
 Alchimie remembers at most 496 unordered experiments; retries are free and inert, reset clears
 them, and only their count is public. Score, secrecy, TTL, and session cap remain unchanged.
 
@@ -31,14 +29,12 @@ dots, and authoritative conflict refresh in one sticky channel with one live own
 
 ## Current outcome — V35 guided word space and comparison (ADR-0042 through ADR-0045)
 
-Cald sau Rece accepts **444 everyday guesses across 26 domains** through 89 reviewed anchors
-without changing graph/pack bytes or creating projection wins.
-Clues progress from category to one strictly warmer familiar word; themed boards skip category.
-Distinct guesses keep stable numbers and one comparison from public ranks; repeats stay free.
-`Bune`/`Recente`, 44 px actions, clue countdown, guarded reveal, and terminal cleanup stay local.
-Alchimie projects 1–4 target-useful routes into at most 24 private pairs / 32 concepts.
-Runtime normally returns one result; exact par remains unchanged. Mined boards prefer two live
-openings; useful/recent/all views retire depleted items and hints progress from output to pair.
+Cald sau Rece accepts **444 screened everyday guesses across 26 domains** through 89 KG
+anchors without projection wins. Clues progress to one warmer familiar word. Distinct guesses
+keep stable numbers and one public-rank comparison; repeats stay free. Browser `Bune`/`Recente`
+views, sticky 44 px actions, guarded reveal, and terminal cleanup do not change targets/scoring.
+Alchimie projects 1–4 target-useful routes into at most 24 private recipe pairs / 32 concepts.
+Runtime normally returns one result and exact par holds; views retire depleted items and hints progress to a pair.
 
 ## Current outcome — beginner vocabulary waves (ADR-0030, ADR-0032, ADR-0033, ADR-0036 through ADR-0041)
 
@@ -71,12 +67,11 @@ Both fixture copies and both pack copies are byte-identical and validator-green.
 
 ## Runtime contracts and safety
 
-- Sessions use a validated two-hour sliding TTL and 1,000-entry LRU cap per game; cleanup
-  is lazy, lock-protected, monotonic, and deterministic.
+- Sessions keep a validated 7,200-second sliding TTL and 1,000-entry LRU cap; cleanup stays
+  lazy, lock-protected, monotonic, and deterministic. Lanț caps paths at 64 moves / 65 nodes.
 - Request bodies default to a 64 KiB Caddy plus ASGI receive ceiling.
-- Hidden-answer boundaries remain pinned: Contexto hides its target until terminal;
-  Alchimie hides target ID; Lanț reveals played/hinted hops; Conexiuni withholds unsolved
-  membership and the full solution until terminal.
+- Hidden answers stay pinned: Contexto hides its target; Alchimie hides target ID; Lanț
+  reveals earned/hinted hops; Conexiuni hides unsolved membership/full solution until terminal.
 - Curated submissions are opt-in through `CAT_SUBMISSIONS_DIR`; only approved records
   are served. Import candidates remain pending until the critique gate promotes them.
 - Mobile fixture/OpenAPI contracts and curated-first seeded selection remain test-pinned.

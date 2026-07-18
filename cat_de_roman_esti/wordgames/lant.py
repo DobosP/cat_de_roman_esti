@@ -77,6 +77,12 @@ _BEGINNER_PREFERRED_POOL = 3
 _MAX_VISIBLE_CHOICES = 6
 _CORRIDOR_CHOICE_QUOTA = 3
 
+# Every accepted hop is retained and echoed as earned path history. Sixty-four moves
+# leave more than ten times the hardest six-hop par for exploration while bounding a
+# session chain at 65 node ids and every full-state path at 65 steps.
+_MAX_MOVES = 64
+_MOVE_LIMIT_MESSAGE = "Limită atinsă — folosește Înapoi."
+
 # Broad generic nodes remain legal but lose guidance rank above the fixture's approximate
 # 95th-percentile live degree.
 _HUB_SOFT_DEGREE = 20
@@ -363,7 +369,7 @@ def _choice_payload(current: str, node_id: str) -> dict[str, str]:
 
 def _visible_choice_nodes(session: LantSession) -> list[str]:
     """Return the private node ids backing the current ID-free choice menu."""
-    if session.won:
+    if session.won or session.moves >= _MAX_MOVES:
         return []
     svc = get_service()
     cur = session.current
@@ -735,6 +741,8 @@ class MoveView(ContractAPIView):
             raise http_error(404, "Joc inexistent")
         if session.won:
             return Response({"ok": True, **_state(game_id, session)})
+        if session.moves >= _MAX_MOVES:
+            return Response({"ok": False, "last_error": _MOVE_LIMIT_MESSAGE})
 
         svc = get_service()
         if not body.text or not body.text.strip():
@@ -880,6 +888,14 @@ class HintView(ContractAPIView):
             raise http_error(404, "Joc inexistent")
         if session.won:
             return Response({"hint": None, "message": "Ai ajuns deja la tinta."})
+        if session.moves >= _MAX_MOVES:
+            return Response(
+                {
+                    "hint": None,
+                    "stage": "backtrack",
+                    "message": _MOVE_LIMIT_MESSAGE,
+                }
+            )
 
         svc = get_service()
         cur = session.current
