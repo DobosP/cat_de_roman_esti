@@ -655,6 +655,129 @@ def test_move_on_won_game_is_idempotent():
     assert after["moves"] == body["moves"]
 
 
+def _bounded_cycle_service():
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    nodes = [
+        {"id": node_id, "label_ro": node_id.upper(), "category": "test"}
+        for node_id in ("a", "b", "target")
+    ]
+    edges = [
+        {
+            "id": "e_cycle",
+            "src_id": "a",
+            "dst_id": "b",
+            "bidirectional": 1,
+            "label_ro": "ciclu",
+        },
+        {"id": "e_a_target", "src_id": "a", "dst_id": "target"},
+        {"id": "e_b_target", "src_id": "b", "dst_id": "target"},
+    ]
+    return WordGameService(Graph.from_records(nodes, edges))
+
+
+def test_two_node_revisit_cycle_caps_then_undo_reopens_play(monkeypatch):
+    svc = _bounded_cycle_service()
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+    session = LantSession(
+        start="a",
+        target="target",
+        optimal=1,
+        difficulty="normal",
+        chain=["a"],
+    )
+    gid = store.create(session)
+
+    last_response = None
+    for move_number in range(1, lant._MAX_MOVES + 1):
+        next_label = "B" if move_number % 2 else "A"
+        last_response = c.post(
+            f"/api/wordgames/lant/games/{gid}/move",
+            {"text": next_label},
+            content_type="application/json",
+        )
+        body = last_response.json()
+        assert body["ok"] is True
+        assert body["won"] is False
+        assert body["moves"] == move_number
+        assert len(body["path"]) == move_number + 1
+
+    assert last_response is not None
+    assert len(session.chain) == lant._MAX_MOVES + 1
+    assert last_response.json()["choices"] == []
+    assert len(last_response.content) <= 16 * 1024
+
+    blocked = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": "B"},
+        content_type="application/json",
+    )
+    assert blocked.json() == {
+        "ok": False,
+        "last_error": lant._MOVE_LIMIT_MESSAGE,
+    }
+    assert len(session.chain) == lant._MAX_MOVES + 1
+
+    capped_hint = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    assert capped_hint == {
+        "hint": None,
+        "stage": "backtrack",
+        "message": lant._MOVE_LIMIT_MESSAGE,
+    }
+    assert session.hint_requests == 0
+
+    undone = c.post(f"/api/wordgames/lant/games/{gid}/undo").json()
+    assert undone["moves"] == lant._MAX_MOVES - 1
+    assert len(undone["path"]) == lant._MAX_MOVES
+
+    retried = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": "A"},
+        content_type="application/json",
+    ).json()
+    assert retried["ok"] is True
+    assert retried["moves"] == lant._MAX_MOVES
+    assert retried["choices"] == []
+
+    c.post(f"/api/wordgames/lant/games/{gid}/undo")
+    won = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": "TARGET"},
+        content_type="application/json",
+    ).json()
+    assert won["won"] is True
+    assert won["moves"] == lant._MAX_MOVES
+    assert won["score"] == lant._score_for(lant._MAX_MOVES, session.optimal)
+    assert f"{lant._MAX_MOVES}/{session.optimal} mutari" in won["share"]
+
+
+def test_move_cap_bounds_full_state_and_repeated_rejections(monkeypatch):
+    svc = _bounded_cycle_service()
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+    chain = ["a" if index % 2 == 0 else "b" for index in range(lant._MAX_MOVES + 1)]
+    session = LantSession(start="a", target="target", optimal=1, chain=chain)
+    gid = store.create(session)
+
+    fetched = c.get(f"/api/wordgames/lant/games/{gid}")
+    state = fetched.json()
+    assert state["moves"] == lant._MAX_MOVES
+    assert len(state["path"]) == lant._MAX_MOVES + 1
+    assert state["choices"] == []
+    assert {step["id"] for step in state["path"]} == {"a", "b"}
+    assert len(fetched.content) <= 16 * 1024
+
+    for _ in range(20):
+        blocked = c.post(
+            f"/api/wordgames/lant/games/{gid}/move",
+            {"text": "B"},
+            content_type="application/json",
+        )
+        assert set(blocked.json()) == {"ok", "last_error"}
+        assert len(blocked.content) <= 256
+    assert len(session.chain) == lant._MAX_MOVES + 1
+
+
 def test_label_collision_disambiguates_to_a_linked_node():
     """Two nodes share the label 'Moldova'; resolve() picks one, but a move should accept
     whichever same-label node is actually linked to the current concept.
