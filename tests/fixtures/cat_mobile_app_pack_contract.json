@@ -4,12 +4,12 @@
     "app": "cat_de_roman_esti",
     "schema_version": 1,
     "manifest_version": 1,
-    "build_version": "fixture-v30-farm-wardrobe-kitchen",
+    "build_version": "fixture-v31-hygiene-lower-limb-cleaning",
     "generated_at": "2026-06-21T00:00:00Z",
-    "content_hash": "sha256:dc128c127b1288421935f53fdfb746590a40bc85b4774ce7ab81901e18e8fa31",
+    "content_hash": "sha256:517d4f3bef48e625436ef3363dedb22ebdc2d3aca31b715e1e3381726c39579c",
     "counts": {
-      "nodes": 2234,
-      "edges": 8963,
+      "nodes": 2251,
+      "edges": 9014,
       "puzzles": 180
     }
   },
@@ -6921,6 +6921,74 @@
     {
       "id": "n_v30_kitchen_utensil_lingura",
       "label_ro": "Lingură"
+    },
+    {
+      "id": "n_v31_body_lower_calcai",
+      "label_ro": "Călcâi"
+    },
+    {
+      "id": "n_v31_body_lower_coapsa",
+      "label_ro": "Coapsă"
+    },
+    {
+      "id": "n_v31_body_lower_gamba",
+      "label_ro": "Gambă"
+    },
+    {
+      "id": "n_v31_body_lower_genunchi",
+      "label_ro": "Genunchi"
+    },
+    {
+      "id": "n_v31_body_lower_glezna",
+      "label_ro": "Gleznă"
+    },
+    {
+      "id": "n_v31_cleaning_dishes_burete_vase",
+      "label_ro": "Burete de vase"
+    },
+    {
+      "id": "n_v31_cleaning_floor_aspirator",
+      "label_ro": "Aspirator"
+    },
+    {
+      "id": "n_v31_cleaning_floor_faras",
+      "label_ro": "Făraș"
+    },
+    {
+      "id": "n_v31_cleaning_floor_mop",
+      "label_ro": "Mop"
+    },
+    {
+      "id": "n_v31_cleaning_supply_detergent",
+      "label_ro": "Detergent"
+    },
+    {
+      "id": "n_v31_cleaning_water_galeata",
+      "label_ro": "Găleată"
+    },
+    {
+      "id": "n_v31_hygiene_bath_prosop",
+      "label_ro": "Prosop"
+    },
+    {
+      "id": "n_v31_hygiene_bath_sapun",
+      "label_ro": "Săpun"
+    },
+    {
+      "id": "n_v31_hygiene_hair_pieptene",
+      "label_ro": "Pieptene"
+    },
+    {
+      "id": "n_v31_hygiene_hair_sampon",
+      "label_ro": "Șampon"
+    },
+    {
+      "id": "n_v31_hygiene_oral_pasta_dinti",
+      "label_ro": "Pastă de dinți"
+    },
+    {
+      "id": "n_v31_hygiene_oral_periuta_dinti",
+      "label_ro": "Periuță de dinți"
     },
     {
       "id": "n_v3art_arta",
@@ -52063,6 +52131,11 @@
       "dst_id": "n_v30_kitchen_table_castron"
     },
     {
+      "id": "de8299",
+      "src_id": "n_v31_hygiene_bath_sapun",
+      "dst_id": "n_v31_hygiene_bath_prosop"
+    },
+    {
       "id": "de83",
       "src_id": "n_etnogeneza_romaneasca",
       "dst_id": "n_geto_daci"
@@ -52073,9 +52146,109 @@
       "dst_id": "n_net_teo_vio_costel"
     },
     {
+      "id": "de8300",
+      "src_id": "n_v31_hygiene_bath_sapun",
+      "dst_id": "n_v31_hygiene_hair_sampon"
+    },
+    {
+      "id": "de8301",
+      "src_id": "n_v31_hygiene_bath_prosop",
+      "dst_id": "n_v31_hygiene_oral_pasta_dinti"
+    },
+    {
+      "id": "de8302",
+      "src_id": "n_v31_hygiene_bath_prosop",
+      "dst_id": "n_v31_hygiene_hair_sampon"
+    },
+    {
+      "id": "de8303",
+      "src_id": "n_v31_hygiene_hair_sampon",
+      "dst_id": "n_v31_hygiene_hair_pieptene"
+    },
+    {
+      "id": "de8304",
+      "src_id": "n_v31_hygiene_hair_sampon",
+      "dst_id": "n_v31_hygiene_bath_prosop"
+    },
+    {
+      "id": "de8305",
+      "src_id": "n_v31_hygiene_hair_pieptene",
+      "dst_id": "n_v31_hygiene_bath_prosop"
+    },
+    {
+      "id": "de8306",
+      "src_id": "n_v31_hygiene_hair_pieptene",
+      "dst_id": "n_v31_hygiene_oral_periuta_dinti"
+    },
+    {
+      "id": "de8307",
+      "src_id": "n_v31_hygiene_oral_periuta_dinti",
+      "dst_id": "n_v31_hygiene_oral_pasta_dinti"
+    },
+    {
+      "id": "de8308",
+      "src_id": "n_v31_hygiene_oral_periuta_dinti",
+      "dst_id": "n_v31_hygiene_bath_sapun"
+    },
+    {
+      "id": "de8309",
+      "src_id": "n_v31_hygiene_oral_pasta_dinti",
+      "dst_id": "n_v31_hygiene_oral_periuta_dinti"
+    },
+    {
       "id": "de831",
       "src_id": "n_net_micutzu",
       "dst_id": "n_net_podcast_ro"
+    },
+    {
+      "id": "de8310",
+      "src_id": "n_v31_hygiene_oral_pasta_dinti",
+      "dst_id": "n_v31_hygiene_bath_sapun"
+    },
+    {
+      "id": "de8311",
+      "src_id": "n_v4via_baie",
+      "dst_id": "n_v31_hygiene_bath_prosop"
+    },
+    {
+      "id": "de8312",
+      "src_id": "n_v4via_baie",
+      "dst_id": "n_v31_hygiene_bath_sapun"
+    },
+    {
+      "id": "de8313",
+      "src_id": "n_v4via_baie",
+      "dst_id": "n_v31_hygiene_hair_sampon"
+    },
+    {
+      "id": "de8314",
+      "src_id": "n_v24_body_face_cap",
+      "dst_id": "n_v31_hygiene_hair_pieptene"
+    },
+    {
+      "id": "de8315",
+      "src_id": "n_v28_body_mouth_dinte",
+      "dst_id": "n_v31_hygiene_oral_periuta_dinti"
+    },
+    {
+      "id": "de8316",
+      "src_id": "n_v28_body_mouth_dinte",
+      "dst_id": "n_v31_hygiene_oral_pasta_dinti"
+    },
+    {
+      "id": "de8317",
+      "src_id": "n_v31_body_lower_coapsa",
+      "dst_id": "n_v31_body_lower_genunchi"
+    },
+    {
+      "id": "de8318",
+      "src_id": "n_v31_body_lower_coapsa",
+      "dst_id": "n_v31_body_lower_gamba"
+    },
+    {
+      "id": "de8319",
+      "src_id": "n_v31_body_lower_genunchi",
+      "dst_id": "n_v31_body_lower_gamba"
     },
     {
       "id": "de832",
@@ -52083,14 +52256,164 @@
       "dst_id": "n_net_umor_autoironic"
     },
     {
+      "id": "de8320",
+      "src_id": "n_v31_body_lower_genunchi",
+      "dst_id": "n_v31_body_lower_glezna"
+    },
+    {
+      "id": "de8321",
+      "src_id": "n_v31_body_lower_gamba",
+      "dst_id": "n_v31_body_lower_glezna"
+    },
+    {
+      "id": "de8322",
+      "src_id": "n_v31_body_lower_gamba",
+      "dst_id": "n_v31_body_lower_calcai"
+    },
+    {
+      "id": "de8323",
+      "src_id": "n_v31_body_lower_glezna",
+      "dst_id": "n_v31_body_lower_calcai"
+    },
+    {
+      "id": "de8324",
+      "src_id": "n_v31_body_lower_glezna",
+      "dst_id": "n_v31_body_lower_coapsa"
+    },
+    {
+      "id": "de8325",
+      "src_id": "n_v31_body_lower_calcai",
+      "dst_id": "n_v31_body_lower_coapsa"
+    },
+    {
+      "id": "de8326",
+      "src_id": "n_v31_body_lower_calcai",
+      "dst_id": "n_v31_body_lower_genunchi"
+    },
+    {
+      "id": "de8327",
+      "src_id": "n_v24_body_limbs_picior",
+      "dst_id": "n_v31_body_lower_genunchi"
+    },
+    {
+      "id": "de8328",
+      "src_id": "n_v4sti_corp",
+      "dst_id": "n_v31_body_lower_coapsa"
+    },
+    {
+      "id": "de8329",
+      "src_id": "n_v4sti_corp",
+      "dst_id": "n_v31_body_lower_gamba"
+    },
+    {
       "id": "de833",
       "src_id": "n_net_micutzu",
       "dst_id": "n_net_sketch_online"
     },
     {
+      "id": "de8330",
+      "src_id": "n_v24_body_limbs_picior",
+      "dst_id": "n_v31_body_lower_glezna"
+    },
+    {
+      "id": "de8331",
+      "src_id": "n_v24_body_limbs_picior",
+      "dst_id": "n_v31_body_lower_calcai"
+    },
+    {
+      "id": "de8332",
+      "src_id": "n_v31_cleaning_water_galeata",
+      "dst_id": "n_v31_cleaning_floor_mop"
+    },
+    {
+      "id": "de8333",
+      "src_id": "n_v31_cleaning_floor_mop",
+      "dst_id": "n_v31_cleaning_water_galeata"
+    },
+    {
+      "id": "de8334",
+      "src_id": "n_v31_cleaning_supply_detergent",
+      "dst_id": "n_v31_cleaning_dishes_burete_vase"
+    },
+    {
+      "id": "de8335",
+      "src_id": "n_v31_cleaning_dishes_burete_vase",
+      "dst_id": "n_v31_cleaning_supply_detergent"
+    },
+    {
+      "id": "de8336",
+      "src_id": "n_v31_cleaning_water_galeata",
+      "dst_id": "n_v31_cleaning_supply_detergent"
+    },
+    {
+      "id": "de8337",
+      "src_id": "n_v31_cleaning_dishes_burete_vase",
+      "dst_id": "n_v31_cleaning_water_galeata"
+    },
+    {
+      "id": "de8338",
+      "src_id": "n_v31_cleaning_supply_detergent",
+      "dst_id": "n_v31_cleaning_floor_mop"
+    },
+    {
+      "id": "de8339",
+      "src_id": "n_v31_cleaning_floor_mop",
+      "dst_id": "n_v31_cleaning_floor_aspirator"
+    },
+    {
       "id": "de834",
       "src_id": "n_net_micutzu",
       "dst_id": "n_bucuresti"
+    },
+    {
+      "id": "de8340",
+      "src_id": "n_v31_cleaning_floor_aspirator",
+      "dst_id": "n_v31_cleaning_floor_faras"
+    },
+    {
+      "id": "de8341",
+      "src_id": "n_v31_cleaning_floor_aspirator",
+      "dst_id": "n_v31_cleaning_dishes_burete_vase"
+    },
+    {
+      "id": "de8342",
+      "src_id": "n_v31_cleaning_floor_faras",
+      "dst_id": "n_v31_cleaning_floor_mop"
+    },
+    {
+      "id": "de8343",
+      "src_id": "n_v31_cleaning_floor_faras",
+      "dst_id": "n_v31_cleaning_dishes_burete_vase"
+    },
+    {
+      "id": "de8344",
+      "src_id": "n_v4gas_apa",
+      "dst_id": "n_v31_cleaning_water_galeata"
+    },
+    {
+      "id": "de8345",
+      "src_id": "n_v24_home_surfaces_podea",
+      "dst_id": "n_v31_cleaning_floor_mop"
+    },
+    {
+      "id": "de8346",
+      "src_id": "n_v24_action_home_a_spala",
+      "dst_id": "n_v31_cleaning_supply_detergent"
+    },
+    {
+      "id": "de8347",
+      "src_id": "n_v24_home_surfaces_podea",
+      "dst_id": "n_v31_cleaning_floor_aspirator"
+    },
+    {
+      "id": "de8348",
+      "src_id": "n_v24_home_surfaces_podea",
+      "dst_id": "n_v31_cleaning_floor_faras"
+    },
+    {
+      "id": "de8349",
+      "src_id": "n_v24_action_home_a_spala",
+      "dst_id": "n_v31_cleaning_dishes_burete_vase"
     },
     {
       "id": "de835",
@@ -54755,25 +55078,25 @@
     },
     {
       "id": "pz_stiinta_hard_3",
-      "start_id": "n_v24_body_face_cap",
-      "target_id": "n_v2sti_stiinta",
+      "start_id": "n_v2sti_fizica",
+      "target_id": "n_v31_body_lower_genunchi",
       "difficulty": "hard"
     },
     {
       "id": "pz_stiinta_hard_4",
-      "start_id": "n_v24_body_face_nas",
+      "start_id": "n_v24_body_face_cap",
       "target_id": "n_v2sti_stiinta",
       "difficulty": "hard"
     },
     {
       "id": "pz_stiinta_hard_5",
-      "start_id": "n_v24_body_face_cap",
-      "target_id": "n_v2sti_fizica",
+      "start_id": "n_v24_body_face_nas",
+      "target_id": "n_v2sti_stiinta",
       "difficulty": "hard"
     },
     {
       "id": "pz_stiinta_hard_6",
-      "start_id": "n_v24_body_face_gura",
+      "start_id": "n_v24_body_face_cap",
       "target_id": "n_v2sti_fizica",
       "difficulty": "hard"
     },
@@ -54839,14 +55162,14 @@
     },
     {
       "id": "pz_viata_de_roman_hard_5",
-      "start_id": "n_v29_routine_shopping_cumparaturi",
-      "target_id": "n_vdr_lasa_ca_merge",
+      "start_id": "n_v29_clothing_everyday_haina",
+      "target_id": "n_v31_cleaning_floor_aspirator",
       "difficulty": "hard"
     },
     {
       "id": "pz_viata_de_roman_hard_6",
-      "start_id": "n_v2via_sarbatori_familie",
-      "target_id": "n_vdr_bloc",
+      "start_id": "n_v29_routine_shopping_cumparaturi",
+      "target_id": "n_vdr_lasa_ca_merge",
       "difficulty": "hard"
     }
   ]

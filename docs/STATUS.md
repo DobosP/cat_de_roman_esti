@@ -1,7 +1,7 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-18. This file is the repository's current source of truth._
-_Last verified: 2026-07-18 (local v30 gate: backend 369; v25/v28/v29/v30 30, v24/app-pack/data/session 46; exact critique 33/33 and full pending report byte-identical; Ruff, both validators, workflow syntax, whitespace; mobile importer 4 and full verify 227/26. Production remains release `2746be3`, smoke-verified 2026-07-16.)_
+_Last verified: 2026-07-18 (local v31 gate: backend 376; v25/v28/v29/v30/v31 37 and session 11; exact critique 33/33 and full pending report byte-identical; Ruff, both validators, workflow syntax, whitespace; mobile importer 4 and full verify 227/26. Production remains release `2746be3`, smoke-verified 2026-07-16.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -30,7 +30,7 @@ one live `ACUM` cue instead of repeating rules. Mobile gets 44 px targets, scrol
 status/theme rails, readable long labels, reachable primary actions, visible rank meaning,
 and safe keyboard shortcuts; desktop retains the same focused play column.
 
-## Current outcome — beginner vocabulary waves (ADR-0030, ADR-0032, ADR-0033, ADR-0036, ADR-0037)
+## Current outcome — beginner vocabulary waves (ADR-0030, ADR-0032, ADR-0033, ADR-0036 through ADR-0039)
 
 V23 retains 22 childhood/story nodes, 78 owned edges, and seven pending items. V24 adds
 **150 everyday nodes, 511 edges, 276 aliases, and 26 pending items**; V25 adds **168
@@ -38,7 +38,8 @@ collision-safe aliases and 25 concrete semantic links**. V28 completes the eligi
 beginner benchmark with **15 concepts, 44 safe inflections, and 53 explicit links**,
 reaching **234/234**. V29 adds **17 concepts, 66 inflections, and 64 links**. V30 adds
 **18 farm, clothing, and kitchen concepts, 60 inflections, and 54 links** in three
-inbound-reachable one-way meshes; combined eligible probes resolve **269/269**. All 33
+inbound-reachable one-way meshes. V31 adds **17 hygiene, lower-limb, and cleaning
+concepts, 61 inflections, and 51 links**; combined eligible probes resolve **286/286**. All 33
 affected pending dossiers stay clean, the full pending critique report is byte-identical,
 and all 794 curated records remain unchanged; no new board is served before bound review.
 
@@ -61,7 +62,7 @@ client-authored and visibility needs opt-in by default.
 | Alchimie | 98 | 77 | 21 | curated first; category closure fallback |
 
 Pack: **794 items = 572 approved + 222 pending**, across 14 categories.
-Bundled KG: **2,234 nodes / 8,963 edges / 7,203 aliases / 180 legacy puzzles**.
+Bundled KG: **2,251 nodes / 9,014 edges / 7,264 aliases / 180 legacy puzzles**.
 Both fixture copies and both pack copies are byte-identical and validator-green.
 
 ## Runtime contracts and safety
@@ -94,6 +95,6 @@ session-store target remains `tests/test_wordgames_session_store.py` (11 tests).
 - Playtest the beginner UI, Alchimie journal/empty-pair swap, and Lanț recovery at 320–390 px; measure
   first action, invalid moves, hint reuse, undo, completion, and abandonment.
 - Complete adversarial review over the exact 33 v23/v24 pending IDs; inspect Contexto
-  ordering after v30, route meaning, Conexiuni predicates, and Alchimie recipe intuition.
+  ordering after v31, route meaning, Conexiuni predicates, and Alchimie recipe intuition.
 - Work the approved-stock critique/A7 queues; generic regional KG edges remain cleanup inventory, while owner demotions stay explicit proposals.
 - Make ranking scores server-authored, bound retained score history, and default ranking visibility off before enabling public accounts.

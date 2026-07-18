@@ -1,4 +1,4 @@
-"""Regression guards for the bounded v30 beginner-word wave."""
+"""Regression guards for the bounded v31 beginner-word wave."""
 
 from __future__ import annotations
 
@@ -12,6 +12,11 @@ from collections import Counter
 from pathlib import Path
 
 from cat_de_roman_esti.data import load_fixture, mobile_app_pack_snapshot
+from cat_de_roman_esti.wordgames.contexto import (
+    MIN_REACHABLE,
+    MIN_RESPONSIVE,
+    RESPONSIVE_MAX_HOPS,
+)
 from cat_de_roman_esti.wordgames.service import WordGameService, normalize
 
 _ROOT = Path(__file__).resolve().parent.parent
@@ -20,14 +25,14 @@ _TEST_KG = _ROOT / "tests/fixtures/kg_sample.json"
 _PACKAGE_PACK = _ROOT / "cat_de_roman_esti/fixtures/games_pack.json"
 _TEST_PACK = _ROOT / "tests/fixtures/games_pack.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
-_EXPECTED_EDGE_COUNT = 54
+_EXPECTED_EDGE_COUNT = 51
 
 
 def _load_data_module():
     scripts = _ROOT / "scripts"
     sys.path.insert(0, str(scripts))
-    path = scripts / "basic_words_v30_data.py"
-    spec = importlib.util.spec_from_file_location("basic_words_v30_data", path)
+    path = scripts / "basic_words_v31_data.py"
+    spec = importlib.util.spec_from_file_location("basic_words_v31_data", path)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     sys.modules[spec.name] = module
@@ -36,7 +41,7 @@ def _load_data_module():
 
 
 DATA = _load_data_module()
-import basic_words_v29_data as V29_DATA  # noqa: E402
+import basic_words_v30_data as V30_DATA  # noqa: E402
 
 
 def _fixture() -> dict:
@@ -52,7 +57,7 @@ def _accentless(surface: str) -> str:
     return "".join(char for char in decomposed if not unicodedata.combining(char))
 
 
-def test_v30_source_inventory_floor_and_mirrors_survive_additive_waves():
+def test_v31_exact_source_inventory_build_and_mirrors():
     fixture = _fixture()
     alias_count = sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"])
     surfaces = [
@@ -60,25 +65,23 @@ def test_v30_source_inventory_floor_and_mirrors_survive_additive_waves():
         for concept in DATA.CONCEPTS
         for surface in (concept.label, *concept.aliases)
     ]
-    edge_keys = {
-        (edge.source, edge.target, edge.relation) for edge in DATA.SEMANTIC_EDGES
-    }
+    edge_keys = {(edge.source, edge.target, edge.relation) for edge in DATA.SEMANTIC_EDGES}
 
-    assert DATA.BUILD_VERSION == "fixture-v30-farm-wardrobe-kitchen"
-    assert len(DATA.CONCEPTS) == len(DATA.NEW_NODE_IDS) == 18
-    assert len(DATA.V30_BEGINNER_EXTENSION) == 18
-    assert sum(len(concept.aliases) for concept in DATA.CONCEPTS) == 60
+    assert DATA.BUILD_VERSION == "fixture-v31-hygiene-lower-limb-cleaning"
+    assert len(DATA.CONCEPTS) == len(DATA.NEW_NODE_IDS) == 17
+    assert len(DATA.V31_BEGINNER_EXTENSION) == 17
+    assert sum(len(concept.aliases) for concept in DATA.CONCEPTS) == 61
     assert len(surfaces) == len(set(surfaces)) == 78
     assert len(DATA.SEMANTIC_EDGES) == len(edge_keys) == _EXPECTED_EDGE_COUNT
-    assert len(fixture["kg_nodes"]) >= 2234
-    assert len(fixture["kg_edges"]) >= 8963
+    assert fixture["meta"]["build_version"] == DATA.BUILD_VERSION
+    assert (len(fixture["kg_nodes"]), len(fixture["kg_edges"])) == (2251, 9014)
     assert len(fixture["kg_puzzles"]) == 180
-    assert alias_count >= 7203
+    assert alias_count == 7264
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert _PACKAGE_PACK.read_bytes() == _TEST_PACK.read_bytes()
 
 
-def test_v30_all_canonicals_and_aliases_have_one_exact_owner():
+def test_v31_all_canonicals_and_aliases_have_one_exact_owner():
     fixture = _fixture()
     by_id = {node["id"]: node for node in fixture["kg_nodes"]}
     svc = _service()
@@ -91,7 +94,7 @@ def test_v30_all_canonicals_and_aliases_have_one_exact_owner():
         assert committed["category"] == concept.category
         assert committed["description"] == concept.description
         assert math.isclose(float(committed["salience"]), concept.salience)
-        assert set(concept.aliases) <= set(committed.get("aliases", ()))
+        assert tuple(committed.get("aliases", ())) == concept.aliases
         assert svc.resolve(concept.label) == concept.node_id
         assert svc.resolve(_accentless(concept.label)) == concept.node_id
         for alias in concept.aliases:
@@ -101,10 +104,10 @@ def test_v30_all_canonicals_and_aliases_have_one_exact_owner():
             assert svc.resolve(alias) == concept.node_id
             assert svc.resolve(_accentless(alias)) == concept.node_id
 
-    assert len(observed) == 60
+    assert len(observed) == 61
 
 
-def test_v30_sense_guards_keep_ambiguous_and_neighboring_forms_separate():
+def test_v31_sense_guards_keep_ambiguous_and_neighboring_forms_separate():
     svc = _service()
     new_ids = set(DATA.NEW_NODE_IDS)
     authored = {
@@ -112,50 +115,42 @@ def test_v30_sense_guards_keep_ambiguous_and_neighboring_forms_separate():
         for concept in DATA.CONCEPTS
         for surface in (concept.label, *concept.aliases)
     }
-    guarded = (*DATA.BLOCKED_ALIAS_FORMS, *DATA.DEFERRED_V30_CONCEPTS)
+    guarded = (*DATA.BLOCKED_ALIAS_FORMS, *DATA.DEFERRED_V31_CONCEPTS)
 
-    assert len(DATA.BLOCKED_ALIAS_FORMS) == 22
-    assert len(DATA.DEFERRED_V30_CONCEPTS) == 4
+    assert len(DATA.BLOCKED_ALIAS_FORMS) == 32
+    assert len({normalize(surface) for surface in DATA.BLOCKED_ALIAS_FORMS}) == 29
+    assert len(DATA.DEFERRED_V31_CONCEPTS) == 14
     assert not (authored & {normalize(surface) for surface in guarded})
     for surface in guarded:
         assert svc.resolve(surface) not in new_ids
 
-    assert svc.resolve("cană") == "n_v30_kitchen_drink_cana"
-    assert svc.resolve("pahar") == "n_v29_kitchen_table_pahar"
-    assert svc.resolve("cai") != "n_v30_animal_farm_cal"
-    assert svc.resolve("căi") != "n_v30_animal_farm_cal"
-    assert svc.resolve("oi") != "n_v30_animal_farm_oaie"
+    assert svc.resolve("periuță") != "n_v31_hygiene_oral_periuta_dinti"
+    assert svc.resolve("pastă") != "n_v31_hygiene_oral_pasta_dinti"
+    assert svc.resolve("burete") != "n_v31_cleaning_dishes_burete_vase"
+    assert svc.resolve("mătură") not in new_ids
 
 
-def test_v30_exact_semantic_edges_and_beginner_topology():
+def test_v31_exact_semantic_edges_and_inbound_beginner_topology():
     fixture = _fixture()
     svc = _service()
     new_ids = set(DATA.NEW_NODE_IDS)
     by_id = {node["id"]: node for node in fixture["kg_nodes"]}
+    legacy_ids = set(by_id) - new_ids
     incident = [
         edge
         for edge in fixture["kg_edges"]
         if edge["src_id"] in new_ids or edge["dst_id"] in new_ids
     ]
-    actual = {
-        (edge["src_id"], edge["dst_id"], edge["relation"]): edge
-        for edge in incident
-    }
-    expected = {
-        (edge.source, edge.target, edge.relation): edge
-        for edge in DATA.SEMANTIC_EDGES
-    }
-    legacy_bridges = [
-        edge for edge in DATA.SEMANTIC_EDGES if edge.source not in new_ids
-    ]
+    actual = {(edge["src_id"], edge["dst_id"], edge["relation"]): edge for edge in incident}
+    expected = {(edge.source, edge.target, edge.relation): edge for edge in DATA.SEMANTIC_EDGES}
+    legacy_bridges = [edge for edge in DATA.SEMANTIC_EDGES if edge.source not in new_ids]
     outgoing = Counter(edge.source for edge in DATA.SEMANTIC_EDGES)
     incoming = Counter(edge.target for edge in DATA.SEMANTIC_EDGES)
     legacy_new_neighbors: dict[str, set[str]] = {}
 
-    assert len(incident) == len(actual) >= _EXPECTED_EDGE_COUNT
-    assert len(expected) == _EXPECTED_EDGE_COUNT
-    assert set(expected) <= set(actual)
-    assert len(legacy_bridges) == 18
+    assert len(incident) == len(actual) == len(expected) == _EXPECTED_EDGE_COUNT
+    assert set(actual) == set(expected)
+    assert len(legacy_bridges) == 17
     assert all(edge.target in new_ids for edge in DATA.SEMANTIC_EDGES)
     for key, authored in expected.items():
         committed = actual[key]
@@ -167,9 +162,8 @@ def test_v30_exact_semantic_edges_and_beginner_topology():
         assert committed["label_ro"].strip()
         if authored.source not in new_ids:
             legacy_new_neighbors.setdefault(authored.source, set()).add(authored.target)
-        if authored.target not in new_ids:
-            legacy_new_neighbors.setdefault(authored.target, set()).add(authored.source)
 
+    assert len(legacy_new_neighbors) == 8
     assert max(map(len, legacy_new_neighbors.values())) <= 3
     for node_id in DATA.NEW_NODE_IDS:
         neighbors = set(svc.neighbor_ids(node_id)) | set(svc.predecessor_ids(node_id))
@@ -182,32 +176,33 @@ def test_v30_exact_semantic_edges_and_beginner_topology():
         assert by_id[node_id]["difficulty_tier"] == "easy"
         assert len(neighbors) >= 4
         assert len(same_category) >= 2
-        assert outgoing[node_id] >= 2
+        assert outgoing[node_id] == 2
         assert incoming[node_id] >= 1
+        inbound = svc.distances_to(node_id)
+        assert len(inbound) >= MIN_REACHABLE
+        assert (
+            sum(1 for distance in inbound.values() if 1 <= distance <= RESPONSIVE_MAX_HOPS)
+            >= MIN_RESPONSIVE
+        )
+        assert not (legacy_ids & set(svc.distances_from(node_id)))
 
 
-def test_v30_preserves_prior_coverage_and_resolves_its_extension():
+def test_v31_preserves_prior_coverage_and_resolves_its_extension():
     svc = _service()
     deferred = {normalize(term) for term in DATA.DEFERRED_AMBIGUOUS_TERMS}
-    v29_eligible = [
-        term for term in V29_DATA.BEGINNER_BENCHMARK if normalize(term) not in deferred
-    ]
-    all_eligible = [
-        term for term in DATA.BEGINNER_BENCHMARK if normalize(term) not in deferred
-    ]
+    v30_eligible = [term for term in V30_DATA.BEGINNER_BENCHMARK if normalize(term) not in deferred]
+    all_eligible = [term for term in DATA.BEGINNER_BENCHMARK if normalize(term) not in deferred]
 
-    assert len(V29_DATA.BEGINNER_BENCHMARK) == 253
-    assert len(v29_eligible) == 251
-    assert all(svc.resolve(term) is not None for term in v29_eligible)
-    assert len(DATA.BEGINNER_BENCHMARK) == 271
-    assert len(all_eligible) == 269
+    assert len(V30_DATA.BEGINNER_BENCHMARK) == 271
+    assert len(v30_eligible) == 269
+    assert all(svc.resolve(term) is not None for term in v30_eligible)
+    assert len(DATA.BEGINNER_BENCHMARK) == 288
+    assert len(all_eligible) == 286
     assert all(svc.resolve(term) is not None for term in all_eligible)
-    assert {
-        svc.resolve(term) for term in DATA.V30_BEGINNER_EXTENSION
-    } == set(DATA.NEW_NODE_IDS)
+    assert {svc.resolve(term) for term in DATA.V31_BEGINNER_EXTENSION} == set(DATA.NEW_NODE_IDS)
 
 
-def test_v30_keeps_the_entire_game_pack_byte_stable_and_unpromoted():
+def test_v31_keeps_the_entire_game_pack_byte_stable_and_unpromoted():
     package_blob = _PACKAGE_PACK.read_bytes()
     pack = json.loads(package_blob)
     statuses = Counter(
@@ -228,15 +223,17 @@ def test_v30_keeps_the_entire_game_pack_byte_stable_and_unpromoted():
     assert statuses == {"approved": 572, "pending": 222}
 
 
-def test_v30_mobile_contract_is_exact_current_and_public():
+def test_v31_mobile_contract_is_exact_current_and_public():
     checked_in = json.loads(_MOBILE_CONTRACT.read_text(encoding="utf-8"))
     mobile_by_id = {node["id"]: node for node in checked_in["kg_nodes"]}
 
     assert checked_in == mobile_app_pack_snapshot(_PACKAGE_KG)
-    counts = checked_in["manifest"]["counts"]
-    assert counts["nodes"] >= 2234
-    assert counts["edges"] >= 8963
-    assert counts["puzzles"] == 180
+    assert checked_in["manifest"]["build_version"] == DATA.BUILD_VERSION
+    assert checked_in["manifest"]["counts"] == {
+        "nodes": 2251,
+        "edges": 9014,
+        "puzzles": 180,
+    }
     for concept in DATA.CONCEPTS:
         assert mobile_by_id[concept.node_id] == {
             "id": concept.node_id,
