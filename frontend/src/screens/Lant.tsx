@@ -5,6 +5,7 @@ import {
   type Difficulty,
   type HintResult,
   type LantChoice,
+  type LantProgress,
   type LantState,
   type PathStep,
   createLant,
@@ -43,6 +44,14 @@ const DIFFICULTIES: { key: Difficulty; label: string; hint: string }[] = [
 // All logic is server-authoritative; this screen only renders state + sends actions.
 
 const TARGET_COLOR = "#f178b6";
+
+const PROGRESS_ICON: Record<LantProgress["kind"], string> = {
+  closer: "↗",
+  lateral: "↔",
+  farther: "↘",
+  dead_end: "↶",
+  won: "✓",
+};
 
 type RecoveryFeedback = {
   message: string;
@@ -108,6 +117,7 @@ export default function Lant({
   const [busy, setBusy] = useState(false);
   const [shake, setShake] = useState(0);
   const [hint, setHint] = useState<HintResult | null>(null);
+  const [progress, setProgress] = useState<LantProgress | null>(null);
   const [recovery, setRecovery] = useState<RecoveryFeedback | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>("usor");
   const [category, setCategory] = useState<string | null>(null);
@@ -154,6 +164,7 @@ export default function Lant({
     async (opts?: { difficulty?: Difficulty; daily?: string }) => {
       setLoading(true);
       setHint(null);
+      setProgress(null);
       setRecovery(null);
       setScored(null);
       try {
@@ -195,6 +206,7 @@ export default function Lant({
           return;
         }
         setHint(null);
+        setProgress(null);
         setScored(null);
         setDifficulty(fresh.difficulty);
         setCategory(fresh.board_category ?? null);
@@ -268,6 +280,7 @@ export default function Lant({
     if (!value) return;
     setBusy(true);
     setHint(null);
+    setProgress(null);
     setRecovery(null);
     try {
       const res = await moveLant(state.game_id, value);
@@ -294,9 +307,12 @@ export default function Lant({
               score: res.score ?? prev.score,
               share: res.share ?? prev.share,
               choices: res.choices ?? prev.choices,
+              backtrack_recommended:
+                res.backtrack_recommended ?? prev.backtrack_recommended,
             }
           : prev,
       );
+      setProgress(res.progress ?? null);
       setText("");
       if (res.message) {
         setRecovery({
@@ -327,6 +343,7 @@ export default function Lant({
     if (!state || busy || state.moves === 0) return;
     setBusy(true);
     setHint(null);
+    setProgress(null);
     setRecovery(null);
     try {
       const fresh = await undoLant(state.game_id);
@@ -394,7 +411,7 @@ export default function Lant({
               </p>
             }
             steps={[
-              { icon: "⌨️", label: "Scrie un vecin" },
+              { icon: "👆", label: "Alege o legătură" },
               { icon: "🔗", label: "Fă un salt" },
               { icon: "🎯", label: "Ajungi la țintă" },
             ]}
@@ -553,6 +570,20 @@ export default function Lant({
           </section>
         ) : null}
 
+        {progress ? (
+          <m.div
+            key={progress.kind + "-" + state.moves}
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={"lant-progress lant-progress--" + progress.kind}
+            role="status"
+            aria-live="polite"
+          >
+            <span aria-hidden="true">{PROGRESS_ICON[progress.kind]}</span>
+            <strong>{progress.message}</strong>
+          </m.div>
+        ) : null}
+
         <span
           className="visually-hidden"
           role="status"
@@ -634,10 +665,20 @@ export default function Lant({
               <Button
                 type="button"
                 variant="secondary"
+                className={
+                  state.backtrack_recommended
+                    ? "lant-undo lant-undo--recommended"
+                    : "lant-undo"
+                }
                 disabled={busy || state.moves === 0}
                 onClick={() => void handleUndo()}
+                aria-label={
+                  state.backtrack_recommended
+                    ? "Înapoi, recomandat după două salturi fără progres"
+                    : "Înapoi"
+                }
               >
-                ↶ Înapoi
+                {state.backtrack_recommended ? "↶ Înapoi · recomandat" : "↶ Înapoi"}
               </Button>
               <Button
                 type="button"
@@ -645,7 +686,9 @@ export default function Lant({
                 disabled={busy}
                 onClick={() => void handleHint()}
               >
-                💡 Indiciu
+                {hint?.stage === "direction" || hint?.stage === "alternatives"
+                  ? "💡 Mai clar"
+                  : "💡 Indiciu"}
               </Button>
               <span className="muted" style={{ alignSelf: "center" }}>
                 {hintRemaining !== null
@@ -691,7 +734,7 @@ export default function Lant({
                             variant="secondary"
                             onClick={() => {
                               setText(choice);
-                              inputRef.current?.focus();
+                              focusInputForFinePointer();
                             }}
                           >
                             {choice}
@@ -740,7 +783,7 @@ export default function Lant({
                             title={choice.relation}
                             onClick={() => {
                               setText(choice.label);
-                              inputRef.current?.focus();
+                              focusInputForFinePointer();
                             }}
                           >
                             {choice.label}
@@ -755,7 +798,7 @@ export default function Lant({
                         title="Pune în căsuță"
                         onClick={() => {
                           if (hint.hint) setText(hint.hint.label);
-                          inputRef.current?.focus();
+                          focusInputForFinePointer();
                         }}
                       >
                         Încearcă <strong>{hint.hint.label}</strong>

@@ -81,6 +81,14 @@ _CORRIDOR_CHOICE_QUOTA = 3
 # 95th-percentile live degree.
 _HUB_SOFT_DEGREE = 20
 
+_PROGRESS_MESSAGES = {
+    "closer": "Mai aproape de țintă.",
+    "lateral": "Tot cam la aceeași distanță.",
+    "farther": "Te-ai îndepărtat puțin.",
+    "dead_end": "Fundătură — folosește Înapoi.",
+    "won": "Ai ajuns la țintă!",
+}
+
 _ROUTE_PROFILE_CACHE_MAX = 512
 _RouteProfiles = tuple[tuple[int, int, int], tuple[int, int, int]]
 _route_profile_cache: OrderedDict[
@@ -119,6 +127,9 @@ class LantSession:
     # reset this capped counter, so exploratory/revisited chains cannot retain O(n²)
     # tuple keys in the session.
     hint_requests: int = 0
+    # Easy-mode direction feedback remembers only whether the last two real hops failed
+    # to improve directed distance. The capped scalar cannot retain route history.
+    non_improving_moves: int = 0
 
     @property
     def current(self) -> str:
@@ -421,6 +432,9 @@ def _state(game_id: str, session: LantSession) -> dict:
         "won": session.won,
         "difficulty": session.difficulty,
         "choices": _visible_choices(session),
+        "backtrack_recommended": (
+            session.difficulty == "usor" and session.non_improving_moves >= 2
+        ),
     }
     if session.daily is not None:
         state["daily"] = session.daily
@@ -781,12 +795,40 @@ class MoveView(ContractAPIView):
         # Early dead-end warning (ADR-0022): the move is legal, but from here the target
         # is unreachable on the directed graph — say so now instead of letting the
         # player discover it hints later (pairs with the hint's backtrack escape).
-        dead_end = (
-            not session.won
-            and svc.distances_to(session.target).get(guess) is None
-        )
-        if dead_end:
+        dist_to_target = svc.distances_to(session.target)
+        previous_remaining = dist_to_target.get(prev)
+        next_remaining = dist_to_target.get(guess)
+        dead_end = not session.won and next_remaining is None
+        if dead_end and session.difficulty != "usor":
             notes.append("Atenție: fundătură — de aici ținta nu mai e accesibilă.")
+
+        progress: dict[str, str] | None = None
+        if session.difficulty == "usor":
+            if session.won:
+                progress_kind = "won"
+            elif dead_end:
+                progress_kind = "dead_end"
+            elif previous_remaining is None or next_remaining < previous_remaining:
+                progress_kind = "closer"
+            elif next_remaining == previous_remaining:
+                progress_kind = "lateral"
+            else:
+                progress_kind = "farther"
+
+            if progress_kind in {"closer", "won"}:
+                session.non_improving_moves = 0
+            else:
+                session.non_improving_moves = min(
+                    2, session.non_improving_moves + 1
+                )
+            progress = {
+                "kind": progress_kind,
+                "message": _PROGRESS_MESSAGES[progress_kind],
+            }
+        else:
+            # Automatic direction is an easy-mode aid only; other modes retain no
+            # latent progress streak that could later surface unexpectedly.
+            session.non_improving_moves = 0
 
         result = {
             "ok": True,
@@ -796,7 +838,13 @@ class MoveView(ContractAPIView):
             "moves": session.moves,
             "won": session.won,
             "choices": _visible_choices(session),
+            "backtrack_recommended": (
+                session.difficulty == "usor"
+                and session.non_improving_moves >= 2
+            ),
         }
+        if progress is not None:
+            result["progress"] = progress
         if dead_end:
             result["dead_end"] = True
         if notes:
@@ -820,6 +868,7 @@ class UndoView(ContractAPIView):
             session.chain.pop()
             session.hint_requests = 0
             session.won = session.current == session.target
+        session.non_improving_moves = 0
         return Response(_state(game_id, session))
 
 

@@ -33,6 +33,18 @@ export interface LantTarget {
 
 export type Difficulty = "usor" | "normal" | "greu";
 
+export type LantProgressKind =
+  | "closer"
+  | "lateral"
+  | "farther"
+  | "dead_end"
+  | "won";
+
+export interface LantProgress {
+  kind: LantProgressKind;
+  message: string;
+}
+
 export interface LantState {
   game_id: string;
   start: Concept;
@@ -45,6 +57,8 @@ export interface LantState {
   difficulty: Difficulty;
   /** Four to six safe local hops when available; never the full route corridor. */
   choices: LantChoice[];
+  /** Easy-mode recovery signal; the private consecutive-move count is never exposed. */
+  backtrack_recommended: boolean;
   daily?: string;
   /** Echoed only when the game was started with an explicit category. */
   board_category?: string;
@@ -69,6 +83,9 @@ export interface MoveResult {
   moves?: number;
   won?: boolean;
   choices?: LantChoice[];
+  /** Easy-mode coarse direction only; never an exact distance or route marker. */
+  progress?: LantProgress;
+  backtrack_recommended?: boolean;
   /** Present only when won === true. */
   score?: number;
   share?: string;
