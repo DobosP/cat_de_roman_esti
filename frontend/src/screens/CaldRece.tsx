@@ -416,7 +416,6 @@ export default function CaldRece({
       const res = await contextoApi.requestClue(state.game_id);
       sound.playSelect();
       setState(res);
-      onToast(res.message, "info");
     } catch (err) {
       sound.playError();
       // A stale tab may ask just after its last safe candidate was played elsewhere.
@@ -624,21 +623,25 @@ export default function CaldRece({
           </Hud>
         </GameShell>
 
-        <NextMove
-          icon={latestGuess ? TEMP_ICON[latestGuess.temperature] : "⌨️"}
-          title={latestGuess ? "Urmează căldura" : "Încearcă un cuvânt"}
-          detail={
-            latestGuess
-              ? `${TEMP_HINT[latestGuess.temperature]} Încearcă ceva înrudit.`
-              : "Sensul contează, nu literele."
-          }
-          progress={`${state?.attempts ?? 0} încercări`}
-          accent={latestGuess ? barColor(latestGuess) : DEF.accent}
-          ready={Boolean(latestGuess && latestGuess.rank <= 10)}
-        />
-        <p className="rank-legend faint" style={{ margin: 0 }}>
-          Număr mai mic = mai aproape · #1 = răspunsul
-        </p>
+        {!finished && (
+          <>
+            <NextMove
+              icon={latestGuess ? TEMP_ICON[latestGuess.temperature] : "⌨️"}
+              title={latestGuess ? "Urmează căldura" : "Încearcă un cuvânt"}
+              detail={
+                latestGuess
+                  ? `${TEMP_HINT[latestGuess.temperature]} Încearcă ceva înrudit.`
+                  : "Sensul contează, nu literele."
+              }
+              progress={`${state?.attempts ?? 0} încercări`}
+              accent={latestGuess ? barColor(latestGuess) : DEF.accent}
+              ready={Boolean(latestGuess && latestGuess.rank <= 10)}
+            />
+            <p className="rank-legend faint" style={{ margin: 0 }}>
+              Număr mai mic = mai aproape · #1 = răspunsul
+            </p>
+          </>
+        )}
 
         {/* The form and its three recovery actions stay together above the scrolling list. */}
         <div className="contexto-sticky-controls">
@@ -877,7 +880,7 @@ export default function CaldRece({
 
         {/* One short, server-authored comparison for the accepted guess just played. */}
         <AnimatePresence mode="wait">
-          {latestGuess && feedback && (
+          {!finished && latestGuess && feedback && (
             <m.div
               key={`${latestGuess.id}-${feedback.kind}-${state?.attempts ?? 0}`}
               initial={{ opacity: 0, y: -6 }}
@@ -959,14 +962,12 @@ export default function CaldRece({
         {guesses.length > 1 && (
           <div
             className="contexto-guess-tabs"
-            role="tablist"
+            role="group"
             aria-label="Ordinea încercărilor"
           >
             <button
               type="button"
-              role="tab"
-              aria-selected={guessView === "best"}
-              aria-controls="contexto-guess-list"
+              aria-pressed={guessView === "best"}
               className={guessView === "best" ? "is-active" : ""}
               onClick={() => {
                 sound.playSelect();
@@ -977,9 +978,7 @@ export default function CaldRece({
             </button>
             <button
               type="button"
-              role="tab"
-              aria-selected={guessView === "recent"}
-              aria-controls="contexto-guess-list"
+              aria-pressed={guessView === "recent"}
               className={guessView === "recent" ? "is-active" : ""}
               onClick={() => {
                 sound.playSelect();

@@ -25,7 +25,10 @@ test("accepted guesses type stable ordinals and bounded server comparison kinds"
 test("Bune and Recente use server rank order and stable attempt ordinals", () => {
   assert.match(screen, /type GuessView = "best" \| "recent"/);
   assert.match(screen, /right\.attempt_number - left\.attempt_number/);
-  assert.match(screen, /role="tablist"/);
+  assert.match(screen, /role="group"\s*aria-label="Ordinea încercărilor"/);
+  assert.match(screen, /aria-pressed=\{guessView === "best"\}/);
+  assert.match(screen, /aria-pressed=\{guessView === "recent"\}/);
+  assert.doesNotMatch(screen, /role="tab"|role="tablist"/);
   assert.match(screen, />\s*Bune\s*</);
   assert.match(screen, />\s*Recente\s*</);
   assert.match(screen, /displayedGuesses\.map\(\(g\)/);
@@ -34,10 +37,21 @@ test("Bune and Recente use server rank order and stable attempt ordinals", () =>
 
 test("the latest accepted guess renders exactly one server-authored comparison", () => {
   assert.match(screen, /setFeedback\(res\.feedback\)/);
+  assert.match(screen, /!finished && latestGuess && feedback/);
   assert.match(screen, /className=\{`contexto-comparison contexto-comparison--\$\{feedback\.kind\}`\}/);
   assert.match(screen, /\{feedback\.message\}/);
   assert.match(screen, /role="status"/);
   assert.match(css, /\.contexto-comparison \{[\s\S]*?min-height: 44px/);
+});
+
+test("terminal results and clue cards each have one announcement owner", () => {
+  assert.match(screen, /!finished && \(\s*<>\s*<NextMove/);
+  const clueTry = screen.match(
+    /try \{\s*const res = await contextoApi\.requestClue\(state\.game_id\);[\s\S]*?\n {4}\} catch/,
+  );
+  assert.ok(clueTry);
+  assert.doesNotMatch(clueTry[0], /onToast/);
+  assert.match(screen, /aria-label="Indicii folosite"\s*aria-live="polite"/);
 });
 
 test("guess form owns a compact phone-safe clue reveal options row", () => {

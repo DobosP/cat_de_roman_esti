@@ -1,10 +1,9 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-19. This file is the repository's current source of truth._
-_Last verified: 2026-07-19 (V35 focused gates: Alchimie backend 422/422,
-Contexto/mobile 61/61, Lanț 49/49, required session store 11/11, frontend 12/12,
-lint, typecheck, Ruff, and whitespace. Canonical static rebuild is pending. Live remains
-V32 `f40fa8b`; V33–V35 are not pushed or deployed.)_
+_Last verified: 2026-07-19 (V35 integrated backend suite and frontend 67/67, lint,
+typecheck, and production build green at 117.03/120 KiB with four font subsets; final
+session-hardening gate pending. Live remains V32 `f40fa8b`; V33–V35 are not deployed.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -27,29 +26,27 @@ them, and only their count is public. Score, secrecy, TTL, and session cap remai
 ## Current outcome — beginner mobile interface (ADR-0031, ADR-0048)
 
 All games default to `Ușor`, teach three terse actions, and show one live `ACUM` cue.
-Mobile gets 44 px actions, compact rails, and one near-board Conexiuni recovery channel
-with mistake dots; desktop keeps the same loop in a focused play column.
+Mobile gets 44 px actions and compact rails. Conexiuni keeps recovery, accessible mistake
+dots, and authoritative conflict refresh in one sticky channel with one live owner.
 
 ## Current outcome — V35 guided word space and comparison (ADR-0042 through ADR-0045)
 
-Cald sau Rece accepts **444 collision-screened everyday guesses across 26 domains** through 89 reviewed KG anchors without changing graph/pack bytes or creating projection wins.
+Cald sau Rece accepts **444 everyday guesses across 26 domains** through 89 reviewed anchors
+without changing graph/pack bytes or creating projection wins.
 Clues progress from category to one strictly warmer familiar word; themed boards skip category.
-Distinct guesses keep stable chronological numbers while the server returns one short comparison from public ranks only; repeats remain free. Browser views switch between `Bune` and `Recente`.
-The sticky guess area keeps 44 px clue/reveal/options actions, a clue countdown, and an inline two-step reveal whose confirmation clears when play resumes. Targets and scoring are unchanged.
-Alchimie projects 1–4 target-useful routes into at most 24 private recipe pairs / 32 concepts. Runtime normally returns one result; exact par remains unchanged. Mined boards prefer two live
+Distinct guesses keep stable numbers and one comparison from public ranks; repeats stay free.
+`Bune`/`Recente`, 44 px actions, clue countdown, guarded reveal, and terminal cleanup stay local.
+Alchimie projects 1–4 target-useful routes into at most 24 private pairs / 32 concepts.
+Runtime normally returns one result; exact par remains unchanged. Mined boards prefer two live
 openings; useful/recent/all views retire depleted items and hints progress from output to pair.
 
 ## Current outcome — beginner vocabulary waves (ADR-0030, ADR-0032, ADR-0033, ADR-0036 through ADR-0041)
 
-V23 retains 22 childhood/story nodes and 78 edges. V24 adds **150 everyday nodes, 511
-edges, 276 aliases, and 26 pending items**; V25 adds **168 safe aliases and 25 links**.
-V28 completes the eligible beginner benchmark with **15 concepts, 44 inflections, and 53
-links**, reaching **234/234**. V29 adds **17 concepts, 66 inflections, and 64 links**.
-V30 adds **18 farm, clothing, and kitchen concepts, 60 inflections, and 54 links** in
-three inbound-reachable meshes. V31 adds **17 hygiene, lower-limb, and cleaning concepts,
-61 inflections, and 51 links**. V32 adds **18 face, workshop, and garden concepts, 69
-inflections, and 54 links**. V33 adds **18 bathroom, household-electrical, and forest
-concepts, 67 inflections, and 54 links**; combined eligible probes resolve **322/322**.
+V23 retains 22 childhood/story nodes and 78 edges. V24 adds **150 nodes, 511 edges, 276
+aliases, and 26 pending items**; V25 adds **168 safe aliases and 25 links**. V28 reaches
+**234/234** eligible probes; V29 adds **17 concepts, 66 inflections, and 64 links**.
+V30–V33 add 71 farm, clothing, kitchen, hygiene, cleaning, face, workshop, garden,
+bathroom, household-electrical, and forest concepts; eligible probes reach **322/322**.
 All 33 affected pending dossiers and the full report stay unchanged and clean; all 794
 curated records remain unchanged.
 
@@ -98,6 +95,5 @@ Run frontend gates when frontend changes; session-store target: `tests/test_word
 
 ## Next verified work
 
-- Playtest V35 comparison/actions at 320–390 px, including projected terms and both clues.
 - Continue exact pending/approved-stock adversarial review and generic-edge cleanup.
 - Make rankings server-authored, bounded, and private-by-default before public accounts.

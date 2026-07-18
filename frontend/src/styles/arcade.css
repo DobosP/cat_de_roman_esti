@@ -757,6 +757,11 @@ input:focus-visible {
   gap: 8px;
 }
 
+.connections-coach-stack {
+  display: grid;
+  gap: 8px;
+}
+
 .connections-lives {
   gap: 3px;
   flex: none;
@@ -1200,10 +1205,13 @@ input:focus-visible {
     height: 38px;
   }
 
-  .connections-coach {
+  .connections-coach-stack {
     position: sticky;
     top: 0;
     z-index: 8;
+  }
+
+  .connections-coach {
     background: linear-gradient(
       100deg,
       color-mix(in srgb, var(--cue-accent) 18%, #15112d),

@@ -76,8 +76,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   // Client-only display order for the remaining tiles (the "shuffle" button reorders
   // these; the authoritative grouping never changes). Keyed by tile id.
   const [shuffleNonce, setShuffleNonce] = useState(0);
-  // Transient inline hint shown under the board. One-away recovery stays visible while
-  // the player swaps a tile; other feedback clears on the next selection change.
+  // Transient inline feedback shown in the sticky action region. Recovery remains until
+  // the player makes the requested selection change, then clears immediately.
   const [hint, setHint] = useState<string | null>(null);
   const recordOnce = useRecordScore(GAME_KEY);
 
@@ -149,12 +149,25 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     blockedGuess !== null &&
     selectionKey(selected) === blockedGuess.key;
   const feedback = blockedGuess?.oneAway ? ONE_AWAY_GUIDANCE : hint;
-  const guidance = useMemo(
-    () =>
-      [...new Set([feedback, ...(state?.clues.map((clue) => clue.message) ?? [])])]
-        .filter((message): message is string => Boolean(message)),
-    [feedback, state?.clues],
+  const clueMessages = useMemo(
+    () => state?.clues.map((clue) => clue.message) ?? [],
+    [state?.clues],
   );
+
+  const refreshAuthoritativeState = useCallback(async (gameId: string) => {
+    try {
+      const fresh = await conexiuniApi.get(gameId);
+      setState(fresh);
+      if (fresh.won || fresh.lost) {
+        setSelected([]);
+        setBlockedGuess(null);
+        setHint(null);
+      }
+      return fresh;
+    } catch {
+      return null;
+    }
+  }, []);
 
   useEffect(() => {
     if (resumeOnce.current) return;
@@ -248,26 +261,30 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const toggle = useCallback(
     (id: string) => {
       if (busy || finished) return;
-      if (blockedGuess === null) setHint(null);
       // Decide outside the updater so the sound side-effect stays StrictMode-safe and
       // fires only on a real change (selecting/deselecting, not a capped 5th click).
       const wasSelected = selected.includes(id);
       const changed = wasSelected || selected.length < 4;
-      if (changed) sound.playSelect();
+      if (changed) {
+        sound.playSelect();
+        setBlockedGuess(null);
+        setHint(null);
+      }
       setSelected((prev) => {
         if (prev.includes(id)) return prev.filter((x) => x !== id);
         if (prev.length >= 4) return prev;
         return [...prev, id];
       });
     },
-    [busy, finished, blockedGuess, selected],
+    [busy, finished, selected],
   );
 
   const clearSelection = useCallback(() => {
     if (busy || finished) return;
     setSelected([]);
-    if (blockedGuess === null) setHint(null);
-  }, [busy, finished, blockedGuess]);
+    setBlockedGuess(null);
+    setHint(null);
+  }, [busy, finished]);
 
   const shuffle = useCallback(() => {
     if (busy || finished) return;
@@ -301,10 +318,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               ? ONE_AWAY_GUIDANCE
               : "Aproape! 3 din 4 sunt din aceeași categorie.",
           );
-          onToast("Aproape! 3 din 4.", "info");
         } else {
           setHint("Niciun grup complet — încearcă altă combinație.");
-          onToast("Nu e grupul — mai încearcă.", "info");
         }
         if (recoverableOneAway) {
           setSelected(guess);
@@ -320,16 +335,23 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         err instanceof ApiError
           ? err.message || `Verificare respinsă (${err.status}).`
           : "Verificare respinsă.";
+      const fresh =
+        err instanceof ApiError && (err.status === 400 || err.status === 409)
+          ? await refreshAuthoritativeState(state.game_id)
+          : null;
       if (err instanceof ApiError && err.status === 409) {
-        setSelected(guess);
-        setBlockedGuess({ key: guessKey, oneAway: false });
-        setHint(`${message} Schimbă cel puțin o piesă înainte de o nouă verificare.`);
+        if (!fresh?.won && !fresh?.lost) {
+          setSelected(guess);
+          setBlockedGuess({ key: guessKey, oneAway: false });
+          setHint(`${message} Schimbă cel puțin o piesă înainte de o nouă verificare.`);
+        }
+      } else {
+        onToast(message, "error");
       }
-      onToast(message, err instanceof ApiError && err.status === 409 ? "info" : "error");
     } finally {
       setBusy(false);
     }
-  }, [state, selected, busy, exactBlockedRetry, onToast]);
+  }, [state, selected, busy, exactBlockedRetry, onToast, refreshAuthoritativeState]);
 
   const requestClue = useCallback(async () => {
     if (!state || busy || finished || !state.clue_available) return;
@@ -344,6 +366,9 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       setHint(null);
     } catch (err) {
       sound.playError();
+      if (err instanceof ApiError && (err.status === 400 || err.status === 409)) {
+        await refreshAuthoritativeState(state.game_id);
+      }
       onToast(
         err instanceof ApiError
           ? err.message || `Indiciu respins (${err.status}).`
@@ -353,7 +378,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     } finally {
       setBusy(false);
     }
-  }, [state, busy, finished, onToast]);
+  }, [state, busy, finished, onToast, refreshAuthoritativeState]);
 
   const copyShare = useCallback(async () => {
     if (!sharePayload) return;
@@ -483,78 +508,93 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         </AnimatePresence>
 
         {!finished && (
-          <NextMove
-            icon={selected.length === GROUP_SIZE ? "✓" : "👆"}
-            title={
-              exactBlockedRetry
-                ? "Schimbă o piesă"
-                : selected.length === 0
-                  ? "Alege 4 care merg împreună"
-                  : selected.length < GROUP_SIZE
-                    ? `Încă ${GROUP_SIZE - selected.length}`
-                    : "Grup gata"
-            }
-            detail={
-              exactBlockedRetry
-                ? "Aceeași combinație a fost deja verificată."
-                : selected.length === GROUP_SIZE
-                  ? "Apasă Verifică."
-                  : "Caută o categorie comună."
-            }
-            progress={`${selected.length}/${GROUP_SIZE}`}
-            accent={DEF.accent}
-            ready={selected.length === GROUP_SIZE && !exactBlockedRetry}
-            className="connections-coach"
-            action={
-              <span className="connections-coach-action">
-                <span
-                  className="connections-lives"
-                  aria-label={`${state.lives} greșeli disponibile`}
-                  title={`${state.lives} greșeli disponibile`}
-                >
-                  {Array.from({ length: 4 }, (_, index) => (
-                    <span
-                      key={index}
-                      className={`connections-life-dot${index < state.lives ? "" : " connections-life-dot--spent"}`}
-                      aria-hidden="true"
-                    />
-                  ))}
+          <div className="connections-coach-stack">
+            <NextMove
+              icon={selected.length === GROUP_SIZE ? "✓" : "👆"}
+              title={
+                exactBlockedRetry
+                  ? "Schimbă o piesă"
+                  : selected.length === 0
+                    ? "Alege 4 care merg împreună"
+                    : selected.length < GROUP_SIZE
+                      ? `Încă ${GROUP_SIZE - selected.length}`
+                      : "Grup gata"
+              }
+              detail={
+                exactBlockedRetry
+                  ? "Aceeași combinație a fost deja verificată."
+                  : selected.length === GROUP_SIZE
+                    ? "Apasă Verifică."
+                    : "Caută o categorie comună."
+              }
+              progress={`${selected.length}/${GROUP_SIZE}`}
+              accent={DEF.accent}
+              ready={selected.length === GROUP_SIZE && !exactBlockedRetry}
+              className="connections-coach"
+              action={
+                <span className="connections-coach-action">
+                  <span
+                    className="connections-lives"
+                    role="img"
+                    aria-label={`${state.lives} ${state.lives === 1 ? "greșeală disponibilă" : "greșeli disponibile"}`}
+                    title={`${state.lives} ${state.lives === 1 ? "greșeală disponibilă" : "greșeli disponibile"}`}
+                  >
+                    {Array.from({ length: 4 }, (_, index) => (
+                      <span
+                        key={index}
+                        className={`connections-life-dot${index < state.lives ? "" : " connections-life-dot--spent"}`}
+                        aria-hidden="true"
+                      />
+                    ))}
+                  </span>
+                  <Button
+                    type="button"
+                    disabled={busy || selected.length !== GROUP_SIZE || exactBlockedRetry}
+                    onClick={submit}
+                    style={{ borderColor: DEF.accent }}
+                  >
+                    {busy ? "…" : exactBlockedRetry ? "Schimbă o piesă" : "Verifică"}
+                  </Button>
                 </span>
-                <Button
-                  type="button"
-                  disabled={busy || selected.length !== GROUP_SIZE || exactBlockedRetry}
-                  onClick={submit}
-                  style={{ borderColor: DEF.accent }}
-                >
-                  {busy ? "…" : exactBlockedRetry ? "Schimbă o piesă" : "Verifică"}
-                </Button>
-              </span>
-            }
-          />
-        )}
+              }
+            />
 
-        {/* Keep recovery beside the sticky coach, before the tall phone board. */}
-        <AnimatePresence>
-          {!finished && guidance.length > 0 && (
-            <m.div
-              key={guidance.join("|")}
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className="card connections-feedback col"
-              role="status"
-              aria-live="polite"
-              aria-atomic="true"
-            >
-              {guidance.map((message, index) => (
-                <span key={message}>
-                  <span aria-hidden="true">{index === 0 && feedback ? "↻ " : "💡 "}</span>
-                  {message}
-                </span>
-              ))}
-            </m.div>
-          )}
-        </AnimatePresence>
+            {/* Recovery stays inside the phone's sticky action region. */}
+            <AnimatePresence>
+              {(feedback || clueMessages.length > 0) && (
+                <m.div
+                  key="connections-feedback"
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="card connections-feedback col"
+                >
+                  <AnimatePresence mode="wait">
+                    {feedback && (
+                      <m.span
+                        key={feedback}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        role="status"
+                        aria-live="polite"
+                      >
+                        <span aria-hidden="true">↻ </span>
+                        {feedback}
+                      </m.span>
+                    )}
+                  </AnimatePresence>
+                  {clueMessages.map((message) => (
+                    <span key={message} role="status" aria-live="polite">
+                      <span aria-hidden="true">💡 </span>
+                      {message}
+                    </span>
+                  ))}
+                </m.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
 
         {/* Active board */}
         {!finished && (

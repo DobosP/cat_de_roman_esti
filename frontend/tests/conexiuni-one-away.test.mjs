@@ -48,15 +48,19 @@ test("Conexiuni blocks unchanged retries in submit, keyboard, and button paths",
 test("Conexiuni remembers a server-rejected duplicate and preserves terminal resets", () => {
   assert.match(
     screen,
-    /err\.status === 409\) \{\s*setSelected\(guess\);\s*setBlockedGuess\(\{ key: guessKey, oneAway: false \}\);/,
+    /err\.status === 409\) \{\s*if \(!fresh\?\.won && !fresh\?\.lost\) \{\s*setSelected\(guess\);\s*setBlockedGuess\(\{ key: guessKey, oneAway: false \}\);/,
   );
   assert.match(
     screen,
     /if \(res\.correct\) \{[\s\S]{0,180}setSelected\(\[\]\);\s*setBlockedGuess\(null\);/,
   );
-  assert.doesNotMatch(
+  assert.match(
     screen,
     /const clearSelection = useCallback\([\s\S]{0,180}setBlockedGuess\(null\)/,
+  );
+  assert.match(
+    screen,
+    /if \(changed\) \{\s*sound\.playSelect\(\);\s*setBlockedGuess\(null\);\s*setHint\(null\);/,
   );
 });
 
@@ -66,10 +70,11 @@ test("Conexiuni never turns a generic duplicate rejection into one-away feedback
   assert.doesNotMatch(screen, /blockedGuess !== null \? ONE_AWAY_GUIDANCE/);
 });
 
-test("mobile recovery and clues stay in one compact channel above the board", () => {
+test("mobile recovery and clues stay in the sticky action channel above the board", () => {
+  const coach = screen.indexOf('className="connections-coach-stack"');
   const guidance = screen.indexOf('className="card connections-feedback col"');
   const board = screen.indexOf('className="connections-grid"');
-  assert.ok(guidance > 0 && board > guidance);
+  assert.ok(coach > 0 && guidance > coach && board > guidance);
   assert.match(screen, /state\?\.clues\.map\(\(clue\) => clue\.message\)/);
   assert.match(
     screen,
@@ -77,13 +82,23 @@ test("mobile recovery and clues stay in one compact channel above the board", ()
   );
   assert.doesNotMatch(screen, /setHint\(res\.clue\.message\)/);
   assert.doesNotMatch(screen, /onToast\("Indiciu deblocat\./);
+  assert.doesNotMatch(screen, /onToast\("Aproape! 3 din 4\.|onToast\("Nu e grupul/);
+  assert.match(screen, /refreshAuthoritativeState\(state\.game_id\)/);
+  assert.match(screen, /err\.status === 400 \|\| err\.status === 409/);
 });
 
 test("the sticky coach keeps the bounded mistake budget visible without membership", () => {
   assert.match(screen, /className="connections-lives"/);
-  assert.match(screen, /aria-label=\{`\$\{state\.lives\} greșeli disponibile`\}/);
+  assert.match(screen, /role="img"/);
+  assert.match(
+    screen,
+    /aria-label=\{`\$\{state\.lives\} \$\{state\.lives === 1 \? "greșeală disponibilă" : "greșeli disponibile"\}`\}/,
+  );
   assert.match(screen, /Array\.from\(\{ length: 4 \}/);
-  const guidance = screen.match(/const guidance = useMemo\([\s\S]*?\n {2}\);/);
-  assert.ok(guidance);
-  assert.doesNotMatch(guidance[0], /tiles|solution|\.id/);
+  const clues = screen.match(/const clueMessages = useMemo\([\s\S]*?\n {2}\);/);
+  assert.ok(clues);
+  assert.doesNotMatch(clues[0], /tiles|solution|\.id/);
+  assert.match(screen, /key="connections-feedback"/);
+  assert.match(screen, /\{feedback && \([\s\S]*?role="status"/);
+  assert.match(screen, /clueMessages\.map\(\(message\) => \([\s\S]*?role="status"/);
 });
