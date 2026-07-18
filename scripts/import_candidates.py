@@ -171,7 +171,7 @@ def rederive_existing_items(pack: dict, svc, report: list[str]) -> dict[str, lis
                     continue
                 rec["optimal"], rec["difficulty"] = actual, band
             elif game == "alchimie":
-                # Combines are category-scoped (ADR-0013): re-derive the depth in-category
+                # Projection input is category-scoped (ADR-0044): derive depth in-theme.
                 # and drop items whose target is no longer craftable within the theme.
                 cat = str(rec.get("category") or "") or None
                 seeds = [str(s) for s in rec["seeds"]]

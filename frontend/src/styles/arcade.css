@@ -847,6 +847,38 @@ input:focus-visible {
   white-space: nowrap;
 }
 
+.alchemy-inventory-tabs {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  padding: 2px;
+  scrollbar-width: none;
+}
+
+.alchemy-inventory-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.alchemy-inventory-tab {
+  flex: 0 0 auto;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.alchemy-inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+  gap: 8px;
+}
+
+.alchemy-inventory-grid > .chip {
+  width: 100%;
+  min-height: 44px;
+  justify-content: center;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
 /* ------------------------------------------------------------------ HUD stat badges */
 .stat-badge {
   gap: 7px;
@@ -1021,6 +1053,15 @@ input:focus-visible {
     width: 100%;
     max-width: 100%;
     justify-content: center;
+  }
+
+  .alchemy-inventory-tabs {
+    margin-inline: -14px;
+    padding-inline: 14px;
+  }
+
+  .alchemy-inventory-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .word-hop-input {

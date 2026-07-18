@@ -173,7 +173,13 @@ def _alchimie_play_to_win(c: Client, state: dict) -> dict:
 
 
 def test_alchimie_hides_target_id_until_win() -> None:
-    from cat_de_roman_esti.wordgames.alchimie import store
+    from itertools import combinations
+
+    from cat_de_roman_esti.wordgames.alchimie import (
+        NUDGE_AFTER_FRUITLESS,
+        _pair_key,
+        store,
+    )
 
     c = client()
     created = c.post(f"/api/wordgames/alchimie/games?seed={SEED}").json()
@@ -190,6 +196,39 @@ def test_alchimie_hides_target_id_until_win() -> None:
         assert body["target"]["id"] is None
         assert body["target"]["label"]  # goal is still shown to the player
         assert secret not in _collect_ids(body)
+        assert "recipes" not in body and "routes" not in body
+        for item in body["inventory"]:
+            assert {"recent", "useful", "ready", "depleted"} <= set(item)
+
+    # Progressive hints expose no target id and no hidden route: the first response is
+    # output/theme-only; only a later response may name one currently-owned pair.
+    owned = [item["id"] for item in created["inventory"]]
+    barren = next(
+        pair
+        for pair in combinations(sorted(owned), 2)
+        if not [
+            output
+            for output in session.recipes.get(_pair_key(*pair), ())
+            if output not in owned
+        ]
+    )
+    state = created
+    for expected_kind in ("output", "pair"):
+        for _ in range(NUDGE_AFTER_FRUITLESS):
+            state = _post_json(
+                c,
+                f"/api/wordgames/alchimie/games/{gid}/combine",
+                {"a": barren[0], "b": barren[1]},
+            )
+        state = c.post(f"/api/wordgames/alchimie/games/{gid}/hint").json()
+        assert secret not in _collect_ids(state)
+        assert "recipes" not in state and "routes" not in state
+        if expected_kind == "output":
+            assert state["hint_kind"] in {"output", "category"}
+            assert state["hint"] is None
+        else:
+            assert state["hint_kind"] == "pair"
+            assert len(state["hint"]) == 2
 
     # Boundary: crafting the target flips revealed and exposes the real id.
     won = _alchimie_play_to_win(c, created)

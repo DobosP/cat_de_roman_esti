@@ -1,4 +1,4 @@
-"""Alchimie category-scoped combines (ADR-0013): closure stays within a theme."""
+"""Alchimie category-scoped projection input (ADR-0044) stays within one theme."""
 
 from __future__ import annotations
 
@@ -35,7 +35,7 @@ def test_mined_alchimie_is_always_themed_and_bounded():
     from cat_de_roman_esti.wordgames.packs import minimum_alchimie_actions
 
     c = Client()
-    # No category requested -> the builder must still pick one (ADR-0013).
+    # No category requested -> the builder must still pick one (ADR-0044).
     body = c.post("/api/wordgames/alchimie/games?seed=7").json()
     assert body["board_category"], "mined Alchimie must be themed"
     session = store.get(body["game_id"])
@@ -56,7 +56,7 @@ def test_mined_alchimie_is_always_themed_and_bounded():
 
 
 def test_category_scoped_alchimie_is_winnable():
-    from cat_de_roman_esti.wordgames.alchimie import store
+    from cat_de_roman_esti.wordgames.alchimie import _pair_key, store
 
     c = Client()
     body = c.post("/api/wordgames/alchimie/games?seed=2&category=istorie").json()
@@ -69,11 +69,10 @@ def test_category_scoped_alchimie_is_winnable():
         if fresh["won"]:
             break
         owned = [i["id"] for i in fresh["inventory"]]
-        svc = get_service()
         made = False
         for i in range(len(owned)):
             for j in range(i + 1, len(owned)):
-                cn = svc.common_neighbors(owned[i], owned[j], category=session.category)
+                cn = session.recipes.get(_pair_key(owned[i], owned[j]), ())
                 if any(x not in owned for x in cn):
                     c.post(
                         f"/api/wordgames/alchimie/games/{gid}/combine",

@@ -1,7 +1,7 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-18. This file is the repository's current source of truth._
-_Last verified: 2026-07-18 (V34 combined verification pending. Contexto source gate: backend 403, focused 53, mobile/session aggregate 70. Lanț source gate: focused 46, mobile aggregate 52, curated/pack/session 46. Both passed Ruff, validators, workflow syntax, whitespace, and frontend source gates. Live release remains V32 `f40fa8bc1b8880637aeeb01816c612ea850f73c0`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles.)_
+_Last verified: 2026-07-18 (V34 combined verification pending. Source gates: Contexto backend 403/focused 53/mobile-session 70; Lanț focused 46/mobile 52/curated-pack-session 46; Alchimie backend 396/focused-mobile-session 60. All passed Ruff, validators, workflow syntax, whitespace, and frontend source gates. Live release remains V32 `f40fa8bc1b8880637aeeb01816c612ea850f73c0`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -33,6 +33,12 @@ Cald sau Rece accepts **444 collision-screened everyday guesses across 26 domain
 89 reviewed KG anchors without changing graph/pack bytes or creating projection wins.
 Clues progress from category to one strictly warmer familiar word; themed boards skip category.
 
+## Current outcome — sparse Alchimie recipes (ADR-0044)
+
+Alchimie projects 1–4 target-useful routes into at most 24 private recipe pairs / 32 concepts.
+Runtime normally returns one result; exact par remains unchanged. Mined boards prefer two live
+openings; useful/recent/all views retire depleted items and hints progress from output to pair.
+
 ## Current outcome — beginner vocabulary waves (ADR-0030, ADR-0032, ADR-0033, ADR-0036 through ADR-0041)
 
 V23 retains 22 childhood/story nodes and 78 edges. V24 adds **150 everyday nodes, 511
@@ -62,7 +68,7 @@ Anonymous v1 at <https://cat-de-roman-esti.dobolabs.ro> runs release `f40fa8b`, 
 | Conexiuni | 288 | 209 | 79 | curated first; mixed-board miner fallback |
 | Cald sau Rece | 207 | 192 | 15 | curated first; category miner fallback |
 | Lanțul Cuvintelor | 201 | 94 | 107 | curated first; branch-aware miner fallback |
-| Alchimie | 98 | 77 | 21 | curated first; category closure fallback |
+| Alchimie | 98 | 77 | 21 | curated first; sparse projection miner fallback |
 
 Pack: **794 items = 572 approved + 222 pending**, across 14 categories.
 Bundled KG: **2,287 nodes / 9,122 edges / 7,400 aliases / 180 legacy puzzles**.

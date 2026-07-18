@@ -72,7 +72,7 @@ class WordGameService:
     _rev_adj: dict[str, set[str]] = field(default_factory=dict)
     # forward edge Dijkstra cost: src -> {dst: cost} over the strongest non-distractor edge
     _fwd_cost: dict[str, dict[str, float]] = field(default_factory=dict)
-    # category -> its node ids (for category-scoped combine math; ADR-0013)
+    # category -> node ids (for scoped Alchimie projection construction; ADR-0044)
     _cat_members: dict[str, frozenset[str]] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
@@ -221,10 +221,10 @@ class WordGameService:
     def common_neighbors(self, a: str, b: str, *, category: str | None = None) -> list[str]:
         """Nodes adjacent (non-distractor) to BOTH a and b — the 'combine' result set.
 
-        With ``category``, the result is restricted to nodes in that category. Alchimie
-        uses this so the combine-closure stays within a theme (ADR-0013): on the dense
-        graph the unscoped closure reaches ~the whole graph (every target craftable in
-        ~2 gens, and slow); a category subgraph (~90 nodes) restores deliberate steps.
+        With ``category``, results are restricted to that category. Alchimie uses this
+        only while constructing its private sparse projection (ADR-0044): the unscoped
+        candidate closure reaches nearly the whole graph, while a category subgraph
+        remains bounded and themed.
         """
         if a not in self._adj or b not in self._adj:
             return []

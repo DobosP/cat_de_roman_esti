@@ -44,6 +44,14 @@ interface Reaction {
   results: CraftedItem[];
 }
 
+type InventoryView = "recent" | "useful" | "all";
+
+const INVENTORY_VIEW_LABEL: Record<InventoryView, string> = {
+  recent: "Recente",
+  useful: "Utile",
+  all: "Toate",
+};
+
 function isCraftedItem(item: InventoryItem): item is CraftedItem {
   return item.parents !== null;
 }
@@ -102,6 +110,7 @@ export default function Alchimie({
   const [freshIds, setFreshIds] = useState<Set<string>>(new Set());
   // The pair the most recent nudge suggested — gets a glowing outline.
   const [hintIds, setHintIds] = useState<Set<string>>(new Set());
+  const [inventoryView, setInventoryView] = useState<InventoryView>("useful");
   const [lastMessage, setLastMessage] = useState<string | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>("usor");
   const [category, setCategory] = useState<string | null>(null);
@@ -141,6 +150,7 @@ export default function Alchimie({
         setEmptyRecoveryActive(false);
         setFreshIds(new Set());
         setHintIds(new Set());
+        setInventoryView("useful");
         setLastMessage(null);
         setIsRecord(false);
         setIsPuzzleRecord(false);
@@ -165,6 +175,7 @@ export default function Alchimie({
         setEmptyRecoveryActive(false);
         setFreshIds(new Set());
         setHintIds(new Set());
+        setInventoryView("useful");
         setLastMessage(null);
         setIsRecord(false);
         setIsPuzzleRecord(false);
@@ -323,6 +334,7 @@ export default function Alchimie({
       setLastMessage(feedback);
       if (res.discovered.length > 0) {
         setFreshIds(new Set(res.discovered.map((d: Concept) => d.id)));
+        setInventoryView("recent");
         if (!res.won) sound.playHop();
         // win sound handled by the won effect
       } else {
@@ -355,6 +367,7 @@ export default function Alchimie({
       setEmptyRecoveryActive(false);
       setFreshIds(new Set());
       setHintIds(new Set());
+      setInventoryView("useful");
       setLastMessage(null);
       sound.playUndo();
     } catch (err) {
@@ -374,6 +387,7 @@ export default function Alchimie({
     setSelected([]);
     setEmptyPairKey(null);
     setEmptyRecoveryActive(false);
+    setInventoryView("useful");
     setState(null);
   }, [active]);
 
@@ -390,12 +404,13 @@ export default function Alchimie({
       if (res.hint) {
         const ids = res.hint.map((c) => c.id);
         setHintIds(new Set(ids));
+        setInventoryView("useful");
         // Pre-select the suggested pair so the player can just press Combina.
         setSelected(ids);
         sound.playSelect();
       } else {
         setHintIds(new Set());
-        onToast(res.message, "info");
+        setInventoryView("useful");
       }
     } catch (err) {
       sound.playError();
@@ -426,6 +441,27 @@ export default function Alchimie({
   );
 
   const inventory = useMemo(() => state?.inventory ?? [], [state]);
+  const inventoryById = useMemo(
+    () => new Map(inventory.map((item) => [item.id, item])),
+    [inventory],
+  );
+  const inventoryCounts = useMemo(
+    () => ({
+      recent: inventory.filter((item) => item.recent && !item.depleted).length,
+      useful: inventory.filter((item) => item.useful && !item.depleted).length,
+      all: inventory.length,
+    }),
+    [inventory],
+  );
+  const visibleInventory = useMemo(
+    () =>
+      inventory.filter((item) => {
+        if (inventoryView === "all") return true;
+        if (inventoryView === "recent") return item.recent && !item.depleted;
+        return item.useful && !item.depleted;
+      }),
+    [inventory, inventoryView],
+  );
   const selectedItems = useMemo(
     () =>
       selected
@@ -690,7 +726,11 @@ export default function Alchimie({
                   variant="secondary"
                   disabled={busy}
                   onClick={() => void doHint()}
-                  title="Îți arată o pereche utilă (costă puțin din scor)"
+                  title={
+                    state.hint_stage === "output"
+                      ? "Îți arată un rezultat apropiat"
+                      : "Îți arată o pereche utilă"
+                  }
                   style={{ borderColor: GOLD, color: GOLD }}
                 >
                   💡 Indiciu
@@ -759,6 +799,7 @@ export default function Alchimie({
               reaction={reactionLog[0]}
               selected={selected}
               freshIds={freshIds}
+              inventoryById={inventoryById}
               busy={busy}
               onSelect={toggle}
             />
@@ -787,6 +828,7 @@ export default function Alchimie({
                       reaction={reaction}
                       selected={selected}
                       freshIds={freshIds}
+                      inventoryById={inventoryById}
                       busy={busy}
                       onSelect={toggle}
                     />
@@ -798,21 +840,54 @@ export default function Alchimie({
         )}
 
         {/* Inventory */}
-        <div className="col" style={{ gap: 8 }}>
-          <span
-            className="faint"
-            style={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}
+        <section className="col" style={{ gap: 10 }} aria-label="Inventar">
+          <div className="row spread wrap" style={{ gap: 8, alignItems: "center" }}>
+            <span
+              className="faint"
+              style={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}
+            >
+              INVENTAR · {state.inventory_summary.active} ÎN JOC
+            </span>
+            {state.inventory_summary.depleted > 0 && (
+              <span className="muted" style={{ fontSize: "0.76rem" }}>
+                {state.inventory_summary.depleted} puse deoparte
+              </span>
+            )}
+          </div>
+          <div
+            className="alchemy-inventory-tabs"
+            role="group"
+            aria-label="Filtrează inventarul"
           >
-            ALEGE DIN INVENTAR ({inventory.length})
-          </span>
-          <div className="wrap" style={{ display: "flex", gap: 8 }}>
+            {(["recent", "useful", "all"] as InventoryView[]).map((view) => (
+              <button
+                key={view}
+                type="button"
+                aria-pressed={inventoryView === view}
+                className="chip alchemy-inventory-tab"
+                onClick={() => {
+                  sound.playSelect();
+                  setInventoryView(view);
+                }}
+                style={{
+                  borderColor: inventoryView === view ? DEF.accent : undefined,
+                  color: inventoryView === view ? "var(--text)" : undefined,
+                }}
+              >
+                {INVENTORY_VIEW_LABEL[view]} {inventoryCounts[view]}
+              </button>
+            ))}
+          </div>
+          <div className="alchemy-inventory-grid">
             <AnimatePresence initial={false}>
-              {inventory.map((item) => {
+              {visibleInventory.map((item) => {
                 const isSel = selected.includes(item.id);
                 const isFresh = freshIds.has(item.id);
                 const isHint = hintIds.has(item.id);
                 const isCrafted = item.parents !== null;
-                const title = parentsOf(item) ?? "Concept de start";
+                const title = item.depleted
+                  ? "Nu mai produce elemente noi"
+                  : (parentsOf(item) ?? "Concept de start");
                 return (
                   <m.button
                     key={item.id}
@@ -833,7 +908,7 @@ export default function Alchimie({
                     }}
                     transition={{ type: "spring", stiffness: 320, damping: 18 }}
                     onClick={() => toggle(item.id)}
-                    disabled={won || busy}
+                    disabled={won || busy || item.depleted}
                     aria-pressed={isSel}
                     title={title}
                     className="chip"
@@ -857,18 +932,23 @@ export default function Alchimie({
                           : undefined,
                       color: isSel || isFresh ? "var(--text)" : undefined,
                       fontWeight: isCrafted ? 600 : 500,
+                      opacity: item.depleted ? 0.5 : 1,
                       boxShadow:
-                        isFresh || isHint ? `0 0 16px -4px ${GOLD}` : undefined,
+                        isFresh || isHint
+                          ? `0 0 16px -4px ${GOLD}`
+                          : item.ready
+                            ? `0 0 12px -8px ${DEF.accent}`
+                            : undefined,
                     }}
                   >
-                    {isCrafted ? "✦ " : ""}
+                    {item.ready && !item.depleted ? "● " : isCrafted ? "✦ " : ""}
                     {item.label}
                   </m.button>
                 );
               })}
             </AnimatePresence>
           </div>
-        </div>
+        </section>
 
         {/* Footer actions */}
         <div className="row center wrap" style={{ gap: 12, marginTop: 8 }}>
@@ -943,12 +1023,14 @@ function ReactionRow({
   reaction,
   selected,
   freshIds,
+  inventoryById,
   busy,
   onSelect,
 }: {
   reaction: Reaction;
   selected: string[];
   freshIds: Set<string>;
+  inventoryById: ReadonlyMap<string, InventoryItem>;
   busy: boolean;
   onSelect: (id: string) => void;
 }) {
@@ -968,23 +1050,27 @@ function ReactionRow({
         {reaction.results.map((item) => {
           const isSelected = selected.includes(item.id);
           const isFresh = freshIds.has(item.id);
+          const currentItem = inventoryById.get(item.id);
+          const depleted = currentItem?.depleted ?? true;
           return (
             <button
               key={item.id}
               type="button"
               className="chip alchemy-reaction-result"
-              disabled={busy}
+              disabled={busy || depleted}
               aria-pressed={isSelected}
-              aria-label={"Alege " + item.label + " din jurnalul de descoperiri"}
+              aria-label={depleted ? `${item.label}, pus deoparte` : `Alege ${item.label}`}
+              title={depleted ? "Pus deoparte" : "Pune în alambic"}
               onClick={() => onSelect(item.id)}
               style={{
-                cursor: busy ? "default" : "pointer",
+                cursor: busy || depleted ? "default" : "pointer",
                 minHeight: 44,
                 maxWidth: "100%",
                 overflowWrap: "anywhere",
                 borderColor: isSelected ? DEF.accent : isFresh ? GOLD : undefined,
                 color: isSelected || isFresh ? "var(--text)" : undefined,
                 fontWeight: 700,
+                opacity: depleted ? 0.5 : 1,
               }}
             >
               {isFresh ? "NOU · " : ""}

@@ -35,10 +35,15 @@ test("journal result controls only fill the bench and keep 44px targets", () => 
   const row = screen.slice(start, end);
 
   assert.match(row, /type="button"/);
-  assert.match(row, /aria-label=\{"Alege " \+ item\.label \+ " din jurnalul de descoperiri"\}/);
+  assert.match(row, /const currentItem = inventoryById\.get\(item\.id\)/);
+  assert.match(row, /const depleted = currentItem\?\.depleted \?\? true/);
+  assert.match(row, /disabled=\{busy \|\| depleted\}/);
+  assert.match(row, /aria-label=\{depleted \? `\$\{item\.label\}, pus deoparte` : `Alege \$\{item\.label\}`\}/);
+  assert.match(row, /title=\{depleted \? "Pus deoparte" : "Pune în alambic"\}/);
   assert.match(row, /onClick=\{\(\) => onSelect\(item\.id\)\}/);
   assert.match(row, /minHeight: 44/);
   assert.doesNotMatch(row, /doCombine|alchimieApi\.combine/);
+  assert.match(screen, /inventoryById=\{inventoryById\}/);
   assert.match(screen, /onSelect=\{toggle\}/);
 });
 

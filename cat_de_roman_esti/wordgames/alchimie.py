@@ -1,21 +1,24 @@
-"""Alchimie — an Infinite-Craft-style word game over the Romanian KG.
+"""Alchimie — a bounded, target-oriented crafting game over the Romanian KG.
 
-The player holds an INVENTORY of concepts and COMBINES two of them to discover new
-ones. A combine of ``a`` + ``b`` yields :meth:`WordGameService.common_neighbors` — the
-KG nodes adjacent to BOTH parents — minus whatever is already owned. The goal is to
-craft a hidden TARGET concept into the inventory.
+The shared graph is discovery input, not the live recipe book.  At game creation the
+server deterministically projects one to four short target-useful routes.  That sparse
+projection is stored in the session; a submitted pair normally
+produces one clear result (never more than two), instead of every shared graph neighbour.
+The goal is to craft a hidden TARGET concept into the inventory.
 
 Server-authoritative: the whole game (seeds, target, inventory) lives here. The target
 id is never echoed back until it has actually been discovered (``won``). Each instance is
 *built to be solvable*: the target is drawn from the combine-CLOSURE of the seed
 inventory (a fixpoint over ``common_neighbors``), at a depth of at least two generations
-so it takes several combines rather than a single obvious pairing.
+so it takes several combines rather than a single obvious pairing.  Recipe routes and
+the target id remain server-side.
 """
 
 from __future__ import annotations
 
 import random
 from dataclasses import dataclass, field
+from functools import lru_cache
 from itertools import combinations
 
 from django.urls import path
@@ -33,7 +36,11 @@ from ..web.http import (
 )
 from ._progress import excluded_pack_ids, record_finished
 from .categories import category_label, is_known, known_keys
-from .packs import ALCHIMIE_MAX_ACTIONS, get_pack, minimum_alchimie_actions
+from .packs import (
+    ALCHIMIE_MAX_ACTIONS,
+    ALCHIMIE_MAX_SEARCH_STATES,
+    get_pack,
+)
 from .service import SessionStore, daily_seed, get_service
 
 GAME_KEY = "alchimie"
@@ -49,9 +56,9 @@ SEED_MIN, SEED_MAX = 5, 7
 SEED_SALIENCE_FLOOR = 0.4
 # Seeds must be recognizable AND have a couple of real edges so they are combinable.
 SEED_MIN_DEGREE = 2
-# A "good" instance offers several openings: at least this many of the seed-inventory
-# pairs must already yield a fresh discovery, so a player never has to brute-force all
-# pairs to find their first move.
+# A "good" mined instance offers several openings: at least this many seed-inventory
+# pairs must yield a fresh result in that target's private recipe projection. Counting
+# the broader graph here would promise choices that runtime intentionally hides.
 MIN_OPENING_PAIRS = 2
 # Targets should themselves be recognizable, not obscure intermediates.
 TARGET_SALIENCE_FLOOR = 0.4
@@ -59,6 +66,16 @@ TARGET_SALIENCE_FLOOR = 0.4
 GREU_MAX_GENERATION = 5
 # How many consecutive fruitless combines before a gentle nudge becomes available.
 NUDGE_AFTER_FRUITLESS = 3
+# Sparse projection bounds.  Four routes keep replay varied without reopening the whole
+# category closure; two extra actions let a board expose alternate near-optimal routes.
+MAX_TARGET_ROUTES = 4
+ROUTE_DETOUR_ACTIONS = 2
+MAX_ROUTE_CANDIDATES = 128
+MAX_RECIPE_PAIRS = 24
+MAX_RESULTS_PER_RECIPE = 2
+MAX_PROJECTED_CONCEPTS = 32
+RECENT_INVENTORY_LIMIT = 8
+PREFERRED_RECIPE_STRENGTH = 0.55
 
 # Difficulty -> (target generation policy, seed-count range).
 #   usor : shallow target (generation 2) but a wide 6-7 seed inventory (more options).
@@ -66,6 +83,25 @@ NUDGE_AFTER_FRUITLESS = 3
 #   greu : deepest available target (3..GREU_MAX) with a lean 5-seed inventory.
 DIFFICULTIES = {"usor", "normal", "greu"}
 DEFAULT_DIFFICULTY = "normal"
+
+RecipePair = tuple[str, str]
+RecipeStep = tuple[RecipePair, tuple[str, ...]]
+RecipeRoute = tuple[RecipeStep, ...]
+
+
+def _pair_key(a: str, b: str) -> RecipePair:
+    return (a, b) if a < b else (b, a)
+
+
+@dataclass(frozen=True)
+class RecipeProjection:
+    """A private, deterministic recipe book for one target."""
+
+    recipes: dict[RecipePair, tuple[str, ...]]
+    routes: tuple[RecipeRoute, ...]
+    par: int
+    # Private audit metadata: quality of bounded routes discovered before selection.
+    candidate_quality: tuple[tuple[int, float, float], ...]
 
 
 def _difficulty_params(difficulty: str) -> tuple[int, int | None, int, int]:
@@ -95,9 +131,12 @@ class AlchimieSession:
     fruitless_streak: int = 0
     # Number of hints (nudges) the player has revealed; each costs a little score.
     hints_used: int = 0
-    # Player-picked board theme + curated-pack provenance (None for mined games).
+    # Player- or server-selected board theme + curated-pack provenance (None for mined games).
     category: str | None = None
     pack_id: str | None = None
+    # Private sparse recipe projection.  It is deliberately never serialized.
+    recipes: dict[RecipePair, tuple[str, ...]] = field(default_factory=dict)
+    routes: tuple[RecipeRoute, ...] = ()
 
     @property
     def won(self) -> bool:
@@ -143,9 +182,9 @@ def _closure_with_generations(
     generation N nodes first appear when combining items available after generation N-1.
     Fixpoint loop: keep combining all owned pairs until nothing new appears.
 
-    ``category`` scopes every combine to that category's subgraph (ADR-0013): the game is
-    always themed, so on the dense graph the closure stays ~a category (bounded, with real
-    depth) instead of exploding to the whole graph (everything craftable in ~2 gens).
+    ``category`` scopes projection-candidate expansion to that category's subgraph
+    (ADR-0044): the dense graph closure stays bounded and themed instead of reopening the
+    whole graph (where everything becomes craftable in roughly two generations).
     """
     svc = get_service()
     gen: dict[str, int] = {s: 0 for s in seeds}
@@ -167,19 +206,266 @@ def _closure_with_generations(
     return gen
 
 
-def _opening_pair_count(seeds: list[str], category: str | None = None) -> int:
-    """How many of the seed-inventory pairs already yield a *fresh* common neighbour.
+def _prune_route(
+    raw_steps: list[tuple[RecipePair, frozenset[str]]],
+    seeds: frozenset[str],
+    target: str,
+) -> RecipeRoute | None:
+    """Keep only outputs that a graph route actually needs later.
 
-    A high count means the player has several visible openings and never has to
-    brute-force every pair to find a first productive move.
+    Full-graph actions may yield many shared neighbours at once.  Walking the route
+    backwards identifies the one or two outputs that feed a later pair (or the target)
+    and discards unrelated discoveries.  A step needing more than two outputs is not a
+    suitable beginner recipe route.
+    """
+    required = {target}
+    selected: list[RecipeStep] = []
+    for pair, fresh in reversed(raw_steps):
+        outputs = tuple(sorted(required & fresh))
+        if not outputs or len(outputs) > MAX_RESULTS_PER_RECIPE:
+            return None
+        selected.append((pair, outputs))
+        required.difference_update(outputs)
+        required.update(node_id for node_id in pair if node_id not in seeds)
+    if required:
+        return None
+    selected.reverse()
+    return tuple(selected)
+
+
+def _route_quality(route: RecipeRoute) -> tuple[float, float, int]:
+    """Return minimum strength, mean strength, and broadest output degree.
+
+    A recipe result is a common neighbour, so both parent→output edges exist.  Stronger
+    weakest/average links read more naturally; lower-degree outputs avoid generic hubs.
     """
     svc = get_service()
+    strengths: list[float] = []
+    degrees: list[int] = []
+    for pair, outputs in route:
+        for output in outputs:
+            degrees.append(svc.degree(output))
+            for parent in pair:
+                edge = svc.link(parent, output)
+                strengths.append(edge.strength if edge is not None else 0.0)
+    if not strengths:
+        return (0.0, 0.0, 0)
+    return (
+        min(strengths),
+        sum(strengths) / len(strengths),
+        max(degrees, default=0),
+    )
+
+
+def _route_sort_key(route: RecipeRoute) -> tuple[object, ...]:
+    minimum, average, broadest_degree = _route_quality(route)
+    return (len(route), -minimum, -average, broadest_degree, route)
+
+
+def _minimum_projected_plan(
+    owned_ids: set[str],
+    target: str,
+    recipes: dict[RecipePair, tuple[str, ...]],
+    *,
+    max_actions: int = ALCHIMIE_MAX_ACTIONS,
+) -> list[RecipePair] | None:
+    """Return one exact deterministic plan through a sparse recipe projection."""
+    start = frozenset(owned_ids)
+    if target in start:
+        return []
+    frontier: dict[frozenset[str], list[RecipePair]] = {start: []}
+    seen = {start}
+    for _action in range(1, max_actions + 1):
+        next_layer: dict[frozenset[str], list[RecipePair]] = {}
+        for owned, plan in sorted(
+            frontier.items(), key=lambda item: tuple(sorted(item[0]))
+        ):
+            for pair in sorted(recipes):
+                if pair[0] not in owned or pair[1] not in owned:
+                    continue
+                fresh = frozenset(node for node in recipes[pair] if node not in owned)
+                if not fresh:
+                    continue
+                next_plan = [*plan, pair]
+                if target in fresh:
+                    return next_plan
+                state = owned | fresh
+                if state not in seen and state not in next_layer:
+                    next_layer[state] = next_plan
+        if not next_layer:
+            return None
+        frontier = next_layer
+        seen.update(frontier)
+    return None
+
+
+def _build_recipe_projection(
+    seeds: list[str],
+    target: str,
+    category: str | None,
+) -> RecipeProjection | None:
+    return _build_recipe_projection_cached(tuple(seeds), target, category)
+
+
+@lru_cache(maxsize=512)
+def _build_recipe_projection_cached(
+    seeds: tuple[str, ...],
+    target: str,
+    category: str | None,
+) -> RecipeProjection | None:
+    """Project a small private recipe book from the shared semantic graph.
+
+    Search mirrors the historical exact-action game so the established par stays valid.
+    Terminal paths are then backward-pruned and combined only while the explicit recipe,
+    result, and concept bounds remain satisfied.  Search and selection are sorted, hence
+    identical seeds/target/category always produce byte-equivalent projections.
+    """
+    svc = get_service()
+    start = frozenset(seeds)
+    frontier: set[frozenset[str]] = {start}
+    seen: set[frozenset[str]] = {start}
+    parents: dict[
+        frozenset[str], tuple[frozenset[str], RecipePair, frozenset[str]]
+    ] = {}
+    candidates: list[RecipeRoute] = []
+    minimum_par: int | None = None
+    state_count = 1
+    exhausted = False
+
+    def reconstruct(
+        owned: frozenset[str], pair: RecipePair, fresh: frozenset[str]
+    ) -> RecipeRoute | None:
+        raw_steps = [(pair, fresh)]
+        state = owned
+        while state != start:
+            previous, previous_pair, previous_fresh = parents[state]
+            raw_steps.append((previous_pair, previous_fresh))
+            state = previous
+        raw_steps.reverse()
+        return _prune_route(raw_steps, start, target)
+
+    for actions in range(1, ALCHIMIE_MAX_ACTIONS + 1):
+        if minimum_par is not None and actions > minimum_par + ROUTE_DETOUR_ACTIONS:
+            break
+        next_layer: set[frozenset[str]] = set()
+        for owned in sorted(frontier, key=lambda state: tuple(sorted(state))):
+            for pair in combinations(sorted(owned), 2):
+                fresh = frozenset(
+                    node_id
+                    for node_id in svc.common_neighbors(
+                        pair[0], pair[1], category=category
+                    )
+                    if node_id not in owned
+                )
+                if not fresh:
+                    continue
+                if target in fresh:
+                    if minimum_par is None:
+                        minimum_par = actions
+                    route = reconstruct(owned, pair, fresh)
+                    if route is not None and route not in candidates:
+                        candidates.append(route)
+                    if len(candidates) >= MAX_ROUTE_CANDIDATES:
+                        exhausted = True
+                        break
+                    continue
+                state = owned | fresh
+                if state in seen or state in next_layer:
+                    continue
+                state_count += 1
+                if state_count > ALCHIMIE_MAX_SEARCH_STATES:
+                    exhausted = True
+                    break
+                parents[state] = (owned, pair, fresh)
+                next_layer.add(state)
+            if exhausted:
+                break
+        if exhausted or not next_layer:
+            break
+        frontier = next_layer
+        seen.update(frontier)
+
+    if minimum_par is None or not candidates:
+        return None
+
+    # Human-legibility wins between equally short routes found by the bounded search:
+    # protect the weakest semantic link first, then average strength, then avoid generic
+    # high-degree outputs. This does not claim to enumerate every possible graph route.
+    candidates.sort(key=_route_sort_key)
+    candidate_quality = tuple(
+        (len(route), *_route_quality(route)[:2]) for route in candidates
+    )
+
+    recipes: dict[RecipePair, set[str]] = {}
+    routes: list[RecipeRoute] = []
+    for route in candidates:
+        minimum_strength, _average, _degree = _route_quality(route)
+        # The strongest discovered shortest route is the explicit solvability fallback.
+        # Additional routes must clear a semantic-strength floor; weak technical detours
+        # stay hidden.
+        if routes and minimum_strength < PREFERRED_RECIPE_STRENGTH:
+            continue
+        merged = {pair: set(outputs) for pair, outputs in recipes.items()}
+        compatible = True
+        for pair, outputs in route:
+            proposed = set(outputs)
+            existing = merged.get(pair)
+            # Never manufacture a two-result recipe merely by merging two alternative
+            # singleton routes.  Two outputs are retained only when one route genuinely
+            # needs both together for a later step.
+            if (
+                existing is not None
+                and len(existing) == 1
+                and len(proposed) == 1
+                and existing != proposed
+            ):
+                compatible = False
+                break
+            merged.setdefault(pair, set()).update(proposed)
+        if not compatible or any(
+            len(outputs) > MAX_RESULTS_PER_RECIPE for outputs in merged.values()
+        ):
+            continue
+        if routes and all(
+            set(outputs) <= recipes.get(pair, set()) for pair, outputs in route
+        ):
+            continue
+        projected = set(start)
+        for pair, outputs in merged.items():
+            projected.update(pair)
+            projected.update(outputs)
+        if len(merged) > MAX_RECIPE_PAIRS or len(projected) > MAX_PROJECTED_CONCEPTS:
+            continue
+        recipes = merged
+        routes.append(route)
+        if len(routes) >= MAX_TARGET_ROUTES:
+            break
+
+    if not routes:
+        return None
+    frozen_recipes = {
+        pair: tuple(sorted(outputs)) for pair, outputs in sorted(recipes.items())
+    }
+    plan = _minimum_projected_plan(set(seeds), target, frozen_recipes)
+    if plan is None or len(plan) != minimum_par:
+        return None
+    return RecipeProjection(
+        recipes=frozen_recipes,
+        routes=tuple(routes),
+        par=minimum_par,
+        candidate_quality=candidate_quality,
+    )
+
+
+def _projected_opening_pair_count(
+    seeds: list[str], recipes: dict[RecipePair, tuple[str, ...]]
+) -> int:
+    """Count seed pairs that are productive in this target's live recipe projection."""
     owned = set(seeds)
-    count = 0
-    for a, b in combinations(sorted(owned), 2):
-        if any(c not in owned for c in svc.common_neighbors(a, b, category=category)):
-            count += 1
-    return count
+    return sum(
+        any(result not in owned for result in recipes.get(_pair_key(a, b), ()))
+        for a, b in combinations(sorted(owned), 2)
+    )
 
 
 def _grow_seed_set(
@@ -191,7 +477,7 @@ def _grow_seed_set(
     NEW productive pair with something already owned. This avoids the old failure mode
     where seeds were sampled independently and most shared nothing (dead weight), leaving
     only a single productive pairing in the whole inventory. Combines are category-scoped
-    (ADR-0013) so seeds are wired to each other *within the theme*.
+    (ADR-0044) so seeds are wired to each other *within the theme*.
     """
     svc = get_service()
     starts = [n for n in pool if svc.degree(n) >= 3]
@@ -226,15 +512,15 @@ def _build_session(
 
     Guarantees:
       * seeds are recognizable (salience floor) and combinable (min degree);
-      * the inventory forms a connected web with several opening moves
-        (``>= MIN_OPENING_PAIRS`` fresh pairs) so progress never needs brute force;
+      * prefer an inventory with several currently productive projected openings
+        (``>= MIN_OPENING_PAIRS``), with a solvable thin fallback for sparse themes;
       * the target is reachable through the combine-closure at the difficulty's depth
         window and is itself recognizable (``TARGET_SALIENCE_FLOOR``).
     """
     svc = get_service()
     min_gen, max_gen, seed_min, seed_max = _difficulty_params(difficulty)
-    # Alchimie is ALWAYS themed (ADR-0013): if no category was requested, pick one so the
-    # combine-closure stays bounded to a category subgraph instead of the whole dense graph.
+    # Alchimie stays themed (ADR-0044): if no category was requested, pick one so private
+    # projection construction stays bounded instead of reopening the whole dense graph.
     if category is None:
         category = _pick_scope_category(rng, svc)
     members = set(svc.by_category(category)) if category is not None else None
@@ -257,22 +543,18 @@ def _build_session(
         raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
 
     def _finish(seeds: list[str], target: str) -> AlchimieSession | None:
-        par = minimum_alchimie_actions(
-            svc,
-            seeds,
-            target,
-            category,
-            max_actions=ALCHIMIE_MAX_ACTIONS,
-        )
-        if par is None:
+        projection = _build_recipe_projection(seeds, target, category)
+        if projection is None:
             return None
         session = AlchimieSession(
             seeds=list(seeds),
             target=target,
-            target_depth=par,
+            target_depth=projection.par,
             difficulty=difficulty,
             daily=daily,
             category=category,
+            recipes=projection.recipes,
+            routes=projection.routes,
         )
         for s in seeds:
             session.add(s, None)
@@ -284,7 +566,6 @@ def _build_session(
         seeds = _grow_seed_set(rng, k, pool, category)
         if seeds is None:
             continue
-        openings = _opening_pair_count(seeds, category)
         gen = _closure_with_generations(seeds, category)
         # Candidates satisfying this difficulty's depth window AND recognizable.
         cands = [
@@ -306,6 +587,7 @@ def _build_session(
         session = _finish(seeds, target)
         if session is None:
             continue
+        openings = _projected_opening_pair_count(session.seeds, session.recipes)
         if openings >= MIN_OPENING_PAIRS:
             return session
         # Keep the first viable-but-thin instance as a fallback if nothing better lands.
@@ -344,29 +626,13 @@ def _build_session(
 
 
 def _useful_pair(session: AlchimieSession) -> tuple[str, str] | None:
-    """A currently-owned pair that makes *forward progress* toward the target.
-
-    Returns the lexicographically-first owned pair whose fresh discovery strictly lowers
-    the number of remaining combine-generations to the target. ``None`` if the target is
-    already owned or somehow unreachable from the current inventory (shouldn't happen for
-    built instances). Used to power the gentle nudge after fruitless combines.
-    """
+    """The first action in an exact remaining plan through the private projection."""
     if session.won:
         return None
-    svc = get_service()
-    cat = session.category
-    owned = set(session.owned)
-    base_gen = _closure_with_generations(list(owned), cat).get(session.target)
-    if base_gen is None or base_gen == 0:
-        return None
-    for a, b in combinations(sorted(owned), 2):
-        fresh = [c for c in svc.common_neighbors(a, b, category=cat) if c not in owned]
-        if not fresh:
-            continue
-        new_gen = _closure_with_generations(list(owned | set(fresh)), cat).get(session.target)
-        if new_gen is not None and new_gen < base_gen:
-            return (a, b)
-    return None
+    plan = _minimum_projected_plan(
+        set(session.owned), session.target, session.recipes
+    )
+    return plan[0] if plan else None
 
 
 # ----------------------------------------------------------------------------- schemas
@@ -380,12 +646,45 @@ def _concept(node_id: str) -> dict[str, str]:
     return {"id": node_id, "label": svc.label(node_id)}
 
 
+def _inventory_flags(
+    session: AlchimieSession,
+) -> dict[str, tuple[bool, bool, bool, bool]]:
+    """Return ``recent, useful, ready, depleted`` for every owned concept.
+
+    ``useful`` means the concept still participates in a private recipe with an unseen
+    output. ``ready`` narrows that to a recipe whose other ingredient is already owned.
+    Depleted ingredients remain in the full encyclopedia/lineage but leave the active
+    beginner workspace automatically.
+    """
+    owned = set(session.owned)
+    useful: set[str] = set()
+    ready: set[str] = set()
+    for pair, outputs in session.recipes.items():
+        if not any(output not in owned for output in outputs):
+            continue
+        useful.update(node_id for node_id in pair if node_id in owned)
+        if pair[0] in owned and pair[1] in owned:
+            ready.update(pair)
+    recent = set(session.order[-RECENT_INVENTORY_LIMIT:])
+    return {
+        node_id: (
+            node_id in recent,
+            node_id in useful,
+            node_id in ready,
+            node_id not in useful,
+        )
+        for node_id in session.order
+    }
+
+
 def _inventory_payload(session: AlchimieSession) -> list[dict[str, object]]:
     """Inventory in discovery order, each item carrying its parent concepts (the WHY)."""
     svc = get_service()
+    flags = _inventory_flags(session)
     out: list[dict[str, object]] = []
     for nid in session.order:
         parents = session.owned[nid]
+        recent, useful, ready, depleted = flags[nid]
         out.append(
             {
                 "id": nid,
@@ -393,6 +692,10 @@ def _inventory_payload(session: AlchimieSession) -> list[dict[str, object]]:
                 "parents": (
                     [_concept(parents[0]), _concept(parents[1])] if parents else None
                 ),
+                "recent": recent,
+                "useful": useful,
+                "ready": ready,
+                "depleted": depleted,
             }
         )
     return out
@@ -437,10 +740,17 @@ def _share_line(session: AlchimieSession) -> str:
 
 
 def _state_payload(game_id: str, session: AlchimieSession) -> dict[str, object]:
+    inventory = _inventory_payload(session)
+    active_count = sum(not bool(item["depleted"]) for item in inventory)
     payload: dict[str, object] = {
         "game_id": game_id,
         "target": _target_payload(session),
-        "inventory": _inventory_payload(session),
+        "inventory": inventory,
+        "inventory_summary": {
+            "active": active_count,
+            "depleted": len(inventory) - active_count,
+            "total": len(inventory),
+        },
         "discovered_count": max(0, len(session.order) - len(session.seeds)),
         "seed_count": len(session.seeds),
         "moves": session.moves,
@@ -448,10 +758,19 @@ def _state_payload(game_id: str, session: AlchimieSession) -> dict[str, object]:
         "target_depth": session.target_depth,
         "won": session.won,
         "hints_used": session.hints_used,
+        "hint_stage": "output" if session.hints_used == 0 else "pair",
         # A gentle nudge unlocks only after several fruitless combines in a row.
         "hint_available": (
             not session.won and session.fruitless_streak >= NUDGE_AFTER_FRUITLESS
         ),
+        # Counts describe the bounded shape, never the private recipe ids/routes.
+        "recipe_summary": {
+            "pairs": len(session.recipes),
+            "routes": len(session.routes),
+            "max_results": max(
+                (len(outputs) for outputs in session.recipes.values()), default=0
+            ),
+        },
     }
     if session.daily:
         payload["daily"] = session.daily
@@ -480,7 +799,8 @@ class CreateGameView(ContractAPIView):
 
         ``?difficulty=`` in {usor,normal,greu} tunes the target depth + seed count.
         ``?daily=YYYY-MM-DD`` makes a shared, deterministic daily instance (ignores seed).
-        Otherwise an optional ``?seed=`` makes the instance reproducible.
+        Otherwise an optional ``?seed=`` makes the instance reproducible. Every board is
+        themed; without ``?category=`` the server deterministically selects a usable theme.
         """
         seed = query_int(request, "seed")
         difficulty = query_str(request, "difficulty", DEFAULT_DIFFICULTY)
@@ -505,16 +825,29 @@ class CreateGameView(ContractAPIView):
                 exclude_ids=excluded_pack_ids(request, GAME_KEY),
             )
         if curated is not None:
+            curated_seeds = [str(s) for s in curated.payload["seeds"]]
+            curated_target = str(curated.payload["target"])
+            projection = _build_recipe_projection(
+                curated_seeds, curated_target, curated.category
+            )
+            if (
+                projection is None
+                or projection.par != int(curated.payload["target_depth"])
+            ):
+                raise http_error(503, "Jocul ales nu are o proiecție de rețete validă.")
             session = AlchimieSession(
-                seeds=[str(s) for s in curated.payload["seeds"]],
-                target=str(curated.payload["target"]),
-                target_depth=int(curated.payload["target_depth"]),
+                seeds=curated_seeds,
+                target=curated_target,
+                target_depth=projection.par,
                 difficulty=difficulty,
                 daily=daily,
-                # The item's OWN category scopes combines (ADR-0013); Alchimie shows the
-                # target label so the theme is not a hidden secret — always set + echoed.
+                # The item's own category scopes private projection construction
+                # (ADR-0044); runtime never queries the broad common-neighbour set.
+                # The target label already makes the theme public, so always echo it.
                 category=curated.category,
                 pack_id=curated.id,
+                recipes=projection.recipes,
+                routes=projection.routes,
             )
             for s in session.seeds:
                 session.add(s, None)
@@ -537,7 +870,7 @@ class CombineView(ContractAPIView):
 
     @extend_schema(operation_id="alchimie_combine", tags=["alchimie"])
     def post(self, request, game_id: str):
-        """Combine two owned concepts; append any newly-discovered shared neighbours."""
+        """Combine two owned concepts through the session's sparse recipe projection."""
         body = parse_body(request, CombineBody)
         svc = get_service()
         session = _require(game_id)
@@ -556,11 +889,11 @@ class CombineView(ContractAPIView):
             raise http_error(400, "Alege doua concepte diferite.")
 
         session.moves += 1
-        # Combines are scoped to the game's category (ADR-0013) so the reachable set
-        # matches the closure the target_depth/score were computed against.
+        # The category graph was used only to build this private, target-useful recipe
+        # book. Runtime never reopens the broad common-neighbour space.
         discovered = [
             c
-            for c in svc.common_neighbors(a, b, category=session.category)
+            for c in session.recipes.get(_pair_key(a, b), ())
             if c not in session.owned
         ]
         for c in discovered:
@@ -580,7 +913,7 @@ class CombineView(ContractAPIView):
             message = f"Ai descoperit tinta: {svc.label(session.target)}!"
         elif len(discovered) == 1:
             message = f"Ai descoperit: {svc.label(discovered[0])}."
-        else:
+        else:  # The explicit projection permits at most two tied/paired results.
             names = ", ".join(svc.label(c) for c in discovered)
             message = f"Ai descoperit {len(discovered)} concepte: {names}."
 
@@ -593,12 +926,14 @@ class CombineView(ContractAPIView):
 class HintGameView(ContractAPIView):
     @extend_schema(operation_id="alchimie_hint_game", tags=["alchimie"])
     def post(self, request, game_id: str):
-        """Reveal a gentle nudge: a pair of owned concepts that makes forward progress.
+        """Reveal a progressive nudge without serializing the private recipe route.
 
         Only allowed once the player has been genuinely stuck (``NUDGE_AFTER_FRUITLESS``
         fruitless combines in a row). Each hint costs score and resets the dry-spell counter
-        so it can't be spammed. Makes the "discovered nothing" path feel fair without handing
-        over the answer — it points at a useful *pair*, never the target itself.
+        so it can't be spammed. The first hint names a reachable non-target output (or just
+        re-orients to the already-public theme when the target is one action away). A later
+        hint may reveal one useful owned pair. Neither response exposes the target id or the
+        hidden full route.
         """
         session = _require(game_id)
         if session.won:
@@ -612,16 +947,48 @@ class HintGameView(ContractAPIView):
             # Defensive: no forward pair (shouldn't happen for built instances).
             payload = _state_payload(game_id, session)
             payload["hint"] = None
+            payload["hint_kind"] = "none"
+            payload["hint_output"] = None
             payload["message"] = "Niciun indiciu disponibil acum."
             return Response(payload)
         session.hints_used += 1
         a, b = pair
         payload = _state_payload(game_id, session)
-        payload["hint"] = [_concept(a), _concept(b)]
-        payload["message"] = (
-            f"Indiciu: incearca sa combini {get_service().label(a)} + "
-            f"{get_service().label(b)}."
-        )
+        if session.hints_used == 1:
+            outputs = [
+                output
+                for output in session.recipes.get(pair, ())
+                if output not in session.owned and output != session.target
+            ]
+            payload["hint"] = None
+            if outputs:
+                output = outputs[0]
+                payload["hint_kind"] = "output"
+                # Label only: output ids and every route stay private until discovered.
+                payload["hint_output"] = {"label": get_service().label(output)}
+                payload["message"] = (
+                    f"Indiciu: caută mai întâi «{get_service().label(output)}»."
+                )
+            else:
+                payload["hint_kind"] = "category"
+                payload["hint_output"] = None
+                if session.category:
+                    payload["message"] = (
+                        "Indiciu: ținta e aproape. Rămâi în tema "
+                        f"{category_label(session.category)}."
+                    )
+                else:
+                    payload["message"] = (
+                        "Indiciu: ținta e la un pas; caută o pereche utilă."
+                    )
+        else:
+            payload["hint"] = [_concept(a), _concept(b)]
+            payload["hint_kind"] = "pair"
+            payload["hint_output"] = None
+            payload["message"] = (
+                f"Indiciu: combină {get_service().label(a)} + "
+                f"{get_service().label(b)}."
+            )
         return Response(payload)
 
 

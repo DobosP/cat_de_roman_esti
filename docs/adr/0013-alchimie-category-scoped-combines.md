@@ -1,7 +1,7 @@
 # ADR-0013: Alchimie combines are category-scoped
 
 Date: 2026-07-07
-Status: accepted
+Status: superseded-by ADR-0044
 
 ## Decision
 
