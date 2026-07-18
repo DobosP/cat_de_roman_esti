@@ -58,7 +58,7 @@ positive reveal boundaries:
 |------|--------|------------------|---------------|
 | contexto | target id/label/solution | no `target` or `solution` key; target id/label absent everywhere; guesses carry rank feedback | won / gave up |
 | alchimie | target id | `target.id = null`, `revealed = false` (label shown as the goal by design) | crafted (won) |
-| lant | solution path | only `start` + `target` ids exposed; no intermediate path node; hint is on-demand | per-hop, by playing / `…/hint` |
+| lant | full route corridor | only `start` + `target` ids; up to six local choices carry label + relation but no id/on-track flag; hints prefer an unvisited target-reachable route, with an ID-free `backtrack` stage only when free undo is the safe recovery | per-hop by playing; one hop id on third same-position `…/hint` |
 | conexiuni | unsolved category grouping | no `solution`; remaining tiles carry only `{id,label}`; each correctly solved group exposes its own key/label/tiles; the optional clue stays redacted | that group: correct guess; full solution: won / lost |
 
 Seeds/daily are deterministic by design (shared daily challenge); offline play inherently ships

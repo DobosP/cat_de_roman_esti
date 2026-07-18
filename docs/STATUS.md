@@ -1,7 +1,7 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-18. This file is the repository's current source of truth._
-_Last verified: 2026-07-18 (local Contexto broad-guidance gate: backend 403; focused Contexto 53 and Contexto/mobile/session 70; Ruff, both validators, workflow syntax, and whitespace; frontend lint, typecheck, 10 source-test files, temporary production build, and 116.12 KiB initial gzip budget; KG/pack mirrors byte-identical. Live release remains V32 `f40fa8bc1b8880637aeeb01816c612ea850f73c0`, healthy image `sha256:3ed5fc61a95ec08417f1ebb68f329bf85779ab0988dffdcc7537c5d769dc6e9a`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles.)_
+_Last verified: 2026-07-18 (V34 combined verification pending. Contexto source gate: backend 403, focused 53, mobile/session aggregate 70. Lanț source gate: focused 46, mobile aggregate 52, curated/pack/session 46. Both passed Ruff, validators, workflow syntax, whitespace, and frontend source gates. Live release remains V32 `f40fa8bc1b8880637aeeb01816c612ea850f73c0`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -14,11 +14,11 @@ The critique layer now fails closed from generation through promotion:
 
 ## Current outcome — browser recovery (ADR-0027 through ADR-0029, ADR-0034, ADR-0035)
 
-Lanț renders server-authored recovery; bounded spelling and path choices fill but never
-submit. Conexiuni retains one-away selections for one-tile swaps and blocks unchanged
-sets without inferring membership. Cald sau Rece keeps target-filtered typo recovery.
-Alchimie keeps a 12-reaction journal, an authoritative empty pair, and 44 px bench slots.
-All four remain server-authoritative; score, secrecy, TTL, and caps are unchanged.
+Lanț exposes up to three private-corridor choices plus safe detours as ID-free label/relation
+chips; visible homonyms bind exactly and every other direct hop stays legal. Hints prefer a
+safe forward route before free undo. Conexiuni retains one-away swaps; Cald sau Rece keeps
+target-filtered typo recovery. Alchimie keeps a 12-reaction journal and authoritative empty
+pair. All remain server-authoritative; score, undo, secrecy, TTL, and caps are unchanged.
 
 ## Current outcome — beginner mobile interface (ADR-0031)
 

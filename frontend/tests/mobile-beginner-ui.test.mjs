@@ -46,6 +46,16 @@ test("Romanian labels wrap on a responsive Connections board and long paths scro
   assert.match(css, /\.connection-tile \{[\s\S]*?overflow-wrap: anywhere/);
   assert.match(lant, /className="row wrap breadcrumb-trail"/);
   assert.match(css, /\.breadcrumb-trail \{[\s\S]*?overflow-x: auto/);
+  assert.match(css, /\.lant-choice-grid \{[\s\S]*?repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(
+    css,
+    /@media \(max-width: 480px\)[\s\S]*?\.lant-choice-grid \{[\s\S]*?repeat\(2, minmax\(0, 1fr\)\)/,
+  );
+  assert.match(
+    css,
+    /@media \(max-width: 480px\)[\s\S]*?\.lant-choice-grid > \.lant-choice:last-child:nth-child\(odd\)[\s\S]*?grid-column: 1 \/ -1/,
+  );
+  assert.match(css, /\.lant-choice \{[\s\S]*?min-height: 58px/);
 });
 
 test("global shortcuts ignore focused controls instead of double-submitting", () => {
@@ -62,7 +72,10 @@ test("global shortcuts ignore focused controls instead of double-submitting", ()
 test("touch users get visible rank meaning and important feedback is announced", () => {
   assert.match(caldRece, /Număr mai mic = mai aproape · #1 = răspunsul/);
   assert.match(alchimie, /lastMessage[\s\S]*?role="status"[\s\S]*?aria-live="polite"/);
-  assert.match(lant, /hint\?\.hint[\s\S]*?role="status"[\s\S]*?aria-live="polite"/);
+  assert.match(
+    lant,
+    /hint && \(hint\.stage \|\| hint\.hint\)[\s\S]*?role="status"[\s\S]*?aria-live="polite"/,
+  );
   assert.match(conexiuni, /clue\.message[\s\S]{0,80}<\/m\.p>/);
   assert.match(conexiuni, /role="status"\s*aria-live="polite"/);
 });

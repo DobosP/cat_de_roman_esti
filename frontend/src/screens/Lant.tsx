@@ -4,6 +4,7 @@ import { Button, Spinner, type ToastKind } from "@roedu/ui";
 import {
   type Difficulty,
   type HintResult,
+  type LantChoice,
   type LantState,
   type PathStep,
   createLant,
@@ -222,7 +223,14 @@ export default function Lant({
   }, [state, puzzleKey, recordOnce, active]);
 
   useEffect(() => {
-    if (state && !state.won) inputRef.current?.focus();
+    // Do not summon the phone keyboard over the new tap-first local choices.
+    if (
+      state &&
+      !state.won &&
+      window.matchMedia("(pointer: fine)").matches
+    ) {
+      inputRef.current?.focus();
+    }
   }, [state]);
 
   // On the win screen, Enter starts another chain with the same free-play filters.
@@ -252,11 +260,11 @@ export default function Lant({
     return state.moves - state.optimal;
   }, [state]);
   // True distance left, learned from the most recent hint for THIS current node.
-  const hintRemaining = hint?.hint && hint.remaining !== undefined ? hint.remaining : null;
+  const hintRemaining = hint?.remaining ?? null;
 
-  async function submit() {
+  async function submit(choice?: LantChoice) {
     if (!state || busy || won) return;
-    const value = text.trim();
+    const value = (choice?.label ?? text).trim();
     if (!value) return;
     setBusy(true);
     setHint(null);
@@ -285,6 +293,7 @@ export default function Lant({
               won: res.won ?? prev.won,
               score: res.score ?? prev.score,
               share: res.share ?? prev.share,
+              choices: res.choices ?? prev.choices,
             }
           : prev,
       );
@@ -338,7 +347,7 @@ export default function Lant({
     try {
       const res = await hintLant(state.game_id);
       setHint(res);
-      if (res.hint) {
+      if (res.hint || res.stage) {
         sound.playSelect();
       } else {
         const message = res.message ?? "Niciun indiciu.";
@@ -514,11 +523,35 @@ export default function Lant({
           <NextMove
             icon="🔗"
             title={`Leagă-te de ${state.current.label}`}
-            detail="Scrie un concept legat direct."
+            detail="Alege o sugestie sau scrie alt vecin."
             progress={`→ ${state.target.label}`}
             accent={DEF.accent}
           />
         )}
+
+        {!won && state.choices?.length > 0 ? (
+          <section className="lant-choice-panel col" aria-labelledby="lant-choice-title">
+            <div className="spread row" style={{ gap: 10, alignItems: "baseline" }}>
+              <strong id="lant-choice-title">Salturi de aici</strong>
+              <span className="faint">toate sunt legături valide</span>
+            </div>
+            <div className="lant-choice-grid">
+              {state.choices.map((choice) => (
+                <button
+                  key={`${choice.label}-${choice.relation}`}
+                  type="button"
+                  className="lant-choice"
+                  disabled={busy}
+                  aria-label={`Salt la ${choice.label}: ${choice.relation}`}
+                  onClick={() => void submit(choice)}
+                >
+                  <strong>{choice.label}</strong>
+                  <span>{choice.relation}</span>
+                </button>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         <span
           className="visually-hidden"
@@ -572,7 +605,7 @@ export default function Lant({
               <input
                 ref={inputRef}
                 className="field fill"
-                placeholder="Scrie un concept legat…"
+                placeholder="Sau scrie alt concept…"
                 value={text}
                 disabled={busy}
                 onChange={(e) => setText(e.target.value)}
@@ -672,7 +705,7 @@ export default function Lant({
             </AnimatePresence>
 
             <AnimatePresence>
-              {hint?.hint && (
+              {hint && (hint.stage || hint.hint) && (
                 <m.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
@@ -682,9 +715,40 @@ export default function Lant({
                   role="status"
                   aria-live="polite"
                 >
-                  <div className="col" style={{ gap: 4 }}>
-                    <span className="muted" style={{ fontSize: "0.85rem" }}>
-                      Încearcă:{" "}
+                  <div className="col" style={{ gap: 8 }}>
+                    <strong style={{ color: "var(--warn)", fontSize: "0.8rem" }}>
+                      {hint.stage === "direction"
+                        ? "O DIRECȚIE"
+                        : hint.stage === "alternatives"
+                          ? "VARIANTE UTILE"
+                          : hint.stage === "backtrack"
+                            ? "UN PAS ÎNAPOI"
+                            : "UN SALT"}
+                    </strong>
+                    {hint.message ? (
+                      <span className="muted" style={{ fontSize: "0.85rem" }}>
+                        {hint.message}
+                      </span>
+                    ) : null}
+                    {hint.alternatives_choices?.length ? (
+                      <div className="row wrap" style={{ gap: 8 }}>
+                        {hint.alternatives_choices.map((choice) => (
+                          <Button
+                            key={`${choice.label}-${choice.relation}`}
+                            type="button"
+                            variant="secondary"
+                            title={choice.relation}
+                            onClick={() => {
+                              setText(choice.label);
+                              inputRef.current?.focus();
+                            }}
+                          >
+                            {choice.label}
+                          </Button>
+                        ))}
+                      </div>
+                    ) : null}
+                    {hint.hint ? (
                       <button
                         type="button"
                         className="hint-fill-button"
@@ -693,48 +757,20 @@ export default function Lant({
                           if (hint.hint) setText(hint.hint.label);
                           inputRef.current?.focus();
                         }}
-                        style={{
-                          background: "none",
-                          border: "none",
-                          padding: 0,
-                          font: "inherit",
-                          fontWeight: 700,
-                          color: "var(--warn)",
-                          cursor: "pointer",
-                          textDecoration: "underline",
-                        }}
                       >
-                        {hint.hint.label}
+                        Încearcă <strong>{hint.hint.label}</strong>
+                        {hint.relation ? ` · ${hint.relation}` : ""}
                       </button>
-                      {hint.relation ? (
-                        <span className="faint"> ({hint.relation})</span>
-                      ) : null}
-                    </span>
-                    {hint.alternatives && hint.alternatives > 1 ? (
-                      <span className="faint" style={{ fontSize: "0.72rem" }}>
-                        {hint.alternatives} variante bune de aici — există mai multe
-                        drumuri.
-                      </span>
                     ) : null}
-                    {hint.alternatives_labels?.length ? (
-                      <div className="row wrap" style={{ gap: 8 }}>
-                        <span className="faint" style={{ fontSize: "0.78rem" }}>
-                          Alte drumuri:
-                        </span>
-                        {hint.alternatives_labels.map((label) => (
-                          <Button
-                            key={label}
-                            type="button"
-                            variant="secondary"
-                            onClick={() => {
-                              setText(label);
-                              inputRef.current?.focus();
-                            }}
-                          >
-                            {label}
-                          </Button>
-                        ))}
-                      </div>
+                    {hint.stage === "backtrack" ? (
+                      <Button
+                        type="button"
+                        variant="secondary"
+                        disabled={busy || state.moves === 0}
+                        onClick={() => void handleUndo()}
+                      >
+                        ↶ Anulează ultimul salt
+                      </Button>
                     ) : null}
                   </div>
                 </m.div>

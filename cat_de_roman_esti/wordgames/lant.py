@@ -6,12 +6,14 @@ along the chain. The goal is to reach the target in as few moves as possible.
 
 Server-authoritative: the chain, the optimal distance and all validation live here.
 The target id is public (it must be shown) but is only meaningful with the hidden
-graph; the frontend never sees the shortest path until it asks for a hint.
+graph; the frontend sees a bounded local menu, never the route corridor or full path.
 """
 
 from __future__ import annotations
 
 import random
+import threading
+from collections import OrderedDict
 from dataclasses import dataclass, field
 
 from django.urls import path
@@ -30,12 +32,14 @@ from ..web.http import (
 from ._progress import excluded_pack_ids, record_finished
 from .categories import category_label, is_known
 from .packs import (
+    CURATED_DAILY_MIN_POOL,
     LANT_MIN_FIRST_HOP_CHOICES,
     LANT_MIN_LAYER_WIDTH,
+    CuratedItem,
+    GamesPack,
     get_pack,
-    lant_branch_profile,
 )
-from .service import SessionStore, daily_seed, get_service, normalize
+from .service import SessionStore, WordGameService, daily_seed, get_service, normalize
 
 GAME_KEY = "lant"
 
@@ -60,6 +64,29 @@ _MIN_FIRST_HOP_CHOICES = LANT_MIN_FIRST_HOP_CHOICES
 _MIN_LAYER_WIDTH = LANT_MIN_LAYER_WIDTH
 # Once we have found enough genuinely-good candidates we stop early (keeps latency low).
 _ENOUGH_GOOD = 6
+
+# A concept is in a board's private route corridor when a route through it is at most
+# par + 2. The server never serializes membership or a full corridor.
+_CORRIDOR_SLACK = 2
+_BEGINNER_MIN_FIRST_HOPS = 3
+_BEGINNER_MIN_LAYER_WIDTH = 3
+_BEGINNER_PREFERRED_POOL = 3
+
+# Small local menus scan well on phones. Detour-thin corners may expose only the three
+# corridor slots; unreachable or extra corridor nodes never pad the visual count.
+_MAX_VISIBLE_CHOICES = 6
+_CORRIDOR_CHOICE_QUOTA = 3
+
+# Broad generic nodes remain legal but lose guidance rank above the fixture's approximate
+# 95th-percentile live degree.
+_HUB_SOFT_DEGREE = 20
+
+_ROUTE_PROFILE_CACHE_MAX = 512
+_RouteProfiles = tuple[tuple[int, int, int], tuple[int, int, int]]
+_route_profile_cache: OrderedDict[
+    tuple[int, str, str, int, int], tuple[WordGameService, _RouteProfiles]
+] = OrderedDict()
+_route_profile_cache_lock = threading.Lock()
 
 
 def _score_for(moves: int, optimal: int) -> int:
@@ -88,10 +115,10 @@ class LantSession:
     # Player-picked board theme + curated-pack provenance (None for mined games).
     category: str | None = None
     pack_id: str | None = None
-    # Hint requests per exact chain state (ADR-0022): the SECOND ask from the same
-    # position also names alternatives, so "still stuck here" is well-defined even
-    # across undo walks. Bounded by positions actually visited in one session.
-    hint_requests: dict[tuple[str, ...], int] = field(default_factory=dict)
+    # Voluntary help escalates only while the position stays unchanged.  Moves and undo
+    # reset this capped counter, so exploratory/revisited chains cannot retain O(n²)
+    # tuple keys in the session.
+    hint_requests: int = 0
 
     @property
     def current(self) -> str:
@@ -142,9 +169,12 @@ def _resolve_neighbor(text: str, current: str, target: str) -> str | None:
 
     dist_to_target = svc.distances_to(target)
 
-    def _closeness(nid: str) -> tuple[int, str]:
+    def _closeness(nid: str) -> tuple[int, float, str, str]:
         d = dist_to_target.get(nid)
-        return (d if d is not None else 1_000_000, nid)
+        return (
+            d if d is not None else 1_000_000,
+            *_hop_quality(current, nid),
+        )
 
     return min(legal, key=_closeness)
 
@@ -152,6 +182,215 @@ def _resolve_neighbor(text: str, current: str, target: str) -> str | None:
 def _concept(node_id: str) -> dict[str, str]:
     svc = get_service()
     return {"id": node_id, "label": svc.label(node_id)}
+
+
+def _short_relation(a: str, b: str) -> str:
+    """Return a concise local-choice label without changing edge semantics."""
+    label = " ".join(get_service().link_label(a, b).split()) or "legătură directă"
+    if len(label) <= 34:
+        return label
+    head = label[:33].rsplit(" ", 1)[0]
+    return f"{head or label[:33]}…"
+
+
+def _hub_penalty(node_id: str) -> float:
+    """Softly demote generic high-degree concepts; never make a legal hop illegal."""
+    excess_degree = max(0, get_service().degree(node_id) - _HUB_SOFT_DEGREE)
+    return min(1.25, excess_degree * 0.08)
+
+
+def _hop_quality(current: str, node_id: str) -> tuple[float, str, str]:
+    svc = get_service()
+    edge = svc.link(current, node_id)
+    strength = edge.strength if edge is not None else 0.0
+    quality = strength * 4 + _salience(node_id) * 1.5 - _hub_penalty(node_id)
+    return (-quality, normalize(svc.label(node_id)), node_id)
+
+
+def _route_profiles(
+    start: str, target: str, optimal: int, *, slack: int = _CORRIDOR_SLACK
+) -> _RouteProfiles:
+    """Compute strict-shortest and near-shortest width profiles with one BFS pair."""
+    svc = get_service()
+    key = (id(svc), start, target, optimal, slack)
+    with _route_profile_cache_lock:
+        cached = _route_profile_cache.get(key)
+        if cached is not None and cached[0] is svc:
+            _route_profile_cache.move_to_end(key)
+            return cached[1]
+
+    result = _compute_route_profiles(svc, start, target, optimal, slack=slack)
+    with _route_profile_cache_lock:
+        _route_profile_cache[key] = (svc, result)
+        _route_profile_cache.move_to_end(key)
+        while len(_route_profile_cache) > _ROUTE_PROFILE_CACHE_MAX:
+            _route_profile_cache.popitem(last=False)
+    return result
+
+
+def _compute_route_profiles(
+    svc: WordGameService,
+    start: str,
+    target: str,
+    optimal: int,
+    *,
+    slack: int,
+) -> _RouteProfiles:
+    dist_from_start = svc.distances_from(start)
+    dist_to_target = svc.distances_to(target)
+    budget = optimal + max(0, slack)
+    shortest_layers: dict[int, int] = {}
+    corridor_layers: dict[int, int] = {}
+    for node_id, from_start in dist_from_start.items():
+        to_target = dist_to_target.get(node_id)
+        if to_target is None:
+            continue
+        route_length = from_start + to_target
+        if route_length == optimal:
+            shortest_layers[from_start] = shortest_layers.get(from_start, 0) + 1
+        if route_length <= budget:
+            corridor_layers[from_start] = corridor_layers.get(from_start, 0) + 1
+
+    def profile(layers: dict[int, int], *, near: bool) -> tuple[int, int, int]:
+        intermediate = [layers.get(layer, 0) for layer in range(1, optimal)]
+        first_hops = sum(
+            1
+            for neighbor in svc.neighbor_ids(start)
+            if (
+                dist_to_target.get(neighbor, budget + 1) + 1 <= budget
+                if near
+                else dist_to_target.get(neighbor) == optimal - 1
+            )
+        )
+        return (
+            first_hops,
+            min(intermediate) if intermediate else 1,
+            sum(intermediate),
+        )
+
+    return profile(shortest_layers, near=False), profile(corridor_layers, near=True)
+
+
+def _corridor_profile(
+    start: str, target: str, optimal: int, *, slack: int = _CORRIDOR_SLACK
+) -> tuple[int, int, int]:
+    """Return first-hop, narrow-layer and total width for routes within par + slack."""
+    return _route_profiles(start, target, optimal, slack=slack)[1]
+
+
+def _near_route_hops(
+    session: LantSession, dist_to_target: dict[str, int] | None = None
+) -> list[str]:
+    """Legal next hops that still permit an actual play of at most par + 2 moves."""
+    svc = get_service()
+    remaining_budget = session.optimal + _CORRIDOR_SLACK - session.moves
+    if dist_to_target is None:
+        dist_to_target = svc.distances_to(session.target)
+    return [
+        node_id
+        for node_id in svc.neighbor_ids(session.current)
+        if node_id not in session.chain
+        and dist_to_target.get(node_id, remaining_budget + 1) + 1 <= remaining_budget
+    ]
+
+
+def _distinct_hops(
+    current: str,
+    target: str,
+    node_ids: list[str],
+    dist_to_target: dict[str, int] | None = None,
+) -> list[str]:
+    """Dedupe an ID-private candidate set by the public normalized label."""
+    svc = get_service()
+    if dist_to_target is None:
+        dist_to_target = svc.distances_to(target)
+    ranked = sorted(
+        set(node_ids),
+        key=lambda node_id: (
+            dist_to_target.get(node_id, 1_000_000),
+            *_hop_quality(current, node_id),
+        ),
+    )
+    seen: set[str] = set()
+    distinct: list[str] = []
+    for node_id in ranked:
+        key = normalize(svc.label(node_id))
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        distinct.append(node_id)
+    return distinct
+
+
+def _shortest_hops(
+    session: LantSession, dist_to_target: dict[str, int] | None = None
+) -> list[str]:
+    """Unvisited legal hops one step closer to the target, deterministically ranked."""
+    svc = get_service()
+    if dist_to_target is None:
+        dist_to_target = svc.distances_to(session.target)
+    remaining = dist_to_target.get(session.current)
+    if remaining is None:
+        return []
+    hops = [
+        node_id
+        for node_id in svc.neighbor_ids(session.current)
+        if node_id not in session.chain and dist_to_target.get(node_id) == remaining - 1
+    ]
+    return _distinct_hops(
+        session.current, session.target, hops, dist_to_target
+    )
+
+
+def _choice_payload(current: str, node_id: str) -> dict[str, str]:
+    """ID-free public choice: enough to understand and submit one local hop."""
+    return {
+        "label": get_service().label(node_id),
+        "relation": _short_relation(current, node_id),
+    }
+
+
+def _visible_choice_nodes(session: LantSession) -> list[str]:
+    """Return the private node ids backing the current ID-free choice menu."""
+    if session.won:
+        return []
+    svc = get_service()
+    cur = session.current
+    dist_to_target = svc.distances_to(session.target)
+    safe = _distinct_hops(
+        cur,
+        session.target,
+        [
+            node_id
+            for node_id in svc.neighbor_ids(cur)
+            if node_id not in session.chain and node_id in dist_to_target
+        ],
+        dist_to_target,
+    )
+    corridor = set(_near_route_hops(session, dist_to_target))
+    on_route = sorted(
+        (node_id for node_id in safe if node_id in corridor),
+        key=lambda node_id: _hop_quality(cur, node_id),
+    )
+    detours = sorted(
+        (node_id for node_id in safe if node_id not in corridor),
+        key=lambda node_id: _hop_quality(cur, node_id),
+    )
+
+    chosen = on_route[:_CORRIDOR_CHOICE_QUOTA]
+    chosen.extend(detours[: _MAX_VISIBLE_CHOICES - len(chosen)])
+
+    # Alphabetical display order does not leak the private route/detour ranking.
+    chosen.sort(key=lambda node_id: (normalize(svc.label(node_id)), node_id))
+    return chosen
+
+
+def _visible_choices(session: LantSession) -> list[dict[str, str]]:
+    """Build a bounded, unmarked mix of corridor hops and safe local detours."""
+    return [
+        _choice_payload(session.current, node_id)
+        for node_id in _visible_choice_nodes(session)
+    ]
 
 
 def _path(session: LantSession) -> list[dict[str, str]]:
@@ -181,6 +420,7 @@ def _state(game_id: str, session: LantSession) -> dict:
         "optimal": session.optimal,
         "won": session.won,
         "difficulty": session.difficulty,
+        "choices": _visible_choices(session),
     }
     if session.daily is not None:
         state["daily"] = session.daily
@@ -227,7 +467,98 @@ def _pair_score(
     ``salience_weight`` is set by difficulty so easier games favour famous endpoints.
     """
     salience = (_salience(start) + _salience(target)) / 2
-    return min_width * 10 + first_hop * 3 + total + salience * salience_weight
+    hub_cost = _hub_penalty(start) + _hub_penalty(target)
+    return min_width * 10 + first_hop * 3 + total + salience * salience_weight - hub_cost
+
+
+def _prefer_wide_beginner_pool(
+    items: list[CuratedItem], difficulty: str, *, minimum_pool: int
+) -> list[CuratedItem]:
+    """Prefer width-three easy boards, falling back when a filtered shelf is thin."""
+    if difficulty != "usor" or not items:
+        return items
+    wide = []
+    for item in items:
+        first_hops, min_width, _ = _corridor_profile(
+            str(item.payload["start"]),
+            str(item.payload["target"]),
+            int(item.payload["optimal"]),
+        )
+        if (
+            first_hops >= _BEGINNER_MIN_FIRST_HOPS
+            and min_width >= _BEGINNER_MIN_LAYER_WIDTH
+        ):
+            wide.append(item)
+    return wide if len(wide) >= max(1, minimum_pool) else items
+
+
+def _is_wide_beginner_item(item: CuratedItem) -> bool:
+    first_hops, min_width, _ = _corridor_profile(
+        str(item.payload["start"]),
+        str(item.payload["target"]),
+        int(item.payload["optimal"]),
+    )
+    return (
+        first_hops >= _BEGINNER_MIN_FIRST_HOPS
+        and min_width >= _BEGINNER_MIN_LAYER_WIDTH
+    )
+
+
+def _pick_curated(
+    rng: random.Random,
+    *,
+    daily: str | None,
+    category: str | None,
+    difficulty: str,
+    exclude_ids: set[str],
+) -> CuratedItem | None:
+    """Select curated content with an easy width-three preference and safe fallback."""
+    pack = get_pack()
+    if daily is not None:
+        picked = pack.pick_daily(
+            GAME_KEY,
+            daily,
+            category=category,
+            difficulty=difficulty,
+        )
+    else:
+        picked = pack.pick_seeded(
+            GAME_KEY,
+            rng,
+            category=category,
+            difficulty=difficulty,
+            exclude_ids=exclude_ids,
+        )
+    if picked is None or difficulty != "usor" or _is_wide_beginner_item(picked):
+        return picked
+
+    pool = pack.pool(
+        GAME_KEY,
+        category=category,
+        difficulty=difficulty,
+        exclude_ids=None if daily is not None else exclude_ids,
+    )
+    if daily is not None and category is None:
+        preference_floor = CURATED_DAILY_MIN_POOL
+    else:
+        preference_floor = min(_BEGINNER_PREFERRED_POOL, len(pool))
+    selected_pool = _prefer_wide_beginner_pool(
+        pool, difficulty, minimum_pool=preference_floor
+    )
+    narrowed = GamesPack(selected_pool)
+    if daily is not None:
+        return narrowed.pick_daily(
+            GAME_KEY,
+            daily,
+            category=category,
+            difficulty=difficulty,
+        )
+    return narrowed.pick_seeded(
+        GAME_KEY,
+        rng,
+        category=category,
+        difficulty=difficulty,
+    )
 
 
 def _pick_pair(
@@ -286,13 +617,21 @@ def _pick_pair(
         for target, optimal in reachable[:_TARGETS_PER_START]:
             if fallback is None:
                 fallback = (start, target, optimal)
-            first_hop, min_width, total = lant_branch_profile(
-                svc, start, target, optimal
-            )
+            strict_profile, near_profile = _route_profiles(start, target, optimal)
+            first_hop, min_width, total = strict_profile
             score = _pair_score(start, target, first_hop, min_width, total, sal_weight)
             if best_any is None or score > best_any[0]:
                 best_any = (score, start, target, optimal)
-            if first_hop >= _MIN_FIRST_HOP_CHOICES and min_width >= _MIN_LAYER_WIDTH:
+            near_first, near_width, _ = near_profile
+            beginner_wide = difficulty != "usor" or (
+                near_first >= _BEGINNER_MIN_FIRST_HOPS
+                and near_width >= _BEGINNER_MIN_LAYER_WIDTH
+            )
+            if (
+                first_hop >= _MIN_FIRST_HOP_CHOICES
+                and min_width >= _MIN_LAYER_WIDTH
+                and beginner_wide
+            ):
                 if best_good is None or score > best_good[0]:
                     best_good = (score, start, target, optimal)
                 good_count += 1
@@ -331,24 +670,20 @@ class CreateGameView(ContractAPIView):
         lo, hi = _DIFFICULTY_BANDS[difficulty]
         if daily is not None:
             seed = daily_seed(daily, GAME_KEY)
-            curated = get_pack().pick_daily(
-                GAME_KEY, daily, category=category, difficulty=difficulty
-            )
-        else:
-            curated = get_pack().pick_seeded(
-                GAME_KEY,
-                random.Random(seed),
-                category=category,
-                difficulty=difficulty,
-                exclude_ids=excluded_pack_ids(request, GAME_KEY),
-            )
+        rng = random.Random(seed)
+        curated = _pick_curated(
+            rng,
+            daily=daily,
+            category=category,
+            difficulty=difficulty,
+            exclude_ids=excluded_pack_ids(request, GAME_KEY),
+        )
         if curated is not None:
             start = str(curated.payload["start"])
             target = str(curated.payload["target"])
             optimal = int(curated.payload["optimal"])
             pack_id: str | None = curated.id
         else:
-            rng = random.Random(seed)
             start, target, optimal = _pick_pair(rng, lo, hi, category, difficulty)
             pack_id = None
         session = LantSession(
@@ -392,7 +727,20 @@ class MoveView(ContractAPIView):
             return Response({"ok": False, "last_error": "Scrie un concept"})
 
         prev = session.current
-        guess = _resolve_neighbor(body.text, prev, session.target)
+        # An ID-free chip submits its public label. Recompute the authored menu at this
+        # exact position and bind a unique label match before general homonym resolution;
+        # otherwise a closer/stronger *visited* homonym could steal the visible action.
+        submitted_key = normalize(body.text)
+        visible_matches = [
+            node_id
+            for node_id in _visible_choice_nodes(session)
+            if normalize(svc.label(node_id)) == submitted_key
+        ]
+        guess = (
+            visible_matches[0]
+            if len(visible_matches) == 1
+            else _resolve_neighbor(body.text, prev, session.target)
+        )
         corrected = False
         if guess is None:
             # Confident auto-accept (ADR-0022): a high-confidence, unambiguous near-miss
@@ -422,6 +770,7 @@ class MoveView(ContractAPIView):
             )
 
         session.chain.append(guess)
+        session.hint_requests = 0
         session.won = guess == session.target
         if session.won:
             record_finished(request, GAME_KEY, session.pack_id)
@@ -446,6 +795,7 @@ class MoveView(ContractAPIView):
             "path": _path(session),
             "moves": session.moves,
             "won": session.won,
+            "choices": _visible_choices(session),
         }
         if dead_end:
             result["dead_end"] = True
@@ -468,6 +818,7 @@ class UndoView(ContractAPIView):
         # Never step below the start.
         if len(session.chain) > 1:
             session.chain.pop()
+            session.hint_requests = 0
             session.won = session.current == session.target
         return Response(_state(game_id, session))
 
@@ -483,12 +834,10 @@ class HintView(ContractAPIView):
 
         svc = get_service()
         cur = session.current
-        # Count asks per exact chain state (ADR-0022): asking AGAIN without having moved
-        # means the first hint did not unstick the player, so the second answer also
-        # names the alternative on-path hops.
-        state_key = tuple(session.chain)
-        asks_here = session.hint_requests.get(state_key, 0) + 1
-        session.hint_requests[state_key] = asks_here
+        # Help escalates only while no move/undo occurs.  Three is the terminal reveal,
+        # so capping here bounds even an abusive stream of repeated hint requests.
+        session.hint_requests = min(3, session.hint_requests + 1)
+        asks_here = session.hint_requests
         dist_to_target = svc.distances_to(session.target)
         remaining = dist_to_target.get(cur)
         if remaining is None:
@@ -500,45 +849,110 @@ class HintView(ContractAPIView):
                     return Response(
                         {
                             "hint": None,
-                            "message": f"Fundatura — intoarce-te la {svc.label(nid)}.",
+                            "stage": "backtrack",
+                            "message": (
+                                "Fundătură — folosește Înapoi până la "
+                                f"{svc.label(nid)}."
+                            ),
                         }
                     )
             return Response(
                 {"hint": None, "message": "Nicio scurtatura de aici — incearca sa revii."}
             )
 
-        # All neighbours that lie on a shortest path (one hop closer to the target). When
-        # several exist, suggest the strongest-edged hop first (ADR-0022) — the tight
-        # semantic link is the association a player can actually see — with salience
-        # (recognisability) breaking strength ties, then id for determinism.
-        on_path = [
-            nb
-            for nb in svc.neighbor_ids(cur)
-            if dist_to_target.get(nb) == remaining - 1
-        ]
-        if on_path:
-
-            def _hop_strength(nb: str) -> float:
-                edge = svc.link(cur, nb)
-                return edge.strength if edge is not None else 0.0
-
-            on_path.sort(key=lambda nb: (-_hop_strength(nb), -_salience(nb), nb))
-            best = on_path[0]
-            payload = {
-                "hint": _concept(best),
-                "relation": svc.link_label(cur, best),
-                "remaining": remaining,
-                # When >1 such neighbour exists, the player genuinely had a choice here.
-                "alternatives": len(on_path),
+        shortest = _shortest_hops(session, dist_to_target)
+        forward = shortest or _distinct_hops(
+            cur,
+            session.target,
+            [
+                node_id
+                for node_id in svc.neighbor_ids(cur)
+                if node_id not in session.chain and node_id in dist_to_target
+            ],
+            dist_to_target,
+        )
+        if not forward:
+            # A legal revisit may leave the only shortest continuation on the already
+            # walked chain.  Suggestions intentionally suppress revisits, so point to the
+            # free undo control instead of returning an empty/misleading hint.
+            prior_shortest = {
+                node_id
+                for node_id in svc.neighbor_ids(cur)
+                if node_id in session.chain[:-1]
+                and dist_to_target.get(node_id) == remaining - 1
             }
-            if asks_here >= 2:
-                # Second ask from the same position: SHOW the branchiness the ADR-0016
-                # floor guarantees — up to 3 alternative on-path hops beside the best.
-                labels = [svc.label(nb) for nb in on_path[1:4]]
-                payload["alternatives_labels"] = labels
-                if labels:
-                    payload["message"] = "Alte variante: " + ", ".join(labels) + "."
-            return Response(payload)
+            if prior_shortest:
+                recovery = next(
+                    node_id
+                    for node_id in reversed(session.chain[:-1])
+                    if node_id in prior_shortest
+                )
+                return Response(
+                    {
+                        "hint": None,
+                        "stage": "backtrack",
+                        "remaining": remaining,
+                        "message": (
+                            "Drumul continuă printr-un pas deja vizitat. Folosește "
+                            f"Înapoi până la {svc.label(recovery)}."
+                        ),
+                    }
+                )
+        if forward:
+            best = forward[0]
+            guided_remaining = 1 + dist_to_target[best]
+            common = {
+                "hint": None,
+                "remaining": guided_remaining,
+                "alternatives": len(forward),
+            }
+            if asks_here == 1:
+                relation = _short_relation(cur, best)
+                return Response(
+                    {
+                        **common,
+                        "stage": "direction",
+                        "relation": relation,
+                        "message": f"Direcție: caută o legătură „{relation}”.",
+                    }
+                )
+            if asks_here == 2:
+                near = (
+                    _distinct_hops(
+                        cur,
+                        session.target,
+                        [*shortest, *_near_route_hops(session, dist_to_target)],
+                        dist_to_target,
+                    )
+                    if shortest
+                    else forward
+                )
+                alternatives = [_choice_payload(cur, node_id) for node_id in near[:2]]
+                lead = (
+                    "O variantă utilă: "
+                    if len(alternatives) == 1
+                    else "Variante utile: "
+                )
+                return Response(
+                    {
+                        **common,
+                        "stage": "alternatives",
+                        "alternatives_choices": alternatives,
+                        "alternatives_labels": [choice["label"] for choice in alternatives],
+                        "message": lead
+                        + ", ".join(choice["label"] for choice in alternatives)
+                        + ".",
+                    }
+                )
+            return Response(
+                {
+                    **common,
+                    "stage": "hop",
+                    "hint": _concept(best),
+                    "relation": _short_relation(cur, best),
+                    "message": f"Un salt bun: {svc.label(best)}.",
+                }
+            )
 
         return Response({"hint": None, "message": "Niciun indiciu disponibil."})
 

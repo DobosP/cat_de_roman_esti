@@ -764,9 +764,75 @@ input:focus-visible {
   min-width: 0;
 }
 
+.lant-choice-panel {
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid color-mix(in srgb, var(--game-lant) 42%, transparent);
+  border-radius: var(--roedu-radius-md);
+  background: color-mix(in srgb, var(--game-lant) 7%, var(--roedu-color-surface));
+}
+
+.lant-choice-panel .faint {
+  font-size: 0.72rem;
+}
+
+.lant-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.lant-choice {
+  min-width: 0;
+  min-height: 58px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3px;
+  padding: 9px 10px;
+  border: 1px solid color-mix(in srgb, var(--game-lant) 38%, var(--surface-border));
+  border-radius: var(--roedu-radius-sm);
+  background: rgba(255, 255, 255, 0.035);
+  text-align: left;
+  transition: border-color 0.16s ease, background 0.16s ease, transform 0.12s ease;
+}
+
+.lant-choice:hover {
+  border-color: var(--game-lant);
+  background: color-mix(in srgb, var(--game-lant) 12%, transparent);
+  transform: translateY(-1px);
+}
+
+.lant-choice:disabled {
+  opacity: 0.5;
+}
+
+.lant-choice strong,
+.lant-choice span {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.lant-choice strong {
+  color: var(--text);
+  font-size: 0.86rem;
+}
+
+.lant-choice span {
+  color: var(--text-faint);
+  font-size: 0.68rem;
+  line-height: 1.2;
+}
+
 .hint-fill-button {
   min-height: 44px;
-  padding-inline: 4px !important;
+  align-self: flex-start;
+  padding: 8px 10px !important;
+  border: 1px solid color-mix(in srgb, var(--warn) 55%, transparent);
+  border-radius: var(--roedu-radius-sm);
+  background: color-mix(in srgb, var(--warn) 10%, transparent);
+  color: var(--warn);
 }
 
 .alchemy-slot {
@@ -992,6 +1058,20 @@ input:focus-visible {
 }
 
 @media (max-width: 480px) {
+  .lant-choice-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lant-choice-grid > .lant-choice:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    align-items: center;
+    text-align: center;
+  }
+
+  .lant-choice-panel {
+    margin-inline: -4px;
+  }
+
   .connections-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
