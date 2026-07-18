@@ -1,7 +1,10 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-19. This file is the repository's current source of truth._
-_Last verified: 2026-07-19 (V35 Conexiuni and Lanț focused gates: backend 49/49, mobile/session 17/17, required session store 11/11, frontend lint, typecheck, 11/11 source tests, Ruff, and whitespace; V34 full gate: backend 420/420, both validators, production build 116.48/120 KiB initial gzip, and four Romanian font subsets. Live release remains V32 `f40fa8bc1b8880637aeeb01816c612ea850f73c0`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles; V33–V35 are not pushed or deployed.)_
+_Last verified: 2026-07-19 (V35 focused gates: Contexto/mobile 61/61, Lanț 49/49,
+mobile/session 17/17, required session store 11/11, frontend 12/12, lint, typecheck,
+Ruff, and whitespace. V34 full gate: backend 420/420 and production build green.
+Live remains V32 `f40fa8b`; V33–V35 are not pushed or deployed.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -25,13 +28,13 @@ All games default to `Ușor`, teach three terse actions, and show one live `ACUM
 Mobile gets 44 px actions, compact rails, and one near-board Conexiuni recovery channel
 with mistake dots; desktop keeps the same loop in a focused play column.
 
-## Current outcome — V34 guided word space (ADR-0042 through ADR-0044)
+## Current outcome — V35 guided word space and comparison (ADR-0042 through ADR-0045)
 
-Cald sau Rece accepts **444 collision-screened everyday guesses across 26 domains** through
-89 reviewed KG anchors without changing graph/pack bytes or creating projection wins.
+Cald sau Rece accepts **444 collision-screened everyday guesses across 26 domains** through 89 reviewed KG anchors without changing graph/pack bytes or creating projection wins.
 Clues progress from category to one strictly warmer familiar word; themed boards skip category.
-Alchimie projects 1–4 target-useful routes into at most 24 private recipe pairs / 32 concepts.
-Runtime normally returns one result; exact par remains unchanged. Mined boards prefer two live
+Distinct guesses keep stable chronological numbers while the server returns one short comparison from public ranks only; repeats remain free. Browser views switch between `Bune` and `Recente`.
+The sticky guess area keeps 44 px clue/reveal/options actions, a clue countdown, and an inline two-step reveal whose confirmation clears when play resumes. Targets and scoring are unchanged.
+Alchimie projects 1–4 target-useful routes into at most 24 private recipe pairs / 32 concepts. Runtime normally returns one result; exact par remains unchanged. Mined boards prefer two live
 openings; useful/recent/all views retire depleted items and hints progress from output to pair.
 
 ## Current outcome — beginner vocabulary waves (ADR-0030, ADR-0032, ADR-0033, ADR-0036 through ADR-0041)
@@ -50,11 +53,9 @@ curated records remain unchanged.
 
 ## Product and deployment
 
-The Romanian arcade has four server-authoritative games: Alchimie, Cald sau Rece, Lanțul
-Cuvintelor, and Conexiuni, using Django 5.2/DRF and React 19/Vite 8 over the offline KG.
+The Romanian arcade has four server-authoritative games: Alchimie, Cald sau Rece, Lanțul Cuvintelor, and Conexiuni, using Django 5.2/DRF and React 19/Vite 8 over the offline KG.
 
-Anonymous v1 at <https://cat-de-roman-esti.dobolabs.ro> runs release `f40fa8b`, verified
-2026-07-18. Accounts/rankings remain staging-only and client-authored.
+Anonymous v1 at <https://cat-de-roman-esti.dobolabs.ro> runs release `f40fa8b`, verified 2026-07-18. Accounts/rankings remain staging-only and client-authored.
 
 ## Shipped content
 
@@ -95,6 +96,6 @@ Run frontend gates when frontend changes; session-store target: `tests/test_word
 
 ## Next verified work
 
-- Playtest beginner guidance at 320–390 px, including projected Contexto terms and clues.
+- Playtest V35 comparison/actions at 320–390 px, including projected terms and both clues.
 - Continue exact pending/approved-stock adversarial review and generic-edge cleanup.
 - Make rankings server-authored, bounded, and private-by-default before public accounts.

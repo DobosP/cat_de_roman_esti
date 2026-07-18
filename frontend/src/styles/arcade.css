@@ -201,20 +201,50 @@ input:focus-visible {
   margin-inline: auto;
 }
 
-/* Sticky guess-input bar (Cald sau Rece): stays pinned to the top of the
-   scrolling screen-pad so the player can always type while the best-first guess
-   list scrolls beneath it. The app is dark-only (color-scheme: dark), so a dark
-   translucent fill + blur reads as a floating bar over the shell backdrop. The
-   top row-gap is folded into the bar's own padding so scrolled content passes
-   cleanly under an opaque edge instead of peeking through the flex gap. */
-.contexto-input-bar {
+/* Cald sau Rece keeps its guess form and the three recovery actions in one compact,
+   phone-first sticky block. Scrolled guesses pass under an opaque blurred edge. */
+.contexto-sticky-controls {
   position: sticky;
   top: 0;
   z-index: 5;
-  padding-block: 10px;
+  display: grid;
+  gap: 6px;
+  padding-block: 8px;
   background: rgba(13, 11, 32, 0.88);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+}
+
+.contexto-input-bar {
+  min-width: 0;
+}
+
+.contexto-action-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.contexto-action-row .roedu-btn,
+.contexto-reveal-confirm .roedu-btn {
+  min-width: 0;
+  min-height: 44px;
+  padding-inline: 8px;
+  font-size: 0.82rem;
+}
+
+.contexto-reveal-confirm {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 6px;
+  align-items: center;
+  min-height: 44px;
+  padding: 6px 8px;
+  border: 1px solid color-mix(in srgb, var(--warn) 55%, transparent);
+  border-radius: var(--roedu-radius-sm);
+  background: color-mix(in srgb, var(--warn) 10%, #15112d);
+  color: var(--text);
+  font-size: 0.82rem;
 }
 
 /* ------------------------------------------------------------------ wordmark */
@@ -908,6 +938,71 @@ input:focus-visible {
   color: var(--text);
   font-weight: 700;
   overflow-wrap: anywhere;
+}
+
+.contexto-comparison {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 9px;
+  align-items: center;
+  min-height: 44px;
+  padding: 7px 11px;
+  border: 1px solid color-mix(in srgb, var(--game-contexto) 60%, transparent);
+  border-radius: var(--roedu-radius-sm);
+  background: color-mix(in srgb, var(--game-contexto) 11%, transparent);
+}
+
+.contexto-comparison--new-best,
+.contexto-comparison--warmer,
+.contexto-comparison--found {
+  border-color: color-mix(in srgb, var(--good) 65%, transparent);
+  background: color-mix(in srgb, var(--good) 10%, transparent);
+}
+
+.contexto-comparison--colder {
+  border-color: rgba(123, 184, 242, 0.65);
+  background: rgba(123, 184, 242, 0.1);
+}
+
+.contexto-comparison-copy {
+  min-width: 0;
+  display: flex;
+  gap: 5px;
+  align-items: baseline;
+  overflow-wrap: anywhere;
+  font-size: 0.84rem;
+}
+
+.contexto-comparison-copy span {
+  color: var(--text-dim);
+}
+
+.contexto-comparison-rank {
+  color: var(--game-contexto);
+  font-variant-numeric: tabular-nums;
+}
+
+.contexto-guess-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  width: min(240px, 100%);
+  margin-inline: auto;
+}
+
+.contexto-guess-tabs button {
+  min-height: 44px;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--roedu-radius-sm);
+  background: transparent;
+  color: var(--text-dim);
+  font-weight: 700;
+}
+
+.contexto-guess-tabs button.is-active {
+  border-color: color-mix(in srgb, var(--game-contexto) 72%, transparent);
+  background: color-mix(in srgb, var(--game-contexto) 13%, transparent);
+  color: var(--text);
 }
 
 .hint-fill-button {

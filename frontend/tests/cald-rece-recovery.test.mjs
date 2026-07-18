@@ -58,15 +58,15 @@ test("accepted autocorrection remains visible, including on a corrected win", ()
 test("recovery clears on explicit input and lifecycle transitions", () => {
   assert.match(
     screen,
-    /active\.remember\(fresh\.game_id\);[\s\S]{0,160}setLatestId\(null\);\s*setText\(""\);\s*setRecovery\(null\);/,
+    /active\.remember\(fresh\.game_id\);[\s\S]{0,300}setLatestId\(null\);[\s\S]{0,220}setText\(""\);\s*setRecovery\(null\);/,
   );
   assert.match(
     screen,
-    /setCategory\(saved\.board_category \?\? null\);[\s\S]{0,160}setLatestId\(null\);\s*setText\(""\);\s*setRecovery\(null\);/,
+    /setCategory\(saved\.board_category \?\? null\);[\s\S]{0,300}setLatestId\(null\);[\s\S]{0,220}setText\(""\);\s*setRecovery\(null\);/,
   );
   assert.match(
     screen,
-    /if \(e\.key === "Escape" && \(text \|\| recovery\)\) \{[\s\S]{0,140}setText\(""\);\s*setRecovery\(null\);/,
+    /if \(e\.key === "Escape" && \(text \|\| recovery \|\| confirmReveal\)\) \{[\s\S]{0,180}setText\(""\);\s*setRecovery\(null\);/,
   );
   assert.match(screen, /const handleClue[\s\S]{0,180}setRecovery\(null\);/);
   assert.match(screen, /const handleGiveUp[\s\S]{0,180}setRecovery\(null\);/);

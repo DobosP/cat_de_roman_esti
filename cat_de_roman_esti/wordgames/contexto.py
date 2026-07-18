@@ -19,6 +19,7 @@ from __future__ import annotations
 import random
 from bisect import bisect_left
 from dataclasses import dataclass, field
+from enum import StrEnum
 
 from django.urls import path
 from drf_spectacular.utils import extend_schema
@@ -72,6 +73,18 @@ WARM_CLUE_MIN_SALIENCE = 0.55
 CATEGORY_LABELS = _SHARED_CATEGORY_LABELS
 
 
+class GuessFeedbackKind(StrEnum):
+    """Public comparison of one accepted guess with ranks the player already saw."""
+
+    FIRST = "first"
+    NEW_BEST = "new-best"
+    WARMER = "warmer"
+    COLDER = "colder"
+    SAME = "same"
+    REPEAT = "repeat"
+    FOUND = "found"
+
+
 # --------------------------------------------------------------------------- session
 @dataclass
 class GuessRecord:
@@ -84,6 +97,9 @@ class GuessRecord:
     # Private scoring source. Projection guesses expose their synthetic id, never this
     # KG anchor; ordinary KG guesses use the same id for both fields.
     anchor_id: str
+    # One-based chronological ordinal assigned only to distinct accepted guesses.
+    # It never changes when the best-first public list re-sorts or a guess is repeated.
+    attempt_number: int
 
 
 @dataclass(frozen=True, slots=True)
@@ -437,6 +453,7 @@ def _guess_payload(record: GuessRecord, *, reveal: bool, target: str) -> dict:
         "rank": record.rank,
         "temperature": record.temperature,
         "closeness": record.closeness,
+        "attempt_number": record.attempt_number,
     }
 
 
@@ -444,9 +461,73 @@ def _sorted_guesses(session: ContextoSession, *, reveal: bool) -> list[dict]:
     """Past guesses serialized best-first (smallest rank, then highest closeness)."""
     records = sorted(
         session.guesses.values(),
-        key=lambda g: (g.rank, g.distance, -g.closeness, g.label),
+        key=lambda g: (
+            g.rank,
+            g.distance,
+            -g.closeness,
+            g.label,
+            g.attempt_number,
+            g.id,
+        ),
     )
     return [_guess_payload(g, reveal=reveal, target=session.target) for g in records]
+
+
+def _guess_feedback_payload(
+    session: ContextoSession,
+    record: GuessRecord,
+    *,
+    is_new: bool,
+    found: bool,
+) -> dict[str, object]:
+    """Describe one accepted guess using only ranks already public to this session.
+
+    New records compare with the previous chronological attempt.  A strict personal best
+    is called out separately and its delta uses the previous public best rank.  Repeats are
+    free and compare with nothing new.  No target, projection anchor, path, or category is
+    consulted or serialized here.
+    """
+
+    if found:
+        return {
+            "kind": GuessFeedbackKind.FOUND.value,
+            "message": "Exact — ai găsit răspunsul!",
+        }
+    if not is_new:
+        return {
+            "kind": GuessFeedbackKind.REPEAT.value,
+            "message": f"Deja încercat — rămâne #{record.rank}.",
+        }
+    if not session.order:
+        return {
+            "kind": GuessFeedbackKind.FIRST.value,
+            "message": f"Primul reper: #{record.rank}.",
+        }
+
+    previous = session.guesses[session.order[-1]]
+    previous_best = min(guess.rank for guess in session.guesses.values())
+    if record.rank < previous_best:
+        delta = previous_best - record.rank
+        places = "un loc" if delta == 1 else f"{delta} locuri"
+        return {
+            "kind": GuessFeedbackKind.NEW_BEST.value,
+            "message": f"Cel mai bun: cu {places} mai aproape.",
+            "rank_delta": delta,
+        }
+
+    delta = previous.rank - record.rank
+    if delta > 0:
+        kind = GuessFeedbackKind.WARMER
+        places = "un loc" if delta == 1 else f"{delta} locuri"
+        message = f"Mai cald cu {places}."
+    elif delta < 0:
+        kind = GuessFeedbackKind.COLDER
+        places = "un loc" if delta == -1 else f"{-delta} locuri"
+        message = f"Mai rece cu {places}."
+    else:
+        kind = GuessFeedbackKind.SAME
+        message = "La fel de aproape ca încercarea trecută."
+    return {"kind": kind.value, "message": message, "rank_delta": delta}
 
 
 def _category_clue_payload(session: ContextoSession) -> dict:
@@ -722,6 +803,9 @@ class GuessView(ContractAPIView):
         guess_id = projection.public_id if projection is not None else anchor_id
         guess_label = projection.label if projection is not None else svc.label(anchor_id)
 
+        existing = session.guesses.get(guess_id)
+        is_new = existing is None
+        attempt_number = session.attempts + 1 if is_new else existing.attempt_number
         record = GuessRecord(
             id=guess_id,
             label=guess_label,
@@ -730,14 +814,21 @@ class GuessView(ContractAPIView):
             closeness=closeness,
             rank=rank,
             anchor_id=anchor_id,
+            attempt_number=attempt_number,
         )
-        is_new = guess_id not in session.guesses
+        found = projection is None and distance == 0
+        feedback = _guess_feedback_payload(
+            session,
+            record,
+            is_new=is_new,
+            found=found,
+        )
         session.guesses[guess_id] = record
         if is_new:
             session.attempts += 1
             session.order.append(guess_id)
 
-        if projection is None and distance == 0:
+        if found:
             session.won = True
             record_finished(request, GAME_KEY, session.pack_id)
         reveal = session.won or session.gave_up
@@ -749,6 +840,7 @@ class GuessView(ContractAPIView):
             "attempts": session.attempts,
             "won": session.won,
             "reachable_count": session.reachable,
+            "feedback": feedback,
             **_clue_view(session),
         }
         if corrected:

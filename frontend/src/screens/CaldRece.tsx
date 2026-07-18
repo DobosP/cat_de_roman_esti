@@ -22,6 +22,7 @@ import {
   type CreateOpts,
   type Difficulty,
   type Guess,
+  type GuessFeedback,
   type GuessResult,
   type Temperature,
 } from "../api/contexto";
@@ -35,6 +36,7 @@ import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 
 const GAME_KEY = "contexto";
 const DEF = gameByKey("contexto");
+const CLUE_UNLOCK_ATTEMPTS = 3;
 
 const DIFFICULTY_LABEL: Record<Difficulty, string> = {
   usor: "Ușor",
@@ -52,6 +54,18 @@ type GuessRecovery = {
   message: string;
   choices: string[];
   tone: "info" | "warning";
+};
+
+type GuessView = "best" | "recent";
+
+const FEEDBACK_ICON: Record<GuessFeedback["kind"], string> = {
+  first: "📍",
+  "new-best": "✨",
+  warmer: "🔥",
+  colder: "❄️",
+  same: "↔️",
+  repeat: "↻",
+  found: "🎯",
 };
 
 // Temperature -> colour on a hot/cold gradient (hot = red/orange, cold = blue).
@@ -174,6 +188,9 @@ export default function CaldRece({
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
   const [latestId, setLatestId] = useState<string | null>(null);
+  const [feedback, setFeedback] = useState<GuessFeedback | null>(null);
+  const [guessView, setGuessView] = useState<GuessView>("best");
+  const [confirmReveal, setConfirmReveal] = useState(false);
   const [recovery, setRecovery] = useState<GuessRecovery | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>("usor");
   const [category, setCategory] = useState<string | null>(null);
@@ -196,6 +213,9 @@ export default function CaldRece({
         setState(fresh);
         active.remember(fresh.game_id);
         setLatestId(null);
+        setFeedback(null);
+        setGuessView("best");
+        setConfirmReveal(false);
         setText("");
         setRecovery(null);
         setIsRecord(false);
@@ -235,6 +255,9 @@ export default function CaldRece({
         setDifficulty(saved.difficulty);
         setCategory(saved.board_category ?? null);
         setLatestId(null);
+        setFeedback(null);
+        setGuessView("best");
+        setConfirmReveal(false);
         setText("");
         setRecovery(null);
         setIsRecord(false);
@@ -308,6 +331,8 @@ export default function CaldRece({
       if (!state || busy || finished) return;
       const q = text.trim();
       if (!q) return;
+      setConfirmReveal(false);
+      setFeedback(null);
       setBusy(true);
       setRecovery(null);
       try {
@@ -340,6 +365,7 @@ export default function CaldRece({
         }
         setText("");
         setLatestId(res.guess.id);
+        setFeedback(res.feedback);
         if (res.message) {
           setRecovery({ message: res.message, choices: [], tone: "info" });
         }
@@ -383,6 +409,7 @@ export default function CaldRece({
 
   const handleClue = useCallback(async () => {
     if (!state || busy || finished || !state.clue_available) return;
+    setConfirmReveal(false);
     setBusy(true);
     setRecovery(null);
     try {
@@ -415,6 +442,8 @@ export default function CaldRece({
 
   const handleGiveUp = useCallback(async () => {
     if (!state || busy || finished) return;
+    setConfirmReveal(false);
+    setFeedback(null);
     setBusy(true);
     setRecovery(null);
     try {
@@ -433,6 +462,12 @@ export default function CaldRece({
     }
   }, [state, busy, finished, onToast]);
 
+  const requestRevealConfirmation = useCallback(() => {
+    if (!state || busy || finished) return;
+    sound.playSelect();
+    setConfirmReveal(true);
+  }, [state, busy, finished]);
+
   const handleCopy = useCallback(async () => {
     if (!sharePayload) return;
     const ok = await copyResult(sharePayload);
@@ -441,6 +476,8 @@ export default function CaldRece({
 
   const showOptions = useCallback(() => {
     active.forget();
+    setConfirmReveal(false);
+    setFeedback(null);
     setRecovery(null);
     setShowIntro(true);
   }, [active]);
@@ -450,11 +487,30 @@ export default function CaldRece({
   // A genuine page refresh — which never calls this — still resumes via useActiveGame.
   const handleExit = useCallback(() => {
     active.forget();
+    setConfirmReveal(false);
+    setFeedback(null);
     onExit();
   }, [active, onExit]);
 
   const guesses = state?.guesses ?? [];
   const bestGuess = guesses[0];
+  const displayedGuesses =
+    guessView === "best"
+      ? guesses
+      : [...guesses].sort(
+          (left, right) => right.attempt_number - left.attempt_number,
+        );
+  const clueCountdown = Math.max(
+    0,
+    CLUE_UNLOCK_ATTEMPTS - (state?.attempts ?? 0),
+  );
+  const clueActionLabel = state?.clue_available
+    ? state.next_clue_kind === "warmer"
+      ? "Mai cald"
+      : "Indiciu"
+    : clueCountdown > 0
+      ? `Indiciu în ${clueCountdown}`
+      : "Indiciu";
   // The most recently played guess (may sort anywhere in the list) — surfaced as an
   // explicit verdict so feedback is always visible, not buried by best-first sorting.
   const latestGuess = latestId
@@ -525,7 +581,7 @@ export default function CaldRece({
 
   return (
     // Whole-screen scroll (the .screen-pad owns overflow-y): the header/title flow
-    // and scroll away, only the input bar stays pinned. The old fixed-header +
+    // and scroll away; the input plus its compact action row stay pinned. The old fixed-header +
     // inner-scroll-list layout collapsed the list to ~0px on short/phone viewports
     // (worst with the keyboard up), stranding the guesses; single-scroll keeps every
     // guess reachable at any height.
@@ -565,43 +621,6 @@ export default function CaldRece({
                 title="Indicii folosite"
               />
             )}
-            <Button
-              type="button"
-              variant="secondary"
-              size="sm"
-              onClick={() => void handleClue()}
-              disabled={busy || finished || !state?.clue_available}
-              title={
-                state?.clue_available
-                  ? state.next_clue_kind === "warmer"
-                    ? "Arată un cuvânt sigur mai cald"
-                    : "Arată categoria conceptului secret"
-                  : (state?.attempts ?? 0) < 3
-                    ? "Disponibil după 3 încercări"
-                    : "Nu mai există un indiciu sigur"
-              }
-            >
-              {state?.next_clue_kind === "warmer" ? "Mai cald" : "Indiciu"}
-            </Button>
-            <Button
-              type="button"
-              variant="secondary"
-              size="sm"
-              onClick={() => void handleGiveUp()}
-              disabled={busy || finished || !state}
-            >
-              Arată răspunsul
-            </Button>
-            <Button
-              type="button"
-              variant="secondary"
-              size="sm"
-              onClick={showOptions}
-              disabled={busy}
-              title="Schimbă opțiunile"
-            >
-              ⚙ Opțiuni
-            </Button>
           </Hud>
         </GameShell>
 
@@ -621,36 +640,117 @@ export default function CaldRece({
           Număr mai mic = mai aproape · #1 = răspunsul
         </p>
 
-        {/* input — sticky so it stays reachable while the guess list scrolls under it */}
-        <form onSubmit={handleGuess} className="row contexto-input-bar" style={{ gap: 8 }}>
-          <input
-            ref={inputRef}
-            className="field fill"
-            placeholder={finished ? "Joc terminat" : "Încearcă un cuvânt…"}
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            onKeyDown={(e) => {
-              // Escape clears a half-typed guess without leaving the field.
-              if (e.key === "Escape" && (text || recovery)) {
-                e.preventDefault();
-                setText("");
-                setRecovery(null);
+        {/* The form and its three recovery actions stay together above the scrolling list. */}
+        <div className="contexto-sticky-controls">
+          <form onSubmit={handleGuess} className="row contexto-input-bar" style={{ gap: 8 }}>
+            <input
+              ref={inputRef}
+              className="field fill"
+              placeholder={finished ? "Joc terminat" : "Încearcă un cuvânt…"}
+              value={text}
+              onChange={(e) => {
+                setText(e.target.value);
+                setConfirmReveal(false);
+              }}
+              onKeyDown={(e) => {
+                // Escape clears a half-typed guess or an accidental reveal confirmation.
+                if (e.key === "Escape" && (text || recovery || confirmReveal)) {
+                  e.preventDefault();
+                  setText("");
+                  setRecovery(null);
+                  setConfirmReveal(false);
+                }
+              }}
+              disabled={busy || finished}
+              autoComplete="off"
+              autoFocus
+              spellCheck={false}
+              aria-label="Concept de ghicit"
+              enterKeyHint="send"
+            />
+            <Button
+              type="submit"
+              disabled={busy || finished || !text.trim()}
+            >
+              Ghicește
+            </Button>
+          </form>
+
+          <div className="contexto-action-row" aria-label="Acțiuni joc">
+            <Button
+              type="button"
+              variant="secondary"
+              size="sm"
+              onClick={() => void handleClue()}
+              disabled={busy || finished || !state?.clue_available}
+              title={
+                state?.clue_available
+                  ? state.next_clue_kind === "warmer"
+                    ? "Arată un cuvânt sigur mai cald"
+                    : "Arată categoria conceptului secret"
+                  : clueCountdown > 0
+                    ? `Disponibil după încă ${clueCountdown} încercări`
+                    : "Nu mai există un indiciu sigur"
               }
-            }}
-            disabled={busy || finished}
-            autoComplete="off"
-            autoFocus
-            spellCheck={false}
-            aria-label="Concept de ghicit"
-            enterKeyHint="send"
-          />
-          <Button
-            type="submit"
-            disabled={busy || finished || !text.trim()}
-          >
-            Ghicește
-          </Button>
-        </form>
+            >
+              {clueActionLabel}
+            </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              size="sm"
+              onClick={requestRevealConfirmation}
+              disabled={busy || finished || !state}
+              aria-expanded={confirmReveal}
+              aria-controls="contexto-reveal-confirmation"
+            >
+              Răspuns
+            </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              size="sm"
+              onClick={showOptions}
+              disabled={busy}
+              title="Schimbă opțiunile"
+            >
+              ⚙ Opțiuni
+            </Button>
+          </div>
+
+          <AnimatePresence initial={false}>
+            {confirmReveal && !finished && (
+              <m.div
+                id="contexto-reveal-confirmation"
+                key="reveal-confirmation"
+                className="contexto-reveal-confirm"
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                role="alert"
+              >
+                <span>Arătăm răspunsul?</span>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setConfirmReveal(false)}
+                  disabled={busy}
+                >
+                  Nu
+                </Button>
+                <Button
+                  type="button"
+                  size="sm"
+                  onClick={() => void handleGiveUp()}
+                  disabled={busy}
+                >
+                  Da, arată
+                </Button>
+              </m.div>
+            )}
+          </AnimatePresence>
+        </div>
 
         <span
           className="visually-hidden"
@@ -692,6 +792,7 @@ export default function CaldRece({
                         onClick={() => {
                           sound.playSelect();
                           setText(choice);
+                          setConfirmReveal(false);
                           inputRef.current?.focus();
                         }}
                       >
@@ -755,6 +856,7 @@ export default function CaldRece({
                     if (!word) return;
                     sound.playSelect();
                     setText(word);
+                    setConfirmReveal(false);
                     if (window.matchMedia("(pointer: fine)").matches) {
                       inputRef.current?.focus();
                     }
@@ -773,40 +875,26 @@ export default function CaldRece({
           </div>
         )}
 
-        {/* latest verdict — always-visible feedback for the last guess */}
+        {/* One short, server-authored comparison for the accepted guess just played. */}
         <AnimatePresence mode="wait">
-          {!finished && latestGuess && (
+          {latestGuess && feedback && (
             <m.div
-              key={`${latestGuess.id}-${latestGuess.distance}`}
+              key={`${latestGuess.id}-${feedback.kind}-${state?.attempts ?? 0}`}
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ type: "spring", stiffness: 320, damping: 24 }}
-              className="row spread"
-              style={{
-                gap: 10,
-                alignItems: "center",
-                padding: "8px 12px",
-                borderRadius: 10,
-                border: `1px solid ${barColor(latestGuess)}`,
-                background: `${barColor(latestGuess)}1a`,
-              }}
+              className={`contexto-comparison contexto-comparison--${feedback.kind}`}
               aria-live="polite"
+              role="status"
             >
-              <span className="row" style={{ gap: 8, alignItems: "center" }}>
-                <span aria-hidden style={{ fontSize: "1.2rem" }}>
-                  {TEMP_ICON[latestGuess.temperature]}
-                </span>
-                <span style={{ fontSize: "0.9rem" }}>
-                  <strong>{latestGuess.label}</strong>{" "}
-                  <span className="muted">— {TEMP_HINT[latestGuess.temperature]}</span>
-                </span>
+              <span aria-hidden>{FEEDBACK_ICON[feedback.kind]}</span>
+              <span className="contexto-comparison-copy">
+                <strong>{latestGuess.label}</strong>
+                <span>{feedback.message}</span>
               </span>
               <strong
-                style={{
-                  color: barColor(latestGuess),
-                  fontVariantNumeric: "tabular-nums",
-                }}
+                className="contexto-comparison-rank"
                 title="Al câtelea cel mai apropiat de conceptul secret (#1 = secretul)"
               >
                 #{latestGuess.rank}
@@ -868,15 +956,50 @@ export default function CaldRece({
           </p>
         )}
 
-        {/* guess list (server-sorted best-first) — flows in the page scroll */}
-        <div className="col" style={{ gap: 8 }}>
+        {guesses.length > 1 && (
+          <div
+            className="contexto-guess-tabs"
+            role="tablist"
+            aria-label="Ordinea încercărilor"
+          >
+            <button
+              type="button"
+              role="tab"
+              aria-selected={guessView === "best"}
+              aria-controls="contexto-guess-list"
+              className={guessView === "best" ? "is-active" : ""}
+              onClick={() => {
+                sound.playSelect();
+                setGuessView("best");
+              }}
+            >
+              Bune
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={guessView === "recent"}
+              aria-controls="contexto-guess-list"
+              className={guessView === "recent" ? "is-active" : ""}
+              onClick={() => {
+                sound.playSelect();
+                setGuessView("recent");
+              }}
+            >
+              Recente
+            </button>
+          </div>
+        )}
+
+        {/* Bune keeps server rank order; Recente uses stable server attempt ordinals. */}
+        <div id="contexto-guess-list" className="col" style={{ gap: 8 }}>
           {guesses.length === 0 && !finished && (
             <p className="faint center" style={{ marginTop: 24 }}>
               Nicio încercare încă. Începe cu orice idee!
             </p>
           )}
           <AnimatePresence initial={false}>
-            {guesses.map((g) => (
+            {displayedGuesses.map((g) => (
               <GuessRow key={g.id} g={g} isLatest={g.id === latestId} />
             ))}
           </AnimatePresence>

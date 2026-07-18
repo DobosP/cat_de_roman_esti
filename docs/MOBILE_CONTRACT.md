@@ -88,14 +88,33 @@ shipping the hidden answer. Each accepted guess has:
   "distance": 1,
   "rank": 2,
   "temperature": "Fierbinte",
-  "closeness": 99
+  "closeness": 99,
+  "attempt_number": 3
 }
 ```
 
 `rank` is one-based (`1` is the secret target), ties share the same rank for a distance
 bucket, and unreachable guesses rank after the reachable set. Distances are directed from
 the guess to the target; `rank`, `closeness`, and `reachable_count` use that same inbound
-distance population. Pre-reveal responses keep the target id, target label, and any
+distance population. `attempt_number` is the stable one-based ordinal of each distinct
+accepted guess; best-first list sorting and free repeats never change it.
+
+Every successful guess response also carries one bounded comparison authored by the server:
+
+```json
+{
+  "feedback": {
+    "kind": "new-best",
+    "message": "Cel mai bun: cu 4 locuri mai aproape.",
+    "rank_delta": 4
+  }
+}
+```
+
+`kind` is one of `first`, `new-best`, `warmer`, `colder`, `same`, `repeat`, or `found`.
+It compares only ranks already exposed to this session; `rank_delta` is optional, and clients
+render the message without deriving target proximity. Pre-reveal responses keep the target id,
+target label, and any
 `solution` payload absent across create/get/guess/clue. The exact target object appears only
 on win or give-up.
 

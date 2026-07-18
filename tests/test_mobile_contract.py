@@ -132,7 +132,20 @@ def test_contexto_does_not_leak_target_before_win() -> None:
         assert "solution" not in last_guess
         assert secret not in _collect_ids(last_guess)
         assert secret_label not in _collect_strings(last_guess)
+        assert secret not in _collect_strings(last_guess["feedback"])
+        assert secret_label not in _collect_strings(last_guess["feedback"])
         assert "rank" in last_guess["guess"]
+        assert last_guess["guess"]["attempt_number"] >= 1
+        assert last_guess["feedback"]["kind"] in {
+            "first",
+            "new-best",
+            "warmer",
+            "colder",
+            "same",
+            "repeat",
+            "found",
+        }
+        assert set(last_guess["feedback"]) <= {"kind", "message", "rank_delta"}
         if c.get(f"/api/wordgames/contexto/games/{gid}").json()["attempts"] >= 3:
             break
     assert last_guess is not None

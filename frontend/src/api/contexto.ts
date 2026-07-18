@@ -24,6 +24,25 @@ export interface Guess {
   temperature: Temperature;
   /** 0..100 — how close (beats this % of reachable concepts). */
   closeness: number;
+  /** Stable one-based order of this distinct accepted guess. */
+  attempt_number: number;
+}
+
+export type GuessFeedbackKind =
+  | "first"
+  | "new-best"
+  | "warmer"
+  | "colder"
+  | "same"
+  | "repeat"
+  | "found";
+
+/** Server-authored comparison using only ranks already visible to the player. */
+export interface GuessFeedback {
+  kind: GuessFeedbackKind;
+  message: string;
+  /** Positive is warmer, negative colder; absent for first/repeat/found. */
+  rank_delta?: number;
 }
 
 export interface RevealedTarget {
@@ -104,6 +123,7 @@ export interface GuessAccepted {
   /** Present only when the server confidently accepted a corrected label. */
   message?: string;
   guess: Guess;
+  feedback: GuessFeedback;
   guesses: Guess[];
   attempts: number;
   won: boolean;
