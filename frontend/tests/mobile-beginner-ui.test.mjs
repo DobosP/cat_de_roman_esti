@@ -77,6 +77,7 @@ test("touch users get visible rank meaning and important feedback is announced",
     lant,
     /hint && \(hint\.stage \|\| hint\.hint\)[\s\S]*?role="status"[\s\S]*?aria-live="polite"/,
   );
-  assert.match(conexiuni, /clue\.message[\s\S]{0,80}<\/m\.p>/);
+  assert.match(conexiuni, /state\?\.clues\.map\(\(clue\) => clue\.message\)/);
+  assert.match(conexiuni, /className="card connections-feedback col"/);
   assert.match(conexiuni, /role="status"\s*aria-live="polite"/);
 });

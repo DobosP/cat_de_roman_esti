@@ -717,6 +717,43 @@ input:focus-visible {
   display: flex;
 }
 
+.connections-coach-action,
+.connections-lives {
+  display: flex;
+  align-items: center;
+}
+
+.connections-coach-action {
+  gap: 8px;
+}
+
+.connections-lives {
+  gap: 3px;
+  flex: none;
+}
+
+.connections-life-dot {
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--cue-accent);
+  border-radius: 999px;
+  background: var(--cue-accent);
+  box-shadow: 0 0 8px -2px var(--cue-accent);
+}
+
+.connections-life-dot--spent {
+  background: transparent;
+  opacity: 0.35;
+  box-shadow: none;
+}
+
+.connections-feedback {
+  gap: 4px;
+  padding: 9px 12px;
+  border-color: color-mix(in srgb, var(--roedu-color-primary) 55%, transparent);
+  font-size: 0.84rem;
+}
+
 .rank-legend {
   font-size: 0.76rem;
   text-align: center;

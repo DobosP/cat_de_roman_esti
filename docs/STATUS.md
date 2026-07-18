@@ -1,7 +1,7 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-19. This file is the repository's current source of truth._
-_Last verified: 2026-07-19 (local V34 gate: backend 420/420; session store 11/11; Ruff, both validators, workflow syntax, whitespace, fixture/pack mirrors; frontend lint, typecheck, 11/11 source tests, production build, 116.48/120 KiB initial gzip, and four Romanian font subsets. Live release remains V32 `f40fa8bc1b8880637aeeb01816c612ea850f73c0`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles; V33/V34 are not pushed or deployed.)_
+_Last verified: 2026-07-19 (V35 Conexiuni focused gate: frontend lint, typecheck, 11/11 source tests, whitespace; V34 full gate: backend 420/420, session store 11/11, both validators, production build 116.48/120 KiB initial gzip, and four Romanian font subsets. Live release remains V32 `f40fa8bc1b8880637aeeb01816c612ea850f73c0`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles; V33–V35 are not pushed or deployed.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -19,11 +19,11 @@ chips; visible homonyms bind exactly, all direct hops stay legal, and hints pref
 routes before free undo. Other recovery remains bounded. All games remain server-authoritative;
 score, undo, secrecy, TTL, and caps are unchanged.
 
-## Current outcome — beginner mobile interface (ADR-0031)
+## Current outcome — beginner mobile interface (ADR-0031, ADR-0048)
 
-All four games default to `Ușor`, teach three terse actions, and show one live `ACUM` cue.
-Mobile gets 44 px targets, scrollable rails, readable labels, reachable primary actions,
-visible rank meaning, and safe shortcuts; desktop keeps the focused play column.
+All games default to `Ușor`, teach three terse actions, and show one live `ACUM` cue.
+Mobile gets 44 px actions, compact rails, and one near-board Conexiuni recovery channel
+with mistake dots; desktop keeps the same loop in a focused play column.
 
 ## Current outcome — V34 guided word space (ADR-0042 through ADR-0044)
 

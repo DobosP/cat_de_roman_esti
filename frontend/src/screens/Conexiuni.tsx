@@ -55,7 +55,7 @@ type StartMode =
 
 const selectionKey = (ids: readonly string[]) => JSON.stringify([...ids].sort());
 const ONE_AWAY_GUIDANCE =
-  "Aproape! 3 din 4 sunt din aceeași categorie. Schimbă cel puțin o piesă și verifică din nou.";
+  "Aproape: 3 din 4. Schimbă o piesă.";
 type BlockedGuess = { key: string; oneAway: boolean };
 
 export default function Conexiuni({ onExit, onToast }: SelfProps) {
@@ -149,6 +149,12 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     blockedGuess !== null &&
     selectionKey(selected) === blockedGuess.key;
   const feedback = blockedGuess?.oneAway ? ONE_AWAY_GUIDANCE : hint;
+  const guidance = useMemo(
+    () =>
+      [...new Set([feedback, ...(state?.clues.map((clue) => clue.message) ?? [])])]
+        .filter((message): message is string => Boolean(message)),
+    [feedback, state?.clues],
+  );
 
   useEffect(() => {
     if (resumeOnce.current) return;
@@ -332,8 +338,10 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       const res = await conexiuniApi.clue(state.game_id);
       sound.playSelect();
       setState(res);
-      setHint(res.clue.message);
-      onToast("Indiciu deblocat.", "info");
+      // The authoritative clue is rendered once in the compact board guidance card.
+      // Clear generic wrong-guess copy instead of repeating the same clue in local
+      // feedback and a toast as well.
+      setHint(null);
     } catch (err) {
       sound.playError();
       onToast(
@@ -498,17 +506,55 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
             ready={selected.length === GROUP_SIZE && !exactBlockedRetry}
             className="connections-coach"
             action={
-              <Button
-                type="button"
-                disabled={busy || selected.length !== GROUP_SIZE || exactBlockedRetry}
-                onClick={submit}
-                style={{ borderColor: DEF.accent }}
-              >
-                {busy ? "…" : exactBlockedRetry ? "Schimbă o piesă" : "Verifică"}
-              </Button>
+              <span className="connections-coach-action">
+                <span
+                  className="connections-lives"
+                  aria-label={`${state.lives} greșeli disponibile`}
+                  title={`${state.lives} greșeli disponibile`}
+                >
+                  {Array.from({ length: 4 }, (_, index) => (
+                    <span
+                      key={index}
+                      className={`connections-life-dot${index < state.lives ? "" : " connections-life-dot--spent"}`}
+                      aria-hidden="true"
+                    />
+                  ))}
+                </span>
+                <Button
+                  type="button"
+                  disabled={busy || selected.length !== GROUP_SIZE || exactBlockedRetry}
+                  onClick={submit}
+                  style={{ borderColor: DEF.accent }}
+                >
+                  {busy ? "…" : exactBlockedRetry ? "Schimbă o piesă" : "Verifică"}
+                </Button>
+              </span>
             }
           />
         )}
+
+        {/* Keep recovery beside the sticky coach, before the tall phone board. */}
+        <AnimatePresence>
+          {!finished && guidance.length > 0 && (
+            <m.div
+              key={guidance.join("|")}
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="card connections-feedback col"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              {guidance.map((message, index) => (
+                <span key={message}>
+                  <span aria-hidden="true">{index === 0 && feedback ? "↻ " : "💡 "}</span>
+                  {message}
+                </span>
+              ))}
+            </m.div>
+          )}
+        </AnimatePresence>
 
         {/* Active board */}
         {!finished && (
@@ -566,43 +612,6 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
             </AnimatePresence>
           </m.div>
         )}
-
-        {/* Inline feedback persists past the toast; one-away guidance survives a swap. */}
-        <AnimatePresence>
-          {!finished && feedback && (
-            <m.p
-              key={feedback}
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className="muted center"
-              style={{ margin: 0, fontSize: "0.85rem" }}
-              role="status"
-              aria-live="polite"
-            >
-              {feedback}
-            </m.p>
-          )}
-        </AnimatePresence>
-
-        {/* Server-authored redacted clues */}
-        <AnimatePresence>
-          {!finished &&
-            state.clues.map((clue) => (
-              <m.p
-                key={clue.pattern}
-                initial={{ opacity: 0, y: -4 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                className="muted center"
-                style={{ margin: 0, fontSize: "0.85rem" }}
-                role="status"
-                aria-live="polite"
-              >
-                {clue.message}
-              </m.p>
-            ))}
-        </AnimatePresence>
 
         {/* Controls */}
         {!finished && (
