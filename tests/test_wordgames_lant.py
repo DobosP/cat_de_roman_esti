@@ -1069,6 +1069,169 @@ def test_move_typo_of_a_non_neighbor_names_the_correction():
 
 
 # --------------------------------------------------------------------- dead-end escape
+def _direction_progress_service():
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    node_ids = (
+        "start",
+        "s1",
+        "lateral",
+        "l1",
+        "farther",
+        "f1",
+        "f2",
+        "closer",
+        "c1",
+        "dead",
+        "target",
+    )
+    nodes = [
+        {"id": node_id, "label_ro": node_id.upper(), "category": "test"}
+        for node_id in node_ids
+    ]
+    directed_pairs = (
+        ("start", "s1"),
+        ("s1", "target"),
+        ("start", "lateral"),
+        ("lateral", "l1"),
+        ("l1", "target"),
+        ("lateral", "farther"),
+        ("farther", "f1"),
+        ("f1", "f2"),
+        ("f2", "target"),
+        ("farther", "closer"),
+        ("closer", "c1"),
+        ("c1", "target"),
+        ("farther", "dead"),
+    )
+    edges = [
+        {
+            "id": f"e_{src}_{dst}",
+            "src_id": src,
+            "dst_id": dst,
+            "bidirectional": 0,
+        }
+        for src, dst in directed_pairs
+    ]
+    return WordGameService(Graph.from_records(nodes, edges))
+
+
+def test_easy_moves_expose_only_coarse_direction_and_a_bounded_undo_signal(monkeypatch):
+    svc = _direction_progress_service()
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+    session = LantSession(
+        start="start",
+        target="target",
+        optimal=2,
+        difficulty="usor",
+        chain=["start"],
+    )
+    gid = store.create(session)
+
+    initial = c.get(f"/api/wordgames/lant/games/{gid}").json()
+    assert initial["backtrack_recommended"] is False
+    assert "non_improving_moves" not in initial
+
+    lateral = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": "LATERAL"},
+        content_type="application/json",
+    ).json()
+    assert lateral["progress"] == {
+        "kind": "lateral",
+        "message": "Tot cam la aceeași distanță.",
+    }
+    assert set(lateral["progress"]) == {"kind", "message"}
+    assert lateral["backtrack_recommended"] is False
+    assert session.non_improving_moves == 1
+
+    farther = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": "FARTHER"},
+        content_type="application/json",
+    ).json()
+    assert farther["progress"]["kind"] == "farther"
+    assert farther["backtrack_recommended"] is True
+    assert session.non_improving_moves == 2
+    assert "remaining" not in farther["progress"]
+    assert "corridor" not in farther["progress"]
+
+    dead_end = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": "DEAD"},
+        content_type="application/json",
+    ).json()
+    assert dead_end["progress"]["kind"] == "dead_end"
+    assert dead_end["dead_end"] is True
+    assert dead_end["backtrack_recommended"] is True
+    assert session.non_improving_moves == 2
+
+    undone = c.post(f"/api/wordgames/lant/games/{gid}/undo").json()
+    assert undone["backtrack_recommended"] is False
+    assert session.non_improving_moves == 0
+
+
+def test_easy_closer_and_won_reset_direction_streak(monkeypatch):
+    svc = _direction_progress_service()
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+    session = LantSession(
+        start="start",
+        target="target",
+        optimal=2,
+        difficulty="usor",
+        chain=["start", "lateral", "farther"],
+        non_improving_moves=2,
+    )
+    gid = store.create(session)
+
+    closer = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": "CLOSER"},
+        content_type="application/json",
+    ).json()
+    assert closer["progress"]["kind"] == "closer"
+    assert closer["backtrack_recommended"] is False
+    assert session.non_improving_moves == 0
+
+    session.non_improving_moves = 2
+    c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": "C1"},
+        content_type="application/json",
+    )
+    session.non_improving_moves = 2
+    won = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": "TARGET"},
+        content_type="application/json",
+    ).json()
+    assert won["progress"] == {"kind": "won", "message": "Ai ajuns la țintă!"}
+    assert won["backtrack_recommended"] is False
+    assert session.non_improving_moves == 0
+
+
+def test_normal_moves_do_not_emit_automatic_direction(monkeypatch):
+    svc = _direction_progress_service()
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+    session = LantSession(
+        start="start",
+        target="target",
+        optimal=2,
+        difficulty="normal",
+        chain=["start"],
+    )
+    gid = store.create(session)
+    body = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": "LATERAL"},
+        content_type="application/json",
+    ).json()
+    assert "progress" not in body
+    assert body["backtrack_recommended"] is False
+    assert session.non_improving_moves == 0
+
+
 def test_move_into_a_dead_end_sets_flag_and_warns(monkeypatch):
     """A legal move onto a node that can no longer reach the target says so at once."""
     from cat_de_roman_esti.graph import Graph

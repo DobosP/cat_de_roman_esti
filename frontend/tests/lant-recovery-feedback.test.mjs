@@ -8,21 +8,28 @@ const screen = read("../src/screens/Lant.tsx");
 
 test("Lanț client preserves bounded server recovery fields", () => {
   const choice = api.match(/export interface LantChoice[\s\S]*?\n}/);
+  const progress = api.match(/export interface LantProgress[\s\S]*?\n}/);
   const state = api.match(/export interface LantState[\s\S]*?\n}/);
   const move = api.match(/export interface MoveResult[\s\S]*?\n}/);
   const hint = api.match(/export interface HintResult[\s\S]*?\n}/);
   assert.ok(choice);
+  assert.ok(progress);
   assert.ok(state);
   assert.ok(move);
   assert.ok(hint);
   assert.match(choice[0], /label: string/);
   assert.match(choice[0], /relation: string/);
   assert.doesNotMatch(choice[0], /id:/);
+  assert.match(progress[0], /kind: LantProgressKind/);
+  assert.match(progress[0], /message: string/);
   assert.match(state[0], /choices: LantChoice\[\]/);
+  assert.match(state[0], /backtrack_recommended: boolean/);
   assert.match(move[0], /message\?: string/);
   assert.match(move[0], /dead_end\?: boolean/);
   assert.match(move[0], /suggestions\?: string\[\]/);
   assert.match(move[0], /choices\?: LantChoice\[\]/);
+  assert.match(move[0], /progress\?: LantProgress/);
+  assert.match(move[0], /backtrack_recommended\?: boolean/);
   assert.match(
     hint[0],
     /stage\?: "direction" \| "alternatives" \| "hop" \| "backtrack"/,
@@ -58,11 +65,22 @@ test("Lanț preserves an autocorrection message when the corrected hop wins", ()
 });
 
 test("Lanț renders local relation chips and keeps free typing available", () => {
+  assert.match(screen, /label: "Alege o legătură"/);
   assert.match(screen, /state\.choices\.map\(\(choice\)/);
   assert.match(screen, /className="lant-choice"/);
   assert.match(screen, /onClick=\{\(\) => void submit\(choice\)\}/);
   assert.match(screen, /toate sunt legături valide/);
   assert.match(screen, /placeholder="Sau scrie alt concept…"/);
+});
+
+test("Lanț renders coarse move progress and highlights recommended undo", () => {
+  assert.match(screen, /const PROGRESS_ICON/);
+  assert.match(screen, /className=\{"lant-progress lant-progress--" \+ progress\.kind\}/);
+  assert.match(screen, /<strong>\{progress\.message\}<\/strong>/);
+  assert.match(screen, /role="status"/);
+  assert.match(screen, /res\.backtrack_recommended \?\? prev\.backtrack_recommended/);
+  assert.match(screen, /lant-undo--recommended/);
+  assert.match(screen, /Înapoi · recomandat/);
 });
 
 test("Lanț renders progressive direction, alternatives, and one-hop help", () => {
@@ -73,6 +91,7 @@ test("Lanț renders progressive direction, alternatives, and one-hop help", () =
   assert.match(screen, /if \(hint\.hint\) setText\(hint\.hint\.label\)/);
   assert.match(screen, /res\.hint \|\| res\.stage/);
   assert.match(screen, /VARIANTE UTILE/);
+  assert.match(screen, /\? "💡 Mai clar"/);
   assert.doesNotMatch(screen, /DOUĂ VARIANTE/);
 });
 
@@ -83,7 +102,7 @@ test("Lanț turns revisit traps into an explicit free-undo action", () => {
   assert.match(screen, /onClick=\{\(\) => void handleUndo\(\)\}/);
 });
 
-test("Lanț undo does not summon the phone keyboard over tap choices", () => {
+test("Lanț recovery fills focus only fine pointers", () => {
   assert.match(
     screen,
     /const focusInputForFinePointer = useCallback[\s\S]*?matchMedia\("\(pointer: fine\)"\)\.matches[\s\S]*?inputRef\.current\?\.focus\(\)/,
@@ -91,5 +110,22 @@ test("Lanț undo does not summon the phone keyboard over tap choices", () => {
   assert.match(
     screen,
     /const fresh = await undoLant\(state\.game_id\);[\s\S]{0,160}focusInputForFinePointer\(\)/,
+  );
+  assert.equal(
+    screen.match(/inputRef\.current\?\.focus\(\)/g)?.length,
+    1,
+    "only the fine-pointer helper may call focus directly",
+  );
+  assert.match(
+    screen,
+    /recovery\.choices\.map[\s\S]*?setText\(choice\);[\s\S]*?focusInputForFinePointer\(\)/,
+  );
+  assert.match(
+    screen,
+    /hint\.alternatives_choices\.map[\s\S]*?setText\(choice\.label\);[\s\S]*?focusInputForFinePointer\(\)/,
+  );
+  assert.match(
+    screen,
+    /if \(hint\.hint\) setText\(hint\.hint\.label\);[\s\S]*?focusInputForFinePointer\(\)/,
   );
 });

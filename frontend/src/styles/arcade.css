@@ -862,6 +862,42 @@ input:focus-visible {
   line-height: 1.2;
 }
 
+.lant-progress {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--roedu-radius-md);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.lant-progress > span {
+  width: 1.4rem;
+  text-align: center;
+  font-size: 1.15rem;
+}
+
+.lant-progress--closer,
+.lant-progress--won {
+  border-color: var(--good);
+}
+
+.lant-progress--lateral {
+  border-color: var(--warn);
+}
+
+.lant-progress--farther,
+.lant-progress--dead_end {
+  border-color: var(--bad);
+}
+
+.lant-undo--recommended {
+  border-color: var(--warn) !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--warn) 28%, transparent);
+}
+
 .contexto-warm-clue-button {
   min-width: 0;
   min-height: 44px;

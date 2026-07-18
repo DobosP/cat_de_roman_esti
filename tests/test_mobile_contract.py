@@ -269,6 +269,32 @@ def test_lant_exposes_id_free_local_choices_not_the_route_corridor() -> None:
     assert on_path, "expected solution-path intermediates for a normal-difficulty game"
     assert not (set(on_path) & _collect_ids(created))
 
+    # Easy-mode direction stays deliberately coarser than the private route math.
+    easy = c.post(f"/api/wordgames/lant/games?seed={SEED}&difficulty=usor").json()
+    assert easy["backtrack_recommended"] is False
+    assert "non_improving_moves" not in _collect_keys(easy)
+    moved = _post_json(
+        c,
+        f"/api/wordgames/lant/games/{easy['game_id']}/move",
+        {"text": easy["choices"][0]["label"]},
+    )
+    assert set(moved["progress"]) == {"kind", "message"}
+    assert moved["progress"]["kind"] in {
+        "closer",
+        "lateral",
+        "farther",
+        "dead_end",
+        "won",
+    }
+    assert isinstance(moved["backtrack_recommended"], bool)
+    assert not {
+        "distance",
+        "remaining",
+        "corridor",
+        "on_track",
+        "non_improving_moves",
+    } & _collect_keys(moved)
+
 
 def test_conexiuni_hides_solution_until_over() -> None:
     from cat_de_roman_esti.wordgames.conexiuni import (
