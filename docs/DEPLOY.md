@@ -65,7 +65,7 @@ docker compose -f docker-compose.anon.yml logs -f app   # watch boot (no migrati
 **4. Smoke test:**
 
 ```bash
-curl -fsS https://<CAT_DOMAIN>/api/health        # {"ok": true, "concepts": 1459, ...}
+curl -fsS https://<CAT_DOMAIN>/api/health        # concepts must equal /api/manifest counts.nodes
 curl -fsS https://<CAT_DOMAIN>/healthz           # container-internal healthcheck endpoint
 curl -fsS https://<CAT_DOMAIN>/api/me            # {"accounts_enabled": false, ...}
 curl -fsS https://<CAT_DOMAIN>/api/categories    # every category: "available" true + non-zero "curated"
@@ -183,7 +183,8 @@ git pull
 docker compose -f docker-compose.prod.yml --env-file .env.prod up -d --build
 ```
 
-Migrations run on boot. Roll back by checking out the previous tag and rebuilding.
+Migrations run on boot. Roll back by checking out the previously recorded known-good
+commit SHA (or restoring its tagged image artifact) and rebuilding.
 
 ---
 

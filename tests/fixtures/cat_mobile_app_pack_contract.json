@@ -4,12 +4,12 @@
     "app": "cat_de_roman_esti",
     "schema_version": 1,
     "manifest_version": 1,
-    "build_version": "fixture-v31-hygiene-lower-limb-cleaning",
+    "build_version": "fixture-v32-face-workshop-garden",
     "generated_at": "2026-06-21T00:00:00Z",
-    "content_hash": "sha256:517d4f3bef48e625436ef3363dedb22ebdc2d3aca31b715e1e3381726c39579c",
+    "content_hash": "sha256:141a74e23835c69c58566f7d8206a914b8740d0d87045d26f808ec6c785a793c",
     "counts": {
-      "nodes": 2251,
-      "edges": 9014,
+      "nodes": 2269,
+      "edges": 9068,
       "puzzles": 180
     }
   },
@@ -6989,6 +6989,78 @@
     {
       "id": "n_v31_hygiene_oral_periuta_dinti",
       "label_ro": "Periuță de dinți"
+    },
+    {
+      "id": "n_v32_body_face_buza",
+      "label_ro": "Buză"
+    },
+    {
+      "id": "n_v32_body_face_frunte",
+      "label_ro": "Frunte"
+    },
+    {
+      "id": "n_v32_body_face_nara",
+      "label_ro": "Nară"
+    },
+    {
+      "id": "n_v32_body_face_obraz",
+      "label_ro": "Obraz"
+    },
+    {
+      "id": "n_v32_body_face_pleoapa",
+      "label_ro": "Pleoapă"
+    },
+    {
+      "id": "n_v32_body_face_spranceana",
+      "label_ro": "Sprânceană"
+    },
+    {
+      "id": "n_v32_garden_container_ghiveci_flori",
+      "label_ro": "Ghiveci de flori"
+    },
+    {
+      "id": "n_v32_garden_soil_grebla",
+      "label_ro": "Greblă"
+    },
+    {
+      "id": "n_v32_garden_soil_lopata",
+      "label_ro": "Lopată"
+    },
+    {
+      "id": "n_v32_garden_transport_roaba",
+      "label_ro": "Roabă"
+    },
+    {
+      "id": "n_v32_garden_water_furtun",
+      "label_ro": "Furtun de grădină"
+    },
+    {
+      "id": "n_v32_garden_water_stropitoare",
+      "label_ro": "Stropitoare"
+    },
+    {
+      "id": "n_v32_workshop_cut_fierastrau",
+      "label_ro": "Fierăstrău"
+    },
+    {
+      "id": "n_v32_workshop_fastener_cui",
+      "label_ro": "Cui"
+    },
+    {
+      "id": "n_v32_workshop_fastener_surub",
+      "label_ro": "Șurub"
+    },
+    {
+      "id": "n_v32_workshop_hand_ciocan",
+      "label_ro": "Ciocan"
+    },
+    {
+      "id": "n_v32_workshop_hand_cleste",
+      "label_ro": "Clește"
+    },
+    {
+      "id": "n_v32_workshop_hand_surubelnita",
+      "label_ro": "Șurubelniță"
     },
     {
       "id": "n_v3art_arta",
@@ -52421,9 +52493,109 @@
       "dst_id": "n_net_ceva_marunt"
     },
     {
+      "id": "de8350",
+      "src_id": "n_v32_body_face_buza",
+      "dst_id": "n_v32_body_face_obraz"
+    },
+    {
+      "id": "de8351",
+      "src_id": "n_v32_body_face_buza",
+      "dst_id": "n_v32_body_face_pleoapa"
+    },
+    {
+      "id": "de8352",
+      "src_id": "n_v32_body_face_obraz",
+      "dst_id": "n_v32_body_face_frunte"
+    },
+    {
+      "id": "de8353",
+      "src_id": "n_v32_body_face_obraz",
+      "dst_id": "n_v32_body_face_nara"
+    },
+    {
+      "id": "de8354",
+      "src_id": "n_v32_body_face_frunte",
+      "dst_id": "n_v32_body_face_spranceana"
+    },
+    {
+      "id": "de8355",
+      "src_id": "n_v32_body_face_frunte",
+      "dst_id": "n_v32_body_face_pleoapa"
+    },
+    {
+      "id": "de8356",
+      "src_id": "n_v32_body_face_spranceana",
+      "dst_id": "n_v32_body_face_pleoapa"
+    },
+    {
+      "id": "de8357",
+      "src_id": "n_v32_body_face_spranceana",
+      "dst_id": "n_v32_body_face_nara"
+    },
+    {
+      "id": "de8358",
+      "src_id": "n_v32_body_face_pleoapa",
+      "dst_id": "n_v32_body_face_nara"
+    },
+    {
+      "id": "de8359",
+      "src_id": "n_v32_body_face_pleoapa",
+      "dst_id": "n_v32_body_face_obraz"
+    },
+    {
       "id": "de836",
       "src_id": "n_net_teo_vio_costel",
       "dst_id": "n_net_umor_autoironic"
+    },
+    {
+      "id": "de8360",
+      "src_id": "n_v32_body_face_nara",
+      "dst_id": "n_v32_body_face_buza"
+    },
+    {
+      "id": "de8361",
+      "src_id": "n_v32_body_face_nara",
+      "dst_id": "n_v32_body_face_spranceana"
+    },
+    {
+      "id": "de8362",
+      "src_id": "n_v24_body_face_gura",
+      "dst_id": "n_v32_body_face_buza"
+    },
+    {
+      "id": "de8363",
+      "src_id": "n_v24_body_face_cap",
+      "dst_id": "n_v32_body_face_obraz"
+    },
+    {
+      "id": "de8364",
+      "src_id": "n_v24_body_face_cap",
+      "dst_id": "n_v32_body_face_frunte"
+    },
+    {
+      "id": "de8365",
+      "src_id": "n_v24_body_face_cap",
+      "dst_id": "n_v32_body_face_nara"
+    },
+    {
+      "id": "de8366",
+      "src_id": "n_v4sti_ochi",
+      "dst_id": "n_v32_body_face_spranceana"
+    },
+    {
+      "id": "de8367",
+      "src_id": "n_v4sti_ochi",
+      "dst_id": "n_v32_body_face_pleoapa"
+    },
+    {
+      "id": "de8368",
+      "src_id": "n_v32_workshop_hand_ciocan",
+      "dst_id": "n_v32_workshop_fastener_cui"
+    },
+    {
+      "id": "de8369",
+      "src_id": "n_v32_workshop_hand_ciocan",
+      "dst_id": "n_v32_workshop_hand_cleste"
     },
     {
       "id": "de837",
@@ -52431,14 +52603,164 @@
       "dst_id": "n_net_podcast_ro"
     },
     {
+      "id": "de8370",
+      "src_id": "n_v32_workshop_fastener_cui",
+      "dst_id": "n_v32_workshop_fastener_surub"
+    },
+    {
+      "id": "de8371",
+      "src_id": "n_v32_workshop_fastener_cui",
+      "dst_id": "n_v32_workshop_hand_cleste"
+    },
+    {
+      "id": "de8372",
+      "src_id": "n_v32_workshop_fastener_surub",
+      "dst_id": "n_v32_workshop_hand_surubelnita"
+    },
+    {
+      "id": "de8373",
+      "src_id": "n_v32_workshop_fastener_surub",
+      "dst_id": "n_v32_workshop_hand_cleste"
+    },
+    {
+      "id": "de8374",
+      "src_id": "n_v32_workshop_hand_surubelnita",
+      "dst_id": "n_v32_workshop_hand_cleste"
+    },
+    {
+      "id": "de8375",
+      "src_id": "n_v32_workshop_hand_surubelnita",
+      "dst_id": "n_v32_workshop_hand_ciocan"
+    },
+    {
+      "id": "de8376",
+      "src_id": "n_v32_workshop_hand_cleste",
+      "dst_id": "n_v32_workshop_cut_fierastrau"
+    },
+    {
+      "id": "de8377",
+      "src_id": "n_v32_workshop_hand_cleste",
+      "dst_id": "n_v32_workshop_fastener_cui"
+    },
+    {
+      "id": "de8378",
+      "src_id": "n_v32_workshop_cut_fierastrau",
+      "dst_id": "n_v32_workshop_hand_ciocan"
+    },
+    {
+      "id": "de8379",
+      "src_id": "n_v32_workshop_cut_fierastrau",
+      "dst_id": "n_v32_workshop_fastener_surub"
+    },
+    {
       "id": "de838",
       "src_id": "n_net_podcast_ro",
       "dst_id": "n_net_creator_de_continut"
     },
     {
+      "id": "de8380",
+      "src_id": "n_v24_action_routine_a_lucra",
+      "dst_id": "n_v32_workshop_hand_ciocan"
+    },
+    {
+      "id": "de8381",
+      "src_id": "n_v4sti_metal",
+      "dst_id": "n_v32_workshop_fastener_cui"
+    },
+    {
+      "id": "de8382",
+      "src_id": "n_v24_action_routine_a_lucra",
+      "dst_id": "n_v32_workshop_hand_surubelnita"
+    },
+    {
+      "id": "de8383",
+      "src_id": "n_v4sti_metal",
+      "dst_id": "n_v32_workshop_fastener_surub"
+    },
+    {
+      "id": "de8384",
+      "src_id": "n_v24_action_routine_a_lucra",
+      "dst_id": "n_v32_workshop_hand_cleste"
+    },
+    {
+      "id": "de8385",
+      "src_id": "n_v4sti_copac",
+      "dst_id": "n_v32_workshop_cut_fierastrau"
+    },
+    {
+      "id": "de8386",
+      "src_id": "n_v32_garden_container_ghiveci_flori",
+      "dst_id": "n_v32_garden_water_stropitoare"
+    },
+    {
+      "id": "de8387",
+      "src_id": "n_v32_garden_container_ghiveci_flori",
+      "dst_id": "n_v32_garden_soil_lopata"
+    },
+    {
+      "id": "de8388",
+      "src_id": "n_v32_garden_water_stropitoare",
+      "dst_id": "n_v32_garden_water_furtun"
+    },
+    {
+      "id": "de8389",
+      "src_id": "n_v32_garden_water_stropitoare",
+      "dst_id": "n_v32_garden_soil_grebla"
+    },
+    {
       "id": "de839",
       "src_id": "n_net_reclama_cult",
       "dst_id": "n_net_vodafone_romania"
+    },
+    {
+      "id": "de8390",
+      "src_id": "n_v32_garden_water_furtun",
+      "dst_id": "n_v32_garden_container_ghiveci_flori"
+    },
+    {
+      "id": "de8391",
+      "src_id": "n_v32_garden_water_furtun",
+      "dst_id": "n_v32_garden_water_stropitoare"
+    },
+    {
+      "id": "de8392",
+      "src_id": "n_v32_garden_soil_lopata",
+      "dst_id": "n_v32_garden_soil_grebla"
+    },
+    {
+      "id": "de8393",
+      "src_id": "n_v32_garden_soil_lopata",
+      "dst_id": "n_v32_garden_water_furtun"
+    },
+    {
+      "id": "de8394",
+      "src_id": "n_v32_garden_soil_grebla",
+      "dst_id": "n_v32_garden_transport_roaba"
+    },
+    {
+      "id": "de8395",
+      "src_id": "n_v32_garden_soil_grebla",
+      "dst_id": "n_v32_garden_soil_lopata"
+    },
+    {
+      "id": "de8396",
+      "src_id": "n_v32_garden_transport_roaba",
+      "dst_id": "n_v32_garden_container_ghiveci_flori"
+    },
+    {
+      "id": "de8397",
+      "src_id": "n_v32_garden_transport_roaba",
+      "dst_id": "n_v32_garden_water_stropitoare"
+    },
+    {
+      "id": "de8398",
+      "src_id": "n_v4sti_floare",
+      "dst_id": "n_v32_garden_container_ghiveci_flori"
+    },
+    {
+      "id": "de8399",
+      "src_id": "n_v24_nature_world_pamant",
+      "dst_id": "n_v32_garden_soil_lopata"
     },
     {
       "id": "de84",
@@ -52449,6 +52771,26 @@
       "id": "de840",
       "src_id": "n_net_reclama_cult",
       "dst_id": "n_net_ghita_ciobanul"
+    },
+    {
+      "id": "de8400",
+      "src_id": "n_v24_home_outdoor_gradina",
+      "dst_id": "n_v32_garden_soil_grebla"
+    },
+    {
+      "id": "de8401",
+      "src_id": "n_v4gas_apa",
+      "dst_id": "n_v32_garden_water_stropitoare"
+    },
+    {
+      "id": "de8402",
+      "src_id": "n_v24_home_outdoor_gradina",
+      "dst_id": "n_v32_garden_transport_roaba"
+    },
+    {
+      "id": "de8403",
+      "src_id": "n_v4gas_apa",
+      "dst_id": "n_v32_garden_water_furtun"
     },
     {
       "id": "de841",
@@ -55084,20 +55426,20 @@
     },
     {
       "id": "pz_stiinta_hard_4",
-      "start_id": "n_v24_body_face_cap",
-      "target_id": "n_v2sti_stiinta",
+      "start_id": "n_v2sti_fizica",
+      "target_id": "n_v32_body_face_buza",
       "difficulty": "hard"
     },
     {
       "id": "pz_stiinta_hard_5",
-      "start_id": "n_v24_body_face_nas",
+      "start_id": "n_v24_body_face_cap",
       "target_id": "n_v2sti_stiinta",
       "difficulty": "hard"
     },
     {
       "id": "pz_stiinta_hard_6",
-      "start_id": "n_v24_body_face_cap",
-      "target_id": "n_v2sti_fizica",
+      "start_id": "n_v24_body_face_nas",
+      "target_id": "n_v2sti_stiinta",
       "difficulty": "hard"
     },
     {
