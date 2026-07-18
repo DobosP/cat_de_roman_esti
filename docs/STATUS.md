@@ -1,7 +1,7 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-18. This file is the repository's current source of truth._
-_Last verified: 2026-07-18 (local v33 gate: backend 391; v25/v28/v29/v30/v31/v32/v33 52 and session 11; exact critique 33/33 and full pending report byte-identical; Ruff, both validators, workflow syntax, whitespace; no frontend code changed; mobile importer 4 and full verify 227/26. Live release remains `f40fa8bc1b8880637aeeb01816c612ea850f73c0`: healthy image `sha256:3ed5fc61a95ec08417f1ebb68f329bf85779ab0988dffdcc7537c5d769dc6e9a`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles; all 14 categories positive, available, and curated; four `usor` creates at seed 32032; anonymous/account-disabled mode and expected submissions 503; homepage plus four deep routes byte-matched the built index; all 12 Vite assets returned non-empty 200 responses with immutable caching; privacy and terms passed without placeholders.)_
+_Last verified: 2026-07-18 (local ADR-0044 gate: backend 396/396; focused Alchimie/mobile/session 60/60; all 77 approved sparse projections deterministic at existing par; Ruff, both validators, workflow syntax, and whitespace; final frontend source 10/10, typecheck, and lint. The pre-review bundle was 116.20 KiB gzip; final static rebuild is deferred to combined integration. Live release remains `f40fa8bc1b8880637aeeb01816c612ea850f73c0`: healthy image `sha256:3ed5fc61a95ec08417f1ebb68f329bf85779ab0988dffdcc7537c5d769dc6e9a`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles; V33/V34 are not deployed.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -16,19 +16,22 @@ The critique layer now fails closed from generation through promotion:
 
 ## Current outcome — browser recovery (ADR-0027 through ADR-0029, ADR-0034, ADR-0035)
 
-Lanț renders server-authored recovery; bounded spelling and path choices fill but never
-submit. Conexiuni retains one-away selections for one-tile swaps and blocks unchanged
-sets without inferring membership. Cald sau Rece keeps target-filtered typo suggestions and accepted corrections.
-Alchimie restores a newest-first, 12-reaction journal and retains an authoritative empty pair
-for one visible swap; either 44 px bench slot removes an ingredient and unchanged/duplicate submission is blocked.
+Lanț recovery fills but never submits; Conexiuni retains one-away swaps without inference.
+Cald sau Rece keeps target-filtered typo suggestions and accepted corrections. Alchimie
+keeps a 12-reaction journal and one empty pair for a visible, duplicate-safe correction.
 All four remain server-authoritative; score, secrecy, TTL, and caps are unchanged.
+
+## Current outcome — sparse Alchimie recipes (ADR-0044)
+
+Alchimie projects 1–4 target-useful routes into at most 24 private recipe pairs / 32 concepts.
+Runtime returns one result normally, two only when one route needs both; exact par is preserved.
+Mined boards prefer two live projected openings; bounded discovered routes rank semantically;
+recent/useful/all views retire depleted chips and hints progress from output/theme to one pair.
 
 ## Current outcome — beginner mobile interface (ADR-0031)
 
-All four games now default to `Ușor`, teach their loop with three terse actions, and show
-one live `ACUM` cue instead of repeating rules. Mobile gets 44 px targets, scrollable
-status/theme rails, readable long labels, reachable primary actions, visible rank meaning,
-and safe keyboard shortcuts; desktop retains the same focused play column.
+All four games default to `Ușor`, teach three terse actions, and show one `ACUM` cue.
+Mobile gets 44 px targets and scrollable rails; desktop keeps the focused play column.
 
 ## Current outcome — beginner vocabulary waves (ADR-0030, ADR-0032, ADR-0033, ADR-0036 through ADR-0041)
 
@@ -60,7 +63,7 @@ client-authored and visibility needs opt-in by default.
 | Conexiuni | 288 | 209 | 79 | curated first; mixed-board miner fallback |
 | Cald sau Rece | 207 | 192 | 15 | curated first; category miner fallback |
 | Lanțul Cuvintelor | 201 | 94 | 107 | curated first; branch-aware miner fallback |
-| Alchimie | 98 | 77 | 21 | curated first; category closure fallback |
+| Alchimie | 98 | 77 | 21 | curated first; sparse projection miner fallback |
 
 Pack: **794 items = 572 approved + 222 pending**, across 14 categories.
 Bundled KG: **2,287 nodes / 9,122 edges / 7,400 aliases / 180 legacy puzzles**.
@@ -88,13 +91,10 @@ PYTHONPATH=. .venv/bin/python scripts/validate_fixture.py
 node --check .claude/workflows/critique-games.js
 git diff --check
 ```
-Run frontend lint/typecheck/test/build only when frontend files change. The shared
-session-store target remains `tests/test_wordgames_session_store.py` (11 tests).
+Run frontend lint/typecheck/test/build only when frontend files change; session-store target: `tests/test_wordgames_session_store.py` (11 tests).
 
 ## Next verified work
 
 - Playtest the beginner UI and recovery flows at 320–390 px; measure friction and abandonment.
-- Complete adversarial review over the exact 33 v23/v24 pending IDs; inspect Contexto
-  ordering after v33, route meaning, Conexiuni predicates, and Alchimie recipe intuition.
-- Work the approved-stock critique/A7 queues; generic regional KG edges remain cleanup inventory, while owner demotions stay explicit proposals.
-- Make ranking scores server-authored, bound retained score history, and default ranking visibility off before enabling public accounts.
+- Review exact pending IDs, Contexto ordering, route meaning, and Conexiuni predicates.
+- Work critique queues; make rankings server-authored and private-by-default before accounts.

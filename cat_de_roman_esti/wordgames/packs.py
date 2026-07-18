@@ -102,8 +102,8 @@ def _closure_generations(
 ) -> dict[str, int]:
     """Combine-closure generation map (mirrors the Alchimie instance builder).
 
-    ``category`` scopes every combine to that category's subgraph (ADR-0013), matching
-    the runtime game — an unscoped closure reaches ~the whole dense graph.
+    ``category`` scopes the graph input used for Alchimie projection construction
+    (ADR-0044); an unscoped candidate closure reaches nearly the whole dense graph.
     """
     gen: dict[str, int] = {s: 0 for s in seeds}
     owned = set(seeds)
@@ -346,7 +346,7 @@ def _validate_alchimie(rec: dict, svc: WordGameService) -> list[str]:
     seeds = [str(s) for s in rec.get("seeds") or []]
     target = str(rec.get("target") or "")
     depth = rec.get("target_depth")
-    # Combines are scoped to the item's category (ADR-0013) — validate the same way.
+    # Projection candidates are scoped to the item's category (ADR-0044).
     category = str(rec.get("category") or "") or None
     errors: list[str] = []
     lo, hi = ALCHIMIE_SEED_RANGE

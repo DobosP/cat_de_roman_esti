@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import random
 from itertools import combinations
 
 import pytest
@@ -106,16 +107,13 @@ def test_combine_is_symmetric_and_lineage_preserves_request_order(client: Client
 
     before = {item["id"]: item for item in forward_state["inventory"]}
     owned = set(before)
-    category = forward_state.get("board_category")
+    session = A.store.get(forward_state["game_id"])
+    assert session is not None
     pair = next(
         (
-            (a, b)
-            for a, b in combinations(before, 2)
-            if [
-                node_id
-                for node_id in A.get_service().common_neighbors(a, b, category=category)
-                if node_id not in owned
-            ]
+            recipe_pair
+            for recipe_pair, outputs in session.recipes.items()
+            if set(recipe_pair) <= owned and any(node_id not in owned for node_id in outputs)
         ),
         None,
     )
@@ -357,31 +355,26 @@ def test_daily_win_share_includes_date(client: Client) -> None:
 # ----------------------------------------------------- instance-quality (anti-degenerate)
 
 
-def _opening_pairs_from_state(state: dict) -> int:
-    """How many seed pairs already yield a fresh discovery, computed via the closure."""
-    from cat_de_roman_esti.wordgames.service import get_service
-
-    svc = get_service()
-    seeds = [i["id"] for i in state["inventory"]]
-    owned = set(seeds)
-    count = 0
-    for a, b in combinations(sorted(owned), 2):
-        if any(c not in owned for c in svc.common_neighbors(a, b)):
-            count += 1
-    return count
+def _projected_openings(session: A.AlchimieSession) -> int:
+    """How many initial pairs are genuinely productive in the live private recipes."""
+    owned = set(session.seeds)
+    return sum(
+        any(
+            result not in owned
+            for result in session.recipes.get(A._pair_key(a, b), ())
+        )
+        for a, b in combinations(sorted(owned), 2)
+    )
 
 
 @pytest.mark.parametrize("difficulty", ["usor", "normal", "greu"])
-def test_instances_have_several_openings(client: Client, difficulty: str) -> None:
-    """Across many seeds, every generated instance must offer >= 2 opening moves so the
-
-    player never has to brute-force every pair to make a first discovery.
-    """
-    for seed in range(40):
-        state = client.post(
-            f"{BASE}/games?seed={seed}&difficulty={difficulty}"
-        ).json()
-        assert _opening_pairs_from_state(state) >= A.MIN_OPENING_PAIRS, (
+def test_mined_instances_prefer_several_live_projected_openings(
+    difficulty: str,
+) -> None:
+    """A bounded direct-builder sample tests mined, not curated-first API selection."""
+    for seed in range(2):
+        session = A._build_session(random.Random(seed), difficulty=difficulty)
+        assert _projected_openings(session) >= A.MIN_OPENING_PAIRS, (
             f"degenerate instance: seed={seed} diff={difficulty}"
         )
 
@@ -439,15 +432,19 @@ def test_curated_par_makes_the_perfect_score_achievable() -> None:
 # ----------------------------------------------------------------- nudges + edge cases
 
 
-def _barren_owned_pair(svc, ids: list[str]) -> tuple[str, str] | None:
-    """The first owned pair with NO fresh common neighbour, computed via the service.
+def _barren_owned_pair(session, ids: list[str]) -> tuple[str, str] | None:
+    """The first owned pair with no fresh result in the private recipe projection.
 
     Combining such a pair always discovers nothing, so it deterministically grows the
     fruitless streak without ever accidentally crafting a concept.
     """
     owned = set(ids)
     for a, b in combinations(sorted(owned), 2):
-        if not [c for c in svc.common_neighbors(a, b) if c not in owned]:
+        if not [
+            result
+            for result in session.recipes.get(A._pair_key(a, b), ())
+            if result not in owned
+        ]:
             return (a, b)
     return None
 
@@ -459,12 +456,11 @@ def _force_fruitless(client: Client, state: dict) -> dict:
     and combines it ``NUDGE_AFTER_FRUITLESS`` times so a hint becomes available. Uses the
     seed inventory directly — no inventory mutation happens because the pair is barren.
     """
-    from cat_de_roman_esti.wordgames.service import get_service
-
-    svc = get_service()
     gid = state["game_id"]
+    session = A.store.get(gid)
+    assert session is not None
     ids = [i["id"] for i in state["inventory"]]
-    pair = _barren_owned_pair(svc, ids)
+    pair = _barren_owned_pair(session, ids)
     assert pair is not None, "expected a barren owned pair to force fruitless combines"
     a, b = pair
     while not state["hint_available"]:
@@ -483,7 +479,9 @@ def test_repeated_empty_pair_is_accepted_charged_and_unlocks_hint(client: Client
     gid = state["game_id"]
     inventory = state["inventory"]
     ids = [item["id"] for item in inventory]
-    pair = _barren_owned_pair(A.get_service(), ids)
+    session = A.store.get(gid)
+    assert session is not None
+    pair = _barren_owned_pair(session, ids)
     assert pair is not None, "expected seed 7 to expose a barren owned pair"
     a, b = pair
 
@@ -504,17 +502,14 @@ def test_repeated_empty_pair_is_accepted_charged_and_unlocks_hint(client: Client
         assert body["hint_available"] is (attempt == A.NUDGE_AFTER_FRUITLESS)
 
 
-def _closure_distance_to_target(client: Client, gid: str, owned: set[str]) -> int | None:
-    """Combine-closure generation of the (server-secret) target from ``owned`` ids.
-
-    Reuses the engine's own closure so the test measures the SAME notion of distance the
-    nudge optimises, and reads the hidden target id from the in-process session store.
-    """
+def _projected_distance_to_target(gid: str, owned: set[str]) -> int | None:
+    """Exact remaining private-recipe actions to the in-process secret target."""
     from cat_de_roman_esti.wordgames import alchimie as _A
 
     session = _A.store.get(gid)
     assert session is not None
-    return _A._closure_with_generations(list(owned)).get(session.target)
+    plan = _A._minimum_projected_plan(owned, session.target, session.recipes)
+    return len(plan) if plan is not None else None
 
 
 def test_hint_unavailable_until_stuck(client: Client) -> None:
@@ -535,40 +530,56 @@ def _seed_with_useful_and_barren(client: Client) -> dict:
     so the test exercises the real nudge path without hard-coding a magic seed.
     """
     from cat_de_roman_esti.wordgames import alchimie as _A
-    from cat_de_roman_esti.wordgames.service import get_service
-
-    svc = get_service()
     for seed in range(40):
         state = _create(client, seed=seed)
         ids = [i["id"] for i in state["inventory"]]
-        if _barren_owned_pair(svc, ids) is None:
-            continue
         session = _A.store.get(state["game_id"])
+        if session is None or _barren_owned_pair(session, ids) is None:
+            continue
         if _A._useful_pair(session) is not None:
             return state
     raise AssertionError("no seed offered both a barren and a forward-progress pair")
 
 
-def test_hint_after_fruitless_returns_useful_pair(client: Client) -> None:
-    from cat_de_roman_esti.wordgames.service import get_service
-
-    svc = get_service()
+def test_hints_progress_from_output_orientation_to_useful_pair(client: Client) -> None:
     state = _force_fruitless(client, _seed_with_useful_and_barren(client))
     assert state["hint_available"] is True
     gid = state["game_id"]
+    session = A.store.get(gid)
+    assert session is not None
+    secret = session.target
+
+    first = client.post(f"{BASE}/games/{gid}/hint").json()
+    assert first["hints_used"] == 1
+    assert first["hint"] is None
+    assert first["hint_kind"] in {"output", "category"}
+    assert secret not in str(first)
+    if first["hint_kind"] == "output":
+        assert set(first["hint_output"]) == {"label"}
+
+    state = _force_fruitless(client, first)
     res = client.post(f"{BASE}/games/{gid}/hint").json()
-    assert res["hints_used"] == 1
+    assert res["hints_used"] == 2
+    assert res["hint_kind"] == "pair"
     assert res["hint"] is not None
     a_id, b_id = res["hint"][0]["id"], res["hint"][1]["id"]
     # The suggested pair must be owned and actually productive (a real forward move).
     owned = {i["id"] for i in res["inventory"]}
     assert a_id in owned and b_id in owned
-    fresh = [c for c in svc.common_neighbors(a_id, b_id) if c not in owned]
+    fresh = [
+        c
+        for c in session.recipes[A._pair_key(a_id, b_id)]
+        if c not in owned
+    ]
     assert fresh, "hint pointed at a barren pair"
-    # ...and it must STRICTLY reduce the distance to the target, not just discover noise.
-    base_gen = _closure_distance_to_target(client, gid, owned)
-    new_gen = _closure_distance_to_target(client, gid, owned | set(fresh))
-    assert new_gen is not None and base_gen is not None and new_gen < base_gen, (
+    # ...and it must STRICTLY reduce exact projected actions, not just discover noise.
+    base_distance = _projected_distance_to_target(gid, owned)
+    new_distance = _projected_distance_to_target(gid, owned | set(fresh))
+    assert (
+        new_distance is not None
+        and base_distance is not None
+        and new_distance < base_distance
+    ), (
         "hint did not shorten the path to the target"
     )
     # The nudge resets the dry spell so it can't be spammed.

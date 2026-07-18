@@ -18,8 +18,10 @@ route refactor never churns the client surface. The full expected set is asserte
 Additive since 2026-07-07 (ADR-0011): `meta_categories` (`GET /api/categories` — category
 taxonomy + per-game availability) and `submissions_create` (`POST /api/submissions` —
 user-submitted games; 503 unless the deployment enables `CAT_SUBMISSIONS_DIR`). Game create
-endpoints accept an optional `?category=` query param; when (and only when) it is sent, game
-state gains an optional `board_category` string.
+endpoints accept an optional `?category=` query param. Contexto, Lanț, and Conexiuni echo
+`board_category` only for an explicit theme request. Alchimie is always themed: omitting the
+query lets the server deterministically select and echo a bounded theme instead of using the
+full graph.
 
 Export the schema for client generation (deterministic, offline — no server/live data):
 
@@ -64,6 +66,15 @@ positive reveal boundaries:
 Seeds/daily are deterministic by design (shared daily challenge); offline play inherently ships
 the whole KG, so this guards the **API surface**, keeping gameplay server-authoritative rather
 than claiming the offline answer is unknowable.
+
+### Alchimie additive projection views
+
+Alchimie inventory entries add the boolean view metadata `recent`, `useful`, `ready`, and
+`depleted`; `inventory_summary` carries only active/depleted/total counts. `recipe_summary`
+contains only bounded pair/route/result counts — recipe ids and full routes are never public.
+The first progressive hint has `hint_kind = output|category`, `hint = null`, and may include
+only a non-target output **label** in `hint_output`; later hints may return one owned pair with
+`hint_kind = pair`. Until win, none of these additive fields may contain the hidden target id.
 
 ## 4. Contexto rank view-model
 

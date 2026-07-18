@@ -14,6 +14,26 @@ export interface InventoryItem {
   id: string;
   label: string;
   parents: [Concept, Concept] | null;
+  /** Recently added to the bounded workspace. */
+  recent: boolean;
+  /** Still participates in at least one recipe with an unseen result. */
+  useful: boolean;
+  /** A useful recipe's other ingredient is already owned. */
+  ready: boolean;
+  /** Kept for lineage/"Toate", but automatically left out of active views. */
+  depleted: boolean;
+}
+
+export interface InventorySummary {
+  active: number;
+  depleted: number;
+  total: number;
+}
+
+export interface RecipeSummary {
+  pairs: number;
+  routes: number;
+  max_results: number;
 }
 
 export interface TargetView {
@@ -30,6 +50,9 @@ export interface AlchimieState {
   game_id: string;
   target: TargetView;
   inventory: InventoryItem[];
+  inventory_summary: InventorySummary;
+  /** Only bounded counts are public; recipe ids/routes stay server-side. */
+  recipe_summary: RecipeSummary;
   discovered_count: number;
   seed_count: number;
   moves: number;
@@ -40,8 +63,10 @@ export interface AlchimieState {
   hints_used: number;
   /** True once the player is genuinely stuck and a nudge can be requested. */
   hint_available: boolean;
+  /** What the next progressive hint will reveal. */
+  hint_stage: "output" | "pair";
   daily?: string;
-  /** Echoed only when the game was started with an explicit category. */
+  /** Server-selected board theme; playable Alchimie boards are always themed. */
   board_category?: string;
   /** Present only when won === true. */
   score?: number;
@@ -58,6 +83,9 @@ export interface CombineResult extends AlchimieState {
 export interface HintResult extends AlchimieState {
   /** The two concepts the nudge suggests combining, or null if unavailable. */
   hint: [Concept, Concept] | null;
+  hint_kind: "output" | "category" | "pair" | "none";
+  /** First hint: label only, never the private output/target id. */
+  hint_output: { label: string } | null;
   message: string;
 }
 
@@ -66,7 +94,7 @@ export interface CreateOpts {
   seed?: number;
   difficulty?: Difficulty;
   daily?: string;
-  /** Curated category/theme (ADR-0011); omit for the classic full-graph game. */
+  /** Preferred theme; omit to let the server deterministically choose one. */
   category?: string;
 }
 
@@ -75,7 +103,8 @@ const BASE = "/api/wordgames/alchimie";
 /** POST /games — start a new game.
  *
  * `?difficulty=` in {usor,normal,greu} tunes target depth + seed count, `?daily=YYYY-MM-DD`
- * makes a shared deterministic daily instance, and `?seed=` makes it reproducible.
+ * makes a shared deterministic daily instance, `?seed=` makes it reproducible, and an
+ * omitted `?category=` lets the server choose a bounded theme rather than using the full graph.
  */
 export function createAlchimie(opts: CreateOpts = {}): Promise<AlchimieState> {
   const params = new URLSearchParams();
