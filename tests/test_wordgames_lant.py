@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import random
+import threading
 
 import pytest
 
@@ -1115,6 +1116,66 @@ def _direction_progress_service():
         for src, dst in directed_pairs
     ]
     return WordGameService(Graph.from_records(nodes, edges))
+
+
+def test_concurrent_competing_hops_preserve_one_legal_chain(monkeypatch):
+    """Both requests may start together, but the second validates after the first hop."""
+    svc = _direction_progress_service()
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+    session = LantSession(
+        start="start",
+        target="target",
+        optimal=2,
+        difficulty="usor",
+        chain=["start"],
+    )
+    gid = store.create(session)
+
+    original_visible = lant._visible_choice_nodes
+    rendezvous = threading.Barrier(2)
+
+    def gated_visible(current_session: LantSession) -> list[str]:
+        try:
+            # Without the per-session transaction both requests capture START and meet
+            # here before appending incompatible hops. Serialized callers make the first
+            # wait time out; the second then validates from the committed current node.
+            rendezvous.wait(timeout=0.15)
+        except threading.BrokenBarrierError:
+            pass
+        return original_visible(current_session)
+
+    monkeypatch.setattr(lant, "_visible_choice_nodes", gated_visible)
+    start = threading.Barrier(3)
+    responses: list[tuple[str, dict]] = []
+
+    def submit(label: str) -> None:
+        request_client = Client()
+        start.wait()
+        response = request_client.post(
+            f"/api/wordgames/lant/games/{gid}/move",
+            {"text": label},
+            content_type="application/json",
+        )
+        assert response.status_code == 200, response.content.decode()
+        responses.append((label, response.json()))
+
+    threads = [
+        threading.Thread(target=submit, args=("S1",)),
+        threading.Thread(target=submit, args=("LATERAL",)),
+    ]
+    for thread in threads:
+        thread.start()
+    start.wait()
+    for thread in threads:
+        thread.join(timeout=2)
+        assert not thread.is_alive()
+
+    assert sum(bool(body["ok"]) for _label, body in responses) == 1
+    assert session.moves == 1
+    assert len(session.chain) == 2
+    assert svc.link(session.chain[0], session.chain[1]) is not None
+    rejected = next(body for _label, body in responses if not body["ok"])
+    assert rejected["last_error"] == "Nu exista o legatura directa"
 
 
 def test_easy_moves_expose_only_coarse_direction_and_a_bounded_undo_signal(monkeypatch):

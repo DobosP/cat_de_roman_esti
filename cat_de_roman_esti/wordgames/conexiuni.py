@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import random
 from dataclasses import dataclass, field
-from functools import lru_cache
+from functools import lru_cache, wraps
 from itertools import combinations
 
 from django.urls import path
@@ -35,7 +35,13 @@ from ..web.http import (
 from ._progress import excluded_pack_ids, record_finished
 from .categories import category_label, is_known, known_keys
 from .packs import CuratedItem, get_pack
-from .service import SessionStore, WordGameService, daily_seed, get_service
+from .service import (
+    SessionCapacityError,
+    SessionStore,
+    WordGameService,
+    daily_seed,
+    get_service,
+)
 
 GAME_KEY = "conexiuni"
 
@@ -91,6 +97,19 @@ class ConexiuniSession:
 
 
 store: SessionStore[ConexiuniSession] = SessionStore()
+
+
+def _atomic_session(method):
+    """Run one request against a pinned, exclusively locked game session."""
+
+    @wraps(method)
+    def wrapped(self, request, game_id: str):
+        with store.transaction(game_id) as session:
+            if session is None:
+                raise http_error(404, "Joc inexistent")
+            return method(self, request, game_id, session)
+
+    return wrapped
 
 
 # --------------------------------------------------------------------- request bodies
@@ -522,16 +541,17 @@ class CreateGameView(ContractAPIView):
         else:
             session = _pick_board(rng, difficulty)
             session.daily = daily
-        game_id = store.create(session)
+        try:
+            game_id = store.create(session)
+        except SessionCapacityError as exc:
+            raise http_error(503, "Prea multe jocuri active. Încearcă din nou.") from exc
         return Response(_state(game_id, session))
 
 
 class GetGameView(ContractAPIView):
     @extend_schema(operation_id="conexiuni_get_game", tags=["conexiuni"])
-    def get(self, request, game_id: str):
-        session = store.get(game_id)
-        if session is None:
-            raise http_error(404, "Joc inexistent")
+    @_atomic_session
+    def get(self, request, game_id: str, session: ConexiuniSession):
         return Response(_state(game_id, session))
 
 
@@ -539,11 +559,9 @@ class GuessView(ContractAPIView):
     authentication_classes = [OptionalSessionAuth]
 
     @extend_schema(operation_id="conexiuni_guess", tags=["conexiuni"])
-    def post(self, request, game_id: str):
+    @_atomic_session
+    def post(self, request, game_id: str, session: ConexiuniSession):
         body = parse_body(request, GuessBody)
-        session = store.get(game_id)
-        if session is None:
-            raise http_error(404, "Joc inexistent")
         if session.won or session.lost:
             raise http_error(400, "Jocul s-a terminat")
 
@@ -611,10 +629,8 @@ class GuessView(ContractAPIView):
 
 class ClueView(ContractAPIView):
     @extend_schema(operation_id="conexiuni_clue", tags=["conexiuni"])
-    def post(self, request, game_id: str):
-        session = store.get(game_id)
-        if session is None:
-            raise http_error(404, "Joc inexistent")
+    @_atomic_session
+    def post(self, request, game_id: str, session: ConexiuniSession):
         if session.won or session.lost:
             raise http_error(400, "Jocul s-a terminat")
         if session.clues_used >= MAX_CLUES:

@@ -19,7 +19,7 @@ from __future__ import annotations
 import random
 import threading
 from dataclasses import dataclass, field
-from functools import lru_cache
+from functools import lru_cache, wraps
 from itertools import combinations
 
 from django.urls import path
@@ -42,7 +42,13 @@ from .packs import (
     ALCHIMIE_MAX_SEARCH_STATES,
     get_pack,
 )
-from .service import SessionStore, WordGameService, daily_seed, get_service
+from .service import (
+    SessionCapacityError,
+    SessionStore,
+    WordGameService,
+    daily_seed,
+    get_service,
+)
 
 GAME_KEY = "alchimie"
 
@@ -178,6 +184,19 @@ class AlchimieSession:
 
 
 store: SessionStore[AlchimieSession] = SessionStore()
+
+
+def _atomic_session(method):
+    """Run one request against a pinned, exclusively locked game session."""
+
+    @wraps(method)
+    def wrapped(self, request, game_id: str):
+        with store.transaction(game_id) as session:
+            if session is None:
+                raise http_error(404, "Joc inexistent.")
+            return method(self, request, game_id, session)
+
+    return wrapped
 
 
 # --------------------------------------------------------------------- instance builder
@@ -827,13 +846,6 @@ def _state_payload(game_id: str, session: AlchimieSession) -> dict[str, object]:
     return payload
 
 
-def _require(game_id: str) -> AlchimieSession:
-    session = store.get(game_id)
-    if session is None:
-        raise http_error(404, "Joc inexistent.")
-    return session
-
-
 # --------------------------------------------------------------------------- endpoints
 class CreateGameView(ContractAPIView):
     authentication_classes = [OptionalSessionAuth]
@@ -899,26 +911,30 @@ class CreateGameView(ContractAPIView):
         else:
             # _build_session always resolves a scope category (picks one if none requested).
             session = _build_session(rng, difficulty=difficulty, daily=daily, category=category)
-        game_id = store.create(session)
+        try:
+            game_id = store.create(session)
+        except SessionCapacityError as exc:
+            raise http_error(503, "Prea multe jocuri active. Încearcă din nou.") from exc
         return Response(_state_payload(game_id, session))
 
 
 class GetGameView(ContractAPIView):
     @extend_schema(operation_id="alchimie_get_game", tags=["alchimie"])
-    def get(self, request, game_id: str):
+    @_atomic_session
+    def get(self, request, game_id: str, session: AlchimieSession):
         """Full current state of an existing game."""
-        return Response(_state_payload(game_id, _require(game_id)))
+        return Response(_state_payload(game_id, session))
 
 
 class CombineView(ContractAPIView):
     authentication_classes = [OptionalSessionAuth]
 
     @extend_schema(operation_id="alchimie_combine", tags=["alchimie"])
-    def post(self, request, game_id: str):
+    @_atomic_session
+    def post(self, request, game_id: str, session: AlchimieSession):
         """Combine two owned concepts through the session's sparse recipe projection."""
         body = parse_body(request, CombineBody)
         svc = get_service()
-        session = _require(game_id)
         a, b = (body.a or "").strip(), (body.b or "").strip()
 
         # A finished game is read-only: never count extra moves or mutate a won score.
@@ -987,7 +1003,8 @@ class CombineView(ContractAPIView):
 
 class HintGameView(ContractAPIView):
     @extend_schema(operation_id="alchimie_hint_game", tags=["alchimie"])
-    def post(self, request, game_id: str):
+    @_atomic_session
+    def post(self, request, game_id: str, session: AlchimieSession):
         """Reveal a progressive nudge without serializing the private recipe route.
 
         Only allowed once the player has been genuinely stuck (``NUDGE_AFTER_FRUITLESS``
@@ -997,7 +1014,6 @@ class HintGameView(ContractAPIView):
         hint may reveal one useful owned pair. Neither response exposes the target id or the
         hidden full route.
         """
-        session = _require(game_id)
         if session.won:
             raise http_error(400, "Jocul s-a terminat deja.")
         if session.fruitless_streak < NUDGE_AFTER_FRUITLESS:
@@ -1056,9 +1072,9 @@ class HintGameView(ContractAPIView):
 
 class ResetGameView(ContractAPIView):
     @extend_schema(operation_id="alchimie_reset_game", tags=["alchimie"])
-    def post(self, request, game_id: str):
+    @_atomic_session
+    def post(self, request, game_id: str, session: AlchimieSession):
         """Reset the SAME instance back to its original seed inventory (target unchanged)."""
-        session = _require(game_id)
         session.owned.clear()
         session.order.clear()
         session.moves = 0

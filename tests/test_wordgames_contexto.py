@@ -1,5 +1,7 @@
 """Offline, deterministic tests for the "Cald sau Rece" (contexto) word game."""
 
+import threading
+
 import pytest
 
 pytest.importorskip("django")
@@ -191,6 +193,52 @@ def test_duplicate_guess_not_double_counted() -> None:
         "message": f"Deja încercat — rămâne #{res['guess']['rank']}.",
     }
     assert res["guesses"] == first["guesses"]
+
+
+def test_concurrent_duplicate_guess_is_counted_once() -> None:
+    from cat_de_roman_esti.wordgames.contexto import store
+
+    c = make_client()
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
+    session = store.get(gid)
+    assert session is not None
+    rendezvous = threading.Barrier(2)
+
+    class RendezvousGuesses(dict):
+        def get(self, key: object, default=None):
+            existing = super().get(key, default)
+            try:
+                rendezvous.wait(timeout=0.15)
+            except threading.BrokenBarrierError:
+                pass
+            return existing
+
+    session.guesses = RendezvousGuesses()
+    start = threading.Barrier(3)
+    responses: list[dict] = []
+
+    def submit() -> None:
+        request_client = make_client()
+        start.wait()
+        response = request_client.post(
+            f"/api/wordgames/contexto/games/{gid}/guess",
+            {"text": "Banat"},
+            content_type="application/json",
+        )
+        assert response.status_code == 200, response.content.decode()
+        responses.append(response.json())
+
+    threads = [threading.Thread(target=submit) for _ in range(2)]
+    for thread in threads:
+        thread.start()
+    start.wait()
+    for thread in threads:
+        thread.join(timeout=2)
+        assert not thread.is_alive()
+
+    assert sorted(body["feedback"]["kind"] for body in responses) == ["first", "repeat"]
+    assert {body["attempts"] for body in responses} == {1}
+    assert session.attempts == len(session.guesses) == len(session.order) == 1
 
 
 def test_comparative_feedback_covers_public_rank_movements_only() -> None:

@@ -1,14 +1,11 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-19. This file is the repository's current source of truth._
-_Last verified: 2026-07-19 (V35 focused gates: Alchimie backend 422/422,
-Contexto/mobile 61/61, Lanț 49/49, required session store 11/11, frontend 12/12,
-lint, typecheck, Ruff, and whitespace. Canonical static rebuild is pending. Live remains
-V32 `f40fa8b`; V33–V35 are not pushed or deployed.)_
+_Last verified: 2026-07-19 (V35 atomic-session regressions 20/20, all-four-game/mobile
+suite green, and required session store 16/16. Static was not rebuilt on this task branch.
+Live remains V32 `f40fa8b`; V33–V35 are not pushed or deployed.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
-
-The critique layer now fails closed from generation through promotion:
 
 - `critique_pack.py` validates IDs, reuse, overuse, live degree, and game-specific judge criteria.
 - Version-2 artifacts bind the exact batch, dossiers, and rubric; apply rebuilds and reruns
@@ -32,24 +29,20 @@ with mistake dots; desktop keeps the same loop in a focused play column.
 
 ## Current outcome — V35 guided word space and comparison (ADR-0042 through ADR-0045)
 
-Cald sau Rece accepts **444 collision-screened everyday guesses across 26 domains** through 89 reviewed KG anchors without changing graph/pack bytes or creating projection wins.
-Clues progress from category to one strictly warmer familiar word; themed boards skip category.
-Distinct guesses keep stable chronological numbers while the server returns one short comparison from public ranks only; repeats remain free. Browser views switch between `Bune` and `Recente`.
-The sticky guess area keeps 44 px clue/reveal/options actions, a clue countdown, and an inline two-step reveal whose confirmation clears when play resumes. Targets and scoring are unchanged.
-Alchimie projects 1–4 target-useful routes into at most 24 private recipe pairs / 32 concepts. Runtime normally returns one result; exact par remains unchanged. Mined boards prefer two live
-openings; useful/recent/all views retire depleted items and hints progress from output to pair.
+Cald sau Rece accepts **444 screened everyday guesses across 26 domains** through 89 KG
+anchors without projection wins. Clues progress to one warmer familiar word. Distinct guesses
+keep stable numbers and one public-rank comparison; repeats stay free. Browser `Bune`/`Recente`
+views and sticky 44 px clue/reveal/options actions do not change targets or scoring.
+Alchimie projects 1–4 target-useful routes into at most 24 private recipe pairs / 32 concepts.
+Runtime normally returns one result and exact par holds; views retire depleted items and hints progress to a pair.
 
 ## Current outcome — beginner vocabulary waves (ADR-0030, ADR-0032, ADR-0033, ADR-0036 through ADR-0041)
 
-V23 retains 22 childhood/story nodes and 78 edges. V24 adds **150 everyday nodes, 511
-edges, 276 aliases, and 26 pending items**; V25 adds **168 safe aliases and 25 links**.
-V28 completes the eligible beginner benchmark with **15 concepts, 44 inflections, and 53
-links**, reaching **234/234**. V29 adds **17 concepts, 66 inflections, and 64 links**.
-V30 adds **18 farm, clothing, and kitchen concepts, 60 inflections, and 54 links** in
-three inbound-reachable meshes. V31 adds **17 hygiene, lower-limb, and cleaning concepts,
-61 inflections, and 51 links**. V32 adds **18 face, workshop, and garden concepts, 69
-inflections, and 54 links**. V33 adds **18 bathroom, household-electrical, and forest
-concepts, 67 inflections, and 54 links**; combined eligible probes resolve **322/322**.
+V23 retains 22 childhood/story nodes and 78 edges. V24 adds **150 nodes, 511 edges, 276
+aliases, and 26 pending items**; V25 adds **168 safe aliases and 25 links**. V28 reaches
+**234/234** eligible probes; V29 adds **17 concepts, 66 inflections, and 64 links**.
+V30–V33 add 71 farm, clothing, kitchen, hygiene, cleaning, face, workshop, garden,
+bathroom, household-electrical, and forest concepts; eligible probes reach **322/322**.
 All 33 affected pending dossiers and the full report stay unchanged and clean; all 794
 curated records remain unchanged.
 
@@ -74,8 +67,9 @@ Both fixture copies and both pack copies are byte-identical and validator-green.
 
 ## Runtime contracts and safety
 
-- Sessions use a validated two-hour sliding TTL and 1,000-entry LRU cap per game; cleanup
-  is lazy, lock-protected, monotonic, and deterministic.
+- Sessions keep a 7,200-second sliding TTL and 1,000-entry LRU cap. Entry-owned locks
+  serialize each request transaction while other sessions stay concurrent; all-borrowed
+  capacity fails fast with 503 and cannot overshoot the cap (ADR-0049).
 - Request bodies default to a 64 KiB Caddy plus ASGI receive ceiling.
 - Hidden-answer boundaries remain pinned: Contexto hides its target until terminal;
   Alchimie hides target ID; Lanț reveals played/hinted hops; Conexiuni withholds unsolved
@@ -94,10 +88,9 @@ PYTHONPATH=. .venv/bin/python scripts/validate_fixture.py
 node --check .claude/workflows/critique-games.js
 git diff --check
 ```
-Run frontend gates when frontend changes; session-store target: `tests/test_wordgames_session_store.py` (11).
+Run frontend gates when frontend changes; session-store target: `tests/test_wordgames_session_store.py` (16).
 
 ## Next verified work
 
-- Playtest V35 comparison/actions at 320–390 px, including projected terms and both clues.
 - Continue exact pending/approved-stock adversarial review and generic-edge cleanup.
 - Make rankings server-authored, bounded, and private-by-default before public accounts.

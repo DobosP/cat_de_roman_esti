@@ -22,7 +22,8 @@ import time
 import unicodedata
 import uuid
 from collections import OrderedDict, deque
-from collections.abc import Callable
+from collections.abc import Callable, Iterator
+from contextlib import contextmanager
 from dataclasses import dataclass, field
 from functools import lru_cache
 from typing import Generic, TypeVar
@@ -400,6 +401,22 @@ DEFAULT_SESSION_TTL_SECONDS = _positive_env_float(
 DEFAULT_MAX_SESSIONS = _positive_env_int("CAT_MAX_SESSIONS_PER_GAME", 1_000)
 
 
+class SessionCapacityError(RuntimeError):
+    """Every capped store slot is currently pinned by an in-flight transaction."""
+
+
+@dataclass
+class _SessionEntry(Generic[S]):
+    """One capped store entry and the lock that linearizes its API transactions."""
+
+    session: S
+    last_access: float
+    transaction_lock: threading.RLock = field(default_factory=threading.RLock)
+    # Includes the transaction currently running plus callers queued on its lock. Pins
+    # keep eviction/deletion from detaching an object while a request still owns it.
+    borrowers: int = 0
+
+
 class SessionStore(Generic[S]):
     """Thread-safe uuid4-keyed store for one game's in-progress sessions.
 
@@ -412,12 +429,13 @@ class SessionStore(Generic[S]):
     * **Max size (LRU):** at most ``max_sessions`` live at once; creating beyond the cap
       evicts the least-recently-used entry. Pass ``max_sessions=None`` to disable the cap.
 
-    Eviction is lazy — it runs inside :meth:`create`/:meth:`get`/:meth:`__len__` under the
-    lock, so there is no background thread to manage. Entries are held in least- to
-    most-recently-used order; with a uniform TTL the oldest are always at the front, which
-    makes both the TTL sweep and the cap eviction cheap front-pops. ``clock`` is injectable
-    (defaults to :func:`time.monotonic`, which is immune to wall-clock jumps) purely so
-    tests can drive expiry deterministically without sleeping.
+    Eviction is lazy — it runs inside :meth:`create`/:meth:`get`/:meth:`__len__` under a
+    short metadata lock, so there is no background thread to manage. Each capped entry
+    owns exactly one transaction lock. :meth:`transaction` pins an entry briefly under
+    metadata lock, then releases that global lock before waiting or running request code:
+    operations for one session serialize while different sessions remain independent.
+    ``clock`` is injectable (defaults to :func:`time.monotonic`, immune to wall-clock
+    jumps) purely so tests can drive expiry deterministically without sleeping.
     """
 
     def __init__(
@@ -429,8 +447,9 @@ class SessionStore(Generic[S]):
     ) -> None:
         if max_sessions is not None and max_sessions < 1:
             raise ValueError("max_sessions must be >= 1 or None")
-        # sid -> (session, last_access_time); insertion/access order == LRU order.
-        self._sessions: OrderedDict[str, tuple[S, float]] = OrderedDict()
+        # sid -> entry; insertion/access order == LRU order. Locks live only inside these
+        # capped entries, never in a second map that could outlive session eviction.
+        self._sessions: OrderedDict[str, _SessionEntry[S]] = OrderedDict()
         self._ttl = ttl_seconds
         self._max = max_sessions
         self._clock = clock
@@ -440,27 +459,35 @@ class SessionStore(Generic[S]):
     def _purge_expired(self, now: float) -> int:
         """Drop sessions past their sliding TTL; returns how many were removed.
 
-        Entries sit in least-recently-used order, so with a uniform TTL the soonest to
-        expire are at the front: pop from the front until one is still alive.
+        Borrowed entries are live request state and cannot be detached. Because a long
+        transaction can leave an expired-but-pinned entry ahead of another expired idle
+        entry, scan the bounded store instead of stopping at the first pinned record.
         """
         if self._ttl is None:
             return 0
         removed = 0
-        while self._sessions:
-            sid = next(iter(self._sessions))
-            _session, last = self._sessions[sid]
-            if now - last <= self._ttl:
+        for sid, entry in list(self._sessions.items()):
+            if now - entry.last_access <= self._ttl:
+                # LRU order also orders access time; everything after this is younger.
                 break
-            self._sessions.popitem(last=False)
+            if entry.borrowers:
+                continue
+            del self._sessions[sid]
             removed += 1
         return removed
 
-    def _evict_to_cap(self) -> None:
-        """Drop the least-recently-used entries until the size cap is satisfied."""
-        if self._max is None:
-            return
-        while len(self._sessions) > self._max:
-            self._sessions.popitem(last=False)
+    def _evict_one_idle_lru(self) -> bool:
+        """Drop one unborrowed LRU entry; return whether capacity was reclaimed."""
+        for sid, entry in self._sessions.items():
+            if entry.borrowers == 0:
+                del self._sessions[sid]
+                return True
+        return False
+
+    def _touch(self, sid: str, entry: _SessionEntry[S], now: float) -> None:
+        """Refresh one still-live entry; caller holds the metadata lock."""
+        entry.last_access = now
+        self._sessions.move_to_end(sid)
 
     # ----------------------------------------------------------- public API
     def create(self, session: S) -> str:
@@ -468,26 +495,71 @@ class SessionStore(Generic[S]):
         with self._lock:
             now = self._clock()
             self._purge_expired(now)
-            self._sessions[sid] = (session, now)  # newest -> most-recently-used (at end)
-            self._evict_to_cap()
+            # Preserve the hard cap without evicting a transaction in flight. Fail fast
+            # instead of waiting when every slot is borrowed: this also makes create safe
+            # if a future caller invokes it from inside a transaction at a tiny test cap.
+            while self._max is not None and len(self._sessions) >= self._max:
+                if self._evict_one_idle_lru():
+                    break
+                raise SessionCapacityError("all session slots are currently busy")
+            self._sessions[sid] = _SessionEntry(session=session, last_access=now)
         return sid
 
     def get(self, sid: str) -> S | None:
+        """Return a session reference and refresh its TTL/LRU position.
+
+        This compatibility accessor cannot protect work performed after it returns.
+        Request handlers must use :meth:`transaction` for compound reads or mutation.
+        """
         with self._lock:
             now = self._clock()
             self._purge_expired(now)
             entry = self._sessions.get(sid)
             if entry is None:
                 return None
-            session, _last = entry
             # Sliding TTL: a touched session is alive and becomes most-recently-used.
-            self._sessions[sid] = (session, now)
-            self._sessions.move_to_end(sid)
-            return session
+            self._touch(sid, entry, now)
+            return entry.session
+
+    @contextmanager
+    def transaction(self, sid: str) -> Iterator[S | None]:
+        """Pin and exclusively yield one session for an atomic request transaction.
+
+        The metadata lock is never held while waiting for the per-entry lock or while
+        caller code runs. Pins include waiters, so lazy TTL/LRU eviction and deletion
+        cannot detach a session between lookup and mutation. Missing ids allocate no lock.
+        """
+
+        with self._lock:
+            now = self._clock()
+            self._purge_expired(now)
+            entry = self._sessions.get(sid)
+            if entry is not None:
+                entry.borrowers += 1
+
+        if entry is None:
+            yield None
+            return
+
+        entry.transaction_lock.acquire()
+        try:
+            # Touch at actual lock acquisition: queued callers do not extend TTL merely
+            # by waiting, while their pin still prevents mid-request eviction.
+            with self._lock:
+                self._touch(sid, entry, self._clock())
+            yield entry.session
+        finally:
+            entry.transaction_lock.release()
+            with self._lock:
+                entry.borrowers -= 1
 
     def delete(self, sid: str) -> bool:
         with self._lock:
-            return self._sessions.pop(sid, None) is not None
+            entry = self._sessions.get(sid)
+            if entry is None or entry.borrowers:
+                return False
+            del self._sessions[sid]
+            return True
 
     def purge_expired(self) -> int:
         """Evict every session past its TTL now; returns the count removed.

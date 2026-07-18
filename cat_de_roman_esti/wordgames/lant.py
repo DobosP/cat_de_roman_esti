@@ -15,6 +15,7 @@ import random
 import threading
 from collections import OrderedDict
 from dataclasses import dataclass, field
+from functools import wraps
 
 from django.urls import path
 from drf_spectacular.utils import extend_schema
@@ -39,7 +40,14 @@ from .packs import (
     GamesPack,
     get_pack,
 )
-from .service import SessionStore, WordGameService, daily_seed, get_service, normalize
+from .service import (
+    SessionCapacityError,
+    SessionStore,
+    WordGameService,
+    daily_seed,
+    get_service,
+    normalize,
+)
 
 GAME_KEY = "lant"
 
@@ -141,6 +149,19 @@ class LantSession:
 
 
 store: SessionStore[LantSession] = SessionStore()
+
+
+def _atomic_session(method):
+    """Run one request against a pinned, exclusively locked game session."""
+
+    @wraps(method)
+    def wrapped(self, request, game_id: str):
+        with store.transaction(game_id) as session:
+            if session is None:
+                raise http_error(404, "Joc inexistent")
+            return method(self, request, game_id, session)
+
+    return wrapped
 
 
 # --------------------------------------------------------------------- request bodies
@@ -711,16 +732,17 @@ class CreateGameView(ContractAPIView):
             category=category,
             pack_id=pack_id,
         )
-        game_id = store.create(session)
+        try:
+            game_id = store.create(session)
+        except SessionCapacityError as exc:
+            raise http_error(503, "Prea multe jocuri active. Încearcă din nou.") from exc
         return Response(_state(game_id, session))
 
 
 class GetGameView(ContractAPIView):
     @extend_schema(operation_id="lant_get_game", tags=["lant"])
-    def get(self, request, game_id: str):
-        session = store.get(game_id)
-        if session is None:
-            raise http_error(404, "Joc inexistent")
+    @_atomic_session
+    def get(self, request, game_id: str, session: LantSession):
         return Response(_state(game_id, session))
 
 
@@ -728,11 +750,9 @@ class MoveView(ContractAPIView):
     authentication_classes = [OptionalSessionAuth]
 
     @extend_schema(operation_id="lant_move", tags=["lant"])
-    def post(self, request, game_id: str):
+    @_atomic_session
+    def post(self, request, game_id: str, session: LantSession):
         body = parse_body(request, MoveBody)
-        session = store.get(game_id)
-        if session is None:
-            raise http_error(404, "Joc inexistent")
         if session.won:
             return Response({"ok": True, **_state(game_id, session)})
 
@@ -859,10 +879,8 @@ class MoveView(ContractAPIView):
 
 class UndoView(ContractAPIView):
     @extend_schema(operation_id="lant_undo", tags=["lant"])
-    def post(self, request, game_id: str):
-        session = store.get(game_id)
-        if session is None:
-            raise http_error(404, "Joc inexistent")
+    @_atomic_session
+    def post(self, request, game_id: str, session: LantSession):
         # Never step below the start.
         if len(session.chain) > 1:
             session.chain.pop()
@@ -874,10 +892,8 @@ class UndoView(ContractAPIView):
 
 class HintView(ContractAPIView):
     @extend_schema(operation_id="lant_hint", tags=["lant"])
-    def post(self, request, game_id: str):
-        session = store.get(game_id)
-        if session is None:
-            raise http_error(404, "Joc inexistent")
+    @_atomic_session
+    def post(self, request, game_id: str, session: LantSession):
         if session.won:
             return Response({"hint": None, "message": "Ai ajuns deja la tinta."})
 

@@ -1,5 +1,7 @@
 """Offline, deterministic tests for the "Conexiuni" (NYT Connections) word game."""
 
+import threading
+
 import pytest
 
 pytest.importorskip("django")
@@ -247,6 +249,56 @@ def test_repeated_wrong_set_does_not_consume_another_life() -> None:
     assert repeated.status_code == 409
     session = store.get(gid)
     assert session is not None
+    assert session.mistakes == 1
+    assert session.lives == 3
+    assert len(session.history) == 1
+
+
+def test_concurrent_duplicate_wrong_set_costs_one_life() -> None:
+    from cat_de_roman_esti.wordgames.conexiuni import store
+
+    _c, body, groups = _groups_for()
+    gid = body["game_id"]
+    session = store.get(gid)
+    assert session is not None
+    wrong = _wrong_cross_group(groups)
+    rendezvous = threading.Barrier(2)
+
+    class RendezvousHistory(list):
+        def __iter__(self):
+            snapshot = tuple(super().__iter__())
+            try:
+                rendezvous.wait(timeout=0.15)
+            except threading.BrokenBarrierError:
+                pass
+            return iter(snapshot)
+
+    session.history = RendezvousHistory()
+    start = threading.Barrier(3)
+    statuses: list[int] = []
+
+    def submit(ids: list[str]) -> None:
+        request_client = make_client()
+        start.wait()
+        response = _post_json(
+            request_client,
+            f"{BASE}/games/{gid}/guess",
+            {"ids": ids},
+        )
+        statuses.append(response.status_code)
+
+    threads = [
+        threading.Thread(target=submit, args=(wrong,)),
+        threading.Thread(target=submit, args=(list(reversed(wrong)),)),
+    ]
+    for thread in threads:
+        thread.start()
+    start.wait()
+    for thread in threads:
+        thread.join(timeout=2)
+        assert not thread.is_alive()
+
+    assert sorted(statuses) == [200, 409]
     assert session.mistakes == 1
     assert session.lives == 3
     assert len(session.history) == 1
