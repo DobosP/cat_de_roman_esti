@@ -1,7 +1,7 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-07-18. This file is the repository's current source of truth._
-_Last verified: 2026-07-18 (V34 combined verification pending. Source gates: Contexto backend 403/focused 53/mobile-session 70; Lanț focused 46/mobile 52/curated-pack-session 46; Alchimie backend 396/focused-mobile-session 60. All passed Ruff, validators, workflow syntax, whitespace, and frontend source gates. Live release remains V32 `f40fa8bc1b8880637aeeb01816c612ea850f73c0`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles.)_
+_As of 2026-07-19. This file is the repository's current source of truth._
+_Last verified: 2026-07-19 (local V34 gate: backend 420/420; session store 11/11; Ruff, both validators, workflow syntax, whitespace, fixture/pack mirrors; frontend lint, typecheck, 11/11 source tests, production build, 116.48/120 KiB initial gzip, and four Romanian font subsets. Live release remains V32 `f40fa8bc1b8880637aeeb01816c612ea850f73c0`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles; V33/V34 are not pushed or deployed.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -15,26 +15,21 @@ The critique layer now fails closed from generation through promotion:
 ## Current outcome — browser recovery (ADR-0027 through ADR-0029, ADR-0034, ADR-0035)
 
 Lanț exposes up to three private-corridor choices plus safe detours as ID-free label/relation
-chips; visible homonyms bind exactly and every other direct hop stays legal. Hints prefer a
-safe forward route before free undo. Conexiuni retains one-away swaps; Cald sau Rece keeps
-target-filtered typo recovery. Alchimie keeps a 12-reaction journal and authoritative empty
-pair. All remain server-authoritative; score, undo, secrecy, TTL, and caps are unchanged.
+chips; visible homonyms bind exactly, all direct hops stay legal, and hints prefer safe forward
+routes before free undo. Other recovery remains bounded. All games remain server-authoritative;
+score, undo, secrecy, TTL, and caps are unchanged.
 
 ## Current outcome — beginner mobile interface (ADR-0031)
 
-All four games now default to `Ușor`, teach their loop with three terse actions, and show
-one live `ACUM` cue instead of repeating rules. Mobile gets 44 px targets, scrollable
-status/theme rails, readable long labels, reachable primary actions, visible rank meaning,
-and safe keyboard shortcuts; desktop retains the same focused play column.
+All four games default to `Ușor`, teach three terse actions, and show one live `ACUM` cue.
+Mobile gets 44 px targets, scrollable rails, readable labels, reachable primary actions,
+visible rank meaning, and safe shortcuts; desktop keeps the focused play column.
 
-## Current outcome — broad Contexto guidance (ADR-0042)
+## Current outcome — V34 guided word space (ADR-0042 through ADR-0044)
 
 Cald sau Rece accepts **444 collision-screened everyday guesses across 26 domains** through
 89 reviewed KG anchors without changing graph/pack bytes or creating projection wins.
 Clues progress from category to one strictly warmer familiar word; themed boards skip category.
-
-## Current outcome — sparse Alchimie recipes (ADR-0044)
-
 Alchimie projects 1–4 target-useful routes into at most 24 private recipe pairs / 32 concepts.
 Runtime normally returns one result; exact par remains unchanged. Mined boards prefer two live
 openings; useful/recent/all views retire depleted items and hints progress from output to pair.
@@ -96,8 +91,7 @@ PYTHONPATH=. .venv/bin/python scripts/validate_fixture.py
 node --check .claude/workflows/critique-games.js
 git diff --check
 ```
-Run frontend lint/typecheck/test/build only when frontend files change. The shared
-session-store target remains `tests/test_wordgames_session_store.py` (11 tests).
+Run frontend gates when frontend changes; session-store target: `tests/test_wordgames_session_store.py` (11).
 
 ## Next verified work
 

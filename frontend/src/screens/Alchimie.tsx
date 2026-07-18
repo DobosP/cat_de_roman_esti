@@ -887,7 +887,14 @@ export default function Alchimie({
                 const isCrafted = item.parents !== null;
                 const title = item.depleted
                   ? "Nu mai produce elemente noi"
-                  : (parentsOf(item) ?? "Concept de start");
+                  : item.ready
+                    ? `${parentsOf(item) ?? "Concept de start"} · Pereche utilă gata`
+                    : (parentsOf(item) ?? "Concept de start");
+                const accessibleLabel = item.depleted
+                  ? `${item.label}, pus deoparte`
+                  : item.ready
+                    ? `${item.label}, gata pentru o combinație utilă`
+                    : item.label;
                 return (
                   <m.button
                     key={item.id}
@@ -910,6 +917,7 @@ export default function Alchimie({
                     onClick={() => toggle(item.id)}
                     disabled={won || busy || item.depleted}
                     aria-pressed={isSel}
+                    aria-label={accessibleLabel}
                     title={title}
                     className="chip"
                     style={{
@@ -941,7 +949,11 @@ export default function Alchimie({
                             : undefined,
                     }}
                   >
-                    {item.ready && !item.depleted ? "● " : isCrafted ? "✦ " : ""}
+                    {item.ready && !item.depleted ? (
+                      <span aria-hidden="true">● </span>
+                    ) : isCrafted ? (
+                      <span aria-hidden="true">✦ </span>
+                    ) : null}
                     {item.label}
                   </m.button>
                 );

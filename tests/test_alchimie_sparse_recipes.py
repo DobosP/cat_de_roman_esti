@@ -15,8 +15,10 @@ pytest.importorskip("django")
 
 from django.test import Client  # noqa: E402
 
+from cat_de_roman_esti.graph import Graph  # noqa: E402
 from cat_de_roman_esti.wordgames import alchimie as A  # noqa: E402
 from cat_de_roman_esti.wordgames.packs import get_pack  # noqa: E402
+from cat_de_roman_esti.wordgames.service import WordGameService  # noqa: E402
 
 
 def _projection_row(item, projection: A.RecipeProjection) -> dict[str, object]:
@@ -141,6 +143,55 @@ def test_projection_identity_survives_a_cold_rebuild() -> None:
         item.payload["seeds"], item.payload["target"], item.category
     )
     assert first == second
+
+
+def test_projection_cache_invalidates_when_service_identity_changes(monkeypatch) -> None:
+    nodes = [
+        {
+            "id": node_id,
+            "label_ro": node_id.upper(),
+            "category": "test",
+            "salience": 1.0,
+        }
+        for node_id in ("a", "b", "c", "target")
+    ]
+
+    def service_with_parent(parent: str) -> WordGameService:
+        edges = [
+            {
+                "id": f"a-target-{parent}",
+                "src_id": "a",
+                "dst_id": "target",
+                "relation": "related_to",
+                "strength": 0.9,
+                "bidirectional": False,
+            },
+            {
+                "id": f"{parent}-target",
+                "src_id": parent,
+                "dst_id": "target",
+                "relation": "related_to",
+                "strength": 0.9,
+                "bidirectional": False,
+            },
+        ]
+        return WordGameService(Graph.from_records(nodes, edges))
+
+    first_service = service_with_parent("b")
+    second_service = service_with_parent("c")
+    active_service = [first_service]
+    monkeypatch.setattr(A, "get_service", lambda: active_service[0])
+    A._build_recipe_projection_cached.cache_clear()
+
+    first = A._build_recipe_projection(["a", "b", "c"], "target", "test")
+    assert first is not None
+    assert first.recipes == {("a", "b"): ("target",)}
+
+    active_service[0] = second_service
+    second = A._build_recipe_projection(["a", "b", "c"], "target", "test")
+    assert second is not None
+    assert second.recipes == {("a", "c"): ("target",)}
+    assert A._build_recipe_projection_cached.cache_info().currsize == 1
 
 
 def test_many_mined_sessions_stay_bounded_solvable_and_fast() -> None:

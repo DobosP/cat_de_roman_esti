@@ -82,3 +82,14 @@ test("Lanț turns revisit traps into an explicit free-undo action", () => {
   assert.match(screen, /Anulează ultimul salt/);
   assert.match(screen, /onClick=\{\(\) => void handleUndo\(\)\}/);
 });
+
+test("Lanț undo does not summon the phone keyboard over tap choices", () => {
+  assert.match(
+    screen,
+    /const focusInputForFinePointer = useCallback[\s\S]*?matchMedia\("\(pointer: fine\)"\)\.matches[\s\S]*?inputRef\.current\?\.focus\(\)/,
+  );
+  assert.match(
+    screen,
+    /const fresh = await undoLant\(state\.game_id\);[\s\S]{0,160}focusInputForFinePointer\(\)/,
+  );
+});

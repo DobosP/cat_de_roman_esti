@@ -821,8 +821,20 @@ input:focus-visible {
 
 .lant-choice span {
   color: var(--text-faint);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   line-height: 1.2;
+}
+
+.contexto-warm-clue-button {
+  min-width: 0;
+  min-height: 44px;
+  padding: 6px 10px;
+  border: 1px solid rgba(244, 162, 89, 0.58);
+  border-radius: var(--roedu-radius-sm);
+  background: rgba(244, 162, 89, 0.1);
+  color: var(--text);
+  font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
 .hint-fill-button {

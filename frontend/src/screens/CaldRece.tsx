@@ -745,7 +745,23 @@ export default function CaldRece({
                 <span className="muted" style={{ fontSize: "0.82rem" }}>
                   🔥 Încearcă
                 </span>
-                <strong>{state.warm_clue.label}</strong>
+                <button
+                  type="button"
+                  className="contexto-warm-clue-button"
+                  title="Pune cuvântul în căsuță"
+                  aria-label={`Pune ${state.warm_clue.label} în câmpul de răspuns`}
+                  onClick={() => {
+                    const word = state.warm_clue?.label;
+                    if (!word) return;
+                    sound.playSelect();
+                    setText(word);
+                    if (window.matchMedia("(pointer: fine)").matches) {
+                      inputRef.current?.focus();
+                    }
+                  }}
+                >
+                  {state.warm_clue.label}
+                </button>
                 <span
                   className="badge"
                   title="Acest cuvânt era mai aproape decât cea mai bună încercare"

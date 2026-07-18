@@ -56,6 +56,7 @@ test("Romanian labels wrap on a responsive Connections board and long paths scro
     /@media \(max-width: 480px\)[\s\S]*?\.lant-choice-grid > \.lant-choice:last-child:nth-child\(odd\)[\s\S]*?grid-column: 1 \/ -1/,
   );
   assert.match(css, /\.lant-choice \{[\s\S]*?min-height: 58px/);
+  assert.match(css, /\.lant-choice span \{[\s\S]*?font-size: 0\.75rem/);
 });
 
 test("global shortcuts ignore focused controls instead of double-submitting", () => {

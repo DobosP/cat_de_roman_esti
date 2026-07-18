@@ -119,6 +119,12 @@ export default function Lant({
   const inputRef = useRef<HTMLInputElement>(null);
   const resumeTried = useRef(false);
 
+  const focusInputForFinePointer = useCallback(() => {
+    if (window.matchMedia("(pointer: fine)").matches) {
+      inputRef.current?.focus();
+    }
+  }, []);
+
   const best = useMemo(() => bestScore(GAME_KEY), []);
   const recordOnce = useRecordScore("lant");
 
@@ -224,14 +230,8 @@ export default function Lant({
 
   useEffect(() => {
     // Do not summon the phone keyboard over the new tap-first local choices.
-    if (
-      state &&
-      !state.won &&
-      window.matchMedia("(pointer: fine)").matches
-    ) {
-      inputRef.current?.focus();
-    }
-  }, [state]);
+    if (state && !state.won) focusInputForFinePointer();
+  }, [state, focusInputForFinePointer]);
 
   // On the win screen, Enter starts another chain with the same free-play filters.
   useEffect(() => {
@@ -332,7 +332,7 @@ export default function Lant({
       const fresh = await undoLant(state.game_id);
       setState(fresh);
       sound.playUndo();
-      inputRef.current?.focus();
+      focusInputForFinePointer();
     } catch {
       onToast("Nu am putut anula.", "error");
     } finally {

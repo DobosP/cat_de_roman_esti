@@ -17,6 +17,7 @@ the target id remain server-side.
 from __future__ import annotations
 
 import random
+import threading
 from dataclasses import dataclass, field
 from functools import lru_cache
 from itertools import combinations
@@ -41,7 +42,7 @@ from .packs import (
     ALCHIMIE_MAX_SEARCH_STATES,
     get_pack,
 )
-from .service import SessionStore, daily_seed, get_service
+from .service import SessionStore, WordGameService, daily_seed, get_service
 
 GAME_KEY = "alchimie"
 
@@ -87,6 +88,17 @@ DEFAULT_DIFFICULTY = "normal"
 RecipePair = tuple[str, str]
 RecipeStep = tuple[RecipePair, tuple[str, ...]]
 RecipeRoute = tuple[RecipeStep, ...]
+
+
+@dataclass(frozen=True, eq=False, slots=True)
+class _ProjectionServiceRef:
+    """Hashable identity key that also pins the service used by one cached build."""
+
+    service: WordGameService
+
+
+_projection_cache_service_ref: _ProjectionServiceRef | None = None
+_projection_cache_service_lock = threading.Lock()
 
 
 def _pair_key(a: str, b: str) -> RecipePair:
@@ -304,7 +316,31 @@ def _build_recipe_projection(
     target: str,
     category: str | None,
 ) -> RecipeProjection | None:
-    return _build_recipe_projection_cached(tuple(seeds), target, category)
+    svc = get_service()
+    service_ref = _projection_service_cache_ref(svc)
+    return _build_recipe_projection_cached(tuple(seeds), target, category, service_ref)
+
+
+def _projection_service_cache_ref(svc: WordGameService) -> _ProjectionServiceRef:
+    """Return the current cache key, clearing stale-service entries on a swap.
+
+    The lock protects only the identity check and invalidation.  Projection construction
+    remains outside it, so simultaneous cold builds are not serialized.  The service
+    reference is also part of each LRU key, preventing an in-flight old-service build from
+    becoming a cache hit after another thread has switched services and cleared the cache.
+    """
+
+    global _projection_cache_service_ref
+    current = _projection_cache_service_ref
+    if current is not None and current.service is svc:
+        return current
+    with _projection_cache_service_lock:
+        current = _projection_cache_service_ref
+        if current is None or current.service is not svc:
+            _build_recipe_projection_cached.cache_clear()
+            current = _ProjectionServiceRef(svc)
+            _projection_cache_service_ref = current
+        return current
 
 
 @lru_cache(maxsize=512)
@@ -312,6 +348,7 @@ def _build_recipe_projection_cached(
     seeds: tuple[str, ...],
     target: str,
     category: str | None,
+    service_ref: _ProjectionServiceRef,
 ) -> RecipeProjection | None:
     """Project a small private recipe book from the shared semantic graph.
 
@@ -320,7 +357,7 @@ def _build_recipe_projection_cached(
     result, and concept bounds remain satisfied.  Search and selection are sorted, hence
     identical seeds/target/category always produce byte-equivalent projections.
     """
-    svc = get_service()
+    svc = service_ref.service
     start = frozenset(seeds)
     frontier: set[frozenset[str]] = {start}
     seen: set[frozenset[str]] = {start}

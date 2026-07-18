@@ -32,6 +32,13 @@ test("depleted ingredients leave the active workspace but remain in all", () => 
   assert.match(screen, /inventory_summary\.depleted/);
 });
 
+test("ready markers explain their meaning without polluting accessible names", () => {
+  assert.match(screen, /item\.ready[\s\S]*?gata pentru o combinație utilă/);
+  assert.match(screen, /aria-label=\{accessibleLabel\}/);
+  assert.match(screen, /<span aria-hidden="true">● <\/span>/);
+  assert.match(screen, /item\.depleted[\s\S]*?\$\{item\.label\}, pus deoparte/);
+});
+
 test("mobile inventory is a two-column 44px chip grid", () => {
   assert.match(css, /\.alchemy-inventory-grid[\s\S]*?minmax\(128px, 1fr\)/);
   assert.match(css, /\.alchemy-inventory-grid > \.chip[\s\S]*?min-height: 44px/);
