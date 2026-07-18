@@ -35,8 +35,7 @@ def _win(game: dict) -> dict:
     gid = game["game_id"]
     body = {}
     for _ in range(game["optimal"]):
-        hint = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()["hint"]
-        assert hint is not None
+        hint = _revealed_hop(gid)["hint"]
         body = c.post(
             f"/api/wordgames/lant/games/{gid}/move",
             {"text": hint["label"]},
@@ -44,6 +43,15 @@ def _win(game: dict) -> dict:
         ).json()
     assert body["won"] is True
     return body
+
+
+def _revealed_hop(game_id: str) -> dict:
+    """Ask through direction/alternatives until the voluntary one-hop reveal."""
+    for _ in range(3):
+        body = c.post(f"/api/wordgames/lant/games/{game_id}/hint").json()
+        if body.get("hint") is not None:
+            return body
+    raise AssertionError(f"third hint did not reveal one hop: {body}")
 
 
 def test_create_is_solvable_and_seed_deterministic():
@@ -61,6 +69,72 @@ def test_create_is_solvable_and_seed_deterministic():
     assert a["target"]["description"]  # target description is shown
 
 
+def test_local_choices_are_bounded_id_free_unique_and_tappable():
+    game = _create(difficulty="usor")
+    choices = game["choices"]
+    # Prefer 4–6 when safe detours exist; an all-corridor position stops at the strict
+    # three-hop quota instead of leaking more of the private route web.
+    assert 1 <= len(choices) <= 6
+    assert choices == c.get(f"/api/wordgames/lant/games/{game['game_id']}").json()["choices"]
+    assert all(set(choice) == {"label", "relation"} for choice in choices)
+    assert all(choice["label"] and 0 < len(choice["relation"]) <= 34 for choice in choices)
+    normalized = [lant.normalize(choice["label"]) for choice in choices]
+    assert len(normalized) == len(set(normalized))
+
+    # Every chip can be submitted from the exact state that authored it.
+    for choice in choices:
+        session = LantSession(
+            start=game["start"]["id"],
+            target=game["target"]["id"],
+            optimal=game["optimal"],
+            difficulty="usor",
+            chain=[game["start"]["id"]],
+        )
+        gid = store.create(session)
+        moved = c.post(
+            f"/api/wordgames/lant/games/{gid}/move",
+            {"text": choice["label"]},
+            content_type="application/json",
+        ).json()
+        assert moved["ok"] is True, choice
+
+
+def test_choice_menu_is_deterministic_and_does_not_serialize_corridor_metadata():
+    first = _create(seed=19, difficulty="usor")
+    second = _create(seed=19, difficulty="usor")
+    assert first["choices"] == second["choices"]
+    assert "corridor" not in first
+    assert "on_track" not in first
+    assert all("id" not in choice for choice in first["choices"])
+
+
+def test_valid_direct_hop_outside_visible_menu_stays_legal():
+    svc = get_service()
+    for seed in range(40):
+        game = _create(seed=seed, difficulty="normal")
+        shown = {lant.normalize(choice["label"]) for choice in game["choices"]}
+        omitted = next(
+            (
+                node_id
+                for node_id in svc.neighbor_ids(game["start"]["id"])
+                if lant.normalize(svc.label(node_id)) not in shown
+            ),
+            None,
+        )
+        if omitted is not None:
+            break
+    else:
+        pytest.skip("sampled starts have no neighbour outside the bounded menu")
+
+    moved = c.post(
+        f"/api/wordgames/lant/games/{game['game_id']}/move",
+        {"text": svc.label(omitted)},
+        content_type="application/json",
+    ).json()
+    assert moved["ok"] is True
+    assert moved["current"]["id"] in svc.neighbor_ids(game["start"]["id"])
+
+
 def test_winning_playthrough_by_following_hints():
     game = _create()
     gid = game["game_id"]
@@ -69,10 +143,7 @@ def test_winning_playthrough_by_following_hints():
     won = False
     # Following the shortest-path hint each turn must win in exactly `optimal` moves.
     for _ in range(optimal):
-        hres = c.post(f"/api/wordgames/lant/games/{gid}/hint")
-        assert hres.status_code == 200, hres.content.decode()
-        hint = hres.json()["hint"]
-        assert hint is not None, hres.content.decode()
+        hint = _revealed_hop(gid)["hint"]
 
         mres = c.post(
             f"/api/wordgames/lant/games/{gid}/move",
@@ -132,7 +203,7 @@ def test_undo_does_not_go_below_start():
     assert body["current"]["id"] == body["start"]["id"]
 
     # Make one valid hinted move, then undo back to start.
-    hint = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()["hint"]
+    hint = _revealed_hop(gid)["hint"]
     c.post(
         f"/api/wordgames/lant/games/{gid}/move",
         {"text": hint["label"]},
@@ -287,6 +358,168 @@ def test_reverse_distance_and_branch_profile_respect_directed_edges():
         "start": 2,
     }
     assert lant_branch_profile(svc, "start", "target", 2) == (2, 2, 2)
+
+
+def test_private_corridor_accepts_par_plus_two_but_not_par_plus_three(monkeypatch):
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    paths = (
+        ("a",),
+        ("b", "c"),
+        ("d", "e", "f"),
+        ("x", "y", "z", "w"),
+    )
+    node_ids = {"start", "target", *(node for route in paths for node in route)}
+    nodes = [
+        {"id": node_id, "label_ro": node_id.upper(), "category": "test"}
+        for node_id in sorted(node_ids)
+    ]
+    edges = []
+    for path_index, route in enumerate(paths):
+        full = ("start", *route, "target")
+        edges.extend(
+            {
+                "id": f"e{path_index}_{index}",
+                "src_id": src,
+                "dst_id": dst,
+                "bidirectional": 0,
+                "strength": 0.8,
+            }
+            for index, (src, dst) in enumerate(zip(full, full[1:], strict=False))
+        )
+    svc = WordGameService(Graph.from_records(nodes, edges))
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+    session = LantSession(start="start", target="target", optimal=2, chain=["start"])
+
+    assert lant._corridor_profile("start", "target", 2) == (3, 3, 3)
+    assert set(lant._near_route_hops(session)) == {"a", "b", "d"}
+    assert "x" not in lant._near_route_hops(session)
+
+    # The bounded cache is scoped to the service object, so monkeypatched graphs with
+    # identical endpoint IDs cannot inherit another fixture's corridor.
+    thin_nodes = [node for node in nodes if node["id"] in {"start", "a", "target"}]
+    thin_edges = [
+        edge
+        for edge in edges
+        if edge["src_id"] in {"start", "a"} and edge["dst_id"] in {"a", "target"}
+    ]
+    thin_svc = WordGameService(Graph.from_records(thin_nodes, thin_edges))
+    monkeypatch.setattr(lant, "get_service", lambda: thin_svc)
+    assert lant._corridor_profile("start", "target", 2) == (1, 1, 1)
+
+
+def test_visible_menu_never_refills_past_three_corridor_hops(monkeypatch):
+    """A branchy corridor may be wide, but its public menu quota remains three."""
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    hops = [f"hop_{index}" for index in range(6)]
+    nodes = [
+        {"id": node_id, "label_ro": node_id.upper(), "category": "test"}
+        for node_id in ("start", *hops, "target")
+    ]
+    edges = [
+        {
+            "id": f"e_start_{hop}",
+            "src_id": "start",
+            "dst_id": hop,
+            "strength": 0.8,
+        }
+        for hop in hops
+    ] + [
+        {
+            "id": f"e_{hop}_target",
+            "src_id": hop,
+            "dst_id": "target",
+            "strength": 0.8,
+        }
+        for hop in hops
+    ]
+    svc = WordGameService(Graph.from_records(nodes, edges))
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+    session = LantSession(start="start", target="target", optimal=2, chain=["start"])
+
+    corridor = set(lant._near_route_hops(session))
+    chosen = lant._visible_choice_nodes(session)
+    assert corridor == set(hops)
+    assert len(chosen) == lant._CORRIDOR_CHOICE_QUOTA == 3
+    assert set(chosen) <= corridor
+    assert len(lant._visible_choices(session)) == 3
+
+
+def test_hub_penalty_is_soft_not_a_high_degree_ban(monkeypatch):
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    spokes = [f"spoke_{index}" for index in range(24)]
+    nodes = [
+        {"id": node_id, "label_ro": node_id.upper(), "category": "test", "salience": 0.5}
+        for node_id in ("start", "plain", "hub", "target", *spokes)
+    ]
+    edges = [
+        {
+            "id": "e_plain",
+            "src_id": "start",
+            "dst_id": "plain",
+            "bidirectional": 0,
+            "strength": 0.8,
+        },
+        {"id": "e_hub", "src_id": "start", "dst_id": "hub", "bidirectional": 0, "strength": 0.8},
+        {
+            "id": "e_plain_t",
+            "src_id": "plain",
+            "dst_id": "target",
+            "bidirectional": 0,
+            "strength": 0.8,
+        },
+        {"id": "e_hub_t", "src_id": "hub", "dst_id": "target", "bidirectional": 0, "strength": 0.8},
+        *[
+            {
+                "id": f"e_spoke_{index}",
+                "src_id": "hub",
+                "dst_id": spoke,
+                "bidirectional": 0,
+                "strength": 0.8,
+            }
+            for index, spoke in enumerate(spokes)
+        ],
+    ]
+    svc = WordGameService(Graph.from_records(nodes, edges))
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+    session = LantSession(start="start", target="target", optimal=2, chain=["start"])
+
+    assert svc.degree("hub") > lant._HUB_SOFT_DEGREE
+    assert lant._shortest_hops(session) == ["plain", "hub"]
+    assert lant._hub_penalty("hub") <= 1.25
+
+    # A much tighter semantic edge must still beat the capped degree penalty.
+    strong_hub_edges = [
+        {
+            **edge,
+            "strength": (
+                0.99
+                if edge["id"] == "e_hub"
+                else 0.10
+                if edge["id"] == "e_plain"
+                else edge["strength"]
+            ),
+        }
+        for edge in edges
+    ]
+    strong_hub_svc = WordGameService(Graph.from_records(nodes, strong_hub_edges))
+    monkeypatch.setattr(lant, "get_service", lambda: strong_hub_svc)
+    assert lant._shortest_hops(session) == ["hub", "plain"]
+
+
+def test_easy_mined_boards_prefer_width_three_near_shortest_corridors():
+    for seed in range(20):
+        game = _generated_pair(seed, "usor")
+        first_hops, min_width, _ = lant._corridor_profile(
+            game["start"]["id"], game["target"]["id"], game["optimal"]
+        )
+        assert first_hops >= 3, seed
+        assert min_width >= 3, seed
 
 
 def test_pack_gate_rejects_a_mid_path_funnel():
@@ -456,14 +689,86 @@ def test_label_collision_disambiguates_to_a_linked_node():
     assert body["won"] is True
 
 
+def test_visible_homonym_chip_binds_to_its_unvisited_authored_node(monkeypatch):
+    """A later-position chip must not be stolen by a stronger visited homonym."""
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    nodes = [
+        {"id": "start", "label_ro": "START", "category": "test"},
+        {"id": "visited", "label_ro": "DUPLICAT", "category": "test"},
+        {"id": "current", "label_ro": "CURRENT", "category": "test"},
+        {"id": "authored", "label_ro": "DUPLICAT", "category": "test"},
+        {"id": "target", "label_ro": "TARGET", "category": "test"},
+    ]
+    edges = [
+        {"id": "e_start_visited", "src_id": "start", "dst_id": "visited"},
+        {"id": "e_visited_current", "src_id": "visited", "dst_id": "current"},
+        {"id": "e_visited_target", "src_id": "visited", "dst_id": "target"},
+        {
+            "id": "e_current_visited",
+            "src_id": "current",
+            "dst_id": "visited",
+            "strength": 0.99,
+            "label_ro": "cale veche",
+        },
+        {
+            "id": "e_current_authored",
+            "src_id": "current",
+            "dst_id": "authored",
+            "strength": 0.10,
+            "label_ro": "cale afișată",
+        },
+        {"id": "e_authored_target", "src_id": "authored", "dst_id": "target"},
+    ]
+    svc = WordGameService(Graph.from_records(nodes, edges))
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+    session = LantSession(
+        start="start",
+        target="target",
+        optimal=3,
+        chain=["start", "visited", "current"],
+    )
+    gid = store.create(session)
+
+    # General homonym ranking would revisit the stronger/closer old node.
+    assert lant._resolve_neighbor("DUPLICAT", "current", "target") == "visited"
+    assert lant._visible_choice_nodes(session) == ["authored"]
+    assert lant._visible_choices(session) == [
+        {"label": "DUPLICAT", "relation": "cale afișată"}
+    ]
+
+    moved = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": "  duplicat  "},
+        content_type="application/json",
+    ).json()
+    assert moved["ok"] is True
+    assert moved["current"]["id"] == "authored"
+    assert moved["relation"] == "cale afișată"
+
+
 # --------------------------------------------------------------------- hardening: hint
-def test_hint_is_on_a_shortest_path_and_reports_remaining():
+def test_progressive_hint_reveals_direction_alternatives_then_shortest_hop():
     game = _create()
     gid = game["game_id"]
     svc = get_service()
+    first = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    assert first["stage"] == "direction"
+    assert first["hint"] is None
+    assert first["relation"]
+    assert first["remaining"] == game["optimal"]
+    assert "alternatives_choices" not in first
+
+    second = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    assert second["stage"] == "alternatives"
+    assert second["hint"] is None
+    assert 1 <= len(second["alternatives_choices"]) <= 2
+    assert all(set(choice) == {"label", "relation"} for choice in second["alternatives_choices"])
+
     h = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    assert h["stage"] == "hop"
     assert h["hint"] is not None
-    assert h["remaining"] == game["optimal"]
     # The suggested neighbour is one hop closer to the target.
     dist_t = svc.distances_to(game["target"]["id"])
     assert dist_t.get(h["hint"]["id"]) == game["optimal"] - 1
@@ -478,9 +783,8 @@ def _hop_strength(svc, cur: str, nb: str) -> float:
     return edge.strength if edge is not None else 0.0
 
 
-def test_hint_prefers_the_strongest_edge_next_step():
-    """Among shortest-path neighbours the hint takes the strongest hop (ADR-0022):
-    edge strength first, salience only breaking ties, id for determinism."""
+def test_revealed_hint_uses_semantic_hub_aware_ordering():
+    """The final revealed hop uses ADR-0043's shared semantic/hub ranking."""
     svc = get_service()
     found = False
     for diff in _BANDS:
@@ -497,11 +801,8 @@ def test_hint_prefers_the_strongest_edge_next_step():
             if len(on_path) < 2:
                 continue
             found = True
-            best = sorted(
-                on_path,
-                key=lambda nb: (-_hop_strength(svc, cur, nb), -svc.node(nb).salience, nb),
-            )[0]
-            h = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+            best = sorted(on_path, key=lambda nb: lant._hop_quality(cur, nb))[0]
+            h = _revealed_hop(gid)
             assert h["hint"]["id"] == best, (diff, seed, on_path)
             assert h["alternatives"] == len(on_path)
             break
@@ -536,34 +837,38 @@ def test_hint_strength_beats_salience(monkeypatch):
     monkeypatch.setattr(lant, "get_service", lambda: svc)
     session = LantSession(start="start", target="target", optimal=2, chain=["start"])
     gid = store.create(session)
-    h = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    h = _revealed_hop(gid)
     assert h["hint"]["id"] == "tight"  # strong edge outranks higher salience
     assert h["alternatives"] == 2
-    assert "alternatives_labels" not in h  # first ask stays a single nudge
+    assert h["stage"] == "hop"
 
 
-def test_second_hint_from_same_position_names_alternatives(monkeypatch):
-    """Asking again without moving reveals up to 3 alternative on-path labels."""
+def test_hint_stages_reset_after_a_move(monkeypatch):
     svc = _branchy_hint_service()
     monkeypatch.setattr(lant, "get_service", lambda: svc)
     session = LantSession(start="start", target="target", optimal=2, chain=["start"])
     gid = store.create(session)
     first = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    assert first["stage"] == "direction"
+    assert first["hint"] is None
     assert "alternatives_labels" not in first
-    assert "message" not in first
     second = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
-    assert second["hint"]["id"] == first["hint"]["id"]  # the nudge itself is stable
-    assert second["alternatives_labels"] == ["FAMOUS"]
-    assert second["message"] == "Alte variante: FAMOUS."
-    # After moving, the NEW position starts over with a single nudge.
+    assert second["stage"] == "alternatives"
+    assert second["hint"] is None
+    assert second["alternatives_labels"] == ["TIGHT", "FAMOUS"]
+    third = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    assert third["stage"] == "hop"
+    assert third["hint"]["id"] == "tight"
+
     mv = c.post(
         f"/api/wordgames/lant/games/{gid}/move",
         {"text": "TIGHT"},
         content_type="application/json",
     ).json()
     assert mv["ok"] is True
-    third = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
-    assert "alternatives_labels" not in third
+    next_position = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    assert next_position["stage"] == "direction"
+    assert next_position["hint"] is None
 
 
 def test_hint_on_won_game_returns_message():
@@ -611,7 +916,7 @@ def test_over_par_lowers_score_but_never_below_floor():
     # Now follow hints from the detour to the target; total moves must exceed optimal.
     body = step
     while not body.get("won"):
-        h = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()["hint"]
+        h = _revealed_hop(gid)["hint"]
         assert h is not None
         body = c.post(
             f"/api/wordgames/lant/games/{gid}/move",
@@ -845,5 +1150,145 @@ def test_hint_dead_end_names_a_reachable_chain_ancestor(monkeypatch):
     gid = store.create(session)
     body = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
     assert body["hint"] is None
-    assert body["message"].startswith("Fundatura")
+    assert body["stage"] == "backtrack"
+    assert body["message"].startswith("Fundătură")
     assert svc.label("mid") in body["message"]
+
+
+def test_hint_recommends_free_undo_when_only_shortest_hop_was_visited(monkeypatch):
+    """A directed detour can stay target-reachable only through its prior node.
+
+    Revisited nodes remain absent from the public hop menu, but help must never claim that
+    no route exists: it explicitly points to free undo and resets escalation after undo.
+    """
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    nodes = [
+        {"id": node_id, "label_ro": node_id.upper(), "category": "test"}
+        for node_id in ("start", "mid", "detour", "target")
+    ]
+    edges = [
+        {"id": "e_start_mid", "src_id": "start", "dst_id": "mid"},
+        {"id": "e_mid_detour", "src_id": "mid", "dst_id": "detour"},
+        {"id": "e_detour_mid", "src_id": "detour", "dst_id": "mid"},
+        {"id": "e_mid_target", "src_id": "mid", "dst_id": "target"},
+    ]
+    svc = WordGameService(Graph.from_records(nodes, edges))
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+    session = LantSession(
+        start="start",
+        target="target",
+        optimal=2,
+        chain=["start", "mid", "detour"],
+    )
+    gid = store.create(session)
+
+    assert svc.distances_to("target")["detour"] == 2
+    assert lant._shortest_hops(session) == []
+    assert lant._visible_choices(session) == []
+
+    body = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    assert body["hint"] is None
+    assert body["stage"] == "backtrack"
+    assert "Înapoi" in body["message"]
+    assert "MID" in body["message"]
+
+    undone = c.post(f"/api/wordgames/lant/games/{gid}/undo").json()
+    assert undone["current"]["id"] == "mid"
+    assert session.hint_requests == 0
+    fresh_hint = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    assert fresh_hint["stage"] == "direction"
+
+
+def test_hint_prefers_a_longer_unvisited_safe_route_before_backtracking(monkeypatch):
+    """A visited shortest hop does not suppress truthful forward help when one exists."""
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    nodes = [
+        {"id": node_id, "label_ro": node_id.upper(), "category": "test"}
+        for node_id in ("start", "mid", "detour", "scenic", "x", "target")
+    ]
+    edges = [
+        {"id": "e_start_mid", "src_id": "start", "dst_id": "mid"},
+        {"id": "e_mid_detour", "src_id": "mid", "dst_id": "detour"},
+        {"id": "e_mid_target", "src_id": "mid", "dst_id": "target"},
+        {"id": "e_detour_mid", "src_id": "detour", "dst_id": "mid"},
+        {
+            "id": "e_detour_scenic",
+            "src_id": "detour",
+            "dst_id": "scenic",
+            "label_ro": "ocol sigur",
+        },
+        {"id": "e_scenic_x", "src_id": "scenic", "dst_id": "x"},
+        {"id": "e_x_target", "src_id": "x", "dst_id": "target"},
+    ]
+    svc = WordGameService(Graph.from_records(nodes, edges))
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+    session = LantSession(
+        start="start",
+        target="target",
+        optimal=2,
+        chain=["start", "mid", "detour"],
+    )
+    gid = store.create(session)
+
+    assert svc.distances_to("target")["detour"] == 2  # via the visited `mid`
+    assert lant._shortest_hops(session) == []
+    assert lant._visible_choice_nodes(session) == ["scenic"]
+
+    first = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    assert first["stage"] == "direction"
+    assert first["relation"] == "ocol sigur"
+    assert first["remaining"] == 3
+    second = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    assert second["stage"] == "alternatives"
+    assert second["alternatives"] == 1
+    assert second["alternatives_labels"] == ["SCENIC"]
+    assert second["message"].startswith("O variantă utilă")
+    third = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+    assert third["stage"] == "hop"
+    assert third["hint"]["id"] == "scenic"
+
+
+def test_hint_escalation_counter_is_capped_and_resets_during_revisits(monkeypatch):
+    """Repeated A↔B walks retain one small counter, not every historical chain tuple."""
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    nodes = [
+        {"id": node_id, "label_ro": node_id.upper(), "category": "test"}
+        for node_id in ("a", "b", "target")
+    ]
+    edges = [
+        {"id": "e_cycle", "src_id": "a", "dst_id": "b", "bidirectional": 1},
+        {"id": "e_a_target", "src_id": "a", "dst_id": "target"},
+        {"id": "e_b_target", "src_id": "b", "dst_id": "target"},
+    ]
+    svc = WordGameService(Graph.from_records(nodes, edges))
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+    session = LantSession(start="a", target="target", optimal=1, chain=["a"])
+    gid = store.create(session)
+
+    for walk in range(24):
+        stages = [
+            c.post(f"/api/wordgames/lant/games/{gid}/hint").json()["stage"]
+            for _ in range(4)
+        ]
+        assert stages == ["direction", "alternatives", "hop", "hop"]
+        assert session.hint_requests == 3
+
+        next_node = "b" if walk % 2 == 0 else "a"
+        moved = c.post(
+            f"/api/wordgames/lant/games/{gid}/move",
+            {"text": next_node.upper()},
+            content_type="application/json",
+        ).json()
+        assert moved["ok"] is True
+        assert session.hint_requests == 0
+
+    session.hint_requests = 3
+    c.post(f"/api/wordgames/lant/games/{gid}/undo")
+    assert session.hint_requests == 0
+    assert isinstance(session.hint_requests, int)

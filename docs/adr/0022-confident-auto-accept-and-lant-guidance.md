@@ -1,7 +1,7 @@
 # ADR-0022: Confident typo auto-accept + smarter Lanț guidance
 
 Date: 2026-07-13
-Status: accepted
+Status: accepted; decision 2 superseded-by ADR-0043
 
 ## Decision
 Make near-miss input playable instead of merely advisable, and make Lanț's guidance

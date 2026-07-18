@@ -12,6 +12,12 @@ export interface Concept {
   label: string;
 }
 
+/** One ID-free, currently legal server-authored hop. Route membership stays private. */
+export interface LantChoice {
+  label: string;
+  relation: string;
+}
+
 export interface PathStep {
   id: string;
   label: string;
@@ -37,6 +43,8 @@ export interface LantState {
   optimal: number;
   won: boolean;
   difficulty: Difficulty;
+  /** Four to six safe local hops when available; never the full route corridor. */
+  choices: LantChoice[];
   daily?: string;
   /** Echoed only when the game was started with an explicit category. */
   board_category?: string;
@@ -60,6 +68,7 @@ export interface MoveResult {
   path?: PathStep[];
   moves?: number;
   won?: boolean;
+  choices?: LantChoice[];
   /** Present only when won === true. */
   score?: number;
   share?: string;
@@ -67,12 +76,15 @@ export interface MoveResult {
 
 export interface HintResult {
   hint: Concept | null;
+  /** Voluntary escalation, or an explicit free-undo recovery from a revisit trap. */
+  stage?: "direction" | "alternatives" | "hop" | "backtrack";
   relation?: string;
   remaining?: number;
   /** How many distinct neighbours lie on a shortest path (>1 => you had a real choice). */
   alternatives?: number;
   /** Named alternatives appear only after a second hint request from the same position. */
   alternatives_labels?: string[];
+  alternatives_choices?: LantChoice[];
   message?: string;
 }
 
@@ -114,7 +126,7 @@ export function undoLant(gameId: string): Promise<LantState> {
   );
 }
 
-/** POST /games/{id}/hint — reveal one neighbour on a shortest path to the target. */
+/** POST /games/{id}/hint — progressively reveal direction, alternatives, then one hop. */
 export function hintLant(gameId: string): Promise<HintResult> {
   return postJson<HintResult>(
     `${PREFIX}/games/${encodeURIComponent(gameId)}/hint`,

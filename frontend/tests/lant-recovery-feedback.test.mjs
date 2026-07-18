@@ -7,14 +7,28 @@ const api = read("../src/api/lant.ts");
 const screen = read("../src/screens/Lant.tsx");
 
 test("Lanț client preserves bounded server recovery fields", () => {
+  const choice = api.match(/export interface LantChoice[\s\S]*?\n}/);
+  const state = api.match(/export interface LantState[\s\S]*?\n}/);
   const move = api.match(/export interface MoveResult[\s\S]*?\n}/);
   const hint = api.match(/export interface HintResult[\s\S]*?\n}/);
+  assert.ok(choice);
+  assert.ok(state);
   assert.ok(move);
   assert.ok(hint);
+  assert.match(choice[0], /label: string/);
+  assert.match(choice[0], /relation: string/);
+  assert.doesNotMatch(choice[0], /id:/);
+  assert.match(state[0], /choices: LantChoice\[\]/);
   assert.match(move[0], /message\?: string/);
   assert.match(move[0], /dead_end\?: boolean/);
   assert.match(move[0], /suggestions\?: string\[\]/);
+  assert.match(move[0], /choices\?: LantChoice\[\]/);
+  assert.match(
+    hint[0],
+    /stage\?: "direction" \| "alternatives" \| "hop" \| "backtrack"/,
+  );
   assert.match(hint[0], /alternatives_labels\?: string\[\]/);
+  assert.match(hint[0], /alternatives_choices\?: LantChoice\[\]/);
 });
 
 test("Lanț keeps move recovery visible and exposes fuzzy spelling choices", () => {
@@ -43,8 +57,28 @@ test("Lanț preserves an autocorrection message when the corrected hop wins", ()
   assert.match(result[0], /recovery\?\.message/);
 });
 
-test("Lanț second-stage hints render named alternatives as keyboard buttons", () => {
-  assert.match(screen, /hint\.alternatives_labels\?\.length/);
-  assert.match(screen, /hint\.alternatives_labels\.map\(\(label\)/);
-  assert.match(screen, /setText\(label\)/);
+test("Lanț renders local relation chips and keeps free typing available", () => {
+  assert.match(screen, /state\.choices\.map\(\(choice\)/);
+  assert.match(screen, /className="lant-choice"/);
+  assert.match(screen, /onClick=\{\(\) => void submit\(choice\)\}/);
+  assert.match(screen, /toate sunt legături valide/);
+  assert.match(screen, /placeholder="Sau scrie alt concept…"/);
+});
+
+test("Lanț renders progressive direction, alternatives, and one-hop help", () => {
+  assert.match(screen, /hint\.stage === "direction"/);
+  assert.match(screen, /hint\.stage === "alternatives"/);
+  assert.match(screen, /hint\.alternatives_choices\?\.length/);
+  assert.match(screen, /hint\.alternatives_choices\.map\(\(choice\)/);
+  assert.match(screen, /if \(hint\.hint\) setText\(hint\.hint\.label\)/);
+  assert.match(screen, /res\.hint \|\| res\.stage/);
+  assert.match(screen, /VARIANTE UTILE/);
+  assert.doesNotMatch(screen, /DOUĂ VARIANTE/);
+});
+
+test("Lanț turns revisit traps into an explicit free-undo action", () => {
+  assert.match(screen, /hint\.stage === "backtrack"/);
+  assert.match(screen, /UN PAS ÎNAPOI/);
+  assert.match(screen, /Anulează ultimul salt/);
+  assert.match(screen, /onClick=\{\(\) => void handleUndo\(\)\}/);
 });

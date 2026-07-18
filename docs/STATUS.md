@@ -1,7 +1,7 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-18. This file is the repository's current source of truth._
-_Last verified: 2026-07-18 (local v33 gate: backend 391; v25/v28/v29/v30/v31/v32/v33 52 and session 11; exact critique 33/33 and full pending report byte-identical; Ruff, both validators, workflow syntax, whitespace; no frontend code changed; mobile importer 4 and full verify 227/26. Live release remains `f40fa8bc1b8880637aeeb01816c612ea850f73c0`: healthy image `sha256:3ed5fc61a95ec08417f1ebb68f329bf85779ab0988dffdcc7537c5d769dc6e9a`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles; all 14 categories positive, available, and curated; four `usor` creates at seed 32032; anonymous/account-disabled mode and expected submissions 503; homepage plus four deep routes byte-matched the built index; all 12 Vite assets returned non-empty 200 responses with immutable caching; privacy and terms passed without placeholders.)_
+_Last verified: 2026-07-18 (local v33 data gate remains green: backend 391, focused content 52, session 11, exact critique 33/33, mobile 227/26. Local ADR-0043 gate: Lanț 46, mobile contract 6, curated/pack invariants 35, session 11; full Ruff, both validators, workflow syntax, whitespace; frontend lint/typecheck and 9/9 source suites, with the generated bundle intentionally unchanged for combined integration. Live release remains `f40fa8bc1b8880637aeeb01816c612ea850f73c0`: healthy image `sha256:3ed5fc61a95ec08417f1ebb68f329bf85779ab0988dffdcc7537c5d769dc6e9a`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles; all 14 categories positive, available, and curated; anonymous mode and production smoke remain healthy.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -14,14 +14,14 @@ The critique layer now fails closed from generation through promotion:
 - Re-review/demotion validates identity and verdict, restoring both pack copies on any red or exception.
 - Imports enter `pending`; persistent per-game high-water marks prevent retired ID reuse.
 
-## Current outcome — browser recovery (ADR-0027 through ADR-0029, ADR-0034, ADR-0035)
+## Current outcome — browser recovery and Lanț navigation (ADR-0027–ADR-0029, ADR-0034, ADR-0035, ADR-0043)
 
-Lanț renders server-authored recovery; bounded spelling and path choices fill but never
-submit. Conexiuni retains one-away selections for one-tile swaps and blocks unchanged
-sets without inferring membership. Cald sau Rece keeps target-filtered typo suggestions and accepted corrections.
-Alchimie restores a newest-first, 12-reaction journal and retains an authoritative empty pair
-for one visible swap; either 44 px bench slot removes an ingredient and unchanged/duplicate submission is blocked.
-All four remain server-authoritative; score, secrecy, TTL, and caps are unchanged.
+Lanț exposes up to three private-corridor choices plus safe detours as ID-free label/relation
+chips; visible homonyms bind exactly and every other direct hop stays legal. Hints prefer a
+safe forward route before free undo. Conexiuni retains one-away swaps; Cald sau Rece keeps
+target-filtered typo recovery. Alchimie keeps a 12-reaction journal and authoritative empty
+pair for one visible swap. All remain server-authoritative; score, undo, secrecy, TTL, and
+caps are unchanged.
 
 ## Current outcome — beginner mobile interface (ADR-0031)
 
@@ -72,8 +72,8 @@ Both fixture copies and both pack copies are byte-identical and validator-green.
   is lazy, lock-protected, monotonic, and deterministic.
 - Request bodies default to a 64 KiB Caddy plus ASGI receive ceiling.
 - Hidden-answer boundaries remain pinned: Contexto hides its target until terminal;
-  Alchimie hides target ID; Lanț reveals played/hinted hops; Conexiuni withholds unsolved
-  membership and the full solution until terminal.
+  Alchimie hides target ID; Lanț local choices have no IDs/on-track flag and reveals one
+  hop ID only on the third requested hint; Conexiuni withholds unsolved membership/solution.
 - Curated submissions are opt-in through `CAT_SUBMISSIONS_DIR`; only approved records
   are served. Import candidates remain pending until the critique gate promotes them.
 - Mobile fixture/OpenAPI contracts and curated-first seeded selection remain test-pinned.

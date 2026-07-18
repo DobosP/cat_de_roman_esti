@@ -4,7 +4,7 @@ These tests pin the contract a *generated mobile client* depends on, independent
 the per-game behaviour tests in ``test_wordgames_*.py``:
 
 * **Hidden-answer exposure** — no game's public responses may leak its secret answer
-  (contexto's target, alchimie's target id, lant's solution path, or an unsolved
+  (contexto's target, alchimie's target id, lant's full route corridor, or an unsolved
   Conexiuni group). Each test also asserts the positive reveal boundary.
 * **Stable OpenAPI operationIds** — the generated TypeScript client's method names come
   from ``operationId``s; these must stay ``<game>_<action>`` and never bake in the HTTP
@@ -197,18 +197,27 @@ def test_alchimie_hides_target_id_until_win() -> None:
     assert won["target"]["id"] == secret
 
 
-def test_lant_exposes_only_start_and_target_not_the_path() -> None:
+def test_lant_exposes_id_free_local_choices_not_the_route_corridor() -> None:
+    from cat_de_roman_esti.wordgames import lant
+
     c = client()
     created = c.post(f"/api/wordgames/lant/games?seed={SEED}").json()
     start, target, optimal = created["start"]["id"], created["target"]["id"], created["optimal"]
-
-    # A fresh game exposes exactly the two public endpoints — never an intermediate node
-    # of the hidden solution path.
-    assert _collect_ids(created) == {start, target}
-
-    # And there genuinely IS a hidden middle to protect: at least one intermediate node
-    # lies on a shortest path, and none of them are present in the response.
     svc = get_service()
+
+    # Only the endpoints carry concept IDs. Local choices are label/relation actions;
+    # corridor membership and route IDs remain server-only.
+    assert _collect_ids(created) == {start, target}
+    assert 1 <= len(created["choices"]) <= 6
+    assert all(set(choice) == {"label", "relation"} for choice in created["choices"])
+    assert all(
+        lant._resolve_neighbor(choice["label"], start, target) in svc.neighbor_ids(start)
+        for choice in created["choices"]
+    )
+    assert not {"corridor", "on_track", "route_budget"} & _collect_keys(created)
+
+    # There genuinely is a hidden middle to protect. A local label may name one useful
+    # neighbour, but no intermediate concept ID or complete route is serialized.
     ds, dt = svc.distances_from(start), svc.distances_to(target)
     on_path = [
         nid
