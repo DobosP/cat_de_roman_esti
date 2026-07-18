@@ -66,15 +66,11 @@ def _target_of(seed: int = SEED, difficulty: str = "normal"):
     from cat_de_roman_esti.wordgames.service import get_service
 
     svc = get_service()
-    curated = get_pack().pick_seeded(
-        "contexto", random.Random(seed), difficulty=difficulty
-    )
+    curated = get_pack().pick_seeded("contexto", random.Random(seed), difficulty=difficulty)
     target = str(curated.payload["target"]) if curated else _pick_target(seed, difficulty).target
     # A genuine incoming distance-1 guess. Contexto distance is directed guess -> target,
     # so an outgoing target neighbour is not necessarily a valid hot guess.
-    neighbour = next(
-        nid for nid, distance in svc.distances_to(target).items() if distance == 1
-    )
+    neighbour = next(nid for nid, distance in svc.distances_to(target).items() if distance == 1)
     return target, svc.label(target), neighbour, svc.label(neighbour)
 
 
@@ -364,7 +360,7 @@ def _make_counted_guesses(client, gid: str, count: int) -> dict:
     raise AssertionError("could not build enough counted guesses")
 
 
-def test_category_clue_unlocks_after_three_attempts_without_target_leak() -> None:
+def test_progressive_clues_are_category_then_strictly_warmer_without_target_leak() -> None:
     from cat_de_roman_esti.wordgames.contexto import store
     from cat_de_roman_esti.wordgames.service import get_service
 
@@ -375,8 +371,10 @@ def test_category_clue_unlocks_after_three_attempts_without_target_leak() -> Non
 
     before = _make_counted_guesses(c, gid, 3)
     assert before["clue_available"] is True
+    assert before["next_clue_kind"] == "category"
     assert before["clues_used"] == 0
     assert "target" not in before
+    best_before = min(guess["rank"] for guess in before["guesses"])
 
     clue = c.post(f"/api/wordgames/contexto/games/{gid}/clue")
     assert clue.status_code == 200, clue.content.decode()
@@ -386,14 +384,144 @@ def test_category_clue_unlocks_after_three_attempts_without_target_leak() -> Non
     secret = session.target
     target_node = get_service().node(secret)
     assert body["clues_used"] == 1
-    assert body["clue_available"] is False
+    assert body["clue_kind"] == "category"
     assert body["clue"]["category"]["key"] == target_node.category
     assert body["clue"]["category"]["label"]
     assert secret not in str(body)
     assert "target" not in body
 
-    again = c.post(f"/api/wordgames/contexto/games/{gid}/clue").json()
-    assert again["clues_used"] == 1  # repeated reads do not stack penalties
+    assert body["clue_available"] is True
+    assert body["next_clue_kind"] == "warmer"
+    warmer = c.post(f"/api/wordgames/contexto/games/{gid}/clue")
+    assert warmer.status_code == 200
+    again = warmer.json()
+    assert again["clue_kind"] == "warmer"
+    assert again["clues_used"] == 2
+    assert 1 < again["warm_clue"]["rank"] < best_before
+    hinted_id = get_service().resolve(again["warm_clue"]["label"])
+    assert hinted_id is not None and hinted_id != secret
+    assert again["clue_available"] is False
+    _assert_secret_hidden(again, secret, get_service().label(secret))
+
+    exhausted = c.post(f"/api/wordgames/contexto/games/{gid}/clue")
+    assert exhausted.status_code == 400
+    assert c.get(f"/api/wordgames/contexto/games/{gid}").json()["clues_used"] == 2
+
+
+def test_public_theme_skips_redundant_category_clue_without_penalty() -> None:
+    c = make_client()
+    created = c.post(
+        "/api/wordgames/contexto/games?seed=4&difficulty=usor&category=gastronomie"
+    ).json()
+    assert created["board_category"] == "gastronomie"
+    body = _make_counted_guesses(c, created["game_id"], 3)
+    assert body["next_clue_kind"] == "warmer"
+    assert body["clues_used"] == 0
+    clue = c.post(f"/api/wordgames/contexto/games/{created['game_id']}/clue").json()
+    assert clue["clue_kind"] == "warmer"
+    assert clue["clues_used"] == 1
+    assert "clue" not in clue  # category was already public; no paid duplicate
+
+
+def test_no_warm_clue_is_offered_when_rank_two_is_already_the_best() -> None:
+    from cat_de_roman_esti.wordgames.contexto import rank_for, store
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    c = make_client()
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
+    session = store.get(gid)
+    assert session is not None
+    svc = get_service()
+    ranked = sorted(
+        (
+            rank_for(session, distance, session.weighted_dist.get(node_id)),
+            node_id,
+        )
+        for node_id, distance in svc.distances_to(session.target).items()
+        if node_id != session.target
+    )
+    best_rank, best_id = ranked[0]
+    assert best_rank == 2
+    ids = [best_id, *(node_id for _rank, node_id in reversed(ranked) if node_id != best_id)][:3]
+    for node_id in ids:
+        body = _post_json(
+            c,
+            f"/api/wordgames/contexto/games/{gid}/guess",
+            {"text": svc.label(node_id)},
+        )
+        assert body["ok"] is True
+    category = c.post(f"/api/wordgames/contexto/games/{gid}/clue").json()
+    assert category["clue_kind"] == "category"
+    assert category["clue_available"] is False
+    assert "next_clue_kind" not in category
+    assert c.post(f"/api/wordgames/contexto/games/{gid}/clue").status_code == 400
+
+
+def test_projected_rank_three_does_not_advertise_an_already_played_warmer_anchor() -> None:
+    from cat_de_roman_esti.wordgames.contexto import _build_session, store
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    c = make_client()
+    svc = get_service()
+    target = "n_arta_plastica"
+    gid = store.create(_build_session(target, "normal", None))
+
+    for surface in ("joc de masă", "joc video", "jucărie"):
+        played = _post_json(
+            c,
+            f"/api/wordgames/contexto/games/{gid}/guess",
+            {"text": surface},
+        )
+        assert played["ok"] is True
+        assert played["guess"]["rank"] == 3
+    assert played["attempts"] == 3
+    assert played["next_clue_kind"] == "category"
+
+    category = c.post(f"/api/wordgames/contexto/games/{gid}/clue")
+    assert category.status_code == 200
+    body = category.json()
+    assert body["clue_kind"] == "category"
+    assert body["clue_available"] is False
+    assert "next_clue_kind" not in body
+    _assert_secret_hidden(body, target, svc.label(target))
+
+    rejected = c.post(f"/api/wordgames/contexto/games/{gid}/clue")
+    assert rejected.status_code == 400
+    refreshed = c.get(f"/api/wordgames/contexto/games/{gid}").json()
+    assert refreshed["clue_available"] is False
+    assert "next_clue_kind" not in refreshed
+    _assert_secret_hidden(refreshed, target, svc.label(target))
+
+
+def test_warmer_clues_prefer_familiar_words_on_approved_easy_targets() -> None:
+    from cat_de_roman_esti.wordgames.contexto import (
+        WARM_CLUE_MIN_SALIENCE,
+        GuessRecord,
+        _build_session,
+        _warmer_clue_candidate,
+    )
+    from cat_de_roman_esti.wordgames.packs import get_pack
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    svc = get_service()
+    for item in get_pack().pool("contexto", difficulty="usor")[:12]:
+        session = _build_session(str(item.payload["target"]), "usor", None)
+        session.guesses["test-cold"] = GuessRecord(
+            id="test-cold",
+            label="test-cold",
+            distance=999,
+            temperature="Inghetat",
+            closeness=0,
+            rank=session.reachable + 1,
+            anchor_id="test-cold",
+        )
+        clue = _warmer_clue_candidate(session)
+        assert clue is not None
+        node_id = svc.resolve(clue.label)
+        assert node_id is not None and node_id != session.target
+        node = svc.node(node_id)
+        assert node is not None and node.salience >= WARM_CLUE_MIN_SALIENCE
+        assert 1 < clue.rank < session.reachable + 1
 
 
 def test_category_clue_penalizes_final_score_and_share() -> None:
@@ -446,6 +574,270 @@ def test_no_score_or_share_before_win() -> None:
     assert "share" not in body
 
 
+# ------------------------------------------ Contexto-only broad guess projection (ADR-0042)
+
+
+def test_projection_is_large_balanced_collision_free_and_legibility_audited() -> None:
+    from collections import Counter
+
+    from cat_de_roman_esti.wordgames.contexto_projection import (
+        PROJECTION_LEGIBILITY_AUDIT,
+        PROJECTION_OVERRIDE_CLUSTERS,
+        PROJECTION_TERMS,
+        normalize_projection_surface,
+        resolve_projection,
+    )
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    svc = get_service()
+    keys = [term.key for term in PROJECTION_TERMS]
+    domains = Counter(term.domain for term in PROJECTION_TERMS)
+    assert len(PROJECTION_TERMS) == 444
+    assert len(domains) == 26
+    assert min(domains.values()) >= 14
+    assert len(keys) == len(set(keys))
+    assert len({term.public_id for term in PROJECTION_TERMS}) == len(PROJECTION_TERMS)
+    assert all(term.public_id.startswith("ctxp_") for term in PROJECTION_TERMS)
+    assert all(svc.exists(term.anchor_id) for term in PROJECTION_TERMS)
+    assert all(svc.resolve(term.surface) is None for term in PROJECTION_TERMS)
+    assert all(term.rank_penalty in (0, 1) for term in PROJECTION_TERMS)
+
+    assert {domain for domain, _surface, _anchor in PROJECTION_LEGIBILITY_AUDIT} == set(domains)
+    for domain, surface, anchor in PROJECTION_LEGIBILITY_AUDIT:
+        term = resolve_projection(surface)
+        assert term is not None
+        assert term.domain == domain
+        assert term.anchor_id == anchor
+        assert term.key == normalize_projection_surface(surface)
+    # Every explicit semantic cluster is audited, not just its representative.
+    for anchor, surfaces in PROJECTION_OVERRIDE_CLUSTERS:
+        assert svc.exists(anchor)
+        for surface in surfaces:
+            term = resolve_projection(surface)
+            if term is None:
+                assert svc.resolve(surface) is not None  # intentionally screened KG owner
+            else:
+                assert term.anchor_id == anchor
+
+
+def test_every_projection_term_uses_an_explicit_cluster_or_named_domain_fallback() -> None:
+    from cat_de_roman_esti.wordgames.contexto_projection import (
+        PROJECTION_DOMAIN_POLICIES,
+        PROJECTION_OVERRIDE_CLUSTERS,
+        PROJECTION_TERMS,
+        normalize_projection_surface,
+    )
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    svc = get_service()
+    explicit_anchors = {
+        normalize_projection_surface(surface): anchor
+        for anchor, surfaces in PROJECTION_OVERRIDE_CLUSTERS
+        for surface in surfaces
+    }
+    assert {term.domain for term in PROJECTION_TERMS} == set(PROJECTION_DOMAIN_POLICIES)
+    for domain, policy in PROJECTION_DOMAIN_POLICIES.items():
+        assert policy.rationale.strip(), domain
+        if policy.fallback_anchor_id is not None:
+            assert svc.exists(policy.fallback_anchor_id), domain
+
+    for term in PROJECTION_TERMS:
+        policy = PROJECTION_DOMAIN_POLICIES[term.domain]
+        if term.mapping_kind == "explicit":
+            assert term.key in explicit_anchors, term.surface
+            assert term.anchor_id == explicit_anchors[term.key], term.surface
+        elif term.mapping_kind == "domain_fallback":
+            assert term.key not in explicit_anchors, term.surface
+            assert policy.fallback_anchor_id is not None, term.surface
+            assert term.anchor_id == policy.fallback_anchor_id, term.surface
+        else:
+            raise AssertionError(f"unknown mapping kind for {term.surface!r}: {term.mapping_kind}")
+
+
+def test_projection_review_examples_use_honest_semantic_anchors() -> None:
+    from cat_de_roman_esti.wordgames.contexto_projection import resolve_projection
+
+    explicit_examples = {
+        "a repara": "n_v32_workshop_hand_ciocan",
+        "a construi": "n_v32_workshop_hand_ciocan",
+        "a aprinde": "n_v4sti_foc",
+        "a stinge": "n_v4sti_foc",
+        "bancă comercială": "n_v4soc_banca",
+        "pinguin": "n_v4sti_pasare",
+    }
+    for surface, anchor in explicit_examples.items():
+        term = resolve_projection(surface)
+        assert term is not None
+        assert term.anchor_id == anchor
+        assert term.mapping_kind == "explicit"
+
+    for surface in ("șarpe", "broască", "șopârlă", "melc", "delfin", "balenă"):
+        term = resolve_projection(surface)
+        assert term is not None
+        assert term.anchor_id == "n_v4sti_animal"
+        assert term.mapping_kind == "domain_fallback"
+
+    for surface in (
+        "a sta",
+        "a opri",
+        "a împinge",
+        "a trage",
+        "a ridica",
+        "a pune",
+        "a lua",
+        "a căra",
+        "a lipi",
+    ):
+        assert resolve_projection(surface) is None
+
+
+def test_projection_guess_uses_anchor_scale_and_dedupes_normalized_surface() -> None:
+    from cat_de_roman_esti.wordgames.contexto import rank_for, store
+    from cat_de_roman_esti.wordgames.contexto_projection import resolve_projection
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    c = make_client()
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
+    session = store.get(gid)
+    assert session is not None
+    svc = get_service()
+    first = resolve_projection("brioșă")
+    second = resolve_projection("chec")
+    assert first is not None and second is not None
+    assert first.anchor_id == second.anchor_id
+
+    played = _post_json(c, f"/api/wordgames/contexto/games/{gid}/guess", {"text": "brioșă"})
+    distance = svc.distance(first.anchor_id, session.target)
+    expected = rank_for(session, distance, session.weighted_dist.get(first.anchor_id))
+    expected = max(2, min(session.reachable + 1, expected + first.rank_penalty))
+    assert played["ok"] is True
+    assert played["guess"]["id"] == first.public_id
+    assert played["guess"]["rank"] == expected
+    assert played["attempts"] == 1
+
+    # Accent/case variants are the same canonical surface and therefore free repeats.
+    repeated = _post_json(
+        c,
+        f"/api/wordgames/contexto/games/{gid}/guess",
+        {"text": "  BRIOSA  "},
+    )
+    assert repeated["attempts"] == 1
+    # A different authored surface remains a distinct guess even when its anchor matches.
+    other = _post_json(c, f"/api/wordgames/contexto/games/{gid}/guess", {"text": "chec"})
+    assert other["guess"]["id"] == second.public_id
+    assert other["attempts"] == 2
+
+
+def test_projection_mapped_to_target_anchor_never_wins_even_with_zero_penalty() -> None:
+    from cat_de_roman_esti.wordgames.contexto import _build_session, store
+    from cat_de_roman_esti.wordgames.contexto_projection import PROJECTION_TERMS
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    term = next(item for item in PROJECTION_TERMS if item.rank_penalty == 0)
+    svc = get_service()
+    c = make_client()
+    gid = store.create(_build_session(term.anchor_id, "normal", None))
+    projected = _post_json(
+        c,
+        f"/api/wordgames/contexto/games/{gid}/guess",
+        {"text": term.surface},
+    )
+    assert projected["ok"] is True
+    assert projected["won"] is False
+    assert projected["guess"]["id"] != term.anchor_id
+    assert projected["guess"]["distance"] == 1
+    assert projected["guess"]["rank"] >= 2
+    assert projected["guess"]["closeness"] < 100
+    _assert_secret_hidden(projected, term.anchor_id, svc.label(term.anchor_id))
+
+    exact = _post_json(
+        c,
+        f"/api/wordgames/contexto/games/{gid}/guess",
+        {"text": svc.label(term.anchor_id)},
+    )
+    assert exact["won"] is True
+    assert exact["guess"]["rank"] == 1
+
+
+def test_projection_typo_suggestions_filter_terms_anchored_on_the_secret() -> None:
+    from cat_de_roman_esti.wordgames.contexto import _build_session, store
+    from cat_de_roman_esti.wordgames.contexto_projection import resolve_projection
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    term = resolve_projection("smoothie")
+    assert term is not None
+    svc = get_service()
+    c = make_client()
+    gid = store.create(_build_session(term.anchor_id, "normal", None))
+    body = _post_json(
+        c,
+        f"/api/wordgames/contexto/games/{gid}/guess",
+        {"text": "smothie"},
+    )
+    assert body["ok"] is False
+    assert term.label not in body["suggestions"]
+    assert body["attempts"] == 0
+    _assert_secret_hidden(body, term.anchor_id, svc.label(term.anchor_id))
+
+
+def test_projection_feedback_spans_rank_and_temperature_buckets_on_easy_pack() -> None:
+    from collections import Counter, defaultdict
+
+    from cat_de_roman_esti.wordgames.contexto import _build_session, rank_for, temperature_for
+    from cat_de_roman_esti.wordgames.contexto_projection import PROJECTION_TERMS
+    from cat_de_roman_esti.wordgames.packs import get_pack
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    svc = get_service()
+    targets = get_pack().pool("contexto", difficulty="usor")[:12]
+    assert len(targets) == 12
+    for item in targets:
+        session = _build_session(str(item.payload["target"]), "usor", None)
+        hop_dist = svc.distances_to(session.target)
+        feedback: dict[tuple[str, int], tuple[int, str]] = {}
+        by_domain: dict[str, list[int]] = defaultdict(list)
+        ranks: list[int] = []
+        temperatures: list[str] = []
+        for term in PROJECTION_TERMS:
+            cache_key = (term.anchor_id, term.rank_penalty)
+            if cache_key not in feedback:
+                distance = hop_dist.get(term.anchor_id)
+                weighted = session.weighted_dist.get(term.anchor_id)
+                rank = rank_for(session, distance, weighted)
+                rank = max(2, min(session.reachable + 1, rank + term.rank_penalty))
+                effective_distance = 1 if distance == 0 else distance
+                feedback[cache_key] = (
+                    rank,
+                    temperature_for(
+                        session,
+                        effective_distance,
+                        weighted,
+                        rank_override=rank,
+                    ),
+                )
+            rank, temperature = feedback[cache_key]
+            ranks.append(rank)
+            temperatures.append(temperature)
+            by_domain[term.domain].append(rank)
+        assert len(set(ranks)) >= 40
+        assert len(set(temperatures)) >= 3
+        assert max(Counter(ranks).values()) / len(ranks) <= 0.15
+        # At least 24/26 domains have more than one meaningful scoring anchor.
+        assert sum(len(set(domain_ranks)) >= 2 for domain_ranks in by_domain.values()) >= 24
+
+
+def test_contexto_session_keeps_original_bounded_shape_and_store_limits() -> None:
+    from cat_de_roman_esti.wordgames.contexto import _pick_target, store
+
+    session = _pick_target(SEED, "normal")
+    fields = session.__dataclass_fields__
+    assert "hop_dist" not in fields
+    assert "clue_candidates" not in fields
+    assert not hasattr(session, "projection_feedback")
+    assert store._ttl == 7200
+    assert store._max == 1000
+
+
 # ----------------------------------------------- new: instance quality (playtest floor)
 
 
@@ -469,8 +861,7 @@ def test_every_target_has_a_responsive_warm_band(difficulty: str) -> None:
         session = _pick_target(seed, difficulty)
         near = _responsive_count(svc.distances_to(session.target))
         assert near >= MIN_RESPONSIVE, (
-            f"{difficulty} seed={seed} target={session.target} "
-            f"responsive={near} < {MIN_RESPONSIVE}"
+            f"{difficulty} seed={seed} target={session.target} responsive={near} < {MIN_RESPONSIVE}"
         )
 
 
@@ -854,8 +1245,11 @@ def test_temperature_is_monotonic_and_pins_found_and_win() -> None:
     assert rank_for(session, 0, 0.0) == 1
     assert closeness_for(session, 0) == 100
     # A non-win reachable guess never reads 100.
-    assert all(closeness_for(session, d, session.weighted_dist[nid]) < 100
-               for nid, d in dist.items() if d != 0)
+    assert all(
+        closeness_for(session, d, session.weighted_dist[nid]) < 100
+        for nid, d in dist.items()
+        if d != 0
+    )
 
 
 def test_ranks_are_deterministic_for_the_same_instance() -> None:

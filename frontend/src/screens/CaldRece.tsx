@@ -330,7 +330,9 @@ export default function CaldRece({
                   attempts: res.attempts,
                   clues_used: res.clues_used,
                   clue_available: res.clue_available,
+                  next_clue_kind: res.next_clue_kind,
                   clue: res.clue ?? prev.clue,
+                  warm_clue: res.warm_clue ?? prev.warm_clue,
                 }
               : prev,
           );
@@ -350,7 +352,9 @@ export default function CaldRece({
                 won: res.won,
                 clues_used: res.clues_used,
                 clue_available: res.clue_available,
+                next_clue_kind: res.next_clue_kind,
                 clue: res.clue ?? prev.clue,
+                warm_clue: res.warm_clue ?? prev.warm_clue,
                 target: res.target ?? prev.target,
                 score: res.score ?? prev.score,
                 share: res.share ?? prev.share,
@@ -388,6 +392,15 @@ export default function CaldRece({
       onToast(res.message, "info");
     } catch (err) {
       sound.playError();
+      // A stale tab may ask just after its last safe candidate was played elsewhere.
+      // Refresh authoritative availability so a rejected clue cannot leave the button on.
+      if (err instanceof ApiError && err.status === 400) {
+        try {
+          setState(await contextoApi.getGame(state.game_id));
+        } catch {
+          // Keep the current recoverable game visible if the refresh itself fails.
+        }
+      }
       onToast(
         err instanceof ApiError
           ? `Indiciul nu este disponibil (${err.status}).`
@@ -560,11 +573,15 @@ export default function CaldRece({
               disabled={busy || finished || !state?.clue_available}
               title={
                 state?.clue_available
-                  ? "Arată categoria conceptului secret"
-                  : "Disponibil după 3 încercări"
+                  ? state.next_clue_kind === "warmer"
+                    ? "Arată un cuvânt sigur mai cald"
+                    : "Arată categoria conceptului secret"
+                  : (state?.attempts ?? 0) < 3
+                    ? "Disponibil după 3 încercări"
+                    : "Nu mai există un indiciu sigur"
               }
             >
-              Indiciu
+              {state?.next_clue_kind === "warmer" ? "Mai cald" : "Indiciu"}
             </Button>
             <Button
               type="button"
@@ -688,23 +705,55 @@ export default function CaldRece({
           )}
         </AnimatePresence>
 
-        {state?.clue && !finished && (
+        {(state?.clue || state?.warm_clue) && !finished && (
           <div
-            className="row spread"
-            style={{
-              gap: 10,
-              alignItems: "center",
-              padding: "8px 12px",
-              borderRadius: 10,
-              border: "1px solid var(--surface-border)",
-              background: "rgba(255,255,255,0.04)",
-            }}
+            className="col"
+            style={{ gap: 8 }}
+            aria-label="Indicii folosite"
             aria-live="polite"
           >
-            <span className="muted" style={{ fontSize: "0.88rem" }}>
-              Categoria secretului
-            </span>
-            <strong>{state.clue.category.label}</strong>
+            {state.clue && (
+              <div
+                className="row spread"
+                style={{
+                  gap: 10,
+                  alignItems: "center",
+                  padding: "9px 12px",
+                  borderRadius: 12,
+                  border: `1px solid ${DEF.accent}66`,
+                  background: `${DEF.accent}12`,
+                }}
+              >
+                <span className="muted" style={{ fontSize: "0.82rem" }}>
+                  🧭 Categorie
+                </span>
+                <strong>{state.clue.category.label}</strong>
+              </div>
+            )}
+            {state.warm_clue && (
+              <div
+                className="row spread"
+                style={{
+                  gap: 10,
+                  alignItems: "center",
+                  padding: "10px 12px",
+                  borderRadius: 12,
+                  border: "1px solid #f4a25999",
+                  background: "rgba(244, 162, 89, 0.12)",
+                }}
+              >
+                <span className="muted" style={{ fontSize: "0.82rem" }}>
+                  🔥 Încearcă
+                </span>
+                <strong>{state.warm_clue.label}</strong>
+                <span
+                  className="badge"
+                  title="Acest cuvânt era mai aproape decât cea mai bună încercare"
+                >
+                  #{state.warm_clue.rank}
+                </span>
+              </div>
+            )}
           </div>
         )}
 

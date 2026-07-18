@@ -1,7 +1,7 @@
 # ADR-0005: Add a bounded Contexto category clue
 
 Date: 2026-07-04
-Status: accepted
+Status: superseded-by ADR-0042
 
 ## Decision
 Add a one-use category clue to Cald sau Rece after three counted guesses; it reveals only the hidden concept's KG category, applies a score penalty, and keeps the target id, label, and description hidden until win or give-up.

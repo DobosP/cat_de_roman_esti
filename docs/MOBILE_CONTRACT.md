@@ -88,6 +88,33 @@ distance population. Pre-reveal responses keep the target id, target label, and 
 `solution` payload absent across create/get/guess/clue. The exact target object appears only
 on win or give-up.
 
+### Contexto broad guesses and progressive clues
+
+Cald sau Rece additionally accepts a server-owned, guess-only projection of common
+Romanian surfaces. A projected guess has an opaque `ctxp_…` id and uses an existing
+concept's rank/temperature scale, but it is never a target: even a surface mapped to the
+target's scoring anchor remains a non-win with `rank >= 2`. Clients must treat ids and all
+feedback as opaque server values and must not infer or cache projection anchors.
+
+After three counted guesses, state may expose `next_clue_kind: "category" | "warmer"`.
+The first unthemed clue retains `clue.category`; the optional second stage adds:
+
+```json
+{
+  "warm_clue": {
+    "label": "cuvânt familiar",
+    "rank": 12,
+    "message": "Mai cald: cuvânt familiar (#12)."
+  }
+}
+```
+
+`warm_clue.rank` is strictly better than the player's best rank when issued, is never 1,
+and its label never names the target. A board created with `?category=` skips the redundant
+category stage because `board_category` is already public. The clue endpoint also returns
+`clue_kind` plus optional direct `category` or `word`; all fields are additive and the
+operationId remains `contexto_clue`.
+
 ## 5. Conexiuni earned state and clue endpoint
 
 `POST /api/wordgames/conexiuni/games/{game_id}/clue` is additive. It unlocks after two

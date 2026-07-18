@@ -36,6 +36,11 @@ from ..web.http import (
 from ._progress import excluded_pack_ids, record_finished
 from .categories import CATEGORY_LABELS as _SHARED_CATEGORY_LABELS
 from .categories import category_label, is_known
+from .contexto_projection import (
+    ProjectionTerm,
+    resolve_projection,
+    suggest_projection,
+)
 from .packs import get_pack
 from .service import SessionStore, daily_seed, get_service
 
@@ -62,6 +67,7 @@ MIN_RESPONSIVE = 40
 # the target's broad KG category, never the hidden id/label/description.
 MIN_CLUE_ATTEMPTS = 3
 CLUE_SCORE_PENALTY = 120
+WARM_CLUE_MIN_SALIENCE = 0.55
 
 CATEGORY_LABELS = _SHARED_CATEGORY_LABELS
 
@@ -74,6 +80,15 @@ class GuessRecord:
     distance: int
     temperature: str
     closeness: int
+    rank: int
+    # Private scoring source. Projection guesses expose their synthetic id, never this
+    # KG anchor; ordinary KG guesses use the same id for both fields.
+    anchor_id: str
+
+
+@dataclass(frozen=True, slots=True)
+class WarmClue:
+    label: str
     rank: int
 
 
@@ -98,7 +113,10 @@ class ContextoSession:
     attempts: int = 0
     won: bool = False
     gave_up: bool = False
+    # ``clue_revealed`` retains its historical meaning: the category clue was used.
     clue_revealed: bool = False
+    warm_clue: WarmClue | None = None
+    warm_clue_exhausted: bool = False
     clues_used: int = 0
     difficulty: str = _DEFAULT_DIFFICULTY
     daily: str | None = None
@@ -155,6 +173,8 @@ def closeness_for(
     session: ContextoSession,
     distance: int | None,
     weighted_distance: float | None = None,
+    *,
+    rank_override: int | None = None,
 ) -> int:
     """0..100 closeness derived from the refined rank (ADR-0021).
 
@@ -170,7 +190,11 @@ def closeness_for(
     total = session.reachable
     if total <= 1:
         return 0
-    rank = rank_for(session, distance, weighted_distance)
+    rank = (
+        rank_override
+        if rank_override is not None
+        else rank_for(session, distance, weighted_distance)
+    )
     raw = round(100 * (total - rank) / (total - 1))
     return max(1, min(99, raw))
 
@@ -182,6 +206,8 @@ def temperature_for(
     session: ContextoSession,
     distance: int | None,
     weighted_distance: float | None = None,
+    *,
+    rank_override: int | None = None,
 ) -> str:
     """Map a guess to a Romanian temperature tier by its refined-rank percentile.
 
@@ -196,7 +222,11 @@ def temperature_for(
     if distance == 0:
         return "Gasit"
     total = session.reachable
-    rank = rank_for(session, distance, weighted_distance)
+    rank = (
+        rank_override
+        if rank_override is not None
+        else rank_for(session, distance, weighted_distance)
+    )
     pct = rank / total if total else 1.0
     if distance == 1 or pct <= 0.005:
         return "Fierbinte"
@@ -419,7 +449,7 @@ def _sorted_guesses(session: ContextoSession, *, reveal: bool) -> list[dict]:
     return [_guess_payload(g, reveal=reveal, target=session.target) for g in records]
 
 
-def _clue_payload(session: ContextoSession) -> dict:
+def _category_clue_payload(session: ContextoSession) -> dict:
     svc = get_service()
     node = svc.node(session.target)
     category = node.category if node is not None else ""
@@ -428,6 +458,85 @@ def _clue_payload(session: ContextoSession) -> dict:
         "category": {"key": category, "label": label},
         "message": f"Categoria secretului: {label}.",
     }
+
+
+def _best_played_rank(session: ContextoSession) -> int:
+    return min((guess.rank for guess in session.guesses.values()), default=session.reachable + 1)
+
+
+def _warmer_clue_candidate(session: ContextoSession) -> WarmClue | None:
+    """Best deterministic non-target word strictly warmer than the player's best.
+
+    The target and rank 1 are hard excluded. Already-played semantic anchors are also
+    excluded, so a broad projected guess is never "hinted" back as its KG label.
+    """
+
+    if session.warm_clue is not None or session.warm_clue_exhausted:
+        return None
+    best_rank = _best_played_rank(session)
+    if best_rank <= 2:
+        return None
+    svc = get_service()
+    played_anchors = {guess.anchor_id for guess in session.guesses.values()}
+    hop_dist = svc.distances_to(session.target)
+    candidates: list[tuple[int, float, str, str]] = []
+    for node_id, distance in hop_dist.items():
+        if node_id == session.target or node_id in played_anchors:
+            continue
+        rank = rank_for(session, distance, session.weighted_dist.get(node_id))
+        if not 1 < rank < best_rank:
+            continue
+        node = svc.node(node_id)
+        candidates.append(
+            (rank, node.salience if node is not None else 0.0, svc.label(node_id), node_id)
+        )
+    candidates.sort(key=lambda item: (item[0], -item[1], item[2].casefold(), item[3]))
+
+    def first_safe(*, familiar_only: bool) -> WarmClue | None:
+        for rank, salience, label, _node_id in candidates:
+            if familiar_only and salience < WARM_CLUE_MIN_SALIENCE:
+                continue
+            return WarmClue(label=label, rank=rank)
+        return None
+
+    # Prefer a recognisable word even when an obscure node happens to rank a little
+    # better. Fall back only when no familiar safe improvement exists.
+    return first_safe(familiar_only=True) or first_safe(familiar_only=False)
+
+
+def _next_clue_kind(session: ContextoSession) -> str | None:
+    if session.won or session.gave_up or session.attempts < MIN_CLUE_ATTEMPTS:
+        return None
+    if not session.clue_revealed and session.category is None:
+        return "category"
+    # Advertise the warmer stage only when an actual unplayed non-target candidate
+    # exists. A projected rank-3 guess may already own the sole rank-2 anchor.
+    if _warmer_clue_candidate(session) is not None:
+        return "warmer"
+    return None
+
+
+def _warm_clue_payload(clue: WarmClue) -> dict:
+    return {
+        "label": clue.label,
+        "rank": clue.rank,
+        "message": f"Mai cald: {clue.label} (#{clue.rank}).",
+    }
+
+
+def _clue_view(session: ContextoSession) -> dict:
+    next_clue_kind = _next_clue_kind(session)
+    body: dict = {
+        "clues_used": session.clues_used,
+        "clue_available": next_clue_kind is not None,
+    }
+    if next_clue_kind is not None:
+        body["next_clue_kind"] = next_clue_kind
+    if session.clue_revealed:
+        body["clue"] = _category_clue_payload(session)
+    if session.warm_clue is not None:
+        body["warm_clue"] = _warm_clue_payload(session.warm_clue)
+    return body
 
 
 def _state(game_id: str, session: ContextoSession) -> dict:
@@ -439,21 +548,13 @@ def _state(game_id: str, session: ContextoSession) -> dict:
         "gave_up": session.gave_up,
         "reachable_count": session.reachable,
         "difficulty": session.difficulty,
-        "clues_used": session.clues_used,
-        "clue_available": (
-            not session.won
-            and not session.gave_up
-            and not session.clue_revealed
-            and session.attempts >= MIN_CLUE_ATTEMPTS
-        ),
         "guesses": _sorted_guesses(session, reveal=reveal),
+        **_clue_view(session),
     }
     if session.daily is not None:
         body["daily"] = session.daily
     if session.category:
         body["board_category"] = session.category
-    if session.clue_revealed:
-        body["clue"] = _clue_payload(session)
     if reveal:
         svc = get_service()
         body["target"] = {
@@ -541,22 +642,39 @@ class GuessView(ContractAPIView):
             raise http_error(400, "Scrie un concept")
 
         node_id = svc.resolve(text)
+        projection: ProjectionTerm | None = None
         corrected = False
         if node_id is None:
+            # Contexto's extra vocabulary is exact-surface only and is checked before
+            # fuzzy KG correction, so an authored everyday word cannot be reinterpreted
+            # as a similarly spelled historical/technical concept.
+            projection = resolve_projection(text)
+        if node_id is None and projection is None:
             # Confident auto-accept (ADR-0022): a high-confidence, unambiguous near-miss
             # is played as the corrected concept — attempts count normally, and if the
             # correction IS the target that is a legitimate win (a typo'd answer is still
             # the answer). Anything weaker falls through to the advisory suggestions.
             node_id = svc.resolve_fuzzy(text)
             corrected = node_id is not None
-        if node_id is None:
+        if node_id is None and projection is None:
             # Unknown concept: do NOT count it as an attempt. Offer fuzzy "did you mean"
             # hints, but NEVER one that resolves to the hidden target (ADR-0009/0021).
-            suggestions = [
-                label
-                for label in svc.suggest(text)
-                if svc.resolve(label) != session.target
+            kg_suggestions = [
+                label for label in svc.suggest(text) if svc.resolve(label) != session.target
             ]
+            projected_suggestions = [
+                term.label for term in suggest_projection(text) if term.anchor_id != session.target
+            ]
+            suggestions: list[str] = []
+            seen_suggestions: set[str] = set()
+            for label in [*projected_suggestions, *kg_suggestions]:
+                key = label.casefold()
+                if key in seen_suggestions:
+                    continue
+                seen_suggestions.add(key)
+                suggestions.append(label)
+                if len(suggestions) == 3:
+                    break
             message = "Nu cunosc acest concept"
             if suggestions:
                 message = f"Nu cunosc acest concept. Poate cautai: {suggestions[0]}?"
@@ -569,38 +687,57 @@ class GuessView(ContractAPIView):
                     "attempts": session.attempts,
                     "won": session.won,
                     "reachable_count": session.reachable,
-                    "clues_used": session.clues_used,
-                    "clue_available": (
-                        not session.clue_revealed
-                        and session.attempts >= MIN_CLUE_ATTEMPTS
-                    ),
+                    **_clue_view(session),
                 }
             )
 
-        distance = svc.distance(node_id, session.target)
-        weighted = session.weighted_dist.get(node_id)
-        temperature = temperature_for(session, distance, weighted)
-        closeness = closeness_for(session, distance, weighted)
+        anchor_id = projection.anchor_id if projection is not None else node_id
+        if anchor_id is None:  # narrowed above; keeps type checkers honest.
+            raise RuntimeError("accepted Contexto guess has no scoring anchor")
+        distance = svc.distance(anchor_id, session.target)
+        weighted = session.weighted_dist.get(anchor_id)
         rank = rank_for(session, distance, weighted)
+        feedback_distance = distance
+        if projection is not None:
+            # Guess-only terms can approach the target but cannot solve it. Even a
+            # zero-penalty term mapped to the target anchor stays a non-win at rank >= 2.
+            rank = max(2, min(session.reachable + 1, rank + projection.rank_penalty))
+            if feedback_distance == 0:
+                feedback_distance = 1
+        temperature = temperature_for(
+            session,
+            feedback_distance,
+            weighted,
+            rank_override=rank,
+        )
+        closeness = closeness_for(
+            session,
+            feedback_distance,
+            weighted,
+            rank_override=rank,
+        )
         # distance is None when the guess is in a disconnected part of the graph — we still
         # store it (as the coldest possible) so a repeated guess shows the same verdict.
-        stored_distance = distance if distance is not None else 999
+        stored_distance = feedback_distance if feedback_distance is not None else 999
+        guess_id = projection.public_id if projection is not None else anchor_id
+        guess_label = projection.label if projection is not None else svc.label(anchor_id)
 
         record = GuessRecord(
-            id=node_id,
-            label=svc.label(node_id),
+            id=guess_id,
+            label=guess_label,
             distance=stored_distance,
             temperature=temperature,
             closeness=closeness,
             rank=rank,
+            anchor_id=anchor_id,
         )
-        is_new = node_id not in session.guesses
-        session.guesses[node_id] = record
+        is_new = guess_id not in session.guesses
+        session.guesses[guess_id] = record
         if is_new:
             session.attempts += 1
-            session.order.append(node_id)
+            session.order.append(guess_id)
 
-        if distance == 0:
+        if projection is None and distance == 0:
             session.won = True
             record_finished(request, GAME_KEY, session.pack_id)
         reveal = session.won or session.gave_up
@@ -612,20 +749,13 @@ class GuessView(ContractAPIView):
             "attempts": session.attempts,
             "won": session.won,
             "reachable_count": session.reachable,
-            "clues_used": session.clues_used,
-            "clue_available": (
-                not session.won
-                and not session.clue_revealed
-                and session.attempts >= MIN_CLUE_ATTEMPTS
-            ),
+            **_clue_view(session),
         }
         if corrected:
             # Tell the player what we understood. On a non-win the corrected node can
             # never be the target (correction == target implies distance 0, a win), so
             # this message cannot leak the hidden answer (ADR-0009).
             result["message"] = f"Am înțeles: {record.label}."
-        if session.clue_revealed:
-            result["clue"] = _clue_payload(session)
         if session.won:
             result["target"] = {
                 "id": session.target,
@@ -645,16 +775,31 @@ class ClueView(ContractAPIView):
             raise http_error(404, "Joc inexistent")
         if session.won or session.gave_up:
             raise http_error(400, "Jocul s-a terminat")
-        if session.attempts < MIN_CLUE_ATTEMPTS and not session.clue_revealed:
+        if session.attempts < MIN_CLUE_ATTEMPTS:
             need = MIN_CLUE_ATTEMPTS - session.attempts
             raise http_error(
                 400,
                 f"Mai incearca {need} concepte inainte de indiciu.",
             )
-        if not session.clue_revealed:
+        if not session.clue_revealed and session.category is None:
+            clue_kind = "category"
             session.clue_revealed = True
             session.clues_used += 1
-        return Response({"ok": True, **_clue_payload(session), **_state(game_id, session)})
+            direct = {"clue_kind": clue_kind, **_category_clue_payload(session)}
+        else:
+            clue = _warmer_clue_candidate(session)
+            if clue is None:
+                session.warm_clue_exhausted = True
+                raise http_error(400, "Nu mai exista un indiciu sigur mai cald.")
+            clue_kind = "warmer"
+            session.warm_clue = clue
+            session.clues_used += 1
+            direct = {
+                "clue_kind": clue_kind,
+                "word": _warm_clue_payload(clue),
+                "message": f"Mai cald: {clue.label}.",
+            }
+        return Response({"ok": True, **direct, **_state(game_id, session)})
 
 
 class GiveUpView(ContractAPIView):
