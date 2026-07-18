@@ -1,7 +1,7 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-18. This file is the repository's current source of truth._
-_Last verified: 2026-07-18 (local v32 gate: backend 383; v25/v28/v29/v30/v31/v32 44 and session 11; exact critique 33/33 and full pending report byte-identical; Ruff, both validators, workflow syntax, whitespace; frontend lint/typecheck/9 suites/build at 116.12 KiB gzip; mobile importer 4 and full verify 227/26. Production remains release `2746be3`, smoke-verified 2026-07-16.)_
+_Last verified: 2026-07-18 (local v32 gate: backend 383; v25/v28/v29/v30/v31/v32 44 and session 11; exact critique 33/33 and full pending report byte-identical; Ruff, both validators, workflow syntax, whitespace; frontend lint/typecheck/9 suites/build at 116.12 KiB gzip; mobile importer 4 and full verify 227/26. Live release `f40fa8bc1b8880637aeeb01816c612ea850f73c0`: healthy image `sha256:3ed5fc61a95ec08417f1ebb68f329bf85779ab0988dffdcc7537c5d769dc6e9a`; manifest `sha256:670cc16bcbf8f5d1ba4184c0867ea3e68f6331533afe7cc259be060eb655a8ee`, 2,269 nodes / 9,068 edges / 180 puzzles; all 14 categories positive, available, and curated; four `usor` creates at seed 32032; anonymous/account-disabled mode and expected submissions 503; homepage plus four deep routes byte-matched the built index; all 12 Vite assets returned non-empty 200 responses with immutable caching; privacy and terms passed without placeholders.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
 
@@ -49,8 +49,8 @@ byte-identical, and all 794 curated records remain unchanged.
 The Romanian arcade has four server-authoritative games: Alchimie, Cald sau Rece, Lanțul
 Cuvintelor, and Conexiuni, using Django 5.2/DRF and React 19/Vite 8 over the offline KG.
 
-Anonymous v1 at <https://cat-de-roman-esti.dobolabs.ro> runs release `2746be3`, deployed
-and smoke-verified on 2026-07-16. Accounts/rankings remain staging-only: scores are
+Anonymous v1 at <https://cat-de-roman-esti.dobolabs.ro> runs release `f40fa8b`, deployed
+and smoke-verified on 2026-07-18. Accounts/rankings remain staging-only: scores are
 client-authored and visibility needs opt-in by default.
 
 ## Shipped content
