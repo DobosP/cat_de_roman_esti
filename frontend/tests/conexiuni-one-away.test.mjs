@@ -78,13 +78,27 @@ test("mobile recovery and clues stay in the sticky action channel above the boar
   assert.match(screen, /state\?\.clues\.map\(\(clue\) => clue\.message\)/);
   assert.match(
     screen,
-    /const res = await conexiuniApi\.clue\(state\.game_id\);[\s\S]{0,180}setState\(res\);[\s\S]{0,240}setHint\(null\)/,
+    /const res = await conexiuniApi\.clue\(state\.game_id\);[\s\S]{0,180}applyAuthoritativeState\(res\)/,
   );
   assert.doesNotMatch(screen, /setHint\(res\.clue\.message\)/);
   assert.doesNotMatch(screen, /onToast\("Indiciu deblocat\./);
   assert.doesNotMatch(screen, /onToast\("Aproape! 3 din 4\.|onToast\("Nu e grupul/);
   assert.match(screen, /refreshAuthoritativeState\(state\.game_id\)/);
   assert.match(screen, /err\.status === 400 \|\| err\.status === 409/);
+});
+
+test("authoritative refresh retires invisible selections without duplicating terminal errors", () => {
+  assert.match(screen, /fresh\.solved\.flatMap\(\(group\) => group\.tiles\.map/);
+  assert.match(screen, /current\.filter\(\(id\) => available\.has\(id\)\)/);
+  assert.match(
+    screen,
+    /setState\(fresh\);[\s\S]{0,240}setBlockedGuess\(null\);\s*setHint\(null\);/,
+  );
+  assert.match(
+    screen,
+    /else if \(!fresh\?\.won && !fresh\?\.lost\) \{\s*onToast\(message, "error"\);/,
+  );
+  assert.match(screen, /if \(!fresh\?\.won && !fresh\?\.lost\) \{\s*onToast\(/);
 });
 
 test("the sticky coach keeps the bounded mistake budget visible without membership", () => {

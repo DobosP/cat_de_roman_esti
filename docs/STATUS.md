@@ -2,7 +2,7 @@
 
 _As of 2026-07-19. This file is the repository's current source of truth._
 _Last verified: 2026-07-19 (V35 integrated backend suite and frontend 67/67, lint,
-typecheck, and production build green at 117.03/120 KiB with four font subsets; final
+typecheck, and production build green at 117.04/120 KiB with four font subsets; final
 session-hardening gate pending. Live remains V32 `f40fa8b`; V33–V35 are not deployed.)_
 
 ## Current outcome — critique gate completed (ADR-0023 through ADR-0026)

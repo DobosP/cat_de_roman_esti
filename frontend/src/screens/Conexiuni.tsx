@@ -154,20 +154,30 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     [state?.clues],
   );
 
+  const applyAuthoritativeState = useCallback((fresh: ConexiuniState) => {
+    const solved = new Set(
+      fresh.solved.flatMap((group) => group.tiles.map((tile) => tile.id)),
+    );
+    const available = new Set(
+      fresh.tiles.filter((tile) => !solved.has(tile.id)).map((tile) => tile.id),
+    );
+    setState(fresh);
+    setSelected((current) =>
+      fresh.won || fresh.lost ? [] : current.filter((id) => available.has(id)),
+    );
+    setBlockedGuess(null);
+    setHint(null);
+  }, []);
+
   const refreshAuthoritativeState = useCallback(async (gameId: string) => {
     try {
       const fresh = await conexiuniApi.get(gameId);
-      setState(fresh);
-      if (fresh.won || fresh.lost) {
-        setSelected([]);
-        setBlockedGuess(null);
-        setHint(null);
-      }
+      applyAuthoritativeState(fresh);
       return fresh;
     } catch {
       return null;
     }
-  }, []);
+  }, [applyAuthoritativeState]);
 
   useEffect(() => {
     if (resumeOnce.current) return;
@@ -345,7 +355,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
           setBlockedGuess({ key: guessKey, oneAway: false });
           setHint(`${message} Schimbă cel puțin o piesă înainte de o nouă verificare.`);
         }
-      } else {
+      } else if (!fresh?.won && !fresh?.lost) {
         onToast(message, "error");
       }
     } finally {
@@ -359,26 +369,34 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     try {
       const res = await conexiuniApi.clue(state.game_id);
       sound.playSelect();
-      setState(res);
+      applyAuthoritativeState(res);
       // The authoritative clue is rendered once in the compact board guidance card.
-      // Clear generic wrong-guess copy instead of repeating the same clue in local
-      // feedback and a toast as well.
-      setHint(null);
+      // Applying it also retires stale selected ids and prior local feedback.
     } catch (err) {
       sound.playError();
-      if (err instanceof ApiError && (err.status === 400 || err.status === 409)) {
-        await refreshAuthoritativeState(state.game_id);
+      const fresh =
+        err instanceof ApiError && (err.status === 400 || err.status === 409)
+          ? await refreshAuthoritativeState(state.game_id)
+          : null;
+      if (!fresh?.won && !fresh?.lost) {
+        onToast(
+          err instanceof ApiError
+            ? err.message || `Indiciu respins (${err.status}).`
+            : "Indiciu respins.",
+          "error",
+        );
       }
-      onToast(
-        err instanceof ApiError
-          ? err.message || `Indiciu respins (${err.status}).`
-          : "Indiciu respins.",
-        "error",
-      );
     } finally {
       setBusy(false);
     }
-  }, [state, busy, finished, onToast, refreshAuthoritativeState]);
+  }, [
+    state,
+    busy,
+    finished,
+    onToast,
+    applyAuthoritativeState,
+    refreshAuthoritativeState,
+  ]);
 
   const copyShare = useCallback(async () => {
     if (!sharePayload) return;
