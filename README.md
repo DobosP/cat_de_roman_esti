@@ -9,13 +9,15 @@ The name is a pun on *"cât de român ești"* — "how Romanian are you".
 
 ## Web app — the word-game arcade
 
-The web app is a **text-only arcade** of four word games over the same Romanian concept
+The web app is a **text-only arcade** of six word games over the same Romanian concept
 graph (**2,287 concepts / 9,122 links / 180 puzzles**,
-`fixture-v33-bathroom-electric-forest` — no graph visualization). All four are
+`fixture-v33-bathroom-electric-forest` — no graph visualization). All six are
 **server-authoritative** (the BFF validates moves and hides answers):
 
 - **Alchimie** *(à la Infinite Craft)* — combine two concepts into a new one (their shared
   link) and keep crafting until you reach the target.
+- **Intrusul** — tap the one word that does not belong with the other three.
+- **Perechi** — match eight words into four hidden semantic pairs.
 - **Conexiuni** *(à la NYT Connections)* — group 16 concepts into 4 hidden categories,
   4 mistakes allowed.
 - **Cald sau Rece** *(à la Contexto/Semantle)* — a hidden secret concept; each guess tells
@@ -168,6 +170,8 @@ Direct **local** merges to `main` are allowed once the CI gate is green; **pushi
 - [`docs/MOBILE_CONTRACT.md`](docs/MOBILE_CONTRACT.md) — stable operationIds + `GET /api/manifest` for the generated mobile client (ADR-0003).
 - [`docs/PILOT_BOARD_RANKING.md`](docs/PILOT_BOARD_RANKING.md) — private V37 pre-playtest
   board estimate: reproduction and interpretation (ADR-0051).
+- [`docs/V38_DERIVED_GAMES.md`](docs/V38_DERIVED_GAMES.md) — private V38 derived-game
+  catalog, ranking, and regeneration contract (ADR-0052).
 - [`docs/ROEDU_INTEGRATION.md`](docs/ROEDU_INTEGRATION.md) — products, key, field mapping, fail-closed gate, offline fixture.
 - [`docs/STATUS.md`](docs/STATUS.md) — phase / built / wired / blockers / next.
 - [`docs/adr/`](docs/adr/) — architecture decision records (0001 = arcade pivot, no graph UI).
