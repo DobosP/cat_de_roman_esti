@@ -1,0 +1,128 @@
+{
+ "id": "lt_stiinta_215",
+ "game": "lant",
+ "category": "stiinta",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "269889da193516c0caf3679d5d4e4fc2122baa5920a4976f1736e2510d77688d",
+ "kg_sha256": "d6d8d530b1a67462a62d29b1873e7df62877959779f892ee1453f9284cfeec38",
+ "lint_findings": [],
+ "start": {
+  "id": "n_v4per_om",
+  "label": "om",
+  "node_type": "concept",
+  "category": "personalitati",
+  "salience": 0.8485,
+  "degree": 7,
+  "incoming_degree": 25,
+  "description": "Ființă umană; termen general pentru persoane și personalități."
+ },
+ "target": {
+  "id": "n_v24_body_face_nas",
+  "label": "Nas",
+  "node_type": "concept",
+  "category": "stiinta",
+  "salience": 0.93,
+  "degree": 2,
+  "incoming_degree": 3,
+  "description": "Concept cotidian din grupul «părți ale capului»: Nas."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v4per_om",
+     "label": "om"
+    },
+    {
+     "id": "n_v4sti_corp",
+     "label": "corp"
+    },
+    {
+     "id": "n_v24_body_face_nas",
+     "label": "Nas"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v4per_om",
+      "label": "om"
+     },
+     "to": {
+      "id": "n_v4sti_corp",
+      "label": "corp"
+     },
+     "relation": "beginner_diamond",
+     "label": "două drumuri prin corp",
+     "strength": 0.93
+    },
+    {
+     "from": {
+      "id": "n_v4sti_corp",
+      "label": "corp"
+     },
+     "to": {
+      "id": "n_v24_body_face_nas",
+      "label": "Nas"
+     },
+     "relation": "beginner_entry",
+     "label": "duce la",
+     "strength": 0.86
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v4per_om",
+     "label": "om"
+    },
+    {
+     "id": "n_v4sti_ochi",
+     "label": "ochi"
+    },
+    {
+     "id": "n_v24_body_face_nas",
+     "label": "Nas"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v4per_om",
+      "label": "om"
+     },
+     "to": {
+      "id": "n_v4sti_ochi",
+      "label": "ochi"
+     },
+     "relation": "beginner_diamond",
+     "label": "două drumuri prin corp",
+     "strength": 0.93
+    },
+    {
+     "from": {
+      "id": "n_v4sti_ochi",
+      "label": "ochi"
+     },
+     "to": {
+      "id": "n_v24_body_face_nas",
+      "label": "Nas"
+     },
+     "relation": "beginner_diamond",
+     "label": "două drumuri prin corp",
+     "strength": 0.93
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "14f8efacf32c8e41825a1accdc43c44c9f8660cdbde7686b55d4a47ffbef6741",
+ "review_binding": "sha256:ff7444fdf2fff732e5d37a56fc145ba3b0175c5469bab35b197c158f922b9afd"
+}

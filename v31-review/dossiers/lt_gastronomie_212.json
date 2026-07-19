@@ -1,0 +1,128 @@
+{
+ "id": "lt_gastronomie_212",
+ "game": "lant",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "32158ef8be3013824ef166f74aa47f89ae4162c5eb9ebe778584113e4f630048",
+ "kg_sha256": "d6d8d530b1a67462a62d29b1873e7df62877959779f892ee1453f9284cfeec38",
+ "lint_findings": [],
+ "start": {
+  "id": "n_v4gas_bucatarie",
+  "label": "Bucătărie",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.8809,
+  "degree": 18,
+  "incoming_degree": 16,
+  "description": "Spațiu și domeniu al pregătirii mâncării."
+ },
+ "target": {
+  "id": "n_v24_food_salad_veg_morcov",
+  "label": "Morcov",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.91,
+  "degree": 4,
+  "incoming_degree": 2,
+  "description": "Concept cotidian din grupul «legume pentru salată»: Morcov."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v4gas_bucatarie",
+     "label": "Bucătărie"
+    },
+    {
+     "id": "n_v4gas_legume",
+     "label": "Legume"
+    },
+    {
+     "id": "n_v24_food_salad_veg_morcov",
+     "label": "Morcov"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v4gas_bucatarie",
+      "label": "Bucătărie"
+     },
+     "to": {
+      "id": "n_v4gas_legume",
+      "label": "Legume"
+     },
+     "relation": "beginner_diamond",
+     "label": "două drumuri prin alimente",
+     "strength": 0.93
+    },
+    {
+     "from": {
+      "id": "n_v4gas_legume",
+      "label": "Legume"
+     },
+     "to": {
+      "id": "n_v24_food_salad_veg_morcov",
+      "label": "Morcov"
+     },
+     "relation": "beginner_repair",
+     "label": "legătură intuitivă",
+     "strength": 0.96
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v4gas_bucatarie",
+     "label": "Bucătărie"
+    },
+    {
+     "id": "n_v4gas_mancare",
+     "label": "Mâncare"
+    },
+    {
+     "id": "n_v24_food_salad_veg_morcov",
+     "label": "Morcov"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v4gas_bucatarie",
+      "label": "Bucătărie"
+     },
+     "to": {
+      "id": "n_v4gas_mancare",
+      "label": "Mâncare"
+     },
+     "relation": "beginner_diamond",
+     "label": "două drumuri prin alimente",
+     "strength": 0.93
+    },
+    {
+     "from": {
+      "id": "n_v4gas_mancare",
+      "label": "Mâncare"
+     },
+     "to": {
+      "id": "n_v24_food_salad_veg_morcov",
+      "label": "Morcov"
+     },
+     "relation": "beginner_entry",
+     "label": "duce la",
+     "strength": 0.86
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "14f8efacf32c8e41825a1accdc43c44c9f8660cdbde7686b55d4a47ffbef6741",
+ "review_binding": "sha256:e36eb055b4717e7c59ac609ba8628b068590860bbab5094d2f540f250e9e5408"
+}
