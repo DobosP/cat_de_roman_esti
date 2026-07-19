@@ -6,6 +6,7 @@ const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
 const intrusul = read("../src/screens/Intrusul.tsx");
 const perechi = read("../src/screens/Perechi.tsx");
 const resultCard = read("../src/components/ResultCard.tsx");
+const gameShell = read("../src/components/GameShell.tsx");
 
 test("valid terminal resume states are adopted instead of discarded", () => {
   assert.match(
@@ -49,11 +50,16 @@ test("create and replay are single-flight with visible result busy state", () =>
     assert.match(screen, /if \(!acquireFlight\(startInFlight\)\) return/);
     assert.match(screen, /releaseFlight\(startInFlight\)/);
     assert.match(screen, /actionsBusy=\{loading\}/);
+    assert.equal((screen.match(/busy=\{loading\}/g) ?? []).length, 2);
     assert.match(screen, /const exitSafely = useCallback/);
   }
   assert.match(resultCard, /actionsBusy = false/);
   assert.match(resultCard, /disabled=\{actionsBusy\}/);
   assert.match(resultCard, /actionsBusy \? "Se pregătește…" : replayLabel/);
+  assert.match(gameShell, /busy = false/);
+  assert.match(gameShell, /disabled=\{busy\}/);
+  assert.match(gameShell, /aria-busy=\{busy \|\| undefined\}/);
+  assert.match(gameShell, /busy \? "Se pregătește…" : "Meniu"/);
 });
 
 test("Intrusul exposes the hint unlock rule to touch users", () => {

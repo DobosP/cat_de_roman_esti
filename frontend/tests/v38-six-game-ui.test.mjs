@@ -14,6 +14,7 @@ const perechi = read("../src/screens/Perechi.tsx");
 const intrusulCss = read("../src/styles/intrusul.css");
 const perechiCss = read("../src/styles/perechi.css");
 const arcadeCss = read("../src/styles/arcade.css");
+const html = read("../index.html");
 
 test("V38 lobby is six games in the tested fun-first order", () => {
   const order = [...games.matchAll(/^\s+key: "([^"]+)",$/gm)].map((match) => match[1]);
@@ -29,6 +30,8 @@ test("V38 lobby is six games in the tested fun-first order", () => {
   assert.match(games, /key: "alchimie"[\s\S]*?featured: true/);
   assert.match(home, /Șase jocuri românești/);
   assert.match(home, /Toate cele șase jocuri/);
+  assert.match(html, /content="Cât de român ești\? Șase jocuri de cuvinte/);
+  assert.doesNotMatch(html, /Patru jocuri/);
 });
 
 test("new game screens and their styles stay behind lazy routes", () => {
