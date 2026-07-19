@@ -1,0 +1,172 @@
+{
+ "id": "lt_viata_de_roman_213",
+ "game": "lant",
+ "category": "viata_de_roman",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "d017804e70c513e921370ef1da570aa034cc4120c047c2d6ae1dfbc2d23ea874",
+ "kg_sha256": "04b5f24c3eee92cc8aed9af91e618804d60abe52f5b4dd37a8e426b052dfdedf",
+ "lint_findings": [],
+ "start": {
+  "id": "n_v23via_ghiozdan",
+  "label": "Ghiozdan",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.84,
+  "degree": 11,
+  "incoming_degree": 5,
+  "description": "Geantă purtată pe spate în care elevii își duc la școală manualele, caietele și rechizitele."
+ },
+ "target": {
+  "id": "n_v24_school_classroom_lectie",
+  "label": "Lecție",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.93,
+  "degree": 3,
+  "incoming_degree": 7,
+  "description": "Concept cotidian din grupul «sala de clasă»: Lecție."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 4,
+  "narrowest_shortest_path_layer": 4,
+  "total_intermediate_shortest_path_nodes": 4
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v23via_ghiozdan",
+     "label": "Ghiozdan"
+    },
+    {
+     "id": "n_v3lit_carte",
+     "label": "Carte"
+    },
+    {
+     "id": "n_v24_school_classroom_lectie",
+     "label": "Lecție"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v23via_ghiozdan",
+      "label": "Ghiozdan"
+     },
+     "to": {
+      "id": "n_v3lit_carte",
+      "label": "Carte"
+     },
+     "relation": "beginner_diamond",
+     "label": "două drumuri spre lecție",
+     "strength": 0.93
+    },
+    {
+     "from": {
+      "id": "n_v3lit_carte",
+      "label": "Carte"
+     },
+     "to": {
+      "id": "n_v24_school_classroom_lectie",
+      "label": "Lecție"
+     },
+     "relation": "beginner_diamond",
+     "label": "două drumuri spre lecție",
+     "strength": 0.93
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v23via_ghiozdan",
+     "label": "Ghiozdan"
+    },
+    {
+     "id": "n_v3soc_scoala",
+     "label": "Școală"
+    },
+    {
+     "id": "n_v24_school_classroom_lectie",
+     "label": "Lecție"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v23via_ghiozdan",
+      "label": "Ghiozdan"
+     },
+     "to": {
+      "id": "n_v3soc_scoala",
+      "label": "Școală"
+     },
+     "relation": "beginner_diamond",
+     "label": "două drumuri spre lecție",
+     "strength": 0.93
+    },
+    {
+     "from": {
+      "id": "n_v3soc_scoala",
+      "label": "Școală"
+     },
+     "to": {
+      "id": "n_v24_school_classroom_lectie",
+      "label": "Lecție"
+     },
+     "relation": "beginner_diamond",
+     "label": "două drumuri spre lecție",
+     "strength": 0.93
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v23via_ghiozdan",
+     "label": "Ghiozdan"
+    },
+    {
+     "id": "n_v24_school_supplies_stilou",
+     "label": "Stilou"
+    },
+    {
+     "id": "n_v24_school_classroom_lectie",
+     "label": "Lecție"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v23via_ghiozdan",
+      "label": "Ghiozdan"
+     },
+     "to": {
+      "id": "n_v24_school_supplies_stilou",
+      "label": "Stilou"
+     },
+     "relation": "beginner_entry",
+     "label": "duce la",
+     "strength": 0.86
+    },
+    {
+     "from": {
+      "id": "n_v24_school_supplies_stilou",
+      "label": "Stilou"
+     },
+     "to": {
+      "id": "n_v24_school_classroom_lectie",
+      "label": "Lecție"
+     },
+     "relation": "beginner_recipe",
+     "label": "notez lecția",
+     "strength": 0.94
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "14f8efacf32c8e41825a1accdc43c44c9f8660cdbde7686b55d4a47ffbef6741",
+ "review_binding": "sha256:c99236fc6ad6bd2c3ec269cd752289e2cbf73eeeafa3815159fcd9158741ec05"
+}

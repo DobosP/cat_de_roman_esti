@@ -1,0 +1,295 @@
+{
+ "id": "al_viata_de_roman_100",
+ "game": "alchimie",
+ "category": "viata_de_roman",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "fbe8645fd033cdfc676c7486988782638b9aca063ebbba5cf765a397a48f49e7",
+ "kg_sha256": "04b5f24c3eee92cc8aed9af91e618804d60abe52f5b4dd37a8e426b052dfdedf",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v24_home_seating_fotoliu",
+  "label": "Fotoliu",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.88,
+  "degree": 2,
+  "incoming_degree": 4,
+  "description": "Concept cotidian din grupul «mobilier pentru șezut»: Fotoliu."
+ },
+ "seeds": [
+  {
+   "id": "n_v24_action_routine_a_dormi",
+   "label": "A dormi",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.93,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Concept cotidian din grupul «rutina zilnică»: A dormi."
+  },
+  {
+   "id": "n_v24_action_routine_a_invata",
+   "label": "A învăța",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.93,
+   "degree": 2,
+   "incoming_degree": 4,
+   "description": "Concept cotidian din grupul «rutina zilnică»: A învăța."
+  },
+  {
+   "id": "n_v24_home_rooms_camera",
+   "label": "Cameră",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.91,
+   "degree": 3,
+   "incoming_degree": 2,
+   "description": "Concept cotidian din grupul «camere ale locuinței»: Cameră."
+  },
+  {
+   "id": "n_v24_school_classroom_clasa_scolara",
+   "label": "Clasă școlară",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.93,
+   "degree": 4,
+   "incoming_degree": 1,
+   "description": "Concept cotidian din grupul «sala de clasă»: Clasă școlară."
+  },
+  {
+   "id": "n_v24_school_writing_caiet",
+   "label": "Caiet",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.94,
+   "degree": 6,
+   "incoming_degree": 1,
+   "description": "Concept cotidian din grupul «obiecte pentru scris»: Caiet."
+  },
+  {
+   "id": "n_v24_school_writing_creion",
+   "label": "Creion",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.94,
+   "degree": 3,
+   "incoming_degree": 3,
+   "description": "Concept cotidian din grupul «obiecte pentru scris»: Creion."
+  },
+  {
+   "id": "n_v4via_usa",
+   "label": "ușă",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.6855,
+   "degree": 40,
+   "incoming_degree": 7,
+   "description": "Element mobil care închide sau deschide intrarea într-o cameră ori locuință."
+  }
+ ],
+ "target_depth": 3,
+ "craft_profile": {
+  "opening_pairs": 7,
+  "closure_size": 18,
+  "target_generation": 3
+ },
+ "productive_openings": [
+  {
+   "pair": [
+    {
+     "id": "n_v24_action_routine_a_dormi",
+     "label": "A dormi"
+    },
+    {
+     "id": "n_v4via_usa",
+     "label": "ușă"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v24_action_routine_a_lucra",
+     "label": "A lucra"
+    },
+    {
+     "id": "n_v24_home_rooms_dormitor",
+     "label": "Dormitor"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v24_home_rooms_camera",
+     "label": "Cameră"
+    },
+    {
+     "id": "n_v4via_usa",
+     "label": "ușă"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v24_home_rooms_dormitor",
+     "label": "Dormitor"
+    },
+    {
+     "id": "n_v24_home_rooms_sufragerie",
+     "label": "Sufragerie"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v24_school_writing_caiet",
+     "label": "Caiet"
+    },
+    {
+     "id": "n_v24_school_writing_creion",
+     "label": "Creion"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v24_school_writing_pix",
+     "label": "Pix"
+    },
+    {
+     "id": "n_v24_school_assessment_tema_acasa",
+     "label": "Temă pentru acasă"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v24_action_routine_a_dormi",
+     "label": "A dormi"
+    },
+    {
+     "id": "n_v24_home_rooms_camera",
+     "label": "Cameră"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v24_home_rooms_dormitor",
+     "label": "Dormitor"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v24_action_routine_a_invata",
+     "label": "A învăța"
+    },
+    {
+     "id": "n_v24_school_writing_caiet",
+     "label": "Caiet"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v24_school_assessment_tema_acasa",
+     "label": "Temă pentru acasă"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v24_action_routine_a_invata",
+     "label": "A învăța"
+    },
+    {
+     "id": "n_v24_school_writing_creion",
+     "label": "Creion"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v24_school_assessment_tema_acasa",
+     "label": "Temă pentru acasă"
+    }
+   ]
+  }
+ ],
+ "minimum_action_recipe": [
+  {
+   "pair": [
+    {
+     "id": "n_v24_action_routine_a_dormi",
+     "label": "A dormi"
+    },
+    {
+     "id": "n_v4via_usa",
+     "label": "ușă"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v24_home_rooms_dormitor",
+     "label": "Dormitor"
+    },
+    {
+     "id": "n_v24_action_routine_a_lucra",
+     "label": "A lucra"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v24_home_rooms_dormitor",
+     "label": "Dormitor"
+    },
+    {
+     "id": "n_v4via_usa",
+     "label": "ușă"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v24_home_bed_perna",
+     "label": "Pernă"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v24_home_bed_perna",
+     "label": "Pernă"
+    },
+    {
+     "id": "n_v4via_usa",
+     "label": "ușă"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v24_home_seating_fotoliu",
+     "label": "Fotoliu"
+    },
+    {
+     "id": "n_v24_home_textiles_covor",
+     "label": "Covor"
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "14f8efacf32c8e41825a1accdc43c44c9f8660cdbde7686b55d4a47ffbef6741",
+ "review_binding": "sha256:210a293b6f40bcbb95596af9c668819886ed18bd663a8f807e44907292769aaa"
+}
