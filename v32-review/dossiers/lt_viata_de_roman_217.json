@@ -1,0 +1,223 @@
+{
+ "id": "lt_viata_de_roman_217",
+ "game": "lant",
+ "category": "viata_de_roman",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "d09c3d417831d39de14666bf00b98c847e39b427110b15155ba9b6286006cab5",
+ "kg_sha256": "866644edc375ed0e051b94d1fe02ea3aa037a2f5318cab9d944dae8e49a30df8",
+ "lint_findings": [],
+ "start": {
+  "id": "n_v24_home_seating_scaun",
+  "label": "Scaun",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.88,
+  "degree": 3,
+  "incoming_degree": 1,
+  "description": "Concept cotidian din grupul «mobilier pentru șezut»: Scaun."
+ },
+ "target": {
+  "id": "n_v24_home_rooms_dormitor",
+  "label": "Dormitor",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.91,
+  "degree": 2,
+  "incoming_degree": 5,
+  "description": "Concept cotidian din grupul «camere ale locuinței»: Dormitor."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 3,
+  "narrowest_shortest_path_layer": 3,
+  "total_intermediate_shortest_path_nodes": 6
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v24_home_seating_scaun",
+     "label": "Scaun"
+    },
+    {
+     "id": "n_v24_home_seating_canapea",
+     "label": "Canapea"
+    },
+    {
+     "id": "n_v24_home_rooms_sufragerie",
+     "label": "Sufragerie"
+    },
+    {
+     "id": "n_v24_home_rooms_dormitor",
+     "label": "Dormitor"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v24_home_seating_scaun",
+      "label": "Scaun"
+     },
+     "to": {
+      "id": "n_v24_home_seating_canapea",
+      "label": "Canapea"
+     },
+     "relation": "same_kind",
+     "label": "mobilier pentru șezut",
+     "strength": 0.9
+    },
+    {
+     "from": {
+      "id": "n_v24_home_seating_canapea",
+      "label": "Canapea"
+     },
+     "to": {
+      "id": "n_v24_home_rooms_sufragerie",
+      "label": "Sufragerie"
+     },
+     "relation": "beginner_recipe",
+     "label": "amenajează sufrageria",
+     "strength": 0.94
+    },
+    {
+     "from": {
+      "id": "n_v24_home_rooms_sufragerie",
+      "label": "Sufragerie"
+     },
+     "to": {
+      "id": "n_v24_home_rooms_dormitor",
+      "label": "Dormitor"
+     },
+     "relation": "part_of_same_home",
+     "label": "camere ale locuinței",
+     "strength": 0.9
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v24_home_seating_scaun",
+     "label": "Scaun"
+    },
+    {
+     "id": "n_v24_home_seating_fotoliu",
+     "label": "Fotoliu"
+    },
+    {
+     "id": "n_v24_home_rooms_sufragerie",
+     "label": "Sufragerie"
+    },
+    {
+     "id": "n_v24_home_rooms_dormitor",
+     "label": "Dormitor"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v24_home_seating_scaun",
+      "label": "Scaun"
+     },
+     "to": {
+      "id": "n_v24_home_seating_fotoliu",
+      "label": "Fotoliu"
+     },
+     "relation": "same_kind",
+     "label": "mobilier pentru șezut",
+     "strength": 0.9
+    },
+    {
+     "from": {
+      "id": "n_v24_home_seating_fotoliu",
+      "label": "Fotoliu"
+     },
+     "to": {
+      "id": "n_v24_home_rooms_sufragerie",
+      "label": "Sufragerie"
+     },
+     "relation": "beginner_recipe",
+     "label": "formează un colț de sufragerie",
+     "strength": 0.94
+    },
+    {
+     "from": {
+      "id": "n_v24_home_rooms_sufragerie",
+      "label": "Sufragerie"
+     },
+     "to": {
+      "id": "n_v24_home_rooms_dormitor",
+      "label": "Dormitor"
+     },
+     "relation": "part_of_same_home",
+     "label": "camere ale locuinței",
+     "strength": 0.9
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v24_home_seating_scaun",
+     "label": "Scaun"
+    },
+    {
+     "id": "n_v4soc_casa",
+     "label": "casă"
+    },
+    {
+     "id": "n_v4via_usa",
+     "label": "ușă"
+    },
+    {
+     "id": "n_v24_home_rooms_dormitor",
+     "label": "Dormitor"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v24_home_seating_scaun",
+      "label": "Scaun"
+     },
+     "to": {
+      "id": "n_v4soc_casa",
+      "label": "casă"
+     },
+     "relation": "beginner_exit",
+     "label": "ține de",
+     "strength": 0.86
+    },
+    {
+     "from": {
+      "id": "n_v4soc_casa",
+      "label": "casă"
+     },
+     "to": {
+      "id": "n_v4via_usa",
+      "label": "ușă"
+     },
+     "relation": "beginner_repair",
+     "label": "legătură intuitivă",
+     "strength": 0.96
+    },
+    {
+     "from": {
+      "id": "n_v4via_usa",
+      "label": "ușă"
+     },
+     "to": {
+      "id": "n_v24_home_rooms_dormitor",
+      "label": "Dormitor"
+     },
+     "relation": "beginner_entry",
+     "label": "duce la",
+     "strength": 0.86
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "14f8efacf32c8e41825a1accdc43c44c9f8660cdbde7686b55d4a47ffbef6741",
+ "review_binding": "sha256:64fcdba7a5c0ea6fe418f996bb0d6dbe56bc22014068488c2cc31dff83f26a87"
+}

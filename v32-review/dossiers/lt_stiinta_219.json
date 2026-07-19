@@ -1,0 +1,274 @@
+{
+ "id": "lt_stiinta_219",
+ "game": "lant",
+ "category": "stiinta",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "e9dc6bc97324dde321c93a798b5547e6206d4918a68e7d7f7ed8a40354569f47",
+ "kg_sha256": "866644edc375ed0e051b94d1fe02ea3aa037a2f5318cab9d944dae8e49a30df8",
+ "lint_findings": [],
+ "start": {
+  "id": "n_v4sti_corp",
+  "label": "corp",
+  "node_type": "concept",
+  "category": "stiinta",
+  "salience": 0.8176,
+  "degree": 16,
+  "incoming_degree": 15,
+  "description": "Structură fizică a unui organism sau obiect studiat în știință."
+ },
+ "target": {
+  "id": "n_v24_weather_precipitation_zapada",
+  "label": "Zăpadă",
+  "node_type": "concept",
+  "category": "stiinta",
+  "salience": 0.91,
+  "degree": 2,
+  "incoming_degree": 2,
+  "description": "Concept cotidian din grupul «precipitații»: Zăpadă."
+ },
+ "optimal": 4,
+ "branch_profile": {
+  "valid_first_hops": 4,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 9
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v4sti_corp",
+     "label": "corp"
+    },
+    {
+     "id": "n_v4sti_ochi",
+     "label": "ochi"
+    },
+    {
+     "id": "n_v2sti_fizica",
+     "label": "Fizică"
+    },
+    {
+     "id": "n_v4sti_aer",
+     "label": "aer"
+    },
+    {
+     "id": "n_v24_weather_precipitation_zapada",
+     "label": "Zăpadă"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v4sti_corp",
+      "label": "corp"
+     },
+     "to": {
+      "id": "n_v4sti_ochi",
+      "label": "ochi"
+     },
+     "relation": "beginner_repair",
+     "label": "legătură intuitivă",
+     "strength": 0.96
+    },
+    {
+     "from": {
+      "id": "n_v4sti_ochi",
+      "label": "ochi"
+     },
+     "to": {
+      "id": "n_v2sti_fizica",
+      "label": "Fizică"
+     },
+     "relation": "related_to",
+     "label": "detectează lumina",
+     "strength": 0.66
+    },
+    {
+     "from": {
+      "id": "n_v2sti_fizica",
+      "label": "Fizică"
+     },
+     "to": {
+      "id": "n_v4sti_aer",
+      "label": "aer"
+     },
+     "relation": "related_to",
+     "label": "are presiune",
+     "strength": 0.75
+    },
+    {
+     "from": {
+      "id": "n_v4sti_aer",
+      "label": "aer"
+     },
+     "to": {
+      "id": "n_v24_weather_precipitation_zapada",
+      "label": "Zăpadă"
+     },
+     "relation": "beginner_entry",
+     "label": "duce la",
+     "strength": 0.86
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v4sti_corp",
+     "label": "corp"
+    },
+    {
+     "id": "n_v2sti_biologie",
+     "label": "Biologie"
+    },
+    {
+     "id": "n_v4gas_apa",
+     "label": "Apă"
+    },
+    {
+     "id": "n_v24_weather_precipitation_ploaie",
+     "label": "Ploaie"
+    },
+    {
+     "id": "n_v24_weather_precipitation_zapada",
+     "label": "Zăpadă"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v4sti_corp",
+      "label": "corp"
+     },
+     "to": {
+      "id": "n_v2sti_biologie",
+      "label": "Biologie"
+     },
+     "relation": "related_to",
+     "label": "studiat la organisme",
+     "strength": 0.85
+    },
+    {
+     "from": {
+      "id": "n_v2sti_biologie",
+      "label": "Biologie"
+     },
+     "to": {
+      "id": "n_v4gas_apa",
+      "label": "Apă"
+     },
+     "relation": "related_to",
+     "label": "susține viața",
+     "strength": 0.78
+    },
+    {
+     "from": {
+      "id": "n_v4gas_apa",
+      "label": "Apă"
+     },
+     "to": {
+      "id": "n_v24_weather_precipitation_ploaie",
+      "label": "Ploaie"
+     },
+     "relation": "beginner_diamond",
+     "label": "două drumuri prin vreme",
+     "strength": 0.93
+    },
+    {
+     "from": {
+      "id": "n_v24_weather_precipitation_ploaie",
+      "label": "Ploaie"
+     },
+     "to": {
+      "id": "n_v24_weather_precipitation_zapada",
+      "label": "Zăpadă"
+     },
+     "relation": "weather_phenomenon",
+     "label": "precipitații",
+     "strength": 0.9
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v4sti_corp",
+     "label": "corp"
+    },
+    {
+     "id": "n_v2sti_stiinta",
+     "label": "Știință"
+    },
+    {
+     "id": "n_v2sti_fizica",
+     "label": "Fizică"
+    },
+    {
+     "id": "n_v4sti_aer",
+     "label": "aer"
+    },
+    {
+     "id": "n_v24_weather_precipitation_zapada",
+     "label": "Zăpadă"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v4sti_corp",
+      "label": "corp"
+     },
+     "to": {
+      "id": "n_v2sti_stiinta",
+      "label": "Știință"
+     },
+     "relation": "related_to",
+     "label": "concept studiat",
+     "strength": 0.65
+    },
+    {
+     "from": {
+      "id": "n_v2sti_stiinta",
+      "label": "Știință"
+     },
+     "to": {
+      "id": "n_v2sti_fizica",
+      "label": "Fizică"
+     },
+     "relation": "related_to",
+     "label": "include ca domeniu",
+     "strength": 0.86
+    },
+    {
+     "from": {
+      "id": "n_v2sti_fizica",
+      "label": "Fizică"
+     },
+     "to": {
+      "id": "n_v4sti_aer",
+      "label": "aer"
+     },
+     "relation": "related_to",
+     "label": "are presiune",
+     "strength": 0.75
+    },
+    {
+     "from": {
+      "id": "n_v4sti_aer",
+      "label": "aer"
+     },
+     "to": {
+      "id": "n_v24_weather_precipitation_zapada",
+      "label": "Zăpadă"
+     },
+     "relation": "beginner_entry",
+     "label": "duce la",
+     "strength": 0.86
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "14f8efacf32c8e41825a1accdc43c44c9f8660cdbde7686b55d4a47ffbef6741",
+ "review_binding": "sha256:d5bad4579c6b6a833c03fa3963fddde90bbf727145cc865da8485a76714df9f3"
+}

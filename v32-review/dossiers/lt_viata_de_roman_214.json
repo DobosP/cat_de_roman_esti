@@ -1,0 +1,128 @@
+{
+ "id": "lt_viata_de_roman_214",
+ "game": "lant",
+ "category": "viata_de_roman",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "d0e08068769e4c18978c20982f184d2019982445790de26a15039fb3e953cfbb",
+ "kg_sha256": "866644edc375ed0e051b94d1fe02ea3aa037a2f5318cab9d944dae8e49a30df8",
+ "lint_findings": [],
+ "start": {
+  "id": "n_v4via_baie",
+  "label": "baie",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.6116,
+  "degree": 18,
+  "incoming_degree": 5,
+  "description": "Încăpere pentru spălat, toaletă și igienă zilnică."
+ },
+ "target": {
+  "id": "n_v24_home_rooms_camera",
+  "label": "Cameră",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.91,
+  "degree": 3,
+  "incoming_degree": 2,
+  "description": "Concept cotidian din grupul «camere ale locuinței»: Cameră."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v4via_baie",
+     "label": "baie"
+    },
+    {
+     "id": "n_v4soc_casa",
+     "label": "casă"
+    },
+    {
+     "id": "n_v24_home_rooms_camera",
+     "label": "Cameră"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v4via_baie",
+      "label": "baie"
+     },
+     "to": {
+      "id": "n_v4soc_casa",
+      "label": "casă"
+     },
+     "relation": "beginner_diamond",
+     "label": "două drumuri prin casă",
+     "strength": 0.93
+    },
+    {
+     "from": {
+      "id": "n_v4soc_casa",
+      "label": "casă"
+     },
+     "to": {
+      "id": "n_v24_home_rooms_camera",
+      "label": "Cameră"
+     },
+     "relation": "beginner_diamond",
+     "label": "două drumuri prin casă",
+     "strength": 0.93
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v4via_baie",
+     "label": "baie"
+    },
+    {
+     "id": "n_v4via_usa",
+     "label": "ușă"
+    },
+    {
+     "id": "n_v24_home_rooms_camera",
+     "label": "Cameră"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v4via_baie",
+      "label": "baie"
+     },
+     "to": {
+      "id": "n_v4via_usa",
+      "label": "ușă"
+     },
+     "relation": "beginner_diamond",
+     "label": "două drumuri prin casă",
+     "strength": 0.93
+    },
+    {
+     "from": {
+      "id": "n_v4via_usa",
+      "label": "ușă"
+     },
+     "to": {
+      "id": "n_v24_home_rooms_camera",
+      "label": "Cameră"
+     },
+     "relation": "beginner_entry",
+     "label": "duce la",
+     "strength": 0.86
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "14f8efacf32c8e41825a1accdc43c44c9f8660cdbde7686b55d4a47ffbef6741",
+ "review_binding": "sha256:c65826553af83e0b241d2470be465a61548bb25db578640f4db699b27fc36bab"
+}

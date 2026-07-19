@@ -1,0 +1,208 @@
+{
+ "id": "cx_societate_295",
+ "game": "conexiuni",
+ "category": "societate",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "67fb267b1628e20d98a3d6e1ff985244d6b4eb5ce59167d19b177ac47b777f05",
+ "kg_sha256": "866644edc375ed0e051b94d1fe02ea3aa037a2f5318cab9d944dae8e49a30df8",
+ "lint_findings": [],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 0
+ },
+ "groups": [
+  {
+   "label": "Vehicule de transport public",
+   "members": [
+    {
+     "id": "n_v24_transport_rail_tren",
+     "label": "Tren",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.94,
+     "degree": 5,
+     "incoming_degree": 2,
+     "description": "Concept cotidian din grupul «transport pe șine»: Tren."
+    },
+    {
+     "id": "n_v24_transport_rail_tramvai",
+     "label": "Tramvai",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.94,
+     "degree": 2,
+     "incoming_degree": 2,
+     "description": "Concept cotidian din grupul «transport pe șine»: Tramvai."
+    },
+    {
+     "id": "n_v24_transport_rail_metrou",
+     "label": "Metrou",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.94,
+     "degree": 1,
+     "incoming_degree": 3,
+     "description": "Concept cotidian din grupul «transport pe șine»: Metrou."
+    },
+    {
+     "id": "n_v24_transport_road_microbuz",
+     "label": "Microbuz",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.88,
+     "degree": 2,
+     "incoming_degree": 2,
+     "description": "Concept cotidian din grupul «vehicule rutiere»: Microbuz."
+    }
+   ]
+  },
+  {
+   "label": "Locuri de plecare și sosire",
+   "members": [
+    {
+     "id": "n_v24_transport_terminals_gara",
+     "label": "Gară",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.9,
+     "degree": 4,
+     "incoming_degree": 2,
+     "description": "Concept cotidian din grupul «puncte de plecare și sosire»: Gară."
+    },
+    {
+     "id": "n_v24_transport_terminals_aeroport",
+     "label": "Aeroport",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.9,
+     "degree": 2,
+     "incoming_degree": 3,
+     "description": "Concept cotidian din grupul «puncte de plecare și sosire»: Aeroport."
+    },
+    {
+     "id": "n_v24_transport_terminals_statie",
+     "label": "Stație",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.9,
+     "degree": 1,
+     "incoming_degree": 3,
+     "description": "Concept cotidian din grupul «puncte de plecare și sosire»: Stație."
+    },
+    {
+     "id": "n_v2soc_port",
+     "label": "Port",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.3664,
+     "degree": 6,
+     "incoming_degree": 7,
+     "description": "Loc amenajat pentru acostarea navelor și schimbul de mărfuri."
+    }
+   ]
+  },
+  {
+   "label": "Destinații cotidiene în oraș",
+   "members": [
+    {
+     "id": "n_v24_places_public_parc",
+     "label": "Parc",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.91,
+     "degree": 3,
+     "incoming_degree": 1,
+     "description": "Concept cotidian din grupul «locuri publice cotidiene»: Parc."
+    },
+    {
+     "id": "n_v24_places_public_farmacie",
+     "label": "Farmacie",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.91,
+     "degree": 2,
+     "incoming_degree": 2,
+     "description": "Concept cotidian din grupul «locuri publice cotidiene»: Farmacie."
+    },
+    {
+     "id": "n_v24_places_public_restaurant",
+     "label": "Restaurant",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.91,
+     "degree": 1,
+     "incoming_degree": 3,
+     "description": "Concept cotidian din grupul «locuri publice cotidiene»: Restaurant."
+    },
+    {
+     "id": "n_v4soc_magazin",
+     "label": "magazin",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.6464,
+     "degree": 16,
+     "incoming_degree": 11,
+     "description": "Loc comercial unde se vând produse către cumpărători."
+    }
+   ]
+  },
+  {
+   "label": "Fenomene meteo",
+   "members": [
+    {
+     "id": "n_v24_weather_precipitation_ploaie",
+     "label": "Ploaie",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.91,
+     "degree": 5,
+     "incoming_degree": 3,
+     "description": "Concept cotidian din grupul «precipitații»: Ploaie."
+    },
+    {
+     "id": "n_v24_weather_precipitation_zapada",
+     "label": "Zăpadă",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.91,
+     "degree": 2,
+     "incoming_degree": 2,
+     "description": "Concept cotidian din grupul «precipitații»: Zăpadă."
+    },
+    {
+     "id": "n_v24_weather_air_vant",
+     "label": "Vânt",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.88,
+     "degree": 3,
+     "incoming_degree": 1,
+     "description": "Concept cotidian din grupul «vreme în atmosferă»: Vânt."
+    },
+    {
+     "id": "n_v24_weather_air_nor",
+     "label": "Nor",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.88,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Concept cotidian din grupul «vreme în atmosferă»: Nor."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Tren",
+   "a_group": "Vehicule de transport public",
+   "b": "Gară",
+   "b_group": "Locuri de plecare și sosire",
+   "strength": 0.99
+  }
+ ],
+ "rubric_sha256": "14f8efacf32c8e41825a1accdc43c44c9f8660cdbde7686b55d4a47ffbef6741",
+ "review_binding": "sha256:d779992cce720012d1dbf11b60a8182f2b7df96c00bfe28df6a2f7e27394f15e"
+}
