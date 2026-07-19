@@ -24,6 +24,8 @@ export interface GameRecord {
   played: number;
   recent: ScoreEntry[]; // newest first, capped
   puzzles?: Record<string, ScoreEntry>;
+  /** Monotonic marker: at least one completed run was not a shared daily. */
+  completedNonDaily: boolean;
 }
 
 const STORAGE_KEY = "cat_wordgame_scores_v1";
@@ -82,7 +84,12 @@ export function recordScore(
   options: RecordScoreOptions = {},
 ): RecordOutcome {
   const board = load();
-  const rec: GameRecord = board[game] ?? { best: null, played: 0, recent: [] };
+  const rec: GameRecord = board[game] ?? {
+    best: null,
+    played: 0,
+    recent: [],
+    completedNonDaily: false,
+  };
   const prev = rec.best;
   const puzzleKey = options.puzzleKey?.trim() || null;
   const entry = normalizeEntry({
@@ -100,6 +107,7 @@ export function recordScore(
   const isPuzzleBest = puzzleKey !== null && (prevPuzzle === null || score > prevPuzzle.score);
   rec.played += 1;
   rec.recent = [entry, ...rec.recent].slice(0, RECENT_CAP);
+  if (!entry.daily) rec.completedNonDaily = true;
   if (isBest) rec.best = entry;
   if (puzzleKey && isPuzzleBest) {
     rec.puzzles = { ...(rec.puzzles ?? {}), [puzzleKey]: entry };
@@ -116,6 +124,11 @@ export function bestScore(game: string): ScoreEntry | null {
 
 export function timesPlayed(game: string): number {
   return load()[game]?.played ?? 0;
+}
+
+/** Whether this player has completed a normal run; daily-only history stays beginner-safe. */
+export function hasCompletedNonDaily(game: string): boolean {
+  return load()[game]?.completedNonDaily ?? false;
 }
 
 export function bestPuzzleScore(game: string, puzzleKey: string | null | undefined): ScoreEntry | null {
@@ -183,7 +196,12 @@ export function importScores(raw: string): ImportOutcome {
   let entries = 0;
 
   for (const [game, rec] of Object.entries(incoming)) {
-    const base: GameRecord = current[game] ?? { best: null, played: 0, recent: [] };
+    const base: GameRecord = current[game] ?? {
+      best: null,
+      played: 0,
+      recent: [],
+      completedNonDaily: false,
+    };
     const recent = mergeEntries(base.recent, rec.recent);
     entries += rec.recent.length;
     const puzzles = mergePuzzles(base.puzzles ?? {}, rec.puzzles ?? {});
@@ -192,6 +210,7 @@ export function importScores(raw: string): ImportOutcome {
       best,
       played: Math.max(base.played, rec.played, recent.length),
       recent,
+      completedNonDaily: base.completedNonDaily || rec.completedNonDaily,
       ...(Object.keys(puzzles).length ? { puzzles } : {}),
     };
   }
@@ -219,10 +238,18 @@ function normalizeBoard(value: unknown): Board {
       if (entry && key.trim()) puzzles[key] = { ...entry, puzzleKey: key };
     }
     const best = normalizeEntry(rawRec.best) ?? bestOf([...recent, ...Object.values(puzzles)]);
+    // The marker is additive and monotonic. Older exports have no marker, so infer it
+    // from every retained completed entry; an entry without `daily` is a normal run.
+    const completedNonDaily =
+      rawRec.completedNonDaily === true ||
+      recent.some((entry) => !entry.daily) ||
+      (best !== null && !best.daily) ||
+      Object.values(puzzles).some((entry) => !entry.daily);
     board[game] = {
       best,
       played: clampNumber(rawRec.played, recent.length),
       recent: recent.sort((a, b) => b.at - a.at).slice(0, RECENT_CAP),
+      completedNonDaily,
       ...(Object.keys(puzzles).length ? { puzzles: capPuzzles(puzzles) } : {}),
     };
   }
