@@ -41,27 +41,27 @@ SOURCE_RING_CAP = 4
 
 @dataclass(frozen=True)
 class Pair:
-    members: tuple[str, str]
-    label: str
+    members: tuple[str, str] = field(repr=False)
+    label: str = field(repr=False)
 
 
 @dataclass
 class PerechiSession:
-    pairs: tuple[Pair, Pair, Pair, Pair]
-    order: list[str]
-    solved: list[int] = field(default_factory=list)
-    wrong_history: list[tuple[str, str]] = field(default_factory=list)
+    pairs: tuple[Pair, Pair, Pair, Pair] = field(repr=False)
+    order: list[str] = field(repr=False)
+    solved: list[int] = field(default_factory=list, repr=False)
+    wrong_history: list[tuple[str, str]] = field(default_factory=list, repr=False)
     mistakes: int = 0
-    hinted_pair: int | None = None
+    hinted_pair: int | None = field(default=None, repr=False)
     hints_used: int = 0
     won: bool = False
     lost: bool = False
     daily: str | None = None
     category: str | None = None
     # Every field below stays inside the server session.
-    source_id: str = ""
-    catalog_id: str = ""
-    source_ring: tuple[str, ...] = ()
+    source_id: str = field(default="", repr=False)
+    catalog_id: str = field(default="", repr=False)
+    source_ring: tuple[str, ...] = field(default=(), repr=False)
 
     def pair_index(self, selected: frozenset[str]) -> int | None:
         for index, pair in enumerate(self.pairs):

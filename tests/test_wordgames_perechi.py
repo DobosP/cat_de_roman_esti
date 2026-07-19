@@ -125,6 +125,47 @@ def test_create_shape_privacy_and_default_store_bounds() -> None:
     _assert_private_preterminal(body, session)
 
 
+def test_dataclass_reprs_hide_answers_tile_order_and_provenance() -> None:
+    client = Client()
+    body = _create(client, seed=38)
+    session = _session(body["game_id"])
+
+    for wrong in _wrong_pairs(session)[:2]:
+        response = _post_json(
+            client,
+            f"{BASE}/games/{body['game_id']}/match",
+            {"ids": wrong},
+        )
+        assert response.status_code == 200
+    assert client.post(f"{BASE}/games/{body['game_id']}/hint").status_code == 200
+    matched = _post_json(
+        client,
+        f"{BASE}/games/{body['game_id']}/match",
+        {"ids": list(session.pairs[0].members)},
+    )
+    assert matched.status_code == 200
+
+    session_repr = repr(session)
+
+    private_values = {
+        *session.order,
+        *(pair.label for pair in session.pairs),
+        session.source_id,
+        session.catalog_id,
+        *session.source_ring,
+    }
+    assert private_values
+    assert all(value not in session_repr for value in private_values)
+    assert "mistakes=2" in session_repr
+    assert "hints_used=1" in session_repr
+    assert "won=False" in session_repr
+
+    for pair in session.pairs:
+        pair_repr = repr(pair)
+        assert pair.label not in pair_repr
+        assert all(member not in pair_repr for member in pair.members)
+
+
 def test_seed_category_and_starter_selection_are_deterministic() -> None:
     client = Client()
     first = _create(client, seed=731, starter=1)
