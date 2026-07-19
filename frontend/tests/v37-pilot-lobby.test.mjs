@@ -8,7 +8,10 @@ const home = read("../src/screens/Home.tsx");
 const css = read("../src/styles/arcade.css");
 
 test("pilot lobby keeps the provisional fun-first game order", () => {
-  const order = [...games.matchAll(/^\s+key: "([^"]+)",$/gm)].map((match) => match[1]);
+  const legacy = new Set(["alchimie", "conexiuni", "contexto", "lant"]);
+  const order = [...games.matchAll(/^\s+key: "([^"]+)",$/gm)]
+    .map((match) => match[1])
+    .filter((key) => legacy.has(key));
   assert.deepEqual(order, ["alchimie", "conexiuni", "contexto", "lant"]);
 });
 

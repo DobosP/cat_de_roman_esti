@@ -1471,6 +1471,8 @@ input:focus-visible {
 .account-btn { text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; }
 
 .rank-row { transition: border-color 0.15s ease; }
+.ranking-game-select { display: none; }
+.ranking-game-tabs { grid-auto-columns: minmax(0, 1fr); }
 .rank-row--me {
   border-color: var(--brand-gold, #ffd166);
   box-shadow: 0 0 0 1px var(--brand-gold, #ffd166) inset;
@@ -1482,3 +1484,15 @@ input:focus-visible {
 .rank-num--1 { color: #ffd166; }
 .rank-num--2 { color: #cfd8e3; }
 .rank-num--3 { color: #e0a06a; }
+
+@media (max-width: 640px) {
+  .ranking-game-tabs { display: none; }
+  .ranking-game-select {
+    display: grid;
+    gap: 6px;
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .ranking-game-select .field { min-height: 44px; }
+}

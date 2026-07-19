@@ -10,17 +10,23 @@ const alchimie = read("../src/screens/Alchimie.tsx");
 const caldRece = read("../src/screens/CaldRece.tsx");
 const lant = read("../src/screens/Lant.tsx");
 const conexiuni = read("../src/screens/Conexiuni.tsx");
+const intrusul = read("../src/screens/Intrusul.tsx");
+const perechi = read("../src/screens/Perechi.tsx");
 
-test("all games teach the loop with a semantic three-step guide and start on easy", () => {
+test("all games teach the loop with a semantic three-step guide", () => {
   assert.match(guide, /<ol className="play-guide"/);
   assert.match(guide, /<li className="play-guide-step"/);
   assert.match(intro, /steps\?: PlayGuideStep\[\]/);
   assert.match(intro, /<PlayGuide steps=\{steps\}/);
 
-  for (const screen of [alchimie, caldRece, lant, conexiuni]) {
+  for (const screen of [alchimie, intrusul, perechi, caldRece, lant, conexiuni]) {
     assert.match(screen, /steps=\{\[/);
-    assert.match(screen, /useState<Difficulty>\("usor"\)/);
     assert.match(screen, /<NextMove/);
+  }
+  // The four configurable games default to easy; derived V38 boards carry their
+  // reviewed difficulty from the server instead of accepting a client override.
+  for (const screen of [alchimie, caldRece, lant, conexiuni]) {
+    assert.match(screen, /useState<Difficulty>\("usor"\)/);
   }
 });
 

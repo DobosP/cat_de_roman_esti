@@ -1,4 +1,4 @@
-// Ranking — the public online leaderboard (one tab per game). Anyone can view it; a line
+// Ranking — the public online leaderboard (one view per game). Anyone can view it; a line
 // only appears here for players who signed in and opted into the ranking. The signed-in
 // viewer sees their own rank highlighted.
 
@@ -9,7 +9,7 @@ import { GAMES, type GameKey } from "../games";
 
 export default function Ranking() {
   const navigate = useNavigate();
-  const [game, setGame] = useState<GameKey>("contexto");
+  const [game, setGame] = useState<GameKey>("alchimie");
   const [data, setData] = useState<RankingResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -40,7 +40,22 @@ export default function Ranking() {
           </button>
         </div>
 
-        <div className="segment" role="group" aria-label="Alege jocul">
+        <label className="ranking-game-select">
+          <span>Alege jocul</span>
+          <select
+            className="field"
+            value={game}
+            onChange={(event) => setGame(event.target.value as GameKey)}
+          >
+            {GAMES.map((g) => (
+              <option key={g.key} value={g.key}>
+                {g.title}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <div className="segment ranking-game-tabs" role="group" aria-label="Alege jocul">
           {GAMES.map((g) => (
             <button
               key={g.key}

@@ -402,6 +402,86 @@ def test_conexiuni_hides_solution_until_over() -> None:
     assert len(last["solution"]) == NUM_GROUPS
 
 
+def test_intrusul_hides_roles_labels_and_private_ranking_until_over() -> None:
+    from cat_de_roman_esti.wordgames import intrusul
+
+    c = client()
+    created = c.post("/api/wordgames/intrusul/games?seed=38&starter=1").json()
+    gid = created["game_id"]
+    session = intrusul.store.get(gid)
+    assert session is not None
+
+    private_keys = {
+        "source_id",
+        "catalog_id",
+        "source_ring",
+        "standard_rank",
+        "starter_rank",
+        "starter_score",
+    }
+    for body in (created, c.get(f"/api/wordgames/intrusul/games/{gid}").json()):
+        assert "solution" not in body and "score" not in body and "share" not in body
+        assert not (private_keys & _collect_keys(body))
+        assert session.group_label not in _collect_strings(body)
+
+    wrong = _post_json(
+        c,
+        f"/api/wordgames/intrusul/games/{gid}/guess",
+        {"id": session.members[0]},
+    )
+    assert "solution" not in wrong and session.group_label not in _collect_strings(wrong)
+
+    over = _post_json(
+        c,
+        f"/api/wordgames/intrusul/games/{gid}/guess",
+        {"id": session.intruder},
+    )
+    assert over["solution"]["intruder"]["id"] == session.intruder
+    assert over["solution"]["group"]["label"] == session.group_label
+
+
+def test_perechi_hides_pair_map_and_private_ranking_until_earned() -> None:
+    from cat_de_roman_esti.wordgames import perechi
+
+    c = client()
+    created = c.post("/api/wordgames/perechi/games?seed=38&starter=1").json()
+    gid = created["game_id"]
+    session = perechi.store.get(gid)
+    assert session is not None
+    hidden_labels = {pair.label for pair in session.pairs}
+
+    for body in (created, c.get(f"/api/wordgames/perechi/games/{gid}").json()):
+        assert "solution" not in body and "score" not in body and "share" not in body
+        assert not hidden_labels.intersection(_collect_strings(body))
+        assert not {
+            "source_id",
+            "catalog_id",
+            "source_ring",
+            "standard_rank",
+            "starter_rank",
+        }.intersection(_collect_keys(body))
+
+    earned = _post_json(
+        c,
+        f"/api/wordgames/perechi/games/{gid}/match",
+        {"ids": list(session.pairs[0].members)},
+    )
+    assert earned["pair"]["label"] == session.pairs[0].label
+    assert not {pair.label for pair in session.pairs[1:]}.intersection(
+        _collect_strings(earned)
+    )
+
+    over = earned
+    for pair in session.pairs[1:]:
+        over = _post_json(
+            c,
+            f"/api/wordgames/perechi/games/{gid}/match",
+            {"ids": list(pair.members)},
+        )
+    assert over["won"] is True
+    assert {pair["label"] for pair in over["solution"]} == hidden_labels
+
+
 # ------------------------------------------------------------- openapi / manifest surface
 EXPECTED_OPERATION_IDS = {
     "meta_health",
@@ -428,6 +508,14 @@ EXPECTED_OPERATION_IDS = {
     "conexiuni_get_game",
     "conexiuni_guess",
     "conexiuni_clue",
+    "intrusul_create_game",
+    "intrusul_get_game",
+    "intrusul_guess",
+    "intrusul_hint",
+    "perechi_create_game",
+    "perechi_get_game",
+    "perechi_match",
+    "perechi_hint",
 }
 
 
