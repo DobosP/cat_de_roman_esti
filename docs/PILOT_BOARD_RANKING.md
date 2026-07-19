@@ -61,6 +61,10 @@ the explicit maintainer action after a reviewed pack, KG, rubric, or formula cha
 fixture copies must stay byte-identical, and `scripts/validate_games_pack.py` plus the
 critique gate still run independently.
 
+V38 deliberately leaves this selector and its daily hash namespace unchanged. Intrusul and
+Perechi use their own source-balanced derived catalog; see
+[`V38_DERIVED_GAMES.md`](V38_DERIVED_GAMES.md) and ADR-0052.
+
 ## Pilot interpretation
 
 Weighted selection increases exposure to stronger eligible boards while keeping every
