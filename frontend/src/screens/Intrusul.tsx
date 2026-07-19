@@ -24,7 +24,7 @@ import { ResultCard } from "../components/ResultCard";
 import { gameByKey } from "../games";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
-import { bestScore, timesPlayed } from "../scores";
+import { bestScore, hasCompletedNonDaily } from "../scores";
 import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 import { sound } from "../sound";
 import "../styles/intrusul.css";
@@ -74,7 +74,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
       const opts: CreateIntrusulOpts = daily
         ? { daily }
         : {
-            starter: timesPlayed(GAME_KEY) === 0,
+            starter: !hasCompletedNonDaily(GAME_KEY),
             previousGameId,
           };
       try {
