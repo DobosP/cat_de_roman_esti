@@ -6,6 +6,11 @@ import { AnimatePresence, m } from "framer-motion";
 import { Button, type ToastKind } from "@roedu/ui";
 import { ApiError } from "../api/client";
 import {
+  acquireFlight,
+  recoverAuthoritative,
+  releaseFlight,
+} from "../asyncControl.mjs";
+import {
   perechiApi,
   type CreatePerechiOpts,
   type PerechiState,
@@ -40,6 +45,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   const active = useActiveGame(GAME_KEY);
   const recordOnce = useRecordScore(GAME_KEY);
   const resumeOnce = useRef(false);
+  const startInFlight = useRef(false);
   const actionInFlight = useRef(false);
   const [state, setState] = useState<PerechiState | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
@@ -53,9 +59,13 @@ export default function Perechi({ onExit, onToast }: Props) {
   const finished = Boolean(state?.won || state?.lost);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const best = useMemo(() => bestScore(GAME_KEY), [state]);
+  const exitSafely = useCallback(() => {
+    if (!startInFlight.current) onExit();
+  }, [onExit]);
 
   const start = useCallback(
     async ({ daily, previousGameId }: StartOpts = {}) => {
+      if (!acquireFlight(startInFlight)) return;
       setLoading(true);
       setSelected(null);
       setChecking(null);
@@ -80,6 +90,7 @@ export default function Perechi({ onExit, onToast }: Props) {
           "error",
         );
       } finally {
+        releaseFlight(startInFlight);
         setLoading(false);
       }
     },
@@ -98,21 +109,23 @@ export default function Perechi({ onExit, onToast }: Props) {
     void (async () => {
       try {
         const fresh = await perechiApi.get(gameId);
-        if (fresh.won || fresh.lost) {
-          active.forget();
-          return;
-        }
         setState(fresh);
         setSelected(null);
         setChecking(null);
-        setFeedback("Joc reluat. Atinge primul cuvânt.");
-      } catch {
-        active.forget();
+        setFeedback(
+          fresh.won || fresh.lost ? null : "Joc reluat. Atinge primul cuvânt.",
+        );
+      } catch (error) {
+        if (error instanceof ApiError && error.status === 404) {
+          active.forget();
+        } else {
+          onToast("Nu am putut relua jocul. Încercăm din nou la următoarea deschidere.", "error");
+        }
       } finally {
         setLoading(false);
       }
     })();
-  }, [active]);
+  }, [active, onToast]);
 
   const puzzleKey = useMemo(() => {
     if (!state || !finished || !state.solution) return null;
@@ -151,21 +164,37 @@ export default function Perechi({ onExit, onToast }: Props) {
     if (outcome.isBest || outcome.isPuzzleBest) sound.playRecord();
   }, [active, finished, puzzleKey, recordOnce, state]);
 
-  const refresh = useCallback(async (gameId: string) => {
-    try {
-      const fresh = await perechiApi.get(gameId);
+  const reconcile = useCallback(
+    async (previous: PerechiState, action: "match" | "hint") => {
+      const recovered = await recoverAuthoritative(() => perechiApi.get(previous.game_id));
+      if (!recovered.ok) {
+        setFeedback("Nu am putut confirma acțiunea. Jocul rămâne salvat; încearcă din nou.");
+        return null;
+      }
+      const fresh = recovered.value;
       setState(fresh);
       setSelected(null);
+      setChecking(null);
+      if (fresh.won || fresh.lost) {
+        setFeedback(null);
+      } else if (action === "hint" && fresh.hints_used > previous.hints_used && fresh.hint) {
+        setFeedback(`Indiciu: ${fresh.hint.label}. Atinge cele două cuvinte marcate.`);
+      } else if (action === "match" && fresh.solved_count > previous.solved_count) {
+        setFeedback("Perechea a fost înregistrată. Continuă de aici.");
+      } else if (action === "match" && fresh.mistakes > previous.mistakes) {
+        setFeedback("Încercarea a fost înregistrată. Continuă de aici.");
+      } else {
+        setFeedback("Joc sincronizat. Poți continua.");
+      }
       return fresh;
-    } catch {
-      return null;
-    }
-  }, []);
+    },
+    [],
+  );
 
   const submitPair = useCallback(
     async (ids: [string, string]) => {
-      if (!state || finished || busy || actionInFlight.current) return;
-      actionInFlight.current = true;
+      if (!state || finished || busy || !acquireFlight(actionInFlight)) return;
+      setChecking(ids);
       setBusy(true);
       try {
         const result = await perechiApi.match(state.game_id, ids);
@@ -185,27 +214,16 @@ export default function Perechi({ onExit, onToast }: Props) {
           );
           sound.playError();
         }
-      } catch (error) {
-        sound.playError();
-        const fresh =
-          error instanceof ApiError && (error.status === 400 || error.status === 409)
-            ? await refresh(state.game_id)
-            : null;
-        if (!fresh?.won && !fresh?.lost) {
-          onToast(
-            error instanceof ApiError
-              ? error.message || `Pereche respinsă (${error.status}).`
-              : "Pereche respinsă.",
-            "error",
-          );
-        }
+      } catch {
+        const fresh = await reconcile(state, "match");
+        if (!fresh) sound.playError();
       } finally {
-        actionInFlight.current = false;
+        releaseFlight(actionInFlight);
         setChecking(null);
         setBusy(false);
       }
     },
-    [busy, finished, onToast, refresh, state],
+    [busy, finished, reconcile, state],
   );
 
   const choose = useCallback(
@@ -223,14 +241,21 @@ export default function Perechi({ onExit, onToast }: Props) {
         return;
       }
       const pair: [string, string] = [selected, id];
-      setChecking(pair);
       void submitPair(pair);
     },
     [busy, finished, selected, state, submitPair],
   );
 
   const requestHint = useCallback(async () => {
-    if (!state || finished || busy || !state.hint_available) return;
+    if (
+      !state ||
+      finished ||
+      busy ||
+      !state.hint_available ||
+      !acquireFlight(actionInFlight)
+    ) {
+      return;
+    }
     setBusy(true);
     try {
       const fresh = await perechiApi.hint(state.game_id);
@@ -238,16 +263,14 @@ export default function Perechi({ onExit, onToast }: Props) {
       setSelected(null);
       setFeedback(`Indiciu: ${fresh.hint.label}. Atinge cele două cuvinte marcate.`);
       sound.playSelect();
-    } catch (error) {
-      sound.playError();
-      onToast(
-        error instanceof ApiError ? error.message : "Nu am putut arăta indiciul.",
-        "error",
-      );
+    } catch {
+      const fresh = await reconcile(state, "hint");
+      if (!fresh) sound.playError();
     } finally {
+      releaseFlight(actionInFlight);
       setBusy(false);
     }
-  }, [busy, finished, onToast, state]);
+  }, [busy, finished, reconcile, state]);
 
   const copyShare = useCallback(async () => {
     if (!sharePayload) return;
@@ -258,7 +281,7 @@ export default function Perechi({ onExit, onToast }: Props) {
     return (
       <div className="screen-pad fill">
         <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
-          <GameShell onExit={onExit} accent={DEF.accent} />
+          <GameShell onExit={exitSafely} accent={DEF.accent} />
           <GameIntro
             icon={DEF.icon}
             title={DEF.title}
@@ -286,7 +309,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   return (
     <div className="screen-pad fill perechi-game">
       <div className="container col game-container" style={{ gap: 14, paddingBottom: 32 }}>
-        <GameShell onExit={onExit} accent={DEF.accent} title={DEF.title}>
+        <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title}>
           <Hud>
             {state.daily && <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} />}
             <StatBadge label="PERECHI" value={`${state.solved_count}/4`} accent={DEF.accent} />
@@ -418,14 +441,16 @@ export default function Perechi({ onExit, onToast }: Props) {
             score={state.score}
             isRecord={recordHit}
             isPuzzleRecord={puzzleRecordHit}
+            actionsBusy={loading}
             shareText={sharePayload}
             onCopy={copyShare}
             onReplay={() => void start({ previousGameId: state.game_id })}
             onOptions={() => {
+              if (startInFlight.current) return;
               active.forget();
               setState(null);
             }}
-            onExit={onExit}
+            onExit={exitSafely}
           >
             <div className="perechi-solution">
               {state.solution.map((pair) => (
