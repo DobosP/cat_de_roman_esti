@@ -1,0 +1,293 @@
+{
+ "id": "al_viata_de_roman_098",
+ "game": "alchimie",
+ "category": "viata_de_roman",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "eb95fff367dc14b119cf21772e83ce587d07b2ff7f917756b1229e2e2df801e0",
+ "kg_sha256": "93f7f7f1e2df03bab42ef1b87912c6b0b3c04a529cbac0584cc46bc435c99218",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v23via_telefonul_fara_fir",
+  "label": "Telefonul fără fir",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.8,
+  "degree": 3,
+  "incoming_degree": 3,
+  "description": "Joc de comunicare în care un mesaj este șoptit din jucător în jucător și comparat la final cu forma inițială."
+ },
+ "seeds": [
+  {
+   "id": "n_v23via_elasticul",
+   "label": "Elasticul",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.75,
+   "degree": 3,
+   "incoming_degree": 3,
+   "description": "Joc de mișcare în care copiii execută sărituri peste un elastic întins între picioarele a doi participanți."
+  },
+  {
+   "id": "n_v23via_tara_tara_vrem_ostasi",
+   "label": "Țară, țară, vrem ostași!",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.72,
+   "degree": 3,
+   "incoming_degree": 3,
+   "description": "Joc de echipă al copilăriei în care două șiruri de jucători se cheamă pe rând și încearcă să rupă lanțul advers."
+  },
+  {
+   "id": "n_v23via_ratele_si_vinatorii",
+   "label": "Rațele și vânătorii",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.68,
+   "degree": 3,
+   "incoming_degree": 3,
+   "description": "Joc cu mingea în care jucătorii din centru evită aruncările celor aflați la marginile terenului."
+  },
+  {
+   "id": "n_vdr_sotron",
+   "label": "Șotronul",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.3802,
+   "degree": 7,
+   "incoming_degree": 7,
+   "description": "Joc de copii desenat cu cretă pe asfalt, cu pătrate sărite într-un picior."
+  },
+  {
+   "id": "n_v23via_nu_te_supara_frate",
+   "label": "Nu te supăra, frate!",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.82,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Joc de masă din familia Ludo, în care pionii înaintează pe traseu în funcție de aruncarea zarului."
+  },
+  {
+   "id": "n_v23via_piticot",
+   "label": "Piticot",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.68,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Joc de masă pentru copii în care pionii avansează cu zarul pe un traseu ilustrat până la căsuța finală."
+  }
+ ],
+ "target_depth": 3,
+ "craft_profile": {
+  "opening_pairs": 9,
+  "closure_size": 111,
+  "target_generation": 2
+ },
+ "productive_openings": [
+  {
+   "pair": [
+    {
+     "id": "n_v23via_elasticul",
+     "label": "Elasticul"
+    },
+    {
+     "id": "n_v23via_ratele_si_vinatorii",
+     "label": "Rațele și vânătorii"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v2via_jocuri_copilarie",
+     "label": "Jocuri de copilărie"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v23via_elasticul",
+     "label": "Elasticul"
+    },
+    {
+     "id": "n_v23via_tara_tara_vrem_ostasi",
+     "label": "Țară, țară, vrem ostași!"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v2via_jocuri_copilarie",
+     "label": "Jocuri de copilărie"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v23via_elasticul",
+     "label": "Elasticul"
+    },
+    {
+     "id": "n_vdr_sotron",
+     "label": "Șotronul"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v2via_jocuri_copilarie",
+     "label": "Jocuri de copilărie"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v23via_nu_te_supara_frate",
+     "label": "Nu te supăra, frate!"
+    },
+    {
+     "id": "n_v23via_piticot",
+     "label": "Piticot"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_vdr_copilaria_anilor_90",
+     "label": "Copilăria anilor 90"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v23via_nu_te_supara_frate",
+     "label": "Nu te supăra, frate!"
+    },
+    {
+     "id": "n_vdr_sotron",
+     "label": "Șotronul"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_vdr_copilaria_anilor_90",
+     "label": "Copilăria anilor 90"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v23via_piticot",
+     "label": "Piticot"
+    },
+    {
+     "id": "n_vdr_sotron",
+     "label": "Șotronul"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_vdr_copilaria_anilor_90",
+     "label": "Copilăria anilor 90"
+    }
+   ]
+  }
+ ],
+ "minimum_action_recipe": [
+  {
+   "pair": [
+    {
+     "id": "n_v23via_elasticul",
+     "label": "Elasticul"
+    },
+    {
+     "id": "n_v23via_ratele_si_vinatorii",
+     "label": "Rațele și vânătorii"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v2via_jocuri_copilarie",
+     "label": "Jocuri de copilărie"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v2via_jocuri_copilarie",
+     "label": "Jocuri de copilărie"
+    },
+    {
+     "id": "n_vdr_sotron",
+     "label": "Șotronul"
+    }
+   ],
+   "result_count": 3,
+   "results": [
+    {
+     "id": "n_vdr_copilaria_anilor_90",
+     "label": "Copilăria anilor 90"
+    },
+    {
+     "id": "n_vdr_joaca_in_fata_blocului",
+     "label": "Joaca în fața blocului"
+    },
+    {
+     "id": "n_vdr_abtibilduri",
+     "label": "Abțibildurile"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v2via_jocuri_copilarie",
+     "label": "Jocuri de copilărie"
+    },
+    {
+     "id": "n_vdr_copilaria_anilor_90",
+     "label": "Copilăria anilor 90"
+    }
+   ],
+   "result_count": 6,
+   "results": [
+    {
+     "id": "n_v23via_telefonul_fara_fir",
+     "label": "Telefonul fără fir"
+    },
+    {
+     "id": "n_vdr_eugenia",
+     "label": "Biscuiții Eugenia"
+    },
+    {
+     "id": "n_vdr_lapte_si_corn",
+     "label": "Lapte și corn"
+    },
+    {
+     "id": "n_vdr_guma_turbo",
+     "label": "Guma Turbo"
+    },
+    {
+     "id": "n_vdr_cheia_de_la_gat",
+     "label": "Cheia de la gât"
+    },
+    {
+     "id": "n_vdr_oracol_scolar",
+     "label": "Oracolul școlar"
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "14f8efacf32c8e41825a1accdc43c44c9f8660cdbde7686b55d4a47ffbef6741",
+ "review_binding": "sha256:1da42880288915d692c686a6056d58754cff5166f9c767d599eb3f8b34dc61a0"
+}

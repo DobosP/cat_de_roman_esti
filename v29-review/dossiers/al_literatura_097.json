@@ -1,0 +1,306 @@
+{
+ "id": "al_literatura_097",
+ "game": "alchimie",
+ "category": "literatura",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "e3a1787ac395a9d1b711df00ae99f25e235d8d3f71425464f3dabc1ec0dda064",
+ "kg_sha256": "93f7f7f1e2df03bab42ef1b87912c6b0b3c04a529cbac0584cc46bc435c99218",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v23lit_fat_frumos",
+  "label": "Făt-Frumos",
+  "node_type": "concept",
+  "category": "literatura",
+  "salience": 0.9,
+  "degree": 5,
+  "incoming_degree": 5,
+  "description": "Erou arhetipal al basmelor românești, cunoscut pentru curaj și pentru confruntările cu zmei și alte încercări."
+ },
+ "seeds": [
+  {
+   "id": "n_v23lit_praslea_cel_voinic",
+   "label": "Prâslea cel voinic și merele de aur",
+   "node_type": "work",
+   "category": "literatura",
+   "salience": 0.82,
+   "degree": 5,
+   "incoming_degree": 5,
+   "description": "Basm popular cules de Petre Ispirescu, în care fiul cel mic al împăratului urmărește hoții merelor de aur."
+  },
+  {
+   "id": "n_v23lit_tinerete_fara_batranete",
+   "label": "Tinerețe fără bătrânețe și viață fără de moarte",
+   "node_type": "work",
+   "category": "literatura",
+   "salience": 0.82,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Basm popular cules de Petre Ispirescu despre un prinț care pornește în căutarea tinereții veșnice."
+  },
+  {
+   "id": "n_v23lit_greuceanu",
+   "label": "Greuceanu",
+   "node_type": "work",
+   "category": "literatura",
+   "salience": 0.7,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Basm popular cules de Petre Ispirescu despre eroul care înfruntă zmeii și readuce soarele și luna pe cer."
+  },
+  {
+   "id": "n_v23lit_capra_cu_trei_iezi",
+   "label": "Capra cu trei iezi",
+   "node_type": "work",
+   "category": "literatura",
+   "salience": 0.92,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Poveste publicată de Ion Creangă în 1875, despre o capră, cei trei iezi ai ei și lupul care încearcă să intre în casă."
+  },
+  {
+   "id": "n_v23lit_punguta_cu_doi_bani",
+   "label": "Punguța cu doi bani",
+   "node_type": "work",
+   "category": "literatura",
+   "salience": 0.88,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Poveste de Ion Creangă despre cocoșul moșneagului, care pornește să-și recupereze punguța cu doi bani."
+  },
+  {
+   "id": "n_v23lit_ursul_pacalit_de_vulpe",
+   "label": "Ursul păcălit de vulpe",
+   "node_type": "work",
+   "category": "literatura",
+   "salience": 0.86,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Poveste de Ion Creangă în care vulpea îl păcălește pe urs să încerce să prindă pește cu coada."
+  }
+ ],
+ "target_depth": 2,
+ "craft_profile": {
+  "opening_pairs": 15,
+  "closure_size": 136,
+  "target_generation": 2
+ },
+ "productive_openings": [
+  {
+   "pair": [
+    {
+     "id": "n_v23lit_capra_cu_trei_iezi",
+     "label": "Capra cu trei iezi"
+    },
+    {
+     "id": "n_v23lit_ursul_pacalit_de_vulpe",
+     "label": "Ursul păcălit de vulpe"
+    }
+   ],
+   "result_count": 4,
+   "results": [
+    {
+     "id": "n_v3lit_carte",
+     "label": "Carte"
+    },
+    {
+     "id": "n_v23lit_povestea_porcului",
+     "label": "Povestea porcului"
+    },
+    {
+     "id": "n_ion_creanga",
+     "label": "Ion Creangă"
+    },
+    {
+     "id": "n_v3lit_poveste",
+     "label": "Poveste"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v23lit_capra_cu_trei_iezi",
+     "label": "Capra cu trei iezi"
+    },
+    {
+     "id": "n_v23lit_punguta_cu_doi_bani",
+     "label": "Punguța cu doi bani"
+    }
+   ],
+   "result_count": 3,
+   "results": [
+    {
+     "id": "n_v3lit_carte",
+     "label": "Carte"
+    },
+    {
+     "id": "n_ion_creanga",
+     "label": "Ion Creangă"
+    },
+    {
+     "id": "n_v3lit_poveste",
+     "label": "Poveste"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v23lit_greuceanu",
+     "label": "Greuceanu"
+    },
+    {
+     "id": "n_v23lit_praslea_cel_voinic",
+     "label": "Prâslea cel voinic și merele de aur"
+    }
+   ],
+   "result_count": 3,
+   "results": [
+    {
+     "id": "n_v3lit_carte",
+     "label": "Carte"
+    },
+    {
+     "id": "n_v23lit_zmeul",
+     "label": "Zmeul"
+    },
+    {
+     "id": "n_v17lit_petre_ispirescu",
+     "label": "Petre Ispirescu"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v23lit_punguta_cu_doi_bani",
+     "label": "Punguța cu doi bani"
+    },
+    {
+     "id": "n_v23lit_ursul_pacalit_de_vulpe",
+     "label": "Ursul păcălit de vulpe"
+    }
+   ],
+   "result_count": 3,
+   "results": [
+    {
+     "id": "n_v3lit_carte",
+     "label": "Carte"
+    },
+    {
+     "id": "n_ion_creanga",
+     "label": "Ion Creangă"
+    },
+    {
+     "id": "n_v3lit_poveste",
+     "label": "Poveste"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v23lit_greuceanu",
+     "label": "Greuceanu"
+    },
+    {
+     "id": "n_v23lit_tinerete_fara_batranete",
+     "label": "Tinerețe fără bătrânețe și viață fără de moarte"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v3lit_carte",
+     "label": "Carte"
+    },
+    {
+     "id": "n_v17lit_petre_ispirescu",
+     "label": "Petre Ispirescu"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v23lit_praslea_cel_voinic",
+     "label": "Prâslea cel voinic și merele de aur"
+    },
+    {
+     "id": "n_v23lit_tinerete_fara_batranete",
+     "label": "Tinerețe fără bătrânețe și viață fără de moarte"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v3lit_carte",
+     "label": "Carte"
+    },
+    {
+     "id": "n_v17lit_petre_ispirescu",
+     "label": "Petre Ispirescu"
+    }
+   ]
+  }
+ ],
+ "minimum_action_recipe": [
+  {
+   "pair": [
+    {
+     "id": "n_v23lit_capra_cu_trei_iezi",
+     "label": "Capra cu trei iezi"
+    },
+    {
+     "id": "n_v23lit_ursul_pacalit_de_vulpe",
+     "label": "Ursul păcălit de vulpe"
+    }
+   ],
+   "result_count": 4,
+   "results": [
+    {
+     "id": "n_v3lit_poveste",
+     "label": "Poveste"
+    },
+    {
+     "id": "n_v3lit_carte",
+     "label": "Carte"
+    },
+    {
+     "id": "n_v23lit_povestea_porcului",
+     "label": "Povestea porcului"
+    },
+    {
+     "id": "n_ion_creanga",
+     "label": "Ion Creangă"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v23lit_tinerete_fara_batranete",
+     "label": "Tinerețe fără bătrânețe și viață fără de moarte"
+    },
+    {
+     "id": "n_v3lit_poveste",
+     "label": "Poveste"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v23lit_fat_frumos",
+     "label": "Făt-Frumos"
+    },
+    {
+     "id": "n_v17lit_petre_ispirescu",
+     "label": "Petre Ispirescu"
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "14f8efacf32c8e41825a1accdc43c44c9f8660cdbde7686b55d4a47ffbef6741",
+ "review_binding": "sha256:6ac5605656f2141e9b448cae3fb401dc1a3b01d88b40e45b2a1090721399f69d"
+}

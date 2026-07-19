@@ -1,0 +1,274 @@
+{
+ "id": "lt_gastronomie_218",
+ "game": "lant",
+ "category": "gastronomie",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "bcc602bc525a0b16b69cfc4f49987d6435dbc2e376df13b1752a83fd90f42637",
+ "kg_sha256": "93f7f7f1e2df03bab42ef1b87912c6b0b3c04a529cbac0584cc46bc435c99218",
+ "lint_findings": [],
+ "start": {
+  "id": "n_v2gas_ciorba",
+  "label": "Ciorbă",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.8872,
+  "degree": 10,
+  "incoming_degree": 11,
+  "description": "Fel lichid acru sau dres, foarte prezent în bucătăria românească."
+ },
+ "target": {
+  "id": "n_v24_food_salad_veg_morcov",
+  "label": "Morcov",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.91,
+  "degree": 3,
+  "incoming_degree": 2,
+  "description": "Concept cotidian din grupul «legume pentru salată»: Morcov."
+ },
+ "optimal": 4,
+ "branch_profile": {
+  "valid_first_hops": 6,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 16
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v2gas_ciorba",
+     "label": "Ciorbă"
+    },
+    {
+     "id": "n_gas_ciorba_burta",
+     "label": "Ciorbă de burtă"
+    },
+    {
+     "id": "n_gas_muraturi",
+     "label": "Murături"
+    },
+    {
+     "id": "n_v4gas_legume",
+     "label": "Legume"
+    },
+    {
+     "id": "n_v24_food_salad_veg_morcov",
+     "label": "Morcov"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v2gas_ciorba",
+      "label": "Ciorbă"
+     },
+     "to": {
+      "id": "n_gas_ciorba_burta",
+      "label": "Ciorbă de burtă"
+     },
+     "relation": "is_a",
+     "label": "este ciorbă",
+     "strength": 0.9
+    },
+    {
+     "from": {
+      "id": "n_gas_ciorba_burta",
+      "label": "Ciorbă de burtă"
+     },
+     "to": {
+      "id": "n_gas_muraturi",
+      "label": "Murături"
+     },
+     "relation": "related_to",
+     "label": "acid lângă",
+     "strength": 0.42
+    },
+    {
+     "from": {
+      "id": "n_gas_muraturi",
+      "label": "Murături"
+     },
+     "to": {
+      "id": "n_v4gas_legume",
+      "label": "Legume"
+     },
+     "relation": "part_of",
+     "label": "se conservă ca",
+     "strength": 0.82
+    },
+    {
+     "from": {
+      "id": "n_v4gas_legume",
+      "label": "Legume"
+     },
+     "to": {
+      "id": "n_v24_food_salad_veg_morcov",
+      "label": "Morcov"
+     },
+     "relation": "beginner_repair",
+     "label": "legătură intuitivă",
+     "strength": 0.96
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v2gas_ciorba",
+     "label": "Ciorbă"
+    },
+    {
+     "id": "n_gas_ciorba_radauteana",
+     "label": "Ciorbă rădăuțeană"
+    },
+    {
+     "id": "n_net_jamila_cuisine",
+     "label": "Jamila Cuisine"
+    },
+    {
+     "id": "n_v4gas_mancare",
+     "label": "Mâncare"
+    },
+    {
+     "id": "n_v24_food_salad_veg_morcov",
+     "label": "Morcov"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v2gas_ciorba",
+      "label": "Ciorbă"
+     },
+     "to": {
+      "id": "n_gas_ciorba_radauteana",
+      "label": "Ciorbă rădăuțeană"
+     },
+     "relation": "is_a",
+     "label": "este ciorbă",
+     "strength": 0.9
+    },
+    {
+     "from": {
+      "id": "n_gas_ciorba_radauteana",
+      "label": "Ciorbă rădăuțeană"
+     },
+     "to": {
+      "id": "n_net_jamila_cuisine",
+      "label": "Jamila Cuisine"
+     },
+     "relation": "related_to",
+     "label": "rețete online",
+     "strength": 0.46
+    },
+    {
+     "from": {
+      "id": "n_net_jamila_cuisine",
+      "label": "Jamila Cuisine"
+     },
+     "to": {
+      "id": "n_v4gas_mancare",
+      "label": "Mâncare"
+     },
+     "relation": "related_to",
+     "label": "rețetă căutată",
+     "strength": 0.64
+    },
+    {
+     "from": {
+      "id": "n_v4gas_mancare",
+      "label": "Mâncare"
+     },
+     "to": {
+      "id": "n_v24_food_salad_veg_morcov",
+      "label": "Morcov"
+     },
+     "relation": "beginner_entry",
+     "label": "duce la",
+     "strength": 0.86
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v2gas_ciorba",
+     "label": "Ciorbă"
+    },
+    {
+     "id": "n_v4gas_apa",
+     "label": "Apă"
+    },
+    {
+     "id": "n_v24_action_food_a_bea",
+     "label": "A bea"
+    },
+    {
+     "id": "n_v4gas_mancare",
+     "label": "Mâncare"
+    },
+    {
+     "id": "n_v24_food_salad_veg_morcov",
+     "label": "Morcov"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v2gas_ciorba",
+      "label": "Ciorbă"
+     },
+     "to": {
+      "id": "n_v4gas_apa",
+      "label": "Apă"
+     },
+     "relation": "part_of",
+     "label": "intră în",
+     "strength": 0.84
+    },
+    {
+     "from": {
+      "id": "n_v4gas_apa",
+      "label": "Apă"
+     },
+     "to": {
+      "id": "n_v24_action_food_a_bea",
+      "label": "A bea"
+     },
+     "relation": "used_for_action",
+     "label": "se bea",
+     "strength": 0.99
+    },
+    {
+     "from": {
+      "id": "n_v24_action_food_a_bea",
+      "label": "A bea"
+     },
+     "to": {
+      "id": "n_v4gas_mancare",
+      "label": "Mâncare"
+     },
+     "relation": "beginner_exit",
+     "label": "ține de",
+     "strength": 0.86
+    },
+    {
+     "from": {
+      "id": "n_v4gas_mancare",
+      "label": "Mâncare"
+     },
+     "to": {
+      "id": "n_v24_food_salad_veg_morcov",
+      "label": "Morcov"
+     },
+     "relation": "beginner_entry",
+     "label": "duce la",
+     "strength": 0.86
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "14f8efacf32c8e41825a1accdc43c44c9f8660cdbde7686b55d4a47ffbef6741",
+ "review_binding": "sha256:33b506e26d89b1d16b659569cd8944f2d0c328db8f992840393674a84d28beb3"
+}

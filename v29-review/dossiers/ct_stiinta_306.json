@@ -1,0 +1,58 @@
+{
+ "id": "ct_stiinta_306",
+ "game": "contexto",
+ "category": "stiinta",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "09cc81a5bd2c238f9c9b6c854586d0a5dd75fdff5ba05297e808f18535e9c6c3",
+ "kg_sha256": "93f7f7f1e2df03bab42ef1b87912c6b0b3c04a529cbac0584cc46bc435c99218",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v24_weather_precipitation_ploaie",
+  "label": "Ploaie",
+  "node_type": "concept",
+  "category": "stiinta",
+  "salience": 0.91,
+  "degree": 5,
+  "incoming_degree": 3,
+  "description": "Concept cotidian din grupul «precipitații»: Ploaie."
+ },
+ "reachable": 2216,
+ "strong_neighbors": [
+  {
+   "id": "n_v24_weather_air_nor",
+   "label": "Nor",
+   "node_type": "concept",
+   "category": "stiinta",
+   "salience": 0.88,
+   "degree": 3,
+   "incoming_degree": 3,
+   "description": "Concept cotidian din grupul «vreme în atmosferă»: Nor.",
+   "strength": 0.98
+  },
+  {
+   "id": "n_v4gas_apa",
+   "label": "Apă",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.968,
+   "degree": 17,
+   "incoming_degree": 20,
+   "description": "Lichid de băut și ingredient de bază în gătit.",
+   "strength": 0.93
+  },
+  {
+   "id": "n_v4sti_aer",
+   "label": "aer",
+   "node_type": "concept",
+   "category": "stiinta",
+   "salience": 0.8753,
+   "degree": 20,
+   "incoming_degree": 6,
+   "description": "Amestec de gaze care formează atmosfera respirată de viețuitoare.",
+   "strength": 0.86
+  }
+ ],
+ "rubric_sha256": "14f8efacf32c8e41825a1accdc43c44c9f8660cdbde7686b55d4a47ffbef6741",
+ "review_binding": "sha256:0cdd15b11f71fdf8b9c5e0dbb7e942bad52871fb85c194a0437e106f3aa669b0"
+}
