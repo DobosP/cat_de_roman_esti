@@ -26,10 +26,19 @@ def test_health_lists_the_games(client: Client):
     assert body["source"] == "offline"
     assert body["concepts"] > 100
     keys = [g["key"] for g in body["games"]]
-    assert keys == ["alchimie", "conexiuni", "contexto", "lant"]
+    assert keys == [
+        "alchimie",
+        "intrusul",
+        "perechi",
+        "conexiuni",
+        "contexto",
+        "lant",
+    ]
 
 
-@pytest.mark.parametrize("game", ["alchimie", "contexto", "lant", "conexiuni"])
+@pytest.mark.parametrize(
+    "game", ["alchimie", "intrusul", "perechi", "conexiuni", "contexto", "lant"]
+)
 def test_each_game_router_is_mounted(client: Client, game: str):
     # A new game can be created through the mounted views (deterministic via seed).
     resp = client.post(f"/api/wordgames/{game}/games?seed=1")
@@ -80,6 +89,7 @@ def test_built_spa_served_when_present(client: Client):
     assert resp.status_code == 200
     assert 'id="root"' in _page_text(resp)
     # Deep links serve the SPA shell so the React router can take over.
-    resp = client.get("/conexiuni")
-    assert resp.status_code == 200
-    assert 'id="root"' in _page_text(resp)
+    for path in ("/intrusul", "/perechi", "/conexiuni"):
+        resp = client.get(path)
+        assert resp.status_code == 200
+        assert 'id="root"' in _page_text(resp)

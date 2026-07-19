@@ -32,6 +32,16 @@ GAMES = [
         "blurb": "Combina doua concepte ca sa descoperi unul nou — pana ajungi la tinta.",
     },
     {
+        "key": "intrusul",
+        "label": "Intrusul",
+        "blurb": "Gaseste cuvantul care nu se potriveste cu celelalte trei.",
+    },
+    {
+        "key": "perechi",
+        "label": "Perechi",
+        "blurb": "Potriveste cele opt cuvinte in patru perechi cu sens.",
+    },
+    {
         "key": "conexiuni",
         "label": "Conexiuni",
         "blurb": "Grupeaza cele 16 concepte in cele 4 categorii ascunse, cate 4 fiecare.",

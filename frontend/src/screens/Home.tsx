@@ -138,7 +138,7 @@ export default function Home({
             transition={{ delay: 0.35, duration: 0.5 }}
             style={{ maxWidth: 640, fontSize: "1.05rem", margin: 0 }}
           >
-            Patru jocuri românești. Alege unul și intri direct în ritm.
+            Șase jocuri românești. Alege unul și intri direct în ritm.
           </m.p>
         </header>
 
@@ -288,7 +288,7 @@ export default function Home({
         />
 
         <p className="faint" style={{ fontSize: "0.8rem" }}>
-          Toate cele patru jocuri folosesc aceeași hartă de legături culturale românești.
+          Toate cele șase jocuri folosesc aceeași hartă de legături culturale românești.
         </p>
       </div>
     </div>

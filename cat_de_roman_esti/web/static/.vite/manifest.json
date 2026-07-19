@@ -1,25 +1,35 @@
 {
-  "_CategoryPicker-vL5rjr-x.js": {
-    "file": "assets/CategoryPicker-vL5rjr-x.js",
+  "_CategoryPicker-CJcj3Swz.js": {
+    "file": "assets/CategoryPicker-CJcj3Swz.js",
     "name": "CategoryPicker",
+    "imports": [
+      "_useRecordScore-B6vRO6pf.js",
+      "index.html"
+    ]
+  },
+  "_useRecordScore-B6vRO6pf.js": {
+    "file": "assets/useRecordScore-B6vRO6pf.js",
+    "name": "useRecordScore",
     "imports": [
       "index.html"
     ]
   },
   "index.html": {
-    "file": "assets/index-DORbbiC2.js",
+    "file": "assets/index-CDubpTcW.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
     "dynamicImports": [
       "src/screens/Alchimie.tsx",
+      "src/screens/Intrusul.tsx",
+      "src/screens/Perechi.tsx",
       "src/screens/CaldRece.tsx",
       "src/screens/Lant.tsx",
       "src/screens/Conexiuni.tsx",
       "src/screens/Ranking.tsx"
     ],
     "css": [
-      "assets/index-BnuB61ZA.css"
+      "assets/index-Nl5onCLa.css"
     ],
     "assets": [
       "assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
@@ -45,47 +55,77 @@
     "src": "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2"
   },
   "src/screens/Alchimie.tsx": {
-    "file": "assets/Alchimie-hERqqWCV.js",
+    "file": "assets/Alchimie-B6a764-_.js",
     "name": "Alchimie",
     "src": "src/screens/Alchimie.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_CategoryPicker-vL5rjr-x.js",
-      "index.html"
+      "_useRecordScore-B6vRO6pf.js",
+      "index.html",
+      "_CategoryPicker-CJcj3Swz.js"
     ]
   },
   "src/screens/CaldRece.tsx": {
-    "file": "assets/CaldRece-DmFL57UW.js",
+    "file": "assets/CaldRece-DikIM5Qz.js",
     "name": "CaldRece",
     "src": "src/screens/CaldRece.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_CategoryPicker-vL5rjr-x.js",
-      "index.html"
+      "_useRecordScore-B6vRO6pf.js",
+      "index.html",
+      "_CategoryPicker-CJcj3Swz.js"
     ]
   },
   "src/screens/Conexiuni.tsx": {
-    "file": "assets/Conexiuni-Dkc-Zl6l.js",
+    "file": "assets/Conexiuni-B51nC2RU.js",
     "name": "Conexiuni",
     "src": "src/screens/Conexiuni.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_CategoryPicker-vL5rjr-x.js",
+      "_useRecordScore-B6vRO6pf.js",
+      "index.html",
+      "_CategoryPicker-CJcj3Swz.js"
+    ]
+  },
+  "src/screens/Intrusul.tsx": {
+    "file": "assets/Intrusul-rUKAhGzB.js",
+    "name": "Intrusul",
+    "src": "src/screens/Intrusul.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_useRecordScore-B6vRO6pf.js",
       "index.html"
+    ],
+    "css": [
+      "assets/Intrusul-Cqfmxx4e.css"
     ]
   },
   "src/screens/Lant.tsx": {
-    "file": "assets/Lant-CY4Z0Lh_.js",
+    "file": "assets/Lant-B7qiX5wG.js",
     "name": "Lant",
     "src": "src/screens/Lant.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_CategoryPicker-vL5rjr-x.js",
+      "_useRecordScore-B6vRO6pf.js",
+      "index.html",
+      "_CategoryPicker-CJcj3Swz.js"
+    ]
+  },
+  "src/screens/Perechi.tsx": {
+    "file": "assets/Perechi-BKEr3Kng.js",
+    "name": "Perechi",
+    "src": "src/screens/Perechi.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_useRecordScore-B6vRO6pf.js",
       "index.html"
+    ],
+    "css": [
+      "assets/Perechi-CH4dXEAU.css"
     ]
   },
   "src/screens/Ranking.tsx": {
-    "file": "assets/Ranking-BuPuZ5o3.js",
+    "file": "assets/Ranking-C5dIdHvL.js",
     "name": "Ranking",
     "src": "src/screens/Ranking.tsx",
     "isDynamicEntry": true,

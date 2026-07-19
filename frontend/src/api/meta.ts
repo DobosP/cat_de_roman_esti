@@ -3,8 +3,10 @@
 // categories a game can actually start (curated content or a minable node pool).
 
 import { getJson } from "./client";
+import type { GameKey as ArcadeGameKey } from "../games";
 
-export type GameKey = "alchimie" | "contexto" | "lant" | "conexiuni";
+/** The category endpoint still describes the four authored/mined pack games. */
+export type GameKey = Exclude<ArcadeGameKey, "intrusul" | "perechi">;
 
 export interface CategoryInfo {
   key: string;
