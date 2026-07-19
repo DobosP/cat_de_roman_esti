@@ -148,13 +148,13 @@ export default function Home({
               key={g.key}
               type="button"
               onClick={() => openGame(g)}
-              aria-label={`Joacă ${g.title} — ${g.tag}`}
+              aria-label={`Joacă ${g.title} — ${g.featured ? "Începe aici" : g.tag}`}
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 + 0.07 * i, duration: 0.4, ease: EASE }}
               whileHover={{ y: -5, rotate: i % 2 ? 0.4 : -0.4 }}
               whileTap={{ scale: 0.97 }}
-              className="card game-card"
+              className={`card game-card${g.featured ? " game-card--featured" : ""}`}
             >
               <div
                 aria-hidden
@@ -172,7 +172,7 @@ export default function Home({
                   {g.icon}
                 </span>
                 <Badge color={g.accent} size="sm">
-                  {g.tag}
+                  {g.featured ? "Începe aici" : g.tag}
                 </Badge>
               </div>
               <strong className="game-card-title" style={{ color: g.accent }}>
@@ -193,7 +193,15 @@ export default function Home({
           ))}
         </div>
 
-        <section className="col" style={{ gap: 14 }}>
+        {playedTotal === 0 && (
+          <div className="row first-play-tools">
+            <Button variant="secondary" size="sm" onClick={() => fileRef.current?.click()}>
+              <span aria-hidden>⬆</span> Importă istoricul
+            </Button>
+          </div>
+        )}
+
+        <section className="col history-section" style={{ gap: 14 }} hidden={playedTotal === 0}>
           <div className="row spread wrap" style={{ gap: 12, alignItems: "center" }}>
             <div className="segment history-tabs" role="group" aria-label="Istoric">
               {(["top", "today", "recent"] as const).map((tab) => (
@@ -215,13 +223,6 @@ export default function Home({
               <Button variant="secondary" size="sm" onClick={() => fileRef.current?.click()}>
                 <span aria-hidden>⬆</span> Import
               </Button>
-              <input
-                ref={fileRef}
-                type="file"
-                accept="application/json,.json"
-                onChange={handleImport}
-                style={{ display: "none" }}
-              />
             </div>
           </div>
 
@@ -277,6 +278,14 @@ export default function Home({
             }
           />
         </section>
+
+        <input
+          ref={fileRef}
+          type="file"
+          accept="application/json,.json"
+          onChange={handleImport}
+          style={{ display: "none" }}
+        />
 
         <p className="faint" style={{ fontSize: "0.8rem" }}>
           Toate cele patru jocuri folosesc aceeași hartă de legături culturale românești.

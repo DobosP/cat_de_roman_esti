@@ -32,6 +32,11 @@ GAMES = [
         "blurb": "Combina doua concepte ca sa descoperi unul nou — pana ajungi la tinta.",
     },
     {
+        "key": "conexiuni",
+        "label": "Conexiuni",
+        "blurb": "Grupeaza cele 16 concepte in cele 4 categorii ascunse, cate 4 fiecare.",
+    },
+    {
         "key": "contexto",
         "label": "Cald sau Rece",
         "blurb": "Ghiceste conceptul secret; fiecare incercare iti spune cat de aproape esti.",
@@ -40,11 +45,6 @@ GAMES = [
         "key": "lant",
         "label": "Lantul Cuvintelor",
         "blurb": "Scrie un concept legat de cel curent si sari din cuvant in cuvant pana la tinta.",
-    },
-    {
-        "key": "conexiuni",
-        "label": "Conexiuni",
-        "blurb": "Grupeaza cele 16 concepte in cele 4 categorii ascunse, cate 4 fiecare.",
     },
 ]
 

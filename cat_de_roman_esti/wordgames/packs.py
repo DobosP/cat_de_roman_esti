@@ -11,7 +11,9 @@ Selection is deterministic where it must be:
 
 * daily picks use rendezvous hashing over item ids, so the day's instance is
   stable for everyone and mostly survives pack growth;
-* seeded picks draw from the id-sorted pool via the caller's ``random.Random``.
+* seeded picks draw from the id-sorted pool via the caller's ``random.Random``;
+* an optional digest-bound V37 sidecar privately prefers pilot-ready, highly rated
+  boards without changing filters, response shapes, or custom-pack compatibility.
 
 This module is stdlib-only (no Django) so the offline validator script and the
 review tooling can import the exact validation the server applies. A handful of
@@ -25,16 +27,22 @@ import hashlib
 import json
 import os
 import random
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from functools import lru_cache
 from itertools import combinations
 from pathlib import Path
 
+from ..data import DEFAULT_FIXTURE
 from .categories import is_known
 from .service import WordGameService, get_service
 
 PACK_DIR = Path(__file__).resolve().parent.parent / "fixtures"
 DEFAULT_PACK = PACK_DIR / "games_pack.json"
+DEFAULT_RANKINGS = PACK_DIR / "board_rankings_v37.json"
+DEFAULT_RUBRIC = Path(__file__).resolve().parents[2] / "docs" / "CRITIQUE_RUBRIC.md"
+# Wheels intentionally omit repository docs. Pin the reviewed rubric digest so the bundled
+# sidecar still verifies its third input in an installed/runtime-only package.
+DEFAULT_RUBRIC_SHA256 = "14f8efacf32c8e41825a1accdc43c44c9f8660cdbde7686b55d4a47ffbef6741"
 
 GAME_KINDS = ("conexiuni", "contexto", "lant", "alchimie")
 SOURCES = ("user", "ai", "ai_corpus")
@@ -77,6 +85,14 @@ class CuratedItem:
     source: str
     status: str
     payload: dict
+    # V37 pilot ranking is server-private. Defaults keep synthetic/custom packs on the
+    # historical uniform selector and make the ranking sidecar an additive concern.
+    _romanian_familiarity: int = field(default=50, repr=False, compare=False)
+    _play_quality: int = field(default=50, repr=False, compare=False)
+    _pilot_score: int = field(default=50, repr=False, compare=False)
+    _pilot_rank: int | None = field(default=None, repr=False, compare=False)
+    _pilot_eligible: bool = field(default=False, repr=False, compare=False)
+    _selection_weight: int = field(default=1, repr=False, compare=False)
 
     @property
     def approved(self) -> bool:
@@ -423,7 +439,21 @@ class GamesPack:
         pool = self.pool(
             game, category=category, difficulty=difficulty, exclude_ids=exclude_ids
         )
-        return rng.choice(pool) if pool else None
+        if not pool:
+            return None
+        preferred = [item for item in pool if item._pilot_eligible]
+        if preferred:
+            pool = preferred
+
+        # Integer tickets avoid float/version drift while retaining every item with a
+        # positive weight. With neutral weight=1 this is exactly the old choice shape.
+        total = sum(_selection_weight(item) for item in pool)
+        ticket = rng.randrange(total)
+        for item in pool:
+            ticket -= _selection_weight(item)
+            if ticket < 0:
+                return item
+        raise AssertionError("weighted curated selection exhausted its ticket range")
 
     def pick_daily(
         self,
@@ -434,9 +464,11 @@ class GamesPack:
         difficulty: str | None = None,
         min_pool: int | None = None,
     ) -> CuratedItem | None:
-        """Rendezvous-hash pick: stable per (day, filters) and mostly insensitive
-        to pack growth — adding items only re-rolls the day when the new item
-        wins the hash, and removing items only affects days they had won.
+        """Rendezvous-ticket pick: stable for unchanged (day, filters, sidecar).
+
+        Neutral selection retains the historical insertion property: adding an item
+        changes a day only when that item wins. A V37 regeneration can deliberately
+        remap days when score quintiles or eligible-pool membership change.
 
         The shared (category-less) daily returns None below
         ``CURATED_DAILY_MIN_POOL`` so a thin pool cannot repeat the same instance
@@ -448,15 +480,229 @@ class GamesPack:
         if len(pool) < max(1, min_pool):
             return None
 
-        def _weight(item: CuratedItem) -> bytes:
-            key = f"{daily}:{game}:{category or ''}:{difficulty or ''}:{item.id}"
-            return hashlib.blake2b(key.encode(), digest_size=8).digest()
+        preferred = [item for item in pool if item._pilot_eligible]
+        if len(preferred) >= max(1, min_pool):
+            pool = preferred
+
+        def _weight(item: CuratedItem) -> tuple[bytes, str]:
+            base = f"{daily}:{game}:{category or ''}:{difficulty or ''}:{item.id}"
+            tickets = [hashlib.blake2b(base.encode(), digest_size=8).digest()]
+            for ticket in range(1, _selection_weight(item)):
+                versioned = f"{base}:v37:{ticket}"
+                tickets.append(hashlib.blake2b(versioned.encode(), digest_size=8).digest())
+            return min(tickets), item.id
 
         return min(pool, key=_weight)
 
 
-def _parse_items(raw: dict) -> list[CuratedItem]:
+def _selection_weight(item: CuratedItem) -> int:
+    """Safe weight for synthetic items as well as sidecar-validated shipped items."""
+    value = item._selection_weight
+    valid = isinstance(value, int) and not isinstance(value, bool) and 1 <= value <= 5
+    return value if valid else 1
+
+
+def normalized_text_sha256(path: Path) -> str:
+    """SHA-256 after platform newline normalization (the critique binding convention)."""
+    text = path.read_text(encoding="utf-8").replace("\r\n", "\n").replace("\r", "\n")
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+_RANKING_FIELDS = {
+    "id",
+    "game",
+    "status",
+    "romanian_familiarity",
+    "play_quality",
+    "pilot_score",
+    "rank",
+    "pilot_eligible",
+    "selection_weight",
+}
+_RANKING_COUNT_FIELDS = {
+    "total",
+    "approved",
+    "pilot_eligible",
+    "by_game",
+    "eligible_by_game",
+}
+
+
+def _load_rankings(
+    raw_pack: dict, pack_path: Path, kg_path: Path, rankings_path: Path
+) -> dict[str, dict]:
+    """Validate and index the digest-bound V37 sidecar; any drift fails closed."""
+    try:
+        raw = json.loads(rankings_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(f"board rankings: cannot read {rankings_path}: {exc}") from exc
+    if not isinstance(raw, dict) or set(raw) != {"meta", "boards"}:
+        raise ValueError("board rankings: top level must contain exactly meta and boards")
+    meta = raw.get("meta")
+    boards = raw.get("boards")
+    if not isinstance(meta, dict) or not isinstance(boards, list):
+        raise ValueError("board rankings: meta must be an object and boards an array")
+    expected_meta = {
+        "schema_version",
+        "pack_sha256",
+        "kg_sha256",
+        "rubric_sha256",
+        "counts",
+    }
+    if set(meta) != expected_meta:
+        raise ValueError("board rankings: meta fields do not match the V37 schema")
+    schema_version = meta.get("schema_version")
+    if isinstance(schema_version, bool) or not isinstance(schema_version, int):
+        raise ValueError("board rankings: schema_version must be the integer 1")
+    if schema_version != 1:
+        raise ValueError("board rankings: unsupported schema_version")
+    declared_counts = meta.get("counts")
+    if not isinstance(declared_counts, dict) or set(declared_counts) != _RANKING_COUNT_FIELDS:
+        raise ValueError("board rankings: counts fields do not match the V37 schema")
+    scalar_counts = (
+        declared_counts.get("total"),
+        declared_counts.get("approved"),
+        declared_counts.get("pilot_eligible"),
+    )
+    nested_counts = (
+        declared_counts.get("by_game"),
+        declared_counts.get("eligible_by_game"),
+    )
+    if any(
+        isinstance(value, bool) or not isinstance(value, int) or value < 0
+        for value in scalar_counts
+    ):
+        raise ValueError("board rankings: counts must use non-negative integers")
+    if any(
+        not isinstance(values, dict) or set(values) != set(GAME_KINDS)
+        for values in nested_counts
+    ):
+        raise ValueError("board rankings: per-game counts must cover the exact game set")
+    if any(
+        isinstance(value, bool) or not isinstance(value, int) or value < 0
+        for values in nested_counts
+        for value in values.values()
+    ):
+        raise ValueError("board rankings: counts must use non-negative integers")
+
+    expected_by_game = {game: len(raw_pack.get(game, [])) for game in GAME_KINDS}
+    digest_paths = {
+        "pack_sha256": pack_path,
+        "kg_sha256": kg_path,
+    }
+    for key, path in digest_paths.items():
+        if meta.get(key) != normalized_text_sha256(path):
+            raise ValueError(f"board rankings: {key} does not match {path.name}")
+    rubric_digest = meta.get("rubric_sha256")
+    if not isinstance(rubric_digest, str) or len(rubric_digest) != 64:
+        raise ValueError("board rankings: rubric_sha256 must be a SHA-256 hex digest")
+    try:
+        int(rubric_digest, 16)
+    except ValueError as exc:
+        raise ValueError("board rankings: rubric_sha256 must be a SHA-256 hex digest") from exc
+    expected_rubric = (
+        normalized_text_sha256(DEFAULT_RUBRIC)
+        if DEFAULT_RUBRIC.exists()
+        else DEFAULT_RUBRIC_SHA256
+    )
+    if rubric_digest != expected_rubric:
+        raise ValueError("board rankings: rubric_sha256 does not match the reviewed rubric")
+
+    expected: dict[str, tuple[str, str]] = {}
+    for game in GAME_KINDS:
+        for rec in raw_pack.get(game, []):
+            item_id = str(rec.get("id") or "")
+            if not item_id or item_id in expected:
+                raise ValueError(f"board rankings: duplicate/empty pack id {item_id!r}")
+            expected[item_id] = (game, str(rec.get("status")))
+
+    indexed: dict[str, dict] = {}
+    for entry in boards:
+        if not isinstance(entry, dict) or set(entry) != _RANKING_FIELDS:
+            raise ValueError("board rankings: every board must match the V37 entry schema")
+        item_id = entry.get("id")
+        if not isinstance(item_id, str) or item_id in indexed:
+            raise ValueError(f"board rankings: duplicate/invalid board id {item_id!r}")
+        expected_identity = expected.get(item_id)
+        if expected_identity != (entry.get("game"), entry.get("status")):
+            raise ValueError(f"board rankings: identity/status drift for {item_id!r}")
+        for name in ("romanian_familiarity", "play_quality", "pilot_score"):
+            value = entry.get(name)
+            if isinstance(value, bool) or not isinstance(value, int) or not 0 <= value <= 100:
+                raise ValueError(f"board rankings: {item_id} {name} must be 0..100")
+        expected_score = (
+            6 * entry["romanian_familiarity"] + 4 * entry["play_quality"] + 5
+        ) // 10
+        if entry["pilot_score"] != expected_score:
+            raise ValueError(
+                f"board rankings: {item_id} pilot_score does not match the 60/40 formula"
+            )
+        rank = entry.get("rank")
+        if isinstance(rank, bool) or not isinstance(rank, int) or rank < 1:
+            raise ValueError(f"board rankings: {item_id} rank must be a positive integer")
+        eligible = entry.get("pilot_eligible")
+        if not isinstance(eligible, bool):
+            raise ValueError(f"board rankings: {item_id} pilot_eligible must be boolean")
+        weight = entry.get("selection_weight")
+        if isinstance(weight, bool) or not isinstance(weight, int) or not 1 <= weight <= 5:
+            raise ValueError(f"board rankings: {item_id} selection_weight must be 1..5")
+        if entry["status"] != "approved" and eligible:
+            raise ValueError(
+                f"board rankings: non-approved item {item_id} cannot be pilot eligible"
+            )
+        if not eligible and weight != 1:
+            raise ValueError(
+                f"board rankings: ineligible item {item_id} must have selection_weight 1"
+            )
+        indexed[item_id] = entry
+
+    if set(indexed) != set(expected):
+        missing = sorted(set(expected) - set(indexed))
+        extra = sorted(set(indexed) - set(expected))
+        raise ValueError(
+            f"board rankings: coverage mismatch (missing={missing[:3]}, extra={extra[:3]})"
+        )
+    for game in GAME_KINDS:
+        ordered = sorted(
+            (entry for entry in indexed.values() if entry["game"] == game),
+            key=lambda entry: (-entry["pilot_score"], entry["id"]),
+        )
+        if [entry["rank"] for entry in ordered] != list(range(1, len(ordered) + 1)):
+            raise ValueError(
+                f"board rankings: {game} ranks must follow pilot_score then stable ID"
+            )
+        eligible = [entry for entry in ordered if entry["pilot_eligible"]]
+        eligible_count = len(eligible)
+        for index, entry in enumerate(eligible):
+            expected_weight = 5 - min(4, (5 * index) // eligible_count)
+            if entry["selection_weight"] != expected_weight:
+                raise ValueError(
+                    "board rankings: "
+                    f"{entry['id']} selection_weight does not match its eligible quintile"
+                )
+    eligible_by_game = {
+        game: sum(
+            entry["pilot_eligible"] is True
+            for entry in indexed.values()
+            if entry["game"] == game
+        )
+        for game in GAME_KINDS
+    }
+    expected_counts = {
+        "total": sum(expected_by_game.values()),
+        "approved": sum(status == "approved" for _, status in expected.values()),
+        "pilot_eligible": sum(eligible_by_game.values()),
+        "by_game": expected_by_game,
+        "eligible_by_game": eligible_by_game,
+    }
+    if declared_counts != expected_counts:
+        raise ValueError("board rankings: counts do not match games pack and ranking rows")
+    return indexed
+
+
+def _parse_items(raw: dict, rankings: dict[str, dict] | None = None) -> list[CuratedItem]:
     items: list[CuratedItem] = []
+    rankings = rankings or {}
     for game in GAME_KINDS:
         for rec in raw.get(game, []) or []:
             if not isinstance(rec, dict):
@@ -465,6 +711,7 @@ def _parse_items(raw: dict) -> list[CuratedItem]:
             if errors:
                 raise ValueError(f"games pack: invalid {game} item {rec.get('id')!r}: {errors}")
             payload = {k: rec[k] for k in _PAYLOAD_FIELDS[game]}
+            rating = rankings.get(str(rec["id"]), {})
             items.append(
                 CuratedItem(
                     id=str(rec["id"]),
@@ -474,6 +721,12 @@ def _parse_items(raw: dict) -> list[CuratedItem]:
                     source=str(rec["source"]),
                     status=str(rec["status"]),
                     payload=payload,
+                    _romanian_familiarity=int(rating.get("romanian_familiarity", 50)),
+                    _play_quality=int(rating.get("play_quality", 50)),
+                    _pilot_score=int(rating.get("pilot_score", 50)),
+                    _pilot_rank=rating.get("rank"),
+                    _pilot_eligible=rating.get("pilot_eligible") is True,
+                    _selection_weight=int(rating.get("selection_weight", 1)),
                 )
             )
     return items
@@ -484,18 +737,41 @@ def _resolve_pack(path: str | Path | None) -> Path:
     return Path(path or os.environ.get("CAT_GAMES_PACK") or DEFAULT_PACK)
 
 
-def load_pack(path: str | Path | None = None) -> GamesPack:
+def load_pack(
+    path: str | Path | None = None, *, rankings_path: str | Path | None = None
+) -> GamesPack:
     """Parse the pack, envelope-validating every record (fail fast on a broken file).
 
     Deep playability validation lives in ``scripts/validate_games_pack.py`` (a CI
     gate); at runtime we trust a shipped pack the same way the KG fixture is
-    trusted, but refuse to load one whose shape is wrong.
+    trusted, but refuse to load one whose shape is wrong. The bundled V37 ranking
+    sidecar is required for the bundled pack and graph. An explicit ``rankings_path`` /
+    ``CAT_BOARD_RANKINGS`` is accepted only when its pack/KG digests and complete
+    ID/status coverage match.
     """
     fpath = _resolve_pack(path)
     raw = json.loads(fpath.read_text(encoding="utf-8"))
     if not isinstance(raw, dict):
         raise ValueError("games pack: top level must be an object")
-    return GamesPack(_parse_items(raw))
+    bundled = fpath.resolve() == DEFAULT_PACK.resolve()
+    kg_path = Path(os.environ.get("CAT_KG_FIXTURE") or DEFAULT_FIXTURE)
+    ranking_override = rankings_path or os.environ.get("CAT_BOARD_RANKINGS")
+    if ranking_override is not None:
+        selected_rankings: Path | None = Path(ranking_override)
+    elif bundled and kg_path.resolve() == DEFAULT_FIXTURE.resolve():
+        # The shipped pack/graph and their private priority model are one release unit.
+        # Missing, unreadable, or drifted ranking data therefore fails closed.
+        selected_rankings = DEFAULT_RANKINGS
+    else:
+        # A graph swap invalidates graph-derived scores. Keep the historical neutral
+        # selector unless the deployment supplies a digest-matching sidecar explicitly.
+        selected_rankings = None
+    rankings = (
+        _load_rankings(raw, fpath, kg_path, selected_rankings)
+        if selected_rankings is not None
+        else {}
+    )
+    return GamesPack(_parse_items(raw, rankings))
 
 
 def _item_node_ids(item: CuratedItem) -> list[str]:

@@ -1,96 +1,95 @@
 # Status — cat_de_roman_esti
 
 _As of 2026-07-19. This file is the repository's current source of truth._
-_Last verified: 2026-07-19 (local V35: backend 438/438, required session store 16/16,
-frontend 68/68, static/mobile 11/11, Ruff, both validators, workflow syntax, lint,
-typecheck, whitespace, and artifact paths green; production build is 117.04/120 KiB with
-four font subsets. Live is V32 `f40fa8b`; V33–V35 are not pushed or deployed.)_
+_Last verified: 2026-07-19 (local V37: backend 477/477, required session store 16/16,
+frontend 13/13, static/mobile 11/11, ranking/critique/pack/KG gates, packaged-runtime smoke,
+Ruff, workflow syntax, lint, typecheck, and whitespace green; production bundle is
+117.23/120 KiB with four font subsets. Live is V32 `f40fa8b`; V33–V37 are not pushed/deployed.)_
 
-## Current outcome — critique gate completed (ADR-0023 through ADR-0026)
+## Current outcome — V37 large-pilot consolidation (ADR-0051)
 
-- `critique_pack.py` validates IDs, reuse, overuse, live degree, and game-specific judge criteria.
-- Version-2 artifacts bind the batch, dossiers, and rubric; apply rebuilds and reruns them
-  before writing, while re-review restores both copies on any red or exception.
-- Imports enter `pending`; persistent per-game high-water marks prevent retired ID reuse.
+- A private, reproducible sidecar ranks all **794** curated boards with a pre-playtest
+  estimate: 60% Romanian-concept familiarity and 40% game-specific structural quality.
+  It is bound to the exact pack, KG, and critique rubric and fails closed on drift.
+- Pilot preference is independent of score: only approved, payload-valid records without
+  deterministic critique `FAIL` qualify. There are **486** eligible boards: Conexiuni 123,
+  Cald sau Rece 192, Lanț 94, and Alchimie 77.
+- Existing game/category/difficulty/repeat filters run first. Eligible shelves then use
+  deterministic 1–5-ticket rotation; shared daily shelves retain their minimum of eight.
+  Eligible-empty seeded shelves retain their approved pool; below-minimum daily shelves
+  retain the existing approved/mined fallback. Custom packs stay neutral unless they
+  provide a digest-matching ranking sidecar.
+- The beginner lobby starts with Alchimie → Conexiuni → Cald sau Rece → Lanț. Only Alchimie
+  says `Începe aici`; a first-time player does not see an empty history wall.
+- Ranking scores, board ranks, selection weights, pack IDs, and pilot eligibility stay
+  outside public responses. This is an editorial board-priority estimate, not measured fun
+  or a rating of any player's knowledge. Accounts, public rankings, and telemetry remain off.
 
-## Current outcome — browser recovery (ADR-0027 through ADR-0029, ADR-0034, ADR-0047)
+## Current outcome — bounded beginner play (ADR-0027 through ADR-0050)
 
-Lanț exposes ID-free corridor/detour choices; homonyms bind exactly and direct hops stay legal.
-Easy hops add coarse direction and recommend free undo after two non-improving moves. A chain
-retains at most 64 moves / 65 earned nodes; the cap offers undo, and a 64th-hop win scores
-normally. Hints and routes stay private; TTL/store caps are unchanged (ADR-0043/0046/0050).
-Alchimie remembers at most 496 unordered experiments; retries are free and inert, reset clears
-them, and only their count is public. Score, secrecy, TTL, and session cap remain unchanged.
+- Every game defaults to `Ușor`, teaches three terse actions, shows one live `ACUM` cue,
+  and keeps mobile actions at least 44 px. Conexiuni owns recovery/conflict feedback in one
+  sticky channel; Lanț offers corridor/detour recovery, direction, free undo, and a 64-hop
+  cap; Alchimie bounds remembered experiments at 496 and projects at most 24 useful pairs.
+- Cald sau Rece accepts **444 screened everyday guesses across 26 domains** through 89 KG
+  anchors, keeps repeated guesses free, and progresses to one warmer familiar clue. Public
+  comparison remains one stable number; targets and hidden routes/recipes remain private.
+- The critique gate validates IDs, reuse, live degree, and game-specific fairness. Version-2
+  artifacts bind pack, dossiers, and rubric; imports remain pending until reviewed.
 
-## Current outcome — beginner mobile interface (ADR-0031, ADR-0048)
+## Current outcome — vocabulary and graph
 
-All games default to `Ușor`, teach three terse actions, and show one live `ACUM` cue.
-Mobile gets 44 px actions and compact rails. Conexiuni keeps recovery, accessible mistake
-dots, and authoritative conflict refresh in one sticky channel with one live owner.
-
-## Current outcome — V35 guided word space and comparison (ADR-0042 through ADR-0045)
-
-Cald sau Rece accepts **444 screened everyday guesses across 26 domains** through 89 KG
-anchors without projection wins. Clues progress to one warmer familiar word. Distinct guesses
-keep stable numbers and one public-rank comparison; repeats stay free. Browser `Bune`/`Recente`
-views, sticky 44 px actions, guarded reveal, and terminal cleanup do not change targets/scoring.
-Alchimie projects 1–4 target-useful routes into at most 24 private recipe pairs / 32 concepts.
-Runtime normally returns one result and exact par holds; views retire depleted items and hints progress to a pair.
-
-## Current outcome — beginner vocabulary waves (ADR-0030, ADR-0032, ADR-0033, ADR-0036 through ADR-0041)
-
-V23 retains 22 childhood/story nodes and 78 edges. V24 adds **150 nodes, 511 edges, 276
-aliases, and 26 pending items**; V25 adds **168 safe aliases and 25 links**. V28 reaches
-**234/234** eligible probes; V29 adds **17 concepts, 66 inflections, and 64 links**.
-V30–V33 add 71 farm, clothing, kitchen, hygiene, cleaning, face, workshop, garden,
-bathroom, household-electrical, and forest concepts; eligible probes reach **322/322**.
-All 33 affected pending dossiers and the full report stay unchanged and clean; all 794
-curated records remain unchanged.
+V23–V33 added childhood, farm, clothing, kitchen, hygiene, cleaning, face, workshop, garden,
+bathroom, household-electrical, and forest concepts. Eligible vocabulary probes are
+**322/322**; 33 affected pending dossiers stay clean and all 794 curated records are unchanged.
 
 ## Product and deployment
 
-The Romanian arcade has four server-authoritative games: Alchimie, Cald sau Rece, Lanțul Cuvintelor, and Conexiuni, using Django 5.2/DRF and React 19/Vite 8 over the offline KG.
-
-Anonymous v1 at <https://cat-de-roman-esti.dobolabs.ro> runs release `f40fa8b`, verified 2026-07-18. Accounts/rankings remain staging-only and client-authored.
+The Romanian arcade has four server-authoritative games over the offline KG, using Django
+5.2/DRF and React 19/Vite 8. Anonymous v1 at
+<https://cat-de-roman-esti.dobolabs.ro> runs `f40fa8b`, verified 2026-07-18. Accounts and
+the player leaderboard remain staging-only; production has no V37 pilot behavior yet.
 
 ## Shipped content
 
-| Game | Total | Approved | Pending | Runtime source |
-|---|---:|---:|---:|---|
-| Conexiuni | 288 | 209 | 79 | curated first; mixed-board miner fallback |
-| Cald sau Rece | 207 | 192 | 15 | curated first; category miner fallback |
-| Lanțul Cuvintelor | 201 | 94 | 107 | curated first; branch-aware miner fallback |
-| Alchimie | 98 | 77 | 21 | curated first; sparse projection miner fallback |
+| Game | Total | Approved | Pending | V37 eligible | Runtime source |
+|---|---:|---:|---:|---:|---|
+| Conexiuni | 288 | 209 | 79 | 123 | ranked curated; mixed-board miner fallback |
+| Cald sau Rece | 207 | 192 | 15 | 192 | ranked curated; category miner fallback |
+| Lanțul Cuvintelor | 201 | 94 | 107 | 94 | ranked curated; branch-aware miner fallback |
+| Alchimie | 98 | 77 | 21 | 77 | ranked curated; sparse projection miner fallback |
 
-Pack: **794 items = 572 approved + 222 pending**, across 14 categories.
-Bundled KG: **2,287 nodes / 9,122 edges / 7,400 aliases / 180 legacy puzzles**.
-Both fixture copies and both pack copies are byte-identical and validator-green.
+Pack: **794 = 572 approved + 222 pending**, across 14 categories. Bundled KG:
+**2,287 nodes / 9,122 edges / 7,400 aliases / 180 legacy puzzles**. Committed fixture
+mirrors stay byte-identical; the V37 sidecar is digest-bound to pack, KG, and rubric.
 
 ## Runtime contracts and safety
 
-- Sessions keep a validated 7,200-second sliding TTL and 1,000-entry LRU cap. Entry locks
-  serialize each request transaction while other sessions stay concurrent; all-borrowed
-  capacity fails with 503; Lanț retains at most 64 moves / 65 nodes (ADR-0049/0050).
-- Request bodies default to a 64 KiB Caddy plus ASGI receive ceiling.
-- Hidden answers stay pinned: Contexto hides its target; Alchimie hides target ID; Lanț
-  reveals earned/hinted hops; Conexiuni hides unsolved membership/full solution until terminal.
-- Curated submissions are opt-in through `CAT_SUBMISSIONS_DIR`; only approved records
-  are served. Import candidates remain pending until the critique gate promotes them.
-- Mobile fixture/OpenAPI contracts and curated-first seeded selection remain test-pinned.
+- Sessions retain a validated 7,200-second sliding TTL and 1,000-entry LRU cap. Per-entry
+  locks linearize a request; different sessions stay concurrent and all-borrowed capacity
+  fails with 503. Lanț retains at most 64 moves / 65 nodes.
+- Request bodies have a 64 KiB Caddy and ASGI receive ceiling. Hidden answers stay pinned;
+  no private V37 ranking field is serialized by a game endpoint.
+- Curated submissions require `CAT_SUBMISSIONS_DIR`; only approved records are served.
+  Mobile fixture/OpenAPI contracts and deterministic seeded/daily selection remain pinned.
 
 ## Quality gate
 
 ```bash
 PYTHONPATH=. .venv/bin/python -m pytest -q
 .venv/bin/ruff check .
+PYTHONPATH=. .venv/bin/python scripts/rank_games_pack.py
 PYTHONPATH=. .venv/bin/python scripts/validate_games_pack.py
 PYTHONPATH=. .venv/bin/python scripts/validate_fixture.py
 node --check .claude/workflows/critique-games.js
 git diff --check
 ```
-Run frontend gates when frontend changes; session-store target: `tests/test_wordgames_session_store.py` (16).
+
+Run frontend gates when frontend files change; session-store target:
+`tests/test_wordgames_session_store.py` (**16**).
 
 ## Next verified work
 
-- Continue exact pending/approved-stock adversarial review and generic-edge cleanup.
-- Make rankings server-authored, bounded, and private-by-default before public accounts.
+- Recalibrate board priority only after a separate privacy/storage decision permits bounded,
+  server-authored aggregate starts, outcomes, hints, and action counts.
+- Continue exact pending-stock adversarial review and generic-edge cleanup.

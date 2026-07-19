@@ -536,6 +536,20 @@ input:focus-visible {
   gap: 10px;
 }
 
+.game-card--featured {
+  border-color: color-mix(in srgb, var(--game-alchimie) 62%, var(--surface-border));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--game-alchimie) 18%, transparent) inset,
+    0 18px 42px -28px var(--game-alchimie);
+}
+
+.game-card--featured:hover {
+  border-color: var(--game-alchimie);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--game-alchimie) 24%, transparent) inset,
+    0 20px 46px -26px var(--game-alchimie);
+}
+
 .game-card-halo {
   position: absolute;
   inset: 0;
@@ -589,6 +603,25 @@ input:focus-visible {
 
 .history-tabs {
   min-width: 220px;
+}
+
+.history-section[hidden] {
+  display: none;
+}
+
+.first-play-tools {
+  justify-content: flex-end;
+}
+
+.first-play-tools button {
+  min-height: 44px;
+}
+
+@media (max-width: 640px) {
+  .first-play-tools,
+  .first-play-tools button {
+    width: 100%;
+  }
 }
 
 /* ------------------------------------------------------------------ game intro */

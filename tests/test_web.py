@@ -25,8 +25,8 @@ def test_health_lists_the_games(client: Client):
     assert body["ok"] is True
     assert body["source"] == "offline"
     assert body["concepts"] > 100
-    keys = {g["key"] for g in body["games"]}
-    assert keys == {"alchimie", "contexto", "lant", "conexiuni"}
+    keys = [g["key"] for g in body["games"]]
+    assert keys == ["alchimie", "conexiuni", "contexto", "lant"]
 
 
 @pytest.mark.parametrize("game", ["alchimie", "contexto", "lant", "conexiuni"])

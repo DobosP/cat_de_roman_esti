@@ -7,7 +7,7 @@
 ## Commands
 | Scope | Command | Expected success |
 |---|---|---|
-| Word-game sessions | `PYTHONPATH=. /home/dobo/work/romania_scraper/.venv/bin/python -m pytest tests/test_wordgames_session_store.py -q` | `11 passed` on current setup |
+| Word-game sessions | `PYTHONPATH=. /home/dobo/work/romania_scraper/.venv/bin/python -m pytest tests/test_wordgames_session_store.py -q` | `16 passed` on current setup |
 | KG/app-pack contract | `PYTHONPATH=. /home/dobo/work/romania_scraper/.venv/bin/python -m pytest tests/test_app_pack_contract.py tests/test_data_client.py -q` | contract/client tests pass |
 | Whitespace | `git diff --check` | no output |
 | Frontend | run project package build/test only if frontend files changed | build/test passes |
