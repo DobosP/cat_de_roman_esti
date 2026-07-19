@@ -9,6 +9,7 @@ from pathlib import Path
 
 import pytest
 
+from cat_de_roman_esti.wordgames import derived_catalog
 from cat_de_roman_esti.wordgames.derived_catalog import (
     DEFAULT_DERIVED_CATALOG,
     DERIVED_GAMES,
@@ -17,7 +18,7 @@ from cat_de_roman_esti.wordgames.derived_catalog import (
     load_derived_catalog,
     score_band_weight,
 )
-from cat_de_roman_esti.wordgames.packs import load_pack
+from cat_de_roman_esti.wordgames.packs import load_pack, normalized_text_sha256
 
 
 def _board(
@@ -55,6 +56,24 @@ def test_bundled_catalog_loads_exact_private_inventory() -> None:
     assert not hasattr(first, "id") and not hasattr(first, "source_id")
     assert first._source_id not in repr(first)
     assert "standard_score" not in repr(first)
+    assert "payload" not in repr(first)
+
+
+def test_answer_payload_is_deeply_read_only() -> None:
+    catalog = load_derived_catalog()
+    intrusul = catalog.pool("intrusul")[0]
+    with pytest.raises(TypeError):
+        intrusul.payload["intruder"] = "schimbat"
+    members = intrusul.payload["members"]
+    assert isinstance(members, tuple)
+    with pytest.raises(TypeError):
+        members[0] = "schimbat"
+
+    perechi = catalog.pool("perechi")[0]
+    pairs = perechi.payload["pairs"]
+    assert isinstance(pairs, tuple)
+    with pytest.raises(TypeError):
+        pairs[0]["members"] = ("schimbat", "schimbat")
 
 
 def test_bundled_artifact_digest_drift_fails_closed(
@@ -73,20 +92,46 @@ def test_bundled_artifact_digest_drift_fails_closed(
 
 @pytest.mark.parametrize("schema", [True, 1.0, "1"])
 def test_schema_version_requires_exact_integer(
-    schema: object, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    schema: object, tmp_path: Path
 ) -> None:
     document = json.loads(DEFAULT_DERIVED_CATALOG.read_text(encoding="utf-8"))
     document["meta"]["schema_version"] = schema
     path = tmp_path / "catalog.json"
     path.write_text(json.dumps(document, ensure_ascii=False), encoding="utf-8")
     with pytest.raises(ValueError, match="unsupported schema version"):
+        load_derived_catalog(path, expected_sha256=normalized_text_sha256(path))
+
+
+def test_explicit_catalog_requires_matching_digest(tmp_path: Path) -> None:
+    path = tmp_path / "catalog.json"
+    path.write_bytes(DEFAULT_DERIVED_CATALOG.read_bytes())
+    with pytest.raises(ValueError, match="expected_sha256 is required"):
         load_derived_catalog(path)
+    with pytest.raises(ValueError, match="explicit artifact digest drift"):
+        load_derived_catalog(path, expected_sha256="0" * 64)
+    assert load_derived_catalog(
+        path, expected_sha256=normalized_text_sha256(path)
+    ).counts() == {"intrusul": 183, "perechi": 153}
 
 
-def test_runtime_fixture_overrides_fail_closed(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setenv("CAT_KG_FIXTURE", "/tmp/other-graph.json")
-    with pytest.raises(ValueError, match="runtime fixture override"):
+@pytest.mark.parametrize(
+    "name", ["CAT_GAMES_PACK", "CAT_KG_FIXTURE", "CAT_BOARD_RANKINGS"]
+)
+def test_runtime_source_overrides_fail_closed(
+    name: str, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv(name, "/tmp/other-source.json")
+    with pytest.raises(ValueError, match="runtime source override"):
         load_derived_catalog()
+
+
+def test_installed_package_without_docs_uses_pinned_rubric(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    missing = tmp_path / "installed" / "docs" / "CRITIQUE_RUBRIC.md"
+    monkeypatch.setattr(derived_catalog, "DEFAULT_RUBRIC", missing)
+    assert not missing.exists()
+    assert load_derived_catalog().counts() == {"intrusul": 183, "perechi": 153}
 
 
 def test_equal_scores_receive_equal_stable_ticket_bands() -> None:
