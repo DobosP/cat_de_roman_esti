@@ -154,7 +154,7 @@ export default function Home({
               transition={{ delay: 0.1 + 0.07 * i, duration: 0.4, ease: EASE }}
               whileHover={{ y: -5, rotate: i % 2 ? 0.4 : -0.4 }}
               whileTap={{ scale: 0.97 }}
-              className="card game-card"
+              className={`card game-card${g.featured ? " game-card--featured" : ""}`}
             >
               <div
                 aria-hidden
@@ -172,7 +172,7 @@ export default function Home({
                   {g.icon}
                 </span>
                 <Badge color={g.accent} size="sm">
-                  {g.tag}
+                  {g.featured ? "Începe aici" : g.tag}
                 </Badge>
               </div>
               <strong className="game-card-title" style={{ color: g.accent }}>
@@ -193,7 +193,7 @@ export default function Home({
           ))}
         </div>
 
-        <section className="col" style={{ gap: 14 }}>
+        <section className="col history-section" style={{ gap: 14 }} hidden={playedTotal === 0}>
           <div className="row spread wrap" style={{ gap: 12, alignItems: "center" }}>
             <div className="segment history-tabs" role="group" aria-label="Istoric">
               {(["top", "today", "recent"] as const).map((tab) => (

@@ -18,6 +18,8 @@ export interface GameDef {
   /** Softer companion for gradients / halos. */
   glow: string;
   icon: string;
+  /** Provisional first-play recommendation; never a board-quality score. */
+  featured?: boolean;
 }
 
 export const GAMES: GameDef[] = [
@@ -30,6 +32,17 @@ export const GAMES: GameDef[] = [
     accent: "#c689ff",
     glow: "#e3ccff",
     icon: "⚗️",
+    featured: true,
+  },
+  {
+    key: "conexiuni",
+    path: "/conexiuni",
+    title: "Conexiuni",
+    tag: "Găsește grupurile",
+    blurb: "Alege câte patru cuvinte care merg împreună.",
+    accent: "#54e39d",
+    glow: "#abf2cd",
+    icon: "🧩",
   },
   {
     key: "contexto",
@@ -50,16 +63,6 @@ export const GAMES: GameDef[] = [
     accent: "#4fd8e0",
     glow: "#a9f0f5",
     icon: "🔗",
-  },
-  {
-    key: "conexiuni",
-    path: "/conexiuni",
-    title: "Conexiuni",
-    tag: "Găsește grupurile",
-    blurb: "Alege câte patru cuvinte care merg împreună.",
-    accent: "#54e39d",
-    glow: "#abf2cd",
-    icon: "🧩",
   },
 ];
 
