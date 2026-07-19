@@ -13,6 +13,7 @@ export function GameShell({
   accent,
   title,
   children,
+  busy = false,
 }: {
   /** Return to the arcade home. */
   onExit: () => void;
@@ -22,12 +23,22 @@ export function GameShell({
   title?: ReactNode;
   /** Right-aligned status badges. */
   children?: ReactNode;
+  /** Disable the menu action while the host is creating or replacing a game. */
+  busy?: boolean;
 }) {
   return (
     <div className="row spread game-shell-header" style={{ gap: 12 }}>
       <div className="row game-shell-main" style={{ gap: 10, alignItems: "center" }}>
-        <Button variant="secondary" size="sm" onClick={onExit} aria-label="Înapoi la meniu">
-          <span aria-hidden>←</span> Meniu
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={onExit}
+          disabled={busy}
+          aria-busy={busy || undefined}
+          aria-label={busy ? "Se pregătește jocul" : "Înapoi la meniu"}
+        >
+          <span aria-hidden>{busy ? "⏳" : "←"}</span>{" "}
+          {busy ? "Se pregătește…" : "Meniu"}
         </Button>
         {title && (
           <strong
