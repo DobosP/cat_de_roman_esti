@@ -7,6 +7,11 @@ import { AnimatePresence, m } from "framer-motion";
 import { Button, type ToastKind } from "@roedu/ui";
 import { ApiError } from "../api/client";
 import {
+  acquireFlight,
+  recoverAuthoritative,
+  releaseFlight,
+} from "../asyncControl.mjs";
+import {
   intrusulApi,
   type CreateIntrusulOpts,
   type IntrusulState,
@@ -42,6 +47,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   const active = useActiveGame(GAME_KEY);
   const recordOnce = useRecordScore(GAME_KEY);
   const resumeOnce = useRef(false);
+  const startInFlight = useRef(false);
   const actionInFlight = useRef(false);
   const [state, setState] = useState<IntrusulState | null>(null);
   const [loading, setLoading] = useState(() => active.peek() !== null);
@@ -54,9 +60,13 @@ export default function Intrusul({ onExit, onToast }: Props) {
   // Re-read after a terminal write when the player returns to this intro.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const best = useMemo(() => bestScore(GAME_KEY), [state]);
+  const exitSafely = useCallback(() => {
+    if (!startInFlight.current) onExit();
+  }, [onExit]);
 
   const start = useCallback(
     async ({ daily, previousGameId }: StartOpts = {}) => {
+      if (!acquireFlight(startInFlight)) return;
       setLoading(true);
       setFeedback(null);
       setRecordHit(false);
@@ -79,6 +89,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
           "error",
         );
       } finally {
+        releaseFlight(startInFlight);
         setLoading(false);
       }
     },
@@ -97,19 +108,23 @@ export default function Intrusul({ onExit, onToast }: Props) {
     void (async () => {
       try {
         const fresh = await intrusulApi.get(gameId);
-        if (fresh.won || fresh.lost) {
-          active.forget();
-          return;
-        }
         setState(fresh);
-        setFeedback("Joc reluat. Atinge cuvântul care nu se potrivește.");
-      } catch {
-        active.forget();
+        setFeedback(
+          fresh.won || fresh.lost
+            ? null
+            : "Joc reluat. Atinge cuvântul care nu se potrivește.",
+        );
+      } catch (error) {
+        if (error instanceof ApiError && error.status === 404) {
+          active.forget();
+        } else {
+          onToast("Nu am putut relua jocul. Încercăm din nou la următoarea deschidere.", "error");
+        }
       } finally {
         setLoading(false);
       }
     })();
-  }, [active]);
+  }, [active, onToast]);
 
   const puzzleKey = useMemo(() => {
     if (!state || !finished || !state.solution) return null;
@@ -151,10 +166,32 @@ export default function Intrusul({ onExit, onToast }: Props) {
     if (outcome.isBest || outcome.isPuzzleBest) sound.playRecord();
   }, [active, finished, puzzleKey, recordOnce, state]);
 
+  const reconcile = useCallback(
+    async (previous: IntrusulState, action: "guess" | "hint") => {
+      const recovered = await recoverAuthoritative(() => intrusulApi.get(previous.game_id));
+      if (!recovered.ok) {
+        setFeedback("Nu am putut confirma acțiunea. Jocul rămâne salvat; încearcă din nou.");
+        return null;
+      }
+      const fresh = recovered.value;
+      setState(fresh);
+      if (fresh.won || fresh.lost) {
+        setFeedback(null);
+      } else if (action === "hint" && fresh.hints_used > previous.hints_used && fresh.clue) {
+        setFeedback(fresh.clue.message);
+      } else if (action === "guess" && fresh.mistakes > previous.mistakes) {
+        setFeedback("Încercarea a fost înregistrată. Continuă de aici.");
+      } else {
+        setFeedback("Joc sincronizat. Poți continua.");
+      }
+      return fresh;
+    },
+    [],
+  );
+
   const choose = useCallback(
     async (id: string) => {
-      if (!state || finished || busy || actionInFlight.current) return;
-      actionInFlight.current = true;
+      if (!state || finished || busy || !acquireFlight(actionInFlight)) return;
       setBusy(true);
       try {
         const result = await intrusulApi.guess(state.game_id, id);
@@ -163,40 +200,41 @@ export default function Intrusul({ onExit, onToast }: Props) {
         // The terminal effect owns the win sound and score recording.
         if (!result.correct && result.already_tried) sound.playUndo();
         else if (!result.correct) sound.playError();
-      } catch (error) {
-        sound.playError();
-        onToast(
-          error instanceof ApiError
-            ? error.message || `Alegere respinsă (${error.status}).`
-            : "Alegere respinsă.",
-          "error",
-        );
+      } catch {
+        const fresh = await reconcile(state, "guess");
+        if (!fresh) sound.playError();
       } finally {
-        actionInFlight.current = false;
+        releaseFlight(actionInFlight);
         setBusy(false);
       }
     },
-    [busy, finished, onToast, state],
+    [busy, finished, reconcile, state],
   );
 
   const requestHint = useCallback(async () => {
-    if (!state || finished || busy || !state.hint_available) return;
+    if (
+      !state ||
+      finished ||
+      busy ||
+      !state.hint_available ||
+      !acquireFlight(actionInFlight)
+    ) {
+      return;
+    }
     setBusy(true);
     try {
       const fresh = await intrusulApi.hint(state.game_id);
       setState(fresh);
       setFeedback(fresh.clue?.message ?? "Indiciul este pe tablă.");
       sound.playSelect();
-    } catch (error) {
-      sound.playError();
-      onToast(
-        error instanceof ApiError ? error.message : "Nu am putut arăta indiciul.",
-        "error",
-      );
+    } catch {
+      const fresh = await reconcile(state, "hint");
+      if (!fresh) sound.playError();
     } finally {
+      releaseFlight(actionInFlight);
       setBusy(false);
     }
-  }, [busy, finished, onToast, state]);
+  }, [busy, finished, reconcile, state]);
 
   const copyShare = useCallback(async () => {
     if (!sharePayload) return;
@@ -207,7 +245,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
     return (
       <div className="screen-pad fill">
         <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
-          <GameShell onExit={onExit} accent={DEF.accent} />
+          <GameShell onExit={exitSafely} accent={DEF.accent} />
           <GameIntro
             icon={DEF.icon}
             title={DEF.title}
@@ -235,7 +273,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   return (
     <div className="screen-pad fill intrusul-game">
       <div className="container col game-container" style={{ gap: 14, paddingBottom: 32 }}>
-        <GameShell onExit={onExit} accent={DEF.accent} title={DEF.title}>
+        <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title}>
           <Hud>
             {state.daily && <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} />}
             <StatBadge
@@ -322,7 +360,11 @@ export default function Intrusul({ onExit, onToast }: Props) {
                     : "Disponibil după prima greșeală"
               }
             >
-              {state.hints_used ? "Indiciu folosit" : "💡 Indiciu"}
+              {state.hints_used
+                ? "Indiciu folosit"
+                : state.hint_available
+                  ? "💡 Arată indiciul"
+                  : "💡 Indiciu după 1 greșeală"}
             </Button>
           </div>
         )}
@@ -336,14 +378,16 @@ export default function Intrusul({ onExit, onToast }: Props) {
             score={state.score}
             isRecord={recordHit}
             isPuzzleRecord={puzzleRecordHit}
+            actionsBusy={loading}
             shareText={sharePayload}
             onCopy={copyShare}
             onReplay={() => void start({ previousGameId: state.game_id })}
             onOptions={() => {
+              if (startInFlight.current) return;
               active.forget();
               setState(null);
             }}
-            onExit={onExit}
+            onExit={exitSafely}
           >
             <div className="intrusul-solution">
               <strong className="intrusul-answer">{state.solution.intruder.label}</strong>

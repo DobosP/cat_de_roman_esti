@@ -28,6 +28,7 @@ export function ResultCard({
   onExit,
   replayLabel = "Încă unul →",
   optionsLabel = "Schimbă opțiunile",
+  actionsBusy = false,
 }: {
   /** Big celebratory glyph. */
   icon: ReactNode;
@@ -57,6 +58,8 @@ export function ResultCard({
   onExit?: () => void;
   replayLabel?: string;
   optionsLabel?: string;
+  /** Disable result actions while a replay/create request is in flight. */
+  actionsBusy?: boolean;
 }) {
   const ring = won ? accent : "var(--surface-border-strong)";
   return (
@@ -137,22 +140,22 @@ export function ResultCard({
 
       <div className="row center wrap" style={{ gap: 12, marginTop: 12, position: "relative" }}>
         {shareText && onCopy && (
-          <Button onClick={onCopy}>
+          <Button onClick={onCopy} disabled={actionsBusy}>
             <span aria-hidden>📋</span> Copiază rezultatul
           </Button>
         )}
         {onReplay && (
-          <Button variant="secondary" onClick={onReplay}>
-            {replayLabel}
+          <Button variant="secondary" onClick={onReplay} disabled={actionsBusy}>
+            {actionsBusy ? "Se pregătește…" : replayLabel}
           </Button>
         )}
         {onOptions && (
-          <Button variant="secondary" onClick={onOptions}>
+          <Button variant="secondary" onClick={onOptions} disabled={actionsBusy}>
             {optionsLabel}
           </Button>
         )}
         {onExit && (
-          <Button variant="secondary" onClick={onExit}>
+          <Button variant="secondary" onClick={onExit} disabled={actionsBusy}>
             Meniu
           </Button>
         )}
