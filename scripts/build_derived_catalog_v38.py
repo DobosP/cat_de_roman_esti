@@ -124,6 +124,21 @@ def _visible_ids(candidate: dict) -> tuple[str, ...]:
     return tuple(node for pair in payload["pairs"] for node in pair["members"])
 
 
+def _assign_competition_ranks(rows: list[dict], score_field: str, rank_field: str) -> None:
+    """Assign deterministic 1,1,3 ranks so equal scores share semantic rank."""
+
+    previous_score: int | None = None
+    current_rank = 0
+    for position, row in enumerate(
+        sorted(rows, key=lambda item: (-item[score_field], item["id"])), 1
+    ):
+        score = row[score_field]
+        if position == 1 or score != previous_score:
+            current_rank = position
+            previous_score = score
+        row[rank_field] = current_rank
+
+
 def _rank_and_cap(candidates: list[dict]) -> list[dict]:
     """Keep at most three variants/source, preferring new concepts before score."""
 
@@ -153,18 +168,19 @@ def _rank_and_cap(candidates: list[dict]) -> list[dict]:
 
     for game in DERIVED_GAMES:
         rows = [row for row in selected if row["game"] == game]
-        standard = sorted(rows, key=lambda row: (-row["standard_score"], row["id"]))
-        for rank, row in enumerate(standard, 1):
-            row["standard_rank"] = rank
-        starter = sorted(
-            (row for row in rows if row["starter_eligible"]),
-            key=lambda row: (-row["starter_score"], row["id"]),
+        _assign_competition_ranks(rows, "standard_score", "standard_rank")
+        _assign_competition_ranks(
+            [row for row in rows if row["starter_eligible"]],
+            "starter_score",
+            "starter_rank",
         )
-        for rank, row in enumerate(starter, 1):
-            row["starter_rank"] = rank
 
     selected.sort(
-        key=lambda row: (DERIVED_GAMES.index(row["game"]), row["standard_rank"])
+        key=lambda row: (
+            DERIVED_GAMES.index(row["game"]),
+            row["standard_rank"],
+            row["id"],
+        )
     )
     return selected
 

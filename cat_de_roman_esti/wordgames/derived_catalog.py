@@ -11,9 +11,11 @@ import hashlib
 import json
 import os
 import random
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
+from types import MappingProxyType
 
 from ..data import DEFAULT_FIXTURE
 from .packs import (
@@ -34,7 +36,7 @@ FORMULA_VERSION = "v38-derived-1"
 MAX_VARIANTS_PER_SOURCE = 3
 # Updated only with a reviewed, generator-produced bundled artifact.
 DEFAULT_DERIVED_CATALOG_SHA256 = (
-    "1072bfe0d0fd7cf1ef88506dd8f190acb2d33e7e1273f29ae7860d8173099331"
+    "3fb0067d068e976ef12795b820f7e889c52872320a1e732a66727dac05b586b8"
 )
 
 _META_FIELDS = {
@@ -71,7 +73,7 @@ class DerivedBoard:
     game: str
     category: str
     difficulty: str
-    payload: dict
+    payload: Mapping[str, object] = field(repr=False)
     _catalog_id: str = field(repr=False, compare=False)
     _source_id: str = field(repr=False, compare=False)
     _romanian_familiarity: int = field(repr=False, compare=False)
@@ -81,6 +83,19 @@ class DerivedBoard:
     _starter_eligible: bool = field(repr=False, compare=False)
     _standard_rank: int = field(repr=False, compare=False)
     _starter_rank: int | None = field(repr=False, compare=False)
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "payload", _deep_freeze(self.payload))
+
+
+def _deep_freeze(value: object) -> object:
+    """Copy JSON-shaped data into recursively read-only runtime containers."""
+
+    if isinstance(value, Mapping):
+        return MappingProxyType({key: _deep_freeze(item) for key, item in value.items()})
+    if isinstance(value, (list, tuple)):
+        return tuple(_deep_freeze(item) for item in value)
+    return value
 
 
 def score_band_weight(score: int) -> int:
@@ -264,6 +279,32 @@ def _require_score(row: dict, name: str) -> int:
     return value
 
 
+def _competition_ranks(rows: list[dict], score_field: str) -> tuple[list[dict], list[int]]:
+    """Return deterministic score order and 1,1,3 competition ranks for ties."""
+
+    ordered = sorted(rows, key=lambda row: (-row[score_field], row["id"]))
+    ranks: list[int] = []
+    previous_score: int | None = None
+    current_rank = 0
+    for position, row in enumerate(ordered, 1):
+        score = row[score_field]
+        if position == 1 or score != previous_score:
+            current_rank = position
+            previous_score = score
+        ranks.append(current_rank)
+    return ordered, ranks
+
+
+def _required_sha256(value: object, name: str) -> str:
+    if not isinstance(value, str) or len(value) != 64:
+        raise ValueError(f"derived catalog: {name} must be a SHA-256 hex digest")
+    try:
+        int(value, 16)
+    except ValueError as exc:
+        raise ValueError(f"derived catalog: {name} must be a SHA-256 hex digest") from exc
+    return value.lower()
+
+
 def _validate_payload(row: dict, source: dict) -> None:
     payload = row.get("payload")
     if not isinstance(payload, dict):
@@ -322,22 +363,41 @@ def _validate_payload(row: dict, source: dict) -> None:
         used_nodes.update(members)
 
 
-def load_derived_catalog(path: str | Path | None = None) -> DerivedCatalog:
+def load_derived_catalog(
+    path: str | Path | None = None, *, expected_sha256: str | None = None
+) -> DerivedCatalog:
     """Load the exact bundled V38 artifact; any source or schema drift fails closed."""
 
-    if os.environ.get("CAT_GAMES_PACK") or os.environ.get("CAT_KG_FIXTURE"):
+    overrides = ("CAT_GAMES_PACK", "CAT_KG_FIXTURE", "CAT_BOARD_RANKINGS")
+    active_overrides = [name for name in overrides if os.environ.get(name)]
+    if active_overrides:
         raise ValueError(
-            "derived catalog: runtime fixture override requires a matching V38 catalog"
+            "derived catalog: runtime source override requires a matching V38 catalog "
+            f"({', '.join(active_overrides)})"
         )
     selected = Path(path or DEFAULT_DERIVED_CATALOG)
+    bundled = selected.resolve() == DEFAULT_DERIVED_CATALOG.resolve()
+    if bundled:
+        pinned_digest = DEFAULT_DERIVED_CATALOG_SHA256
+    elif expected_sha256 is None:
+        raise ValueError(
+            "derived catalog: expected_sha256 is required for a non-bundled catalog"
+        )
+    else:
+        pinned_digest = _required_sha256(expected_sha256, "expected_sha256")
     try:
-        raw = json.loads(selected.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
+        text = selected.read_text(encoding="utf-8")
+        normalized = text.replace("\r\n", "\n").replace("\r", "\n")
+        actual_digest = hashlib.sha256(normalized.encode("utf-8")).hexdigest()
+    except (OSError, UnicodeError) as exc:
         raise ValueError(f"derived catalog: cannot read {selected}: {exc}") from exc
-    if selected.resolve() == DEFAULT_DERIVED_CATALOG.resolve():
-        actual = normalized_text_sha256(selected)
-        if actual != DEFAULT_DERIVED_CATALOG_SHA256:
-            raise ValueError("derived catalog: bundled artifact digest drift")
+    if actual_digest != pinned_digest:
+        kind = "bundled" if bundled else "explicit"
+        raise ValueError(f"derived catalog: {kind} artifact digest drift")
+    try:
+        raw = json.loads(text)
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"derived catalog: cannot read {selected}: {exc}") from exc
     if not isinstance(raw, dict) or set(raw) != {"meta", "boards"}:
         raise ValueError("derived catalog: top level must contain exactly meta and boards")
     meta = raw["meta"]
@@ -490,18 +550,13 @@ def load_derived_catalog(path: str | Path | None = None) -> DerivedCatalog:
         raise ValueError("derived catalog: counts drift")
     for game in DERIVED_GAMES:
         game_rows = [row for row in rows if row["game"] == game]
-        standard_order = sorted(game_rows, key=lambda row: (-row["standard_score"], row["id"]))
-        if [row["standard_rank"] for row in standard_order] != list(
-            range(1, len(standard_order) + 1)
-        ):
+        standard_order, standard_ranks = _competition_ranks(game_rows, "standard_score")
+        if [row["standard_rank"] for row in standard_order] != standard_ranks:
             raise ValueError(f"derived catalog: {game} standard rank drift")
-        starter_order = sorted(
-            (row for row in game_rows if row["starter_eligible"]),
-            key=lambda row: (-row["starter_score"], row["id"]),
+        starter_order, starter_ranks = _competition_ranks(
+            [row for row in game_rows if row["starter_eligible"]], "starter_score"
         )
-        if [row["starter_rank"] for row in starter_order] != list(
-            range(1, len(starter_order) + 1)
-        ):
+        if [row["starter_rank"] for row in starter_order] != starter_ranks:
             raise ValueError(f"derived catalog: {game} starter rank drift")
         per_source: dict[str, int] = {}
         for row in game_rows:

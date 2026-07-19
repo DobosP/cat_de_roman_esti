@@ -30,6 +30,19 @@ def generated() -> dict:
     return BUILD.generate_catalog()
 
 
+def _competition_ranks(rows: list[dict], score_field: str) -> tuple[list[dict], list[int]]:
+    ordered = sorted(rows, key=lambda row: (-row[score_field], row["id"]))
+    ranks: list[int] = []
+    previous_score: int | None = None
+    current_rank = 0
+    for position, row in enumerate(ordered, 1):
+        if position == 1 or row[score_field] != previous_score:
+            current_rank = position
+            previous_score = row[score_field]
+        ranks.append(current_rank)
+    return ordered, ranks
+
+
 def test_generated_catalog_is_exact_complete_and_byte_identical(generated: dict) -> None:
     expected = BUILD.render_catalog(generated)
     assert BUILD.PACKAGE_CATALOG.read_bytes() == expected
@@ -81,22 +94,43 @@ def test_scores_ranks_and_source_caps_recompute_exactly(generated: dict) -> None
         )
     for game in BUILD.DERIVED_GAMES:
         game_rows = [row for row in rows if row["game"] == game]
-        standard = sorted(game_rows, key=lambda row: (-row["standard_score"], row["id"]))
-        assert [row["standard_rank"] for row in standard] == list(
-            range(1, len(standard) + 1)
+        standard, standard_ranks = _competition_ranks(game_rows, "standard_score")
+        assert [row["standard_rank"] for row in standard] == standard_ranks
+        starter, starter_ranks = _competition_ranks(
+            [row for row in game_rows if row["starter_eligible"]], "starter_score"
         )
-        starter = sorted(
-            (row for row in game_rows if row["starter_eligible"]),
-            key=lambda row: (-row["starter_score"], row["id"]),
-        )
-        assert [row["starter_rank"] for row in starter] == list(
-            range(1, len(starter) + 1)
-        )
+        assert [row["starter_rank"] for row in starter] == starter_ranks
         assert all(
             row["starter_rank"] is None
             for row in game_rows
             if not row["starter_eligible"]
         )
+
+
+def test_equal_scores_share_semantic_competition_rank(generated: dict) -> None:
+    rows = generated["boards"]
+    for game in BUILD.DERIVED_GAMES:
+        game_rows = [row for row in rows if row["game"] == game]
+        for score_field, rank_field, eligible_only in (
+            ("standard_score", "standard_rank", False),
+            ("starter_score", "starter_rank", True),
+        ):
+            ranked = [
+                row
+                for row in game_rows
+                if not eligible_only or row["starter_eligible"]
+            ]
+            score_groups = {
+                score: [row for row in ranked if row[score_field] == score]
+                for score in {row[score_field] for row in ranked}
+            }
+            tied_groups = [group for group in score_groups.values() if len(group) > 1]
+            assert tied_groups
+            for group in tied_groups:
+                assert len({row[rank_field] for row in group}) == 1
+                score = group[0][score_field]
+                expected = 1 + sum(row[score_field] > score for row in ranked)
+                assert group[0][rank_field] == expected
 
 
 def test_selected_intrusul_rows_recompute_strict_semantic_gate(generated: dict) -> None:
