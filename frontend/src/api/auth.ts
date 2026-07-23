@@ -32,6 +32,8 @@ export interface RankingRow {
   rank: number;
   name: string;
   score: number;
+  /** Request-scoped marker; never infer identity from a tied rank or nickname. */
+  is_me: boolean;
 }
 
 export interface RankingResponse {

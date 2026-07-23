@@ -382,7 +382,7 @@ def test_perfect_win_score_terminal_solution_answer_free_share_and_progress_reco
     monkeypatch.setattr(
         P,
         "record_finished",
-        lambda request, game, source: recorded.append((game, source)),
+        lambda request, game, source, **_kwargs: recorded.append((game, source)),
     )
     client = Client()
     body = _create(client, seed=14)

@@ -815,7 +815,12 @@ class MoveView(ContractAPIView):
         session.hint_requests = 0
         session.won = guess == session.target
         if session.won:
-            record_finished(request, GAME_KEY, session.pack_id)
+            record_finished(
+                request,
+                GAME_KEY,
+                session.pack_id,
+                score=_score_for(session.moves, session.optimal),
+            )
 
         notes: list[str] = []
         if corrected:

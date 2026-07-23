@@ -5,8 +5,9 @@ from __future__ import annotations
 import random
 
 import pytest
+from django.conf import settings
 
-from cat_de_roman_esti.accounts.models import PlayedPuzzle
+from cat_de_roman_esti.accounts.models import PlayedPuzzle, Profile
 from cat_de_roman_esti.accounts.progress import finished_pack_ids, record_played
 from cat_de_roman_esti.wordgames.packs import get_pack
 
@@ -38,6 +39,12 @@ def test_pick_seeded_excludes_finished():
 
 def test_record_and_finished_roundtrip(make_google_user):
     user = make_google_user()
+    Profile.objects.create(
+        user=user,
+        birth_year=1990,
+        consent_completed=True,
+        consent_version=settings.CAT_CONSENT_VERSION,
+    )
     record_played(user, "contexto", "X1")
     record_played(user, "contexto", "X1")  # idempotent
     record_played(user, "lant", "Y1")
@@ -46,7 +53,8 @@ def test_record_and_finished_roundtrip(make_google_user):
     assert PlayedPuzzle.objects.filter(user=user).count() == 2
 
 
-def test_giveup_records_finished_curated(auth_client):
+def test_giveup_records_finished_curated(auth_client, give_consent):
+    give_consent(auth_client)
     cat, ids = _contexto_category_with_curated()
     assert ids
     created = auth_client.post(
@@ -63,6 +71,20 @@ def test_giveup_records_finished_curated(auth_client):
     recorded = finished_pack_ids(auth_client.cat_user, "contexto")
     assert len(recorded) == 1
     assert recorded.issubset(set(ids))  # a real curated instance from that category
+
+
+def test_authenticated_play_before_consent_records_nothing(auth_client):
+    cat, _ = _contexto_category_with_curated()
+    created = auth_client.post(
+        f"/api/wordgames/contexto/games?category={cat}",
+        content_type="application/json",
+    )
+    game_id = created.json()["game_id"]
+    auth_client.post(
+        f"/api/wordgames/contexto/games/{game_id}/giveup",
+        content_type="application/json",
+    )
+    assert PlayedPuzzle.objects.filter(user=auth_client.cat_user).count() == 0
 
 
 def test_anonymous_play_records_nothing(client):

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import pytest
+from django.test import override_settings
 from django.utils import timezone
 
 from cat_de_roman_esti.accounts.models import ConsentRecord, Profile
@@ -47,3 +48,21 @@ def test_minor_is_blocked_pending_parental_consent(auth_client, give_consent):
     assert profile.can_save_progress() is False
     # No consent record is written for a blocked minor.
     assert ConsentRecord.objects.filter(user=auth_client.cat_user).count() == 0
+
+
+@override_settings(CAT_CONSENT_VERSION="renewed-policy")
+def test_stale_consent_reopens_gate_and_hides_public_visibility(auth_client):
+    profile = Profile.objects.create(
+        user=auth_client.cat_user,
+        birth_year=1990,
+        consent_completed=True,
+        consent_version="old-policy",
+        display_name="Poreclă",
+        show_on_ranking=True,
+    )
+    assert profile.can_save_progress() is False
+
+    user = auth_client.get("/api/me").json()["user"]
+    assert user["consent_completed"] is False
+    assert user["can_save_progress"] is False
+    assert user["show_on_ranking"] is False

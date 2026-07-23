@@ -326,7 +326,12 @@ class GuessView(ContractAPIView):
                 else "Face parte din grup. Mai încearcă."
             )
         if session.finished:
-            record_finished(request, GAME_KEY, session.source_id)
+            record_finished(
+                request,
+                GAME_KEY,
+                session.source_id,
+                score=session.score,
+            )
         return Response(
             {
                 "ok": True,

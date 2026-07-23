@@ -88,7 +88,17 @@ def http_error(status_code: int, detail: str) -> ApiHttpError:
 
 def _validation_error(errors: list[dict], scope: str) -> ApiHttpError:
     """422 with pydantic error dicts, ``loc`` prefixed with body/query like FastAPI."""
-    detail = [{**err, "loc": [scope, *err.get("loc", ())]} for err in errors]
+    detail = []
+    for err in errors:
+        clean = {**err, "loc": [scope, *err.get("loc", ())]}
+        # Custom validators retain their ValueError in ``ctx``. FastAPI renders that
+        # context as text; DRF's encoder likewise needs a JSON-safe public value.
+        if isinstance(clean.get("ctx"), dict):
+            clean["ctx"] = {
+                key: str(value) if isinstance(value, BaseException) else value
+                for key, value in clean["ctx"].items()
+            }
+        detail.append(clean)
     return ApiHttpError(422, detail)
 
 

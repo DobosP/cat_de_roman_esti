@@ -30,13 +30,16 @@ def excluded_pack_ids(request, game: str) -> set[str]:
     return finished_pack_ids(user, game)
 
 
-def record_finished(request, game: str, pack_id) -> None:
-    """Record that the signed-in player finished this curated instance (no-op otherwise)."""
-    if not pack_id or not getattr(settings, "ACCOUNTS_ENABLED", False):
+def record_finished(request, game: str, pack_id, *, score: int | None = None) -> None:
+    """Persist consented repeat avoidance and an optional server-authored best score."""
+    if not getattr(settings, "ACCOUNTS_ENABLED", False):
         return
     user = _user(request)
     if user is None:
         return
-    from ..accounts.progress import record_played
+    from ..accounts.progress import record_played, record_verified_best
 
-    record_played(user, game, str(pack_id))
+    if pack_id:
+        record_played(user, game, str(pack_id))
+    if score is not None:
+        record_verified_best(user, game, score)
