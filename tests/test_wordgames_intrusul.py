@@ -282,7 +282,7 @@ def test_first_try_score_third_wrong_loss_and_terminal_guards(
     monkeypatch.setattr(
         intrusul,
         "record_finished",
-        lambda _request, game, source: recorded.append((game, source)),
+        lambda _request, game, source, **_kwargs: recorded.append((game, source)),
     )
     client = Client()
     first = _create(client, "seed=51")

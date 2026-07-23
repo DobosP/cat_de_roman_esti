@@ -28,7 +28,7 @@ export default function Ranking() {
   }, [game]);
 
   const entries = data?.entries ?? [];
-  const meRank = data?.me?.rank ?? null;
+  const meIsVisible = entries.some((row) => row.is_me);
 
   return (
     <div className="screen-pad fill" style={{ overflowY: "auto" }}>
@@ -69,6 +69,10 @@ export default function Ranking() {
           ))}
         </div>
 
+        <p className="muted" style={{ margin: 0, fontSize: "0.9rem" }}>
+          Recorduri verificate de joc · maximum 1000 de puncte.
+        </p>
+
         {loading && <div className="card center muted" style={{ minHeight: 82 }}>Se încarcă…</div>}
         {error && <div className="card center account-error" style={{ minHeight: 82 }}>{error}</div>}
 
@@ -80,10 +84,10 @@ export default function Ranking() {
 
         {!loading && !error && entries.length > 0 && (
           <div className="col" style={{ gap: 6 }}>
-            {entries.map((row) => (
+            {entries.map((row, index) => (
               <div
-                key={`${row.rank}-${row.name}`}
-                className={`card row spread rank-row${meRank === row.rank ? " rank-row--me" : ""}`}
+                key={`${row.rank}-${row.name}-${index}`}
+                className={`card row spread rank-row${row.is_me ? " rank-row--me" : ""}`}
                 style={{ padding: "10px 14px", alignItems: "center" }}
               >
                 <div className="row" style={{ gap: 12, minWidth: 0, alignItems: "center" }}>
@@ -94,15 +98,22 @@ export default function Ranking() {
                     {row.name}
                   </strong>
                 </div>
-                <strong style={{ fontVariantNumeric: "tabular-nums" }}>{row.score}</strong>
+                <strong style={{ fontVariantNumeric: "tabular-nums" }}>{row.score} pct</strong>
               </div>
             ))}
           </div>
         )}
 
+        {data?.me && !loading && !error && !meIsVisible && (
+          <div className="card row spread rank-row rank-row--me" style={{ padding: "12px 14px" }}>
+            <strong>Locul tău: #{data.me.rank}</strong>
+            <strong style={{ fontVariantNumeric: "tabular-nums" }}>{data.me.score} pct</strong>
+          </div>
+        )}
+
         {data && !data.me && !loading && (
           <p className="faint" style={{ fontSize: "0.85rem" }}>
-            Intră cu Google (dreapta sus) ca să apari și tu în clasament.
+            Pentru a apărea, intră în cont și activează clasamentul din meniul profilului.
           </p>
         )}
       </div>

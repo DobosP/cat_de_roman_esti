@@ -976,7 +976,12 @@ class CombineView(ContractAPIView):
         for c in discovered:
             session.add(c, (a, b))
         if session.won:
-            record_finished(request, GAME_KEY, session.pack_id)
+            record_finished(
+                request,
+                GAME_KEY,
+                session.pack_id,
+                score=session.score,
+            )
 
         # Track dry spells so the nudge can surface only when the player is genuinely stuck.
         if discovered:

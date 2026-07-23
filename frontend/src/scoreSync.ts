@@ -1,9 +1,10 @@
-// scoreSync.ts — best-effort mirror of the local score history to the logged-in account.
+// scoreSync.ts — best-effort mirror of private local history to the logged-in account.
 //
 // The browser localStorage store (scores.ts) stays the source of truth for offline play;
 // when the user is signed in AND has completed consent, finished runs are also pushed to
-// the server (idempotent — the backend dedups on user+game+at+puzzle_key). Never throws:
-// a failed sync must not break gameplay.
+// the server (idempotent — the backend dedups on user+game+at+puzzle_key). These client
+// entries NEVER feed the public ranking; only terminal server actions update that record.
+// Never throws: a failed sync must not break gameplay.
 
 import { postAuth } from "./api/auth";
 import { recentScores, scoreBoard, type GameScoreEntry } from "./scores";

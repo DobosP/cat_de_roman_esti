@@ -342,7 +342,12 @@ class MatchView(ContractAPIView):
             session.solved.append(pair_index)
             session.won = len(session.solved) == PAIR_COUNT
             if session.won:
-                record_finished(request, GAME_KEY, session.source_id)
+                record_finished(
+                    request,
+                    GAME_KEY,
+                    session.source_id,
+                    score=_score(session),
+                )
             return Response(
                 {
                     "ok": True,
@@ -366,7 +371,12 @@ class MatchView(ContractAPIView):
         session.mistakes += 1
         session.lost = session.mistakes >= MAX_MISTAKES
         if session.lost:
-            record_finished(request, GAME_KEY, session.source_id)
+            record_finished(
+                request,
+                GAME_KEY,
+                session.source_id,
+                score=_score(session),
+            )
         return Response(
             {
                 "ok": True,
