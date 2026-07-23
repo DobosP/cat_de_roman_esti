@@ -28,7 +28,7 @@ import {
   lastDerivedReplayId,
   rememberDerivedReplayId,
 } from "../derivedReplay";
-import { bestScore, hasCompletedNonDaily } from "../scores";
+import { bestScore, needsDerivedStarter } from "../scores";
 import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 import { sound } from "../sound";
 import "../styles/intrusul.css";
@@ -78,7 +78,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
       const opts: CreateIntrusulOpts = daily
         ? { daily }
         : {
-            starter: !hasCompletedNonDaily(GAME_KEY),
+            starter: needsDerivedStarter(GAME_KEY),
             previousGameId:
               previousGameId ?? lastDerivedReplayId(GAME_KEY) ?? undefined,
           };
