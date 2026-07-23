@@ -172,7 +172,9 @@ def test_previous_game_carries_a_bounded_distinct_source_ring() -> None:
         assert len(session.source_ring) == len(set(session.source_ring))
         previous_id = body["game_id"]
 
-    assert _create(client, "seed=31&previous_game_id=expired-id")["game_id"]
+    expired = _create(client, "seed=31&previous_game_id=expired-id")
+    expired_session = _session(expired)
+    assert expired_session.source_ring == (expired_session.source_id,)
 
 
 def test_forced_source_repeat_moves_to_tail_without_shrinking_ring() -> None:
