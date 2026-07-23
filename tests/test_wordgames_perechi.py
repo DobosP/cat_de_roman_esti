@@ -291,6 +291,10 @@ def test_source_ring_is_bounded_to_four_live_predecessors() -> None:
     assert session.source_ring[-1] == session.source_id
     assert len(set(session.source_ring)) == len(session.source_ring)
 
+    expired = _create(client, seed=99, previous_game_id="expired-id")
+    expired_session = _session(expired["game_id"])
+    assert expired_session.source_ring == (expired_session.source_id,)
+
 
 def test_exhausted_source_exclusions_retry_the_same_strict_catalog(
     monkeypatch: pytest.MonkeyPatch,

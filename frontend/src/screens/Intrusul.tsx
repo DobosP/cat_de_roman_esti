@@ -24,6 +24,10 @@ import { ResultCard } from "../components/ResultCard";
 import { gameByKey } from "../games";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
+import {
+  lastDerivedReplayId,
+  rememberDerivedReplayId,
+} from "../derivedReplay";
 import { bestScore, hasCompletedNonDaily } from "../scores";
 import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 import { sound } from "../sound";
@@ -75,7 +79,8 @@ export default function Intrusul({ onExit, onToast }: Props) {
         ? { daily }
         : {
             starter: !hasCompletedNonDaily(GAME_KEY),
-            previousGameId,
+            previousGameId:
+              previousGameId ?? lastDerivedReplayId(GAME_KEY) ?? undefined,
           };
       try {
         const fresh = await intrusulApi.create(opts);
@@ -148,6 +153,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
 
   useEffect(() => {
     if (!state || !finished || state.score === undefined) return;
+    if (!state.daily) rememberDerivedReplayId(GAME_KEY, state.game_id);
     active.forget();
     const detail = state.won
       ? `${state.mistakes} ${state.mistakes === 1 ? "greșeală" : "greșeli"}`
