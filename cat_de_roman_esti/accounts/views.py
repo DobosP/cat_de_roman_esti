@@ -120,6 +120,17 @@ class _ConsentBody(pydantic.BaseModel):
     display_name: str = pydantic.Field(default="", max_length=80)
 
 
+def _parental_consent_required(user) -> Response:
+    return Response(
+        {
+            "status": "parental_consent_required",
+            "min_self_consent_age": settings.CAT_MIN_SELF_CONSENT_AGE,
+            "user": _user_payload(user),
+        },
+        status=403,
+    )
+
+
 class ConsentView(_SessionAuthedView):
     permission_classes = [IsAuthenticated]
 
@@ -128,41 +139,43 @@ class ConsentView(_SessionAuthedView):
         if not (body.accept_privacy and body.accept_tos):
             raise http_error(400, "Trebuie sa accepti politica de confidentialitate si termenii.")
 
-        profile = _profile_for(request.user)
-        profile.birth_year = body.birth_year
-        age = timezone.now().year - body.birth_year
-        version = settings.CAT_CONSENT_VERSION
+        with transaction.atomic():
+            profile = _profile_for(request.user)
+            profile = Profile.objects.select_for_update().get(pk=profile.pk)
 
-        if age < settings.CAT_MIN_SELF_CONSENT_AGE:
-            # Below the RO self-consent age: block self-service accounts. A verifiable
-            # parental-consent flow is required before this account may save any data.
-            profile.is_minor = True
-            profile.parental_consent_required = True
-            profile.consent_completed = False
-            profile.consent_version = ""
+            # Once self-service has identified an underage player, only the future
+            # verifiable parental flow may clear the hold. Recheck it under the same
+            # lock as consent writes so a second request cannot replace the birth year.
+            if profile.is_minor or profile.parental_consent_required:
+                return _parental_consent_required(request.user)
+
+            profile.birth_year = body.birth_year
+            age = timezone.now().year - body.birth_year
+            version = settings.CAT_CONSENT_VERSION
+
+            if age < settings.CAT_MIN_SELF_CONSENT_AGE:
+                # Below the RO self-consent age: block self-service accounts. A verifiable
+                # parental-consent flow is required before this account may save any data.
+                profile.is_minor = True
+                profile.parental_consent_required = True
+                profile.consent_completed = False
+                profile.consent_version = ""
+                profile.save()
+                return _parental_consent_required(request.user)
+
+            profile.is_minor = False
+            profile.parental_consent_required = False
+            profile.consent_completed = True
+            profile.consent_version = version
+            # A nickname is optional for private progress, but mandatory before public opt-in.
+            # Never fill it from Google profile or email data.
+            chosen = body.display_name.strip()
+            if chosen:
+                profile.display_name = " ".join(chosen.split())
             profile.save()
-            return Response(
-                {
-                    "status": "parental_consent_required",
-                    "min_self_consent_age": settings.CAT_MIN_SELF_CONSENT_AGE,
-                    "user": _user_payload(request.user),
-                },
-                status=403,
-            )
-
-        profile.is_minor = False
-        profile.parental_consent_required = False
-        profile.consent_completed = True
-        profile.consent_version = version
-        # A nickname is optional for private progress, but mandatory before public opt-in.
-        # Never fill it from Google profile or email data.
-        chosen = body.display_name.strip()
-        if chosen:
-            profile.display_name = " ".join(chosen.split())
-        profile.save()
-        for doc in (ConsentRecord.PRIVACY, ConsentRecord.TOS):
-            ConsentRecord.objects.create(user=request.user, document=doc, version=version)
-        return Response({"status": "ok", "user": _user_payload(request.user)})
+            for doc in (ConsentRecord.PRIVACY, ConsentRecord.TOS):
+                ConsentRecord.objects.create(user=request.user, document=doc, version=version)
+            return Response({"status": "ok", "user": _user_payload(request.user)})
 
 
 class _ProfileBody(pydantic.BaseModel):
@@ -177,19 +190,27 @@ class ProfileView(_SessionAuthedView):
 
     def post(self, request) -> Response:
         body = parse_data(request, _ProfileBody)
-        profile = _profile_for(request.user)
-        if body.display_name is not None:
-            handle = " ".join(body.display_name.split())
-            if not handle:
-                raise http_error(400, "Numele din clasament nu poate fi gol.")
-            profile.display_name = handle[:80]
-        if body.show_on_ranking is not None:
-            if body.show_on_ranking and not profile.can_save_progress():
-                raise http_error(403, "Consimțământ valid necesar pentru clasament.")
-            if body.show_on_ranking and not profile.display_name.strip():
-                raise http_error(400, "Alege o poreclă înainte să apari în clasament.")
-            profile.show_on_ranking = body.show_on_ranking
-        profile.save()
+        with transaction.atomic():
+            profile = _profile_for(request.user)
+            profile = Profile.objects.select_for_update().get(pk=profile.pk)
+            update_fields: list[str] = []
+
+            if body.display_name is not None:
+                handle = " ".join(body.display_name.split())
+                if not handle:
+                    raise http_error(400, "Numele din clasament nu poate fi gol.")
+                profile.display_name = handle[:80]
+                update_fields.append("display_name")
+            if body.show_on_ranking is not None:
+                if body.show_on_ranking and not profile.can_save_progress():
+                    raise http_error(403, "Consimțământ valid necesar pentru clasament.")
+                if body.show_on_ranking and not profile.display_name.strip():
+                    raise http_error(400, "Alege o poreclă înainte să apari în clasament.")
+                profile.show_on_ranking = body.show_on_ranking
+                update_fields.append("show_on_ranking")
+
+            if update_fields:
+                profile.save(update_fields=[*update_fields, "updated"])
         return Response({"status": "ok", "user": _user_payload(request.user)})
 
 

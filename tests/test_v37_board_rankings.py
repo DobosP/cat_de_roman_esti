@@ -15,9 +15,11 @@ from cat_de_roman_esti.wordgames.packs import (
     DEFAULT_PACK,
     DEFAULT_RUBRIC,
     DEFAULT_RUBRIC_SHA256,
+    DIFFICULTIES,
     GAME_KINDS,
     CuratedItem,
     GamesPack,
+    get_pack,
     load_pack,
     normalized_text_sha256,
 )
@@ -104,6 +106,7 @@ def test_digest_bound_sidecar_loads_private_ratings(tmp_path: Path):
     rankings = _write_rankings(tmp_path / "rankings.json")
     pack = load_pack(DEFAULT_PACK, rankings_path=rankings)
 
+    assert pack.ranked is True
     first = min(pack.pool("conexiuni"), key=lambda item: item._pilot_rank or 10_000)
     assert first._romanian_familiarity == 80
     assert first._play_quality == 75
@@ -156,6 +159,7 @@ def test_custom_pack_without_sidecar_keeps_neutral_selection(
     custom.write_text(DEFAULT_PACK.read_text(encoding="utf-8"), encoding="utf-8")
     pack = load_pack(custom)
 
+    assert pack.ranked is False
     item = pack.pool("contexto")[0]
     assert item._pilot_eligible is False
     assert item._selection_weight == 1
@@ -371,6 +375,61 @@ def test_pilot_preference_falls_back_after_filters_and_exclusions():
     ) is None
 
 
+def test_ranked_seeded_selection_never_uses_reserves_and_repeats_safely():
+    eligible = [
+        _item("ct_good_a", weight=1),
+        _item("ct_good_b", weight=5),
+    ]
+    reserve = _item("ct_reserve", weight=5, eligible=False)
+    forward = GamesPack([*eligible, reserve], ranked=True)
+    reverse = GamesPack([reserve, *reversed(eligible)], ranked=True)
+
+    for seed in range(100):
+        left = forward.pick_seeded("contexto", random.Random(seed))
+        right = reverse.pick_seeded("contexto", random.Random(seed))
+        assert left is not None and right is not None
+        assert left.id == right.id
+        assert left.id in {item.id for item in eligible}
+
+    unseen = forward.pick_seeded(
+        "contexto",
+        random.Random(37),
+        exclude_ids={"ct_good_a"},
+    )
+    assert unseen is not None and unseen.id == "ct_good_b"
+
+    exhausted = {"ct_good_a", "ct_good_b"}
+    repeated = {
+        forward.pick_seeded(
+            "contexto",
+            random.Random(seed),
+            exclude_ids=exhausted,
+        ).id
+        for seed in range(100)
+    }
+    assert repeated == exhausted
+
+
+def test_ranked_selection_returns_none_when_filtered_shelf_has_no_eligible_item():
+    reserves = [
+        _item("ct_reserve_a", eligible=False),
+        _item("ct_reserve_b", eligible=False),
+    ]
+    pack = GamesPack(reserves, ranked=True)
+
+    assert pack.pick_seeded("contexto", random.Random(1)) is None
+    assert (
+        pack.pick_seeded(
+            "contexto",
+            random.Random(1),
+            category="geografie",
+            difficulty="normal",
+        )
+        is None
+    )
+    assert pack.pick_daily("contexto", "v40-zero", category="istorie") is None
+
+
 def test_weighted_daily_is_stable_order_independent_and_keeps_low_reachable():
     items = [_item("ct_low", weight=1), _item("ct_high", weight=5)]
     forward = GamesPack(items)
@@ -406,6 +465,124 @@ def test_daily_pilot_preference_respects_shared_floor_and_category_minimum():
 
     themed = GamesPack([preferred[0], reserve])
     assert themed.pick_daily("contexto", "themed", category="istorie").id == preferred[0].id
+
+
+def test_ranked_daily_applies_floor_to_eligible_items_and_is_order_independent():
+    eligible = [_item(f"ct_good_{index}", weight=(index % 5) + 1) for index in range(8)]
+    reserves = [
+        _item(f"ct_reserve_{index}", eligible=False, weight=5) for index in range(8)
+    ]
+
+    thin = GamesPack([*eligible[:7], *reserves], ranked=True)
+    assert thin.pick_daily("contexto", "v40-thin") is None
+    scoped = thin.pick_daily("contexto", "v40-thin", category="istorie")
+    assert scoped is not None and scoped._pilot_eligible
+
+    forward = GamesPack([*eligible, *reserves], ranked=True)
+    reverse = GamesPack([*reversed(reserves), *reversed(eligible)], ranked=True)
+    eligible_ids = {item.id for item in eligible}
+    for day in range(200):
+        key = f"v40-day-{day}"
+        left = forward.pick_daily("contexto", key)
+        right = reverse.pick_daily("contexto", key)
+        assert left is not None and right is not None
+        assert left.id == right.id
+        assert left.id in eligible_ids
+
+
+def test_shipped_ranked_inventory_exposes_reserves_but_never_selects_them():
+    pack = load_pack()
+    runtime_pack = get_pack()
+
+    assert pack.ranked is True
+    assert runtime_pack.ranked is True
+    assert any(not item._pilot_eligible for item in pack.pool("conexiuni"))
+
+    empty_eligible_shelves: set[tuple[str, str, str]] = set()
+    for game in GAME_KINDS:
+        categories = {item.category for item in pack.pool(game)}
+        for category in categories:
+            for difficulty in DIFFICULTIES:
+                shelf = pack.pool(
+                    game,
+                    category=category,
+                    difficulty=difficulty,
+                )
+                if not shelf:
+                    continue
+                eligible_ids = {item.id for item in shelf if item._pilot_eligible}
+                seeded = pack.pick_seeded(
+                    game,
+                    random.Random(39),
+                    category=category,
+                    difficulty=difficulty,
+                )
+                exhausted = pack.pick_seeded(
+                    game,
+                    random.Random(39),
+                    category=category,
+                    difficulty=difficulty,
+                    exclude_ids=eligible_ids,
+                )
+                daily = pack.pick_daily(
+                    game,
+                    "v40-inventory",
+                    category=category,
+                    difficulty=difficulty,
+                )
+                if not eligible_ids:
+                    empty_eligible_shelves.add((game, category, difficulty))
+                    assert seeded is None
+                    assert exhausted is None
+                    assert daily is None
+                else:
+                    assert seeded is not None and seeded.id in eligible_ids
+                    assert exhausted is not None and exhausted.id in eligible_ids
+                    assert daily is not None and daily.id in eligible_ids
+
+    assert empty_eligible_shelves == {
+        ("conexiuni", "gastronomie", "usor"),
+        ("conexiuni", "geografie", "usor"),
+        ("conexiuni", "stiinta", "usor"),
+        ("conexiuni", "viata_de_roman", "usor"),
+    }
+
+
+def test_ranked_lant_narrowing_preserves_safe_repeat_semantics(monkeypatch):
+    pytest.importorskip("django")
+    from cat_de_roman_esti.wordgames import lant
+
+    eligible = CuratedItem(
+        id="lt_good",
+        game="lant",
+        category="istorie",
+        difficulty="usor",
+        source="ai",
+        status="approved",
+        payload={"start": "n_dacia", "target": "n_roma", "optimal": 2},
+        _pilot_eligible=True,
+    )
+    reserve = replace(eligible, id="lt_reserve", _pilot_eligible=False)
+    monkeypatch.setattr(
+        lant,
+        "get_pack",
+        lambda: GamesPack([eligible, reserve], ranked=True),
+    )
+    monkeypatch.setattr(lant, "_is_wide_beginner_item", lambda _item: False)
+    monkeypatch.setattr(
+        lant,
+        "_prefer_wide_beginner_pool",
+        lambda items, _difficulty, *, minimum_pool: items,
+    )
+
+    picked = lant._pick_curated(
+        random.Random(39),
+        daily=None,
+        category="istorie",
+        difficulty="usor",
+        exclude_ids={eligible.id},
+    )
+    assert picked is not None and picked.id == eligible.id
 
 
 def _all_keys(value: object) -> set[str]:

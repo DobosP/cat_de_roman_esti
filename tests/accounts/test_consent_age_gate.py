@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from unittest.mock import patch
+
 import pytest
 from django.test import override_settings
 from django.utils import timezone
@@ -48,6 +50,86 @@ def test_minor_is_blocked_pending_parental_consent(auth_client, give_consent):
     assert profile.can_save_progress() is False
     # No consent record is written for a blocked minor.
     assert ConsentRecord.objects.filter(user=auth_client.cat_user).count() == 0
+
+
+def test_parental_hold_cannot_be_cleared_by_adult_year_resubmission(
+    auth_client,
+    give_consent,
+):
+    minor_year = timezone.now().year - 10
+    with patch.object(
+        Profile.objects,
+        "select_for_update",
+        wraps=Profile.objects.select_for_update,
+    ) as locked:
+        first = give_consent(auth_client, birth_year=minor_year)
+        second = auth_client.post(
+            "/api/me/consent",
+            data={
+                "birth_year": 1990,
+                "accept_privacy": True,
+                "accept_tos": True,
+                "display_name": "Adult",
+            },
+            content_type="application/json",
+        )
+
+    assert first.status_code == 403
+    assert second.status_code == 403
+    assert second.json()["status"] == "parental_consent_required"
+    assert locked.call_count == 2
+
+    profile = Profile.objects.get(user=auth_client.cat_user)
+    assert profile.birth_year == minor_year
+    assert profile.is_minor is True
+    assert profile.parental_consent_required is True
+    assert profile.consent_completed is False
+    assert profile.consent_version == ""
+    assert profile.display_name == ""
+    assert ConsentRecord.objects.filter(user=auth_client.cat_user).count() == 0
+
+    me = auth_client.get("/api/me").json()["user"]
+    assert me["parental_consent_required"] is True
+    assert me["consent_completed"] is False
+    assert me["can_save_progress"] is False
+    assert me["show_on_ranking"] is False
+
+    score = {
+        "game": "contexto",
+        "score": 500,
+        "detail": "3 încercări",
+        "at": 1_700_000_000_000,
+    }
+    assert auth_client.get("/api/me/scores").status_code == 403
+    assert (
+        auth_client.post(
+            "/api/me/scores",
+            data={"entries": [score]},
+            content_type="application/json",
+        ).status_code
+        == 403
+    )
+    with patch.object(
+        Profile.objects,
+        "select_for_update",
+        wraps=Profile.objects.select_for_update,
+    ) as profile_locked:
+        ranking_response = auth_client.post(
+            "/api/me/profile",
+            data={"display_name": "Adult", "show_on_ranking": True},
+            content_type="application/json",
+        )
+    assert ranking_response.status_code == 403
+    assert profile_locked.call_count == 1
+
+    profile.refresh_from_db()
+    assert profile.birth_year == minor_year
+    assert profile.is_minor is True
+    assert profile.parental_consent_required is True
+    assert profile.consent_completed is False
+    assert profile.consent_version == ""
+    assert profile.display_name == ""
+    assert profile.show_on_ranking is False
 
 
 @override_settings(CAT_CONSENT_VERSION="renewed-policy")

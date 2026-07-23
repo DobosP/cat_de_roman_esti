@@ -176,21 +176,40 @@ export default function Home({
           <ul className="daily-circuit-games" aria-label="Progresul jocurilor de azi">
             {circuit.games.map((row) => {
               const game = gameByKey(row.game);
+              if (row.completed) {
+                return (
+                  <li
+                    key={row.game}
+                    className="daily-circuit-game-item daily-circuit-game is-complete"
+                    aria-label={`${game.title}: terminat azi, ${row.score} puncte`}
+                  >
+                    <span className="daily-circuit-game-icon" aria-hidden>
+                      {game.icon}
+                    </span>
+                    <span className="daily-circuit-game-name">{game.title}</span>
+                    <span className="daily-circuit-game-score" aria-hidden>
+                      {row.score} ✓
+                    </span>
+                  </li>
+                );
+              }
+
               return (
-                <li
-                  key={row.game}
-                  className={`daily-circuit-game${row.completed ? " is-complete" : ""}`}
-                  aria-label={`${game.title}: ${
-                    row.completed
-                      ? `terminat azi, ${row.score} puncte`
-                      : "neterminat azi"
-                  }`}
-                >
-                  <span className="daily-circuit-game-icon" aria-hidden>{game.icon}</span>
-                  <span className="daily-circuit-game-name">{game.title}</span>
-                  <span className="daily-circuit-game-score" aria-hidden>
-                    {row.completed ? `${row.score} ✓` : "○"}
-                  </span>
+                <li key={row.game} className="daily-circuit-game-item">
+                  <button
+                    type="button"
+                    className="daily-circuit-game daily-circuit-game-action"
+                    onClick={() => openGame(game)}
+                    aria-label={`Deschide ${game.title} — neterminat azi`}
+                  >
+                    <span className="daily-circuit-game-icon" aria-hidden>
+                      {game.icon}
+                    </span>
+                    <span className="daily-circuit-game-name">{game.title}</span>
+                    <span className="daily-circuit-game-score" aria-hidden>
+                      Joacă →
+                    </span>
+                  </button>
                 </li>
               );
             })}

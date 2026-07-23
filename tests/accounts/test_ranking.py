@@ -82,10 +82,38 @@ def test_hidden_player_excluded(auth_client, give_consent):
 
 def test_profile_update_and_validation(auth_client, give_consent):
     give_consent(auth_client)
-    ok = auth_client.post(
-        "/api/me/profile", data={"display_name": "  Vlad  "}, content_type="application/json"
-    )
+    saved_fields = []
+    original_save = Profile.save
+
+    def track_save(instance, *args, **kwargs):
+        saved_fields.append(kwargs.get("update_fields"))
+        return original_save(instance, *args, **kwargs)
+
+    with (
+        patch.object(
+            Profile.objects,
+            "select_for_update",
+            wraps=Profile.objects.select_for_update,
+        ) as locked,
+        patch.object(Profile, "save", track_save),
+    ):
+        ok = auth_client.post(
+            "/api/me/profile",
+            data={"display_name": "  Vlad  ", "show_on_ranking": True},
+            content_type="application/json",
+        )
+
     assert ok.status_code == 200 and ok.json()["user"]["ranking_name"] == "Vlad"
+    assert locked.call_count == 1
+    assert len(saved_fields) == 1
+    assert set(saved_fields[0]) == {"display_name", "show_on_ranking", "updated"}
+
+    profile = Profile.objects.get(user=auth_client.cat_user)
+    assert profile.consent_completed is True
+    assert profile.parental_consent_required is False
+    assert profile.consent_version
+    assert profile.show_on_ranking is True
+
     bad = auth_client.post(
         "/api/me/profile", data={"display_name": "   "}, content_type="application/json"
     )

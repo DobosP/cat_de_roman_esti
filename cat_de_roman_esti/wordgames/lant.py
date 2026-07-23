@@ -579,6 +579,18 @@ def _pick_curated(
         difficulty=difficulty,
         exclude_ids=None if daily is not None else exclude_ids,
     )
+    if pack.ranked:
+        pool = [item for item in pool if item._pilot_eligible]
+        if not pool and daily is None and exclude_ids:
+            pool = [
+                item
+                for item in pack.pool(
+                    GAME_KEY,
+                    category=category,
+                    difficulty=difficulty,
+                )
+                if item._pilot_eligible
+            ]
     if daily is not None and category is None:
         preference_floor = CURATED_DAILY_MIN_POOL
     else:
@@ -586,7 +598,7 @@ def _pick_curated(
     selected_pool = _prefer_wide_beginner_pool(
         pool, difficulty, minimum_pool=preference_floor
     )
-    narrowed = GamesPack(selected_pool)
+    narrowed = GamesPack(selected_pool, ranked=pack.ranked)
     if daily is not None:
         return narrowed.pick_daily(
             GAME_KEY,

@@ -136,7 +136,7 @@ test("malformed and imported histories stay deterministic and local", () => {
   assert.equal(JSON.parse(storage.getItem(STORAGE_KEY)).alchimie.recent[0].score, 0);
 });
 
-test("Home renders a compact local-only circuit and marks completed game cards", () => {
+test("Home renders local-only circuit actions and keeps completed rows read-only", () => {
   assert.match(homeSource, /buildDailyCircuit\(board, today\)/);
   assert.match(homeSource, /Circuitul de azi/);
   assert.match(homeSource, /Doar pe acest dispozitiv\./);
@@ -152,7 +152,28 @@ test("Home renders a compact local-only circuit and marks completed game cards",
     scoreSource.indexOf("export function buildDailyCircuit"),
     scoreSource.indexOf("export function recentScores"),
   );
-  assert.doesNotMatch(circuitMarkup, /onClick|navigate\(|<button/);
+  assert.match(circuitMarkup, /if \(row\.completed\) \{/);
+  assert.match(
+    circuitMarkup,
+    /className="daily-circuit-game-item daily-circuit-game is-complete"/,
+  );
+  assert.match(
+    circuitMarkup,
+    /aria-label=\{`\$\{game\.title\}: terminat azi, \$\{row\.score\} puncte`\}/,
+  );
+  assert.match(circuitMarkup, /className="daily-circuit-game daily-circuit-game-action"/);
+  assert.match(circuitMarkup, /onClick=\{\(\) => openGame\(game\)\}/);
+  assert.match(
+    circuitMarkup,
+    /aria-label=\{`Deschide \$\{game\.title\} — neterminat azi`\}/,
+  );
+  assert.match(circuitMarkup, /Joacă →/);
+  const completedBranch = circuitMarkup.slice(
+    circuitMarkup.indexOf("if (row.completed)"),
+    circuitMarkup.indexOf('<li key={row.game} className="daily-circuit-game-item">'),
+  );
+  assert.doesNotMatch(completedBranch, /<button|onClick/);
+  assert.doesNotMatch(circuitMarkup, /navigate\(/);
   assert.doesNotMatch(`${circuitMarkup}\n${helperSource}`, /fetch\(|\/api\/|telemetry|upload/i);
 });
 
@@ -165,7 +186,14 @@ test("circuit markup exposes headings, status text, and a labelled progress list
   assert.match(homeSource, /aria-live="polite"/);
   assert.match(homeSource, /aria-label=\{`\$\{circuit\.completed\} din 6 jocuri terminate azi,/);
   assert.match(homeSource, /<ul className="daily-circuit-games" aria-label="Progresul jocurilor de azi">/);
-  assert.match(homeSource, /aria-label=\{`\$\{game\.title\}: \$\{/);
+  assert.match(
+    homeSource,
+    /aria-label=\{`\$\{game\.title\}: terminat azi, \$\{row\.score\} puncte`\}/,
+  );
+  assert.match(
+    homeSource,
+    /aria-label=\{`Deschide \$\{game\.title\} — neterminat azi`\}/,
+  );
   assert.match(homeSource, /aria-label=\{`Joacă \$\{g\.title\} — \$\{/);
 });
 
@@ -175,6 +203,11 @@ test("daily circuit CSS is mobile-first, compact, and scales to desktop", () => 
     /\.daily-circuit-games\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/s,
   );
   assert.match(cssSource, /\.daily-circuit-game\s*\{[^}]*min-height: 44px/s);
+  assert.match(cssSource, /\.daily-circuit-game-name\s*\{[^}]*overflow-wrap: anywhere/s);
+  assert.match(
+    cssSource,
+    /\.daily-circuit-game-action:focus-visible\s*\{[^}]*outline: 2px solid/s,
+  );
   assert.match(
     cssSource,
     /@media \(min-width: 700px\)\s*\{[\s\S]*?\.daily-circuit-games\s*\{[^}]*repeat\(3,/,
