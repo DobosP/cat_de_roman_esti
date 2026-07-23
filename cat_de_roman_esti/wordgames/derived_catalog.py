@@ -1,4 +1,4 @@
-"""Private V38 derived-board catalog and source-balanced deterministic selection.
+"""Private derived-board catalog and deterministic ranked selection.
 
 This module is additive: the V37 ``GamesPack`` implementation and its daily hash
 namespace remain untouched.  Derived board IDs, source IDs, scores, and ranks are
@@ -34,6 +34,7 @@ DEFAULT_DERIVED_CATALOG = PACK_DIR / "derived_catalog_v38.json"
 SCHEMA_VERSION = 1
 FORMULA_VERSION = "v38-derived-1"
 MAX_VARIANTS_PER_SOURCE = 3
+_PREFERRED_STANDARD_SCORE = 55
 # Updated only with a reviewed, generator-produced bundled artifact.
 DEFAULT_DERIVED_CATALOG_SHA256 = (
     "3fb0067d068e976ef12795b820f7e889c52872320a1e732a66727dac05b586b8"
@@ -148,7 +149,7 @@ def _rendezvous(
 
 
 class DerivedCatalog:
-    """Finite derived boards grouped by private source before candidate selection."""
+    """Finite derived boards grouped before deterministic ranked selection."""
 
     def __init__(self, boards: list[DerivedBoard]):
         self._boards = sorted(boards, key=lambda board: board._catalog_id)
@@ -184,32 +185,60 @@ class DerivedCatalog:
         return [(source, grouped[source]) for source in sorted(grouped)]
 
     @staticmethod
+    def _by_category(pool: list[DerivedBoard]) -> list[tuple[str, list[DerivedBoard]]]:
+        grouped: dict[str, list[DerivedBoard]] = {}
+        for board in pool:
+            grouped.setdefault(board.category, []).append(board)
+        return [(category, grouped[category]) for category in sorted(grouped)]
+
+    @staticmethod
     def _score(board: DerivedBoard, starter: bool) -> int:
         return board._starter_score if starter else board._standard_score
 
-    def pick_seeded(
+    @staticmethod
+    def _preferred_shelf(pool: list[DerivedBoard]) -> list[DerivedBoard]:
+        """Prefer launch-quality boards without widening an already strict filter."""
+
+        preferred = [
+            board
+            for board in pool
+            if board._standard_score >= _PREFERRED_STANDARD_SCORE
+        ]
+        return preferred or pool
+
+    def _source_average_score(
         self,
-        game: str,
+        boards: list[DerivedBoard],
+        starter: bool,
+    ) -> int:
+        return _rounded_mean([self._score(board, starter) for board in boards])
+
+    def _category_average_score(
+        self,
+        boards: list[DerivedBoard],
+        starter: bool,
+    ) -> int:
+        # Average each source first so neither source-rich categories nor prolific
+        # sources acquire extra category weight from catalog size.
+        return _rounded_mean(
+            [
+                self._source_average_score(source_boards, starter)
+                for _, source_boards in self._by_source(boards)
+            ]
+        )
+
+    def _pick_source_variant(
+        self,
+        pool: list[DerivedBoard],
         rng: random.Random,
         *,
-        category: str | None = None,
-        difficulty: str | None = None,
-        exclude_source_ids: set[str] | None = None,
-        starter: bool = False,
+        starter: bool,
     ) -> DerivedBoard | None:
-        pool = self.pool(
-            game,
-            category=category,
-            difficulty=difficulty,
-            exclude_source_ids=exclude_source_ids,
-            starter=starter,
-        )
         sources = self._by_source(pool)
         if not sources:
             return None
         source_scores = [
-            _rounded_mean([self._score(board, starter) for board in boards])
-            for _, boards in sources
+            self._source_average_score(boards, starter) for _, boards in sources
         ]
         source = _weighted_choice(
             sources,
@@ -223,6 +252,42 @@ class DerivedCatalog:
             rng,
         )
 
+    def pick_seeded(
+        self,
+        game: str,
+        rng: random.Random,
+        *,
+        category: str | None = None,
+        difficulty: str | None = None,
+        exclude_source_ids: set[str] | None = None,
+        starter: bool = False,
+        balance_categories: bool = False,
+    ) -> DerivedBoard | None:
+        pool = self.pool(
+            game,
+            category=category,
+            difficulty=difficulty,
+            exclude_source_ids=exclude_source_ids,
+            starter=starter,
+        )
+        pool = self._preferred_shelf(pool)
+        if balance_categories and category is None:
+            categories = self._by_category(pool)
+            if not categories:
+                return None
+            selected_category = _weighted_choice(
+                categories,
+                [
+                    score_band_weight(
+                        self._category_average_score(boards, starter=starter)
+                    )
+                    for _, boards in categories
+                ],
+                rng,
+            )
+            pool = selected_category[1]
+        return self._pick_source_variant(pool, rng, starter=starter)
+
     def pick_daily(
         self,
         game: str,
@@ -233,7 +298,9 @@ class DerivedCatalog:
     ) -> DerivedBoard | None:
         """Pick a stable source then variant; never widen an empty filtered shelf."""
 
-        pool = self.pool(game, category=category, difficulty=difficulty)
+        pool = self._preferred_shelf(
+            self.pool(game, category=category, difficulty=difficulty)
+        )
         sources = self._by_source(pool)
         if not sources:
             return None

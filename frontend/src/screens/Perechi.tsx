@@ -20,10 +20,15 @@ import { GameShell } from "../components/GameShell";
 import { Hud, StatBadge } from "../components/Hud";
 import { NextMove } from "../components/PlayGuide";
 import { ResultCard } from "../components/ResultCard";
+import { nextActiveTileId } from "../perechiFocus.mjs";
 import { gameByKey } from "../games";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
-import { bestScore, hasCompletedNonDaily } from "../scores";
+import {
+  lastDerivedReplayId,
+  rememberDerivedReplayId,
+} from "../derivedReplay";
+import { bestScore, needsDerivedStarter } from "../scores";
 import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 import { sound } from "../sound";
 import "../styles/perechi.css";
@@ -41,12 +46,18 @@ interface StartOpts {
   previousGameId?: string;
 }
 
+type PendingFocus = { kind: "tile"; id: string } | { kind: "result" } | null;
+
 export default function Perechi({ onExit, onToast }: Props) {
   const active = useActiveGame(GAME_KEY);
   const recordOnce = useRecordScore(GAME_KEY);
   const resumeOnce = useRef(false);
   const startInFlight = useRef(false);
   const actionInFlight = useRef(false);
+  const tileRefs = useRef(new Map<string, HTMLButtonElement>());
+  const resultFocusRef = useRef<HTMLDivElement>(null);
+  const pendingFocus = useRef<PendingFocus>(null);
+  const focusedTileBeforeMutation = useRef<string | null>(null);
   const [state, setState] = useState<PerechiState | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
   const [checking, setChecking] = useState<[string, string] | null>(null);
@@ -62,6 +73,34 @@ export default function Perechi({ onExit, onToast }: Props) {
   const exitSafely = useCallback(() => {
     if (!startInFlight.current) onExit();
   }, [onExit]);
+  const queueFocusAfterUpdate = useCallback(
+    (fresh: PerechiState, candidateIds: readonly string[]) => {
+      const focusedId = focusedTileBeforeMutation.current;
+      if (!focusedId || !candidateIds.includes(focusedId)) return;
+      if (fresh.won || fresh.lost) {
+        pendingFocus.current = { kind: "result" };
+        return;
+      }
+      if (!fresh.tiles.find((tile) => tile.id === focusedId)?.solved) return;
+      const nextId = nextActiveTileId(fresh.tiles, focusedId);
+      pendingFocus.current = nextId
+        ? { kind: "tile", id: nextId }
+        : { kind: "result" };
+    },
+    [],
+  );
+
+  useEffect(() => {
+    const pending = pendingFocus.current;
+    if (!pending) return;
+    const target =
+      pending.kind === "tile"
+        ? tileRefs.current.get(pending.id)
+        : resultFocusRef.current?.querySelector<HTMLButtonElement>("button:not(:disabled)");
+    if (!target) return;
+    target.focus();
+    pendingFocus.current = null;
+  }, [finished, state?.solved_count]);
 
   const start = useCallback(
     async ({ daily, previousGameId }: StartOpts = {}) => {
@@ -75,8 +114,9 @@ export default function Perechi({ onExit, onToast }: Props) {
       const opts: CreatePerechiOpts = daily
         ? { daily }
         : {
-            starter: !hasCompletedNonDaily(GAME_KEY),
-            previousGameId,
+            starter: needsDerivedStarter(GAME_KEY),
+            previousGameId:
+              previousGameId ?? lastDerivedReplayId(GAME_KEY) ?? undefined,
           };
       try {
         const fresh = await perechiApi.create(opts);
@@ -147,6 +187,7 @@ export default function Perechi({ onExit, onToast }: Props) {
 
   useEffect(() => {
     if (!state || !finished || state.score === undefined) return;
+    if (!state.daily) rememberDerivedReplayId(GAME_KEY, state.game_id);
     active.forget();
     const detail = state.won
       ? `${state.mistakes} ${state.mistakes === 1 ? "greșeală" : "greșeli"}`
@@ -172,6 +213,12 @@ export default function Perechi({ onExit, onToast }: Props) {
         return null;
       }
       const fresh = recovered.value;
+      if (
+        action === "match" &&
+        (fresh.solved_count > previous.solved_count || fresh.won || fresh.lost)
+      ) {
+        queueFocusAfterUpdate(fresh, [...tileRefs.current.keys()]);
+      }
       setState(fresh);
       setSelected(null);
       setChecking(null);
@@ -188,16 +235,19 @@ export default function Perechi({ onExit, onToast }: Props) {
       }
       return fresh;
     },
-    [],
+    [queueFocusAfterUpdate],
   );
 
   const submitPair = useCallback(
     async (ids: [string, string]) => {
       if (!state || finished || busy || !acquireFlight(actionInFlight)) return;
+      focusedTileBeforeMutation.current =
+        ids.find((id) => tileRefs.current.get(id) === document.activeElement) ?? null;
       setChecking(ids);
       setBusy(true);
       try {
         const result = await perechiApi.match(state.game_id, ids);
+        queueFocusAfterUpdate(result, ids);
         setState(result);
         setSelected(null);
         if (result.correct) {
@@ -219,11 +269,12 @@ export default function Perechi({ onExit, onToast }: Props) {
         if (!fresh) sound.playError();
       } finally {
         releaseFlight(actionInFlight);
+        focusedTileBeforeMutation.current = null;
         setChecking(null);
         setBusy(false);
       }
     },
-    [busy, finished, reconcile, state],
+    [busy, finished, queueFocusAfterUpdate, reconcile, state],
   );
 
   const choose = useCallback(
@@ -256,6 +307,7 @@ export default function Perechi({ onExit, onToast }: Props) {
     ) {
       return;
     }
+    focusedTileBeforeMutation.current = null;
     setBusy(true);
     try {
       const fresh = await perechiApi.hint(state.game_id);
@@ -306,6 +358,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   }
 
   const hintIds = new Set(state.hint?.tiles.map((tile) => tile.id) ?? []);
+  const activeTiles = state.tiles.filter((tile) => !tile.solved);
   return (
     <div className="screen-pad fill perechi-game">
       <div className="container col game-container" style={{ gap: 14, paddingBottom: 32 }}>
@@ -353,28 +406,34 @@ export default function Perechi({ onExit, onToast }: Props) {
         )}
 
         {!finished && (
-          <div className="perechi-grid" aria-label="Cuvinte de potrivit">
-            {state.tiles.map((tile) => {
+          <div
+            className="perechi-grid"
+            aria-label={`Cuvinte de potrivit, ${activeTiles.length} rămase`}
+          >
+            {activeTiles.map((tile) => {
               const isSelected = selected === tile.id || Boolean(checking?.includes(tile.id));
-              const isHinted = hintIds.has(tile.id) && !tile.solved;
+              const isHinted = hintIds.has(tile.id);
               return (
                 <m.button
                   key={tile.id}
+                  ref={(node) => {
+                    if (node) tileRefs.current.set(tile.id, node);
+                    else tileRefs.current.delete(tile.id);
+                  }}
                   type="button"
                   className={`card perechi-tile${
-                    tile.solved ? " perechi-tile--solved" : ""
-                  }${isSelected ? " perechi-tile--selected" : ""}${
+                    isSelected ? " perechi-tile--selected" : ""
+                  }${
                     isHinted ? " perechi-tile--hinted" : ""
                   }`}
                   onClick={() => choose(tile.id)}
-                  disabled={busy || tile.solved}
+                  disabled={busy}
                   aria-pressed={isSelected}
-                  aria-label={`${tile.label}${tile.solved ? ", pereche găsită" : isHinted ? ", marcat de indiciu" : ""}`}
-                  whileTap={tile.solved ? undefined : { scale: 0.97 }}
+                  aria-label={`${tile.label}${isHinted ? ", marcat de indiciu" : ""}`}
+                  whileTap={{ scale: 0.97 }}
                 >
                   <strong>{tile.label}</strong>
-                  {tile.solved && <span>găsită ✓</span>}
-                  {!tile.solved && isHinted && <span>indiciu</span>}
+                  {isHinted && <span>indiciu</span>}
                 </m.button>
               );
             })}
@@ -433,33 +492,37 @@ export default function Perechi({ onExit, onToast }: Props) {
         )}
 
         {finished && state.solution && (
-          <ResultCard
-            icon={state.won ? "✨" : "🧠"}
-            title={state.won ? "Toate se potrivesc!" : "Acestea erau perechile"}
-            accent={DEF.accent}
-            won={state.won}
-            score={state.score}
-            isRecord={recordHit}
-            isPuzzleRecord={puzzleRecordHit}
-            actionsBusy={loading}
-            shareText={sharePayload}
-            onCopy={copyShare}
-            onReplay={() => void start({ previousGameId: state.game_id })}
-            onOptions={() => {
-              if (startInFlight.current) return;
-              active.forget();
-              setState(null);
-            }}
-            onExit={exitSafely}
-          >
-            <div className="perechi-solution">
-              {state.solution.map((pair) => (
-                <span key={pair.tiles.map((tile) => tile.id).join("+")}>
-                  <strong>{pair.label}</strong>: {pair.tiles.map((tile) => tile.label).join(" + ")}
-                </span>
-              ))}
-            </div>
-          </ResultCard>
+          <div ref={resultFocusRef}>
+            <ResultCard
+              icon={state.won ? "✨" : "🧠"}
+              title={state.won ? "Toate se potrivesc!" : "Acestea erau perechile"}
+              accent={DEF.accent}
+              won={state.won}
+              score={state.score}
+              isRecord={recordHit}
+              isPuzzleRecord={puzzleRecordHit}
+              actionsBusy={loading}
+              shareText={sharePayload}
+              onCopy={copyShare}
+              onReplay={() => void start({ previousGameId: state.game_id })}
+              replayLabel={state.daily ? "Joacă liber →" : undefined}
+              onOptions={() => {
+                if (startInFlight.current) return;
+                active.forget();
+                setState(null);
+              }}
+              onExit={exitSafely}
+            >
+              <div className="perechi-solution">
+                {state.solution.map((pair) => (
+                  <span key={pair.tiles.map((tile) => tile.id).join("+")}>
+                    <strong>{pair.label}</strong>:{" "}
+                    {pair.tiles.map((tile) => tile.label).join(" + ")}
+                  </span>
+                ))}
+              </div>
+            </ResultCard>
+          </div>
         )}
       </div>
     </div>

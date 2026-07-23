@@ -131,9 +131,9 @@ function ConsentGate({ minAge, onResolved }: { minAge: number; onResolved: () =>
     <div className="account-overlay">
       <div className="account-card">
         <h2>Un pas rapid</h2>
-        <p>Ca să apari în clasament, confirmă vârsta, alege un nume și acceptă regulile.</p>
+        <p>Ca să-ți salvezi progresul, confirmă vârsta și acceptă regulile.</p>
         <label className="account-field">
-          <span>Numele din clasament (poți folosi o poreclă)</span>
+          <span>Poreclă (opțională; necesară doar pentru clasament)</span>
           <input
             type="text"
             maxLength={80}
@@ -197,17 +197,24 @@ function ConsentGate({ minAge, onResolved }: { minAge: number; onResolved: () =>
 
 function UserChip({ user, onChanged }: { user: AuthUser; onChanged: () => Promise<void> }) {
   const [open, setOpen] = useState(false);
-  const initial = (user.ranking_name || user.name || "?").slice(0, 1).toUpperCase();
+  const privateLabel = user.display_name || user.name || "Cont";
+  const initial = privateLabel.slice(0, 1).toUpperCase();
 
   const editName = async () => {
-    const next = window.prompt("Numele afișat în clasament:", user.ranking_name);
+    const next = window.prompt("Numele afișat în clasament:", privateLabel);
     if (next === null || !next.trim()) return;
     await updateProfile({ display_name: next.trim() });
     await onChanged();
   };
 
   const toggleRanking = async () => {
-    await updateProfile({ show_on_ranking: !user.show_on_ranking });
+    if (!user.show_on_ranking && !user.display_name.trim()) {
+      const next = window.prompt("Alege o poreclă pentru clasament:");
+      if (next === null || !next.trim()) return;
+      await updateProfile({ display_name: next.trim(), show_on_ranking: true });
+    } else {
+      await updateProfile({ show_on_ranking: !user.show_on_ranking });
+    }
     await onChanged();
   };
 
@@ -225,7 +232,7 @@ function UserChip({ user, onChanged }: { user: AuthUser; onChanged: () => Promis
         ) : (
           <span className="account-avatar account-avatar--letter">{initial}</span>
         )}
-        <span className="account-name">{user.ranking_name}</span>
+        <span className="account-name">{privateLabel}</span>
       </button>
       {open && (
         <div className="account-menu" role="menu">

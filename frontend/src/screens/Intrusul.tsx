@@ -24,14 +24,17 @@ import { ResultCard } from "../components/ResultCard";
 import { gameByKey } from "../games";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
-import { bestScore, hasCompletedNonDaily } from "../scores";
+import {
+  lastDerivedReplayId,
+  rememberDerivedReplayId,
+} from "../derivedReplay";
+import { bestScore, needsDerivedStarter } from "../scores";
 import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 import { sound } from "../sound";
 import "../styles/intrusul.css";
 
 const GAME_KEY = "intrusul";
 const DEF = gameByKey(GAME_KEY);
-const DIFFICULTY_LABEL = { usor: "Ușor", normal: "Normal", greu: "Greu" } as const;
 
 interface Props {
   onExit: () => void;
@@ -74,8 +77,9 @@ export default function Intrusul({ onExit, onToast }: Props) {
       const opts: CreateIntrusulOpts = daily
         ? { daily }
         : {
-            starter: !hasCompletedNonDaily(GAME_KEY),
-            previousGameId,
+            starter: needsDerivedStarter(GAME_KEY),
+            previousGameId:
+              previousGameId ?? lastDerivedReplayId(GAME_KEY) ?? undefined,
           };
       try {
         const fresh = await intrusulApi.create(opts);
@@ -148,6 +152,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
 
   useEffect(() => {
     if (!state || !finished || state.score === undefined) return;
+    if (!state.daily) rememberDerivedReplayId(GAME_KEY, state.game_id);
     active.forget();
     const detail = state.won
       ? `${state.mistakes} ${state.mistakes === 1 ? "greșeală" : "greșeli"}`
@@ -277,11 +282,6 @@ export default function Intrusul({ onExit, onToast }: Props) {
           <Hud>
             {state.daily && <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} />}
             <StatBadge
-              label="NIVEL"
-              value={DIFFICULTY_LABEL[state.difficulty]}
-              accent={DEF.accent}
-            />
-            <StatBadge
               label="ÎNCERCĂRI"
               value={`${state.remaining_mistakes} rămase`}
               accent={DEF.accent}
@@ -382,6 +382,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
             shareText={sharePayload}
             onCopy={copyShare}
             onReplay={() => void start({ previousGameId: state.game_id })}
+            replayLabel={state.daily ? "Joacă liber →" : undefined}
             onOptions={() => {
               if (startInFlight.current) return;
               active.forget();

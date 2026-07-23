@@ -1,42 +1,40 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-07-19. This file is the repository's current source of truth._
-_Last verified: 2026-07-19 (local V38 backend: targeted derived-catalog and game tests
-59/59 plus required session-store tests 16/16 green; full backend, frontend, and release
-gates pending. Live remains V32 `f40fa8b`; V33–V38 are not pushed or deployed.)_
+_As of 2026-07-23. This file is the repository's current source of truth._
+_Last verified: 2026-07-23 (V39: backend 548, accounts 52, frontend 21, session store 16;
+lint/build/artifacts green, bundle 119.01/120 KiB; live V32, V38–V39 not on main/deployed.)_
 
-## Current outcome — local V38 refinement (ADR-0052)
+## Current outcome — local V39 release candidate (ADR-0053, ADR-0054)
 
-- Two strict catalog-only games are implemented locally: Intrusul (a 3+1 odd-one-out)
-  and Perechi (four semantic pairs). Neither game mines or widens to unreviewed content.
-- The reproducible private catalog contains **336 boards**: Intrusul **183** from 66
-  Conexiuni sources and Perechi **153** from 51. Starter shelves contain 24 and 26.
-- Standard score is 60% visible-word familiarity and 40% mechanic clarity; starter score is
-  75% familiarity and 25% clarity with stricter gates. Selection chooses a source before a
-  candidate, uses fixed 1–5 score bands, and gives tied scores competition ranks (`1, 1, 3`).
-- Catalog IDs, source IDs, scores, ranks, gates, weights, and unearned answers remain
-  server-private. The loader rejects pack/KG/V37-ranking overrides and any bound pack, KG,
-  critique-rubric, V37-ranking, or catalog-digest drift.
-- Intrusul allows three distinct mistakes and one hint after the first; Perechi allows six
-  distinct unordered wrong pairs and one non-solving pair hint after two. Repeats are free,
-  losses score zero, and win penalties are bounded to a 100-point floor.
-- V37 selection, hash namespaces, and all four existing daily schedules are unchanged.
-  Shared 7,200-second sliding TTL, 1,000-entry per-game cap, atomic mutation, and terminal
-  answer gates remain in force; non-daily repeat memory holds at most four private sources.
-- The accepted frontend contract is tap-first and mobile-first, with lobby order Alchimie →
-  Intrusul → Perechi → Conexiuni → Cald sau Rece → Lanț and only Alchimie featured as
-  `Începe aici`. Its separate integration and frontend gates are still pending.
+- The six-game, tap-first lobby is complete in fun-first order: Alchimie → Intrusul →
+  Perechi → Conexiuni → Cald sau Rece → Lanț. A seventh mode waits for pilot evidence.
+- Intrusul and Perechi remain strict catalog-only games over **336 boards**: 183 from 66
+  sources and 153 from 51. Runtime prefers standard-score ≥55 boards (144/113), but falls
+  back only inside the already filtered strict shelf; explicit category filters never widen.
+- Unscoped starter selection balances category, then source, then variant. A derived game
+  stays on its beginner shelf until a non-daily win or three non-daily completions; daily
+  play does not graduate it. Free replay remembers one opaque completed session per game,
+  never content or answers, and daily play is isolated from that memory.
+- Home shows a local-only six-game daily circuit: completion includes zero-score runs and
+  each game's best contribution is clamped to 0–1,000 (total 6,000). No aggregate, action
+  trail, board identity, or telemetry is uploaded.
+- Accounts-on staging has per-game server-verified records only. Public rows require current
+  consent, an explicit nickname, and opt-in; ties use competition ranks and the player's
+  bounded row can sit below the top 50. Imported/browser score history remains private.
+- Intrusul drops its unrelated source-level badge. Perechi removes solved tiles from the
+  active grid while retaining the solved stack and keyboard focus. Daily results name the
+  transition to free play directly.
 
 ## Retained V37 baseline (ADR-0051)
 
 - The private V37 sidecar ranks all **794** curated boards at 60% Romanian-concept
   familiarity and 40% game-specific structural quality, bound to pack, KG, and rubric.
-  Its **486** eligible boards are Conexiuni 123, Cald sau Rece 192, Lanț 94, Alchimie 77.
+  Its **486** eligible boards are Conexiuni 123, Cald sau Rece 192, Lanț 94, Alchimie 77; focused critique has zero strict FAILs.
 - Existing game/category/difficulty/repeat filters run first. Eligible shelves use
   deterministic 1–5-ticket rotation; daily shelves retain their minimum of eight and their
   approved/mined fallback. Custom packs stay neutral without a digest-matching sidecar.
-- Rankings are editorial pre-playtest estimates, not measured fun or player-knowledge
-  ratings. Accounts, public rankings, and telemetry remain off.
+- Board rankings are editorial pre-playtest estimates, not measured fun or
+  player-knowledge ratings. Accounts remain off by default; no telemetry was added.
 
 ## Retained beginner play and vocabulary
 
@@ -49,14 +47,14 @@ gates pending. Live remains V32 `f40fa8b`; V33–V38 are not pushed or deployed.
   or recipes remain private in every game.
 - V23–V33 added childhood, farm, clothing, kitchen, hygiene, cleaning, face, workshop,
   garden, bathroom, household-electrical, and forest concepts. Vocabulary probes are
-  **322/322**; 33 affected pending dossiers and all 794 curated records remain clean.
+  **322/322**; all 794 curated records pass schema and playability validation.
 
 ## Product and deployment
 
-The Romanian arcade uses Django 5.2/DRF and React 19/Vite 8 over the offline KG. Anonymous
-v1 at <https://cat-de-roman-esti.dobolabs.ro> runs V32 `f40fa8b`, verified 2026-07-18.
-Production has neither V37 ranking rotation nor V38 games. Accounts and the player
-leaderboard remain staging-only.
+The Romanian arcade uses Django 5.2/DRF and React 19/Vite 8 over the offline KG. On
+2026-07-23, <https://cat-de-roman-esti.dobolabs.ro/api/manifest> still reported
+`fixture-v32-face-workshop-garden` and the health API exposed four games. Shared `main`
+remains V37 `18400f9`; V38/V39 and accounts/player rankings remain local only.
 
 ## Shipped content baseline
 
@@ -66,16 +64,19 @@ leaderboard remain staging-only.
 | Cald sau Rece | 207 | 192 | 15 | 192 | ranked curated; category miner fallback |
 | Lanțul Cuvintelor | 201 | 94 | 107 | 94 | ranked curated; branch-aware miner fallback |
 | Alchimie | 98 | 77 | 21 | 77 | ranked curated; sparse projection miner fallback |
+| Intrusul | 183 | 183 | 0 | 144 preferred | strict derived catalog only |
+| Perechi | 153 | 153 | 0 | 113 preferred | strict derived catalog only |
 
 Pack: **794 = 572 approved + 222 pending**, across 14 categories. Bundled KG:
-**2,287 nodes / 9,122 edges / 7,400 aliases / 180 legacy puzzles**. Fixture mirrors and
-private ranking artifacts remain digest-bound and byte-identical where duplicated.
+**2,287 nodes / 9,122 edges / 7,400 aliases / 180 puzzles**; mirrors remain byte-identical.
 
 ## Runtime contracts and quality gate
 
 - Sessions use a validated 7,200-second sliding TTL and 1,000-entry LRU cap. Per-entry locks
   serialize one session while allowing concurrent sessions; all-borrowed capacity returns
   503. Request bodies have a 64 KiB Caddy and ASGI receive ceiling.
+- Account history is capped at 500 rows per user; public verified records are capped at one
+  row for each of the exact six game keys. Current consent is rechecked under a profile lock.
 - Curated submissions require `CAT_SUBMISSIONS_DIR`; only approved records are served.
   Mobile fixture/OpenAPI contracts and deterministic seeded/daily selection remain pinned.
 
@@ -90,11 +91,10 @@ node --check .claude/workflows/critique-games.js
 git diff --check
 ```
 
-Run frontend gates when frontend files change. Required session-store target:
-`tests/test_wordgames_session_store.py` (**16**).
+Frontend: 21/21, lint/build green, 119.01 KiB. Required session-store target: **16**.
 
 ## Next verified work
 
-- Integrate and gate the six-game mobile frontend, then run the complete release suite.
-- Recalibrate rankings only after a separate privacy/storage decision permits bounded,
-  server-authored aggregate starts, outcomes, hints, and action counts.
+- Run a larger anonymous six-game pilot before adding a seventh game or changing scores.
+- Merge/deploy V38/V39 only on explicit instruction; keep accounts off until the compliance
+  checklist is complete. Any analytics still requires a separate privacy/retention decision.

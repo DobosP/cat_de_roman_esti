@@ -11,6 +11,7 @@ const intrusulApi = read("../src/api/intrusul.ts");
 const perechiApi = read("../src/api/perechi.ts");
 const intrusul = read("../src/screens/Intrusul.tsx");
 const perechi = read("../src/screens/Perechi.tsx");
+const replayMemory = read("../src/derivedReplay.ts");
 const intrusulCss = read("../src/styles/intrusul.css");
 const perechiCss = read("../src/styles/perechi.css");
 const arcadeCss = read("../src/styles/arcade.css");
@@ -51,10 +52,22 @@ test("personalized starts and replay fatigue use only non-daily query inputs", (
     assert.match(api, /query\.set\("previous_game_id", opts\.previousGameId\)/);
   }
   for (const screen of [intrusul, perechi]) {
-    assert.match(screen, /starter: !hasCompletedNonDaily\(GAME_KEY\)/);
+    assert.match(screen, /starter: needsDerivedStarter\(GAME_KEY\)/);
+    assert.match(screen, /const opts:[^=]+ = daily\s*\? \{ daily \}\s*: \{/);
+    assert.match(
+      screen,
+      /previousGameId:\s*previousGameId \?\? lastDerivedReplayId\(GAME_KEY\) \?\? undefined/,
+    );
+    assert.match(
+      screen,
+      /if \(!state\.daily\) rememberDerivedReplayId\(GAME_KEY, state\.game_id\)/,
+    );
     assert.match(screen, /onDaily=\{\(\) => void start\(\{ daily: todayLocal\(\) \}\)\}/);
     assert.match(screen, /onReplay=\{\(\) => void start\(\{ previousGameId: state\.game_id \}\)\}/);
   }
+  assert.match(replayMemory, /const GAMES:[^=]+ = \["intrusul", "perechi"\]/);
+  assert.match(replayMemory, /const MAX_SESSION_ID_LENGTH = 128/);
+  assert.doesNotMatch(replayMemory, /sourceId|catalogId|solution/);
 });
 
 test("both boards are tap-first, compact and responsive from tiny phones to desktop", () => {

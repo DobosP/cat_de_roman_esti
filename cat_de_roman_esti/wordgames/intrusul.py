@@ -183,6 +183,7 @@ def _pick_non_daily(
                 category=category,
                 exclude_source_ids=exclusions,
                 starter=True,
+                balance_categories=starter,
             )
             if selected is not None:
                 return selected
@@ -191,6 +192,7 @@ def _pick_non_daily(
             rng,
             category=category,
             exclude_source_ids=exclusions,
+            balance_categories=starter,
         )
         if selected is not None:
             return selected
@@ -324,7 +326,12 @@ class GuessView(ContractAPIView):
                 else "Face parte din grup. Mai încearcă."
             )
         if session.finished:
-            record_finished(request, GAME_KEY, session.source_id)
+            record_finished(
+                request,
+                GAME_KEY,
+                session.source_id,
+                score=session.score,
+            )
         return Response(
             {
                 "ok": True,

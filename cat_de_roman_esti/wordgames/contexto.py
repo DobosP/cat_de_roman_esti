@@ -843,7 +843,12 @@ class GuessView(ContractAPIView):
 
         if found:
             session.won = True
-            record_finished(request, GAME_KEY, session.pack_id)
+            record_finished(
+                request,
+                GAME_KEY,
+                session.pack_id,
+                score=score_for(session.attempts, session.clues_used),
+            )
         reveal = session.won or session.gave_up
 
         result: dict = {
