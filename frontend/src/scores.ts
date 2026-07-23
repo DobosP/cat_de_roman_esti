@@ -38,9 +38,34 @@ const GAME_CAP = 16;
 const RECENT_CAP = 50;
 const PUZZLE_CAP = 100;
 const DERIVED_STARTER_COMPLETIONS = 3;
+const DAILY_CIRCUIT_SCORE_CAP = 1_000;
 
 export type Board = Record<string, GameRecord>;
 export type DerivedStarterGame = "intrusul" | "perechi";
+export const DAILY_CIRCUIT_GAME_KEYS = Object.freeze(
+  [
+    "alchimie",
+    "intrusul",
+    "perechi",
+    "conexiuni",
+    "contexto",
+    "lant",
+  ] as const,
+);
+export type DailyCircuitGame = (typeof DAILY_CIRCUIT_GAME_KEYS)[number];
+
+export interface DailyCircuitRow {
+  game: DailyCircuitGame;
+  completed: boolean;
+  score: number;
+}
+
+export interface DailyCircuitSummary {
+  day: string;
+  completed: number;
+  total: number;
+  games: DailyCircuitRow[];
+}
 
 export interface GameScoreEntry extends ScoreEntry {
   game: string;
@@ -158,6 +183,39 @@ export function bestPuzzleScore(game: string, puzzleKey: string | null | undefin
 
 export function scoreBoard(): Board {
   return load();
+}
+
+/**
+ * Summarize the six shared daily runs from a supplied local-history snapshot.
+ * A retained zero/negative score still means completed; only its contribution
+ * is clamped to zero. Unknown games and malformed entries never enter the circuit.
+ */
+export function buildDailyCircuit(board: unknown, day: string): DailyCircuitSummary {
+  const source = isRecord(board) ? board : {};
+  const daily = isDailyKey(day) ? day : "";
+  const games = DAILY_CIRCUIT_GAME_KEYS.map((game): DailyCircuitRow => {
+    const matching = daily
+      ? retainedScoreEntries(source[game]).filter((entry) => entry.daily === daily)
+      : [];
+    const completed = matching.length > 0;
+    const score = completed
+      ? matching.reduce(
+          (best, entry) => Math.max(best, clampDailyCircuitScore(entry.score)),
+          0,
+        )
+      : 0;
+    return { game, completed, score };
+  });
+
+  return {
+    day: daily,
+    completed: games.filter((game) => game.completed).length,
+    total: Math.min(
+      DAILY_CIRCUIT_SCORE_CAP * DAILY_CIRCUIT_GAME_KEYS.length,
+      games.reduce((sum, game) => sum + game.score, 0),
+    ),
+    games,
+  };
 }
 
 export function recentScores(game?: string, limit = 30): GameScoreEntry[] {
@@ -364,6 +422,46 @@ function uniqueEntries(entries: ScoreEntry[]): ScoreEntry[] {
     seen.add(key);
     return true;
   });
+}
+
+function retainedScoreEntries(value: unknown): ScoreEntry[] {
+  if (!isRecord(value)) return [];
+  const candidates: unknown[] = Array.isArray(value.recent) ? [...value.recent] : [];
+  if (value.best !== undefined) candidates.push(value.best);
+  if (isRecord(value.puzzles)) candidates.push(...Object.values(value.puzzles));
+  return candidates
+    .map(normalizeEntry)
+    .filter((entry): entry is ScoreEntry => entry !== null);
+}
+
+function clampDailyCircuitScore(score: number): number {
+  return Math.min(DAILY_CIRCUIT_SCORE_CAP, Math.max(0, score));
+}
+
+function isDailyKey(value: unknown): value is string {
+  if (typeof value !== "string") return false;
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (!match) return false;
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  if (year < 1 || month < 1 || month > 12 || day < 1) return false;
+  const leapYear = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+  const daysInMonth = [
+    31,
+    leapYear ? 29 : 28,
+    31,
+    30,
+    31,
+    30,
+    31,
+    31,
+    30,
+    31,
+    30,
+    31,
+  ];
+  return day <= daysInMonth[month - 1]!;
 }
 
 function boundedStarterCompletions(value: unknown): number {

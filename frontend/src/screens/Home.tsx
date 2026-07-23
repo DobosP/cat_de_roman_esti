@@ -6,10 +6,17 @@ import { useCallback, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { m } from "framer-motion";
 import { Badge, Button, type ToastKind } from "@roedu/ui";
-import { GAMES, GAME_TITLES, type GameDef, type GameKey } from "../games";
+import {
+  GAMES,
+  GAME_TITLES,
+  gameByKey,
+  type GameDef,
+  type GameKey,
+} from "../games";
 import { SoundToggle } from "../components/SoundToggle";
 import { sound } from "../sound";
 import {
+  buildDailyCircuit,
   exportScores,
   importScores,
   scoreBoard,
@@ -35,6 +42,11 @@ export default function Home({
   const fileRef = useRef<HTMLInputElement>(null);
   const today = todayLocal();
 
+  const circuit = useMemo(() => buildDailyCircuit(board, today), [board, today]);
+  const circuitByGame = useMemo(
+    () => new Map(circuit.games.map((game) => [game.game, game])),
+    [circuit],
+  );
   const totals = useMemo(
     () => GAMES.map((game) => ({ ...game, record: board[game.key] })),
     [board],
@@ -142,55 +154,109 @@ export default function Home({
           </m.p>
         </header>
 
-        <div className="games-grid">
-          {GAMES.map((g, i) => (
-            <m.button
-              key={g.key}
-              type="button"
-              onClick={() => openGame(g)}
-              aria-label={`Joacă ${g.title} — ${g.featured ? "Începe aici" : g.tag}`}
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 + 0.07 * i, duration: 0.4, ease: EASE }}
-              whileHover={{ y: -5, rotate: i % 2 ? 0.4 : -0.4 }}
-              whileTap={{ scale: 0.97 }}
-              className={`card game-card${g.featured ? " game-card--featured" : ""}`}
-            >
-              <div
-                aria-hidden
-                className="game-card-halo"
-                style={{
-                  background: `radial-gradient(190px 130px at 100% 0%, ${g.glow}26, transparent 70%)`,
-                }}
-              />
-              <div className="row spread" style={{ position: "relative" }}>
-                <span
-                  className="game-card-icon"
-                  aria-hidden
-                  style={{ background: `${g.accent}1f`, borderColor: `${g.accent}55` }}
-                >
-                  {g.icon}
-                </span>
-                <Badge color={g.accent} size="sm">
-                  {g.featured ? "Începe aici" : g.tag}
-                </Badge>
+        <section className="card daily-circuit" aria-labelledby="daily-circuit-title">
+          <div className="daily-circuit-head">
+            <div className="row daily-circuit-title">
+              <span className="daily-circuit-sun" aria-hidden>☀️</span>
+              <div className="col" style={{ gap: 2 }}>
+                <h2 id="daily-circuit-title">Circuitul de azi</h2>
+                <p className="muted">Doar pe acest dispozitiv.</p>
               </div>
-              <strong className="game-card-title" style={{ color: g.accent }}>
-                {g.title}
-              </strong>
-              <p className="muted game-card-blurb">{g.blurb}</p>
-              <span className="row game-card-footer" style={{ gap: 10 }}>
-                <span className="game-card-cta" style={{ color: g.accent }}>
-                  Joacă →
-                </span>
-                {board[g.key]?.best && (
-                  <span className="faint" style={{ fontSize: "0.8rem" }}>
-                    ★ record {board[g.key]!.best!.score}
+            </div>
+            <div
+              className="daily-circuit-summary"
+              role="status"
+              aria-live="polite"
+              aria-label={`${circuit.completed} din 6 jocuri terminate azi, ${circuit.total} din 6000 de puncte`}
+            >
+              <strong>{circuit.completed}/6</strong>
+              <span>{circuit.total}/6000 pct</span>
+            </div>
+          </div>
+          <ul className="daily-circuit-games" aria-label="Progresul jocurilor de azi">
+            {circuit.games.map((row) => {
+              const game = gameByKey(row.game);
+              return (
+                <li
+                  key={row.game}
+                  className={`daily-circuit-game${row.completed ? " is-complete" : ""}`}
+                  aria-label={`${game.title}: ${
+                    row.completed
+                      ? `terminat azi, ${row.score} puncte`
+                      : "neterminat azi"
+                  }`}
+                >
+                  <span className="daily-circuit-game-icon" aria-hidden>{game.icon}</span>
+                  <span className="daily-circuit-game-name">{game.title}</span>
+                  <span className="daily-circuit-game-score" aria-hidden>
+                    {row.completed ? `${row.score} ✓` : "○"}
                   </span>
-                )}
-              </span>
-            </m.button>
-          ))}
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+
+        <div className="games-grid">
+          {GAMES.map((g, i) => {
+            const completedToday = circuitByGame.get(g.key)?.completed ?? false;
+            return (
+              <m.button
+                key={g.key}
+                type="button"
+                onClick={() => openGame(g)}
+                aria-label={`Joacă ${g.title} — ${
+                  completedToday
+                    ? "terminat azi"
+                    : g.featured
+                      ? "Începe aici"
+                      : g.tag
+                }`}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + 0.07 * i, duration: 0.4, ease: EASE }}
+                whileHover={{ y: -5, rotate: i % 2 ? 0.4 : -0.4 }}
+                whileTap={{ scale: 0.97 }}
+                className={`card game-card${g.featured ? " game-card--featured" : ""}${
+                  completedToday ? " game-card--daily-complete" : ""
+                }`}
+              >
+                <div
+                  aria-hidden
+                  className="game-card-halo"
+                  style={{
+                    background: `radial-gradient(190px 130px at 100% 0%, ${g.glow}26, transparent 70%)`,
+                  }}
+                />
+                <div className="row spread" style={{ position: "relative" }}>
+                  <span
+                    className="game-card-icon"
+                    aria-hidden
+                    style={{ background: `${g.accent}1f`, borderColor: `${g.accent}55` }}
+                  >
+                    {g.icon}
+                  </span>
+                  <Badge color={g.accent} size="sm">
+                    {completedToday ? "Azi ✓" : g.featured ? "Începe aici" : g.tag}
+                  </Badge>
+                </div>
+                <strong className="game-card-title" style={{ color: g.accent }}>
+                  {g.title}
+                </strong>
+                <p className="muted game-card-blurb">{g.blurb}</p>
+                <span className="row game-card-footer" style={{ gap: 10 }}>
+                  <span className="game-card-cta" style={{ color: g.accent }}>
+                    Joacă →
+                  </span>
+                  {board[g.key]?.best && (
+                    <span className="faint" style={{ fontSize: "0.8rem" }}>
+                      ★ record {board[g.key]!.best!.score}
+                    </span>
+                  )}
+                </span>
+              </m.button>
+            );
+          })}
         </div>
 
         {playedTotal === 0 && (
