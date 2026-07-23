@@ -24,8 +24,12 @@ export interface GameRecord {
   played: number;
   recent: ScoreEntry[]; // newest first, capped
   puzzles?: Record<string, ScoreEntry>;
-  /** Monotonic marker: at least one completed run was not a shared daily. */
+  /** Legacy/export-compatible marker: at least one completed run was not a shared daily. */
   completedNonDaily: boolean;
+  /** Monotonic, bounded count used by the derived-game starter progression. */
+  nonDailyCompletions: number;
+  /** Monotonic marker: at least one non-daily terminal score was positive. */
+  nonDailyWon: boolean;
 }
 
 const STORAGE_KEY = "cat_wordgame_scores_v1";
@@ -33,8 +37,10 @@ const EXPORT_SCHEMA = "cat-wordgame-history-v2";
 const GAME_CAP = 16;
 const RECENT_CAP = 50;
 const PUZZLE_CAP = 100;
+const DERIVED_STARTER_COMPLETIONS = 3;
 
 export type Board = Record<string, GameRecord>;
+export type DerivedStarterGame = "intrusul" | "perechi";
 
 export interface GameScoreEntry extends ScoreEntry {
   game: string;
@@ -89,6 +95,8 @@ export function recordScore(
     played: 0,
     recent: [],
     completedNonDaily: false,
+    nonDailyCompletions: 0,
+    nonDailyWon: false,
   };
   const prev = rec.best;
   const puzzleKey = options.puzzleKey?.trim() || null;
@@ -107,7 +115,14 @@ export function recordScore(
   const isPuzzleBest = puzzleKey !== null && (prevPuzzle === null || score > prevPuzzle.score);
   rec.played += 1;
   rec.recent = [entry, ...rec.recent].slice(0, RECENT_CAP);
-  if (!entry.daily) rec.completedNonDaily = true;
+  if (!entry.daily) {
+    rec.completedNonDaily = true;
+    rec.nonDailyCompletions = Math.min(
+      DERIVED_STARTER_COMPLETIONS,
+      rec.nonDailyCompletions + 1,
+    );
+    if (entry.score > 0) rec.nonDailyWon = true;
+  }
   if (isBest) rec.best = entry;
   if (puzzleKey && isPuzzleBest) {
     rec.puzzles = { ...(rec.puzzles ?? {}), [puzzleKey]: entry };
@@ -126,9 +141,14 @@ export function timesPlayed(game: string): number {
   return load()[game]?.played ?? 0;
 }
 
-/** Whether this player has completed a normal run; daily-only history stays beginner-safe. */
-export function hasCompletedNonDaily(game: string): boolean {
-  return load()[game]?.completedNonDaily ?? false;
+/** Keep a derived game on its starter shelf until mastery or three normal attempts. */
+export function needsDerivedStarter(game: DerivedStarterGame): boolean {
+  const record = load()[game];
+  return (
+    !record ||
+    (!record.nonDailyWon &&
+      record.nonDailyCompletions < DERIVED_STARTER_COMPLETIONS)
+  );
 }
 
 export function bestPuzzleScore(game: string, puzzleKey: string | null | undefined): ScoreEntry | null {
@@ -201,6 +221,8 @@ export function importScores(raw: string): ImportOutcome {
       played: 0,
       recent: [],
       completedNonDaily: false,
+      nonDailyCompletions: 0,
+      nonDailyWon: false,
     };
     const recent = mergeEntries(base.recent, rec.recent);
     entries += rec.recent.length;
@@ -211,6 +233,11 @@ export function importScores(raw: string): ImportOutcome {
       played: Math.max(base.played, rec.played, recent.length),
       recent,
       completedNonDaily: base.completedNonDaily || rec.completedNonDaily,
+      nonDailyCompletions: Math.min(
+        DERIVED_STARTER_COMPLETIONS,
+        Math.max(base.nonDailyCompletions, rec.nonDailyCompletions),
+      ),
+      nonDailyWon: base.nonDailyWon || rec.nonDailyWon,
       ...(Object.keys(puzzles).length ? { puzzles } : {}),
     };
   }
@@ -238,18 +265,47 @@ function normalizeBoard(value: unknown): Board {
       if (entry && key.trim()) puzzles[key] = { ...entry, puzzleKey: key };
     }
     const best = normalizeEntry(rawRec.best) ?? bestOf([...recent, ...Object.values(puzzles)]);
-    // The marker is additive and monotonic. Older exports have no marker, so infer it
-    // from every retained completed entry; an entry without `daily` is a normal run.
+    // Old exports may only have `completedNonDaily`, or no progress markers at all.
+    // Infer bounded progress from distinct retained normal entries. A legacy boolean
+    // with no surviving entry means one unknown/lost attempt, never an assumed win.
+    const retained = uniqueEntries([
+      ...recent,
+      ...Object.values(puzzles),
+      ...(best ? [best] : []),
+    ]);
+    const retainedNonDaily = retained.filter((entry) => !entry.daily);
+    const hasStoredProgress =
+      isNonNegativeInteger(rawRec.nonDailyCompletions) &&
+      typeof rawRec.nonDailyWon === "boolean";
+    const storedCompletions = boundedStarterCompletions(
+      rawRec.nonDailyCompletions,
+    );
+    const storedWin = rawRec.nonDailyWon === true;
     const completedNonDaily =
       rawRec.completedNonDaily === true ||
-      recent.some((entry) => !entry.daily) ||
-      (best !== null && !best.daily) ||
-      Object.values(puzzles).some((entry) => !entry.daily);
+      storedCompletions > 0 ||
+      storedWin ||
+      retainedNonDaily.length > 0;
+    const nonDailyWon = hasStoredProgress
+      ? storedWin
+      : retainedNonDaily.some((entry) => entry.score > 0);
+    const nonDailyCompletions = hasStoredProgress
+      ? Math.max(storedCompletions, nonDailyWon ? 1 : 0)
+      : Math.min(
+          DERIVED_STARTER_COMPLETIONS,
+          Math.max(
+            retainedNonDaily.length,
+            completedNonDaily ? 1 : 0,
+            nonDailyWon ? 1 : 0,
+          ),
+        );
     board[game] = {
       best,
       played: clampNumber(rawRec.played, recent.length),
       recent: recent.sort((a, b) => b.at - a.at).slice(0, RECENT_CAP),
       completedNonDaily,
+      nonDailyCompletions,
+      nonDailyWon,
       ...(Object.keys(puzzles).length ? { puzzles: capPuzzles(puzzles) } : {}),
     };
   }
@@ -292,6 +348,31 @@ function mergeEntries(a: ScoreEntry[], b: ScoreEntry[]): ScoreEntry[] {
       return true;
     })
     .slice(0, RECENT_CAP);
+}
+
+function uniqueEntries(entries: ScoreEntry[]): ScoreEntry[] {
+  const seen = new Set<string>();
+  return entries.filter((entry) => {
+    const key = [
+      entry.at,
+      entry.score,
+      entry.detail,
+      entry.puzzleKey ?? "",
+      entry.daily ?? "",
+    ].join(":");
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function boundedStarterCompletions(value: unknown): number {
+  if (!isNonNegativeInteger(value)) return 0;
+  return Math.min(DERIVED_STARTER_COMPLETIONS, value);
+}
+
+function isNonNegativeInteger(value: unknown): value is number {
+  return typeof value === "number" && Number.isInteger(value) && value >= 0;
 }
 
 function bestOf(entries: Array<ScoreEntry | null | undefined>): ScoreEntry | null {

@@ -52,7 +52,7 @@ test("personalized starts and replay fatigue use only non-daily query inputs", (
     assert.match(api, /query\.set\("previous_game_id", opts\.previousGameId\)/);
   }
   for (const screen of [intrusul, perechi]) {
-    assert.match(screen, /starter: !hasCompletedNonDaily\(GAME_KEY\)/);
+    assert.match(screen, /starter: needsDerivedStarter\(GAME_KEY\)/);
     assert.match(screen, /const opts:[^=]+ = daily\s*\? \{ daily \}\s*: \{/);
     assert.match(
       screen,
