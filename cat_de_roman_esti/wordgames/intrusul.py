@@ -183,6 +183,7 @@ def _pick_non_daily(
                 category=category,
                 exclude_source_ids=exclusions,
                 starter=True,
+                balance_categories=starter,
             )
             if selected is not None:
                 return selected
@@ -191,6 +192,7 @@ def _pick_non_daily(
             rng,
             category=category,
             exclude_source_ids=exclusions,
+            balance_categories=starter,
         )
         if selected is not None:
             return selected

@@ -200,6 +200,7 @@ def _pick_non_daily(
             category=category,
             exclude_source_ids=exclusions,
             starter=starter_profile,
+            balance_categories=starter,
         )
         if board is not None:
             return board, previous_ring
@@ -213,6 +214,7 @@ def _pick_non_daily(
                 rng,
                 category=category,
                 starter=starter_profile,
+                balance_categories=starter,
             )
             if board is not None:
                 return board, previous_ring
