@@ -12,7 +12,10 @@ Responsabil: `[[PLACEHOLDER: responsible person / DPO]]`
 
 ## 1. Rezumat
 
-Aplicația este un joc web educațional gratuit, în limba română, destinat publicului larg și accesibil minorilor. Funcționalitatea nouă permite conturi opționale prin Google și salvarea progresului pe server.
+Aplicația este un joc web educațional gratuit, în limba română, destinat publicului larg și
+accesibil minorilor. Funcționalitatea nouă permite conturi opționale prin Google și o copie
+privată, unidirecțională, a rezultatelor terminate. Progresul activ și istoricul afișat rămân
+în browser.
 
 Prelucrarea include date de cont, progres în joc și loguri tehnice. Deoarece serviciul este child-facing și implică date ale minorilor, se recomandă o evaluare DPIA completată și semnată înainte de lansare.
 
@@ -21,9 +24,9 @@ Prelucrarea include date de cont, progres în joc și loguri tehnice. Deoarece s
 | Element | Descriere |
 | --- | --- |
 | Persoane vizate | utilizatori ai aplicației, inclusiv minori; părinți/tutori pentru consimțământ |
-| Date | e-mail, nume, avatar, Google `sub`, scoruri, completări zilnice, per-puzzle bests, loguri IP/user agent, consimțământ/vârstă |
+| Date | e-mail, nume, avatar, Google `sub`, rezultate terminate și metadatele lor opționale, ID-uri opace de puzzle selectat editorial și terminat, poreclă/opt-in și record verificat, loguri IP/user agent, consimțământ/vârstă |
 | Surse | Google Identity, browser, server aplicație, Cloudflare |
-| Scopuri | autentificare, salvare progres, securitate, prevenire abuz, răspuns DSAR |
+| Scopuri | autentificare, copie privată a rezultatelor, evitare repetări, clasament opțional, securitate, prevenire abuz, răspuns DSAR |
 | Temeiuri | art. 6(1)(b), art. 6(1)(a), art. 6(1)(f), art. 6(1)(c); art. 8 pentru consimțământ copii |
 | Destinatari | Google Identity, Hetzner, Cloudflare, persoane autorizate intern |
 | Transferuri | baza cont/progres în UE/SEE; transferuri tehnice ale Google/Cloudflare de confirmat |
@@ -33,9 +36,9 @@ Prelucrarea include date de cont, progres în joc și loguri tehnice. Deoarece s
 
 | Întrebare | Evaluare draft |
 | --- | --- |
-| Este contul necesar pentru joc? | Nu pentru jocul de bază; da pentru sincronizarea progresului pe server. Contul trebuie să fie opțional. |
+| Este contul necesar pentru joc? | Nu. Contul este opțional și permite copia privată, evitarea unor repetări și clasamentul cu opt-in; nu restaurează progresul local. |
 | Sunt datele Google minime? | Trebuie solicitate doar scope-uri OIDC minime: `openid email profile`. `[[CONTROLLER DECISION: confirm scopes]]` |
-| Este progresul necesar? | Da, pentru funcția cerută de utilizator: istoric scoruri, completări zilnice, per-puzzle bests. |
+| Este copia rezultatelor necesară? | Numai pentru funcția opțională cerută de utilizator. Se încarcă rezultate terminate, nu progres activ, măiestrie sau agregatul circuitului zilnic. |
 | Sunt logurile necesare? | Da, limitat la securitate, depanare și prevenire abuz. Retenția trebuie să fie scurtă. |
 | Există profilare? | Nu trebuie implementată profilare publicitară sau scoring cu efecte semnificative. |
 | Există alternative mai puțin intruzive? | Joc fără cont și progres local în localStorage trebuie să rămână disponibile unde practic. |
@@ -49,7 +52,7 @@ Prelucrarea include date de cont, progres în joc și loguri tehnice. Deoarece s
 | Colectare excesivă prin Google scopes | mediu | medie | scope-uri minime, fără acces la contacte/Drive/calendar |
 | Reidentificare prin avatar/nume real | mediu | medie | nu afișa numele/avatarul public; permite ascundere/ștergere |
 | Păstrare excesivă a datelor | mediu | medie | retenție documentată, ștergere cont, ștergere conturi inactive `[[CONFIRM]]` |
-| Acces neautorizat la cont/progres | ridicat | medie | OIDC, TLS, cookie-uri securizate, CSRF, control acces, logging |
+| Acces neautorizat la cont/copia rezultatelor | ridicat | medie | OIDC, TLS, cookie-uri securizate, CSRF, control acces, logging |
 | Transferuri internaționale neclare | mediu | medie | DPA-uri, SCC/TIA unde e cazul, confirmare setări Google/Cloudflare |
 | Dark patterns sau consimțământ neclar | mediu | medie | UX simplu, limbaj pe înțelesul copiilor, refuz la fel de ușor ca acceptare |
 | Publicitate/profilare pentru minori | ridicat | scăzută dacă nu se implementează | interdicție de tracking ads și profilare publicitară |
@@ -83,7 +86,7 @@ Aceasta este o concluzie preliminară. Dacă operatorul decide să adauge profil
 | Arie | Risc rezidual propus |
 | --- | --- |
 | Autentificare și cont | mediu-scăzut după age gate și consimțământ parental |
-| Progres joc | scăzut dacă nu este public și se poate șterge ușor |
+| Copie privată a rezultatelor | scăzut dacă nu este publică și se poate șterge ușor |
 | Loguri tehnice | scăzut spre mediu, dependent de retenție și acces |
 | Transferuri furnizori | mediu până la confirmarea DPA/SCC/TIA |
 | Protecția minorilor | mediu-scăzut dacă nu există profilare, publicitate sau funcții sociale |

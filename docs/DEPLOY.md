@@ -5,15 +5,17 @@ Two shippable shapes:
 | Mode | Flag | What it is | Compliance |
 | --- | --- | --- | --- |
 | **Anonymous arcade** | `CAT_ACCOUNTS_ENABLED=0` (default) | Stateless, no DB, progress in the browser | Minimal — no accounts/PII |
-| **Accounts + Google login** | `CAT_ACCOUNTS_ENABLED=1` | Postgres + sessions + Sign-in-with-Google + saved progress | Full child-data stack (below) |
+| **Accounts + Google login** | `CAT_ACCOUNTS_ENABLED=1` | Postgres + sessions + Google login + private score copy | Full child-data stack (below) |
 
 This document covers publishing the **accounts** stack on a single EU VPS (Hetzner), fronted
 by Cloudflare, with TLS via Caddy. The anonymous arcade is a subset (skip Postgres/OAuth).
 
-**Product model.** The game is **always free to play without an account.** Signing in
-(Google) does two private things; Google name/email are never published:
+**Product model.** The game is **always free to play without an account.** With current
+consent, signing in can do two private things; Google name/email are never published:
 
-1. **Keep your progress** across devices (history synced to your account).
+1. **Back up completed scores** — the frontend uploads retained finished-score rows to a
+   private account copy. The browser remains the source of truth: there is no automatic
+   download, restore, or merge, so this is not cross-device progress continuity.
 2. **Don't get the same game again** — once you *finish* a curated puzzle (win or give up), the
    server won't offer it to you anymore (`PlayedPuzzle`; daily challenges are exempt; mined/random
    boards draw from a huge pool so repeats there are already rare — and their identity can encode
@@ -209,9 +211,10 @@ The accounts stack must not serve real users until these are done (see `docs/com
 - [ ] **DSAR + deletion** verified on a demo account (the app exposes account deletion; also
       document the export/erasure request path + SLA).
 - [ ] **72h breach** runbook + incident + DSAR registers in place; contact email published.
-- [ ] **Public ranking** reviewed: only terminal server scores and chosen nicknames appear;
-      browser history is private, visibility defaults off and requires current consent; if
-      under-16 players should rank, complete a new DPIA + parental-consent flow first.
+- [ ] **Public ranking and score copy** reviewed: only terminal server scores and chosen
+      nicknames appear; the account copy is private, upload-only, and never restores
+      local progress or feeds standings. Visibility defaults off and requires current
+      consent; if under-16 players should rank, complete a new DPIA + parental-consent flow.
 - [ ] **Donations**: `CAT_DONATE_URL` points at the real donation page (Stripe link /
       redirecționează.ro / ONG page); the receiving entity + tax treatment confirmed.
 - [ ] `manage.py check --deploy` clean; secure cookies, CSRF, rate-limit on `/accounts/*` and

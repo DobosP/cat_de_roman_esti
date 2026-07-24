@@ -4,7 +4,14 @@
 
 **DRAFT — REQUIRES LEGAL REVIEW**
 
-Acest director conține drafturi practice pentru lansarea conturilor opționale prin „Sign in with Google” și salvarea progresului pe server pentru aplicația web educațională `cât-de-român-ești`.
+Acest director conține drafturi practice pentru lansarea conturilor opționale prin „Sign in
+with Google” și încărcarea unei copii private a rezultatelor terminate pentru aplicația web
+educațională `cât-de-român-ești`.
+
+Limita tehnică actuală este documentată în
+[ADR-0060](../adr/0060-device-local-progress-and-upload-only-private-backup.md): progresul
+afișat rămâne în browser, iar copia de cont nu este descărcată, restaurată sau combinată
+automat.
 
 Documentele sunt intenționat incomplete în zonele unde lipsesc fapte juridice sau operaționale. Completați toate marcajele `[[PLACEHOLDER: ...]]`, `[[CONFIRM: ...]]` și `[[CONTROLLER DECISION: ...]]` înainte de publicare.
 

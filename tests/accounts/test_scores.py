@@ -1,4 +1,4 @@
-"""Server-side saved progress: consent gate, idempotent sync, per-user isolation."""
+"""Private completed-score copy: consent, idempotency, cap, and per-user isolation."""
 
 from __future__ import annotations
 

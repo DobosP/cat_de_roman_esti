@@ -1,5 +1,5 @@
-// useAuth — loads /api/me once, exposes auth state + a refresh, and keeps score-sync in
-// step with the session's save capability. Anonymous/offline play needs none of this; the
+// useAuth — loads /api/me once, exposes auth state + a refresh, and gates the upload-only
+// private score copy with current consent. Anonymous/offline play needs none of this; the
 // hook degrades to {accounts_enabled:false} if /api/me is unreachable or disabled.
 
 import { useCallback, useEffect, useState } from "react";

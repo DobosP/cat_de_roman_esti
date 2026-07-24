@@ -23,6 +23,10 @@ def client() -> Client:
     return Client()
 
 
+def _normalized(response) -> str:
+    return " ".join(response.content.decode().split())
+
+
 def test_privacy_default_shows_placeholder_and_unfinalized_banner(client: Client):
     resp = client.get("/legal/privacy")
     assert resp.status_code == 200
@@ -38,6 +42,23 @@ def test_terms_default_shows_unfinalized_banner(client: Client):
     body = resp.content.decode()
     assert UNFINALIZED_SENTENCE in body
     assert DRAFT_SENTENCE in body
+
+
+def test_privacy_describes_device_local_progress_and_private_account_copy(client: Client):
+    body = _normalized(client.get("/legal/privacy"))
+    assert "Progresul rămâne pe acest dispozitiv." in body
+    assert "doar o copie privată a rezultatelor terminate" in body
+    assert "nu este descărcată și nu reface automat progresul pe alt dispozitiv" in body
+    assert "maximum 500 de rezultate terminate" in body
+    assert "Progresul activ, măiestria și circuitul zilnic nu sunt încărcate." in body
+    assert "salva progresul și pe server" not in body
+
+
+def test_terms_do_not_promise_account_restore(client: Client):
+    body = _normalized(client.get("/legal/terms"))
+    assert "copie privată a rezultatelor terminate" in body
+    assert "Progresul rămâne pe dispozitiv, fără restaurare automată din cont." in body
+    assert "servește doar la salvarea progresului" not in body
 
 
 @override_settings(

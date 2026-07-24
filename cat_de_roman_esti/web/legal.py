@@ -71,41 +71,48 @@ _PRIVACY_BODY = """
 <h1>Politica de confidențialitate</h1>
 {draft}
 <p><em>cât-de-român-ești</em> este un joc de cuvinte gratuit, în limba română. Poți juca
-<strong>fără cont</strong>; progresul se salvează local în browser. Dacă folosești
-„Intră cu Google”, îți putem salva progresul și pe server.</p>
+<strong>fără cont</strong>. Progresul rămâne pe acest dispozitiv. Cu un cont și
+consimțământ curent, trimitem în cont doar o copie privată a rezultatelor terminate. Copia
+nu este descărcată și nu reface automat progresul pe alt dispozitiv.</p>
 
 <h2>Ce date colectăm</h2>
 <ul>
   <li><strong>Cont Google</strong> (dacă te autentifici): adresa de e-mail, numele și poza
     de profil furnizate de Google, plus identificatorul contului. Nu stocăm parole și nu
     păstrăm tokenurile Google.</li>
-  <li><strong>Progres în joc</strong>: istoricul scorurilor, completările zilnice și cele
-    mai bune rezultate pe puzzle.</li>
+  <li><strong>Copie privată</strong>: maximum 500 de rezultate terminate, cu jocul, scorul,
+    momentul și metadatele opționale ale rezultatului. Progresul activ, măiestria și
+    circuitul zilnic nu sunt încărcate.</li>
+  <li><strong>Repetări și clasament</strong>: separat, putem păstra ID-ul opac al unui puzzle
+    selectat editorial și terminat; porecla și recordul verificat apar public numai cu
+    opt-in.</li>
   <li><strong>Date tehnice</strong>: adresa IP și jurnale de securitate strict necesare
     funcționării și protecției serviciului.</li>
 </ul>
 
 <h2>De ce și pe ce temei</h2>
 <ul>
-  <li>Contul și salvarea progresului — pe baza <strong>consimțământului</strong> tău.</li>
+  <li>Contul și copia privată — pe baza <strong>consimțământului</strong> tău.</li>
+  <li>Clasamentul — numai dacă alegi separat să apari.</li>
   <li>Securitatea serviciului — pe baza interesului legitim.</li>
 </ul>
 
 <h2>Copii</h2>
 <p>În România, consimțământul pentru un cont este valabil de la <strong>16 ani</strong>.
 Sub 16 ani este nevoie de acordul unui părinte sau tutore; până atunci nu creăm cont și nu
-salvăm progres pe server — jocul rămâne disponibil fără cont.</p>
+încărcăm copia privată — jocul rămâne disponibil fără cont.</p>
 
 <h2>Unde stau datele și cine le prelucrează</h2>
-<p>Datele de cont și progres sunt găzduite în <strong>UE/SEE</strong>. Prelucrători:
+<p>Datele de cont și copia privată sunt găzduite în <strong>UE/SEE</strong>. Prelucrători:
 Google (autentificare), furnizorul de găzduire (UE) și rețeaua de livrare/CDN. Nu folosim
 cookie-uri de publicitate sau de urmărire.</p>
 
 <h2>Drepturile tale</h2>
 <p>Ai dreptul de acces, rectificare, ștergere, portabilitate, opoziție și de retragere a
-consimțământului. Îți poți <strong>șterge contul și tot progresul</strong> direct din meniul
-contului. {operator_line}Pentru orice cerere sau plângere: {contact}. Te poți
-adresa și autorității de supraveghere, <strong>ANSPDCP</strong>.</p>
+consimțământului. Îți poți <strong>șterge contul și datele lui de pe server</strong> direct
+din meniul contului. Progresul de pe dispozitiv rămâne și se șterge separat din browser.
+{operator_line}Pentru orice cerere sau plângere: {contact}. Te poți adresa și autorității
+de supraveghere, <strong>ANSPDCP</strong>.</p>
 
 <p>Documentul complet (draft): <code>docs/compliance/privacy-notice.md</code>.</p>
 """
@@ -115,7 +122,8 @@ _TERMS_BODY = """
 {draft}
 <h2>1. Serviciul</h2>
 <p><em>cât-de-român-ești</em> este un joc educațional gratuit. Poți juca fără cont; contul
-prin Google este opțional și servește doar la salvarea progresului.</p>
+prin Google este opțional și poate păstra o copie privată a rezultatelor terminate.
+Progresul rămâne pe dispozitiv, fără restaurare automată din cont.</p>
 
 <h2>2. Eligibilitate și vârstă</h2>
 <p>Pentru crearea unui cont trebuie să ai cel puțin <strong>16 ani</strong>; sub această

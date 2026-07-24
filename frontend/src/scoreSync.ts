@@ -1,10 +1,10 @@
-// scoreSync.ts — best-effort mirror of private local history to the logged-in account.
+// scoreSync.ts — best-effort upload-only private copy of completed local score rows.
 //
 // The browser localStorage store (scores.ts) stays the source of truth for offline play;
 // when the user is signed in AND has completed consent, finished runs are also pushed to
 // the server (idempotent — the backend dedups on user+game+at+puzzle_key). These client
-// entries NEVER feed the public ranking; only terminal server actions update that record.
-// Never throws: a failed sync must not break gameplay.
+// entries are not downloaded/restored and NEVER feed the public ranking; only terminal
+// server actions update that record. Never throws: a failed upload must not break gameplay.
 
 import { postAuth } from "./api/auth";
 import { recentScores, scoreBoard, type GameScoreEntry } from "./scores";
@@ -42,7 +42,7 @@ export async function pushLatest(game: string): Promise<void> {
   }
 }
 
-/** One-shot upload of the whole local board when a session first becomes save-capable. */
+/** One-shot upload of retained completed rows when a session first becomes save-capable. */
 export async function syncAllLocalOnce(): Promise<void> {
   if (!enabled || didFullSync) return;
   didFullSync = true;

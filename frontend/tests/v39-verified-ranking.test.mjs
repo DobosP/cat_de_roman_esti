@@ -22,12 +22,17 @@ test("ranking copy describes verified records rather than knowledge or fun", () 
   assert.match(ranking, /activează clasamentul din meniul profilului/);
 });
 
-test("public visibility needs an explicit nickname and private sync stays private", () => {
+test("public visibility needs an explicit nickname and the account copy stays private", () => {
   assert.match(account, /const privateLabel = user\.display_name \|\| user\.name \|\| "Cont"/);
   assert.match(account, /className="account-name">\{privateLabel\}/);
   assert.match(account, /Numele afișat în clasament:", privateLabel/);
   assert.match(account, /!user\.show_on_ranking && !user\.display_name\.trim\(\)/);
   assert.match(account, /Alege o poreclă pentru clasament/);
   assert.match(account, /display_name: next\.trim\(\), show_on_ranking: true/);
+  assert.match(account, /Progresul rămâne aici/);
+  assert.match(account, /Pentru o copie privată a rezultatelor/);
+  assert.match(account, /Progresul de pe acest dispozitiv rămâne/);
+  assert.match(sync, /upload-only private copy/);
+  assert.match(sync, /not downloaded\/restored/);
   assert.match(sync, /NEVER feed the public ranking/);
 });

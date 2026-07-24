@@ -5,7 +5,7 @@
 **DRAFT — REQUIRES LEGAL REVIEW**
 
 Aplicație: `cât-de-român-ești`  
-Feature: primul login cu Google, cont opțional, salvare progres server-side  
+Feature: primul login cu Google, cont opțional, copie privată a rezultatelor terminate
 Owner: `[[PLACEHOLDER: product/engineering owner]]`  
 Data: `[[PLACEHOLDER: spec date]]`
 
@@ -15,9 +15,11 @@ La primul „Sign in with Google”, aplicația trebuie să stabilească dacă u
 
 - 16+ ani: poate accepta Termenii și Politica de confidențialitate;
 - sub 16 ani în România: necesită consimțământ verificabil de la părinte/tutore sau blocarea contului;
-- fără consimțământ valid: nu se creează cont server-side și nu se salvează progres pe server.
+- fără consimțământ valid: nu se creează cont server-side și nu se încarcă o copie privată.
 
-Contul este opțional. Jocul fără cont și progresul local trebuie să rămână disponibile unde practic.
+Contul este opțional. Jocul fără cont și progresul local trebuie să rămână disponibile unde
+practic. Progresul afișat rămâne pe dispozitiv; copia de cont nu este descărcată, restaurată
+sau combinată automat.
 
 ## 2. Ecrane UX
 
@@ -25,7 +27,9 @@ Contul este opțional. Jocul fără cont și progresul local trebuie să rămân
 
 Text scurt:
 
-„Contul este opțional. Îl folosim pentru a salva progresul tău pe server. Dacă ai sub 16 ani, avem nevoie de acordul părintelui sau tutorelui.”
+„Contul este opțional. Cu acordul tău, păstrăm în cont o copie privată a rezultatelor
+terminate. Progresul rămâne pe acest dispozitiv. Dacă ai sub 16 ani, avem nevoie de acordul
+părintelui sau tutorelui.”
 
 Acțiuni:
 
@@ -65,7 +69,8 @@ Nu pre-bifa checkboxurile.
 
 Opțiunea A — blocare cont:
 
-- mesaj: „Pentru cont și progres salvat pe server avem nevoie de acordul părintelui sau tutorelui. Poți continua să joci fără cont.”
+- mesaj: „Pentru cont și copia privată avem nevoie de acordul părintelui sau tutorelui.
+  Progresul rămâne pe acest dispozitiv și poți continua fără cont.”
 - acțiuni: „Joacă fără cont”, „Înapoi”
 
 Opțiunea B — consimțământ parental verificabil:
@@ -83,7 +88,7 @@ Metode acceptabile de verificare, de ales cu avocatul:
 | Parent email double opt-in | simplu, implementabil, minim intruziv | verifică acces la e-mail, nu dovedește complet identitatea parentală |
 | Confirmare prin cont adult | mai puternică dacă există mecanism adult | mai complexă; poate colecta mai multe date |
 | Semnătură electronică / document | mai puternică | disproporționată pentru joc gratuit, colectează date excesive |
-| Blocare cont sub 16 | cel mai simplu și minim | limitează funcția de salvare server-side pentru copii |
+| Blocare cont sub 16 | cel mai simplu și minim | limitează copia privată de cont pentru copii |
 
 Decizie necesară: `[[CONTROLLER DECISION: choose block-under-16 or parental-consent flow]]`
 
@@ -92,10 +97,10 @@ Decizie necesară: `[[CONTROLLER DECISION: choose block-under-16 or parental-con
 | Stare | Descriere | Acces |
 | --- | --- | --- |
 | `no_account` | utilizator neautentificat | joc local, localStorage |
-| `pending_age_gate` | Google login primit, cont intern nefinalizat | nu salva progres server-side |
-| `pending_parent_consent` | utilizator sub 16, e-mail părinte trimis | nu salva progres server-side, sau păstrează temporar doar date minime `[[CONTROLLER DECISION]]` |
-| `active_adult_or_16plus` | 16+ cu acceptări | cont și progres server-side |
-| `active_child_parent_consented` | sub 16 cu consimțământ parental | cont privat și progres server-side |
+| `pending_age_gate` | Google login primit, cont intern nefinalizat | nu încărca rezultate în copia privată |
+| `pending_parent_consent` | utilizator sub 16, e-mail părinte trimis | nu încărca rezultate, sau păstrează temporar doar date minime `[[CONTROLLER DECISION]]` |
+| `active_adult_or_16plus` | 16+ cu acceptări | cont și încărcare unidirecțională în copia privată |
+| `active_child_parent_consented` | sub 16 cu consimțământ parental | cont privat și încărcare unidirecțională |
 | `blocked_under_16` | sub 16 fără consimțământ sau flux blocat | fără cont; joc local |
 | `deleted` | cont șters | fără acces, date șterse/anomizate |
 
@@ -120,7 +125,9 @@ Decizie necesară: `[[CONTROLLER DECISION: choose block-under-16 or parental-con
 ## 5. Reguli backend
 
 - Nu crea cont activ înainte de finalizarea age gate + acceptări.
-- Nu salva progres server-side pentru `pending_age_gate`, `pending_parent_consent` sau `blocked_under_16`, cu excepția unui buffer temporar aprobat și minim. `[[CONTROLLER DECISION]]`
+- Nu încărca rezultate pentru `pending_age_gate`, `pending_parent_consent` sau
+  `blocked_under_16`, cu excepția unui buffer temporar aprobat și minim.
+  `[[CONTROLLER DECISION]]`
 - Scope-uri Google: `openid email profile`; nu cere Drive, Contacts, Calendar sau alte scope-uri.
 - Nu afișa public nume, avatar, scoruri sau profiluri ale minorilor.
 - Leaderboard-urile publice cu identitate reală sunt în afara acestui spec și necesită DPIA actualizat.
@@ -144,9 +151,9 @@ Decizie necesară: `[[CONTROLLER DECISION: choose block-under-16 or parental-con
 
 Pagina părintelui trebuie să explice:
 
-- copilul dorește cont pentru salvarea progresului;
-- date colectate: e-mail/nume/avatar Google, progres joc, loguri tehnice;
-- scopuri: cont, progres, securitate;
+- copilul dorește cont pentru o copie privată a rezultatelor terminate;
+- date colectate: e-mail/nume/avatar Google, rezultate terminate, loguri tehnice;
+- scopuri: cont, copie privată, securitate;
 - fără publicitate comportamentală și fără profil public implicit;
 - dreptul de retragere și ștergere;
 - contact: `[[PLACEHOLDER: privacy contact email]]`;
@@ -158,6 +165,7 @@ Pagina părintelui trebuie să explice:
 | --- | --- |
 | utilizator alege „Joacă fără cont” | nu se creează cont, progresul rămâne local |
 | 16+ acceptă documentele | cont activ, record consimțământ salvat |
+| 16+ termină un joc cu salvarea permisă | rezultatul este încărcat; progresul local nu este înlocuit |
 | 16+ nu bifează checkboxurile | buton creare cont dezactivat |
 | sub 16 fără flux parental | cont blocat, joc local disponibil |
 | sub 16 cu părinte confirmat | cont activ copil, privat implicit, record parental salvat |

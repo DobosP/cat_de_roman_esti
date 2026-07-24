@@ -1,7 +1,9 @@
 # V39 six-game refinement
 
-V39 refines the V38 six-game candidate without adding another mechanic. The governing
-decisions are [ADR-0053](adr/0053-verified-player-records-and-local-circuit.md) and
+V39 refines the V38 six-game candidate without adding another mechanic. Its original
+governing decisions were
+[ADR-0053](adr/0053-verified-player-records-and-local-circuit.md), since superseded by
+[ADR-0060](adr/0060-device-local-progress-and-upload-only-private-backup.md), and
 [ADR-0054](adr/0054-refine-derived-pilot-before-expansion.md). The derived-catalog generation
 and privacy boundary remain documented in [V38_DERIVED_GAMES.md](V38_DERIVED_GAMES.md).
 
@@ -43,10 +45,12 @@ older export from returning a graduated player to the starter shelf.
 
 ## Account and ranking boundary
 
-`ScoreEntry` is private cross-device history, validated and pruned to 500 newest arrivals.
-It never feeds the public ranking. `VerifiedBest` contains only user, exact game key, a
-server-authored 0–1,000 best score, and update time; uniqueness limits it to six rows per
-user.
+`ScoreEntry` is a consent-gated, upload-only private backup of completed-score rows,
+validated and pruned to the 500 newest server arrivals. The browser score document remains
+the source of truth; the frontend does not download, restore, or merge account rows.
+`ScoreEntry` never feeds the public ranking. `VerifiedBest` contains only user, exact game
+key, a server-authored 0–1,000 best score, and update time; uniqueness limits it to six rows
+per user.
 
 Public visibility requires all of:
 

@@ -2,7 +2,8 @@
 // (when accounts are on), and the account affordance (Sign in with Google → RO age-16
 // consent gate → signed-in chip). Renders one useAuth() for the whole bar.
 //
-// Anonymous/offline play is never gated: you only need an account to APPEAR on the ranking.
+// Anonymous/offline play is never gated. With consent, an account can receive an upload-only
+// private copy of completed scores; appearing on the separate verified ranking needs opt-in.
 // When accounts are disabled the bar shows just the Donează button (if a URL is set).
 
 import { useState } from "react";
@@ -131,7 +132,10 @@ function ConsentGate({ minAge, onResolved }: { minAge: number; onResolved: () =>
     <div className="account-overlay">
       <div className="account-card">
         <h2>Un pas rapid</h2>
-        <p>Ca să-ți salvezi progresul, confirmă vârsta și acceptă regulile.</p>
+        <p>
+          Progresul rămâne aici. Pentru o copie privată a rezultatelor, confirmă vârsta și
+          acceptă regulile.
+        </p>
         <label className="account-field">
           <span>Poreclă (opțională; necesară doar pentru clasament)</span>
           <input
@@ -263,7 +267,13 @@ function UserChip({ user, onChanged }: { user: AuthUser; onChanged: () => Promis
             role="menuitem"
             className="account-menu__danger"
             onClick={async () => {
-              if (!window.confirm("Ștergi definitiv contul și tot progresul salvat?")) return;
+              if (
+                !window.confirm(
+                  "Ștergi contul și copia privată de pe server? Progresul de pe acest dispozitiv rămâne.",
+                )
+              ) {
+                return;
+              }
               await deleteAccount();
               await onChanged();
             }}
