@@ -78,8 +78,8 @@ function RestrictedNotice({ onLogout }: { onLogout: () => Promise<void> }) {
       <div className="account-card">
         <h2>Cont restricționat</h2>
         <p>
-          Conform legii, copiii sub 16 ani au nevoie de acordul unui părinte pentru a-și crea
-          un cont. Poți juca în continuare fără cont — nu apari însă în clasament.
+          Contul există, dar rămâne restricționat. Poți juca local; nu încărcăm copia privată,
+          nu memorăm jocurile terminate și nu te afișăm în clasament.
         </p>
         <p className="account-muted">
           Un flux de consimțământ al părintelui va fi disponibil în curând.

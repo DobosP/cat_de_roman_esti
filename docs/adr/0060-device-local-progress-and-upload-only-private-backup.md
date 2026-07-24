@@ -19,9 +19,13 @@ arrivals per user. The authenticated read endpoint remains available for account
 data-rights work, but the current frontend does not download, restore, or merge its response
 into the browser score document.
 
-Keep repeat avoidance separate. `PlayedPuzzle` stores only the opaque ID of a finished
-curated puzzle under current consent; it never derives from `ScoreEntry` and never stores a
-mined board or hidden answer.
+A Google/allauth user and `Profile` can exist before valid self-consent. An under-threshold
+declaration creates a sticky parental-consent hold: until a verified parental flow exists,
+it blocks `ScoreEntry`, `PlayedPuzzle`, and `VerifiedBest` writes plus ranking visibility.
+
+Keep repeat avoidance separate. Under current consent, `PlayedPuzzle` stores the game key,
+opaque curated pack ID, and server-authored completion timestamp. It never derives from
+`ScoreEntry` and never stores a mined board or solution.
 
 Keep public records separate. Accept exactly the six public game keys and at most one
 `VerifiedBest` row per user and game, with an integer score from 0 through 1,000. Update it
@@ -54,9 +58,11 @@ recovery path the product does not provide.
 ## Consequences
 
 Losing or changing a browser can lose its displayed progress even when private score rows
-exist on the account. Account deletion removes the server copy, consent records, repeat
-history, profile, and verified records; it does not clear another browser's localStorage.
-Browser-authored rows remain unable to influence public standings.
+exist on the account. Account deletion immediately cascades through `Profile`,
+`ConsentRecord`, `ScoreEntry`, `PlayedPuzzle`, and `VerifiedBest`; it does not clear another
+browser's localStorage. The current model does not retain consent evidence for three years
+after deletion. Such evidentiary retention remains an unimplemented legal and data-model
+decision. Browser-authored rows remain unable to influence public standings.
 
 Accounts mode remains behind its compliance go-live checklist. A future automatic download
 or merge requires a new decision covering account-namespaced local storage, account

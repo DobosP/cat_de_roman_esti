@@ -51,6 +51,9 @@ def test_privacy_describes_device_local_progress_and_private_account_copy(client
     assert "nu este descărcată și nu reface automat progresul pe alt dispozitiv" in body
     assert "maximum 500 de rezultate terminate" in body
     assert "Progresul activ, măiestria și circuitul zilnic nu sunt încărcate." in body
+    assert "jocul, ID-ul opac al puzzle-ului selectat editorial și momentul terminării" in body
+    assert "Nu păstrăm un joc minat sau soluția." in body
+    assert "Un cont intern poate exista, dar rămâne restricționat" in body
     assert "salva progresul și pe server" not in body
 
 

@@ -8,6 +8,10 @@ const ranking = read("../src/screens/Ranking.tsx");
 const account = read("../src/components/AccountBar.tsx");
 const sync = read("../src/scoreSync.ts");
 
+function withoutComments(source) {
+  return source.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
+}
+
 test("tied rows identify the requester explicitly and keep an off-list self card", () => {
   assert.match(authApi, /is_me: boolean/);
   assert.match(ranking, /row\.is_me \? " rank-row--me"/);
@@ -35,4 +39,23 @@ test("public visibility needs an explicit nickname and the account copy stays pr
   assert.match(sync, /upload-only private copy/);
   assert.match(sync, /not downloaded\/restored/);
   assert.match(sync, /NEVER feed the public ranking/);
+});
+
+test("score-copy code has only a POST transport and no server-to-local path", () => {
+  const executable = withoutComments(sync);
+  const authImport = executable.match(
+    /import\s*\{([^}]*)\}\s*from\s*["']\.\/api\/auth["'];/,
+  );
+  assert.ok(authImport);
+  assert.deepEqual(
+    authImport[1]
+      .split(",")
+      .map((name) => name.trim())
+      .filter(Boolean),
+    ["postAuth"],
+  );
+  assert.doesNotMatch(
+    executable,
+    /\b(?:getAuth|getScores|importScores|mergeScores|localStorage|recordScore)\b/,
+  );
 });

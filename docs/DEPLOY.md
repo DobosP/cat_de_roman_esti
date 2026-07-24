@@ -17,17 +17,18 @@ consent, signing in can do two private things; Google name/email are never publi
    private account copy. The browser remains the source of truth: there is no automatic
    download, restore, or merge, so this is not cross-device progress continuity.
 2. **Don't get the same game again** — once you *finish* a curated puzzle (win or give up), the
-   server won't offer it to you anymore (`PlayedPuzzle`; daily challenges are exempt; mined/random
-   boards draw from a huge pool so repeats there are already rare — and their identity can encode
-   the answer, so it is never persisted).
+   server stores its game key, opaque curated pack ID, and completion timestamp, then avoids
+   offering it again (`PlayedPuzzle`; daily challenges are exempt). Mined/random boards and
+   solutions are never persisted.
 
 An account can also **appear on the public ranking** (`/clasament`) with a chosen nickname
 (never Google name/email) and one selected game's server-verified record. Browser/imported
 history never feeds public standings. Visibility requires current consent plus an explicit
 `show_on_ranking` opt-in, which defaults to private. Money comes from **donations**: set
 `CAT_DONATE_URL` and a "Donează" button shows in both modes (real provider/ONG page is an
-owner task). Under-16 self-service accounts stay blocked — so the ranking is effectively 16+;
-letting minors rank (pseudonymously, with verifiable parental consent) is a **new DPIA** — see
+owner task). An under-16 Google/allauth user and profile can exist, but a sticky parental hold
+blocks score-copy, repeat, and verified-record writes plus ranking visibility. Letting minors
+rank (pseudonymously, with verifiable parental consent) is a **new DPIA** — see
 `docs/compliance/`.
 
 > **Go-live gate.** The accounts stack collects personal data from possibly-minor users. Do

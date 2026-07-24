@@ -48,7 +48,8 @@ Documentele sunt intenționat incomplete în zonele unde lipsesc fapte juridice 
 
 ### Copii și consimțământ
 
-- decideți între blocarea conturilor sub 16 sau flux parental verificabil;
+- confirmați hold-ul parental sticky pentru sub 16 și proiectați orice flux parental
+  verificabil înainte de deblocare;
 - implementați age gate la primul Google login;
 - nu pre-bifați acceptările;
 - stocați recordul de consimțământ: timestamp, versiune, text hash, metodă;

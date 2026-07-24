@@ -24,7 +24,7 @@ Prelucrarea include date de cont, progres în joc și loguri tehnice. Deoarece s
 | Element | Descriere |
 | --- | --- |
 | Persoane vizate | utilizatori ai aplicației, inclusiv minori; părinți/tutori pentru consimțământ |
-| Date | e-mail, nume, avatar, Google `sub`, rezultate terminate și metadatele lor opționale, ID-uri opace de puzzle selectat editorial și terminat, poreclă/opt-in și record verificat, loguri IP/user agent, consimțământ/vârstă |
+| Date | e-mail, nume, avatar, Google `sub`, rezultate terminate și metadatele lor opționale; pentru repetări: joc, ID opac al pachetului curatoriat și timestamp de terminare, fără joc minat sau soluție; poreclă/opt-in și record verificat; loguri IP/user agent, consimțământ/vârstă |
 | Surse | Google Identity, browser, server aplicație, Cloudflare |
 | Scopuri | autentificare, copie privată a rezultatelor, evitare repetări, clasament opțional, securitate, prevenire abuz, răspuns DSAR |
 | Temeiuri | art. 6(1)(b), art. 6(1)(a), art. 6(1)(f), art. 6(1)(c); art. 8 pentru consimțământ copii |
@@ -47,7 +47,7 @@ Prelucrarea include date de cont, progres în joc și loguri tehnice. Deoarece s
 
 | Risc | Impact | Probabilitate draft | Măsuri propuse |
 | --- | --- | --- | --- |
-| Crearea contului de către copil sub 16 fără consimțământ parental | ridicat | medie | age gate, consimțământ parental verificabil sau blocare cont |
+| Scrieri de cont sau clasament pentru copil sub 16 fără consimțământ parental | ridicat | medie | age gate și hold parental sticky care blochează copia, repetările, recordurile și clasamentul |
 | Expunere publică a progresului/profilului minorului | ridicat | scăzută dacă nu există profil public | conturi private implicit, fără leaderboard public cu identitate reală |
 | Colectare excesivă prin Google scopes | mediu | medie | scope-uri minime, fără acces la contacte/Drive/calendar |
 | Reidentificare prin avatar/nume real | mediu | medie | nu afișa numele/avatarul public; permite ascundere/ștergere |
@@ -64,7 +64,7 @@ Prelucrarea include date de cont, progres în joc și loguri tehnice. Deoarece s
 | Conturi private implicit; fără profil public al minorilor | `[[CONTROLLER DECISION]]` |
 | Joc utilizabil fără cont unde practic | `[[CONTROLLER DECISION]]` |
 | Age gate la primul Google login | `[[CONTROLLER DECISION]]` |
-| Flux consimțământ parental pentru sub 16 sau blocare cont | `[[CONTROLLER DECISION]]` |
+| Hold parental sticky pentru sub 16; flux parental verificabil înainte de orice deblocare | `[[CONTROLLER DECISION]]` |
 | Înregistrare consimțământ: timestamp, versiune documente, hash text, metodă | `[[CONTROLLER DECISION]]` |
 | Scope-uri Google minime | `[[CONTROLLER DECISION]]` |
 | Ștergere cont și export date în aplicație | `[[CONTROLLER DECISION]]` |

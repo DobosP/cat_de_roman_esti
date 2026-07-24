@@ -11,11 +11,14 @@ Data: `[[PLACEHOLDER: spec date]]`
 
 ## 1. Obiectiv
 
-La primul „Sign in with Google”, aplicația trebuie să stabilească dacă utilizatorul poate crea un cont:
+La primul „Sign in with Google”, aplicația trebuie să stabilească dacă utilizatorul poate
+activa funcțiile contului:
 
 - 16+ ani: poate accepta Termenii și Politica de confidențialitate;
-- sub 16 ani în România: necesită consimțământ verificabil de la părinte/tutore sau blocarea contului;
-- fără consimțământ valid: nu se creează cont server-side și nu se încarcă o copie privată.
+- sub 16 ani în România: utilizatorul Google/allauth și profilul intern pot exista, dar au
+  un hold parental sticky până la consimțământ verificabil;
+- fără consimțământ valid: profilul rămâne restricționat și nu permite copia privată,
+  repetări, recorduri verificate sau clasament.
 
 Contul este opțional. Jocul fără cont și progresul local trebuie să rămână disponibile unde
 practic. Progresul afișat rămâne pe dispozitiv; copia de cont nu este descărcată, restaurată
@@ -67,10 +70,10 @@ Nu pre-bifa checkboxurile.
 
 ### 2.4 Flux pentru sub 16
 
-Opțiunea A — blocare cont:
+Opțiunea A — profil restricționat:
 
 - mesaj: „Pentru cont și copia privată avem nevoie de acordul părintelui sau tutorelui.
-  Progresul rămâne pe acest dispozitiv și poți continua fără cont.”
+  Progresul rămâne pe acest dispozitiv și poți continua local.”
 - acțiuni: „Joacă fără cont”, „Înapoi”
 
 Opțiunea B — consimțământ parental verificabil:
@@ -88,20 +91,21 @@ Metode acceptabile de verificare, de ales cu avocatul:
 | Parent email double opt-in | simplu, implementabil, minim intruziv | verifică acces la e-mail, nu dovedește complet identitatea parentală |
 | Confirmare prin cont adult | mai puternică dacă există mecanism adult | mai complexă; poate colecta mai multe date |
 | Semnătură electronică / document | mai puternică | disproporționată pentru joc gratuit, colectează date excesive |
-| Blocare cont sub 16 | cel mai simplu și minim | limitează copia privată de cont pentru copii |
+| Profil restricționat sub 16 | cel mai simplu și minim | utilizatorul intern există, dar hold-ul blochează scrierile și clasamentul |
 
-Decizie necesară: `[[CONTROLLER DECISION: choose block-under-16 or parental-consent flow]]`
+Decizie necesară:
+`[[CONTROLLER DECISION: choose restricted-under-16 or parental-consent flow]]`
 
 ## 3. Stări de cont
 
 | Stare | Descriere | Acces |
 | --- | --- | --- |
 | `no_account` | utilizator neautentificat | joc local, localStorage |
-| `pending_age_gate` | Google login primit, cont intern nefinalizat | nu încărca rezultate în copia privată |
-| `pending_parent_consent` | utilizator sub 16, e-mail părinte trimis | nu încărca rezultate, sau păstrează temporar doar date minime `[[CONTROLLER DECISION]]` |
+| `pending_age_gate` | utilizator Google/allauth și profil intern create | profil restricționat; fără copie, repetări, recorduri sau clasament |
+| `pending_parent_consent` | utilizator sub 16, hold parental sticky | profil restricționat; fără scrieri de progres sau clasament |
 | `active_adult_or_16plus` | 16+ cu acceptări | cont și încărcare unidirecțională în copia privată |
 | `active_child_parent_consented` | sub 16 cu consimțământ parental | cont privat și încărcare unidirecțională |
-| `blocked_under_16` | sub 16 fără consimțământ sau flux blocat | fără cont; joc local |
+| `blocked_under_16` | sub 16 fără flux parental verificat | utilizator/profil restricționat; joc local |
 | `deleted` | cont șters | fără acces, date șterse/anomizate |
 
 ## 4. Date de stocat pentru consimțământ
@@ -124,7 +128,8 @@ Decizie necesară: `[[CONTROLLER DECISION: choose block-under-16 or parental-con
 
 ## 5. Reguli backend
 
-- Nu crea cont activ înainte de finalizarea age gate + acceptări.
+- Păstrează utilizatorul Google/allauth și `Profile` restricționate înainte de finalizarea
+  age gate + acceptări.
 - Nu încărca rezultate pentru `pending_age_gate`, `pending_parent_consent` sau
   `blocked_under_16`, cu excepția unui buffer temporar aprobat și minim.
   `[[CONTROLLER DECISION]]`
@@ -167,7 +172,7 @@ Pagina părintelui trebuie să explice:
 | 16+ acceptă documentele | cont activ, record consimțământ salvat |
 | 16+ termină un joc cu salvarea permisă | rezultatul este încărcat; progresul local nu este înlocuit |
 | 16+ nu bifează checkboxurile | buton creare cont dezactivat |
-| sub 16 fără flux parental | cont blocat, joc local disponibil |
+| sub 16 fără flux parental | utilizator/profil restricționat, joc local disponibil |
 | sub 16 cu părinte confirmat | cont activ copil, privat implicit, record parental salvat |
 | link parental expirat | consimțământ refuzat/expirat, cont neactivat |
 | părinte retrage consimțământul | cont copil dezactivat și ștergere declanșată |

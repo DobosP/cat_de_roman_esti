@@ -138,15 +138,37 @@ def test_stale_consent_blocks_progress_read_and_write(auth_client):
 def test_delete_account_erases_everything(auth_client, give_consent):
     from django.contrib.auth import get_user_model
 
-    from cat_de_roman_esti.accounts.models import ScoreEntry
+    from cat_de_roman_esti.accounts.models import (
+        ConsentRecord,
+        PlayedPuzzle,
+        Profile,
+        ScoreEntry,
+        VerifiedBest,
+    )
 
     give_consent(auth_client)
     _post(auth_client, [_ENTRY])
+    PlayedPuzzle.objects.create(
+        user=auth_client.cat_user,
+        game="contexto",
+        pack_id="ct-test-delete",
+    )
+    VerifiedBest.objects.create(
+        user=auth_client.cat_user,
+        game="contexto",
+        score=750,
+    )
     user_id = auth_client.cat_user.id
+    assert Profile.objects.filter(user_id=user_id).exists()
+    assert ConsentRecord.objects.filter(user_id=user_id).count() == 2
+    assert ScoreEntry.objects.filter(user_id=user_id).exists()
+    assert PlayedPuzzle.objects.filter(user_id=user_id).exists()
+    assert VerifiedBest.objects.filter(user_id=user_id).exists()
 
     resp = auth_client.post("/api/me/delete", content_type="application/json")
     assert resp.status_code == 200 and resp.json() == {"ok": True}
     assert get_user_model().objects.filter(id=user_id).count() == 0
-    assert ScoreEntry.objects.filter(user_id=user_id).count() == 0
+    for model in (Profile, ConsentRecord, ScoreEntry, PlayedPuzzle, VerifiedBest):
+        assert not model.objects.filter(user_id=user_id).exists()
     # Session is gone too.
     assert auth_client.get("/api/me").json()["authenticated"] is False

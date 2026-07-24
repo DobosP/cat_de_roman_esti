@@ -83,9 +83,9 @@ nu este descărcată și nu reface automat progresul pe alt dispozitiv.</p>
   <li><strong>Copie privată</strong>: maximum 500 de rezultate terminate, cu jocul, scorul,
     momentul și metadatele opționale ale rezultatului. Progresul activ, măiestria și
     circuitul zilnic nu sunt încărcate.</li>
-  <li><strong>Repetări și clasament</strong>: separat, putem păstra ID-ul opac al unui puzzle
-    selectat editorial și terminat; porecla și recordul verificat apar public numai cu
-    opt-in.</li>
+  <li><strong>Repetări și clasament</strong>: separat, păstrăm jocul, ID-ul opac al
+    puzzle-ului selectat editorial și momentul terminării. Nu păstrăm un joc minat sau
+    soluția. Porecla și recordul verificat apar public numai cu opt-in.</li>
   <li><strong>Date tehnice</strong>: adresa IP și jurnale de securitate strict necesare
     funcționării și protecției serviciului.</li>
 </ul>
@@ -99,8 +99,9 @@ nu este descărcată și nu reface automat progresul pe alt dispozitiv.</p>
 
 <h2>Copii</h2>
 <p>În România, consimțământul pentru un cont este valabil de la <strong>16 ani</strong>.
-Sub 16 ani este nevoie de acordul unui părinte sau tutore; până atunci nu creăm cont și nu
-încărcăm copia privată — jocul rămâne disponibil fără cont.</p>
+Sub 16 ani este nevoie de acordul unui părinte sau tutore. Un cont intern poate exista, dar
+rămâne restricționat: nu încărcăm copia privată, nu salvăm repetări sau recorduri verificate
+și nu afișăm profilul în clasament. Jocul local rămâne disponibil.</p>
 
 <h2>Unde stau datele și cine le prelucrează</h2>
 <p>Datele de cont și copia privată sunt găzduite în <strong>UE/SEE</strong>. Prelucrători:

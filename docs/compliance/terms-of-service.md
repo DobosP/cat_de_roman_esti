@@ -26,7 +26,8 @@ Poți folosi aplicația fără cont dacă ai capacitatea legală necesară sau d
 
 - utilizatorii de cel puțin 16 ani pot consimți singuri, în condițiile legii române;
 - utilizatorii sub 16 ani au nevoie de consimțământ verificabil din partea părintelui sau tutorelui legal;
-- dacă nu putem obține consimțământul necesar, crearea contului va fi blocată sau contul va fi dezactivat.
+- dacă nu putem obține consimțământul necesar, contul intern rămâne restricționat:
+  fără copie privată, repetări, recorduri verificate sau clasament.
 
 ### 3. Conturi
 
@@ -99,7 +100,8 @@ You may use the app without an account if you have legal capacity or parental/gu
 
 - users aged 16 or over may consent under Romanian law;
 - users under 16 need verifiable parental/legal guardian consent;
-- if required consent cannot be obtained, account creation will be blocked or the account disabled.
+- if required consent cannot be obtained, the internal account remains restricted: no
+  private copy, repeat writes, verified records or ranking visibility.
 
 ### 3. Accounts
 

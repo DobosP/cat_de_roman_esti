@@ -13,7 +13,7 @@ Data: `[[PLACEHOLDER: effective date]]`
 
 | Date | Sistem | Retenție propusă | Acțiune la expirare |
 | --- | --- | --- | --- |
-| Profil cont | baza de date aplicație | durata contului | ștergere sau anonimizare în 30 zile de la ștergerea contului `[[CONFIRM]]` |
+| Profil cont | baza de date aplicație | durata contului | ștergere imediată prin cascada curentă la ștergerea din aplicație |
 | Google `sub`, e-mail, nume, avatar | baza de date aplicație | durata contului | ștergere odată cu contul |
 | Copie privată rezultate (`ScoreEntry`, maximum 500/utilizator) | baza de date aplicație | durata contului | ștergere odată cu contul |
 | Repetări și recorduri (`PlayedPuzzle`, `VerifiedBest`) | baza de date aplicație | durata contului | ștergere odată cu contul |
@@ -21,7 +21,7 @@ Data: `[[PLACEHOLDER: effective date]]`
 | Loguri aplicație | servere Hetzner | 90 zile | rotație și ștergere automată `[[CONFIRM]]` |
 | Loguri Cloudflare | Cloudflare | termenul din plan/contract | configurare minimă disponibilă `[[CONFIRM]]` |
 | Backup-uri | storage backup `[[PLACEHOLDER]]` | 30 zile | suprascriere automată; ștergerea din backup la rotație `[[CONFIRM]]` |
-| Consimțământ și acceptări | baza de date aplicație | durata contului + 3 ani | ștergere după termen `[[CONFIRM with counsel]]` |
+| Consimțământ și acceptări | baza de date aplicație | implementarea curentă: durata contului | ștergere imediată prin cascadă; păstrarea 3 ani este propusă, neimplementată și necesită temei juridic confirmat |
 | DSAR și corespondență | e-mail/ticketing `[[PLACEHOLDER]]` | 3 ani după închidere | ștergere/arhivare limitată `[[CONFIRM]]` |
 | Incident records | incident register | incident + 3 ani | ștergere după termen `[[CONFIRM]]` |
 
@@ -47,8 +47,10 @@ Termene:
 1. Înregistrează cererea în registrul DSAR: dată, canal, solicitant, drept invocat, cont afectat, termen limită.
 2. Verifică identitatea proporțional: login existent, link trimis la e-mailul contului sau alte informații minime. Nu cere documente de identitate decât dacă este necesar și proporțional.
 3. Pentru părinte/tutore, verifică legătura cu copilul prin metoda aprobată: `[[CONTROLLER DECISION: parent verification method]]`.
-4. Identifică datele în sistem: cont, copia rezultatelor, ID-uri de puzzle terminat,
-   recorduri verificate, loguri rezonabil căutabile, consimțământ, corespondență.
+4. Identifică datele în sistem: cont, copia rezultatelor, jocul + ID-ul opac al pachetului
+   curatoriat + timestamp-ul de terminare pentru repetări, recorduri verificate, loguri
+   rezonabil căutabile, consimțământ, corespondență. `PlayedPuzzle` nu conține joc minat
+   sau soluție.
 5. Aplică excepțiile legale unde este cazul și documentează motivul.
 6. Răspunde în limbaj clar. Pentru copii, folosește explicații simple.
 7. Execută cererea: export, corectare, ștergere, restricționare sau retragere consimțământ.
@@ -62,8 +64,8 @@ Conținut export:
 
 - profil cont: e-mail, nume, avatar URL dacă este stocat, Google `sub` sau identificator pseudonimizat;
 - copia privată: joc, scor, descriere, timestamp și metadatele opționale ale rezultatului;
-- repetări și clasament: ID-urile opace ale puzzle-urilor terminate, poreclă, opt-in și
-  recorduri verificate;
+- repetări și clasament: joc, ID opac al pachetului curatoriat, timestamp de terminare,
+  poreclă, opt-in și recorduri verificate; fără joc minat sau soluție;
 - consimțăminte: versiuni documente, timestamp, metodă;
 - setări cont.
 
@@ -81,6 +83,10 @@ Cerință produs:
 - după ștergere: revocare sesiuni active, ștergere date de cont, dezlegare de Google `sub`,
   păstrare minimă a evidenței legale;
 - localStorage: oferă buton separat „Șterge progresul de pe acest dispozitiv”.
+
+Ștergerea curentă a utilizatorului cascadează imediat prin `Profile`, `ConsentRecord`,
+`ScoreEntry`, `PlayedPuzzle` și `VerifiedBest`. O retenție separată de trei ani pentru
+dovada consimțământului nu este implementată.
 
 ## 6. Checklist incident și notificare 72 ore
 
