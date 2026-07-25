@@ -1,7 +1,16 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-07-19. This file is the repository's current source of truth._
-_Last verified: 2026-07-19 (local V37: backend 477/477, required session store 16/16,
+_As of 2026-07-25. This file is the repository's current source of truth._
+
+**Client (2026-07-25):** `cat_de_roman_esti/roedu_client.py` is now a thin re-export of
+`_roedu_client_core.py`, a generated, stamped copy of the canonical `/v1` client the producer
+owns (romania_scraper ADR-0069, `scripts/sync_roedu_client.py`; local ADR-0060). Never edit
+`_roedu_client_core.py` here — edit the canonical file and re-run the sync script;
+`tests/test_roedu_client_vendored.py` fails on a local edit via the `VENDORED_SHA256` stamp.
+Adopting it **fixed a real defect**: this app's private `iter()` had no repeated-cursor guard,
+so a server echoing one cursor looped forever. Iteration now raises `RoeduContractError`.
+The public import path (`from cat_de_roman_esti.roedu_client import RoeduClient`) is unchanged.
+_Last verified: 2026-07-25 (backend 482/482 after the vendored-client adoption; prior V37 baseline was 477/477, required session store 16/16,
 frontend 13/13, static/mobile 11/11, ranking/critique/pack/KG gates, packaged-runtime smoke,
 Ruff, workflow syntax, lint, typecheck, and whitespace green; production bundle is
 117.23/120 KiB with four font subsets. Live is V32 `f40fa8b`; V33–V37 are not pushed/deployed.)_
