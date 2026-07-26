@@ -9,7 +9,7 @@ with Google” și încărcarea unei copii private a rezultatelor terminate pent
 educațională `cât-de-român-ești`.
 
 Limita tehnică actuală este documentată în
-[ADR-0058](../adr/0058-device-local-progress-and-upload-only-private-backup.md): progresul
+[ADR-0061](../adr/0061-device-local-progress-and-upload-only-private-backup.md): progresul
 afișat rămâne în browser, iar copia de cont nu este descărcată, restaurată sau combinată
 automat.
 

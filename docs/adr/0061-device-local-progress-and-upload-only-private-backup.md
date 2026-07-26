@@ -1,8 +1,11 @@
-# ADR-0058: Keep progress device-local and account history upload-only
+# ADR-0061: Keep progress device-local and account history upload-only
 
-> Renumbered from 0060 when this chain landed on 2026-07-26: main had already landed
-> `0060-adopt-canonical-vendored-roedu-client.md` on 2026-07-25 while this branch waited.
-> 0058 was the next free number (0052-0057 are claimed by this same chain).
+> Renumbered from 0060 to **0061** when this chain landed on 2026-07-26. Main had already
+> landed `0060-adopt-canonical-vendored-roedu-client.md` on 2026-07-25 while this branch
+> waited. It was briefly renumbered to 0058, which was wrong: 0058
+> (difficulty-aware-playable-category-availability) and 0059 (recoverable-ranking-states)
+> are claimed by the still-unlanded `feat/v41-refinement-wave`. 0061 is the first number
+> free of both landed and in-flight claims.
 
 Date: 2026-07-24
 Status: accepted

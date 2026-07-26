@@ -3,7 +3,7 @@
 V39 refines the V38 six-game candidate without adding another mechanic. Its original
 governing decisions were
 [ADR-0053](adr/0053-verified-player-records-and-local-circuit.md), since superseded by
-[ADR-0058](adr/0058-device-local-progress-and-upload-only-private-backup.md), and
+[ADR-0061](adr/0061-device-local-progress-and-upload-only-private-backup.md), and
 [ADR-0054](adr/0054-refine-derived-pilot-before-expansion.md). The derived-catalog generation
 and privacy boundary remain documented in [V38_DERIVED_GAMES.md](V38_DERIVED_GAMES.md).
 

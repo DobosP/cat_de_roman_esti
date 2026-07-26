@@ -2,7 +2,7 @@
 
 ## Summary
 
-- Added ADR-0058 and superseded ADR-0053 without editing its landed body.
+- Added ADR-0061 and superseded ADR-0053 without editing its landed body.
 - Corrected product, compliance, served legal, account-gate, deletion, and code-comment copy:
   browser progress is device-local; the account receives an upload-only private copy of
   completed-score rows; no automatic download, restore, or merge exists.
@@ -35,7 +35,7 @@
 ## Risks / manual review
 
 - Compliance documents remain drafts requiring the existing legal-review and go-live gates.
-- ADR-0058 intentionally documents the current one-way behavior; future automatic restore
+- ADR-0061 intentionally documents the current one-way behavior; future automatic restore
   requires account namespacing and a new decision.
 - Root integration must add the V41 STATUS/release references in its assembled commit.
 
