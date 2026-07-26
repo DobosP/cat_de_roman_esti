@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-07-25. This file is the repository's current source of truth._
+_As of 2026-07-26. This file is the repository's current source of truth._
 
 **Client (2026-07-25):** `cat_de_roman_esti/roedu_client.py` is now a thin re-export of
 `_roedu_client_core.py`, a generated, stamped copy of the canonical `/v1` client the producer
@@ -10,83 +10,82 @@ owns (romania_scraper ADR-0069, `scripts/sync_roedu_client.py`; local ADR-0060).
 Adopting it **fixed a real defect**: this app's private `iter()` had no repeated-cursor guard,
 so a server echoing one cursor looped forever. Iteration now raises `RoeduContractError`.
 The public import path (`from cat_de_roman_esti.roedu_client import RoeduClient`) is unchanged.
-_Last verified: 2026-07-25 (backend 482/482 after the vendored-client adoption; prior V37 baseline was 477/477, required session store 16/16,
-frontend 13/13, static/mobile 11/11, ranking/critique/pack/KG gates, packaged-runtime smoke,
-Ruff, workflow syntax, lint, typecheck, and whitespace green; production bundle is
-117.23/120 KiB with four font subsets. Live is V32 `f40fa8b`; V33–V37 are not pushed/deployed.)_
+_Last verified: 2026-07-26 (V38-V41 chain landed on top of the vendored-client adoption; backend 560/560, frontend 114/114. Baseline before this merge was backend 482/482. The V40 line this replaced read: _As of 2026-07-24. This file is the repository's current source of truth._ _Last verified: 2026-07-24 (V40: backend 553, accounts 53, frontend 21, session store 16; lint/build/content/migration/wheel green, bundle 119.15/120 KiB; live V32, V38–V40 local.)_)_
 
-## Current outcome — V37 large-pilot consolidation (ADR-0051)
+## Current outcome — local V40 release candidate (ADR-0055–ADR-0057)
 
-- A private, reproducible sidecar ranks all **794** curated boards with a pre-playtest
-  estimate: 60% Romanian-concept familiarity and 40% game-specific structural quality.
-  It is bound to the exact pack, KG, and critique rubric and fails closed on drift.
-- Pilot preference is independent of score: only approved, payload-valid records without
-  deterministic critique `FAIL` qualify. There are **486** eligible boards: Conexiuni 123,
-  Cald sau Rece 192, Lanț 94, and Alchimie 77.
-- Existing game/category/difficulty/repeat filters run first. Eligible shelves then use
-  deterministic 1–5-ticket rotation; shared daily shelves retain their minimum of eight.
-  Eligible-empty seeded shelves retain their approved pool; below-minimum daily shelves
-  retain the existing approved/mined fallback. Custom packs stay neutral unless they
-  provide a digest-matching ranking sidecar.
-- The beginner lobby starts with Alchimie → Conexiuni → Cald sau Rece → Lanț. Only Alchimie
-  says `Începe aici`; a first-time player does not see an empty history wall.
-- Ranking scores, board ranks, selection weights, pack IDs, and pilot eligibility stay
-  outside public responses. This is an editorial board-priority estimate, not measured fun
-  or a rating of any player's knowledge. Accounts, public rankings, and telemetry remain off.
+- The six-game, tap-first lobby remains in fun-first order: Alchimie → Intrusul → Perechi →
+  Conexiuni → Cald sau Rece → Lanț. A seventh mode still waits for player evidence.
+- The digest-ranked bundled runtime now serves only its **486 zero-FAIL pilot boards**:
+  Conexiuni 123, Cald sau Rece 192, Lanț 94, and Alchimie 77. Its 86 approved
+  non-eligible Conexiuni reserves are never selected.
+- Game/category/difficulty filters remain exact. Finished eligible IDs are avoided while a
+  new one remains, then selection repeats only inside the safe shelf. Daily floors apply to
+  eligible stock; zero/thin shelves use the existing mined fallback or themed 503. A custom
+  pack without a matching sidecar keeps neutral historical selection.
+- Intrusul and Perechi remain strict catalog-only games over **336 boards**: 183 from 66
+  sources and 153 from 51. Runtime prefers standard-score ≥55 boards (144/113) and falls
+  back only inside the same pilot-clean filtered catalog.
+- Home's local-only daily circuit keeps zero-score completion and a bounded 0–6,000 total.
+  An unfinished 44 px row now opens that game's intro with `Joacă →`; a completed row stays
+  status-only. No daily aggregate, board identity, action trail, API call, or telemetry exists.
+- Accounts-on staging keeps server-verified per-game records. An under-age hold is sticky:
+  adult-year resubmission cannot clear it, create consent, save scores, or enable ranking.
+  Consent/profile writers share a row lock and profile edits update only intended fields.
+- Public rows still require current consent, an explicit nickname, and opt-in; ties use
+  competition ranks and a bounded personal row can sit below the top 50. Browser-authored
+  history remains private and cannot feed public ranking.
 
-## Current outcome — bounded beginner play (ADR-0027 through ADR-0050)
+## Retained beginner play and vocabulary
 
-- Every game defaults to `Ușor`, teaches three terse actions, shows one live `ACUM` cue,
-  and keeps mobile actions at least 44 px. Conexiuni owns recovery/conflict feedback in one
-  sticky channel; Lanț offers corridor/detour recovery, direction, free undo, and a 64-hop
-  cap; Alchimie bounds remembered experiments at 496 and projects at most 24 useful pairs.
-- Cald sau Rece accepts **444 screened everyday guesses across 26 domains** through 89 KG
-  anchors, keeps repeated guesses free, and progresses to one warmer familiar clue. Public
-  comparison remains one stable number; targets and hidden routes/recipes remain private.
-- The critique gate validates IDs, reuse, live degree, and game-specific fairness. Version-2
-  artifacts bind pack, dossiers, and rubric; imports remain pending until reviewed.
-
-## Current outcome — vocabulary and graph
-
-V23–V33 added childhood, farm, clothing, kitchen, hygiene, cleaning, face, workshop, garden,
-bathroom, household-electrical, and forest concepts. Eligible vocabulary probes are
-**322/322**; 33 affected pending dossiers stay clean and all 794 curated records are unchanged.
+- Every original game defaults to `Ușor`, teaches three terse actions, shows one live `ACUM`
+  cue, and keeps mobile actions at least 44 px. Conexiuni centralizes recovery feedback;
+  Lanț has direction, free undo, and a 64-hop cap; Alchimie remembers at most 496
+  experiments and projects at most 24 useful pairs.
+- Derived starters balance category → source → variant and persist until a non-daily win or
+  three non-daily completions. Daily play does not graduate them. Free replay retains one
+  opaque session ID per derived game, never content or answers.
+- Cald sau Rece accepts **444 screened guesses across 26 domains** through 89 KG anchors.
+  Targets, hidden routes, and recipes stay private in all games.
+- V23–V33 vocabulary probes remain **322/322**. All 794 curated records pass envelope/schema
+  validation and all 572 approved records pass playability validation. Rankings remain
+  editorial pre-playtest estimates, not measured fun or Romanian-knowledge ratings.
 
 ## Product and deployment
 
-The Romanian arcade has four server-authoritative games over the offline KG, using Django
-5.2/DRF and React 19/Vite 8. Anonymous v1 at
-<https://cat-de-roman-esti.dobolabs.ro> runs `f40fa8b`, verified 2026-07-18. Accounts and
-the player leaderboard remain staging-only; production has no V37 pilot behavior yet.
+The arcade uses Django 5.2/DRF and React 19/Vite 8 over the offline KG. On 2026-07-23,
+<https://cat-de-roman-esti.dobolabs.ro/api/manifest> still reported
+`fixture-v32-face-workshop-garden` and four live games. Shared `main` remains V37 `18400f9`;
+V38–V40 and accounts/player rankings remain local only.
 
-## Shipped content
+## Content baseline
 
-| Game | Total | Approved | Pending | V37 eligible | Runtime source |
+| Game | Total | Approved | Pending | Runtime eligible/preferred | Runtime source |
 |---|---:|---:|---:|---:|---|
-| Conexiuni | 288 | 209 | 79 | 123 | ranked curated; mixed-board miner fallback |
-| Cald sau Rece | 207 | 192 | 15 | 192 | ranked curated; category miner fallback |
-| Lanțul Cuvintelor | 201 | 94 | 107 | 94 | ranked curated; branch-aware miner fallback |
-| Alchimie | 98 | 77 | 21 | 77 | ranked curated; sparse projection miner fallback |
+| Conexiuni | 288 | 209 | 79 | 123 eligible | pilot-only curated; mixed-board miner |
+| Cald sau Rece | 207 | 192 | 15 | 192 eligible | pilot-only curated; category miner |
+| Lanțul Cuvintelor | 201 | 94 | 107 | 94 eligible | pilot-only curated; branch-aware miner |
+| Alchimie | 98 | 77 | 21 | 77 eligible | pilot-only curated; sparse miner |
+| Intrusul | 183 | 183 | 0 | 144 preferred | strict derived catalog only |
+| Perechi | 153 | 153 | 0 | 113 preferred | strict derived catalog only |
 
 Pack: **794 = 572 approved + 222 pending**, across 14 categories. Bundled KG:
-**2,287 nodes / 9,122 edges / 7,400 aliases / 180 legacy puzzles**. Committed fixture
-mirrors stay byte-identical; the V37 sidecar is digest-bound to pack, KG, and rubric.
+**2,287 nodes / 9,122 edges / 7,400 aliases / 180 puzzles**; all mirrors are byte-identical.
 
-## Runtime contracts and safety
+## Runtime contracts and quality gate
 
-- Sessions retain a validated 7,200-second sliding TTL and 1,000-entry LRU cap. Per-entry
-  locks linearize a request; different sessions stay concurrent and all-borrowed capacity
-  fails with 503. Lanț retains at most 64 moves / 65 nodes.
-- Request bodies have a 64 KiB Caddy and ASGI receive ceiling. Hidden answers stay pinned;
-  no private V37 ranking field is serialized by a game endpoint.
-- Curated submissions require `CAT_SUBMISSIONS_DIR`; only approved records are served.
-  Mobile fixture/OpenAPI contracts and deterministic seeded/daily selection remain pinned.
-
-## Quality gate
+- Sessions retain the validated 7,200-second sliding TTL and 1,000-entry per-game LRU cap.
+  Per-entry locks serialize one session; all-borrowed capacity returns 503. Request bodies
+  retain the 64 KiB Caddy and ASGI ceiling.
+- Account history is capped at 500 rows per user; public records are capped at one for each
+  of the exact six game keys. Current consent is checked under the shared profile lock.
+- Curated submissions require `CAT_SUBMISSIONS_DIR`; hidden answers remain server-private.
+  Mobile fixture/OpenAPI contracts and deterministic seeded/daily selection stay pinned.
 
 ```bash
 PYTHONPATH=. .venv/bin/python -m pytest -q
-.venv/bin/ruff check .
+CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=. .venv/bin/python -m pytest tests/accounts -q
+PYTHONPATH=. .venv/bin/python scripts/build_derived_catalog_v38.py
 PYTHONPATH=. .venv/bin/python scripts/rank_games_pack.py
 PYTHONPATH=. .venv/bin/python scripts/validate_games_pack.py
 PYTHONPATH=. .venv/bin/python scripts/validate_fixture.py
@@ -94,11 +93,10 @@ node --check .claude/workflows/critique-games.js
 git diff --check
 ```
 
-Run frontend gates when frontend files change; session-store target:
-`tests/test_wordgames_session_store.py` (**16**).
+Frontend: **21/21**, lint/build green, **119.15 KiB**. Session-store target: **16/16**.
 
 ## Next verified work
 
-- Recalibrate board priority only after a separate privacy/storage decision permits bounded,
-  server-authored aggregate starts, outcomes, hints, and action counts.
-- Continue exact pending-stock adversarial review and generic-edge cleanup.
+- Run a larger anonymous six-game pilot before adding a seventh game or changing scores.
+- Merge/deploy V38–V40 only on explicit instruction. Keep accounts off until the compliance
+  checklist is complete; analytics still requires a separate privacy/retention decision.

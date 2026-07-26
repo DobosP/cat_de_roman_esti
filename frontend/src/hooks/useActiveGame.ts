@@ -1,7 +1,7 @@
 // useActiveGame — remembers the server-side game id of a RUNNING game so a page
 // refresh or a revisited deep link resumes the session (via the game's GET
 // /games/{id}) instead of silently dropping it. Stored in localStorage keyed per
-// game; the server's sliding 6h session TTL is the natural expiry — a dead id
+// game; the server's sliding 7,200-second (2h) session TTL is the natural expiry — a dead id
 // simply 404s and the screen falls back to its intro.
 
 import { useMemo } from "react";

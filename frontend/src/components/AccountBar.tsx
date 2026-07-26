@@ -2,7 +2,8 @@
 // (when accounts are on), and the account affordance (Sign in with Google → RO age-16
 // consent gate → signed-in chip). Renders one useAuth() for the whole bar.
 //
-// Anonymous/offline play is never gated: you only need an account to APPEAR on the ranking.
+// Anonymous/offline play is never gated. With consent, an account can receive an upload-only
+// private copy of completed scores; appearing on the separate verified ranking needs opt-in.
 // When accounts are disabled the bar shows just the Donează button (if a URL is set).
 
 import { useState } from "react";
@@ -77,8 +78,8 @@ function RestrictedNotice({ onLogout }: { onLogout: () => Promise<void> }) {
       <div className="account-card">
         <h2>Cont restricționat</h2>
         <p>
-          Conform legii, copiii sub 16 ani au nevoie de acordul unui părinte pentru a-și crea
-          un cont. Poți juca în continuare fără cont — nu apari însă în clasament.
+          Contul există, dar rămâne restricționat. Poți juca local; nu încărcăm copia privată,
+          nu memorăm jocurile terminate și nu te afișăm în clasament.
         </p>
         <p className="account-muted">
           Un flux de consimțământ al părintelui va fi disponibil în curând.
@@ -131,9 +132,12 @@ function ConsentGate({ minAge, onResolved }: { minAge: number; onResolved: () =>
     <div className="account-overlay">
       <div className="account-card">
         <h2>Un pas rapid</h2>
-        <p>Ca să apari în clasament, confirmă vârsta, alege un nume și acceptă regulile.</p>
+        <p>
+          Progresul rămâne aici. Pentru o copie privată a rezultatelor, confirmă vârsta și
+          acceptă regulile.
+        </p>
         <label className="account-field">
-          <span>Numele din clasament (poți folosi o poreclă)</span>
+          <span>Poreclă (opțională; necesară doar pentru clasament)</span>
           <input
             type="text"
             maxLength={80}
@@ -197,17 +201,24 @@ function ConsentGate({ minAge, onResolved }: { minAge: number; onResolved: () =>
 
 function UserChip({ user, onChanged }: { user: AuthUser; onChanged: () => Promise<void> }) {
   const [open, setOpen] = useState(false);
-  const initial = (user.ranking_name || user.name || "?").slice(0, 1).toUpperCase();
+  const privateLabel = user.display_name || user.name || "Cont";
+  const initial = privateLabel.slice(0, 1).toUpperCase();
 
   const editName = async () => {
-    const next = window.prompt("Numele afișat în clasament:", user.ranking_name);
+    const next = window.prompt("Numele afișat în clasament:", privateLabel);
     if (next === null || !next.trim()) return;
     await updateProfile({ display_name: next.trim() });
     await onChanged();
   };
 
   const toggleRanking = async () => {
-    await updateProfile({ show_on_ranking: !user.show_on_ranking });
+    if (!user.show_on_ranking && !user.display_name.trim()) {
+      const next = window.prompt("Alege o poreclă pentru clasament:");
+      if (next === null || !next.trim()) return;
+      await updateProfile({ display_name: next.trim(), show_on_ranking: true });
+    } else {
+      await updateProfile({ show_on_ranking: !user.show_on_ranking });
+    }
     await onChanged();
   };
 
@@ -225,7 +236,7 @@ function UserChip({ user, onChanged }: { user: AuthUser; onChanged: () => Promis
         ) : (
           <span className="account-avatar account-avatar--letter">{initial}</span>
         )}
-        <span className="account-name">{user.ranking_name}</span>
+        <span className="account-name">{privateLabel}</span>
       </button>
       {open && (
         <div className="account-menu" role="menu">
@@ -256,7 +267,13 @@ function UserChip({ user, onChanged }: { user: AuthUser; onChanged: () => Promis
             role="menuitem"
             className="account-menu__danger"
             onClick={async () => {
-              if (!window.confirm("Ștergi definitiv contul și tot progresul salvat?")) return;
+              if (
+                !window.confirm(
+                  "Ștergi contul și copia privată de pe server? Progresul de pe acest dispozitiv rămâne.",
+                )
+              ) {
+                return;
+              }
               await deleteAccount();
               await onChanged();
             }}

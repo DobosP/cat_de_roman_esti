@@ -1,9 +1,15 @@
-// games.ts — the single registry for the four word games: routes, titles, accents,
+// games.ts — the single registry for the six word games: routes, titles, accents,
 // icons, blurbs. Home cards, routing, HUDs and score views all read from here so a
 // game's identity is defined exactly once. (`contexto` stays the internal/API/score
 // key for Cald sau Rece; only its URL is the user-facing name.)
 
-export type GameKey = "alchimie" | "contexto" | "lant" | "conexiuni";
+export type GameKey =
+  | "alchimie"
+  | "intrusul"
+  | "perechi"
+  | "conexiuni"
+  | "contexto"
+  | "lant";
 
 export interface GameDef {
   key: GameKey;
@@ -33,6 +39,26 @@ export const GAMES: GameDef[] = [
     glow: "#e3ccff",
     icon: "⚗️",
     featured: true,
+  },
+  {
+    key: "intrusul",
+    path: "/intrusul",
+    title: "Intrusul",
+    tag: "Găsește ce nu se potrivește",
+    blurb: "Trei cuvinte au o legătură. Atinge intrusul.",
+    accent: "#ffcf5c",
+    glow: "#ffe7a3",
+    icon: "🔎",
+  },
+  {
+    key: "perechi",
+    path: "/perechi",
+    title: "Perechi",
+    tag: "Potrivește câte două",
+    blurb: "Atinge două cuvinte care merg împreună.",
+    accent: "#ff78b7",
+    glow: "#ffc4df",
+    icon: "🧠",
   },
   {
     key: "conexiuni",

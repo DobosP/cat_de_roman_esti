@@ -11,8 +11,10 @@ import Home from "./screens/Home";
 import AccountBar from "./components/AccountBar";
 
 // Home is the only screen every visitor needs. Each game is deliberately loaded
-// on first play so low-end devices do not parse all four game engines up front.
+// on first play so low-end devices do not parse all six game engines up front.
 const Alchimie = lazy(() => import("./screens/Alchimie"));
+const Intrusul = lazy(() => import("./screens/Intrusul"));
+const Perechi = lazy(() => import("./screens/Perechi"));
 const CaldRece = lazy(() => import("./screens/CaldRece"));
 const Lant = lazy(() => import("./screens/Lant"));
 const Conexiuni = lazy(() => import("./screens/Conexiuni"));
@@ -91,6 +93,22 @@ export default function App() {
               element={
                 <ScreenFrame>
                   <Alchimie onExit={goHome} onToast={pushToast} />
+                </ScreenFrame>
+              }
+            />
+            <Route
+              path="/intrusul"
+              element={
+                <ScreenFrame>
+                  <Intrusul onExit={goHome} onToast={pushToast} />
+                </ScreenFrame>
+              }
+            />
+            <Route
+              path="/perechi"
+              element={
+                <ScreenFrame>
+                  <Perechi onExit={goHome} onToast={pushToast} />
                 </ScreenFrame>
               }
             />

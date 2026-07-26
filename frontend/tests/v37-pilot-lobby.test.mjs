@@ -8,7 +8,10 @@ const home = read("../src/screens/Home.tsx");
 const css = read("../src/styles/arcade.css");
 
 test("pilot lobby keeps the provisional fun-first game order", () => {
-  const order = [...games.matchAll(/^\s+key: "([^"]+)",$/gm)].map((match) => match[1]);
+  const legacy = new Set(["alchimie", "conexiuni", "contexto", "lant"]);
+  const order = [...games.matchAll(/^\s+key: "([^"]+)",$/gm)]
+    .map((match) => match[1])
+    .filter((key) => legacy.has(key));
   assert.deepEqual(order, ["alchimie", "conexiuni", "contexto", "lant"]);
 });
 
@@ -18,7 +21,10 @@ test("only Alchimie receives the terse first-play highlight", () => {
   assert.equal((home.match(/Începe aici/g) ?? []).length, 2);
   assert.match(home, /g\.featured \? " game-card--featured" : ""/);
   assert.match(home, /g\.featured \? "Începe aici" : g\.tag/);
-  assert.match(home, /aria-label=\{`Joacă \$\{g\.title\} — \$\{g\.featured \? "Începe aici" : g\.tag\}`\}/);
+  assert.match(
+    home,
+    /completedToday\s*\? "terminat azi"\s*: g\.featured\s*\? "Începe aici"\s*: g\.tag/,
+  );
   assert.match(css, /\.game-card--featured \{[\s\S]*?border-color:[\s\S]*?box-shadow:/);
   assert.doesNotMatch(`${games}\n${home}`, /boardRank|board_score|qualityScore|pilotRank/i);
 });

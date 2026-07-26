@@ -5,26 +5,30 @@ Two shippable shapes:
 | Mode | Flag | What it is | Compliance |
 | --- | --- | --- | --- |
 | **Anonymous arcade** | `CAT_ACCOUNTS_ENABLED=0` (default) | Stateless, no DB, progress in the browser | Minimal — no accounts/PII |
-| **Accounts + Google login** | `CAT_ACCOUNTS_ENABLED=1` | Postgres + sessions + Sign-in-with-Google + saved progress | Full child-data stack (below) |
+| **Accounts + Google login** | `CAT_ACCOUNTS_ENABLED=1` | Postgres + sessions + Google login + private score copy | Full child-data stack (below) |
 
 This document covers publishing the **accounts** stack on a single EU VPS (Hetzner), fronted
 by Cloudflare, with TLS via Caddy. The anonymous arcade is a subset (skip Postgres/OAuth).
 
-**Product model.** The game is **always free to play without an account.** Signing in (Google)
-does two personal things — no real name is ever used or shown:
+**Product model.** The game is **always free to play without an account.** With current
+consent, signing in can do two private things; Google name/email are never published:
 
-1. **Keep your progress** across devices (history synced to your account).
+1. **Back up completed scores** — the frontend uploads retained finished-score rows to a
+   private account copy. The browser remains the source of truth: there is no automatic
+   download, restore, or merge, so this is not cross-device progress continuity.
 2. **Don't get the same game again** — once you *finish* a curated puzzle (win or give up), the
-   server won't offer it to you anymore (`PlayedPuzzle`; daily challenges are exempt; mined/random
-   boards draw from a huge pool so repeats there are already rare — and their identity can encode
-   the answer, so it is never persisted).
+   server stores its game key, opaque curated pack ID, and completion timestamp, then avoids
+   offering it again (`PlayedPuzzle`; daily challenges are exempt). Mined/random boards and
+   solutions are never persisted.
 
-An account also lets you **appear on the public ranking** (`/clasament`) with a **chosen nickname
-(never the real name/email)** + score — anyone can *view* it, you only sign in to *appear*, and it
-is opt-in (`show_on_ranking`, toggled in the account menu). Money comes from **donations**: set
-`CAT_DONATE_URL` and a "Donează" button shows in both modes (real provider/ONG page is an owner
-task). Under-16 self-service accounts stay blocked — so v1's ranking is effectively 16+; letting
-minors rank (pseudonymously, with verifiable parental consent) is a **new DPIA** — see
+An account can also **appear on the public ranking** (`/clasament`) with a chosen nickname
+(never Google name/email) and one selected game's server-verified record. Browser/imported
+history never feeds public standings. Visibility requires current consent plus an explicit
+`show_on_ranking` opt-in, which defaults to private. Money comes from **donations**: set
+`CAT_DONATE_URL` and a "Donează" button shows in both modes (real provider/ONG page is an
+owner task). An under-16 Google/allauth user and profile can exist, but a sticky parental hold
+blocks score-copy, repeat, and verified-record writes plus ranking visibility. Letting minors
+rank (pseudonymously, with verifiable parental consent) is a **new DPIA** — see
 `docs/compliance/`.
 
 > **Go-live gate.** The accounts stack collects personal data from possibly-minor users. Do
@@ -208,9 +212,10 @@ The accounts stack must not serve real users until these are done (see `docs/com
 - [ ] **DSAR + deletion** verified on a demo account (the app exposes account deletion; also
       document the export/erasure request path + SLA).
 - [ ] **72h breach** runbook + incident + DSAR registers in place; contact email published.
-- [ ] **Public ranking** reviewed: it shows chosen nicknames only (no real name/email),
-      is opt-in, and — if you want under-16 players to rank — a new DPIA + parental-consent
-      flow is done (otherwise ranking stays 16+).
+- [ ] **Public ranking and score copy** reviewed: only terminal server scores and chosen
+      nicknames appear; the account copy is private, upload-only, and never restores
+      local progress or feeds standings. Visibility defaults off and requires current
+      consent; if under-16 players should rank, complete a new DPIA + parental-consent flow.
 - [ ] **Donations**: `CAT_DONATE_URL` points at the real donation page (Stripe link /
       redirecționează.ro / ONG page); the receiving entity + tax treatment confirmed.
 - [ ] `manage.py check --deploy` clean; secure cookies, CSRF, rate-limit on `/accounts/*` and

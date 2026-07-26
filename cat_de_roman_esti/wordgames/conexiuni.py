@@ -595,7 +595,12 @@ class GuessView(ContractAPIView):
             session.solved.append(shared)
             session.won = len(session.solved) == NUM_GROUPS
             if session.won:
-                record_finished(request, GAME_KEY, session.pack_id)
+                record_finished(
+                    request,
+                    GAME_KEY,
+                    session.pack_id,
+                    score=_score(session),
+                )
             state = _state(game_id, session)
             result = {
                 "ok": True,
@@ -616,7 +621,12 @@ class GuessView(ContractAPIView):
         one_away = any(v == GROUP_SIZE - 1 for v in counts.values())
         session.lost = session.lives <= 0
         if session.lost:
-            record_finished(request, GAME_KEY, session.pack_id)
+            record_finished(
+                request,
+                GAME_KEY,
+                session.pack_id,
+                score=_score(session),
+            )
 
         result: dict = {
             "ok": True,

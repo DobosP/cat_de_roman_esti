@@ -12,7 +12,15 @@ from django.conf import settings
 from django.urls import path, re_path
 from drf_spectacular.views import SpectacularJSONAPIView
 
-from ..wordgames import alchimie, conexiuni, contexto, lant, submissions
+from ..wordgames import (
+    alchimie,
+    conexiuni,
+    contexto,
+    intrusul,
+    lant,
+    perechi,
+    submissions,
+)
 from . import legal, meta, spa
 
 urlpatterns = [
@@ -29,6 +37,8 @@ urlpatterns = [
     *contexto.urlpatterns,
     *lant.urlpatterns,
     *conexiuni.urlpatterns,
+    *intrusul.urlpatterns,
+    *perechi.urlpatterns,
     *submissions.urlpatterns,
 ]
 

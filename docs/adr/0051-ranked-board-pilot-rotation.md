@@ -1,7 +1,7 @@
 # ADR-0051: Rank pilot boards without claiming measured fun
 
 Date: 2026-07-19
-Status: accepted
+Status: superseded-by ADR-0055
 
 ## Decision
 

@@ -14,7 +14,11 @@ Contact: `[[PLACEHOLDER: contact email]]`
 
 ### 1. Despre serviciu
 
-`cât-de-român-ești` este o aplicație web gratuită, educațională, în limba română, care oferă patru jocuri de cuvinte bazate pe o hartă de cunoștințe despre România. Contul este opțional, dar anumite funcții, cum ar fi salvarea progresului pe server, necesită autentificare cu Google.
+`cât-de-român-ești` este o aplicație web gratuită, educațională, în limba română, care
+oferă șase jocuri de cuvinte bazate pe o hartă de cunoștințe despre România. Contul este
+opțional. Cu autentificare și consimțământ curent, aplicația poate încărca o copie privată
+în cont a rezultatelor terminate. Aceasta nu descarcă, nu restaurează și nu combină automat
+progresul local.
 
 ### 2. Eligibilitate și vârstă
 
@@ -22,7 +26,8 @@ Poți folosi aplicația fără cont dacă ai capacitatea legală necesară sau d
 
 - utilizatorii de cel puțin 16 ani pot consimți singuri, în condițiile legii române;
 - utilizatorii sub 16 ani au nevoie de consimțământ verificabil din partea părintelui sau tutorelui legal;
-- dacă nu putem obține consimțământul necesar, crearea contului va fi blocată sau contul va fi dezactivat.
+- dacă nu putem obține consimțământul necesar, contul intern rămâne restricționat:
+  fără copie privată, repetări, recorduri verificate sau clasament.
 
 ### 3. Conturi
 
@@ -64,7 +69,11 @@ Prelucrarea datelor personale este descrisă în Politica de confidențialitate:
 
 ### 10. Încetarea contului
 
-Poți cere ștergerea contului și a progresului salvat prin `[[PLACEHOLDER: in-app deletion path]]` sau la `[[PLACEHOLDER: support/privacy email]]`. Putem închide conturi inactive conform politicii de retenție, după notificare unde este practic și necesar. `[[CONFIRM: inactive account policy]]`
+Poți cere ștergerea contului și a copiei private de pe server prin
+`[[PLACEHOLDER: in-app deletion path]]` sau la
+`[[PLACEHOLDER: support/privacy email]]`. Progresul local se șterge separat din browser.
+Putem închide conturi inactive conform politicii de retenție, după notificare unde este
+practic și necesar. `[[CONFIRM: inactive account policy]]`
 
 ### 11. Legea aplicabilă
 
@@ -80,7 +89,10 @@ Putem actualiza termenii. Pentru modificări importante, vom afișa o notificare
 
 ### 1. The Service
 
-`cât-de-român-ești` is a free Romanian-language educational web app offering four word games based on a Romanian knowledge graph. Accounts are optional, but server-side saved progress requires Google sign-in.
+`cât-de-român-ești` is a free Romanian-language educational web app offering six word
+games based on a Romanian knowledge graph. Accounts are optional. With sign-in and current
+consent, the app can upload a private account copy of completed-score rows. It does not
+automatically download, restore or merge local progress.
 
 ### 2. Eligibility and Age
 
@@ -88,7 +100,8 @@ You may use the app without an account if you have legal capacity or parental/gu
 
 - users aged 16 or over may consent under Romanian law;
 - users under 16 need verifiable parental/legal guardian consent;
-- if required consent cannot be obtained, account creation will be blocked or the account disabled.
+- if required consent cannot be obtained, the internal account remains restricted: no
+  private copy, repeat writes, verified records or ranking visibility.
 
 ### 3. Accounts
 
@@ -120,7 +133,11 @@ Personal data processing is described in the Privacy Notice: `[[PLACEHOLDER: pri
 
 ### 10. Account Termination
 
-You may request deletion of your account and saved progress through `[[PLACEHOLDER: in-app deletion path]]` or at `[[PLACEHOLDER: support/privacy email]]`. We may close inactive accounts under the retention policy, with notice where practical and required. `[[CONFIRM: inactive account policy]]`
+You may request deletion of your account and its private server copy through
+`[[PLACEHOLDER: in-app deletion path]]` or at
+`[[PLACEHOLDER: support/privacy email]]`. Local browser progress is deleted separately.
+We may close inactive accounts under the retention policy, with notice where practical and
+required. `[[CONFIRM: inactive account policy]]`
 
 ### 11. Governing Law
 

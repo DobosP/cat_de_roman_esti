@@ -12,8 +12,8 @@ Selection is deterministic where it must be:
 * daily picks use rendezvous hashing over item ids, so the day's instance is
   stable for everyone and mostly survives pack growth;
 * seeded picks draw from the id-sorted pool via the caller's ``random.Random``;
-* an optional digest-bound V37 sidecar privately prefers pilot-ready, highly rated
-  boards without changing filters, response shapes, or custom-pack compatibility.
+* a digest-bound V37 sidecar makes the shipped selector pilot-only and fun-weighted
+  without changing inventory filters, response shapes, or custom-pack compatibility.
 
 This module is stdlib-only (no Django) so the offline validator script and the
 review tooling can import the exact validation the server applies. A handful of
@@ -86,7 +86,7 @@ class CuratedItem:
     status: str
     payload: dict
     # V37 pilot ranking is server-private. Defaults keep synthetic/custom packs on the
-    # historical uniform selector and make the ranking sidecar an additive concern.
+    # historical selector; only a digest-validated sidecar activates ranked serving.
     _romanian_familiarity: int = field(default=50, repr=False, compare=False)
     _play_quality: int = field(default=50, repr=False, compare=False)
     _pilot_score: int = field(default=50, repr=False, compare=False)
@@ -398,13 +398,19 @@ def _validate_alchimie(rec: dict, svc: WordGameService) -> list[str]:
 class GamesPack:
     """All approved curated instances, indexed for deterministic selection."""
 
-    def __init__(self, items: list[CuratedItem]):
+    def __init__(self, items: list[CuratedItem], *, ranked: bool = False):
+        self._ranked = ranked
         self._items: dict[str, list[CuratedItem]] = {g: [] for g in GAME_KINDS}
         for item in items:
             if item.approved:
                 self._items[item.game].append(item)
         for pool in self._items.values():
             pool.sort(key=lambda i: i.id)
+
+    @property
+    def ranked(self) -> bool:
+        """Whether a digest-validated ranking sidecar governs selection."""
+        return self._ranked
 
     def pool(
         self,
@@ -436,14 +442,32 @@ class GamesPack:
         difficulty: str | None = None,
         exclude_ids: set[str] | None = None,
     ) -> CuratedItem | None:
-        pool = self.pool(
-            game, category=category, difficulty=difficulty, exclude_ids=exclude_ids
-        )
-        if not pool:
-            return None
-        preferred = [item for item in pool if item._pilot_eligible]
-        if preferred:
-            pool = preferred
+        if self._ranked:
+            pool = [
+                item
+                for item in self.pool(
+                    game, category=category, difficulty=difficulty
+                )
+                if item._pilot_eligible
+            ]
+            if not pool:
+                return None
+            if exclude_ids:
+                unfinished = [item for item in pool if item.id not in exclude_ids]
+                if unfinished:
+                    pool = unfinished
+        else:
+            pool = self.pool(
+                game,
+                category=category,
+                difficulty=difficulty,
+                exclude_ids=exclude_ids,
+            )
+            if not pool:
+                return None
+            preferred = [item for item in pool if item._pilot_eligible]
+            if preferred:
+                pool = preferred
 
         # Integer tickets avoid float/version drift while retaining every item with a
         # positive weight. With neutral weight=1 this is exactly the old choice shape.
@@ -469,6 +493,7 @@ class GamesPack:
         Neutral selection retains the historical insertion property: adding an item
         changes a day only when that item wins. A V37 regeneration can deliberately
         remap days when score quintiles or eligible-pool membership change.
+        Ranked selection counts and serves only pilot-eligible items.
 
         The shared (category-less) daily returns None below
         ``CURATED_DAILY_MIN_POOL`` so a thin pool cannot repeat the same instance
@@ -477,12 +502,17 @@ class GamesPack:
         if min_pool is None:
             min_pool = 1 if category is not None else CURATED_DAILY_MIN_POOL
         pool = self.pool(game, category=category, difficulty=difficulty)
-        if len(pool) < max(1, min_pool):
-            return None
-
+        floor = max(1, min_pool)
         preferred = [item for item in pool if item._pilot_eligible]
-        if len(preferred) >= max(1, min_pool):
+        if self._ranked:
             pool = preferred
+            if len(pool) < floor:
+                return None
+        else:
+            if len(pool) < floor:
+                return None
+            if len(preferred) >= floor:
+                pool = preferred
 
         def _weight(item: CuratedItem) -> tuple[bytes, str]:
             base = f"{daily}:{game}:{category or ''}:{difficulty or ''}:{item.id}"
@@ -771,7 +801,10 @@ def load_pack(
         if selected_rankings is not None
         else {}
     )
-    return GamesPack(_parse_items(raw, rankings))
+    return GamesPack(
+        _parse_items(raw, rankings),
+        ranked=selected_rankings is not None,
+    )
 
 
 def _item_node_ids(item: CuratedItem) -> list[str]:
@@ -801,7 +834,7 @@ def get_pack() -> GamesPack:
     pack = load_pack()
     svc = get_service()
     items = [i for pool in pack._items.values() for i in pool]
-    return GamesPack(resolvable_items(items, svc))
+    return GamesPack(resolvable_items(items, svc), ranked=pack.ranked)
 
 
 def validate_pack_item(rec: dict, game: str) -> list[str]:

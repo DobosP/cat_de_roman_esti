@@ -1,7 +1,8 @@
 # V37 pilot board ranking
 
-ADR-0051 defines this as an **editorial pre-playtest estimate**, not measured fun or a
-test of any player's Romanian knowledge. The committed sidecar
+ADR-0051 introduced this as an **editorial pre-playtest estimate**, not measured fun or a
+test of any player's Romanian knowledge. ADR-0055 supersedes its runtime fallback while
+retaining that score interpretation. The committed sidecar
 `cat_de_roman_esti/fixtures/board_rankings_v37.json` contains one private row for every
 curated pack record; no ranking field is returned by a game API.
 
@@ -61,11 +62,20 @@ the explicit maintainer action after a reviewed pack, KG, rubric, or formula cha
 fixture copies must stay byte-identical, and `scripts/validate_games_pack.py` plus the
 critique gate still run independently.
 
+V38 left this selector and its daily hash namespace unchanged. V40 keeps the hash namespace
+but makes `pilot_eligible` a hard boundary for a digest-ranked bundled pack. Intrusul and
+Perechi use their own source-balanced derived catalog; see
+[`V38_DERIVED_GAMES.md`](V38_DERIVED_GAMES.md) and ADR-0052.
+
 ## Pilot interpretation
 
 Weighted selection increases exposure to stronger eligible boards while keeping every
-eligible board reachable. Approved ineligible stock is reserve content only when the
-eligible shelf is empty or below its daily minimum. This does not make a causal claim about
-enjoyment. A later calibration needs server-authored aggregate starts, terminal outcomes,
-hints, and action counts keyed only by internal board ID. Identities, session IDs, raw
-guesses, free text, and client-authored public scores are outside V37.
+eligible board reachable. A digest-ranked bundled selector never serves approved ineligible
+stock: seeded play repeats inside an exhausted eligible shelf, while a thin or empty daily
+shelf returns to the game's existing mined or themed-unavailable behavior. Custom packs
+without a matching sidecar keep historical neutral selection.
+
+This does not make a causal claim about enjoyment. A later calibration needs server-authored
+aggregate starts, terminal outcomes, hints, and action counts keyed only by internal board
+ID. Identities, session IDs, raw guesses, free text, and client-authored public scores are
+outside V37.
