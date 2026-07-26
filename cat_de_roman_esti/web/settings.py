@@ -10,10 +10,11 @@ Two modes, selected by the ``CAT_ACCOUNTS_ENABLED`` env flag:
 
 * **accounts ON** — adds a real database (Postgres in prod), Django sessions/auth/CSRF,
   ``django-allauth`` with the **Google** provider, and the ``accounts`` app (profile,
-  consent record, server-side saved progress). This collects personal data from (possibly
-  minor) users and MUST run behind the compliance stack + a real controller entity — see
-  ``docs/DEPLOY.md`` and ``docs/compliance/``. It is deliberately gated so the anonymous v1
-  can ship now and accounts flip on later.
+  consent record, upload-only private score copy, repeat avoidance, verified records).
+  This collects personal data from (possibly minor) users and MUST run behind the
+  compliance stack + a real controller entity — see ``docs/DEPLOY.md`` and
+  ``docs/compliance/``. It is deliberately gated so the anonymous v1 can ship now and
+  accounts flip on later.
 
 Divergences in the OFF mode (no sessions/CSRF/auth middleware, permissive ALLOWED_HOSTS)
 all follow from statelessness; the ON mode restores the full production-safe posture.

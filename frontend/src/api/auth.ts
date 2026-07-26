@@ -1,4 +1,4 @@
-// api/auth.ts — account + saved-progress transport (accounts ON only).
+// api/auth.ts — account, private score-copy, and verified-ranking transport.
 //
 // Separate from api/client.ts on purpose: the account endpoints need same-origin session
 // cookies + the CSRF token echoed as X-CSRFToken (Django/DRF SessionAuthentication). The

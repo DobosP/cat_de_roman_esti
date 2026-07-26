@@ -9,7 +9,7 @@ from .models import VERIFIED_GAME_KEYS, PlayedPuzzle, Profile, VerifiedBest
 
 
 def _can_persist(user) -> bool:
-    """Whether this user currently has valid consent for account-linked progress."""
+    """Whether this user has current consent for repeat and verified-record writes."""
     profile = Profile.objects.filter(user=user).first()
     return bool(profile and profile.can_save_progress())
 

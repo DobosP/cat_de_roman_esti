@@ -173,7 +173,11 @@ Direct **local** merges to `main` are allowed once the CI gate is green; **pushi
 - [`docs/V38_DERIVED_GAMES.md`](docs/V38_DERIVED_GAMES.md) — private V38 derived-game
   catalog, ranking, and regeneration contract (ADR-0052).
 - [`docs/V39_REFINEMENT.md`](docs/V39_REFINEMENT.md) — V39 replay, starter, exposure,
-  local-circuit, and verified-record contracts (ADR-0053/0054).
+  local-circuit, and verified-record contracts (ADR-0054/0060; ADR-0053 superseded).
+- [`docs/V40_REFINEMENT.md`](docs/V40_REFINEMENT.md) — V40 critique-clean selection,
+  sticky parental holds, and actionable daily-circuit rows (ADR-0055–0057).
+- [`docs/V41_REFINEMENT.md`](docs/V41_REFINEMENT.md) — V41 playable category choices,
+  recoverable ranking states, and the private-history boundary (ADR-0058–0060).
 - [`docs/ROEDU_INTEGRATION.md`](docs/ROEDU_INTEGRATION.md) — products, key, field mapping, fail-closed gate, offline fixture.
 - [`docs/STATUS.md`](docs/STATUS.md) — phase / built / wired / blockers / next.
 - [`docs/adr/`](docs/adr/) — architecture decision records (0001 = arcade pivot, no graph UI).

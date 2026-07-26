@@ -1,12 +1,12 @@
-"""Account API — the SPA's auth + saved-progress surface (accounts ON only).
+"""Account API — auth, private score-copy, repeat, and ranking surfaces.
 
 Endpoints (all same-origin, session-cookie authenticated):
 
 * ``GET  /api/me``          — current user + consent state (also seeds the CSRF cookie).
 * ``POST /api/auth/logout`` — end the session.
 * ``POST /api/me/consent``  — the age gate: birth year + privacy/ToS acceptance.
-* ``GET  /api/me/scores``   — saved game history for this account.
-* ``POST /api/me/scores``   — upload finished runs (idempotent bulk sync).
+* ``GET  /api/me/scores``   — read the account's private completed-score copy.
+* ``POST /api/me/scores``   — upload finished runs (idempotent, capped at 500).
 * ``POST /api/me/delete``   — DSAR erasure: delete the account and all its data.
 
 The word-game endpoints stay anonymous + CSRF-free; only these views opt into
@@ -39,7 +39,7 @@ from .models import (
     VerifiedBest,
 )
 
-# Keep the saved-history response bounded (mirrors the browser store's caps).
+# Keep the private account copy bounded independently of the browser store.
 _SCORES_READ_CAP = 500
 _SCORES_SYNC_CAP = 500
 

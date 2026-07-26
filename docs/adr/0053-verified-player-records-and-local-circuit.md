@@ -1,7 +1,7 @@
 # ADR-0053: Separate verified player records from the local daily circuit
 
 Date: 2026-07-23
-Status: accepted
+Status: superseded-by ADR-0060
 
 ## Decision
 

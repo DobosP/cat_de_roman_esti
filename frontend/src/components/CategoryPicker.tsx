@@ -6,18 +6,28 @@
 
 import { useEffect, useState } from "react";
 import { categoryStyle } from "../categories";
-import { getCategories, type CategoryInfo, type GameKey } from "../api/meta";
+import {
+  getCategories,
+  type CategoryInfo,
+  type Difficulty,
+  type GameKey,
+} from "../api/meta";
 
 export function CategoryPicker({
   game,
+  difficulty,
   value,
   onChange,
+  onInvalid,
   accent,
 }: {
   game: GameKey;
+  difficulty: Difficulty;
   /** Selected category key, or null for all available themes. */
   value: string | null;
   onChange: (key: string | null) => void;
+  /** Silently clear a selection invalidated by a difficulty change. */
+  onInvalid: () => void;
   accent: string;
 }) {
   const [categories, setCategories] = useState<CategoryInfo[] | null>(null);
@@ -36,8 +46,17 @@ export function CategoryPicker({
     };
   }, []);
 
-  const playable = (categories ?? []).filter((c) => c.available[game]);
-  if (playable.length === 0) return null;
+  const visible = (categories ?? []).filter(
+    (category) => category.available_by_difficulty[game][difficulty],
+  );
+
+  useEffect(() => {
+    if (categories === null || categories.length === 0 || value === null) return;
+    const selected = categories.find((category) => category.key === value);
+    if (!selected?.available_by_difficulty[game][difficulty]) onInvalid();
+  }, [categories, difficulty, game, onInvalid, value]);
+
+  if (categories === null || categories.length === 0) return null;
 
   const chip = (
     key: string | null,
@@ -69,8 +88,12 @@ export function CategoryPicker({
     );
   };
 
-  const pop = playable.filter((c) => c.kind === "pop");
-  const serious = playable.filter((c) => c.kind === "serious");
+  const pop = visible.filter((category) => category.kind === "pop");
+  const serious = visible.filter((category) => category.kind === "serious");
+  const chipFor = (category: CategoryInfo) => {
+    const style = categoryStyle(category.key);
+    return chip(category.key, style.label, style.color, category.kind);
+  };
 
   return (
     <div className="col" style={{ gap: 8 }}>
@@ -88,10 +111,8 @@ export function CategoryPicker({
         style={{ gap: 6 }}
       >
         {chip(null, "Toate temele", accent)}
-        {pop.map((c) => chip(c.key, categoryStyle(c.key).label, categoryStyle(c.key).color, c.kind))}
-        {serious.map((c) =>
-          chip(c.key, categoryStyle(c.key).label, categoryStyle(c.key).color, c.kind),
-        )}
+        {pop.map(chipFor)}
+        {serious.map(chipFor)}
       </div>
       <span className="faint category-picker-note" style={{ fontSize: "0.72rem" }}>
         Tema se aplică doar jocurilor libere.

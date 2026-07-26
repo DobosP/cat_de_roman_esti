@@ -486,11 +486,13 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
             />
             <CategoryPicker
               game="conexiuni"
+              difficulty={difficulty}
               value={category}
               onChange={(key) => {
                 sound.playSelect();
                 setCategory(key);
               }}
+              onInvalid={() => setCategory(null)}
               accent={DEF.accent}
             />
           </GameIntro>

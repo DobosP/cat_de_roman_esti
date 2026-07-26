@@ -432,11 +432,13 @@ export default function Lant({
             />
             <CategoryPicker
               game="lant"
+              difficulty={difficulty}
               value={category}
               onChange={(key) => {
                 sound.playSelect();
                 setCategory(key);
               }}
+              onInvalid={() => setCategory(null)}
               accent={DEF.accent}
             />
           </GameIntro>

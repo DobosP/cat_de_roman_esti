@@ -7,6 +7,7 @@ import type { GameKey as ArcadeGameKey } from "../games";
 
 /** The category endpoint still describes the four authored/mined pack games. */
 export type GameKey = Exclude<ArcadeGameKey, "intrusul" | "perechi">;
+export type Difficulty = "usor" | "normal" | "greu";
 
 export interface CategoryInfo {
   key: string;
@@ -15,6 +16,7 @@ export interface CategoryInfo {
   node_count: number;
   curated: Record<GameKey, number>;
   available: Record<GameKey, boolean>;
+  available_by_difficulty: Record<GameKey, Record<Difficulty, boolean>>;
 }
 
 let cached: Promise<CategoryInfo[]> | null = null;

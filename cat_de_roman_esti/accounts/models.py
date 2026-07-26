@@ -6,8 +6,8 @@ We store only what the product needs:
   creates from the Google login. No date of birth is kept, only the birth *year* used to
   apply Romania's age-16 self-consent rule.
 * :class:`ConsentRecord` — an immutable audit trail of privacy/ToS acceptance (ROPA input).
-* :class:`ScoreEntry` — server-side saved game progress (the account-backed twin of the
-  browser localStorage store in ``frontend/src/scores.ts``).
+* :class:`ScoreEntry` — an upload-only private copy of completed-score rows. The browser
+  localStorage document in ``frontend/src/scores.ts`` remains the source of truth.
 
 The Google account itself (subject id, email, name, avatar) lives in allauth's
 ``SocialAccount``; we do not duplicate it here, and OAuth tokens are never stored
@@ -46,13 +46,13 @@ class Profile(models.Model):
     parental_consent_required = models.BooleanField(default=False)
     # Explicitly chosen public handle; never derive or default it from Google identity.
     display_name = models.CharField(max_length=80, blank=True)
-    # Public visibility is an explicit opt-in, separate from saving private progress.
+    # Public visibility is an explicit opt-in, separate from the private score copy.
     show_on_ranking = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def can_save_progress(self) -> bool:
-        """Progress persistence requires consent to the policy version in force now."""
+        """Account-linked score, repeat, and verified-record writes require current consent."""
         return (
             self.consent_completed
             and not self.parental_consent_required
@@ -90,7 +90,7 @@ class ConsentRecord(models.Model):
 
 
 class ScoreEntry(models.Model):
-    """One finished game result saved to the account (mirrors the localStorage ScoreEntry)."""
+    """One uploaded completed-score row; never an automatic localStorage restore source."""
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="cat_scores"

@@ -24,7 +24,7 @@ dev = ["pytest>=8", "pytest-django>=4.8", "ruff>=0.5"]
 # models + FastAPI-parity validation errors (see web/http.py).
 #
 # allauth + dj-database-url + psycopg are the ACCOUNTS extras: only exercised when
-# CAT_ACCOUNTS_ENABLED=1 (Sign-in-with-Google + saved progress). They import cleanly
+# CAT_ACCOUNTS_ENABLED=1 (Google login + private score copy/repeats/ranking). They import cleanly
 # but are inert in the default stateless deployment, so they ride in [web] to keep the
 # single install closure the Dockerfile already uses.
 web = [
