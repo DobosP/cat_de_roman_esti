@@ -564,11 +564,13 @@ export default function CaldRece({
             <div style={{ width: "100%", maxWidth: 420 }}>
               <CategoryPicker
                 game="contexto"
+                difficulty={difficulty}
                 value={category}
                 onChange={(key) => {
                   sound.playSelect();
                   setCategory(key);
                 }}
+                onInvalid={() => setCategory(null)}
                 accent={DEF.accent}
               />
             </div>

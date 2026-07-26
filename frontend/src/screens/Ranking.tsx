@@ -4,28 +4,35 @@
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getRanking, type RankingResponse } from "../api/auth";
+import { AuthError, getRanking, type RankingResponse } from "../api/auth";
 import { GAMES, type GameKey } from "../games";
+
+type RankingError = "unavailable" | "failed";
 
 export default function Ranking() {
   const navigate = useNavigate();
   const [game, setGame] = useState<GameKey>("alchimie");
   const [data, setData] = useState<RankingResponse | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<RankingError | null>(null);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     let alive = true;
     setLoading(true);
     setError(null);
+    setData(null);
     getRanking(game, 50)
       .then((r) => alive && setData(r))
-      .catch(() => alive && setError("Nu am putut încărca clasamentul."))
+      .catch((reason: unknown) => {
+        if (!alive) return;
+        setError(reason instanceof AuthError && reason.status === 404 ? "unavailable" : "failed");
+      })
       .finally(() => alive && setLoading(false));
     return () => {
       alive = false;
     };
-  }, [game]);
+  }, [game, attempt]);
 
   const entries = data?.entries ?? [];
   const meIsVisible = entries.some((row) => row.is_me);
@@ -73,8 +80,39 @@ export default function Ranking() {
           Recorduri verificate de joc · maximum 1000 de puncte.
         </p>
 
-        {loading && <div className="card center muted" style={{ minHeight: 82 }}>Se încarcă…</div>}
-        {error && <div className="card center account-error" style={{ minHeight: 82 }}>{error}</div>}
+        {loading && (
+          <div
+            className="card ranking-state muted"
+            role="status"
+            aria-live="polite"
+            aria-busy="true"
+          >
+            Se încarcă…
+          </div>
+        )}
+
+        {!loading && error && (
+          <div className="card ranking-state">
+            <p className="account-error" role="alert">
+              {error === "unavailable"
+                ? "Clasamentul nu este activ aici."
+                : "Nu am putut încărca clasamentul."}
+            </p>
+            {error === "unavailable" ? (
+              <button type="button" className="account-btn" onClick={() => navigate("/")}>
+                Acasă →
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="account-btn"
+                onClick={() => setAttempt((value) => value + 1)}
+              >
+                Reîncearcă
+              </button>
+            )}
+          </div>
+        )}
 
         {!loading && !error && entries.length === 0 && (
           <div className="card center muted" style={{ minHeight: 100, padding: 18 }}>

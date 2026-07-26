@@ -433,6 +433,23 @@ class GamesPack:
     def counts(self, *, category: str | None = None) -> dict[str, int]:
         return {g: len(self.pool(g, category=category)) for g in GAME_KINDS}
 
+    def selectable_count(
+        self,
+        game: str,
+        *,
+        category: str | None = None,
+        difficulty: str | None = None,
+    ) -> int:
+        """Count items the active selector may serve for these exact filters.
+
+        A digest-ranked pack exposes only pilot-eligible stock. Neutral custom packs
+        retain their historical ability to fall back across all approved records.
+        """
+        pool = self.pool(game, category=category, difficulty=difficulty)
+        if self._ranked:
+            pool = [item for item in pool if item._pilot_eligible]
+        return len(pool)
+
     def pick_seeded(
         self,
         game: str,

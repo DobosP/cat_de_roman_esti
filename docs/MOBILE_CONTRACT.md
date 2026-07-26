@@ -23,6 +23,13 @@ endpoints accept an optional `?category=` query param. Contexto, Lanț, and Cone
 query lets the server deterministically select and echo a bounded theme instead of using the
 full graph.
 
+Additive in V41 ([ADR-0058](adr/0058-difficulty-aware-playable-category-availability.md)):
+each category also carries
+`available_by_difficulty.<game>.<usor|normal|greu>`. `available.<game>` summarizes whether
+any difficulty is playable, while `curated.<game>` remains a raw approved-inventory count
+and is not a runtime-playability promise. Clients that offer a difficulty and category
+together should use the nested field for that exact pair.
+
 Export the schema for client generation (deterministic, offline — no server/live data):
 
 ```bash

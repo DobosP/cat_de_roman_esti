@@ -15,13 +15,40 @@ from rest_framework.response import Response
 
 from ..data import fixture_manifest
 from ..wordgames.categories import CATEGORIES
-from ..wordgames.packs import get_pack
+from ..wordgames.packs import DIFFICULTIES, GAME_KINDS, GamesPack, get_pack
 from ..wordgames.service import get_service
 from .http import ContractAPIView
 
 # Loose per-game node floors under which mining a category-scoped game is hopeless;
 # the UI uses `available` to only offer categories that will actually start.
 _MINE_FLOORS = {"contexto": 10, "lant": 10, "alchimie": 8}
+
+
+def _availability_by_difficulty(
+    pack: GamesPack,
+    category: str,
+    node_count: int,
+) -> dict[str, dict[str, bool]]:
+    """Exact curated selection plus the retained approximate mining fallback."""
+    out: dict[str, dict[str, bool]] = {}
+    for game in GAME_KINDS:
+        # Mining availability intentionally keeps the historical node-floor proxy;
+        # only the ranked curated half is an exact game/category/difficulty shelf.
+        minable = game in _MINE_FLOORS and node_count >= _MINE_FLOORS[game]
+        out[game] = {
+            difficulty: (
+                pack.selectable_count(
+                    game,
+                    category=category,
+                    difficulty=difficulty,
+                )
+                > 0
+                or minable
+            )
+            for difficulty in DIFFICULTIES
+        }
+    return out
+
 
 # Arcade metadata — the SPA home screen mirrors this (kept here so /api/health can
 # report it).
@@ -92,11 +119,12 @@ class HealthView(ContractAPIView):
 class CategoriesView(ContractAPIView):
     @extend_schema(operation_id="meta_categories", tags=["meta"])
     def get(self, request) -> Response:
-        """The category taxonomy + per-game availability (curated counts included).
+        """Category taxonomy plus broad and per-difficulty game availability.
 
         ``available.<game>`` is true when the game can actually start for that
-        category: a curated instance is approved, or (except Conexiuni, whose
-        boards cannot be mined per-category) the fixture has enough nodes to mine.
+        category at some difficulty. ``available_by_difficulty.<game>.<difficulty>``
+        applies the exact ranked selector boundary to curated shelves, then preserves
+        the existing approximate node-floor fallback for category mining.
         """
         svc = get_service()
         pack = get_pack()
@@ -104,11 +132,10 @@ class CategoriesView(ContractAPIView):
         for key, (label, kind) in CATEGORIES.items():
             curated = pack.counts(category=key)
             nodes = len(svc.by_category(key))
+            available_by_difficulty = _availability_by_difficulty(pack, key, nodes)
             available = {
-                "conexiuni": curated["conexiuni"] > 0,
-                "contexto": curated["contexto"] > 0 or nodes >= _MINE_FLOORS["contexto"],
-                "lant": curated["lant"] > 0 or nodes >= _MINE_FLOORS["lant"],
-                "alchimie": curated["alchimie"] > 0 or nodes >= _MINE_FLOORS["alchimie"],
+                game: any(available_by_difficulty[game].values())
+                for game in GAME_KINDS
             }
             out.append(
                 {
@@ -118,6 +145,7 @@ class CategoriesView(ContractAPIView):
                     "node_count": nodes,
                     "curated": curated,
                     "available": available,
+                    "available_by_difficulty": available_by_difficulty,
                 }
             )
         return Response({"categories": out})

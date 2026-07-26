@@ -18,7 +18,7 @@ pytest.importorskip("django")
 
 from django.test import Client
 
-from cat_de_roman_esti.wordgames.packs import get_pack
+from cat_de_roman_esti.wordgames.packs import DIFFICULTIES, GAME_KINDS, get_pack
 
 
 def _strings(obj: object) -> set[str]:
@@ -261,21 +261,52 @@ def test_alchimie_curated_instance_by_category():
 
 # -------------------------------------------------------------------- /api/categories
 def test_categories_endpoint_reports_taxonomy_and_availability():
+    from cat_de_roman_esti.web.meta import _MINE_FLOORS
+
     c = Client()
     body = c.get("/api/categories").json()
     by_key = {entry["key"]: entry for entry in body["categories"]}
     assert len(by_key) == 14
     assert by_key["muzica"]["kind"] == "pop"
     assert by_key["istorie"]["kind"] == "serious"
-    # istorie: curated everywhere -> every game available.
+    # Istorie has a playable path for every original game at some difficulty.
     assert all(by_key["istorie"]["available"].values())
     assert by_key["istorie"]["curated"]["conexiuni"] >= 1
-    # The serving rule itself: Conexiuni availability == an approved curated board
-    # exists (it cannot be mined per-category); counts mirror the loaded pack.
+
+    # Raw approved inventory remains visible, while exact availability follows the
+    # active selector's safe pool plus the established mining fallback.
     pack = get_pack()
     for key, entry in by_key.items():
-        assert entry["available"]["conexiuni"] == (entry["curated"]["conexiuni"] > 0)
-        assert entry["curated"]["conexiuni"] == len(pack.pool("conexiuni", category=key))
+        assert set(entry["available_by_difficulty"]) == set(GAME_KINDS)
+        for game in GAME_KINDS:
+            exact = entry["available_by_difficulty"][game]
+            assert set(exact) == set(DIFFICULTIES)
+            minable = (
+                game in _MINE_FLOORS
+                and entry["node_count"] >= _MINE_FLOORS[game]
+            )
+            for difficulty in DIFFICULTIES:
+                expected = (
+                    pack.selectable_count(
+                        game,
+                        category=key,
+                        difficulty=difficulty,
+                    )
+                    > 0
+                    or minable
+                )
+                assert exact[difficulty] is expected
+            assert entry["available"][game] is any(exact.values())
+            assert entry["curated"][game] == len(pack.pool(game, category=key))
+
+    # These approved shelves contain only V37 reserves; V40 selection returns 503,
+    # so the beginner picker must not offer them.
+    for key in ("gastronomie", "geografie", "stiinta", "viata_de_roman"):
+        assert by_key[key]["curated"]["conexiuni"] > 0
+        assert (
+            by_key[key]["available_by_difficulty"]["conexiuni"]["usor"]
+            is False
+        )
 
 
 # ------------------------------------------------------------------- /api/submissions

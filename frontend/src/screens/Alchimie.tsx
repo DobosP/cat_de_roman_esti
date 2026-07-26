@@ -580,11 +580,13 @@ export default function Alchimie({
             />
             <CategoryPicker
               game="alchimie"
+              difficulty={difficulty}
               value={category}
               onChange={(key) => {
                 sound.playSelect();
                 setCategory(key);
               }}
+              onInvalid={() => setCategory(null)}
               accent={DEF.accent}
             />
           </GameIntro>

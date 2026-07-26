@@ -11,7 +11,9 @@ This document covers publishing the **accounts** stack on a single EU VPS (Hetzn
 by Cloudflare, with TLS via Caddy. The anonymous arcade is a subset (skip Postgres/OAuth).
 
 **Product model.** The game is **always free to play without an account.** With current
-consent, signing in can do two private things; Google name/email are never published:
+consent, signing in can do two private things; Google name/email are never published. The
+history boundary is recorded in
+[ADR-0061](adr/0061-device-local-progress-and-upload-only-private-backup.md):
 
 1. **Back up completed scores** — the frontend uploads retained finished-score rows to a
    private account copy. The browser remains the source of truth: there is no automatic
@@ -72,11 +74,13 @@ docker compose -f docker-compose.anon.yml logs -f app   # watch boot (no migrati
 curl -fsS https://<CAT_DOMAIN>/api/health        # concepts must equal /api/manifest counts.nodes
 curl -fsS https://<CAT_DOMAIN>/healthz           # container-internal healthcheck endpoint
 curl -fsS https://<CAT_DOMAIN>/api/me            # {"accounts_enabled": false, ...}
-curl -fsS https://<CAT_DOMAIN>/api/categories    # every category: "available" true + non-zero "curated"
+curl -fsS https://<CAT_DOMAIN>/api/categories    # 14 rows; curated + available + difficulty matrix
 ```
 
-If `/api/categories` shows `node_count: 0` / all-false `available`, the app loaded the
-wrong KG fixture — `CAT_KG_FIXTURE` must point at the curated `kg_sample.json` (the
+`curated` is raw approved inventory, not a runtime-playability promise. Four easy Conexiuni
+themes are intentionally false in `available_by_difficulty`; the picker hides them. If every
+category shows `node_count: 0`, or every nested availability flag is false, the app loaded
+the wrong KG fixture — `CAT_KG_FIXTURE` must point at the curated `kg_sample.json` (the
 default); the games pack's node ids do not exist in other fixtures.
 
 **Single-process constraint** still applies: game sessions live in memory
