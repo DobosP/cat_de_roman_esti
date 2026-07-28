@@ -45,9 +45,9 @@ def _edge_cost(strength: float) -> float:
     return 2.0 - min(max(strength, 0.0), 1.0)
 
 
-# Confident auto-accept thresholds (ADR-0022): a fuzzy correction is played silently only
-# when the best candidate is BOTH high-confidence (ratio floor) AND unambiguous (no second
-# distinct node scores within the margin of it). Everything weaker stays advisory.
+# Confident fuzzy-resolution thresholds (ADR-0022/0062): a correction is eligible for
+# automatic play or explicit confirmation only when the best candidate is BOTH
+# high-confidence and unambiguous. Everything weaker stays advisory.
 AUTO_ACCEPT_RATIO = 0.90
 AUTO_ACCEPT_MARGIN = 0.06
 
@@ -133,8 +133,8 @@ class WordGameService:
         display label, and de-duplicates so a node that matched via several surface forms
         is offered once. Order is the close-match ranking (best first); ties are broken by
         label then id so the result is deterministic. :meth:`resolve` stays exact-match —
-        this only powers advisory hints; silent acceptance is :meth:`resolve_fuzzy`'s
-        (much stricter) job.
+        this only powers advisory hints; actionable or confirmable correction is
+        :meth:`resolve_fuzzy`'s (much stricter) job.
         """
         key = normalize(text)
         if not key:

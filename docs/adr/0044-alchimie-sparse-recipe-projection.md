@@ -1,7 +1,7 @@
 # ADR-0044: Project sparse target-useful Alchimie recipes
 
 Date: 2026-07-18
-Status: accepted
+Status: accepted; three-fruitless hint threshold superseded-by ADR-0062
 
 ## Decision
 

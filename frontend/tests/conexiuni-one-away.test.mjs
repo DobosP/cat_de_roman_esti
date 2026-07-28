@@ -76,7 +76,10 @@ test("mobile recovery and clues stay in the sticky action channel above the boar
   const guidance = screen.indexOf('className="card connections-feedback col"');
   const board = screen.indexOf('className="connections-grid"');
   assert.ok(coach > 0 && guidance > coach && board > guidance);
-  assert.match(screen, /state\?\.clues\.map\(\(clue\) => clue\.message\)/);
+  assert.match(
+    screen,
+    /state\?\.clues\.map\(\(clue, index\) => \(\{ key: `clue-\$\{index\}`, message: clue\.message \}\)\)/,
+  );
   assert.match(
     screen,
     /const res = await conexiuniApi\.clue\(state\.game_id\);[\s\S]{0,180}applyAuthoritativeState\(res\)/,
@@ -115,5 +118,36 @@ test("the sticky coach keeps the bounded mistake budget visible without membersh
   assert.doesNotMatch(clues[0], /tiles|solution|\.id/);
   assert.match(screen, /key="connections-feedback"/);
   assert.match(screen, /\{feedback && \([\s\S]*?role="status"/);
-  assert.match(screen, /clueMessages\.map\(\(message\) => \([\s\S]*?role="status"/);
+  assert.match(screen, /clueMessages\.map\(\(\{ key, message \}\) => \([\s\S]*?role="status"/);
+});
+
+test("Indiciu unlocks up to a second clue and reflects remaining availability", () => {
+  assert.match(screen, /const MAX_CLUES = 2;/);
+  assert.match(screen, /const CLUE_MISTAKES_BASE = 2;/);
+  assert.match(screen, /const cluesUsed = state\?\.clues_used \?\? 0;/);
+  assert.match(
+    screen,
+    /const clueMistakesNeeded = CLUE_MISTAKES_BASE \+ cluesUsed;/,
+  );
+  assert.match(
+    screen,
+    /const clueMistakesRemaining = Math\.max\(0, clueMistakesNeeded - \(state\?\.mistakes \?\? 0\)\);/,
+  );
+  // The button stays gated by the server's clue_available flag at every stage...
+  assert.match(screen, /disabled=\{busy \|\| !state\.clue_available\}/);
+  // ...while its title distinguishes "not yet unlocked" from "both spent".
+  assert.match(
+    screen,
+    /cluesUsed >= MAX_CLUES\s*\?\s*"Indicii epuizate"\s*:\s*`Disponibil după \$\{clueMistakesNeeded\} greșeli`/,
+  );
+  // Disabled controls expose their countdown as visible text on touch screens; once
+  // unlocked after the first clue, a small "1 rămas" suffix marks the second.
+  assert.match(
+    screen,
+    /!state\.clue_available && cluesUsed < MAX_CLUES/,
+  );
+  assert.match(
+    screen,
+    /className="conexiuni-clue-status"> · 1 rămas<\/span>/,
+  );
 });

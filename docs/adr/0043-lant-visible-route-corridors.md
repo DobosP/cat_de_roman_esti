@@ -1,7 +1,7 @@
 # ADR-0043: Lanț uses visible local route corridors
 
 Date: 2026-07-18
-Status: accepted
+Status: accepted; per-position hint reset superseded-by ADR-0062
 
 ## Decision
 

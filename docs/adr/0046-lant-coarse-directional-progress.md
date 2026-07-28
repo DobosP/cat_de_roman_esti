@@ -1,7 +1,7 @@
 # ADR-0046: Easy Lanț gives coarse directional progress
 
 Date: 2026-07-19
-Status: accepted
+Status: accepted; easy-only progress scope superseded-by ADR-0062
 
 ## Decision
 

@@ -30,6 +30,13 @@ any difficulty is playable, while `curated.<game>` remains a raw approved-invent
 and is not a runtime-playability promise. Clients that offer a difficulty and category
 together should use the nested field for that exact pair.
 
+V42 ([ADR-0063](adr/0063-four-board-category-daily-floor.md)) gives an explicit
+category daily a curated floor of four records for the exact game/category/difficulty
+shelf; the unscoped floor stays eight. Below four, Alchimie, Contexto, and Lanț use their
+existing deterministic miner inside the requested theme, while Conexiuni returns its
+themed-unavailable 503. A successful response must never borrow an unscoped board and
+relabel it as `board_category`.
+
 Export the schema for client generation (deterministic, offline — no server/live data):
 
 ```bash
@@ -67,8 +74,8 @@ positive reveal boundaries:
 |------|--------|------------------|---------------|
 | contexto | target id/label/solution | no `target` or `solution` key; target id/label absent everywhere; guesses carry rank feedback | won / gave up |
 | alchimie | target id | `target.id = null`, `revealed = false` (label shown as the goal by design) | crafted (won) |
-| lant | full route corridor | only `start` + `target` ids; up to six local choices carry label + relation but no id/on-track flag; hints prefer an unvisited target-reachable route, with an ID-free `backtrack` stage only when free undo is the safe recovery | per-hop by playing; one hop id on third same-position `…/hint` |
-| conexiuni | unsolved category grouping | no `solution`; remaining tiles carry only `{id,label}`; each correctly solved group exposes its own key/label/tiles; the optional clue stays redacted | that group: correct guess; full solution: won / lost |
+| lant | full route corridor | only `start` + `target` ids; up to six local choices carry label + relation but no id/on-track flag; hints prefer an unvisited target-reachable route, with an ID-free `backtrack` stage only when free undo is the safe recovery | per-hop by playing; at most one hop id from the third help request in the session, unless safe recovery is ID-free backtrack |
+| conexiuni | unsolved category grouping | no `solution`; remaining tiles carry only `{id,label}`; each correctly solved group exposes its own key/label/tiles; up to two optional clues stay redacted | that group: correct guess; full solution: won / lost |
 
 Seeds/daily are deterministic by design (shared daily challenge); offline play inherently ships
 the whole KG, so this guards the **API surface**, keeping gameplay server-authoritative rather
@@ -85,6 +92,21 @@ hint, or inventory state, and no response serializes attempted ingredient IDs or
 The first progressive hint has `hint_kind = output|category`, `hint = null`, and may include
 only a non-target output **label** in `hint_output`; later hints may return one owned pair with
 `hint_kind = pair`. Until win, none of these additive fields may contain the hidden target id.
+V42 unlocks that hint after two consecutive distinct barren combines. From the fourth total
+barren combine, `message` may append one deterministic generic strategy sentence; this is
+not a new field or score penalty, and repeated pairs advance neither dry counter.
+
+### Lanț progress and help
+
+Successful `usor` and `normal` moves may add `progress: {kind, message}`, where `kind` is
+`closer`, `lateral`, `farther`, `dead_end`, or `won`. `greu` omits automatic progress. No
+response adds an exact remaining distance, corridor flag, or route marker.
+`backtrack_recommended` remains an easy-only boolean.
+
+Voluntary help has three session-wide stages: direction, alternatives, then one hop. The
+counter is capped at three and survives moves and undo; only a new game resets it. Hint
+content is recomputed from the current position, and a dead end can still return the ID-free
+`backtrack` recovery instead of a hop.
 
 ## 4. Contexto rank view-model
 
@@ -103,11 +125,16 @@ shipping the hidden answer. Each accepted guess has:
 }
 ```
 
-`rank` is one-based (`1` is the secret target), ties share the same rank for a distance
-bucket, and unreachable guesses rank after the reachable set. Distances are directed from
-the guess to the target; `rank`, `closeness`, and `reachable_count` use that same inbound
-distance population. `attempt_number` is the stable one-based ordinal of each distinct
-accepted guess; best-first list sorting and free repeats never change it.
+`rank` is one-based (`1` is the secret target). Within a hop-distance bucket, weighted path
+tightness orders ranks and only equal weighted distances tie; the whole nearer-hop bucket
+still ranks before the next one. Unreachable guesses rank after the reachable set. Distances
+are directed from the guess to the target; `rank`, `closeness`, and `reachable_count` use
+that same inbound distance population. `attempt_number` is the stable one-based ordinal of
+each distinct accepted guess; best-first list sorting and free repeats never change it.
+`temperature` is one of `Gasit`, `Fierbinte`, `Cald`, `Caldut`, `Rece`,
+`Foarte rece`, or `Inghetat`. For a reachable non-target rank percentile, the boundaries
+are 0.5%, 3%, 10%, 40%, and 70% before the final frozen band; a direct distance-one guess
+remains `Fierbinte`.
 
 Every successful guess response also carries one bounded comparison authored by the server:
 
@@ -127,6 +154,29 @@ render the message without deriving target proximity. Pre-reveal responses keep 
 target label, and any
 `solution` payload absent across create/get/guess/clue. The exact target object appears only
 on win or give-up.
+
+### Contexto fuzzy confirmation
+
+An exact label, alias, or diacritic-insensitive match still plays immediately. A confident
+fuzzy resolution to a non-target concept first returns without spending an attempt:
+
+```json
+{
+  "ok": false,
+  "needs_confirmation": true,
+  "resolved_label": "București",
+  "resolved_token": "ctxc_…",
+  "message": "Am înțeles: București. Confirmă sau corectează.",
+  "suggestions": [],
+  "attempts": 0
+}
+```
+
+The client accepts it by resubmitting the same `text` with optional request field
+`confirm: "<resolved_token>"`. Handles are opaque and game-bound; stale, invented, or
+different-resolution handles re-offer confirmation without mutation. A fuzzy resolution
+that is itself the hidden target remains a direct win, so confirmation never names the
+answer before it is earned.
 
 ### Contexto broad guesses and progressive clues
 
@@ -158,7 +208,10 @@ operationId remains `contexto_clue`.
 ## 5. Conexiuni earned state and clue endpoint
 
 `POST /api/wordgames/conexiuni/games/{game_id}/clue` is additive. It unlocks after two
-mistakes, can be used once, applies a score penalty, and returns:
+mistakes; a second clue unlocks at three mistakes. At most two may be used, and each applies
+the existing score penalty. The first targets the deterministic first unsolved category and
+the second advances to another unsolved category when one exists. A first-clue response can
+look like:
 
 ```json
 {
@@ -171,7 +224,8 @@ mistakes, can be used once, applies a score penalty, and returns:
 ```
 
 The clue payload itself stays redacted: it contains no category `key`, exact category label,
-tile ids, or membership.
+tile ids, or membership. `clues_used` can reach two; after both are spent
+`clue_available` remains false and another request is rejected.
 
 Pre-terminal Conexiuni create/get/guess/clue responses use the same public view model:
 `tiles` contains only public tile `{id,label}` objects still playable on the board,

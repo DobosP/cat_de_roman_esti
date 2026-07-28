@@ -63,6 +63,8 @@ export default function Intrusul({ onExit, onToast }: Props) {
   // Re-read after a terminal write when the player returns to this intro.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const best = useMemo(() => bestScore(GAME_KEY), [state]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const starterVisible = useMemo(() => needsDerivedStarter(GAME_KEY), [state]);
   const exitSafely = useCallback(() => {
     if (!startInFlight.current) onExit();
   }, [onExit]);
@@ -257,7 +259,16 @@ export default function Intrusul({ onExit, onToast }: Props) {
             tag={DEF.tag}
             accent={DEF.accent}
             glow={DEF.glow}
-            description={<p style={{ margin: 0 }}>Trei cuvinte au ceva în comun. Unul nu.</p>}
+            description={
+              <>
+                <p style={{ margin: 0 }}>Trei cuvinte au ceva în comun. Unul nu.</p>
+                {starterVisible && (
+                  <p className="faint" style={{ margin: "6px 0 0", fontSize: "0.82rem" }}>
+                    Primele runde sunt mai blânde. Câștigă una și deblochezi tot catalogul.
+                  </p>
+                )}
+              </>
+            }
             steps={[
               { icon: "👀", label: "Privește cele patru" },
               { icon: "👆", label: "Atinge intrusul" },
@@ -391,10 +402,23 @@ export default function Intrusul({ onExit, onToast }: Props) {
             onExit={exitSafely}
           >
             <div className="intrusul-solution">
-              <strong className="intrusul-answer">{state.solution.intruder.label}</strong>
-              <span>
-                Celelalte trei: <strong>{state.solution.group.label}</strong>
-              </span>
+              {state.won ? (
+                <>
+                  <strong className="intrusul-answer">{state.solution.intruder.label}</strong>
+                  <span>
+                    Celelalte trei: <strong>{state.solution.group.label}</strong>
+                  </span>
+                </>
+              ) : (
+                <>
+                  <strong className="intrusul-answer">
+                    Intrusul era: {state.solution.intruder.label}.
+                  </strong>
+                  <span>
+                    Grupul: <strong>{state.solution.group.label}</strong>.
+                  </span>
+                </>
+              )}
               <span>{state.solution.group.tiles.map((tile) => tile.label).join(" · ")}</span>
             </div>
           </ResultCard>

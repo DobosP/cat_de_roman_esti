@@ -95,6 +95,10 @@ _MOVE_LIMIT_MESSAGE = "Limită atinsă — folosește Înapoi."
 # 95th-percentile live degree.
 _HUB_SOFT_DEGREE = 20
 
+# Directional (closer/farther/lateral/dead_end/won) progress plays on usor and normal;
+# greu omits that automatic progress object but retains help and dead-end recovery.
+_PROGRESS_DIFFICULTIES = {"usor", "normal"}
+
 _PROGRESS_MESSAGES = {
     "closer": "Mai aproape de țintă.",
     "lateral": "Tot cam la aceeași distanță.",
@@ -137,12 +141,14 @@ class LantSession:
     # Player-picked board theme + curated-pack provenance (None for mined games).
     category: str | None = None
     pack_id: str | None = None
-    # Voluntary help escalates only while the position stays unchanged.  Moves and undo
-    # reset this capped counter, so exploratory/revisited chains cannot retain O(n²)
-    # tuple keys in the session.
+    # Voluntary help consumed this session, not position on the chain: it escalates with
+    # every hint request and persists across moves and undo (a capped scalar, never a
+    # per-position map, so it cannot retain O(n²) tuple keys in the session). It resets
+    # only when a fresh game is created.
     hint_requests: int = 0
-    # Easy-mode direction feedback remembers only whether the last two real hops failed
-    # to improve directed distance. The capped scalar cannot retain route history.
+    # Directional feedback (usor + normal) remembers only whether the last two real
+    # hops failed to improve directed distance. The capped scalar cannot retain route
+    # history.
     non_improving_moves: int = 0
 
     @property
@@ -710,8 +716,9 @@ class CreateGameView(ContractAPIView):
     @extend_schema(operation_id="lant_create_game", tags=["lant"])
     def post(self, request):
         """Start a game. Optional ``?category=`` prefers a curated pair for that
-        theme and otherwise mines with both endpoints inside the category; the
-        daily prefers a curated pair whenever one is approved (ADR-0011)."""
+        theme and otherwise mines with both endpoints inside the category. Dailies
+        use curated content once they meet the four-board scoped or eight-board shared
+        variety floor (ADR-0063)."""
         seed = query_int(request, "seed")
         difficulty = query_str(request, "difficulty", _DEFAULT_DIFFICULTY)
         daily = query_str(request, "daily")
@@ -824,7 +831,8 @@ class MoveView(ContractAPIView):
             )
 
         session.chain.append(guess)
-        session.hint_requests = 0
+        # hint_requests measures help consumed this session, not chain position: a move
+        # never resets it (persists until a new game).
         session.won = guess == session.target
         if session.won:
             record_finished(
@@ -848,7 +856,7 @@ class MoveView(ContractAPIView):
             notes.append("Atenție: fundătură — de aici ținta nu mai e accesibilă.")
 
         progress: dict[str, str] | None = None
-        if session.difficulty == "usor":
+        if session.difficulty in _PROGRESS_DIFFICULTIES:
             if session.won:
                 progress_kind = "won"
             elif dead_end:
@@ -871,8 +879,8 @@ class MoveView(ContractAPIView):
                 "message": _PROGRESS_MESSAGES[progress_kind],
             }
         else:
-            # Automatic direction is an easy-mode aid only; other modes retain no
-            # latent progress streak that could later surface unexpectedly.
+            # Greu omits the progress object and retains no latent progress streak
+            # that could later surface unexpectedly.
             session.non_improving_moves = 0
 
         result = {
@@ -909,7 +917,8 @@ class UndoView(ContractAPIView):
         # Never step below the start.
         if len(session.chain) > 1:
             session.chain.pop()
-            session.hint_requests = 0
+            # hint_requests measures help consumed this session, not chain position:
+            # undo never resets it (persists until a new game).
             session.won = session.current == session.target
         session.non_improving_moves = 0
         return Response(_state(game_id, session))
@@ -932,8 +941,10 @@ class HintView(ContractAPIView):
 
         svc = get_service()
         cur = session.current
-        # Help escalates only while no move/undo occurs.  Three is the terminal reveal,
-        # so capping here bounds even an abusive stream of repeated hint requests.
+        # Help escalates and persists for the whole session (moves/undo never reset it);
+        # only a new game does. Three is the terminal reveal, so capping here bounds even
+        # an abusive stream of repeated hint requests. Each stage's CONTENT is still
+        # computed fresh from the current position at request time.
         session.hint_requests = min(3, session.hint_requests + 1)
         asks_here = session.hint_requests
         dist_to_target = svc.distances_to(session.target)

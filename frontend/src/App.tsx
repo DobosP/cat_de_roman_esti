@@ -8,10 +8,10 @@ import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-
 import { AnimatePresence, domAnimation, LazyMotion, m, MotionConfig } from "framer-motion";
 import { ToastStack, type ToastData, type ToastKind } from "@roedu/ui";
 import Home from "./screens/Home";
-import AccountBar from "./components/AccountBar";
 
 // Home is the only screen every visitor needs. Each game is deliberately loaded
 // on first play so low-end devices do not parse all six game engines up front.
+const AccountBar = lazy(() => import("./components/AccountBar"));
 const Alchimie = lazy(() => import("./screens/Alchimie"));
 const Intrusul = lazy(() => import("./screens/Intrusul"));
 const Perechi = lazy(() => import("./screens/Perechi"));
@@ -69,7 +69,9 @@ export default function App() {
     <MotionConfig reducedMotion="user">
       <LazyMotion features={domAnimation} strict>
         <div className="app-shell">
-          <AccountBar />
+          <Suspense fallback={null}>
+            <AccountBar />
+          </Suspense>
           <AnimatePresence mode="wait">
             <Suspense
               key={location.pathname}

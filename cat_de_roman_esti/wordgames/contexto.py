@@ -16,6 +16,7 @@ useful without accidentally serializing the hidden answer. Sessions live in-memo
 
 from __future__ import annotations
 
+import hashlib
 import random
 from bisect import bisect_left
 from dataclasses import dataclass, field
@@ -231,7 +232,11 @@ def closeness_for(
 
 # Warmth tiers as fractions of the refined rank over the reachable set (ADR-0021). Replaces
 # the old fixed hop table, which piled ~74% of guesses into one "Rece" bucket regardless of
-# target. Ordered coldest-last; the exact Romanian labels are unchanged.
+# target. Ordered coldest-last.
+# V42 splits the cold half in two: everything past 40% used to read "Inghetat", so most of a
+# game's guesses shared one flat verdict and a real step toward the secret stayed invisible.
+# "Foarte rece" (<= 70%) now separates "far" from "nowhere near"; the warmer labels and the
+# comparative warmer/colder signal are unchanged.
 def temperature_for(
     session: ContextoSession,
     distance: int | None,
@@ -243,7 +248,8 @@ def temperature_for(
 
     ``d == 0`` -> "Gasit"; unreachable -> "Inghetat". Otherwise, with
     ``pct = rank / reachable``: a distance-1 guess or ``pct <= 0.005`` -> "Fierbinte";
-    ``<= 0.03`` -> "Cald"; ``<= 0.10`` -> "Caldut"; ``<= 0.40`` -> "Rece"; else "Inghetat".
+    ``<= 0.03`` -> "Cald"; ``<= 0.10`` -> "Caldut"; ``<= 0.40`` -> "Rece";
+    ``<= 0.70`` -> "Foarte rece"; else "Inghetat".
     Warmth is monotonically non-increasing in rank (hop ordering is preserved by rank_for,
     so the distance-1 override never inverts a colder-ranked guess).
     """
@@ -266,6 +272,8 @@ def temperature_for(
         return "Caldut"
     if pct <= 0.40:
         return "Rece"
+    if pct <= 0.70:
+        return "Foarte rece"
     return "Inghetat"
 
 
@@ -454,6 +462,19 @@ def _pick_target(
 # --------------------------------------------------------------------------- schemas
 class GuessBody(BaseModel):
     text: str
+    # Opaque handle echoed back from a needs-confirmation reply; anything else is ignored.
+    confirm: str | None = None
+
+
+def _confirmation_token(game_id: str, node_id: str) -> str:
+    """Opaque per-game handle for a fuzzy resolution the player still has to accept.
+
+    The KG id never travels to the client, and the token is recomputed from the resubmitted
+    text: one minted for another game or another resolution simply fails to match, so a
+    stale or replayed confirmation can never play a concept the player did not see.
+    """
+    digest = hashlib.sha256(f"{game_id}\x00{node_id}".encode()).hexdigest()
+    return f"ctxc_{digest[:16]}"
 
 
 def _guess_payload(record: GuessRecord, *, reveal: bool, target: str) -> dict:
@@ -670,9 +691,10 @@ class CreateGameView(ContractAPIView):
     @extend_schema(operation_id="contexto_create_game", tags=["contexto"])
     def post(self, request):
         """Start a game. Optional ``?category=`` prefers a curated target for that
-        theme and otherwise mines within the category; the daily prefers a curated
-        target whenever one is approved (ADR-0011). For a signed-in player, curated
-        instances they have already finished are excluded (dailies are exempt)."""
+        theme and otherwise mines within the category. Dailies use curated content
+        once they meet the four-board scoped or eight-board shared variety floor
+        (ADR-0063). For a signed-in player, curated instances they have already
+        finished are excluded (dailies are exempt)."""
         seed = query_int(request, "seed")
         difficulty = query_str(request, "difficulty", _DEFAULT_DIFFICULTY)
         daily = query_str(request, "daily")
@@ -744,11 +766,33 @@ class GuessView(ContractAPIView):
             # as a similarly spelled historical/technical concept.
             projection = resolve_projection(text)
         if node_id is None and projection is None:
-            # Confident auto-accept (ADR-0022): a high-confidence, unambiguous near-miss
-            # is played as the corrected concept — attempts count normally, and if the
-            # correction IS the target that is a legitimate win (a typo'd answer is still
-            # the answer). Anything weaker falls through to the advisory suggestions.
-            node_id = svc.resolve_fuzzy(text)
+            # Confident correction (ADR-0022) now ASKS before it costs anything (V42): a
+            # high-confidence, unambiguous near-miss is a guess about intent, so the session
+            # stays untouched until the player echoes the resolution's token. Exact label,
+            # alias and diacritic-insensitive hits never reach here and are unaffected.
+            # A corrected typo of the target still wins outright (a typo'd answer is still
+            # the answer) — asking would spell the secret out loud before it is earned.
+            fuzzy = svc.resolve_fuzzy(text)
+            if fuzzy is not None and fuzzy != session.target:
+                token = _confirmation_token(game_id, fuzzy)
+                if body.confirm != token:
+                    understood = svc.label(fuzzy)
+                    return Response(
+                        {
+                            "ok": False,
+                            "needs_confirmation": True,
+                            "resolved_label": understood,
+                            "resolved_token": token,
+                            "message": f"Am înțeles: {understood}. Confirmă sau corectează.",
+                            "suggestions": [],
+                            "guesses": _sorted_guesses(session, reveal=False),
+                            "attempts": session.attempts,
+                            "won": session.won,
+                            "reachable_count": session.reachable,
+                            **_clue_view(session),
+                        }
+                    )
+            node_id = fuzzy
             corrected = node_id is not None
         if node_id is None and projection is None:
             # Unknown concept: do NOT count it as an attempt. Offer fuzzy "did you mean"

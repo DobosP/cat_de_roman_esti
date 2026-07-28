@@ -54,6 +54,8 @@ type GuessRecovery = {
   message: string;
   choices: string[];
   tone: "info" | "warning";
+  /** A fuzzy correction the player must accept before it costs an attempt. */
+  confirm?: { label: string; token: string };
 };
 
 type GuessView = "best" | "recent";
@@ -75,6 +77,7 @@ const TEMP_COLOR: Record<Temperature, string> = {
   Cald: "#f4a259",
   Caldut: "#ffd166",
   Rece: "#8ec5ff",
+  "Foarte rece": "#84bef8",
   Inghetat: "#7bb8f2",
 };
 
@@ -84,6 +87,7 @@ const TEMP_ICON: Record<Temperature, string> = {
   Cald: "♨️",
   Caldut: "🌤️",
   Rece: "❄️",
+  "Foarte rece": "🥶",
   Inghetat: "🧊",
 };
 
@@ -94,6 +98,7 @@ const TEMP_LABEL: Record<Temperature, string> = {
   Cald: "Cald",
   Caldut: "Călduț",
   Rece: "Rece",
+  "Foarte rece": "Foarte rece",
   Inghetat: "Înghețat",
 };
 
@@ -104,6 +109,7 @@ const TEMP_HINT: Record<Temperature, string> = {
   Cald: "Foarte aproape.",
   Caldut: "Te apropii.",
   Rece: "Cam departe.",
+  "Foarte rece": "Departe — caută altă zonă.",
   Inghetat: "Înghețat — încearcă altă direcție.",
 };
 
@@ -192,6 +198,7 @@ export default function CaldRece({
   const [guessView, setGuessView] = useState<GuessView>("best");
   const [confirmReveal, setConfirmReveal] = useState(false);
   const [recovery, setRecovery] = useState<GuessRecovery | null>(null);
+  const [showLegend, setShowLegend] = useState(false);
   const [difficulty, setDifficulty] = useState<Difficulty>("usor");
   const [category, setCategory] = useState<string | null>(null);
   // Intro is shown until the player picks how to start.
@@ -326,7 +333,8 @@ export default function CaldRece({
   }, [state, puzzleKey, recordOnce, active]);
 
   const handleGuess = useCallback(
-    async (e?: React.FormEvent) => {
+    // ``confirm`` accepts a correction the server asked about; only then does it count.
+    async (e?: React.FormEvent, confirm?: string) => {
       e?.preventDefault();
       if (!state || busy || finished) return;
       const q = text.trim();
@@ -339,6 +347,7 @@ export default function CaldRece({
         const res: GuessResult = await contextoApi.submitGuess(
           state.game_id,
           q,
+          confirm,
         );
         if (!res.ok) {
           sound.playError();
@@ -346,6 +355,10 @@ export default function CaldRece({
             message: res.message,
             choices: res.suggestions,
             tone: "warning",
+            confirm:
+              res.needs_confirmation && res.resolved_label && res.resolved_token
+                ? { label: res.resolved_label, token: res.resolved_token }
+                : undefined,
           });
           setState((prev) =>
             prev
@@ -639,9 +652,6 @@ export default function CaldRece({
               accent={latestGuess ? barColor(latestGuess) : DEF.accent}
               ready={Boolean(latestGuess && latestGuess.rank <= 10)}
             />
-            <p className="rank-legend faint" style={{ margin: 0 }}>
-              Număr mai mic = mai aproape · #1 = răspunsul
-            </p>
           </>
         )}
 
@@ -655,6 +665,7 @@ export default function CaldRece({
               value={text}
               onChange={(e) => {
                 setText(e.target.value);
+                setRecovery(null);
                 setConfirmReveal(false);
               }}
               onKeyDown={(e) => {
@@ -804,6 +815,22 @@ export default function CaldRece({
                         {choice}
                       </Button>
                     ))}
+                  </div>
+                ) : null}
+                {recovery.confirm ? (
+                  <div className="row wrap" style={{ gap: 8 }}>
+                    <Button
+                      type="button"
+                      className="contexto-confirm-chip"
+                      disabled={busy}
+                      onClick={() => {
+                        sound.playSelect();
+                        void handleGuess(undefined, recovery.confirm?.token);
+                      }}
+                    >
+                      Joacă {recovery.confirm.label}
+                    </Button>
+                    <span className="faint">sau corectează textul.</span>
                   </div>
                 ) : null}
               </div>
@@ -960,6 +987,30 @@ export default function CaldRece({
             </span>
           </p>
         )}
+
+        {/* Tappable rank legend: the phone has no hover, so the row tooltips alone
+            left the numbers unexplained on the only screen most players use. */}
+        <div className="contexto-legend">
+          <Button
+            type="button"
+            variant="secondary"
+            size="sm"
+            className="contexto-legend-toggle"
+            aria-expanded={showLegend}
+            aria-controls="contexto-legend-body"
+            onClick={() => {
+              sound.playSelect();
+              setShowLegend((open) => !open);
+            }}
+          >
+            Cum citesc #?
+          </Button>
+          {showLegend && (
+            <p id="contexto-legend-body" className="contexto-legend-body faint">
+              #1 este ținta; un număr mai mic și mai multă căldură înseamnă mai aproape.
+            </p>
+          )}
+        </div>
 
         {guesses.length > 1 && (
           <div

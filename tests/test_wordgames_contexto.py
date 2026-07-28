@@ -1282,9 +1282,14 @@ def test_resolve_fuzzy_confident_unique_ambiguous_and_below_bar() -> None:
     assert svc.resolve_fuzzy("") is None
 
 
-def test_typo_auto_accepts_counts_attempt_and_names_correction() -> None:
-    """A unique high-confidence typo is played as the corrected concept (ADR-0022)."""
-    from cat_de_roman_esti.wordgames.contexto import store
+def test_typo_asks_before_it_costs_then_counts_once_confirmed() -> None:
+    """A unique high-confidence typo is offered, not played for the player (V42).
+
+    ADR-0022 auto-accepted the correction and spent the attempt; the confirmation step
+    keeps the correction but moves the cost behind an explicit "yes". Confirming replays
+    the same text with the token the server issued.
+    """
+    from cat_de_roman_esti.wordgames.contexto import _confirmation_token, store
     from cat_de_roman_esti.wordgames.service import get_service
 
     c = make_client()
@@ -1293,25 +1298,118 @@ def test_typo_auto_accepts_counts_attempt_and_names_correction() -> None:
     target = store.get(gid).target
     concept, typo = _auto_correctable_concept(svc, exclude=target)
     label = svc.label(concept)
-    body = c.post(
+    asked = c.post(
         f"/api/wordgames/contexto/games/{gid}/guess",
         {"text": typo},
         content_type="application/json",
     ).json()
-    assert body["ok"] is True
-    assert body["guess"]["id"] == concept
-    assert body["guess"]["label"] == label
-    assert body["message"] == f"Am înțeles: {label}."
-    assert body["attempts"] == 1  # auto-accepted guesses count normally
-    assert body["won"] is False
-    assert "target" not in body
-    # The same typo replayed maps to the same node: deduplicated like any repeat guess.
+    assert asked["ok"] is False
+    assert asked["needs_confirmation"] is True
+    assert asked["resolved_label"] == label
+    assert asked["resolved_token"] == _confirmation_token(gid, concept)
+    assert asked["message"] == f"Am înțeles: {label}. Confirmă sau corectează."
+    assert asked["suggestions"] == []
+    # Nothing about the session moved: no attempt, no guess, no order entry.
+    assert asked["attempts"] == 0
+    assert asked["guesses"] == []
+    session = store.get(gid)
+    assert session.attempts == 0 and not session.guesses and not session.order
+
+    played = c.post(
+        f"/api/wordgames/contexto/games/{gid}/guess",
+        {"text": typo, "confirm": asked["resolved_token"]},
+        content_type="application/json",
+    ).json()
+    assert played["ok"] is True
+    assert played["guess"]["id"] == concept
+    assert played["guess"]["label"] == label
+    assert played["message"] == f"Am înțeles: {label}."
+    assert played["attempts"] == 1  # confirmed corrections count normally
+    assert played["won"] is False
+    assert "target" not in played
+
+    # Confirming twice maps to the same node: deduplicated like any repeat guess.
     again = c.post(
         f"/api/wordgames/contexto/games/{gid}/guess",
-        {"text": typo},
+        {"text": typo, "confirm": asked["resolved_token"]},
         content_type="application/json",
     ).json()
+    assert again["ok"] is True
     assert again["attempts"] == 1
+    assert again["feedback"]["kind"] == "repeat"
+    assert store.get(gid).attempts == 1
+
+
+def test_stale_or_foreign_confirmation_tokens_never_consume_an_attempt() -> None:
+    """A token from another game — or an invented one — re-asks instead of playing."""
+    from cat_de_roman_esti.wordgames.contexto import _confirmation_token, store
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    c = make_client()
+    svc = get_service()
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
+    other_gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
+    concept, typo = _auto_correctable_concept(svc, exclude=store.get(gid).target)
+    for token in ("ctxc_0000000000000000", _confirmation_token(other_gid, concept)):
+        body = c.post(
+            f"/api/wordgames/contexto/games/{gid}/guess",
+            {"text": typo, "confirm": token},
+            content_type="application/json",
+        ).json()
+        assert body["ok"] is False
+        assert body["needs_confirmation"] is True
+        assert body["resolved_token"] == _confirmation_token(gid, concept)
+        assert body["attempts"] == 0
+    assert store.get(gid).attempts == 0
+    assert not store.get(gid).guesses
+
+
+def test_exact_alias_and_diacritic_free_guesses_skip_confirmation() -> None:
+    """Only FUZZY resolution asks: exact labels, aliases and stripped diacritics play."""
+    from cat_de_roman_esti.wordgames.contexto import store
+    from cat_de_roman_esti.wordgames.service import get_service, normalize
+
+    c = make_client()
+    svc = get_service()
+    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
+    target = store.get(gid).target
+
+    def play(text: str) -> dict:
+        return c.post(
+            f"/api/wordgames/contexto/games/{gid}/guess",
+            {"text": text},
+            content_type="application/json",
+        ).json()
+
+    exact = next(nid for nid in svc.all_ids() if nid != target)
+    # A label carrying diacritics whose stripped surface still resolves exactly.
+    accented = next(
+        nid
+        for nid in svc.all_ids()
+        if nid not in {target, exact}
+        and normalize(svc.label(nid)) != svc.label(nid)
+        and svc.resolve(normalize(svc.label(nid))) == nid
+    )
+    # An alias surface (ADR-0012) that is not just the normalized label.
+    alias_node, alias = next(
+        (nid, alias)
+        for nid in svc.all_ids()
+        if nid not in {target, exact, accented}
+        for alias in (svc.node(nid).aliases if svc.node(nid) else ())
+        if normalize(alias) != normalize(svc.label(nid)) and svc.resolve(alias) == nid
+    )
+
+    for text, node_id in (
+        (svc.label(exact), exact),
+        (normalize(svc.label(accented)), accented),
+        (alias, alias_node),
+    ):
+        body = play(text)
+        assert body["ok"] is True, text
+        assert "needs_confirmation" not in body
+        assert "message" not in body  # nothing was corrected
+        assert body["guess"]["id"] == node_id
+    assert store.get(gid).attempts == 3
 
 
 def test_typo_of_the_target_is_a_legitimate_win() -> None:
@@ -1385,6 +1483,33 @@ def test_hop_ordering_is_preserved_across_buckets() -> None:
         prev_max = max(ranks)
 
 
+def test_temperature_band_boundaries_cover_six_tiers() -> None:
+    """Each percentile band owns its upper bound and hands the next rank over (V42).
+
+    A synthetic 1,000-node reachable set makes ``rank / reachable`` exact, so every
+    boundary — including the new "Foarte rece" split of the old flat cold half — is
+    pinned rather than inferred from whatever the seeded target happens to produce.
+    """
+    from cat_de_roman_esti.wordgames.contexto import ContextoSession, temperature_for
+
+    session = ContextoSession(target="t", dist_hist={5: 1000}, reachable=1000)
+
+    def tier(rank: int) -> str:
+        return temperature_for(session, 5, rank_override=rank)
+
+    assert [tier(rank) for rank in (1, 5)] == ["Fierbinte", "Fierbinte"]
+    assert [tier(rank) for rank in (6, 30)] == ["Cald", "Cald"]
+    assert [tier(rank) for rank in (31, 100)] == ["Caldut", "Caldut"]
+    assert [tier(rank) for rank in (101, 400)] == ["Rece", "Rece"]
+    assert [tier(rank) for rank in (401, 700)] == ["Foarte rece", "Foarte rece"]
+    assert [tier(rank) for rank in (701, 1000)] == ["Inghetat", "Inghetat"]
+    # The pinned extremes are untouched by the extra band.
+    assert temperature_for(session, 0) == "Gasit"
+    assert temperature_for(session, None) == "Inghetat"
+    # A distance-1 guess still overrides the percentile and reads hottest.
+    assert temperature_for(session, 1, rank_override=900) == "Fierbinte"
+
+
 def test_temperature_is_monotonic_and_pins_found_and_win() -> None:
     """Warmth never rises as rank grows; only d==0 is Gasit and only the win reads 100."""
     from cat_de_roman_esti.wordgames.contexto import (
@@ -1395,7 +1520,15 @@ def test_temperature_is_monotonic_and_pins_found_and_win() -> None:
     )
     from cat_de_roman_esti.wordgames.service import get_service
 
-    warmth = {"Gasit": 6, "Fierbinte": 5, "Cald": 4, "Caldut": 3, "Rece": 2, "Inghetat": 1}
+    warmth = {
+        "Gasit": 7,
+        "Fierbinte": 6,
+        "Cald": 5,
+        "Caldut": 4,
+        "Rece": 3,
+        "Foarte rece": 2,
+        "Inghetat": 1,
+    }
     svc = get_service()
     session = _pick_target(SEED, "normal")
     dist = svc.distances_to(session.target)

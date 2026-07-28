@@ -1,7 +1,7 @@
 # ADR-0048: Keep Conexiuni recovery beside the active board
 
 Date: 2026-07-19
-Status: accepted
+Status: accepted; unchanged clue cardinality/backend-state assumptions superseded-by ADR-0062
 
 ## Decision
 

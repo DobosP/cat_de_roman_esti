@@ -18,12 +18,15 @@ import { sound } from "../sound";
 import {
   buildDailyCircuit,
   exportScores,
+  getDailyStreak,
   importScores,
+  needsDerivedStarter,
   scoreBoard,
+  type DerivedStarterGame,
   type GameScoreEntry,
   type ScoreEntry,
 } from "../scores";
-import { todayLocal } from "../share";
+import { appUrl, copyResult, todayLocal } from "../share";
 
 type HistoryTab = "top" | "today" | "recent";
 
@@ -47,6 +50,9 @@ export default function Home({
     () => new Map(circuit.games.map((game) => [game.game, game])),
     [circuit],
   );
+  // Not memoized: it reads localStorage directly (like `board`'s own state refresh),
+  // so it must re-run on every render that could follow a score/import update.
+  const dailyStreak = getDailyStreak(today);
   const totals = useMemo(
     () => GAMES.map((game) => ({ ...game, record: board[game.key] })),
     [board],
@@ -99,6 +105,11 @@ export default function Home({
     onToast("Istoricul local a fost exportat.", "success");
   }, [onToast]);
 
+  const handleDiplomaShare = useCallback(async () => {
+    const text = `Cât de român ești? Circuit 6/6 azi · ${circuit.total} pct · Joacă: ${appUrl()}`;
+    onToast((await copyResult(text)) ? "Copiat!" : "Nu am putut copia.", "info");
+  }, [circuit.total, onToast]);
+
   const handleImport = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
       const file = event.target.files?.[0];
@@ -150,7 +161,8 @@ export default function Home({
             transition={{ delay: 0.35, duration: 0.5 }}
             style={{ maxWidth: 640, fontSize: "1.05rem", margin: 0 }}
           >
-            Șase jocuri românești. Alege unul și intri direct în ritm.
+            De la Ștefan cel Mare la Las Fierbinți: șase jocuri scurte din cultura și
+            viața românească.
           </m.p>
         </header>
 
@@ -161,6 +173,11 @@ export default function Home({
               <div className="col" style={{ gap: 2 }}>
                 <h2 id="daily-circuit-title">Circuitul de azi</h2>
                 <p className="muted">Doar pe acest dispozitiv.</p>
+                {dailyStreak >= 1 && (
+                  <p className="muted">
+                    🔥 Serie: {dailyStreak === 1 ? "o zi" : `${dailyStreak} zile`}
+                  </p>
+                )}
               </div>
             </div>
             <div
@@ -214,6 +231,17 @@ export default function Home({
               );
             })}
           </ul>
+          {circuit.completed === 6 && (
+            <div className="col daily-circuit-diploma">
+              <strong>
+                🏆 Diplomă de român — {formatDiplomaDate(today)}
+              </strong>
+              <p className="muted">Ai închis circuitul de azi: {circuit.total} puncte.</p>
+              <Button variant="secondary" size="sm" onClick={handleDiplomaShare}>
+                <span aria-hidden>📤</span> Distribuie
+              </Button>
+            </div>
+          )}
         </section>
 
         <div className="games-grid">
@@ -267,6 +295,9 @@ export default function Home({
                   <span className="game-card-cta" style={{ color: g.accent }}>
                     Joacă →
                   </span>
+                  {isStarterGame(g.key) && needsDerivedStarter(g.key) && (
+                    <span className="faint">🌱 Nivel de început</span>
+                  )}
                   {board[g.key]?.best && (
                     <span className="faint" style={{ fontSize: "0.8rem" }}>
                       ★ record {board[g.key]!.best!.score}
@@ -448,4 +479,13 @@ function formatWhen(ms: number): string {
     hour: "2-digit",
     minute: "2-digit",
   }).format(new Date(ms));
+}
+
+function isStarterGame(key: GameKey): key is DerivedStarterGame {
+  return key === "intrusul" || key === "perechi";
+}
+
+function formatDiplomaDate(day: string): string {
+  const [y, m, d] = day.split("-");
+  return `${d}.${m}.${y}`;
 }

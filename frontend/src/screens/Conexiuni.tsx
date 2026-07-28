@@ -49,6 +49,11 @@ const DIFF_LABEL: Record<Difficulty, string> = {
 
 const GROUP_COLORS = ["#f4c95d", "#70c1b3", "#5aa9e6", "#a78bfa"] as const;
 
+// Mirrors the server's ConexiuniSession clue economy (cat_de_roman_esti/wordgames/
+// conexiuni.py): up to two clues, unlocking at 2 then 3 mistakes.
+const MAX_CLUES = 2;
+const CLUE_MISTAKES_BASE = 2;
+
 type StartMode =
   | { kind: "seed"; difficulty: Difficulty }
   | { kind: "daily" };
@@ -159,9 +164,12 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     selectionKey(selected) === blockedGuess.key;
   const feedback = blockedGuess?.oneAway ? ONE_AWAY_GUIDANCE : hint;
   const clueMessages = useMemo(
-    () => state?.clues.map((clue) => clue.message) ?? [],
+    () => state?.clues.map((clue, index) => ({ key: `clue-${index}`, message: clue.message })) ?? [],
     [state?.clues],
   );
+  const cluesUsed = state?.clues_used ?? 0;
+  const clueMistakesNeeded = CLUE_MISTAKES_BASE + cluesUsed;
+  const clueMistakesRemaining = Math.max(0, clueMistakesNeeded - (state?.mistakes ?? 0));
 
   const applyAuthoritativeState = useCallback((fresh: ConexiuniState) => {
     const available = unsolvedTileIds(fresh);
@@ -611,8 +619,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                       </m.span>
                     )}
                   </AnimatePresence>
-                  {clueMessages.map((message) => (
-                    <span key={message} role="status" aria-live="polite">
+                  {clueMessages.map(({ key, message }) => (
+                    <span key={key} role="status" aria-live="polite">
                       <span aria-hidden="true">💡 </span>
                       {message}
                     </span>
@@ -692,11 +700,22 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                 title={
                   state.clue_available
                     ? "Arată începutul unei categorii"
-                    : "Disponibil după două greșeli"
+                    : cluesUsed >= MAX_CLUES
+                      ? "Indicii epuizate"
+                      : `Disponibil după ${clueMistakesNeeded} greșeli`
                 }
-              >
-                Indiciu
-              </Button>
+                  >
+                    {cluesUsed >= MAX_CLUES ? "Indicii folosite" : "Indiciu"}
+                    {!state.clue_available && cluesUsed < MAX_CLUES ? (
+                      <span className="conexiuni-clue-status">
+                        {" "}
+                        · încă {clueMistakesRemaining}{" "}
+                        {clueMistakesRemaining === 1 ? "greșeală" : "greșeli"}
+                      </span>
+                    ) : cluesUsed === 1 ? (
+                      <span className="conexiuni-clue-status"> · 1 rămas</span>
+                    ) : null}
+                  </Button>
               <Button
                 type="button"
                 variant="secondary"

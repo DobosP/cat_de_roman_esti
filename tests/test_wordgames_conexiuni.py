@@ -413,6 +413,104 @@ def test_clue_penalizes_score_and_share() -> None:
     assert "indiciu x1" in last["share"]
 
 
+def test_second_clue_needs_three_mistakes_and_a_first_clue_already_used() -> None:
+    c, b, groups = _groups_for()
+    gid = b["game_id"]
+
+    _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": _wrong_cross_group(groups, 0)})
+    _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": _wrong_cross_group(groups, 1)})
+    first = c.post(f"{BASE}/games/{gid}/clue").json()
+    assert first["clues_used"] == 1
+
+    # One clue used, but only two mistakes so far: the second stays locked.
+    assert c.get(f"{BASE}/games/{gid}").json()["clue_available"] is False
+    assert c.post(f"{BASE}/games/{gid}/clue").status_code == 400
+
+    _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": _wrong_cross_group(groups, 2)})
+    state = c.get(f"{BASE}/games/{gid}").json()
+    assert state["mistakes"] == 3
+    assert state["clue_available"] is True
+
+    second = c.post(f"{BASE}/games/{gid}/clue").json()
+    assert second["ok"] is True
+    assert second["clues_used"] == 2
+    assert second["clue_available"] is False
+    assert len(second["clues"]) == 2
+    assert second["clue"] == second["clues"][1]
+    _assert_preterminal_public(second, groups)
+
+    # Both clues spent: a third request is rejected, not silently served.
+    assert c.post(f"{BASE}/games/{gid}/clue").status_code == 400
+
+
+def test_next_clue_targets_alphabetically_next_group_and_wraps() -> None:
+    from cat_de_roman_esti.wordgames.conexiuni import (
+        ConexiuniSession,
+        _category_label,
+        _label_pattern,
+        _next_clue,
+    )
+
+    groups = {
+        "aaa": ["a1", "a2", "a3", "a4"],
+        "bbb": ["b1", "b2", "b3", "b4"],
+        "ccc": ["c1", "c2", "c3", "c4"],
+        "ddd": ["d1", "d2", "d3", "d4"],
+    }
+    order = [nid for ids in groups.values() for nid in ids]
+    pattern_of = lambda cat: _label_pattern(_category_label(cat))  # noqa: E731
+
+    # First clue: alphabetically-first unsolved group.
+    session = ConexiuniSession(groups=groups, order=order)
+    first = _next_clue(session)
+    assert session.clued_categories == ["aaa"]
+    assert first["pattern"] == pattern_of("aaa")
+
+    # Second clue on the same session: alphabetically-next unsolved group after the
+    # one already clued (not a repeat).
+    second = _next_clue(session)
+    assert session.clued_categories == ["aaa", "bbb"]
+    assert second["pattern"] == pattern_of("bbb")
+
+    # Wrap-around: the last-clued group is the alphabetical maximum among what
+    # remains unsolved, so the next clue wraps back to the smallest unsolved one.
+    wrap_session = ConexiuniSession(groups=groups, order=order, clued_categories=["ddd"])
+    wrapped = _next_clue(wrap_session)
+    assert wrap_session.clued_categories == ["ddd", "aaa"]
+    assert wrapped["pattern"] == pattern_of("aaa")
+
+    # Only one unsolved group remains: it is targeted again rather than repeating the
+    # wrap search (an identical payload is expected here, and only here).
+    lone_session = ConexiuniSession(
+        groups=groups,
+        order=order,
+        solved=["aaa", "bbb", "ccc"],
+        clued_categories=["ddd"],
+    )
+    lone = _next_clue(lone_session)
+    assert lone_session.clued_categories == ["ddd", "ddd"]
+    assert lone["pattern"] == pattern_of("ddd")
+
+
+def test_score_and_share_reflect_two_clue_penalties() -> None:
+    c, b, groups = _groups_for()
+    gid = b["game_id"]
+    for index in range(3):
+        _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": _wrong_cross_group(groups, index)})
+    c.post(f"{BASE}/games/{gid}/clue")
+    c.post(f"{BASE}/games/{gid}/clue")
+
+    last = None
+    for members in groups.values():
+        last = _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": members}).json()
+
+    assert last["won"] is True
+    assert last["score"] == 50  # three mistakes (750 pts) + two clue penalties (200 pts)
+    assert last["share"].startswith("cat_de_roman_esti · Conexiuni · ")
+    assert "3 greseli" in last["share"]
+    assert "indiciu x2" in last["share"]
+
+
 # --------------------------------------------------------------------- input hardening
 def test_guess_rejects_empty_and_malformed_bodies() -> None:
     c = make_client()

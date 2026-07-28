@@ -39,6 +39,16 @@ const RECENT_CAP = 50;
 const PUZZLE_CAP = 100;
 const DERIVED_STARTER_COMPLETIONS = 3;
 const DAILY_CIRCUIT_SCORE_CAP = 1_000;
+/** Reserved key inside the same payload; never a game key, so it's excluded from GAME_CAP. */
+const STREAK_KEY = "_streak";
+/** Sanity bound only — a real streak never approaches this. */
+const DAILY_STREAK_CAP = 20_000;
+
+/** Bounded local daily-streak record: consecutive calendar days with >=1 daily completion. */
+interface DailyStreakRecord {
+  lastDate: string;
+  length: number;
+}
 
 export type Board = Record<string, GameRecord>;
 export type DerivedStarterGame = "intrusul" | "perechi";
@@ -71,19 +81,27 @@ export interface GameScoreEntry extends ScoreEntry {
   game: string;
 }
 
-function load(): Board {
+function loadRaw(): Record<string, unknown> {
   if (typeof localStorage === "undefined") return {};
   try {
-    return normalizeBoard(JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"));
+    const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    return isRecord(parsed) ? parsed : {};
   } catch {
     return {};
   }
 }
 
-function save(board: Board): void {
+function load(): Board {
+  return normalizeBoard(loadRaw());
+}
+
+/** `streak` is written verbatim (undefined omits the key, preserving nothing). */
+function save(board: Board, streak?: unknown): void {
   if (typeof localStorage === "undefined") return;
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(board));
+    const payload: Record<string, unknown> = { ...board };
+    if (streak !== undefined) payload[STREAK_KEY] = streak;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
   } catch {
     /* best-effort */
   }
@@ -114,7 +132,8 @@ export function recordScore(
   detail: string,
   options: RecordScoreOptions = {},
 ): RecordOutcome {
-  const board = load();
+  const raw = loadRaw();
+  const board = normalizeBoard(raw);
   const rec: GameRecord = board[game] ?? {
     best: null,
     played: 0,
@@ -154,7 +173,12 @@ export function recordScore(
     rec.puzzles = capPuzzles(rec.puzzles);
   }
   board[game] = rec;
-  save(board);
+  // Local daily streak: advance only on a valid daily completion (any game counts).
+  const dailyDay = entry.daily && isDailyKey(entry.daily) ? entry.daily : null;
+  const streak = dailyDay
+    ? advanceStreak(normalizeStreak(raw[STREAK_KEY], board), dailyDay)
+    : raw[STREAK_KEY];
+  save(board, streak);
   return { isBest, isPuzzleBest, prev, prevPuzzle };
 }
 
@@ -174,6 +198,21 @@ export function needsDerivedStarter(game: DerivedStarterGame): boolean {
     (!record.nonDailyWon &&
       record.nonDailyCompletions < DERIVED_STARTER_COMPLETIONS)
   );
+}
+
+/**
+ * Bounded local daily-streak length for `today` (YYYY-MM-DD, caller-supplied like
+ * `buildDailyCircuit`). A streak stays valid through the day after its last completion
+ * (so it isn't shown as broken before the player has had a chance to play today) and
+ * reads 0 once a full calendar day has passed with no completion.
+ */
+export function getDailyStreak(today: string): number {
+  const raw = loadRaw();
+  const streak = normalizeStreak(raw[STREAK_KEY], normalizeBoard(raw));
+  if (!streak.lastDate || !isDailyKey(today)) return 0;
+  const gap = daysBetween(streak.lastDate, today);
+  if (!Number.isFinite(gap) || gap < 0 || gap > 1) return 0;
+  return streak.length;
 }
 
 export function bestPuzzleScore(game: string, puzzleKey: string | null | undefined): ScoreEntry | null {
@@ -270,7 +309,11 @@ export function importScores(raw: string): ImportOutcome {
   const incoming = normalizeBoard(
     isRecord(parsed) && isRecord(parsed.games) ? parsed.games : parsed,
   );
-  const current = load();
+  const existingRaw = loadRaw();
+  const current = normalizeBoard(existingRaw);
+  // Snapshot the local streak before merging. If this device has legacy daily rows but
+  // no explicit streak record, normalize them now; imported rows must never create one.
+  const localStreak = normalizeStreak(existingRaw[STREAK_KEY], current);
   let entries = 0;
 
   for (const [game, rec] of Object.entries(incoming)) {
@@ -300,7 +343,8 @@ export function importScores(raw: string): ImportOutcome {
     };
   }
 
-  save(current);
+  // The daily streak is local-device state, not imported/exported history.
+  save(current, localStreak);
   return { games: Object.keys(incoming).length, entries };
 }
 
@@ -311,7 +355,10 @@ export function clearScores(): void {
 function normalizeBoard(value: unknown): Board {
   if (!isRecord(value)) return {};
   const board: Board = {};
-  for (const [game, rawRec] of Object.entries(value).slice(0, GAME_CAP)) {
+  const gameEntries = Object.entries(value)
+    .filter(([key]) => key !== STREAK_KEY)
+    .slice(0, GAME_CAP);
+  for (const [game, rawRec] of gameEntries) {
     if (!isRecord(rawRec)) continue;
     const recent = Array.isArray(rawRec.recent)
       ? rawRec.recent.map(normalizeEntry).filter((x): x is ScoreEntry => Boolean(x))
@@ -462,6 +509,59 @@ function isDailyKey(value: unknown): value is string {
     31,
   ];
   return day <= daysInMonth[month - 1]!;
+}
+
+/** Whole calendar days from `a` to `b` (both YYYY-MM-DD); NaN when either is malformed. */
+function daysBetween(a: string, b: string): number {
+  const parse = (value: string): number => {
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+    if (!match) return NaN;
+    return Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+  };
+  return Math.round((parse(b) - parse(a)) / 86_400_000);
+}
+
+/** Validated streak, else a conservative recompute from retained daily entries, else zero. */
+function normalizeStreak(value: unknown, board: Board): DailyStreakRecord {
+  if (isRecord(value) && isNonNegativeInteger(value.length)) {
+    if (value.lastDate === "" && value.length === 0) return { lastDate: "", length: 0 };
+    if (isDailyKey(value.lastDate)) {
+      return { lastDate: value.lastDate, length: Math.min(DAILY_STREAK_CAP, value.length) };
+    }
+  }
+  return recomputeStreakFromBoard(board);
+}
+
+/** Longest run of consecutive calendar days ending on the most recent retained daily entry. */
+function recomputeStreakFromBoard(board: Board): DailyStreakRecord {
+  const days = new Set<string>();
+  for (const record of Object.values(board)) {
+    for (const entry of retainedScoreEntries(record)) {
+      if (entry.daily && isDailyKey(entry.daily)) days.add(entry.daily);
+    }
+  }
+  if (days.size === 0) return { lastDate: "", length: 0 };
+  const sorted = [...days].sort();
+  const mostRecent = sorted[sorted.length - 1]!;
+  let length = 1;
+  let cursor = mostRecent;
+  for (let i = sorted.length - 2; i >= 0; i -= 1) {
+    const candidate = sorted[i]!;
+    if (daysBetween(candidate, cursor) !== 1) break;
+    length += 1;
+    cursor = candidate;
+  }
+  return { lastDate: mostRecent, length };
+}
+
+/** Same day = no-op, next day = +1, a gap resets to 1; an out-of-order older day is ignored. */
+function advanceStreak(current: DailyStreakRecord, day: string): DailyStreakRecord {
+  if (!current.lastDate) return { lastDate: day, length: 1 };
+  const gap = daysBetween(current.lastDate, day);
+  if (gap === 0) return current;
+  if (gap === 1) return { lastDate: day, length: Math.min(DAILY_STREAK_CAP, current.length + 1) };
+  if (gap < 0) return current;
+  return { lastDate: day, length: 1 };
 }
 
 function boundedStarterCompletions(value: unknown): number {

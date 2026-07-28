@@ -70,6 +70,8 @@ export default function Perechi({ onExit, onToast }: Props) {
   const finished = Boolean(state?.won || state?.lost);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const best = useMemo(() => bestScore(GAME_KEY), [state]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const starterVisible = useMemo(() => needsDerivedStarter(GAME_KEY), [state]);
   const exitSafely = useCallback(() => {
     if (!startInFlight.current) onExit();
   }, [onExit]);
@@ -340,7 +342,16 @@ export default function Perechi({ onExit, onToast }: Props) {
             tag={DEF.tag}
             accent={DEF.accent}
             glow={DEF.glow}
-            description={<p style={{ margin: 0 }}>Opt cuvinte ascund patru perechi cu sens.</p>}
+            description={
+              <>
+                <p style={{ margin: 0 }}>Opt cuvinte ascund patru perechi cu sens.</p>
+                {starterVisible && (
+                  <p className="faint" style={{ margin: "6px 0 0", fontSize: "0.82rem" }}>
+                    Primele runde sunt mai blânde. Câștigă una și deblochezi tot catalogul.
+                  </p>
+                )}
+              </>
+            }
             steps={[
               { icon: "👆", label: "Atinge un cuvânt" },
               { icon: "👆", label: "Atinge perechea" },
@@ -514,6 +525,11 @@ export default function Perechi({ onExit, onToast }: Props) {
               onExit={exitSafely}
             >
               <div className="perechi-solution">
+                {!state.won && (
+                  <p style={{ margin: "0 0 2px" }}>
+                    Ai găsit {state.solved_count} din 4 perechi.
+                  </p>
+                )}
                 {state.solution.map((pair) => (
                   <span key={pair.tiles.map((tile) => tile.id).join("+")}>
                     <strong>{pair.label}</strong>:{" "}

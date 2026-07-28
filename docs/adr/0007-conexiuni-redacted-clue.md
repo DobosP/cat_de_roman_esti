@@ -1,7 +1,7 @@
 # ADR-0006: Conexiuni Redacted Clue
 
 Date: 2026-07-04
-Status: accepted
+Status: accepted; one-clue limit superseded-by ADR-0062
 
 ## Decision
 Conexiuni may offer one server-authored clue after two mistakes: a redacted label pattern

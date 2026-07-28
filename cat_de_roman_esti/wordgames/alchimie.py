@@ -72,7 +72,16 @@ TARGET_SALIENCE_FLOOR = 0.4
 # Greu targets can otherwise sprawl very deep (gen 7+); cap so a game stays finishable.
 GREU_MAX_GENERATION = 5
 # How many consecutive fruitless combines before a gentle nudge becomes available.
-NUDGE_AFTER_FRUITLESS = 3
+NUDGE_AFTER_FRUITLESS = 2
+# A deliberately sparse recipe space (ADR-0044) makes "nothing new" the common reply, so
+# after this many TOTAL fruitless combines every barren answer also carries one bounded,
+# rotating whisper. The whispers describe strategy only — never a recipe, target, or concept.
+WHISPER_AFTER_FRUITLESS = 4
+DEAD_PAIR_WHISPERS = (
+    "Încearcă perechi din aceeași temă.",
+    "Combină un element descoperit cu unul de start.",
+    "Indiciul te poate debloca.",
+)
 # Sparse projection bounds.  Four routes keep replay varied without reopening the whole
 # category closure; two extra actions let a board expose alternate near-optimal routes.
 MAX_TARGET_ROUTES = 4
@@ -151,6 +160,8 @@ class AlchimieSession:
     moves: int = 0
     # Consecutive combines that discovered nothing — drives the nudge offer.
     fruitless_streak: int = 0
+    # Every fruitless combine of this session — drives the free dead-pair whisper.
+    fruitless_total: int = 0
     # Number of hints (nudges) the player has revealed; each costs a little score.
     hints_used: int = 0
     # Player- or server-selected board theme + curated-pack provenance (None for mined games).
@@ -846,6 +857,18 @@ def _state_payload(game_id: str, session: AlchimieSession) -> dict[str, object]:
     return payload
 
 
+def _dead_pair_whisper(session: AlchimieSession) -> str | None:
+    """Rotating strategy whisper for a long dry spell, or None while it is still short.
+
+    Deterministic in the fruitless count and deliberately generic: it never names a
+    recipe, an undiscovered concept, or the target.
+    """
+    if session.fruitless_total < WHISPER_AFTER_FRUITLESS:
+        return None
+    index = (session.fruitless_total - WHISPER_AFTER_FRUITLESS) % len(DEAD_PAIR_WHISPERS)
+    return DEAD_PAIR_WHISPERS[index]
+
+
 # --------------------------------------------------------------------------- endpoints
 class CreateGameView(ContractAPIView):
     authentication_classes = [OptionalSessionAuth]
@@ -988,9 +1011,13 @@ class CombineView(ContractAPIView):
             session.fruitless_streak = 0
         else:
             session.fruitless_streak += 1
+            session.fruitless_total += 1
 
         if not discovered:
             message = "Nicio combinatie noua."
+            whisper = _dead_pair_whisper(session)
+            if whisper:
+                message += f" {whisper}"
         elif session.target in discovered:
             message = f"Ai descoperit tinta: {svc.label(session.target)}!"
         elif len(discovered) == 1:
@@ -1084,6 +1111,7 @@ class ResetGameView(ContractAPIView):
         session.order.clear()
         session.moves = 0
         session.fruitless_streak = 0
+        session.fruitless_total = 0
         session.hints_used = 0
         session.attempted_pairs.clear()
         for s in session.seeds:

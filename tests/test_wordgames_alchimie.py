@@ -489,6 +489,69 @@ def _force_fruitless(client: Client, state: dict) -> dict:
     return state
 
 
+def _combine(client: Client, gid: str, pair: tuple[str, str]) -> dict:
+    return client.post(
+        f"{BASE}/games/{gid}/combine",
+        {"a": pair[0], "b": pair[1]},
+        content_type="application/json",
+    ).json()
+
+
+def test_nudge_unlocks_after_two_fruitless_combines(client: Client) -> None:
+    """A stuck player reaches the hint one combine sooner than the V41 threshold."""
+    assert A.NUDGE_AFTER_FRUITLESS == 2
+    state = _create(client, seed=7)
+    gid = state["game_id"]
+    session = A.store.get(gid)
+    assert session is not None
+    pairs = _barren_owned_pairs(session, [i["id"] for i in state["inventory"]])
+    assert len(pairs) >= A.NUDGE_AFTER_FRUITLESS
+
+    for count, pair in enumerate(pairs[: A.NUDGE_AFTER_FRUITLESS], start=1):
+        state = _combine(client, gid, pair)
+        assert state["discovered"] == []
+        assert state["hint_available"] is (count >= A.NUDGE_AFTER_FRUITLESS)
+    assert client.post(f"{BASE}/games/{gid}/hint").status_code == 200
+
+
+def test_dead_pair_whisper_starts_late_rotates_and_stays_generic(
+    client: Client,
+) -> None:
+    """A long dry spell earns free strategy copy that names no recipe, concept, or target."""
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    needed = A.WHISPER_AFTER_FRUITLESS + len(A.DEAD_PAIR_WHISPERS)
+    state = _create(client, seed=7)
+    gid = state["game_id"]
+    session = A.store.get(gid)
+    assert session is not None
+    pairs = _barren_owned_pairs(session, [i["id"] for i in state["inventory"]])
+    assert len(pairs) >= needed, "expected enough barren pairs to wrap the rotation"
+
+    messages = [_combine(client, gid, pair)["message"] for pair in pairs[:needed]]
+    # The first few dead pairs stay silent; the whisper is for a genuine dry spell.
+    early = messages[: A.WHISPER_AFTER_FRUITLESS - 1]
+    assert early == ["Nicio combinatie noua."] * len(early)
+
+    late = messages[A.WHISPER_AFTER_FRUITLESS - 1 :]
+    whispers = [message.removeprefix("Nicio combinatie noua. ") for message in late]
+    assert all(message.startswith("Nicio combinatie noua. ") for message in late)
+    # Deterministic rotation that wraps back to the first whisper.
+    assert whispers == [
+        A.DEAD_PAIR_WHISPERS[index % len(A.DEAD_PAIR_WHISPERS)]
+        for index in range(len(late))
+    ]
+    label = get_service().label(session.target)
+    for message in late:
+        assert session.target not in message
+        assert label not in message
+
+    # Reset restarts the game, so the dry spell (and its whisper) starts over.
+    client.post(f"{BASE}/games/{gid}/reset")
+    assert session.fruitless_total == 0
+    assert _combine(client, gid, pairs[0])["message"] == "Nicio combinatie noua."
+
+
 def test_repeated_barren_pair_is_authoritative_free_and_resettable(
     client: Client,
 ) -> None:
