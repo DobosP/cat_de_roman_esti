@@ -41,7 +41,7 @@ test("first-time players see games without an empty history wall", () => {
 test("the existing responsive grid keeps one-column phone cards", () => {
   assert.match(
     css,
-    /\.games-grid \{[\s\S]*?grid-template-columns: repeat\(auto-fit, minmax\(min\(100%, 240px\), 1fr\)\)/,
+    /\.games-grid \{[\s\S]*?grid-template-columns: repeat\(auto-fit, minmax\(min\(100%, 320px\), 1fr\)\)/,
   );
   assert.match(css, /@media \(max-width: 640px\)[\s\S]*?\.game-card \{\s*padding: 18px/);
 });

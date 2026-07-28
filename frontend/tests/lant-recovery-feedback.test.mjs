@@ -83,6 +83,31 @@ test("Lanț renders coarse move progress and highlights recommended undo", () =>
   assert.match(screen, /Înapoi · recomandat/);
 });
 
+test("Lanț renders the directional progress cue for any server-sent difficulty, including normal (ADR-0046)", () => {
+  // The progress cue is driven only by whether the server attached `progress` to the
+  // move response (usor/normal); the screen never re-gates rendering on difficulty.
+  const progressBlock = screen.match(
+    /\{progress \? \([\s\S]*?\) : null\}/,
+  );
+  assert.ok(progressBlock, "expected a progress-gated render block");
+  assert.doesNotMatch(progressBlock[0], /difficulty/);
+  assert.match(screen, /setProgress\(res\.progress \?\? null\)/);
+});
+
+test("Lanț intro discloses the corridor/detour mix, free undo, free typing, and the 64-move cap", () => {
+  assert.match(screen, /const \[showHow, setShowHow\] = useState\(false\)/);
+  assert.match(screen, /className="lant-intro-disclosure-toggle"/);
+  assert.match(screen, /aria-expanded=\{showHow\}/);
+  assert.match(screen, /aria-controls="lant-intro-disclosure"/);
+  assert.match(screen, /onClick=\{\(\) => setShowHow\(\(v\) => !v\)\}/);
+  assert.match(screen, /Cum funcționează/);
+  assert.match(screen, /showHow && \(/);
+  assert.match(screen, /amestecă drumul optim cu ocoluri sigure/);
+  assert.match(screen, /Înapoi e gratuit și nelimitat/);
+  assert.match(screen, /Poți scrie orice concept legat/);
+  assert.match(screen, /64 de mutări pe lanț/);
+});
+
 test("Lanț renders progressive direction, alternatives, and one-hop help", () => {
   assert.match(screen, /hint\.stage === "direction"/);
   assert.match(screen, /hint\.stage === "alternatives"/);

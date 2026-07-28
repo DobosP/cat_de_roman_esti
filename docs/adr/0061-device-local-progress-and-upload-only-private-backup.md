@@ -8,7 +8,7 @@
 > free of both landed and in-flight claims.
 
 Date: 2026-07-24
-Status: accepted
+Status: accepted; no-persisted-daily-aggregate rule superseded-by ADR-0064 for `_streak` only
 
 ## Decision
 

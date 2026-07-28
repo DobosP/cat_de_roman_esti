@@ -72,6 +72,12 @@ CONEXIUNI_GROUP_SIZE = 4
 # or two instances every day, so the daily stays mined until content lands.
 CURATED_DAILY_MIN_POOL = 8
 
+# A category-scoped daily needs its own (smaller) variety floor: a shelf of one or two
+# boards would otherwise serve the identical instance to that category forever. Below
+# this floor selection declines so each game can keep its category-aware mined fallback
+# or themed-unavailable response; it must never relabel an unscoped board as the theme.
+CURATED_CATEGORY_DAILY_MIN_POOL = 4
+
 
 # --------------------------------------------------------------------------- items
 @dataclass(frozen=True)
@@ -514,10 +520,16 @@ class GamesPack:
 
         The shared (category-less) daily returns None below
         ``CURATED_DAILY_MIN_POOL`` so a thin pool cannot repeat the same instance
-        every day; an explicit category request has no floor — the player asked
-        for that shelf."""
+        every day. A category request has its own smaller floor
+        (``CURATED_CATEGORY_DAILY_MIN_POOL``); a shelf below it would pin one board
+        for that category forever, so curated selection declines and leaves the caller's
+        category-aware fallback in control. An explicit ``min_pool`` keeps the exact
+        floor it asks for."""
         if min_pool is None:
-            min_pool = 1 if category is not None else CURATED_DAILY_MIN_POOL
+            if category is not None:
+                min_pool = CURATED_CATEGORY_DAILY_MIN_POOL
+            else:
+                min_pool = CURATED_DAILY_MIN_POOL
         pool = self.pool(game, category=category, difficulty=difficulty)
         floor = max(1, min_pool)
         preferred = [item for item in pool if item._pilot_eligible]

@@ -967,7 +967,11 @@ def test_hint_strength_beats_salience(monkeypatch):
     assert h["stage"] == "hop"
 
 
-def test_hint_stages_reset_after_a_move(monkeypatch):
+def test_hint_stages_persist_across_a_move(monkeypatch):
+    """Help consumed this session persists (ADR-0046 update): a move that follows a
+    fully-escalated hint ladder does not restart it at stage one — the player keeps
+    the help level they already earned. Each hint's CONTENT is still computed fresh
+    from the current position at request time."""
     svc = _branchy_hint_service()
     monkeypatch.setattr(lant, "get_service", lambda: svc)
     session = LantSession(start="start", target="target", optimal=2, chain=["start"])
@@ -983,6 +987,7 @@ def test_hint_stages_reset_after_a_move(monkeypatch):
     third = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
     assert third["stage"] == "hop"
     assert third["hint"]["id"] == "tight"
+    assert session.hint_requests == 3
 
     mv = c.post(
         f"/api/wordgames/lant/games/{gid}/move",
@@ -990,9 +995,11 @@ def test_hint_stages_reset_after_a_move(monkeypatch):
         content_type="application/json",
     ).json()
     assert mv["ok"] is True
+    assert session.hint_requests == 3
     next_position = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
-    assert next_position["stage"] == "direction"
-    assert next_position["hint"] is None
+    # Still capped at the terminal stage; content is recomputed for the new position.
+    assert next_position["stage"] == "hop"
+    assert next_position["hint"] is not None
 
 
 def test_hint_on_won_game_returns_message():
@@ -1395,7 +1402,30 @@ def test_easy_closer_and_won_reset_direction_streak(monkeypatch):
     assert session.non_improving_moves == 0
 
 
-def test_normal_moves_do_not_emit_automatic_direction(monkeypatch):
+def test_greu_moves_do_not_emit_automatic_direction(monkeypatch):
+    """Greu omits the automatic coarse progress object (ADR-0062)."""
+    svc = _direction_progress_service()
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+    session = LantSession(
+        start="start",
+        target="target",
+        optimal=2,
+        difficulty="greu",
+        chain=["start"],
+    )
+    gid = store.create(session)
+    body = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": "LATERAL"},
+        content_type="application/json",
+    ).json()
+    assert "progress" not in body
+    assert body["backtrack_recommended"] is False
+    assert session.non_improving_moves == 0
+
+
+def test_normal_moves_emit_automatic_direction(monkeypatch):
+    """Directional feedback (ADR-0046) now plays on usor AND normal, not usor only."""
     svc = _direction_progress_service()
     monkeypatch.setattr(lant, "get_service", lambda: svc)
     session = LantSession(
@@ -1411,9 +1441,51 @@ def test_normal_moves_do_not_emit_automatic_direction(monkeypatch):
         {"text": "LATERAL"},
         content_type="application/json",
     ).json()
-    assert "progress" not in body
+    assert body["progress"] == {
+        "kind": "lateral",
+        "message": "Tot cam la aceeași distanță.",
+    }
+    # The internal streak is still tracked at normal, but the recommended-undo pill
+    # remains a usor-only surface (unchanged scope).
+    assert session.non_improving_moves == 1
     assert body["backtrack_recommended"] is False
-    assert session.non_improving_moves == 0
+
+
+@pytest.mark.parametrize("difficulty", ["normal", "greu"])
+def test_dead_end_note_appears_for_normal_and_greu(monkeypatch, difficulty):
+    """The early dead-end warning note (ADR-0022) fires outside usor regardless of
+    whether the progress object (ADR-0046) is also attached at that difficulty."""
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    nodes = [
+        {"id": n, "label_ro": n.upper(), "category": "test"}
+        for n in ("start", "mid", "dead", "target")
+    ]
+    edges = [
+        {"id": "e1", "src_id": "start", "dst_id": "mid", "bidirectional": 1},
+        {"id": "e2", "src_id": "mid", "dst_id": "target", "bidirectional": 1},
+        {"id": "e3", "src_id": "mid", "dst_id": "dead", "bidirectional": 0},
+    ]
+    svc = WordGameService(Graph.from_records(nodes, edges))
+    monkeypatch.setattr(lant, "get_service", lambda: svc)
+
+    session = LantSession(
+        start="start",
+        target="target",
+        optimal=2,
+        difficulty=difficulty,
+        chain=["start", "mid"],
+    )
+    gid = store.create(session)
+    body = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": "DEAD"},
+        content_type="application/json",
+    ).json()
+    assert body["ok"] is True
+    assert body["dead_end"] is True
+    assert "fundătură" in body["message"]
 
 
 def test_move_into_a_dead_end_sets_flag_and_warns(monkeypatch):
@@ -1502,11 +1574,13 @@ def test_hint_dead_end_names_a_reachable_chain_ancestor(monkeypatch):
     assert svc.label("mid") in body["message"]
 
 
-def test_hint_recommends_free_undo_when_only_shortest_hop_was_visited(monkeypatch):
+def test_hint_recommends_free_undo_and_escalation_persists_after_undo(monkeypatch):
     """A directed detour can stay target-reachable only through its prior node.
 
-    Revisited nodes remain absent from the public hop menu, but help must never claim that
-    no route exists: it explicitly points to free undo and resets escalation after undo.
+    Revisited nodes remain absent from the public hop menu, but help must never claim
+    that no route exists: it explicitly points to free undo. The escalation counter
+    persists across that undo (it measures help consumed this session, not chain
+    position), so the very next hint continues escalating rather than restarting.
     """
     from cat_de_roman_esti.graph import Graph
     from cat_de_roman_esti.wordgames.service import WordGameService
@@ -1543,9 +1617,11 @@ def test_hint_recommends_free_undo_when_only_shortest_hop_was_visited(monkeypatc
 
     undone = c.post(f"/api/wordgames/lant/games/{gid}/undo").json()
     assert undone["current"]["id"] == "mid"
-    assert session.hint_requests == 0
+    # Undo no longer resets the counter: one hint was already spent this session.
+    assert session.hint_requests == 1
     fresh_hint = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
-    assert fresh_hint["stage"] == "direction"
+    # Escalates to stage two instead of restarting at stage one.
+    assert fresh_hint["stage"] == "alternatives"
 
 
 def test_hint_prefers_a_longer_unvisited_safe_route_before_backtracking(monkeypatch):
@@ -1599,8 +1675,15 @@ def test_hint_prefers_a_longer_unvisited_safe_route_before_backtracking(monkeypa
     assert third["hint"]["id"] == "scenic"
 
 
-def test_hint_escalation_counter_is_capped_and_resets_during_revisits(monkeypatch):
-    """Repeated A↔B walks retain one small counter, not every historical chain tuple."""
+def test_hint_escalation_counter_is_capped_and_persists_through_moves_and_undo(
+    monkeypatch,
+):
+    """Repeated A↔B walks retain one small counter, not every historical chain tuple.
+
+    Help consumed this session now persists (ADR-0046 update): once the terminal
+    stage is reached it stays reached through any number of further moves or undos,
+    and only a brand-new game resets it back to zero.
+    """
     from cat_de_roman_esti.graph import Graph
     from cat_de_roman_esti.wordgames.service import WordGameService
 
@@ -1618,14 +1701,14 @@ def test_hint_escalation_counter_is_capped_and_resets_during_revisits(monkeypatc
     session = LantSession(start="a", target="target", optimal=1, chain=["a"])
     gid = store.create(session)
 
-    for walk in range(24):
-        stages = [
-            c.post(f"/api/wordgames/lant/games/{gid}/hint").json()["stage"]
-            for _ in range(4)
-        ]
-        assert stages == ["direction", "alternatives", "hop", "hop"]
-        assert session.hint_requests == 3
+    stages = [
+        c.post(f"/api/wordgames/lant/games/{gid}/hint").json()["stage"]
+        for _ in range(4)
+    ]
+    assert stages == ["direction", "alternatives", "hop", "hop"]
+    assert session.hint_requests == 3
 
+    for walk in range(24):
         next_node = "b" if walk % 2 == 0 else "a"
         moved = c.post(
             f"/api/wordgames/lant/games/{gid}/move",
@@ -1633,9 +1716,20 @@ def test_hint_escalation_counter_is_capped_and_resets_during_revisits(monkeypatc
             content_type="application/json",
         ).json()
         assert moved["ok"] is True
-        assert session.hint_requests == 0
+        # A move never resets help already consumed this session.
+        assert session.hint_requests == 3
 
-    session.hint_requests = 3
+        # Once capped, further hints stay at the terminal stage instead of re-teaching
+        # direction/alternatives from a stale, reset escalation.
+        again = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
+        assert again["stage"] == "hop"
+        assert session.hint_requests == 3
+
     c.post(f"/api/wordgames/lant/games/{gid}/undo")
-    assert session.hint_requests == 0
+    # Undo never resets it either.
+    assert session.hint_requests == 3
     assert isinstance(session.hint_requests, int)
+
+    # Only a brand-new game resets the counter.
+    fresh = LantSession(start="a", target="target", optimal=1, chain=["a"])
+    assert fresh.hint_requests == 0

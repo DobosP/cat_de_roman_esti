@@ -29,7 +29,7 @@ test("V38 lobby is six games in the tested fun-first order", () => {
   ]);
   assert.equal((games.match(/featured: true/g) ?? []).length, 1);
   assert.match(games, /key: "alchimie"[\s\S]*?featured: true/);
-  assert.match(home, /Șase jocuri românești/);
+  assert.match(home, /De la Ștefan cel Mare la Las Fierbinți/);
   assert.match(home, /Toate cele șase jocuri/);
   assert.match(html, /content="Cât de român ești\? Șase jocuri de cuvinte/);
   assert.doesNotMatch(html, /Patru jocuri/);

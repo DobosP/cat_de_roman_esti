@@ -13,6 +13,7 @@ export type Temperature =
   | "Cald"
   | "Caldut"
   | "Rece"
+  | "Foarte rece"
   | "Inghetat";
 
 export interface Guess {
@@ -106,6 +107,11 @@ export interface GuessRejected {
   message: string;
   /** Bounded, server-filtered labels; the hidden target is never included. */
   suggestions: string[];
+  /** Set when a fuzzy correction awaits the player instead of being played for them. */
+  needs_confirmation?: true;
+  /** What the server understood; play it by resubmitting with `resolved_token`. */
+  resolved_label?: string;
+  resolved_token?: string;
   guesses: Guess[];
   attempts: number;
   won: boolean;
@@ -183,14 +189,19 @@ export function getGame(gameId: string): Promise<ContextoState> {
   );
 }
 
-/** POST /games/{id}/guess — submit a concept; server scores closeness. */
+/** POST /games/{id}/guess — submit a concept; server scores closeness.
+ *
+ * `confirm` echoes a `resolved_token` the server asked about, which accepts that fuzzy
+ * correction and spends the attempt; omitting it keeps a typo free.
+ */
 export function submitGuess(
   gameId: string,
   text: string,
+  confirm?: string,
 ): Promise<GuessResult> {
   return postJson<GuessResult>(
     `${BASE}/games/${encodeURIComponent(gameId)}/guess`,
-    { text },
+    confirm ? { text, confirm } : { text },
   );
 }
 

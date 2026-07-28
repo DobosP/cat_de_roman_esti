@@ -1,8 +1,19 @@
+import tomllib
+from pathlib import Path
+
 import pytest
 from django.conf import settings
 from django.test import Client, override_settings
 
 from cat_de_roman_esti.web.settings import _env_positive_int, _vite_asset_is_immutable
+
+
+def test_vite_manifest_is_explicit_wheel_package_data() -> None:
+    config = tomllib.loads(
+        (Path(__file__).resolve().parents[1] / "pyproject.toml").read_text(encoding="utf-8")
+    )
+    package_data = config["tool"]["setuptools"]["package-data"]["cat_de_roman_esti.web"]
+    assert "static/.vite/manifest.json" in package_data
 
 
 def test_vite_hashed_assets_are_immutable() -> None:

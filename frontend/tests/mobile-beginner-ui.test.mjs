@@ -78,13 +78,17 @@ test("global shortcuts ignore focused controls instead of double-submitting", ()
 });
 
 test("touch users get visible rank meaning and important feedback is announced", () => {
-  assert.match(caldRece, /Număr mai mic = mai aproape · #1 = răspunsul/);
+  assert.match(caldRece, /className="contexto-legend-toggle"/);
+  assert.match(caldRece, /#1 este ținta; un număr mai mic/);
   assert.match(alchimie, /lastMessage[\s\S]*?role="status"[\s\S]*?aria-live="polite"/);
   assert.match(
     lant,
     /hint && \(hint\.stage \|\| hint\.hint\)[\s\S]*?role="status"[\s\S]*?aria-live="polite"/,
   );
-  assert.match(conexiuni, /state\?\.clues\.map\(\(clue\) => clue\.message\)/);
+  assert.match(
+    conexiuni,
+    /state\?\.clues\.map\(\(clue, index\) => \(\{ key: `clue-\$\{index\}`, message: clue\.message \}\)\)/,
+  );
   assert.match(conexiuni, /className="card connections-feedback col"/);
   assert.match(conexiuni, /role="status"\s*aria-live="polite"/);
 });

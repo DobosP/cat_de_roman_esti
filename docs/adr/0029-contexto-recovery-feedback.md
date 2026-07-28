@@ -1,7 +1,7 @@
 # ADR-0029: Cald sau Rece recovery is persistent and fill-only
 
 Date: 2026-07-16
-Status: accepted
+Status: accepted; direct non-target autocorrection assumption superseded-by ADR-0062
 
 ## Decision
 

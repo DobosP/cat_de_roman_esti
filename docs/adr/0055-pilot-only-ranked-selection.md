@@ -1,7 +1,7 @@
 # ADR-0055: Serve only critique-clean boards from a ranked bundled pack
 
 Date: 2026-07-24
-Status: accepted
+Status: accepted; category-daily floor superseded-by ADR-0063
 
 ## Decision
 

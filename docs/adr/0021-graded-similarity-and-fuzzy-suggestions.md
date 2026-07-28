@@ -1,7 +1,7 @@
 # ADR-0021: Graded Contexto similarity + fuzzy input suggestions
 
 Date: 2026-07-12
-Status: accepted
+Status: accepted; Contexto temperature thresholds superseded-by ADR-0062
 
 ## Decision
 Make the similarity/input feel of Cald sau Rece (Contexto) and Lanțul Cuvintelor smarter

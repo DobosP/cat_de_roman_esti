@@ -1013,25 +1013,41 @@ export default function Alchimie({
           </div>
         </section>
 
-        {/* Footer actions */}
-        <div className="row center wrap" style={{ gap: 12, marginTop: 8 }}>
-          <Button
-            type="button"
-            variant="secondary"
-            disabled={busy}
-            onClick={doReset}
-          >
-            ↻ Reia același joc
-          </Button>
-          <Button
-            type="button"
-            variant="secondary"
-            disabled={busy}
-            onClick={newGame}
-          >
-            ⚙ Schimbă opțiunile
-          </Button>
-        </div>
+        {/* Footer actions stay in-play only; ResultCard owns the terminal actions. */}
+        {!won && (
+          <div className="row center wrap" style={{ gap: 12, marginTop: 8 }}>
+            <Button
+              type="button"
+              variant="secondary"
+              disabled={busy}
+              onClick={doReset}
+            >
+              ↻ Reia același joc
+            </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              className="alchimie-other-board"
+              disabled={busy || loading}
+              onClick={() =>
+                void start({
+                  difficulty: state.difficulty,
+                  category: state.board_category ?? undefined,
+                })
+              }
+            >
+              ⚗ Alt joc
+            </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              disabled={busy}
+              onClick={newGame}
+            >
+              ⚙ Schimbă opțiunile
+            </Button>
+          </div>
+        )}
 
         {/* Win banner */}
         <AnimatePresence>
@@ -1048,7 +1064,7 @@ export default function Alchimie({
               onReplay={() =>
                 void start({
                   difficulty: state.difficulty,
-                  category: category ?? undefined,
+                  category: state.board_category ?? undefined,
                 })
               }
               onOptions={newGame}

@@ -671,7 +671,7 @@ input:focus-visible {
 
 .games-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 16px;
 }
 
@@ -1681,12 +1681,19 @@ input:focus-visible {
 }
 
 /* ===== V42 section: caldrece (builder-1 styles go here) ===== */
-
 /* ===== V42 section: lant (builder-2 styles go here) ===== */
+/* Intro disclosure: a real tap target that never demands the rules wall up front. */
+.lant-intro-disclosure {
+  font-size: 0.82rem;
+  text-align: left;
+}
 
 /* ===== V42 section: alchimie (builder-3 styles go here) ===== */
 
 /* ===== V42 section: conexiuni (builder-4 styles go here) ===== */
+/* Clue unlock/remaining hint on the Indiciu button: a small, muted suffix, not a
+   separate control (ADR-0007 clue economy). */
+.conexiuni-clue-status { font-size: 0.78em; opacity: 0.75; }
 
 /* ===== V42 section: derived-games (builder-5 styles go here) ===== */
 

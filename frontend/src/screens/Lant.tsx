@@ -121,6 +121,7 @@ export default function Lant({
   const [recovery, setRecovery] = useState<RecoveryFeedback | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>("usor");
   const [category, setCategory] = useState<string | null>(null);
+  const [showHow, setShowHow] = useState(false);
   const [scored, setScored] = useState<{
     score: number;
     isBest: boolean;
@@ -406,9 +407,30 @@ export default function Lant({
             accent={DEF.accent}
             glow={DEF.glow}
             description={
-              <p style={{ margin: 0 }}>
-                Ajungi la țintă prin concepte legate direct.
-              </p>
+              <div className="col" style={{ gap: 8 }}>
+                <p style={{ margin: 0 }}>
+                  Ajungi la țintă prin concepte legate direct.
+                </p>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  className="lant-intro-disclosure-toggle"
+                  aria-expanded={showHow}
+                  aria-controls="lant-intro-disclosure"
+                  onClick={() => setShowHow((v) => !v)}
+                >
+                  Cum funcționează <span aria-hidden>{showHow ? "▲" : "▼"}</span>
+                </Button>
+                {showHow && (
+                  <ul id="lant-intro-disclosure" className="lant-intro-disclosure faint">
+                    <li>Salturile afișate amestecă drumul optim cu ocoluri sigure.</li>
+                    <li>Înapoi e gratuit și nelimitat.</li>
+                    <li>Poți scrie orice concept legat — nu doar din listă.</li>
+                    <li>Limită: 64 de mutări pe lanț.</li>
+                  </ul>
+                )}
+              </div>
             }
             steps={[
               { icon: "👆", label: "Alege o legătură" },

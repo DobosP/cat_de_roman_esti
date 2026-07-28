@@ -12,6 +12,7 @@ import pytest
 
 from cat_de_roman_esti.data import DEFAULT_FIXTURE
 from cat_de_roman_esti.wordgames.packs import (
+    CURATED_CATEGORY_DAILY_MIN_POOL,
     DEFAULT_PACK,
     DEFAULT_RUBRIC,
     DEFAULT_RUBRIC_SHA256,
@@ -463,8 +464,45 @@ def test_daily_pilot_preference_respects_shared_floor_and_category_minimum():
     )
     assert GamesPack(preferred[:7]).pick_daily("contexto", "too-thin") is None
 
-    themed = GamesPack([preferred[0], reserve])
-    assert themed.pick_daily("contexto", "themed", category="istorie").id == preferred[0].id
+    # A themed shelf at its own (smaller) floor still answers with its own boards.
+    themed = GamesPack([*preferred[:4], reserve])
+    themed_ids = {item.id for item in preferred[:4]}
+    assert themed.pick_daily("contexto", "themed", category="istorie").id in themed_ids
+    # Below that floor curated selection declines and leaves a category-aware caller
+    # fallback in control.
+    thin_themed = GamesPack([preferred[0], reserve])
+    assert thin_themed.pick_daily("contexto", "themed", category="istorie") is None
+
+
+def test_category_daily_declines_below_its_variety_floor_without_crossing_themes():
+    """A one-board category shelf must not serve the identical daily forever (V42)."""
+    istorie = [_item(f"ct_ist_{index}") for index in range(4)]
+    stiinta = [_item(f"ct_sti_{index}", category="stiinta") for index in range(8)]
+    day = "2026-08-01"
+
+    stocked = GamesPack([*istorie, *stiinta])
+    picked = stocked.pick_daily("contexto", day, category="istorie")
+    assert picked is not None and picked.id in {item.id for item in istorie}
+
+    thin = GamesPack([istorie[0], *stiinta])
+    shared = thin.pick_daily("contexto", day)
+    assert shared is not None
+    assert shared.category == "stiinta"
+    assert thin.pick_daily("contexto", day, category="istorie") is None
+    # Ranked packs count the same way, and an explicit floor keeps its escape hatch.
+    ranked = GamesPack([istorie[0], *stiinta], ranked=True)
+    assert ranked.pick_daily("contexto", day, category="istorie") is None
+    assert (
+        thin.pick_daily("contexto", day, category="istorie", min_pool=1) == istorie[0]
+    )
+
+    # Same date -> same board on a sufficiently stocked themed shelf; a thin shelf
+    # deterministically keeps declining instead of crossing into another theme.
+    for _ in range(3):
+        assert stocked.pick_daily("contexto", day, category="istorie") == picked
+        assert thin.pick_daily("contexto", day, category="istorie") is None
+    other = stocked.pick_daily("contexto", "2026-08-02", category="istorie")
+    assert other == stocked.pick_daily("contexto", "2026-08-02", category="istorie")
 
 
 def test_ranked_daily_applies_floor_to_eligible_items_and_is_order_independent():
@@ -538,7 +576,10 @@ def test_shipped_ranked_inventory_exposes_reserves_but_never_selects_them():
                 else:
                     assert seeded is not None and seeded.id in eligible_ids
                     assert exhausted is not None and exhausted.id in eligible_ids
-                    assert daily is not None and daily.id in eligible_ids
+                    if len(eligible_ids) >= CURATED_CATEGORY_DAILY_MIN_POOL:
+                        assert daily is not None and daily.id in eligible_ids
+                    else:
+                        assert daily is None
 
     assert empty_eligible_shelves == {
         ("conexiuni", "gastronomie", "usor"),

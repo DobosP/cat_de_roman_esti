@@ -1,7 +1,7 @@
 # ADR-0027: Lanț recovery feedback is persistent and actionable
 
 Date: 2026-07-16
-Status: accepted
+Status: accepted; same-position alternatives trigger superseded-by ADR-0062
 
 ## Decision
 

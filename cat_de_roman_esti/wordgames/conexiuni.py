@@ -54,7 +54,7 @@ NUM_GROUPS = 4
 MAX_LIVES = 4
 BOARD_PICK_RETRIES = 16
 MIN_CLUE_MISTAKES = 2
-MAX_CLUES = 1
+MAX_CLUES = 2
 CLUE_SCORE_PENALTY = 100
 
 DIFFICULTIES = ("usor", "normal", "greu")
@@ -81,6 +81,10 @@ class ConexiuniSession:
     # exact labels, tile ids, or membership.
     clues: list[dict[str, str]] = field(default_factory=list)
     clues_used: int = 0
+    # Server-only memory of which categories were already targeted by a clue, used to
+    # pick the next one (alphabetically after the last) without ever leaving the
+    # session. Never serialized to a response.
+    clued_categories: list[str] = field(default_factory=list)
     # history of guesses (each a list of 4 ids) for the share grid
     history: list[list[str]] = field(default_factory=list)
     # Curated boards carry authored group labels (group key -> display label) and the
@@ -432,20 +436,37 @@ def _label_pattern(label: str) -> str:
     return "".join(out)
 
 
+def _clue_mistakes_needed(clues_used: int) -> int:
+    """Mistakes required to unlock the clue at ``clues_used`` (0-based): 2, then 3."""
+    return MIN_CLUE_MISTAKES + clues_used
+
+
 def _clue_available(session: ConexiuniSession) -> bool:
     return (
         not session.won
         and not session.lost
         and session.clues_used < MAX_CLUES
-        and session.mistakes >= MIN_CLUE_MISTAKES
+        and session.mistakes >= _clue_mistakes_needed(session.clues_used)
         and len(session.solved) < len(session.groups)
     )
 
 
 def _next_clue(session: ConexiuniSession) -> dict[str, str]:
-    """Pick a deterministic redacted label-pattern clue for one unsolved group."""
-    unsolved = [cat for cat in sorted(session.groups) if cat not in session.solved]
-    cat = unsolved[0]
+    """Pick a deterministic redacted label-pattern clue for one unsolved group.
+
+    The first clue targets the alphabetically-first unsolved group. A second clue
+    targets the unsolved group alphabetically after the one already clued, wrapping
+    around; if only one unsolved group remains, it is targeted again (never an
+    identical payload for the same group unless it is the only one left).
+    """
+    unsolved = sorted(cat for cat in session.groups if cat not in session.solved)
+    if session.clued_categories and len(unsolved) > 1:
+        prev = session.clued_categories[-1]
+        after = [cat for cat in unsolved if cat > prev]
+        cat = after[0] if after else unsolved[0]
+    else:
+        cat = unsolved[0]
+    session.clued_categories.append(cat)
     pattern = _label_pattern(_group_label(session, cat))
     return {
         "pattern": pattern,
@@ -510,8 +531,9 @@ class CreateGameView(ContractAPIView):
     @extend_schema(operation_id="conexiuni_create_game", tags=["conexiuni"])
     def post(self, request):
         """Start a game. Optional ``?category=`` serves a curated board for that theme
-        (503 when none is approved yet — Conexiuni boards cannot be mined per-category);
-        the daily prefers a curated board whenever one exists (ADR-0011)."""
+        (503 when unavailable — Conexiuni boards cannot be mined per-category). Dailies
+        use curated content once they meet the four-board scoped or eight-board shared
+        variety floor (ADR-0063)."""
         seed = query_int(request, "seed")
         difficulty = query_str(request, "difficulty", "normal")
         daily = query_str(request, "daily")
@@ -644,9 +666,10 @@ class ClueView(ContractAPIView):
         if session.won or session.lost:
             raise http_error(400, "Jocul s-a terminat")
         if session.clues_used >= MAX_CLUES:
-            raise http_error(400, "Indiciul a fost deja folosit")
-        if session.mistakes < MIN_CLUE_MISTAKES:
-            need = MIN_CLUE_MISTAKES - session.mistakes
+            raise http_error(400, "Indiciile au fost deja folosite")
+        needed = _clue_mistakes_needed(session.clues_used)
+        if session.mistakes < needed:
+            need = needed - session.mistakes
             raise http_error(
                 400,
                 f"Mai greseste {need} incercari inainte de indiciu.",

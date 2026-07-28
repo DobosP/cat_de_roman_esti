@@ -83,7 +83,7 @@ export interface MoveResult {
   moves?: number;
   won?: boolean;
   choices?: LantChoice[];
-  /** Easy-mode coarse direction only; never an exact distance or route marker. */
+  /** Easy/Normal coarse direction only; never an exact distance or route marker. */
   progress?: LantProgress;
   backtrack_recommended?: boolean;
   /** Present only when won === true. */
@@ -99,7 +99,7 @@ export interface HintResult {
   remaining?: number;
   /** How many distinct neighbours lie on a shortest path (>1 => you had a real choice). */
   alternatives?: number;
-  /** Named alternatives appear only after a second hint request from the same position. */
+  /** Named alternatives appear from the second voluntary-help stage in the session. */
   alternatives_labels?: string[];
   alternatives_choices?: LantChoice[];
   message?: string;
