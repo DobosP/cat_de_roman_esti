@@ -5,15 +5,20 @@ Consumes a directory of per-category generation output (the codex-fleet /
 verification pipeline of ADR-0011):
 
     <dir>/<category>/candidates.json       # nodes, edges, conexiuni/contexto/lant/alchimie
-    <dir>/<category>/verify_factual.json   # {"issues":[{"ref","severity","issue","correction"}]}
+    <dir>/<category>/verify_factual.json   # category, reviewed_refs, issues, coverage_note
     <dir>/<category>/verify_quality.json   # {"instances":[{"ref","scores","verdict","note"}]}
 
 Curation policy (quality over quantity):
+  * every raw node, edge and game instance must be named exactly once in the factual
+    ``reviewed_refs`` inventory; quality must contain exactly one row per instance;
+  * missing, partial, duplicate or category-mismatched verification aborts the whole
+    batch before graph or pack mutation;
   * factual ``block`` on a node -> the node, its edges and every instance touching
     it are dropped; ``block`` on an instance -> that instance is dropped;
-  * quality verdict ``keep`` / ``fix`` -> imported as ``status: pending``;
+  * unresolved factual ``fix`` issues or quality ``fix`` verdicts abort the batch;
+    factual ``block`` and quality ``drop`` are explicit, verified exclusions;
+  * quality verdict ``keep`` -> imported as ``status: pending``;
     ADR-0023's strict lint + two-agent judge gate is the only promotion path;
-    ``drop`` / missing / unknown -> not imported;
   * every surviving instance is re-derived against the MERGED graph (Lanț distance +
     branch floor, Alchimie exact action par + opening pairs, Contexto floors,
     Conexiuni board shape) — the generator's numbers are never trusted;
@@ -21,8 +26,7 @@ Curation policy (quality over quantity):
 
 Steps: merge accepted nodes/edges via densify_content.run() (fixture regenerated +
 validated + rolled back on failure), rebuild games_pack.json (both copies), run
-the pack validator, roll the pack back if it fails. A human-review report of every
-``fix``-severity factual issue is written next to the input dir.
+the pack validator, and roll the pack back if it fails.
 """
 
 from __future__ import annotations
@@ -32,6 +36,8 @@ import json
 import random
 import re
 import sys
+from collections import Counter
+from copy import deepcopy
 from pathlib import Path
 
 _REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -55,6 +61,9 @@ from cat_de_roman_esti.wordgames.service import WordGameService  # noqa: E402
 
 PACK_COPIES = (validate_games_pack.PACKAGE_PACK, validate_games_pack.TESTS_PACK)
 PREFIX = {"conexiuni": "cx", "contexto": "ct", "lant": "lt", "alchimie": "al"}
+FACTUAL_SEVERITIES = frozenset({"block", "fix", "note"})
+QUALITY_VERDICTS = frozenset({"keep", "fix", "drop"})
+EDGE_REF_RE = re.compile(r"^edge:(?P<src>\S+)->(?P<dst>\S+)$")
 
 # Generated nodes that duplicate an existing concept under another id: the new node
 # definition is dropped and every reference (edges, tiles, targets, seeds) is remapped
@@ -79,8 +88,272 @@ def _load(path: Path) -> dict:
 
 
 def candidate_import_status(verdict: str) -> str | None:
-    '''Stage pre-screened candidates pending; critique is the only promotion path.'''
-    return 'pending' if verdict in {'keep', 'fix'} else None
+    """Stage fully pre-screened candidates pending; critique is the promotion path."""
+    return "pending" if verdict == "keep" else None
+
+
+def _nonblank(value: object) -> str | None:
+    if not isinstance(value, str):
+        return None
+    return value if value.strip() else None
+
+
+def _reference(value: object) -> str | None:
+    value = _nonblank(value)
+    if value is None or value != value.strip() or any(char.isspace() for char in value):
+        return None
+    return value
+
+
+def _duplicate_values(values: list[str]) -> list[str]:
+    return sorted(value for value, count in Counter(values).items() if count > 1)
+
+
+def _load_object(path: Path, label: str, errors: list[str]) -> dict | None:
+    if not path.exists():
+        errors.append(f"{label}: missing {path.name}")
+        return None
+    try:
+        payload = _load(path)
+    except (OSError, json.JSONDecodeError) as exc:
+        errors.append(f"{label}: cannot read {path.name}: {exc}")
+        return None
+    if not isinstance(payload, dict):
+        errors.append(f"{label}: {path.name} must contain an object")
+        return None
+    return payload
+
+
+def _object_rows(
+    payload: dict,
+    key: str,
+    label: str,
+    errors: list[str],
+) -> list[dict]:
+    value = payload.get(key)
+    if not isinstance(value, list):
+        errors.append(f"{label}: {key} must be an array")
+        return []
+    rows: list[dict] = []
+    for idx, row in enumerate(value):
+        if not isinstance(row, dict):
+            errors.append(f"{label}: {key}[{idx}] must be an object")
+            continue
+        rows.append(row)
+    return rows
+
+
+def _raw_reference_inventory(
+    category: str,
+    candidate: dict,
+    errors: list[str],
+) -> tuple[set[str], set[str], set[str]]:
+    """Return all/node/instance references before any alias or block transformation."""
+    label = f"{category}/candidates.json"
+    refs: list[str] = []
+    node_refs: set[str] = set()
+    instance_refs: set[str] = set()
+
+    for idx, node in enumerate(_object_rows(candidate, "nodes", label, errors)):
+        node_id = _reference(node.get("id"))
+        if node_id is None:
+            errors.append(f"{label}: nodes[{idx}].id must be a nonblank string")
+            continue
+        refs.append(node_id)
+        node_refs.add(node_id)
+
+    for idx, edge in enumerate(_object_rows(candidate, "edges", label, errors)):
+        src = _reference(edge.get("src"))
+        dst = _reference(edge.get("dst"))
+        if src is None or dst is None:
+            errors.append(f"{label}: edges[{idx}] needs nonblank string src and dst")
+            continue
+        refs.append(f"edge:{src}->{dst}")
+
+    for game in GAME_KINDS:
+        rows = candidate.get(game)
+        if not isinstance(rows, list):
+            errors.append(f"{label}: {game} must be an array")
+            continue
+        for idx, row in enumerate(rows):
+            ref = f"{game}[{idx}]"
+            refs.append(ref)
+            instance_refs.add(ref)
+            if not isinstance(row, dict):
+                errors.append(f"{label}: {ref} must be an object")
+
+    duplicates = _duplicate_values(refs)
+    if duplicates:
+        errors.append(f"{label}: raw references are not unique: {duplicates}")
+    return set(refs), node_refs, instance_refs
+
+
+def _validate_header(
+    category: str,
+    name: str,
+    artifact: dict,
+    errors: list[str],
+) -> None:
+    label = f"{category}/{name}"
+    if artifact.get("category") != category:
+        errors.append(f"{label}: category must equal {category!r}")
+    if _nonblank(artifact.get("coverage_note")) is None:
+        errors.append(f"{label}: coverage_note must be a nonblank string")
+
+
+def _validate_factual(
+    category: str,
+    artifact: dict,
+    expected_refs: set[str],
+    errors: list[str],
+) -> None:
+    label = f"{category}/verify_factual.json"
+    _validate_header(category, "verify_factual.json", artifact, errors)
+
+    reviewed = artifact.get("reviewed_refs")
+    reviewed_values: list[str] = []
+    if not isinstance(reviewed, list):
+        errors.append(f"{label}: reviewed_refs must be an array")
+    else:
+        for idx, ref in enumerate(reviewed):
+            canonical = _reference(ref)
+            if canonical is None:
+                errors.append(
+                    f"{label}: reviewed_refs[{idx}] must be a canonical nonblank ref"
+                )
+            else:
+                reviewed_values.append(canonical)
+        duplicates = _duplicate_values(reviewed_values)
+        if duplicates:
+            errors.append(f"{label}: reviewed_refs contains duplicates: {duplicates}")
+        reviewed_set = set(reviewed_values)
+        missing = sorted(expected_refs - reviewed_set)
+        extra = sorted(reviewed_set - expected_refs)
+        if missing:
+            errors.append(f"{label}: reviewed_refs missing {missing}")
+        if extra:
+            errors.append(f"{label}: reviewed_refs contains unknown refs {extra}")
+
+    issues = artifact.get("issues")
+    if not isinstance(issues, list):
+        errors.append(f"{label}: issues must be an array")
+        return
+    for idx, issue in enumerate(issues):
+        issue_label = f"{label}: issues[{idx}]"
+        if not isinstance(issue, dict):
+            errors.append(f"{issue_label} must be an object")
+            continue
+        ref = _reference(issue.get("ref"))
+        if ref is None:
+            errors.append(f"{issue_label}.ref must be a canonical nonblank ref")
+        elif ref not in expected_refs:
+            errors.append(f"{issue_label}.ref is unknown: {ref!r}")
+        severity = issue.get("severity")
+        if severity not in FACTUAL_SEVERITIES:
+            errors.append(f"{issue_label}.severity is unknown: {severity!r}")
+        elif severity == "fix":
+            errors.append(f"{issue_label} is an unresolved factual fix")
+        if _nonblank(issue.get("issue")) is None:
+            errors.append(f"{issue_label}.issue must be a nonblank string")
+
+
+def _validate_quality(
+    category: str,
+    artifact: dict,
+    expected_refs: set[str],
+    errors: list[str],
+) -> None:
+    label = f"{category}/verify_quality.json"
+    _validate_header(category, "verify_quality.json", artifact, errors)
+
+    instances = artifact.get("instances")
+    if not isinstance(instances, list):
+        errors.append(f"{label}: instances must be an array")
+        return
+    seen: list[str] = []
+    for idx, instance in enumerate(instances):
+        instance_label = f"{label}: instances[{idx}]"
+        if not isinstance(instance, dict):
+            errors.append(f"{instance_label} must be an object")
+            continue
+        ref = _reference(instance.get("ref"))
+        if ref is None:
+            errors.append(f"{instance_label}.ref must be a canonical nonblank ref")
+        else:
+            seen.append(ref)
+            if ref not in expected_refs:
+                errors.append(f"{instance_label}.ref is unknown: {ref!r}")
+        verdict = instance.get("verdict")
+        if verdict not in QUALITY_VERDICTS:
+            errors.append(f"{instance_label}.verdict is unknown: {verdict!r}")
+        elif verdict == "fix":
+            errors.append(f"{instance_label} is an unresolved quality fix")
+        if _nonblank(instance.get("note")) is None:
+            errors.append(f"{instance_label}.note must be a nonblank string")
+
+    duplicates = _duplicate_values(seen)
+    if duplicates:
+        errors.append(f"{label}: duplicate instance refs: {duplicates}")
+    seen_set = set(seen)
+    missing = sorted(expected_refs - seen_set)
+    extra = sorted(seen_set - expected_refs)
+    if missing:
+        errors.append(f"{label}: instances missing {missing}")
+    if extra:
+        errors.append(f"{label}: instances contains unknown refs {extra}")
+
+
+def preflight_candidates(gen_dir: Path) -> dict[str, dict]:
+    """Validate the complete raw batch without mutating candidate data or repo files."""
+    if not gen_dir.is_dir():
+        raise SystemExit(f"candidate batch directory does not exist: {gen_dir}")
+
+    filenames = {"candidates.json", "verify_factual.json", "verify_quality.json"}
+    category_dirs = sorted(
+        directory
+        for directory in gen_dir.iterdir()
+        if directory.is_dir() and any((directory / name).exists() for name in filenames)
+    )
+    if not category_dirs:
+        raise SystemExit(f"no candidate category artifacts under {gen_dir}")
+
+    errors: list[str] = []
+    bundles: dict[str, dict] = {}
+    for category_dir in category_dirs:
+        category = category_dir.name
+        candidate = _load_object(
+            category_dir / "candidates.json",
+            f"{category}/candidates.json",
+            errors,
+        )
+        factual = _load_object(
+            category_dir / "verify_factual.json",
+            f"{category}/verify_factual.json",
+            errors,
+        )
+        quality = _load_object(
+            category_dir / "verify_quality.json",
+            f"{category}/verify_quality.json",
+            errors,
+        )
+        if candidate is None or factual is None or quality is None:
+            continue
+        expected, node_refs, instance_refs = _raw_reference_inventory(
+            category, candidate, errors
+        )
+        _validate_factual(category, factual, expected, errors)
+        _validate_quality(category, quality, instance_refs, errors)
+        bundles[category] = {
+            "cand": candidate,
+            "factual": factual,
+            "quality": quality,
+            "node_refs": node_refs,
+        }
+
+    if errors:
+        details = "\n- ".join(errors)
+        raise SystemExit(f"invalid candidate verification contract:\n- {details}")
+    return bundles
 
 
 def next_item_number(items: list[dict], prefix: str) -> int:
@@ -139,6 +412,64 @@ def _apply_aliases(cand: dict) -> dict:
         inst["seeds"] = [rm(s) for s in (inst.get("seeds") or [])]
         inst["target"] = rm(inst.get("target"))
     return cand
+
+
+def _edge_ref_pair(ref: object) -> tuple[str, str] | None:
+    """Parse only the canonical factual edge ref, without retaining the ``edge:`` prefix."""
+    match = EDGE_REF_RE.fullmatch(str(ref))
+    if match is None:
+        return None
+    return match.group("src"), match.group("dst")
+
+
+def _instance_node_refs(game: str, instance: dict) -> set[str]:
+    if game == "conexiuni":
+        return {
+            str(tile)
+            for group in instance.get("groups", []) or []
+            for tile in group.get("tiles", []) or []
+        }
+    if game == "contexto":
+        return {str(instance.get("target"))}
+    if game == "lant":
+        return {str(instance.get("start")), str(instance.get("target"))}
+    refs = {str(seed) for seed in instance.get("seeds", []) or []}
+    refs.add(str(instance.get("target")))
+    return refs
+
+
+def _prepare_candidate(
+    raw_candidate: dict,
+    issues: list[dict],
+    blocked_nodes: set[str],
+) -> tuple[dict, dict[str, dict[int, str]]]:
+    """Apply verified exclusions to a copy, then alias-map the surviving raw content."""
+    candidate = deepcopy(raw_candidate)
+    blocked_edges = {
+        pair
+        for issue in issues
+        if issue.get("severity") == "block"
+        if (pair := _edge_ref_pair(issue.get("ref"))) is not None
+    }
+    candidate["nodes"] = [
+        node
+        for node in candidate.get("nodes", []) or []
+        if str(node.get("id")) not in blocked_nodes
+    ]
+    candidate["edges"] = [
+        edge
+        for edge in candidate.get("edges", []) or []
+        if str(edge.get("src")) not in blocked_nodes
+        and str(edge.get("dst")) not in blocked_nodes
+        and (str(edge.get("src")), str(edge.get("dst"))) not in blocked_edges
+    ]
+
+    factual_by_game = {game: _instance_refs(issues, game) for game in GAME_KINDS}
+    for game in GAME_KINDS:
+        for idx, instance in enumerate(raw_candidate.get(game, []) or []):
+            if _instance_node_refs(game, instance) & blocked_nodes:
+                factual_by_game[game][idx] = "block"
+    return _apply_aliases(candidate), factual_by_game
 
 
 def _band_for(actual: int, declared: str, bands: dict[str, tuple[int, int]]) -> str | None:
@@ -207,10 +538,10 @@ def _instance_refs(issues: list[dict], game: str) -> dict[int, str]:
     out: dict[int, str] = {}
     rx = re.compile(rf"{game}\[(\d+)\]")
     for issue in issues:
-        m = rx.search(str(issue.get("ref", "")))
+        m = rx.fullmatch(str(issue.get("ref", "")))
         if m:
             idx = int(m.group(1))
-            sev = str(issue.get("severity", "nit"))
+            sev = str(issue.get("severity", "note"))
             if sev == "block" or out.get(idx) != "block":
                 out[idx] = sev
     return out
@@ -226,67 +557,51 @@ def main(argv: list[str]) -> int:
     )
     args = parser.parse_args(argv[1:])
     gen_dir = Path(args.dir)
-
-    categories = sorted(d.name for d in gen_dir.iterdir() if (d / "candidates.json").exists())
-    if not categories:
-        raise SystemExit(f"no <category>/candidates.json under {gen_dir}")
+    raw_bundles = preflight_candidates(gen_dir)
 
     report: list[str] = []
     all_nodes: list[dict] = []
     all_edges: list[dict] = []
-    blocked_nodes: set[str] = set()
+    blocked_nodes = {
+        str(issue["ref"])
+        for bundle in raw_bundles.values()
+        for issue in bundle["factual"]["issues"]
+        if issue["severity"] == "block" and issue["ref"] in bundle["node_refs"]
+    }
     per_cat: dict[str, dict] = {}
 
-    for cat in categories:
-        cdir = gen_dir / cat
-        cand = _apply_aliases(_load(cdir / "candidates.json"))
-        fpath = cdir / "verify_factual.json"
-        qpath = cdir / "verify_quality.json"
-        factual = _load(fpath) if fpath.exists() else {}
-        quality = _load(qpath) if qpath.exists() else {}
+    for cat, raw_bundle in raw_bundles.items():
+        factual = raw_bundle["factual"]
+        quality = raw_bundle["quality"]
         issues = list(factual.get("issues", []))
+        cand, factual_by_game = _prepare_candidate(
+            raw_bundle["cand"], issues, blocked_nodes
+        )
 
-        node_ids_here = {str(n["id"]) for n in cand.get("nodes", [])}
-        blocked_edges: set[tuple[str, str]] = set()
         for issue in issues:
             ref = str(issue.get("ref", ""))
             severity = issue.get("severity")
-            edge_ref = re.search(r"(\S+?)\s*->\s*(\S+)", ref)
-            if severity == "block" and ref in node_ids_here:
-                blocked_nodes.add(ref)
+            if severity == "block" and ref in raw_bundle["node_refs"]:
                 report.append(f"BLOCKED node {ref} ({cat}): {issue.get('issue')}")
-            elif severity == "block" and edge_ref:
-                blocked_edges.add((edge_ref.group(1), edge_ref.group(2)))
+            elif severity == "block" and _edge_ref_pair(ref) is not None:
                 report.append(f"BLOCKED edge {ref} ({cat}): {issue.get('issue')}")
-            elif severity == "fix":
-                report.append(
-                    f"REVIEW ({cat}) {ref}: {issue.get('issue')} -> {issue.get('correction')}"
-                )
-
-        def _edge_ok(e: dict, blocked_pairs: set[tuple[str, str]] = blocked_edges) -> bool:
-            src, dst = str(e.get("src")), str(e.get("dst"))
-            if src in blocked_nodes or dst in blocked_nodes:
-                return False
-            return (src, dst) not in blocked_pairs and (dst, src) not in blocked_pairs
 
         # The generator emits nodes without a category (it is implicit per file).
         kept_nodes = [
             {**n, "category": str(n.get("category") or cat)}
             for n in cand.get("nodes", [])
-            if str(n["id"]) not in blocked_nodes
         ]
-        kept_edges = [e for e in cand.get("edges", []) if _edge_ok(e)]
         all_nodes.extend(kept_nodes)
-        all_edges.extend(kept_edges)
+        all_edges.extend(cand.get("edges", []))
 
         verdicts = {
-            str(inst.get("ref", "")): str(inst.get("verdict", "drop"))
-            for inst in quality.get("instances", [])
+            str(instance["ref"]): str(instance["verdict"])
+            for instance in quality.get("instances", [])
         }
         per_cat[cat] = {
             "cand": cand,
             "verdicts": verdicts,
-            "factual_by_game": {g: _instance_refs(issues, g) for g in GAME_KINDS},
+            "factual_by_game": factual_by_game,
         }
 
     # ---- 1. merge the accepted subgraph (validated + rolled back inside run()) ----
