@@ -1,0 +1,5026 @@
+{
+  "schema_version": 1,
+  "batch": "v43_everyday_shelves",
+  "scope": "Authoring proposals only; no verifier, import, promotion, pack edit, KG edit, ranking edit, or status change.",
+  "source_census": {
+    "pack_sha256": "b2b603be2354af4c982c515ac43795bfe342c217c5cf32e59b0c5e28f5769194",
+    "kg_sha256": "9363ccaa3a892ff0cd9ba77dfa5baee01eaa0de9dde5ca4bb6d3aaf17295dac2",
+    "demotions_sha256": "ba9bb55b17b2a1a7a28e54d440256a42d7bfab337fa91861881d6ca926aa61ff",
+    "pack_conexiuni_boards": 308,
+    "pack_conexiuni_groups": 1232,
+    "approved_groups_including_reserves": 753,
+    "demoted_board_count": 67,
+    "new_node_count": 0,
+    "new_edge_count": 0,
+    "evidence_policy": "Every tile resolves to an existing fixture node. No new node or edge claim is introduced; independent factual verification remains mandatory."
+  },
+  "counts": {
+    "boards": 36,
+    "groups": 144,
+    "by_shelf": {
+      "gastronomie/normal": 6,
+      "geografie/normal": 6,
+      "personalitati/normal": 6,
+      "sport/normal": 6,
+      "sport/usor": 6,
+      "stiinta/normal": 6
+    },
+    "advance_by_shelf": {
+      "gastronomie/normal": 4,
+      "geografie/normal": 4,
+      "personalitati/normal": 4,
+      "sport/normal": 4,
+      "sport/usor": 4,
+      "stiinta/normal": 4
+    },
+    "hold_refs": [
+      "gastronomie_normal_02"
+    ],
+    "drop_refs": [
+      "sport_usor_03",
+      "sport_usor_06",
+      "sport_normal_05",
+      "sport_normal_06",
+      "gastronomie_normal_03",
+      "geografie_normal_05",
+      "geografie_normal_06",
+      "personalitati_normal_04",
+      "personalitati_normal_06",
+      "stiinta_normal_01",
+      "stiinta_normal_06"
+    ],
+    "hard_error_count": 0
+  },
+  "hard_rules": {
+    "quad_overlap": "maximum 2/4 against every pack and same-batch group",
+    "board_overlap": "maximum 7/16 against every pack board",
+    "member_use": "projected approved plus whole authoring batch <=8",
+    "mirrors": "no >=3-way strong-edge correspondence",
+    "label_leak": "no normalized full tile label inside its group label",
+    "shape": "four groups, four unique tiles each, sixteen unique tiles"
+  },
+  "boards": [
+    {
+      "ref": "sport_usor_01",
+      "shelf": "sport/usor",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare este un sport de echipă jucat cu minge.",
+      "max_pack_board_overlap": {
+        "tiles": 2,
+        "board": "cx_sport_223"
+      },
+      "projected_member_use_max": 6,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Sporturi de echipă cu minge",
+          "criterion": "Fiecare este un sport de echipă jucat cu minge.",
+          "tiles": [
+            "n_fotbal",
+            "n_v2spo_baschet",
+            "n_v3spo_volei",
+            "n_v20spo_rugby"
+          ],
+          "tile_labels": [
+            "Fotbal",
+            "Baschet",
+            "Volei",
+            "Rugby"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_sport_223",
+            "max_pack_status": "pending",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Cluburi românești de fotbal",
+          "criterion": "Fiecare joacă în fotbalul românesc.",
+          "tiles": [
+            "n_v18spo_fcsb",
+            "n_v18spo_cfr_cluj",
+            "n_v20spo_farul_constanta",
+            "n_v11spo_universitatea_craiova"
+          ],
+          "tile_labels": [
+            "FCSB",
+            "CFR Cluj",
+            "Farul Constanța",
+            "Universitatea Craiova"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_sport_282",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_04",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Medaliați olimpici români",
+          "criterion": "Fiecare a câștigat cel puțin o medalie olimpică pentru România.",
+          "tiles": [
+            "n_v11spo_gabriela_szabo",
+            "n_v11spo_ana_maria_branza",
+            "n_v11spo_elisabeta_lipa",
+            "n_v20spo_mihaela_cambei"
+          ],
+          "tile_labels": [
+            "Gabriela Szabó",
+            "Ana Maria Brânză",
+            "Elisabeta Lipă",
+            "Mihaela Cambei"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_sport_284",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_normal_04",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Evenimente sportive din 2024 sau 2025",
+          "criterion": "Fiecare eveniment a avut loc în 2024 sau 2025.",
+          "tiles": [
+            "n_v17spo_euro_2024",
+            "n_v19spo_jo_paris_2024",
+            "n_v18spo_retragerea_simonei_halep",
+            "n_v18spo_dubla_singapore_2025"
+          ],
+          "tile_labels": [
+            "EURO 2024",
+            "Jocurile Olimpice Paris 2024",
+            "Retragerea Simonei Halep",
+            "Dubla mondială de la Singapore"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_05",
+            "max_same_batch_group": 3
+          }
+        }
+      ]
+    },
+    {
+      "ref": "sport_usor_02",
+      "shelf": "sport/usor",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "În fiecare, sportivul poate concura individual la Jocurile Olimpice.",
+      "max_pack_board_overlap": {
+        "tiles": 3,
+        "board": "cx_sport_284"
+      },
+      "projected_member_use_max": 7,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Sporturi olimpice individuale",
+          "criterion": "În fiecare, sportivul poate concura individual la Jocurile Olimpice.",
+          "tiles": [
+            "n_v3spo_atletism",
+            "n_v2spo_inot_sportiv",
+            "n_v20spo_haltere",
+            "n_tenis"
+          ],
+          "tile_labels": [
+            "Atletism",
+            "Înot sportiv",
+            "Haltere",
+            "Tenis"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_sport_284",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_normal_01",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Cluburi sportive din București",
+          "criterion": "Fiecare club are sediul în București.",
+          "tiles": [
+            "n_v18spo_fcsb",
+            "n_v11spo_dinamo_bucuresti",
+            "n_v11spo_rapid_bucuresti",
+            "n_v19spo_csm_bucuresti"
+          ],
+          "tile_labels": [
+            "FCSB",
+            "Dinamo București",
+            "Rapid București",
+            "CSM București"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_sport_284",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_normal_06",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Gimnaste române",
+          "criterion": "Fiecare a reprezentat România în gimnastica artistică.",
+          "tiles": [
+            "n_v17spo_catalina_ponor",
+            "n_v17spo_simona_amanar",
+            "n_v18spo_ana_barbosu",
+            "n_v21spo_sabrina_voinea"
+          ],
+          "tile_labels": [
+            "Cătălina Ponor",
+            "Simona Amânar",
+            "Ana Bărbosu",
+            "Sabrina Maneca-Voinea"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_normal_03",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Fundași români din generații diferite",
+          "criterion": "Fiecare a jucat fundaș pentru echipa națională a României.",
+          "tiles": [
+            "n_spt_gica_popescu",
+            "n_v20spo_cristian_chivu",
+            "n_v21spo_dan_petrescu",
+            "n_v17spo_miodrag_belodedici"
+          ],
+          "tile_labels": [
+            "Gică Popescu",
+            "Cristian Chivu",
+            "Dan Petrescu",
+            "Miodrag Belodedici"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_sport_075",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_06",
+            "max_same_batch_group": 2
+          }
+        }
+      ]
+    },
+    {
+      "ref": "sport_usor_03",
+      "shelf": "sport/usor",
+      "author_verdict": "drop",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare a fost titular pentru România la turneul continental din 2024.",
+      "max_pack_board_overlap": {
+        "tiles": 2,
+        "board": "cx_sport_158"
+      },
+      "projected_member_use_max": 8,
+      "hard_errors": [],
+      "editorial_flags": [
+        "two_event_groups_make_the_board_repetitive"
+      ],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": false,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Titulari ai României la turneul continental din 2024",
+          "criterion": "Fiecare a fost titular pentru România la turneul continental din 2024.",
+          "tiles": [
+            "n_v19spo_nicolae_stanciu",
+            "n_v20spo_andrei_ratiu",
+            "n_v18spo_radu_dragusin",
+            "n_v20spo_florin_nita"
+          ],
+          "tile_labels": [
+            "Nicolae Stanciu",
+            "Andrei Rațiu",
+            "Radu Drăgușin",
+            "Florin Niță"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_06",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Antrenori români campioni în prima ligă",
+          "criterion": "Fiecare a câștigat ca antrenor principal un campionat național de prim eșalon.",
+          "tiles": [
+            "n_v11spo_mircea_lucescu",
+            "n_v21spo_dan_petrescu",
+            "n_v19spo_edi_iordanescu",
+            "n_v21spo_emeric_ienei"
+          ],
+          "tile_labels": [
+            "Mircea Lucescu",
+            "Dan Petrescu",
+            "Edward Iordănescu",
+            "Emeric Ienei"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_normal_03",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Victorii românești pe mari scene internaționale",
+          "criterion": "Fiecare eveniment s-a încheiat cu un titlu câștigat de un român sau o echipă românească.",
+          "tiles": [
+            "n_spt_liga_campionilor_handbal",
+            "n_spt_roland_garros",
+            "n_spt_simona_wimbledon_2019",
+            "n_spt_nastase_us_open_1972"
+          ],
+          "tile_labels": [
+            "Liga Campionilor la handbal",
+            "Roland Garros",
+            "Wimbledon 2019",
+            "US Open 1972"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_sport_158",
+            "max_pack_status": "pending",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_normal_04",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Rezultate românești din vara sportivă 2024",
+          "criterion": "Fiecare rezultat a fost obținut de România între iunie și august 2024.",
+          "tiles": [
+            "n_v19spo_romania_ucraina_3_0",
+            "n_v17spo_aur_paris_2024",
+            "n_v18spo_bronzul_de_la_sol_2024",
+            "n_v19spo_aurul_optului_feminin"
+          ],
+          "tile_labels": [
+            "România - Ucraina 3-0",
+            "Aurul de la Paris 2024",
+            "Bronzul de la sol 2024",
+            "Aurul optului feminin (2024)"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_05",
+            "max_same_batch_group": 3
+          }
+        }
+      ]
+    },
+    {
+      "ref": "sport_usor_04",
+      "shelf": "sport/usor",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare reprezintă România într-un sport jucat cu rachetă sau paletă.",
+      "max_pack_board_overlap": {
+        "tiles": 2,
+        "board": "cx_sport_284"
+      },
+      "projected_member_use_max": 7,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Sportivi români în sporturi cu rachetă sau paletă",
+          "criterion": "Fiecare reprezintă România într-un sport jucat cu rachetă sau paletă.",
+          "tiles": [
+            "n_ion_tiriac",
+            "n_v20spo_horia_tecau",
+            "n_v18spo_jaqueline_cristian",
+            "n_v19spo_bernadette_szocs"
+          ],
+          "tile_labels": [
+            "Ion Țiriac",
+            "Horia Tecău",
+            "Jaqueline Cristian",
+            "Bernadette Szőcs"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_sport_284",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_normal_03",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Medaliați români la Paris 2024",
+          "criterion": "Fiecare a câștigat o medalie pentru România la Jocurile Olimpice din 2024.",
+          "tiles": [
+            "n_v18spo_ana_barbosu",
+            "n_v20spo_mihaela_cambei",
+            "n_v19spo_simona_radis",
+            "n_v19spo_ancuta_bodnar"
+          ],
+          "tile_labels": [
+            "Ana Bărbosu",
+            "Mihaela Cambei",
+            "Simona Radiș",
+            "Ancuța Bodnar"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_normal_03",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Au un oraș în numele afișat",
+          "criterion": "Numele fiecărui club include explicit numele unui oraș.",
+          "tiles": [
+            "n_v18spo_cfr_cluj",
+            "n_v20spo_farul_constanta",
+            "n_v19spo_csm_bucuresti",
+            "n_v20spo_inter_milano"
+          ],
+          "tile_labels": [
+            "CFR Cluj",
+            "Farul Constanța",
+            "CSM București",
+            "Inter Milano"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_01",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Sporturi cu adversar direct",
+          "criterion": "În fiecare, un sportiv sau o echipă înfruntă direct adversarul.",
+          "tiles": [
+            "n_v21spo_box",
+            "n_v20spo_scrima",
+            "n_v18spo_tenis_de_masa",
+            "n_tenis"
+          ],
+          "tile_labels": [
+            "Box",
+            "Scrimă",
+            "Tenis de masă",
+            "Tenis"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_sport_284",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_normal_01",
+            "max_same_batch_group": 4
+          }
+        }
+      ]
+    },
+    {
+      "ref": "sport_usor_05",
+      "shelf": "sport/usor",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare a reprezentat România la cel puțin o ediție a Jocurilor Olimpice.",
+      "max_pack_board_overlap": {
+        "tiles": 1,
+        "board": "cx_sport_283"
+      },
+      "projected_member_use_max": 8,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Sportivi români prezenți la Jocurile Olimpice",
+          "criterion": "Fiecare a reprezentat România la cel puțin o ediție a Jocurilor Olimpice.",
+          "tiles": [
+            "n_v17spo_catalina_ponor",
+            "n_v11spo_leonard_doroftei",
+            "n_v20spo_sorana_cirstea",
+            "n_v11spo_ana_maria_branza"
+          ],
+          "tile_labels": [
+            "Cătălina Ponor",
+            "Leonard Doroftei",
+            "Sorana Cîrstea",
+            "Ana Maria Brânză"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_06",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Jucători din lotul României la EURO 2024",
+          "criterion": "Fiecare a făcut parte din lotul României la turneul continental din 2024.",
+          "tiles": [
+            "n_v18spo_radu_dragusin",
+            "n_v20spo_florin_nita",
+            "n_v18spo_dennis_man",
+            "n_v18spo_ianis_hagi"
+          ],
+          "tile_labels": [
+            "Radu Drăgușin",
+            "Florin Niță",
+            "Dennis Man",
+            "Ianis Hagi"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_06",
+            "max_same_batch_group": 1
+          }
+        },
+        {
+          "label": "Evenimente sportive din 2024",
+          "criterion": "Fiecare eveniment sportiv a avut loc în 2024.",
+          "tiles": [
+            "n_v17spo_euro_2024",
+            "n_v19spo_jo_paris_2024",
+            "n_v19spo_romania_ucraina_3_0",
+            "n_v18spo_bronzul_de_la_sol_2024"
+          ],
+          "tile_labels": [
+            "EURO 2024",
+            "Jocurile Olimpice Paris 2024",
+            "România - Ucraina 3-0",
+            "Bronzul de la sol 2024"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_03",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Roluri umane la o partidă",
+          "criterion": "Fiecare numește un rol uman prezent la o partidă.",
+          "tiles": [
+            "n_v3spo_arbitru",
+            "n_v3spo_antrenor",
+            "n_v4spo_suporter",
+            "n_v2spo_portar"
+          ],
+          "tile_labels": [
+            "Arbitru",
+            "Antrenor",
+            "suporter",
+            "Portar"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_sport_283",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "sport_normal_05",
+            "max_same_batch_group": 4
+          }
+        }
+      ]
+    },
+    {
+      "ref": "sport_usor_06",
+      "shelf": "sport/usor",
+      "author_verdict": "drop",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare este fotbalist român cu rol preponderent ofensiv.",
+      "max_pack_board_overlap": {
+        "tiles": 1,
+        "board": "cx_sport_075"
+      },
+      "projected_member_use_max": 8,
+      "hard_errors": [],
+      "editorial_flags": [
+        "recent_events_need_gate_reverification"
+      ],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": false,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Internaționali români ofensivi",
+          "criterion": "Fiecare este fotbalist român cu rol preponderent ofensiv.",
+          "tiles": [
+            "n_v21spo_adrian_mutu",
+            "n_v18spo_ianis_hagi",
+            "n_v18spo_dennis_man",
+            "n_v19spo_louis_munteanu"
+          ],
+          "tile_labels": [
+            "Adrian Mutu",
+            "Ianis Hagi",
+            "Dennis Man",
+            "Louis Munteanu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_05",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Fundași ai naționalei",
+          "criterion": "Fiecare a jucat fundaș pentru naționala României.",
+          "tiles": [
+            "n_spt_gica_popescu",
+            "n_v21spo_dan_petrescu",
+            "n_v18spo_radu_dragusin",
+            "n_v20spo_andrei_ratiu"
+          ],
+          "tile_labels": [
+            "Gică Popescu",
+            "Dan Petrescu",
+            "Radu Drăgușin",
+            "Andrei Rațiu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_sport_075",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_03",
+            "max_same_batch_group": 1
+          }
+        },
+        {
+          "label": "Sportivi români de duel sau contact",
+          "criterion": "Fiecare a concurat într-un sport bazat pe duel direct ori contact.",
+          "tiles": [
+            "n_v11spo_leonard_doroftei",
+            "n_v17spo_lucian_bute",
+            "n_v21spo_catalin_morosanu",
+            "n_v11spo_ana_maria_branza"
+          ],
+          "tile_labels": [
+            "Leonard Doroftei",
+            "Lucian Bute",
+            "Cătălin Moroșanu",
+            "Ana Maria Brânză"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_05",
+            "max_same_batch_group": 1
+          }
+        },
+        {
+          "label": "Evenimente sportive din 2025 sau 2026",
+          "criterion": "Fiecare eveniment s-a produs în 2025 sau 2026.",
+          "tiles": [
+            "n_v18spo_retragerea_simonei_halep",
+            "n_v19spo_retragerea_cristinei_neagu",
+            "n_v19spo_titlul_craiovei_2026",
+            "n_v18spo_barajul_cu_turcia_2026"
+          ],
+          "tile_labels": [
+            "Retragerea Simonei Halep",
+            "Retragerea Cristinei Neagu",
+            "Titlul Craiovei din 2026",
+            "Barajul cu Turcia 2026"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_normal_06",
+            "max_same_batch_group": 3
+          }
+        }
+      ]
+    },
+    {
+      "ref": "sport_normal_01",
+      "shelf": "sport/normal",
+      "author_verdict": "advance",
+      "anchor_group": 3,
+      "anchor_reason": "Fiecare club a câștigat cel puțin o cupă europeană majoră.",
+      "max_pack_board_overlap": {
+        "tiles": 3,
+        "board": "cx_sport_077"
+      },
+      "projected_member_use_max": 8,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Lotul României din 2024",
+          "criterion": "Fiecare a făcut parte din lotul României la turneul continental din 2024.",
+          "tiles": [
+            "n_v19spo_nicolae_stanciu",
+            "n_v20spo_andrei_ratiu",
+            "n_v18spo_dennis_man",
+            "n_v18spo_ianis_hagi"
+          ],
+          "tile_labels": [
+            "Nicolae Stanciu",
+            "Andrei Rațiu",
+            "Dennis Man",
+            "Ianis Hagi"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_06",
+            "max_same_batch_group": 1
+          }
+        },
+        {
+          "label": "Antrenori care au fost internaționali români",
+          "criterion": "Fiecare a antrenat la nivel profesionist după ce a jucat pentru naționala României.",
+          "tiles": [
+            "n_v11spo_mircea_lucescu",
+            "n_v21spo_dan_petrescu",
+            "n_v20spo_cristian_chivu",
+            "n_v17spo_anghel_iordanescu"
+          ],
+          "tile_labels": [
+            "Mircea Lucescu",
+            "Dan Petrescu",
+            "Cristian Chivu",
+            "Anghel Iordănescu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_03",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Câștigătoare de cupe europene",
+          "criterion": "Fiecare club a câștigat cel puțin o cupă europeană majoră.",
+          "tiles": [
+            "n_spt_steaua_1986",
+            "n_spt_fc_barcelona",
+            "n_v19spo_csm_bucuresti",
+            "n_spt_galatasaray"
+          ],
+          "tile_labels": [
+            "Steaua 1986",
+            "FC Barcelona",
+            "CSM București",
+            "Galatasaray"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_sport_225",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_normal_06",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Sporturi individuale cu medalii olimpice românești",
+          "criterion": "În fiecare sport, România a câștigat cel puțin o medalie olimpică individuală.",
+          "tiles": [
+            "n_v3spo_atletism",
+            "n_v21spo_box",
+            "n_v20spo_haltere",
+            "n_v20spo_scrima"
+          ],
+          "tile_labels": [
+            "Atletism",
+            "Box",
+            "Haltere",
+            "Scrimă"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_04",
+            "max_same_batch_group": 4
+          }
+        }
+      ]
+    },
+    {
+      "ref": "sport_normal_02",
+      "shelf": "sport/normal",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare a reprezentat România în tenisul profesionist.",
+      "max_pack_board_overlap": {
+        "tiles": 2,
+        "board": "cx_sport_284"
+      },
+      "projected_member_use_max": 8,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Tenismeni români",
+          "criterion": "Fiecare a reprezentat România în tenisul profesionist.",
+          "tiles": [
+            "n_ilie_nastase",
+            "n_ion_tiriac",
+            "n_v20spo_horia_tecau",
+            "n_v20spo_sorana_cirstea"
+          ],
+          "tile_labels": [
+            "Ilie Năstase",
+            "Ion Țiriac",
+            "Horia Tecău",
+            "Sorana Cîrstea"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_sport_284",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_04",
+            "max_same_batch_group": 1
+          }
+        },
+        {
+          "label": "Campioane europene după 2010",
+          "criterion": "Fiecare a câștigat după 2010 un titlu european de senioare.",
+          "tiles": [
+            "n_v19spo_simona_radis",
+            "n_v20spo_mihaela_cambei",
+            "n_v19spo_eliza_samara",
+            "n_v19spo_bernadette_szocs"
+          ],
+          "tile_labels": [
+            "Simona Radiș",
+            "Mihaela Cambei",
+            "Elizabeta Samara",
+            "Bernadette Szőcs"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_04",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Jucători defensivi români",
+          "criterion": "Fiecare a apărat poarta ori linia defensivă a unei echipe românești.",
+          "tiles": [
+            "n_v20spo_cristian_chivu",
+            "n_v18spo_radu_dragusin",
+            "n_v20spo_andrei_ratiu",
+            "n_v17spo_miodrag_belodedici"
+          ],
+          "tile_labels": [
+            "Cristian Chivu",
+            "Radu Drăgușin",
+            "Andrei Rațiu",
+            "Miodrag Belodedici"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_06",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Medaliați olimpici înainte de 2005",
+          "criterion": "Fiecare a câștigat o medalie olimpică până în 2004 inclusiv.",
+          "tiles": [
+            "n_v11spo_gabriela_szabo",
+            "n_v18spo_iolanda_balas",
+            "n_v11spo_leonard_doroftei",
+            "n_v17spo_catalina_ponor"
+          ],
+          "tile_labels": [
+            "Gabriela Szabó",
+            "Iolanda Balaș",
+            "Leonard Doroftei",
+            "Cătălina Ponor"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_05",
+            "max_same_batch_group": 1
+          }
+        }
+      ]
+    },
+    {
+      "ref": "sport_normal_03",
+      "shelf": "sport/normal",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare a purtat banderola echipei naționale de fotbal.",
+      "max_pack_board_overlap": {
+        "tiles": 1,
+        "board": "cx_sport_075"
+      },
+      "projected_member_use_max": 6,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Foști căpitani ai României",
+          "criterion": "Fiecare a purtat banderola echipei naționale de fotbal.",
+          "tiles": [
+            "n_spt_gica_popescu",
+            "n_v20spo_cristian_chivu",
+            "n_v19spo_nicolae_stanciu",
+            "n_v21spo_adrian_mutu"
+          ],
+          "tile_labels": [
+            "Gică Popescu",
+            "Cristian Chivu",
+            "Nicolae Stanciu",
+            "Adrian Mutu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_sport_075",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_02",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Sportive cu rachetă sau paletă",
+          "criterion": "Fiecare concurează în tenis ori tenis de masă.",
+          "tiles": [
+            "n_v20spo_sorana_cirstea",
+            "n_v18spo_jaqueline_cristian",
+            "n_v19spo_bernadette_szocs",
+            "n_v19spo_eliza_samara"
+          ],
+          "tile_labels": [
+            "Sorana Cîrstea",
+            "Jaqueline Cristian",
+            "Bernadette Szőcs",
+            "Elizabeta Samara"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_04",
+            "max_same_batch_group": 1
+          }
+        },
+        {
+          "label": "Sportivi români în primii opt la Paris 2024",
+          "criterion": "Fiecare s-a clasat între primele opt la proba sau întrecerea sa olimpică din 2024.",
+          "tiles": [
+            "n_v18spo_ana_barbosu",
+            "n_v20spo_mihaela_cambei",
+            "n_v21spo_sabrina_voinea",
+            "n_v18spo_constantin_popovici"
+          ],
+          "tile_labels": [
+            "Ana Bărbosu",
+            "Mihaela Cambei",
+            "Sabrina Maneca-Voinea",
+            "Constantin Popovici"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_04",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Antrenori ai loturilor naționale românești",
+          "criterion": "Fiecare a condus un lot național de seniori al României.",
+          "tiles": [
+            "n_v17spo_octavian_bellu",
+            "n_v21spo_emeric_ienei",
+            "n_v19spo_edi_iordanescu",
+            "n_v17spo_anghel_iordanescu"
+          ],
+          "tile_labels": [
+            "Octavian Bellu",
+            "Emeric Ienei",
+            "Edward Iordănescu",
+            "Anghel Iordănescu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_03",
+            "max_same_batch_group": 2
+          }
+        }
+      ]
+    },
+    {
+      "ref": "sport_normal_04",
+      "shelf": "sport/normal",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare a evoluat ca fotbalist în prima ligă italiană.",
+      "max_pack_board_overlap": {
+        "tiles": 3,
+        "board": "cx_sport_225"
+      },
+      "projected_member_use_max": 8,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Români care au jucat în Serie A",
+          "criterion": "Fiecare a evoluat ca fotbalist în prima ligă italiană.",
+          "tiles": [
+            "n_v21spo_adrian_mutu",
+            "n_v20spo_cristian_chivu",
+            "n_v18spo_radu_dragusin",
+            "n_v18spo_dennis_man"
+          ],
+          "tile_labels": [
+            "Adrian Mutu",
+            "Cristian Chivu",
+            "Radu Drăgușin",
+            "Dennis Man"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_06",
+            "max_same_batch_group": 1
+          }
+        },
+        {
+          "label": "Turnee de tenis câștigate de români",
+          "criterion": "Fiecare turneu sau ediție a fost câștigat la simplu de un tenismen român.",
+          "tiles": [
+            "n_spt_simona_roland_garros_2018",
+            "n_spt_simona_wimbledon_2019",
+            "n_spt_nastase_us_open_1972",
+            "n_spt_madrid_open"
+          ],
+          "tile_labels": [
+            "Roland Garros 2018",
+            "Wimbledon 2019",
+            "US Open 1972",
+            "Madrid Open"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_sport_281",
+            "max_pack_status": "pending",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_03",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Medaliați români la Sydney 2000",
+          "criterion": "Fiecare a câștigat o medalie pentru România la Jocurile Olimpice din 2000.",
+          "tiles": [
+            "n_v11spo_gabriela_szabo",
+            "n_v11spo_leonard_doroftei",
+            "n_v17spo_simona_amanar",
+            "n_v11spo_elisabeta_lipa"
+          ],
+          "tile_labels": [
+            "Gabriela Szabó",
+            "Leonard Doroftei",
+            "Simona Amânar",
+            "Elisabeta Lipă"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_sport_284",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_01",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Cluburi cu sediul în afara Bucureștiului",
+          "criterion": "Fiecare club are sediul în afara municipiului București.",
+          "tiles": [
+            "n_v18spo_cfr_cluj",
+            "n_v11spo_universitatea_craiova",
+            "n_spt_fc_barcelona",
+            "n_spt_galatasaray"
+          ],
+          "tile_labels": [
+            "CFR Cluj",
+            "Universitatea Craiova",
+            "FC Barcelona",
+            "Galatasaray"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_sport_225",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_01",
+            "max_same_batch_group": 2
+          }
+        }
+      ]
+    },
+    {
+      "ref": "sport_normal_05",
+      "shelf": "sport/normal",
+      "author_verdict": "drop",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare a avut rol direct în parcursul României din 2024.",
+      "max_pack_board_overlap": {
+        "tiles": 2,
+        "board": "cx_sport_284"
+      },
+      "projected_member_use_max": 8,
+      "hard_errors": [],
+      "editorial_flags": [
+        "association_and_type_bag_board"
+      ],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": false,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Oameni ai parcursului continental din 2024",
+          "criterion": "Fiecare a avut rol direct în parcursul României din 2024.",
+          "tiles": [
+            "n_v19spo_edi_iordanescu",
+            "n_v19spo_nicolae_stanciu",
+            "n_v18spo_dennis_man",
+            "n_v18spo_radu_dragusin"
+          ],
+          "tile_labels": [
+            "Edward Iordănescu",
+            "Nicolae Stanciu",
+            "Dennis Man",
+            "Radu Drăgușin"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_05",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Organizații cunoscute din sportul românesc",
+          "criterion": "Fiecare este club, lot sau publicație din sportul românesc.",
+          "tiles": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v11spo_rapid_bucuresti",
+            "n_v21spo_gazeta_sporturilor",
+            "n_spt_lotul_olimpic_romania"
+          ],
+          "tile_labels": [
+            "Dinamo București",
+            "Rapid București",
+            "Gazeta Sporturilor",
+            "Lotul olimpic al României"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_sport_284",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_02",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Evenimente sportive din 2024 până în 2026",
+          "criterion": "Fiecare eveniment s-a produs între 2024 și 2026 inclusiv.",
+          "tiles": [
+            "n_v19spo_retragerea_cristinei_neagu",
+            "n_v18spo_barajul_cu_turcia_2026",
+            "n_v19spo_romania_ucraina_3_0",
+            "n_v18spo_dubla_singapore_2025"
+          ],
+          "tile_labels": [
+            "Retragerea Cristinei Neagu",
+            "Barajul cu Turcia 2026",
+            "România - Ucraina 3-0",
+            "Dubla mondială de la Singapore"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Termeni de arbitraj și rezultat",
+          "criterion": "Fiecare ține de validarea ori consemnarea rezultatului.",
+          "tiles": [
+            "n_v3spo_arbitru",
+            "n_v4spo_fluier",
+            "n_v4spo_scor",
+            "n_v2spo_penalty"
+          ],
+          "tile_labels": [
+            "Arbitru",
+            "fluier",
+            "scor",
+            "Penalty"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_sport_283",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "sport_usor_05",
+            "max_same_batch_group": 4
+          }
+        }
+      ]
+    },
+    {
+      "ref": "sport_normal_06",
+      "shelf": "sport/normal",
+      "author_verdict": "drop",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare a avut o carieră sportivă internațională.",
+      "max_pack_board_overlap": {
+        "tiles": 3,
+        "board": "cx_sport_161"
+      },
+      "projected_member_use_max": 8,
+      "hard_errors": [],
+      "editorial_flags": [
+        "club_group_is_broad"
+      ],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": false,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Sportivi cu carieră internațională",
+          "criterion": "Fiecare a avut o carieră sportivă internațională.",
+          "tiles": [
+            "n_v21spo_emma_raducanu",
+            "n_v20spo_horia_tecau",
+            "n_v18spo_iolanda_balas",
+            "n_v17spo_octavian_bellu"
+          ],
+          "tile_labels": [
+            "Emma Răducanu",
+            "Horia Tecău",
+            "Iolanda Balaș",
+            "Octavian Bellu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "personalitati_normal_02",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Cluburi din România și străinătate",
+          "criterion": "Fiecare este un club sportiv cunoscut publicului român.",
+          "tiles": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v11spo_rapid_bucuresti",
+            "n_spt_galatasaray",
+            "n_spt_fc_barcelona"
+          ],
+          "tile_labels": [
+            "Dinamo București",
+            "Rapid București",
+            "Galatasaray",
+            "FC Barcelona"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_sport_284",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_02",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Finaluri și medalii recente",
+          "criterion": "Fiecare este un moment sportiv care a adus medalie sau a încheiat o carieră.",
+          "tiles": [
+            "n_v17spo_aur_paris_2024",
+            "n_v18spo_bronzul_de_la_sol_2024",
+            "n_v18spo_retragerea_simonei_halep",
+            "n_v19spo_retragerea_cristinei_neagu"
+          ],
+          "tile_labels": [
+            "Aurul de la Paris 2024",
+            "Bronzul de la sol 2024",
+            "Retragerea Simonei Halep",
+            "Retragerea Cristinei Neagu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Probe și trasee cronometrate",
+          "criterion": "Fiecare numește o probă ori un spațiu unde timpul decide clasamentul.",
+          "tiles": [
+            "n_spt_200m_liber",
+            "n_v4spo_alergare",
+            "n_v4spo_pista",
+            "n_v4spo_inot"
+          ],
+          "tile_labels": [
+            "200 m liber",
+            "alergare",
+            "pistă",
+            "înot"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_sport_283",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        }
+      ]
+    },
+    {
+      "ref": "gastronomie_normal_01",
+      "shelf": "gastronomie/normal",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare este un vas din care se mănâncă ori se bea.",
+      "max_pack_board_overlap": {
+        "tiles": 2,
+        "board": "cx_gastronomie_299"
+      },
+      "projected_member_use_max": 6,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Vase pentru servit",
+          "criterion": "Fiecare este un vas din care se mănâncă ori se bea.",
+          "tiles": [
+            "n_v30_kitchen_table_farfurie",
+            "n_v30_kitchen_table_castron",
+            "n_v30_kitchen_drink_cana",
+            "n_v29_kitchen_table_pahar"
+          ],
+          "tile_labels": [
+            "Farfurie",
+            "Castron",
+            "Cană",
+            "Pahar"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Se întind pe pâine",
+          "criterion": "Fiecare poate fi întins direct pe o felie de pâine.",
+          "tiles": [
+            "n_v42gas_pate",
+            "n_v24_food_breakfast_unt",
+            "n_v42gas_fasole_batuta",
+            "n_v17gas_dulceata"
+          ],
+          "tile_labels": [
+            "Pate",
+            "Unt",
+            "Fasole bătută",
+            "Dulceață"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_gastronomie_300",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "gastronomie_normal_05",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Prăjite până devin rumene",
+          "criterion": "Prepararea obișnuită a fiecăruia implică prăjire.",
+          "tiles": [
+            "n_v3gas_cartofi_prajiti",
+            "n_gas_cascaval_pane",
+            "n_v20gas_snitel",
+            "n_v17gas_gogosi"
+          ],
+          "tile_labels": [
+            "Cartofi prăjiți",
+            "Cașcaval pane",
+            "Șnițel",
+            "Gogoși"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_limba_187",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "gastronomie_normal_06",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Mezeluri",
+          "criterion": "Fiecare este un produs din categoria mezelurilor.",
+          "tiles": [
+            "n_v20gas_parizer",
+            "n_v11gas_salam_sibiu",
+            "n_gas_caltabos",
+            "n_gas_lebar"
+          ],
+          "tile_labels": [
+            "Parizer",
+            "Salam de Sibiu",
+            "Caltaboș",
+            "Lebăr"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_gastronomie_249",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "gastronomie_normal_04",
+            "max_same_batch_group": 4
+          }
+        }
+      ]
+    },
+    {
+      "ref": "gastronomie_normal_02",
+      "shelf": "gastronomie/normal",
+      "author_verdict": "hold",
+      "anchor_group": 3,
+      "anchor_reason": "Fiecare este folosită frecvent crudă în salate.",
+      "max_pack_board_overlap": {
+        "tiles": 4,
+        "board": "cx_gastronomie_292"
+      },
+      "projected_member_use_max": 3,
+      "hard_errors": [],
+      "editorial_flags": [
+        "hold_subjective_travel_snack_and_borderline_summer_grape"
+      ],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": false,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Băuturi fără alcool cunoscute înainte de 1990",
+          "criterion": "Fiecare se consuma în România înainte de anul 1990 și nu este alcoolică.",
+          "tiles": [
+            "n_v42gas_cico",
+            "n_v42gas_must",
+            "n_v18gas_socata",
+            "n_v3gas_cafea"
+          ],
+          "tile_labels": [
+            "Cico",
+            "Must",
+            "Socată",
+            "Cafea"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_gastronomie_299",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Gustări de luat la drum",
+          "criterion": "Fiecare poate fi mâncată ușor fără tacâmuri, ca gustare.",
+          "tiles": [
+            "n_v17gas_pufuleti",
+            "n_v24_food_snack_biscuit",
+            "n_v24_food_snack_sandvis",
+            "n_v21gas_merdenea"
+          ],
+          "tile_labels": [
+            "Pufuleți",
+            "Biscuit",
+            "Sandviș",
+            "Merdenea"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_viata_de_roman_313",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Legume puse crude în salată",
+          "criterion": "Fiecare este folosită frecvent crudă în salate.",
+          "tiles": [
+            "n_v24_food_salad_veg_ardei",
+            "n_v24_food_salad_veg_castravete",
+            "n_v24_food_garden_veg_ridiche",
+            "n_v4gas_ceapa"
+          ],
+          "tile_labels": [
+            "Ardei",
+            "Castravete",
+            "Ridiche",
+            "Ceapă"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_stiinta_308",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "gastronomie_normal_05",
+            "max_same_batch_group": 1
+          }
+        },
+        {
+          "label": "Fructe de vară",
+          "criterion": "Fiecare se coace și se consumă proaspăt vara în România.",
+          "tiles": [
+            "n_v24_food_small_fruit_capsuna",
+            "n_v24_food_small_fruit_cireasa",
+            "n_v24_food_small_fruit_strugure",
+            "n_v24_food_summer_fruit_pepene"
+          ],
+          "tile_labels": [
+            "Căpșună",
+            "Cireașă",
+            "Strugure",
+            "Pepene"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_gastronomie_300",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "gastronomie_normal_06",
+            "max_same_batch_group": 4
+          }
+        }
+      ]
+    },
+    {
+      "ref": "gastronomie_normal_03",
+      "shelf": "gastronomie/normal",
+      "author_verdict": "drop",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare este bucătar profesionist cunoscut din media românească.",
+      "max_pack_board_overlap": {
+        "tiles": 2,
+        "board": "cx_gastronomie_248"
+      },
+      "projected_member_use_max": 4,
+      "hard_errors": [],
+      "editorial_flags": [
+        "two_deep_cuts_in_chef_group"
+      ],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": false,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Chefi cunoscuți publicului român",
+          "criterion": "Fiecare este bucătar profesionist cunoscut din media românească.",
+          "tiles": [
+            "n_v20gas_catalin_scarlatescu",
+            "n_v20gas_florin_dumitrescu",
+            "n_v19gas_adi_hadean",
+            "n_v19gas_richard_abou_zaki"
+          ],
+          "tile_labels": [
+            "Cătălin Scărlătescu",
+            "Florin Dumitrescu",
+            "Adi Hădean",
+            "Richard Abou Zaki"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Localuri bucureștene cunoscute",
+          "criterion": "Fiecare este un local sau lanț cu prezență cunoscută în București.",
+          "tiles": [
+            "n_v11gas_caru_cu_bere",
+            "n_v18gas_dristor_kebap",
+            "n_v19gas_taverna_racilor",
+            "n_gas_hanul_lui_manuc"
+          ],
+          "tile_labels": [
+            "Caru' cu Bere",
+            "Dristor Kebap",
+            "Taverna Racilor",
+            "Hanul lui Manuc"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_gastronomie_248",
+            "max_pack_status": "pending",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Comenzi culinare devenite tendințe",
+          "criterion": "Fiecare a fost o tendință vizibilă în meniurile urbane recente.",
+          "tiles": [
+            "n_v21gas_sushi",
+            "n_v19gas_smash_burger",
+            "n_v19gas_bubble_tea",
+            "n_v19gas_matcha"
+          ],
+          "tile_labels": [
+            "Sushi",
+            "Smash burger",
+            "Bubble tea",
+            "Matcha"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "gastronomie_normal_05",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Deserturi și gustări dulci",
+          "criterion": "Fiecare este un preparat dulce servit ca desert ori gustare.",
+          "tiles": [
+            "n_v18gas_amandina",
+            "n_v18gas_salam_de_biscuiti",
+            "n_v21gas_turta_dulce",
+            "n_v17gas_gogosi"
+          ],
+          "tile_labels": [
+            "Amandină",
+            "Salam de biscuiți",
+            "Turtă dulce",
+            "Gogoși"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_gastronomie_301",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "gastronomie_normal_01",
+            "max_same_batch_group": 3
+          }
+        }
+      ]
+    },
+    {
+      "ref": "gastronomie_normal_04",
+      "shelf": "gastronomie/normal",
+      "author_verdict": "advance",
+      "anchor_group": 3,
+      "anchor_reason": "Fiecare este un produs lactat de consum curent.",
+      "max_pack_board_overlap": {
+        "tiles": 4,
+        "board": "cx_gastronomie_174"
+      },
+      "projected_member_use_max": 7,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [
+        {
+          "check": "red_herring_budget",
+          "level": "WARN",
+          "detail": "2 contested tiles (budget <4): Pâine de casă, Supă cu găluște"
+        }
+      ],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Se coc în cuptor",
+          "criterion": "Fiecare preparat are o versiune tradițională coaptă în cuptor.",
+          "tiles": [
+            "n_v17gas_pasca",
+            "n_gas_paine_de_casa",
+            "n_gas_covrigi_buzau",
+            "n_v42gas_placinta_mere"
+          ],
+          "tile_labels": [
+            "Pască",
+            "Pâine de casă",
+            "Covrigi de Buzău",
+            "Plăcintă cu mere"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_viata_de_roman_169",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Se mănâncă din farfurie adâncă",
+          "criterion": "Fiecare este o zeamă servită cu lingura.",
+          "tiles": [
+            "n_v42gas_ciorba_fasole",
+            "n_v11gas_ciorba_perisoare",
+            "n_gas_supa_galuste",
+            "n_gas_bors"
+          ],
+          "tile_labels": [
+            "Ciorbă de fasole",
+            "Ciorbă de perișoare",
+            "Supă cu găluște",
+            "Borș"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_gastronomie_298",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Lactate de bază",
+          "criterion": "Fiecare este un produs lactat de consum curent.",
+          "tiles": [
+            "n_v24_food_breakfast_iaurt",
+            "n_v20gas_smantana",
+            "n_v4gas_lapte",
+            "n_v24_food_breakfast_unt"
+          ],
+          "tile_labels": [
+            "Iaurt",
+            "Smântână",
+            "Lapte",
+            "Unt"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_gastronomie_292",
+            "max_pack_status": "pending",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "gastronomie_normal_05",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Preparate din carne de porc",
+          "criterion": "Carnea de porc este ingredientul definitoriu al fiecăruia.",
+          "tiles": [
+            "n_gas_toba",
+            "n_gas_lebar",
+            "n_v11gas_salam_sibiu",
+            "n_v20gas_pomana_porcului"
+          ],
+          "tile_labels": [
+            "Tobă",
+            "Lebăr",
+            "Salam de Sibiu",
+            "Pomana porcului"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_gastronomie_249",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "gastronomie_normal_01",
+            "max_same_batch_group": 4
+          }
+        }
+      ]
+    },
+    {
+      "ref": "gastronomie_normal_05",
+      "shelf": "gastronomie/normal",
+      "author_verdict": "advance",
+      "anchor_group": 2,
+      "anchor_reason": "Fiecare intră într-un aluat obișnuit de clătite.",
+      "max_pack_board_overlap": {
+        "tiles": 3,
+        "board": "cx_gastronomie_299"
+      },
+      "projected_member_use_max": 4,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Arome din grădină",
+          "criterion": "Fiecare este plantă sau bulb folosit pentru aromarea mâncării.",
+          "tiles": [
+            "n_v42gas_marar",
+            "n_v42gas_patrunjel",
+            "n_v4gas_usturoi",
+            "n_v4gas_ceapa"
+          ],
+          "tile_labels": [
+            "Mărar",
+            "Pătrunjel",
+            "Usturoi",
+            "Ceapă"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_gastronomie_297",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "gastronomie_normal_02",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Ingrediente pentru clătite",
+          "criterion": "Fiecare intră într-un aluat obișnuit de clătite.",
+          "tiles": [
+            "n_v24_food_pantry_faina",
+            "n_v4gas_ou",
+            "n_v4gas_lapte",
+            "n_v24_food_pantry_ulei"
+          ],
+          "tile_labels": [
+            "Făină",
+            "Ou",
+            "Lapte",
+            "Ulei"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_gastronomie_292",
+            "max_pack_status": "pending",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "gastronomie_normal_04",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Comenzi urbane internaționale",
+          "criterion": "Fiecare este o comandă urbană de origine internațională.",
+          "tiles": [
+            "n_v3gas_pizza",
+            "n_v21gas_sushi",
+            "n_v19gas_smash_burger",
+            "n_gas_saorma_de_toate"
+          ],
+          "tile_labels": [
+            "Pizza",
+            "Sushi",
+            "Smash burger",
+            "Șaorma cu de toate"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_gastronomie_172",
+            "max_pack_status": "pending",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "gastronomie_normal_03",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Se păstrează în borcan",
+          "criterion": "Fiecare este conservat în mod obișnuit în borcan.",
+          "tiles": [
+            "n_v17gas_dulceata",
+            "n_v20gas_compot",
+            "n_v11gas_magiun_topoloveni",
+            "n_v42gas_castraveti_murati"
+          ],
+          "tile_labels": [
+            "Dulceață",
+            "Compot",
+            "Magiun de Topoloveni",
+            "Castraveți murați"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_gastronomie_299",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "gastronomie_normal_06",
+            "max_same_batch_group": 1
+          }
+        }
+      ]
+    },
+    {
+      "ref": "gastronomie_normal_06",
+      "shelf": "gastronomie/normal",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Numele fiecărui preparat include explicit o localitate sau regiune.",
+      "max_pack_board_overlap": {
+        "tiles": 4,
+        "board": "cx_gastronomie_297"
+      },
+      "projected_member_use_max": 5,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Au o localitate în nume",
+          "criterion": "Numele fiecărui preparat include explicit o localitate sau regiune.",
+          "tiles": [
+            "n_v11gas_salam_sibiu",
+            "n_v20gas_telemea_ibanesti",
+            "n_v11gas_magiun_topoloveni",
+            "n_v20gas_carnati_topor_valcea"
+          ],
+          "tile_labels": [
+            "Salam de Sibiu",
+            "Telemea de Ibănești",
+            "Magiun de Topoloveni",
+            "Cârnați din topor din Vâlcea"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_gastronomie_297",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "gastronomie_normal_05",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Se gătesc în ulei sau tigaie",
+          "criterion": "Fiecare se gătește în mod obișnuit prin prăjire.",
+          "tiles": [
+            "n_v18gas_langosi",
+            "n_v3gas_cartofi_prajiti",
+            "n_gas_cascaval_pane",
+            "n_gas_papanasi"
+          ],
+          "tile_labels": [
+            "Langoși",
+            "Cartofi prăjiți",
+            "Cașcaval pane",
+            "Papanași"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_viata_de_roman_172",
+            "max_pack_status": "pending",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "gastronomie_normal_01",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Băuturi alcoolice din fructe",
+          "criterion": "Fiecare este obținută din fructe prin fermentare ori distilare.",
+          "tiles": [
+            "n_v4gas_vin",
+            "n_gas_tuica",
+            "n_gas_palinca",
+            "n_v42gas_visinata"
+          ],
+          "tile_labels": [
+            "Vin",
+            "Țuică",
+            "Pălincă",
+            "Vișinată"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_gastronomie_300",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Fructe potrivite pentru compot",
+          "criterion": "Fiecare este folosit frecvent la compot.",
+          "tiles": [
+            "n_v24_food_orchard_pruna",
+            "n_v24_food_summer_fruit_piersica",
+            "n_v24_food_orchard_para",
+            "n_v24_food_small_fruit_strugure"
+          ],
+          "tile_labels": [
+            "Prună",
+            "Piersică",
+            "Pară",
+            "Strugure"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_stiinta_311",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "gastronomie_normal_02",
+            "max_same_batch_group": 4
+          }
+        }
+      ]
+    },
+    {
+      "ref": "geografie_normal_01",
+      "shelf": "geografie/normal",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare râu se varsă direct în Dunăre.",
+      "max_pack_board_overlap": {
+        "tiles": 2,
+        "board": "cx_istorie_032"
+      },
+      "projected_member_use_max": 7,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Afluenți direcți ai Dunării",
+          "criterion": "Fiecare râu se varsă direct în Dunăre.",
+          "tiles": [
+            "n_v20geo_arges",
+            "n_v20geo_jiu",
+            "n_siret",
+            "n_v20geo_tisa"
+          ],
+          "tile_labels": [
+            "Argeș",
+            "Jiu",
+            "Siret",
+            "Tisa"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_geografie_305",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Forme majore de relief",
+          "criterion": "Fiecare este o formă de relief distinctă.",
+          "tiles": [
+            "n_v2geo_munte",
+            "n_v3geo_deal",
+            "n_v2geo_campie",
+            "n_v2geo_podis"
+          ],
+          "tile_labels": [
+            "munte",
+            "deal",
+            "câmpie",
+            "podiș"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Orașe din Transilvania",
+          "criterion": "Fiecare oraș se află în Transilvania.",
+          "tiles": [
+            "n_brasov",
+            "n_sibiu",
+            "n_geox_targu_mures",
+            "n_geox_deva"
+          ],
+          "tile_labels": [
+            "Brașov",
+            "Sibiu",
+            "Târgu Mureș",
+            "Deva"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_istorie_032",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "geografie_normal_03",
+            "max_same_batch_group": 1
+          }
+        },
+        {
+          "label": "Termeni ai țărmului",
+          "criterion": "Fiecare numește o formă sau zonă aflată la marginea unei ape mari.",
+          "tiles": [
+            "n_v4geo_mal",
+            "n_v4geo_coasta",
+            "n_v4geo_faleza",
+            "n_v4geo_plaja"
+          ],
+          "tile_labels": [
+            "mal",
+            "coastă",
+            "faleză",
+            "plajă"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_geografie_180",
+            "max_pack_status": "pending",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "geografie_normal_02",
+            "max_same_batch_group": 3
+          }
+        }
+      ]
+    },
+    {
+      "ref": "geografie_normal_02",
+      "shelf": "geografie/normal",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare localitate are port maritim sau fluvial.",
+      "max_pack_board_overlap": {
+        "tiles": 4,
+        "board": "cx_geografie_304"
+      },
+      "projected_member_use_max": 4,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Orașe-port din România",
+          "criterion": "Fiecare localitate are port maritim sau fluvial.",
+          "tiles": [
+            "n_v21geo_braila",
+            "n_socx_galati",
+            "n_v11geo_sulina",
+            "n_v11geo_tulcea"
+          ],
+          "tile_labels": [
+            "Brăila",
+            "Galați",
+            "Sulina",
+            "Tulcea"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_geografie_304",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Repere din Munții Bucegi",
+          "criterion": "Fiecare reper se află în masivul Bucegi.",
+          "tiles": [
+            "n_v17geo_babele",
+            "n_v17geo_sfinxul_bucegi",
+            "n_omu",
+            "n_v20geo_crucea_caraiman"
+          ],
+          "tile_labels": [
+            "Babele",
+            "Sfinxul din Bucegi",
+            "Vârful Omu",
+            "Crucea Caraiman"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_geografie_303",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Forme la contactul dintre uscat și apă",
+          "criterion": "Fiecare este o formă geografică aflată la întâlnirea uscatului cu apa.",
+          "tiles": [
+            "n_v3geo_insula",
+            "n_v4geo_peninsula",
+            "n_v4geo_golf",
+            "n_v4geo_faleza"
+          ],
+          "tile_labels": [
+            "insulă",
+            "peninsulă",
+            "golf",
+            "faleză"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "geografie_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Stațiuni balneare",
+          "criterion": "Fiecare localitate este cunoscută ca stațiune balneară.",
+          "tiles": [
+            "n_geox_borsec",
+            "n_geox_techirghiol",
+            "n_v42geo_sovata",
+            "n_v42geo_slanic_moldova"
+          ],
+          "tile_labels": [
+            "Borsec",
+            "Techirghiol",
+            "Sovata",
+            "Slănic-Moldova"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_geografie_305",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "geografie_normal_05",
+            "max_same_batch_group": 1
+          }
+        }
+      ]
+    },
+    {
+      "ref": "geografie_normal_03",
+      "shelf": "geografie/normal",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare oraș este în jumătatea vestică a României.",
+      "max_pack_board_overlap": {
+        "tiles": 3,
+        "board": "cx_societate_154"
+      },
+      "projected_member_use_max": 7,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Orașe din vestul țării",
+          "criterion": "Fiecare oraș este în jumătatea vestică a României.",
+          "tiles": [
+            "n_timisoara",
+            "n_geox_arad",
+            "n_v11geo_oradea",
+            "n_geox_deva"
+          ],
+          "tile_labels": [
+            "Timișoara",
+            "Arad",
+            "Oradea",
+            "Deva"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_geografie_024",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "geografie_normal_04",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Masive din Carpații Meridionali",
+          "criterion": "Fiecare masiv aparține Carpaților Meridionali.",
+          "tiles": [
+            "n_muntii_fagaras",
+            "n_geox_piatra_craiului",
+            "n_v21geo_muntii_parang",
+            "n_geox_retezat"
+          ],
+          "tile_labels": [
+            "Munții Făgăraș",
+            "Munții Piatra Craiului",
+            "Munții Parâng",
+            "Munții Retezat"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_geografie_302",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Lacuri și complexe lacustre",
+          "criterion": "Fiecare este un lac ori complex lacustru din România.",
+          "tiles": [
+            "n_v20geo_lacul_izvorul_muntelui",
+            "n_v21geo_lacul_ursu",
+            "n_v20geo_razim_sinoe",
+            "n_lacul_sfanta_ana"
+          ],
+          "tile_labels": [
+            "Lacul Izvorul Muntelui",
+            "Lacul Ursu",
+            "Complexul Razim-Sinoe",
+            "Lacul Sfânta Ana"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_geografie_304",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Regiuni istorice",
+          "criterion": "Fiecare este o regiune istorică românească.",
+          "tiles": [
+            "n_bucovina",
+            "n_muntenia",
+            "n_moldova_reg",
+            "n_v11geo_maramures"
+          ],
+          "tile_labels": [
+            "Bucovina",
+            "Muntenia",
+            "Moldova",
+            "Maramureș"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_stiinta_287",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        }
+      ]
+    },
+    {
+      "ref": "geografie_normal_04",
+      "shelf": "geografie/normal",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare este un reper geografic al culoarului Dunării din România.",
+      "max_pack_board_overlap": {
+        "tiles": 5,
+        "board": "cx_geografie_303"
+      },
+      "projected_member_use_max": 6,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Repere ale culoarului Dunării",
+          "criterion": "Fiecare este un reper geografic al culoarului Dunării din România.",
+          "tiles": [
+            "n_v11geo_portile_fier",
+            "n_v11geo_cazanele_dunarii",
+            "n_v21geo_podul_braila",
+            "n_v17geo_canal_dunare_marea_neagra"
+          ],
+          "tile_labels": [
+            "Porțile de Fier",
+            "Cazanele Dunării",
+            "Podul de la Brăila",
+            "Canalul Dunăre-Marea Neagră"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_geografie_303",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "geografie_normal_05",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Arii naturale protejate",
+          "criterion": "Fiecare loc are statut de arie naturală protejată.",
+          "tiles": [
+            "n_v17geo_vulcanii_noroiosi",
+            "n_v17geo_padurea_letea",
+            "n_v20geo_cheile_turzii",
+            "n_cheile_bicazului"
+          ],
+          "tile_labels": [
+            "Vulcanii Noroioși",
+            "Pădurea Letea",
+            "Cheile Turzii",
+            "Cheile Bicazului"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_geografie_303",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "geografie_normal_06",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Orașe reședință de județ",
+          "criterion": "Fiecare este municipiu reședință de județ.",
+          "tiles": [
+            "n_v20geo_ploiesti",
+            "n_v11geo_suceava",
+            "n_v11geo_oradea",
+            "n_geox_arad"
+          ],
+          "tile_labels": [
+            "Ploiești",
+            "Suceava",
+            "Oradea",
+            "Arad"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_geografie_024",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "geografie_normal_03",
+            "max_same_batch_group": 1
+          }
+        },
+        {
+          "label": "Masive și grupe montane din România",
+          "criterion": "Fiecare numește o unitate montană distinctă din România.",
+          "tiles": [
+            "n_bucegi",
+            "n_v11geo_ceahlau",
+            "n_v17geo_muntii_rodnei",
+            "n_v21geo_muntii_calimani"
+          ],
+          "tile_labels": [
+            "Munții Bucegi",
+            "Ceahlău",
+            "Munții Rodnei",
+            "Munții Călimani"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_geografie_302",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        }
+      ]
+    },
+    {
+      "ref": "geografie_normal_05",
+      "shelf": "geografie/normal",
+      "author_verdict": "drop",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare localitate este o stațiune aflată între dealuri ori munți.",
+      "max_pack_board_overlap": {
+        "tiles": 3,
+        "board": "cx_geografie_303"
+      },
+      "projected_member_use_max": 5,
+      "hard_errors": [],
+      "editorial_flags": [
+        "museum_group_is_broad"
+      ],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": false,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Stațiuni în zone montane sau submontane",
+          "criterion": "Fiecare localitate este o stațiune aflată între dealuri ori munți.",
+          "tiles": [
+            "n_v20geo_poiana_brasov",
+            "n_v42geo_busteni",
+            "n_v42geo_sovata",
+            "n_v42geo_slanic_moldova"
+          ],
+          "tile_labels": [
+            "Poiana Brașov",
+            "Bușteni",
+            "Sovata",
+            "Slănic-Moldova"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_geografie_305",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "geografie_normal_02",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Forme și surse naturale",
+          "criterion": "Fiecare este o formă ori sursă naturală întâlnită în peisaj.",
+          "tiles": [
+            "n_v2geo_pestera",
+            "n_v4geo_izvor",
+            "n_v4geo_cascada",
+            "n_v4geo_vulcan"
+          ],
+          "tile_labels": [
+            "peșteră",
+            "izvor",
+            "cascadă",
+            "vulcan"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_stiinta_167",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Lucrări care traversează relieful",
+          "criterion": "Fiecare este o lucrare românească majoră construită peste ori prin relief.",
+          "tiles": [
+            "n_transfagarasan",
+            "n_v17geo_transalpina",
+            "n_v11geo_portile_fier",
+            "n_v17geo_canal_dunare_marea_neagra"
+          ],
+          "tile_labels": [
+            "Transfăgărășan",
+            "Transalpina",
+            "Porțile de Fier",
+            "Canalul Dunăre-Marea Neagră"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_geografie_303",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "geografie_normal_04",
+            "max_same_batch_group": 1
+          }
+        },
+        {
+          "label": "Muzee despre patrimoniu material românesc",
+          "criterion": "Fiecare muzeu expune obiecte ori construcții din patrimoniul românesc.",
+          "tiles": [
+            "n_v20art_muzeul_astra",
+            "n_v17art_muzeul_satului",
+            "n_v11art_muzeul_taranului",
+            "n_v21art_muzeul_national_istorie"
+          ],
+          "tile_labels": [
+            "Muzeul ASTRA",
+            "Muzeul Național al Satului „Dimitrie Gusti”",
+            "Muzeul Național al Țăranului Român",
+            "Muzeul Național de Istorie a României"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_arta_cultura_240",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        }
+      ]
+    },
+    {
+      "ref": "geografie_normal_06",
+      "shelf": "geografie/normal",
+      "author_verdict": "drop",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare reper se află în municipiul București.",
+      "max_pack_board_overlap": {
+        "tiles": 3,
+        "board": "cx_geografie_254"
+      },
+      "projected_member_use_max": 5,
+      "hard_errors": [],
+      "editorial_flags": [
+        "broad_littoral_group"
+      ],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": false,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Repere din București",
+          "criterion": "Fiecare reper se află în municipiul București.",
+          "tiles": [
+            "n_v18via_therme",
+            "n_v42geo_arcul_de_triumf",
+            "n_v42geo_cismigiu",
+            "n_v11spo_arena_nationala"
+          ],
+          "tile_labels": [
+            "Therme București",
+            "Arcul de Triumf",
+            "Cișmigiu",
+            "Arena Națională"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_geografie_304",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Destinații geologice din Transilvania",
+          "criterion": "Fiecare este o destinație geologică vizitabilă din Transilvania.",
+          "tiles": [
+            "n_geox_pestera_ursilor",
+            "n_pestera_scarisoara",
+            "n_v17geo_salina_turda",
+            "n_v20geo_cheile_turzii"
+          ],
+          "tile_labels": [
+            "Peștera Urșilor",
+            "Peștera Scărișoara",
+            "Salina Turda",
+            "Cheile Turzii"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_stiinta_167",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "geografie_normal_04",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Termeni pentru traseul montan",
+          "criterion": "Fiecare numește un element concret întâlnit pe un traseu montan.",
+          "tiles": [
+            "n_v4geo_poteca",
+            "n_v4geo_stanca",
+            "n_v3geo_vale",
+            "n_v4geo_colina"
+          ],
+          "tile_labels": [
+            "potecă",
+            "stâncă",
+            "vale",
+            "colină"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_geografie_180",
+            "max_pack_status": "pending",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Ape sau forme litorale",
+          "criterion": "Fiecare este o întindere de apă ori o formă litorală.",
+          "tiles": [
+            "n_v3geo_mare",
+            "n_v3geo_ocean",
+            "n_v4geo_golf",
+            "n_v4geo_peninsula"
+          ],
+          "tile_labels": [
+            "mare",
+            "ocean",
+            "golf",
+            "peninsulă"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_geografie_180",
+            "max_pack_status": "pending",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "geografie_normal_02",
+            "max_same_batch_group": 3
+          }
+        }
+      ]
+    },
+    {
+      "ref": "personalitati_normal_01",
+      "shelf": "personalitati/normal",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Prenumele fiecărei persoane este Ion.",
+      "max_pack_board_overlap": {
+        "tiles": 1,
+        "board": "cx_stiinta_231"
+      },
+      "projected_member_use_max": 6,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Prenumele Ion",
+          "criterion": "Prenumele fiecărei persoane este Ion.",
+          "tiles": [
+            "n_v21per_ion_mincu",
+            "n_v20per_ion_ratiu",
+            "n_v17fil_ion_popescu_gopo",
+            "n_v21sti_ion_agarbiceanu_fizicianul"
+          ],
+          "tile_labels": [
+            "Ion Mincu",
+            "Ion Rațiu",
+            "Ion Popescu-Gopo",
+            "Ion I. Agârbiceanu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "personalitati_normal_05",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Prenumele Nicolae",
+          "criterion": "Prenumele fiecărei persoane este Nicolae.",
+          "tiles": [
+            "n_v11spo_nicolae_dobrin",
+            "n_v19spo_nicolae_stanciu",
+            "n_v17per_nicolae_steinhardt",
+            "n_v17sti_nicolae_teclu"
+          ],
+          "tile_labels": [
+            "Nicolae Dobrin",
+            "Nicolae Stanciu",
+            "Nicolae Steinhardt",
+            "Nicolae Teclu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "sport_usor_03",
+            "max_same_batch_group": 1
+          }
+        },
+        {
+          "label": "Scriitori români moderni",
+          "criterion": "Fiecare este autor român publicat în epoca modernă sau contemporană.",
+          "tiles": [
+            "n_v20lit_alexandru_macedonski",
+            "n_v17lit_ana_blandiana",
+            "n_herta_muller",
+            "n_v17lit_mircea_cartarescu"
+          ],
+          "tile_labels": [
+            "Alexandru Macedonski",
+            "Ana Blandiana",
+            "Herta Muller",
+            "Mircea Cărtărescu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_stiinta_231",
+            "max_pack_status": "pending",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Medaliați olimpici români din sporturi individuale",
+          "criterion": "Fiecare a câștigat pentru România o medalie olimpică într-un sport individual.",
+          "tiles": [
+            "n_v18spo_ana_barbosu",
+            "n_v11spo_ana_maria_branza",
+            "n_v20spo_mihaela_cambei",
+            "n_v17spo_catalina_ponor"
+          ],
+          "tile_labels": [
+            "Ana Bărbosu",
+            "Ana Maria Brânză",
+            "Mihaela Cambei",
+            "Cătălina Ponor"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_05",
+            "max_same_batch_group": 1
+          }
+        }
+      ]
+    },
+    {
+      "ref": "personalitati_normal_02",
+      "shelf": "personalitati/normal",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare este cunoscut prin filozofie sau eseu.",
+      "max_pack_board_overlap": {
+        "tiles": 2,
+        "board": "cx_personalitati_277"
+      },
+      "projected_member_use_max": 8,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Filozofi și eseiști",
+          "criterion": "Fiecare este cunoscut prin filozofie sau eseu.",
+          "tiles": [
+            "n_constantin_noica",
+            "n_mircea_eliade",
+            "n_v21per_andrei_plesu",
+            "n_v21per_gabriel_liiceanu"
+          ],
+          "tile_labels": [
+            "Constantin Noica",
+            "Mircea Eliade",
+            "Andrei Pleșu",
+            "Gabriel Liiceanu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_personalitati_145",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Interpreți de muzică",
+          "criterion": "Fiecare este interpret român cunoscut pe scene muzicale.",
+          "tiles": [
+            "n_v11per_hariclea_darclee",
+            "n_angela_gheorghiu",
+            "n_v11per_gheorghe_zamfir",
+            "n_maria_tanase"
+          ],
+          "tile_labels": [
+            "Hariclea Darclée",
+            "Angela Gheorghiu",
+            "Gheorghe Zamfir",
+            "Maria Tănase"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_personalitati_277",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "personalitati_normal_04",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Personalități medicale",
+          "criterion": "Fiecare a avut o carieră majoră în medicină sau sănătate publică.",
+          "tiles": [
+            "n_v21sti_mina_minovici",
+            "n_v20per_sofia_ionescu",
+            "n_v11per_carol_davila",
+            "n_v17per_raed_arafat"
+          ],
+          "tile_labels": [
+            "Mina Minovici",
+            "Sofia Ionescu",
+            "Carol Davila",
+            "Raed Arafat"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_personalitati_276",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 1
+          }
+        },
+        {
+          "label": "Campioni din sporturi diferite",
+          "criterion": "Fiecare este campion român emblematic într-un sport diferit.",
+          "tiles": [
+            "n_v11spo_leonard_doroftei",
+            "n_v20spo_horia_tecau",
+            "n_v18spo_iolanda_balas",
+            "n_v20spo_mihaela_cambei"
+          ],
+          "tile_labels": [
+            "Leonard Doroftei",
+            "Horia Tecău",
+            "Iolanda Balaș",
+            "Mihaela Cambei"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_normal_06",
+            "max_same_batch_group": 1
+          }
+        }
+      ]
+    },
+    {
+      "ref": "personalitati_normal_03",
+      "shelf": "personalitati/normal",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Prenumele fiecărei persoane este Radu.",
+      "max_pack_board_overlap": {
+        "tiles": 2,
+        "board": "cx_stiinta_166"
+      },
+      "projected_member_use_max": 8,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Prenumele Radu",
+          "criterion": "Prenumele fiecărei persoane este Radu.",
+          "tiles": [
+            "n_v11per_radu_beligan",
+            "n_v18fil_radu_jude",
+            "n_v19fil_radu_valcan",
+            "n_v18spo_radu_dragusin"
+          ],
+          "tile_labels": [
+            "Radu Beligan",
+            "Radu Jude",
+            "Radu Vâlcan",
+            "Radu Drăgușin"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_personalitati_277",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "sport_usor_06",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Prenumele Adrian",
+          "criterion": "Prenumele fiecărei persoane este Adrian.",
+          "tiles": [
+            "n_v21spo_adrian_mutu",
+            "n_v21art_adrian_ghenie",
+            "n_v18fil_adrian_vancica",
+            "n_muz_adrian_minune"
+          ],
+          "tile_labels": [
+            "Adrian Mutu",
+            "Adrian Ghenie",
+            "Adrian Văncică",
+            "Adrian Minune"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_personalitati_213",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "sport_usor_06",
+            "max_same_batch_group": 1
+          }
+        },
+        {
+          "label": "Pionieri români în știință și tehnică",
+          "criterion": "Fiecare a deschis drumuri într-un domeniu științific sau tehnic.",
+          "tiles": [
+            "n_v20per_sofia_ionescu",
+            "n_v21sti_dimitrie_leonida",
+            "n_gogu_constantinescu",
+            "n_petrache_poenaru"
+          ],
+          "tile_labels": [
+            "Sofia Ionescu",
+            "Dimitrie Leonida",
+            "Gogu Constantinescu",
+            "Petrache Poenaru"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_stiinta_080",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "stiinta_normal_04",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Campioni români din sporturi diferite",
+          "criterion": "Fiecare a câștigat un titlu internațional major pentru România.",
+          "tiles": [
+            "n_v11spo_gabriela_szabo",
+            "n_v17spo_catalina_ponor",
+            "n_v19spo_eliza_samara",
+            "n_spt_cristina_neagu"
+          ],
+          "tile_labels": [
+            "Gabriela Szabó",
+            "Cătălina Ponor",
+            "Elizabeta Samara",
+            "Cristina Neagu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_sport_226",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_normal_02",
+            "max_same_batch_group": 4
+          }
+        }
+      ]
+    },
+    {
+      "ref": "personalitati_normal_04",
+      "shelf": "personalitati/normal",
+      "author_verdict": "drop",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare este pictor român cu operă muzeală.",
+      "max_pack_board_overlap": {
+        "tiles": 2,
+        "board": "cx_personalitati_212"
+      },
+      "projected_member_use_max": 6,
+      "hard_errors": [],
+      "editorial_flags": [
+        "four_generic_class_lists"
+      ],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": false,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Pictori români",
+          "criterion": "Fiecare este pictor român cu operă muzeală.",
+          "tiles": [
+            "n_v17art_theodor_pallady",
+            "n_v11art_nicolae_tonitza",
+            "n_v20art_corneliu_baba",
+            "n_v21art_adrian_ghenie"
+          ],
+          "tile_labels": [
+            "Theodor Pallady",
+            "Nicolae Tonitza",
+            "Corneliu Baba",
+            "Adrian Ghenie"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_arta_cultura_241",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "personalitati_normal_03",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Regizori de film români",
+          "criterion": "Fiecare este regizor român de lungmetraj.",
+          "tiles": [
+            "n_v19fil_tudor_giurgiu",
+            "n_v20fil_corneliu_porumboiu",
+            "n_v18fil_bogdan_muresanu",
+            "n_v17fil_sergiu_nicolaescu"
+          ],
+          "tile_labels": [
+            "Tudor Giurgiu",
+            "Corneliu Porumboiu",
+            "Bogdan Mureșanu",
+            "Sergiu Nicolaescu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "personalitati_normal_05",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Scriitori români din secolul XX",
+          "criterion": "Fiecare a publicat literatură în secolul al XX-lea.",
+          "tiles": [
+            "n_v21per_mihail_sebastian",
+            "n_hortensia_papadat_bengescu",
+            "n_v20per_regina_elisabeta",
+            "n_v20per_elena_vacarescu"
+          ],
+          "tile_labels": [
+            "Mihail Sebastian",
+            "Hortensia Papadat-Bengescu",
+            "Regina Elisabeta",
+            "Elena Văcărescu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_literatura_264",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Muzicieni clasici români",
+          "criterion": "Fiecare a avut carieră în muzica clasică.",
+          "tiles": [
+            "n_sergiu_celibidache",
+            "n_v11art_dinu_lipatti",
+            "n_v11per_hariclea_darclee",
+            "n_angela_gheorghiu"
+          ],
+          "tile_labels": [
+            "Sergiu Celibidache",
+            "Dinu Lipatti",
+            "Hariclea Darclée",
+            "Angela Gheorghiu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_personalitati_212",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "personalitati_normal_02",
+            "max_same_batch_group": 2
+          }
+        }
+      ]
+    },
+    {
+      "ref": "personalitati_normal_05",
+      "shelf": "personalitati/normal",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare a jucat pentru echipa națională de fotbal a României.",
+      "max_pack_board_overlap": {
+        "tiles": 3,
+        "board": "cx_muzica_057"
+      },
+      "projected_member_use_max": 8,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Fotbaliști români cu meciuri la națională",
+          "criterion": "Fiecare a jucat pentru echipa națională de fotbal a României.",
+          "tiles": [
+            "n_v20spo_florin_nita",
+            "n_v18spo_radu_dragusin",
+            "n_v21spo_adrian_mutu",
+            "n_v11spo_mircea_lucescu"
+          ],
+          "tile_labels": [
+            "Florin Niță",
+            "Radu Drăgușin",
+            "Adrian Mutu",
+            "Mircea Lucescu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "sport_usor_05",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Actori români",
+          "criterion": "Fiecare este actor român cunoscut în film, teatru ori televiziune.",
+          "tiles": [
+            "n_v19fil_florin_piersic_jr",
+            "n_v11per_radu_beligan",
+            "n_v18fil_adrian_vancica",
+            "n_v20fil_sebastian_stan"
+          ],
+          "tile_labels": [
+            "Florin Piersic Jr.",
+            "Radu Beligan",
+            "Adrian Văncică",
+            "Sebastian Stan"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_personalitati_277",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "personalitati_normal_03",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Regizori români de lungmetraj",
+          "criterion": "Fiecare a regizat cel puțin un lungmetraj românesc lansat în cinematografe.",
+          "tiles": [
+            "n_v19fil_tudor_giurgiu",
+            "n_v18fil_radu_jude",
+            "n_ftv_nae_caranfil",
+            "n_v17fil_ion_popescu_gopo"
+          ],
+          "tile_labels": [
+            "Tudor Giurgiu",
+            "Radu Jude",
+            "Nae Caranfil",
+            "Ion Popescu-Gopo"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_personalitati_212",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "personalitati_normal_04",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Vocaliști români contemporani",
+          "criterion": "Fiecare este interpret vocal român cu succes popular după anul 2000.",
+          "tiles": [
+            "n_muz_florin_salam",
+            "n_muz_adrian_minune",
+            "n_muz_inna",
+            "n_v17muz_loredana"
+          ],
+          "tile_labels": [
+            "Florin Salam",
+            "Adrian Minune",
+            "INNA",
+            "Loredana Groza"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_personalitati_213",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "personalitati_normal_03",
+            "max_same_batch_group": 2
+          }
+        }
+      ]
+    },
+    {
+      "ref": "personalitati_normal_06",
+      "shelf": "personalitati/normal",
+      "author_verdict": "drop",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare numește un rol creator din artele vizuale.",
+      "max_pack_board_overlap": {
+        "tiles": 1,
+        "board": "cx_societate_280"
+      },
+      "projected_member_use_max": 2,
+      "hard_errors": [],
+      "editorial_flags": [
+        "generic_profession_board"
+      ],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": false,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Profesii din artele vizuale",
+          "criterion": "Fiecare numește un rol creator din artele vizuale.",
+          "tiles": [
+            "n_v3per_pictor",
+            "n_v3per_sculptor",
+            "n_v4per_creator",
+            "n_v4per_maestru"
+          ],
+          "tile_labels": [
+            "Pictor",
+            "Sculptor",
+            "creator",
+            "maestru"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Profesii muzicale",
+          "criterion": "Fiecare numește un rol profesional din muzică.",
+          "tiles": [
+            "n_v3per_muzician",
+            "n_v3per_compozitor",
+            "n_v2per_dirijor",
+            "n_v3per_cantaret"
+          ],
+          "tile_labels": [
+            "Muzician",
+            "Compozitor",
+            "Dirijor",
+            "Cântăreț"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_muzica_208",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Roluri din știință",
+          "criterion": "Fiecare numește o persoană care produce cunoaștere.",
+          "tiles": [
+            "n_v4per_cercetator",
+            "n_v4per_savant",
+            "n_v4per_om_de_stiinta",
+            "n_inventator"
+          ],
+          "tile_labels": [
+            "cercetător",
+            "savant",
+            "om de știință",
+            "Inventator"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_personalitati_148",
+            "max_pack_status": "pending",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Roluri în viața publică",
+          "criterion": "Fiecare numește un rol vizibil în viața publică.",
+          "tiles": [
+            "n_v2per_diplomat",
+            "n_v3per_politician",
+            "n_v4per_lider",
+            "n_v4per_celebritate"
+          ],
+          "tile_labels": [
+            "Diplomat",
+            "Politician",
+            "lider",
+            "celebritate"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_societate_280",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        }
+      ]
+    },
+    {
+      "ref": "stiinta_normal_01",
+      "shelf": "stiinta/normal",
+      "author_verdict": "drop",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare este o parte vizibilă a feței.",
+      "max_pack_board_overlap": {
+        "tiles": 3,
+        "board": "cx_stiinta_309"
+      },
+      "projected_member_use_max": 3,
+      "hard_errors": [],
+      "editorial_flags": [
+        "primary_school_stock_below_normal_difficulty"
+      ],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": false,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Părți ale feței",
+          "criterion": "Fiecare este o parte vizibilă a feței.",
+          "tiles": [
+            "n_v32_body_face_buza",
+            "n_v32_body_face_frunte",
+            "n_v32_body_face_obraz",
+            "n_v32_body_face_spranceana"
+          ],
+          "tile_labels": [
+            "Buză",
+            "Frunte",
+            "Obraz",
+            "Sprânceană"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "stiinta_normal_02",
+            "max_same_batch_group": 1
+          }
+        },
+        {
+          "label": "Părți ale piciorului",
+          "criterion": "Fiecare este o parte anatomică a membrului inferior.",
+          "tiles": [
+            "n_v31_body_lower_coapsa",
+            "n_v31_body_lower_gamba",
+            "n_v31_body_lower_calcai",
+            "n_v31_body_lower_genunchi"
+          ],
+          "tile_labels": [
+            "Coapsă",
+            "Gambă",
+            "Călcâi",
+            "Genunchi"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_stiinta_311",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Fenomene meteo violente",
+          "criterion": "Fiecare este un fenomen atmosferic asociat vremii violente.",
+          "tiles": [
+            "n_v24_weather_storm_furtuna",
+            "n_v24_weather_storm_fulger",
+            "n_v24_weather_storm_tunet",
+            "n_v24_weather_precipitation_grindina"
+          ],
+          "tile_labels": [
+            "Furtună",
+            "Fulger",
+            "Tunet",
+            "Grindină"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_stiinta_309",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "stiinta_normal_05",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Mamifere domestice",
+          "criterion": "Fiecare este un mamifer domestic crescut lângă om.",
+          "tiles": [
+            "n_v29_animal_pets_caine",
+            "n_v29_animal_farm_porc",
+            "n_v30_animal_farm_cal",
+            "n_v30_animal_farm_oaie"
+          ],
+          "tile_labels": [
+            "Câine",
+            "Porc",
+            "Cal",
+            "Oaie"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_stiinta_310",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "stiinta_normal_05",
+            "max_same_batch_group": 1
+          }
+        }
+      ]
+    },
+    {
+      "ref": "stiinta_normal_02",
+      "shelf": "stiinta/normal",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare este o structură aflată în cavitatea bucală sau la marginea ei.",
+      "max_pack_board_overlap": {
+        "tiles": 2,
+        "board": "cx_stiinta_309"
+      },
+      "projected_member_use_max": 5,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Structuri ale cavității bucale",
+          "criterion": "Fiecare este o structură aflată în cavitatea bucală sau la marginea ei.",
+          "tiles": [
+            "n_v28_body_mouth_dinte",
+            "n_v3lim_limba",
+            "n_v4ist_palat",
+            "n_v32_body_face_buza"
+          ],
+          "tile_labels": [
+            "Dinte",
+            "Limbă",
+            "Palat",
+            "Buză"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_gastronomie_172",
+            "max_pack_status": "pending",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "stiinta_normal_01",
+            "max_same_batch_group": 1
+          }
+        },
+        {
+          "label": "Animale întâlnite în pădure",
+          "criterion": "Fiecare trăiește frecvent în pădurile României.",
+          "tiles": [
+            "n_v33_forest_animal_veverita",
+            "n_v30_animal_field_iepure",
+            "n_v33_forest_animal_caprioara",
+            "n_v33_forest_animal_cerb"
+          ],
+          "tile_labels": [
+            "Veveriță",
+            "Iepure",
+            "Căprioară",
+            "Cerb"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_stiinta_309",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "stiinta_normal_05",
+            "max_same_batch_group": 1
+          }
+        },
+        {
+          "label": "Se termină în „-logie”",
+          "criterion": "Numele fiecărei discipline se termină în sufixul „-logie”.",
+          "tiles": [
+            "n_v2sti_biologie",
+            "n_v17sti_geologie",
+            "n_v17sti_ecologie",
+            "n_microbiologie"
+          ],
+          "tile_labels": [
+            "Biologie",
+            "Geologie",
+            "Ecologie",
+            "Microbiologie"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_stiinta_286",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "stiinta_normal_04",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Mărimi fizice",
+          "criterion": "Fiecare este o mărime măsurabilă folosită în fizică.",
+          "tiles": [
+            "n_v4sti_forta",
+            "n_v4gas_masa",
+            "n_v4sti_temperatura",
+            "n_v3sti_energie"
+          ],
+          "tile_labels": [
+            "forță",
+            "Masă",
+            "temperatură",
+            "Energie"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_stiinta_230",
+            "max_pack_status": "pending",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        }
+      ]
+    },
+    {
+      "ref": "stiinta_normal_03",
+      "shelf": "stiinta/normal",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare este o structură prea mică pentru a fi văzută cu ochiul liber.",
+      "max_pack_board_overlap": {
+        "tiles": 3,
+        "board": "cx_stiinta_286"
+      },
+      "projected_member_use_max": 8,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Structuri microscopice",
+          "criterion": "Fiecare este o structură prea mică pentru a fi văzută cu ochiul liber.",
+          "tiles": [
+            "n_v3sti_atom",
+            "n_v3sti_molecula",
+            "n_v2sti_celula",
+            "n_ribozom"
+          ],
+          "tile_labels": [
+            "Atom",
+            "Moleculă",
+            "Celulă",
+            "Ribozom"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_stiinta_227",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Personalități ale medicinei românești",
+          "criterion": "Fiecare a avut un rol major în medicina ori microbiologia românească.",
+          "tiles": [
+            "n_george_palade",
+            "n_stix_ion_cantacuzino",
+            "n_v11per_carol_davila",
+            "n_v20per_sofia_ionescu"
+          ],
+          "tile_labels": [
+            "George Emil Palade",
+            "Ion Cantacuzino",
+            "Carol Davila",
+            "Sofia Ionescu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_personalitati_212",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "stiinta_normal_04",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Instituții românești de știință și tehnică",
+          "criterion": "Fiecare este instituție românească legată de cercetare ori educație tehnică.",
+          "tiles": [
+            "n_v11sti_institutul_cantacuzino",
+            "n_v20sti_institutul_speologie",
+            "n_v11sti_observatorul_urseanu",
+            "n_socx_universitatea_politehnica_bucuresti"
+          ],
+          "tile_labels": [
+            "Institutul Cantacuzino",
+            "Institutul de Speologie Emil Racoviță",
+            "Observatorul Urseanu",
+            "Universitatea Politehnica din București"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_stiinta_231",
+            "max_pack_status": "pending",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Matematicieni români",
+          "criterion": "Fiecare este matematician român cu contribuții academice cunoscute.",
+          "tiles": [
+            "n_v20sti_traian_lalescu",
+            "n_v20sti_octav_onicescu",
+            "n_v20sti_simion_stoilow",
+            "n_v17per_solomon_marcus"
+          ],
+          "tile_labels": [
+            "Traian Lalescu",
+            "Octav Onicescu",
+            "Simion Stoilow",
+            "Solomon Marcus"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "stiinta_normal_05",
+            "max_same_batch_group": 2
+          }
+        }
+      ]
+    },
+    {
+      "ref": "stiinta_normal_04",
+      "shelf": "stiinta/normal",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Numele fiecărui domeniu se termină în sufixul „-ică”.",
+      "max_pack_board_overlap": {
+        "tiles": 3,
+        "board": "cx_stiinta_232"
+      },
+      "projected_member_use_max": 8,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Se termină în „-ică”",
+          "criterion": "Numele fiecărui domeniu se termină în sufixul „-ică”.",
+          "tiles": [
+            "n_v2sti_fizica",
+            "n_v2sti_matematica",
+            "n_v17sti_robotica",
+            "n_cibernetica"
+          ],
+          "tile_labels": [
+            "Fizică",
+            "Matematică",
+            "Robotică",
+            "Cibernetică"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_stiinta_232",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Termeni științifici terminați în „-ie”",
+          "criterion": "Fiecare termen are utilizare științifică și se termină în literele „-ie”.",
+          "tiles": [
+            "n_v24_weather_precipitation_ploaie",
+            "n_v24_places_public_farmacie",
+            "n_v2sti_bacterie",
+            "n_v17sti_geologie"
+          ],
+          "tile_labels": [
+            "Ploaie",
+            "Farmacie",
+            "Bacterie",
+            "Geologie"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_stiinta_227",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "stiinta_normal_05",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Nume purtate de instituții științifice",
+          "criterion": "Numele fiecărei persoane este purtat de o instituție științifică românească.",
+          "tiles": [
+            "n_stix_ion_cantacuzino",
+            "n_v11per_carol_davila",
+            "n_v11sti_horia_hulubei",
+            "n_emil_racovita"
+          ],
+          "tile_labels": [
+            "Ion Cantacuzino",
+            "Carol Davila",
+            "Horia Hulubei",
+            "Emil Racoviță"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_stiinta_287",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "stiinta_normal_03",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Ingineri și inventatori români",
+          "criterion": "Fiecare este inginer ori inventator român cunoscut pentru o contribuție tehnică.",
+          "tiles": [
+            "n_v21sti_dimitrie_leonida",
+            "n_v17sti_elisa_leonida_zamfirescu",
+            "n_v21sti_aurel_persu",
+            "n_petrache_poenaru"
+          ],
+          "tile_labels": [
+            "Dimitrie Leonida",
+            "Elisa Leonida Zamfirescu",
+            "Aurel Persu",
+            "Petrache Poenaru"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_stiinta_232",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "personalitati_normal_03",
+            "max_same_batch_group": 3
+          }
+        }
+      ]
+    },
+    {
+      "ref": "stiinta_normal_05",
+      "shelf": "stiinta/normal",
+      "author_verdict": "advance",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare este un mamifer rumegător.",
+      "max_pack_board_overlap": {
+        "tiles": 4,
+        "board": "cx_stiinta_309"
+      },
+      "projected_member_use_max": 8,
+      "hard_errors": [],
+      "editorial_flags": [],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": true,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Mamifere rumegătoare",
+          "criterion": "Fiecare este un mamifer rumegător.",
+          "tiles": [
+            "n_v30_animal_farm_oaie",
+            "n_v30_animal_farm_capra",
+            "n_v33_forest_animal_cerb",
+            "n_v33_forest_animal_caprioara"
+          ],
+          "tile_labels": [
+            "Oaie",
+            "Capră",
+            "Cerb",
+            "Căprioară"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_stiinta_309",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "stiinta_normal_02",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Alți matematicieni români",
+          "criterion": "Fiecare este matematician român cu activitate academică.",
+          "tiles": [
+            "n_stix_gheorghe_titeica",
+            "n_stix_grigore_moisil",
+            "n_v20sti_traian_lalescu",
+            "n_v17per_solomon_marcus"
+          ],
+          "tile_labels": [
+            "Gheorghe Țițeica",
+            "Grigore Moisil",
+            "Traian Lalescu",
+            "Solomon Marcus"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_stiinta_165",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "stiinta_normal_03",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Fenomene meteo care reduc vizibilitatea",
+          "criterion": "Fiecare poate reduce vizibilitatea în aer liber.",
+          "tiles": [
+            "n_v24_weather_air_ceata",
+            "n_v24_weather_precipitation_ploaie",
+            "n_v24_weather_precipitation_zapada",
+            "n_v24_weather_storm_furtuna"
+          ],
+          "tile_labels": [
+            "Ceață",
+            "Ploaie",
+            "Zăpadă",
+            "Furtună"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_societate_295",
+            "max_pack_status": "pending",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "stiinta_normal_04",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Femei românce din știință",
+          "criterion": "Fiecare este femeie română cu activitate științifică sau inginerească.",
+          "tiles": [
+            "n_ana_aslan",
+            "n_v17sti_elisa_leonida_zamfirescu",
+            "n_v11sti_stefania_maracineanu",
+            "n_v20per_sofia_ionescu"
+          ],
+          "tile_labels": [
+            "Ana Aslan",
+            "Elisa Leonida Zamfirescu",
+            "Ștefania Mărăcineanu",
+            "Sofia Ionescu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_stiinta_308",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 1
+          }
+        }
+      ]
+    },
+    {
+      "ref": "stiinta_normal_06",
+      "shelf": "stiinta/normal",
+      "author_verdict": "drop",
+      "anchor_group": 1,
+      "anchor_reason": "Fiecare a avut un rol major în medicina ori sănătatea publică românească.",
+      "max_pack_board_overlap": {
+        "tiles": 3,
+        "board": "cx_stiinta_286"
+      },
+      "projected_member_use_max": 8,
+      "hard_errors": [],
+      "editorial_flags": [
+        "technology_and_matter_groups_are_broad"
+      ],
+      "lint_findings": [],
+      "rubric_self_screen": {
+        "B1_single_predicates": true,
+        "B2_type_discipline": true,
+        "B3_unique_partition": true,
+        "B4_bounded_traps": true,
+        "B5_no_mirrors": true,
+        "B6_no_hierarchy_or_filler": false,
+        "B7_easy_anchor": true,
+        "B8_recognition": [
+          "mainstream",
+          "mainstream",
+          "mainstream",
+          "mainstream"
+        ],
+        "B9_no_full_member_leak": true
+      },
+      "groups": [
+        {
+          "label": "Personalități medicale românești",
+          "criterion": "Fiecare a avut un rol major în medicina ori sănătatea publică românească.",
+          "tiles": [
+            "n_v21sti_mina_minovici",
+            "n_ana_aslan",
+            "n_v17per_raed_arafat",
+            "n_gheorghe_marinescu"
+          ],
+          "tile_labels": [
+            "Mina Minovici",
+            "Ana Aslan",
+            "Raed Arafat",
+            "Gheorghe Marinescu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_stiinta_286",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "personalitati_normal_02",
+            "max_same_batch_group": 3
+          }
+        },
+        {
+          "label": "Invenții și produse științifice românești",
+          "criterion": "Fiecare este o invenție ori realizare științifică românească.",
+          "tiles": [
+            "n_v11sti_laserul_magurele",
+            "n_stilou_rezervor",
+            "n_v11sti_gerovital",
+            "n_v17sti_becul_teclu"
+          ],
+          "tile_labels": [
+            "Laserul Măgurele",
+            "Stiloul cu rezervor",
+            "Gerovital",
+            "Becul Teclu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_stiinta_310",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
+          }
+        },
+        {
+          "label": "Tehnologii moderne",
+          "criterion": "Fiecare este un domeniu ori sistem tehnologic modern.",
+          "tiles": [
+            "n_v17sti_inteligenta_artificiala",
+            "n_v17sti_robotica",
+            "n_v3sti_electricitate",
+            "n_rachete"
+          ],
+          "tile_labels": [
+            "Inteligență artificială",
+            "Robotică",
+            "Electricitate",
+            "Rachete"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_stiinta_080",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "stiinta_normal_04",
+            "max_same_batch_group": 1
+          }
+        },
+        {
+          "label": "Cuvinte despre alcătuirea materiei",
+          "criterion": "Fiecare numește un material sau o unitate microscopică a materiei.",
+          "tiles": [
+            "n_v4sti_metal",
+            "n_v28_nature_material_piatra",
+            "n_v3sti_atom",
+            "n_v3sti_molecula"
+          ],
+          "tile_labels": [
+            "metal",
+            "Piatră",
+            "Atom",
+            "Moleculă"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_literatura_265",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "stiinta_normal_03",
+            "max_same_batch_group": 1
+          }
+        }
+      ]
+    }
+  ]
+}
