@@ -31,20 +31,23 @@ production build at 118.03/120 KiB, browser click-through, and `git diff --check
   completion counts; import cannot create or overwrite the streak. The 6/6 diploma is derived
   from the browser score document and only copies a share string.
 
-## Content and ranking baseline (post ADR-0065 content wave)
+## Content and ranking baseline (post ADR-0065/0066)
 
 | Game | Total | Approved | Pending | Runtime eligible/preferred |
 |---|---:|---:|---:|---:|
-| Conexiuni | 308 | 215 | 93 | 129 eligible |
-| Cald sau Rece | 217 | 198 | 19 | 198 eligible |
+| Conexiuni | 308 | 229 | 79 | 76 eligible |
+| Cald sau Rece | 217 | 202 | 15 | 202 eligible |
 | Lanțul Cuvintelor | 201 | 94 | 107 | 94 eligible |
 | Alchimie | 99 | 78 | 21 | 78 eligible |
 | Intrusul | 183 | 183 | 0 | 144 preferred |
 | Perechi | 153 | 153 | 0 | 113 preferred |
 
-Pack: **825 = 585 approved + 240 pending**, across 14 categories. The ranked original-game
-runtime serves **499 zero-FAIL pilot boards**; the derived strict catalog stays at **336**
-boards generated from the frozen V38 source snapshot (expansion deferred per ADR-0054/0065).
+Pack: **825 = 603 approved + 222 pending**, across 14 categories. The ranked original-game
+runtime serves **450 zero-FAIL boards** after the ADR-0066 owner wave (18 promotions; 67
+structurally-killed boards demoted to never-selected reserves via
+`board_demotions_v43.json`). Eleven Conexiuni shelves are empty and hidden pending the next
+authoring wave (ADR-0066 lists them). The derived strict catalog stays at **336** boards
+from the frozen V38 source snapshot (ADR-0054/0065; loader validates freeze-time semantics).
 Bundled KG: **2,364 nodes / 9,219 edges / 7,440 aliases / 180 puzzles** (`fixture-v5-pop`).
 V23–V33 vocabulary probes remain **322/322**.
 
@@ -85,9 +88,9 @@ git diff --check
 
 ## Next verified work
 
-- Owner decisions from ADR-0065: near-duplicate-held boards (fills the Ușor shelves to the
-  8-board daily target), the 67 verified sweep demote proposals, and the deferred
-  Lanț/Conexiuni pending-pool re-gate.
+- Author the next Conexiuni wave for the 11 empty shelves (ADR-0066) — the demoted
+  clusters (Enescu, Caragiale, rivers/lakes, sport quads) need fresh, non-recycled boards.
+- Deferred Lanț/Conexiuni pending-pool re-gate from fresh dossiers (ADR-0065).
 - Run the larger anonymous six-game pilot before a seventh mode, score recalibration, or
   derived-catalog expansion (ADR-0054; generator now pins the V38 source snapshot).
 - Keep accounts off until the compliance checklist is complete.

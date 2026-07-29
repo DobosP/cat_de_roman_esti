@@ -37,7 +37,7 @@ MAX_VARIANTS_PER_SOURCE = 3
 _PREFERRED_STANDARD_SCORE = 55
 # Updated only with a reviewed, generator-produced bundled artifact.
 DEFAULT_DERIVED_CATALOG_SHA256 = (
-    "96d07a4e824658ed8c1c5e5c4620af24a55427e2338390c0a24739149e108611"
+    "480a11d046a4afa46b5abfaea53928d834dad917a08bc52e74b7210547f442df"
 )
 
 _META_FIELDS = {
@@ -520,11 +520,14 @@ def load_derived_catalog(
 
     pack = json.loads(DEFAULT_PACK.read_text(encoding="utf-8"))
     sources = {str(rec["id"]): rec for rec in pack["conexiuni"]}
-    ranking = json.loads(DEFAULT_RANKINGS.read_text(encoding="utf-8"))
-    eligible_sources = {
-        str(row["id"])
-        for row in ranking["boards"]
-        if row["game"] == "conexiuni" and row["pilot_eligible"] is True
+    # The catalog is a frozen artifact whose sources were pilot-eligible at freeze time
+    # (V38 snapshot; ADR-0054). Live eligibility churn — ADR-0065 additions or ADR-0066
+    # owner demotions of served originals — must not invalidate the frozen children; the
+    # digest pin above binds the exact reviewed artifact. Sources must still exist and be
+    # approved so metadata and answer custody hold.
+    approved_sources = {
+        source_id for source_id, rec in sources.items()
+        if rec.get("status") == "approved"
     }
     indexed: dict[str, dict] = {}
     parsed: list[DerivedBoard] = []
@@ -540,7 +543,7 @@ def load_derived_catalog(
             not isinstance(game, str)
             or not isinstance(source_id, str)
             or game not in DERIVED_GAMES
-            or source_id not in eligible_sources
+            or source_id not in approved_sources
         ):
             raise ValueError(f"derived catalog: invalid game/source for {item_id}")
         source = sources[source_id]

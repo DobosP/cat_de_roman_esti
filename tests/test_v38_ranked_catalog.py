@@ -202,8 +202,9 @@ def test_daily_selection_is_stable_and_order_independent() -> None:
 def test_v37_daily_assignments_remain_unchanged() -> None:
     pack = load_pack()
     expected = {
-        ("conexiuni", "2026-07-19"): "cx_film_tv_169",
-        ("conexiuni", "2026-12-31"): "cx_societate_290",
+        # ADR-0066: the previous winners were owner-demoted; deterministic re-pick.
+        ("conexiuni", "2026-07-19"): "cx_meme_net_201",
+        ("conexiuni", "2026-12-31"): "cx_viata_de_roman_288",
         ("contexto", "2026-07-19"): "ct_viata_de_roman_273",
         ("contexto", "2026-12-31"): "ct_muzica_243",
         ("lant", "2026-07-19"): "lt_viata_de_roman_094",

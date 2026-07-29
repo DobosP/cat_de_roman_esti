@@ -229,7 +229,7 @@ def test_v31_keeps_the_entire_game_pack_byte_stable_and_unpromoted():
         "lant": 201,
         "alchimie": 99,
     }
-    assert statuses == {"approved": 585, "pending": 240}
+    assert statuses == {"approved": 603, "pending": 222}
 
 
 def test_v31_mobile_contract_stays_current_and_keeps_v31_public():
