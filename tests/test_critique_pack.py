@@ -174,7 +174,7 @@ def test_apply_demotions_rejects_filename_game_mismatch(tmp_path):
 
 def test_candidate_imports_are_always_pending_until_critique():
     assert import_candidates.candidate_import_status('keep') == 'pending'
-    assert import_candidates.candidate_import_status('fix') == 'pending'
+    assert import_candidates.candidate_import_status('fix') is None
     assert import_candidates.candidate_import_status('drop') is None
     assert import_candidates.candidate_import_status('surprise') is None
 
