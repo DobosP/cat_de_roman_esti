@@ -20,7 +20,7 @@
       "societate/greu": 6
     },
     "tile_placements": 480,
-    "unique_existing_nodes_used": 372,
+    "unique_existing_nodes_used": 370,
     "new_nodes": 0,
     "new_edges": 0
   },
@@ -33,23 +33,23 @@
     "film_tv": {
       "boards": 6,
       "tile_placements": 96,
-      "unique_existing_nodes_used": 85
+      "unique_existing_nodes_used": 81
     },
     "societate": {
       "boards": 12,
       "tile_placements": 192,
-      "unique_existing_nodes_used": 157
+      "unique_existing_nodes_used": 160
     },
     "kg_policy": "Every tile id was resolved against the frozen V38 knowledge graph. This proposal adds no node or edge."
   },
   "reproducibility": {
     "full_inventory_group_census_sha256": "5e15a341034c73a62b4a7b8ad731730849a8237ba63eda585408479ad182cece",
-    "canonical_candidate_batch_sha256": "fe0d65b28a6e2da9829e0c00a0bf3c76828d64ae3614141d3b6f2608718c454a",
+    "canonical_candidate_batch_sha256": "a2867f1b2ef627529e585b58400be7ca5ddbfe01a4fa7ddc92cb46b9a4ac890e",
     "canonical_candidate_batch_sha256_basis": "SHA-256 of UTF-8 canonical JSON (ensure_ascii=false, sort_keys=true, separators=[comma,colon]) over the path-sorted list [relative candidates.json path, complete parsed payload].",
     "candidate_file_sha256": {
-      "arta_cultura/candidates.json": "4384906d4082cda0f4de33f1a2611dd0b05dbf4cca5edf21622ba275f655c762",
-      "film_tv/candidates.json": "feaea95dab6940b57d5f963a7ddc4c125d4bac5c541cc8cbf399058fc24b57a7",
-      "societate/candidates.json": "d45a1f8dedc4138ef569db1cd22219185930c806204249f534badce325b81253"
+      "arta_cultura/candidates.json": "1f25238d73128bf5693ffb4e7cfbf7250c7bcefd1e5a0f43531c4264cb8647f9",
+      "film_tv/candidates.json": "207a7bc0365d6180fb1d2029e396eed2f15b98a40138ee234b3ed0d717e9cf70",
+      "societate/candidates.json": "f194d307bdeace63f5ee949eabd887edeaafafe8f08a3aa2a0889ab95586e55d"
     },
     "strict_preflight_command": "PYTHONPATH=. /home/dobo/work/romania_scraper/.venv/bin/python /tmp/preflight_v43_conexiuni.py /home/dobo/work/_worktrees/cat_de_roman_esti/content__v43-release-board-rebuild /home/dobo/work/_worktrees/cat_de_roman_esti/content__v43-cultural-shelves/content_candidates/v43-cultural-shelves",
     "strict_preflight_result": {
@@ -102,9 +102,9 @@
       "v43-film-usor-03",
       "v43-film-usor-05",
       "v43-societate-usor-01",
+      "v43-societate-usor-02",
       "v43-societate-usor-03",
       "v43-societate-usor-05",
-      "v43-societate-usor-06",
       "v43-societate-greu-01",
       "v43-societate-greu-02",
       "v43-societate-greu-04",
@@ -118,8 +118,8 @@
       "v43-arta-greu-06",
       "v43-film-usor-04",
       "v43-film-usor-06",
-      "v43-societate-usor-02",
       "v43-societate-usor-04",
+      "v43-societate-usor-06",
       "v43-societate-greu-03",
       "v43-societate-greu-06"
     ],
@@ -330,8 +330,8 @@
         "near_quad_matches": 0,
         "max_existing_board_overlap": 2,
         "max_batch_board_overlap": 3,
-        "projected_member_use_max": 6,
-        "mirror_matching_max": 1,
+        "projected_member_use_max": 7,
+        "mirror_matching_max": 0,
         "label_leaks": 0
       },
       "self_screen": {
@@ -342,7 +342,7 @@
         "trap_budget": "pass",
         "theme_fit": "pass",
         "author_recommendation": "send_to_independent_verification",
-        "note": "Institutions and genres provide anchors around two broader lexical groups; verify official institution names."
+        "note": "Visible hyphens and exclamation marks replace the repeated title-initial and generic-genre groups; three familiar answers anchor each formal predicate, and all four groups remain exact."
       }
     },
     {
@@ -399,7 +399,7 @@
         "near_quad_matches": 0,
         "max_existing_board_overlap": 2,
         "max_batch_board_overlap": 2,
-        "projected_member_use_max": 4,
+        "projected_member_use_max": 5,
         "mirror_matching_max": 0,
         "label_leaks": 0
       },
@@ -421,7 +421,7 @@
         "exact_quad_matches": 0,
         "near_quad_matches": 0,
         "max_existing_board_overlap": 3,
-        "max_batch_board_overlap": 2,
+        "max_batch_board_overlap": 1,
         "projected_member_use_max": 2,
         "mirror_matching_max": 2,
         "label_leaks": 0
@@ -444,7 +444,7 @@
         "exact_quad_matches": 0,
         "near_quad_matches": 0,
         "max_existing_board_overlap": 3,
-        "max_batch_board_overlap": 1,
+        "max_batch_board_overlap": 3,
         "projected_member_use_max": 6,
         "mirror_matching_max": 1,
         "label_leaks": 0
@@ -466,10 +466,10 @@
       "metrics": {
         "exact_quad_matches": 0,
         "near_quad_matches": 0,
-        "max_existing_board_overlap": 2,
-        "max_batch_board_overlap": 2,
-        "projected_member_use_max": 3,
-        "mirror_matching_max": 1,
+        "max_existing_board_overlap": 3,
+        "max_batch_board_overlap": 3,
+        "projected_member_use_max": 6,
+        "mirror_matching_max": 0,
         "label_leaks": 0
       },
       "self_screen": {
@@ -480,7 +480,7 @@
         "trap_budget": "pass",
         "theme_fit": "pass",
         "author_recommendation": "send_to_independent_verification",
-        "note": "The post-2013 launch boundary is objective, while the occupation and Antena 1 groups provide accessible anchors for the newer serial titles."
+        "note": "Four mainstream name-bearing titles and four familiar M-first-name personalities replace the niche recent cohort; the S-initial vocabulary and long-running Antena 1 shows are literal, accessible anchors."
       }
     },
     {
@@ -513,8 +513,8 @@
         "exact_quad_matches": 0,
         "near_quad_matches": 0,
         "max_existing_board_overlap": 3,
-        "max_batch_board_overlap": 2,
-        "projected_member_use_max": 7,
+        "max_batch_board_overlap": 3,
+        "projected_member_use_max": 6,
         "mirror_matching_max": 1,
         "label_leaks": 0
       },
@@ -526,7 +526,7 @@
         "trap_budget": "pass",
         "theme_fit": "pass",
         "author_recommendation": "send_to_independent_verification",
-        "note": "The actor predicate is now a factual profession class rather than a fame claim; the pre-2010 show predicate is auditable and supports the two less immediate groups."
+        "note": "The two solid mainstream groups remain; exact OR endings and visible title punctuation replace the generic content container and flat character list, with only two controlled pre-2010 cross-fits."
       }
     },
     {
@@ -582,20 +582,20 @@
         "exact_quad_matches": 0,
         "near_quad_matches": 0,
         "max_existing_board_overlap": 4,
-        "max_batch_board_overlap": 3,
+        "max_batch_board_overlap": 2,
         "projected_member_use_max": 3,
         "mirror_matching_max": 0,
         "label_leaks": 0
       },
       "self_screen": {
         "recognition": "pass",
-        "predicate_honesty": "caution",
+        "predicate_honesty": "pass",
         "unique_partition": "pass_structural",
         "easy_anchor": "pass",
         "trap_budget": "pass",
         "theme_fit": "pass",
-        "author_recommendation": "hold_before_verification",
-        "note": "The civic predicate is cleaner, but the national-network group remains too broad for the release shortlist."
+        "author_recommendation": "send_to_independent_verification",
+        "note": "The heterogeneous national-network bag is gone; LEGE, STAT, PARC, and TREN give one exact four-letter discovery between three concrete everyday groups."
       }
     },
     {
@@ -681,13 +681,13 @@
       },
       "self_screen": {
         "recognition": "pass",
-        "predicate_honesty": "pass",
+        "predicate_honesty": "caution",
         "unique_partition": "pass_structural",
         "easy_anchor": "pass",
         "trap_budget": "pass",
-        "theme_fit": "pass",
-        "author_recommendation": "send_to_independent_verification",
-        "note": "Adult relationships, marriage, social emotions, and demography form a coherent beginner-level society board."
+        "theme_fit": "caution",
+        "author_recommendation": "hold_before_verification",
+        "note": "Relationships, marriage, social emotions, and demography remain broad theme bags rather than four predicates stated in the same precise sense; retain only as a hold."
       }
     },
     {
@@ -720,7 +720,7 @@
         "exact_quad_matches": 0,
         "near_quad_matches": 0,
         "max_existing_board_overlap": 2,
-        "max_batch_board_overlap": 4,
+        "max_batch_board_overlap": 3,
         "projected_member_use_max": 4,
         "mirror_matching_max": 0,
         "label_leaks": 0
@@ -733,7 +733,7 @@
         "trap_budget": "pass",
         "theme_fit": "pass",
         "author_recommendation": "send_to_independent_verification",
-        "note": "The legal label no longer misclassifies Curtea Constituțională as a court in the judiciary; verify all legal remits and the monthly-receipt predicate."
+        "note": "CNP, ITP, NBA, and ADN are each displayed as exactly three uppercase letters, eliminating the former RCA/SGR visible-label defect without adding another all-suffix board."
       }
     },
     {
@@ -789,7 +789,7 @@
         "exact_quad_matches": 0,
         "near_quad_matches": 0,
         "max_existing_board_overlap": 2,
-        "max_batch_board_overlap": 4,
+        "max_batch_board_overlap": 3,
         "projected_member_use_max": 3,
         "mirror_matching_max": 1,
         "label_leaks": 0
