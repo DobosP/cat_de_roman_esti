@@ -47,6 +47,11 @@ _PLACEHOLDER_HTML = """<!doctype html>
 
 
 def spa_index(request: HttpRequest, *args, **kwargs) -> HttpResponse:
+    if request.path.startswith("/assets/"):
+        # WhiteNoise serves real Vite assets before this catch-all view. A missing
+        # content hash must remain a 404: returning index.html with status 200 makes
+        # a stale dynamic import fail as misleading JavaScript/HTML.
+        return HttpResponse(status=404)
     index_html = STATIC_DIR / "index.html"
     if index_html.exists():
         return HttpResponse(index_html.read_bytes(), content_type="text/html; charset=utf-8")

@@ -1,13 +1,12 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-07-29. This file is the repository's current source of truth._
+_As of 2026-07-30. This file is the repository's current source of truth._
 
-_Last verified: 2026-07-29 (local V42 candidate incl. the ADR-0065 content wave: backend
-full suite green, frontend 148/148, session store 16/16; pack/fixture/ranking/derived and
-`git diff --check` gates green; content is backend JSON — the tracked SPA bundle is
-unchanged from the 2026-07-28 build measurement 117.81/120 KiB)._
+_Last verified: 2026-07-30 (V42 plus stale lazy-route recovery: full backend suite,
+web/static 18/18, derived-game 36/36, session store 16/16, frontend 28/28, lint, typecheck,
+production build at 118.03/120 KiB, browser click-through, and `git diff --check` green)._
 
-## Current outcome — local V42 candidate (ADR-0062–ADR-0064)
+## Current outcome — V42 release (ADR-0062–ADR-0065)
 
 - The six-game, tap-first lobby stays in its tested fun-first order: Alchimie → Intrusul →
   Perechi → Conexiuni → Cald sau Rece → Lanț. Mobile remains one card per row; wide screens
@@ -22,6 +21,9 @@ unchanged from the 2026-07-28 build measurement 117.81/120 KiB)._
 - Intrusul and Perechi explain their starter shelf before graduation and reveal clearer loss
   summaries only after terminal server state. Hidden answers and server-authored scores are
   unchanged.
+- A browser tab kept open across a release reloads at most once when an obsolete lazy game
+  chunk is requested. Missing `/assets/` hashes return 404 instead of the SPA HTML; current
+  Intrusul and Perechi sessions, answers, scores, TTL, and caps are unchanged.
 - A category-scoped curated daily now needs four selectable exact-shelf records; the shared
   daily still needs eight. Thin shelves mine inside the requested theme or return themed 503,
   never an off-theme board carrying the requested label.
@@ -63,10 +65,9 @@ estimates, not measured fun or knowledge.
   restore, or merge them. Public records remain server-authored and consent-gated.
 - The canonical vendored `/v1` client remains generated from the producer and stamped by
   `scripts/sync_roedu_client.py`; never edit `_roedu_client_core.py` directly.
-- Shared `main` and `origin/main` are V41 at `23cf700`. The V42 release-candidate changes are
-  local only; the remote task branch contains only its earlier seed. The last live probe
-  (2026-07-23) reported V32 `fixture-v32-face-workshop-garden`; no V42 merge, push, or deploy
-  is authorized by the current continuation request.
+- Shared `main` and `origin/main` contain V42. The last recorded live probe (2026-07-23)
+  reported V32 `fixture-v32-face-workshop-garden`; repository landing and production
+  deployment remain separate operations.
 
 ## Reproduction
 
@@ -89,5 +90,4 @@ git diff --check
   Lanț/Conexiuni pending-pool re-gate.
 - Run the larger anonymous six-game pilot before a seventh mode, score recalibration, or
   derived-catalog expansion (ADR-0054; generator now pins the V38 source snapshot).
-- Merge, push, and deploy V42 only on explicit instruction; keep accounts off until the
-  compliance checklist is complete.
+- Keep accounts off until the compliance checklist is complete.

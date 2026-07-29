@@ -9,7 +9,10 @@ import "./styles/fonts.css";
 import "./styles/arcade.css";
 
 import App from "./App";
+import { installReleaseRecovery } from "./releaseRecovery.mjs";
 import { catTheme } from "./theme";
+
+installReleaseRecovery();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

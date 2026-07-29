@@ -93,3 +93,9 @@ def test_built_spa_served_when_present(client: Client):
         resp = client.get(path)
         assert resp.status_code == 200
         assert 'id="root"' in _page_text(resp)
+
+
+def test_missing_vite_asset_is_not_rewritten_to_the_spa(client: Client):
+    resp = client.get("/assets/Intrusul-OldHash1.js")
+    assert resp.status_code == 404
+    assert 'id="root"' not in _page_text(resp)
