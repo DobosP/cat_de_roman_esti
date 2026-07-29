@@ -1,15 +1,16 @@
 {
- "schema_version": 1,
+ "schema_version": 2,
  "audited_at": "2026-07-30",
  "sources": {
   "games_pack_sha256": "b2b603be2354af4c982c515ac43795bfe342c217c5cf32e59b0c5e28f5769194",
   "demotions_sha256": "ba9bb55b17b2a1a7a28e54d440256a42d7bfab337fa91861881d6ca926aa61ff",
   "rankings_sha256": "d05b2aa8729ad899222a673024d130b63e37aa78bf460d4e1ce80fa0525ee65a",
   "kg_sha256": "9363ccaa3a892ff0cd9ba77dfa5baee01eaa0de9dde5ca4bb6d3aaf17295dac2",
-  "rubric_sha256": "14f8efacf32c8e41825a1accdc43c44c9f8660cdbde7686b55d4a47ffbef6741"
+  "audit_rubric_sha256": "14f8efacf32c8e41825a1accdc43c44c9f8660cdbde7686b55d4a47ffbef6741",
+  "release_gate_rubric_sha256": "9a443ed89a6b2447c7ec6ae1bf057d25ac3acdc96e2bb5f58e03e8ab8ed64c39"
  },
  "scope": {
-  "comparison_semantics": "Each demoted group instance is counted once per condition; every group on the subject board is excluded from its comparison set.",
+  "comparison_semantics": "Each demoted group instance is counted once per condition; every group on the subject board is excluded only from this historical census. A future candidate is a different subject and must compare against the still-approved reserve source.",
   "full_pack": "all Conexiuni records, approved and pending",
   "approved_inventory": "all approved Conexiuni records, including ADR-0066 reserves",
   "current_runtime": "ranking rows with pilot_eligible=true"
@@ -20,8 +21,9 @@
   "found_approved_conexiuni": 67,
   "currently_pilot_eligible": 0,
   "group_instances": 268,
-  "hard_ban_groups": 264,
-  "conditional_salvage_groups": 4
+  "hard_ban_groups": 268,
+  "conditional_salvage_groups": 0,
+  "predicate_idea_groups": 4
  },
  "aggregate": {
   "categories": {
@@ -97,7 +99,7 @@
    "A1": 2,
    "A3": 2,
    "A4": 2,
-   "A6": 66,
+   "A6": 67,
    "A7": 1,
    "B1": 47,
    "B2": 51,
@@ -138,7 +140,11 @@
    "B8_deep_cut_cluster": 1,
    "B8_low_salience_tail": 1,
    "B9_label_self_leak": 40,
-   "approved_inventory_member_saturation": 1
+   "approved_inventory_member_saturation": 3,
+   "at_least_two_replacement_members_required": 4,
+   "direct_reuse_exact_source_collision": 4,
+   "fresh_full_gate_required": 4,
+   "predicate_idea_only": 4
   },
   "current_eligible_member_use_max": 7,
   "approved_member_overuse_nodes": 65,
@@ -561,12 +567,12 @@
    "eligible_uses": 2
   }
  ],
- "conditional_salvage": [
+ "predicate_ideas": [
   {
    "group": "cx_arta_cultura_005.g2",
    "predicate": "România în patrimoniul UNESCO",
-   "why": "four verified Romanian UNESCO entries; unique quad and no 3-of-4 collision",
-   "caution": "recheck recognition gradient; Delta Dunării already occurs three times in eligible stock",
+   "why": "the predicate remains useful, but the approved reserve makes its original four-member group an exact collision",
+   "caution": "replace at least two members, including Delta Dunării (13 approved uses); projected use must stay at or below eight and every current gate still applies",
    "members": [
     "Sighișoara",
     "Delta Dunării",
@@ -577,8 +583,8 @@
   {
    "group": "cx_film_tv_167.g1",
    "predicate": "Mare, dar nu aceeași apă",
-   "why": "clean orthographic MARE trick across four familiar, unlike types; unique and no 3-of-4 collision",
-   "caution": "Ștefan cel Mare already occurs six times in eligible stock; prefer a fresh MARE replacement",
+   "why": "the orthographic MARE predicate remains useful, but the approved reserve makes its original four-member group an exact collision",
+   "caution": "replace at least two members; Marea Unire has 11 approved uses and Ștefan cel Mare has 15, while only one replacement would still fail at three-of-four",
    "members": [
     "Marea Neagră",
     "Marea Unire 1918",
@@ -589,8 +595,8 @@
   {
    "group": "cx_personalitati_277.g1",
    "predicate": "Opoziție anticomunistă",
-   "why": "four recognizable people, one honest predicate, zero eligible member reuse",
-   "caution": "hard-group only; web reverify each biography in the new batch",
+   "why": "the biographical predicate remains useful, but the approved reserve makes its original four-member group an exact collision",
+   "caution": "replace at least two members, web-reverify every biography, and rerun every current gate",
    "members": [
     "Elisabeta Rizea",
     "Doina Cornea",
@@ -601,8 +607,8 @@
   {
    "group": "cx_sport_226.g1",
    "predicate": "Supranume care au prins la popor",
-   "why": "the owner verifier called this group excellent; unique and no 3-of-4 collision",
-   "caution": "keep the nickname predicate exact; do not rebuild the familiar-moment sport template",
+   "why": "the nickname predicate remains useful, but the approved reserve makes its original four-member group an exact collision",
+   "caution": "replace at least two members, keep the nickname predicate exact, and do not rebuild the familiar-moment sport template",
    "members": [
     "Regele fotbalului românesc",
     "Eroul de la Sevilla",
@@ -613,12 +619,15 @@
  ],
  "release_recommendation": {
   "keep_all_67_demoted": true,
-  "salvage_is_automatic": false,
+  "direct_quad_salvage_allowed": false,
+  "predicate_ideas_are_approval": false,
   "new_board_conditions": [
    "zero exact collision against the full pack, including pending",
    "zero three-of-four collision against the full pack, including pending",
-   "at most one conditional salvage group",
+   "at most one predicate-derived group",
+   "replace at least two members of any predicate-derived group",
    "three wholly fresh groups",
+   "projected approved member use stays at or below eight",
    "fresh deterministic critique and full analyst/verifier gate"
   ]
  },
@@ -994,6 +1003,7 @@
     "B9"
    ],
    "secondary": [
+    "A6",
     "B1",
     "B2",
     "B3"
@@ -2363,11 +2373,12 @@
    ]
   },
   "cx_arta_cultura_005.g2": {
-   "disposition": "conditional_salvage",
+   "disposition": "hard_ban",
    "reasons": [
-    "unique_quad_full_pack",
-    "zero_three_of_four_full_pack",
-    "three_fresh_groups_required",
+    "direct_reuse_exact_source_collision",
+    "predicate_idea_only",
+    "at_least_two_replacement_members_required",
+    "approved_inventory_member_saturation",
     "fresh_full_gate_required"
    ]
   },
@@ -2866,11 +2877,12 @@
    ]
   },
   "cx_film_tv_167.g1": {
-   "disposition": "conditional_salvage",
+   "disposition": "hard_ban",
    "reasons": [
-    "unique_quad_full_pack",
-    "zero_three_of_four_full_pack",
-    "three_fresh_groups_required",
+    "direct_reuse_exact_source_collision",
+    "predicate_idea_only",
+    "at_least_two_replacement_members_required",
+    "approved_inventory_member_saturation",
     "fresh_full_gate_required"
    ]
   },
@@ -3453,11 +3465,11 @@
    ]
   },
   "cx_personalitati_277.g1": {
-   "disposition": "conditional_salvage",
+   "disposition": "hard_ban",
    "reasons": [
-    "unique_quad_full_pack",
-    "zero_three_of_four_full_pack",
-    "three_fresh_groups_required",
+    "direct_reuse_exact_source_collision",
+    "predicate_idea_only",
+    "at_least_two_replacement_members_required",
     "fresh_full_gate_required"
    ]
   },
@@ -4210,11 +4222,11 @@
    ]
   },
   "cx_sport_226.g1": {
-   "disposition": "conditional_salvage",
+   "disposition": "hard_ban",
    "reasons": [
-    "unique_quad_full_pack",
-    "zero_three_of_four_full_pack",
-    "three_fresh_groups_required",
+    "direct_reuse_exact_source_collision",
+    "predicate_idea_only",
+    "at_least_two_replacement_members_required",
     "fresh_full_gate_required"
    ]
   },

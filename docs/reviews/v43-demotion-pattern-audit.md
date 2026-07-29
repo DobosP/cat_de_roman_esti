@@ -5,13 +5,17 @@ behavior changed._
 
 ## Release verdict
 
-Keep all **67/67** ADR-0066 boards demoted. Their 268 group instances resolve to **264
-hard-banned for reuse** and only **4 conditional salvage candidates**. Salvage is never an
-undemotion or automatic promotion: a candidate may appear in a new board only with three
-wholly fresh groups, zero exact and zero 3-of-4 collision against the **full pack, including
-pending**, and a fresh deterministic plus analyst/verifier gate.
+Keep all **67/67** ADR-0066 boards demoted. All **268/268** original four-member groups are
+hard-banned from direct reuse. Four predicates remain useful as design ideas only; a group
+derived from one of them must replace at least two members, sit beside three wholly fresh
+groups, avoid every exact and 3-of-4 collision against the **full pack, including pending**,
+stay within the member-use ceiling, and pass a fresh deterministic plus analyst/verifier
+gate.
 
-The census excludes the subject board itself. Across the **full pack, including pending**,
+The historical census excludes the subject board itself so it can measure repetition
+elsewhere. That exclusion does not apply to a future candidate: its still-approved reserve
+source remains in the full inventory and makes direct reuse a 4-of-4 collision. Across the
+**full pack, including pending**,
 **211/268** groups collide (102 exact; 190 at 3-of-4). Across **approved inventory,
 including reserves**, **200/268** collide (89 exact; 179 at 3-of-4). Against **currently
 eligible runtime stock**, **90/268** collide (42 exact; 65 at 3-of-4). Exact and 3-of-4
@@ -30,12 +34,13 @@ counts overlap. Runtime-only counting would re-import both reserve and pending d
   subject board; normalized label/member leakage; strong `is_a`/`part_of`
   class-container groups; and mirror-pair membership from the dossiers.
 - Manual-only classification was used for 24 hard-banned groups with none of those
-  programmatic flags. All 264 hard bans have at least one explicit reason in the
+  programmatic flags. All 268 direct-quad bans have at least one explicit reason in the
   [machine-readable companion](v43-demotion-pattern-audit.json).
 - Inputs are digest-bound: pack `b2b603be2354`, demotions
   `ba9bb55b17b2`, rankings
   `d05b2aa8729a`, KG `9363ccaa3a89`,
-  rubric `14f8efacf32c`.
+  historical dossier rubric `14f8efacf32c`, and hardened release-gate rubric
+  `9a443ed89a6b`.
 
 Evidence shorthand in the coverage table is `E pack/approved/eligible exact-group count`,
 `N pack/approved/eligible 3-of-4 count`, `T` type-mixed groups, `M` mirror findings, `L`
@@ -44,7 +49,7 @@ label-leak groups, and `C` class/container groups.
 ## Dominant failure patterns
 
 1. **Freshness is the main debt.** A6 is primary on 36 boards and
-   implicated on 66/67. The full pack contains
+   implicated on 67/67. The full pack contains
    102 exact-reused and 190 3-of-4-reused demoted groups; approved inventory alone
    contains 89 and 179.
    Re-labeling a quad is not new content.
@@ -105,18 +110,19 @@ runtime stock looks healthier:
 | Aurel Vlaicu | 8 | 15 | 2 |
 | București | 8 | 18 | 1 |
 
-## Conditional salvage — not approval
+## Predicate ideas — original quads still hard-banned
 
 | Group | Predicate | Members | Strict caution |
 |---|---|---|---|
-| `cx_arta_cultura_005.g2` | România în patrimoniul UNESCO | Sighișoara · Delta Dunării · Ceramica de Horezu · Mănăstirile pictate din Bucovina | recheck recognition gradient; Delta Dunării already occurs three times in eligible stock |
-| `cx_film_tv_167.g1` | Mare, dar nu aceeași apă | Marea Neagră · Marea Unire 1918 · Ștefan cel Mare · B.D. la munte și la mare | Ștefan cel Mare already occurs six times in eligible stock; prefer a fresh MARE replacement |
-| `cx_personalitati_277.g1` | Opoziție anticomunistă | Elisabeta Rizea · Doina Cornea · Corneliu Coposu · Iuliu Maniu | hard-group only; web reverify each biography in the new batch |
-| `cx_sport_226.g1` | Supranume care au prins la popor | Regele fotbalului românesc · Eroul de la Sevilla · Tricolorii · Generația de Aur | keep the nickname predicate exact; do not rebuild the familiar-moment sport template |
+| `cx_arta_cultura_005.g2` | România în patrimoniul UNESCO | Sighișoara · Delta Dunării · Ceramica de Horezu · Mănăstirile pictate din Bucovina | replace at least two members, including Delta Dunării (13 approved uses; a projected 14th blocks), then rerun every collision/member gate |
+| `cx_film_tv_167.g1` | Mare, dar nu aceeași apă | Marea Neagră · Marea Unire 1918 · Ștefan cel Mare · B.D. la munte și la mare | replace at least two members; Marea Unire (11 approved uses) and Ștefan cel Mare (15) are already saturated, and one swap still fails at 3-of-4 |
+| `cx_personalitati_277.g1` | Opoziție anticomunistă | Elisabeta Rizea · Doina Cornea · Corneliu Coposu · Iuliu Maniu | replace at least two members and web-reverify every biography in the derived group |
+| `cx_sport_226.g1` | Supranume care au prins la popor | Regele fotbalului românesc · Eroul de la Sevilla · Tricolorii · Generația de Aur | replace at least two members; keep the nickname predicate exact and do not rebuild the familiar-moment sport template |
 
-All other **264** group instances are hard-banned for direct reuse. The exact per-group
-reason list is the `groups` object in the JSON companion. The practical hard-ban families
-are:
+All **268** exact four-member sets are hard-banned for direct reuse. The four rows above
+preserve only a reusable predicate idea; they do not authorize reuse of the original
+four-member set. The exact per-group reason list is the `groups` object in the JSON
+companion. The practical hard-ban families are:
 
 - Enescu, Brâncuși/Târgu Jiu, Caragiale/work/characters, Bucovina monasteries, and generic
   institutions/scenes;
@@ -133,8 +139,9 @@ member or changing the label does not make them fresh.
 
 1. Census unordered quads against the full pack, including pending and reserves, before
    writing labels. Reject any exact or 3-of-4 match; do not wait for the promotion lint.
-2. Use at most one conditional salvage group per board. The other three groups and at
-   least 12 tiles must be new to the demoted-family census.
+2. Use at most one group derived from the four predicate ideas. Replace at least two of its
+   members and make the other three groups wholly fresh. This is necessary, not sufficient:
+   the full gate still decides.
 3. Write each group as one sentence: “Each tile ___.” If the same verb/relation cannot fill
    the blank four times, reject the group.
 4. Reject person+work/event/place “universes”, class+instances, and paired owner↔owned or
@@ -146,7 +153,7 @@ member or changing the label does not make them fresh.
 6. Give every board one immediately nameable anchor, at most one deep cut per hard group,
    fewer than four plausible red herrings, and no tier inversion.
 7. Prefer nodes used at most five times in current eligible stock and inspect full-approved
-   use as well; do not add a node already above eight without explicit owner review.
+   use as well; projected approved use must remain at or below eight.
 8. A new candidate remains pending until factual verification, deterministic zero-FAIL,
    full batch-bound analyst/verifier coverage, and the owner/orchestrator decision.
 
@@ -169,7 +176,7 @@ member or changing the label does not make them fresh.
 | `cx_film_tv_008` | A6 | B1, B2, B9 | E 3/2/2; N 0/0/0; T3 M0 L3 C2 |
 | `cx_film_tv_009` | B5 | A6 | E 2/0/0; N 3/3/2; T0 M1 L0 C0 |
 | `cx_film_tv_011` | A6 | B1, B2, B9 | E 1/1/0; N 1/1/0; T1 M0 L2 C0 |
-| `cx_film_tv_013` | B9 | B1, B2, B3 | E 1/0/0; N 2/0/0; T2 M0 L4 C3 |
+| `cx_film_tv_013` | B9 | A6, B1, B2, B3 | E 1/0/0; N 2/0/0; T2 M0 L4 C3 |
 | `cx_film_tv_165` | A6 | B1, B2, B9 | E 4/4/2; N 1/1/0; T2 M0 L3 C0 |
 | `cx_film_tv_167` | B6 | A6, B3, B9 | E 0/0/0; N 1/1/0; T0 M0 L0 C0 |
 | `cx_film_tv_169` | B5 | A6, B2 | E 3/2/2; N 3/1/0; T1 M3 L0 C0 |
