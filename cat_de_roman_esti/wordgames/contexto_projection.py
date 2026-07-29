@@ -144,8 +144,6 @@ _GROUPS: tuple[tuple[str, int, tuple[str, ...]], ...] = (
             "broccoli",
             "avocado",
             "țelină",
-            "pătrunjel",
-            "mărar",
             "oregano",
             "busuioc",
             "scorțișoară",
@@ -902,7 +900,7 @@ _ANCHOR_CLUSTERS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("n_v24_food_pantry_faina", ("tăiței", "cereale", "ramen", "lasagna")),
     (
         "n_v4gas_legume",
-        ("linte", "năut", "broccoli", "avocado", "țelină", "pătrunjel", "mărar"),
+        ("linte", "năut", "broccoli", "avocado", "țelină"),
     ),
     ("n_v24_food_breakfast_miere", ("gem", "nucă", "alună")),
     ("n_v3gas_cafea", ("cacao", "cappuccino", "espresso", "cafea cu lapte")),

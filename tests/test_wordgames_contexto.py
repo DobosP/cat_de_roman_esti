@@ -759,7 +759,8 @@ def test_projection_is_large_balanced_collision_free_and_legibility_audited() ->
     svc = get_service()
     keys = [term.key for term in PROJECTION_TERMS]
     domains = Counter(term.domain for term in PROJECTION_TERMS)
-    assert len(PROJECTION_TERMS) == 444
+    # ADR-0065: mărar/pătrunjel became real KG nodes, their projected surfaces retired.
+    assert len(PROJECTION_TERMS) == 442
     assert len(domains) == 26
     assert min(domains.values()) >= 14
     assert len(keys) == len(set(keys))

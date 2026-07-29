@@ -299,13 +299,13 @@ def test_categories_endpoint_reports_taxonomy_and_availability():
             assert entry["available"][game] is any(exact.values())
             assert entry["curated"][game] == len(pack.pool(game, category=key))
 
-    # These approved shelves contain only V37 reserves; V40 selection returns 503,
-    # so the beginner picker must not offer them.
+    # ADR-0065: the V42 gated content wave refilled these Ușor shelves, so the
+    # beginner picker offers them again (V40/V41 had only failed reserves here).
     for key in ("gastronomie", "geografie", "stiinta", "viata_de_roman"):
         assert by_key[key]["curated"]["conexiuni"] > 0
         assert (
             by_key[key]["available_by_difficulty"]["conexiuni"]["usor"]
-            is False
+            is True
         )
 
 

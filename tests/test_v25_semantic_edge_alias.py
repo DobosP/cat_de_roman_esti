@@ -179,7 +179,7 @@ def test_v25_intended_topology_changes_stay_inside_reviewed_game_bounds():
 
     alchimie = by_id["al_viata_de_roman_098"]
     closure = _closure_generations(svc, alchimie["seeds"], alchimie["category"])
-    assert len(closure) == 111
+    assert len(closure) == 113  # ADR-0065: V42 nodes joined this category closure
     assert _opening_pairs(svc, alchimie["seeds"], alchimie["category"]) == 9
     max_fresh = max(
         len(

@@ -32,28 +32,29 @@ _TEST_KG = _ROOT / "tests/fixtures/kg_sample.json"
 _PACKAGE_PACK = _ROOT / "cat_de_roman_esti/fixtures/games_pack.json"
 _TEST_PACK = _ROOT / "tests/fixtures/games_pack.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
-_EXPECTED_NODE_COUNT = 2287
-_EXPECTED_EDGE_COUNT = 9122
+_EXPECTED_NODE_COUNT = 2364
+_EXPECTED_EDGE_COUNT = 9219
 _EXPECTED_AUTHORED_EDGE_COUNT = 54
 _EXPECTED_LOCAL_EDGE_COUNT = 36
 _V32_ALIAS_COUNT = 7333
 
 # These are fingerprints of behavior/reports at the v32 boundary. V33 is an inbound-only
 # sink wave, so none of these legacy projections may move.
+# Profile pins move only with a gated content wave (ADR-0065 moved them last).
 _V32_CONTEXTO_PROFILE_SHA256 = (
-    "208755f7f01f3229a8de188285f24a5605da0fdb3e9bf78f8101b5fce013ce5d"
+    "1d16f892671a17f9d4fea666dc7c1fa53c61d899de10cc26a8efdd101bf5f607"
 )
 _V32_LANT_PROFILE_SHA256 = (
-    "a83964f03af86ef840c617a7e38aa86af249ff892dec74515460e1a6e4d8547f"
+    "faa793d95d438cb27353e7043997eeda402be27eb267d1e5597364d7096a5afd"
 )
 _V32_ALCHIMIE_PROFILE_SHA256 = (
-    "62c26aebcbbf87d3b2c55afa10db4e7e3491ea8ad19bc24e964bf9cf78c2efd3"
+    "762c1f3a84463fbc2f14d0ec878c12db53ed48f6a4c5ec3c5c107b57ca5a4168"
 )
 _EXACT_REVIEW_REPORT_SHA256 = (
-    "5a01894e6e89fe29aaffee09210949e81cb0505385cc5c65615bf9c4b75f3349"
+    "bb9637b0b75e36310fedc38d0c44140bc05909d3896d811e9ff834569e6698c3"
 )
 _FULL_PENDING_REPORT_SHA256 = (
-    "122e35c819f6bdacbbcf95b7dcbac09bf5b2a3de56314487df187493ac86919a"
+    "128c1af845ffa99f4675dc10c433d9674ec66e4eb6b0d1f405106b86d01b82e2"
 )
 
 
@@ -179,7 +180,8 @@ def test_v33_source_inventory_builder_application_counts_and_mirrors():
     authored_alias_count = sum(len(concept.aliases) for concept in DATA.CONCEPTS)
     authored_alias_count += sum(len(aliases) for aliases in built["aliases"].values())
 
-    assert DATA.BUILD_VERSION.startswith("fixture-v33-")
+    # ADR-0065: the V42 content wave re-stamped the merged fixture.
+    assert DATA.BUILD_VERSION.startswith("fixture-v42-")
     assert len(DATA.CONCEPTS) == len(DATA.NEW_NODE_IDS) == 18
     assert len(set(DATA.NEW_NODE_IDS)) == 18
     assert tuple(map(len, DATA.DOMAIN_NODE_IDS)) == (6, 6, 6)
@@ -197,7 +199,8 @@ def test_v33_source_inventory_builder_application_counts_and_mirrors():
         _EXPECTED_EDGE_COUNT,
     )
     assert len(fixture["kg_puzzles"]) == 180
-    assert alias_count == _V32_ALIAS_COUNT + authored_alias_count
+    # ADR-0065: the V42 authored wave contributed 40 aliases on its 78 new nodes.
+    assert alias_count == _V32_ALIAS_COUNT + authored_alias_count + 40
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert _PACKAGE_PACK.read_bytes() == _TEST_PACK.read_bytes()
 
@@ -387,22 +390,23 @@ def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
         game: len(pack[game])
         for game in ("conexiuni", "contexto", "lant", "alchimie")
     } == {
-        "conexiuni": 288,
-        "contexto": 207,
+        "conexiuni": 308,
+        "contexto": 217,
         "lant": 201,
-        "alchimie": 98,
+        "alchimie": 99,
     }
-    assert statuses == {"approved": 572, "pending": 222}
+    # ADR-0065 content wave totals.
+    assert statuses == {"approved": 585, "pending": 240}
     assert len(DATA.REVIEW_ITEM_IDS) == len(set(DATA.REVIEW_ITEM_IDS)) == 33
     assert _critique_report(set(DATA.REVIEW_ITEM_IDS)) == (
         33,
-        0,
+        1,
         0,
         _EXACT_REVIEW_REPORT_SHA256,
     )
     assert _critique_report(None) == (
-        222,
-        147,
+        240,
+        160,
         78,
         _FULL_PENDING_REPORT_SHA256,
     )
