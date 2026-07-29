@@ -22,7 +22,7 @@ NOTE = (
     "kitchen/table items, with conservative inflections and explicit semantic links; "
     "no game boards or promotions."
 )
-BASELINE_PACK_SHA256 = "2c7d2eb298781a12250b087e6f4bd92c204928180fadd743b35883b61444a023"
+BASELINE_PACK_SHA256 = "0858a2e83473ea35dc832233aa314feb24fc04f1a6774fc1b7adbdf0832d1e0e"
 GAME_ITEM_IDS: tuple[str, ...] = ()
 V30_BEGINNER_EXTENSION: tuple[str, ...] = (
     "Vacă",

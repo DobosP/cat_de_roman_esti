@@ -209,7 +209,8 @@ def test_v37_daily_assignments_remain_unchanged() -> None:
         ("lant", "2026-07-19"): "lt_viata_de_roman_094",
         ("lant", "2026-12-31"): "lt_film_tv_011",
         ("alchimie", "2026-07-19"): "al_muzica_066",
-        ("alchimie", "2026-12-31"): "al_muzica_064",
+        # ADR-0065 content wave: al_film_tv_106 joined the pool and wins this date.
+        ("alchimie", "2026-12-31"): "al_film_tv_106",
     }
     assert {
         (game, day): pack.pick_daily(game, day, difficulty="normal").id

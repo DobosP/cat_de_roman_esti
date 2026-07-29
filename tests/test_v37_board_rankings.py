@@ -581,12 +581,9 @@ def test_shipped_ranked_inventory_exposes_reserves_but_never_selects_them():
                     else:
                         assert daily is None
 
-    assert empty_eligible_shelves == {
-        ("conexiuni", "gastronomie", "usor"),
-        ("conexiuni", "geografie", "usor"),
-        ("conexiuni", "stiinta", "usor"),
-        ("conexiuni", "viata_de_roman", "usor"),
-    }
+    # ADR-0065: the V42 gated content wave refilled the four formerly empty
+    # Ușor Conexiuni shelves; no eligible shelf is empty any more.
+    assert empty_eligible_shelves == set()
 
 
 def test_ranked_lant_narrowing_preserves_safe_repeat_semantics(monkeypatch):

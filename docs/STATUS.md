@@ -1,10 +1,11 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-07-28. This file is the repository's current source of truth._
+_As of 2026-07-29. This file is the repository's current source of truth._
 
-_Last verified: 2026-07-28 (local V42 candidate: backend 577/577, accounts 53/53,
-frontend 27/27, session store 16/16; Ruff/lint/typecheck/build/wheel/content/fixture gates
-green; initial JS/CSS 117.81/120 KiB)._
+_Last verified: 2026-07-29 (local V42 candidate incl. the ADR-0065 content wave: backend
+full suite green, frontend 148/148, session store 16/16; pack/fixture/ranking/derived and
+`git diff --check` gates green; content is backend JSON — the tracked SPA bundle is
+unchanged from the 2026-07-28 build measurement 117.81/120 KiB)._
 
 ## Current outcome — local V42 candidate (ADR-0062–ADR-0064)
 
@@ -28,26 +29,30 @@ green; initial JS/CSS 117.81/120 KiB)._
   completion counts; import cannot create or overwrite the streak. The 6/6 diploma is derived
   from the browser score document and only copies a share string.
 
-## Content and ranking baseline
+## Content and ranking baseline (post ADR-0065 content wave)
 
 | Game | Total | Approved | Pending | Runtime eligible/preferred |
 |---|---:|---:|---:|---:|
-| Conexiuni | 288 | 209 | 79 | 123 eligible |
-| Cald sau Rece | 207 | 192 | 15 | 192 eligible |
+| Conexiuni | 308 | 215 | 93 | 129 eligible |
+| Cald sau Rece | 217 | 198 | 19 | 198 eligible |
 | Lanțul Cuvintelor | 201 | 94 | 107 | 94 eligible |
-| Alchimie | 98 | 77 | 21 | 77 eligible |
+| Alchimie | 99 | 78 | 21 | 78 eligible |
 | Intrusul | 183 | 183 | 0 | 144 preferred |
 | Perechi | 153 | 153 | 0 | 113 preferred |
 
-Pack: **794 = 572 approved + 222 pending**, across 14 categories. The ranked original-game
-runtime serves **486 zero-FAIL pilot boards**; the derived strict catalog contains **336**
-boards. Bundled KG: **2,287 nodes / 9,122 edges / 7,400 aliases / 180 puzzles**. V23–V33
-vocabulary probes remain **322/322**.
+Pack: **825 = 585 approved + 240 pending**, across 14 categories. The ranked original-game
+runtime serves **499 zero-FAIL pilot boards**; the derived strict catalog stays at **336**
+boards generated from the frozen V38 source snapshot (expansion deferred per ADR-0054/0065).
+Bundled KG: **2,364 nodes / 9,219 edges / 7,440 aliases / 180 puzzles** (`fixture-v5-pop`).
+V23–V33 vocabulary probes remain **322/322**.
 
-Nine pending beginner candidates passed the deterministic local critique with zero failures,
-but promotion remains blocked until ADR-0023/0025's independent analyst/verifier review is
-authorized. No pack, ranking sidecar, fixture, KG, catalog, or board count changes in V42.
-Ranking scores remain editorial pre-playtest estimates, not measured fun or knowledge.
+The ADR-0023 gate ran end to end in V42 (Sonnet critique → adversarial Opus verify with live
+Romanian web checks → orchestrator final judgment): **36 items promoted** (9+6 Contexto,
+14+1 Alchimie, 6 Conexiuni) and **11 rejected**, including the authored wave of ADR-0065.
+Each formerly empty Ușor Conexiuni shelf gained at least one eligible board; reaching the
+eight-board daily-pool target additionally needs the owner's ADR-0019 call on the near-
+duplicate-held boards listed in ADR-0065. Ranking scores remain editorial pre-playtest
+estimates, not measured fun or knowledge.
 
 ## Runtime, accounts, and deployment
 
@@ -79,8 +84,10 @@ git diff --check
 
 ## Next verified work
 
-- Obtain explicit authorization for the independent nine-candidate content review, then
-  promote only if both artifacts and regenerated sidecars stay green.
-- Run the larger anonymous six-game pilot before a seventh mode or score recalibration.
+- Owner decisions from ADR-0065: near-duplicate-held boards (fills the Ușor shelves to the
+  8-board daily target), the 67 verified sweep demote proposals, and the deferred
+  Lanț/Conexiuni pending-pool re-gate.
+- Run the larger anonymous six-game pilot before a seventh mode, score recalibration, or
+  derived-catalog expansion (ADR-0054; generator now pins the V38 source snapshot).
 - Merge, push, and deploy V42 only on explicit instruction; keep accounts off until the
   compliance checklist is complete.

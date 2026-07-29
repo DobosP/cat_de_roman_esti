@@ -60,11 +60,15 @@ account restore, aggregate upload, telemetry event, or diploma API.
 
 ## Content gate
 
-V42 does not change the shipped pack, KG, or catalog counts. A deterministic audit found nine
-existing pending beginner candidates with zero local critique failures, but ADR-0023/0025
-also require independent external analyst/verifier artifacts before promotion. That review
-needs separate authorization to send the private dossiers to its configured service, so the
-pack remains fail-closed rather than claiming unreviewed quantity growth.
+The ADR-0023/0025 review ran under the owner's V42 authorization (ADR-0065): every pending
+Contexto/Alchimie item, a 79-item pending Conexiuni batch, a 107-item pending Lanț batch, a
+132-board sweep of served stock, and a freshly authored wave (78 new KG nodes, 98 edges, 32
+instances, all factually web-verified before import). Net shipped result: 36 promotions, 11
+rejections, Conexiuni eligibility 123 → 129 (every formerly empty Ușor shelf regained at
+least one board), Cald sau Rece 192 → 198, Alchimie 77 → 78. The derived catalog stays
+pinned to the V38 source snapshot per ADR-0054. Owner-decision queues (near-duplicate-held
+boards, 67 verified sweep demote proposals, deferred Lanț/Conexiuni pending applies) are
+recorded in ADR-0065.
 
 ## Reproduction
 

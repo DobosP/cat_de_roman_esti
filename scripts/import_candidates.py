@@ -66,7 +66,7 @@ DUPLICATE_ALIASES = {
 
 LANT_BANDS = {"usor": (2, 3), "normal": (3, 4), "greu": (4, 6)}
 ALCH_BANDS = {"usor": (2, 2), "normal": (2, 3), "greu": (3, 5)}
-BUILD_VERSION = "fixture-v5-pop"
+BUILD_VERSION = "fixture-v42-pegas-colind-damigeana"
 NOTE = (
     "v5: pop-culture + serious curated-content batch (ADR-0011) — AI-generated, "
     "fact/quality-verified subgraph merged on the v4 dense graph; kg_puzzles "

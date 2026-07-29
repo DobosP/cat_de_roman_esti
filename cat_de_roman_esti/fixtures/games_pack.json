@@ -3,16 +3,16 @@
   "pack_version": 1,
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
   "counts": {
-   "conexiuni": 288,
-   "contexto": 207,
+   "conexiuni": 308,
+   "contexto": 217,
    "lant": 201,
-   "alchimie": 98
+   "alchimie": 99
   },
   "id_high_water": {
-   "conexiuni": 295,
-   "contexto": 307,
+   "conexiuni": 315,
+   "contexto": 317,
    "lant": 219,
-   "alchimie": 104
+   "alchimie": 106
   }
  },
  "conexiuni": [
@@ -3437,6 +3437,405 @@
    "status": "approved"
   },
   {
+   "id": "cx_gastronomie_292",
+   "category": "gastronomie",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "groups": {
+    "g1": [
+     "n_v24_food_pantry_zahar",
+     "n_v24_food_pantry_faina",
+     "n_v24_food_pantry_ulei",
+     "n_v4gas_sare"
+    ],
+    "g2": [
+     "n_v24_food_breakfast_unt",
+     "n_v24_food_breakfast_iaurt",
+     "n_v24_food_breakfast_miere",
+     "n_v3gas_cafea"
+    ],
+    "g3": [
+     "n_v24_food_orchard_mar",
+     "n_v24_food_orchard_para",
+     "n_v24_food_orchard_pruna",
+     "n_v24_food_small_fruit_cireasa"
+    ],
+    "g4": [
+     "n_v24_food_salad_veg_morcov",
+     "n_v24_food_salad_veg_ardei",
+     "n_v24_food_salad_veg_castravete",
+     "n_v4gas_rosie"
+    ]
+   },
+   "group_labels": {
+    "g1": "Ingrediente de bază pentru gătit",
+    "g2": "La micul dejun",
+    "g3": "Fructe de livadă",
+    "g4": "Legume pentru salată"
+   },
+   "order": [
+    "n_v24_food_pantry_zahar",
+    "n_v24_food_breakfast_unt",
+    "n_v24_food_orchard_mar",
+    "n_v24_food_salad_veg_morcov",
+    "n_v24_food_pantry_faina",
+    "n_v24_food_breakfast_iaurt",
+    "n_v24_food_orchard_para",
+    "n_v24_food_salad_veg_ardei",
+    "n_v24_food_pantry_ulei",
+    "n_v24_food_breakfast_miere",
+    "n_v24_food_orchard_pruna",
+    "n_v24_food_salad_veg_castravete",
+    "n_v4gas_sare",
+    "n_v3gas_cafea",
+    "n_v24_food_small_fruit_cireasa",
+    "n_v4gas_rosie"
+   ]
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_gas_drob_miel",
+     "n_v17gas_pasca",
+     "n_gas_oua_rosii",
+     "n_gas_cozonac"
+    ],
+    "g2": [
+     "n_gas_papanasi",
+     "n_v17gas_gogosi",
+     "n_v42gas_placinta_mere",
+     "n_v3gas_clatite"
+    ],
+    "g3": [
+     "n_gas_zacusca",
+     "n_gas_muraturi",
+     "n_v42gas_untura",
+     "n_v20gas_compot"
+    ],
+    "g4": [
+     "n_gas_caltabos",
+     "n_gas_sorici",
+     "n_gas_piftie",
+     "n_gas_slanina_ceapa"
+    ]
+   },
+   "group_labels": {
+    "g1": "Le găsești pe masa de Paște",
+    "g2": "Dulciuri făcute în casă",
+    "g3": "Cămara de iarnă, la borcan",
+    "g4": "De la tăierea porcului"
+   },
+   "order": [
+    "n_gas_caltabos",
+    "n_v42gas_placinta_mere",
+    "n_v17gas_gogosi",
+    "n_gas_slanina_ceapa",
+    "n_gas_drob_miel",
+    "n_v20gas_compot",
+    "n_gas_zacusca",
+    "n_gas_cozonac",
+    "n_v17gas_pasca",
+    "n_gas_piftie",
+    "n_gas_muraturi",
+    "n_gas_sorici",
+    "n_gas_papanasi",
+    "n_v42gas_untura",
+    "n_v3gas_clatite",
+    "n_gas_oua_rosii"
+   ],
+   "id": "cx_gastronomie_296",
+   "category": "gastronomie",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_v11gas_salam_sibiu",
+     "n_v17gas_carnati_plescoi",
+     "n_gas_covrigi_buzau",
+     "n_v20gas_telemea_ibanesti"
+    ],
+    "g2": [
+     "n_gas_leustean",
+     "n_v42gas_marar",
+     "n_v42gas_patrunjel",
+     "n_gas_cimbru"
+    ],
+    "g3": [
+     "n_gas_tuica",
+     "n_v42gas_visinata",
+     "n_v18gas_socata",
+     "n_v42gas_vin_casa"
+    ],
+    "g4": [
+     "n_gas_mici",
+     "n_gas_mustar",
+     "n_v3gas_bere",
+     "n_muz_manele"
+    ]
+   },
+   "group_labels": {
+    "g1": "Specialități botezate după un loc",
+    "g2": "Verdețuri și arome din grădină",
+    "g3": "Băuturi făcute în casă",
+    "g4": "Nelipsite la grătarul de 1 Mai"
+   },
+   "order": [
+    "n_v42gas_visinata",
+    "n_v17gas_carnati_plescoi",
+    "n_v3gas_bere",
+    "n_v11gas_salam_sibiu",
+    "n_gas_tuica",
+    "n_gas_mustar",
+    "n_v42gas_vin_casa",
+    "n_v42gas_marar",
+    "n_v42gas_patrunjel",
+    "n_gas_leustean",
+    "n_muz_manele",
+    "n_v18gas_socata",
+    "n_gas_cimbru",
+    "n_gas_covrigi_buzau",
+    "n_gas_mici",
+    "n_v20gas_telemea_ibanesti"
+   ],
+   "id": "cx_gastronomie_297",
+   "category": "gastronomie",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_v17gas_pufuleti",
+     "n_vdr_lapte_si_corn",
+     "n_vdr_eugenia",
+     "n_vdr_lapte_si_corn"
+    ],
+    "g2": [
+     "n_gas_ciorba_burta",
+     "n_gas_ciorba_radauteana",
+     "n_v11gas_ciorba_perisoare",
+     "n_v42gas_ciorba_fasole"
+    ],
+    "g3": [
+     "n_gas_telemea",
+     "n_gas_urda",
+     "n_v20gas_cascaval",
+     "n_v42gas_branza_burduf"
+    ],
+    "g4": [
+     "n_v18gas_amandina",
+     "n_v21gas_savarina",
+     "n_v21gas_ecler",
+     "n_v11gas_joffre"
+    ]
+   },
+   "group_labels": {
+    "g1": "Gustul copilăriei de la școală",
+    "g2": "Sortimente de ciorbă",
+    "g3": "Brânzeturi românești",
+    "g4": "Vitrina cofetăriei clasice"
+   },
+   "order": [
+    "n_v11gas_ciorba_perisoare",
+    "n_vdr_lapte_si_corn",
+    "n_v42gas_ciorba_fasole",
+    "n_v20gas_cascaval",
+    "n_v17gas_pufuleti",
+    "n_gas_urda",
+    "n_vdr_lapte_si_corn",
+    "n_vdr_eugenia",
+    "n_gas_ciorba_radauteana",
+    "n_v11gas_joffre",
+    "n_gas_ciorba_burta",
+    "n_v18gas_amandina",
+    "n_v21gas_savarina",
+    "n_v42gas_branza_burduf",
+    "n_gas_telemea",
+    "n_v21gas_ecler"
+   ],
+   "id": "cx_gastronomie_298",
+   "category": "gastronomie",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_v42gas_gogonele",
+     "n_v42gas_varza_murata",
+     "n_v42gas_castraveti_murati",
+     "n_v42gas_pepene_murat"
+    ],
+    "g2": [
+     "n_v42gas_pate",
+     "n_gas_zacusca",
+     "n_v17gas_salata_icre",
+     "n_v42gas_untura"
+    ],
+    "g3": [
+     "n_v42gas_cico",
+     "n_v42gas_brifcor",
+     "n_v18gas_socata",
+     "n_v20gas_compot"
+    ],
+    "g4": [
+     "n_gas_saorma_de_toate",
+     "n_gas_covrigi_buzau",
+     "n_v18gas_langosi",
+     "n_v17gas_gogosi"
+    ]
+   },
+   "group_labels": {
+    "g1": "Puse la murat în butoi",
+    "g2": "Se întind pe pâine",
+    "g3": "Le beai în copilărie",
+    "g4": "Calde, de la tarabă"
+   },
+   "order": [
+    "n_v42gas_varza_murata",
+    "n_gas_zacusca",
+    "n_v17gas_gogosi",
+    "n_gas_saorma_de_toate",
+    "n_v42gas_pepene_murat",
+    "n_gas_covrigi_buzau",
+    "n_v42gas_brifcor",
+    "n_v42gas_untura",
+    "n_v20gas_compot",
+    "n_v42gas_gogonele",
+    "n_v42gas_castraveti_murati",
+    "n_v18gas_langosi",
+    "n_v42gas_pate",
+    "n_v18gas_socata",
+    "n_v17gas_salata_icre",
+    "n_v42gas_cico"
+   ],
+   "id": "cx_gastronomie_299",
+   "category": "gastronomie",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_gas_mici",
+     "n_gas_bulz",
+     "n_v42gas_frigarui",
+     "n_v17gas_carnati_plescoi"
+    ],
+    "g2": [
+     "n_v24_food_summer_fruit_pepene",
+     "n_v24_food_summer_fruit_piersica",
+     "n_v24_food_summer_fruit_caisa",
+     "n_v24_food_small_fruit_cireasa"
+    ],
+    "g3": [
+     "n_v42gas_fasole_batuta",
+     "n_gas_salata_vinete",
+     "n_gas_zacusca",
+     "n_gas_muraturi"
+    ],
+    "g4": [
+     "n_v42gas_vin_casa",
+     "n_v42gas_must",
+     "n_gas_tuica",
+     "n_gas_palinca"
+    ]
+   },
+   "group_labels": {
+    "g1": "Sfârâie pe grătar",
+    "g2": "Fructele verii de la piață",
+    "g3": "Bune și de post",
+    "g4": "Din cazanul și damigeana gospodăriei"
+   },
+   "order": [
+    "n_gas_salata_vinete",
+    "n_v42gas_frigarui",
+    "n_v24_food_summer_fruit_caisa",
+    "n_v24_food_summer_fruit_piersica",
+    "n_v42gas_fasole_batuta",
+    "n_v24_food_small_fruit_cireasa",
+    "n_v17gas_carnati_plescoi",
+    "n_gas_zacusca",
+    "n_gas_palinca",
+    "n_gas_mici",
+    "n_v42gas_vin_casa",
+    "n_gas_muraturi",
+    "n_v42gas_must",
+    "n_v24_food_summer_fruit_pepene",
+    "n_gas_bulz",
+    "n_gas_tuica"
+   ],
+   "id": "cx_gastronomie_300",
+   "category": "gastronomie",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_gas_salata_boeuf",
+     "n_gas_sarmale",
+     "n_v17gas_salata_icre",
+     "n_v42gas_sampanie"
+    ],
+    "g2": [
+     "n_gas_cozonac",
+     "n_v21gas_cornulete",
+     "n_v21gas_turta_dulce",
+     "n_v42gas_placinta_mere"
+    ],
+    "g3": [
+     "n_gas_vin_fiert",
+     "n_v42gas_tuica_fiarta",
+     "n_v24_food_snack_ceai",
+     "n_v42gas_cafea_ibric"
+    ],
+    "g4": [
+     "n_gas_sorici",
+     "n_v42gas_jumari",
+     "n_gas_caltabos",
+     "n_gas_toba"
+    ]
+   },
+   "group_labels": {
+    "g1": "Nu lipsesc de la Revelion",
+    "g2": "Coapte în cuptor de sărbători",
+    "g3": "Le bei fierbinți iarna",
+    "g4": "De la porcul de Ignat"
+   },
+   "order": [
+    "n_gas_cozonac",
+    "n_gas_sarmale",
+    "n_v42gas_tuica_fiarta",
+    "n_v42gas_cafea_ibric",
+    "n_gas_caltabos",
+    "n_v21gas_turta_dulce",
+    "n_gas_vin_fiert",
+    "n_gas_salata_boeuf",
+    "n_gas_toba",
+    "n_gas_sorici",
+    "n_v42gas_jumari",
+    "n_v21gas_cornulete",
+    "n_v42gas_placinta_mere",
+    "n_v42gas_sampanie",
+    "n_v24_food_snack_ceai",
+    "n_v17gas_salata_icre"
+   ],
+   "id": "cx_gastronomie_301",
+   "category": "gastronomie",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
    "id": "cx_geografie_001",
    "category": "geografie",
    "difficulty": "usor",
@@ -4515,6 +4914,234 @@
     "n_lacul_rosu"
    ],
    "id": "cx_geografie_254",
+   "category": "geografie",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_v20geo_poiana_brasov",
+     "n_geox_sinaia",
+     "n_geox_predeal",
+     "n_v42geo_busteni"
+    ],
+    "g2": [
+     "n_v11geo_mamaia",
+     "n_v42geo_neptun",
+     "n_v42geo_costinesti",
+     "n_v42geo_eforie"
+    ],
+    "g3": [
+     "n_dunarea",
+     "n_mures",
+     "n_olt",
+     "n_siret"
+    ],
+    "g4": [
+     "n_v11geo_ceahlau",
+     "n_muntii_apuseni",
+     "n_geox_retezat",
+     "n_v21geo_muntii_parang"
+    ]
+   },
+   "group_labels": {
+    "g1": "Stațiuni montane cu pârtii",
+    "g2": "Stațiuni la Marea Neagră",
+    "g3": "Ape curgătoare mari ale țării",
+    "g4": "Masive în care faci drumeții"
+   },
+   "order": [
+    "n_v42geo_costinesti",
+    "n_v20geo_poiana_brasov",
+    "n_v42geo_neptun",
+    "n_v21geo_muntii_parang",
+    "n_dunarea",
+    "n_v11geo_mamaia",
+    "n_olt",
+    "n_mures",
+    "n_geox_sinaia",
+    "n_v42geo_busteni",
+    "n_geox_predeal",
+    "n_v11geo_ceahlau",
+    "n_siret",
+    "n_v42geo_eforie",
+    "n_geox_retezat",
+    "n_muntii_apuseni"
+   ],
+   "id": "cx_geografie_302",
+   "category": "geografie",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_delta_dunarii",
+     "n_v17geo_vulcanii_noroiosi",
+     "n_geox_pestera_ursilor",
+     "n_lacul_sfanta_ana"
+    ],
+    "g2": [
+     "n_cheile_bicazului",
+     "n_v20geo_cheile_turzii",
+     "n_v11geo_cazanele_dunarii",
+     "n_v11geo_portile_fier"
+    ],
+    "g3": [
+     "n_transfagarasan",
+     "n_v17geo_transalpina",
+     "n_v42geo_dn1",
+     "n_v42geo_autostrada_soarelui"
+    ],
+    "g4": [
+     "n_varful_moldoveanu",
+     "n_omu",
+     "n_v20geo_varful_negoiu",
+     "n_v20geo_crucea_caraiman"
+    ]
+   },
+   "group_labels": {
+    "g1": "Ciudățenii ale naturii de arătat străinilor",
+    "g2": "Chei și defilee săpate în piatră",
+    "g3": "Drumuri pe care le știe orice șofer",
+    "g4": "Puncte înalte de reper din Carpați"
+   },
+   "order": [
+    "n_v20geo_crucea_caraiman",
+    "n_v20geo_varful_negoiu",
+    "n_v20geo_cheile_turzii",
+    "n_omu",
+    "n_v42geo_dn1",
+    "n_v42geo_autostrada_soarelui",
+    "n_v17geo_transalpina",
+    "n_v11geo_cazanele_dunarii",
+    "n_lacul_sfanta_ana",
+    "n_varful_moldoveanu",
+    "n_v17geo_vulcanii_noroiosi",
+    "n_geox_pestera_ursilor",
+    "n_v11geo_portile_fier",
+    "n_delta_dunarii",
+    "n_cheile_bicazului",
+    "n_transfagarasan"
+   ],
+   "id": "cx_geografie_303",
+   "category": "geografie",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_v42geo_arcul_de_triumf",
+     "n_v42geo_casa_poporului",
+     "n_v42geo_cismigiu",
+     "n_v42geo_herastrau"
+    ],
+    "g2": [
+     "n_v21geo_braila",
+     "n_socx_galati",
+     "n_v21geo_drobeta_turnu_severin",
+     "n_v42geo_giurgiu"
+    ],
+    "g3": [
+     "n_v11geo_sulina",
+     "n_v21geo_bratul_chilia",
+     "n_sfantu_gheorghe",
+     "n_v11geo_tulcea"
+    ],
+    "g4": [
+     "n_lacul_balea",
+     "n_lacul_sfanta_ana",
+     "n_lacul_rosu",
+     "n_v21geo_lacul_ursu"
+    ]
+   },
+   "group_labels": {
+    "g1": "Repere ale Bucureștiului",
+    "g2": "Orașe-port la Dunăre",
+    "g3": "Prin Deltă, cu barca",
+    "g4": "Lacuri de poveste"
+   },
+   "order": [
+    "n_v42geo_cismigiu",
+    "n_v21geo_drobeta_turnu_severin",
+    "n_v21geo_braila",
+    "n_v42geo_casa_poporului",
+    "n_sfantu_gheorghe",
+    "n_v11geo_tulcea",
+    "n_lacul_sfanta_ana",
+    "n_lacul_rosu",
+    "n_socx_galati",
+    "n_v21geo_lacul_ursu",
+    "n_v11geo_sulina",
+    "n_v42geo_arcul_de_triumf",
+    "n_v42geo_giurgiu",
+    "n_v21geo_bratul_chilia",
+    "n_v42geo_herastrau",
+    "n_lacul_balea"
+   ],
+   "id": "cx_geografie_304",
+   "category": "geografie",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_v11art_cimitirul_vesel",
+     "n_v20art_biserici_lemn_maramures",
+     "n_v42geo_mocanita",
+     "n_v20art_poarta_maramureseana"
+    ],
+    "g2": [
+     "n_v20ist_castelul_bran",
+     "n_v20ist_castelul_peles",
+     "n_v42geo_alba_carolina",
+     "n_v42geo_castelul_corvinilor"
+    ],
+    "g3": [
+     "n_v21geo_baile_felix",
+     "n_geox_baile_herculane",
+     "n_v42geo_sovata",
+     "n_v42geo_slanic_moldova"
+    ],
+    "g4": [
+     "n_v20geo_tisa",
+     "n_prut",
+     "n_dunarea",
+     "n_v42geo_milcov"
+    ]
+   },
+   "group_labels": {
+    "g1": "Minunile Maramureșului",
+    "g2": "Castele și cetăți de vizitat",
+    "g3": "Stațiuni de tratament ale bunicilor",
+    "g4": "Au fost sau sunt ape de hotar"
+   },
+   "order": [
+    "n_v42geo_alba_carolina",
+    "n_v20ist_castelul_peles",
+    "n_v42geo_mocanita",
+    "n_v20art_biserici_lemn_maramures",
+    "n_dunarea",
+    "n_geox_baile_herculane",
+    "n_v11art_cimitirul_vesel",
+    "n_v20ist_castelul_bran",
+    "n_v21geo_baile_felix",
+    "n_v20geo_tisa",
+    "n_v42geo_slanic_moldova",
+    "n_v42geo_milcov",
+    "n_v42geo_castelul_corvinilor",
+    "n_v20art_poarta_maramureseana",
+    "n_prut",
+    "n_v42geo_sovata"
+   ],
+   "id": "cx_geografie_305",
    "category": "geografie",
    "source": "ai",
    "status": "approved"
@@ -6798,6 +7425,120 @@
    "category": "limba",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_v20lim_omonim",
+     "n_v20lim_paronim",
+     "n_v17lim_cacofonie",
+     "n_v17lim_pleonasm"
+    ],
+    "g2": [
+     "n_dex",
+     "n_v11lim_doom",
+     "n_v17lim_dexonline",
+     "n_v42lim_google_translate"
+    ],
+    "g3": [
+     "n_v20lim_proverb",
+     "n_v42lim_ghicitoare",
+     "n_v42lim_descantec",
+     "n_v4art_colind"
+    ],
+    "g4": [
+     "n_v20lim_fond_latin",
+     "n_v20lim_imprumuturi_maghiare",
+     "n_v20lim_neologism",
+     "n_v17lim_romgleza"
+    ]
+   },
+   "group_labels": {
+    "g1": "Capcanele exprimării corecte",
+    "g2": "Unde cauți un cuvânt azi",
+    "g3": "Specii scurte din folclorul oral",
+    "g4": "De unde ne vin cuvintele"
+   },
+   "order": [
+    "n_v4art_colind",
+    "n_v17lim_romgleza",
+    "n_v17lim_cacofonie",
+    "n_v11lim_doom",
+    "n_v42lim_descantec",
+    "n_v17lim_dexonline",
+    "n_v42lim_ghicitoare",
+    "n_v20lim_proverb",
+    "n_v20lim_fond_latin",
+    "n_v20lim_omonim",
+    "n_v20lim_paronim",
+    "n_v20lim_imprumuturi_maghiare",
+    "n_dex",
+    "n_v17lim_pleonasm",
+    "n_v42lim_google_translate",
+    "n_v20lim_neologism"
+   ],
+   "id": "cx_limba_306",
+   "category": "limba",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "groups": {
+    "g1": [
+     "n_lbax_dor",
+     "n_doina",
+     "n_vdr_descurcare_romaneasca",
+     "n_vdr_lasa_ca_merge"
+    ],
+    "g2": [
+     "n_v17lim_romgleza",
+     "n_v20lim_argou",
+     "n_v2lim_vorbire_populara",
+     "n_v42lim_jargon"
+    ],
+    "g3": [
+     "n_v4lim_timp_verbal",
+     "n_v20lim_vocativ",
+     "n_v21lim_mod_verbal",
+     "n_v21lim_acord_gramatical"
+    ],
+    "g4": [
+     "n_v11lim_scrisoarea_neacsu",
+     "n_v11lim_biblia_bucuresti",
+     "n_v11lim_cazania_varlaam",
+     "n_v42lim_palia_orastie"
+    ]
+   },
+   "group_labels": {
+    "g1": "Greu de tradus în altă limbă",
+    "g2": "Felurile în care vorbim",
+    "g3": "Noțiuni de gramatică din gimnaziu",
+    "g4": "Începuturile scrisului românesc"
+   },
+   "order": [
+    "n_v42lim_jargon",
+    "n_v21lim_mod_verbal",
+    "n_v11lim_biblia_bucuresti",
+    "n_doina",
+    "n_v11lim_cazania_varlaam",
+    "n_v2lim_vorbire_populara",
+    "n_v21lim_acord_gramatical",
+    "n_v4lim_timp_verbal",
+    "n_v42lim_palia_orastie",
+    "n_v11lim_scrisoarea_neacsu",
+    "n_lbax_dor",
+    "n_v20lim_argou",
+    "n_vdr_descurcare_romaneasca",
+    "n_v17lim_romgleza",
+    "n_v20lim_vocativ",
+    "n_vdr_lasa_ca_merge"
+   ],
+   "id": "cx_limba_307",
+   "category": "limba",
+   "source": "ai",
+   "status": "pending"
   },
   {
    "difficulty": "usor",
@@ -12671,6 +13412,120 @@
    ]
   },
   {
+   "id": "cx_societate_294",
+   "category": "societate",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "groups": {
+    "g1": [
+     "n_v24_people_parents_mama",
+     "n_v24_people_parents_tata",
+     "n_v24_people_descendants_fiu",
+     "n_v24_people_descendants_fiica"
+    ],
+    "g2": [
+     "n_v24_people_grandparents_bunica",
+     "n_v24_people_grandparents_bunic",
+     "n_v24_people_relatives_unchi",
+     "n_v24_people_grandparents_matusa"
+    ],
+    "g3": [
+     "n_v4sti_ochi",
+     "n_v4sti_ureche",
+     "n_v24_body_face_nas",
+     "n_v24_body_face_gura"
+    ],
+    "g4": [
+     "n_v24_transport_road_camion",
+     "n_v24_transport_road_duba",
+     "n_v24_transport_personal_masina",
+     "n_v24_transport_personal_motocicleta"
+    ]
+   },
+   "group_labels": {
+    "g1": "Părinți și copii",
+    "g2": "Rude din familia extinsă",
+    "g3": "Pe cap și pe față",
+    "g4": "Vehicule rutiere"
+   },
+   "order": [
+    "n_v24_people_parents_mama",
+    "n_v24_people_grandparents_bunica",
+    "n_v4sti_ochi",
+    "n_v24_transport_road_camion",
+    "n_v24_people_parents_tata",
+    "n_v24_people_grandparents_bunic",
+    "n_v4sti_ureche",
+    "n_v24_transport_road_duba",
+    "n_v24_people_descendants_fiu",
+    "n_v24_people_relatives_unchi",
+    "n_v24_body_face_nas",
+    "n_v24_transport_personal_masina",
+    "n_v24_people_descendants_fiica",
+    "n_v24_people_grandparents_matusa",
+    "n_v24_body_face_gura",
+    "n_v24_transport_personal_motocicleta"
+   ]
+  },
+  {
+   "id": "cx_societate_295",
+   "category": "societate",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "groups": {
+    "g1": [
+     "n_v24_transport_rail_tren",
+     "n_v24_transport_rail_tramvai",
+     "n_v24_transport_rail_metrou",
+     "n_v24_transport_road_microbuz"
+    ],
+    "g2": [
+     "n_v24_transport_terminals_gara",
+     "n_v24_transport_terminals_aeroport",
+     "n_v24_transport_terminals_statie",
+     "n_v2soc_port"
+    ],
+    "g3": [
+     "n_v24_places_public_parc",
+     "n_v24_places_public_farmacie",
+     "n_v24_places_public_restaurant",
+     "n_v4soc_magazin"
+    ],
+    "g4": [
+     "n_v24_weather_precipitation_ploaie",
+     "n_v24_weather_precipitation_zapada",
+     "n_v24_weather_air_vant",
+     "n_v24_weather_air_nor"
+    ]
+   },
+   "group_labels": {
+    "g1": "Vehicule de transport public",
+    "g2": "Locuri de plecare și sosire",
+    "g3": "Destinații cotidiene în oraș",
+    "g4": "Fenomene meteo"
+   },
+   "order": [
+    "n_v24_transport_rail_tren",
+    "n_v24_transport_terminals_gara",
+    "n_v24_places_public_parc",
+    "n_v24_weather_precipitation_ploaie",
+    "n_v24_transport_rail_tramvai",
+    "n_v24_transport_terminals_aeroport",
+    "n_v24_places_public_farmacie",
+    "n_v24_weather_precipitation_zapada",
+    "n_v24_transport_rail_metrou",
+    "n_v24_transport_terminals_statie",
+    "n_v24_places_public_restaurant",
+    "n_v24_weather_air_vant",
+    "n_v24_transport_road_microbuz",
+    "n_v2soc_port",
+    "n_v4soc_magazin",
+    "n_v24_weather_air_nor"
+   ]
+  },
+  {
    "difficulty": "usor",
    "groups": {
     "g1": [
@@ -15011,6 +15866,234 @@
    "difficulty": "usor",
    "groups": {
     "g1": [
+     "n_v24_food_salad_veg_morcov",
+     "n_v24_food_salad_veg_ardei",
+     "n_v24_food_salad_veg_castravete",
+     "n_v28_food_vegetable_conopida"
+    ],
+    "g2": [
+     "n_nicolae_paulescu",
+     "n_victor_babes",
+     "n_ana_aslan",
+     "n_george_palade"
+    ],
+    "g3": [
+     "n_v2sti_celula",
+     "n_v4sti_inima",
+     "n_v4sti_creier",
+     "n_v3sti_adn"
+    ],
+    "g4": [
+     "n_v24_nature_sky_soare",
+     "n_v24_nature_sky_luna",
+     "n_v24_nature_sky_stea",
+     "n_v28_nature_weather_curcubeu"
+    ]
+   },
+   "group_labels": {
+    "g1": "Legume din grădină",
+    "g2": "Medici și savanți care au schimbat lumea",
+    "g3": "Le înveți la biologie",
+    "g4": "Le vezi pe cer"
+   },
+   "order": [
+    "n_victor_babes",
+    "n_v24_nature_sky_stea",
+    "n_v28_nature_weather_curcubeu",
+    "n_v2sti_celula",
+    "n_v28_food_vegetable_conopida",
+    "n_v24_nature_sky_luna",
+    "n_george_palade",
+    "n_v24_food_salad_veg_ardei",
+    "n_v24_nature_sky_soare",
+    "n_nicolae_paulescu",
+    "n_v3sti_adn",
+    "n_ana_aslan",
+    "n_v24_food_salad_veg_castravete",
+    "n_v4sti_creier",
+    "n_v24_food_salad_veg_morcov",
+    "n_v4sti_inima"
+   ],
+   "id": "cx_stiinta_308",
+   "category": "stiinta",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_v33_forest_animal_urs",
+     "n_v33_forest_animal_lup",
+     "n_v33_forest_animal_cerb",
+     "n_v33_forest_animal_caprioara"
+    ],
+    "g2": [
+     "n_v30_animal_farm_vaca",
+     "n_v30_animal_farm_oaie",
+     "n_v30_animal_farm_capra",
+     "n_v29_animal_farm_gaina"
+    ],
+    "g3": [
+     "n_v24_weather_storm_fulger",
+     "n_v24_weather_storm_tunet",
+     "n_v24_weather_air_vant",
+     "n_v24_weather_air_nor"
+    ],
+    "g4": [
+     "n_delta_dunarii",
+     "n_carpati",
+     "n_marea_neagra",
+     "n_v17geo_sfinxul_bucegi"
+    ]
+   },
+   "group_labels": {
+    "g1": "Animale din pădurile noastre",
+    "g2": "Le crești în ogradă",
+    "g3": "Semnele furtunii",
+    "g4": "Minuni naturale ale României"
+   },
+   "order": [
+    "n_v24_weather_air_nor",
+    "n_v29_animal_farm_gaina",
+    "n_v30_animal_farm_vaca",
+    "n_v33_forest_animal_cerb",
+    "n_marea_neagra",
+    "n_v24_weather_storm_fulger",
+    "n_v33_forest_animal_urs",
+    "n_v30_animal_farm_oaie",
+    "n_v24_weather_air_vant",
+    "n_v33_forest_animal_caprioara",
+    "n_v17geo_sfinxul_bucegi",
+    "n_carpati",
+    "n_v30_animal_farm_capra",
+    "n_delta_dunarii",
+    "n_v33_forest_animal_lup",
+    "n_v24_weather_storm_tunet"
+   ],
+   "id": "cx_stiinta_309",
+   "category": "stiinta",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_v29_animal_pets_caine",
+     "n_v29_animal_pets_pisica",
+     "n_v30_animal_farm_cal",
+     "n_v30_animal_field_iepure"
+    ],
+    "g2": [
+     "n_stilou_rezervor",
+     "n_insulina",
+     "n_coanda_1910",
+     "n_v11sti_gerovital"
+    ],
+    "g3": [
+     "n_v24_food_orchard_mar",
+     "n_v24_food_orchard_para",
+     "n_v24_food_orchard_pruna",
+     "n_v24_food_small_fruit_cireasa"
+    ],
+    "g4": [
+     "n_v4sti_aer",
+     "n_v4gas_apa",
+     "n_v4sti_foc",
+     "n_v24_nature_world_pamant"
+    ]
+   },
+   "group_labels": {
+    "g1": "Animale de pe lângă casă",
+    "g2": "Descoperiri și invenții cu semnătură românească",
+    "g3": "Fructe din livada bunicilor",
+    "g4": "Cele patru elemente clasice"
+   },
+   "order": [
+    "n_v24_food_orchard_pruna",
+    "n_v24_food_orchard_mar",
+    "n_v24_food_orchard_para",
+    "n_v4sti_aer",
+    "n_insulina",
+    "n_v11sti_gerovital",
+    "n_stilou_rezervor",
+    "n_v29_animal_pets_caine",
+    "n_coanda_1910",
+    "n_v4gas_apa",
+    "n_v30_animal_field_iepure",
+    "n_v29_animal_pets_pisica",
+    "n_v24_nature_world_pamant",
+    "n_v24_food_small_fruit_cireasa",
+    "n_v4sti_foc",
+    "n_v30_animal_farm_cal"
+   ],
+   "id": "cx_stiinta_310",
+   "category": "stiinta",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_v33_forest_animal_urs",
+     "n_v33_forest_animal_vulpe",
+     "n_v30_animal_farm_capra",
+     "n_v33_forest_animal_lup"
+    ],
+    "g2": [
+     "n_v24_food_orchard_pruna",
+     "n_v24_food_orchard_mar",
+     "n_v24_food_orchard_para",
+     "n_v24_food_summer_fruit_caisa"
+    ],
+    "g3": [
+     "n_v24_nature_plant_parts_radacina",
+     "n_v4sti_frunza",
+     "n_v4sti_floare",
+     "n_v24_nature_plant_parts_ramura"
+    ],
+    "g4": [
+     "n_v24_body_face_cap",
+     "n_v29_body_upper_gat",
+     "n_v31_body_lower_genunchi",
+     "n_v31_body_lower_glezna"
+    ]
+   },
+   "group_labels": {
+    "g1": "Personaje din poveștile copilăriei",
+    "g2": "Din ele iese țuica",
+    "g3": "Le desenezi la botanică",
+    "g4": "Le pomenești la doctor"
+   },
+   "order": [
+    "n_v4sti_floare",
+    "n_v24_food_orchard_para",
+    "n_v24_food_orchard_pruna",
+    "n_v30_animal_farm_capra",
+    "n_v33_forest_animal_lup",
+    "n_v24_body_face_cap",
+    "n_v24_food_summer_fruit_caisa",
+    "n_v31_body_lower_genunchi",
+    "n_v24_nature_plant_parts_ramura",
+    "n_v4sti_frunza",
+    "n_v33_forest_animal_vulpe",
+    "n_v31_body_lower_glezna",
+    "n_v29_body_upper_gat",
+    "n_v24_nature_plant_parts_radacina",
+    "n_v24_food_orchard_mar",
+    "n_v33_forest_animal_urs"
+   ],
+   "id": "cx_stiinta_311",
+   "category": "stiinta",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
      "n_vdr_eugenia",
      "n_vdr_ciocolata_rom",
      "n_vdr_guma_turbo",
@@ -16205,63 +17288,6 @@
    "status": "pending"
   },
   {
-   "id": "cx_gastronomie_292",
-   "category": "gastronomie",
-   "difficulty": "usor",
-   "source": "ai",
-   "status": "pending",
-   "groups": {
-    "g1": [
-     "n_v24_food_pantry_zahar",
-     "n_v24_food_pantry_faina",
-     "n_v24_food_pantry_ulei",
-     "n_v4gas_sare"
-    ],
-    "g2": [
-     "n_v24_food_breakfast_unt",
-     "n_v24_food_breakfast_iaurt",
-     "n_v24_food_breakfast_miere",
-     "n_v3gas_cafea"
-    ],
-    "g3": [
-     "n_v24_food_orchard_mar",
-     "n_v24_food_orchard_para",
-     "n_v24_food_orchard_pruna",
-     "n_v24_food_small_fruit_cireasa"
-    ],
-    "g4": [
-     "n_v24_food_salad_veg_morcov",
-     "n_v24_food_salad_veg_ardei",
-     "n_v24_food_salad_veg_castravete",
-     "n_v4gas_rosie"
-    ]
-   },
-   "group_labels": {
-    "g1": "Ingrediente de bază pentru gătit",
-    "g2": "La micul dejun",
-    "g3": "Fructe de livadă",
-    "g4": "Legume pentru salată"
-   },
-   "order": [
-    "n_v24_food_pantry_zahar",
-    "n_v24_food_breakfast_unt",
-    "n_v24_food_orchard_mar",
-    "n_v24_food_salad_veg_morcov",
-    "n_v24_food_pantry_faina",
-    "n_v24_food_breakfast_iaurt",
-    "n_v24_food_orchard_para",
-    "n_v24_food_salad_veg_ardei",
-    "n_v24_food_pantry_ulei",
-    "n_v24_food_breakfast_miere",
-    "n_v24_food_orchard_pruna",
-    "n_v24_food_salad_veg_castravete",
-    "n_v4gas_sare",
-    "n_v3gas_cafea",
-    "n_v24_food_small_fruit_cireasa",
-    "n_v4gas_rosie"
-   ]
-  },
-  {
    "id": "cx_viata_de_roman_293",
    "category": "viata_de_roman",
    "difficulty": "usor",
@@ -16319,118 +17345,232 @@
    ]
   },
   {
-   "id": "cx_societate_294",
-   "category": "societate",
    "difficulty": "usor",
-   "source": "ai",
-   "status": "pending",
    "groups": {
     "g1": [
-     "n_v24_people_parents_mama",
-     "n_v24_people_parents_tata",
-     "n_v24_people_descendants_fiu",
-     "n_v24_people_descendants_fiica"
+     "n_v3via_intretinerea",
+     "n_v4via_lift",
+     "n_vdr_interfon",
+     "n_vdr_asociatia_proprietari"
     ],
     "g2": [
-     "n_v24_people_grandparents_bunica",
-     "n_v24_people_grandparents_bunic",
-     "n_v24_people_relatives_unchi",
-     "n_v24_people_grandparents_matusa"
+     "n_v20via_carpeta",
+     "n_v20via_mileuri",
+     "n_v20via_vitrina_cu_bibelouri",
+     "n_v24_home_textiles_covor"
     ],
     "g3": [
-     "n_v4sti_ochi",
-     "n_v4sti_ureche",
-     "n_v24_body_face_nas",
-     "n_v24_body_face_gura"
+     "n_vdr_borcane_zacusca",
+     "n_v42vdr_pegas",
+     "n_v42vdr_sarma_rufe",
+     "n_v42vdr_cauciucuri"
     ],
     "g4": [
-     "n_v24_transport_road_camion",
-     "n_v24_transport_road_duba",
-     "n_v24_transport_personal_masina",
-     "n_v24_transport_personal_motocicleta"
+     "n_v2via_masa_in_familie",
+     "n_v2via_sarbatori_familie",
+     "n_v2via_rude",
+     "n_vdr_revelion_la_televizor"
     ]
    },
    "group_labels": {
-    "g1": "Părinți și copii",
-    "g2": "Rude din familia extinsă",
-    "g3": "Pe cap și pe față",
-    "g4": "Vehicule rutiere"
+    "g1": "Le știi de la bloc",
+    "g2": "Sfinte în sufrageria bunicii",
+    "g3": "Le ții pe balcon",
+    "g4": "Cu toată familia"
    },
    "order": [
-    "n_v24_people_parents_mama",
-    "n_v24_people_grandparents_bunica",
-    "n_v4sti_ochi",
-    "n_v24_transport_road_camion",
-    "n_v24_people_parents_tata",
-    "n_v24_people_grandparents_bunic",
-    "n_v4sti_ureche",
-    "n_v24_transport_road_duba",
-    "n_v24_people_descendants_fiu",
-    "n_v24_people_relatives_unchi",
-    "n_v24_body_face_nas",
-    "n_v24_transport_personal_masina",
-    "n_v24_people_descendants_fiica",
-    "n_v24_people_grandparents_matusa",
-    "n_v24_body_face_gura",
-    "n_v24_transport_personal_motocicleta"
-   ]
+    "n_v42vdr_sarma_rufe",
+    "n_v42vdr_cauciucuri",
+    "n_vdr_revelion_la_televizor",
+    "n_v2via_sarbatori_familie",
+    "n_v2via_masa_in_familie",
+    "n_v20via_vitrina_cu_bibelouri",
+    "n_vdr_borcane_zacusca",
+    "n_v2via_rude",
+    "n_vdr_asociatia_proprietari",
+    "n_v24_home_textiles_covor",
+    "n_vdr_interfon",
+    "n_v4via_lift",
+    "n_v3via_intretinerea",
+    "n_v20via_mileuri",
+    "n_v20via_carpeta",
+    "n_v42vdr_pegas"
+   ],
+   "id": "cx_viata_de_roman_312",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "pending"
   },
   {
-   "id": "cx_societate_295",
-   "category": "societate",
    "difficulty": "usor",
-   "source": "ai",
-   "status": "pending",
    "groups": {
     "g1": [
-     "n_v24_transport_rail_tren",
-     "n_v24_transport_rail_tramvai",
-     "n_v24_transport_rail_metrou",
-     "n_v24_transport_road_microbuz"
+     "n_vdr_sotron",
+     "n_v42vdr_lapte_gros",
+     "n_v23via_tara_tara_vrem_ostasi",
+     "n_v23via_elasticul"
     ],
     "g2": [
-     "n_v24_transport_terminals_gara",
-     "n_v24_transport_terminals_aeroport",
-     "n_v24_transport_terminals_statie",
-     "n_v2soc_port"
+     "n_v24_school_classroom_banca_scolara",
+     "n_v42vdr_uniforma",
+     "n_v42vdr_creta",
+     "n_v23via_penar"
     ],
     "g3": [
-     "n_v24_places_public_parc",
-     "n_v24_places_public_farmacie",
-     "n_v24_places_public_restaurant",
-     "n_v4soc_magazin"
+     "n_vdr_telefon_fix",
+     "n_v42vdr_vhs",
+     "n_v42vdr_casetofon",
+     "n_v42vdr_discheta"
     ],
     "g4": [
-     "n_v24_weather_precipitation_ploaie",
-     "n_v24_weather_precipitation_zapada",
-     "n_v24_weather_air_vant",
-     "n_v24_weather_air_nor"
+     "n_vdr_guma_turbo",
+     "n_v17gas_pufuleti",
+     "n_v42gas_cico",
+     "n_vdr_eugenia"
     ]
    },
    "group_labels": {
-    "g1": "Vehicule de transport public",
-    "g2": "Locuri de plecare și sosire",
-    "g3": "Destinații cotidiene în oraș",
-    "g4": "Fenomene meteo"
+    "g1": "Le jucai în fața blocului",
+    "g2": "Din clasa de altădată",
+    "g3": "Tehnică de dinainte de internet",
+    "g4": "De la chioșcul din colț"
    },
    "order": [
-    "n_v24_transport_rail_tren",
-    "n_v24_transport_terminals_gara",
-    "n_v24_places_public_parc",
-    "n_v24_weather_precipitation_ploaie",
-    "n_v24_transport_rail_tramvai",
-    "n_v24_transport_terminals_aeroport",
-    "n_v24_places_public_farmacie",
-    "n_v24_weather_precipitation_zapada",
-    "n_v24_transport_rail_metrou",
-    "n_v24_transport_terminals_statie",
-    "n_v24_places_public_restaurant",
-    "n_v24_weather_air_vant",
-    "n_v24_transport_road_microbuz",
-    "n_v2soc_port",
-    "n_v4soc_magazin",
-    "n_v24_weather_air_nor"
-   ]
+    "n_vdr_eugenia",
+    "n_v42vdr_vhs",
+    "n_v42gas_cico",
+    "n_v17gas_pufuleti",
+    "n_v42vdr_casetofon",
+    "n_v23via_tara_tara_vrem_ostasi",
+    "n_v42vdr_uniforma",
+    "n_vdr_telefon_fix",
+    "n_vdr_guma_turbo",
+    "n_vdr_sotron",
+    "n_v42vdr_lapte_gros",
+    "n_v42vdr_creta",
+    "n_v24_school_classroom_banca_scolara",
+    "n_v42vdr_discheta",
+    "n_v23via_elasticul",
+    "n_v23via_penar"
+   ],
+   "id": "cx_viata_de_roman_313",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_vdr_punga_cu_pungi",
+     "n_v3via_sacosa",
+     "n_vdr_borcane_zacusca",
+     "n_v42vdr_cutia_biscuiti"
+    ],
+    "g2": [
+     "n_vdr_lasa_ca_merge",
+     "n_vdr_descurcare_romaneasca",
+     "n_v42vdr_las_ca_stiu_eu",
+     "n_v42vdr_se_rezolva"
+    ],
+    "g3": [
+     "n_v3via_dosar_sina",
+     "n_v3via_coada",
+     "n_v42vdr_stampila",
+     "n_v42vdr_reveniti_maine"
+    ],
+    "g4": [
+     "n_v3via_naveta",
+     "n_v42vdr_maxi_taxi",
+     "n_v42vdr_personal_cfr",
+     "n_v42vdr_autostopul"
+    ]
+   },
+   "group_labels": {
+    "g1": "Nu se aruncă nimic în casă",
+    "g2": "Filosofia descurcatului",
+    "g3": "Aventura de la ghișeu",
+    "g4": "Te duc, încet, unde trebuie"
+   },
+   "order": [
+    "n_v42vdr_maxi_taxi",
+    "n_v42vdr_stampila",
+    "n_v42vdr_cutia_biscuiti",
+    "n_vdr_punga_cu_pungi",
+    "n_vdr_descurcare_romaneasca",
+    "n_v42vdr_se_rezolva",
+    "n_v3via_coada",
+    "n_v3via_sacosa",
+    "n_v42vdr_autostopul",
+    "n_v42vdr_reveniti_maine",
+    "n_vdr_lasa_ca_merge",
+    "n_v42vdr_las_ca_stiu_eu",
+    "n_v42vdr_personal_cfr",
+    "n_v3via_naveta",
+    "n_v3via_dosar_sina",
+    "n_vdr_borcane_zacusca"
+   ],
+   "id": "cx_viata_de_roman_314",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "usor",
+   "groups": {
+    "g1": [
+     "n_vdr_plugusorul",
+     "n_v42vdr_capra",
+     "n_v42vdr_sorcova",
+     "n_v42vdr_ursul_obicei"
+    ],
+    "g2": [
+     "n_martisor",
+     "n_v42vdr_ghiocel",
+     "n_v42vdr_8_martie",
+     "n_v42vdr_babele"
+    ],
+    "g3": [
+     "n_v42vdr_dansul_gainii",
+     "n_v42vdr_nasii",
+     "n_v42vdr_darul",
+     "n_v42vdr_furatul_miresei"
+    ],
+    "g4": [
+     "n_v42vdr_ciocnitul_oualor",
+     "n_v42vdr_vopsitul_oualor",
+     "n_v42vdr_slujba_inviere",
+     "n_v42vdr_iepurasul"
+    ]
+   },
+   "group_labels": {
+    "g1": "Obiceiuri de Anul Nou",
+    "g2": "Semnele lui martie",
+    "g3": "Le vezi la nuntă",
+    "g4": "De Paște, la români"
+   },
+   "order": [
+    "n_v42vdr_babele",
+    "n_v42vdr_8_martie",
+    "n_v42vdr_iepurasul",
+    "n_v42vdr_ciocnitul_oualor",
+    "n_v42vdr_ursul_obicei",
+    "n_v42vdr_sorcova",
+    "n_v42vdr_nasii",
+    "n_v42vdr_slujba_inviere",
+    "n_v42vdr_vopsitul_oualor",
+    "n_v42vdr_darul",
+    "n_martisor",
+    "n_v42vdr_ghiocel",
+    "n_v42vdr_furatul_miresei",
+    "n_vdr_plugusorul",
+    "n_v42vdr_capra",
+    "n_v42vdr_dansul_gainii"
+   ],
+   "id": "cx_viata_de_roman_315",
+   "category": "viata_de_roman",
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "contexto": [
@@ -16755,6 +17895,22 @@
    "status": "approved"
   },
   {
+   "id": "ct_gastronomie_300",
+   "category": "gastronomie",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "target": "n_v4gas_mancare"
+  },
+  {
+   "id": "ct_gastronomie_301",
+   "category": "gastronomie",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "target": "n_v24_food_salad_veg_morcov"
+  },
+  {
    "id": "ct_geografie_001",
    "category": "geografie",
    "difficulty": "usor",
@@ -16963,6 +18119,30 @@
    "status": "approved"
   },
   {
+   "difficulty": "greu",
+   "target": "n_v11ist_revolutia_1848",
+   "id": "ct_istorie_308",
+   "category": "istorie",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "greu",
+   "target": "n_v20ist_abdicarea_regelui_mihai",
+   "id": "ct_istorie_309",
+   "category": "istorie",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "greu",
+   "target": "n_istx_constantin_brancoveanu",
+   "id": "ct_istorie_310",
+   "category": "istorie",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
    "difficulty": "usor",
    "target": "n_dex",
    "id": "ct_limba_043",
@@ -17089,6 +18269,14 @@
    "category": "limba",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "id": "ct_limba_307",
+   "category": "limba",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "target": "n_v24_action_language_a_citi"
   },
   {
    "difficulty": "usor",
@@ -17451,6 +18639,30 @@
    "status": "approved"
   },
   {
+   "difficulty": "normal",
+   "target": "n_muz_ozone",
+   "id": "ct_muzica_311",
+   "category": "muzica",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "greu",
+   "target": "n_v11muz_festivalul_mamaia",
+   "id": "ct_muzica_312",
+   "category": "muzica",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "greu",
+   "target": "n_muz_vama_veche",
+   "id": "ct_muzica_313",
+   "category": "muzica",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
    "difficulty": "usor",
    "target": "n_constantin_brancusi",
    "id": "ct_personalitati_075",
@@ -17659,6 +18871,22 @@
    "status": "approved"
   },
   {
+   "id": "ct_societate_303",
+   "category": "societate",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "target": "n_v4soc_familie"
+  },
+  {
+   "id": "ct_societate_305",
+   "category": "societate",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "target": "n_v24_places_public_farmacie"
+  },
+  {
    "difficulty": "usor",
    "target": "n_spt_romania_argentina_1994",
    "id": "ct_sport_091",
@@ -17769,6 +18997,38 @@
    "category": "sport",
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "difficulty": "greu",
+   "target": "n_spt_finala_sevilla_1986",
+   "id": "ct_sport_314",
+   "category": "sport",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "greu",
+   "target": "n_spt_helmut_duckadam",
+   "id": "ct_sport_315",
+   "category": "sport",
+   "source": "ai",
+   "status": "pending"
+  },
+  {
+   "difficulty": "greu",
+   "target": "n_spt_ivan_patzaichin",
+   "id": "ct_sport_316",
+   "category": "sport",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "greu",
+   "target": "n_spt_generatia_de_aur",
+   "id": "ct_sport_317",
+   "category": "sport",
+   "source": "ai",
+   "status": "pending"
   },
   {
    "difficulty": "normal",
@@ -17907,6 +19167,14 @@
    "status": "approved"
   },
   {
+   "id": "ct_stiinta_306",
+   "category": "stiinta",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "target": "n_v24_weather_precipitation_ploaie"
+  },
+  {
    "difficulty": "usor",
    "target": "n_vdr_cheia_de_la_gat",
    "id": "ct_viata_de_roman_107",
@@ -18027,22 +19295,6 @@
    "status": "pending"
   },
   {
-   "id": "ct_gastronomie_300",
-   "category": "gastronomie",
-   "difficulty": "usor",
-   "source": "ai",
-   "status": "pending",
-   "target": "n_v4gas_mancare"
-  },
-  {
-   "id": "ct_gastronomie_301",
-   "category": "gastronomie",
-   "difficulty": "usor",
-   "source": "ai",
-   "status": "pending",
-   "target": "n_v24_food_salad_veg_morcov"
-  },
-  {
    "id": "ct_viata_de_roman_302",
    "category": "viata_de_roman",
    "difficulty": "usor",
@@ -18051,44 +19303,12 @@
    "target": "n_v24_home_appliances_frigider"
   },
   {
-   "id": "ct_societate_303",
-   "category": "societate",
-   "difficulty": "usor",
-   "source": "ai",
-   "status": "pending",
-   "target": "n_v4soc_familie"
-  },
-  {
    "id": "ct_viata_de_roman_304",
    "category": "viata_de_roman",
    "difficulty": "usor",
    "source": "ai",
    "status": "pending",
    "target": "n_v24_school_writing_creion"
-  },
-  {
-   "id": "ct_societate_305",
-   "category": "societate",
-   "difficulty": "usor",
-   "source": "ai",
-   "status": "pending",
-   "target": "n_v24_places_public_farmacie"
-  },
-  {
-   "id": "ct_stiinta_306",
-   "category": "stiinta",
-   "difficulty": "usor",
-   "source": "ai",
-   "status": "pending",
-   "target": "n_v24_weather_precipitation_ploaie"
-  },
-  {
-   "id": "ct_limba_307",
-   "category": "limba",
-   "difficulty": "usor",
-   "source": "ai",
-   "status": "pending",
-   "target": "n_v24_action_language_a_citi"
   }
  ],
  "lant": [
@@ -18511,6 +19731,26 @@
    "category": "gastronomie",
    "source": "ai",
    "status": "pending"
+  },
+  {
+   "id": "lt_gastronomie_212",
+   "category": "gastronomie",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "start": "n_v4gas_bucatarie",
+   "target": "n_v24_food_salad_veg_morcov",
+   "optimal": 2
+  },
+  {
+   "id": "lt_gastronomie_218",
+   "category": "gastronomie",
+   "difficulty": "normal",
+   "source": "ai",
+   "status": "pending",
+   "start": "n_v2gas_ciorba",
+   "target": "n_v24_food_salad_veg_morcov",
+   "optimal": 4
   },
   {
    "id": "lt_geografie_001",
@@ -19883,6 +21123,36 @@
    "status": "pending"
   },
   {
+   "id": "lt_stiinta_215",
+   "category": "stiinta",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "start": "n_v4per_om",
+   "target": "n_v24_body_face_nas",
+   "optimal": 2
+  },
+  {
+   "id": "lt_stiinta_216",
+   "category": "stiinta",
+   "difficulty": "usor",
+   "source": "ai",
+   "status": "pending",
+   "start": "n_v4gas_apa",
+   "target": "n_v24_weather_air_nor",
+   "optimal": 2
+  },
+  {
+   "id": "lt_stiinta_219",
+   "category": "stiinta",
+   "difficulty": "normal",
+   "source": "ai",
+   "status": "pending",
+   "start": "n_v4sti_corp",
+   "target": "n_v24_weather_precipitation_zapada",
+   "optimal": 4
+  },
+  {
    "difficulty": "usor",
    "start": "n_vdr_guma_turbo",
    "target": "n_dacia",
@@ -20023,16 +21293,6 @@
    "status": "pending"
   },
   {
-   "id": "lt_gastronomie_212",
-   "category": "gastronomie",
-   "difficulty": "usor",
-   "source": "ai",
-   "status": "pending",
-   "start": "n_v4gas_bucatarie",
-   "target": "n_v24_food_salad_veg_morcov",
-   "optimal": 2
-  },
-  {
    "id": "lt_viata_de_roman_213",
    "category": "viata_de_roman",
    "difficulty": "usor",
@@ -20053,26 +21313,6 @@
    "optimal": 2
   },
   {
-   "id": "lt_stiinta_215",
-   "category": "stiinta",
-   "difficulty": "usor",
-   "source": "ai",
-   "status": "pending",
-   "start": "n_v4per_om",
-   "target": "n_v24_body_face_nas",
-   "optimal": 2
-  },
-  {
-   "id": "lt_stiinta_216",
-   "category": "stiinta",
-   "difficulty": "usor",
-   "source": "ai",
-   "status": "pending",
-   "start": "n_v4gas_apa",
-   "target": "n_v24_weather_air_nor",
-   "optimal": 2
-  },
-  {
    "id": "lt_viata_de_roman_217",
    "category": "viata_de_roman",
    "difficulty": "usor",
@@ -20081,26 +21321,6 @@
    "start": "n_v24_home_seating_scaun",
    "target": "n_v24_home_rooms_dormitor",
    "optimal": 3
-  },
-  {
-   "id": "lt_gastronomie_218",
-   "category": "gastronomie",
-   "difficulty": "normal",
-   "source": "ai",
-   "status": "pending",
-   "start": "n_v2gas_ciorba",
-   "target": "n_v24_food_salad_veg_morcov",
-   "optimal": 4
-  },
-  {
-   "id": "lt_stiinta_219",
-   "category": "stiinta",
-   "difficulty": "normal",
-   "source": "ai",
-   "status": "pending",
-   "start": "n_v4sti_corp",
-   "target": "n_v24_weather_precipitation_zapada",
-   "optimal": 4
   }
  ],
  "alchimie": [
@@ -20307,6 +21527,22 @@
    "target": "n_ftv_bobita",
    "target_depth": 6,
    "id": "al_film_tv_023",
+   "category": "film_tv",
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "difficulty": "normal",
+   "seeds": [
+    "n_ftv_las_fierbinti",
+    "n_ftv_vacanta_mare",
+    "n_v11fil_vocea_romaniei",
+    "n_ftv_chefi_la_cutite",
+    "n_ftv_tvr"
+   ],
+   "target": "n_v11fil_romanii_au_talent",
+   "target_depth": 3,
+   "id": "al_film_tv_106",
    "category": "film_tv",
    "source": "ai",
    "status": "approved"
@@ -21691,7 +22927,7 @@
   {
    "id": "al_viata_de_roman_100",
    "category": "viata_de_roman",
-   "difficulty": "usor",
+   "difficulty": "normal",
    "source": "ai",
    "status": "pending",
    "seeds": [
@@ -21709,7 +22945,7 @@
   {
    "id": "al_viata_de_roman_101",
    "category": "viata_de_roman",
-   "difficulty": "usor",
+   "difficulty": "normal",
    "source": "ai",
    "status": "pending",
    "seeds": [
@@ -21763,7 +22999,7 @@
   {
    "id": "al_viata_de_roman_104",
    "category": "viata_de_roman",
-   "difficulty": "usor",
+   "difficulty": "normal",
    "source": "ai",
    "status": "pending",
    "seeds": [

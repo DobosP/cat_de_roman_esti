@@ -342,9 +342,20 @@ def generate_catalog() -> dict:
         for row in rankings["boards"]
         if row["game"] == "conexiuni" and row["pilot_eligible"] is True
     }
-    records = [rec for rec in pack["conexiuni"] if rec["id"] in eligible_ids]
+    # ADR-0054 defers Intrusul/Perechi expansion until the anonymous pilot: the derived
+    # catalog stays generated from the frozen V38 source snapshot. The V42 content wave
+    # (ADR-0065) added six eligible Conexiuni boards; they are excluded here on purpose
+    # and become derived sources only with a post-pilot decision.
+    V42_DEFERRED_SOURCES = {
+        "cx_gastronomie_299", "cx_geografie_305", "cx_limba_306",
+        "cx_stiinta_309", "cx_viata_de_roman_313", "cx_viata_de_roman_315",
+    }
+    records = [
+        rec for rec in pack["conexiuni"]
+        if rec["id"] in eligible_ids and rec["id"] not in V42_DEFERRED_SOURCES
+    ]
     if len(records) != 123:
-        raise ValueError(f"expected 123 V37-eligible Conexiuni sources, found {len(records)}")
+        raise ValueError(f"expected 123 V38-snapshot Conexiuni sources, found {len(records)}")
     kg = json.loads(critique_pack.PACKAGE_KG.read_text(encoding="utf-8"))
     strengths, linked = _edge_maps(kg)
     raw_intrusul = _intrusul_candidates(records, svc, strengths, linked)
