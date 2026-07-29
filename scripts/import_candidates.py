@@ -5,13 +5,14 @@ Consumes a directory of per-category generation output (the codex-fleet /
 verification pipeline of ADR-0011):
 
     <dir>/<category>/candidates.json       # nodes, edges, conexiuni/contexto/lant/alchimie
-    <dir>/<category>/verify_factual.json   # category, reviewed_refs, issues, coverage_note
-    <dir>/<category>/verify_quality.json   # {"instances":[{"ref","scores","verdict","note"}]}
+    <dir>/<category>/verify_factual.json   # category, candidate_sha256, reviewed_refs, issues
+    <dir>/<category>/verify_quality.json   # category, candidate_sha256, instances, coverage
 
 Curation policy (quality over quantity):
   * every raw node, edge and game instance must be named exactly once in the factual
     ``reviewed_refs`` inventory; quality must contain exactly one row per instance;
-  * missing, partial, duplicate or category-mismatched verification aborts the whole
+  * both verification layers must bind the exact candidate-file SHA-256; missing,
+    stale, partial, duplicate or category-mismatched verification aborts the whole
     batch before graph or pack mutation;
   * factual ``block`` on a node -> the node, its edges and every instance touching
     it are dropped; ``block`` on an instance -> that instance is dropped;
@@ -32,6 +33,7 @@ the pack validator, and roll the pack back if it fails.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import random
 import re
@@ -85,6 +87,11 @@ NOTE = (
 
 def _load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def candidate_binding(path: Path) -> str:
+    """Bind verification artifacts to the exact candidate bytes they reviewed."""
+    return f"sha256:{hashlib.sha256(path.read_bytes()).hexdigest()}"
 
 
 def candidate_import_status(verdict: str) -> str | None:
@@ -192,11 +199,16 @@ def _validate_header(
     category: str,
     name: str,
     artifact: dict,
+    expected_binding: str,
     errors: list[str],
 ) -> None:
     label = f"{category}/{name}"
     if artifact.get("category") != category:
         errors.append(f"{label}: category must equal {category!r}")
+    if artifact.get("candidate_sha256") != expected_binding:
+        errors.append(
+            f"{label}: candidate_sha256 does not match candidates.json"
+        )
     if _nonblank(artifact.get("coverage_note")) is None:
         errors.append(f"{label}: coverage_note must be a nonblank string")
 
@@ -205,10 +217,13 @@ def _validate_factual(
     category: str,
     artifact: dict,
     expected_refs: set[str],
+    expected_binding: str,
     errors: list[str],
 ) -> None:
     label = f"{category}/verify_factual.json"
-    _validate_header(category, "verify_factual.json", artifact, errors)
+    _validate_header(
+        category, "verify_factual.json", artifact, expected_binding, errors
+    )
 
     reviewed = artifact.get("reviewed_refs")
     reviewed_values: list[str] = []
@@ -261,10 +276,13 @@ def _validate_quality(
     category: str,
     artifact: dict,
     expected_refs: set[str],
+    expected_binding: str,
     errors: list[str],
 ) -> None:
     label = f"{category}/verify_quality.json"
-    _validate_header(category, "verify_quality.json", artifact, errors)
+    _validate_header(
+        category, "verify_quality.json", artifact, expected_binding, errors
+    )
 
     instances = artifact.get("instances")
     if not isinstance(instances, list):
@@ -321,8 +339,9 @@ def preflight_candidates(gen_dir: Path) -> dict[str, dict]:
     bundles: dict[str, dict] = {}
     for category_dir in category_dirs:
         category = category_dir.name
+        candidate_path = category_dir / "candidates.json"
         candidate = _load_object(
-            category_dir / "candidates.json",
+            candidate_path,
             f"{category}/candidates.json",
             errors,
         )
@@ -341,8 +360,9 @@ def preflight_candidates(gen_dir: Path) -> dict[str, dict]:
         expected, node_refs, instance_refs = _raw_reference_inventory(
             category, candidate, errors
         )
-        _validate_factual(category, factual, expected, errors)
-        _validate_quality(category, quality, instance_refs, errors)
+        binding = candidate_binding(candidate_path)
+        _validate_factual(category, factual, expected, binding, errors)
+        _validate_quality(category, quality, instance_refs, binding, errors)
         bundles[category] = {
             "cand": candidate,
             "factual": factual,

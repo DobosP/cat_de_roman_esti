@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -74,22 +75,24 @@ def _write_batch(
     quality: dict | None = None,
 ) -> Path:
     defaults = _artifacts()
-    payloads = (
+    payloads = [
         defaults[0] if candidate is None else candidate,
         defaults[1] if factual is None else factual,
         defaults[2] if quality is None else quality,
-    )
+    ]
+    payloads = copy.deepcopy(payloads)
     batch = tmp_path / "batch"
     category = batch / "istorie"
     category.mkdir(parents=True, exist_ok=True)
+    candidate_bytes = json.dumps(payloads[0], ensure_ascii=False).encode("utf-8")
+    (category / "candidates.json").write_bytes(candidate_bytes)
+    binding = f"sha256:{hashlib.sha256(candidate_bytes).hexdigest()}"
     for name, payload in zip(
-        ("candidates.json", "verify_factual.json", "verify_quality.json"),
-        payloads,
-        strict=True,
+        ("verify_factual.json", "verify_quality.json"), payloads[1:], strict=True
     ):
+        payload["candidate_sha256"] = binding
         (category / name).write_text(
-            json.dumps(payload, ensure_ascii=False),
-            encoding="utf-8",
+            json.dumps(payload, ensure_ascii=False), encoding="utf-8"
         )
     return batch
 
@@ -233,6 +236,16 @@ def test_preflight_rejects_missing_verification_artifact(tmp_path, filename):
     (batch / "istorie" / filename).unlink()
 
     _assert_contract_error(batch, f"missing {filename}")
+
+
+def test_preflight_rejects_artifacts_after_candidate_content_changes(tmp_path):
+    batch = _write_batch(tmp_path)
+    path = batch / "istorie" / "candidates.json"
+    candidate = json.loads(path.read_text(encoding="utf-8"))
+    candidate["conexiuni"][0]["difficulty"] = "greu"
+    path.write_text(json.dumps(candidate, ensure_ascii=False), encoding="utf-8")
+
+    _assert_contract_error(batch, "candidate_sha256 does not match candidates.json")
 
 
 def test_factual_coverage_is_bound_to_raw_ids_before_alias_mapping(tmp_path):

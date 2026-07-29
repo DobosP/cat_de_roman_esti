@@ -179,8 +179,11 @@ A verifier with web access confirms A1/A2/C2 by checking ≥2 independent signal
    critique; run section-F checks on every A1/A2/C2 claim; settle the verdict. Gate
    mode verifies every item; only clean approved-stock sweeps may use the stable
    one-in-four sample. Model-returned IDs and review bindings must match the request.
-4. **Batch-bound apply**: `import_candidates.py` stages every surviving new item as
-   `pending`. Save each entry under the gate workflow result's `artifacts` key as
+4. **Batch-bound apply**: before staging, `import_candidates.py` requires complete factual
+   and quality coverage for every raw candidate ref, binds both artifacts to the exact
+   candidate-file SHA-256, and rejects missing/unknown/duplicate rows or unresolved
+   `fix` verdicts before any graph or pack mutation. Surviving items stage as `pending`.
+   Save each entry under the gate workflow result's `artifacts` key as
    `<game>_verdicts.json`; the version-2 artifact binds the exact cross-game input IDs,
    canonical dossier/rubric digest, every per-item final verdict, and complete verifier
    coverage. Legacy, stale, unverified, partially lost, or hand-combined batches fail

@@ -545,6 +545,7 @@ def test_authored_workflow_censuses_full_inventory_for_reskins():
     assert "including reserves and pending stock" in workflow
     assert "exact or 3-of-4 quads plus >=8/16 whole-board overlap" in workflow
     assert "Treat those freshness matches as drop" in workflow
+    assert "candidate_sha256" in workflow
 
 
 def test_duplicate_groups_flags_exact_and_near_duplicates(loaded):
