@@ -25,8 +25,8 @@ _KG_PATH = _ROOT / "tests" / "fixtures" / "kg_sample.json"
 # approved inventory and serving remain unchanged. Later pending-only waves may grow
 # these totals, so this older-wave guard is a floor while the approved split stays exact.
 _V23_INVENTORY_FLOOR = {
-    "conexiuni": (284, 215, 75),
-    "contexto": (199, 198, 7),
+    "conexiuni": (284, 229, 75),
+    "contexto": (199, 202, 7),
     "lant": (193, 94, 99),
     "alchimie": (92, 78, 15),
 }
@@ -87,7 +87,8 @@ def test_v14_pack_inventory_and_review_split():
     # 2026-07-15: 592 − 20 critique-gate demotions (ADR-0023/0024) = 572 approved.
     # 2026-07-29: + 13 ADR-0065 gate promotions among these games' totals = 585 approved.
     assert sum(expected[0] for expected in _V23_INVENTORY_FLOOR.values()) == 768
-    assert sum(expected[1] for expected in _V23_INVENTORY_FLOOR.values()) == 585
+    # 2026-07-30 (ADR-0066): + 18 owner promotions among these games' totals.
+    assert sum(expected[1] for expected in _V23_INVENTORY_FLOOR.values()) == 603
     assert sum(expected[2] for expected in _V23_INVENTORY_FLOOR.values()) == 196
 
 

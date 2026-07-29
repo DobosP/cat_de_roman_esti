@@ -51,10 +51,10 @@ _V32_ALCHIMIE_PROFILE_SHA256 = (
     "762c1f3a84463fbc2f14d0ec878c12db53ed48f6a4c5ec3c5c107b57ca5a4168"
 )
 _EXACT_REVIEW_REPORT_SHA256 = (
-    "bb9637b0b75e36310fedc38d0c44140bc05909d3896d811e9ff834569e6698c3"
+    "12f425d5e9ea591e80dfd46b29f74a2bbc3f11e16f6747d9db3830f961e3e5f7"
 )
 _FULL_PENDING_REPORT_SHA256 = (
-    "128c1af845ffa99f4675dc10c433d9674ec66e4eb6b0d1f405106b86d01b82e2"
+    "11371687dc1e25b8ac48bc6a6f3f5317647c5e1b825688100765722cc259dbab"
 )
 
 
@@ -396,18 +396,18 @@ def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
         "alchimie": 99,
     }
     # ADR-0065 content wave totals.
-    assert statuses == {"approved": 585, "pending": 240}
+    assert statuses == {"approved": 603, "pending": 222}
     assert len(DATA.REVIEW_ITEM_IDS) == len(set(DATA.REVIEW_ITEM_IDS)) == 33
     assert _critique_report(set(DATA.REVIEW_ITEM_IDS)) == (
         33,
-        1,
+        2,
         0,
         _EXACT_REVIEW_REPORT_SHA256,
     )
     assert _critique_report(None) == (
-        240,
-        160,
-        78,
+        222,
+        149,
+        81,
         _FULL_PENDING_REPORT_SHA256,
     )
 

@@ -243,8 +243,8 @@ def test_artifact_is_complete_exactly_bound_and_byte_identical(generated: dict) 
     )
     assert meta["counts"] == {
         "total": 825,
-        "approved": 585,
-        "pilot_eligible": 499,
+        "approved": 603,
+        "pilot_eligible": 450,
         "by_game": {
             "conexiuni": 308,
             "contexto": 217,
@@ -252,8 +252,8 @@ def test_artifact_is_complete_exactly_bound_and_byte_identical(generated: dict) 
             "alchimie": 99,
         },
         "eligible_by_game": {
-            "conexiuni": 129,
-            "contexto": 198,
+            "conexiuni": 76,
+            "contexto": 202,
             "lant": 94,
             "alchimie": 78,
         },
@@ -309,6 +309,17 @@ def test_every_eligibility_flag_matches_payload_and_critique_gates(generated: di
         for game, rec, findings in selected
     }
 
+    demotions = set(
+        json.loads(
+            RANK._DEMOTIONS_PATH.read_text(
+                encoding="utf-8"
+            )
+        )["ids"]
+    )
+    expected = {
+        item_id: eligible and item_id not in demotions
+        for item_id, eligible in expected.items()
+    }
     assert {row["id"]: row["pilot_eligible"] for row in generated["boards"]} == expected
 
 
@@ -334,7 +345,7 @@ def test_ranks_and_selection_quintiles_recompute_exactly(generated: dict) -> Non
 def test_default_checker_is_green_and_prints_a_human_audit(capsys) -> None:
     assert RANK.main(["rank_games_pack.py"]) == 0
     output = capsys.readouterr().out
-    assert "825 total / 499 pilot-eligible" in output
+    assert "825 total / 450 pilot-eligible" in output
     assert "conexiuni" in output and "contexto" in output
     assert "lant" in output and "alchimie" in output
     assert "top:" in output

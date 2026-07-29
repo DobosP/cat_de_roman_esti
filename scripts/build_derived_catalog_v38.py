@@ -332,30 +332,53 @@ def _perechi_candidates(
     return rows
 
 
+_V38_SOURCE_SNAPSHOT: frozenset[str] = frozenset((
+    "cx_arta_cultura_003", "cx_arta_cultura_004", "cx_arta_cultura_005", "cx_arta_cultura_007",
+    "cx_arta_cultura_091", "cx_arta_cultura_092", "cx_arta_cultura_094", "cx_arta_cultura_159",
+    "cx_arta_cultura_161", "cx_arta_cultura_162", "cx_arta_cultura_239", "cx_arta_cultura_240",
+    "cx_arta_cultura_241", "cx_film_tv_008", "cx_film_tv_009", "cx_film_tv_011",
+    "cx_film_tv_013", "cx_film_tv_165", "cx_film_tv_167", "cx_film_tv_169",
+    "cx_film_tv_243", "cx_film_tv_244", "cx_gastronomie_171", "cx_gastronomie_173",
+    "cx_geografie_028", "cx_geografie_110", "cx_geografie_177", "cx_geografie_178",
+    "cx_geografie_179", "cx_geografie_252", "cx_istorie_001", "cx_istorie_029",
+    "cx_istorie_030", "cx_istorie_034", "cx_istorie_115", "cx_istorie_117",
+    "cx_istorie_118", "cx_istorie_181", "cx_istorie_182", "cx_istorie_183",
+    "cx_istorie_255", "cx_limba_037", "cx_limba_038", "cx_limba_122",
+    "cx_limba_187", "cx_limba_192", "cx_limba_260", "cx_literatura_040",
+    "cx_literatura_041", "cx_literatura_043", "cx_literatura_044", "cx_literatura_126",
+    "cx_literatura_127", "cx_literatura_128", "cx_literatura_131", "cx_literatura_193",
+    "cx_literatura_194", "cx_literatura_198", "cx_literatura_264", "cx_literatura_266",
+    "cx_meme_net_045", "cx_meme_net_048", "cx_meme_net_137", "cx_meme_net_201",
+    "cx_meme_net_204", "cx_meme_net_267", "cx_muzica_053", "cx_muzica_055",
+    "cx_muzica_138", "cx_muzica_141", "cx_muzica_143", "cx_muzica_205",
+    "cx_muzica_208", "cx_muzica_209", "cx_muzica_273", "cx_personalitati_059",
+    "cx_personalitati_063", "cx_personalitati_064", "cx_personalitati_144", "cx_personalitati_145",
+    "cx_personalitati_210", "cx_personalitati_213", "cx_personalitati_214", "cx_personalitati_275",
+    "cx_personalitati_276", "cx_personalitati_277", "cx_societate_065", "cx_societate_067",
+    "cx_societate_068", "cx_societate_151", "cx_societate_152", "cx_societate_155",
+    "cx_societate_216", "cx_societate_217", "cx_societate_220", "cx_societate_278",
+    "cx_societate_280", "cx_societate_290", "cx_sport_072", "cx_sport_073",
+    "cx_sport_074", "cx_sport_075", "cx_sport_076", "cx_sport_077",
+    "cx_sport_156", "cx_sport_157", "cx_sport_160", "cx_sport_161",
+    "cx_sport_222", "cx_sport_225", "cx_sport_226", "cx_sport_282",
+    "cx_sport_284", "cx_stiinta_081", "cx_stiinta_083", "cx_stiinta_162",
+    "cx_stiinta_165", "cx_stiinta_167", "cx_stiinta_227", "cx_stiinta_285",
+    "cx_viata_de_roman_236", "cx_viata_de_roman_238", "cx_viata_de_roman_288",
+))
+
+
 def generate_catalog() -> dict:
     pack, svc, _, _ = critique_pack.load_all(
         critique_pack.PACKAGE_PACK, critique_pack.PACKAGE_KG
     )
-    rankings = json.loads(DEFAULT_RANKINGS.read_text(encoding="utf-8"))
-    eligible_ids = {
-        row["id"]
-        for row in rankings["boards"]
-        if row["game"] == "conexiuni" and row["pilot_eligible"] is True
-    }
     # ADR-0054 defers Intrusul/Perechi expansion until the anonymous pilot: the derived
-    # catalog stays generated from the frozen V38 source snapshot. The V42 content wave
-    # (ADR-0065) added six eligible Conexiuni boards; they are excluded here on purpose
-    # and become derived sources only with a post-pilot decision.
-    V42_DEFERRED_SOURCES = {
-        "cx_gastronomie_299", "cx_geografie_305", "cx_limba_306",
-        "cx_stiinta_309", "cx_viata_de_roman_313", "cx_viata_de_roman_315",
-    }
-    records = [
-        rec for rec in pack["conexiuni"]
-        if rec["id"] in eligible_ids and rec["id"] not in V42_DEFERRED_SOURCES
-    ]
-    if len(records) != 123:
-        raise ValueError(f"expected 123 V38-snapshot Conexiuni sources, found {len(records)}")
+    # catalog reproduces the frozen V38 source snapshot below, independent of live pack
+    # status or eligibility churn (ADR-0065 added eligible boards; the ADR-0066 owner wave
+    # demoted served ones). Refreshing the snapshot is a post-pilot decision.
+    records = [rec for rec in pack["conexiuni"] if rec["id"] in _V38_SOURCE_SNAPSHOT]
+    if len(records) != len(_V38_SOURCE_SNAPSHOT):
+        missing = sorted(_V38_SOURCE_SNAPSHOT - {rec["id"] for rec in records})
+        raise ValueError(f"frozen derived sources missing from the pack: {missing}")
     kg = json.loads(critique_pack.PACKAGE_KG.read_text(encoding="utf-8"))
     strengths, linked = _edge_maps(kg)
     raw_intrusul = _intrusul_candidates(records, svc, strengths, linked)

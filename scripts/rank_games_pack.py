@@ -349,14 +349,29 @@ def _service_edge_strength(svc: WordGameService, source: str, target: str) -> fl
     return float(edge.strength) if edge is not None else 0.0
 
 
+_DEMOTIONS_PATH = _REPO_ROOT / "cat_de_roman_esti/fixtures/board_demotions_v43.json"
+
+
+def _owner_demotions() -> frozenset[str]:
+    """ADR-0066: owner-demoted served boards leave the selected pool but stay approved
+    (the ADR-0055 reserve model), so derived sources and runtime invariants hold."""
+    data = json.loads(_DEMOTIONS_PATH.read_text(encoding="utf-8"))
+    ids = frozenset(str(item) for item in data["ids"])
+    if len(ids) != int(data["meta"]["count"]):
+        raise ValueError("board demotions: meta.count does not match ids")
+    return ids
+
+
 def _pilot_eligible(
     rec: dict,
     game: str,
     dossier: dict,
     svc: WordGameService,
+    demoted: frozenset[str],
 ) -> bool:
     return (
         rec.get("status") == "approved"
+        and str(rec.get("id")) not in demoted
         and not validate_payload(rec, game, svc)
         and not any(
             finding.get("level") == "FAIL"
@@ -369,6 +384,7 @@ def _score_rows() -> tuple[list[dict], dict]:
     pack, svc, strong, regions = critique_pack.load_all(
         critique_pack.PACKAGE_PACK, critique_pack.PACKAGE_KG
     )
+    demoted = _owner_demotions()
     _, _, selected = critique_pack.run(
         pack,
         svc,
@@ -399,7 +415,7 @@ def _score_rows() -> tuple[list[dict], dict]:
                 "play_quality": quality,
                 "pilot_score": _bounded_score(0.60 * familiarity + 0.40 * quality),
                 "rank": 0,
-                "pilot_eligible": _pilot_eligible(rec, game, dossier, svc),
+                "pilot_eligible": _pilot_eligible(rec, game, dossier, svc, demoted),
                 "selection_weight": 1,
             }
         )

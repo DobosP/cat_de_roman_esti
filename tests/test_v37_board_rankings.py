@@ -581,9 +581,21 @@ def test_shipped_ranked_inventory_exposes_reserves_but_never_selects_them():
                     else:
                         assert daily is None
 
-    # ADR-0065: the V42 gated content wave refilled the four formerly empty
-    # Ușor Conexiuni shelves; no eligible shelf is empty any more.
-    assert empty_eligible_shelves == set()
+    # ADR-0066: the owner demotion wave emptied three other shelves (hidden by the
+    # picker per ADR-0058); refilling them is the next content wave's target.
+    assert empty_eligible_shelves == {
+        ("conexiuni", "arta_cultura", "greu"),
+        ("conexiuni", "arta_cultura", "usor"),
+        ("conexiuni", "film_tv", "usor"),
+        ("conexiuni", "gastronomie", "normal"),
+        ("conexiuni", "geografie", "normal"),
+        ("conexiuni", "personalitati", "normal"),
+        ("conexiuni", "societate", "greu"),
+        ("conexiuni", "societate", "usor"),
+        ("conexiuni", "sport", "normal"),
+        ("conexiuni", "sport", "usor"),
+        ("conexiuni", "stiinta", "normal"),
+    }
 
 
 def test_ranked_lant_narrowing_preserves_safe_repeat_semantics(monkeypatch):
