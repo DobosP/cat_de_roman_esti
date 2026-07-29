@@ -72,7 +72,7 @@ phase('Quality')
 const quality = await parallel(CATS.map(cat => () =>
   agent(`You are the QUALITY pre-screener for authored Romanian word-game candidates (the full ADR-0023 judge gate runs later — just cull clearly-bad instances). Read ${DIR}/${cat}/candidates.json and ${REPO}/docs/CRITIQUE_RUBRIC.md sections A + B/C/D/E.
 
-For EVERY game instance (ref "<game>[<idx>]", 0-based): simulate an average Romanian player. conexiuni: honest single predicates, one defensible partition, one easy anchor, traps within the mistake budget, and CENSUS the served pack for already-used quads (${REPO}/cat_de_roman_esti/fixtures/games_pack.json). contexto: spontaneously nameable famous target. lant/alchimie: legible steps, satisfying discovery. verdict keep/fix/drop with scores 0-100. Return ONLY the structured object.`,
+For EVERY game instance (ref "<game>[<idx>]", 0-based): simulate an average Romanian player. conexiuni: honest single predicates, one defensible partition, one easy anchor, traps within the mistake budget, no label repeating an answer, and CENSUS the full pack (including reserves and pending stock) for exact or 3-of-4 quads plus >=8/16 whole-board overlap (${REPO}/cat_de_roman_esti/fixtures/games_pack.json). Treat those freshness matches as drop, not a cosmetic fix. contexto: spontaneously nameable famous target. lant/alchimie: legible steps, satisfying discovery. verdict keep/fix/drop with scores 0-100. Return ONLY the structured object.`,
     { agentType: 'analyst', effort: 'high', phase: 'Quality', label: `quality:${cat}`, schema: QUALITY_SCHEMA })
 ))
 

@@ -12,7 +12,8 @@ the verified verdicts to BOTH bundled pack copies:
 
 Only items currently `status: pending` are eligible. Batch identity, full verifier
 coverage, filename/game scope, verdict enum, item ownership and status are validated
-before mutation. Every ``promote`` ID is re-run through ``critique_pack.py --strict``;
+before mutation. Every ``promote`` ID is re-run through the strict deterministic checks
+against the prospective inventory (verified same-batch rejects removed in memory only);
 then the full pack validator runs and both copies ROLL BACK on a red return or exception.
 
     python scripts/apply_rereview.py --dir <verdicts_dir>
@@ -38,16 +39,55 @@ PACK_COPIES = (validate_games_pack.PACKAGE_PACK, validate_games_pack.TESTS_PACK)
 GATE_ARTIFACT_VERSION = 2
 
 
-def critique_promotions(item_ids: set[str]) -> int:
-    '''Run ADR-0023's deterministic gate over the exact pending promotion set.'''
+def critique_promotions(
+    item_ids: set[str], rejected_ids: set[str] | None = None,
+) -> int:
+    '''Gate promotions against the prospective inventory after verified rejects.
+
+    Review bindings are validated against the untouched batch first. Here only
+    same-batch ``reject`` rows are removed in memory, so a rejected duplicate cannot
+    block its surviving replacement while unrelated/``keep`` pending rows still do.
+    '''
     if not item_ids:
         return 0
-    return critique_pack.main([
-        'critique_pack.py',
-        '--status', 'pending',
-        '--ids', ','.join(sorted(item_ids)),
-        '--strict',
-    ])
+    rejected_ids = rejected_ids or set()
+    pack, svc, strong, regions = critique_pack.load_all(
+        critique_pack.PACKAGE_PACK, critique_pack.PACKAGE_KG,
+    )
+    for game in GAME_KINDS:
+        pack[game] = [
+            rec for rec in pack[game]
+            if not (
+                rec.get('status') == 'pending'
+                and str(rec.get('id')) in rejected_ids
+            )
+        ]
+    items, _, selected = critique_pack.run(
+        pack, svc, strong, regions, list(GAME_KINDS), {'pending'}, item_ids,
+    )
+    errors = critique_pack.selection_errors(
+        pack, list(GAME_KINDS), {'pending'}, item_ids, selected,
+    )
+    if errors:
+        for error in errors:
+            print(f'apply_rereview: ERROR: {error}', file=sys.stderr)
+        return 2
+    failures = [
+        (str(rec['id']), finding)
+        for _, rec, findings in selected
+        for finding in findings
+        if finding.get('level') == 'FAIL'
+    ]
+    print(
+        f'apply_rereview: prospective critique checked {len(selected)} '
+        f'promotion(s), {len(failures)} FAIL finding(s)'
+    )
+    for item_id, finding in failures:
+        print(
+            f"  FAIL {item_id}: [{finding.get('check')}] "
+            f"{finding.get('detail')}"
+        )
+    return int(bool(failures))
 
 
 def current_review_bindings(item_ids: set[str]) -> dict[str, str]:
@@ -191,7 +231,8 @@ def main(argv: list[str]) -> int:
     if stale:
         raise SystemExit('stale gate artifact for revised content: ' + ', '.join(stale))
     promotions = {iid for iid, verdict in verdicts.items() if verdict == 'promote'}
-    if critique_promotions(promotions) != 0:
+    rejections = {iid for iid, verdict in verdicts.items() if verdict == 'reject'}
+    if critique_promotions(promotions, rejections) != 0:
         raise SystemExit('promotion blocked by ADR-0023 deterministic critique gate')
 
     originals = {copy: copy.read_bytes() for copy in PACK_COPIES}

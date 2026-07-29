@@ -14,7 +14,9 @@ neighbours in a foreign group than in its own — curated boards historically by
 it); ``red_herring_budget`` counts contested tiles; ``mirrored_groups`` detects group
 pairs in >=3-way 1:1 strong-edge correspondence (festivals <-> host cities);
 ``type_coherence`` flags 3+1 / 2+2 node_type mixes inside a group;
-``duplicate_groups`` flags quads already used by an approved or selected batch board;
+``duplicate_groups`` flags exact/three-of-four quads already used in inventory or the
+selected batch; ``board_reskin`` catches half-board concept recycling;
+``label_self_leak`` catches labels that repeat one of their answers;
 ``salience_floor`` flags Contexto/Lant/Alchimie targets below their difficulty band;
 ``member_overuse`` flags nodes reused across too many approved Conexiuni boards.
 
@@ -33,7 +35,9 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import sys
+import unicodedata
 from collections import Counter, defaultdict
 from functools import lru_cache
 from itertools import combinations
@@ -70,6 +74,10 @@ RED_HERRING_WARN = 2
 RED_HERRING_FAIL = 4
 # Rubric A6: reuse ceiling for one node across approved Conexiuni boards.
 MEMBER_OVERUSE = 8
+# Rubric A6: sharing half a board is a reskin even when no single quad is exact.
+BOARD_OVERLAP_FAIL = 8
+# Rubric B9: three characters catches acronyms such as TVR without matching noise.
+LABEL_LEAK_MIN_CHARS = 3
 # Rubric A7: non-distinctive region association ("true of all Romania").
 REGION_LABELS = frozenset({
     "Moldova", "Transilvania", "Oltenia", "Muntenia", "Dobrogea",
@@ -140,6 +148,44 @@ def max_matching(pairs_by_left: dict[str, set[str]]) -> int:
         return False
 
     return sum(1 for left in pairs_by_left if augment(left, set()))
+
+
+def normalized_phrase(value: object) -> str:
+    """Return accent/case-insensitive words for conservative B9 matching."""
+    folded = "".join(
+        ch
+        for ch in unicodedata.normalize("NFKD", str(value).casefold())
+        if not unicodedata.combining(ch)
+    )
+    tokens = re.findall(r"[a-z0-9]+", folded)
+    normalized: list[str] = []
+    initialism: list[str] = []
+
+    def flush_initialism() -> None:
+        if len(initialism) >= 2:
+            normalized.append("".join(initialism))
+        else:
+            normalized.extend(initialism)
+        initialism.clear()
+
+    for token in tokens:
+        if len(token) == 1 and token.isalpha():
+            initialism.append(token)
+        else:
+            flush_initialism()
+            normalized.append(token)
+    flush_initialism()
+    return " ".join(normalized)
+
+
+def label_leaks_member(label: object, member_label: object) -> bool:
+    """Whether a group label contains one complete member name or phrase."""
+    group = normalized_phrase(label)
+    member = normalized_phrase(member_label)
+    return (
+        len(member.replace(" ", "")) >= LABEL_LEAK_MIN_CHARS
+        and f" {member} " in f" {group} "
+    )
 
 
 def fairness_counts(
@@ -285,8 +331,13 @@ def check_generic_region(rec: dict, game: str, svc: WordGameService,
     return findings
 
 
-def check_conexiuni(rec: dict, svc: WordGameService, strong: dict,
-                    approved_quads: dict[frozenset, list[str]]) -> list[dict]:
+def check_conexiuni(
+    rec: dict,
+    svc: WordGameService,
+    strong: dict,
+    comparison_quads: dict[frozenset, list[str]],
+    comparison_boards: dict[str, frozenset[str]] | None = None,
+) -> list[dict]:
     findings = []
     groups = rec["groups"]
     labels = rec.get("group_labels") or {}
@@ -313,6 +364,18 @@ def check_conexiuni(rec: dict, svc: WordGameService, strong: dict,
 
     group_keys = sorted(groups)
     for i, ga in enumerate(group_keys):
+        leaked = [
+            name(n)
+            for n in groups[ga]
+            if label_leaks_member(labels.get(ga, ""), name(n))
+        ]
+        if leaked:
+            findings.append({
+                "check": "label_self_leak",
+                "level": "WARN" if rec.get("status") == "approved" else "FAIL",
+                "detail": f'group label "{labels.get(ga, ga)}" repeats member(s): '
+                          + ", ".join(sorted(leaked)),
+            })
         types = [node_brief(svc, n)["node_type"] for n in groups[ga]]
         mix = classify_type_mix(types)
         if mix:
@@ -331,32 +394,56 @@ def check_conexiuni(rec: dict, svc: WordGameService, strong: dict,
             }
             if max_matching({k: v for k, v in pairs.items() if v}) >= MIRROR_PAIRS:
                 findings.append({
-                    "check": "mirrored_groups", "level": "WARN",
+                    "check": "mirrored_groups",
+                    "level": "WARN" if rec.get("status") == "approved" else "FAIL",
                     "detail": f'"{labels.get(ga, ga)}" <-> "{labels.get(gb, gb)}" are in '
                               f">={MIRROR_PAIRS}-way strong correspondence",
                 })
 
     for gk in group_keys:
         quad = frozenset(groups[gk])
-        others = [b for b in approved_quads.get(quad, []) if b != rec["id"]]
+        others = [b for b in comparison_quads.get(quad, []) if b != rec["id"]]
         if others:
             findings.append({
                 "check": "duplicate_groups",
                 "level": "WARN" if rec.get("status") == "approved" else "FAIL",
-                "detail": f'group "{labels.get(gk, gk)}" reuses an approved/selected quad '
+                "detail": f'group "{labels.get(gk, gk)}" reuses an inventory/selected quad '
                           f"(also in: {', '.join(sorted(others))})",
             })
             continue
         near = sorted({
-            b for other_quad, boards in approved_quads.items()
+            b for other_quad, boards in comparison_quads.items()
             if len(quad & other_quad) == 3
             for b in boards if b != rec["id"]
         })
         if near:
             findings.append({
-                "check": "duplicate_groups", "level": "WARN",
+                "check": "duplicate_groups",
+                "level": "WARN" if rec.get("status") == "approved" else "FAIL",
                 "detail": f'group "{labels.get(gk, gk)}" shares 3 members with an '
-                          f"approved/selected quad (near-duplicate; see: {', '.join(near)})",
+                          f"inventory/selected quad (near-duplicate; see: {', '.join(near)})",
+            })
+
+    if comparison_boards:
+        board = frozenset(nid for ids in groups.values() for nid in ids)
+        overlaps = sorted(
+            (
+                (len(board & other), other_id)
+                for other_id, other in comparison_boards.items()
+                if other_id != rec["id"]
+                and len(board & other) >= BOARD_OVERLAP_FAIL
+            ),
+            key=lambda row: (-row[0], row[1]),
+        )
+        if overlaps:
+            findings.append({
+                "check": "board_reskin",
+                "level": "WARN" if rec.get("status") == "approved" else "FAIL",
+                "detail": f"shares >={BOARD_OVERLAP_FAIL}/16 concepts with "
+                          "inventory/selected board(s): "
+                          + ", ".join(
+                              f"{other_id} ({count})" for count, other_id in overlaps
+                          ),
             })
     return findings
 
@@ -717,16 +804,26 @@ def build_dossier(rec: dict, game: str, svc: WordGameService, strong: dict,
 # --------------------------------------------------------------------- main
 def run(pack: dict, svc: WordGameService, strong: dict, regions: dict,
         games: list[str], statuses: set[str], ids: set[str] | None):
-    approved_quads: dict[frozenset, list[str]] = defaultdict(list)
+    comparison_quads: dict[frozenset, list[str]] = defaultdict(list)
+    comparison_boards: dict[str, frozenset[str]] = {}
+    pending_gate = ids is not None and any(
+        rec.get("status") == "pending" and rec.get("id") in ids
+        for rec in pack["conexiuni"]
+    )
     for rec in pack["conexiuni"]:
         compare_selected = (
             ids is not None
             and rec.get('status') in statuses
             and rec.get('id') in ids
         )
-        if rec.get('status') == 'approved' or compare_selected:
+        # Candidate gates census the full inventory, including unrelated pending
+        # stock; stock sweeps and ranking keep their historical approved-only scope.
+        if rec.get('status') == 'approved' or compare_selected or pending_gate:
+            comparison_boards[rec["id"]] = frozenset(
+                nid for group in rec["groups"].values() for nid in group
+            )
             for g in rec["groups"].values():
-                approved_quads[frozenset(g)].append(rec["id"])
+                comparison_quads[frozenset(g)].append(rec["id"])
 
     approved_use = Counter()
     for rec in pack['conexiuni']:
@@ -749,7 +846,9 @@ def run(pack: dict, svc: WordGameService, strong: dict, regions: dict,
             if ids is not None and rec["id"] not in ids:
                 continue
             if game == "conexiuni":
-                findings = check_conexiuni(rec, svc, strong, approved_quads)
+                findings = check_conexiuni(
+                    rec, svc, strong, comparison_quads, comparison_boards
+                )
                 if ids is not None:
                     board = {nid for group in rec['groups'].values() for nid in group}
                     overused = [
@@ -760,7 +859,9 @@ def run(pack: dict, svc: WordGameService, strong: dict, regions: dict,
                     if overused:
                         findings.append({
                             'check': 'member_overuse',
-                            'level': 'WARN',
+                            'level': (
+                                'WARN' if rec.get('status') == 'approved' else 'FAIL'
+                            ),
                             'detail': 'projected approved-batch use exceeds '
                                       f'{MEMBER_OVERUSE}: ' + ', '.join(overused),
                         })
@@ -882,6 +983,8 @@ def main(argv: list[str]) -> int:
             "salience_floors": SALIENCE_FLOORS, "strong_edge": STRONG_EDGE,
             "mirror_pairs": MIRROR_PAIRS, "red_herring_warn": RED_HERRING_WARN,
             "red_herring_fail": RED_HERRING_FAIL, "member_overuse": MEMBER_OVERUSE,
+            "board_overlap_fail": BOARD_OVERLAP_FAIL,
+            "label_leak_min_chars": LABEL_LEAK_MIN_CHARS,
             "region_fanout": REGION_FANOUT, "national_salience": NATIONAL_SALIENCE,
         },
         "items": items,

@@ -36,8 +36,13 @@ vocabulary `promote|reject|keep` for pending items. Sweeps over `approved` items
   verdict and flag the A5 trigger in the reasoning — never convert a quality kill
   into `keep` out of deference (that hides the signal the owner needs).
 - **A6 Freshness.** Not a re-skin of an already-approved item (same mechanic + same
-  concepts under a new label). Lint `duplicate_groups` / shared-member counts are the
-  signal; the judge decides if the overlap is a re-skin.
+  concepts under a new label). For a pending Conexiuni board, an exact or three-of-four
+  reused quad anywhere in full pack inventory (`duplicate_groups`) and an overlap of at
+  least 8 of 16 concepts with one inventory/selected board (`board_reskin`) block
+  promotion, as does pushing any member above the eight-board reuse ceiling
+  (`member_overuse`). Approved-stock sweeps retain approved-only comparison scope and
+  report the patterns as warnings so an owner can retire them without rewriting history.
+  Smaller shared-member counts remain judge evidence.
 - **A7 Distinctive association.** Any connection the gameplay leans on must be true of
   X *specifically*, not of the whole country or class. "Sarmale → Moldova" is
   true-but-generic (sarmale is pan-Romanian; the same claim works for every region) —
@@ -75,7 +80,8 @@ Grounding: NYT Connections editorial practice (difficulty gradient; overlap as a
 - **B5 No mirrored groups.** Two groups in ≥3-way 1:1 strong correspondence
   (festivals ↔ their host cities; hosts ↔ their own shows; inventors ↔ their machines)
   make label-guessing a coin flip and read as lazy authoring. One crossing pair is a
-  trap; three is a mirror. Lint: `mirrored_groups`.
+  trap; three is a mirror. Lint `mirrored_groups` blocks pending boards and warns on
+  approved stock.
 - **B6 No generic-filler groups.** A group of bare dictionary abstractions
   ("Concert, Festival, Spectacol, Public") is not puzzle content, and its members act
   as archetype-magnets for other groups' proper nouns. Kill.
@@ -86,7 +92,9 @@ Grounding: NYT Connections editorial practice (difficulty gradient; overlap as a
 - **B8 Recognition per group.** ≥3 of 4 members pass A1 on their own; at most one
   deep-cut per group, and only on normal/greu.
 - **B9 Label self-leakage.** A group label must not contain a member's name, and must
-  not be trivially reverse-engineerable from a single member alone.
+  not be trivially reverse-engineerable from a single member alone. Lint
+  `label_self_leak` blocks a pending board when the normalized label repeats a complete
+  member name (including short acronyms such as TVR); approved stock is warned for sweep.
 
 ## C. Contexto / Cald sau Rece targets (guess-by-association, rank feedback)
 
@@ -177,8 +185,11 @@ A verifier with web access confirms A1/A2/C2 by checking ≥2 independent signal
    canonical dossier/rubric digest, every per-item final verdict, and complete verifier
    coverage. Legacy, stale, unverified, partially lost, or hand-combined batches fail
    closed. `apply_rereview.py` rebuilds the exact-batch dossiers, compares their bindings,
-   then re-runs strict deterministic critique over the exact `promote` set before either
-   pack copy is written. Approved-stock sweep proposals remain an owner decision.
+   then re-runs strict deterministic critique over the exact `promote` set against the
+   prospective inventory: only verified same-batch `reject` rows are omitted in memory,
+   while `keep`, unrelated pending, and co-promoted rows still participate in freshness
+   checks. No pack copy is written before this passes. Approved-stock sweep proposals
+   remain an owner decision.
    Verdict archives stay in the session scratchpad (v16 precedent). See ADR-0025.
 
 ## H. Lint reference (`scripts/critique_pack.py`)
@@ -187,13 +198,15 @@ A verifier with web access confirms A1/A2/C2 by checking ≥2 independent signal
 |---|---|---|---|
 | `tile_fairness` | conexiuni | FAIL | tile has more on-board neighbors in a *type-compatible* foreign group (≥2 members of its node_type) than its own; raw engine count (`_board_quality` parity) ships in the dossier as `engine_unfair_raw` |
 | `red_herring_budget` | conexiuni | WARN ≥2, FAIL ≥4 | contested tiles (foreign pull == own pull > 0) |
-| `mirrored_groups` | conexiuni | WARN | group pair with ≥3 disjoint strong (≥0.6) cross edges |
+| `mirrored_groups` | conexiuni | FAIL (new) / WARN (stock) | group pair with ≥3 disjoint strong (≥0.6) cross edges |
 | `type_coherence` | conexiuni | WARN | 3+1 type outlier or 2+2 type split in a group |
-| `duplicate_groups` | conexiuni | FAIL (new) / WARN (stock) | exact quad already in an approved or same-batch selected board; near-duplicates (3 shared members) always WARN |
+| `duplicate_groups` | conexiuni | FAIL (new) / WARN (stock) | exact or three-of-four quad already in full inventory (pending gate) or approved stock (sweep/rank) |
+| `board_reskin` | conexiuni | FAIL (new) / WARN (stock) | board shares at least 8 of 16 concepts with one inventory/selected board (pending gate) or approved board (sweep/rank) |
+| `label_self_leak` | conexiuni | FAIL (new) / WARN (stock) | normalized group label repeats a complete member name or acronym |
 | `salience_floor` | contexto, lant, alchimie | WARN | target/endpoint salience below difficulty band (C6) |
 | `generic_region_link` | conexiuni, contexto | WARN | gameplay leans on a non-distinctive region association (A7): board pairs regions with generically-linked tiles; target is (or is polluted by) a pan-Romanian concept claiming a region |
 | `nondistinctive_region_link` | pack-wide | WARN | KG inventory of A7-suspect edges (≥2-region fan-out, or national-salience concept with a generic `related_to` region edge) — the edge-cleanup queue |
-| `member_overuse` | pack-wide / selected batch | WARN | node appears in >8 approved boards, including projected promotion of selected pending candidates |
+| `member_overuse` | pack-wide / selected batch | FAIL (new) / WARN (stock) | node appears in >8 approved boards, including projected promotion of selected pending candidates |
 
 FAIL blocks promotion (`--strict` exits 1). WARN routes the item to the judge fleet —
 it may pass with justification recorded in the verdict reasoning.

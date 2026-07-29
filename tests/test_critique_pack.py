@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import sys
+from copy import deepcopy
 from pathlib import Path
 
 import pytest
@@ -260,7 +261,9 @@ def test_apply_rereview_blocks_failed_critique_before_writes(tmp_path, monkeypat
         apply_rereview, 'current_review_bindings',
         lambda _ids: {pending['id']: 'sha256:' + ('a' * 64)},
     )
-    monkeypatch.setattr(apply_rereview, 'critique_promotions', lambda _ids: 1)
+    monkeypatch.setattr(
+        apply_rereview, 'critique_promotions', lambda _ids, _rejects: 1
+    )
     with pytest.raises(SystemExit, match='promotion blocked'):
         apply_rereview.main(['apply_rereview.py', '--dir', str(tmp_path)])
     assert all(path.read_bytes() == blob for path, blob in originals.items())
@@ -277,7 +280,9 @@ def test_apply_rereview_rejects_unverified_workflow_artifact(tmp_path, monkeypat
     )
     monkeypatch.setattr(
         apply_rereview, 'critique_promotions',
-        lambda _ids: pytest.fail('critique must not run for an unverified artifact'),
+        lambda _ids, _rejects: pytest.fail(
+            'critique must not run for an unverified artifact'
+        ),
     )
     with pytest.raises(SystemExit, match='not fully verified'):
         apply_rereview.main(['apply_rereview.py', '--dir', str(tmp_path)])
@@ -312,7 +317,9 @@ def test_apply_rereview_rejects_stale_artifact_after_content_edit(tmp_path, monk
     )
     monkeypatch.setattr(
         apply_rereview, 'critique_promotions',
-        lambda _ids: pytest.fail('stale artifacts must fail before deterministic critique'),
+        lambda _ids, _rejects: pytest.fail(
+            'stale artifacts must fail before deterministic critique'
+        ),
     )
     with pytest.raises(SystemExit, match='stale gate artifact'):
         apply_rereview.main(['apply_rereview.py', '--dir', str(tmp_path)])
@@ -356,6 +363,74 @@ def test_ids_filter_selects_exactly_the_requested_items(loaded):
     assert [rec["id"] for _, rec, _ in selected] == [target]
 
 
+def test_default_status_filter_does_not_expand_approved_review_to_pending(loaded):
+    pack, svc, strong, regions = loaded
+    base = pack["conexiuni"][0]
+    approved = {**base, "id": "cx_scope_approved", "status": "approved"}
+    pending = {**base, "id": "cx_scope_pending", "status": "pending"}
+    mini_pack = {
+        "meta": {},
+        "conexiuni": [approved, pending],
+        "contexto": [],
+        "lant": [],
+        "alchimie": [],
+    }
+
+    _, _, selected = critique_pack.run(
+        mini_pack,
+        svc,
+        strong,
+        regions,
+        ["conexiuni"],
+        {"approved", "pending"},
+        {approved["id"]},
+    )
+
+    findings = selected[0][2]
+    assert not any(
+        finding["check"] in {"duplicate_groups", "board_reskin"}
+        for finding in findings
+    )
+
+
+def test_prospective_promotion_gate_removes_only_same_batch_rejects(
+    loaded, monkeypatch
+):
+    pack, svc, strong, regions = loaded
+    base = next(
+        {**rec, "status": "pending"}
+        for rec in pack["conexiuni"]
+        if not any(
+            finding["level"] == "FAIL"
+            for finding in critique_pack.check_conexiuni(
+                {**rec, "status": "pending"}, svc, strong, {}
+            )
+        )
+    )
+    promoted = {**base, "id": "cx_prospective_promote"}
+    duplicate = {**base, "id": "cx_prospective_duplicate"}
+    mini_pack = {
+        "meta": {},
+        "conexiuni": [promoted, duplicate],
+        "contexto": [],
+        "lant": [],
+        "alchimie": [],
+    }
+    monkeypatch.setattr(
+        apply_rereview.critique_pack,
+        "load_all",
+        lambda *_args: (deepcopy(mini_pack), svc, strong, regions),
+    )
+
+    assert apply_rereview.critique_promotions(
+        {promoted["id"]}, {duplicate["id"]}
+    ) == 0
+    assert apply_rereview.critique_promotions({promoted["id"]}, set()) == 1
+    assert apply_rereview.critique_promotions(
+        {promoted["id"], duplicate["id"]}, set()
+    ) == 1
+
+
 def test_explicit_selection_rejects_unknown_and_filtered_ids(loaded):
     pack, svc, strong, regions = loaded
     target = pack['conexiuni'][0]['id']
@@ -391,12 +466,14 @@ def test_selected_pending_boards_are_compared_with_each_other(loaded):
         {first['id'], second['id']},
     )
     for iid in (first['id'], second['id']):
+        other_id = second['id'] if iid == first['id'] else first['id']
         duplicate_findings = [
             finding for finding in items[iid]['findings']
             if finding['check'] == 'duplicate_groups'
         ]
         assert duplicate_findings
         assert any(finding['level'] == 'FAIL' for finding in duplicate_findings)
+        assert any(other_id in finding['detail'] for finding in duplicate_findings)
 
 
 def test_selected_batch_reports_projected_member_overuse(loaded):
@@ -414,9 +491,10 @@ def test_selected_batch_reports_projected_member_overuse(loaded):
     items, _, _ = critique_pack.run(
         mini_pack, svc, strong, regions, ['conexiuni'], {'pending'}, {candidate['id']}
     )
+    findings = items[candidate['id']]['findings']
     assert any(
-        finding['check'] == 'member_overuse'
-        for finding in items[candidate['id']]['findings']
+        finding['check'] == 'member_overuse' and finding['level'] == 'FAIL'
+        for finding in findings
     )
 
 
@@ -460,6 +538,15 @@ def test_workflow_requires_two_layers_for_gate_promotions():
     assert 'return { mode: MODE, batch, verdicts, perItem, coverage, artifacts }' in workflow
 
 
+def test_authored_workflow_censuses_full_inventory_for_reskins():
+    workflow = (
+        _REPO_ROOT / ".claude" / "workflows" / "verify-authored-content.js"
+    ).read_text(encoding="utf-8")
+    assert "including reserves and pending stock" in workflow
+    assert "exact or 3-of-4 quads plus >=8/16 whole-board overlap" in workflow
+    assert "Treat those freshness matches as drop" in workflow
+
+
 def test_duplicate_groups_flags_exact_and_near_duplicates(loaded):
     pack, svc, strong, _ = loaded
     rec = {**pack["conexiuni"][0], "status": "pending"}
@@ -475,8 +562,123 @@ def test_duplicate_groups_flags_exact_and_near_duplicates(loaded):
     near = {frozenset(quad[:3] + [other]): ["cx_near_board"]}
     findings = critique_pack.check_conexiuni(rec, svc, strong, near)
     dups = [f for f in findings if f["check"] == "duplicate_groups"]
-    assert dups and dups[0]["level"] == "WARN"
+    assert dups and dups[0]["level"] == "FAIL"
     assert "near-duplicate" in dups[0]["detail"]
+
+
+def test_pending_conexiuni_label_self_leak_is_a_fail(loaded):
+    pack, svc, strong, _ = loaded
+    rec = {**pack["conexiuni"][0], "status": "pending"}
+    group = sorted(rec["groups"])[0]
+    member = critique_pack.node_brief(svc, rec["groups"][group][0])["label"]
+    rec = {
+        **rec,
+        "group_labels": {**rec["group_labels"], group: f"Din lumea {member}"},
+    }
+
+    findings = critique_pack.check_conexiuni(rec, svc, strong, {})
+
+    leaks = [f for f in findings if f["check"] == "label_self_leak"]
+    assert leaks and leaks[0]["level"] == "FAIL"
+    assert member in leaks[0]["detail"]
+
+
+@pytest.mark.parametrize(
+    ("label", "member"),
+    [
+        ("Posturi ale T.V.R.", "TVR"),
+        ("Posturi ale TVR", "T.V.R."),
+        ("Scrieri de MIHAI EMINESCU", "Mihai Eminescu"),
+        ("Personaje din Ion-Luca Caragiale", "Ion Luca Caragiale"),
+    ],
+)
+def test_label_leak_normalization_catches_real_answer_forms(label, member):
+    assert critique_pack.label_leaks_member(label, member)
+
+
+@pytest.mark.parametrize(
+    ("label", "member"),
+    [
+        ("Posturi TV", "TV"),
+        ("Festival teatral", "Teatru"),
+        ("Opere de Marin Preda", "Marina"),
+        ("Formula 1", "Formula 10"),
+    ],
+)
+def test_label_leak_normalization_preserves_noise_and_word_boundaries(label, member):
+    assert not critique_pack.label_leaks_member(label, member)
+
+
+def test_pending_conexiuni_mirrored_groups_are_a_fail(loaded):
+    pack, svc, strong, _ = loaded
+    rec = next(
+        {**item, "status": "pending"}
+        for item in pack["conexiuni"]
+        if any(
+            finding["check"] == "mirrored_groups"
+            for finding in critique_pack.check_conexiuni(item, svc, strong, {})
+        )
+    )
+
+    findings = critique_pack.check_conexiuni(rec, svc, strong, {})
+
+    mirrors = [f for f in findings if f["check"] == "mirrored_groups"]
+    assert mirrors and all(f["level"] == "FAIL" for f in mirrors)
+
+
+def test_pending_conexiuni_half_board_reskin_is_a_fail(loaded):
+    pack, svc, strong, _ = loaded
+    rec = {**pack["conexiuni"][0], "status": "pending"}
+    board = frozenset(nid for group in rec["groups"].values() for nid in group)
+
+    findings = critique_pack.check_conexiuni(
+        rec,
+        svc,
+        strong,
+        {},
+        {"cx_other_board": board},
+    )
+
+    reskins = [f for f in findings if f["check"] == "board_reskin"]
+    assert reskins and reskins[0]["level"] == "FAIL"
+    assert "cx_other_board (16)" in reskins[0]["detail"]
+
+
+def test_approved_stock_freshness_checks_remain_warnings(loaded):
+    pack, svc, strong, _ = loaded
+    rec = pack["conexiuni"][0]
+    group = sorted(rec["groups"])[0]
+    member = critique_pack.node_brief(svc, rec["groups"][group][0])["label"]
+    rec = {
+        **rec,
+        "group_labels": {**rec["group_labels"], group: f"Din lumea {member}"},
+    }
+    quad = frozenset(rec["groups"][group])
+    board = frozenset(nid for ids in rec["groups"].values() for nid in ids)
+
+    findings = critique_pack.check_conexiuni(
+        rec,
+        svc,
+        strong,
+        {quad: ["cx_other_board"]},
+        {"cx_other_board": board},
+    )
+
+    freshness = [
+        finding
+        for finding in findings
+        if finding["check"] in {
+            "duplicate_groups",
+            "board_reskin",
+            "label_self_leak",
+        }
+    ]
+    assert {finding["check"] for finding in freshness} == {
+        "duplicate_groups",
+        "board_reskin",
+        "label_self_leak",
+    }
+    assert all(finding["level"] == "WARN" for finding in freshness)
 
 
 def test_null_group_labels_do_not_crash(loaded):
