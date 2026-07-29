@@ -1,0 +1,832 @@
+{
+  "batch": "v43-cultural-shelves",
+  "artifact_kind": "authoring_proposal",
+  "artifact_status": {
+    "state": "unverified",
+    "approved": false,
+    "import_allowed": false,
+    "release_ready": false,
+    "instruction": "Do not import any board until independent factual verification, blind quality review, and the full deterministic gate all pass."
+  },
+  "scope": {
+    "game": "conexiuni",
+    "requested_boards": 30,
+    "authored_boards": 30,
+    "shelves": {
+      "arta_cultura/usor": 6,
+      "arta_cultura/greu": 6,
+      "film_tv/usor": 6,
+      "societate/usor": 6,
+      "societate/greu": 6
+    },
+    "tile_placements": 480,
+    "unique_existing_nodes_used": 372,
+    "new_nodes": 0,
+    "new_edges": 0
+  },
+  "node_accounting": {
+    "arta_cultura": {
+      "boards": 12,
+      "tile_placements": 192,
+      "unique_existing_nodes_used": 149
+    },
+    "film_tv": {
+      "boards": 6,
+      "tile_placements": 96,
+      "unique_existing_nodes_used": 85
+    },
+    "societate": {
+      "boards": 12,
+      "tile_placements": 192,
+      "unique_existing_nodes_used": 157
+    },
+    "kg_policy": "Every tile id was resolved against the frozen V38 knowledge graph. This proposal adds no node or edge."
+  },
+  "reproducibility": {
+    "full_inventory_group_census_sha256": "5e15a341034c73a62b4a7b8ad731730849a8237ba63eda585408479ad182cece",
+    "canonical_candidate_batch_sha256": "fe0d65b28a6e2da9829e0c00a0bf3c76828d64ae3614141d3b6f2608718c454a",
+    "canonical_candidate_batch_sha256_basis": "SHA-256 of UTF-8 canonical JSON (ensure_ascii=false, sort_keys=true, separators=[comma,colon]) over the path-sorted list [relative candidates.json path, complete parsed payload].",
+    "candidate_file_sha256": {
+      "arta_cultura/candidates.json": "4384906d4082cda0f4de33f1a2611dd0b05dbf4cca5edf21622ba275f655c762",
+      "film_tv/candidates.json": "feaea95dab6940b57d5f963a7ddc4c125d4bac5c541cc8cbf399058fc24b57a7",
+      "societate/candidates.json": "d45a1f8dedc4138ef569db1cd22219185930c806204249f534badce325b81253"
+    },
+    "strict_preflight_command": "PYTHONPATH=. /home/dobo/work/romania_scraper/.venv/bin/python /tmp/preflight_v43_conexiuni.py /home/dobo/work/_worktrees/cat_de_roman_esti/content__v43-release-board-rebuild /home/dobo/work/_worktrees/cat_de_roman_esti/content__v43-cultural-shelves/content_candidates/v43-cultural-shelves",
+    "strict_preflight_result": {
+      "candidates": 30,
+      "candidates_with_fail": 0,
+      "structural_errors": 0,
+      "warnings": 0,
+      "warning_refs": []
+    }
+  },
+  "deterministic_gate_contract": {
+    "exact_quad_matches_against_inventory_or_batch": {
+      "limit": 0,
+      "observed": 0
+    },
+    "three_of_four_quad_matches_against_inventory_or_batch": {
+      "limit": 0,
+      "observed": 0
+    },
+    "tile_overlap_with_any_existing_board": {
+      "fail_at_or_above": 8,
+      "observed_max": 4
+    },
+    "projected_approved_plus_batch_member_use": {
+      "fail_above": 8,
+      "observed_max": 8
+    },
+    "strong_cross_group_mirror_matching": {
+      "fail_at_or_above": 3,
+      "observed_max": 2
+    },
+    "label_self_leak": {
+      "limit": 0,
+      "observed": 0
+    },
+    "interpretation": "These checks establish structural novelty only. They do not establish factual truth, clue fairness, recognition, shelf fit, or release quality."
+  },
+  "release_triage_summary": {
+    "send_to_independent_verification": [
+      "v43-arta-usor-01",
+      "v43-arta-usor-02",
+      "v43-arta-usor-03",
+      "v43-arta-usor-05",
+      "v43-arta-greu-01",
+      "v43-arta-greu-02",
+      "v43-arta-greu-03",
+      "v43-arta-greu-04",
+      "v43-film-usor-01",
+      "v43-film-usor-02",
+      "v43-film-usor-03",
+      "v43-film-usor-05",
+      "v43-societate-usor-01",
+      "v43-societate-usor-03",
+      "v43-societate-usor-05",
+      "v43-societate-usor-06",
+      "v43-societate-greu-01",
+      "v43-societate-greu-02",
+      "v43-societate-greu-04",
+      "v43-societate-greu-05"
+    ],
+    "verify_with_caution": [],
+    "hold_before_verification": [
+      "v43-arta-usor-04",
+      "v43-arta-usor-06",
+      "v43-arta-greu-05",
+      "v43-arta-greu-06",
+      "v43-film-usor-04",
+      "v43-film-usor-06",
+      "v43-societate-usor-02",
+      "v43-societate-usor-04",
+      "v43-societate-greu-03",
+      "v43-societate-greu-06"
+    ],
+    "strict_note": "A hold is an authoring drop recommendation, not a deterministic failure. No candidate is approved by this manifest.",
+    "counts": {
+      "send_to_independent_verification": 20,
+      "verify_with_caution": 0,
+      "hold_before_verification": 10
+    },
+    "verification_shortlist_by_shelf": {
+      "arta_cultura/usor": 4,
+      "arta_cultura/greu": 4,
+      "film_tv/usor": 4,
+      "societate/usor": 4,
+      "societate/greu": 4
+    }
+  },
+  "board_audits": [
+    {
+      "ref": "v43-arta-usor-01",
+      "shelf": "arta_cultura/usor",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 3,
+        "projected_member_use_max": 7,
+        "mirror_matching_max": 1,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "Four concrete cultural classes with multiple accessible anchors; verify annual-event wording."
+      }
+    },
+    {
+      "ref": "v43-arta-usor-02",
+      "shelf": "arta_cultura/usor",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 2,
+        "projected_member_use_max": 5,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "Balanced institutions, crafts, folklore, and performers; folklore classification needs factual review."
+      }
+    },
+    {
+      "ref": "v43-arta-usor-03",
+      "shelf": "arta_cultura/usor",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 4,
+        "max_batch_board_overlap": 1,
+        "projected_member_use_max": 8,
+        "mirror_matching_max": 1,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "The F group now uses four familiar cultural concepts, and Mircea Bravo replaces the off-shelf sports figure; projected reuse is exactly at the ceiling."
+      }
+    },
+    {
+      "ref": "v43-arta-usor-04",
+      "shelf": "arta_cultura/usor",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 4,
+        "projected_member_use_max": 3,
+        "mirror_matching_max": 2,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "caution",
+        "predicate_honesty": "caution",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "caution",
+        "author_recommendation": "hold_before_verification",
+        "note": "The national-public event predicate is broad and Ion Rațiu stretches the art-and-culture shelf; rewrite before spending review capacity."
+      }
+    },
+    {
+      "ref": "v43-arta-usor-05",
+      "shelf": "arta_cultura/usor",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 3,
+        "max_batch_board_overlap": 2,
+        "projected_member_use_max": 4,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "Strong accessible anchors and distinct cultural predicates; verify that all four music labels are treated consistently as contemporary genres."
+      }
+    },
+    {
+      "ref": "v43-arta-usor-06",
+      "shelf": "arta_cultura/usor",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 1,
+        "max_batch_board_overlap": 4,
+        "projected_member_use_max": 3,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "caution",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "caution",
+        "author_recommendation": "hold_before_verification",
+        "note": "Topîrceanu and Labiș raise the recognition load, while recurring-event and decorative-craft groups substantially repeat easy boards 01 and 02."
+      }
+    },
+    {
+      "ref": "v43-arta-greu-01",
+      "shelf": "arta_cultura/greu",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 2,
+        "projected_member_use_max": 8,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass_hard",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "Controlled mix of orthographic and cultural predicates; projected reuse sits exactly at the allowed ceiling."
+      }
+    },
+    {
+      "ref": "v43-arta-greu-02",
+      "shelf": "arta_cultura/greu",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 3,
+        "max_batch_board_overlap": 2,
+        "projected_member_use_max": 7,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass_hard",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "Clear hard-board progression from names and character titles to rock and suffix wordplay."
+      }
+    },
+    {
+      "ref": "v43-arta-greu-03",
+      "shelf": "arta_cultura/greu",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 3,
+        "projected_member_use_max": 6,
+        "mirror_matching_max": 1,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass_hard",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "Institutions and genres provide anchors around two broader lexical groups; verify official institution names."
+      }
+    },
+    {
+      "ref": "v43-arta-greu-04",
+      "shelf": "arta_cultura/greu",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 2,
+        "projected_member_use_max": 7,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass_hard",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "Honest name, title, suffix, and culturally scoped ROMÂN-name predicates; verify the official organization names."
+      }
+    },
+    {
+      "ref": "v43-arta-greu-05",
+      "shelf": "arta_cultura/greu",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 2,
+        "projected_member_use_max": 8,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "caution",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "hold_before_verification",
+        "note": "Victor Toma and Victor Brauner create a high recognition burden, projected reuse is at the ceiling, and the board adds another name/title/suffix template."
+      }
+    },
+    {
+      "ref": "v43-arta-greu-06",
+      "shelf": "arta_cultura/greu",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 2,
+        "projected_member_use_max": 4,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass_hard",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "hold_before_verification",
+        "note": "The traditional-performance anchor is honest, but two title-initial groups make this the sixth repetition of the batch's name/title lexical template."
+      }
+    },
+    {
+      "ref": "v43-film-usor-01",
+      "shelf": "film_tv/usor",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 3,
+        "max_batch_board_overlap": 2,
+        "projected_member_use_max": 2,
+        "mirror_matching_max": 2,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "The pre-2005 launch-date predicate replaces a vague popularity claim; verify dates and Romanian production credits."
+      }
+    },
+    {
+      "ref": "v43-film-usor-02",
+      "shelf": "film_tv/usor",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 3,
+        "max_batch_board_overlap": 1,
+        "projected_member_use_max": 6,
+        "mirror_matching_max": 1,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "Pre-1990 film dates and 1930s actor birth dates make the formerly subjective predicates auditable; verify each date."
+      }
+    },
+    {
+      "ref": "v43-film-usor-03",
+      "shelf": "film_tv/usor",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 2,
+        "projected_member_use_max": 3,
+        "mirror_matching_max": 1,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "The post-2013 launch boundary is objective, while the occupation and Antena 1 groups provide accessible anchors for the newer serial titles."
+      }
+    },
+    {
+      "ref": "v43-film-usor-04",
+      "shelf": "film_tv/usor",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 2,
+        "projected_member_use_max": 7,
+        "mirror_matching_max": 1,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "fail_easy",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "hold_before_verification",
+        "note": "The Pro TV predicate is exact, but Jude, Porumboiu, Caranfil, and Nasty are too specialist for an easy shelf; replace the low-recognition material."
+      }
+    },
+    {
+      "ref": "v43-film-usor-05",
+      "shelf": "film_tv/usor",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 3,
+        "max_batch_board_overlap": 2,
+        "projected_member_use_max": 7,
+        "mirror_matching_max": 1,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "The actor predicate is now a factual profession class rather than a fame claim; the pre-2010 show predicate is auditable and supports the two less immediate groups."
+      }
+    },
+    {
+      "ref": "v43-film-usor-06",
+      "shelf": "film_tv/usor",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 4,
+        "max_batch_board_overlap": 2,
+        "projected_member_use_max": 6,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "fail_easy",
+        "predicate_honesty": "caution",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "hold_before_verification",
+        "note": "Recent festival films are too obscure for easy play and the production-word predicate is generic; rewrite both before review."
+      }
+    },
+    {
+      "ref": "v43-societate-usor-01",
+      "shelf": "societate/usor",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 3,
+        "max_batch_board_overlap": 2,
+        "projected_member_use_max": 3,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "Everyday identification, family, transit, and education groups are concrete and easy."
+      }
+    },
+    {
+      "ref": "v43-societate-usor-02",
+      "shelf": "societate/usor",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 4,
+        "max_batch_board_overlap": 3,
+        "projected_member_use_max": 3,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass",
+        "predicate_honesty": "caution",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "hold_before_verification",
+        "note": "The civic predicate is cleaner, but the national-network group remains too broad for the release shortlist."
+      }
+    },
+    {
+      "ref": "v43-societate-usor-03",
+      "shelf": "societate/usor",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 3,
+        "max_batch_board_overlap": 2,
+        "projected_member_use_max": 4,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass",
+        "predicate_honesty": "caution",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "School and family vocabulary provide strong easy anchors around familiar institutional acronyms."
+      }
+    },
+    {
+      "ref": "v43-societate-usor-04",
+      "shelf": "societate/usor",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 2,
+        "projected_member_use_max": 3,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "caution",
+        "author_recommendation": "hold_before_verification",
+        "note": "The safety group mixes intelligence, prosecution, public order, and emergency response; time and positive-state groups are too generic for the shelf."
+      }
+    },
+    {
+      "ref": "v43-societate-usor-05",
+      "shelf": "societate/usor",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 2,
+        "projected_member_use_max": 4,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "Localities, school objects, the labor market, and emergency response now give the board a clear beginner-level society identity."
+      }
+    },
+    {
+      "ref": "v43-societate-usor-06",
+      "shelf": "societate/usor",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 2,
+        "projected_member_use_max": 2,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "Adult relationships, marriage, social emotions, and demography form a coherent beginner-level society board."
+      }
+    },
+    {
+      "ref": "v43-societate-greu-01",
+      "shelf": "societate/greu",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 1,
+        "projected_member_use_max": 6,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass_hard",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "Dated historical events supply a meaningful social anchor within a disciplined lexical board."
+      }
+    },
+    {
+      "ref": "v43-societate-greu-02",
+      "shelf": "societate/greu",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 4,
+        "projected_member_use_max": 4,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass_hard",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "The legal label no longer misclassifies Curtea Constituțională as a court in the judiciary; verify all legal remits and the monthly-receipt predicate."
+      }
+    },
+    {
+      "ref": "v43-societate-greu-03",
+      "shelf": "societate/greu",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 2,
+        "projected_member_use_max": 7,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass_hard",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "weak",
+        "trap_budget": "pass",
+        "theme_fit": "fail",
+        "author_recommendation": "hold_before_verification",
+        "note": "Four suffix groups make a valid word puzzle but not a society board; replace at least two groups with semantic social content."
+      }
+    },
+    {
+      "ref": "v43-societate-greu-04",
+      "shelf": "societate/greu",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 3,
+        "projected_member_use_max": 7,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass_hard",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "Date-bounded political events, Bucharest-headquartered cultural organizations, school objects ending in AR, and road checks are all auditable predicates."
+      }
+    },
+    {
+      "ref": "v43-societate-greu-05",
+      "shelf": "societate/greu",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 4,
+        "projected_member_use_max": 3,
+        "mirror_matching_max": 1,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass_hard",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "pass",
+        "trap_budget": "pass",
+        "theme_fit": "pass",
+        "author_recommendation": "send_to_independent_verification",
+        "note": "C-initial society terms and items regulated by labor law replace the two association bags; renewed-item and ROMÂN-name groups remain exact, with no contested-tile warning."
+      }
+    },
+    {
+      "ref": "v43-societate-greu-06",
+      "shelf": "societate/greu",
+      "metrics": {
+        "exact_quad_matches": 0,
+        "near_quad_matches": 0,
+        "max_existing_board_overlap": 2,
+        "max_batch_board_overlap": 1,
+        "projected_member_use_max": 4,
+        "mirror_matching_max": 0,
+        "label_leaks": 0
+      },
+      "self_screen": {
+        "recognition": "pass_hard",
+        "predicate_honesty": "pass",
+        "unique_partition": "pass_structural",
+        "easy_anchor": "weak",
+        "trap_budget": "pass",
+        "theme_fit": "fail",
+        "author_recommendation": "hold_before_verification",
+        "note": "Four suffix groups are mechanically valid but shelf-incoherent and repetitive; rebuild around semantic society predicates."
+      }
+    }
+  ]
+}
