@@ -248,6 +248,37 @@ def test_preflight_rejects_artifacts_after_candidate_content_changes(tmp_path):
     _assert_contract_error(batch, "candidate_sha256 does not match candidates.json")
 
 
+def test_preflight_hashes_and_parses_the_same_single_candidate_read(
+    tmp_path,
+    monkeypatch,
+):
+    batch = _write_batch(tmp_path)
+    path = batch / "istorie" / "candidates.json"
+    reviewed_blob = path.read_bytes()
+    revised = json.loads(reviewed_blob.decode("utf-8"))
+    revised["conexiuni"][0]["difficulty"] = "greu"
+    revised_blob = json.dumps(revised, ensure_ascii=False).encode("utf-8")
+
+    original_read_bytes = Path.read_bytes
+    candidate_reads = 0
+
+    def edit_after_candidate_read(self):
+        nonlocal candidate_reads
+        blob = original_read_bytes(self)
+        if self == path:
+            candidate_reads += 1
+            if candidate_reads == 1:
+                self.write_bytes(revised_blob)
+        return blob
+
+    monkeypatch.setattr(Path, "read_bytes", edit_after_candidate_read)
+    bundles = import_candidates.preflight_candidates(batch)
+
+    assert candidate_reads == 1
+    assert bundles["istorie"]["cand"]["conexiuni"][0]["difficulty"] == "normal"
+    assert original_read_bytes(path) == revised_blob
+
+
 def test_factual_coverage_is_bound_to_raw_ids_before_alias_mapping(tmp_path):
     candidate, factual, quality = _artifacts()
     raw_id = "n_ftv_cristian_mungiu"
@@ -330,3 +361,35 @@ def test_invalid_verification_aborts_before_graph_or_pack_mutation(tmp_path, mon
     assert densify_called is False
     assert [pack.read_bytes() for pack in pack_copies] == [b"unchanged", b"unchanged"]
     assert not (batch / "curation_report.txt").exists()
+
+
+def test_main_restores_all_transaction_files_after_import_failure(tmp_path, monkeypatch):
+    transaction_files = tuple(tmp_path / f"content-{index}.json" for index in range(4))
+    originals = {
+        path: f"original-{index}".encode()
+        for index, path in enumerate(transaction_files)
+    }
+    for path, blob in originals.items():
+        path.write_bytes(blob)
+
+    monkeypatch.setattr(import_candidates, "TRANSACTION_FILES", transaction_files)
+    monkeypatch.setattr(import_candidates, "preflight_candidates", lambda _path: {})
+
+    def fail_after_writes(_bundles, _gen_dir, *, skip_merge):
+        assert skip_merge is True
+        for index, path in enumerate(transaction_files):
+            path.write_bytes(f"changed-{index}".encode())
+        raise SystemExit("injected validator failure")
+
+    monkeypatch.setattr(import_candidates, "_import_verified", fail_after_writes)
+    with pytest.raises(SystemExit, match="injected validator failure"):
+        import_candidates.main(
+            [
+                "import_candidates.py",
+                "--dir",
+                str(tmp_path / "batch"),
+                "--skip-merge",
+            ]
+        )
+
+    assert {path: path.read_bytes() for path in transaction_files} == originals

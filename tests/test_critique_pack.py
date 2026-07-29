@@ -269,6 +269,108 @@ def test_apply_rereview_blocks_failed_critique_before_writes(tmp_path, monkeypat
     assert all(path.read_bytes() == blob for path, blob in originals.items())
 
 
+@pytest.mark.parametrize("validator_mode", ["return", "raise"])
+def test_apply_rereview_restores_both_mirrors_when_validation_fails(
+    tmp_path,
+    monkeypatch,
+    validator_mode,
+):
+    original = critique_pack.PACKAGE_PACK.read_bytes()
+    copies = (tmp_path / "package-pack.json", tmp_path / "tests-pack.json")
+    for copy in copies:
+        copy.write_bytes(original)
+    pack = json.loads(original.decode("utf-8"))
+    pending = next(item for item in pack["conexiuni"] if item["status"] == "pending")
+    _write_gate_artifact(
+        tmp_path / "conexiuni_verdicts.json",
+        "conexiuni",
+        {pending["id"]: "promote"},
+    )
+
+    monkeypatch.setattr(apply_rereview, "PACK_COPIES", copies)
+    monkeypatch.setattr(
+        apply_rereview,
+        "current_review_bindings",
+        lambda _ids: {pending["id"]: "sha256:" + ("a" * 64)},
+    )
+    monkeypatch.setattr(
+        apply_rereview,
+        "critique_promotions",
+        lambda _ids, _rejects: 0,
+    )
+    if validator_mode == "return":
+        monkeypatch.setattr(
+            apply_rereview.validate_games_pack,
+            "main",
+            lambda _argv: 1,
+        )
+        expected_exception = SystemExit
+    else:
+        def raise_validator_error(_argv):
+            raise RuntimeError("injected validator exception")
+
+        monkeypatch.setattr(
+            apply_rereview.validate_games_pack,
+            "main",
+            raise_validator_error,
+        )
+        expected_exception = RuntimeError
+
+    with pytest.raises(expected_exception):
+        apply_rereview.main(["apply_rereview.py", "--dir", str(tmp_path)])
+
+    assert [copy.read_bytes() for copy in copies] == [original, original]
+
+
+def test_apply_rereview_restores_first_mirror_after_second_write_fails(
+    tmp_path,
+    monkeypatch,
+):
+    original = critique_pack.PACKAGE_PACK.read_bytes()
+    copies = (tmp_path / "package-pack.json", tmp_path / "tests-pack.json")
+    for copy in copies:
+        copy.write_bytes(original)
+    pack = json.loads(original.decode("utf-8"))
+    pending = next(item for item in pack["conexiuni"] if item["status"] == "pending")
+    _write_gate_artifact(
+        tmp_path / "conexiuni_verdicts.json",
+        "conexiuni",
+        {pending["id"]: "promote"},
+    )
+
+    monkeypatch.setattr(apply_rereview, "PACK_COPIES", copies)
+    monkeypatch.setattr(
+        apply_rereview,
+        "current_review_bindings",
+        lambda _ids: {pending["id"]: "sha256:" + ("a" * 64)},
+    )
+    monkeypatch.setattr(
+        apply_rereview,
+        "critique_promotions",
+        lambda _ids, _rejects: 0,
+    )
+    monkeypatch.setattr(
+        apply_rereview.validate_games_pack,
+        "main",
+        lambda _argv: pytest.fail("validator must not run after a write failure"),
+    )
+    real_atomic_write = apply_rereview.atomic_write
+    writes = 0
+
+    def fail_second_write(path, blob):
+        nonlocal writes
+        writes += 1
+        if writes == 2:
+            raise OSError("injected second mirror failure")
+        real_atomic_write(path, blob)
+
+    monkeypatch.setattr(apply_rereview, "atomic_write", fail_second_write)
+    with pytest.raises(OSError, match="injected second mirror failure"):
+        apply_rereview.main(["apply_rereview.py", "--dir", str(tmp_path)])
+
+    assert [copy.read_bytes() for copy in copies] == [original, original]
+
+
 def test_apply_rereview_rejects_unverified_workflow_artifact(tmp_path, monkeypatch):
     pack = json.loads(critique_pack.PACKAGE_PACK.read_text(encoding='utf-8'))
     pending = next(item for item in pack['conexiuni'] if item['status'] == 'pending')

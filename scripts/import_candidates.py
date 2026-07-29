@@ -25,9 +25,10 @@ Curation policy (quality over quantity):
     Conexiuni board shape) — the generator's numbers are never trusted;
   * existing pack items are re-derived too (the denser graph can shorten paths).
 
-Steps: merge accepted nodes/edges via densify_content.run() (fixture regenerated +
-validated + rolled back on failure), rebuild games_pack.json (both copies), run
-the pack validator, and roll the pack back if it fails.
+Steps: read and bind every candidate once, snapshot both KG and pack mirrors, merge
+accepted nodes/edges via densify_content.run(), rebuild both games-pack copies, and run
+the validators inside one logical transaction. Writes replace files atomically; any
+error restores and byte-verifies all four snapshots before the failure escapes.
 """
 
 from __future__ import annotations
@@ -48,6 +49,7 @@ sys.path.insert(0, str(_REPO_ROOT / "scripts"))
 
 import densify_content  # noqa: E402
 import validate_games_pack  # noqa: E402
+from content_file_transaction import atomic_write, file_transaction  # noqa: E402
 
 from cat_de_roman_esti.data import load_fixture  # noqa: E402
 from cat_de_roman_esti.wordgames.packs import (  # noqa: E402
@@ -62,6 +64,8 @@ from cat_de_roman_esti.wordgames.packs import (  # noqa: E402
 from cat_de_roman_esti.wordgames.service import WordGameService  # noqa: E402
 
 PACK_COPIES = (validate_games_pack.PACKAGE_PACK, validate_games_pack.TESTS_PACK)
+KG_COPIES = (validate_games_pack.PACKAGE_KG, validate_games_pack.TESTS_KG)
+TRANSACTION_FILES = (*KG_COPIES, *PACK_COPIES)
 PREFIX = {"conexiuni": "cx", "contexto": "ct", "lant": "lt", "alchimie": "al"}
 FACTUAL_SEVERITIES = frozenset({"block", "fix", "note"})
 QUALITY_VERDICTS = frozenset({"keep", "fix", "drop"})
@@ -85,13 +89,9 @@ NOTE = (
 )
 
 
-def _load(path: Path) -> dict:
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
-def candidate_binding(path: Path) -> str:
+def candidate_binding(blob: bytes) -> str:
     """Bind verification artifacts to the exact candidate bytes they reviewed."""
-    return f"sha256:{hashlib.sha256(path.read_bytes()).hexdigest()}"
+    return f"sha256:{hashlib.sha256(blob).hexdigest()}"
 
 
 def candidate_import_status(verdict: str) -> str | None:
@@ -116,19 +116,24 @@ def _duplicate_values(values: list[str]) -> list[str]:
     return sorted(value for value, count in Counter(values).items() if count > 1)
 
 
-def _load_object(path: Path, label: str, errors: list[str]) -> dict | None:
+def _load_object(
+    path: Path,
+    label: str,
+    errors: list[str],
+) -> tuple[dict | None, bytes | None]:
     if not path.exists():
         errors.append(f"{label}: missing {path.name}")
-        return None
+        return None, None
     try:
-        payload = _load(path)
-    except (OSError, json.JSONDecodeError) as exc:
+        blob = path.read_bytes()
+        payload = json.loads(blob.decode("utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
         errors.append(f"{label}: cannot read {path.name}: {exc}")
-        return None
+        return None, None
     if not isinstance(payload, dict):
         errors.append(f"{label}: {path.name} must contain an object")
-        return None
-    return payload
+        return None, None
+    return payload, blob
 
 
 def _object_rows(
@@ -340,27 +345,32 @@ def preflight_candidates(gen_dir: Path) -> dict[str, dict]:
     for category_dir in category_dirs:
         category = category_dir.name
         candidate_path = category_dir / "candidates.json"
-        candidate = _load_object(
+        candidate, candidate_blob = _load_object(
             candidate_path,
             f"{category}/candidates.json",
             errors,
         )
-        factual = _load_object(
+        factual, _ = _load_object(
             category_dir / "verify_factual.json",
             f"{category}/verify_factual.json",
             errors,
         )
-        quality = _load_object(
+        quality, _ = _load_object(
             category_dir / "verify_quality.json",
             f"{category}/verify_quality.json",
             errors,
         )
-        if candidate is None or factual is None or quality is None:
+        if (
+            candidate is None
+            or candidate_blob is None
+            or factual is None
+            or quality is None
+        ):
             continue
         expected, node_refs, instance_refs = _raw_reference_inventory(
             category, candidate, errors
         )
-        binding = candidate_binding(candidate_path)
+        binding = candidate_binding(candidate_blob)
         _validate_factual(category, factual, expected, binding, errors)
         _validate_quality(category, quality, instance_refs, binding, errors)
         bundles[category] = {
@@ -567,18 +577,13 @@ def _instance_refs(issues: list[dict], game: str) -> dict[int, str]:
     return out
 
 
-def main(argv: list[str]) -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--dir", required=True, help="generation output dir (one subdir per category)"
-    )
-    parser.add_argument(
-        "--skip-merge", action="store_true", help="pack rebuild only (graph already merged)"
-    )
-    args = parser.parse_args(argv[1:])
-    gen_dir = Path(args.dir)
-    raw_bundles = preflight_candidates(gen_dir)
-
+def _import_verified(
+    raw_bundles: dict[str, dict],
+    gen_dir: Path,
+    *,
+    skip_merge: bool,
+) -> tuple[dict[str, int], dict[str, int], Path, int]:
+    """Mutate verified content inside the caller's four-file transaction."""
     report: list[str] = []
     all_nodes: list[dict] = []
     all_edges: list[dict] = []
@@ -625,10 +630,10 @@ def main(argv: list[str]) -> int:
         }
 
     # ---- 1. merge the accepted subgraph (validated + rolled back inside run()) ----
-    if not args.skip_merge:
+    if not skip_merge:
         rc = densify_content.run({"nodes": all_nodes, "edges": all_edges}, BUILD_VERSION, NOTE)
         if rc != 0:
-            raise SystemExit("subgraph merge failed (fixture rolled back) — aborting import")
+            raise SystemExit("subgraph merge failed — aborting import and rolling back")
 
     # ---- 2. rebuild the pack against the MERGED graph ----
     svc = WordGameService(graph=load_fixture(validate_games_pack.PACKAGE_KG).graph)
@@ -754,22 +759,41 @@ def main(argv: list[str]) -> int:
         "hand-crafted starters. Only status=approved items are served."
     )
 
-    out = json.dumps(pack, ensure_ascii=False, indent=1) + "\n"
+    out = (json.dumps(pack, ensure_ascii=False, indent=1) + "\n").encode("utf-8")
     for copy in PACK_COPIES:
-        copy.write_text(out, encoding="utf-8")
+        atomic_write(copy, out)
 
     if validate_games_pack.main(["validate_games_pack.py"]) != 0:
-        for copy, blob in pack_originals.items():
-            copy.write_bytes(blob)
-        raise SystemExit(
-            "pack validation failed — pack ROLLED BACK (fixture keeps the merged graph)"
-        )
+        raise SystemExit("pack validation failed — rolling back fixture and pack")
 
     report_path = gen_dir / "curation_report.txt"
-    report_path.write_text("\n".join(report) + "\n", encoding="utf-8")
+    atomic_write(report_path, ("\n".join(report) + "\n").encode("utf-8"))
+    return stats, pack["meta"]["counts"], report_path, len(report)
+
+
+def main(argv: list[str]) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--dir", required=True, help="generation output dir (one subdir per category)"
+    )
+    parser.add_argument(
+        "--skip-merge", action="store_true", help="pack rebuild only (graph already merged)"
+    )
+    args = parser.parse_args(argv[1:])
+    gen_dir = Path(args.dir)
+
+    # Verification is pure and complete before the transaction snapshots any mutable file.
+    raw_bundles = preflight_candidates(gen_dir)
+    with file_transaction(TRANSACTION_FILES):
+        stats, counts, report_path, report_lines = _import_verified(
+            raw_bundles,
+            gen_dir,
+            skip_merge=args.skip_merge,
+        )
+
     print(f"\nimport_candidates: {stats['approved']} approved, {stats['pending']} pending, "
-          f"{stats['skipped']} skipped; counts={pack['meta']['counts']}")
-    print(f"human-review report: {report_path} ({len(report)} lines)")
+          f"{stats['skipped']} skipped; counts={counts}")
+    print(f"human-review report: {report_path} ({report_lines} lines)")
     return 0
 
 

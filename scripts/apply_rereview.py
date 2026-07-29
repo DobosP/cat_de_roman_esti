@@ -33,6 +33,7 @@ sys.path.insert(0, str(_REPO_ROOT / "scripts"))
 
 import critique_pack  # noqa: E402
 import validate_games_pack  # noqa: E402
+from content_file_transaction import atomic_write, file_transaction  # noqa: E402
 from import_candidates import GAME_KINDS, item_high_water  # noqa: E402
 
 PACK_COPIES = (validate_games_pack.PACKAGE_PACK, validate_games_pack.TESTS_PACK)
@@ -235,9 +236,8 @@ def main(argv: list[str]) -> int:
     if critique_promotions(promotions, rejections) != 0:
         raise SystemExit('promotion blocked by ADR-0023 deterministic critique gate')
 
-    originals = {copy: copy.read_bytes() for copy in PACK_COPIES}
     stats = Counter()
-    try:
+    with file_transaction(PACK_COPIES) as originals:
         for copy in PACK_COPIES:
             pack = json.loads(originals[copy].decode('utf-8'))
             for game in GAME_KINDS:
@@ -254,24 +254,18 @@ def main(argv: list[str]) -> int:
                 pack[game] = kept
             pack['meta']['counts'] = {g: len(pack[g]) for g in GAME_KINDS}
             pack['meta']['id_high_water'] = high_water
-            copy.write_text(
-                json.dumps(pack, ensure_ascii=False, indent=1) + '\n', encoding='utf-8'
+            atomic_write(
+                copy,
+                (json.dumps(pack, ensure_ascii=False, indent=1) + '\n').encode(
+                    'utf-8'
+                ),
             )
-        validation_rc = validate_games_pack.main(['validate_games_pack.py'])
-    except BaseException:
-        for copy, blob in originals.items():
-            copy.write_bytes(blob)
-        raise
+        if validate_games_pack.main(['validate_games_pack.py']) != 0:
+            raise SystemExit("pack validation failed — rolling back both copies")
+        final = json.loads(PACK_COPIES[0].read_text(encoding="utf-8"))["meta"]["counts"]
 
-    # stats double-counted across the two identical copies — halve for the report.
-    applied = {k: v // 2 for k, v in stats.items()}
-
-    if validation_rc != 0:
-        for copy, blob in originals.items():
-            copy.write_bytes(blob)
-        raise SystemExit("pack validation failed — ROLLED BACK both copies")
-
-    final = json.loads(PACK_COPIES[0].read_text(encoding="utf-8"))["meta"]["counts"]
+    # Stats are accumulated once for each identical mirror.
+    applied = {key: value // len(PACK_COPIES) for key, value in stats.items()}
     print(f"apply_rereview: {dict(applied)}")
     print(f"pack counts now: {final}")
     return 0
