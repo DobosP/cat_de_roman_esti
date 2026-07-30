@@ -13,6 +13,7 @@
 - `cat_de_roman_esti/wordgames/derived_catalog.py`
 - `tests/test_v38_ranked_catalog.py`
 - `docs/V38_DERIVED_GAMES.md`
+- `docs/DEPLOY.md`
 - `docs/STATUS.md`
 
 ## Verification
@@ -22,7 +23,9 @@
 - Complete backend: 688/688 green.
 - Ruff and `git diff --check`: green.
 - Independent blocker review: no blockers.
-- Production redeploy and public POST smoke remain required.
+- Production redeployed at `38da2f4`: container catalog 183/153, health/manifest,
+  accounts-off, 14 populated categories, frontend, and all six create endpoints green.
+- Recent production app logs contained no 5xx/error entries after the final smoke.
 
 ## Risk
 
