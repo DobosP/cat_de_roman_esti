@@ -3,6 +3,13 @@
 _Audited 2026-07-30. Report-only review; no pack, ranking, sidecar, status, or runtime
 behavior changed._
 
+_Post-audit note (ADR-0067): a later strict approved-stock sweep independently demoted
+six additional boards (`cx_geografie_024`, `cx_geografie_304`, `cx_limba_260`,
+`cx_muzica_138`, `cx_societate_066`, and `cx_stiinta_080`). They are intentionally
+outside this frozen 67-board/268-group historical census. The final real-ID re-audit also
+reserved `cx_personalitati_339` and `cx_sport_355`; the V43 release review records all
+eight board-specific decisions._
+
 ## Release verdict
 
 Keep all **67/67** ADR-0066 boards demoted. All **268/268** original four-member groups are
@@ -229,11 +236,18 @@ member or changing the label does not make them fresh.
 | `cx_stiinta_285` | A6 | B1, B2, B5 | E 1/1/1; N 3/3/1; T1 M1 L0 C1 |
 | `cx_viata_de_roman_238` | B1 | A6, B2, B6 | E 0/0/0; N 3/3/1; T2 M0 L0 C0 |
 
-## Reproduction
+## Current recheck of the frozen 67 IDs
+
+The exact 67-board/268-group census above is a frozen historical result from commit
+`4f09e87`, bound to the six full digests recorded in the JSON companion. The current
+command below re-runs today's deterministic critique for those same 67 IDs; it does not
+recreate the historical collision census after the pack, KG, rankings, and rubric have
+changed.
 
 ```bash
 PYTHONPATH=. /home/dobo/work/romania_scraper/.venv/bin/python \
   scripts/critique_pack.py --game conexiuni --status approved \
-  --ids "$(python -c 'import json; print(",".join(json.load(open("cat_de_roman_esti/fixtures/board_demotions_v43.json"))["ids"]))')"
+  --ids "$(/home/dobo/work/romania_scraper/.venv/bin/python -c \
+  'import json; d=json.load(open("docs/reviews/v43-demotion-pattern-audit.json")); print(",".join(b["id"] for b in d["boards"]))')"
 git diff --check
 ```

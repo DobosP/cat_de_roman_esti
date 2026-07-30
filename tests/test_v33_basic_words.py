@@ -33,16 +33,16 @@ _PACKAGE_PACK = _ROOT / "cat_de_roman_esti/fixtures/games_pack.json"
 _TEST_PACK = _ROOT / "tests/fixtures/games_pack.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 _EXPECTED_NODE_COUNT = 2364
-_EXPECTED_EDGE_COUNT = 9219
+_EXPECTED_EDGE_COUNT = 9217
 _EXPECTED_AUTHORED_EDGE_COUNT = 54
 _EXPECTED_LOCAL_EDGE_COUNT = 36
 _V32_ALIAS_COUNT = 7333
 
-# These are fingerprints of behavior/reports at the v32 boundary. V33 is an inbound-only
-# sink wave, so none of these legacy projections may move.
-# Profile pins move only with a gated content wave (ADR-0065 moved them last).
+# These are fingerprints of current legacy behavior. Profile pins move only with a gated
+# content wave; ADR-0067's removal of two false e-SIGUR edges intentionally changed the
+# Contexto closure while leaving the Lanț and Alchimie projections stable.
 _V32_CONTEXTO_PROFILE_SHA256 = (
-    "1d16f892671a17f9d4fea666dc7c1fa53c61d899de10cc26a8efdd101bf5f607"
+    "9faec43182f76c1fa9434876b7052eb4d10f4cf95d29008e9f4270250b6e3b05"
 )
 _V32_LANT_PROFILE_SHA256 = (
     "faa793d95d438cb27353e7043997eeda402be27eb267d1e5597364d7096a5afd"
@@ -51,10 +51,10 @@ _V32_ALCHIMIE_PROFILE_SHA256 = (
     "762c1f3a84463fbc2f14d0ec878c12db53ed48f6a4c5ec3c5c107b57ca5a4168"
 )
 _EXACT_REVIEW_REPORT_SHA256 = (
-    "12f425d5e9ea591e80dfd46b29f74a2bbc3f11e16f6747d9db3830f961e3e5f7"
+    "94fb8e92c1c3a7bbde74e2d3faec08691ba16348a1cec1bcb714e3c0e56f39b3"
 )
 _FULL_PENDING_REPORT_SHA256 = (
-    "11371687dc1e25b8ac48bc6a6f3f5317647c5e1b825688100765722cc259dbab"
+    "3da6045aa2f3d2afb8698bea2eea9b04d2fb0d2437a5cc23105d30024ac12e31"
 )
 
 
@@ -390,13 +390,13 @@ def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
         game: len(pack[game])
         for game in ("conexiuni", "contexto", "lant", "alchimie")
     } == {
-        "conexiuni": 308,
+        "conexiuni": 311,
         "contexto": 217,
         "lant": 201,
         "alchimie": 99,
     }
     # ADR-0065 content wave totals.
-    assert statuses == {"approved": 603, "pending": 222}
+    assert statuses == {"approved": 606, "pending": 222}
     assert len(DATA.REVIEW_ITEM_IDS) == len(set(DATA.REVIEW_ITEM_IDS)) == 33
     assert _critique_report(set(DATA.REVIEW_ITEM_IDS)) == (
         33,

@@ -2,12 +2,24 @@
 
 _As of 2026-07-30. This file is the repository's current source of truth._
 
-_Last verified: 2026-07-30 (V42 plus stale lazy-route recovery: full backend suite,
-web/static 18/18, derived-game 36/36, session store 16/16, frontend 28/28, lint, typecheck,
-production build at 118.03/120 KiB, browser click-through, and `git diff --check` green)._
+_Last verified: 2026-07-30 (V43: backend 679/679, accounts 53/53, session store
+16/16, frontend 152/152, Ruff, ESLint, typecheck, production build at
+118.03/120 KiB, rankings/derived/pack/KG validators, and `git diff --check` green)._
 
-## Current outcome — V42 release (ADR-0062–ADR-0065)
+## Current outcome — V43 strict board release (ADR-0067)
 
+- The Fable 5 replay audited all 67 original reserve boards and 268 groups, the full
+  approved/pending inventory, every replacement, and both derived-game creation paths.
+  Direct quad reuse is banned; rejected material remains digest-bound novelty debt.
+- The release funnel used exact deterministic, factual, play-quality, and real-ID
+  analyst/verifier gates with no shelf quota. Of 66 original proposals, only
+  `cx_stiinta_356` remains selectable; the strict replacement rebuild shipped no new
+  selected board.
+- Eight more approved boards moved to the reserve sidecar. It now has 75 IDs; 43 rejected
+  boards/172 groups live in durable tombstones. Ten empty Conexiuni shelves stay hidden.
+- Invalid or unreadable derived catalogs now make Intrusul/Perechi return controlled
+  Romanian 503 responses. Regenerated healthy catalogs serve normally; the frozen
+  336-board payload stayed byte-identical.
 - The six-game, tap-first lobby stays in its tested fun-first order: Alchimie → Intrusul →
   Perechi → Conexiuni → Cald sau Rece → Lanț. Mobile remains one card per row; wide screens
   balance the six cards in three columns.
@@ -31,33 +43,28 @@ production build at 118.03/120 KiB, browser click-through, and `git diff --check
   completion counts; import cannot create or overwrite the streak. The 6/6 diploma is derived
   from the browser score document and only copies a share string.
 
-## Content and ranking baseline (post ADR-0065/0066)
+## Content and ranking baseline
 
 | Game | Total | Approved | Pending | Runtime eligible/preferred |
 |---|---:|---:|---:|---:|
-| Conexiuni | 308 | 229 | 79 | 76 eligible |
+| Conexiuni | 311 | 232 | 79 | 74 eligible |
 | Cald sau Rece | 217 | 202 | 15 | 202 eligible |
 | Lanțul Cuvintelor | 201 | 94 | 107 | 94 eligible |
 | Alchimie | 99 | 78 | 21 | 78 eligible |
 | Intrusul | 183 | 183 | 0 | 144 preferred |
 | Perechi | 153 | 153 | 0 | 113 preferred |
 
-Pack: **825 = 603 approved + 222 pending**, across 14 categories. The ranked original-game
-runtime serves **450 zero-FAIL boards** after the ADR-0066 owner wave (18 promotions; 67
-structurally-killed boards demoted to never-selected reserves via
-`board_demotions_v43.json`). Eleven Conexiuni shelves are empty and hidden pending the next
-authoring wave (ADR-0066 lists them). The derived strict catalog stays at **336** boards
-from the frozen V38 source snapshot (ADR-0054/0065; loader validates freeze-time semantics).
-Bundled KG: **2,364 nodes / 9,219 edges / 7,440 aliases / 180 puzzles** (`fixture-v5-pop`).
-V23–V33 vocabulary probes remain **322/322**.
+Pack: **828 = 606 approved + 222 pending**, across 14 categories. The ranked original-game
+runtime serves **448 zero-FAIL boards**. The strict derived catalog remains **336** boards
+from the frozen V38 source snapshot; its `boards` payload hash is
+`71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
+Bundled KG: **2,364 nodes / 9,217 edges / 7,440 aliases / 180 puzzles**
+(`fixture-v42-pegas-colind-damigeana`).
 
-The ADR-0023 gate ran end to end in V42 (Sonnet critique → adversarial Opus verify with live
-Romanian web checks → orchestrator final judgment): **36 items promoted** (9+6 Contexto,
-14+1 Alchimie, 6 Conexiuni) and **11 rejected**, including the authored wave of ADR-0065.
-Each formerly empty Ușor Conexiuni shelf gained at least one eligible board; reaching the
-eight-board daily-pool target additionally needs the owner's ADR-0019 call on the near-
-duplicate-held boards listed in ADR-0065. Ranking scores remain editorial pre-playtest
-estimates, not measured fun or knowledge.
+ADR-0067 supersedes ADR-0023. The full evidence, exact rejection reasons, source links,
+bindings, and closure census are in `docs/reviews/v43-release-board-rebuild.md` and
+`v43-release-funnel.json`. Ranking scores remain editorial pre-playtest estimates, not
+measured fun or knowledge.
 
 ## Runtime, accounts, and deployment
 
@@ -66,11 +73,8 @@ estimates, not measured fun or knowledge.
 - Browser history, records, derived mastery, circuit, and streak remain device-authored.
   Account mode can upload validated completed-score rows privately but does not download,
   restore, or merge them. Public records remain server-authored and consent-gated.
-- The canonical vendored `/v1` client remains generated from the producer and stamped by
-  `scripts/sync_roedu_client.py`; never edit `_roedu_client_core.py` directly.
-- Shared `main` and `origin/main` contain V42. The last recorded live probe (2026-07-23)
-  reported V32 `fixture-v32-face-workshop-garden`; repository landing and production
-  deployment remain separate operations.
+- Repository landing and production deployment remain separate operations; the last
+  recorded live probe (2026-07-23) reported V32 `fixture-v32-face-workshop-garden`.
 
 ## Reproduction
 
@@ -88,9 +92,9 @@ git diff --check
 
 ## Next verified work
 
-- Author the next Conexiuni wave for the 11 empty shelves (ADR-0066) — the demoted
-  clusters (Enescu, Caragiale, rivers/lakes, sport quads) need fresh, non-recycled boards.
-- Deferred Lanț/Conexiuni pending-pool re-gate from fresh dossiers (ADR-0065).
+- Any future Conexiuni authoring starts from the ten hidden shelves and the durable
+  demotion/rejection evidence; never force a quota or reuse a banned quad.
+- Deferred Lanț/Conexiuni pending-pool re-gate requires fresh exact dossiers.
 - Run the larger anonymous six-game pilot before a seventh mode, score recalibration, or
   derived-catalog expansion (ADR-0054; generator now pins the V38 source snapshot).
 - Keep accounts off until the compliance checklist is complete.

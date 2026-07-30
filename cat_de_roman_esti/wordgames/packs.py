@@ -42,7 +42,7 @@ DEFAULT_RANKINGS = PACK_DIR / "board_rankings_v37.json"
 DEFAULT_RUBRIC = Path(__file__).resolve().parents[2] / "docs" / "CRITIQUE_RUBRIC.md"
 # Wheels intentionally omit repository docs. Pin the reviewed rubric digest so the bundled
 # sidecar still verifies its third input in an installed/runtime-only package.
-DEFAULT_RUBRIC_SHA256 = "14f8efacf32c8e41825a1accdc43c44c9f8660cdbde7686b55d4a47ffbef6741"
+DEFAULT_RUBRIC_SHA256 = "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3"
 
 GAME_KINDS = ("conexiuni", "contexto", "lant", "alchimie")
 SOURCES = ("user", "ai", "ai_corpus")

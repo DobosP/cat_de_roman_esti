@@ -81,6 +81,14 @@ class IntrusulSession:
 store: SessionStore[IntrusulSession] = SessionStore()
 
 
+def _catalog_or_503() -> DerivedCatalog:
+    """Turn a fail-closed derived-artifact integrity error into a stable response."""
+    try:
+        return get_derived_catalog()
+    except (OSError, ValueError) as exc:
+        raise http_error(503, "Catalogul Intrusul este invalid.") from exc
+
+
 def _atomic_session(method):
     """Pin one session and serialize every compound read/mutation against it."""
 
@@ -246,7 +254,7 @@ class CreateGameView(ContractAPIView):
         if starter_value not in (None, 0, 1):
             raise http_error(400, "starter trebuie să fie 0 sau 1.")
 
-        catalog = get_derived_catalog()
+        catalog = _catalog_or_503()
         if daily:
             # One shared daily: starter, previous sessions, and account history cannot
             # fork the result.  The daily seed controls only the stable tile shuffle.

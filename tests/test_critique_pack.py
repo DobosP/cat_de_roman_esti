@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 from copy import deepcopy
@@ -35,6 +36,115 @@ def test_classify_type_mix_flags_two_plus_two_split():
 
 def test_classify_type_mix_leaves_diverse_groups_to_judges():
     assert critique_pack.classify_type_mix(["event", "place", "work", "work"]) is None
+
+
+def test_board_type_shortcut_requires_four_homogeneous_groups():
+    groups = {
+        "g1": ["a1", "a2", "a3", "a4"],
+        "g2": ["b1", "b2", "b3", "b4"],
+        "g3": ["c1", "c2", "c3", "c4"],
+        "g4": ["d1", "d2", "d3", "d4"],
+    }
+    four_types = {
+        node_id: group_id
+        for group_id, members in groups.items()
+        for node_id in members
+    }
+    assert critique_pack.board_type_shortcut(groups, four_types) == 4
+    four_types["d4"] = "g3"
+    assert critique_pack.board_type_shortcut(groups, four_types) is None
+
+
+@pytest.mark.parametrize(
+    ("label", "member", "foreign"),
+    [
+        ("Cuvinte care încep cu litera P", "Primar", "Document"),
+        ("Cuvinte care se termină în ȚIE", "Justiție", "Document"),
+        ("Denumirea afișată conține o cratimă", "O-Zone", "Aferim!"),
+        (
+            "Etichete afișate formate din exact trei litere majuscule",
+            "CNP",
+            "Document",
+        ),
+        ("Evenimente istorice cu anul în denumire", "Revoluția 1848", "Primar"),
+        ("Încep cu S sau Ș", "Șnițel", "Ceai"),
+        ("Încep cu șirul „Sala”", "Salată", "Muștar"),
+        ("Se termină cu litera R", "Muștar", "Mărarul"),
+        ("Au cuvântul „cu” în denumire", "Fasole cu ciolan", "Cuvânt"),
+        ("Numele afișat are exact trei cuvinte", "Ana Maria Brânză", "Ana Blandiana"),
+        ("Prenume din exact patru litere", "Radu Drăgușin", "Dan Petrescu"),
+        (
+            "Primul cuvânt al numelui începe cu R",
+            "Radu Jude",
+            "Andrei Pleșu",
+        ),
+    ],
+)
+def test_surface_rule_parser_is_literal_and_auditable(label, member, foreign):
+    rule = critique_pack.parse_surface_rule(label)
+    assert rule is not None
+    assert critique_pack.matches_surface_rule(rule, member)
+    assert not critique_pack.matches_surface_rule(rule, foreign)
+
+
+def test_surface_rule_crossfit_is_a_pending_failure():
+    groups = {
+        "g1": ["p1", "p2", "p3", "p4"],
+        "g2": ["x1", "x2", "x3", "x4"],
+        "g3": ["y1", "y2", "y3", "y4"],
+        "g4": ["z1", "z2", "z3", "z4"],
+    }
+    labels = {"g1": "Cuvinte care încep cu litera P"}
+    displayed = {
+        "p1": "Primar",
+        "p2": "Prefect",
+        "p3": "Port",
+        "p4": "Parc",
+        "x1": "Populație",
+        **{node_id: node_id for node_id in groups["g2"][1:]},
+        **{node_id: node_id for node_id in groups["g3"]},
+        **{node_id: node_id for node_id in groups["g4"]},
+    }
+    node_types = {node_id: "concept" for node_id in displayed}
+    findings = critique_pack.surface_rule_findings(
+        groups, labels, displayed, node_types, approved=False
+    )
+    assert findings == [{
+        "check": "surface_predicate_crossfit",
+        "level": "FAIL",
+        "detail": (
+            'group "Cuvinte care încep cu litera P" also matches '
+            "foreign tile(s): Populație"
+        ),
+    }]
+
+
+@pytest.mark.parametrize(
+    "label",
+    [
+        "Țin de viața la bloc",
+        "Repere ale unei seri de film",
+        "Apar în situația locuirii",
+        "Practici și obiecte legate de Paște",
+        "Programe sau măsuri publice cu impact direct",
+        "Din lumea teatrului",
+        "Concepte asociate cu un inventator",
+    ],
+)
+def test_vague_predicate_wording_catches_association_bundle_labels(label):
+    assert critique_pack.vague_predicate_wording(label) is not None
+
+
+@pytest.mark.parametrize(
+    "label",
+    [
+        "Romane publicate între cele două războaie",
+        "Nume de familie care încep cu S",
+        "Au câștigat titlul olimpic la canotaj",
+    ],
+)
+def test_vague_predicate_wording_leaves_testable_labels_alone(label):
+    assert critique_pack.vague_predicate_wording(label) is None
 
 
 def test_max_matching_disjoint_pairs():
@@ -220,9 +330,12 @@ def test_pack_validator_rejects_lowered_id_high_water(tmp_path):
 def _write_gate_artifact(
     path, game, verdicts, *, verified=True, batch_ids=None,
     review_binding='sha256:' + ('a' * 64),
+    analyst_verdicts=None, verifier_verdicts=None,
 ):
     ids = list(verdicts) if batch_ids is None else list(batch_ids)
     count = len(verdicts)
+    analyst_verdicts = analyst_verdicts or verdicts
+    verifier_verdicts = verifier_verdicts or verdicts
     path.write_text(
         json.dumps({
             'game': game,
@@ -232,6 +345,9 @@ def _write_gate_artifact(
             'perItem': [
                 {
                     'id': iid, 'game': game, 'final': verdict,
+                    'proposed': analyst_verdicts[iid],
+                    'analyst': analyst_verdicts[iid],
+                    'verifier': verifier_verdicts[iid],
                     'verified': verified, 'verifier_lost': not verified,
                     'review_binding': review_binding,
                 }
@@ -371,6 +487,94 @@ def test_apply_rereview_restores_first_mirror_after_second_write_fails(
     assert [copy.read_bytes() for copy in copies] == [original, original]
 
 
+@pytest.mark.parametrize("validator_result", [0, 1])
+def test_apply_rereview_records_rejections_transactionally(
+    tmp_path,
+    monkeypatch,
+    validator_result,
+):
+    original = critique_pack.PACKAGE_PACK.read_bytes()
+    copies = (tmp_path / "package-pack.json", tmp_path / "tests-pack.json")
+    for copy in copies:
+        copy.write_bytes(original)
+    pack = json.loads(original.decode("utf-8"))
+    pending = next(
+        item for item in pack["conexiuni"] if item["status"] == "pending"
+    )
+    binding = "sha256:" + ("a" * 64)
+    _write_gate_artifact(
+        tmp_path / "conexiuni_verdicts.json",
+        "conexiuni",
+        {pending["id"]: "reject"},
+        review_binding=binding,
+    )
+    tombstone_path = tmp_path / "tombstones.json"
+    empty_tombstones = (
+        json.dumps({
+            "schema_version": 1,
+            "meta": {
+                "note": "test",
+                "count": 0,
+                "group_count": 0,
+                "initial_seed_gate_sha256": "0" * 64,
+            },
+            "items": {},
+        }) + "\n"
+    ).encode()
+    tombstone_path.write_bytes(empty_tombstones)
+
+    monkeypatch.setattr(apply_rereview, "PACK_COPIES", copies)
+    monkeypatch.setattr(
+        apply_rereview.critique_pack,
+        "REJECTION_TOMBSTONES",
+        tombstone_path,
+    )
+    monkeypatch.setattr(
+        apply_rereview,
+        "current_review_bindings",
+        lambda _ids: {pending["id"]: binding},
+    )
+    monkeypatch.setattr(
+        apply_rereview,
+        "critique_promotions",
+        lambda _ids, _rejects: 0,
+    )
+    monkeypatch.setattr(
+        apply_rereview.validate_games_pack,
+        "main",
+        lambda _argv: validator_result,
+    )
+
+    if validator_result:
+        with pytest.raises(SystemExit, match="pack validation failed"):
+            apply_rereview.main(
+                ["apply_rereview.py", "--dir", str(tmp_path)]
+            )
+        assert [copy.read_bytes() for copy in copies] == [original, original]
+        assert tombstone_path.read_bytes() == empty_tombstones
+        return
+
+    assert apply_rereview.main(
+        ["apply_rereview.py", "--dir", str(tmp_path)]
+    ) == 0
+    for copy in copies:
+        updated_pack = json.loads(copy.read_text())
+        assert pending["id"] not in {
+            item["id"] for item in updated_pack["conexiuni"]
+        }
+    tombstones = json.loads(tombstone_path.read_text())
+    entry = tombstones["items"][pending["id"]]
+    assert entry["record_sha256"] == critique_pack.canonical_json_sha256(pending)
+    assert entry["groups_sha256"] == critique_pack.canonical_json_sha256(
+        pending["groups"]
+    )
+    assert entry["review_binding"] == binding
+    assert entry["source_gate_sha256"] == hashlib.sha256(
+        (tmp_path / "conexiuni_verdicts.json").read_bytes()
+    ).hexdigest()
+    assert entry["groups"] == pending["groups"]
+
+
 def test_apply_rereview_rejects_unverified_workflow_artifact(tmp_path, monkeypatch):
     pack = json.loads(critique_pack.PACKAGE_PACK.read_text(encoding='utf-8'))
     pending = next(item for item in pack['conexiuni'] if item['status'] == 'pending')
@@ -388,6 +592,80 @@ def test_apply_rereview_rejects_unverified_workflow_artifact(tmp_path, monkeypat
     )
     with pytest.raises(SystemExit, match='not fully verified'):
         apply_rereview.main(['apply_rereview.py', '--dir', str(tmp_path)])
+
+
+@pytest.mark.parametrize(
+    ("analyst", "verifier", "unsafe_final"),
+    [
+        ("reject", "promote", "promote"),
+        ("keep", "promote", "promote"),
+        ("promote", "keep", "promote"),
+        ("promote", "reject", "promote"),
+    ],
+)
+def test_apply_rereview_rejects_non_unanimous_promotion(
+    tmp_path, monkeypatch, analyst, verifier, unsafe_final,
+):
+    pack = json.loads(critique_pack.PACKAGE_PACK.read_text(encoding="utf-8"))
+    pending = next(item for item in pack["conexiuni"] if item["status"] == "pending")
+    _write_gate_artifact(
+        tmp_path / "conexiuni_verdicts.json",
+        "conexiuni",
+        {pending["id"]: unsafe_final},
+        analyst_verdicts={pending["id"]: analyst},
+        verifier_verdicts={pending["id"]: verifier},
+    )
+    monkeypatch.setattr(
+        apply_rereview,
+        "critique_promotions",
+        lambda _ids, _rejects: pytest.fail(
+            "non-unanimous promotion must fail before deterministic critique"
+        ),
+    )
+    with pytest.raises(SystemExit, match="not fully verified"):
+        apply_rereview.main(["apply_rereview.py", "--dir", str(tmp_path)])
+
+
+def test_apply_rereview_accepts_conservative_disagreement_rejection(tmp_path):
+    pack = json.loads(critique_pack.PACKAGE_PACK.read_text(encoding="utf-8"))
+    pending = next(item for item in pack["conexiuni"] if item["status"] == "pending")
+    path = tmp_path / "conexiuni_verdicts.json"
+    _write_gate_artifact(
+        path,
+        "conexiuni",
+        {pending["id"]: "reject"},
+        analyst_verdicts={pending["id"]: "reject"},
+        verifier_verdicts={pending["id"]: "promote"},
+    )
+    verdicts, batch, bindings = apply_rereview.validated_artifact(
+        json.loads(path.read_text(encoding="utf-8")),
+        "conexiuni",
+        path,
+    )
+    assert verdicts == {pending["id"]: "reject"}
+    assert batch["input_ids"] == [pending["id"]]
+    assert bindings[pending["id"]] == "sha256:" + ("a" * 64)
+
+
+def test_tracked_v43_gate_satisfies_conservative_two_reviewer_contract():
+    path = (
+        _REPO_ROOT
+        / "docs"
+        / "reviews"
+        / "v43-final-gate"
+        / "conexiuni_verdicts.json"
+    )
+    verdicts, batch, bindings = apply_rereview.validated_artifact(
+        json.loads(path.read_text(encoding="utf-8")),
+        "conexiuni",
+        path,
+    )
+    assert verdicts == {
+        "cx_personalitati_360": "reject",
+        "cx_sport_361": "reject",
+    }
+    assert set(batch["input_ids"]) == set(verdicts)
+    assert set(bindings) == set(verdicts)
 
 
 def test_apply_rereview_rejects_hand_combined_gate_batches(tmp_path):
@@ -431,6 +709,80 @@ def test_apply_rereview_rejects_stale_artifact_after_content_edit(tmp_path, monk
 @pytest.fixture(scope="module")
 def loaded():
     return critique_pack.load_all(critique_pack.PACKAGE_PACK, critique_pack.PACKAGE_KG)
+
+
+def test_real_rejection_tombstones_are_valid_and_not_runtime_boards(loaded):
+    pack, _, _, _ = loaded
+    tombstones = critique_pack.load_rejection_tombstones()
+    runtime_ids = {item["id"] for item in pack["conexiuni"]}
+    assert len(tombstones) == 43
+    assert sum(len(item["groups"]) for item in tombstones) == 172
+    assert {"cx_personalitati_360", "cx_sport_361"} <= {
+        item["id"] for item in tombstones
+    }
+    assert not ({item["id"] for item in tombstones} & runtime_ids)
+
+
+def test_rejection_tombstone_group_mutation_fails_integrity_check():
+    data = json.loads(critique_pack.REJECTION_TOMBSTONES.read_text(encoding="utf-8"))
+    item_id = next(iter(data["items"]))
+    data["items"][item_id]["groups"]["g1"][0] = "n_tampered"
+    with pytest.raises(ValueError, match="groups digest drift"):
+        critique_pack.validate_rejection_tombstones(data)
+
+
+def test_four_type_board_shortcut_blocks_pending_but_only_warns_on_stock(loaded):
+    pack, svc, strong, _ = loaded
+    by_type: dict[str, list[str]] = {}
+    for rec in pack["conexiuni"]:
+        for members in rec["groups"].values():
+            for node_id in members:
+                node_type = svc.node(node_id).node_type
+                bucket = by_type.setdefault(node_type, [])
+                if node_id not in bucket:
+                    bucket.append(node_id)
+    chosen = [
+        members[:4]
+        for _, members in sorted(by_type.items())
+        if len(members) >= 4
+    ][:4]
+    assert len(chosen) == 4
+    base = deepcopy(pack["conexiuni"][0])
+    base["groups"] = {
+        f"g{index}": members for index, members in enumerate(chosen, 1)
+    }
+    base["group_labels"] = {
+        f"g{index}": f"Predicatul {index}" for index in range(1, 5)
+    }
+    base["order"] = [node_id for members in chosen for node_id in members]
+
+    for status, expected in (("pending", "FAIL"), ("approved", "WARN")):
+        findings = critique_pack.check_conexiuni(
+            {**base, "status": status}, svc, strong, {}
+        )
+        shortcut = [
+            finding
+            for finding in findings
+            if finding["check"] == "board_type_shortcut"
+        ]
+        assert [finding["level"] for finding in shortcut] == [expected]
+
+
+def test_vague_predicate_wording_blocks_pending_but_only_warns_on_stock(loaded):
+    pack, svc, strong, _ = loaded
+    base = deepcopy(pack["conexiuni"][0])
+    group_id = sorted(base["groups"])[0]
+    base["group_labels"][group_id] = "Repere ale unei teme"
+    for status, expected in (("pending", "FAIL"), ("approved", "WARN")):
+        findings = critique_pack.check_conexiuni(
+            {**base, "status": status}, svc, strong, {}
+        )
+        wording = [
+            finding
+            for finding in findings
+            if finding["check"] == "vague_predicate_wording"
+        ]
+        assert [finding["level"] for finding in wording] == [expected]
 
 
 def test_run_over_real_pack_is_bounded_and_typed(loaded):
@@ -495,7 +847,7 @@ def test_default_status_filter_does_not_expand_approved_review_to_pending(loaded
     )
 
 
-def test_prospective_promotion_gate_removes_only_same_batch_rejects(
+def test_prospective_promotion_gate_keeps_same_batch_rejects_as_novelty_debt(
     loaded, monkeypatch
 ):
     pack, svc, strong, regions = loaded
@@ -526,11 +878,106 @@ def test_prospective_promotion_gate_removes_only_same_batch_rejects(
 
     assert apply_rereview.critique_promotions(
         {promoted["id"]}, {duplicate["id"]}
-    ) == 0
+    ) == 1
     assert apply_rereview.critique_promotions({promoted["id"]}, set()) == 1
     assert apply_rereview.critique_promotions(
         {promoted["id"], duplicate["id"]}, set()
     ) == 1
+
+
+def test_rejection_tombstones_block_future_exact_and_board_reskins(
+    loaded, tmp_path, monkeypatch
+):
+    pack, svc, strong, regions = loaded
+    base = deepcopy(pack["conexiuni"][0])
+    base["id"] = "cx_rejected_source"
+    base["status"] = "pending"
+    binding = "sha256:" + ("a" * 64)
+    empty = {
+        "schema_version": 1,
+        "meta": {
+            "note": "test",
+            "count": 0,
+            "group_count": 0,
+            "initial_seed_gate_sha256": "0" * 64,
+        },
+        "items": {},
+    }
+    path = tmp_path / "tombstones.json"
+    path.write_bytes(
+        apply_rereview.updated_rejection_tombstones(
+            (json.dumps(empty) + "\n").encode(),
+            [base],
+            {base["id"]: binding},
+            {base["id"]: "b" * 64},
+        )
+    )
+    monkeypatch.setattr(critique_pack, "REJECTION_TOMBSTONES", path)
+
+    candidate = {**base, "id": "cx_future_candidate"}
+    mini_pack = {
+        "meta": {},
+        "conexiuni": [candidate],
+        "contexto": [],
+        "lant": [],
+        "alchimie": [],
+    }
+    _, _, selected = critique_pack.run(
+        mini_pack,
+        svc,
+        strong,
+        regions,
+        ["conexiuni"],
+        {"pending"},
+        {candidate["id"]},
+    )
+    findings = selected[0][2]
+    assert any(
+        finding["check"] == "duplicate_groups"
+        and "rejected:cx_rejected_source" in finding["detail"]
+        for finding in findings
+    )
+    assert any(
+        finding["check"] == "board_reskin"
+        and "rejected:cx_rejected_source" in finding["detail"]
+        for finding in findings
+    )
+
+    replacement = next(
+        node_id
+        for rec in pack["conexiuni"]
+        for members in rec["groups"].values()
+        for node_id in members
+        if node_id not in {
+            tile for members in base["groups"].values() for tile in members
+        }
+    )
+    near_candidate = deepcopy(candidate)
+    near_candidate["id"] = "cx_future_near_candidate"
+    first_group = sorted(near_candidate["groups"])[0]
+    near_candidate["groups"][first_group][0] = replacement
+    near_candidate["order"] = [
+        node_id
+        for members in near_candidate["groups"].values()
+        for node_id in members
+    ]
+    mini_pack["conexiuni"] = [near_candidate]
+    _, _, selected = critique_pack.run(
+        mini_pack,
+        svc,
+        strong,
+        regions,
+        ["conexiuni"],
+        {"pending"},
+        {near_candidate["id"]},
+    )
+    near_findings = selected[0][2]
+    assert any(
+        finding["check"] == "duplicate_groups"
+        and "near-duplicate" in finding["detail"]
+        and "rejected:cx_rejected_source" in finding["detail"]
+        for finding in near_findings
+    )
 
 
 def test_explicit_selection_rejects_unknown_and_filtered_ids(loaded):
@@ -637,6 +1084,9 @@ def test_workflow_requires_two_layers_for_gate_promotions():
     assert "A.repo || '.'" in workflow
     assert "lant: 'D', alchimie: 'E'" in workflow
     assert 'const batch = { version: 2' in workflow
+    assert "analyst === 'promote' && verifier === 'promote'" in workflow
+    assert "return `${gateVerdict(analyst, verifier)}-without-unanimity`" in workflow
+    assert 'analyst, verifier, policy' in workflow
     assert 'return { mode: MODE, batch, verdicts, perItem, coverage, artifacts }' in workflow
 
 
@@ -645,9 +1095,23 @@ def test_authored_workflow_censuses_full_inventory_for_reskins():
         _REPO_ROOT / ".claude" / "workflows" / "verify-authored-content.js"
     ).read_text(encoding="utf-8")
     assert "including reserves and pending stock" in workflow
+    assert "conexiuni_rejection_tombstones.json" in workflow
     assert "exact or 3-of-4 quads plus >=8/16 whole-board overlap" in workflow
     assert "Treat those freshness matches as drop" in workflow
     assert "candidate_sha256" in workflow
+
+
+def test_audit_and_gate_workflows_retain_rejected_pattern_evidence():
+    audit = (
+        _REPO_ROOT / ".claude" / "workflows" / "game-audit-recon.js"
+    ).read_text(encoding="utf-8")
+    gate = (
+        _REPO_ROOT / ".claude" / "workflows" / "critique-games.js"
+    ).read_text(encoding="utf-8")
+    assert "demotion/rejection artifact" in audit
+    assert "rejection tombstones" in audit
+    assert "conexiuni_rejection_tombstones.json" in gate
+    assert "four-type sorting" in gate
 
 
 def test_duplicate_groups_flags_exact_and_near_duplicates(loaded):

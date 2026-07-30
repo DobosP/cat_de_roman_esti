@@ -91,6 +91,25 @@ def test_create_uses_one_strict_private_catalog_board() -> None:
     assert "board_category" not in body
 
 
+@pytest.mark.parametrize(
+    "catalog_error",
+    [
+        ValueError("derived catalog: pack_sha256 source drift"),
+        OSError("derived catalog fixture is unreadable"),
+    ],
+)
+def test_create_returns_503_when_derived_catalog_is_unavailable(
+    monkeypatch: pytest.MonkeyPatch, catalog_error: Exception,
+) -> None:
+    def source_drift():
+        raise catalog_error
+
+    monkeypatch.setattr(intrusul, "get_derived_catalog", source_drift)
+    response = Client().post(f"{BASE}/games?seed=38")
+    assert response.status_code == 503
+    assert response.json()["detail"] == "Catalogul Intrusul este invalid."
+
+
 def test_seed_and_daily_are_stable_and_daily_ignores_optional_rotation_inputs(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:

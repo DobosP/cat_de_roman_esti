@@ -1,0 +1,56 @@
+{
+  "game": "conexiuni",
+  "mode": "gate",
+  "batch": {
+    "version": 2,
+    "mode": "gate",
+    "input_ids": [
+      "cx_personalitati_360",
+      "cx_sport_361"
+    ]
+  },
+  "verdicts": {
+    "cx_personalitati_360": "reject",
+    "cx_sport_361": "reject"
+  },
+  "perItem": [
+    {
+      "id": "cx_personalitati_360",
+      "game": "conexiuni",
+      "final": "reject",
+      "verified": true,
+      "verifier_lost": false,
+      "review_binding": "sha256:36d74506eda311d3555a6e977cc8e27ad9eec76dc9771235c4a865d1dc517dee",
+      "analyst": "reject",
+      "verifier": "promote",
+      "policy": "reject-without-unanimity"
+    },
+    {
+      "id": "cx_sport_361",
+      "game": "conexiuni",
+      "final": "reject",
+      "verified": true,
+      "verifier_lost": false,
+      "review_binding": "sha256:0244b320805591aec2bc04b9f972dd7cdc9687ee392625809963b4221bc34acc",
+      "analyst": "reject",
+      "verifier": "reject",
+      "policy": "unanimous-reject"
+    }
+  ],
+  "coverage": {
+    "total": 2,
+    "verified": 2,
+    "unverifiedClean": 0,
+    "verifiersLost": 0,
+    "lost": 0
+  },
+  "evidence": {
+    "analyst_artifact_sha256": "29518684c482cd852009d98d07559eba30ca02ccfec4ffbec1124508d2cca51a",
+    "verifier_artifact_sha256": "839c3c5968be17bd06bcf9b6bd2c28c3cd601a5d982547b810e9951ce5fbf974",
+    "audited_approved_incumbents": {
+      "cx_personalitati_339": "demote",
+      "cx_sport_355": "demote",
+      "cx_stiinta_356": "keep"
+    }
+  }
+}

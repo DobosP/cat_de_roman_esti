@@ -21,7 +21,7 @@ NOTE = (
     "anatomy, and household cleaning, with conservative inflections and explicit "
     "semantic links; no game boards or promotions."
 )
-BASELINE_PACK_SHA256 = "b2b603be2354af4c982c515ac43795bfe342c217c5cf32e59b0c5e28f5769194"
+BASELINE_PACK_SHA256 = "70fa40b6bc9e6f9245a4cfbeee72b60595b5b705d8f84589adf718458363a9df"
 GAME_ITEM_IDS: tuple[str, ...] = ()
 V31_BEGINNER_EXTENSION: tuple[str, ...] = (
     "Prosop",

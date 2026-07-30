@@ -14,8 +14,15 @@ neighbours in a foreign group than in its own — curated boards historically by
 it); ``red_herring_budget`` counts contested tiles; ``mirrored_groups`` detects group
 pairs in >=3-way 1:1 strong-edge correspondence (festivals <-> host cities);
 ``type_coherence`` flags 3+1 / 2+2 node_type mixes inside a group;
+``board_type_shortcut`` flags boards whose four internally homogeneous groups can be
+mostly or entirely sorted by node type;
+``surface_predicate_crossfit`` proves when a foreign tile satisfies a conservative
+visible-string rule, while ``visible_string_worksheet`` warns when such rules dominate;
+``vague_predicate_wording`` blocks new groups whose label uses recurring catch-all
+association language instead of a testable shared property;
 ``duplicate_groups`` flags exact/three-of-four quads already used in inventory or the
-selected batch; ``board_reskin`` catches half-board concept recycling;
+selected batch or the durable rejection tombstones; ``board_reskin`` catches
+half-board concept recycling, including previously rejected boards;
 ``label_self_leak`` catches labels that repeat one of their answers;
 ``salience_floor`` flags Contexto/Lant/Alchimie targets below their difficulty band;
 ``member_overuse`` flags nodes reused across too many approved Conexiuni boards.
@@ -60,6 +67,12 @@ from cat_de_roman_esti.wordgames.service import WordGameService  # noqa: E402
 
 PACKAGE_PACK = _REPO_ROOT / "cat_de_roman_esti" / "fixtures" / "games_pack.json"
 PACKAGE_KG = _REPO_ROOT / "cat_de_roman_esti" / "fixtures" / "kg_sample.json"
+REJECTION_TOMBSTONES = (
+    _REPO_ROOT
+    / "cat_de_roman_esti"
+    / "fixtures"
+    / "conexiuni_rejection_tombstones.json"
+)
 RUBRIC_PATH = _REPO_ROOT / "docs" / "CRITIQUE_RUBRIC.md"
 REVIEW_BINDING_VERSION = 1
 
@@ -88,6 +101,282 @@ NATIONAL_SALIENCE = 0.70   # a concept this famous claiming ONE region is suspec
 
 
 # --------------------------------------------------------------------- pure helpers
+def validate_rejection_tombstones(data: object) -> list[dict]:
+    """Validate and normalize the durable Conexiuni rejection inventory."""
+    if not isinstance(data, dict) or data.get("schema_version") != 1:
+        raise ValueError("rejection tombstones: expected schema_version 1")
+    items = data.get("items")
+    meta = data.get("meta")
+    if not isinstance(items, dict) or not isinstance(meta, dict):
+        raise ValueError("rejection tombstones: invalid items/meta")
+    seed_gate = meta.get("initial_seed_gate_sha256")
+    if not isinstance(seed_gate, str) or re.fullmatch(r"[0-9a-f]{64}", seed_gate) is None:
+        raise ValueError("rejection tombstones: invalid initial seed gate digest")
+
+    records = []
+    for item_id, row in sorted(items.items()):
+        if not isinstance(item_id, str) or not isinstance(row, dict):
+            raise ValueError("rejection tombstones: invalid item entry")
+        groups = row.get("groups")
+        if not isinstance(groups, dict) or set(groups) != {"g1", "g2", "g3", "g4"}:
+            raise ValueError(f"rejection tombstones: invalid groups for {item_id}")
+        tiles = []
+        normalized_groups = {}
+        for group_id in sorted(groups):
+            members = groups[group_id]
+            if (
+                not isinstance(members, list)
+                or len(members) != 4
+                or not all(isinstance(node_id, str) and node_id for node_id in members)
+            ):
+                raise ValueError(
+                    f"rejection tombstones: invalid {item_id}.{group_id}"
+                )
+            normalized_groups[group_id] = list(members)
+            tiles.extend(members)
+        if len(set(tiles)) != 16:
+            raise ValueError(f"rejection tombstones: repeated tile in {item_id}")
+        record_sha = row.get("record_sha256")
+        groups_sha = row.get("groups_sha256")
+        binding = row.get("review_binding")
+        source_gate = row.get("source_gate_sha256")
+        if (
+            not isinstance(record_sha, str)
+            or re.fullmatch(r"[0-9a-f]{64}", record_sha) is None
+            or not isinstance(groups_sha, str)
+            or re.fullmatch(r"[0-9a-f]{64}", groups_sha) is None
+            or not isinstance(binding, str)
+            or re.fullmatch(r"sha256:[0-9a-f]{64}", binding) is None
+            or not isinstance(source_gate, str)
+            or re.fullmatch(r"[0-9a-f]{64}", source_gate) is None
+        ):
+            raise ValueError(f"rejection tombstones: invalid binding for {item_id}")
+        if groups_sha != canonical_json_sha256(normalized_groups):
+            raise ValueError(f"rejection tombstones: groups digest drift for {item_id}")
+        records.append({"id": item_id, "groups": normalized_groups})
+
+    expected_groups = len(records) * 4
+    if (
+        meta.get("count") != len(records)
+        or meta.get("group_count") != expected_groups
+    ):
+        raise ValueError("rejection tombstones: stale meta counts")
+    return records
+
+
+def load_rejection_tombstones(path: Path | None = None) -> list[dict]:
+    """Load exact rejected boards retained solely for future novelty checks."""
+    source = path or REJECTION_TOMBSTONES
+    return validate_rejection_tombstones(
+        json.loads(source.read_text(encoding="utf-8"))
+    )
+
+
+def fold_surface(value: object) -> str:
+    """Accent-insensitive text that retains punctuation used by visible rules."""
+    return "".join(
+        ch
+        for ch in unicodedata.normalize("NFKD", str(value).casefold())
+        if not unicodedata.combining(ch)
+    ).strip()
+
+
+def parse_surface_rule(label: object) -> tuple[str, str | int | None] | None:
+    """Parse only literal, judge-auditable display/name predicates."""
+    folded = fold_surface(label)
+    if "contine o cratima" in folded:
+        return ("punctuation", "-")
+    if "contine semnul exclamarii" in folded:
+        return ("punctuation", "!")
+    if "cu anul in denumire" in folded:
+        return ("year", None)
+    if "cu cifra in nume" in folded or "cu o cifra in nume" in folded:
+        return ("digit", None)
+    if "dintr-un singur cuvant" in folded or "dintr un singur cuvant" in folded:
+        return ("one_word", None)
+    if re.search(r"exact (?:trei|3) litere majuscule", folded):
+        return ("uppercase_length", 3)
+    if "aceeasi initiala la prenume si nume" in folded:
+        return ("same_person_initial", None)
+    if re.search(r"numele afisat are exact (?:trei|3) cuvinte", folded):
+        return ("word_count", 3)
+    if re.search(r"prenume(?:le)? (?:din|are) exact (?:patru|4) litere", folded):
+        return ("first_name_length", 4)
+
+    match = re.search(
+        r"(?:primul cuvant al numelui|prenume(?:le)? care) "
+        r"(?:incep|incepe) cu(?: litera)? ([a-z])(?:\b|$)",
+        folded,
+    )
+    if match:
+        return ("prefix", match.group(1))
+    match = re.search(
+        r"(?:incep|incepe) cu(?: litera| sirul)? "
+        r"[„\"']?([a-z]+)[”\"']?(?: sau [a-z])?(?:\b|$)",
+        folded,
+    )
+    if match:
+        return ("prefix", match.group(1))
+    match = re.search(
+        r"se termina (?:in|cu)(?: litera)? "
+        r"[„\"']?-?([a-z]+)[”\"']?\s*$",
+        folded,
+    )
+    if match:
+        return ("suffix", match.group(1))
+    match = re.search(r"contine sirul de litere ([a-z]{2,})\s*$", folded)
+    if match:
+        return ("contains", match.group(1))
+    match = re.search(r"cu ([a-z]{3,}) in denumire\s*$", folded)
+    if match:
+        return ("contains", match.group(1))
+    match = re.search(
+        r"au cuvantul [„\"']?([a-z]{2,})[”\"']? in denumire\s*$",
+        folded,
+    )
+    if match:
+        return ("contains_word", match.group(1))
+    match = re.search(r"(?:cu )?prenumele ([a-z]+)\s*$", folded)
+    if match:
+        return ("first_name", match.group(1))
+    match = re.search(r"nume de familie care (?:incep|incepe) cu ([a-z])\s*$", folded)
+    if match:
+        return ("last_name_prefix", match.group(1))
+    return None
+
+
+def vague_predicate_wording(label: object) -> str | None:
+    """Return the catch-all wording that prevents a group from stating one predicate."""
+    folded = fold_surface(label)
+    patterns = (
+        r"^tin de\b",
+        r"^repere (?:ale|din)\b",
+        r"^apar (?:in|cand)\b",
+        r"^intra in\b",
+        r"^fac parte din\b",
+        r"^se intalnesc\b",
+        r"^participa la\b",
+        r"^insotesc\b",
+        r"^ajuta sau\b",
+        r"^structuri si repere\b",
+        r"^simboluri sau repere\b",
+        r"^programe sau masuri\b",
+        r"^(?:din|in) lumea\b",
+        r"^constelatia\b",
+        r"^pe scurt\b",
+        r"\bcu adresa\b",
+        r"\b(?:legat(?:a|e)?|asociat(?:a|e)?) (?:de|cu)\b",
+        r"\bcu impact direct\b",
+        r"\bcu identitate (?:romaneasca|romana)\b",
+    )
+    return next((pattern for pattern in patterns if re.search(pattern, folded)), None)
+
+
+def matches_surface_rule(
+    rule: tuple[str, str | int | None], displayed: object,
+) -> bool:
+    """Whether a displayed tile label satisfies one parsed literal rule."""
+    kind, value = rule
+    raw = str(displayed).strip()
+    folded = fold_surface(raw)
+    words = re.findall(r"[a-z0-9]+", folded)
+    if kind == "punctuation":
+        return str(value) in raw
+    if kind == "year":
+        return re.search(r"\b\d{4}\b", raw) is not None
+    if kind == "digit":
+        return re.search(r"\d", raw) is not None
+    if kind == "one_word":
+        return len(words) == 1
+    if kind == "uppercase_length":
+        letters = "".join(ch for ch in raw if ch.isalpha())
+        return (
+            len(letters) == value
+            and raw == letters
+            and all(ch.isupper() for ch in letters)
+        )
+    if kind == "prefix":
+        return folded.startswith(str(value))
+    if kind == "suffix":
+        return folded.endswith(str(value))
+    if kind == "contains":
+        return str(value) in folded
+    if kind == "contains_word":
+        return str(value) in words
+    if kind == "first_name":
+        return bool(words) and words[0] == value
+    if kind == "first_name_length":
+        return bool(words) and len(words[0]) == value
+    if kind == "last_name_prefix":
+        return bool(words) and words[-1].startswith(str(value))
+    if kind == "same_person_initial":
+        return len(words) >= 2 and words[0][0] == words[-1][0]
+    if kind == "word_count":
+        return len(words) == value
+    raise AssertionError(f"unknown surface rule: {kind}")
+
+
+def board_type_shortcut(
+    groups: dict[str, list[str]], node_types: dict[str, str],
+) -> int | None:
+    """Number of distinct group types when all four groups are homogeneous."""
+    homogeneous = []
+    for group_id in sorted(groups):
+        types = {node_types[node_id] for node_id in groups[group_id]}
+        if len(types) != 1:
+            return None
+        homogeneous.append(next(iter(types)))
+    distinct = len(set(homogeneous))
+    return distinct if distinct >= 3 else None
+
+
+def surface_rule_findings(
+    groups: dict[str, list[str]],
+    labels: dict[str, str],
+    displayed: dict[str, str],
+    node_types: dict[str, str],
+    *,
+    approved: bool,
+) -> list[dict]:
+    """Prove literal-rule crossfits and warn when display checks dominate."""
+    findings = []
+    parsed: dict[str, tuple[str, str | int | None]] = {}
+    for group_id in sorted(groups):
+        rule = parse_surface_rule(labels.get(group_id, ""))
+        if rule is None or not all(
+            matches_surface_rule(rule, displayed[node_id])
+            for node_id in groups[group_id]
+        ):
+            continue
+        parsed[group_id] = rule
+        foreign = sorted(
+            displayed[node_id]
+            for other_group, members in groups.items()
+            if other_group != group_id
+            for node_id in members
+            if matches_surface_rule(rule, displayed[node_id])
+        )
+        if foreign:
+            findings.append({
+                "check": "surface_predicate_crossfit",
+                "level": "WARN" if approved else "FAIL",
+                "detail": (
+                    f'group "{labels.get(group_id, group_id)}" also matches '
+                    f"foreign tile(s): {', '.join(foreign)}"
+                ),
+            })
+    if len(parsed) >= 3 and len(set(node_types.values())) > 1:
+        findings.append({
+            "check": "visible_string_worksheet",
+            "level": "WARN",
+            "detail": (
+                f"{len(parsed)}/4 groups are literal display/name checks "
+                "across multiple node types"
+            ),
+        })
+    return findings
+
+
 def classify_type_mix(types: list[str]) -> str | None:
     """Rubric B2: '3+1' when one type has len-1 members, '2+2' on an even split.
 
@@ -363,7 +652,40 @@ def check_conexiuni(
         })
 
     group_keys = sorted(groups)
+    shortcut_types = board_type_shortcut(groups, node_types)
+    if shortcut_types is not None:
+        findings.append({
+            "check": "board_type_shortcut",
+            "level": (
+                "WARN"
+                if rec.get("status") == "approved" or shortcut_types == 3
+                else "FAIL"
+            ),
+            "detail": (
+                "all four groups are node-type homogeneous and expose "
+                f"{shortcut_types} distinct group types"
+            ),
+        })
+    findings.extend(
+        surface_rule_findings(
+            groups,
+            labels,
+            {node_id: name(node_id) for node_id in node_types},
+            node_types,
+            approved=rec.get("status") == "approved",
+        )
+    )
     for i, ga in enumerate(group_keys):
+        vague_wording = vague_predicate_wording(labels.get(ga, ""))
+        if vague_wording:
+            findings.append({
+                "check": "vague_predicate_wording",
+                "level": "WARN" if rec.get("status") == "approved" else "FAIL",
+                "detail": (
+                    f'group "{labels.get(ga, ga)}" uses catch-all wording '
+                    "instead of one testable shared predicate"
+                ),
+            })
         leaked = [
             name(n)
             for n in groups[ga]
@@ -824,6 +1146,14 @@ def run(pack: dict, svc: WordGameService, strong: dict, regions: dict,
             )
             for g in rec["groups"].values():
                 comparison_quads[frozenset(g)].append(rec["id"])
+    if pending_gate:
+        for rec in load_rejection_tombstones():
+            tombstone_id = f"rejected:{rec['id']}"
+            comparison_boards[tombstone_id] = frozenset(
+                nid for group in rec["groups"].values() for nid in group
+            )
+            for group in rec["groups"].values():
+                comparison_quads[frozenset(group)].append(tombstone_id)
 
     approved_use = Counter()
     for rec in pack['conexiuni']:

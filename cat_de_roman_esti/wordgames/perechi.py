@@ -27,7 +27,7 @@ from ..web.http import (
 )
 from ._progress import excluded_pack_ids, record_finished
 from .categories import is_known
-from .derived_catalog import DerivedBoard, get_derived_catalog
+from .derived_catalog import DerivedBoard, DerivedCatalog, get_derived_catalog
 from .service import SessionCapacityError, SessionStore, daily_seed, get_service
 
 GAME_KEY = "perechi"
@@ -71,6 +71,14 @@ class PerechiSession:
 
 
 store: SessionStore[PerechiSession] = SessionStore()
+
+
+def _catalog_or_503() -> DerivedCatalog:
+    """Turn a fail-closed derived-artifact integrity error into a stable response."""
+    try:
+        return get_derived_catalog()
+    except (OSError, ValueError) as exc:
+        raise http_error(503, "Catalogul Perechi este invalid.") from exc
 
 
 def _atomic_session(method):
@@ -188,7 +196,7 @@ def _pick_non_daily(
     starter: bool,
     previous_game_id: str | None,
 ) -> tuple[DerivedBoard | None, tuple[str, ...]]:
-    catalog = get_derived_catalog()
+    catalog = _catalog_or_503()
     previous_ring = _previous_source_ring(previous_game_id)
     exclusions = set(previous_ring) | excluded_pack_ids(request, GAME_KEY)
     profiles = (True, False) if starter else (False,)
@@ -281,7 +289,9 @@ class CreateGameView(ContractAPIView):
         if daily:
             # A shared daily ignores personal history, starter hints, and account state.
             rng = random.Random(daily_seed(daily, GAME_KEY))
-            board = get_derived_catalog().pick_daily(GAME_KEY, daily, category=category)
+            board = _catalog_or_503().pick_daily(
+                GAME_KEY, daily, category=category
+            )
             previous_ring: tuple[str, ...] = ()
         else:
             rng = random.Random(seed)

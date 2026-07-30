@@ -189,10 +189,13 @@ A verifier with web access confirms A1/A2/C2 by checking ≥2 independent signal
    coverage. Legacy, stale, unverified, partially lost, or hand-combined batches fail
    closed. `apply_rereview.py` rebuilds the exact-batch dossiers, compares their bindings,
    then re-runs strict deterministic critique over the exact `promote` set against the
-   prospective inventory: only verified same-batch `reject` rows are omitted in memory,
-   while `keep`, unrelated pending, and co-promoted rows still participate in freshness
-   checks. No pack copy is written before this passes. Approved-stock sweep proposals
-   remain an owner decision.
+   prospective inventory. Same-batch rejects remain novelty debt during that check and
+   are then recorded in a durable tombstone inventory before removal, so future exact,
+   three-of-four, and half-board reskins stay blocked. `keep`, unrelated pending, and
+   co-promoted rows also participate. Each tombstone binds its canonical group set,
+   rejected record, review dossier, and exact gate artifact by SHA-256; group tampering
+   fails closed. No pack copy is written before this passes.
+   Approved-stock sweep proposals remain an owner decision.
    Verdict archives stay in the session scratchpad (v16 precedent). See ADR-0025.
 
 ## H. Lint reference (`scripts/critique_pack.py`)
@@ -203,8 +206,12 @@ A verifier with web access confirms A1/A2/C2 by checking ≥2 independent signal
 | `red_herring_budget` | conexiuni | WARN ≥2, FAIL ≥4 | contested tiles (foreign pull == own pull > 0) |
 | `mirrored_groups` | conexiuni | FAIL (new) / WARN (stock) | group pair with ≥3 disjoint strong (≥0.6) cross edges |
 | `type_coherence` | conexiuni | WARN | 3+1 type outlier or 2+2 type split in a group |
-| `duplicate_groups` | conexiuni | FAIL (new) / WARN (stock) | exact or three-of-four quad already in full inventory (pending gate) or approved stock (sweep/rank) |
-| `board_reskin` | conexiuni | FAIL (new) / WARN (stock) | board shares at least 8 of 16 concepts with one inventory/selected board (pending gate) or approved board (sweep/rank) |
+| `board_type_shortcut` | conexiuni | FAIL for new four-type boards; otherwise WARN | all four groups are internally type-homogeneous and three or four distinct types expose most or all of the partition |
+| `surface_predicate_crossfit` | conexiuni | FAIL (new) / WARN (stock) | a conservative literal parser proves that a foreign displayed tile also satisfies an intended prefix, suffix, contained-string, punctuation, digit/year, name/initial, one-word, or uppercase-length rule |
+| `visible_string_worksheet` | conexiuni | WARN | at least three groups are provable literal display/name checks across multiple node types |
+| `vague_predicate_wording` | conexiuni | FAIL (new) / WARN (stock) | recurring catch-all labels (`țin de`, `repere ale/din`, `apar în`, `legate/asociate de`, etc.) conceal an association bundle instead of stating one testable property |
+| `duplicate_groups` | conexiuni | FAIL (new) / WARN (stock) | exact or three-of-four quad already in full inventory, selected batch, or durable rejection tombstones (pending gate), or approved stock (sweep/rank) |
+| `board_reskin` | conexiuni | FAIL (new) / WARN (stock) | board shares at least 8 of 16 concepts with one inventory, selected, or rejected-tombstone board (pending gate), or approved board (sweep/rank) |
 | `label_self_leak` | conexiuni | FAIL (new) / WARN (stock) | normalized group label repeats a complete member name or acronym |
 | `salience_floor` | contexto, lant, alchimie | WARN | target/endpoint salience below difficulty band (C6) |
 | `generic_region_link` | conexiuni, contexto | WARN | gameplay leans on a non-distinctive region association (A7): board pairs regions with generically-linked tiles; target is (or is polluted by) a pan-Romanian concept claiming a region |

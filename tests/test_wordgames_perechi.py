@@ -125,6 +125,26 @@ def test_create_shape_privacy_and_default_store_bounds() -> None:
     _assert_private_preterminal(body, session)
 
 
+@pytest.mark.parametrize(
+    "catalog_error",
+    [
+        ValueError("derived catalog: pack_sha256 source drift"),
+        OSError("derived catalog fixture is unreadable"),
+    ],
+)
+@pytest.mark.parametrize("query", ["seed=38", "daily=2026-07-19"])
+def test_create_returns_503_when_derived_catalog_is_unavailable(
+    monkeypatch: pytest.MonkeyPatch, catalog_error: Exception, query: str,
+) -> None:
+    def source_drift():
+        raise catalog_error
+
+    monkeypatch.setattr(P, "get_derived_catalog", source_drift)
+    response = Client().post(f"{BASE}/games?{query}")
+    assert response.status_code == 503
+    assert response.json()["detail"] == "Catalogul Perechi este invalid."
+
+
 def test_dataclass_reprs_hide_answers_tile_order_and_provenance() -> None:
     client = Client()
     body = _create(client, seed=38)

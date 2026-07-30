@@ -1,7 +1,7 @@
 # ADR-0023: Two-layer content critique gate before approval
 
 Date: 2026-07-15
-Status: accepted
+Status: superseded-by ADR-0067
 
 ## Decision
 
