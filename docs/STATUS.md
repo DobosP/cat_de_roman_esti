@@ -2,24 +2,29 @@
 
 _As of 2026-07-30. This file is the repository's current source of truth._
 
-_Last verified: 2026-07-30 (V43: backend 688/688, accounts 53/53, session store
-16/16, frontend 152/152, Ruff, ESLint, typecheck, production build at
-118.03/120 KiB, rankings/derived/pack/KG validators, and `git diff --check` green)._
+_Last verified: 2026-07-30 (V44 backend 700/700, accounts 53/53, session store
+16/16, Ruff, ranking/derived/pack/KG validators, and `git diff --check` green)._
 
-## Current outcome — V43 strict board release (ADR-0067)
+## Current outcome — V44 common-word Contexto repair (ADR-0068)
 
-- The Fable 5 replay audited all 67 original reserve boards and 268 groups, the full
-  approved/pending inventory, every replacement, and both derived-game creation paths.
-  Direct quad reuse is banned; rejected material remains digest-bound novelty debt.
-- The release funnel used exact deterministic, factual, play-quality, and real-ID
-  analyst/verifier gates with no shelf quota. Of 66 original proposals, only
-  `cx_stiinta_356` remains selectable; the strict replacement rebuild shipped no new
-  selected board.
-- Eight more approved boards moved to the reserve sidecar. It now has 75 IDs; 43 rejected
-  boards/172 groups live in durable tombstones. Ten empty Conexiuni shelves stay hidden.
-- Invalid, unreadable, or genuinely overridden derived catalogs make Intrusul/Perechi
-  return controlled Romanian 503 responses. Exact bundled Compose paths remain defaults;
-  healthy catalogs serve normally and the frozen 336-board payload stayed byte-identical.
+- Independent inventory, gameplay, semantic/web, and release-contract reviews accepted
+  only 12 exact aliases, 11 non-winning projections, two C1–C6 target promotions, and
+  reserve cleanup of three exact target duplicates. Ambiguous, disputed, or
+  accent-folding-colliding forms remain rejected.
+- All 71 inbound-only V30–V33 common-word nodes now borrow feedback from 26 reviewed
+  mature anchors in Cald sau Rece only. Exact targets still win, public guess identity
+  stays unchanged, approximation costs at most one rank, and the shared graph is untouched.
+- Guesses, KG/projection typo help, suggestions, played-anchor filtering, and paid warmer
+  clues use one effective scorer. A 71-target API sweep found no clue-rank mismatch,
+  repeated anchor, or hidden proxy disclosure.
+- Contexto projection has 453 terms across 26 domains. The repair also restores meaningful
+  scoring to 43 shipped projection terms that previously inherited unreachable sink nodes.
+- `Capra cu trei iezi` and `Abecedar` are selectable from fresh digest-bound dossiers.
+  `ct_sport_315–317` stay approved for provenance but are reserved; the runtime now has
+  201 selectable Contexto records and 201 unique targets.
+- V43's 75-board general reserve, 43 rejected boards/172 rejected groups, hidden weak
+  shelves, and unanimous future gate remain in force. The frozen 336-board
+  Intrusul/Perechi payload remains unchanged after metadata regeneration.
 - The six-game, tap-first lobby stays in its tested fun-first order: Alchimie → Intrusul →
   Perechi → Conexiuni → Cald sau Rece → Lanț. Mobile remains one card per row; wide screens
   balance the six cards in three columns.
@@ -33,38 +38,31 @@ _Last verified: 2026-07-30 (V43: backend 688/688, accounts 53/53, session store
 - Intrusul and Perechi explain their starter shelf before graduation and reveal clearer loss
   summaries only after terminal server state. Hidden answers and server-authored scores are
   unchanged.
-- A browser tab kept open across a release reloads at most once when an obsolete lazy game
-  chunk is requested. Missing `/assets/` hashes return 404 instead of the SPA HTML; current
-  Intrusul and Perechi sessions, answers, scores, TTL, and caps are unchanged.
 - A category-scoped curated daily now needs four selectable exact-shelf records; the shared
   daily still needs eight. Thin shelves mine inside the requested theme or return themed 503,
   never an off-theme board carrying the requested label.
-- The browser keeps one bounded daily streak outside portable history. A zero-score daily
-  completion counts; import cannot create or overwrite the streak. The 6/6 diploma is derived
-  from the browser score document and only copies a share string.
 
 ## Content and ranking baseline
 
 | Game | Total | Approved | Pending | Runtime eligible/preferred |
 |---|---:|---:|---:|---:|
 | Conexiuni | 311 | 232 | 79 | 74 eligible |
-| Cald sau Rece | 217 | 202 | 15 | 202 eligible |
+| Cald sau Rece | 217 | 204 | 13 | 201 eligible |
 | Lanțul Cuvintelor | 201 | 94 | 107 | 94 eligible |
 | Alchimie | 99 | 78 | 21 | 78 eligible |
 | Intrusul | 183 | 183 | 0 | 144 preferred |
 | Perechi | 153 | 153 | 0 | 113 preferred |
 
-Pack: **828 = 606 approved + 222 pending**, across 14 categories. The ranked original-game
-runtime serves **448 zero-FAIL boards**. The strict derived catalog remains **336** boards
+Pack: **828 = 608 approved + 220 pending**, across 14 categories. The ranked original-game
+runtime serves **447 zero-FAIL boards**. The strict derived catalog remains **336** boards
 from the frozen V38 source snapshot; its `boards` payload hash is
 `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
-Bundled KG: **2,364 nodes / 9,217 edges / 7,440 aliases / 180 puzzles**
-(`fixture-v42-pegas-colind-damigeana`).
+Bundled KG: **2,364 nodes / 9,217 edges / 7,452 aliases / 180 puzzles**
+(`fixture-v44-contexto-common-words`).
 
-ADR-0067 supersedes ADR-0023. The full evidence, exact rejection reasons, source links,
-bindings, and closure census are in `docs/reviews/v43-release-board-rebuild.md` and
-`v43-release-funnel.json`. Ranking scores remain editorial pre-playtest estimates, not
-measured fun or knowledge.
+ADR-0068 supersedes ADR-0042/0045 and the affected part of ADR-0066. The exact vocabulary
+funnel and bound dossiers are in `docs/reviews/v44-contexto-vocabulary.json` and
+`v44-final-gate/`. Ranking scores remain editorial pre-playtest estimates, not measured fun.
 
 ## Runtime, accounts, and deployment
 

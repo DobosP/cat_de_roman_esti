@@ -1,6 +1,6 @@
 # ADR-0066: V42 owner decisions — 18 promotions and 67 reserve demotions
 
-- Status: accepted
+- Status: superseded-by ADR-0068
 - Date: 2026-07-30
 
 ## Context

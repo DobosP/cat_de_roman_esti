@@ -158,9 +158,11 @@ def test_v25_pack_is_byte_stable_and_the_33_review_items_remain_playable():
     }
 
     assert set(records) == set(DATA.REVIEW_ITEM_IDS)
+    later_promotions = {"ct_literatura_298", "ct_viata_de_roman_299"}
     for item_id in DATA.REVIEW_ITEM_IDS:
         game, record = records[item_id]
-        assert record["status"] == "pending"
+        expected_status = "approved" if item_id in later_promotions else "pending"
+        assert record["status"] == expected_status
         assert validate_payload(record, game, svc) == []
 
 

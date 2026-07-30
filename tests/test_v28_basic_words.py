@@ -186,7 +186,7 @@ def test_v28_exact_53_semantic_edges_and_topology():
         assert len(same_category) >= 2
 
 
-def test_v28_keeps_the_entire_game_pack_byte_stable_and_unpromoted():
+def test_v28_keeps_the_entire_game_pack_byte_stable_without_adding_items():
     package_blob = _PACKAGE_PACK.read_bytes()
     pack = json.loads(package_blob)
     statuses = Counter(
@@ -204,7 +204,7 @@ def test_v28_keeps_the_entire_game_pack_byte_stable_and_unpromoted():
         "lant": 201,
         "alchimie": 99,
     }
-    assert statuses == {"approved": 606, "pending": 222}
+    assert statuses == {"approved": 608, "pending": 220}
 
 
 def test_v28_mobile_contract_stays_current_and_contains_the_v28_nodes():

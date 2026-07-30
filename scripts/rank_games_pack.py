@@ -350,18 +350,28 @@ def _service_edge_strength(svc: WordGameService, source: str, target: str) -> fl
 
 
 _DEMOTIONS_PATH = _REPO_ROOT / "cat_de_roman_esti/fixtures/board_demotions_v43.json"
+_CONTEXTO_DEMOTIONS_PATH = (
+    _REPO_ROOT / "cat_de_roman_esti/fixtures/contexto_demotions_v44.json"
+)
+_DEMOTION_PATHS = (_DEMOTIONS_PATH, _CONTEXTO_DEMOTIONS_PATH)
 
 
 def _owner_demotions() -> frozenset[str]:
-    """ADR-0066/0067: owner-demoted boards stay approved but leave selection.
+    """ADR-0066/0067/0068: approved reserve boards stay out of selection.
 
     This preserves the ADR-0055 reserve model and derived-game source invariants.
     """
-    data = json.loads(_DEMOTIONS_PATH.read_text(encoding="utf-8"))
-    ids = frozenset(str(item) for item in data["ids"])
-    if len(ids) != int(data["meta"]["count"]):
-        raise ValueError("board demotions: meta.count does not match ids")
-    return ids
+    combined: set[str] = set()
+    for path in _DEMOTION_PATHS:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        ids = {str(item) for item in data["ids"]}
+        if len(ids) != int(data["meta"]["count"]):
+            raise ValueError(f"{path.name}: meta.count does not match ids")
+        overlap = combined & ids
+        if overlap:
+            raise ValueError(f"{path.name}: duplicate demotion ids: {sorted(overlap)}")
+        combined.update(ids)
+    return frozenset(combined)
 
 
 def _pilot_eligible(

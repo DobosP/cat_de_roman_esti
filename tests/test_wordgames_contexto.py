@@ -759,8 +759,8 @@ def test_projection_is_large_balanced_collision_free_and_legibility_audited() ->
     svc = get_service()
     keys = [term.key for term in PROJECTION_TERMS]
     domains = Counter(term.domain for term in PROJECTION_TERMS)
-    # ADR-0065: mărar/pătrunjel became real KG nodes, their projected surfaces retired.
-    assert len(PROJECTION_TERMS) == 442
+    # ADR-0068: the strict common-word wave adds eleven reviewed projections.
+    assert len(PROJECTION_TERMS) == 453
     assert len(domains) == 26
     assert min(domains.values()) >= 14
     assert len(keys) == len(set(keys))
@@ -951,7 +951,11 @@ def test_projection_typo_suggestions_filter_terms_anchored_on_the_secret() -> No
 def test_projection_feedback_spans_rank_and_temperature_buckets_on_easy_pack() -> None:
     from collections import Counter, defaultdict
 
-    from cat_de_roman_esti.wordgames.contexto import _build_session, rank_for, temperature_for
+    from cat_de_roman_esti.wordgames.contexto import (
+        _build_session,
+        _score_feedback,
+        temperature_for,
+    )
     from cat_de_roman_esti.wordgames.contexto_projection import PROJECTION_TERMS
     from cat_de_roman_esti.wordgames.packs import get_pack
     from cat_de_roman_esti.wordgames.service import get_service
@@ -969,18 +973,21 @@ def test_projection_feedback_spans_rank_and_temperature_buckets_on_easy_pack() -
         for term in PROJECTION_TERMS:
             cache_key = (term.anchor_id, term.rank_penalty)
             if cache_key not in feedback:
-                distance = hop_dist.get(term.anchor_id)
-                weighted = session.weighted_dist.get(term.anchor_id)
-                rank = rank_for(session, distance, weighted)
-                rank = max(2, min(session.reachable + 1, rank + term.rank_penalty))
-                effective_distance = 1 if distance == 0 else distance
+                score = _score_feedback(
+                    svc,
+                    session,
+                    term.anchor_id,
+                    nonwinning=True,
+                    rank_penalty=term.rank_penalty,
+                    distances=hop_dist,
+                )
                 feedback[cache_key] = (
-                    rank,
+                    score.rank,
                     temperature_for(
                         session,
-                        effective_distance,
-                        weighted,
-                        rank_override=rank,
+                        score.feedback_distance,
+                        score.weighted_distance,
+                        rank_override=score.rank,
                     ),
                 )
             rank, temperature = feedback[cache_key]

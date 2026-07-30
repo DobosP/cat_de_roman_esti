@@ -180,8 +180,8 @@ def test_v33_source_inventory_builder_application_counts_and_mirrors():
     authored_alias_count = sum(len(concept.aliases) for concept in DATA.CONCEPTS)
     authored_alias_count += sum(len(aliases) for aliases in built["aliases"].values())
 
-    # ADR-0065: the V42 content wave re-stamped the merged fixture.
-    assert DATA.BUILD_VERSION.startswith("fixture-v42-")
+    # ADR-0068: the V44 alias-only wave re-stamped the merged fixture.
+    assert DATA.BUILD_VERSION == "fixture-v44-contexto-common-words"
     assert len(DATA.CONCEPTS) == len(DATA.NEW_NODE_IDS) == 18
     assert len(set(DATA.NEW_NODE_IDS)) == 18
     assert tuple(map(len, DATA.DOMAIN_NODE_IDS)) == (6, 6, 6)
@@ -199,8 +199,8 @@ def test_v33_source_inventory_builder_application_counts_and_mirrors():
         _EXPECTED_EDGE_COUNT,
     )
     assert len(fixture["kg_puzzles"]) == 180
-    # ADR-0065: the V42 authored wave contributed 40 aliases on its 78 new nodes.
-    assert alias_count == _V32_ALIAS_COUNT + authored_alias_count + 40
+    # ADR-0065 contributed 40 aliases; ADR-0068 adds twelve reviewed synonyms.
+    assert alias_count == _V32_ALIAS_COUNT + authored_alias_count + 52
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert _PACKAGE_PACK.read_bytes() == _TEST_PACK.read_bytes()
 
@@ -395,17 +395,21 @@ def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
         "lant": 201,
         "alchimie": 99,
     }
-    # ADR-0065 content wave totals.
-    assert statuses == {"approved": 606, "pending": 222}
+    # ADR-0068 promotes two bound Contexto targets.
+    assert statuses == {"approved": 608, "pending": 220}
     assert len(DATA.REVIEW_ITEM_IDS) == len(set(DATA.REVIEW_ITEM_IDS)) == 33
-    assert _critique_report(set(DATA.REVIEW_ITEM_IDS)) == (
-        33,
+    pending_review_ids = set(DATA.REVIEW_ITEM_IDS) - {
+        "ct_literatura_298",
+        "ct_viata_de_roman_299",
+    }
+    assert _critique_report(pending_review_ids) == (
+        31,
         2,
         0,
         _EXACT_REVIEW_REPORT_SHA256,
     )
     assert _critique_report(None) == (
-        222,
+        220,
         149,
         81,
         _FULL_PENDING_REPORT_SHA256,

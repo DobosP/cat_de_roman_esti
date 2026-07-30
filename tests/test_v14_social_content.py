@@ -26,7 +26,7 @@ _KG_PATH = _ROOT / "tests" / "fixtures" / "kg_sample.json"
 # these totals, so this older-wave guard is a floor while the approved split stays exact.
 _V23_INVENTORY_FLOOR = {
     "conexiuni": (284, 232, 75),
-    "contexto": (199, 202, 7),
+    "contexto": (199, 204, 5),
     "lant": (193, 94, 99),
     "alchimie": (92, 78, 15),
 }
@@ -87,9 +87,10 @@ def test_v14_pack_inventory_and_review_split():
     # 2026-07-15: 592 − 20 critique-gate demotions (ADR-0023/0024) = 572 approved.
     # 2026-07-29: + 13 ADR-0065 gate promotions among these games' totals = 585 approved.
     assert sum(expected[0] for expected in _V23_INVENTORY_FLOOR.values()) == 768
-    # 2026-07-30 (ADR-0066/0067): + 18 owner and + 3 strict-gate promotions.
-    assert sum(expected[1] for expected in _V23_INVENTORY_FLOOR.values()) == 606
-    assert sum(expected[2] for expected in _V23_INVENTORY_FLOOR.values()) == 196
+    # 2026-07-30 (ADR-0066/0067/0068): + 18 owner, + 3 strict-gate, then + 2
+    # bound Contexto promotions.
+    assert sum(expected[1] for expected in _V23_INVENTORY_FLOOR.values()) == 608
+    assert sum(expected[2] for expected in _V23_INVENTORY_FLOOR.values()) == 194
 
 
 def test_v14_adds_contemporary_civic_education_science_and_digital_play():

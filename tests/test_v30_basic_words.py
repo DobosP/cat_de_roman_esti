@@ -207,7 +207,7 @@ def test_v30_preserves_prior_coverage_and_resolves_its_extension():
     } == set(DATA.NEW_NODE_IDS)
 
 
-def test_v30_keeps_the_entire_game_pack_byte_stable_and_unpromoted():
+def test_v30_keeps_the_entire_game_pack_byte_stable_without_adding_items():
     package_blob = _PACKAGE_PACK.read_bytes()
     pack = json.loads(package_blob)
     statuses = Counter(
@@ -225,7 +225,7 @@ def test_v30_keeps_the_entire_game_pack_byte_stable_and_unpromoted():
         "lant": 201,
         "alchimie": 99,
     }
-    assert statuses == {"approved": 606, "pending": 222}
+    assert statuses == {"approved": 608, "pending": 220}
 
 
 def test_v30_mobile_contract_is_exact_current_and_public():

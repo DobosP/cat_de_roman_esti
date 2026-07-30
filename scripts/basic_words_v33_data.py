@@ -19,13 +19,13 @@ from basic_words_v32_data import (
     REVIEW_ITEM_IDS,
 )
 
-BUILD_VERSION = "fixture-v42-pegas-colind-damigeana"
+BUILD_VERSION = "fixture-v44-contexto-common-words"
 NOTE = (
     "v33: eighteen concrete beginner concepts across bathroom fixtures, home "
     "electrical equipment, and forest animals, with conservative inflections and "
     "explicit semantic links; no game boards or promotions."
 )
-BASELINE_PACK_SHA256 = "70fa40b6bc9e6f9245a4cfbeee72b60595b5b705d8f84589adf718458363a9df"
+BASELINE_PACK_SHA256 = "742478415995b67379ba6fe58f939132abbff141aef7af392eff05b70e7845b6"
 GAME_ITEM_IDS: tuple[str, ...] = ()
 V33_BEGINNER_EXTENSION: tuple[str, ...] = (
     "Chiuvetă",

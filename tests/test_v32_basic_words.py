@@ -282,7 +282,7 @@ def test_v32_preserves_prior_coverage_and_resolves_its_extension():
     assert {svc.resolve(term) for term in DATA.V32_BEGINNER_EXTENSION} == set(DATA.NEW_NODE_IDS)
 
 
-def test_v32_keeps_the_entire_game_pack_byte_stable_and_unpromoted():
+def test_v32_keeps_the_entire_game_pack_byte_stable_without_adding_items():
     package_blob = _PACKAGE_PACK.read_bytes()
     pack = json.loads(package_blob)
     statuses = Counter(
@@ -300,7 +300,7 @@ def test_v32_keeps_the_entire_game_pack_byte_stable_and_unpromoted():
         "lant": 201,
         "alchimie": 99,
     }
-    assert statuses == {"approved": 606, "pending": 222}
+    assert statuses == {"approved": 608, "pending": 220}
 
 
 def test_v32_mobile_contract_stays_current_and_keeps_v32_public():

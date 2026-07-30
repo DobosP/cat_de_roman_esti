@@ -1,7 +1,7 @@
 # ADR-0042: Bound broad Contexto guesses and progressive clues outside the shared graph
 
 Date: 2026-07-18
-Status: accepted
+Status: superseded-by ADR-0068
 
 ## Decision
 

@@ -39,6 +39,7 @@ from ..web.http import (
 from ._progress import excluded_pack_ids, record_finished
 from .categories import CATEGORY_LABELS as _SHARED_CATEGORY_LABELS
 from .categories import category_label, is_known
+from .contexto_feedback import feedback_proxy_id
 from .contexto_projection import (
     ProjectionTerm,
     resolve_projection,
@@ -158,6 +159,17 @@ class ContextoSession:
             cumulative += count_at
 
 
+@dataclass(frozen=True, slots=True)
+class _FeedbackScore:
+    """Private effective scoring result shared by guesses and warmer clues."""
+
+    anchor_id: str
+    distance: int | None
+    weighted_distance: float | None
+    rank: int
+    feedback_distance: int | None
+
+
 store: SessionStore[ContextoSession] = SessionStore()
 
 
@@ -175,6 +187,23 @@ def _atomic_session(method):
 
 
 # --------------------------------------------------------------------------- scoring
+def _feedback_anchor_id(svc, node_id: str, target_id: str) -> str:
+    """Return a reviewed Contexto-only proxy without stealing an exact win.
+
+    V30--V33 everyday nodes are deliberately inbound-only in the shared graph.  Their
+    public identity remains the submitted node, while Cald sau Rece borrows a mature
+    semantic anchor for feedback.  Custom fixtures that do not carry the reviewed anchor
+    retain their original behavior.
+    """
+
+    if node_id == target_id:
+        return node_id
+    proxy_id = feedback_proxy_id(node_id)
+    if proxy_id != node_id and svc.exists(proxy_id):
+        return proxy_id
+    return node_id
+
+
 def rank_for(
     session: ContextoSession,
     distance: int | None,
@@ -198,6 +227,47 @@ def rank_for(
         return base + 1
     bucket = session.sorted_weighted.get(distance, ())
     return base + bisect_left(bucket, weighted_distance) + 1
+
+
+def _score_feedback(
+    svc,
+    session: ContextoSession,
+    submitted_id: str,
+    *,
+    nonwinning: bool = False,
+    rank_penalty: int = 0,
+    distances: dict[str, int] | None = None,
+) -> _FeedbackScore:
+    """Apply the one authoritative Contexto feedback transformation.
+
+    ``distances`` lets clue selection reuse its reverse-BFS map; live guesses use the
+    service's point distance. Projection-only guesses set ``nonwinning`` even when their
+    authored penalty is zero. A scorer proxy contributes at most one total approximation
+    rank and exact submitted targets bypass proxying in :func:`_feedback_anchor_id`.
+    """
+
+    anchor_id = _feedback_anchor_id(svc, submitted_id, session.target)
+    proxied = anchor_id != submitted_id
+    distance = (
+        distances.get(anchor_id)
+        if distances is not None
+        else svc.distance(anchor_id, session.target)
+    )
+    weighted = session.weighted_dist.get(anchor_id)
+    rank = rank_for(session, distance, weighted)
+    feedback_distance = distance
+    if nonwinning or proxied:
+        penalty = max(rank_penalty, 1 if proxied else 0)
+        rank = max(2, min(session.reachable + 1, rank + penalty))
+        if feedback_distance == 0:
+            feedback_distance = 1
+    return _FeedbackScore(
+        anchor_id=anchor_id,
+        distance=distance,
+        weighted_distance=weighted,
+        rank=rank,
+        feedback_distance=feedback_distance,
+    )
 
 
 def closeness_for(
@@ -596,15 +666,22 @@ def _warmer_clue_candidate(session: ContextoSession) -> WarmClue | None:
     played_anchors = {guess.anchor_id for guess in session.guesses.values()}
     hop_dist = svc.distances_to(session.target)
     candidates: list[tuple[int, float, str, str]] = []
-    for node_id, distance in hop_dist.items():
-        if node_id == session.target or node_id in played_anchors:
+    for node_id in hop_dist:
+        if node_id == session.target:
             continue
-        rank = rank_for(session, distance, session.weighted_dist.get(node_id))
-        if not 1 < rank < best_rank:
+        score = _score_feedback(svc, session, node_id, distances=hop_dist)
+        if score.anchor_id in played_anchors:
+            continue
+        if not 1 < score.rank < best_rank:
             continue
         node = svc.node(node_id)
         candidates.append(
-            (rank, node.salience if node is not None else 0.0, svc.label(node_id), node_id)
+            (
+                score.rank,
+                node.salience if node is not None else 0.0,
+                svc.label(node_id),
+                node_id,
+            )
         )
     candidates.sort(key=lambda item: (item[0], -item[1], item[2].casefold(), item[3]))
 
@@ -773,6 +850,14 @@ class GuessView(ContractAPIView):
             # A corrected typo of the target still wins outright (a typo'd answer is still
             # the answer) — asking would spell the secret out loud before it is earned.
             fuzzy = svc.resolve_fuzzy(text)
+            if (
+                fuzzy is not None
+                and fuzzy != session.target
+                and _feedback_anchor_id(svc, fuzzy, session.target) == session.target
+            ):
+                # Do not disclose or silently play a non-target word whose reviewed
+                # scorer proxy is the secret. An actual target typo remains a valid win.
+                fuzzy = None
             if fuzzy is not None and fuzzy != session.target:
                 token = _confirmation_token(game_id, fuzzy)
                 if body.confirm != token:
@@ -797,11 +882,22 @@ class GuessView(ContractAPIView):
         if node_id is None and projection is None:
             # Unknown concept: do NOT count it as an attempt. Offer fuzzy "did you mean"
             # hints, but NEVER one that resolves to the hidden target (ADR-0009/0021).
-            kg_suggestions = [
-                label for label in svc.suggest(text) if svc.resolve(label) != session.target
-            ]
+            kg_suggestions: list[str] = []
+            for label in svc.suggest(text):
+                suggestion_id = svc.resolve(label)
+                if suggestion_id is None:
+                    continue
+                if (
+                    _feedback_anchor_id(svc, suggestion_id, session.target)
+                    == session.target
+                ):
+                    continue
+                kg_suggestions.append(label)
             projected_suggestions = [
-                term.label for term in suggest_projection(text) if term.anchor_id != session.target
+                term.label
+                for term in suggest_projection(text)
+                if _feedback_anchor_id(svc, term.anchor_id, session.target)
+                != session.target
             ]
             suggestions: list[str] = []
             seen_suggestions: set[str] = set()
@@ -829,36 +925,35 @@ class GuessView(ContractAPIView):
                 }
             )
 
-        anchor_id = projection.anchor_id if projection is not None else node_id
-        if anchor_id is None:  # narrowed above; keeps type checkers honest.
+        submitted_id = projection.anchor_id if projection is not None else node_id
+        if submitted_id is None:  # narrowed above; keeps type checkers honest.
             raise RuntimeError("accepted Contexto guess has no scoring anchor")
-        distance = svc.distance(anchor_id, session.target)
-        weighted = session.weighted_dist.get(anchor_id)
-        rank = rank_for(session, distance, weighted)
-        feedback_distance = distance
-        if projection is not None:
-            # Guess-only terms can approach the target but cannot solve it. Even a
-            # zero-penalty term mapped to the target anchor stays a non-win at rank >= 2.
-            rank = max(2, min(session.reachable + 1, rank + projection.rank_penalty))
-            if feedback_distance == 0:
-                feedback_distance = 1
+        score = _score_feedback(
+            svc,
+            session,
+            submitted_id,
+            nonwinning=projection is not None,
+            rank_penalty=projection.rank_penalty if projection is not None else 0,
+        )
         temperature = temperature_for(
             session,
-            feedback_distance,
-            weighted,
-            rank_override=rank,
+            score.feedback_distance,
+            score.weighted_distance,
+            rank_override=score.rank,
         )
         closeness = closeness_for(
             session,
-            feedback_distance,
-            weighted,
-            rank_override=rank,
+            score.feedback_distance,
+            score.weighted_distance,
+            rank_override=score.rank,
         )
         # distance is None when the guess is in a disconnected part of the graph — we still
         # store it (as the coldest possible) so a repeated guess shows the same verdict.
-        stored_distance = feedback_distance if feedback_distance is not None else 999
-        guess_id = projection.public_id if projection is not None else anchor_id
-        guess_label = projection.label if projection is not None else svc.label(anchor_id)
+        stored_distance = (
+            score.feedback_distance if score.feedback_distance is not None else 999
+        )
+        guess_id = projection.public_id if projection is not None else submitted_id
+        guess_label = projection.label if projection is not None else svc.label(submitted_id)
 
         existing = session.guesses.get(guess_id)
         is_new = existing is None
@@ -869,11 +964,11 @@ class GuessView(ContractAPIView):
             distance=stored_distance,
             temperature=temperature,
             closeness=closeness,
-            rank=rank,
-            anchor_id=anchor_id,
+            rank=score.rank,
+            anchor_id=score.anchor_id,
             attempt_number=attempt_number,
         )
-        found = projection is None and distance == 0
+        found = projection is None and submitted_id == session.target
         feedback = _guess_feedback_payload(
             session,
             record,

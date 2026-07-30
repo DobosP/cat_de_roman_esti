@@ -46,7 +46,7 @@ _NODE_IDS = {
 _EDGE_IDS = {f"de{number}" for number in range(7514, 7592)}
 
 
-def test_v23_items_remain_pending_until_the_bound_judge_gate():
+def test_v23_items_reflect_the_later_bound_contexto_gate():
     records = {
         item["id"]: item
         for game in ("conexiuni", "contexto", "lant", "alchimie")
@@ -55,7 +55,13 @@ def test_v23_items_remain_pending_until_the_bound_judge_gate():
     }
 
     assert set(records) == _ITEM_IDS
-    assert {item["status"] for item in records.values()} == {"pending"}
+    promoted = {"ct_literatura_298", "ct_viata_de_roman_299"}
+    assert {
+        item_id for item_id, item in records.items() if item["status"] == "approved"
+    } == promoted
+    assert {
+        item_id for item_id, item in records.items() if item["status"] == "pending"
+    } == _ITEM_IDS - promoted
     assert records["lt_literatura_210"]["optimal"] == 2
     assert records["lt_viata_de_roman_211"]["optimal"] == 2
     assert records["al_literatura_097"]["target_depth"] == 2

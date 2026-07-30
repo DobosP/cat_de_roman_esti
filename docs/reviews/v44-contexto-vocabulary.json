@@ -1,0 +1,97 @@
+{
+  "version": "V44",
+  "policy": "Only independently unanimous, collision-free exact synonyms may enter the winning KG resolver. Related words remain non-winning Contexto projections. Holds and rejections are preferred to semantic ambiguity.",
+  "baseline": {
+    "projection_terms": 442,
+    "projection_domains": 26,
+    "kg_aliases": 7440,
+    "contexto_rows_approved": 202,
+    "contexto_unique_approved_targets": 199,
+    "unreachable_v30_v33_nodes": 71,
+    "unreachable_projection_terms": 43
+  },
+  "feedback_repair": {
+    "mapped_nodes": 71,
+    "mature_anchors": 26,
+    "authored_path_support": {
+      "direct": 57,
+      "two_hops": 13,
+      "three_hops": 1
+    },
+    "shared_graph_topology_changed": false,
+    "existing_projection_retarget": {
+      "surface": "sac de gunoi",
+      "from": "n_v31_cleaning_supply_detergent",
+      "to": "n_v4soc_casa",
+      "reason": "Detergent would proxy to A spăla; Casă is the honest mature context."
+    }
+  },
+  "accepted_aliases": {
+    "cameră de dormit": "n_v24_home_rooms_dormitor",
+    "automobil": "n_v24_transport_personal_masina",
+    "autoturism": "n_v24_transport_personal_masina",
+    "amic": "n_v24_people_relationships_prieten",
+    "nevastă": "n_v24_people_relationships_sotie",
+    "teamă": "n_v24_feeling_difficult_frica",
+    "gumă de șters": "n_v24_school_supplies_radiera",
+    "week-end": "n_v29_time_weekly_weekend",
+    "a zice": "n_v24_action_language_a_spune",
+    "arbore": "n_v4sti_copac",
+    "dragoste": "n_v28_feeling_positive_iubire",
+    "omăt": "n_v24_weather_precipitation_zapada"
+  },
+  "rejected_aliases": {
+    "sofa": "Accent folding also accepts the distinct verb șofa.",
+    "mâță": "Accent folding also accepts the distinct common form mata.",
+    "mânie": "Accent folding also accepts the distinct word manie.",
+    "cameră de zi": "Not definitionally identical to sufragerie across Romanian usage.",
+    "living": "Not definitionally identical to sufragerie and would need shared projection identity.",
+    "a sosi": "Narrower arrival sense; retained only as a non-winning projection.",
+    "a munci": "Overlaps but is not interchangeable with every sense of a lucra.",
+    "slujbă": "Job/religious-service polysemy.",
+    "spaimă": "Intensity differs from the broad target Frică."
+  },
+  "accepted_projections": {
+    "bluză": "n_v29_clothing_everyday_haina",
+    "blugi": "n_v30_clothing_everyday_pantaloni",
+    "jachetă": "n_v30_clothing_outer_geaca",
+    "vestă": "n_v29_clothing_everyday_haina",
+    "chiflă": "n_v4gas_paine",
+    "piure de cartofi": "n_v2lim_cartof",
+    "plapumă": "n_v24_home_textiles_patura",
+    "garaj": "n_v24_transport_personal_masina",
+    "claxon": "n_v24_transport_personal_masina",
+    "oglindă retrovizoare": "n_v24_transport_personal_masina",
+    "a sosi": "n_v24_action_movement_a_veni"
+  },
+  "rejected_projections": {
+    "șort": "Accent folding collides with the distinct common word șorț.",
+    "croissant": "Would create a second attempt for existing croasant and its Pâine anchor was disputed.",
+    "living": "Deferred until alternate projection spellings can share one attempt identity.",
+    "cameră de zi": "Reviewers did not agree on one honest scoring anchor.",
+    "pilotă": "Bedding/pilot polysemy after accent folding."
+  },
+  "targets": {
+    "promote": [
+      "ct_literatura_298",
+      "ct_viata_de_roman_299"
+    ],
+    "reserve_demote": [
+      "ct_sport_315",
+      "ct_sport_316",
+      "ct_sport_317"
+    ],
+    "result": "201 selectable rows with 201 unique targets"
+  },
+  "lexical_sources": [
+    "https://dexonline.ro/definitie/automobil",
+    "https://dexonline.ro/definitie/autoturism/832082",
+    "https://dexonline.ro/definitie/amic",
+    "https://dexonline.ro/definitie/team%C4%83",
+    "https://dexonline.ro/definitie/radier%C4%83",
+    "https://dexonline.ro/definitie/zice",
+    "https://dexonline.ro/definitie/arbore",
+    "https://dexonline.ro/definitie/dragoste",
+    "https://dexonline.ro/definitie/om%C4%83t"
+  ]
+}

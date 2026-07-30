@@ -1,0 +1,75 @@
+{
+  "game": "contexto",
+  "mode": "gate",
+  "batch": {
+    "version": 2,
+    "mode": "gate",
+    "input_ids": [
+      "ct_literatura_298",
+      "ct_viata_de_roman_299"
+    ]
+  },
+  "verdicts": {
+    "ct_literatura_298": "promote",
+    "ct_viata_de_roman_299": "promote"
+  },
+  "perItem": [
+    {
+      "id": "ct_literatura_298",
+      "game": "contexto",
+      "proposed": "promote",
+      "analyst": "promote",
+      "verifier": "promote",
+      "final": "promote",
+      "verified": true,
+      "verifier_lost": false,
+      "review_binding": "sha256:767b25a6389a0e8b7932cbca3bd26e9c4863cb246aa9dbd53e818ec8aa0b7fbd",
+      "policy": "unanimous-promote",
+      "failure_modes": [],
+      "reasoning": "C1-C6 pass: a uniquely named, cross-generational Ion Creangă work with salience 0.92, 2,288 reachable concepts, 1,977 responsive concepts, six recognizable direct neighbors, and obvious one-hop openers.",
+      "web_checks": [
+        "ISJ Vaslui educational material includes Capra cu trei iezi in the Ion Creangă school-culture corpus.",
+        "Radio România Cultural carries the work in its children's radio-theatre repertoire."
+      ],
+      "evidence": "Independent inventory and adversarial semantic/web reviews agree that the easy target is concrete, universally recognizable, unambiguous, and densely connected."
+    },
+    {
+      "id": "ct_viata_de_roman_299",
+      "game": "contexto",
+      "proposed": "promote",
+      "analyst": "promote",
+      "verifier": "promote",
+      "final": "promote",
+      "verified": true,
+      "verifier_lost": false,
+      "review_binding": "sha256:58c6f70e73c6c6c445eecc34d71e4d5a983d9a1ac4f3eed574af7b31aff05003",
+      "policy": "unanimous-promote",
+      "failure_modes": [],
+      "reasoning": "C1-C6 pass: a concrete first-reading manual with salience 0.86, 2,288 reachable concepts, 1,984 responsive concepts, exactly five recognizable strong neighbors, and Carte/Școală as one-hop openers.",
+      "web_checks": [
+        "Romanian educational documentation treats the abecedar as a class-I literacy manual.",
+        "A current school-equipment norm lists the abecedar in the primary reading inventory."
+      ],
+      "evidence": "Independent inventory and adversarial semantic/web reviews agree that the easy target is concrete, cross-generational, dominant-sense, and legibly connected."
+    }
+  ],
+  "coverage": {
+    "total": 2,
+    "verified": 2,
+    "unverifiedClean": 0,
+    "verifiersLost": 0,
+    "lost": 0
+  },
+  "evidence": {
+    "reviewers": [
+      "independent inventory/gameplay analyst",
+      "independent adversarial Romanian semantic and web verifier"
+    ],
+    "sources": [
+      "https://isj.vs.edu.ro/download/Concursul-Ion-Creanga-cel-mai-iubit-martisor-al-romanilor.pdf",
+      "https://www.radioromaniacultural.ro/sectiuni-articole/teatru-si-film/audio-teatru-radiofonic-pentru-copii-fata-babei-si-fata-mosului-si-capra-cu-trei-iezi-de-ion-creanga-2-id23030.html",
+      "https://www.isj.sv.edu.ro/images/Docs/Discipline/invatamnat_preprimar/2017/biblioteca/Perspective_asupra_dimensiunii_de_gen_in_educatie.pdf",
+      "https://isj.vs.edu.ro/download/Normativul-de-dotare-minimal%C4%83-pentru-%C3%AEnv%C4%83%C8%9B%C4%83m%C3%A2ntul.pdf"
+    ]
+  }
+}

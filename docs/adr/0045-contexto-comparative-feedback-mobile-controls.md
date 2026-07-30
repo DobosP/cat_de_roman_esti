@@ -1,7 +1,7 @@
 # ADR-0045: Keep Contexto comparison and recovery controls bounded
 
 Date: 2026-07-19
-Status: accepted
+Status: superseded-by ADR-0068
 
 ## Decision
 

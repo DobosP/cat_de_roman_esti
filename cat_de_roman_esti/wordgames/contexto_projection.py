@@ -128,8 +128,10 @@ _GROUPS: tuple[tuple[str, int, tuple[str, ...]], ...] = (
             "budincă",
             "brioșă",
             "chec",
+            "chiflă",
             "covrig",
             "croasant",
+            "piure de cartofi",
             "salată de fructe",
             "cartofi prăjiți",
         ),
@@ -202,6 +204,7 @@ _GROUPS: tuple[tuple[str, int, tuple[str, ...]], ...] = (
             "scară interioară",
             "hol",
             "debara",
+            "plapumă",
         ),
     ),
     (
@@ -298,6 +301,16 @@ _GROUPS: tuple[tuple[str, int, tuple[str, ...]], ...] = (
             "bocanc",
             "adidaș",
             "lenjerie",
+        ),
+    ),
+    (
+        "îmbrăcăminte",
+        1,
+        (
+            "bluză",
+            "blugi",
+            "jachetă",
+            "vestă",
         ),
     ),
     (
@@ -500,6 +513,9 @@ _GROUPS: tuple[tuple[str, int, tuple[str, ...]], ...] = (
             "peron",
             "călător",
             "șofer",
+            "garaj",
+            "claxon",
+            "oglindă retrovizoare",
         ),
     ),
     (
@@ -761,6 +777,7 @@ _GROUPS: tuple[tuple[str, int, tuple[str, ...]], ...] = (
             "a se plimba",
             "a se deplasa",
             "a pedala",
+            "a sosi",
         ),
     ),
     (
@@ -896,7 +913,8 @@ _EXISTING_KG_SURFACES = frozenset(
 # intentionally authored by meaning rather than distributed by position: "espresso"
 # borrows Cafea, never whichever anchor happens to be fourth in a list.
 _ANCHOR_CLUSTERS: tuple[tuple[str, tuple[str, ...]], ...] = (
-    ("n_v4gas_paine", ("brioșă", "chec", "covrig", "croasant")),
+    ("n_v4gas_paine", ("brioșă", "chec", "chiflă", "covrig", "croasant")),
+    ("n_v2lim_cartof", ("piure de cartofi",)),
     ("n_v24_food_pantry_faina", ("tăiței", "cereale", "ramen", "lasagna")),
     (
         "n_v4gas_legume",
@@ -909,6 +927,7 @@ _ANCHOR_CLUSTERS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("n_v4soc_apartament", ("interfon", "hol", "debara", "scară interioară")),
     ("n_v24_home_storage_dulap", ("cuier", "bibliotecă de perete")),
     ("n_v24_home_bed_pat", ("noptieră", "veioză")),
+    ("n_v24_home_textiles_patura", ("plapumă",)),
     ("n_v29_kitchen_table_cutit", ("tocător de bucătărie", "tirbușon", "desfăcător de sticle")),
     (
         "n_v30_kitchen_utensil_lingura",
@@ -922,13 +941,21 @@ _ANCHOR_CLUSTERS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("n_v31_cleaning_floor_aspirator", ("mătură", "pămătuf")),
     ("n_v31_cleaning_floor_mop", ("cârpă de praf", "lavetă", "perie de curățat")),
     ("n_v31_cleaning_water_galeata", ("soluție de geamuri", "înălbitor", "dezinfectant")),
-    ("n_v31_cleaning_supply_detergent", ("sac de gunoi",)),
-    ("n_v4soc_casa", ("uscător de rufe", "mașină de spălat")),
+    ("n_v4soc_casa", ("sac de gunoi", "uscător de rufe", "mașină de spălat")),
     ("n_v4gas_bucatarie", ("mașină de spălat vase",)),
     (
         "n_v29_clothing_everyday_haina",
-        ("fier de călcat", "masă de călcat", "clește de rufe", "coș de rufe"),
+        (
+            "fier de călcat",
+            "masă de călcat",
+            "clește de rufe",
+            "coș de rufe",
+            "bluză",
+            "vestă",
+        ),
     ),
+    ("n_v30_clothing_everyday_pantaloni", ("blugi",)),
+    ("n_v30_clothing_outer_geaca", ("jachetă",)),
     ("n_v30_clothing_footwear_pantof", ("papuc", "sandală", "cizmă", "bocanc", "adidaș")),
     ("n_v30_clothing_outer_geaca", ("pulover", "hanorac", "sacou", "mănușă", "căciulă")),
     ("n_v30_clothing_everyday_pantaloni", ("curea", "pijama", "lenjerie")),
@@ -977,6 +1004,10 @@ _ANCHOR_CLUSTERS: tuple[tuple[str, tuple[str, ...]], ...] = (
     (
         "n_v24_transport_terminals_statie",
         ("bilet de autobuz", "abonament de transport", "peron", "călător"),
+    ),
+    (
+        "n_v24_transport_personal_masina",
+        ("garaj", "claxon", "oglindă retrovizoare"),
     ),
     ("n_v29_city_street_trotuar", ("parcare",)),
     (
@@ -1034,6 +1065,7 @@ _ANCHOR_CLUSTERS: tuple[tuple[str, tuple[str, ...]], ...] = (
         ("roman polițist", "puzzle", "bandă desenată", "carte de colorat", "audiocarte"),
     ),
     ("n_v4art_muzica", ("karaoke", "concert acustic", "dans de societate")),
+    ("n_v24_action_movement_a_veni", ("a sosi",)),
     ("n_v24_action_home_a_spala", ("a curăța", "a mătura", "a aspira", "a șterge")),
     ("n_v32_workshop_hand_ciocan", ("a repara", "a construi")),
     ("n_v29_kitchen_table_cutit", ("a tăia",)),
