@@ -125,6 +125,54 @@ def test_runtime_source_overrides_fail_closed(
         load_derived_catalog()
 
 
+@pytest.mark.parametrize(
+    ("name", "default"),
+    [
+        ("CAT_GAMES_PACK", derived_catalog.DEFAULT_PACK),
+        ("CAT_KG_FIXTURE", derived_catalog.DEFAULT_FIXTURE),
+        ("CAT_BOARD_RANKINGS", derived_catalog.DEFAULT_RANKINGS),
+    ],
+)
+@pytest.mark.parametrize("relative", [False, True])
+def test_exact_bundled_source_env_is_not_a_runtime_override(
+    name: str,
+    default: Path,
+    relative: bool,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    value = default
+    if relative:
+        repo_root = Path(__file__).resolve().parent.parent
+        monkeypatch.chdir(repo_root)
+        value = default.relative_to(repo_root)
+    monkeypatch.setenv(name, str(value))
+    assert load_derived_catalog().counts() == {
+        "intrusul": 183,
+        "perechi": 153,
+    }
+
+
+@pytest.mark.parametrize(
+    ("name", "default"),
+    [
+        ("CAT_GAMES_PACK", derived_catalog.DEFAULT_PACK),
+        ("CAT_KG_FIXTURE", derived_catalog.DEFAULT_FIXTURE),
+        ("CAT_BOARD_RANKINGS", derived_catalog.DEFAULT_RANKINGS),
+    ],
+)
+def test_identical_source_at_a_different_path_is_still_an_override(
+    name: str,
+    default: Path,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    copied = tmp_path / default.name
+    copied.write_bytes(default.read_bytes())
+    monkeypatch.setenv(name, str(copied))
+    with pytest.raises(ValueError, match="runtime source override"):
+        load_derived_catalog()
+
+
 def test_installed_package_without_docs_uses_pinned_rubric(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

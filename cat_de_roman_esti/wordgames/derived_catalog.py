@@ -372,6 +372,14 @@ def _required_sha256(value: object, name: str) -> str:
     return value.lower()
 
 
+def _is_bundled_source_path(value: str, default: Path) -> bool:
+    """Return true only when an environment path resolves to the bundled source."""
+    try:
+        return Path(value).resolve() == default.resolve()
+    except (OSError, RuntimeError):
+        return False
+
+
 def _validate_payload(row: dict, source: dict) -> None:
     payload = row.get("payload")
     if not isinstance(payload, dict):
@@ -435,8 +443,17 @@ def load_derived_catalog(
 ) -> DerivedCatalog:
     """Load the exact bundled V38 artifact; any source or schema drift fails closed."""
 
-    overrides = ("CAT_GAMES_PACK", "CAT_KG_FIXTURE", "CAT_BOARD_RANKINGS")
-    active_overrides = [name for name in overrides if os.environ.get(name)]
+    source_defaults = {
+        "CAT_GAMES_PACK": DEFAULT_PACK,
+        "CAT_KG_FIXTURE": DEFAULT_FIXTURE,
+        "CAT_BOARD_RANKINGS": DEFAULT_RANKINGS,
+    }
+    active_overrides = [
+        name
+        for name, default in source_defaults.items()
+        if os.environ.get(name)
+        and not _is_bundled_source_path(os.environ[name], default)
+    ]
     if active_overrides:
         raise ValueError(
             "derived catalog: runtime source override requires a matching V38 catalog "
