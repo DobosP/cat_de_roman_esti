@@ -1,0 +1,79 @@
+{
+  "category": "geografie",
+  "candidate_sha256": "sha256:5a5df7e90d842d4e45256701de7bc7d640ccf09da82c5747b835450475ae6be0",
+  "instances": [
+    {
+      "ref": "conexiuni[0]",
+      "author_ref": "geografie_normal_01",
+      "scores": {
+        "recognition": 90,
+        "fairness": 93,
+        "fun": 80
+      },
+      "verdict": "keep",
+      "note": "Anchor de relief, tributari suficient de challenging și două grupe lexicale/urbane curate. Tipurile și relațiile sunt uniforme, fără mirrors."
+    },
+    {
+      "ref": "conexiuni[1]",
+      "author_ref": "geografie_normal_02",
+      "scores": {
+        "recognition": 86,
+        "fairness": 94,
+        "fun": 87
+      },
+      "verdict": "keep",
+      "note": "Bucegi și stațiunile oferă specific românesc; porturile și formele coastale sunt anchors. Recunoașterea și dificultatea sunt potrivite pentru Normal."
+    },
+    {
+      "ref": "conexiuni[2]",
+      "author_ref": "geografie_normal_03",
+      "scores": {
+        "recognition": 81,
+        "fairness": 92,
+        "fun": 79
+      },
+      "verdict": "keep",
+      "note": "Board de geografie școlară solid: vest, Meridionali, lacuri și regiuni. Nu are trick verbal, dar relațiile sunt exacte, recunoscute și satisfăcătoare pentru publicul care alege categoria."
+    },
+    {
+      "ref": "conexiuni[3]",
+      "author_ref": "geografie_normal_04",
+      "scores": {
+        "recognition": 83,
+        "fairness": 90,
+        "fun": 82
+      },
+      "verdict": "keep",
+      "note": "Reperele dunărene și ariile protejate dau identitate, reședințele sunt anchor, iar munții închid curat. Niciun tile nu are o plasare străină egală."
+    },
+    {
+      "ref": "conexiuni[4]",
+      "author_ref": "geografie_normal_05",
+      "scores": {
+        "recognition": 86,
+        "fairness": 56,
+        "fun": 43
+      },
+      "verdict": "drop",
+      "note": "«Forme și surse naturale» este o pungă de concepte, iar «lucrări care traversează relieful» include Porțile de Fier, în primul rând defileu natural, plus un canal și două șosele. Relația 2+1+1 este prea elastică pentru release."
+    },
+    {
+      "ref": "conexiuni[5]",
+      "author_ref": "geografie_normal_06",
+      "scores": {
+        "recognition": 84,
+        "fairness": 0,
+        "fun": 0
+      },
+      "verdict": "drop",
+      "note": "Therme este în Balotești, Ilfov, nu București; Peștera Urșilor în Bihor face și «Transilvania» contestabilă. Două predicate geografice riscante, primul clar fals."
+    }
+  ],
+  "coverage_note": "Blind release-grade B1–B9 review of all 6 instances: predicate honesty, recognition, difficulty, ambiguity, unique partition, generic containers, mirrors/reskins and fun were assessed. Full-inventory deterministic census found zero FAILs; its sole WARN was two contested tiles on gastronomie_normal_04, below the four-mistake budget.",
+  "deterministic_gate": {
+    "selected_instances": 36,
+    "fail_count": 0,
+    "warn_count": 1,
+    "warning": "gastronomie_normal_04: red_herring_budget — Pâine de casă and Supă cu găluște (2 contested, budget <4)"
+  }
+}

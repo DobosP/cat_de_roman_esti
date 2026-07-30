@@ -1,0 +1,79 @@
+{
+  "category": "stiinta",
+  "candidate_sha256": "sha256:a54be27a3acfcb479e6403fca122036ba0a2584d316c49e4ba6ce6ac39785972",
+  "instances": [
+    {
+      "ref": "conexiuni[0]",
+      "author_ref": "stiinta_normal_01",
+      "scores": {
+        "recognition": 99,
+        "fairness": 97,
+        "fun": 31
+      },
+      "verdict": "drop",
+      "note": "Board de nivel primar: părți ale corpului, vreme și animale domestice, fără mecanică ascunsă. Ar fi Ușor pentru copii, nu Normal; dificultatea declarată este necinstită și fun-ul prea scăzut."
+    },
+    {
+      "ref": "conexiuni[1]",
+      "author_ref": "stiinta_normal_02",
+      "scores": {
+        "recognition": 88,
+        "fairness": 93,
+        "fun": 93
+      },
+      "verdict": "keep",
+      "note": "Cel mai bun board de știință: Limbă/Palat/Masă folosesc sensuri secundare, «-logie» este un anchor exact, iar animalele de pădure stabilizează partiția. Trick numibil și fair."
+    },
+    {
+      "ref": "conexiuni[2]",
+      "author_ref": "stiinta_normal_03",
+      "scores": {
+        "recognition": 91,
+        "fairness": 95,
+        "fun": 89
+      },
+      "verdict": "keep",
+      "note": "Rebuild-ul înlocuiește ambele predicate ucise. M-ul și cele patru litere sunt anchors vizuale exacte; absolvenții de medicină și instituțiile bucureștene aduc substanță românească recunoscută. Rămâne o singură pereche intenționată Cantacuzino persoană–institut, sub pragul de mirror și fără dublă apartenență."
+    },
+    {
+      "ref": "conexiuni[3]",
+      "author_ref": "stiinta_normal_04",
+      "scores": {
+        "recognition": 82,
+        "fairness": 87,
+        "fun": 86
+      },
+      "verdict": "keep",
+      "note": "Două terminații exacte oferă joc verbal, iar numele de instituții și inventatorii dau dificultatea Normal. «Termeni științifici» este larg, dar regula «-ie» este obiectivă și toate patru au uz științific."
+    },
+    {
+      "ref": "conexiuni[4]",
+      "author_ref": "stiinta_normal_05",
+      "scores": {
+        "recognition": 82,
+        "fairness": 89,
+        "fun": 78
+      },
+      "verdict": "keep",
+      "note": "Rumegătoarele și vremea sunt două anchors imediate; matematicienii și femeile din știință dau dificultatea românească Normal. Maximumul de grupă este 2/4 față de stock, board-ul doar 4/16, iar derivația schimbă jumătate din vechea grupă și adaugă trei grupe proaspete. Partiția rămâne strictă."
+    },
+    {
+      "ref": "conexiuni[5]",
+      "author_ref": "stiinta_normal_06",
+      "scores": {
+        "recognition": 61,
+        "fairness": 38,
+        "fun": 35
+      },
+      "verdict": "drop",
+      "note": "Laserul Măgurele/facilitate lângă invenții și produse, Electricitatea/fenomen lângă tehnologii, apoi materiale lângă atom/moleculă: trei grupe amestecă tipuri și niveluri de abstracție. Multe tile-uri sunt și deep-cut-uri."
+    }
+  ],
+  "coverage_note": "Blind release-grade B1–B9 review of all 6 instances: predicate honesty, recognition, difficulty, ambiguity, unique partition, generic containers, mirrors/reskins and fun were assessed. Full-inventory deterministic census found zero FAILs; its sole WARN was two contested tiles on gastronomie_normal_04, below the four-mistake budget.",
+  "deterministic_gate": {
+    "selected_instances": 36,
+    "fail_count": 0,
+    "warn_count": 1,
+    "warning": "gastronomie_normal_04: red_herring_budget — Pâine de casă and Supă cu găluște (2 contested, budget <4)"
+  }
+}

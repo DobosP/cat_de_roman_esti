@@ -1,0 +1,79 @@
+{
+  "category": "personalitati",
+  "candidate_sha256": "sha256:e755b4ccfbf4a45a7d73e8fd738926b4506b4a2fedb98589aa92d2e58e31fbe5",
+  "instances": [
+    {
+      "ref": "conexiuni[0]",
+      "author_ref": "personalitati_normal_01",
+      "scores": {
+        "recognition": 80,
+        "fairness": 92,
+        "fun": 84
+      },
+      "verdict": "keep",
+      "note": "Două pattern-uri de prenume creează capcana centrală, apoi scriitorii și medaliații separă sensurile. Câte un nume mai rar este susținut de trei repere cunoscute; partiție unică."
+    },
+    {
+      "ref": "conexiuni[1]",
+      "author_ref": "personalitati_normal_02",
+      "scores": {
+        "recognition": 82,
+        "fairness": 93,
+        "fun": 85
+      },
+      "verdict": "keep",
+      "note": "Patru domenii publice distincte și cross-generaționale; campionii sunt din patru sporturi, iar filozofii/eseiștii au semnal cultural puternic. Fără filler."
+    },
+    {
+      "ref": "conexiuni[2]",
+      "author_ref": "personalitati_normal_03",
+      "scores": {
+        "recognition": 78,
+        "fairness": 91,
+        "fun": 89
+      },
+      "verdict": "keep",
+      "note": "Prenumele Radu/Adrian dau mecanica de text, pionierii și campionii adaugă substanță. Un deep-cut (Gogu Constantinescu) este acceptabil la Normal și nu creează partiție alternativă."
+    },
+    {
+      "ref": "conexiuni[3]",
+      "author_ref": "personalitati_normal_04",
+      "scores": {
+        "recognition": 66,
+        "fairness": 91,
+        "fun": 47
+      },
+      "verdict": "drop",
+      "note": "Patru clase profesionale directe, fără trick sau red herring controlat, plus mai multe nume sub pragul prime-time (Papadat-Bengescu, Celibidache, Mureșanu). Corect, dar prea encyclopedic și inert pentru release."
+    },
+    {
+      "ref": "conexiuni[4]",
+      "author_ref": "personalitati_normal_05",
+      "scores": {
+        "recognition": 91,
+        "fairness": 96,
+        "fun": 88
+      },
+      "verdict": "keep",
+      "note": "Grupa 1848 înlocuiește sortarea falsă a hipocoristicelor și adaugă substanță istorică; Avram Iancu, Bălcescu și Alecsandri ancorează singurul deep-cut, Ana Ipătescu. Cele trei mecanici ortografice rămase sunt exacte și se intersectează tentant fără crossfit. Recensământul arată cel mult trei tile-uri comune cu alt board din batch și niciun reskin; dificultatea Normal și partiția sunt oneste."
+    },
+    {
+      "ref": "conexiuni[5]",
+      "author_ref": "personalitati_normal_06",
+      "scores": {
+        "recognition": 91,
+        "fairness": 19,
+        "fun": 20
+      },
+      "verdict": "drop",
+      "note": "Creator/maestru nu sunt profesii vizuale specifice, iar muzicianul include compozitor/dirijor/cântăreț; cercetător/savant/om de știință sunt aproape sinonime. Există multe partiții la fel de valide."
+    }
+  ],
+  "coverage_note": "Blind release-grade B1–B9 review of all 6 instances: predicate honesty, recognition, difficulty, ambiguity, unique partition, generic containers, mirrors/reskins and fun were assessed. Full-inventory deterministic census found zero FAILs; its sole WARN was two contested tiles on gastronomie_normal_04, below the four-mistake budget.",
+  "deterministic_gate": {
+    "selected_instances": 36,
+    "fail_count": 0,
+    "warn_count": 1,
+    "warning": "gastronomie_normal_04: red_herring_budget — Pâine de casă and Supă cu găluște (2 contested, budget <4)"
+  }
+}

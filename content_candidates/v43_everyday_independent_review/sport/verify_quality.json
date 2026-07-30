@@ -1,0 +1,145 @@
+{
+  "category": "sport",
+  "candidate_sha256": "sha256:6f6238b9e45dc65d88a5fda46da3cb7a3daf2f933e18ecc64160d2429bf9d57a",
+  "instances": [
+    {
+      "ref": "conexiuni[0]",
+      "author_ref": "sport_usor_01",
+      "scores": {
+        "recognition": 94,
+        "fairness": 97,
+        "fun": 89
+      },
+      "verdict": "keep",
+      "note": "Patru grupe imediat lizibile pe tipuri diferite, un anchor universal și evenimente actuale bine recunoscute. Partiția este unică și potrivită pentru Ușor."
+    },
+    {
+      "ref": "conexiuni[1]",
+      "author_ref": "sport_usor_02",
+      "scores": {
+        "recognition": 91,
+        "fairness": 96,
+        "fun": 84
+      },
+      "verdict": "keep",
+      "note": "Board curat și accesibil: sporturi, cluburi, gimnaste și fundași nu se confundă. Nu are trick sofisticat, dar livrează o rundă Ușor cinstită."
+    },
+    {
+      "ref": "conexiuni[2]",
+      "author_ref": "sport_usor_03",
+      "scores": {
+        "recognition": 86,
+        "fairness": 72,
+        "fun": 64
+      },
+      "verdict": "drop",
+      "note": "«Victorii românești» amestecă o competiție generică (Liga Campionilor la handbal) cu turnee/ediții câștigate, iar două grupe sunt inventare ale aceleiași veri 2024. Se simte ca rezumat sportiv, nu ca puzzle cu patru idei distincte."
+    },
+    {
+      "ref": "conexiuni[3]",
+      "author_ref": "sport_usor_04",
+      "scores": {
+        "recognition": 82,
+        "fairness": 93,
+        "fun": 90
+      },
+      "verdict": "keep",
+      "note": "Paletă/rachetă și orașul din denumirea afișată adaugă două mecanici numibile; medaliații și sporturile de duel oferă anchors. Suprapunerile se rezolvă unic."
+    },
+    {
+      "ref": "conexiuni[4]",
+      "author_ref": "sport_usor_05",
+      "scores": {
+        "recognition": 91,
+        "fairness": 93,
+        "fun": 82
+      },
+      "verdict": "keep",
+      "note": "Olimpici, lot EURO, evenimente 2024 și roluri la meci sunt patru relații clare. Este simplu, dar corect bandat Ușor și fără deep-cut obligatoriu."
+    },
+    {
+      "ref": "conexiuni[5]",
+      "author_ref": "sport_usor_06",
+      "scores": {
+        "recognition": 78,
+        "fairness": 84,
+        "fun": 60
+      },
+      "verdict": "drop",
+      "note": "Board prea dependent de știri 2025–2026 și de Louis Munteanu pentru Ușor; primele două grupe sunt liste de posturi, iar ultima îmbătrânește rapid. Corect factual, dar fără un trick memorabil și cu tier inversion."
+    },
+    {
+      "ref": "conexiuni[6]",
+      "author_ref": "sport_normal_01",
+      "scores": {
+        "recognition": 87,
+        "fairness": 92,
+        "fun": 84
+      },
+      "verdict": "keep",
+      "note": "Are gradient bun: lotul este anchor, foștii internaționali-antrenori și câștigătoarele europene cer un pas suplimentar, iar sporturile olimpice închid fără ambiguitate."
+    },
+    {
+      "ref": "conexiuni[7]",
+      "author_ref": "sport_normal_02",
+      "scores": {
+        "recognition": 80,
+        "fairness": 92,
+        "fun": 87
+      },
+      "verdict": "keep",
+      "note": "Patru predicate stricte, actuale și cross-generaționale; campioanele europene sunt dificultatea Normal, cu restul drept anchors. Nicio alternativă 4×4 serioasă."
+    },
+    {
+      "ref": "conexiuni[8]",
+      "author_ref": "sport_normal_03",
+      "scores": {
+        "recognition": 86,
+        "fairness": 93,
+        "fun": 88
+      },
+      "verdict": "keep",
+      "note": "Etichetele revizuite sunt temporally stable și separă exact căpitanii de conducătorii loturilor naționale de seniori. Racheta/paleta este anchor, Paris 2024 aduce dificultatea Normal, iar partiția nu are o alternativă egală."
+    },
+    {
+      "ref": "conexiuni[9]",
+      "author_ref": "sport_normal_04",
+      "scores": {
+        "recognition": 94,
+        "fairness": 94,
+        "fun": 88
+      },
+      "verdict": "keep",
+      "note": "Rebuild-ul elimină complementul generic și scara mixtă a turneelor. Inițiala A și anul afișat sunt două mecanici vizuale exacte; Serie A și Atlanta 1996 dau cunoașterea sportivă Normal. Tipurile sunt curate, toate numele sunt mainstream, iar nicio persoană nu satisface egal altă grupă."
+    },
+    {
+      "ref": "conexiuni[10]",
+      "author_ref": "sport_normal_05",
+      "scores": {
+        "recognition": 83,
+        "fairness": 54,
+        "fun": 42
+      },
+      "verdict": "drop",
+      "note": "«Organizații cunoscute» este un container fără relație distinctivă (două cluburi, presă, delegație), iar arbitru/fluier/scor/penalty amestecă persoană, obiect, rezultat și fază. Două grupe-filler depășesc toleranța release."
+    },
+    {
+      "ref": "conexiuni[11]",
+      "author_ref": "sport_normal_06",
+      "scores": {
+        "recognition": 77,
+        "fairness": 28,
+        "fun": 25
+      },
+      "verdict": "drop",
+      "note": "Bellu este antrenor într-o grupă de sportivi; cluburile «din România și străinătate» sunt tautologice; finalurile/medaliile sunt un joc de cuvinte vag; pistă este traseu lângă trei probe/activități. Partiția nu este cinstită."
+    }
+  ],
+  "coverage_note": "Blind release-grade B1–B9 review of all 12 instances: predicate honesty, recognition, difficulty, ambiguity, unique partition, generic containers, mirrors/reskins and fun were assessed. Full-inventory deterministic census found zero FAILs; its sole WARN was two contested tiles on gastronomie_normal_04, below the four-mistake budget.",
+  "deterministic_gate": {
+    "selected_instances": 36,
+    "fail_count": 0,
+    "warn_count": 1,
+    "warning": "gastronomie_normal_04: red_herring_budget — Pâine de casă and Supă cu găluște (2 contested, budget <4)"
+  }
+}

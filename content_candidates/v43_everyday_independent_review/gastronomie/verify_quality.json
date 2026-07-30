@@ -1,0 +1,79 @@
+{
+  "category": "gastronomie",
+  "candidate_sha256": "sha256:60067abed795b4dc25a874924df17b567c1c5bea9981486da24c3446c69e7161",
+  "instances": [
+    {
+      "ref": "conexiuni[0]",
+      "author_ref": "gastronomie_normal_01",
+      "scores": {
+        "recognition": 94,
+        "fairness": 95,
+        "fun": 84
+      },
+      "verdict": "keep",
+      "note": "Patru relații culinare concrete, fără subjetivitate și cu vocabular foarte românesc. Anchor-ul vaselor echilibrează lebărul/caltaboșul; partiție unică."
+    },
+    {
+      "ref": "conexiuni[1]",
+      "author_ref": "gastronomie_normal_02",
+      "scores": {
+        "recognition": 90,
+        "fairness": 90,
+        "fun": 77
+      },
+      "verdict": "keep",
+      "note": "Board accesibil și cross-generațional; Cico este singurul mic deep-cut pentru tineri. Grupele sunt largi, dar fiecare tile satisface direct predicatul și nu există redistribuire completă plauzibilă."
+    },
+    {
+      "ref": "conexiuni[2]",
+      "author_ref": "gastronomie_normal_03",
+      "scores": {
+        "recognition": 68,
+        "fairness": 65,
+        "fun": 62
+      },
+      "verdict": "drop",
+      "note": "«Cunoscuți» și «devenite tendințe» sunt criterii editoriale instabile; Richard Abou Zaki și Taverna Racilor îngustează publicul, iar matcha este ingredient/băutură, nu aceeași unitate ca comenzile de feluri. Prea mult zeitgeist, prea puțină logică strictă."
+    },
+    {
+      "ref": "conexiuni[3]",
+      "author_ref": "gastronomie_normal_04",
+      "scores": {
+        "recognition": 92,
+        "fairness": 88,
+        "fun": 82
+      },
+      "verdict": "keep",
+      "note": "Predicate culinare exacte și satisfăcătoare. Lintul găsește doar două tile-uri contestate (Pâine de casă, Supă cu găluște), sub bugetul de patru greșeli; etichetele rezolvă clar capcana."
+    },
+    {
+      "ref": "conexiuni[4]",
+      "author_ref": "gastronomie_normal_05",
+      "scores": {
+        "recognition": 91,
+        "fairness": 86,
+        "fun": 80
+      },
+      "verdict": "keep",
+      "note": "Clătitele și borcanul sunt anchors, iar aromele/comenzile urbane dau varietate. «Urban» este puțin larg, dar toate patru sunt preparate internaționale comandate curent și partiția rămâne unică."
+    },
+    {
+      "ref": "conexiuni[5]",
+      "author_ref": "gastronomie_normal_06",
+      "scores": {
+        "recognition": 89,
+        "fairness": 96,
+        "fun": 91
+      },
+      "verdict": "keep",
+      "note": "Toate cele patru predicate sunt acum stricte și numibile: toponim afișat, aluat dospit, cacao în compoziție și parte comestibilă subterană. Toponimele oferă trick-ul vizual, iar deserturile și morfologia vegetală susțin dificultatea Normal. Joffre și produsul vâlcean sunt singurele repere mai adânci, fiecare sprijinit de trei anchors. Nicio redistribuire completă și nicio excepție."
+    }
+  ],
+  "coverage_note": "Blind release-grade B1–B9 review of all 6 instances: predicate honesty, recognition, difficulty, ambiguity, unique partition, generic containers, mirrors/reskins and fun were assessed. Full-inventory deterministic census found zero FAILs; its sole WARN was two contested tiles on gastronomie_normal_04, below the four-mistake budget.",
+  "deterministic_gate": {
+    "selected_instances": 36,
+    "fail_count": 0,
+    "warn_count": 1,
+    "warning": "gastronomie_normal_04: red_herring_budget — Pâine de casă and Supă cu găluște (2 contested, budget <4)"
+  }
+}

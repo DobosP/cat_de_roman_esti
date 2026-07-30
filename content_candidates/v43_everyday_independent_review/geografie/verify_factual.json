@@ -1,0 +1,89 @@
+{
+  "category": "geografie",
+  "candidate_sha256": "sha256:5a5df7e90d842d4e45256701de7bc7d640ccf09da82c5747b835450475ae6be0",
+  "reviewed_refs": [
+    "conexiuni[0]",
+    "conexiuni[1]",
+    "conexiuni[2]",
+    "conexiuni[3]",
+    "conexiuni[4]",
+    "conexiuni[5]"
+  ],
+  "issues": [
+    {
+      "ref": "conexiuni[5]",
+      "severity": "block",
+      "issue": "geografie_normal_06: Therme București este situat oficial în Balotești, județul Ilfov, nu în municipiul București.",
+      "sources": [
+        "https://www.therme.ro/termeni-si-conditii"
+      ]
+    },
+    {
+      "ref": "conexiuni[5]",
+      "severity": "note",
+      "issue": "Aceeași placă numește Peștera Urșilor destinație din Transilvania, deși Consiliul Județean o localizează la Chișcău, Bihor; eticheta regională este cel puțin disputabilă pentru public.",
+      "sources": [
+        "https://www.cjbihor.ro/despre-bihor/turism/"
+      ]
+    }
+  ],
+  "coverage_note": "Blind independent review of all 6 raw references in the exact candidate bytes. Every one of the four predicates and every displayed tile was checked; specific/time-sensitive claims used direct authoritative URLs. No author audit was read before these verdicts were frozen.",
+  "reviews": [
+    {
+      "ref": "conexiuni[0]",
+      "author_ref": "geografie_normal_01",
+      "result": "verified",
+      "note": "Argeș, Jiu, Siret și Tisa sunt afluenți direcți ai Dunării; formele de relief, orașele transilvănene și termenii de țărm sunt corect clasificați.",
+      "sources": [
+        "https://rowater.ro/wp-content/uploads/2024/06/Revista-HIDROTEHNICA-Ziua-Dunarii-2024_.pdf"
+      ]
+    },
+    {
+      "ref": "conexiuni[1]",
+      "author_ref": "geografie_normal_02",
+      "result": "verified",
+      "note": "Cele patru orașe sunt porturi, Babele/Sfinxul/Omu/Crucea sunt în Bucegi, formele descriu contactul uscat-apă și cele patru localități sunt stațiuni balneare.",
+      "sources": [
+        "https://www.bucegipark.ro/en/"
+      ]
+    },
+    {
+      "ref": "conexiuni[2]",
+      "author_ref": "geografie_normal_03",
+      "result": "verified",
+      "note": "Orașele vestice, masivele Carpaților Meridionali, lacurile/complexul Razim-Sinoe și regiunile istorice au fost verificate individual; etichetele sunt largi, dar nu includ o excepție.",
+      "sources": [
+        "https://www.cjbihor.ro/despre-bihor/turism/"
+      ]
+    },
+    {
+      "ref": "conexiuni[3]",
+      "author_ref": "geografie_normal_04",
+      "result": "verified",
+      "note": "Reperele dunărene, statutul de arii protejate, reședințele de județ și masivele românești sunt corecte pentru toate tile-urile.",
+      "sources": [
+        "https://rowater.ro/wp-content/uploads/2024/06/Revista-HIDROTEHNICA-Ziua-Dunarii-2024_.pdf",
+        "https://www.cjbihor.ro/despre-bihor/turism/"
+      ]
+    },
+    {
+      "ref": "conexiuni[4]",
+      "author_ref": "geografie_normal_05",
+      "result": "verified",
+      "note": "Stațiunile și muzeele sunt corecte; «forme și surse naturale» și «lucrări care traversează relieful» sunt predicate prea elastice, tratate ca defect de calitate. Porțile de Fier este și defileu natural, nu doar lucrare.",
+      "sources": [
+        "https://rowater.ro/wp-content/uploads/2024/06/Revista-HIDROTEHNICA-Ziua-Dunarii-2024_.pdf"
+      ]
+    },
+    {
+      "ref": "conexiuni[5]",
+      "author_ref": "geografie_normal_06",
+      "result": "blocked",
+      "note": "Prima grupă este factual falsă: termenii oficiali Therme plasează complexul în Balotești, județul Ilfov, nu în municipiul București. Peștera Urșilor este în Chișcău, Bihor, ceea ce face și eticheta «Transilvania» cel puțin disputabilă.",
+      "sources": [
+        "https://www.therme.ro/termeni-si-conditii",
+        "https://www.cjbihor.ro/despre-bihor/turism/"
+      ]
+    }
+  ]
+}
