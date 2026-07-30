@@ -1,0 +1,325 @@
+{
+ "id": "lt_stiinta_200",
+ "game": "lant",
+ "category": "stiinta",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "85b7aa1552a17151cb50cc8cffdcde727cc87297b3a8f2762831c10234ff5e73",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [],
+ "start": {
+  "id": "n_vdr_calorifer_rece",
+  "label": "Caloriferul rece",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.4731,
+  "degree": 7,
+  "incoming_degree": 7,
+  "description": "Semn al iernilor de apartament când căldura vine greu sau deloc."
+ },
+ "target": {
+  "id": "n_v4sti_caldura",
+  "label": "căldură",
+  "node_type": "concept",
+  "category": "stiinta",
+  "salience": 0.7248,
+  "degree": 4,
+  "incoming_degree": 4,
+  "description": "Transfer de energie termică între corpuri cu temperaturi diferite."
+ },
+ "optimal": 5,
+ "branch_profile": {
+  "valid_first_hops": 4,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 14
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_vdr_calorifer_rece",
+     "label": "Caloriferul rece"
+    },
+    {
+     "id": "n_vdr_viata_la_bloc",
+     "label": "Viața la bloc"
+    },
+    {
+     "id": "n_v3via_intretinerea",
+     "label": "Întreținerea"
+    },
+    {
+     "id": "n_v4gas_apa",
+     "label": "Apă"
+    },
+    {
+     "id": "n_v2sti_chimie",
+     "label": "Chimie"
+    },
+    {
+     "id": "n_v4sti_caldura",
+     "label": "căldură"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_vdr_calorifer_rece",
+      "label": "Caloriferul rece"
+     },
+     "to": {
+      "id": "n_vdr_viata_la_bloc",
+      "label": "Viața la bloc"
+     },
+     "relation": "related_to",
+     "label": "simte iarna",
+     "strength": 0.78
+    },
+    {
+     "from": {
+      "id": "n_vdr_viata_la_bloc",
+      "label": "Viața la bloc"
+     },
+     "to": {
+      "id": "n_v3via_intretinerea",
+      "label": "Întreținerea"
+     },
+     "relation": "related_to",
+     "label": "costuri de bloc",
+     "strength": 0.88
+    },
+    {
+     "from": {
+      "id": "n_v3via_intretinerea",
+      "label": "Întreținerea"
+     },
+     "to": {
+      "id": "n_v4gas_apa",
+      "label": "Apă"
+     },
+     "relation": "related_to",
+     "label": "intră la",
+     "strength": 0.72
+    },
+    {
+     "from": {
+      "id": "n_v4gas_apa",
+      "label": "Apă"
+     },
+     "to": {
+      "id": "n_v2sti_chimie",
+      "label": "Chimie"
+     },
+     "relation": "related_to",
+     "label": "are formula H2O",
+     "strength": 0.85
+    },
+    {
+     "from": {
+      "id": "n_v2sti_chimie",
+      "label": "Chimie"
+     },
+     "to": {
+      "id": "n_v4sti_caldura",
+      "label": "căldură"
+     },
+     "relation": "related_to",
+     "label": "apare în reacții",
+     "strength": 0.72
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_vdr_calorifer_rece",
+     "label": "Caloriferul rece"
+    },
+    {
+     "id": "n_v3via_repartitoare",
+     "label": "Repartitoare"
+    },
+    {
+     "id": "n_v3via_intretinerea",
+     "label": "Întreținerea"
+    },
+    {
+     "id": "n_v4gas_apa",
+     "label": "Apă"
+    },
+    {
+     "id": "n_v2sti_chimie",
+     "label": "Chimie"
+    },
+    {
+     "id": "n_v4sti_caldura",
+     "label": "căldură"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_vdr_calorifer_rece",
+      "label": "Caloriferul rece"
+     },
+     "to": {
+      "id": "n_v3via_repartitoare",
+      "label": "Repartitoare"
+     },
+     "relation": "related_to",
+     "label": "calorifer de bloc",
+     "strength": 0.74
+    },
+    {
+     "from": {
+      "id": "n_v3via_repartitoare",
+      "label": "Repartitoare"
+     },
+     "to": {
+      "id": "n_v3via_intretinerea",
+      "label": "Întreținerea"
+     },
+     "relation": "related_to",
+     "label": "calculul căldurii",
+     "strength": 0.8
+    },
+    {
+     "from": {
+      "id": "n_v3via_intretinerea",
+      "label": "Întreținerea"
+     },
+     "to": {
+      "id": "n_v4gas_apa",
+      "label": "Apă"
+     },
+     "relation": "related_to",
+     "label": "intră la",
+     "strength": 0.72
+    },
+    {
+     "from": {
+      "id": "n_v4gas_apa",
+      "label": "Apă"
+     },
+     "to": {
+      "id": "n_v2sti_chimie",
+      "label": "Chimie"
+     },
+     "relation": "related_to",
+     "label": "are formula H2O",
+     "strength": 0.85
+    },
+    {
+     "from": {
+      "id": "n_v2sti_chimie",
+      "label": "Chimie"
+     },
+     "to": {
+      "id": "n_v4sti_caldura",
+      "label": "căldură"
+     },
+     "relation": "related_to",
+     "label": "apare în reacții",
+     "strength": 0.72
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_vdr_calorifer_rece",
+     "label": "Caloriferul rece"
+    },
+    {
+     "id": "n_vdr_bloc",
+     "label": "Blocul"
+    },
+    {
+     "id": "n_v3via_intretinerea",
+     "label": "Întreținerea"
+    },
+    {
+     "id": "n_v4gas_apa",
+     "label": "Apă"
+    },
+    {
+     "id": "n_v2sti_chimie",
+     "label": "Chimie"
+    },
+    {
+     "id": "n_v4sti_caldura",
+     "label": "căldură"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_vdr_calorifer_rece",
+      "label": "Caloriferul rece"
+     },
+     "to": {
+      "id": "n_vdr_bloc",
+      "label": "Blocul"
+     },
+     "relation": "part_of",
+     "label": "are instalație",
+     "strength": 0.66
+    },
+    {
+     "from": {
+      "id": "n_vdr_bloc",
+      "label": "Blocul"
+     },
+     "to": {
+      "id": "n_v3via_intretinerea",
+      "label": "Întreținerea"
+     },
+     "relation": "related_to",
+     "label": "cheltuieli comune",
+     "strength": 0.86
+    },
+    {
+     "from": {
+      "id": "n_v3via_intretinerea",
+      "label": "Întreținerea"
+     },
+     "to": {
+      "id": "n_v4gas_apa",
+      "label": "Apă"
+     },
+     "relation": "related_to",
+     "label": "intră la",
+     "strength": 0.72
+    },
+    {
+     "from": {
+      "id": "n_v4gas_apa",
+      "label": "Apă"
+     },
+     "to": {
+      "id": "n_v2sti_chimie",
+      "label": "Chimie"
+     },
+     "relation": "related_to",
+     "label": "are formula H2O",
+     "strength": 0.85
+    },
+    {
+     "from": {
+      "id": "n_v2sti_chimie",
+      "label": "Chimie"
+     },
+     "to": {
+      "id": "n_v4sti_caldura",
+      "label": "căldură"
+     },
+     "relation": "related_to",
+     "label": "apare în reacții",
+     "strength": 0.72
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:d891f1e98f2038ce1c3f58a174c329f402fe1be4627a37a4ccec496aabf094ca"
+}

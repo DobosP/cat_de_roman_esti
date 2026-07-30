@@ -1,0 +1,115 @@
+{
+ "id": "lt_gastronomie_164",
+ "game": "lant",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "5e3a08ab191118fa2246d9839eff84888c5fbcc95ff87426b6fad39767de1cdb",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "Mămăligă": "national-salience concept (0.97) with generic related_to edge to Moldova"
+ },
+ "start": {
+  "id": "n_limba_romana",
+  "label": "Limba română",
+  "node_type": "concept",
+  "category": "limba",
+  "salience": 0.8338,
+  "degree": 71,
+  "incoming_degree": 79,
+  "description": "Limba romanica vorbita in Romania si Republica Moldova, limba oficiala a statului."
+ },
+ "target": {
+  "id": "n_gas_mamaliga",
+  "label": "Mămăligă",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.9666,
+  "degree": 13,
+  "incoming_degree": 13,
+  "description": "Preparat din mălai, servit cu brânză, smântână, sarmale, pește sau tocănițe."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_limba_romana",
+     "label": "Limba română"
+    },
+    {
+     "id": "n_dialectul_dacoroman",
+     "label": "Dialectul dacoromân"
+    },
+    {
+     "id": "n_moldova_reg",
+     "label": "Moldova"
+    },
+    {
+     "id": "n_gas_mamaliga",
+     "label": "Mămăligă"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_limba_romana",
+      "label": "Limba română"
+     },
+     "to": {
+      "id": "n_dialectul_dacoroman",
+      "label": "Dialectul dacoromân"
+     },
+     "relation": "part_of",
+     "label": "are dialectul",
+     "strength": 0.85
+    },
+    {
+     "from": {
+      "id": "n_dialectul_dacoroman",
+      "label": "Dialectul dacoromân"
+     },
+     "to": {
+      "id": "n_moldova_reg",
+      "label": "Moldova"
+     },
+     "relation": "located_in",
+     "label": "vorbit in",
+     "strength": 0.4
+    },
+    {
+     "from": {
+      "id": "n_moldova_reg",
+      "label": "Moldova"
+     },
+     "to": {
+      "id": "n_gas_mamaliga",
+      "label": "Mămăligă"
+     },
+     "relation": "related_to",
+     "label": "emblemă rurală",
+     "strength": 0.6
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:4744809569b9b2df83de7986d18ef4f8edef7c1bd51e00c7190d5c94409c2b80"
+}

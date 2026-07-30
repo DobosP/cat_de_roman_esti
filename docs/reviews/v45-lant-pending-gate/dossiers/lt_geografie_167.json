@@ -1,0 +1,95 @@
+{
+ "id": "lt_geografie_167",
+ "game": "lant",
+ "category": "geografie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "968a8342143871767daee9a772dcccf1ad73edd1d8d3ab9dba63dd366cd91aa2",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_spt_finala_sevilla_1986",
+  "label": "Finala de la Sevilla",
+  "node_type": "event",
+  "category": "sport",
+  "salience": 0.9378,
+  "degree": 13,
+  "incoming_degree": 13,
+  "description": "Finala Steaua - Barcelona din 1986, decisă la loviturile de departajare."
+ },
+ "target": {
+  "id": "n_bucuresti",
+  "label": "București",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.6721,
+  "degree": 103,
+  "incoming_degree": 108,
+  "description": "Capitala României, în Muntenia."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_spt_finala_sevilla_1986",
+     "label": "Finala de la Sevilla"
+    },
+    {
+     "id": "n_spt_steaua_1986",
+     "label": "Steaua 1986"
+    },
+    {
+     "id": "n_bucuresti",
+     "label": "București"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_spt_finala_sevilla_1986",
+      "label": "Finala de la Sevilla"
+     },
+     "to": {
+      "id": "n_spt_steaua_1986",
+      "label": "Steaua 1986"
+     },
+     "relation": "related_to",
+     "label": "a jucat",
+     "strength": 0.95
+    },
+    {
+     "from": {
+      "id": "n_spt_steaua_1986",
+      "label": "Steaua 1986"
+     },
+     "to": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "relation": "located_in",
+     "label": "este din",
+     "strength": 0.72
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:fec6d111289e9ca97d88ef2ccb179443212292f324ca5876694c1dfd52f09b7b"
+}

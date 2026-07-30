@@ -1,0 +1,236 @@
+{
+ "id": "lt_stiinta_204",
+ "game": "lant",
+ "category": "stiinta",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "5427958af3901dd19cd9848bf8bac45b71e80a5226745b27fbf651adff66c673",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_luceafarul",
+  "label": "Luceafărul",
+  "node_type": "work",
+  "category": "literatura",
+  "salience": 0.4767,
+  "degree": 10,
+  "incoming_degree": 10,
+  "description": "Poem romantic de Mihai Eminescu."
+ },
+ "target": {
+  "id": "n_v3sti_gravitatie",
+  "label": "Gravitație",
+  "node_type": "concept",
+  "category": "stiinta",
+  "salience": 0.6841,
+  "degree": 5,
+  "incoming_degree": 5,
+  "description": "Interacțiune prin care corpurile cu masă se atrag."
+ },
+ "optimal": 5,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 8
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_luceafarul",
+     "label": "Luceafărul"
+    },
+    {
+     "id": "n_mihai_eminescu",
+     "label": "Mihai Eminescu"
+    },
+    {
+     "id": "n_iasi",
+     "label": "Iași"
+    },
+    {
+     "id": "n_stefan_procopiu",
+     "label": "Ștefan Procopiu"
+    },
+    {
+     "id": "n_v2sti_fizica",
+     "label": "Fizică"
+    },
+    {
+     "id": "n_v3sti_gravitatie",
+     "label": "Gravitație"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_luceafarul",
+      "label": "Luceafărul"
+     },
+     "to": {
+      "id": "n_mihai_eminescu",
+      "label": "Mihai Eminescu"
+     },
+     "relation": "created_by",
+     "label": "a scris",
+     "strength": 0.95
+    },
+    {
+     "from": {
+      "id": "n_mihai_eminescu",
+      "label": "Mihai Eminescu"
+     },
+     "to": {
+      "id": "n_iasi",
+      "label": "Iași"
+     },
+     "relation": "related_to",
+     "label": "legat de Iași",
+     "strength": 0.66
+    },
+    {
+     "from": {
+      "id": "n_iasi",
+      "label": "Iași"
+     },
+     "to": {
+      "id": "n_stefan_procopiu",
+      "label": "Ștefan Procopiu"
+     },
+     "relation": "located_in",
+     "label": "profesor la",
+     "strength": 0.6
+    },
+    {
+     "from": {
+      "id": "n_stefan_procopiu",
+      "label": "Ștefan Procopiu"
+     },
+     "to": {
+      "id": "n_v2sti_fizica",
+      "label": "Fizică"
+     },
+     "relation": "related_to",
+     "label": "a fost fizician",
+     "strength": 0.86
+    },
+    {
+     "from": {
+      "id": "n_v2sti_fizica",
+      "label": "Fizică"
+     },
+     "to": {
+      "id": "n_v3sti_gravitatie",
+      "label": "Gravitație"
+     },
+     "relation": "related_to",
+     "label": "forță fundamentală",
+     "strength": 0.94
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_luceafarul",
+     "label": "Luceafărul"
+    },
+    {
+     "id": "n_v3lit_vers",
+     "label": "Vers"
+    },
+    {
+     "id": "n_v3muz_melodie",
+     "label": "Melodie"
+    },
+    {
+     "id": "n_v4lim_sunet",
+     "label": "Sunet"
+    },
+    {
+     "id": "n_v2sti_fizica",
+     "label": "Fizică"
+    },
+    {
+     "id": "n_v3sti_gravitatie",
+     "label": "Gravitație"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_luceafarul",
+      "label": "Luceafărul"
+     },
+     "to": {
+      "id": "n_v3lit_vers",
+      "label": "Vers"
+     },
+     "relation": "part_of",
+     "label": "versuri eminesciene",
+     "strength": 0.82
+    },
+    {
+     "from": {
+      "id": "n_v3lit_vers",
+      "label": "Vers"
+     },
+     "to": {
+      "id": "n_v3muz_melodie",
+      "label": "Melodie"
+     },
+     "relation": "part_of",
+     "label": "textul piesei",
+     "strength": 0.9
+    },
+    {
+     "from": {
+      "id": "n_v3muz_melodie",
+      "label": "Melodie"
+     },
+     "to": {
+      "id": "n_v4lim_sunet",
+      "label": "Sunet"
+     },
+     "relation": "part_of",
+     "label": "formează melodii",
+     "strength": 0.78
+    },
+    {
+     "from": {
+      "id": "n_v4lim_sunet",
+      "label": "Sunet"
+     },
+     "to": {
+      "id": "n_v2sti_fizica",
+      "label": "Fizică"
+     },
+     "relation": "related_to",
+     "label": "undă mecanică",
+     "strength": 0.88
+    },
+    {
+     "from": {
+      "id": "n_v2sti_fizica",
+      "label": "Fizică"
+     },
+     "to": {
+      "id": "n_v3sti_gravitatie",
+      "label": "Gravitație"
+     },
+     "relation": "related_to",
+     "label": "forță fundamentală",
+     "strength": 0.94
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:3f557bf439d56eb402bcd4eb958b45145cc95f5db78304ebb9e128a5b11decc5"
+}

@@ -1,0 +1,105 @@
+{
+ "id": "lt_personalitati_145",
+ "game": "lant",
+ "category": "personalitati",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "e9e3552d7defc6f1388c974d8d544f59ffcb98254311a0247dd38e11934989f2",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Oedipe salience 0.26 < 0.60 (usor floor)"
+  },
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Angela Gheorghiu salience 0.28 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_oedipe",
+  "label": "Oedipe",
+  "node_type": "work",
+  "category": "arta_cultura",
+  "salience": 0.2638,
+  "degree": 9,
+  "incoming_degree": 9,
+  "description": "Unica opera lirica a lui George Enescu."
+ },
+ "target": {
+  "id": "n_angela_gheorghiu",
+  "label": "Angela Gheorghiu",
+  "node_type": "person",
+  "category": "personalitati",
+  "salience": 0.275,
+  "degree": 9,
+  "incoming_degree": 9,
+  "description": "Soprana romana de renume international, una dintre marile voci de opera."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_oedipe",
+     "label": "Oedipe"
+    },
+    {
+     "id": "n_muzica_clasica",
+     "label": "Muzică clasică"
+    },
+    {
+     "id": "n_angela_gheorghiu",
+     "label": "Angela Gheorghiu"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_oedipe",
+      "label": "Oedipe"
+     },
+     "to": {
+      "id": "n_muzica_clasica",
+      "label": "Muzică clasică"
+     },
+     "relation": "is_a",
+     "label": "apartine genului",
+     "strength": 0.5
+    },
+    {
+     "from": {
+      "id": "n_muzica_clasica",
+      "label": "Muzică clasică"
+     },
+     "to": {
+      "id": "n_angela_gheorghiu",
+      "label": "Angela Gheorghiu"
+     },
+     "relation": "related_to",
+     "label": "a cantat",
+     "strength": 0.8
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:1b32273b50cb5542e9f94d52aa3d9c58aba6323980a46d57c53d4f5bef4ff19c"
+}

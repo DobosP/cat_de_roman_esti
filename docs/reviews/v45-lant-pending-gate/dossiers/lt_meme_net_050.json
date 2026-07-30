@@ -1,0 +1,168 @@
+{
+ "id": "lt_meme_net_050",
+ "game": "lant",
+ "category": "meme_net",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "aa7ea7f15ff346ad05a4e597f1d7f65c6cf46f4e3b88a2ffc66a94d4d92343cb",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Zaiafet salience 0.36 < 0.60 (usor floor)"
+  }
+ ],
+ "start": {
+  "id": "n_net_zaiafet",
+  "label": "Zaiafet",
+  "node_type": "work",
+  "category": "meme_net",
+  "salience": 0.3634,
+  "degree": 6,
+  "incoming_degree": 6,
+  "description": "Canal românesc de YouTube cu explicații accesibile despre istorie, cultură și idei."
+ },
+ "target": {
+  "id": "n_net_ghita_ciobanul",
+  "label": "Ghiță Ciobanul",
+  "node_type": "person",
+  "category": "meme_net",
+  "salience": 0.6458,
+  "degree": 10,
+  "incoming_degree": 10,
+  "description": "Personaj din reclamele Vodafone inspirat de viața pastorală, devenit reper al internetului românesc."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 5
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_net_zaiafet",
+     "label": "Zaiafet"
+    },
+    {
+     "id": "n_net_youtube_ro",
+     "label": "YouTube România"
+    },
+    {
+     "id": "n_net_internet_romanesc",
+     "label": "Internetul românesc"
+    },
+    {
+     "id": "n_net_ghita_ciobanul",
+     "label": "Ghiță Ciobanul"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_net_zaiafet",
+      "label": "Zaiafet"
+     },
+     "to": {
+      "id": "n_net_youtube_ro",
+      "label": "YouTube România"
+     },
+     "relation": "related_to",
+     "label": "găzduiește",
+     "strength": 0.65
+    },
+    {
+     "from": {
+      "id": "n_net_youtube_ro",
+      "label": "YouTube România"
+     },
+     "to": {
+      "id": "n_net_internet_romanesc",
+      "label": "Internetul românesc"
+     },
+     "relation": "part_of",
+     "label": "include",
+     "strength": 0.82
+    },
+    {
+     "from": {
+      "id": "n_net_internet_romanesc",
+      "label": "Internetul românesc"
+     },
+     "to": {
+      "id": "n_net_ghita_ciobanul",
+      "label": "Ghiță Ciobanul"
+     },
+     "relation": "related_to",
+     "label": "a fost adoptat de",
+     "strength": 0.55
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_net_zaiafet",
+     "label": "Zaiafet"
+    },
+    {
+     "id": "n_net_creator_de_continut",
+     "label": "Creator de conținut"
+    },
+    {
+     "id": "n_net_internet_romanesc",
+     "label": "Internetul românesc"
+    },
+    {
+     "id": "n_net_ghita_ciobanul",
+     "label": "Ghiță Ciobanul"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_net_zaiafet",
+      "label": "Zaiafet"
+     },
+     "to": {
+      "id": "n_net_creator_de_continut",
+      "label": "Creator de conținut"
+     },
+     "relation": "is_a",
+     "label": "este canal de",
+     "strength": 0.64
+    },
+    {
+     "from": {
+      "id": "n_net_creator_de_continut",
+      "label": "Creator de conținut"
+     },
+     "to": {
+      "id": "n_net_internet_romanesc",
+      "label": "Internetul românesc"
+     },
+     "relation": "related_to",
+     "label": "hrănește",
+     "strength": 0.75
+    },
+    {
+     "from": {
+      "id": "n_net_internet_romanesc",
+      "label": "Internetul românesc"
+     },
+     "to": {
+      "id": "n_net_ghita_ciobanul",
+      "label": "Ghiță Ciobanul"
+     },
+     "relation": "related_to",
+     "label": "a fost adoptat de",
+     "strength": 0.55
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:a853889d89dd23d2e0924042335e81e9a194c4e195686d4cc9d2b7381c36c193"
+}

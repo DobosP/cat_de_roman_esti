@@ -1,0 +1,112 @@
+{
+ "id": "lt_limba_121",
+ "game": "lant",
+ "category": "limba",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "e38187aee3bea81a38a6b95d62f83f0da276d9a157962374963a222d4201979a",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_vdr_oracol_scolar",
+  "label": "Oracolul școlar",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.5307,
+  "degree": 8,
+  "incoming_degree": 8,
+  "description": "Caiet cu întrebări, dedicații și secrete circulate prin clasă."
+ },
+ "target": {
+  "id": "n_ortografie",
+  "label": "Ortografie",
+  "node_type": "concept",
+  "category": "limba",
+  "salience": 0.4096,
+  "degree": 18,
+  "incoming_degree": 18,
+  "description": "Ansamblul regulilor de scriere corecta a unei limbi."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 3
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_vdr_oracol_scolar",
+     "label": "Oracolul școlar"
+    },
+    {
+     "id": "n_invatamant_romanesc",
+     "label": "Învățământul românesc"
+    },
+    {
+     "id": "n_limba_romana",
+     "label": "Limba română"
+    },
+    {
+     "id": "n_ortografie",
+     "label": "Ortografie"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_vdr_oracol_scolar",
+      "label": "Oracolul școlar"
+     },
+     "to": {
+      "id": "n_invatamant_romanesc",
+      "label": "Învățământul românesc"
+     },
+     "relation": "related_to",
+     "label": "apare la școală",
+     "strength": 0.7
+    },
+    {
+     "from": {
+      "id": "n_invatamant_romanesc",
+      "label": "Învățământul românesc"
+     },
+     "to": {
+      "id": "n_limba_romana",
+      "label": "Limba română"
+     },
+     "relation": "related_to",
+     "label": "limba de predare",
+     "strength": 0.6
+    },
+    {
+     "from": {
+      "id": "n_limba_romana",
+      "label": "Limba română"
+     },
+     "to": {
+      "id": "n_ortografie",
+      "label": "Ortografie"
+     },
+     "relation": "related_to",
+     "label": "se scrie prin",
+     "strength": 0.82
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:f46f4930c9745d114229358e52843c2c7fee0115f9e688ba404095f8b656b9f5"
+}

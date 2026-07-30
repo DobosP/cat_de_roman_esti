@@ -1,0 +1,105 @@
+{
+ "id": "lt_istorie_027",
+ "game": "lant",
+ "category": "istorie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "812c0dcf4e93aa123d5a19021161a3e7bcff13e8f7ecc9b23120411d9c2cd9c9",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Decebal salience 0.54 < 0.60 (usor floor)"
+  },
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Columna lui Traian salience 0.25 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_decebal",
+  "label": "Decebal",
+  "node_type": "person",
+  "category": "istorie",
+  "salience": 0.5361,
+  "degree": 8,
+  "incoming_degree": 7,
+  "description": "Ultimul rege al Daciei, infrant de romani in 106."
+ },
+ "target": {
+  "id": "n_columna_traian",
+  "label": "Columna lui Traian",
+  "node_type": "work",
+  "category": "istorie",
+  "salience": 0.2482,
+  "degree": 11,
+  "incoming_degree": 10,
+  "description": "Monument roman care infatiseaza razboaiele cu dacii."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_decebal",
+     "label": "Decebal"
+    },
+    {
+     "id": "n_dacia",
+     "label": "Dacia"
+    },
+    {
+     "id": "n_columna_traian",
+     "label": "Columna lui Traian"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_decebal",
+      "label": "Decebal"
+     },
+     "to": {
+      "id": "n_dacia",
+      "label": "Dacia"
+     },
+     "relation": "located_in",
+     "label": "a domnit in",
+     "strength": 0.9
+    },
+    {
+     "from": {
+      "id": "n_dacia",
+      "label": "Dacia"
+     },
+     "to": {
+      "id": "n_columna_traian",
+      "label": "Columna lui Traian"
+     },
+     "relation": "related_to",
+     "label": "arată cucerirea",
+     "strength": 0.84
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:5f33fba439aab4a7b82d2f81ab48d3c257d950833143899322b0fdd4eabfda27"
+}

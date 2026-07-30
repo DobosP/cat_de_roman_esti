@@ -1,0 +1,230 @@
+{
+ "id": "lt_stiinta_202",
+ "game": "lant",
+ "category": "stiinta",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "b77cc24825d6fc4ab0751f49b7e9bd5458496f79e767dab7b989a547c6f33df5",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [],
+ "start": {
+  "id": "n_spt_david_popovici",
+  "label": "David Popovici",
+  "node_type": "person",
+  "category": "sport",
+  "salience": 0.9174,
+  "degree": 13,
+  "incoming_degree": 13,
+  "description": "Înotător român, campion mondial și olimpic la probele de liber."
+ },
+ "target": {
+  "id": "n_stix_mecanica_fluidelor",
+  "label": "Mecanica fluidelor",
+  "node_type": "concept",
+  "category": "stiinta",
+  "salience": 0.4269,
+  "degree": 12,
+  "incoming_degree": 12,
+  "description": "Ramură a fizicii care studiază lichidele și gazele, esențială pentru aerodinamică și efectul Coandă."
+ },
+ "optimal": 5,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 27
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_spt_david_popovici",
+     "label": "David Popovici"
+    },
+    {
+     "id": "n_romania_stat",
+     "label": "România"
+    },
+    {
+     "id": "n_vdr_viata_de_roman",
+     "label": "Viața în România"
+    },
+    {
+     "id": "n_v3via_intretinerea",
+     "label": "Întreținerea"
+    },
+    {
+     "id": "n_v4gas_apa",
+     "label": "Apă"
+    },
+    {
+     "id": "n_stix_mecanica_fluidelor",
+     "label": "Mecanica fluidelor"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_spt_david_popovici",
+      "label": "David Popovici"
+     },
+     "to": {
+      "id": "n_romania_stat",
+      "label": "România"
+     },
+     "relation": "related_to",
+     "label": "a reprezentat România",
+     "strength": 0.82
+    },
+    {
+     "from": {
+      "id": "n_romania_stat",
+      "label": "România"
+     },
+     "to": {
+      "id": "n_vdr_viata_de_roman",
+      "label": "Viața în România"
+     },
+     "relation": "located_in",
+     "label": "ține de",
+     "strength": 0.88
+    },
+    {
+     "from": {
+      "id": "n_vdr_viata_de_roman",
+      "label": "Viața în România"
+     },
+     "to": {
+      "id": "n_v3via_intretinerea",
+      "label": "Întreținerea"
+     },
+     "relation": "related_to",
+     "label": "cheltuieli de bloc",
+     "strength": 0.84
+    },
+    {
+     "from": {
+      "id": "n_v3via_intretinerea",
+      "label": "Întreținerea"
+     },
+     "to": {
+      "id": "n_v4gas_apa",
+      "label": "Apă"
+     },
+     "relation": "related_to",
+     "label": "intră la",
+     "strength": 0.72
+    },
+    {
+     "from": {
+      "id": "n_v4gas_apa",
+      "label": "Apă"
+     },
+     "to": {
+      "id": "n_stix_mecanica_fluidelor",
+      "label": "Mecanica fluidelor"
+     },
+     "relation": "related_to",
+     "label": "curge ca fluid",
+     "strength": 0.82
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_spt_david_popovici",
+     "label": "David Popovici"
+    },
+    {
+     "id": "n_spt_lotul_olimpic_romania",
+     "label": "Lotul olimpic al României"
+    },
+    {
+     "id": "n_bucuresti",
+     "label": "București"
+    },
+    {
+     "id": "n_v11sti_stefania_maracineanu",
+     "label": "Ștefania Mărăcineanu"
+    },
+    {
+     "id": "n_v2sti_fizica",
+     "label": "Fizică"
+    },
+    {
+     "id": "n_stix_mecanica_fluidelor",
+     "label": "Mecanica fluidelor"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_spt_david_popovici",
+      "label": "David Popovici"
+     },
+     "to": {
+      "id": "n_spt_lotul_olimpic_romania",
+      "label": "Lotul olimpic al României"
+     },
+     "relation": "related_to",
+     "label": "l-a inclus",
+     "strength": 0.74
+    },
+    {
+     "from": {
+      "id": "n_spt_lotul_olimpic_romania",
+      "label": "Lotul olimpic al României"
+     },
+     "to": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "relation": "related_to",
+     "label": "are federații",
+     "strength": 0.5
+    },
+    {
+     "from": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "to": {
+      "id": "n_v11sti_stefania_maracineanu",
+      "label": "Ștefania Mărăcineanu"
+     },
+     "relation": "located_in",
+     "label": "născută la București",
+     "strength": 0.66
+    },
+    {
+     "from": {
+      "id": "n_v11sti_stefania_maracineanu",
+      "label": "Ștefania Mărăcineanu"
+     },
+     "to": {
+      "id": "n_v2sti_fizica",
+      "label": "Fizică"
+     },
+     "relation": "associated_with",
+     "label": "cercetătoare în fizică",
+     "strength": 0.6
+    },
+    {
+     "from": {
+      "id": "n_v2sti_fizica",
+      "label": "Fizică"
+     },
+     "to": {
+      "id": "n_stix_mecanica_fluidelor",
+      "label": "Mecanica fluidelor"
+     },
+     "relation": "part_of",
+     "label": "ramură din",
+     "strength": 0.9
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:bf798ded977a73c42970eb8b28059986833c797ae6b848f18eb19aca5108946b"
+}

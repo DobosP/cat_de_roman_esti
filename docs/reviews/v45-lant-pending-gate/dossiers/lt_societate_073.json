@@ -1,0 +1,105 @@
+{
+ "id": "lt_societate_073",
+ "game": "lant",
+ "category": "societate",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "22ab412754c0bb14e9fcf5665a41685fb619dd54afac3c62ce49fd4f93014c4e",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Automobile Dacia salience 0.35 < 0.60 (usor floor)"
+  },
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Leul românesc salience 0.47 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_socx_automobile_dacia",
+  "label": "Automobile Dacia",
+  "node_type": "org",
+  "category": "societate",
+  "salience": 0.3544,
+  "degree": 7,
+  "incoming_degree": 7,
+  "description": "Constructor auto românesc lansat la Mioveni/Pitești, devenit marcă de export."
+ },
+ "target": {
+  "id": "n_leul_romanesc",
+  "label": "Leul românesc",
+  "node_type": "concept",
+  "category": "societate",
+  "salience": 0.4689,
+  "degree": 10,
+  "incoming_degree": 10,
+  "description": "Moneda nationala a Romaniei, administrata de Banca Nationala a Romaniei."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_socx_automobile_dacia",
+     "label": "Automobile Dacia"
+    },
+    {
+     "id": "n_socx_industria_romaneasca",
+     "label": "Industria românească"
+    },
+    {
+     "id": "n_leul_romanesc",
+     "label": "Leul românesc"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_socx_automobile_dacia",
+      "label": "Automobile Dacia"
+     },
+     "to": {
+      "id": "n_socx_industria_romaneasca",
+      "label": "Industria românească"
+     },
+     "relation": "related_to",
+     "label": "include marca",
+     "strength": 0.82
+    },
+    {
+     "from": {
+      "id": "n_socx_industria_romaneasca",
+      "label": "Industria românească"
+     },
+     "to": {
+      "id": "n_leul_romanesc",
+      "label": "Leul românesc"
+     },
+     "relation": "related_to",
+     "label": "se măsoară în",
+     "strength": 0.58
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:c172308969c07d1b6427b06c7a17e1cd2d6e571437dc7c5e0571023f25c02e0d"
+}

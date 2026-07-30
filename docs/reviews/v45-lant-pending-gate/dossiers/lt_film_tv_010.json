@@ -1,0 +1,112 @@
+{
+ "id": "lt_film_tv_010",
+ "game": "lant",
+ "category": "film_tv",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "9f76c0adf208fe4f7ef19ea55b79502e185e78fd10346b585fb84f845f7048b3",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_ftv_andreea_marin",
+  "label": "Andreea Marin",
+  "node_type": "person",
+  "category": "film_tv",
+  "salience": 0.5127,
+  "degree": 5,
+  "incoming_degree": 5,
+  "description": "Prezentatoare TV asociată puternic cu emisiunea Surprize, surprize."
+ },
+ "target": {
+  "id": "n_ftv_filantropica",
+  "label": "Filantropica",
+  "node_type": "work",
+  "category": "film_tv",
+  "salience": 0.722,
+  "degree": 9,
+  "incoming_degree": 9,
+  "description": "Film românesc din 2002 regizat de Nae Caranfil, satiră despre tranziție."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 3
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_ftv_andreea_marin",
+     "label": "Andreea Marin"
+    },
+    {
+     "id": "n_ftv_tvr",
+     "label": "TVR"
+    },
+    {
+     "id": "n_bucuresti",
+     "label": "București"
+    },
+    {
+     "id": "n_ftv_filantropica",
+     "label": "Filantropica"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_ftv_andreea_marin",
+      "label": "Andreea Marin"
+     },
+     "to": {
+      "id": "n_ftv_tvr",
+      "label": "TVR"
+     },
+     "relation": "related_to",
+     "label": "vedetă TVR",
+     "strength": 0.84
+    },
+    {
+     "from": {
+      "id": "n_ftv_tvr",
+      "label": "TVR"
+     },
+     "to": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "relation": "located_in",
+     "label": "sediu în București",
+     "strength": 0.62
+    },
+    {
+     "from": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "to": {
+      "id": "n_ftv_filantropica",
+      "label": "Filantropica"
+     },
+     "relation": "located_in",
+     "label": "plasat în",
+     "strength": 0.86
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:796ce439b715288322026d73c1bcc7ea21541c1c7fdd243e3dfbdeef77cfcdf8"
+}

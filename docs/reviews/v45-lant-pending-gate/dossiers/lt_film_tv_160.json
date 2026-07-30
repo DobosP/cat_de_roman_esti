@@ -1,0 +1,100 @@
+{
+ "id": "lt_film_tv_160",
+ "game": "lant",
+ "category": "film_tv",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "856af58769dcc98050f30194f485b9cb24f28b876cf6c0de130b755e99458539",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "La Măruță salience 0.43 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_muz_andra",
+  "label": "Andra",
+  "node_type": "person",
+  "category": "muzica",
+  "salience": 0.8183,
+  "degree": 9,
+  "incoming_degree": 9,
+  "description": "Cântăreață română pop, prezentă constant în radio, televiziune și concerte mari."
+ },
+ "target": {
+  "id": "n_ftv_la_maruta",
+  "label": "La Măruță",
+  "node_type": "work",
+  "category": "film_tv",
+  "salience": 0.4293,
+  "degree": 8,
+  "incoming_degree": 8,
+  "description": "Emisiune de divertisment și interviuri difuzată de Pro TV între 2007 și 2026."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_muz_andra",
+     "label": "Andra"
+    },
+    {
+     "id": "n_ftv_catalin_maruta",
+     "label": "Cătălin Măruță"
+    },
+    {
+     "id": "n_ftv_la_maruta",
+     "label": "La Măruță"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_muz_andra",
+      "label": "Andra"
+     },
+     "to": {
+      "id": "n_ftv_catalin_maruta",
+      "label": "Cătălin Măruță"
+     },
+     "relation": "related_to",
+     "label": "soțul Andrei",
+     "strength": 0.62
+    },
+    {
+     "from": {
+      "id": "n_ftv_catalin_maruta",
+      "label": "Cătălin Măruță"
+     },
+     "to": {
+      "id": "n_ftv_la_maruta",
+      "label": "La Măruță"
+     },
+     "relation": "related_to",
+     "label": "prezentată de",
+     "strength": 0.98
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:92cf1ad40d59cfbd39c8a661018f4dd7897dbc7768dcf937e5581628be0180c5"
+}

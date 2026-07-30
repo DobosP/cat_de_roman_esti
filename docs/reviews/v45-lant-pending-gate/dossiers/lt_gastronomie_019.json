@@ -1,0 +1,105 @@
+{
+ "id": "lt_gastronomie_019",
+ "game": "lant",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "0b31065565ba73f5a0df53dae99ad06efeefa2fddccd9df8e8d36e56d75d104e",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Șorici salience 0.43 < 0.60 (usor floor)"
+  },
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Vin fiert salience 0.54 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_gas_sorici",
+  "label": "Șorici",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.4287,
+  "degree": 7,
+  "incoming_degree": 7,
+  "description": "Piele de porc pârlită și curățată, gustată proaspăt la tăierea porcului."
+ },
+ "target": {
+  "id": "n_gas_vin_fiert",
+  "label": "Vin fiert",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.5385,
+  "degree": 7,
+  "incoming_degree": 7,
+  "description": "Băutură caldă cu scorțișoară și mirodenii, prezentă la târgurile de iarnă."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_gas_sorici",
+     "label": "Șorici"
+    },
+    {
+     "id": "n_gas_masa_craciun",
+     "label": "Masa de Crăciun"
+    },
+    {
+     "id": "n_gas_vin_fiert",
+     "label": "Vin fiert"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_gas_sorici",
+      "label": "Șorici"
+     },
+     "to": {
+      "id": "n_gas_masa_craciun",
+      "label": "Masa de Crăciun"
+     },
+     "relation": "part_of",
+     "label": "tăierea porcului",
+     "strength": 0.8
+    },
+    {
+     "from": {
+      "id": "n_gas_masa_craciun",
+      "label": "Masa de Crăciun"
+     },
+     "to": {
+      "id": "n_gas_vin_fiert",
+      "label": "Vin fiert"
+     },
+     "relation": "related_to",
+     "label": "târguri de iarnă",
+     "strength": 0.68
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:38a1869f80474fef59214915c640d97120175c7c5b5721b164da99b9aa9ceb1c"
+}

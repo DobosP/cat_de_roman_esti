@@ -1,0 +1,105 @@
+{
+ "id": "lt_stiinta_081",
+ "game": "lant",
+ "category": "stiinta",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "811f1ed2b15ec3f3b37172672b80cd98fdf2d60f8edf4594b73681e797ea0af7",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Traian Vuia salience 0.36 < 0.60 (usor floor)"
+  },
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Efectul Coandă salience 0.39 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_traian_vuia",
+  "label": "Traian Vuia",
+  "node_type": "person",
+  "category": "stiinta",
+  "salience": 0.3556,
+  "degree": 7,
+  "incoming_degree": 7,
+  "description": "Inventator roman, autor al unui aparat de zbor cu decolare proprie (1906)."
+ },
+ "target": {
+  "id": "n_efectul_coanda",
+  "label": "Efectul Coandă",
+  "node_type": "concept",
+  "category": "stiinta",
+  "salience": 0.3868,
+  "degree": 7,
+  "incoming_degree": 7,
+  "description": "Fenomen aerodinamic prin care un jet de fluid adera la o suprafata vecina."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_traian_vuia",
+     "label": "Traian Vuia"
+    },
+    {
+     "id": "n_aviatie",
+     "label": "Aviație"
+    },
+    {
+     "id": "n_efectul_coanda",
+     "label": "Efectul Coandă"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_traian_vuia",
+      "label": "Traian Vuia"
+     },
+     "to": {
+      "id": "n_aviatie",
+      "label": "Aviație"
+     },
+     "relation": "related_to",
+     "label": "pionier al",
+     "strength": 0.78
+    },
+    {
+     "from": {
+      "id": "n_aviatie",
+      "label": "Aviație"
+     },
+     "to": {
+      "id": "n_efectul_coanda",
+      "label": "Efectul Coandă"
+     },
+     "relation": "related_to",
+     "label": "aplicat in",
+     "strength": 0.6
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:504fd3f499899f8c4f7dd74eb8b681b8d2aef165303477cd498d42fe1713a700"
+}

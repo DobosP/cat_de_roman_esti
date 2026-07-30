@@ -1,0 +1,100 @@
+{
+ "id": "lt_gastronomie_014",
+ "game": "lant",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "3a9c25d065e5aef1cc73eb8996be0d24db0940e2bcaffd73fa511d9ae52e318a",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Moldova salience 0.60 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_gas_papanasi",
+  "label": "Papanași",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.9491,
+  "degree": 16,
+  "incoming_degree": 16,
+  "description": "Desert cu brânză, smântână și dulceață, prăjit sau fiert în variante regionale."
+ },
+ "target": {
+  "id": "n_moldova_reg",
+  "label": "Moldova",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.5978,
+  "degree": 29,
+  "incoming_degree": 36,
+  "description": "Regiune istorică din estul României."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_gas_papanasi",
+     "label": "Papanași"
+    },
+    {
+     "id": "n_gas_placinte_poale_brau",
+     "label": "Poale-n brâu"
+    },
+    {
+     "id": "n_moldova_reg",
+     "label": "Moldova"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_gas_papanasi",
+      "label": "Papanași"
+     },
+     "to": {
+      "id": "n_gas_placinte_poale_brau",
+      "label": "Poale-n brâu"
+     },
+     "relation": "same_category",
+     "label": "brânză dulce",
+     "strength": 0.72
+    },
+    {
+     "from": {
+      "id": "n_gas_placinte_poale_brau",
+      "label": "Poale-n brâu"
+     },
+     "to": {
+      "id": "n_moldova_reg",
+      "label": "Moldova"
+     },
+     "relation": "related_to",
+     "label": "moldovenești",
+     "strength": 0.7
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:ec36a637ba9219ccf114364f0eebf6c22d446f28a4f39b86cb02b6aa48dfc26d"
+}

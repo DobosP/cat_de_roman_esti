@@ -1,0 +1,115 @@
+{
+ "id": "lt_gastronomie_013",
+ "game": "lant",
+ "category": "gastronomie",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "77255ccf66025bb66a171025c4980dae0dea03df76019a654cdce28fe5c92305",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "Covrigi de Buzău": "national-salience concept (0.76) with generic related_to edge to Muntenia"
+ },
+ "start": {
+  "id": "n_gas_covrigi_buzau",
+  "label": "Covrigi de Buzău",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.7635,
+  "degree": 11,
+  "incoming_degree": 11,
+  "description": "Covrigi opăriți și copți, produs românesc cu indicație geografică protejată."
+ },
+ "target": {
+  "id": "n_marea_unire_1918",
+  "label": "Marea Unire 1918",
+  "node_type": "event",
+  "category": "istorie",
+  "salience": 0.6014,
+  "degree": 28,
+  "incoming_degree": 29,
+  "description": "Unirea Transilvaniei, Basarabiei si Bucovinei cu Romania."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_gas_covrigi_buzau",
+     "label": "Covrigi de Buzău"
+    },
+    {
+     "id": "n_gas_paine_de_casa",
+     "label": "Pâine de casă"
+    },
+    {
+     "id": "n_gas_fasole_ciolan",
+     "label": "Fasole cu ciolan"
+    },
+    {
+     "id": "n_marea_unire_1918",
+     "label": "Marea Unire 1918"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_gas_covrigi_buzau",
+      "label": "Covrigi de Buzău"
+     },
+     "to": {
+      "id": "n_gas_paine_de_casa",
+      "label": "Pâine de casă"
+     },
+     "relation": "same_category",
+     "label": "aluat copt",
+     "strength": 0.72
+    },
+    {
+     "from": {
+      "id": "n_gas_paine_de_casa",
+      "label": "Pâine de casă"
+     },
+     "to": {
+      "id": "n_gas_fasole_ciolan",
+      "label": "Fasole cu ciolan"
+     },
+     "relation": "related_to",
+     "label": "merge cu pâine",
+     "strength": 0.68
+    },
+    {
+     "from": {
+      "id": "n_gas_fasole_ciolan",
+      "label": "Fasole cu ciolan"
+     },
+     "to": {
+      "id": "n_marea_unire_1918",
+      "label": "Marea Unire 1918"
+     },
+     "relation": "related_to",
+     "label": "1 Decembrie evocă",
+     "strength": 0.62
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:9c86a4f7847bc16c025f0645734bc101e901bfcc0356b9afa3781673ae2092f0"
+}

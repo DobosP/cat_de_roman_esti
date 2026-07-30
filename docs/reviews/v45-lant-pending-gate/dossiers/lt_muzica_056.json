@@ -1,0 +1,100 @@
+{
+ "id": "lt_muzica_056",
+ "game": "lant",
+ "category": "muzica",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "9d0d7b02b925d15b02a003e831494bf92e0124686ff0c5b9ffa380c2084d3917",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Sub pielea mea salience 0.48 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_muz_dragostea_din_tei",
+  "label": "Dragostea din tei",
+  "node_type": "work",
+  "category": "muzica",
+  "salience": 0.9519,
+  "degree": 11,
+  "incoming_degree": 11,
+  "description": "Hit O-Zone din 2003, cunoscut global prin refrenul „nu mă, nu mă iei”."
+ },
+ "target": {
+  "id": "n_muz_sub_pielea_mea",
+  "label": "Sub pielea mea",
+  "node_type": "work",
+  "category": "muzica",
+  "salience": 0.4839,
+  "degree": 6,
+  "incoming_degree": 6,
+  "description": "Piesă Carla’s Dreams din 2016, cunoscută și ca „Sub pielea mea | #eroina\" — hit masiv pe YouTube."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_muz_dragostea_din_tei",
+     "label": "Dragostea din tei"
+    },
+    {
+     "id": "n_muz_refren_viral",
+     "label": "Refren viral"
+    },
+    {
+     "id": "n_muz_sub_pielea_mea",
+     "label": "Sub pielea mea"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_muz_dragostea_din_tei",
+      "label": "Dragostea din tei"
+     },
+     "to": {
+      "id": "n_muz_refren_viral",
+      "label": "Refren viral"
+     },
+     "relation": "related_to",
+     "label": "are refren viral",
+     "strength": 0.76
+    },
+    {
+     "from": {
+      "id": "n_muz_refren_viral",
+      "label": "Refren viral"
+     },
+     "to": {
+      "id": "n_muz_sub_pielea_mea",
+      "label": "Sub pielea mea"
+     },
+     "relation": "related_to",
+     "label": "are refren viral",
+     "strength": 0.76
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:7aa5e09657ccae3985d4dcfca8ccf4de30dc502802d0c359fafd2bc2d4fff907"
+}

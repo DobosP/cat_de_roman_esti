@@ -1,0 +1,100 @@
+{
+ "id": "lt_istorie_116",
+ "game": "lant",
+ "category": "istorie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "3188dea13dc3aeb4ab0f866526d0ad3d1aa52bcbcd6dcdff7b4aac31b0e2a357",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Societatea Națiunilor salience 0.21 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_perx_regina_maria",
+  "label": "Regina Maria",
+  "node_type": "person",
+  "category": "personalitati",
+  "salience": 0.9245,
+  "degree": 20,
+  "incoming_degree": 20,
+  "description": "Regină a României, figură publică majoră în Primul Război Mondial și în diplomația unirii."
+ },
+ "target": {
+  "id": "n_perx_liga_natiunilor",
+  "label": "Societatea Națiunilor",
+  "node_type": "org",
+  "category": "personalitati",
+  "salience": 0.2062,
+  "degree": 5,
+  "incoming_degree": 5,
+  "description": "Organizație internațională interbelică, precursoare simbolică a ONU."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_perx_regina_maria",
+     "label": "Regina Maria"
+    },
+    {
+     "id": "n_perx_nicolae_titulescu",
+     "label": "Nicolae Titulescu"
+    },
+    {
+     "id": "n_perx_liga_natiunilor",
+     "label": "Societatea Națiunilor"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_perx_regina_maria",
+      "label": "Regina Maria"
+     },
+     "to": {
+      "id": "n_perx_nicolae_titulescu",
+      "label": "Nicolae Titulescu"
+     },
+     "relation": "contemporary_of",
+     "label": "aceeași epocă",
+     "strength": 0.5
+    },
+    {
+     "from": {
+      "id": "n_perx_nicolae_titulescu",
+      "label": "Nicolae Titulescu"
+     },
+     "to": {
+      "id": "n_perx_liga_natiunilor",
+      "label": "Societatea Națiunilor"
+     },
+     "relation": "related_to",
+     "label": "a prezidat",
+     "strength": 0.92
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:b46f6321412e2201d597faf9747b76b28bbe35ff10c044b6ec743dac8002128e"
+}

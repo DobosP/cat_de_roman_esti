@@ -1,0 +1,117 @@
+{
+ "id": "lt_gastronomie_108",
+ "game": "lant",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "96fec44acd40aeb33fe4a604cb02f2b3ff47e1c7422833cd5849e7108b2ffb6d",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Prut salience 0.23 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_gas_bors",
+  "label": "Borș",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.6494,
+  "degree": 7,
+  "incoming_degree": 7,
+  "description": "Lichid acru din tărâțe fermentate, folosit mai ales la ciorbe moldovenești."
+ },
+ "target": {
+  "id": "n_prut",
+  "label": "Prut",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.2274,
+  "degree": 8,
+  "incoming_degree": 6,
+  "description": "Rau afluent al Dunarii, formeaza granita de est a Romaniei cu Republica Moldova."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_gas_bors",
+     "label": "Borș"
+    },
+    {
+     "id": "n_moldova_reg",
+     "label": "Moldova"
+    },
+    {
+     "id": "n_v11ist_basarabia",
+     "label": "Basarabia"
+    },
+    {
+     "id": "n_prut",
+     "label": "Prut"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_gas_bors",
+      "label": "Borș"
+     },
+     "to": {
+      "id": "n_moldova_reg",
+      "label": "Moldova"
+     },
+     "relation": "related_to",
+     "label": "folosit în",
+     "strength": 0.72
+    },
+    {
+     "from": {
+      "id": "n_moldova_reg",
+      "label": "Moldova"
+     },
+     "to": {
+      "id": "n_v11ist_basarabia",
+      "label": "Basarabia"
+     },
+     "relation": "part_of",
+     "label": "Moldova istorică",
+     "strength": 0.77
+    },
+    {
+     "from": {
+      "id": "n_v11ist_basarabia",
+      "label": "Basarabia"
+     },
+     "to": {
+      "id": "n_prut",
+      "label": "Prut"
+     },
+     "relation": "related_to",
+     "label": "râu de hotar",
+     "strength": 0.84
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:29bda5af92946862f744e55c4d12213798cf1aecd14837b45807f3806aea9e21"
+}

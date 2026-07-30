@@ -1,0 +1,105 @@
+{
+ "id": "lt_literatura_043",
+ "game": "lant",
+ "category": "literatura",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "5405eac458400d01171b243f80b1c86909e41050a92a3f1805198e6b4e51ecf4",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Ultima noapte de dragoste, întâia noapte de război salience 0.21 < 0.60 (usor floor)"
+  },
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Sburătorul salience 0.25 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_ultima_noapte",
+  "label": "Ultima noapte de dragoste, întâia noapte de război",
+  "node_type": "work",
+  "category": "literatura",
+  "salience": 0.2077,
+  "degree": 6,
+  "incoming_degree": 5,
+  "description": "Roman modernist publicat in 1930 de Camil Petrescu, roman al experientei si al analizei psihologice."
+ },
+ "target": {
+  "id": "n_sburatorul",
+  "label": "Sburătorul",
+  "node_type": "org",
+  "category": "literatura",
+  "salience": 0.2537,
+  "degree": 8,
+  "incoming_degree": 8,
+  "description": "Cenaclu si revista literara conduse de Eugen Lovinescu."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_ultima_noapte",
+     "label": "Ultima noapte de dragoste, întâia noapte de război"
+    },
+    {
+     "id": "n_modernism",
+     "label": "Modernism"
+    },
+    {
+     "id": "n_sburatorul",
+     "label": "Sburătorul"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_ultima_noapte",
+      "label": "Ultima noapte de dragoste, întâia noapte de război"
+     },
+     "to": {
+      "id": "n_modernism",
+      "label": "Modernism"
+     },
+     "relation": "related_to",
+     "label": "roman modernist",
+     "strength": 0.65
+    },
+    {
+     "from": {
+      "id": "n_modernism",
+      "label": "Modernism"
+     },
+     "to": {
+      "id": "n_sburatorul",
+      "label": "Sburătorul"
+     },
+     "relation": "related_to",
+     "label": "promoveaza curentul",
+     "strength": 0.5
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:10371fb63576d1c859b4d5fa932418b897bd70ba4791d7c809044e7165d080fa"
+}

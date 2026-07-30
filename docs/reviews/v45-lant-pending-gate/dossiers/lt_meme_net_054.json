@@ -1,0 +1,229 @@
+{
+ "id": "lt_meme_net_054",
+ "game": "lant",
+ "category": "meme_net",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "eacfa1f61fba8cb46d5bd035374464cd91ddbc9e98142160917c9ef499f6641a",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Unboxing românesc salience 0.29 < 0.35 (normal floor)"
+  }
+ ],
+ "start": {
+  "id": "n_net_unboxing_ro",
+  "label": "Unboxing românesc",
+  "node_type": "concept",
+  "category": "meme_net",
+  "salience": 0.2871,
+  "degree": 8,
+  "incoming_degree": 8,
+  "description": "Format video în care produsul e deschis pe cameră, cu reacții și detalii pentru public."
+ },
+ "target": {
+  "id": "n_vdr_lasa_ca_merge",
+  "label": "Lasă că merge și așa",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.9596,
+  "degree": 13,
+  "incoming_degree": 13,
+  "description": "Expresie folosită adesea ironic pentru acceptarea unei soluții provizorii sau imperfecte."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 3,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 5
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_net_unboxing_ro",
+     "label": "Unboxing românesc"
+    },
+    {
+     "id": "n_net_youtube_ro",
+     "label": "YouTube România"
+    },
+    {
+     "id": "n_limba_romana",
+     "label": "Limba română"
+    },
+    {
+     "id": "n_vdr_lasa_ca_merge",
+     "label": "Lasă că merge și așa"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_net_unboxing_ro",
+      "label": "Unboxing românesc"
+     },
+     "to": {
+      "id": "n_net_youtube_ro",
+      "label": "YouTube România"
+     },
+     "relation": "part_of",
+     "label": "include",
+     "strength": 0.62
+    },
+    {
+     "from": {
+      "id": "n_net_youtube_ro",
+      "label": "YouTube România"
+     },
+     "to": {
+      "id": "n_limba_romana",
+      "label": "Limba română"
+     },
+     "relation": "related_to",
+     "label": "circulă în",
+     "strength": 0.43
+    },
+    {
+     "from": {
+      "id": "n_limba_romana",
+      "label": "Limba română"
+     },
+     "to": {
+      "id": "n_vdr_lasa_ca_merge",
+      "label": "Lasă că merge și așa"
+     },
+     "relation": "related_to",
+     "label": "este expresie în",
+     "strength": 0.55
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_net_unboxing_ro",
+     "label": "Unboxing românesc"
+    },
+    {
+     "id": "n_net_thumbnail_cu_sageata",
+     "label": "Thumbnail cu săgeată"
+    },
+    {
+     "id": "n_net_meme_romanesc",
+     "label": "Memă românească"
+    },
+    {
+     "id": "n_vdr_lasa_ca_merge",
+     "label": "Lasă că merge și așa"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_net_unboxing_ro",
+      "label": "Unboxing românesc"
+     },
+     "to": {
+      "id": "n_net_thumbnail_cu_sageata",
+      "label": "Thumbnail cu săgeată"
+     },
+     "relation": "related_to",
+     "label": "se vinde prin",
+     "strength": 0.56
+    },
+    {
+     "from": {
+      "id": "n_net_thumbnail_cu_sageata",
+      "label": "Thumbnail cu săgeată"
+     },
+     "to": {
+      "id": "n_net_meme_romanesc",
+      "label": "Memă românească"
+     },
+     "relation": "related_to",
+     "label": "parodiază",
+     "strength": 0.44
+    },
+    {
+     "from": {
+      "id": "n_net_meme_romanesc",
+      "label": "Memă românească"
+     },
+     "to": {
+      "id": "n_vdr_lasa_ca_merge",
+      "label": "Lasă că merge și așa"
+     },
+     "relation": "related_to",
+     "label": "spune",
+     "strength": 0.86
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_net_unboxing_ro",
+     "label": "Unboxing românesc"
+    },
+    {
+     "id": "n_net_comentarii_online",
+     "label": "Comentarii online"
+    },
+    {
+     "id": "n_net_meme_romanesc",
+     "label": "Memă românească"
+    },
+    {
+     "id": "n_vdr_lasa_ca_merge",
+     "label": "Lasă că merge și așa"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_net_unboxing_ro",
+      "label": "Unboxing românesc"
+     },
+     "to": {
+      "id": "n_net_comentarii_online",
+      "label": "Comentarii online"
+     },
+     "relation": "related_to",
+     "label": "strânge întrebări în",
+     "strength": 0.43
+    },
+    {
+     "from": {
+      "id": "n_net_comentarii_online",
+      "label": "Comentarii online"
+     },
+     "to": {
+      "id": "n_net_meme_romanesc",
+      "label": "Memă românească"
+     },
+     "relation": "related_to",
+     "label": "se naște în",
+     "strength": 0.63
+    },
+    {
+     "from": {
+      "id": "n_net_meme_romanesc",
+      "label": "Memă românească"
+     },
+     "to": {
+      "id": "n_vdr_lasa_ca_merge",
+      "label": "Lasă că merge și așa"
+     },
+     "relation": "related_to",
+     "label": "spune",
+     "strength": 0.86
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:4cece6515744eadeb8a895f4bc15b05d29c8a435d590587d30a21d518bec8768"
+}

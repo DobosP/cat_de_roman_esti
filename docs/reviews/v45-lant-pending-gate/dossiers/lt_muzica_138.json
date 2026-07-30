@@ -1,0 +1,202 @@
+{
+ "id": "lt_muzica_138",
+ "game": "lant",
+ "category": "muzica",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "7414862bff6983bf8f3e2c75cf8403eb33b83553b7970bc861766fb284625036",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_muz_florin_salam",
+  "label": "Florin Salam",
+  "node_type": "person",
+  "category": "muzica",
+  "salience": 0.8134,
+  "degree": 7,
+  "incoming_degree": 6,
+  "description": "Cântăreț român de manele, celebru pentru vocea sa și pentru concertele de petrecere."
+ },
+ "target": {
+  "id": "n_gas_mici",
+  "label": "Mici",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.9765,
+  "degree": 20,
+  "incoming_degree": 20,
+  "description": "Mititei fripți pe grătar, asociați popular cu muștar, pâine și ieșiri de 1 Mai."
+ },
+ "optimal": 4,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 7
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_muz_florin_salam",
+     "label": "Florin Salam"
+    },
+    {
+     "id": "n_muz_muzica_petrecere",
+     "label": "Muzică de petrecere"
+    },
+    {
+     "id": "n_v17muz_gica_petrescu",
+     "label": "Gică Petrescu"
+    },
+    {
+     "id": "n_bucuresti",
+     "label": "București"
+    },
+    {
+     "id": "n_gas_mici",
+     "label": "Mici"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_muz_florin_salam",
+      "label": "Florin Salam"
+     },
+     "to": {
+      "id": "n_muz_muzica_petrecere",
+      "label": "Muzică de petrecere"
+     },
+     "relation": "related_to",
+     "label": "merge la petrecere",
+     "strength": 0.84
+    },
+    {
+     "from": {
+      "id": "n_muz_muzica_petrecere",
+      "label": "Muzică de petrecere"
+     },
+     "to": {
+      "id": "n_v17muz_gica_petrescu",
+      "label": "Gică Petrescu"
+     },
+     "relation": "associated_with",
+     "label": "clasic al muzicii de petrecere",
+     "strength": 0.85
+    },
+    {
+     "from": {
+      "id": "n_v17muz_gica_petrescu",
+      "label": "Gică Petrescu"
+     },
+     "to": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "relation": "related_to",
+     "label": "bucureștean get-beget",
+     "strength": 0.5
+    },
+    {
+     "from": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "to": {
+      "id": "n_gas_mici",
+      "label": "Mici"
+     },
+     "relation": "related_to",
+     "label": "faimoși în",
+     "strength": 0.58
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_muz_florin_salam",
+     "label": "Florin Salam"
+    },
+    {
+     "id": "n_v2muz_concert",
+     "label": "Concert"
+    },
+    {
+     "id": "n_v20muz_summer_well",
+     "label": "Summer Well"
+    },
+    {
+     "id": "n_bucuresti",
+     "label": "București"
+    },
+    {
+     "id": "n_gas_mici",
+     "label": "Mici"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_muz_florin_salam",
+      "label": "Florin Salam"
+     },
+     "to": {
+      "id": "n_v2muz_concert",
+      "label": "Concert"
+     },
+     "relation": "related_to",
+     "label": "cântă la evenimente",
+     "strength": 0.65
+    },
+    {
+     "from": {
+      "id": "n_v2muz_concert",
+      "label": "Concert"
+     },
+     "to": {
+      "id": "n_v20muz_summer_well",
+      "label": "Summer Well"
+     },
+     "relation": "associated_with",
+     "label": "găzduiește concerte",
+     "strength": 0.7
+    },
+    {
+     "from": {
+      "id": "n_v20muz_summer_well",
+      "label": "Summer Well"
+     },
+     "to": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "relation": "associated_with",
+     "label": "lângă București, la Buftea",
+     "strength": 0.65
+    },
+    {
+     "from": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "to": {
+      "id": "n_gas_mici",
+      "label": "Mici"
+     },
+     "relation": "related_to",
+     "label": "faimoși în",
+     "strength": 0.58
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:3ddfbef458591f222f865b62870db974d86cd070d4e952b534edbe561f069686"
+}

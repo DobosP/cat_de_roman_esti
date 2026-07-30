@@ -1,0 +1,112 @@
+{
+ "id": "lt_societate_192",
+ "game": "lant",
+ "category": "societate",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "38c7d6dd889b725e49f8eec33f0895cfdd63862c9783902c4fe8fde233e61839",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_vdr_scara_blocului",
+  "label": "Scara blocului",
+  "node_type": "place",
+  "category": "viata_de_roman",
+  "salience": 0.8591,
+  "degree": 12,
+  "incoming_degree": 12,
+  "description": "Spațiul comun unde se întâlnesc cutiile poștale, ecoul și anunțurile vecinilor."
+ },
+ "target": {
+  "id": "n_parlamentul_romaniei",
+  "label": "Parlamentul României",
+  "node_type": "org",
+  "category": "societate",
+  "salience": 0.6026,
+  "degree": 11,
+  "incoming_degree": 13,
+  "description": "Organul reprezentativ suprem si unica autoritate legiuitoare, format din Camera Deputatilor si Senat."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_vdr_scara_blocului",
+     "label": "Scara blocului"
+    },
+    {
+     "id": "n_vdr_bloc",
+     "label": "Blocul"
+    },
+    {
+     "id": "n_bucuresti",
+     "label": "București"
+    },
+    {
+     "id": "n_parlamentul_romaniei",
+     "label": "Parlamentul României"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_vdr_scara_blocului",
+      "label": "Scara blocului"
+     },
+     "to": {
+      "id": "n_vdr_bloc",
+      "label": "Blocul"
+     },
+     "relation": "part_of",
+     "label": "conține scara",
+     "strength": 0.9
+    },
+    {
+     "from": {
+      "id": "n_vdr_bloc",
+      "label": "Blocul"
+     },
+     "to": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "relation": "located_in",
+     "label": "este tipic urban",
+     "strength": 0.58
+    },
+    {
+     "from": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "to": {
+      "id": "n_parlamentul_romaniei",
+      "label": "Parlamentul României"
+     },
+     "relation": "related_to",
+     "label": "sediu în capitală",
+     "strength": 0.74
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:97ad514a5670d3e3616f5ffab64dfa8f3dd6727676e12035302eb1eb95176943"
+}

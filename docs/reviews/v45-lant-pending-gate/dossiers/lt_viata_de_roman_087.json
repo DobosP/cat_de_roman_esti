@@ -1,0 +1,95 @@
+{
+ "id": "lt_viata_de_roman_087",
+ "game": "lant",
+ "category": "viata_de_roman",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "b6f894ff058cea9aedca5598c46fd07982beeb27e4d03d80cd833d66c7e3462f",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_vdr_guma_turbo",
+  "label": "Guma Turbo",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.7867,
+  "degree": 5,
+  "incoming_degree": 5,
+  "description": "Gumă de mestecat cu abțibilduri cu mașini, populară în România anilor 90."
+ },
+ "target": {
+  "id": "n_dacia",
+  "label": "Dacia",
+  "node_type": "place",
+  "category": "istorie",
+  "salience": 0.6911,
+  "degree": 17,
+  "incoming_degree": 17,
+  "description": "Regat antic locuit de geto-daci, cucerit de Imperiul Roman."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_vdr_guma_turbo",
+     "label": "Guma Turbo"
+    },
+    {
+     "id": "n_vdr_dacia_1310",
+     "label": "Dacia 1310"
+    },
+    {
+     "id": "n_dacia",
+     "label": "Dacia"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_vdr_guma_turbo",
+      "label": "Guma Turbo"
+     },
+     "to": {
+      "id": "n_vdr_dacia_1310",
+      "label": "Dacia 1310"
+     },
+     "relation": "related_to",
+     "label": "arăta mașini",
+     "strength": 0.5
+    },
+    {
+     "from": {
+      "id": "n_vdr_dacia_1310",
+      "label": "Dacia 1310"
+     },
+     "to": {
+      "id": "n_dacia",
+      "label": "Dacia"
+     },
+     "relation": "related_to",
+     "label": "poartă numele",
+     "strength": 0.58
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:df4f046c75a320c28522e87616433b6b9cc57039cbcc2077bab0683338f8fcde"
+}

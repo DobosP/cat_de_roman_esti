@@ -1,0 +1,95 @@
+{
+ "id": "lt_gastronomie_165",
+ "game": "lant",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "4f45da28f3ee355a62915958c901b76a215dc32944dfcb295464eb47c387c6b4",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_ftv_chefi_la_cutite",
+  "label": "Chefi la cuțite",
+  "node_type": "work",
+  "category": "film_tv",
+  "salience": 0.7726,
+  "degree": 16,
+  "incoming_degree": 16,
+  "description": "Show culinar competitiv difuzat de Antena 1."
+ },
+ "target": {
+  "id": "n_gas_saorma_de_toate",
+  "label": "Șaorma cu de toate",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.9013,
+  "degree": 13,
+  "incoming_degree": 13,
+  "description": "Fast-food urban adoptat local, cu lipie, carne, cartofi, sosuri și murături."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_ftv_chefi_la_cutite",
+     "label": "Chefi la cuțite"
+    },
+    {
+     "id": "n_gas_mici",
+     "label": "Mici"
+    },
+    {
+     "id": "n_gas_saorma_de_toate",
+     "label": "Șaorma cu de toate"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_ftv_chefi_la_cutite",
+      "label": "Chefi la cuțite"
+     },
+     "to": {
+      "id": "n_gas_mici",
+      "label": "Mici"
+     },
+     "relation": "related_to",
+     "label": "mâncare la concurs",
+     "strength": 0.46
+    },
+    {
+     "from": {
+      "id": "n_gas_mici",
+      "label": "Mici"
+     },
+     "to": {
+      "id": "n_gas_saorma_de_toate",
+      "label": "Șaorma cu de toate"
+     },
+     "relation": "same_category",
+     "label": "mâncare de stradă",
+     "strength": 0.44
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:afa59d23c9205175a870ffc177fd7a387ca1793c1e28e65d62517ed55d8fc65b"
+}

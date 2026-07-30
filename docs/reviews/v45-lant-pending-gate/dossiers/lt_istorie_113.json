@@ -1,0 +1,105 @@
+{
+ "id": "lt_istorie_113",
+ "game": "lant",
+ "category": "istorie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "d64ef73a360e2df408b603807137d97da589eb93597758dd3bf42a6a312193de",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Alba Iulia salience 0.39 < 0.60 (usor floor)"
+  },
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Tratatul de la Trianon salience 0.41 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_alba_iulia",
+  "label": "Alba Iulia",
+  "node_type": "place",
+  "category": "istorie",
+  "salience": 0.3892,
+  "degree": 10,
+  "incoming_degree": 11,
+  "description": "Oras al marilor uniri (1600, 1918)."
+ },
+ "target": {
+  "id": "n_tratatul_trianon",
+  "label": "Tratatul de la Trianon",
+  "node_type": "event",
+  "category": "istorie",
+  "salience": 0.406,
+  "degree": 12,
+  "incoming_degree": 12,
+  "description": "Tratat de pace semnat în 1920 între Puterile Aliate și Asociate și Ungaria, care a stabilit noile frontiere ale Ungariei, inclusiv granița cu România."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_alba_iulia",
+     "label": "Alba Iulia"
+    },
+    {
+     "id": "n_transilvania",
+     "label": "Transilvania"
+    },
+    {
+     "id": "n_tratatul_trianon",
+     "label": "Tratatul de la Trianon"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_alba_iulia",
+      "label": "Alba Iulia"
+     },
+     "to": {
+      "id": "n_transilvania",
+      "label": "Transilvania"
+     },
+     "relation": "located_in",
+     "label": "are orasul",
+     "strength": 0.8
+    },
+    {
+     "from": {
+      "id": "n_transilvania",
+      "label": "Transilvania"
+     },
+     "to": {
+      "id": "n_tratatul_trianon",
+      "label": "Tratatul de la Trianon"
+     },
+     "relation": "related_to",
+     "label": "a confirmat unirea",
+     "strength": 0.72
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:f8a0f88ffd29a347e929b788ecfa32b31055b72eb8cfcee816286b19386243b8"
+}

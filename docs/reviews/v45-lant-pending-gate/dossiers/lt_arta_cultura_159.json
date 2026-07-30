@@ -1,0 +1,112 @@
+{
+ "id": "lt_arta_cultura_159",
+ "game": "lant",
+ "category": "arta_cultura",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "6da15c2167b5b1b4def7d6cda631e763aa9c0fbc3c257815f49296e57ad713da",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_carol_i",
+  "label": "Carol I",
+  "node_type": "person",
+  "category": "istorie",
+  "salience": 0.5379,
+  "degree": 21,
+  "incoming_degree": 20,
+  "description": "Primul rege al Romaniei (1881-1914)."
+ },
+ "target": {
+  "id": "n_ateneul_roman",
+  "label": "Ateneul Român",
+  "node_type": "place",
+  "category": "arta_cultura",
+  "salience": 0.6749,
+  "degree": 21,
+  "incoming_degree": 21,
+  "description": "Sala de concerte din Bucuresti inaugurata in 1888, principala scena a Festivalului George Enescu."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_carol_i",
+     "label": "Carol I"
+    },
+    {
+     "id": "n_theodor_aman",
+     "label": "Theodor Aman"
+    },
+    {
+     "id": "n_bucuresti",
+     "label": "București"
+    },
+    {
+     "id": "n_ateneul_roman",
+     "label": "Ateneul Român"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_carol_i",
+      "label": "Carol I"
+     },
+     "to": {
+      "id": "n_theodor_aman",
+      "label": "Theodor Aman"
+     },
+     "relation": "contemporary_of",
+     "label": "epoca lui Carol I",
+     "strength": 0.65
+    },
+    {
+     "from": {
+      "id": "n_theodor_aman",
+      "label": "Theodor Aman"
+     },
+     "to": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "relation": "located_in",
+     "label": "a activat in",
+     "strength": 0.6
+    },
+    {
+     "from": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "to": {
+      "id": "n_ateneul_roman",
+      "label": "Ateneul Român"
+     },
+     "relation": "located_in",
+     "label": "se afla in",
+     "strength": 0.9
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:bd1ffb1de73094b3c0fc50267e757613dea3c4d141d13c075dc776f6f212f953"
+}

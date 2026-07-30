@@ -25,6 +25,8 @@ selected batch or the durable rejection tombstones; ``board_reskin`` catches
 half-board concept recycling, including previously rejected boards;
 ``label_self_leak`` catches labels that repeat one of their answers;
 ``salience_floor`` flags Contexto/Lant/Alchimie targets below their difficulty band;
+``lant_playability`` blocks Lanț records that fail the runtime's exact-distance or
+shortest-path choice floors;
 ``member_overuse`` flags nodes reused across too many approved Conexiuni boards.
 
 Usage::
@@ -62,6 +64,7 @@ from cat_de_roman_esti.wordgames.packs import (  # noqa: E402
     _closure_generations,
     _opening_pairs,
     lant_branch_profile,
+    validate_payload,
 )
 from cat_de_roman_esti.wordgames.service import WordGameService  # noqa: E402
 
@@ -784,6 +787,18 @@ def check_target_salience(rec: dict, svc: WordGameService, *targets: str) -> lis
     return findings
 
 
+def check_lant_playability(rec: dict, svc: WordGameService) -> list[dict]:
+    """Expose the runtime Lanț validator as a fail-closed promotion lint."""
+    return [
+        {
+            "check": "lant_playability",
+            "level": "FAIL",
+            "detail": error,
+        }
+        for error in validate_payload(rec, "lant", svc)
+    ]
+
+
 # --------------------------------------------------------------------- dossiers
 def canonical_json_sha256(value: object) -> str:
     '''Stable SHA-256 for JSON-shaped review inputs.'''
@@ -1199,6 +1214,7 @@ def run(pack: dict, svc: WordGameService, strong: dict, regions: dict,
                 findings = check_target_salience(rec, svc, rec["target"])
             elif game == "lant":
                 findings = check_target_salience(rec, svc, rec["start"], rec["target"])
+                findings.extend(check_lant_playability(rec, svc))
             else:  # alchimie
                 findings = check_target_salience(rec, svc, rec["target"])
             findings.extend(check_generic_region(rec, game, svc, regions))

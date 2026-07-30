@@ -1,39 +1,46 @@
-# Task Result — V44 common-word Contexto quality wave
+# Task Result — V45 strict Lanț pending cleanup
 
 ## Outcome
 
-- Repaired Cald sau Rece feedback for all 71 shipped V30–V33 inbound-only common-word
-  nodes through 26 explicit mature scoring anchors without changing graph topology.
-- Added 12 unanimously safe resolver aliases and 11 non-winning projection terms;
-  rejected ambiguous, disputed, and normalization-colliding candidates.
-- Promoted `Capra cu trei iezi` and `Abecedar` from fresh bound C1–C6 dossiers.
-- Reserved three later IDs that duplicate already-selectable Contexto targets. Runtime
-  stock is now 201 selectable records with 201 unique targets.
-- Unified guesses, typo help, suggestions, and warmer clues behind one effective scoring
-  rule, closing proxy-to-secret disclosure and clue-rank mismatch defects found by the
-  adversarial review.
+- Rebuilt current-bound dossiers for all 107 pending Lanț records and applied independent
+  gameplay and inventory reviews under the conservative unanimous gate.
+- Found 91 records with 177 runtime playability failures. Fixed the critique workflow so
+  those failures are visible and blocking before subjective review.
+- Promoted no board: none received two promotion judgments. Removed 104 rejected records
+  and kept only `lt_literatura_210`, `lt_stiinta_216`, and `lt_viata_de_roman_211`
+  pending behind explicit repair blockers.
+- Reduced Lanț from 201 to 97 records while preserving all 94 approved/selectable boards.
+  The original pack is now 724 = 608 approved + 116 pending, with 447 runtime-eligible.
+- Regenerated ranking and derived metadata without changing the frozen 336-board
+  Intrusul/Perechi payload.
 
 ## Files
 
-- Runtime: `contexto.py`, `contexto_feedback.py`, `contexto_projection.py`.
-- Content: mirrored KG/pack/ranking/derived artifacts and V44 reserve sidecar.
-- Review: exact vocabulary funnel, two bound dossiers, unanimous verdict artifact.
-- Contracts: ADR-0068, current status, mobile snapshot, and V44 regression suite.
+- Workflow: `scripts/critique_pack.py` and its fail-closed regression.
+- Content: mirrored pack/ranking/derived artifacts and the runtime derived digest pin.
+- Review: deterministic report, 107 exact dossiers, full two-reviewer gate, and audit.
+- Contracts: ADR-0069, current status, historical-wave count updates, and V45 regressions.
 
 ## Verification
 
-- Complete backend: 700/700 green.
+- Complete backend: 705/705 green.
 - Accounts: 53/53 green; bounded session store: 16/16 green.
 - Ruff, `git diff --check`, pack, KG, ranking, and derived-catalog validators: green.
-- Adversarial 71-target API sweep: no typo leak, repeated clue anchor, or advertised/play
-  rank mismatch.
-- Pack: 608 approved / 220 pending; 447 selectable originals.
+- Targeted Lanț/pack contract: 21/21 green; V45 gate + critique suite: 102/102 green.
+- Pack: 608 approved / 116 pending; 447 selectable originals.
 - KG: 2,364 nodes / 9,217 edges / 7,452 aliases / 180 puzzles.
-- Frozen derived board payload: unchanged at 183 Intrusul / 153 Perechi.
+- Frozen derived board payload: unchanged at 183 Intrusul / 153 Perechi, SHA-256
+  `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
 
 ## Risk
 
-Contexto-only scoring behavior changes for the closed 71-node inventory. Exact wins,
-public guess identity, session TTL/caps, shared graph routes, Lanț/Alchimie behavior, and
-the frozen derived board payload are pinned by regression tests. No frontend files changed
-and V44 has not been deployed.
+Rejected Lanț records are preserved as exact dossiers and verdict evidence but do not yet
+have a dedicated import-time tombstone ledger. The three holds require fresh dossiers
+after their named blocker changes. Session TTL/caps, deterministic selection, graph
+topology, KG/mobile contract, frontend, and the frozen derived payload are unchanged.
+V45 has not been deployed.
+
+## Merge recommendation
+
+Green to land and push on `main`. Do not deploy as part of this task, and retain the task
+worktree/branch until the owner explicitly authorizes deletion.

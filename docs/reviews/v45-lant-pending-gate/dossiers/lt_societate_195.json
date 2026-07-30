@@ -1,0 +1,112 @@
+{
+ "id": "lt_societate_195",
+ "game": "lant",
+ "category": "societate",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "80012a675d3bfceba5197d0e5ab7e5827af1b297885afa95efa2375a6a0a4175",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_gas_mici",
+  "label": "Mici",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.9765,
+  "degree": 20,
+  "incoming_degree": 20,
+  "description": "Mititei fripți pe grătar, asociați popular cu muștar, pâine și ieșiri de 1 Mai."
+ },
+ "target": {
+  "id": "n_v2soc_alegeri",
+  "label": "Alegeri",
+  "node_type": "concept",
+  "category": "societate",
+  "salience": 0.8907,
+  "degree": 13,
+  "incoming_degree": 13,
+  "description": "Proces prin care cetățenii votează reprezentanți sau opțiuni politice."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_gas_mici",
+     "label": "Mici"
+    },
+    {
+     "id": "n_bucuresti",
+     "label": "București"
+    },
+    {
+     "id": "n_parlamentul_romaniei",
+     "label": "Parlamentul României"
+    },
+    {
+     "id": "n_v2soc_alegeri",
+     "label": "Alegeri"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_gas_mici",
+      "label": "Mici"
+     },
+     "to": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "relation": "related_to",
+     "label": "faimoși în",
+     "strength": 0.58
+    },
+    {
+     "from": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "to": {
+      "id": "n_parlamentul_romaniei",
+      "label": "Parlamentul României"
+     },
+     "relation": "related_to",
+     "label": "sediu în capitală",
+     "strength": 0.74
+    },
+    {
+     "from": {
+      "id": "n_parlamentul_romaniei",
+      "label": "Parlamentul României"
+     },
+     "to": {
+      "id": "n_v2soc_alegeri",
+      "label": "Alegeri"
+     },
+     "relation": "related_to",
+     "label": "ales prin vot",
+     "strength": 0.78
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:8b6dabbfd32834abc762e84dd6e344a4837fd01e20243891b8d2f8df63113699"
+}

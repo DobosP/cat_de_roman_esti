@@ -1,0 +1,129 @@
+{
+ "id": "lt_limba_119",
+ "game": "lant",
+ "category": "limba",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "909c16a73ac5b28e42b0d0874564645b99dd8d9ef5728026794723910a606d46",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_litx_nae_catavencu",
+  "label": "Nae Cațavencu",
+  "node_type": "person",
+  "category": "literatura",
+  "salience": 0.2805,
+  "degree": 5,
+  "incoming_degree": 5,
+  "description": "Demagogul ambițios din O scrisoare pierdută, celebru pentru retorica lui comică."
+ },
+ "target": {
+  "id": "n_v2lim_expresie_idiomatica",
+  "label": "Expresie idiomatică",
+  "node_type": "concept",
+  "category": "limba",
+  "salience": 0.5738,
+  "degree": 6,
+  "incoming_degree": 6,
+  "description": "Îmbinare fixă de cuvinte cu sens figurat, folosită frecvent în vorbire."
+ },
+ "optimal": 4,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 4
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_litx_nae_catavencu",
+     "label": "Nae Cațavencu"
+    },
+    {
+     "id": "n_v2fil_comedie",
+     "label": "Comedie"
+    },
+    {
+     "id": "n_ftv_las_fierbinti",
+     "label": "Las Fierbinți"
+    },
+    {
+     "id": "n_limba_romana",
+     "label": "Limba română"
+    },
+    {
+     "id": "n_v2lim_expresie_idiomatica",
+     "label": "Expresie idiomatică"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_litx_nae_catavencu",
+      "label": "Nae Cațavencu"
+     },
+     "to": {
+      "id": "n_v2fil_comedie",
+      "label": "Comedie"
+     },
+     "relation": "related_to",
+     "label": "comic politic",
+     "strength": 0.84
+    },
+    {
+     "from": {
+      "id": "n_v2fil_comedie",
+      "label": "Comedie"
+     },
+     "to": {
+      "id": "n_ftv_las_fierbinti",
+      "label": "Las Fierbinți"
+     },
+     "relation": "is_a",
+     "label": "ține de comedie",
+     "strength": 0.82
+    },
+    {
+     "from": {
+      "id": "n_ftv_las_fierbinti",
+      "label": "Las Fierbinți"
+     },
+     "to": {
+      "id": "n_limba_romana",
+      "label": "Limba română"
+     },
+     "relation": "related_to",
+     "label": "replici intrate în vorbire",
+     "strength": 0.52
+    },
+    {
+     "from": {
+      "id": "n_limba_romana",
+      "label": "Limba română"
+     },
+     "to": {
+      "id": "n_v2lim_expresie_idiomatica",
+      "label": "Expresie idiomatică"
+     },
+     "relation": "part_of",
+     "label": "aparține limbii",
+     "strength": 0.73
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:cc70079a9c83c586a90b2bb7947dbbcf4413f9d525409310bce6e71e1847a95b"
+}

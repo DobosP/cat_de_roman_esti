@@ -1,0 +1,105 @@
+{
+ "id": "lt_stiinta_084",
+ "game": "lant",
+ "category": "stiinta",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "c858b8e581de96a70a928cecd26ea9b1a7f7cfce4387375fdad6c120f9642fd8",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Ion Barbu salience 0.26 < 0.60 (usor floor)"
+  },
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Gheorghe Țițeica salience 0.16 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_ion_barbu",
+  "label": "Ion Barbu",
+  "node_type": "person",
+  "category": "literatura",
+  "salience": 0.2608,
+  "degree": 6,
+  "incoming_degree": 5,
+  "description": "Poet modernist si matematician (1895-1961), autor al volumului Joc secund."
+ },
+ "target": {
+  "id": "n_stix_gheorghe_titeica",
+  "label": "Gheorghe Țițeica",
+  "node_type": "person",
+  "category": "stiinta",
+  "salience": 0.1596,
+  "degree": 4,
+  "incoming_degree": 5,
+  "description": "Matematician român cunoscut pentru contribuții în geometria diferențială."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_ion_barbu",
+     "label": "Ion Barbu"
+    },
+    {
+     "id": "n_stix_matematica_romaneasca",
+     "label": "Matematica românească"
+    },
+    {
+     "id": "n_stix_gheorghe_titeica",
+     "label": "Gheorghe Țițeica"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_ion_barbu",
+      "label": "Ion Barbu"
+     },
+     "to": {
+      "id": "n_stix_matematica_romaneasca",
+      "label": "Matematica românească"
+     },
+     "relation": "related_to",
+     "label": "poet matematician",
+     "strength": 0.86
+    },
+    {
+     "from": {
+      "id": "n_stix_matematica_romaneasca",
+      "label": "Matematica românească"
+     },
+     "to": {
+      "id": "n_stix_gheorghe_titeica",
+      "label": "Gheorghe Țițeica"
+     },
+     "relation": "part_of",
+     "label": "aparține de",
+     "strength": 0.76
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:bec990dc9ae24aecd3abe17f40f7f63a490c7f98995cb67c2d2e376b13764cfd"
+}

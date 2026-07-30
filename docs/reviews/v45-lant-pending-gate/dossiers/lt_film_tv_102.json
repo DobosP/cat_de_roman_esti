@@ -1,0 +1,168 @@
+{
+ "id": "lt_film_tv_102",
+ "game": "lant",
+ "category": "film_tv",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "61d7f709a219635571c662eb73a3afc2645f3c850689236a60a31397fe3a3412",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_ftv_nea_marin_miliardar",
+  "label": "Nea Mărin Miliardar",
+  "node_type": "work",
+  "category": "film_tv",
+  "salience": 0.8514,
+  "degree": 9,
+  "incoming_degree": 9,
+  "description": "Comedie românească din 1979 cu Amza Pellea în dublu rol memorabil."
+ },
+ "target": {
+  "id": "n_gas_mici",
+  "label": "Mici",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.9765,
+  "degree": 20,
+  "incoming_degree": 20,
+  "description": "Mititei fripți pe grătar, asociați popular cu muștar, pâine și ieșiri de 1 Mai."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 3
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_ftv_nea_marin_miliardar",
+     "label": "Nea Mărin Miliardar"
+    },
+    {
+     "id": "n_cinematografia_romaneasca",
+     "label": "Cinematografia românească"
+    },
+    {
+     "id": "n_bucuresti",
+     "label": "București"
+    },
+    {
+     "id": "n_gas_mici",
+     "label": "Mici"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_ftv_nea_marin_miliardar",
+      "label": "Nea Mărin Miliardar"
+     },
+     "to": {
+      "id": "n_cinematografia_romaneasca",
+      "label": "Cinematografia românească"
+     },
+     "relation": "is_a",
+     "label": "comedie românească",
+     "strength": 0.86
+    },
+    {
+     "from": {
+      "id": "n_cinematografia_romaneasca",
+      "label": "Cinematografia românească"
+     },
+     "to": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "relation": "located_in",
+     "label": "industrie culturala in",
+     "strength": 0.45
+    },
+    {
+     "from": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "to": {
+      "id": "n_gas_mici",
+      "label": "Mici"
+     },
+     "relation": "related_to",
+     "label": "faimoși în",
+     "strength": 0.58
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_ftv_nea_marin_miliardar",
+     "label": "Nea Mărin Miliardar"
+    },
+    {
+     "id": "n_ftv_bd_la_munte_si_la_mare",
+     "label": "B.D. la munte și la mare"
+    },
+    {
+     "id": "n_bucuresti",
+     "label": "București"
+    },
+    {
+     "id": "n_gas_mici",
+     "label": "Mici"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_ftv_nea_marin_miliardar",
+      "label": "Nea Mărin Miliardar"
+     },
+     "to": {
+      "id": "n_ftv_bd_la_munte_si_la_mare",
+      "label": "B.D. la munte și la mare"
+     },
+     "relation": "same_category",
+     "label": "comedii populare",
+     "strength": 0.7
+    },
+    {
+     "from": {
+      "id": "n_ftv_bd_la_munte_si_la_mare",
+      "label": "B.D. la munte și la mare"
+     },
+     "to": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "relation": "related_to",
+     "label": "brigadă bucureșteană",
+     "strength": 0.5
+    },
+    {
+     "from": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "to": {
+      "id": "n_gas_mici",
+      "label": "Mici"
+     },
+     "relation": "related_to",
+     "label": "faimoși în",
+     "strength": 0.58
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:f8f5cbbf4f856845d0dd5606df94c0f4bbded4cc3e4cbf2fbd8924ea6923675a"
+}

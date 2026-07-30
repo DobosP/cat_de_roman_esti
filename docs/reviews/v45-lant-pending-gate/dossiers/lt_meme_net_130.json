@@ -1,0 +1,129 @@
+{
+ "id": "lt_meme_net_130",
+ "game": "lant",
+ "category": "meme_net",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "0992c6a71091c38ee132e54eb92bd5c557d1a5c3dc755b7fcf94c9b26343e2c0",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_spt_generatia_de_aur",
+  "label": "Generația de Aur",
+  "node_type": "concept",
+  "category": "sport",
+  "salience": 0.9638,
+  "degree": 15,
+  "incoming_degree": 17,
+  "description": "Nucleul naționalei de fotbal care a dus România în sferturile Mondialului din 1994."
+ },
+ "target": {
+  "id": "n_v2mem_replici_memorabile",
+  "label": "Replică memorabilă",
+  "node_type": "concept",
+  "category": "meme_net",
+  "salience": 0.8893,
+  "degree": 23,
+  "incoming_degree": 23,
+  "description": "Formulare scurtă care rămâne în cultura populară și e citată des."
+ },
+ "optimal": 4,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 11
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_spt_generatia_de_aur",
+     "label": "Generația de Aur"
+    },
+    {
+     "id": "n_romania_stat",
+     "label": "România"
+    },
+    {
+     "id": "n_academia_romana",
+     "label": "Academia Română"
+    },
+    {
+     "id": "n_limba_romana",
+     "label": "Limba română"
+    },
+    {
+     "id": "n_v2mem_replici_memorabile",
+     "label": "Replică memorabilă"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_spt_generatia_de_aur",
+      "label": "Generația de Aur"
+     },
+     "to": {
+      "id": "n_romania_stat",
+      "label": "România"
+     },
+     "relation": "related_to",
+     "label": "a reprezentat România",
+     "strength": 0.86
+    },
+    {
+     "from": {
+      "id": "n_romania_stat",
+      "label": "România"
+     },
+     "to": {
+      "id": "n_academia_romana",
+      "label": "Academia Română"
+     },
+     "relation": "located_in",
+     "label": "for cultural national al",
+     "strength": 0.6
+    },
+    {
+     "from": {
+      "id": "n_academia_romana",
+      "label": "Academia Română"
+     },
+     "to": {
+      "id": "n_limba_romana",
+      "label": "Limba română"
+     },
+     "relation": "related_to",
+     "label": "normeaza",
+     "strength": 0.6
+    },
+    {
+     "from": {
+      "id": "n_limba_romana",
+      "label": "Limba română"
+     },
+     "to": {
+      "id": "n_v2mem_replici_memorabile",
+      "label": "Replică memorabilă"
+     },
+     "relation": "related_to",
+     "label": "circulă în limbă",
+     "strength": 0.72
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:de2e20891489ec8cde886f0e96d741aeda5a1851bd2918a92092fe7d0726f4c9"
+}

@@ -1,0 +1,112 @@
+{
+ "id": "lt_sport_078",
+ "game": "lant",
+ "category": "sport",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "d1539918fce763df0224f29ea94e2a4fbce623e4a9ab9d918854dee2d8dd0738",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_marea_neagra",
+  "label": "Marea Neagră",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.6416,
+  "degree": 26,
+  "incoming_degree": 27,
+  "description": "Mare la est de România, litoralul românesc."
+ },
+ "target": {
+  "id": "n_spt_simona_wimbledon_2019",
+  "label": "Wimbledon 2019",
+  "node_type": "event",
+  "category": "sport",
+  "salience": 0.9118,
+  "degree": 6,
+  "incoming_degree": 6,
+  "description": "Al doilea titlu de Grand Slam al Simonei Halep, câștigat pe iarba londoneză."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_marea_neagra",
+     "label": "Marea Neagră"
+    },
+    {
+     "id": "n_constanta",
+     "label": "Constanța"
+    },
+    {
+     "id": "n_simona_halep",
+     "label": "Simona Halep"
+    },
+    {
+     "id": "n_spt_simona_wimbledon_2019",
+     "label": "Wimbledon 2019"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_marea_neagra",
+      "label": "Marea Neagră"
+     },
+     "to": {
+      "id": "n_constanta",
+      "label": "Constanța"
+     },
+     "relation": "located_in",
+     "label": "are portul",
+     "strength": 0.8
+    },
+    {
+     "from": {
+      "id": "n_constanta",
+      "label": "Constanța"
+     },
+     "to": {
+      "id": "n_simona_halep",
+      "label": "Simona Halep"
+     },
+     "relation": "related_to",
+     "label": "este din",
+     "strength": 0.78
+    },
+    {
+     "from": {
+      "id": "n_simona_halep",
+      "label": "Simona Halep"
+     },
+     "to": {
+      "id": "n_spt_simona_wimbledon_2019",
+      "label": "Wimbledon 2019"
+     },
+     "relation": "related_to",
+     "label": "a câștigat",
+     "strength": 0.97
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:9f2e06054f1f01893b52c9141987587765014bb0d0d543010a03e39b51b14398"
+}

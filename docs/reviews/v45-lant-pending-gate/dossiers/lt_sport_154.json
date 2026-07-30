@@ -1,0 +1,95 @@
+{
+ "id": "lt_sport_154",
+ "game": "lant",
+ "category": "sport",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "36fe8bc8c0a3441d08624919489608053abd020a043f83700ca2f68779955c91",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_bucuresti",
+  "label": "București",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.6721,
+  "degree": 103,
+  "incoming_degree": 108,
+  "description": "Capitala României, în Muntenia."
+ },
+ "target": {
+  "id": "n_spt_finala_sevilla_1986",
+  "label": "Finala de la Sevilla",
+  "node_type": "event",
+  "category": "sport",
+  "salience": 0.9378,
+  "degree": 13,
+  "incoming_degree": 13,
+  "description": "Finala Steaua - Barcelona din 1986, decisă la loviturile de departajare."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_bucuresti",
+     "label": "București"
+    },
+    {
+     "id": "n_spt_steaua_1986",
+     "label": "Steaua 1986"
+    },
+    {
+     "id": "n_spt_finala_sevilla_1986",
+     "label": "Finala de la Sevilla"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "to": {
+      "id": "n_spt_steaua_1986",
+      "label": "Steaua 1986"
+     },
+     "relation": "located_in",
+     "label": "este din",
+     "strength": 0.72
+    },
+    {
+     "from": {
+      "id": "n_spt_steaua_1986",
+      "label": "Steaua 1986"
+     },
+     "to": {
+      "id": "n_spt_finala_sevilla_1986",
+      "label": "Finala de la Sevilla"
+     },
+     "relation": "related_to",
+     "label": "a jucat",
+     "strength": 0.95
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:a874942ceb86836e201aeb1b9f1bb18fbb07dfd79272f33942ff574251363118"
+}

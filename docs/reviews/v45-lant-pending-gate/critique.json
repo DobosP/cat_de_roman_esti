@@ -1,0 +1,2079 @@
+{
+ "thresholds": {
+  "salience_floors": {
+   "usor": 0.6,
+   "normal": 0.35,
+   "greu": 0.2
+  },
+  "strong_edge": 0.6,
+  "mirror_pairs": 3,
+  "red_herring_warn": 2,
+  "red_herring_fail": 4,
+  "member_overuse": 8,
+  "board_overlap_fail": 8,
+  "label_leak_min_chars": 3,
+  "region_fanout": 2,
+  "national_salience": 0.7
+ },
+ "items": {
+  "lt_arta_cultura_156": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_arta_cultura_158": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Moromeții salience 0.31 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_arta_cultura_159": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_film_tv_008": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "4 luni, 3 săptămâni și 2 zile salience 0.28 < 0.35 (normal floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_film_tv_010": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_film_tv_012": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Isoscel salience 0.31 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_film_tv_097": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Marin Preda salience 0.25 < 0.35 (normal floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_film_tv_101": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Teo, Vio și Costel salience 0.32 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_film_tv_102": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_film_tv_160": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "La Măruță salience 0.43 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_gastronomie_013": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_gastronomie_014": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Moldova salience 0.60 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_gastronomie_016": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Bucovina salience 0.38 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_gastronomie_019": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Șorici salience 0.43 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Vin fiert salience 0.54 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_gastronomie_103": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Mănăstirea Voroneț salience 0.41 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_gastronomie_104": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_gastronomie_106": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_gastronomie_108": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Prut salience 0.23 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_gastronomie_164": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_gastronomie_165": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_geografie_020": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Arad salience 0.18 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Cluj-Napoca salience 0.50 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_geografie_024": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Anghel Saligny salience 0.31 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Sfântu Gheorghe (braț) salience 0.15 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_geografie_026": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Sinaia salience 0.30 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Lacul Vidraru salience 0.24 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_geografie_167": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_istorie_027": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Decebal salience 0.54 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Columna lui Traian salience 0.25 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_istorie_031": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Burebista salience 0.16 < 0.35 (normal floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Traian salience 0.30 < 0.35 (normal floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_istorie_113": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Alba Iulia salience 0.39 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Tratatul de la Trianon salience 0.41 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_istorie_116": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Societatea Națiunilor salience 0.21 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_limba_035": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Pronume salience 0.23 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Caz gramatical salience 0.20 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_limba_037": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Aromână salience 0.29 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Substratul dacic salience 0.22 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_limba_038": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Folclor românesc salience 0.53 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_limba_039": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Neologismele franceze salience 0.23 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Școala Ardeleană salience 0.34 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_limba_117": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Păpușoi salience 0.20 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_limba_118": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Școala Ardeleană salience 0.34 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Limba română literară salience 0.47 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_limba_119": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_limba_120": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Miorița salience 0.50 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_limba_121": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_limba_174": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Columna lui Traian salience 0.25 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Limba latină salience 0.43 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_limba_175": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_limba_176": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Brevetul francez al stiloului salience 0.16 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Neologismele franceze salience 0.23 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_literatura_042": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Ghiță salience 0.20 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Junimea salience 0.50 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_literatura_043": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Ultima noapte de dragoste, întâia noapte de război salience 0.21 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Sburătorul salience 0.25 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_literatura_045": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Convorbiri literare salience 0.29 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Sărmanul Dionis salience 0.23 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_literatura_046": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Ion Barbu salience 0.26 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Ultima noapte de dragoste, întâia noapte de război salience 0.21 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_literatura_124": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Alfabetul chirilic românesc salience 0.20 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_literatura_125": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_literatura_177": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Luceafărul salience 0.48 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Junimea salience 0.50 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_meme_net_050": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Zaiafet salience 0.36 < 0.60 (usor floor)"
+    }
+   ]
+  },
+  "lt_meme_net_053": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Teo, Vio și Costel salience 0.32 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "F.O.C.A. din RObotzi salience 0.28 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_meme_net_054": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Unboxing românesc salience 0.29 < 0.35 (normal floor)"
+    }
+   ]
+  },
+  "lt_meme_net_130": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_meme_net_133": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "A da cu mucii-n fasole salience 0.27 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_muzica_056": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Sub pielea mea salience 0.48 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_muzica_057": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Undeva-n Balcani salience 0.36 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_muzica_059": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "După blocuri salience 0.26 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Vara nu dorm salience 0.56 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_muzica_061": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Maria Tănase salience 0.37 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_muzica_138": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_muzica_140": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Ploaia salience 0.39 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Doina salience 0.40 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_muzica_183": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Vama Veche salience 0.28 < 0.60 (usor floor)"
+    }
+   ]
+  },
+  "lt_personalitati_062": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Cumințenia Pământului salience 0.18 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_personalitati_063": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Masa Tăcerii salience 0.35 < 0.35 (normal floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Oedipe salience 0.26 < 0.35 (normal floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_personalitati_064": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Balcic salience 0.17 < 0.35 (normal floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_personalitati_065": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Bizanț după Bizanț salience 0.16 < 0.35 (normal floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_personalitati_068": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Rapsodiile Române salience 0.17 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_personalitati_142": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Poarta Sărutului salience 0.36 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_personalitati_144": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Castelul Pelișor salience 0.18 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_personalitati_145": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Oedipe salience 0.26 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Angela Gheorghiu salience 0.28 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_personalitati_146": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Moartea domnului Lăzărescu salience 0.27 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Liviu Ciulei salience 0.27 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_personalitati_147": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Dadaism salience 0.22 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Mircea Eliade salience 0.35 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_personalitati_148": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Podul de la Cernavodă salience 0.21 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_personalitati_187": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Maria Tănase salience 0.37 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_societate_072": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Școala Ardeleană salience 0.34 < 0.35 (normal floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_societate_073": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Automobile Dacia salience 0.35 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Leul românesc salience 0.47 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_societate_074": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Combinatul siderurgic Galați salience 0.25 < 0.35 (normal floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Banca Națională a României salience 0.32 < 0.35 (normal floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_societate_153": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Uzinele Reșița salience 0.22 < 0.35 (normal floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Anghel Saligny salience 0.31 < 0.35 (normal floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_societate_192": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_societate_193": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Automobile Dacia salience 0.35 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_societate_195": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_sport_078": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_sport_079": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Delta Dunării salience 0.60 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Cinci inele olimpice salience 0.57 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_sport_154": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_sport_199": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Stadionul Ghencea salience 0.53 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_stiinta_081": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Traian Vuia salience 0.36 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Efectul Coandă salience 0.39 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_stiinta_084": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Ion Barbu salience 0.26 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Gheorghe Țițeica salience 0.16 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_stiinta_155": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Aeroportul Băneasa Aurel Vlaicu salience 0.20 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Efectul Coandă salience 0.39 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_stiinta_157": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Stiloul cu rezervor salience 0.21 < 0.35 (normal floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_stiinta_159": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Peștera Scărișoara salience 0.18 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Emil Racoviță salience 0.47 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_stiinta_160": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Premiul Nobel salience 0.38 < 0.60 (usor floor)"
+    },
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Ribozom salience 0.21 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_stiinta_204": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_viata_de_roman_087": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_viata_de_roman_090": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Mărțișor salience 0.29 < 0.60 (usor floor)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_viata_de_roman_091": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_viata_de_roman_093": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  },
+  "lt_viata_de_roman_206": {
+   "game": "lant",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "only 1 valid first-hop choice(s) (< 2)"
+    },
+    {
+     "check": "lant_playability",
+     "level": "FAIL",
+     "detail": "narrowest shortest-path layer has width 1 (< 2)"
+    }
+   ]
+  }
+ },
+ "pack_findings": []
+}

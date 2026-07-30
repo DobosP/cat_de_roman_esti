@@ -1,0 +1,100 @@
+{
+ "id": "lt_film_tv_101",
+ "game": "lant",
+ "category": "film_tv",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "970e65565e2120c152e7ea52aa5ffefb3dd9a70b5af0b72d5f846fb77313fc4c",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Teo, Vio și Costel salience 0.32 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_ftv_vacanta_mare",
+  "label": "Vacanța Mare",
+  "node_type": "org",
+  "category": "film_tv",
+  "salience": 0.7937,
+  "degree": 10,
+  "incoming_degree": 10,
+  "description": "Grup și brand de comedie TV românească, cunoscut pentru Leana și Costel."
+ },
+ "target": {
+  "id": "n_net_teo_vio_costel",
+  "label": "Teo, Vio și Costel",
+  "node_type": "org",
+  "category": "meme_net",
+  "salience": 0.319,
+  "degree": 7,
+  "incoming_degree": 7,
+  "description": "Trio de comedianți important pentru stand-up-ul românesc modern."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_ftv_vacanta_mare",
+     "label": "Vacanța Mare"
+    },
+    {
+     "id": "n_v2fil_comedie",
+     "label": "Comedie"
+    },
+    {
+     "id": "n_net_teo_vio_costel",
+     "label": "Teo, Vio și Costel"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_ftv_vacanta_mare",
+      "label": "Vacanța Mare"
+     },
+     "to": {
+      "id": "n_v2fil_comedie",
+      "label": "Comedie"
+     },
+     "relation": "is_a",
+     "label": "ține de comedie",
+     "strength": 0.82
+    },
+    {
+     "from": {
+      "id": "n_v2fil_comedie",
+      "label": "Comedie"
+     },
+     "to": {
+      "id": "n_net_teo_vio_costel",
+      "label": "Teo, Vio și Costel"
+     },
+     "relation": "related_to",
+     "label": "stand-up comedy",
+     "strength": 0.73
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:53158e45b01b3e7cbd272584a3e75f24224e10139f5f5c4f3747ee11f27da29d"
+}

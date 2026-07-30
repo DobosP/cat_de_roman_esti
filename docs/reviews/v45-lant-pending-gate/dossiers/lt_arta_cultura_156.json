@@ -1,0 +1,146 @@
+{
+ "id": "lt_arta_cultura_156",
+ "game": "lant",
+ "category": "arta_cultura",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "a212fb5ac2da32f67e2a79673774a2cb234de2af4ed95aa4fa73298a57d5e8d0",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_gas_masa_craciun",
+  "label": "Masa de Crăciun",
+  "node_type": "event",
+  "category": "gastronomie",
+  "salience": 0.9659,
+  "degree": 19,
+  "incoming_degree": 19,
+  "description": "Masă festivă cu porc, cozonac, sarmale, piftie și multe platouri reci."
+ },
+ "target": {
+  "id": "n_masa_tacerii",
+  "label": "Masa Tăcerii",
+  "node_type": "work",
+  "category": "arta_cultura",
+  "salience": 0.3478,
+  "degree": 7,
+  "incoming_degree": 7,
+  "description": "Sculptura de Brancusi din Ansamblul de la Targu Jiu."
+ },
+ "optimal": 5,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 4
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_gas_masa_craciun",
+     "label": "Masa de Crăciun"
+    },
+    {
+     "id": "n_gas_sarmale",
+     "label": "Sarmale"
+    },
+    {
+     "id": "n_moldova_reg",
+     "label": "Moldova"
+    },
+    {
+     "id": "n_george_enescu",
+     "label": "George Enescu"
+    },
+    {
+     "id": "n_constantin_brancusi",
+     "label": "Constantin Brâncuși"
+    },
+    {
+     "id": "n_masa_tacerii",
+     "label": "Masa Tăcerii"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_gas_masa_craciun",
+      "label": "Masa de Crăciun"
+     },
+     "to": {
+      "id": "n_gas_sarmale",
+      "label": "Sarmale"
+     },
+     "relation": "part_of",
+     "label": "fel de Crăciun",
+     "strength": 0.88
+    },
+    {
+     "from": {
+      "id": "n_gas_sarmale",
+      "label": "Sarmale"
+     },
+     "to": {
+      "id": "n_moldova_reg",
+      "label": "Moldova"
+     },
+     "relation": "related_to",
+     "label": "popular în",
+     "strength": 0.52
+    },
+    {
+     "from": {
+      "id": "n_moldova_reg",
+      "label": "Moldova"
+     },
+     "to": {
+      "id": "n_george_enescu",
+      "label": "George Enescu"
+     },
+     "relation": "located_in",
+     "label": "nascut in regiunea",
+     "strength": 0.5
+    },
+    {
+     "from": {
+      "id": "n_george_enescu",
+      "label": "George Enescu"
+     },
+     "to": {
+      "id": "n_constantin_brancusi",
+      "label": "Constantin Brâncuși"
+     },
+     "relation": "contemporary_of",
+     "label": "contemporani",
+     "strength": 0.58
+    },
+    {
+     "from": {
+      "id": "n_constantin_brancusi",
+      "label": "Constantin Brâncuși"
+     },
+     "to": {
+      "id": "n_masa_tacerii",
+      "label": "Masa Tăcerii"
+     },
+     "relation": "related_to",
+     "label": "a sculptat",
+     "strength": 0.94
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:bce9b0dec893ca5df01d6211244db88b900205efbb5615abb6b39241f1904129"
+}

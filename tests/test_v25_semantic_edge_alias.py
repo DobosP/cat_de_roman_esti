@@ -28,6 +28,15 @@ _TEST_KG = _ROOT / "tests/fixtures/kg_sample.json"
 _PACKAGE_PACK = _ROOT / "cat_de_roman_esti/fixtures/games_pack.json"
 _TEST_PACK = _ROOT / "tests/fixtures/games_pack.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
+_V45_REJECTED_REVIEW_IDS = {
+    "lt_gastronomie_212",
+    "lt_gastronomie_218",
+    "lt_stiinta_215",
+    "lt_stiinta_219",
+    "lt_viata_de_roman_213",
+    "lt_viata_de_roman_214",
+    "lt_viata_de_roman_217",
+}
 
 
 def _load_data_module():
@@ -157,9 +166,9 @@ def test_v25_pack_is_byte_stable_and_the_33_review_items_remain_playable():
         if record["id"] in set(DATA.REVIEW_ITEM_IDS)
     }
 
-    assert set(records) == set(DATA.REVIEW_ITEM_IDS)
+    assert set(records) == set(DATA.REVIEW_ITEM_IDS) - _V45_REJECTED_REVIEW_IDS
     later_promotions = {"ct_literatura_298", "ct_viata_de_roman_299"}
-    for item_id in DATA.REVIEW_ITEM_IDS:
+    for item_id in set(DATA.REVIEW_ITEM_IDS) - _V45_REJECTED_REVIEW_IDS:
         game, record = records[item_id]
         expected_status = "approved" if item_id in later_promotions else "pending"
         assert record["status"] == expected_status
@@ -175,9 +184,14 @@ def test_v25_intended_topology_changes_stay_inside_reviewed_game_bounds():
         for record in pack[game]
     }
 
-    lant = by_id["lt_gastronomie_218"]
-    assert svc.distance(lant["start"], lant["target"]) == 4
-    assert lant_branch_profile(svc, lant["start"], lant["target"], 4) == (6, 2, 16)
+    # V45 rejects the board but leaves this reviewed graph topology untouched.
+    assert svc.distance("n_v2gas_ciorba", "n_v24_food_salad_veg_morcov") == 4
+    assert lant_branch_profile(
+        svc,
+        "n_v2gas_ciorba",
+        "n_v24_food_salad_veg_morcov",
+        4,
+    ) == (6, 2, 16)
 
     alchimie = by_id["al_viata_de_roman_098"]
     closure = _closure_generations(svc, alchimie["seeds"], alchimie["category"])

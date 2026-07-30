@@ -1,0 +1,115 @@
+{
+ "id": "lt_gastronomie_106",
+ "game": "lant",
+ "category": "gastronomie",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "e2c8e00c79114e07015f0350682eac1611f780a9a94732c40e8d4350f26935bc",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "Pălincă": "linked to 2 regions (Maramureș, Transilvania)"
+ },
+ "start": {
+  "id": "n_gas_palinca",
+  "label": "Pălincă",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.3694,
+  "degree": 6,
+  "incoming_degree": 6,
+  "description": "Distilat tare din fructe, emblematic mai ales în Transilvania și Maramureș."
+ },
+ "target": {
+  "id": "n_muntii_apuseni",
+  "label": "Munții Apuseni",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.3706,
+  "degree": 11,
+  "incoming_degree": 11,
+  "description": "Grupa montana din Carpatii Occidentali, cunoscuta pentru pesteri si Tara Motilor."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 3
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_gas_palinca",
+     "label": "Pălincă"
+    },
+    {
+     "id": "n_transilvania",
+     "label": "Transilvania"
+    },
+    {
+     "id": "n_avram_iancu",
+     "label": "Avram Iancu"
+    },
+    {
+     "id": "n_muntii_apuseni",
+     "label": "Munții Apuseni"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_gas_palinca",
+      "label": "Pălincă"
+     },
+     "to": {
+      "id": "n_transilvania",
+      "label": "Transilvania"
+     },
+     "relation": "related_to",
+     "label": "asociată cu",
+     "strength": 0.74
+    },
+    {
+     "from": {
+      "id": "n_transilvania",
+      "label": "Transilvania"
+     },
+     "to": {
+      "id": "n_avram_iancu",
+      "label": "Avram Iancu"
+     },
+     "relation": "located_in",
+     "label": "a condus revolutia in",
+     "strength": 0.78
+    },
+    {
+     "from": {
+      "id": "n_avram_iancu",
+      "label": "Avram Iancu"
+     },
+     "to": {
+      "id": "n_muntii_apuseni",
+      "label": "Munții Apuseni"
+     },
+     "relation": "located_in",
+     "label": "originar din",
+     "strength": 0.7
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:ce19dabd0617300e7210161481504c7584e1a0b61511684db8655dfe9a937305"
+}

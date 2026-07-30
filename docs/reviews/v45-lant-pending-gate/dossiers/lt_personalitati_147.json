@@ -1,0 +1,105 @@
+{
+ "id": "lt_personalitati_147",
+ "game": "lant",
+ "category": "personalitati",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "81915546b0df0adb30e9fb7fa8abfde6070f59d76d1da281455428b0a6bc47b6",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Dadaism salience 0.22 < 0.60 (usor floor)"
+  },
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Mircea Eliade salience 0.35 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_dadaism_lit",
+  "label": "Dadaism",
+  "node_type": "concept",
+  "category": "literatura",
+  "salience": 0.2234,
+  "degree": 4,
+  "incoming_degree": 4,
+  "description": "Miscare de avangarda fondata in 1916, initiata de Tristan Tzara la Zurich."
+ },
+ "target": {
+  "id": "n_mircea_eliade",
+  "label": "Mircea Eliade",
+  "node_type": "person",
+  "category": "personalitati",
+  "salience": 0.3496,
+  "degree": 10,
+  "incoming_degree": 10,
+  "description": "Istoric al religiilor si scriitor roman."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_dadaism_lit",
+     "label": "Dadaism"
+    },
+    {
+     "id": "n_generatia_interbelica",
+     "label": "Generația interbelică"
+    },
+    {
+     "id": "n_mircea_eliade",
+     "label": "Mircea Eliade"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_dadaism_lit",
+      "label": "Dadaism"
+     },
+     "to": {
+      "id": "n_generatia_interbelica",
+      "label": "Generația interbelică"
+     },
+     "relation": "same_category",
+     "label": "avangardă interbelică",
+     "strength": 0.68
+    },
+    {
+     "from": {
+      "id": "n_generatia_interbelica",
+      "label": "Generația interbelică"
+     },
+     "to": {
+      "id": "n_mircea_eliade",
+      "label": "Mircea Eliade"
+     },
+     "relation": "part_of",
+     "label": "face parte din",
+     "strength": 0.7
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:05b7df357e6cc20656049fdc5c32a6034ec1ff8fca0b1d15b920a26145d3a3ef"
+}

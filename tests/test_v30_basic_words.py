@@ -222,10 +222,10 @@ def test_v30_keeps_the_entire_game_pack_byte_stable_without_adding_items():
     assert {game: len(pack[game]) for game in ("conexiuni", "contexto", "lant", "alchimie")} == {
         "conexiuni": 311,
         "contexto": 217,
-        "lant": 201,
+        "lant": 97,
         "alchimie": 99,
     }
-    assert statuses == {"approved": 608, "pending": 220}
+    assert statuses == {"approved": 608, "pending": 116}
 
 
 def test_v30_mobile_contract_is_exact_current_and_public():

@@ -1,0 +1,112 @@
+{
+ "id": "lt_viata_de_roman_091",
+ "game": "lant",
+ "category": "viata_de_roman",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "8e485e6e202192ad3c69a2e1b84147c0965ef3c88133abf894ff5d2a731434ce",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_vdr_calorifer_rece",
+  "label": "Caloriferul rece",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.4731,
+  "degree": 7,
+  "incoming_degree": 7,
+  "description": "Semn al iernilor de apartament când căldura vine greu sau deloc."
+ },
+ "target": {
+  "id": "n_vdr_miros_de_cozonac",
+  "label": "Mirosul de cozonac",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.7473,
+  "degree": 8,
+  "incoming_degree": 8,
+  "description": "Aroma de cozonac copt care anunță masa de sărbătoare."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_vdr_calorifer_rece",
+     "label": "Caloriferul rece"
+    },
+    {
+     "id": "n_vdr_nu_iesi_capul_ud",
+     "label": "Nu ieși cu capul ud!"
+    },
+    {
+     "id": "n_vdr_calendar_obiceiuri",
+     "label": "Calendarul obiceiurilor"
+    },
+    {
+     "id": "n_vdr_miros_de_cozonac",
+     "label": "Mirosul de cozonac"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_vdr_calorifer_rece",
+      "label": "Caloriferul rece"
+     },
+     "to": {
+      "id": "n_vdr_nu_iesi_capul_ud",
+      "label": "Nu ieși cu capul ud!"
+     },
+     "relation": "related_to",
+     "label": "se teme de frig",
+     "strength": 0.68
+    },
+    {
+     "from": {
+      "id": "n_vdr_nu_iesi_capul_ud",
+      "label": "Nu ieși cu capul ud!"
+     },
+     "to": {
+      "id": "n_vdr_calendar_obiceiuri",
+      "label": "Calendarul obiceiurilor"
+     },
+     "relation": "related_to",
+     "label": "include avertismente",
+     "strength": 0.54
+    },
+    {
+     "from": {
+      "id": "n_vdr_calendar_obiceiuri",
+      "label": "Calendarul obiceiurilor"
+     },
+     "to": {
+      "id": "n_vdr_miros_de_cozonac",
+      "label": "Mirosul de cozonac"
+     },
+     "relation": "related_to",
+     "label": "miroase a sărbătoare",
+     "strength": 0.78
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:cfbeb1fd3ceff5395f24ba5cfd5fe18c94cedbb95161ff2565dec92df619d394"
+}

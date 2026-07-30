@@ -1,0 +1,117 @@
+{
+ "id": "lt_personalitati_065",
+ "game": "lant",
+ "category": "personalitati",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "399ac73e4573c79befe27b237494edd9d4495eba35270fa62ac793571509bcf7",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Bizanț după Bizanț salience 0.16 < 0.35 (normal floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_perx_bizant_dupa_bizant",
+  "label": "Bizanț după Bizanț",
+  "node_type": "work",
+  "category": "personalitati",
+  "salience": 0.1551,
+  "degree": 3,
+  "incoming_degree": 3,
+  "description": "Lucrare celebră a lui Nicolae Iorga despre continuitatea culturală bizantină după 1453."
+ },
+ "target": {
+  "id": "n_generatia_interbelica",
+  "label": "Generația interbelică",
+  "node_type": "concept",
+  "category": "personalitati",
+  "salience": 0.3814,
+  "degree": 12,
+  "incoming_degree": 12,
+  "description": "Grup de intelectuali romani afirmati intre cele doua razboaie mondiale (1918-1939)."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_perx_bizant_dupa_bizant",
+     "label": "Bizanț după Bizanț"
+    },
+    {
+     "id": "n_perx_nicolae_iorga",
+     "label": "Nicolae Iorga"
+    },
+    {
+     "id": "n_perx_romania_interbelica",
+     "label": "România interbelică"
+    },
+    {
+     "id": "n_generatia_interbelica",
+     "label": "Generația interbelică"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_perx_bizant_dupa_bizant",
+      "label": "Bizanț după Bizanț"
+     },
+     "to": {
+      "id": "n_perx_nicolae_iorga",
+      "label": "Nicolae Iorga"
+     },
+     "relation": "created_by",
+     "label": "scrisă de",
+     "strength": 0.97
+    },
+    {
+     "from": {
+      "id": "n_perx_nicolae_iorga",
+      "label": "Nicolae Iorga"
+     },
+     "to": {
+      "id": "n_perx_romania_interbelica",
+      "label": "România interbelică"
+     },
+     "relation": "part_of",
+     "label": "a marcat",
+     "strength": 0.72
+    },
+    {
+     "from": {
+      "id": "n_perx_romania_interbelica",
+      "label": "România interbelică"
+     },
+     "to": {
+      "id": "n_generatia_interbelica",
+      "label": "Generația interbelică"
+     },
+     "relation": "related_to",
+     "label": "cadru pentru",
+     "strength": 0.72
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:958eda7278a3aa8a8fd8591e3cf8b9599ea444c12c03f127dc6276d5b224d446"
+}

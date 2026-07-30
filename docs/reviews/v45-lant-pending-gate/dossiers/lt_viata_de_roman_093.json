@@ -1,0 +1,95 @@
+{
+ "id": "lt_viata_de_roman_093",
+ "game": "lant",
+ "category": "viata_de_roman",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "617db9358dc14d30be80c8ba8d4f3c75bfc9efc4d6e2b3f7451ec5b7fd07c1a6",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_vdr_vecin_bormasina",
+  "label": "Vecinul cu bormașina",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.786,
+  "degree": 6,
+  "incoming_degree": 6,
+  "description": "Clișeul vecinului care găurește pereții exact când vrei liniște."
+ },
+ "target": {
+  "id": "n_vdr_punga_cu_pungi",
+  "label": "Punga cu pungi",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.9364,
+  "degree": 13,
+  "incoming_degree": 13,
+  "description": "Punga mare în care se păstrează alte pungi, soluție domestică foarte răspândită."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_vdr_vecin_bormasina",
+     "label": "Vecinul cu bormașina"
+    },
+    {
+     "id": "n_vdr_lasa_ca_merge",
+     "label": "Lasă că merge și așa"
+    },
+    {
+     "id": "n_vdr_punga_cu_pungi",
+     "label": "Punga cu pungi"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_vdr_vecin_bormasina",
+      "label": "Vecinul cu bormașina"
+     },
+     "to": {
+      "id": "n_vdr_lasa_ca_merge",
+      "label": "Lasă că merge și așa"
+     },
+     "relation": "related_to",
+     "label": "termină renovarea",
+     "strength": 0.56
+    },
+    {
+     "from": {
+      "id": "n_vdr_lasa_ca_merge",
+      "label": "Lasă că merge și așa"
+     },
+     "to": {
+      "id": "n_vdr_punga_cu_pungi",
+      "label": "Punga cu pungi"
+     },
+     "relation": "same_category",
+     "label": "soluție de casă",
+     "strength": 0.7
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:0d82912495430e7b92a734f80c073debe54a891a0537331be05038fbf8fa94aa"
+}

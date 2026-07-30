@@ -1,0 +1,105 @@
+{
+ "id": "lt_muzica_059",
+ "game": "lant",
+ "category": "muzica",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "1010d687e1ef4b402ab9fe4c3ace35a51006d2e5a868157008a94f529cfb891c",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "După blocuri salience 0.26 < 0.60 (usor floor)"
+  },
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Vara nu dorm salience 0.56 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_muz_dupa_blocuri",
+  "label": "După blocuri",
+  "node_type": "work",
+  "category": "muzica",
+  "salience": 0.2583,
+  "degree": 4,
+  "incoming_degree": 4,
+  "description": "Piesă B.U.G. Mafia, emblematică pentru imaginarul hip-hop de cartier."
+ },
+ "target": {
+  "id": "n_muz_vara_nu_dorm",
+  "label": "Vara nu dorm",
+  "node_type": "work",
+  "category": "muzica",
+  "salience": 0.5565,
+  "degree": 7,
+  "incoming_degree": 7,
+  "description": "Hit Connect-R din 2012, refren de vară intrat rapid în cultura pop."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_muz_dupa_blocuri",
+     "label": "După blocuri"
+    },
+    {
+     "id": "n_muz_refren_viral",
+     "label": "Refren viral"
+    },
+    {
+     "id": "n_muz_vara_nu_dorm",
+     "label": "Vara nu dorm"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_muz_dupa_blocuri",
+      "label": "După blocuri"
+     },
+     "to": {
+      "id": "n_muz_refren_viral",
+      "label": "Refren viral"
+     },
+     "relation": "related_to",
+     "label": "refren de generație",
+     "strength": 0.6
+    },
+    {
+     "from": {
+      "id": "n_muz_refren_viral",
+      "label": "Refren viral"
+     },
+     "to": {
+      "id": "n_muz_vara_nu_dorm",
+      "label": "Vara nu dorm"
+     },
+     "relation": "related_to",
+     "label": "are refren viral",
+     "strength": 0.76
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:df3d9583317f4b4df29a5d1b81d55e88730ae1057b302084520e5573013d2873"
+}

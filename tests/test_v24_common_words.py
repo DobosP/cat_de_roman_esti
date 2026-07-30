@@ -31,6 +31,15 @@ _PACKAGE_KG = _ROOT / "cat_de_roman_esti" / "fixtures" / "kg_sample.json"
 _TEST_KG = _ROOT / "tests" / "fixtures" / "kg_sample.json"
 _PACKAGE_PACK = _ROOT / "cat_de_roman_esti" / "fixtures" / "games_pack.json"
 _TEST_PACK = _ROOT / "tests" / "fixtures" / "games_pack.json"
+_V45_REJECTED_LANT = {
+    "lt_gastronomie_212",
+    "lt_gastronomie_218",
+    "lt_stiinta_215",
+    "lt_stiinta_219",
+    "lt_viata_de_roman_213",
+    "lt_viata_de_roman_214",
+    "lt_viata_de_roman_217",
+}
 
 
 def _load_data_module():
@@ -275,6 +284,8 @@ def test_v24_declared_game_candidates_are_present_pending_and_playable():
         for item_id in item_ids:
             found = actual.get(item_id)
             if found is None:
+                if item_id in _V45_REJECTED_LANT:
+                    continue
                 failures.append(f"{expected_game}:{item_id}: missing from games pack")
                 continue
             actual_game, record = found
@@ -292,6 +303,7 @@ def test_v24_declared_game_candidates_are_present_pending_and_playable():
             failures.extend(f"{expected_game}:{item_id}: {error}" for error in errors)
 
     assert not failures, "\n" + "\n".join(failures)
+    assert not (_V45_REJECTED_LANT & set(actual))
 
 
 def test_v24_fixture_and_pack_mirrors_are_byte_identical():
@@ -313,7 +325,7 @@ def test_v24_game_wave_has_the_reviewed_per_game_sizes():
     assert {game: len(items) for game, items in records.items()} == {
         "conexiuni": 4,
         "contexto": 8,
-        "lant": 8,
+        "lant": 1,
         "alchimie": 6,
     }
 
@@ -350,7 +362,7 @@ def test_v24_lant_routes_keep_short_bands_and_real_choices():
     svc = _fixture_service()
     records = _declared_records()["lant"]
     bands = {"usor": (2, 3), "normal": (3, 4), "greu": (4, 6)}
-    preferred_easy = 0
+    assert {record["id"] for record in records} == {"lt_stiinta_216"}
 
     for record in records:
         optimal = svc.distance(str(record["start"]), str(record["target"]))
@@ -362,10 +374,6 @@ def test_v24_lant_routes_keep_short_bands_and_real_choices():
         )
         assert first_hops >= 2
         assert min_width >= 2
-        if record["difficulty"] == "usor" and first_hops >= 3 and min_width >= 3:
-            preferred_easy += 1
-
-    assert preferred_easy >= 2
 
 
 def test_v24_alchimie_recipes_are_sparse_bounded_and_distinct():

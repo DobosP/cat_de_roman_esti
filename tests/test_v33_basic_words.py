@@ -40,12 +40,12 @@ _V32_ALIAS_COUNT = 7333
 
 # These are fingerprints of current legacy behavior. Profile pins move only with a gated
 # content wave; ADR-0067's removal of two false e-SIGUR edges intentionally changed the
-# Contexto closure while leaving the Lanț and Alchimie projections stable.
+# Contexto closure; V45's strict pending cleanup intentionally narrows the Lanț profile.
 _V32_CONTEXTO_PROFILE_SHA256 = (
     "9faec43182f76c1fa9434876b7052eb4d10f4cf95d29008e9f4270250b6e3b05"
 )
 _V32_LANT_PROFILE_SHA256 = (
-    "faa793d95d438cb27353e7043997eeda402be27eb267d1e5597364d7096a5afd"
+    "6fe32a7aacb464d8d30ae2d97bc02e9ed0ef5413ee264e2424f13388a7f8e8c2"
 )
 _V32_ALCHIMIE_PROFILE_SHA256 = (
     "762c1f3a84463fbc2f14d0ec878c12db53ed48f6a4c5ec3c5c107b57ca5a4168"
@@ -54,7 +54,7 @@ _EXACT_REVIEW_REPORT_SHA256 = (
     "94fb8e92c1c3a7bbde74e2d3faec08691ba16348a1cec1bcb714e3c0e56f39b3"
 )
 _FULL_PENDING_REPORT_SHA256 = (
-    "3da6045aa2f3d2afb8698bea2eea9b04d2fb0d2437a5cc23105d30024ac12e31"
+    "ec5bdf4c9d0f8ccd48599566bef120123a2094fac850c8f93cdbf60691cc276e"
 )
 
 
@@ -392,25 +392,32 @@ def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
     } == {
         "conexiuni": 311,
         "contexto": 217,
-        "lant": 201,
+        "lant": 97,
         "alchimie": 99,
     }
     # ADR-0068 promotes two bound Contexto targets.
-    assert statuses == {"approved": 608, "pending": 220}
+    assert statuses == {"approved": 608, "pending": 116}
     assert len(DATA.REVIEW_ITEM_IDS) == len(set(DATA.REVIEW_ITEM_IDS)) == 33
     pending_review_ids = set(DATA.REVIEW_ITEM_IDS) - {
         "ct_literatura_298",
         "ct_viata_de_roman_299",
+        "lt_gastronomie_212",
+        "lt_gastronomie_218",
+        "lt_stiinta_215",
+        "lt_stiinta_219",
+        "lt_viata_de_roman_213",
+        "lt_viata_de_roman_214",
+        "lt_viata_de_roman_217",
     }
     assert _critique_report(pending_review_ids) == (
-        31,
+        24,
         2,
         0,
         _EXACT_REVIEW_REPORT_SHA256,
     )
     assert _critique_report(None) == (
-        220,
-        149,
+        116,
+        80,
         81,
         _FULL_PENDING_REPORT_SHA256,
     )

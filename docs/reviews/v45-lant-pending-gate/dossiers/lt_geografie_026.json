@@ -1,0 +1,105 @@
+{
+ "id": "lt_geografie_026",
+ "game": "lant",
+ "category": "geografie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "deae5749c8e0883570531d74ddaaa6683f34d70586adcb3af34eeb3b6a75f891",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Sinaia salience 0.30 < 0.60 (usor floor)"
+  },
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Lacul Vidraru salience 0.24 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_geox_sinaia",
+  "label": "Sinaia",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.2972,
+  "degree": 11,
+  "incoming_degree": 11,
+  "description": "Stațiune de pe Valea Prahovei, la poalele Bucegilor, cunoscută pentru Peleș."
+ },
+ "target": {
+  "id": "n_geox_lacul_vidraru",
+  "label": "Lacul Vidraru",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.2401,
+  "degree": 6,
+  "incoming_degree": 6,
+  "description": "Lac de acumulare pe Argeș, legat de barajul Vidraru și de traseul Transfăgărășanului."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_geox_sinaia",
+     "label": "Sinaia"
+    },
+    {
+     "id": "n_carpati",
+     "label": "Carpați"
+    },
+    {
+     "id": "n_geox_lacul_vidraru",
+     "label": "Lacul Vidraru"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_geox_sinaia",
+      "label": "Sinaia"
+     },
+     "to": {
+      "id": "n_carpati",
+      "label": "Carpați"
+     },
+     "relation": "located_in",
+     "label": "la munte",
+     "strength": 0.82
+    },
+    {
+     "from": {
+      "id": "n_carpati",
+      "label": "Carpați"
+     },
+     "to": {
+      "id": "n_geox_lacul_vidraru",
+      "label": "Lacul Vidraru"
+     },
+     "relation": "located_in",
+     "label": "în Carpați",
+     "strength": 0.78
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:b459701f6ac3374c1ea40f73769df329521cffd5ed10d59def26b4ab1419103d"
+}

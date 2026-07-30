@@ -1,0 +1,331 @@
+{
+ "id": "lt_literatura_125",
+ "game": "lant",
+ "category": "literatura",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "9c5d5f846a8e555eeabc307ca37ea23491ff8d81ef2c54521b7a79a63ad3b614",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_muz_ploaia_cargo",
+  "label": "Ploaia",
+  "node_type": "work",
+  "category": "muzica",
+  "salience": 0.3862,
+  "degree": 5,
+  "incoming_degree": 5,
+  "description": "Baladă rock Cargo, una dintre cele mai cântate piese românești de chitară."
+ },
+ "target": {
+  "id": "n_plumb",
+  "label": "Plumb",
+  "node_type": "work",
+  "category": "literatura",
+  "salience": 0.2557,
+  "degree": 7,
+  "incoming_degree": 7,
+  "description": "Poezie simbolista emblematica a lui George Bacovia."
+ },
+ "optimal": 5,
+ "branch_profile": {
+  "valid_first_hops": 3,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 14
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_muz_ploaia_cargo",
+     "label": "Ploaia"
+    },
+    {
+     "id": "n_muz_rock_ro",
+     "label": "Rock românesc"
+    },
+    {
+     "id": "n_v4muz_acord",
+     "label": "Acord"
+    },
+    {
+     "id": "n_v3muz_melodie",
+     "label": "Melodie"
+    },
+    {
+     "id": "n_v3lit_vers",
+     "label": "Vers"
+    },
+    {
+     "id": "n_plumb",
+     "label": "Plumb"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_muz_ploaia_cargo",
+      "label": "Ploaia"
+     },
+     "to": {
+      "id": "n_muz_rock_ro",
+      "label": "Rock românesc"
+     },
+     "relation": "part_of",
+     "label": "ține de genul",
+     "strength": 0.82
+    },
+    {
+     "from": {
+      "id": "n_muz_rock_ro",
+      "label": "Rock românesc"
+     },
+     "to": {
+      "id": "n_v4muz_acord",
+      "label": "Acord"
+     },
+     "relation": "related_to",
+     "label": "folosit în rock",
+     "strength": 0.76
+    },
+    {
+     "from": {
+      "id": "n_v4muz_acord",
+      "label": "Acord"
+     },
+     "to": {
+      "id": "n_v3muz_melodie",
+      "label": "Melodie"
+     },
+     "relation": "part_of",
+     "label": "susține melodia",
+     "strength": 0.66
+    },
+    {
+     "from": {
+      "id": "n_v3muz_melodie",
+      "label": "Melodie"
+     },
+     "to": {
+      "id": "n_v3lit_vers",
+      "label": "Vers"
+     },
+     "relation": "part_of",
+     "label": "textul piesei",
+     "strength": 0.9
+    },
+    {
+     "from": {
+      "id": "n_v3lit_vers",
+      "label": "Vers"
+     },
+     "to": {
+      "id": "n_plumb",
+      "label": "Plumb"
+     },
+     "relation": "part_of",
+     "label": "versuri simboliste",
+     "strength": 0.82
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_muz_ploaia_cargo",
+     "label": "Ploaia"
+    },
+    {
+     "id": "n_v2muz_trupa_rock",
+     "label": "Trupă rock"
+    },
+    {
+     "id": "n_v4muz_acord",
+     "label": "Acord"
+    },
+    {
+     "id": "n_v3muz_melodie",
+     "label": "Melodie"
+    },
+    {
+     "id": "n_v3lit_vers",
+     "label": "Vers"
+    },
+    {
+     "id": "n_plumb",
+     "label": "Plumb"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_muz_ploaia_cargo",
+      "label": "Ploaia"
+     },
+     "to": {
+      "id": "n_v2muz_trupa_rock",
+      "label": "Trupă rock"
+     },
+     "relation": "related_to",
+     "label": "baladă de trupă",
+     "strength": 0.65
+    },
+    {
+     "from": {
+      "id": "n_v2muz_trupa_rock",
+      "label": "Trupă rock"
+     },
+     "to": {
+      "id": "n_v4muz_acord",
+      "label": "Acord"
+     },
+     "relation": "part_of",
+     "label": "folosit de trupă",
+     "strength": 0.72
+    },
+    {
+     "from": {
+      "id": "n_v4muz_acord",
+      "label": "Acord"
+     },
+     "to": {
+      "id": "n_v3muz_melodie",
+      "label": "Melodie"
+     },
+     "relation": "part_of",
+     "label": "susține melodia",
+     "strength": 0.66
+    },
+    {
+     "from": {
+      "id": "n_v3muz_melodie",
+      "label": "Melodie"
+     },
+     "to": {
+      "id": "n_v3lit_vers",
+      "label": "Vers"
+     },
+     "relation": "part_of",
+     "label": "textul piesei",
+     "strength": 0.9
+    },
+    {
+     "from": {
+      "id": "n_v3lit_vers",
+      "label": "Vers"
+     },
+     "to": {
+      "id": "n_plumb",
+      "label": "Plumb"
+     },
+     "relation": "part_of",
+     "label": "versuri simboliste",
+     "strength": 0.82
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_muz_ploaia_cargo",
+     "label": "Ploaia"
+    },
+    {
+     "id": "n_muz_muzica_petrecere",
+     "label": "Muzică de petrecere"
+    },
+    {
+     "id": "n_v3muz_ritm",
+     "label": "Ritm"
+    },
+    {
+     "id": "n_v3muz_melodie",
+     "label": "Melodie"
+    },
+    {
+     "id": "n_v3lit_vers",
+     "label": "Vers"
+    },
+    {
+     "id": "n_plumb",
+     "label": "Plumb"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_muz_ploaia_cargo",
+      "label": "Ploaia"
+     },
+     "to": {
+      "id": "n_muz_muzica_petrecere",
+      "label": "Muzică de petrecere"
+     },
+     "relation": "related_to",
+     "label": "merge la karaoke",
+     "strength": 0.58
+    },
+    {
+     "from": {
+      "id": "n_muz_muzica_petrecere",
+      "label": "Muzică de petrecere"
+     },
+     "to": {
+      "id": "n_v3muz_ritm",
+      "label": "Ritm"
+     },
+     "relation": "related_to",
+     "label": "ritm de petrecere",
+     "strength": 0.8
+    },
+    {
+     "from": {
+      "id": "n_v3muz_ritm",
+      "label": "Ritm"
+     },
+     "to": {
+      "id": "n_v3muz_melodie",
+      "label": "Melodie"
+     },
+     "relation": "part_of",
+     "label": "structură muzicală",
+     "strength": 0.88
+    },
+    {
+     "from": {
+      "id": "n_v3muz_melodie",
+      "label": "Melodie"
+     },
+     "to": {
+      "id": "n_v3lit_vers",
+      "label": "Vers"
+     },
+     "relation": "part_of",
+     "label": "textul piesei",
+     "strength": 0.9
+    },
+    {
+     "from": {
+      "id": "n_v3lit_vers",
+      "label": "Vers"
+     },
+     "to": {
+      "id": "n_plumb",
+      "label": "Plumb"
+     },
+     "relation": "part_of",
+     "label": "versuri simboliste",
+     "strength": 0.82
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:ad78d6fd1d335f06a48844c7ab919a3610551bcb1984eff5a8c5cf5588dfd851"
+}

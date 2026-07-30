@@ -1,0 +1,134 @@
+{
+ "id": "lt_muzica_183",
+ "game": "lant",
+ "category": "muzica",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "1fa0f7f0f1356042629e60977022397b1f02da5f3be2e04a8b3796220c057d99",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Vama Veche salience 0.28 < 0.60 (usor floor)"
+  }
+ ],
+ "start": {
+  "id": "n_muz_neversea",
+  "label": "Neversea",
+  "node_type": "event",
+  "category": "muzica",
+  "salience": 0.729,
+  "degree": 11,
+  "incoming_degree": 11,
+  "description": "Festival de muzică organizat la Constanța, asociat cu scena de pe litoral."
+ },
+ "target": {
+  "id": "n_muz_vama_veche",
+  "label": "Vama Veche",
+  "node_type": "org",
+  "category": "muzica",
+  "salience": 0.2795,
+  "degree": 7,
+  "incoming_degree": 7,
+  "description": "Trupă românească de rock alternativ, asociată cu refrene de vară și libertate."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_muz_neversea",
+     "label": "Neversea"
+    },
+    {
+     "id": "n_marea_neagra",
+     "label": "Marea Neagră"
+    },
+    {
+     "id": "n_muz_vama_veche",
+     "label": "Vama Veche"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_muz_neversea",
+      "label": "Neversea"
+     },
+     "to": {
+      "id": "n_marea_neagra",
+      "label": "Marea Neagră"
+     },
+     "relation": "located_in",
+     "label": "pe litoralul",
+     "strength": 0.82
+    },
+    {
+     "from": {
+      "id": "n_marea_neagra",
+      "label": "Marea Neagră"
+     },
+     "to": {
+      "id": "n_muz_vama_veche",
+      "label": "Vama Veche"
+     },
+     "relation": "related_to",
+     "label": "sat la malul mării",
+     "strength": 0.85
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_muz_neversea",
+     "label": "Neversea"
+    },
+    {
+     "id": "n_v2muz_concert",
+     "label": "Concert"
+    },
+    {
+     "id": "n_muz_vama_veche",
+     "label": "Vama Veche"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_muz_neversea",
+      "label": "Neversea"
+     },
+     "to": {
+      "id": "n_v2muz_concert",
+      "label": "Concert"
+     },
+     "relation": "related_to",
+     "label": "concerte pe litoral",
+     "strength": 0.74
+    },
+    {
+     "from": {
+      "id": "n_v2muz_concert",
+      "label": "Concert"
+     },
+     "to": {
+      "id": "n_muz_vama_veche",
+      "label": "Vama Veche"
+     },
+     "relation": "related_to",
+     "label": "cântă live",
+     "strength": 0.62
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:431b0715d8fa4a179d7e263694742884795bff0f2604856629fabb67fecc4b9b"
+}

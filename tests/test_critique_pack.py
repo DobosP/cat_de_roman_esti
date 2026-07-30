@@ -723,6 +723,48 @@ def test_real_rejection_tombstones_are_valid_and_not_runtime_boards(loaded):
     assert not ({item["id"] for item in tombstones} & runtime_ids)
 
 
+def test_pending_lant_runtime_failures_are_critique_gate_failures(loaded):
+    pack, svc, strong, regions = loaded
+    valid = next(item for item in pack["lant"] if item["id"] == "lt_viata_de_roman_211")
+    invalid = {
+        **valid,
+        "id": "lt_pending_invalid",
+        "category": "arta_cultura",
+        "difficulty": "greu",
+        "start": "n_gas_masa_craciun",
+        "target": "n_masa_tacerii",
+        "optimal": 5,
+    }
+    pack = {**pack, "lant": [*pack["lant"], invalid]}
+
+    items, _, selected = critique_pack.run(
+        pack,
+        svc,
+        strong,
+        regions,
+        ["lant"],
+        {"pending"},
+        {invalid["id"], valid["id"]},
+    )
+
+    assert {record["id"] for _, record, _ in selected} == {
+        invalid["id"],
+        valid["id"],
+    }
+    assert {
+        finding["detail"]
+        for finding in items[invalid["id"]]["findings"]
+        if finding["check"] == "lant_playability"
+    } == {
+        "only 1 valid first-hop choice(s) (< 2)",
+        "narrowest shortest-path layer has width 1 (< 2)",
+    }
+    assert not any(
+        finding["check"] == "lant_playability"
+        for finding in items.get(valid["id"], {}).get("findings", [])
+    )
+
+
 def test_rejection_tombstone_group_mutation_fails_integrity_check():
     data = json.loads(critique_pack.REJECTION_TOMBSTONES.read_text(encoding="utf-8"))
     item_id = next(iter(data["items"]))

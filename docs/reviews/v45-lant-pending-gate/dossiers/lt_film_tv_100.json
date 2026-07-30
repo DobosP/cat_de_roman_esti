@@ -1,0 +1,223 @@
+{
+ "id": "lt_film_tv_100",
+ "game": "lant",
+ "category": "film_tv",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "bf1b3d6eba5d6ad21340e8e28c5eaccf892af34df9280dab6cb0275f88b975cc",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [],
+ "start": {
+  "id": "n_ftv_pro_tv",
+  "label": "Pro TV",
+  "node_type": "org",
+  "category": "film_tv",
+  "salience": 0.9055,
+  "degree": 26,
+  "incoming_degree": 26,
+  "description": "Post TV comercial românesc, important pentru seriale și divertisment pop."
+ },
+ "target": {
+  "id": "n_vdr_revelion_la_televizor",
+  "label": "Revelionul la televizor",
+  "node_type": "event",
+  "category": "viata_de_roman",
+  "salience": 0.8359,
+  "degree": 14,
+  "incoming_degree": 14,
+  "description": "Noaptea de Anul Nou petrecută cu programe TV, salată boeuf și numărătoare inversă."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 9,
+  "narrowest_shortest_path_layer": 3,
+  "total_intermediate_shortest_path_nodes": 12
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_ftv_pro_tv",
+     "label": "Pro TV"
+    },
+    {
+     "id": "n_v2fil_televiziune",
+     "label": "Televiziune"
+    },
+    {
+     "id": "n_ftv_tvr",
+     "label": "TVR"
+    },
+    {
+     "id": "n_vdr_revelion_la_televizor",
+     "label": "Revelionul la televizor"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_ftv_pro_tv",
+      "label": "Pro TV"
+     },
+     "to": {
+      "id": "n_v2fil_televiziune",
+      "label": "Televiziune"
+     },
+     "relation": "is_a",
+     "label": "este post TV",
+     "strength": 0.88
+    },
+    {
+     "from": {
+      "id": "n_v2fil_televiziune",
+      "label": "Televiziune"
+     },
+     "to": {
+      "id": "n_ftv_tvr",
+      "label": "TVR"
+     },
+     "relation": "is_a",
+     "label": "este post TV",
+     "strength": 0.88
+    },
+    {
+     "from": {
+      "id": "n_ftv_tvr",
+      "label": "TVR"
+     },
+     "to": {
+      "id": "n_vdr_revelion_la_televizor",
+      "label": "Revelionul la televizor"
+     },
+     "relation": "related_to",
+     "label": "revelion la TV",
+     "strength": 0.54
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_ftv_pro_tv",
+     "label": "Pro TV"
+    },
+    {
+     "id": "n_v4fil_canal_tv",
+     "label": "canal TV"
+    },
+    {
+     "id": "n_ftv_tvr",
+     "label": "TVR"
+    },
+    {
+     "id": "n_vdr_revelion_la_televizor",
+     "label": "Revelionul la televizor"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_ftv_pro_tv",
+      "label": "Pro TV"
+     },
+     "to": {
+      "id": "n_v4fil_canal_tv",
+      "label": "canal TV"
+     },
+     "relation": "same_category",
+     "label": "post TV",
+     "strength": 0.84
+    },
+    {
+     "from": {
+      "id": "n_v4fil_canal_tv",
+      "label": "canal TV"
+     },
+     "to": {
+      "id": "n_ftv_tvr",
+      "label": "TVR"
+     },
+     "relation": "same_category",
+     "label": "post TV",
+     "strength": 0.84
+    },
+    {
+     "from": {
+      "id": "n_ftv_tvr",
+      "label": "TVR"
+     },
+     "to": {
+      "id": "n_vdr_revelion_la_televizor",
+      "label": "Revelionul la televizor"
+     },
+     "relation": "related_to",
+     "label": "revelion la TV",
+     "strength": 0.54
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_ftv_pro_tv",
+     "label": "Pro TV"
+    },
+    {
+     "id": "n_v4fil_televizor",
+     "label": "televizor"
+    },
+    {
+     "id": "n_ftv_tvr",
+     "label": "TVR"
+    },
+    {
+     "id": "n_vdr_revelion_la_televizor",
+     "label": "Revelionul la televizor"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_ftv_pro_tv",
+      "label": "Pro TV"
+     },
+     "to": {
+      "id": "n_v4fil_televizor",
+      "label": "televizor"
+     },
+     "relation": "related_to",
+     "label": "recepționează canal",
+     "strength": 0.78
+    },
+    {
+     "from": {
+      "id": "n_v4fil_televizor",
+      "label": "televizor"
+     },
+     "to": {
+      "id": "n_ftv_tvr",
+      "label": "TVR"
+     },
+     "relation": "related_to",
+     "label": "recepționează canal",
+     "strength": 0.78
+    },
+    {
+     "from": {
+      "id": "n_ftv_tvr",
+      "label": "TVR"
+     },
+     "to": {
+      "id": "n_vdr_revelion_la_televizor",
+      "label": "Revelionul la televizor"
+     },
+     "relation": "related_to",
+     "label": "revelion la TV",
+     "strength": 0.54
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:f308db07c574abb8dd7f994a45af06d8d34cc6144bf51ce4580c392e2dafacc6"
+}

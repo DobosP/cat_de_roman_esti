@@ -1,0 +1,122 @@
+{
+ "id": "lt_muzica_140",
+ "game": "lant",
+ "category": "muzica",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "6b36eb9d3affbb2c17cfc328548f33504f572269916de5aa2700efe780827332",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Ploaia salience 0.39 < 0.60 (usor floor)"
+  },
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Doina salience 0.40 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "start": {
+  "id": "n_muz_ploaia_cargo",
+  "label": "Ploaia",
+  "node_type": "work",
+  "category": "muzica",
+  "salience": 0.3862,
+  "degree": 5,
+  "incoming_degree": 5,
+  "description": "Baladă rock Cargo, una dintre cele mai cântate piese românești de chitară."
+ },
+ "target": {
+  "id": "n_doina",
+  "label": "Doina",
+  "node_type": "concept",
+  "category": "arta_cultura",
+  "salience": 0.3976,
+  "degree": 15,
+  "incoming_degree": 15,
+  "description": "Cantec liric traditional romanesc, in patrimoniul UNESCO."
+ },
+ "optimal": 3,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 3
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_muz_ploaia_cargo",
+     "label": "Ploaia"
+    },
+    {
+     "id": "n_muz_muzica_petrecere",
+     "label": "Muzică de petrecere"
+    },
+    {
+     "id": "n_v4art_muzica",
+     "label": "Muzică"
+    },
+    {
+     "id": "n_doina",
+     "label": "Doina"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_muz_ploaia_cargo",
+      "label": "Ploaia"
+     },
+     "to": {
+      "id": "n_muz_muzica_petrecere",
+      "label": "Muzică de petrecere"
+     },
+     "relation": "related_to",
+     "label": "merge la karaoke",
+     "strength": 0.58
+    },
+    {
+     "from": {
+      "id": "n_muz_muzica_petrecere",
+      "label": "Muzică de petrecere"
+     },
+     "to": {
+      "id": "n_v4art_muzica",
+      "label": "Muzică"
+     },
+     "relation": "same_category",
+     "label": "include petrecere",
+     "strength": 0.76
+    },
+    {
+     "from": {
+      "id": "n_v4art_muzica",
+      "label": "Muzică"
+     },
+     "to": {
+      "id": "n_doina",
+      "label": "Doina"
+     },
+     "relation": "related_to",
+     "label": "cântec popular",
+     "strength": 0.76
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:c2286ee0132cd029788a0ad89c83231c43287695ec73dc205282ea6928bd7576"
+}

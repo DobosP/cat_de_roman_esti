@@ -1,0 +1,103 @@
+{
+ "id": "lt_limba_117",
+ "game": "lant",
+ "category": "limba",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "a95ac7f23f761c6073d4040a4217edb5cda34f853ca6f8c463d8072eb690cb54",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Păpușoi salience 0.20 < 0.60 (usor floor)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "only 1 valid first-hop choice(s) (< 2)"
+  },
+  {
+   "check": "lant_playability",
+   "level": "FAIL",
+   "detail": "narrowest shortest-path layer has width 1 (< 2)"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "Mămăligă": "national-salience concept (0.97) with generic related_to edge to Moldova"
+ },
+ "start": {
+  "id": "n_gas_mamaliga",
+  "label": "Mămăligă",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.9666,
+  "degree": 13,
+  "incoming_degree": 13,
+  "description": "Preparat din mălai, servit cu brânză, smântână, sarmale, pește sau tocănițe."
+ },
+ "target": {
+  "id": "n_lbax_regionalism_papusoi",
+  "label": "Păpușoi",
+  "node_type": "concept",
+  "category": "limba",
+  "salience": 0.2041,
+  "degree": 5,
+  "incoming_degree": 4,
+  "description": "Regionalism moldovenesc pentru porumb; apare des în vorbirea populară și în literatură."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 1,
+  "narrowest_shortest_path_layer": 1,
+  "total_intermediate_shortest_path_nodes": 1
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_gas_mamaliga",
+     "label": "Mămăligă"
+    },
+    {
+     "id": "n_v2lim_porumb",
+     "label": "Porumb"
+    },
+    {
+     "id": "n_lbax_regionalism_papusoi",
+     "label": "Păpușoi"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_gas_mamaliga",
+      "label": "Mămăligă"
+     },
+     "to": {
+      "id": "n_v2lim_porumb",
+      "label": "Porumb"
+     },
+     "relation": "related_to",
+     "label": "stă la baza",
+     "strength": 0.65
+    },
+    {
+     "from": {
+      "id": "n_v2lim_porumb",
+      "label": "Porumb"
+     },
+     "to": {
+      "id": "n_lbax_regionalism_papusoi",
+      "label": "Păpușoi"
+     },
+     "relation": "related_to",
+     "label": "denumește",
+     "strength": 0.92
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:2d9f67952ae80ee32164c636037520bac36edb20e28bbea3cf51a5e4291c6b3d"
+}

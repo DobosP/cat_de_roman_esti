@@ -332,7 +332,7 @@ def test_bound_promotions_and_duplicate_reserve_cleanup_are_exact() -> None:
         for row in pack[game]
     )
 
-    assert statuses == {"approved": 608, "pending": 220}
+    assert statuses == {"approved": 608, "pending": 116}
     assert rows["ct_literatura_298"]["status"] == "approved"
     assert rows["ct_viata_de_roman_299"]["status"] == "approved"
     assert ranked["ct_literatura_298"]["pilot_eligible"] is True

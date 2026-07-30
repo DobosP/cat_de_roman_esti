@@ -23,11 +23,12 @@ _KG_PATH = _ROOT / "tests" / "fixtures" / "kg_sample.json"
 # fairness/relevance failures + A7 non-distinctive region associations); nothing deleted.
 # 2026-07-16 (ADR-0030): the v23 childhood wave staged seven more items as pending;
 # approved inventory and serving remain unchanged. Later pending-only waves may grow
-# these totals, so this older-wave guard is a floor while the approved split stays exact.
+# these totals. V45 then removed 104 freshly rejected Lanț records, so that game's
+# release inventory is an exact lower baseline rather than the old pending-stock floor.
 _V23_INVENTORY_FLOOR = {
     "conexiuni": (284, 232, 75),
     "contexto": (199, 204, 5),
-    "lant": (193, 94, 99),
+    "lant": (97, 94, 3),
     "alchimie": (92, 78, 15),
 }
 
@@ -86,11 +87,12 @@ def test_v14_pack_inventory_and_review_split():
     # v16: 769 − 3 judge-rejected − 1 retired greu Lanț = 765; v18: − 1 retired normal Lanț.
     # 2026-07-15: 592 − 20 critique-gate demotions (ADR-0023/0024) = 572 approved.
     # 2026-07-29: + 13 ADR-0065 gate promotions among these games' totals = 585 approved.
-    assert sum(expected[0] for expected in _V23_INVENTORY_FLOOR.values()) == 768
+    # V45 resolves 104 stale Lanț candidates without changing the served pool.
+    assert sum(expected[0] for expected in _V23_INVENTORY_FLOOR.values()) == 672
     # 2026-07-30 (ADR-0066/0067/0068): + 18 owner, + 3 strict-gate, then + 2
     # bound Contexto promotions.
     assert sum(expected[1] for expected in _V23_INVENTORY_FLOOR.values()) == 608
-    assert sum(expected[2] for expected in _V23_INVENTORY_FLOOR.values()) == 194
+    assert sum(expected[2] for expected in _V23_INVENTORY_FLOOR.values()) == 98
 
 
 def test_v14_adds_contemporary_civic_education_science_and_digital_play():
