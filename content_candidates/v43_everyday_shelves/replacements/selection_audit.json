@@ -1,0 +1,340 @@
+{
+  "schema_version": 1,
+  "batch": "v43_everyday_shelves_replacements",
+  "verified_on": "2026-07-30",
+  "scope": "Isolated Conexiuni replacement authoring only. No pack, KG, ranking, runtime, Intrusul, Perechi, verifier, or session-store file is changed.",
+  "source_binding": {
+    "pack_sha256": "900b8eba5a4e1714658891da92a21a34b6eba58d5172716052338cbd8cd099d1",
+    "kg_sha256": "4465f68e67046804d41c8e2ac2009e48685a230f93291f7feafb76d4cd1af80b",
+    "rejection_tombstones_sha256": "b4ca6b5c10d23a1770fab7d347ded2caf1b8728bd378293d26229b12339b6551",
+    "critique_pack_sha256": "9a4b5f85f517153b35d005c3ab4f93a2b94b088e8c35aac1c54ed0b817fceece"
+  },
+  "candidate_file_sha256": {
+    "gastronomie": "6d8c53cfbce49c25817692ca0d874788c55d2a7efcda32ad22c9b9105941cd68",
+    "geografie": "e0828719c33a0715490e9d39f341d4cf33ce4fd4edbf735349721a0911875b92",
+    "personalitati": "f7a4504d92f79a3d3006df03a3d8b154ba60cbccabb6538e125de7b29f8010f9",
+    "sport": "0a45121bdd84d6ca34098cb18a4f5f94a8a515d1a0fdb519db7d0085b2728f80",
+    "stiinta": "67ded60c07d861ccd9f41f84cc7a2c9b5dcbf9daad6cdd80bae79fe560b241fa"
+  },
+  "result": {
+    "selected": 21,
+    "hold": 0,
+    "preflight_fail": 0,
+    "preflight_warn": 0,
+    "structural_errors": 0,
+    "projected_member_use_max": 8,
+    "constraints_verified": [
+      "four groups of four and sixteen unique existing nodes",
+      "maximum two shared members with every full-pack, tombstoned, or same-batch group",
+      "maximum seven shared members with every full-pack or tombstoned board",
+      "no mirrors, member leaks, literal surface crossfits, type shortcuts, or vague catch-all predicates"
+    ]
+  },
+  "proposal_policy": {
+    "minimum_materially_different_proposals_per_gap": 2,
+    "method": "Each selection below was compared with a complete predecessor proposal whose four groups are recorded in the cited manifest. All four selected group predicates differ from that predecessor; no rejected quad was repaired by a one-tile swap.",
+    "discarded_proposal_source_commit": "b325972",
+    "discarded_proposal_manifest": "content_candidates/v43_everyday_shelves/authoring_audit.json"
+  },
+  "selections": [
+    {
+      "selected_ref": "v43r_gastronomie_normal_01",
+      "shelf": "gastronomie/normal",
+      "discarded_proposal": {
+        "ref": "gastronomie_normal_01",
+        "group_labels": [
+          "Vase pentru servit",
+          "Se întind pe pâine",
+          "Prăjite până devin rumene",
+          "Mezeluri"
+        ],
+        "reason": "Rejected as a stack of familiar food class lists with weak cross-group deduction; the selected board uses exact surface and preparation predicates without reusing any predecessor quad."
+      }
+    },
+    {
+      "selected_ref": "v43r_gastronomie_normal_02",
+      "shelf": "gastronomie/normal",
+      "discarded_proposal": {
+        "ref": "gastronomie_normal_02",
+        "group_labels": [
+          "Băuturi fără alcool cunoscute înainte de 1990",
+          "Gustări de luat la drum",
+          "Legume puse crude în salată",
+          "Fructe de vară"
+        ],
+        "reason": "Held and then discarded because the travel-snack predicate was subjective and grape was a borderline summer-fruit member."
+      }
+    },
+    {
+      "selected_ref": "v43r_gastronomie_normal_03",
+      "shelf": "gastronomie/normal",
+      "discarded_proposal": {
+        "ref": "gastronomie_normal_03",
+        "group_labels": [
+          "Chefi cunoscuți publicului român",
+          "Localuri bucureștene cunoscute",
+          "Comenzi culinare devenite tendințe",
+          "Deserturi și gustări dulci"
+        ],
+        "reason": "Discarded for two deep-cut chef members and subjective popularity/trend predicates; the selected board is answerable from exact word shape and cooking method."
+      }
+    },
+    {
+      "selected_ref": "v43r_gastronomie_normal_04",
+      "shelf": "gastronomie/normal",
+      "discarded_proposal": {
+        "ref": "gastronomie_normal_04",
+        "group_labels": [
+          "Se coc în cuptor",
+          "Se mănâncă din farfurie adâncă",
+          "Lactate de bază",
+          "Preparate din carne de porc"
+        ],
+        "reason": "Discarded after critic review because the broad food classes produced contested red herrings; the replacement narrows every group to one observable operation or spelling rule."
+      }
+    },
+    {
+      "selected_ref": "v43r_geografie_normal_01",
+      "shelf": "geografie/normal",
+      "discarded_proposal": {
+        "ref": "geografie_normal_01",
+        "group_labels": [
+          "Afluenți direcți ai Dunării",
+          "Forme majore de relief",
+          "Orașe din Transilvania",
+          "Termeni ai țărmului"
+        ],
+        "reason": "Discarded as four visible taxonomy lists with little cross-group deception; the selected board uses exact route, location, name, and suffix predicates."
+      }
+    },
+    {
+      "selected_ref": "v43r_geografie_normal_02",
+      "shelf": "geografie/normal",
+      "discarded_proposal": {
+        "ref": "geografie_normal_02",
+        "group_labels": [
+          "Orașe-port din România",
+          "Repere din Munții Bucegi",
+          "Forme la contactul dintre uscat și apă",
+          "Stațiuni balneare"
+        ],
+        "reason": "Discarded because the catch-all landmark group and visible place-type buckets were weaker than the selected board's four testable geographic predicates."
+      }
+    },
+    {
+      "selected_ref": "v43r_geografie_normal_03",
+      "shelf": "geografie/normal",
+      "discarded_proposal": {
+        "ref": "geografie_normal_03",
+        "group_labels": [
+          "Orașe din vestul țării",
+          "Masive din Carpații Meridionali",
+          "Lacuri și complexe lacustre",
+          "Regiuni istorice"
+        ],
+        "reason": "Discarded as a generic geography sorting worksheet; the replacement mixes exact spelling, county-name, Apuseni, and Mehedinți-Danube deductions."
+      }
+    },
+    {
+      "selected_ref": "v43r_geografie_normal_04",
+      "shelf": "geografie/normal",
+      "discarded_proposal": {
+        "ref": "geografie_normal_04",
+        "group_labels": [
+          "Repere ale culoarului Dunării",
+          "Arii naturale protejate",
+          "Orașe reședință de județ",
+          "Masive și grupe montane din România"
+        ],
+        "reason": "Discarded because the Danube catch-all did not state one testable predicate and the remaining class lists self-sorted by type."
+      }
+    },
+    {
+      "selected_ref": "v43r_personalitati_normal_01",
+      "shelf": "personalitati/normal",
+      "discarded_proposal": {
+        "ref": "personalitati_normal_01",
+        "group_labels": [
+          "Prenumele Ion",
+          "Prenumele Nicolae",
+          "Scriitori români moderni",
+          "Medaliați olimpici români din sporturi individuale"
+        ],
+        "reason": "Discarded because two parallel first-name groups made the construction mechanical and the two profession lists were broad."
+      }
+    },
+    {
+      "selected_ref": "v43r_personalitati_normal_02",
+      "shelf": "personalitati/normal",
+      "discarded_proposal": {
+        "ref": "personalitati_normal_02",
+        "group_labels": [
+          "Filozofi și eseiști",
+          "Interpreți de muzică",
+          "Personalități medicale",
+          "Campioni din sporturi diferite"
+        ],
+        "reason": "Discarded as four broad profession/achievement buckets; the selected board uses a surname rule, a precise birth-century fact, institution names, and a bounded television predicate."
+      }
+    },
+    {
+      "selected_ref": "v43r_personalitati_normal_03",
+      "shelf": "personalitati/normal",
+      "discarded_proposal": {
+        "ref": "personalitati_normal_03",
+        "group_labels": [
+          "Prenumele Radu",
+          "Prenumele Adrian",
+          "Pionieri români în știință și tehnică",
+          "Campioni români din sporturi diferite"
+        ],
+        "reason": "Discarded because it repeated the paired-name worksheet and used an overbroad pioneer predicate; the replacement has four materially different, independently testable groups."
+      }
+    },
+    {
+      "selected_ref": "v43r_sport_usor_01",
+      "shelf": "sport/usor",
+      "discarded_proposal": {
+        "ref": "sport_usor_01",
+        "group_labels": [
+          "Sporturi de echipă cu minge",
+          "Cluburi românești de fotbal",
+          "Medaliați olimpici români",
+          "Evenimente sportive din 2024 sau 2025"
+        ],
+        "reason": "Discarded because sport, club, person, and event groups gave away the partition by visible node type; all sixteen selected tiles are people."
+      }
+    },
+    {
+      "selected_ref": "v43r_sport_usor_02",
+      "shelf": "sport/usor",
+      "discarded_proposal": {
+        "ref": "sport_usor_02",
+        "group_labels": [
+          "Sporturi olimpice individuale",
+          "Cluburi sportive din București",
+          "Gimnaste române",
+          "Fundași români din generații diferite"
+        ],
+        "reason": "Discarded because the concept/club/person split was a visible type shortcut; the selected all-person board requires actual predicate solving."
+      }
+    },
+    {
+      "selected_ref": "v43r_sport_usor_03",
+      "shelf": "sport/usor",
+      "discarded_proposal": {
+        "ref": "sport_usor_03",
+        "group_labels": [
+          "Titulari ai României la turneul continental din 2024",
+          "Antrenori români campioni în prima ligă",
+          "Victorii românești pe mari scene internaționale",
+          "Rezultate românești din vara sportivă 2024"
+        ],
+        "reason": "Discarded because two event/result groups made the board repetitive and time-bound; the selected all-person design has exact stable predicates."
+      }
+    },
+    {
+      "selected_ref": "v43r_sport_usor_04",
+      "shelf": "sport/usor",
+      "discarded_proposal": {
+        "ref": "sport_usor_04",
+        "group_labels": [
+          "Sportivi români în sporturi cu rachetă sau paletă",
+          "Medaliați români la Paris 2024",
+          "Au un oraș în numele afișat",
+          "Sporturi cu adversar direct"
+        ],
+        "reason": "Discarded because the final concept group was type-visible and the city-name rule was a weak surface gimmick; the replacement keeps sixteen people and bounded deductions."
+      }
+    },
+    {
+      "selected_ref": "v43r_sport_normal_01",
+      "shelf": "sport/normal",
+      "discarded_proposal": {
+        "ref": "sport_normal_01",
+        "group_labels": [
+          "Lotul României din 2024",
+          "Antrenori care au fost internaționali români",
+          "Câștigătoare de cupe europene",
+          "Sporturi individuale cu medalii olimpice românești"
+        ],
+        "reason": "Discarded because the final sport-concept group made the answer type-visible and the first three groups had broad football overlap; the selected board is all-person and partition-clean."
+      }
+    },
+    {
+      "selected_ref": "v43r_sport_normal_02",
+      "shelf": "sport/normal",
+      "discarded_proposal": {
+        "ref": "sport_normal_02",
+        "group_labels": [
+          "Tenismeni români",
+          "Campioane europene după 2010",
+          "Jucători defensivi români",
+          "Medaliați olimpici înainte de 2005"
+        ],
+        "reason": "Discarded because broad career classes allowed too many plausible semantic crossfits; the selected board uses dated accomplishments, league participation, and an exact first-name rule."
+      }
+    },
+    {
+      "selected_ref": "v43r_sport_normal_03",
+      "shelf": "sport/normal",
+      "discarded_proposal": {
+        "ref": "sport_normal_03",
+        "group_labels": [
+          "Au purtat banderola României",
+          "Sportive cu rachetă sau paletă",
+          "Sportivi români în primii opt la Paris 2024",
+          "Au condus loturi naționale de seniori ale României"
+        ],
+        "reason": "Discarded because the national-team leadership groups were too close semantically and the Paris cutoff was brittle; the replacement states four stable, mutually bounded predicates."
+      }
+    },
+    {
+      "selected_ref": "v43r_stiinta_normal_01",
+      "shelf": "stiinta/normal",
+      "discarded_proposal": {
+        "ref": "stiinta_normal_01",
+        "group_labels": [
+          "Părți ale feței",
+          "Părți ale piciorului",
+          "Fenomene meteo violente",
+          "Mamifere domestice"
+        ],
+        "reason": "Discarded as primary-school stock below normal difficulty; the selected board adds exact astronomy, scale/visibility, and suffix deductions."
+      }
+    },
+    {
+      "selected_ref": "v43r_stiinta_normal_02",
+      "shelf": "stiinta/normal",
+      "discarded_proposal": {
+        "ref": "stiinta_normal_02",
+        "group_labels": [
+          "Structuri ale cavității bucale",
+          "Animale întâlnite în pădure",
+          "Se termină în „-logie”",
+          "Mărimi fizice"
+        ],
+        "reason": "Discarded because three generic taxonomy groups made the normal board too direct; the replacement creates bounded cross-category decoys around one exact prefix."
+      }
+    },
+    {
+      "selected_ref": "v43r_stiinta_normal_03",
+      "shelf": "stiinta/normal",
+      "discarded_proposal": {
+        "ref": "stiinta_normal_03",
+        "group_labels": [
+          "Termeni științifici care încep cu M",
+          "Absolvenți de medicină",
+          "Instituții științifice bucureștene",
+          "Părți ale corpului din patru litere"
+        ],
+        "reason": "Discarded because concepts, people, organizations, and anatomy produced a visible type shortcut; the selected board uses sixteen concepts and four exact predicates."
+      }
+    }
+  ],
+  "runtime_invariants": {
+    "intrusul_and_perechi_content": "unchanged",
+    "session_ttl_seconds": 7200,
+    "session_capacity": 1000
+  }
+}
