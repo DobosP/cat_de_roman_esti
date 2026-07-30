@@ -336,9 +336,9 @@ BOARDS = (
         g("Preparate din aluat dospit",
           "Aluatul fiecărui preparat este lăsat să dospească înainte de gătire.",
           "Pizza", "Gogoși", "Langoși", "Pâine cu maia"),
-        g("Băuturi alcoolice din fructe",
-          "Fructele sunt materia primă definitorie a fiecărei băuturi alcoolice.",
-          "Vin", "Țuică", "Pălincă", "Vișinată"),
+        g("Cacao în compoziție",
+          "Fiecare produs dulce conține cacao.",
+          "Salam de biscuiți", "Amandină", "Joffre", "Ciocolata ROM"),
         g("Părți comestibile crescute sub pământ",
           "Partea consumată a fiecărei plante crește sub pământ.",
           "Morcov", "Ridiche", "Ceapă", "Usturoi"),
@@ -493,9 +493,9 @@ BOARDS = (
         g("Prenumele Florin", "Primul cuvânt din numele afișat este „Florin”.",
           "Florin Niță", "Florin Piersic Jr.", "Florin Răducioiu",
           "Florin Dumitrescu"),
-        g("Prenume din patru litere",
-          "Primul cuvânt din numele afișat are exact patru litere.",
-          "Radu Beligan", "Gică Popescu", "Dinu Lipatti", "Toma Caragiu"),
+        g("Figuri ale Revoluției de la 1848",
+          "Fiecare a participat la mișcările revoluționare românești din 1848.",
+          "Avram Iancu", "Nicolae Bălcescu", "Ana Ipătescu", "Vasile Alecsandri"),
         g("Aceeași inițială la prenume și nume",
           "Primul și ultimul cuvânt din numele afișat încep cu aceeași literă.",
           "Cristian Chivu", "Alexandru Arșinel", "Marius Moga", "Corneliu Coposu"),
@@ -627,15 +627,36 @@ AUTHOR_SOURCE_ASSERTIONS = {
         ),
         "source": "https://www.cosr.ro/olympicGames/atlanta-1996",
     }],
-    "gastronomie_normal_06": [{
+    "gastronomie_normal_06": [
+        {
+            "assertion": (
+                "EU Implementing Regulation 2025/2259 registers «Cârnați din topor "
+                "din Vâlcea» as a geographical indication; the predicate therefore "
+                "uses «toponim», not the false narrower class «localitate»."
+            ),
+            "source": (
+                "https://eur-lex.europa.eu/legal-content/RO/TXT/"
+                "?uri=OJ%3AL_202502259"
+            ),
+        },
+        {
+            "assertion": (
+                "Kandia Dulce's official ROM page lists cocoa powder, cocoa butter, "
+                "and cocoa mass among the product ingredients."
+            ),
+            "source": "https://kandia-dulce.ro/branduri/rom/",
+        },
+    ],
+    "personalitati_normal_05": [{
         "assertion": (
-            "EU Implementing Regulation 2025/2259 registers «Cârnați din topor "
-            "din Vâlcea» as a geographical indication; the predicate therefore "
-            "uses «toponim», not the false narrower class «localitate»."
+            "Romania's Interior Ministry names Vasile Alecsandri among Moldavian "
+            "revolutionaries, Avram Iancu among Transylvanian exponents, and Ana "
+            "Ipătescu and Nicolae Bălcescu among Wallachian leaders of 1848."
         ),
         "source": (
-            "https://eur-lex.europa.eu/legal-content/RO/TXT/"
-            "?uri=OJ%3AL_202502259"
+            "https://www.mai.gov.ro/mesajul-premierului-interimar-al-romaniei-"
+            "ministrul-afacerilor-interne-catalin-predoiu-cu-ocazia-zilei-"
+            "victoriei-revolutiei-de-la-1848-si-a-democratiei-romanesti/"
         ),
     }],
 }

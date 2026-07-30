@@ -7,9 +7,9 @@
     "kg_sha256": "9363ccaa3a892ff0cd9ba77dfa5baee01eaa0de9dde5ca4bb6d3aaf17295dac2",
     "demotions_sha256": "ba9bb55b17b2a1a7a28e54d440256a42d7bfab337fa91861881d6ca926aa61ff",
     "candidate_sha256_by_category": {
-      "gastronomie": "bf97eea5936a76addab99700867e5aa0ee4dd9e4906f0373ce95e833a49e3c55",
+      "gastronomie": "60067abed795b4dc25a874924df17b567c1c5bea9981486da24c3446c69e7161",
       "geografie": "5a5df7e90d842d4e45256701de7bc7d640ccf09da82c5747b835450475ae6be0",
-      "personalitati": "195db031fe3ac9a3f4a1dcc5bd604bc7c12656969475472f3211ad0191387e75",
+      "personalitati": "e755b4ccfbf4a45a7d73e8fd738926b4506b4a2fedb98589aa92d2e58e31fbe5",
       "sport": "6f6238b9e45dc65d88a5fda46da3cb7a3daf2f933e18ecc64160d2429bf9d57a",
       "stiinta": "a54be27a3acfcb479e6403fca122036ba0a2584d316c49e4ba6ce6ac39785972"
     },
@@ -2152,9 +2152,9 @@
             "max_pack_board": "cx_gastronomie_301",
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
-            "max_same_batch_overlap": 1,
+            "max_same_batch_overlap": 2,
             "max_same_batch_ref": "gastronomie_normal_06",
-            "max_same_batch_group": 2
+            "max_same_batch_group": 3
           }
         }
       ]
@@ -2448,8 +2448,8 @@
       "anchor_group": 1,
       "anchor_reason": "Numele afișat al fiecărui produs include explicit un toponim românesc.",
       "max_pack_board_overlap": {
-        "tiles": 4,
-        "board": "cx_gastronomie_297"
+        "tiles": 2,
+        "board": "cx_gastronomie_299"
       },
       "projected_member_use_max": 5,
       "hard_errors": [],
@@ -2458,6 +2458,10 @@
         {
           "assertion": "EU Implementing Regulation 2025/2259 registers «Cârnați din topor din Vâlcea» as a geographical indication; the predicate therefore uses «toponim», not the false narrower class «localitate».",
           "source": "https://eur-lex.europa.eu/legal-content/RO/TXT/?uri=OJ%3AL_202502259"
+        },
+        {
+          "assertion": "Kandia Dulce's official ROM page lists cocoa powder, cocoa butter, and cocoa mass among the product ingredients.",
+          "source": "https://kandia-dulce.ro/branduri/rom/"
         }
       ],
       "lint_findings": [],
@@ -2531,28 +2535,28 @@
           }
         },
         {
-          "label": "Băuturi alcoolice din fructe",
-          "criterion": "Fructele sunt materia primă definitorie a fiecărei băuturi alcoolice.",
+          "label": "Cacao în compoziție",
+          "criterion": "Fiecare produs dulce conține cacao.",
           "tiles": [
-            "n_v4gas_vin",
-            "n_gas_tuica",
-            "n_gas_palinca",
-            "n_v42gas_visinata"
+            "n_v18gas_salam_de_biscuiti",
+            "n_v18gas_amandina",
+            "n_v11gas_joffre",
+            "n_vdr_ciocolata_rom"
           ],
           "tile_labels": [
-            "Vin",
-            "Țuică",
-            "Pălincă",
-            "Vișinată"
+            "Salam de biscuiți",
+            "Amandină",
+            "Joffre",
+            "Ciocolata ROM"
           ],
           "recognition": "mainstream",
           "overlap_census": {
             "max_pack_overlap": 2,
-            "max_pack_board": "cx_gastronomie_300",
+            "max_pack_board": "cx_gastronomie_298",
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
-            "max_same_batch_overlap": 0,
-            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "gastronomie_normal_03",
             "max_same_batch_group": 4
           }
         },
@@ -3977,13 +3981,18 @@
       "anchor_group": 1,
       "anchor_reason": "Primul cuvânt din numele afișat este „Florin”.",
       "max_pack_board_overlap": {
-        "tiles": 2,
+        "tiles": 1,
         "board": "cx_sport_075"
       },
       "projected_member_use_max": 6,
       "hard_errors": [],
       "editorial_flags": [],
-      "author_source_assertions": [],
+      "author_source_assertions": [
+        {
+          "assertion": "Romania's Interior Ministry names Vasile Alecsandri among Moldavian revolutionaries, Avram Iancu among Transylvanian exponents, and Ana Ipătescu and Nicolae Bălcescu among Wallachian leaders of 1848.",
+          "source": "https://www.mai.gov.ro/mesajul-premierului-interimar-al-romaniei-ministrul-afacerilor-interne-catalin-predoiu-cu-ocazia-zilei-victoriei-revolutiei-de-la-1848-si-a-democratiei-romanesti/"
+        }
+      ],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -4029,29 +4038,29 @@
           }
         },
         {
-          "label": "Prenume din patru litere",
-          "criterion": "Primul cuvânt din numele afișat are exact patru litere.",
+          "label": "Figuri ale Revoluției de la 1848",
+          "criterion": "Fiecare a participat la mișcările revoluționare românești din 1848.",
           "tiles": [
-            "n_v11per_radu_beligan",
-            "n_spt_gica_popescu",
-            "n_v11art_dinu_lipatti",
-            "n_ftv_toma_caragiu"
+            "n_avram_iancu",
+            "n_v17ist_nicolae_balcescu",
+            "n_v21per_ana_ipatescu",
+            "n_vasile_alecsandri"
           ],
           "tile_labels": [
-            "Radu Beligan",
-            "Gică Popescu",
-            "Dinu Lipatti",
-            "Toma Caragiu"
+            "Avram Iancu",
+            "Nicolae Bălcescu",
+            "Ana Ipătescu",
+            "Vasile Alecsandri"
           ],
           "recognition": "mainstream",
           "overlap_census": {
             "max_pack_overlap": 1,
-            "max_pack_board": "cx_sport_075",
+            "max_pack_board": "cx_istorie_182",
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
-            "max_same_batch_overlap": 1,
-            "max_same_batch_ref": "sport_usor_06",
-            "max_same_batch_group": 2
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
           }
         },
         {
