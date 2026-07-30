@@ -73,8 +73,8 @@ measured fun or knowledge.
 - Browser history, records, derived mastery, circuit, and streak remain device-authored.
   Account mode can upload validated completed-score rows privately but does not download,
   restore, or merge them. Public records remain server-authored and consent-gated.
-- Anonymous production is on V43 `1f6c167`; its mandatory game-create smoke exposed the
-  bundled-path mismatch fixed here. The corrected image still requires redeployment.
+- Anonymous production runs V43 at `38da2f4`; on 2026-07-30 all six create endpoints,
+  health, manifest, categories, accounts-off mode, and the frontend passed live probes.
 
 ## Reproduction
 

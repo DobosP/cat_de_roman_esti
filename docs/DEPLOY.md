@@ -75,6 +75,8 @@ curl -fsS https://<CAT_DOMAIN>/api/health        # concepts must equal /api/mani
 curl -fsS https://<CAT_DOMAIN>/healthz           # container-internal healthcheck endpoint
 curl -fsS https://<CAT_DOMAIN>/api/me            # {"accounts_enabled": false, ...}
 curl -fsS https://<CAT_DOMAIN>/api/categories    # 14 rows; curated + available + difficulty matrix
+curl -fsS -X POST "https://<CAT_DOMAIN>/api/wordgames/intrusul/games?seed=38"
+curl -fsS -X POST "https://<CAT_DOMAIN>/api/wordgames/perechi/games?seed=38"
 ```
 
 `curated` is raw approved inventory, not a runtime-playability promise. Four easy Conexiuni
@@ -82,6 +84,10 @@ themes are intentionally false in `available_by_difficulty`; the picker hides th
 category shows `node_count: 0`, or every nested availability flag is false, the app loaded
 the wrong KG fixture — `CAT_KG_FIXTURE` must point at the curated `kg_sample.json` (the
 default); the games pack's node ids do not exist in other fixtures.
+
+`/api/health` does not instantiate the derived catalog. The two POST probes are mandatory:
+both must return 200 after every deploy, or Intrusul/Perechi may be unavailable despite a
+healthy container.
 
 **Single-process constraint** still applies: game sessions live in memory
 (`SessionStore`), so the app must stay one process (see the
