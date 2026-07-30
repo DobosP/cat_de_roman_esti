@@ -6,6 +6,13 @@
     "pack_sha256": "b2b603be2354af4c982c515ac43795bfe342c217c5cf32e59b0c5e28f5769194",
     "kg_sha256": "9363ccaa3a892ff0cd9ba77dfa5baee01eaa0de9dde5ca4bb6d3aaf17295dac2",
     "demotions_sha256": "ba9bb55b17b2a1a7a28e54d440256a42d7bfab337fa91861881d6ca926aa61ff",
+    "candidate_sha256_by_category": {
+      "gastronomie": "3bce733bddbe7af20531e8e1617ea08eb460288625af902b3e051d23671fd350",
+      "geografie": "5a5df7e90d842d4e45256701de7bc7d640ccf09da82c5747b835450475ae6be0",
+      "personalitati": "f20c808db692c6e849e3b089a2e8095dbe3e53f44e1f931de974443a6f5cd493",
+      "sport": "3c2bbd506c14fa05ecc7e0b5474beacfda8e65f2eca2862cbe7fbb7bcf91dc0e",
+      "stiinta": "553e297960d0e60f2a1583421806e0c6f78db943783807759c11358776c90761"
+    },
     "pack_conexiuni_boards": 308,
     "pack_conexiuni_groups": 1232,
     "approved_groups_including_reserves": 753,
@@ -73,6 +80,7 @@
       "projected_member_use_max": 6,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -210,6 +218,7 @@
       "projected_member_use_max": 7,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -344,11 +353,12 @@
         "tiles": 2,
         "board": "cx_sport_158"
       },
-      "projected_member_use_max": 8,
+      "projected_member_use_max": 7,
       "hard_errors": [],
       "editorial_flags": [
         "two_event_groups_make_the_board_repetitive"
       ],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -486,6 +496,7 @@
       "projected_member_use_max": 7,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -620,9 +631,10 @@
         "tiles": 1,
         "board": "cx_sport_283"
       },
-      "projected_member_use_max": 8,
+      "projected_member_use_max": 7,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -757,11 +769,12 @@
         "tiles": 1,
         "board": "cx_sport_075"
       },
-      "projected_member_use_max": 8,
+      "projected_member_use_max": 7,
       "hard_errors": [],
       "editorial_flags": [
         "recent_events_need_gate_reverification"
       ],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -899,6 +912,7 @@
       "projected_member_use_max": 8,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -1036,6 +1050,7 @@
       "projected_member_use_max": 8,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -1167,12 +1182,18 @@
       "anchor_group": 1,
       "anchor_reason": "Fiecare a purtat banderola echipei naționale de fotbal.",
       "max_pack_board_overlap": {
-        "tiles": 1,
+        "tiles": 2,
         "board": "cx_sport_075"
       },
-      "projected_member_use_max": 6,
+      "projected_member_use_max": 8,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [
+        {
+          "assertion": "COSR lists David Popovici as the Paris 2024 Olympic champion at 200 m freestyle and bronze medallist at 100 m freestyle.",
+          "source": "https://www.cosr.ro/olympicGames/paris-2024"
+        }
+      ],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -1250,18 +1271,18 @@
             "n_v18spo_ana_barbosu",
             "n_v20spo_mihaela_cambei",
             "n_v21spo_sabrina_voinea",
-            "n_v18spo_constantin_popovici"
+            "n_spt_david_popovici"
           ],
           "tile_labels": [
             "Ana Bărbosu",
             "Mihaela Cambei",
             "Sabrina Maneca-Voinea",
-            "Constantin Popovici"
+            "David Popovici"
           ],
           "recognition": "mainstream",
           "overlap_census": {
-            "max_pack_overlap": 0,
-            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_sport_283",
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
             "max_same_batch_overlap": 2,
@@ -1310,6 +1331,12 @@
       "projected_member_use_max": 8,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [
+        {
+          "assertion": "COSR's Atlanta 1996 results list Gabriela Szabó, Leonard Doroftei, Simona Amânar, and Elisabeta Lipă among Romania's medallists.",
+          "source": "https://www.cosr.ro/olympicGames/atlanta-1996"
+        }
+      ],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -1381,8 +1408,8 @@
           }
         },
         {
-          "label": "Medaliați români la Sydney 2000",
-          "criterion": "Fiecare a câștigat o medalie pentru România la Jocurile Olimpice din 2000.",
+          "label": "Medaliați români la Atlanta 1996",
+          "criterion": "Fiecare a câștigat o medalie pentru România la Jocurile Olimpice din 1996.",
           "tiles": [
             "n_v11spo_gabriela_szabo",
             "n_v11spo_leonard_doroftei",
@@ -1444,11 +1471,12 @@
         "tiles": 2,
         "board": "cx_sport_284"
       },
-      "projected_member_use_max": 8,
+      "projected_member_use_max": 7,
       "hard_errors": [],
       "editorial_flags": [
         "association_and_type_bag_board"
       ],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -1588,6 +1616,7 @@
       "editorial_flags": [
         "club_group_is_broad"
       ],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -1725,6 +1754,7 @@
       "projected_member_use_max": 6,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -1864,6 +1894,7 @@
       "editorial_flags": [
         "hold_subjective_travel_snack_and_borderline_summer_grape"
       ],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -2003,6 +2034,7 @@
       "editorial_flags": [
         "two_deep_cuts_in_chef_group"
       ],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -2042,9 +2074,9 @@
             "max_pack_board": "cx_viata_de_roman_315",
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
-            "max_same_batch_overlap": 0,
-            "max_same_batch_ref": "stiinta_normal_06",
-            "max_same_batch_group": 4
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "personalitati_normal_05",
+            "max_same_batch_group": 1
           }
         },
         {
@@ -2140,6 +2172,7 @@
       "projected_member_use_max": 7,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [
         {
           "check": "red_herring_budget",
@@ -2283,6 +2316,7 @@
       "projected_member_use_max": 4,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -2412,7 +2446,7 @@
       "shelf": "gastronomie/normal",
       "author_verdict": "advance",
       "anchor_group": 1,
-      "anchor_reason": "Numele fiecărui preparat include explicit o localitate sau regiune.",
+      "anchor_reason": "Numele afișat al fiecărui produs include explicit un toponim românesc.",
       "max_pack_board_overlap": {
         "tiles": 4,
         "board": "cx_gastronomie_297"
@@ -2420,6 +2454,12 @@
       "projected_member_use_max": 5,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [
+        {
+          "assertion": "EU Implementing Regulation 2025/2259 registers «Cârnați din topor din Vâlcea» as a geographical indication; the predicate therefore uses «toponim», not the false narrower class «localitate».",
+          "source": "https://eur-lex.europa.eu/legal-content/RO/TXT/?uri=OJ%3AL_202502259"
+        }
+      ],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -2439,8 +2479,8 @@
       },
       "groups": [
         {
-          "label": "Au o localitate în nume",
-          "criterion": "Numele fiecărui preparat include explicit o localitate sau regiune.",
+          "label": "Toponime în denumirea afișată",
+          "criterion": "Numele afișat al fiecărui produs include explicit un toponim românesc.",
           "tiles": [
             "n_v11gas_salam_sibiu",
             "n_v20gas_telemea_ibanesti",
@@ -2557,6 +2597,7 @@
       "projected_member_use_max": 7,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -2694,6 +2735,7 @@
       "projected_member_use_max": 4,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -2831,6 +2873,7 @@
       "projected_member_use_max": 7,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -2968,6 +3011,7 @@
       "projected_member_use_max": 6,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -3107,6 +3151,7 @@
       "editorial_flags": [
         "museum_group_is_broad"
       ],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -3246,6 +3291,7 @@
       "editorial_flags": [
         "broad_littoral_group"
       ],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -3383,6 +3429,7 @@
       "projected_member_use_max": 6,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -3422,9 +3469,9 @@
             "max_pack_board": "cx_viata_de_roman_315",
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
-            "max_same_batch_overlap": 1,
-            "max_same_batch_ref": "personalitati_normal_05",
-            "max_same_batch_group": 3
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
           }
         },
         {
@@ -3520,6 +3567,7 @@
       "projected_member_use_max": 8,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -3654,9 +3702,10 @@
         "tiles": 2,
         "board": "cx_stiinta_166"
       },
-      "projected_member_use_max": 8,
+      "projected_member_use_max": 7,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -3796,6 +3845,7 @@
       "editorial_flags": [
         "four_generic_class_lists"
       ],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -3861,9 +3911,9 @@
             "max_pack_board": "cx_viata_de_roman_315",
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
-            "max_same_batch_overlap": 1,
-            "max_same_batch_ref": "personalitati_normal_05",
-            "max_same_batch_group": 3
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_group": 4
           }
         },
         {
@@ -3925,14 +3975,15 @@
       "shelf": "personalitati/normal",
       "author_verdict": "advance",
       "anchor_group": 1,
-      "anchor_reason": "Fiecare a jucat pentru echipa națională de fotbal a României.",
+      "anchor_reason": "Primul cuvânt din numele afișat este „Florin”.",
       "max_pack_board_overlap": {
-        "tiles": 3,
-        "board": "cx_muzica_057"
+        "tiles": 2,
+        "board": "cx_personalitati_277"
       },
       "projected_member_use_max": 8,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -3952,45 +4003,71 @@
       },
       "groups": [
         {
-          "label": "Fotbaliști români cu meciuri la națională",
-          "criterion": "Fiecare a jucat pentru echipa națională de fotbal a României.",
+          "label": "Prenumele Florin",
+          "criterion": "Primul cuvânt din numele afișat este „Florin”.",
           "tiles": [
             "n_v20spo_florin_nita",
-            "n_v18spo_radu_dragusin",
-            "n_v21spo_adrian_mutu",
-            "n_v11spo_mircea_lucescu"
+            "n_v19fil_florin_piersic_jr",
+            "n_muz_florin_salam",
+            "n_v20gas_florin_dumitrescu"
           ],
           "tile_labels": [
             "Florin Niță",
-            "Radu Drăgușin",
-            "Adrian Mutu",
-            "Mircea Lucescu"
+            "Florin Piersic Jr.",
+            "Florin Salam",
+            "Florin Dumitrescu"
           ],
           "recognition": "mainstream",
           "overlap_census": {
-            "max_pack_overlap": 0,
-            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_personalitati_213",
             "max_pack_status": "approved",
-            "max_pack_is_demoted": false,
-            "max_same_batch_overlap": 2,
+            "max_pack_is_demoted": true,
+            "max_same_batch_overlap": 1,
             "max_same_batch_ref": "sport_usor_05",
             "max_same_batch_group": 2
           }
         },
         {
-          "label": "Actori români",
-          "criterion": "Fiecare este actor român cunoscut în film, teatru ori televiziune.",
+          "label": "Prenume din patru litere",
+          "criterion": "Primul cuvânt din numele afișat are exact patru litere.",
           "tiles": [
-            "n_v19fil_florin_piersic_jr",
             "n_v11per_radu_beligan",
-            "n_v18fil_adrian_vancica",
-            "n_v20fil_sebastian_stan"
+            "n_spt_gica_popescu",
+            "n_v11art_dinu_lipatti",
+            "n_ftv_toma_caragiu"
           ],
           "tile_labels": [
-            "Florin Piersic Jr.",
             "Radu Beligan",
-            "Adrian Văncică",
-            "Sebastian Stan"
+            "Gică Popescu",
+            "Dinu Lipatti",
+            "Toma Caragiu"
+          ],
+          "recognition": "mainstream",
+          "overlap_census": {
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_sport_075",
+            "max_pack_status": "approved",
+            "max_pack_is_demoted": false,
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "sport_usor_06",
+            "max_same_batch_group": 2
+          }
+        },
+        {
+          "label": "Aceeași inițială la prenume și nume",
+          "criterion": "Primul și ultimul cuvânt din numele afișat încep cu aceeași literă.",
+          "tiles": [
+            "n_v20spo_cristian_chivu",
+            "n_v20fil_alexandru_arsinel",
+            "n_v20muz_marius_moga",
+            "n_v11per_corneliu_coposu"
+          ],
+          "tile_labels": [
+            "Cristian Chivu",
+            "Alexandru Arșinel",
+            "Marius Moga",
+            "Corneliu Coposu"
           ],
           "recognition": "mainstream",
           "overlap_census": {
@@ -3999,60 +4076,34 @@
             "max_pack_status": "approved",
             "max_pack_is_demoted": true,
             "max_same_batch_overlap": 1,
-            "max_same_batch_ref": "personalitati_normal_03",
-            "max_same_batch_group": 2
+            "max_same_batch_ref": "sport_usor_02",
+            "max_same_batch_group": 4
           }
         },
         {
-          "label": "Regizori români de lungmetraj",
-          "criterion": "Fiecare a regizat cel puțin un lungmetraj românesc lansat în cinematografe.",
+          "label": "Nume de familie care încep cu S",
+          "criterion": "Numele de familie afișat al fiecărei persoane începe cu litera S.",
           "tiles": [
-            "n_v19fil_tudor_giurgiu",
-            "n_v18fil_radu_jude",
-            "n_ftv_nae_caranfil",
-            "n_v17fil_ion_popescu_gopo"
+            "n_v19spo_eliza_samara",
+            "n_v19spo_nicolae_stanciu",
+            "n_v11spo_gabriela_szabo",
+            "n_nichita_stanescu"
           ],
           "tile_labels": [
-            "Tudor Giurgiu",
-            "Radu Jude",
-            "Nae Caranfil",
-            "Ion Popescu-Gopo"
+            "Elizabeta Samara",
+            "Nicolae Stanciu",
+            "Gabriela Szabó",
+            "Nichita Stănescu"
           ],
           "recognition": "mainstream",
           "overlap_census": {
             "max_pack_overlap": 1,
-            "max_pack_board": "cx_personalitati_212",
+            "max_pack_board": "cx_literatura_263",
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
-            "max_same_batch_overlap": 1,
-            "max_same_batch_ref": "personalitati_normal_04",
-            "max_same_batch_group": 2
-          }
-        },
-        {
-          "label": "Vocaliști români contemporani",
-          "criterion": "Fiecare este interpret vocal român cu succes popular după anul 2000.",
-          "tiles": [
-            "n_muz_florin_salam",
-            "n_muz_adrian_minune",
-            "n_muz_inna",
-            "n_v17muz_loredana"
-          ],
-          "tile_labels": [
-            "Florin Salam",
-            "Adrian Minune",
-            "INNA",
-            "Loredana Groza"
-          ],
-          "recognition": "mainstream",
-          "overlap_census": {
-            "max_pack_overlap": 2,
-            "max_pack_board": "cx_personalitati_213",
-            "max_pack_status": "approved",
-            "max_pack_is_demoted": true,
-            "max_same_batch_overlap": 1,
+            "max_same_batch_overlap": 2,
             "max_same_batch_ref": "personalitati_normal_03",
-            "max_same_batch_group": 2
+            "max_same_batch_group": 4
           }
         }
       ]
@@ -4072,6 +4123,7 @@
       "editorial_flags": [
         "generic_profession_board"
       ],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -4211,6 +4263,7 @@
       "editorial_flags": [
         "primary_school_stock_below_normal_difficulty"
       ],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -4348,6 +4401,7 @@
       "projected_member_use_max": 5,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -4477,14 +4531,15 @@
       "shelf": "stiinta/normal",
       "author_verdict": "advance",
       "anchor_group": 1,
-      "anchor_reason": "Fiecare este o structură prea mică pentru a fi văzută cu ochiul liber.",
+      "anchor_reason": "Fiecare entitate este prea mică pentru a fi observată cu ochiul liber.",
       "max_pack_board_overlap": {
-        "tiles": 3,
-        "board": "cx_stiinta_286"
+        "tiles": 2,
+        "board": "cx_stiinta_308"
       },
       "projected_member_use_max": 8,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -4504,26 +4559,26 @@
       },
       "groups": [
         {
-          "label": "Structuri microscopice",
-          "criterion": "Fiecare este o structură prea mică pentru a fi văzută cu ochiul liber.",
+          "label": "Prea mici pentru ochiul liber",
+          "criterion": "Fiecare entitate este prea mică pentru a fi observată cu ochiul liber.",
           "tiles": [
             "n_v3sti_atom",
             "n_v3sti_molecula",
             "n_v2sti_celula",
-            "n_ribozom"
+            "n_v4sti_microb"
           ],
           "tile_labels": [
             "Atom",
             "Moleculă",
             "Celulă",
-            "Ribozom"
+            "microb"
           ],
           "recognition": "mainstream",
           "overlap_census": {
-            "max_pack_overlap": 2,
-            "max_pack_board": "cx_stiinta_227",
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_stiinta_308",
             "max_pack_status": "approved",
-            "max_pack_is_demoted": true,
+            "max_pack_is_demoted": false,
             "max_same_batch_overlap": 2,
             "max_same_batch_ref": "stiinta_normal_06",
             "max_same_batch_group": 4
@@ -4556,8 +4611,8 @@
           }
         },
         {
-          "label": "Instituții românești de știință și tehnică",
-          "criterion": "Fiecare este instituție românească legată de cercetare ori educație tehnică.",
+          "label": "Instituții științifice bucureștene",
+          "criterion": "Fiecare instituție științifică își are sediul în București.",
           "tiles": [
             "n_v11sti_institutul_cantacuzino",
             "n_v20sti_institutul_speologie",
@@ -4582,28 +4637,28 @@
           }
         },
         {
-          "label": "Matematicieni români",
-          "criterion": "Fiecare este matematician român cu contribuții academice cunoscute.",
+          "label": "Încep cu un substantiv articulat",
+          "criterion": "Primul cuvânt din fiecare denumire este un substantiv articulat hotărât.",
           "tiles": [
-            "n_v20sti_traian_lalescu",
-            "n_v20sti_octav_onicescu",
-            "n_v20sti_simion_stoilow",
-            "n_v17per_solomon_marcus"
+            "n_v21sti_centrala_cernavoda",
+            "n_v11sti_laserul_magurele",
+            "n_stilou_rezervor",
+            "n_v21sti_manuscrisul_sibiu"
           ],
           "tile_labels": [
-            "Traian Lalescu",
-            "Octav Onicescu",
-            "Simion Stoilow",
-            "Solomon Marcus"
+            "Centrala Nucleară de la Cernavodă",
+            "Laserul Măgurele",
+            "Stiloul cu rezervor",
+            "Manuscrisul de la Sibiu"
           ],
           "recognition": "mainstream",
           "overlap_census": {
-            "max_pack_overlap": 0,
-            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_stiinta_310",
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
             "max_same_batch_overlap": 2,
-            "max_same_batch_ref": "stiinta_normal_05",
+            "max_same_batch_ref": "stiinta_normal_06",
             "max_same_batch_group": 2
           }
         }
@@ -4622,6 +4677,7 @@
       "projected_member_use_max": 8,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -4759,6 +4815,7 @@
       "projected_member_use_max": 8,
       "hard_errors": [],
       "editorial_flags": [],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -4804,7 +4861,7 @@
           }
         },
         {
-          "label": "Alți matematicieni români",
+          "label": "Matematicieni români",
           "criterion": "Fiecare este matematician român cu activitate academică.",
           "tiles": [
             "n_stix_gheorghe_titeica",
@@ -4824,13 +4881,13 @@
             "max_pack_board": "cx_stiinta_165",
             "max_pack_status": "approved",
             "max_pack_is_demoted": true,
-            "max_same_batch_overlap": 2,
-            "max_same_batch_ref": "stiinta_normal_03",
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
             "max_same_batch_group": 4
           }
         },
         {
-          "label": "Fenomene meteo care reduc vizibilitatea",
+          "label": "Fenomene meteo care pot reduce vizibilitatea",
           "criterion": "Fiecare poate reduce vizibilitatea în aer liber.",
           "tiles": [
             "n_v24_weather_air_ceata",
@@ -4898,6 +4955,7 @@
       "editorial_flags": [
         "technology_and_matter_groups_are_broad"
       ],
+      "author_source_assertions": [],
       "lint_findings": [],
       "rubric_self_screen": {
         "B1_single_predicates": true,
@@ -4963,8 +5021,8 @@
             "max_pack_board": "cx_stiinta_310",
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
-            "max_same_batch_overlap": 0,
-            "max_same_batch_ref": "stiinta_normal_06",
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "stiinta_normal_03",
             "max_same_batch_group": 4
           }
         },

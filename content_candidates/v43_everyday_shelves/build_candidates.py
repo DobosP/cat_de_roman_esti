@@ -200,7 +200,7 @@ BOARDS = (
         g("Sportivi români în primii opt la Paris 2024",
           "Fiecare s-a clasat între primele opt la proba sau întrecerea sa olimpică din 2024.",
           "Ana Bărbosu", "Mihaela Cambei", "Sabrina Maneca-Voinea",
-          "Constantin Popovici"),
+          "David Popovici"),
         g("Antrenori ai loturilor naționale românești",
           "Fiecare a condus un lot național de seniori al României.",
           "Octavian Bellu", "Emeric Ienei", "Edward Iordănescu",
@@ -214,8 +214,8 @@ BOARDS = (
         g("Turnee de tenis câștigate de români",
           "Fiecare turneu sau ediție a fost câștigat la simplu de un tenismen român.",
           "Roland Garros 2018", "Wimbledon 2019", "US Open 1972", "Madrid Open"),
-        g("Medaliați români la Sydney 2000",
-          "Fiecare a câștigat o medalie pentru România la Jocurile Olimpice din 2000.",
+        g("Medaliați români la Atlanta 1996",
+          "Fiecare a câștigat o medalie pentru România la Jocurile Olimpice din 1996.",
           "Gabriela Szabó", "Leonard Doroftei", "Simona Amânar", "Elisabeta Lipă"),
         g("Cluburi cu sediul în afara Bucureștiului",
           "Fiecare club are sediul în afara municipiului București.",
@@ -328,8 +328,8 @@ BOARDS = (
     ),
     b(
         "gastronomie_normal_06", "gastronomie", "normal", 0,
-        g("Au o localitate în nume",
-          "Numele fiecărui preparat include explicit o localitate sau regiune.",
+        g("Toponime în denumirea afișată",
+          "Numele afișat al fiecărui produs include explicit un toponim românesc.",
           "Salam de Sibiu", "Telemea de Ibănești", "Magiun de Topoloveni",
           "Cârnați din topor din Vâlcea"),
         g("Se gătesc în ulei sau tigaie",
@@ -489,19 +489,18 @@ BOARDS = (
     ),
     b(
         "personalitati_normal_05", "personalitati", "normal", 0,
-        g("Fotbaliști români cu meciuri la națională",
-          "Fiecare a jucat pentru echipa națională de fotbal a României.",
-          "Florin Niță", "Radu Drăgușin", "Adrian Mutu", "Mircea Lucescu"),
-        g("Actori români",
-          "Fiecare este actor român cunoscut în film, teatru ori televiziune.",
-          "Florin Piersic Jr.", "Radu Beligan", "Adrian Văncică",
-          "Sebastian Stan"),
-        g("Regizori români de lungmetraj",
-          "Fiecare a regizat cel puțin un lungmetraj românesc lansat în cinematografe.",
-          "Tudor Giurgiu", "Radu Jude", "Nae Caranfil", "Ion Popescu-Gopo"),
-        g("Vocaliști români contemporani",
-          "Fiecare este interpret vocal român cu succes popular după anul 2000.",
-          "Florin Salam", "Adrian Minune", "INNA", "Loredana Groza"),
+        g("Prenumele Florin", "Primul cuvânt din numele afișat este „Florin”.",
+          "Florin Niță", "Florin Piersic Jr.", "Florin Salam", "Florin Dumitrescu"),
+        g("Prenume din patru litere",
+          "Primul cuvânt din numele afișat are exact patru litere.",
+          "Radu Beligan", "Gică Popescu", "Dinu Lipatti", "Toma Caragiu"),
+        g("Aceeași inițială la prenume și nume",
+          "Primul și ultimul cuvânt din numele afișat încep cu aceeași literă.",
+          "Cristian Chivu", "Alexandru Arșinel", "Marius Moga", "Corneliu Coposu"),
+        g("Nume de familie care încep cu S",
+          "Numele de familie afișat al fiecărei persoane începe cu litera S.",
+          "Elizabeta Samara", "Nicolae Stanciu", "Gabriela Szabó",
+          "Nichita Stănescu"),
     ),
     b(
         "personalitati_normal_06", "personalitati", "normal", 0,
@@ -547,19 +546,20 @@ BOARDS = (
     ),
     b(
         "stiinta_normal_03", "stiinta", "normal", 0,
-        g("Structuri microscopice",
-          "Fiecare este o structură prea mică pentru a fi văzută cu ochiul liber.",
-          "Atom", "Moleculă", "Celulă", "Ribozom"),
+        g("Prea mici pentru ochiul liber",
+          "Fiecare entitate este prea mică pentru a fi observată cu ochiul liber.",
+          "Atom", "Moleculă", "Celulă", "microb"),
         g("Personalități ale medicinei românești",
           "Fiecare a avut un rol major în medicina ori microbiologia românească.",
           "George Emil Palade", "Ion Cantacuzino", "Carol Davila", "Sofia Ionescu"),
-        g("Instituții românești de știință și tehnică",
-          "Fiecare este instituție românească legată de cercetare ori educație tehnică.",
+        g("Instituții științifice bucureștene",
+          "Fiecare instituție științifică își are sediul în București.",
           "Institutul Cantacuzino", "Institutul de Speologie Emil Racoviță",
           "Observatorul Urseanu", "Universitatea Politehnica din București"),
-        g("Matematicieni români",
-          "Fiecare este matematician român cu contribuții academice cunoscute.",
-          "Traian Lalescu", "Octav Onicescu", "Simion Stoilow", "Solomon Marcus"),
+        g("Încep cu un substantiv articulat",
+          "Primul cuvânt din fiecare denumire este un substantiv articulat hotărât.",
+          "Centrala Nucleară de la Cernavodă", "Laserul Măgurele",
+          "Stiloul cu rezervor", "Manuscrisul de la Sibiu"),
     ),
     b(
         "stiinta_normal_04", "stiinta", "normal", 0,
@@ -582,11 +582,11 @@ BOARDS = (
         g("Mamifere rumegătoare",
           "Fiecare este un mamifer rumegător.",
           "Oaie", "Capră", "Cerb", "Căprioară"),
-        g("Alți matematicieni români",
+        g("Matematicieni români",
           "Fiecare este matematician român cu activitate academică.",
           "Gheorghe Țițeica", "Grigore Moisil", "Traian Lalescu",
           "Solomon Marcus"),
-        g("Fenomene meteo care reduc vizibilitatea",
+        g("Fenomene meteo care pot reduce vizibilitatea",
           "Fiecare poate reduce vizibilitatea în aer liber.",
           "Ceață", "Ploaie", "Zăpadă", "Furtună"),
         g("Femei românce din știință",
@@ -610,6 +610,34 @@ BOARDS = (
         flags=("technology_and_matter_groups_are_broad",),
     ),
 )
+
+AUTHOR_SOURCE_ASSERTIONS = {
+    "sport_normal_03": [{
+        "assertion": (
+            "COSR lists David Popovici as the Paris 2024 Olympic champion at 200 m "
+            "freestyle and bronze medallist at 100 m freestyle."
+        ),
+        "source": "https://www.cosr.ro/olympicGames/paris-2024",
+    }],
+    "sport_normal_04": [{
+        "assertion": (
+            "COSR's Atlanta 1996 results list Gabriela Szabó, Leonard Doroftei, "
+            "Simona Amânar, and Elisabeta Lipă among Romania's medallists."
+        ),
+        "source": "https://www.cosr.ro/olympicGames/atlanta-1996",
+    }],
+    "gastronomie_normal_06": [{
+        "assertion": (
+            "EU Implementing Regulation 2025/2259 registers «Cârnați din topor "
+            "din Vâlcea» as a geographical indication; the predicate therefore "
+            "uses «toponim», not the false narrower class «localitate»."
+        ),
+        "source": (
+            "https://eur-lex.europa.eu/legal-content/RO/TXT/"
+            "?uri=OJ%3AL_202502259"
+        ),
+    }],
+}
 
 
 def digest(path: Path) -> str:
@@ -762,6 +790,7 @@ def main() -> int:
             "max_pack_board_overlap": {"tiles": max_board[0], "board": max_board[1]},
             "projected_member_use_max": max(projected_use[x] for x in set(board_ids)),
             "hard_errors": hard, "editorial_flags": list(board.flags),
+            "author_source_assertions": AUTHOR_SOURCE_ASSERTIONS.get(board.ref, []),
             "lint_findings": lint,
             "rubric_self_screen": {
                 "B1_single_predicates": all(x["criterion"] for x in groups),
@@ -793,6 +822,10 @@ def main() -> int:
         (folder / "candidates.json").write_text(
             json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
         )
+    candidate_digests = {
+        category: digest(OUT / category / "candidates.json")
+        for category in sorted(output)
+    }
     manifest = {
         "schema_version": 1, "batch": "v43_everyday_shelves",
         "scope": (
@@ -802,6 +835,7 @@ def main() -> int:
         "source_census": {
             "pack_sha256": digest(PACK_PATH), "kg_sha256": digest(KG_PATH),
             "demotions_sha256": digest(DEMOTIONS_PATH),
+            "candidate_sha256_by_category": candidate_digests,
             "pack_conexiuni_boards": len(pack["conexiuni"]),
             "pack_conexiuni_groups": len(pack_quads),
             "approved_groups_including_reserves": len(approved_quads),
