@@ -7,11 +7,11 @@
     "kg_sha256": "9363ccaa3a892ff0cd9ba77dfa5baee01eaa0de9dde5ca4bb6d3aaf17295dac2",
     "demotions_sha256": "ba9bb55b17b2a1a7a28e54d440256a42d7bfab337fa91861881d6ca926aa61ff",
     "candidate_sha256_by_category": {
-      "gastronomie": "3bce733bddbe7af20531e8e1617ea08eb460288625af902b3e051d23671fd350",
+      "gastronomie": "bf97eea5936a76addab99700867e5aa0ee4dd9e4906f0373ce95e833a49e3c55",
       "geografie": "5a5df7e90d842d4e45256701de7bc7d640ccf09da82c5747b835450475ae6be0",
-      "personalitati": "f20c808db692c6e849e3b089a2e8095dbe3e53f44e1f931de974443a6f5cd493",
-      "sport": "04feadd5b1b4c18105ede2007f57ca22ecf2369752ae43ae988ba25770c47ca9",
-      "stiinta": "553e297960d0e60f2a1583421806e0c6f78db943783807759c11358776c90761"
+      "personalitati": "195db031fe3ac9a3f4a1dcc5bd604bc7c12656969475472f3211ad0191387e75",
+      "sport": "6f6238b9e45dc65d88a5fda46da3cb7a3daf2f933e18ecc64160d2429bf9d57a",
+      "stiinta": "a54be27a3acfcb479e6403fca122036ba0a2584d316c49e4ba6ce6ac39785972"
     },
     "pack_conexiuni_boards": 308,
     "pack_conexiuni_groups": 1232,
@@ -452,7 +452,7 @@
             "max_pack_is_demoted": false,
             "max_same_batch_overlap": 2,
             "max_same_batch_ref": "sport_normal_04",
-            "max_same_batch_group": 2
+            "max_same_batch_group": 4
           }
         },
         {
@@ -563,8 +563,8 @@
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
             "max_same_batch_overlap": 2,
-            "max_same_batch_ref": "sport_normal_03",
-            "max_same_batch_group": 3
+            "max_same_batch_ref": "sport_normal_04",
+            "max_same_batch_group": 2
           }
         },
         {
@@ -1325,10 +1325,10 @@
       "anchor_group": 1,
       "anchor_reason": "Fiecare a evoluat ca fotbalist în prima ligă italiană.",
       "max_pack_board_overlap": {
-        "tiles": 3,
-        "board": "cx_sport_225"
+        "tiles": 2,
+        "board": "cx_sport_283"
       },
-      "projected_member_use_max": 8,
+      "projected_member_use_max": 7,
       "hard_errors": [],
       "editorial_flags": [],
       "author_source_assertions": [
@@ -1359,16 +1359,16 @@
           "label": "Români care au jucat în Serie A",
           "criterion": "Fiecare a evoluat ca fotbalist în prima ligă italiană.",
           "tiles": [
-            "n_v21spo_adrian_mutu",
             "n_v20spo_cristian_chivu",
             "n_v18spo_radu_dragusin",
-            "n_v18spo_dennis_man"
+            "n_v18spo_dennis_man",
+            "n_v21spo_dan_petrescu"
           ],
           "tile_labels": [
-            "Adrian Mutu",
             "Cristian Chivu",
             "Radu Drăgușin",
-            "Dennis Man"
+            "Dennis Man",
+            "Dan Petrescu"
           ],
           "recognition": "mainstream",
           "overlap_census": {
@@ -1378,33 +1378,33 @@
             "max_pack_is_demoted": false,
             "max_same_batch_overlap": 2,
             "max_same_batch_ref": "sport_usor_06",
-            "max_same_batch_group": 1
+            "max_same_batch_group": 2
           }
         },
         {
-          "label": "Turnee de tenis câștigate de români",
-          "criterion": "Fiecare turneu sau ediție a fost câștigat la simplu de un tenismen român.",
+          "label": "Prenume care încep cu A",
+          "criterion": "Primul cuvânt din numele afișat al fiecărei persoane începe cu litera A.",
           "tiles": [
-            "n_spt_simona_roland_garros_2018",
-            "n_spt_simona_wimbledon_2019",
-            "n_spt_nastase_us_open_1972",
-            "n_spt_madrid_open"
+            "n_v20spo_andrei_ratiu",
+            "n_v18spo_ana_barbosu",
+            "n_v11spo_ana_maria_branza",
+            "n_v19spo_ancuta_bodnar"
           ],
           "tile_labels": [
-            "Roland Garros 2018",
-            "Wimbledon 2019",
-            "US Open 1972",
-            "Madrid Open"
+            "Andrei Rațiu",
+            "Ana Bărbosu",
+            "Ana Maria Brânză",
+            "Ancuța Bodnar"
           ],
           "recognition": "mainstream",
           "overlap_census": {
-            "max_pack_overlap": 2,
-            "max_pack_board": "cx_sport_281",
-            "max_pack_status": "pending",
+            "max_pack_overlap": 0,
+            "max_pack_board": "cx_viata_de_roman_315",
+            "max_pack_status": "approved",
             "max_pack_is_demoted": false,
             "max_same_batch_overlap": 2,
-            "max_same_batch_ref": "sport_usor_03",
-            "max_same_batch_group": 3
+            "max_same_batch_ref": "sport_usor_04",
+            "max_same_batch_group": 2
           }
         },
         {
@@ -1434,29 +1434,29 @@
           }
         },
         {
-          "label": "Cluburi cu sediul în afara Bucureștiului",
-          "criterion": "Fiecare club are sediul în afara municipiului București.",
+          "label": "Evenimente cu anul în denumire",
+          "criterion": "Numele afișat al fiecărui eveniment include explicit un an din patru cifre.",
           "tiles": [
-            "n_v18spo_cfr_cluj",
-            "n_v11spo_universitatea_craiova",
-            "n_spt_fc_barcelona",
-            "n_spt_galatasaray"
+            "n_v17spo_euro_2024",
+            "n_v19spo_jo_paris_2024",
+            "n_spt_simona_wimbledon_2019",
+            "n_spt_nastase_us_open_1972"
           ],
           "tile_labels": [
-            "CFR Cluj",
-            "Universitatea Craiova",
-            "FC Barcelona",
-            "Galatasaray"
+            "EURO 2024",
+            "Jocurile Olimpice Paris 2024",
+            "Wimbledon 2019",
+            "US Open 1972"
           ],
           "recognition": "mainstream",
           "overlap_census": {
-            "max_pack_overlap": 2,
-            "max_pack_board": "cx_sport_225",
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_sport_283",
             "max_pack_status": "approved",
-            "max_pack_is_demoted": true,
+            "max_pack_is_demoted": false,
             "max_same_batch_overlap": 2,
-            "max_same_batch_ref": "sport_usor_01",
-            "max_same_batch_group": 2
+            "max_same_batch_ref": "sport_usor_05",
+            "max_same_batch_group": 3
           }
         }
       ]
@@ -1611,7 +1611,7 @@
         "tiles": 3,
         "board": "cx_sport_161"
       },
-      "projected_member_use_max": 8,
+      "projected_member_use_max": 7,
       "hard_errors": [],
       "editorial_flags": [
         "club_group_is_broad"
@@ -1846,7 +1846,7 @@
             "max_pack_board": "cx_limba_187",
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
-            "max_same_batch_overlap": 2,
+            "max_same_batch_overlap": 1,
             "max_same_batch_ref": "gastronomie_normal_06",
             "max_same_batch_group": 2
           }
@@ -1986,9 +1986,9 @@
             "max_pack_board": "cx_stiinta_308",
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
-            "max_same_batch_overlap": 1,
-            "max_same_batch_ref": "gastronomie_normal_05",
-            "max_same_batch_group": 1
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "gastronomie_normal_06",
+            "max_same_batch_group": 4
           }
         },
         {
@@ -2012,8 +2012,8 @@
             "max_pack_board": "cx_gastronomie_300",
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
-            "max_same_batch_overlap": 1,
-            "max_same_batch_ref": "gastronomie_normal_06",
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
             "max_same_batch_group": 4
           }
         }
@@ -2029,7 +2029,7 @@
         "tiles": 2,
         "board": "cx_gastronomie_248"
       },
-      "projected_member_use_max": 4,
+      "projected_member_use_max": 5,
       "hard_errors": [],
       "editorial_flags": [
         "two_deep_cuts_in_chef_group"
@@ -2153,8 +2153,8 @@
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
             "max_same_batch_overlap": 1,
-            "max_same_batch_ref": "gastronomie_normal_01",
-            "max_same_batch_group": 3
+            "max_same_batch_ref": "gastronomie_normal_06",
+            "max_same_batch_group": 2
           }
         }
       ]
@@ -2356,9 +2356,9 @@
             "max_pack_board": "cx_gastronomie_297",
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
-            "max_same_batch_overlap": 1,
-            "max_same_batch_ref": "gastronomie_normal_02",
-            "max_same_batch_group": 3
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "gastronomie_normal_06",
+            "max_same_batch_group": 4
           }
         },
         {
@@ -2505,34 +2505,34 @@
           }
         },
         {
-          "label": "Se gătesc în ulei sau tigaie",
-          "criterion": "Fiecare se gătește în mod obișnuit prin prăjire.",
+          "label": "Preparate din aluat dospit",
+          "criterion": "Aluatul fiecărui preparat este lăsat să dospească înainte de gătire.",
           "tiles": [
+            "n_v3gas_pizza",
+            "n_v17gas_gogosi",
             "n_v18gas_langosi",
-            "n_v3gas_cartofi_prajiti",
-            "n_gas_cascaval_pane",
-            "n_gas_papanasi"
+            "n_v21gas_paine_cu_maia"
           ],
           "tile_labels": [
+            "Pizza",
+            "Gogoși",
             "Langoși",
-            "Cartofi prăjiți",
-            "Cașcaval pane",
-            "Papanași"
+            "Pâine cu maia"
           ],
           "recognition": "mainstream",
           "overlap_census": {
-            "max_pack_overlap": 1,
-            "max_pack_board": "cx_viata_de_roman_172",
-            "max_pack_status": "pending",
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_gastronomie_299",
+            "max_pack_status": "approved",
             "max_pack_is_demoted": false,
-            "max_same_batch_overlap": 2,
-            "max_same_batch_ref": "gastronomie_normal_01",
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "gastronomie_normal_05",
             "max_same_batch_group": 3
           }
         },
         {
           "label": "Băuturi alcoolice din fructe",
-          "criterion": "Fiecare este obținută din fructe prin fermentare ori distilare.",
+          "criterion": "Fructele sunt materia primă definitorie a fiecărei băuturi alcoolice.",
           "tiles": [
             "n_v4gas_vin",
             "n_gas_tuica",
@@ -2557,29 +2557,29 @@
           }
         },
         {
-          "label": "Fructe potrivite pentru compot",
-          "criterion": "Fiecare este folosit frecvent la compot.",
+          "label": "Părți comestibile crescute sub pământ",
+          "criterion": "Partea consumată a fiecărei plante crește sub pământ.",
           "tiles": [
-            "n_v24_food_orchard_pruna",
-            "n_v24_food_summer_fruit_piersica",
-            "n_v24_food_orchard_para",
-            "n_v24_food_small_fruit_strugure"
+            "n_v24_food_salad_veg_morcov",
+            "n_v24_food_garden_veg_ridiche",
+            "n_v4gas_ceapa",
+            "n_v4gas_usturoi"
           ],
           "tile_labels": [
-            "Prună",
-            "Piersică",
-            "Pară",
-            "Strugure"
+            "Morcov",
+            "Ridiche",
+            "Ceapă",
+            "Usturoi"
           ],
           "recognition": "mainstream",
           "overlap_census": {
-            "max_pack_overlap": 2,
-            "max_pack_board": "cx_stiinta_311",
+            "max_pack_overlap": 1,
+            "max_pack_board": "cx_stiinta_308",
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
-            "max_same_batch_overlap": 1,
-            "max_same_batch_ref": "gastronomie_normal_02",
-            "max_same_batch_group": 4
+            "max_same_batch_overlap": 2,
+            "max_same_batch_ref": "gastronomie_normal_05",
+            "max_same_batch_group": 1
           }
         }
       ]
@@ -3978,9 +3978,9 @@
       "anchor_reason": "Primul cuvânt din numele afișat este „Florin”.",
       "max_pack_board_overlap": {
         "tiles": 2,
-        "board": "cx_personalitati_277"
+        "board": "cx_sport_075"
       },
-      "projected_member_use_max": 8,
+      "projected_member_use_max": 6,
       "hard_errors": [],
       "editorial_flags": [],
       "author_source_assertions": [],
@@ -4008,21 +4008,21 @@
           "tiles": [
             "n_v20spo_florin_nita",
             "n_v19fil_florin_piersic_jr",
-            "n_muz_florin_salam",
+            "n_spt_florin_raducioiu",
             "n_v20gas_florin_dumitrescu"
           ],
           "tile_labels": [
             "Florin Niță",
             "Florin Piersic Jr.",
-            "Florin Salam",
+            "Florin Răducioiu",
             "Florin Dumitrescu"
           ],
           "recognition": "mainstream",
           "overlap_census": {
             "max_pack_overlap": 1,
-            "max_pack_board": "cx_personalitati_213",
+            "max_pack_board": "cx_sport_075",
             "max_pack_status": "approved",
-            "max_pack_is_demoted": true,
+            "max_pack_is_demoted": false,
             "max_same_batch_overlap": 1,
             "max_same_batch_ref": "sport_usor_05",
             "max_same_batch_group": 2
@@ -4304,8 +4304,8 @@
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
             "max_same_batch_overlap": 1,
-            "max_same_batch_ref": "stiinta_normal_02",
-            "max_same_batch_group": 1
+            "max_same_batch_ref": "stiinta_normal_03",
+            "max_same_batch_group": 4
           }
         },
         {
@@ -4442,8 +4442,8 @@
             "max_pack_status": "pending",
             "max_pack_is_demoted": false,
             "max_same_batch_overlap": 1,
-            "max_same_batch_ref": "stiinta_normal_01",
-            "max_same_batch_group": 1
+            "max_same_batch_ref": "stiinta_normal_03",
+            "max_same_batch_group": 4
           }
         },
         {
@@ -4531,10 +4531,10 @@
       "shelf": "stiinta/normal",
       "author_verdict": "advance",
       "anchor_group": 1,
-      "anchor_reason": "Fiecare entitate este prea mică pentru a fi observată cu ochiul liber.",
+      "anchor_reason": "Numele afișat al fiecărui termen științific începe cu litera M.",
       "max_pack_board_overlap": {
         "tiles": 2,
-        "board": "cx_stiinta_308"
+        "board": "cx_stiinta_286"
       },
       "projected_member_use_max": 8,
       "hard_errors": [],
@@ -4559,24 +4559,24 @@
       },
       "groups": [
         {
-          "label": "Prea mici pentru ochiul liber",
-          "criterion": "Fiecare entitate este prea mică pentru a fi observată cu ochiul liber.",
+          "label": "Termeni științifici care încep cu M",
+          "criterion": "Numele afișat al fiecărui termen științific începe cu litera M.",
           "tiles": [
-            "n_v3sti_atom",
+            "n_v3sti_microscop",
             "n_v3sti_molecula",
-            "n_v2sti_celula",
-            "n_v4sti_microb"
+            "n_v4sti_microb",
+            "n_v4sti_metal"
           ],
           "tile_labels": [
-            "Atom",
+            "Microscop",
             "Moleculă",
-            "Celulă",
-            "microb"
+            "microb",
+            "metal"
           ],
           "recognition": "mainstream",
           "overlap_census": {
             "max_pack_overlap": 1,
-            "max_pack_board": "cx_stiinta_308",
+            "max_pack_board": "cx_stiinta_232",
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
             "max_same_batch_overlap": 2,
@@ -4585,8 +4585,8 @@
           }
         },
         {
-          "label": "Personalități ale medicinei românești",
-          "criterion": "Fiecare a avut un rol major în medicina ori microbiologia românească.",
+          "label": "Absolvenți de medicină",
+          "criterion": "Fiecare a absolvit studii universitare de medicină.",
           "tiles": [
             "n_george_palade",
             "n_stix_ion_cantacuzino",
@@ -4637,29 +4637,29 @@
           }
         },
         {
-          "label": "Încep cu un substantiv articulat",
-          "criterion": "Primul cuvânt din fiecare denumire este un substantiv articulat hotărât.",
+          "label": "Părți ale corpului din patru litere",
+          "criterion": "Numele afișat al fiecărei părți a corpului are exact patru litere.",
           "tiles": [
-            "n_v21sti_centrala_cernavoda",
-            "n_v11sti_laserul_magurele",
-            "n_stilou_rezervor",
-            "n_v21sti_manuscrisul_sibiu"
+            "n_v24_body_face_gura",
+            "n_v4sti_ochi",
+            "n_v32_body_face_buza",
+            "n_v32_body_face_nara"
           ],
           "tile_labels": [
-            "Centrala Nucleară de la Cernavodă",
-            "Laserul Măgurele",
-            "Stiloul cu rezervor",
-            "Manuscrisul de la Sibiu"
+            "Gură",
+            "ochi",
+            "Buză",
+            "Nară"
           ],
           "recognition": "mainstream",
           "overlap_census": {
-            "max_pack_overlap": 1,
-            "max_pack_board": "cx_stiinta_310",
-            "max_pack_status": "approved",
+            "max_pack_overlap": 2,
+            "max_pack_board": "cx_societate_294",
+            "max_pack_status": "pending",
             "max_pack_is_demoted": false,
-            "max_same_batch_overlap": 2,
-            "max_same_batch_ref": "stiinta_normal_06",
-            "max_same_batch_group": 2
+            "max_same_batch_overlap": 1,
+            "max_same_batch_ref": "stiinta_normal_02",
+            "max_same_batch_group": 1
           }
         }
       ]
@@ -5021,8 +5021,8 @@
             "max_pack_board": "cx_stiinta_310",
             "max_pack_status": "approved",
             "max_pack_is_demoted": false,
-            "max_same_batch_overlap": 2,
-            "max_same_batch_ref": "stiinta_normal_03",
+            "max_same_batch_overlap": 0,
+            "max_same_batch_ref": "stiinta_normal_06",
             "max_same_batch_group": 4
           }
         },
