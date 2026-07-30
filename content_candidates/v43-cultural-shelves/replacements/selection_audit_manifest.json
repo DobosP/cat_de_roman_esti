@@ -11,15 +11,15 @@
   "scope": {
     "game": "conexiuni",
     "requested_slots": 20,
-    "candidate_boards": 3,
-    "held_slots": 17,
-    "groups": 12,
-    "tile_placements": 48,
-    "unique_existing_nodes": 48,
+    "candidate_boards": 2,
+    "held_slots": 18,
+    "groups": 8,
+    "tile_placements": 32,
+    "unique_existing_nodes": 32,
     "new_nodes": 0,
     "new_edges": 0,
     "selected_by_shelf": {
-      "arta_cultura/usor": 1,
+      "arta_cultura/usor": 0,
       "arta_cultura/greu": 1,
       "film_tv/usor": 1,
       "societate/usor": 0,
@@ -55,7 +55,7 @@
   "candidate_freeze": {
     "frozen_on": "2026-07-30",
     "candidate_sha256": {
-      "arta_cultura/candidates.json": "f5a2e967240d0f5e09386cd198a9dab4e221c9998f609946874608264b29dd46",
+      "arta_cultura/candidates.json": "a2b7fbad3825b271fc8b76fd947e6504af43f872d6702538381cbb3bf40d7151",
       "film_tv/candidates.json": "82a7e2a351a596d2a4694d0b88b8563208e01cf84075c6e09ff2068387a80754",
       "societate/candidates.json": "f90bf069e0161ec0ab9ea244cbd018a7a08ef78644f09a1886385750ac5c7e92"
     },
@@ -174,9 +174,29 @@
         "evidence": [
           {
             "source": "tests/fixtures/kg_sample.json",
-            "supports": "The exact frozen labels visibly contain boi, căprioarei, Pasărea and Ursul; the same records identify the tiles as a painting, poem, sculpture series and story."
+            "supports": "The exact frozen labels visibly contain boi, căprioarei, Capra and Ursul; the same records identify the tiles as a painting, poem and two stories."
           }
         ]
+      }
+    ]
+  },
+  "blind_quality_gate": {
+    "reviewed_on": "2026-07-30",
+    "verdicts": [
+      {
+        "ref": "v43r-arta-usor-01",
+        "verdict": "drop",
+        "reason": "Four flat taxonomies form a school worksheet without a clue arc."
+      },
+      {
+        "ref": "v43r-arta-greu-02",
+        "verdict": "fix",
+        "reason": "Displayed Pasărea măiastră also names Ispirescu's journey-and-probes basm; it was replaced with Capra cu trei iezi, which does not satisfy that full predicate."
+      },
+      {
+        "ref": "v43r-film-usor-04",
+        "verdict": "keep",
+        "reason": "No fatal semantic cross-fit; the 6-of-16 similarity to approved cx_film_tv_243 is nonblocking."
       }
     ]
   },
@@ -192,9 +212,7 @@
     }
   ],
   "selected_refs": {
-    "arta_cultura/usor": [
-      "v43r-arta-usor-01"
-    ],
+    "arta_cultura/usor": [],
     "arta_cultura/greu": [
       "v43r-arta-greu-02"
     ],
@@ -205,17 +223,6 @@
     "societate/greu": []
   },
   "design_competition": [
-    {
-      "selected": "v43r-arta-usor-01",
-      "discarded": "v43-arta-usor-01",
-      "tombstone": "cx_arta_cultura_316",
-      "discard_reason": "visible person, organization, concept and event sorting",
-      "selection_basis": "four single-property groups: book parts, staging elements, orally transmitted forms and two-dimensional visual works",
-      "selected_vs_tombstone": {
-        "board_overlap": 0,
-        "max_group_overlap": 0
-      }
-    },
     {
       "selected": "v43r-arta-greu-02",
       "discarded": "v43-arta-greu-02",
@@ -240,6 +247,11 @@
     }
   ],
   "holds": [
+    {
+      "slot": "arta_cultura/usor/01",
+      "ref": "v43r-arta-usor-01",
+      "reason": "Blind quality review dropped the board as four flat taxonomies forming a school worksheet without a clue arc."
+    },
     {
       "slot": "arta_cultura/usor/02",
       "ref": "v43r-arta-usor-02",
@@ -344,11 +356,11 @@
   "strict_preflight": {
     "command": "PYTHONPATH=. /home/dobo/work/romania_scraper/.venv/bin/python /tmp/preflight_v43_conexiuni.py /home/dobo/work/_worktrees/cat_de_roman_esti/content__v43-release-board-rebuild /home/dobo/work/_worktrees/cat_de_roman_esti/content__v43-cultural-shelves/content_candidates/v43-cultural-shelves/replacements",
     "result": {
-      "candidates": 3,
+      "candidates": 2,
       "candidates_with_fail": 0,
       "structural_errors": 0,
       "warnings": 0
     }
   },
-  "hold_note": "Seventeen requested slots are intentionally unfilled. Passing lint did not override predicate honesty, unique partition, recognition or difficulty concerns, and this proposal is not an approval verdict."
+  "hold_note": "Eighteen requested slots are intentionally unfilled. Passing lint did not override predicate honesty, unique partition, recognition or difficulty concerns, and this proposal is not an approval verdict."
 }
