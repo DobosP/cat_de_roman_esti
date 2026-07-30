@@ -2,9 +2,10 @@
 """Apply a re-review verdict set to the curated games pack (promote/reject pending items).
 
 Reads version-2 `<dir>/<game>_verdicts.json` artifacts emitted under the workflow's
-`artifacts` key. Each artifact binds the exact cross-game batch, per-item verifier
-coverage, and final verdicts; legacy or hand-combined verdict maps fail closed. Applies
-the verified verdicts to BOTH bundled pack copies:
+`artifacts` key. Each artifact binds the exact cross-game batch, both independent
+judgments, per-item verifier coverage, and conservative synthesized verdicts; legacy,
+non-unanimous promotions, or hand-combined verdict maps fail closed. Applies the
+verified verdicts to BOTH bundled pack copies:
 
 * `promote` → the pending item's `status` becomes `approved` (now served);
 * `reject`  → the item is removed from the pack entirely;
@@ -12,8 +13,10 @@ the verified verdicts to BOTH bundled pack copies:
 
 Only items currently `status: pending` are eligible. Batch identity, full verifier
 coverage, filename/game scope, verdict enum, item ownership and status are validated
-before mutation. Every ``promote`` ID is re-run through ``critique_pack.py --strict``;
-then the full pack validator runs and both copies ROLL BACK on a red return or exception.
+before mutation. Every ``promote`` ID is re-run through the strict deterministic checks
+against the untouched inventory, including same-batch rejects as novelty debt; rejected
+Conexiuni rows are then tombstoned. The full pack validator runs and every mutated file
+ROLLS BACK on a red return or exception.
 
     python scripts/apply_rereview.py --dir <verdicts_dir>
 """
@@ -21,6 +24,7 @@ then the full pack validator runs and both copies ROLL BACK on a red return or e
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from collections import Counter
@@ -32,22 +36,123 @@ sys.path.insert(0, str(_REPO_ROOT / "scripts"))
 
 import critique_pack  # noqa: E402
 import validate_games_pack  # noqa: E402
+from content_file_transaction import atomic_write, file_transaction  # noqa: E402
 from import_candidates import GAME_KINDS, item_high_water  # noqa: E402
 
 PACK_COPIES = (validate_games_pack.PACKAGE_PACK, validate_games_pack.TESTS_PACK)
 GATE_ARTIFACT_VERSION = 2
+GATE_VERDICTS = frozenset({"promote", "reject", "keep"})
 
 
-def critique_promotions(item_ids: set[str]) -> int:
-    '''Run ADR-0023's deterministic gate over the exact pending promotion set.'''
+def synthesized_gate_verdict(analyst: object, verifier: object) -> str | None:
+    """Return the conservative two-reviewer outcome, or ``None`` for bad input."""
+    if analyst not in GATE_VERDICTS or verifier not in GATE_VERDICTS:
+        return None
+    if analyst == verifier == "promote":
+        return "promote"
+    if "reject" in {analyst, verifier}:
+        return "reject"
+    return "keep"
+
+
+def fully_verified_gate_row(
+    row: dict, item_id: str, game: str, verdict: object,
+) -> bool:
+    """Require both raw judgments and their fail-closed synthesized outcome."""
+    analyst = row.get("analyst", row.get("proposed"))
+    verifier = row.get("verifier")
+    if (
+        "analyst" in row
+        and "proposed" in row
+        and row["analyst"] != row["proposed"]
+    ):
+        return False
+    return (
+        row.get("id") == item_id
+        and row.get("game") == game
+        and row.get("final") == verdict
+        and synthesized_gate_verdict(analyst, verifier) == verdict
+        and row.get("verified") is True
+        and row.get("verifier_lost") is False
+        and isinstance(row.get("review_binding"), str)
+        and row["review_binding"].startswith("sha256:")
+    )
+
+
+def critique_promotions(
+    item_ids: set[str], rejected_ids: set[str] | None = None,
+) -> int:
+    '''Gate promotions while retaining rejected rows as novelty tombstones.
+
+    Review bindings are validated against the untouched batch first. Same-batch
+    rejects remain in the comparison inventory, preventing a promoted row from
+    recycling an exact group, a 3-of-4 group, or half of a rejected board. The
+    ``rejected_ids`` argument is retained for the caller contract and auditability.
+    '''
     if not item_ids:
         return 0
-    return critique_pack.main([
-        'critique_pack.py',
-        '--status', 'pending',
-        '--ids', ','.join(sorted(item_ids)),
-        '--strict',
-    ])
+    rejected_ids = rejected_ids or set()
+    pack, svc, strong, regions = critique_pack.load_all(
+        critique_pack.PACKAGE_PACK, critique_pack.PACKAGE_KG,
+    )
+    items, _, selected = critique_pack.run(
+        pack, svc, strong, regions, list(GAME_KINDS), {'pending'}, item_ids,
+    )
+    errors = critique_pack.selection_errors(
+        pack, list(GAME_KINDS), {'pending'}, item_ids, selected,
+    )
+    if errors:
+        for error in errors:
+            print(f'apply_rereview: ERROR: {error}', file=sys.stderr)
+        return 2
+    failures = [
+        (str(rec['id']), finding)
+        for _, rec, findings in selected
+        for finding in findings
+        if finding.get('level') == 'FAIL'
+    ]
+    print(
+        f'apply_rereview: prospective critique checked {len(selected)} '
+        f'promotion(s), {len(failures)} FAIL finding(s)'
+    )
+    for item_id, finding in failures:
+        print(
+            f"  FAIL {item_id}: [{finding.get('check')}] "
+            f"{finding.get('detail')}"
+        )
+    return int(bool(failures))
+
+
+def updated_rejection_tombstones(
+    original: bytes,
+    rejected_records: list[dict],
+    review_bindings: dict[str, str],
+    gate_digests: dict[str, str],
+) -> bytes:
+    """Append exact rejected Conexiuni records without permitting ID drift."""
+    data = json.loads(original.decode("utf-8"))
+    critique_pack.validate_rejection_tombstones(data)
+    items = data["items"]
+    for rec in sorted(rejected_records, key=lambda row: str(row["id"])):
+        item_id = str(rec["id"])
+        groups = rec["groups"]
+        entry = {
+            "record_sha256": critique_pack.canonical_json_sha256(rec),
+            "groups_sha256": critique_pack.canonical_json_sha256(groups),
+            "review_binding": review_bindings[item_id],
+            "source_gate_sha256": gate_digests[item_id],
+            "groups": groups,
+        }
+        existing = items.get(item_id)
+        if existing is not None and existing != entry:
+            raise SystemExit(
+                f"rejection tombstone conflict for revised item: {item_id}"
+            )
+        items[item_id] = entry
+    data["meta"]["count"] = len(items)
+    data["meta"]["group_count"] = len(items) * 4
+    critique_pack.validate_rejection_tombstones(data)
+    return (json.dumps(data, ensure_ascii=False, indent=1) + "\n").encode("utf-8")
 
 
 def current_review_bindings(item_ids: set[str]) -> dict[str, str]:
@@ -120,12 +225,7 @@ def validated_artifact(
             'verifiersLost': 0, 'lost': 0,
         }
         and all(
-            row.get('game') == game
-            and row.get('final') == verdicts[iid]
-            and row.get('verified') is True
-            and row.get('verifier_lost') is False
-            and isinstance(row.get('review_binding'), str)
-            and row['review_binding'].startswith('sha256:')
+            fully_verified_gate_row(row, iid, game, verdicts[iid])
             for iid, row in rows.items()
         )
     )
@@ -153,17 +253,20 @@ def main(argv: list[str]) -> int:
 
     verdicts: dict[str, str] = {}
     review_bindings: dict[str, str] = {}
+    gate_digests: dict[str, str] = {}
     batches: list[dict] = []
     for game in GAME_KINDS:
         vpath = vdir / f"{game}_verdicts.json"
         if not vpath.exists():
             continue
-        data = json.loads(vpath.read_text(encoding="utf-8"))
+        artifact_bytes = vpath.read_bytes()
+        data = json.loads(artifact_bytes.decode("utf-8"))
+        artifact_digest = hashlib.sha256(artifact_bytes).hexdigest()
         artifact_verdicts, batch, artifact_bindings = validated_artifact(data, game, vpath)
         batches.append(batch)
         for iid, verdict in artifact_verdicts.items():
             iid, verdict = str(iid), str(verdict)
-            if verdict not in {'promote', 'reject', 'keep'}:
+            if verdict not in GATE_VERDICTS:
                 raise SystemExit(f'invalid verdict for {iid}: {verdict}')
             if iid in verdicts:
                 raise SystemExit(f'duplicate verdict id: {iid}')
@@ -176,6 +279,7 @@ def main(argv: list[str]) -> int:
                 )
             verdicts[iid] = verdict
             review_bindings[iid] = artifact_bindings[iid]
+            gate_digests[iid] = artifact_digest
     if not verdicts:
         raise SystemExit(f"no verdicts found under {vdir}")
     if any(batch != batches[0] for batch in batches[1:]):
@@ -191,12 +295,25 @@ def main(argv: list[str]) -> int:
     if stale:
         raise SystemExit('stale gate artifact for revised content: ' + ', '.join(stale))
     promotions = {iid for iid, verdict in verdicts.items() if verdict == 'promote'}
-    if critique_promotions(promotions) != 0:
+    rejections = {iid for iid, verdict in verdicts.items() if verdict == 'reject'}
+    if critique_promotions(promotions, rejections) != 0:
         raise SystemExit('promotion blocked by ADR-0023 deterministic critique gate')
+    rejected_conexiuni = [
+        rec
+        for rec in baseline["conexiuni"]
+        if str(rec.get("id")) in rejections
+    ]
 
-    originals = {copy: copy.read_bytes() for copy in PACK_COPIES}
     stats = Counter()
-    try:
+    transaction_paths = [
+        *PACK_COPIES,
+        *(
+            [critique_pack.REJECTION_TOMBSTONES]
+            if rejected_conexiuni
+            else []
+        ),
+    ]
+    with file_transaction(transaction_paths) as originals:
         for copy in PACK_COPIES:
             pack = json.loads(originals[copy].decode('utf-8'))
             for game in GAME_KINDS:
@@ -213,25 +330,34 @@ def main(argv: list[str]) -> int:
                 pack[game] = kept
             pack['meta']['counts'] = {g: len(pack[g]) for g in GAME_KINDS}
             pack['meta']['id_high_water'] = high_water
-            copy.write_text(
-                json.dumps(pack, ensure_ascii=False, indent=1) + '\n', encoding='utf-8'
+            atomic_write(
+                copy,
+                (json.dumps(pack, ensure_ascii=False, indent=1) + '\n').encode(
+                    'utf-8'
+                ),
             )
-        validation_rc = validate_games_pack.main(['validate_games_pack.py'])
-    except BaseException:
-        for copy, blob in originals.items():
-            copy.write_bytes(blob)
-        raise
+        if rejected_conexiuni:
+            atomic_write(
+                critique_pack.REJECTION_TOMBSTONES,
+                updated_rejection_tombstones(
+                    originals[critique_pack.REJECTION_TOMBSTONES],
+                    rejected_conexiuni,
+                    review_bindings,
+                    gate_digests,
+                ),
+            )
+        if validate_games_pack.main(['validate_games_pack.py']) != 0:
+            raise SystemExit("pack validation failed — rolling back both copies")
+        final = json.loads(PACK_COPIES[0].read_text(encoding="utf-8"))["meta"]["counts"]
 
-    # stats double-counted across the two identical copies — halve for the report.
-    applied = {k: v // 2 for k, v in stats.items()}
-
-    if validation_rc != 0:
-        for copy, blob in originals.items():
-            copy.write_bytes(blob)
-        raise SystemExit("pack validation failed — ROLLED BACK both copies")
-
-    final = json.loads(PACK_COPIES[0].read_text(encoding="utf-8"))["meta"]["counts"]
+    # Stats are accumulated once for each identical mirror.
+    applied = {key: value // len(PACK_COPIES) for key, value in stats.items()}
     print(f"apply_rereview: {dict(applied)}")
+    if rejected_conexiuni:
+        print(
+            "rejection tombstones now: "
+            f"{len(critique_pack.load_rejection_tombstones())}"
+        )
     print(f"pack counts now: {final}")
     return 0
 

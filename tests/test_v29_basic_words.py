@@ -213,12 +213,12 @@ def test_v29_keeps_the_entire_game_pack_byte_stable_and_unpromoted():
     assert hashlib.sha256(package_blob).hexdigest() == DATA.BASELINE_PACK_SHA256
     assert package_blob == _TEST_PACK.read_bytes()
     assert {game: len(pack[game]) for game in ("conexiuni", "contexto", "lant", "alchimie")} == {
-        "conexiuni": 308,
+        "conexiuni": 311,
         "contexto": 217,
         "lant": 201,
         "alchimie": 99,
     }
-    assert statuses == {"approved": 603, "pending": 222}
+    assert statuses == {"approved": 606, "pending": 222}
 
 
 def test_v29_mobile_contract_stays_current_and_keeps_v29_public():

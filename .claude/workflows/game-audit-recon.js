@@ -1,7 +1,7 @@
 export const meta = {
   name: 'game-audit-recon',
-  description: 'Analyst fan-out that builds condensed dossiers for a fun/playability audit: per-game mechanics+UX+friction+sample boards, refinement history, content pipeline, release path, and the cross-game meta-loop.',
-  whenToUse: 'Before a fun/quality wave (the V42 ADR-0065 precedent): run first so the orchestrating model judges from condensed evidence instead of reading the whole repo. args {repo?: path (default "."), games?: [{key, hint}]}. ~10 Sonnet analysts; the orchestrator stays the judge.',
+  description: 'Analyst fan-out that builds condensed dossiers for a fun/playability audit: per-game mechanics+UX+friction+sample boards, rejected-content patterns, refinement history, content pipeline, release path, and the cross-game meta-loop.',
+  whenToUse: 'Before a fun/quality wave (the V42/V43 precedent): run first so the orchestrating model judges from condensed evidence instead of reading the whole repo. args {repo?: path (default "."), games?: [{key, hint}]}. ~10 Sonnet analysts; the orchestrator stays the judge.',
   phases: [{ title: 'Gather', detail: 'analyst dossiers over the checkout' }],
 }
 
@@ -10,7 +10,7 @@ const REPO = A.repo || '.'
 
 const GAME_DOSSIER = {
   type: 'object',
-  required: ['game', 'mechanics', 'ux_flow', 'friction', 'sample_boards', 'content_stats', 'anchors'],
+  required: ['game', 'mechanics', 'ux_flow', 'friction', 'failure_patterns', 'sample_boards', 'content_stats', 'anchors'],
   properties: {
     game: { type: 'string' },
     mechanics: { type: 'string', description: 'How the game plays: rules, win/lose, scoring, feedback loop, session flow, difficulty tiers. Concrete, not marketing.' },
@@ -29,6 +29,7 @@ const GAME_DOSSIER = {
       description: 'Everything that could make this game hard to play or unfun, judged as a skeptical playtester reading the code.',
     },
     fun_evidence: { type: 'string', description: 'What docs/rankings/pilot notes say about fun; any player evidence; the editorial ranking and its basis.' },
+    failure_patterns: { type: 'string', description: 'Recurring patterns in demoted/rejected evidence for this game, with counts and concrete IDs. Say explicitly when no durable rejection inventory exists.' },
     sample_boards: {
       type: 'array',
       items: {
@@ -75,7 +76,7 @@ const GAMES = A.games || DEFAULT_GAMES
 phase('Gather')
 const results = await parallel([
   ...GAMES.map(g => () => agent(
-    `${COMMON}\n\nBuild a complete dossier on the game "${g.key}". ${g.hint}\n\nCover: (1) exact mechanics from the backend engine code; (2) the frontend UX flow; (3) ALL friction points with file:line evidence; (4) fun evidence from docs; (5) six verbatim sample boards from the runtime-eligible/preferred stock (2 best, 2 worst-still-eligible, 2 mid — full JSON including hidden answers); (6) content stats: eligible counts, category spread, thin shelves.`,
+    `${COMMON}\n\nBuild a complete dossier on the game "${g.key}". ${g.hint}\n\nCover: (1) exact mechanics from the backend engine code; (2) the frontend UX flow; (3) ALL friction points with file:line evidence; (4) fun evidence from docs; (5) recurring failure patterns from every durable demotion/rejection artifact relevant to this game — inspect docs/reviews, sidecars, and rejection tombstones rather than sampling only survivors; (6) six verbatim sample boards from the runtime-eligible/preferred stock (2 best, 2 worst-still-eligible, 2 mid — full JSON including hidden answers); (7) content stats: eligible counts, category spread, thin shelves. Keep rejected evidence separate from runtime inventory and never infer quality from rank alone.`,
     { agentType: 'analyst', label: `dossier:${g.key}`, phase: 'Gather', schema: GAME_DOSSIER },
   )),
   () => agent(
@@ -83,7 +84,7 @@ const results = await parallel([
     { agentType: 'analyst', label: 'dossier:history', phase: 'Gather', schema: DOC_DOSSIER },
   ),
   () => agent(
-    `${COMMON}\n\nBuild a dossier on the CONTENT PIPELINE: how new boards get created, validated, ranked, critiqued (docs/CRITIQUE_RUBRIC.md), approved, and bundled. Include the exact file format + required fields to author a new board for each game, what approved/pending/eligible mean, and how the critique gate is invoked. The orchestrator will author new boards, so precision on formats and gates matters most.`,
+    `${COMMON}\n\nBuild a dossier on the CONTENT PIPELINE: how new boards get created, validated, ranked, critiqued (docs/CRITIQUE_RUBRIC.md), approved, rejected/tombstoned, and bundled. Include the exact file format + required fields to author a new board for each game, what approved/pending/eligible mean, how rejection novelty debt is retained, and how the critique gate is invoked. The orchestrator will author new boards, so precision on formats and gates matters most.`,
     { agentType: 'analyst', label: 'dossier:content-pipeline', phase: 'Gather', schema: DOC_DOSSIER },
   ),
   () => agent(

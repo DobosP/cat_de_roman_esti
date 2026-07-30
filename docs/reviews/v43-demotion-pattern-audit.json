@@ -1,0 +1,4543 @@
+{
+ "schema_version": 2,
+ "audited_at": "2026-07-30",
+ "sources": {
+  "games_pack_sha256": "b2b603be2354af4c982c515ac43795bfe342c217c5cf32e59b0c5e28f5769194",
+  "demotions_sha256": "ba9bb55b17b2a1a7a28e54d440256a42d7bfab337fa91861881d6ca926aa61ff",
+  "rankings_sha256": "d05b2aa8729ad899222a673024d130b63e37aa78bf460d4e1ce80fa0525ee65a",
+  "kg_sha256": "95b7e4b0a9e54f34ecc83a4b0a58cc70046beb695032152f58cdcfaea4186649",
+  "audit_rubric_sha256": "14f8efacf32c8e41825a1accdc43c44c9f8660cdbde7686b55d4a47ffbef6741",
+  "release_gate_rubric_sha256": "9a443ed89a6b2447c7ec6ae1bf057d25ac3acdc96e2bb5f58e03e8ab8ed64c39"
+ },
+ "scope": {
+  "comparison_semantics": "Each demoted group instance is counted once per condition; every group on the subject board is excluded only from this historical census. A future candidate is a different subject and must compare against the still-approved reserve source.",
+  "full_pack": "all Conexiuni records, approved and pending",
+  "approved_inventory": "all approved Conexiuni records, including ADR-0066 reserves",
+  "current_runtime": "ranking rows with pilot_eligible=true"
+ },
+ "coverage": {
+  "sidecar_ids": 67,
+  "unique_ids": 67,
+  "found_approved_conexiuni": 67,
+  "currently_pilot_eligible": 0,
+  "group_instances": 268,
+  "hard_ban_groups": 268,
+  "conditional_salvage_groups": 0,
+  "predicate_idea_groups": 4
+ },
+ "aggregate": {
+  "categories": {
+   "arta_cultura": 12,
+   "film_tv": 7,
+   "gastronomie": 1,
+   "geografie": 5,
+   "istorie": 2,
+   "personalitati": 8,
+   "societate": 11,
+   "sport": 14,
+   "stiinta": 6,
+   "viata_de_roman": 1
+  },
+  "difficulties": {
+   "greu": 24,
+   "normal": 35,
+   "usor": 8
+  },
+  "board_lints": {
+   "duplicate_groups": {
+    "boards": 66,
+    "findings": 200
+   },
+   "member_overuse": {
+    "boards": 59,
+    "findings": 59
+   },
+   "type_coherence": {
+    "boards": 51,
+    "findings": 89
+   },
+   "mirrored_groups": {
+    "boards": 11,
+    "findings": 16
+   },
+   "red_herring_budget": {
+    "boards": 3,
+    "findings": 3
+   },
+   "generic_region_link": {
+    "boards": 1,
+    "findings": 1
+   }
+  },
+  "group_collisions": {
+   "full_pack_exact": 102,
+   "full_pack_three_of_four": 190,
+   "full_pack_union": 211,
+   "approved_inventory_exact": 89,
+   "approved_inventory_three_of_four": 179,
+   "approved_inventory_union": 200,
+   "current_eligible_exact": 42,
+   "current_eligible_three_of_four": 65,
+   "current_eligible_union": 90
+  },
+  "group_flags": {
+   "B2_type_mix": 89,
+   "B5_mirrored_group_members": 27,
+   "B6_class_container": 41,
+   "B9_label_self_leak": 40
+  },
+  "primary_frequency": {
+   "A1": 1,
+   "A4": 2,
+   "A6": 36,
+   "B1": 11,
+   "B5": 10,
+   "B6": 5,
+   "B9": 2
+  },
+  "implicated_frequency": {
+   "A1": 2,
+   "A3": 2,
+   "A4": 2,
+   "A6": 67,
+   "A7": 1,
+   "B1": 47,
+   "B2": 51,
+   "B3": 3,
+   "B5": 11,
+   "B6": 32,
+   "B8": 1,
+   "B9": 24
+  },
+  "all_group_reason_frequency": {
+   "A3_label_false": 1,
+   "A4_dacic_substrate_not_latinity": 1,
+   "A6_exact_approved_inventory": 89,
+   "A6_exact_current_eligible": 42,
+   "A6_exact_full_pack": 102,
+   "A6_near_approved_inventory": 179,
+   "A6_near_current_eligible": 65,
+   "A6_near_full_pack": 190,
+   "B1_association_bundle": 7,
+   "B1_no_checkable_predicate": 2,
+   "B1_predicate_mismatch": 3,
+   "B1_single_entity_bundle": 2,
+   "B1_temperature_outlier": 1,
+   "B1_vibe_only_bundle": 1,
+   "B2_type_mix": 89,
+   "B3_paired_hierarchy": 1,
+   "B3_three_plus_one_partition": 1,
+   "B3_two_pair_construction": 1,
+   "B5_mirrored_group": 27,
+   "B6_class_container": 41,
+   "B6_class_role_hierarchy": 1,
+   "B6_generic_chronology_bucket": 1,
+   "B6_generic_domain_list": 2,
+   "B6_generic_famous_people_list": 1,
+   "B6_generic_theme_bucket": 2,
+   "B6_meta_answer_nodes": 1,
+   "B6_umbrella_members": 3,
+   "B8_deep_cut_cluster": 1,
+   "B8_low_salience_tail": 1,
+   "B9_label_self_leak": 40,
+   "approved_inventory_member_saturation": 3,
+   "at_least_two_replacement_members_required": 4,
+   "direct_reuse_exact_source_collision": 4,
+   "fresh_full_gate_required": 4,
+   "predicate_idea_only": 4
+  },
+  "current_eligible_member_use_max": 7,
+  "approved_member_overuse_nodes": 65,
+  "manual_only_hard_ban_groups": 24
+ },
+ "top_exact_quad_families": [
+  {
+   "members": [
+    "Barabulă",
+    "Cucuruz",
+    "Curechi",
+    "Păpușoi"
+   ],
+   "full_pack_occurrences": 9,
+   "approved_occurrences": 6,
+   "eligible_occurrences": 2,
+   "demoted_occurrences": 3,
+   "boards": [
+    "cx_gastronomie_106",
+    "cx_gastronomie_171",
+    "cx_geografie_110",
+    "cx_limba_036",
+    "cx_limba_187",
+    "cx_meme_net_201",
+    "cx_personalitati_213",
+    "cx_stiinta_229",
+    "cx_viata_de_roman_237"
+   ]
+  },
+  {
+   "members": [
+    "Andreea Marin",
+    "Cătălin Măruță",
+    "Teo Trandafir",
+    "Virgil Ianțu"
+   ],
+   "full_pack_occurrences": 7,
+   "approved_occurrences": 4,
+   "eligible_occurrences": 1,
+   "demoted_occurrences": 1,
+   "boards": [
+    "cx_film_tv_010",
+    "cx_film_tv_012",
+    "cx_film_tv_014",
+    "cx_film_tv_097",
+    "cx_film_tv_169",
+    "cx_film_tv_246",
+    "cx_muzica_209"
+   ]
+  },
+  {
+   "members": [
+    "București",
+    "Cluj-Napoca",
+    "Iași",
+    "Timișoara"
+   ],
+   "full_pack_occurrences": 7,
+   "approved_occurrences": 4,
+   "eligible_occurrences": 0,
+   "demoted_occurrences": 1,
+   "boards": [
+    "cx_geografie_001",
+    "cx_geografie_023",
+    "cx_societate_065",
+    "cx_societate_066",
+    "cx_societate_154",
+    "cx_societate_221",
+    "cx_societate_279"
+   ]
+  },
+  {
+   "members": [
+    "Cerbul de Aur",
+    "Electric Castle",
+    "Neversea",
+    "Untold"
+   ],
+   "full_pack_occurrences": 6,
+   "approved_occurrences": 3,
+   "eligible_occurrences": 2,
+   "demoted_occurrences": 1,
+   "boards": [
+    "cx_geografie_252",
+    "cx_muzica_056",
+    "cx_muzica_138",
+    "cx_muzica_205",
+    "cx_muzica_206",
+    "cx_muzica_271"
+   ]
+  },
+  {
+   "members": [
+    "Columbia - România 1994",
+    "Cupa Mondială 1994",
+    "Generația de Aur",
+    "România - Argentina 1994"
+   ],
+   "full_pack_occurrences": 6,
+   "approved_occurrences": 3,
+   "eligible_occurrences": 1,
+   "demoted_occurrences": 2,
+   "boards": [
+    "cx_geografie_179",
+    "cx_societate_219",
+    "cx_sport_071",
+    "cx_sport_156",
+    "cx_sport_222",
+    "cx_sport_281"
+   ]
+  },
+  {
+   "members": [
+    "Adjectiv",
+    "Pronume",
+    "Substantiv",
+    "Verb"
+   ],
+   "full_pack_occurrences": 5,
+   "approved_occurrences": 5,
+   "eligible_occurrences": 1,
+   "demoted_occurrences": 1,
+   "boards": [
+    "cx_arta_cultura_005",
+    "cx_limba_035",
+    "cx_limba_124",
+    "cx_limba_187",
+    "cx_limba_259"
+   ]
+  },
+  {
+   "members": [
+    "Albastru de Voroneț",
+    "Mănăstirea Sucevița",
+    "Mănăstirea Voroneț",
+    "Mănăstirile pictate din Bucovina"
+   ],
+   "full_pack_occurrences": 5,
+   "approved_occurrences": 3,
+   "eligible_occurrences": 0,
+   "demoted_occurrences": 2,
+   "boards": [
+    "cx_arta_cultura_003",
+    "cx_arta_cultura_091",
+    "cx_arta_cultura_158",
+    "cx_arta_cultura_242",
+    "cx_gastronomie_103"
+   ]
+  },
+  {
+   "members": [
+    "Antena 1",
+    "Kanal D",
+    "Pro TV",
+    "TVR"
+   ],
+   "full_pack_occurrences": 5,
+   "approved_occurrences": 4,
+   "eligible_occurrences": 1,
+   "demoted_occurrences": 3,
+   "boards": [
+    "cx_arta_cultura_162",
+    "cx_film_tv_169",
+    "cx_film_tv_246",
+    "cx_muzica_209",
+    "cx_societate_155"
+   ]
+  },
+  {
+   "members": [
+    "Automobile Dacia",
+    "Combinatul siderurgic Galați",
+    "Electroputere Craiova",
+    "Uzinele Reșița"
+   ],
+   "full_pack_occurrences": 5,
+   "approved_occurrences": 3,
+   "eligible_occurrences": 0,
+   "demoted_occurrences": 3,
+   "boards": [
+    "cx_geografie_177",
+    "cx_societate_067",
+    "cx_societate_151",
+    "cx_societate_221",
+    "cx_societate_279"
+   ]
+  },
+  {
+   "members": [
+    "Balcic",
+    "Castelul Pelișor",
+    "Povestea vieții mele",
+    "Regina Maria"
+   ],
+   "full_pack_occurrences": 5,
+   "approved_occurrences": 4,
+   "eligible_occurrences": 2,
+   "demoted_occurrences": 2,
+   "boards": [
+    "cx_geografie_178",
+    "cx_istorie_117",
+    "cx_istorie_183",
+    "cx_istorie_256",
+    "cx_personalitati_275"
+   ]
+  },
+  {
+   "members": [
+    "Craiova",
+    "Galați",
+    "Pitești",
+    "Reșița"
+   ],
+   "full_pack_occurrences": 5,
+   "approved_occurrences": 2,
+   "eligible_occurrences": 0,
+   "demoted_occurrences": 2,
+   "boards": [
+    "cx_geografie_113",
+    "cx_societate_067",
+    "cx_societate_151",
+    "cx_societate_221",
+    "cx_societate_279"
+   ]
+  },
+  {
+   "members": [
+    "Mihai Eminescu",
+    "Mihai I",
+    "Mihai Viteazul",
+    "Mihai din Liceenii"
+   ],
+   "full_pack_occurrences": 5,
+   "approved_occurrences": 3,
+   "eligible_occurrences": 0,
+   "demoted_occurrences": 1,
+   "boards": [
+    "cx_film_tv_166",
+    "cx_istorie_257",
+    "cx_limba_190",
+    "cx_literatura_129",
+    "cx_personalitati_210"
+   ]
+  },
+  {
+   "members": [
+    "Universitatea Alexandru Ioan Cuza din Iași",
+    "Universitatea Babeș-Bolyai",
+    "Universitatea Politehnica din București",
+    "Universitatea din București"
+   ],
+   "full_pack_occurrences": 5,
+   "approved_occurrences": 4,
+   "eligible_occurrences": 0,
+   "demoted_occurrences": 3,
+   "boards": [
+    "cx_geografie_177",
+    "cx_societate_066",
+    "cx_societate_152",
+    "cx_societate_217",
+    "cx_societate_279"
+   ]
+  },
+  {
+   "members": [
+    "Adrian Minune",
+    "Florin Salam",
+    "Nicolae Guță",
+    "Vali Vijelie"
+   ],
+   "full_pack_occurrences": 4,
+   "approved_occurrences": 3,
+   "eligible_occurrences": 2,
+   "demoted_occurrences": 1,
+   "boards": [
+    "cx_muzica_053",
+    "cx_muzica_054",
+    "cx_muzica_055",
+    "cx_personalitati_213"
+   ]
+  },
+  {
+   "members": [
+    "Ansamblul monumental de la Târgu Jiu",
+    "Coloana Infinitului",
+    "Masa Tăcerii",
+    "Poarta Sărutului"
+   ],
+   "full_pack_occurrences": 4,
+   "approved_occurrences": 3,
+   "eligible_occurrences": 1,
+   "demoted_occurrences": 2,
+   "boards": [
+    "cx_arta_cultura_094",
+    "cx_arta_cultura_158",
+    "cx_arta_cultura_240",
+    "cx_geografie_178"
+   ]
+  }
+ ],
+ "top_demoted_members": [
+  {
+   "label": "Simona Halep",
+   "demoted_uses": 10,
+   "approved_uses": 12,
+   "eligible_uses": 1
+  },
+  {
+   "label": "Masa Tăcerii",
+   "demoted_uses": 9,
+   "approved_uses": 15,
+   "eligible_uses": 3
+  },
+  {
+   "label": "Teatrul Bulandra",
+   "demoted_uses": 9,
+   "approved_uses": 13,
+   "eligible_uses": 3
+  },
+  {
+   "label": "Coloana Infinitului",
+   "demoted_uses": 8,
+   "approved_uses": 11,
+   "eligible_uses": 3
+  },
+  {
+   "label": "Poarta Sărutului",
+   "demoted_uses": 8,
+   "approved_uses": 11,
+   "eligible_uses": 3
+  },
+  {
+   "label": "Muzeul Național Brukenthal",
+   "demoted_uses": 8,
+   "approved_uses": 9,
+   "eligible_uses": 1
+  },
+  {
+   "label": "Academia Română",
+   "demoted_uses": 8,
+   "approved_uses": 15,
+   "eligible_uses": 4
+  },
+  {
+   "label": "Nadia Comăneci",
+   "demoted_uses": 8,
+   "approved_uses": 11,
+   "eligible_uses": 2
+  },
+  {
+   "label": "Aurel Vlaicu",
+   "demoted_uses": 8,
+   "approved_uses": 15,
+   "eligible_uses": 2
+  },
+  {
+   "label": "București",
+   "demoted_uses": 8,
+   "approved_uses": 18,
+   "eligible_uses": 1
+  },
+  {
+   "label": "4 luni, 3 săptămâni și 2 zile",
+   "demoted_uses": 7,
+   "approved_uses": 13,
+   "eligible_uses": 2
+  },
+  {
+   "label": "Ateneul Român",
+   "demoted_uses": 7,
+   "approved_uses": 11,
+   "eligible_uses": 1
+  },
+  {
+   "label": "Henri Coandă",
+   "demoted_uses": 7,
+   "approved_uses": 15,
+   "eligible_uses": 2
+  },
+  {
+   "label": "Finala de la Sevilla",
+   "demoted_uses": 7,
+   "approved_uses": 10,
+   "eligible_uses": 3
+  },
+  {
+   "label": "Cristian Mungiu",
+   "demoted_uses": 6,
+   "approved_uses": 10,
+   "eligible_uses": 0
+  },
+  {
+   "label": "Moartea domnului Lăzărescu",
+   "demoted_uses": 6,
+   "approved_uses": 11,
+   "eligible_uses": 2
+  },
+  {
+   "label": "Delta Dunării",
+   "demoted_uses": 6,
+   "approved_uses": 13,
+   "eligible_uses": 3
+  },
+  {
+   "label": "Gheorghe Hagi",
+   "demoted_uses": 6,
+   "approved_uses": 11,
+   "eligible_uses": 3
+  },
+  {
+   "label": "Ansamblul monumental de la Târgu Jiu",
+   "demoted_uses": 6,
+   "approved_uses": 7,
+   "eligible_uses": 1
+  },
+  {
+   "label": "Traian Vuia",
+   "demoted_uses": 6,
+   "approved_uses": 11,
+   "eligible_uses": 2
+  }
+ ],
+ "predicate_ideas": [
+  {
+   "group": "cx_arta_cultura_005.g2",
+   "predicate": "România în patrimoniul UNESCO",
+   "why": "the predicate remains useful, but the approved reserve makes its original four-member group an exact collision",
+   "caution": "replace at least two members, including Delta Dunării (13 approved uses); projected use must stay at or below eight and every current gate still applies",
+   "members": [
+    "Sighișoara",
+    "Delta Dunării",
+    "Ceramica de Horezu",
+    "Mănăstirile pictate din Bucovina"
+   ]
+  },
+  {
+   "group": "cx_film_tv_167.g1",
+   "predicate": "Mare, dar nu aceeași apă",
+   "why": "the orthographic MARE predicate remains useful, but the approved reserve makes its original four-member group an exact collision",
+   "caution": "replace at least two members; Marea Unire has 11 approved uses and Ștefan cel Mare has 15, while only one replacement would still fail at three-of-four",
+   "members": [
+    "Marea Neagră",
+    "Marea Unire 1918",
+    "Ștefan cel Mare",
+    "B.D. la munte și la mare"
+   ]
+  },
+  {
+   "group": "cx_personalitati_277.g1",
+   "predicate": "Opoziție anticomunistă",
+   "why": "the biographical predicate remains useful, but the approved reserve makes its original four-member group an exact collision",
+   "caution": "replace at least two members, web-reverify every biography, and rerun every current gate",
+   "members": [
+    "Elisabeta Rizea",
+    "Doina Cornea",
+    "Corneliu Coposu",
+    "Iuliu Maniu"
+   ]
+  },
+  {
+   "group": "cx_sport_226.g1",
+   "predicate": "Supranume care au prins la popor",
+   "why": "the nickname predicate remains useful, but the approved reserve makes its original four-member group an exact collision",
+   "caution": "replace at least two members, keep the nickname predicate exact, and do not rebuild the familiar-moment sport template",
+   "members": [
+    "Regele fotbalului românesc",
+    "Eroul de la Sevilla",
+    "Tricolorii",
+    "Generația de Aur"
+   ]
+  }
+ ],
+ "release_recommendation": {
+  "keep_all_67_demoted": true,
+  "direct_quad_salvage_allowed": false,
+  "predicate_ideas_are_approval": false,
+  "new_board_conditions": [
+   "zero exact collision against the full pack, including pending",
+   "zero three-of-four collision against the full pack, including pending",
+   "at most one predicate-derived group",
+   "replace at least two members of any predicate-derived group",
+   "three wholly fresh groups",
+   "projected approved member use stays at or below eight",
+   "fresh deterministic critique and full analyst/verifier gate"
+  ]
+ },
+ "boards": [
+  {
+   "id": "cx_arta_cultura_003",
+   "category": "arta_cultura",
+   "difficulty": "usor",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B2",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 0,
+    "container": 1,
+    "exact_full_pack": 3,
+    "exact_approved": 2,
+    "exact_eligible": 0,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 3
+   }
+  },
+  {
+   "id": "cx_arta_cultura_004",
+   "category": "arta_cultura",
+   "difficulty": "normal",
+   "primary": [
+    "B5"
+   ],
+   "secondary": [
+    "A6",
+    "B2"
+   ],
+   "evidence": {
+    "mirrors": 1,
+    "type_mix": 2,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 4,
+    "exact_approved": 3,
+    "exact_eligible": 1,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_arta_cultura_005",
+   "category": "arta_cultura",
+   "difficulty": "greu",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 0,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 3,
+    "exact_approved": 3,
+    "exact_eligible": 2,
+    "near_full_pack": 3,
+    "near_approved": 3,
+    "near_eligible": 2
+   }
+  },
+  {
+   "id": "cx_arta_cultura_007",
+   "category": "arta_cultura",
+   "difficulty": "greu",
+   "primary": [
+    "B1"
+   ],
+   "secondary": [
+    "A3",
+    "A6",
+    "B2"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 0,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 0,
+    "exact_approved": 0,
+    "exact_eligible": 0,
+    "near_full_pack": 2,
+    "near_approved": 2,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_arta_cultura_091",
+   "category": "arta_cultura",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B2",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 0,
+    "label_leak": 0,
+    "container": 1,
+    "exact_full_pack": 2,
+    "exact_approved": 2,
+    "exact_eligible": 1,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 2
+   }
+  },
+  {
+   "id": "cx_arta_cultura_092",
+   "category": "arta_cultura",
+   "difficulty": "normal",
+   "primary": [
+    "B5"
+   ],
+   "secondary": [
+    "A6",
+    "B1",
+    "B2"
+   ],
+   "evidence": {
+    "mirrors": 1,
+    "type_mix": 0,
+    "label_leak": 0,
+    "container": 1,
+    "exact_full_pack": 2,
+    "exact_approved": 2,
+    "exact_eligible": 0,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 2
+   }
+  },
+  {
+   "id": "cx_arta_cultura_094",
+   "category": "arta_cultura",
+   "difficulty": "greu",
+   "primary": [
+    "B6"
+   ],
+   "secondary": [
+    "A6",
+    "B2"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 3,
+    "label_leak": 0,
+    "container": 2,
+    "exact_full_pack": 2,
+    "exact_approved": 1,
+    "exact_eligible": 1,
+    "near_full_pack": 4,
+    "near_approved": 3,
+    "near_eligible": 2
+   }
+  },
+  {
+   "id": "cx_arta_cultura_159",
+   "category": "arta_cultura",
+   "difficulty": "normal",
+   "primary": [
+    "A4"
+   ],
+   "secondary": [
+    "A6",
+    "B1",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 1,
+    "container": 2,
+    "exact_full_pack": 4,
+    "exact_approved": 3,
+    "exact_eligible": 2,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 2
+   }
+  },
+  {
+   "id": "cx_arta_cultura_161",
+   "category": "arta_cultura",
+   "difficulty": "normal",
+   "primary": [
+    "B6"
+   ],
+   "secondary": [
+    "A6",
+    "B2",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 1,
+    "label_leak": 1,
+    "container": 0,
+    "exact_full_pack": 1,
+    "exact_approved": 0,
+    "exact_eligible": 0,
+    "near_full_pack": 4,
+    "near_approved": 3,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_arta_cultura_162",
+   "category": "arta_cultura",
+   "difficulty": "greu",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 0,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 1,
+    "exact_approved": 1,
+    "exact_eligible": 1,
+    "near_full_pack": 2,
+    "near_approved": 2,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_arta_cultura_239",
+   "category": "arta_cultura",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 2,
+    "container": 2,
+    "exact_full_pack": 1,
+    "exact_approved": 1,
+    "exact_eligible": 1,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 2
+   }
+  },
+  {
+   "id": "cx_arta_cultura_241",
+   "category": "arta_cultura",
+   "difficulty": "greu",
+   "primary": [
+    "B1"
+   ],
+   "secondary": [
+    "A6",
+    "B2",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 2,
+    "container": 0,
+    "exact_full_pack": 1,
+    "exact_approved": 1,
+    "exact_eligible": 1,
+    "near_full_pack": 1,
+    "near_approved": 1,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_film_tv_008",
+   "category": "film_tv",
+   "difficulty": "usor",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 3,
+    "label_leak": 3,
+    "container": 2,
+    "exact_full_pack": 3,
+    "exact_approved": 2,
+    "exact_eligible": 2,
+    "near_full_pack": 0,
+    "near_approved": 0,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_film_tv_009",
+   "category": "film_tv",
+   "difficulty": "normal",
+   "primary": [
+    "B5"
+   ],
+   "secondary": [
+    "A6"
+   ],
+   "evidence": {
+    "mirrors": 1,
+    "type_mix": 0,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 2,
+    "exact_approved": 0,
+    "exact_eligible": 0,
+    "near_full_pack": 3,
+    "near_approved": 3,
+    "near_eligible": 2
+   }
+  },
+  {
+   "id": "cx_film_tv_011",
+   "category": "film_tv",
+   "difficulty": "greu",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 1,
+    "label_leak": 2,
+    "container": 0,
+    "exact_full_pack": 1,
+    "exact_approved": 1,
+    "exact_eligible": 0,
+    "near_full_pack": 1,
+    "near_approved": 1,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_film_tv_013",
+   "category": "film_tv",
+   "difficulty": "greu",
+   "primary": [
+    "B9"
+   ],
+   "secondary": [
+    "A6",
+    "B1",
+    "B2",
+    "B3"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 4,
+    "container": 3,
+    "exact_full_pack": 1,
+    "exact_approved": 0,
+    "exact_eligible": 0,
+    "near_full_pack": 2,
+    "near_approved": 0,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_film_tv_165",
+   "category": "film_tv",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 3,
+    "container": 0,
+    "exact_full_pack": 4,
+    "exact_approved": 4,
+    "exact_eligible": 2,
+    "near_full_pack": 1,
+    "near_approved": 1,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_film_tv_167",
+   "category": "film_tv",
+   "difficulty": "greu",
+   "primary": [
+    "B6"
+   ],
+   "secondary": [
+    "A6",
+    "B3",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 0,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 0,
+    "exact_approved": 0,
+    "exact_eligible": 0,
+    "near_full_pack": 1,
+    "near_approved": 1,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_film_tv_169",
+   "category": "film_tv",
+   "difficulty": "normal",
+   "primary": [
+    "B5"
+   ],
+   "secondary": [
+    "A6",
+    "B2"
+   ],
+   "evidence": {
+    "mirrors": 3,
+    "type_mix": 1,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 3,
+    "exact_approved": 2,
+    "exact_eligible": 2,
+    "near_full_pack": 3,
+    "near_approved": 1,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_gastronomie_171",
+   "category": "gastronomie",
+   "difficulty": "normal",
+   "primary": [
+    "A4"
+   ],
+   "secondary": [
+    "A1",
+    "A6",
+    "B1",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 0,
+    "label_leak": 0,
+    "container": 1,
+    "exact_full_pack": 1,
+    "exact_approved": 1,
+    "exact_eligible": 1,
+    "near_full_pack": 3,
+    "near_approved": 3,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_geografie_028",
+   "category": "geografie",
+   "difficulty": "greu",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 1,
+    "label_leak": 2,
+    "container": 0,
+    "exact_full_pack": 0,
+    "exact_approved": 0,
+    "exact_eligible": 0,
+    "near_full_pack": 2,
+    "near_approved": 2,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_geografie_110",
+   "category": "geografie",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 1,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 2,
+    "exact_approved": 2,
+    "exact_eligible": 1,
+    "near_full_pack": 3,
+    "near_approved": 3,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_geografie_177",
+   "category": "geografie",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 0,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 2,
+    "exact_approved": 2,
+    "exact_eligible": 0,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_geografie_178",
+   "category": "geografie",
+   "difficulty": "greu",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2",
+    "B6",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 2,
+    "container": 2,
+    "exact_full_pack": 3,
+    "exact_approved": 3,
+    "exact_eligible": 2,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 3
+   }
+  },
+  {
+   "id": "cx_geografie_252",
+   "category": "geografie",
+   "difficulty": "normal",
+   "primary": [
+    "B1"
+   ],
+   "secondary": [
+    "A6",
+    "A7",
+    "B2",
+    "B6",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 1,
+    "label_leak": 1,
+    "container": 0,
+    "exact_full_pack": 1,
+    "exact_approved": 1,
+    "exact_eligible": 1,
+    "near_full_pack": 3,
+    "near_approved": 1,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_istorie_029",
+   "category": "istorie",
+   "difficulty": "usor",
+   "primary": [
+    "B5"
+   ],
+   "secondary": [
+    "A6",
+    "B2"
+   ],
+   "evidence": {
+    "mirrors": 1,
+    "type_mix": 1,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 2,
+    "exact_approved": 2,
+    "exact_eligible": 2,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 2
+   }
+  },
+  {
+   "id": "cx_istorie_030",
+   "category": "istorie",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 2,
+    "container": 0,
+    "exact_full_pack": 2,
+    "exact_approved": 2,
+    "exact_eligible": 2,
+    "near_full_pack": 3,
+    "near_approved": 3,
+    "near_eligible": 3
+   }
+  },
+  {
+   "id": "cx_personalitati_064",
+   "category": "personalitati",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B2"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 3,
+    "exact_approved": 3,
+    "exact_eligible": 1,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_personalitati_144",
+   "category": "personalitati",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 3,
+    "exact_approved": 3,
+    "exact_eligible": 1,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 3
+   }
+  },
+  {
+   "id": "cx_personalitati_210",
+   "category": "personalitati",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 1,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 2,
+    "exact_approved": 1,
+    "exact_eligible": 0,
+    "near_full_pack": 3,
+    "near_approved": 3,
+    "near_eligible": 2
+   }
+  },
+  {
+   "id": "cx_personalitati_213",
+   "category": "personalitati",
+   "difficulty": "greu",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 0,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 2,
+    "exact_approved": 2,
+    "exact_eligible": 2,
+    "near_full_pack": 2,
+    "near_approved": 2,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_personalitati_214",
+   "category": "personalitati",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 1,
+    "exact_approved": 1,
+    "exact_eligible": 1,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 3
+   }
+  },
+  {
+   "id": "cx_personalitati_275",
+   "category": "personalitati",
+   "difficulty": "greu",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 0,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 3,
+    "exact_approved": 3,
+    "exact_eligible": 3,
+    "near_full_pack": 3,
+    "near_approved": 3,
+    "near_eligible": 3
+   }
+  },
+  {
+   "id": "cx_personalitati_276",
+   "category": "personalitati",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 1,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 0,
+    "exact_approved": 0,
+    "exact_eligible": 0,
+    "near_full_pack": 2,
+    "near_approved": 2,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_personalitati_277",
+   "category": "personalitati",
+   "difficulty": "greu",
+   "primary": [
+    "B9"
+   ],
+   "secondary": [
+    "A6",
+    "B1",
+    "B2",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 0,
+    "container": 2,
+    "exact_full_pack": 0,
+    "exact_approved": 0,
+    "exact_eligible": 0,
+    "near_full_pack": 3,
+    "near_approved": 3,
+    "near_eligible": 2
+   }
+  },
+  {
+   "id": "cx_societate_065",
+   "category": "societate",
+   "difficulty": "usor",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B2",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 1,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 3,
+    "exact_approved": 3,
+    "exact_eligible": 1,
+    "near_full_pack": 4,
+    "near_approved": 3,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_societate_067",
+   "category": "societate",
+   "difficulty": "normal",
+   "primary": [
+    "B5"
+   ],
+   "secondary": [
+    "A6"
+   ],
+   "evidence": {
+    "mirrors": 2,
+    "type_mix": 0,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 2,
+    "exact_approved": 2,
+    "exact_eligible": 0,
+    "near_full_pack": 3,
+    "near_approved": 3,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_societate_068",
+   "category": "societate",
+   "difficulty": "greu",
+   "primary": [
+    "B5"
+   ],
+   "secondary": [
+    "A6",
+    "B1",
+    "B2",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 1,
+    "type_mix": 1,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 1,
+    "exact_approved": 1,
+    "exact_eligible": 0,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 2
+   }
+  },
+  {
+   "id": "cx_societate_151",
+   "category": "societate",
+   "difficulty": "normal",
+   "primary": [
+    "B5"
+   ],
+   "secondary": [
+    "A6",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 2,
+    "type_mix": 1,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 2,
+    "exact_approved": 2,
+    "exact_eligible": 0,
+    "near_full_pack": 1,
+    "near_approved": 1,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_societate_152",
+   "category": "societate",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B2"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 1,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 3,
+    "exact_approved": 3,
+    "exact_eligible": 1,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_societate_155",
+   "category": "societate",
+   "difficulty": "greu",
+   "primary": [
+    "B1"
+   ],
+   "secondary": [
+    "A6",
+    "B2"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 0,
+    "container": 2,
+    "exact_full_pack": 1,
+    "exact_approved": 1,
+    "exact_eligible": 1,
+    "near_full_pack": 3,
+    "near_approved": 3,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_societate_216",
+   "category": "societate",
+   "difficulty": "usor",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B2",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 2,
+    "exact_approved": 2,
+    "exact_eligible": 0,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_societate_217",
+   "category": "societate",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2",
+    "B6",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 1,
+    "container": 2,
+    "exact_full_pack": 1,
+    "exact_approved": 1,
+    "exact_eligible": 0,
+    "near_full_pack": 3,
+    "near_approved": 3,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_societate_220",
+   "category": "societate",
+   "difficulty": "greu",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 0,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 0,
+    "exact_approved": 0,
+    "exact_eligible": 0,
+    "near_full_pack": 2,
+    "near_approved": 2,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_societate_280",
+   "category": "societate",
+   "difficulty": "greu",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 1,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 1,
+    "exact_approved": 1,
+    "exact_eligible": 0,
+    "near_full_pack": 4,
+    "near_approved": 3,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_societate_290",
+   "category": "societate",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 1,
+    "label_leak": 2,
+    "container": 0,
+    "exact_full_pack": 0,
+    "exact_approved": 0,
+    "exact_eligible": 0,
+    "near_full_pack": 3,
+    "near_approved": 3,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_sport_072",
+   "category": "sport",
+   "difficulty": "normal",
+   "primary": [
+    "B6"
+   ],
+   "secondary": [
+    "A6",
+    "B1",
+    "B2"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 1,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 1,
+    "exact_approved": 1,
+    "exact_eligible": 0,
+    "near_full_pack": 2,
+    "near_approved": 2,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_sport_073",
+   "category": "sport",
+   "difficulty": "usor",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 0,
+    "label_leak": 0,
+    "container": 1,
+    "exact_full_pack": 2,
+    "exact_approved": 2,
+    "exact_eligible": 0,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_sport_074",
+   "category": "sport",
+   "difficulty": "normal",
+   "primary": [
+    "B1"
+   ],
+   "secondary": [
+    "A6",
+    "B2",
+    "B6",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 1,
+    "container": 2,
+    "exact_full_pack": 0,
+    "exact_approved": 0,
+    "exact_eligible": 0,
+    "near_full_pack": 2,
+    "near_approved": 2,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_sport_076",
+   "category": "sport",
+   "difficulty": "normal",
+   "primary": [
+    "B1"
+   ],
+   "secondary": [
+    "A6",
+    "B2",
+    "B6",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 3,
+    "container": 2,
+    "exact_full_pack": 0,
+    "exact_approved": 0,
+    "exact_eligible": 0,
+    "near_full_pack": 1,
+    "near_approved": 1,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_sport_077",
+   "category": "sport",
+   "difficulty": "greu",
+   "primary": [
+    "B1"
+   ],
+   "secondary": [
+    "A6",
+    "B2",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 1,
+    "container": 0,
+    "exact_full_pack": 0,
+    "exact_approved": 0,
+    "exact_eligible": 0,
+    "near_full_pack": 2,
+    "near_approved": 2,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_sport_156",
+   "category": "sport",
+   "difficulty": "usor",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 0,
+    "container": 2,
+    "exact_full_pack": 2,
+    "exact_approved": 2,
+    "exact_eligible": 2,
+    "near_full_pack": 3,
+    "near_approved": 3,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_sport_157",
+   "category": "sport",
+   "difficulty": "normal",
+   "primary": [
+    "B1"
+   ],
+   "secondary": [
+    "A6",
+    "B2",
+    "B6",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 1,
+    "label_leak": 2,
+    "container": 0,
+    "exact_full_pack": 0,
+    "exact_approved": 0,
+    "exact_eligible": 0,
+    "near_full_pack": 1,
+    "near_approved": 1,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_sport_160",
+   "category": "sport",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 0,
+    "container": 2,
+    "exact_full_pack": 1,
+    "exact_approved": 1,
+    "exact_eligible": 1,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_sport_161",
+   "category": "sport",
+   "difficulty": "greu",
+   "primary": [
+    "B5"
+   ],
+   "secondary": [
+    "A6",
+    "B1",
+    "B2",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 1,
+    "type_mix": 4,
+    "label_leak": 1,
+    "container": 0,
+    "exact_full_pack": 2,
+    "exact_approved": 2,
+    "exact_eligible": 0,
+    "near_full_pack": 2,
+    "near_approved": 1,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_sport_222",
+   "category": "sport",
+   "difficulty": "usor",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 0,
+    "container": 1,
+    "exact_full_pack": 3,
+    "exact_approved": 2,
+    "exact_eligible": 1,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_sport_225",
+   "category": "sport",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 3,
+    "label_leak": 0,
+    "container": 1,
+    "exact_full_pack": 1,
+    "exact_approved": 1,
+    "exact_eligible": 1,
+    "near_full_pack": 2,
+    "near_approved": 2,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_sport_226",
+   "category": "sport",
+   "difficulty": "greu",
+   "primary": [
+    "B1"
+   ],
+   "secondary": [
+    "A3",
+    "A6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 0,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 1,
+    "exact_approved": 0,
+    "exact_eligible": 0,
+    "near_full_pack": 1,
+    "near_approved": 1,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_sport_282",
+   "category": "sport",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 3,
+    "label_leak": 2,
+    "container": 0,
+    "exact_full_pack": 0,
+    "exact_approved": 0,
+    "exact_eligible": 0,
+    "near_full_pack": 3,
+    "near_approved": 3,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_sport_284",
+   "category": "sport",
+   "difficulty": "greu",
+   "primary": [
+    "B6"
+   ],
+   "secondary": [
+    "A6",
+    "B1",
+    "B2",
+    "B3",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 2,
+    "container": 1,
+    "exact_full_pack": 0,
+    "exact_approved": 0,
+    "exact_eligible": 0,
+    "near_full_pack": 2,
+    "near_approved": 2,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_stiinta_083",
+   "category": "stiinta",
+   "difficulty": "normal",
+   "primary": [
+    "A1"
+   ],
+   "secondary": [
+    "A6",
+    "B1",
+    "B2",
+    "B8"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 1,
+    "exact_approved": 1,
+    "exact_eligible": 0,
+    "near_full_pack": 3,
+    "near_approved": 3,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_stiinta_162",
+   "category": "stiinta",
+   "difficulty": "normal",
+   "primary": [
+    "B5"
+   ],
+   "secondary": [
+    "A6",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 2,
+    "type_mix": 0,
+    "label_leak": 0,
+    "container": 1,
+    "exact_full_pack": 2,
+    "exact_approved": 2,
+    "exact_eligible": 0,
+    "near_full_pack": 4,
+    "near_approved": 4,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_stiinta_165",
+   "category": "stiinta",
+   "difficulty": "greu",
+   "primary": [
+    "B1"
+   ],
+   "secondary": [
+    "A6",
+    "B2",
+    "B9"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 1,
+    "exact_approved": 1,
+    "exact_eligible": 0,
+    "near_full_pack": 3,
+    "near_approved": 3,
+    "near_eligible": 0
+   }
+  },
+  {
+   "id": "cx_stiinta_167",
+   "category": "stiinta",
+   "difficulty": "greu",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 0,
+    "container": 2,
+    "exact_full_pack": 2,
+    "exact_approved": 2,
+    "exact_eligible": 0,
+    "near_full_pack": 2,
+    "near_approved": 2,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_stiinta_227",
+   "category": "stiinta",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 1,
+    "label_leak": 0,
+    "container": 2,
+    "exact_full_pack": 1,
+    "exact_approved": 1,
+    "exact_eligible": 0,
+    "near_full_pack": 2,
+    "near_approved": 2,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_stiinta_285",
+   "category": "stiinta",
+   "difficulty": "normal",
+   "primary": [
+    "A6"
+   ],
+   "secondary": [
+    "B1",
+    "B2",
+    "B5"
+   ],
+   "evidence": {
+    "mirrors": 1,
+    "type_mix": 1,
+    "label_leak": 0,
+    "container": 1,
+    "exact_full_pack": 1,
+    "exact_approved": 1,
+    "exact_eligible": 1,
+    "near_full_pack": 3,
+    "near_approved": 3,
+    "near_eligible": 1
+   }
+  },
+  {
+   "id": "cx_viata_de_roman_238",
+   "category": "viata_de_roman",
+   "difficulty": "greu",
+   "primary": [
+    "B1"
+   ],
+   "secondary": [
+    "A6",
+    "B2",
+    "B6"
+   ],
+   "evidence": {
+    "mirrors": 0,
+    "type_mix": 2,
+    "label_leak": 0,
+    "container": 0,
+    "exact_full_pack": 0,
+    "exact_approved": 0,
+    "exact_eligible": 0,
+    "near_full_pack": 3,
+    "near_approved": 3,
+    "near_eligible": 1
+   }
+  }
+ ],
+ "groups": {
+  "cx_arta_cultura_003.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_arta_cultura_003.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix"
+   ]
+  },
+  "cx_arta_cultura_003.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "B6_class_container"
+   ]
+  },
+  "cx_arta_cultura_003.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix"
+   ]
+  },
+  "cx_arta_cultura_004.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_arta_cultura_004.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_arta_cultura_004.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_arta_cultura_004.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_arta_cultura_005.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_arta_cultura_005.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "direct_reuse_exact_source_collision",
+    "predicate_idea_only",
+    "at_least_two_replacement_members_required",
+    "approved_inventory_member_saturation",
+    "fresh_full_gate_required"
+   ]
+  },
+  "cx_arta_cultura_005.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible"
+   ]
+  },
+  "cx_arta_cultura_005.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_arta_cultura_007.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B1_association_bundle"
+   ]
+  },
+  "cx_arta_cultura_007.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_arta_cultura_007.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B1_association_bundle"
+   ]
+  },
+  "cx_arta_cultura_007.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_arta_cultura_091.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_arta_cultura_091.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_arta_cultura_091.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_arta_cultura_091.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "B6_class_container"
+   ]
+  },
+  "cx_arta_cultura_092.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_arta_cultura_092.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_arta_cultura_092.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_arta_cultura_092.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B6_class_container"
+   ]
+  },
+  "cx_arta_cultura_094.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "A6_near_current_eligible",
+    "B6_class_container"
+   ]
+  },
+  "cx_arta_cultura_094.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_arta_cultura_094.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "B2_type_mix",
+    "B6_class_container"
+   ]
+  },
+  "cx_arta_cultura_094.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix"
+   ]
+  },
+  "cx_arta_cultura_159.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible"
+   ]
+  },
+  "cx_arta_cultura_159.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_arta_cultura_159.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix",
+    "B6_class_container"
+   ]
+  },
+  "cx_arta_cultura_159.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix",
+    "B9_label_self_leak",
+    "B6_class_container"
+   ]
+  },
+  "cx_arta_cultura_161.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_arta_cultura_161.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_arta_cultura_161.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_arta_cultura_161.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_arta_cultura_162.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_arta_cultura_162.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible"
+   ]
+  },
+  "cx_arta_cultura_162.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B6_generic_theme_bucket"
+   ]
+  },
+  "cx_arta_cultura_162.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B1_association_bundle"
+   ]
+  },
+  "cx_arta_cultura_239.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_arta_cultura_239.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix",
+    "B6_class_container"
+   ]
+  },
+  "cx_arta_cultura_239.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_arta_cultura_239.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix",
+    "B9_label_self_leak",
+    "B6_class_container"
+   ]
+  },
+  "cx_arta_cultura_241.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_arta_cultura_241.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix"
+   ]
+  },
+  "cx_arta_cultura_241.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_arta_cultura_241.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_exact_current_eligible",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_film_tv_008.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_exact_current_eligible",
+    "B9_label_self_leak",
+    "B6_class_container"
+   ]
+  },
+  "cx_film_tv_008.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "B2_type_mix",
+    "B9_label_self_leak",
+    "B6_class_container"
+   ]
+  },
+  "cx_film_tv_008.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_exact_current_eligible",
+    "B2_type_mix",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_film_tv_008.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix"
+   ]
+  },
+  "cx_film_tv_009.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_film_tv_009.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_film_tv_009.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_film_tv_009.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_film_tv_011.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_film_tv_011.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_film_tv_011.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix"
+   ]
+  },
+  "cx_film_tv_011.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_film_tv_013.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "B9_label_self_leak",
+    "B6_class_container"
+   ]
+  },
+  "cx_film_tv_013.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B9_label_self_leak",
+    "B6_class_container"
+   ]
+  },
+  "cx_film_tv_013.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "B2_type_mix",
+    "B9_label_self_leak",
+    "B6_class_container"
+   ]
+  },
+  "cx_film_tv_013.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_film_tv_165.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "B2_type_mix"
+   ]
+  },
+  "cx_film_tv_165.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_exact_current_eligible",
+    "B2_type_mix",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_film_tv_165.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_film_tv_165.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_film_tv_167.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "direct_reuse_exact_source_collision",
+    "predicate_idea_only",
+    "at_least_two_replacement_members_required",
+    "approved_inventory_member_saturation",
+    "fresh_full_gate_required"
+   ]
+  },
+  "cx_film_tv_167.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_film_tv_167.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B3_two_pair_construction",
+    "approved_inventory_member_saturation"
+   ]
+  },
+  "cx_film_tv_167.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B3_paired_hierarchy",
+    "B6_umbrella_members"
+   ]
+  },
+  "cx_film_tv_169.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_film_tv_169.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "B2_type_mix"
+   ]
+  },
+  "cx_film_tv_169.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_exact_current_eligible",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_film_tv_169.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_gastronomie_171.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_gastronomie_171.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_exact_current_eligible"
+   ]
+  },
+  "cx_gastronomie_171.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B6_class_container"
+   ]
+  },
+  "cx_gastronomie_171.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_geografie_028.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_geografie_028.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_geografie_028.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_geografie_028.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B1_predicate_mismatch",
+    "A4_dacic_substrate_not_latinity"
+   ]
+  },
+  "cx_geografie_110.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_geografie_110.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_exact_current_eligible"
+   ]
+  },
+  "cx_geografie_110.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_geografie_110.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix"
+   ]
+  },
+  "cx_geografie_177.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_geografie_177.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_geografie_177.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_geografie_177.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_geografie_178.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix"
+   ]
+  },
+  "cx_geografie_178.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "A6_near_current_eligible",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_geografie_178.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "B2_type_mix",
+    "B9_label_self_leak",
+    "B6_class_container"
+   ]
+  },
+  "cx_geografie_178.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "A6_near_current_eligible",
+    "B6_class_container"
+   ]
+  },
+  "cx_geografie_252.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_geografie_252.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_exact_current_eligible"
+   ]
+  },
+  "cx_geografie_252.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_geografie_252.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "B1_no_checkable_predicate"
+   ]
+  },
+  "cx_istorie_029.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "A6_near_current_eligible",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_istorie_029.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_istorie_029.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_istorie_029.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_istorie_030.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "A6_near_current_eligible",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_istorie_030.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_exact_current_eligible"
+   ]
+  },
+  "cx_istorie_030.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_istorie_030.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix"
+   ]
+  },
+  "cx_personalitati_064.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_personalitati_064.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_personalitati_064.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_personalitati_064.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible"
+   ]
+  },
+  "cx_personalitati_144.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_personalitati_144.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix"
+   ]
+  },
+  "cx_personalitati_144.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "A6_near_current_eligible",
+    "B2_type_mix"
+   ]
+  },
+  "cx_personalitati_144.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_personalitati_210.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_personalitati_210.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix"
+   ]
+  },
+  "cx_personalitati_210.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_personalitati_210.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_personalitati_213.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_personalitati_213.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_exact_current_eligible"
+   ]
+  },
+  "cx_personalitati_213.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_exact_current_eligible"
+   ]
+  },
+  "cx_personalitati_213.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_personalitati_214.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_personalitati_214.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix"
+   ]
+  },
+  "cx_personalitati_214.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix"
+   ]
+  },
+  "cx_personalitati_214.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_personalitati_275.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_personalitati_275.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_personalitati_275.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_personalitati_275.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B6_generic_chronology_bucket"
+   ]
+  },
+  "cx_personalitati_276.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_personalitati_276.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_personalitati_276.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B6_generic_domain_list"
+   ]
+  },
+  "cx_personalitati_276.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B1_association_bundle"
+   ]
+  },
+  "cx_personalitati_277.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "direct_reuse_exact_source_collision",
+    "predicate_idea_only",
+    "at_least_two_replacement_members_required",
+    "fresh_full_gate_required"
+   ]
+  },
+  "cx_personalitati_277.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B6_class_container"
+   ]
+  },
+  "cx_personalitati_277.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix"
+   ]
+  },
+  "cx_personalitati_277.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix",
+    "B6_class_container"
+   ]
+  },
+  "cx_societate_065.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_societate_065.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_societate_065.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_societate_065.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "B6_umbrella_members"
+   ]
+  },
+  "cx_societate_067.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_societate_067.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_societate_067.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_societate_067.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_societate_068.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_societate_068.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_societate_068.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_societate_068.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_societate_151.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_societate_151.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_societate_151.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B5_mirrored_group",
+    "B6_umbrella_members"
+   ]
+  },
+  "cx_societate_151.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix"
+   ]
+  },
+  "cx_societate_152.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_societate_152.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_societate_152.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible"
+   ]
+  },
+  "cx_societate_152.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_societate_155.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix",
+    "B6_class_container"
+   ]
+  },
+  "cx_societate_155.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible"
+   ]
+  },
+  "cx_societate_155.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix"
+   ]
+  },
+  "cx_societate_155.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B6_class_container"
+   ]
+  },
+  "cx_societate_216.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_societate_216.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_societate_216.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_societate_216.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_societate_217.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_societate_217.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B6_class_container"
+   ]
+  },
+  "cx_societate_217.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix",
+    "B6_class_container"
+   ]
+  },
+  "cx_societate_217.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_societate_220.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_societate_220.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_societate_220.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B6_generic_domain_list"
+   ]
+  },
+  "cx_societate_220.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B1_no_checkable_predicate"
+   ]
+  },
+  "cx_societate_280.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_societate_280.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_societate_280.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_societate_280.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "B6_class_role_hierarchy"
+   ]
+  },
+  "cx_societate_290.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_societate_290.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_societate_290.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_societate_290.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B6_generic_theme_bucket",
+    "B8_low_salience_tail"
+   ]
+  },
+  "cx_sport_072.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B6_meta_answer_nodes",
+    "B8_deep_cut_cluster"
+   ]
+  },
+  "cx_sport_072.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_sport_072.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_sport_072.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_sport_073.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_sport_073.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_sport_073.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B6_class_container"
+   ]
+  },
+  "cx_sport_073.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_sport_074.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix",
+    "B6_class_container"
+   ]
+  },
+  "cx_sport_074.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B1_association_bundle"
+   ]
+  },
+  "cx_sport_074.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_sport_074.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B6_class_container"
+   ]
+  },
+  "cx_sport_076.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_sport_076.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix",
+    "B9_label_self_leak",
+    "B6_class_container"
+   ]
+  },
+  "cx_sport_076.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B9_label_self_leak",
+    "B6_class_container"
+   ]
+  },
+  "cx_sport_076.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B1_predicate_mismatch"
+   ]
+  },
+  "cx_sport_077.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_sport_077.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix"
+   ]
+  },
+  "cx_sport_077.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B1_association_bundle"
+   ]
+  },
+  "cx_sport_077.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_sport_156.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible"
+   ]
+  },
+  "cx_sport_156.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix",
+    "B6_class_container"
+   ]
+  },
+  "cx_sport_156.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "B2_type_mix",
+    "B6_class_container"
+   ]
+  },
+  "cx_sport_156.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B1_single_entity_bundle"
+   ]
+  },
+  "cx_sport_157.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_sport_157.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B1_single_entity_bundle"
+   ]
+  },
+  "cx_sport_157.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_sport_157.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_sport_160.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_sport_160.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix",
+    "B6_class_container"
+   ]
+  },
+  "cx_sport_160.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix",
+    "B6_class_container"
+   ]
+  },
+  "cx_sport_160.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible"
+   ]
+  },
+  "cx_sport_161.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "B2_type_mix",
+    "B9_label_self_leak",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_sport_161.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_sport_161.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_sport_161.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_sport_222.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "B2_type_mix",
+    "B6_class_container"
+   ]
+  },
+  "cx_sport_222.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_sport_222.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_sport_222.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_sport_225.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_sport_225.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible"
+   ]
+  },
+  "cx_sport_225.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix",
+    "B6_class_container"
+   ]
+  },
+  "cx_sport_225.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix"
+   ]
+  },
+  "cx_sport_226.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "direct_reuse_exact_source_collision",
+    "predicate_idea_only",
+    "at_least_two_replacement_members_required",
+    "fresh_full_gate_required"
+   ]
+  },
+  "cx_sport_226.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B6_generic_famous_people_list"
+   ]
+  },
+  "cx_sport_226.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A3_label_false",
+    "B1_predicate_mismatch"
+   ]
+  },
+  "cx_sport_226.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_sport_282.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_sport_282.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_sport_282.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_sport_282.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_sport_284.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix",
+    "B9_label_self_leak"
+   ]
+  },
+  "cx_sport_284.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix",
+    "B9_label_self_leak",
+    "B6_class_container"
+   ]
+  },
+  "cx_sport_284.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_sport_284.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B1_association_bundle"
+   ]
+  },
+  "cx_stiinta_083.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_stiinta_083.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_stiinta_083.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_stiinta_083.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix"
+   ]
+  },
+  "cx_stiinta_162.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_stiinta_162.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_stiinta_162.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B6_class_container"
+   ]
+  },
+  "cx_stiinta_162.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_stiinta_165.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_stiinta_165.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_stiinta_165.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix"
+   ]
+  },
+  "cx_stiinta_165.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_stiinta_167.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix",
+    "B6_class_container"
+   ]
+  },
+  "cx_stiinta_167.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "B6_class_container"
+   ]
+  },
+  "cx_stiinta_167.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible"
+   ]
+  },
+  "cx_stiinta_167.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_stiinta_227.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B6_class_container"
+   ]
+  },
+  "cx_stiinta_227.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B6_class_container"
+   ]
+  },
+  "cx_stiinta_227.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_exact_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_stiinta_227.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B1_temperature_outlier",
+    "B3_three_plus_one_partition"
+   ]
+  },
+  "cx_stiinta_285.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_exact_full_pack",
+    "A6_near_full_pack",
+    "A6_exact_approved_inventory",
+    "A6_near_approved_inventory",
+    "A6_exact_current_eligible",
+    "A6_near_current_eligible",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_stiinta_285.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B5_mirrored_group"
+   ]
+  },
+  "cx_stiinta_285.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B2_type_mix"
+   ]
+  },
+  "cx_stiinta_285.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B6_class_container"
+   ]
+  },
+  "cx_viata_de_roman_238.g1": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "A6_near_current_eligible",
+    "B2_type_mix"
+   ]
+  },
+  "cx_viata_de_roman_238.g2": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory",
+    "B2_type_mix"
+   ]
+  },
+  "cx_viata_de_roman_238.g3": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "A6_near_full_pack",
+    "A6_near_approved_inventory"
+   ]
+  },
+  "cx_viata_de_roman_238.g4": {
+   "disposition": "hard_ban",
+   "reasons": [
+    "B1_vibe_only_bundle"
+   ]
+  }
+ }
+}

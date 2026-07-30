@@ -353,8 +353,10 @@ _DEMOTIONS_PATH = _REPO_ROOT / "cat_de_roman_esti/fixtures/board_demotions_v43.j
 
 
 def _owner_demotions() -> frozenset[str]:
-    """ADR-0066: owner-demoted served boards leave the selected pool but stay approved
-    (the ADR-0055 reserve model), so derived sources and runtime invariants hold."""
+    """ADR-0066/0067: owner-demoted boards stay approved but leave selection.
+
+    This preserves the ADR-0055 reserve model and derived-game source invariants.
+    """
     data = json.loads(_DEMOTIONS_PATH.read_text(encoding="utf-8"))
     ids = frozenset(str(item) for item in data["ids"])
     if len(ids) != int(data["meta"]["count"]):

@@ -581,8 +581,8 @@ def test_shipped_ranked_inventory_exposes_reserves_but_never_selects_them():
                     else:
                         assert daily is None
 
-    # ADR-0066: the owner demotion wave emptied three other shelves (hidden by the
-    # picker per ADR-0058); refilling them is the next content wave's target.
+    # ADR-0066/0067 reserves stay hidden by the picker. The strict rebuild restored
+    # science/normal through cx_stiinta_356; no weak board was forced into the others.
     assert empty_eligible_shelves == {
         ("conexiuni", "arta_cultura", "greu"),
         ("conexiuni", "arta_cultura", "usor"),
@@ -594,7 +594,6 @@ def test_shipped_ranked_inventory_exposes_reserves_but_never_selects_them():
         ("conexiuni", "societate", "usor"),
         ("conexiuni", "sport", "normal"),
         ("conexiuni", "sport", "usor"),
-        ("conexiuni", "stiinta", "normal"),
     }
 
 

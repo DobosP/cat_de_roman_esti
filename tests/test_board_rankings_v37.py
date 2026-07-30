@@ -242,17 +242,17 @@ def test_artifact_is_complete_exactly_bound_and_byte_identical(generated: dict) 
         RANK.critique_pack.RUBRIC_PATH
     )
     assert meta["counts"] == {
-        "total": 825,
-        "approved": 603,
-        "pilot_eligible": 450,
+        "total": 828,
+        "approved": 606,
+        "pilot_eligible": 448,
         "by_game": {
-            "conexiuni": 308,
+            "conexiuni": 311,
             "contexto": 217,
             "lant": 201,
             "alchimie": 99,
         },
         "eligible_by_game": {
-            "conexiuni": 76,
+            "conexiuni": 74,
             "contexto": 202,
             "lant": 94,
             "alchimie": 78,
@@ -323,6 +323,35 @@ def test_every_eligibility_flag_matches_payload_and_critique_gates(generated: di
     assert {row["id"]: row["pilot_eligible"] for row in generated["boards"]} == expected
 
 
+def test_v43_strict_stock_demotions_remain_approved_but_unselectable(
+    generated: dict,
+) -> None:
+    package_path = (
+        _REPO_ROOT / "cat_de_roman_esti" / "fixtures" / "board_demotions_v43.json"
+    )
+    tests_path = _REPO_ROOT / "tests" / "fixtures" / "board_demotions_v43.json"
+    assert package_path.read_bytes() == tests_path.read_bytes()
+
+    demotions = json.loads(package_path.read_text(encoding="utf-8"))
+    ids = set(demotions["ids"])
+    assert demotions["meta"]["count"] == len(ids) == 75
+    strict_v43 = {
+        "cx_geografie_024",
+        "cx_geografie_304",
+        "cx_limba_260",
+        "cx_muzica_138",
+        "cx_personalitati_339",
+        "cx_societate_066",
+        "cx_sport_355",
+        "cx_stiinta_080",
+    }
+    assert strict_v43 <= ids
+
+    rows = {row["id"]: row for row in generated["boards"]}
+    assert all(rows[item_id]["status"] == "approved" for item_id in strict_v43)
+    assert all(not rows[item_id]["pilot_eligible"] for item_id in strict_v43)
+
+
 def test_ranks_and_selection_quintiles_recompute_exactly(generated: dict) -> None:
     for game in RANK.GAME_KINDS:
         rows = [row for row in generated["boards"] if row["game"] == game]
@@ -345,7 +374,7 @@ def test_ranks_and_selection_quintiles_recompute_exactly(generated: dict) -> Non
 def test_default_checker_is_green_and_prints_a_human_audit(capsys) -> None:
     assert RANK.main(["rank_games_pack.py"]) == 0
     output = capsys.readouterr().out
-    assert "825 total / 450 pilot-eligible" in output
+    assert "828 total / 448 pilot-eligible" in output
     assert "conexiuni" in output and "contexto" in output
     assert "lant" in output and "alchimie" in output
     assert "top:" in output

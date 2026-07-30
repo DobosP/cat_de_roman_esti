@@ -54,10 +54,10 @@ the right generated types. Deterministic, side-effect-free (`data.fixture_manife
   "app": "cat_de_roman_esti",
   "schema_version": 1,          // KG record schema (APP_PACK_SCHEMA_VERSION)
   "manifest_version": 1,        // shape of THIS manifest
-  "build_version": "fixture-v5-pop",
+  "build_version": "fixture-v42-pegas-colind-damigeana",
   "generated_at": "2026-06-21T00:00:00Z",
   "content_hash": "sha256:…",   // canonical hash over kg_nodes+kg_edges+kg_puzzles
-  "counts": { "nodes": 1459, "edges": 5656, "puzzles": 180 }
+  "counts": { "nodes": 2364, "edges": 9217, "puzzles": 180 }
 }
 ```
 

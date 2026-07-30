@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-07-30",
+  "policy": "A board ships only when deterministic preflight, exact-byte factual review, blind play-quality review, and the imported real-ID analyst/verifier gate are unanimous. Holds and empty shelves are acceptable.",
+  "initial_wave": {
+    "proposals": 66,
+    "cultural_proposals": 30,
+    "everyday_proposals": 36,
+    "early_survivors": 44,
+    "imported_id_range": [
+      316,
+      359
+    ],
+    "corrected_real_id_gate": {
+      "promoted": [
+        "cx_personalitati_339",
+        "cx_sport_355",
+        "cx_stiinta_356"
+      ],
+      "later_reaudit_demoted": [
+        "cx_personalitati_339",
+        "cx_sport_355"
+      ],
+      "release_runtime_survivor": "cx_stiinta_356",
+      "rejected": 41,
+      "rejected_groups": 164,
+      "durable_evidence": "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json"
+    }
+  },
+  "replacement_wave": {
+    "slots": {
+      "cultural": 20,
+      "everyday": 21
+    },
+    "holds_before_final_raw_review": {
+      "cultural": 18,
+      "everyday": 12,
+      "total": 30
+    },
+    "cultural": [
+      {
+        "category": "arta_cultura",
+        "candidate_sha256": "a2b7fbad3825b271fc8b76fd947e6504af43f872d6702538381cbb3bf40d7151",
+        "ref": "v43r-arta-greu-02",
+        "factual": "clean",
+        "quality": "drop",
+        "outcome": "reject",
+        "reason": "Four exact groups, but 14 of 16 tiles are works and three shelves play as school-program classification; chronology and leftovers replace a satisfying clue arc."
+      },
+      {
+        "category": "film_tv",
+        "candidate_sha256": "82a7e2a351a596d2a4694d0b88b8563208e01cf84075c6e09ff2068387a80754",
+        "ref": "v43r-film-usor-04",
+        "factual": "clean",
+        "quality": "drop",
+        "outcome": "reject",
+        "reason": "The interlopers shelf misses the easy recognition floor and the board reuses six tiles plus three shelf concepts from approved cx_film_tv_243."
+      }
+    ],
+    "everyday_candidate_bindings": {
+      "gastronomie": "b1e2b02bf98fb5c9bd2e0f4b1acd6c6c47098c7e1a9a9d2716932dfeaabc02c2",
+      "geografie": "93614863b9e5d625cbfcd31b50134f8b4dd3fdaf5d15b5c59a4c15ebe04cc367",
+      "personalitati": "1f24e467a315e5fddf11410b6c6dc91109a8ca01458e3766f4d5eb8ef0dcbf0a",
+      "sport": "4e88df317c2e4fcf8375ddabf7e399883bfe8dabafdafb1396c1ecf664043b5b",
+      "stiinta": "b56dfe9d52ba7fcfe95ed2fa28e106d4fd4d178b1b342e00cf5dd8a3e618a9d2"
+    },
+    "everyday": [
+      {
+        "category": "gastronomie",
+        "ref": "v43r_gastronomie_normal_03",
+        "candidate_ref": "conexiuni[0]",
+        "factual": "block",
+        "quality": "keep",
+        "outcome": "reject",
+        "reason": "Salată de boeuf also truthfully fits the preparation-by-boiling group."
+      },
+      {
+        "category": "geografie",
+        "ref": "v43r_geografie_normal_02",
+        "candidate_ref": "conexiuni[0]",
+        "factual": "block",
+        "quality": "drop",
+        "outcome": "reject",
+        "reason": "Munții Rodnei contains the distinct place name Rodna and crosses the geographic-name group; the remaining shelves are stock-like place lists."
+      },
+      {
+        "category": "personalitati",
+        "ref": "v43r_personalitati_normal_02",
+        "candidate_ref": "conexiuni[0]",
+        "factual": "clean",
+        "quality": "keep",
+        "outcome": "imported-pending",
+        "real_id": "cx_personalitati_360"
+      },
+      {
+        "category": "personalitati",
+        "ref": "v43r_personalitati_normal_03",
+        "candidate_ref": "conexiuni[1]",
+        "factual": "block",
+        "quality": "drop",
+        "outcome": "reject",
+        "reason": "Loredana Groza also truthfully fits the actors-in-international-productions shelf; the board otherwise self-sorts as a worksheet."
+      },
+      {
+        "category": "sport",
+        "ref": "v43r_sport_usor_03",
+        "candidate_ref": "conexiuni[0]",
+        "factual": "clean",
+        "quality": "drop",
+        "outcome": "reject",
+        "reason": "Two initial-letter filler groups, specialist names, and a repeated 1994 theme miss the easy-tier and freshness bars."
+      },
+      {
+        "category": "sport",
+        "ref": "v43r_sport_normal_02",
+        "candidate_ref": "conexiuni[1]",
+        "factual": "block",
+        "quality": "drop",
+        "outcome": "reject",
+        "reason": "Elisabeta Lipă is both an Olympic opening flag-bearer and the 1989 senior world champion in single sculls."
+      },
+      {
+        "category": "sport",
+        "ref": "v43r_sport_normal_03",
+        "candidate_ref": "conexiuni[2]",
+        "factual": "clean",
+        "quality": "keep",
+        "outcome": "imported-pending",
+        "real_id": "cx_sport_361"
+      },
+      {
+        "category": "stiinta",
+        "ref": "v43r_stiinta_normal_02",
+        "candidate_ref": "conexiuni[0]",
+        "factual": "clean",
+        "quality": "drop",
+        "outcome": "reject",
+        "reason": "Four disjoint elementary buckets and conspicuous pairs from recent approved shelves create an easy remix, not a normal clue arc."
+      },
+      {
+        "category": "stiinta",
+        "ref": "v43r_stiinta_normal_03",
+        "candidate_ref": "conexiuni[1]",
+        "factual": "clean",
+        "quality": "drop",
+        "outcome": "reject",
+        "reason": "Visible body/animal/weather types reveal three shelves immediately, while multiple pairs remix the newest science stock."
+      }
+    ],
+    "raw_review_totals": {
+      "cultural": {
+        "factual_clean": 2,
+        "quality_keep": 0,
+        "consensus": 0
+      },
+      "everyday": {
+        "factual_clean": 5,
+        "factual_block": 4,
+        "quality_keep": 3,
+        "quality_drop": 6,
+        "consensus": 2
+      }
+    }
+  },
+  "final_real_id_gate": {
+    "input_ids": [
+      "cx_personalitati_339",
+      "cx_sport_355",
+      "cx_stiinta_356",
+      "cx_personalitati_360",
+      "cx_sport_361"
+    ],
+    "deterministic_failures": 0,
+    "analyst_artifact_sha256": "29518684c482cd852009d98d07559eba30ca02ccfec4ffbec1124508d2cca51a",
+    "verifier_artifact_sha256": "839c3c5968be17bd06bcf9b6bd2c28c3cd601a5d982547b810e9951ce5fbf974",
+    "verdicts": {
+      "cx_personalitati_339": {
+        "analyst": "demote",
+        "verifier": "demote",
+        "final": "demote"
+      },
+      "cx_sport_355": {
+        "analyst": "demote",
+        "verifier": "demote",
+        "final": "demote"
+      },
+      "cx_stiinta_356": {
+        "analyst": "keep",
+        "verifier": "keep",
+        "final": "keep"
+      },
+      "cx_personalitati_360": {
+        "analyst": "reject",
+        "verifier": "promote",
+        "final": "reject-without-unanimity"
+      },
+      "cx_sport_361": {
+        "analyst": "reject",
+        "verifier": "reject",
+        "final": "reject"
+      }
+    },
+    "applied": {
+      "new_rejections": 2,
+      "new_promotions": 0,
+      "rejection_tombstones": 43,
+      "rejection_tombstone_groups": 172,
+      "owner_demotions": 75
+    }
+  }
+}

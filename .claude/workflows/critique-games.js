@@ -66,6 +66,7 @@ Read, in this order:
 Then:
 - Simulate an average Romanian player (not a specialist). For conexiuni: labels are HIDDEN during play — can the player partition the 16 tiles from the tiles alone, and does each solved group feel earned and consistent? For contexto: would the player ever converge on this target by free association, and does getting warmer feel legible?
 - For lant, inspect every labeled representative path and judge whether each step is a nameable association. For alchimie, inspect productive_openings and minimum_action_recipe; structural craftability alone is not quality.
+- For conexiuni, rewrite every hidden group as "each tile ___" and reject any predicate that does not survive that sentence. Catch-all labels such as "țin de", "repere ale/din", "apar în", and "legate de" are evidence of an association bundle, not predicates. Treat four-type sorting, three-or-more literal display/name rules, and a recycled rejected-board template as defects even when the graph lint is otherwise clean; consult ${REPO}/cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json.
 - Walk every rubric criterion; name each violated failure mode exactly (e.g. "B1 Predicate Inconsistency", "C1 Nameable-thing", "B5 mirrored groups", "A7 non-distinctive association" — check the dossier's nondistinctive_region_links block).
 - Be hard: "technically valid but no Romanian would enjoy it" is a failing item. The bar is a prime-time-audience puzzle, not a graph exercise.
 - ADR-0019 triggers (adult/profanity/alcohol/insensitive-humor/near-duplicate): ${MODE === 'gate' ? 'propose "keep" and say so — that boundary is the owner\'s.' : 'flag them in your reasoning but still return your honest QUALITY verdict — in sweep mode every verdict is already only an owner proposal; never soften to "keep" out of deference.'}
@@ -81,6 +82,7 @@ Item ${c.id} (game: ${gameOf(c.id)}), mode=${MODE}. Review binding: ${c.review_b
 
 1. Read ${RUBRIC} (sections A, F, and ${sectionOf(c.id)}) and ${DOSSIERS}/${c.id}.json yourself — do not trust the critic's summary.
    For lant/alchimie, independently inspect the labeled representative paths or productive openings/minimum recipe; do not accept aggregate branch/closure counts as semantic evidence.
+   For conexiuni, independently test all four predicates, the full 16-tile partition, type/surface shortcuts, and rejected-template reuse; do not accept zero deterministic FAILs as proof of quality.
 2. Refute-first: argue the OPPOSITE of the critic's verdict; keep whichever position survives the evidence.
 3. Run rubric section F web checks (WebSearch/WebFetch) on every claim in ${JSON.stringify(c.web_claims)} and on any A1/A2/C2 doubt you have: ro.wikipedia presence, school-canon, national media (digi24/HotNews/ProTV/Libertatea/GSP), charts, sustained-vs-spike interest, cross-generational legibility. Record each check + outcome in web_checks.
 4. Salience numbers under-rate some famous nodes — fame is settled by the web checks, never by salience alone.
@@ -95,6 +97,18 @@ const sampleBucket = id => [...id].reduce(
   (acc, ch) => ((acc * 31) + ch.charCodeAt(0)) >>> 0,
   0,
 ) % 4
+
+const gateVerdict = (analyst, verifier) => {
+  if (analyst === 'promote' && verifier === 'promote') return 'promote'
+  if (analyst === 'reject' || verifier === 'reject') return 'reject'
+  return 'keep'
+}
+
+const gatePolicy = (analyst, verifier) => {
+  if (!verifier) return 'verifier-lost'
+  if (analyst === verifier) return `unanimous-${analyst}`
+  return `${gateVerdict(analyst, verifier)}-without-unanimity`
+}
 
 const results = await pipeline(
   IDS,
@@ -124,13 +138,18 @@ for (let i = 0; i < IDS.length; i++) {
   const inputId = IDS[i]
   const r = results[i]
   if (!r || !r.critique) { lost++; continue }
-  let final = r.verdict ? r.verdict.final : r.critique.proposed
+  const analyst = r.critique.proposed
+  const verifier = r.verdict ? r.verdict.final : null
+  let final = MODE === 'gate'
+    ? gateVerdict(analyst, verifier)
+    : (verifier || analyst)
+  const policy = MODE === 'gate'
+    ? gatePolicy(analyst, verifier)
+    : (verifier ? 'verifier-final' : 'analyst-only')
   let evidence = r.verdict ? r.verdict.evidence : 'clean sweep critique, stable sample skipped'
   if (r.verifierLost) {
     verifiersLost++
     evidence = 'VERIFIER LOST — analyst-only judgment, do not trust as verified'
-    // Gate integrity: promotion requires a live adversarial verifier.
-    if (MODE === 'gate' && final === 'promote') final = 'keep'
   }
   verified += r.verified ? 1 : 0
   unverifiedClean += r.sampledOut ? 1 : 0
@@ -138,6 +157,7 @@ for (let i = 0; i < IDS.length; i++) {
   ;(verdicts[game] = verdicts[game] || {})[inputId] = final
   perItem.push({
     id: inputId, game, proposed: r.critique.proposed, final,
+    analyst, verifier, policy,
     review_binding: r.critique.review_binding,
     verified: !!r.verified, verifier_lost: !!r.verifierLost,
     sampled_out: !!r.sampledOut,
