@@ -38,7 +38,7 @@ counts overlap. Runtime-only counting would re-import both reserve and pending d
   [machine-readable companion](v43-demotion-pattern-audit.json).
 - Inputs are digest-bound: pack `b2b603be2354`, demotions
   `ba9bb55b17b2`, rankings
-  `d05b2aa8729a`, KG `9363ccaa3a89`,
+  `d05b2aa8729a`, KG `95b7e4b0a9e5`,
   historical dossier rubric `14f8efacf32c`, and hardened release-gate rubric
   `9a443ed89a6b`.
 
