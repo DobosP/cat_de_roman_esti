@@ -2,7 +2,7 @@
 
 _As of 2026-07-30. This file is the repository's current source of truth._
 
-_Last verified: 2026-07-30 (V43: backend 679/679, accounts 53/53, session store
+_Last verified: 2026-07-30 (V43: backend 688/688, accounts 53/53, session store
 16/16, frontend 152/152, Ruff, ESLint, typecheck, production build at
 118.03/120 KiB, rankings/derived/pack/KG validators, and `git diff --check` green)._
 
@@ -17,9 +17,9 @@ _Last verified: 2026-07-30 (V43: backend 679/679, accounts 53/53, session store
   selected board.
 - Eight more approved boards moved to the reserve sidecar. It now has 75 IDs; 43 rejected
   boards/172 groups live in durable tombstones. Ten empty Conexiuni shelves stay hidden.
-- Invalid or unreadable derived catalogs now make Intrusul/Perechi return controlled
-  Romanian 503 responses. Regenerated healthy catalogs serve normally; the frozen
-  336-board payload stayed byte-identical.
+- Invalid, unreadable, or genuinely overridden derived catalogs make Intrusul/Perechi
+  return controlled Romanian 503 responses. Exact bundled Compose paths remain defaults;
+  healthy catalogs serve normally and the frozen 336-board payload stayed byte-identical.
 - The six-game, tap-first lobby stays in its tested fun-first order: Alchimie → Intrusul →
   Perechi → Conexiuni → Cald sau Rece → Lanț. Mobile remains one card per row; wide screens
   balance the six cards in three columns.
@@ -73,8 +73,8 @@ measured fun or knowledge.
 - Browser history, records, derived mastery, circuit, and streak remain device-authored.
   Account mode can upload validated completed-score rows privately but does not download,
   restore, or merge them. Public records remain server-authored and consent-gated.
-- Repository landing and production deployment remain separate operations; the last
-  recorded live probe (2026-07-23) reported V32 `fixture-v32-face-workshop-garden`.
+- Anonymous production is on V43 `1f6c167`; its mandatory game-create smoke exposed the
+  bundled-path mismatch fixed here. The corrected image still requires redeployment.
 
 ## Reproduction
 

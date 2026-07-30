@@ -84,7 +84,9 @@ PYTHONPATH=. python -m pytest tests/test_v38_derived_rankings.py tests/test_v38_
 
 The default command recomputes all candidates and compares both committed fixture copies.
 `--write` is a reviewed maintainer action. Runtime also checks the artifact's pinned digest
-and its pack, KG, critique-rubric, and V37-ranking bindings. Any `CAT_GAMES_PACK`,
-`CAT_KG_FIXTURE`, or `CAT_BOARD_RANKINGS` runtime override deliberately fails closed because
-V38 has no neutral derived-content fallback. Loading a non-bundled catalog also requires its
-explicit matching SHA-256 digest.
+and its pack, KG, critique-rubric, and V37-ranking bindings. A `CAT_GAMES_PACK`,
+`CAT_KG_FIXTURE`, or `CAT_BOARD_RANKINGS` value that resolves away from its exact bundled
+source deliberately fails closed because V38 has no neutral derived-content fallback.
+Compose may expose the exact bundled path through an environment variable without turning
+it into an override. Loading a non-bundled catalog still requires its explicit matching
+SHA-256 digest.
