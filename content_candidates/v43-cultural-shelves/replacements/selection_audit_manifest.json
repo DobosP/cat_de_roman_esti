@@ -1,0 +1,354 @@
+{
+  "batch": "v43-cultural-shelves-replacements",
+  "artifact_kind": "replacement_authoring_proposal",
+  "artifact_status": {
+    "state": "unverified",
+    "approved": false,
+    "import_allowed": false,
+    "release_ready": false,
+    "instruction": "Independent factual verification and blind quality review remain mandatory before import."
+  },
+  "scope": {
+    "game": "conexiuni",
+    "requested_slots": 20,
+    "candidate_boards": 3,
+    "held_slots": 17,
+    "groups": 12,
+    "tile_placements": 48,
+    "unique_existing_nodes": 48,
+    "new_nodes": 0,
+    "new_edges": 0,
+    "selected_by_shelf": {
+      "arta_cultura/usor": 1,
+      "arta_cultura/greu": 1,
+      "film_tv/usor": 1,
+      "societate/usor": 0,
+      "societate/greu": 0
+    }
+  },
+  "selection_policy": {
+    "designs_considered_per_slot_min": 2,
+    "comparison_basis": "Every slot was compared with its exact-review incumbent and at least one fresh reconstruction. The first 20-board reconstruction received an independent 0 KEEP / 20 REBUILD verdict; only later reconstructions that cleared the latest editorial screen and the strengthened integration gate remain as unverified proposals.",
+    "no_one_tile_fixes": true,
+    "retained_predicate_rule": "A carried predicate must replace at least two members. The census enforces less than 3-of-4 overlap with every tombstoned group.",
+    "hold_rule": "A slot is held whenever four exact, mutually exclusive, recognizable and inventory-novel groups could not be assembled without a shortcut or catch-all predicate.",
+    "quota_forcing": false
+  },
+  "independent_rebuild_trigger": {
+    "snapshot_hash_prefixes": {
+      "arta_cultura": "b5f04fb",
+      "film_tv": "ae13b2c",
+      "societate": "4ef5319"
+    },
+    "verdict": {
+      "keep": 0,
+      "rebuild": 20
+    },
+    "recurring_failures": [
+      "catch-all association labels instead of one checkable relation",
+      "semantic cross-fits that broke the unique partition",
+      "generic concept taxonomies and visible node-type shortcuts",
+      "unsupported factual predicates",
+      "easy-tier recognition inversions"
+    ]
+  },
+  "candidate_freeze": {
+    "frozen_on": "2026-07-30",
+    "candidate_sha256": {
+      "arta_cultura/candidates.json": "f5a2e967240d0f5e09386cd198a9dab4e221c9998f609946874608264b29dd46",
+      "film_tv/candidates.json": "82a7e2a351a596d2a4694d0b88b8563208e01cf84075c6e09ff2068387a80754",
+      "societate/candidates.json": "f90bf069e0161ec0ab9ea244cbd018a7a08ef78644f09a1886385750ac5c7e92"
+    },
+    "manifest_in_hash_scope": false
+  },
+  "factual_provenance": {
+    "checked_on": "2026-07-30",
+    "status": "targeted_support_only_not_full_fact_approval",
+    "local_baseline": "tests/fixtures/kg_sample.json",
+    "groups": [
+      {
+        "ref": "v43r-film-usor-04",
+        "predicate": "Producții TV difuzate inițial de Televiziunea Română",
+        "evidence": [
+          {
+            "tile": "n_v11fil_teleenciclopedia",
+            "source": "https://tvr1.tvr.ro/emisiuni/teleenciclopedia_5234.html",
+            "supports": "TVR records the programme's 1965 launch at Televiziunea Română."
+          },
+          {
+            "tile": "n_v17fil_ciresarii",
+            "source": "https://tvr2.tvr.ro/in-culisele-cire-arii-marele-actor-care-i-a-facut-debutul-in-celebrul-serial-tv_33935.html",
+            "supports": "TVR records its own casting and the original live 1972 television broadcast."
+          },
+          {
+            "tile": "n_ftv_surprize_surprize",
+            "source": "https://mediatvr.tvr.ro/media-tvr/other/201206/raport-de-activitate-tvr-2006_1151.pdf",
+            "supports": "SRTv's annual report identifies Surprize, surprize as TVR 1's representative entertainment programme after more than nine seasons."
+          },
+          {
+            "tile": "n_v11fil_pistruiatul",
+            "source": "https://www.tvr.ro/pistruiatul-un-adolescent-care-a-facut-istorie-revine-la-tvr2_26934.html",
+            "supports": "TVR states that Studioul de film TVR made the production in 1973 for its original serial run."
+          }
+        ]
+      },
+      {
+        "ref": "v43r-arta-greu-02",
+        "predicate": "Basme în care eroul trece prin mai multe probe într-o călătorie",
+        "evidence": [
+          {
+            "tile": "n_litx_povestea_lui_harap_alb",
+            "source": "https://ro.wikisource.org/wiki/Povestea_lui_Harap-Alb",
+            "supports": "Primary text exposes the journey and successive tests."
+          },
+          {
+            "tile": "n_v23lit_praslea_cel_voinic",
+            "source": "https://ro.wikisource.org/wiki/Pr%C3%A2slea_cel_voinic_%C8%99i_merele_de_aur",
+            "supports": "Primary text exposes the pursuit, descent and successive tests."
+          },
+          {
+            "tile": "n_v23lit_tinerete_fara_batranete",
+            "source": "https://ro.wikisource.org/wiki/Tinere%C8%9Be_f%C4%83r%C4%83_b%C4%83tr%C3%A2ne%C8%9Be_%C8%99i_via%C8%9B%C4%83_f%C4%83r%C4%83_de_moarte",
+            "supports": "Primary text exposes the journey and successive obstacles."
+          },
+          {
+            "tile": "n_v23lit_greuceanu",
+            "source": "https://ro.wikisource.org/wiki/Greuceanu",
+            "supports": "Primary text exposes the recovery journey and successive confrontations."
+          }
+        ]
+      },
+      {
+        "ref": "v43r-arta-greu-02",
+        "predicate": "Romane românești publicate între 1919 și 1939",
+        "evidence": [
+          {
+            "tiles": [
+              "n_ultima_noapte",
+              "n_v11lit_patul_lui_procust"
+            ],
+            "source": "https://mnlr.ro/en/camil-petrescu-130/",
+            "supports": "MNLR dates the two-volume novels to 1930 and 1933."
+          },
+          {
+            "tile": "n_v11lit_rascoala",
+            "source": "https://mnlr.ro/en/liviu-rebreanu-80-de-ani-de-la-trecerea-in-nefiinta/",
+            "supports": "MNLR states that Răscoala was published in 1932."
+          },
+          {
+            "tile": "n_v11lit_craii",
+            "source": "https://mnlr.ro/en/135-de-ani-de-la-nasterea-lui-mateiu-i-caragiale/",
+            "supports": "MNLR identifies the București 1929 edition of Craii de Curtea-Veche."
+          }
+        ]
+      },
+      {
+        "ref": "v43r-arta-greu-02",
+        "predicate": "Opere în care apare ca personaj un domnitor român",
+        "evidence": [
+          {
+            "tile": "n_v17lit_alexandru_lapusneanul",
+            "source": "https://ro.wikisource.org/wiki/Alexandru_L%C4%83pu%C8%99neanul",
+            "supports": "Primary text depicts Alexandru Lăpușneanul as the ruling character."
+          },
+          {
+            "tile": "n_v20lit_scrisoarea_iii",
+            "source": "https://ro.wikisource.org/wiki/Scrisoarea_III",
+            "supports": "Primary text directly stages Mircea cel Bătrân."
+          },
+          {
+            "tile": "n_v20lit_apus_de_soare",
+            "source": "https://www.tnb.ro/ro/apus-de-soare",
+            "supports": "TNB's production record casts Ștefan cel Mare in the play."
+          },
+          {
+            "tile": "n_v17fil_mihai_viteazul_film",
+            "source": "https://aarc.ro/newfilm/film/3761",
+            "supports": "AARC's film record identifies Amza Pellea as Mihai Viteazul."
+          }
+        ]
+      },
+      {
+        "ref": "v43r-arta-greu-02",
+        "predicate": "Opere cu un animal numit explicit în titlu",
+        "evidence": [
+          {
+            "source": "tests/fixtures/kg_sample.json",
+            "supports": "The exact frozen labels visibly contain boi, căprioarei, Pasărea and Ursul; the same records identify the tiles as a painting, poem, sculpture series and story."
+          }
+        ]
+      }
+    ]
+  },
+  "manual_review_flags": [
+    {
+      "ref": "v43r-film-usor-04",
+      "severity": "nonfatal",
+      "concerns": [
+        "The all-work board may play closer to normal than usor because Groapa and Subteran are recent while two cinema anchors are from the 1970s.",
+        "Blind review must adversarially test whether Secretul lui Bachus tempts a thematic association with lumea interlopă even though it is a cinema film, not a serial."
+      ],
+      "required_next_gate": "Fresh blind difficulty and cross-fit review; do not infer approval from this manifest."
+    }
+  ],
+  "selected_refs": {
+    "arta_cultura/usor": [
+      "v43r-arta-usor-01"
+    ],
+    "arta_cultura/greu": [
+      "v43r-arta-greu-02"
+    ],
+    "film_tv/usor": [
+      "v43r-film-usor-04"
+    ],
+    "societate/usor": [],
+    "societate/greu": []
+  },
+  "design_competition": [
+    {
+      "selected": "v43r-arta-usor-01",
+      "discarded": "v43-arta-usor-01",
+      "tombstone": "cx_arta_cultura_316",
+      "discard_reason": "visible person, organization, concept and event sorting",
+      "selection_basis": "four single-property groups: book parts, staging elements, orally transmitted forms and two-dimensional visual works",
+      "selected_vs_tombstone": {
+        "board_overlap": 0,
+        "max_group_overlap": 0
+      }
+    },
+    {
+      "selected": "v43r-arta-greu-02",
+      "discarded": "v43-arta-greu-02",
+      "tombstone": "cx_arta_cultura_321",
+      "discard_reason": "entity/form sorting with a visible suffix shelf",
+      "selection_basis": "all-work partition by trial journey, publication period, represented ruler and explicit animal title",
+      "selected_vs_tombstone": {
+        "board_overlap": 2,
+        "max_group_overlap": 1
+      }
+    },
+    {
+      "selected": "v43r-film-usor-04",
+      "discarded": "v43-film-usor-05",
+      "tombstone": "cx_film_tv_327",
+      "discard_reason": "actor hub plus direct title-format cross-fits",
+      "selection_basis": "all-work partition by original broadcaster, story domain, jury format and cinema genre",
+      "selected_vs_tombstone": {
+        "board_overlap": 2,
+        "max_group_overlap": 1
+      }
+    }
+  ],
+  "holds": [
+    {
+      "slot": "arta_cultura/usor/02",
+      "ref": "v43r-arta-usor-02",
+      "reason": "The deterministic survivor exposed three homogeneous node-type shelves; no equally exact all-work replacement cleared the inventory gate."
+    },
+    {
+      "slot": "arta_cultura/usor/03",
+      "ref": "v43r-arta-usor-03",
+      "reason": "Three exact holiday predicates and 12 of 16 tiles reskinned cx_viata_de_roman_315."
+    },
+    {
+      "slot": "arta_cultura/usor/04",
+      "ref": "v43r-arta-usor-04",
+      "reason": "The usable oral and static-image groups were moved into the surviving easy board; the remaining slot lacked four fresh exact predicates."
+    },
+    {
+      "slot": "arta_cultura/greu/01",
+      "ref": "v43r-arta-greu-01",
+      "reason": "Fresh raw review found a fatal partition cross-fit: Maitreyi also satisfies the eponymous-title group; Domnișoara Pogany is not cleanly a fictional character, and Patul lui Procust has multiple first-person perspectives."
+    },
+    {
+      "slot": "arta_cultura/greu/03",
+      "ref": "v43r-arta-greu-03",
+      "reason": "Textile and UNESCO reconstructions remained inventory near-duplicates or created oral/textile cross-fits."
+    },
+    {
+      "slot": "arta_cultura/greu/04",
+      "ref": "v43r-arta-greu-04",
+      "reason": "The Brâncuși group was already served exactly, the Cannes group was a near-duplicate, and several nodes exceeded the projected use ceiling."
+    },
+    {
+      "slot": "film_tv/usor/01",
+      "ref": "v43r-film-usor-01",
+      "reason": "Only generic film-room, set, post-production and profession taxonomies survived; that would be B6 filler rather than a cultural board."
+    },
+    {
+      "slot": "film_tv/usor/02",
+      "ref": "v43r-film-usor-02",
+      "reason": "Youth-story variants retained a recognition inversion or semantic cross-fit; broadcaster alternatives collapsed into flat taxonomy."
+    },
+    {
+      "slot": "film_tv/usor/03",
+      "ref": "v43r-film-usor-03",
+      "reason": "The workflow and screen-language bundles did not share one strict relation; the exact profession quartet alone could not support a full board."
+    },
+    {
+      "slot": "societate/usor/01",
+      "ref": "v43r-societate-usor-01",
+      "reason": "Fresh raw review rejected the non-homogeneous school sequence, the care-or-medicines bundle, the checkout object/tool mix and the insufficiently exact current-document predicate."
+    },
+    {
+      "slot": "societate/usor/02",
+      "ref": "v43r-societate-usor-02",
+      "reason": "Rail and block reconstructions were full-inventory near-duplicates; the remaining marketplace group would expose a visible organization bucket."
+    },
+    {
+      "slot": "societate/usor/03",
+      "ref": "v43r-societate-usor-03",
+      "reason": "School-family, work-change and short-holiday bundles remained association lists rather than one-relation predicates."
+    },
+    {
+      "slot": "societate/usor/04",
+      "ref": "v43r-societate-usor-04",
+      "reason": "The symbol shelf lacks a fourth exact node, while the civic and emergency repairs would reuse three members of served groups."
+    },
+    {
+      "slot": "societate/greu/01",
+      "ref": "v43r-societate-greu-01",
+      "reason": "The executive quartet was usable, but rights, local-administration and integration bundles could not all satisfy strict B1 and novelty."
+    },
+    {
+      "slot": "societate/greu/02",
+      "ref": "v43r-societate-greu-02",
+      "reason": "All four provisional groups were dissolved as mobility, risk, labor-crisis or random-public-program association bundles."
+    },
+    {
+      "slot": "societate/greu/03",
+      "ref": "v43r-societate-greu-03",
+      "reason": "Auto obligations and housing costs were exact, but two further hard-tier groups were unavailable without loose association or an easy-tier board."
+    },
+    {
+      "slot": "societate/greu/04",
+      "ref": "v43r-societate-greu-04",
+      "reason": "Legislative, law-enforcement, money and electoral shelves each mixed unlike relations; the slot was rebuilt and then held."
+    }
+  ],
+  "census": {
+    "tombstoned_dossiers": 41,
+    "tombstoned_groups": 164,
+    "rejected_group_exact_or_3_of_4_matches": 0,
+    "worst_rejected_group_overlap": 2,
+    "rejected_board_overlap_at_or_above_8_of_16": 0,
+    "worst_rejected_board_overlap": 3,
+    "batch_group_exact_or_3_of_4_matches": 0,
+    "batch_board_overlap_at_or_above_8_of_16": 0,
+    "candidate_node_use_max": 1,
+    "all_268_demoted_quads_and_near_quads": "hard-banned by the integration preflight",
+    "full_inventory_duplicate_or_near_duplicate_failures": 0,
+    "board_type_shortcut_warnings": 0,
+    "vague_predicate_wording_failures": 0
+  },
+  "strict_preflight": {
+    "command": "PYTHONPATH=. /home/dobo/work/romania_scraper/.venv/bin/python /tmp/preflight_v43_conexiuni.py /home/dobo/work/_worktrees/cat_de_roman_esti/content__v43-release-board-rebuild /home/dobo/work/_worktrees/cat_de_roman_esti/content__v43-cultural-shelves/content_candidates/v43-cultural-shelves/replacements",
+    "result": {
+      "candidates": 3,
+      "candidates_with_fail": 0,
+      "structural_errors": 0,
+      "warnings": 0
+    }
+  },
+  "hold_note": "Seventeen requested slots are intentionally unfilled. Passing lint did not override predicate honesty, unique partition, recognition or difficulty concerns, and this proposal is not an approval verdict."
+}
