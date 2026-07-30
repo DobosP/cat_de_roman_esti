@@ -191,7 +191,7 @@ BOARDS = (
     ),
     b(
         "sport_normal_03", "sport", "normal", 0,
-        g("Foști căpitani ai României",
+        g("Au purtat banderola României",
           "Fiecare a purtat banderola echipei naționale de fotbal.",
           "Gică Popescu", "Cristian Chivu", "Nicolae Stanciu", "Adrian Mutu"),
         g("Sportive cu rachetă sau paletă",
@@ -201,7 +201,7 @@ BOARDS = (
           "Fiecare s-a clasat între primele opt la proba sau întrecerea sa olimpică din 2024.",
           "Ana Bărbosu", "Mihaela Cambei", "Sabrina Maneca-Voinea",
           "David Popovici"),
-        g("Antrenori ai loturilor naționale românești",
+        g("Au condus loturi naționale de seniori ale României",
           "Fiecare a condus un lot național de seniori al României.",
           "Octavian Bellu", "Emeric Ienei", "Edward Iordănescu",
           "Anghel Iordănescu"),
