@@ -1,0 +1,305 @@
+{
+ "id": "cx_viata_de_roman_237",
+ "game": "conexiuni",
+ "category": "viata_de_roman",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "c31e7c247c27cb94881bc8f6967133721cad3ab033f447a6dc55e558b683154e",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Cozonac, Curechi, Varză"
+  },
+  {
+   "check": "red_herring_budget",
+   "level": "FAIL",
+   "detail": "5 contested tiles (budget <4): Mirosul de cozonac, Mămăliga bunicii, Mămăligă, Sarmale, Sarmalele de Crăciun"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Mâncare în forma ei de dicționar\" <-> \"Aceeași mâncare, dar cu familie atașată\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Nu e fel principal, e capcană de cuvânt\" mixes node_types 3+1: Masa Tăcerii[work], Varză[concept], Coada[concept], Port[concept]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Mâncare în forma ei de dicționar\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_personalitati_213)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Aceeași mâncare, dar cu familie atașată\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_201, cx_viata_de_roman_086, cx_viata_de_roman_234)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Regionalisme care ajung în oală\" reuses an inventory/selected quad (also in: cx_gastronomie_106, cx_gastronomie_171, cx_geografie_110, cx_limba_036, cx_limba_187, cx_meme_net_201, cx_personalitati_213, cx_stiinta_229)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_gastronomie_106 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Cozonac (11), Mici (16), Sarmale (14), Barabulă (10), Cucuruz (9), Curechi (10), Păpușoi (9), Masa Tăcerii (20), Borcanele de zacuscă (11)"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "Mămăligă": "national-salience concept (0.97) with generic related_to edge to Moldova",
+  "Sarmale": "linked to 2 regions (Moldova, Transilvania)",
+  "Barabulă": "linked to 2 regions (Bucovina, Moldova)",
+  "Cucuruz": "linked to 2 regions (Banat, Transilvania)"
+ },
+ "fairness": {
+  "unfair_tiles": [
+   "Cozonac",
+   "Curechi",
+   "Varză"
+  ],
+  "contested_tiles": [
+   "Mirosul de cozonac",
+   "Mămăliga bunicii",
+   "Mămăligă",
+   "Sarmale",
+   "Sarmalele de Crăciun"
+  ],
+  "engine_unfair_raw": 3
+ },
+ "groups": [
+  {
+   "label": "Mâncare în forma ei de dicționar",
+   "members": [
+    {
+     "id": "n_gas_sarmale",
+     "label": "Sarmale",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9793,
+     "degree": 23,
+     "incoming_degree": 23,
+     "description": "Foi de varză sau viță umplute cu carne și orez, reper al meselor românești de sărbătoare."
+    },
+    {
+     "id": "n_gas_mici",
+     "label": "Mici",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9765,
+     "degree": 20,
+     "incoming_degree": 20,
+     "description": "Mititei fripți pe grătar, asociați popular cu muștar, pâine și ieșiri de 1 Mai."
+    },
+    {
+     "id": "n_gas_mamaliga",
+     "label": "Mămăligă",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9666,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Preparat din mălai, servit cu brânză, smântână, sarmale, pește sau tocănițe."
+    },
+    {
+     "id": "n_gas_cozonac",
+     "label": "Cozonac",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9737,
+     "degree": 22,
+     "incoming_degree": 22,
+     "description": "Aluat dulce cu nucă, cacao sau rahat, nelipsit de la Crăciun și Paște."
+    }
+   ]
+  },
+  {
+   "label": "Aceeași mâncare, dar cu familie atașată",
+   "members": [
+    {
+     "id": "n_vdr_sarmale_craciun",
+     "label": "Sarmalele de Crăciun",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9603,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Fel de sărbătoare cu varză, carne și oală mare, nelipsit pe multe mese românești."
+    },
+    {
+     "id": "n_vdr_mamaliga_bunicii",
+     "label": "Mămăliga bunicii",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.8535,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Mămăligă fierbinte făcută în casă, simbol al mesei simple de la bunici."
+    },
+    {
+     "id": "n_vdr_miros_de_cozonac",
+     "label": "Mirosul de cozonac",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.7473,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Aroma de cozonac copt care anunță masa de sărbătoare."
+    },
+    {
+     "id": "n_vdr_borcane_zacusca",
+     "label": "Borcanele de zacuscă",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.7642,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Conserve de toamnă puse la borcan pentru iarnă, nelipsite din multe cămări."
+    }
+   ]
+  },
+  {
+   "label": "Regionalisme care ajung în oală",
+   "members": [
+    {
+     "id": "n_lbax_regionalism_barabula",
+     "label": "Barabulă",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.1804,
+     "degree": 5,
+     "incoming_degree": 3,
+     "description": "Regionalism pentru cartof, asociat mai ales cu Moldova și Bucovina."
+    },
+    {
+     "id": "n_lbax_regionalism_cucuruz",
+     "label": "Cucuruz",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.1935,
+     "degree": 5,
+     "incoming_degree": 3,
+     "description": "Regionalism pentru porumb, răspândit în Transilvania și Banat."
+    },
+    {
+     "id": "n_lbax_regionalism_curechi",
+     "label": "Curechi",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.19,
+     "degree": 5,
+     "incoming_degree": 4,
+     "description": "Regionalism pentru varză, folosit mai ales în Moldova și în unele zone ardelenești."
+    },
+    {
+     "id": "n_lbax_regionalism_papusoi",
+     "label": "Păpușoi",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.2041,
+     "degree": 5,
+     "incoming_degree": 4,
+     "description": "Regionalism moldovenesc pentru porumb; apare des în vorbirea populară și în literatură."
+    }
+   ]
+  },
+  {
+   "label": "Nu e fel principal, e capcană de cuvânt",
+   "members": [
+    {
+     "id": "n_masa_tacerii",
+     "label": "Masa Tăcerii",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.3478,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Sculptura de Brancusi din Ansamblul de la Targu Jiu."
+    },
+    {
+     "id": "n_v2lim_varza",
+     "label": "Varză",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.7009,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Legumă cu frunze suprapuse, numită regional și curechi."
+    },
+    {
+     "id": "n_v3via_coada",
+     "label": "Coada",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.6248,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Așteptarea la rând pentru acte, plăți sau servicii."
+    },
+    {
+     "id": "n_v2soc_port",
+     "label": "Port",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.3664,
+     "degree": 6,
+     "incoming_degree": 7,
+     "description": "Loc amenajat pentru acostarea navelor și schimbul de mărfuri."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Sarmale",
+   "a_group": "Mâncare în forma ei de dicționar",
+   "b": "Varză",
+   "b_group": "Nu e fel principal, e capcană de cuvânt",
+   "strength": 0.95
+  },
+  {
+   "a": "Sarmale",
+   "a_group": "Mâncare în forma ei de dicționar",
+   "b": "Sarmalele de Crăciun",
+   "b_group": "Aceeași mâncare, dar cu familie atașată",
+   "strength": 0.94
+  },
+  {
+   "a": "Cozonac",
+   "a_group": "Mâncare în forma ei de dicționar",
+   "b": "Mirosul de cozonac",
+   "b_group": "Aceeași mâncare, dar cu familie atașată",
+   "strength": 0.9
+  },
+  {
+   "a": "Curechi",
+   "a_group": "Regionalisme care ajung în oală",
+   "b": "Varză",
+   "b_group": "Nu e fel principal, e capcană de cuvânt",
+   "strength": 0.9
+  },
+  {
+   "a": "Mămăligă",
+   "a_group": "Mâncare în forma ei de dicționar",
+   "b": "Mămăliga bunicii",
+   "b_group": "Aceeași mâncare, dar cu familie atașată",
+   "strength": 0.9
+  },
+  {
+   "a": "Varză",
+   "a_group": "Nu e fel principal, e capcană de cuvânt",
+   "b": "Sarmalele de Crăciun",
+   "b_group": "Aceeași mâncare, dar cu familie atașată",
+   "strength": 0.82
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:e57eda5b28a77f345351d6dd2f4894c72b4fc82b66430a406623e9b045239b1a"
+}

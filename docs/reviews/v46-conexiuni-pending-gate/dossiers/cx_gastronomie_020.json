@@ -1,0 +1,263 @@
+{
+ "id": "cx_gastronomie_020",
+ "game": "conexiuni",
+ "category": "gastronomie",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "5296b447e93d086f25c25a6651c0ff85e8578fa321006c00d1870d0df080b088",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Cimbru, Drob de miel, Leuștean"
+  },
+  {
+   "check": "red_herring_budget",
+   "level": "FAIL",
+   "detail": "5 contested tiles (budget <4): Ardei umpluți, Pâine de casă, Sarmale, Vin fiert, Țuică"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Condimente mici, efect mare\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_104)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Feluri cu umplutură\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_105, cx_gastronomie_174)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Murături (14), Muștar (9), Sarmale (14), Zacuscă (11)"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "Pălincă": "linked to 2 regions (Maramureș, Transilvania)",
+  "Sarmale": "linked to 2 regions (Moldova, Transilvania)",
+  "Țuică": "national-salience concept (0.83) with generic related_to edge to Moldova"
+ },
+ "fairness": {
+  "unfair_tiles": [
+   "Cimbru",
+   "Drob de miel",
+   "Leuștean"
+  ],
+  "contested_tiles": [
+   "Ardei umpluți",
+   "Pâine de casă",
+   "Sarmale",
+   "Vin fiert",
+   "Țuică"
+  ],
+  "engine_unfair_raw": 3
+ },
+ "groups": [
+  {
+   "label": "Toamnă de cramă",
+   "members": [
+    {
+     "id": "n_gas_must_pastrama",
+     "label": "Must și pastramă",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.6756,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Pereche de toamnă: must proaspăt și pastramă friptă, mai ales la crame și târguri."
+    },
+    {
+     "id": "n_gas_vin_fiert",
+     "label": "Vin fiert",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.5385,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Băutură caldă cu scorțișoară și mirodenii, prezentă la târgurile de iarnă."
+    },
+    {
+     "id": "n_gas_muraturi",
+     "label": "Murături",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.8914,
+     "degree": 23,
+     "incoming_degree": 23,
+     "description": "Legume conservate în saramură sau oțet, puse lângă fripturi, fasole sau șaorma."
+    },
+    {
+     "id": "n_gas_zacusca",
+     "label": "Zacuscă",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9695,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Pastă de legume coapte, pusă la borcan pentru iarnă și întinsă pe pâine."
+    }
+   ]
+  },
+  {
+   "label": "Aperitiv cu tărie",
+   "members": [
+    {
+     "id": "n_gas_tuica",
+     "label": "Țuică",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.8324,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Distilat tradițional din prune, servit ca aperitiv în multe gospodării."
+    },
+    {
+     "id": "n_gas_palinca",
+     "label": "Pălincă",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.3694,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Distilat tare din fructe, emblematic mai ales în Transilvania și Maramureș."
+    },
+    {
+     "id": "n_gas_slanina_ceapa",
+     "label": "Slănină cu ceapă",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.8605,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Gustare rustică din slănină, ceapă și pâine, adesea lângă țuică."
+    },
+    {
+     "id": "n_gas_paine_de_casa",
+     "label": "Pâine de casă",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.8422,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Pâine coaptă în gospodărie, suport perfect pentru zacuscă, slănină sau ciorbe."
+    }
+   ]
+  },
+  {
+   "label": "Condimente mici, efect mare",
+   "members": [
+    {
+     "id": "n_gas_mustar",
+     "label": "Muștar",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.8317,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Sos iute-acrișor aproape obligatoriu lângă mici, cârnați sau grătare."
+    },
+    {
+     "id": "n_gas_mujdei",
+     "label": "Mujdei",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.7993,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Sos de usturoi zdrobit, nelipsit lângă pește, cartofi, fripturi sau ciorbă de burtă."
+    },
+    {
+     "id": "n_gas_leustean",
+     "label": "Leuștean",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.59,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Verdeață aromatică definitorie pentru multe ciorbe românești."
+    },
+    {
+     "id": "n_gas_cimbru",
+     "label": "Cimbru",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.3982,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Plantă aromatică folosită la sarmale, fasole, cârnați și mâncăruri de iarnă."
+    }
+   ]
+  },
+  {
+   "label": "Feluri cu umplutură",
+   "members": [
+    {
+     "id": "n_gas_sarmale",
+     "label": "Sarmale",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9793,
+     "degree": 23,
+     "incoming_degree": 23,
+     "description": "Foi de varză sau viță umplute cu carne și orez, reper al meselor românești de sărbătoare."
+    },
+    {
+     "id": "n_gas_ardei_umpluti",
+     "label": "Ardei umpluți",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.5882,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Ardei umpluți cu carne și orez, înrudiți culinar cu sarmalele."
+    },
+    {
+     "id": "n_gas_drob_miel",
+     "label": "Drob de miel",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.3988,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Preparat pascal din organe de miel, verdețuri și ouă, copt în tavă."
+    },
+    {
+     "id": "n_gas_placinte_poale_brau",
+     "label": "Poale-n brâu",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.6158,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Plăcinte moldovenești cu brânză dulce, cunoscute și ca brânzoaice."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Pâine de casă",
+   "a_group": "Aperitiv cu tărie",
+   "b": "Zacuscă",
+   "b_group": "Toamnă de cramă",
+   "strength": 0.88
+  },
+  {
+   "a": "Murături",
+   "a_group": "Toamnă de cramă",
+   "b": "Sarmale",
+   "b_group": "Feluri cu umplutură",
+   "strength": 0.78
+  },
+  {
+   "a": "Cimbru",
+   "a_group": "Condimente mici, efect mare",
+   "b": "Sarmale",
+   "b_group": "Feluri cu umplutură",
+   "strength": 0.62
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:4bac3efece71e83047d2ce07a31854a7f299d0257c8c4446688ddf266bb3e1d3"
+}

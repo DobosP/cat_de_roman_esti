@@ -1,0 +1,231 @@
+{
+ "id": "cx_societate_219",
+ "game": "conexiuni",
+ "category": "societate",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "a9e9102e727ce4abe8d089981d1fc757955932bebbbccfa02111bd02c77a4ee5",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Uniri și locuri de manual\" mixes node_types 3+1: Mică Unire 1859[event], Marea Unire 1918[event], Unirea Principatelor Române[event], Alba Iulia[place]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"1994, când toți știau schema\" mixes node_types 3+1: Cupa Mondială 1994[event], România - Argentina 1994[event], Columbia - România 1994[event], Generația de Aur[concept]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"1986, Sevilla la televizor\" reuses an inventory/selected quad (also in: cx_sport_281)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"1994, când toți știau schema\" reuses an inventory/selected quad (also in: cx_geografie_179, cx_sport_071, cx_sport_156, cx_sport_222, cx_sport_281)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_sport_281 (9), cx_sport_156 (8), cx_sport_222 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Coandă-1910 (13), Marea Unire 1918 (14), Mică Unire 1859 (10), Columbia - România 1994 (9), Finala de la Sevilla (14), Generația de Aur (10), Helmut Duckadam (9), Primul 10 perfect (10), România - Argentina 1994 (9), Steaua 1986 (11), Cupa Mondială 1994 (9)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 0
+ },
+ "groups": [
+  {
+   "label": "Uniri și locuri de manual",
+   "members": [
+    {
+     "id": "n_mica_unire_1859",
+     "label": "Mică Unire 1859",
+     "node_type": "event",
+     "category": "istorie",
+     "salience": 0.4263,
+     "degree": 14,
+     "incoming_degree": 11,
+     "description": "Unirea Moldovei cu Tara Romaneasca in 1859."
+    },
+    {
+     "id": "n_marea_unire_1918",
+     "label": "Marea Unire 1918",
+     "node_type": "event",
+     "category": "istorie",
+     "salience": 0.6014,
+     "degree": 28,
+     "incoming_degree": 29,
+     "description": "Unirea Transilvaniei, Basarabiei si Bucovinei cu Romania."
+    },
+    {
+     "id": "n_unirea_principatelor",
+     "label": "Unirea Principatelor Române",
+     "node_type": "event",
+     "category": "societate",
+     "salience": 0.3778,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Procesul de formare a statului roman modern prin unirea Moldovei si Tarii Romanesti, baza statalitatii actuale."
+    },
+    {
+     "id": "n_alba_iulia",
+     "label": "Alba Iulia",
+     "node_type": "place",
+     "category": "istorie",
+     "salience": 0.3892,
+     "degree": 10,
+     "incoming_degree": 11,
+     "description": "Oras al marilor uniri (1600, 1918)."
+    }
+   ]
+  },
+  {
+   "label": "1986, Sevilla la televizor",
+   "members": [
+    {
+     "id": "n_spt_steaua_1986",
+     "label": "Steaua 1986",
+     "node_type": "org",
+     "category": "sport",
+     "salience": 0.9188,
+     "degree": 15,
+     "incoming_degree": 15,
+     "description": "Echipa Steaua București care a câștigat Cupa Campionilor Europeni în 1986."
+    },
+    {
+     "id": "n_spt_finala_sevilla_1986",
+     "label": "Finala de la Sevilla",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.9378,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Finala Steaua - Barcelona din 1986, decisă la loviturile de departajare."
+    },
+    {
+     "id": "n_spt_cupa_campionilor_1986",
+     "label": "Cupa Campionilor 1986",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.8886,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Trofeul european cucerit de Steaua București după finala de la Sevilla."
+    },
+    {
+     "id": "n_spt_helmut_duckadam",
+     "label": "Helmut Duckadam",
+     "node_type": "person",
+     "category": "sport",
+     "salience": 0.9224,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Portarul Stelei care a apărat patru penalty-uri în finala de la Sevilla."
+    }
+   ]
+  },
+  {
+   "label": "1994, când toți știau schema",
+   "members": [
+    {
+     "id": "n_spt_world_cup_1994",
+     "label": "Cupa Mondială 1994",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.9449,
+     "degree": 14,
+     "incoming_degree": 14,
+     "description": "Turneul final din SUA unde România a ajuns în sferturi, moment de vârf al fotbalului românesc."
+    },
+    {
+     "id": "n_spt_romania_argentina_1994",
+     "label": "România - Argentina 1994",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.9456,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Victoria cu 3-2 din optimile Mondialului, unul dintre cele mai iubite meciuri ale României."
+    },
+    {
+     "id": "n_spt_columbia_romania_1994",
+     "label": "Columbia - România 1994",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.7754,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Meciul câștigat cu 3-1, celebru pentru golul spectaculos al lui Gheorghe Hagi."
+    },
+    {
+     "id": "n_spt_generatia_de_aur",
+     "label": "Generația de Aur",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.9638,
+     "degree": 15,
+     "incoming_degree": 17,
+     "description": "Nucleul naționalei de fotbal care a dus România în sferturile Mondialului din 1994."
+    }
+   ]
+  },
+  {
+   "label": "Numere devenite legendă",
+   "members": [
+    {
+     "id": "n_spt_nadia_zecele_perfect",
+     "label": "Primul 10 perfect",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.9484,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Nota 10 obținută de Nadia Comăneci la Montreal 1976, premieră olimpică în gimnastică."
+    },
+    {
+     "id": "n_spt_cinci_inele",
+     "label": "Cinci inele olimpice",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.575,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Simbolul Jocurilor Olimpice, comun legendelor Nadia, Patzaichin și Popovici."
+    },
+    {
+     "id": "n_spt_record_100m_liber_2022",
+     "label": "Recordul la 100 m liber din 2022",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.6218,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Performanța de 46,86 s cu care David Popovici a stabilit recordul mondial la Roma în 2022; recordul a fost depășit în 2024."
+    },
+    {
+     "id": "n_coanda_1910",
+     "label": "Coandă-1910",
+     "node_type": "work",
+     "category": "stiinta",
+     "salience": 0.2203,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Aeroplan experimental prezentat de Henri Coanda la Salonul Aeronautic de la Paris in 1910."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:8f15c16b90c8d467a899dd9176421f6b8146ca2647448d741bcb293f8948419c"
+}

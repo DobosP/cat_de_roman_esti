@@ -1,0 +1,309 @@
+{
+ "id": "cx_literatura_197",
+ "game": "conexiuni",
+ "category": "literatura",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "dc9a0a4f49be12cb9087c720f6c83ae12df2854935010287adb4b0c530490b95",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Caragiale înainte să bată gongul\" <-> \"Teatru, dar din clădire și meserie\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Teatru, dar din clădire și meserie\" repeats member(s): Teatru"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Teatru, dar din clădire și meserie\" mixes node_types 3+1: Teatrul românesc[concept], Teatrul Bulandra[org], Teatru[concept], Scenă[concept]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Caragiale înainte să bată gongul\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_159, cx_limba_121, cx_literatura_266)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Teatru, dar din clădire și meserie\" reuses an inventory/selected quad (also in: cx_arta_cultura_159)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Fețe de comedie românească pe ecran\" reuses an inventory/selected quad (also in: cx_film_tv_014)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Teatrul românesc (10), I.L. Caragiale (23), O scrisoare pierdută (17), Teatrul Bulandra (16)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [
+   "Dramaturgie"
+  ],
+  "engine_unfair_raw": 0
+ },
+ "groups": [
+  {
+   "label": "Caragiale înainte să bată gongul",
+   "members": [
+    {
+     "id": "n_ion_luca_caragiale",
+     "label": "I.L. Caragiale",
+     "node_type": "person",
+     "category": "literatura",
+     "salience": 0.5625,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Dramaturg roman, maestru al comediei, membru al Junimii."
+    },
+    {
+     "id": "n_v2lit_dramaturgie",
+     "label": "Dramaturgie",
+     "node_type": "concept",
+     "category": "literatura",
+     "salience": 0.6086,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Literatură scrisă pentru teatru: comedii, drame și piese."
+    },
+    {
+     "id": "n_o_scrisoare_pierduta",
+     "label": "O scrisoare pierdută",
+     "node_type": "work",
+     "category": "literatura",
+     "salience": 0.6344,
+     "degree": 15,
+     "incoming_degree": 15,
+     "description": "Comedie de I.L. Caragiale (1884), satira a vietii politice romanesti."
+    },
+    {
+     "id": "n_litx_zoe_trahanache",
+     "label": "Zoe Trahanache",
+     "node_type": "person",
+     "category": "literatura",
+     "salience": 0.239,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Personaj central din O scrisoare pierdută, motor al intrigii scrisorii compromițătoare."
+    }
+   ]
+  },
+  {
+   "label": "Teatru, dar din clădire și meserie",
+   "members": [
+    {
+     "id": "n_artx_teatru_romanesc",
+     "label": "Teatrul românesc",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.6134,
+     "degree": 23,
+     "incoming_degree": 23,
+     "description": "Tradiția scenică românească, de la comedia clasică la regia modernă și instituțiile de repertoriu."
+    },
+    {
+     "id": "n_teatrul_bulandra",
+     "label": "Teatrul Bulandra",
+     "node_type": "org",
+     "category": "arta_cultura",
+     "salience": 0.4233,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Teatru bucurestean fondat in 1947 ca Teatrul Municipal, asociat cu Lucia Sturdza-Bulandra si Liviu Ciulei."
+    },
+    {
+     "id": "n_v2art_teatru",
+     "label": "Teatru",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.8654,
+     "degree": 15,
+     "incoming_degree": 17,
+     "description": "Artă scenică bazată pe joc actoricesc, regie și spectacol public."
+    },
+    {
+     "id": "n_v4art_scena",
+     "label": "Scenă",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.9624,
+     "degree": 15,
+     "incoming_degree": 15,
+     "description": "Spațiu de joc pentru teatru, muzică, dans sau alte reprezentații."
+    }
+   ]
+  },
+  {
+   "label": "Fețe de comedie românească pe ecran",
+   "members": [
+    {
+     "id": "n_ftv_amza_pellea",
+     "label": "Amza Pellea",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.871,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Actor român legendar, creatorul personajului Nea Mărin pe ecran."
+    },
+    {
+     "id": "n_ftv_dem_radulescu",
+     "label": "Dem Rădulescu",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.8647,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Actor român de comedie, figură centrală în filmele Brigada Diverse."
+    },
+    {
+     "id": "n_ftv_toma_caragiu",
+     "label": "Toma Caragiu",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.9315,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Actor român de teatru și film, celebru pentru comedie și roluri dramatice."
+    },
+    {
+     "id": "n_ftv_draga_olteanu_matei",
+     "label": "Draga Olteanu Matei",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.7438,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Actriță română iubită pentru roluri de comedie și personaje populare."
+    }
+   ]
+  },
+  {
+   "label": "Termeni de film care se dau drept literatură",
+   "members": [
+    {
+     "id": "n_v3fil_scenariu",
+     "label": "Scenariu",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.4479,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Textul care descrie acțiunea, replicile și scenele unui film."
+    },
+    {
+     "id": "n_v4fil_rol",
+     "label": "rol",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.7522,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Personaj interpretat de un actor într-un film, serial sau spectacol."
+    },
+    {
+     "id": "n_v3fil_episod",
+     "label": "Episod",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.4209,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Parte numerotată dintr-un serial sau dintr-o emisiune."
+    },
+    {
+     "id": "n_v4fil_decor",
+     "label": "decor",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.388,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Ansamblu de obiecte și spații amenajate pentru o scenă filmată."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Teatrul românesc",
+   "a_group": "Teatru, dar din clădire și meserie",
+   "b": "O scrisoare pierdută",
+   "b_group": "Caragiale înainte să bată gongul",
+   "strength": 0.9
+  },
+  {
+   "a": "Teatrul românesc",
+   "a_group": "Teatru, dar din clădire și meserie",
+   "b": "I.L. Caragiale",
+   "b_group": "Caragiale înainte să bată gongul",
+   "strength": 0.86
+  },
+  {
+   "a": "Toma Caragiu",
+   "a_group": "Fețe de comedie românească pe ecran",
+   "b": "Teatrul Bulandra",
+   "b_group": "Teatru, dar din clădire și meserie",
+   "strength": 0.82
+  },
+  {
+   "a": "Dramaturgie",
+   "a_group": "Caragiale înainte să bată gongul",
+   "b": "Scenă",
+   "b_group": "Teatru, dar din clădire și meserie",
+   "strength": 0.78
+  },
+  {
+   "a": "Teatru",
+   "a_group": "Teatru, dar din clădire și meserie",
+   "b": "Dramaturgie",
+   "b_group": "Caragiale înainte să bată gongul",
+   "strength": 0.78
+  },
+  {
+   "a": "Teatrul românesc",
+   "a_group": "Teatru, dar din clădire și meserie",
+   "b": "Toma Caragiu",
+   "b_group": "Fețe de comedie românească pe ecran",
+   "strength": 0.78
+  },
+  {
+   "a": "O scrisoare pierdută",
+   "a_group": "Caragiale înainte să bată gongul",
+   "b": "Scenă",
+   "b_group": "Teatru, dar din clădire și meserie",
+   "strength": 0.76
+  },
+  {
+   "a": "Teatrul românesc",
+   "a_group": "Teatru, dar din clădire și meserie",
+   "b": "Dem Rădulescu",
+   "b_group": "Fețe de comedie românească pe ecran",
+   "strength": 0.72
+  },
+  {
+   "a": "Toma Caragiu",
+   "a_group": "Fețe de comedie românească pe ecran",
+   "b": "O scrisoare pierdută",
+   "b_group": "Caragiale înainte să bată gongul",
+   "strength": 0.7
+  },
+  {
+   "a": "Teatrul românesc",
+   "a_group": "Teatru, dar din clădire și meserie",
+   "b": "Draga Olteanu Matei",
+   "b_group": "Fețe de comedie românească pe ecran",
+   "strength": 0.68
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:49ff83d58f213b62ec286e7f90f99f7ec8df74c6fc92d85c66e6d838e1b255ca"
+}

@@ -1,0 +1,248 @@
+{
+ "id": "cx_stiinta_230",
+ "game": "conexiuni",
+ "category": "stiinta",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "87b3ffd29f80c0678aee35506053d020c43b14c09e7ccb20f13b79ae44b94ce2",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Apă"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Căldură fără repartitor\" repeats member(s): căldură"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Iarna la bloc, capitolul aplicații\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_233)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Fluide care explică de ce zboară ceva\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_stiinta_162, cx_stiinta_285)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Fluide care explică de ce stă lumea la masă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_172)"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "Țuică": "national-salience concept (0.83) with generic related_to edge to Moldova"
+ },
+ "fairness": {
+  "unfair_tiles": [
+   "Apă"
+  ],
+  "contested_tiles": [
+   "Întreținerea"
+  ],
+  "engine_unfair_raw": 1
+ },
+ "groups": [
+  {
+   "label": "Căldură fără repartitor",
+   "members": [
+    {
+     "id": "n_v4sti_foc",
+     "label": "foc",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.8225,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Ardere vizibilă care produce căldură și lumină."
+    },
+    {
+     "id": "n_v4sti_caldura",
+     "label": "căldură",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.7248,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Transfer de energie termică între corpuri cu temperaturi diferite."
+    },
+    {
+     "id": "n_v4sti_temperatura",
+     "label": "temperatură",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.6404,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Mărime fizică ce indică starea termică a unui corp sau mediu."
+    },
+    {
+     "id": "n_v3sti_energie",
+     "label": "Energie",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.7832,
+     "degree": 6,
+     "incoming_degree": 7,
+     "description": "Mărime fizică ce exprimă capacitatea de a produce lucru sau schimbare."
+    }
+   ]
+  },
+  {
+   "label": "Iarna la bloc, capitolul aplicații",
+   "members": [
+    {
+     "id": "n_v2via_frig_in_casa",
+     "label": "Frig în casă",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.4791,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Disconfort domestic produs de căldură insuficientă, curent sau izolație slabă."
+    },
+    {
+     "id": "n_vdr_calorifer_rece",
+     "label": "Caloriferul rece",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.4731,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Semn al iernilor de apartament când căldura vine greu sau deloc."
+    },
+    {
+     "id": "n_v3via_repartitoare",
+     "label": "Repartitoare",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.4527,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Dispozitive montate pe calorifere pentru estimarea consumului de căldură."
+    },
+    {
+     "id": "n_v3via_intretinerea",
+     "label": "Întreținerea",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.8802,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Cheltuiala lunară a apartamentului pentru bloc și utilități comune."
+    }
+   ]
+  },
+  {
+   "label": "Fluide care explică de ce zboară ceva",
+   "members": [
+    {
+     "id": "n_stix_mecanica_fluidelor",
+     "label": "Mecanica fluidelor",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.4269,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Ramură a fizicii care studiază lichidele și gazele, esențială pentru aerodinamică și efectul Coandă."
+    },
+    {
+     "id": "n_aerodinamica",
+     "label": "Aerodinamică",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.318,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Ramura a fizicii care studiaza miscarea aerului si fortele asupra corpurilor."
+    },
+    {
+     "id": "n_efectul_coanda",
+     "label": "Efectul Coandă",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.3868,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Fenomen aerodinamic prin care un jet de fluid adera la o suprafata vecina."
+    },
+    {
+     "id": "n_v4sti_gaz",
+     "label": "gaz",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.5601,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Stare a materiei fără formă și volum propriu."
+    }
+   ]
+  },
+  {
+   "label": "Fluide care explică de ce stă lumea la masă",
+   "members": [
+    {
+     "id": "n_gas_tuica",
+     "label": "Țuică",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.8324,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Distilat tradițional din prune, servit ca aperitiv în multe gospodării."
+    },
+    {
+     "id": "n_gas_vin_fiert",
+     "label": "Vin fiert",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.5385,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Băutură caldă cu scorțișoară și mirodenii, prezentă la târgurile de iarnă."
+    },
+    {
+     "id": "n_v3gas_bere",
+     "label": "Bere",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.6296,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Băutură alcoolică fermentată din malț, hamei, drojdie și apă."
+    },
+    {
+     "id": "n_v4gas_apa",
+     "label": "Apă",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.968,
+     "degree": 21,
+     "incoming_degree": 20,
+     "description": "Lichid de băut și ingredient de bază în gătit."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Mecanica fluidelor",
+   "a_group": "Fluide care explică de ce zboară ceva",
+   "b": "Apă",
+   "b_group": "Fluide care explică de ce stă lumea la masă",
+   "strength": 0.82
+  },
+  {
+   "a": "Întreținerea",
+   "a_group": "Iarna la bloc, capitolul aplicații",
+   "b": "Apă",
+   "b_group": "Fluide care explică de ce stă lumea la masă",
+   "strength": 0.72
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:a46e57446bc6db964be64adc82c6b70d0de549373c01fab8b8d419c38aba2ea1"
+}

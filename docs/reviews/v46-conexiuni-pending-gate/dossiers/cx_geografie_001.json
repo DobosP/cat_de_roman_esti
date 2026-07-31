@@ -1,0 +1,276 @@
+{
+ "id": "cx_geografie_001",
+ "game": "conexiuni",
+ "category": "geografie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "e85aeb7757c516e690b93fa74e2da85f1e73499f936b852e2acc90acdb588b07",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Banat, București, Iași, Muntenia, Mureș, Olt, Oltenia, Timișoara"
+  },
+  {
+   "check": "red_herring_budget",
+   "level": "WARN",
+   "detail": "3 contested tiles (budget <4): Munții Bucegi, Munții Făgăraș, Prut"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Munti\" reuses an inventory/selected quad (also in: cx_geografie_023, cx_geografie_175)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Orase mari\" reuses an inventory/selected quad (also in: cx_geografie_023, cx_societate_065, cx_societate_066, cx_societate_154, cx_societate_221, cx_societate_279)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Rauri\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_023, cx_geografie_028, cx_geografie_109, cx_geografie_175, cx_geografie_251, cx_geografie_253, cx_geografie_302, cx_istorie_032, cx_istorie_258)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Regiuni istorice\" reuses an inventory/selected quad (also in: cx_geografie_024)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_geografie_251 (12), cx_geografie_023 (11), cx_geografie_175 (10)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Banat (9), București (24), Carpați (9), Cluj-Napoca (19), Dobrogea (13), Iași (16), Olt (10), Oltenia (9), Prut (9), Timișoara (10)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Banat",
+   "București",
+   "Iași",
+   "Muntenia",
+   "Mureș",
+   "Olt",
+   "Oltenia",
+   "Timișoara"
+  ],
+  "contested_tiles": [
+   "Munții Bucegi",
+   "Munții Făgăraș",
+   "Prut"
+  ],
+  "engine_unfair_raw": 8
+ },
+ "groups": [
+  {
+   "label": "Munti",
+   "members": [
+    {
+     "id": "n_carpati",
+     "label": "Carpați",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.7269,
+     "degree": 41,
+     "incoming_degree": 46,
+     "description": "Lanț muntos care străbate România în formă de arc."
+    },
+    {
+     "id": "n_muntii_fagaras",
+     "label": "Munții Făgăraș",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.5091,
+     "degree": 14,
+     "incoming_degree": 15,
+     "description": "Cei mai înalți munți din Carpații Meridionali."
+    },
+    {
+     "id": "n_bucegi",
+     "label": "Munții Bucegi",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.3018,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Masiv montan din Carpații Meridionali, lângă Prahova."
+    },
+    {
+     "id": "n_muntii_apuseni",
+     "label": "Munții Apuseni",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.3706,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Grupa montana din Carpatii Occidentali, cunoscuta pentru pesteri si Tara Motilor."
+    }
+   ]
+  },
+  {
+   "label": "Orase mari",
+   "members": [
+    {
+     "id": "n_bucuresti",
+     "label": "București",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.6721,
+     "degree": 103,
+     "incoming_degree": 108,
+     "description": "Capitala României, în Muntenia."
+    },
+    {
+     "id": "n_iasi",
+     "label": "Iași",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.5139,
+     "degree": 20,
+     "incoming_degree": 19,
+     "description": "Oras din Moldova, fosta capitala a Principatului Moldovei si important centru cultural."
+    },
+    {
+     "id": "n_cluj_napoca",
+     "label": "Cluj-Napoca",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.4989,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Oraș important din Transilvania, pe Someș."
+    },
+    {
+     "id": "n_timisoara",
+     "label": "Timișoara",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.3406,
+     "degree": 8,
+     "incoming_degree": 7,
+     "description": "Oras principal din Banat, vestul Romaniei, unde a inceput Revolutia din 1989."
+    }
+   ]
+  },
+  {
+   "label": "Rauri",
+   "members": [
+    {
+     "id": "n_olt",
+     "label": "Olt",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.2416,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Râu care traversează Carpații și se varsă în Dunăre."
+    },
+    {
+     "id": "n_mures",
+     "label": "Mureș",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.2552,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Râu care străbate Transilvania spre vest."
+    },
+    {
+     "id": "n_siret",
+     "label": "Siret",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.1566,
+     "degree": 5,
+     "incoming_degree": 4,
+     "description": "Rau cu cel mai mare bazin hidrografic din Romania, afluent al Dunarii, curge prin Moldova."
+    },
+    {
+     "id": "n_prut",
+     "label": "Prut",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.2274,
+     "degree": 8,
+     "incoming_degree": 6,
+     "description": "Rau afluent al Dunarii, formeaza granita de est a Romaniei cu Republica Moldova."
+    }
+   ]
+  },
+  {
+   "label": "Regiuni istorice",
+   "members": [
+    {
+     "id": "n_dobrogea",
+     "label": "Dobrogea",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.4845,
+     "degree": 23,
+     "incoming_degree": 25,
+     "description": "Regiune între Dunăre și Marea Neagră."
+    },
+    {
+     "id": "n_muntenia",
+     "label": "Muntenia",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.403,
+     "degree": 14,
+     "incoming_degree": 15,
+     "description": "Regiune istorică din sudul României (Țara Românească)."
+    },
+    {
+     "id": "n_oltenia",
+     "label": "Oltenia",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.4197,
+     "degree": 23,
+     "incoming_degree": 23,
+     "description": "Regiune istorică din sud-vestul României."
+    },
+    {
+     "id": "n_banat",
+     "label": "Banat",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.3532,
+     "degree": 9,
+     "incoming_degree": 11,
+     "description": "Regiune istorică din vestul României."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Banat",
+   "a_group": "Regiuni istorice",
+   "b": "Timișoara",
+   "b_group": "Orase mari",
+   "strength": 0.82
+  },
+  {
+   "a": "București",
+   "a_group": "Orase mari",
+   "b": "Muntenia",
+   "b_group": "Regiuni istorice",
+   "strength": 0.75
+  },
+  {
+   "a": "Olt",
+   "a_group": "Rauri",
+   "b": "Oltenia",
+   "b_group": "Regiuni istorice",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:7e25e88ad796e9a94786d03a0ca4bb0a3f97a46eabe273488aafa30ba7919359"
+}

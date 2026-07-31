@@ -1,0 +1,267 @@
+{
+ "id": "cx_meme_net_203",
+ "game": "conexiuni",
+ "category": "meme_net",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "f2b70b9f031ccd83ec929e3f3737eefd2dadabbd70adb475cca944e6afa7cd50",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Acasă, Hot, Oriunde te vei afla"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Viralul cântat, nu postat\" mixes node_types 3+1: Dragostea din tei[work], Stereo Love[work], Mr. Saxobeat[work], Refren viral[concept]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Festival, mare, castel, sat\" mixes node_types 3+1: Untold[event], Neversea[event], Electric Castle[event], Bonțida[place]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Titluri care par prognoză sau GPS\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_limba_123, cx_literatura_131, cx_muzica_139, cx_muzica_205)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Viralul cântat, nu postat\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_136, cx_muzica_056, cx_muzica_138, cx_muzica_140, cx_muzica_274)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Festival, mare, castel, sat\" reuses an inventory/selected quad (also in: cx_meme_net_136)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_meme_net_136 (11), cx_muzica_138 (9), cx_muzica_056 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Bonțida (9), Dragostea din tei (11), Electric Castle (10), Hot (9), Neversea (11), Untold (10)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Acasă",
+   "Hot",
+   "Oriunde te vei afla"
+  ],
+  "contested_tiles": [],
+  "engine_unfair_raw": 3
+ },
+ "groups": [
+  {
+   "label": "Titluri care par prognoză sau GPS",
+   "members": [
+    {
+     "id": "n_muz_hot_inna",
+     "label": "Hot",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.6032,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Single Inna din 2008, piesă dance care a deschis succesul ei internațional."
+    },
+    {
+     "id": "n_muz_ploaia_cargo",
+     "label": "Ploaia",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.3862,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Baladă rock Cargo, una dintre cele mai cântate piese românești de chitară."
+    },
+    {
+     "id": "n_muz_acasa_smiley",
+     "label": "Acasă",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.4383,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Piesă Smiley din 2013, devenită refren pop românesc foarte recognoscibil."
+    },
+    {
+     "id": "n_muz_oriunde_te_vei_afla",
+     "label": "Oriunde te vei afla",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.2143,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Piesă La Familia, cunoscută pentru tonul sentimental din rapul românesc."
+    }
+   ]
+  },
+  {
+   "label": "Viralul cântat, nu postat",
+   "members": [
+    {
+     "id": "n_muz_dragostea_din_tei",
+     "label": "Dragostea din tei",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.9519,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Hit O-Zone din 2003, cunoscut global prin refrenul „nu mă, nu mă iei”."
+    },
+    {
+     "id": "n_muz_stereo_love",
+     "label": "Stereo Love",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.8204,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Hit dance produs de Edward Maya, lansat în 2009 și difuzat masiv internațional."
+    },
+    {
+     "id": "n_muz_mr_saxobeat",
+     "label": "Mr. Saxobeat",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.8197,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Single Alexandra Stan din 2010, hit dance internațional cu riff de saxofon."
+    },
+    {
+     "id": "n_muz_refren_viral",
+     "label": "Refren viral",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.7157,
+     "degree": 24,
+     "incoming_degree": 24,
+     "description": "Refren ușor de fredonat, memorat rapid și redistribuit masiv online sau la radio."
+    }
+   ]
+  },
+  {
+   "label": "Festival, mare, castel, sat",
+   "members": [
+    {
+     "id": "n_muz_untold",
+     "label": "Untold",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.8746,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Festival muzical major organizat la Cluj-Napoca, cu artiști EDM și pop internaționali."
+    },
+    {
+     "id": "n_muz_neversea",
+     "label": "Neversea",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.729,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Festival de muzică organizat la Constanța, asociat cu scena de pe litoral."
+    },
+    {
+     "id": "n_muz_electric_castle",
+     "label": "Electric Castle",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.6862,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Festival muzical organizat la Bonțida, lângă Castelul Bánffy."
+    },
+    {
+     "id": "n_muz_bontida",
+     "label": "Bonțida",
+     "node_type": "place",
+     "category": "muzica",
+     "salience": 0.2836,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Localitate din județul Cluj, cunoscută în pop-culture prin Electric Castle."
+    }
+   ]
+  },
+  {
+   "label": "Mecanici de TikTok fără să zici TikTok",
+   "members": [
+    {
+     "id": "n_v2mem_sunet_viral",
+     "label": "Sunet viral",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5319,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Fragment audio refolosit masiv în clipuri scurte și trenduri."
+    },
+    {
+     "id": "n_net_challenge_online",
+     "label": "Challenge online",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5103,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Provocare repetată de creatori și public, de obicei împinsă de algoritm."
+    },
+    {
+     "id": "n_v3mem_hashtag",
+     "label": "Hashtag",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5241,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Etichetă cu diez care grupează postări și trenduri pe platforme sociale."
+    },
+    {
+     "id": "n_v2mem_clip_scurt",
+     "label": "Clip scurt",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.8851,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Video foarte scurt, făcut pentru scroll rapid pe platforme sociale."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Acasă",
+   "a_group": "Titluri care par prognoză sau GPS",
+   "b": "Refren viral",
+   "b_group": "Viralul cântat, nu postat",
+   "strength": 0.76
+  },
+  {
+   "a": "Hot",
+   "a_group": "Titluri care par prognoză sau GPS",
+   "b": "Refren viral",
+   "b_group": "Viralul cântat, nu postat",
+   "strength": 0.76
+  },
+  {
+   "a": "Oriunde te vei afla",
+   "a_group": "Titluri care par prognoză sau GPS",
+   "b": "Refren viral",
+   "b_group": "Viralul cântat, nu postat",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:ce2f8fb994ed4df0663482e421209ef7185a030cc5a57821eed8f9b87eedac65"
+}

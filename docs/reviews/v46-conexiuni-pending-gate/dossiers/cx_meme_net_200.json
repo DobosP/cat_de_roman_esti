@@ -1,0 +1,236 @@
+{
+ "id": "cx_meme_net_200",
+ "game": "conexiuni",
+ "category": "meme_net",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "9ca4467dc8d8083fe0785029facd06f14b647196a307d187c4c854721d082cf0",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Patru Ghiță, patru lumi\" repeats member(s): Ghiță"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Patru Ghiță, patru lumi\" mixes node_types 3+1: Ghiță Ciobanul[person], Reclamele Vodafone cu Ghiță[work], Ghiță Pristanda[person], Ghiță[person]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Patru Ghiță, patru lumi\" reuses an inventory/selected quad (also in: cx_film_tv_100)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Manualul nescris al reparației românești\" reuses an inventory/selected quad (also in: cx_meme_net_045, cx_meme_net_049)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Bunici, uliță și cameră pornită\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_234)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Poanta de scenă, nu de comentarii\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_047)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Ghiță Pristanda (9), Ghiță Ciobanul (10), Lasă că merge și așa (9)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 0
+ },
+ "groups": [
+  {
+   "label": "Patru Ghiță, patru lumi",
+   "members": [
+    {
+     "id": "n_net_ghita_ciobanul",
+     "label": "Ghiță Ciobanul",
+     "node_type": "person",
+     "category": "meme_net",
+     "salience": 0.6458,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Personaj din reclamele Vodafone inspirat de viața pastorală, devenit reper al internetului românesc."
+    },
+    {
+     "id": "n_net_reclamele_vodafone_ghita",
+     "label": "Reclamele Vodafone cu Ghiță",
+     "node_type": "work",
+     "category": "meme_net",
+     "salience": 0.5954,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Campanie publicitară Vodafone România construită în jurul lui Ghiță Ciobanul."
+    },
+    {
+     "id": "n_litx_ghita_pristanda",
+     "label": "Ghiță Pristanda",
+     "node_type": "person",
+     "category": "literatura",
+     "salience": 0.2279,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Polițaiul servil din „O scrisoare pierdută\", memorabil prin replica „Curat murdar!\"."
+    },
+    {
+     "id": "n_litx_ghita_slavici",
+     "label": "Ghiță",
+     "node_type": "person",
+     "category": "literatura",
+     "salience": 0.2046,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Cârciumarul din Moara cu noroc, prins între dorința de avere și degradarea morală."
+    }
+   ]
+  },
+  {
+   "label": "Manualul nescris al reparației românești",
+   "members": [
+    {
+     "id": "n_net_dorel",
+     "label": "Dorel",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.935,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Personaj-memă din publicitate și umorul online, folosit pentru a ironiza lucrările improvizate."
+    },
+    {
+     "id": "n_net_mester_improvizat",
+     "label": "Meșter improvizat",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.4941,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Figura celui care repară pe loc, cu sârmă, bandă și multă convingere."
+    },
+    {
+     "id": "n_net_am_facut_cu_manuta_mea",
+     "label": "Am făcut cu mânuța mea",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.4179,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Replică asociată cu bricolajul mândru, perfectă pentru poze cu reparații improbabile."
+    },
+    {
+     "id": "n_vdr_lasa_ca_merge",
+     "label": "Lasă că merge și așa",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9596,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Expresie folosită adesea ironic pentru acceptarea unei soluții provizorii sau imperfecte."
+    }
+   ]
+  },
+  {
+   "label": "Bunici, uliță și cameră pornită",
+   "members": [
+    {
+     "id": "n_net_bunica_mircea_bravo",
+     "label": "Bunica lui Mircea Bravo",
+     "node_type": "person",
+     "category": "meme_net",
+     "salience": 0.4929,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Personaj-cult din clipurile lui Mircea Bravo, jucat de Lenuța Moldovan (Tanti Lenuța din Chinteni)."
+    },
+    {
+     "id": "n_vdr_vara_la_bunici",
+     "label": "Vara la bunici",
+     "node_type": "event",
+     "category": "viata_de_roman",
+     "salience": 0.9498,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Vacanța lungă la sat, cu curte, uliță, animale și mâncare făcută în casă."
+    },
+    {
+     "id": "n_vdr_gospodaria_bunicilor",
+     "label": "Gospodăria bunicilor",
+     "node_type": "place",
+     "category": "viata_de_roman",
+     "salience": 0.9146,
+     "degree": 20,
+     "incoming_degree": 20,
+     "description": "Curtea cu grădină, coteț, magazie, butoi și lucruri păstrate pentru orice nevoie."
+    },
+    {
+     "id": "n_vdr_ulita_satului",
+     "label": "Ulița satului",
+     "node_type": "place",
+     "category": "viata_de_roman",
+     "salience": 0.5109,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Drumul mic al satului, spațiu de joacă, povești și întoarceri de la câmp."
+    }
+   ]
+  },
+  {
+   "label": "Poanta de scenă, nu de comentarii",
+   "members": [
+    {
+     "id": "n_net_standup_ro",
+     "label": "Stand-up românesc",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.6812,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Scenă locală de comedie live care a ajuns puternic și în clipuri, podcasturi și reels."
+    },
+    {
+     "id": "n_net_teo_vio_costel",
+     "label": "Teo, Vio și Costel",
+     "node_type": "org",
+     "category": "meme_net",
+     "salience": 0.319,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Trio de comedianți important pentru stand-up-ul românesc modern."
+    },
+    {
+     "id": "n_net_ceva_marunt",
+     "label": "Ceva Mărunt",
+     "node_type": "org",
+     "category": "meme_net",
+     "salience": 0.3079,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Proiect de comedie românesc asociat cu scena de stand-up și apariții online."
+    },
+    {
+     "id": "n_ftv_iumor",
+     "label": "iUmor",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.5541,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Emisiune de divertisment și stand-up difuzată de Antena 1."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:d7a40614de89cbd97388bcedd44d6cc8ef5cbf4112da1cef34679eb58bf8618a"
+}

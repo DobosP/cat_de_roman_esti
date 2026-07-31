@@ -1,0 +1,322 @@
+{
+ "id": "cx_film_tv_098",
+ "game": "conexiuni",
+ "category": "film_tv",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "95494e646350dbd06aeaf4835e79953c06f9bef32f29dc08b4c25eb0433e1919",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Jean Constantin"
+  },
+  {
+   "check": "red_herring_budget",
+   "level": "WARN",
+   "detail": "3 contested tiles (budget <4): Amza Pellea, Dem Rădulescu, Sebastian Papaiani"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Nea Mărin Miliardar\" repeats member(s): Nea Mărin Miliardar"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Nea Mărin Miliardar\" mixes node_types 3+1: Nea Mărin Miliardar[work], Amza Pellea[person], Draga Olteanu Matei[person], Jean Constantin[person]"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Nea Mărin Miliardar\" <-> \"B.D. și comedia miliției\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"B.D. și comedia miliției\" mixes node_types 3+1: B.D. la munte și la mare[work], Toma Caragiu[person], Dem Rădulescu[person], Sebastian Papaiani[person]"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Vacanța Mare\" repeats member(s): Vacanța Mare"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Vacanța Mare\" mixes node_types 3+1: Vacanța Mare[org], Mugur Mihăescu[person], Leana[person], Costel[person]"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Las Fierbinți\" repeats member(s): Fierbinți, Las Fierbinți"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"B.D. și comedia miliției\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_film_tv_009, cx_film_tv_165, cx_film_tv_244)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Vacanța Mare\" reuses an inventory/selected quad (also in: cx_film_tv_008, cx_film_tv_164, cx_film_tv_244)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Las Fierbinți\" reuses an inventory/selected quad (also in: cx_film_tv_008, cx_film_tv_244)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_film_tv_244 (12), cx_film_tv_008 (8), cx_film_tv_012 (8)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Jean Constantin"
+  ],
+  "contested_tiles": [
+   "Amza Pellea",
+   "Dem Rădulescu",
+   "Sebastian Papaiani"
+  ],
+  "engine_unfair_raw": 1
+ },
+ "groups": [
+  {
+   "label": "Nea Mărin Miliardar",
+   "members": [
+    {
+     "id": "n_ftv_nea_marin_miliardar",
+     "label": "Nea Mărin Miliardar",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.8514,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Comedie românească din 1979 cu Amza Pellea în dublu rol memorabil."
+    },
+    {
+     "id": "n_ftv_amza_pellea",
+     "label": "Amza Pellea",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.871,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Actor român legendar, creatorul personajului Nea Mărin pe ecran."
+    },
+    {
+     "id": "n_ftv_draga_olteanu_matei",
+     "label": "Draga Olteanu Matei",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.7438,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Actriță română iubită pentru roluri de comedie și personaje populare."
+    },
+    {
+     "id": "n_ftv_jean_constantin",
+     "label": "Jean Constantin",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.581,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Actor român de comedie, prezent în B.D. și Nea Mărin Miliardar."
+    }
+   ]
+  },
+  {
+   "label": "B.D. și comedia miliției",
+   "members": [
+    {
+     "id": "n_ftv_bd_la_munte_si_la_mare",
+     "label": "B.D. la munte și la mare",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.7283,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Comedie românească din seria Brigada Diverse, cu Dem Rădulescu și Toma Caragiu."
+    },
+    {
+     "id": "n_ftv_toma_caragiu",
+     "label": "Toma Caragiu",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.9315,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Actor român de teatru și film, celebru pentru comedie și roluri dramatice."
+    },
+    {
+     "id": "n_ftv_dem_radulescu",
+     "label": "Dem Rădulescu",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.8647,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Actor român de comedie, figură centrală în filmele Brigada Diverse."
+    },
+    {
+     "id": "n_ftv_sebastian_papaiani",
+     "label": "Sebastian Papaiani",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.4,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Actor român popular, cunoscut din seria Brigada Diverse și alte comedii."
+    }
+   ]
+  },
+  {
+   "label": "Vacanța Mare",
+   "members": [
+    {
+     "id": "n_ftv_vacanta_mare",
+     "label": "Vacanța Mare",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.7937,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Grup și brand de comedie TV românească, cunoscut pentru Leana și Costel."
+    },
+    {
+     "id": "n_ftv_mugur_mihaescu",
+     "label": "Mugur Mihăescu",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.3568,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Actor și comedian român, membru fondator Vacanța Mare și interpret al Leanei."
+    },
+    {
+     "id": "n_ftv_leana",
+     "label": "Leana",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.5205,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Personaj comic din Vacanța Mare, interpretat de Mugur Mihăescu."
+    },
+    {
+     "id": "n_ftv_costel_vacanta_mare",
+     "label": "Costel",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.28,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Personaj din Vacanța Mare, pereche comică pentru Leana în sketch-uri TV."
+    }
+   ]
+  },
+  {
+   "label": "Las Fierbinți",
+   "members": [
+    {
+     "id": "n_ftv_las_fierbinti",
+     "label": "Las Fierbinți",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.9744,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Serial românesc de comedie difuzat de Pro TV, plasat într-un sat fictiv."
+    },
+    {
+     "id": "n_ftv_bobita",
+     "label": "Bobiță",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.7958,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Personaj din Las Fierbinți, patronul cârciumii satului fictiv."
+    },
+    {
+     "id": "n_ftv_celentano",
+     "label": "Celentano",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.7607,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Personaj din Las Fierbinți, celebru pentru monoloagele sale de cârciumă."
+    },
+    {
+     "id": "n_ftv_fierbinti_sat",
+     "label": "Fierbinți",
+     "node_type": "place",
+     "category": "film_tv",
+     "salience": 0.2831,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Sat fictiv din serialul Las Fierbinți, centrul farselor și bârfelor locale."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "B.D. la munte și la mare",
+   "a_group": "B.D. și comedia miliției",
+   "b": "Jean Constantin",
+   "b_group": "Nea Mărin Miliardar",
+   "strength": 0.88
+  },
+  {
+   "a": "Amza Pellea",
+   "a_group": "Nea Mărin Miliardar",
+   "b": "Toma Caragiu",
+   "b_group": "B.D. și comedia miliției",
+   "strength": 0.78
+  },
+  {
+   "a": "Jean Constantin",
+   "a_group": "Nea Mărin Miliardar",
+   "b": "Sebastian Papaiani",
+   "b_group": "B.D. și comedia miliției",
+   "strength": 0.76
+  },
+  {
+   "a": "Amza Pellea",
+   "a_group": "Nea Mărin Miliardar",
+   "b": "Dem Rădulescu",
+   "b_group": "B.D. și comedia miliției",
+   "strength": 0.7
+  },
+  {
+   "a": "B.D. la munte și la mare",
+   "a_group": "B.D. și comedia miliției",
+   "b": "Nea Mărin Miliardar",
+   "b_group": "Nea Mărin Miliardar",
+   "strength": 0.7
+  },
+  {
+   "a": "Las Fierbinți",
+   "a_group": "Las Fierbinți",
+   "b": "Vacanța Mare",
+   "b_group": "Vacanța Mare",
+   "strength": 0.68
+  },
+  {
+   "a": "Dem Rădulescu",
+   "a_group": "B.D. și comedia miliției",
+   "b": "Jean Constantin",
+   "b_group": "Nea Mărin Miliardar",
+   "strength": 0.66
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:3d0c3bf7024d5dcc6651e4bd0dbd50ab72d69e816c61bc82df429b4cba0cac41"
+}

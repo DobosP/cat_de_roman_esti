@@ -1,0 +1,285 @@
+{
+ "id": "cx_viata_de_roman_172",
+ "game": "conexiuni",
+ "category": "viata_de_roman",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "3acc87f96590eea61ec6b29ddfec3a9dbc4607167cabfd1db3b964dd425d65df",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Bucovina, Carpați, Dobrogea, Moldova, Pachet de acasă, Transilvania"
+  },
+  {
+   "check": "red_herring_budget",
+   "level": "WARN",
+   "detail": "2 contested tiles (budget <4): Delta Dunării, Marea Neagră"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Mașina și locul ei\" reuses an inventory/selected quad (also in: cx_viata_de_roman_085, cx_viata_de_roman_088)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Vacanțe cu hartă mare\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_stiinta_309)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Prin regiuni\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_251, cx_limba_038)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Carpați (9), Delta Dunării (15), Dobrogea (13), Ciorbă rădăuțeană (11), Mici (16), Marea Neagră (10), Moldova (9), Oltenia (9), Transilvania (10), Portbagajul plin (9)"
+  },
+  {
+   "check": "generic_region_link",
+   "level": "WARN",
+   "detail": "board pairs region tiles (Bucovina, Moldova, Transilvania, Oltenia, Dobrogea) with non-distinctive region-linked tiles: Ciorbă rădăuțeană (national-salience concept (0.88) with generic related_to edge to Bucovina)"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "Ciorbă rădăuțeană": "national-salience concept (0.88) with generic related_to edge to Bucovina"
+ },
+ "fairness": {
+  "unfair_tiles": [
+   "Bucovina",
+   "Carpați",
+   "Dobrogea",
+   "Moldova",
+   "Pachet de acasă",
+   "Transilvania"
+  ],
+  "contested_tiles": [
+   "Delta Dunării",
+   "Marea Neagră"
+  ],
+  "engine_unfair_raw": 7
+ },
+ "groups": [
+  {
+   "label": "Mașina și locul ei",
+   "members": [
+    {
+     "id": "n_vdr_dacia_1310",
+     "label": "Dacia 1310",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9329,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Model de autoturism produs la Mioveni, foarte prezent pe șoselele românești înainte de 2000."
+    },
+    {
+     "id": "n_vdr_portbagaj_plin",
+     "label": "Portbagajul plin",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.6883,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Mașina încărcată cu sacoșe, borcane sau bagaje la plecarea de la rude."
+    },
+    {
+     "id": "n_vdr_parcat_pe_trotuar",
+     "label": "Parcatul pe trotuar",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.5685,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Obicei urban controversat, asociat cu lipsa locurilor de parcare."
+    },
+    {
+     "id": "n_vdr_biletel_in_parbriz",
+     "label": "Bilețelul în parbriz",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.5061,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Mesaj lăsat pe mașină pentru parcare, zgârietură sau rugăminți de mutare."
+    }
+   ]
+  },
+  {
+   "label": "Vacanțe cu hartă mare",
+   "members": [
+    {
+     "id": "n_marea_neagra",
+     "label": "Marea Neagră",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.6416,
+     "degree": 26,
+     "incoming_degree": 27,
+     "description": "Mare la est de România, litoralul românesc."
+    },
+    {
+     "id": "n_carpati",
+     "label": "Carpați",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.7269,
+     "degree": 41,
+     "incoming_degree": 46,
+     "description": "Lanț muntos care străbate România în formă de arc."
+    },
+    {
+     "id": "n_delta_dunarii",
+     "label": "Delta Dunării",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.5966,
+     "degree": 24,
+     "incoming_degree": 24,
+     "description": "Deltă la vărsarea Dunării, rezervație a biosferei."
+    },
+    {
+     "id": "n_bucovina",
+     "label": "Bucovina",
+     "node_type": "place",
+     "category": "arta_cultura",
+     "salience": 0.3754,
+     "degree": 13,
+     "incoming_degree": 14,
+     "description": "Regiune istorica din nordul Moldovei."
+    }
+   ]
+  },
+  {
+   "label": "Prin regiuni",
+   "members": [
+    {
+     "id": "n_moldova_reg",
+     "label": "Moldova",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.5978,
+     "degree": 29,
+     "incoming_degree": 36,
+     "description": "Regiune istorică din estul României."
+    },
+    {
+     "id": "n_transilvania",
+     "label": "Transilvania",
+     "node_type": "place",
+     "category": "istorie",
+     "salience": 0.9779,
+     "degree": 62,
+     "incoming_degree": 65,
+     "description": "Regiune istorica romaneasca."
+    },
+    {
+     "id": "n_oltenia",
+     "label": "Oltenia",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.4197,
+     "degree": 23,
+     "incoming_degree": 23,
+     "description": "Regiune istorică din sud-vestul României."
+    },
+    {
+     "id": "n_dobrogea",
+     "label": "Dobrogea",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.4845,
+     "degree": 23,
+     "incoming_degree": 25,
+     "description": "Regiune între Dunăre și Marea Neagră."
+    }
+   ]
+  },
+  {
+   "label": "Opriri de mâncat",
+   "members": [
+    {
+     "id": "n_v2via_pachet_de_acasa",
+     "label": "Pachet de acasă",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.7768,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Mâncare sau lucruri primite de la familie și duse în sacoșe ori portbagaj."
+    },
+    {
+     "id": "n_gas_mici",
+     "label": "Mici",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9765,
+     "degree": 20,
+     "incoming_degree": 20,
+     "description": "Mititei fripți pe grătar, asociați popular cu muștar, pâine și ieșiri de 1 Mai."
+    },
+    {
+     "id": "n_gas_ciorba_radauteana",
+     "label": "Ciorbă rădăuțeană",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.8816,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Ciorbă cu pui, smântână și usturoi, asociată cu Rădăuți și Bucovina."
+    },
+    {
+     "id": "n_gas_papanasi",
+     "label": "Papanași",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9491,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Desert cu brânză, smântână și dulceață, prăjit sau fiert în variante regionale."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Pachet de acasă",
+   "a_group": "Opriri de mâncat",
+   "b": "Portbagajul plin",
+   "b_group": "Mașina și locul ei",
+   "strength": 0.86
+  },
+  {
+   "a": "Delta Dunării",
+   "a_group": "Vacanțe cu hartă mare",
+   "b": "Dobrogea",
+   "b_group": "Prin regiuni",
+   "strength": 0.84
+  },
+  {
+   "a": "Bucovina",
+   "a_group": "Vacanțe cu hartă mare",
+   "b": "Ciorbă rădăuțeană",
+   "b_group": "Opriri de mâncat",
+   "strength": 0.82
+  },
+  {
+   "a": "Dobrogea",
+   "a_group": "Prin regiuni",
+   "b": "Marea Neagră",
+   "b_group": "Vacanțe cu hartă mare",
+   "strength": 0.7
+  },
+  {
+   "a": "Bucovina",
+   "a_group": "Vacanțe cu hartă mare",
+   "b": "Moldova",
+   "b_group": "Prin regiuni",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:3a96db5ae5d8eceaa766f534834ea0e0fc40a3d9605e6f7942b0ed082efc2400"
+}

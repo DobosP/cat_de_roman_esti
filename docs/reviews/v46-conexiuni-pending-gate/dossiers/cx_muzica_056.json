@@ -1,0 +1,314 @@
+{
+ "id": "cx_muzica_056",
+ "game": "conexiuni",
+ "category": "muzica",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "0a484071f6bdbbe8a241d6c45b2b2117caceca28f7170569e373fd0bbcc86f54",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "board_type_shortcut",
+   "level": "FAIL",
+   "detail": "all four groups are node-type homogeneous and expose 4 distinct group types"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Festivaluri\" <-> \"Locuri-gazdă\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Festivaluri\" reuses an inventory/selected quad (also in: cx_geografie_252, cx_muzica_138, cx_muzica_205, cx_muzica_206, cx_muzica_271)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Locuri-gazdă\" reuses an inventory/selected quad (also in: cx_muzica_054, cx_muzica_138, cx_muzica_206, cx_muzica_271)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Hituri de export\" reuses an inventory/selected quad (also in: cx_meme_net_136, cx_muzica_138, cx_muzica_140, cx_muzica_274)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_muzica_138 (12), cx_meme_net_136 (8), cx_meme_net_203 (8), cx_muzica_206 (8), cx_muzica_271 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Brașov (12), Cluj-Napoca (19), Constanța (15), Bonțida (9), Dragostea din tei (11), Electric Castle (10), Hot (9), Neversea (11), Untold (10)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 13
+ },
+ "groups": [
+  {
+   "label": "Festivaluri",
+   "members": [
+    {
+     "id": "n_muz_untold",
+     "label": "Untold",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.8746,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Festival muzical major organizat la Cluj-Napoca, cu artiști EDM și pop internaționali."
+    },
+    {
+     "id": "n_muz_neversea",
+     "label": "Neversea",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.729,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Festival de muzică organizat la Constanța, asociat cu scena de pe litoral."
+    },
+    {
+     "id": "n_muz_electric_castle",
+     "label": "Electric Castle",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.6862,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Festival muzical organizat la Bonțida, lângă Castelul Bánffy."
+    },
+    {
+     "id": "n_muz_cerbul_de_aur",
+     "label": "Cerbul de Aur",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.7305,
+     "degree": 15,
+     "incoming_degree": 15,
+     "description": "Festival-concurs muzical de la Brașov, lansat în perioada televiziunii clasice."
+    }
+   ]
+  },
+  {
+   "label": "Locuri-gazdă",
+   "members": [
+    {
+     "id": "n_cluj_napoca",
+     "label": "Cluj-Napoca",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.4989,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Oraș important din Transilvania, pe Someș."
+    },
+    {
+     "id": "n_constanta",
+     "label": "Constanța",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.5067,
+     "degree": 22,
+     "incoming_degree": 22,
+     "description": "Oraș-port la Marea Neagră, în Dobrogea."
+    },
+    {
+     "id": "n_brasov",
+     "label": "Brașov",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.3074,
+     "degree": 12,
+     "incoming_degree": 11,
+     "description": "Oras din centrul Romaniei, la poalele Carpatilor, important centru turistic si industrial."
+    },
+    {
+     "id": "n_muz_bontida",
+     "label": "Bonțida",
+     "node_type": "place",
+     "category": "muzica",
+     "salience": 0.2836,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Localitate din județul Cluj, cunoscută în pop-culture prin Electric Castle."
+    }
+   ]
+  },
+  {
+   "label": "Genuri muzicale",
+   "members": [
+    {
+     "id": "n_muz_manele",
+     "label": "Manele",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.916,
+     "degree": 23,
+     "incoming_degree": 23,
+     "description": "Gen urban-popular românesc cu refrene de petrecere și vedete foarte recognoscibile."
+    },
+    {
+     "id": "n_muz_hip_hop_ro",
+     "label": "Hip-hop românesc",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.845,
+     "degree": 19,
+     "incoming_degree": 19,
+     "description": "Rap românesc de cartier, cu texte sociale și refrene intrate în cultura urbană."
+    },
+    {
+     "id": "n_muz_rock_ro",
+     "label": "Rock românesc",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.7776,
+     "degree": 22,
+     "incoming_degree": 22,
+     "description": "Trupe rock românești cu refrene de stadion, folk-rock și balade de chitară."
+    },
+    {
+     "id": "n_muz_pop_dance_ro",
+     "label": "Pop-dance românesc",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.8303,
+     "degree": 26,
+     "incoming_degree": 26,
+     "description": "Valul de dance românesc și moldovenesc exportat în cluburi și topuri internaționale."
+    }
+   ]
+  },
+  {
+   "label": "Hituri de export",
+   "members": [
+    {
+     "id": "n_muz_dragostea_din_tei",
+     "label": "Dragostea din tei",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.9519,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Hit O-Zone din 2003, cunoscut global prin refrenul „nu mă, nu mă iei”."
+    },
+    {
+     "id": "n_muz_mr_saxobeat",
+     "label": "Mr. Saxobeat",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.8197,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Single Alexandra Stan din 2010, hit dance internațional cu riff de saxofon."
+    },
+    {
+     "id": "n_muz_stereo_love",
+     "label": "Stereo Love",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.8204,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Hit dance produs de Edward Maya, lansat în 2009 și difuzat masiv internațional."
+    },
+    {
+     "id": "n_muz_hot_inna",
+     "label": "Hot",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.6032,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Single Inna din 2008, piesă dance care a deschis succesul ei internațional."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Bonțida",
+   "a_group": "Locuri-gazdă",
+   "b": "Electric Castle",
+   "b_group": "Festivaluri",
+   "strength": 0.92
+  },
+  {
+   "a": "Brașov",
+   "a_group": "Locuri-gazdă",
+   "b": "Cerbul de Aur",
+   "b_group": "Festivaluri",
+   "strength": 0.9
+  },
+  {
+   "a": "Cluj-Napoca",
+   "a_group": "Locuri-gazdă",
+   "b": "Untold",
+   "b_group": "Festivaluri",
+   "strength": 0.88
+  },
+  {
+   "a": "Constanța",
+   "a_group": "Locuri-gazdă",
+   "b": "Neversea",
+   "b_group": "Festivaluri",
+   "strength": 0.88
+  },
+  {
+   "a": "Dragostea din tei",
+   "a_group": "Hituri de export",
+   "b": "Pop-dance românesc",
+   "b_group": "Genuri muzicale",
+   "strength": 0.88
+  },
+  {
+   "a": "Mr. Saxobeat",
+   "a_group": "Hituri de export",
+   "b": "Pop-dance românesc",
+   "b_group": "Genuri muzicale",
+   "strength": 0.88
+  },
+  {
+   "a": "Pop-dance românesc",
+   "a_group": "Genuri muzicale",
+   "b": "Stereo Love",
+   "b_group": "Hituri de export",
+   "strength": 0.88
+  },
+  {
+   "a": "Hot",
+   "a_group": "Hituri de export",
+   "b": "Pop-dance românesc",
+   "b_group": "Genuri muzicale",
+   "strength": 0.84
+  },
+  {
+   "a": "Neversea",
+   "a_group": "Festivaluri",
+   "b": "Pop-dance românesc",
+   "b_group": "Genuri muzicale",
+   "strength": 0.64
+  },
+  {
+   "a": "Pop-dance românesc",
+   "a_group": "Genuri muzicale",
+   "b": "Untold",
+   "b_group": "Festivaluri",
+   "strength": 0.64
+  },
+  {
+   "a": "Electric Castle",
+   "a_group": "Festivaluri",
+   "b": "Rock românesc",
+   "b_group": "Genuri muzicale",
+   "strength": 0.62
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:5a16df53306cd513bd097e5a3ca5bc74c39a8e583b94ba38aaa9a31d7ec1aaf3"
+}

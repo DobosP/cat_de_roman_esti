@@ -1,0 +1,394 @@
+{
+ "id": "cx_istorie_116",
+ "game": "conexiuni",
+ "category": "istorie",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "687b739a378d975b3e65c08b160c36cb76f2fc3ed43d8b583627616950c24413",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Bătălia de la Vaslui, Moldova, Mănăstirea Putna"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Domnitori de manual\" <-> \"Principate și vecini de pe hartă\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Bătălii medievale\" mixes node_types 3+1: Bătălia de la Vaslui[place], Bătălia de la Rovine[event], Bătălia de la Călugăreni[event], Bătălia de la Posada[event]"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Bătălii medievale\" <-> \"Principate și vecini de pe hartă\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Principate și vecini de pe hartă\" mixes node_types 3+1: Țara Românească[place], Moldova[place], Transilvania[place], Imperiul Otoman[org]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Domnitori de manual\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_160, cx_istorie_001, cx_istorie_029, cx_istorie_255, cx_viata_de_roman_236)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Bătălii medievale\" reuses an inventory/selected quad (also in: cx_istorie_033)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Mănăstiri și ctitorii\" reuses an inventory/selected quad (also in: cx_istorie_032)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Principate și vecini de pe hartă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_258)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_istorie_033 (10), cx_istorie_182 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Mircea cel Bătrân (11), Ștefan cel Mare (18), Mănăstirea Sucevița (9), Transilvania (10), Mănăstirea Voroneț (12)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Bătălia de la Vaslui",
+   "Moldova",
+   "Mănăstirea Putna"
+  ],
+  "contested_tiles": [],
+  "engine_unfair_raw": 10
+ },
+ "groups": [
+  {
+   "label": "Domnitori de manual",
+   "members": [
+    {
+     "id": "n_stefan_cel_mare",
+     "label": "Ștefan cel Mare",
+     "node_type": "person",
+     "category": "istorie",
+     "salience": 0.6939,
+     "degree": 18,
+     "incoming_degree": 18,
+     "description": "Domnitor al Moldovei (1457-1504)."
+    },
+    {
+     "id": "n_vlad_tepes",
+     "label": "Vlad Țepeș",
+     "node_type": "person",
+     "category": "istorie",
+     "salience": 0.5744,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Domnitor al Tarii Romanesti, cunoscut pentru lupta cu otomanii."
+    },
+    {
+     "id": "n_mircea_cel_batran",
+     "label": "Mircea cel Bătrân",
+     "node_type": "person",
+     "category": "istorie",
+     "salience": 0.2628,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Domn al Tarii Romanesti (1386-1418), cunoscut pentru rezistenta antiotomana."
+    },
+    {
+     "id": "n_istx_petru_rares",
+     "label": "Petru Rareș",
+     "node_type": "person",
+     "category": "istorie",
+     "salience": 0.1955,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Domn al Moldovei, fiu al lui Ștefan cel Mare, cunoscut pentru ctitorii și conflicte cu Polonia și otomanii."
+    }
+   ]
+  },
+  {
+   "label": "Bătălii medievale",
+   "members": [
+    {
+     "id": "n_vaslui",
+     "label": "Bătălia de la Vaslui",
+     "node_type": "place",
+     "category": "istorie",
+     "salience": 0.1986,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Victorie a lui Stefan cel Mare in 1475."
+    },
+    {
+     "id": "n_istx_batalia_rovine",
+     "label": "Bătălia de la Rovine",
+     "node_type": "event",
+     "category": "istorie",
+     "salience": 0.1591,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Bătălie medievală asociată cu Mircea cel Bătrân și rezistența Țării Românești în fața otomanilor."
+    },
+    {
+     "id": "n_istx_batalia_calugareni",
+     "label": "Bătălia de la Călugăreni",
+     "node_type": "event",
+     "category": "istorie",
+     "salience": 0.1712,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Confruntare din 1595 între Mihai Viteazul și otomani, reper al campaniei antiotomane."
+    },
+    {
+     "id": "n_istx_batalia_posada",
+     "label": "Bătălia de la Posada",
+     "node_type": "event",
+     "category": "istorie",
+     "salience": 0.1652,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Victoria lui Basarab I asupra regelui Carol Robert de Anjou în 1330, reper pentru Țara Românească."
+    }
+   ]
+  },
+  {
+   "label": "Mănăstiri și ctitorii",
+   "members": [
+    {
+     "id": "n_putna",
+     "label": "Mănăstirea Putna",
+     "node_type": "place",
+     "category": "istorie",
+     "salience": 0.2072,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Ctitorie a lui Stefan cel Mare."
+    },
+    {
+     "id": "n_voronet",
+     "label": "Mănăstirea Voroneț",
+     "node_type": "place",
+     "category": "arta_cultura",
+     "salience": 0.409,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Manastire din Bucovina, vestita pentru frescele exterioare."
+    },
+    {
+     "id": "n_sucevita",
+     "label": "Mănăstirea Sucevița",
+     "node_type": "place",
+     "category": "arta_cultura",
+     "salience": 0.1718,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Manastire pictata din Bucovina."
+    },
+    {
+     "id": "n_horezu",
+     "label": "Mănăstirea Hurezi",
+     "node_type": "place",
+     "category": "arta_cultura",
+     "salience": 0.3454,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Manastire din Valcea, ctitorie a lui Constantin Brancoveanu, inscrisa in patrimoniul UNESCO."
+    }
+   ]
+  },
+  {
+   "label": "Principate și vecini de pe hartă",
+   "members": [
+    {
+     "id": "n_tara_romaneasca",
+     "label": "Țara Românească",
+     "node_type": "place",
+     "category": "istorie",
+     "salience": 0.5864,
+     "degree": 19,
+     "incoming_degree": 24,
+     "description": "Stat medieval romanesc la sud de Carpati."
+    },
+    {
+     "id": "n_moldova",
+     "label": "Moldova",
+     "node_type": "place",
+     "category": "istorie",
+     "salience": 0.7192,
+     "degree": 25,
+     "incoming_degree": 27,
+     "description": "Tara romaneasca istorica."
+    },
+    {
+     "id": "n_transilvania",
+     "label": "Transilvania",
+     "node_type": "place",
+     "category": "istorie",
+     "salience": 0.9779,
+     "degree": 62,
+     "incoming_degree": 65,
+     "description": "Regiune istorica romaneasca."
+    },
+    {
+     "id": "n_imperiul_otoman",
+     "label": "Imperiul Otoman",
+     "node_type": "org",
+     "category": "istorie",
+     "salience": 0.5613,
+     "degree": 18,
+     "incoming_degree": 18,
+     "description": "Imperiu impotriva caruia au luptat domnitorii romani; a impus suzeranitatea asupra Tarilor Romane."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Moldova",
+   "a_group": "Principate și vecini de pe hartă",
+   "b": "Ștefan cel Mare",
+   "b_group": "Domnitori de manual",
+   "strength": 0.95
+  },
+  {
+   "a": "Moldova",
+   "a_group": "Principate și vecini de pe hartă",
+   "b": "Mănăstirea Putna",
+   "b_group": "Mănăstiri și ctitorii",
+   "strength": 0.9
+  },
+  {
+   "a": "Țara Românească",
+   "a_group": "Principate și vecini de pe hartă",
+   "b": "Vlad Țepeș",
+   "b_group": "Domnitori de manual",
+   "strength": 0.9
+  },
+  {
+   "a": "Mircea cel Bătrân",
+   "a_group": "Domnitori de manual",
+   "b": "Țara Românească",
+   "b_group": "Principate și vecini de pe hartă",
+   "strength": 0.88
+  },
+  {
+   "a": "Petru Rareș",
+   "a_group": "Domnitori de manual",
+   "b": "Moldova",
+   "b_group": "Principate și vecini de pe hartă",
+   "strength": 0.88
+  },
+  {
+   "a": "Mănăstirea Putna",
+   "a_group": "Mănăstiri și ctitorii",
+   "b": "Ștefan cel Mare",
+   "b_group": "Domnitori de manual",
+   "strength": 0.86
+  },
+  {
+   "a": "Bătălia de la Rovine",
+   "a_group": "Bătălii medievale",
+   "b": "Mircea cel Bătrân",
+   "b_group": "Domnitori de manual",
+   "strength": 0.82
+  },
+  {
+   "a": "Imperiul Otoman",
+   "a_group": "Principate și vecini de pe hartă",
+   "b": "Bătălia de la Călugăreni",
+   "b_group": "Bătălii medievale",
+   "strength": 0.82
+  },
+  {
+   "a": "Imperiul Otoman",
+   "a_group": "Principate și vecini de pe hartă",
+   "b": "Bătălia de la Vaslui",
+   "b_group": "Bătălii medievale",
+   "strength": 0.82
+  },
+  {
+   "a": "Moldova",
+   "a_group": "Principate și vecini de pe hartă",
+   "b": "Bătălia de la Vaslui",
+   "b_group": "Bătălii medievale",
+   "strength": 0.82
+  },
+  {
+   "a": "Imperiul Otoman",
+   "a_group": "Principate și vecini de pe hartă",
+   "b": "Bătălia de la Rovine",
+   "b_group": "Bătălii medievale",
+   "strength": 0.8
+  },
+  {
+   "a": "Imperiul Otoman",
+   "a_group": "Principate și vecini de pe hartă",
+   "b": "Vlad Țepeș",
+   "b_group": "Domnitori de manual",
+   "strength": 0.8
+  },
+  {
+   "a": "Ștefan cel Mare",
+   "a_group": "Domnitori de manual",
+   "b": "Bătălia de la Vaslui",
+   "b_group": "Bătălii medievale",
+   "strength": 0.8
+  },
+  {
+   "a": "Ștefan cel Mare",
+   "a_group": "Domnitori de manual",
+   "b": "Mănăstirea Voroneț",
+   "b_group": "Mănăstiri și ctitorii",
+   "strength": 0.8
+  },
+  {
+   "a": "Imperiul Otoman",
+   "a_group": "Principate și vecini de pe hartă",
+   "b": "Ștefan cel Mare",
+   "b_group": "Domnitori de manual",
+   "strength": 0.78
+  },
+  {
+   "a": "Bătălia de la Călugăreni",
+   "a_group": "Bătălii medievale",
+   "b": "Țara Românească",
+   "b_group": "Principate și vecini de pe hartă",
+   "strength": 0.76
+  },
+  {
+   "a": "Bătălia de la Rovine",
+   "a_group": "Bătălii medievale",
+   "b": "Țara Românească",
+   "b_group": "Principate și vecini de pe hartă",
+   "strength": 0.74
+  },
+  {
+   "a": "Bătălia de la Posada",
+   "a_group": "Bătălii medievale",
+   "b": "Țara Românească",
+   "b_group": "Principate și vecini de pe hartă",
+   "strength": 0.72
+  },
+  {
+   "a": "Imperiul Otoman",
+   "a_group": "Principate și vecini de pe hartă",
+   "b": "Mircea cel Bătrân",
+   "b_group": "Domnitori de manual",
+   "strength": 0.7
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:8c97d46294a235695929488658a6d535966562990a27b33f05404421160cf9e8"
+}

@@ -1,0 +1,229 @@
+{
+ "id": "cx_sport_158",
+ "game": "conexiuni",
+ "category": "sport",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "c96ba11d1c6a3fffb0047599932a922ca59b8788c0cd908a7d5171fd03e27419",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Semne olimpice\" mixes node_types 3+1: Cinci inele olimpice[concept], Campion olimpic[concept], Lotul olimpic al României[org], Olimpiadă[concept]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Tenis cu nume de turneu\" reuses an inventory/selected quad (also in: cx_geografie_179)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Lovitura de la 11 metri\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_sport_161, cx_sport_283)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Patru penalty-uri apărate (9), Steaua 1986 (11), Wimbledon (9)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 0
+ },
+ "groups": [
+  {
+   "label": "Tenis cu nume de turneu",
+   "members": [
+    {
+     "id": "n_spt_wimbledon",
+     "label": "Wimbledon",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.7537,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Turneul de Grand Slam pe iarbă câștigat de Simona Halep în 2019."
+    },
+    {
+     "id": "n_spt_roland_garros",
+     "label": "Roland Garros",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.6392,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Turneul de Grand Slam de la Paris, câștigat de Simona Halep în 2018."
+    },
+    {
+     "id": "n_spt_nastase_us_open_1972",
+     "label": "US Open 1972",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.412,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Primul titlu de Grand Slam la simplu câștigat de Ilie Năstase."
+    },
+    {
+     "id": "n_spt_madrid_open",
+     "label": "Madrid Open",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.2962,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Turneu de tenis asociat ani buni cu Ion Țiriac ca proprietar și promotor."
+    }
+   ]
+  },
+  {
+   "label": "Lovitura de la 11 metri",
+   "members": [
+    {
+     "id": "n_v2spo_penalty",
+     "label": "Penalty",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.8542,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Lovitură de pedeapsă executată direct spre poartă."
+    },
+    {
+     "id": "n_v2spo_portar",
+     "label": "Portar",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.8092,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Jucătorul care apără poarta la fotbal, handbal sau hochei."
+    },
+    {
+     "id": "n_spt_patru_penaltyuri",
+     "label": "Patru penalty-uri apărate",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.8162,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Performanța unică a lui Duckadam în finala Cupei Campionilor Europeni din 1986."
+    },
+    {
+     "id": "n_spt_eroul_de_la_sevilla",
+     "label": "Eroul de la Sevilla",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.7761,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Supranumele lui Helmut Duckadam după cele patru penalty-uri apărate în 1986."
+    }
+   ]
+  },
+  {
+   "label": "Semne olimpice",
+   "members": [
+    {
+     "id": "n_spt_cinci_inele",
+     "label": "Cinci inele olimpice",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.575,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Simbolul Jocurilor Olimpice, comun legendelor Nadia, Patzaichin și Popovici."
+    },
+    {
+     "id": "n_v2spo_campion_olimpic",
+     "label": "Campion olimpic",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.942,
+     "degree": 27,
+     "incoming_degree": 30,
+     "description": "Sportiv care câștigă aurul la Jocurile Olimpice."
+    },
+    {
+     "id": "n_spt_lotul_olimpic_romania",
+     "label": "Lotul olimpic al României",
+     "node_type": "org",
+     "category": "sport",
+     "salience": 0.599,
+     "degree": 18,
+     "incoming_degree": 22,
+     "description": "Reprezentarea sportivă a României la Jocurile Olimpice."
+    },
+    {
+     "id": "n_v2per_olimpiada",
+     "label": "Olimpiadă",
+     "node_type": "concept",
+     "category": "personalitati",
+     "salience": 0.9231,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Competiție sportivă internațională organizată o dată la patru ani."
+    }
+   ]
+  },
+  {
+   "label": "Infrastructura clubului",
+   "members": [
+    {
+     "id": "n_v2spo_stadion_fotbal",
+     "label": "Stadion de fotbal",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.838,
+     "degree": 9,
+     "incoming_degree": 10,
+     "description": "Arenă cu teren, porți și tribune pentru meciuri de fotbal."
+    },
+    {
+     "id": "n_spt_stadionul_ghencea",
+     "label": "Stadionul Ghencea",
+     "node_type": "place",
+     "category": "sport",
+     "salience": 0.5283,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Arena asociată istoric cu Steaua București și cu mari seri ale fotbalului românesc."
+    },
+    {
+     "id": "n_v2spo_club_sportiv",
+     "label": "Club sportiv",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.8373,
+     "degree": 25,
+     "incoming_degree": 28,
+     "description": "Organizație care înscrie sportivi sau echipe în competiții."
+    },
+    {
+     "id": "n_spt_steaua_1986",
+     "label": "Steaua 1986",
+     "node_type": "org",
+     "category": "sport",
+     "salience": 0.9188,
+     "degree": 15,
+     "incoming_degree": 15,
+     "description": "Echipa Steaua București care a câștigat Cupa Campionilor Europeni în 1986."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Eroul de la Sevilla",
+   "a_group": "Lovitura de la 11 metri",
+   "b": "Steaua 1986",
+   "b_group": "Infrastructura clubului",
+   "strength": 0.88
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:c785bbf0f0c1848a7e975cde14e5088ed2cecadcac396ee26c7775a7dcdacc5f"
+}

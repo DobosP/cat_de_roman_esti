@@ -1,0 +1,231 @@
+{
+ "id": "cx_arta_cultura_158",
+ "game": "conexiuni",
+ "category": "arta_cultura",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "5fa444242c507448884ece649fead545c370025c5bd9495f00daa3d5829612a3",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"UNESCO de dansat, cântat sau purtat\" reuses an inventory/selected quad (also in: cx_arta_cultura_242)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Bucovina pictată, cu albastru la vedere\" reuses an inventory/selected quad (also in: cx_arta_cultura_003, cx_arta_cultura_091, cx_arta_cultura_242, cx_gastronomie_103)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Brâncuși la Târgu Jiu: mobilier care nu se mută\" reuses an inventory/selected quad (also in: cx_arta_cultura_094, cx_arta_cultura_240, cx_geografie_178)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Enescu pe afiș, în sală și în partitură\" reuses an inventory/selected quad (also in: cx_arta_cultura_239, cx_muzica_273)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_arta_cultura_003 (12), cx_arta_cultura_091 (10), cx_arta_cultura_242 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Ansamblul monumental de la Târgu Jiu (10), Coloana Infinitului (14), Doina (14), Festivalul George Enescu (18), Mănăstirile pictate din Bucovina (10), Masa Tăcerii (20), Oedipe (11), Poarta Sărutului (15), Rapsodia Română (14), Mănăstirea Sucevița (9), Mănăstirea Voroneț (12)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 0
+ },
+ "groups": [
+  {
+   "label": "UNESCO de dansat, cântat sau purtat",
+   "members": [
+    {
+     "id": "n_calusarii",
+     "label": "Călușarii",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.3514,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Dans ritual romanesc, in patrimoniul UNESCO."
+    },
+    {
+     "id": "n_doina",
+     "label": "Doina",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.3976,
+     "degree": 15,
+     "incoming_degree": 15,
+     "description": "Cantec liric traditional romanesc, in patrimoniul UNESCO."
+    },
+    {
+     "id": "n_ceramica_de_horezu",
+     "label": "Ceramica de Horezu",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.4863,
+     "degree": 9,
+     "incoming_degree": 10,
+     "description": "Mestesug traditional de olarit din Oltenia, inscris in patrimoniul imaterial UNESCO in 2012."
+    },
+    {
+     "id": "n_martisor",
+     "label": "Mărțișor",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.2932,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Obicei romanesc de 1 martie, in patrimoniul UNESCO."
+    }
+   ]
+  },
+  {
+   "label": "Bucovina pictată, cu albastru la vedere",
+   "members": [
+    {
+     "id": "n_manastiri_pictate_bucovina",
+     "label": "Mănăstirile pictate din Bucovina",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.4743,
+     "degree": 14,
+     "incoming_degree": 14,
+     "description": "Grup de manastiri cu fresce exterioare, in patrimoniul UNESCO."
+    },
+    {
+     "id": "n_voronet",
+     "label": "Mănăstirea Voroneț",
+     "node_type": "place",
+     "category": "arta_cultura",
+     "salience": 0.409,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Manastire din Bucovina, vestita pentru frescele exterioare."
+    },
+    {
+     "id": "n_sucevita",
+     "label": "Mănăstirea Sucevița",
+     "node_type": "place",
+     "category": "arta_cultura",
+     "salience": 0.1718,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Manastire pictata din Bucovina."
+    },
+    {
+     "id": "n_albastru_de_voronet",
+     "label": "Albastru de Voroneț",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.2466,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Nuanta de albastru a frescelor de la Voronet."
+    }
+   ]
+  },
+  {
+   "label": "Brâncuși la Târgu Jiu: mobilier care nu se mută",
+   "members": [
+    {
+     "id": "n_ansamblul_targu_jiu",
+     "label": "Ansamblul monumental de la Târgu Jiu",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.316,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Ansamblul sculptural creat de Brancusi la Targu Jiu."
+    },
+    {
+     "id": "n_masa_tacerii",
+     "label": "Masa Tăcerii",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.3478,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Sculptura de Brancusi din Ansamblul de la Targu Jiu."
+    },
+    {
+     "id": "n_poarta_sarutului",
+     "label": "Poarta Sărutului",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.361,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Sculptura de Brancusi din Ansamblul de la Targu Jiu."
+    },
+    {
+     "id": "n_coloana_infinitului",
+     "label": "Coloana Infinitului",
+     "node_type": "work",
+     "category": "personalitati",
+     "salience": 0.4557,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Sculptura de Brancusi din ansamblul de la Targu Jiu."
+    }
+   ]
+  },
+  {
+   "label": "Enescu pe afiș, în sală și în partitură",
+   "members": [
+    {
+     "id": "n_festivalul_enescu",
+     "label": "Festivalul George Enescu",
+     "node_type": "event",
+     "category": "arta_cultura",
+     "salience": 0.4779,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Festival international de muzica clasica de la Bucuresti."
+    },
+    {
+     "id": "n_rapsodia_romana",
+     "label": "Rapsodia Română",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.4419,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Lucrare orchestrala de George Enescu inspirata din folclor."
+    },
+    {
+     "id": "n_oedipe",
+     "label": "Oedipe",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.2638,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Unica opera lirica a lui George Enescu."
+    },
+    {
+     "id": "n_george_enescu_compozitor",
+     "label": "Muzica lui George Enescu",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.5025,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Opera muzicala a celui mai important compozitor roman, intemeietor al scolii nationale de muzica culta."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:a1cb67537d23d3d295c3e0b3dff94f20e67606e11ed2ad56dab2d8e33520832a"
+}

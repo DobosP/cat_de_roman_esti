@@ -37,6 +37,14 @@ _V45_REJECTED_REVIEW_IDS = {
     "lt_viata_de_roman_214",
     "lt_viata_de_roman_217",
 }
+_V46_REJECTED_REVIEW_IDS = {
+    "cx_viata_de_roman_291",
+    "cx_gastronomie_292",
+    "cx_viata_de_roman_293",
+    "cx_societate_294",
+    "cx_societate_295",
+}
+_RETIRED_REVIEW_IDS = _V45_REJECTED_REVIEW_IDS | _V46_REJECTED_REVIEW_IDS
 
 
 def _load_data_module():
@@ -166,9 +174,9 @@ def test_v25_pack_is_byte_stable_and_the_33_review_items_remain_playable():
         if record["id"] in set(DATA.REVIEW_ITEM_IDS)
     }
 
-    assert set(records) == set(DATA.REVIEW_ITEM_IDS) - _V45_REJECTED_REVIEW_IDS
+    assert set(records) == set(DATA.REVIEW_ITEM_IDS) - _RETIRED_REVIEW_IDS
     later_promotions = {"ct_literatura_298", "ct_viata_de_roman_299"}
-    for item_id in set(DATA.REVIEW_ITEM_IDS) - _V45_REJECTED_REVIEW_IDS:
+    for item_id in set(DATA.REVIEW_ITEM_IDS) - _RETIRED_REVIEW_IDS:
         game, record = records[item_id]
         expected_status = "approved" if item_id in later_promotions else "pending"
         assert record["status"] == expected_status

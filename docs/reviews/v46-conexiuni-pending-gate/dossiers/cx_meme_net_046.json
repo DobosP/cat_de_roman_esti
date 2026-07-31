@@ -1,0 +1,247 @@
+{
+ "id": "cx_meme_net_046",
+ "game": "conexiuni",
+ "category": "meme_net",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "a469d4d8435543d5b02467078f905aea3cb17efaca5c901595954a627bf458f5",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Live stream românesc, Thumbnail cu săgeată, Unboxing românesc, Video de reacție, Vlogging românesc"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Canale sau branduri cu comunitate\" mixes node_types 2+2: Creative Monkeyz[org], Zaiafet[work], Jamila Cuisine[work], Recorder[org]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Format video, nu persoană\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_049)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Combustibil de viral\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_048, cx_meme_net_049)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Umor cu buletin românesc\" reuses an inventory/selected quad (also in: cx_meme_net_048)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_meme_net_048 (8), cx_meme_net_132 (8)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Live stream românesc",
+   "Thumbnail cu săgeată",
+   "Unboxing românesc",
+   "Video de reacție",
+   "Vlogging românesc"
+  ],
+  "contested_tiles": [
+   "Challenge online"
+  ],
+  "engine_unfair_raw": 6
+ },
+ "groups": [
+  {
+   "label": "Format video, nu persoană",
+   "members": [
+    {
+     "id": "n_net_vlogging_ro",
+     "label": "Vlogging românesc",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.6735,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Format online bazat pe viața de zi cu zi, comunitate și adresare directă către public."
+    },
+    {
+     "id": "n_net_live_stream_ro",
+     "label": "Live stream românesc",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5349,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Transmisiune online în direct, cu chat, reacții și momente care pot deveni meme."
+    },
+    {
+     "id": "n_net_unboxing_ro",
+     "label": "Unboxing românesc",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.2871,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Format video în care produsul e deschis pe cameră, cu reacții și detalii pentru public."
+    },
+    {
+     "id": "n_net_reactie_video",
+     "label": "Video de reacție",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5217,
+     "degree": 15,
+     "incoming_degree": 15,
+     "description": "Clip în care creatorul comentează alt conținut, iar expresia feței devine parte din poantă."
+    }
+   ]
+  },
+  {
+   "label": "Combustibil de viral",
+   "members": [
+    {
+     "id": "n_net_thumbnail_cu_sageata",
+     "label": "Thumbnail cu săgeată",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5721,
+     "degree": 14,
+     "incoming_degree": 14,
+     "description": "Imagine de copertă online cu săgeți, fețe mirate și promisiune de revelație."
+    },
+    {
+     "id": "n_net_algoritm_social",
+     "label": "Algoritm social",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5643,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Mecanismul platformelor care decide ce clip ajunge în fața publicului."
+    },
+    {
+     "id": "n_net_trending_ro",
+     "label": "Trending România",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.6362,
+     "degree": 22,
+     "incoming_degree": 22,
+     "description": "Lista și senzația că un subiect a prins brusc la publicul online românesc."
+    },
+    {
+     "id": "n_net_challenge_online",
+     "label": "Challenge online",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5103,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Provocare repetată de creatori și public, de obicei împinsă de algoritm."
+    }
+   ]
+  },
+  {
+   "label": "Canale sau branduri cu comunitate",
+   "members": [
+    {
+     "id": "n_net_creative_monkeyz",
+     "label": "Creative Monkeyz",
+     "node_type": "org",
+     "category": "meme_net",
+     "salience": 0.4935,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Studio românesc de animație online cunoscut mai ales pentru seria RObotzi."
+    },
+    {
+     "id": "n_net_zaiafet",
+     "label": "Zaiafet",
+     "node_type": "work",
+     "category": "meme_net",
+     "salience": 0.3634,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Canal românesc de YouTube cu explicații accesibile despre istorie, cultură și idei."
+    },
+    {
+     "id": "n_net_jamila_cuisine",
+     "label": "Jamila Cuisine",
+     "node_type": "work",
+     "category": "meme_net",
+     "salience": 0.5487,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Canal culinar românesc foarte popular pe YouTube, reper pentru rețete explicate clar."
+    },
+    {
+     "id": "n_net_recorder",
+     "label": "Recorder",
+     "node_type": "org",
+     "category": "meme_net",
+     "salience": 0.4953,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Publicație video online din România, cunoscută pentru reportaje și documentare."
+    }
+   ]
+  },
+  {
+   "label": "Umor cu buletin românesc",
+   "members": [
+    {
+     "id": "n_net_meme_romanesc",
+     "label": "Memă românească",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.9308,
+     "degree": 40,
+     "incoming_degree": 40,
+     "description": "Glumă vizuală sau textuală care circulă online și traduce reflexe locale în poantă rapidă."
+    },
+    {
+     "id": "n_net_umor_autoironic",
+     "label": "Umor autoironic românesc",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.7551,
+     "degree": 15,
+     "incoming_degree": 15,
+     "description": "Felul blând-acid prin care românii râd de propriile improvizații și obiceiuri."
+    },
+    {
+     "id": "n_net_parodie_online",
+     "label": "Parodie online",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5433,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Imitație comică făcută pentru internet, de la sketch-uri la reacții și animații."
+    },
+    {
+     "id": "n_net_sketch_online",
+     "label": "Sketch online",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5726,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Scenetă scurtă filmată pentru internet, cu personaje recognoscibile și final de poantă."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Memă românească",
+   "a_group": "Umor cu buletin românesc",
+   "b": "Trending România",
+   "b_group": "Combustibil de viral",
+   "strength": 0.65
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:5c806537108bd7b0359a38f93385bec3a776b6df14166a3016610042d44dfac8"
+}

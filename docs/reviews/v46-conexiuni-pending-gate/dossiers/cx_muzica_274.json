@@ -1,0 +1,526 @@
+{
+ "id": "cx_muzica_274",
+ "game": "conexiuni",
+ "category": "muzica",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "ab7b496e76af3460ab3178165bb2e59fab681fdba43af683c9e4ae629adf9360",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Refren viral"
+  },
+  {
+   "check": "red_herring_budget",
+   "level": "WARN",
+   "detail": "2 contested tiles (budget <4): Hit de vară, Refren de vară"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Hituri plecate afară\" <-> \"Artiștii din spate\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Hituri plecate afară\" <-> \"Rețeta de vară\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Artiștii din spate\" mixes node_types 3+1: O-Zone[org], Edward Maya[person], Alexandra Stan[person], INNA[person]"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Artiștii din spate\" <-> \"Rețeta de vară\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Hituri plecate afară\" reuses an inventory/selected quad (also in: cx_meme_net_136, cx_muzica_056, cx_muzica_138, cx_muzica_140)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Artiștii din spate\" reuses an inventory/selected quad (also in: cx_muzica_053, cx_muzica_058, cx_muzica_140)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Viral înainte și după TikTok\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_136)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Rețeta de vară\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_muzica_140)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_muzica_140 (13), cx_meme_net_136 (9)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Dragostea din tei (11), Hot (9), O-Zone (10), TikTok România (10)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Refren viral"
+  ],
+  "contested_tiles": [
+   "Hit de vară",
+   "Refren de vară"
+  ],
+  "engine_unfair_raw": 13
+ },
+ "groups": [
+  {
+   "label": "Hituri plecate afară",
+   "members": [
+    {
+     "id": "n_muz_dragostea_din_tei",
+     "label": "Dragostea din tei",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.9519,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Hit O-Zone din 2003, cunoscut global prin refrenul „nu mă, nu mă iei”."
+    },
+    {
+     "id": "n_muz_stereo_love",
+     "label": "Stereo Love",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.8204,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Hit dance produs de Edward Maya, lansat în 2009 și difuzat masiv internațional."
+    },
+    {
+     "id": "n_muz_mr_saxobeat",
+     "label": "Mr. Saxobeat",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.8197,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Single Alexandra Stan din 2010, hit dance internațional cu riff de saxofon."
+    },
+    {
+     "id": "n_muz_hot_inna",
+     "label": "Hot",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.6032,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Single Inna din 2008, piesă dance care a deschis succesul ei internațional."
+    }
+   ]
+  },
+  {
+   "label": "Artiștii din spate",
+   "members": [
+    {
+     "id": "n_muz_ozone",
+     "label": "O-Zone",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.883,
+     "degree": 12,
+     "incoming_degree": 11,
+     "description": "Trio pop din Republica Moldova care a dus „Dragostea din tei” în topuri internaționale."
+    },
+    {
+     "id": "n_muz_edward_maya",
+     "label": "Edward Maya",
+     "node_type": "person",
+     "category": "muzica",
+     "salience": 0.4185,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "DJ și producător român, cunoscut internațional pentru „Stereo Love”."
+    },
+    {
+     "id": "n_muz_alexandra_stan",
+     "label": "Alexandra Stan",
+     "node_type": "person",
+     "category": "muzica",
+     "salience": 0.6002,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Cântăreață română devenită cunoscută global cu „Mr. Saxobeat”."
+    },
+    {
+     "id": "n_muz_inna",
+     "label": "INNA",
+     "node_type": "person",
+     "category": "muzica",
+     "salience": 0.8549,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Cântăreață română de dance-pop, cu succes internațional după single-ul „Hot”."
+    }
+   ]
+  },
+  {
+   "label": "Viral înainte și după TikTok",
+   "members": [
+    {
+     "id": "n_muz_refren_viral",
+     "label": "Refren viral",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.7157,
+     "degree": 24,
+     "incoming_degree": 24,
+     "description": "Refren ușor de fredonat, memorat rapid și redistribuit masiv online sau la radio."
+    },
+    {
+     "id": "n_net_tiktok_ro",
+     "label": "TikTok România",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.8345,
+     "degree": 46,
+     "incoming_degree": 46,
+     "description": "Zona românească de clipuri scurte, trenduri, sunete refolosite și glume comprimate."
+    },
+    {
+     "id": "n_v2mem_sunet_viral",
+     "label": "Sunet viral",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5319,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Fragment audio refolosit masiv în clipuri scurte și trenduri."
+    },
+    {
+     "id": "n_net_trending_ro",
+     "label": "Trending România",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.6362,
+     "degree": 22,
+     "incoming_degree": 22,
+     "description": "Lista și senzația că un subiect a prins brusc la publicul online românesc."
+    }
+   ]
+  },
+  {
+   "label": "Rețeta de vară",
+   "members": [
+    {
+     "id": "n_v2muz_muzica_dance",
+     "label": "Muzică dance",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.9195,
+     "degree": 18,
+     "incoming_degree": 18,
+     "description": "Muzică electronică pop pentru cluburi, radio și dans."
+    },
+    {
+     "id": "n_muz_pop_dance_ro",
+     "label": "Pop-dance românesc",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.8303,
+     "degree": 26,
+     "incoming_degree": 26,
+     "description": "Valul de dance românesc și moldovenesc exportat în cluburi și topuri internaționale."
+    },
+    {
+     "id": "n_v2muz_hit_de_vara",
+     "label": "Hit de vară",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.7804,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Piesă pop foarte difuzată vara, cu refren ușor de reținut."
+    },
+    {
+     "id": "n_v2muz_refren_de_vara",
+     "label": "Refren de vară",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.5715,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Refren luminos, simplu și repetat în piese estivale."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Dragostea din tei",
+   "a_group": "Hituri plecate afară",
+   "b": "O-Zone",
+   "b_group": "Artiștii din spate",
+   "strength": 0.95
+  },
+  {
+   "a": "Alexandra Stan",
+   "a_group": "Artiștii din spate",
+   "b": "Mr. Saxobeat",
+   "b_group": "Hituri plecate afară",
+   "strength": 0.9
+  },
+  {
+   "a": "Alexandra Stan",
+   "a_group": "Artiștii din spate",
+   "b": "Pop-dance românesc",
+   "b_group": "Rețeta de vară",
+   "strength": 0.9
+  },
+  {
+   "a": "Edward Maya",
+   "a_group": "Artiștii din spate",
+   "b": "Pop-dance românesc",
+   "b_group": "Rețeta de vară",
+   "strength": 0.9
+  },
+  {
+   "a": "Edward Maya",
+   "a_group": "Artiștii din spate",
+   "b": "Stereo Love",
+   "b_group": "Hituri plecate afară",
+   "strength": 0.9
+  },
+  {
+   "a": "INNA",
+   "a_group": "Artiștii din spate",
+   "b": "Pop-dance românesc",
+   "b_group": "Rețeta de vară",
+   "strength": 0.9
+  },
+  {
+   "a": "O-Zone",
+   "a_group": "Artiștii din spate",
+   "b": "Pop-dance românesc",
+   "b_group": "Rețeta de vară",
+   "strength": 0.9
+  },
+  {
+   "a": "Dragostea din tei",
+   "a_group": "Hituri plecate afară",
+   "b": "Pop-dance românesc",
+   "b_group": "Rețeta de vară",
+   "strength": 0.88
+  },
+  {
+   "a": "Mr. Saxobeat",
+   "a_group": "Hituri plecate afară",
+   "b": "Pop-dance românesc",
+   "b_group": "Rețeta de vară",
+   "strength": 0.88
+  },
+  {
+   "a": "Pop-dance românesc",
+   "a_group": "Rețeta de vară",
+   "b": "Stereo Love",
+   "b_group": "Hituri plecate afară",
+   "strength": 0.88
+  },
+  {
+   "a": "Hot",
+   "a_group": "Hituri plecate afară",
+   "b": "INNA",
+   "b_group": "Artiștii din spate",
+   "strength": 0.86
+  },
+  {
+   "a": "Hot",
+   "a_group": "Hituri plecate afară",
+   "b": "Muzică dance",
+   "b_group": "Rețeta de vară",
+   "strength": 0.84
+  },
+  {
+   "a": "Hot",
+   "a_group": "Hituri plecate afară",
+   "b": "Pop-dance românesc",
+   "b_group": "Rețeta de vară",
+   "strength": 0.84
+  },
+  {
+   "a": "Mr. Saxobeat",
+   "a_group": "Hituri plecate afară",
+   "b": "Muzică dance",
+   "b_group": "Rețeta de vară",
+   "strength": 0.84
+  },
+  {
+   "a": "Stereo Love",
+   "a_group": "Hituri plecate afară",
+   "b": "Muzică dance",
+   "b_group": "Rețeta de vară",
+   "strength": 0.84
+  },
+  {
+   "a": "INNA",
+   "a_group": "Artiștii din spate",
+   "b": "Muzică dance",
+   "b_group": "Rețeta de vară",
+   "strength": 0.83
+  },
+  {
+   "a": "Refren viral",
+   "a_group": "Viral înainte și după TikTok",
+   "b": "Hit de vară",
+   "b_group": "Rețeta de vară",
+   "strength": 0.83
+  },
+  {
+   "a": "Edward Maya",
+   "a_group": "Artiștii din spate",
+   "b": "Muzică dance",
+   "b_group": "Rețeta de vară",
+   "strength": 0.82
+  },
+  {
+   "a": "Refren viral",
+   "a_group": "Viral înainte și după TikTok",
+   "b": "Refren de vară",
+   "b_group": "Rețeta de vară",
+   "strength": 0.82
+  },
+  {
+   "a": "Alexandra Stan",
+   "a_group": "Artiștii din spate",
+   "b": "Muzică dance",
+   "b_group": "Rețeta de vară",
+   "strength": 0.8
+  },
+  {
+   "a": "Alexandra Stan",
+   "a_group": "Artiștii din spate",
+   "b": "Refren viral",
+   "b_group": "Viral înainte și după TikTok",
+   "strength": 0.78
+  },
+  {
+   "a": "Dragostea din tei",
+   "a_group": "Hituri plecate afară",
+   "b": "Hit de vară",
+   "b_group": "Rețeta de vară",
+   "strength": 0.78
+  },
+  {
+   "a": "Dragostea din tei",
+   "a_group": "Hituri plecate afară",
+   "b": "Muzică dance",
+   "b_group": "Rețeta de vară",
+   "strength": 0.78
+  },
+  {
+   "a": "Edward Maya",
+   "a_group": "Artiștii din spate",
+   "b": "Refren viral",
+   "b_group": "Viral înainte și după TikTok",
+   "strength": 0.78
+  },
+  {
+   "a": "INNA",
+   "a_group": "Artiștii din spate",
+   "b": "Refren viral",
+   "b_group": "Viral înainte și după TikTok",
+   "strength": 0.78
+  },
+  {
+   "a": "O-Zone",
+   "a_group": "Artiștii din spate",
+   "b": "Muzică dance",
+   "b_group": "Rețeta de vară",
+   "strength": 0.78
+  },
+  {
+   "a": "O-Zone",
+   "a_group": "Artiștii din spate",
+   "b": "Refren viral",
+   "b_group": "Viral înainte și după TikTok",
+   "strength": 0.78
+  },
+  {
+   "a": "Dragostea din tei",
+   "a_group": "Hituri plecate afară",
+   "b": "Refren viral",
+   "b_group": "Viral înainte și după TikTok",
+   "strength": 0.76
+  },
+  {
+   "a": "Hot",
+   "a_group": "Hituri plecate afară",
+   "b": "Refren viral",
+   "b_group": "Viral înainte și după TikTok",
+   "strength": 0.76
+  },
+  {
+   "a": "Mr. Saxobeat",
+   "a_group": "Hituri plecate afară",
+   "b": "Refren viral",
+   "b_group": "Viral înainte și după TikTok",
+   "strength": 0.76
+  },
+  {
+   "a": "Refren viral",
+   "a_group": "Viral înainte și după TikTok",
+   "b": "Stereo Love",
+   "b_group": "Hituri plecate afară",
+   "strength": 0.76
+  },
+  {
+   "a": "Hot",
+   "a_group": "Hituri plecate afară",
+   "b": "Hit de vară",
+   "b_group": "Rețeta de vară",
+   "strength": 0.75
+  },
+  {
+   "a": "Dragostea din tei",
+   "a_group": "Hituri plecate afară",
+   "b": "Refren de vară",
+   "b_group": "Rețeta de vară",
+   "strength": 0.74
+  },
+  {
+   "a": "Hot",
+   "a_group": "Hituri plecate afară",
+   "b": "Refren de vară",
+   "b_group": "Rețeta de vară",
+   "strength": 0.72
+  },
+  {
+   "a": "Mr. Saxobeat",
+   "a_group": "Hituri plecate afară",
+   "b": "Hit de vară",
+   "b_group": "Rețeta de vară",
+   "strength": 0.7
+  },
+  {
+   "a": "Stereo Love",
+   "a_group": "Hituri plecate afară",
+   "b": "Hit de vară",
+   "b_group": "Rețeta de vară",
+   "strength": 0.68
+  },
+  {
+   "a": "O-Zone",
+   "a_group": "Artiștii din spate",
+   "b": "Refren de vară",
+   "b_group": "Rețeta de vară",
+   "strength": 0.64
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:b82a00f4f3b9202166c91b5d3658fbd0ff0b514e06519ebe8dab9ca6d90707b2"
+}

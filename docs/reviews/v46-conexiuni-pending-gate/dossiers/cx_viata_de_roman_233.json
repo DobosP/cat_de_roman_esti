@@ -1,0 +1,290 @@
+{
+ "id": "cx_viata_de_roman_233",
+ "game": "conexiuni",
+ "category": "viata_de_roman",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "d1dcf56373f1050f447e0ead9724d8419ad2d6d5ac952776b08ce33250ee5d1b",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Apometrele"
+  },
+  {
+   "check": "red_herring_budget",
+   "level": "WARN",
+   "detail": "3 contested tiles (budget <4): Avizierul de la bloc, Caloriferul rece, Întreținerea"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Războiul locului de parcare\" repeats member(s): Parcare"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Bugetul nevăzut al scării\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_stiinta_230)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"La intrare se află tot\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_154, cx_viata_de_roman_084, cx_viata_de_roman_168, cx_viata_de_roman_289)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Războiul locului de parcare\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_085, cx_viata_de_roman_088, cx_viata_de_roman_168, cx_viata_de_roman_172)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_viata_de_roman_085 (9), cx_viata_de_roman_168 (9)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Interfonul (9), Portbagajul plin (9)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Apometrele"
+  ],
+  "contested_tiles": [
+   "Avizierul de la bloc",
+   "Caloriferul rece",
+   "Întreținerea"
+  ],
+  "engine_unfair_raw": 2
+ },
+ "groups": [
+  {
+   "label": "Bugetul nevăzut al scării",
+   "members": [
+    {
+     "id": "n_v3via_intretinerea",
+     "label": "Întreținerea",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.8802,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Cheltuiala lunară a apartamentului pentru bloc și utilități comune."
+    },
+    {
+     "id": "n_vdr_apometre",
+     "label": "Apometrele",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.5271,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Contoare de apă citite lunar, sursă clasică de discuții la întreținere."
+    },
+    {
+     "id": "n_v3via_repartitoare",
+     "label": "Repartitoare",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.4527,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Dispozitive montate pe calorifere pentru estimarea consumului de căldură."
+    },
+    {
+     "id": "n_vdr_calorifer_rece",
+     "label": "Caloriferul rece",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.4731,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Semn al iernilor de apartament când căldura vine greu sau deloc."
+    }
+   ]
+  },
+  {
+   "label": "La intrare se află tot",
+   "members": [
+    {
+     "id": "n_vdr_scara_blocului",
+     "label": "Scara blocului",
+     "node_type": "place",
+     "category": "viata_de_roman",
+     "salience": 0.8591,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Spațiul comun unde se întâlnesc cutiile poștale, ecoul și anunțurile vecinilor."
+    },
+    {
+     "id": "n_vdr_interfon",
+     "label": "Interfonul",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.632,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Sistemul de acces la scară, cu apeluri, coduri și uși care tot se blochează."
+    },
+    {
+     "id": "n_vdr_avizier_bloc",
+     "label": "Avizierul de la bloc",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.5019,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Panoul cu întreținerea, anunțuri și bilete pentru locatari."
+    },
+    {
+     "id": "n_vdr_asociatia_proprietari",
+     "label": "Asociația de proprietari",
+     "node_type": "org",
+     "category": "viata_de_roman",
+     "salience": 0.629,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Organizația locatarilor care gestionează cheltuielile și spațiile comune ale blocului."
+    }
+   ]
+  },
+  {
+   "label": "Războiul locului de parcare",
+   "members": [
+    {
+     "id": "n_v2via_parcare",
+     "label": "Parcare",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.6974,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Spațiu sau situație legată de lăsarea mașinii lângă bloc ori pe stradă."
+    },
+    {
+     "id": "n_vdr_biletel_in_parbriz",
+     "label": "Bilețelul în parbriz",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.5061,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Mesaj lăsat pe mașină pentru parcare, zgârietură sau rugăminți de mutare."
+    },
+    {
+     "id": "n_vdr_parcat_pe_trotuar",
+     "label": "Parcatul pe trotuar",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.5685,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Obicei urban controversat, asociat cu lipsa locurilor de parcare."
+    },
+    {
+     "id": "n_vdr_portbagaj_plin",
+     "label": "Portbagajul plin",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.6883,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Mașina încărcată cu sacoșe, borcane sau bagaje la plecarea de la rude."
+    }
+   ]
+  },
+  {
+   "label": "Copilărie printre betoane",
+   "members": [
+    {
+     "id": "n_vdr_copilaria_anilor_90",
+     "label": "Copilăria anilor 90",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9688,
+     "degree": 31,
+     "incoming_degree": 31,
+     "description": "Nostalgia copiilor crescuți între cheia de la gât, jocuri la bloc și dulciuri de chioșc."
+    },
+    {
+     "id": "n_v2via_jocuri_copilarie",
+     "label": "Jocuri de copilărie",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.8935,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Jocuri simple practicate de copii în curte, la școală sau între blocuri."
+    },
+    {
+     "id": "n_vdr_joaca_in_fata_blocului",
+     "label": "Joaca în fața blocului",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.8661,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Fotbal, elastic, ascunsa și negocieri pe aleea dintre scări."
+    },
+    {
+     "id": "n_vdr_oracol_scolar",
+     "label": "Oracolul școlar",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.5307,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Caiet cu întrebări, dedicații și secrete circulate prin clasă."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Întreținerea",
+   "a_group": "Bugetul nevăzut al scării",
+   "b": "Asociația de proprietari",
+   "b_group": "La intrare se află tot",
+   "strength": 0.86
+  },
+  {
+   "a": "Întreținerea",
+   "a_group": "Bugetul nevăzut al scării",
+   "b": "Avizierul de la bloc",
+   "b_group": "La intrare se află tot",
+   "strength": 0.85
+  },
+  {
+   "a": "Apometrele",
+   "a_group": "Bugetul nevăzut al scării",
+   "b": "Asociația de proprietari",
+   "b_group": "La intrare se află tot",
+   "strength": 0.82
+  },
+  {
+   "a": "Apometrele",
+   "a_group": "Bugetul nevăzut al scării",
+   "b": "Avizierul de la bloc",
+   "b_group": "La intrare se află tot",
+   "strength": 0.74
+  },
+  {
+   "a": "Joaca în fața blocului",
+   "a_group": "Copilărie printre betoane",
+   "b": "Scara blocului",
+   "b_group": "La intrare se află tot",
+   "strength": 0.74
+  },
+  {
+   "a": "Asociația de proprietari",
+   "a_group": "La intrare se află tot",
+   "b": "Caloriferul rece",
+   "b_group": "Bugetul nevăzut al scării",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:cf4de68f4d5bdd6268d46e33ec928dd223e38fd15fcc502625b95bf79a8cc341"
+}

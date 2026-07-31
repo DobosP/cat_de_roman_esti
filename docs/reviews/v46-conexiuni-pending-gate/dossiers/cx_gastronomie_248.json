@@ -1,0 +1,249 @@
+{
+ "id": "cx_gastronomie_248",
+ "game": "conexiuni",
+ "category": "gastronomie",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "a0449f936f6d2ef71a4a2fbccdfa97c43f727f2db58a14d459a59fca0f53dbdb",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Covrigi de Buzău"
+  },
+  {
+   "check": "red_herring_budget",
+   "level": "WARN",
+   "detail": "2 contested tiles (budget <4): Magiun de Topoloveni, Plăcintă dobrogeană"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Dobrogea\" repeats member(s): Dobrogea"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Dobrogea\" mixes node_types 2+2: Baclava dobrogeană[concept], Plăcintă dobrogeană[concept], Dobrogea[place], Constanța[place]"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Moldova și Bucovina\" repeats member(s): Moldova"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Moldova și Bucovina\" mixes node_types 3+1: Bucovina gastronomică[concept], Poale-n brâu[concept], Tochitură moldovenească[concept], Moldova[place]"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Constanța (15), Dobrogea (13), Varză a la Cluj (9), Moldova (9)"
+  },
+  {
+   "check": "generic_region_link",
+   "level": "WARN",
+   "detail": "board pairs region tiles (Dobrogea, Moldova) with non-distinctive region-linked tiles: Covrigi de Buzău (national-salience concept (0.76) with generic related_to edge to Muntenia)"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "Covrigi de Buzău": "national-salience concept (0.76) with generic related_to edge to Muntenia"
+ },
+ "fairness": {
+  "unfair_tiles": [
+   "Covrigi de Buzău"
+  ],
+  "contested_tiles": [
+   "Magiun de Topoloveni",
+   "Plăcintă dobrogeană"
+  ],
+  "engine_unfair_raw": 1
+ },
+ "groups": [
+  {
+   "label": "Orașe în numele mâncării",
+   "members": [
+    {
+     "id": "n_gas_covrigi_buzau",
+     "label": "Covrigi de Buzău",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.7635,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Covrigi opăriți și copți, produs românesc cu indicație geografică protejată."
+    },
+    {
+     "id": "n_gas_varza_a_la_cluj",
+     "label": "Varză a la Cluj",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.5846,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Fel ardelenesc stratificat cu varză, carne și orez, asemănat cu sarmalele desfăcute."
+    },
+    {
+     "id": "n_v11gas_salam_sibiu",
+     "label": "Salam de Sibiu",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.82,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Salam crud-uscat emblematic, asociat cu Sibiu și cu mezelurile fine românești."
+    },
+    {
+     "id": "n_v11gas_magiun_topoloveni",
+     "label": "Magiun de Topoloveni",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.62,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Magiun de prune cu indicație geografică protejată, produs celebru din Argeș."
+    }
+   ]
+  },
+  {
+   "label": "Dobrogea",
+   "members": [
+    {
+     "id": "n_gas_baclava_dobrogeana",
+     "label": "Baclava dobrogeană",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.5193,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Desert cu foi, nucă și sirop, intrat firesc în peisajul culinar dobrogean."
+    },
+    {
+     "id": "n_v11gas_placinta_dobrogeana",
+     "label": "Plăcintă dobrogeană",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.61,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Plăcintă sărată cu brânză, produs tradițional cu nume protejat european."
+    },
+    {
+     "id": "n_dobrogea",
+     "label": "Dobrogea",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.4845,
+     "degree": 23,
+     "incoming_degree": 25,
+     "description": "Regiune între Dunăre și Marea Neagră."
+    },
+    {
+     "id": "n_constanta",
+     "label": "Constanța",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.5067,
+     "degree": 22,
+     "incoming_degree": 22,
+     "description": "Oraș-port la Marea Neagră, în Dobrogea."
+    }
+   ]
+  },
+  {
+   "label": "Moldova și Bucovina",
+   "members": [
+    {
+     "id": "n_gas_bucovina_gastronomica",
+     "label": "Bucovina gastronomică",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.4317,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Imagine culinară regională: ciorbe drese, afumături, plăcinte și ospitalitate."
+    },
+    {
+     "id": "n_gas_placinte_poale_brau",
+     "label": "Poale-n brâu",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.6158,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Plăcinte moldovenești cu brânză dulce, cunoscute și ca brânzoaice."
+    },
+    {
+     "id": "n_v11gas_tochitura_moldoveneasca",
+     "label": "Tochitură moldovenească",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.68,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Tocană consistentă cu carne, mămăligă, brânză și ou, asociată Moldovei."
+    },
+    {
+     "id": "n_moldova_reg",
+     "label": "Moldova",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.5978,
+     "degree": 29,
+     "incoming_degree": 36,
+     "description": "Regiune istorică din estul României."
+    }
+   ]
+  },
+  {
+   "label": "București de masă",
+   "members": [
+    {
+     "id": "n_gas_mititei_obor",
+     "label": "Mititeii de la Obor",
+     "node_type": "place",
+     "category": "gastronomie",
+     "salience": 0.4641,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Reper bucureștean de mici la grătar, coadă și muștar în Piața Obor."
+    },
+    {
+     "id": "n_gas_hanul_lui_manuc",
+     "label": "Hanul lui Manuc",
+     "node_type": "place",
+     "category": "gastronomie",
+     "salience": 0.2173,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Han istoric din București, legat de ospitalitate, mese și negustorie urbană."
+    },
+    {
+     "id": "n_v11gas_caru_cu_bere",
+     "label": "Caru' cu Bere",
+     "node_type": "place",
+     "category": "gastronomie",
+     "salience": 0.66,
+     "degree": 6,
+     "incoming_degree": 5,
+     "description": "Restaurant istoric din Centrul Vechi al Bucureștiului, celebru pentru decor și bere."
+    },
+    {
+     "id": "n_v11gas_casa_capsa",
+     "label": "Casa Capșa",
+     "node_type": "place",
+     "category": "gastronomie",
+     "salience": 0.58,
+     "degree": 5,
+     "incoming_degree": 4,
+     "description": "Cofetărie și restaurant istoric bucureștean, reper al elitei urbane."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:87631c4f3eb3d3be7bc723f1dbce7f14aa8b987e9a7f63a075f11a20e9b34cc5"
+}

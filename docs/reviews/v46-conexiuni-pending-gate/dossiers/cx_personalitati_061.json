@@ -1,0 +1,267 @@
+{
+ "id": "cx_personalitati_061",
+ "game": "conexiuni",
+ "category": "personalitati",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "fc74ce4374a6b85d2be7d3d9fae9d595ba4aea121b377eb4fcd7dc562af0a3a5",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Enescu: titluri care se ating\" mixes node_types 3+1: Rapsodia Română[work], Rapsodiile Române[work], Oedipe[work], Festivalul George Enescu[event]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Opere Brâncuși, nu locuri\" reuses an inventory/selected quad (also in: cx_arta_cultura_003, cx_personalitati_064)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Enescu: titluri care se ating\" reuses an inventory/selected quad (also in: cx_arta_cultura_003)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Curente artistice și literare\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_183, cx_personalitati_215)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_arta_cultura_003 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Ateneul Român (17), Coloana Infinitului (14), Festivalul George Enescu (18), Masa Tăcerii (20), Modernism (9), Oedipe (11), Poarta Sărutului (15), Rapsodia Română (14)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 3
+ },
+ "groups": [
+  {
+   "label": "Opere Brâncuși, nu locuri",
+   "members": [
+    {
+     "id": "n_coloana_infinitului",
+     "label": "Coloana Infinitului",
+     "node_type": "work",
+     "category": "personalitati",
+     "salience": 0.4557,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Sculptura de Brancusi din ansamblul de la Targu Jiu."
+    },
+    {
+     "id": "n_poarta_sarutului",
+     "label": "Poarta Sărutului",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.361,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Sculptura de Brancusi din Ansamblul de la Targu Jiu."
+    },
+    {
+     "id": "n_masa_tacerii",
+     "label": "Masa Tăcerii",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.3478,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Sculptura de Brancusi din Ansamblul de la Targu Jiu."
+    },
+    {
+     "id": "n_cumintenia_pamantului",
+     "label": "Cumințenia Pământului",
+     "node_type": "work",
+     "category": "personalitati",
+     "salience": 0.1763,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Sculptura timpurie de Constantin Brancusi."
+    }
+   ]
+  },
+  {
+   "label": "Enescu: titluri care se ating",
+   "members": [
+    {
+     "id": "n_rapsodia_romana",
+     "label": "Rapsodia Română",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.4419,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Lucrare orchestrala de George Enescu inspirata din folclor."
+    },
+    {
+     "id": "n_rapsodiile_romane",
+     "label": "Rapsodiile Române",
+     "node_type": "work",
+     "category": "personalitati",
+     "salience": 0.1728,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Lucrari orchestrale celebre de George Enescu."
+    },
+    {
+     "id": "n_oedipe",
+     "label": "Oedipe",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.2638,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Unica opera lirica a lui George Enescu."
+    },
+    {
+     "id": "n_festivalul_enescu",
+     "label": "Festivalul George Enescu",
+     "node_type": "event",
+     "category": "arta_cultura",
+     "salience": 0.4779,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Festival international de muzica clasica de la Bucuresti."
+    }
+   ]
+  },
+  {
+   "label": "Locuri-magnet pentru personalități",
+   "members": [
+    {
+     "id": "n_paris",
+     "label": "Paris",
+     "node_type": "place",
+     "category": "personalitati",
+     "salience": 0.8261,
+     "degree": 23,
+     "incoming_degree": 24,
+     "description": "Capitala Frantei, centru al exilului romanesc."
+    },
+    {
+     "id": "n_targu_jiu",
+     "label": "Târgu Jiu",
+     "node_type": "place",
+     "category": "personalitati",
+     "salience": 0.233,
+     "degree": 8,
+     "incoming_degree": 9,
+     "description": "Oras din Oltenia, ansamblul sculptural Brancusi."
+    },
+    {
+     "id": "n_ateneul_roman",
+     "label": "Ateneul Român",
+     "node_type": "place",
+     "category": "arta_cultura",
+     "salience": 0.6749,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Sala de concerte din Bucuresti inaugurata in 1888, principala scena a Festivalului George Enescu."
+    },
+    {
+     "id": "n_perx_balcic",
+     "label": "Balcic",
+     "node_type": "place",
+     "category": "personalitati",
+     "salience": 0.1702,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Oraș de la Marea Neagră, legat de reședința preferată a Reginei Maria."
+    }
+   ]
+  },
+  {
+   "label": "Curente artistice și literare",
+   "members": [
+    {
+     "id": "n_dadaism_lit",
+     "label": "Dadaism",
+     "node_type": "concept",
+     "category": "literatura",
+     "salience": 0.2234,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Miscare de avangarda fondata in 1916, initiata de Tristan Tzara la Zurich."
+    },
+    {
+     "id": "n_modernism",
+     "label": "Modernism",
+     "node_type": "concept",
+     "category": "literatura",
+     "salience": 0.4869,
+     "degree": 25,
+     "incoming_degree": 24,
+     "description": "Curent literar interbelic de innoire a expresiei."
+    },
+    {
+     "id": "n_simbolism",
+     "label": "Simbolism",
+     "node_type": "concept",
+     "category": "literatura",
+     "salience": 0.2745,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Curent literar de la cumpana secolelor XIX-XX."
+    },
+    {
+     "id": "n_impresionism",
+     "label": "Impresionism",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.2365,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Curent artistic francez care a influentat pictura lui Grigorescu."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Masa Tăcerii",
+   "a_group": "Opere Brâncuși, nu locuri",
+   "b": "Târgu Jiu",
+   "b_group": "Locuri-magnet pentru personalități",
+   "strength": 0.9
+  },
+  {
+   "a": "Poarta Sărutului",
+   "a_group": "Opere Brâncuși, nu locuri",
+   "b": "Târgu Jiu",
+   "b_group": "Locuri-magnet pentru personalități",
+   "strength": 0.9
+  },
+  {
+   "a": "Coloana Infinitului",
+   "a_group": "Opere Brâncuși, nu locuri",
+   "b": "Târgu Jiu",
+   "b_group": "Locuri-magnet pentru personalități",
+   "strength": 0.85
+  },
+  {
+   "a": "Ateneul Român",
+   "a_group": "Locuri-magnet pentru personalități",
+   "b": "Festivalul George Enescu",
+   "b_group": "Enescu: titluri care se ating",
+   "strength": 0.75
+  },
+  {
+   "a": "Oedipe",
+   "a_group": "Enescu: titluri care se ating",
+   "b": "Paris",
+   "b_group": "Locuri-magnet pentru personalități",
+   "strength": 0.68
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:3d84628a24ebbf20967f4279bc928e3f2008dfb989200eb0b480e4529c3a107d"
+}

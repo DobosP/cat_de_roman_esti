@@ -1,0 +1,352 @@
+{
+ "id": "cx_muzica_271",
+ "game": "conexiuni",
+ "category": "muzica",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "969ca9a65de1e969c666cc3dd8923de1430dcbf6fa6f0a366dcfe57d524f4137",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "board_type_shortcut",
+   "level": "WARN",
+   "detail": "all four groups are node-type homogeneous and expose 3 distinct group types"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Festivaluri cu hartă clară\" <-> \"Locuri care le trag de mânecă\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Festivaluri cu hartă clară\" <-> \"Evenimente cu public\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Evenimente cu public\" repeats member(s): Public"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Festivaluri cu hartă clară\" reuses an inventory/selected quad (also in: cx_geografie_252, cx_muzica_056, cx_muzica_138, cx_muzica_205, cx_muzica_206)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Locuri care le trag de mânecă\" reuses an inventory/selected quad (also in: cx_muzica_054, cx_muzica_056, cx_muzica_138, cx_muzica_206)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Evenimente cu public\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_161)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_muzica_206 (10), cx_muzica_056 (8), cx_muzica_138 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Brașov (12), Cluj-Napoca (19), Constanța (15), Bonțida (9), Electric Castle (10), Neversea (11), Untold (10)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 9
+ },
+ "groups": [
+  {
+   "label": "Festivaluri cu hartă clară",
+   "members": [
+    {
+     "id": "n_muz_untold",
+     "label": "Untold",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.8746,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Festival muzical major organizat la Cluj-Napoca, cu artiști EDM și pop internaționali."
+    },
+    {
+     "id": "n_muz_neversea",
+     "label": "Neversea",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.729,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Festival de muzică organizat la Constanța, asociat cu scena de pe litoral."
+    },
+    {
+     "id": "n_muz_electric_castle",
+     "label": "Electric Castle",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.6862,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Festival muzical organizat la Bonțida, lângă Castelul Bánffy."
+    },
+    {
+     "id": "n_muz_cerbul_de_aur",
+     "label": "Cerbul de Aur",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.7305,
+     "degree": 15,
+     "incoming_degree": 15,
+     "description": "Festival-concurs muzical de la Brașov, lansat în perioada televiziunii clasice."
+    }
+   ]
+  },
+  {
+   "label": "Locuri care le trag de mânecă",
+   "members": [
+    {
+     "id": "n_cluj_napoca",
+     "label": "Cluj-Napoca",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.4989,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Oraș important din Transilvania, pe Someș."
+    },
+    {
+     "id": "n_constanta",
+     "label": "Constanța",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.5067,
+     "degree": 22,
+     "incoming_degree": 22,
+     "description": "Oraș-port la Marea Neagră, în Dobrogea."
+    },
+    {
+     "id": "n_muz_bontida",
+     "label": "Bonțida",
+     "node_type": "place",
+     "category": "muzica",
+     "salience": 0.2836,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Localitate din județul Cluj, cunoscută în pop-culture prin Electric Castle."
+    },
+    {
+     "id": "n_brasov",
+     "label": "Brașov",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.3074,
+     "degree": 12,
+     "incoming_degree": 11,
+     "description": "Oras din centrul Romaniei, la poalele Carpatilor, important centru turistic si industrial."
+    }
+   ]
+  },
+  {
+   "label": "Hituri și refrene",
+   "members": [
+    {
+     "id": "n_v2muz_hit_de_vara",
+     "label": "Hit de vară",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.7804,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Piesă pop foarte difuzată vara, cu refren ușor de reținut."
+    },
+    {
+     "id": "n_v2muz_refren_de_vara",
+     "label": "Refren de vară",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.5715,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Refren luminos, simplu și repetat în piese estivale."
+    },
+    {
+     "id": "n_v4muz_hit",
+     "label": "Hit",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.6074,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Piesă foarte populară, ascultată mult de public."
+    },
+    {
+     "id": "n_v4muz_refren",
+     "label": "Refren",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.7691,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Parte repetată a unei piese, ușor de ținut minte."
+    }
+   ]
+  },
+  {
+   "label": "Evenimente cu public",
+   "members": [
+    {
+     "id": "n_v2muz_concert",
+     "label": "Concert",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.9582,
+     "degree": 39,
+     "incoming_degree": 39,
+     "description": "Eveniment live în care artiștii cântă în fața publicului."
+    },
+    {
+     "id": "n_v4art_festival",
+     "label": "Festival",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.9083,
+     "degree": 10,
+     "incoming_degree": 12,
+     "description": "Eveniment cultural cu spectacole, concerte sau proiecții."
+    },
+    {
+     "id": "n_v4art_spectacol",
+     "label": "Spectacol",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.9406,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Reprezentație artistică văzută de public pe scenă sau într-o sală."
+    },
+    {
+     "id": "n_v4art_public",
+     "label": "Public",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.8823,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Oamenii care urmăresc un spectacol, concert, film sau expoziție."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Bonțida",
+   "a_group": "Locuri care le trag de mânecă",
+   "b": "Electric Castle",
+   "b_group": "Festivaluri cu hartă clară",
+   "strength": 0.92
+  },
+  {
+   "a": "Brașov",
+   "a_group": "Locuri care le trag de mânecă",
+   "b": "Cerbul de Aur",
+   "b_group": "Festivaluri cu hartă clară",
+   "strength": 0.9
+  },
+  {
+   "a": "Cluj-Napoca",
+   "a_group": "Locuri care le trag de mânecă",
+   "b": "Untold",
+   "b_group": "Festivaluri cu hartă clară",
+   "strength": 0.88
+  },
+  {
+   "a": "Constanța",
+   "a_group": "Locuri care le trag de mânecă",
+   "b": "Neversea",
+   "b_group": "Festivaluri cu hartă clară",
+   "strength": 0.88
+  },
+  {
+   "a": "Untold",
+   "a_group": "Festivaluri cu hartă clară",
+   "b": "Festival",
+   "b_group": "Evenimente cu public",
+   "strength": 0.82
+  },
+  {
+   "a": "Electric Castle",
+   "a_group": "Festivaluri cu hartă clară",
+   "b": "Festival",
+   "b_group": "Evenimente cu public",
+   "strength": 0.8
+  },
+  {
+   "a": "Neversea",
+   "a_group": "Festivaluri cu hartă clară",
+   "b": "Festival",
+   "b_group": "Evenimente cu public",
+   "strength": 0.8
+  },
+  {
+   "a": "Untold",
+   "a_group": "Festivaluri cu hartă clară",
+   "b": "Concert",
+   "b_group": "Evenimente cu public",
+   "strength": 0.75
+  },
+  {
+   "a": "Electric Castle",
+   "a_group": "Festivaluri cu hartă clară",
+   "b": "Concert",
+   "b_group": "Evenimente cu public",
+   "strength": 0.74
+  },
+  {
+   "a": "Neversea",
+   "a_group": "Festivaluri cu hartă clară",
+   "b": "Concert",
+   "b_group": "Evenimente cu public",
+   "strength": 0.74
+  },
+  {
+   "a": "Cerbul de Aur",
+   "a_group": "Festivaluri cu hartă clară",
+   "b": "Concert",
+   "b_group": "Evenimente cu public",
+   "strength": 0.7
+  },
+  {
+   "a": "Untold",
+   "a_group": "Festivaluri cu hartă clară",
+   "b": "Public",
+   "b_group": "Evenimente cu public",
+   "strength": 0.68
+  },
+  {
+   "a": "Cerbul de Aur",
+   "a_group": "Festivaluri cu hartă clară",
+   "b": "Spectacol",
+   "b_group": "Evenimente cu public",
+   "strength": 0.66
+  },
+  {
+   "a": "Neversea",
+   "a_group": "Festivaluri cu hartă clară",
+   "b": "Hit de vară",
+   "b_group": "Hituri și refrene",
+   "strength": 0.66
+  },
+  {
+   "a": "Bonțida",
+   "a_group": "Locuri care le trag de mânecă",
+   "b": "Concert",
+   "b_group": "Evenimente cu public",
+   "strength": 0.62
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:40ea481e49f578b7e8ac04e95ff219bc67dfe19f0dc9ba82401bc53153f1cee4"
+}

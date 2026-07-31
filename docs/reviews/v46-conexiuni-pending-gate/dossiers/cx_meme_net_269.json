@@ -1,0 +1,236 @@
+{
+ "id": "cx_meme_net_269",
+ "game": "conexiuni",
+ "category": "meme_net",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "5cd0d7be6132244c780a9074d0b13b9439620e1300a63ff4d08d3ab5a208d70c",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Bucătărie pe ecran\" repeats member(s): Bucătărie"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Bucătărie pe ecran\" mixes node_types 3+1: Jamila Cuisine[work], Clip culinar[concept], Mâncare[concept], Bucătărie[concept]"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Presă, documentar, protest\" repeats member(s): Documentar, Protest"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Presă, documentar, protest\" mixes node_types 3+1: Recorder[org], Mass-media[concept], Documentar[concept], Protest[concept]"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Ghiță, Sibiu și Vodafone\" repeats member(s): Sibiu"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Ghiță, Sibiu și Vodafone\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_045, cx_meme_net_048, cx_meme_net_268)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: I.L. Caragiale (23), Ghiță Ciobanul (10)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 0
+ },
+ "groups": [
+  {
+   "label": "Satiră și comedie românească",
+   "members": [
+    {
+     "id": "n_v11mem_times_new_roman",
+     "label": "Times New Roman",
+     "node_type": "org",
+     "category": "meme_net",
+     "salience": 0.64,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Publicație online de satiră și știri parodice, foarte citată în meme românești."
+    },
+    {
+     "id": "n_ion_luca_caragiale",
+     "label": "I.L. Caragiale",
+     "node_type": "person",
+     "category": "literatura",
+     "salience": 0.5625,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Dramaturg roman, maestru al comediei, membru al Junimii."
+    },
+    {
+     "id": "n_net_standup_ro",
+     "label": "Stand-up românesc",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.6812,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Scenă locală de comedie live care a ajuns puternic și în clipuri, podcasturi și reels."
+    },
+    {
+     "id": "n_ftv_iumor",
+     "label": "iUmor",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.5541,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Emisiune de divertisment și stand-up difuzată de Antena 1."
+    }
+   ]
+  },
+  {
+   "label": "Bucătărie pe ecran",
+   "members": [
+    {
+     "id": "n_net_jamila_cuisine",
+     "label": "Jamila Cuisine",
+     "node_type": "work",
+     "category": "meme_net",
+     "salience": 0.5487,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Canal culinar românesc foarte popular pe YouTube, reper pentru rețete explicate clar."
+    },
+    {
+     "id": "n_v2mem_clip_culinar",
+     "label": "Clip culinar",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.3796,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Video scurt sau lung despre rețete, gătit și prezentare de mâncare."
+    },
+    {
+     "id": "n_v4gas_mancare",
+     "label": "Mâncare",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9301,
+     "degree": 38,
+     "incoming_degree": 15,
+     "description": "Concept general pentru alimente și preparate consumate zilnic."
+    },
+    {
+     "id": "n_v4gas_bucatarie",
+     "label": "Bucătărie",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.8809,
+     "degree": 18,
+     "incoming_degree": 16,
+     "description": "Spațiu și domeniu al pregătirii mâncării."
+    }
+   ]
+  },
+  {
+   "label": "Presă, documentar, protest",
+   "members": [
+    {
+     "id": "n_net_recorder",
+     "label": "Recorder",
+     "node_type": "org",
+     "category": "meme_net",
+     "salience": 0.4953,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Publicație video online din România, cunoscută pentru reportaje și documentare."
+    },
+    {
+     "id": "n_v3soc_mass_media",
+     "label": "Mass-media",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.4719,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Canale publice de informare, precum presa, radioul, televiziunea și online-ul."
+    },
+    {
+     "id": "n_v3fil_documentar",
+     "label": "Documentar",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.2527,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Film non-ficțional despre persoane, locuri sau evenimente reale."
+    },
+    {
+     "id": "n_v3soc_protest",
+     "label": "Protest",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.4893,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Acțiune publică prin care oamenii își exprimă nemulțumirea sau revendicările."
+    }
+   ]
+  },
+  {
+   "label": "Ghiță, Sibiu și Vodafone",
+   "members": [
+    {
+     "id": "n_net_ghita_ciobanul",
+     "label": "Ghiță Ciobanul",
+     "node_type": "person",
+     "category": "meme_net",
+     "salience": 0.6458,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Personaj din reclamele Vodafone inspirat de viața pastorală, devenit reper al internetului românesc."
+    },
+    {
+     "id": "n_sibiu",
+     "label": "Sibiu",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.3144,
+     "degree": 12,
+     "incoming_degree": 14,
+     "description": "Oras din Transilvania, fost centru sas, capitala culturala europeana in 2007."
+    },
+    {
+     "id": "n_net_reclamele_vodafone_ghita",
+     "label": "Reclamele Vodafone cu Ghiță",
+     "node_type": "work",
+     "category": "meme_net",
+     "salience": 0.5954,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Campanie publicitară Vodafone România construită în jurul lui Ghiță Ciobanul."
+    },
+    {
+     "id": "n_net_vodafone_romania",
+     "label": "Vodafone România",
+     "node_type": "org",
+     "category": "meme_net",
+     "salience": 0.2562,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Operator telecom care a popularizat în reclame personajul Ghiță Ciobanul."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:f4005b9f03cc27815ab1ead8640fb6d2e0315eb6a66a1ea246498c08cb66653a"
+}

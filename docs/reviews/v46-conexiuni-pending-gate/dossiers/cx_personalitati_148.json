@@ -1,0 +1,305 @@
+{
+ "id": "cx_personalitati_148",
+ "game": "conexiuni",
+ "category": "personalitati",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "dd8f299bc36543f0be67663e52a28f1dbeb2076809d98f303c30e6d462500c7b",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Inginerie, Inventator"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Pionieri ai aviației\" mixes node_types 2+2: Aurel Vlaicu[person], Traian Vuia[person], Avionul Vlaicu I[work], Vuia I[work]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Știința vieții\" mixes node_types 2+2: Ana Aslan[person], Emil Racoviță[person], Medicină[concept], Speologie[concept]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Poduri și ingineri\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_stiinta_164)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_stiinta_162 (8), cx_stiinta_285 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Aurel Vlaicu (16), Coandă-1910 (13), Henri Coandă (16), Podul de la Cernavodă (10), Traian Vuia (12)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Inginerie",
+   "Inventator"
+  ],
+  "contested_tiles": [],
+  "engine_unfair_raw": 2
+ },
+ "groups": [
+  {
+   "label": "Coandă explicit",
+   "members": [
+    {
+     "id": "n_henri_coanda",
+     "label": "Henri Coandă",
+     "node_type": "person",
+     "category": "stiinta",
+     "salience": 0.6428,
+     "degree": 18,
+     "incoming_degree": 18,
+     "description": "Inginer si inventator roman, pionier al aviatiei cu reactie."
+    },
+    {
+     "id": "n_efectul_coanda",
+     "label": "Efectul Coandă",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.3868,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Fenomen aerodinamic prin care un jet de fluid adera la o suprafata vecina."
+    },
+    {
+     "id": "n_coanda_1910",
+     "label": "Coandă-1910",
+     "node_type": "work",
+     "category": "stiinta",
+     "salience": 0.2203,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Aeroplan experimental prezentat de Henri Coanda la Salonul Aeronautic de la Paris in 1910."
+    },
+    {
+     "id": "n_aerodinamica",
+     "label": "Aerodinamică",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.318,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Ramura a fizicii care studiaza miscarea aerului si fortele asupra corpurilor."
+    }
+   ]
+  },
+  {
+   "label": "Poduri și ingineri",
+   "members": [
+    {
+     "id": "n_anghel_saligny",
+     "label": "Anghel Saligny",
+     "node_type": "person",
+     "category": "stiinta",
+     "salience": 0.3084,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Inginer român, constructor al podului de la Cernavodă."
+    },
+    {
+     "id": "n_podul_cernavoda",
+     "label": "Podul de la Cernavodă",
+     "node_type": "work",
+     "category": "stiinta",
+     "salience": 0.2107,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Pod feroviar peste Dunare, inaugurat in 1895, opera lui Anghel Saligny."
+    },
+    {
+     "id": "n_v2sti_inginerie",
+     "label": "Inginerie",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.8584,
+     "degree": 22,
+     "incoming_degree": 22,
+     "description": "Aplicarea științei pentru proiectarea și construirea de sisteme utile."
+    },
+    {
+     "id": "n_inventator",
+     "label": "Inventator",
+     "node_type": "concept",
+     "category": "personalitati",
+     "salience": 0.2988,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Persoana care creeaza inventii sau dispozitive tehnice noi."
+    }
+   ]
+  },
+  {
+   "label": "Pionieri ai aviației",
+   "members": [
+    {
+     "id": "n_aurel_vlaicu",
+     "label": "Aurel Vlaicu",
+     "node_type": "person",
+     "category": "stiinta",
+     "salience": 0.4815,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Inginer si pionier al aviatiei romane, constructor al avioanelor Vlaicu."
+    },
+    {
+     "id": "n_traian_vuia",
+     "label": "Traian Vuia",
+     "node_type": "person",
+     "category": "stiinta",
+     "salience": 0.3556,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Inventator roman, autor al unui aparat de zbor cu decolare proprie (1906)."
+    },
+    {
+     "id": "n_avionul_vlaicu",
+     "label": "Avionul Vlaicu I",
+     "node_type": "work",
+     "category": "stiinta",
+     "salience": 0.1606,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Aparat de zbor proiectat si construit de Aurel Vlaicu in 1910."
+    },
+    {
+     "id": "n_vuia_i",
+     "label": "Vuia I",
+     "node_type": "work",
+     "category": "stiinta",
+     "salience": 0.2158,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Aeroplan construit de Traian Vuia si testat la Montesson in 1906, cunoscut pentru decolarea cu mijloace proprii."
+    }
+   ]
+  },
+  {
+   "label": "Știința vieții",
+   "members": [
+    {
+     "id": "n_ana_aslan",
+     "label": "Ana Aslan",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.3008,
+     "degree": 14,
+     "incoming_degree": 13,
+     "description": "Medic roman, pionier al gerontologiei (Gerovital)."
+    },
+    {
+     "id": "n_emil_racovita",
+     "label": "Emil Racoviță",
+     "node_type": "person",
+     "category": "stiinta",
+     "salience": 0.4671,
+     "degree": 14,
+     "incoming_degree": 14,
+     "description": "Biolog si explorator roman, fondatorul biospeologiei."
+    },
+    {
+     "id": "n_medicina",
+     "label": "Medicină",
+     "node_type": "concept",
+     "category": "personalitati",
+     "salience": 0.3898,
+     "degree": 24,
+     "incoming_degree": 24,
+     "description": "Stiinta tratarii si prevenirii bolilor."
+    },
+    {
+     "id": "n_speologie",
+     "label": "Speologie",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.2735,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Stiinta care studiaza pesterile si mediul subteran."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Aurel Vlaicu",
+   "a_group": "Pionieri ai aviației",
+   "b": "Inventator",
+   "b_group": "Poduri și ingineri",
+   "strength": 0.8
+  },
+  {
+   "a": "Henri Coandă",
+   "a_group": "Coandă explicit",
+   "b": "Inventator",
+   "b_group": "Poduri și ingineri",
+   "strength": 0.8
+  },
+  {
+   "a": "Inventator",
+   "a_group": "Poduri și ingineri",
+   "b": "Traian Vuia",
+   "b_group": "Pionieri ai aviației",
+   "strength": 0.8
+  },
+  {
+   "a": "Aurel Vlaicu",
+   "a_group": "Pionieri ai aviației",
+   "b": "Inginerie",
+   "b_group": "Poduri și ingineri",
+   "strength": 0.78
+  },
+  {
+   "a": "Henri Coandă",
+   "a_group": "Coandă explicit",
+   "b": "Inginerie",
+   "b_group": "Poduri și ingineri",
+   "strength": 0.78
+  },
+  {
+   "a": "Avionul Vlaicu I",
+   "a_group": "Pionieri ai aviației",
+   "b": "Inginerie",
+   "b_group": "Poduri și ingineri",
+   "strength": 0.76
+  },
+  {
+   "a": "Coandă-1910",
+   "a_group": "Coandă explicit",
+   "b": "Inginerie",
+   "b_group": "Poduri și ingineri",
+   "strength": 0.74
+  },
+  {
+   "a": "Aerodinamică",
+   "a_group": "Coandă explicit",
+   "b": "Vuia I",
+   "b_group": "Pionieri ai aviației",
+   "strength": 0.7
+  },
+  {
+   "a": "Ana Aslan",
+   "a_group": "Știința vieții",
+   "b": "Inventator",
+   "b_group": "Poduri și ingineri",
+   "strength": 0.69
+  },
+  {
+   "a": "Efectul Coandă",
+   "a_group": "Coandă explicit",
+   "b": "Inginerie",
+   "b_group": "Poduri și ingineri",
+   "strength": 0.68
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:6ec33db42b9ff690e01eff45a03d0d48078337e83f512ca2d110fbe62b6d1bc2"
+}

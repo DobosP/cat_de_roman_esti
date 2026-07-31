@@ -1,0 +1,246 @@
+{
+ "id": "cx_personalitati_147",
+ "game": "conexiuni",
+ "category": "personalitati",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "4fb07a0741144c4f9bad23d21902529c38d352de4c89a1c8f1046fa9568eac25",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Pictori clasici și pânză celebră\" mixes node_types 3+1: Nicolae Grigorescu[person], Theodor Aman[person], Ștefan Luchian[person], Carul cu boi[work]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Brâncuși fără numele Brâncuși\" mixes node_types 2+2: Cumințenia Pământului[work], Pasărea măiastră[work], Sculptura modernă brâncușiană[concept], Sculptură[concept]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Pictori clasici și pânză celebră\" reuses an inventory/selected quad (also in: cx_arta_cultura_004)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Enescu pe scenă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_006)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_arta_cultura_007 (9)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Ateneul Român (17), Festivalul George Enescu (18), George Enescu (23), Mănăstirile pictate din Bucovina (10), Muzeul Național Brukenthal (15), Nicolae Grigorescu (11), Ștefan Luchian (12)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 1
+ },
+ "groups": [
+  {
+   "label": "Pictori clasici și pânză celebră",
+   "members": [
+    {
+     "id": "n_nicolae_grigorescu",
+     "label": "Nicolae Grigorescu",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.5469,
+     "degree": 14,
+     "incoming_degree": 14,
+     "description": "Pictor roman, intemeietor al picturii moderne romanesti."
+    },
+    {
+     "id": "n_theodor_aman",
+     "label": "Theodor Aman",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.2396,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Pictor roman, fondator al Scolii de Belle-Arte din Bucuresti (1831-1891)."
+    },
+    {
+     "id": "n_stefan_luchian",
+     "label": "Ștefan Luchian",
+     "node_type": "person",
+     "category": "arta_cultura",
+     "salience": 0.4701,
+     "degree": 10,
+     "incoming_degree": 9,
+     "description": "Pictor roman (1868-1916), maestru al florilor si peisajului, figura centrala a artei moderne romanesti."
+    },
+    {
+     "id": "n_carul_cu_boi",
+     "label": "Carul cu boi",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.2087,
+     "degree": 7,
+     "incoming_degree": 6,
+     "description": "Pictura celebra a lui Nicolae Grigorescu, motiv recurent in opera sa rurala."
+    }
+   ]
+  },
+  {
+   "label": "Brâncuși fără numele Brâncuși",
+   "members": [
+    {
+     "id": "n_cumintenia_pamantului",
+     "label": "Cumințenia Pământului",
+     "node_type": "work",
+     "category": "personalitati",
+     "salience": 0.1763,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Sculptura timpurie de Constantin Brancusi."
+    },
+    {
+     "id": "n_artx_pasarea_maiastra",
+     "label": "Pasărea măiastră",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.2355,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Serie de sculpturi de Constantin Brâncuși inspirată de pasărea miraculoasă din basmele românești."
+    },
+    {
+     "id": "n_brancusi_concept",
+     "label": "Sculptura modernă brâncușiană",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.4911,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Curent al sculpturii moderne initiat de Brancusi, bazat pe esentializarea formei si abstractizare."
+    },
+    {
+     "id": "n_sculptura",
+     "label": "Sculptură",
+     "node_type": "concept",
+     "category": "personalitati",
+     "salience": 0.2568,
+     "degree": 6,
+     "incoming_degree": 7,
+     "description": "Arta tridimensionala a formelor in material."
+    }
+   ]
+  },
+  {
+   "label": "Enescu pe scenă",
+   "members": [
+    {
+     "id": "n_george_enescu",
+     "label": "George Enescu",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.8366,
+     "degree": 30,
+     "incoming_degree": 30,
+     "description": "Compozitor, violonist si dirijor roman."
+    },
+    {
+     "id": "n_rapsodiile_romane",
+     "label": "Rapsodiile Române",
+     "node_type": "work",
+     "category": "personalitati",
+     "salience": 0.1728,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Lucrari orchestrale celebre de George Enescu."
+    },
+    {
+     "id": "n_vioara",
+     "label": "Vioară",
+     "node_type": "concept",
+     "category": "personalitati",
+     "salience": 0.1905,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Instrument muzical cu coarde."
+    },
+    {
+     "id": "n_festivalul_enescu",
+     "label": "Festivalul George Enescu",
+     "node_type": "event",
+     "category": "arta_cultura",
+     "salience": 0.4779,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Festival international de muzica clasica de la Bucuresti."
+    }
+   ]
+  },
+  {
+   "label": "Patrimoniu care pare pictură",
+   "members": [
+    {
+     "id": "n_albastru_de_voronet",
+     "label": "Albastru de Voroneț",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.2466,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Nuanta de albastru a frescelor de la Voronet."
+    },
+    {
+     "id": "n_manastiri_pictate_bucovina",
+     "label": "Mănăstirile pictate din Bucovina",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.4743,
+     "degree": 14,
+     "incoming_degree": 14,
+     "description": "Grup de manastiri cu fresce exterioare, in patrimoniul UNESCO."
+    },
+    {
+     "id": "n_muzeul_brukenthal",
+     "label": "Muzeul Național Brukenthal",
+     "node_type": "org",
+     "category": "arta_cultura",
+     "salience": 0.3934,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Muzeu de arta din Sibiu, deschis in 1817, unul dintre cele mai vechi muzee din Europa."
+    },
+    {
+     "id": "n_ateneul_roman",
+     "label": "Ateneul Român",
+     "node_type": "place",
+     "category": "arta_cultura",
+     "salience": 0.6749,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Sala de concerte din Bucuresti inaugurata in 1888, principala scena a Festivalului George Enescu."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Ateneul Român",
+   "a_group": "Patrimoniu care pare pictură",
+   "b": "Festivalul George Enescu",
+   "b_group": "Enescu pe scenă",
+   "strength": 0.75
+  },
+  {
+   "a": "Ateneul Român",
+   "a_group": "Patrimoniu care pare pictură",
+   "b": "George Enescu",
+   "b_group": "Enescu pe scenă",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:1b36bbed67cf9e7cf2088f6c2883881b97a61049b29e9f798c3106cc59e9cae0"
+}

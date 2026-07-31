@@ -1,0 +1,319 @@
+{
+ "id": "cx_arta_cultura_096",
+ "game": "conexiuni",
+ "category": "arta_cultura",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "0a6ec131f5d754c6b7cfec65b147bfe4a7b56f3d58d8b72b6d6793efd92aaf09",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Ateneul Român"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Festivaluri care mută mulțimea\" <-> \"Locuri-gazdă pe hartă\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Instituții unde cultura are sală\" mixes node_types 3+1: Ateneul Român[place], Teatrul Bulandra[org], Muzeul Național Brukenthal[org], ASTRA[org]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Muzică cultă românească\" mixes node_types 2+2: George Enescu[person], Oedipe[work], Rapsodia Română[work], Ciprian Porumbescu[person]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Festivaluri care mută mulțimea\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_252, cx_meme_net_136, cx_meme_net_203, cx_muzica_056, cx_muzica_058, cx_muzica_138, cx_muzica_205, cx_muzica_206, cx_muzica_271)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Locuri-gazdă pe hartă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_251, cx_muzica_054, cx_muzica_056, cx_muzica_138, cx_muzica_206, cx_muzica_271)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Instituții unde cultura are sală\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_004, cx_arta_cultura_161, cx_arta_cultura_162, cx_personalitati_064, cx_societate_152)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Muzică cultă românească\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_091, cx_muzica_208, cx_personalitati_059)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Ateneul Român (17), București (24), Cluj-Napoca (19), Constanța (15), Festivalul George Enescu (18), George Enescu (23), Bonțida (9), Electric Castle (10), Neversea (11), Untold (10), Muzeul Național Brukenthal (15), Oedipe (11), Rapsodia Română (14), Teatrul Bulandra (16)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Ateneul Român"
+  ],
+  "contested_tiles": [],
+  "engine_unfair_raw": 9
+ },
+ "groups": [
+  {
+   "label": "Festivaluri care mută mulțimea",
+   "members": [
+    {
+     "id": "n_festivalul_enescu",
+     "label": "Festivalul George Enescu",
+     "node_type": "event",
+     "category": "arta_cultura",
+     "salience": 0.4779,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Festival international de muzica clasica de la Bucuresti."
+    },
+    {
+     "id": "n_muz_untold",
+     "label": "Untold",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.8746,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Festival muzical major organizat la Cluj-Napoca, cu artiști EDM și pop internaționali."
+    },
+    {
+     "id": "n_muz_electric_castle",
+     "label": "Electric Castle",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.6862,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Festival muzical organizat la Bonțida, lângă Castelul Bánffy."
+    },
+    {
+     "id": "n_muz_neversea",
+     "label": "Neversea",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.729,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Festival de muzică organizat la Constanța, asociat cu scena de pe litoral."
+    }
+   ]
+  },
+  {
+   "label": "Locuri-gazdă pe hartă",
+   "members": [
+    {
+     "id": "n_bucuresti",
+     "label": "București",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.6721,
+     "degree": 103,
+     "incoming_degree": 108,
+     "description": "Capitala României, în Muntenia."
+    },
+    {
+     "id": "n_cluj_napoca",
+     "label": "Cluj-Napoca",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.4989,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Oraș important din Transilvania, pe Someș."
+    },
+    {
+     "id": "n_muz_bontida",
+     "label": "Bonțida",
+     "node_type": "place",
+     "category": "muzica",
+     "salience": 0.2836,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Localitate din județul Cluj, cunoscută în pop-culture prin Electric Castle."
+    },
+    {
+     "id": "n_constanta",
+     "label": "Constanța",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.5067,
+     "degree": 22,
+     "incoming_degree": 22,
+     "description": "Oraș-port la Marea Neagră, în Dobrogea."
+    }
+   ]
+  },
+  {
+   "label": "Instituții unde cultura are sală",
+   "members": [
+    {
+     "id": "n_ateneul_roman",
+     "label": "Ateneul Român",
+     "node_type": "place",
+     "category": "arta_cultura",
+     "salience": 0.6749,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Sala de concerte din Bucuresti inaugurata in 1888, principala scena a Festivalului George Enescu."
+    },
+    {
+     "id": "n_teatrul_bulandra",
+     "label": "Teatrul Bulandra",
+     "node_type": "org",
+     "category": "arta_cultura",
+     "salience": 0.4233,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Teatru bucurestean fondat in 1947 ca Teatrul Municipal, asociat cu Lucia Sturdza-Bulandra si Liviu Ciulei."
+    },
+    {
+     "id": "n_muzeul_brukenthal",
+     "label": "Muzeul Național Brukenthal",
+     "node_type": "org",
+     "category": "arta_cultura",
+     "salience": 0.3934,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Muzeu de arta din Sibiu, deschis in 1817, unul dintre cele mai vechi muzee din Europa."
+    },
+    {
+     "id": "n_astra",
+     "label": "ASTRA",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.1834,
+     "degree": 6,
+     "incoming_degree": 7,
+     "description": "Asociatiunea Transilvana pentru Literatura Romana si Cultura Poporului Roman, infiintata in 1861 la Sibiu."
+    }
+   ]
+  },
+  {
+   "label": "Muzică cultă românească",
+   "members": [
+    {
+     "id": "n_george_enescu",
+     "label": "George Enescu",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.8366,
+     "degree": 30,
+     "incoming_degree": 30,
+     "description": "Compozitor, violonist si dirijor roman."
+    },
+    {
+     "id": "n_oedipe",
+     "label": "Oedipe",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.2638,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Unica opera lirica a lui George Enescu."
+    },
+    {
+     "id": "n_rapsodia_romana",
+     "label": "Rapsodia Română",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.4419,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Lucrare orchestrala de George Enescu inspirata din folclor."
+    },
+    {
+     "id": "n_ciprian_porumbescu",
+     "label": "Ciprian Porumbescu",
+     "node_type": "person",
+     "category": "arta_cultura",
+     "salience": 0.2132,
+     "degree": 7,
+     "incoming_degree": 6,
+     "description": "Compozitor roman (1853-1883), autor al Baladei pentru vioara si al cantecului Pe-al nostru steag."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Bonțida",
+   "a_group": "Locuri-gazdă pe hartă",
+   "b": "Electric Castle",
+   "b_group": "Festivaluri care mută mulțimea",
+   "strength": 0.92
+  },
+  {
+   "a": "Ateneul Român",
+   "a_group": "Instituții unde cultura are sală",
+   "b": "București",
+   "b_group": "Locuri-gazdă pe hartă",
+   "strength": 0.9
+  },
+  {
+   "a": "Festivalul George Enescu",
+   "a_group": "Festivaluri care mută mulțimea",
+   "b": "George Enescu",
+   "b_group": "Muzică cultă românească",
+   "strength": 0.9
+  },
+  {
+   "a": "Cluj-Napoca",
+   "a_group": "Locuri-gazdă pe hartă",
+   "b": "Untold",
+   "b_group": "Festivaluri care mută mulțimea",
+   "strength": 0.88
+  },
+  {
+   "a": "Constanța",
+   "a_group": "Locuri-gazdă pe hartă",
+   "b": "Neversea",
+   "b_group": "Festivaluri care mută mulțimea",
+   "strength": 0.88
+  },
+  {
+   "a": "București",
+   "a_group": "Locuri-gazdă pe hartă",
+   "b": "Teatrul Bulandra",
+   "b_group": "Instituții unde cultura are sală",
+   "strength": 0.8
+  },
+  {
+   "a": "București",
+   "a_group": "Locuri-gazdă pe hartă",
+   "b": "Festivalul George Enescu",
+   "b_group": "Festivaluri care mută mulțimea",
+   "strength": 0.78
+  },
+  {
+   "a": "Ateneul Român",
+   "a_group": "Instituții unde cultura are sală",
+   "b": "Festivalul George Enescu",
+   "b_group": "Festivaluri care mută mulțimea",
+   "strength": 0.75
+  },
+  {
+   "a": "Festivalul George Enescu",
+   "a_group": "Festivaluri care mută mulțimea",
+   "b": "Oedipe",
+   "b_group": "Muzică cultă românească",
+   "strength": 0.67
+  },
+  {
+   "a": "Ateneul Român",
+   "a_group": "Instituții unde cultura are sală",
+   "b": "George Enescu",
+   "b_group": "Muzică cultă românească",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:4001881ca656394803c684942c8796c10e891146e384784fddc47a2098a55d75"
+}

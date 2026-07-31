@@ -1,0 +1,303 @@
+{
+ "id": "cx_societate_279",
+ "game": "conexiuni",
+ "category": "societate",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "c67278453f4164ec4c72413db2207d236e2223131ea887945b5c4d17c03ca9e2",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Universități mari\" <-> \"Orașe universitare\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "vague_predicate_wording",
+   "level": "FAIL",
+   "detail": "group \"Industrie cu adresă\" uses catch-all wording instead of one testable shared predicate"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Industrie cu adresă\" <-> \"Orașe-fabrică\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Universități mari\" reuses an inventory/selected quad (also in: cx_geografie_177, cx_societate_066, cx_societate_152, cx_societate_217)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Orașe universitare\" reuses an inventory/selected quad (also in: cx_geografie_001, cx_geografie_023, cx_societate_065, cx_societate_066, cx_societate_154, cx_societate_221)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Industrie cu adresă\" reuses an inventory/selected quad (also in: cx_geografie_177, cx_societate_067, cx_societate_151, cx_societate_221)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Orașe-fabrică\" reuses an inventory/selected quad (also in: cx_geografie_113, cx_societate_067, cx_societate_151, cx_societate_221)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_societate_221 (12), cx_geografie_177 (11), cx_societate_066 (8), cx_societate_067 (8), cx_societate_151 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: București (24), Cluj-Napoca (19), Iași (16), Universitatea Babeș-Bolyai (9), Universitatea Alexandru Ioan Cuza din Iași (9), Timișoara (10), Universitatea din București (13)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 15
+ },
+ "groups": [
+  {
+   "label": "Universități mari",
+   "members": [
+    {
+     "id": "n_universitatea_bucuresti",
+     "label": "Universitatea din București",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.5768,
+     "degree": 21,
+     "incoming_degree": 22,
+     "description": "Una dintre cele mai vechi si prestigioase universitati din Romania, infiintata in 1864."
+    },
+    {
+     "id": "n_socx_universitatea_cuza_iasi",
+     "label": "Universitatea Alexandru Ioan Cuza din Iași",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.2588,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Prima universitate modernă a României, fondată la Iași în 1860."
+    },
+    {
+     "id": "n_socx_universitatea_babes_bolyai",
+     "label": "Universitatea Babeș-Bolyai",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.2092,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Universitate publică majoră din Cluj-Napoca, cu rădăcini academice în Transilvania."
+    },
+    {
+     "id": "n_socx_universitatea_politehnica_bucuresti",
+     "label": "Universitatea Politehnica din București",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.2461,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Universitate tehnică bucureșteană, reper pentru ingineria românească."
+    }
+   ]
+  },
+  {
+   "label": "Orașe universitare",
+   "members": [
+    {
+     "id": "n_bucuresti",
+     "label": "București",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.6721,
+     "degree": 103,
+     "incoming_degree": 108,
+     "description": "Capitala României, în Muntenia."
+    },
+    {
+     "id": "n_iasi",
+     "label": "Iași",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.5139,
+     "degree": 20,
+     "incoming_degree": 19,
+     "description": "Oras din Moldova, fosta capitala a Principatului Moldovei si important centru cultural."
+    },
+    {
+     "id": "n_cluj_napoca",
+     "label": "Cluj-Napoca",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.4989,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Oraș important din Transilvania, pe Someș."
+    },
+    {
+     "id": "n_timisoara",
+     "label": "Timișoara",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.3406,
+     "degree": 8,
+     "incoming_degree": 7,
+     "description": "Oras principal din Banat, vestul Romaniei, unde a inceput Revolutia din 1989."
+    }
+   ]
+  },
+  {
+   "label": "Industrie cu adresă",
+   "members": [
+    {
+     "id": "n_socx_automobile_dacia",
+     "label": "Automobile Dacia",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.3544,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Constructor auto românesc lansat la Mioveni/Pitești, devenit marcă de export."
+    },
+    {
+     "id": "n_socx_electroputere_craiova",
+     "label": "Electroputere Craiova",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.194,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Întreprindere craioveană cunoscută pentru locomotive și echipamente electrice."
+    },
+    {
+     "id": "n_socx_combinatul_galati",
+     "label": "Combinatul siderurgic Galați",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.2456,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Mare platformă siderurgică de la Galați, reper al industriei grele românești."
+    },
+    {
+     "id": "n_socx_uzina_resita",
+     "label": "Uzinele Reșița",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.2218,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Centru industrial bănățean legat de metalurgie, mașini și locomotive."
+    }
+   ]
+  },
+  {
+   "label": "Orașe-fabrică",
+   "members": [
+    {
+     "id": "n_socx_pitesti",
+     "label": "Pitești",
+     "node_type": "place",
+     "category": "societate",
+     "salience": 0.2259,
+     "degree": 7,
+     "incoming_degree": 8,
+     "description": "Oraș argeșean asociat puternic cu industria auto Dacia."
+    },
+    {
+     "id": "n_socx_craiova",
+     "label": "Craiova",
+     "node_type": "place",
+     "category": "societate",
+     "salience": 0.2406,
+     "degree": 6,
+     "incoming_degree": 7,
+     "description": "Oraș important al Olteniei, cu tradiție industrială și universitară."
+    },
+    {
+     "id": "n_socx_galati",
+     "label": "Galați",
+     "node_type": "place",
+     "category": "societate",
+     "salience": 0.2345,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Oraș dunărean și port, asociat cu siderurgia românească."
+    },
+    {
+     "id": "n_socx_resita",
+     "label": "Reșița",
+     "node_type": "place",
+     "category": "societate",
+     "salience": 0.1849,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Oraș bănățean cunoscut pentru tradiția sa metalurgică."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "București",
+   "a_group": "Orașe universitare",
+   "b": "Universitatea Politehnica din București",
+   "b_group": "Universități mari",
+   "strength": 0.88
+  },
+  {
+   "a": "Cluj-Napoca",
+   "a_group": "Orașe universitare",
+   "b": "Universitatea Babeș-Bolyai",
+   "b_group": "Universități mari",
+   "strength": 0.88
+  },
+  {
+   "a": "Combinatul siderurgic Galați",
+   "a_group": "Industrie cu adresă",
+   "b": "Galați",
+   "b_group": "Orașe-fabrică",
+   "strength": 0.88
+  },
+  {
+   "a": "Iași",
+   "a_group": "Orașe universitare",
+   "b": "Universitatea Alexandru Ioan Cuza din Iași",
+   "b_group": "Universități mari",
+   "strength": 0.88
+  },
+  {
+   "a": "Reșița",
+   "a_group": "Orașe-fabrică",
+   "b": "Uzinele Reșița",
+   "b_group": "Industrie cu adresă",
+   "strength": 0.88
+  },
+  {
+   "a": "Automobile Dacia",
+   "a_group": "Industrie cu adresă",
+   "b": "Pitești",
+   "b_group": "Orașe-fabrică",
+   "strength": 0.86
+  },
+  {
+   "a": "Craiova",
+   "a_group": "Orașe-fabrică",
+   "b": "Electroputere Craiova",
+   "b_group": "Industrie cu adresă",
+   "strength": 0.86
+  },
+  {
+   "a": "București",
+   "a_group": "Orașe universitare",
+   "b": "Universitatea din București",
+   "b_group": "Universități mari",
+   "strength": 0.85
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:b41ed4016f019c64998c3c0a86bba14b2a7fe81901959e86adf05daeb641b145"
+}

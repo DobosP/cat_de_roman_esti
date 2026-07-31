@@ -1,0 +1,265 @@
+{
+ "id": "cx_film_tv_168",
+ "game": "conexiuni",
+ "category": "film_tv",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "e614954754bad218fad2068054fc968ba92315eec91926487a5539eb8c5b6fa4",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Coloană sonoră, Serial TV, Talk-show, Trailer, cameră video, decor, studio"
+  },
+  {
+   "check": "red_herring_budget",
+   "level": "WARN",
+   "detail": "2 contested tiles (budget <4): Scenariu, montaj"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Coloană sonoră",
+   "Serial TV",
+   "Talk-show",
+   "Trailer",
+   "cameră video",
+   "decor",
+   "studio"
+  ],
+  "contested_tiles": [
+   "Scenariu",
+   "montaj"
+  ],
+  "engine_unfair_raw": 7
+ },
+ "groups": [
+  {
+   "label": "Meserii și decizii de film",
+   "members": [
+    {
+     "id": "n_v2fil_regizor",
+     "label": "Regizor",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.8436,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Autor artistic care coordonează realizarea unui film sau spectacol."
+    },
+    {
+     "id": "n_v3fil_scenariu",
+     "label": "Scenariu",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.4479,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Textul care descrie acțiunea, replicile și scenele unui film."
+    },
+    {
+     "id": "n_v4fil_montaj",
+     "label": "montaj",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.3748,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Etapă de editare care ordonează imaginile filmate într-o producție."
+    },
+    {
+     "id": "n_v4fil_operator_imagine",
+     "label": "operator imagine",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.3119,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Specialist care filmează imaginile pentru o producție video sau TV."
+    }
+   ]
+  },
+  {
+   "label": "Ce primești înainte sau peste film",
+   "members": [
+    {
+     "id": "n_v3fil_trailer",
+     "label": "Trailer",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.2821,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Material video scurt care promovează un film sau un serial."
+    },
+    {
+     "id": "n_v3fil_subtitrare",
+     "label": "Subtitrare",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.2299,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Text afișat pe ecran cu traducerea sau transcrierea replicilor."
+    },
+    {
+     "id": "n_v3fil_dublaj",
+     "label": "Dublaj",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.2026,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Înlocuirea vocilor originale cu voci în altă limbă."
+    },
+    {
+     "id": "n_v3fil_coloana_sonora",
+     "label": "Coloană sonoră",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.2021,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Muzica și sunetele folosite într-un film sau serial."
+    }
+   ]
+  },
+  {
+   "label": "Platoul, când nu se vede povestea",
+   "members": [
+    {
+     "id": "n_v4fil_studio",
+     "label": "studio",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.6452,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Spațiu amenajat pentru filmări, emisiuni sau transmisii TV."
+    },
+    {
+     "id": "n_v4fil_decor",
+     "label": "decor",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.388,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Ansamblu de obiecte și spații amenajate pentru o scenă filmată."
+    },
+    {
+     "id": "n_v4fil_machiaj",
+     "label": "machiaj",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.3175,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Pregătire cosmetică folosită pentru actori și prezentatori pe ecran."
+    },
+    {
+     "id": "n_v4fil_camera_video",
+     "label": "cameră video",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.7199,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Aparat folosit pentru filmare în cinema și televiziune."
+    }
+   ]
+  },
+  {
+   "label": "Formate care țin televizorul aprins",
+   "members": [
+    {
+     "id": "n_v2fil_serial_tv",
+     "label": "Serial TV",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.8626,
+     "degree": 27,
+     "incoming_degree": 27,
+     "description": "Producție de televiziune în episoade, difuzată pe posturi TV sau online."
+    },
+    {
+     "id": "n_v2fil_talk_show",
+     "label": "Talk-show",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.5948,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Emisiune TV bazată pe discuții, interviuri și invitați."
+    },
+    {
+     "id": "n_v2fil_reality_show",
+     "label": "Reality-show",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.4359,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Format TV cu participanți reali filmați în situații regizate sau competitive."
+    },
+    {
+     "id": "n_v2fil_concurs_tv",
+     "label": "Concurs TV",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.5816,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Emisiune televizată bazată pe întrebări, probe sau competiție."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Regizor",
+   "a_group": "Meserii și decizii de film",
+   "b": "cameră video",
+   "b_group": "Platoul, când nu se vede povestea",
+   "strength": 0.78
+  },
+  {
+   "a": "Serial TV",
+   "a_group": "Formate care țin televizorul aprins",
+   "b": "montaj",
+   "b_group": "Meserii și decizii de film",
+   "strength": 0.78
+  },
+  {
+   "a": "Talk-show",
+   "a_group": "Formate care țin televizorul aprins",
+   "b": "studio",
+   "b_group": "Platoul, când nu se vede povestea",
+   "strength": 0.78
+  },
+  {
+   "a": "Serial TV",
+   "a_group": "Formate care țin televizorul aprins",
+   "b": "decor",
+   "b_group": "Platoul, când nu se vede povestea",
+   "strength": 0.76
+  },
+  {
+   "a": "Serial TV",
+   "a_group": "Formate care țin televizorul aprins",
+   "b": "Trailer",
+   "b_group": "Ce primești înainte sau peste film",
+   "strength": 0.7
+  },
+  {
+   "a": "Regizor",
+   "a_group": "Meserii și decizii de film",
+   "b": "decor",
+   "b_group": "Platoul, când nu se vede povestea",
+   "strength": 0.66
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:253b3c713c182b69d6682e9a27f111a6dcfc1e430014a622bf62b1a29764df93"
+}

@@ -40,7 +40,7 @@ _V32_ALIAS_COUNT = 7333
 
 # These are fingerprints of current legacy behavior. Profile pins move only with a gated
 # content wave; ADR-0067's removal of two false e-SIGUR edges intentionally changed the
-# Contexto closure; V45's strict pending cleanup intentionally narrows the Lanț profile.
+# Contexto closure; V45/V46 strict cleanup narrows the dormant Lanț/Conexiuni inventory.
 _V32_CONTEXTO_PROFILE_SHA256 = (
     "9faec43182f76c1fa9434876b7052eb4d10f4cf95d29008e9f4270250b6e3b05"
 )
@@ -51,10 +51,10 @@ _V32_ALCHIMIE_PROFILE_SHA256 = (
     "762c1f3a84463fbc2f14d0ec878c12db53ed48f6a4c5ec3c5c107b57ca5a4168"
 )
 _EXACT_REVIEW_REPORT_SHA256 = (
-    "94fb8e92c1c3a7bbde74e2d3faec08691ba16348a1cec1bcb714e3c0e56f39b3"
+    "5a01894e6e89fe29aaffee09210949e81cb0505385cc5c65615bf9c4b75f3349"
 )
 _FULL_PENDING_REPORT_SHA256 = (
-    "ec5bdf4c9d0f8ccd48599566bef120123a2094fac850c8f93cdbf60691cc276e"
+    "ff1f3754afe013ffd4b082c3e924e854f753e2bfa75d477fce3f3c1f12c637ce"
 )
 
 
@@ -390,13 +390,13 @@ def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
         game: len(pack[game])
         for game in ("conexiuni", "contexto", "lant", "alchimie")
     } == {
-        "conexiuni": 311,
+        "conexiuni": 232,
         "contexto": 217,
         "lant": 97,
         "alchimie": 99,
     }
     # ADR-0068 promotes two bound Contexto targets.
-    assert statuses == {"approved": 608, "pending": 116}
+    assert statuses == {"approved": 608, "pending": 37}
     assert len(DATA.REVIEW_ITEM_IDS) == len(set(DATA.REVIEW_ITEM_IDS)) == 33
     pending_review_ids = set(DATA.REVIEW_ITEM_IDS) - {
         "ct_literatura_298",
@@ -408,16 +408,21 @@ def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
         "lt_viata_de_roman_213",
         "lt_viata_de_roman_214",
         "lt_viata_de_roman_217",
+        "cx_viata_de_roman_291",
+        "cx_gastronomie_292",
+        "cx_viata_de_roman_293",
+        "cx_societate_294",
+        "cx_societate_295",
     }
     assert _critique_report(pending_review_ids) == (
-        24,
-        2,
+        19,
+        0,
         0,
         _EXACT_REVIEW_REPORT_SHA256,
     )
     assert _critique_report(None) == (
-        116,
-        80,
+        37,
+        4,
         81,
         _FULL_PENDING_REPORT_SHA256,
     )

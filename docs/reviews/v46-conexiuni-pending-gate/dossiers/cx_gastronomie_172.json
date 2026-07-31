@@ -1,0 +1,246 @@
+{
+ "id": "cx_gastronomie_172",
+ "game": "conexiuni",
+ "category": "gastronomie",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "bb19e45e8c19a71a879e8a7d556234b1520efa1cd5f08b9e6fde0743614babc3",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Bere, Cartof, Pizza, Salată de boeuf, Șaorma cu de toate"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Gătit pe ecran\" mixes node_types 2+2: Chefi la cuțite[work], Jamila Cuisine[work], Clip culinar[concept], Am făcut cu mânuța mea[concept]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Gătit pe ecran\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_104, cx_meme_net_201)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"De băut când masa se lungește\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_stiinta_230)"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "Pălincă": "linked to 2 regions (Maramureș, Transilvania)",
+  "Țuică": "national-salience concept (0.83) with generic related_to edge to Moldova"
+ },
+ "fairness": {
+  "unfair_tiles": [
+   "Bere",
+   "Cartof",
+   "Pizza",
+   "Salată de boeuf",
+   "Șaorma cu de toate"
+  ],
+  "contested_tiles": [],
+  "engine_unfair_raw": 5
+ },
+ "groups": [
+  {
+   "label": "Gătit pe ecran",
+   "members": [
+    {
+     "id": "n_ftv_chefi_la_cutite",
+     "label": "Chefi la cuțite",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.7726,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Show culinar competitiv difuzat de Antena 1."
+    },
+    {
+     "id": "n_net_jamila_cuisine",
+     "label": "Jamila Cuisine",
+     "node_type": "work",
+     "category": "meme_net",
+     "salience": 0.5487,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Canal culinar românesc foarte popular pe YouTube, reper pentru rețete explicate clar."
+    },
+    {
+     "id": "n_v2mem_clip_culinar",
+     "label": "Clip culinar",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.3796,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Video scurt sau lung despre rețete, gătit și prezentare de mâncare."
+    },
+    {
+     "id": "n_net_am_facut_cu_manuta_mea",
+     "label": "Am făcut cu mânuța mea",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.4179,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Replică asociată cu bricolajul mândru, perfectă pentru poze cu reparații improbabile."
+    }
+   ]
+  },
+  {
+   "label": "Importuri care au primit buletin românesc",
+   "members": [
+    {
+     "id": "n_gas_salata_boeuf",
+     "label": "Salată de boeuf",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9139,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Salată festivă cu legume, carne și maioneză, decorată migălos de sărbători."
+    },
+    {
+     "id": "n_gas_baclava_dobrogeana",
+     "label": "Baclava dobrogeană",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.5193,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Desert cu foi, nucă și sirop, intrat firesc în peisajul culinar dobrogean."
+    },
+    {
+     "id": "n_gas_saorma_de_toate",
+     "label": "Șaorma cu de toate",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9013,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Fast-food urban adoptat local, cu lipie, carne, cartofi, sosuri și murături."
+    },
+    {
+     "id": "n_v3gas_pizza",
+     "label": "Pizza",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.7459,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Preparat copt cu blat, sos de roșii, brânză și toppinguri."
+    }
+   ]
+  },
+  {
+   "label": "De băut când masa se lungește",
+   "members": [
+    {
+     "id": "n_gas_tuica",
+     "label": "Țuică",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.8324,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Distilat tradițional din prune, servit ca aperitiv în multe gospodării."
+    },
+    {
+     "id": "n_gas_palinca",
+     "label": "Pălincă",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.3694,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Distilat tare din fructe, emblematic mai ales în Transilvania și Maramureș."
+    },
+    {
+     "id": "n_gas_vin_fiert",
+     "label": "Vin fiert",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.5385,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Băutură caldă cu scorțișoară și mirodenii, prezentă la târgurile de iarnă."
+    },
+    {
+     "id": "n_v3gas_bere",
+     "label": "Bere",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.6296,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Băutură alcoolică fermentată din malț, hamei, drojdie și apă."
+    }
+   ]
+  },
+  {
+   "label": "Par ingrediente, sunt lecție de română",
+   "members": [
+    {
+     "id": "n_v3lim_limba",
+     "label": "Limbă",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.9434,
+     "degree": 11,
+     "incoming_degree": 8,
+     "description": "Sistem de comunicare verbală folosit de o comunitate."
+    },
+    {
+     "id": "n_v2lim_varza",
+     "label": "Varză",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.7009,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Legumă cu frunze suprapuse, numită regional și curechi."
+    },
+    {
+     "id": "n_v2lim_cartof",
+     "label": "Cartof",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.7178,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Tubercul alimentar, numit regional barabulă în unele zone."
+    },
+    {
+     "id": "n_v2lim_porumb",
+     "label": "Porumb",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.6398,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Plantă cultivată pentru boabe, numită regional păpușoi sau cucuruz."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Salată de boeuf",
+   "a_group": "Importuri care au primit buletin românesc",
+   "b": "Cartof",
+   "b_group": "Par ingrediente, sunt lecție de română",
+   "strength": 0.85
+  },
+  {
+   "a": "Bere",
+   "a_group": "De băut când masa se lungește",
+   "b": "Pizza",
+   "b_group": "Importuri care au primit buletin românesc",
+   "strength": 0.65
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:e99f6a88034387d7cc2bd8ce69150d4b291dbdf258ca863c2002788ba0e46e8a"
+}

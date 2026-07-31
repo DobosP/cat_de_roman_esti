@@ -1,0 +1,225 @@
+{
+ "id": "cx_stiinta_229",
+ "game": "conexiuni",
+ "category": "stiinta",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "71a1bf6b82438ef74d430376cbab0b8a21fe226ba44e5fdefea171ca009d1e0b",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Expresii românești care intră anatomic în vorbă\" reuses an inventory/selected quad (also in: cx_gastronomie_106, cx_limba_036, cx_limba_123, cx_limba_187)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Legume cu pașaport regional\" reuses an inventory/selected quad (also in: cx_gastronomie_106, cx_gastronomie_171, cx_geografie_110, cx_limba_036, cx_limba_187, cx_meme_net_201, cx_personalitati_213, cx_viata_de_roman_237)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_gastronomie_106 (8), cx_limba_036 (8), cx_limba_187 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Barabulă (10), Cucuruz (9), Curechi (10), Păpușoi (9)"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "Barabulă": "linked to 2 regions (Bucovina, Moldova)",
+  "Cucuruz": "linked to 2 regions (Banat, Transilvania)"
+ },
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 0
+ },
+ "groups": [
+  {
+   "label": "Piese de corp, fără diagnostic",
+   "members": [
+    {
+     "id": "n_v4sti_ochi",
+     "label": "ochi",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.6356,
+     "degree": 8,
+     "incoming_degree": 6,
+     "description": "Organ de simț care detectează lumina și permite vederea."
+    },
+    {
+     "id": "n_v4sti_ureche",
+     "label": "ureche",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.4917,
+     "degree": 5,
+     "incoming_degree": 4,
+     "description": "Organ de simț pentru auz și echilibru."
+    },
+    {
+     "id": "n_v4sti_inima",
+     "label": "inimă",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.7818,
+     "degree": 5,
+     "incoming_degree": 6,
+     "description": "Organ muscular care pompează sângele prin corp."
+    },
+    {
+     "id": "n_v4sti_piele",
+     "label": "piele",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.5828,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Învelișul extern al corpului, cu rol de protecție și simț tactil."
+    }
+   ]
+  },
+  {
+   "label": "Expresii românești care intră anatomic în vorbă",
+   "members": [
+    {
+     "id": "n_lbax_a_si_lua_inima_in_dinti",
+     "label": "A-și lua inima în dinți",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.2937,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Expresie idiomatică: a-și face curaj pentru un gest greu sau riscant."
+    },
+    {
+     "id": "n_lbax_a_da_cu_mucii_in_fasole",
+     "label": "A da cu mucii-n fasole",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.2724,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Expresie idiomatică populară: a strica o situație printr-o gafă stângace."
+    },
+    {
+     "id": "n_lbax_a_taie_frunza_la_caini",
+     "label": "A tăia frunză la câini",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.2441,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Expresie idiomatică: a pierde vremea fără lucru folositor."
+    },
+    {
+     "id": "n_lbax_a_umbla_cu_cioara_vopsita",
+     "label": "A umbla cu cioara vopsită",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.236,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Expresie idiomatică: a încerca să păcălești pe cineva cu o aparență falsă."
+    }
+   ]
+  },
+  {
+   "label": "Botanică de manual, nu de aprozar",
+   "members": [
+    {
+     "id": "n_v4sti_planta",
+     "label": "plantă",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.8612,
+     "degree": 10,
+     "incoming_degree": 28,
+     "description": "Organism viu care face fotosinteză și are celule vegetale."
+    },
+    {
+     "id": "n_v4sti_floare",
+     "label": "floare",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.5637,
+     "degree": 5,
+     "incoming_degree": 4,
+     "description": "Organ al plantei implicat în reproducere."
+    },
+    {
+     "id": "n_v4sti_copac",
+     "label": "copac",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.6446,
+     "degree": 8,
+     "incoming_degree": 5,
+     "description": "Plantă lemnoasă înaltă, cu trunchi și coroană."
+    },
+    {
+     "id": "n_v4sti_frunza",
+     "label": "frunză",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.4821,
+     "degree": 4,
+     "incoming_degree": 5,
+     "description": "Organ al plantei care produce hrană prin fotosinteză."
+    }
+   ]
+  },
+  {
+   "label": "Legume cu pașaport regional",
+   "members": [
+    {
+     "id": "n_lbax_regionalism_barabula",
+     "label": "Barabulă",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.1804,
+     "degree": 5,
+     "incoming_degree": 3,
+     "description": "Regionalism pentru cartof, asociat mai ales cu Moldova și Bucovina."
+    },
+    {
+     "id": "n_lbax_regionalism_cucuruz",
+     "label": "Cucuruz",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.1935,
+     "degree": 5,
+     "incoming_degree": 3,
+     "description": "Regionalism pentru porumb, răspândit în Transilvania și Banat."
+    },
+    {
+     "id": "n_lbax_regionalism_curechi",
+     "label": "Curechi",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.19,
+     "degree": 5,
+     "incoming_degree": 4,
+     "description": "Regionalism pentru varză, folosit mai ales în Moldova și în unele zone ardelenești."
+    },
+    {
+     "id": "n_lbax_regionalism_papusoi",
+     "label": "Păpușoi",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.2041,
+     "degree": 5,
+     "incoming_degree": 4,
+     "description": "Regionalism moldovenesc pentru porumb; apare des în vorbirea populară și în literatură."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:c3e41a8c9c634317c8557ce81c9decf4bd00913f57903c2af9010c1809b04db0"
+}

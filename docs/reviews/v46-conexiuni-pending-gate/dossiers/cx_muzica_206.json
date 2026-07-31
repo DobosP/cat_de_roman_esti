@@ -1,0 +1,422 @@
+{
+ "id": "cx_muzica_206",
+ "game": "conexiuni",
+ "category": "muzica",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "4a8152562889ad7d010a09db48af29e72b63bc604663c6a78381a0cdbe12d832",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Brașov, Constanța, Transilvania"
+  },
+  {
+   "check": "red_herring_budget",
+   "level": "FAIL",
+   "detail": "4 contested tiles (budget <4): Bonțida, Cluj-Napoca, Dobrogea, Marea Neagră"
+  },
+  {
+   "check": "board_type_shortcut",
+   "level": "WARN",
+   "detail": "all four groups are node-type homogeneous and expose 3 distinct group types"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Festivaluri și concursuri de pus pe brățară\" <-> \"Orașe și satul care le țin în priză\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Festivaluri și concursuri de pus pe brățară\" <-> \"Ce vezi când intri la scenă\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Orașe și satul care le țin în priză\" <-> \"Peisajul din jurul playlistului\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Festivaluri și concursuri de pus pe brățară\" reuses an inventory/selected quad (also in: cx_geografie_252, cx_muzica_056, cx_muzica_138, cx_muzica_205, cx_muzica_271)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Orașe și satul care le țin în priză\" reuses an inventory/selected quad (also in: cx_muzica_054, cx_muzica_056, cx_muzica_138, cx_muzica_271)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_muzica_271 (10), cx_muzica_056 (8), cx_muzica_138 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Brașov (12), Carpați (9), Cluj-Napoca (19), Constanța (15), Dobrogea (13), Marea Neagră (10), Bonțida (9), Electric Castle (10), Neversea (11), Untold (10), Transilvania (10)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Brașov",
+   "Constanța",
+   "Transilvania"
+  ],
+  "contested_tiles": [
+   "Bonțida",
+   "Cluj-Napoca",
+   "Dobrogea",
+   "Marea Neagră"
+  ],
+  "engine_unfair_raw": 11
+ },
+ "groups": [
+  {
+   "label": "Festivaluri și concursuri de pus pe brățară",
+   "members": [
+    {
+     "id": "n_muz_untold",
+     "label": "Untold",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.8746,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Festival muzical major organizat la Cluj-Napoca, cu artiști EDM și pop internaționali."
+    },
+    {
+     "id": "n_muz_neversea",
+     "label": "Neversea",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.729,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Festival de muzică organizat la Constanța, asociat cu scena de pe litoral."
+    },
+    {
+     "id": "n_muz_electric_castle",
+     "label": "Electric Castle",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.6862,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Festival muzical organizat la Bonțida, lângă Castelul Bánffy."
+    },
+    {
+     "id": "n_muz_cerbul_de_aur",
+     "label": "Cerbul de Aur",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.7305,
+     "degree": 15,
+     "incoming_degree": 15,
+     "description": "Festival-concurs muzical de la Brașov, lansat în perioada televiziunii clasice."
+    }
+   ]
+  },
+  {
+   "label": "Orașe și satul care le țin în priză",
+   "members": [
+    {
+     "id": "n_cluj_napoca",
+     "label": "Cluj-Napoca",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.4989,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Oraș important din Transilvania, pe Someș."
+    },
+    {
+     "id": "n_constanta",
+     "label": "Constanța",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.5067,
+     "degree": 22,
+     "incoming_degree": 22,
+     "description": "Oraș-port la Marea Neagră, în Dobrogea."
+    },
+    {
+     "id": "n_muz_bontida",
+     "label": "Bonțida",
+     "node_type": "place",
+     "category": "muzica",
+     "salience": 0.2836,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Localitate din județul Cluj, cunoscută în pop-culture prin Electric Castle."
+    },
+    {
+     "id": "n_brasov",
+     "label": "Brașov",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.3074,
+     "degree": 12,
+     "incoming_degree": 11,
+     "description": "Oras din centrul Romaniei, la poalele Carpatilor, important centru turistic si industrial."
+    }
+   ]
+  },
+  {
+   "label": "Peisajul din jurul playlistului",
+   "members": [
+    {
+     "id": "n_marea_neagra",
+     "label": "Marea Neagră",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.6416,
+     "degree": 26,
+     "incoming_degree": 27,
+     "description": "Mare la est de România, litoralul românesc."
+    },
+    {
+     "id": "n_transilvania",
+     "label": "Transilvania",
+     "node_type": "place",
+     "category": "istorie",
+     "salience": 0.9779,
+     "degree": 62,
+     "incoming_degree": 65,
+     "description": "Regiune istorica romaneasca."
+    },
+    {
+     "id": "n_dobrogea",
+     "label": "Dobrogea",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.4845,
+     "degree": 23,
+     "incoming_degree": 25,
+     "description": "Regiune între Dunăre și Marea Neagră."
+    },
+    {
+     "id": "n_carpati",
+     "label": "Carpați",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.7269,
+     "degree": 41,
+     "incoming_degree": 46,
+     "description": "Lanț muntos care străbate România în formă de arc."
+    }
+   ]
+  },
+  {
+   "label": "Ce vezi când intri la scenă",
+   "members": [
+    {
+     "id": "n_v2muz_concert",
+     "label": "Concert",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.9582,
+     "degree": 39,
+     "incoming_degree": 39,
+     "description": "Eveniment live în care artiștii cântă în fața publicului."
+    },
+    {
+     "id": "n_v2muz_scena_festival",
+     "label": "Scenă de festival",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.6278,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Spațiu de concert amenajat pentru public numeros la festival."
+    },
+    {
+     "id": "n_v4muz_aplauze",
+     "label": "Aplauze",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.3562,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Bătăi din palme prin care publicul apreciază o interpretare."
+    },
+    {
+     "id": "n_v4art_public",
+     "label": "Public",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.8823,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Oamenii care urmăresc un spectacol, concert, film sau expoziție."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Bonțida",
+   "a_group": "Orașe și satul care le țin în priză",
+   "b": "Electric Castle",
+   "b_group": "Festivaluri și concursuri de pus pe brățară",
+   "strength": 0.92
+  },
+  {
+   "a": "Brașov",
+   "a_group": "Orașe și satul care le țin în priză",
+   "b": "Cerbul de Aur",
+   "b_group": "Festivaluri și concursuri de pus pe brățară",
+   "strength": 0.9
+  },
+  {
+   "a": "Cluj-Napoca",
+   "a_group": "Orașe și satul care le țin în priză",
+   "b": "Untold",
+   "b_group": "Festivaluri și concursuri de pus pe brățară",
+   "strength": 0.88
+  },
+  {
+   "a": "Constanța",
+   "a_group": "Orașe și satul care le țin în priză",
+   "b": "Neversea",
+   "b_group": "Festivaluri și concursuri de pus pe brățară",
+   "strength": 0.88
+  },
+  {
+   "a": "Marea Neagră",
+   "a_group": "Peisajul din jurul playlistului",
+   "b": "Neversea",
+   "b_group": "Festivaluri și concursuri de pus pe brățară",
+   "strength": 0.82
+  },
+  {
+   "a": "Constanța",
+   "a_group": "Orașe și satul care le țin în priză",
+   "b": "Marea Neagră",
+   "b_group": "Peisajul din jurul playlistului",
+   "strength": 0.8
+  },
+  {
+   "a": "Untold",
+   "a_group": "Festivaluri și concursuri de pus pe brățară",
+   "b": "Scenă de festival",
+   "b_group": "Ce vezi când intri la scenă",
+   "strength": 0.78
+  },
+  {
+   "a": "Electric Castle",
+   "a_group": "Festivaluri și concursuri de pus pe brățară",
+   "b": "Scenă de festival",
+   "b_group": "Ce vezi când intri la scenă",
+   "strength": 0.77
+  },
+  {
+   "a": "Neversea",
+   "a_group": "Festivaluri și concursuri de pus pe brățară",
+   "b": "Scenă de festival",
+   "b_group": "Ce vezi când intri la scenă",
+   "strength": 0.77
+  },
+  {
+   "a": "Cluj-Napoca",
+   "a_group": "Orașe și satul care le țin în priză",
+   "b": "Transilvania",
+   "b_group": "Peisajul din jurul playlistului",
+   "strength": 0.75
+  },
+  {
+   "a": "Untold",
+   "a_group": "Festivaluri și concursuri de pus pe brățară",
+   "b": "Concert",
+   "b_group": "Ce vezi când intri la scenă",
+   "strength": 0.75
+  },
+  {
+   "a": "Electric Castle",
+   "a_group": "Festivaluri și concursuri de pus pe brățară",
+   "b": "Concert",
+   "b_group": "Ce vezi când intri la scenă",
+   "strength": 0.74
+  },
+  {
+   "a": "Neversea",
+   "a_group": "Festivaluri și concursuri de pus pe brățară",
+   "b": "Concert",
+   "b_group": "Ce vezi când intri la scenă",
+   "strength": 0.74
+  },
+  {
+   "a": "Bonțida",
+   "a_group": "Orașe și satul care le țin în priză",
+   "b": "Transilvania",
+   "b_group": "Peisajul din jurul playlistului",
+   "strength": 0.72
+  },
+  {
+   "a": "Cerbul de Aur",
+   "a_group": "Festivaluri și concursuri de pus pe brățară",
+   "b": "Concert",
+   "b_group": "Ce vezi când intri la scenă",
+   "strength": 0.7
+  },
+  {
+   "a": "Constanța",
+   "a_group": "Orașe și satul care le țin în priză",
+   "b": "Dobrogea",
+   "b_group": "Peisajul din jurul playlistului",
+   "strength": 0.7
+  },
+  {
+   "a": "Electric Castle",
+   "a_group": "Festivaluri și concursuri de pus pe brățară",
+   "b": "Transilvania",
+   "b_group": "Peisajul din jurul playlistului",
+   "strength": 0.7
+  },
+  {
+   "a": "Untold",
+   "a_group": "Festivaluri și concursuri de pus pe brățară",
+   "b": "Public",
+   "b_group": "Ce vezi când intri la scenă",
+   "strength": 0.68
+  },
+  {
+   "a": "Bonțida",
+   "a_group": "Orașe și satul care le țin în priză",
+   "b": "Scenă de festival",
+   "b_group": "Ce vezi când intri la scenă",
+   "strength": 0.66
+  },
+  {
+   "a": "Cerbul de Aur",
+   "a_group": "Festivaluri și concursuri de pus pe brățară",
+   "b": "Aplauze",
+   "b_group": "Ce vezi când intri la scenă",
+   "strength": 0.66
+  },
+  {
+   "a": "Brașov",
+   "a_group": "Orașe și satul care le țin în priză",
+   "b": "Transilvania",
+   "b_group": "Peisajul din jurul playlistului",
+   "strength": 0.65
+  },
+  {
+   "a": "Bonțida",
+   "a_group": "Orașe și satul care le țin în priză",
+   "b": "Concert",
+   "b_group": "Ce vezi când intri la scenă",
+   "strength": 0.62
+  },
+  {
+   "a": "Brașov",
+   "a_group": "Orașe și satul care le țin în priză",
+   "b": "Carpați",
+   "b_group": "Peisajul din jurul playlistului",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:611e49c9558fec0f0dca487ac5fc3a2fb23d8ecdb1d93098a354f18bc8f36afb"
+}

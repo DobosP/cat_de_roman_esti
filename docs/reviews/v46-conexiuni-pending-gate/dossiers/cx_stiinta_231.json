@@ -1,0 +1,253 @@
+{
+ "id": "cx_stiinta_231",
+ "game": "conexiuni",
+ "category": "stiinta",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "6a543337d9942b098c40127f95d7f1334c7ee020af2ff65268aa072e81b0de78",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Nobel pe bune sau pe etichetă\" mixes node_types 2+2: George Emil Palade[person], Herta Muller[person], Premiul Nobel[concept], Premiul Nobel pentru Medicină[concept]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Artistul devenit brand de operă sau școală\" mixes node_types 3+1: Festivalul George Enescu[event], Muzica lui George Enescu[concept], Sculptura modernă brâncușiană[concept], Pictura lui Nicolae Grigorescu[concept]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Parisul le-a fost mai mult decât escală\" reuses an inventory/selected quad (also in: cx_personalitati_210)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Nobel pe bune sau pe etichetă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_stiinta_165)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Instituții unde înveți înainte să inventezi\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_177, cx_istorie_256, cx_limba_261, cx_societate_066, cx_societate_152, cx_societate_217, cx_societate_279, cx_stiinta_165)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Academia Română (19), Constantin Brâncuși (18), Emil Cioran (13), Eugen Ionescu (11), Festivalul George Enescu (18), George Enescu (23), Universitatea Alexandru Ioan Cuza din Iași (9), Universitatea din București (13)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 2
+ },
+ "groups": [
+  {
+   "label": "Parisul le-a fost mai mult decât escală",
+   "members": [
+    {
+     "id": "n_constantin_brancusi",
+     "label": "Constantin Brâncuși",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.8675,
+     "degree": 26,
+     "incoming_degree": 26,
+     "description": "Sculptor roman, pionier al sculpturii moderne."
+    },
+    {
+     "id": "n_emil_cioran",
+     "label": "Emil Cioran",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.5289,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Filosof si eseist roman stabilit la Paris."
+    },
+    {
+     "id": "n_eugen_ionescu",
+     "label": "Eugen Ionescu",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.2522,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Dramaturg al teatrului absurdului (Eugene Ionesco)."
+    },
+    {
+     "id": "n_george_enescu",
+     "label": "George Enescu",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.8366,
+     "degree": 30,
+     "incoming_degree": 30,
+     "description": "Compozitor, violonist si dirijor roman."
+    }
+   ]
+  },
+  {
+   "label": "Nobel pe bune sau pe etichetă",
+   "members": [
+    {
+     "id": "n_george_palade",
+     "label": "George Emil Palade",
+     "node_type": "person",
+     "category": "stiinta",
+     "salience": 0.4545,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Biolog roman, laureat Nobel pentru medicina (1974), pionier al biologiei celulare."
+    },
+    {
+     "id": "n_herta_muller",
+     "label": "Herta Muller",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.1839,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Scriitoare germana din Romania, laureata Nobel 2009."
+    },
+    {
+     "id": "n_premiul_nobel",
+     "label": "Premiul Nobel",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.382,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Distinctie internationala anuala; George Emil Palade a primit Nobelul pentru Medicina in 1974."
+    },
+    {
+     "id": "n_nobel_medicina",
+     "label": "Premiul Nobel pentru Medicină",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.1611,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Distinctie internationala acordata pentru descoperiri in fiziologie si medicina."
+    }
+   ]
+  },
+  {
+   "label": "Instituții unde înveți înainte să inventezi",
+   "members": [
+    {
+     "id": "n_academia_romana",
+     "label": "Academia Română",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.7002,
+     "degree": 33,
+     "incoming_degree": 38,
+     "description": "Cel mai inalt for de stiinta si cultura din Romania, infiintat in 1866."
+    },
+    {
+     "id": "n_universitatea_bucuresti",
+     "label": "Universitatea din București",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.5768,
+     "degree": 21,
+     "incoming_degree": 22,
+     "description": "Una dintre cele mai vechi si prestigioase universitati din Romania, infiintata in 1864."
+    },
+    {
+     "id": "n_socx_universitatea_cuza_iasi",
+     "label": "Universitatea Alexandru Ioan Cuza din Iași",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.2588,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Prima universitate modernă a României, fondată la Iași în 1860."
+    },
+    {
+     "id": "n_socx_universitatea_politehnica_bucuresti",
+     "label": "Universitatea Politehnica din București",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.2461,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Universitate tehnică bucureșteană, reper pentru ingineria românească."
+    }
+   ]
+  },
+  {
+   "label": "Artistul devenit brand de operă sau școală",
+   "members": [
+    {
+     "id": "n_festivalul_enescu",
+     "label": "Festivalul George Enescu",
+     "node_type": "event",
+     "category": "arta_cultura",
+     "salience": 0.4779,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Festival international de muzica clasica de la Bucuresti."
+    },
+    {
+     "id": "n_george_enescu_compozitor",
+     "label": "Muzica lui George Enescu",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.5025,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Opera muzicala a celui mai important compozitor roman, intemeietor al scolii nationale de muzica culta."
+    },
+    {
+     "id": "n_brancusi_concept",
+     "label": "Sculptura modernă brâncușiană",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.4911,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Curent al sculpturii moderne initiat de Brancusi, bazat pe esentializarea formei si abstractizare."
+    },
+    {
+     "id": "n_nicolae_grigorescu_picturi",
+     "label": "Pictura lui Nicolae Grigorescu",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.4455,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Opera intemeietorului picturii moderne romanesti, marcata de realism si influente impresioniste."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "George Enescu",
+   "a_group": "Parisul le-a fost mai mult decât escală",
+   "b": "Muzica lui George Enescu",
+   "b_group": "Artistul devenit brand de operă sau școală",
+   "strength": 0.92
+  },
+  {
+   "a": "Festivalul George Enescu",
+   "a_group": "Artistul devenit brand de operă sau școală",
+   "b": "George Enescu",
+   "b_group": "Parisul le-a fost mai mult decât escală",
+   "strength": 0.9
+  },
+  {
+   "a": "Sculptura modernă brâncușiană",
+   "a_group": "Artistul devenit brand de operă sau școală",
+   "b": "Constantin Brâncuși",
+   "b_group": "Parisul le-a fost mai mult decât escală",
+   "strength": 0.86
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:8f139bab8cf0cc2b56c8b66bf2a84a7b9415831266e38f98133ff3ada15da78a"
+}

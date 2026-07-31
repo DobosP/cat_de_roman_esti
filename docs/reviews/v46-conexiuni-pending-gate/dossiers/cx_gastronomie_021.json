@@ -1,0 +1,288 @@
+{
+ "id": "cx_gastronomie_021",
+ "game": "conexiuni",
+ "category": "gastronomie",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "88a52c3ad0169410f7ad0b69a59a9329d8ee25f9c5b5931224413d5f6b69ce9e",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Fasole cu ciolan, Mujdei, Pâine de casă"
+  },
+  {
+   "check": "red_herring_budget",
+   "level": "FAIL",
+   "detail": "5 contested tiles (budget <4): Cașcaval pane, Mici, Murături, Mămăligă, Piftie"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Greu, cu porc\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_018)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Comandă urbană rapidă\" reuses an inventory/selected quad (also in: cx_gastronomie_019, cx_gastronomie_104)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_gastronomie_019 (9)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Mici (16), Murături (14)"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "Covrigi de Buzău": "national-salience concept (0.76) with generic related_to edge to Muntenia",
+  "Mămăligă": "national-salience concept (0.97) with generic related_to edge to Moldova"
+ },
+ "fairness": {
+  "unfair_tiles": [
+   "Fasole cu ciolan",
+   "Mujdei",
+   "Pâine de casă"
+  ],
+  "contested_tiles": [
+   "Cașcaval pane",
+   "Mici",
+   "Murături",
+   "Mămăligă",
+   "Piftie"
+  ],
+  "engine_unfair_raw": 3
+ },
+ "groups": [
+  {
+   "label": "Gusturi tari, cu pâine alături",
+   "members": [
+    {
+     "id": "n_gas_ciorba_burta",
+     "label": "Ciorbă de burtă",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.8739,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Ciorbă dreaptă cu smântână, usturoi și oțet, celebră după petreceri lungi."
+    },
+    {
+     "id": "n_gas_muraturi",
+     "label": "Murături",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.8914,
+     "degree": 23,
+     "incoming_degree": 23,
+     "description": "Legume conservate în saramură sau oțet, puse lângă fripturi, fasole sau șaorma."
+    },
+    {
+     "id": "n_gas_mujdei",
+     "label": "Mujdei",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.7993,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Sos de usturoi zdrobit, nelipsit lângă pește, cartofi, fripturi sau ciorbă de burtă."
+    },
+    {
+     "id": "n_gas_paine_de_casa",
+     "label": "Pâine de casă",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.8422,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Pâine coaptă în gospodărie, suport perfect pentru zacuscă, slănină sau ciorbe."
+    }
+   ]
+  },
+  {
+   "label": "Greu, cu porc",
+   "members": [
+    {
+     "id": "n_gas_fasole_ciolan",
+     "label": "Fasole cu ciolan",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9111,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Mâncare consistentă servită simbolic la multe mese publice de 1 Decembrie."
+    },
+    {
+     "id": "n_gas_piftie",
+     "label": "Piftie",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.2492,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Aspic de porc sau pasăre cu usturoi, fel rece clasic al sărbătorilor de iarnă."
+    },
+    {
+     "id": "n_gas_toba",
+     "label": "Tobă",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.4833,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Mezel tradițional din porc, în membrană, servit rece la masa de Crăciun."
+    },
+    {
+     "id": "n_gas_caltabos",
+     "label": "Caltaboș",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.4593,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Preparat tradițional de porc, fiert în maț, prezent pe masa de Crăciun."
+    }
+   ]
+  },
+  {
+   "label": "Bune cu brânză",
+   "members": [
+    {
+     "id": "n_gas_papanasi",
+     "label": "Papanași",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9491,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Desert cu brânză, smântână și dulceață, prăjit sau fiert în variante regionale."
+    },
+    {
+     "id": "n_gas_bulz",
+     "label": "Bulz",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.4785,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Mămăligă umplută cu brânză, coaptă sau friptă, frecvent asociată cu zona montană."
+    },
+    {
+     "id": "n_gas_placinte_poale_brau",
+     "label": "Poale-n brâu",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.6158,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Plăcinte moldovenești cu brânză dulce, cunoscute și ca brânzoaice."
+    },
+    {
+     "id": "n_gas_mamaliga",
+     "label": "Mămăligă",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9666,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Preparat din mălai, servit cu brânză, smântână, sarmale, pește sau tocănițe."
+    }
+   ]
+  },
+  {
+   "label": "Comandă urbană rapidă",
+   "members": [
+    {
+     "id": "n_gas_saorma_de_toate",
+     "label": "Șaorma cu de toate",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9013,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Fast-food urban adoptat local, cu lipie, carne, cartofi, sosuri și murături."
+    },
+    {
+     "id": "n_gas_cascaval_pane",
+     "label": "Cașcaval pane",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.4371,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Fel prăjit de restaurant și autoservire, cu crustă crocantă și interior topit."
+    },
+    {
+     "id": "n_gas_covrigi_buzau",
+     "label": "Covrigi de Buzău",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.7635,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Covrigi opăriți și copți, produs românesc cu indicație geografică protejată."
+    },
+    {
+     "id": "n_gas_mici",
+     "label": "Mici",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9765,
+     "degree": 20,
+     "incoming_degree": 20,
+     "description": "Mititei fripți pe grătar, asociați popular cu muștar, pâine și ieșiri de 1 Mai."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Murături",
+   "a_group": "Gusturi tari, cu pâine alături",
+   "b": "Șaorma cu de toate",
+   "b_group": "Comandă urbană rapidă",
+   "strength": 0.78
+  },
+  {
+   "a": "Fasole cu ciolan",
+   "a_group": "Greu, cu porc",
+   "b": "Murături",
+   "b_group": "Gusturi tari, cu pâine alături",
+   "strength": 0.75
+  },
+  {
+   "a": "Covrigi de Buzău",
+   "a_group": "Comandă urbană rapidă",
+   "b": "Pâine de casă",
+   "b_group": "Gusturi tari, cu pâine alături",
+   "strength": 0.72
+  },
+  {
+   "a": "Mujdei",
+   "a_group": "Gusturi tari, cu pâine alături",
+   "b": "Piftie",
+   "b_group": "Greu, cu porc",
+   "strength": 0.72
+  },
+  {
+   "a": "Mici",
+   "a_group": "Comandă urbană rapidă",
+   "b": "Pâine de casă",
+   "b_group": "Gusturi tari, cu pâine alături",
+   "strength": 0.7
+  },
+  {
+   "a": "Fasole cu ciolan",
+   "a_group": "Greu, cu porc",
+   "b": "Pâine de casă",
+   "b_group": "Gusturi tari, cu pâine alături",
+   "strength": 0.68
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:6fe705b50a15cf1b741088081d056e32b426ff387c5a6f533250db1f62b51288"
+}

@@ -1,0 +1,297 @@
+{
+ "id": "cx_viata_de_roman_171",
+ "game": "conexiuni",
+ "category": "viata_de_roman",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "81c4c8d1d272f54bc5130eb9586718b0f58bfa87a9e318adc5f9a5ec6853d8f0",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Abțibildurile, Oracolul școlar"
+  },
+  {
+   "check": "red_herring_budget",
+   "level": "FAIL",
+   "detail": "5 contested tiles (budget <4): Cheia de la gât, Guma Turbo, Jocuri de copilărie, Lapte și corn, Telefonul fix"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Pauza mare dulce\" reuses an inventory/selected quad (also in: cx_viata_de_roman_084, cx_viata_de_roman_235)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Afară până seara\" reuses an inventory/selected quad (also in: cx_viata_de_roman_235)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_viata_de_roman_235 (12), cx_viata_de_roman_084 (9)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: TVR (14)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Abțibildurile",
+   "Oracolul școlar"
+  ],
+  "contested_tiles": [
+   "Cheia de la gât",
+   "Guma Turbo",
+   "Jocuri de copilărie",
+   "Lapte și corn",
+   "Telefonul fix"
+  ],
+  "engine_unfair_raw": 3
+ },
+ "groups": [
+  {
+   "label": "Pauza mare dulce",
+   "members": [
+    {
+     "id": "n_vdr_ciocolata_rom",
+     "label": "Ciocolata ROM",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.8556,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Baton românesc cu ambalaj tricolor și aromă de rom, produs din perioada comunistă."
+    },
+    {
+     "id": "n_vdr_eugenia",
+     "label": "Biscuiții Eugenia",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9069,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Biscuiți sandviș cu cremă, prezenți în pachețelul multor copii români."
+    },
+    {
+     "id": "n_vdr_guma_turbo",
+     "label": "Guma Turbo",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.7867,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Gumă de mestecat cu abțibilduri cu mașini, populară în România anilor 90."
+    },
+    {
+     "id": "n_vdr_lapte_si_corn",
+     "label": "Lapte și corn",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.8331,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Program școlar românesc de distribuire a laptelui și cornului pentru elevi."
+    }
+   ]
+  },
+  {
+   "label": "Afară până seara",
+   "members": [
+    {
+     "id": "n_vdr_cheia_de_la_gat",
+     "label": "Cheia de la gât",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.7501,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Cheia purtată de copii la gât când mergeau singuri acasă de la școală."
+    },
+    {
+     "id": "n_vdr_sotron",
+     "label": "Șotronul",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.3802,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Joc de copii desenat cu cretă pe asfalt, cu pătrate sărite într-un picior."
+    },
+    {
+     "id": "n_vdr_joaca_in_fata_blocului",
+     "label": "Joaca în fața blocului",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.8661,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Fotbal, elastic, ascunsa și negocieri pe aleea dintre scări."
+    },
+    {
+     "id": "n_v2via_jocuri_copilarie",
+     "label": "Jocuri de copilărie",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.8935,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Jocuri simple practicate de copii în curte, la școală sau între blocuri."
+    }
+   ]
+  },
+  {
+   "label": "Social offline",
+   "members": [
+    {
+     "id": "n_vdr_oracol_scolar",
+     "label": "Oracolul școlar",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.5307,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Caiet cu întrebări, dedicații și secrete circulate prin clasă."
+    },
+    {
+     "id": "n_vdr_abtibilduri",
+     "label": "Abțibildurile",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.3165,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Colecții de imagini lipite pe caiete, dulapuri sau albume improvizate."
+    },
+    {
+     "id": "n_vdr_telefon_fix",
+     "label": "Telefonul fix",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.4054,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Telefonul de acasă folosit înainte ca mobilul să devină obișnuit."
+    },
+    {
+     "id": "n_vdr_teletext",
+     "label": "Teletextul",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.34,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Serviciu TV cu pagini de text pentru știri, program și rezultate, folosit înaintea internetului."
+    }
+   ]
+  },
+  {
+   "label": "Ecranul de familie",
+   "members": [
+    {
+     "id": "n_ftv_liceenii",
+     "label": "Liceenii",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.8978,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Film românesc din 1986 despre adolescenți, școală și prime iubiri."
+    },
+    {
+     "id": "n_ftv_vacanta_mare",
+     "label": "Vacanța Mare",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.7937,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Grup și brand de comedie TV românească, cunoscut pentru Leana și Costel."
+    },
+    {
+     "id": "n_ftv_tvr",
+     "label": "TVR",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.876,
+     "degree": 20,
+     "incoming_degree": 20,
+     "description": "Televiziunea publică din România, reper istoric pentru emisiuni și filme TV."
+    },
+    {
+     "id": "n_vdr_revelion_la_televizor",
+     "label": "Revelionul la televizor",
+     "node_type": "event",
+     "category": "viata_de_roman",
+     "salience": 0.8359,
+     "degree": 14,
+     "incoming_degree": 14,
+     "description": "Noaptea de Anul Nou petrecută cu programe TV, salată boeuf și numărătoare inversă."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Abțibildurile",
+   "a_group": "Social offline",
+   "b": "Guma Turbo",
+   "b_group": "Pauza mare dulce",
+   "strength": 0.84
+  },
+  {
+   "a": "Jocuri de copilărie",
+   "a_group": "Afară până seara",
+   "b": "Abțibildurile",
+   "b_group": "Social offline",
+   "strength": 0.7
+  },
+  {
+   "a": "Jocuri de copilărie",
+   "a_group": "Afară până seara",
+   "b": "Biscuiții Eugenia",
+   "b_group": "Pauza mare dulce",
+   "strength": 0.7
+  },
+  {
+   "a": "TVR",
+   "a_group": "Ecranul de familie",
+   "b": "Teletextul",
+   "b_group": "Social offline",
+   "strength": 0.7
+  },
+  {
+   "a": "Cheia de la gât",
+   "a_group": "Afară până seara",
+   "b": "Telefonul fix",
+   "b_group": "Social offline",
+   "strength": 0.64
+  },
+  {
+   "a": "Jocuri de copilărie",
+   "a_group": "Afară până seara",
+   "b": "Guma Turbo",
+   "b_group": "Pauza mare dulce",
+   "strength": 0.64
+  },
+  {
+   "a": "Biscuiții Eugenia",
+   "a_group": "Pauza mare dulce",
+   "b": "Oracolul școlar",
+   "b_group": "Social offline",
+   "strength": 0.62
+  },
+  {
+   "a": "Jocuri de copilărie",
+   "a_group": "Afară până seara",
+   "b": "Oracolul școlar",
+   "b_group": "Social offline",
+   "strength": 0.62
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:517ec2e65dcbb97018477565d9712969930403703c9e0dd5fde00060166612d8"
+}

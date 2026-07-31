@@ -1,0 +1,330 @@
+{
+ "id": "cx_viata_de_roman_235",
+ "game": "conexiuni",
+ "category": "viata_de_roman",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "32a1928b942211f367a28a394fe1861fd74ac175a3d13154c4d68f7f32f3ac39",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Copilăria anilor 90, Lapte și corn, Oracolul școlar"
+  },
+  {
+   "check": "red_herring_budget",
+   "level": "FAIL",
+   "detail": "4 contested tiles (budget <4): Biscuiții Eugenia, Cheia de la gât, Guma Turbo, Jocuri de copilărie"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Pauza mare, ambalată\" reuses an inventory/selected quad (also in: cx_viata_de_roman_084, cx_viata_de_roman_171)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Televizor înainte de streaming\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_118, cx_muzica_143, cx_viata_de_roman_170)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Afară, până se aprindea lumina\" reuses an inventory/selected quad (also in: cx_viata_de_roman_171)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_viata_de_roman_171 (12), cx_viata_de_roman_084 (9)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Pro TV (14), TVR (14), Lasă că merge și așa (9)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Copilăria anilor 90",
+   "Lapte și corn",
+   "Oracolul școlar"
+  ],
+  "contested_tiles": [
+   "Biscuiții Eugenia",
+   "Cheia de la gât",
+   "Guma Turbo",
+   "Jocuri de copilărie"
+  ],
+  "engine_unfair_raw": 3
+ },
+ "groups": [
+  {
+   "label": "Pauza mare, ambalată",
+   "members": [
+    {
+     "id": "n_vdr_eugenia",
+     "label": "Biscuiții Eugenia",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9069,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Biscuiți sandviș cu cremă, prezenți în pachețelul multor copii români."
+    },
+    {
+     "id": "n_vdr_lapte_si_corn",
+     "label": "Lapte și corn",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.8331,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Program școlar românesc de distribuire a laptelui și cornului pentru elevi."
+    },
+    {
+     "id": "n_vdr_ciocolata_rom",
+     "label": "Ciocolata ROM",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.8556,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Baton românesc cu ambalaj tricolor și aromă de rom, produs din perioada comunistă."
+    },
+    {
+     "id": "n_vdr_guma_turbo",
+     "label": "Guma Turbo",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.7867,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Gumă de mestecat cu abțibilduri cu mașini, populară în România anilor 90."
+    }
+   ]
+  },
+  {
+   "label": "Televizor înainte de streaming",
+   "members": [
+    {
+     "id": "n_ftv_tvr",
+     "label": "TVR",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.876,
+     "degree": 20,
+     "incoming_degree": 20,
+     "description": "Televiziunea publică din România, reper istoric pentru emisiuni și filme TV."
+    },
+    {
+     "id": "n_ftv_pro_tv",
+     "label": "Pro TV",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.9055,
+     "degree": 26,
+     "incoming_degree": 26,
+     "description": "Post TV comercial românesc, important pentru seriale și divertisment pop."
+    },
+    {
+     "id": "n_vdr_teletext",
+     "label": "Teletextul",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.34,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Serviciu TV cu pagini de text pentru știri, program și rezultate, folosit înaintea internetului."
+    },
+    {
+     "id": "n_vdr_revelion_la_televizor",
+     "label": "Revelionul la televizor",
+     "node_type": "event",
+     "category": "viata_de_roman",
+     "salience": 0.8359,
+     "degree": 14,
+     "incoming_degree": 14,
+     "description": "Noaptea de Anul Nou petrecută cu programe TV, salată boeuf și numărătoare inversă."
+    }
+   ]
+  },
+  {
+   "label": "Afară, până se aprindea lumina",
+   "members": [
+    {
+     "id": "n_vdr_joaca_in_fata_blocului",
+     "label": "Joaca în fața blocului",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.8661,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Fotbal, elastic, ascunsa și negocieri pe aleea dintre scări."
+    },
+    {
+     "id": "n_vdr_sotron",
+     "label": "Șotronul",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.3802,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Joc de copii desenat cu cretă pe asfalt, cu pătrate sărite într-un picior."
+    },
+    {
+     "id": "n_vdr_cheia_de_la_gat",
+     "label": "Cheia de la gât",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.7501,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Cheia purtată de copii la gât când mergeau singuri acasă de la școală."
+    },
+    {
+     "id": "n_v2via_jocuri_copilarie",
+     "label": "Jocuri de copilărie",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.8935,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Jocuri simple practicate de copii în curte, la școală sau între blocuri."
+    }
+   ]
+  },
+  {
+   "label": "Folclor de părinte și caiet",
+   "members": [
+    {
+     "id": "n_vdr_oracol_scolar",
+     "label": "Oracolul școlar",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.5307,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Caiet cu întrebări, dedicații și secrete circulate prin clasă."
+    },
+    {
+     "id": "n_vdr_nu_iesi_capul_ud",
+     "label": "Nu ieși cu capul ud!",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.7234,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Avertisment părintesc românesc despre frig, curent și păr proaspăt spălat."
+    },
+    {
+     "id": "n_vdr_lasa_ca_merge",
+     "label": "Lasă că merge și așa",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9596,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Expresie folosită adesea ironic pentru acceptarea unei soluții provizorii sau imperfecte."
+    },
+    {
+     "id": "n_vdr_copilaria_anilor_90",
+     "label": "Copilăria anilor 90",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9688,
+     "degree": 31,
+     "incoming_degree": 31,
+     "description": "Nostalgia copiilor crescuți între cheia de la gât, jocuri la bloc și dulciuri de chioșc."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Cheia de la gât",
+   "a_group": "Afară, până se aprindea lumina",
+   "b": "Copilăria anilor 90",
+   "b_group": "Folclor de părinte și caiet",
+   "strength": 0.9
+  },
+  {
+   "a": "Copilăria anilor 90",
+   "a_group": "Folclor de părinte și caiet",
+   "b": "Joaca în fața blocului",
+   "b_group": "Afară, până se aprindea lumina",
+   "strength": 0.88
+  },
+  {
+   "a": "Copilăria anilor 90",
+   "a_group": "Folclor de părinte și caiet",
+   "b": "Biscuiții Eugenia",
+   "b_group": "Pauza mare, ambalată",
+   "strength": 0.86
+  },
+  {
+   "a": "Copilăria anilor 90",
+   "a_group": "Folclor de părinte și caiet",
+   "b": "Guma Turbo",
+   "b_group": "Pauza mare, ambalată",
+   "strength": 0.86
+  },
+  {
+   "a": "Jocuri de copilărie",
+   "a_group": "Afară, până se aprindea lumina",
+   "b": "Copilăria anilor 90",
+   "b_group": "Folclor de părinte și caiet",
+   "strength": 0.86
+  },
+  {
+   "a": "Ciocolata ROM",
+   "a_group": "Pauza mare, ambalată",
+   "b": "Copilăria anilor 90",
+   "b_group": "Folclor de părinte și caiet",
+   "strength": 0.82
+  },
+  {
+   "a": "Copilăria anilor 90",
+   "a_group": "Folclor de părinte și caiet",
+   "b": "Lapte și corn",
+   "b_group": "Pauza mare, ambalată",
+   "strength": 0.82
+  },
+  {
+   "a": "Copilăria anilor 90",
+   "a_group": "Folclor de părinte și caiet",
+   "b": "Șotronul",
+   "b_group": "Afară, până se aprindea lumina",
+   "strength": 0.76
+  },
+  {
+   "a": "Jocuri de copilărie",
+   "a_group": "Afară, până se aprindea lumina",
+   "b": "Biscuiții Eugenia",
+   "b_group": "Pauza mare, ambalată",
+   "strength": 0.7
+  },
+  {
+   "a": "Jocuri de copilărie",
+   "a_group": "Afară, până se aprindea lumina",
+   "b": "Guma Turbo",
+   "b_group": "Pauza mare, ambalată",
+   "strength": 0.64
+  },
+  {
+   "a": "Biscuiții Eugenia",
+   "a_group": "Pauza mare, ambalată",
+   "b": "Oracolul școlar",
+   "b_group": "Folclor de părinte și caiet",
+   "strength": 0.62
+  },
+  {
+   "a": "Jocuri de copilărie",
+   "a_group": "Afară, până se aprindea lumina",
+   "b": "Oracolul școlar",
+   "b_group": "Folclor de părinte și caiet",
+   "strength": 0.62
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:17b8169a97a07bf963cbcd11fd9c569e9265d749d39c875b8b2972e311e1eb9f"
+}

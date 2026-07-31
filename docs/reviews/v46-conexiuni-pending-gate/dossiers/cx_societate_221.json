@@ -1,0 +1,335 @@
+{
+ "id": "cx_societate_221",
+ "game": "conexiuni",
+ "category": "societate",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "0d626ed9171eaf0b9e8ec21be9ab6ddecae626d3e0657d1369720ba4316412ac",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "board_type_shortcut",
+   "level": "WARN",
+   "detail": "all four groups are node-type homogeneous and expose 3 distinct group types"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Fabrici cu oraș în nume\" <-> \"Orașele din spatele fabricilor\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Orașe cu greutate de centru\" reuses an inventory/selected quad (also in: cx_geografie_001, cx_geografie_023, cx_societate_065, cx_societate_066, cx_societate_154, cx_societate_279)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Fabrici cu oraș în nume\" reuses an inventory/selected quad (also in: cx_geografie_177, cx_societate_067, cx_societate_151, cx_societate_279)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Orașele din spatele fabricilor\" reuses an inventory/selected quad (also in: cx_geografie_113, cx_societate_067, cx_societate_151, cx_societate_279)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_societate_279 (12), cx_societate_151 (10), cx_societate_067 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: București (24), Cluj-Napoca (19), Iași (16), Timișoara (10)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 10
+ },
+ "groups": [
+  {
+   "label": "Orașe cu greutate de centru",
+   "members": [
+    {
+     "id": "n_bucuresti",
+     "label": "București",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.6721,
+     "degree": 103,
+     "incoming_degree": 108,
+     "description": "Capitala României, în Muntenia."
+    },
+    {
+     "id": "n_iasi",
+     "label": "Iași",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.5139,
+     "degree": 20,
+     "incoming_degree": 19,
+     "description": "Oras din Moldova, fosta capitala a Principatului Moldovei si important centru cultural."
+    },
+    {
+     "id": "n_cluj_napoca",
+     "label": "Cluj-Napoca",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.4989,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Oraș important din Transilvania, pe Someș."
+    },
+    {
+     "id": "n_timisoara",
+     "label": "Timișoara",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.3406,
+     "degree": 8,
+     "incoming_degree": 7,
+     "description": "Oras principal din Banat, vestul Romaniei, unde a inceput Revolutia din 1989."
+    }
+   ]
+  },
+  {
+   "label": "Fabrici cu oraș în nume",
+   "members": [
+    {
+     "id": "n_socx_automobile_dacia",
+     "label": "Automobile Dacia",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.3544,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Constructor auto românesc lansat la Mioveni/Pitești, devenit marcă de export."
+    },
+    {
+     "id": "n_socx_uzina_resita",
+     "label": "Uzinele Reșița",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.2218,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Centru industrial bănățean legat de metalurgie, mașini și locomotive."
+    },
+    {
+     "id": "n_socx_combinatul_galati",
+     "label": "Combinatul siderurgic Galați",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.2456,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Mare platformă siderurgică de la Galați, reper al industriei grele românești."
+    },
+    {
+     "id": "n_socx_electroputere_craiova",
+     "label": "Electroputere Craiova",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.194,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Întreprindere craioveană cunoscută pentru locomotive și echipamente electrice."
+    }
+   ]
+  },
+  {
+   "label": "Orașele din spatele fabricilor",
+   "members": [
+    {
+     "id": "n_socx_pitesti",
+     "label": "Pitești",
+     "node_type": "place",
+     "category": "societate",
+     "salience": 0.2259,
+     "degree": 7,
+     "incoming_degree": 8,
+     "description": "Oraș argeșean asociat puternic cu industria auto Dacia."
+    },
+    {
+     "id": "n_socx_resita",
+     "label": "Reșița",
+     "node_type": "place",
+     "category": "societate",
+     "salience": 0.1849,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Oraș bănățean cunoscut pentru tradiția sa metalurgică."
+    },
+    {
+     "id": "n_socx_galati",
+     "label": "Galați",
+     "node_type": "place",
+     "category": "societate",
+     "salience": 0.2345,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Oraș dunărean și port, asociat cu siderurgia românească."
+    },
+    {
+     "id": "n_socx_craiova",
+     "label": "Craiova",
+     "node_type": "place",
+     "category": "societate",
+     "salience": 0.2406,
+     "degree": 6,
+     "incoming_degree": 7,
+     "description": "Oraș important al Olteniei, cu tradiție industrială și universitară."
+    }
+   ]
+  },
+  {
+   "label": "Cuvinte de hală și pontaj",
+   "members": [
+    {
+     "id": "n_v2soc_industrie",
+     "label": "Industrie",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.7888,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Producție de bunuri prin fabrici, uzine și tehnologii specializate."
+    },
+    {
+     "id": "n_v2soc_uzina",
+     "label": "Uzină",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.5325,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Unitate industrială mare, asociată cu producția și utilajele."
+    },
+    {
+     "id": "n_v4soc_munca",
+     "label": "muncă",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.8963,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Activitate prin care oamenii produc bunuri, servicii sau venit."
+    },
+    {
+     "id": "n_v4soc_fabrica",
+     "label": "fabrică",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.5037,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Unitate industrială unde se produc bunuri în serie."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Combinatul siderurgic Galați",
+   "a_group": "Fabrici cu oraș în nume",
+   "b": "Galați",
+   "b_group": "Orașele din spatele fabricilor",
+   "strength": 0.88
+  },
+  {
+   "a": "Reșița",
+   "a_group": "Orașele din spatele fabricilor",
+   "b": "Uzinele Reșița",
+   "b_group": "Fabrici cu oraș în nume",
+   "strength": 0.88
+  },
+  {
+   "a": "Automobile Dacia",
+   "a_group": "Fabrici cu oraș în nume",
+   "b": "Pitești",
+   "b_group": "Orașele din spatele fabricilor",
+   "strength": 0.86
+  },
+  {
+   "a": "Craiova",
+   "a_group": "Orașele din spatele fabricilor",
+   "b": "Electroputere Craiova",
+   "b_group": "Fabrici cu oraș în nume",
+   "strength": 0.86
+  },
+  {
+   "a": "Uzinele Reșița",
+   "a_group": "Fabrici cu oraș în nume",
+   "b": "Uzină",
+   "b_group": "Cuvinte de hală și pontaj",
+   "strength": 0.82
+  },
+  {
+   "a": "Automobile Dacia",
+   "a_group": "Fabrici cu oraș în nume",
+   "b": "Industrie",
+   "b_group": "Cuvinte de hală și pontaj",
+   "strength": 0.78
+  },
+  {
+   "a": "Electroputere Craiova",
+   "a_group": "Fabrici cu oraș în nume",
+   "b": "Uzină",
+   "b_group": "Cuvinte de hală și pontaj",
+   "strength": 0.78
+  },
+  {
+   "a": "Uzinele Reșița",
+   "a_group": "Fabrici cu oraș în nume",
+   "b": "Industrie",
+   "b_group": "Cuvinte de hală și pontaj",
+   "strength": 0.78
+  },
+  {
+   "a": "Combinatul siderurgic Galați",
+   "a_group": "Fabrici cu oraș în nume",
+   "b": "Uzină",
+   "b_group": "Cuvinte de hală și pontaj",
+   "strength": 0.76
+  },
+  {
+   "a": "Electroputere Craiova",
+   "a_group": "Fabrici cu oraș în nume",
+   "b": "Industrie",
+   "b_group": "Cuvinte de hală și pontaj",
+   "strength": 0.76
+  },
+  {
+   "a": "Automobile Dacia",
+   "a_group": "Fabrici cu oraș în nume",
+   "b": "Uzină",
+   "b_group": "Cuvinte de hală și pontaj",
+   "strength": 0.74
+  },
+  {
+   "a": "Reșița",
+   "a_group": "Orașele din spatele fabricilor",
+   "b": "Uzină",
+   "b_group": "Cuvinte de hală și pontaj",
+   "strength": 0.67
+  },
+  {
+   "a": "Pitești",
+   "a_group": "Orașele din spatele fabricilor",
+   "b": "Industrie",
+   "b_group": "Cuvinte de hală și pontaj",
+   "strength": 0.63
+  },
+  {
+   "a": "Craiova",
+   "a_group": "Orașele din spatele fabricilor",
+   "b": "Industrie",
+   "b_group": "Cuvinte de hală și pontaj",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:58fb21ae86a76de727b2d2dbf9b4041fc10a8f06542aaef72f012bdd25c4ddd6"
+}

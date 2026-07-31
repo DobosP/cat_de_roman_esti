@@ -1,0 +1,244 @@
+{
+ "id": "cx_muzica_054",
+ "game": "conexiuni",
+ "category": "muzica",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "0c1e74168287f046c452213eb8bb54b7726589ef841804a1c84121fb32167eac",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "board_type_shortcut",
+   "level": "WARN",
+   "detail": "all four groups are node-type homogeneous and expose 3 distinct group types"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Nume de trupă/proiect\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_muzica_057, cx_muzica_139)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Soliste pop-dance/pop\" reuses an inventory/selected quad (also in: cx_muzica_057)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Locuri de festival\" reuses an inventory/selected quad (also in: cx_muzica_056, cx_muzica_138, cx_muzica_206, cx_muzica_271)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Voci de manele\" reuses an inventory/selected quad (also in: cx_muzica_053, cx_muzica_055, cx_personalitati_213)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_muzica_057 (9), cx_muzica_053 (8), cx_muzica_055 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Brașov (12), Cluj-Napoca (19), Constanța (15), Bonțida (9), O-Zone (10)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 2
+ },
+ "groups": [
+  {
+   "label": "Nume de trupă/proiect",
+   "members": [
+    {
+     "id": "n_muz_ozone",
+     "label": "O-Zone",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.883,
+     "degree": 12,
+     "incoming_degree": 11,
+     "description": "Trio pop din Republica Moldova care a dus „Dragostea din tei” în topuri internaționale."
+    },
+    {
+     "id": "n_muz_bug_mafia",
+     "label": "B.U.G. Mafia",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.641,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Trupă românească de hip-hop, asociată cu soundul dur de cartier din anii 1990 și 2000."
+    },
+    {
+     "id": "n_muz_carlas_dreams",
+     "label": "Carla's Dreams",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.5445,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Proiect muzical din Republica Moldova, cunoscut pentru imaginea mascată și pop alternativ."
+    },
+    {
+     "id": "n_muz_vama_veche",
+     "label": "Vama Veche",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.2795,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Trupă românească de rock alternativ, asociată cu refrene de vară și libertate."
+    }
+   ]
+  },
+  {
+   "label": "Soliste pop-dance/pop",
+   "members": [
+    {
+     "id": "n_muz_inna",
+     "label": "INNA",
+     "node_type": "person",
+     "category": "muzica",
+     "salience": 0.8549,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Cântăreață română de dance-pop, cu succes internațional după single-ul „Hot”."
+    },
+    {
+     "id": "n_muz_alexandra_stan",
+     "label": "Alexandra Stan",
+     "node_type": "person",
+     "category": "muzica",
+     "salience": 0.6002,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Cântăreață română devenită cunoscută global cu „Mr. Saxobeat”."
+    },
+    {
+     "id": "n_muz_delia",
+     "label": "Delia",
+     "node_type": "person",
+     "category": "muzica",
+     "salience": 0.7656,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Cântăreață română pop, cunoscută pentru voce, show-uri TV și hituri radio."
+    },
+    {
+     "id": "n_muz_andra",
+     "label": "Andra",
+     "node_type": "person",
+     "category": "muzica",
+     "salience": 0.8183,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Cântăreață română pop, prezentă constant în radio, televiziune și concerte mari."
+    }
+   ]
+  },
+  {
+   "label": "Locuri de festival",
+   "members": [
+    {
+     "id": "n_cluj_napoca",
+     "label": "Cluj-Napoca",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.4989,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Oraș important din Transilvania, pe Someș."
+    },
+    {
+     "id": "n_constanta",
+     "label": "Constanța",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.5067,
+     "degree": 22,
+     "incoming_degree": 22,
+     "description": "Oraș-port la Marea Neagră, în Dobrogea."
+    },
+    {
+     "id": "n_brasov",
+     "label": "Brașov",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.3074,
+     "degree": 12,
+     "incoming_degree": 11,
+     "description": "Oras din centrul Romaniei, la poalele Carpatilor, important centru turistic si industrial."
+    },
+    {
+     "id": "n_muz_bontida",
+     "label": "Bonțida",
+     "node_type": "place",
+     "category": "muzica",
+     "salience": 0.2836,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Localitate din județul Cluj, cunoscută în pop-culture prin Electric Castle."
+    }
+   ]
+  },
+  {
+   "label": "Voci de manele",
+   "members": [
+    {
+     "id": "n_muz_nicolae_guta",
+     "label": "Nicolae Guță",
+     "node_type": "person",
+     "category": "muzica",
+     "salience": 0.767,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Cântăreț român de manele, una dintre cele mai cunoscute voci ale genului."
+    },
+    {
+     "id": "n_muz_florin_salam",
+     "label": "Florin Salam",
+     "node_type": "person",
+     "category": "muzica",
+     "salience": 0.8134,
+     "degree": 7,
+     "incoming_degree": 6,
+     "description": "Cântăreț român de manele, celebru pentru vocea sa și pentru concertele de petrecere."
+    },
+    {
+     "id": "n_muz_adrian_minune",
+     "label": "Adrian Minune",
+     "node_type": "person",
+     "category": "muzica",
+     "salience": 0.6995,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Cântăreț român de manele, figură centrală a scenei din anii 2000."
+    },
+    {
+     "id": "n_muz_vali_vijelie",
+     "label": "Vali Vijelie",
+     "node_type": "person",
+     "category": "muzica",
+     "salience": 0.4851,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Cântăreț român de manele și muzică de petrecere, activ pe scene de evenimente."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Constanța",
+   "a_group": "Locuri de festival",
+   "b": "Alexandra Stan",
+   "b_group": "Soliste pop-dance/pop",
+   "strength": 0.78
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:565bd098f5e38ad43dfb827fea42a5093228b83010558f1743949b9b7c333b26"
+}

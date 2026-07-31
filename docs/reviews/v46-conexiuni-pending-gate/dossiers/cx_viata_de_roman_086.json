@@ -1,0 +1,296 @@
+{
+ "id": "cx_viata_de_roman_086",
+ "game": "conexiuni",
+ "category": "viata_de_roman",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "6bb89ee9f90ae6cbd1b370cc07180d73c5e987a3797ed8ec9bb18de4b2b64924",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Mămăliga bunicii, Țuica de casă"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Curtea bunicilor\" mixes node_types 3+1: Gospodăria bunicilor[place], Găina din curte[concept], Fântâna din curte[place], Ulița satului[place]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Curtea bunicilor\" reuses an inventory/selected quad (also in: cx_viata_de_roman_089, cx_viata_de_roman_289)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Din cămară sau beci\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_089, cx_viata_de_roman_169)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Pe masa de familie\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_237)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Iarna care intră în poveste\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_170)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_viata_de_roman_234 (11), cx_viata_de_roman_089 (10), cx_viata_de_roman_169 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Borcanele de zacuscă (11), Portbagajul plin (9)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Mămăliga bunicii",
+   "Țuica de casă"
+  ],
+  "contested_tiles": [
+   "Mirosul de cozonac"
+  ],
+  "engine_unfair_raw": 4
+ },
+ "groups": [
+  {
+   "label": "Curtea bunicilor",
+   "members": [
+    {
+     "id": "n_vdr_gospodaria_bunicilor",
+     "label": "Gospodăria bunicilor",
+     "node_type": "place",
+     "category": "viata_de_roman",
+     "salience": 0.9146,
+     "degree": 20,
+     "incoming_degree": 20,
+     "description": "Curtea cu grădină, coteț, magazie, butoi și lucruri păstrate pentru orice nevoie."
+    },
+    {
+     "id": "n_vdr_gaina_din_curte",
+     "label": "Găina din curte",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.281,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Pasărea din gospodărie care anunță ouă proaspete și haos controlat prin curte."
+    },
+    {
+     "id": "n_vdr_fantana_din_curte",
+     "label": "Fântâna din curte",
+     "node_type": "place",
+     "category": "viata_de_roman",
+     "salience": 0.2659,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Sursa de apă din gospodărie, cu găleată, cumpănă sau roată."
+    },
+    {
+     "id": "n_vdr_ulita_satului",
+     "label": "Ulița satului",
+     "node_type": "place",
+     "category": "viata_de_roman",
+     "salience": 0.5109,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Drumul mic al satului, spațiu de joacă, povești și întoarceri de la câmp."
+    }
+   ]
+  },
+  {
+   "label": "Din cămară sau beci",
+   "members": [
+    {
+     "id": "n_vdr_borcane_zacusca",
+     "label": "Borcanele de zacuscă",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.7642,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Conserve de toamnă puse la borcan pentru iarnă, nelipsite din multe cămări."
+    },
+    {
+     "id": "n_vdr_tuica_de_casa",
+     "label": "Țuica de casă",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.635,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Băutură tradițională din prune, asociată cu gospodăria rurală și mesele de familie."
+    },
+    {
+     "id": "n_vdr_punga_cu_pungi",
+     "label": "Punga cu pungi",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9364,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Punga mare în care se păstrează alte pungi, soluție domestică foarte răspândită."
+    },
+    {
+     "id": "n_vdr_portbagaj_plin",
+     "label": "Portbagajul plin",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.6883,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Mașina încărcată cu sacoșe, borcane sau bagaje la plecarea de la rude."
+    }
+   ]
+  },
+  {
+   "label": "Pe masa de familie",
+   "members": [
+    {
+     "id": "n_vdr_mamaliga_bunicii",
+     "label": "Mămăliga bunicii",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.8535,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Mămăligă fierbinte făcută în casă, simbol al mesei simple de la bunici."
+    },
+    {
+     "id": "n_vdr_sarmale_craciun",
+     "label": "Sarmalele de Crăciun",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9603,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Fel de sărbătoare cu varză, carne și oală mare, nelipsit pe multe mese românești."
+    },
+    {
+     "id": "n_vdr_miros_de_cozonac",
+     "label": "Mirosul de cozonac",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.7473,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Aroma de cozonac copt care anunță masa de sărbătoare."
+    },
+    {
+     "id": "n_vdr_eugenia",
+     "label": "Biscuiții Eugenia",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9069,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Biscuiți sandviș cu cremă, prezenți în pachețelul multor copii români."
+    }
+   ]
+  },
+  {
+   "label": "Iarna care intră în poveste",
+   "members": [
+    {
+     "id": "n_vdr_taiatul_porcului",
+     "label": "Tăiatul porcului de Ignat",
+     "node_type": "event",
+     "category": "viata_de_roman",
+     "salience": 0.8064,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Obicei rural de iarnă înaintea Crăciunului, legat de pregătirea cărnii."
+    },
+    {
+     "id": "n_vdr_colindatul",
+     "label": "Colindatul",
+     "node_type": "event",
+     "category": "viata_de_roman",
+     "salience": 0.7839,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Obicei de Crăciun în care grupuri cântă colinde pe la case."
+    },
+    {
+     "id": "n_vdr_plugusorul",
+     "label": "Plugușorul",
+     "node_type": "event",
+     "category": "viata_de_roman",
+     "salience": 0.5145,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Urare tradițională de Anul Nou, rostită ritmic cu clopoței și buhai."
+    },
+    {
+     "id": "n_vdr_revelion_la_televizor",
+     "label": "Revelionul la televizor",
+     "node_type": "event",
+     "category": "viata_de_roman",
+     "salience": 0.8359,
+     "degree": 14,
+     "incoming_degree": 14,
+     "description": "Noaptea de Anul Nou petrecută cu programe TV, salată boeuf și numărătoare inversă."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Borcanele de zacuscă",
+   "a_group": "Din cămară sau beci",
+   "b": "Gospodăria bunicilor",
+   "b_group": "Curtea bunicilor",
+   "strength": 0.84
+  },
+  {
+   "a": "Gospodăria bunicilor",
+   "a_group": "Curtea bunicilor",
+   "b": "Mămăliga bunicii",
+   "b_group": "Pe masa de familie",
+   "strength": 0.82
+  },
+  {
+   "a": "Colindatul",
+   "a_group": "Iarna care intră în poveste",
+   "b": "Sarmalele de Crăciun",
+   "b_group": "Pe masa de familie",
+   "strength": 0.78
+  },
+  {
+   "a": "Gospodăria bunicilor",
+   "a_group": "Curtea bunicilor",
+   "b": "Tăiatul porcului de Ignat",
+   "b_group": "Iarna care intră în poveste",
+   "strength": 0.78
+  },
+  {
+   "a": "Sarmalele de Crăciun",
+   "a_group": "Pe masa de familie",
+   "b": "Tăiatul porcului de Ignat",
+   "b_group": "Iarna care intră în poveste",
+   "strength": 0.78
+  },
+  {
+   "a": "Borcanele de zacuscă",
+   "a_group": "Din cămară sau beci",
+   "b": "Mămăliga bunicii",
+   "b_group": "Pe masa de familie",
+   "strength": 0.72
+  },
+  {
+   "a": "Gospodăria bunicilor",
+   "a_group": "Curtea bunicilor",
+   "b": "Țuica de casă",
+   "b_group": "Din cămară sau beci",
+   "strength": 0.72
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:a46f406dbd2c0ae34b46af883dbb4215e550b1a5d0077ab105cd1af12b24b21f"
+}

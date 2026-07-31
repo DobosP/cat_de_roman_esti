@@ -1,0 +1,279 @@
+{
+ "id": "cx_literatura_129",
+ "game": "conexiuni",
+ "category": "literatura",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "4b5fbd711f67fa8533af0386f39b64ea0de5e2168d234887679aed44f1b81f68",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): George Călinescu, I.L. Caragiale, Ion Creangă, Mihai Eminescu, Mihai din Liceenii, Ștefan Bănică Jr., Ștefan Tipătescu"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Ion, dar nu același Ion\" mixes node_types 3+1: Ion Creangă[person], I.L. Caragiale[person], Ion Barbu[person], Ion (roman)[work]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"George în cultură\" mixes node_types 3+1: George Bacovia[person], George Călinescu[person], George Enescu[person], Festivalul George Enescu[event]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Ion, dar nu același Ion\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_160, cx_film_tv_166, cx_limba_190, cx_literatura_042, cx_literatura_196, cx_stiinta_082)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"George în cultură\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_196)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Mihai din epoci diferite\" reuses an inventory/selected quad (also in: cx_film_tv_166, cx_istorie_257, cx_limba_190, cx_personalitati_210)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Ștefan între roman, comedie, istorie și pop\" reuses an inventory/selected quad (also in: cx_meme_net_204)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_literatura_196 (12), cx_film_tv_166 (10), cx_limba_190 (9)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Festivalul George Enescu (18), George Enescu (23), Ion Barbu (15), Ion Creangă (18), I.L. Caragiale (23), Ion (roman) (12), Ștefan Tipătescu (13), Mihai Eminescu (11), Mihai I (15), Mihai Viteazul (13), Ștefan cel Mare (18)"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "Mihai Viteazul": "linked to 2 regions (Moldova, Transilvania)"
+ },
+ "fairness": {
+  "unfair_tiles": [
+   "George Călinescu",
+   "I.L. Caragiale",
+   "Ion Creangă",
+   "Mihai Eminescu",
+   "Mihai din Liceenii",
+   "Ștefan Bănică Jr.",
+   "Ștefan Tipătescu"
+  ],
+  "contested_tiles": [],
+  "engine_unfair_raw": 7
+ },
+ "groups": [
+  {
+   "label": "Ion, dar nu același Ion",
+   "members": [
+    {
+     "id": "n_ion_creanga",
+     "label": "Ion Creangă",
+     "node_type": "person",
+     "category": "literatura",
+     "salience": 0.5583,
+     "degree": 19,
+     "incoming_degree": 18,
+     "description": "Scriitor roman, autor al Amintirilor din copilarie."
+    },
+    {
+     "id": "n_ion_luca_caragiale",
+     "label": "I.L. Caragiale",
+     "node_type": "person",
+     "category": "literatura",
+     "salience": 0.5625,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Dramaturg roman, maestru al comediei, membru al Junimii."
+    },
+    {
+     "id": "n_ion_barbu",
+     "label": "Ion Barbu",
+     "node_type": "person",
+     "category": "literatura",
+     "salience": 0.2608,
+     "degree": 6,
+     "incoming_degree": 5,
+     "description": "Poet modernist si matematician (1895-1961), autor al volumului Joc secund."
+    },
+    {
+     "id": "n_ion_roman",
+     "label": "Ion (roman)",
+     "node_type": "work",
+     "category": "literatura",
+     "salience": 0.2578,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Roman realist de Liviu Rebreanu (1920) despre taranul ardelean."
+    }
+   ]
+  },
+  {
+   "label": "George în cultură",
+   "members": [
+    {
+     "id": "n_george_bacovia",
+     "label": "George Bacovia",
+     "node_type": "person",
+     "category": "literatura",
+     "salience": 0.2573,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Poet roman, principal reprezentant al simbolismului."
+    },
+    {
+     "id": "n_george_calinescu",
+     "label": "George Călinescu",
+     "node_type": "person",
+     "category": "literatura",
+     "salience": 0.1971,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Critic si istoric literar roman (1899-1965), autor al Istoriei literaturii romane de la origini pana in prezent."
+    },
+    {
+     "id": "n_george_enescu",
+     "label": "George Enescu",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.8366,
+     "degree": 30,
+     "incoming_degree": 30,
+     "description": "Compozitor, violonist si dirijor roman."
+    },
+    {
+     "id": "n_festivalul_enescu",
+     "label": "Festivalul George Enescu",
+     "node_type": "event",
+     "category": "arta_cultura",
+     "salience": 0.4779,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Festival international de muzica clasica de la Bucuresti."
+    }
+   ]
+  },
+  {
+   "label": "Mihai din epoci diferite",
+   "members": [
+    {
+     "id": "n_mihai_eminescu",
+     "label": "Mihai Eminescu",
+     "node_type": "person",
+     "category": "literatura",
+     "salience": 0.8268,
+     "degree": 24,
+     "incoming_degree": 24,
+     "description": "Poet roman, autor al poemului Luceafarul."
+    },
+    {
+     "id": "n_mihai_viteazul",
+     "label": "Mihai Viteazul",
+     "node_type": "person",
+     "category": "istorie",
+     "salience": 0.6182,
+     "degree": 13,
+     "incoming_degree": 14,
+     "description": "Domnitor, prima unire a Tarilor Romane (1600)."
+    },
+    {
+     "id": "n_mihai_i",
+     "label": "Mihai I",
+     "node_type": "person",
+     "category": "istorie",
+     "salience": 0.3436,
+     "degree": 14,
+     "incoming_degree": 15,
+     "description": "Ultimul rege al Romaniei (1927-1930, 1940-1947), nepot al lui Ferdinand I."
+    },
+    {
+     "id": "n_ftv_mihai_liceenii",
+     "label": "Mihai din Liceenii",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.2755,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Personajul interpretat de Ștefan Bănică Jr. în filmul Liceenii."
+    }
+   ]
+  },
+  {
+   "label": "Ștefan între roman, comedie, istorie și pop",
+   "members": [
+    {
+     "id": "n_litx_stefan_gheorghidiu",
+     "label": "Ștefan Gheorghidiu",
+     "node_type": "person",
+     "category": "literatura",
+     "salience": 0.1965,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Naratorul din Ultima noapte de dragoste, întâia noapte de război, lucid și gelos."
+    },
+    {
+     "id": "n_litx_stefan_tipatescu",
+     "label": "Ștefan Tipătescu",
+     "node_type": "person",
+     "category": "literatura",
+     "salience": 0.2699,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Prefectul din O scrisoare pierdută, prins în mecanismul comic al puterii locale."
+    },
+    {
+     "id": "n_stefan_cel_mare",
+     "label": "Ștefan cel Mare",
+     "node_type": "person",
+     "category": "istorie",
+     "salience": 0.6939,
+     "degree": 18,
+     "incoming_degree": 18,
+     "description": "Domnitor al Moldovei (1457-1504)."
+    },
+    {
+     "id": "n_ftv_stefan_banica_jr",
+     "label": "Ștefan Bănică Jr.",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.5253,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Actor și cântăreț român, interpretul lui Mihai în filmul Liceenii."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Mihai din Liceenii",
+   "a_group": "Mihai din epoci diferite",
+   "b": "Ștefan Bănică Jr.",
+   "b_group": "Ștefan între roman, comedie, istorie și pop",
+   "strength": 0.96
+  },
+  {
+   "a": "I.L. Caragiale",
+   "a_group": "Ion, dar nu același Ion",
+   "b": "Ștefan Tipătescu",
+   "b_group": "Ștefan între roman, comedie, istorie și pop",
+   "strength": 0.82
+  },
+  {
+   "a": "Ion Creangă",
+   "a_group": "Ion, dar nu același Ion",
+   "b": "Mihai Eminescu",
+   "b_group": "Mihai din epoci diferite",
+   "strength": 0.7
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:c216e7d128fdf701068a5d01948eff50b431c576d9b2d8dcb1a4b5b91e807fac"
+}

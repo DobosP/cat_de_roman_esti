@@ -28,7 +28,7 @@ NOTE = (
 NEW_NODE_IDS: tuple[str, ...] = ()
 GAME_ITEM_IDS: tuple[str, ...] = ()
 BEGINNER_BENCHMARK = V24_BEGINNER_BENCHMARK
-BASELINE_PACK_SHA256 = "2fdb17d98a4f433dac6a55780d14a2c5604bfa5dd9d14d62c670c54b38d46ccb"
+BASELINE_PACK_SHA256 = "f630dcfcea52a30a0fb763bfe078f67b765b228638dbf064fe60363acec6728b"
 REVIEW_ITEM_IDS: tuple[str, ...] = (
     *V24_GAME_ITEM_IDS,
     "cx_viata_de_roman_291",

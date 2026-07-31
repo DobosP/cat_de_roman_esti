@@ -1,0 +1,253 @@
+{
+ "id": "cx_stiinta_166",
+ "game": "conexiuni",
+ "category": "stiinta",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "2c66a124543c3575e0d02978266cc4a32f9d5aa801e51cf07ad6fa824b2406ac",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Sunetul ca tehnică\" mixes node_types 3+1: Gogu Constantinescu[person], Sonicitate[concept], Fizică[concept], Inginerie[concept]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Numere în nume, nu în formule\" mixes node_types 3+1: Coandă-1910[work], Vuia I[work], Vlaicu II[work], Dacia 1310[concept]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Muzee și obiecte de văzut\" mixes node_types 3+1: Muzeul Național de Istorie Naturală Grigore Antipa[org], Muzeul Național al Aviației Române[org], Muzeul Național Brukenthal[org], Muzeu[concept]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Stiloul, înainte să fie penar\" reuses an inventory/selected quad (also in: cx_limba_192)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Numere în nume, nu în formule\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_067, cx_stiinta_078, cx_stiinta_082, cx_stiinta_162)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Muzee și obiecte de văzut\" reuses an inventory/selected quad (also in: cx_arta_cultura_094)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Coandă-1910 (13), Muzeul Național de Istorie Naturală Grigore Antipa (14), Muzeul Național Brukenthal (15)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [
+   "Inginerie"
+  ],
+  "engine_unfair_raw": 2
+ },
+ "groups": [
+  {
+   "label": "Stiloul, înainte să fie penar",
+   "members": [
+    {
+     "id": "n_petrache_poenaru",
+     "label": "Petrache Poenaru",
+     "node_type": "person",
+     "category": "stiinta",
+     "salience": 0.2719,
+     "degree": 6,
+     "incoming_degree": 5,
+     "description": "Inventator si pedagog roman (1799-1875), a brevetat in 1827 la Paris stiloul cu rezervor de cerneala."
+    },
+    {
+     "id": "n_stilou_rezervor",
+     "label": "Stiloul cu rezervor",
+     "node_type": "work",
+     "category": "stiinta",
+     "salience": 0.2067,
+     "degree": 5,
+     "incoming_degree": 6,
+     "description": "Condei portaret care se alimenteaza singur cu cerneala, brevetat de Poenaru in 1827, precursor al stiloului modern."
+    },
+    {
+     "id": "n_stix_brevet_francez",
+     "label": "Brevetul francez al stiloului",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.1571,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Brevetul obținut la Paris de Petrache Poenaru în 1827 pentru condeiul portăreț fără sfârșit."
+    },
+    {
+     "id": "n_v2lim_scriere",
+     "label": "Scriere",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.9441,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Reprezentarea limbii prin litere, semne și reguli grafice."
+    }
+   ]
+  },
+  {
+   "label": "Sunetul ca tehnică",
+   "members": [
+    {
+     "id": "n_gogu_constantinescu",
+     "label": "Gogu Constantinescu",
+     "node_type": "person",
+     "category": "stiinta",
+     "salience": 0.2031,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Inginer si inventator roman, fondatorul teoriei sonicitatii."
+    },
+    {
+     "id": "n_sonicitate",
+     "label": "Sonicitate",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.152,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Stiinta transmiterii energiei prin vibratii in fluide, creata de Gogu Constantinescu."
+    },
+    {
+     "id": "n_v2sti_fizica",
+     "label": "Fizică",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.9568,
+     "degree": 33,
+     "incoming_degree": 33,
+     "description": "Știință care studiază materia, energia, mișcarea și interacțiunile lor."
+    },
+    {
+     "id": "n_v2sti_inginerie",
+     "label": "Inginerie",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.8584,
+     "degree": 22,
+     "incoming_degree": 22,
+     "description": "Aplicarea științei pentru proiectarea și construirea de sisteme utile."
+    }
+   ]
+  },
+  {
+   "label": "Numere în nume, nu în formule",
+   "members": [
+    {
+     "id": "n_coanda_1910",
+     "label": "Coandă-1910",
+     "node_type": "work",
+     "category": "stiinta",
+     "salience": 0.2203,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Aeroplan experimental prezentat de Henri Coanda la Salonul Aeronautic de la Paris in 1910."
+    },
+    {
+     "id": "n_vuia_i",
+     "label": "Vuia I",
+     "node_type": "work",
+     "category": "stiinta",
+     "salience": 0.2158,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Aeroplan construit de Traian Vuia si testat la Montesson in 1906, cunoscut pentru decolarea cu mijloace proprii."
+    },
+    {
+     "id": "n_vlaicu_ii",
+     "label": "Vlaicu II",
+     "node_type": "work",
+     "category": "stiinta",
+     "salience": 0.2057,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Aeroplan proiectat si construit de Aurel Vlaicu, cu rezultate premiate la concursul aviatic de la Aspern din 1912."
+    },
+    {
+     "id": "n_vdr_dacia_1310",
+     "label": "Dacia 1310",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9329,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Model de autoturism produs la Mioveni, foarte prezent pe șoselele românești înainte de 2000."
+    }
+   ]
+  },
+  {
+   "label": "Muzee și obiecte de văzut",
+   "members": [
+    {
+     "id": "n_muzeul_antipa",
+     "label": "Muzeul Național de Istorie Naturală Grigore Antipa",
+     "node_type": "org",
+     "category": "stiinta",
+     "salience": 0.4072,
+     "degree": 12,
+     "incoming_degree": 13,
+     "description": "Muzeu de istorie naturala din Bucuresti, inaugurat in 1908, reorganizat de Grigore Antipa cu primele diorame moderne."
+    },
+    {
+     "id": "n_muzeul_aviatiei_romane",
+     "label": "Muzeul Național al Aviației Române",
+     "node_type": "org",
+     "category": "arta_cultura",
+     "salience": 0.2649,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Muzeu din Bucuresti dedicat istoriei aviatiei romanesti si patrimoniului aeronautic."
+    },
+    {
+     "id": "n_muzeul_brukenthal",
+     "label": "Muzeul Național Brukenthal",
+     "node_type": "org",
+     "category": "arta_cultura",
+     "salience": 0.3934,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Muzeu de arta din Sibiu, deschis in 1817, unul dintre cele mai vechi muzee din Europa."
+    },
+    {
+     "id": "n_v2art_muzeu",
+     "label": "Muzeu",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.8507,
+     "degree": 8,
+     "incoming_degree": 13,
+     "description": "Instituție care păstrează și expune colecții de artă, istorie sau știință."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Coandă-1910",
+   "a_group": "Numere în nume, nu în formule",
+   "b": "Inginerie",
+   "b_group": "Sunetul ca tehnică",
+   "strength": 0.74
+  },
+  {
+   "a": "Stiloul cu rezervor",
+   "a_group": "Stiloul, înainte să fie penar",
+   "b": "Inginerie",
+   "b_group": "Sunetul ca tehnică",
+   "strength": 0.62
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:c425f77ad07020d8507810e3ffc2f85e4306b2fedeead8320fab604a52cc10e4"
+}

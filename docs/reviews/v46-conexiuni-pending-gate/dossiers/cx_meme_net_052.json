@@ -1,0 +1,244 @@
+{
+ "id": "cx_meme_net_052",
+ "game": "conexiuni",
+ "category": "meme_net",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "7bbb1dbc274feea04a5ef49115764e1e415e9d7b42ce0f22b1aa50fb8de91b88",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Au intrat din vlog în sketch\" mixes node_types 3+1: Mircea Bravo[person], Bunica lui Mircea Bravo[person], BRomania[person], Sketch online[concept]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Au intrat din reclamă în memă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_045, cx_meme_net_048, cx_meme_net_268)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Au intrat din animație în replici\" reuses an inventory/selected quad (also in: cx_meme_net_045)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Au intrat din stand-up în feed\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_047)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Au intrat din vlog în sketch\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_047)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_meme_net_045 (9)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Ghiță Ciobanul (10)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 1
+ },
+ "groups": [
+  {
+   "label": "Au intrat din reclamă în memă",
+   "members": [
+    {
+     "id": "n_net_ghita_ciobanul",
+     "label": "Ghiță Ciobanul",
+     "node_type": "person",
+     "category": "meme_net",
+     "salience": 0.6458,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Personaj din reclamele Vodafone inspirat de viața pastorală, devenit reper al internetului românesc."
+    },
+    {
+     "id": "n_net_vodafone_romania",
+     "label": "Vodafone România",
+     "node_type": "org",
+     "category": "meme_net",
+     "salience": 0.2562,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Operator telecom care a popularizat în reclame personajul Ghiță Ciobanul."
+    },
+    {
+     "id": "n_net_reclama_cult",
+     "label": "Reclamă-cult",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.6777,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Spot publicitar care a depășit produsul și a rămas în memorie prin replici sau personaje."
+    },
+    {
+     "id": "n_net_fenomen_viral",
+     "label": "Fenomen viral",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.8724,
+     "degree": 42,
+     "incoming_degree": 42,
+     "description": "Clip, replică sau imagine care sare repede din feed în conversațiile de zi cu zi."
+    }
+   ]
+  },
+  {
+   "label": "Au intrat din animație în replici",
+   "members": [
+    {
+     "id": "n_net_creative_monkeyz",
+     "label": "Creative Monkeyz",
+     "node_type": "org",
+     "category": "meme_net",
+     "salience": 0.4935,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Studio românesc de animație online cunoscut mai ales pentru seria RObotzi."
+    },
+    {
+     "id": "n_net_robotzi",
+     "label": "RObotzi",
+     "node_type": "work",
+     "category": "meme_net",
+     "salience": 0.7361,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Serial românesc de animație online creat de Creative Monkeyz, cu limbaj și umor devenite meme."
+    },
+    {
+     "id": "n_net_mo_robotzi",
+     "label": "MO din RObotzi",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.277,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Unul dintre roboții centrali ai seriei RObotzi, recognoscibil prin dialogul absurd-comic."
+    },
+    {
+     "id": "n_net_foca_robotzi",
+     "label": "F.O.C.A. din RObotzi",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.276,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Personaj robot din RObotzi, pereche comică pentru MO în episoadele animate."
+    }
+   ]
+  },
+  {
+   "label": "Au intrat din stand-up în feed",
+   "members": [
+    {
+     "id": "n_net_micutzu",
+     "label": "Micutzu",
+     "node_type": "person",
+     "category": "meme_net",
+     "salience": 0.6194,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Numele de scenă al lui Cosmin Nedelcu, comediant de stand-up și gazdă de podcast."
+    },
+    {
+     "id": "n_net_teo_vio_costel",
+     "label": "Teo, Vio și Costel",
+     "node_type": "org",
+     "category": "meme_net",
+     "salience": 0.319,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Trio de comedianți important pentru stand-up-ul românesc modern."
+    },
+    {
+     "id": "n_net_ceva_marunt",
+     "label": "Ceva Mărunt",
+     "node_type": "org",
+     "category": "meme_net",
+     "salience": 0.3079,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Proiect de comedie românesc asociat cu scena de stand-up și apariții online."
+    },
+    {
+     "id": "n_net_podcast_ro",
+     "label": "Podcast românesc",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5229,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Format audio-video online, adesea cu comedie, interviuri și fragmente viralizate."
+    }
+   ]
+  },
+  {
+   "label": "Au intrat din vlog în sketch",
+   "members": [
+    {
+     "id": "n_net_mircea_bravo",
+     "label": "Mircea Bravo",
+     "node_type": "person",
+     "category": "meme_net",
+     "salience": 0.696,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Creator român de sketch-uri online, cunoscut pentru umor observațional și personaje de familie."
+    },
+    {
+     "id": "n_net_bunica_mircea_bravo",
+     "label": "Bunica lui Mircea Bravo",
+     "node_type": "person",
+     "category": "meme_net",
+     "salience": 0.4929,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Personaj-cult din clipurile lui Mircea Bravo, jucat de Lenuța Moldovan (Tanti Lenuța din Chinteni)."
+    },
+    {
+     "id": "n_net_bromania",
+     "label": "BRomania",
+     "node_type": "person",
+     "category": "meme_net",
+     "salience": 0.5918,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Persona online a lui Matei Dima, asociată cu sketch-uri, parodii și comedie video."
+    },
+    {
+     "id": "n_net_sketch_online",
+     "label": "Sketch online",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5726,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Scenetă scurtă filmată pentru internet, cu personaje recognoscibile și final de poantă."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Fenomen viral",
+   "a_group": "Au intrat din reclamă în memă",
+   "b": "RObotzi",
+   "b_group": "Au intrat din animație în replici",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:0022944f75c088b7352ee8bfa1da5749d44ff984bd733680228ce31e1fcfe317"
+}

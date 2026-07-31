@@ -1,0 +1,3248 @@
+{
+ "thresholds": {
+  "salience_floors": {
+   "usor": 0.6,
+   "normal": 0.35,
+   "greu": 0.2
+  },
+  "strong_edge": 0.6,
+  "mirror_pairs": 3,
+  "red_herring_warn": 2,
+  "red_herring_fail": 4,
+  "member_overuse": 8,
+  "board_overlap_fail": 8,
+  "label_leak_min_chars": 3,
+  "region_fanout": 2,
+  "national_salience": 0.7
+ },
+ "items": {
+  "cx_arta_cultura_006": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Titluri cu obiecte concrete\" reuses an inventory/selected quad (also in: cx_arta_cultura_161)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Monumente și clădiri publice\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_256)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Enescu: om, sunet, scenă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_007, cx_arta_cultura_091, cx_muzica_142, cx_muzica_208, cx_personalitati_059, cx_personalitati_147)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Teatru românesc\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_092, cx_literatura_266)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Teatrul românesc (10), Ateneul Român (17), Coloana Infinitului (14), Festivalul George Enescu (18), George Enescu (23), I.L. Caragiale (23), Masa Tăcerii (20), Muzeul Național Brukenthal (15), O scrisoare pierdută (17), Poarta Sărutului (15), Podul de la Cernavodă (10), Rapsodia Română (14), Teatrul Bulandra (16)"
+    }
+   ]
+  },
+  "cx_arta_cultura_096": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Ateneul Român"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Festivaluri care mută mulțimea\" <-> \"Locuri-gazdă pe hartă\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Instituții unde cultura are sală\" mixes node_types 3+1: Ateneul Român[place], Teatrul Bulandra[org], Muzeul Național Brukenthal[org], ASTRA[org]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Muzică cultă românească\" mixes node_types 2+2: George Enescu[person], Oedipe[work], Rapsodia Română[work], Ciprian Porumbescu[person]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Festivaluri care mută mulțimea\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_252, cx_meme_net_136, cx_meme_net_203, cx_muzica_056, cx_muzica_058, cx_muzica_138, cx_muzica_205, cx_muzica_206, cx_muzica_271)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Locuri-gazdă pe hartă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_251, cx_muzica_054, cx_muzica_056, cx_muzica_138, cx_muzica_206, cx_muzica_271)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Instituții unde cultura are sală\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_004, cx_arta_cultura_161, cx_arta_cultura_162, cx_personalitati_064, cx_societate_152)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Muzică cultă românească\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_091, cx_muzica_208, cx_personalitati_059)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Ateneul Român (17), București (24), Cluj-Napoca (19), Constanța (15), Festivalul George Enescu (18), George Enescu (23), Bonțida (9), Electric Castle (10), Neversea (11), Untold (10), Muzeul Național Brukenthal (15), Oedipe (11), Rapsodia Română (14), Teatrul Bulandra (16)"
+    }
+   ]
+  },
+  "cx_arta_cultura_158": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"UNESCO de dansat, cântat sau purtat\" reuses an inventory/selected quad (also in: cx_arta_cultura_242)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Bucovina pictată, cu albastru la vedere\" reuses an inventory/selected quad (also in: cx_arta_cultura_003, cx_arta_cultura_091, cx_arta_cultura_242, cx_gastronomie_103)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Brâncuși la Târgu Jiu: mobilier care nu se mută\" reuses an inventory/selected quad (also in: cx_arta_cultura_094, cx_arta_cultura_240, cx_geografie_178)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Enescu pe afiș, în sală și în partitură\" reuses an inventory/selected quad (also in: cx_arta_cultura_239, cx_muzica_273)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_arta_cultura_003 (12), cx_arta_cultura_091 (10), cx_arta_cultura_242 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Ansamblul monumental de la Târgu Jiu (10), Coloana Infinitului (14), Doina (14), Festivalul George Enescu (18), Mănăstirile pictate din Bucovina (10), Masa Tăcerii (20), Oedipe (11), Poarta Sărutului (15), Rapsodia Română (14), Mănăstirea Sucevița (9), Mănăstirea Voroneț (12)"
+    }
+   ]
+  },
+  "cx_film_tv_010": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Vrei să fii milionar?"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Prezentatori TV\" <-> \"Emisiunile lor\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Prezentatori TV\" <-> \"Canale comerciale și publice\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Emisiunile lor\" <-> \"Canale comerciale și publice\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Antena 1 prime-time\" repeats member(s): Antena 1"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Antena 1 prime-time\" mixes node_types 3+1: Antena 1[org], iUmor[work], Chefi la cuțite[work], Insula Iubirii[work]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Prezentatori TV\" reuses an inventory/selected quad (also in: cx_film_tv_012, cx_film_tv_014, cx_film_tv_097, cx_film_tv_169, cx_film_tv_246, cx_muzica_209)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Emisiunile lor\" reuses an inventory/selected quad (also in: cx_film_tv_097, cx_film_tv_169)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Canale comerciale și publice\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_162, cx_film_tv_009, cx_film_tv_097, cx_film_tv_169, cx_film_tv_246, cx_muzica_209, cx_societate_155)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Antena 1 prime-time\" reuses an inventory/selected quad (also in: cx_film_tv_013, cx_film_tv_164)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_film_tv_013 (14), cx_film_tv_169 (13), cx_film_tv_097 (12), cx_film_tv_246 (12), cx_muzica_209 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Andreea Marin (9), Antena 1 (12), Cătălin Măruță (9), Pro TV (14), TVR (14)"
+    }
+   ]
+  },
+  "cx_film_tv_015": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Filantropica, Moromeții (film)"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Comedie și divertisment TV\" mixes node_types 3+1: Las Fierbinți[work], Trăsniții[work], Vacanța Mare[org], Teo Show[work]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Reality și concurs\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_film_tv_010, cx_film_tv_013, cx_film_tv_164)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Comedie și divertisment TV\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_film_tv_169)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Comedii de cinema\" reuses an inventory/selected quad (also in: cx_film_tv_009)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Cinema de autor sau ecranizare\" reuses an inventory/selected quad (also in: cx_istorie_184)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Pădurea spânzuraților (film) (9), 4 luni, 3 săptămâni și 2 zile (14)"
+    }
+   ]
+  },
+  "cx_film_tv_097": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "board_type_shortcut",
+     "level": "FAIL",
+     "detail": "all four groups are node-type homogeneous and expose 4 distinct group types"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Canale TV românești\" <-> \"Prezentatori cu emisiune proprie\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Canale TV românești\" <-> \"Titluri de emisiuni\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Prezentatori cu emisiune proprie\" <-> \"Titluri de emisiuni\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Titluri de emisiuni\" <-> \"Dicționar de TV\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Canale TV românești\" reuses an inventory/selected quad (also in: cx_film_tv_009)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Prezentatori cu emisiune proprie\" reuses an inventory/selected quad (also in: cx_film_tv_010, cx_film_tv_012, cx_film_tv_014, cx_film_tv_169, cx_film_tv_246, cx_muzica_209)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Titluri de emisiuni\" reuses an inventory/selected quad (also in: cx_film_tv_010, cx_film_tv_169)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_film_tv_010 (12), cx_film_tv_169 (11), cx_film_tv_013 (10), cx_film_tv_246 (10)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Andreea Marin (9), Antena 1 (12), Cătălin Măruță (9), Pro TV (14), TVR (14)"
+    }
+   ]
+  },
+  "cx_film_tv_098": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Jean Constantin"
+    },
+    {
+     "check": "red_herring_budget",
+     "level": "WARN",
+     "detail": "3 contested tiles (budget <4): Amza Pellea, Dem Rădulescu, Sebastian Papaiani"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Nea Mărin Miliardar\" repeats member(s): Nea Mărin Miliardar"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Nea Mărin Miliardar\" mixes node_types 3+1: Nea Mărin Miliardar[work], Amza Pellea[person], Draga Olteanu Matei[person], Jean Constantin[person]"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Nea Mărin Miliardar\" <-> \"B.D. și comedia miliției\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"B.D. și comedia miliției\" mixes node_types 3+1: B.D. la munte și la mare[work], Toma Caragiu[person], Dem Rădulescu[person], Sebastian Papaiani[person]"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Vacanța Mare\" repeats member(s): Vacanța Mare"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Vacanța Mare\" mixes node_types 3+1: Vacanța Mare[org], Mugur Mihăescu[person], Leana[person], Costel[person]"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Las Fierbinți\" repeats member(s): Fierbinți, Las Fierbinți"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"B.D. și comedia miliției\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_film_tv_009, cx_film_tv_165, cx_film_tv_244)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Vacanța Mare\" reuses an inventory/selected quad (also in: cx_film_tv_008, cx_film_tv_164, cx_film_tv_244)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Las Fierbinți\" reuses an inventory/selected quad (also in: cx_film_tv_008, cx_film_tv_244)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_film_tv_244 (12), cx_film_tv_008 (8), cx_film_tv_012 (8)"
+    }
+   ]
+  },
+  "cx_film_tv_164": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Catalogul din Liceenii\" repeats member(s): Liceenii"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Catalogul din Liceenii\" mixes node_types 3+1: Liceenii[work], Mihai din Liceenii[person], Dana din Liceenii[person], Isoscel[person]"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Vacanța Mare: familia Leana-Costel\" repeats member(s): Costel, Leana, Vacanța Mare"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Vacanța Mare: familia Leana-Costel\" mixes node_types 3+1: Vacanța Mare[org], Mugur Mihăescu[person], Leana[person], Costel[person]"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Antena 1 cu juriu, ispită și tigaie\" repeats member(s): Antena 1"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Antena 1 cu juriu, ispită și tigaie\" mixes node_types 3+1: Antena 1[org], Chefi la cuțite[work], iUmor[work], Insula Iubirii[work]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Catalogul din Liceenii\" reuses an inventory/selected quad (also in: cx_film_tv_008)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Vacanța Mare: familia Leana-Costel\" reuses an inventory/selected quad (also in: cx_film_tv_008, cx_film_tv_098, cx_film_tv_244)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Măruță acasă și pe post\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_film_tv_013)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Antena 1 cu juriu, ispită și tigaie\" reuses an inventory/selected quad (also in: cx_film_tv_010, cx_film_tv_013)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_film_tv_008 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Antena 1 (12), Cătălin Măruță (9), Pro TV (14)"
+    }
+   ]
+  },
+  "cx_film_tv_166": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): I.L. Caragiale, Ion Creangă, Mihai Eminescu, Mihai din Liceenii, Ștefan Bănică Jr., Ștefan Tipătescu"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Ion: manualul, romanul și terenul\" mixes node_types 3+1: Ion Creangă[person], I.L. Caragiale[person], Ion (roman)[work], Ion Țiriac[person]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Mihai: voievod, rege, poet, elev\" reuses an inventory/selected quad (also in: cx_istorie_257, cx_limba_190, cx_literatura_129, cx_personalitati_210)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Ștefan: tron, pânză, scenă, catalog\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_film_tv_100, cx_literatura_129, cx_literatura_196, cx_meme_net_204, cx_personalitati_211)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Ion: manualul, romanul și terenul\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_129)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Gheorghe: stadion, ecran, laborator, parchet\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_218)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_literatura_129 (10), cx_literatura_196 (9), cx_limba_190 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Gheorghe Hagi (13), Ion Creangă (18), I.L. Caragiale (23), Ion (roman) (12), Ștefan Tipătescu (13), Mihai Eminescu (11), Mihai I (15), Mihai Viteazul (13), Ștefan cel Mare (18), Ștefan Luchian (12)"
+    }
+   ]
+  },
+  "cx_film_tv_168": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Coloană sonoră, Serial TV, Talk-show, Trailer, cameră video, decor, studio"
+    },
+    {
+     "check": "red_herring_budget",
+     "level": "WARN",
+     "detail": "2 contested tiles (budget <4): Scenariu, montaj"
+    }
+   ]
+  },
+  "cx_film_tv_246": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "board_type_shortcut",
+     "level": "FAIL",
+     "detail": "all four groups are node-type homogeneous and expose 4 distinct group types"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Posturi TV\" <-> \"Prezentatori TV\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Posturi TV\" <-> \"Emisiuni de divertisment\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Posturi TV\" <-> \"Obiecte și tehnologii TV\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Prezentatori TV\" <-> \"Emisiuni de divertisment\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Posturi TV\" reuses an inventory/selected quad (also in: cx_arta_cultura_162, cx_film_tv_169, cx_muzica_209, cx_societate_155)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Prezentatori TV\" reuses an inventory/selected quad (also in: cx_film_tv_010, cx_film_tv_012, cx_film_tv_014, cx_film_tv_097, cx_film_tv_169, cx_muzica_209)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Emisiuni de divertisment\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_film_tv_010, cx_film_tv_097, cx_film_tv_169)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_film_tv_010 (12), cx_film_tv_169 (12), cx_film_tv_013 (10), cx_film_tv_097 (10), cx_muzica_209 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Andreea Marin (9), Antena 1 (12), Cătălin Măruță (9), Pro TV (14), TVR (14)"
+    }
+   ]
+  },
+  "cx_gastronomie_018": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Borș, Fasole cu ciolan, Mujdei, Murături"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Paște pe masă\" mixes node_types 3+1: Drob de miel[concept], Ouă roșii[concept], Masa de Paște[event], Cozonac[concept]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Paște pe masă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_102, cx_gastronomie_296, cx_viata_de_roman_288)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Preparate de porc pentru iarnă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_021, cx_gastronomie_174, cx_gastronomie_249)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Oală mare, porții multe\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_105)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Cozonac (11), Murături (14), Muștar (9), Sarmale (14), Varză a la Cluj (9)"
+    }
+   ]
+  },
+  "cx_gastronomie_020": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Cimbru, Drob de miel, Leuștean"
+    },
+    {
+     "check": "red_herring_budget",
+     "level": "FAIL",
+     "detail": "5 contested tiles (budget <4): Ardei umpluți, Pâine de casă, Sarmale, Vin fiert, Țuică"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Condimente mici, efect mare\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_104)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Feluri cu umplutură\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_105, cx_gastronomie_174)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Murături (14), Muștar (9), Sarmale (14), Zacuscă (11)"
+    }
+   ]
+  },
+  "cx_gastronomie_021": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Fasole cu ciolan, Mujdei, Pâine de casă"
+    },
+    {
+     "check": "red_herring_budget",
+     "level": "FAIL",
+     "detail": "5 contested tiles (budget <4): Cașcaval pane, Mici, Murături, Mămăligă, Piftie"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Greu, cu porc\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_018)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Comandă urbană rapidă\" reuses an inventory/selected quad (also in: cx_gastronomie_019, cx_gastronomie_104)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_gastronomie_019 (9)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Mici (16), Murături (14)"
+    }
+   ]
+  },
+  "cx_gastronomie_103": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Poale-n brâu"
+    },
+    {
+     "check": "red_herring_budget",
+     "level": "WARN",
+     "detail": "2 contested tiles (budget <4): Brânză cu smântână, Urdă"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Bucovina gastronomică\" repeats member(s): Bucovina gastronomică"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Brânză de pus lângă mămăligă\" repeats member(s): Mămăligă"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Moldova din manual și din poveste\" repeats member(s): Moldova"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Mănăstiri pictate și culoarea lor\" reuses an inventory/selected quad (also in: cx_arta_cultura_003, cx_arta_cultura_091, cx_arta_cultura_158, cx_arta_cultura_242)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Brânză de pus lângă mămăligă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_019, cx_gastronomie_171)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Ciorbă rădăuțeană (11), Iași (16), Ion Creangă (18), Mănăstirile pictate din Bucovina (10), Moldova (9), Mănăstirea Sucevița (9), Mănăstirea Voroneț (12)"
+    },
+    {
+     "check": "generic_region_link",
+     "level": "WARN",
+     "detail": "board pairs region tiles (Moldova) with non-distinctive region-linked tiles: Ciorbă rădăuțeană (national-salience concept (0.88) with generic related_to edge to Bucovina), Mămăligă (national-salience concept (0.97) with generic related_to edge to Moldova)"
+    }
+   ]
+  },
+  "cx_gastronomie_172": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Bere, Cartof, Pizza, Salată de boeuf, Șaorma cu de toate"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Gătit pe ecran\" mixes node_types 2+2: Chefi la cuțite[work], Jamila Cuisine[work], Clip culinar[concept], Am făcut cu mânuța mea[concept]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Gătit pe ecran\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_104, cx_meme_net_201)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"De băut când masa se lungește\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_stiinta_230)"
+    }
+   ]
+  },
+  "cx_gastronomie_248": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Covrigi de Buzău"
+    },
+    {
+     "check": "red_herring_budget",
+     "level": "WARN",
+     "detail": "2 contested tiles (budget <4): Magiun de Topoloveni, Plăcintă dobrogeană"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Dobrogea\" repeats member(s): Dobrogea"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Dobrogea\" mixes node_types 2+2: Baclava dobrogeană[concept], Plăcintă dobrogeană[concept], Dobrogea[place], Constanța[place]"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Moldova și Bucovina\" repeats member(s): Moldova"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Moldova și Bucovina\" mixes node_types 3+1: Bucovina gastronomică[concept], Poale-n brâu[concept], Tochitură moldovenească[concept], Moldova[place]"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Constanța (15), Dobrogea (13), Varză a la Cluj (9), Moldova (9)"
+    },
+    {
+     "check": "generic_region_link",
+     "level": "WARN",
+     "detail": "board pairs region tiles (Dobrogea, Moldova) with non-distinctive region-linked tiles: Covrigi de Buzău (national-salience concept (0.76) with generic related_to edge to Muntenia)"
+    }
+   ]
+  },
+  "cx_gastronomie_292": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Fructe de livadă\" reuses an inventory/selected quad (also in: cx_stiinta_310)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Legume pentru salată\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_stiinta_308)"
+    }
+   ]
+  },
+  "cx_geografie_001": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Banat, București, Iași, Muntenia, Mureș, Olt, Oltenia, Timișoara"
+    },
+    {
+     "check": "red_herring_budget",
+     "level": "WARN",
+     "detail": "3 contested tiles (budget <4): Munții Bucegi, Munții Făgăraș, Prut"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Munti\" reuses an inventory/selected quad (also in: cx_geografie_023, cx_geografie_175)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Orase mari\" reuses an inventory/selected quad (also in: cx_geografie_023, cx_societate_065, cx_societate_066, cx_societate_154, cx_societate_221, cx_societate_279)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Rauri\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_023, cx_geografie_028, cx_geografie_109, cx_geografie_175, cx_geografie_251, cx_geografie_253, cx_geografie_302, cx_istorie_032, cx_istorie_258)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Regiuni istorice\" reuses an inventory/selected quad (also in: cx_geografie_024)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_geografie_251 (12), cx_geografie_023 (11), cx_geografie_175 (10)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Banat (9), București (24), Carpați (9), Cluj-Napoca (19), Dobrogea (13), Iași (16), Olt (10), Oltenia (9), Prut (9), Timișoara (10)"
+    }
+   ]
+  },
+  "cx_geografie_113": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Sport cu geografie în nume\" mixes node_types 3+1: Finala de la Sevilla[event], Eroul de la Sevilla[concept], Madrid Open[event], Wimbledon[event]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Sport cu geografie în nume\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_177)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Nume de oraș în industrie\" reuses an inventory/selected quad (also in: cx_societate_067, cx_societate_151, cx_societate_221, cx_societate_279)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Administrație care sună a hartă\" reuses an inventory/selected quad (also in: cx_societate_154)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Bonțida (9), Neversea (11), Finala de la Sevilla (14), Wimbledon (9)"
+    }
+   ]
+  },
+  "cx_geografie_180": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): mal"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Satul din ce în ce mai mic\" mixes node_types 2+2: sat[concept], cătun[concept], Ulița satului[place], Fântâna din curte[place]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Turistul zice că mai e puțin\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_254)"
+    }
+   ]
+  },
+  "cx_geografie_253": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Basarabia, Moldova, Mureș, Transilvania"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Administrație și stat\" mixes node_types 3+1: Județ[concept], Comuna[concept], Municipiu[concept], România[place]"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Instrumente și idei de hartă\" repeats member(s): hartă"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Noduri geografice cu nume-capcană\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_001, cx_geografie_302)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Teritorii istorice\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_258)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Administrație și stat\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_113, cx_societate_065, cx_societate_069, cx_societate_154, cx_societate_216)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Moldova (9), Olt (10), Transilvania (10)"
+    }
+   ]
+  },
+  "cx_istorie_114": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Marea Unire 1918"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Uniri care schimbă statul\" mixes node_types 3+1: Unirea de la 1600[event], Mică Unire 1859[event], Marea Unire 1918[event], Unire[concept]"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Uniri care schimbă statul\" <-> \"Oameni de pe axa unirii\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Uniri care schimbă statul\" <-> \"Geografia Marii Uniri\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Context european, nu strigăt de tribună\" mixes node_types 2+2: Primul Război Mondial[event], Tratatul de la Trianon[event], Imperiul Austro-Ungar[org], Regatul României[org]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Uniri care schimbă statul\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_001, cx_istorie_184)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Oameni de pe axa unirii\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_173, cx_istorie_001, cx_personalitati_275)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Geografia Marii Uniri\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_032, cx_istorie_258)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Carol I (10), Ferdinand I (13), Marea Unire 1918 (14), Mică Unire 1859 (10), Mihai Viteazul (13), Transilvania (10)"
+    },
+    {
+     "check": "generic_region_link",
+     "level": "WARN",
+     "detail": "board pairs region tiles (Transilvania) with non-distinctive region-linked tiles: Unirea de la 1600 (linked to 2 regions (Moldova, Transilvania)), Mihai Viteazul (linked to 2 regions (Moldova, Transilvania))"
+    }
+   ]
+  },
+  "cx_istorie_116": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Bătălia de la Vaslui, Moldova, Mănăstirea Putna"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Domnitori de manual\" <-> \"Principate și vecini de pe hartă\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Bătălii medievale\" mixes node_types 3+1: Bătălia de la Vaslui[place], Bătălia de la Rovine[event], Bătălia de la Călugăreni[event], Bătălia de la Posada[event]"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Bătălii medievale\" <-> \"Principate și vecini de pe hartă\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Principate și vecini de pe hartă\" mixes node_types 3+1: Țara Românească[place], Moldova[place], Transilvania[place], Imperiul Otoman[org]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Domnitori de manual\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_160, cx_istorie_001, cx_istorie_029, cx_istorie_255, cx_viata_de_roman_236)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Bătălii medievale\" reuses an inventory/selected quad (also in: cx_istorie_033)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Mănăstiri și ctitorii\" reuses an inventory/selected quad (also in: cx_istorie_032)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Principate și vecini de pe hartă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_258)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_istorie_033 (10), cx_istorie_182 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Mircea cel Bătrân (11), Ștefan cel Mare (18), Mănăstirea Sucevița (9), Transilvania (10), Mănăstirea Voroneț (12)"
+    }
+   ]
+  },
+  "cx_istorie_119": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Istorici și cărturari\" mixes node_types 3+1: Dimitrie Cantemir[person], Bogdan Petriceicu Hasdeu[person], Nicolae Iorga[person], Școala Ardeleană[org]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Primul Război în memorie și literatură\" mixes node_types 2+2: Primul Război Mondial[event], Bătălia de la Mărășești[event], Pădurea spânzuraților (film)[work], Ultima noapte de dragoste, întâia noapte de război[work]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Istorici și cărturari\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_personalitati_060)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Monumente care povestesc istorie\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_094, cx_arta_cultura_158, cx_arta_cultura_239, cx_arta_cultura_240, cx_geografie_178)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Instituții cu memorie publică\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_094, cx_stiinta_166)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Academia Română (19), Ansamblul monumental de la Târgu Jiu (10), Masa Tăcerii (20), Muzeul Național de Istorie Naturală Grigore Antipa (14), Muzeul Național Brukenthal (15), Pădurea spânzuraților (film) (9), Nicolae Iorga (9), Poarta Sărutului (15)"
+    }
+   ]
+  },
+  "cx_istorie_185": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Epoca în care și coada era instituție\" repeats member(s): Coada"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Statul la costum\" mixes node_types 3+1: Regatul României[org], Constituția României[work], Parlamentul României[org], Guvernul României[org]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"1918 și after-party-ul juridic\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_030, cx_personalitati_063)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Epoca în care și coada era instituție\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_118)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Statul la costum\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_238)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Organizații internaționale, nu echipe de cupă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_068, cx_societate_153, cx_societate_216)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_personalitati_063 (9)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Constituția României (9), Ferdinand I (13), Guvernul României (9), Marea Unire 1918 (14), Parlamentul României (11), Societatea Națiunilor (9)"
+    }
+   ]
+  },
+  "cx_istorie_256": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Cercul Reginei Maria\" reuses an inventory/selected quad (also in: cx_geografie_178, cx_istorie_117, cx_istorie_183, cx_personalitati_275)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Instituții academice și monetare\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_limba_261, cx_stiinta_231)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Repere patrimoniale culturale\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_006, cx_geografie_252)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Academia Română (19), Ansamblul monumental de la Târgu Jiu (10), Ateneul Român (17), Banca Națională a României (9), Muzeul Național Brukenthal (15), Regina Maria (9), Universitatea Alexandru Ioan Cuza din Iași (9), Universitatea din București (13), Mănăstirea Voroneț (12)"
+    }
+   ]
+  },
+  "cx_limba_036": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Barabulă, Cucuruz, Curechi, Etimologie, Limba latină, Păpușoi, Regionalisme"
+    },
+    {
+     "check": "red_herring_budget",
+     "level": "WARN",
+     "detail": "2 contested tiles (budget <4): Substratul dacic, Împrumuturile slave"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Etichete pentru feluri de cuvinte\" mixes node_types 3+1: Regionalisme[concept], Arhaisme[concept], Etimologie[concept], DEX[work]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Regionalisme pentru legume sau cereale\" reuses an inventory/selected quad (also in: cx_gastronomie_106, cx_gastronomie_171, cx_geografie_110, cx_limba_187, cx_meme_net_201, cx_personalitati_213, cx_stiinta_229, cx_viata_de_roman_237)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Expresii cu sens figurat\" reuses an inventory/selected quad (also in: cx_gastronomie_106, cx_limba_123, cx_limba_187, cx_stiinta_229)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Straturi istorice în vocabular\" reuses an inventory/selected quad (also in: cx_limba_122, cx_limba_189, cx_limba_261)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_gastronomie_106 (8), cx_limba_187 (8), cx_stiinta_229 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: DEX (13), Barabulă (10), Cucuruz (9), Curechi (10), Păpușoi (9), Limba latină (9), Substratul dacic (9)"
+    }
+   ]
+  },
+  "cx_limba_261": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "board_type_shortcut",
+     "level": "WARN",
+     "detail": "all four groups are node-type homogeneous and expose 3 distinct group types"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Orașe cu miză lingvistică\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_001, cx_geografie_023, cx_geografie_175, cx_geografie_177, cx_geografie_251, cx_muzica_272, cx_societate_065, cx_societate_066, cx_societate_154, cx_societate_221, cx_societate_279)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Instituții și cercuri\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_256, cx_stiinta_231)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Straturi istorice ale lexicului\" reuses an inventory/selected quad (also in: cx_limba_036, cx_limba_122, cx_limba_189)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Academia Română (19), Brașov (12), București (24), Cluj-Napoca (19), Iași (16), Junimea (10), Barabulă (10), Curechi (10), Limba latină (9), Universitatea Alexandru Ioan Cuza din Iași (9), Substratul dacic (9), Universitatea din București (13)"
+    }
+   ]
+  },
+  "cx_literatura_129": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): George Călinescu, I.L. Caragiale, Ion Creangă, Mihai Eminescu, Mihai din Liceenii, Ștefan Bănică Jr., Ștefan Tipătescu"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Ion, dar nu același Ion\" mixes node_types 3+1: Ion Creangă[person], I.L. Caragiale[person], Ion Barbu[person], Ion (roman)[work]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"George în cultură\" mixes node_types 3+1: George Bacovia[person], George Călinescu[person], George Enescu[person], Festivalul George Enescu[event]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Ion, dar nu același Ion\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_160, cx_film_tv_166, cx_limba_190, cx_literatura_042, cx_literatura_196, cx_stiinta_082)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"George în cultură\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_196)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Mihai din epoci diferite\" reuses an inventory/selected quad (also in: cx_film_tv_166, cx_istorie_257, cx_limba_190, cx_personalitati_210)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Ștefan între roman, comedie, istorie și pop\" reuses an inventory/selected quad (also in: cx_meme_net_204)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_literatura_196 (12), cx_film_tv_166 (10), cx_limba_190 (9)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Festivalul George Enescu (18), George Enescu (23), Ion Barbu (15), Ion Creangă (18), I.L. Caragiale (23), Ion (roman) (12), Ștefan Tipătescu (13), Mihai Eminescu (11), Mihai I (15), Mihai Viteazul (13), Ștefan cel Mare (18)"
+    }
+   ]
+  },
+  "cx_literatura_197": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Caragiale înainte să bată gongul\" <-> \"Teatru, dar din clădire și meserie\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Teatru, dar din clădire și meserie\" repeats member(s): Teatru"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Teatru, dar din clădire și meserie\" mixes node_types 3+1: Teatrul românesc[concept], Teatrul Bulandra[org], Teatru[concept], Scenă[concept]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Caragiale înainte să bată gongul\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_159, cx_limba_121, cx_literatura_266)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Teatru, dar din clădire și meserie\" reuses an inventory/selected quad (also in: cx_arta_cultura_159)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Fețe de comedie românească pe ecran\" reuses an inventory/selected quad (also in: cx_film_tv_014)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Teatrul românesc (10), I.L. Caragiale (23), O scrisoare pierdută (17), Teatrul Bulandra (16)"
+    }
+   ]
+  },
+  "cx_meme_net_046": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Live stream românesc, Thumbnail cu săgeată, Unboxing românesc, Video de reacție, Vlogging românesc"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Canale sau branduri cu comunitate\" mixes node_types 2+2: Creative Monkeyz[org], Zaiafet[work], Jamila Cuisine[work], Recorder[org]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Format video, nu persoană\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_049)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Combustibil de viral\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_048, cx_meme_net_049)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Umor cu buletin românesc\" reuses an inventory/selected quad (also in: cx_meme_net_048)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_meme_net_048 (8), cx_meme_net_132 (8)"
+    }
+   ]
+  },
+  "cx_meme_net_052": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Au intrat din vlog în sketch\" mixes node_types 3+1: Mircea Bravo[person], Bunica lui Mircea Bravo[person], BRomania[person], Sketch online[concept]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Au intrat din reclamă în memă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_045, cx_meme_net_048, cx_meme_net_268)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Au intrat din animație în replici\" reuses an inventory/selected quad (also in: cx_meme_net_045)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Au intrat din stand-up în feed\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_047)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Au intrat din vlog în sketch\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_047)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_meme_net_045 (9)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Ghiță Ciobanul (10)"
+    }
+   ]
+  },
+  "cx_meme_net_134": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Biscuiții Eugenia, Ciocolata ROM, Guma Turbo"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Publicitate intrată în meme\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_045, cx_meme_net_048, cx_meme_net_268)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Canale și branduri amplificatoare\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_film_tv_009, cx_film_tv_097)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Meștereala ridicată la rang de glumă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_045, cx_meme_net_049, cx_meme_net_200)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Antena 1 (12), Pro TV (14), Ghiță Ciobanul (10), Lasă că merge și așa (9)"
+    }
+   ]
+  },
+  "cx_meme_net_136": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Dragostea din tei, Hot, Mr. Saxobeat, Refren viral, Stereo Love"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Refren de vară și club\" repeats member(s): Refren de vară"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Refren de vară și club\" mixes node_types 2+2: Vara nu dorm[work], Undeva-n Balcani[work], Hit de vară[concept], Refren de vară[concept]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Festivalul ca multiplicator\" mixes node_types 3+1: Untold[event], Neversea[event], Electric Castle[event], Bonțida[place]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Hituri românești cu export viral\" reuses an inventory/selected quad (also in: cx_muzica_056, cx_muzica_138, cx_muzica_140, cx_muzica_274)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Festivalul ca multiplicator\" reuses an inventory/selected quad (also in: cx_meme_net_203)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Remixul scurt din feed\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_muzica_274)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_meme_net_203 (11), cx_muzica_138 (9), cx_muzica_274 (9), cx_muzica_056 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Bonțida (9), Dragostea din tei (11), Electric Castle (10), Hot (9), Neversea (11), Untold (10), TikTok România (10)"
+    }
+   ]
+  },
+  "cx_meme_net_200": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Patru Ghiță, patru lumi\" repeats member(s): Ghiță"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Patru Ghiță, patru lumi\" mixes node_types 3+1: Ghiță Ciobanul[person], Reclamele Vodafone cu Ghiță[work], Ghiță Pristanda[person], Ghiță[person]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Patru Ghiță, patru lumi\" reuses an inventory/selected quad (also in: cx_film_tv_100)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Manualul nescris al reparației românești\" reuses an inventory/selected quad (also in: cx_meme_net_045, cx_meme_net_049)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Bunici, uliță și cameră pornită\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_234)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Poanta de scenă, nu de comentarii\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_047)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Ghiță Pristanda (9), Ghiță Ciobanul (10), Lasă că merge și așa (9)"
+    }
+   ]
+  },
+  "cx_meme_net_202": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Comentariu, Emoji, Semn de întrebare, Sticker"
+    }
+   ]
+  },
+  "cx_meme_net_203": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Acasă, Hot, Oriunde te vei afla"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Viralul cântat, nu postat\" mixes node_types 3+1: Dragostea din tei[work], Stereo Love[work], Mr. Saxobeat[work], Refren viral[concept]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Festival, mare, castel, sat\" mixes node_types 3+1: Untold[event], Neversea[event], Electric Castle[event], Bonțida[place]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Titluri care par prognoză sau GPS\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_limba_123, cx_literatura_131, cx_muzica_139, cx_muzica_205)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Viralul cântat, nu postat\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_136, cx_muzica_056, cx_muzica_138, cx_muzica_140, cx_muzica_274)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Festival, mare, castel, sat\" reuses an inventory/selected quad (also in: cx_meme_net_136)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_meme_net_136 (11), cx_muzica_138 (9), cx_muzica_056 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Bonțida (9), Dragostea din tei (11), Electric Castle (10), Hot (9), Neversea (11), Untold (10)"
+    }
+   ]
+  },
+  "cx_meme_net_268": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Parodie online, Shitpost"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Satiră și parodie\" mixes node_types 2+2: Times New Roman[org], Noaptea Târziu[org], Parodie online[concept], Umor autoironic românesc[concept]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Universul Ghiță/Vodafone\" reuses an inventory/selected quad (also in: cx_meme_net_045, cx_meme_net_048)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Ghiță Ciobanul (10)"
+    }
+   ]
+  },
+  "cx_meme_net_269": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Bucătărie pe ecran\" repeats member(s): Bucătărie"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Bucătărie pe ecran\" mixes node_types 3+1: Jamila Cuisine[work], Clip culinar[concept], Mâncare[concept], Bucătărie[concept]"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Presă, documentar, protest\" repeats member(s): Documentar, Protest"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Presă, documentar, protest\" mixes node_types 3+1: Recorder[org], Mass-media[concept], Documentar[concept], Protest[concept]"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Ghiță, Sibiu și Vodafone\" repeats member(s): Sibiu"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Ghiță, Sibiu și Vodafone\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_045, cx_meme_net_048, cx_meme_net_268)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: I.L. Caragiale (23), Ghiță Ciobanul (10)"
+    }
+   ]
+  },
+  "cx_muzica_054": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "board_type_shortcut",
+     "level": "WARN",
+     "detail": "all four groups are node-type homogeneous and expose 3 distinct group types"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Nume de trupă/proiect\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_muzica_057, cx_muzica_139)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Soliste pop-dance/pop\" reuses an inventory/selected quad (also in: cx_muzica_057)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Locuri de festival\" reuses an inventory/selected quad (also in: cx_muzica_056, cx_muzica_138, cx_muzica_206, cx_muzica_271)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Voci de manele\" reuses an inventory/selected quad (also in: cx_muzica_053, cx_muzica_055, cx_personalitati_213)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_muzica_057 (9), cx_muzica_053 (8), cx_muzica_055 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Brașov (12), Cluj-Napoca (19), Constanța (15), Bonțida (9), O-Zone (10)"
+    }
+   ]
+  },
+  "cx_muzica_056": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "board_type_shortcut",
+     "level": "FAIL",
+     "detail": "all four groups are node-type homogeneous and expose 4 distinct group types"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Festivaluri\" <-> \"Locuri-gazdă\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Festivaluri\" reuses an inventory/selected quad (also in: cx_geografie_252, cx_muzica_138, cx_muzica_205, cx_muzica_206, cx_muzica_271)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Locuri-gazdă\" reuses an inventory/selected quad (also in: cx_muzica_054, cx_muzica_138, cx_muzica_206, cx_muzica_271)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Hituri de export\" reuses an inventory/selected quad (also in: cx_meme_net_136, cx_muzica_138, cx_muzica_140, cx_muzica_274)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_muzica_138 (12), cx_meme_net_136 (8), cx_meme_net_203 (8), cx_muzica_206 (8), cx_muzica_271 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Brașov (12), Cluj-Napoca (19), Constanța (15), Bonțida (9), Dragostea din tei (11), Electric Castle (10), Hot (9), Neversea (11), Untold (10)"
+    }
+   ]
+  },
+  "cx_muzica_058": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Folclor și clasic în inventar\" mixes node_types 2+2: George Enescu[person], Maria Tănase[person], Folclor românesc[concept], Doina[concept]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Exporturi de radio peste hotare\" mixes node_types 3+1: O-Zone[org], INNA[person], Alexandra Stan[person], Edward Maya[person]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Folclor și clasic în inventar\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_043, cx_muzica_273)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Festivaluri cu tradiție sau brand mare\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_096, cx_geografie_252, cx_muzica_056, cx_muzica_138, cx_muzica_205, cx_muzica_206, cx_muzica_271)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Exporturi de radio peste hotare\" reuses an inventory/selected quad (also in: cx_muzica_053, cx_muzica_140, cx_muzica_274)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Constanța (15), Doina (14), Festivalul George Enescu (18), George Enescu (23), Marea Neagră (10), Electric Castle (10), Neversea (11), O-Zone (10), Untold (10)"
+    }
+   ]
+  },
+  "cx_muzica_140": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Artiști/proiecte legați de exportul pop-dance\" mixes node_types 3+1: O-Zone[org], INNA[person], Alexandra Stan[person], Edward Maya[person]"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Artiști/proiecte legați de exportul pop-dance\" <-> \"Piesele lor de export\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Artiști/proiecte legați de exportul pop-dance\" <-> \"Etichete de top și fredonat\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Piesele lor de export\" <-> \"Etichete de top și fredonat\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Artiști/proiecte legați de exportul pop-dance\" reuses an inventory/selected quad (also in: cx_muzica_053, cx_muzica_058, cx_muzica_274)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Piesele lor de export\" reuses an inventory/selected quad (also in: cx_meme_net_136, cx_muzica_056, cx_muzica_138, cx_muzica_274)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Etichete de top și fredonat\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_muzica_274)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_muzica_274 (13)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Dragostea din tei (11), Hot (9), O-Zone (10)"
+    }
+   ]
+  },
+  "cx_muzica_142": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Trupe rock românești\" <-> \"Vocabular de rock\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Vocabular de rock\" mixes node_types 3+1: Rock românesc[concept], Trupă rock[concept], Baladă rock[concept], Ploaia[work]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Spații și idei de scenă\" mixes node_types 3+1: Concert[concept], Scenă de festival[concept], Ateneul Român[place], Teatrul românesc[concept]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Trupe rock românești\" reuses an inventory/selected quad (also in: cx_muzica_053, cx_muzica_055)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Vocabular de rock\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_muzica_272)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Enescu și muzica de concert\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_006, cx_arta_cultura_007, cx_arta_cultura_091, cx_muzica_208, cx_personalitati_059)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Teatrul românesc (10), Ateneul Român (17), Festivalul George Enescu (18), George Enescu (23), Rapsodia Română (14)"
+    }
+   ]
+  },
+  "cx_muzica_206": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Brașov, Constanța, Transilvania"
+    },
+    {
+     "check": "red_herring_budget",
+     "level": "FAIL",
+     "detail": "4 contested tiles (budget <4): Bonțida, Cluj-Napoca, Dobrogea, Marea Neagră"
+    },
+    {
+     "check": "board_type_shortcut",
+     "level": "WARN",
+     "detail": "all four groups are node-type homogeneous and expose 3 distinct group types"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Festivaluri și concursuri de pus pe brățară\" <-> \"Orașe și satul care le țin în priză\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Festivaluri și concursuri de pus pe brățară\" <-> \"Ce vezi când intri la scenă\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Orașe și satul care le țin în priză\" <-> \"Peisajul din jurul playlistului\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Festivaluri și concursuri de pus pe brățară\" reuses an inventory/selected quad (also in: cx_geografie_252, cx_muzica_056, cx_muzica_138, cx_muzica_205, cx_muzica_271)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Orașe și satul care le țin în priză\" reuses an inventory/selected quad (also in: cx_muzica_054, cx_muzica_056, cx_muzica_138, cx_muzica_271)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_muzica_271 (10), cx_muzica_056 (8), cx_muzica_138 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Brașov (12), Carpați (9), Cluj-Napoca (19), Constanța (15), Dobrogea (13), Marea Neagră (10), Bonțida (9), Electric Castle (10), Neversea (11), Untold (10), Transilvania (10)"
+    }
+   ]
+  },
+  "cx_muzica_271": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "board_type_shortcut",
+     "level": "WARN",
+     "detail": "all four groups are node-type homogeneous and expose 3 distinct group types"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Festivaluri cu hartă clară\" <-> \"Locuri care le trag de mânecă\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Festivaluri cu hartă clară\" <-> \"Evenimente cu public\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Evenimente cu public\" repeats member(s): Public"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Festivaluri cu hartă clară\" reuses an inventory/selected quad (also in: cx_geografie_252, cx_muzica_056, cx_muzica_138, cx_muzica_205, cx_muzica_206)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Locuri care le trag de mânecă\" reuses an inventory/selected quad (also in: cx_muzica_054, cx_muzica_056, cx_muzica_138, cx_muzica_206)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Evenimente cu public\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_161)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_muzica_206 (10), cx_muzica_056 (8), cx_muzica_138 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Brașov (12), Cluj-Napoca (19), Constanța (15), Bonțida (9), Electric Castle (10), Neversea (11), Untold (10)"
+    }
+   ]
+  },
+  "cx_muzica_272": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "board_type_shortcut",
+     "level": "WARN",
+     "detail": "all four groups are node-type homogeneous and expose 3 distinct group types"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Rock clasic și hard\" <-> \"Semnele chitării\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Rock clasic și hard\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_muzica_053, cx_muzica_055, cx_muzica_142, cx_muzica_205)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Semnele chitării\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_muzica_142)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Orașe trase în legendă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_001, cx_geografie_023, cx_geografie_177, cx_limba_261, cx_societate_065, cx_societate_066, cx_societate_154, cx_societate_221, cx_societate_279)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Brașov (12), București (24), Cluj-Napoca (19), Timișoara (10)"
+    }
+   ]
+  },
+  "cx_muzica_274": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Refren viral"
+    },
+    {
+     "check": "red_herring_budget",
+     "level": "WARN",
+     "detail": "2 contested tiles (budget <4): Hit de vară, Refren de vară"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Hituri plecate afară\" <-> \"Artiștii din spate\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Hituri plecate afară\" <-> \"Rețeta de vară\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Artiștii din spate\" mixes node_types 3+1: O-Zone[org], Edward Maya[person], Alexandra Stan[person], INNA[person]"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Artiștii din spate\" <-> \"Rețeta de vară\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Hituri plecate afară\" reuses an inventory/selected quad (also in: cx_meme_net_136, cx_muzica_056, cx_muzica_138, cx_muzica_140)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Artiștii din spate\" reuses an inventory/selected quad (also in: cx_muzica_053, cx_muzica_058, cx_muzica_140)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Viral înainte și după TikTok\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_136)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Rețeta de vară\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_muzica_140)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_muzica_140 (13), cx_meme_net_136 (9)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Dragostea din tei (11), Hot (9), O-Zone (10), TikTok România (10)"
+    }
+   ]
+  },
+  "cx_personalitati_061": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Enescu: titluri care se ating\" mixes node_types 3+1: Rapsodia Română[work], Rapsodiile Române[work], Oedipe[work], Festivalul George Enescu[event]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Opere Brâncuși, nu locuri\" reuses an inventory/selected quad (also in: cx_arta_cultura_003, cx_personalitati_064)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Enescu: titluri care se ating\" reuses an inventory/selected quad (also in: cx_arta_cultura_003)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Curente artistice și literare\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_183, cx_personalitati_215)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_arta_cultura_003 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Ateneul Român (17), Coloana Infinitului (14), Festivalul George Enescu (18), Masa Tăcerii (20), Modernism (9), Oedipe (11), Poarta Sărutului (15), Rapsodia Română (14)"
+    }
+   ]
+  },
+  "cx_personalitati_147": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Pictori clasici și pânză celebră\" mixes node_types 3+1: Nicolae Grigorescu[person], Theodor Aman[person], Ștefan Luchian[person], Carul cu boi[work]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Brâncuși fără numele Brâncuși\" mixes node_types 2+2: Cumințenia Pământului[work], Pasărea măiastră[work], Sculptura modernă brâncușiană[concept], Sculptură[concept]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Pictori clasici și pânză celebră\" reuses an inventory/selected quad (also in: cx_arta_cultura_004)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Enescu pe scenă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_006)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_arta_cultura_007 (9)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Ateneul Român (17), Festivalul George Enescu (18), George Enescu (23), Mănăstirile pictate din Bucovina (10), Muzeul Național Brukenthal (15), Nicolae Grigorescu (11), Ștefan Luchian (12)"
+    }
+   ]
+  },
+  "cx_personalitati_148": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Inginerie, Inventator"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Pionieri ai aviației\" mixes node_types 2+2: Aurel Vlaicu[person], Traian Vuia[person], Avionul Vlaicu I[work], Vuia I[work]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Știința vieții\" mixes node_types 2+2: Ana Aslan[person], Emil Racoviță[person], Medicină[concept], Speologie[concept]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Poduri și ingineri\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_stiinta_164)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_stiinta_162 (8), cx_stiinta_285 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Aurel Vlaicu (16), Coandă-1910 (13), Henri Coandă (16), Podul de la Cernavodă (10), Traian Vuia (12)"
+    }
+   ]
+  },
+  "cx_societate_069": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Drept de vot, Primar"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Circuit legislativ și electoral\" mixes node_types 3+1: Parlamentul României[org], Camera Deputaților[org], Senatul[org], Drept de vot[concept]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Executiv și funcții alese\" mixes node_types 3+1: Guvernul României[org], Prim-ministrul[concept], Președintele României[concept], Primar[concept]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Local, cu ștampilă mică\" mixes node_types 3+1: Județ[concept], Municipiu[concept], Comuna[concept], Consiliul local[org]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Circuit legislativ și electoral\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_150)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Executiv și funcții alese\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_150, cx_societate_280)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Local, cu ștampilă mică\" reuses an inventory/selected quad (also in: cx_societate_065, cx_societate_216)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_societate_150 (11), cx_societate_216 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Constituția României (9), Guvernul României (9), Parlamentul României (11)"
+    }
+   ]
+  },
+  "cx_societate_150": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Executivul de la centru\" mixes node_types 3+1: Președintele României[concept], Prim-ministrul[concept], Guvernul României[org], Stat[concept]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Legislativul bicameral\" mixes node_types 3+1: Parlamentul României[org], Camera Deputaților[org], Senatul[org], Alegeri[concept]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Administrație locală\" mixes node_types 3+1: Primar[concept], Consiliul local[org], Comuna[concept], Municipiu[concept]"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Cetățenie și drepturi\" repeats member(s): Cetățenie"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Executivul de la centru\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_069)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Legislativul bicameral\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_069)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Administrație locală\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_065, cx_societate_069, cx_societate_216)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Cetățenie și drepturi\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_065)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_societate_069 (11), cx_societate_065 (8), cx_societate_216 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Guvernul României (9), Parlamentul României (11)"
+    }
+   ]
+  },
+  "cx_societate_218": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Gheorghe Marinescu, Ion Cantacuzino"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Nume de om în titlu, dar nu persoană\" mixes node_types 3+1: Ion (roman)[work], Ghiță[person], Reclamele Vodafone cu Ghiță[work], Povestea lui Harap-Alb[work]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Au prins Parisul în biografie\" reuses an inventory/selected quad (also in: cx_arta_cultura_005, cx_gastronomie_173, cx_literatura_198)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Ion e prenume, nu titlu\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_204, cx_personalitati_211)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Gheorghe sub diferite tricouri\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_film_tv_166)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Constantin Brâncuși (18), Emil Cioran (13), George Enescu (23), Gheorghe Hagi (13), Ion Creangă (18), Ion Heliade Rădulescu (11), Ion (roman) (12), Tristan Tzara (10)"
+    }
+   ]
+  },
+  "cx_societate_219": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Uniri și locuri de manual\" mixes node_types 3+1: Mică Unire 1859[event], Marea Unire 1918[event], Unirea Principatelor Române[event], Alba Iulia[place]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"1994, când toți știau schema\" mixes node_types 3+1: Cupa Mondială 1994[event], România - Argentina 1994[event], Columbia - România 1994[event], Generația de Aur[concept]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"1986, Sevilla la televizor\" reuses an inventory/selected quad (also in: cx_sport_281)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"1994, când toți știau schema\" reuses an inventory/selected quad (also in: cx_geografie_179, cx_sport_071, cx_sport_156, cx_sport_222, cx_sport_281)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_sport_281 (9), cx_sport_156 (8), cx_sport_222 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Coandă-1910 (13), Marea Unire 1918 (14), Mică Unire 1859 (10), Columbia - România 1994 (9), Finala de la Sevilla (14), Generația de Aur (10), Helmut Duckadam (9), Primul 10 perfect (10), România - Argentina 1994 (9), Steaua 1986 (11), Cupa Mondială 1994 (9)"
+    }
+   ]
+  },
+  "cx_societate_221": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "board_type_shortcut",
+     "level": "WARN",
+     "detail": "all four groups are node-type homogeneous and expose 3 distinct group types"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Fabrici cu oraș în nume\" <-> \"Orașele din spatele fabricilor\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Orașe cu greutate de centru\" reuses an inventory/selected quad (also in: cx_geografie_001, cx_geografie_023, cx_societate_065, cx_societate_066, cx_societate_154, cx_societate_279)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Fabrici cu oraș în nume\" reuses an inventory/selected quad (also in: cx_geografie_177, cx_societate_067, cx_societate_151, cx_societate_279)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Orașele din spatele fabricilor\" reuses an inventory/selected quad (also in: cx_geografie_113, cx_societate_067, cx_societate_151, cx_societate_279)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_societate_279 (12), cx_societate_151 (10), cx_societate_067 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: București (24), Cluj-Napoca (19), Iași (16), Timișoara (10)"
+    }
+   ]
+  },
+  "cx_societate_279": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Universități mari\" <-> \"Orașe universitare\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "vague_predicate_wording",
+     "level": "FAIL",
+     "detail": "group \"Industrie cu adresă\" uses catch-all wording instead of one testable shared predicate"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Industrie cu adresă\" <-> \"Orașe-fabrică\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Universități mari\" reuses an inventory/selected quad (also in: cx_geografie_177, cx_societate_066, cx_societate_152, cx_societate_217)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Orașe universitare\" reuses an inventory/selected quad (also in: cx_geografie_001, cx_geografie_023, cx_societate_065, cx_societate_066, cx_societate_154, cx_societate_221)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Industrie cu adresă\" reuses an inventory/selected quad (also in: cx_geografie_177, cx_societate_067, cx_societate_151, cx_societate_221)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Orașe-fabrică\" reuses an inventory/selected quad (also in: cx_geografie_113, cx_societate_067, cx_societate_151, cx_societate_221)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_societate_221 (12), cx_geografie_177 (11), cx_societate_066 (8), cx_societate_067 (8), cx_societate_151 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: București (24), Cluj-Napoca (19), Iași (16), Universitatea Babeș-Bolyai (9), Universitatea Alexandru Ioan Cuza din Iași (9), Timișoara (10), Universitatea din București (13)"
+    }
+   ]
+  },
+  "cx_sport_071": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Mondialul american din 1994\" mixes node_types 3+1: Generația de Aur[concept], Cupa Mondială 1994[event], România - Argentina 1994[event], Columbia - România 1994[event]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Grand Slam-uri românești\" mixes node_types 3+1: Simona Halep[person], Roland Garros 2018[event], Wimbledon 2019[event], Finala cu Serena Williams[event]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Mondialul american din 1994\" reuses an inventory/selected quad (also in: cx_geografie_179, cx_societate_219, cx_sport_156, cx_sport_222, cx_sport_281)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Sevilla, 7 mai 1986\" reuses an inventory/selected quad (also in: cx_geografie_179, cx_sport_156)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Grand Slam-uri românești\" reuses an inventory/selected quad (also in: cx_sport_222, cx_sport_281)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Pagaia lui Patzaichin\" reuses an inventory/selected quad (also in: cx_geografie_179, cx_sport_160, cx_sport_225)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_geografie_179 (12), cx_sport_160 (12), cx_sport_222 (11), cx_sport_281 (11), cx_sport_156 (10)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Delta Dunării (15), Simona Halep (14), Columbia - România 1994 (9), Finala de la Sevilla (14), Generația de Aur (10), Helmut Duckadam (9), Ivan Patzaichin (9), Patru penalty-uri apărate (9), România - Argentina 1994 (9), Steaua 1986 (11), Cupa Mondială 1994 (9)"
+    }
+   ]
+  },
+  "cx_sport_158": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Semne olimpice\" mixes node_types 3+1: Cinci inele olimpice[concept], Campion olimpic[concept], Lotul olimpic al României[org], Olimpiadă[concept]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Tenis cu nume de turneu\" reuses an inventory/selected quad (also in: cx_geografie_179)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Lovitura de la 11 metri\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_sport_161, cx_sport_283)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Patru penalty-uri apărate (9), Steaua 1986 (11), Wimbledon (9)"
+    }
+   ]
+  },
+  "cx_sport_223": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Bazin olimpic, Handbal, Meci, Patru penalty-uri apărate, Primul 10 perfect, Volei, fileu, sală"
+    },
+    {
+     "check": "red_herring_budget",
+     "level": "WARN",
+     "detail": "2 contested tiles (budget <4): Bârna, Paralele inegale"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Sună a masă de după meci, dar nu e\" repeats member(s): Meci"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Sună a masă de după meci, dar nu e\" mixes node_types 3+1: Meci[concept], fileu[concept], Cupa Campionilor 1986[event], sală[concept]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Cifre care au devenit legendă\" mixes node_types 3+1: Primul 10 perfect[concept], Primul număr 1 ATP[concept], Patru penalty-uri apărate[concept], Recordul la 100 m liber din 2022[event]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Locuri pe care le vezi, nu le mănânci\" reuses an inventory/selected quad (also in: cx_sport_226)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Primul 10 perfect (10), Patru penalty-uri apărate (9)"
+    }
+   ]
+  },
+  "cx_sport_281": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Mondialul american\" mixes node_types 3+1: Generația de Aur[concept], Cupa Mondială 1994[event], România - Argentina 1994[event], Columbia - România 1994[event]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Dubla Simonei\" mixes node_types 3+1: Simona Halep[person], Wimbledon 2019[event], Roland Garros 2018[event], Finala cu Serena Williams[event]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Sevilla 1986\" reuses an inventory/selected quad (also in: cx_societate_219)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Mondialul american\" reuses an inventory/selected quad (also in: cx_geografie_179, cx_societate_219, cx_sport_071, cx_sport_156, cx_sport_222)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Dubla Simonei\" reuses an inventory/selected quad (also in: cx_sport_071, cx_sport_222)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Zecele Nadiei\" reuses an inventory/selected quad (also in: cx_sport_073, cx_sport_222)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_sport_222 (15), cx_sport_071 (11), cx_societate_219 (9), cx_sport_156 (9), cx_sport_160 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Nadia Comăneci (12), Simona Halep (14), Columbia - România 1994 (9), Finala de la Sevilla (14), Generația de Aur (10), Helmut Duckadam (9), Primul 10 perfect (10), România - Argentina 1994 (9), Steaua 1986 (11), Cupa Mondială 1994 (9)"
+    }
+   ]
+  },
+  "cx_stiinta_166": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Sunetul ca tehnică\" mixes node_types 3+1: Gogu Constantinescu[person], Sonicitate[concept], Fizică[concept], Inginerie[concept]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Numere în nume, nu în formule\" mixes node_types 3+1: Coandă-1910[work], Vuia I[work], Vlaicu II[work], Dacia 1310[concept]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Muzee și obiecte de văzut\" mixes node_types 3+1: Muzeul Național de Istorie Naturală Grigore Antipa[org], Muzeul Național al Aviației Române[org], Muzeul Național Brukenthal[org], Muzeu[concept]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Stiloul, înainte să fie penar\" reuses an inventory/selected quad (also in: cx_limba_192)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Numere în nume, nu în formule\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_067, cx_stiinta_078, cx_stiinta_082, cx_stiinta_162)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Muzee și obiecte de văzut\" reuses an inventory/selected quad (also in: cx_arta_cultura_094)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Coandă-1910 (13), Muzeul Național de Istorie Naturală Grigore Antipa (14), Muzeul Național Brukenthal (15)"
+    }
+   ]
+  },
+  "cx_stiinta_229": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Expresii românești care intră anatomic în vorbă\" reuses an inventory/selected quad (also in: cx_gastronomie_106, cx_limba_036, cx_limba_123, cx_limba_187)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Legume cu pașaport regional\" reuses an inventory/selected quad (also in: cx_gastronomie_106, cx_gastronomie_171, cx_geografie_110, cx_limba_036, cx_limba_187, cx_meme_net_201, cx_personalitati_213, cx_viata_de_roman_237)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_gastronomie_106 (8), cx_limba_036 (8), cx_limba_187 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Barabulă (10), Cucuruz (9), Curechi (10), Păpușoi (9)"
+    }
+   ]
+  },
+  "cx_stiinta_230": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Apă"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Căldură fără repartitor\" repeats member(s): căldură"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Iarna la bloc, capitolul aplicații\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_233)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Fluide care explică de ce zboară ceva\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_stiinta_162, cx_stiinta_285)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Fluide care explică de ce stă lumea la masă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_172)"
+    }
+   ]
+  },
+  "cx_stiinta_231": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Nobel pe bune sau pe etichetă\" mixes node_types 2+2: George Emil Palade[person], Herta Muller[person], Premiul Nobel[concept], Premiul Nobel pentru Medicină[concept]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Artistul devenit brand de operă sau școală\" mixes node_types 3+1: Festivalul George Enescu[event], Muzica lui George Enescu[concept], Sculptura modernă brâncușiană[concept], Pictura lui Nicolae Grigorescu[concept]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Parisul le-a fost mai mult decât escală\" reuses an inventory/selected quad (also in: cx_personalitati_210)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Nobel pe bune sau pe etichetă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_stiinta_165)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Instituții unde înveți înainte să inventezi\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_177, cx_istorie_256, cx_limba_261, cx_societate_066, cx_societate_152, cx_societate_217, cx_societate_279, cx_stiinta_165)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Academia Română (19), Constantin Brâncuși (18), Emil Cioran (13), Eugen Ionescu (11), Festivalul George Enescu (18), George Enescu (23), Universitatea Alexandru Ioan Cuza din Iași (9), Universitatea din București (13)"
+    }
+   ]
+  },
+  "cx_viata_de_roman_085": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Bătaia covoarelor, Telefonul fix"
+    },
+    {
+     "check": "red_herring_budget",
+     "level": "WARN",
+     "detail": "2 contested tiles (budget <4): Caloriferul rece, Vecinul cu bormașina"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Administrează întreținerea\" mixes node_types 3+1: Asociația de proprietari[org], Avizierul de la bloc[concept], Apometrele[concept], Caloriferul rece[concept]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Se văd pe bloc\" mixes node_types 3+1: Rufele pe balcon[concept], Termopanele[concept], Bătaia covoarelor[concept], Blocul[place]"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Sunete și acces\" mixes node_types 3+1: Vecinul cu bormașina[concept], Interfonul[concept], Telefonul fix[concept], Scara blocului[place]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Administrează întreținerea\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_154, cx_viata_de_roman_238)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Mașina de lângă scară\" reuses an inventory/selected quad (also in: cx_viata_de_roman_088, cx_viata_de_roman_172)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_viata_de_roman_168 (13), cx_viata_de_roman_233 (9)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Interfonul (9), Portbagajul plin (9)"
+    }
+   ]
+  },
+  "cx_viata_de_roman_086": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Mămăliga bunicii, Țuica de casă"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Curtea bunicilor\" mixes node_types 3+1: Gospodăria bunicilor[place], Găina din curte[concept], Fântâna din curte[place], Ulița satului[place]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Curtea bunicilor\" reuses an inventory/selected quad (also in: cx_viata_de_roman_089, cx_viata_de_roman_289)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Din cămară sau beci\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_089, cx_viata_de_roman_169)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Pe masa de familie\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_237)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Iarna care intră în poveste\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_170)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_viata_de_roman_234 (11), cx_viata_de_roman_089 (10), cx_viata_de_roman_169 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Borcanele de zacuscă (11), Portbagajul plin (9)"
+    }
+   ]
+  },
+  "cx_viata_de_roman_168": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Apometrele, Avizierul de la bloc, Rufele pe balcon"
+    },
+    {
+     "check": "red_herring_budget",
+     "level": "FAIL",
+     "detail": "6 contested tiles (budget <4): Bătaia covoarelor, Caloriferul rece, Interfonul, Termopanele, Vecini, Vecinul cu bormașina"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Administrația blocului\" mixes node_types 2+2: Blocul[place], Scara blocului[place], Interfonul[concept], Avizierul de la bloc[concept]"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Administrația blocului\" <-> \"Vecinii se fac auziți\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Vecinii se fac auziți\" mixes node_types 3+1: Vecini[concept], Vecinul cu bormașina[concept], Bătaia covoarelor[concept], Asociația de proprietari[org]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Administrația blocului\" reuses an inventory/selected quad (also in: cx_viata_de_roman_289)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Teritoriul din jurul blocului\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_233)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_viata_de_roman_085 (13), cx_viata_de_roman_233 (9)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Interfonul (9)"
+    }
+   ]
+  },
+  "cx_viata_de_roman_171": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Abțibildurile, Oracolul școlar"
+    },
+    {
+     "check": "red_herring_budget",
+     "level": "FAIL",
+     "detail": "5 contested tiles (budget <4): Cheia de la gât, Guma Turbo, Jocuri de copilărie, Lapte și corn, Telefonul fix"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Pauza mare dulce\" reuses an inventory/selected quad (also in: cx_viata_de_roman_084, cx_viata_de_roman_235)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Afară până seara\" reuses an inventory/selected quad (also in: cx_viata_de_roman_235)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_viata_de_roman_235 (12), cx_viata_de_roman_084 (9)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: TVR (14)"
+    }
+   ]
+  },
+  "cx_viata_de_roman_172": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Bucovina, Carpați, Dobrogea, Moldova, Pachet de acasă, Transilvania"
+    },
+    {
+     "check": "red_herring_budget",
+     "level": "WARN",
+     "detail": "2 contested tiles (budget <4): Delta Dunării, Marea Neagră"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Mașina și locul ei\" reuses an inventory/selected quad (also in: cx_viata_de_roman_085, cx_viata_de_roman_088)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Vacanțe cu hartă mare\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_stiinta_309)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Prin regiuni\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_251, cx_limba_038)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Carpați (9), Delta Dunării (15), Dobrogea (13), Ciorbă rădăuțeană (11), Mici (16), Marea Neagră (10), Moldova (9), Oltenia (9), Transilvania (10), Portbagajul plin (9)"
+    },
+    {
+     "check": "generic_region_link",
+     "level": "WARN",
+     "detail": "board pairs region tiles (Bucovina, Moldova, Transilvania, Oltenia, Dobrogea) with non-distinctive region-linked tiles: Ciorbă rădăuțeană (national-salience concept (0.88) with generic related_to edge to Bucovina)"
+    }
+   ]
+  },
+  "cx_viata_de_roman_233": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Apometrele"
+    },
+    {
+     "check": "red_herring_budget",
+     "level": "WARN",
+     "detail": "3 contested tiles (budget <4): Avizierul de la bloc, Caloriferul rece, Întreținerea"
+    },
+    {
+     "check": "label_self_leak",
+     "level": "FAIL",
+     "detail": "group label \"Războiul locului de parcare\" repeats member(s): Parcare"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Bugetul nevăzut al scării\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_stiinta_230)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"La intrare se află tot\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_154, cx_viata_de_roman_084, cx_viata_de_roman_168, cx_viata_de_roman_289)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Războiul locului de parcare\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_085, cx_viata_de_roman_088, cx_viata_de_roman_168, cx_viata_de_roman_172)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_viata_de_roman_085 (9), cx_viata_de_roman_168 (9)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Interfonul (9), Portbagajul plin (9)"
+    }
+   ]
+  },
+  "cx_viata_de_roman_234": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Borcanele de zacuscă, Mirosul de cozonac"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Curtea bunicilor, cu GPS afectiv\" mixes node_types 3+1: Gospodăria bunicilor[place], Vara la bunici[event], Gospodărie rurală[place], Ulița satului[place]"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Curtea bunicilor, cu GPS afectiv\" <-> \"Din cămara care nu se termină\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Calendarul când se strânge familia\" mixes node_types 2+2: Sărbători în familie[concept], Sarmalele de Crăciun[concept], Tăiatul porcului de Ignat[event], Colindatul[event]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Curtea bunicilor, cu GPS afectiv\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_200)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Din cămara care nu se termină\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_237)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Logistica pachetului de acasă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_169)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_viata_de_roman_086 (11), cx_viata_de_roman_169 (9)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Borcanele de zacuscă (11), Portbagajul plin (9)"
+    }
+   ]
+  },
+  "cx_viata_de_roman_235": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Copilăria anilor 90, Lapte și corn, Oracolul școlar"
+    },
+    {
+     "check": "red_herring_budget",
+     "level": "FAIL",
+     "detail": "4 contested tiles (budget <4): Biscuiții Eugenia, Cheia de la gât, Guma Turbo, Jocuri de copilărie"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Pauza mare, ambalată\" reuses an inventory/selected quad (also in: cx_viata_de_roman_084, cx_viata_de_roman_171)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Televizor înainte de streaming\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_118, cx_muzica_143, cx_viata_de_roman_170)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Afară, până se aprindea lumina\" reuses an inventory/selected quad (also in: cx_viata_de_roman_171)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_viata_de_roman_171 (12), cx_viata_de_roman_084 (9)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Pro TV (14), TVR (14), Lasă că merge și așa (9)"
+    }
+   ]
+  },
+  "cx_viata_de_roman_237": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "tile_fairness",
+     "level": "FAIL",
+     "detail": "unfair tiles (foreign pull > own): Cozonac, Curechi, Varză"
+    },
+    {
+     "check": "red_herring_budget",
+     "level": "FAIL",
+     "detail": "5 contested tiles (budget <4): Mirosul de cozonac, Mămăliga bunicii, Mămăligă, Sarmale, Sarmalele de Crăciun"
+    },
+    {
+     "check": "mirrored_groups",
+     "level": "FAIL",
+     "detail": "\"Mâncare în forma ei de dicționar\" <-> \"Aceeași mâncare, dar cu familie atașată\" are in >=3-way strong correspondence"
+    },
+    {
+     "check": "type_coherence",
+     "level": "WARN",
+     "detail": "group \"Nu e fel principal, e capcană de cuvânt\" mixes node_types 3+1: Masa Tăcerii[work], Varză[concept], Coada[concept], Port[concept]"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Mâncare în forma ei de dicționar\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_personalitati_213)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Aceeași mâncare, dar cu familie atașată\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_201, cx_viata_de_roman_086, cx_viata_de_roman_234)"
+    },
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Regionalisme care ajung în oală\" reuses an inventory/selected quad (also in: cx_gastronomie_106, cx_gastronomie_171, cx_geografie_110, cx_limba_036, cx_limba_187, cx_meme_net_201, cx_personalitati_213, cx_stiinta_229)"
+    },
+    {
+     "check": "board_reskin",
+     "level": "FAIL",
+     "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_gastronomie_106 (8)"
+    },
+    {
+     "check": "member_overuse",
+     "level": "FAIL",
+     "detail": "projected approved-batch use exceeds 8: Cozonac (11), Mici (16), Sarmale (14), Barabulă (10), Cucuruz (9), Curechi (10), Păpușoi (9), Masa Tăcerii (20), Borcanele de zacuscă (11)"
+    }
+   ]
+  },
+  "cx_viata_de_roman_291": {
+   "game": "conexiuni",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "duplicate_groups",
+     "level": "FAIL",
+     "detail": "group \"Jocuri de mișcare în aer liber\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_313)"
+    }
+   ]
+  }
+ },
+ "pack_findings": []
+}

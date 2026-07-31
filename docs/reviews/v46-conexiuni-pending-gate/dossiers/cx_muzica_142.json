@@ -1,0 +1,379 @@
+{
+ "id": "cx_muzica_142",
+ "game": "conexiuni",
+ "category": "muzica",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "bcaff6c3fc9abe4021465f230cb6101e62ee2d35864f9d44b8dc9683f31feec2",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Trupe rock românești\" <-> \"Vocabular de rock\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Vocabular de rock\" mixes node_types 3+1: Rock românesc[concept], Trupă rock[concept], Baladă rock[concept], Ploaia[work]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Spații și idei de scenă\" mixes node_types 3+1: Concert[concept], Scenă de festival[concept], Ateneul Român[place], Teatrul românesc[concept]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Trupe rock românești\" reuses an inventory/selected quad (also in: cx_muzica_053, cx_muzica_055)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Vocabular de rock\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_muzica_272)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Enescu și muzica de concert\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_006, cx_arta_cultura_007, cx_arta_cultura_091, cx_muzica_208, cx_personalitati_059)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Teatrul românesc (10), Ateneul Român (17), Festivalul George Enescu (18), George Enescu (23), Rapsodia Română (14)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [
+   "Concert"
+  ],
+  "engine_unfair_raw": 9
+ },
+ "groups": [
+  {
+   "label": "Trupe rock românești",
+   "members": [
+    {
+     "id": "n_muz_phoenix",
+     "label": "Phoenix",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.6918,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Trupă românească de rock, reper al folk-rockului și al mitologiei muzicale autohtone."
+    },
+    {
+     "id": "n_muz_iris",
+     "label": "Iris",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.5511,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Trupă românească de rock, cunoscută pentru balade și concerte de arenă."
+    },
+    {
+     "id": "n_muz_cargo",
+     "label": "Cargo",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.6834,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Trupă românească de rock din Timișoara, celebră pentru piesa „Ploaia”."
+    },
+    {
+     "id": "n_muz_holograf",
+     "label": "Holograf",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.5499,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Trupă românească pop-rock, cunoscută pentru balade radio și refrene de concert."
+    }
+   ]
+  },
+  {
+   "label": "Vocabular de rock",
+   "members": [
+    {
+     "id": "n_muz_rock_ro",
+     "label": "Rock românesc",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.7776,
+     "degree": 22,
+     "incoming_degree": 22,
+     "description": "Trupe rock românești cu refrene de stadion, folk-rock și balade de chitară."
+    },
+    {
+     "id": "n_v2muz_trupa_rock",
+     "label": "Trupă rock",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.89,
+     "degree": 19,
+     "incoming_degree": 19,
+     "description": "Formație muzicală care cântă rock cu instrumente de band."
+    },
+    {
+     "id": "n_v2muz_balada_rock",
+     "label": "Baladă rock",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.4857,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Piesă rock lentă sau melodică, centrată pe voce și chitară."
+    },
+    {
+     "id": "n_muz_ploaia_cargo",
+     "label": "Ploaia",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.3862,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Baladă rock Cargo, una dintre cele mai cântate piese românești de chitară."
+    }
+   ]
+  },
+  {
+   "label": "Enescu și muzica de concert",
+   "members": [
+    {
+     "id": "n_george_enescu",
+     "label": "George Enescu",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.8366,
+     "degree": 30,
+     "incoming_degree": 30,
+     "description": "Compozitor, violonist si dirijor roman."
+    },
+    {
+     "id": "n_festivalul_enescu",
+     "label": "Festivalul George Enescu",
+     "node_type": "event",
+     "category": "arta_cultura",
+     "salience": 0.4779,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Festival international de muzica clasica de la Bucuresti."
+    },
+    {
+     "id": "n_rapsodia_romana",
+     "label": "Rapsodia Română",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.4419,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Lucrare orchestrala de George Enescu inspirata din folclor."
+    },
+    {
+     "id": "n_v2art_muzica_culta",
+     "label": "Muzică cultă",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.6876,
+     "degree": 16,
+     "incoming_degree": 17,
+     "description": "Muzică de concert, academică sau clasică, compusă pentru interpretare artistică."
+    }
+   ]
+  },
+  {
+   "label": "Spații și idei de scenă",
+   "members": [
+    {
+     "id": "n_v2muz_concert",
+     "label": "Concert",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.9582,
+     "degree": 39,
+     "incoming_degree": 39,
+     "description": "Eveniment live în care artiștii cântă în fața publicului."
+    },
+    {
+     "id": "n_v2muz_scena_festival",
+     "label": "Scenă de festival",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.6278,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Spațiu de concert amenajat pentru public numeros la festival."
+    },
+    {
+     "id": "n_ateneul_roman",
+     "label": "Ateneul Român",
+     "node_type": "place",
+     "category": "arta_cultura",
+     "salience": 0.6749,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Sala de concerte din Bucuresti inaugurata in 1888, principala scena a Festivalului George Enescu."
+    },
+    {
+     "id": "n_artx_teatru_romanesc",
+     "label": "Teatrul românesc",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.6134,
+     "degree": 23,
+     "incoming_degree": 23,
+     "description": "Tradiția scenică românească, de la comedia clasică la regia modernă și instituțiile de repertoriu."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Cargo",
+   "a_group": "Trupe rock românești",
+   "b": "Rock românesc",
+   "b_group": "Vocabular de rock",
+   "strength": 0.9
+  },
+  {
+   "a": "Holograf",
+   "a_group": "Trupe rock românești",
+   "b": "Rock românesc",
+   "b_group": "Vocabular de rock",
+   "strength": 0.9
+  },
+  {
+   "a": "Iris",
+   "a_group": "Trupe rock românești",
+   "b": "Rock românesc",
+   "b_group": "Vocabular de rock",
+   "strength": 0.9
+  },
+  {
+   "a": "Iris",
+   "a_group": "Trupe rock românești",
+   "b": "Trupă rock",
+   "b_group": "Vocabular de rock",
+   "strength": 0.9
+  },
+  {
+   "a": "Phoenix",
+   "a_group": "Trupe rock românești",
+   "b": "Rock românesc",
+   "b_group": "Vocabular de rock",
+   "strength": 0.9
+  },
+  {
+   "a": "Phoenix",
+   "a_group": "Trupe rock românești",
+   "b": "Trupă rock",
+   "b_group": "Vocabular de rock",
+   "strength": 0.9
+  },
+  {
+   "a": "Ateneul Român",
+   "a_group": "Spații și idei de scenă",
+   "b": "Muzică cultă",
+   "b_group": "Enescu și muzica de concert",
+   "strength": 0.86
+  },
+  {
+   "a": "Cargo",
+   "a_group": "Trupe rock românești",
+   "b": "Ploaia",
+   "b_group": "Vocabular de rock",
+   "strength": 0.84
+  },
+  {
+   "a": "Cargo",
+   "a_group": "Trupe rock românești",
+   "b": "Trupă rock",
+   "b_group": "Vocabular de rock",
+   "strength": 0.82
+  },
+  {
+   "a": "Holograf",
+   "a_group": "Trupe rock românești",
+   "b": "Trupă rock",
+   "b_group": "Vocabular de rock",
+   "strength": 0.82
+  },
+  {
+   "a": "Cargo",
+   "a_group": "Trupe rock românești",
+   "b": "Baladă rock",
+   "b_group": "Vocabular de rock",
+   "strength": 0.78
+  },
+  {
+   "a": "Ateneul Român",
+   "a_group": "Spații și idei de scenă",
+   "b": "Festivalul George Enescu",
+   "b_group": "Enescu și muzica de concert",
+   "strength": 0.75
+  },
+  {
+   "a": "Holograf",
+   "a_group": "Trupe rock românești",
+   "b": "Baladă rock",
+   "b_group": "Vocabular de rock",
+   "strength": 0.74
+  },
+  {
+   "a": "Cargo",
+   "a_group": "Trupe rock românești",
+   "b": "Concert",
+   "b_group": "Spații și idei de scenă",
+   "strength": 0.72
+  },
+  {
+   "a": "Iris",
+   "a_group": "Trupe rock românești",
+   "b": "Baladă rock",
+   "b_group": "Vocabular de rock",
+   "strength": 0.72
+  },
+  {
+   "a": "Phoenix",
+   "a_group": "Trupe rock românești",
+   "b": "Concert",
+   "b_group": "Spații și idei de scenă",
+   "strength": 0.72
+  },
+  {
+   "a": "Iris",
+   "a_group": "Trupe rock românești",
+   "b": "Concert",
+   "b_group": "Spații și idei de scenă",
+   "strength": 0.7
+  },
+  {
+   "a": "Holograf",
+   "a_group": "Trupe rock românești",
+   "b": "Concert",
+   "b_group": "Spații și idei de scenă",
+   "strength": 0.68
+  },
+  {
+   "a": "Concert",
+   "a_group": "Spații și idei de scenă",
+   "b": "Trupă rock",
+   "b_group": "Vocabular de rock",
+   "strength": 0.62
+  },
+  {
+   "a": "Ateneul Român",
+   "a_group": "Spații și idei de scenă",
+   "b": "George Enescu",
+   "b_group": "Enescu și muzica de concert",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:083f6ca44a7a65101a80b7d8b81692df8932535b479e2a3035f1acf15f0a8ca9"
+}

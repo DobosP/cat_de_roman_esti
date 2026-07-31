@@ -1,0 +1,246 @@
+{
+ "id": "cx_istorie_119",
+ "game": "conexiuni",
+ "category": "istorie",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "773c5a519f4d1eed0d521f70d84af4743712a3735cdc717813f5c014df556a7c",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Istorici și cărturari\" mixes node_types 3+1: Dimitrie Cantemir[person], Bogdan Petriceicu Hasdeu[person], Nicolae Iorga[person], Școala Ardeleană[org]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Primul Război în memorie și literatură\" mixes node_types 2+2: Primul Război Mondial[event], Bătălia de la Mărășești[event], Pădurea spânzuraților (film)[work], Ultima noapte de dragoste, întâia noapte de război[work]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Istorici și cărturari\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_personalitati_060)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Monumente care povestesc istorie\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_094, cx_arta_cultura_158, cx_arta_cultura_239, cx_arta_cultura_240, cx_geografie_178)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Instituții cu memorie publică\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_094, cx_stiinta_166)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Academia Română (19), Ansamblul monumental de la Târgu Jiu (10), Masa Tăcerii (20), Muzeul Național de Istorie Naturală Grigore Antipa (14), Muzeul Național Brukenthal (15), Pădurea spânzuraților (film) (9), Nicolae Iorga (9), Poarta Sărutului (15)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 4
+ },
+ "groups": [
+  {
+   "label": "Istorici și cărturari",
+   "members": [
+    {
+     "id": "n_dimitrie_cantemir",
+     "label": "Dimitrie Cantemir",
+     "node_type": "person",
+     "category": "limba",
+     "salience": 0.2896,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Domnitor al Moldovei si carturar (1673-1723), autor de opere istorice si lingvistice, membru al Academiei din Berlin."
+    },
+    {
+     "id": "n_bogdan_petriceicu_hasdeu",
+     "label": "Bogdan Petriceicu Hasdeu",
+     "node_type": "person",
+     "category": "limba",
+     "salience": 0.192,
+     "degree": 5,
+     "incoming_degree": 3,
+     "description": "Filolog si istoric (1838-1907), pionier al lingvisticii romanesti, autor al dictionarului Etymologicum Magnum Romaniae."
+    },
+    {
+     "id": "n_perx_nicolae_iorga",
+     "label": "Nicolae Iorga",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.7698,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Istoric, profesor, om politic și autor al unei opere imense despre trecutul românesc și european."
+    },
+    {
+     "id": "n_scoala_ardeleana",
+     "label": "Școala Ardeleană",
+     "node_type": "org",
+     "category": "limba",
+     "salience": 0.3418,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Miscare culturala iluminista din Transilvania (sec. XVIII-XIX) ce a sustinut originea latina a limbii romane."
+    }
+   ]
+  },
+  {
+   "label": "Primul Război în memorie și literatură",
+   "members": [
+    {
+     "id": "n_primul_razboi_mondial",
+     "label": "Primul Război Mondial",
+     "node_type": "event",
+     "category": "istorie",
+     "salience": 0.4923,
+     "degree": 14,
+     "incoming_degree": 17,
+     "description": "Conflict mondial (1914-1918); Romania a participat din 1916, urmat de Marea Unire."
+    },
+    {
+     "id": "n_istx_batalia_marasesti",
+     "label": "Bătălia de la Mărășești",
+     "node_type": "event",
+     "category": "istorie",
+     "salience": 0.3682,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Bătălie din 1917 pe frontul românesc al Primului Război Mondial, legată de deviza „Pe aici nu se trece”."
+    },
+    {
+     "id": "n_padurea_spanzuratilor_film",
+     "label": "Pădurea spânzuraților (film)",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.2304,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Film romanesc regizat de Liviu Ciulei dupa romanul lui Liviu Rebreanu, premiat pentru regie la Cannes in 1965."
+    },
+    {
+     "id": "n_ultima_noapte",
+     "label": "Ultima noapte de dragoste, întâia noapte de război",
+     "node_type": "work",
+     "category": "literatura",
+     "salience": 0.2077,
+     "degree": 6,
+     "incoming_degree": 5,
+     "description": "Roman modernist publicat in 1930 de Camil Petrescu, roman al experientei si al analizei psihologice."
+    }
+   ]
+  },
+  {
+   "label": "Monumente care povestesc istorie",
+   "members": [
+    {
+     "id": "n_columna_traian",
+     "label": "Columna lui Traian",
+     "node_type": "work",
+     "category": "istorie",
+     "salience": 0.2482,
+     "degree": 11,
+     "incoming_degree": 10,
+     "description": "Monument roman care infatiseaza razboaiele cu dacii."
+    },
+    {
+     "id": "n_ansamblul_targu_jiu",
+     "label": "Ansamblul monumental de la Târgu Jiu",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.316,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Ansamblul sculptural creat de Brancusi la Targu Jiu."
+    },
+    {
+     "id": "n_masa_tacerii",
+     "label": "Masa Tăcerii",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.3478,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Sculptura de Brancusi din Ansamblul de la Targu Jiu."
+    },
+    {
+     "id": "n_poarta_sarutului",
+     "label": "Poarta Sărutului",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.361,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Sculptura de Brancusi din Ansamblul de la Targu Jiu."
+    }
+   ]
+  },
+  {
+   "label": "Instituții cu memorie publică",
+   "members": [
+    {
+     "id": "n_academia_romana",
+     "label": "Academia Română",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.7002,
+     "degree": 33,
+     "incoming_degree": 38,
+     "description": "Cel mai inalt for de stiinta si cultura din Romania, infiintat in 1866."
+    },
+    {
+     "id": "n_muzeul_brukenthal",
+     "label": "Muzeul Național Brukenthal",
+     "node_type": "org",
+     "category": "arta_cultura",
+     "salience": 0.3934,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Muzeu de arta din Sibiu, deschis in 1817, unul dintre cele mai vechi muzee din Europa."
+    },
+    {
+     "id": "n_muzeul_antipa",
+     "label": "Muzeul Național de Istorie Naturală Grigore Antipa",
+     "node_type": "org",
+     "category": "stiinta",
+     "salience": 0.4072,
+     "degree": 12,
+     "incoming_degree": 13,
+     "description": "Muzeu de istorie naturala din Bucuresti, inaugurat in 1908, reorganizat de Grigore Antipa cu primele diorame moderne."
+    },
+    {
+     "id": "n_muzeul_aviatiei_romane",
+     "label": "Muzeul Național al Aviației Române",
+     "node_type": "org",
+     "category": "arta_cultura",
+     "salience": 0.2649,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Muzeu din Bucuresti dedicat istoriei aviatiei romanesti si patrimoniului aeronautic."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Academia Română",
+   "a_group": "Instituții cu memorie publică",
+   "b": "Nicolae Iorga",
+   "b_group": "Istorici și cărturari",
+   "strength": 0.78
+  },
+  {
+   "a": "Academia Română",
+   "a_group": "Instituții cu memorie publică",
+   "b": "Bogdan Petriceicu Hasdeu",
+   "b_group": "Istorici și cărturari",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:a71ae726dce56783606fb1056d6f925670f6bc91b9653cfb8eb574adf1ae0a0a"
+}

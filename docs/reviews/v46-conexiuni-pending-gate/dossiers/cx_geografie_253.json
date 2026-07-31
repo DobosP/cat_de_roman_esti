@@ -1,0 +1,256 @@
+{
+ "id": "cx_geografie_253",
+ "game": "conexiuni",
+ "category": "geografie",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "f470030e75d46983970ca0f0abcee1d44846710658706b7b08159415e1cc0a28",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Basarabia, Moldova, Mureș, Transilvania"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Administrație și stat\" mixes node_types 3+1: Județ[concept], Comuna[concept], Municipiu[concept], România[place]"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Instrumente și idei de hartă\" repeats member(s): hartă"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Noduri geografice cu nume-capcană\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_001, cx_geografie_302)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Teritorii istorice\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_258)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Administrație și stat\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_113, cx_societate_065, cx_societate_069, cx_societate_154, cx_societate_216)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Moldova (9), Olt (10), Transilvania (10)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Basarabia",
+   "Moldova",
+   "Mureș",
+   "Transilvania"
+  ],
+  "contested_tiles": [],
+  "engine_unfair_raw": 4
+ },
+ "groups": [
+  {
+   "label": "Noduri geografice cu nume-capcană",
+   "members": [
+    {
+     "id": "n_moldova_reg",
+     "label": "Moldova",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.5978,
+     "degree": 29,
+     "incoming_degree": 36,
+     "description": "Regiune istorică din estul României."
+    },
+    {
+     "id": "n_mures",
+     "label": "Mureș",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.2552,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Râu care străbate Transilvania spre vest."
+    },
+    {
+     "id": "n_olt",
+     "label": "Olt",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.2416,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Râu care traversează Carpații și se varsă în Dunăre."
+    },
+    {
+     "id": "n_siret",
+     "label": "Siret",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.1566,
+     "degree": 5,
+     "incoming_degree": 4,
+     "description": "Rau cu cel mai mare bazin hidrografic din Romania, afluent al Dunarii, curge prin Moldova."
+    }
+   ]
+  },
+  {
+   "label": "Teritorii istorice",
+   "members": [
+    {
+     "id": "n_v11ist_basarabia",
+     "label": "Basarabia",
+     "node_type": "place",
+     "category": "istorie",
+     "salience": 0.61,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Regiune istorică dintre Prut și Nistru, cu rol major în istoria românilor."
+    },
+    {
+     "id": "n_transilvania",
+     "label": "Transilvania",
+     "node_type": "place",
+     "category": "istorie",
+     "salience": 0.9779,
+     "degree": 62,
+     "incoming_degree": 65,
+     "description": "Regiune istorica romaneasca."
+    },
+    {
+     "id": "n_tara_romaneasca",
+     "label": "Țara Românească",
+     "node_type": "place",
+     "category": "istorie",
+     "salience": 0.5864,
+     "degree": 19,
+     "incoming_degree": 24,
+     "description": "Stat medieval romanesc la sud de Carpati."
+    },
+    {
+     "id": "n_dacia",
+     "label": "Dacia",
+     "node_type": "place",
+     "category": "istorie",
+     "salience": 0.6911,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Regat antic locuit de geto-daci, cucerit de Imperiul Roman."
+    }
+   ]
+  },
+  {
+   "label": "Administrație și stat",
+   "members": [
+    {
+     "id": "n_judet",
+     "label": "Județ",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.3099,
+     "degree": 7,
+     "incoming_degree": 8,
+     "description": "Unitate administrativ-teritoriala de baza a Romaniei; tara are 41 de judete plus municipiul Bucuresti."
+    },
+    {
+     "id": "n_comuna",
+     "label": "Comuna",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.3424,
+     "degree": 14,
+     "incoming_degree": 13,
+     "description": "Unitate administrativ-teritoriala de baza, formata din unul sau mai multe sate."
+    },
+    {
+     "id": "n_municipiu",
+     "label": "Municipiu",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.3928,
+     "degree": 14,
+     "incoming_degree": 14,
+     "description": "Localitate urbana de rang superior in organizarea administrativa a Romaniei."
+    },
+    {
+     "id": "n_romania_stat",
+     "label": "România",
+     "node_type": "place",
+     "category": "societate",
+     "salience": 0.7986,
+     "degree": 52,
+     "incoming_degree": 54,
+     "description": "Stat national, suveran, unitar si indivizibil, organizat ca republica semiprezidentiala."
+    }
+   ]
+  },
+  {
+   "label": "Instrumente și idei de hartă",
+   "members": [
+    {
+     "id": "n_v3geo_tara",
+     "label": "țară",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.8985,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Teritoriu cu populație, granițe și autoritate politică."
+    },
+    {
+     "id": "n_v3geo_capitala",
+     "label": "capitală",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.238,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Oraș principal unde se află instituțiile centrale ale unui stat."
+    },
+    {
+     "id": "n_v3geo_granita",
+     "label": "graniță",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.2623,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Linie care desparte două state sau teritorii administrative."
+    },
+    {
+     "id": "n_v3geo_harta",
+     "label": "hartă",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.3874,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Reprezentare grafică a unei zone, cu locuri și forme de relief."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Mureș",
+   "a_group": "Noduri geografice cu nume-capcană",
+   "b": "Transilvania",
+   "b_group": "Teritorii istorice",
+   "strength": 0.82
+  },
+  {
+   "a": "Moldova",
+   "a_group": "Noduri geografice cu nume-capcană",
+   "b": "Basarabia",
+   "b_group": "Teritorii istorice",
+   "strength": 0.77
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:f1cfac96fbe69bacc0eee61f5426b707d214059a49b9ba3bed4e36394e13a7de"
+}

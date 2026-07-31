@@ -2,19 +2,20 @@
 
 _As of 2026-07-31. This file is the repository's current source of truth._
 
-_Last verified: 2026-07-31 (V45 backend 705/705, accounts 53/53, session store
+_Last verified: 2026-07-31 (V46 backend 711/711, accounts 53/53, session store
 16/16, Ruff, ranking/derived/pack/KG validators, and `git diff --check` green)._
 
-## Current outcome — V45 strict Lanț pending cleanup (ADR-0069)
+## Current outcome — V46 strict Conexiuni pending cleanup (ADR-0070)
 
-- Fresh exact dossiers cover all 107 formerly pending Lanț records. Runtime validation
-  rejects 91 for forced openings or width-one shortest-path layers; the corrected critique
-  gate now exposes their 177 failures before subjective review.
-- Independent gameplay and inventory reviews produced no unanimous promotion. The gate
-  removed 104 rejected records and retained only `lt_literatura_210`, `lt_stiinta_216`,
-  and `lt_viata_de_roman_211` pending behind concrete repair blockers.
-- Lanț remains 94 selectable boards; dormant debt shrinks from 107 to three without a
-  quota, graph edit, session change, or approved-board removal.
+- Fresh exact dossiers cover all 79 formerly pending Conexiuni records. Deterministic
+  review finds 438 failures across 76; the three lint-clean boards still fail unique
+  partition and clue-arc review.
+- Independent gameplay and inventory reviews produced no promotion candidate. The
+  conservative gate removed all 79 dormant records and retained their exact content in
+  the rejection ledger, now 122 boards / 488 groups.
+- Conexiuni remains 232 approved / 74 selectable with no pending queue. Empty shelves did
+  not force a quota promotion; the KG, graph, sessions, and approved stock are unchanged.
+- V45's strict Lanț cleanup remains: 94 selectable boards and three pending repair holds.
 - V44's 71-node Cald sau Rece feedback repair, 453-term projection, 12 aliases, 11
   non-winning projections, two promoted targets, and unique 201-target runtime remain
   unchanged.
@@ -42,23 +43,24 @@ _Last verified: 2026-07-31 (V45 backend 705/705, accounts 53/53, session store
 
 | Game | Total | Approved | Pending | Runtime eligible/preferred |
 |---|---:|---:|---:|---:|
-| Conexiuni | 311 | 232 | 79 | 74 eligible |
+| Conexiuni | 232 | 232 | 0 | 74 eligible |
 | Cald sau Rece | 217 | 204 | 13 | 201 eligible |
 | Lanțul Cuvintelor | 97 | 94 | 3 | 94 eligible |
 | Alchimie | 99 | 78 | 21 | 78 eligible |
 | Intrusul | 183 | 183 | 0 | 144 preferred |
 | Perechi | 153 | 153 | 0 | 113 preferred |
 
-Pack: **724 = 608 approved + 116 pending**, across 14 categories. The ranked original-game
+Pack: **645 = 608 approved + 37 pending**, across 14 categories. The ranked original-game
 runtime serves **447 zero-FAIL boards**. The strict derived catalog remains **336** boards
 from the frozen V38 source snapshot; its `boards` payload hash is
 `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
 Bundled KG: **2,364 nodes / 9,217 edges / 7,452 aliases / 180 puzzles**
 (`fixture-v44-contexto-common-words`).
 
-ADR-0069 resolves ADR-0065's deferred Lanț queue. Its exact 107 dossiers, deterministic
-report, two-reviewer verdicts, and audit are under `docs/reviews/v45-lant-pending-gate/`.
-Ranking scores remain editorial pre-playtest estimates, not measured fun.
+ADR-0070 resolves ADR-0065's deferred Conexiuni queue. Its exact 79 dossiers,
+deterministic report, two-reviewer verdicts, and audit are under
+`docs/reviews/v46-conexiuni-pending-gate/`. Ranking scores remain editorial pre-playtest
+estimates, not measured fun.
 
 ## Runtime, accounts, and deployment
 
@@ -86,11 +88,12 @@ git diff --check
 
 ## Next verified work
 
-- Any future Conexiuni authoring starts from the ten hidden shelves and the durable
-  demotion/rejection evidence; never force a quota or reuse a banned quad.
+- Any future Conexiuni authoring starts materially fresh from the ten hidden shelves and
+  the durable demotion/rejection evidence; never force a quota or reuse a banned quad.
 - Repair the three Lanț holds only after their named blocker changes, then generate fresh
   exact dossiers; add a generic Lanț rejection ledger before another large import.
-- The deferred Conexiuni pending-pool re-gate still requires fresh exact dossiers.
+- Re-gate the remaining 13 Cald sau Rece and 21 Alchimie pending records with fresh exact
+  evidence; improve common-word coverage through safe aliases/projections, not weak targets.
 - Run the larger anonymous six-game pilot before a seventh mode, score recalibration, or
   derived-catalog expansion (ADR-0054; generator now pins the V38 source snapshot).
 - Keep accounts off until the compliance checklist is complete.

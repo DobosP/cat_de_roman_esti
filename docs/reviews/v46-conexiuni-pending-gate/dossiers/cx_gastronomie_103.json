@@ -1,0 +1,298 @@
+{
+ "id": "cx_gastronomie_103",
+ "game": "conexiuni",
+ "category": "gastronomie",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "b925914c3f2cbeb15b421e0b655544cdb25b82bee88d93be1dbb9c7b27bd8bd5",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Poale-n brâu"
+  },
+  {
+   "check": "red_herring_budget",
+   "level": "WARN",
+   "detail": "2 contested tiles (budget <4): Brânză cu smântână, Urdă"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Bucovina gastronomică\" repeats member(s): Bucovina gastronomică"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Brânză de pus lângă mămăligă\" repeats member(s): Mămăligă"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Moldova din manual și din poveste\" repeats member(s): Moldova"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Mănăstiri pictate și culoarea lor\" reuses an inventory/selected quad (also in: cx_arta_cultura_003, cx_arta_cultura_091, cx_arta_cultura_158, cx_arta_cultura_242)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Brânză de pus lângă mămăligă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_019, cx_gastronomie_171)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Ciorbă rădăuțeană (11), Iași (16), Ion Creangă (18), Mănăstirile pictate din Bucovina (10), Moldova (9), Mănăstirea Sucevița (9), Mănăstirea Voroneț (12)"
+  },
+  {
+   "check": "generic_region_link",
+   "level": "WARN",
+   "detail": "board pairs region tiles (Moldova) with non-distinctive region-linked tiles: Ciorbă rădăuțeană (national-salience concept (0.88) with generic related_to edge to Bucovina), Mămăligă (national-salience concept (0.97) with generic related_to edge to Moldova)"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "Ciorbă rădăuțeană": "national-salience concept (0.88) with generic related_to edge to Bucovina",
+  "Mămăligă": "national-salience concept (0.97) with generic related_to edge to Moldova"
+ },
+ "fairness": {
+  "unfair_tiles": [
+   "Poale-n brâu"
+  ],
+  "contested_tiles": [
+   "Brânză cu smântână",
+   "Urdă"
+  ],
+  "engine_unfair_raw": 2
+ },
+ "groups": [
+  {
+   "label": "Bucovina gastronomică",
+   "members": [
+    {
+     "id": "n_gas_bucovina_gastronomica",
+     "label": "Bucovina gastronomică",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.4317,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Imagine culinară regională: ciorbe drese, afumături, plăcinte și ospitalitate."
+    },
+    {
+     "id": "n_gas_ciorba_radauteana",
+     "label": "Ciorbă rădăuțeană",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.8816,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Ciorbă cu pui, smântână și usturoi, asociată cu Rădăuți și Bucovina."
+    },
+    {
+     "id": "n_gas_placinte_poale_brau",
+     "label": "Poale-n brâu",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.6158,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Plăcinte moldovenești cu brânză dulce, cunoscute și ca brânzoaice."
+    },
+    {
+     "id": "n_gas_bors",
+     "label": "Borș",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.6494,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Lichid acru din tărâțe fermentate, folosit mai ales la ciorbe moldovenești."
+    }
+   ]
+  },
+  {
+   "label": "Mănăstiri pictate și culoarea lor",
+   "members": [
+    {
+     "id": "n_voronet",
+     "label": "Mănăstirea Voroneț",
+     "node_type": "place",
+     "category": "arta_cultura",
+     "salience": 0.409,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Manastire din Bucovina, vestita pentru frescele exterioare."
+    },
+    {
+     "id": "n_sucevita",
+     "label": "Mănăstirea Sucevița",
+     "node_type": "place",
+     "category": "arta_cultura",
+     "salience": 0.1718,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Manastire pictata din Bucovina."
+    },
+    {
+     "id": "n_manastiri_pictate_bucovina",
+     "label": "Mănăstirile pictate din Bucovina",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.4743,
+     "degree": 14,
+     "incoming_degree": 14,
+     "description": "Grup de manastiri cu fresce exterioare, in patrimoniul UNESCO."
+    },
+    {
+     "id": "n_albastru_de_voronet",
+     "label": "Albastru de Voroneț",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.2466,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Nuanta de albastru a frescelor de la Voronet."
+    }
+   ]
+  },
+  {
+   "label": "Brânză de pus lângă mămăligă",
+   "members": [
+    {
+     "id": "n_gas_mamaliga",
+     "label": "Mămăligă",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9666,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Preparat din mălai, servit cu brânză, smântână, sarmale, pește sau tocănițe."
+    },
+    {
+     "id": "n_gas_telemea",
+     "label": "Telemea",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.6784,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Brânză sărată românească, servită cu roșii, mămăligă sau în plăcinte."
+    },
+    {
+     "id": "n_gas_urda",
+     "label": "Urdă",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.4215,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Brânză dulce din zer, folosită în plăcinte, papanași și umpluturi."
+    },
+    {
+     "id": "n_gas_branza_smantana",
+     "label": "Brânză cu smântână",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.8999,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Combinație clasică lângă mămăligă, papanași sau ciorbe drese."
+    }
+   ]
+  },
+  {
+   "label": "Moldova din manual și din poveste",
+   "members": [
+    {
+     "id": "n_ion_creanga",
+     "label": "Ion Creangă",
+     "node_type": "person",
+     "category": "literatura",
+     "salience": 0.5583,
+     "degree": 19,
+     "incoming_degree": 18,
+     "description": "Scriitor roman, autor al Amintirilor din copilarie."
+    },
+    {
+     "id": "n_amintiri_copilarie",
+     "label": "Amintiri din copilărie",
+     "node_type": "work",
+     "category": "literatura",
+     "salience": 0.2998,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Opera autobiografica de Ion Creanga."
+    },
+    {
+     "id": "n_iasi",
+     "label": "Iași",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.5139,
+     "degree": 20,
+     "incoming_degree": 19,
+     "description": "Oras din Moldova, fosta capitala a Principatului Moldovei si important centru cultural."
+    },
+    {
+     "id": "n_moldova_reg",
+     "label": "Moldova",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.5978,
+     "degree": 29,
+     "incoming_degree": 36,
+     "description": "Regiune istorică din estul României."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Brânză cu smântână",
+   "a_group": "Brânză de pus lângă mămăligă",
+   "b": "Ciorbă rădăuțeană",
+   "b_group": "Bucovina gastronomică",
+   "strength": 0.84
+  },
+  {
+   "a": "Poale-n brâu",
+   "a_group": "Bucovina gastronomică",
+   "b": "Urdă",
+   "b_group": "Brânză de pus lângă mămăligă",
+   "strength": 0.82
+  },
+  {
+   "a": "Borș",
+   "a_group": "Bucovina gastronomică",
+   "b": "Moldova",
+   "b_group": "Moldova din manual și din poveste",
+   "strength": 0.72
+  },
+  {
+   "a": "Poale-n brâu",
+   "a_group": "Bucovina gastronomică",
+   "b": "Moldova",
+   "b_group": "Moldova din manual și din poveste",
+   "strength": 0.7
+  },
+  {
+   "a": "Brânză cu smântână",
+   "a_group": "Brânză de pus lângă mămăligă",
+   "b": "Poale-n brâu",
+   "b_group": "Bucovina gastronomică",
+   "strength": 0.65
+  },
+  {
+   "a": "Mămăligă",
+   "a_group": "Brânză de pus lângă mămăligă",
+   "b": "Moldova",
+   "b_group": "Moldova din manual și din poveste",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:c0f90850abb600f26d51f225d69dcf3b52a1949f196bcc90b1ea48d1f695de43"
+}

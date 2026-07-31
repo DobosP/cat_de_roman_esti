@@ -1,0 +1,295 @@
+{
+ "id": "cx_viata_de_roman_085",
+ "game": "conexiuni",
+ "category": "viata_de_roman",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "1fcf85cd211b1b55cb254ce8db82862c14edda6167cdf46d110fd3a3b3cc1460",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Bătaia covoarelor, Telefonul fix"
+  },
+  {
+   "check": "red_herring_budget",
+   "level": "WARN",
+   "detail": "2 contested tiles (budget <4): Caloriferul rece, Vecinul cu bormașina"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Administrează întreținerea\" mixes node_types 3+1: Asociația de proprietari[org], Avizierul de la bloc[concept], Apometrele[concept], Caloriferul rece[concept]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Se văd pe bloc\" mixes node_types 3+1: Rufele pe balcon[concept], Termopanele[concept], Bătaia covoarelor[concept], Blocul[place]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Sunete și acces\" mixes node_types 3+1: Vecinul cu bormașina[concept], Interfonul[concept], Telefonul fix[concept], Scara blocului[place]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Administrează întreținerea\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_154, cx_viata_de_roman_238)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Mașina de lângă scară\" reuses an inventory/selected quad (also in: cx_viata_de_roman_088, cx_viata_de_roman_172)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_viata_de_roman_168 (13), cx_viata_de_roman_233 (9)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Interfonul (9), Portbagajul plin (9)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Bătaia covoarelor",
+   "Telefonul fix"
+  ],
+  "contested_tiles": [
+   "Caloriferul rece",
+   "Vecinul cu bormașina"
+  ],
+  "engine_unfair_raw": 2
+ },
+ "groups": [
+  {
+   "label": "Administrează întreținerea",
+   "members": [
+    {
+     "id": "n_vdr_asociatia_proprietari",
+     "label": "Asociația de proprietari",
+     "node_type": "org",
+     "category": "viata_de_roman",
+     "salience": 0.629,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Organizația locatarilor care gestionează cheltuielile și spațiile comune ale blocului."
+    },
+    {
+     "id": "n_vdr_avizier_bloc",
+     "label": "Avizierul de la bloc",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.5019,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Panoul cu întreținerea, anunțuri și bilete pentru locatari."
+    },
+    {
+     "id": "n_vdr_apometre",
+     "label": "Apometrele",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.5271,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Contoare de apă citite lunar, sursă clasică de discuții la întreținere."
+    },
+    {
+     "id": "n_vdr_calorifer_rece",
+     "label": "Caloriferul rece",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.4731,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Semn al iernilor de apartament când căldura vine greu sau deloc."
+    }
+   ]
+  },
+  {
+   "label": "Se văd pe bloc",
+   "members": [
+    {
+     "id": "n_vdr_rufe_pe_balcon",
+     "label": "Rufele pe balcon",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.3526,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Haine puse la uscat la vedere, pe sârmă sau uscător, între ghivece și antene."
+    },
+    {
+     "id": "n_vdr_termopane",
+     "label": "Termopanele",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.6008,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Ferestre moderne cu geam dublu, simbol al renovărilor de apartament după 1990."
+    },
+    {
+     "id": "n_vdr_bataia_covoarelor",
+     "label": "Bătaia covoarelor",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.4353,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Curățarea covoarelor pe bara din spatele blocului, cu bătătorul de sârmă."
+    },
+    {
+     "id": "n_vdr_bloc",
+     "label": "Blocul",
+     "node_type": "place",
+     "category": "viata_de_roman",
+     "salience": 0.9526,
+     "degree": 19,
+     "incoming_degree": 19,
+     "description": "Clădire de locuințe colective, reper al urbanizării românești de după 1960."
+    }
+   ]
+  },
+  {
+   "label": "Sunete și acces",
+   "members": [
+    {
+     "id": "n_vdr_vecin_bormasina",
+     "label": "Vecinul cu bormașina",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.786,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Clișeul vecinului care găurește pereții exact când vrei liniște."
+    },
+    {
+     "id": "n_vdr_interfon",
+     "label": "Interfonul",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.632,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Sistemul de acces la scară, cu apeluri, coduri și uși care tot se blochează."
+    },
+    {
+     "id": "n_vdr_telefon_fix",
+     "label": "Telefonul fix",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.4054,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Telefonul de acasă folosit înainte ca mobilul să devină obișnuit."
+    },
+    {
+     "id": "n_vdr_scara_blocului",
+     "label": "Scara blocului",
+     "node_type": "place",
+     "category": "viata_de_roman",
+     "salience": 0.8591,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Spațiul comun unde se întâlnesc cutiile poștale, ecoul și anunțurile vecinilor."
+    }
+   ]
+  },
+  {
+   "label": "Mașina de lângă scară",
+   "members": [
+    {
+     "id": "n_vdr_dacia_1310",
+     "label": "Dacia 1310",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9329,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Model de autoturism produs la Mioveni, foarte prezent pe șoselele românești înainte de 2000."
+    },
+    {
+     "id": "n_vdr_parcat_pe_trotuar",
+     "label": "Parcatul pe trotuar",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.5685,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Obicei urban controversat, asociat cu lipsa locurilor de parcare."
+    },
+    {
+     "id": "n_vdr_biletel_in_parbriz",
+     "label": "Bilețelul în parbriz",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.5061,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Mesaj lăsat pe mașină pentru parcare, zgârietură sau rugăminți de mutare."
+    },
+    {
+     "id": "n_vdr_portbagaj_plin",
+     "label": "Portbagajul plin",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.6883,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Mașina încărcată cu sacoșe, borcane sau bagaje la plecarea de la rude."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Blocul",
+   "a_group": "Se văd pe bloc",
+   "b": "Scara blocului",
+   "b_group": "Sunete și acces",
+   "strength": 0.9
+  },
+  {
+   "a": "Avizierul de la bloc",
+   "a_group": "Administrează întreținerea",
+   "b": "Scara blocului",
+   "b_group": "Sunete și acces",
+   "strength": 0.82
+  },
+  {
+   "a": "Apometrele",
+   "a_group": "Administrează întreținerea",
+   "b": "Blocul",
+   "b_group": "Se văd pe bloc",
+   "strength": 0.72
+  },
+  {
+   "a": "Bătaia covoarelor",
+   "a_group": "Se văd pe bloc",
+   "b": "Scara blocului",
+   "b_group": "Sunete și acces",
+   "strength": 0.68
+  },
+  {
+   "a": "Blocul",
+   "a_group": "Se văd pe bloc",
+   "b": "Caloriferul rece",
+   "b_group": "Administrează întreținerea",
+   "strength": 0.66
+  },
+  {
+   "a": "Termopanele",
+   "a_group": "Se văd pe bloc",
+   "b": "Vecinul cu bormașina",
+   "b_group": "Sunete și acces",
+   "strength": 0.66
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:87ccac908e28ed5c7b656b482f61d7dc0038052ffbd5a02be62e9eee0a0baba9"
+}

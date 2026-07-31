@@ -1,0 +1,226 @@
+{
+ "id": "cx_geografie_113",
+ "game": "conexiuni",
+ "category": "geografie",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "a09c70d01b936e1efad8b79ad99ab3629f3ba69a3b90cb06268c7ff062b5e136",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Sport cu geografie în nume\" mixes node_types 3+1: Finala de la Sevilla[event], Eroul de la Sevilla[concept], Madrid Open[event], Wimbledon[event]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Sport cu geografie în nume\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_177)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Nume de oraș în industrie\" reuses an inventory/selected quad (also in: cx_societate_067, cx_societate_151, cx_societate_221, cx_societate_279)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Administrație care sună a hartă\" reuses an inventory/selected quad (also in: cx_societate_154)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Bonțida (9), Neversea (11), Finala de la Sevilla (14), Wimbledon (9)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 0
+ },
+ "groups": [
+  {
+   "label": "Locuri devenite muzică",
+   "members": [
+    {
+     "id": "n_muz_vama_veche",
+     "label": "Vama Veche",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.2795,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Trupă românească de rock alternativ, asociată cu refrene de vară și libertate."
+    },
+    {
+     "id": "n_muz_undeva_n_balcani",
+     "label": "Undeva-n Balcani",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.358,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Piesă Puya din 2009, hit pop-rap cu autoironie balcanică."
+    },
+    {
+     "id": "n_muz_bontida",
+     "label": "Bonțida",
+     "node_type": "place",
+     "category": "muzica",
+     "salience": 0.2836,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Localitate din județul Cluj, cunoscută în pop-culture prin Electric Castle."
+    },
+    {
+     "id": "n_muz_neversea",
+     "label": "Neversea",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.729,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Festival de muzică organizat la Constanța, asociat cu scena de pe litoral."
+    }
+   ]
+  },
+  {
+   "label": "Sport cu geografie în nume",
+   "members": [
+    {
+     "id": "n_spt_finala_sevilla_1986",
+     "label": "Finala de la Sevilla",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.9378,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Finala Steaua - Barcelona din 1986, decisă la loviturile de departajare."
+    },
+    {
+     "id": "n_spt_eroul_de_la_sevilla",
+     "label": "Eroul de la Sevilla",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.7761,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Supranumele lui Helmut Duckadam după cele patru penalty-uri apărate în 1986."
+    },
+    {
+     "id": "n_spt_madrid_open",
+     "label": "Madrid Open",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.2962,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Turneu de tenis asociat ani buni cu Ion Țiriac ca proprietar și promotor."
+    },
+    {
+     "id": "n_spt_wimbledon",
+     "label": "Wimbledon",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.7537,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Turneul de Grand Slam pe iarbă câștigat de Simona Halep în 2019."
+    }
+   ]
+  },
+  {
+   "label": "Nume de oraș în industrie",
+   "members": [
+    {
+     "id": "n_socx_craiova",
+     "label": "Craiova",
+     "node_type": "place",
+     "category": "societate",
+     "salience": 0.2406,
+     "degree": 6,
+     "incoming_degree": 7,
+     "description": "Oraș important al Olteniei, cu tradiție industrială și universitară."
+    },
+    {
+     "id": "n_socx_pitesti",
+     "label": "Pitești",
+     "node_type": "place",
+     "category": "societate",
+     "salience": 0.2259,
+     "degree": 7,
+     "incoming_degree": 8,
+     "description": "Oraș argeșean asociat puternic cu industria auto Dacia."
+    },
+    {
+     "id": "n_socx_galati",
+     "label": "Galați",
+     "node_type": "place",
+     "category": "societate",
+     "salience": 0.2345,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Oraș dunărean și port, asociat cu siderurgia românească."
+    },
+    {
+     "id": "n_socx_resita",
+     "label": "Reșița",
+     "node_type": "place",
+     "category": "societate",
+     "salience": 0.1849,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Oraș bănățean cunoscut pentru tradiția sa metalurgică."
+    }
+   ]
+  },
+  {
+   "label": "Administrație care sună a hartă",
+   "members": [
+    {
+     "id": "n_comuna",
+     "label": "Comuna",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.3424,
+     "degree": 14,
+     "incoming_degree": 13,
+     "description": "Unitate administrativ-teritoriala de baza, formata din unul sau mai multe sate."
+    },
+    {
+     "id": "n_judet",
+     "label": "Județ",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.3099,
+     "degree": 7,
+     "incoming_degree": 8,
+     "description": "Unitate administrativ-teritoriala de baza a Romaniei; tara are 41 de judete plus municipiul Bucuresti."
+    },
+    {
+     "id": "n_municipiu",
+     "label": "Municipiu",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.3928,
+     "degree": 14,
+     "incoming_degree": 14,
+     "description": "Localitate urbana de rang superior in organizarea administrativa a Romaniei."
+    },
+    {
+     "id": "n_v2soc_administratie_locala",
+     "label": "Administrație locală",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.7565,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Conducerea publică a comunelor, orașelor, municipiilor și județelor."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:b2e89951c592e4abe6805e3410dcb50e120c129cd9fbbfbcd24b2b5506a6f462"
+}

@@ -1,0 +1,480 @@
+{
+ "id": "cx_muzica_140",
+ "game": "conexiuni",
+ "category": "muzica",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "2fb7dcea99098543abbd07c76284a4197eec470e6a65623a53090de1a15fed47",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Artiști/proiecte legați de exportul pop-dance\" mixes node_types 3+1: O-Zone[org], INNA[person], Alexandra Stan[person], Edward Maya[person]"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Artiști/proiecte legați de exportul pop-dance\" <-> \"Piesele lor de export\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Artiști/proiecte legați de exportul pop-dance\" <-> \"Etichete de top și fredonat\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Piesele lor de export\" <-> \"Etichete de top și fredonat\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Artiști/proiecte legați de exportul pop-dance\" reuses an inventory/selected quad (also in: cx_muzica_053, cx_muzica_058, cx_muzica_274)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Piesele lor de export\" reuses an inventory/selected quad (also in: cx_meme_net_136, cx_muzica_056, cx_muzica_138, cx_muzica_274)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Etichete de top și fredonat\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_muzica_274)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_muzica_274 (13)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Dragostea din tei (11), Hot (9), O-Zone (10)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [
+   "Refren viral"
+  ],
+  "engine_unfair_raw": 12
+ },
+ "groups": [
+  {
+   "label": "Artiști/proiecte legați de exportul pop-dance",
+   "members": [
+    {
+     "id": "n_muz_ozone",
+     "label": "O-Zone",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.883,
+     "degree": 12,
+     "incoming_degree": 11,
+     "description": "Trio pop din Republica Moldova care a dus „Dragostea din tei” în topuri internaționale."
+    },
+    {
+     "id": "n_muz_inna",
+     "label": "INNA",
+     "node_type": "person",
+     "category": "muzica",
+     "salience": 0.8549,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Cântăreață română de dance-pop, cu succes internațional după single-ul „Hot”."
+    },
+    {
+     "id": "n_muz_alexandra_stan",
+     "label": "Alexandra Stan",
+     "node_type": "person",
+     "category": "muzica",
+     "salience": 0.6002,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Cântăreață română devenită cunoscută global cu „Mr. Saxobeat”."
+    },
+    {
+     "id": "n_muz_edward_maya",
+     "label": "Edward Maya",
+     "node_type": "person",
+     "category": "muzica",
+     "salience": 0.4185,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "DJ și producător român, cunoscut internațional pentru „Stereo Love”."
+    }
+   ]
+  },
+  {
+   "label": "Piesele lor de export",
+   "members": [
+    {
+     "id": "n_muz_dragostea_din_tei",
+     "label": "Dragostea din tei",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.9519,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Hit O-Zone din 2003, cunoscut global prin refrenul „nu mă, nu mă iei”."
+    },
+    {
+     "id": "n_muz_hot_inna",
+     "label": "Hot",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.6032,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Single Inna din 2008, piesă dance care a deschis succesul ei internațional."
+    },
+    {
+     "id": "n_muz_mr_saxobeat",
+     "label": "Mr. Saxobeat",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.8197,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Single Alexandra Stan din 2010, hit dance internațional cu riff de saxofon."
+    },
+    {
+     "id": "n_muz_stereo_love",
+     "label": "Stereo Love",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.8204,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Hit dance produs de Edward Maya, lansat în 2009 și difuzat masiv internațional."
+    }
+   ]
+  },
+  {
+   "label": "Etichete de top și fredonat",
+   "members": [
+    {
+     "id": "n_muz_pop_dance_ro",
+     "label": "Pop-dance românesc",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.8303,
+     "degree": 26,
+     "incoming_degree": 26,
+     "description": "Valul de dance românesc și moldovenesc exportat în cluburi și topuri internaționale."
+    },
+    {
+     "id": "n_v2muz_muzica_dance",
+     "label": "Muzică dance",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.9195,
+     "degree": 18,
+     "incoming_degree": 18,
+     "description": "Muzică electronică pop pentru cluburi, radio și dans."
+    },
+    {
+     "id": "n_muz_refren_viral",
+     "label": "Refren viral",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.7157,
+     "degree": 24,
+     "incoming_degree": 24,
+     "description": "Refren ușor de fredonat, memorat rapid și redistribuit masiv online sau la radio."
+    },
+    {
+     "id": "n_v2muz_hit_de_vara",
+     "label": "Hit de vară",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.7804,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Piesă pop foarte difuzată vara, cu refren ușor de reținut."
+    }
+   ]
+  },
+  {
+   "label": "Internetul care amplifică piesa",
+   "members": [
+    {
+     "id": "n_net_fenomen_viral",
+     "label": "Fenomen viral",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.8724,
+     "degree": 42,
+     "incoming_degree": 42,
+     "description": "Clip, replică sau imagine care sare repede din feed în conversațiile de zi cu zi."
+    },
+    {
+     "id": "n_v2mem_sunet_viral",
+     "label": "Sunet viral",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5319,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Fragment audio refolosit masiv în clipuri scurte și trenduri."
+    },
+    {
+     "id": "n_net_challenge_online",
+     "label": "Challenge online",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5103,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Provocare repetată de creatori și public, de obicei împinsă de algoritm."
+    },
+    {
+     "id": "n_net_internet_romanesc",
+     "label": "Internetul românesc",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.9512,
+     "degree": 34,
+     "incoming_degree": 34,
+     "description": "Spațiul online românesc, de la forumuri și bloguri la YouTube, TikTok și meme-uri."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Dragostea din tei",
+   "a_group": "Piesele lor de export",
+   "b": "O-Zone",
+   "b_group": "Artiști/proiecte legați de exportul pop-dance",
+   "strength": 0.95
+  },
+  {
+   "a": "Alexandra Stan",
+   "a_group": "Artiști/proiecte legați de exportul pop-dance",
+   "b": "Mr. Saxobeat",
+   "b_group": "Piesele lor de export",
+   "strength": 0.9
+  },
+  {
+   "a": "Alexandra Stan",
+   "a_group": "Artiști/proiecte legați de exportul pop-dance",
+   "b": "Pop-dance românesc",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.9
+  },
+  {
+   "a": "Edward Maya",
+   "a_group": "Artiști/proiecte legați de exportul pop-dance",
+   "b": "Pop-dance românesc",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.9
+  },
+  {
+   "a": "Edward Maya",
+   "a_group": "Artiști/proiecte legați de exportul pop-dance",
+   "b": "Stereo Love",
+   "b_group": "Piesele lor de export",
+   "strength": 0.9
+  },
+  {
+   "a": "INNA",
+   "a_group": "Artiști/proiecte legați de exportul pop-dance",
+   "b": "Pop-dance românesc",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.9
+  },
+  {
+   "a": "O-Zone",
+   "a_group": "Artiști/proiecte legați de exportul pop-dance",
+   "b": "Pop-dance românesc",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.9
+  },
+  {
+   "a": "Dragostea din tei",
+   "a_group": "Piesele lor de export",
+   "b": "Pop-dance românesc",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.88
+  },
+  {
+   "a": "Mr. Saxobeat",
+   "a_group": "Piesele lor de export",
+   "b": "Pop-dance românesc",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.88
+  },
+  {
+   "a": "Pop-dance românesc",
+   "a_group": "Etichete de top și fredonat",
+   "b": "Stereo Love",
+   "b_group": "Piesele lor de export",
+   "strength": 0.88
+  },
+  {
+   "a": "Hot",
+   "a_group": "Piesele lor de export",
+   "b": "INNA",
+   "b_group": "Artiști/proiecte legați de exportul pop-dance",
+   "strength": 0.86
+  },
+  {
+   "a": "Hot",
+   "a_group": "Piesele lor de export",
+   "b": "Muzică dance",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.84
+  },
+  {
+   "a": "Hot",
+   "a_group": "Piesele lor de export",
+   "b": "Pop-dance românesc",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.84
+  },
+  {
+   "a": "Mr. Saxobeat",
+   "a_group": "Piesele lor de export",
+   "b": "Muzică dance",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.84
+  },
+  {
+   "a": "Stereo Love",
+   "a_group": "Piesele lor de export",
+   "b": "Muzică dance",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.84
+  },
+  {
+   "a": "INNA",
+   "a_group": "Artiști/proiecte legați de exportul pop-dance",
+   "b": "Muzică dance",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.83
+  },
+  {
+   "a": "Edward Maya",
+   "a_group": "Artiști/proiecte legați de exportul pop-dance",
+   "b": "Muzică dance",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.82
+  },
+  {
+   "a": "Alexandra Stan",
+   "a_group": "Artiști/proiecte legați de exportul pop-dance",
+   "b": "Muzică dance",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.8
+  },
+  {
+   "a": "Alexandra Stan",
+   "a_group": "Artiști/proiecte legați de exportul pop-dance",
+   "b": "Refren viral",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.78
+  },
+  {
+   "a": "Dragostea din tei",
+   "a_group": "Piesele lor de export",
+   "b": "Hit de vară",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.78
+  },
+  {
+   "a": "Dragostea din tei",
+   "a_group": "Piesele lor de export",
+   "b": "Muzică dance",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.78
+  },
+  {
+   "a": "Edward Maya",
+   "a_group": "Artiști/proiecte legați de exportul pop-dance",
+   "b": "Refren viral",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.78
+  },
+  {
+   "a": "INNA",
+   "a_group": "Artiști/proiecte legați de exportul pop-dance",
+   "b": "Refren viral",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.78
+  },
+  {
+   "a": "O-Zone",
+   "a_group": "Artiști/proiecte legați de exportul pop-dance",
+   "b": "Muzică dance",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.78
+  },
+  {
+   "a": "O-Zone",
+   "a_group": "Artiști/proiecte legați de exportul pop-dance",
+   "b": "Refren viral",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.78
+  },
+  {
+   "a": "Dragostea din tei",
+   "a_group": "Piesele lor de export",
+   "b": "Refren viral",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.76
+  },
+  {
+   "a": "Hot",
+   "a_group": "Piesele lor de export",
+   "b": "Refren viral",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.76
+  },
+  {
+   "a": "Mr. Saxobeat",
+   "a_group": "Piesele lor de export",
+   "b": "Refren viral",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.76
+  },
+  {
+   "a": "Refren viral",
+   "a_group": "Etichete de top și fredonat",
+   "b": "Stereo Love",
+   "b_group": "Piesele lor de export",
+   "strength": 0.76
+  },
+  {
+   "a": "Hot",
+   "a_group": "Piesele lor de export",
+   "b": "Hit de vară",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.75
+  },
+  {
+   "a": "Mr. Saxobeat",
+   "a_group": "Piesele lor de export",
+   "b": "Hit de vară",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.7
+  },
+  {
+   "a": "Refren viral",
+   "a_group": "Etichete de top și fredonat",
+   "b": "Fenomen viral",
+   "b_group": "Internetul care amplifică piesa",
+   "strength": 0.68
+  },
+  {
+   "a": "Stereo Love",
+   "a_group": "Piesele lor de export",
+   "b": "Hit de vară",
+   "b_group": "Etichete de top și fredonat",
+   "strength": 0.68
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:5c091646764410314f025271e6ba415170d002ca0245198b728ffb07eef8871c"
+}

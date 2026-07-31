@@ -1,0 +1,221 @@
+{
+ "id": "cx_istorie_256",
+ "game": "conexiuni",
+ "category": "istorie",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "a0d71cb1c50d686f90244b1a687771a22f0b65c3d8791e620cf6debb5d96deaf",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Cercul Reginei Maria\" reuses an inventory/selected quad (also in: cx_geografie_178, cx_istorie_117, cx_istorie_183, cx_personalitati_275)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Instituții academice și monetare\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_limba_261, cx_stiinta_231)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Repere patrimoniale culturale\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_006, cx_geografie_252)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Academia Română (19), Ansamblul monumental de la Târgu Jiu (10), Ateneul Român (17), Banca Națională a României (9), Muzeul Național Brukenthal (15), Regina Maria (9), Universitatea Alexandru Ioan Cuza din Iași (9), Universitatea din București (13), Mănăstirea Voroneț (12)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 0
+ },
+ "groups": [
+  {
+   "label": "Nume istorice devenite stil sau culoare",
+   "members": [
+    {
+     "id": "n_istx_constantin_brancoveanu",
+     "label": "Constantin Brâncoveanu",
+     "node_type": "person",
+     "category": "istorie",
+     "salience": 0.2866,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Domn al Țării Românești între 1688 și 1714, asociat cu stilul brâncovenesc și martiriul de la Istanbul."
+    },
+    {
+     "id": "n_constantin_brancoveanu_stil",
+     "label": "Stilul brâncovenesc",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.1733,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Stil arhitectural romanesc dezvoltat sub domnia lui Constantin Brancoveanu la sfarsitul secolului XVII."
+    },
+    {
+     "id": "n_voronet",
+     "label": "Mănăstirea Voroneț",
+     "node_type": "place",
+     "category": "arta_cultura",
+     "salience": 0.409,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Manastire din Bucovina, vestita pentru frescele exterioare."
+    },
+    {
+     "id": "n_albastru_de_voronet",
+     "label": "Albastru de Voroneț",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.2466,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Nuanta de albastru a frescelor de la Voronet."
+    }
+   ]
+  },
+  {
+   "label": "Cercul Reginei Maria",
+   "members": [
+    {
+     "id": "n_perx_regina_maria",
+     "label": "Regina Maria",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.9245,
+     "degree": 20,
+     "incoming_degree": 20,
+     "description": "Regină a României, figură publică majoră în Primul Război Mondial și în diplomația unirii."
+    },
+    {
+     "id": "n_perx_memorii_regina_maria",
+     "label": "Povestea vieții mele",
+     "node_type": "work",
+     "category": "personalitati",
+     "salience": 0.2487,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Memoriile Reginei Maria, una dintre cele mai cunoscute scrieri autobiografice regale românești."
+    },
+    {
+     "id": "n_perx_castelul_pelisor",
+     "label": "Castelul Pelișor",
+     "node_type": "place",
+     "category": "personalitati",
+     "salience": 0.1788,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Reședință regală de la Sinaia, strâns asociată cu Regina Maria."
+    },
+    {
+     "id": "n_perx_balcic",
+     "label": "Balcic",
+     "node_type": "place",
+     "category": "personalitati",
+     "salience": 0.1702,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Oraș de la Marea Neagră, legat de reședința preferată a Reginei Maria."
+    }
+   ]
+  },
+  {
+   "label": "Instituții academice și monetare",
+   "members": [
+    {
+     "id": "n_academia_romana",
+     "label": "Academia Română",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.7002,
+     "degree": 33,
+     "incoming_degree": 38,
+     "description": "Cel mai inalt for de stiinta si cultura din Romania, infiintat in 1866."
+    },
+    {
+     "id": "n_bnr",
+     "label": "Banca Națională a României",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.3185,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Banca centrala a Romaniei, infiintata in 1880, care emite moneda nationala si conduce politica monetara."
+    },
+    {
+     "id": "n_universitatea_bucuresti",
+     "label": "Universitatea din București",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.5768,
+     "degree": 21,
+     "incoming_degree": 22,
+     "description": "Una dintre cele mai vechi si prestigioase universitati din Romania, infiintata in 1864."
+    },
+    {
+     "id": "n_socx_universitatea_cuza_iasi",
+     "label": "Universitatea Alexandru Ioan Cuza din Iași",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.2588,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Prima universitate modernă a României, fondată la Iași în 1860."
+    }
+   ]
+  },
+  {
+   "label": "Repere patrimoniale culturale",
+   "members": [
+    {
+     "id": "n_columna_traian",
+     "label": "Columna lui Traian",
+     "node_type": "work",
+     "category": "istorie",
+     "salience": 0.2482,
+     "degree": 11,
+     "incoming_degree": 10,
+     "description": "Monument roman care infatiseaza razboaiele cu dacii."
+    },
+    {
+     "id": "n_ansamblul_targu_jiu",
+     "label": "Ansamblul monumental de la Târgu Jiu",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.316,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Ansamblul sculptural creat de Brancusi la Targu Jiu."
+    },
+    {
+     "id": "n_ateneul_roman",
+     "label": "Ateneul Român",
+     "node_type": "place",
+     "category": "arta_cultura",
+     "salience": 0.6749,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Sala de concerte din Bucuresti inaugurata in 1888, principala scena a Festivalului George Enescu."
+    },
+    {
+     "id": "n_muzeul_brukenthal",
+     "label": "Muzeul Național Brukenthal",
+     "node_type": "org",
+     "category": "arta_cultura",
+     "salience": 0.3934,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Muzeu de arta din Sibiu, deschis in 1817, unul dintre cele mai vechi muzee din Europa."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:d89ba5b67be7a2f4bf8c9b815b67028789a78552b8b4004ffcb7b33734c00955"
+}

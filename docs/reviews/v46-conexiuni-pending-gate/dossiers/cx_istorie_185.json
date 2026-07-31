@@ -1,0 +1,263 @@
+{
+ "id": "cx_istorie_185",
+ "game": "conexiuni",
+ "category": "istorie",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "6b3dddce7af94ff49d7652511d2e574df03d1e6edc3ea909f9fae6b8f8131cdf",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Epoca în care și coada era instituție\" repeats member(s): Coada"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Statul la costum\" mixes node_types 3+1: Regatul României[org], Constituția României[work], Parlamentul României[org], Guvernul României[org]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"1918 și after-party-ul juridic\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_030, cx_personalitati_063)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Epoca în care și coada era instituție\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_118)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Statul la costum\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_238)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Organizații internaționale, nu echipe de cupă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_068, cx_societate_153, cx_societate_216)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_personalitati_063 (9)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Constituția României (9), Ferdinand I (13), Guvernul României (9), Marea Unire 1918 (14), Parlamentul României (11), Societatea Națiunilor (9)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 1
+ },
+ "groups": [
+  {
+   "label": "1918 și after-party-ul juridic",
+   "members": [
+    {
+     "id": "n_marea_unire_1918",
+     "label": "Marea Unire 1918",
+     "node_type": "event",
+     "category": "istorie",
+     "salience": 0.6014,
+     "degree": 28,
+     "incoming_degree": 29,
+     "description": "Unirea Transilvaniei, Basarabiei si Bucovinei cu Romania."
+    },
+    {
+     "id": "n_alba_iulia",
+     "label": "Alba Iulia",
+     "node_type": "place",
+     "category": "istorie",
+     "salience": 0.3892,
+     "degree": 10,
+     "incoming_degree": 11,
+     "description": "Oras al marilor uniri (1600, 1918)."
+    },
+    {
+     "id": "n_ferdinand_i",
+     "label": "Ferdinand I",
+     "node_type": "person",
+     "category": "istorie",
+     "salience": 0.2881,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Rege al Romaniei in timpul Marii Uniri (1914-1927)."
+    },
+    {
+     "id": "n_tratatul_trianon",
+     "label": "Tratatul de la Trianon",
+     "node_type": "event",
+     "category": "istorie",
+     "salience": 0.406,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Tratat de pace semnat în 1920 între Puterile Aliate și Asociate și Ungaria, care a stabilit noile frontiere ale Ungariei, inclusiv granița cu România."
+    }
+   ]
+  },
+  {
+   "label": "Epoca în care și coada era instituție",
+   "members": [
+    {
+     "id": "n_comunismul_in_romania",
+     "label": "Comunismul în România",
+     "node_type": "concept",
+     "category": "istorie",
+     "salience": 0.5259,
+     "degree": 35,
+     "incoming_degree": 36,
+     "description": "Regimul comunist instaurat dupa 1947, condus in final de Nicolae Ceausescu pana in 1989."
+    },
+    {
+     "id": "n_nicolae_ceausescu",
+     "label": "Nicolae Ceaușescu",
+     "node_type": "person",
+     "category": "istorie",
+     "salience": 0.3448,
+     "degree": 9,
+     "incoming_degree": 10,
+     "description": "Lider comunist al Romaniei (1965-1989), inlaturat de la putere in Revolutia din 1989."
+    },
+    {
+     "id": "n_revolutia_1989",
+     "label": "Revoluția din 1989",
+     "node_type": "event",
+     "category": "istorie",
+     "salience": 0.6188,
+     "degree": 26,
+     "incoming_degree": 26,
+     "description": "Revolutia care a inlaturat regimul comunist din Romania."
+    },
+    {
+     "id": "n_v3via_coada",
+     "label": "Coada",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.6248,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Așteptarea la rând pentru acte, plăți sau servicii."
+    }
+   ]
+  },
+  {
+   "label": "Statul la costum",
+   "members": [
+    {
+     "id": "n_regatul_romaniei",
+     "label": "Regatul României",
+     "node_type": "org",
+     "category": "istorie",
+     "salience": 0.5906,
+     "degree": 22,
+     "incoming_degree": 22,
+     "description": "Monarhia romana proclamata in 1881, cu Carol I primul rege; a durat pana in 1947."
+    },
+    {
+     "id": "n_constitutia",
+     "label": "Constituția României",
+     "node_type": "work",
+     "category": "societate",
+     "salience": 0.6707,
+     "degree": 19,
+     "incoming_degree": 20,
+     "description": "Legea fundamentala a statului roman, adoptata in 1991 si revizuita in 2003."
+    },
+    {
+     "id": "n_parlamentul_romaniei",
+     "label": "Parlamentul României",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.6026,
+     "degree": 11,
+     "incoming_degree": 13,
+     "description": "Organul reprezentativ suprem si unica autoritate legiuitoare, format din Camera Deputatilor si Senat."
+    },
+    {
+     "id": "n_guvernul",
+     "label": "Guvernul României",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.4108,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Autoritatea executiva care realizeaza politica interna si externa a tarii."
+    }
+   ]
+  },
+  {
+   "label": "Organizații internaționale, nu echipe de cupă",
+   "members": [
+    {
+     "id": "n_uniunea_europeana",
+     "label": "Uniunea Europeană",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.3003,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Uniune politica si economica din care Romania face parte din 2007."
+    },
+    {
+     "id": "n_nato",
+     "label": "NATO",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.2598,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Alianta militara nord-atlantica la care Romania a aderat in 2004."
+    },
+    {
+     "id": "n_onu",
+     "label": "ONU",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.2922,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Organizatia Natiunilor Unite, din care Romania face parte din 1955."
+    },
+    {
+     "id": "n_perx_liga_natiunilor",
+     "label": "Societatea Națiunilor",
+     "node_type": "org",
+     "category": "personalitati",
+     "salience": 0.2062,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Organizație internațională interbelică, precursoare simbolică a ONU."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Ferdinand I",
+   "a_group": "1918 și after-party-ul juridic",
+   "b": "Regatul României",
+   "b_group": "Statul la costum",
+   "strength": 0.84
+  },
+  {
+   "a": "Marea Unire 1918",
+   "a_group": "1918 și after-party-ul juridic",
+   "b": "Regatul României",
+   "b_group": "Statul la costum",
+   "strength": 0.75
+  },
+  {
+   "a": "Constituția României",
+   "a_group": "Statul la costum",
+   "b": "Revoluția din 1989",
+   "b_group": "Epoca în care și coada era instituție",
+   "strength": 0.7
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:219045a43ee7417ae73df004ef3894f8fecd4bb24c48b44dc34a6a3358c1c0ef"
+}

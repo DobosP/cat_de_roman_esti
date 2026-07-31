@@ -1,0 +1,358 @@
+{
+ "id": "cx_meme_net_136",
+ "game": "conexiuni",
+ "category": "meme_net",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "21304738aafeee8687d4aa033e7c67c58c20b0bc0183f518d75bd984c58ba263",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Dragostea din tei, Hot, Mr. Saxobeat, Refren viral, Stereo Love"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Refren de vară și club\" repeats member(s): Refren de vară"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Refren de vară și club\" mixes node_types 2+2: Vara nu dorm[work], Undeva-n Balcani[work], Hit de vară[concept], Refren de vară[concept]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Festivalul ca multiplicator\" mixes node_types 3+1: Untold[event], Neversea[event], Electric Castle[event], Bonțida[place]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Hituri românești cu export viral\" reuses an inventory/selected quad (also in: cx_muzica_056, cx_muzica_138, cx_muzica_140, cx_muzica_274)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Festivalul ca multiplicator\" reuses an inventory/selected quad (also in: cx_meme_net_203)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Remixul scurt din feed\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_muzica_274)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_meme_net_203 (11), cx_muzica_138 (9), cx_muzica_274 (9), cx_muzica_056 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Bonțida (9), Dragostea din tei (11), Electric Castle (10), Hot (9), Neversea (11), Untold (10), TikTok România (10)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Dragostea din tei",
+   "Hot",
+   "Mr. Saxobeat",
+   "Refren viral",
+   "Stereo Love"
+  ],
+  "contested_tiles": [],
+  "engine_unfair_raw": 8
+ },
+ "groups": [
+  {
+   "label": "Hituri românești cu export viral",
+   "members": [
+    {
+     "id": "n_muz_dragostea_din_tei",
+     "label": "Dragostea din tei",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.9519,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Hit O-Zone din 2003, cunoscut global prin refrenul „nu mă, nu mă iei”."
+    },
+    {
+     "id": "n_muz_mr_saxobeat",
+     "label": "Mr. Saxobeat",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.8197,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Single Alexandra Stan din 2010, hit dance internațional cu riff de saxofon."
+    },
+    {
+     "id": "n_muz_stereo_love",
+     "label": "Stereo Love",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.8204,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Hit dance produs de Edward Maya, lansat în 2009 și difuzat masiv internațional."
+    },
+    {
+     "id": "n_muz_hot_inna",
+     "label": "Hot",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.6032,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Single Inna din 2008, piesă dance care a deschis succesul ei internațional."
+    }
+   ]
+  },
+  {
+   "label": "Refren de vară și club",
+   "members": [
+    {
+     "id": "n_muz_vara_nu_dorm",
+     "label": "Vara nu dorm",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.5565,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Hit Connect-R din 2012, refren de vară intrat rapid în cultura pop."
+    },
+    {
+     "id": "n_muz_undeva_n_balcani",
+     "label": "Undeva-n Balcani",
+     "node_type": "work",
+     "category": "muzica",
+     "salience": 0.358,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Piesă Puya din 2009, hit pop-rap cu autoironie balcanică."
+    },
+    {
+     "id": "n_v2muz_hit_de_vara",
+     "label": "Hit de vară",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.7804,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Piesă pop foarte difuzată vara, cu refren ușor de reținut."
+    },
+    {
+     "id": "n_v2muz_refren_de_vara",
+     "label": "Refren de vară",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.5715,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Refren luminos, simplu și repetat în piese estivale."
+    }
+   ]
+  },
+  {
+   "label": "Festivalul ca multiplicator",
+   "members": [
+    {
+     "id": "n_muz_untold",
+     "label": "Untold",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.8746,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Festival muzical major organizat la Cluj-Napoca, cu artiști EDM și pop internaționali."
+    },
+    {
+     "id": "n_muz_neversea",
+     "label": "Neversea",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.729,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Festival de muzică organizat la Constanța, asociat cu scena de pe litoral."
+    },
+    {
+     "id": "n_muz_electric_castle",
+     "label": "Electric Castle",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.6862,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Festival muzical organizat la Bonțida, lângă Castelul Bánffy."
+    },
+    {
+     "id": "n_muz_bontida",
+     "label": "Bonțida",
+     "node_type": "place",
+     "category": "muzica",
+     "salience": 0.2836,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Localitate din județul Cluj, cunoscută în pop-culture prin Electric Castle."
+    }
+   ]
+  },
+  {
+   "label": "Remixul scurt din feed",
+   "members": [
+    {
+     "id": "n_v2mem_sunet_viral",
+     "label": "Sunet viral",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5319,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Fragment audio refolosit masiv în clipuri scurte și trenduri."
+    },
+    {
+     "id": "n_muz_refren_viral",
+     "label": "Refren viral",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.7157,
+     "degree": 24,
+     "incoming_degree": 24,
+     "description": "Refren ușor de fredonat, memorat rapid și redistribuit masiv online sau la radio."
+    },
+    {
+     "id": "n_net_tiktok_ro",
+     "label": "TikTok România",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.8345,
+     "degree": 46,
+     "incoming_degree": 46,
+     "description": "Zona românească de clipuri scurte, trenduri, sunete refolosite și glume comprimate."
+    },
+    {
+     "id": "n_v2mem_clip_scurt",
+     "label": "Clip scurt",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.8851,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Video foarte scurt, făcut pentru scroll rapid pe platforme sociale."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Refren viral",
+   "a_group": "Remixul scurt din feed",
+   "b": "Hit de vară",
+   "b_group": "Refren de vară și club",
+   "strength": 0.83
+  },
+  {
+   "a": "Refren viral",
+   "a_group": "Remixul scurt din feed",
+   "b": "Refren de vară",
+   "b_group": "Refren de vară și club",
+   "strength": 0.82
+  },
+  {
+   "a": "Dragostea din tei",
+   "a_group": "Hituri românești cu export viral",
+   "b": "Hit de vară",
+   "b_group": "Refren de vară și club",
+   "strength": 0.78
+  },
+  {
+   "a": "Dragostea din tei",
+   "a_group": "Hituri românești cu export viral",
+   "b": "Refren viral",
+   "b_group": "Remixul scurt din feed",
+   "strength": 0.76
+  },
+  {
+   "a": "Hot",
+   "a_group": "Hituri românești cu export viral",
+   "b": "Refren viral",
+   "b_group": "Remixul scurt din feed",
+   "strength": 0.76
+  },
+  {
+   "a": "Mr. Saxobeat",
+   "a_group": "Hituri românești cu export viral",
+   "b": "Refren viral",
+   "b_group": "Remixul scurt din feed",
+   "strength": 0.76
+  },
+  {
+   "a": "Refren viral",
+   "a_group": "Remixul scurt din feed",
+   "b": "Stereo Love",
+   "b_group": "Hituri românești cu export viral",
+   "strength": 0.76
+  },
+  {
+   "a": "Refren viral",
+   "a_group": "Remixul scurt din feed",
+   "b": "Vara nu dorm",
+   "b_group": "Refren de vară și club",
+   "strength": 0.76
+  },
+  {
+   "a": "Hot",
+   "a_group": "Hituri românești cu export viral",
+   "b": "Hit de vară",
+   "b_group": "Refren de vară și club",
+   "strength": 0.75
+  },
+  {
+   "a": "Dragostea din tei",
+   "a_group": "Hituri românești cu export viral",
+   "b": "Refren de vară",
+   "b_group": "Refren de vară și club",
+   "strength": 0.74
+  },
+  {
+   "a": "Hot",
+   "a_group": "Hituri românești cu export viral",
+   "b": "Refren de vară",
+   "b_group": "Refren de vară și club",
+   "strength": 0.72
+  },
+  {
+   "a": "Mr. Saxobeat",
+   "a_group": "Hituri românești cu export viral",
+   "b": "Hit de vară",
+   "b_group": "Refren de vară și club",
+   "strength": 0.7
+  },
+  {
+   "a": "Stereo Love",
+   "a_group": "Hituri românești cu export viral",
+   "b": "Hit de vară",
+   "b_group": "Refren de vară și club",
+   "strength": 0.68
+  },
+  {
+   "a": "Neversea",
+   "a_group": "Festivalul ca multiplicator",
+   "b": "Hit de vară",
+   "b_group": "Refren de vară și club",
+   "strength": 0.66
+  },
+  {
+   "a": "Refren viral",
+   "a_group": "Remixul scurt din feed",
+   "b": "Undeva-n Balcani",
+   "b_group": "Refren de vară și club",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:f4583b783fdf627d21061ab597e7acc6ce281af508149e24d37c3cbf868feece"
+}

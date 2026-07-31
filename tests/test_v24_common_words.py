@@ -7,6 +7,7 @@ shared contract instead of duplicating a long vocabulary list in two places.
 
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import json
 import math
@@ -31,6 +32,9 @@ _PACKAGE_KG = _ROOT / "cat_de_roman_esti" / "fixtures" / "kg_sample.json"
 _TEST_KG = _ROOT / "tests" / "fixtures" / "kg_sample.json"
 _PACKAGE_PACK = _ROOT / "cat_de_roman_esti" / "fixtures" / "games_pack.json"
 _TEST_PACK = _ROOT / "tests" / "fixtures" / "games_pack.json"
+_TOMBSTONES = (
+    _ROOT / "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json"
+)
 _V45_REJECTED_LANT = {
     "lt_gastronomie_212",
     "lt_gastronomie_218",
@@ -40,6 +44,13 @@ _V45_REJECTED_LANT = {
     "lt_viata_de_roman_214",
     "lt_viata_de_roman_217",
 }
+_V46_REJECTED_CONEXIUNI = {
+    "cx_gastronomie_292",
+    "cx_viata_de_roman_293",
+    "cx_societate_294",
+    "cx_societate_295",
+}
+_RETIRED_GAME_ITEMS = _V45_REJECTED_LANT | _V46_REJECTED_CONEXIUNI
 
 
 def _load_data_module():
@@ -284,7 +295,7 @@ def test_v24_declared_game_candidates_are_present_pending_and_playable():
         for item_id in item_ids:
             found = actual.get(item_id)
             if found is None:
-                if item_id in _V45_REJECTED_LANT:
+                if item_id in _RETIRED_GAME_ITEMS:
                     continue
                 failures.append(f"{expected_game}:{item_id}: missing from games pack")
                 continue
@@ -303,7 +314,7 @@ def test_v24_declared_game_candidates_are_present_pending_and_playable():
             failures.extend(f"{expected_game}:{item_id}: {error}" for error in errors)
 
     assert not failures, "\n" + "\n".join(failures)
-    assert not (_V45_REJECTED_LANT & set(actual))
+    assert not (_RETIRED_GAME_ITEMS & set(actual))
 
 
 def test_v24_fixture_and_pack_mirrors_are_byte_identical():
@@ -323,7 +334,7 @@ def _declared_records() -> dict[str, list[dict]]:
 def test_v24_game_wave_has_the_reviewed_per_game_sizes():
     records = _declared_records()
     assert {game: len(items) for game, items in records.items()} == {
-        "conexiuni": 4,
+        "conexiuni": 0,
         "contexto": 8,
         "lant": 1,
         "alchimie": 6,
@@ -407,21 +418,22 @@ def test_v24_alchimie_recipes_are_sparse_bounded_and_distinct():
                 assert 1 <= len(fresh) <= 3
 
 
-def test_v24_conexiuni_boards_are_familiar_unique_and_type_coherent():
-    svc = _fixture_service()
-    records = _declared_records()["conexiuni"]
-    benchmark = {normalize(str(term)) for term in DATA.BEGINNER_BENCHMARK}
-    all_tiles: list[str] = []
+def test_v24_conexiuni_candidates_are_retired_with_exact_tombstones():
+    pack = json.loads(_PACKAGE_PACK.read_text(encoding="utf-8"))
+    runtime_ids = {record["id"] for record in pack["conexiuni"]}
+    tombstones = json.loads(_TOMBSTONES.read_text(encoding="utf-8"))["items"]
+    records = {record["id"]: record for record in DATA.GAME_ITEMS["conexiuni"]}
 
-    for record in records:
-        tiles = [node_id for group in record["groups"].values() for node_id in group]
-        familiar = sum(normalize(svc.label(node_id)) in benchmark for node_id in tiles)
-        assert len(tiles) == len(set(tiles)) == 16
-        assert familiar >= 15
-        assert all(
-            len({svc.node(node_id).node_type for node_id in group}) == 1
-            for group in record["groups"].values()
-        )
-        all_tiles.extend(tiles)
-
-    assert len(all_tiles) == len(set(all_tiles)) == 64
+    assert set(records) == _V46_REJECTED_CONEXIUNI
+    assert _V46_REJECTED_CONEXIUNI.isdisjoint(runtime_ids)
+    assert _V46_REJECTED_CONEXIUNI <= set(tombstones)
+    for item_id, record in records.items():
+        canonical = json.dumps(
+            record,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode()
+        assert tombstones[item_id]["record_sha256"] == hashlib.sha256(
+            canonical
+        ).hexdigest()

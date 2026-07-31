@@ -1,0 +1,312 @@
+{
+ "id": "cx_sport_223",
+ "game": "conexiuni",
+ "category": "sport",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "47d6cdb5c196a5529f1dbcf1635180d9f47ac0ebf2d3211f93f4256a9ce964c2",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Bazin olimpic, Handbal, Meci, Patru penalty-uri apărate, Primul 10 perfect, Volei, fileu, sală"
+  },
+  {
+   "check": "red_herring_budget",
+   "level": "WARN",
+   "detail": "2 contested tiles (budget <4): Bârna, Paralele inegale"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Sună a masă de după meci, dar nu e\" repeats member(s): Meci"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Sună a masă de după meci, dar nu e\" mixes node_types 3+1: Meci[concept], fileu[concept], Cupa Campionilor 1986[event], sală[concept]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Cifre care au devenit legendă\" mixes node_types 3+1: Primul 10 perfect[concept], Primul număr 1 ATP[concept], Patru penalty-uri apărate[concept], Recordul la 100 m liber din 2022[event]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Locuri pe care le vezi, nu le mănânci\" reuses an inventory/selected quad (also in: cx_sport_226)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Primul 10 perfect (10), Patru penalty-uri apărate (9)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Bazin olimpic",
+   "Handbal",
+   "Meci",
+   "Patru penalty-uri apărate",
+   "Primul 10 perfect",
+   "Volei",
+   "fileu",
+   "sală"
+  ],
+  "contested_tiles": [
+   "Bârna",
+   "Paralele inegale"
+  ],
+  "engine_unfair_raw": 10
+ },
+ "groups": [
+  {
+   "label": "Sună a masă de după meci, dar nu e",
+   "members": [
+    {
+     "id": "n_v3spo_meci",
+     "label": "Meci",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.9709,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Întâlnire sportivă între jucători sau echipe, cu scor și reguli."
+    },
+    {
+     "id": "n_v4spo_fileu",
+     "label": "fileu",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.4401,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Plasă întinsă care separă terenul la sporturi precum tenisul și voleiul."
+    },
+    {
+     "id": "n_spt_cupa_campionilor_1986",
+     "label": "Cupa Campionilor 1986",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.8886,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Trofeul european cucerit de Steaua București după finala de la Sevilla."
+    },
+    {
+     "id": "n_v4spo_sala",
+     "label": "sală",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.6791,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Spațiu interior folosit pentru antrenamente și meciuri."
+    }
+   ]
+  },
+  {
+   "label": "Mingea se plimbă prin sală",
+   "members": [
+    {
+     "id": "n_v2spo_baschet",
+     "label": "Baschet",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.9357,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Sport de echipă în care mingea trebuie aruncată prin coș."
+    },
+    {
+     "id": "n_v3spo_handbal",
+     "label": "Handbal",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.8007,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Sport de echipă în care mingea este pasată cu mâna și aruncată la poartă."
+    },
+    {
+     "id": "n_v3spo_volei",
+     "label": "Volei",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.7494,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Sport de echipă cu fileu, în care mingea este trimisă peste plasă."
+    },
+    {
+     "id": "n_spt_nba",
+     "label": "NBA",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.3904,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Liga nord-americană de baschet în care a jucat Gheorghe Mureșan."
+    }
+   ]
+  },
+  {
+   "label": "Cifre care au devenit legendă",
+   "members": [
+    {
+     "id": "n_spt_nadia_zecele_perfect",
+     "label": "Primul 10 perfect",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.9484,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Nota 10 obținută de Nadia Comăneci la Montreal 1976, premieră olimpică în gimnastică."
+    },
+    {
+     "id": "n_spt_nastase_numarul_1",
+     "label": "Primul număr 1 ATP",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.5079,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Ilie Năstase a fost primul lider al clasamentului computerizat ATP, în 1973."
+    },
+    {
+     "id": "n_spt_patru_penaltyuri",
+     "label": "Patru penalty-uri apărate",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.8162,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Performanța unică a lui Duckadam în finala Cupei Campionilor Europeni din 1986."
+    },
+    {
+     "id": "n_spt_record_100m_liber_2022",
+     "label": "Recordul la 100 m liber din 2022",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.6218,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Performanța de 46,86 s cu care David Popovici a stabilit recordul mondial la Roma în 2022; recordul a fost depășit în 2024."
+    }
+   ]
+  },
+  {
+   "label": "Locuri pe care le vezi, nu le mănânci",
+   "members": [
+    {
+     "id": "n_v2spo_stadion_fotbal",
+     "label": "Stadion de fotbal",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.838,
+     "degree": 9,
+     "incoming_degree": 10,
+     "description": "Arenă cu teren, porți și tribune pentru meciuri de fotbal."
+    },
+    {
+     "id": "n_spt_bazin_olimpic",
+     "label": "Bazin olimpic",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.2765,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Spațiul standard al înotului de performanță, scena probelor de liber."
+    },
+    {
+     "id": "n_spt_barna_gimnastica",
+     "label": "Bârna",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.3124,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Aparat de gimnastică artistică pe care România a construit multe amintiri olimpice."
+    },
+    {
+     "id": "n_spt_paralele_gimnastica",
+     "label": "Paralele inegale",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.4257,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Aparatul la care Nadia Comăneci a primit primul 10 perfect la Montreal."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Primul 10 perfect",
+   "a_group": "Cifre care au devenit legendă",
+   "b": "Paralele inegale",
+   "b_group": "Locuri pe care le vezi, nu le mănânci",
+   "strength": 0.95
+  },
+  {
+   "a": "Cupa Campionilor 1986",
+   "a_group": "Sună a masă de după meci, dar nu e",
+   "b": "Patru penalty-uri apărate",
+   "b_group": "Cifre care au devenit legendă",
+   "strength": 0.9
+  },
+  {
+   "a": "Volei",
+   "a_group": "Mingea se plimbă prin sală",
+   "b": "fileu",
+   "b_group": "Sună a masă de după meci, dar nu e",
+   "strength": 0.86
+  },
+  {
+   "a": "Baschet",
+   "a_group": "Mingea se plimbă prin sală",
+   "b": "sală",
+   "b_group": "Sună a masă de după meci, dar nu e",
+   "strength": 0.78
+  },
+  {
+   "a": "Bazin olimpic",
+   "a_group": "Locuri pe care le vezi, nu le mănânci",
+   "b": "Recordul la 100 m liber din 2022",
+   "b_group": "Cifre care au devenit legendă",
+   "strength": 0.78
+  },
+  {
+   "a": "Handbal",
+   "a_group": "Mingea se plimbă prin sală",
+   "b": "sală",
+   "b_group": "Sună a masă de după meci, dar nu e",
+   "strength": 0.78
+  },
+  {
+   "a": "Volei",
+   "a_group": "Mingea se plimbă prin sală",
+   "b": "sală",
+   "b_group": "Sună a masă de după meci, dar nu e",
+   "strength": 0.76
+  },
+  {
+   "a": "Bârna",
+   "a_group": "Locuri pe care le vezi, nu le mănânci",
+   "b": "Primul 10 perfect",
+   "b_group": "Cifre care au devenit legendă",
+   "strength": 0.7
+  },
+  {
+   "a": "Meci",
+   "a_group": "Sună a masă de după meci, dar nu e",
+   "b": "Volei",
+   "b_group": "Mingea se plimbă prin sală",
+   "strength": 0.7
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:210b76c8e3812d3fd9959629dabef6b7bad8106f9deb94165e56b588e2250cb1"
+}

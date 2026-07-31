@@ -1,0 +1,358 @@
+{
+ "id": "cx_muzica_272",
+ "game": "conexiuni",
+ "category": "muzica",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "bcdd02be353624220d5ef9e61995424f707b9324742f3e6285953bfcbeb1e8f1",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "board_type_shortcut",
+   "level": "WARN",
+   "detail": "all four groups are node-type homogeneous and expose 3 distinct group types"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Rock clasic și hard\" <-> \"Semnele chitării\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Rock clasic și hard\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_muzica_053, cx_muzica_055, cx_muzica_142, cx_muzica_205)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Semnele chitării\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_muzica_142)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Orașe trase în legendă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_001, cx_geografie_023, cx_geografie_177, cx_limba_261, cx_societate_065, cx_societate_066, cx_societate_154, cx_societate_221, cx_societate_279)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Brașov (12), București (24), Cluj-Napoca (19), Timișoara (10)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 12
+ },
+ "groups": [
+  {
+   "label": "Rock clasic și hard",
+   "members": [
+    {
+     "id": "n_muz_phoenix",
+     "label": "Phoenix",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.6918,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Trupă românească de rock, reper al folk-rockului și al mitologiei muzicale autohtone."
+    },
+    {
+     "id": "n_muz_cargo",
+     "label": "Cargo",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.6834,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Trupă românească de rock din Timișoara, celebră pentru piesa „Ploaia”."
+    },
+    {
+     "id": "n_muz_iris",
+     "label": "Iris",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.5511,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Trupă românească de rock, cunoscută pentru balade și concerte de arenă."
+    },
+    {
+     "id": "n_v11muz_sfinx",
+     "label": "Sfinx",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.52,
+     "degree": 4,
+     "incoming_degree": 3,
+     "description": "Trupă rock progresivă, reper al scenei românești din anii 60-80."
+    }
+   ]
+  },
+  {
+   "label": "Pop-rock și alternative",
+   "members": [
+    {
+     "id": "n_v11muz_compact",
+     "label": "Compact",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.66,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Trupă pop-rock pornită la Cluj-Napoca, cunoscută pentru balade de stadion."
+    },
+    {
+     "id": "n_v11muz_vita_de_vie",
+     "label": "Vița de Vie",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.59,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Trupă alternative rock din București, activă din anii 90."
+    },
+    {
+     "id": "n_v11muz_voltaj",
+     "label": "Voltaj",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.74,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Trupă pop-rock din București, reprezentantă a României la Eurovision 2015."
+    },
+    {
+     "id": "n_v11muz_taxi",
+     "label": "Taxi",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.58,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Trupă pop-rock cu versuri ironice, fondată de Dan Teodorescu."
+    }
+   ]
+  },
+  {
+   "label": "Semnele chitării",
+   "members": [
+    {
+     "id": "n_v2muz_balada_rock",
+     "label": "Baladă rock",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.4857,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Piesă rock lentă sau melodică, centrată pe voce și chitară."
+    },
+    {
+     "id": "n_v2muz_trupa_rock",
+     "label": "Trupă rock",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.89,
+     "degree": 19,
+     "incoming_degree": 19,
+     "description": "Formație muzicală care cântă rock cu instrumente de band."
+    },
+    {
+     "id": "n_v4muz_rock",
+     "label": "Rock",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.7051,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Gen muzical cu chitare electrice, ritm puternic și energie de scenă."
+    },
+    {
+     "id": "n_muz_rock_ro",
+     "label": "Rock românesc",
+     "node_type": "concept",
+     "category": "muzica",
+     "salience": 0.7776,
+     "degree": 22,
+     "incoming_degree": 22,
+     "description": "Trupe rock românești cu refrene de stadion, folk-rock și balade de chitară."
+    }
+   ]
+  },
+  {
+   "label": "Orașe trase în legendă",
+   "members": [
+    {
+     "id": "n_timisoara",
+     "label": "Timișoara",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.3406,
+     "degree": 8,
+     "incoming_degree": 7,
+     "description": "Oras principal din Banat, vestul Romaniei, unde a inceput Revolutia din 1989."
+    },
+    {
+     "id": "n_cluj_napoca",
+     "label": "Cluj-Napoca",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.4989,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Oraș important din Transilvania, pe Someș."
+    },
+    {
+     "id": "n_bucuresti",
+     "label": "București",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.6721,
+     "degree": 103,
+     "incoming_degree": 108,
+     "description": "Capitala României, în Muntenia."
+    },
+    {
+     "id": "n_brasov",
+     "label": "Brașov",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.3074,
+     "degree": 12,
+     "incoming_degree": 11,
+     "description": "Oras din centrul Romaniei, la poalele Carpatilor, important centru turistic si industrial."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Cargo",
+   "a_group": "Rock clasic și hard",
+   "b": "Rock românesc",
+   "b_group": "Semnele chitării",
+   "strength": 0.9
+  },
+  {
+   "a": "Iris",
+   "a_group": "Rock clasic și hard",
+   "b": "Rock românesc",
+   "b_group": "Semnele chitării",
+   "strength": 0.9
+  },
+  {
+   "a": "Iris",
+   "a_group": "Rock clasic și hard",
+   "b": "Trupă rock",
+   "b_group": "Semnele chitării",
+   "strength": 0.9
+  },
+  {
+   "a": "Phoenix",
+   "a_group": "Rock clasic și hard",
+   "b": "Rock românesc",
+   "b_group": "Semnele chitării",
+   "strength": 0.9
+  },
+  {
+   "a": "Phoenix",
+   "a_group": "Rock clasic și hard",
+   "b": "Trupă rock",
+   "b_group": "Semnele chitării",
+   "strength": 0.9
+  },
+  {
+   "a": "Cargo",
+   "a_group": "Rock clasic și hard",
+   "b": "Trupă rock",
+   "b_group": "Semnele chitării",
+   "strength": 0.82
+  },
+  {
+   "a": "Cluj-Napoca",
+   "a_group": "Orașe trase în legendă",
+   "b": "Compact",
+   "b_group": "Pop-rock și alternative",
+   "strength": 0.82
+  },
+  {
+   "a": "Cargo",
+   "a_group": "Rock clasic și hard",
+   "b": "Baladă rock",
+   "b_group": "Semnele chitării",
+   "strength": 0.78
+  },
+  {
+   "a": "București",
+   "a_group": "Orașe trase în legendă",
+   "b": "Vița de Vie",
+   "b_group": "Pop-rock și alternative",
+   "strength": 0.76
+  },
+  {
+   "a": "București",
+   "a_group": "Orașe trase în legendă",
+   "b": "Voltaj",
+   "b_group": "Pop-rock și alternative",
+   "strength": 0.76
+  },
+  {
+   "a": "București",
+   "a_group": "Orașe trase în legendă",
+   "b": "Sfinx",
+   "b_group": "Rock clasic și hard",
+   "strength": 0.74
+  },
+  {
+   "a": "Cargo",
+   "a_group": "Rock clasic și hard",
+   "b": "Timișoara",
+   "b_group": "Orașe trase în legendă",
+   "strength": 0.74
+  },
+  {
+   "a": "București",
+   "a_group": "Orașe trase în legendă",
+   "b": "Taxi",
+   "b_group": "Pop-rock și alternative",
+   "strength": 0.72
+  },
+  {
+   "a": "Cargo",
+   "a_group": "Rock clasic și hard",
+   "b": "Rock",
+   "b_group": "Semnele chitării",
+   "strength": 0.72
+  },
+  {
+   "a": "Iris",
+   "a_group": "Rock clasic și hard",
+   "b": "Baladă rock",
+   "b_group": "Semnele chitării",
+   "strength": 0.72
+  },
+  {
+   "a": "Phoenix",
+   "a_group": "Rock clasic și hard",
+   "b": "Rock",
+   "b_group": "Semnele chitării",
+   "strength": 0.72
+  },
+  {
+   "a": "Phoenix",
+   "a_group": "Rock clasic și hard",
+   "b": "Timișoara",
+   "b_group": "Orașe trase în legendă",
+   "strength": 0.62
+  },
+  {
+   "a": "Compact",
+   "a_group": "Pop-rock și alternative",
+   "b": "Baladă rock",
+   "b_group": "Semnele chitării",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:348e89d903839721b71687821495d1d79d89f47e0c48408ecd847c86e693fe7e"
+}

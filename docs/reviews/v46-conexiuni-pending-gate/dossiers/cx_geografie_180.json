@@ -1,0 +1,230 @@
+{
+ "id": "cx_geografie_180",
+ "game": "conexiuni",
+ "category": "geografie",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "e2e75d9d16f9bb9a1ca89d12727975a9a372561cf8b695e07e7d7bd0cfec490b",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): mal"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Satul din ce în ce mai mic\" mixes node_types 2+2: sat[concept], cătun[concept], Ulița satului[place], Fântâna din curte[place]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Turistul zice că mai e puțin\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_254)"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "mare": "national-salience concept (0.89) with generic related_to edge to Dobrogea",
+  "sat": "linked to 2 regions (Moldova, Oltenia)"
+ },
+ "fairness": {
+  "unfair_tiles": [
+   "mal"
+  ],
+  "contested_tiles": [],
+  "engine_unfair_raw": 1
+ },
+ "groups": [
+  {
+   "label": "Par vorbe obișnuite, dar au maluri",
+   "members": [
+    {
+     "id": "n_v3geo_mare",
+     "label": "mare",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.8942,
+     "degree": 7,
+     "incoming_degree": 8,
+     "description": "Întindere de apă sărată, mai mică decât oceanul."
+    },
+    {
+     "id": "n_v4geo_mal",
+     "label": "mal",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.593,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Marginea unui râu, lac sau alt curs de apă."
+    },
+    {
+     "id": "n_v4geo_coasta",
+     "label": "coastă",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.5888,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Margine de uscat aflată lângă mare sau ocean."
+    },
+    {
+     "id": "n_v4geo_camp",
+     "label": "câmp",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.7016,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Teren deschis, de obicei plat, folosit adesea agricol."
+    }
+   ]
+  },
+  {
+   "label": "Turistul zice că mai e puțin",
+   "members": [
+    {
+     "id": "n_v2geo_drum_montan",
+     "label": "drum montan",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.5181,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Șosea sau traseu rutier care traversează zone de munte."
+    },
+    {
+     "id": "n_v4geo_carare",
+     "label": "cărare",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.3736,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Drum îngust pentru mers pe jos prin natură sau sate."
+    },
+    {
+     "id": "n_v4geo_poteca",
+     "label": "potecă",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.3844,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Traseu îngust de mers pe jos, frecvent în zone montane."
+    },
+    {
+     "id": "n_v4geo_stanca",
+     "label": "stâncă",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.5373,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Masă mare și dură de rocă la suprafața terenului."
+    }
+   ]
+  },
+  {
+   "label": "Apa începe mic și ajunge legendă",
+   "members": [
+    {
+     "id": "n_v4geo_izvor",
+     "label": "izvor",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.6728,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Loc unde apa subterană iese natural la suprafață."
+    },
+    {
+     "id": "n_v4geo_parau",
+     "label": "pârâu",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.6763,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Curs mic de apă curgătoare."
+    },
+    {
+     "id": "n_v2geo_rau",
+     "label": "râu",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.9399,
+     "degree": 20,
+     "incoming_degree": 20,
+     "description": "Apă curgătoare naturală, mai mică decât un fluviu."
+    },
+    {
+     "id": "n_v4geo_fluviu",
+     "label": "fluviu",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.5595,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Râu mare care se varsă într-o mare sau într-un ocean."
+    }
+   ]
+  },
+  {
+   "label": "Satul din ce în ce mai mic",
+   "members": [
+    {
+     "id": "n_v4geo_sat",
+     "label": "sat",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.8971,
+     "degree": 7,
+     "incoming_degree": 8,
+     "description": "Așezare rurală cu locuințe și gospodării."
+    },
+    {
+     "id": "n_v4geo_catun",
+     "label": "cătun",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.274,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Așezare rurală foarte mică, mai redusă decât un sat."
+    },
+    {
+     "id": "n_vdr_ulita_satului",
+     "label": "Ulița satului",
+     "node_type": "place",
+     "category": "viata_de_roman",
+     "salience": 0.5109,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Drumul mic al satului, spațiu de joacă, povești și întoarceri de la câmp."
+    },
+    {
+     "id": "n_vdr_fantana_din_curte",
+     "label": "Fântâna din curte",
+     "node_type": "place",
+     "category": "viata_de_roman",
+     "salience": 0.2659,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Sursa de apă din gospodărie, cu găleată, cumpănă sau roată."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "râu",
+   "a_group": "Apa începe mic și ajunge legendă",
+   "b": "mal",
+   "b_group": "Par vorbe obișnuite, dar au maluri",
+   "strength": 0.86
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:08525f0536c7d2c4c4494381d8d6e3d0777e14b19af1d205569578626a8272f3"
+}

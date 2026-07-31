@@ -1,0 +1,232 @@
+{
+ "id": "cx_meme_net_268",
+ "game": "conexiuni",
+ "category": "meme_net",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "c3de1dd586b2a0891b619e68a8527047b995afffc42c3972e10609453cb1500c",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Parodie online, Shitpost"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Satiră și parodie\" mixes node_types 2+2: Times New Roman[org], Noaptea Târziu[org], Parodie online[concept], Umor autoironic românesc[concept]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Universul Ghiță/Vodafone\" reuses an inventory/selected quad (also in: cx_meme_net_045, cx_meme_net_048)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Ghiță Ciobanul (10)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Parodie online",
+   "Shitpost"
+  ],
+  "contested_tiles": [],
+  "engine_unfair_raw": 2
+ },
+ "groups": [
+  {
+   "label": "Satiră și parodie",
+   "members": [
+    {
+     "id": "n_v11mem_times_new_roman",
+     "label": "Times New Roman",
+     "node_type": "org",
+     "category": "meme_net",
+     "salience": 0.64,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Publicație online de satiră și știri parodice, foarte citată în meme românești."
+    },
+    {
+     "id": "n_v11mem_noaptea_tarziu",
+     "label": "Noaptea Târziu",
+     "node_type": "org",
+     "category": "meme_net",
+     "salience": 0.57,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Trio/canal cunoscut pentru parodii muzicale românești distribuite masiv online."
+    },
+    {
+     "id": "n_net_parodie_online",
+     "label": "Parodie online",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5433,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Imitație comică făcută pentru internet, de la sketch-uri la reacții și animații."
+    },
+    {
+     "id": "n_net_umor_autoironic",
+     "label": "Umor autoironic românesc",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.7551,
+     "degree": 15,
+     "incoming_degree": 15,
+     "description": "Felul blând-acid prin care românii râd de propriile improvizații și obiceiuri."
+    }
+   ]
+  },
+  {
+   "label": "Universul Ghiță/Vodafone",
+   "members": [
+    {
+     "id": "n_net_ghita_ciobanul",
+     "label": "Ghiță Ciobanul",
+     "node_type": "person",
+     "category": "meme_net",
+     "salience": 0.6458,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Personaj din reclamele Vodafone inspirat de viața pastorală, devenit reper al internetului românesc."
+    },
+    {
+     "id": "n_net_reclamele_vodafone_ghita",
+     "label": "Reclamele Vodafone cu Ghiță",
+     "node_type": "work",
+     "category": "meme_net",
+     "salience": 0.5954,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Campanie publicitară Vodafone România construită în jurul lui Ghiță Ciobanul."
+    },
+    {
+     "id": "n_net_vodafone_romania",
+     "label": "Vodafone România",
+     "node_type": "org",
+     "category": "meme_net",
+     "salience": 0.2562,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Operator telecom care a popularizat în reclame personajul Ghiță Ciobanul."
+    },
+    {
+     "id": "n_net_reclama_cult",
+     "label": "Reclamă-cult",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.6777,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Spot publicitar care a depășit produsul și a rămas în memorie prin replici sau personaje."
+    }
+   ]
+  },
+  {
+   "label": "Mecanici de meme",
+   "members": [
+    {
+     "id": "n_v3mem_sablon_meme",
+     "label": "Șablon meme",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.611,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Format reutilizabil pentru glume vizuale și texte de meme."
+    },
+    {
+     "id": "n_v3mem_copypasta",
+     "label": "Copypasta",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.3574,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Text copiat și redistribuit repetat online, de obicei ca glumă."
+    },
+    {
+     "id": "n_v3mem_shitpost",
+     "label": "Shitpost",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.8387,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Postare intenționat absurdă sau proastă, folosită ca glumă online."
+    },
+    {
+     "id": "n_v3mem_repost",
+     "label": "Repost",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.596,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Redistribuire a unei postări, imagini sau glume deja publicate online."
+    }
+   ]
+  },
+  {
+   "label": "Materiale de reacție",
+   "members": [
+    {
+     "id": "n_v2mem_sunet_viral",
+     "label": "Sunet viral",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5319,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Fragment audio refolosit masiv în clipuri scurte și trenduri."
+    },
+    {
+     "id": "n_v3mem_gif_animat",
+     "label": "GIF animat",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.7508,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Imagine animată scurtă, folosită des ca reacție pe internet."
+    },
+    {
+     "id": "n_v3mem_sticker",
+     "label": "Sticker",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.349,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Imagine mică trimisă în chat, adesea cu text sau reacție comică."
+    },
+    {
+     "id": "n_v3mem_screenshot",
+     "label": "Screenshot",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.7136,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Captură de ecran distribuită ca dovadă, reacție sau material de meme."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Parodie online",
+   "a_group": "Satiră și parodie",
+   "b": "Shitpost",
+   "b_group": "Mecanici de meme",
+   "strength": 0.68
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:7ff4073df8bd6099aacefc2e551af9cc316df17c04e6e711f371ce6938b1bd03"
+}

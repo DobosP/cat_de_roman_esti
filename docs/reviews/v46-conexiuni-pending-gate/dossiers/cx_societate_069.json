@@ -1,0 +1,327 @@
+{
+ "id": "cx_societate_069",
+ "game": "conexiuni",
+ "category": "societate",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "74dc1c303fe616a140a6cf5bb8b48db40f7ccb5fdb4c7335fc4765f2305ca939",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Drept de vot, Primar"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Circuit legislativ și electoral\" mixes node_types 3+1: Parlamentul României[org], Camera Deputaților[org], Senatul[org], Drept de vot[concept]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Executiv și funcții alese\" mixes node_types 3+1: Guvernul României[org], Prim-ministrul[concept], Președintele României[concept], Primar[concept]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Local, cu ștampilă mică\" mixes node_types 3+1: Județ[concept], Municipiu[concept], Comuna[concept], Consiliul local[org]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Circuit legislativ și electoral\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_150)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Executiv și funcții alese\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_150, cx_societate_280)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Local, cu ștampilă mică\" reuses an inventory/selected quad (also in: cx_societate_065, cx_societate_216)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_societate_150 (11), cx_societate_216 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Constituția României (9), Guvernul României (9), Parlamentul României (11)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Drept de vot",
+   "Primar"
+  ],
+  "contested_tiles": [],
+  "engine_unfair_raw": 4
+ },
+ "groups": [
+  {
+   "label": "Circuit legislativ și electoral",
+   "members": [
+    {
+     "id": "n_parlamentul_romaniei",
+     "label": "Parlamentul României",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.6026,
+     "degree": 11,
+     "incoming_degree": 13,
+     "description": "Organul reprezentativ suprem si unica autoritate legiuitoare, format din Camera Deputatilor si Senat."
+    },
+    {
+     "id": "n_camera_deputatilor",
+     "label": "Camera Deputaților",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.1925,
+     "degree": 5,
+     "incoming_degree": 4,
+     "description": "Una dintre cele doua camere ale Parlamentului Romaniei, alaturi de Senat."
+    },
+    {
+     "id": "n_senatul",
+     "label": "Senatul",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.2127,
+     "degree": 5,
+     "incoming_degree": 4,
+     "description": "Camera superioara a Parlamentului Romaniei, alaturi de Camera Deputatilor."
+    },
+    {
+     "id": "n_vot",
+     "label": "Drept de vot",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.346,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Dreptul cetățenilor de a alege, exercitat prin vot sau sufragiu."
+    }
+   ]
+  },
+  {
+   "label": "Executiv și funcții alese",
+   "members": [
+    {
+     "id": "n_guvernul",
+     "label": "Guvernul României",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.4108,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Autoritatea executiva care realizeaza politica interna si externa a tarii."
+    },
+    {
+     "id": "n_prim_ministru",
+     "label": "Prim-ministrul",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.2254,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Seful Guvernului Romaniei, numit de Presedinte si validat de Parlament."
+    },
+    {
+     "id": "n_presedintele",
+     "label": "Președintele României",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.4036,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Seful statului roman, ales prin vot universal, reprezinta statul si vegheaza la respectarea Constitutiei."
+    },
+    {
+     "id": "n_primar",
+     "label": "Primar",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.2846,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Autoritatea executiva aleasa care conduce administratia unei localitati."
+    }
+   ]
+  },
+  {
+   "label": "Constituțional-juridic",
+   "members": [
+    {
+     "id": "n_constitutia",
+     "label": "Constituția României",
+     "node_type": "work",
+     "category": "societate",
+     "salience": 0.6707,
+     "degree": 19,
+     "incoming_degree": 20,
+     "description": "Legea fundamentala a statului roman, adoptata in 1991 si revizuita in 2003."
+    },
+    {
+     "id": "n_separatia_puterilor",
+     "label": "Separația puterilor în stat",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.352,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Principiu al statului de drept: puterea legislativa, executiva si judecatoreasca sunt distincte."
+    },
+    {
+     "id": "n_puterea_judecatoreasca",
+     "label": "Puterea judecătorească",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.1859,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Ramura statului care infaptuieste justitia prin instante, separata de legislativ si executiv."
+    },
+    {
+     "id": "n_iccj",
+     "label": "Înalta Curte de Casație și Justiție",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.1753,
+     "degree": 7,
+     "incoming_degree": 5,
+     "description": "Instanta judecatoreasca suprema a Romaniei, in varful sistemului judiciar."
+    }
+   ]
+  },
+  {
+   "label": "Local, cu ștampilă mică",
+   "members": [
+    {
+     "id": "n_judet",
+     "label": "Județ",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.3099,
+     "degree": 7,
+     "incoming_degree": 8,
+     "description": "Unitate administrativ-teritoriala de baza a Romaniei; tara are 41 de judete plus municipiul Bucuresti."
+    },
+    {
+     "id": "n_municipiu",
+     "label": "Municipiu",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.3928,
+     "degree": 14,
+     "incoming_degree": 14,
+     "description": "Localitate urbana de rang superior in organizarea administrativa a Romaniei."
+    },
+    {
+     "id": "n_comuna",
+     "label": "Comuna",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.3424,
+     "degree": 14,
+     "incoming_degree": 13,
+     "description": "Unitate administrativ-teritoriala de baza, formata din unul sau mai multe sate."
+    },
+    {
+     "id": "n_consiliul_local",
+     "label": "Consiliul local",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.1778,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Autoritate deliberativa aleasa la nivelul unei comune, oras sau municipiu."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Constituția României",
+   "a_group": "Constituțional-juridic",
+   "b": "Parlamentul României",
+   "b_group": "Circuit legislativ și electoral",
+   "strength": 0.85
+  },
+  {
+   "a": "Constituția României",
+   "a_group": "Constituțional-juridic",
+   "b": "Guvernul României",
+   "b_group": "Executiv și funcții alese",
+   "strength": 0.8
+  },
+  {
+   "a": "Constituția României",
+   "a_group": "Constituțional-juridic",
+   "b": "Președintele României",
+   "b_group": "Executiv și funcții alese",
+   "strength": 0.8
+  },
+  {
+   "a": "Municipiu",
+   "a_group": "Local, cu ștampilă mică",
+   "b": "Primar",
+   "b_group": "Executiv și funcții alese",
+   "strength": 0.8
+  },
+  {
+   "a": "Consiliul local",
+   "a_group": "Local, cu ștampilă mică",
+   "b": "Primar",
+   "b_group": "Executiv și funcții alese",
+   "strength": 0.7
+  },
+  {
+   "a": "Constituția României",
+   "a_group": "Constituțional-juridic",
+   "b": "Drept de vot",
+   "b_group": "Circuit legislativ și electoral",
+   "strength": 0.7
+  },
+  {
+   "a": "Comuna",
+   "a_group": "Local, cu ștampilă mică",
+   "b": "Primar",
+   "b_group": "Executiv și funcții alese",
+   "strength": 0.65
+  },
+  {
+   "a": "Președintele României",
+   "a_group": "Executiv și funcții alese",
+   "b": "Drept de vot",
+   "b_group": "Circuit legislativ și electoral",
+   "strength": 0.65
+  },
+  {
+   "a": "Guvernul României",
+   "a_group": "Executiv și funcții alese",
+   "b": "Separația puterilor în stat",
+   "b_group": "Constituțional-juridic",
+   "strength": 0.6
+  },
+  {
+   "a": "Parlamentul României",
+   "a_group": "Circuit legislativ și electoral",
+   "b": "Prim-ministrul",
+   "b_group": "Executiv și funcții alese",
+   "strength": 0.6
+  },
+  {
+   "a": "Parlamentul României",
+   "a_group": "Circuit legislativ și electoral",
+   "b": "Separația puterilor în stat",
+   "b_group": "Constituțional-juridic",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:29891b7a264798ed3602ec586821fe0f25af43b83a9975419739dd53b87c19e4"
+}

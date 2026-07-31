@@ -365,12 +365,24 @@ def _write_gate_artifact(
     )
 
 
+def _synthetic_pending_conexiuni_pack() -> tuple[bytes, dict]:
+    pack = json.loads(critique_pack.PACKAGE_PACK.read_text(encoding="utf-8"))
+    pending = deepcopy(pack["conexiuni"][0])
+    pending["id"] = "cx_test_pending_999"
+    pending["status"] = "pending"
+    pack["conexiuni"].append(pending)
+    pack["meta"]["counts"]["conexiuni"] += 1
+    pack["meta"]["id_high_water"]["conexiuni"] = 999
+    blob = (json.dumps(pack, ensure_ascii=False, indent=1) + "\n").encode()
+    return blob, pending
+
+
 def test_apply_rereview_blocks_failed_critique_before_writes(tmp_path, monkeypatch):
     pack = json.loads(critique_pack.PACKAGE_PACK.read_text(encoding='utf-8'))
-    pending = next(item for item in pack['conexiuni'] if item['status'] == 'pending')
-    verdict_path = tmp_path / 'conexiuni_verdicts.json'
+    pending = next(item for item in pack['contexto'] if item['status'] == 'pending')
+    verdict_path = tmp_path / 'contexto_verdicts.json'
     _write_gate_artifact(
-        verdict_path, 'conexiuni', {pending['id']: 'promote'},
+        verdict_path, 'contexto', {pending['id']: 'promote'},
     )
     originals = {path: path.read_bytes() for path in apply_rereview.PACK_COPIES}
     monkeypatch.setattr(
@@ -396,10 +408,10 @@ def test_apply_rereview_restores_both_mirrors_when_validation_fails(
     for copy in copies:
         copy.write_bytes(original)
     pack = json.loads(original.decode("utf-8"))
-    pending = next(item for item in pack["conexiuni"] if item["status"] == "pending")
+    pending = next(item for item in pack["contexto"] if item["status"] == "pending")
     _write_gate_artifact(
-        tmp_path / "conexiuni_verdicts.json",
-        "conexiuni",
+        tmp_path / "contexto_verdicts.json",
+        "contexto",
         {pending["id"]: "promote"},
     )
 
@@ -447,10 +459,10 @@ def test_apply_rereview_restores_first_mirror_after_second_write_fails(
     for copy in copies:
         copy.write_bytes(original)
     pack = json.loads(original.decode("utf-8"))
-    pending = next(item for item in pack["conexiuni"] if item["status"] == "pending")
+    pending = next(item for item in pack["contexto"] if item["status"] == "pending")
     _write_gate_artifact(
-        tmp_path / "conexiuni_verdicts.json",
-        "conexiuni",
+        tmp_path / "contexto_verdicts.json",
+        "contexto",
         {pending["id"]: "promote"},
     )
 
@@ -493,14 +505,10 @@ def test_apply_rereview_records_rejections_transactionally(
     monkeypatch,
     validator_result,
 ):
-    original = critique_pack.PACKAGE_PACK.read_bytes()
+    original, pending = _synthetic_pending_conexiuni_pack()
     copies = (tmp_path / "package-pack.json", tmp_path / "tests-pack.json")
     for copy in copies:
         copy.write_bytes(original)
-    pack = json.loads(original.decode("utf-8"))
-    pending = next(
-        item for item in pack["conexiuni"] if item["status"] == "pending"
-    )
     binding = "sha256:" + ("a" * 64)
     _write_gate_artifact(
         tmp_path / "conexiuni_verdicts.json",
@@ -575,12 +583,54 @@ def test_apply_rereview_records_rejections_transactionally(
     assert entry["groups"] == pending["groups"]
 
 
+def test_rejection_tombstones_normalize_legacy_named_group_keys(loaded):
+    pack, _, _, _ = loaded
+    source = deepcopy(pack["conexiuni"][0])
+    canonical = source["groups"]
+    source["id"] = "cx_legacy_named_groups"
+    source["groups"] = {
+        "rauri": canonical["g1"],
+        "munti": canonical["g2"],
+        "orase": canonical["g3"],
+        "regiuni": canonical["g4"],
+    }
+    empty = {
+        "schema_version": 1,
+        "meta": {
+            "note": "test",
+            "count": 0,
+            "group_count": 0,
+            "initial_seed_gate_sha256": "0" * 64,
+        },
+        "items": {},
+    }
+    binding = "sha256:" + ("a" * 64)
+    blob = apply_rereview.updated_rejection_tombstones(
+        (json.dumps(empty) + "\n").encode(),
+        [source],
+        {source["id"]: binding},
+        {source["id"]: "b" * 64},
+    )
+    entry = json.loads(blob)["items"][source["id"]]
+
+    assert entry["record_sha256"] == critique_pack.canonical_json_sha256(source)
+    assert entry["groups"] == {
+        "g1": canonical["g2"],
+        "g2": canonical["g3"],
+        "g3": canonical["g1"],
+        "g4": canonical["g4"],
+    }
+    assert entry["groups_sha256"] == critique_pack.canonical_json_sha256(
+        entry["groups"]
+    )
+
+
 def test_apply_rereview_rejects_unverified_workflow_artifact(tmp_path, monkeypatch):
     pack = json.loads(critique_pack.PACKAGE_PACK.read_text(encoding='utf-8'))
-    pending = next(item for item in pack['conexiuni'] if item['status'] == 'pending')
+    pending = next(item for item in pack['contexto'] if item['status'] == 'pending')
     _write_gate_artifact(
-        tmp_path / 'conexiuni_verdicts.json',
-        'conexiuni',
+        tmp_path / 'contexto_verdicts.json',
+        'contexto',
         {pending['id']: 'promote'},
         verified=False,
     )
@@ -607,10 +657,10 @@ def test_apply_rereview_rejects_non_unanimous_promotion(
     tmp_path, monkeypatch, analyst, verifier, unsafe_final,
 ):
     pack = json.loads(critique_pack.PACKAGE_PACK.read_text(encoding="utf-8"))
-    pending = next(item for item in pack["conexiuni"] if item["status"] == "pending")
+    pending = next(item for item in pack["contexto"] if item["status"] == "pending")
     _write_gate_artifact(
-        tmp_path / "conexiuni_verdicts.json",
-        "conexiuni",
+        tmp_path / "contexto_verdicts.json",
+        "contexto",
         {pending["id"]: unsafe_final},
         analyst_verdicts={pending["id"]: analyst},
         verifier_verdicts={pending["id"]: verifier},
@@ -628,18 +678,18 @@ def test_apply_rereview_rejects_non_unanimous_promotion(
 
 def test_apply_rereview_accepts_conservative_disagreement_rejection(tmp_path):
     pack = json.loads(critique_pack.PACKAGE_PACK.read_text(encoding="utf-8"))
-    pending = next(item for item in pack["conexiuni"] if item["status"] == "pending")
-    path = tmp_path / "conexiuni_verdicts.json"
+    pending = next(item for item in pack["contexto"] if item["status"] == "pending")
+    path = tmp_path / "contexto_verdicts.json"
     _write_gate_artifact(
         path,
-        "conexiuni",
+        "contexto",
         {pending["id"]: "reject"},
         analyst_verdicts={pending["id"]: "reject"},
         verifier_verdicts={pending["id"]: "promote"},
     )
     verdicts, batch, bindings = apply_rereview.validated_artifact(
         json.loads(path.read_text(encoding="utf-8")),
-        "conexiuni",
+        "contexto",
         path,
     )
     assert verdicts == {pending["id"]: "reject"}
@@ -670,13 +720,13 @@ def test_tracked_v43_gate_satisfies_conservative_two_reviewer_contract():
 
 def test_apply_rereview_rejects_hand_combined_gate_batches(tmp_path):
     pack = json.loads(critique_pack.PACKAGE_PACK.read_text(encoding='utf-8'))
-    cx = next(item for item in pack['conexiuni'] if item['status'] == 'pending')
     ct = next(item for item in pack['contexto'] if item['status'] == 'pending')
-    _write_gate_artifact(
-        tmp_path / 'conexiuni_verdicts.json', 'conexiuni', {cx['id']: 'keep'},
-    )
+    al = next(item for item in pack['alchimie'] if item['status'] == 'pending')
     _write_gate_artifact(
         tmp_path / 'contexto_verdicts.json', 'contexto', {ct['id']: 'keep'},
+    )
+    _write_gate_artifact(
+        tmp_path / 'alchimie_verdicts.json', 'alchimie', {al['id']: 'keep'},
     )
     with pytest.raises(SystemExit, match='same gate batch'):
         apply_rereview.main(['apply_rereview.py', '--dir', str(tmp_path)])
@@ -684,10 +734,10 @@ def test_apply_rereview_rejects_hand_combined_gate_batches(tmp_path):
 
 def test_apply_rereview_rejects_stale_artifact_after_content_edit(tmp_path, monkeypatch):
     pack = json.loads(critique_pack.PACKAGE_PACK.read_text(encoding='utf-8'))
-    pending = next(item for item in pack['conexiuni'] if item['status'] == 'pending')
+    pending = next(item for item in pack['contexto'] if item['status'] == 'pending')
     _write_gate_artifact(
-        tmp_path / 'conexiuni_verdicts.json',
-        'conexiuni',
+        tmp_path / 'contexto_verdicts.json',
+        'contexto',
         {pending['id']: 'promote'},
         review_binding='sha256:' + ('b' * 64),
     )
@@ -715,8 +765,8 @@ def test_real_rejection_tombstones_are_valid_and_not_runtime_boards(loaded):
     pack, _, _, _ = loaded
     tombstones = critique_pack.load_rejection_tombstones()
     runtime_ids = {item["id"] for item in pack["conexiuni"]}
-    assert len(tombstones) == 43
-    assert sum(len(item["groups"]) for item in tombstones) == 172
+    assert len(tombstones) == 122
+    assert sum(len(item["groups"]) for item in tombstones) == 488
     assert {"cx_personalitati_360", "cx_sport_361"} <= {
         item["id"] for item in tombstones
     }
@@ -1039,19 +1089,13 @@ def test_explicit_selection_rejects_unknown_and_filtered_ids(loaded):
 
 def test_selected_pending_boards_are_compared_with_each_other(loaded):
     pack, svc, strong, regions = loaded
-    approved_quads = {
-        frozenset(group)
-        for rec in pack['conexiuni'] if rec['status'] == 'approved'
-        for group in rec['groups'].values()
+    base = pack['conexiuni'][0]
+    first = {**base, 'id': 'cx_batch_duplicate_a', 'status': 'pending'}
+    second = {**base, 'id': 'cx_batch_duplicate_b', 'status': 'pending'}
+    batch_pack = {
+        'meta': {}, 'conexiuni': [first, second],
+        'contexto': [], 'lant': [], 'alchimie': [],
     }
-    base = next(
-        rec for rec in pack['conexiuni']
-        if rec['status'] == 'pending'
-        and all(frozenset(group) not in approved_quads for group in rec['groups'].values())
-    )
-    first = {**base, 'id': 'cx_batch_duplicate_a'}
-    second = {**base, 'id': 'cx_batch_duplicate_b'}
-    batch_pack = {**pack, 'conexiuni': [*pack['conexiuni'], first, second]}
     items, _, _ = critique_pack.run(
         batch_pack, svc, strong, regions, ['conexiuni'], {'pending'},
         {first['id'], second['id']},

@@ -1,0 +1,258 @@
+{
+ "id": "cx_limba_261",
+ "game": "conexiuni",
+ "category": "limba",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "adc34d46d59e6889e3ad4f797eb8f17e25e2d14e4fea2195b9984946440f54f6",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "board_type_shortcut",
+   "level": "WARN",
+   "detail": "all four groups are node-type homogeneous and expose 3 distinct group types"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Orașe cu miză lingvistică\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_geografie_001, cx_geografie_023, cx_geografie_175, cx_geografie_177, cx_geografie_251, cx_muzica_272, cx_societate_065, cx_societate_066, cx_societate_154, cx_societate_221, cx_societate_279)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Instituții și cercuri\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_256, cx_stiinta_231)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Straturi istorice ale lexicului\" reuses an inventory/selected quad (also in: cx_limba_036, cx_limba_122, cx_limba_189)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Academia Română (19), Brașov (12), București (24), Cluj-Napoca (19), Iași (16), Junimea (10), Barabulă (10), Curechi (10), Limba latină (9), Universitatea Alexandru Ioan Cuza din Iași (9), Substratul dacic (9), Universitatea din București (13)"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "Barabulă": "linked to 2 regions (Bucovina, Moldova)"
+ },
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 4
+ },
+ "groups": [
+  {
+   "label": "Orașe cu miză lingvistică",
+   "members": [
+    {
+     "id": "n_brasov",
+     "label": "Brașov",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.3074,
+     "degree": 12,
+     "incoming_degree": 11,
+     "description": "Oras din centrul Romaniei, la poalele Carpatilor, important centru turistic si industrial."
+    },
+    {
+     "id": "n_iasi",
+     "label": "Iași",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.5139,
+     "degree": 20,
+     "incoming_degree": 19,
+     "description": "Oras din Moldova, fosta capitala a Principatului Moldovei si important centru cultural."
+    },
+    {
+     "id": "n_bucuresti",
+     "label": "București",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.6721,
+     "degree": 103,
+     "incoming_degree": 108,
+     "description": "Capitala României, în Muntenia."
+    },
+    {
+     "id": "n_cluj_napoca",
+     "label": "Cluj-Napoca",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.4989,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Oraș important din Transilvania, pe Someș."
+    }
+   ]
+  },
+  {
+   "label": "Instituții și cercuri",
+   "members": [
+    {
+     "id": "n_academia_romana",
+     "label": "Academia Română",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.7002,
+     "degree": 33,
+     "incoming_degree": 38,
+     "description": "Cel mai inalt for de stiinta si cultura din Romania, infiintat in 1866."
+    },
+    {
+     "id": "n_universitatea_bucuresti",
+     "label": "Universitatea din București",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.5768,
+     "degree": 21,
+     "incoming_degree": 22,
+     "description": "Una dintre cele mai vechi si prestigioase universitati din Romania, infiintata in 1864."
+    },
+    {
+     "id": "n_socx_universitatea_cuza_iasi",
+     "label": "Universitatea Alexandru Ioan Cuza din Iași",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.2588,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Prima universitate modernă a României, fondată la Iași în 1860."
+    },
+    {
+     "id": "n_junimea",
+     "label": "Junimea",
+     "node_type": "org",
+     "category": "literatura",
+     "salience": 0.5031,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Societate literara de la Iasi."
+    }
+   ]
+  },
+  {
+   "label": "Standard și regionalism alimentar",
+   "members": [
+    {
+     "id": "n_v2lim_cartof",
+     "label": "Cartof",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.7178,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Tubercul alimentar, numit regional barabulă în unele zone."
+    },
+    {
+     "id": "n_lbax_regionalism_barabula",
+     "label": "Barabulă",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.1804,
+     "degree": 5,
+     "incoming_degree": 3,
+     "description": "Regionalism pentru cartof, asociat mai ales cu Moldova și Bucovina."
+    },
+    {
+     "id": "n_v2lim_varza",
+     "label": "Varză",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.7009,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Legumă cu frunze suprapuse, numită regional și curechi."
+    },
+    {
+     "id": "n_lbax_regionalism_curechi",
+     "label": "Curechi",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.19,
+     "degree": 5,
+     "incoming_degree": 4,
+     "description": "Regionalism pentru varză, folosit mai ales în Moldova și în unele zone ardelenești."
+    }
+   ]
+  },
+  {
+   "label": "Straturi istorice ale lexicului",
+   "members": [
+    {
+     "id": "n_limba_latina",
+     "label": "Limba latină",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.4299,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Limba antica din care provine limba romana si celelalte limbi romanice."
+    },
+    {
+     "id": "n_substrat_dacic",
+     "label": "Substratul dacic",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.2198,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Element lingvistic traco-dac mostenit in romana, vizibil in cuvinte ca brad, mal, copac."
+    },
+    {
+     "id": "n_imprumuturi_slave",
+     "label": "Împrumuturile slave",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.1758,
+     "degree": 7,
+     "incoming_degree": 6,
+     "description": "Strat lexical de origine slava intrat in romana incepand cu secolul al IX-lea, ca prieten, dragoste, munca."
+    },
+    {
+     "id": "n_neologisme_franceze",
+     "label": "Neologismele franceze",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.2284,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Imprumuturi lexicale din franceza patrunse in romana mai ales in sec. XIX, in epoca modernizarii."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Iași",
+   "a_group": "Orașe cu miză lingvistică",
+   "b": "Universitatea Alexandru Ioan Cuza din Iași",
+   "b_group": "Instituții și cercuri",
+   "strength": 0.88
+  },
+  {
+   "a": "București",
+   "a_group": "Orașe cu miză lingvistică",
+   "b": "Universitatea din București",
+   "b_group": "Instituții și cercuri",
+   "strength": 0.85
+  },
+  {
+   "a": "Academia Română",
+   "a_group": "Instituții și cercuri",
+   "b": "București",
+   "b_group": "Orașe cu miză lingvistică",
+   "strength": 0.7
+  },
+  {
+   "a": "Iași",
+   "a_group": "Orașe cu miză lingvistică",
+   "b": "Junimea",
+   "b_group": "Instituții și cercuri",
+   "strength": 0.7
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:d92db06aeb2f40257f550ff18e00a780e7d02f1bbe67a0aa5a80818f5c5544b5"
+}

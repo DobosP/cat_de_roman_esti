@@ -1,0 +1,235 @@
+{
+ "id": "cx_meme_net_202",
+ "game": "conexiuni",
+ "category": "meme_net",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "59e9f41bbc43b9e8133b9a08ab550add332551eaa5f305067ce86674b5e84728",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Comentariu, Emoji, Semn de întrebare, Sticker"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Comentariu",
+   "Emoji",
+   "Semn de întrebare",
+   "Sticker"
+  ],
+  "contested_tiles": [
+   "Întrebare"
+  ],
+  "engine_unfair_raw": 4
+ },
+ "groups": [
+  {
+   "label": "Semne care schimbă tonul",
+   "members": [
+    {
+     "id": "n_diacritice",
+     "label": "Diacritice",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.2036,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Semnele speciale ale romanei: a-breve, a-circumflex, i-circumflex, s-virgula, t-virgula."
+    },
+    {
+     "id": "n_v4lim_semn_intrebare",
+     "label": "Semn de întrebare",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.4695,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Semn de punctuație folosit la finalul unei întrebări."
+    },
+    {
+     "id": "n_v4lim_semn_exclamare",
+     "label": "Semn de exclamare",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.4042,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Semn de punctuație folosit pentru exclamații."
+    },
+    {
+     "id": "n_v3mem_emoji",
+     "label": "Emoji",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.3033,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Pictogramă digitală folosită pentru emoții, reacții și glume în mesaje."
+    }
+   ]
+  },
+  {
+   "label": "Din gramatică direct în reply",
+   "members": [
+    {
+     "id": "n_v4lim_interjectie",
+     "label": "Interjecție",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.2517,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Parte de vorbire care exprimă reacții, chemări sau sunete."
+    },
+    {
+     "id": "n_v4lim_raspuns",
+     "label": "Răspuns",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.6092,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Enunț oferit ca reacție la o întrebare."
+    },
+    {
+     "id": "n_v4lim_intrebare",
+     "label": "Întrebare",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.6869,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Enunț prin care se cere o informație sau un răspuns."
+    },
+    {
+     "id": "n_v4mem_comentariu",
+     "label": "Comentariu",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.7171,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Text scris de utilizatori sub o postare, un clip sau un live."
+    }
+   ]
+  },
+  {
+   "label": "Abțibilduri ale internetului",
+   "members": [
+    {
+     "id": "n_v3mem_copypasta",
+     "label": "Copypasta",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.3574,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Text copiat și redistribuit repetat online, de obicei ca glumă."
+    },
+    {
+     "id": "n_v3mem_sablon_meme",
+     "label": "Șablon meme",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.611,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Format reutilizabil pentru glume vizuale și texte de meme."
+    },
+    {
+     "id": "n_v3mem_sticker",
+     "label": "Sticker",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.349,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Imagine mică trimisă în chat, adesea cu text sau reacție comică."
+    },
+    {
+     "id": "n_v3mem_gif_animat",
+     "label": "GIF animat",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.7508,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Imagine animată scurtă, folosită des ca reacție pe internet."
+    }
+   ]
+  },
+  {
+   "label": "Publicul cu degetul pe ecran",
+   "members": [
+    {
+     "id": "n_v2mem_public_online",
+     "label": "Public online",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.8619,
+     "degree": 30,
+     "incoming_degree": 30,
+     "description": "Audiența care urmărește, comentează și distribuie conținut pe internet."
+    },
+    {
+     "id": "n_v4mem_urmaritor",
+     "label": "Urmăritor",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.5703,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Persoană care urmărește un profil, creator sau flux de conținut online."
+    },
+    {
+     "id": "n_v4mem_abonat",
+     "label": "Abonat",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.4803,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Utilizator care urmărește constant un canal sau un creator online."
+    },
+    {
+     "id": "n_v4fil_spectator",
+     "label": "spectator",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.5942,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Persoană care urmărește un film, o emisiune sau un spectacol."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Întrebare",
+   "a_group": "Din gramatică direct în reply",
+   "b": "Semn de întrebare",
+   "b_group": "Semne care schimbă tonul",
+   "strength": 0.85
+  },
+  {
+   "a": "Public online",
+   "a_group": "Publicul cu degetul pe ecran",
+   "b": "Comentariu",
+   "b_group": "Din gramatică direct în reply",
+   "strength": 0.78
+  },
+  {
+   "a": "Public online",
+   "a_group": "Publicul cu degetul pe ecran",
+   "b": "Emoji",
+   "b_group": "Semne care schimbă tonul",
+   "strength": 0.72
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:4b7603bd1472202068f3aea6de355903a1bfd91aae1a06dd5654e09bd24830ba"
+}

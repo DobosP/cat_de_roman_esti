@@ -1,0 +1,241 @@
+{
+ "id": "cx_arta_cultura_006",
+ "game": "conexiuni",
+ "category": "arta_cultura",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "cc1a9c157506a1dd716cd451b1af2b576827037e9c14c829f8bead3929d6e382",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Titluri cu obiecte concrete\" reuses an inventory/selected quad (also in: cx_arta_cultura_161)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Monumente și clădiri publice\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_256)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Enescu: om, sunet, scenă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_007, cx_arta_cultura_091, cx_muzica_142, cx_muzica_208, cx_personalitati_059, cx_personalitati_147)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Teatru românesc\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_092, cx_literatura_266)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Teatrul românesc (10), Ateneul Român (17), Coloana Infinitului (14), Festivalul George Enescu (18), George Enescu (23), I.L. Caragiale (23), Masa Tăcerii (20), Muzeul Național Brukenthal (15), O scrisoare pierdută (17), Poarta Sărutului (15), Podul de la Cernavodă (10), Rapsodia Română (14), Teatrul Bulandra (16)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 1
+ },
+ "groups": [
+  {
+   "label": "Titluri cu obiecte concrete",
+   "members": [
+    {
+     "id": "n_coloana_infinitului",
+     "label": "Coloana Infinitului",
+     "node_type": "work",
+     "category": "personalitati",
+     "salience": 0.4557,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Sculptura de Brancusi din ansamblul de la Targu Jiu."
+    },
+    {
+     "id": "n_masa_tacerii",
+     "label": "Masa Tăcerii",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.3478,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Sculptura de Brancusi din Ansamblul de la Targu Jiu."
+    },
+    {
+     "id": "n_poarta_sarutului",
+     "label": "Poarta Sărutului",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.361,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Sculptura de Brancusi din Ansamblul de la Targu Jiu."
+    },
+    {
+     "id": "n_carul_cu_boi",
+     "label": "Carul cu boi",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.2087,
+     "degree": 7,
+     "incoming_degree": 6,
+     "description": "Pictura celebra a lui Nicolae Grigorescu, motiv recurent in opera sa rurala."
+    }
+   ]
+  },
+  {
+   "label": "Monumente și clădiri publice",
+   "members": [
+    {
+     "id": "n_ateneul_roman",
+     "label": "Ateneul Român",
+     "node_type": "place",
+     "category": "arta_cultura",
+     "salience": 0.6749,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Sala de concerte din Bucuresti inaugurata in 1888, principala scena a Festivalului George Enescu."
+    },
+    {
+     "id": "n_muzeul_brukenthal",
+     "label": "Muzeul Național Brukenthal",
+     "node_type": "org",
+     "category": "arta_cultura",
+     "salience": 0.3934,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Muzeu de arta din Sibiu, deschis in 1817, unul dintre cele mai vechi muzee din Europa."
+    },
+    {
+     "id": "n_podul_cernavoda",
+     "label": "Podul de la Cernavodă",
+     "node_type": "work",
+     "category": "stiinta",
+     "salience": 0.2107,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Pod feroviar peste Dunare, inaugurat in 1895, opera lui Anghel Saligny."
+    },
+    {
+     "id": "n_columna_traian",
+     "label": "Columna lui Traian",
+     "node_type": "work",
+     "category": "istorie",
+     "salience": 0.2482,
+     "degree": 11,
+     "incoming_degree": 10,
+     "description": "Monument roman care infatiseaza razboaiele cu dacii."
+    }
+   ]
+  },
+  {
+   "label": "Enescu: om, sunet, scenă",
+   "members": [
+    {
+     "id": "n_george_enescu",
+     "label": "George Enescu",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.8366,
+     "degree": 30,
+     "incoming_degree": 30,
+     "description": "Compozitor, violonist si dirijor roman."
+    },
+    {
+     "id": "n_rapsodia_romana",
+     "label": "Rapsodia Română",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.4419,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Lucrare orchestrala de George Enescu inspirata din folclor."
+    },
+    {
+     "id": "n_festivalul_enescu",
+     "label": "Festivalul George Enescu",
+     "node_type": "event",
+     "category": "arta_cultura",
+     "salience": 0.4779,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Festival international de muzica clasica de la Bucuresti."
+    },
+    {
+     "id": "n_vioara",
+     "label": "Vioară",
+     "node_type": "concept",
+     "category": "personalitati",
+     "salience": 0.1905,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Instrument muzical cu coarde."
+    }
+   ]
+  },
+  {
+   "label": "Teatru românesc",
+   "members": [
+    {
+     "id": "n_ion_luca_caragiale",
+     "label": "I.L. Caragiale",
+     "node_type": "person",
+     "category": "literatura",
+     "salience": 0.5625,
+     "degree": 21,
+     "incoming_degree": 21,
+     "description": "Dramaturg roman, maestru al comediei, membru al Junimii."
+    },
+    {
+     "id": "n_o_scrisoare_pierduta",
+     "label": "O scrisoare pierdută",
+     "node_type": "work",
+     "category": "literatura",
+     "salience": 0.6344,
+     "degree": 15,
+     "incoming_degree": 15,
+     "description": "Comedie de I.L. Caragiale (1884), satira a vietii politice romanesti."
+    },
+    {
+     "id": "n_teatrul_bulandra",
+     "label": "Teatrul Bulandra",
+     "node_type": "org",
+     "category": "arta_cultura",
+     "salience": 0.4233,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Teatru bucurestean fondat in 1947 ca Teatrul Municipal, asociat cu Lucia Sturdza-Bulandra si Liviu Ciulei."
+    },
+    {
+     "id": "n_artx_teatru_romanesc",
+     "label": "Teatrul românesc",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.6134,
+     "degree": 23,
+     "incoming_degree": 23,
+     "description": "Tradiția scenică românească, de la comedia clasică la regia modernă și instituțiile de repertoriu."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Ateneul Român",
+   "a_group": "Monumente și clădiri publice",
+   "b": "Festivalul George Enescu",
+   "b_group": "Enescu: om, sunet, scenă",
+   "strength": 0.75
+  },
+  {
+   "a": "Ateneul Român",
+   "a_group": "Monumente și clădiri publice",
+   "b": "George Enescu",
+   "b_group": "Enescu: om, sunet, scenă",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:26c93417772387f708bcd589013d8fb33963aaf47d107b3c57b2f3a2cc0256c3"
+}

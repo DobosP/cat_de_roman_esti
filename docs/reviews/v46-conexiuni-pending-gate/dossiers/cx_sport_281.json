@@ -1,0 +1,241 @@
+{
+ "id": "cx_sport_281",
+ "game": "conexiuni",
+ "category": "sport",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "bd1301cb08e699ad4d061e078aca6c962f74450a6e35fb11d379394a7a4f5301",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Mondialul american\" mixes node_types 3+1: Generația de Aur[concept], Cupa Mondială 1994[event], România - Argentina 1994[event], Columbia - România 1994[event]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Dubla Simonei\" mixes node_types 3+1: Simona Halep[person], Wimbledon 2019[event], Roland Garros 2018[event], Finala cu Serena Williams[event]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Sevilla 1986\" reuses an inventory/selected quad (also in: cx_societate_219)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Mondialul american\" reuses an inventory/selected quad (also in: cx_geografie_179, cx_societate_219, cx_sport_071, cx_sport_156, cx_sport_222)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Dubla Simonei\" reuses an inventory/selected quad (also in: cx_sport_071, cx_sport_222)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Zecele Nadiei\" reuses an inventory/selected quad (also in: cx_sport_073, cx_sport_222)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_sport_222 (15), cx_sport_071 (11), cx_societate_219 (9), cx_sport_156 (9), cx_sport_160 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Nadia Comăneci (12), Simona Halep (14), Columbia - România 1994 (9), Finala de la Sevilla (14), Generația de Aur (10), Helmut Duckadam (9), Primul 10 perfect (10), România - Argentina 1994 (9), Steaua 1986 (11), Cupa Mondială 1994 (9)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 0
+ },
+ "groups": [
+  {
+   "label": "Sevilla 1986",
+   "members": [
+    {
+     "id": "n_spt_steaua_1986",
+     "label": "Steaua 1986",
+     "node_type": "org",
+     "category": "sport",
+     "salience": 0.9188,
+     "degree": 15,
+     "incoming_degree": 15,
+     "description": "Echipa Steaua București care a câștigat Cupa Campionilor Europeni în 1986."
+    },
+    {
+     "id": "n_spt_finala_sevilla_1986",
+     "label": "Finala de la Sevilla",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.9378,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Finala Steaua - Barcelona din 1986, decisă la loviturile de departajare."
+    },
+    {
+     "id": "n_spt_helmut_duckadam",
+     "label": "Helmut Duckadam",
+     "node_type": "person",
+     "category": "sport",
+     "salience": 0.9224,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Portarul Stelei care a apărat patru penalty-uri în finala de la Sevilla."
+    },
+    {
+     "id": "n_spt_cupa_campionilor_1986",
+     "label": "Cupa Campionilor 1986",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.8886,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Trofeul european cucerit de Steaua București după finala de la Sevilla."
+    }
+   ]
+  },
+  {
+   "label": "Mondialul american",
+   "members": [
+    {
+     "id": "n_spt_generatia_de_aur",
+     "label": "Generația de Aur",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.9638,
+     "degree": 15,
+     "incoming_degree": 17,
+     "description": "Nucleul naționalei de fotbal care a dus România în sferturile Mondialului din 1994."
+    },
+    {
+     "id": "n_spt_world_cup_1994",
+     "label": "Cupa Mondială 1994",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.9449,
+     "degree": 14,
+     "incoming_degree": 14,
+     "description": "Turneul final din SUA unde România a ajuns în sferturi, moment de vârf al fotbalului românesc."
+    },
+    {
+     "id": "n_spt_romania_argentina_1994",
+     "label": "România - Argentina 1994",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.9456,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Victoria cu 3-2 din optimile Mondialului, unul dintre cele mai iubite meciuri ale României."
+    },
+    {
+     "id": "n_spt_columbia_romania_1994",
+     "label": "Columbia - România 1994",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.7754,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Meciul câștigat cu 3-1, celebru pentru golul spectaculos al lui Gheorghe Hagi."
+    }
+   ]
+  },
+  {
+   "label": "Dubla Simonei",
+   "members": [
+    {
+     "id": "n_simona_halep",
+     "label": "Simona Halep",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.5055,
+     "degree": 15,
+     "incoming_degree": 15,
+     "description": "Fostă jucătoare română de tenis, lideră mondială WTA și campioană la Roland Garros 2018 și Wimbledon 2019; s-a retras în 2025."
+    },
+    {
+     "id": "n_spt_simona_wimbledon_2019",
+     "label": "Wimbledon 2019",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.9118,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Al doilea titlu de Grand Slam al Simonei Halep, câștigat pe iarba londoneză."
+    },
+    {
+     "id": "n_spt_simona_roland_garros_2018",
+     "label": "Roland Garros 2018",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.8577,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Primul titlu de Grand Slam câștigat de Simona Halep, după finala cu Sloane Stephens."
+    },
+    {
+     "id": "n_spt_finala_wimbledon_serena",
+     "label": "Finala cu Serena Williams",
+     "node_type": "event",
+     "category": "sport",
+     "salience": 0.8141,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Finala Wimbledon 2019 câștigată de Simona Halep în două seturi contra Serenei Williams."
+    }
+   ]
+  },
+  {
+   "label": "Zecele Nadiei",
+   "members": [
+    {
+     "id": "n_nadia_comaneci",
+     "label": "Nadia Comăneci",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.6128,
+     "degree": 18,
+     "incoming_degree": 18,
+     "description": "Gimnasta romana, primul 10 perfect olimpic."
+    },
+    {
+     "id": "n_spt_nadia_zecele_perfect",
+     "label": "Primul 10 perfect",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.9484,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Nota 10 obținută de Nadia Comăneci la Montreal 1976, premieră olimpică în gimnastică."
+    },
+    {
+     "id": "n_montreal_1976",
+     "label": "Jocurile Olimpice Montreal 1976",
+     "node_type": "event",
+     "category": "personalitati",
+     "salience": 0.1677,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Olimpiada unde Nadia a primit primul 10."
+    },
+    {
+     "id": "n_spt_paralele_gimnastica",
+     "label": "Paralele inegale",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.4257,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Aparatul la care Nadia Comăneci a primit primul 10 perfect la Montreal."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:16aee0f84cf62e1d7f1bbf1e97ceadfe602788085e4012181f4fed94234819c4"
+}

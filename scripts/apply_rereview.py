@@ -135,7 +135,7 @@ def updated_rejection_tombstones(
     items = data["items"]
     for rec in sorted(rejected_records, key=lambda row: str(row["id"])):
         item_id = str(rec["id"])
-        groups = rec["groups"]
+        groups = canonical_rejection_groups(rec)
         entry = {
             "record_sha256": critique_pack.canonical_json_sha256(rec),
             "groups_sha256": critique_pack.canonical_json_sha256(groups),
@@ -153,6 +153,23 @@ def updated_rejection_tombstones(
     data["meta"]["group_count"] = len(items) * 4
     critique_pack.validate_rejection_tombstones(data)
     return (json.dumps(data, ensure_ascii=False, indent=1) + "\n").encode("utf-8")
+
+
+def canonical_rejection_groups(record: dict) -> dict[str, list[str]]:
+    """Normalize legacy named group keys to the durable ``g1``–``g4`` schema."""
+    raw = record.get("groups")
+    if (
+        not isinstance(raw, dict)
+        or len(raw) != 4
+        or not all(isinstance(key, str) and key for key in raw)
+    ):
+        raise ValueError(f"invalid Conexiuni groups for {record.get('id')}")
+    canonical_keys = {"g1", "g2", "g3", "g4"}
+    source_keys = sorted(raw) if set(raw) != canonical_keys else ["g1", "g2", "g3", "g4"]
+    return {
+        f"g{index}": list(raw[source_key])
+        for index, source_key in enumerate(source_keys, start=1)
+    }
 
 
 def current_review_bindings(item_ids: set[str]) -> dict[str, str]:

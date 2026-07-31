@@ -8,6 +8,11 @@ from pathlib import Path
 _ROOT = Path(__file__).resolve().parent.parent
 _PACK = json.loads((_ROOT / "tests/fixtures/games_pack.json").read_text(encoding="utf-8"))
 _KG = json.loads((_ROOT / "tests/fixtures/kg_sample.json").read_text(encoding="utf-8"))
+_TOMBSTONES = json.loads(
+    (
+        _ROOT / "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json"
+    ).read_text(encoding="utf-8")
+)["items"]
 
 _ITEM_IDS = {
     "cx_viata_de_roman_291",
@@ -18,6 +23,7 @@ _ITEM_IDS = {
     "al_literatura_097",
     "al_viata_de_roman_098",
 }
+_V46_RETIRED = {"cx_viata_de_roman_291"}
 
 _NODE_IDS = {
     "n_v23via_elasticul",
@@ -54,14 +60,15 @@ def test_v23_items_reflect_the_later_bound_contexto_gate():
         if item["id"] in _ITEM_IDS
     }
 
-    assert set(records) == _ITEM_IDS
+    assert set(records) == _ITEM_IDS - _V46_RETIRED
+    assert _V46_RETIRED <= set(_TOMBSTONES)
     promoted = {"ct_literatura_298", "ct_viata_de_roman_299"}
     assert {
         item_id for item_id, item in records.items() if item["status"] == "approved"
     } == promoted
     assert {
         item_id for item_id, item in records.items() if item["status"] == "pending"
-    } == _ITEM_IDS - promoted
+    } == _ITEM_IDS - promoted - _V46_RETIRED
     assert records["lt_literatura_210"]["optimal"] == 2
     assert records["lt_viata_de_roman_211"]["optimal"] == 2
     assert records["al_literatura_097"]["target_depth"] == 2
@@ -83,11 +90,14 @@ def test_v23_graph_wave_has_the_reviewed_size_and_no_duplicate_moara_node():
     assert not any(node["label_ro"] == "Țintar" for node in _KG["kg_nodes"])
 
 
-def test_v23_conexiuni_groups_are_unique_and_type_coherent():
-    board = next(item for item in _PACK["conexiuni"] if item["id"] == "cx_viata_de_roman_291")
+def test_v23_retired_conexiuni_groups_remain_unique_and_type_coherent():
+    board = _TOMBSTONES["cx_viata_de_roman_291"]
     nodes = {node["id"]: node for node in _KG["kg_nodes"]}
     tiles = [node_id for group in board["groups"].values() for node_id in group]
 
+    assert not any(
+        item["id"] == "cx_viata_de_roman_291" for item in _PACK["conexiuni"]
+    )
     assert len(tiles) == len(set(tiles)) == 16
     assert all(
         len({nodes[node_id]["node_type"] for node_id in group}) == 1

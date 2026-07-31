@@ -9,6 +9,9 @@ from pathlib import Path
 _ROOT = Path(__file__).resolve().parent.parent
 _PACK_PATH = _ROOT / "tests" / "fixtures" / "games_pack.json"
 _KG_PATH = _ROOT / "tests" / "fixtures" / "kg_sample.json"
+_TOMBSTONE_PATH = (
+    _ROOT / "cat_de_roman_esti" / "fixtures" / "conexiuni_rejection_tombstones.json"
+)
 
 # v16 (2026-07-12): KG-enrichment re-derivation retired one approved greu Lanț board, a
 # judge fleet promoted 70 pending items / rejected 3, and the ADR-0019 quarantine below
@@ -23,10 +26,10 @@ _KG_PATH = _ROOT / "tests" / "fixtures" / "kg_sample.json"
 # fairness/relevance failures + A7 non-distinctive region associations); nothing deleted.
 # 2026-07-16 (ADR-0030): the v23 childhood wave staged seven more items as pending;
 # approved inventory and serving remain unchanged. Later pending-only waves may grow
-# these totals. V45 then removed 104 freshly rejected Lanț records, so that game's
-# release inventory is an exact lower baseline rather than the old pending-stock floor.
+# these totals. V45 removed 104 freshly rejected Lanț records; V46 then removed the full
+# 79-board pending Conexiuni queue. Those games now use exact lower baselines.
 _V23_INVENTORY_FLOOR = {
-    "conexiuni": (284, 232, 75),
+    "conexiuni": (232, 232, 0),
     "contexto": (199, 204, 5),
     "lant": (97, 94, 3),
     "alchimie": (92, 78, 15),
@@ -87,12 +90,12 @@ def test_v14_pack_inventory_and_review_split():
     # v16: 769 − 3 judge-rejected − 1 retired greu Lanț = 765; v18: − 1 retired normal Lanț.
     # 2026-07-15: 592 − 20 critique-gate demotions (ADR-0023/0024) = 572 approved.
     # 2026-07-29: + 13 ADR-0065 gate promotions among these games' totals = 585 approved.
-    # V45 resolves 104 stale Lanț candidates without changing the served pool.
-    assert sum(expected[0] for expected in _V23_INVENTORY_FLOOR.values()) == 672
+    # V45/V46 clear stale pending debt without changing either served pool.
+    assert sum(expected[0] for expected in _V23_INVENTORY_FLOOR.values()) == 620
     # 2026-07-30 (ADR-0066/0067/0068): + 18 owner, + 3 strict-gate, then + 2
     # bound Contexto promotions.
     assert sum(expected[1] for expected in _V23_INVENTORY_FLOOR.values()) == 608
-    assert sum(expected[2] for expected in _V23_INVENTORY_FLOOR.values()) == 98
+    assert sum(expected[2] for expected in _V23_INVENTORY_FLOOR.values()) == 23
 
 
 def test_v14_adds_contemporary_civic_education_science_and_digital_play():
@@ -139,13 +142,10 @@ def test_v14_quarantined_content_is_not_in_approved_pools():
     pack = _load(_PACK_PATH)
     conexiuni = _by_id(pack["conexiuni"])
     contexto = _by_id(pack["contexto"])
+    tombstones = _load(_TOMBSTONE_PATH)["items"]
 
-    quarantined = {
-        item_id
-        for item_id in _QUARANTINED_CONEXIUNI
-        if conexiuni[item_id]["status"] == "pending"
-    }
-    assert quarantined == _QUARANTINED_CONEXIUNI
+    assert _QUARANTINED_CONEXIUNI.isdisjoint(conexiuni)
+    assert _QUARANTINED_CONEXIUNI <= set(tombstones)
     assert contexto["ct_meme_net_238"]["status"] == "pending"
 
     approved_conexiuni = {

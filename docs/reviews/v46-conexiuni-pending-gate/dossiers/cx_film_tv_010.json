@@ -1,0 +1,371 @@
+{
+ "id": "cx_film_tv_010",
+ "game": "conexiuni",
+ "category": "film_tv",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "ca77f1925d9d13662b075e32719e1ecc3a79477b267965b7bfb6eaf66a8f3eeb",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Vrei să fii milionar?"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Prezentatori TV\" <-> \"Emisiunile lor\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Prezentatori TV\" <-> \"Canale comerciale și publice\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Emisiunile lor\" <-> \"Canale comerciale și publice\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Antena 1 prime-time\" repeats member(s): Antena 1"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Antena 1 prime-time\" mixes node_types 3+1: Antena 1[org], iUmor[work], Chefi la cuțite[work], Insula Iubirii[work]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Prezentatori TV\" reuses an inventory/selected quad (also in: cx_film_tv_012, cx_film_tv_014, cx_film_tv_097, cx_film_tv_169, cx_film_tv_246, cx_muzica_209)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Emisiunile lor\" reuses an inventory/selected quad (also in: cx_film_tv_097, cx_film_tv_169)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Canale comerciale și publice\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_162, cx_film_tv_009, cx_film_tv_097, cx_film_tv_169, cx_film_tv_246, cx_muzica_209, cx_societate_155)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Antena 1 prime-time\" reuses an inventory/selected quad (also in: cx_film_tv_013, cx_film_tv_164)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_film_tv_013 (14), cx_film_tv_169 (13), cx_film_tv_097 (12), cx_film_tv_246 (12), cx_muzica_209 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Andreea Marin (9), Antena 1 (12), Cătălin Măruță (9), Pro TV (14), TVR (14)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Vrei să fii milionar?"
+  ],
+  "contested_tiles": [
+   "Antena 1"
+  ],
+  "engine_unfair_raw": 4
+ },
+ "groups": [
+  {
+   "label": "Prezentatori TV",
+   "members": [
+    {
+     "id": "n_ftv_andreea_marin",
+     "label": "Andreea Marin",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.5127,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Prezentatoare TV asociată puternic cu emisiunea Surprize, surprize."
+    },
+    {
+     "id": "n_ftv_teo_trandafir",
+     "label": "Teo Trandafir",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.4251,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Prezentatoare și realizatoare TV română, reper al talk-show-ului autohton."
+    },
+    {
+     "id": "n_ftv_catalin_maruta",
+     "label": "Cătălin Măruță",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.584,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Prezentator TV român care a prezentat emisiunea La Măruță la Pro TV între 2007 și 2026."
+    },
+    {
+     "id": "n_ftv_virgil_iantu",
+     "label": "Virgil Ianțu",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.278,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Prezentator TV cunoscut ca gazdă a emisiunii Vrei să fii milionar?."
+    }
+   ]
+  },
+  {
+   "label": "Emisiunile lor",
+   "members": [
+    {
+     "id": "n_ftv_surprize_surprize",
+     "label": "Surprize, surprize",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.4755,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Emisiune TVR de divertisment prezentată de Andreea Marin."
+    },
+    {
+     "id": "n_ftv_teo_show",
+     "label": "Teo Show",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.3089,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Talk-show de divertisment asociat cu Teo Trandafir, difuzat la Kanal D."
+    },
+    {
+     "id": "n_ftv_la_maruta",
+     "label": "La Măruță",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.4293,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Emisiune de divertisment și interviuri difuzată de Pro TV între 2007 și 2026."
+    },
+    {
+     "id": "n_ftv_vrei_sa_fii_milionar",
+     "label": "Vrei să fii milionar?",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.4539,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Versiunea românească a formatului Who Wants to Be a Millionaire?."
+    }
+   ]
+  },
+  {
+   "label": "Canale comerciale și publice",
+   "members": [
+    {
+     "id": "n_ftv_pro_tv",
+     "label": "Pro TV",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.9055,
+     "degree": 26,
+     "incoming_degree": 26,
+     "description": "Post TV comercial românesc, important pentru seriale și divertisment pop."
+    },
+    {
+     "id": "n_ftv_tvr",
+     "label": "TVR",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.876,
+     "degree": 20,
+     "incoming_degree": 20,
+     "description": "Televiziunea publică din România, reper istoric pentru emisiuni și filme TV."
+    },
+    {
+     "id": "n_ftv_prima_tv",
+     "label": "Prima TV",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.394,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Televiziune comercială românească asociată cu Trăsniții și quiz-show-uri."
+    },
+    {
+     "id": "n_ftv_kanal_d",
+     "label": "Kanal D",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.4413,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Post TV comercial din România, cunoscut pentru divertisment și reality-show-uri."
+    }
+   ]
+  },
+  {
+   "label": "Antena 1 prime-time",
+   "members": [
+    {
+     "id": "n_ftv_antena_1",
+     "label": "Antena 1",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.8169,
+     "degree": 20,
+     "incoming_degree": 20,
+     "description": "Post TV comercial românesc cu divertisment, reality-show-uri și concursuri."
+    },
+    {
+     "id": "n_ftv_iumor",
+     "label": "iUmor",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.5541,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Emisiune de divertisment și stand-up difuzată de Antena 1."
+    },
+    {
+     "id": "n_ftv_chefi_la_cutite",
+     "label": "Chefi la cuțite",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.7726,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Show culinar competitiv difuzat de Antena 1."
+    },
+    {
+     "id": "n_ftv_insula_iubirii",
+     "label": "Insula Iubirii",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.4563,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Reality-show românesc difuzat de Antena 1, adaptare după Temptation Island."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Andreea Marin",
+   "a_group": "Prezentatori TV",
+   "b": "Surprize, surprize",
+   "b_group": "Emisiunile lor",
+   "strength": 0.98
+  },
+  {
+   "a": "Cătălin Măruță",
+   "a_group": "Prezentatori TV",
+   "b": "La Măruță",
+   "b_group": "Emisiunile lor",
+   "strength": 0.98
+  },
+  {
+   "a": "La Măruță",
+   "a_group": "Emisiunile lor",
+   "b": "Pro TV",
+   "b_group": "Canale comerciale și publice",
+   "strength": 0.96
+  },
+  {
+   "a": "Surprize, surprize",
+   "a_group": "Emisiunile lor",
+   "b": "TVR",
+   "b_group": "Canale comerciale și publice",
+   "strength": 0.96
+  },
+  {
+   "a": "Teo Show",
+   "a_group": "Emisiunile lor",
+   "b": "Teo Trandafir",
+   "b_group": "Prezentatori TV",
+   "strength": 0.96
+  },
+  {
+   "a": "Virgil Ianțu",
+   "a_group": "Prezentatori TV",
+   "b": "Vrei să fii milionar?",
+   "b_group": "Emisiunile lor",
+   "strength": 0.94
+  },
+  {
+   "a": "Cătălin Măruță",
+   "a_group": "Prezentatori TV",
+   "b": "Pro TV",
+   "b_group": "Canale comerciale și publice",
+   "strength": 0.86
+  },
+  {
+   "a": "Andreea Marin",
+   "a_group": "Prezentatori TV",
+   "b": "TVR",
+   "b_group": "Canale comerciale și publice",
+   "strength": 0.84
+  },
+  {
+   "a": "Kanal D",
+   "a_group": "Canale comerciale și publice",
+   "b": "Teo Show",
+   "b_group": "Emisiunile lor",
+   "strength": 0.82
+  },
+  {
+   "a": "Prima TV",
+   "a_group": "Canale comerciale și publice",
+   "b": "Vrei să fii milionar?",
+   "b_group": "Emisiunile lor",
+   "strength": 0.82
+  },
+  {
+   "a": "Kanal D",
+   "a_group": "Canale comerciale și publice",
+   "b": "Teo Trandafir",
+   "b_group": "Prezentatori TV",
+   "strength": 0.78
+  },
+  {
+   "a": "Antena 1",
+   "a_group": "Antena 1 prime-time",
+   "b": "Pro TV",
+   "b_group": "Canale comerciale și publice",
+   "strength": 0.72
+  },
+  {
+   "a": "Prima TV",
+   "a_group": "Canale comerciale și publice",
+   "b": "Virgil Ianțu",
+   "b_group": "Prezentatori TV",
+   "strength": 0.68
+  },
+  {
+   "a": "Antena 1",
+   "a_group": "Antena 1 prime-time",
+   "b": "Prima TV",
+   "b_group": "Canale comerciale și publice",
+   "strength": 0.64
+  },
+  {
+   "a": "Antena 1",
+   "a_group": "Antena 1 prime-time",
+   "b": "Kanal D",
+   "b_group": "Canale comerciale și publice",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:d859fede9be23ca82e36a894e0e5ff5079f14d5b0d63f04b2371c6503768dd2e"
+}

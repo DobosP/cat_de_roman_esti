@@ -1,0 +1,412 @@
+{
+ "id": "cx_istorie_114",
+ "game": "conexiuni",
+ "category": "istorie",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "2ce527f2c88be51a0f8b61f81d676470cf3b567d4294e8a9175963b6534176ac",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Marea Unire 1918"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Uniri care schimbă statul\" mixes node_types 3+1: Unirea de la 1600[event], Mică Unire 1859[event], Marea Unire 1918[event], Unire[concept]"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Uniri care schimbă statul\" <-> \"Oameni de pe axa unirii\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Uniri care schimbă statul\" <-> \"Geografia Marii Uniri\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Context european, nu strigăt de tribună\" mixes node_types 2+2: Primul Război Mondial[event], Tratatul de la Trianon[event], Imperiul Austro-Ungar[org], Regatul României[org]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Uniri care schimbă statul\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_001, cx_istorie_184)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Oameni de pe axa unirii\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_173, cx_istorie_001, cx_personalitati_275)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Geografia Marii Uniri\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_istorie_032, cx_istorie_258)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Carol I (10), Ferdinand I (13), Marea Unire 1918 (14), Mică Unire 1859 (10), Mihai Viteazul (13), Transilvania (10)"
+  },
+  {
+   "check": "generic_region_link",
+   "level": "WARN",
+   "detail": "board pairs region tiles (Transilvania) with non-distinctive region-linked tiles: Unirea de la 1600 (linked to 2 regions (Moldova, Transilvania)), Mihai Viteazul (linked to 2 regions (Moldova, Transilvania))"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "Mihai Viteazul": "linked to 2 regions (Moldova, Transilvania)",
+  "Unirea de la 1600": "linked to 2 regions (Moldova, Transilvania)"
+ },
+ "fairness": {
+  "unfair_tiles": [
+   "Marea Unire 1918"
+  ],
+  "contested_tiles": [],
+  "engine_unfair_raw": 9
+ },
+ "groups": [
+  {
+   "label": "Uniri care schimbă statul",
+   "members": [
+    {
+     "id": "n_unirea_1600",
+     "label": "Unirea de la 1600",
+     "node_type": "event",
+     "category": "istorie",
+     "salience": 0.1981,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "În 1600, Mihai Viteazul a ajuns pentru scurt timp să conducă Țara Românească, Transilvania și Moldova."
+    },
+    {
+     "id": "n_mica_unire_1859",
+     "label": "Mică Unire 1859",
+     "node_type": "event",
+     "category": "istorie",
+     "salience": 0.4263,
+     "degree": 14,
+     "incoming_degree": 11,
+     "description": "Unirea Moldovei cu Tara Romaneasca in 1859."
+    },
+    {
+     "id": "n_marea_unire_1918",
+     "label": "Marea Unire 1918",
+     "node_type": "event",
+     "category": "istorie",
+     "salience": 0.6014,
+     "degree": 28,
+     "incoming_degree": 29,
+     "description": "Unirea Transilvaniei, Basarabiei si Bucovinei cu Romania."
+    },
+    {
+     "id": "n_v2ist_unire",
+     "label": "Unire",
+     "node_type": "concept",
+     "category": "istorie",
+     "salience": 0.8689,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Act politic prin care teritorii sau state se reunesc."
+    }
+   ]
+  },
+  {
+   "label": "Oameni de pe axa unirii",
+   "members": [
+    {
+     "id": "n_mihai_viteazul",
+     "label": "Mihai Viteazul",
+     "node_type": "person",
+     "category": "istorie",
+     "salience": 0.6182,
+     "degree": 13,
+     "incoming_degree": 14,
+     "description": "Domnitor, prima unire a Tarilor Romane (1600)."
+    },
+    {
+     "id": "n_alexandru_ioan_cuza",
+     "label": "Alexandru Ioan Cuza",
+     "node_type": "person",
+     "category": "istorie",
+     "salience": 0.2117,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Primul domnitor al Principatelor Unite (1859-1866)."
+    },
+    {
+     "id": "n_ferdinand_i",
+     "label": "Ferdinand I",
+     "node_type": "person",
+     "category": "istorie",
+     "salience": 0.2881,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Rege al Romaniei in timpul Marii Uniri (1914-1927)."
+    },
+    {
+     "id": "n_carol_i",
+     "label": "Carol I",
+     "node_type": "person",
+     "category": "istorie",
+     "salience": 0.5379,
+     "degree": 21,
+     "incoming_degree": 20,
+     "description": "Primul rege al Romaniei (1881-1914)."
+    }
+   ]
+  },
+  {
+   "label": "Geografia Marii Uniri",
+   "members": [
+    {
+     "id": "n_alba_iulia",
+     "label": "Alba Iulia",
+     "node_type": "place",
+     "category": "istorie",
+     "salience": 0.3892,
+     "degree": 10,
+     "incoming_degree": 11,
+     "description": "Oras al marilor uniri (1600, 1918)."
+    },
+    {
+     "id": "n_transilvania",
+     "label": "Transilvania",
+     "node_type": "place",
+     "category": "istorie",
+     "salience": 0.9779,
+     "degree": 62,
+     "incoming_degree": 65,
+     "description": "Regiune istorica romaneasca."
+    },
+    {
+     "id": "n_istx_chisinau",
+     "label": "Chișinău",
+     "node_type": "place",
+     "category": "istorie",
+     "salience": 0.1657,
+     "degree": 7,
+     "incoming_degree": 8,
+     "description": "Orașul în care Sfatul Țării a votat unirea Basarabiei cu România la 27 martie 1918."
+    },
+    {
+     "id": "n_istx_cernauti",
+     "label": "Cernăuți",
+     "node_type": "place",
+     "category": "istorie",
+     "salience": 0.1864,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Orașul congresului care a votat unirea Bucovinei cu România la 28 noiembrie 1918."
+    }
+   ]
+  },
+  {
+   "label": "Context european, nu strigăt de tribună",
+   "members": [
+    {
+     "id": "n_primul_razboi_mondial",
+     "label": "Primul Război Mondial",
+     "node_type": "event",
+     "category": "istorie",
+     "salience": 0.4923,
+     "degree": 14,
+     "incoming_degree": 17,
+     "description": "Conflict mondial (1914-1918); Romania a participat din 1916, urmat de Marea Unire."
+    },
+    {
+     "id": "n_tratatul_trianon",
+     "label": "Tratatul de la Trianon",
+     "node_type": "event",
+     "category": "istorie",
+     "salience": 0.406,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Tratat de pace semnat în 1920 între Puterile Aliate și Asociate și Ungaria, care a stabilit noile frontiere ale Ungariei, inclusiv granița cu România."
+    },
+    {
+     "id": "n_imperiul_austro_ungar",
+     "label": "Imperiul Austro-Ungar",
+     "node_type": "org",
+     "category": "istorie",
+     "salience": 0.2294,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Imperiu dualist (1867-1918) care a stapanit Transilvania pana la Marea Unire din 1918."
+    },
+    {
+     "id": "n_regatul_romaniei",
+     "label": "Regatul României",
+     "node_type": "org",
+     "category": "istorie",
+     "salience": 0.5906,
+     "degree": 22,
+     "incoming_degree": 22,
+     "description": "Monarhia romana proclamata in 1881, cu Carol I primul rege; a durat pana in 1947."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Marea Unire 1918",
+   "a_group": "Uniri care schimbă statul",
+   "b": "Transilvania",
+   "b_group": "Geografia Marii Uniri",
+   "strength": 0.91
+  },
+  {
+   "a": "Cernăuți",
+   "a_group": "Geografia Marii Uniri",
+   "b": "Marea Unire 1918",
+   "b_group": "Uniri care schimbă statul",
+   "strength": 0.86
+  },
+  {
+   "a": "Alexandru Ioan Cuza",
+   "a_group": "Oameni de pe axa unirii",
+   "b": "Mică Unire 1859",
+   "b_group": "Uniri care schimbă statul",
+   "strength": 0.85
+  },
+  {
+   "a": "Carol I",
+   "a_group": "Oameni de pe axa unirii",
+   "b": "Regatul României",
+   "b_group": "Context european, nu strigăt de tribună",
+   "strength": 0.85
+  },
+  {
+   "a": "Mihai Viteazul",
+   "a_group": "Oameni de pe axa unirii",
+   "b": "Unirea de la 1600",
+   "b_group": "Uniri care schimbă statul",
+   "strength": 0.85
+  },
+  {
+   "a": "Chișinău",
+   "a_group": "Geografia Marii Uniri",
+   "b": "Unire",
+   "b_group": "Uniri care schimbă statul",
+   "strength": 0.84
+  },
+  {
+   "a": "Ferdinand I",
+   "a_group": "Oameni de pe axa unirii",
+   "b": "Regatul României",
+   "b_group": "Context european, nu strigăt de tribună",
+   "strength": 0.84
+  },
+  {
+   "a": "Marea Unire 1918",
+   "a_group": "Uniri care schimbă statul",
+   "b": "Primul Război Mondial",
+   "b_group": "Context european, nu strigăt de tribună",
+   "strength": 0.82
+  },
+  {
+   "a": "Alba Iulia",
+   "a_group": "Geografia Marii Uniri",
+   "b": "Marea Unire 1918",
+   "b_group": "Uniri care schimbă statul",
+   "strength": 0.8
+  },
+  {
+   "a": "Imperiul Austro-Ungar",
+   "a_group": "Context european, nu strigăt de tribună",
+   "b": "Transilvania",
+   "b_group": "Geografia Marii Uniri",
+   "strength": 0.8
+  },
+  {
+   "a": "Cernăuți",
+   "a_group": "Geografia Marii Uniri",
+   "b": "Unire",
+   "b_group": "Uniri care schimbă statul",
+   "strength": 0.78
+  },
+  {
+   "a": "Marea Unire 1918",
+   "a_group": "Uniri care schimbă statul",
+   "b": "Tratatul de la Trianon",
+   "b_group": "Context european, nu strigăt de tribună",
+   "strength": 0.78
+  },
+  {
+   "a": "Alba Iulia",
+   "a_group": "Geografia Marii Uniri",
+   "b": "Mihai Viteazul",
+   "b_group": "Oameni de pe axa unirii",
+   "strength": 0.75
+  },
+  {
+   "a": "Marea Unire 1918",
+   "a_group": "Uniri care schimbă statul",
+   "b": "Regatul României",
+   "b_group": "Context european, nu strigăt de tribună",
+   "strength": 0.75
+  },
+  {
+   "a": "Mihai Viteazul",
+   "a_group": "Oameni de pe axa unirii",
+   "b": "Transilvania",
+   "b_group": "Geografia Marii Uniri",
+   "strength": 0.75
+  },
+  {
+   "a": "Chișinău",
+   "a_group": "Geografia Marii Uniri",
+   "b": "Marea Unire 1918",
+   "b_group": "Uniri care schimbă statul",
+   "strength": 0.74
+  },
+  {
+   "a": "Transilvania",
+   "a_group": "Geografia Marii Uniri",
+   "b": "Tratatul de la Trianon",
+   "b_group": "Context european, nu strigăt de tribună",
+   "strength": 0.72
+  },
+  {
+   "a": "Ferdinand I",
+   "a_group": "Oameni de pe axa unirii",
+   "b": "Marea Unire 1918",
+   "b_group": "Uniri care schimbă statul",
+   "strength": 0.7
+  },
+  {
+   "a": "Imperiul Austro-Ungar",
+   "a_group": "Context european, nu strigăt de tribună",
+   "b": "Marea Unire 1918",
+   "b_group": "Uniri care schimbă statul",
+   "strength": 0.7
+  },
+  {
+   "a": "Transilvania",
+   "a_group": "Geografia Marii Uniri",
+   "b": "Unirea de la 1600",
+   "b_group": "Uniri care schimbă statul",
+   "strength": 0.7
+  },
+  {
+   "a": "Imperiul Austro-Ungar",
+   "a_group": "Context european, nu strigăt de tribună",
+   "b": "Cernăuți",
+   "b_group": "Geografia Marii Uniri",
+   "strength": 0.68
+  },
+  {
+   "a": "Alba Iulia",
+   "a_group": "Geografia Marii Uniri",
+   "b": "Unirea de la 1600",
+   "b_group": "Uniri care schimbă statul",
+   "strength": 0.66
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:61fbe392c06363e98cd3b601de9dc7252943a24c62103a8a20f570c517c3bafc"
+}

@@ -1,0 +1,283 @@
+{
+ "id": "cx_film_tv_164",
+ "game": "conexiuni",
+ "category": "film_tv",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "d91e22242e74c0c400b709da08664a1b966b8c835dc28bc37c8bfb7175a24980",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Catalogul din Liceenii\" repeats member(s): Liceenii"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Catalogul din Liceenii\" mixes node_types 3+1: Liceenii[work], Mihai din Liceenii[person], Dana din Liceenii[person], Isoscel[person]"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Vacanța Mare: familia Leana-Costel\" repeats member(s): Costel, Leana, Vacanța Mare"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Vacanța Mare: familia Leana-Costel\" mixes node_types 3+1: Vacanța Mare[org], Mugur Mihăescu[person], Leana[person], Costel[person]"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Antena 1 cu juriu, ispită și tigaie\" repeats member(s): Antena 1"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Antena 1 cu juriu, ispită și tigaie\" mixes node_types 3+1: Antena 1[org], Chefi la cuțite[work], iUmor[work], Insula Iubirii[work]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Catalogul din Liceenii\" reuses an inventory/selected quad (also in: cx_film_tv_008)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Vacanța Mare: familia Leana-Costel\" reuses an inventory/selected quad (also in: cx_film_tv_008, cx_film_tv_098, cx_film_tv_244)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Măruță acasă și pe post\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_film_tv_013)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Antena 1 cu juriu, ispită și tigaie\" reuses an inventory/selected quad (also in: cx_film_tv_010, cx_film_tv_013)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_film_tv_008 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Antena 1 (12), Cătălin Măruță (9), Pro TV (14)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 0
+ },
+ "groups": [
+  {
+   "label": "Catalogul din Liceenii",
+   "members": [
+    {
+     "id": "n_ftv_liceenii",
+     "label": "Liceenii",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.8978,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Film românesc din 1986 despre adolescenți, școală și prime iubiri."
+    },
+    {
+     "id": "n_ftv_mihai_liceenii",
+     "label": "Mihai din Liceenii",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.2755,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Personajul interpretat de Ștefan Bănică Jr. în filmul Liceenii."
+    },
+    {
+     "id": "n_ftv_dana_liceenii",
+     "label": "Dana din Liceenii",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.2674,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Personajul interpretat de Oana Sârbu în filmul Liceenii."
+    },
+    {
+     "id": "n_ftv_isoscel",
+     "label": "Isoscel",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.3063,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Profesoara severă interpretată de Tamara Buciuceanu-Botez în Liceenii."
+    }
+   ]
+  },
+  {
+   "label": "Vacanța Mare: familia Leana-Costel",
+   "members": [
+    {
+     "id": "n_ftv_vacanta_mare",
+     "label": "Vacanța Mare",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.7937,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Grup și brand de comedie TV românească, cunoscut pentru Leana și Costel."
+    },
+    {
+     "id": "n_ftv_mugur_mihaescu",
+     "label": "Mugur Mihăescu",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.3568,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Actor și comedian român, membru fondator Vacanța Mare și interpret al Leanei."
+    },
+    {
+     "id": "n_ftv_leana",
+     "label": "Leana",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.5205,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Personaj comic din Vacanța Mare, interpretat de Mugur Mihăescu."
+    },
+    {
+     "id": "n_ftv_costel_vacanta_mare",
+     "label": "Costel",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.28,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Personaj din Vacanța Mare, pereche comică pentru Leana în sketch-uri TV."
+    }
+   ]
+  },
+  {
+   "label": "Măruță acasă și pe post",
+   "members": [
+    {
+     "id": "n_ftv_catalin_maruta",
+     "label": "Cătălin Măruță",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.584,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Prezentator TV român care a prezentat emisiunea La Măruță la Pro TV între 2007 și 2026."
+    },
+    {
+     "id": "n_ftv_la_maruta",
+     "label": "La Măruță",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.4293,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Emisiune de divertisment și interviuri difuzată de Pro TV între 2007 și 2026."
+    },
+    {
+     "id": "n_ftv_pro_tv",
+     "label": "Pro TV",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.9055,
+     "degree": 26,
+     "incoming_degree": 26,
+     "description": "Post TV comercial românesc, important pentru seriale și divertisment pop."
+    },
+    {
+     "id": "n_muz_andra",
+     "label": "Andra",
+     "node_type": "person",
+     "category": "muzica",
+     "salience": 0.8183,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Cântăreață română pop, prezentă constant în radio, televiziune și concerte mari."
+    }
+   ]
+  },
+  {
+   "label": "Antena 1 cu juriu, ispită și tigaie",
+   "members": [
+    {
+     "id": "n_ftv_antena_1",
+     "label": "Antena 1",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.8169,
+     "degree": 20,
+     "incoming_degree": 20,
+     "description": "Post TV comercial românesc cu divertisment, reality-show-uri și concursuri."
+    },
+    {
+     "id": "n_ftv_chefi_la_cutite",
+     "label": "Chefi la cuțite",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.7726,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Show culinar competitiv difuzat de Antena 1."
+    },
+    {
+     "id": "n_ftv_iumor",
+     "label": "iUmor",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.5541,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Emisiune de divertisment și stand-up difuzată de Antena 1."
+    },
+    {
+     "id": "n_ftv_insula_iubirii",
+     "label": "Insula Iubirii",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.4563,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Reality-show românesc difuzat de Antena 1, adaptare după Temptation Island."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Pro TV",
+   "a_group": "Măruță acasă și pe post",
+   "b": "Vacanța Mare",
+   "b_group": "Vacanța Mare: familia Leana-Costel",
+   "strength": 0.74
+  },
+  {
+   "a": "Antena 1",
+   "a_group": "Antena 1 cu juriu, ispită și tigaie",
+   "b": "Pro TV",
+   "b_group": "Măruță acasă și pe post",
+   "strength": 0.72
+  },
+  {
+   "a": "iUmor",
+   "a_group": "Antena 1 cu juriu, ispită și tigaie",
+   "b": "Mugur Mihăescu",
+   "b_group": "Vacanța Mare: familia Leana-Costel",
+   "strength": 0.72
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:4e48d4d6eac029707dca461885e095e130397c06702bc43926011539dfdbd9ad"
+}

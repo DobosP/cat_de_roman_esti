@@ -1,0 +1,343 @@
+{
+ "id": "cx_viata_de_roman_234",
+ "game": "conexiuni",
+ "category": "viata_de_roman",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "e97e2d1bc3ff4674b726679d2072bb7a0aceb05d83aacf04adbd68f6e1ce7b92",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Borcanele de zacuscă, Mirosul de cozonac"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Curtea bunicilor, cu GPS afectiv\" mixes node_types 3+1: Gospodăria bunicilor[place], Vara la bunici[event], Gospodărie rurală[place], Ulița satului[place]"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Curtea bunicilor, cu GPS afectiv\" <-> \"Din cămara care nu se termină\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Calendarul când se strânge familia\" mixes node_types 2+2: Sărbători în familie[concept], Sarmalele de Crăciun[concept], Tăiatul porcului de Ignat[event], Colindatul[event]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Curtea bunicilor, cu GPS afectiv\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_200)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Din cămara care nu se termină\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_237)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Logistica pachetului de acasă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_viata_de_roman_169)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_viata_de_roman_086 (11), cx_viata_de_roman_169 (9)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Borcanele de zacuscă (11), Portbagajul plin (9)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Borcanele de zacuscă",
+   "Mirosul de cozonac"
+  ],
+  "contested_tiles": [
+   "Țuica de casă"
+  ],
+  "engine_unfair_raw": 3
+ },
+ "groups": [
+  {
+   "label": "Curtea bunicilor, cu GPS afectiv",
+   "members": [
+    {
+     "id": "n_vdr_gospodaria_bunicilor",
+     "label": "Gospodăria bunicilor",
+     "node_type": "place",
+     "category": "viata_de_roman",
+     "salience": 0.9146,
+     "degree": 20,
+     "incoming_degree": 20,
+     "description": "Curtea cu grădină, coteț, magazie, butoi și lucruri păstrate pentru orice nevoie."
+    },
+    {
+     "id": "n_vdr_vara_la_bunici",
+     "label": "Vara la bunici",
+     "node_type": "event",
+     "category": "viata_de_roman",
+     "salience": 0.9498,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Vacanța lungă la sat, cu curte, uliță, animale și mâncare făcută în casă."
+    },
+    {
+     "id": "n_v2via_gospodarie_rurala",
+     "label": "Gospodărie rurală",
+     "node_type": "place",
+     "category": "viata_de_roman",
+     "salience": 0.8218,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Curte de la țară cu animale, fântână, provizii și anexe gospodărești."
+    },
+    {
+     "id": "n_vdr_ulita_satului",
+     "label": "Ulița satului",
+     "node_type": "place",
+     "category": "viata_de_roman",
+     "salience": 0.5109,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Drumul mic al satului, spațiu de joacă, povești și întoarceri de la câmp."
+    }
+   ]
+  },
+  {
+   "label": "Din cămara care nu se termină",
+   "members": [
+    {
+     "id": "n_vdr_borcane_zacusca",
+     "label": "Borcanele de zacuscă",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.7642,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Conserve de toamnă puse la borcan pentru iarnă, nelipsite din multe cămări."
+    },
+    {
+     "id": "n_vdr_mamaliga_bunicii",
+     "label": "Mămăliga bunicii",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.8535,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Mămăligă fierbinte făcută în casă, simbol al mesei simple de la bunici."
+    },
+    {
+     "id": "n_vdr_tuica_de_casa",
+     "label": "Țuica de casă",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.635,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Băutură tradițională din prune, asociată cu gospodăria rurală și mesele de familie."
+    },
+    {
+     "id": "n_vdr_miros_de_cozonac",
+     "label": "Mirosul de cozonac",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.7473,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Aroma de cozonac copt care anunță masa de sărbătoare."
+    }
+   ]
+  },
+  {
+   "label": "Logistica pachetului de acasă",
+   "members": [
+    {
+     "id": "n_v2via_pachet_de_acasa",
+     "label": "Pachet de acasă",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.7768,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Mâncare sau lucruri primite de la familie și duse în sacoșe ori portbagaj."
+    },
+    {
+     "id": "n_vdr_portbagaj_plin",
+     "label": "Portbagajul plin",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.6883,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Mașina încărcată cu sacoșe, borcane sau bagaje la plecarea de la rude."
+    },
+    {
+     "id": "n_vdr_punga_cu_pungi",
+     "label": "Punga cu pungi",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9364,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Punga mare în care se păstrează alte pungi, soluție domestică foarte răspândită."
+    },
+    {
+     "id": "n_v3via_sacosa",
+     "label": "Sacoșa",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.4947,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Geantă rezistentă folosită la cumpărături sau bagaje."
+    }
+   ]
+  },
+  {
+   "label": "Calendarul când se strânge familia",
+   "members": [
+    {
+     "id": "n_v2via_sarbatori_familie",
+     "label": "Sărbători în familie",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9153,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Zile festive trăite acasă, cu rude, obiceiuri și mâncare pregătită."
+    },
+    {
+     "id": "n_vdr_sarmale_craciun",
+     "label": "Sarmalele de Crăciun",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9603,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Fel de sărbătoare cu varză, carne și oală mare, nelipsit pe multe mese românești."
+    },
+    {
+     "id": "n_vdr_taiatul_porcului",
+     "label": "Tăiatul porcului de Ignat",
+     "node_type": "event",
+     "category": "viata_de_roman",
+     "salience": 0.8064,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Obicei rural de iarnă înaintea Crăciunului, legat de pregătirea cărnii."
+    },
+    {
+     "id": "n_vdr_colindatul",
+     "label": "Colindatul",
+     "node_type": "event",
+     "category": "viata_de_roman",
+     "salience": 0.7839,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Obicei de Crăciun în care grupuri cântă colinde pe la case."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Borcanele de zacuscă",
+   "a_group": "Din cămara care nu se termină",
+   "b": "Gospodăria bunicilor",
+   "b_group": "Curtea bunicilor, cu GPS afectiv",
+   "strength": 0.84
+  },
+  {
+   "a": "Mămăliga bunicii",
+   "a_group": "Din cămara care nu se termină",
+   "b": "Vara la bunici",
+   "b_group": "Curtea bunicilor, cu GPS afectiv",
+   "strength": 0.84
+  },
+  {
+   "a": "Gospodăria bunicilor",
+   "a_group": "Curtea bunicilor, cu GPS afectiv",
+   "b": "Mămăliga bunicii",
+   "b_group": "Din cămara care nu se termină",
+   "strength": 0.82
+  },
+  {
+   "a": "Mirosul de cozonac",
+   "a_group": "Din cămara care nu se termină",
+   "b": "Sarmalele de Crăciun",
+   "b_group": "Calendarul când se strânge familia",
+   "strength": 0.82
+  },
+  {
+   "a": "Pachet de acasă",
+   "a_group": "Logistica pachetului de acasă",
+   "b": "Borcanele de zacuscă",
+   "b_group": "Din cămara care nu se termină",
+   "strength": 0.82
+  },
+  {
+   "a": "Sărbători în familie",
+   "a_group": "Calendarul când se strânge familia",
+   "b": "Mirosul de cozonac",
+   "b_group": "Din cămara care nu se termină",
+   "strength": 0.82
+  },
+  {
+   "a": "Gospodăria bunicilor",
+   "a_group": "Curtea bunicilor, cu GPS afectiv",
+   "b": "Tăiatul porcului de Ignat",
+   "b_group": "Calendarul când se strânge familia",
+   "strength": 0.78
+  },
+  {
+   "a": "Gospodărie rurală",
+   "a_group": "Curtea bunicilor, cu GPS afectiv",
+   "b": "Tăiatul porcului de Ignat",
+   "b_group": "Calendarul când se strânge familia",
+   "strength": 0.78
+  },
+  {
+   "a": "Gospodărie rurală",
+   "a_group": "Curtea bunicilor, cu GPS afectiv",
+   "b": "Țuica de casă",
+   "b_group": "Din cămara care nu se termină",
+   "strength": 0.76
+  },
+  {
+   "a": "Borcanele de zacuscă",
+   "a_group": "Din cămara care nu se termină",
+   "b": "Vara la bunici",
+   "b_group": "Curtea bunicilor, cu GPS afectiv",
+   "strength": 0.74
+  },
+  {
+   "a": "Borcanele de zacuscă",
+   "a_group": "Din cămara care nu se termină",
+   "b": "Portbagajul plin",
+   "b_group": "Logistica pachetului de acasă",
+   "strength": 0.72
+  },
+  {
+   "a": "Gospodăria bunicilor",
+   "a_group": "Curtea bunicilor, cu GPS afectiv",
+   "b": "Țuica de casă",
+   "b_group": "Din cămara care nu se termină",
+   "strength": 0.72
+  },
+  {
+   "a": "Borcanele de zacuscă",
+   "a_group": "Din cămara care nu se termină",
+   "b": "Punga cu pungi",
+   "b_group": "Logistica pachetului de acasă",
+   "strength": 0.7
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:90334e4a0d8e39b0ea29203e8a6f54a66b5ad481d15a88bfd9f25209abee8577"
+}

@@ -1,0 +1,246 @@
+{
+ "id": "cx_muzica_058",
+ "game": "conexiuni",
+ "category": "muzica",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "f4853a25195e7503b18697090f16d2730daf181aeddc6c163d0527ed1034382f",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Folclor și clasic în inventar\" mixes node_types 2+2: George Enescu[person], Maria Tănase[person], Folclor românesc[concept], Doina[concept]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Exporturi de radio peste hotare\" mixes node_types 3+1: O-Zone[org], INNA[person], Alexandra Stan[person], Edward Maya[person]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Folclor și clasic în inventar\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_literatura_043, cx_muzica_273)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Festivaluri cu tradiție sau brand mare\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_arta_cultura_096, cx_geografie_252, cx_muzica_056, cx_muzica_138, cx_muzica_205, cx_muzica_206, cx_muzica_271)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Exporturi de radio peste hotare\" reuses an inventory/selected quad (also in: cx_muzica_053, cx_muzica_140, cx_muzica_274)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Constanța (15), Doina (14), Festivalul George Enescu (18), George Enescu (23), Marea Neagră (10), Electric Castle (10), Neversea (11), O-Zone (10), Untold (10)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 1
+ },
+ "groups": [
+  {
+   "label": "Folclor și clasic în inventar",
+   "members": [
+    {
+     "id": "n_george_enescu",
+     "label": "George Enescu",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.8366,
+     "degree": 30,
+     "incoming_degree": 30,
+     "description": "Compozitor, violonist si dirijor roman."
+    },
+    {
+     "id": "n_maria_tanase",
+     "label": "Maria Tănase",
+     "node_type": "person",
+     "category": "personalitati",
+     "salience": 0.3658,
+     "degree": 15,
+     "incoming_degree": 16,
+     "description": "Cantareata romana de muzica populara, una dintre cele mai mari interprete de folclor (1913-1963)."
+    },
+    {
+     "id": "n_folclor_romanesc",
+     "label": "Folclor românesc",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.5295,
+     "degree": 42,
+     "incoming_degree": 45,
+     "description": "Traditia populara romaneasca: muzica, dans, obiceiuri."
+    },
+    {
+     "id": "n_doina",
+     "label": "Doina",
+     "node_type": "concept",
+     "category": "arta_cultura",
+     "salience": 0.3976,
+     "degree": 15,
+     "incoming_degree": 15,
+     "description": "Cantec liric traditional romanesc, in patrimoniul UNESCO."
+    }
+   ]
+  },
+  {
+   "label": "Festivaluri cu tradiție sau brand mare",
+   "members": [
+    {
+     "id": "n_muz_cerbul_de_aur",
+     "label": "Cerbul de Aur",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.7305,
+     "degree": 15,
+     "incoming_degree": 15,
+     "description": "Festival-concurs muzical de la Brașov, lansat în perioada televiziunii clasice."
+    },
+    {
+     "id": "n_festivalul_enescu",
+     "label": "Festivalul George Enescu",
+     "node_type": "event",
+     "category": "arta_cultura",
+     "salience": 0.4779,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Festival international de muzica clasica de la Bucuresti."
+    },
+    {
+     "id": "n_muz_untold",
+     "label": "Untold",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.8746,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Festival muzical major organizat la Cluj-Napoca, cu artiști EDM și pop internaționali."
+    },
+    {
+     "id": "n_muz_electric_castle",
+     "label": "Electric Castle",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.6862,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Festival muzical organizat la Bonțida, lângă Castelul Bánffy."
+    }
+   ]
+  },
+  {
+   "label": "Litoral pop-culture",
+   "members": [
+    {
+     "id": "n_muz_neversea",
+     "label": "Neversea",
+     "node_type": "event",
+     "category": "muzica",
+     "salience": 0.729,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Festival de muzică organizat la Constanța, asociat cu scena de pe litoral."
+    },
+    {
+     "id": "n_constanta",
+     "label": "Constanța",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.5067,
+     "degree": 22,
+     "incoming_degree": 22,
+     "description": "Oraș-port la Marea Neagră, în Dobrogea."
+    },
+    {
+     "id": "n_marea_neagra",
+     "label": "Marea Neagră",
+     "node_type": "place",
+     "category": "geografie",
+     "salience": 0.6416,
+     "degree": 26,
+     "incoming_degree": 27,
+     "description": "Mare la est de România, litoralul românesc."
+    },
+    {
+     "id": "n_muz_vama_veche",
+     "label": "Vama Veche",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.2795,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Trupă românească de rock alternativ, asociată cu refrene de vară și libertate."
+    }
+   ]
+  },
+  {
+   "label": "Exporturi de radio peste hotare",
+   "members": [
+    {
+     "id": "n_muz_ozone",
+     "label": "O-Zone",
+     "node_type": "org",
+     "category": "muzica",
+     "salience": 0.883,
+     "degree": 12,
+     "incoming_degree": 11,
+     "description": "Trio pop din Republica Moldova care a dus „Dragostea din tei” în topuri internaționale."
+    },
+    {
+     "id": "n_muz_inna",
+     "label": "INNA",
+     "node_type": "person",
+     "category": "muzica",
+     "salience": 0.8549,
+     "degree": 12,
+     "incoming_degree": 12,
+     "description": "Cântăreață română de dance-pop, cu succes internațional după single-ul „Hot”."
+    },
+    {
+     "id": "n_muz_alexandra_stan",
+     "label": "Alexandra Stan",
+     "node_type": "person",
+     "category": "muzica",
+     "salience": 0.6002,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Cântăreață română devenită cunoscută global cu „Mr. Saxobeat”."
+    },
+    {
+     "id": "n_muz_edward_maya",
+     "label": "Edward Maya",
+     "node_type": "person",
+     "category": "muzica",
+     "salience": 0.4185,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "DJ și producător român, cunoscut internațional pentru „Stereo Love”."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Festivalul George Enescu",
+   "a_group": "Festivaluri cu tradiție sau brand mare",
+   "b": "George Enescu",
+   "b_group": "Folclor și clasic în inventar",
+   "strength": 0.9
+  },
+  {
+   "a": "Constanța",
+   "a_group": "Litoral pop-culture",
+   "b": "Alexandra Stan",
+   "b_group": "Exporturi de radio peste hotare",
+   "strength": 0.78
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:abda1de1dd99842e9862e4339f74f3dc21701a4eefe323817b1c08e614fb3157"
+}

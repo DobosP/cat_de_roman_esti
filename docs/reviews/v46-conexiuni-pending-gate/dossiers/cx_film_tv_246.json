@@ -1,0 +1,364 @@
+{
+ "id": "cx_film_tv_246",
+ "game": "conexiuni",
+ "category": "film_tv",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "7db274878192693ec5238ce7c94a78bd17d44085a0a00e57dbd4397d481a4a4a",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "board_type_shortcut",
+   "level": "FAIL",
+   "detail": "all four groups are node-type homogeneous and expose 4 distinct group types"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Posturi TV\" <-> \"Prezentatori TV\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Posturi TV\" <-> \"Emisiuni de divertisment\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Posturi TV\" <-> \"Obiecte și tehnologii TV\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "mirrored_groups",
+   "level": "FAIL",
+   "detail": "\"Prezentatori TV\" <-> \"Emisiuni de divertisment\" are in >=3-way strong correspondence"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Posturi TV\" reuses an inventory/selected quad (also in: cx_arta_cultura_162, cx_film_tv_169, cx_muzica_209, cx_societate_155)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Prezentatori TV\" reuses an inventory/selected quad (also in: cx_film_tv_010, cx_film_tv_012, cx_film_tv_014, cx_film_tv_097, cx_film_tv_169, cx_muzica_209)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Emisiuni de divertisment\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_film_tv_010, cx_film_tv_097, cx_film_tv_169)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_film_tv_010 (12), cx_film_tv_169 (12), cx_film_tv_013 (10), cx_film_tv_097 (10), cx_muzica_209 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Andreea Marin (9), Antena 1 (12), Cătălin Măruță (9), Pro TV (14), TVR (14)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 6
+ },
+ "groups": [
+  {
+   "label": "Posturi TV",
+   "members": [
+    {
+     "id": "n_ftv_pro_tv",
+     "label": "Pro TV",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.9055,
+     "degree": 26,
+     "incoming_degree": 26,
+     "description": "Post TV comercial românesc, important pentru seriale și divertisment pop."
+    },
+    {
+     "id": "n_ftv_tvr",
+     "label": "TVR",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.876,
+     "degree": 20,
+     "incoming_degree": 20,
+     "description": "Televiziunea publică din România, reper istoric pentru emisiuni și filme TV."
+    },
+    {
+     "id": "n_ftv_antena_1",
+     "label": "Antena 1",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.8169,
+     "degree": 20,
+     "incoming_degree": 20,
+     "description": "Post TV comercial românesc cu divertisment, reality-show-uri și concursuri."
+    },
+    {
+     "id": "n_ftv_kanal_d",
+     "label": "Kanal D",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.4413,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Post TV comercial din România, cunoscut pentru divertisment și reality-show-uri."
+    }
+   ]
+  },
+  {
+   "label": "Prezentatori TV",
+   "members": [
+    {
+     "id": "n_ftv_andreea_marin",
+     "label": "Andreea Marin",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.5127,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Prezentatoare TV asociată puternic cu emisiunea Surprize, surprize."
+    },
+    {
+     "id": "n_ftv_catalin_maruta",
+     "label": "Cătălin Măruță",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.584,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Prezentator TV român care a prezentat emisiunea La Măruță la Pro TV între 2007 și 2026."
+    },
+    {
+     "id": "n_ftv_teo_trandafir",
+     "label": "Teo Trandafir",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.4251,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Prezentatoare și realizatoare TV română, reper al talk-show-ului autohton."
+    },
+    {
+     "id": "n_ftv_virgil_iantu",
+     "label": "Virgil Ianțu",
+     "node_type": "person",
+     "category": "film_tv",
+     "salience": 0.278,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Prezentator TV cunoscut ca gazdă a emisiunii Vrei să fii milionar?."
+    }
+   ]
+  },
+  {
+   "label": "Emisiuni de divertisment",
+   "members": [
+    {
+     "id": "n_ftv_surprize_surprize",
+     "label": "Surprize, surprize",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.4755,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Emisiune TVR de divertisment prezentată de Andreea Marin."
+    },
+    {
+     "id": "n_ftv_la_maruta",
+     "label": "La Măruță",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.4293,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Emisiune de divertisment și interviuri difuzată de Pro TV între 2007 și 2026."
+    },
+    {
+     "id": "n_ftv_teo_show",
+     "label": "Teo Show",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.3089,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Talk-show de divertisment asociat cu Teo Trandafir, difuzat la Kanal D."
+    },
+    {
+     "id": "n_ftv_iumor",
+     "label": "iUmor",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.5541,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Emisiune de divertisment și stand-up difuzată de Antena 1."
+    }
+   ]
+  },
+  {
+   "label": "Obiecte și tehnologii TV",
+   "members": [
+    {
+     "id": "n_v4fil_televizor",
+     "label": "televizor",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.8127,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Aparat pe care se urmăresc programe TV, filme și emisiuni."
+    },
+    {
+     "id": "n_v4fil_telecomanda",
+     "label": "telecomandă",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.647,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Dispozitiv folosit pentru schimbarea canalelor și controlul televizorului."
+    },
+    {
+     "id": "n_vdr_teletext",
+     "label": "Teletextul",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.34,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Serviciu TV cu pagini de text pentru știri, program și rezultate, folosit înaintea internetului."
+    },
+    {
+     "id": "n_v4fil_ecran",
+     "label": "ecran",
+     "node_type": "concept",
+     "category": "film_tv",
+     "salience": 0.8,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Suprafață pe care apar imagini de film, televiziune sau video."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Andreea Marin",
+   "a_group": "Prezentatori TV",
+   "b": "Surprize, surprize",
+   "b_group": "Emisiuni de divertisment",
+   "strength": 0.98
+  },
+  {
+   "a": "Cătălin Măruță",
+   "a_group": "Prezentatori TV",
+   "b": "La Măruță",
+   "b_group": "Emisiuni de divertisment",
+   "strength": 0.98
+  },
+  {
+   "a": "Antena 1",
+   "a_group": "Posturi TV",
+   "b": "iUmor",
+   "b_group": "Emisiuni de divertisment",
+   "strength": 0.96
+  },
+  {
+   "a": "La Măruță",
+   "a_group": "Emisiuni de divertisment",
+   "b": "Pro TV",
+   "b_group": "Posturi TV",
+   "strength": 0.96
+  },
+  {
+   "a": "Surprize, surprize",
+   "a_group": "Emisiuni de divertisment",
+   "b": "TVR",
+   "b_group": "Posturi TV",
+   "strength": 0.96
+  },
+  {
+   "a": "Teo Show",
+   "a_group": "Emisiuni de divertisment",
+   "b": "Teo Trandafir",
+   "b_group": "Prezentatori TV",
+   "strength": 0.96
+  },
+  {
+   "a": "Cătălin Măruță",
+   "a_group": "Prezentatori TV",
+   "b": "Pro TV",
+   "b_group": "Posturi TV",
+   "strength": 0.86
+  },
+  {
+   "a": "Andreea Marin",
+   "a_group": "Prezentatori TV",
+   "b": "TVR",
+   "b_group": "Posturi TV",
+   "strength": 0.84
+  },
+  {
+   "a": "Kanal D",
+   "a_group": "Posturi TV",
+   "b": "Teo Show",
+   "b_group": "Emisiuni de divertisment",
+   "strength": 0.82
+  },
+  {
+   "a": "Kanal D",
+   "a_group": "Posturi TV",
+   "b": "Teo Trandafir",
+   "b_group": "Prezentatori TV",
+   "strength": 0.78
+  },
+  {
+   "a": "Pro TV",
+   "a_group": "Posturi TV",
+   "b": "televizor",
+   "b_group": "Obiecte și tehnologii TV",
+   "strength": 0.78
+  },
+  {
+   "a": "TVR",
+   "a_group": "Posturi TV",
+   "b": "televizor",
+   "b_group": "Obiecte și tehnologii TV",
+   "strength": 0.78
+  },
+  {
+   "a": "Antena 1",
+   "a_group": "Posturi TV",
+   "b": "telecomandă",
+   "b_group": "Obiecte și tehnologii TV",
+   "strength": 0.7
+  },
+  {
+   "a": "Pro TV",
+   "a_group": "Posturi TV",
+   "b": "telecomandă",
+   "b_group": "Obiecte și tehnologii TV",
+   "strength": 0.7
+  },
+  {
+   "a": "TVR",
+   "a_group": "Posturi TV",
+   "b": "Teletextul",
+   "b_group": "Obiecte și tehnologii TV",
+   "strength": 0.7
+  },
+  {
+   "a": "TVR",
+   "a_group": "Posturi TV",
+   "b": "telecomandă",
+   "b_group": "Obiecte și tehnologii TV",
+   "strength": 0.7
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:884977ea7b0c1a4e8e10b494d44a4faaa84676c0e33c013c255a51fa5399e8c6"
+}

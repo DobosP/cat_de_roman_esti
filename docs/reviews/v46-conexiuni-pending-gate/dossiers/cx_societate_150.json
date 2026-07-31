@@ -1,0 +1,317 @@
+{
+ "id": "cx_societate_150",
+ "game": "conexiuni",
+ "category": "societate",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "274b2c872c1aefd36cffc9f1cfd2b5880de436e9f8574cf99962d3ac0a7891e0",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Executivul de la centru\" mixes node_types 3+1: Președintele României[concept], Prim-ministrul[concept], Guvernul României[org], Stat[concept]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Legislativul bicameral\" mixes node_types 3+1: Parlamentul României[org], Camera Deputaților[org], Senatul[org], Alegeri[concept]"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Administrație locală\" mixes node_types 3+1: Primar[concept], Consiliul local[org], Comuna[concept], Municipiu[concept]"
+  },
+  {
+   "check": "label_self_leak",
+   "level": "FAIL",
+   "detail": "group label \"Cetățenie și drepturi\" repeats member(s): Cetățenie"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Executivul de la centru\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_069)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Legislativul bicameral\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_069)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Administrație locală\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_065, cx_societate_069, cx_societate_216)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Cetățenie și drepturi\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_societate_065)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_societate_069 (11), cx_societate_065 (8), cx_societate_216 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Guvernul României (9), Parlamentul României (11)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [
+   "Cetățenie"
+  ],
+  "engine_unfair_raw": 1
+ },
+ "groups": [
+  {
+   "label": "Executivul de la centru",
+   "members": [
+    {
+     "id": "n_presedintele",
+     "label": "Președintele României",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.4036,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Seful statului roman, ales prin vot universal, reprezinta statul si vegheaza la respectarea Constitutiei."
+    },
+    {
+     "id": "n_prim_ministru",
+     "label": "Prim-ministrul",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.2254,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Seful Guvernului Romaniei, numit de Presedinte si validat de Parlament."
+    },
+    {
+     "id": "n_guvernul",
+     "label": "Guvernul României",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.4108,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Autoritatea executiva care realizeaza politica interna si externa a tarii."
+    },
+    {
+     "id": "n_v2soc_stat",
+     "label": "Stat",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.9547,
+     "degree": 24,
+     "incoming_degree": 24,
+     "description": "Organizare politică și juridică a unei comunități pe un teritoriu."
+    }
+   ]
+  },
+  {
+   "label": "Legislativul bicameral",
+   "members": [
+    {
+     "id": "n_parlamentul_romaniei",
+     "label": "Parlamentul României",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.6026,
+     "degree": 11,
+     "incoming_degree": 13,
+     "description": "Organul reprezentativ suprem si unica autoritate legiuitoare, format din Camera Deputatilor si Senat."
+    },
+    {
+     "id": "n_camera_deputatilor",
+     "label": "Camera Deputaților",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.1925,
+     "degree": 5,
+     "incoming_degree": 4,
+     "description": "Una dintre cele doua camere ale Parlamentului Romaniei, alaturi de Senat."
+    },
+    {
+     "id": "n_senatul",
+     "label": "Senatul",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.2127,
+     "degree": 5,
+     "incoming_degree": 4,
+     "description": "Camera superioara a Parlamentului Romaniei, alaturi de Camera Deputatilor."
+    },
+    {
+     "id": "n_v2soc_alegeri",
+     "label": "Alegeri",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.8907,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Proces prin care cetățenii votează reprezentanți sau opțiuni politice."
+    }
+   ]
+  },
+  {
+   "label": "Administrație locală",
+   "members": [
+    {
+     "id": "n_primar",
+     "label": "Primar",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.2846,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Autoritatea executiva aleasa care conduce administratia unei localitati."
+    },
+    {
+     "id": "n_consiliul_local",
+     "label": "Consiliul local",
+     "node_type": "org",
+     "category": "societate",
+     "salience": 0.1778,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Autoritate deliberativa aleasa la nivelul unei comune, oras sau municipiu."
+    },
+    {
+     "id": "n_comuna",
+     "label": "Comuna",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.3424,
+     "degree": 14,
+     "incoming_degree": 13,
+     "description": "Unitate administrativ-teritoriala de baza, formata din unul sau mai multe sate."
+    },
+    {
+     "id": "n_municipiu",
+     "label": "Municipiu",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.3928,
+     "degree": 14,
+     "incoming_degree": 14,
+     "description": "Localitate urbana de rang superior in organizarea administrativa a Romaniei."
+    }
+   ]
+  },
+  {
+   "label": "Cetățenie și drepturi",
+   "members": [
+    {
+     "id": "n_cetatean",
+     "label": "Cetățean",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.3826,
+     "degree": 23,
+     "incoming_degree": 23,
+     "description": "Persoana care detine cetatenia romana, cu drepturi si obligatii civice."
+    },
+    {
+     "id": "n_cetatenie",
+     "label": "Cetățenie",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.151,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Legatura juridica si politica intre o persoana si statul roman."
+    },
+    {
+     "id": "n_vot",
+     "label": "Drept de vot",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.346,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Dreptul cetățenilor de a alege, exercitat prin vot sau sufragiu."
+    },
+    {
+     "id": "n_v2soc_drepturi_civile",
+     "label": "Drepturi civile",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.6946,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Drepturi ale cetățenilor în raport cu statul și societatea."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Alegeri",
+   "a_group": "Legislativul bicameral",
+   "b": "Drept de vot",
+   "b_group": "Cetățenie și drepturi",
+   "strength": 0.9
+  },
+  {
+   "a": "Cetățenie",
+   "a_group": "Cetățenie și drepturi",
+   "b": "Stat",
+   "b_group": "Executivul de la centru",
+   "strength": 0.86
+  },
+  {
+   "a": "Președintele României",
+   "a_group": "Executivul de la centru",
+   "b": "Alegeri",
+   "b_group": "Legislativul bicameral",
+   "strength": 0.86
+  },
+  {
+   "a": "Primar",
+   "a_group": "Administrație locală",
+   "b": "Alegeri",
+   "b_group": "Legislativul bicameral",
+   "strength": 0.86
+  },
+  {
+   "a": "Consiliul local",
+   "a_group": "Administrație locală",
+   "b": "Alegeri",
+   "b_group": "Legislativul bicameral",
+   "strength": 0.76
+  },
+  {
+   "a": "Cetățean",
+   "a_group": "Cetățenie și drepturi",
+   "b": "Stat",
+   "b_group": "Executivul de la centru",
+   "strength": 0.72
+  },
+  {
+   "a": "Președintele României",
+   "a_group": "Executivul de la centru",
+   "b": "Drept de vot",
+   "b_group": "Cetățenie și drepturi",
+   "strength": 0.65
+  },
+  {
+   "a": "Parlamentul României",
+   "a_group": "Legislativul bicameral",
+   "b": "Drept de vot",
+   "b_group": "Cetățenie și drepturi",
+   "strength": 0.6
+  },
+  {
+   "a": "Parlamentul României",
+   "a_group": "Legislativul bicameral",
+   "b": "Prim-ministrul",
+   "b_group": "Executivul de la centru",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:b7cbe915c00b33dd651cfbdb451df3eabbfd8a184ed6eaf6bacf289a7318893c"
+}

@@ -1,0 +1,239 @@
+{
+ "id": "cx_film_tv_015",
+ "game": "conexiuni",
+ "category": "film_tv",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "86a435d2e7a2809f55851f68cfbf63faba95416e061a9ba2d3c68fa8798e7768",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Filantropica, Moromeții (film)"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Comedie și divertisment TV\" mixes node_types 3+1: Las Fierbinți[work], Trăsniții[work], Vacanța Mare[org], Teo Show[work]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Reality și concurs\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_film_tv_010, cx_film_tv_013, cx_film_tv_164)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Comedie și divertisment TV\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_film_tv_169)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Comedii de cinema\" reuses an inventory/selected quad (also in: cx_film_tv_009)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Cinema de autor sau ecranizare\" reuses an inventory/selected quad (also in: cx_istorie_184)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Pădurea spânzuraților (film) (9), 4 luni, 3 săptămâni și 2 zile (14)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Filantropica",
+   "Moromeții (film)"
+  ],
+  "contested_tiles": [],
+  "engine_unfair_raw": 2
+ },
+ "groups": [
+  {
+   "label": "Reality și concurs",
+   "members": [
+    {
+     "id": "n_ftv_iumor",
+     "label": "iUmor",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.5541,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Emisiune de divertisment și stand-up difuzată de Antena 1."
+    },
+    {
+     "id": "n_ftv_chefi_la_cutite",
+     "label": "Chefi la cuțite",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.7726,
+     "degree": 16,
+     "incoming_degree": 16,
+     "description": "Show culinar competitiv difuzat de Antena 1."
+    },
+    {
+     "id": "n_ftv_insula_iubirii",
+     "label": "Insula Iubirii",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.4563,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Reality-show românesc difuzat de Antena 1, adaptare după Temptation Island."
+    },
+    {
+     "id": "n_ftv_vrei_sa_fii_milionar",
+     "label": "Vrei să fii milionar?",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.4539,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Versiunea românească a formatului Who Wants to Be a Millionaire?."
+    }
+   ]
+  },
+  {
+   "label": "Comedie și divertisment TV",
+   "members": [
+    {
+     "id": "n_ftv_las_fierbinti",
+     "label": "Las Fierbinți",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.9744,
+     "degree": 17,
+     "incoming_degree": 17,
+     "description": "Serial românesc de comedie difuzat de Pro TV, plasat într-un sat fictiv."
+    },
+    {
+     "id": "n_ftv_trasnitii",
+     "label": "Trăsniții",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.4509,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Serial românesc de comedie longeviv, difuzat de Prima TV."
+    },
+    {
+     "id": "n_ftv_vacanta_mare",
+     "label": "Vacanța Mare",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.7937,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Grup și brand de comedie TV românească, cunoscut pentru Leana și Costel."
+    },
+    {
+     "id": "n_ftv_teo_show",
+     "label": "Teo Show",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.3089,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Talk-show de divertisment asociat cu Teo Trandafir, difuzat la Kanal D."
+    }
+   ]
+  },
+  {
+   "label": "Comedii de cinema",
+   "members": [
+    {
+     "id": "n_ftv_nea_marin_miliardar",
+     "label": "Nea Mărin Miliardar",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.8514,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Comedie românească din 1979 cu Amza Pellea în dublu rol memorabil."
+    },
+    {
+     "id": "n_ftv_bd_la_munte_si_la_mare",
+     "label": "B.D. la munte și la mare",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.7283,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Comedie românească din seria Brigada Diverse, cu Dem Rădulescu și Toma Caragiu."
+    },
+    {
+     "id": "n_ftv_operatiunea_monstrul",
+     "label": "Operațiunea Monstrul",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.4983,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Comedie românească din 1976 cu Toma Caragiu, Octavian Cotescu și Marin Moraru."
+    },
+    {
+     "id": "n_ftv_filantropica",
+     "label": "Filantropica",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.722,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Film românesc din 2002 regizat de Nae Caranfil, satiră despre tranziție."
+    }
+   ]
+  },
+  {
+   "label": "Cinema de autor sau ecranizare",
+   "members": [
+    {
+     "id": "n_ftv_morometii_film",
+     "label": "Moromeții (film)",
+     "node_type": "work",
+     "category": "film_tv",
+     "salience": 0.4587,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Ecranizare românească din 1987 după romanul lui Marin Preda."
+    },
+    {
+     "id": "n_patru_luni_trei_saptamani",
+     "label": "4 luni, 3 săptămâni și 2 zile",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.2775,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Film romanesc din 2007 regizat de Cristian Mungiu, distins cu Palme d'Or la Cannes."
+    },
+    {
+     "id": "n_padurea_spanzuratilor_film",
+     "label": "Pădurea spânzuraților (film)",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.2304,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Film romanesc regizat de Liviu Ciulei dupa romanul lui Liviu Rebreanu, premiat pentru regie la Cannes in 1965."
+    },
+    {
+     "id": "n_reconstituirea_film",
+     "label": "Reconstituirea",
+     "node_type": "work",
+     "category": "arta_cultura",
+     "salience": 0.2325,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Film romanesc din 1968 regizat de Lucian Pintilie, reper critic al cinemaului romanesc."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:874dae058881813259aaf6930ba6c1d9672b96a1d7ab39d4e303b5540f2895df"
+}

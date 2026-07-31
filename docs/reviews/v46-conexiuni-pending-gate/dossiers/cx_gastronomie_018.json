@@ -1,0 +1,261 @@
+{
+ "id": "cx_gastronomie_018",
+ "game": "conexiuni",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "0d8d373e7a711528054313042263940d5eef6334636e012f6345ce5beef7b55d",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Borș, Fasole cu ciolan, Mujdei, Murături"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Paște pe masă\" mixes node_types 3+1: Drob de miel[concept], Ouă roșii[concept], Masa de Paște[event], Cozonac[concept]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Paște pe masă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_102, cx_gastronomie_296, cx_viata_de_roman_288)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Preparate de porc pentru iarnă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_021, cx_gastronomie_174, cx_gastronomie_249)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Oală mare, porții multe\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_gastronomie_105)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Cozonac (11), Murături (14), Muștar (9), Sarmale (14), Varză a la Cluj (9)"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "Sarmale": "linked to 2 regions (Moldova, Transilvania)"
+ },
+ "fairness": {
+  "unfair_tiles": [
+   "Borș",
+   "Fasole cu ciolan",
+   "Mujdei",
+   "Murături"
+  ],
+  "contested_tiles": [],
+  "engine_unfair_raw": 4
+ },
+ "groups": [
+  {
+   "label": "Paște pe masă",
+   "members": [
+    {
+     "id": "n_gas_drob_miel",
+     "label": "Drob de miel",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.3988,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Preparat pascal din organe de miel, verdețuri și ouă, copt în tavă."
+    },
+    {
+     "id": "n_gas_oua_rosii",
+     "label": "Ouă roșii",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.7544,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Ouă vopsite pentru Paște, ciocnite la masa festivă."
+    },
+    {
+     "id": "n_gas_masa_paste",
+     "label": "Masa de Paște",
+     "node_type": "event",
+     "category": "gastronomie",
+     "salience": 0.9413,
+     "degree": 15,
+     "incoming_degree": 15,
+     "description": "Masă festivă cu ouă roșii, drob, miel, cozonac și preparate de primăvară."
+    },
+    {
+     "id": "n_gas_cozonac",
+     "label": "Cozonac",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9737,
+     "degree": 22,
+     "incoming_degree": 22,
+     "description": "Aluat dulce cu nucă, cacao sau rahat, nelipsit de la Crăciun și Paște."
+    }
+   ]
+  },
+  {
+   "label": "Preparate de porc pentru iarnă",
+   "members": [
+    {
+     "id": "n_gas_caltabos",
+     "label": "Caltaboș",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.4593,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Preparat tradițional de porc, fiert în maț, prezent pe masa de Crăciun."
+    },
+    {
+     "id": "n_gas_lebar",
+     "label": "Lebăr",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.3604,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Preparat de porc cu ficat, specific tăierii porcului și platourilor de iarnă."
+    },
+    {
+     "id": "n_gas_toba",
+     "label": "Tobă",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.4833,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Mezel tradițional din porc, în membrană, servit rece la masa de Crăciun."
+    },
+    {
+     "id": "n_gas_piftie",
+     "label": "Piftie",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.2492,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Aspic de porc sau pasăre cu usturoi, fel rece clasic al sărbătorilor de iarnă."
+    }
+   ]
+  },
+  {
+   "label": "Accente care dreg masa",
+   "members": [
+    {
+     "id": "n_gas_muraturi",
+     "label": "Murături",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.8914,
+     "degree": 23,
+     "incoming_degree": 23,
+     "description": "Legume conservate în saramură sau oțet, puse lângă fripturi, fasole sau șaorma."
+    },
+    {
+     "id": "n_gas_bors",
+     "label": "Borș",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.6494,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Lichid acru din tărâțe fermentate, folosit mai ales la ciorbe moldovenești."
+    },
+    {
+     "id": "n_gas_mujdei",
+     "label": "Mujdei",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.7993,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Sos de usturoi zdrobit, nelipsit lângă pește, cartofi, fripturi sau ciorbă de burtă."
+    },
+    {
+     "id": "n_gas_mustar",
+     "label": "Muștar",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.8317,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Sos iute-acrișor aproape obligatoriu lângă mici, cârnați sau grătare."
+    }
+   ]
+  },
+  {
+   "label": "Oală mare, porții multe",
+   "members": [
+    {
+     "id": "n_gas_sarmale",
+     "label": "Sarmale",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9793,
+     "degree": 23,
+     "incoming_degree": 23,
+     "description": "Foi de varză sau viță umplute cu carne și orez, reper al meselor românești de sărbătoare."
+    },
+    {
+     "id": "n_gas_ardei_umpluti",
+     "label": "Ardei umpluți",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.5882,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Ardei umpluți cu carne și orez, înrudiți culinar cu sarmalele."
+    },
+    {
+     "id": "n_gas_varza_a_la_cluj",
+     "label": "Varză a la Cluj",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.5846,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Fel ardelenesc stratificat cu varză, carne și orez, asemănat cu sarmalele desfăcute."
+    },
+    {
+     "id": "n_gas_fasole_ciolan",
+     "label": "Fasole cu ciolan",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9111,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Mâncare consistentă servită simbolic la multe mese publice de 1 Decembrie."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Murături",
+   "a_group": "Accente care dreg masa",
+   "b": "Sarmale",
+   "b_group": "Oală mare, porții multe",
+   "strength": 0.78
+  },
+  {
+   "a": "Fasole cu ciolan",
+   "a_group": "Oală mare, porții multe",
+   "b": "Murături",
+   "b_group": "Accente care dreg masa",
+   "strength": 0.75
+  },
+  {
+   "a": "Mujdei",
+   "a_group": "Accente care dreg masa",
+   "b": "Piftie",
+   "b_group": "Preparate de porc pentru iarnă",
+   "strength": 0.72
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:0c699e638ac2f3246073375825d7de331c17f334e1e75376ede68b02ff6cee60"
+}

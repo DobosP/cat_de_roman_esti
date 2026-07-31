@@ -1,0 +1,299 @@
+{
+ "id": "cx_limba_036",
+ "game": "conexiuni",
+ "category": "limba",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "2f87c857dd30dce2261446987aec046cc64ca81af63d38abf8f831a51c696844",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Barabulă, Cucuruz, Curechi, Etimologie, Limba latină, Păpușoi, Regionalisme"
+  },
+  {
+   "check": "red_herring_budget",
+   "level": "WARN",
+   "detail": "2 contested tiles (budget <4): Substratul dacic, Împrumuturile slave"
+  },
+  {
+   "check": "type_coherence",
+   "level": "WARN",
+   "detail": "group \"Etichete pentru feluri de cuvinte\" mixes node_types 3+1: Regionalisme[concept], Arhaisme[concept], Etimologie[concept], DEX[work]"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Regionalisme pentru legume sau cereale\" reuses an inventory/selected quad (also in: cx_gastronomie_106, cx_gastronomie_171, cx_geografie_110, cx_limba_187, cx_meme_net_201, cx_personalitati_213, cx_stiinta_229, cx_viata_de_roman_237)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Expresii cu sens figurat\" reuses an inventory/selected quad (also in: cx_gastronomie_106, cx_limba_123, cx_limba_187, cx_stiinta_229)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Straturi istorice în vocabular\" reuses an inventory/selected quad (also in: cx_limba_122, cx_limba_189, cx_limba_261)"
+  },
+  {
+   "check": "board_reskin",
+   "level": "FAIL",
+   "detail": "shares >=8/16 concepts with inventory/selected board(s): cx_gastronomie_106 (8), cx_limba_187 (8), cx_stiinta_229 (8)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: DEX (13), Barabulă (10), Cucuruz (9), Curechi (10), Păpușoi (9), Limba latină (9), Substratul dacic (9)"
+  }
+ ],
+ "nondistinctive_region_links": {
+  "Barabulă": "linked to 2 regions (Bucovina, Moldova)",
+  "Cucuruz": "linked to 2 regions (Banat, Transilvania)"
+ },
+ "fairness": {
+  "unfair_tiles": [
+   "Barabulă",
+   "Cucuruz",
+   "Curechi",
+   "Etimologie",
+   "Limba latină",
+   "Păpușoi",
+   "Regionalisme"
+  ],
+  "contested_tiles": [
+   "Substratul dacic",
+   "Împrumuturile slave"
+  ],
+  "engine_unfair_raw": 7
+ },
+ "groups": [
+  {
+   "label": "Regionalisme pentru legume sau cereale",
+   "members": [
+    {
+     "id": "n_lbax_regionalism_curechi",
+     "label": "Curechi",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.19,
+     "degree": 5,
+     "incoming_degree": 4,
+     "description": "Regionalism pentru varză, folosit mai ales în Moldova și în unele zone ardelenești."
+    },
+    {
+     "id": "n_lbax_regionalism_papusoi",
+     "label": "Păpușoi",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.2041,
+     "degree": 5,
+     "incoming_degree": 4,
+     "description": "Regionalism moldovenesc pentru porumb; apare des în vorbirea populară și în literatură."
+    },
+    {
+     "id": "n_lbax_regionalism_cucuruz",
+     "label": "Cucuruz",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.1935,
+     "degree": 5,
+     "incoming_degree": 3,
+     "description": "Regionalism pentru porumb, răspândit în Transilvania și Banat."
+    },
+    {
+     "id": "n_lbax_regionalism_barabula",
+     "label": "Barabulă",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.1804,
+     "degree": 5,
+     "incoming_degree": 3,
+     "description": "Regionalism pentru cartof, asociat mai ales cu Moldova și Bucovina."
+    }
+   ]
+  },
+  {
+   "label": "Expresii cu sens figurat",
+   "members": [
+    {
+     "id": "n_lbax_a_da_cu_mucii_in_fasole",
+     "label": "A da cu mucii-n fasole",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.2724,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Expresie idiomatică populară: a strica o situație printr-o gafă stângace."
+    },
+    {
+     "id": "n_lbax_a_si_lua_inima_in_dinti",
+     "label": "A-și lua inima în dinți",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.2937,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Expresie idiomatică: a-și face curaj pentru un gest greu sau riscant."
+    },
+    {
+     "id": "n_lbax_a_taie_frunza_la_caini",
+     "label": "A tăia frunză la câini",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.2441,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Expresie idiomatică: a pierde vremea fără lucru folositor."
+    },
+    {
+     "id": "n_lbax_a_umbla_cu_cioara_vopsita",
+     "label": "A umbla cu cioara vopsită",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.236,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Expresie idiomatică: a încerca să păcălești pe cineva cu o aparență falsă."
+    }
+   ]
+  },
+  {
+   "label": "Straturi istorice în vocabular",
+   "members": [
+    {
+     "id": "n_limba_latina",
+     "label": "Limba latină",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.4299,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Limba antica din care provine limba romana si celelalte limbi romanice."
+    },
+    {
+     "id": "n_substrat_dacic",
+     "label": "Substratul dacic",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.2198,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Element lingvistic traco-dac mostenit in romana, vizibil in cuvinte ca brad, mal, copac."
+    },
+    {
+     "id": "n_imprumuturi_slave",
+     "label": "Împrumuturile slave",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.1758,
+     "degree": 7,
+     "incoming_degree": 6,
+     "description": "Strat lexical de origine slava intrat in romana incepand cu secolul al IX-lea, ca prieten, dragoste, munca."
+    },
+    {
+     "id": "n_neologisme_franceze",
+     "label": "Neologismele franceze",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.2284,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Imprumuturi lexicale din franceza patrunse in romana mai ales in sec. XIX, in epoca modernizarii."
+    }
+   ]
+  },
+  {
+   "label": "Etichete pentru feluri de cuvinte",
+   "members": [
+    {
+     "id": "n_lbax_regionalisme",
+     "label": "Regionalisme",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.5235,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Cuvinte sau forme folosite mai ales într-o anumită zonă, precum graiurile din Moldova, Banat sau Ardeal."
+    },
+    {
+     "id": "n_lbax_arcaisme",
+     "label": "Arhaisme",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.1915,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Cuvinte și forme vechi, ieșite din uzul curent, întâlnite în texte istorice sau literare."
+    },
+    {
+     "id": "n_etimologie",
+     "label": "Etimologie",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.2927,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Studiul originii și evoluției cuvintelor."
+    },
+    {
+     "id": "n_dex",
+     "label": "DEX",
+     "node_type": "work",
+     "category": "limba",
+     "salience": 0.3724,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Dictionarul explicativ al limbii romane, lucrare de referinta a Academiei."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Cucuruz",
+   "a_group": "Regionalisme pentru legume sau cereale",
+   "b": "Regionalisme",
+   "b_group": "Etichete pentru feluri de cuvinte",
+   "strength": 0.84
+  },
+  {
+   "a": "Curechi",
+   "a_group": "Regionalisme pentru legume sau cereale",
+   "b": "Regionalisme",
+   "b_group": "Etichete pentru feluri de cuvinte",
+   "strength": 0.84
+  },
+  {
+   "a": "Păpușoi",
+   "a_group": "Regionalisme pentru legume sau cereale",
+   "b": "Regionalisme",
+   "b_group": "Etichete pentru feluri de cuvinte",
+   "strength": 0.84
+  },
+  {
+   "a": "Barabulă",
+   "a_group": "Regionalisme pentru legume sau cereale",
+   "b": "Regionalisme",
+   "b_group": "Etichete pentru feluri de cuvinte",
+   "strength": 0.82
+  },
+  {
+   "a": "Etimologie",
+   "a_group": "Etichete pentru feluri de cuvinte",
+   "b": "Împrumuturile slave",
+   "b_group": "Straturi istorice în vocabular",
+   "strength": 0.76
+  },
+  {
+   "a": "Etimologie",
+   "a_group": "Etichete pentru feluri de cuvinte",
+   "b": "Limba latină",
+   "b_group": "Straturi istorice în vocabular",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:d50b0489ce7bd5d011acd4a8274829e5bb97a6ee2f04e3c25af09d96a584570c"
+}

@@ -1,0 +1,266 @@
+{
+ "id": "cx_meme_net_134",
+ "game": "conexiuni",
+ "category": "meme_net",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "758eb47cab3bb7ffee72b4feb2e1254ec51b4eefbd3a3d84220bc51b3c6dd26c",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "tile_fairness",
+   "level": "FAIL",
+   "detail": "unfair tiles (foreign pull > own): Biscuiții Eugenia, Ciocolata ROM, Guma Turbo"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Publicitate intrată în meme\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_045, cx_meme_net_048, cx_meme_net_268)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Canale și branduri amplificatoare\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_film_tv_009, cx_film_tv_097)"
+  },
+  {
+   "check": "duplicate_groups",
+   "level": "FAIL",
+   "detail": "group \"Meștereala ridicată la rang de glumă\" shares 3 members with an inventory/selected quad (near-duplicate; see: cx_meme_net_045, cx_meme_net_049, cx_meme_net_200)"
+  },
+  {
+   "check": "member_overuse",
+   "level": "FAIL",
+   "detail": "projected approved-batch use exceeds 8: Antena 1 (12), Pro TV (14), Ghiță Ciobanul (10), Lasă că merge și așa (9)"
+  }
+ ],
+ "fairness": {
+  "unfair_tiles": [
+   "Biscuiții Eugenia",
+   "Ciocolata ROM",
+   "Guma Turbo"
+  ],
+  "contested_tiles": [],
+  "engine_unfair_raw": 4
+ },
+ "groups": [
+  {
+   "label": "Publicitate intrată în meme",
+   "members": [
+    {
+     "id": "n_net_reclama_cult",
+     "label": "Reclamă-cult",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.6777,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Spot publicitar care a depășit produsul și a rămas în memorie prin replici sau personaje."
+    },
+    {
+     "id": "n_net_reclamele_vodafone_ghita",
+     "label": "Reclamele Vodafone cu Ghiță",
+     "node_type": "work",
+     "category": "meme_net",
+     "salience": 0.5954,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Campanie publicitară Vodafone România construită în jurul lui Ghiță Ciobanul."
+    },
+    {
+     "id": "n_net_ghita_ciobanul",
+     "label": "Ghiță Ciobanul",
+     "node_type": "person",
+     "category": "meme_net",
+     "salience": 0.6458,
+     "degree": 10,
+     "incoming_degree": 10,
+     "description": "Personaj din reclamele Vodafone inspirat de viața pastorală, devenit reper al internetului românesc."
+    },
+    {
+     "id": "n_vdr_ciocolata_rom",
+     "label": "Ciocolata ROM",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.8556,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Baton românesc cu ambalaj tricolor și aromă de rom, produs din perioada comunistă."
+    }
+   ]
+  },
+  {
+   "label": "Canale și branduri amplificatoare",
+   "members": [
+    {
+     "id": "n_net_vodafone_romania",
+     "label": "Vodafone România",
+     "node_type": "org",
+     "category": "meme_net",
+     "salience": 0.2562,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Operator telecom care a popularizat în reclame personajul Ghiță Ciobanul."
+    },
+    {
+     "id": "n_ftv_pro_tv",
+     "label": "Pro TV",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.9055,
+     "degree": 26,
+     "incoming_degree": 26,
+     "description": "Post TV comercial românesc, important pentru seriale și divertisment pop."
+    },
+    {
+     "id": "n_ftv_antena_1",
+     "label": "Antena 1",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.8169,
+     "degree": 20,
+     "incoming_degree": 20,
+     "description": "Post TV comercial românesc cu divertisment, reality-show-uri și concursuri."
+    },
+    {
+     "id": "n_ftv_prima_tv",
+     "label": "Prima TV",
+     "node_type": "org",
+     "category": "film_tv",
+     "salience": 0.394,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Televiziune comercială românească asociată cu Trăsniții și quiz-show-uri."
+    }
+   ]
+  },
+  {
+   "label": "Nostalgie analogică de share-uit",
+   "members": [
+    {
+     "id": "n_vdr_guma_turbo",
+     "label": "Guma Turbo",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.7867,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Gumă de mestecat cu abțibilduri cu mașini, populară în România anilor 90."
+    },
+    {
+     "id": "n_vdr_eugenia",
+     "label": "Biscuiții Eugenia",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9069,
+     "degree": 8,
+     "incoming_degree": 8,
+     "description": "Biscuiți sandviș cu cremă, prezenți în pachețelul multor copii români."
+    },
+    {
+     "id": "n_vdr_telefon_fix",
+     "label": "Telefonul fix",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.4054,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Telefonul de acasă folosit înainte ca mobilul să devină obișnuit."
+    },
+    {
+     "id": "n_vdr_teletext",
+     "label": "Teletextul",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.34,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Serviciu TV cu pagini de text pentru știri, program și rezultate, folosit înaintea internetului."
+    }
+   ]
+  },
+  {
+   "label": "Meștereala ridicată la rang de glumă",
+   "members": [
+    {
+     "id": "n_net_dorel",
+     "label": "Dorel",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.935,
+     "degree": 11,
+     "incoming_degree": 11,
+     "description": "Personaj-memă din publicitate și umorul online, folosit pentru a ironiza lucrările improvizate."
+    },
+    {
+     "id": "n_net_mester_improvizat",
+     "label": "Meșter improvizat",
+     "node_type": "concept",
+     "category": "meme_net",
+     "salience": 0.4941,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Figura celui care repară pe loc, cu sârmă, bandă și multă convingere."
+    },
+    {
+     "id": "n_vdr_lasa_ca_merge",
+     "label": "Lasă că merge și așa",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9596,
+     "degree": 13,
+     "incoming_degree": 13,
+     "description": "Expresie folosită adesea ironic pentru acceptarea unei soluții provizorii sau imperfecte."
+    },
+    {
+     "id": "n_v2via_improvizatie",
+     "label": "Improvizație",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.4959,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Soluție făcută rapid cu resurse la îndemână, nu mereu elegantă."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [
+  {
+   "a": "Reclamele Vodafone cu Ghiță",
+   "a_group": "Publicitate intrată în meme",
+   "b": "Vodafone România",
+   "b_group": "Canale și branduri amplificatoare",
+   "strength": 0.92
+  },
+  {
+   "a": "Ghiță Ciobanul",
+   "a_group": "Publicitate intrată în meme",
+   "b": "Vodafone România",
+   "b_group": "Canale și branduri amplificatoare",
+   "strength": 0.76
+  },
+  {
+   "a": "Ciocolata ROM",
+   "a_group": "Publicitate intrată în meme",
+   "b": "Biscuiții Eugenia",
+   "b_group": "Nostalgie analogică de share-uit",
+   "strength": 0.72
+  },
+  {
+   "a": "Ciocolata ROM",
+   "a_group": "Publicitate intrată în meme",
+   "b": "Guma Turbo",
+   "b_group": "Nostalgie analogică de share-uit",
+   "strength": 0.68
+  },
+  {
+   "a": "Reclamă-cult",
+   "a_group": "Publicitate intrată în meme",
+   "b": "Vodafone România",
+   "b_group": "Canale și branduri amplificatoare",
+   "strength": 0.62
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:6f5238e38237e3650e0142c74cd96806e33da076bfde592986f22d4382beee4f"
+}
