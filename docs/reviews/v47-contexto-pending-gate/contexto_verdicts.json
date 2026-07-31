@@ -1,0 +1,350 @@
+{
+ "game": "contexto",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "ct_gastronomie_300",
+   "ct_gastronomie_301",
+   "ct_limba_307",
+   "ct_meme_net_238",
+   "ct_societate_179",
+   "ct_societate_256",
+   "ct_societate_257",
+   "ct_societate_303",
+   "ct_societate_305",
+   "ct_stiinta_104",
+   "ct_stiinta_306",
+   "ct_viata_de_roman_302",
+   "ct_viata_de_roman_304"
+  ]
+ },
+ "verdicts": {
+  "ct_gastronomie_300": "promote",
+  "ct_gastronomie_301": "reject",
+  "ct_limba_307": "reject",
+  "ct_meme_net_238": "keep",
+  "ct_societate_179": "reject",
+  "ct_societate_256": "reject",
+  "ct_societate_257": "keep",
+  "ct_societate_303": "reject",
+  "ct_societate_305": "reject",
+  "ct_stiinta_104": "reject",
+  "ct_stiinta_306": "reject",
+  "ct_viata_de_roman_302": "reject",
+  "ct_viata_de_roman_304": "reject"
+ },
+ "perItem": [
+  {
+   "id": "ct_gastronomie_300",
+   "game": "contexto",
+   "analyst": "promote",
+   "verifier": "promote",
+   "final": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:0bb6978cb081cb681687700f7581fe999af43c0c581b1727a14f8b9119827670",
+   "policy": "unanimous-promote",
+   "failure_modes": [],
+   "metrics": {
+    "direct_incoming": 15,
+    "responsive": 2259,
+    "direct_projections": 19,
+    "direct_feedback_proxies": 1
+   },
+   "reasoning": "C1-C6 pass. Mâncare is a universal, dominant-sense easy target with 15 recognizable direct predecessors, 2,259 responsive graph nodes, obvious Foame/Bucătărie/Sarmale openers, 19 reviewed non-winning projected guesses, and one everyday feedback proxy."
+  },
+  {
+   "id": "ct_gastronomie_301",
+   "game": "contexto",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:ca585c01b96b1dc7444c20c3f8e3e5ccb629fd0ed3331c97b69e79b072c90e39",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "C3"
+   ],
+   "metrics": {
+    "direct_incoming": 2,
+    "responsive": 1735,
+    "direct_projections": 0,
+    "direct_feedback_proxies": 0
+   },
+   "reasoning": "Morcov is common, concrete, and unambiguous, but only Legume and Mâncare are direct predecessors. Two direct neighbors cannot clear the literal five-neighbor C3 release floor; Iepure is only Rece and no projection or proxy repairs the sparse target neighborhood."
+  },
+  {
+   "id": "ct_limba_307",
+   "game": "contexto",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:fa8d610a3832593c7b8ca26f9abd11775248af52a96e0b993b8fd022d3711f84",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "C1",
+    "C3"
+   ],
+   "metrics": {
+    "direct_incoming": 3,
+    "responsive": 1919,
+    "direct_projections": 0,
+    "direct_feedback_proxies": 0
+   },
+   "reasoning": "A citi is a familiar action with well-covered inflections and Carte as an obvious opener, but the strict target ontology excludes verbs and its three direct predecessors also miss C3."
+  },
+  {
+   "id": "ct_meme_net_238",
+   "game": "contexto",
+   "analyst": "keep",
+   "verifier": "keep",
+   "final": "keep",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:d1f80276d736e8db37356c191c14d8ed40d832363dbe3b2f568065b451b54d29",
+   "policy": "unanimous-keep",
+   "failure_modes": [
+    "A5",
+    "C2"
+   ],
+   "metrics": {
+    "direct_incoming": 8,
+    "responsive": 2078,
+    "direct_projections": 0,
+    "direct_feedback_proxies": 0
+   },
+   "reasoning": "Shitpost has adequate graph density and Memă as an obvious opener, but cross-generational recognition is doubtful and the profanity-derived target triggers the mandatory ADR-0019/A5 owner boundary. Gate mode therefore keeps it pending rather than auto-shipping or auto-rejecting it."
+  },
+  {
+   "id": "ct_societate_179",
+   "game": "contexto",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:e27682eb54ed16de6cea4a96a3219285e7f4059077aea6caafbb82eb2dc8d70f",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "C1"
+   ],
+   "metrics": {
+    "direct_incoming": 13,
+    "responsive": 2043,
+    "direct_projections": 0,
+    "direct_feedback_proxies": 0
+   },
+   "reasoning": "Drepturile omului is recognizable and densely connected, but it is an abstract legal framework rather than a concrete, spontaneously nameable secret. A civics vocabulary field does not rescue the hard C1 failure."
+  },
+  {
+   "id": "ct_societate_256",
+   "game": "contexto",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:56f1e61b1ff8b382704b31d9f30a71881ca006b4f3b30055b48c1317f87524b9",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "C1"
+   ],
+   "metrics": {
+    "direct_incoming": 7,
+    "responsive": 2232,
+    "direct_projections": 0,
+    "direct_feedback_proxies": 0
+   },
+   "reasoning": "Recensământul populației is the rubric's explicit canonical C1 kill: a record/meta-process rather than a concrete secret. Populație and Stat are warm, but difficulty cannot come from asking the player to name an institutional phrase."
+  },
+  {
+   "id": "ct_societate_257",
+   "game": "contexto",
+   "analyst": "keep",
+   "verifier": "keep",
+   "final": "keep",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:a3ca820107a1b65c4b54e94caeda971c63a6d278124cb082dd2fdb9d1283c3e8",
+   "policy": "unanimous-keep",
+   "failure_modes": [
+    "A5",
+    "C1"
+   ],
+   "metrics": {
+    "direct_incoming": 13,
+    "responsive": 2239,
+    "direct_projections": 0,
+    "direct_feedback_proxies": 0
+   },
+   "reasoning": "Industrie is an abstract economic category and would fail C1 on quality alone. It is also a near-duplicate of served ct_societate_178 / Industria românească: the targets have a strength-0.86 direct link and share five high-signal predecessors. A5 requires an owner-boundary keep in gate mode."
+  },
+  {
+   "id": "ct_societate_303",
+   "game": "contexto",
+   "analyst": "reject",
+   "verifier": "promote",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:2ca329a8b8ff88ca47f7504e504c222781aa3f37c7904232a3a932a662497c7c",
+   "policy": "reject-without-unanimity",
+   "failure_modes": [
+    "C3-legibility"
+   ],
+   "metrics": {
+    "direct_incoming": 11,
+    "responsive": 2138,
+    "direct_projections": 9,
+    "direct_feedback_proxies": 0
+   },
+   "reasoning": "Familie is common and numerically dense, so the inventory verifier proposed promotion. The gameplay analyst found the decisive counterexample: Mamă, Tată, Bunică, Bunic, Frate, and Soră all rank 2,079/2,288 and read Înghețat while Weekend and broad civic abstractions are one-hop hot. That misleading core gradient blocks unanimous promotion and fail-closed synthesis rejects the exact record."
+  },
+  {
+   "id": "ct_societate_305",
+   "game": "contexto",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:dfaa1c09217fbf41d6b2f97f629cc8c4d5fea51de68d37c4dabea1240328ba8d",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "C3"
+   ],
+   "metrics": {
+    "direct_incoming": 2,
+    "responsive": 1390,
+    "direct_projections": 6,
+    "direct_feedback_proxies": 0
+   },
+   "reasoning": "Farmacie has six safe non-winning medical projections and therefore obvious openers, but its only direct KG predecessors are the generic place siblings Parc and Magazin. Projection rank-2 hints cannot substitute for the literal five-neighbor C3 target floor."
+  },
+  {
+   "id": "ct_stiinta_104",
+   "game": "contexto",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:021ac14fa8d644ca0498c81e10da8924c36ab13d8573212eee989290d13a1ea8",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "C1",
+    "C2",
+    "C3",
+    "C6"
+   ],
+   "metrics": {
+    "direct_incoming": 4,
+    "responsive": 1908,
+    "direct_projections": 0,
+    "direct_feedback_proxies": 0
+   },
+   "reasoning": "Sonicitate is the rubric's canonical obscure meta-concept kill, has only four direct predecessors, and is the batch's sole salience warning at 0.152 below the greu floor of 0.20. Fizică being warm cannot turn obscurity into fair difficulty."
+  },
+  {
+   "id": "ct_stiinta_306",
+   "game": "contexto",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:bfba78848d82de730b63e9c07ff6b50eada64841d02da298231bf34a55c68fe3",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "C3",
+    "lexical-collision"
+   ],
+   "metrics": {
+    "direct_incoming": 3,
+    "responsive": 1460,
+    "direct_projections": 0,
+    "direct_feedback_proxies": 0
+   },
+   "reasoning": "Ploaie is universal and Nor/Apă are obvious openers, but three direct predecessors fail C3. Its natural definite form ploaia already resolves to the served Cargo song node, so it cannot safely be added as a weather alias or projection."
+  },
+  {
+   "id": "ct_viata_de_roman_302",
+   "game": "contexto",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:da724398931e2593ef2cdb2a414ee69c269060cef12e737b7bf1c06653cf538f",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "C3"
+   ],
+   "metrics": {
+    "direct_incoming": 3,
+    "responsive": 1642,
+    "direct_projections": 1,
+    "direct_feedback_proxies": 0
+   },
+   "reasoning": "Frigider is concrete and Bucătărie is an obvious opener, but its three direct predecessors include generic Lampă and Ușă. Congelator supplies one non-winning projected hint; the current target still misses the C3 density and legibility bar."
+  },
+  {
+   "id": "ct_viata_de_roman_304",
+   "game": "contexto",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:7f51ed52a9c6ffb5d37a72769e60626bee3ddf89b5832e7817396bbb3c5573b4",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "C3"
+   ],
+   "metrics": {
+    "direct_incoming": 3,
+    "responsive": 946,
+    "direct_projections": 0,
+    "direct_feedback_proxies": 0
+   },
+   "reasoning": "Creion is concrete and Radieră/Caiet/Ghiozdan are excellent openers, but the exact target has only those three direct predecessors and no target-anchored projection or proxy. It remains a strong future repair candidate, not a release candidate."
+  }
+ ],
+ "coverage": {
+  "total": 13,
+  "verified": 13,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "evidence": {
+  "reviewed_at": "2026-08-01",
+  "pending_id_set_sha256": "508ac4014f6c519fc0891b92474e683e9a26078e86091cee8ee77a1aa10e97c1",
+  "fresh_dossiers": 13,
+  "deterministic_fail_records": 0,
+  "deterministic_warn_records": 1,
+  "analyst_counts": {
+   "promote": 1,
+   "reject": 10,
+   "keep": 2
+  },
+  "verifier_counts": {
+   "promote": 2,
+   "reject": 9,
+   "keep": 2
+  },
+  "final_counts": {
+   "promote": 1,
+   "reject": 10,
+   "keep": 2
+  },
+  "independent_review_disagreements": 1,
+  "new_aliases_or_projections": 0,
+  "stale_v42_judgments_reused": false
+ }
+}

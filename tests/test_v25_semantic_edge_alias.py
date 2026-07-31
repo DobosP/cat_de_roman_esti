@@ -44,7 +44,20 @@ _V46_REJECTED_REVIEW_IDS = {
     "cx_societate_294",
     "cx_societate_295",
 }
-_RETIRED_REVIEW_IDS = _V45_REJECTED_REVIEW_IDS | _V46_REJECTED_REVIEW_IDS
+_V47_REJECTED_REVIEW_IDS = {
+    "ct_gastronomie_301",
+    "ct_limba_307",
+    "ct_societate_303",
+    "ct_societate_305",
+    "ct_stiinta_306",
+    "ct_viata_de_roman_302",
+    "ct_viata_de_roman_304",
+}
+_RETIRED_REVIEW_IDS = (
+    _V45_REJECTED_REVIEW_IDS
+    | _V46_REJECTED_REVIEW_IDS
+    | _V47_REJECTED_REVIEW_IDS
+)
 
 
 def _load_data_module():
@@ -175,7 +188,11 @@ def test_v25_pack_is_byte_stable_and_the_33_review_items_remain_playable():
     }
 
     assert set(records) == set(DATA.REVIEW_ITEM_IDS) - _RETIRED_REVIEW_IDS
-    later_promotions = {"ct_literatura_298", "ct_viata_de_roman_299"}
+    later_promotions = {
+        "ct_gastronomie_300",
+        "ct_literatura_298",
+        "ct_viata_de_roman_299",
+    }
     for item_id in set(DATA.REVIEW_ITEM_IDS) - _RETIRED_REVIEW_IDS:
         game, record = records[item_id]
         expected_status = "approved" if item_id in later_promotions else "pending"
@@ -217,11 +234,12 @@ def test_v25_intended_topology_changes_stay_inside_reviewed_game_bounds():
     )
     assert max_fresh == 1
 
-    for item_id, responsive_floor in {
-        "ct_viata_de_roman_302": 1500,
-        "ct_limba_307": 1800,
+    # V47 rejects these exact pending records on C1/C3, but the reviewed V25 graph
+    # topology and its broad reach stay unchanged for the underlying concepts.
+    for target, responsive_floor in {
+        "n_v24_home_appliances_frigider": 1500,
+        "n_v24_action_language_a_citi": 1800,
     }.items():
-        target = by_id[item_id]["target"]
         distances = svc.distances_to(target)
         responsive = sum(1 for distance in distances.values() if 1 <= distance <= 5)
         assert len(distances) >= 2184

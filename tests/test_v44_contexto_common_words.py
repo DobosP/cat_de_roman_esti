@@ -166,7 +166,7 @@ def test_every_proxy_anchor_reaches_every_selectable_unique_target() -> None:
     targets = {target_by_id[row["id"]] for row in eligible}
     svc = get_service()
 
-    assert len(eligible) == len(targets) == 201
+    assert len(eligible) == len(targets) == 202
     for anchor_id in set(COMMON_FEEDBACK_PROXIES.values()):
         assert targets <= set(svc.distances_from(anchor_id))
     for node_id in COMMON_FEEDBACK_PROXIES:
@@ -332,11 +332,13 @@ def test_bound_promotions_and_duplicate_reserve_cleanup_are_exact() -> None:
         for row in pack[game]
     )
 
-    assert statuses == {"approved": 608, "pending": 37}
+    assert statuses == {"approved": 609, "pending": 26}
     assert rows["ct_literatura_298"]["status"] == "approved"
     assert rows["ct_viata_de_roman_299"]["status"] == "approved"
     assert ranked["ct_literatura_298"]["pilot_eligible"] is True
     assert ranked["ct_viata_de_roman_299"]["pilot_eligible"] is True
+    assert rows["ct_gastronomie_300"]["status"] == "approved"
+    assert ranked["ct_gastronomie_300"]["pilot_eligible"] is True
 
     reserve = _json(_PACKAGE_DEMOTIONS)
     duplicate_to_canonical = {

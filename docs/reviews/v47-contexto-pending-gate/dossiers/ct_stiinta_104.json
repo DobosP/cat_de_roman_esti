@@ -1,0 +1,64 @@
+{
+ "id": "ct_stiinta_104",
+ "game": "contexto",
+ "category": "stiinta",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "d46f1c5730297ae4795ad6c94398371bbef6714a7f06159d33f1ec6d6328514b",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Sonicitate salience 0.15 < 0.20 (greu floor)"
+  }
+ ],
+ "target": {
+  "id": "n_sonicitate",
+  "label": "Sonicitate",
+  "node_type": "concept",
+  "category": "stiinta",
+  "salience": 0.152,
+  "degree": 4,
+  "incoming_degree": 4,
+  "description": "Stiinta transmiterii energiei prin vibratii in fluide, creata de Gogu Constantinescu."
+ },
+ "reachable": 2288,
+ "strong_neighbors": [
+  {
+   "id": "n_gogu_constantinescu",
+   "label": "Gogu Constantinescu",
+   "node_type": "person",
+   "category": "stiinta",
+   "salience": 0.2031,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Inginer si inventator roman, fondatorul teoriei sonicitatii.",
+   "strength": 0.9
+  },
+  {
+   "id": "n_stix_mecanica_fluidelor",
+   "label": "Mecanica fluidelor",
+   "node_type": "concept",
+   "category": "stiinta",
+   "salience": 0.4269,
+   "degree": 12,
+   "incoming_degree": 12,
+   "description": "Ramură a fizicii care studiază lichidele și gazele, esențială pentru aerodinamică și efectul Coandă.",
+   "strength": 0.82
+  },
+  {
+   "id": "n_v2sti_fizica",
+   "label": "Fizică",
+   "node_type": "concept",
+   "category": "stiinta",
+   "salience": 0.9568,
+   "degree": 33,
+   "incoming_degree": 33,
+   "description": "Știință care studiază materia, energia, mișcarea și interacțiunile lor.",
+   "strength": 0.82
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:021ac14fa8d644ca0498c81e10da8924c36ab13d8573212eee989290d13a1ea8"
+}

@@ -26,11 +26,12 @@ _TOMBSTONE_PATH = (
 # fairness/relevance failures + A7 non-distinctive region associations); nothing deleted.
 # 2026-07-16 (ADR-0030): the v23 childhood wave staged seven more items as pending;
 # approved inventory and serving remain unchanged. Later pending-only waves may grow
-# these totals. V45 removed 104 freshly rejected Lanț records; V46 then removed the full
-# 79-board pending Conexiuni queue. Those games now use exact lower baselines.
+# these totals. V45 removed 104 freshly rejected Lanț records; V46 removed the full
+# 79-board pending Conexiuni queue; V47 promoted one and removed ten Contexto records.
+# Those games now use exact lower baselines.
 _V23_INVENTORY_FLOOR = {
     "conexiuni": (232, 232, 0),
-    "contexto": (199, 204, 5),
+    "contexto": (207, 205, 2),
     "lant": (97, 94, 3),
     "alchimie": (92, 78, 15),
 }
@@ -90,12 +91,12 @@ def test_v14_pack_inventory_and_review_split():
     # v16: 769 − 3 judge-rejected − 1 retired greu Lanț = 765; v18: − 1 retired normal Lanț.
     # 2026-07-15: 592 − 20 critique-gate demotions (ADR-0023/0024) = 572 approved.
     # 2026-07-29: + 13 ADR-0065 gate promotions among these games' totals = 585 approved.
-    # V45/V46 clear stale pending debt without changing either served pool.
-    assert sum(expected[0] for expected in _V23_INVENTORY_FLOOR.values()) == 620
+    # V45/V46 clear stale pending debt; V47 adds one strict Contexto promotion.
+    assert sum(expected[0] for expected in _V23_INVENTORY_FLOOR.values()) == 628
     # 2026-07-30 (ADR-0066/0067/0068): + 18 owner, + 3 strict-gate, then + 2
     # bound Contexto promotions.
-    assert sum(expected[1] for expected in _V23_INVENTORY_FLOOR.values()) == 608
-    assert sum(expected[2] for expected in _V23_INVENTORY_FLOOR.values()) == 23
+    assert sum(expected[1] for expected in _V23_INVENTORY_FLOOR.values()) == 609
+    assert sum(expected[2] for expected in _V23_INVENTORY_FLOOR.values()) == 20
 
 
 def test_v14_adds_contemporary_civic_education_science_and_digital_play():

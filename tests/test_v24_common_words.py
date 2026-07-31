@@ -50,7 +50,19 @@ _V46_REJECTED_CONEXIUNI = {
     "cx_societate_294",
     "cx_societate_295",
 }
-_RETIRED_GAME_ITEMS = _V45_REJECTED_LANT | _V46_REJECTED_CONEXIUNI
+_V47_PROMOTED_CONTEXTO = {"ct_gastronomie_300"}
+_V47_REJECTED_CONTEXTO = {
+    "ct_gastronomie_301",
+    "ct_limba_307",
+    "ct_societate_303",
+    "ct_societate_305",
+    "ct_stiinta_306",
+    "ct_viata_de_roman_302",
+    "ct_viata_de_roman_304",
+}
+_RETIRED_GAME_ITEMS = (
+    _V45_REJECTED_LANT | _V46_REJECTED_CONEXIUNI | _V47_REJECTED_CONTEXTO
+)
 
 
 def _load_data_module():
@@ -305,9 +317,13 @@ def test_v24_declared_game_candidates_are_present_pending_and_playable():
                     f"{item_id}: stored under {actual_game}, expected {expected_game}"
                 )
                 continue
-            if record.get("status") != "pending":
+            expected_status = (
+                "approved" if item_id in _V47_PROMOTED_CONTEXTO else "pending"
+            )
+            if record.get("status") != expected_status:
                 failures.append(
-                    f"{expected_game}:{item_id}: status={record.get('status')!r}, expected pending"
+                    f"{expected_game}:{item_id}: status={record.get('status')!r}, "
+                    f"expected {expected_status}"
                 )
             errors = validate_envelope(record, expected_game)
             errors.extend(validate_payload(record, expected_game, svc))
@@ -315,6 +331,7 @@ def test_v24_declared_game_candidates_are_present_pending_and_playable():
 
     assert not failures, "\n" + "\n".join(failures)
     assert not (_RETIRED_GAME_ITEMS & set(actual))
+    assert _V47_PROMOTED_CONTEXTO <= set(actual)
 
 
 def test_v24_fixture_and_pack_mirrors_are_byte_identical():
@@ -335,7 +352,7 @@ def test_v24_game_wave_has_the_reviewed_per_game_sizes():
     records = _declared_records()
     assert {game: len(items) for game, items in records.items()} == {
         "conexiuni": 0,
-        "contexto": 8,
+        "contexto": 1,
         "lant": 1,
         "alchimie": 6,
     }

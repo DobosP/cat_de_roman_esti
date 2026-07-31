@@ -40,9 +40,9 @@ _V32_ALIAS_COUNT = 7333
 
 # These are fingerprints of current legacy behavior. Profile pins move only with a gated
 # content wave; ADR-0067's removal of two false e-SIGUR edges intentionally changed the
-# Contexto closure; V45/V46 strict cleanup narrows the dormant Lanț/Conexiuni inventory.
+# Contexto closure; V45-V47 strict cleanup narrows dormant pending inventory.
 _V32_CONTEXTO_PROFILE_SHA256 = (
-    "9faec43182f76c1fa9434876b7052eb4d10f4cf95d29008e9f4270250b6e3b05"
+    "7ed3bd1237d4ee7c1b4ff332da191ad6bd2ac9e8eb005b4ea4a25753fea57ca8"
 )
 _V32_LANT_PROFILE_SHA256 = (
     "6fe32a7aacb464d8d30ae2d97bc02e9ed0ef5413ee264e2424f13388a7f8e8c2"
@@ -54,7 +54,7 @@ _EXACT_REVIEW_REPORT_SHA256 = (
     "5a01894e6e89fe29aaffee09210949e81cb0505385cc5c65615bf9c4b75f3349"
 )
 _FULL_PENDING_REPORT_SHA256 = (
-    "ff1f3754afe013ffd4b082c3e924e854f753e2bfa75d477fce3f3c1f12c637ce"
+    "c0fd99a953e47f05b85b7584a43ca0ed0ed1747cecc99b58a35ac73e25b919c4"
 )
 
 
@@ -391,16 +391,24 @@ def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
         for game in ("conexiuni", "contexto", "lant", "alchimie")
     } == {
         "conexiuni": 232,
-        "contexto": 217,
+        "contexto": 207,
         "lant": 97,
         "alchimie": 99,
     }
-    # ADR-0068 promotes two bound Contexto targets.
-    assert statuses == {"approved": 608, "pending": 37}
+    # ADR-0068 promotes two bound Contexto targets; V47 promotes one more.
+    assert statuses == {"approved": 609, "pending": 26}
     assert len(DATA.REVIEW_ITEM_IDS) == len(set(DATA.REVIEW_ITEM_IDS)) == 33
     pending_review_ids = set(DATA.REVIEW_ITEM_IDS) - {
         "ct_literatura_298",
         "ct_viata_de_roman_299",
+        "ct_gastronomie_300",
+        "ct_gastronomie_301",
+        "ct_limba_307",
+        "ct_societate_303",
+        "ct_societate_305",
+        "ct_stiinta_306",
+        "ct_viata_de_roman_302",
+        "ct_viata_de_roman_304",
         "lt_gastronomie_212",
         "lt_gastronomie_218",
         "lt_stiinta_215",
@@ -415,14 +423,14 @@ def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
         "cx_societate_295",
     }
     assert _critique_report(pending_review_ids) == (
-        19,
+        11,
         0,
         0,
         _EXACT_REVIEW_REPORT_SHA256,
     )
     assert _critique_report(None) == (
-        37,
-        4,
+        26,
+        3,
         81,
         _FULL_PENDING_REPORT_SHA256,
     )

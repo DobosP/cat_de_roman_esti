@@ -1,0 +1,33 @@
+{
+ "thresholds": {
+  "salience_floors": {
+   "usor": 0.6,
+   "normal": 0.35,
+   "greu": 0.2
+  },
+  "strong_edge": 0.6,
+  "mirror_pairs": 3,
+  "red_herring_warn": 2,
+  "red_herring_fail": 4,
+  "member_overuse": 8,
+  "board_overlap_fail": 8,
+  "label_leak_min_chars": 3,
+  "region_fanout": 2,
+  "national_salience": 0.7
+ },
+ "items": {
+  "ct_stiinta_104": {
+   "game": "contexto",
+   "status": "pending",
+   "difficulty": "greu",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Sonicitate salience 0.15 < 0.20 (greu floor)"
+    }
+   ]
+  }
+ },
+ "pack_findings": []
+}

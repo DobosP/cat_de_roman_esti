@@ -1,56 +1,65 @@
-# Task Result — V46 strict Conexiuni pending cleanup
+# Task Result — V47 strict Cald sau Rece pending-target gate
 
 ## Outcome
 
-- Rebuilt current-bound dossiers for the exact 79 pending Conexiuni records and compared
-  them with the full approved, pending, owner-demoted, and rejected inventory.
-- The deterministic gate found 438 failures across 76 records. The three lint-clean
-  records still failed adversarial unique-partition and clue-arc review.
-- Promoted and kept no board. Gameplay rejected all 79; inventory rejected 38 and held 41
-  under a cautious owner-boundary reading, so the fail-closed synthesis rejected all 79.
-- Removed only dormant pending stock. Conexiuni is now 232 approved / 0 pending / 74
-  eligible; the original-game pack is 645 = 608 approved + 37 pending, with 447 eligible.
-- Appended all 79 exact records to the rejection ledger, now 122 boards / 488 groups.
-  Legacy named group keys are normalized deterministically inside the ledger without
-  changing original record digests or partitions.
-- Regenerated ranking and derived metadata without changing the frozen 336-board
+- Rebuilt current-bound dossiers for the exact 13 pending Contexto records and audited
+  C1-C6, live feedback, vocabulary, collisions, projections, proxies, and release state.
+- Deterministic checks found zero failures and one Sonicitate salience warning. Independent
+  gameplay and inventory reviews synthesized to one promotion, ten rejections, and two
+  mandatory A5 keeps.
+- Promoted only `ct_gastronomie_300` (`Mâncare`). It has 15 recognizable direct
+  predecessors, 2,259 responsive nodes, 19 existing target projections, one existing
+  feedback proxy, and intuitive hot openers.
+- Removed ten dormant records. Familiar common targets were not promoted when their local
+  field was too thin or misleading: Familie freezes core kinship guesses; Morcov, Farmacie,
+  Ploaie, Frigider, and Creion miss the direct-neighbor floor.
+- Kept `Shitpost` and `Industrie` pending and unserved under the ADR-0019/A5 owner boundary.
+  Industrie substantially duplicates the served `Industria românească` discovery field.
+- Added no synonym, alias, projection, node, or edge. Existing Mâncare morphology is
+  adequate; `ploaia` remains correctly owned by the served Cargo-song concept. Optional
+  `hrană`/`alimente` projections require a separate exact review.
+- Cald sau Rece is now 207 records = 205 approved + 2 pending / 202 eligible unique
+  targets. The original-game pack is 635 = 609 approved + 26 pending / 448 eligible.
+- Regenerated rankings and derived metadata without changing the frozen 336-board
   Intrusul/Perechi payload. No deployment was performed.
 
 ## Files changed
 
-- Content: mirrored game pack, rankings, derived catalog, rejection ledger, pack digest
-  pins, and runtime derived-catalog pin.
-- Gate: 79 exact dossiers, deterministic report, complete v2 two-reviewer artifact, and
-  the human-readable audit under `docs/reviews/v46-conexiuni-pending-gate/`.
-- Workflow: legacy group-key normalization in `scripts/apply_rereview.py` with rollback
-  and provenance regression coverage.
-- Contracts: ADR-0070, `docs/STATUS.md`, V46 regression tests, and historical tests updated
-  to model retired records rather than require a real pending Conexiuni fixture.
+- Content: both game-pack mirrors, both ranking sidecars, both derived-catalog metadata
+  copies, the runtime derived digest pin, and seven historical pack digest pins.
+- Gate evidence: 13 exact dossiers, deterministic report, complete v2 two-reviewer
+  artifact, and the human audit under `docs/reviews/v47-contexto-pending-gate/`.
+- Contracts: ADR-0071, `docs/STATUS.md`, a six-test V47 regression contract, and historical
+  lifecycle/count/profile assertions updated for retired pending records.
+- Unchanged: KG nodes/edges/aliases, projection and proxy inventories, frontend, scoring,
+  hidden answers, session semantics, and the derived boards payload.
 
 ## Verification
 
-- Full backend: 711/711 green.
+- Full backend: 717/717 green.
 - Accounts-on: 53/53 green; bounded session store: 16/16 green.
-- Exact targeted Conexiuni/pack/critique gate: 138/138 green.
-- Affected historical/content matrix: 241/241 green.
-- Intrusul/Perechi/derived-catalog gate: 68/68 green.
+- Contexto/pack/critique targeted gate: 187/187 green; V47 exact contract: 6/6 green.
+- Intrusul/Perechi/derived-catalog gate: 82/82 green.
 - Ruff, `git diff --check`, pack, KG, ranking, and derived-catalog validators: green.
-- Pack mirrors: 645 records, 608 approved / 37 pending, 447 runtime-eligible.
-- Rejection ledger: 122 boards / 488 groups; every V46 row cross-bound to its exact
-  dossier, gate artifact, record digest, and group partition.
-- Frozen derived board payload: unchanged at 183 Intrusul / 153 Perechi, SHA-256
+- Pack mirrors: 635 records, 609 approved / 26 pending, 448 runtime-eligible.
+- Contexto: 207 records, 205 approved / 2 pending, 202 unique selectable targets.
+- Frozen derived boards: 183 Intrusul / 153 Perechi, unchanged SHA-256
   `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
+
+Pytest emitted only the expected cache warning because the retained task worktree itself is
+read-only to the cache provider; all suites completed successfully.
 
 ## Risks and manual review
 
-Ten Conexiuni category/difficulty shelves remain empty by design; no failed record was
-promoted to fill a quota. Future boards must be materially new because the larger ledger
-blocks exact, three-of-four, and board-level reskins. The generic apply command still
-requires ranking and derived-metadata regeneration as a separate release step; V46's
-committed regression verifies the completed chain. Session TTL/caps, deterministic
-selection, graph/KG, frontend, scoring, and hidden-answer behavior are unchanged.
+Contexto has no rejection ledger. The committed dossiers, record digests, review bindings,
+artifact, ADR, and regression test preserve the ten removals, but a future importer cannot
+mechanically block the same target under a new ID. Any repair must consult this archive,
+change the named feedback defect, and pass a fresh exact C1-C6 gate.
+
+The two A5 holds still need an explicit owner disposition. Production remains V43 at
+`38da2f4`; V47 deliberately does not alter deployment state.
 
 ## Merge recommendation
 
-Green to commit, land, and push on `main`. Do not deploy V46 as part of this content gate,
+Green to commit, land, and push on `main`. Do not deploy V47 as part of this content gate,
 and retain the task worktree/branch until the owner explicitly authorizes deletion.

@@ -221,11 +221,11 @@ def test_v30_keeps_the_entire_game_pack_byte_stable_without_adding_items():
     assert package_blob == _TEST_PACK.read_bytes()
     assert {game: len(pack[game]) for game in ("conexiuni", "contexto", "lant", "alchimie")} == {
         "conexiuni": 232,
-        "contexto": 217,
+        "contexto": 207,
         "lant": 97,
         "alchimie": 99,
     }
-    assert statuses == {"approved": 608, "pending": 37}
+    assert statuses == {"approved": 609, "pending": 26}
 
 
 def test_v30_mobile_contract_is_exact_current_and_public():

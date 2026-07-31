@@ -1,0 +1,58 @@
+{
+ "id": "ct_societate_256",
+ "game": "contexto",
+ "category": "societate",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "8ed5c4e3c69abbe2254ac96a66b45e16ace2ad4af2a9387e9e2b0b53c36c1a5b",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [],
+ "target": {
+  "id": "n_recensamant",
+  "label": "Recensământul populației",
+  "node_type": "concept",
+  "category": "societate",
+  "salience": 0.2168,
+  "degree": 7,
+  "incoming_degree": 7,
+  "description": "Numaratoare oficiala a populatiei si locuintelor, organizata periodic pentru date demografice."
+ },
+ "reachable": 2288,
+ "strong_neighbors": [
+  {
+   "id": "n_v3soc_populatie",
+   "label": "Populație",
+   "node_type": "concept",
+   "category": "societate",
+   "salience": 0.7276,
+   "degree": 15,
+   "incoming_degree": 15,
+   "description": "Totalitatea locuitorilor unei țări, regiuni sau localități.",
+   "strength": 0.9
+  },
+  {
+   "id": "n_v2soc_stat",
+   "label": "Stat",
+   "node_type": "concept",
+   "category": "societate",
+   "salience": 0.9547,
+   "degree": 24,
+   "incoming_degree": 24,
+   "description": "Organizare politică și juridică a unei comunități pe un teritoriu.",
+   "strength": 0.76
+  },
+  {
+   "id": "n_judet",
+   "label": "Județ",
+   "node_type": "concept",
+   "category": "societate",
+   "salience": 0.3099,
+   "degree": 7,
+   "incoming_degree": 8,
+   "description": "Unitate administrativ-teritoriala de baza a Romaniei; tara are 41 de judete plus municipiul Bucuresti.",
+   "strength": 0.62
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:56f1e61b1ff8b382704b31d9f30a71881ca006b4f3b30055b48c1317f87524b9"
+}

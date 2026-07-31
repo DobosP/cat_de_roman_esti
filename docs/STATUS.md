@@ -1,24 +1,25 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-07-31. This file is the repository's current source of truth._
+_As of 2026-08-01. This file is the repository's current source of truth._
 
-_Last verified: 2026-07-31 (V46 backend 711/711, accounts 53/53, session store
-16/16, Ruff, ranking/derived/pack/KG validators, and `git diff --check` green)._
+_Last verified: 2026-08-01 (V47 backend 717/717, accounts 53/53, sessions 16/16,
+targeted Contexto 187/187, derived games 82/82, Ruff and all artifact validators green)._
 
-## Current outcome — V46 strict Conexiuni pending cleanup (ADR-0070)
+## Current outcome — V47 strict Cald sau Rece target gate (ADR-0071)
 
-- Fresh exact dossiers cover all 79 formerly pending Conexiuni records. Deterministic
-  review finds 438 failures across 76; the three lint-clean boards still fail unique
-  partition and clue-arc review.
-- Independent gameplay and inventory reviews produced no promotion candidate. The
-  conservative gate removed all 79 dormant records and retained their exact content in
-  the rejection ledger, now 122 boards / 488 groups.
-- Conexiuni remains 232 approved / 74 selectable with no pending queue. Empty shelves did
-  not force a quota promotion; the KG, graph, sessions, and approved stock are unchanged.
+- Fresh exact dossiers cover all 13 formerly pending Cald sau Rece records. Deterministic
+  review found no failure and one Sonicitate salience warning; live C1-C6 gameplay and
+  inventory review still rejected ten misleading or too-thin targets.
+- `Mâncare` is the one unanimous promotion. `Shitpost` and `Industrie` remain unserved A5
+  owner holds; Familie was rejected because core kin guesses are frozen while generic
+  abstractions are hot. No common-word quota overrode the feedback-quality bar.
+- Cald sau Rece is 205 approved / 2 pending / 202 selectable unique targets. The lexical
+  review added nothing: existing forms cover Mâncare, and `ploaia` belongs to a served song.
+- V46's Conexiuni cleanup remains: 232 approved / 74 selectable / 0 pending and a durable
+  rejection ledger of 122 boards / 488 groups.
 - V45's strict Lanț cleanup remains: 94 selectable boards and three pending repair holds.
 - V44's 71-node Cald sau Rece feedback repair, 453-term projection, 12 aliases, 11
-  non-winning projections, two promoted targets, and unique 201-target runtime remain
-  unchanged.
+  non-winning projections, and two earlier promoted targets remain unchanged.
 - V43's 75-board general reserve, 43 rejected boards/172 rejected groups, hidden weak
   shelves, and unanimous future gate remain in force. The frozen 336-board
   Intrusul/Perechi payload remains unchanged after metadata regeneration.
@@ -44,23 +45,21 @@ _Last verified: 2026-07-31 (V46 backend 711/711, accounts 53/53, session store
 | Game | Total | Approved | Pending | Runtime eligible/preferred |
 |---|---:|---:|---:|---:|
 | Conexiuni | 232 | 232 | 0 | 74 eligible |
-| Cald sau Rece | 217 | 204 | 13 | 201 eligible |
+| Cald sau Rece | 207 | 205 | 2 | 202 eligible |
 | Lanțul Cuvintelor | 97 | 94 | 3 | 94 eligible |
 | Alchimie | 99 | 78 | 21 | 78 eligible |
 | Intrusul | 183 | 183 | 0 | 144 preferred |
 | Perechi | 153 | 153 | 0 | 113 preferred |
 
-Pack: **645 = 608 approved + 37 pending**, across 14 categories. The ranked original-game
-runtime serves **447 zero-FAIL boards**. The strict derived catalog remains **336** boards
+Pack: **635 = 609 approved + 26 pending**, across 14 categories. The ranked original-game
+runtime serves **448 zero-FAIL boards**. The strict derived catalog remains **336** boards
 from the frozen V38 source snapshot; its `boards` payload hash is
 `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
 Bundled KG: **2,364 nodes / 9,217 edges / 7,452 aliases / 180 puzzles**
 (`fixture-v44-contexto-common-words`).
 
-ADR-0070 resolves ADR-0065's deferred Conexiuni queue. Its exact 79 dossiers,
-deterministic report, two-reviewer verdicts, and audit are under
-`docs/reviews/v46-conexiuni-pending-gate/`. Ranking scores remain editorial pre-playtest
-estimates, not measured fun.
+ADR-0071's exact dossiers, report, verdicts, and audit are under
+`docs/reviews/v47-contexto-pending-gate/`; ranking scores remain pre-playtest estimates.
 
 ## Runtime, accounts, and deployment
 
@@ -69,8 +68,7 @@ estimates, not measured fun.
 - Browser history, records, derived mastery, circuit, and streak remain device-authored.
   Account mode can upload validated completed-score rows privately but does not download,
   restore, or merge them. Public records remain server-authored and consent-gated.
-- Anonymous production runs V43 at `38da2f4`; on 2026-07-30 all six create endpoints,
-  health, manifest, categories, accounts-off mode, and the frontend passed live probes.
+- Anonymous production runs V43 at `38da2f4`; its 2026-07-30 six-game live probes passed.
 
 ## Reproduction
 
@@ -92,8 +90,10 @@ git diff --check
   the durable demotion/rejection evidence; never force a quota or reuse a banned quad.
 - Repair the three Lanț holds only after their named blocker changes, then generate fresh
   exact dossiers; add a generic Lanț rejection ledger before another large import.
-- Re-gate the remaining 13 Cald sau Rece and 21 Alchimie pending records with fresh exact
-  evidence; improve common-word coverage through safe aliases/projections, not weak targets.
+- Resolve the two Cald sau Rece A5 holds explicitly. Repair Morcov, Familie, Farmacie,
+  Ploaie, Frigider, or Creion only through a separately bound feedback change and fresh
+  C1-C6 gate; never re-add the archived exact record unchanged.
+- Re-gate the remaining 21 Alchimie pending records with fresh exact evidence.
 - Run the larger anonymous six-game pilot before a seventh mode, score recalibration, or
   derived-catalog expansion (ADR-0054; generator now pins the V38 source snapshot).
 - Keep accounts off until the compliance checklist is complete.
