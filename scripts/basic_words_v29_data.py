@@ -21,7 +21,7 @@ NOTE = (
     "v29: seventeen concrete beginner concepts, collision-safe Romanian inflections, "
     "and bounded explicit semantic links; no game boards or promotions."
 )
-BASELINE_PACK_SHA256 = "c4542d4201c45b04f58563eb08aa2ba0973389f453f5181f53066a88df550d05"
+BASELINE_PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
 GAME_ITEM_IDS: tuple[str, ...] = ()
 V29_BEGINNER_EXTENSION: tuple[str, ...] = (
     "Câine",

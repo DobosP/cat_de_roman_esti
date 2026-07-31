@@ -55,10 +55,10 @@ def test_all_approved_boards_have_sparse_deterministic_target_routes(
         json.dumps(rows, sort_keys=True, separators=(",", ":")).encode()
     ).hexdigest()
 
-    assert len(rows) == 78  # ADR-0065: al_film_tv_106 promoted
-    assert digest == "b2cb3105d89b75eb2ebff52ecc2886d7840fca19cea554d6f7897d660fd6f170"
+    assert len(rows) == 79  # ADR-0072: al_literatura_097 promoted
+    assert digest == "50f82c4660c54708e00cdd31e28c68a60034c83444a2a9dd2d5cc879500c2683"
     assert elapsed < 30.0
-    assert Counter(row["routes"] for row in rows) == {1: 5, 2: 6, 3: 7, 4: 60}
+    assert Counter(row["routes"] for row in rows) == {1: 5, 2: 6, 3: 7, 4: 61}
 
     recipe_count = 0
     tied_count = 0
@@ -93,9 +93,9 @@ def test_all_approved_boards_have_sparse_deterministic_target_routes(
             A._projected_opening_pair_count(item.payload["seeds"], projection.recipes)
         ] += 1
 
-    assert recipe_count == 544
+    assert recipe_count == 550
     assert tied_count == 77
-    assert sum(count for openings, count in opening_counts.items() if openings >= 2) == 62
+    assert sum(count for openings, count in opening_counts.items() if openings >= 2) == 63
     assert opening_counts[1] == 16
 
 

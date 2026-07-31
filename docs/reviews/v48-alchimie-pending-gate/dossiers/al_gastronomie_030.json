@@ -1,0 +1,294 @@
+{
+ "id": "al_gastronomie_030",
+ "game": "alchimie",
+ "category": "gastronomie",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "af4bab1a723cc1921a4d143896d94a3c02b0cf88871948b1015434b93d540374",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [],
+ "target": {
+  "id": "n_gas_lebar",
+  "label": "Lebăr",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.3604,
+  "degree": 6,
+  "incoming_degree": 6,
+  "description": "Preparat de porc cu ficat, specific tăierii porcului și platourilor de iarnă."
+ },
+ "seeds": [
+  {
+   "id": "n_v2gas_mirodenii",
+   "label": "Mirodenii",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.5553,
+   "degree": 8,
+   "incoming_degree": 8,
+   "description": "Ingrediente aromate folosite pentru gust și parfum culinar."
+  },
+  {
+   "id": "n_gas_vin_fiert",
+   "label": "Vin fiert",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.5385,
+   "degree": 7,
+   "incoming_degree": 7,
+   "description": "Băutură caldă cu scorțișoară și mirodenii, prezentă la târgurile de iarnă."
+  },
+  {
+   "id": "n_gas_drob_miel",
+   "label": "Drob de miel",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.3988,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Preparat pascal din organe de miel, verdețuri și ouă, copt în tavă."
+  },
+  {
+   "id": "n_v3gas_cafea",
+   "label": "Cafea",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.4239,
+   "degree": 8,
+   "incoming_degree": 8,
+   "description": "Băutură obținută din boabe de cafea prăjite și măcinate."
+  },
+  {
+   "id": "n_gas_ardei_umpluti",
+   "label": "Ardei umpluți",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.5882,
+   "degree": 8,
+   "incoming_degree": 8,
+   "description": "Ardei umpluți cu carne și orez, înrudiți culinar cu sarmalele."
+  }
+ ],
+ "target_depth": 6,
+ "craft_profile": {
+  "opening_pairs": 4,
+  "closure_size": 151,
+  "target_generation": 5
+ },
+ "productive_openings": [
+  {
+   "pair": [
+    {
+     "id": "n_gas_ardei_umpluti",
+     "label": "Ardei umpluți"
+    },
+    {
+     "id": "n_v2gas_mirodenii",
+     "label": "Mirodenii"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_gas_sarmale",
+     "label": "Sarmale"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_gas_drob_miel",
+     "label": "Drob de miel"
+    },
+    {
+     "id": "n_gas_vin_fiert",
+     "label": "Vin fiert"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_gas_mese_sarbatori",
+     "label": "Mese de sărbători"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_gas_drob_miel",
+     "label": "Drob de miel"
+    },
+    {
+     "id": "n_v2gas_mirodenii",
+     "label": "Mirodenii"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_gas_leustean",
+     "label": "Leuștean"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v2gas_mirodenii",
+     "label": "Mirodenii"
+    },
+    {
+     "id": "n_v3gas_cafea",
+     "label": "Cafea"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_gas_cozonac",
+     "label": "Cozonac"
+    }
+   ]
+  }
+ ],
+ "minimum_action_recipe": [
+  {
+   "pair": [
+    {
+     "id": "n_gas_drob_miel",
+     "label": "Drob de miel"
+    },
+    {
+     "id": "n_gas_vin_fiert",
+     "label": "Vin fiert"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_gas_mese_sarbatori",
+     "label": "Mese de sărbători"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_gas_mese_sarbatori",
+     "label": "Mese de sărbători"
+    },
+    {
+     "id": "n_gas_vin_fiert",
+     "label": "Vin fiert"
+    }
+   ],
+   "result_count": 3,
+   "results": [
+    {
+     "id": "n_gas_masa_craciun",
+     "label": "Masa de Crăciun"
+    },
+    {
+     "id": "n_gas_tuica",
+     "label": "Țuică"
+    },
+    {
+     "id": "n_v4gas_vin",
+     "label": "Vin"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_gas_tuica",
+     "label": "Țuică"
+    },
+    {
+     "id": "n_gas_vin_fiert",
+     "label": "Vin fiert"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_gas_must_pastrama",
+     "label": "Must și pastramă"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_gas_masa_craciun",
+     "label": "Masa de Crăciun"
+    },
+    {
+     "id": "n_gas_must_pastrama",
+     "label": "Must și pastramă"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v2gas_afumaturi",
+     "label": "Afumături"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_gas_masa_craciun",
+     "label": "Masa de Crăciun"
+    },
+    {
+     "id": "n_v2gas_afumaturi",
+     "label": "Afumături"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_gas_caltabos",
+     "label": "Caltaboș"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_gas_caltabos",
+     "label": "Caltaboș"
+    },
+    {
+     "id": "n_gas_masa_craciun",
+     "label": "Masa de Crăciun"
+    }
+   ],
+   "result_count": 4,
+   "results": [
+    {
+     "id": "n_gas_lebar",
+     "label": "Lebăr"
+    },
+    {
+     "id": "n_v2gas_mezeluri",
+     "label": "Mezeluri"
+    },
+    {
+     "id": "n_gas_toba",
+     "label": "Tobă"
+    },
+    {
+     "id": "n_gas_sorici",
+     "label": "Șorici"
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:7c1e1c7da5cd488059a318e0a39ddc4c9db0b37a13b3f60cc2e04ac888d49239"
+}

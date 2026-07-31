@@ -1,0 +1,302 @@
+{
+ "id": "al_gastronomie_026",
+ "game": "alchimie",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "e1197928db929ba04c2f1a8fef7d094ead5834ea7cf33127cd41a76cf5e26cad",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [],
+ "nondistinctive_region_links": {
+  "Țuică": "national-salience concept (0.83) with generic related_to edge to Moldova"
+ },
+ "target": {
+  "id": "n_gas_paine_de_casa",
+  "label": "Pâine de casă",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.8422,
+  "degree": 17,
+  "incoming_degree": 17,
+  "description": "Pâine coaptă în gospodărie, suport perfect pentru zacuscă, slănină sau ciorbe."
+ },
+ "seeds": [
+  {
+   "id": "n_gas_ziua_nationala_masa",
+   "label": "Masa de 1 Decembrie",
+   "node_type": "event",
+   "category": "gastronomie",
+   "salience": 0.3442,
+   "degree": 5,
+   "incoming_degree": 5,
+   "description": "Asociere populară între Ziua Națională, fasole cu ciolan și porții în piețe."
+  },
+  {
+   "id": "n_v3gas_cafea",
+   "label": "Cafea",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.4239,
+   "degree": 8,
+   "incoming_degree": 8,
+   "description": "Băutură obținută din boabe de cafea prăjite și măcinate."
+  },
+  {
+   "id": "n_v2gas_afumaturi",
+   "label": "Afumături",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.4497,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Carne sau produse conservate și aromate prin fum."
+  },
+  {
+   "id": "n_v4gas_dulce",
+   "label": "Dulce",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.7333,
+   "degree": 8,
+   "incoming_degree": 8,
+   "description": "Preparat sau gust cu zahăr, asociat mai ales deserturilor."
+  },
+  {
+   "id": "n_v4gas_masa",
+   "label": "Masă",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.9027,
+   "degree": 10,
+   "incoming_degree": 9,
+   "description": "Prilej de a servi mâncare, de la mesele zilnice la cele festive."
+  },
+  {
+   "id": "n_v3gas_inghetata",
+   "label": "Înghețată",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.2826,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Desert rece, cremos, din lapte sau apă, zahăr și arome."
+  },
+  {
+   "id": "n_gas_tuica",
+   "label": "Țuică",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.8324,
+   "degree": 12,
+   "incoming_degree": 12,
+   "description": "Distilat tradițional din prune, servit ca aperitiv în multe gospodării."
+  }
+ ],
+ "target_depth": 3,
+ "craft_profile": {
+  "opening_pairs": 7,
+  "closure_size": 152,
+  "target_generation": 2
+ },
+ "productive_openings": [
+  {
+   "pair": [
+    {
+     "id": "n_gas_tuica",
+     "label": "Țuică"
+    },
+    {
+     "id": "n_v2gas_afumaturi",
+     "label": "Afumături"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_gas_slanina_ceapa",
+     "label": "Slănină cu ceapă"
+    },
+    {
+     "id": "n_gas_must_pastrama",
+     "label": "Must și pastramă"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v3gas_cafea",
+     "label": "Cafea"
+    },
+    {
+     "id": "n_v4gas_dulce",
+     "label": "Dulce"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_gas_cozonac",
+     "label": "Cozonac"
+    },
+    {
+     "id": "n_v2gas_desert",
+     "label": "Desert"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_gas_tuica",
+     "label": "Țuică"
+    },
+    {
+     "id": "n_v4gas_masa",
+     "label": "Masă"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_gas_mese_sarbatori",
+     "label": "Mese de sărbători"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_gas_ziua_nationala_masa",
+     "label": "Masa de 1 Decembrie"
+    },
+    {
+     "id": "n_v2gas_afumaturi",
+     "label": "Afumături"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_gas_fasole_ciolan",
+     "label": "Fasole cu ciolan"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v2gas_afumaturi",
+     "label": "Afumături"
+    },
+    {
+     "id": "n_v4gas_masa",
+     "label": "Masă"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_gas_masa_craciun",
+     "label": "Masa de Crăciun"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v3gas_cafea",
+     "label": "Cafea"
+    },
+    {
+     "id": "n_v3gas_inghetata",
+     "label": "Înghețată"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v2gas_desert",
+     "label": "Desert"
+    }
+   ]
+  }
+ ],
+ "minimum_action_recipe": [
+  {
+   "pair": [
+    {
+     "id": "n_gas_ziua_nationala_masa",
+     "label": "Masa de 1 Decembrie"
+    },
+    {
+     "id": "n_v2gas_afumaturi",
+     "label": "Afumături"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_gas_fasole_ciolan",
+     "label": "Fasole cu ciolan"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_gas_tuica",
+     "label": "Țuică"
+    },
+    {
+     "id": "n_v2gas_afumaturi",
+     "label": "Afumături"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_gas_slanina_ceapa",
+     "label": "Slănină cu ceapă"
+    },
+    {
+     "id": "n_gas_must_pastrama",
+     "label": "Must și pastramă"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_gas_fasole_ciolan",
+     "label": "Fasole cu ciolan"
+    },
+    {
+     "id": "n_gas_slanina_ceapa",
+     "label": "Slănină cu ceapă"
+    }
+   ],
+   "result_count": 4,
+   "results": [
+    {
+     "id": "n_gas_paine_de_casa",
+     "label": "Pâine de casă"
+    },
+    {
+     "id": "n_gas_muraturi",
+     "label": "Murături"
+    },
+    {
+     "id": "n_v4gas_ceapa",
+     "label": "Ceapă"
+    },
+    {
+     "id": "n_v4gas_fasole",
+     "label": "Fasole"
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:c30caba42ac2d5c52e4e0b589152d01e9d382f01a99aee63d780a879408db5dd"
+}

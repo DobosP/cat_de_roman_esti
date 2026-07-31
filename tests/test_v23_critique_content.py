@@ -13,6 +13,14 @@ _TOMBSTONES = json.loads(
         _ROOT / "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json"
     ).read_text(encoding="utf-8")
 )["items"]
+_V48_AUDIT = json.loads(
+    (
+        _ROOT / "docs/reviews/v48-alchimie-pending-gate/projection-audit.json"
+    ).read_text(encoding="utf-8")
+)
+_V48_SOURCE_RECORDS = {
+    row["id"]: row["source_record"] for row in _V48_AUDIT["items"]
+}
 
 _ITEM_IDS = {
     "cx_viata_de_roman_291",
@@ -24,6 +32,7 @@ _ITEM_IDS = {
     "al_viata_de_roman_098",
 }
 _V46_RETIRED = {"cx_viata_de_roman_291"}
+_V48_RETIRED = {"al_viata_de_roman_098"}
 
 _NODE_IDS = {
     "n_v23via_elasticul",
@@ -52,7 +61,7 @@ _NODE_IDS = {
 _EDGE_IDS = {f"de{number}" for number in range(7514, 7592)}
 
 
-def test_v23_items_reflect_the_later_bound_contexto_gate():
+def test_v23_items_reflect_the_later_bound_content_gates():
     records = {
         item["id"]: item
         for game in ("conexiuni", "contexto", "lant", "alchimie")
@@ -60,19 +69,29 @@ def test_v23_items_reflect_the_later_bound_contexto_gate():
         if item["id"] in _ITEM_IDS
     }
 
-    assert set(records) == _ITEM_IDS - _V46_RETIRED
+    assert set(records) == _ITEM_IDS - _V46_RETIRED - _V48_RETIRED
     assert _V46_RETIRED <= set(_TOMBSTONES)
-    promoted = {"ct_literatura_298", "ct_viata_de_roman_299"}
+    assert _V48_RETIRED <= set(_V48_SOURCE_RECORDS)
+    promoted = {
+        "ct_literatura_298",
+        "ct_viata_de_roman_299",
+        "al_literatura_097",
+    }
     assert {
         item_id for item_id, item in records.items() if item["status"] == "approved"
     } == promoted
     assert {
         item_id for item_id, item in records.items() if item["status"] == "pending"
-    } == _ITEM_IDS - promoted - _V46_RETIRED
+    } == _ITEM_IDS - promoted - _V46_RETIRED - _V48_RETIRED
     assert records["lt_literatura_210"]["optimal"] == 2
     assert records["lt_viata_de_roman_211"]["optimal"] == 2
     assert records["al_literatura_097"]["target_depth"] == 2
-    assert records["al_viata_de_roman_098"]["target_depth"] == 3
+    archived_alchimie = _V48_SOURCE_RECORDS["al_viata_de_roman_098"]
+    assert archived_alchimie["status"] == "pending"
+    assert archived_alchimie["target_depth"] == 3
+    assert not any(
+        item["id"] == "al_viata_de_roman_098" for item in _PACK["alchimie"]
+    )
 
 
 def test_v23_graph_wave_has_the_reviewed_size_and_no_duplicate_moara_node():

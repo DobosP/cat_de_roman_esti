@@ -1,0 +1,644 @@
+{
+ "game": "alchimie",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "al_arta_cultura_015",
+   "al_film_tv_022",
+   "al_gastronomie_026",
+   "al_gastronomie_030",
+   "al_geografie_032",
+   "al_limba_047",
+   "al_literatura_051",
+   "al_literatura_097",
+   "al_muzica_065",
+   "al_personalitati_070",
+   "al_societate_076",
+   "al_viata_de_roman_092",
+   "al_viata_de_roman_094",
+   "al_viata_de_roman_095",
+   "al_viata_de_roman_098",
+   "al_viata_de_roman_099",
+   "al_viata_de_roman_100",
+   "al_viata_de_roman_101",
+   "al_viata_de_roman_102",
+   "al_viata_de_roman_103",
+   "al_viata_de_roman_104"
+  ],
+  "projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c"
+ },
+ "verdicts": {
+  "al_arta_cultura_015": "reject",
+  "al_film_tv_022": "reject",
+  "al_gastronomie_026": "keep",
+  "al_gastronomie_030": "keep",
+  "al_geografie_032": "reject",
+  "al_limba_047": "reject",
+  "al_literatura_051": "reject",
+  "al_literatura_097": "promote",
+  "al_muzica_065": "reject",
+  "al_personalitati_070": "reject",
+  "al_societate_076": "reject",
+  "al_viata_de_roman_092": "keep",
+  "al_viata_de_roman_094": "reject",
+  "al_viata_de_roman_095": "reject",
+  "al_viata_de_roman_098": "reject",
+  "al_viata_de_roman_099": "reject",
+  "al_viata_de_roman_100": "reject",
+  "al_viata_de_roman_101": "reject",
+  "al_viata_de_roman_102": "reject",
+  "al_viata_de_roman_103": "reject",
+  "al_viata_de_roman_104": "reject"
+ },
+ "perItem": [
+  {
+   "id": "al_arta_cultura_015",
+   "game": "alchimie",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:1104991ced34056157eedd979481ca63aada0302ed03624f5f6e7c60ce1f8291",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "metrics": {
+    "live_openings": 1,
+    "live_routes": 1,
+    "recipe_pairs": 2,
+    "projected_concepts": 9,
+    "exact_action_par": 2
+   },
+   "reasoning": "Only Artă + Fotografie is productive in the live projection. The repeated Artă taxonomy step makes Sculptură românească arbitrary, while the remaining seeds are filler."
+  },
+  {
+   "id": "al_film_tv_022",
+   "game": "alchimie",
+   "analyst": "reject",
+   "verifier": "promote",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:84239067d9b5491d0ef76f13bbec449844399247ed775cbb4cee60d91c6d715b",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "reject-without-unanimity",
+   "failure_modes": [
+    "E3"
+   ],
+   "metrics": {
+    "live_openings": 5,
+    "live_routes": 4,
+    "recipe_pairs": 7,
+    "projected_concepts": 10,
+    "exact_action_par": 2
+   },
+   "reasoning": "Five live openings and a familiar target made the verifier positive, but the gameplay review found Televiziune + Film underdetermines Subtitrare among many equally plausible film/TV crafts. Reject wins without unanimity."
+  },
+  {
+   "id": "al_gastronomie_026",
+   "game": "alchimie",
+   "analyst": "keep",
+   "verifier": "keep",
+   "final": "keep",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:c30caba42ac2d5c52e4e0b589152d01e9d382f01a99aee63d780a879408db5dd",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "unanimous-keep",
+   "failure_modes": [
+    "A5",
+    "E1",
+    "E3"
+   ],
+   "metrics": {
+    "live_openings": 4,
+    "live_routes": 4,
+    "recipe_pairs": 12,
+    "projected_concepts": 15,
+    "exact_action_par": 3
+   },
+   "reasoning": "Every target route consumes Țuică, so ADR-0019 requires an owner hold. The honest quality signal is also negative: the mixed seeds contain filler and bread is an arbitrary accompaniment at the final craft."
+  },
+  {
+   "id": "al_gastronomie_030",
+   "game": "alchimie",
+   "analyst": "keep",
+   "verifier": "keep",
+   "final": "keep",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:7c1e1c7da5cd488059a318e0a39ddc4c9db0b37a13b3f60cc2e04ac888d49239",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "unanimous-keep",
+   "failure_modes": [
+    "A5",
+    "E3"
+   ],
+   "metrics": {
+    "live_openings": 2,
+    "live_routes": 2,
+    "recipe_pairs": 8,
+    "projected_concepts": 12,
+    "exact_action_par": 6
+   },
+   "reasoning": "Every live route consumes Vin fiert, forcing an ADR-0019 owner hold. The six-action meals-to-meat-to-cold-cuts chain is too long and generic to release unchanged."
+  },
+  {
+   "id": "al_geografie_032",
+   "game": "alchimie",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:b974d9a642ca1e5df4c61a7f1669d81a2c3d9aa5c8b037929d76d37b65d15b27",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "metrics": {
+    "live_openings": 1,
+    "live_routes": 4,
+    "recipe_pairs": 7,
+    "projected_concepts": 11,
+    "exact_action_par": 2
+   },
+   "reasoning": "The only live opener is cătun + pârâu → Carpați, a generic and unintuitive association. Loose seed coherence and a low-salience target reinforce the hard E2 failure."
+  },
+  {
+   "id": "al_limba_047",
+   "game": "alchimie",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:9c54665c68c7543f99fb44154cd2c4c6ef2dfbae8e588745bd72e3b962a4f573",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "E1",
+    "E2",
+    "E3",
+    "E5"
+   ],
+   "metrics": {
+    "live_openings": 1,
+    "live_routes": 1,
+    "recipe_pairs": 6,
+    "projected_concepts": 12,
+    "exact_action_par": 6
+   },
+   "reasoning": "Only Frază + Dialog opens the one six-action route. Dor, Grai, and Dicționar are dead filler in the private recipe book, leaving a long linear taxonomy exercise rather than meaningful choice."
+  },
+  {
+   "id": "al_literatura_051",
+   "game": "alchimie",
+   "analyst": "reject",
+   "verifier": "promote",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:f29410f1ee3a26748b609945c865901555304e91da7d3ef75601ae02339e28b5",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "reject-without-unanimity",
+   "failure_modes": [
+    "E1",
+    "E3"
+   ],
+   "metrics": {
+    "live_openings": 3,
+    "live_routes": 4,
+    "recipe_pairs": 11,
+    "projected_concepts": 14,
+    "exact_action_par": 3
+   },
+   "reasoning": "The verifier found four plausible school-canon routes, but the gameplay reviewer found jurnal and Ghiță Pristanda unused and Sat românesc an uneven generic setting reached through author/work/category leaps. Reject wins without unanimity."
+  },
+  {
+   "id": "al_literatura_097",
+   "game": "alchimie",
+   "analyst": "promote",
+   "verifier": "promote",
+   "final": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:0cd19422b9cd20256695b472798b6ed4b522db8fc6888706ad7ccad1d96dba45",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "unanimous-promote",
+   "failure_modes": [],
+   "metrics": {
+    "live_openings": 3,
+    "live_routes": 4,
+    "recipe_pairs": 6,
+    "projected_concepts": 9,
+    "exact_action_par": 2
+   },
+   "reasoning": "All six seeds are recognizable Romanian fairy tales. Three intuitive openings and four short bounded routes produce Poveste or Zmeul before the specific Tinerețe fără bătrânețe relation reaches its Făt-Frumos protagonist."
+  },
+  {
+   "id": "al_muzica_065",
+   "game": "alchimie",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:8be230044b40ae7eaacf829147c26b1dd1540bd7777a8acac7287c3eb2cddf02",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "E1",
+    "E3"
+   ],
+   "metrics": {
+    "live_openings": 4,
+    "live_routes": 4,
+    "recipe_pairs": 9,
+    "projected_concepts": 12,
+    "exact_action_par": 2
+   },
+   "reasoning": "Rock românesc + Trupă rock cannot distinguish the particular Cargo song Ploaia from countless songs or bands. No Cargo-specific ingredient enters the minimum route."
+  },
+  {
+   "id": "al_personalitati_070",
+   "game": "alchimie",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:96eb26ddbae963c8f682fb992a58e64f5276ba39f18f2d61273077157589925e",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "metrics": {
+    "live_openings": 1,
+    "live_routes": 1,
+    "recipe_pairs": 3,
+    "projected_concepts": 9,
+    "exact_action_par": 3
+   },
+   "reasoning": "The sole opening Nicolae Titulescu + biografie → Regina Maria is not an intuitive distinctive association. Most seeds are filler for a forced biography chain."
+  },
+  {
+   "id": "al_societate_076",
+   "game": "alchimie",
+   "analyst": "reject",
+   "verifier": "promote",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:704801995210b41b479201069b0e18102bc25a73a8a84ee11f5094368eb2a35a",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "reject-without-unanimity",
+   "failure_modes": [
+    "E1",
+    "E3"
+   ],
+   "metrics": {
+    "live_openings": 3,
+    "live_routes": 4,
+    "recipe_pairs": 8,
+    "projected_concepts": 11,
+    "exact_action_par": 3
+   },
+   "reasoning": "The verifier accepted the civic State/România route, but the gameplay reviewer found copil and Universitatea filler and the generic taxonomy insufficiently specific to make Uniunea Europeană a satisfying easy craft. Reject wins without unanimity."
+  },
+  {
+   "id": "al_viata_de_roman_092",
+   "game": "alchimie",
+   "analyst": "keep",
+   "verifier": "keep",
+   "final": "keep",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:25ff93d98ce627b8f296878a8f069c72e078d419bd30fac680c4273167a2e6fc",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "unanimous-keep",
+   "failure_modes": [
+    "A5",
+    "E2",
+    "E3",
+    "E4"
+   ],
+   "metrics": {
+    "live_openings": 1,
+    "live_routes": 4,
+    "recipe_pairs": 6,
+    "projected_concepts": 10,
+    "exact_action_par": 2
+   },
+   "reasoning": "Every route begins with Țuica de casă, so ADR-0019 requires an owner hold. It also has only one live opening and strains a winter Ignat association into Vara la bunici through near-restatement household nodes."
+  },
+  {
+   "id": "al_viata_de_roman_094",
+   "game": "alchimie",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:d8e508d7689f34e2166c84129c5ac29dcb093ce5a2add841f4fc82489caf80d0",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "E1",
+    "E2"
+   ],
+   "metrics": {
+    "live_openings": 1,
+    "live_routes": 4,
+    "recipe_pairs": 7,
+    "projected_concepts": 10,
+    "exact_action_par": 3
+   },
+   "reasoning": "The Bloc → Viața la bloc → Întreținere/Apometre → Facturi route is repairable, but only Bloc + Termopanele is live initially. The literal two-opening E2 floor blocks release."
+  },
+  {
+   "id": "al_viata_de_roman_095",
+   "game": "alchimie",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:9a7c394a1656f2510c1ac33c3d88fad327d76d94a7a2ed1246dd8e96c45b6b6d",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "metrics": {
+    "live_openings": 1,
+    "live_routes": 4,
+    "recipe_pairs": 11,
+    "projected_concepts": 16,
+    "exact_action_par": 6
+   },
+   "reasoning": "Only Naveta + Piața opens a six-action route through generic shopping, car, and package concepts. Caloriferul rece and Cheia de la gât are filler and the target is not inferable."
+  },
+  {
+   "id": "al_viata_de_roman_098",
+   "game": "alchimie",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:a81f96f093eedfb482692bab1a0d81a773765d5928044d5d6ded71d6b69a2d8c",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "A6",
+    "E3",
+    "E4"
+   ],
+   "metrics": {
+    "live_openings": 2,
+    "live_routes": 3,
+    "recipe_pairs": 5,
+    "projected_concepts": 9,
+    "exact_action_par": 3
+   },
+   "reasoning": "The childhood-game seeds and two openings are strong, but generic Jocuri de copilărie + Copilăria anilor 90 cannot distinguish Telefonul fără fir from many sibling games. It also recycles a served nostalgia cluster."
+  },
+  {
+   "id": "al_viata_de_roman_099",
+   "game": "alchimie",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:8f5d866edb7e4494aa164ad58b81d8fe11dfb9e3a860b6b469b41508c67977c2",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "A6",
+    "E1",
+    "E3"
+   ],
+   "metrics": {
+    "live_openings": 3,
+    "live_routes": 3,
+    "recipe_pairs": 4,
+    "projected_concepts": 9,
+    "exact_action_par": 2
+   },
+   "reasoning": "This is one of six 5/7–6/7 seed-template reskins. School items are filler and Dormitor + ușă → Pernă uses ușă as a magic transformer."
+  },
+  {
+   "id": "al_viata_de_roman_100",
+   "game": "alchimie",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:ad4ae37e0fb07a8f517b75ae553ea6fd659f047a61988ec314d407eae75c58a8",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "A6",
+    "E1",
+    "E3"
+   ],
+   "metrics": {
+    "live_openings": 3,
+    "live_routes": 3,
+    "recipe_pairs": 5,
+    "projected_concepts": 10,
+    "exact_action_par": 3
+   },
+   "reasoning": "This is one of six 5/7–6/7 seed-template reskins. School items are filler and repeated +ușă crafts arbitrarily extend Pernă to Fotoliu."
+  },
+  {
+   "id": "al_viata_de_roman_101",
+   "game": "alchimie",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:fb5c99bfbdf025f39c7743051baebc0d81c8d345441cbc917b9ecd601e36b7b5",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "A6",
+    "E1",
+    "E3"
+   ],
+   "metrics": {
+    "live_openings": 3,
+    "live_routes": 3,
+    "recipe_pairs": 6,
+    "projected_concepts": 11,
+    "exact_action_par": 3
+   },
+   "reasoning": "This is one of six 5/7–6/7 seed-template reskins. School items are filler and repeated +ușă crafts arbitrarily transform Pat into Pernă, Fotoliu, then Sufragerie."
+  },
+  {
+   "id": "al_viata_de_roman_102",
+   "game": "alchimie",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:6aa2b1d21eb0ba1a890e9394f1d3bc03f57f37de9a26ec38aa8b01d4d23c9aec",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "A6",
+    "E1"
+   ],
+   "metrics": {
+    "live_openings": 3,
+    "live_routes": 2,
+    "recipe_pairs": 4,
+    "projected_concepts": 10,
+    "exact_action_par": 3
+   },
+   "reasoning": "The Temă + Lecție → Examen route is a strong repair nucleus, but A dormi, Pat, and ușă are irrelevant home leftovers and the board is a 6/7 template reskin."
+  },
+  {
+   "id": "al_viata_de_roman_103",
+   "game": "alchimie",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:13fe59065ab9209244334ba757c1b840d64e319221bcc29b07189976de121993",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "A6",
+    "E1",
+    "E3"
+   ],
+   "metrics": {
+    "live_openings": 3,
+    "live_routes": 2,
+    "recipe_pairs": 5,
+    "projected_concepts": 11,
+    "exact_action_par": 4
+   },
+   "reasoning": "The school route is repairable, but A dormi, Sufragerie, and ușă are filler, the final Examen + Temă → Catalog școlar step is loose, and the board is a 6/7 template reskin."
+  },
+  {
+   "id": "al_viata_de_roman_104",
+   "game": "alchimie",
+   "analyst": "reject",
+   "verifier": "reject",
+   "final": "reject",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:15108ec0499a53aa16b512af9eef03460c459090a3fce4e99f1a1b09c3d433e3",
+   "analyst_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "verifier_projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+   "policy": "unanimous-reject",
+   "failure_modes": [
+    "A6",
+    "E1",
+    "E3"
+   ],
+   "metrics": {
+    "live_openings": 2,
+    "live_routes": 2,
+    "recipe_pairs": 4,
+    "projected_concepts": 10,
+    "exact_action_par": 3
+   },
+   "reasoning": "This is one of six 5/7–6/7 seed-template reskins. School seeds are filler in a home-object board and Dormitor → Pernă → Covor again relies on arbitrary +ușă transformations."
+  }
+ ],
+ "coverage": {
+  "total": 21,
+  "verified": 21,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "evidence": {
+  "reviewed_at": "2026-08-01",
+  "pending_id_set_sha256": "d7cbc45ce53f4c70e2d3c3d8214e5f49964422f703f3004514ab08eccb822120",
+  "projection_audit_sha256": "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c",
+  "fresh_dossiers": 21,
+  "deterministic_fail_records": 0,
+  "deterministic_warn_records": 3,
+  "live_e2_opening_floor_failures": 7,
+  "analyst_counts": {
+   "promote": 1,
+   "reject": 17,
+   "keep": 3
+  },
+  "verifier_counts": {
+   "promote": 4,
+   "reject": 14,
+   "keep": 3
+  },
+  "final_counts": {
+   "promote": 1,
+   "reject": 17,
+   "keep": 3
+  },
+  "independent_review_disagreements": 3,
+  "mandatory_a5_holds": 3,
+  "stale_v42_judgments_reused": false,
+  "new_nodes_edges_or_authored_records": 0
+ },
+ "factual_checks": [
+  {
+   "claim": "Făt-Frumos is the protagonist of Tinerețe fără bătrânețe și viață fără de moarte.",
+   "sources": [
+    "https://educatie.inmures.ro/fileadmin/galerii_foto/institutii/pdf/tinerete_fara_batranete.pdf",
+    "https://liceunet.ro/petre-ispirescu/tinerete-fara-batranete-si-viata-fara-de-moarte/personaje"
+   ]
+  },
+  {
+   "claim": "Greuceanu and Prâslea cel voinic both have distinctive zmeu conflicts.",
+   "sources": [
+    "https://ro.wikisource.org/wiki/Greuceanu",
+    "https://ro.wikisource.org/wiki/Pr%C3%A2slea_cel_voinic_%C8%99i_merele_de_aur"
+   ]
+  }
+ ]
+}

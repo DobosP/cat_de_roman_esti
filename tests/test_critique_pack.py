@@ -336,11 +336,56 @@ def _write_gate_artifact(
     count = len(verdicts)
     analyst_verdicts = analyst_verdicts or verdicts
     verifier_verdicts = verifier_verdicts or verdicts
+    batch = {'version': 2, 'mode': 'gate', 'input_ids': sorted(ids)}
+    projection_digest = None
+    review_bindings = {iid: review_binding for iid in ids}
+    if game == 'alchimie':
+        import audit_alchimie_projections
+
+        pack, svc, strong, regions = critique_pack.load_all(
+            critique_pack.PACKAGE_PACK,
+            critique_pack.PACKAGE_KG,
+        )
+        _items, _pack_findings, selected = critique_pack.run(
+            pack,
+            svc,
+            strong,
+            regions,
+            ['alchimie'],
+            {'pending'},
+            set(ids),
+        )
+        dossier_dir = path.parent / 'dossiers'
+        dossier_dir.mkdir()
+        for item_game, record, findings in selected:
+            dossier = critique_pack.build_dossier(
+                record,
+                item_game,
+                svc,
+                strong,
+                findings,
+                regions,
+            )
+            review_bindings[record['id']] = dossier['review_binding']
+            (dossier_dir / f"{record['id']}.json").write_text(
+                json.dumps(dossier, ensure_ascii=False, indent=1) + '\n',
+                encoding='utf-8',
+            )
+        audit = audit_alchimie_projections.build_artifact(
+            sorted(ids),
+            dossier_dir,
+        )
+        audit_raw = (json.dumps(audit, ensure_ascii=False, indent=1) + '\n').encode()
+        (path.parent / apply_rereview.ALCHIMIE_PROJECTION_AUDIT).write_bytes(
+            audit_raw
+        )
+        projection_digest = hashlib.sha256(audit_raw).hexdigest()
+        batch['projection_audit_sha256'] = projection_digest
     path.write_text(
         json.dumps({
             'game': game,
             'mode': 'gate',
-            'batch': {'version': 2, 'mode': 'gate', 'input_ids': sorted(ids)},
+            'batch': batch,
             'verdicts': verdicts,
             'perItem': [
                 {
@@ -349,7 +394,15 @@ def _write_gate_artifact(
                     'analyst': analyst_verdicts[iid],
                     'verifier': verifier_verdicts[iid],
                     'verified': verified, 'verifier_lost': not verified,
-                    'review_binding': review_binding,
+                    'review_binding': review_bindings[iid],
+                    **(
+                        {
+                            'analyst_projection_audit_sha256': projection_digest,
+                            'verifier_projection_audit_sha256': projection_digest,
+                        }
+                        if projection_digest is not None
+                        else {}
+                    ),
                 }
                 for iid, verdict in verdicts.items()
             ],
@@ -695,6 +748,60 @@ def test_apply_rereview_accepts_conservative_disagreement_rejection(tmp_path):
     assert verdicts == {pending["id"]: "reject"}
     assert batch["input_ids"] == [pending["id"]]
     assert bindings[pending["id"]] == "sha256:" + ("a" * 64)
+
+
+def test_apply_rereview_requires_bound_alchimie_live_projection(tmp_path):
+    pack = json.loads(critique_pack.PACKAGE_PACK.read_text(encoding="utf-8"))
+    pending = next(item for item in pack["alchimie"] if item["status"] == "pending")
+    path = tmp_path / "alchimie_verdicts.json"
+    _write_gate_artifact(path, "alchimie", {pending["id"]: "keep"})
+    data = json.loads(path.read_text(encoding="utf-8"))
+
+    verdicts, batch, _bindings = apply_rereview.validated_artifact(
+        data, "alchimie", path,
+    )
+    assert verdicts == {pending["id"]: "keep"}
+    assert len(batch["projection_audit_sha256"]) == 64
+
+    data["perItem"][0]["verifier_projection_audit_sha256"] = "0" * 64
+    with pytest.raises(SystemExit, match="unbound Alchimie live-projection"):
+        apply_rereview.validated_artifact(data, "alchimie", path)
+
+
+def test_apply_rereview_rejects_stale_alchimie_live_projection_file(tmp_path):
+    pack = json.loads(critique_pack.PACKAGE_PACK.read_text(encoding="utf-8"))
+    pending = next(item for item in pack["alchimie"] if item["status"] == "pending")
+    path = tmp_path / "alchimie_verdicts.json"
+    _write_gate_artifact(path, "alchimie", {pending["id"]: "keep"})
+    audit_path = tmp_path / apply_rereview.ALCHIMIE_PROJECTION_AUDIT
+    audit_path.write_text("{}\n", encoding="utf-8")
+
+    with pytest.raises(SystemExit, match="stale Alchimie live-projection"):
+        apply_rereview.validated_artifact(
+            json.loads(path.read_text(encoding="utf-8")),
+            "alchimie",
+            path,
+        )
+
+
+def test_apply_rereview_replays_alchimie_projection_evidence(tmp_path):
+    pack = json.loads(critique_pack.PACKAGE_PACK.read_text(encoding="utf-8"))
+    pending = next(item for item in pack["alchimie"] if item["status"] == "pending")
+    path = tmp_path / "alchimie_verdicts.json"
+    _write_gate_artifact(path, "alchimie", {pending["id"]: "keep"})
+    audit_path = tmp_path / apply_rereview.ALCHIMIE_PROJECTION_AUDIT
+    audit = json.loads(audit_path.read_text(encoding="utf-8"))
+    audit["items"][0]["projected_opening_pair_count"] += 1
+    audit_raw = (json.dumps(audit, ensure_ascii=False, indent=1) + "\n").encode()
+    audit_path.write_bytes(audit_raw)
+    digest = hashlib.sha256(audit_raw).hexdigest()
+    artifact = json.loads(path.read_text(encoding="utf-8"))
+    artifact["batch"]["projection_audit_sha256"] = digest
+    artifact["perItem"][0]["analyst_projection_audit_sha256"] = digest
+    artifact["perItem"][0]["verifier_projection_audit_sha256"] = digest
+
+    with pytest.raises(SystemExit, match="unreproducible Alchimie live-projection"):
+        apply_rereview.validated_artifact(artifact, "alchimie", path)
 
 
 def test_tracked_v43_gate_satisfies_conservative_two_reviewer_contract():

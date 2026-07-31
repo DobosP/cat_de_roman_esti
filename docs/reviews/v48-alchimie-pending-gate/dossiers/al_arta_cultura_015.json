@@ -1,0 +1,292 @@
+{
+ "id": "al_arta_cultura_015",
+ "game": "alchimie",
+ "category": "arta_cultura",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "c21a63efbf65076e9be1775113a8edfda8f9535aa1947b17495d0b7e6c868f42",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v2art_sculptura_romaneasca",
+  "label": "Sculptură românească",
+  "node_type": "concept",
+  "category": "arta_cultura",
+  "salience": 0.623,
+  "degree": 8,
+  "incoming_degree": 8,
+  "description": "Sculptură creată de artiști români sau legată de cultura română."
+ },
+ "seeds": [
+  {
+   "id": "n_v4art_fotografie",
+   "label": "Fotografie",
+   "node_type": "concept",
+   "category": "arta_cultura",
+   "salience": 0.7164,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Imagine obținută cu aparatul foto, folosită și ca formă artistică."
+  },
+  {
+   "id": "n_v3art_costum_popular",
+   "label": "Costum popular",
+   "node_type": "concept",
+   "category": "arta_cultura",
+   "salience": 0.2178,
+   "degree": 4,
+   "incoming_degree": 5,
+   "description": "Îmbrăcăminte tradițională purtată în comunități și la sărbători."
+  },
+  {
+   "id": "n_v3art_cultura",
+   "label": "Cultură",
+   "node_type": "concept",
+   "category": "arta_cultura",
+   "salience": 0.9427,
+   "degree": 11,
+   "incoming_degree": 11,
+   "description": "Ansamblu de valori, practici și creații ale unei comunități."
+  },
+  {
+   "id": "n_v3art_arta",
+   "label": "Artă",
+   "node_type": "concept",
+   "category": "arta_cultura",
+   "salience": 0.9589,
+   "degree": 10,
+   "incoming_degree": 10,
+   "description": "Activitate creativă exprimată prin imagini, sunete, forme sau spectacol."
+  },
+  {
+   "id": "n_v4art_traditie",
+   "label": "Tradiție",
+   "node_type": "concept",
+   "category": "arta_cultura",
+   "salience": 0.8415,
+   "degree": 7,
+   "incoming_degree": 7,
+   "description": "Obicei sau practică transmisă între generații într-o comunitate."
+  },
+  {
+   "id": "n_artx_teatru_romanesc",
+   "label": "Teatrul românesc",
+   "node_type": "concept",
+   "category": "arta_cultura",
+   "salience": 0.6134,
+   "degree": 23,
+   "incoming_degree": 23,
+   "description": "Tradiția scenică românească, de la comedia clasică la regia modernă și instituțiile de repertoriu."
+  },
+  {
+   "id": "n_v4art_masca",
+   "label": "Mască",
+   "node_type": "concept",
+   "category": "arta_cultura",
+   "salience": 0.4389,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Obiect purtat pe față în teatru, ritual, dans sau carnaval."
+  }
+ ],
+ "target_depth": 2,
+ "craft_profile": {
+  "opening_pairs": 13,
+  "closure_size": 109,
+  "target_generation": 2
+ },
+ "productive_openings": [
+  {
+   "pair": [
+    {
+     "id": "n_v3art_costum_popular",
+     "label": "Costum popular"
+    },
+    {
+     "id": "n_v4art_traditie",
+     "label": "Tradiție"
+    }
+   ],
+   "result_count": 3,
+   "results": [
+    {
+     "id": "n_v17art_ia_romaneasca",
+     "label": "Ia românească"
+    },
+    {
+     "id": "n_folclor_romanesc",
+     "label": "Folclor românesc"
+    },
+    {
+     "id": "n_calusarii",
+     "label": "Călușarii"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v3art_arta",
+     "label": "Artă"
+    },
+    {
+     "id": "n_v4art_fotografie",
+     "label": "Fotografie"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_cinematografia_romaneasca",
+     "label": "Cinematografia românească"
+    },
+    {
+     "id": "n_arta_plastica",
+     "label": "Artă plastică"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v3art_arta",
+     "label": "Artă"
+    },
+    {
+     "id": "n_v4art_masca",
+     "label": "Mască"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v2art_teatru",
+     "label": "Teatru"
+    },
+    {
+     "id": "n_folclor_romanesc",
+     "label": "Folclor românesc"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v3art_costum_popular",
+     "label": "Costum popular"
+    },
+    {
+     "id": "n_v4art_masca",
+     "label": "Mască"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_folclor_romanesc",
+     "label": "Folclor românesc"
+    },
+    {
+     "id": "n_calusarii",
+     "label": "Călușarii"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v3art_cultura",
+     "label": "Cultură"
+    },
+    {
+     "id": "n_v4art_traditie",
+     "label": "Tradiție"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_folclor_romanesc",
+     "label": "Folclor românesc"
+    },
+    {
+     "id": "n_martisor",
+     "label": "Mărțișor"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v4art_masca",
+     "label": "Mască"
+    },
+    {
+     "id": "n_v4art_traditie",
+     "label": "Tradiție"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_folclor_romanesc",
+     "label": "Folclor românesc"
+    },
+    {
+     "id": "n_calusarii",
+     "label": "Călușarii"
+    }
+   ]
+  }
+ ],
+ "minimum_action_recipe": [
+  {
+   "pair": [
+    {
+     "id": "n_v3art_arta",
+     "label": "Artă"
+    },
+    {
+     "id": "n_v4art_fotografie",
+     "label": "Fotografie"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_arta_plastica",
+     "label": "Artă plastică"
+    },
+    {
+     "id": "n_cinematografia_romaneasca",
+     "label": "Cinematografia românească"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_arta_plastica",
+     "label": "Artă plastică"
+    },
+    {
+     "id": "n_v3art_arta",
+     "label": "Artă"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v2art_sculptura_romaneasca",
+     "label": "Sculptură românească"
+    },
+    {
+     "id": "n_v2art_pictura_romaneasca",
+     "label": "Pictură românească"
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:1104991ced34056157eedd979481ca63aada0302ed03624f5f6e7c60ce1f8291"
+}

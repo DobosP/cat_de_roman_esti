@@ -1,0 +1,266 @@
+{
+ "id": "al_literatura_051",
+ "game": "alchimie",
+ "category": "literatura",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "cb3bd21e7bf382d9881693044babbc7d7fd0ef08dec14d1e8a0d089ef049afb4",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v2lit_sat_romanesc",
+  "label": "Sat românesc",
+  "node_type": "concept",
+  "category": "literatura",
+  "salience": 0.8781,
+  "degree": 17,
+  "incoming_degree": 17,
+  "description": "Spațiu rural frecvent în proza și poezia românească."
+ },
+ "seeds": [
+  {
+   "id": "n_junimea",
+   "label": "Junimea",
+   "node_type": "org",
+   "category": "literatura",
+   "salience": 0.5031,
+   "degree": 13,
+   "incoming_degree": 13,
+   "description": "Societate literara de la Iasi."
+  },
+  {
+   "id": "n_v2lit_roman_literar",
+   "label": "Roman (specie literară)",
+   "node_type": "concept",
+   "category": "literatura",
+   "salience": 0.9702,
+   "degree": 40,
+   "incoming_degree": 40,
+   "description": "Specie epică amplă, cu personaje și acțiune complexă."
+  },
+  {
+   "id": "n_v2lit_nuvela",
+   "label": "Nuvelă",
+   "node_type": "concept",
+   "category": "literatura",
+   "salience": 0.7298,
+   "degree": 11,
+   "incoming_degree": 11,
+   "description": "Specie epică scurtă, cu conflict concentrat și puține personaje."
+  },
+  {
+   "id": "n_v3lit_poveste",
+   "label": "Poveste",
+   "node_type": "concept",
+   "category": "literatura",
+   "salience": 0.4659,
+   "degree": 11,
+   "incoming_degree": 11,
+   "description": "Narațiune cu întâmplări și personaje."
+  },
+  {
+   "id": "n_v4lit_jurnal",
+   "label": "jurnal",
+   "node_type": "concept",
+   "category": "literatura",
+   "salience": 0.3412,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Text cu însemnări personale așezate pe zile."
+  },
+  {
+   "id": "n_litx_ghita_pristanda",
+   "label": "Ghiță Pristanda",
+   "node_type": "person",
+   "category": "literatura",
+   "salience": 0.2279,
+   "degree": 5,
+   "incoming_degree": 5,
+   "description": "Polițaiul servil din „O scrisoare pierdută\", memorabil prin replica „Curat murdar!\"."
+  }
+ ],
+ "target_depth": 3,
+ "craft_profile": {
+  "opening_pairs": 5,
+  "closure_size": 136,
+  "target_generation": 2
+ },
+ "productive_openings": [
+  {
+   "pair": [
+    {
+     "id": "n_v2lit_nuvela",
+     "label": "Nuvelă"
+    },
+    {
+     "id": "n_v2lit_roman_literar",
+     "label": "Roman (specie literară)"
+    }
+   ],
+   "result_count": 5,
+   "results": [
+    {
+     "id": "n_v4lit_proza",
+     "label": "proză"
+    },
+    {
+     "id": "n_v4lit_pagina",
+     "label": "pagină"
+    },
+    {
+     "id": "n_v4lit_narator",
+     "label": "narator"
+    },
+    {
+     "id": "n_v4lit_intriga",
+     "label": "intrigă"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v2lit_roman_literar",
+     "label": "Roman (specie literară)"
+    },
+    {
+     "id": "n_v3lit_poveste",
+     "label": "Poveste"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v20lit_panait_istrati",
+     "label": "Panait Istrati"
+    },
+    {
+     "id": "n_amintiri_copilarie",
+     "label": "Amintiri din copilărie"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_junimea",
+     "label": "Junimea"
+    },
+    {
+     "id": "n_v2lit_nuvela",
+     "label": "Nuvelă"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_ioan_slavici",
+     "label": "Ioan Slavici"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_litx_ghita_pristanda",
+     "label": "Ghiță Pristanda"
+    },
+    {
+     "id": "n_v3lit_poveste",
+     "label": "Poveste"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v2lit_personaj_literar",
+     "label": "Personaj literar"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v2lit_roman_literar",
+     "label": "Roman (specie literară)"
+    },
+    {
+     "id": "n_v4lit_jurnal",
+     "label": "jurnal"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_camil_petrescu",
+     "label": "Camil Petrescu"
+    }
+   ]
+  }
+ ],
+ "minimum_action_recipe": [
+  {
+   "pair": [
+    {
+     "id": "n_v2lit_roman_literar",
+     "label": "Roman (specie literară)"
+    },
+    {
+     "id": "n_v3lit_poveste",
+     "label": "Poveste"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_amintiri_copilarie",
+     "label": "Amintiri din copilărie"
+    },
+    {
+     "id": "n_v20lit_panait_istrati",
+     "label": "Panait Istrati"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_junimea",
+     "label": "Junimea"
+    },
+    {
+     "id": "n_v2lit_nuvela",
+     "label": "Nuvelă"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_ioan_slavici",
+     "label": "Ioan Slavici"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_amintiri_copilarie",
+     "label": "Amintiri din copilărie"
+    },
+    {
+     "id": "n_ioan_slavici",
+     "label": "Ioan Slavici"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v2lit_sat_romanesc",
+     "label": "Sat românesc"
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:f29410f1ee3a26748b609945c865901555304e91da7d3ef75601ae02339e28b5"
+}

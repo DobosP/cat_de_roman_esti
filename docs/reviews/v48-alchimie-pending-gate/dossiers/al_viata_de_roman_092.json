@@ -1,0 +1,274 @@
+{
+ "id": "al_viata_de_roman_092",
+ "game": "alchimie",
+ "category": "viata_de_roman",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "75d003bf6589b4eee9c558329caf131ee93111da1eee2337052a65091fc42d15",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [],
+ "target": {
+  "id": "n_vdr_vara_la_bunici",
+  "label": "Vara la bunici",
+  "node_type": "event",
+  "category": "viata_de_roman",
+  "salience": 0.9498,
+  "degree": 16,
+  "incoming_degree": 16,
+  "description": "Vacanța lungă la sat, cu curte, uliță, animale și mâncare făcută în casă."
+ },
+ "seeds": [
+  {
+   "id": "n_vdr_taiatul_porcului",
+   "label": "Tăiatul porcului de Ignat",
+   "node_type": "event",
+   "category": "viata_de_roman",
+   "salience": 0.8064,
+   "degree": 12,
+   "incoming_degree": 12,
+   "description": "Obicei rural de iarnă înaintea Crăciunului, legat de pregătirea cărnii."
+  },
+  {
+   "id": "n_vdr_ulita_satului",
+   "label": "Ulița satului",
+   "node_type": "place",
+   "category": "viata_de_roman",
+   "salience": 0.5109,
+   "degree": 7,
+   "incoming_degree": 7,
+   "description": "Drumul mic al satului, spațiu de joacă, povești și întoarceri de la câmp."
+  },
+  {
+   "id": "n_vdr_plugusorul",
+   "label": "Plugușorul",
+   "node_type": "event",
+   "category": "viata_de_roman",
+   "salience": 0.5145,
+   "degree": 8,
+   "incoming_degree": 8,
+   "description": "Urare tradițională de Anul Nou, rostită ritmic cu clopoței și buhai."
+  },
+  {
+   "id": "n_vdr_tuica_de_casa",
+   "label": "Țuica de casă",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.635,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Băutură tradițională din prune, asociată cu gospodăria rurală și mesele de familie."
+  },
+  {
+   "id": "n_v2via_casa_parinteasca",
+   "label": "Casa părintească",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.741,
+   "degree": 14,
+   "incoming_degree": 14,
+   "description": "Locuința familiei de origine, asociată cu vizite, amintiri și lucruri păstrate."
+  },
+  {
+   "id": "n_vdr_papuci_de_casa",
+   "label": "Papucii de casă",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.5049,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Încălțămintea de interior oferită musafirilor sau purtată obligatoriu în apartament."
+  }
+ ],
+ "target_depth": 2,
+ "craft_profile": {
+  "opening_pairs": 6,
+  "closure_size": 109,
+  "target_generation": 2
+ },
+ "productive_openings": [
+  {
+   "pair": [
+    {
+     "id": "n_vdr_taiatul_porcului",
+     "label": "Tăiatul porcului de Ignat"
+    },
+    {
+     "id": "n_vdr_tuica_de_casa",
+     "label": "Țuica de casă"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_vdr_gospodaria_bunicilor",
+     "label": "Gospodăria bunicilor"
+    },
+    {
+     "id": "n_v2via_gospodarie_rurala",
+     "label": "Gospodărie rurală"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_vdr_taiatul_porcului",
+     "label": "Tăiatul porcului de Ignat"
+    },
+    {
+     "id": "n_vdr_ulita_satului",
+     "label": "Ulița satului"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_vdr_gospodaria_bunicilor",
+     "label": "Gospodăria bunicilor"
+    },
+    {
+     "id": "n_v2via_gospodarie_rurala",
+     "label": "Gospodărie rurală"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_vdr_tuica_de_casa",
+     "label": "Țuica de casă"
+    },
+    {
+     "id": "n_vdr_ulita_satului",
+     "label": "Ulița satului"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_vdr_gospodaria_bunicilor",
+     "label": "Gospodăria bunicilor"
+    },
+    {
+     "id": "n_v2via_gospodarie_rurala",
+     "label": "Gospodărie rurală"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v2via_casa_parinteasca",
+     "label": "Casa părintească"
+    },
+    {
+     "id": "n_vdr_papuci_de_casa",
+     "label": "Papucii de casă"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_vdr_punga_cu_pungi",
+     "label": "Punga cu pungi"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v2via_casa_parinteasca",
+     "label": "Casa părintească"
+    },
+    {
+     "id": "n_vdr_tuica_de_casa",
+     "label": "Țuica de casă"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_vdr_mamaliga_bunicii",
+     "label": "Mămăliga bunicii"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_vdr_plugusorul",
+     "label": "Plugușorul"
+    },
+    {
+     "id": "n_vdr_taiatul_porcului",
+     "label": "Tăiatul porcului de Ignat"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v2via_sarbatori_familie",
+     "label": "Sărbători în familie"
+    }
+   ]
+  }
+ ],
+ "minimum_action_recipe": [
+  {
+   "pair": [
+    {
+     "id": "n_vdr_taiatul_porcului",
+     "label": "Tăiatul porcului de Ignat"
+    },
+    {
+     "id": "n_vdr_tuica_de_casa",
+     "label": "Țuica de casă"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v2via_gospodarie_rurala",
+     "label": "Gospodărie rurală"
+    },
+    {
+     "id": "n_vdr_gospodaria_bunicilor",
+     "label": "Gospodăria bunicilor"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v2via_gospodarie_rurala",
+     "label": "Gospodărie rurală"
+    },
+    {
+     "id": "n_vdr_gospodaria_bunicilor",
+     "label": "Gospodăria bunicilor"
+    }
+   ],
+   "result_count": 4,
+   "results": [
+    {
+     "id": "n_vdr_vara_la_bunici",
+     "label": "Vara la bunici"
+    },
+    {
+     "id": "n_v3via_butelie",
+     "label": "Butelia"
+    },
+    {
+     "id": "n_vdr_gaina_din_curte",
+     "label": "Găina din curte"
+    },
+    {
+     "id": "n_vdr_fantana_din_curte",
+     "label": "Fântâna din curte"
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:25ff93d98ce627b8f296878a8f069c72e078d419bd30fac680c4273167a2e6fc"
+}

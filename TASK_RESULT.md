@@ -1,65 +1,68 @@
-# Task Result — V47 strict Cald sau Rece pending-target gate
+# Task Result — V48 strict Alchimie live-recipe gate
 
 ## Outcome
 
-- Rebuilt current-bound dossiers for the exact 13 pending Contexto records and audited
-  C1-C6, live feedback, vocabulary, collisions, projections, proxies, and release state.
-- Deterministic checks found zero failures and one Sonicitate salience warning. Independent
-  gameplay and inventory reviews synthesized to one promotion, ten rejections, and two
-  mandatory A5 keeps.
-- Promoted only `ct_gastronomie_300` (`Mâncare`). It has 15 recognizable direct
-  predecessors, 2,259 responsive nodes, 19 existing target projections, one existing
-  feedback proxy, and intuitive hot openers.
-- Removed ten dormant records. Familiar common targets were not promoted when their local
-  field was too thin or misleading: Familie freezes core kinship guesses; Morcov, Farmacie,
-  Ploaie, Frigider, and Creion miss the direct-neighbor floor.
-- Kept `Shitpost` and `Industrie` pending and unserved under the ADR-0019/A5 owner boundary.
-  Industrie substantially duplicates the served `Industria românească` discovery field.
-- Added no synonym, alias, projection, node, or edge. Existing Mâncare morphology is
-  adequate; `ploaia` remains correctly owned by the served Cargo-song concept. Optional
-  `hrană`/`alimente` projections require a separate exact review.
-- Cald sau Rece is now 207 records = 205 approved + 2 pending / 202 eligible unique
-  targets. The original-game pack is 635 = 609 approved + 26 pending / 448 eligible.
-- Regenerated rankings and derived metadata without changing the frozen 336-board
-  Intrusul/Perechi payload. No deployment was performed.
+- Rebuilt current-bound dossiers for the exact 21 pending Alchimie records and audited
+  E1–E5 against both the broad graph and the sparse private recipe books players receive.
+- Deterministic graph checks found zero failures and three salience warnings, but the new
+  runtime projection audit found seven boards with only one live opening. It binds the
+  exact IDs, source rows, pack, KG, rubric, dossiers, runtime sources, and generator.
+- Two independent reviews synthesized fail closed to one promotion, 17 rejections, and
+  three mandatory A5 keeps. Promoted only `al_literatura_097` (`Făt-Frumos`).
+- Kept `al_gastronomie_026`, `al_gastronomie_030`, and `al_viata_de_roman_092` pending and
+  unserved because every route depends on alcohol content covered by ADR-0019.
+- Removed 17 weak, arbitrary, filler-heavy, or recycled records. Three reviewer promotion
+  disagreements were rejected because promotion was not unanimous.
+- Alchimie is now 82 records = 79 approved/selectable + 3 pending. The original-game pack
+  is 618 = 610 approved + 8 pending / 449 eligible.
+- Added no board, alias, projection term, node, edge, or KG content. Regenerated rankings
+  and derived metadata without changing the frozen 336-board Intrusul/Perechi payload.
+  No deployment was performed.
 
 ## Files changed
 
 - Content: both game-pack mirrors, both ranking sidecars, both derived-catalog metadata
   copies, the runtime derived digest pin, and seven historical pack digest pins.
-- Gate evidence: 13 exact dossiers, deterministic report, complete v2 two-reviewer
-  artifact, and the human audit under `docs/reviews/v47-contexto-pending-gate/`.
-- Contracts: ADR-0071, `docs/STATUS.md`, a six-test V47 regression contract, and historical
-  lifecycle/count/profile assertions updated for retired pending records.
-- Unchanged: KG nodes/edges/aliases, projection and proxy inventories, frontend, scoring,
-  hidden answers, session semantics, and the derived boards payload.
+- Workflow: `scripts/audit_alchimie_projections.py` generates replayable private-recipe
+  evidence; `scripts/apply_rereview.py` now requires both reviewers to bind that evidence,
+  replays the full artifact, and verifies its source against the untouched pre-apply pack.
+- Gate evidence: 21 exact dossiers, deterministic report, live-projection audit, complete
+  two-reviewer artifact, review report, ADR-0072, and the current STATUS.
+- Contracts: six V48 regressions plus unit coverage for missing, stale, and structurally
+  unreproducible projection evidence; historical lifecycle/count/profile assertions now
+  preserve removed records through the V48 archive.
+- Unchanged: KG, frontend, scoring, hidden answers, session semantics, and derived boards.
 
 ## Verification
 
-- Full backend: 717/717 green.
-- Accounts-on: 53/53 green; bounded session store: 16/16 green.
-- Contexto/pack/critique targeted gate: 187/187 green; V47 exact contract: 6/6 green.
-- Intrusul/Perechi/derived-catalog gate: 82/82 green.
+- Full backend: 726/726 green.
+- Accounts-on: 53/53 green; bounded session store: 16/16 green under both the repository
+  environment and the prescribed shared environment.
+- Alchimie/runtime/V48 targeted gate: 55/55 green; V48 exact contract: 6/6 green.
+- Intrusul/Perechi/derived-catalog gate: 56/56 green.
 - Ruff, `git diff --check`, pack, KG, ranking, and derived-catalog validators: green.
-- Pack mirrors: 635 records, 609 approved / 26 pending, 448 runtime-eligible.
-- Contexto: 207 records, 205 approved / 2 pending, 202 unique selectable targets.
+- Pack mirrors: 618 records, 610 approved / 8 pending, 449 runtime-eligible.
+- Alchimie: 82 records, 79 approved / 3 pending, 79 selectable.
 - Frozen derived boards: 183 Intrusul / 153 Perechi, unchanged SHA-256
   `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
 
-Pytest emitted only the expected cache warning because the retained task worktree itself is
-read-only to the cache provider; all suites completed successfully.
+The prescribed session command emitted only its existing warning that the shared
+`romania_scraper` environment does not recognize the Django pytest option; all 16 tests
+still passed. Frontend gates were not required because no frontend file changed.
 
 ## Risks and manual review
 
-Contexto has no rejection ledger. The committed dossiers, record digests, review bindings,
-artifact, ADR, and regression test preserve the ten removals, but a future importer cannot
-mechanically block the same target under a new ID. Any repair must consult this archive,
-change the named feedback defect, and pass a fresh exact C1-C6 gate.
+Alchimie has no generic rejection ledger. The committed source records, record digests,
+dossiers, reviewer bindings, projection audit, ADR, and regression tests preserve all 17
+removals. Any repair must consult that archive, materially change the named defect, and
+pass a fresh source-bound E1–E5 gate.
 
-The two A5 holds still need an explicit owner disposition. Production remains V43 at
-`38da2f4`; V47 deliberately does not alter deployment state.
+The three A5 holds still require explicit owner disposition. The projection artifact
+intentionally pins the reviewed runtime and generator; a future recipe-runtime change must
+refresh evidence rather than silently inheriting these judgments. Production remains V43
+at `38da2f4`; V48 deliberately does not alter deployment state.
 
 ## Merge recommendation
 
-Green to commit, land, and push on `main`. Do not deploy V47 as part of this content gate,
+Green to commit, land, and push on `main`. Do not deploy V48 as part of this content gate,
 and retain the task worktree/branch until the owner explicitly authorizes deletion.

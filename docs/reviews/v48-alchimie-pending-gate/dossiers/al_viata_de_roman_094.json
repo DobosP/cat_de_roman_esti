@@ -1,0 +1,311 @@
+{
+ "id": "al_viata_de_roman_094",
+ "game": "alchimie",
+ "category": "viata_de_roman",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "4da5240ea0092ca288ff9ab75ff9062e27768c2578f8b1f1c91067c2e85641e4",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v3via_facturi",
+  "label": "Facturi",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.5589,
+  "degree": 7,
+  "incoming_degree": 7,
+  "description": "Hârtii sau plăți lunare pentru utilități și servicii."
+ },
+ "seeds": [
+  {
+   "id": "n_vdr_biletel_in_parbriz",
+   "label": "Bilețelul în parbriz",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.5061,
+   "degree": 7,
+   "incoming_degree": 7,
+   "description": "Mesaj lăsat pe mașină pentru parcare, zgârietură sau rugăminți de mutare."
+  },
+  {
+   "id": "n_v3via_coada",
+   "label": "Coada",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.6248,
+   "degree": 12,
+   "incoming_degree": 12,
+   "description": "Așteptarea la rând pentru acte, plăți sau servicii."
+  },
+  {
+   "id": "n_vdr_termopane",
+   "label": "Termopanele",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.6008,
+   "degree": 11,
+   "incoming_degree": 11,
+   "description": "Ferestre moderne cu geam dublu, simbol al renovărilor de apartament după 1990."
+  },
+  {
+   "id": "n_vdr_bloc",
+   "label": "Blocul",
+   "node_type": "place",
+   "category": "viata_de_roman",
+   "salience": 0.9526,
+   "degree": 19,
+   "incoming_degree": 19,
+   "description": "Clădire de locuințe colective, reper al urbanizării românești de după 1960."
+  },
+  {
+   "id": "n_v2via_pachet_de_acasa",
+   "label": "Pachet de acasă",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.7768,
+   "degree": 11,
+   "incoming_degree": 11,
+   "description": "Mâncare sau lucruri primite de la familie și duse în sacoșe ori portbagaj."
+  }
+ ],
+ "target_depth": 3,
+ "craft_profile": {
+  "opening_pairs": 6,
+  "closure_size": 109,
+  "target_generation": 3
+ },
+ "productive_openings": [
+  {
+   "pair": [
+    {
+     "id": "n_vdr_bloc",
+     "label": "Blocul"
+    },
+    {
+     "id": "n_vdr_termopane",
+     "label": "Termopanele"
+    }
+   ],
+   "result_count": 3,
+   "results": [
+    {
+     "id": "n_vdr_viata_la_bloc",
+     "label": "Viața la bloc"
+    },
+    {
+     "id": "n_v21via_reabilitare_termica",
+     "label": "Reabilitarea termică a blocului"
+    },
+    {
+     "id": "n_vdr_rufe_pe_balcon",
+     "label": "Rufele pe balcon"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v3via_coada",
+     "label": "Coada"
+    },
+    {
+     "id": "n_vdr_termopane",
+     "label": "Termopanele"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_vdr_lasa_ca_merge",
+     "label": "Lasă că merge și așa"
+    },
+    {
+     "id": "n_vdr_descurcare_romaneasca",
+     "label": "Descurcăreala de zi cu zi"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_vdr_biletel_in_parbriz",
+     "label": "Bilețelul în parbriz"
+    },
+    {
+     "id": "n_vdr_bloc",
+     "label": "Blocul"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v2via_cartier",
+     "label": "Cartier"
+    },
+    {
+     "id": "n_v2via_parcare",
+     "label": "Parcare"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_vdr_biletel_in_parbriz",
+     "label": "Bilețelul în parbriz"
+    },
+    {
+     "id": "n_vdr_termopane",
+     "label": "Termopanele"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_vdr_descurcare_romaneasca",
+     "label": "Descurcăreala de zi cu zi"
+    },
+    {
+     "id": "n_v2via_improvizatie",
+     "label": "Improvizație"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v2via_pachet_de_acasa",
+     "label": "Pachet de acasă"
+    },
+    {
+     "id": "n_vdr_biletel_in_parbriz",
+     "label": "Bilețelul în parbriz"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_vdr_portbagaj_plin",
+     "label": "Portbagajul plin"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v3via_coada",
+     "label": "Coada"
+    },
+    {
+     "id": "n_vdr_biletel_in_parbriz",
+     "label": "Bilețelul în parbriz"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_vdr_descurcare_romaneasca",
+     "label": "Descurcăreala de zi cu zi"
+    }
+   ]
+  }
+ ],
+ "minimum_action_recipe": [
+  {
+   "pair": [
+    {
+     "id": "n_vdr_bloc",
+     "label": "Blocul"
+    },
+    {
+     "id": "n_vdr_termopane",
+     "label": "Termopanele"
+    }
+   ],
+   "result_count": 3,
+   "results": [
+    {
+     "id": "n_vdr_viata_la_bloc",
+     "label": "Viața la bloc"
+    },
+    {
+     "id": "n_v21via_reabilitare_termica",
+     "label": "Reabilitarea termică a blocului"
+    },
+    {
+     "id": "n_vdr_rufe_pe_balcon",
+     "label": "Rufele pe balcon"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_vdr_bloc",
+     "label": "Blocul"
+    },
+    {
+     "id": "n_vdr_viata_la_bloc",
+     "label": "Viața la bloc"
+    }
+   ],
+   "result_count": 5,
+   "results": [
+    {
+     "id": "n_v3via_intretinerea",
+     "label": "Întreținerea"
+    },
+    {
+     "id": "n_vdr_apometre",
+     "label": "Apometrele"
+    },
+    {
+     "id": "n_vdr_scara_blocului",
+     "label": "Scara blocului"
+    },
+    {
+     "id": "n_vdr_papuci_de_casa",
+     "label": "Papucii de casă"
+    },
+    {
+     "id": "n_vdr_calorifer_rece",
+     "label": "Caloriferul rece"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v3via_intretinerea",
+     "label": "Întreținerea"
+    },
+    {
+     "id": "n_vdr_apometre",
+     "label": "Apometrele"
+    }
+   ],
+   "result_count": 4,
+   "results": [
+    {
+     "id": "n_v3via_facturi",
+     "label": "Facturi"
+    },
+    {
+     "id": "n_vdr_asociatia_proprietari",
+     "label": "Asociația de proprietari"
+    },
+    {
+     "id": "n_v4via_baie",
+     "label": "baie"
+    },
+    {
+     "id": "n_vdr_avizier_bloc",
+     "label": "Avizierul de la bloc"
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:d8e508d7689f34e2166c84129c5ac29dcb093ce5a2add841f4fc82489caf80d0"
+}

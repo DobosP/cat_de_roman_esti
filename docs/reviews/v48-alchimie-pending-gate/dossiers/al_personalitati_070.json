@@ -1,0 +1,258 @@
+{
+ "id": "al_personalitati_070",
+ "game": "alchimie",
+ "category": "personalitati",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "63ee9c988954a772083ff642098354988e50d6751a28ae058682d69bd74381f2",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v2per_casa_regala",
+  "label": "Casa regală",
+  "node_type": "concept",
+  "category": "personalitati",
+  "salience": 0.5463,
+  "degree": 10,
+  "incoming_degree": 10,
+  "description": "Familia și instituția monarhică a României moderne."
+ },
+ "seeds": [
+  {
+   "id": "n_perx_romania_interbelica",
+   "label": "România interbelică",
+   "node_type": "concept",
+   "category": "personalitati",
+   "salience": 0.3964,
+   "degree": 7,
+   "incoming_degree": 7,
+   "description": "România dintre cele două războaie mondiale, perioadă de afirmare culturală și diplomatică."
+  },
+  {
+   "id": "n_perx_nicolae_titulescu",
+   "label": "Nicolae Titulescu",
+   "node_type": "person",
+   "category": "personalitati",
+   "salience": 0.7403,
+   "degree": 12,
+   "incoming_degree": 12,
+   "description": "Diplomat român, de două ori președinte al Adunării Societății Națiunilor."
+  },
+  {
+   "id": "n_perx_nicolae_iorga",
+   "label": "Nicolae Iorga",
+   "node_type": "person",
+   "category": "personalitati",
+   "salience": 0.7698,
+   "degree": 9,
+   "incoming_degree": 9,
+   "description": "Istoric, profesor, om politic și autor al unei opere imense despre trecutul românesc și european."
+  },
+  {
+   "id": "n_perx_scoala_romaneasca_istorie",
+   "label": "Școala românească de istorie",
+   "node_type": "concept",
+   "category": "personalitati",
+   "salience": 0.1642,
+   "degree": 3,
+   "incoming_degree": 3,
+   "description": "Tradiție istoriografică legată de mari cărturari și profesori români."
+  },
+  {
+   "id": "n_emil_racovita",
+   "label": "Emil Racoviță",
+   "node_type": "person",
+   "category": "stiinta",
+   "salience": 0.4671,
+   "degree": 14,
+   "incoming_degree": 14,
+   "description": "Biolog si explorator roman, fondatorul biospeologiei."
+  },
+  {
+   "id": "n_v4per_biografie",
+   "label": "biografie",
+   "node_type": "concept",
+   "category": "personalitati",
+   "salience": 0.7101,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Relatare a vieții unei persoane reale."
+  }
+ ],
+ "target_depth": 3,
+ "craft_profile": {
+  "opening_pairs": 5,
+  "closure_size": 24,
+  "target_generation": 3
+ },
+ "productive_openings": [
+  {
+   "pair": [
+    {
+     "id": "n_perx_nicolae_titulescu",
+     "label": "Nicolae Titulescu"
+    },
+    {
+     "id": "n_perx_romania_interbelica",
+     "label": "România interbelică"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_perx_liga_natiunilor",
+     "label": "Societatea Națiunilor"
+    },
+    {
+     "id": "n_perx_mica_antanta",
+     "label": "Mica Antantă"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_emil_racovita",
+     "label": "Emil Racoviță"
+    },
+    {
+     "id": "n_perx_nicolae_iorga",
+     "label": "Nicolae Iorga"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v4per_profesor",
+     "label": "profesor"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_perx_nicolae_iorga",
+     "label": "Nicolae Iorga"
+    },
+    {
+     "id": "n_perx_nicolae_titulescu",
+     "label": "Nicolae Titulescu"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v3per_politician",
+     "label": "Politician"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_perx_nicolae_iorga",
+     "label": "Nicolae Iorga"
+    },
+    {
+     "id": "n_perx_scoala_romaneasca_istorie",
+     "label": "Școala românească de istorie"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v2per_istoric",
+     "label": "Istoric"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_perx_nicolae_titulescu",
+     "label": "Nicolae Titulescu"
+    },
+    {
+     "id": "n_v4per_biografie",
+     "label": "biografie"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_perx_regina_maria",
+     "label": "Regina Maria"
+    }
+   ]
+  }
+ ],
+ "minimum_action_recipe": [
+  {
+   "pair": [
+    {
+     "id": "n_perx_nicolae_titulescu",
+     "label": "Nicolae Titulescu"
+    },
+    {
+     "id": "n_v4per_biografie",
+     "label": "biografie"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_perx_regina_maria",
+     "label": "Regina Maria"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_perx_regina_maria",
+     "label": "Regina Maria"
+    },
+    {
+     "id": "n_v4per_biografie",
+     "label": "biografie"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_perx_memorii_regina_maria",
+     "label": "Povestea vieții mele"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_perx_memorii_regina_maria",
+     "label": "Povestea vieții mele"
+    },
+    {
+     "id": "n_perx_regina_maria",
+     "label": "Regina Maria"
+    }
+   ],
+   "result_count": 3,
+   "results": [
+    {
+     "id": "n_v2per_casa_regala",
+     "label": "Casa regală"
+    },
+    {
+     "id": "n_v4per_regina",
+     "label": "regină"
+    },
+    {
+     "id": "n_v2per_memorii",
+     "label": "Memorii"
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:96eb26ddbae963c8f682fb992a58e64f5276ba39f18f2d61273077157589925e"
+}

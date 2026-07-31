@@ -1,0 +1,286 @@
+{
+ "id": "al_muzica_065",
+ "game": "alchimie",
+ "category": "muzica",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "ec383c2a83da86a8935bcec866f55746947bdd0c1ac0caf647b7d72d846d63f6",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [],
+ "target": {
+  "id": "n_muz_ploaia_cargo",
+  "label": "Ploaia",
+  "node_type": "work",
+  "category": "muzica",
+  "salience": 0.3862,
+  "degree": 5,
+  "incoming_degree": 5,
+  "description": "Baladă rock Cargo, una dintre cele mai cântate piese românești de chitară."
+ },
+ "seeds": [
+  {
+   "id": "n_v2muz_trupa_rock",
+   "label": "Trupă rock",
+   "node_type": "concept",
+   "category": "muzica",
+   "salience": 0.89,
+   "degree": 19,
+   "incoming_degree": 19,
+   "description": "Formație muzicală care cântă rock cu instrumente de band."
+  },
+  {
+   "id": "n_muz_acasa_smiley",
+   "label": "Acasă",
+   "node_type": "work",
+   "category": "muzica",
+   "salience": 0.4383,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Piesă Smiley din 2013, devenită refren pop românesc foarte recognoscibil."
+  },
+  {
+   "id": "n_muz_dragostea_din_tei",
+   "label": "Dragostea din tei",
+   "node_type": "work",
+   "category": "muzica",
+   "salience": 0.9519,
+   "degree": 11,
+   "incoming_degree": 11,
+   "description": "Hit O-Zone din 2003, cunoscut global prin refrenul „nu mă, nu mă iei”."
+  },
+  {
+   "id": "n_v2muz_artist_mascat",
+   "label": "Artist mascat",
+   "node_type": "concept",
+   "category": "muzica",
+   "salience": 0.4066,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Artist sau proiect scenic recunoscut prin mască ori anonimat vizual."
+  },
+  {
+   "id": "n_v3muz_album",
+   "label": "Album",
+   "node_type": "concept",
+   "category": "muzica",
+   "salience": 0.5007,
+   "degree": 3,
+   "incoming_degree": 3,
+   "description": "Colecție de piese muzicale lansată de un artist sau o trupă."
+  },
+  {
+   "id": "n_muz_oriunde_te_vei_afla",
+   "label": "Oriunde te vei afla",
+   "node_type": "work",
+   "category": "muzica",
+   "salience": 0.2143,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Piesă La Familia, cunoscută pentru tonul sentimental din rapul românesc."
+  }
+ ],
+ "target_depth": 2,
+ "craft_profile": {
+  "opening_pairs": 9,
+  "closure_size": 144,
+  "target_generation": 2
+ },
+ "productive_openings": [
+  {
+   "pair": [
+    {
+     "id": "n_muz_acasa_smiley",
+     "label": "Acasă"
+    },
+    {
+     "id": "n_muz_dragostea_din_tei",
+     "label": "Dragostea din tei"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v3muz_melodie",
+     "label": "Melodie"
+    },
+    {
+     "id": "n_muz_refren_viral",
+     "label": "Refren viral"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_muz_acasa_smiley",
+     "label": "Acasă"
+    },
+    {
+     "id": "n_muz_oriunde_te_vei_afla",
+     "label": "Oriunde te vei afla"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v3muz_melodie",
+     "label": "Melodie"
+    },
+    {
+     "id": "n_muz_refren_viral",
+     "label": "Refren viral"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_muz_acasa_smiley",
+     "label": "Acasă"
+    },
+    {
+     "id": "n_v2muz_artist_mascat",
+     "label": "Artist mascat"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v2muz_cantaret_pop",
+     "label": "Cântăreț pop"
+    },
+    {
+     "id": "n_muz_pop_mainstream_ro",
+     "label": "Pop mainstream românesc"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_muz_acasa_smiley",
+     "label": "Acasă"
+    },
+    {
+     "id": "n_v3muz_album",
+     "label": "Album"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v3muz_melodie",
+     "label": "Melodie"
+    },
+    {
+     "id": "n_muz_pop_mainstream_ro",
+     "label": "Pop mainstream românesc"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_muz_dragostea_din_tei",
+     "label": "Dragostea din tei"
+    },
+    {
+     "id": "n_muz_oriunde_te_vei_afla",
+     "label": "Oriunde te vei afla"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v3muz_melodie",
+     "label": "Melodie"
+    },
+    {
+     "id": "n_muz_refren_viral",
+     "label": "Refren viral"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_muz_dragostea_din_tei",
+     "label": "Dragostea din tei"
+    },
+    {
+     "id": "n_v3muz_album",
+     "label": "Album"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v3muz_melodie",
+     "label": "Melodie"
+    }
+   ]
+  }
+ ],
+ "minimum_action_recipe": [
+  {
+   "pair": [
+    {
+     "id": "n_v2muz_trupa_rock",
+     "label": "Trupă rock"
+    },
+    {
+     "id": "n_v3muz_album",
+     "label": "Album"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_muz_rock_ro",
+     "label": "Rock românesc"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_muz_rock_ro",
+     "label": "Rock românesc"
+    },
+    {
+     "id": "n_v2muz_trupa_rock",
+     "label": "Trupă rock"
+    }
+   ],
+   "result_count": 13,
+   "results": [
+    {
+     "id": "n_muz_ploaia_cargo",
+     "label": "Ploaia"
+    },
+    {
+     "id": "n_v3muz_chitara",
+     "label": "Chitară"
+    },
+    {
+     "id": "n_v4muz_rock",
+     "label": "Rock"
+    },
+    {
+     "id": "n_muz_phoenix",
+     "label": "Phoenix"
+    },
+    {
+     "id": "n_muz_electric_castle",
+     "label": "Electric Castle"
+    },
+    {
+     "id": "n_muz_cargo",
+     "label": "Cargo"
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:8be230044b40ae7eaacf829147c26b1dd1540bd7777a8acac7287c3eb2cddf02"
+}

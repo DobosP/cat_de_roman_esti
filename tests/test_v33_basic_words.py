@@ -32,6 +32,9 @@ _TEST_KG = _ROOT / "tests/fixtures/kg_sample.json"
 _PACKAGE_PACK = _ROOT / "cat_de_roman_esti/fixtures/games_pack.json"
 _TEST_PACK = _ROOT / "tests/fixtures/games_pack.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
+_V48_AUDIT = (
+    _ROOT / "docs/reviews/v48-alchimie-pending-gate/projection-audit.json"
+)
 _EXPECTED_NODE_COUNT = 2364
 _EXPECTED_EDGE_COUNT = 9217
 _EXPECTED_AUTHORED_EDGE_COUNT = 54
@@ -48,14 +51,24 @@ _V32_LANT_PROFILE_SHA256 = (
     "6fe32a7aacb464d8d30ae2d97bc02e9ed0ef5413ee264e2424f13388a7f8e8c2"
 )
 _V32_ALCHIMIE_PROFILE_SHA256 = (
-    "762c1f3a84463fbc2f14d0ec878c12db53ed48f6a4c5ec3c5c107b57ca5a4168"
+    "07aa42811a48c3851313b6075380f2a1e11b5557f4e1c56591c1b545a98536d7"
 )
 _EXACT_REVIEW_REPORT_SHA256 = (
     "5a01894e6e89fe29aaffee09210949e81cb0505385cc5c65615bf9c4b75f3349"
 )
 _FULL_PENDING_REPORT_SHA256 = (
-    "c0fd99a953e47f05b85b7584a43ca0ed0ed1747cecc99b58a35ac73e25b919c4"
+    "ac8d764b401e930ba91d34f82f78e43f6ff348d4b34b93e65ff4ed9e4ad7fa6e"
 )
+_V48_REVIEW_ITEM_IDS = {
+    "al_literatura_097",
+    "al_viata_de_roman_098",
+    "al_viata_de_roman_099",
+    "al_viata_de_roman_100",
+    "al_viata_de_roman_101",
+    "al_viata_de_roman_102",
+    "al_viata_de_roman_103",
+    "al_viata_de_roman_104",
+}
 
 
 def _load_data_module():
@@ -393,12 +406,22 @@ def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
         "conexiuni": 232,
         "contexto": 207,
         "lant": 97,
-        "alchimie": 99,
+        "alchimie": 82,
     }
-    # ADR-0068 promotes two bound Contexto targets; V47 promotes one more.
-    assert statuses == {"approved": 609, "pending": 26}
+    # ADR-0068 promotes two bound Contexto targets; V47 promotes one more; V48 promotes
+    # one Alchimie board, archives 17 rejects, and retains three A5 holds.
+    assert statuses == {"approved": 610, "pending": 8}
     assert len(DATA.REVIEW_ITEM_IDS) == len(set(DATA.REVIEW_ITEM_IDS)) == 33
-    pending_review_ids = set(DATA.REVIEW_ITEM_IDS) - {
+    v48_audit = json.loads(_V48_AUDIT.read_text(encoding="utf-8"))
+    v48_source_records = {
+        row["id"]: row["source_record"] for row in v48_audit["items"]
+    }
+    assert _V48_REVIEW_ITEM_IDS <= set(v48_source_records)
+    assert all(
+        v48_source_records[item_id]["status"] == "pending"
+        for item_id in _V48_REVIEW_ITEM_IDS
+    )
+    resolved_review_ids = {
         "ct_literatura_298",
         "ct_viata_de_roman_299",
         "ct_gastronomie_300",
@@ -421,16 +444,17 @@ def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
         "cx_viata_de_roman_293",
         "cx_societate_294",
         "cx_societate_295",
-    }
+    } | _V48_REVIEW_ITEM_IDS
+    pending_review_ids = set(DATA.REVIEW_ITEM_IDS) - resolved_review_ids
     assert _critique_report(pending_review_ids) == (
-        11,
+        3,
         0,
         0,
         _EXACT_REVIEW_REPORT_SHA256,
     )
     assert _critique_report(None) == (
-        26,
-        3,
+        8,
+        0,
         81,
         _FULL_PENDING_REPORT_SHA256,
     )

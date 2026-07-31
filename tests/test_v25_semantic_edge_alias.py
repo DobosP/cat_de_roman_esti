@@ -28,6 +28,9 @@ _TEST_KG = _ROOT / "tests/fixtures/kg_sample.json"
 _PACKAGE_PACK = _ROOT / "cat_de_roman_esti/fixtures/games_pack.json"
 _TEST_PACK = _ROOT / "tests/fixtures/games_pack.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
+_V48_AUDIT = (
+    _ROOT / "docs/reviews/v48-alchimie-pending-gate/projection-audit.json"
+)
 _V45_REJECTED_REVIEW_IDS = {
     "lt_gastronomie_212",
     "lt_gastronomie_218",
@@ -53,10 +56,20 @@ _V47_REJECTED_REVIEW_IDS = {
     "ct_viata_de_roman_302",
     "ct_viata_de_roman_304",
 }
+_V48_REJECTED_REVIEW_IDS = {
+    "al_viata_de_roman_098",
+    "al_viata_de_roman_099",
+    "al_viata_de_roman_100",
+    "al_viata_de_roman_101",
+    "al_viata_de_roman_102",
+    "al_viata_de_roman_103",
+    "al_viata_de_roman_104",
+}
 _RETIRED_REVIEW_IDS = (
     _V45_REJECTED_REVIEW_IDS
     | _V46_REJECTED_REVIEW_IDS
     | _V47_REJECTED_REVIEW_IDS
+    | _V48_REJECTED_REVIEW_IDS
 )
 
 
@@ -82,6 +95,13 @@ def _service() -> WordGameService:
 
 def _pack() -> dict:
     return json.loads(_PACKAGE_PACK.read_text(encoding="utf-8"))
+
+
+def _v48_source_records() -> dict[str, dict]:
+    audit = json.loads(_V48_AUDIT.read_text(encoding="utf-8"))
+    records = {row["id"]: row["source_record"] for row in audit["items"]}
+    assert _V48_REJECTED_REVIEW_IDS <= set(records)
+    return records
 
 
 def test_v25_inventory_floor_and_mirrors_survive_later_additive_waves():
@@ -189,6 +209,7 @@ def test_v25_pack_is_byte_stable_and_the_33_review_items_remain_playable():
 
     assert set(records) == set(DATA.REVIEW_ITEM_IDS) - _RETIRED_REVIEW_IDS
     later_promotions = {
+        "al_literatura_097",
         "ct_gastronomie_300",
         "ct_literatura_298",
         "ct_viata_de_roman_299",
@@ -198,6 +219,11 @@ def test_v25_pack_is_byte_stable_and_the_33_review_items_remain_playable():
         expected_status = "approved" if item_id in later_promotions else "pending"
         assert record["status"] == expected_status
         assert validate_payload(record, game, svc) == []
+
+    archived = _v48_source_records()
+    assert _V48_REJECTED_REVIEW_IDS.isdisjoint(records)
+    for item_id in _V48_REJECTED_REVIEW_IDS:
+        assert validate_payload(archived[item_id], "alchimie", svc) == []
 
 
 def test_v25_intended_topology_changes_stay_inside_reviewed_game_bounds():
@@ -218,7 +244,8 @@ def test_v25_intended_topology_changes_stay_inside_reviewed_game_bounds():
         4,
     ) == (6, 2, 16)
 
-    alchimie = by_id["al_viata_de_roman_098"]
+    assert "al_viata_de_roman_098" not in by_id
+    alchimie = _v48_source_records()["al_viata_de_roman_098"]
     closure = _closure_generations(svc, alchimie["seeds"], alchimie["category"])
     assert len(closure) == 113  # ADR-0065: V42 nodes joined this category closure
     assert _opening_pairs(svc, alchimie["seeds"], alchimie["category"]) == 9

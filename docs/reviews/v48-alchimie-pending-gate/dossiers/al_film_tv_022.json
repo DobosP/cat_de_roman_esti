@@ -1,0 +1,296 @@
+{
+ "id": "al_film_tv_022",
+ "game": "alchimie",
+ "category": "film_tv",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "466a80d332f079a7e1b48011d8d779b01fe8c2f0b1af82b3b37504a57f52ca16",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Subtitrare salience 0.23 < 0.35 (normal floor)"
+  }
+ ],
+ "target": {
+  "id": "n_v3fil_subtitrare",
+  "label": "Subtitrare",
+  "node_type": "concept",
+  "category": "film_tv",
+  "salience": 0.2299,
+  "degree": 3,
+  "incoming_degree": 3,
+  "description": "Text afișat pe ecran cu traducerea sau transcrierea replicilor."
+ },
+ "seeds": [
+  {
+   "id": "n_v4fil_producator",
+   "label": "producător",
+   "node_type": "concept",
+   "category": "film_tv",
+   "salience": 0.4449,
+   "degree": 5,
+   "incoming_degree": 5,
+   "description": "Persoană care organizează și finanțează realizarea unei producții."
+  },
+  {
+   "id": "n_ftv_iumor",
+   "label": "iUmor",
+   "node_type": "work",
+   "category": "film_tv",
+   "salience": 0.5541,
+   "degree": 9,
+   "incoming_degree": 9,
+   "description": "Emisiune de divertisment și stand-up difuzată de Antena 1."
+  },
+  {
+   "id": "n_v3fil_scenariu",
+   "label": "Scenariu",
+   "node_type": "concept",
+   "category": "film_tv",
+   "salience": 0.4479,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Textul care descrie acțiunea, replicile și scenele unui film."
+  },
+  {
+   "id": "n_ftv_trasnitii",
+   "label": "Trăsniții",
+   "node_type": "work",
+   "category": "film_tv",
+   "salience": 0.4509,
+   "degree": 7,
+   "incoming_degree": 7,
+   "description": "Serial românesc de comedie longeviv, difuzat de Prima TV."
+  },
+  {
+   "id": "n_v4fil_spectator",
+   "label": "spectator",
+   "node_type": "concept",
+   "category": "film_tv",
+   "salience": 0.5942,
+   "degree": 5,
+   "incoming_degree": 5,
+   "description": "Persoană care urmărește un film, o emisiune sau un spectacol."
+  },
+  {
+   "id": "n_v4fil_ecran",
+   "label": "ecran",
+   "node_type": "concept",
+   "category": "film_tv",
+   "salience": 0.8,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Suprafață pe care apar imagini de film, televiziune sau video."
+  }
+ ],
+ "target_depth": 2,
+ "craft_profile": {
+  "opening_pairs": 12,
+  "closure_size": 149,
+  "target_generation": 2
+ },
+ "productive_openings": [
+  {
+   "pair": [
+    {
+     "id": "n_v4fil_ecran",
+     "label": "ecran"
+    },
+    {
+     "id": "n_v4fil_producator",
+     "label": "producător"
+    }
+   ],
+   "result_count": 3,
+   "results": [
+    {
+     "id": "n_v3fil_film",
+     "label": "Film"
+    },
+    {
+     "id": "n_v2fil_emisiune_tv",
+     "label": "Emisiune TV"
+    },
+    {
+     "id": "n_v2fil_serial_tv",
+     "label": "Serial TV"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v4fil_ecran",
+     "label": "ecran"
+    },
+    {
+     "id": "n_v4fil_spectator",
+     "label": "spectator"
+    }
+   ],
+   "result_count": 3,
+   "results": [
+    {
+     "id": "n_v3fil_film",
+     "label": "Film"
+    },
+    {
+     "id": "n_v2fil_televiziune",
+     "label": "Televiziune"
+    },
+    {
+     "id": "n_v2fil_emisiune_tv",
+     "label": "Emisiune TV"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_ftv_iumor",
+     "label": "iUmor"
+    },
+    {
+     "id": "n_v4fil_spectator",
+     "label": "spectator"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v2fil_emisiune_tv",
+     "label": "Emisiune TV"
+    },
+    {
+     "id": "n_v2fil_concurs_tv",
+     "label": "Concurs TV"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v3fil_scenariu",
+     "label": "Scenariu"
+    },
+    {
+     "id": "n_v4fil_producator",
+     "label": "producător"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v3fil_film",
+     "label": "Film"
+    },
+    {
+     "id": "n_v2fil_regizor",
+     "label": "Regizor"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v4fil_producator",
+     "label": "producător"
+    },
+    {
+     "id": "n_v4fil_spectator",
+     "label": "spectator"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v3fil_film",
+     "label": "Film"
+    },
+    {
+     "id": "n_v2fil_emisiune_tv",
+     "label": "Emisiune TV"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_ftv_iumor",
+     "label": "iUmor"
+    },
+    {
+     "id": "n_ftv_trasnitii",
+     "label": "Trăsniții"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v2fil_comedie",
+     "label": "Comedie"
+    }
+   ]
+  }
+ ],
+ "minimum_action_recipe": [
+  {
+   "pair": [
+    {
+     "id": "n_v4fil_ecran",
+     "label": "ecran"
+    },
+    {
+     "id": "n_v4fil_spectator",
+     "label": "spectator"
+    }
+   ],
+   "result_count": 3,
+   "results": [
+    {
+     "id": "n_v2fil_televiziune",
+     "label": "Televiziune"
+    },
+    {
+     "id": "n_v3fil_film",
+     "label": "Film"
+    },
+    {
+     "id": "n_v2fil_emisiune_tv",
+     "label": "Emisiune TV"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v2fil_televiziune",
+     "label": "Televiziune"
+    },
+    {
+     "id": "n_v3fil_film",
+     "label": "Film"
+    }
+   ],
+   "result_count": 3,
+   "results": [
+    {
+     "id": "n_v3fil_subtitrare",
+     "label": "Subtitrare"
+    },
+    {
+     "id": "n_v4fil_desen_animat",
+     "label": "desen animat"
+    },
+    {
+     "id": "n_v4fil_camera_video",
+     "label": "cameră video"
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:84239067d9b5491d0ef76f13bbec449844399247ed775cbb4cee60d91c6d715b"
+}

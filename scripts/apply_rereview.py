@@ -42,6 +42,13 @@ from import_candidates import GAME_KINDS, item_high_water  # noqa: E402
 PACK_COPIES = (validate_games_pack.PACKAGE_PACK, validate_games_pack.TESTS_PACK)
 GATE_ARTIFACT_VERSION = 2
 GATE_VERDICTS = frozenset({"promote", "reject", "keep"})
+ALCHIMIE_PROJECTION_AUDIT = "projection-audit.json"
+ALCHIMIE_PROJECTION_SCHEMA = "alchimie-live-projection-audit-v1"
+ALCHIMIE_RUNTIME_SOURCES = (
+    _REPO_ROOT / "cat_de_roman_esti/wordgames/alchimie.py",
+    _REPO_ROOT / "cat_de_roman_esti/wordgames/packs.py",
+)
+ALCHIMIE_AUDIT_GENERATOR = _REPO_ROOT / "scripts/audit_alchimie_projections.py"
 
 
 def synthesized_gate_verdict(analyst: object, verifier: object) -> str | None:
@@ -77,6 +84,128 @@ def fully_verified_gate_row(
         and isinstance(row.get("review_binding"), str)
         and row["review_binding"].startswith("sha256:")
     )
+
+
+def validate_alchimie_projection_evidence(
+    data: dict, batch: dict, rows: dict[str, dict], path: Path,
+) -> None:
+    """Require every Alchimie reviewer to bind the exact live recipe projection."""
+    digest = batch.get("projection_audit_sha256")
+    valid_digest = (
+        isinstance(digest, str)
+        and len(digest) == 64
+        and all(char in "0123456789abcdef" for char in digest)
+    )
+    audit_path = path.parent / ALCHIMIE_PROJECTION_AUDIT
+    if not valid_digest or not audit_path.is_file():
+        raise SystemExit(f"missing Alchimie live-projection evidence: {path}")
+    audit_bytes = audit_path.read_bytes()
+    if hashlib.sha256(audit_bytes).hexdigest() != digest:
+        raise SystemExit(f"stale Alchimie live-projection evidence: {path}")
+    try:
+        audit = json.loads(audit_bytes.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise SystemExit(
+            f"invalid Alchimie live-projection evidence: {audit_path}"
+        ) from exc
+    raw_audit_rows = audit.get("items")
+    if not isinstance(raw_audit_rows, list):
+        raise SystemExit(f"unbound Alchimie live-projection evidence: {path}")
+    audit_rows = {
+        row.get("id"): row
+        for row in raw_audit_rows
+        if isinstance(row, dict) and isinstance(row.get("id"), str)
+    }
+    expected_ids = batch["input_ids"]
+    id_blob = ("\n".join(expected_ids) + "\n").encode()
+    expected_runtime_sources = [
+        {
+            "path": str(source.relative_to(_REPO_ROOT)),
+            "sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+        }
+        for source in ALCHIMIE_RUNTIME_SOURCES
+    ]
+    runtime_manifest = hashlib.sha256(
+        json.dumps(
+            expected_runtime_sources,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    ).hexdigest()
+    expected_generator = {
+        "path": str(ALCHIMIE_AUDIT_GENERATOR.relative_to(_REPO_ROOT)),
+        "sha256": hashlib.sha256(ALCHIMIE_AUDIT_GENERATOR.read_bytes()).hexdigest(),
+    }
+    fully_bound = (
+        audit.get("schema") == ALCHIMIE_PROJECTION_SCHEMA
+        and audit.get("game") == "alchimie"
+        and audit.get("mode") == "gate"
+        and audit.get("status") == "pending"
+        and audit.get("input_ids") == expected_ids
+        and expected_ids == sorted(expected_ids)
+        and audit.get("input_ids_sha256") == hashlib.sha256(id_blob).hexdigest()
+        and isinstance(audit.get("pack_sha256"), str)
+        and len(audit["pack_sha256"]) == 64
+        and all(char in "0123456789abcdef" for char in audit["pack_sha256"])
+        and audit.get("kg_sha256") == critique_pack.kg_sha256()
+        and audit.get("rubric_sha256") == critique_pack.rubric_sha256()
+        and audit.get("runtime_sources") == expected_runtime_sources
+        and audit.get("runtime_source_manifest_sha256") == runtime_manifest
+        and audit.get("generator") == expected_generator
+        and len(raw_audit_rows) == len(expected_ids)
+        and len(audit_rows) == len(expected_ids)
+        and set(audit_rows) == set(expected_ids) == set(rows)
+        and all(
+            rows[item_id].get("analyst_projection_audit_sha256") == digest
+            and rows[item_id].get("verifier_projection_audit_sha256") == digest
+            and audit_rows[item_id].get("review_binding")
+            == rows[item_id].get("review_binding")
+            and isinstance(audit_rows[item_id].get("source_record"), dict)
+            and audit_rows[item_id]["source_record"].get("id") == item_id
+            and audit_rows[item_id]["source_record"].get("status") == "pending"
+            and audit_rows[item_id].get("record_sha256")
+            == critique_pack.canonical_json_sha256(
+                audit_rows[item_id]["source_record"]
+            )
+            for item_id in expected_ids
+        )
+    )
+    if not fully_bound:
+        raise SystemExit(f"unbound Alchimie live-projection evidence: {path}")
+
+    import audit_alchimie_projections
+
+    rebuilt = audit_alchimie_projections.rebuild_archived_artifact(
+        audit,
+        path.parent / "dossiers",
+    )
+    if rebuilt != audit:
+        raise SystemExit(f"unreproducible Alchimie live-projection evidence: {path}")
+
+
+def validate_live_alchimie_projection_source(batch: dict, path: Path) -> None:
+    """Require archived Alchimie evidence to match the live pre-apply source pack."""
+    audit_path = path.parent / ALCHIMIE_PROJECTION_AUDIT
+    audit = json.loads(audit_path.read_text(encoding="utf-8"))
+    current_pack_raw = critique_pack.PACKAGE_PACK.read_bytes()
+    current_pack = json.loads(current_pack_raw.decode("utf-8"))
+    current_records = {
+        str(record["id"]): record for record in current_pack["alchimie"]
+    }
+    audit_rows = {row["id"]: row for row in audit["items"]}
+    expected_ids = batch["input_ids"]
+    live = (
+        audit.get("pack_sha256") == hashlib.sha256(current_pack_raw).hexdigest()
+        and all(
+            item_id in current_records
+            and current_records[item_id].get("status") == "pending"
+            and audit_rows[item_id].get("source_record") == current_records[item_id]
+            for item_id in expected_ids
+        )
+    )
+    if not live:
+        raise SystemExit(f"stale Alchimie live-projection source: {path}")
 
 
 def critique_promotions(
@@ -248,6 +377,8 @@ def validated_artifact(
     )
     if not fully_verified:
         raise SystemExit(f'gate artifact is not fully verified: {path}')
+    if game == "alchimie":
+        validate_alchimie_projection_evidence(data, batch, rows, path)
     return (
         {str(iid): str(verdict) for iid, verdict in verdicts.items()},
         batch,
@@ -280,6 +411,8 @@ def main(argv: list[str]) -> int:
         data = json.loads(artifact_bytes.decode("utf-8"))
         artifact_digest = hashlib.sha256(artifact_bytes).hexdigest()
         artifact_verdicts, batch, artifact_bindings = validated_artifact(data, game, vpath)
+        if game == "alchimie":
+            validate_live_alchimie_projection_source(batch, vpath)
         batches.append(batch)
         for iid, verdict in artifact_verdicts.items():
             iid, verdict = str(iid), str(verdict)

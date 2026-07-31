@@ -1,0 +1,6640 @@
+{
+ "schema": "alchimie-live-projection-audit-v1",
+ "game": "alchimie",
+ "mode": "gate",
+ "status": "pending",
+ "input_ids": [
+  "al_arta_cultura_015",
+  "al_film_tv_022",
+  "al_gastronomie_026",
+  "al_gastronomie_030",
+  "al_geografie_032",
+  "al_limba_047",
+  "al_literatura_051",
+  "al_literatura_097",
+  "al_muzica_065",
+  "al_personalitati_070",
+  "al_societate_076",
+  "al_viata_de_roman_092",
+  "al_viata_de_roman_094",
+  "al_viata_de_roman_095",
+  "al_viata_de_roman_098",
+  "al_viata_de_roman_099",
+  "al_viata_de_roman_100",
+  "al_viata_de_roman_101",
+  "al_viata_de_roman_102",
+  "al_viata_de_roman_103",
+  "al_viata_de_roman_104"
+ ],
+ "input_ids_sha256": "d7cbc45ce53f4c70e2d3c3d8214e5f49964422f703f3004514ab08eccb822120",
+ "pack_sha256": "c4542d4201c45b04f58563eb08aa2ba0973389f453f5181f53066a88df550d05",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "dossier_manifest_sha256": "2a3250f1701ba54ee586670979d4105a5d6b093e7b2227cb0230bbd721d723db",
+ "runtime_sources": [
+  {
+   "path": "cat_de_roman_esti/wordgames/alchimie.py",
+   "sha256": "fec1420724565154226b641e8dfedc869449536f9f57d04efe6c19af0ee3171c"
+  },
+  {
+   "path": "cat_de_roman_esti/wordgames/packs.py",
+   "sha256": "92e43c27690640a4578b84039050c6e8ae3e3a7245ad4f6a01d52aa12cdf77e5"
+  }
+ ],
+ "runtime_source_manifest_sha256": "0d38a914e4b8fc5d0730d1fc1bf23530214b1112ec2101218d4951050bf126ea",
+ "generator": {
+  "path": "scripts/audit_alchimie_projections.py",
+  "sha256": "9dcae3ce7e5d4643fced7edcf6d962cc55568163fa5d77c93a325b69aeb405c2"
+ },
+ "summary": {
+  "records": 21,
+  "live_opening_floor_failures": 7
+ },
+ "items": [
+  {
+   "id": "al_arta_cultura_015",
+   "review_binding": "sha256:1104991ced34056157eedd979481ca63aada0302ed03624f5f6e7c60ce1f8291",
+   "record_sha256": "c21a63efbf65076e9be1775113a8edfda8f9535aa1947b17495d0b7e6c868f42",
+   "source_record": {
+    "difficulty": "normal",
+    "seeds": [
+     "n_v4art_fotografie",
+     "n_v3art_costum_popular",
+     "n_v3art_cultura",
+     "n_v3art_arta",
+     "n_v4art_traditie",
+     "n_artx_teatru_romanesc",
+     "n_v4art_masca"
+    ],
+    "target": "n_v2art_sculptura_romaneasca",
+    "target_depth": 2,
+    "id": "al_arta_cultura_015",
+    "category": "arta_cultura",
+    "source": "ai",
+    "status": "pending"
+   },
+   "category": "arta_cultura",
+   "difficulty": "normal",
+   "seeds": [
+    {
+     "id": "n_v4art_fotografie",
+     "label": "Fotografie"
+    },
+    {
+     "id": "n_v3art_costum_popular",
+     "label": "Costum popular"
+    },
+    {
+     "id": "n_v3art_cultura",
+     "label": "Cultură"
+    },
+    {
+     "id": "n_v3art_arta",
+     "label": "Artă"
+    },
+    {
+     "id": "n_v4art_traditie",
+     "label": "Tradiție"
+    },
+    {
+     "id": "n_artx_teatru_romanesc",
+     "label": "Teatrul românesc"
+    },
+    {
+     "id": "n_v4art_masca",
+     "label": "Mască"
+    }
+   ],
+   "target": {
+    "id": "n_v2art_sculptura_romaneasca",
+    "label": "Sculptură românească"
+   },
+   "declared_target_depth": 2,
+   "exact_action_par": 2,
+   "projection_par": 2,
+   "projection_sha256": "31654ad0bc82ec06d7f769002043d69c18a4ac5ee6964ee6a7fd4d10e7e369e4",
+   "projected_opening_pair_count": 1,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_v3art_arta",
+      "label": "Artă"
+     },
+     "right": {
+      "id": "n_v4art_fotografie",
+      "label": "Fotografie"
+     },
+     "results": [
+      {
+       "id": "n_arta_plastica",
+       "label": "Artă plastică"
+      }
+     ]
+    }
+   ],
+   "route_count": 1,
+   "recipe_pair_count": 2,
+   "projected_concept_count": 9,
+   "max_results_per_pair": 1,
+   "routes": [
+    {
+     "actions": 2,
+     "minimum_edge_strength": 0.72,
+     "mean_edge_strength": 0.84,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v3art_arta",
+        "label": "Artă"
+       },
+       "right": {
+        "id": "n_v4art_fotografie",
+        "label": "Fotografie"
+       },
+       "results": [
+        {
+         "id": "n_arta_plastica",
+         "label": "Artă plastică"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      },
+      {
+       "left": {
+        "id": "n_arta_plastica",
+        "label": "Artă plastică"
+       },
+       "right": {
+        "id": "n_v3art_arta",
+        "label": "Artă"
+       },
+       "results": [
+        {
+         "id": "n_v2art_sculptura_romaneasca",
+         "label": "Sculptură românească"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": false
+   }
+  },
+  {
+   "id": "al_film_tv_022",
+   "review_binding": "sha256:84239067d9b5491d0ef76f13bbec449844399247ed775cbb4cee60d91c6d715b",
+   "record_sha256": "466a80d332f079a7e1b48011d8d779b01fe8c2f0b1af82b3b37504a57f52ca16",
+   "source_record": {
+    "difficulty": "normal",
+    "seeds": [
+     "n_v4fil_producator",
+     "n_ftv_iumor",
+     "n_v3fil_scenariu",
+     "n_ftv_trasnitii",
+     "n_v4fil_spectator",
+     "n_v4fil_ecran"
+    ],
+    "target": "n_v3fil_subtitrare",
+    "target_depth": 2,
+    "id": "al_film_tv_022",
+    "category": "film_tv",
+    "source": "ai",
+    "status": "pending"
+   },
+   "category": "film_tv",
+   "difficulty": "normal",
+   "seeds": [
+    {
+     "id": "n_v4fil_producator",
+     "label": "producător"
+    },
+    {
+     "id": "n_ftv_iumor",
+     "label": "iUmor"
+    },
+    {
+     "id": "n_v3fil_scenariu",
+     "label": "Scenariu"
+    },
+    {
+     "id": "n_ftv_trasnitii",
+     "label": "Trăsniții"
+    },
+    {
+     "id": "n_v4fil_spectator",
+     "label": "spectator"
+    },
+    {
+     "id": "n_v4fil_ecran",
+     "label": "ecran"
+    }
+   ],
+   "target": {
+    "id": "n_v3fil_subtitrare",
+    "label": "Subtitrare"
+   },
+   "declared_target_depth": 2,
+   "exact_action_par": 2,
+   "projection_par": 2,
+   "projection_sha256": "67916d65fc108c0f29f6183f884243ef873eb4235045979e7ed85fa2db114b18",
+   "projected_opening_pair_count": 5,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_ftv_trasnitii",
+      "label": "Trăsniții"
+     },
+     "right": {
+      "id": "n_v4fil_ecran",
+      "label": "ecran"
+     },
+     "results": [
+      {
+       "id": "n_v2fil_serial_tv",
+       "label": "Serial TV"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v3fil_scenariu",
+      "label": "Scenariu"
+     },
+     "right": {
+      "id": "n_v4fil_ecran",
+      "label": "ecran"
+     },
+     "results": [
+      {
+       "id": "n_v3fil_film",
+       "label": "Film"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v3fil_scenariu",
+      "label": "Scenariu"
+     },
+     "right": {
+      "id": "n_v4fil_producator",
+      "label": "producător"
+     },
+     "results": [
+      {
+       "id": "n_v3fil_film",
+       "label": "Film"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v4fil_ecran",
+      "label": "ecran"
+     },
+     "right": {
+      "id": "n_v4fil_producator",
+      "label": "producător"
+     },
+     "results": [
+      {
+       "id": "n_v2fil_serial_tv",
+       "label": "Serial TV"
+      },
+      {
+       "id": "n_v3fil_film",
+       "label": "Film"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v4fil_ecran",
+      "label": "ecran"
+     },
+     "right": {
+      "id": "n_v4fil_spectator",
+      "label": "spectator"
+     },
+     "results": [
+      {
+       "id": "n_v2fil_televiziune",
+       "label": "Televiziune"
+      },
+      {
+       "id": "n_v3fil_film",
+       "label": "Film"
+      }
+     ]
+    }
+   ],
+   "route_count": 4,
+   "recipe_pair_count": 7,
+   "projected_concept_count": 10,
+   "max_results_per_pair": 2,
+   "routes": [
+    {
+     "actions": 2,
+     "minimum_edge_strength": 0.66,
+     "mean_edge_strength": 0.7967,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v4fil_ecran",
+        "label": "ecran"
+       },
+       "right": {
+        "id": "n_v4fil_spectator",
+        "label": "spectator"
+       },
+       "results": [
+        {
+         "id": "n_v2fil_televiziune",
+         "label": "Televiziune"
+        },
+        {
+         "id": "n_v3fil_film",
+         "label": "Film"
+        }
+       ],
+       "minimum_edge_strength": 0.8
+      },
+      {
+       "left": {
+        "id": "n_v2fil_televiziune",
+        "label": "Televiziune"
+       },
+       "right": {
+        "id": "n_v3fil_film",
+        "label": "Film"
+       },
+       "results": [
+        {
+         "id": "n_v3fil_subtitrare",
+         "label": "Subtitrare"
+        }
+       ],
+       "minimum_edge_strength": 0.66
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.66,
+     "mean_edge_strength": 0.795,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v4fil_ecran",
+        "label": "ecran"
+       },
+       "right": {
+        "id": "n_v4fil_producator",
+        "label": "producător"
+       },
+       "results": [
+        {
+         "id": "n_v2fil_serial_tv",
+         "label": "Serial TV"
+        },
+        {
+         "id": "n_v3fil_film",
+         "label": "Film"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      },
+      {
+       "left": {
+        "id": "n_v2fil_serial_tv",
+        "label": "Serial TV"
+       },
+       "right": {
+        "id": "n_v4fil_ecran",
+        "label": "ecran"
+       },
+       "results": [
+        {
+         "id": "n_v2fil_televiziune",
+         "label": "Televiziune"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      },
+      {
+       "left": {
+        "id": "n_v2fil_televiziune",
+        "label": "Televiziune"
+       },
+       "right": {
+        "id": "n_v3fil_film",
+        "label": "Film"
+       },
+       "results": [
+        {
+         "id": "n_v3fil_subtitrare",
+         "label": "Subtitrare"
+        }
+       ],
+       "minimum_edge_strength": 0.66
+      }
+     ]
+    },
+    {
+     "actions": 4,
+     "minimum_edge_strength": 0.66,
+     "mean_edge_strength": 0.8025,
+     "steps": [
+      {
+       "left": {
+        "id": "n_ftv_trasnitii",
+        "label": "Trăsniții"
+       },
+       "right": {
+        "id": "n_v4fil_ecran",
+        "label": "ecran"
+       },
+       "results": [
+        {
+         "id": "n_v2fil_serial_tv",
+         "label": "Serial TV"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      },
+      {
+       "left": {
+        "id": "n_v2fil_serial_tv",
+        "label": "Serial TV"
+       },
+       "right": {
+        "id": "n_v4fil_ecran",
+        "label": "ecran"
+       },
+       "results": [
+        {
+         "id": "n_v2fil_televiziune",
+         "label": "Televiziune"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      },
+      {
+       "left": {
+        "id": "n_v3fil_scenariu",
+        "label": "Scenariu"
+       },
+       "right": {
+        "id": "n_v4fil_ecran",
+        "label": "ecran"
+       },
+       "results": [
+        {
+         "id": "n_v3fil_film",
+         "label": "Film"
+        }
+       ],
+       "minimum_edge_strength": 0.82
+      },
+      {
+       "left": {
+        "id": "n_v2fil_televiziune",
+        "label": "Televiziune"
+       },
+       "right": {
+        "id": "n_v3fil_film",
+        "label": "Film"
+       },
+       "results": [
+        {
+         "id": "n_v3fil_subtitrare",
+         "label": "Subtitrare"
+        }
+       ],
+       "minimum_edge_strength": 0.66
+      }
+     ]
+    },
+    {
+     "actions": 4,
+     "minimum_edge_strength": 0.66,
+     "mean_edge_strength": 0.8,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v3fil_scenariu",
+        "label": "Scenariu"
+       },
+       "right": {
+        "id": "n_v4fil_producator",
+        "label": "producător"
+       },
+       "results": [
+        {
+         "id": "n_v3fil_film",
+         "label": "Film"
+        }
+       ],
+       "minimum_edge_strength": 0.82
+      },
+      {
+       "left": {
+        "id": "n_ftv_trasnitii",
+        "label": "Trăsniții"
+       },
+       "right": {
+        "id": "n_v4fil_ecran",
+        "label": "ecran"
+       },
+       "results": [
+        {
+         "id": "n_v2fil_serial_tv",
+         "label": "Serial TV"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      },
+      {
+       "left": {
+        "id": "n_v2fil_serial_tv",
+        "label": "Serial TV"
+       },
+       "right": {
+        "id": "n_v4fil_ecran",
+        "label": "ecran"
+       },
+       "results": [
+        {
+         "id": "n_v2fil_televiziune",
+         "label": "Televiziune"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      },
+      {
+       "left": {
+        "id": "n_v2fil_televiziune",
+        "label": "Televiziune"
+       },
+       "right": {
+        "id": "n_v3fil_film",
+        "label": "Film"
+       },
+       "results": [
+        {
+         "id": "n_v3fil_subtitrare",
+         "label": "Subtitrare"
+        }
+       ],
+       "minimum_edge_strength": 0.66
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": true
+   }
+  },
+  {
+   "id": "al_gastronomie_026",
+   "review_binding": "sha256:c30caba42ac2d5c52e4e0b589152d01e9d382f01a99aee63d780a879408db5dd",
+   "record_sha256": "e1197928db929ba04c2f1a8fef7d094ead5834ea7cf33127cd41a76cf5e26cad",
+   "source_record": {
+    "difficulty": "usor",
+    "seeds": [
+     "n_gas_ziua_nationala_masa",
+     "n_v3gas_cafea",
+     "n_v2gas_afumaturi",
+     "n_v4gas_dulce",
+     "n_v4gas_masa",
+     "n_v3gas_inghetata",
+     "n_gas_tuica"
+    ],
+    "target": "n_gas_paine_de_casa",
+    "target_depth": 3,
+    "id": "al_gastronomie_026",
+    "category": "gastronomie",
+    "source": "ai",
+    "status": "pending"
+   },
+   "category": "gastronomie",
+   "difficulty": "usor",
+   "seeds": [
+    {
+     "id": "n_gas_ziua_nationala_masa",
+     "label": "Masa de 1 Decembrie"
+    },
+    {
+     "id": "n_v3gas_cafea",
+     "label": "Cafea"
+    },
+    {
+     "id": "n_v2gas_afumaturi",
+     "label": "Afumături"
+    },
+    {
+     "id": "n_v4gas_dulce",
+     "label": "Dulce"
+    },
+    {
+     "id": "n_v4gas_masa",
+     "label": "Masă"
+    },
+    {
+     "id": "n_v3gas_inghetata",
+     "label": "Înghețată"
+    },
+    {
+     "id": "n_gas_tuica",
+     "label": "Țuică"
+    }
+   ],
+   "target": {
+    "id": "n_gas_paine_de_casa",
+    "label": "Pâine de casă"
+   },
+   "declared_target_depth": 3,
+   "exact_action_par": 3,
+   "projection_par": 3,
+   "projection_sha256": "b4061fd212e9c9c81fe96b3f4d35e61aae1b6a37c7ae640d2a01944fd43112d6",
+   "projected_opening_pair_count": 4,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_gas_tuica",
+      "label": "Țuică"
+     },
+     "right": {
+      "id": "n_v2gas_afumaturi",
+      "label": "Afumături"
+     },
+     "results": [
+      {
+       "id": "n_gas_slanina_ceapa",
+       "label": "Slănină cu ceapă"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_gas_tuica",
+      "label": "Țuică"
+     },
+     "right": {
+      "id": "n_v4gas_masa",
+      "label": "Masă"
+     },
+     "results": [
+      {
+       "id": "n_gas_mese_sarbatori",
+       "label": "Mese de sărbători"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_gas_ziua_nationala_masa",
+      "label": "Masa de 1 Decembrie"
+     },
+     "right": {
+      "id": "n_v2gas_afumaturi",
+      "label": "Afumături"
+     },
+     "results": [
+      {
+       "id": "n_gas_fasole_ciolan",
+       "label": "Fasole cu ciolan"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v2gas_afumaturi",
+      "label": "Afumături"
+     },
+     "right": {
+      "id": "n_v4gas_masa",
+      "label": "Masă"
+     },
+     "results": [
+      {
+       "id": "n_gas_masa_craciun",
+       "label": "Masa de Crăciun"
+      }
+     ]
+    }
+   ],
+   "route_count": 4,
+   "recipe_pair_count": 12,
+   "projected_concept_count": 15,
+   "max_results_per_pair": 2,
+   "routes": [
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.68,
+     "mean_edge_strength": 0.7867,
+     "steps": [
+      {
+       "left": {
+        "id": "n_gas_ziua_nationala_masa",
+        "label": "Masa de 1 Decembrie"
+       },
+       "right": {
+        "id": "n_v2gas_afumaturi",
+        "label": "Afumături"
+       },
+       "results": [
+        {
+         "id": "n_gas_fasole_ciolan",
+         "label": "Fasole cu ciolan"
+        }
+       ],
+       "minimum_edge_strength": 0.82
+      },
+      {
+       "left": {
+        "id": "n_gas_tuica",
+        "label": "Țuică"
+       },
+       "right": {
+        "id": "n_v2gas_afumaturi",
+        "label": "Afumături"
+       },
+       "results": [
+        {
+         "id": "n_gas_slanina_ceapa",
+         "label": "Slănină cu ceapă"
+        }
+       ],
+       "minimum_edge_strength": 0.68
+      },
+      {
+       "left": {
+        "id": "n_gas_fasole_ciolan",
+        "label": "Fasole cu ciolan"
+       },
+       "right": {
+        "id": "n_gas_slanina_ceapa",
+        "label": "Slănină cu ceapă"
+       },
+       "results": [
+        {
+         "id": "n_gas_paine_de_casa",
+         "label": "Pâine de casă"
+        }
+       ],
+       "minimum_edge_strength": 0.68
+      }
+     ]
+    },
+    {
+     "actions": 5,
+     "minimum_edge_strength": 0.58,
+     "mean_edge_strength": 0.754,
+     "steps": [
+      {
+       "left": {
+        "id": "n_gas_ziua_nationala_masa",
+        "label": "Masa de 1 Decembrie"
+       },
+       "right": {
+        "id": "n_v2gas_afumaturi",
+        "label": "Afumături"
+       },
+       "results": [
+        {
+         "id": "n_gas_fasole_ciolan",
+         "label": "Fasole cu ciolan"
+        }
+       ],
+       "minimum_edge_strength": 0.82
+      },
+      {
+       "left": {
+        "id": "n_gas_tuica",
+        "label": "Țuică"
+       },
+       "right": {
+        "id": "n_v4gas_masa",
+        "label": "Masă"
+       },
+       "results": [
+        {
+         "id": "n_gas_mese_sarbatori",
+         "label": "Mese de sărbători"
+        }
+       ],
+       "minimum_edge_strength": 0.65
+      },
+      {
+       "left": {
+        "id": "n_gas_fasole_ciolan",
+        "label": "Fasole cu ciolan"
+       },
+       "right": {
+        "id": "n_gas_mese_sarbatori",
+        "label": "Mese de sărbători"
+       },
+       "results": [
+        {
+         "id": "n_gas_muraturi",
+         "label": "Murături"
+        }
+       ],
+       "minimum_edge_strength": 0.66
+      },
+      {
+       "left": {
+        "id": "n_gas_muraturi",
+        "label": "Murături"
+       },
+       "right": {
+        "id": "n_gas_tuica",
+        "label": "Țuică"
+       },
+       "results": [
+        {
+         "id": "n_gas_slanina_ceapa",
+         "label": "Slănină cu ceapă"
+        }
+       ],
+       "minimum_edge_strength": 0.58
+      },
+      {
+       "left": {
+        "id": "n_gas_fasole_ciolan",
+        "label": "Fasole cu ciolan"
+       },
+       "right": {
+        "id": "n_gas_slanina_ceapa",
+        "label": "Slănină cu ceapă"
+       },
+       "results": [
+        {
+         "id": "n_gas_paine_de_casa",
+         "label": "Pâine de casă"
+        }
+       ],
+       "minimum_edge_strength": 0.68
+      }
+     ]
+    },
+    {
+     "actions": 5,
+     "minimum_edge_strength": 0.58,
+     "mean_edge_strength": 0.74,
+     "steps": [
+      {
+       "left": {
+        "id": "n_gas_tuica",
+        "label": "Țuică"
+       },
+       "right": {
+        "id": "n_v4gas_masa",
+        "label": "Masă"
+       },
+       "results": [
+        {
+         "id": "n_gas_mese_sarbatori",
+         "label": "Mese de sărbători"
+        }
+       ],
+       "minimum_edge_strength": 0.65
+      },
+      {
+       "left": {
+        "id": "n_gas_mese_sarbatori",
+        "label": "Mese de sărbători"
+       },
+       "right": {
+        "id": "n_v4gas_masa",
+        "label": "Masă"
+       },
+       "results": [
+        {
+         "id": "n_gas_sarmale",
+         "label": "Sarmale"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      },
+      {
+       "left": {
+        "id": "n_gas_mese_sarbatori",
+        "label": "Mese de sărbători"
+       },
+       "right": {
+        "id": "n_gas_sarmale",
+        "label": "Sarmale"
+       },
+       "results": [
+        {
+         "id": "n_gas_muraturi",
+         "label": "Murături"
+        }
+       ],
+       "minimum_edge_strength": 0.66
+      },
+      {
+       "left": {
+        "id": "n_gas_muraturi",
+        "label": "Murături"
+       },
+       "right": {
+        "id": "n_v2gas_afumaturi",
+        "label": "Afumături"
+       },
+       "results": [
+        {
+         "id": "n_gas_fasole_ciolan",
+         "label": "Fasole cu ciolan"
+        },
+        {
+         "id": "n_gas_slanina_ceapa",
+         "label": "Slănină cu ceapă"
+        }
+       ],
+       "minimum_edge_strength": 0.58
+      },
+      {
+       "left": {
+        "id": "n_gas_fasole_ciolan",
+        "label": "Fasole cu ciolan"
+       },
+       "right": {
+        "id": "n_gas_slanina_ceapa",
+        "label": "Slănină cu ceapă"
+       },
+       "results": [
+        {
+         "id": "n_gas_paine_de_casa",
+         "label": "Pâine de casă"
+        }
+       ],
+       "minimum_edge_strength": 0.68
+      }
+     ]
+    },
+    {
+     "actions": 5,
+     "minimum_edge_strength": 0.55,
+     "mean_edge_strength": 0.767,
+     "steps": [
+      {
+       "left": {
+        "id": "n_gas_ziua_nationala_masa",
+        "label": "Masa de 1 Decembrie"
+       },
+       "right": {
+        "id": "n_v2gas_afumaturi",
+        "label": "Afumături"
+       },
+       "results": [
+        {
+         "id": "n_gas_fasole_ciolan",
+         "label": "Fasole cu ciolan"
+        }
+       ],
+       "minimum_edge_strength": 0.82
+      },
+      {
+       "left": {
+        "id": "n_v2gas_afumaturi",
+        "label": "Afumături"
+       },
+       "right": {
+        "id": "n_v4gas_masa",
+        "label": "Masă"
+       },
+       "results": [
+        {
+         "id": "n_gas_masa_craciun",
+         "label": "Masa de Crăciun"
+        }
+       ],
+       "minimum_edge_strength": 0.74
+      },
+      {
+       "left": {
+        "id": "n_gas_fasole_ciolan",
+        "label": "Fasole cu ciolan"
+       },
+       "right": {
+        "id": "n_gas_masa_craciun",
+        "label": "Masa de Crăciun"
+       },
+       "results": [
+        {
+         "id": "n_v4gas_fasole",
+         "label": "Fasole"
+        }
+       ],
+       "minimum_edge_strength": 0.55
+      },
+      {
+       "left": {
+        "id": "n_gas_tuica",
+        "label": "Țuică"
+       },
+       "right": {
+        "id": "n_v4gas_fasole",
+        "label": "Fasole"
+       },
+       "results": [
+        {
+         "id": "n_gas_slanina_ceapa",
+         "label": "Slănină cu ceapă"
+        }
+       ],
+       "minimum_edge_strength": 0.58
+      },
+      {
+       "left": {
+        "id": "n_gas_fasole_ciolan",
+        "label": "Fasole cu ciolan"
+       },
+       "right": {
+        "id": "n_gas_slanina_ceapa",
+        "label": "Slănină cu ceapă"
+       },
+       "results": [
+        {
+         "id": "n_gas_paine_de_casa",
+         "label": "Pâine de casă"
+        }
+       ],
+       "minimum_edge_strength": 0.68
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": true
+   }
+  },
+  {
+   "id": "al_gastronomie_030",
+   "review_binding": "sha256:7c1e1c7da5cd488059a318e0a39ddc4c9db0b37a13b3f60cc2e04ac888d49239",
+   "record_sha256": "af4bab1a723cc1921a4d143896d94a3c02b0cf88871948b1015434b93d540374",
+   "source_record": {
+    "difficulty": "greu",
+    "seeds": [
+     "n_v2gas_mirodenii",
+     "n_gas_vin_fiert",
+     "n_gas_drob_miel",
+     "n_v3gas_cafea",
+     "n_gas_ardei_umpluti"
+    ],
+    "target": "n_gas_lebar",
+    "target_depth": 6,
+    "id": "al_gastronomie_030",
+    "category": "gastronomie",
+    "source": "ai",
+    "status": "pending"
+   },
+   "category": "gastronomie",
+   "difficulty": "greu",
+   "seeds": [
+    {
+     "id": "n_v2gas_mirodenii",
+     "label": "Mirodenii"
+    },
+    {
+     "id": "n_gas_vin_fiert",
+     "label": "Vin fiert"
+    },
+    {
+     "id": "n_gas_drob_miel",
+     "label": "Drob de miel"
+    },
+    {
+     "id": "n_v3gas_cafea",
+     "label": "Cafea"
+    },
+    {
+     "id": "n_gas_ardei_umpluti",
+     "label": "Ardei umpluți"
+    }
+   ],
+   "target": {
+    "id": "n_gas_lebar",
+    "label": "Lebăr"
+   },
+   "declared_target_depth": 6,
+   "exact_action_par": 6,
+   "projection_par": 6,
+   "projection_sha256": "6625843deed134a7ff16a375cfaaa8879598798e32b9e44e992c72d1f017f257",
+   "projected_opening_pair_count": 2,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_gas_ardei_umpluti",
+      "label": "Ardei umpluți"
+     },
+     "right": {
+      "id": "n_v2gas_mirodenii",
+      "label": "Mirodenii"
+     },
+     "results": [
+      {
+       "id": "n_gas_sarmale",
+       "label": "Sarmale"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_gas_drob_miel",
+      "label": "Drob de miel"
+     },
+     "right": {
+      "id": "n_gas_vin_fiert",
+      "label": "Vin fiert"
+     },
+     "results": [
+      {
+       "id": "n_gas_mese_sarbatori",
+       "label": "Mese de sărbători"
+      }
+     ]
+    }
+   ],
+   "route_count": 2,
+   "recipe_pair_count": 8,
+   "projected_concept_count": 12,
+   "max_results_per_pair": 2,
+   "routes": [
+    {
+     "actions": 6,
+     "minimum_edge_strength": 0.62,
+     "mean_edge_strength": 0.8121,
+     "steps": [
+      {
+       "left": {
+        "id": "n_gas_drob_miel",
+        "label": "Drob de miel"
+       },
+       "right": {
+        "id": "n_gas_vin_fiert",
+        "label": "Vin fiert"
+       },
+       "results": [
+        {
+         "id": "n_gas_mese_sarbatori",
+         "label": "Mese de sărbători"
+        }
+       ],
+       "minimum_edge_strength": 0.62
+      },
+      {
+       "left": {
+        "id": "n_gas_mese_sarbatori",
+        "label": "Mese de sărbători"
+       },
+       "right": {
+        "id": "n_v2gas_mirodenii",
+        "label": "Mirodenii"
+       },
+       "results": [
+        {
+         "id": "n_gas_sarmale",
+         "label": "Sarmale"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      },
+      {
+       "left": {
+        "id": "n_gas_mese_sarbatori",
+        "label": "Mese de sărbători"
+       },
+       "right": {
+        "id": "n_gas_sarmale",
+        "label": "Sarmale"
+       },
+       "results": [
+        {
+         "id": "n_gas_masa_craciun",
+         "label": "Masa de Crăciun"
+        },
+        {
+         "id": "n_v4gas_mancare",
+         "label": "Mâncare"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      },
+      {
+       "left": {
+        "id": "n_gas_sarmale",
+        "label": "Sarmale"
+       },
+       "right": {
+        "id": "n_v4gas_mancare",
+        "label": "Mâncare"
+       },
+       "results": [
+        {
+         "id": "n_v4gas_carne",
+         "label": "Carne"
+        }
+       ],
+       "minimum_edge_strength": 0.83
+      },
+      {
+       "left": {
+        "id": "n_gas_masa_craciun",
+        "label": "Masa de Crăciun"
+       },
+       "right": {
+        "id": "n_v4gas_carne",
+        "label": "Carne"
+       },
+       "results": [
+        {
+         "id": "n_v2gas_mezeluri",
+         "label": "Mezeluri"
+        }
+       ],
+       "minimum_edge_strength": 0.76
+      },
+      {
+       "left": {
+        "id": "n_gas_masa_craciun",
+        "label": "Masa de Crăciun"
+       },
+       "right": {
+        "id": "n_v2gas_mezeluri",
+        "label": "Mezeluri"
+       },
+       "results": [
+        {
+         "id": "n_gas_lebar",
+         "label": "Lebăr"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      }
+     ]
+    },
+    {
+     "actions": 6,
+     "minimum_edge_strength": 0.62,
+     "mean_edge_strength": 0.7971,
+     "steps": [
+      {
+       "left": {
+        "id": "n_gas_ardei_umpluti",
+        "label": "Ardei umpluți"
+       },
+       "right": {
+        "id": "n_v2gas_mirodenii",
+        "label": "Mirodenii"
+       },
+       "results": [
+        {
+         "id": "n_gas_sarmale",
+         "label": "Sarmale"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      },
+      {
+       "left": {
+        "id": "n_gas_sarmale",
+        "label": "Sarmale"
+       },
+       "right": {
+        "id": "n_gas_vin_fiert",
+        "label": "Vin fiert"
+       },
+       "results": [
+        {
+         "id": "n_gas_masa_craciun",
+         "label": "Masa de Crăciun"
+        },
+        {
+         "id": "n_gas_mese_sarbatori",
+         "label": "Mese de sărbători"
+        }
+       ],
+       "minimum_edge_strength": 0.62
+      },
+      {
+       "left": {
+        "id": "n_gas_mese_sarbatori",
+        "label": "Mese de sărbători"
+       },
+       "right": {
+        "id": "n_gas_sarmale",
+        "label": "Sarmale"
+       },
+       "results": [
+        {
+         "id": "n_v4gas_mancare",
+         "label": "Mâncare"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      },
+      {
+       "left": {
+        "id": "n_gas_sarmale",
+        "label": "Sarmale"
+       },
+       "right": {
+        "id": "n_v4gas_mancare",
+        "label": "Mâncare"
+       },
+       "results": [
+        {
+         "id": "n_v4gas_carne",
+         "label": "Carne"
+        }
+       ],
+       "minimum_edge_strength": 0.83
+      },
+      {
+       "left": {
+        "id": "n_gas_masa_craciun",
+        "label": "Masa de Crăciun"
+       },
+       "right": {
+        "id": "n_v4gas_carne",
+        "label": "Carne"
+       },
+       "results": [
+        {
+         "id": "n_v2gas_mezeluri",
+         "label": "Mezeluri"
+        }
+       ],
+       "minimum_edge_strength": 0.76
+      },
+      {
+       "left": {
+        "id": "n_gas_masa_craciun",
+        "label": "Masa de Crăciun"
+       },
+       "right": {
+        "id": "n_v2gas_mezeluri",
+        "label": "Mezeluri"
+       },
+       "results": [
+        {
+         "id": "n_gas_lebar",
+         "label": "Lebăr"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": true
+   }
+  },
+  {
+   "id": "al_geografie_032",
+   "review_binding": "sha256:b974d9a642ca1e5df4c61a7f1669d81a2c3d9aa5c8b037929d76d37b65d15b27",
+   "record_sha256": "d2a84c2c9e8958e585d101bb97f56b1dc19fff8c733cab07e4a470bcb0c80a22",
+   "source_record": {
+    "difficulty": "normal",
+    "seeds": [
+     "n_v2geo_lac",
+     "n_geox_deva",
+     "n_v4geo_catun",
+     "n_v4geo_strada",
+     "n_muntenia",
+     "n_v2geo_drum_montan",
+     "n_v4geo_parau"
+    ],
+    "target": "n_subcarpatii",
+    "target_depth": 2,
+    "id": "al_geografie_032",
+    "category": "geografie",
+    "source": "ai",
+    "status": "pending"
+   },
+   "category": "geografie",
+   "difficulty": "normal",
+   "seeds": [
+    {
+     "id": "n_v2geo_lac",
+     "label": "lac"
+    },
+    {
+     "id": "n_geox_deva",
+     "label": "Deva"
+    },
+    {
+     "id": "n_v4geo_catun",
+     "label": "cătun"
+    },
+    {
+     "id": "n_v4geo_strada",
+     "label": "stradă"
+    },
+    {
+     "id": "n_muntenia",
+     "label": "Muntenia"
+    },
+    {
+     "id": "n_v2geo_drum_montan",
+     "label": "drum montan"
+    },
+    {
+     "id": "n_v4geo_parau",
+     "label": "pârâu"
+    }
+   ],
+   "target": {
+    "id": "n_subcarpatii",
+    "label": "Subcarpații"
+   },
+   "declared_target_depth": 2,
+   "exact_action_par": 2,
+   "projection_par": 2,
+   "projection_sha256": "4c72c3834e37a3b512bedd29b61a55b3f9ce90b9ea53393c048d63cc85fb2278",
+   "projected_opening_pair_count": 1,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_v4geo_catun",
+      "label": "cătun"
+     },
+     "right": {
+      "id": "n_v4geo_parau",
+      "label": "pârâu"
+     },
+     "results": [
+      {
+       "id": "n_carpati",
+       "label": "Carpați"
+      }
+     ]
+    }
+   ],
+   "route_count": 4,
+   "recipe_pair_count": 7,
+   "projected_concept_count": 11,
+   "max_results_per_pair": 1,
+   "routes": [
+    {
+     "actions": 2,
+     "minimum_edge_strength": 0.5,
+     "mean_edge_strength": 0.64,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v4geo_catun",
+        "label": "cătun"
+       },
+       "right": {
+        "id": "n_v4geo_parau",
+        "label": "pârâu"
+       },
+       "results": [
+        {
+         "id": "n_carpati",
+         "label": "Carpați"
+        }
+       ],
+       "minimum_edge_strength": 0.6
+      },
+      {
+       "left": {
+        "id": "n_carpati",
+        "label": "Carpați"
+       },
+       "right": {
+        "id": "n_muntenia",
+        "label": "Muntenia"
+       },
+       "results": [
+        {
+         "id": "n_subcarpatii",
+         "label": "Subcarpații"
+        }
+       ],
+       "minimum_edge_strength": 0.5
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.58,
+     "mean_edge_strength": 0.73,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v4geo_catun",
+        "label": "cătun"
+       },
+       "right": {
+        "id": "n_v4geo_parau",
+        "label": "pârâu"
+       },
+       "results": [
+        {
+         "id": "n_carpati",
+         "label": "Carpați"
+        }
+       ],
+       "minimum_edge_strength": 0.6
+      },
+      {
+       "left": {
+        "id": "n_carpati",
+        "label": "Carpați"
+       },
+       "right": {
+        "id": "n_v2geo_drum_montan",
+        "label": "drum montan"
+       },
+       "results": [
+        {
+         "id": "n_v2geo_munte",
+         "label": "munte"
+        }
+       ],
+       "minimum_edge_strength": 0.84
+      },
+      {
+       "left": {
+        "id": "n_carpati",
+        "label": "Carpați"
+       },
+       "right": {
+        "id": "n_v2geo_munte",
+        "label": "munte"
+       },
+       "results": [
+        {
+         "id": "n_subcarpatii",
+         "label": "Subcarpații"
+        }
+       ],
+       "minimum_edge_strength": 0.58
+      }
+     ]
+    },
+    {
+     "actions": 4,
+     "minimum_edge_strength": 0.58,
+     "mean_edge_strength": 0.7425,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v4geo_catun",
+        "label": "cătun"
+       },
+       "right": {
+        "id": "n_v4geo_parau",
+        "label": "pârâu"
+       },
+       "results": [
+        {
+         "id": "n_carpati",
+         "label": "Carpați"
+        }
+       ],
+       "minimum_edge_strength": 0.6
+      },
+      {
+       "left": {
+        "id": "n_carpati",
+        "label": "Carpați"
+       },
+       "right": {
+        "id": "n_v2geo_lac",
+        "label": "lac"
+       },
+       "results": [
+        {
+         "id": "n_geox_retezat",
+         "label": "Munții Retezat"
+        }
+       ],
+       "minimum_edge_strength": 0.62
+      },
+      {
+       "left": {
+        "id": "n_carpati",
+        "label": "Carpați"
+       },
+       "right": {
+        "id": "n_geox_retezat",
+        "label": "Munții Retezat"
+       },
+       "results": [
+        {
+         "id": "n_v2geo_munte",
+         "label": "munte"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      },
+      {
+       "left": {
+        "id": "n_carpati",
+        "label": "Carpați"
+       },
+       "right": {
+        "id": "n_v2geo_munte",
+        "label": "munte"
+       },
+       "results": [
+        {
+         "id": "n_subcarpatii",
+         "label": "Subcarpații"
+        }
+       ],
+       "minimum_edge_strength": 0.58
+      }
+     ]
+    },
+    {
+     "actions": 4,
+     "minimum_edge_strength": 0.58,
+     "mean_edge_strength": 0.735,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v4geo_catun",
+        "label": "cătun"
+       },
+       "right": {
+        "id": "n_v4geo_parau",
+        "label": "pârâu"
+       },
+       "results": [
+        {
+         "id": "n_carpati",
+         "label": "Carpați"
+        }
+       ],
+       "minimum_edge_strength": 0.6
+      },
+      {
+       "left": {
+        "id": "n_carpati",
+        "label": "Carpați"
+       },
+       "right": {
+        "id": "n_v2geo_lac",
+        "label": "lac"
+       },
+       "results": [
+        {
+         "id": "n_geox_retezat",
+         "label": "Munții Retezat"
+        }
+       ],
+       "minimum_edge_strength": 0.62
+      },
+      {
+       "left": {
+        "id": "n_geox_retezat",
+        "label": "Munții Retezat"
+       },
+       "right": {
+        "id": "n_v2geo_drum_montan",
+        "label": "drum montan"
+       },
+       "results": [
+        {
+         "id": "n_v2geo_munte",
+         "label": "munte"
+        }
+       ],
+       "minimum_edge_strength": 0.84
+      },
+      {
+       "left": {
+        "id": "n_carpati",
+        "label": "Carpați"
+       },
+       "right": {
+        "id": "n_v2geo_munte",
+        "label": "munte"
+       },
+       "results": [
+        {
+         "id": "n_subcarpatii",
+         "label": "Subcarpații"
+        }
+       ],
+       "minimum_edge_strength": 0.58
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": false
+   }
+  },
+  {
+   "id": "al_limba_047",
+   "review_binding": "sha256:9c54665c68c7543f99fb44154cd2c4c6ef2dfbae8e588745bd72e3b962a4f573",
+   "record_sha256": "49137b723c07fef9d273a4d6be6ad81b725ec1b7a107aa9b75ff3f1015342b02",
+   "source_record": {
+    "difficulty": "greu",
+    "seeds": [
+     "n_lbax_dor",
+     "n_v4lim_dialog",
+     "n_v2lim_grai",
+     "n_v3lim_fraza",
+     "n_v3lim_dictionar"
+    ],
+    "target": "n_v4lim_timp_verbal",
+    "target_depth": 6,
+    "id": "al_limba_047",
+    "category": "limba",
+    "source": "ai",
+    "status": "pending"
+   },
+   "category": "limba",
+   "difficulty": "greu",
+   "seeds": [
+    {
+     "id": "n_lbax_dor",
+     "label": "Dor"
+    },
+    {
+     "id": "n_v4lim_dialog",
+     "label": "Dialog"
+    },
+    {
+     "id": "n_v2lim_grai",
+     "label": "Grai"
+    },
+    {
+     "id": "n_v3lim_fraza",
+     "label": "Frază"
+    },
+    {
+     "id": "n_v3lim_dictionar",
+     "label": "Dicționar"
+    }
+   ],
+   "target": {
+    "id": "n_v4lim_timp_verbal",
+    "label": "Timp verbal"
+   },
+   "declared_target_depth": 6,
+   "exact_action_par": 6,
+   "projection_par": 6,
+   "projection_sha256": "5f3e7470ae937fbce83df97bee467c29799e0817c58ea3b7209581aaf20c5a8d",
+   "projected_opening_pair_count": 1,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_v3lim_fraza",
+      "label": "Frază"
+     },
+     "right": {
+      "id": "n_v4lim_dialog",
+      "label": "Dialog"
+     },
+     "results": [
+      {
+       "id": "n_sintaxa",
+       "label": "Sintaxă"
+      }
+     ]
+    }
+   ],
+   "route_count": 1,
+   "recipe_pair_count": 6,
+   "projected_concept_count": 12,
+   "max_results_per_pair": 2,
+   "routes": [
+    {
+     "actions": 6,
+     "minimum_edge_strength": 0.45,
+     "mean_edge_strength": 0.7743,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v3lim_fraza",
+        "label": "Frază"
+       },
+       "right": {
+        "id": "n_v4lim_dialog",
+        "label": "Dialog"
+       },
+       "results": [
+        {
+         "id": "n_sintaxa",
+         "label": "Sintaxă"
+        }
+       ],
+       "minimum_edge_strength": 0.62
+      },
+      {
+       "left": {
+        "id": "n_sintaxa",
+        "label": "Sintaxă"
+       },
+       "right": {
+        "id": "n_v3lim_fraza",
+        "label": "Frază"
+       },
+       "results": [
+        {
+         "id": "n_v3lim_propozitie",
+         "label": "Propoziție"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_sintaxa",
+        "label": "Sintaxă"
+       },
+       "right": {
+        "id": "n_v3lim_propozitie",
+        "label": "Propoziție"
+       },
+       "results": [
+        {
+         "id": "n_gramatica",
+         "label": "Gramatică"
+        }
+       ],
+       "minimum_edge_strength": 0.8
+      },
+      {
+       "left": {
+        "id": "n_gramatica",
+        "label": "Gramatică"
+       },
+       "right": {
+        "id": "n_sintaxa",
+        "label": "Sintaxă"
+       },
+       "results": [
+        {
+         "id": "n_verb",
+         "label": "Verb"
+        }
+       ],
+       "minimum_edge_strength": 0.45
+      },
+      {
+       "left": {
+        "id": "n_gramatica",
+        "label": "Gramatică"
+       },
+       "right": {
+        "id": "n_verb",
+        "label": "Verb"
+       },
+       "results": [
+        {
+         "id": "n_conjugare",
+         "label": "Conjugare"
+        },
+        {
+         "id": "n_morfologie",
+         "label": "Morfologie"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      },
+      {
+       "left": {
+        "id": "n_conjugare",
+        "label": "Conjugare"
+       },
+       "right": {
+        "id": "n_morfologie",
+        "label": "Morfologie"
+       },
+       "results": [
+        {
+         "id": "n_v4lim_timp_verbal",
+         "label": "Timp verbal"
+        }
+       ],
+       "minimum_edge_strength": 0.76
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": false
+   }
+  },
+  {
+   "id": "al_literatura_051",
+   "review_binding": "sha256:f29410f1ee3a26748b609945c865901555304e91da7d3ef75601ae02339e28b5",
+   "record_sha256": "cb3bd21e7bf382d9881693044babbc7d7fd0ef08dec14d1e8a0d089ef049afb4",
+   "source_record": {
+    "difficulty": "usor",
+    "seeds": [
+     "n_junimea",
+     "n_v2lit_roman_literar",
+     "n_v2lit_nuvela",
+     "n_v3lit_poveste",
+     "n_v4lit_jurnal",
+     "n_litx_ghita_pristanda"
+    ],
+    "target": "n_v2lit_sat_romanesc",
+    "target_depth": 3,
+    "id": "al_literatura_051",
+    "category": "literatura",
+    "source": "ai",
+    "status": "pending"
+   },
+   "category": "literatura",
+   "difficulty": "usor",
+   "seeds": [
+    {
+     "id": "n_junimea",
+     "label": "Junimea"
+    },
+    {
+     "id": "n_v2lit_roman_literar",
+     "label": "Roman (specie literară)"
+    },
+    {
+     "id": "n_v2lit_nuvela",
+     "label": "Nuvelă"
+    },
+    {
+     "id": "n_v3lit_poveste",
+     "label": "Poveste"
+    },
+    {
+     "id": "n_v4lit_jurnal",
+     "label": "jurnal"
+    },
+    {
+     "id": "n_litx_ghita_pristanda",
+     "label": "Ghiță Pristanda"
+    }
+   ],
+   "target": {
+    "id": "n_v2lit_sat_romanesc",
+    "label": "Sat românesc"
+   },
+   "declared_target_depth": 3,
+   "exact_action_par": 3,
+   "projection_par": 3,
+   "projection_sha256": "bd8536e8deef90e3661dfdbafd4172d3bd2c7b5a4c77b7ed3d159aa6a5799b99",
+   "projected_opening_pair_count": 3,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_junimea",
+      "label": "Junimea"
+     },
+     "right": {
+      "id": "n_v2lit_nuvela",
+      "label": "Nuvelă"
+     },
+     "results": [
+      {
+       "id": "n_ioan_slavici",
+       "label": "Ioan Slavici"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v2lit_nuvela",
+      "label": "Nuvelă"
+     },
+     "right": {
+      "id": "n_v2lit_roman_literar",
+      "label": "Roman (specie literară)"
+     },
+     "results": [
+      {
+       "id": "n_v4lit_proza",
+       "label": "proză"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v2lit_roman_literar",
+      "label": "Roman (specie literară)"
+     },
+     "right": {
+      "id": "n_v3lit_poveste",
+      "label": "Poveste"
+     },
+     "results": [
+      {
+       "id": "n_amintiri_copilarie",
+       "label": "Amintiri din copilărie"
+      }
+     ]
+    }
+   ],
+   "route_count": 4,
+   "recipe_pair_count": 11,
+   "projected_concept_count": 14,
+   "max_results_per_pair": 2,
+   "routes": [
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.68,
+     "mean_edge_strength": 0.76,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v2lit_nuvela",
+        "label": "Nuvelă"
+       },
+       "right": {
+        "id": "n_v2lit_roman_literar",
+        "label": "Roman (specie literară)"
+       },
+       "results": [
+        {
+         "id": "n_v4lit_proza",
+         "label": "proză"
+        }
+       ],
+       "minimum_edge_strength": 0.84
+      },
+      {
+       "left": {
+        "id": "n_v2lit_roman_literar",
+        "label": "Roman (specie literară)"
+       },
+       "right": {
+        "id": "n_v4lit_proza",
+        "label": "proză"
+       },
+       "results": [
+        {
+         "id": "n_mihail_sadoveanu",
+         "label": "Mihail Sadoveanu"
+        },
+        {
+         "id": "n_realism",
+         "label": "Realism"
+        }
+       ],
+       "minimum_edge_strength": 0.68
+      },
+      {
+       "left": {
+        "id": "n_mihail_sadoveanu",
+        "label": "Mihail Sadoveanu"
+       },
+       "right": {
+        "id": "n_realism",
+        "label": "Realism"
+       },
+       "results": [
+        {
+         "id": "n_v2lit_sat_romanesc",
+         "label": "Sat românesc"
+        }
+       ],
+       "minimum_edge_strength": 0.68
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.62,
+     "mean_edge_strength": 0.7283,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v2lit_roman_literar",
+        "label": "Roman (specie literară)"
+       },
+       "right": {
+        "id": "n_v3lit_poveste",
+        "label": "Poveste"
+       },
+       "results": [
+        {
+         "id": "n_amintiri_copilarie",
+         "label": "Amintiri din copilărie"
+        }
+       ],
+       "minimum_edge_strength": 0.62
+      },
+      {
+       "left": {
+        "id": "n_amintiri_copilarie",
+        "label": "Amintiri din copilărie"
+       },
+       "right": {
+        "id": "n_junimea",
+        "label": "Junimea"
+       },
+       "results": [
+        {
+         "id": "n_ion_creanga",
+         "label": "Ion Creangă"
+        }
+       ],
+       "minimum_edge_strength": 0.65
+      },
+      {
+       "left": {
+        "id": "n_amintiri_copilarie",
+        "label": "Amintiri din copilărie"
+       },
+       "right": {
+        "id": "n_ion_creanga",
+        "label": "Ion Creangă"
+       },
+       "results": [
+        {
+         "id": "n_v2lit_sat_romanesc",
+         "label": "Sat românesc"
+        }
+       ],
+       "minimum_edge_strength": 0.7
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.55,
+     "mean_edge_strength": 0.755,
+     "steps": [
+      {
+       "left": {
+        "id": "n_junimea",
+        "label": "Junimea"
+       },
+       "right": {
+        "id": "n_v2lit_nuvela",
+        "label": "Nuvelă"
+       },
+       "results": [
+        {
+         "id": "n_ioan_slavici",
+         "label": "Ioan Slavici"
+        }
+       ],
+       "minimum_edge_strength": 0.55
+      },
+      {
+       "left": {
+        "id": "n_ioan_slavici",
+        "label": "Ioan Slavici"
+       },
+       "right": {
+        "id": "n_v2lit_nuvela",
+        "label": "Nuvelă"
+       },
+       "results": [
+        {
+         "id": "n_moara_cu_noroc",
+         "label": "Moara cu noroc"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      },
+      {
+       "left": {
+        "id": "n_ioan_slavici",
+        "label": "Ioan Slavici"
+       },
+       "right": {
+        "id": "n_moara_cu_noroc",
+        "label": "Moara cu noroc"
+       },
+       "results": [
+        {
+         "id": "n_v2lit_sat_romanesc",
+         "label": "Sat românesc"
+        }
+       ],
+       "minimum_edge_strength": 0.64
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.55,
+     "mean_edge_strength": 0.715,
+     "steps": [
+      {
+       "left": {
+        "id": "n_junimea",
+        "label": "Junimea"
+       },
+       "right": {
+        "id": "n_v2lit_nuvela",
+        "label": "Nuvelă"
+       },
+       "results": [
+        {
+         "id": "n_ioan_slavici",
+         "label": "Ioan Slavici"
+        }
+       ],
+       "minimum_edge_strength": 0.55
+      },
+      {
+       "left": {
+        "id": "n_ioan_slavici",
+        "label": "Ioan Slavici"
+       },
+       "right": {
+        "id": "n_v2lit_roman_literar",
+        "label": "Roman (specie literară)"
+       },
+       "results": [
+        {
+         "id": "n_realism",
+         "label": "Realism"
+        }
+       ],
+       "minimum_edge_strength": 0.76
+      },
+      {
+       "left": {
+        "id": "n_ioan_slavici",
+        "label": "Ioan Slavici"
+       },
+       "right": {
+        "id": "n_realism",
+        "label": "Realism"
+       },
+       "results": [
+        {
+         "id": "n_v2lit_sat_romanesc",
+         "label": "Sat românesc"
+        }
+       ],
+       "minimum_edge_strength": 0.66
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": true
+   }
+  },
+  {
+   "id": "al_literatura_097",
+   "review_binding": "sha256:0cd19422b9cd20256695b472798b6ed4b522db8fc6888706ad7ccad1d96dba45",
+   "record_sha256": "e3a1787ac395a9d1b711df00ae99f25e235d8d3f71425464f3dabc1ec0dda064",
+   "source_record": {
+    "difficulty": "normal",
+    "seeds": [
+     "n_v23lit_praslea_cel_voinic",
+     "n_v23lit_tinerete_fara_batranete",
+     "n_v23lit_greuceanu",
+     "n_v23lit_capra_cu_trei_iezi",
+     "n_v23lit_punguta_cu_doi_bani",
+     "n_v23lit_ursul_pacalit_de_vulpe"
+    ],
+    "target": "n_v23lit_fat_frumos",
+    "target_depth": 2,
+    "id": "al_literatura_097",
+    "category": "literatura",
+    "source": "ai",
+    "status": "pending"
+   },
+   "category": "literatura",
+   "difficulty": "normal",
+   "seeds": [
+    {
+     "id": "n_v23lit_praslea_cel_voinic",
+     "label": "Prâslea cel voinic și merele de aur"
+    },
+    {
+     "id": "n_v23lit_tinerete_fara_batranete",
+     "label": "Tinerețe fără bătrânețe și viață fără de moarte"
+    },
+    {
+     "id": "n_v23lit_greuceanu",
+     "label": "Greuceanu"
+    },
+    {
+     "id": "n_v23lit_capra_cu_trei_iezi",
+     "label": "Capra cu trei iezi"
+    },
+    {
+     "id": "n_v23lit_punguta_cu_doi_bani",
+     "label": "Punguța cu doi bani"
+    },
+    {
+     "id": "n_v23lit_ursul_pacalit_de_vulpe",
+     "label": "Ursul păcălit de vulpe"
+    }
+   ],
+   "target": {
+    "id": "n_v23lit_fat_frumos",
+    "label": "Făt-Frumos"
+   },
+   "declared_target_depth": 2,
+   "exact_action_par": 2,
+   "projection_par": 2,
+   "projection_sha256": "0f5237e90d226b630c2042894dd3cb8076bfb3add3fad19fb8ad874a3e2fc33f",
+   "projected_opening_pair_count": 3,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_v23lit_capra_cu_trei_iezi",
+      "label": "Capra cu trei iezi"
+     },
+     "right": {
+      "id": "n_v23lit_punguta_cu_doi_bani",
+      "label": "Punguța cu doi bani"
+     },
+     "results": [
+      {
+       "id": "n_v3lit_poveste",
+       "label": "Poveste"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v23lit_capra_cu_trei_iezi",
+      "label": "Capra cu trei iezi"
+     },
+     "right": {
+      "id": "n_v23lit_ursul_pacalit_de_vulpe",
+      "label": "Ursul păcălit de vulpe"
+     },
+     "results": [
+      {
+       "id": "n_v3lit_poveste",
+       "label": "Poveste"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v23lit_greuceanu",
+      "label": "Greuceanu"
+     },
+     "right": {
+      "id": "n_v23lit_praslea_cel_voinic",
+      "label": "Prâslea cel voinic și merele de aur"
+     },
+     "results": [
+      {
+       "id": "n_v23lit_zmeul",
+       "label": "Zmeul"
+      }
+     ]
+    }
+   ],
+   "route_count": 4,
+   "recipe_pair_count": 6,
+   "projected_concept_count": 9,
+   "max_results_per_pair": 1,
+   "routes": [
+    {
+     "actions": 2,
+     "minimum_edge_strength": 0.72,
+     "mean_edge_strength": 0.85,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v23lit_capra_cu_trei_iezi",
+        "label": "Capra cu trei iezi"
+       },
+       "right": {
+        "id": "n_v23lit_punguta_cu_doi_bani",
+        "label": "Punguța cu doi bani"
+       },
+       "results": [
+        {
+         "id": "n_v3lit_poveste",
+         "label": "Poveste"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      },
+      {
+       "left": {
+        "id": "n_v23lit_tinerete_fara_batranete",
+        "label": "Tinerețe fără bătrânețe și viață fără de moarte"
+       },
+       "right": {
+        "id": "n_v3lit_poveste",
+        "label": "Poveste"
+       },
+       "results": [
+        {
+         "id": "n_v23lit_fat_frumos",
+         "label": "Făt-Frumos"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      }
+     ]
+    },
+    {
+     "actions": 2,
+     "minimum_edge_strength": 0.72,
+     "mean_edge_strength": 0.85,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v23lit_capra_cu_trei_iezi",
+        "label": "Capra cu trei iezi"
+       },
+       "right": {
+        "id": "n_v23lit_ursul_pacalit_de_vulpe",
+        "label": "Ursul păcălit de vulpe"
+       },
+       "results": [
+        {
+         "id": "n_v3lit_poveste",
+         "label": "Poveste"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      },
+      {
+       "left": {
+        "id": "n_v23lit_tinerete_fara_batranete",
+        "label": "Tinerețe fără bătrânețe și viață fără de moarte"
+       },
+       "right": {
+        "id": "n_v3lit_poveste",
+        "label": "Poveste"
+       },
+       "results": [
+        {
+         "id": "n_v23lit_fat_frumos",
+         "label": "Făt-Frumos"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      }
+     ]
+    },
+    {
+     "actions": 2,
+     "minimum_edge_strength": 0.72,
+     "mean_edge_strength": 0.84,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v23lit_greuceanu",
+        "label": "Greuceanu"
+       },
+       "right": {
+        "id": "n_v23lit_praslea_cel_voinic",
+        "label": "Prâslea cel voinic și merele de aur"
+       },
+       "results": [
+        {
+         "id": "n_v23lit_zmeul",
+         "label": "Zmeul"
+        }
+       ],
+       "minimum_edge_strength": 0.88
+      },
+      {
+       "left": {
+        "id": "n_v23lit_tinerete_fara_batranete",
+        "label": "Tinerețe fără bătrânețe și viață fără de moarte"
+       },
+       "right": {
+        "id": "n_v23lit_zmeul",
+        "label": "Zmeul"
+       },
+       "results": [
+        {
+         "id": "n_v23lit_fat_frumos",
+         "label": "Făt-Frumos"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.86,
+     "mean_edge_strength": 0.8867,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v23lit_capra_cu_trei_iezi",
+        "label": "Capra cu trei iezi"
+       },
+       "right": {
+        "id": "n_v23lit_punguta_cu_doi_bani",
+        "label": "Punguța cu doi bani"
+       },
+       "results": [
+        {
+         "id": "n_v3lit_poveste",
+         "label": "Poveste"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      },
+      {
+       "left": {
+        "id": "n_v23lit_greuceanu",
+        "label": "Greuceanu"
+       },
+       "right": {
+        "id": "n_v23lit_praslea_cel_voinic",
+        "label": "Prâslea cel voinic și merele de aur"
+       },
+       "results": [
+        {
+         "id": "n_v23lit_zmeul",
+         "label": "Zmeul"
+        }
+       ],
+       "minimum_edge_strength": 0.88
+      },
+      {
+       "left": {
+        "id": "n_v23lit_zmeul",
+        "label": "Zmeul"
+       },
+       "right": {
+        "id": "n_v3lit_poveste",
+        "label": "Poveste"
+       },
+       "results": [
+        {
+         "id": "n_v23lit_fat_frumos",
+         "label": "Făt-Frumos"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": true
+   }
+  },
+  {
+   "id": "al_muzica_065",
+   "review_binding": "sha256:8be230044b40ae7eaacf829147c26b1dd1540bd7777a8acac7287c3eb2cddf02",
+   "record_sha256": "ec383c2a83da86a8935bcec866f55746947bdd0c1ac0caf647b7d72d846d63f6",
+   "source_record": {
+    "difficulty": "normal",
+    "seeds": [
+     "n_v2muz_trupa_rock",
+     "n_muz_acasa_smiley",
+     "n_muz_dragostea_din_tei",
+     "n_v2muz_artist_mascat",
+     "n_v3muz_album",
+     "n_muz_oriunde_te_vei_afla"
+    ],
+    "target": "n_muz_ploaia_cargo",
+    "target_depth": 2,
+    "id": "al_muzica_065",
+    "category": "muzica",
+    "source": "ai",
+    "status": "pending"
+   },
+   "category": "muzica",
+   "difficulty": "normal",
+   "seeds": [
+    {
+     "id": "n_v2muz_trupa_rock",
+     "label": "Trupă rock"
+    },
+    {
+     "id": "n_muz_acasa_smiley",
+     "label": "Acasă"
+    },
+    {
+     "id": "n_muz_dragostea_din_tei",
+     "label": "Dragostea din tei"
+    },
+    {
+     "id": "n_v2muz_artist_mascat",
+     "label": "Artist mascat"
+    },
+    {
+     "id": "n_v3muz_album",
+     "label": "Album"
+    },
+    {
+     "id": "n_muz_oriunde_te_vei_afla",
+     "label": "Oriunde te vei afla"
+    }
+   ],
+   "target": {
+    "id": "n_muz_ploaia_cargo",
+    "label": "Ploaia"
+   },
+   "declared_target_depth": 2,
+   "exact_action_par": 2,
+   "projection_par": 2,
+   "projection_sha256": "78af353fe48ba088517185984e34b22beb2948913e17afff511ed6760c6c2583",
+   "projected_opening_pair_count": 4,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_muz_acasa_smiley",
+      "label": "Acasă"
+     },
+     "right": {
+      "id": "n_muz_dragostea_din_tei",
+      "label": "Dragostea din tei"
+     },
+     "results": [
+      {
+       "id": "n_muz_refren_viral",
+       "label": "Refren viral"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_muz_acasa_smiley",
+      "label": "Acasă"
+     },
+     "right": {
+      "id": "n_v3muz_album",
+      "label": "Album"
+     },
+     "results": [
+      {
+       "id": "n_v3muz_melodie",
+       "label": "Melodie"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_muz_dragostea_din_tei",
+      "label": "Dragostea din tei"
+     },
+     "right": {
+      "id": "n_v3muz_album",
+      "label": "Album"
+     },
+     "results": [
+      {
+       "id": "n_v3muz_melodie",
+       "label": "Melodie"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v2muz_trupa_rock",
+      "label": "Trupă rock"
+     },
+     "right": {
+      "id": "n_v3muz_album",
+      "label": "Album"
+     },
+     "results": [
+      {
+       "id": "n_muz_rock_ro",
+       "label": "Rock românesc"
+      }
+     ]
+    }
+   ],
+   "route_count": 4,
+   "recipe_pair_count": 9,
+   "projected_concept_count": 12,
+   "max_results_per_pair": 1,
+   "routes": [
+    {
+     "actions": 2,
+     "minimum_edge_strength": 0.6,
+     "mean_edge_strength": 0.7425,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v2muz_trupa_rock",
+        "label": "Trupă rock"
+       },
+       "right": {
+        "id": "n_v3muz_album",
+        "label": "Album"
+       },
+       "results": [
+        {
+         "id": "n_muz_rock_ro",
+         "label": "Rock românesc"
+        }
+       ],
+       "minimum_edge_strength": 0.6
+      },
+      {
+       "left": {
+        "id": "n_muz_rock_ro",
+        "label": "Rock românesc"
+       },
+       "right": {
+        "id": "n_v2muz_trupa_rock",
+        "label": "Trupă rock"
+       },
+       "results": [
+        {
+         "id": "n_muz_ploaia_cargo",
+         "label": "Ploaia"
+        }
+       ],
+       "minimum_edge_strength": 0.65
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.58,
+     "mean_edge_strength": 0.6817,
+     "steps": [
+      {
+       "left": {
+        "id": "n_muz_acasa_smiley",
+        "label": "Acasă"
+       },
+       "right": {
+        "id": "n_muz_dragostea_din_tei",
+        "label": "Dragostea din tei"
+       },
+       "results": [
+        {
+         "id": "n_muz_refren_viral",
+         "label": "Refren viral"
+        }
+       ],
+       "minimum_edge_strength": 0.76
+      },
+      {
+       "left": {
+        "id": "n_muz_acasa_smiley",
+        "label": "Acasă"
+       },
+       "right": {
+        "id": "n_muz_refren_viral",
+        "label": "Refren viral"
+       },
+       "results": [
+        {
+         "id": "n_muz_muzica_petrecere",
+         "label": "Muzică de petrecere"
+        }
+       ],
+       "minimum_edge_strength": 0.62
+      },
+      {
+       "left": {
+        "id": "n_muz_muzica_petrecere",
+        "label": "Muzică de petrecere"
+       },
+       "right": {
+        "id": "n_v2muz_trupa_rock",
+        "label": "Trupă rock"
+       },
+       "results": [
+        {
+         "id": "n_muz_ploaia_cargo",
+         "label": "Ploaia"
+        }
+       ],
+       "minimum_edge_strength": 0.58
+      }
+     ]
+    },
+    {
+     "actions": 4,
+     "minimum_edge_strength": 0.65,
+     "mean_edge_strength": 0.7762,
+     "steps": [
+      {
+       "left": {
+        "id": "n_muz_dragostea_din_tei",
+        "label": "Dragostea din tei"
+       },
+       "right": {
+        "id": "n_v3muz_album",
+        "label": "Album"
+       },
+       "results": [
+        {
+         "id": "n_v3muz_melodie",
+         "label": "Melodie"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      },
+      {
+       "left": {
+        "id": "n_v2muz_trupa_rock",
+        "label": "Trupă rock"
+       },
+       "right": {
+        "id": "n_v3muz_melodie",
+        "label": "Melodie"
+       },
+       "results": [
+        {
+         "id": "n_v4muz_acord",
+         "label": "Acord"
+        }
+       ],
+       "minimum_edge_strength": 0.66
+      },
+      {
+       "left": {
+        "id": "n_v2muz_trupa_rock",
+        "label": "Trupă rock"
+       },
+       "right": {
+        "id": "n_v4muz_acord",
+        "label": "Acord"
+       },
+       "results": [
+        {
+         "id": "n_muz_rock_ro",
+         "label": "Rock românesc"
+        }
+       ],
+       "minimum_edge_strength": 0.76
+      },
+      {
+       "left": {
+        "id": "n_muz_rock_ro",
+        "label": "Rock românesc"
+       },
+       "right": {
+        "id": "n_v2muz_trupa_rock",
+        "label": "Trupă rock"
+       },
+       "results": [
+        {
+         "id": "n_muz_ploaia_cargo",
+         "label": "Ploaia"
+        }
+       ],
+       "minimum_edge_strength": 0.65
+      }
+     ]
+    },
+    {
+     "actions": 4,
+     "minimum_edge_strength": 0.65,
+     "mean_edge_strength": 0.7638,
+     "steps": [
+      {
+       "left": {
+        "id": "n_muz_acasa_smiley",
+        "label": "Acasă"
+       },
+       "right": {
+        "id": "n_v3muz_album",
+        "label": "Album"
+       },
+       "results": [
+        {
+         "id": "n_v3muz_melodie",
+         "label": "Melodie"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      },
+      {
+       "left": {
+        "id": "n_v2muz_trupa_rock",
+        "label": "Trupă rock"
+       },
+       "right": {
+        "id": "n_v3muz_melodie",
+        "label": "Melodie"
+       },
+       "results": [
+        {
+         "id": "n_v4muz_acord",
+         "label": "Acord"
+        }
+       ],
+       "minimum_edge_strength": 0.66
+      },
+      {
+       "left": {
+        "id": "n_v2muz_trupa_rock",
+        "label": "Trupă rock"
+       },
+       "right": {
+        "id": "n_v4muz_acord",
+        "label": "Acord"
+       },
+       "results": [
+        {
+         "id": "n_muz_rock_ro",
+         "label": "Rock românesc"
+        }
+       ],
+       "minimum_edge_strength": 0.76
+      },
+      {
+       "left": {
+        "id": "n_muz_rock_ro",
+        "label": "Rock românesc"
+       },
+       "right": {
+        "id": "n_v2muz_trupa_rock",
+        "label": "Trupă rock"
+       },
+       "results": [
+        {
+         "id": "n_muz_ploaia_cargo",
+         "label": "Ploaia"
+        }
+       ],
+       "minimum_edge_strength": 0.65
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": true
+   }
+  },
+  {
+   "id": "al_personalitati_070",
+   "review_binding": "sha256:96eb26ddbae963c8f682fb992a58e64f5276ba39f18f2d61273077157589925e",
+   "record_sha256": "63ee9c988954a772083ff642098354988e50d6751a28ae058682d69bd74381f2",
+   "source_record": {
+    "difficulty": "normal",
+    "seeds": [
+     "n_perx_romania_interbelica",
+     "n_perx_nicolae_titulescu",
+     "n_perx_nicolae_iorga",
+     "n_perx_scoala_romaneasca_istorie",
+     "n_emil_racovita",
+     "n_v4per_biografie"
+    ],
+    "target": "n_v2per_casa_regala",
+    "target_depth": 3,
+    "id": "al_personalitati_070",
+    "category": "personalitati",
+    "source": "ai",
+    "status": "pending"
+   },
+   "category": "personalitati",
+   "difficulty": "normal",
+   "seeds": [
+    {
+     "id": "n_perx_romania_interbelica",
+     "label": "România interbelică"
+    },
+    {
+     "id": "n_perx_nicolae_titulescu",
+     "label": "Nicolae Titulescu"
+    },
+    {
+     "id": "n_perx_nicolae_iorga",
+     "label": "Nicolae Iorga"
+    },
+    {
+     "id": "n_perx_scoala_romaneasca_istorie",
+     "label": "Școala românească de istorie"
+    },
+    {
+     "id": "n_emil_racovita",
+     "label": "Emil Racoviță"
+    },
+    {
+     "id": "n_v4per_biografie",
+     "label": "biografie"
+    }
+   ],
+   "target": {
+    "id": "n_v2per_casa_regala",
+    "label": "Casa regală"
+   },
+   "declared_target_depth": 3,
+   "exact_action_par": 3,
+   "projection_par": 3,
+   "projection_sha256": "e1beed73488fbc163e657275e18ffc8ce5e62774650920c17bd6248b76678bd4",
+   "projected_opening_pair_count": 1,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_perx_nicolae_titulescu",
+      "label": "Nicolae Titulescu"
+     },
+     "right": {
+      "id": "n_v4per_biografie",
+      "label": "biografie"
+     },
+     "results": [
+      {
+       "id": "n_perx_regina_maria",
+       "label": "Regina Maria"
+      }
+     ]
+    }
+   ],
+   "route_count": 1,
+   "recipe_pair_count": 3,
+   "projected_concept_count": 9,
+   "max_results_per_pair": 1,
+   "routes": [
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.5,
+     "mean_edge_strength": 0.8167,
+     "steps": [
+      {
+       "left": {
+        "id": "n_perx_nicolae_titulescu",
+        "label": "Nicolae Titulescu"
+       },
+       "right": {
+        "id": "n_v4per_biografie",
+        "label": "biografie"
+       },
+       "results": [
+        {
+         "id": "n_perx_regina_maria",
+         "label": "Regina Maria"
+        }
+       ],
+       "minimum_edge_strength": 0.5
+      },
+      {
+       "left": {
+        "id": "n_perx_regina_maria",
+        "label": "Regina Maria"
+       },
+       "right": {
+        "id": "n_v4per_biografie",
+        "label": "biografie"
+       },
+       "results": [
+        {
+         "id": "n_perx_memorii_regina_maria",
+         "label": "Povestea vieții mele"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_perx_memorii_regina_maria",
+        "label": "Povestea vieții mele"
+       },
+       "right": {
+        "id": "n_perx_regina_maria",
+        "label": "Regina Maria"
+       },
+       "results": [
+        {
+         "id": "n_v2per_casa_regala",
+         "label": "Casa regală"
+        }
+       ],
+       "minimum_edge_strength": 0.83
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": false
+   }
+  },
+  {
+   "id": "al_societate_076",
+   "review_binding": "sha256:704801995210b41b479201069b0e18102bc25a73a8a84ee11f5094368eb2a35a",
+   "record_sha256": "d3dff309b9ef89f3691f79c80f09f897b1121ea61d14311a86d4037aa87a3450",
+   "source_record": {
+    "difficulty": "usor",
+    "seeds": [
+     "n_vot",
+     "n_v4soc_copil",
+     "n_camera_deputatilor",
+     "n_recensamant",
+     "n_v3soc_lege",
+     "n_iccj",
+     "n_universitatea_bucuresti"
+    ],
+    "target": "n_uniunea_europeana",
+    "target_depth": 3,
+    "id": "al_societate_076",
+    "category": "societate",
+    "source": "ai",
+    "status": "pending"
+   },
+   "category": "societate",
+   "difficulty": "usor",
+   "seeds": [
+    {
+     "id": "n_vot",
+     "label": "Drept de vot"
+    },
+    {
+     "id": "n_v4soc_copil",
+     "label": "copil"
+    },
+    {
+     "id": "n_camera_deputatilor",
+     "label": "Camera Deputaților"
+    },
+    {
+     "id": "n_recensamant",
+     "label": "Recensământul populației"
+    },
+    {
+     "id": "n_v3soc_lege",
+     "label": "Lege"
+    },
+    {
+     "id": "n_iccj",
+     "label": "Înalta Curte de Casație și Justiție"
+    },
+    {
+     "id": "n_universitatea_bucuresti",
+     "label": "Universitatea din București"
+    }
+   ],
+   "target": {
+    "id": "n_uniunea_europeana",
+    "label": "Uniunea Europeană"
+   },
+   "declared_target_depth": 3,
+   "exact_action_par": 3,
+   "projection_par": 3,
+   "projection_sha256": "6db42d5ada9d1ec3881b502f5f73ff45e5f2a3ff9997beb92ab752651c280dc0",
+   "projected_opening_pair_count": 3,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_iccj",
+      "label": "Înalta Curte de Casație și Justiție"
+     },
+     "right": {
+      "id": "n_recensamant",
+      "label": "Recensământul populației"
+     },
+     "results": [
+      {
+       "id": "n_romania_stat",
+       "label": "România"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_recensamant",
+      "label": "Recensământul populației"
+     },
+     "right": {
+      "id": "n_v3soc_lege",
+      "label": "Lege"
+     },
+     "results": [
+      {
+       "id": "n_v2soc_stat",
+       "label": "Stat"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v3soc_lege",
+      "label": "Lege"
+     },
+     "right": {
+      "id": "n_vot",
+      "label": "Drept de vot"
+     },
+     "results": [
+      {
+       "id": "n_constitutia",
+       "label": "Constituția României"
+      }
+     ]
+    }
+   ],
+   "route_count": 4,
+   "recipe_pair_count": 8,
+   "projected_concept_count": 11,
+   "max_results_per_pair": 2,
+   "routes": [
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.6,
+     "mean_edge_strength": 0.79,
+     "steps": [
+      {
+       "left": {
+        "id": "n_recensamant",
+        "label": "Recensământul populației"
+       },
+       "right": {
+        "id": "n_v3soc_lege",
+        "label": "Lege"
+       },
+       "results": [
+        {
+         "id": "n_v2soc_stat",
+         "label": "Stat"
+        }
+       ],
+       "minimum_edge_strength": 0.76
+      },
+      {
+       "left": {
+        "id": "n_iccj",
+        "label": "Înalta Curte de Casație și Justiție"
+       },
+       "right": {
+        "id": "n_v2soc_stat",
+        "label": "Stat"
+       },
+       "results": [
+        {
+         "id": "n_romania_stat",
+         "label": "România"
+        }
+       ],
+       "minimum_edge_strength": 0.6
+      },
+      {
+       "left": {
+        "id": "n_romania_stat",
+        "label": "România"
+       },
+       "right": {
+        "id": "n_v2soc_stat",
+        "label": "Stat"
+       },
+       "results": [
+        {
+         "id": "n_uniunea_europeana",
+         "label": "Uniunea Europeană"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.55,
+     "mean_edge_strength": 0.775,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v3soc_lege",
+        "label": "Lege"
+       },
+       "right": {
+        "id": "n_vot",
+        "label": "Drept de vot"
+       },
+       "results": [
+        {
+         "id": "n_constitutia",
+         "label": "Constituția României"
+        }
+       ],
+       "minimum_edge_strength": 0.7
+      },
+      {
+       "left": {
+        "id": "n_constitutia",
+        "label": "Constituția României"
+       },
+       "right": {
+        "id": "n_recensamant",
+        "label": "Recensământul populației"
+       },
+       "results": [
+        {
+         "id": "n_romania_stat",
+         "label": "România"
+        },
+        {
+         "id": "n_v2soc_stat",
+         "label": "Stat"
+        }
+       ],
+       "minimum_edge_strength": 0.55
+      },
+      {
+       "left": {
+        "id": "n_romania_stat",
+        "label": "România"
+       },
+       "right": {
+        "id": "n_v2soc_stat",
+        "label": "Stat"
+       },
+       "results": [
+        {
+         "id": "n_uniunea_europeana",
+         "label": "Uniunea Europeană"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.55,
+     "mean_edge_strength": 0.755,
+     "steps": [
+      {
+       "left": {
+        "id": "n_iccj",
+        "label": "Înalta Curte de Casație și Justiție"
+       },
+       "right": {
+        "id": "n_recensamant",
+        "label": "Recensământul populației"
+       },
+       "results": [
+        {
+         "id": "n_romania_stat",
+         "label": "România"
+        }
+       ],
+       "minimum_edge_strength": 0.55
+      },
+      {
+       "left": {
+        "id": "n_romania_stat",
+        "label": "România"
+       },
+       "right": {
+        "id": "n_v3soc_lege",
+        "label": "Lege"
+       },
+       "results": [
+        {
+         "id": "n_v2soc_stat",
+         "label": "Stat"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_romania_stat",
+        "label": "România"
+       },
+       "right": {
+        "id": "n_v2soc_stat",
+        "label": "Stat"
+       },
+       "results": [
+        {
+         "id": "n_uniunea_europeana",
+         "label": "Uniunea Europeană"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.55,
+     "mean_edge_strength": 0.7383,
+     "steps": [
+      {
+       "left": {
+        "id": "n_iccj",
+        "label": "Înalta Curte de Casație și Justiție"
+       },
+       "right": {
+        "id": "n_recensamant",
+        "label": "Recensământul populației"
+       },
+       "results": [
+        {
+         "id": "n_romania_stat",
+         "label": "România"
+        }
+       ],
+       "minimum_edge_strength": 0.55
+      },
+      {
+       "left": {
+        "id": "n_recensamant",
+        "label": "Recensământul populației"
+       },
+       "right": {
+        "id": "n_romania_stat",
+        "label": "România"
+       },
+       "results": [
+        {
+         "id": "n_v2soc_stat",
+         "label": "Stat"
+        }
+       ],
+       "minimum_edge_strength": 0.76
+      },
+      {
+       "left": {
+        "id": "n_romania_stat",
+        "label": "România"
+       },
+       "right": {
+        "id": "n_v2soc_stat",
+        "label": "Stat"
+       },
+       "results": [
+        {
+         "id": "n_uniunea_europeana",
+         "label": "Uniunea Europeană"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": true
+   }
+  },
+  {
+   "id": "al_viata_de_roman_092",
+   "review_binding": "sha256:25ff93d98ce627b8f296878a8f069c72e078d419bd30fac680c4273167a2e6fc",
+   "record_sha256": "75d003bf6589b4eee9c558329caf131ee93111da1eee2337052a65091fc42d15",
+   "source_record": {
+    "difficulty": "usor",
+    "seeds": [
+     "n_vdr_taiatul_porcului",
+     "n_vdr_ulita_satului",
+     "n_vdr_plugusorul",
+     "n_vdr_tuica_de_casa",
+     "n_v2via_casa_parinteasca",
+     "n_vdr_papuci_de_casa"
+    ],
+    "target": "n_vdr_vara_la_bunici",
+    "target_depth": 2,
+    "id": "al_viata_de_roman_092",
+    "category": "viata_de_roman",
+    "source": "ai",
+    "status": "pending"
+   },
+   "category": "viata_de_roman",
+   "difficulty": "usor",
+   "seeds": [
+    {
+     "id": "n_vdr_taiatul_porcului",
+     "label": "Tăiatul porcului de Ignat"
+    },
+    {
+     "id": "n_vdr_ulita_satului",
+     "label": "Ulița satului"
+    },
+    {
+     "id": "n_vdr_plugusorul",
+     "label": "Plugușorul"
+    },
+    {
+     "id": "n_vdr_tuica_de_casa",
+     "label": "Țuica de casă"
+    },
+    {
+     "id": "n_v2via_casa_parinteasca",
+     "label": "Casa părintească"
+    },
+    {
+     "id": "n_vdr_papuci_de_casa",
+     "label": "Papucii de casă"
+    }
+   ],
+   "target": {
+    "id": "n_vdr_vara_la_bunici",
+    "label": "Vara la bunici"
+   },
+   "declared_target_depth": 2,
+   "exact_action_par": 2,
+   "projection_par": 2,
+   "projection_sha256": "b61d3158ff70014fb0f807229992a1e1e4a230906deb54a399816103c9ab723f",
+   "projected_opening_pair_count": 1,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_vdr_taiatul_porcului",
+      "label": "Tăiatul porcului de Ignat"
+     },
+     "right": {
+      "id": "n_vdr_tuica_de_casa",
+      "label": "Țuica de casă"
+     },
+     "results": [
+      {
+       "id": "n_v2via_gospodarie_rurala",
+       "label": "Gospodărie rurală"
+      },
+      {
+       "id": "n_vdr_gospodaria_bunicilor",
+       "label": "Gospodăria bunicilor"
+      }
+     ]
+    }
+   ],
+   "route_count": 4,
+   "recipe_pair_count": 6,
+   "projected_concept_count": 10,
+   "max_results_per_pair": 2,
+   "routes": [
+    {
+     "actions": 2,
+     "minimum_edge_strength": 0.76,
+     "mean_edge_strength": 0.78,
+     "steps": [
+      {
+       "left": {
+        "id": "n_vdr_taiatul_porcului",
+        "label": "Tăiatul porcului de Ignat"
+       },
+       "right": {
+        "id": "n_vdr_tuica_de_casa",
+        "label": "Țuica de casă"
+       },
+       "results": [
+        {
+         "id": "n_v2via_gospodarie_rurala",
+         "label": "Gospodărie rurală"
+        }
+       ],
+       "minimum_edge_strength": 0.76
+      },
+      {
+       "left": {
+        "id": "n_v2via_gospodarie_rurala",
+        "label": "Gospodărie rurală"
+       },
+       "right": {
+        "id": "n_vdr_ulita_satului",
+        "label": "Ulița satului"
+       },
+       "results": [
+        {
+         "id": "n_vdr_vara_la_bunici",
+         "label": "Vara la bunici"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      }
+     ]
+    },
+    {
+     "actions": 2,
+     "minimum_edge_strength": 0.72,
+     "mean_edge_strength": 0.7867,
+     "steps": [
+      {
+       "left": {
+        "id": "n_vdr_taiatul_porcului",
+        "label": "Tăiatul porcului de Ignat"
+       },
+       "right": {
+        "id": "n_vdr_tuica_de_casa",
+        "label": "Țuica de casă"
+       },
+       "results": [
+        {
+         "id": "n_v2via_gospodarie_rurala",
+         "label": "Gospodărie rurală"
+        },
+        {
+         "id": "n_vdr_gospodaria_bunicilor",
+         "label": "Gospodăria bunicilor"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      },
+      {
+       "left": {
+        "id": "n_v2via_gospodarie_rurala",
+        "label": "Gospodărie rurală"
+       },
+       "right": {
+        "id": "n_vdr_gospodaria_bunicilor",
+        "label": "Gospodăria bunicilor"
+       },
+       "results": [
+        {
+         "id": "n_vdr_vara_la_bunici",
+         "label": "Vara la bunici"
+        }
+       ],
+       "minimum_edge_strength": 0.8
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.72,
+     "mean_edge_strength": 0.78,
+     "steps": [
+      {
+       "left": {
+        "id": "n_vdr_taiatul_porcului",
+        "label": "Tăiatul porcului de Ignat"
+       },
+       "right": {
+        "id": "n_vdr_tuica_de_casa",
+        "label": "Țuica de casă"
+       },
+       "results": [
+        {
+         "id": "n_vdr_gospodaria_bunicilor",
+         "label": "Gospodăria bunicilor"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      },
+      {
+       "left": {
+        "id": "n_v2via_casa_parinteasca",
+        "label": "Casa părintească"
+       },
+       "right": {
+        "id": "n_vdr_gospodaria_bunicilor",
+        "label": "Gospodăria bunicilor"
+       },
+       "results": [
+        {
+         "id": "n_vdr_borcane_zacusca",
+         "label": "Borcanele de zacuscă"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      },
+      {
+       "left": {
+        "id": "n_vdr_borcane_zacusca",
+        "label": "Borcanele de zacuscă"
+       },
+       "right": {
+        "id": "n_vdr_gospodaria_bunicilor",
+        "label": "Gospodăria bunicilor"
+       },
+       "results": [
+        {
+         "id": "n_vdr_vara_la_bunici",
+         "label": "Vara la bunici"
+        }
+       ],
+       "minimum_edge_strength": 0.74
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.72,
+     "mean_edge_strength": 0.7675,
+     "steps": [
+      {
+       "left": {
+        "id": "n_vdr_taiatul_porcului",
+        "label": "Tăiatul porcului de Ignat"
+       },
+       "right": {
+        "id": "n_vdr_tuica_de_casa",
+        "label": "Țuica de casă"
+       },
+       "results": [
+        {
+         "id": "n_v2via_gospodarie_rurala",
+         "label": "Gospodărie rurală"
+        },
+        {
+         "id": "n_vdr_gospodaria_bunicilor",
+         "label": "Gospodăria bunicilor"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      },
+      {
+       "left": {
+        "id": "n_v2via_casa_parinteasca",
+        "label": "Casa părintească"
+       },
+       "right": {
+        "id": "n_vdr_gospodaria_bunicilor",
+        "label": "Gospodăria bunicilor"
+       },
+       "results": [
+        {
+         "id": "n_vdr_borcane_zacusca",
+         "label": "Borcanele de zacuscă"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      },
+      {
+       "left": {
+        "id": "n_v2via_gospodarie_rurala",
+        "label": "Gospodărie rurală"
+       },
+       "right": {
+        "id": "n_vdr_borcane_zacusca",
+        "label": "Borcanele de zacuscă"
+       },
+       "results": [
+        {
+         "id": "n_vdr_vara_la_bunici",
+         "label": "Vara la bunici"
+        }
+       ],
+       "minimum_edge_strength": 0.74
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": false
+   }
+  },
+  {
+   "id": "al_viata_de_roman_094",
+   "review_binding": "sha256:d8e508d7689f34e2166c84129c5ac29dcb093ce5a2add841f4fc82489caf80d0",
+   "record_sha256": "4da5240ea0092ca288ff9ab75ff9062e27768c2578f8b1f1c91067c2e85641e4",
+   "source_record": {
+    "difficulty": "normal",
+    "seeds": [
+     "n_vdr_biletel_in_parbriz",
+     "n_v3via_coada",
+     "n_vdr_termopane",
+     "n_vdr_bloc",
+     "n_v2via_pachet_de_acasa"
+    ],
+    "target": "n_v3via_facturi",
+    "target_depth": 3,
+    "id": "al_viata_de_roman_094",
+    "category": "viata_de_roman",
+    "source": "ai",
+    "status": "pending"
+   },
+   "category": "viata_de_roman",
+   "difficulty": "normal",
+   "seeds": [
+    {
+     "id": "n_vdr_biletel_in_parbriz",
+     "label": "Bilețelul în parbriz"
+    },
+    {
+     "id": "n_v3via_coada",
+     "label": "Coada"
+    },
+    {
+     "id": "n_vdr_termopane",
+     "label": "Termopanele"
+    },
+    {
+     "id": "n_vdr_bloc",
+     "label": "Blocul"
+    },
+    {
+     "id": "n_v2via_pachet_de_acasa",
+     "label": "Pachet de acasă"
+    }
+   ],
+   "target": {
+    "id": "n_v3via_facturi",
+    "label": "Facturi"
+   },
+   "declared_target_depth": 3,
+   "exact_action_par": 3,
+   "projection_par": 3,
+   "projection_sha256": "28208baf1e2d402244014aafc0a7647f28136c7ef30976de77c6349376d2b7f0",
+   "projected_opening_pair_count": 1,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_vdr_bloc",
+      "label": "Blocul"
+     },
+     "right": {
+      "id": "n_vdr_termopane",
+      "label": "Termopanele"
+     },
+     "results": [
+      {
+       "id": "n_vdr_viata_la_bloc",
+       "label": "Viața la bloc"
+      }
+     ]
+    }
+   ],
+   "route_count": 4,
+   "recipe_pair_count": 7,
+   "projected_concept_count": 10,
+   "max_results_per_pair": 2,
+   "routes": [
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.68,
+     "mean_edge_strength": 0.8183,
+     "steps": [
+      {
+       "left": {
+        "id": "n_vdr_bloc",
+        "label": "Blocul"
+       },
+       "right": {
+        "id": "n_vdr_termopane",
+        "label": "Termopanele"
+       },
+       "results": [
+        {
+         "id": "n_vdr_viata_la_bloc",
+         "label": "Viața la bloc"
+        }
+       ],
+       "minimum_edge_strength": 0.68
+      },
+      {
+       "left": {
+        "id": "n_vdr_bloc",
+        "label": "Blocul"
+       },
+       "right": {
+        "id": "n_vdr_viata_la_bloc",
+        "label": "Viața la bloc"
+       },
+       "results": [
+        {
+         "id": "n_v3via_intretinerea",
+         "label": "Întreținerea"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_v3via_intretinerea",
+        "label": "Întreținerea"
+       },
+       "right": {
+        "id": "n_vdr_viata_la_bloc",
+        "label": "Viața la bloc"
+       },
+       "results": [
+        {
+         "id": "n_v3via_facturi",
+         "label": "Facturi"
+        }
+       ],
+       "minimum_edge_strength": 0.79
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.68,
+     "mean_edge_strength": 0.815,
+     "steps": [
+      {
+       "left": {
+        "id": "n_vdr_bloc",
+        "label": "Blocul"
+       },
+       "right": {
+        "id": "n_vdr_termopane",
+        "label": "Termopanele"
+       },
+       "results": [
+        {
+         "id": "n_vdr_viata_la_bloc",
+         "label": "Viața la bloc"
+        }
+       ],
+       "minimum_edge_strength": 0.68
+      },
+      {
+       "left": {
+        "id": "n_v3via_coada",
+        "label": "Coada"
+       },
+       "right": {
+        "id": "n_vdr_viata_la_bloc",
+        "label": "Viața la bloc"
+       },
+       "results": [
+        {
+         "id": "n_vdr_viata_de_roman",
+         "label": "Viața în România"
+        }
+       ],
+       "minimum_edge_strength": 0.82
+      },
+      {
+       "left": {
+        "id": "n_vdr_viata_de_roman",
+        "label": "Viața în România"
+       },
+       "right": {
+        "id": "n_vdr_viata_la_bloc",
+        "label": "Viața la bloc"
+       },
+       "results": [
+        {
+         "id": "n_v3via_facturi",
+         "label": "Facturi"
+        }
+       ],
+       "minimum_edge_strength": 0.79
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.68,
+     "mean_edge_strength": 0.79,
+     "steps": [
+      {
+       "left": {
+        "id": "n_vdr_bloc",
+        "label": "Blocul"
+       },
+       "right": {
+        "id": "n_vdr_termopane",
+        "label": "Termopanele"
+       },
+       "results": [
+        {
+         "id": "n_vdr_viata_la_bloc",
+         "label": "Viața la bloc"
+        }
+       ],
+       "minimum_edge_strength": 0.68
+      },
+      {
+       "left": {
+        "id": "n_vdr_bloc",
+        "label": "Blocul"
+       },
+       "right": {
+        "id": "n_vdr_viata_la_bloc",
+        "label": "Viața la bloc"
+       },
+       "results": [
+        {
+         "id": "n_v3via_intretinerea",
+         "label": "Întreținerea"
+        },
+        {
+         "id": "n_vdr_apometre",
+         "label": "Apometrele"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      },
+      {
+       "left": {
+        "id": "n_v3via_intretinerea",
+        "label": "Întreținerea"
+       },
+       "right": {
+        "id": "n_vdr_apometre",
+        "label": "Apometrele"
+       },
+       "results": [
+        {
+         "id": "n_v3via_facturi",
+         "label": "Facturi"
+        }
+       ],
+       "minimum_edge_strength": 0.74
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.68,
+     "mean_edge_strength": 0.7583,
+     "steps": [
+      {
+       "left": {
+        "id": "n_vdr_bloc",
+        "label": "Blocul"
+       },
+       "right": {
+        "id": "n_vdr_termopane",
+        "label": "Termopanele"
+       },
+       "results": [
+        {
+         "id": "n_vdr_viata_la_bloc",
+         "label": "Viața la bloc"
+        }
+       ],
+       "minimum_edge_strength": 0.68
+      },
+      {
+       "left": {
+        "id": "n_vdr_bloc",
+        "label": "Blocul"
+       },
+       "right": {
+        "id": "n_vdr_viata_la_bloc",
+        "label": "Viața la bloc"
+       },
+       "results": [
+        {
+         "id": "n_vdr_apometre",
+         "label": "Apometrele"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      },
+      {
+       "left": {
+        "id": "n_vdr_apometre",
+        "label": "Apometrele"
+       },
+       "right": {
+        "id": "n_vdr_viata_la_bloc",
+        "label": "Viața la bloc"
+       },
+       "results": [
+        {
+         "id": "n_v3via_facturi",
+         "label": "Facturi"
+        }
+       ],
+       "minimum_edge_strength": 0.74
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": false
+   }
+  },
+  {
+   "id": "al_viata_de_roman_095",
+   "review_binding": "sha256:9a7c394a1656f2510c1ac33c3d88fad327d76d94a7a2ed1246dd8e96c45b6b6d",
+   "record_sha256": "c35f4499995a264c152d27ba69ff71d89ab243aa97bc005f99e05a11437834c9",
+   "source_record": {
+    "difficulty": "greu",
+    "seeds": [
+     "n_vdr_guma_turbo",
+     "n_vdr_calorifer_rece",
+     "n_v3via_naveta",
+     "n_vdr_cheia_de_la_gat",
+     "n_v3via_piata"
+    ],
+    "target": "n_vdr_gospodaria_bunicilor",
+    "target_depth": 6,
+    "id": "al_viata_de_roman_095",
+    "category": "viata_de_roman",
+    "source": "ai",
+    "status": "pending"
+   },
+   "category": "viata_de_roman",
+   "difficulty": "greu",
+   "seeds": [
+    {
+     "id": "n_vdr_guma_turbo",
+     "label": "Guma Turbo"
+    },
+    {
+     "id": "n_vdr_calorifer_rece",
+     "label": "Caloriferul rece"
+    },
+    {
+     "id": "n_v3via_naveta",
+     "label": "Naveta"
+    },
+    {
+     "id": "n_vdr_cheia_de_la_gat",
+     "label": "Cheia de la gât"
+    },
+    {
+     "id": "n_v3via_piata",
+     "label": "Piața"
+    }
+   ],
+   "target": {
+    "id": "n_vdr_gospodaria_bunicilor",
+    "label": "Gospodăria bunicilor"
+   },
+   "declared_target_depth": 6,
+   "exact_action_par": 6,
+   "projection_par": 6,
+   "projection_sha256": "5696d2af1b65f3f4cf9c6ff35734edddde0efa1eaaaadd11074a980722a6e125",
+   "projected_opening_pair_count": 1,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_v3via_naveta",
+      "label": "Naveta"
+     },
+     "right": {
+      "id": "n_v3via_piata",
+      "label": "Piața"
+     },
+     "results": [
+      {
+       "id": "n_vdr_viata_de_roman",
+       "label": "Viața în România"
+      }
+     ]
+    }
+   ],
+   "route_count": 4,
+   "recipe_pair_count": 11,
+   "projected_concept_count": 16,
+   "max_results_per_pair": 2,
+   "routes": [
+    {
+     "actions": 6,
+     "minimum_edge_strength": 0.7,
+     "mean_edge_strength": 0.785,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v3via_naveta",
+        "label": "Naveta"
+       },
+       "right": {
+        "id": "n_v3via_piata",
+        "label": "Piața"
+       },
+       "results": [
+        {
+         "id": "n_vdr_viata_de_roman",
+         "label": "Viața în România"
+        }
+       ],
+       "minimum_edge_strength": 0.74
+      },
+      {
+       "left": {
+        "id": "n_v3via_piata",
+        "label": "Piața"
+       },
+       "right": {
+        "id": "n_vdr_viata_de_roman",
+        "label": "Viața în România"
+       },
+       "results": [
+        {
+         "id": "n_v3via_sacosa",
+         "label": "Sacoșa"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      },
+      {
+       "left": {
+        "id": "n_v3via_piata",
+        "label": "Piața"
+       },
+       "right": {
+        "id": "n_v3via_sacosa",
+        "label": "Sacoșa"
+       },
+       "results": [
+        {
+         "id": "n_vdr_portbagaj_plin",
+         "label": "Portbagajul plin"
+        },
+        {
+         "id": "n_vdr_punga_cu_pungi",
+         "label": "Punga cu pungi"
+        }
+       ],
+       "minimum_edge_strength": 0.7
+      },
+      {
+       "left": {
+        "id": "n_vdr_portbagaj_plin",
+        "label": "Portbagajul plin"
+       },
+       "right": {
+        "id": "n_vdr_punga_cu_pungi",
+        "label": "Punga cu pungi"
+       },
+       "results": [
+        {
+         "id": "n_vdr_borcane_zacusca",
+         "label": "Borcanele de zacuscă"
+        }
+       ],
+       "minimum_edge_strength": 0.7
+      },
+      {
+       "left": {
+        "id": "n_vdr_borcane_zacusca",
+        "label": "Borcanele de zacuscă"
+       },
+       "right": {
+        "id": "n_vdr_viata_de_roman",
+        "label": "Viața în România"
+       },
+       "results": [
+        {
+         "id": "n_vdr_vara_la_bunici",
+         "label": "Vara la bunici"
+        }
+       ],
+       "minimum_edge_strength": 0.74
+      },
+      {
+       "left": {
+        "id": "n_vdr_borcane_zacusca",
+        "label": "Borcanele de zacuscă"
+       },
+       "right": {
+        "id": "n_vdr_vara_la_bunici",
+        "label": "Vara la bunici"
+       },
+       "results": [
+        {
+         "id": "n_vdr_gospodaria_bunicilor",
+         "label": "Gospodăria bunicilor"
+        }
+       ],
+       "minimum_edge_strength": 0.84
+      }
+     ]
+    },
+    {
+     "actions": 6,
+     "minimum_edge_strength": 0.7,
+     "mean_edge_strength": 0.7836,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v3via_naveta",
+        "label": "Naveta"
+       },
+       "right": {
+        "id": "n_v3via_piata",
+        "label": "Piața"
+       },
+       "results": [
+        {
+         "id": "n_vdr_viata_de_roman",
+         "label": "Viața în România"
+        }
+       ],
+       "minimum_edge_strength": 0.74
+      },
+      {
+       "left": {
+        "id": "n_v3via_piata",
+        "label": "Piața"
+       },
+       "right": {
+        "id": "n_vdr_viata_de_roman",
+        "label": "Viața în România"
+       },
+       "results": [
+        {
+         "id": "n_v3via_sacosa",
+         "label": "Sacoșa"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      },
+      {
+       "left": {
+        "id": "n_v3via_piata",
+        "label": "Piața"
+       },
+       "right": {
+        "id": "n_v3via_sacosa",
+        "label": "Sacoșa"
+       },
+       "results": [
+        {
+         "id": "n_vdr_portbagaj_plin",
+         "label": "Portbagajul plin"
+        }
+       ],
+       "minimum_edge_strength": 0.7
+      },
+      {
+       "left": {
+        "id": "n_v3via_sacosa",
+        "label": "Sacoșa"
+       },
+       "right": {
+        "id": "n_vdr_portbagaj_plin",
+        "label": "Portbagajul plin"
+       },
+       "results": [
+        {
+         "id": "n_v2via_pachet_de_acasa",
+         "label": "Pachet de acasă"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      },
+      {
+       "left": {
+        "id": "n_v2via_pachet_de_acasa",
+        "label": "Pachet de acasă"
+       },
+       "right": {
+        "id": "n_vdr_portbagaj_plin",
+        "label": "Portbagajul plin"
+       },
+       "results": [
+        {
+         "id": "n_v2via_rude",
+         "label": "Rude"
+        },
+        {
+         "id": "n_vdr_borcane_zacusca",
+         "label": "Borcanele de zacuscă"
+        }
+       ],
+       "minimum_edge_strength": 0.72
+      },
+      {
+       "left": {
+        "id": "n_v2via_rude",
+        "label": "Rude"
+       },
+       "right": {
+        "id": "n_vdr_borcane_zacusca",
+        "label": "Borcanele de zacuscă"
+       },
+       "results": [
+        {
+         "id": "n_vdr_gospodaria_bunicilor",
+         "label": "Gospodăria bunicilor"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      }
+     ]
+    },
+    {
+     "actions": 6,
+     "minimum_edge_strength": 0.62,
+     "mean_edge_strength": 0.7694,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v3via_naveta",
+        "label": "Naveta"
+       },
+       "right": {
+        "id": "n_v3via_piata",
+        "label": "Piața"
+       },
+       "results": [
+        {
+         "id": "n_vdr_viata_de_roman",
+         "label": "Viața în România"
+        }
+       ],
+       "minimum_edge_strength": 0.74
+      },
+      {
+       "left": {
+        "id": "n_v3via_piata",
+        "label": "Piața"
+       },
+       "right": {
+        "id": "n_vdr_viata_de_roman",
+        "label": "Viața în România"
+       },
+       "results": [
+        {
+         "id": "n_v3via_sacosa",
+         "label": "Sacoșa"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      },
+      {
+       "left": {
+        "id": "n_v3via_piata",
+        "label": "Piața"
+       },
+       "right": {
+        "id": "n_v3via_sacosa",
+        "label": "Sacoșa"
+       },
+       "results": [
+        {
+         "id": "n_vdr_portbagaj_plin",
+         "label": "Portbagajul plin"
+        },
+        {
+         "id": "n_vdr_punga_cu_pungi",
+         "label": "Punga cu pungi"
+        }
+       ],
+       "minimum_edge_strength": 0.7
+      },
+      {
+       "left": {
+        "id": "n_vdr_portbagaj_plin",
+        "label": "Portbagajul plin"
+       },
+       "right": {
+        "id": "n_vdr_punga_cu_pungi",
+        "label": "Punga cu pungi"
+       },
+       "results": [
+        {
+         "id": "n_v2via_pachet_de_acasa",
+         "label": "Pachet de acasă"
+        },
+        {
+         "id": "n_vdr_borcane_zacusca",
+         "label": "Borcanele de zacuscă"
+        }
+       ],
+       "minimum_edge_strength": 0.62
+      },
+      {
+       "left": {
+        "id": "n_v2via_pachet_de_acasa",
+        "label": "Pachet de acasă"
+       },
+       "right": {
+        "id": "n_vdr_portbagaj_plin",
+        "label": "Portbagajul plin"
+       },
+       "results": [
+        {
+         "id": "n_v2via_rude",
+         "label": "Rude"
+        }
+       ],
+       "minimum_edge_strength": 0.76
+      },
+      {
+       "left": {
+        "id": "n_v2via_rude",
+        "label": "Rude"
+       },
+       "right": {
+        "id": "n_vdr_borcane_zacusca",
+        "label": "Borcanele de zacuscă"
+       },
+       "results": [
+        {
+         "id": "n_vdr_gospodaria_bunicilor",
+         "label": "Gospodăria bunicilor"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      }
+     ]
+    },
+    {
+     "actions": 6,
+     "minimum_edge_strength": 0.55,
+     "mean_edge_strength": 0.7488,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v3via_naveta",
+        "label": "Naveta"
+       },
+       "right": {
+        "id": "n_v3via_piata",
+        "label": "Piața"
+       },
+       "results": [
+        {
+         "id": "n_vdr_viata_de_roman",
+         "label": "Viața în România"
+        }
+       ],
+       "minimum_edge_strength": 0.74
+      },
+      {
+       "left": {
+        "id": "n_v3via_piata",
+        "label": "Piața"
+       },
+       "right": {
+        "id": "n_vdr_viata_de_roman",
+        "label": "Viața în România"
+       },
+       "results": [
+        {
+         "id": "n_v3via_coada",
+         "label": "Coada"
+        },
+        {
+         "id": "n_v3via_sacosa",
+         "label": "Sacoșa"
+        }
+       ],
+       "minimum_edge_strength": 0.55
+      },
+      {
+       "left": {
+        "id": "n_v3via_piata",
+        "label": "Piața"
+       },
+       "right": {
+        "id": "n_v3via_sacosa",
+        "label": "Sacoșa"
+       },
+       "results": [
+        {
+         "id": "n_vdr_portbagaj_plin",
+         "label": "Portbagajul plin"
+        },
+        {
+         "id": "n_vdr_punga_cu_pungi",
+         "label": "Punga cu pungi"
+        }
+       ],
+       "minimum_edge_strength": 0.7
+      },
+      {
+       "left": {
+        "id": "n_vdr_portbagaj_plin",
+        "label": "Portbagajul plin"
+       },
+       "right": {
+        "id": "n_vdr_punga_cu_pungi",
+        "label": "Punga cu pungi"
+       },
+       "results": [
+        {
+         "id": "n_vdr_borcane_zacusca",
+         "label": "Borcanele de zacuscă"
+        }
+       ],
+       "minimum_edge_strength": 0.7
+      },
+      {
+       "left": {
+        "id": "n_v3via_coada",
+        "label": "Coada"
+       },
+       "right": {
+        "id": "n_vdr_viata_de_roman",
+        "label": "Viața în România"
+       },
+       "results": [
+        {
+         "id": "n_v3via_butelie",
+         "label": "Butelia"
+        }
+       ],
+       "minimum_edge_strength": 0.65
+      },
+      {
+       "left": {
+        "id": "n_v3via_butelie",
+        "label": "Butelia"
+       },
+       "right": {
+        "id": "n_vdr_borcane_zacusca",
+        "label": "Borcanele de zacuscă"
+       },
+       "results": [
+        {
+         "id": "n_vdr_gospodaria_bunicilor",
+         "label": "Gospodăria bunicilor"
+        }
+       ],
+       "minimum_edge_strength": 0.73
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": false
+   }
+  },
+  {
+   "id": "al_viata_de_roman_098",
+   "review_binding": "sha256:a81f96f093eedfb482692bab1a0d81a773765d5928044d5d6ded71d6b69a2d8c",
+   "record_sha256": "eb95fff367dc14b119cf21772e83ce587d07b2ff7f917756b1229e2e2df801e0",
+   "source_record": {
+    "difficulty": "normal",
+    "seeds": [
+     "n_v23via_elasticul",
+     "n_v23via_tara_tara_vrem_ostasi",
+     "n_v23via_ratele_si_vinatorii",
+     "n_vdr_sotron",
+     "n_v23via_nu_te_supara_frate",
+     "n_v23via_piticot"
+    ],
+    "target": "n_v23via_telefonul_fara_fir",
+    "target_depth": 3,
+    "id": "al_viata_de_roman_098",
+    "category": "viata_de_roman",
+    "source": "ai",
+    "status": "pending"
+   },
+   "category": "viata_de_roman",
+   "difficulty": "normal",
+   "seeds": [
+    {
+     "id": "n_v23via_elasticul",
+     "label": "Elasticul"
+    },
+    {
+     "id": "n_v23via_tara_tara_vrem_ostasi",
+     "label": "Țară, țară, vrem ostași!"
+    },
+    {
+     "id": "n_v23via_ratele_si_vinatorii",
+     "label": "Rațele și vânătorii"
+    },
+    {
+     "id": "n_vdr_sotron",
+     "label": "Șotronul"
+    },
+    {
+     "id": "n_v23via_nu_te_supara_frate",
+     "label": "Nu te supăra, frate!"
+    },
+    {
+     "id": "n_v23via_piticot",
+     "label": "Piticot"
+    }
+   ],
+   "target": {
+    "id": "n_v23via_telefonul_fara_fir",
+    "label": "Telefonul fără fir"
+   },
+   "declared_target_depth": 3,
+   "exact_action_par": 3,
+   "projection_par": 3,
+   "projection_sha256": "06c85a5101ee2fb53b2f54d813be7fd185fc3107edbc7ac816cc281baefda4c5",
+   "projected_opening_pair_count": 2,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_v23via_elasticul",
+      "label": "Elasticul"
+     },
+     "right": {
+      "id": "n_v23via_ratele_si_vinatorii",
+      "label": "Rațele și vânătorii"
+     },
+     "results": [
+      {
+       "id": "n_v2via_jocuri_copilarie",
+       "label": "Jocuri de copilărie"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v23via_nu_te_supara_frate",
+      "label": "Nu te supăra, frate!"
+     },
+     "right": {
+      "id": "n_v23via_piticot",
+      "label": "Piticot"
+     },
+     "results": [
+      {
+       "id": "n_vdr_copilaria_anilor_90",
+       "label": "Copilăria anilor 90"
+      }
+     ]
+    }
+   ],
+   "route_count": 3,
+   "recipe_pair_count": 5,
+   "projected_concept_count": 9,
+   "max_results_per_pair": 1,
+   "routes": [
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.78,
+     "mean_edge_strength": 0.8333,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v23via_nu_te_supara_frate",
+        "label": "Nu te supăra, frate!"
+       },
+       "right": {
+        "id": "n_v23via_piticot",
+        "label": "Piticot"
+       },
+       "results": [
+        {
+         "id": "n_vdr_copilaria_anilor_90",
+         "label": "Copilăria anilor 90"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      },
+      {
+       "left": {
+        "id": "n_vdr_copilaria_anilor_90",
+        "label": "Copilăria anilor 90"
+       },
+       "right": {
+        "id": "n_vdr_sotron",
+        "label": "Șotronul"
+       },
+       "results": [
+        {
+         "id": "n_v2via_jocuri_copilarie",
+         "label": "Jocuri de copilărie"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_v2via_jocuri_copilarie",
+        "label": "Jocuri de copilărie"
+       },
+       "right": {
+        "id": "n_vdr_copilaria_anilor_90",
+        "label": "Copilăria anilor 90"
+       },
+       "results": [
+        {
+         "id": "n_v23via_telefonul_fara_fir",
+         "label": "Telefonul fără fir"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.78,
+     "mean_edge_strength": 0.83,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v23via_elasticul",
+        "label": "Elasticul"
+       },
+       "right": {
+        "id": "n_v23via_ratele_si_vinatorii",
+        "label": "Rațele și vânătorii"
+       },
+       "results": [
+        {
+         "id": "n_v2via_jocuri_copilarie",
+         "label": "Jocuri de copilărie"
+        }
+       ],
+       "minimum_edge_strength": 0.88
+      },
+      {
+       "left": {
+        "id": "n_v23via_nu_te_supara_frate",
+        "label": "Nu te supăra, frate!"
+       },
+       "right": {
+        "id": "n_v23via_piticot",
+        "label": "Piticot"
+       },
+       "results": [
+        {
+         "id": "n_vdr_copilaria_anilor_90",
+         "label": "Copilăria anilor 90"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      },
+      {
+       "left": {
+        "id": "n_v2via_jocuri_copilarie",
+        "label": "Jocuri de copilărie"
+       },
+       "right": {
+        "id": "n_vdr_copilaria_anilor_90",
+        "label": "Copilăria anilor 90"
+       },
+       "results": [
+        {
+         "id": "n_v23via_telefonul_fara_fir",
+         "label": "Telefonul fără fir"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.76,
+     "mean_edge_strength": 0.8367,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v23via_elasticul",
+        "label": "Elasticul"
+       },
+       "right": {
+        "id": "n_v23via_ratele_si_vinatorii",
+        "label": "Rațele și vânătorii"
+       },
+       "results": [
+        {
+         "id": "n_v2via_jocuri_copilarie",
+         "label": "Jocuri de copilărie"
+        }
+       ],
+       "minimum_edge_strength": 0.88
+      },
+      {
+       "left": {
+        "id": "n_v2via_jocuri_copilarie",
+        "label": "Jocuri de copilărie"
+       },
+       "right": {
+        "id": "n_vdr_sotron",
+        "label": "Șotronul"
+       },
+       "results": [
+        {
+         "id": "n_vdr_copilaria_anilor_90",
+         "label": "Copilăria anilor 90"
+        }
+       ],
+       "minimum_edge_strength": 0.76
+      },
+      {
+       "left": {
+        "id": "n_v2via_jocuri_copilarie",
+        "label": "Jocuri de copilărie"
+       },
+       "right": {
+        "id": "n_vdr_copilaria_anilor_90",
+        "label": "Copilăria anilor 90"
+       },
+       "results": [
+        {
+         "id": "n_v23via_telefonul_fara_fir",
+         "label": "Telefonul fără fir"
+        }
+       ],
+       "minimum_edge_strength": 0.78
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": true
+   }
+  },
+  {
+   "id": "al_viata_de_roman_099",
+   "review_binding": "sha256:8f5d866edb7e4494aa164ad58b81d8fe11dfb9e3a860b6b469b41508c67977c2",
+   "record_sha256": "ed4e392f6d86769bc6a6822cc88d09a80260284eca2e4fb94f855b60c005ca9f",
+   "source_record": {
+    "id": "al_viata_de_roman_099",
+    "category": "viata_de_roman",
+    "difficulty": "usor",
+    "source": "ai",
+    "status": "pending",
+    "seeds": [
+     "n_v24_action_routine_a_dormi",
+     "n_v24_action_routine_a_invata",
+     "n_v24_home_rooms_camera",
+     "n_v24_school_classroom_banca_scolara",
+     "n_v24_school_writing_caiet",
+     "n_v24_school_writing_creion",
+     "n_v4via_usa"
+    ],
+    "target": "n_v24_home_bed_perna",
+    "target_depth": 2
+   },
+   "category": "viata_de_roman",
+   "difficulty": "usor",
+   "seeds": [
+    {
+     "id": "n_v24_action_routine_a_dormi",
+     "label": "A dormi"
+    },
+    {
+     "id": "n_v24_action_routine_a_invata",
+     "label": "A învăța"
+    },
+    {
+     "id": "n_v24_home_rooms_camera",
+     "label": "Cameră"
+    },
+    {
+     "id": "n_v24_school_classroom_banca_scolara",
+     "label": "Bancă școlară"
+    },
+    {
+     "id": "n_v24_school_writing_caiet",
+     "label": "Caiet"
+    },
+    {
+     "id": "n_v24_school_writing_creion",
+     "label": "Creion"
+    },
+    {
+     "id": "n_v4via_usa",
+     "label": "ușă"
+    }
+   ],
+   "target": {
+    "id": "n_v24_home_bed_perna",
+    "label": "Pernă"
+   },
+   "declared_target_depth": 2,
+   "exact_action_par": 2,
+   "projection_par": 2,
+   "projection_sha256": "ec493627df723d077c617318f094bd24697c5ddd19e02b9e5fe96db15e938746",
+   "projected_opening_pair_count": 3,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_v24_action_routine_a_dormi",
+      "label": "A dormi"
+     },
+     "right": {
+      "id": "n_v24_home_rooms_camera",
+      "label": "Cameră"
+     },
+     "results": [
+      {
+       "id": "n_v24_home_rooms_dormitor",
+       "label": "Dormitor"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v24_action_routine_a_dormi",
+      "label": "A dormi"
+     },
+     "right": {
+      "id": "n_v4via_usa",
+      "label": "ușă"
+     },
+     "results": [
+      {
+       "id": "n_v24_home_rooms_dormitor",
+       "label": "Dormitor"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v24_home_rooms_camera",
+      "label": "Cameră"
+     },
+     "right": {
+      "id": "n_v4via_usa",
+      "label": "ușă"
+     },
+     "results": [
+      {
+       "id": "n_v24_home_rooms_dormitor",
+       "label": "Dormitor"
+      }
+     ]
+    }
+   ],
+   "route_count": 3,
+   "recipe_pair_count": 4,
+   "projected_concept_count": 9,
+   "max_results_per_pair": 1,
+   "routes": [
+    {
+     "actions": 2,
+     "minimum_edge_strength": 0.86,
+     "mean_edge_strength": 0.91,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v24_action_routine_a_dormi",
+        "label": "A dormi"
+       },
+       "right": {
+        "id": "n_v24_home_rooms_camera",
+        "label": "Cameră"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_rooms_dormitor",
+         "label": "Dormitor"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      },
+      {
+       "left": {
+        "id": "n_v24_home_rooms_dormitor",
+        "label": "Dormitor"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_bed_perna",
+         "label": "Pernă"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      }
+     ]
+    },
+    {
+     "actions": 2,
+     "minimum_edge_strength": 0.86,
+     "mean_edge_strength": 0.9,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v24_action_routine_a_dormi",
+        "label": "A dormi"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_rooms_dormitor",
+         "label": "Dormitor"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_v24_home_rooms_dormitor",
+        "label": "Dormitor"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_bed_perna",
+         "label": "Pernă"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      }
+     ]
+    },
+    {
+     "actions": 2,
+     "minimum_edge_strength": 0.86,
+     "mean_edge_strength": 0.89,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v24_home_rooms_camera",
+        "label": "Cameră"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_rooms_dormitor",
+         "label": "Dormitor"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_v24_home_rooms_dormitor",
+        "label": "Dormitor"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_bed_perna",
+         "label": "Pernă"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": true
+   }
+  },
+  {
+   "id": "al_viata_de_roman_100",
+   "review_binding": "sha256:ad4ae37e0fb07a8f517b75ae553ea6fd659f047a61988ec314d407eae75c58a8",
+   "record_sha256": "2c5b43a1d9ee064d2bea30035afaa6a537bc0a1f3bb4e042c0b8b86aed4b34c8",
+   "source_record": {
+    "id": "al_viata_de_roman_100",
+    "category": "viata_de_roman",
+    "difficulty": "normal",
+    "source": "ai",
+    "status": "pending",
+    "seeds": [
+     "n_v24_action_routine_a_dormi",
+     "n_v24_action_routine_a_invata",
+     "n_v24_home_rooms_camera",
+     "n_v24_school_classroom_clasa_scolara",
+     "n_v24_school_writing_caiet",
+     "n_v24_school_writing_creion",
+     "n_v4via_usa"
+    ],
+    "target": "n_v24_home_seating_fotoliu",
+    "target_depth": 3
+   },
+   "category": "viata_de_roman",
+   "difficulty": "normal",
+   "seeds": [
+    {
+     "id": "n_v24_action_routine_a_dormi",
+     "label": "A dormi"
+    },
+    {
+     "id": "n_v24_action_routine_a_invata",
+     "label": "A învăța"
+    },
+    {
+     "id": "n_v24_home_rooms_camera",
+     "label": "Cameră"
+    },
+    {
+     "id": "n_v24_school_classroom_clasa_scolara",
+     "label": "Clasă școlară"
+    },
+    {
+     "id": "n_v24_school_writing_caiet",
+     "label": "Caiet"
+    },
+    {
+     "id": "n_v24_school_writing_creion",
+     "label": "Creion"
+    },
+    {
+     "id": "n_v4via_usa",
+     "label": "ușă"
+    }
+   ],
+   "target": {
+    "id": "n_v24_home_seating_fotoliu",
+    "label": "Fotoliu"
+   },
+   "declared_target_depth": 3,
+   "exact_action_par": 3,
+   "projection_par": 3,
+   "projection_sha256": "480ca51c6d5a582f5a48ab5bd6095832328c07374680aa0fc1329a84077a0711",
+   "projected_opening_pair_count": 3,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_v24_action_routine_a_dormi",
+      "label": "A dormi"
+     },
+     "right": {
+      "id": "n_v24_home_rooms_camera",
+      "label": "Cameră"
+     },
+     "results": [
+      {
+       "id": "n_v24_home_rooms_dormitor",
+       "label": "Dormitor"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v24_action_routine_a_dormi",
+      "label": "A dormi"
+     },
+     "right": {
+      "id": "n_v4via_usa",
+      "label": "ușă"
+     },
+     "results": [
+      {
+       "id": "n_v24_home_rooms_dormitor",
+       "label": "Dormitor"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v24_home_rooms_camera",
+      "label": "Cameră"
+     },
+     "right": {
+      "id": "n_v4via_usa",
+      "label": "ușă"
+     },
+     "results": [
+      {
+       "id": "n_v24_home_rooms_dormitor",
+       "label": "Dormitor"
+      }
+     ]
+    }
+   ],
+   "route_count": 3,
+   "recipe_pair_count": 5,
+   "projected_concept_count": 10,
+   "max_results_per_pair": 1,
+   "routes": [
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.86,
+     "mean_edge_strength": 0.9067,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v24_action_routine_a_dormi",
+        "label": "A dormi"
+       },
+       "right": {
+        "id": "n_v24_home_rooms_camera",
+        "label": "Cameră"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_rooms_dormitor",
+         "label": "Dormitor"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      },
+      {
+       "left": {
+        "id": "n_v24_home_rooms_dormitor",
+        "label": "Dormitor"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_bed_perna",
+         "label": "Pernă"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_v24_home_bed_perna",
+        "label": "Pernă"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_seating_fotoliu",
+         "label": "Fotoliu"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.86,
+     "mean_edge_strength": 0.9,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v24_action_routine_a_dormi",
+        "label": "A dormi"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_rooms_dormitor",
+         "label": "Dormitor"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_v24_home_rooms_dormitor",
+        "label": "Dormitor"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_bed_perna",
+         "label": "Pernă"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_v24_home_bed_perna",
+        "label": "Pernă"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_seating_fotoliu",
+         "label": "Fotoliu"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.86,
+     "mean_edge_strength": 0.8933,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v24_home_rooms_camera",
+        "label": "Cameră"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_rooms_dormitor",
+         "label": "Dormitor"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_v24_home_rooms_dormitor",
+        "label": "Dormitor"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_bed_perna",
+         "label": "Pernă"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_v24_home_bed_perna",
+        "label": "Pernă"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_seating_fotoliu",
+         "label": "Fotoliu"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": true
+   }
+  },
+  {
+   "id": "al_viata_de_roman_101",
+   "review_binding": "sha256:fb5c99bfbdf025f39c7743051baebc0d81c8d345441cbc917b9ecd601e36b7b5",
+   "record_sha256": "072b6a880c275e7b9ac85088599f2d628185cbb13979386406ab30a4dbe9568f",
+   "source_record": {
+    "id": "al_viata_de_roman_101",
+    "category": "viata_de_roman",
+    "difficulty": "normal",
+    "source": "ai",
+    "status": "pending",
+    "seeds": [
+     "n_v24_action_routine_a_dormi",
+     "n_v24_action_routine_a_invata",
+     "n_v24_home_bed_pat",
+     "n_v24_school_classroom_banca_scolara",
+     "n_v24_school_writing_caiet",
+     "n_v24_school_writing_creion",
+     "n_v4via_usa"
+    ],
+    "target": "n_v24_home_rooms_sufragerie",
+    "target_depth": 3
+   },
+   "category": "viata_de_roman",
+   "difficulty": "normal",
+   "seeds": [
+    {
+     "id": "n_v24_action_routine_a_dormi",
+     "label": "A dormi"
+    },
+    {
+     "id": "n_v24_action_routine_a_invata",
+     "label": "A învăța"
+    },
+    {
+     "id": "n_v24_home_bed_pat",
+     "label": "Pat"
+    },
+    {
+     "id": "n_v24_school_classroom_banca_scolara",
+     "label": "Bancă școlară"
+    },
+    {
+     "id": "n_v24_school_writing_caiet",
+     "label": "Caiet"
+    },
+    {
+     "id": "n_v24_school_writing_creion",
+     "label": "Creion"
+    },
+    {
+     "id": "n_v4via_usa",
+     "label": "ușă"
+    }
+   ],
+   "target": {
+    "id": "n_v24_home_rooms_sufragerie",
+    "label": "Sufragerie"
+   },
+   "declared_target_depth": 3,
+   "exact_action_par": 3,
+   "projection_par": 3,
+   "projection_sha256": "87cbb6acd9e6cad495142445f3ef01d6659f8dc0797d329087a5cfd9fb130fb2",
+   "projected_opening_pair_count": 3,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_v24_action_routine_a_dormi",
+      "label": "A dormi"
+     },
+     "right": {
+      "id": "n_v24_home_bed_pat",
+      "label": "Pat"
+     },
+     "results": [
+      {
+       "id": "n_v24_home_rooms_dormitor",
+       "label": "Dormitor"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v24_action_routine_a_dormi",
+      "label": "A dormi"
+     },
+     "right": {
+      "id": "n_v4via_usa",
+      "label": "ușă"
+     },
+     "results": [
+      {
+       "id": "n_v24_home_rooms_dormitor",
+       "label": "Dormitor"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v24_home_bed_pat",
+      "label": "Pat"
+     },
+     "right": {
+      "id": "n_v4via_usa",
+      "label": "ușă"
+     },
+     "results": [
+      {
+       "id": "n_v24_home_bed_perna",
+       "label": "Pernă"
+      }
+     ]
+    }
+   ],
+   "route_count": 3,
+   "recipe_pair_count": 6,
+   "projected_concept_count": 11,
+   "max_results_per_pair": 1,
+   "routes": [
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.86,
+     "mean_edge_strength": 0.8933,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v24_home_bed_pat",
+        "label": "Pat"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_bed_perna",
+         "label": "Pernă"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_v24_home_bed_perna",
+        "label": "Pernă"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_seating_fotoliu",
+         "label": "Fotoliu"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_v24_home_seating_fotoliu",
+        "label": "Fotoliu"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_rooms_sufragerie",
+         "label": "Sufragerie"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      }
+     ]
+    },
+    {
+     "actions": 4,
+     "minimum_edge_strength": 0.86,
+     "mean_edge_strength": 0.915,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v24_action_routine_a_dormi",
+        "label": "A dormi"
+       },
+       "right": {
+        "id": "n_v24_home_bed_pat",
+        "label": "Pat"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_rooms_dormitor",
+         "label": "Dormitor"
+        }
+       ],
+       "minimum_edge_strength": 0.94
+      },
+      {
+       "left": {
+        "id": "n_v24_home_bed_pat",
+        "label": "Pat"
+       },
+       "right": {
+        "id": "n_v24_home_rooms_dormitor",
+        "label": "Dormitor"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_bed_perna",
+         "label": "Pernă"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      },
+      {
+       "left": {
+        "id": "n_v24_home_bed_perna",
+        "label": "Pernă"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_seating_fotoliu",
+         "label": "Fotoliu"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_v24_home_seating_fotoliu",
+        "label": "Fotoliu"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_rooms_sufragerie",
+         "label": "Sufragerie"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      }
+     ]
+    },
+    {
+     "actions": 4,
+     "minimum_edge_strength": 0.86,
+     "mean_edge_strength": 0.905,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v24_action_routine_a_dormi",
+        "label": "A dormi"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_rooms_dormitor",
+         "label": "Dormitor"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_v24_home_bed_pat",
+        "label": "Pat"
+       },
+       "right": {
+        "id": "n_v24_home_rooms_dormitor",
+        "label": "Dormitor"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_bed_perna",
+         "label": "Pernă"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      },
+      {
+       "left": {
+        "id": "n_v24_home_bed_perna",
+        "label": "Pernă"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_seating_fotoliu",
+         "label": "Fotoliu"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_v24_home_seating_fotoliu",
+        "label": "Fotoliu"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_rooms_sufragerie",
+         "label": "Sufragerie"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": true
+   }
+  },
+  {
+   "id": "al_viata_de_roman_102",
+   "review_binding": "sha256:6aa2b1d21eb0ba1a890e9394f1d3bc03f57f37de9a26ec38aa8b01d4d23c9aec",
+   "record_sha256": "5ada5ff37cd4c2f4c6036d65dcc7c32102be7e7e89ee84b97f2755b31892affb",
+   "source_record": {
+    "id": "al_viata_de_roman_102",
+    "category": "viata_de_roman",
+    "difficulty": "usor",
+    "source": "ai",
+    "status": "pending",
+    "seeds": [
+     "n_v24_action_routine_a_dormi",
+     "n_v24_action_routine_a_invata",
+     "n_v24_home_bed_pat",
+     "n_v24_school_classroom_clasa_scolara",
+     "n_v24_school_writing_caiet",
+     "n_v24_school_writing_creion",
+     "n_v4via_usa"
+    ],
+    "target": "n_v24_school_assessment_examen",
+    "target_depth": 3
+   },
+   "category": "viata_de_roman",
+   "difficulty": "usor",
+   "seeds": [
+    {
+     "id": "n_v24_action_routine_a_dormi",
+     "label": "A dormi"
+    },
+    {
+     "id": "n_v24_action_routine_a_invata",
+     "label": "A învăța"
+    },
+    {
+     "id": "n_v24_home_bed_pat",
+     "label": "Pat"
+    },
+    {
+     "id": "n_v24_school_classroom_clasa_scolara",
+     "label": "Clasă școlară"
+    },
+    {
+     "id": "n_v24_school_writing_caiet",
+     "label": "Caiet"
+    },
+    {
+     "id": "n_v24_school_writing_creion",
+     "label": "Creion"
+    },
+    {
+     "id": "n_v4via_usa",
+     "label": "ușă"
+    }
+   ],
+   "target": {
+    "id": "n_v24_school_assessment_examen",
+    "label": "Examen"
+   },
+   "declared_target_depth": 3,
+   "exact_action_par": 3,
+   "projection_par": 3,
+   "projection_sha256": "71a0f90d81e05254bf14170f53e53c4c968dc2132635c36ef8f56e861f2a3e26",
+   "projected_opening_pair_count": 3,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_v24_action_routine_a_invata",
+      "label": "A învăța"
+     },
+     "right": {
+      "id": "n_v24_school_writing_caiet",
+      "label": "Caiet"
+     },
+     "results": [
+      {
+       "id": "n_v24_school_assessment_tema_acasa",
+       "label": "Temă pentru acasă"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v24_school_classroom_clasa_scolara",
+      "label": "Clasă școlară"
+     },
+     "right": {
+      "id": "n_v24_school_writing_caiet",
+      "label": "Caiet"
+     },
+     "results": [
+      {
+       "id": "n_v24_school_classroom_lectie",
+       "label": "Lecție"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v24_school_writing_caiet",
+      "label": "Caiet"
+     },
+     "right": {
+      "id": "n_v24_school_writing_creion",
+      "label": "Creion"
+     },
+     "results": [
+      {
+       "id": "n_v24_school_assessment_tema_acasa",
+       "label": "Temă pentru acasă"
+      }
+     ]
+    }
+   ],
+   "route_count": 2,
+   "recipe_pair_count": 4,
+   "projected_concept_count": 10,
+   "max_results_per_pair": 1,
+   "routes": [
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.9,
+     "mean_edge_strength": 0.9267,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v24_action_routine_a_invata",
+        "label": "A învăța"
+       },
+       "right": {
+        "id": "n_v24_school_writing_caiet",
+        "label": "Caiet"
+       },
+       "results": [
+        {
+         "id": "n_v24_school_assessment_tema_acasa",
+         "label": "Temă pentru acasă"
+        }
+       ],
+       "minimum_edge_strength": 0.94
+      },
+      {
+       "left": {
+        "id": "n_v24_school_classroom_clasa_scolara",
+        "label": "Clasă școlară"
+       },
+       "right": {
+        "id": "n_v24_school_writing_caiet",
+        "label": "Caiet"
+       },
+       "results": [
+        {
+         "id": "n_v24_school_classroom_lectie",
+         "label": "Lecție"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      },
+      {
+       "left": {
+        "id": "n_v24_school_assessment_tema_acasa",
+        "label": "Temă pentru acasă"
+       },
+       "right": {
+        "id": "n_v24_school_classroom_lectie",
+        "label": "Lecție"
+       },
+       "results": [
+        {
+         "id": "n_v24_school_assessment_examen",
+         "label": "Examen"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.9,
+     "mean_edge_strength": 0.9267,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v24_school_writing_caiet",
+        "label": "Caiet"
+       },
+       "right": {
+        "id": "n_v24_school_writing_creion",
+        "label": "Creion"
+       },
+       "results": [
+        {
+         "id": "n_v24_school_assessment_tema_acasa",
+         "label": "Temă pentru acasă"
+        }
+       ],
+       "minimum_edge_strength": 0.94
+      },
+      {
+       "left": {
+        "id": "n_v24_school_classroom_clasa_scolara",
+        "label": "Clasă școlară"
+       },
+       "right": {
+        "id": "n_v24_school_writing_caiet",
+        "label": "Caiet"
+       },
+       "results": [
+        {
+         "id": "n_v24_school_classroom_lectie",
+         "label": "Lecție"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      },
+      {
+       "left": {
+        "id": "n_v24_school_assessment_tema_acasa",
+        "label": "Temă pentru acasă"
+       },
+       "right": {
+        "id": "n_v24_school_classroom_lectie",
+        "label": "Lecție"
+       },
+       "results": [
+        {
+         "id": "n_v24_school_assessment_examen",
+         "label": "Examen"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": true
+   }
+  },
+  {
+   "id": "al_viata_de_roman_103",
+   "review_binding": "sha256:13fe59065ab9209244334ba757c1b840d64e319221bcc29b07189976de121993",
+   "record_sha256": "6774c6aa4cf064ecfaa416bc6558268130883126901530920f2b5db4ff96c3f1",
+   "source_record": {
+    "id": "al_viata_de_roman_103",
+    "category": "viata_de_roman",
+    "difficulty": "normal",
+    "source": "ai",
+    "status": "pending",
+    "seeds": [
+     "n_v24_action_routine_a_dormi",
+     "n_v24_action_routine_a_invata",
+     "n_v24_home_rooms_sufragerie",
+     "n_v24_school_classroom_banca_scolara",
+     "n_v24_school_writing_caiet",
+     "n_v24_school_writing_creion",
+     "n_v4via_usa"
+    ],
+    "target": "n_v24_school_assessment_catalog_scolar",
+    "target_depth": 4
+   },
+   "category": "viata_de_roman",
+   "difficulty": "normal",
+   "seeds": [
+    {
+     "id": "n_v24_action_routine_a_dormi",
+     "label": "A dormi"
+    },
+    {
+     "id": "n_v24_action_routine_a_invata",
+     "label": "A învăța"
+    },
+    {
+     "id": "n_v24_home_rooms_sufragerie",
+     "label": "Sufragerie"
+    },
+    {
+     "id": "n_v24_school_classroom_banca_scolara",
+     "label": "Bancă școlară"
+    },
+    {
+     "id": "n_v24_school_writing_caiet",
+     "label": "Caiet"
+    },
+    {
+     "id": "n_v24_school_writing_creion",
+     "label": "Creion"
+    },
+    {
+     "id": "n_v4via_usa",
+     "label": "ușă"
+    }
+   ],
+   "target": {
+    "id": "n_v24_school_assessment_catalog_scolar",
+    "label": "Catalog școlar"
+   },
+   "declared_target_depth": 4,
+   "exact_action_par": 4,
+   "projection_par": 4,
+   "projection_sha256": "66b36dfd32042dcd4ddca158c2601a6ba357c8856f9d61f44fc5ff2583988da9",
+   "projected_opening_pair_count": 3,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_v24_action_routine_a_invata",
+      "label": "A învăța"
+     },
+     "right": {
+      "id": "n_v24_school_writing_caiet",
+      "label": "Caiet"
+     },
+     "results": [
+      {
+       "id": "n_v24_school_assessment_tema_acasa",
+       "label": "Temă pentru acasă"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v24_school_classroom_banca_scolara",
+      "label": "Bancă școlară"
+     },
+     "right": {
+      "id": "n_v24_school_writing_caiet",
+      "label": "Caiet"
+     },
+     "results": [
+      {
+       "id": "n_v24_school_classroom_lectie",
+       "label": "Lecție"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v24_school_writing_caiet",
+      "label": "Caiet"
+     },
+     "right": {
+      "id": "n_v24_school_writing_creion",
+      "label": "Creion"
+     },
+     "results": [
+      {
+       "id": "n_v24_school_assessment_tema_acasa",
+       "label": "Temă pentru acasă"
+      }
+     ]
+    }
+   ],
+   "route_count": 2,
+   "recipe_pair_count": 5,
+   "projected_concept_count": 11,
+   "max_results_per_pair": 1,
+   "routes": [
+    {
+     "actions": 4,
+     "minimum_edge_strength": 0.9,
+     "mean_edge_strength": 0.92,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v24_action_routine_a_invata",
+        "label": "A învăța"
+       },
+       "right": {
+        "id": "n_v24_school_writing_caiet",
+        "label": "Caiet"
+       },
+       "results": [
+        {
+         "id": "n_v24_school_assessment_tema_acasa",
+         "label": "Temă pentru acasă"
+        }
+       ],
+       "minimum_edge_strength": 0.94
+      },
+      {
+       "left": {
+        "id": "n_v24_school_classroom_banca_scolara",
+        "label": "Bancă școlară"
+       },
+       "right": {
+        "id": "n_v24_school_writing_caiet",
+        "label": "Caiet"
+       },
+       "results": [
+        {
+         "id": "n_v24_school_classroom_lectie",
+         "label": "Lecție"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      },
+      {
+       "left": {
+        "id": "n_v24_school_assessment_tema_acasa",
+        "label": "Temă pentru acasă"
+       },
+       "right": {
+        "id": "n_v24_school_classroom_lectie",
+        "label": "Lecție"
+       },
+       "results": [
+        {
+         "id": "n_v24_school_assessment_examen",
+         "label": "Examen"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      },
+      {
+       "left": {
+        "id": "n_v24_school_assessment_examen",
+        "label": "Examen"
+       },
+       "right": {
+        "id": "n_v24_school_assessment_tema_acasa",
+        "label": "Temă pentru acasă"
+       },
+       "results": [
+        {
+         "id": "n_v24_school_assessment_catalog_scolar",
+         "label": "Catalog școlar"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      }
+     ]
+    },
+    {
+     "actions": 4,
+     "minimum_edge_strength": 0.9,
+     "mean_edge_strength": 0.92,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v24_school_writing_caiet",
+        "label": "Caiet"
+       },
+       "right": {
+        "id": "n_v24_school_writing_creion",
+        "label": "Creion"
+       },
+       "results": [
+        {
+         "id": "n_v24_school_assessment_tema_acasa",
+         "label": "Temă pentru acasă"
+        }
+       ],
+       "minimum_edge_strength": 0.94
+      },
+      {
+       "left": {
+        "id": "n_v24_school_classroom_banca_scolara",
+        "label": "Bancă școlară"
+       },
+       "right": {
+        "id": "n_v24_school_writing_caiet",
+        "label": "Caiet"
+       },
+       "results": [
+        {
+         "id": "n_v24_school_classroom_lectie",
+         "label": "Lecție"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      },
+      {
+       "left": {
+        "id": "n_v24_school_assessment_tema_acasa",
+        "label": "Temă pentru acasă"
+       },
+       "right": {
+        "id": "n_v24_school_classroom_lectie",
+        "label": "Lecție"
+       },
+       "results": [
+        {
+         "id": "n_v24_school_assessment_examen",
+         "label": "Examen"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      },
+      {
+       "left": {
+        "id": "n_v24_school_assessment_examen",
+        "label": "Examen"
+       },
+       "right": {
+        "id": "n_v24_school_assessment_tema_acasa",
+        "label": "Temă pentru acasă"
+       },
+       "results": [
+        {
+         "id": "n_v24_school_assessment_catalog_scolar",
+         "label": "Catalog școlar"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": true
+   }
+  },
+  {
+   "id": "al_viata_de_roman_104",
+   "review_binding": "sha256:15108ec0499a53aa16b512af9eef03460c459090a3fce4e99f1a1b09c3d433e3",
+   "record_sha256": "d6c5b301119480cbdd519f97f73c7afb39b9bcff50f57465b881adb84526c005",
+   "source_record": {
+    "id": "al_viata_de_roman_104",
+    "category": "viata_de_roman",
+    "difficulty": "normal",
+    "source": "ai",
+    "status": "pending",
+    "seeds": [
+     "n_v24_action_routine_a_dormi",
+     "n_v24_action_routine_a_invata",
+     "n_v24_home_rooms_sufragerie",
+     "n_v24_school_classroom_banca_scolara",
+     "n_v24_school_classroom_clasa_scolara",
+     "n_v24_school_writing_caiet",
+     "n_v4via_usa"
+    ],
+    "target": "n_v24_home_textiles_covor",
+    "target_depth": 3
+   },
+   "category": "viata_de_roman",
+   "difficulty": "normal",
+   "seeds": [
+    {
+     "id": "n_v24_action_routine_a_dormi",
+     "label": "A dormi"
+    },
+    {
+     "id": "n_v24_action_routine_a_invata",
+     "label": "A învăța"
+    },
+    {
+     "id": "n_v24_home_rooms_sufragerie",
+     "label": "Sufragerie"
+    },
+    {
+     "id": "n_v24_school_classroom_banca_scolara",
+     "label": "Bancă școlară"
+    },
+    {
+     "id": "n_v24_school_classroom_clasa_scolara",
+     "label": "Clasă școlară"
+    },
+    {
+     "id": "n_v24_school_writing_caiet",
+     "label": "Caiet"
+    },
+    {
+     "id": "n_v4via_usa",
+     "label": "ușă"
+    }
+   ],
+   "target": {
+    "id": "n_v24_home_textiles_covor",
+    "label": "Covor"
+   },
+   "declared_target_depth": 3,
+   "exact_action_par": 3,
+   "projection_par": 3,
+   "projection_sha256": "a44a827972bde91aba4ef770927fbaf45b512755c301d3e1aa9da6d731fdb1db",
+   "projected_opening_pair_count": 2,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_v24_action_routine_a_dormi",
+      "label": "A dormi"
+     },
+     "right": {
+      "id": "n_v24_home_rooms_sufragerie",
+      "label": "Sufragerie"
+     },
+     "results": [
+      {
+       "id": "n_v24_home_rooms_dormitor",
+       "label": "Dormitor"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v24_action_routine_a_dormi",
+      "label": "A dormi"
+     },
+     "right": {
+      "id": "n_v4via_usa",
+      "label": "ușă"
+     },
+     "results": [
+      {
+       "id": "n_v24_home_rooms_dormitor",
+       "label": "Dormitor"
+      }
+     ]
+    }
+   ],
+   "route_count": 2,
+   "recipe_pair_count": 4,
+   "projected_concept_count": 10,
+   "max_results_per_pair": 1,
+   "routes": [
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.86,
+     "mean_edge_strength": 0.9067,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v24_action_routine_a_dormi",
+        "label": "A dormi"
+       },
+       "right": {
+        "id": "n_v24_home_rooms_sufragerie",
+        "label": "Sufragerie"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_rooms_dormitor",
+         "label": "Dormitor"
+        }
+       ],
+       "minimum_edge_strength": 0.9
+      },
+      {
+       "left": {
+        "id": "n_v24_home_rooms_dormitor",
+        "label": "Dormitor"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_bed_perna",
+         "label": "Pernă"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_v24_home_bed_perna",
+        "label": "Pernă"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_textiles_covor",
+         "label": "Covor"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.86,
+     "mean_edge_strength": 0.9,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v24_action_routine_a_dormi",
+        "label": "A dormi"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_rooms_dormitor",
+         "label": "Dormitor"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_v24_home_rooms_dormitor",
+        "label": "Dormitor"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_bed_perna",
+         "label": "Pernă"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      },
+      {
+       "left": {
+        "id": "n_v24_home_bed_perna",
+        "label": "Pernă"
+       },
+       "right": {
+        "id": "n_v4via_usa",
+        "label": "ușă"
+       },
+       "results": [
+        {
+         "id": "n_v24_home_textiles_covor",
+         "label": "Covor"
+        }
+       ],
+       "minimum_edge_strength": 0.86
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": true
+   }
+  }
+ ]
+}

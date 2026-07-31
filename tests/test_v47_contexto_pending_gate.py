@@ -39,9 +39,9 @@ _PACKAGE_DERIVED = _ROOT / "cat_de_roman_esti/fixtures/derived_catalog_v38.json"
 _TEST_DERIVED = _ROOT / "tests/fixtures/derived_catalog_v38.json"
 
 _PENDING_ID_SET_SHA256 = "508ac4014f6c519fc0891b92474e683e9a26078e86091cee8ee77a1aa10e97c1"
-_PACK_SHA256 = "c4542d4201c45b04f58563eb08aa2ba0973389f453f5181f53066a88df550d05"
-_RANKINGS_SHA256 = "0db1a9c551148fd8de808b2479e726861bf9a1191f1b9686ac5a67741cfd55ee"
-_DERIVED_SHA256 = "1bdeabf3f42efc4671f8900957fbe48397a5a909bc1012307fbcba22534126f0"
+_PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
+_RANKINGS_SHA256 = "0e2b5cda2c46d81f9b5a5cc2a274a7a55bf387a203bae3df48b1b5c2d1bde219"
+_DERIVED_SHA256 = "87544c899799e92ea8733303ab0ed286650abfe0298008a38bcbc7aef75d5ae2"
 _FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
 
 _PROMOTED = {"ct_gastronomie_300"}
@@ -188,14 +188,14 @@ def test_v47_pack_applies_only_the_bound_outcomes_and_keeps_unique_live_targets(
         "conexiuni": 232,
         "contexto": 207,
         "lant": 97,
-        "alchimie": 99,
+        "alchimie": 82,
     }
     assert pack["meta"]["id_high_water"]["contexto"] == 317
     assert Counter(record["status"] for record in contexto.values()) == {
         "approved": 205,
         "pending": 2,
     }
-    assert statuses == {"approved": 609, "pending": 26}
+    assert statuses == {"approved": 610, "pending": 8}
     assert contexto["ct_gastronomie_300"]["status"] == "approved"
     assert {item_id for item_id, row in contexto.items() if row["status"] == "pending"} == _KEPT
     assert _REJECTED.isdisjoint(contexto)
@@ -234,20 +234,20 @@ def test_v47_rankings_and_frozen_derived_catalog_track_the_clean_pack() -> None:
     assert hashlib.sha256(_PACKAGE_RANKINGS.read_bytes()).hexdigest() == _RANKINGS_SHA256
     rankings = _json(_PACKAGE_RANKINGS)
     assert rankings["meta"]["counts"] == {
-        "total": 635,
-        "approved": 609,
-        "pilot_eligible": 448,
+        "total": 618,
+        "approved": 610,
+        "pilot_eligible": 449,
         "by_game": {
             "conexiuni": 232,
             "contexto": 207,
             "lant": 97,
-            "alchimie": 99,
+            "alchimie": 82,
         },
         "eligible_by_game": {
             "conexiuni": 74,
             "contexto": 202,
             "lant": 94,
-            "alchimie": 78,
+            "alchimie": 79,
         },
     }
     ranked = {row["id"]: row for row in rankings["boards"]}

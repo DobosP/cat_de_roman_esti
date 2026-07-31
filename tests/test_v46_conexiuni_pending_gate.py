@@ -132,13 +132,13 @@ def test_v46_pack_removes_only_the_rejected_pending_conexiuni_records() -> None:
         "conexiuni": 232,
         "contexto": 207,
         "lant": 97,
-        "alchimie": 99,
+        "alchimie": 82,
     }
     assert pack["meta"]["id_high_water"]["conexiuni"] == 361
     assert Counter(record["status"] for record in conexiuni.values()) == {
         "approved": 232
     }
-    assert statuses == {"approved": 609, "pending": 26}
+    assert statuses == {"approved": 610, "pending": 8}
     assert rejected.isdisjoint(conexiuni)
 
 
@@ -172,20 +172,20 @@ def test_v46_rankings_and_frozen_derived_catalog_track_the_clean_pack() -> None:
     assert _PACKAGE_RANKINGS.read_bytes() == _TEST_RANKINGS.read_bytes()
     rankings = _json(_PACKAGE_RANKINGS)
     assert rankings["meta"]["counts"] == {
-        "total": 635,
-        "approved": 609,
-        "pilot_eligible": 448,
+        "total": 618,
+        "approved": 610,
+        "pilot_eligible": 449,
         "by_game": {
             "conexiuni": 232,
             "contexto": 207,
             "lant": 97,
-            "alchimie": 99,
+            "alchimie": 82,
         },
         "eligible_by_game": {
             "conexiuni": 74,
             "contexto": 202,
             "lant": 94,
-            "alchimie": 78,
+            "alchimie": 79,
         },
     }
     rejected = set(_json(_VERDICTS)["verdicts"])

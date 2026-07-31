@@ -22,7 +22,7 @@ NOTE = (
     "v28: fifteen previously missing beginner concepts with collision-safe inflections "
     "and concrete local semantic links; no game boards or promotions."
 )
-BASELINE_PACK_SHA256 = "c4542d4201c45b04f58563eb08aa2ba0973389f453f5181f53066a88df550d05"
+BASELINE_PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
 GAME_ITEM_IDS: tuple[str, ...] = ()
 BEGINNER_BENCHMARK = V24_BEGINNER_BENCHMARK
 

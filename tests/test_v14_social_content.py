@@ -12,6 +12,9 @@ _KG_PATH = _ROOT / "tests" / "fixtures" / "kg_sample.json"
 _TOMBSTONE_PATH = (
     _ROOT / "cat_de_roman_esti" / "fixtures" / "conexiuni_rejection_tombstones.json"
 )
+_V48_AUDIT_PATH = (
+    _ROOT / "docs/reviews/v48-alchimie-pending-gate/projection-audit.json"
+)
 
 # v16 (2026-07-12): KG-enrichment re-derivation retired one approved greu Lanț board, a
 # judge fleet promoted 70 pending items / rejected 3, and the ADR-0019 quarantine below
@@ -27,13 +30,15 @@ _TOMBSTONE_PATH = (
 # 2026-07-16 (ADR-0030): the v23 childhood wave staged seven more items as pending;
 # approved inventory and serving remain unchanged. Later pending-only waves may grow
 # these totals. V45 removed 104 freshly rejected Lanț records; V46 removed the full
-# 79-board pending Conexiuni queue; V47 promoted one and removed ten Contexto records.
-# Those games now use exact lower baselines.
+# 79-board pending Conexiuni queue; V47 promoted one and removed ten Contexto records;
+# V48 promoted one, retained three A5 holds, and archived 17 rejected Alchimie records.
+# Those games now use exact lower baselines, with the removed Alchimie rows preserved in
+# V48's bound projection audit.
 _V23_INVENTORY_FLOOR = {
     "conexiuni": (232, 232, 0),
     "contexto": (207, 205, 2),
     "lant": (97, 94, 3),
-    "alchimie": (92, 78, 15),
+    "alchimie": (82, 79, 3),
 }
 
 _NEW_CONTEXTO_TARGETS = {
@@ -76,10 +81,15 @@ def _by_id(records: list[dict]) -> dict[str, dict]:
 
 def test_v14_pack_inventory_and_review_split():
     pack = _load(_PACK_PATH)
+    v48_audit = _load(_V48_AUDIT_PATH)
 
-    assert pack["meta"]["counts"] == {
+    live_counts = {
         game: len(pack[game]) for game in _V23_INVENTORY_FLOOR
     }
+    expected_counts = {
+        game: expected[0] for game, expected in _V23_INVENTORY_FLOOR.items()
+    }
+    assert pack["meta"]["counts"] == live_counts == expected_counts
     for game, (minimum_total, approved, minimum_pending) in _V23_INVENTORY_FLOOR.items():
         records = pack[game]
         statuses = Counter(record["status"] for record in records)
@@ -91,12 +101,24 @@ def test_v14_pack_inventory_and_review_split():
     # v16: 769 − 3 judge-rejected − 1 retired greu Lanț = 765; v18: − 1 retired normal Lanț.
     # 2026-07-15: 592 − 20 critique-gate demotions (ADR-0023/0024) = 572 approved.
     # 2026-07-29: + 13 ADR-0065 gate promotions among these games' totals = 585 approved.
-    # V45/V46 clear stale pending debt; V47 adds one strict Contexto promotion.
-    assert sum(expected[0] for expected in _V23_INVENTORY_FLOOR.values()) == 628
+    # V45/V46 clear stale pending debt; V47 adds one strict Contexto promotion; V48
+    # promotes one Alchimie board and removes 17 quality rejects.
+    assert sum(expected[0] for expected in _V23_INVENTORY_FLOOR.values()) == 618
     # 2026-07-30 (ADR-0066/0067/0068): + 18 owner, + 3 strict-gate, then + 2
     # bound Contexto promotions.
-    assert sum(expected[1] for expected in _V23_INVENTORY_FLOOR.values()) == 609
-    assert sum(expected[2] for expected in _V23_INVENTORY_FLOOR.values()) == 20
+    assert sum(expected[1] for expected in _V23_INVENTORY_FLOOR.values()) == 610
+    assert sum(expected[2] for expected in _V23_INVENTORY_FLOOR.values()) == 8
+
+    live_alchimie = {record["id"] for record in pack["alchimie"]}
+    archived = {
+        row["id"]: row["source_record"]
+        for row in v48_audit["items"]
+        if row["id"] not in live_alchimie
+    }
+    assert len(v48_audit["items"]) == 21
+    assert len(archived) == 17
+    assert all(record["status"] == "pending" for record in archived.values())
+    assert len(pack["alchimie"]) + len(archived) == 99
 
 
 def test_v14_adds_contemporary_civic_education_science_and_digital_play():

@@ -35,6 +35,9 @@ _TEST_PACK = _ROOT / "tests" / "fixtures" / "games_pack.json"
 _TOMBSTONES = (
     _ROOT / "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json"
 )
+_V48_AUDIT = (
+    _ROOT / "docs/reviews/v48-alchimie-pending-gate/projection-audit.json"
+)
 _V45_REJECTED_LANT = {
     "lt_gastronomie_212",
     "lt_gastronomie_218",
@@ -60,8 +63,19 @@ _V47_REJECTED_CONTEXTO = {
     "ct_viata_de_roman_302",
     "ct_viata_de_roman_304",
 }
+_V48_REJECTED_ALCHIMIE = {
+    "al_viata_de_roman_099",
+    "al_viata_de_roman_100",
+    "al_viata_de_roman_101",
+    "al_viata_de_roman_102",
+    "al_viata_de_roman_103",
+    "al_viata_de_roman_104",
+}
 _RETIRED_GAME_ITEMS = (
-    _V45_REJECTED_LANT | _V46_REJECTED_CONEXIUNI | _V47_REJECTED_CONTEXTO
+    _V45_REJECTED_LANT
+    | _V46_REJECTED_CONEXIUNI
+    | _V47_REJECTED_CONTEXTO
+    | _V48_REJECTED_ALCHIMIE
 )
 
 
@@ -78,6 +92,14 @@ def _load_data_module():
 
 
 DATA = _load_data_module()
+
+
+def _v48_source_records() -> dict[str, dict]:
+    audit = json.loads(_V48_AUDIT.read_text(encoding="utf-8"))
+    records = {row["id"]: row["source_record"] for row in audit["items"]}
+    assert _V48_REJECTED_ALCHIMIE <= set(records)
+    assert all(records[item_id]["id"] == item_id for item_id in records)
+    return records
 
 
 def _built_content() -> tuple[list[dict], list[dict], Mapping[str, Iterable[str]]]:
@@ -332,6 +354,7 @@ def test_v24_declared_game_candidates_are_present_pending_and_playable():
     assert not failures, "\n" + "\n".join(failures)
     assert not (_RETIRED_GAME_ITEMS & set(actual))
     assert _V47_PROMOTED_CONTEXTO <= set(actual)
+    assert _V48_REJECTED_ALCHIMIE <= set(_v48_source_records())
 
 
 def test_v24_fixture_and_pack_mirrors_are_byte_identical():
@@ -342,10 +365,17 @@ def test_v24_fixture_and_pack_mirrors_are_byte_identical():
 def _declared_records() -> dict[str, list[dict]]:
     declared = _candidate_item_ids()
     pack = json.loads(_PACKAGE_PACK.read_text(encoding="utf-8"))
-    return {
+    records = {
         game: [record for record in pack[game] if record["id"] in set(declared.get(game, ()))]
         for game in GAME_KINDS
     }
+    archived = _v48_source_records()
+    records["alchimie"].extend(
+        archived[item_id]
+        for item_id in declared["alchimie"]
+        if item_id in _V48_REJECTED_ALCHIMIE
+    )
+    return records
 
 
 def test_v24_game_wave_has_the_reviewed_per_game_sizes():

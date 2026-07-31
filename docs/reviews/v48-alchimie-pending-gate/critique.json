@@ -1,0 +1,57 @@
+{
+ "thresholds": {
+  "salience_floors": {
+   "usor": 0.6,
+   "normal": 0.35,
+   "greu": 0.2
+  },
+  "strong_edge": 0.6,
+  "mirror_pairs": 3,
+  "red_herring_warn": 2,
+  "red_herring_fail": 4,
+  "member_overuse": 8,
+  "board_overlap_fail": 8,
+  "label_leak_min_chars": 3,
+  "region_fanout": 2,
+  "national_salience": 0.7
+ },
+ "items": {
+  "al_film_tv_022": {
+   "game": "alchimie",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Subtitrare salience 0.23 < 0.35 (normal floor)"
+    }
+   ]
+  },
+  "al_geografie_032": {
+   "game": "alchimie",
+   "status": "pending",
+   "difficulty": "normal",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Subcarpații salience 0.22 < 0.35 (normal floor)"
+    }
+   ]
+  },
+  "al_societate_076": {
+   "game": "alchimie",
+   "status": "pending",
+   "difficulty": "usor",
+   "findings": [
+    {
+     "check": "salience_floor",
+     "level": "WARN",
+     "detail": "Uniunea Europeană salience 0.30 < 0.60 (usor floor)"
+    }
+   ]
+  }
+ },
+ "pack_findings": []
+}

@@ -1,0 +1,295 @@
+{
+ "id": "al_viata_de_roman_095",
+ "game": "alchimie",
+ "category": "viata_de_roman",
+ "difficulty": "greu",
+ "status": "pending",
+ "record_sha256": "c35f4499995a264c152d27ba69ff71d89ab243aa97bc005f99e05a11437834c9",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [],
+ "target": {
+  "id": "n_vdr_gospodaria_bunicilor",
+  "label": "Gospodăria bunicilor",
+  "node_type": "place",
+  "category": "viata_de_roman",
+  "salience": 0.9146,
+  "degree": 20,
+  "incoming_degree": 20,
+  "description": "Curtea cu grădină, coteț, magazie, butoi și lucruri păstrate pentru orice nevoie."
+ },
+ "seeds": [
+  {
+   "id": "n_vdr_guma_turbo",
+   "label": "Guma Turbo",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.7867,
+   "degree": 5,
+   "incoming_degree": 5,
+   "description": "Gumă de mestecat cu abțibilduri cu mașini, populară în România anilor 90."
+  },
+  {
+   "id": "n_vdr_calorifer_rece",
+   "label": "Caloriferul rece",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.4731,
+   "degree": 7,
+   "incoming_degree": 7,
+   "description": "Semn al iernilor de apartament când căldura vine greu sau deloc."
+  },
+  {
+   "id": "n_v3via_naveta",
+   "label": "Naveta",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.3109,
+   "degree": 8,
+   "incoming_degree": 8,
+   "description": "Drumul repetat între casă și serviciu sau școală."
+  },
+  {
+   "id": "n_vdr_cheia_de_la_gat",
+   "label": "Cheia de la gât",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.7501,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Cheia purtată de copii la gât când mergeau singuri acasă de la școală."
+  },
+  {
+   "id": "n_v3via_piata",
+   "label": "Piața",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.9463,
+   "degree": 13,
+   "incoming_degree": 13,
+   "description": "Loc de cumpărat legume, fructe și produse de la tarabe."
+  }
+ ],
+ "target_depth": 6,
+ "craft_profile": {
+  "opening_pairs": 3,
+  "closure_size": 109,
+  "target_generation": 4
+ },
+ "productive_openings": [
+  {
+   "pair": [
+    {
+     "id": "n_vdr_cheia_de_la_gat",
+     "label": "Cheia de la gât"
+    },
+    {
+     "id": "n_vdr_guma_turbo",
+     "label": "Guma Turbo"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_vdr_copilaria_anilor_90",
+     "label": "Copilăria anilor 90"
+    },
+    {
+     "id": "n_v2via_jocuri_copilarie",
+     "label": "Jocuri de copilărie"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v3via_naveta",
+     "label": "Naveta"
+    },
+    {
+     "id": "n_v3via_piata",
+     "label": "Piața"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_vdr_viata_de_roman",
+     "label": "Viața în România"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v3via_naveta",
+     "label": "Naveta"
+    },
+    {
+     "id": "n_vdr_guma_turbo",
+     "label": "Guma Turbo"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_vdr_dacia_1310",
+     "label": "Dacia 1310"
+    }
+   ]
+  }
+ ],
+ "minimum_action_recipe": [
+  {
+   "pair": [
+    {
+     "id": "n_v3via_naveta",
+     "label": "Naveta"
+    },
+    {
+     "id": "n_vdr_guma_turbo",
+     "label": "Guma Turbo"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_vdr_dacia_1310",
+     "label": "Dacia 1310"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v3via_piata",
+     "label": "Piața"
+    },
+    {
+     "id": "n_vdr_dacia_1310",
+     "label": "Dacia 1310"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_vdr_portbagaj_plin",
+     "label": "Portbagajul plin"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_vdr_dacia_1310",
+     "label": "Dacia 1310"
+    },
+    {
+     "id": "n_vdr_portbagaj_plin",
+     "label": "Portbagajul plin"
+    }
+   ],
+   "result_count": 4,
+   "results": [
+    {
+     "id": "n_v3via_concediul",
+     "label": "Concediul"
+    },
+    {
+     "id": "n_vdr_descurcare_romaneasca",
+     "label": "Descurcăreala de zi cu zi"
+    },
+    {
+     "id": "n_v2via_parcare",
+     "label": "Parcare"
+    },
+    {
+     "id": "n_vdr_biletel_in_parbriz",
+     "label": "Bilețelul în parbriz"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v3via_concediul",
+     "label": "Concediul"
+    },
+    {
+     "id": "n_vdr_portbagaj_plin",
+     "label": "Portbagajul plin"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v2via_pachet_de_acasa",
+     "label": "Pachet de acasă"
+    },
+    {
+     "id": "n_v18via_vacanta_in_grecia",
+     "label": "Vacanța în Grecia"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v2via_pachet_de_acasa",
+     "label": "Pachet de acasă"
+    },
+    {
+     "id": "n_vdr_portbagaj_plin",
+     "label": "Portbagajul plin"
+    }
+   ],
+   "result_count": 5,
+   "results": [
+    {
+     "id": "n_v2via_rude",
+     "label": "Rude"
+    },
+    {
+     "id": "n_vdr_borcane_zacusca",
+     "label": "Borcanele de zacuscă"
+    },
+    {
+     "id": "n_vdr_punga_cu_pungi",
+     "label": "Punga cu pungi"
+    },
+    {
+     "id": "n_v2via_casa_parinteasca",
+     "label": "Casa părintească"
+    },
+    {
+     "id": "n_v3via_sacosa",
+     "label": "Sacoșa"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v2via_rude",
+     "label": "Rude"
+    },
+    {
+     "id": "n_vdr_borcane_zacusca",
+     "label": "Borcanele de zacuscă"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_vdr_gospodaria_bunicilor",
+     "label": "Gospodăria bunicilor"
+    },
+    {
+     "id": "n_vdr_vara_la_bunici",
+     "label": "Vara la bunici"
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:9a7c394a1656f2510c1ac33c3d88fad327d76d94a7a2ed1246dd8e96c45b6b6d"
+}

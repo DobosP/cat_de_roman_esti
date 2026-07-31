@@ -1,0 +1,325 @@
+{
+ "id": "al_societate_076",
+ "game": "alchimie",
+ "category": "societate",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "d3dff309b9ef89f3691f79c80f09f897b1121ea61d14311a86d4037aa87a3450",
+ "kg_sha256": "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Uniunea Europeană salience 0.30 < 0.60 (usor floor)"
+  }
+ ],
+ "target": {
+  "id": "n_uniunea_europeana",
+  "label": "Uniunea Europeană",
+  "node_type": "org",
+  "category": "societate",
+  "salience": 0.3003,
+  "degree": 9,
+  "incoming_degree": 9,
+  "description": "Uniune politica si economica din care Romania face parte din 2007."
+ },
+ "seeds": [
+  {
+   "id": "n_vot",
+   "label": "Drept de vot",
+   "node_type": "concept",
+   "category": "societate",
+   "salience": 0.346,
+   "degree": 11,
+   "incoming_degree": 11,
+   "description": "Dreptul cetățenilor de a alege, exercitat prin vot sau sufragiu."
+  },
+  {
+   "id": "n_v4soc_copil",
+   "label": "copil",
+   "node_type": "concept",
+   "category": "societate",
+   "salience": 0.909,
+   "degree": 26,
+   "incoming_degree": 22,
+   "description": "Persoană aflată la vârsta copilăriei sau fiu ori fiică."
+  },
+  {
+   "id": "n_camera_deputatilor",
+   "label": "Camera Deputaților",
+   "node_type": "org",
+   "category": "societate",
+   "salience": 0.1925,
+   "degree": 5,
+   "incoming_degree": 4,
+   "description": "Una dintre cele doua camere ale Parlamentului Romaniei, alaturi de Senat."
+  },
+  {
+   "id": "n_recensamant",
+   "label": "Recensământul populației",
+   "node_type": "concept",
+   "category": "societate",
+   "salience": 0.2168,
+   "degree": 7,
+   "incoming_degree": 7,
+   "description": "Numaratoare oficiala a populatiei si locuintelor, organizata periodic pentru date demografice."
+  },
+  {
+   "id": "n_v3soc_lege",
+   "label": "Lege",
+   "node_type": "concept",
+   "category": "societate",
+   "salience": 0.9617,
+   "degree": 12,
+   "incoming_degree": 12,
+   "description": "Normă juridică obligatorie, adoptată sau recunoscută de stat."
+  },
+  {
+   "id": "n_iccj",
+   "label": "Înalta Curte de Casație și Justiție",
+   "node_type": "org",
+   "category": "societate",
+   "salience": 0.1753,
+   "degree": 7,
+   "incoming_degree": 5,
+   "description": "Instanta judecatoreasca suprema a Romaniei, in varful sistemului judiciar."
+  },
+  {
+   "id": "n_universitatea_bucuresti",
+   "label": "Universitatea din București",
+   "node_type": "org",
+   "category": "societate",
+   "salience": 0.5768,
+   "degree": 21,
+   "incoming_degree": 22,
+   "description": "Una dintre cele mai vechi si prestigioase universitati din Romania, infiintata in 1864."
+  }
+ ],
+ "target_depth": 3,
+ "craft_profile": {
+  "opening_pairs": 10,
+  "closure_size": 136,
+  "target_generation": 2
+ },
+ "productive_openings": [
+  {
+   "pair": [
+    {
+     "id": "n_camera_deputatilor",
+     "label": "Camera Deputaților"
+    },
+    {
+     "id": "n_vot",
+     "label": "Drept de vot"
+    }
+   ],
+   "result_count": 3,
+   "results": [
+    {
+     "id": "n_v2soc_alegeri",
+     "label": "Alegeri"
+    },
+    {
+     "id": "n_parlamentul_romaniei",
+     "label": "Parlamentul României"
+    },
+    {
+     "id": "n_democratie",
+     "label": "Democrație"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v3soc_lege",
+     "label": "Lege"
+    },
+    {
+     "id": "n_vot",
+     "label": "Drept de vot"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_constitutia",
+     "label": "Constituția României"
+    },
+    {
+     "id": "n_parlamentul_romaniei",
+     "label": "Parlamentul României"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_camera_deputatilor",
+     "label": "Camera Deputaților"
+    },
+    {
+     "id": "n_iccj",
+     "label": "Înalta Curte de Casație și Justiție"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v2soc_institutie",
+     "label": "Instituție"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_camera_deputatilor",
+     "label": "Camera Deputaților"
+    },
+    {
+     "id": "n_v3soc_lege",
+     "label": "Lege"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_parlamentul_romaniei",
+     "label": "Parlamentul României"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_iccj",
+     "label": "Înalta Curte de Casație și Justiție"
+    },
+    {
+     "id": "n_recensamant",
+     "label": "Recensământul populației"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_romania_stat",
+     "label": "România"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_iccj",
+     "label": "Înalta Curte de Casație și Justiție"
+    },
+    {
+     "id": "n_v3soc_lege",
+     "label": "Lege"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v2soc_justitie",
+     "label": "Justiție"
+    }
+   ]
+  }
+ ],
+ "minimum_action_recipe": [
+  {
+   "pair": [
+    {
+     "id": "n_v3soc_lege",
+     "label": "Lege"
+    },
+    {
+     "id": "n_vot",
+     "label": "Drept de vot"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_constitutia",
+     "label": "Constituția României"
+    },
+    {
+     "id": "n_parlamentul_romaniei",
+     "label": "Parlamentul României"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_constitutia",
+     "label": "Constituția României"
+    },
+    {
+     "id": "n_recensamant",
+     "label": "Recensământul populației"
+    }
+   ],
+   "result_count": 3,
+   "results": [
+    {
+     "id": "n_romania_stat",
+     "label": "România"
+    },
+    {
+     "id": "n_v2soc_stat",
+     "label": "Stat"
+    },
+    {
+     "id": "n_minoritati_nationale",
+     "label": "Minoritățile naționale"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_romania_stat",
+     "label": "România"
+    },
+    {
+     "id": "n_v2soc_stat",
+     "label": "Stat"
+    }
+   ],
+   "result_count": 6,
+   "results": [
+    {
+     "id": "n_uniunea_europeana",
+     "label": "Uniunea Europeană"
+    },
+    {
+     "id": "n_leul_romanesc",
+     "label": "Leul românesc"
+    },
+    {
+     "id": "n_unirea_principatelor",
+     "label": "Unirea Principatelor Române"
+    },
+    {
+     "id": "n_bnr",
+     "label": "Banca Națională a României"
+    },
+    {
+     "id": "n_onu",
+     "label": "ONU"
+    },
+    {
+     "id": "n_cetatenie",
+     "label": "Cetățenie"
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:704801995210b41b479201069b0e18102bc25a73a8a84ee11f5094368eb2a35a"
+}

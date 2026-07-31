@@ -216,9 +216,9 @@ def test_v29_keeps_the_entire_game_pack_byte_stable_without_adding_items():
         "conexiuni": 232,
         "contexto": 207,
         "lant": 97,
-        "alchimie": 99,
+        "alchimie": 82,
     }
-    assert statuses == {"approved": 609, "pending": 26}
+    assert statuses == {"approved": 610, "pending": 8}
 
 
 def test_v29_mobile_contract_stays_current_and_keeps_v29_public():
