@@ -3,7 +3,8 @@
 _As of 2026-08-01. This file is the repository's current source of truth._
 
 _Last verified: 2026-08-01 (V48 backend 726/726, accounts 53/53, sessions 16/16,
-targeted Alchimie 55/55, derived games 56/56, Ruff and all artifact validators green)._
+frontend 28/28 + lint/typecheck/build at 118.03/120 KiB, all artifact validators, and
+production runtime/public/log probes green on exact commit `d59caed`)._
 
 ## Current outcome — V48 strict Alchimie live-recipe gate (ADR-0072)
 
@@ -58,7 +59,10 @@ verdicts are under `docs/reviews/v48-alchimie-pending-gate/`; rankings remain es
 - Browser history, records, derived mastery, circuit, and streak remain device-authored.
   Account mode can upload validated completed-score rows privately but does not download,
   restore, or merge them. Public records remain server-authored and consent-gated.
-- Anonymous production runs V43 at `38da2f4`; its 2026-07-30 six-game live probes passed.
+- Anonymous production runs V48 at `d59caed` since 2026-08-01. Exact runtime hashes/counts,
+  accounts-off and submissions-off boundaries, 14 categories, frontend/health/manifest,
+  Făt-Frumos, and create/resume privacy contracts for all six games passed publicly.
+  The single app process is healthy with zero restarts and no unexpected post-smoke errors.
 
 ## Reproduction
 
@@ -88,4 +92,7 @@ git diff --check
   C1-C6 gate; never re-add the archived exact record unchanged.
 - Run the larger anonymous six-game pilot before a seventh mode, score recalibration, or
   derived-catalog expansion (ADR-0054; generator now pins the V38 source snapshot).
+- Track the React Router high-severity advisory in a separate compatibility upgrade. Its
+  primary advisory limits impact to unstable RSC APIs, which this BrowserRouter SPA does
+  not use: <https://github.com/advisories/GHSA-qwww-vcr4-c8h2>.
 - Keep accounts off until the compliance checklist is complete.

@@ -192,13 +192,26 @@ state to Redis before scaling out.
 
 ## 6. Updates
 
+Before either stack rebuilds `latest`, preserve the running app image under the recorded
+known-good release. Docker may discard the prior untagged image after replacement:
+
+```bash
+cat_previous_good="SHORT_SHA_RECORDED_IN_STATUS"
+cat_compose_file="docker-compose.prod.yml"  # use docker-compose.anon.yml for anonymous
+cat_env_file=".env.prod"                    # use .env.anon for anonymous
+cat_app_container="$(docker compose -f "$cat_compose_file" --env-file "$cat_env_file" ps -q app)"
+cat_running_image="$(docker inspect --format '{{.Image}}' "$cat_app_container")"
+docker image tag "$cat_running_image" "cat-de-roman-esti:rollback-$cat_previous_good"
+```
+
 ```bash
 git pull
 docker compose -f docker-compose.prod.yml --env-file .env.prod up -d --build
 ```
 
-Migrations run on boot. Roll back by checking out the previously recorded known-good
-commit SHA (or restoring its tagged image artifact) and rebuilding.
+Migrations run on boot. Roll back by checking out the recorded commit and either restoring
+the preserved image tag or rebuilding that commit. Never use `down -v` or a Docker prune:
+the Caddy TLS volumes and other apps on the shared host are outside this rollout's scope.
 
 ---
 

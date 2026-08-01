@@ -1,68 +1,68 @@
-# Task Result — V48 strict Alchimie live-recipe gate
+# Task Result — V48 anonymous production rollout
 
 ## Outcome
 
-- Rebuilt current-bound dossiers for the exact 21 pending Alchimie records and audited
-  E1–E5 against both the broad graph and the sparse private recipe books players receive.
-- Deterministic graph checks found zero failures and three salience warnings, but the new
-  runtime projection audit found seven boards with only one live opening. It binds the
-  exact IDs, source rows, pack, KG, rubric, dossiers, runtime sources, and generator.
-- Two independent reviews synthesized fail closed to one promotion, 17 rejections, and
-  three mandatory A5 keeps. Promoted only `al_literatura_097` (`Făt-Frumos`).
-- Kept `al_gastronomie_026`, `al_gastronomie_030`, and `al_viata_de_roman_092` pending and
-  unserved because every route depends on alcohol content covered by ADR-0019.
-- Removed 17 weak, arbitrary, filler-heavy, or recycled records. Three reviewer promotion
-  disagreements were rejected because promotion was not unanimous.
-- Alchimie is now 82 records = 79 approved/selectable + 3 pending. The original-game pack
-  is 618 = 610 approved + 8 pending / 449 eligible.
-- Added no board, alias, projection term, node, edge, or KG content. Regenerated rankings
-  and derived metadata without changing the frozen 336-board Intrusul/Perechi payload.
-  No deployment was performed.
+- Fast-forwarded the clean production checkout from rollout-record commit `2853eaf` to
+  exact V48 commit `d59caed25a1fdbca7556cb66740beb8cb449cb28`.
+- Rebuilt and recreated only the anonymous `app` service through
+  `docker-compose.anon.yml` + `.env.anon`; Caddy stayed running and retained TLS ownership.
+- The replacement image is `sha256:d18295ae372cb3cf38298d9f0a7eb13a0c1ff78a0347bfc9ef2c93ffa357292c`.
+  Its one Python process is healthy with zero restarts.
+- Production now serves the exact V48 pack: 618 records = 610 approved + 8 pending /
+  449 selectable, including 79 selectable Alchimie boards and promoted Făt-Frumos.
+- Accounts and submissions remain disabled. No database, migration, submissions volume,
+  second worker, graph change, or deployment-configuration change was introduced.
+
+## Public and runtime proof
+
+- Exact in-container SHA-256 checks passed for KG, pack, rankings, and derived catalog:
+  `f2a4229c…`, `05e80ab2…`, `0e2b5cda…`, and `87544c899…`.
+- Raw game counts are 232/207/97/82; approved runtime pools are 232/205/94/79; ranked
+  eligibility is 74/202/94/79. The frozen derived catalog is 183 Intrusul + 153 Perechi.
+- Frontend, `/healthz`, `/api/health`, `/api/manifest`, `/api/me`, and all 14 categories
+  passed through public HTTPS. The manifest is `fixture-v44-contexto-common-words` with
+  2,364 nodes / 9,217 edges / 180 puzzles.
+- Anonymous `POST /api/submissions` returned its required 503. A deterministic literature
+  Alchimie request selected Făt-Frumos with a hidden target ID and playable recipe summary.
+- Alchimie, Intrusul, Perechi, Conexiuni, Contexto, and Lanț all passed public fixed-seed
+  create + exact resume checks, including non-terminal hidden-answer contracts.
+- Post-smoke logs contain one expected submissions 503 and zero unexpected errors or 5xx.
+  Every game route logged successful requests; Caddy logged no upstream error.
+
+## Pre-deploy verification
+
+- Backend: 726/726; accounts-on: 53/53; bounded sessions: 16/16.
+- Frontend: 28/28 tests; ESLint and TypeScript green; production build 118.03/120 KiB with
+  the Romanian font-subset gate green.
+- Pack, ranking, derived-catalog, KG, Ruff, mirror, and whitespace gates: green.
+- Host preflight: clean repository, healthy V43 app, accounts-off anonymous stack, and only
+  the expected `app` + `caddy` services.
 
 ## Files changed
 
-- Content: both game-pack mirrors, both ranking sidecars, both derived-catalog metadata
-  copies, the runtime derived digest pin, and seven historical pack digest pins.
-- Workflow: `scripts/audit_alchimie_projections.py` generates replayable private-recipe
-  evidence; `scripts/apply_rereview.py` now requires both reviewers to bind that evidence,
-  replays the full artifact, and verifies its source against the untouched pre-apply pack.
-- Gate evidence: 21 exact dossiers, deterministic report, live-projection audit, complete
-  two-reviewer artifact, review report, ADR-0072, and the current STATUS.
-- Contracts: six V48 regressions plus unit coverage for missing, stale, and structurally
-  unreproducible projection evidence; historical lifecycle/count/profile assertions now
-  preserve removed records through the V48 archive.
-- Unchanged: KG, frontend, scoring, hidden answers, session semantics, and derived boards.
+- `docs/STATUS.md` records exact V48 production state and verified probes.
+- `docs/DEPLOY.md` now tags the running known-good image before replacing `latest`; this
+  closes the rollback gap observed during this rollout.
+- `TASK_RESULT.md` records the sanitized rollout evidence and residual risks.
+- No ADR is required: this separately authorized exact-commit rollout changes no default,
+  architecture, account mode, worker model, or release decision.
 
-## Verification
+## Residual risks and rollback
 
-- Full backend: 726/726 green.
-- Accounts-on: 53/53 green; bounded session store: 16/16 green under both the repository
-  environment and the prescribed shared environment.
-- Alchimie/runtime/V48 targeted gate: 55/55 green; V48 exact contract: 6/6 green.
-- Intrusul/Perechi/derived-catalog gate: 56/56 green.
-- Ruff, `git diff --check`, pack, KG, ranking, and derived-catalog validators: green.
-- Pack mirrors: 618 records, 610 approved / 8 pending, 449 runtime-eligible.
-- Alchimie: 82 records, 79 approved / 3 pending, 79 selectable.
-- Frozen derived boards: 183 Intrusul / 153 Perechi, unchanged SHA-256
-  `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
-
-The prescribed session command emitted only its existing warning that the shared
-`romania_scraper` environment does not recognize the Django pytest option; all 16 tests
-still passed. Frontend gates were not required because no frontend file changed.
-
-## Risks and manual review
-
-Alchimie has no generic rejection ledger. The committed source records, record digests,
-dossiers, reviewer bindings, projection audit, ADR, and regression tests preserve all 17
-removals. Any repair must consult that archive, materially change the named defect, and
-pass a fresh source-bound E1–E5 gate.
-
-The three A5 holds still require explicit owner disposition. The projection artifact
-intentionally pins the reviewed runtime and generator; a future recipe-runtime change must
-refresh evidence rather than silently inheriting these judgments. Production remains V43
-at `38da2f4`; V48 deliberately does not alter deployment state.
+- Recreating the app reset active in-memory game sessions. Browser-authored progress and
+  records remain local; anonymous production persists no player data.
+- The old V43 image was not tagged before rebuild and Docker did not retain its captured
+  image ID. This rollout can still roll back by rebuilding exact known-good code commit
+  `38da2f4`; the updated runbook preserves an immediate image tag before future rebuilds.
+- `npm audit` reports four high findings: brace-expansion and PostCSS are build-only and do
+  not enter the runtime image; the two production findings are one React Router advisory.
+  The primary advisory applies only to unstable RSC APIs, while this app uses BrowserRouter
+  and no RSC API. Track the upgrade separately:
+  <https://github.com/advisories/GHSA-qwww-vcr4-c8h2>.
+- The shared VPS is appropriate for this low-traffic anonymous pilot, not hardened or scaled
+  for a high-load public launch. Accounts remain off pending the compliance checklist.
 
 ## Merge recommendation
 
-Green to commit, land, and push on `main`. Do not deploy V48 as part of this content gate,
-and retain the task worktree/branch until the owner explicitly authorizes deletion.
+Production is healthy on V48. Green to land and push this three-file deployment record;
+retain the deployment worktree/branch until explicit owner authorization to delete it.
