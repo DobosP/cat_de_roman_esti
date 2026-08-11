@@ -15,8 +15,8 @@ Only items currently `status: pending` are eligible. Batch identity, full verifi
 coverage, filename/game scope, verdict enum, item ownership and status are validated
 before mutation. Every ``promote`` ID is re-run through the strict deterministic checks
 against the untouched inventory, including same-batch rejects as novelty debt; rejected
-Conexiuni rows are then tombstoned. The full pack validator runs and every mutated file
-ROLLS BACK on a red return or exception.
+Conexiuni boards and Lanț directed pairs are then tombstoned. The full pack validator runs
+and every mutated file ROLLS BACK on a red return or exception.
 
     python scripts/apply_rereview.py --dir <verdicts_dir>
 """
@@ -214,13 +214,14 @@ def critique_promotions(
     '''Gate promotions while retaining rejected rows as novelty tombstones.
 
     Review bindings are validated against the untouched batch first. Same-batch
-    rejects remain in the comparison inventory, preventing a promoted row from
-    recycling an exact group, a 3-of-4 group, or half of a rejected board. The
-    ``rejected_ids`` argument is retained for the caller contract and auditability.
+    rejects remain in the comparison inventory, preventing a promoted Conexiuni row
+    from recycling an exact group, a 3-of-4 group, or half of a rejected board. The
+    full untouched pending inventory likewise supplies same-batch rejects, keeps,
+    unrelated rows, and co-promotions to the Lanț exact-pair census. ``rejected_ids``
+    remains in the caller contract for compatibility; the census needs no verdict labels.
     '''
     if not item_ids:
         return 0
-    rejected_ids = rejected_ids or set()
     pack, svc, strong, regions = critique_pack.load_all(
         critique_pack.PACKAGE_PACK, critique_pack.PACKAGE_KG,
     )
@@ -281,6 +282,37 @@ def updated_rejection_tombstones(
     data["meta"]["count"] = len(items)
     data["meta"]["group_count"] = len(items) * 4
     critique_pack.validate_rejection_tombstones(data)
+    return (json.dumps(data, ensure_ascii=False, indent=1) + "\n").encode("utf-8")
+
+
+def updated_lant_rejection_tombstones(
+    original: bytes,
+    rejected_records: list[dict],
+    review_bindings: dict[str, str],
+    gate_digests: dict[str, str],
+) -> bytes:
+    """Append exact rejected Lanț pairs without permitting ID drift."""
+    data = json.loads(original.decode("utf-8"))
+    critique_pack.validate_lant_rejection_tombstones(data)
+    items = data["items"]
+    for rec in sorted(rejected_records, key=lambda row: str(row["id"])):
+        item_id = str(rec["id"])
+        pair = {"start": str(rec["start"]), "target": str(rec["target"])}
+        entry = {
+            "record_sha256": critique_pack.canonical_json_sha256(rec),
+            "pair_sha256": critique_pack.canonical_json_sha256(pair),
+            "review_binding": review_bindings[item_id],
+            "source_gate_sha256": gate_digests[item_id],
+            **pair,
+        }
+        existing = items.get(item_id)
+        if existing is not None and existing != entry:
+            raise SystemExit(
+                f"Lanț rejection tombstone conflict for revised item: {item_id}"
+            )
+        items[item_id] = entry
+    data["meta"]["count"] = len(items)
+    critique_pack.validate_lant_rejection_tombstones(data)
     return (json.dumps(data, ensure_ascii=False, indent=1) + "\n").encode("utf-8")
 
 
@@ -453,6 +485,11 @@ def main(argv: list[str]) -> int:
         for rec in baseline["conexiuni"]
         if str(rec.get("id")) in rejections
     ]
+    rejected_lant = [
+        rec
+        for rec in baseline["lant"]
+        if str(rec.get("id")) in rejections
+    ]
 
     stats = Counter()
     transaction_paths = [
@@ -460,6 +497,11 @@ def main(argv: list[str]) -> int:
         *(
             [critique_pack.REJECTION_TOMBSTONES]
             if rejected_conexiuni
+            else []
+        ),
+        *(
+            [critique_pack.LANT_REJECTION_TOMBSTONES]
+            if rejected_lant
             else []
         ),
     ]
@@ -496,6 +538,16 @@ def main(argv: list[str]) -> int:
                     gate_digests,
                 ),
             )
+        if rejected_lant:
+            atomic_write(
+                critique_pack.LANT_REJECTION_TOMBSTONES,
+                updated_lant_rejection_tombstones(
+                    originals[critique_pack.LANT_REJECTION_TOMBSTONES],
+                    rejected_lant,
+                    review_bindings,
+                    gate_digests,
+                ),
+            )
         if validate_games_pack.main(['validate_games_pack.py']) != 0:
             raise SystemExit("pack validation failed — rolling back both copies")
         final = json.loads(PACK_COPIES[0].read_text(encoding="utf-8"))["meta"]["counts"]
@@ -507,6 +559,11 @@ def main(argv: list[str]) -> int:
         print(
             "rejection tombstones now: "
             f"{len(critique_pack.load_rejection_tombstones())}"
+        )
+    if rejected_lant:
+        print(
+            "Lanț rejection tombstones now: "
+            f"{len(critique_pack.load_lant_rejection_tombstones())}"
         )
     print(f"pack counts now: {final}")
     return 0

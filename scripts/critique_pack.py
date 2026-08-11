@@ -26,7 +26,9 @@ half-board concept recycling, including previously rejected boards;
 ``label_self_leak`` catches labels that repeat one of their answers;
 ``salience_floor`` flags Contexto/Lant/Alchimie targets below their difficulty band;
 ``lant_playability`` blocks Lanț records that fail the runtime's exact-distance or
-shortest-path choice floors;
+shortest-path choice floors; ``lant_rejection_debt`` blocks exact directed start/target
+pairs already rejected by a bound review gate; ``lant_pair_reuse`` blocks an exact
+directed pair duplicated elsewhere in the current inventory;
 ``member_overuse`` flags nodes reused across too many approved Conexiuni boards.
 
 Usage::
@@ -75,6 +77,12 @@ REJECTION_TOMBSTONES = (
     / "cat_de_roman_esti"
     / "fixtures"
     / "conexiuni_rejection_tombstones.json"
+)
+LANT_REJECTION_TOMBSTONES = (
+    _REPO_ROOT
+    / "cat_de_roman_esti"
+    / "fixtures"
+    / "lant_rejection_tombstones.json"
 )
 RUBRIC_PATH = _REPO_ROOT / "docs" / "CRITIQUE_RUBRIC.md"
 REVIEW_BINDING_VERSION = 1
@@ -171,6 +179,85 @@ def load_rejection_tombstones(path: Path | None = None) -> list[dict]:
     """Load exact rejected boards retained solely for future novelty checks."""
     source = path or REJECTION_TOMBSTONES
     return validate_rejection_tombstones(
+        json.loads(source.read_text(encoding="utf-8"))
+    )
+
+
+def validate_lant_rejection_tombstones(data: object) -> list[dict]:
+    """Validate and normalize exact directed Lanț rejection debt."""
+    if not isinstance(data, dict) or data.get("schema_version") != 1:
+        raise ValueError("Lanț rejection tombstones: expected schema_version 1")
+    items = data.get("items")
+    meta = data.get("meta")
+    if not isinstance(items, dict) or not isinstance(meta, dict):
+        raise ValueError("Lanț rejection tombstones: invalid items/meta")
+    for key in (
+        "initial_seed_gate_sha256",
+        "initial_seed_id_set_sha256",
+        "initial_seed_pack_sha256",
+    ):
+        value = meta.get(key)
+        if not isinstance(value, str) or re.fullmatch(r"[0-9a-f]{64}", value) is None:
+            raise ValueError(f"Lanț rejection tombstones: invalid {key}")
+    seed_commit = meta.get("initial_seed_pack_commit")
+    if (
+        not isinstance(seed_commit, str)
+        or re.fullmatch(r"[0-9a-f]{40}", seed_commit) is None
+    ):
+        raise ValueError("Lanț rejection tombstones: invalid initial seed commit")
+
+    records = []
+    initial_seed_ids = []
+    for item_id, row in sorted(items.items()):
+        if not isinstance(item_id, str) or not isinstance(row, dict):
+            raise ValueError("Lanț rejection tombstones: invalid item entry")
+        start = row.get("start")
+        target = row.get("target")
+        pair = {"start": start, "target": target}
+        if (
+            not item_id.startswith("lt_")
+            or not isinstance(start, str)
+            or not start
+            or not isinstance(target, str)
+            or not target
+            or start == target
+        ):
+            raise ValueError(f"Lanț rejection tombstones: invalid pair for {item_id}")
+        record_sha = row.get("record_sha256")
+        pair_sha = row.get("pair_sha256")
+        binding = row.get("review_binding")
+        source_gate = row.get("source_gate_sha256")
+        if (
+            not isinstance(record_sha, str)
+            or re.fullmatch(r"[0-9a-f]{64}", record_sha) is None
+            or not isinstance(pair_sha, str)
+            or re.fullmatch(r"[0-9a-f]{64}", pair_sha) is None
+            or not isinstance(binding, str)
+            or re.fullmatch(r"sha256:[0-9a-f]{64}", binding) is None
+            or not isinstance(source_gate, str)
+            or re.fullmatch(r"[0-9a-f]{64}", source_gate) is None
+        ):
+            raise ValueError(f"Lanț rejection tombstones: invalid binding for {item_id}")
+        if pair_sha != canonical_json_sha256(pair):
+            raise ValueError(f"Lanț rejection tombstones: pair digest drift for {item_id}")
+        if source_gate == meta["initial_seed_gate_sha256"]:
+            initial_seed_ids.append(item_id)
+        records.append({"id": item_id, **pair})
+
+    if meta.get("count") != len(records):
+        raise ValueError("Lanț rejection tombstones: stale meta count")
+    seed_id_blob = (
+        "\n".join(initial_seed_ids) + ("\n" if initial_seed_ids else "")
+    ).encode()
+    if hashlib.sha256(seed_id_blob).hexdigest() != meta["initial_seed_id_set_sha256"]:
+        raise ValueError("Lanț rejection tombstones: initial seed ID set drift")
+    return records
+
+
+def load_lant_rejection_tombstones(path: Path | None = None) -> list[dict]:
+    """Load rejected Lanț pairs retained solely for future quality gates."""
+    source = path or LANT_REJECTION_TOMBSTONES
+    return validate_lant_rejection_tombstones(
         json.loads(source.read_text(encoding="utf-8"))
     )
 
@@ -799,6 +886,43 @@ def check_lant_playability(rec: dict, svc: WordGameService) -> list[dict]:
     ]
 
 
+def check_lant_rejection_debt(
+    rec: dict,
+    rejected_pairs: dict[tuple[str, str], list[str]],
+) -> list[dict]:
+    """Block a directed start/target pair already rejected by a bound gate."""
+    pair = (str(rec.get("start", "")), str(rec.get("target", "")))
+    rejected_ids = sorted(rejected_pairs.get(pair, []))
+    if not rejected_ids:
+        return []
+    return [{
+        "check": "lant_rejection_debt",
+        "level": "FAIL",
+        "detail": "directed start/target pair was already rejected "
+                  f"(see: {', '.join(rejected_ids)})",
+    }]
+
+
+def check_lant_pair_reuse(
+    rec: dict,
+    current_pairs: dict[tuple[str, str], list[str]],
+) -> list[dict]:
+    """Block an exact directed pair duplicated by another current Lanț row."""
+    pair = (str(rec.get("start", "")), str(rec.get("target", "")))
+    item_id = str(rec.get("id", ""))
+    duplicate_ids = sorted(
+        other_id for other_id in current_pairs.get(pair, []) if other_id != item_id
+    )
+    if not duplicate_ids:
+        return []
+    return [{
+        "check": "lant_pair_reuse",
+        "level": "FAIL",
+        "detail": "directed start/target pair duplicates current inventory "
+                  f"(see: {', '.join(duplicate_ids)})",
+    }]
+
+
 # --------------------------------------------------------------------- dossiers
 def canonical_json_sha256(value: object) -> str:
     '''Stable SHA-256 for JSON-shaped review inputs.'''
@@ -1147,6 +1271,26 @@ def run(pack: dict, svc: WordGameService, strong: dict, regions: dict,
         rec.get("status") == "pending" and rec.get("id") in ids
         for rec in pack["conexiuni"]
     )
+    pending_lant_gate = (
+        "lant" in games
+        and "pending" in statuses
+        and (
+            ids is None
+            or any(
+                rec.get("status") == "pending" and rec.get("id") in ids
+                for rec in pack["lant"]
+            )
+        )
+    )
+    current_lant_pairs: dict[tuple[str, str], list[str]] = defaultdict(list)
+    rejected_lant_pairs: dict[tuple[str, str], list[str]] = defaultdict(list)
+    if pending_lant_gate:
+        for current in pack["lant"]:
+            pair = (str(current.get("start", "")), str(current.get("target", "")))
+            current_lant_pairs[pair].append(str(current.get("id", "")))
+        for rejected in load_lant_rejection_tombstones():
+            pair = (rejected["start"], rejected["target"])
+            rejected_lant_pairs[pair].append(f"rejected:{rejected['id']}")
     for rec in pack["conexiuni"]:
         compare_selected = (
             ids is not None
@@ -1215,6 +1359,11 @@ def run(pack: dict, svc: WordGameService, strong: dict, regions: dict,
             elif game == "lant":
                 findings = check_target_salience(rec, svc, rec["start"], rec["target"])
                 findings.extend(check_lant_playability(rec, svc))
+                if pending_lant_gate and rec.get("status") == "pending":
+                    findings.extend(check_lant_pair_reuse(rec, current_lant_pairs))
+                    findings.extend(
+                        check_lant_rejection_debt(rec, rejected_lant_pairs)
+                    )
             else:  # alchimie
                 findings = check_target_salience(rec, svc, rec["target"])
             findings.extend(check_generic_region(rec, game, svc, regions))

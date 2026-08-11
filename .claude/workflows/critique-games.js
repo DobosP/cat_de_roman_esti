@@ -14,6 +14,7 @@ export const meta = {
 const A = typeof args === 'string' ? JSON.parse(args) : (args || {})
 const REPO = A.repo || '.'
 const RUBRIC = `${REPO}/docs/CRITIQUE_RUBRIC.md`
+const PACK = `${REPO}/cat_de_roman_esti/fixtures/games_pack.json`
 const MODE = A.mode || 'gate'
 const IDS = A.ids || []
 const DOSSIERS = A.dossierDir
@@ -65,7 +66,7 @@ Read, in this order:
 
 Then:
 - Simulate an average Romanian player (not a specialist). For conexiuni: labels are HIDDEN during play — can the player partition the 16 tiles from the tiles alone, and does each solved group feel earned and consistent? For contexto: would the player ever converge on this target by free association, and does getting warmer feel legible?
-- For lant, inspect every labeled representative path and judge whether each step is a nameable association. For alchimie, inspect productive_openings and minimum_action_recipe; structural craftability alone is not quality.
+- For lant, inspect every labeled representative path and judge whether each step is a nameable association; census exact directed start/target pairs in both ${PACK} and ${REPO}/cat_de_roman_esti/fixtures/lant_rejection_tombstones.json. Ignore the current item ID in ${PACK}; reject only reuse by another row or by the ledger. Do not infer that the reverse pair or a merely similar corridor is equivalent. For alchimie, inspect productive_openings and minimum_action_recipe; structural craftability alone is not quality.
 - For conexiuni, rewrite every hidden group as "each tile ___" and reject any predicate that does not survive that sentence. Catch-all labels such as "țin de", "repere ale/din", "apar în", and "legate de" are evidence of an association bundle, not predicates. Treat four-type sorting, three-or-more literal display/name rules, and a recycled rejected-board template as defects even when the graph lint is otherwise clean; consult ${REPO}/cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json.
 - Walk every rubric criterion; name each violated failure mode exactly (e.g. "B1 Predicate Inconsistency", "C1 Nameable-thing", "B5 mirrored groups", "A7 non-distinctive association" — check the dossier's nondistinctive_region_links block).
 - Be hard: "technically valid but no Romanian would enjoy it" is a failing item. The bar is a prime-time-audience puzzle, not a graph exercise.
@@ -81,7 +82,7 @@ const verifyPrompt = (c, sampled) => `You are an adversarial Opus verifier with 
 Item ${c.id} (game: ${gameOf(c.id)}), mode=${MODE}. Review binding: ${c.review_binding}. Critic proposed: ${c.proposed}. Failure modes: ${JSON.stringify(c.failure_modes)}. Reasoning: ${c.reasoning}
 
 1. Read ${RUBRIC} (sections A, F, and ${sectionOf(c.id)}) and ${DOSSIERS}/${c.id}.json yourself — do not trust the critic's summary.
-   For lant/alchimie, independently inspect the labeled representative paths or productive openings/minimum recipe; do not accept aggregate branch/closure counts as semantic evidence.
+   For lant/alchimie, independently inspect the labeled representative paths or productive openings/minimum recipe; do not accept aggregate branch/closure counts as semantic evidence. For lant, also verify exact directed-pair freshness against both ${PACK} and ${REPO}/cat_de_roman_esti/fixtures/lant_rejection_tombstones.json, excluding the current item ID from the pack comparison.
    For conexiuni, independently test all four predicates, the full 16-tile partition, type/surface shortcuts, and rejected-template reuse; do not accept zero deterministic FAILs as proof of quality.
 2. Refute-first: argue the OPPOSITE of the critic's verdict; keep whichever position survives the evidence.
 3. Run rubric section F web checks (WebSearch/WebFetch) on every claim in ${JSON.stringify(c.web_claims)} and on any A1/A2/C2 doubt you have: ro.wikipedia presence, school-canon, national media (digi24/HotNews/ProTV/Libertatea/GSP), charts, sustained-vs-spike interest, cross-generational legibility. Record each check + outcome in web_checks.

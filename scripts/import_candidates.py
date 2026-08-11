@@ -20,6 +20,8 @@ Curation policy (quality over quantity):
     factual ``block`` and quality ``drop`` are explicit, verified exclusions;
   * quality verdict ``keep`` -> imported as ``status: pending``;
     ADR-0023's strict lint + two-agent judge gate is the only promotion path;
+  * a kept Lanț instance may not reuse an exact directed start/target pair from the
+    durable rejection ledger; ledger drift or reuse aborts the batch before mutation;
   * every surviving instance is re-derived against the MERGED graph (Lanț distance +
     branch floor, Alchimie exact action par + opening pairs, Contexto floors,
     Conexiuni board shape) — the generator's numbers are never trusted;
@@ -47,6 +49,7 @@ _REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_REPO_ROOT))
 sys.path.insert(0, str(_REPO_ROOT / "scripts"))
 
+import critique_pack  # noqa: E402
 import densify_content  # noqa: E402
 import validate_games_pack  # noqa: E402
 from content_file_transaction import atomic_write, file_transaction  # noqa: E402
@@ -200,6 +203,39 @@ def _raw_reference_inventory(
     return set(refs), node_refs, instance_refs
 
 
+def lant_rejection_errors(
+    candidate: dict,
+    quality: dict,
+    rejected_pairs: dict[tuple[str, str], list[str]],
+) -> list[str]:
+    """Report kept raw Lanț instances that reuse rejected directed pairs."""
+    verdicts = {
+        str(row.get("ref")): row.get("verdict")
+        for row in quality.get("instances", [])
+        if isinstance(row, dict)
+    }
+    errors = []
+    for idx, instance in enumerate(candidate.get("lant", []) or []):
+        if not isinstance(instance, dict):
+            continue
+        ref = f"lant[{idx}]"
+        if verdicts.get(ref) != "keep":
+            continue
+        raw_start = str(instance.get("start", ""))
+        raw_target = str(instance.get("target", ""))
+        pair = (
+            DUPLICATE_ALIASES.get(raw_start, raw_start),
+            DUPLICATE_ALIASES.get(raw_target, raw_target),
+        )
+        rejected_ids = sorted(rejected_pairs.get(pair, []))
+        if rejected_ids:
+            errors.append(
+                f"{ref} reuses rejected directed start/target pair "
+                f"(see: {', '.join(rejected_ids)})"
+            )
+    return errors
+
+
 def _validate_header(
     category: str,
     name: str,
@@ -340,6 +376,15 @@ def preflight_candidates(gen_dir: Path) -> dict[str, dict]:
     if not category_dirs:
         raise SystemExit(f"no candidate category artifacts under {gen_dir}")
 
+    try:
+        lant_tombstones = critique_pack.load_lant_rejection_tombstones()
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError) as exc:
+        raise SystemExit(f"invalid Lanț rejection ledger: {exc}") from exc
+    rejected_lant_pairs: dict[tuple[str, str], list[str]] = {}
+    for row in lant_tombstones:
+        pair = (row["start"], row["target"])
+        rejected_lant_pairs.setdefault(pair, []).append(f"rejected:{row['id']}")
+
     errors: list[str] = []
     bundles: dict[str, dict] = {}
     for category_dir in category_dirs:
@@ -373,6 +418,14 @@ def preflight_candidates(gen_dir: Path) -> dict[str, dict]:
         binding = candidate_binding(candidate_blob)
         _validate_factual(category, factual, expected, binding, errors)
         _validate_quality(category, quality, instance_refs, binding, errors)
+        errors.extend(
+            f"{category}/candidates.json: {error}"
+            for error in lant_rejection_errors(
+                candidate,
+                quality,
+                rejected_lant_pairs,
+            )
+        )
         bundles[category] = {
             "cand": candidate,
             "factual": factual,

@@ -1,0 +1,35 @@
+{
+ "schema_version": 1,
+ "version": "V49",
+ "audited_at": "2026-08-11",
+ "scope": "lant_rejection_ledger_initial_seed",
+ "source": {
+  "pre_apply_pack_commit": "246e8577412831405c67bfd6e8843121d8309cd0",
+  "pre_apply_pack_sha256": "742478415995b67379ba6fe58f939132abbff141aef7af392eff05b70e7845b6",
+  "gate_path": "docs/reviews/v45-lant-pending-gate/lant_verdicts.json",
+  "gate_sha256": "4e976a185b27ccee2737542ed8321c6664b7b8c974ae8e793076571964af4458",
+  "dossiers_path": "docs/reviews/v45-lant-pending-gate/dossiers",
+  "rejected_id_set_sha256": "eadd0fc249c8bcdd601e2ffd9a03b0c2aa472e9115d853fdf165aa884bd597e6"
+ },
+ "output": {
+  "path": "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json",
+  "sha256": "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29",
+  "record_count": 104,
+  "directed_pair_count": 104
+ },
+ "excluded_pending_ids": [
+  "lt_literatura_210",
+  "lt_stiinta_216",
+  "lt_viata_de_roman_211"
+ ],
+ "checks": {
+  "source_rows_were_pending": 104,
+  "record_digests_match_dossiers": 104,
+  "pairs_match_dossiers": 104,
+  "verdicts_are_reject": 104,
+  "review_bindings_match_gate": 104,
+  "source_gate_digests_match": 104,
+  "excluded_holds_absent": 3,
+  "runtime_pair_overlap": 0
+ }
+}

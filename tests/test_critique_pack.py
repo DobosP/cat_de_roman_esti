@@ -1291,6 +1291,9 @@ def test_authored_workflow_censuses_full_inventory_for_reskins():
     assert "conexiuni_rejection_tombstones.json" in workflow
     assert "exact or 3-of-4 quads plus >=8/16 whole-board overlap" in workflow
     assert "Treat those freshness matches as drop" in workflow
+    assert "lant_rejection_tombstones.json" in workflow
+    assert "exact directed start/target pair" in workflow
+    assert "both the full pack" in workflow
     assert "candidate_sha256" in workflow
 
 
@@ -1303,7 +1306,12 @@ def test_audit_and_gate_workflows_retain_rejected_pattern_evidence():
     ).read_text(encoding="utf-8")
     assert "demotion/rejection artifact" in audit
     assert "rejection tombstones" in audit
+    assert "lant_rejection_tombstones.json" in audit
     assert "conexiuni_rejection_tombstones.json" in gate
+    assert "lant_rejection_tombstones.json" in gate
+    assert "const PACK =" in gate
+    assert "Ignore the current item ID" in gate
+    assert "excluding the current item ID" in gate
     assert "four-type sorting" in gate
 
 

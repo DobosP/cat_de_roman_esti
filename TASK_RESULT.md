@@ -1,68 +1,82 @@
-# Task Result — V48 anonymous production rollout
+# Task Result — V49 durable Lanț rejection-debt workflow
 
 ## Outcome
 
-- Fast-forwarded the clean production checkout from rollout-record commit `2853eaf` to
-  exact V48 commit `d59caed25a1fdbca7556cb66740beb8cb449cb28`.
-- Rebuilt and recreated only the anonymous `app` service through
-  `docker-compose.anon.yml` + `.env.anon`; Caddy stayed running and retained TLS ownership.
-- The replacement image is `sha256:d18295ae372cb3cf38298d9f0a7eb13a0c1ff78a0347bfc9ef2c93ffa357292c`.
-  Its one Python process is healthy with zero restarts.
-- Production now serves the exact V48 pack: 618 records = 610 approved + 8 pending /
-  449 selectable, including 79 selectable Alchimie boards and promoted Făt-Frumos.
-- Accounts and submissions remain disabled. No database, migration, submissions volume,
-  second worker, graph change, or deployment-configuration change was introduced.
+- Started V49 as the ledger hardening explicitly left by V45/ADR-0069, instead of
+  re-gating the eight unchanged owner/blocker holds or beginning privacy-sensitive pilot
+  telemetry.
+- Added a non-runtime Lanț rejection ledger seeded with exactly the 104 V45 rejects and
+  104 unique directed start/target pairs. The three V45 keeps are excluded.
+- Bound the seed to the pre-V45 pack commit/hash, sorted rejected-ID set, exact V45 gate,
+  dossier review bindings, canonical record digests, and per-pair digests.
+- Added fail-closed checks to candidate import, deterministic pending critique, and review
+  apply. Import checks canonical post-alias pairs before mutation; critique compares the
+  selected row with the full current inventory and ledger; future rejects append in the
+  same transaction as pack mutation and roll back with it.
+- Kept direction exact. Reverse pairs and merely similar corridors remain ordinary A1–A7
+  and D1–D5 human-review evidence rather than inferred automated rejections.
 
-## Public and runtime proof
+## Quality conditions retained
 
-- Exact in-container SHA-256 checks passed for KG, pack, rankings, and derived catalog:
-  `f2a4229c…`, `05e80ab2…`, `0e2b5cda…`, and `87544c899…`.
-- Raw game counts are 232/207/97/82; approved runtime pools are 232/205/94/79; ranked
-  eligibility is 74/202/94/79. The frozen derived catalog is 183 Intrusul + 153 Perechi.
-- Frontend, `/healthz`, `/api/health`, `/api/manifest`, `/api/me`, and all 14 categories
-  passed through public HTTPS. The manifest is `fixture-v44-contexto-common-words` with
-  2,364 nodes / 9,217 edges / 180 puzzles.
-- Anonymous `POST /api/submissions` returned its required 503. A deterministic literature
-  Alchimie request selected Făt-Frumos with a hidden target ID and playable recipe summary.
-- Alchimie, Intrusul, Perechi, Conexiuni, Contexto, and Lanț all passed public fixed-seed
-  create + exact resume checks, including non-terminal hidden-answer contracts.
-- Post-smoke logs contain one expected submissions 503 and zero unexpected errors or 5xx.
-  Every game route logged successful requests; Caddy logged no upstream error.
+- Exact sorted batch identity, fresh dossier/KG/rubric bindings, strict deterministic and
+  runtime-real evidence, complete two-reviewer coverage, unanimous promotion, either
+  rejection rejects, owner-only A5 holds, and no quota promotions remain the gate bar.
+- Approved, pending, kept, unrelated, co-promoted, and same-batch-rejected Lanț rows all
+  participate in exact-pair comparison; only the current row ID excludes itself.
+- The V45–V48 archives remain immutable. V49 deliberately leaves the rubric digest,
+  pack, rankings, derived wrapper, frozen derived payload, and runtime source pins at
+  their V48 bytes.
 
-## Pre-deploy verification
+## Evidence
 
-- Backend: 726/726; accounts-on: 53/53; bounded sessions: 16/16.
-- Frontend: 28/28 tests; ESLint and TypeScript green; production build 118.03/120 KiB with
-  the Romanian font-subset gate green.
-- Pack, ranking, derived-catalog, KG, Ruff, mirror, and whitespace gates: green.
-- Host preflight: clean repository, healthy V43 app, accounts-off anonymous stack, and only
-  the expected `app` + `caddy` services.
+- ADR: `docs/adr/0073-durable-lant-rejection-debt.md`.
+- Review archive: `docs/reviews/v49-lant-rejection-ledger/README.md` and
+  `seed-audit.json`.
+- Ledger SHA-256:
+  `e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29`.
+- V45 gate SHA-256:
+  `4e976a185b27ccee2737542ed8321c6664b7b8c974ae8e793076571964af4458`.
+- Pack/rankings/derived SHA-256 remain `05e80ab2…`, `0e2b5cda…`, and `87544c899…`;
+  the frozen 336-board payload remains `71a2acef…`.
+- Content remains 618 records = 610 approved + 8 pending / 449 selectable. No game row,
+  KG node/edge/alias, content status, score, session behavior, account mode, frontend, or
+  production deployment changed.
+
+## Verification
+
+- Full backend: **748/748**.
+- Accounts enabled: **53/53**.
+- Bounded word-game sessions: **16/16**; only the existing foreign-venv
+  `DJANGO_SETTINGS_MODULE` warning appeared.
+- V49 plus V45–V48, critique, and importer regressions: green (also included in the full
+  backend result).
+- The real Lanț pending sweep checked all three holds with the ledger/full-pair census:
+  0 flagged items and 0 FAIL findings.
+- Pack, ranking, derived-catalog, and KG validators: green.
+- Ruff, all three edited workflow syntax checks, and `git diff --check`: green.
+- Frontend checks were not rerun because no frontend or release-bundle file changed.
 
 ## Files changed
 
-- `docs/STATUS.md` records exact V48 production state and verified probes.
-- `docs/DEPLOY.md` now tags the running known-good image before replacing `latest`; this
-  closes the rollback gap observed during this rollout.
-- `TASK_RESULT.md` records the sanitized rollout evidence and residual risks.
-- No ADR is required: this separately authorized exact-commit rollout changes no default,
-  architecture, account mode, worker model, or release decision.
+- Ledger/runtime tooling: `lant_rejection_tombstones.json`, `critique_pack.py`,
+  `import_candidates.py`, and `apply_rereview.py`.
+- Workflow prompts: `critique-games.js`, `game-audit-recon.js`, and
+  `verify-authored-content.js`.
+- Regression coverage: `test_v49_lant_rejection_ledger.py` and workflow assertions in
+  `test_critique_pack.py`.
+- Durable record: ADR-0073, the V49 review archive, `docs/STATUS.md`, and this result.
 
-## Residual risks and rollback
+## Residual work
 
-- Recreating the app reset active in-memory game sessions. Browser-authored progress and
-  records remain local; anonymous production persists no player data.
-- The old V43 image was not tagged before rebuild and Docker did not retain its captured
-  image ID. This rollout can still roll back by rebuilding exact known-good code commit
-  `38da2f4`; the updated runbook preserves an immediate image tag before future rebuilds.
-- `npm audit` reports four high findings: brace-expansion and PostCSS are build-only and do
-  not enter the runtime image; the two production findings are one React Router advisory.
-  The primary advisory applies only to unstable RSC APIs, while this app uses BrowserRouter
-  and no RSC API. Track the upgrade separately:
-  <https://github.com/advisories/GHSA-qwww-vcr4-c8h2>.
-- The shared VPS is appropriate for this low-traffic anonymous pilot, not hardened or scaled
-  for a high-load public launch. Accounts remain off pending the compliance checklist.
+- The three Lanț holds still require their named blocker to change and then a fresh exact
+  gate. The two Contexto and three Alchimie A5 holds still require explicit owner action.
+- Broader corridor similarity has no approved deterministic threshold and remains a
+  human D1–D5 judgment.
+- The first genuine future ledger append must evolve the V49 exact-seed assertions while
+  preserving all 104 V45 entries as an immutable subset.
+- Production remains V48 at `d59caed`; V49 was not deployed.
 
-## Merge recommendation
+## Handoff
 
-Production is healthy on V48. Green to land and push this three-file deployment record;
-retain the deployment worktree/branch until explicit owner authorization to delete it.
+The branch is green and ready for review/landing. No commit, push, merge, deployment, or
+owner-hold disposition was performed.

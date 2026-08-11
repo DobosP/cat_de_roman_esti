@@ -84,7 +84,7 @@ const results = await parallel([
     { agentType: 'analyst', label: 'dossier:history', phase: 'Gather', schema: DOC_DOSSIER },
   ),
   () => agent(
-    `${COMMON}\n\nBuild a dossier on the CONTENT PIPELINE: how new boards get created, validated, ranked, critiqued (docs/CRITIQUE_RUBRIC.md), approved, rejected/tombstoned, and bundled. Include the exact file format + required fields to author a new board for each game, what approved/pending/eligible mean, how rejection novelty debt is retained, and how the critique gate is invoked. The orchestrator will author new boards, so precision on formats and gates matters most.`,
+    `${COMMON}\n\nBuild a dossier on the CONTENT PIPELINE: how new boards get created, validated, ranked, critiqued (docs/CRITIQUE_RUBRIC.md), approved, rejected/tombstoned, and bundled. Include the exact file format + required fields to author a new board for each game, what approved/pending/eligible mean, how rejection novelty debt is retained in both conexiuni_rejection_tombstones.json and lant_rejection_tombstones.json, and how the critique gate is invoked. The orchestrator will author new boards, so precision on formats and gates matters most.`,
     { agentType: 'analyst', label: 'dossier:content-pipeline', phase: 'Gather', schema: DOC_DOSSIER },
   ),
   () => agent(

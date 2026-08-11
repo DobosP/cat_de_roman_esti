@@ -1,28 +1,28 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-08-01. This file is the repository's current source of truth._
+_As of 2026-08-11. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-01 (V48 backend 726/726, accounts 53/53, sessions 16/16,
-frontend 28/28 + lint/typecheck/build at 118.03/120 KiB, all artifact validators, and
-production runtime/public/log probes green on exact commit `d59caed`)._
+_Last verified: 2026-08-11 (V49 backend 748/748, accounts 53/53, sessions 16/16, artifact validators, Ruff, workflow syntax, and whitespace green; frontend unchanged; production probes remain V48)._
 
-## Current outcome — V48 strict Alchimie live-recipe gate (ADR-0072)
+## Current outcome — V49 durable Lanț rejection debt (ADR-0073)
 
-- Fresh exact dossiers cover all 21 formerly pending Alchimie records. The broad-graph
-  critique found 0 FAILs and 3 salience WARNs, but source-bound simulation of the private
-  sparse recipe books found seven boards with only one live opening.
-- Two independent E1–E5 reviews produced one unanimous promotion (`Făt-Frumos`), 17
-  fail-closed rejections, and three mandatory ADR-0019 alcohol holds. No quota overrode
-  legibility; all removed source rows remain in the replayable V48 audit.
-- Alchimie is 79 approved/selectable + 3 pending. Its 79 live projections stay bounded;
-  declared and exact par agree. No alias, node, edge, KG content, or new board was added.
+- A non-runtime ledger now retains exactly the 104 V45 Lanț rejections as 104 unique
+  directed start/target pairs. Each entry binds its rejected record, pair, exact dossier,
+  and complete V45 gate; the initial ID set and source commit/pack are pinned.
+- Import canonicalizes aliases and fails before mutation on ledger reuse. Pending critique
+  checks the full current Lanț inventory plus the ledger, excluding only the row itself.
+  Future rejects append with the pack transaction and roll back on any validation failure.
+- Reverse pairs are distinct; broader corridor similarity remains D1–D5 human evidence.
+  The three V45 repair holds are excluded and unchanged. No owner disposition was inferred.
+- Pack, KG, rubric, rankings, derived catalog, statuses, selection, frontend, and sessions are unchanged. V49 did not deploy.
+- V48 remains: Alchimie has 79 approved/selectable + 3 alcohol A5 holds; its source-bound
+  private recipes are bounded and the complete one-promote/17-reject archive is retained.
 - V47 remains: Cald sau Rece has 205 approved / 2 pending / 202 selectable unique targets;
   `Mâncare` is served and `Shitpost`/`Industrie` remain A5 owner holds.
 - V46 remains: Conexiuni has 232 approved / 74 selectable / 0 pending and a durable
   rejection ledger of 122 boards / 488 groups. V45 leaves Lanț at 94 selectable boards
   and three pending repair holds.
-- V44's 71-node Cald sau Rece repair, 453-term projection, 12 aliases, and 11 non-winning
-  projections remain unchanged. The frozen 336-board Intrusul/Perechi payload is unchanged.
+- V44's repair/projection remains unchanged; so does the frozen 336-board derived payload.
 - The six-game tap-first lobby remains Alchimie → Intrusul → Perechi → Conexiuni → Cald sau
   Rece → Lanț. Mobile stays one card per row; wide screens use three columns.
 - Alchimie help still starts after two distinct barren experiments, reveals only bounded
@@ -49,8 +49,9 @@ from the frozen V38 source snapshot; its `boards` payload hash is
 Bundled KG: **2,364 nodes / 9,217 edges / 7,452 aliases / 180 puzzles**
 (`fixture-v44-contexto-common-words`).
 
-ADR-0072's exact dossiers, deterministic report, live-projection audit, and two-reviewer
-verdicts are under `docs/reviews/v48-alchimie-pending-gate/`; rankings remain estimates.
+ADR-0073's seed audit is under `docs/reviews/v49-lant-rejection-ledger/`. V45's exact
+Lanț gate and V48's live-projection gate remain their immutable source evidence; rankings
+remain estimates.
 
 ## Runtime, accounts, and deployment
 
@@ -85,8 +86,8 @@ git diff --check
   re-add one of the 17 rejected source records unchanged or fill the shelf by quota.
 - Any future Conexiuni authoring starts materially fresh from the ten hidden shelves and
   durable rejection evidence; never force a quota or reuse a banned quad.
-- Repair the three Lanț holds only after their named blocker changes, then generate fresh
-  exact dossiers; add a generic Lanț rejection ledger before another large import.
+- Census the full Lanț pack and durable ledger before authoring/import. Repair the three
+  holds only after their named blocker changes, then generate fresh exact dossiers.
 - Resolve the two Cald sau Rece A5 holds explicitly. Repair Morcov, Familie, Farmacie,
   Ploaie, Frigider, or Creion only through a separately bound feedback change and fresh
   C1-C6 gate; never re-add the archived exact record unchanged.
