@@ -1,6 +1,6 @@
 # ADR-0068: Repair Contexto common-word feedback and require unique targets
 
-- Status: accepted
+- Status: superseded-by ADR-0074
 - Date: 2026-07-30
 
 ## Context

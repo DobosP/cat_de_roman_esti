@@ -169,7 +169,7 @@ def _assert_mirrors_identical() -> None:
 
 def _refresh_mobile_contract() -> None:
     payload = mobile_app_pack_snapshot(FIXTURE_COPIES[0])
-    blob = (json.dumps(payload, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    blob = (json.dumps(payload, ensure_ascii=False, indent=1) + "\n").encode("utf-8")
     _atomic_write(MOBILE_CONTRACT, blob)
 
 

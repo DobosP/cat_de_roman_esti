@@ -205,6 +205,9 @@ _GROUPS: tuple[tuple[str, int, tuple[str, ...]], ...] = (
             "hol",
             "debara",
             "plapumă",
+            "întrerupător",
+            "prelungitor",
+            "lanternă",
         ),
     ),
     (
@@ -232,6 +235,11 @@ _GROUPS: tuple[tuple[str, int, tuple[str, ...]], ...] = (
         ),
     ),
     (
+        "ustensile de bucătărie",
+        1,
+        ("blid",),
+    ),
+    (
         "igienă",
         1,
         (
@@ -253,6 +261,7 @@ _GROUPS: tuple[tuple[str, int, tuple[str, ...]], ...] = (
             "prosop de mâini",
             "covoraș de baie",
             "săpun lichid",
+            "lavoar",
         ),
     ),
     (
@@ -337,6 +346,8 @@ _GROUPS: tuple[tuple[str, int, tuple[str, ...]], ...] = (
             "plămân",
             "ficat",
             "rinichi",
+            "barbă",
+            "geană",
         ),
     ),
     (
@@ -461,6 +472,10 @@ _GROUPS: tuple[tuple[str, int, tuple[str, ...]], ...] = (
             "electrician",
             "instalator",
             "tâmplar",
+            "topor",
+            "bormașină",
+            "burghiu",
+            "ruletă de măsurat",
         ),
     ),
     (
@@ -487,6 +502,7 @@ _GROUPS: tuple[tuple[str, int, tuple[str, ...]], ...] = (
             "mesaj text",
             "apel video",
             "fotografie digitală",
+            "cablu",
         ),
     ),
     (
@@ -934,10 +950,12 @@ _ANCHOR_CLUSTERS: tuple[tuple[str, tuple[str, ...]], ...] = (
         ("tel de bucătărie", "polonic", "spatulă", "strecurătoare", "răzătoare"),
     ),
     ("n_v30_kitchen_cookware_oala", ("tavă", "capac", "ibric", "fierbător")),
+    ("n_v30_kitchen_table_castron", ("blid",)),
     ("n_v24_home_appliances_frigider", ("congelator",)),
     ("n_v31_hygiene_hair_sampon", ("balsam de păr", "uscător de păr")),
     ("n_v31_hygiene_oral_periuta_dinti", ("ață dentară", "apă de gură")),
     ("n_v31_hygiene_bath_sapun", ("gel de duș", "săpun lichid")),
+    ("n_v33_bathroom_fixture_chiuveta", ("lavoar",)),
     ("n_v31_cleaning_floor_aspirator", ("mătură", "pămătuf")),
     ("n_v31_cleaning_floor_mop", ("cârpă de praf", "lavetă", "perie de curățat")),
     ("n_v31_cleaning_water_galeata", ("soluție de geamuri", "înălbitor", "dezinfectant")),
@@ -961,6 +979,8 @@ _ANCHOR_CLUSTERS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("n_v30_clothing_everyday_pantaloni", ("curea", "pijama", "lenjerie")),
     ("n_v24_body_limbs_mana", ("cot", "umăr", "braț", "încheietură", "palmă", "unghie")),
     ("n_v24_body_face_cap", ("creier",)),
+    ("n_v24_body_face_cap", ("barbă",)),
+    ("n_v4sti_ochi", ("geană",)),
     ("n_v24_body_limbs_picior", ("șold", "talie")),
     (
         "n_v17soc_medicul_de_familie",
@@ -998,8 +1018,15 @@ _ANCHOR_CLUSTERS: tuple[tuple[str, tuple[str, ...]], ...] = (
         ("job", "profesie", "mecanic", "electrician", "instalator", "tâmplar"),
     ),
     ("n_v29_people_coleg", ("angajat", "angajator", "șef")),
+    ("n_v32_workshop_cut_fierastrau", ("topor",)),
+    ("n_v32_workshop_hand_surubelnita", ("bormașină", "burghiu")),
+    ("n_v24_school_supplies_rigla", ("ruletă de măsurat",)),
     ("n_v4mem_telefon", ("tabletă", "căști audio", "încărcător", "mesaj text", "apel video")),
     ("n_v3sti_electricitate", ("baterie externă",)),
+    ("n_v33_electric_control_intrerupator", ("întrerupător",)),
+    ("n_v33_electric_extension_prelungitor", ("prelungitor",)),
+    ("n_v33_electric_wire_cablu", ("cablu",)),
+    ("n_v24_home_appliances_lampa", ("lanternă",)),
     ("n_v4geo_drum", ("semafor", "trecere de pietoni", "sens giratoriu", "intersecție")),
     (
         "n_v24_transport_terminals_statie",

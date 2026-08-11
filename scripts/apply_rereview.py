@@ -118,25 +118,37 @@ def validate_alchimie_projection_evidence(
     }
     expected_ids = batch["input_ids"]
     id_blob = ("\n".join(expected_ids) + "\n").encode()
-    expected_runtime_sources = [
-        {
-            "path": str(source.relative_to(_REPO_ROOT)),
-            "sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
-        }
-        for source in ALCHIMIE_RUNTIME_SOURCES
-    ]
+    runtime_sources = audit.get("runtime_sources")
     runtime_manifest = hashlib.sha256(
         json.dumps(
-            expected_runtime_sources,
+            runtime_sources,
             ensure_ascii=False,
             sort_keys=True,
             separators=(",", ":"),
         ).encode("utf-8")
     ).hexdigest()
-    expected_generator = {
-        "path": str(ALCHIMIE_AUDIT_GENERATOR.relative_to(_REPO_ROOT)),
-        "sha256": hashlib.sha256(ALCHIMIE_AUDIT_GENERATOR.read_bytes()).hexdigest(),
-    }
+    generator = audit.get("generator")
+    valid_runtime_sources = (
+        isinstance(runtime_sources, list)
+        and bool(runtime_sources)
+        and all(
+            isinstance(source, dict)
+            and isinstance(source.get("path"), str)
+            and bool(source["path"])
+            and isinstance(source.get("sha256"), str)
+            and len(source["sha256"]) == 64
+            and all(char in "0123456789abcdef" for char in source["sha256"])
+            for source in runtime_sources
+        )
+    )
+    valid_generator = (
+        isinstance(generator, dict)
+        and isinstance(generator.get("path"), str)
+        and bool(generator["path"])
+        and isinstance(generator.get("sha256"), str)
+        and len(generator["sha256"]) == 64
+        and all(char in "0123456789abcdef" for char in generator["sha256"])
+    )
     fully_bound = (
         audit.get("schema") == ALCHIMIE_PROJECTION_SCHEMA
         and audit.get("game") == "alchimie"
@@ -148,11 +160,15 @@ def validate_alchimie_projection_evidence(
         and isinstance(audit.get("pack_sha256"), str)
         and len(audit["pack_sha256"]) == 64
         and all(char in "0123456789abcdef" for char in audit["pack_sha256"])
-        and audit.get("kg_sha256") == critique_pack.kg_sha256()
-        and audit.get("rubric_sha256") == critique_pack.rubric_sha256()
-        and audit.get("runtime_sources") == expected_runtime_sources
+        and isinstance(audit.get("kg_sha256"), str)
+        and len(audit["kg_sha256"]) == 64
+        and all(char in "0123456789abcdef" for char in audit["kg_sha256"])
+        and isinstance(audit.get("rubric_sha256"), str)
+        and len(audit["rubric_sha256"]) == 64
+        and all(char in "0123456789abcdef" for char in audit["rubric_sha256"])
+        and valid_runtime_sources
         and audit.get("runtime_source_manifest_sha256") == runtime_manifest
-        and audit.get("generator") == expected_generator
+        and valid_generator
         and len(raw_audit_rows) == len(expected_ids)
         and len(audit_rows) == len(expected_ids)
         and set(audit_rows) == set(expected_ids) == set(rows)
@@ -185,7 +201,7 @@ def validate_alchimie_projection_evidence(
 
 
 def validate_live_alchimie_projection_source(batch: dict, path: Path) -> None:
-    """Require archived Alchimie evidence to match the live pre-apply source pack."""
+    """Require archived evidence to match every live pre-apply review input."""
     audit_path = path.parent / ALCHIMIE_PROJECTION_AUDIT
     audit = json.loads(audit_path.read_text(encoding="utf-8"))
     current_pack_raw = critique_pack.PACKAGE_PACK.read_bytes()
@@ -195,8 +211,32 @@ def validate_live_alchimie_projection_source(batch: dict, path: Path) -> None:
     }
     audit_rows = {row["id"]: row for row in audit["items"]}
     expected_ids = batch["input_ids"]
+    expected_runtime_sources = [
+        {
+            "path": str(source.relative_to(_REPO_ROOT)),
+            "sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+        }
+        for source in ALCHIMIE_RUNTIME_SOURCES
+    ]
+    expected_runtime_manifest = hashlib.sha256(
+        json.dumps(
+            expected_runtime_sources,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    ).hexdigest()
+    expected_generator = {
+        "path": str(ALCHIMIE_AUDIT_GENERATOR.relative_to(_REPO_ROOT)),
+        "sha256": hashlib.sha256(ALCHIMIE_AUDIT_GENERATOR.read_bytes()).hexdigest(),
+    }
     live = (
         audit.get("pack_sha256") == hashlib.sha256(current_pack_raw).hexdigest()
+        and audit.get("kg_sha256") == critique_pack.kg_sha256()
+        and audit.get("rubric_sha256") == critique_pack.rubric_sha256()
+        and audit.get("runtime_sources") == expected_runtime_sources
+        and audit.get("runtime_source_manifest_sha256") == expected_runtime_manifest
+        and audit.get("generator") == expected_generator
         and all(
             item_id in current_records
             and current_records[item_id].get("status") == "pending"

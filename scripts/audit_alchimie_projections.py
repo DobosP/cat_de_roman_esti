@@ -93,11 +93,25 @@ def _runtime_source_manifest() -> tuple[list[dict[str, str]], str]:
 
 
 def _dossier_manifest(
-    ids: list[str], dossier_dir: Path, records: dict[str, dict],
+    ids: list[str],
+    dossier_dir: Path,
+    records: dict[str, dict],
+    *,
+    expected_kg_sha256: str | None = None,
+    expected_rubric_sha256: str | None = None,
 ) -> tuple[dict[str, str], str]:
     actual_ids = sorted(path.stem for path in dossier_dir.glob("*.json"))
     if actual_ids != ids:
         raise SystemExit("dossier directory does not exactly match the requested ids")
+    expected_kg = expected_kg_sha256 or critique_pack.kg_sha256()
+    expected_rubric = expected_rubric_sha256 or critique_pack.rubric_sha256()
+    for label, digest in (("KG", expected_kg), ("rubric", expected_rubric)):
+        if (
+            not isinstance(digest, str)
+            or len(digest) != 64
+            or any(char not in "0123456789abcdef" for char in digest)
+        ):
+            raise SystemExit(f"archive carries an invalid {label} SHA-256")
     bindings = {}
     for item_id in ids:
         path = dossier_dir / f"{item_id}.json"
@@ -109,7 +123,8 @@ def _dossier_manifest(
             dossier.get("id") != item_id
             or dossier.get("game") != "alchimie"
             or dossier.get("record_sha256") != record_sha256
-            or dossier.get("kg_sha256") != critique_pack.kg_sha256()
+            or dossier.get("kg_sha256") != expected_kg
+            or dossier.get("rubric_sha256") != expected_rubric
             or critique_pack.dossier_review_binding(dossier)
             != dossier.get("review_binding")
         ):
@@ -126,6 +141,8 @@ def build_artifact(
     status: str = "pending",
     source_records: dict[str, dict] | None = None,
     source_pack_sha256: str | None = None,
+    expected_dossier_kg_sha256: str | None = None,
+    expected_dossier_rubric_sha256: str | None = None,
 ) -> dict:
     """Return deterministic live-projection evidence for one exact Alchimie batch."""
     if not ids or ids != sorted(ids) or len(ids) != len(set(ids)):
@@ -158,7 +175,11 @@ def build_artifact(
         )
 
     bindings, dossier_manifest_sha256 = _dossier_manifest(
-        ids, dossier_dir, all_records,
+        ids,
+        dossier_dir,
+        all_records,
+        expected_kg_sha256=expected_dossier_kg_sha256,
+        expected_rubric_sha256=expected_dossier_rubric_sha256,
     )
     runtime_sources, runtime_source_manifest_sha256 = _runtime_source_manifest()
     svc = get_service()
@@ -275,7 +296,12 @@ def build_artifact(
 
 
 def rebuild_archived_artifact(artifact: dict, dossier_dir: Path) -> dict:
-    """Rebuild checked-in evidence after its source rows leave the live pack."""
+    """Replay checked-in evidence without rebinding historical provenance.
+
+    The current runtime must still reproduce every structural projection row.  The
+    archived KG/rubric/runtime/generator digests remain the immutable provenance of the
+    original review instead of being silently restamped by a later content release.
+    """
     ids = artifact.get("input_ids")
     rows = artifact.get("items")
     if (
@@ -295,13 +321,24 @@ def rebuild_archived_artifact(artifact: dict, dossier_dir: Path) -> dict:
     }
     if set(source_records) != set(ids) or len(source_records) != len(ids):
         raise SystemExit("archived Alchimie projection source rows are incomplete")
-    return build_artifact(
+    rebuilt = build_artifact(
         ids,
         dossier_dir,
         status=str(artifact.get("status")),
         source_records=source_records,
         source_pack_sha256=artifact.get("pack_sha256"),
+        expected_dossier_kg_sha256=artifact.get("kg_sha256"),
+        expected_dossier_rubric_sha256=artifact.get("rubric_sha256"),
     )
+    for key in (
+        "kg_sha256",
+        "rubric_sha256",
+        "runtime_sources",
+        "runtime_source_manifest_sha256",
+        "generator",
+    ):
+        rebuilt[key] = artifact.get(key)
+    return rebuilt
 
 
 def main(argv: list[str]) -> int:

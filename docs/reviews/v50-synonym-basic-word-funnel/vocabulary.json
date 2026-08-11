@@ -1,0 +1,335 @@
+{
+  "schema": "v50-typed-vocabulary-review-v1",
+  "version": "V50",
+  "policy": "Only normalized-unique, independently unanimous exact same-referent forms enter the shared resolver. Related basic words may enter only the non-winning Contexto projection with one unanimous anchor, domain, and penalty. Disagreement defers; no quota applies.",
+  "baseline": {
+    "kg_nodes": 2364,
+    "kg_edges": 9217,
+    "kg_puzzles": 180,
+    "kg_aliases": 7452,
+    "contexto_projection_terms": 453,
+    "contexto_projection_domains": 26,
+    "beginner_benchmark_total": 324,
+    "beginner_benchmark_eligible": 322,
+    "beginner_benchmark_eligible_resolved": 322
+  },
+  "candidate_funnel_sha256": "7c710d153209ec969e6ecff1313e59a30b6f7f3e8cd73799c123706eef13d011",
+  "candidates": {
+    "aliases": {
+      "odaie": "n_v24_home_rooms_camera",
+      "ogradă": "n_v24_home_outdoor_curte",
+      "mămică": "n_v24_people_parents_mama",
+      "tătic": "n_v24_people_parents_tata",
+      "leafă": "n_v4soc_salariu",
+      "muică": "n_v24_people_parents_mama",
+      "barabule": "n_lbax_regionalism_barabula",
+      "barabulei": "n_lbax_regionalism_barabula",
+      "barabulelor": "n_lbax_regionalism_barabula",
+      "baraboi": "n_lbax_regionalism_barabula",
+      "cucuruzi": "n_lbax_regionalism_cucuruz",
+      "cucuruzii": "n_lbax_regionalism_cucuruz",
+      "păpușoii": "n_lbax_regionalism_papusoi",
+      "pită": "n_v4gas_paine",
+      "blid": "n_v30_kitchen_table_farfurie"
+    },
+    "projections": {
+      "bărbie": "n_v24_body_face_cap",
+      "barbă": "n_v24_body_face_cap",
+      "geană": "n_v4sti_ochi",
+      "topor": "n_v32_workshop_cut_fierastrau",
+      "bormașină": "n_v32_workshop_hand_surubelnita",
+      "burghiu": "n_v32_workshop_hand_surubelnita",
+      "ruletă de măsurat": "n_v24_school_supplies_rigla",
+      "lavoar": "n_v33_bathroom_fixture_chiuveta",
+      "întrerupător": "n_v33_electric_control_intrerupator",
+      "prelungitor": "n_v33_electric_extension_prelungitor",
+      "cablu": "n_v33_electric_wire_cablu",
+      "lanternă": "n_v24_home_appliances_lampa"
+    },
+    "holds": [
+      "toaletă",
+      "tigru",
+      "elefant",
+      "maimuță",
+      "mistreț"
+    ],
+    "explicit_rejects": [
+      "duș",
+      "pod",
+      "somn",
+      "burete",
+      "talpă",
+      "perie",
+      "coș",
+      "față",
+      "păr",
+      "ciocănel",
+      "patent",
+      "ghiveci",
+      "sapă",
+      "furtun",
+      "cadă",
+      "priză",
+      "baterie",
+      "leu"
+    ]
+  },
+  "reviews": {
+    "reviewer_a": {
+      "alias_accept": [
+        "odaie",
+        "ogradă",
+        "mămică",
+        "tătic",
+        "barabule",
+        "barabulei",
+        "barabulelor",
+        "cucuruzi",
+        "cucuruzii",
+        "păpușoii",
+        "pită"
+      ],
+      "alias_reject": [
+        "leafă",
+        "muică",
+        "baraboi",
+        "blid"
+      ],
+      "projection_accept": [
+        "blid",
+        "barbă",
+        "geană",
+        "topor",
+        "bormașină",
+        "burghiu",
+        "ruletă de măsurat",
+        "lavoar",
+        "întrerupător",
+        "prelungitor",
+        "cablu",
+        "lanternă",
+        "tigru",
+        "elefant",
+        "maimuță",
+        "mistreț"
+      ],
+      "projection_binding_schema": "v50-projection-binding-v1",
+      "projection_binding_sha256": "670b7aacc34d5feb00c5ad57c2774ef1444039d57451258de3aa60c966094f5f",
+      "defer": [
+        "toaletă"
+      ]
+    },
+    "reviewer_b": {
+      "alias_accept": [
+        "odaie",
+        "mămică",
+        "tătic",
+        "barabule",
+        "barabulei",
+        "barabulelor",
+        "păpușoii",
+        "pită"
+      ],
+      "alias_reject": [
+        "ogradă",
+        "leafă",
+        "muică",
+        "baraboi",
+        "cucuruzi",
+        "cucuruzii",
+        "blid"
+      ],
+      "projection_accept": [
+        "blid",
+        "barbă",
+        "geană",
+        "topor",
+        "bormașină",
+        "burghiu",
+        "ruletă de măsurat",
+        "lavoar",
+        "întrerupător",
+        "prelungitor",
+        "cablu",
+        "lanternă"
+      ],
+      "projection_binding_schema": "v50-projection-binding-v1",
+      "projection_binding_sha256": "670b7aacc34d5feb00c5ad57c2774ef1444039d57451258de3aa60c966094f5f",
+      "defer": [
+        "toaletă",
+        "tigru",
+        "elefant",
+        "maimuță",
+        "mistreț"
+      ]
+    },
+    "unanimous_reject": [
+      "bărbie",
+      "duș",
+      "pod",
+      "somn",
+      "burete",
+      "talpă",
+      "perie",
+      "coș",
+      "față",
+      "păr",
+      "ciocănel",
+      "patent",
+      "ghiveci",
+      "sapă",
+      "furtun",
+      "cadă",
+      "priză",
+      "baterie",
+      "leu"
+    ],
+    "followup_consensus": {
+      "blid": {
+        "verdict": "projection",
+        "anchor_id": "n_v30_kitchen_table_castron",
+        "domain": "ustensile de bucătărie"
+      },
+      "întrerupător": {
+        "verdict": "projection",
+        "domain": "mobilier și casă"
+      },
+      "prelungitor": {
+        "verdict": "projection",
+        "domain": "mobilier și casă"
+      }
+    }
+  },
+  "final": {
+    "accepted_aliases": {
+      "odaie": "n_v24_home_rooms_camera",
+      "mămică": "n_v24_people_parents_mama",
+      "tătic": "n_v24_people_parents_tata",
+      "barabule": "n_lbax_regionalism_barabula",
+      "barabulei": "n_lbax_regionalism_barabula",
+      "barabulelor": "n_lbax_regionalism_barabula",
+      "păpușoii": "n_lbax_regionalism_papusoi",
+      "pită": "n_v4gas_paine"
+    },
+    "accepted_projections": {
+      "blid": {
+        "anchor_id": "n_v30_kitchen_table_castron",
+        "domain": "ustensile de bucătărie",
+        "rank_penalty": 1
+      },
+      "barbă": {
+        "anchor_id": "n_v24_body_face_cap",
+        "domain": "corp",
+        "rank_penalty": 1
+      },
+      "geană": {
+        "anchor_id": "n_v4sti_ochi",
+        "domain": "corp",
+        "rank_penalty": 1
+      },
+      "topor": {
+        "anchor_id": "n_v32_workshop_cut_fierastrau",
+        "domain": "muncă",
+        "rank_penalty": 1
+      },
+      "bormașină": {
+        "anchor_id": "n_v32_workshop_hand_surubelnita",
+        "domain": "muncă",
+        "rank_penalty": 1
+      },
+      "burghiu": {
+        "anchor_id": "n_v32_workshop_hand_surubelnita",
+        "domain": "muncă",
+        "rank_penalty": 1
+      },
+      "ruletă de măsurat": {
+        "anchor_id": "n_v24_school_supplies_rigla",
+        "domain": "muncă",
+        "rank_penalty": 1
+      },
+      "lavoar": {
+        "anchor_id": "n_v33_bathroom_fixture_chiuveta",
+        "domain": "igienă",
+        "rank_penalty": 1
+      },
+      "întrerupător": {
+        "anchor_id": "n_v33_electric_control_intrerupator",
+        "domain": "mobilier și casă",
+        "rank_penalty": 1
+      },
+      "prelungitor": {
+        "anchor_id": "n_v33_electric_extension_prelungitor",
+        "domain": "mobilier și casă",
+        "rank_penalty": 1
+      },
+      "cablu": {
+        "anchor_id": "n_v33_electric_wire_cablu",
+        "domain": "tehnologie",
+        "rank_penalty": 1
+      },
+      "lanternă": {
+        "anchor_id": "n_v24_home_appliances_lampa",
+        "domain": "mobilier și casă",
+        "rank_penalty": 1
+      }
+    },
+    "deferred": [
+      "ogradă",
+      "cucuruzi",
+      "cucuruzii",
+      "toaletă",
+      "tigru",
+      "elefant",
+      "maimuță",
+      "mistreț"
+    ],
+    "rejected": [
+      "leafă",
+      "muică",
+      "baraboi",
+      "bărbie",
+      "duș",
+      "pod",
+      "somn",
+      "burete",
+      "talpă",
+      "perie",
+      "coș",
+      "față",
+      "păr",
+      "ciocănel",
+      "patent",
+      "ghiveci",
+      "sapă",
+      "furtun",
+      "cadă",
+      "priză",
+      "baterie",
+      "leu"
+    ]
+  },
+  "lexical_sources": [
+    "https://dexonline.ro/definitie/odaie",
+    "https://dexonline.ro/definitie/ograd%C4%83",
+    "https://dexonline.ro/definitie/m%C4%83mic%C4%83",
+    "https://dexonline.ro/definitie/t%C4%83tic",
+    "https://dexonline.ro/definitie/leaf%C4%83",
+    "https://dexonline.ro/definitie/muic%C4%83",
+    "https://dexonline.ro/definitie/barabul%C4%83",
+    "https://dexonline.ro/definitie/baraboi",
+    "https://dexonline.ro/definitie/cucuruz",
+    "https://dexonline.ro/definitie/p%C4%83pu%C8%99oi",
+    "https://dexonline.ro/definitie/pit%C4%83",
+    "https://dexonline.ro/definitie/blid",
+    "https://dexonline.ro/definitie/toalet%C4%83"
+  ],
+  "result": {
+    "accepted_alias_surfaces": 8,
+    "accepted_projection_surfaces": 12,
+    "deferred_surfaces": 8,
+    "rejected_surfaces": 22,
+    "new_nodes": 0,
+    "new_edges": 0,
+    "new_game_records": 0
+  }
+}

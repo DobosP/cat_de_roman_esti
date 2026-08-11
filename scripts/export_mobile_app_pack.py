@@ -24,7 +24,7 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     payload = mobile_app_pack_snapshot()
-    text = json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=False) + "\n"
+    text = json.dumps(payload, ensure_ascii=False, indent=1, sort_keys=False) + "\n"
     if args:
         Path(args[0]).write_text(text, encoding="utf-8")
     else:

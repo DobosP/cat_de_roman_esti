@@ -951,10 +951,22 @@ def kg_sha256() -> str:
 
 
 def dossier_review_binding(dossier: dict) -> str:
-    '''Hash the exact judge input plus the current rubric, excluding the hash itself.'''
+    '''Hash the exact judge input plus its bound rubric, excluding the hash itself.
+
+    Fresh dossiers are stamped by :func:`bind_dossier` with the current rubric.  An
+    archived dossier keeps that embedded digest so a later, unrelated rubric revision
+    does not rewrite history; live application still rebuilds and compares a fresh
+    current binding before it may mutate content.
+    '''
+    bound_rubric = dossier.get('rubric_sha256', rubric_sha256())
+    if (
+        not isinstance(bound_rubric, str)
+        or re.fullmatch(r'[0-9a-f]{64}', bound_rubric) is None
+    ):
+        raise ValueError('dossier rubric_sha256 must be a SHA-256 hex digest')
     payload = {
         'version': REVIEW_BINDING_VERSION,
-        'rubric_sha256': rubric_sha256(),
+        'rubric_sha256': bound_rubric,
         'dossier': {
             key: value for key, value in dossier.items()
             if key not in {'review_binding', 'rubric_sha256'}
