@@ -1,7 +1,7 @@
 # ADR-0076: Bound household case morphology
 
 Date: 2026-08-12
-Status: accepted
+Status: superseded-by ADR-0077
 
 ## Decision
 
