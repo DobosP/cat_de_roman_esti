@@ -1,0 +1,324 @@
+{
+  "schema": "v51-typed-vocabulary-review-v1",
+  "version": "V51",
+  "policy": "Only normalized-unique grammatical forms of already accepted exact aliases enter the shared resolver. Related common words may enter only the non-winning Contexto projection with one unanimous anchor, domain, and penalty. Disagreement defers; either hard rejection rejects; no quota applies.",
+  "baseline": {
+    "kg_nodes": 2364,
+    "kg_edges": 9217,
+    "kg_puzzles": 180,
+    "kg_aliases": 7460,
+    "contexto_projection_terms": 465,
+    "contexto_projection_domains": 26,
+    "beginner_benchmark_total": 324,
+    "beginner_benchmark_eligible": 322,
+    "beginner_benchmark_eligible_resolved": 322
+  },
+  "candidate_funnel_sha256": "36eb871f07de3dde7169a896585031598791367af2c184b6dd6d15262933e416",
+  "candidates": {
+    "aliases": {
+      "odaia": "n_v24_home_rooms_camera",
+      "odăi": "n_v24_home_rooms_camera",
+      "odăile": "n_v24_home_rooms_camera",
+      "odăii": "n_v24_home_rooms_camera",
+      "odăilor": "n_v24_home_rooms_camera",
+      "mămici": "n_v24_people_parents_mama",
+      "mămicile": "n_v24_people_parents_mama",
+      "mămicii": "n_v24_people_parents_mama",
+      "mămicilor": "n_v24_people_parents_mama",
+      "tăticul": "n_v24_people_parents_tata",
+      "tătici": "n_v24_people_parents_tata",
+      "tăticii": "n_v24_people_parents_tata",
+      "tăticului": "n_v24_people_parents_tata",
+      "tăticilor": "n_v24_people_parents_tata",
+      "pite": "n_v4gas_paine",
+      "pitele": "n_v4gas_paine",
+      "pitei": "n_v4gas_paine",
+      "pitelor": "n_v4gas_paine",
+      "automobilul": "n_v24_transport_personal_masina",
+      "automobile": "n_v24_transport_personal_masina",
+      "automobilele": "n_v24_transport_personal_masina",
+      "automobilului": "n_v24_transport_personal_masina",
+      "automobilelor": "n_v24_transport_personal_masina",
+      "autoturismul": "n_v24_transport_personal_masina",
+      "autoturisme": "n_v24_transport_personal_masina",
+      "autoturismele": "n_v24_transport_personal_masina",
+      "autoturismului": "n_v24_transport_personal_masina",
+      "autoturismelor": "n_v24_transport_personal_masina",
+      "amicul": "n_v24_people_relationships_prieten",
+      "amici": "n_v24_people_relationships_prieten",
+      "amicii": "n_v24_people_relationships_prieten",
+      "amicului": "n_v24_people_relationships_prieten",
+      "amicilor": "n_v24_people_relationships_prieten"
+    },
+    "projections": {
+      "smartphone": "n_v4mem_telefon",
+      "Wi Fi": "n_v4mem_internet",
+      "e-mail": "n_v4mem_internet",
+      "site web": "n_v4mem_internet",
+      "browser": "n_v4mem_internet",
+      "rețea socială": "n_v4mem_internet",
+      "sertar": "n_v24_home_storage_comoda_sertare",
+      "stație de autobuz": "n_v24_transport_terminals_statie",
+      "cuptor": "n_v24_home_appliances_aragaz"
+    },
+    "holds": [
+      "arborele",
+      "arbori",
+      "arborii",
+      "arborelui",
+      "arborilor"
+    ],
+    "explicit_rejects": [
+      "fișă",
+      "elan",
+      "priză multiplă"
+    ]
+  },
+  "reviews": {
+    "reviewer_a": {
+      "alias_accept": [
+        "odaia",
+        "odăi",
+        "odăile",
+        "odăii",
+        "odăilor",
+        "mămici",
+        "mămicile",
+        "mămicii",
+        "mămicilor",
+        "tăticul",
+        "tătici",
+        "tăticii",
+        "tăticului",
+        "tăticilor",
+        "pite",
+        "pitele",
+        "pitei",
+        "pitelor",
+        "automobilul",
+        "automobile",
+        "automobilele",
+        "automobilului",
+        "automobilelor",
+        "autoturismul",
+        "autoturisme",
+        "autoturismele",
+        "autoturismului",
+        "autoturismelor",
+        "amicul",
+        "amici",
+        "amicului",
+        "amicilor"
+      ],
+      "alias_reject": [
+        "amicii"
+      ],
+      "projection_accept": [
+        "smartphone",
+        "Wi Fi",
+        "e-mail",
+        "site web",
+        "browser",
+        "rețea socială",
+        "sertar",
+        "stație de autobuz"
+      ],
+      "projection_binding_schema": "v51-projection-binding-v1",
+      "projection_binding_sha256": "c0b8cb8fb6d464ab9536a8d11c26311a93de69d6031ac729e67bc49f5a06491b",
+      "defer": [
+        "arborele",
+        "arbori",
+        "arborii",
+        "arborelui",
+        "arborilor",
+        "cuptor"
+      ],
+      "reject": [
+        "fișă",
+        "elan",
+        "priză multiplă"
+      ]
+    },
+    "reviewer_b": {
+      "alias_accept": [
+        "odaia",
+        "odăi",
+        "odăile",
+        "odăii",
+        "odăilor",
+        "mămici",
+        "mămicile",
+        "mămicii",
+        "mămicilor",
+        "tăticul",
+        "tătici",
+        "tăticii",
+        "tăticului",
+        "tăticilor",
+        "pite",
+        "pitele",
+        "pitei",
+        "pitelor",
+        "automobilul",
+        "automobile",
+        "automobilele",
+        "automobilului",
+        "automobilelor",
+        "autoturismul",
+        "autoturisme",
+        "autoturismele",
+        "autoturismului",
+        "autoturismelor",
+        "amicul",
+        "amici",
+        "amicii",
+        "amicului",
+        "amicilor"
+      ],
+      "alias_reject": [],
+      "projection_accept": [
+        "smartphone",
+        "Wi Fi",
+        "e-mail",
+        "site web",
+        "browser",
+        "rețea socială",
+        "sertar",
+        "stație de autobuz"
+      ],
+      "projection_binding_schema": "v51-projection-binding-v1",
+      "projection_binding_sha256": "c0b8cb8fb6d464ab9536a8d11c26311a93de69d6031ac729e67bc49f5a06491b",
+      "defer": [
+        "arborele",
+        "arbori",
+        "arborii",
+        "arborelui",
+        "arborilor",
+        "cuptor"
+      ],
+      "reject": [
+        "fișă",
+        "elan",
+        "priză multiplă"
+      ]
+    }
+  },
+  "final": {
+    "accepted_aliases": {
+      "odaia": "n_v24_home_rooms_camera",
+      "odăi": "n_v24_home_rooms_camera",
+      "odăile": "n_v24_home_rooms_camera",
+      "odăii": "n_v24_home_rooms_camera",
+      "odăilor": "n_v24_home_rooms_camera",
+      "mămici": "n_v24_people_parents_mama",
+      "mămicile": "n_v24_people_parents_mama",
+      "mămicii": "n_v24_people_parents_mama",
+      "mămicilor": "n_v24_people_parents_mama",
+      "tăticul": "n_v24_people_parents_tata",
+      "tătici": "n_v24_people_parents_tata",
+      "tăticii": "n_v24_people_parents_tata",
+      "tăticului": "n_v24_people_parents_tata",
+      "tăticilor": "n_v24_people_parents_tata",
+      "pite": "n_v4gas_paine",
+      "pitele": "n_v4gas_paine",
+      "pitei": "n_v4gas_paine",
+      "pitelor": "n_v4gas_paine",
+      "automobilul": "n_v24_transport_personal_masina",
+      "automobile": "n_v24_transport_personal_masina",
+      "automobilele": "n_v24_transport_personal_masina",
+      "automobilului": "n_v24_transport_personal_masina",
+      "automobilelor": "n_v24_transport_personal_masina",
+      "autoturismul": "n_v24_transport_personal_masina",
+      "autoturisme": "n_v24_transport_personal_masina",
+      "autoturismele": "n_v24_transport_personal_masina",
+      "autoturismului": "n_v24_transport_personal_masina",
+      "autoturismelor": "n_v24_transport_personal_masina",
+      "amicul": "n_v24_people_relationships_prieten",
+      "amici": "n_v24_people_relationships_prieten",
+      "amicului": "n_v24_people_relationships_prieten",
+      "amicilor": "n_v24_people_relationships_prieten"
+    },
+    "accepted_projections": {
+      "smartphone": {
+        "anchor_id": "n_v4mem_telefon",
+        "domain": "tehnologie",
+        "rank_penalty": 1
+      },
+      "Wi Fi": {
+        "anchor_id": "n_v4mem_internet",
+        "domain": "tehnologie",
+        "rank_penalty": 1
+      },
+      "e-mail": {
+        "anchor_id": "n_v4mem_internet",
+        "domain": "tehnologie",
+        "rank_penalty": 1
+      },
+      "site web": {
+        "anchor_id": "n_v4mem_internet",
+        "domain": "tehnologie",
+        "rank_penalty": 1
+      },
+      "browser": {
+        "anchor_id": "n_v4mem_internet",
+        "domain": "tehnologie",
+        "rank_penalty": 1
+      },
+      "rețea socială": {
+        "anchor_id": "n_v4mem_internet",
+        "domain": "tehnologie",
+        "rank_penalty": 1
+      },
+      "sertar": {
+        "anchor_id": "n_v24_home_storage_comoda_sertare",
+        "domain": "mobilier și casă",
+        "rank_penalty": 1
+      },
+      "stație de autobuz": {
+        "anchor_id": "n_v24_transport_terminals_statie",
+        "domain": "transport rutier",
+        "rank_penalty": 1
+      }
+    },
+    "deferred": [
+      "amicii",
+      "arborele",
+      "arbori",
+      "arborii",
+      "arborelui",
+      "arborilor",
+      "cuptor"
+    ],
+    "rejected": [
+      "fișă",
+      "elan",
+      "priză multiplă"
+    ]
+  },
+  "lexical_sources": [
+    "https://dexonline.ro/definitie/odaie",
+    "https://dexonline.ro/definitie/m%C4%83mic%C4%83",
+    "https://dexonline.ro/definitie/t%C4%83tic",
+    "https://dexonline.ro/definitie/pit%C4%83",
+    "https://dexonline.ro/definitie/automobil",
+    "https://dexonline.ro/definitie/autoturism",
+    "https://dexonline.ro/definitie/amic",
+    "https://dexonline.ro/definitie/arbore",
+    "https://dexonline.ro/definitie/smartphone",
+    "https://dexonline.ro/definitie/wi%20fi/1260813",
+    "https://dexonline.ro/definitie/e-mail",
+    "https://dexonline.ro/definitie/browser",
+    "https://dexonline.ro/definitie/website",
+    "https://dexonline.ro/definitie/sertar",
+    "https://dexonline.ro/definitie/autosta%C8%9Bie"
+  ],
+  "result": {
+    "accepted_alias_surfaces": 32,
+    "accepted_projection_surfaces": 8,
+    "deferred_surfaces": 7,
+    "rejected_surfaces": 3,
+    "new_nodes": 0,
+    "new_edges": 0,
+    "new_game_records": 0
+  }
+}

@@ -1,70 +1,67 @@
-# Task Result — V50 bounded typed vocabulary
+# Task Result — land V49–V51 typed vocabulary
 
 ## Outcome
 
-- Reviewed a finite 50-surface Romanian vocabulary funnel twice and accepted only the
-  unanimous subset: 8 exact shared aliases and 12 Contexto-only non-winning projections.
-  Eight surfaces remain deferred and 22 are explicit rejects; no quota was used.
-- Exact aliases improve typed Contexto input and eligible Lanț hops. Related/basic words
-  have rank-penalty-one Contexto feedback only. Conexiuni, Alchimie, Intrusul, and Perechi
-  receive no alias substitution.
-- Preserved 2,364 nodes, 9,217 edges, 180 puzzles, all 618 game records, every ranking row,
-  and the frozen 336-board derived payload. Alias count is 7,460; Contexto projection count
-  is 465 across the existing 26 domains.
-- Added no topology, board, promotion, pending-hold disposition, frontend, account, privacy,
-  session, or deployment change.
+- Landed V49 at `b70640f`, V50 at `2d45c06`, and V51 on `main`; pushed `main` to
+  `origin`. Shared main is clean and synchronized.
+- Created `feat/v51-typed-vocabulary` directly from landed V50. Two independent reviews
+  classified one fixed 50-surface funnel; only their unanimous subset entered runtime.
+- Added 32 normalized-unique grammatical forms of previously accepted exact aliases and
+  eight Contexto-only, rank-penalty-one common guesses. Seven surfaces remain deferred,
+  including disputed `amicii`; three are rejected. No quota was used.
+- Preserved all nodes, edges, puzzles, game records, ranking rows, derived boards, owner
+  holds, sessions, accounts, frontend, privacy, and deployment state.
 
 ## Quality and provenance
 
-- ADR-0074 separates exact same-referent resolver aliases from approximate non-winning
-  feedback. The 50 candidate rows, both verdicts, normalized-key census, lexical sources,
-  exact projection-binding digests, and final partition are archived under
-  `docs/reviews/v50-synonym-basic-word-funnel/`.
-- The rollback-safe authoring transaction updates both KG mirrors and the mobile snapshot,
-  validates normalization ownership, and preserves pack bytes.
-- V48 Alchimie archives replay their embedded historical provenance after alias-only KG
-  changes. Live gates require the current KG, rubric, runtime sources and manifest,
-  generator, and source pack; V50 independently tampers with every input.
-- V49's 104-pair Lanț rejection ledger, alias-aware import preflight, full-inventory
-  critique, and transactional future appends remain intact after integration.
+- ADR-0075 preserves V50's typed lexical boundary: exact same-referent forms may enter the
+  shared Contexto/Lanț resolver; related terms remain non-winning Contexto projections.
+- The review archive binds all 50 candidates, complete/disjoint reviewer dispositions,
+  exact projection tuples, lexical sources, normalized-key uniqueness, and the final
+  32/8/7/3 partition. Reviewer disagreement fails closed to defer.
+- Only normative `Wi Fi` is authored. `Wi-Fi`, `wifi`, and bare `email` remain absent and
+  are tested through resolver, projection, and Contexto behavior so spellings cannot create
+  duplicate semantic attempts.
+- The rollback-safe authoring transaction updated both KG mirrors and the mobile snapshot.
+  V49's 104 directed rejection pairs and V48's historical/archive versus current-live
+  Alchimie provenance boundary remain intact.
 
 ## Files changed
 
-- Added the V50 data/applier, lexical review archive, ADR-0074, and focused regression test.
-- Updated Contexto projection data, both KG mirrors, the mobile contract, README/status,
-  and exact ranking/derived mirrors plus their runtime/test digest pins.
-- Versioned historical dossier/Alchimie replay separately from current live-gate checks;
-  aligned both mobile snapshot writers with the checked-in canonical JSON format.
-- Marked ADR-0068 superseded only for its old fixed 453-term inventory clause.
+- Added the V51 data/applier, ADR-0075, exact lexical review archive, and focused regression
+  contract; marked ADR-0074 superseded only for its fixed V50 inventory counts.
+- Added eight terms and exact anchors to the Contexto projection; updated both KG mirrors,
+  the canonical mobile snapshot, README/current status, and ranking/derived wrapper mirrors.
+- Updated runtime and historical regression pins to distinguish current wrapper bytes from
+  unchanged ranking rows, topology, pack bytes, and frozen derived-board payloads.
 
 ## Bound artifacts
 
-- KG SHA-256: `56b861ae4f6d611e70e87e27086a3a617ccfc8b6d69d51b100677df3dff4be7e`.
+- Candidate funnel SHA-256:
+  `36eb871f07de3dde7169a896585031598791367af2c184b6dd6d15262933e416`.
+- Exact projection binding SHA-256:
+  `c0b8cb8fb6d464ab9536a8d11c26311a93de69d6031ac729e67bc49f5a06491b`.
+- KG SHA-256: `db236736caee6dc8a00874939f52cba2082ef9a73ea1c40d9826a25099ef7e3a`.
 - Pack SHA-256 remains `05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed`.
-- Ranking SHA-256: `12c0971c60b6e93f5c4443776f46570b5f9ae29d10f7254d3a222e7a38eafd4e`;
+- Ranking SHA-256: `265696defbefd31adf1bc2da46511a69083361721207ad4b8833d8b22bc4133b`;
   its board payload remains `46aabcea827c3eed9d64dd7249ea1514d4b211a5b95c4bbea2d8a825e29d86e0`.
-- Derived SHA-256: `e987229417aea266e12f3223cb696f13aa740225aaab56cb2d55b084a4fad1ea`;
+- Derived SHA-256: `ee0bfd5ed51ff24a2e3ed8ea8ce32612548d9a418f138dacad2464d6bfd48b3d`;
   its frozen board payload remains `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
+- V49 ledger SHA-256 remains
+  `e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29`.
 
 ## Verification
 
-- Combined V49+V50 backend: 759/759; accounts-on: 53/53; sessions: 16/16.
-- V49 contract: 22/22; V50 contract: 11/11; affected V33/V44/V45–V48 and critique/import
-  regressions: green.
-- Pack, KG, ranking, and derived validators: green; the real Lanț pending sweep is clean.
-- Ruff, three workflow syntax checks, JSON/mirror integrity, and `git diff --check`: green.
-- Frontend was untouched; V48's 28/28, lint, typecheck, and production build remain the
-  latest frontend evidence.
+- Backend: 769/769; accounts-on: 53/53; sessions: 16/16; V51 contract: 10/10.
+- Affected V33/V44/V47–V50 and app-pack/Contexto regressions: 150/150.
+- Games-pack, KG, ranking, and derived validators: green; strict real Lanț pending sweep:
+  three checked, zero flagged and zero FAIL findings.
+- Ruff and `git diff --check`: green. Frontend was untouched, so no frontend gate ran.
 
 ## Sequencing and residual risk
 
-- V49 landed first at `b70640f`; V50 is rebased directly on it and retains ADR-0073.
-- Deferred and rejected vocabulary stays out of runtime. A later topology wave, wild-animal
-  domain, alternate-spelling attempt identity, or disputed alias needs a fresh review.
-- V51 starts only after V50 lands, from a separate branch and finite two-reviewer funnel.
-- Anonymous production remains unchanged on V48 `d59caed`.
-
-## Landing
-
-The owner authorized landing. This V50 change is green for a fast-forward main update and
-push after the recorded gate; no production deployment is included.
+- V51 is committed and landed on `main`, with `origin/main` synchronized. No production
+  deployment is included.
+- Deferred/rejected forms and unauthored spelling variants remain outside runtime. A later
+  morphology, projection-attempt alias, topology, or board wave needs a new bounded review.
+- Anonymous production remains unchanged on V48 `d59caed`; owner-only holds remain pending.

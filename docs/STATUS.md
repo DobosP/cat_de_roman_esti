@@ -2,18 +2,19 @@
 
 _As of 2026-08-12. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-12 (V49+V50 backend 759/759, accounts 53/53, sessions
-16/16, V49 22/22, V50 11/11, affected historical gates, all artifact validators,
-Ruff, workflow syntax, and whitespace green; frontend untouched)._
+_Last verified: 2026-08-12 (V51 backend 769/769, accounts 53/53, sessions 16/16,
+V51 10/10, affected V33/V44/V47–V50 gates, all artifact validators, strict Lanț
+pending sweep, Ruff, and whitespace green; frontend untouched)._
 
-## Current outcome — V50 bounded typed vocabulary (ADR-0074)
+## Current outcome — V51 bounded alias morphology and common guesses (ADR-0075)
 
-- Two independent lexical passes reviewed one finite 50-surface funnel: eight exact shared
-  aliases and twelve Contexto-only non-winning projections passed unanimously; eight
-  surfaces remain deferred and twenty-two are rejected. No quota overrode disagreement.
-- Exact aliases serve typed Contexto input and legal Lanț hops. Related/basic words remain
-  Contexto projections with penalty one; tap-only games receive no lexical substitution.
-- V50 adds no nodes, edges, puzzles, game records, hold dispositions, or derived boards.
+- Two independent lexical passes reviewed one finite 50-surface funnel: 32 exact
+  grammatical forms and eight Contexto-only non-winning projections passed unanimously;
+  seven surfaces remain deferred and three are rejected. Disputed `amicii` stays deferred.
+- Exact forms serve typed Contexto input and legal Lanț hops. Related common guesses remain
+  Contexto projections with penalty one. Only `Wi Fi` is authored; alternate spellings stay
+  absent so one concept cannot consume multiple attempt identities.
+- V51 adds no nodes, edges, puzzles, game records, hold dispositions, or derived boards.
   KG topology and pack bytes stay fixed; only aliases and bound wrapper metadata change.
 - Archived V48 Alchimie evidence replays its embedded historical provenance, while a new
   live gate fails closed unless KG, rubric, runtime sources, generator, and pack match
@@ -25,7 +26,7 @@ Ruff, workflow syntax, and whitespace green; frontend untouched)._
   V47 leaves Cald sau Rece at 205 approved / 2 pending / 202 unique selectable targets.
 - V46 leaves Conexiuni at 232 approved / 74 selectable / 0 pending with 122 rejected-board
   tombstones. V45 leaves Lanț at 94 selectable boards and three pending repair holds.
-- V44's 71-node Cald sau Rece repair remains. The projection now has 465 terms across the
+- V44's 71-node Cald sau Rece repair remains. The projection now has 473 terms across the
   same 26 domains, and the frozen 336-board Intrusul/Perechi payload is unchanged.
 
 ## Content and ranking baseline
@@ -43,11 +44,11 @@ Pack: **618 = 610 approved + 8 pending**, across 14 categories. The ranked origi
 runtime serves **449 zero-FAIL boards**. The strict derived catalog remains **336** boards
 from the frozen V38 source snapshot; its `boards` payload hash is
 `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
-Bundled KG: **2,364 nodes / 9,217 edges / 7,460 aliases / 180 puzzles**
-(`fixture-v50-typed-vocabulary`).
+Bundled KG: **2,364 nodes / 9,217 edges / 7,492 aliases / 180 puzzles**
+(`fixture-v51-typed-vocabulary`).
 
-V49 evidence is under `docs/reviews/v49-lant-rejection-ledger/`; V50's 50-row lexical
-funnel is under `docs/reviews/v50-synonym-basic-word-funnel/`. Rankings remain estimates.
+V49 evidence is under `docs/reviews/v49-lant-rejection-ledger/`; V51's 50-row lexical
+funnel is under `docs/reviews/v51-typed-vocabulary-funnel/`. Rankings remain estimates.
 
 ## Runtime, accounts, and deployment
 
@@ -74,8 +75,8 @@ git diff --check
 
 ## Next verified work
 
-- Start V51 only from landed V50 in a separate worktree. Use another finite two-reviewer
-  lexical funnel; no V50 defer/reject becomes accepted without fresh exact evidence.
+- Any later lexical wave needs a new finite two-reviewer funnel. V50/V51 deferrals,
+  rejections, and unauthored spelling variants stay absent without fresh exact evidence.
 - Resolve the three Alchimie alcohol holds and two Cald sau Rece A5 holds only through
   explicit owner disposition and fresh game-specific gates.
 - Census the full Lanț pack and durable ledger before authoring/import. Repair its three

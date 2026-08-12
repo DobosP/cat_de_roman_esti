@@ -759,8 +759,8 @@ def test_projection_is_large_balanced_collision_free_and_legibility_audited() ->
     svc = get_service()
     keys = [term.key for term in PROJECTION_TERMS]
     domains = Counter(term.domain for term in PROJECTION_TERMS)
-    # ADR-0074: V50 adds twelve more reviewed, non-winning basic-word projections.
-    assert len(PROJECTION_TERMS) == 465
+    # ADR-0074 added twelve reviewed projections; ADR-0075 adds eight more.
+    assert len(PROJECTION_TERMS) == 473
     assert len(domains) == 26
     assert min(domains.values()) >= 14
     assert len(keys) == len(set(keys))

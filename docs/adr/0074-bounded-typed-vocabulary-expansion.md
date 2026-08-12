@@ -1,7 +1,7 @@
 # ADR-0074: Bound synonym expansion to typed games
 
 Date: 2026-08-12
-Status: accepted
+Status: superseded-by ADR-0075
 
 ## Decision
 

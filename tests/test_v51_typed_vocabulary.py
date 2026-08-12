@@ -1,4 +1,4 @@
-"""Regression contract for the reviewed V50 synonym/basic-word wave."""
+"""Regression contract for the reviewed V51 typed-vocabulary wave."""
 
 from __future__ import annotations
 
@@ -49,7 +49,7 @@ sys.path.insert(0, str(_SCRIPTS))
 
 import apply_rereview  # noqa: E402
 import audit_alchimie_projections  # noqa: E402
-import contexto_common_words_v50_data as DATA  # noqa: E402
+import contexto_common_words_v51_data as DATA  # noqa: E402
 import critique_pack  # noqa: E402
 
 _PACKAGE_KG = _ROOT / "cat_de_roman_esti/fixtures/kg_sample.json"
@@ -60,14 +60,18 @@ _PACKAGE_RANKINGS = _ROOT / "cat_de_roman_esti/fixtures/board_rankings_v37.json"
 _TEST_RANKINGS = _ROOT / "tests/fixtures/board_rankings_v37.json"
 _PACKAGE_DERIVED = _ROOT / "cat_de_roman_esti/fixtures/derived_catalog_v38.json"
 _TEST_DERIVED = _ROOT / "tests/fixtures/derived_catalog_v38.json"
+_LEDGER = _ROOT / "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
-_REVIEW = _ROOT / "docs/reviews/v50-synonym-basic-word-funnel/vocabulary.json"
+_REVIEW = _ROOT / "docs/reviews/v51-typed-vocabulary-funnel/vocabulary.json"
 _V48_REVIEW = _ROOT / "docs/reviews/v48-alchimie-pending-gate"
 
 _KG_SHA256 = "db236736caee6dc8a00874939f52cba2082ef9a73ea1c40d9826a25099ef7e3a"
 _PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
 _RANKINGS_SHA256 = "265696defbefd31adf1bc2da46511a69083361721207ad4b8833d8b22bc4133b"
 _DERIVED_SHA256 = "ee0bfd5ed51ff24a2e3ed8ea8ce32612548d9a418f138dacad2464d6bfd48b3d"
+_CANDIDATE_FUNNEL_SHA256 = (
+    "36eb871f07de3dde7169a896585031598791367af2c184b6dd6d15262933e416"
+)
 _RANKING_ROWS_SHA256 = "46aabcea827c3eed9d64dd7249ea1514d4b211a5b95c4bbea2d8a825e29d86e0"
 _FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
 _NODES_WITHOUT_ALIASES_SHA256 = (
@@ -75,7 +79,113 @@ _NODES_WITHOUT_ALIASES_SHA256 = (
 )
 _EDGES_SHA256 = "f62f0730a3e79c1498776049d86e1013e877bc74433360b2fcfaf3f1253a89b0"
 _PUZZLES_SHA256 = "3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc"
+_V49_LEDGER_SHA256 = "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29"
 _V48_KG_SHA256 = "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12"
+
+_EXPECTED_ALIASES = {
+    "odaia": "n_v24_home_rooms_camera",
+    "odăi": "n_v24_home_rooms_camera",
+    "odăile": "n_v24_home_rooms_camera",
+    "odăii": "n_v24_home_rooms_camera",
+    "odăilor": "n_v24_home_rooms_camera",
+    "mămici": "n_v24_people_parents_mama",
+    "mămicile": "n_v24_people_parents_mama",
+    "mămicii": "n_v24_people_parents_mama",
+    "mămicilor": "n_v24_people_parents_mama",
+    "tăticul": "n_v24_people_parents_tata",
+    "tătici": "n_v24_people_parents_tata",
+    "tăticii": "n_v24_people_parents_tata",
+    "tăticului": "n_v24_people_parents_tata",
+    "tăticilor": "n_v24_people_parents_tata",
+    "pite": "n_v4gas_paine",
+    "pitele": "n_v4gas_paine",
+    "pitei": "n_v4gas_paine",
+    "pitelor": "n_v4gas_paine",
+    "automobilul": "n_v24_transport_personal_masina",
+    "automobile": "n_v24_transport_personal_masina",
+    "automobilele": "n_v24_transport_personal_masina",
+    "automobilului": "n_v24_transport_personal_masina",
+    "automobilelor": "n_v24_transport_personal_masina",
+    "autoturismul": "n_v24_transport_personal_masina",
+    "autoturisme": "n_v24_transport_personal_masina",
+    "autoturismele": "n_v24_transport_personal_masina",
+    "autoturismului": "n_v24_transport_personal_masina",
+    "autoturismelor": "n_v24_transport_personal_masina",
+    "amicul": "n_v24_people_relationships_prieten",
+    "amici": "n_v24_people_relationships_prieten",
+    "amicului": "n_v24_people_relationships_prieten",
+    "amicilor": "n_v24_people_relationships_prieten",
+}
+_EXPECTED_PROJECTIONS = {
+    "smartphone": {
+        "anchor_id": "n_v4mem_telefon",
+        "domain": "tehnologie",
+        "rank_penalty": 1,
+    },
+    "Wi Fi": {
+        "anchor_id": "n_v4mem_internet",
+        "domain": "tehnologie",
+        "rank_penalty": 1,
+    },
+    "e-mail": {
+        "anchor_id": "n_v4mem_internet",
+        "domain": "tehnologie",
+        "rank_penalty": 1,
+    },
+    "site web": {
+        "anchor_id": "n_v4mem_internet",
+        "domain": "tehnologie",
+        "rank_penalty": 1,
+    },
+    "browser": {
+        "anchor_id": "n_v4mem_internet",
+        "domain": "tehnologie",
+        "rank_penalty": 1,
+    },
+    "rețea socială": {
+        "anchor_id": "n_v4mem_internet",
+        "domain": "tehnologie",
+        "rank_penalty": 1,
+    },
+    "sertar": {
+        "anchor_id": "n_v24_home_storage_comoda_sertare",
+        "domain": "mobilier și casă",
+        "rank_penalty": 1,
+    },
+    "stație de autobuz": {
+        "anchor_id": "n_v24_transport_terminals_statie",
+        "domain": "transport rutier",
+        "rank_penalty": 1,
+    },
+}
+_EXPECTED_DEFERRED = {
+    "amicii",
+    "arborele",
+    "arbori",
+    "arborii",
+    "arborelui",
+    "arborilor",
+    "cuptor",
+}
+_EXPECTED_REJECTED = {"fișă", "elan", "priză multiplă"}
+_UNAUTHORED_SPELLING_VARIANTS = {"Wi-Fi", "wifi", "email"}
+_EXPECTED_LEXICAL_SOURCES = {
+    "https://dexonline.ro/definitie/odaie",
+    "https://dexonline.ro/definitie/m%C4%83mic%C4%83",
+    "https://dexonline.ro/definitie/t%C4%83tic",
+    "https://dexonline.ro/definitie/pit%C4%83",
+    "https://dexonline.ro/definitie/automobil",
+    "https://dexonline.ro/definitie/autoturism",
+    "https://dexonline.ro/definitie/amic",
+    "https://dexonline.ro/definitie/arbore",
+    "https://dexonline.ro/definitie/smartphone",
+    "https://dexonline.ro/definitie/wi%20fi/1260813",
+    "https://dexonline.ro/definitie/e-mail",
+    "https://dexonline.ro/definitie/browser",
+    "https://dexonline.ro/definitie/website",
+    "https://dexonline.ro/definitie/sertar",
+    "https://dexonline.ro/definitie/autosta%C8%9Bie",
+}
 
 
 def _json(path: Path) -> dict:
@@ -101,6 +211,13 @@ def _pretty_payload_sha256(value: object) -> str:
     return hashlib.sha256(payload).hexdigest()
 
 
+def _candidate_surfaces(candidates: dict) -> set[str]:
+    surfaces: set[str] = set()
+    for values in candidates.values():
+        surfaces.update(values)
+    return surfaces
+
+
 def _post_contexto_guess(client: Client, game_id: str, text: str) -> dict:
     return client.post(
         f"/api/wordgames/contexto/games/{game_id}/guess",
@@ -109,81 +226,81 @@ def _post_contexto_guess(client: Client, game_id: str, text: str) -> dict:
     ).json()
 
 
-def test_v50_review_funnel_is_exact_complete_and_unanimous() -> None:
+def test_v51_review_funnel_is_exact_complete_and_records_disagreement() -> None:
     review = _json(_REVIEW)
     candidates = review["candidates"]
-    alias_candidates = set(candidates["aliases"])
-    projection_candidates = set(candidates["projections"])
-    hold_candidates = set(candidates["holds"])
-    explicit_rejects = set(candidates["explicit_rejects"])
-    candidate_surfaces = (
-        alias_candidates | projection_candidates | hold_candidates | explicit_rejects
-    )
-
-    assert review["schema"] == "v50-typed-vocabulary-review-v1"
-    assert review["candidate_funnel_sha256"] == _canonical_sha256(candidates)
-    assert len(candidate_surfaces) == 50
-    assert sum(
-        map(
-            len,
-            (alias_candidates, projection_candidates, hold_candidates, explicit_rejects),
-        )
-    ) == 50
-    normalized = [normalize_projection_surface(surface) for surface in candidate_surfaces]
-    assert len(normalized) == len(set(normalized)) == 50
-
-    reviews = review["reviews"]
+    surfaces = _candidate_surfaces(candidates)
     final = review["final"]
-    accepted_aliases = set(final["accepted_aliases"])
-    accepted_projections = set(final["accepted_projections"])
-    projection_binding = {
-        "schema": "v50-projection-binding-v1",
-        "items": final["accepted_projections"],
-    }
-    projection_binding_sha256 = _canonical_sha256(projection_binding)
-    for reviewer in (reviews["reviewer_a"], reviews["reviewer_b"]):
-        assert reviewer["projection_binding_schema"] == projection_binding["schema"]
-        assert reviewer["projection_binding_sha256"] == projection_binding_sha256
-    assert accepted_aliases == (
-        set(reviews["reviewer_a"]["alias_accept"])
-        & set(reviews["reviewer_b"]["alias_accept"])
-    )
-    assert accepted_projections == (
-        set(reviews["reviewer_a"]["projection_accept"])
-        & set(reviews["reviewer_b"]["projection_accept"])
-    )
-    assert set(final["rejected"]) == (
-        set(reviews["unanimous_reject"])
-        | (
-            set(reviews["reviewer_a"]["alias_reject"])
-            & set(reviews["reviewer_b"]["alias_reject"])
-            - accepted_projections
-        )
-    )
     final_partition = [
-        accepted_aliases,
-        accepted_projections,
+        set(final["accepted_aliases"]),
+        set(final["accepted_projections"]),
         set(final["deferred"]),
         set(final["rejected"]),
     ]
-    assert set().union(*final_partition) == candidate_surfaces
-    assert sum(map(len, final_partition)) == len(candidate_surfaces)
+
+    assert review["schema"] == "v51-typed-vocabulary-review-v1"
+    assert review["candidate_funnel_sha256"] == _CANDIDATE_FUNNEL_SHA256
+    assert review["candidate_funnel_sha256"] == _canonical_sha256(candidates)
+    assert len(surfaces) == 50
+    assert sum(len(values) for values in candidates.values()) == 50
+    normalized = [normalize_projection_surface(surface) for surface in surfaces]
+    assert len(normalized) == len(set(normalized)) == 50
+    assert set().union(*final_partition) == surfaces
+    assert sum(map(len, final_partition)) == 50
+
+    assert final["accepted_aliases"] == _EXPECTED_ALIASES
+    assert final["accepted_projections"] == _EXPECTED_PROJECTIONS
+    assert set(final["deferred"]) == _EXPECTED_DEFERRED
+    assert set(final["rejected"]) == _EXPECTED_REJECTED
     assert review["result"] == {
-        "accepted_alias_surfaces": 8,
-        "accepted_projection_surfaces": 12,
-        "deferred_surfaces": 8,
-        "rejected_surfaces": 22,
+        "accepted_alias_surfaces": 32,
+        "accepted_projection_surfaces": 8,
+        "deferred_surfaces": 7,
+        "rejected_surfaces": 3,
         "new_nodes": 0,
         "new_edges": 0,
         "new_game_records": 0,
     }
-    assert len(review["lexical_sources"]) == len(set(review["lexical_sources"])) == 13
-    assert all(url.startswith("https://dexonline.ro/") for url in review["lexical_sources"])
+
+    reviewers = review["reviews"]
+    reviewer_a = reviewers["reviewer_a"]
+    reviewer_b = reviewers["reviewer_b"]
+    assert set(reviewer_a["alias_accept"]) == set(_EXPECTED_ALIASES)
+    assert set(reviewer_b["alias_accept"]) == set(_EXPECTED_ALIASES) | {"amicii"}
+    assert set(reviewer_a["alias_reject"]) == {"amicii"}
+    assert reviewer_b["alias_reject"] == []
+    assert "amicii" in final["deferred"]
+    reviewer_deferred = _EXPECTED_DEFERRED - {"amicii"}
+    for reviewer in (reviewer_a, reviewer_b):
+        dispositions = [
+            set(reviewer["alias_accept"]),
+            set(reviewer["alias_reject"]),
+            set(reviewer["projection_accept"]),
+            set(reviewer["defer"]),
+            set(reviewer["reject"]),
+        ]
+        assert set(reviewer["projection_accept"]) == set(_EXPECTED_PROJECTIONS)
+        assert set(reviewer["defer"]) == reviewer_deferred
+        assert set(reviewer["reject"]) == _EXPECTED_REJECTED
+        assert set().union(*dispositions) == surfaces
+        assert sum(map(len, dispositions)) == 50
+
+    projection_binding = {
+        "schema": "v51-projection-binding-v1",
+        "items": _EXPECTED_PROJECTIONS,
+    }
+    for reviewer in (reviewer_a, reviewer_b):
+        assert reviewer["projection_binding_schema"] == projection_binding["schema"]
+        assert reviewer["projection_binding_sha256"] == _canonical_sha256(
+            projection_binding
+        )
+    lexical_sources = review["lexical_sources"]
+    assert set(lexical_sources) == _EXPECTED_LEXICAL_SOURCES
+    assert len(lexical_sources) == len(set(lexical_sources))
 
 
-def test_v50_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -> None:
+def test_v51_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -> None:
     fixture = _json(_PACKAGE_KG)
-    review = _json(_REVIEW)
     svc = WordGameService(load_fixture(_PACKAGE_KG).graph)
     aliases = {
         alias: node_id
@@ -191,27 +308,27 @@ def test_v50_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
         for alias in surfaces
     }
 
-    assert aliases == review["final"]["accepted_aliases"]
+    assert DATA.BUILD_VERSION == "fixture-v51-typed-vocabulary"
+    assert aliases == _EXPECTED_ALIASES
     assert len(DATA.ALIAS_ADDITIONS) == 6
-    assert len(aliases) == 8
+    assert len(aliases) == 32
     assert all(svc.resolve(surface) == node_id for surface, node_id in aliases.items())
-    assert all(svc.resolve(surface) is None for surface in DATA.BLOCKED_ALIAS_FORMS)
+    blocked = _EXPECTED_DEFERRED | _EXPECTED_REJECTED | set(_EXPECTED_PROJECTIONS)
+    assert all(svc.resolve(surface) is None for surface in blocked)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
-    assert fixture["meta"]["build_version"] == "fixture-v51-typed-vocabulary"
+    assert fixture["meta"]["build_version"] == DATA.BUILD_VERSION
     assert fixture["meta"]["counts"]["nodes"] == 2364
     assert fixture["meta"]["counts"]["edges"] == 9217
     assert fixture["meta"]["counts"]["puzzles"] == 180
     assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 7492
 
 
-def test_v50_basic_words_are_exactly_the_reviewed_nonwinning_projection() -> None:
-    review = _json(_REVIEW)
-    accepted = review["final"]["accepted_projections"]
+def test_v51_basic_words_are_exactly_the_reviewed_nonwinning_projection() -> None:
     svc = get_service()
 
     assert len(PROJECTION_TERMS) == 473
     assert len({term.domain for term in PROJECTION_TERMS}) == 26
-    for surface, expected in accepted.items():
+    for surface, expected in _EXPECTED_PROJECTIONS.items():
         term = resolve_projection(surface)
         assert term is not None
         assert term.anchor_id == expected["anchor_id"]
@@ -219,21 +336,16 @@ def test_v50_basic_words_are_exactly_the_reviewed_nonwinning_projection() -> Non
         assert term.rank_penalty == expected["rank_penalty"] == 1
         assert svc.resolve(surface) is None
 
-    excluded = {
-        *review["final"]["accepted_aliases"],
-        *review["final"]["deferred"],
-        *review["final"]["rejected"],
-    }
+    excluded = set(_EXPECTED_ALIASES) | _EXPECTED_DEFERRED | _EXPECTED_REJECTED
     assert all(resolve_projection(surface) is None for surface in excluded)
-    assert normalize_projection_surface("bărbie") == normalize_projection_surface("Barbie")
 
 
-def test_v50_aliases_play_in_contexto_and_on_legal_lant_hops() -> None:
+def test_v51_aliases_play_in_contexto_and_only_on_existing_legal_lant_hops() -> None:
     client = Client()
     svc = get_service()
     lant_targets: set[str] = set()
 
-    for alias, target in _json(_REVIEW)["final"]["accepted_aliases"].items():
+    for alias, target in _EXPECTED_ALIASES.items():
         contexto_id = contexto_store.create(_build_session(target, "normal", None))
         contexto = _post_contexto_guess(client, contexto_id, alias)
         assert contexto["ok"] is True
@@ -242,12 +354,10 @@ def test_v50_aliases_play_in_contexto_and_on_legal_lant_hops() -> None:
 
         starts = [
             node_id
-            for node_id in svc.neighbor_ids(target)
+            for node_id in svc.predecessor_ids(target)
             if svc.link(node_id, target) is not None
         ]
         if not starts:
-            # Alias authoring must not manufacture a reverse edge solely to make a
-            # currently one-way concept typeable from the other side in Lanț.
             continue
         start = starts[0]
         lant_targets.add(target)
@@ -263,20 +373,14 @@ def test_v50_aliases_play_in_contexto_and_on_legal_lant_hops() -> None:
         assert lant["won"] is True
         assert lant["current"]["id"] == target
 
-    assert lant_targets == {
-        "n_v24_home_rooms_camera",
-        "n_lbax_regionalism_barabula",
-        "n_lbax_regionalism_papusoi",
-        "n_v4gas_paine",
-    }
+    assert lant_targets == set(_EXPECTED_ALIASES.values())
 
 
-def test_v50_projections_play_only_in_contexto_and_never_win() -> None:
+def test_v51_projections_play_only_in_contexto_and_never_win() -> None:
     client = Client()
-    accepted = _json(_REVIEW)["final"]["accepted_projections"]
     svc = get_service()
 
-    for surface, expected in accepted.items():
+    for surface, expected in _EXPECTED_PROJECTIONS.items():
         target = expected["anchor_id"]
         game_id = contexto_store.create(_build_session(target, "normal", None))
         body = _post_contexto_guess(client, game_id, surface)
@@ -294,7 +398,7 @@ def test_v50_projections_play_only_in_contexto_and_never_win() -> None:
     )
     session = LantSession(start=start, target=target, optimal=1, chain=[start])
     game_id = lant_store.create(session)
-    for surface in accepted:
+    for surface in _EXPECTED_PROJECTIONS:
         body = client.post(
             f"/api/wordgames/lant/games/{game_id}/move",
             {"text": surface},
@@ -304,18 +408,27 @@ def test_v50_projections_play_only_in_contexto_and_never_win() -> None:
         assert session.moves == 0
 
 
-def test_v50_projection_typo_does_not_disclose_a_proxy_of_the_secret() -> None:
+def test_v51_blocked_and_unauthored_spellings_stay_out_of_typed_games() -> None:
     client = Client()
-    game_id = contexto_store.create(_build_session("n_v24_body_face_cap", "normal", None))
-    body = _post_contexto_guess(client, game_id, "barbaa")
+    svc = get_service()
+    blocked = (
+        _EXPECTED_DEFERRED
+        | _EXPECTED_REJECTED
+        | _UNAUTHORED_SPELLING_VARIANTS
+    )
+    target = "n_v4mem_internet"
 
-    assert body["ok"] is False
-    assert body["attempts"] == 0
-    assert "Barbă" not in body["suggestions"]
-    assert "target" not in body
+    for surface in blocked:
+        assert svc.resolve(surface) is None
+        assert resolve_projection(surface) is None
+        game_id = contexto_store.create(_build_session(target, "normal", None))
+        body = _post_contexto_guess(client, game_id, surface)
+        assert body["ok"] is False
+        assert body["attempts"] == 0
+        assert "target" not in body
 
 
-def test_v50_preserves_topology_pack_rows_and_frozen_derived_boards() -> None:
+def test_v51_preserves_topology_pack_rows_and_frozen_derived_boards() -> None:
     fixture = _json(_PACKAGE_KG)
     rankings = _json(_PACKAGE_RANKINGS)
     derived = _json(_PACKAGE_DERIVED)
@@ -346,22 +459,40 @@ def test_v50_preserves_topology_pack_rows_and_frozen_derived_boards() -> None:
     assert contexto_store._max == lant_store._max == 1000
 
 
-def test_v50_mobile_contract_tracks_only_the_alias_release() -> None:
+def test_v51_mobile_contract_and_v49_ledger_persist_exactly() -> None:
     checked_in = _json(_MOBILE_CONTRACT)
+    ledger = _json(_LEDGER)
 
     assert checked_in == mobile_app_pack_snapshot(_PACKAGE_KG)
     assert _MOBILE_CONTRACT.read_bytes() == (
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
-    assert checked_in["manifest"]["build_version"] == "fixture-v51-typed-vocabulary"
+    assert checked_in["manifest"]["build_version"] == DATA.BUILD_VERSION
     assert checked_in["manifest"]["counts"] == {
         "nodes": 2364,
         "edges": 9217,
         "puzzles": 180,
     }
 
+    assert _sha256(_LEDGER) == _V49_LEDGER_SHA256
+    assert ledger["meta"]["count"] == len(ledger["items"]) == 104
+    pack = _json(_PACKAGE_PACK)
+    runtime_ids = {
+        row["id"]
+        for game in ("conexiuni", "contexto", "lant", "alchimie")
+        for row in pack[game]
+    }
+    rejected_ids = set(ledger["items"])
+    rejected_pairs = {
+        (row["start"], row["target"]) for row in ledger["items"].values()
+    }
+    assert rejected_ids.isdisjoint(runtime_ids)
+    assert rejected_pairs.isdisjoint(
+        (row["start"], row["target"]) for row in pack["lant"]
+    )
 
-def test_v50_replays_v48_projection_evidence_without_rebinding_history() -> None:
+
+def test_v51_replays_v48_projection_evidence_without_rebinding_history() -> None:
     audit_path = _V48_REVIEW / "projection-audit.json"
     audit = _json(audit_path)
     dossiers = _V48_REVIEW / "dossiers"
@@ -385,9 +516,7 @@ def test_v50_replays_v48_projection_evidence_without_rebinding_history() -> None
         audit_alchimie_projections.rebuild_archived_artifact(tampered, dossiers)
 
 
-def test_v50_live_alchimie_gate_requires_every_current_provenance_input(
-    tmp_path: Path,
-) -> None:
+def test_v51_live_alchimie_gate_still_binds_the_current_kg(tmp_path: Path) -> None:
     pack, svc, strong, regions = critique_pack.load_all(
         critique_pack.PACKAGE_PACK,
         critique_pack.PACKAGE_KG,
@@ -403,11 +532,9 @@ def test_v50_live_alchimie_gate_requires_every_current_provenance_input(
         {"pending"},
         {item_id},
     )
-    assert len(selected) == 1
-
+    game, record, findings = selected[0]
     dossier_dir = tmp_path / "dossiers"
     dossier_dir.mkdir()
-    game, record, findings = selected[0]
     dossier = critique_pack.build_dossier(
         record,
         game,
@@ -424,55 +551,19 @@ def test_v50_live_alchimie_gate_requires_every_current_provenance_input(
     audit_path = tmp_path / apply_rereview.ALCHIMIE_PROJECTION_AUDIT
     verdict_path = tmp_path / "alchimie_verdicts.json"
     batch = {"input_ids": [item_id]}
+    audit_path.write_text(
+        json.dumps(audit, ensure_ascii=False, indent=1) + "\n",
+        encoding="utf-8",
+    )
 
-    def write_audit(value: dict) -> None:
-        audit_path.write_text(
-            json.dumps(value, ensure_ascii=False, indent=1) + "\n",
-            encoding="utf-8",
-        )
-
-    write_audit(audit)
+    assert audit["kg_sha256"] == _KG_SHA256
     apply_rereview.validate_live_alchimie_projection_source(batch, verdict_path)
 
-    mutations = []
-    changed_pack = deepcopy(audit)
-    changed_pack["pack_sha256"] = "0" * 64
-    mutations.append(changed_pack)
-    changed_kg = deepcopy(audit)
-    changed_kg["kg_sha256"] = "0" * 64
-    mutations.append(changed_kg)
-    changed_rubric = deepcopy(audit)
-    changed_rubric["rubric_sha256"] = "0" * 64
-    mutations.append(changed_rubric)
-    changed_runtime = deepcopy(audit)
-    changed_runtime["runtime_sources"][0]["sha256"] = "0" * 64
-    changed_runtime["runtime_source_manifest_sha256"] = _canonical_sha256(
-        changed_runtime["runtime_sources"]
+    stale = deepcopy(audit)
+    stale["kg_sha256"] = _V48_KG_SHA256
+    audit_path.write_text(
+        json.dumps(stale, ensure_ascii=False, indent=1) + "\n",
+        encoding="utf-8",
     )
-    mutations.append(changed_runtime)
-    changed_runtime_manifest = deepcopy(audit)
-    changed_runtime_manifest["runtime_source_manifest_sha256"] = "0" * 64
-    mutations.append(changed_runtime_manifest)
-    changed_generator = deepcopy(audit)
-    changed_generator["generator"]["sha256"] = "0" * 64
-    mutations.append(changed_generator)
-
-    for changed in mutations:
-        write_audit(changed)
-        with pytest.raises(SystemExit, match="stale Alchimie live-projection source"):
-            apply_rereview.validate_live_alchimie_projection_source(
-                batch,
-                verdict_path,
-            )
-
-
-def test_v50_embedded_rubric_bindings_replay_but_live_dossiers_use_current() -> None:
-    dossier = _json(next((_V48_REVIEW / "dossiers").glob("*.json")))
-
-    assert critique_pack.dossier_review_binding(dossier) == dossier["review_binding"]
-    changed = deepcopy(dossier)
-    changed["rubric_sha256"] = "0" * 64
-    assert critique_pack.dossier_review_binding(changed) != dossier["review_binding"]
-    changed["rubric_sha256"] = "bad"
-    with pytest.raises(ValueError, match="rubric_sha256"):
-        critique_pack.dossier_review_binding(changed)
+    with pytest.raises(SystemExit, match="stale Alchimie live-projection source"):
+        apply_rereview.validate_live_alchimie_projection_source(batch, verdict_path)

@@ -208,6 +208,7 @@ _GROUPS: tuple[tuple[str, int, tuple[str, ...]], ...] = (
             "întrerupător",
             "prelungitor",
             "lanternă",
+            "sertar",
         ),
     ),
     (
@@ -503,6 +504,12 @@ _GROUPS: tuple[tuple[str, int, tuple[str, ...]], ...] = (
             "apel video",
             "fotografie digitală",
             "cablu",
+            "smartphone",
+            "Wi Fi",
+            "e-mail",
+            "site web",
+            "browser",
+            "rețea socială",
         ),
     ),
     (
@@ -532,6 +539,7 @@ _GROUPS: tuple[tuple[str, int, tuple[str, ...]], ...] = (
             "garaj",
             "claxon",
             "oglindă retrovizoare",
+            "stație de autobuz",
         ),
     ),
     (
@@ -1027,10 +1035,22 @@ _ANCHOR_CLUSTERS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("n_v33_electric_extension_prelungitor", ("prelungitor",)),
     ("n_v33_electric_wire_cablu", ("cablu",)),
     ("n_v24_home_appliances_lampa", ("lanternă",)),
+    ("n_v24_home_storage_comoda_sertare", ("sertar",)),
+    ("n_v4mem_telefon", ("smartphone",)),
+    (
+        "n_v4mem_internet",
+        ("Wi Fi", "e-mail", "site web", "browser", "rețea socială"),
+    ),
     ("n_v4geo_drum", ("semafor", "trecere de pietoni", "sens giratoriu", "intersecție")),
     (
         "n_v24_transport_terminals_statie",
-        ("bilet de autobuz", "abonament de transport", "peron", "călător"),
+        (
+            "bilet de autobuz",
+            "abonament de transport",
+            "peron",
+            "călător",
+            "stație de autobuz",
+        ),
     ),
     (
         "n_v24_transport_personal_masina",
