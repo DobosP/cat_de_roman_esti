@@ -37,7 +37,7 @@ MAX_VARIANTS_PER_SOURCE = 3
 _PREFERRED_STANDARD_SCORE = 55
 # Updated only with a reviewed, generator-produced bundled artifact.
 DEFAULT_DERIVED_CATALOG_SHA256 = (
-    "ee0bfd5ed51ff24a2e3ed8ea8ce32612548d9a418f138dacad2464d6bfd48b3d"
+    "94ab0afa16cc9d1ce5dba0de387df6ddda822322349801c84a79a7b560510b98"
 )
 
 _META_FIELDS = {

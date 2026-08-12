@@ -1,7 +1,7 @@
 # ADR-0075: Bound alias morphology and common typed guesses
 
 Date: 2026-08-12
-Status: accepted
+Status: superseded-by ADR-0076
 
 ## Decision
 

@@ -2,20 +2,20 @@
 
 _As of 2026-08-12. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-12 (V51 backend 769/769, accounts 53/53, sessions 16/16,
-V51 10/10, affected V33/V44/V47–V50 gates, all artifact validators, strict Lanț
-pending sweep, Ruff, and whitespace green; frontend untouched)._
+_Last verified: 2026-08-12 (V52 backend 775/775, accounts 53/53, sessions 16/16,
+V52 6/6, affected historical gates, all artifact validators, strict Lanț pending sweep,
+Ruff, and whitespace green; frontend untouched)._
 
-## Current outcome — V51 bounded alias morphology and common guesses (ADR-0075)
+## Current outcome — V52 bounded household case morphology (ADR-0076)
 
-- Two independent lexical passes reviewed one finite 50-surface funnel: 32 exact
-  grammatical forms and eight Contexto-only non-winning projections passed unanimously;
-  seven surfaces remain deferred and three are rejected. Disputed `amicii` stays deferred.
-- Exact forms serve typed Contexto input and legal Lanț hops. Related common guesses remain
-  Contexto projections with penalty one. Only `Wi Fi` is authored; alternate spellings stay
-  absent so one concept cannot consume multiple attempt identities.
-- V51 adds no nodes, edges, puzzles, game records, hold dispositions, or derived boards.
-  KG topology and pack bytes stay fixed; only aliases and bound wrapper metadata change.
+- Two independent passes reviewed two case forms for each of 25 existing household nouns.
+  Forty-eight exact forms passed unanimously; `păturile` and `păturilor` are rejected because
+  their accent-folded keys are also ordinary forms of `pat`. No quota was used.
+- Accepted forms serve typed Contexto input and otherwise-legal Lanț hops. V52 adds no
+  Contexto projection, node, edge, puzzle, game record, hold disposition, or derived board;
+  KG topology and pack bytes stay fixed while only aliases and bound wrappers change.
+- V51 remains in force: its 32 alias forms and eight penalty-one Contexto projections stay
+  accepted; its seven deferrals, three rejections, and unauthored spellings stay absent.
 - Archived V48 Alchimie evidence replays its embedded historical provenance, while a new
   live gate fails closed unless KG, rubric, runtime sources, generator, and pack match
   current bytes. Tampering at every boundary is regression-tested.
@@ -44,11 +44,11 @@ Pack: **618 = 610 approved + 8 pending**, across 14 categories. The ranked origi
 runtime serves **449 zero-FAIL boards**. The strict derived catalog remains **336** boards
 from the frozen V38 source snapshot; its `boards` payload hash is
 `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
-Bundled KG: **2,364 nodes / 9,217 edges / 7,492 aliases / 180 puzzles**
-(`fixture-v51-typed-vocabulary`).
+Bundled KG: **2,364 nodes / 9,217 edges / 7,540 aliases / 180 puzzles**
+(`fixture-v52-household-morphology`).
 
-V49 evidence is under `docs/reviews/v49-lant-rejection-ledger/`; V51's 50-row lexical
-funnel is under `docs/reviews/v51-typed-vocabulary-funnel/`. Rankings remain estimates.
+V49 evidence is under `docs/reviews/v49-lant-rejection-ledger/`; V52's 50-row lexical
+funnel is under `docs/reviews/v52-household-morphology/`. Rankings remain estimates.
 
 ## Runtime, accounts, and deployment
 
@@ -75,8 +75,8 @@ git diff --check
 
 ## Next verified work
 
-- Any later lexical wave needs a new finite two-reviewer funnel. V50/V51 deferrals,
-  rejections, and unauthored spelling variants stay absent without fresh exact evidence.
+- Any later lexical wave needs a new finite two-reviewer funnel. V50–V52 deferrals,
+  rejections, folded collisions, and unauthored spellings stay absent without fresh evidence.
 - Resolve the three Alchimie alcohol holds and two Cald sau Rece A5 holds only through
   explicit owner disposition and fresh game-specific gates.
 - Census the full Lanț pack and durable ledger before authoring/import. Repair its three
