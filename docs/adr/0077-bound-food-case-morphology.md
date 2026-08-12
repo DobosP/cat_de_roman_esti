@@ -1,7 +1,7 @@
 # ADR-0077: Bound food case morphology
 
 Date: 2026-08-12
-Status: accepted
+Status: superseded-by ADR-0078
 
 ## Decision
 

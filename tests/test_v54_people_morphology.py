@@ -1,4 +1,4 @@
-"""Regression contract for the reviewed V52 household-morphology wave."""
+"""Regression contract for the reviewed V54 people-morphology wave."""
 
 from __future__ import annotations
 
@@ -13,10 +13,7 @@ pytest.importorskip("django")
 
 from django.test import Client  # noqa: E402
 
-from cat_de_roman_esti.data import (  # noqa: E402
-    load_fixture,
-    mobile_app_pack_snapshot,
-)
+from cat_de_roman_esti.data import load_fixture, mobile_app_pack_snapshot  # noqa: E402
 from cat_de_roman_esti.wordgames.contexto import _build_session  # noqa: E402
 from cat_de_roman_esti.wordgames.contexto import store as contexto_store  # noqa: E402
 from cat_de_roman_esti.wordgames.contexto_projection import (  # noqa: E402
@@ -37,7 +34,7 @@ from cat_de_roman_esti.wordgames.service import (  # noqa: E402
 _ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_ROOT / "scripts"))
 
-import contexto_common_words_v52_data as DATA  # noqa: E402
+import contexto_common_words_v54_data as DATA  # noqa: E402
 
 _PACKAGE_KG = _ROOT / "cat_de_roman_esti/fixtures/kg_sample.json"
 _TEST_KG = _ROOT / "tests/fixtures/kg_sample.json"
@@ -49,14 +46,14 @@ _PACKAGE_DERIVED = _ROOT / "cat_de_roman_esti/fixtures/derived_catalog_v38.json"
 _TEST_DERIVED = _ROOT / "tests/fixtures/derived_catalog_v38.json"
 _LEDGER = _ROOT / "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
-_REVIEW = _ROOT / "docs/reviews/v52-household-morphology/vocabulary.json"
+_REVIEW = _ROOT / "docs/reviews/v54-people-morphology/vocabulary.json"
 
 _KG_SHA256 = "8fa5bd8d7f9169c21fc076a6310b085b1224fd68aca473b365143306608ff526"
 _PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
 _RANKINGS_SHA256 = "8adc1da531ca65fd23b653597886d93c7ecdad23477a44ba754365596041e900"
 _DERIVED_SHA256 = "f23f4abf69217234a085525643f9d4d85109f260ec388421ac25961c9a0486ed"
 _CANDIDATE_FUNNEL_SHA256 = (
-    "21bf03bc35819a0957d98cbef23a060daf8abf63c5afdaed5c0a53a9d7b7a535"
+    "e826810d2b8a88b8034e21c28336faa7d6d55e2801d62bde4ec6dccfdd87a2bb"
 )
 _RANKING_ROWS_SHA256 = "46aabcea827c3eed9d64dd7249ea1514d4b211a5b95c4bbea2d8a825e29d86e0"
 _FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
@@ -66,7 +63,7 @@ _NODES_WITHOUT_ALIASES_SHA256 = (
 _EDGES_SHA256 = "f62f0730a3e79c1498776049d86e1013e877bc74433360b2fcfaf3f1253a89b0"
 _PUZZLES_SHA256 = "3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc"
 _V49_LEDGER_SHA256 = "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29"
-_REJECTED = {"păturile", "păturilor"}
+_REJECTED = {"părintelui", "părinților"}
 
 
 def _json(path: Path) -> dict:
@@ -108,14 +105,14 @@ def _post_contexto_guess(client: Client, game_id: str, text: str) -> dict:
     ).json()
 
 
-def test_v52_review_funnel_is_exact_complete_and_collision_aware() -> None:
+def test_v54_review_funnel_is_exact_complete_and_collision_aware() -> None:
     review = _json(_REVIEW)
     candidates = review["candidates"]
     candidate_aliases = candidates["aliases"]
     final = review["final"]
     accepted = _accepted_aliases()
 
-    assert review["schema"] == "v52-household-morphology-review-v1"
+    assert review["schema"] == "v54-people-morphology-review-v1"
     assert review["candidate_funnel_sha256"] == _CANDIDATE_FUNNEL_SHA256
     assert review["candidate_funnel_sha256"] == _canonical_sha256(candidates)
     assert len(candidate_aliases) == 50
@@ -128,9 +125,9 @@ def test_v52_review_funnel_is_exact_complete_and_collision_aware() -> None:
     assert final["deferred"] == []
     assert set(final["rejected"]) == _REJECTED
     assert set(accepted) | _REJECTED == set(candidate_aliases)
-    assert review["normalized_collision_evidence"] == {
-        "paturile": ["păturile (blankets)", "paturile (the beds)"],
-        "paturilor": ["păturilor (of the blankets)", "paturilor (of the beds)"],
+    assert review["sense_collision_evidence"] == {
+        "părintelui": ["parent", "priest or monk"],
+        "părinților": ["parents", "priests, monks, or Church Fathers"],
     }
 
     for reviewer in review["reviews"].values():
@@ -163,26 +160,26 @@ def test_v52_review_funnel_is_exact_complete_and_collision_aware() -> None:
     }
 
 
-def test_v52_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -> None:
+def test_v54_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -> None:
     fixture = _json(_PACKAGE_KG)
     svc = WordGameService(load_fixture(_PACKAGE_KG).graph)
     aliases = _accepted_aliases()
 
-    assert DATA.BUILD_VERSION == "fixture-v52-household-morphology"
+    assert DATA.BUILD_VERSION == "fixture-v54-people-morphology"
     assert len(DATA.ALIAS_ADDITIONS) == 24
     assert len(aliases) == 48
     assert all(svc.resolve(surface) == node_id for surface, node_id in aliases.items())
     assert all(svc.resolve(surface) is None for surface in _REJECTED)
     assert all(resolve_projection(surface) is None for surface in set(aliases) | _REJECTED)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
-    assert fixture["meta"]["build_version"] == "fixture-v54-people-morphology"
+    assert fixture["meta"]["build_version"] == DATA.BUILD_VERSION
     assert fixture["meta"]["counts"]["nodes"] == 2364
     assert fixture["meta"]["counts"]["edges"] == 9217
     assert fixture["meta"]["counts"]["puzzles"] == 180
     assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 7636
 
 
-def test_v52_aliases_play_in_contexto_and_only_on_existing_legal_lant_hops() -> None:
+def test_v54_aliases_play_in_contexto_and_only_on_existing_legal_lant_hops() -> None:
     client = Client()
     svc = get_service()
     lant_targets: set[str] = set()
@@ -218,12 +215,12 @@ def test_v52_aliases_play_in_contexto_and_only_on_existing_legal_lant_hops() -> 
     assert lant_targets == set(_accepted_aliases().values())
 
 
-def test_v52_rejected_folded_keys_stay_out_of_typed_games() -> None:
+def test_v54_rejected_polysemes_stay_out_of_typed_games() -> None:
     client = Client()
     svc = get_service()
-    target = "n_v24_home_textiles_patura"
+    target = "n_v4soc_parinte"
 
-    for surface in (*sorted(_REJECTED), "paturile", "paturilor"):
+    for surface in sorted(_REJECTED):
         assert svc.resolve(surface) is None
         assert resolve_projection(surface) is None
         game_id = contexto_store.create(_build_session(target, "normal", None))
@@ -233,7 +230,7 @@ def test_v52_rejected_folded_keys_stay_out_of_typed_games() -> None:
         assert "target" not in body
 
 
-def test_v52_preserves_projection_topology_pack_and_frozen_board_payloads() -> None:
+def test_v54_preserves_projection_topology_pack_and_frozen_board_payloads() -> None:
     fixture = _json(_PACKAGE_KG)
     rankings = _json(_PACKAGE_RANKINGS)
     derived = _json(_PACKAGE_DERIVED)
@@ -265,7 +262,7 @@ def test_v52_preserves_projection_topology_pack_and_frozen_board_payloads() -> N
     assert contexto_store._max == lant_store._max == 1000
 
 
-def test_v52_mobile_contract_and_v49_ledger_persist_exactly() -> None:
+def test_v54_mobile_contract_and_v49_ledger_persist_exactly() -> None:
     checked_in = _json(_MOBILE_CONTRACT)
     ledger = _json(_LEDGER)
 
@@ -273,7 +270,7 @@ def test_v52_mobile_contract_and_v49_ledger_persist_exactly() -> None:
     assert _MOBILE_CONTRACT.read_bytes() == (
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
-    assert checked_in["manifest"]["build_version"] == "fixture-v54-people-morphology"
+    assert checked_in["manifest"]["build_version"] == DATA.BUILD_VERSION
     assert checked_in["manifest"]["counts"] == {
         "nodes": 2364,
         "edges": 9217,

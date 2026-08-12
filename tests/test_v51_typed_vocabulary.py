@@ -65,10 +65,10 @@ _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 _REVIEW = _ROOT / "docs/reviews/v51-typed-vocabulary-funnel/vocabulary.json"
 _V48_REVIEW = _ROOT / "docs/reviews/v48-alchimie-pending-gate"
 
-_KG_SHA256 = "1a5bd5ad9f6ce4b453f1b5463f335c7a006624d3cafbf6664a2e45d5b220edbc"
+_KG_SHA256 = "8fa5bd8d7f9169c21fc076a6310b085b1224fd68aca473b365143306608ff526"
 _PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
-_RANKINGS_SHA256 = "606937c391008c838fd0a78b06bc8ca03352f31c643cec500f7c7974cbb72366"
-_DERIVED_SHA256 = "b4cb91c671191fcd2e6aa627d97cff8f7be4552c99af747701a8e1ce4a941287"
+_RANKINGS_SHA256 = "8adc1da531ca65fd23b653597886d93c7ecdad23477a44ba754365596041e900"
+_DERIVED_SHA256 = "f23f4abf69217234a085525643f9d4d85109f260ec388421ac25961c9a0486ed"
 _CANDIDATE_FUNNEL_SHA256 = (
     "36eb871f07de3dde7169a896585031598791367af2c184b6dd6d15262933e416"
 )
@@ -316,11 +316,11 @@ def test_v51_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     blocked = _EXPECTED_DEFERRED | _EXPECTED_REJECTED | set(_EXPECTED_PROJECTIONS)
     assert all(svc.resolve(surface) is None for surface in blocked)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
-    assert fixture["meta"]["build_version"] == "fixture-v53-food-morphology"
+    assert fixture["meta"]["build_version"] == "fixture-v54-people-morphology"
     assert fixture["meta"]["counts"]["nodes"] == 2364
     assert fixture["meta"]["counts"]["edges"] == 9217
     assert fixture["meta"]["counts"]["puzzles"] == 180
-    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 7588
+    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 7636
 
 
 def test_v51_basic_words_are_exactly_the_reviewed_nonwinning_projection() -> None:
@@ -467,7 +467,7 @@ def test_v51_mobile_contract_and_v49_ledger_persist_exactly() -> None:
     assert _MOBILE_CONTRACT.read_bytes() == (
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
-    assert checked_in["manifest"]["build_version"] == "fixture-v53-food-morphology"
+    assert checked_in["manifest"]["build_version"] == "fixture-v54-people-morphology"
     assert checked_in["manifest"]["counts"] == {
         "nodes": 2364,
         "edges": 9217,
