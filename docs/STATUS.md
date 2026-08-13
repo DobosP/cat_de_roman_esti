@@ -2,18 +2,21 @@
 
 _As of 2026-08-13. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-13 (V57 backend 805/805, accounts 53/53, sessions 16/16,
-V57 6/6, affected historical gates, all artifact validators, strict Lanț pending sweep,
-Ruff, and whitespace green; frontend untouched)._
+_Last verified: 2026-08-13 (V58 focused 6/6, affected 117/117, accounts 53/53,
+sessions 16/16, artifacts, validators, Ruff, and whitespace green. Full backend is
+810/811: one load-sensitive Alchimie timing ceiling also fails on landed V57)._
 
-## Current outcome — V57 bounded creative-arts case morphology (ADR-0081)
+## Current outcome — V58 bounded school/literacy case morphology (ADR-0082)
 
-- Two independent passes reviewed two case forms for each of 25 existing creative-arts
-  concepts. Forty-eight exact forms passed unanimously; both _tablou_ forms remain rejected
-  because painting, table/chart, theatre-division, and technical-panel senses collide.
-- Accepted forms serve typed Contexto input and otherwise-legal Lanț hops. V57 adds no
+- Two independent passes reviewed a fixed set of two case forms for each of 25 existing
+  school/literacy concepts. Forty-eight exact aliases across 24 owners passed; _cărții_ and
+  _cărților_ remain rejected because ordinary book, playing-card, document, and record
+  senses do not have one safe owner.
+- Accepted forms serve typed Contexto input and otherwise-legal Lanț hops. V58 adds no
   Contexto projection, node, edge, puzzle, game record, hold disposition, or derived board;
   KG topology and pack bytes stay fixed while only aliases and bound wrappers change.
+- V57 remains in force: its 48 creative-arts forms stay accepted, while both artwork/table
+  polysemes stay rejected. V57 landed and was pushed at `e0dd912`.
 - V56 remains in force: its 46 nature/basic-science forms stay accepted, while its four
   fish/body polysemes stay rejected.
 - V55 remains in force: its 48 place forms stay accepted, while both geography/sport
@@ -54,11 +57,11 @@ Pack: **618 = 610 approved + 8 pending**, across 14 categories. The ranked origi
 runtime serves **449 zero-FAIL boards**. The strict derived catalog remains **336** boards
 from the frozen V38 source snapshot; its `boards` payload hash is
 `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
-Bundled KG: **2,364 nodes / 9,217 edges / 7,778 aliases / 180 puzzles**
-(`fixture-v57-creative-arts-morphology`).
+Bundled KG: **2,364 nodes / 9,217 edges / 7,826 aliases / 180 puzzles**
+(`fixture-v58-school-literacy-morphology`).
 
-V49 evidence is under `docs/reviews/v49-lant-rejection-ledger/`; V57's 50-row lexical
-funnel is under `docs/reviews/v57-creative-arts-morphology/`. Rankings remain estimates.
+V49 evidence is under `docs/reviews/v49-lant-rejection-ledger/`; V58's 50-row lexical
+funnel is under `docs/reviews/v58-school-literacy-morphology/`. Rankings remain estimates.
 
 ## Runtime, accounts, and deployment
 
@@ -85,7 +88,8 @@ git diff --check
 
 ## Next verified work
 
-- Any later lexical wave needs a new finite two-reviewer funnel. V50–V57 deferrals,
+- Rerun V58's Alchimie timing and full-backend gates on a non-saturated host before landing.
+- Any later lexical wave needs a new finite two-reviewer funnel. V50–V58 deferrals,
   rejections, folded collisions, and unauthored spellings stay absent without fresh evidence.
 - Resolve the three Alchimie alcohol holds and two Cald sau Rece A5 holds only through
   explicit owner disposition and fresh game-specific gates.
