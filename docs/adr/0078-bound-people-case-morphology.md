@@ -1,7 +1,7 @@
 # ADR-0078: Bound people case morphology
 
 Date: 2026-08-13
-Status: accepted
+Status: superseded-by ADR-0079
 
 ## Decision
 

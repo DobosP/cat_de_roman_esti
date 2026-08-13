@@ -206,15 +206,15 @@ def test_v33_source_inventory_builder_application_counts_and_mirrors():
     assert len(built["nodes"]) == 18
     assert len(built["edges"]) == _EXPECTED_AUTHORED_EDGE_COUNT
     assert built == DATA.build_nodes_and_edges()
-    assert fixture["meta"]["build_version"] == "fixture-v54-people-morphology"
+    assert fixture["meta"]["build_version"] == "fixture-v55-place-morphology"
     assert (len(fixture["kg_nodes"]), len(fixture["kg_edges"])) == (
         _EXPECTED_NODE_COUNT,
         _EXPECTED_EDGE_COUNT,
     )
     assert len(fixture["kg_puzzles"]) == 180
     # ADR-0065 contributed 40 aliases, ADR-0068 twelve, ADR-0074 eight,
-    # ADR-0075 thirty-two and ADR-0076 through ADR-0078 forty-eight each.
-    assert alias_count == _V32_ALIAS_COUNT + authored_alias_count + 236
+    # ADR-0075 thirty-two and ADR-0076 through ADR-0079 forty-eight each.
+    assert alias_count == _V32_ALIAS_COUNT + authored_alias_count + 284
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert _PACKAGE_PACK.read_bytes() == _TEST_PACK.read_bytes()
 
@@ -508,7 +508,7 @@ def test_v33_mobile_contract_is_exact_current_and_public():
     mobile_by_id = {node["id"]: node for node in checked_in["kg_nodes"]}
 
     assert checked_in == mobile_app_pack_snapshot(_PACKAGE_KG)
-    assert checked_in["manifest"]["build_version"] == "fixture-v54-people-morphology"
+    assert checked_in["manifest"]["build_version"] == "fixture-v55-place-morphology"
     assert checked_in["manifest"]["counts"] == {
         "nodes": _EXPECTED_NODE_COUNT,
         "edges": _EXPECTED_EDGE_COUNT,

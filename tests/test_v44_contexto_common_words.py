@@ -106,11 +106,11 @@ def test_v44_alias_source_is_exact_bounded_and_applied_to_both_kg_copies() -> No
     assert resolve_projection("a sosi") is not None
 
     meta = fixture["meta"]
-    assert meta["build_version"] == "fixture-v54-people-morphology"
+    assert meta["build_version"] == "fixture-v55-place-morphology"
     assert meta["counts"]["nodes"] == 2364
     assert meta["counts"]["edges"] == 9217
     assert meta["counts"]["puzzles"] == 180
-    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 7636
+    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 7684
 
 
 def test_v44_projection_funnel_is_explicit_nonwinning_and_collision_safe() -> None:

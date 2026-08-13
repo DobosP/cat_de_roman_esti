@@ -2,18 +2,20 @@
 
 _As of 2026-08-13. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-13 (V54 backend 787/787, accounts 53/53, sessions 16/16,
-V54 6/6, affected historical gates, all artifact validators, strict Lanț pending sweep,
+_Last verified: 2026-08-13 (V55 backend 793/793, accounts 53/53, sessions 16/16,
+V55 6/6, affected historical gates, all artifact validators, strict Lanț pending sweep,
 Ruff, and whitespace green; frontend untouched)._
 
-## Current outcome — V54 bounded people case morphology (ADR-0078)
+## Current outcome — V55 bounded place case morphology (ADR-0079)
 
-- Two independent passes reviewed two case forms for each of 25 existing people/role nouns.
-  Forty-eight exact forms passed unanimously; `părintelui` and `părinților` are rejected
-  because _părinte_ ordinarily denotes both a parent and a cleric. No quota was used.
-- Accepted forms serve typed Contexto input and otherwise-legal Lanț hops. V54 adds no
+- Two independent passes reviewed two case forms for each of 25 existing place nouns.
+  Forty-eight exact forms passed unanimously; `golfului` and `golfurilor` are rejected
+  because _golf_ ordinarily denotes both a geographic inlet and the sport. No quota was used.
+- Accepted forms serve typed Contexto input and otherwise-legal Lanț hops. V55 adds no
   Contexto projection, node, edge, puzzle, game record, hold disposition, or derived board;
   KG topology and pack bytes stay fixed while only aliases and bound wrappers change.
+- V54 remains in force: its 48 people/role forms stay accepted, while both parent/cleric
+  polysemes stay rejected.
 - V53 remains in force: its 48 food forms stay accepted, while both meal/table polysemes
   stay rejected.
 - V52 remains in force: its 48 household forms stay accepted, while the two folded
@@ -48,11 +50,11 @@ Pack: **618 = 610 approved + 8 pending**, across 14 categories. The ranked origi
 runtime serves **449 zero-FAIL boards**. The strict derived catalog remains **336** boards
 from the frozen V38 source snapshot; its `boards` payload hash is
 `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
-Bundled KG: **2,364 nodes / 9,217 edges / 7,636 aliases / 180 puzzles**
-(`fixture-v54-people-morphology`).
+Bundled KG: **2,364 nodes / 9,217 edges / 7,684 aliases / 180 puzzles**
+(`fixture-v55-place-morphology`).
 
-V49 evidence is under `docs/reviews/v49-lant-rejection-ledger/`; V54's 50-row lexical
-funnel is under `docs/reviews/v54-people-morphology/`. Rankings remain estimates.
+V49 evidence is under `docs/reviews/v49-lant-rejection-ledger/`; V55's 50-row lexical
+funnel is under `docs/reviews/v55-place-morphology/`. Rankings remain estimates.
 
 ## Runtime, accounts, and deployment
 
@@ -79,7 +81,7 @@ git diff --check
 
 ## Next verified work
 
-- Any later lexical wave needs a new finite two-reviewer funnel. V50–V54 deferrals,
+- Any later lexical wave needs a new finite two-reviewer funnel. V50–V55 deferrals,
   rejections, folded collisions, and unauthored spellings stay absent without fresh evidence.
 - Resolve the three Alchimie alcohol holds and two Cald sau Rece A5 holds only through
   explicit owner disposition and fresh game-specific gates.
