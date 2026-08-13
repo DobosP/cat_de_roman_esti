@@ -14,8 +14,7 @@
 - V58 adds no projection, node, edge, puzzle, game record, hold disposition, or derived
   board. Pack bytes, topology, board payloads, sessions, accounts, frontend, privacy, and
   deployment behavior are unchanged.
-- V58 remains intentionally unlanded. Its content gates are green, but the
-  full-suite timing gate must be rerun on a non-saturated host before landing.
+- V58 is green, and the owner explicitly requested landing before V59 starts.
 
 ## Files changed
 
@@ -48,14 +47,11 @@
   session store: 16/16. Pytest collection is 811 tests.
 - Ranking/derived checks, games-pack and KG validators, strict Lanț pending sweep
   (3 checked, 0 flagged, 0 FAIL), mirror equality, Ruff, and whitespace: green.
-- Full backend completed with one failure and 810 passing tests: the pre-existing Alchimie
-  coarse timing assertion measured 47.30 seconds against its 45-second ceiling. Isolated
-  reruns measured 49.10 and 53.52 seconds; landed V57 reproduced the same failure at 48.33
-  seconds. Host load was about 35 with 87% aggregate CPU use, while every structural
-  Alchimie assertion and V58-specific contract passed.
-- Frontend was untouched, so no frontend gate ran.
+- The saturated local host produced 810/811 because the pre-existing Alchimie timing check
+  measured 47.30 seconds against its 45-second ceiling; landed V57 reproduced the same
+  failure. GitHub Actions run 31743609008 then passed the complete backend and accounts-on
+  gates on both Python 3.12 and 3.14. Its frontend contracts, lint, and build also passed.
 
 ## Merge recommendation
 
-Do not land V58 yet. Rerun the isolated timing test and then the full backend on a
-non-saturated host; if both are green, no known content or consistency blocker remains.
+V58 is green and ready to land. The owner explicitly requested landing before V59 starts.

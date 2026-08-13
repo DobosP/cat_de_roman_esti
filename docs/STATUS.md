@@ -1,10 +1,10 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-08-13. This file is the repository's current source of truth._
+_As of 2026-08-14. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-13 (V58 focused 6/6, affected 117/117, accounts 53/53,
-sessions 16/16, artifacts, validators, Ruff, and whitespace green. Full backend is
-810/811: one load-sensitive Alchimie timing ceiling also fails on landed V57)._
+_Last verified: 2026-08-14 (V58 focused 6/6, affected 117/117, sessions 16/16,
+artifacts and validators green; GitHub CI run 31743609008 passed full backend and accounts
+on Python 3.12/3.14 plus frontend contracts, lint, and build)._
 
 ## Current outcome — V58 bounded school/literacy case morphology (ADR-0082)
 
@@ -88,7 +88,6 @@ git diff --check
 
 ## Next verified work
 
-- Rerun V58's Alchimie timing and full-backend gates on a non-saturated host before landing.
 - Any later lexical wave needs a new finite two-reviewer funnel. V50–V58 deferrals,
   rejections, folded collisions, and unauthored spellings stay absent without fresh evidence.
 - Resolve the three Alchimie alcohol holds and two Cald sau Rece A5 holds only through
