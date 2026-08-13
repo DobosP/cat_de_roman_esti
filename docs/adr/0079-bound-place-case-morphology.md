@@ -1,7 +1,7 @@
 # ADR-0079: Bound place case morphology
 
 Date: 2026-08-13
-Status: accepted
+Status: superseded-by ADR-0080
 
 ## Decision
 
