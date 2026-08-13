@@ -13,8 +13,8 @@
 - V59 changes no projection, node, edge, puzzle, game record, hold disposition, or derived
   board. Pack bytes, topology, board payloads, sessions, accounts, frontend, privacy, and
   deployment behavior remain unchanged.
-- V59 is implemented but remains uncommitted and unlanded pending a clean complete backend
-  run or CI.
+- V59 is committed at `a978a519609f69b7a45ed5f94fcceeb0c4e73885` and its exact
+  GitHub Actions run `31752372303` is green.
 
 ## Implementation scope
 
@@ -51,11 +51,13 @@
   V31–V33/V44/V47–V59 run: 137 passed. Accounts-on: 53 passed. Session store: 16 passed.
 - Ranking and derived read-only checks, pack and KG validators, strict Lanț sweep, fixture
   mirror equality, Ruff, and whitespace checks passed.
-- The complete backend collected 817 tests and reported four failures while unrelated OCR
-  jobs saturated the host: two unchanged Alchimie timing ceilings (30.8027 s > 30 s and
-  62.0167 s > 45 s), plus exact-alias assertions in V31 and V32. The V31/V32 compatibility
-  assertions were repaired, and both their targeted run and the expanded 137-test affected
-  rerun are green. A clean complete backend rerun remains pending; the complete gate is not green.
+- An earlier complete backend run collected 817 tests and reported four failures while
+  unrelated OCR jobs saturated the host: two unchanged Alchimie timing ceilings
+  (30.8027 s > 30 s and 62.0167 s > 45 s), plus exact-alias assertions in V31 and V32.
+  The compatibility assertions were repaired, and their targeted and expanded affected
+  reruns passed. Exact feature commit `a978a51` then passed complete backend and accounts-on
+  gates on Python 3.12 and 3.14 plus frontend contracts, lint, and build in GitHub Actions
+  run `31752372303`; that clean CI supersedes the saturated-host timing signal.
 
 ## Risks and manual review
 
@@ -65,4 +67,4 @@
 
 ## Merge recommendation
 
-Do not land V59 until a clean complete backend run or remote CI is green.
+V59 is green and safe to land.

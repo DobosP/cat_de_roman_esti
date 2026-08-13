@@ -2,8 +2,8 @@
 
 _As of 2026-08-14. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-14 (V58 landed and was pushed at `9e1011b`; V59 is implemented
-but remains uncommitted and unlanded pending a clean complete backend gate)._
+_Last verified: 2026-08-14 (V59 feature commit `a978a51`; GitHub Actions run
+`31752372303` passed frontend and backend gates on Python 3.12 and 3.14)._
 
 ## Current outcome — V59 bounded human-anatomy case morphology (ADR-0083)
 
@@ -82,8 +82,8 @@ git diff --check
 
 ## Next verified work
 
-- V59's scoped gates are green. The 817-test backend run found two unchanged Alchimie
-  timing ceilings under a saturated host; do not land V59 before a clean full run or CI.
+- V59 is green and safe to land. Exact-commit CI supersedes two unchanged Alchimie timing
+  ceilings observed in an earlier 817-test local run while unrelated jobs saturated the host.
 - Any later lexical wave needs a new finite two-reviewer funnel. V50–V59 deferrals,
   rejections, folded collisions, and unauthored spellings stay absent without fresh evidence.
 - Resolve the three Alchimie alcohol holds and two Cald sau Rece A5 holds only through
