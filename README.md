@@ -11,7 +11,7 @@ The name is a pun on *"cât de român ești"* — "how Romanian are you".
 
 The web app is a **text-only arcade** of six word games over the same Romanian concept
 graph (**2,364 concepts / 9,217 links / 180 puzzles**,
-`fixture-v56-nature-morphology` — no graph visualization). All six are
+`fixture-v57-creative-arts-morphology` — no graph visualization). All six are
 **server-authoritative** (the BFF validates moves and hides answers):
 
 - **Alchimie** *(à la Infinite Craft)* — combine two concepts into a new one (their shared

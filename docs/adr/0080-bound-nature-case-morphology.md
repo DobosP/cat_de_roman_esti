@@ -1,7 +1,7 @@
 # ADR-0080: Bound nature case morphology
 
 Date: 2026-08-13
-Status: accepted
+Status: superseded-by ADR-0081
 
 ## Decision
 

@@ -64,10 +64,10 @@ _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 _REVIEW = _ROOT / "docs/reviews/v50-synonym-basic-word-funnel/vocabulary.json"
 _V48_REVIEW = _ROOT / "docs/reviews/v48-alchimie-pending-gate"
 
-_KG_SHA256 = "9e148aa51a7261ed4132c0d2e628d34652e1aa1f277271d8f3348caea5a97009"
+_KG_SHA256 = "7098d7fb2178656209b72c779dc73583c442bbb601c7eaf08d42920367834d4d"
 _PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
-_RANKINGS_SHA256 = "fc1ac0bbb89334fa069ed5c68eea592c44cd0ab4ca6115bbe7e5870ac9834b9a"
-_DERIVED_SHA256 = "c0d8a00334c920ef512c633f05a990a434428c7b4b6c8916618de9eb11d8f6c0"
+_RANKINGS_SHA256 = "0bfd99fba8f3f85fb125fbd5fca8e8b72c60c5b1dcb2bc2e362d5ecad4d4f29b"
+_DERIVED_SHA256 = "dcdf298e4fb39b42696249b272e9c210b145ea6f9539a20ea402b7b8a0a1b5d2"
 _RANKING_ROWS_SHA256 = "46aabcea827c3eed9d64dd7249ea1514d4b211a5b95c4bbea2d8a825e29d86e0"
 _FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
 _NODES_WITHOUT_ALIASES_SHA256 = (
@@ -197,11 +197,11 @@ def test_v50_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     assert all(svc.resolve(surface) == node_id for surface, node_id in aliases.items())
     assert all(svc.resolve(surface) is None for surface in DATA.BLOCKED_ALIAS_FORMS)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
-    assert fixture["meta"]["build_version"] == "fixture-v56-nature-morphology"
+    assert fixture["meta"]["build_version"] == "fixture-v57-creative-arts-morphology"
     assert fixture["meta"]["counts"]["nodes"] == 2364
     assert fixture["meta"]["counts"]["edges"] == 9217
     assert fixture["meta"]["counts"]["puzzles"] == 180
-    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 7730
+    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 7778
 
 
 def test_v50_basic_words_are_exactly_the_reviewed_nonwinning_projection() -> None:
@@ -353,7 +353,9 @@ def test_v50_mobile_contract_tracks_only_the_alias_release() -> None:
     assert _MOBILE_CONTRACT.read_bytes() == (
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
-    assert checked_in["manifest"]["build_version"] == "fixture-v56-nature-morphology"
+    assert checked_in["manifest"]["build_version"] == (
+        "fixture-v57-creative-arts-morphology"
+    )
     assert checked_in["manifest"]["counts"] == {
         "nodes": 2364,
         "edges": 9217,
