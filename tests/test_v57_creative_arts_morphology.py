@@ -48,11 +48,11 @@ _LEDGER = _ROOT / "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 _REVIEW = _ROOT / "docs/reviews/v57-creative-arts-morphology/vocabulary.json"
 
-_KG_SHA256 = "e51e06ccf11f9457033ad679f8b7aa18a6e1177a973690376f7cdf3baeb182a4"
+_KG_SHA256 = "22e1f7345f9af8d67b9b5aafb769f6d42919c775ff577c3fc865f0d82215da38"
 _PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
-_RANKINGS_SHA256 = "6d686be4e449d83975570665748aefc1c1879cebdcbc71ff805cab163a4b387d"
-_DERIVED_SHA256 = "bf3225bc4540112b433582f48a847317b113e6d7a6a20e1174720d1be2150a1a"
-_MOBILE_SHA256 = "5b1c59fb74a9fe76aea3f9637c4ed469540ae893bd0738f54c8cce7315c07868"
+_RANKINGS_SHA256 = "662c966c29be77e536cc73579c94b930ed3424dc99e4aa903c7a58a34d0f8773"
+_DERIVED_SHA256 = "196b7a5f5fbf88c5de4e31762b238b9ce426d4d95329c38d675265e53626fa86"
+_MOBILE_SHA256 = "49af5e2c9ed2a1ce00e7dfc511a8b3408bb7fad4e0a5a4a95e8cad8bac6fa22a"
 _CANDIDATE_FUNNEL_SHA256 = (
     "1637e4c45028f6aa07ce3fb87dbb1d774174edd09c54c41b89a65bf18bf03d39"
 )
@@ -206,11 +206,11 @@ def test_v57_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     assert all(svc.resolve(surface) is None for surface in _REJECTED)
     assert all(resolve_projection(surface) is None for surface in set(aliases) | _REJECTED)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
-    assert fixture["meta"]["build_version"] == "fixture-v58-school-literacy-morphology"
+    assert fixture["meta"]["build_version"] == "fixture-v59-human-anatomy-morphology"
     assert fixture["meta"]["counts"]["nodes"] == 2364
     assert fixture["meta"]["counts"]["edges"] == 9217
     assert fixture["meta"]["counts"]["puzzles"] == 180
-    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 7826
+    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 7874
 
 
 def test_v57_aliases_play_in_contexto_and_only_on_existing_legal_lant_hops() -> None:
@@ -310,7 +310,7 @@ def test_v57_mobile_contract_and_v49_ledger_persist_exactly() -> None:
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
     assert checked_in["manifest"]["build_version"] == (
-        "fixture-v58-school-literacy-morphology"
+        "fixture-v59-human-anatomy-morphology"
     )
     assert checked_in["manifest"]["counts"] == {
         "nodes": 2364,

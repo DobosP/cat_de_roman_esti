@@ -1,57 +1,68 @@
-# Task Result — V58 bounded school/literacy morphology
+# Task Result — V59 bounded human-anatomy morphology
 
 ## Summary
 
-- V57 landed and was pushed at `e0dd912`; V58 starts directly from it on
-  `feat/v58-school-literacy-morphology`.
-- Two independent reviews covered a fixed 50-surface funnel for 25 existing school,
-  language, and literacy concepts. Forty-eight normalized-unique forms were accepted as
-  exact aliases for 24 owners. `cărții` and `cărților` were rejected because unqualified
-  _carte_ spans ordinary book, playing-card, document, and message senses.
-- The fixture is now `fixture-v58-school-literacy-morphology`: 2,364 nodes, 9,217 edges,
-  7,826 aliases, and 180 puzzles. `paginilor` now resolves exactly to the page node instead
-  of fuzzily misrouting to the bread node.
-- V58 adds no projection, node, edge, puzzle, game record, hold disposition, or derived
+- V58 landed and was pushed at `9e1011b`; V59 starts directly from it on
+  `feat/v59-human-anatomy-morphology`.
+- The fixed funnel contains 50 normalized-unique case surfaces for 25 existing
+  human-anatomy concepts. Its disposition calls for 48 qualified exact aliases across 24
+  owners; `creierului` and `creierelor` remain rejected because the bare forms do not have
+  one safe owner.
+- The worktree fixture is `fixture-v59-human-anatomy-morphology`: 2,364 nodes, 9,217
+  edges, 7,874 aliases, and 180 puzzles.
+- V59 changes no projection, node, edge, puzzle, game record, hold disposition, or derived
   board. Pack bytes, topology, board payloads, sessions, accounts, frontend, privacy, and
-  deployment behavior are unchanged.
-- V58 is green, and the owner explicitly requested landing before V59 starts.
+  deployment behavior remain unchanged.
+- V59 is implemented but remains uncommitted and unlanded pending a clean complete backend
+  run or CI.
 
-## Files changed
+## Implementation scope
 
-- Added `scripts/contexto_common_words_v58_data.py`, its transactional apply wrapper, the
-  two-reviewer archive under `docs/reviews/v58-school-literacy-morphology/`, ADR-0082, and
-  `tests/test_v58_school_literacy_morphology.py`.
-- Superseded ADR-0081 only for the V57 build/count pins.
-- Regenerated both KG, ranking, and derived mirrors plus the mobile snapshot; updated their
-  current digest/build/count contracts from V33/V44/V47–V58.
-- Updated `README.md`, `docs/MOBILE_CONTRACT.md`, and `docs/STATUS.md` for V58.
+- Add the bounded V59 data module and transactional apply wrapper.
+- Archive both complete reviews of the fixed 50-surface funnel and record ADR-0083.
+- Add the focused V59 regression contract, including every historical rejected surface.
+- Regenerate only alias-bearing KG/mobile/ranking/derived wrappers and update their current
+  V59 build, count, and digest pins; keep topology and board payloads byte-stable.
+- Update `README.md`, `docs/MOBILE_CONTRACT.md`, and `docs/STATUS.md` for V59.
 
 ## Review and artifact evidence
 
-- Candidate funnel: `efa98cc1f35cb5d009b87c01d38fabef5103ba62fae1f7b96df4ee9d81082716`.
-- KG: `e51e06ccf11f9457033ad679f8b7aa18a6e1177a973690376f7cdf3baeb182a4`.
-- Games pack, unchanged: `05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed`.
-- Ranking wrapper: `6d686be4e449d83975570665748aefc1c1879cebdcbc71ff805cab163a4b387d`;
-  unchanged boards payload: `46aabcea827c3eed9d64dd7249ea1514d4b211a5b95c4bbea2d8a825e29d86e0`.
-- Derived wrapper: `bf3225bc4540112b433582f48a847317b113e6d7a6a20e1174720d1be2150a1a`;
-  unchanged boards payload: `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
-- Mobile snapshot: `5b1c59fb74a9fe76aea3f9637c4ed469540ae893bd0738f54c8cce7315c07868`;
-  V49 ledger unchanged: `e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29`.
+- Candidate-funnel digest:
+  `606386a07e33909759a6f644e265bc5f20c956bb64fb992b7a64a355a6380500`.
+- KG: `22e1f7345f9af8d67b9b5aafb769f6d42919c775ff577c3fc865f0d82215da38`;
+  games pack: `05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed`.
+- Ranking wrapper:
+  `662c966c29be77e536cc73579c94b930ed3424dc99e4aa903c7a58a34d0f8773`;
+  derived wrapper: `196b7a5f5fbf88c5de4e31762b238b9ce426d4d95329c38d675265e53626fa86`.
+- Mobile snapshot:
+  `49af5e2c9ed2a1ce00e7dfc511a8b3408bb7fad4e0a5a4a95e8cad8bac6fa22a`;
+  Lanț rejection ledger:
+  `e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29`.
+- The ranking-board payload remains
+  `46aabcea827c3eed9d64dd7249ea1514d4b211a5b95c4bbea2d8a825e29d86e0`;
+  the derived-board payload remains
+  `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
 
 ## Verification
 
-- Source assertions, canonical review digest, two complete 48/2 reviewer partitions, and
-  transaction dry-run: green. All 48 aliases resolve to their intended owners; all 16
-  V52–V58 rejected forms remain absent from exact, projection, and fuzzy paths.
-- V58 focused: 6/6; affected V33/V44/V47–V58: 117/117; accounts-on: 53/53;
-  session store: 16/16. Pytest collection is 811 tests.
-- Ranking/derived checks, games-pack and KG validators, strict Lanț pending sweep
-  (3 checked, 0 flagged, 0 FAIL), mirror equality, Ruff, and whitespace: green.
-- The saturated local host produced 810/811 because the pre-existing Alchimie timing check
-  measured 47.30 seconds against its 45-second ceiling; landed V57 reproduced the same
-  failure. GitHub Actions run 31743609008 then passed the complete backend and accounts-on
-  gates on both Python 3.12 and 3.14. Its frontend contracts, lint, and build also passed.
+- Source assertions, both independent 48-accept/2-reject reviewer partitions, transaction
+  dry-run, exact resolution, and inherited rejection checks passed.
+- Focused V59: 6 passed. V31 + V32 + V59 compatibility: 20 passed. The expanded affected
+  V31–V33/V44/V47–V59 run: 137 passed. Accounts-on: 53 passed. Session store: 16 passed.
+- Ranking and derived read-only checks, pack and KG validators, strict Lanț sweep, fixture
+  mirror equality, Ruff, and whitespace checks passed.
+- The complete backend collected 817 tests and reported four failures while unrelated OCR
+  jobs saturated the host: two unchanged Alchimie timing ceilings (30.8027 s > 30 s and
+  62.0167 s > 45 s), plus exact-alias assertions in V31 and V32. The V31/V32 compatibility
+  assertions were repaired, and both their targeted run and the expanded 137-test affected
+  rerun are green. A clean complete backend rerun remains pending; the complete gate is not green.
+
+## Risks and manual review
+
+- Both rejected brain forms remain absent from exact, projection, and fuzzy paths after all
+  48 accepted aliases are applied.
+- No inherited V52–V58 rejected surface gains a route through the V59 additions.
 
 ## Merge recommendation
 
-V58 is green and ready to land. The owner explicitly requested landing before V59 starts.
+Do not land V59 until a clean complete backend run or remote CI is green.

@@ -43,6 +43,17 @@ def _load_data_module():
 
 DATA = _load_data_module()
 import basic_words_v30_data as V30_DATA  # noqa: E402
+import contexto_common_words_v59_data as V59_DATA  # noqa: E402
+
+_V59_AFFECTED_NODE_IDS = frozenset(
+    {
+        "n_v31_body_lower_genunchi",
+        "n_v31_body_lower_coapsa",
+        "n_v31_body_lower_gamba",
+        "n_v31_body_lower_glezna",
+        "n_v31_body_lower_calcai",
+    }
+)
 
 
 def _fixture() -> dict:
@@ -87,21 +98,36 @@ def test_v31_all_canonicals_and_aliases_have_one_exact_owner():
     by_id = {node["id"]: node for node in fixture["kg_nodes"]}
     svc = _service()
     observed: set[str] = set()
+    v59_additions = {
+        node_id: aliases
+        for node_id, aliases in V59_DATA.ALIAS_ADDITIONS.items()
+        if node_id in DATA.NEW_NODE_IDS
+    }
+
+    assert set(v59_additions) == _V59_AFFECTED_NODE_IDS
+    assert sum(map(len, v59_additions.values())) == 10
 
     for concept in DATA.CONCEPTS:
         committed = by_id[concept.node_id]
+        appended_aliases = v59_additions.get(concept.node_id, ())
         assert committed["node_type"] == "concept"
         assert committed["label_ro"] == concept.label
         assert committed["category"] == concept.category
         assert committed["description"] == concept.description
         assert math.isclose(float(committed["salience"]), concept.salience)
-        assert tuple(committed.get("aliases", ())) == concept.aliases
+        assert tuple(committed.get("aliases", ())) == (
+            *concept.aliases,
+            *appended_aliases,
+        )
         assert svc.resolve(concept.label) == concept.node_id
         assert svc.resolve(_accentless(concept.label)) == concept.node_id
         for alias in concept.aliases:
             key = normalize(alias)
             assert key not in observed
             observed.add(key)
+            assert svc.resolve(alias) == concept.node_id
+            assert svc.resolve(_accentless(alias)) == concept.node_id
+        for alias in appended_aliases:
             assert svc.resolve(alias) == concept.node_id
             assert svc.resolve(_accentless(alias)) == concept.node_id
 

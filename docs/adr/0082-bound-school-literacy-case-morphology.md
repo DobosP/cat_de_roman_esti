@@ -1,7 +1,7 @@
 # ADR-0082: Bound school/literacy case morphology
 
 Date: 2026-08-13
-Status: accepted
+Status: superseded-by ADR-0083
 
 ## Decision
 

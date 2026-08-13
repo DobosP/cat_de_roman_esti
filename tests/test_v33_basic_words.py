@@ -206,7 +206,7 @@ def test_v33_source_inventory_builder_application_counts_and_mirrors():
     assert len(built["nodes"]) == 18
     assert len(built["edges"]) == _EXPECTED_AUTHORED_EDGE_COUNT
     assert built == DATA.build_nodes_and_edges()
-    assert fixture["meta"]["build_version"] == "fixture-v58-school-literacy-morphology"
+    assert fixture["meta"]["build_version"] == "fixture-v59-human-anatomy-morphology"
     assert (len(fixture["kg_nodes"]), len(fixture["kg_edges"])) == (
         _EXPECTED_NODE_COUNT,
         _EXPECTED_EDGE_COUNT,
@@ -214,8 +214,9 @@ def test_v33_source_inventory_builder_application_counts_and_mirrors():
     assert len(fixture["kg_puzzles"]) == 180
     # ADR-0065 contributed 40 aliases, ADR-0068 twelve, ADR-0074 eight,
     # ADR-0075 thirty-two, ADR-0076 through ADR-0079 forty-eight each, and
-    # ADR-0080 forty-six, ADR-0081 forty-eight, and ADR-0082 forty-eight.
-    assert alias_count == _V32_ALIAS_COUNT + authored_alias_count + 426
+    # ADR-0080 forty-six, ADR-0081 forty-eight, ADR-0082 forty-eight, and
+    # ADR-0083 forty-eight.
+    assert alias_count == _V32_ALIAS_COUNT + authored_alias_count + 474
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert _PACKAGE_PACK.read_bytes() == _TEST_PACK.read_bytes()
 
@@ -510,7 +511,7 @@ def test_v33_mobile_contract_is_exact_current_and_public():
 
     assert checked_in == mobile_app_pack_snapshot(_PACKAGE_KG)
     assert checked_in["manifest"]["build_version"] == (
-        "fixture-v58-school-literacy-morphology"
+        "fixture-v59-human-anatomy-morphology"
     )
     assert checked_in["manifest"]["counts"] == {
         "nodes": _EXPECTED_NODE_COUNT,

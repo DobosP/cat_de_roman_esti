@@ -2,31 +2,23 @@
 
 _As of 2026-08-14. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-14 (V58 focused 6/6, affected 117/117, sessions 16/16,
-artifacts and validators green; GitHub CI run 31743609008 passed full backend and accounts
-on Python 3.12/3.14 plus frontend contracts, lint, and build)._
+_Last verified: 2026-08-14 (V58 landed and was pushed at `9e1011b`; V59 is implemented
+but remains uncommitted and unlanded pending a clean complete backend gate)._
 
-## Current outcome — V58 bounded school/literacy case morphology (ADR-0082)
+## Current outcome — V59 bounded human-anatomy case morphology (ADR-0083)
 
 - Two independent passes reviewed a fixed set of two case forms for each of 25 existing
-  school/literacy concepts. Forty-eight exact aliases across 24 owners passed; _cărții_ and
-  _cărților_ remain rejected because ordinary book, playing-card, document, and record
-  senses do not have one safe owner.
-- Accepted forms serve typed Contexto input and otherwise-legal Lanț hops. V58 adds no
+  human-anatomy concepts. Forty-eight qualified exact aliases across 24 owners passed;
+  _creierului_ and _creierelor_ remain rejected because the bare forms do not have one
+  safe owner.
+- Accepted forms serve typed Contexto input and otherwise-legal Lanț hops. V59 adds no
   Contexto projection, node, edge, puzzle, game record, hold disposition, or derived board;
   KG topology and pack bytes stay fixed while only aliases and bound wrappers change.
-- V57 remains in force: its 48 creative-arts forms stay accepted, while both artwork/table
-  polysemes stay rejected. V57 landed and was pushed at `e0dd912`.
-- V56 remains in force: its 46 nature/basic-science forms stay accepted, while its four
-  fish/body polysemes stay rejected.
-- V55 remains in force: its 48 place forms stay accepted, while both geography/sport
-  polysemes stay rejected.
-- V54 remains in force: its 48 people/role forms stay accepted, while both parent/cleric
-  polysemes stay rejected.
-- V53 remains in force: its 48 food forms stay accepted, while both meal/table polysemes
-  stay rejected.
-- V52 remains in force: its 48 household forms stay accepted, while the two folded
-  blanket/bed collisions stay rejected.
+- V58 remains in force: its 48 school/literacy forms stay accepted, while both bare book
+  polysemes stay rejected. V58 landed and was pushed at `9e1011b`.
+- V52–V57 remain in force. Their accepted totals are 48 household, 48 food, 48 people/role,
+  48 place, 46 nature/basic-science, and 48 creative-arts forms; their recorded polysemes
+  remain rejected.
 - V51 remains in force: its 32 alias forms and eight penalty-one Contexto projections stay
   accepted; its seven deferrals, three rejections, and unauthored spellings stay absent.
 - Archived V48 Alchimie evidence replays its embedded historical provenance, while a new
@@ -57,11 +49,13 @@ Pack: **618 = 610 approved + 8 pending**, across 14 categories. The ranked origi
 runtime serves **449 zero-FAIL boards**. The strict derived catalog remains **336** boards
 from the frozen V38 source snapshot; its `boards` payload hash is
 `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
-Bundled KG: **2,364 nodes / 9,217 edges / 7,826 aliases / 180 puzzles**
-(`fixture-v58-school-literacy-morphology`).
+Bundled KG: **2,364 nodes / 9,217 edges / 7,874 aliases / 180 puzzles**
+(`fixture-v59-human-anatomy-morphology`). KG SHA-256 is
+`22e1f7345f9af8d67b9b5aafb769f6d42919c775ff577c3fc865f0d82215da38`;
+the byte-stable pack remains `05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed`.
 
-V49 evidence is under `docs/reviews/v49-lant-rejection-ledger/`; V58's 50-row lexical
-funnel is under `docs/reviews/v58-school-literacy-morphology/`. Rankings remain estimates.
+V49 evidence is under `docs/reviews/v49-lant-rejection-ledger/`; V59's 50-row lexical
+funnel is under `docs/reviews/v59-human-anatomy-morphology/`. Rankings remain estimates.
 
 ## Runtime, accounts, and deployment
 
@@ -88,7 +82,9 @@ git diff --check
 
 ## Next verified work
 
-- Any later lexical wave needs a new finite two-reviewer funnel. V50–V58 deferrals,
+- V59's scoped gates are green. The 817-test backend run found two unchanged Alchimie
+  timing ceilings under a saturated host; do not land V59 before a clean full run or CI.
+- Any later lexical wave needs a new finite two-reviewer funnel. V50–V59 deferrals,
   rejections, folded collisions, and unauthored spellings stay absent without fresh evidence.
 - Resolve the three Alchimie alcohol holds and two Cald sau Rece A5 holds only through
   explicit owner disposition and fresh game-specific gates.
