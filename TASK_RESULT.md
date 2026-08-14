@@ -5,7 +5,7 @@
 - V59 landed and was pushed at `d28b3ab`; its exact GitHub Actions run `31753019731`
   passed frontend and backend gates on Python 3.12 and 3.14.
 - V60 starts from that landed baseline on `feat/v60-sports-ecosystem-morphology` and is
-  intentionally uncommitted and unlanded while its full backend/CI gate remains pending.
+  committed at `c2058fc17f7203890870a79be0474517892e48ae`.
 - The fixed funnel contains 50 normalized-unique case surfaces for 25 existing sports-
   ecosystem concepts. Its disposition calls for 48 qualified exact aliases across 24
   owners; `fileului` and `fileurilor` remain rejected because the bare forms do not have
@@ -53,8 +53,9 @@
   unavailable failures; the final 53/53 rerun supersedes that transient result.
 - Ranking and derived read-only checks, pack and KG validators, strict Lanț sweep
   (3 checked, 0 flagged, 0 FAIL), fixture mirrors, Ruff, and whitespace checks passed.
-- The complete backend and exact-commit CI have not run for V60; the complete gate remains
-  open.
+- Exact feature commit `c2058fc` passed complete backend and accounts-on gates on Python
+  3.12 and 3.14 plus frontend contracts, lint, and build in GitHub Actions run
+  `31772976481`. That exact-commit result completes the V60 gate.
 
 ## Risks and manual review
 
@@ -64,4 +65,5 @@
 
 ## Merge recommendation
 
-Do not land V60 until the full backend or exact-commit CI is green.
+V60 is green and safe to land. The requested deployment procedure applies later to V61,
+not to this V60 landing.

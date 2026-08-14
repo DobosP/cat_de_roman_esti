@@ -2,9 +2,8 @@
 
 _As of 2026-08-14. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-14 (V60 focused 6/6, affected 143/143, accounts 53/53,
-sessions 16/16, artifacts and scoped validators green. Full backend/CI remain pending;
-V60 is intentionally uncommitted and unlanded)._
+_Last verified: 2026-08-14 (V60 feature commit `c2058fc`; GitHub Actions run
+`31772976481` passed frontend and backend gates on Python 3.12 and 3.14)._
 
 ## Current work — V60 bounded sports-ecosystem case morphology
 
@@ -85,8 +84,8 @@ git diff --check
 
 ## Next verified work
 
-- V60's scoped gates are green, but full backend and CI have not run. Keep it uncommitted,
-  unlanded, and out of `main` until one complete gate passes.
+- V60 is green and safe to land. The later V61 deployment instruction is a separate task;
+  landing V60 does not change the deployed V48 runtime.
 - Any later lexical wave needs a new finite two-reviewer funnel. V50–V60 deferrals,
   rejections, folded collisions, and unauthored spellings stay absent without fresh evidence.
 - Resolve the three Alchimie alcohol holds and two Cald sau Rece A5 holds only through
