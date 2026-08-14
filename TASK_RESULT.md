@@ -4,8 +4,8 @@
 
 - V60 landed and was pushed at `2a4d683`; its exact GitHub Actions run `31773557256`
   passed frontend and backend gates on Python 3.12 and 3.14.
-- V61 starts from that landed baseline on `feat/v61-home-care-maintenance-morphology` and
-  is intentionally uncommitted and unlanded until the complete backend and CI gates pass.
+- V61 is committed at `78838f308d2549cd1b38ac50031872115c2a50e0`; exact GitHub Actions
+  run `31810385243` passed frontend and backend gates on Python 3.12 and 3.14.
 - The fixed refined funnel contains 50 normalized-unique case surfaces for 25 existing
   home-care-and-maintenance concepts. It calls for 48 qualified exact aliases across 24
   owners; `cheii` and `cheilor` remain rejected because the bare forms do not have one safe
@@ -47,8 +47,9 @@
   53 passed. Session store: 16 passed.
 - Ranking and derived checks, pack and fixture validators, strict Lanț sweep (3 checked,
   0 flagged, 0 FAIL), fixture mirrors, Ruff, and whitespace checks passed.
-- The complete backend suite and exact-commit CI have not run for V61. Their absence keeps
-  the landing gate incomplete despite every scoped gate above being green.
+- Exact feature commit `78838f308d2549cd1b38ac50031872115c2a50e0` passed complete backend
+  and accounts-on gates on Python 3.12 and 3.14 plus frontend contracts, lint, and build in
+  GitHub Actions run `31810385243`. That exact-commit result completes the V61 landing gate.
 
 ## Authorized post-landing deployment
 
@@ -72,5 +73,5 @@
 
 ## Merge recommendation
 
-Do not land V61 until the complete backend suite and exact-commit CI are green.
+V61 is green and safe to land.
 After landing, deploy only the exact green commit through the authorized anonymous procedure.

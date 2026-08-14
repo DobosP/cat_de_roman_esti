@@ -2,9 +2,9 @@
 
 _As of 2026-08-14. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-14 (V60 landed and was pushed at `2a4d683`; exact CI run
-`31773557256` is green. V61 is intentionally uncommitted and unlanded: scoped gates are
-green, but its complete backend suite and CI have not run)._
+_Last verified: 2026-08-14 (exact V61 feature commit
+`78838f308d2549cd1b38ac50031872115c2a50e0`; GitHub Actions run `31810385243` passed
+frontend and backend gates on Python 3.12 and 3.14)._
 
 ## Current work — V61 refined home-care-and-maintenance case morphology
 
@@ -20,7 +20,7 @@ green, but its complete backend suite and CI have not run)._
   exact +48-alias-only artifact audit passed. Focused V61 passed 6; affected
   V31–V33/V44/V47–V61 passed 149; accounts passed 53; sessions passed 16.
 - Ranking/derived checks, pack and fixture validators, strict Lanț sweep (3/0/0), mirrors,
-  Ruff, and whitespace checks passed. Complete backend and CI remain unrun; do not land V61.
+  Ruff, whitespace, and exact feature CI run `31810385243` passed; V61 is safe to land.
 - V52–V60 remain in force with their recorded accepted totals and rejected polysemes. V60
   landed/pushed at `2a4d683`; exact CI run `31773557256` is green.
 - V51 remains in force: its 32 alias forms and eight penalty-one Contexto projections stay
@@ -84,8 +84,8 @@ git diff --check
 
 ## Next verified work
 
-- Run the complete backend suite and exact-commit CI before landing V61; deploy only after
-  the exact landed commit is green and the rollback/smoke preflight passes.
+- V61 is green and safe to land. After landing, deploy only the exact green commit once
+  rollback readiness is preserved and the mandatory public-smoke preflight passes.
 - Any later lexical wave needs a new finite two-reviewer funnel. V50–V61 deferrals,
   rejections, folded collisions, and unauthored spellings stay absent without fresh evidence.
 - Resolve the three Alchimie alcohol holds and two Cald sau Rece A5 holds only through
