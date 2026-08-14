@@ -4,8 +4,9 @@
 
 - V60 landed and was pushed at `2a4d683`; its exact GitHub Actions run `31773557256`
   passed frontend and backend gates on Python 3.12 and 3.14.
-- V61 is committed at `78838f308d2549cd1b38ac50031872115c2a50e0`; exact GitHub Actions
-  run `31810385243` passed frontend and backend gates on Python 3.12 and 3.14.
+- V61 landed and was pushed at `1c42de0d52cf56fd0d49f930aaccaafbc96906f9`;
+  exact GitHub Actions run `31811714317` passed frontend and backend gates on Python 3.12
+  and 3.14.
 - The fixed refined funnel contains 50 normalized-unique case surfaces for 25 existing
   home-care-and-maintenance concepts. It calls for 48 qualified exact aliases across 24
   owners; `cheii` and `cheilor` remain rejected because the bare forms do not have one safe
@@ -47,23 +48,24 @@
   53 passed. Session store: 16 passed.
 - Ranking and derived checks, pack and fixture validators, strict Lanț sweep (3 checked,
   0 flagged, 0 FAIL), fixture mirrors, Ruff, and whitespace checks passed.
-- Exact feature commit `78838f308d2549cd1b38ac50031872115c2a50e0` passed complete backend
+- Exact landed commit `1c42de0d52cf56fd0d49f930aaccaafbc96906f9` passed complete backend
   and accounts-on gates on Python 3.12 and 3.14 plus frontend contracts, lint, and build in
-  GitHub Actions run `31810385243`. That exact-commit result completes the V61 landing gate.
+  GitHub Actions run `31811714317`.
 
-## Authorized post-landing deployment
+## Production deployment evidence
 
-- The owner authorizes only the anonymous V61 stack after the exact landed commit and CI
-  are green. Accounts and submissions must remain off; this does not authorize the accounts
-  stack, database, OAuth, extra workers, or infrastructure changes.
-- Before rebuilding production, confirm the exact running revision, preserve its app image
-  as the rollback target, verify the host checkout can fast-forward to exact V61 `main`, and
-  retain the existing `.env.anon`, DNS, Caddy, and TLS configuration.
-- Required public smokes cover `/api/health`, `/api/manifest`, `/healthz`, `/api/me`, all
-  14 `/api/categories` rows, and seeded Intrusul/Perechi creation. Accounts must report off,
-  submissions must remain unavailable, and the manifest must report the exact V61 build.
-- On any mandatory smoke failure, restore the preserved image or previous-good commit;
-  never use `down -v` or Docker prune. No V61 deployment has occurred yet.
+- The anonymous production stack was upgraded from V48 `d59caed` to exact V61 on
+  2026-08-14. The host checkout is clean at `1c42de0d52cf56fd0d49f930aaccaafbc96906f9`;
+  the app is healthy with zero restarts.
+- `rollback-d59caed` points to the previous image ID prefix `sha256:d18295ae`; the deployed
+  image ID begins `sha256:efa179af`.
+- Accounts and debug are off, `CAT_SUBMISSIONS_DIR` is absent, and submissions return HTTP
+  503. No accounts stack, database, OAuth, extra workers, or infrastructure were enabled.
+- `/api/manifest` reports `fixture-v61-home-care-and-maintenance-morphology`, public content
+  hash `sha256:bfc3e868f49d8e07f23e2895c3010ecb9bd966dbfef6e5b543157937e49a1699`, and counts
+  2,364 nodes / 9,217 edges / 180 puzzles.
+- `/api/health`, `/healthz`, `/api/me`, all 14 `/api/categories` rows, and seeded Intrusul
+  and Perechi creation passed. Preserve the rollback tag; never use `down -v` or Docker prune.
 
 ## Risks and manual review
 
@@ -71,7 +73,7 @@
 - The 48 accepted aliases have their intended unique owners and open no route for inherited
   rejected surfaces; package/test mirrors and invariant payloads match.
 
-## Merge recommendation
+## Release result
 
-V61 is green and safe to land.
-After landing, deploy only the exact green commit through the authorized anonymous procedure.
+V61 is landed, pushed, exact-CI-green, and deployed to anonymous production. Accounts and
+submissions remain off.

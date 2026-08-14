@@ -2,9 +2,9 @@
 
 _As of 2026-08-14. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-14 (exact V61 feature commit
-`78838f308d2549cd1b38ac50031872115c2a50e0`; GitHub Actions run `31810385243` passed
-frontend and backend gates on Python 3.12 and 3.14)._
+_Last verified: 2026-08-14 (V61 landed and was pushed at
+`1c42de0d52cf56fd0d49f930aaccaafbc96906f9`; exact GitHub Actions run `31811714317`
+passed frontend and backend gates on Python 3.12 and 3.14; production smokes are green)._
 
 ## Current work — V61 refined home-care-and-maintenance case morphology
 
@@ -20,7 +20,7 @@ frontend and backend gates on Python 3.12 and 3.14)._
   exact +48-alias-only artifact audit passed. Focused V61 passed 6; affected
   V31–V33/V44/V47–V61 passed 149; accounts passed 53; sessions passed 16.
 - Ranking/derived checks, pack and fixture validators, strict Lanț sweep (3/0/0), mirrors,
-  Ruff, whitespace, and exact feature CI run `31810385243` passed; V61 is safe to land.
+  Ruff, whitespace, and exact landed CI run `31811714317` passed.
 - V52–V60 remain in force with their recorded accepted totals and rejected polysemes. V60
   landed/pushed at `2a4d683`; exact CI run `31773557256` is green.
 - V51 remains in force: its 32 alias forms and eight penalty-one Contexto projections stay
@@ -63,11 +63,14 @@ the fixed 50-row home-care-and-maintenance funnel. Rankings remain estimates.
 - Browser history, records, derived mastery, circuit, and streak remain device-authored.
   Account mode only uploads validated completed-score rows; public records remain
   server-authored and consent-gated.
-- Anonymous production still runs V48 at `d59caed` since 2026-08-01. Accounts and
-  submissions remain off; its exact public/runtime probes remain the deployment evidence.
-- The owner authorizes an anonymous V61 deployment only after V61 lands exact-green.
-  Preserve rollback, keep accounts/submissions off, and pass all required public smokes;
-  no V61 deployment has occurred.
+- Anonymous production was upgraded from V48 `d59caed` to exact landed V61
+  `1c42de0d52cf56fd0d49f930aaccaafbc96906f9` on 2026-08-14; its checkout is clean.
+- `rollback-d59caed` points to the prior image ID prefix `sha256:d18295ae`; the running
+  image ID begins `sha256:efa179af`. The app is healthy with zero restarts.
+- Accounts and debug are off; `CAT_SUBMISSIONS_DIR` is absent and submissions return HTTP 503.
+- The manifest reports `fixture-v61-home-care-and-maintenance-morphology`, content hash
+  `sha256:bfc3e868f49d8e07f23e2895c3010ecb9bd966dbfef6e5b543157937e49a1699`, and counts
+  2,364/9,217/180. Health, healthz, me, all 14 categories, Intrusul, and Perechi smokes pass.
 
 ## Reproduction
 
@@ -84,8 +87,7 @@ git diff --check
 
 ## Next verified work
 
-- V61 is green and safe to land. After landing, deploy only the exact green commit once
-  rollback readiness is preserved and the mandatory public-smoke preflight passes.
+- Retain the verified V48 rollback image until the next exact-green rollout supersedes it.
 - Any later lexical wave needs a new finite two-reviewer funnel. V50–V61 deferrals,
   rejections, folded collisions, and unauthored spellings stay absent without fresh evidence.
 - Resolve the three Alchimie alcohol holds and two Cald sau Rece A5 holds only through
