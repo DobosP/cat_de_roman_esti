@@ -44,6 +44,7 @@ def _load_data_module():
 DATA = _load_data_module()
 import basic_words_v30_data as V30_DATA  # noqa: E402
 import contexto_common_words_v59_data as V59_DATA  # noqa: E402
+import contexto_common_words_v61_data as V61_DATA  # noqa: E402
 
 _V59_AFFECTED_NODE_IDS = frozenset(
     {
@@ -52,6 +53,22 @@ _V59_AFFECTED_NODE_IDS = frozenset(
         "n_v31_body_lower_gamba",
         "n_v31_body_lower_glezna",
         "n_v31_body_lower_calcai",
+    }
+)
+_V61_AFFECTED_NODE_IDS = frozenset(
+    {
+        "n_v31_hygiene_bath_prosop",
+        "n_v31_hygiene_bath_sapun",
+        "n_v31_hygiene_hair_sampon",
+        "n_v31_hygiene_hair_pieptene",
+        "n_v31_hygiene_oral_periuta_dinti",
+        "n_v31_hygiene_oral_pasta_dinti",
+        "n_v31_cleaning_water_galeata",
+        "n_v31_cleaning_floor_mop",
+        "n_v31_cleaning_supply_detergent",
+        "n_v31_cleaning_floor_aspirator",
+        "n_v31_cleaning_floor_faras",
+        "n_v31_cleaning_dishes_burete_vase",
     }
 )
 
@@ -103,13 +120,22 @@ def test_v31_all_canonicals_and_aliases_have_one_exact_owner():
         for node_id, aliases in V59_DATA.ALIAS_ADDITIONS.items()
         if node_id in DATA.NEW_NODE_IDS
     }
+    v61_additions = {
+        node_id: aliases
+        for node_id, aliases in V61_DATA.ALIAS_ADDITIONS.items()
+        if node_id in DATA.NEW_NODE_IDS
+    }
 
     assert set(v59_additions) == _V59_AFFECTED_NODE_IDS
     assert sum(map(len, v59_additions.values())) == 10
+    assert set(v61_additions) == _V61_AFFECTED_NODE_IDS
+    assert sum(map(len, v61_additions.values())) == 24
 
     for concept in DATA.CONCEPTS:
         committed = by_id[concept.node_id]
-        appended_aliases = v59_additions.get(concept.node_id, ())
+        v59_appended_aliases = v59_additions.get(concept.node_id, ())
+        v61_appended_aliases = v61_additions.get(concept.node_id, ())
+        appended_aliases = (*v59_appended_aliases, *v61_appended_aliases)
         assert committed["node_type"] == "concept"
         assert committed["label_ro"] == concept.label
         assert committed["category"] == concept.category
@@ -117,7 +143,8 @@ def test_v31_all_canonicals_and_aliases_have_one_exact_owner():
         assert math.isclose(float(committed["salience"]), concept.salience)
         assert tuple(committed.get("aliases", ())) == (
             *concept.aliases,
-            *appended_aliases,
+            *v59_appended_aliases,
+            *v61_appended_aliases,
         )
         assert svc.resolve(concept.label) == concept.node_id
         assert svc.resolve(_accentless(concept.label)) == concept.node_id

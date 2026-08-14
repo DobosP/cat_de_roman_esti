@@ -86,7 +86,15 @@ def _load_data_module():
 DATA = _load_data_module()
 import apply_common_words_v24 as APPLIER  # noqa: E402
 import basic_words_v32_data as V32_DATA  # noqa: E402
+import contexto_common_words_v61_data as V61_DATA  # noqa: E402
 import critique_pack  # noqa: E402
+
+_V61_AFFECTED_NODE_IDS = frozenset(
+    {
+        "n_v33_bathroom_fixture_chiuveta",
+        "n_v33_bathroom_fixture_robinet",
+    }
+)
 
 
 def _fixture() -> dict:
@@ -206,7 +214,9 @@ def test_v33_source_inventory_builder_application_counts_and_mirrors():
     assert len(built["nodes"]) == 18
     assert len(built["edges"]) == _EXPECTED_AUTHORED_EDGE_COUNT
     assert built == DATA.build_nodes_and_edges()
-    assert fixture["meta"]["build_version"] == "fixture-v60-sports-ecosystem-morphology"
+    assert fixture["meta"]["build_version"] == (
+        "fixture-v61-home-care-and-maintenance-morphology"
+    )
     assert (len(fixture["kg_nodes"]), len(fixture["kg_edges"])) == (
         _EXPECTED_NODE_COUNT,
         _EXPECTED_EDGE_COUNT,
@@ -215,8 +225,8 @@ def test_v33_source_inventory_builder_application_counts_and_mirrors():
     # ADR-0065 contributed 40 aliases, ADR-0068 twelve, ADR-0074 eight,
     # ADR-0075 thirty-two, ADR-0076 through ADR-0079 forty-eight each, and
     # ADR-0080 contributed forty-six aliases; ADR-0081 through ADR-0084
-    # contributed forty-eight each.
-    assert alias_count == _V32_ALIAS_COUNT + authored_alias_count + 522
+    # contributed forty-eight each. V61 contributes another forty-eight aliases.
+    assert alias_count == _V32_ALIAS_COUNT + authored_alias_count + 570
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert _PACKAGE_PACK.read_bytes() == _TEST_PACK.read_bytes()
 
@@ -233,6 +243,11 @@ def test_v33_normalized_canonicals_and_aliases_have_one_safe_owner():
     deferred = {normalize(surface) for surface in DATA.DEFERRED_AMBIGUOUS_TERMS}
     deferred_v32 = {normalize(surface) for surface in V32_DATA.DEFERRED_V32_CONCEPTS}
     deferred_v33 = {normalize(surface) for surface in DATA.DEFERRED_V33_CONCEPTS}
+    v61_additions = {
+        node_id: aliases
+        for node_id, aliases in V61_DATA.ALIAS_ADDITIONS.items()
+        if node_id in DATA.NEW_NODE_IDS
+    }
 
     assert len(labels) == len(set(labels)) == 18
     assert len(alias_keys) == len(set(alias_keys))
@@ -242,18 +257,27 @@ def test_v33_normalized_canonicals_and_aliases_have_one_safe_owner():
     assert not (authored & blocked)
     assert not (authored & deferred)
     assert not (authored & deferred_v33)
+    assert set(v61_additions) == _V61_AFFECTED_NODE_IDS
+    assert sum(map(len, v61_additions.values())) == 4
 
     for concept in DATA.CONCEPTS:
         committed = by_id[concept.node_id]
+        appended_aliases = v61_additions.get(concept.node_id, ())
         assert committed["node_type"] == "concept"
         assert committed["label_ro"] == concept.label
         assert committed["category"] == concept.category
         assert committed["description"] == concept.description
         assert math.isclose(float(committed["salience"]), concept.salience)
-        assert tuple(committed.get("aliases", ())) == concept.aliases
+        assert tuple(committed.get("aliases", ())) == (
+            *concept.aliases,
+            *appended_aliases,
+        )
         assert svc.resolve(concept.label) == concept.node_id
         assert svc.resolve(_accentless(concept.label)) == concept.node_id
         for alias in concept.aliases:
+            assert svc.resolve(alias) == concept.node_id
+            assert svc.resolve(_accentless(alias)) == concept.node_id
+        for alias in appended_aliases:
             assert svc.resolve(alias) == concept.node_id
             assert svc.resolve(_accentless(alias)) == concept.node_id
 
@@ -511,7 +535,7 @@ def test_v33_mobile_contract_is_exact_current_and_public():
 
     assert checked_in == mobile_app_pack_snapshot(_PACKAGE_KG)
     assert checked_in["manifest"]["build_version"] == (
-        "fixture-v60-sports-ecosystem-morphology"
+        "fixture-v61-home-care-and-maintenance-morphology"
     )
     assert checked_in["manifest"]["counts"] == {
         "nodes": _EXPECTED_NODE_COUNT,

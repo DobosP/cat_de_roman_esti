@@ -1,7 +1,7 @@
 # ADR-0084: Bound sports-ecosystem case morphology
 
 Date: 2026-08-14
-Status: accepted
+Status: superseded-by ADR-0085
 
 ## Decision
 
