@@ -2,20 +2,23 @@
 
 _As of 2026-08-14. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-14 (V59 feature commit `a978a51`; GitHub Actions run
-`31752372303` passed frontend and backend gates on Python 3.12 and 3.14)._
+_Last verified: 2026-08-14 (V60 focused 6/6, affected 143/143, accounts 53/53,
+sessions 16/16, artifacts and scoped validators green. Full backend/CI remain pending;
+V60 is intentionally uncommitted and unlanded)._
 
-## Current outcome — V59 bounded human-anatomy case morphology (ADR-0083)
+## Current work — V60 bounded sports-ecosystem case morphology
 
 - Two independent passes reviewed a fixed set of two case forms for each of 25 existing
-  human-anatomy concepts. Forty-eight qualified exact aliases across 24 owners passed;
-  _creierului_ and _creierelor_ remain rejected because the bare forms do not have one
-  safe owner.
-- Accepted forms serve typed Contexto input and otherwise-legal Lanț hops. V59 adds no
+  sports-ecosystem concepts. Forty-eight qualified exact aliases across 24 owners passed;
+  _fileului_ and _fileurilor_ remain rejected because the bare forms do not have one safe
+  sports owner. The fixed 50-surface funnel digest is
+  `8afc138608d3bd8667aea8e8d7d9b1b6b609d65531099e69d9a648dd362ef8bb`.
+- Accepted forms serve typed Contexto input and otherwise-legal Lanț hops. V60 adds no
   Contexto projection, node, edge, puzzle, game record, hold disposition, or derived board;
   KG topology and pack bytes stay fixed while only aliases and bound wrappers change.
-- V58 remains in force: its 48 school/literacy forms stay accepted, while both bare book
-  polysemes stay rejected. V58 landed and was pushed at `9e1011b`.
+- V58–V59 remain in force: their 48 school/literacy and 48 human-anatomy forms stay
+  accepted, while their recorded polysemes stay rejected. V59 landed and was pushed at
+  `d28b3ab`; exact CI run `31753019731` is green.
 - V52–V57 remain in force. Their accepted totals are 48 household, 48 food, 48 people/role,
   48 place, 46 nature/basic-science, and 48 creative-arts forms; their recorded polysemes
   remain rejected.
@@ -49,13 +52,13 @@ Pack: **618 = 610 approved + 8 pending**, across 14 categories. The ranked origi
 runtime serves **449 zero-FAIL boards**. The strict derived catalog remains **336** boards
 from the frozen V38 source snapshot; its `boards` payload hash is
 `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
-Bundled KG: **2,364 nodes / 9,217 edges / 7,874 aliases / 180 puzzles**
-(`fixture-v59-human-anatomy-morphology`). KG SHA-256 is
-`22e1f7345f9af8d67b9b5aafb769f6d42919c775ff577c3fc865f0d82215da38`;
-the byte-stable pack remains `05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed`.
+Bundled KG: **2,364 nodes / 9,217 edges / 7,922 aliases / 180 puzzles**
+(`fixture-v60-sports-ecosystem-morphology`), SHA-256
+`66fa13ffd0e482df5c527c27f643563a1a76fc1d71cd3c65f868a59d49d15a07`.
+The byte-stable pack remains `05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed`.
 
-V49 evidence is under `docs/reviews/v49-lant-rejection-ledger/`; V59's 50-row lexical
-funnel is under `docs/reviews/v59-human-anatomy-morphology/`. Rankings remain estimates.
+V49 evidence is under `docs/reviews/v49-lant-rejection-ledger/`; V60's review archive is
+the fixed 50-row sports-ecosystem funnel. Rankings remain estimates.
 
 ## Runtime, accounts, and deployment
 
@@ -82,9 +85,9 @@ git diff --check
 
 ## Next verified work
 
-- V59 is green and safe to land. Exact-commit CI supersedes two unchanged Alchimie timing
-  ceilings observed in an earlier 817-test local run while unrelated jobs saturated the host.
-- Any later lexical wave needs a new finite two-reviewer funnel. V50–V59 deferrals,
+- V60's scoped gates are green, but full backend and CI have not run. Keep it uncommitted,
+  unlanded, and out of `main` until one complete gate passes.
+- Any later lexical wave needs a new finite two-reviewer funnel. V50–V60 deferrals,
   rejections, folded collisions, and unauthored spellings stay absent without fresh evidence.
 - Resolve the three Alchimie alcohol holds and two Cald sau Rece A5 holds only through
   explicit owner disposition and fresh game-specific gates.

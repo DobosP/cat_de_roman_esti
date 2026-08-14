@@ -1,7 +1,7 @@
 # ADR-0083: Bound human-anatomy case morphology
 
 Date: 2026-08-14
-Status: accepted
+Status: superseded-by ADR-0084
 
 ## Decision
 

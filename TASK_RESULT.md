@@ -1,70 +1,67 @@
-# Task Result — V59 bounded human-anatomy morphology
+# Task Result — V60 bounded sports-ecosystem morphology
 
 ## Summary
 
-- V58 landed and was pushed at `9e1011b`; V59 starts directly from it on
-  `feat/v59-human-anatomy-morphology`.
-- The fixed funnel contains 50 normalized-unique case surfaces for 25 existing
-  human-anatomy concepts. Its disposition calls for 48 qualified exact aliases across 24
-  owners; `creierului` and `creierelor` remain rejected because the bare forms do not have
-  one safe owner.
-- The worktree fixture is `fixture-v59-human-anatomy-morphology`: 2,364 nodes, 9,217
-  edges, 7,874 aliases, and 180 puzzles.
-- V59 changes no projection, node, edge, puzzle, game record, hold disposition, or derived
-  board. Pack bytes, topology, board payloads, sessions, accounts, frontend, privacy, and
-  deployment behavior remain unchanged.
-- V59 is committed at `a978a519609f69b7a45ed5f94fcceeb0c4e73885` and its exact
-  GitHub Actions run `31752372303` is green.
+- V59 landed and was pushed at `d28b3ab`; its exact GitHub Actions run `31753019731`
+  passed frontend and backend gates on Python 3.12 and 3.14.
+- V60 starts from that landed baseline on `feat/v60-sports-ecosystem-morphology` and is
+  intentionally uncommitted and unlanded while its full backend/CI gate remains pending.
+- The fixed funnel contains 50 normalized-unique case surfaces for 25 existing sports-
+  ecosystem concepts. Its disposition calls for 48 qualified exact aliases across 24
+  owners; `fileului` and `fileurilor` remain rejected because the bare forms do not have
+  one safe sports owner.
+- The fixture is `fixture-v60-sports-ecosystem-morphology`: 2,364 nodes, 9,217
+  edges, 7,922 aliases, and 180 puzzles.
+- V60 changes no projection, node, edge, puzzle, game record, hold disposition, or derived
+  board. Artifact audit confirms exactly 48 aliases were added and topology, games-pack,
+  ledger, ranking rows, and derived-board payloads remain unchanged.
 
 ## Implementation scope
 
-- Add the bounded V59 data module and transactional apply wrapper.
-- Archive both complete reviews of the fixed 50-surface funnel and record ADR-0083.
-- Add the focused V59 regression contract, including every historical rejected surface.
-- Regenerate only alias-bearing KG/mobile/ranking/derived wrappers and update their current
-  V59 build, count, and digest pins; keep topology and board payloads byte-stable.
-- Update `README.md`, `docs/MOBILE_CONTRACT.md`, and `docs/STATUS.md` for V59.
+- Added the bounded V60 data module and transactional apply wrapper.
+- Archived both complete reviews of the fixed funnel and recorded the V60 decision.
+- Added a focused V60 regression contract covering accepted aliases, both new rejections,
+  and every inherited rejected surface.
+- Regenerated only alias-bearing KG/mobile/ranking/derived wrappers and updated current
+  build, alias-count, and digest pins while preserving topology and board payloads.
+- Updated current README, mobile-contract, status, and task-result documentation.
 
 ## Review and artifact evidence
 
 - Candidate-funnel digest:
-  `606386a07e33909759a6f644e265bc5f20c956bb64fb992b7a64a355a6380500`.
-- KG: `22e1f7345f9af8d67b9b5aafb769f6d42919c775ff577c3fc865f0d82215da38`;
+  `8afc138608d3bd8667aea8e8d7d9b1b6b609d65531099e69d9a648dd362ef8bb`.
+- KG: `66fa13ffd0e482df5c527c27f643563a1a76fc1d71cd3c65f868a59d49d15a07`;
   games pack: `05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed`.
 - Ranking wrapper:
-  `662c966c29be77e536cc73579c94b930ed3424dc99e4aa903c7a58a34d0f8773`;
-  derived wrapper: `196b7a5f5fbf88c5de4e31762b238b9ce426d4d95329c38d675265e53626fa86`.
+  `ec747eb5ee4842e6b6635569fb360e2ea13edbe0b30cffaf61d89758876cf720`;
+  derived wrapper: `a97c3b124ddbf5f1c018e9fe50a33bc6d1dd44cc7e0b6c9331ee0a6df05b3dc0`.
 - Mobile snapshot:
-  `49af5e2c9ed2a1ce00e7dfc511a8b3408bb7fad4e0a5a4a95e8cad8bac6fa22a`;
-  Lanț rejection ledger:
-  `e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29`.
-- The ranking-board payload remains
+  `44587518e949ed58dc2beba96a391f26107381e9cf35cd66349bb1802a44c75a`;
+  Lanț ledger: `e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29`.
+- Invariant ranking rows:
   `46aabcea827c3eed9d64dd7249ea1514d4b211a5b95c4bbea2d8a825e29d86e0`;
-  the derived-board payload remains
+  invariant derived boards:
   `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
 
 ## Verification
 
-- Source assertions, both independent 48-accept/2-reject reviewer partitions, transaction
-  dry-run, exact resolution, and inherited rejection checks passed.
-- Focused V59: 6 passed. V31 + V32 + V59 compatibility: 20 passed. The expanded affected
-  V31–V33/V44/V47–V59 run: 137 passed. Accounts-on: 53 passed. Session store: 16 passed.
-- Ranking and derived read-only checks, pack and KG validators, strict Lanț sweep, fixture
-  mirror equality, Ruff, and whitespace checks passed.
-- An earlier complete backend run collected 817 tests and reported four failures while
-  unrelated OCR jobs saturated the host: two unchanged Alchimie timing ceilings
-  (30.8027 s > 30 s and 62.0167 s > 45 s), plus exact-alias assertions in V31 and V32.
-  The compatibility assertions were repaired, and their targeted and expanded affected
-  reruns passed. Exact feature commit `a978a51` then passed complete backend and accounts-on
-  gates on Python 3.12 and 3.14 plus frontend contracts, lint, and build in GitHub Actions
-  run `31752372303`; that clean CI supersedes the saturated-host timing signal.
+- Source assertions, both reviewer partitions, transaction dry-run and apply, exact
+  resolution, inherited rejection checks, and the exact +48-alias artifact audit passed.
+- Focused V60: 6 passed. Affected V31–V33/V44/V47–V60: 143 passed. Accounts-on:
+  53 passed. Session store: 16 passed.
+- An initial accounts run before the current derived digest pin reported two service-
+  unavailable failures; the final 53/53 rerun supersedes that transient result.
+- Ranking and derived read-only checks, pack and KG validators, strict Lanț sweep
+  (3 checked, 0 flagged, 0 FAIL), fixture mirrors, Ruff, and whitespace checks passed.
+- The complete backend and exact-commit CI have not run for V60; the complete gate remains
+  open.
 
 ## Risks and manual review
 
-- Both rejected brain forms remain absent from exact, projection, and fuzzy paths after all
-  48 accepted aliases are applied.
-- No inherited V52–V58 rejected surface gains a route through the V59 additions.
+- Both rejected `fileu` forms remain absent from exact, projection, and fuzzy paths.
+- The 48 accepted aliases have exact intended owners and open no route for inherited
+  rejected surfaces; package/test mirrors and immutable payloads match.
 
 ## Merge recommendation
 
-V59 is green and safe to land.
+Do not land V60 until the full backend or exact-commit CI is green.
