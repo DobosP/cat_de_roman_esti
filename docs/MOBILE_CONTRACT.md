@@ -47,14 +47,16 @@ python scripts/export_openapi.py openapi.json   # or print to stdout with no arg
 ## 2. Trust manifest — `GET /api/manifest`
 
 Lets a mobile app verify its **bundled offline KG copy** is in sync with the server and pick
-the right generated types. Deterministic, side-effect-free (`data.fixture_manifest`):
+the right generated types. The V63 worktree targets the following build version; generated
+hashes and verification are recorded in `docs/STATUS.md`. The endpoint is deterministic and
+side-effect-free (`data.fixture_manifest`):
 
 ```json
 {
   "app": "cat_de_roman_esti",
   "schema_version": 1,          // KG record schema (APP_PACK_SCHEMA_VERSION)
   "manifest_version": 1,        // shape of THIS manifest
-  "build_version": "fixture-v62-transport-and-mobility-morphology",
+  "build_version": "fixture-v63-film-and-television-morphology",
   "generated_at": "2026-06-21T00:00:00Z",
   "content_hash": "sha256:…",   // canonical hash over kg_nodes+kg_edges+kg_puzzles
   "counts": { "nodes": 2364, "edges": 9217, "puzzles": 180 }

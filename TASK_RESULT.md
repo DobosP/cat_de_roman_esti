@@ -1,86 +1,82 @@
-# Task Result — V62 transport-and-mobility morphology
+# Task Result — V63 film-and-television morphology
 
 ## Summary
 
-- V61 is already landed, pushed, and deployed at
-  `1c42de0d52cf56fd0d49f930aaccaafbc96906f9`; exact CI run `31811714317` and anonymous
-  production remain green.
-- V62 freezes 50 normalized-unique transport-and-mobility case surfaces for 25 existing
-  concepts. It adds 48 exact aliases across 24 owners, with _portului_ and
-  _porturilor_ rejected because neither bare form has one safe transport owner.
-- The revised inventory assigns _pașaportului de călătorie_ and
-  _pașapoartelor de călătorie_ to `n_v20soc_pasaport`.
-- V62 landed and was pushed at `d7fd85543b27be14d8c3d79153b1f2371fe4ba99`.
-  Exact GitHub Actions run `32455606677` passed frontend and backend gates on Python 3.12
-  and 3.14; feature run `32455008129` was also green.
+- V62 is landed and pushed at `6e9f1dba75fc4a1b6fccdb3a91a5bd77a5f14734`; exact
+  final GitHub Actions run `32456325843` is green.
+- Anonymous production remains on V61. V62 is landed but undeployed.
+- V63 freezes 50 normalized-unique film-and-television case surfaces for 25 existing
+  concepts. It adds exactly 48 aliases across 24 owners while rejecting _rolului_ and
+  _rolurilor_ because neither bare form has one safe film/TV sense.
+- V63 is implemented and locally green but remains unlanded and undeployed; exact
+  feature-head CI has not run.
 
 ## Frozen review contract
 
 - Candidate-funnel digest:
-  `f85e8955697e44bd53b802fcc71f8a0bb6ebe9d4b099292b4d44dbd2c7b4b79b`.
-- Build: `fixture-v62-transport-and-mobility-morphology`.
-- Fixture counts: 2,364 nodes / 9,217 edges / 8,018 aliases / 180 puzzles.
+  `73f31447e8fff86bb918d3830ebf886ba6fc1d2f14a1a88793fa396c03b5acef`.
+- Build: `fixture-v63-film-and-television-morphology`.
+- Fixture counts: 2,364 nodes / 9,217 edges / 8,066 aliases / 180 puzzles.
 - Exact delta: +48 aliases; no projection, node, edge, puzzle, game record, hold
   disposition, ranking row, or derived board.
-- Earlier accepted inventories remain in force and all earlier rejected, deferred, held, and
-  unauthored surfaces remain absent.
+- Earlier accepted inventories retain their owners; earlier rejected, deferred, held, and
+  unauthored surfaces retain their prior absence or disposition.
 
 ## Implementation scope
 
-- Added the reviewed V62 data module, rollback-safe apply wrapper, complete review archive,
-  ADR-0086, and focused six-test regression contract.
-- Regenerated only the alias-bearing KG/mobile/ranking/derived wrappers and updated their
-  current build, alias-count, and digest pins.
-- Preserved both fixture mirrors, games-pack mirrors, ranking rows, derived boards, Contexto
-  projection inventory, V49 rejection ledger, sessions, accounts, frontend, and deployment.
-- Updated the V33 compatibility assertion for the V62-owned transport inventory.
+- Added the reviewed V63 data module, rollback-safe apply wrapper, complete two-reviewer
+  archive, ADR-0087, and focused six-test regression contract.
+- Regenerated only alias-bearing KG/mobile/ranking/derived wrappers and migrated current
+  build/count/hash pins.
+- Preserved games-pack mirrors, ranking rows, derived boards, projection inventory, V49
+  ledger, sessions, accounts, frontend, and deployment.
+- Updated the V33 cumulative compatibility pin without changing historical wave constants.
 
 ## Artifact evidence
 
-- KG: `ecd3fffa195497678bcc442ea1ae789f41358cb50be588df56731b3542b66dca`.
+- KG: `a27d86ee3b820edcb9d7cad2485362f2fde5c23adc25c6999e997c6b0aa9ac51`.
 - Games pack:
   `05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed`.
 - Ranking wrapper:
-  `05343dc62cd1c262253fa1e74b8eac12bf69dd94238e429ff62fd2ec693d7025`;
-  derived wrapper: `af9fe04e9c7840cb789d2573c5be047499c03b831fe17d9bfd916e4725b5cafb`.
-- Mobile snapshot:
-  `153af3ac3bcb3db872e95a31678c6d1356382a55fbaca4cb1ee765a83a4bc316`;
-  Lanț ledger: `e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29`.
-- Immutable ranking rows remain
-  `46aabcea827c3eed9d64dd7249ea1514d4b211a5b95c4bbea2d8a825e29d86e0`.
-- Immutable derived boards remain
-  `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
-- Nodes excluding aliases, edges, puzzles, games-pack payloads, ranking rows, and derived
-  boards are unchanged; package/test mirrors are byte-identical.
+  `c6cf62066f8c68c199d3830e59c72a1625f3a58acdce37471a8c7a985af65442`.
+- Derived wrapper:
+  `b22b7dfab519c84a8fbae31b88a4aaf06bec178622d03877b6089aa62030079f`.
+- Mobile wrapper:
+  `9bdfdef1d79eff03baae360df18fb01ef4a0484e42c667653bb300a429d78780`.
+- V49 ledger:
+  `e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29`.
+- The +48-only artifact audit, exact/projection/fuzzy resolver audit, immutable topology,
+  puzzle, pack, ranking-row, derived-board, ledger, and package/test mirror checks are green.
 
 ## Verification state
 
-- Focused V62 passed 6/6; affected V31–V33/V44/V47–V62 passed 155/155; complete backend
-  passed 835/835; the post-bind accounts-on rerun passed 53/53; sessions passed 16/16.
-- Fixture and games-pack validators are green. Ranking is 618 total / 449 eligible; the
-  derived catalog is 336 boards.
-- Strict pending Lanț checked 3 items with 0 flagged and 0 FAIL. Fixture/ranking/derived
-  mirrors, Ruff with `--no-cache`, and global `git diff --check` are green.
-- Exact feature CI run `32455008129` passed on
-  `89464ab9ef9e2a3af21eced381acde8543fcd89f`; all three jobs are green.
-- Exact landed-head CI run `32455606677` passed on
-  `d7fd85543b27be14d8c3d79153b1f2371fe4ba99`; all three jobs are green.
+- Focused V63 passed 6/6; affected V31–V33/V44/V47–V63 passed 161/161; complete backend
+  collected and passed 841/841.
+- The post-bind accounts-on run passed 53/53; sessions passed 16/16.
+- Fixture and games-pack validators are green. Ranking remains 618 total / 449 eligible;
+  the derived catalog remains 336 boards.
+- Strict pending Lanț checked 3 items with 0 flagged and 0 FAIL.
+- Fixture/ranking/derived mirrors, Ruff with `--no-cache`, and global `git diff --check`
+  are green.
+- Exact V63 CI has not run.
 
 ## Production state
 
-- Production remains on V61; V62 has not been deployed.
-- Accounts and debug remain off, submissions remain disabled, and no database, OAuth, extra
-  worker, frontend, DNS, TLS, or infrastructure change is authorized by this wave.
+- Production remains on exact V61 `1c42de0d52cf56fd0d49f930aaccaafbc96906f9`.
+- Accounts and debug remain off, submissions remain disabled, and no database, OAuth,
+  worker, frontend, DNS, TLS, or infrastructure change is authorized by V63.
+- Neither V62 nor V63 is deployed.
 
 ## Risks and manual review
 
-- Both rejected port forms must remain absent from exact, projection, and fuzzy resolution.
-- Every accepted qualifier needs one normalized owner and an already-legal Lanț predecessor;
+- _Rolului_ and _rolurilor_ must remain absent from exact, projection, and fuzzy resolution.
+- Every accepted qualifier has one reviewed owner and an existing legal Lanț predecessor;
   aliases must not create graph edges or broaden projection resolution.
-- The alias-only artifact audit confirms exactly +48 aliases and preserves all immutable
-  payloads; final review must still confirm no unrelated file entered the change.
+- Final review must confirm no unrelated file entered the bounded V63 change.
+- Historical data-module build constants must remain historical.
 
 ## Release result
 
-V62 is landed and pushed at `d7fd85543b27be14d8c3d79153b1f2371fe4ba99`.
-It remains undeployed; V63 may start from this exact landed baseline.
+V63 is locally green and reviewable. It remains unlanded; require exact-head CI on the
+bounded feature commit before considering any fast-forward to `main`. Deployment remains
+out of scope.

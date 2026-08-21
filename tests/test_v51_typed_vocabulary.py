@@ -65,10 +65,10 @@ _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 _REVIEW = _ROOT / "docs/reviews/v51-typed-vocabulary-funnel/vocabulary.json"
 _V48_REVIEW = _ROOT / "docs/reviews/v48-alchimie-pending-gate"
 
-_KG_SHA256 = "ecd3fffa195497678bcc442ea1ae789f41358cb50be588df56731b3542b66dca"
+_KG_SHA256 = "a27d86ee3b820edcb9d7cad2485362f2fde5c23adc25c6999e997c6b0aa9ac51"
 _PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
-_RANKINGS_SHA256 = "05343dc62cd1c262253fa1e74b8eac12bf69dd94238e429ff62fd2ec693d7025"
-_DERIVED_SHA256 = "af9fe04e9c7840cb789d2573c5be047499c03b831fe17d9bfd916e4725b5cafb"
+_RANKINGS_SHA256 = "c6cf62066f8c68c199d3830e59c72a1625f3a58acdce37471a8c7a985af65442"
+_DERIVED_SHA256 = "b22b7dfab519c84a8fbae31b88a4aaf06bec178622d03877b6089aa62030079f"
 _CANDIDATE_FUNNEL_SHA256 = (
     "36eb871f07de3dde7169a896585031598791367af2c184b6dd6d15262933e416"
 )
@@ -317,12 +317,12 @@ def test_v51_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     assert all(svc.resolve(surface) is None for surface in blocked)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert fixture["meta"]["build_version"] == (
-        "fixture-v62-transport-and-mobility-morphology"
+        "fixture-v63-film-and-television-morphology"
     )
     assert fixture["meta"]["counts"]["nodes"] == 2364
     assert fixture["meta"]["counts"]["edges"] == 9217
     assert fixture["meta"]["counts"]["puzzles"] == 180
-    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8018
+    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8066
 
 
 def test_v51_basic_words_are_exactly_the_reviewed_nonwinning_projection() -> None:
@@ -470,7 +470,7 @@ def test_v51_mobile_contract_and_v49_ledger_persist_exactly() -> None:
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
     assert checked_in["manifest"]["build_version"] == (
-        "fixture-v62-transport-and-mobility-morphology"
+        "fixture-v63-film-and-television-morphology"
     )
     assert checked_in["manifest"]["counts"] == {
         "nodes": 2364,
