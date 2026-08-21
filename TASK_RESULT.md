@@ -10,9 +10,9 @@
   _porturilor_ rejected because neither bare form has one safe transport owner.
 - The revised inventory assigns _pașaportului de călătorie_ and
   _pașapoartelor de călătorie_ to `n_v20soc_pasaport`.
-- V62 is committed and pushed at `89464ab9ef9e2a3af21eced381acde8543fcd89f`.
-  Exact GitHub Actions run `32455008129` passed frontend and backend gates on Python 3.12
-  and 3.14; this evidence-only head still requires its own exact CI before landing.
+- V62 landed and was pushed at `d7fd85543b27be14d8c3d79153b1f2371fe4ba99`.
+  Exact GitHub Actions run `32455606677` passed frontend and backend gates on Python 3.12
+  and 3.14; feature run `32455008129` was also green.
 
 ## Frozen review contract
 
@@ -63,6 +63,8 @@
   mirrors, Ruff with `--no-cache`, and global `git diff --check` are green.
 - Exact feature CI run `32455008129` passed on
   `89464ab9ef9e2a3af21eced381acde8543fcd89f`; all three jobs are green.
+- Exact landed-head CI run `32455606677` passed on
+  `d7fd85543b27be14d8c3d79153b1f2371fe4ba99`; all three jobs are green.
 
 ## Production state
 
@@ -80,5 +82,5 @@
 
 ## Release result
 
-V62's exact feature commit is green. Commit this evidence update, require exact-head CI on
-that documentation-only commit, then fast-forward V62 to `main`. V62 remains undeployed.
+V62 is landed and pushed at `d7fd85543b27be14d8c3d79153b1f2371fe4ba99`.
+It remains undeployed; V63 may start from this exact landed baseline.

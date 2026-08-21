@@ -2,9 +2,9 @@
 
 _As of 2026-08-21. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-21 (exact V62 feature commit
-`89464ab9ef9e2a3af21eced381acde8543fcd89f`; GitHub Actions run `32455008129` passed
-frontend and backend gates on Python 3.12 and 3.14)._
+_Last verified: 2026-08-21 (V62 landed and was pushed at
+`d7fd85543b27be14d8c3d79153b1f2371fe4ba99`; exact GitHub Actions run `32455606677`
+passed frontend and backend gates on Python 3.12 and 3.14)._
 
 ## Current work — V62 transport-and-mobility case morphology
 
@@ -23,7 +23,8 @@ frontend and backend gates on Python 3.12 and 3.14)._
 - Fixture and games-pack validators, ranking 618/449, derived 336, strict pending Lanț
   (3 checked / 0 flagged / 0 FAIL), mirrors, Ruff, global whitespace, and exact feature CI
   run `32455008129` are green.
-- V62 is committed and pushed; land only after this evidence-only head also passes exact CI.
+- V62 is landed and pushed at `d7fd85543b27be14d8c3d79153b1f2371fe4ba99`;
+  exact-head CI run `32455606677` is green. V62 remains undeployed.
 - V61 remains in force and deployed: 48 home-care aliases across 24 owners were accepted;
   _cheii_ and _cheilor_ remain rejected. V51–V60 accepted and rejected inventories also
   remain in force.
@@ -88,7 +89,7 @@ git diff --check
 
 ## Next verified work
 
-- Require exact CI on this evidence-only head, then fast-forward and push V62 to `main`.
+- Start V63 from exact landed V62 main using a new dedicated branch and worktree.
 - Keep _portului_, _porturilor_, all earlier rejected/held forms, projections, topology,
   game records, sessions, accounts, frontend, and deployment unchanged.
 - Keep V62 undeployed; production remains on V61 unless deployment is separately requested.
