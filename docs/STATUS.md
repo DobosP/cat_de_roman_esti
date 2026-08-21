@@ -2,9 +2,9 @@
 
 _As of 2026-08-21. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-21 (exact V63 feature commit
-`8d5f061084bec94dc836c1266aad9e912e13106b`; GitHub Actions run `32511269364` passed
-frontend and backend gates on Python 3.12 and 3.14)._
+_Last verified: 2026-08-21 (V63 landed and was pushed at
+`787a8a648e02cad2dec52623ea86a2fa562cafb6`; exact GitHub Actions run `32512048319`
+passed frontend and backend gates on Python 3.12 and 3.14)._
 
 ## Current work — V63 film-and-television case morphology
 
@@ -25,7 +25,8 @@ frontend and backend gates on Python 3.12 and 3.14)._
   remains 336 boards. Strict pending Lanț checked 3 with 0 flagged and 0 FAIL.
 - Package/test mirrors, Ruff with `--no-cache`, global `git diff --check`, the exact
   +48-only audit, resolver checks, and immutable-payload invariants are green.
-- Exact feature CI run `32511269364` is green; V63 remains unlanded and undeployed.
+- V63 landed and was pushed at `787a8a648e02cad2dec52623ea86a2fa562cafb6`; exact
+  landed-head CI run `32512048319` and feature run `32511269364` are green. It is undeployed.
 
 ## Landed baseline and preserved inventory
 
@@ -86,7 +87,8 @@ git diff --check
 
 ## Next verified work
 
-- Require exact-head CI on the release-evidence commit before any fast-forward to `main`.
+- Start V64 only from exact landed V63 head `787a8a648e02cad2dec52623ea86a2fa562cafb6`
+  in its own feature worktree; keep it unlanded until its own exact-head gates are green.
 - Keep _rolului_, _rolurilor_, all earlier rejected/held forms, projections, topology,
   games, sessions, accounts, frontend, and deployment unchanged.
 - Keep production on V61; deploying V62 or V63 requires a separate explicit request.
