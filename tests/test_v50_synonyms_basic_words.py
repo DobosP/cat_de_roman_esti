@@ -64,10 +64,10 @@ _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 _REVIEW = _ROOT / "docs/reviews/v50-synonym-basic-word-funnel/vocabulary.json"
 _V48_REVIEW = _ROOT / "docs/reviews/v48-alchimie-pending-gate"
 
-_KG_SHA256 = "a27d86ee3b820edcb9d7cad2485362f2fde5c23adc25c6999e997c6b0aa9ac51"
+_KG_SHA256 = "d8db3ca58272e26192c9e0a3b556fc796c15dc4cec9d828f67a1245cf75d90b3"
 _PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
-_RANKINGS_SHA256 = "c6cf62066f8c68c199d3830e59c72a1625f3a58acdce37471a8c7a985af65442"
-_DERIVED_SHA256 = "b22b7dfab519c84a8fbae31b88a4aaf06bec178622d03877b6089aa62030079f"
+_RANKINGS_SHA256 = "e9a5acd3fc62753912728dc6ca5f8a9e2ead00edfba14ef7f44a3e752fb6e13e"
+_DERIVED_SHA256 = "39a77d724ad4436d0529ceeaf87e46e9cbf3a85661a60b3ca09f141211652089"
 _RANKING_ROWS_SHA256 = "46aabcea827c3eed9d64dd7249ea1514d4b211a5b95c4bbea2d8a825e29d86e0"
 _FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
 _NODES_WITHOUT_ALIASES_SHA256 = (
@@ -198,12 +198,12 @@ def test_v50_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     assert all(svc.resolve(surface) is None for surface in DATA.BLOCKED_ALIAS_FORMS)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert fixture["meta"]["build_version"] == (
-        "fixture-v63-film-and-television-morphology"
+        "fixture-v64-history-and-heritage-morphology"
     )
     assert fixture["meta"]["counts"]["nodes"] == 2364
     assert fixture["meta"]["counts"]["edges"] == 9217
     assert fixture["meta"]["counts"]["puzzles"] == 180
-    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8066
+    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8114
 
 
 def test_v50_basic_words_are_exactly_the_reviewed_nonwinning_projection() -> None:
@@ -356,7 +356,7 @@ def test_v50_mobile_contract_tracks_only_the_alias_release() -> None:
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
     assert checked_in["manifest"]["build_version"] == (
-        "fixture-v63-film-and-television-morphology"
+        "fixture-v64-history-and-heritage-morphology"
     )
     assert checked_in["manifest"]["counts"] == {
         "nodes": 2364,

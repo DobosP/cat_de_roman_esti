@@ -1,4 +1,4 @@
-"""Regression contract for the reviewed V62 transport-and-mobility wave."""
+"""Regression contract for the reviewed V64 history-and-heritage wave."""
 
 from __future__ import annotations
 
@@ -34,7 +34,7 @@ from cat_de_roman_esti.wordgames.service import (  # noqa: E402
 _ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_ROOT / "scripts"))
 
-import contexto_common_words_v62_data as DATA  # noqa: E402
+import contexto_common_words_v64_data as DATA  # noqa: E402
 
 _PACKAGE_KG = _ROOT / "cat_de_roman_esti/fixtures/kg_sample.json"
 _TEST_KG = _ROOT / "tests/fixtures/kg_sample.json"
@@ -46,16 +46,16 @@ _PACKAGE_DERIVED = _ROOT / "cat_de_roman_esti/fixtures/derived_catalog_v38.json"
 _TEST_DERIVED = _ROOT / "tests/fixtures/derived_catalog_v38.json"
 _LEDGER = _ROOT / "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
-_REVIEW = _ROOT / "docs/reviews/v62-transport-and-mobility-morphology/vocabulary.json"
+_REVIEW = _ROOT / "docs/reviews/v64-history-and-heritage-morphology/vocabulary.json"
 
-# Current whole-artifact pins; the immutable payload pins below must not move.
+# V64 whole-artifact pins; the immutable payload pins below must not move.
 _KG_SHA256 = "d8db3ca58272e26192c9e0a3b556fc796c15dc4cec9d828f67a1245cf75d90b3"
 _PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
 _RANKINGS_SHA256 = "e9a5acd3fc62753912728dc6ca5f8a9e2ead00edfba14ef7f44a3e752fb6e13e"
 _DERIVED_SHA256 = "39a77d724ad4436d0529ceeaf87e46e9cbf3a85661a60b3ca09f141211652089"
 _MOBILE_SHA256 = "92cc85b8658acae05b343ea55cc773d51f2642ce84725f06ff0c34577bd0302c"
 _CANDIDATE_FUNNEL_SHA256 = (
-    "f85e8955697e44bd53b802fcc71f8a0bb6ebe9d4b099292b4d44dbd2c7b4b79b"
+    "42137b42712597779ce402ce4a9f9065060701c5a19b444235b4abed69ecef40"
 )
 _RANKING_ROWS_SHA256 = "46aabcea827c3eed9d64dd7249ea1514d4b211a5b95c4bbea2d8a825e29d86e0"
 _FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
@@ -66,8 +66,8 @@ _EDGES_SHA256 = "f62f0730a3e79c1498776049d86e1013e877bc74433360b2fcfaf3f1253a89b
 _PUZZLES_SHA256 = "3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc"
 _V49_LEDGER_SHA256 = "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29"
 _REJECTED_TARGETS = {
-    "portului": "n_v2soc_port",
-    "porturilor": "n_v2soc_port",
+    "frontului": "n_v4ist_front",
+    "fronturilor": "n_v4ist_front",
 }
 _REJECTED = set(_REJECTED_TARGETS)
 _V51_DEFERRED = {
@@ -82,7 +82,7 @@ _V51_DEFERRED = {
 _V51_REJECTED = {"fișă", "elan", "priză multiplă"}
 _V51_UNAUTHORED = {"Wi-Fi", "wifi", "email"}
 _HISTORICAL_WAVE_BLOCKS = {
-    # V52 through V61 rejected polysemes.
+    # V52 through V63 rejected polysemes.
     "păturile",
     "păturilor",
     "mesei",
@@ -105,6 +105,10 @@ _HISTORICAL_WAVE_BLOCKS = {
     "fileurilor",
     "cheii",
     "cheilor",
+    "portului",
+    "porturilor",
+    "rolului",
+    "rolurilor",
 }
 _HISTORICAL_NONACCEPTED = (
     _V51_DEFERRED
@@ -153,14 +157,14 @@ def _post_contexto_guess(client: Client, game_id: str, text: str) -> dict:
     ).json()
 
 
-def test_v62_review_funnel_is_exact_complete_and_collision_aware() -> None:
+def test_v64_review_funnel_is_exact_complete_and_collision_aware() -> None:
     review = _json(_REVIEW)
     candidates = review["candidates"]
     candidate_aliases = candidates["aliases"]
     final = review["final"]
     accepted = _accepted_aliases()
 
-    assert review["schema"] == "v62-transport-and-mobility-morphology-review-v1"
+    assert review["schema"] == "v64-history-and-heritage-morphology-review-v1"
     assert review["candidate_funnel_sha256"] == _CANDIDATE_FUNNEL_SHA256
     assert review["candidate_funnel_sha256"] == _canonical_sha256(candidates)
     assert len(candidate_aliases) == 50
@@ -175,15 +179,17 @@ def test_v62_review_funnel_is_exact_complete_and_collision_aware() -> None:
     assert set(final["rejected"]) == _REJECTED
     assert set(accepted) | _REJECTED == set(candidate_aliases)
     collision_evidence = [
-        "harbor facility or port city",
-        "act or right of carrying or possessing",
-        "conduct or habitual bearing",
-        "traditional or occasion-specific clothing/costume",
-        "computer-network or USB port",
+        "military battle line, theater, or forces under unified command",
+        "line formation of soldiers, pupils, or athletes",
+        "organized political or social grouping pursuing a common goal",
+        "mining work face or excavation sector",
+        "architectural frontage or parcel facade line",
+        "meteorological boundary between unlike air masses",
+        "physical wavefront",
     ]
     assert review["sense_collision_evidence"] == {
-        "portului": collision_evidence,
-        "porturilor": collision_evidence,
+        "frontului": collision_evidence,
+        "fronturilor": collision_evidence,
     }
 
     for reviewer in review["reviews"].values():
@@ -216,35 +222,34 @@ def test_v62_review_funnel_is_exact_complete_and_collision_aware() -> None:
     }
 
 
-def test_v62_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -> None:
+def test_v64_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -> None:
     fixture = _json(_PACKAGE_KG)
     svc = WordGameService(load_fixture(_PACKAGE_KG).graph)
     aliases = _accepted_aliases()
 
-    assert DATA.BUILD_VERSION == "fixture-v62-transport-and-mobility-morphology"
+    assert DATA.BUILD_VERSION == "fixture-v64-history-and-heritage-morphology"
     assert len(DATA.ALIAS_ADDITIONS) == 24
     assert len(aliases) == 48
     assert set(DATA.BLOCKED_ALIAS_FORMS) == _REJECTED
     assert all(svc.resolve(surface) == node_id for surface, node_id in aliases.items())
-    assert all(svc.node(node_id).node_type == "concept" for node_id in set(aliases.values()))
-    assert svc.resolve("autoturismelor personale") == (
-        "n_v24_transport_personal_masina"
+    assert all(
+        svc.resolve_fuzzy(surface) == node_id for surface, node_id in aliases.items()
     )
-    assert svc.resolve("navetelor între casă și serviciu") == "n_v3via_naveta"
-    assert svc.resolve("pașapoartelor de călătorie") == "n_v20soc_pasaport"
+    assert all(svc.node(node_id).node_type == "concept" for node_id in set(aliases.values()))
+    assert svc.resolve("tratatelor diplomatice") == "n_v2ist_tratat"
+    assert svc.resolve("datelor calendaristice") == "n_v4ist_data"
+    assert svc.resolve("armurilor medievale") == "n_v4ist_armura"
     assert all(svc.resolve(surface) is None for surface in _REJECTED)
     assert all(resolve_projection(surface) is None for surface in set(aliases) | _REJECTED)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
-    assert fixture["meta"]["build_version"] == (
-        "fixture-v64-history-and-heritage-morphology"
-    )
+    assert fixture["meta"]["build_version"] == DATA.BUILD_VERSION
     assert fixture["meta"]["counts"]["nodes"] == 2364
     assert fixture["meta"]["counts"]["edges"] == 9217
     assert fixture["meta"]["counts"]["puzzles"] == 180
     assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8114
 
 
-def test_v62_aliases_play_in_contexto_and_only_on_existing_legal_lant_hops() -> None:
+def test_v64_aliases_play_in_contexto_and_only_on_existing_legal_lant_hops() -> None:
     client = Client()
     svc = get_service()
     lant_targets: set[str] = set()
@@ -280,7 +285,7 @@ def test_v62_aliases_play_in_contexto_and_only_on_existing_legal_lant_hops() -> 
     assert lant_targets == set(_accepted_aliases().values())
 
 
-def test_v62_nonaccepted_surfaces_stay_out_of_typed_games() -> None:
+def test_v64_nonaccepted_surfaces_stay_out_of_typed_games() -> None:
     client = Client()
     svc = get_service()
     for surface, target in sorted(_REJECTED_TARGETS.items()):
@@ -296,15 +301,16 @@ def test_v62_nonaccepted_surfaces_stay_out_of_typed_games() -> None:
     assert len(_V51_DEFERRED) == 7
     assert len(_V51_REJECTED) == 3
     assert len(_V51_UNAUTHORED) == 3
-    assert len(_HISTORICAL_WAVE_BLOCKS) == 22
-    assert len(_HISTORICAL_NONACCEPTED) == 35
+    assert len(_HISTORICAL_WAVE_BLOCKS) == 26
+    assert len(_HISTORICAL_NONACCEPTED) == 39
+    assert len(_HISTORICAL_NONACCEPTED | _REJECTED) == 41
     for surface in _HISTORICAL_NONACCEPTED:
         assert svc.resolve(surface) is None
         assert resolve_projection(surface) is None
         assert svc.resolve_fuzzy(surface) is None
 
 
-def test_v62_preserves_projection_topology_pack_and_frozen_board_payloads() -> None:
+def test_v64_preserves_projection_topology_pack_and_frozen_board_payloads() -> None:
     fixture = _json(_PACKAGE_KG)
     rankings = _json(_PACKAGE_RANKINGS)
     derived = _json(_PACKAGE_DERIVED)
@@ -336,7 +342,7 @@ def test_v62_preserves_projection_topology_pack_and_frozen_board_payloads() -> N
     assert contexto_store._max == lant_store._max == 1000
 
 
-def test_v62_mobile_contract_and_v49_ledger_persist_exactly() -> None:
+def test_v64_mobile_contract_and_v49_ledger_persist_exactly() -> None:
     checked_in = _json(_MOBILE_CONTRACT)
     ledger = _json(_LEDGER)
 
@@ -345,9 +351,7 @@ def test_v62_mobile_contract_and_v49_ledger_persist_exactly() -> None:
     assert _MOBILE_CONTRACT.read_bytes() == (
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
-    assert checked_in["manifest"]["build_version"] == (
-        "fixture-v64-history-and-heritage-morphology"
-    )
+    assert checked_in["manifest"]["build_version"] == DATA.BUILD_VERSION
     assert checked_in["manifest"]["counts"] == {
         "nodes": 2364,
         "edges": 9217,

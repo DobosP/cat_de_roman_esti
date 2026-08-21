@@ -49,11 +49,11 @@ _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 _REVIEW = _ROOT / "docs/reviews/v59-human-anatomy-morphology/vocabulary.json"
 
 # Whole-artifact digests bind the current generated fixture and wrappers.
-_KG_SHA256 = "a27d86ee3b820edcb9d7cad2485362f2fde5c23adc25c6999e997c6b0aa9ac51"
+_KG_SHA256 = "d8db3ca58272e26192c9e0a3b556fc796c15dc4cec9d828f67a1245cf75d90b3"
 _PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
-_RANKINGS_SHA256 = "c6cf62066f8c68c199d3830e59c72a1625f3a58acdce37471a8c7a985af65442"
-_DERIVED_SHA256 = "b22b7dfab519c84a8fbae31b88a4aaf06bec178622d03877b6089aa62030079f"
-_MOBILE_SHA256 = "9bdfdef1d79eff03baae360df18fb01ef4a0484e42c667653bb300a429d78780"
+_RANKINGS_SHA256 = "e9a5acd3fc62753912728dc6ca5f8a9e2ead00edfba14ef7f44a3e752fb6e13e"
+_DERIVED_SHA256 = "39a77d724ad4436d0529ceeaf87e46e9cbf3a85661a60b3ca09f141211652089"
+_MOBILE_SHA256 = "92cc85b8658acae05b343ea55cc773d51f2642ce84725f06ff0c34577bd0302c"
 _CANDIDATE_FUNNEL_SHA256 = (
     "606386a07e33909759a6f644e265bc5f20c956bb64fb992b7a64a355a6380500"
 )
@@ -208,12 +208,12 @@ def test_v59_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     assert all(resolve_projection(surface) is None for surface in set(aliases) | _REJECTED)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert fixture["meta"]["build_version"] == (
-        "fixture-v63-film-and-television-morphology"
+        "fixture-v64-history-and-heritage-morphology"
     )
     assert fixture["meta"]["counts"]["nodes"] == 2364
     assert fixture["meta"]["counts"]["edges"] == 9217
     assert fixture["meta"]["counts"]["puzzles"] == 180
-    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8066
+    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8114
 
 
 def test_v59_aliases_play_in_contexto_and_only_on_existing_legal_lant_hops() -> None:
@@ -313,7 +313,7 @@ def test_v59_mobile_contract_and_v49_ledger_persist_exactly() -> None:
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
     assert checked_in["manifest"]["build_version"] == (
-        "fixture-v63-film-and-television-morphology"
+        "fixture-v64-history-and-heritage-morphology"
     )
     assert checked_in["manifest"]["counts"] == {
         "nodes": 2364,

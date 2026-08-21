@@ -1,7 +1,7 @@
 # ADR-0087: Bound film and television case morphology
 
 Date: 2026-08-21
-Status: accepted
+Status: superseded-by ADR-0088
 
 ## Decision
 
