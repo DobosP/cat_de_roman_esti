@@ -2,9 +2,9 @@
 
 _As of 2026-08-21. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-21 (V61 remains landed and healthy in anonymous production; exact
-GitHub Actions run `31811714317` is green. V62's complete local test, validator, mirror,
-Ruff, and whitespace gates are green; exact-head CI has not run)._
+_Last verified: 2026-08-21 (exact V62 feature commit
+`89464ab9ef9e2a3af21eced381acde8543fcd89f`; GitHub Actions run `32455008129` passed
+frontend and backend gates on Python 3.12 and 3.14)._
 
 ## Current work — V62 transport-and-mobility case morphology
 
@@ -19,11 +19,11 @@ Ruff, and whitespace gates are green; exact-head CI has not run)._
 - The alias-only apply raised aliases from 7,970 to exactly 8,018 while preserving 2,364
   nodes, 9,217 edges, 180 puzzles, pack bytes, ranking rows, and derived boards.
 - Focused V62 passed 6/6; affected V31–V33/V44/V47–V62 passed 155/155; complete backend
-  passed 829/829; post-bind accounts-on passed 53/53; sessions passed 16/16.
+  passed 835/835; post-bind accounts-on passed 53/53; sessions passed 16/16.
 - Fixture and games-pack validators, ranking 618/449, derived 336, strict pending Lanț
-  (3 checked / 0 flagged / 0 FAIL), mirrors, Ruff, and global whitespace are green. Remote
-  CI has not run.
-- V62 is intentionally uncommitted and unlanded for review.
+  (3 checked / 0 flagged / 0 FAIL), mirrors, Ruff, global whitespace, and exact feature CI
+  run `32455008129` are green.
+- V62 is committed and pushed; land only after this evidence-only head also passes exact CI.
 - V61 remains in force and deployed: 48 home-care aliases across 24 owners were accepted;
   _cheii_ and _cheilor_ remain rejected. V51–V60 accepted and rejected inventories also
   remain in force.
@@ -88,8 +88,7 @@ git diff --check
 
 ## Next verified work
 
-- Review the complete V62 diff and keep exact results current.
+- Require exact CI on this evidence-only head, then fast-forward and push V62 to `main`.
 - Keep _portului_, _porturilor_, all earlier rejected/held forms, projections, topology,
   game records, sessions, accounts, frontend, and deployment unchanged.
-- Do not commit or land V62 until review is complete; after commit, require exact-head CI
-  green before landing.
+- Keep V62 undeployed; production remains on V61 unless deployment is separately requested.

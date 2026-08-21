@@ -10,8 +10,9 @@
   _porturilor_ rejected because neither bare form has one safe transport owner.
 - The revised inventory assigns _pașaportului de călătorie_ and
   _pașapoartelor de călătorie_ to `n_v20soc_pasaport`.
-- V62 is reviewable but intentionally uncommitted and unlanded. All local gates are green;
-  exact remote CI has not run.
+- V62 is committed and pushed at `89464ab9ef9e2a3af21eced381acde8543fcd89f`.
+  Exact GitHub Actions run `32455008129` passed frontend and backend gates on Python 3.12
+  and 3.14; this evidence-only head still requires its own exact CI before landing.
 
 ## Frozen review contract
 
@@ -55,12 +56,13 @@
 ## Verification state
 
 - Focused V62 passed 6/6; affected V31–V33/V44/V47–V62 passed 155/155; complete backend
-  passed 829/829; the post-bind accounts-on rerun passed 53/53; sessions passed 16/16.
+  passed 835/835; the post-bind accounts-on rerun passed 53/53; sessions passed 16/16.
 - Fixture and games-pack validators are green. Ranking is 618 total / 449 eligible; the
   derived catalog is 336 boards.
 - Strict pending Lanț checked 3 items with 0 flagged and 0 FAIL. Fixture/ranking/derived
   mirrors, Ruff with `--no-cache`, and global `git diff --check` are green.
-- Exact-head remote CI has not run because V62 is uncommitted.
+- Exact feature CI run `32455008129` passed on
+  `89464ab9ef9e2a3af21eced381acde8543fcd89f`; all three jobs are green.
 
 ## Production state
 
@@ -78,5 +80,5 @@
 
 ## Release result
 
-V62 is intentionally uncommitted, unlanded, and undeployed for review. Do not merge until
-exact-head remote CI is green.
+V62's exact feature commit is green. Commit this evidence update, require exact-head CI on
+that documentation-only commit, then fast-forward V62 to `main`. V62 remains undeployed.
