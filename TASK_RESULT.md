@@ -8,8 +8,8 @@
 - V63 freezes 50 normalized-unique film-and-television case surfaces for 25 existing
   concepts. It adds exactly 48 aliases across 24 owners while rejecting _rolului_ and
   _rolurilor_ because neither bare form has one safe film/TV sense.
-- V63 is implemented and locally green but remains unlanded and undeployed; exact
-  feature-head CI has not run.
+- V63 is implemented and locally green but remains unlanded and undeployed. Exact feature
+  commit `8d5f061084bec94dc836c1266aad9e912e13106b` passed GitHub Actions run `32511269364`.
 
 ## Frozen review contract
 
@@ -58,7 +58,8 @@
 - Strict pending Lanț checked 3 items with 0 flagged and 0 FAIL.
 - Fixture/ranking/derived mirrors, Ruff with `--no-cache`, and global `git diff --check`
   are green.
-- Exact V63 CI has not run.
+- Exact feature CI run `32511269364` passed frontend and backend gates on Python 3.12 and
+  3.14 for `8d5f061084bec94dc836c1266aad9e912e13106b`.
 
 ## Production state
 
@@ -77,6 +78,5 @@
 
 ## Release result
 
-V63 is locally green and reviewable. It remains unlanded; require exact-head CI on the
-bounded feature commit before considering any fast-forward to `main`. Deployment remains
-out of scope.
+V63's exact feature commit is green. It remains unlanded; require exact-head CI on this
+release-evidence update before any fast-forward to `main`. Deployment remains out of scope.
