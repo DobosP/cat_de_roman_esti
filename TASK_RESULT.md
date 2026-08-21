@@ -5,13 +5,12 @@
 - V63 is landed and pushed on final `main` head
   `08038ee28c95a33c8295268de91c015697249f15`; exact final GitHub Actions run `32512940422`
   is green.
-- Anonymous production remains on V61. V62 and V63 are landed but undeployed.
+- Anonymous production remains on V61. V62 through V64 are landed but undeployed.
 - Refined V64 freezes 50 normalized-unique history-and-heritage case surfaces for 25
   existing concepts. It adds exactly 48 aliases across 24 owners while rejecting
   _frontului_ and _fronturilor_ because neither bare form has one safe bounded sense.
-- V64 is locally implemented with all reported gates green, but remains unlanded and
-  undeployed. Exact feature commit `7a2d441ded82c1b276e6f18428a5556e1e0c9dbc` passed
-  GitHub Actions run `32528498910`.
+- V64 landed and was pushed at `ff273e9c38035277423b04cb91713a827094512c`; exact
+  GitHub Actions run `32529292437` and feature run `32528498910` are green. It is undeployed.
 
 ## Frozen review contract
 
@@ -62,6 +61,8 @@
   immutable-payload invariants, Ruff with `--no-cache`, and global `git diff --check` are green.
 - Exact feature CI run `32528498910` passed frontend and backend gates on Python 3.12 and
   3.14 for `7a2d441ded82c1b276e6f18428a5556e1e0c9dbc`.
+- Exact landed-head CI run `32529292437` passed the same three gates for
+  `ff273e9c38035277423b04cb91713a827094512c`.
 
 ## Production state
 
@@ -79,7 +80,7 @@
 - Final independent review confirmed no unrelated file entered the bounded V64 change.
 - Historical data-module build constants must remain historical.
 
-## Release state
+## Release result
 
-V64's exact feature commit is green. It remains unlanded and undeployed; require exact-head
-CI on this release-evidence update before any fast-forward to `main`.
+V64 is landed and pushed at `ff273e9c38035277423b04cb91713a827094512c`. It remains
+undeployed; V65 may start only from this exact green baseline in its own worktree.
