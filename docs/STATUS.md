@@ -1,10 +1,10 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-08-21. This file is the repository's current source of truth._
+_As of 2026-08-22. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-21 (V63 is landed and pushed on final `main` head
-`08038ee28c95a33c8295268de91c015697249f15`; exact GitHub Actions run `32512940422`
-passed frontend and backend gates on Python 3.12 and 3.14)._
+_Last verified: 2026-08-22 (exact V64 feature commit
+`7a2d441ded82c1b276e6f18428a5556e1e0c9dbc`; GitHub Actions run `32528498910` passed
+frontend and backend gates on Python 3.12 and 3.14)._
 
 ## Current work — V64 history-and-heritage case morphology
 
@@ -24,8 +24,8 @@ passed frontend and backend gates on Python 3.12 and 3.14)._
   collection and execution passed 847/847; accounts-on passed 53/53; sessions passed 16/16.
 - Validators, ranking 618/449, derived 336, strict Lanț 3/0/0, mirrors, exact +48 audit,
   resolver/protected-surface checks, immutable-payload invariants, Ruff with `--no-cache`,
-  and `git diff --check` are green. Exact feature CI has not run.
-- V64 remains unlanded and undeployed; exact feature-head CI has not run.
+  and `git diff --check` are green.
+- Exact feature CI run `32528498910` is green; V64 remains unlanded and undeployed.
 
 ## Landed baseline and preserved inventory
 
@@ -89,8 +89,8 @@ git diff --check
 
 ## Next verified work
 
-- V64 is locally green and independently reviewable; exact feature CI has not run.
+- Require exact-head CI on the release-evidence commit before any fast-forward to `main`.
 - Keep _frontului_, _fronturilor_, all earlier rejected/held forms, projections, topology,
   games, sessions, accounts, frontend, and deployment unchanged.
-- Keep V64 unlanded until exact feature-head CI is green. Production stays on V61;
+- Keep V64 unlanded until exact release-evidence CI is green. Production stays on V61;
   deployment requires a separate explicit request.

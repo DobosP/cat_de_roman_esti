@@ -10,7 +10,8 @@
   existing concepts. It adds exactly 48 aliases across 24 owners while rejecting
   _frontului_ and _fronturilor_ because neither bare form has one safe bounded sense.
 - V64 is locally implemented with all reported gates green, but remains unlanded and
-  undeployed. Exact feature CI has not run.
+  undeployed. Exact feature commit `7a2d441ded82c1b276e6f18428a5556e1e0c9dbc` passed
+  GitHub Actions run `32528498910`.
 
 ## Frozen review contract
 
@@ -59,7 +60,8 @@
   remains 336 boards. Strict pending Lanț checked 3 with 0 flagged and 0 FAIL.
 - Fixture/ranking/derived mirrors, exact +48 audit, resolver and protected-surface checks,
   immutable-payload invariants, Ruff with `--no-cache`, and global `git diff --check` are green.
-- V64 exact feature CI has not run.
+- Exact feature CI run `32528498910` passed frontend and backend gates on Python 3.12 and
+  3.14 for `7a2d441ded82c1b276e6f18428a5556e1e0c9dbc`.
 
 ## Production state
 
@@ -79,6 +81,5 @@
 
 ## Release state
 
-V64 started from exact landed V63 `08038ee28c95a33c8295268de91c015697249f15` in its own
-worktree. Its local implementation and confirmed gates are complete; it remains unlanded and
-undeployed for review, with exact feature CI unrun.
+V64's exact feature commit is green. It remains unlanded and undeployed; require exact-head
+CI on this release-evidence update before any fast-forward to `main`.
