@@ -1,7 +1,7 @@
 # ADR-0085: Bound home-care and maintenance case morphology
 
 Date: 2026-08-14
-Status: accepted
+Status: superseded-by ADR-0086
 
 ## Decision
 

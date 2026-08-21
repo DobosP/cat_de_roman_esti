@@ -1,79 +1,82 @@
-# Task Result — V61 refined home-care-and-maintenance morphology
+# Task Result — V62 transport-and-mobility morphology
 
 ## Summary
 
-- V60 landed and was pushed at `2a4d683`; its exact GitHub Actions run `31773557256`
-  passed frontend and backend gates on Python 3.12 and 3.14.
-- V61 landed and was pushed at `1c42de0d52cf56fd0d49f930aaccaafbc96906f9`;
-  exact GitHub Actions run `31811714317` passed frontend and backend gates on Python 3.12
-  and 3.14.
-- The fixed refined funnel contains 50 normalized-unique case surfaces for 25 existing
-  home-care-and-maintenance concepts. It calls for 48 qualified exact aliases across 24
-  owners; `cheii` and `cheilor` remain rejected because the bare forms do not have one safe
-  home-care owner.
-- The fixture is `fixture-v61-home-care-and-maintenance-morphology`: 2,364 nodes,
-  9,217 edges, 7,970 aliases, and 180 puzzles.
-- V61 changes no projection, node, edge, puzzle, game record, hold disposition, or derived
-  board. The artifact audit confirms topology, pack bytes, ranking rows, and derived boards
-  remain unchanged while exactly 48 aliases were added.
+- V61 is already landed, pushed, and deployed at
+  `1c42de0d52cf56fd0d49f930aaccaafbc96906f9`; exact CI run `31811714317` and anonymous
+  production remain green.
+- V62 freezes 50 normalized-unique transport-and-mobility case surfaces for 25 existing
+  concepts. It adds 48 exact aliases across 24 owners, with _portului_ and
+  _porturilor_ rejected because neither bare form has one safe transport owner.
+- The revised inventory assigns _pașaportului de călătorie_ and
+  _pașapoartelor de călătorie_ to `n_v20soc_pasaport`.
+- V62 is reviewable but intentionally uncommitted and unlanded. All local gates are green;
+  exact remote CI has not run.
+
+## Frozen review contract
+
+- Candidate-funnel digest:
+  `f85e8955697e44bd53b802fcc71f8a0bb6ebe9d4b099292b4d44dbd2c7b4b79b`.
+- Build: `fixture-v62-transport-and-mobility-morphology`.
+- Fixture counts: 2,364 nodes / 9,217 edges / 8,018 aliases / 180 puzzles.
+- Exact delta: +48 aliases; no projection, node, edge, puzzle, game record, hold
+  disposition, ranking row, or derived board.
+- Earlier accepted inventories remain in force and all earlier rejected, deferred, held, and
+  unauthored surfaces remain absent.
 
 ## Implementation scope
 
-- Added the bounded V61 data module and transactional apply wrapper.
-- Archived both complete reviews of the fixed funnel and recorded the V61 decision.
-- Added a focused V61 regression contract covering accepted aliases, both new rejections,
-  and every inherited rejected surface.
-- Regenerated only alias-bearing KG/mobile/ranking/derived wrappers and updated current
-  build, alias-count, and digest pins while preserving invariant payloads.
-- Updated current README, mobile-contract, status, and task-result documentation.
+- Added the reviewed V62 data module, rollback-safe apply wrapper, complete review archive,
+  ADR-0086, and focused six-test regression contract.
+- Regenerated only the alias-bearing KG/mobile/ranking/derived wrappers and updated their
+  current build, alias-count, and digest pins.
+- Preserved both fixture mirrors, games-pack mirrors, ranking rows, derived boards, Contexto
+  projection inventory, V49 rejection ledger, sessions, accounts, frontend, and deployment.
+- Updated the V33 compatibility assertion for the V62-owned transport inventory.
 
-## Review and artifact evidence
+## Artifact evidence
 
-- Candidate-funnel digest:
-  `218fef7d717e5c373c0390586e9dacee207b405f773e6795c4e4a6c42bec4de6`.
-- KG: `544fe547c875acb913c3d188917304b246a84997ba3cfccb586da119ac89913c`;
-  games pack: `05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed`.
-- Ranking wrapper: `ce03c2a69a98a6905dc14e4f66a143c89dafee9b689532e6d2e4266632f2b5ee`;
-  derived wrapper: `2a3ad0e2f9345396780481f72ab0a2cc144eef3b96d0ab11dc0b814182c9138a`.
-- Mobile snapshot: `387bb3bcdcccebfca9d1f5615604bc28279a087463a7162653f97972245e1665`;
+- KG: `ecd3fffa195497678bcc442ea1ae789f41358cb50be588df56731b3542b66dca`.
+- Games pack:
+  `05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed`.
+- Ranking wrapper:
+  `05343dc62cd1c262253fa1e74b8eac12bf69dd94238e429ff62fd2ec693d7025`;
+  derived wrapper: `af9fe04e9c7840cb789d2573c5be047499c03b831fe17d9bfd916e4725b5cafb`.
+- Mobile snapshot:
+  `153af3ac3bcb3db872e95a31678c6d1356382a55fbaca4cb1ee765a83a4bc316`;
   Lanț ledger: `e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29`.
-- Immutable ranking rows remain `46aabcea827c3eed9d64dd7249ea1514d4b211a5b95c4bbea2d8a825e29d86e0`;
-  derived boards remain `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
+- Immutable ranking rows remain
+  `46aabcea827c3eed9d64dd7249ea1514d4b211a5b95c4bbea2d8a825e29d86e0`.
+- Immutable derived boards remain
+  `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
+- Nodes excluding aliases, edges, puzzles, games-pack payloads, ranking rows, and derived
+  boards are unchanged; package/test mirrors are byte-identical.
 
-## Verification
+## Verification state
 
-- Source assertions, both reviewer partitions, transaction dry-run and apply, exact
-  resolution, inherited rejection checks, and the exact +48-alias-only artifact audit passed.
-- Focused V61: 6 passed. Affected V31–V33/V44/V47–V61: 149 passed. Accounts-on:
-  53 passed. Session store: 16 passed.
-- Ranking and derived checks, pack and fixture validators, strict Lanț sweep (3 checked,
-  0 flagged, 0 FAIL), fixture mirrors, Ruff, and whitespace checks passed.
-- Exact landed commit `1c42de0d52cf56fd0d49f930aaccaafbc96906f9` passed complete backend
-  and accounts-on gates on Python 3.12 and 3.14 plus frontend contracts, lint, and build in
-  GitHub Actions run `31811714317`.
+- Focused V62 passed 6/6; affected V31–V33/V44/V47–V62 passed 155/155; complete backend
+  passed 829/829; the post-bind accounts-on rerun passed 53/53; sessions passed 16/16.
+- Fixture and games-pack validators are green. Ranking is 618 total / 449 eligible; the
+  derived catalog is 336 boards.
+- Strict pending Lanț checked 3 items with 0 flagged and 0 FAIL. Fixture/ranking/derived
+  mirrors, Ruff with `--no-cache`, and global `git diff --check` are green.
+- Exact-head remote CI has not run because V62 is uncommitted.
 
-## Production deployment evidence
+## Production state
 
-- The anonymous production stack was upgraded from V48 `d59caed` to exact V61 on
-  2026-08-14. The host checkout is clean at `1c42de0d52cf56fd0d49f930aaccaafbc96906f9`;
-  the app is healthy with zero restarts.
-- `rollback-d59caed` points to the previous image ID prefix `sha256:d18295ae`; the deployed
-  image ID begins `sha256:efa179af`.
-- Accounts and debug are off, `CAT_SUBMISSIONS_DIR` is absent, and submissions return HTTP
-  503. No accounts stack, database, OAuth, extra workers, or infrastructure were enabled.
-- `/api/manifest` reports `fixture-v61-home-care-and-maintenance-morphology`, public content
-  hash `sha256:bfc3e868f49d8e07f23e2895c3010ecb9bd966dbfef6e5b543157937e49a1699`, and counts
-  2,364 nodes / 9,217 edges / 180 puzzles.
-- `/api/health`, `/healthz`, `/api/me`, all 14 `/api/categories` rows, and seeded Intrusul
-  and Perechi creation passed. Preserve the rollback tag; never use `down -v` or Docker prune.
+- Production remains on V61; V62 has not been deployed.
+- Accounts and debug remain off, submissions remain disabled, and no database, OAuth, extra
+  worker, frontend, DNS, TLS, or infrastructure change is authorized by this wave.
 
 ## Risks and manual review
 
-- Both rejected `cheie` forms remain absent from exact, projection, and fuzzy paths.
-- The 48 accepted aliases have their intended unique owners and open no route for inherited
-  rejected surfaces; package/test mirrors and invariant payloads match.
+- Both rejected port forms must remain absent from exact, projection, and fuzzy resolution.
+- Every accepted qualifier needs one normalized owner and an already-legal Lanț predecessor;
+  aliases must not create graph edges or broaden projection resolution.
+- The alias-only artifact audit confirms exactly +48 aliases and preserves all immutable
+  payloads; final review must still confirm no unrelated file entered the change.
 
 ## Release result
 
-V61 is landed, pushed, exact-CI-green, and deployed to anonymous production. Accounts and
-submissions remain off.
+V62 is intentionally uncommitted, unlanded, and undeployed for review. Do not merge until
+exact-head remote CI is green.
