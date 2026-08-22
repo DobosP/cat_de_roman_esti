@@ -2,9 +2,9 @@
 
 _As of 2026-08-22. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-22 (V65 local gate matrix 6/173/853/53/16 is green; V64 is
-landed on final `main` at `156736a04c705406625ca4ef35752cd41a558187`, with exact
-GitHub Actions run `32530075329` green)._
+_Last verified: 2026-08-22 (exact V65 feature commit
+`502ea4004fc0fac391a6a74d8a8c619334eb057c`; GitHub Actions run `32557087552` passed
+frontend and backend gates on Python 3.12 and 3.14)._
 
 ## Current work — V65 music-and-performance case morphology
 
@@ -22,8 +22,8 @@ GitHub Actions run `32530075329` green)._
   green. Strict Lanț also reports 16 pack-level WARN only.
 - Focused V65 passed 6/6; affected V31–V33/V44/V47–V65 passed 173/173; exact full
   backend collection and execution passed 853/853; accounts-on passed 53/53; sessions
-  passed 16/16; Ruff with `--no-cache` and whitespace checks are green. V65 CI has not run.
-- V65 is uncommitted and unlanded in its feature worktree.
+  passed 16/16; Ruff with `--no-cache` and whitespace checks are green.
+- Exact feature CI run `32557087552` is green; V65 remains unlanded and undeployed.
 
 ## Landed baseline and preserved inventory
 
@@ -84,7 +84,7 @@ git diff --check
 
 ## Next verified work
 
-- Keep V65 unlanded until its own exact-head CI is green.
+- Require exact-head CI on the release-evidence commit before any fast-forward to `main`.
 - Keep _notei_, _notelor_, every earlier rejected/held form, projections, topology, payloads,
   sessions, accounts, frontend, and deployment unchanged.
-- Keep production on V61; V62–V65 remain undeployed.
+- Keep V65 unlanded and production on V61 until release-evidence CI is green.

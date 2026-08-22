@@ -9,7 +9,9 @@
 - The fixed V65 funnel contains 50 normalized-unique music-and-performance case surfaces.
   It adds exactly 48 aliases across 24 existing owners while rejecting _notei_ and
   _notelor_ because neither ordinary form has one safely bounded musical sense.
-- V65 is uncommitted and unlanded in its feature worktree. CI has not run.
+- V65 is committed and pushed at exact feature head
+  `502ea4004fc0fac391a6a74d8a8c619334eb057c`; GitHub Actions run `32557087552` is green.
+  It remains unlanded and undeployed.
 
 ## Frozen review contract
 
@@ -59,7 +61,9 @@
 - Accounts-on passed 53/53; word-game sessions passed 16/16; Ruff with `--no-cache` and
   global whitespace checks are green.
 - Package/test mirrors, exact +48 delta, resolver/protected-surface, inherited-binding,
-  immutable-payload, and source-coupling audits are green. V65 CI has not run.
+  immutable-payload, and source-coupling audits are green.
+- Exact feature CI run `32557087552` passed frontend and backend gates on Python 3.12 and
+  3.14 for `502ea4004fc0fac391a6a74d8a8c619334eb057c`.
 
 ## Production state
 
@@ -78,5 +82,5 @@
 
 ## Release result
 
-V65 is locally green and ready for review. It remains intentionally uncommitted and
-unlanded, so exact-head CI has not run. Production remains on exact V61.
+V65's exact feature commit is green. It remains unlanded and undeployed; require exact-head
+CI on this release-evidence update before any fast-forward to `main`. Production remains V61.
