@@ -9,9 +9,9 @@
 - The fixed V65 funnel contains 50 normalized-unique music-and-performance case surfaces.
   It adds exactly 48 aliases across 24 existing owners while rejecting _notei_ and
   _notelor_ because neither ordinary form has one safely bounded musical sense.
-- V65 is committed and pushed at exact feature head
-  `502ea4004fc0fac391a6a74d8a8c619334eb057c`; GitHub Actions run `32557087552` is green.
-  It remains unlanded and undeployed.
+- V65 landed and was pushed at `aefcc2c64feda8b18bd66d68f5330bfe75c1d9de`; exact
+  GitHub Actions run `32557471621` and feature run `32557087552` are green.
+- Anonymous production was upgraded from V61 to exact V65 on 2026-08-22.
 
 ## Frozen review contract
 
@@ -65,12 +65,19 @@
 - Exact feature CI run `32557087552` passed frontend and backend gates on Python 3.12 and
   3.14 for `502ea4004fc0fac391a6a74d8a8c619334eb057c`.
 
-## Production state
+## Production deployment evidence
 
-- Production remains on exact V61 `1c42de0d52cf56fd0d49f930aaccaafbc96906f9`.
-- Accounts and debug remain off, submissions remain disabled, and V65 changes no database,
-  OAuth, worker, session, frontend, DNS, TLS, or infrastructure behavior.
-- V62–V65 are not deployed.
+- The production host checkout is clean at exact V65
+  `aefcc2c64feda8b18bd66d68f5330bfe75c1d9de`; the healthy app image begins
+  `sha256:71f3e2cc`, has zero restarts, and is tagged `release-aefcc2c64fed`.
+- `rollback-1c42de0` preserves the previous V61 image `sha256:efa179af`. Caddy was not
+  recreated; no env, DNS, TLS, database, OAuth, extra worker, or infrastructure changed.
+- Accounts and debug are off, `CAT_SUBMISSIONS_DIR` is absent, and submissions return HTTP 503.
+- The public manifest reports `fixture-v65-music-and-performance-morphology`, content hash
+  `sha256:6670819a1eefe0b15b7d410371c713515f54196f8d340ed7da959ec69057ba15`,
+  and 2,364 nodes / 9,217 edges / 180 puzzles.
+- Runtime KG/pack/ranking/derived hashes match the V65 pins. Health, healthz, all 14 populated
+  categories, seeded Intrusul/Perechi, and the V65 resolver/rejection probes pass.
 
 ## Risks and manual review
 
@@ -82,5 +89,5 @@
 
 ## Release result
 
-V65's exact feature commit is green. It remains unlanded and undeployed; require exact-head
-CI on this release-evidence update before any fast-forward to `main`. Production remains V61.
+V65 is landed, pushed, exact-CI-green, and deployed to anonymous production. Require exact
+CI on this rollout record before V66 starts from the final V65 `main` head.

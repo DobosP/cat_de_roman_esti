@@ -2,9 +2,9 @@
 
 _As of 2026-08-22. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-22 (exact V65 feature commit
-`502ea4004fc0fac391a6a74d8a8c619334eb057c`; GitHub Actions run `32557087552` passed
-frontend and backend gates on Python 3.12 and 3.14)._
+_Last verified: 2026-08-22 (V65 landed and was pushed at
+`aefcc2c64feda8b18bd66d68f5330bfe75c1d9de`; exact GitHub Actions run `32557471621`
+and anonymous production smokes are green)._
 
 ## Current work — V65 music-and-performance case morphology
 
@@ -23,7 +23,8 @@ frontend and backend gates on Python 3.12 and 3.14)._
 - Focused V65 passed 6/6; affected V31–V33/V44/V47–V65 passed 173/173; exact full
   backend collection and execution passed 853/853; accounts-on passed 53/53; sessions
   passed 16/16; Ruff with `--no-cache` and whitespace checks are green.
-- Exact feature CI run `32557087552` is green; V65 remains unlanded and undeployed.
+- V65 landed and was pushed at `aefcc2c64feda8b18bd66d68f5330bfe75c1d9de`; exact
+  landed-head CI run `32557471621` and feature run `32557087552` are green.
 
 ## Landed baseline and preserved inventory
 
@@ -64,11 +65,14 @@ remain invariant.
 
 - Sessions retain the 7,200-second sliding TTL, 1,000-entry per-game LRU cap, per-entry
   locks, 64 KiB request ceiling, deterministic selection, and server-private answers.
-- Anonymous production remains on exact landed V61
-  `1c42de0d52cf56fd0d49f930aaccaafbc96906f9`; accounts and debug are off, submissions are
-  disabled, and the prior V48 rollback image remains retained.
-- No account, submission, database, worker, frontend, DNS, TLS, or infrastructure change is
-  in scope. V62–V65 are not deployed.
+- Anonymous production was upgraded from V61 to exact landed V65
+  `aefcc2c64feda8b18bd66d68f5330bfe75c1d9de` on 2026-08-22. The app image begins
+  `sha256:71f3e2cc`; `rollback-1c42de0` preserves prior image `sha256:efa179af`.
+- Accounts and debug are off, submissions return HTTP 503, and the app is healthy with zero
+  restarts. No database, OAuth, extra worker, frontend, DNS, TLS, or infrastructure changed.
+- The public manifest reports the V65 build, content hash
+  `sha256:6670819a1eefe0b15b7d410371c713515f54196f8d340ed7da959ec69057ba15`,
+  and counts 2,364/9,217/180. Health, healthz, all 14 categories, Intrusul, and Perechi pass.
 
 ## Reproduction
 
@@ -84,7 +88,7 @@ git diff --check
 
 ## Next verified work
 
-- Require exact-head CI on the release-evidence commit before any fast-forward to `main`.
+- Require exact-head CI on this rollout record, then start V66 from that final landed head.
 - Keep _notei_, _notelor_, every earlier rejected/held form, projections, topology, payloads,
   sessions, accounts, frontend, and deployment unchanged.
-- Keep V65 unlanded and production on V61 until release-evidence CI is green.
+- Keep production on exact V65 and preserve `rollback-1c42de0` through the next rollout.
