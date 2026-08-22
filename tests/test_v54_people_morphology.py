@@ -48,10 +48,10 @@ _LEDGER = _ROOT / "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 _REVIEW = _ROOT / "docs/reviews/v54-people-morphology/vocabulary.json"
 
-_KG_SHA256 = "d8db3ca58272e26192c9e0a3b556fc796c15dc4cec9d828f67a1245cf75d90b3"
+_KG_SHA256 = "412dce67a5c49803e0a31d4e5453b32187449e15da2ebe0b0e430457668c2bf7"
 _PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
-_RANKINGS_SHA256 = "e9a5acd3fc62753912728dc6ca5f8a9e2ead00edfba14ef7f44a3e752fb6e13e"
-_DERIVED_SHA256 = "39a77d724ad4436d0529ceeaf87e46e9cbf3a85661a60b3ca09f141211652089"
+_RANKINGS_SHA256 = "c9a3c678240631f9622a508126d6ad39158624052019d8478bbdbc14f9850849"
+_DERIVED_SHA256 = "a28539995c1ac5e95ee6c87ba1302edab4067e4dc614678a7cd2680d8b73ae4b"
 _CANDIDATE_FUNNEL_SHA256 = (
     "e826810d2b8a88b8034e21c28336faa7d6d55e2801d62bde4ec6dccfdd87a2bb"
 )
@@ -173,12 +173,12 @@ def test_v54_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     assert all(resolve_projection(surface) is None for surface in set(aliases) | _REJECTED)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert fixture["meta"]["build_version"] == (
-        "fixture-v64-history-and-heritage-morphology"
+        "fixture-v65-music-and-performance-morphology"
     )
     assert fixture["meta"]["counts"]["nodes"] == 2364
     assert fixture["meta"]["counts"]["edges"] == 9217
     assert fixture["meta"]["counts"]["puzzles"] == 180
-    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8114
+    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8162
 
 
 def test_v54_aliases_play_in_contexto_and_only_on_existing_legal_lant_hops() -> None:
@@ -273,7 +273,7 @@ def test_v54_mobile_contract_and_v49_ledger_persist_exactly() -> None:
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
     assert checked_in["manifest"]["build_version"] == (
-        "fixture-v64-history-and-heritage-morphology"
+        "fixture-v65-music-and-performance-morphology"
     )
     assert checked_in["manifest"]["counts"] == {
         "nodes": 2364,

@@ -1,7 +1,7 @@
 # ADR-0088: Bound history and heritage case morphology
 
 Date: 2026-08-21
-Status: accepted
+Status: superseded-by ADR-0089
 
 ## Decision
 
