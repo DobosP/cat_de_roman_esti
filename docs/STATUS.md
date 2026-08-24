@@ -2,8 +2,9 @@
 
 _As of 2026-08-24. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-24 (exact V67 full backend 865/865 in 590.85 seconds on stable
-CPU14 scheduler placement; the unchanged Alchimie timing gate passed inside the full run)._
+_Last verified: 2026-08-24 (exact V67 feature commit
+`71304f9a805c47a8328322b992541a18999b0d71`; GitHub Actions run `32772547384` passed
+frontend and backend gates on Python 3.12 and 3.14)._
 
 ## Current work — V67 online-content and social-media case morphology
 
@@ -25,7 +26,8 @@ CPU14 scheduler placement; the unchanged Alchimie timing gate passed inside the 
 - The exact full backend passed 865/865 in 590.85 seconds on stable CPU14 scheduler
   placement; the unchanged Alchimie timing gate passed inside the full run. An earlier
   loaded-host 864/865 run was contention-only and is superseded by this terminal result.
-- V67 is intentionally uncommitted, unlanded, undeployed, and has no CI run.
+- Exact feature CI run `32772547384` is green; V67 remains unlanded and undeployed
+  pending exact CI on this release-evidence update.
 
 ## Landed baseline and preserved inventory
 
@@ -85,7 +87,7 @@ git diff --check
 
 ## Next verified work
 
-- Commit the V67 feature, then require exact feature CI before any landing decision.
+- Require exact-head CI on this release-evidence commit before any landing decision.
 - Keep _fluxului_, _fluxurilor_, prior rejected/held forms, projections, topology, payloads,
   sessions, accounts, frontend, and deployment unchanged.
 - Keep production on exact V65 `aefcc2c64feda` and preserve `rollback-1c42de0`.

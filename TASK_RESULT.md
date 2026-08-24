@@ -11,8 +11,8 @@
   surfaces. It adds exactly 48 aliases across 24 existing owners while rejecting
   _fluxului_ and _fluxurilor_ because neither ordinary form has one safely bounded
   social-feed sense.
-- V67 remains intentionally uncommitted, unlanded, undeployed, and without CI until its
-  next commit.
+- V67 feature commit `71304f9a805c47a8328322b992541a18999b0d71` is pushed and
+  exact-CI-green. It remains unlanded and undeployed.
 
 ## Frozen review contract
 
@@ -66,7 +66,8 @@
   placement; the unchanged Alchimie timing gate passed inside that full run.
 - An earlier 864/865 run hit 60.69 seconds only at that timing gate while host load exceeded
   21; the terminal stable-placement run resolves that contention-only failure.
-- V67 has no commit and therefore no exact-head CI run.
+- Exact feature CI run `32772547384` passed frontend and backend gates on Python 3.12 and
+  3.14 for `71304f9a805c47a8328322b992541a18999b0d71`.
 
 ## Production state
 
@@ -84,8 +85,6 @@
 
 - _Fluxului_ and _fluxurilor_ must remain absent from exact, projection, and fuzzy
   resolution. Aliases must not create edges or broaden projection resolution.
-- V67 is implemented and all local gates are green, but it remains intentionally
-  uncommitted, unlanded, undeployed, and without CI until the next commit. Commit the
-  feature and require exact feature CI before landing. Production remains on exact V65
-  app commit
+- V67 is implemented, feature-CI-green, unlanded, and undeployed. Require exact CI on
+  this release-evidence update before landing. Production remains on exact V65 app commit
   `aefcc2c64feda8b18bd66d68f5330bfe75c1d9de`.
