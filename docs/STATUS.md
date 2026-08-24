@@ -2,9 +2,9 @@
 
 _As of 2026-08-24. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-24 (V66 local full backend 859/859 is green; V65 final `main`
-head `f8d9d435105c221457e4fe9e9bf3e81f04ed1e19` and exact GitHub Actions run
-`32558067986` remain green; anonymous production remains on app commit `aefcc2c64feda`)._
+_Last verified: 2026-08-24 (exact V66 feature commit
+`c1da6c617767f5e49ca6302ded470160c3e7919a`; GitHub Actions run `32763537804` passed
+frontend and backend gates on Python 3.12 and 3.14)._
 
 ## Current work — V66 science-and-discovery case morphology
 
@@ -26,7 +26,8 @@ head `f8d9d435105c221457e4fe9e9bf3e81f04ed1e19` and exact GitHub Actions run
   whitespace audits are green.
 - Quiet-host verification on 2026-08-24 passed the isolated Alchimie timing gate in 16.29
   seconds and the exact full backend 859/859 in 230.96 seconds.
-- V66 remains uncommitted and unlanded in its feature worktree.
+- Exact feature CI run `32763537804` is green; V66 remains unlanded pending exact CI on
+  this release-evidence update.
 
 ## Landed baseline and preserved inventory
 
@@ -88,7 +89,7 @@ git diff --check
 
 ## Next verified work
 
-- Require exact-head CI on the V66 feature commit before any landing decision.
+- Require exact-head CI on this release-evidence commit before any landing decision.
 - Keep _curentului_, _curenților_, every earlier rejected/held form, projections, topology,
   payloads, sessions, accounts, frontend, and deployment unchanged.
 - Keep production on exact V65 app commit `aefcc2c64feda` and preserve `rollback-1c42de0`.

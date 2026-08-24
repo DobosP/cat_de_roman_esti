@@ -10,7 +10,8 @@
 - The fixed V66 funnel contains 50 normalized-unique science-and-discovery case surfaces.
   It adds exactly 48 aliases across 24 existing owners while rejecting _curentului_ and
   _curenților_ because neither ordinary form has one safely bounded electricity sense.
-- V66 is uncommitted and unlanded in its feature worktree. It is not deployed.
+- V66 feature commit `c1da6c617767f5e49ca6302ded470160c3e7919a` is pushed and
+  exact-CI-green. It remains unlanded and is not deployed.
 
 ## Frozen review contract
 
@@ -59,7 +60,8 @@
   source-coupling, Ruff, and whitespace audits are green.
 - Quiet-host verification on 2026-08-24 passed the unchanged Alchimie timing gate 1/1 in
   16.29 seconds and the exact full backend 859/859 in 230.96 seconds.
-- V66 has no commit or exact-head CI evidence yet.
+- Exact feature CI run `32763537804` passed frontend and backend gates on Python 3.12 and
+  3.14 for `c1da6c617767f5e49ca6302ded470160c3e7919a`.
 
 ## Production state
 
@@ -87,6 +89,6 @@
 
 ## Release result
 
-V66 is implemented and its local gate matrix is green. It stays intentionally uncommitted,
-unlanded, and undeployed until exact-head CI; production remains on exact V65 app commit
+V66 is implemented, feature-CI-green, unlanded, and undeployed. Require exact CI on this
+release-evidence update before landing; production remains on exact V65 app commit
 `aefcc2c64feda8b18bd66d68f5330bfe75c1d9de`.
