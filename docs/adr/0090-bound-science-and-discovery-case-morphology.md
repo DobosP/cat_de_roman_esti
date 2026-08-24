@@ -1,7 +1,7 @@
 # ADR-0090: Bound science and discovery case morphology
 
 Date: 2026-08-22
-Status: accepted
+Status: superseded-by ADR-0091
 
 ## Decision
 
