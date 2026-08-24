@@ -49,12 +49,12 @@ _LEDGER = _ROOT / "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 _REVIEW = _ROOT / "docs/reviews/v65-music-and-performance-morphology/vocabulary.json"
 
-# V65 whole-artifact pins; the immutable payload pins below must not move.
-_KG_SHA256 = "412dce67a5c49803e0a31d4e5453b32187449e15da2ebe0b0e430457668c2bf7"
+# Current V66 whole-artifact pins; the immutable payload pins below must not move.
+_KG_SHA256 = "a98bc426bf3091cebf00e069296fae07adc17febdeb9da875c4f9fef4f109e8f"
 _PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
-_RANKINGS_SHA256 = "c9a3c678240631f9622a508126d6ad39158624052019d8478bbdbc14f9850849"
-_DERIVED_SHA256 = "a28539995c1ac5e95ee6c87ba1302edab4067e4dc614678a7cd2680d8b73ae4b"
-_MOBILE_SHA256 = "d5acd5d62336090b5093182bb6897443794f1c0ae858edc63d0bdf2453895430"
+_RANKINGS_SHA256 = "b76308fb2cd88768609fff0a96f7459157ec7a5ce007fd97833742bc13c8f17f"
+_DERIVED_SHA256 = "1e2ddde7f3731b0f7e36e2477b1bb2c9848e8ba766ef789c0dfc5657d67c6477"
+_MOBILE_SHA256 = "e243340676c435d0b5b8feace2f934b748bd3edbe75195370055315fbc0d3e68"
 _CANDIDATE_FUNNEL_SHA256 = (
     "abfaaf5cf29a3e3624cc401cc36b767f90e5e0ff102634c32d17111c6b2321f6"
 )
@@ -262,11 +262,13 @@ def test_v65_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     assert all(svc.resolve(surface) is None for surface in _REJECTED)
     assert all(resolve_projection(surface) is None for surface in set(aliases) | _REJECTED)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
-    assert fixture["meta"]["build_version"] == DATA.BUILD_VERSION
+    assert fixture["meta"]["build_version"] == (
+        "fixture-v66-science-and-discovery-morphology"
+    )
     assert fixture["meta"]["counts"]["nodes"] == 2364
     assert fixture["meta"]["counts"]["edges"] == 9217
     assert fixture["meta"]["counts"]["puzzles"] == 180
-    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8162
+    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8210
 
 
 def test_v65_aliases_play_in_contexto_and_only_on_existing_legal_lant_hops() -> None:
@@ -371,7 +373,9 @@ def test_v65_mobile_contract_and_v49_ledger_persist_exactly() -> None:
     assert _MOBILE_CONTRACT.read_bytes() == (
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
-    assert checked_in["manifest"]["build_version"] == DATA.BUILD_VERSION
+    assert checked_in["manifest"]["build_version"] == (
+        "fixture-v66-science-and-discovery-morphology"
+    )
     assert checked_in["manifest"]["counts"] == {
         "nodes": 2364,
         "edges": 9217,
