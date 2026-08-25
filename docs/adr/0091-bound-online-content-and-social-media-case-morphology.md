@@ -1,7 +1,7 @@
 # ADR-0091: Bound online-content and social-media case morphology
 
 Date: 2026-08-24
-Status: accepted
+Status: superseded-by ADR-0092
 
 ## Decision
 

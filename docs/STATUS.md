@@ -1,40 +1,39 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-08-24. This file is the repository's current source of truth._
+_As of 2026-08-25. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-24 (exact V67 feature commit
-`71304f9a805c47a8328322b992541a18999b0d71`; GitHub Actions run `32772547384` passed
-frontend and backend gates on Python 3.12 and 3.14)._
+_Last verified: 2026-08-25 (V68 focused 6/6, affected 191/191, exact full backend
+871/871 in 569.61 seconds on stable CPU14 scheduler placement, accounts 53/53, sessions
+16/16, validators, strict Lanț, invariant audits, Ruff, and whitespace are green)._
 
-## Current work — V67 online-content and social-media case morphology
+## Current work — V68 Romanian-language and grammar case morphology
 
 - The fixed 50-surface funnel admits exactly 48 normalized-unique, sense-qualified aliases
-  across 24 existing owners. It rejects _fluxului_ and _fluxurilor_ because the ordinary
-  forms span tide/surge, physical or information flow, and social-feed senses.
+  across 24 existing owners. It rejects _punctului_ and _punctelor_ because the ordinary
+  forms span punctuation, geometric/location, measurement, score, and viewpoint senses.
 - Candidate digest:
-  `d694a4baca37eb864e0acf9fdd9608f01b4f24346cea9589bde2931b551663e3`.
-- Build `fixture-v67-online-content-and-social-media-morphology` contains 2,364 nodes /
-  9,217 edges / 8,258 aliases / 180 puzzles: +48 aliases only. Contexto remains at 473
+  `ff4cee7a4ac2f39601a19efd3aad2a305e85303e282451ba606fe1c8b68b3377`.
+- Build `fixture-v68-romanian-language-and-grammar-morphology` contains 2,364 nodes /
+  9,217 edges / 8,306 aliases / 180 puzzles: +48 aliases only. Contexto remains at 473
   projection terms across 26 domains.
-- V67 adds no projection, node, edge, puzzle, game payload, ranking row, derived board,
+- V68 adds no projection, node, edge, puzzle, game payload, ranking row, derived board,
   account/session behavior, frontend, or deployment change.
-- Focused V67 passed 6/6; affected V31–V33/V44/V47–V67 passed 185/185; accounts-on
-  passed 53/53; sessions passed 16/16.
+- Focused V68 passed 6/6; affected V31–V33/V44/V47–V68 passed 191/191; accounts-on
+  passed 53/53; sessions passed 16/16; exact full backend passed 871/871 in 569.61 seconds
+  on stable CPU14 scheduler placement.
 - Fixture/pack/ranking/derived validators, ranking inventory 618/449, 336 derived boards,
   strict Lanț 3 checked / 0 flagged / 0 FAIL with 16 WARN, mirrors, exact-delta, inherited
   bindings, protected surfaces, immutable payloads, and source coupling are green.
-- The exact full backend passed 865/865 in 590.85 seconds on stable CPU14 scheduler
-  placement; the unchanged Alchimie timing gate passed inside the full run. An earlier
-  loaded-host 864/865 run was contention-only and is superseded by this terminal result.
-- Exact feature CI run `32772547384` is green; V67 remains unlanded and undeployed
-  pending exact CI on this release-evidence update.
+- The original six-word part-of-speech pair failed the hard alias-style validator; the
+  transaction rolled back fully. The corrected five-word pair is triple-absent and green.
+- V68 is intentionally uncommitted, unlanded, undeployed, and has no CI run.
 
 ## Landed baseline and preserved inventory
 
-- V66 is landed and pushed on final `main` head
-  `631d9b2bba6eae42903713d70aa5b051b7a78f34`. Exact feature run `32763537804`, evidence
-  run `32764788526`, and landed-main run `32765738442` are green.
-- V51–V66 accepted inventories retain their owners; every prior rejected, deferred, held,
+- V67 is landed and pushed on final `main` head
+  `46cf65f05a39b001e429c9f0a14fe0bfb611cb38`. Exact feature run `32772547384`, evidence
+  run `32773388527`, and landed-main run `32774376592` are green.
+- V51–V67 accepted inventories retain their owners; every prior rejected, deferred, held,
   or unauthored surface retains its disposition. V49 keeps 104 durable Lanț rejections.
 
 | Game | Total | Approved | Pending | Runtime eligible/preferred |
@@ -49,15 +48,15 @@ frontend and backend gates on Python 3.12 and 3.14)._
 Pack inventory remains **618 = 610 approved + 8 pending** across 14 categories. Ranked
 original-game inventory remains 618 total / 449 eligible; derived inventory remains 336.
 
-## V67 artifact pins
+## V68 artifact pins
 
-Bundled KG: `89437c8aaeb84818c9e9acbc879985f146d5dadaab04777c8820fb5d42b87f84`;
+Bundled KG: `ed247c0fbb426781c05dd81a6d38de3e3a8d5b702b558f6fd6ff9a4e565a4128`;
 pack: `05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed`;
-ranking: `dbc9410d5040215c4301096fbc195e3630a6a6d8896492414301f73a8067dd95`;
-derived: `82a2b1c5e5c7744bf79961351b451ecc12c2522c71e354606e168c7c0218481c`;
-mobile: `0b67f50f3d255e523bb72c3bf997e9439cae2a08f08c837b64016e84f29ce9c7`;
+ranking: `b521d5d698a036aa81589ba059d7c04d731dbd69a2bf1a2f6b627e881a19bfe6`;
+derived: `e7acd141a357409559a93f68514b977dbd697e19a97939afa9bb200d9d70dc97`;
+mobile: `1a9f0c5182630a1cc6fe89c28546884d5f61d6781ff374da8fc003691df70cae`;
 ledger: `e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29`.
-Frozen V66 invariants remain: nodes without aliases `c1ca327243b25415e1d7158436d00e36a3f1b53c15bc77590c9d6677d04678f0`;
+Frozen V67 invariants remain: nodes without aliases `c1ca327243b25415e1d7158436d00e36a3f1b53c15bc77590c9d6677d04678f0`;
 edges `f62f0730a3e79c1498776049d86e1013e877bc74433360b2fcfaf3f1253a89b0`;
 puzzles `3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc`;
 ranking rows `46aabcea827c3eed9d64dd7249ea1514d4b211a5b95c4bbea2d8a825e29d86e0`;
@@ -76,7 +75,7 @@ derived boards `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6
 ## Reproduction
 
 ```bash
-PYTHONPATH=. .venv/bin/python -m pytest tests/test_v67_online_content_and_social_media_morphology.py -q
+PYTHONPATH=. .venv/bin/python -m pytest tests/test_v68_romanian_language_and_grammar_morphology.py -q
 PYTHONPATH=. .venv/bin/python scripts/validate_fixture.py
 PYTHONPATH=. .venv/bin/python scripts/validate_games_pack.py
 CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=. .venv/bin/python -m pytest tests/accounts -q
@@ -87,7 +86,7 @@ git diff --check
 
 ## Next verified work
 
-- Require exact-head CI on this release-evidence commit before any landing decision.
-- Keep _fluxului_, _fluxurilor_, prior rejected/held forms, projections, topology, payloads,
+- Commit V68, then require exact feature CI before any landing decision.
+- Keep _punctului_, _punctelor_, prior rejected/held forms, projections, topology, payloads,
   sessions, accounts, frontend, and deployment unchanged.
 - Keep production on exact V65 `aefcc2c64feda` and preserve `rollback-1c42de0`.

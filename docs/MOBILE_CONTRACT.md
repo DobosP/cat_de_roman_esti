@@ -47,9 +47,9 @@ python scripts/export_openapi.py openapi.json   # or print to stdout with no arg
 ## 2. Trust manifest — `GET /api/manifest`
 
 Lets a mobile app verify its **bundled offline KG copy** is in sync with the server and pick
-the right generated types. The V67 worktree targets the following build version; generated
+the right generated types. The V68 worktree targets the following build version; generated
 hashes and verification state are recorded in `docs/STATUS.md`. This alias-only draft has
-8,258 typed aliases and does not change the manifest shape or mobile behavior. The endpoint
+8,306 typed aliases and does not change the manifest shape or mobile behavior. The endpoint
 is deterministic and side-effect-free (`data.fixture_manifest`):
 
 ```json
@@ -57,7 +57,7 @@ is deterministic and side-effect-free (`data.fixture_manifest`):
   "app": "cat_de_roman_esti",
   "schema_version": 1,          // KG record schema (APP_PACK_SCHEMA_VERSION)
   "manifest_version": 1,        // shape of THIS manifest
-  "build_version": "fixture-v67-online-content-and-social-media-morphology",
+  "build_version": "fixture-v68-romanian-language-and-grammar-morphology",
   "generated_at": "2026-06-21T00:00:00Z",
   "content_hash": "sha256:…",   // canonical hash over kg_nodes+kg_edges+kg_puzzles
   "counts": { "nodes": 2364, "edges": 9217, "puzzles": 180 }
