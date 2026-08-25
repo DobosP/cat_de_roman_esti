@@ -59,7 +59,7 @@ test("create and replay are single-flight with visible result busy state", () =>
   assert.match(gameShell, /busy = false/);
   assert.match(gameShell, /disabled=\{busy\}/);
   assert.match(gameShell, /aria-busy=\{busy \|\| undefined\}/);
-  assert.match(gameShell, /busy \? "Se pregătește…" : "Meniu"/);
+  assert.match(gameShell, /busy \? "Se pregătește…" : "Ieși"/);
 });
 
 test("Intrusul exposes the hint unlock rule to touch users", () => {

@@ -15,9 +15,9 @@ test("pilot lobby keeps the provisional fun-first game order", () => {
   assert.deepEqual(order, ["alchimie", "conexiuni", "contexto", "lant"]);
 });
 
-test("only Alchimie receives the terse first-play highlight", () => {
+test("only Intrusul receives the terse first-play highlight", () => {
   assert.equal((games.match(/featured: true/g) ?? []).length, 1);
-  assert.match(games, /key: "alchimie"[\s\S]*?featured: true/);
+  assert.match(games, /key: "intrusul"[\s\S]*?featured: true/);
   assert.equal((home.match(/Începe aici/g) ?? []).length, 2);
   assert.match(home, /g\.featured \? " game-card--featured" : ""/);
   assert.match(home, /g\.featured \? "Începe aici" : g\.tag/);
@@ -25,7 +25,11 @@ test("only Alchimie receives the terse first-play highlight", () => {
     home,
     /completedToday\s*\? "terminat azi"\s*: g\.featured\s*\? "Începe aici"\s*: g\.tag/,
   );
-  assert.match(css, /\.game-card--featured \{[\s\S]*?border-color:[\s\S]*?box-shadow:/);
+  assert.match(css, /--game-intrusul: #ffcf5c/);
+  assert.match(
+    css,
+    /\.game-card--featured \{[\s\S]*?var\(--game-intrusul\)[\s\S]*?box-shadow:/,
+  );
   assert.doesNotMatch(`${games}\n${home}`, /boardRank|board_score|qualityScore|pilotRank/i);
 });
 

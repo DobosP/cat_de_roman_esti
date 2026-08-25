@@ -2,36 +2,45 @@
 
 _As of 2026-08-26. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-26 (V68+V69 preservation 11/11, selector contracts 99/99,
-ranking 9/9, derived 33/33, generators, validators, Ruff, and mirrors are green)._
+_Last verified: 2026-08-26 (frontend 29/29, ESLint, typecheck/build, bundle/manifest/static
+parity, backend preservation 11/11 + 99/99 + 42/42 + 6/6, generators, validators, Ruff,
+mirrors, browser acceptance, and whitespace are green)._
 
-## Current work — V69 impactful Cald sau Rece targets
+## Current work — persistent game navigation and beginner entry
 
-- `ct_muzica_163` remains approved for provenance but is the sole member of the mirrored
-  V69 impact reserve. Its secret, _Refren viral_, gives the distinct ordinary concept
-  _Refren_ rank 2; neither resolver owner nor shared vocabulary changes.
-- Digest-ranked Contexto seeded and daily picks derive positive 1–5 tickets inside the
-  exact eligible category+difficulty shelf by `pilot_score` descending and stable ID.
-  Player-history exclusions apply only after those weights are fixed.
-- All 201 eligible, unique Contexto targets remain distributed across all 14 categories.
-  The music/easy shelf retains six targets, above the four-board category-daily floor.
-- Neutral/custom packs and every other game keep their prior selector. The pack, KG,
-  topology, projections, frontend, accounts, session shape, TTL, and capacity are unchanged.
-- The frozen 336-board derived payload remains byte-identical; only its ranking-bound
-  metadata and reviewed digest pin change.
-- Ranking generation reports 618 total / 448 eligible, and derived generation reports
-  336 boards; package/test ranking and derived mirrors are byte-identical.
-- V69 is unlanded, undeployed, and has no integrated-head CI run.
+- Shared game navigation is sticky below the mobile safe area and labeled `Ieși`; returning
+  to the lobby replaces history so browser Back cannot reopen an explicitly exited game.
+- Conexiuni forgets only its own active-game pointer on explicit exit from intro, board, or
+  result. Reload still resumes a live board, and Escape/Backspace still clears selection.
+- Only the compact Conexiuni next-move coach stays sticky. Feedback and earned clues remain
+  in normal flow immediately before the grid; Alchimie and other secondary sticky controls
+  share the header-safe offset.
+- Intrusul is the sole `Începe aici` recommendation. Conexiuni describes easy, normal, and
+  hard as clear groups, a balanced mix, and subtle connections.
+- Independent Chrome acceptance of the reviewed navigation snapshot kept the 44 px exit
+  visible at maximum scroll on 390 × 620, 360 × 430, and 375 × 330 viewports with zero
+  header/coach overlap. At 360 × 430 the measured gap was 7 px.
+- That acceptance also preserved the identical Conexiuni token and 16 tiles on reload.
+  Explicit exit cleared only that token, preserved unrelated/game sentinels, returned to
+  `/`, and browser Back stayed home without a board or token.
+- The integrated production build byte-matches the tracked static tree. Its manifest graph
+  has 18 entries / 37 edges / 25 referenced files, and initial JS/CSS is 118.17 KiB gzip
+  against the 120 KiB budget.
+- The work is frontend-only. It changes no server session, TTL/cap, payload, catalog,
+  scoring, content, account, infrastructure, or deployment behavior.
+- The navigation change is unlanded, undeployed, and has no exact integrated-head CI run.
 
 ## Integrated baseline and preserved inventory
 
-- Exact V68 `5e9fadf450a70e6e1b24d9a16cc7859fec6c8e99` is the integration base and is
-  landed and pushed on `main`. It retains 2,364 nodes / 9,217 edges / 8,306 aliases /
-  180 puzzles and ADR-0092's bounded Romanian-language morphology contracts.
-- V68 exact feature CI run `32907211185` is green. Exact landed-main run `32907879041`
-  is in progress; no green conclusion is recorded here yet.
-- V51–V68 accepted inventories retain their owners; every prior rejected, deferred, held,
-  or unauthored surface retains its disposition. V49 keeps 104 durable Lanț rejections.
+- Exact V69 `75255a46924bf1f4964cc3c9f24a1228b4c72d70` is the integration base. It
+  retains ADR-0093's Contexto impact reserve and filtered-shelf weighting, 201 eligible
+  Contexto targets, 618 total / 448 eligible original-game boards, and 336 derived boards.
+  V69 is unlanded; branch CI `32908368059` is in progress and is not claimed green.
+- Exact V68 `5e9fadf450a70e6e1b24d9a16cc7859fec6c8e99` is landed and pushed on
+  `main`. Feature CI `32907211185` and landed-main CI `32907879041` are green.
+- V68 retains 2,364 nodes / 9,217 edges / 8,306 aliases / 180 puzzles and ADR-0092's
+  bounded Romanian-language morphology contracts. ADR-0091 remains superseded by ADR-0092.
+- V51–V69 accepted inventories and owners remain intact; V49 keeps 104 Lanț rejections.
 
 | Game | Total | Approved | Pending | Runtime eligible/preferred |
 |---|---:|---:|---:|---:|
@@ -42,8 +51,7 @@ ranking 9/9, derived 33/33, generators, validators, Ruff, and mirrors are green)
 | Intrusul | 183 | 183 | 0 | 144 preferred |
 | Perechi | 153 | 153 | 0 | 113 preferred |
 
-Pack inventory remains **618 = 610 approved + 8 pending** across 14 categories. Ranked
-original-game inventory is 618 total / 448 eligible; derived inventory remains 336.
+Pack inventory remains **618 = 610 approved + 8 pending** across 14 categories.
 
 ## V69 artifact pins
 
@@ -59,20 +67,22 @@ puzzles `3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc`;
 ranking rows `faf7b1a5224b082619641de3565f2131e2ca425b41258cdd4df0b57e9cda7031`;
 derived boards `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
 
-## Runtime, accounts, and deployment
+## Runtime and deployment
 
 - Sessions retain the 7,200-second sliding TTL, 1,000-entry per-game LRU cap, per-entry
   locks, 64 KiB request ceiling, deterministic selection, and server-private answers.
 - Anonymous production remains on exact V65 `aefcc2c64feda8b18bd66d68f5330bfe75c1d9de`;
-  accounts and debug remain off. No deployment or infrastructure changes belong to V69.
+  accounts/debug remain off. No deployment or infrastructure changes belong to this work.
 
 ## Reproduction
 
 ```bash
+(cd frontend && npm test && npm run lint && npm run build)
+git diff --exit-code -- cat_de_roman_esti/web/static
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_v68_romanian_language_and_grammar_morphology.py tests/test_v69_contexto_impactful_targets.py -q -p no:cacheprovider
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_wordgames_contexto.py tests/test_v37_board_rankings.py -q -p no:cacheprovider
-PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_board_rankings_v37.py -q -p no:cacheprovider
-PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_v38_derived_rankings.py tests/test_v38_ranked_catalog.py -q -p no:cacheprovider
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_board_rankings_v37.py tests/test_v38_derived_rankings.py tests/test_v38_ranked_catalog.py -q -p no:cacheprovider
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_static_asset_cache.py -q -p no:cacheprovider
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python scripts/rank_games_pack.py
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python scripts/build_derived_catalog_v38.py
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python scripts/validate_fixture.py
@@ -83,7 +93,6 @@ git diff --check
 
 ## Next verified work
 
-- Require exact-head CI before any landing decision.
-- Keep `ct_muzica_163` approved but unselectable and keep V44's three-record reserve unchanged.
-- Preserve V68's _punctului_/_punctelor_ rejections, prior ownership, topology, and payloads.
+- Require exact-head CI before landing V69 or this navigation change.
+- Preserve V69's Contexto reserve/weights and V68's morphology, topology, and payloads.
 - Keep production on exact V65 `aefcc2c64feda`.

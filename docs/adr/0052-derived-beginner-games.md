@@ -1,7 +1,7 @@
 # ADR-0052: Add two ranked games from strict derived catalogs
 
 Date: 2026-07-19
-Status: accepted
+Status: accepted; lobby-recommendation clause superseded-by ADR-0094
 
 ## Decision
 

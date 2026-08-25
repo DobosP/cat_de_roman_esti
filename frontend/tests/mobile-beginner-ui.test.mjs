@@ -43,7 +43,10 @@ test("mobile layout keeps status and category rails compact with 44px targets", 
     /\.alchemy-bench > \.row:first-child \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\) auto minmax\(0, 1fr\)/,
   );
   assert.match(css, /\.connections-coach-stack \{[\s\S]*?position: sticky/);
-  assert.match(conexiuni, /className="connections-coach-stack"[\s\S]*?className="card connections-feedback col"/);
+  const coach = conexiuni.indexOf('className="connections-coach-stack"');
+  const coachEnd = conexiuni.indexOf("\n          </div>\n        )}", coach);
+  const feedback = conexiuni.indexOf('className="card connections-feedback col"');
+  assert.ok(coach > 0 && coachEnd > coach && feedback > coachEnd);
 });
 
 test("Romanian labels wrap on a responsive Connections board and long paths scroll", () => {

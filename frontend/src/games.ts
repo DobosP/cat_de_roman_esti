@@ -38,7 +38,6 @@ export const GAMES: GameDef[] = [
     accent: "#c689ff",
     glow: "#e3ccff",
     icon: "⚗️",
-    featured: true,
   },
   {
     key: "intrusul",
@@ -49,6 +48,7 @@ export const GAMES: GameDef[] = [
     accent: "#ffcf5c",
     glow: "#ffe7a3",
     icon: "🔎",
+    featured: true,
   },
   {
     key: "perechi",

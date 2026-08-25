@@ -71,11 +71,12 @@ test("Conexiuni never turns a generic duplicate rejection into one-away feedback
   assert.doesNotMatch(screen, /blockedGuess !== null \? ONE_AWAY_GUIDANCE/);
 });
 
-test("mobile recovery and clues stay in the sticky action channel above the board", () => {
+test("mobile recovery and clues stay in normal flow immediately above the board", () => {
   const coach = screen.indexOf('className="connections-coach-stack"');
+  const coachEnd = screen.indexOf("\n          </div>\n        )}", coach);
   const guidance = screen.indexOf('className="card connections-feedback col"');
   const board = screen.indexOf('className="connections-grid"');
-  assert.ok(coach > 0 && guidance > coach && board > guidance);
+  assert.ok(coach > 0 && coachEnd > coach && guidance > coachEnd && board > guidance);
   assert.match(
     screen,
     /state\?\.clues\.map\(\(clue, index\) => \(\{ key: `clue-\$\{index\}`, message: clue\.message \}\)\)/,

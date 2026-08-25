@@ -47,6 +47,12 @@ const DIFF_LABEL: Record<Difficulty, string> = {
   greu: "Greu",
 };
 
+const DIFFICULTY_OPTIONS: { id: Difficulty; label: string; hint: string }[] = [
+  { id: "usor", label: DIFF_LABEL.usor, hint: "grupuri clare" },
+  { id: "normal", label: DIFF_LABEL.normal, hint: "mix echilibrat" },
+  { id: "greu", label: DIFF_LABEL.greu, hint: "legături subtile" },
+];
+
 const GROUP_COLORS = ["#f4c95d", "#70c1b3", "#5aa9e6", "#a78bfa"] as const;
 
 // Mirrors the server's ConexiuniSession clue economy (cat_de_roman_esti/wordgames/
@@ -420,6 +426,17 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     else onToast("Nu am putut copia.", "error");
   }, [sharePayload, onToast]);
 
+  // Ieși means a deliberate exit, not a temporary route hop. Forget only this game's
+  // resume pointer before replacing the route; a page refresh never calls this and still
+  // resumes the live board through useActiveGame.
+  const handleExit = useCallback(() => {
+    active.forget();
+    setSelected([]);
+    setBlockedGuess(null);
+    setHint(null);
+    onExit();
+  }, [active, onExit]);
+
   // Keyboard: Enter submits a full selection, Escape/Backspace clears it. Inert when
   // no board is active, while a request is in flight, or once the game is finished.
   useEffect(() => {
@@ -455,7 +472,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     return (
       <div className="screen-pad fill" style={{ overflowY: "auto" }}>
         <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
-          <GameShell onExit={onExit} accent={DEF.accent} />
+          <GameShell onExit={handleExit} accent={DEF.accent} />
 
           <GameIntro
             icon={DEF.icon}
@@ -481,11 +498,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
             starting={loading}
           >
             <DifficultyPicker
-              options={(["usor", "normal", "greu"] as Difficulty[]).map((d) => ({
-                id: d,
-                label: DIFF_LABEL[d],
-                hint: d === "usor" ? "recomandat" : undefined,
-              }))}
+              options={DIFFICULTY_OPTIONS}
               value={difficulty}
               onChange={(d) => {
                 sound.playSelect();
@@ -514,7 +527,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     <div className="screen-pad fill" style={{ overflowY: "auto" }}>
       <div className="container col game-container" style={{ gap: 16, paddingBottom: 32 }}>
         {/* Header */}
-        <GameShell onExit={onExit} accent={DEF.accent} title={DEF.title}>
+        <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title}>
           <Hud>
             {state.daily && (
               <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} title="Provocarea zilei" />
@@ -593,43 +606,43 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                 </span>
               }
             />
-
-            {/* Recovery stays inside the phone's sticky action region. */}
-            <AnimatePresence>
-              {(feedback || clueMessages.length > 0) && (
-                <m.div
-                  key="connections-feedback"
-                  initial={{ opacity: 0, y: -4 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  className="card connections-feedback col"
-                >
-                  <AnimatePresence mode="wait">
-                    {feedback && (
-                      <m.span
-                        key={feedback}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        role="status"
-                        aria-live="polite"
-                      >
-                        <span aria-hidden="true">↻ </span>
-                        {feedback}
-                      </m.span>
-                    )}
-                  </AnimatePresence>
-                  {clueMessages.map(({ key, message }) => (
-                    <span key={key} role="status" aria-live="polite">
-                      <span aria-hidden="true">💡 </span>
-                      {message}
-                    </span>
-                  ))}
-                </m.div>
-              )}
-            </AnimatePresence>
           </div>
         )}
+
+        {/* Feedback stays immediately before the board without enlarging the sticky coach. */}
+        <AnimatePresence>
+          {!finished && (feedback || clueMessages.length > 0) && (
+            <m.div
+              key="connections-feedback"
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="card connections-feedback col"
+            >
+              <AnimatePresence mode="wait">
+                {feedback && (
+                  <m.span
+                    key={feedback}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    role="status"
+                    aria-live="polite"
+                  >
+                    <span aria-hidden="true">↻ </span>
+                    {feedback}
+                  </m.span>
+                )}
+              </AnimatePresence>
+              {clueMessages.map(({ key, message }) => (
+                <span key={key} role="status" aria-live="polite">
+                  <span aria-hidden="true">💡 </span>
+                  {message}
+                </span>
+              ))}
+            </m.div>
+          )}
+        </AnimatePresence>
 
         {/* Active board */}
         {!finished && (
@@ -777,7 +790,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                 active.forget();
                 setState(null);
               }}
-              onExit={onExit}
+              onExit={handleExit}
             >
               {state.mistakes} {state.mistakes === 1 ? "greșeală" : "greșeli"}
             </ResultCard>

@@ -1,6 +1,6 @@
 // GameShell — a shared header for every word game so the arcade feels cohesive.
 //
-// Renders a consistent "← Meniu" back-button (left) and a right-aligned slot for the
+// Renders a consistent "← Ieși" navigation button (left) and a right-aligned slot for the
 // game's status badges (moves, difficulty, lives, …). The optional `accent` tints the
 // title so each game keeps its own colour identity while sharing the exact same
 // layout, tap-targets, and accessibility wiring.
@@ -19,11 +19,11 @@ export function GameShell({
   onExit: () => void;
   /** Game accent colour (used for the title glyph + a11y labels). */
   accent?: string;
-  /** Optional small title shown next to the back-button. */
+  /** Optional small title shown next to the exit button. */
   title?: ReactNode;
   /** Right-aligned status badges. */
   children?: ReactNode;
-  /** Disable the menu action while the host is creating or replacing a game. */
+  /** Disable the exit action while the host is creating or replacing a game. */
   busy?: boolean;
 }) {
   return (
@@ -35,10 +35,10 @@ export function GameShell({
           onClick={onExit}
           disabled={busy}
           aria-busy={busy || undefined}
-          aria-label={busy ? "Se pregătește jocul" : "Înapoi la meniu"}
+          aria-label={busy ? "Se pregătește jocul" : "Ieși la lista de jocuri"}
         >
           <span aria-hidden>{busy ? "⏳" : "←"}</span>{" "}
-          {busy ? "Se pregătește…" : "Meniu"}
+          {busy ? "Se pregătește…" : "Ieși"}
         </Button>
         {title && (
           <strong

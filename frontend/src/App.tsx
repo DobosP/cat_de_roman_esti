@@ -63,7 +63,7 @@ export default function App() {
     [dismissToast],
   );
 
-  const goHome = useCallback(() => navigate("/"), [navigate]);
+  const goHome = useCallback(() => navigate("/", { replace: true }), [navigate]);
 
   return (
     <MotionConfig reducedMotion="user">
