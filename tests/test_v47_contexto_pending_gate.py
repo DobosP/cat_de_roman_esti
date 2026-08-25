@@ -40,8 +40,8 @@ _TEST_DERIVED = _ROOT / "tests/fixtures/derived_catalog_v38.json"
 
 _PENDING_ID_SET_SHA256 = "508ac4014f6c519fc0891b92474e683e9a26078e86091cee8ee77a1aa10e97c1"
 _PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
-_RANKINGS_SHA256 = "b521d5d698a036aa81589ba059d7c04d731dbd69a2bf1a2f6b627e881a19bfe6"
-_DERIVED_SHA256 = "e7acd141a357409559a93f68514b977dbd697e19a97939afa9bb200d9d70dc97"
+_RANKINGS_SHA256 = "c32b648885cf9d0aad718bda9c1dcbd86f49ddda6819ceb14a7c372e32ddb424"
+_DERIVED_SHA256 = "9199f60c41d334f620403ca68926790b57292d71761175a470ba7385af52da91"
 _FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
 
 _PROMOTED = {"ct_gastronomie_300"}
@@ -207,7 +207,7 @@ def test_v47_pack_applies_only_the_bound_outcomes_and_keeps_unique_live_targets(
         if row["game"] == "contexto" and row["pilot_eligible"]
     }
     eligible_targets = [contexto[item_id]["target"] for item_id in eligible_ids]
-    assert len(eligible_ids) == len(eligible_targets) == len(set(eligible_targets)) == 202
+    assert len(eligible_ids) == len(eligible_targets) == len(set(eligible_targets)) == 201
 
 
 def test_v47_archive_preserves_every_removed_record_binding_without_a_ledger() -> None:
@@ -236,7 +236,7 @@ def test_v47_rankings_and_frozen_derived_catalog_track_the_clean_pack() -> None:
     assert rankings["meta"]["counts"] == {
         "total": 618,
         "approved": 610,
-        "pilot_eligible": 449,
+        "pilot_eligible": 448,
         "by_game": {
             "conexiuni": 232,
             "contexto": 207,
@@ -245,7 +245,7 @@ def test_v47_rankings_and_frozen_derived_catalog_track_the_clean_pack() -> None:
         },
         "eligible_by_game": {
             "conexiuni": 74,
-            "contexto": 202,
+            "contexto": 201,
             "lant": 94,
             "alchimie": 79,
         },

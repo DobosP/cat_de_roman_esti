@@ -244,7 +244,7 @@ def test_artifact_is_complete_exactly_bound_and_byte_identical(generated: dict) 
     assert meta["counts"] == {
         "total": 618,
         "approved": 610,
-        "pilot_eligible": 449,
+        "pilot_eligible": 448,
         "by_game": {
             "conexiuni": 232,
             "contexto": 207,
@@ -253,7 +253,7 @@ def test_artifact_is_complete_exactly_bound_and_byte_identical(generated: dict) 
         },
         "eligible_by_game": {
             "conexiuni": 74,
-            "contexto": 202,
+            "contexto": 201,
             "lant": 94,
             "alchimie": 79,
         },
@@ -368,7 +368,7 @@ def test_ranks_and_selection_quintiles_recompute_exactly(generated: dict) -> Non
 def test_default_checker_is_green_and_prints_a_human_audit(capsys) -> None:
     assert RANK.main(["rank_games_pack.py"]) == 0
     output = capsys.readouterr().out
-    assert "618 total / 449 pilot-eligible" in output
+    assert "618 total / 448 pilot-eligible" in output
     assert "conexiuni" in output and "contexto" in output
     assert "lant" in output and "alchimie" in output
     assert "top:" in output

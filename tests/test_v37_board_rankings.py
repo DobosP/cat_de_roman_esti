@@ -30,6 +30,7 @@ def _item(
     item_id: str,
     *,
     weight: int = 1,
+    score: int = 50,
     eligible: bool = True,
     category: str = "istorie",
     difficulty: str = "normal",
@@ -42,6 +43,7 @@ def _item(
         source="ai",
         status="approved",
         payload={"target": "n_dacia"},
+        _pilot_score=score,
         _pilot_eligible=eligible,
         _selection_weight=weight,
     )
@@ -329,6 +331,72 @@ def test_neutral_seeded_selection_keeps_historical_choice_sequence():
     for seed in range(100):
         expected = random.Random(seed).choice(ordered)
         assert pack.pick_seeded("contexto", random.Random(seed)).id == expected.id
+        assert (
+            pack.pick_seeded(
+                "contexto",
+                random.Random(seed),
+                filtered_shelf_weights=True,
+            ).id
+            == expected.id
+        )
+
+
+def test_ranked_filtered_shelf_seeded_weights_are_relative_and_order_independent():
+    items = [
+        _item("ct_high", score=90, weight=1),
+        _item("ct_middle", score=60, weight=1),
+        _item("ct_low", score=10, weight=5),
+    ]
+    forward = GamesPack(items, ranked=True)
+    reverse = GamesPack(list(reversed(items)), ranked=True)
+    counts: Counter[str] = Counter()
+
+    for seed in range(2_000):
+        left = forward.pick_seeded(
+            "contexto",
+            random.Random(seed),
+            filtered_shelf_weights=True,
+        )
+        right = reverse.pick_seeded(
+            "contexto",
+            random.Random(seed),
+            filtered_shelf_weights=True,
+        )
+        assert left is not None and right is not None and left.id == right.id
+        counts[left.id] += 1
+
+    assert counts["ct_high"] > counts["ct_low"] * 2
+    assert counts["ct_low"] > 0
+
+
+def test_ranked_filtered_shelf_weights_are_fixed_before_history_exclusions():
+    items = [
+        _item("ct_high", score=90),
+        _item("ct_middle", score=60),
+        _item("ct_low", score=10),
+    ]
+    pack = GamesPack(items, ranked=True)
+    retained = sorted(items[1:], key=lambda item: item.id)
+    # The complete three-item shelf assigns high/middle/low = 5/4/2. After excluding
+    # high, middle and low must keep 4/2 rather than being recomputed to 5/3.
+    original_weights = {"ct_middle": 4, "ct_low": 2}
+
+    for seed in range(100):
+        expected_rng = random.Random(seed)
+        ticket = expected_rng.randrange(sum(original_weights.values()))
+        expected = None
+        for item in retained:
+            ticket -= original_weights[item.id]
+            if ticket < 0:
+                expected = item
+                break
+        actual = pack.pick_seeded(
+            "contexto",
+            random.Random(seed),
+            exclude_ids={"ct_high"},
+            filtered_shelf_weights=True,
+        )
+        assert expected is not None and actual == expected
 
 
 def test_weighted_seeded_selection_is_deterministic_and_order_independent():
@@ -444,6 +512,37 @@ def test_weighted_daily_is_stable_order_independent_and_keeps_low_reachable():
         counts[left.id] += 1
 
     assert counts["ct_high"] > counts["ct_low"] * 3
+    assert counts["ct_low"] > 0
+
+
+def test_ranked_filtered_shelf_daily_weights_are_relative_and_order_independent():
+    items = [
+        _item("ct_high", score=90, weight=1),
+        _item("ct_middle", score=60, weight=1),
+        _item("ct_low", score=10, weight=5),
+    ]
+    forward = GamesPack(items, ranked=True)
+    reverse = GamesPack(list(reversed(items)), ranked=True)
+    counts: Counter[str] = Counter()
+
+    for day in range(2_000):
+        key = f"v69-day-{day}"
+        left = forward.pick_daily(
+            "contexto",
+            key,
+            min_pool=1,
+            filtered_shelf_weights=True,
+        )
+        right = reverse.pick_daily(
+            "contexto",
+            key,
+            min_pool=1,
+            filtered_shelf_weights=True,
+        )
+        assert left is not None and right is not None and left.id == right.id
+        counts[left.id] += 1
+
+    assert counts["ct_high"] > counts["ct_low"] * 2
     assert counts["ct_low"] > 0
 
 

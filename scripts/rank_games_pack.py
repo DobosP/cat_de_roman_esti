@@ -353,11 +353,18 @@ _DEMOTIONS_PATH = _REPO_ROOT / "cat_de_roman_esti/fixtures/board_demotions_v43.j
 _CONTEXTO_DEMOTIONS_PATH = (
     _REPO_ROOT / "cat_de_roman_esti/fixtures/contexto_demotions_v44.json"
 )
-_DEMOTION_PATHS = (_DEMOTIONS_PATH, _CONTEXTO_DEMOTIONS_PATH)
+_CONTEXTO_IMPACT_RESERVE_PATH = (
+    _REPO_ROOT / "cat_de_roman_esti/fixtures/contexto_impact_reserve_v69.json"
+)
+_DEMOTION_PATHS = (
+    _DEMOTIONS_PATH,
+    _CONTEXTO_DEMOTIONS_PATH,
+    _CONTEXTO_IMPACT_RESERVE_PATH,
+)
 
 
 def _owner_demotions() -> frozenset[str]:
-    """ADR-0066/0067/0068: approved reserve boards stay out of selection.
+    """ADR-0066/0067/0068/0093: approved reserve boards stay out of selection.
 
     This preserves the ADR-0055 reserve model and derived-game source invariants.
     """

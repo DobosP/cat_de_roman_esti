@@ -166,7 +166,7 @@ def test_every_proxy_anchor_reaches_every_selectable_unique_target() -> None:
     targets = {target_by_id[row["id"]] for row in eligible}
     svc = get_service()
 
-    assert len(eligible) == len(targets) == 202
+    assert len(eligible) == len(targets) == 201
     for anchor_id in set(COMMON_FEEDBACK_PROXIES.values()):
         assert targets <= set(svc.distances_from(anchor_id))
     for node_id in COMMON_FEEDBACK_PROXIES:

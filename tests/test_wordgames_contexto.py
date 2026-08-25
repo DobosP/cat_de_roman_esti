@@ -68,7 +68,12 @@ def _target_of(seed: int = SEED, difficulty: str = "normal"):
     from cat_de_roman_esti.wordgames.service import get_service
 
     svc = get_service()
-    curated = get_pack().pick_seeded("contexto", random.Random(seed), difficulty=difficulty)
+    curated = get_pack().pick_seeded(
+        "contexto",
+        random.Random(seed),
+        difficulty=difficulty,
+        filtered_shelf_weights=True,
+    )
     target = str(curated.payload["target"]) if curated else _pick_target(seed, difficulty).target
     # A genuine incoming distance-1 guess. Contexto distance is directed guess -> target,
     # so an outgoing target neighbour is not necessarily a valid hot guess.

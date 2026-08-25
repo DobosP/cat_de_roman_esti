@@ -39,8 +39,8 @@ _VERDICTS_SHA256 = "e14ceab934c7e19ce8a2f1a2cdcf9e03650654e5ae268fa6e04f51401368
 _PROJECTION_SHA256 = "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c"
 _PRE_APPLY_PACK_SHA256 = "c4542d4201c45b04f58563eb08aa2ba0973389f453f5181f53066a88df550d05"
 _PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
-_RANKINGS_SHA256 = "b521d5d698a036aa81589ba059d7c04d731dbd69a2bf1a2f6b627e881a19bfe6"
-_DERIVED_SHA256 = "e7acd141a357409559a93f68514b977dbd697e19a97939afa9bb200d9d70dc97"
+_RANKINGS_SHA256 = "c32b648885cf9d0aad718bda9c1dcbd86f49ddda6819ceb14a7c372e32ddb424"
+_DERIVED_SHA256 = "9199f60c41d334f620403ca68926790b57292d71761175a470ba7385af52da91"
 _FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
 _KG_SHA256 = "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12"
 _RUBRIC_SHA256 = "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3"
@@ -362,7 +362,7 @@ def test_v48_pack_rankings_and_frozen_derived_mirrors_track_the_gate() -> None:
     assert rankings["meta"]["counts"] == {
         "total": 618,
         "approved": 610,
-        "pilot_eligible": 449,
+        "pilot_eligible": 448,
         "by_game": {
             "conexiuni": 232,
             "contexto": 207,
@@ -371,7 +371,7 @@ def test_v48_pack_rankings_and_frozen_derived_mirrors_track_the_gate() -> None:
         },
         "eligible_by_game": {
             "conexiuni": 74,
-            "contexto": 202,
+            "contexto": 201,
             "lant": 94,
             "alchimie": 79,
         },

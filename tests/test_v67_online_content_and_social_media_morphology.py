@@ -54,16 +54,16 @@ _LEDGER = _ROOT / "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 _REVIEW = _ROOT / "docs/reviews/v67-online-content-and-social-media-morphology/vocabulary.json"
 
-# Current V68 whole-artifact pins; the immutable payload pins below must not move.
+# Current V69 whole-artifact pins; the immutable payload pins below must not move.
 _KG_SHA256 = "ed247c0fbb426781c05dd81a6d38de3e3a8d5b702b558f6fd6ff9a4e565a4128"
-_RANKINGS_SHA256 = "b521d5d698a036aa81589ba059d7c04d731dbd69a2bf1a2f6b627e881a19bfe6"
-_DERIVED_SHA256 = "e7acd141a357409559a93f68514b977dbd697e19a97939afa9bb200d9d70dc97"
+_RANKINGS_SHA256 = "c32b648885cf9d0aad718bda9c1dcbd86f49ddda6819ceb14a7c372e32ddb424"
+_DERIVED_SHA256 = "9199f60c41d334f620403ca68926790b57292d71761175a470ba7385af52da91"
 _MOBILE_SHA256 = "1a9f0c5182630a1cc6fe89c28546884d5f61d6781ff374da8fc003691df70cae"
 
 # Immutable payload pins must not move during this alias-only wave.
 _PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
 _CANDIDATE_FUNNEL_SHA256 = "d694a4baca37eb864e0acf9fdd9608f01b4f24346cea9589bde2931b551663e3"
-_RANKING_ROWS_SHA256 = "46aabcea827c3eed9d64dd7249ea1514d4b211a5b95c4bbea2d8a825e29d86e0"
+_RANKING_ROWS_SHA256 = "faf7b1a5224b082619641de3565f2131e2ca425b41258cdd4df0b57e9cda7031"
 _FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
 _NODES_WITHOUT_ALIASES_SHA256 = "c1ca327243b25415e1d7158436d00e36a3f1b53c15bc77590c9d6677d04678f0"
 _EDGES_SHA256 = "f62f0730a3e79c1498776049d86e1013e877bc74433360b2fcfaf3f1253a89b0"

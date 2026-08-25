@@ -464,7 +464,15 @@ class GamesPack:
         category: str | None = None,
         difficulty: str | None = None,
         exclude_ids: set[str] | None = None,
+        filtered_shelf_weights: bool = False,
     ) -> CuratedItem | None:
+        """Pick deterministically from one exact filter shelf.
+
+        ``filtered_shelf_weights`` is an opt-in for a digest-ranked caller: derive
+        relative score quintiles within this category+difficulty shelf. Neutral/custom
+        packs and callers that omit the flag retain their historical behavior.
+        """
+        effective_weights: dict[str, int] | None = None
         if self._ranked:
             pool = [
                 item
@@ -475,6 +483,11 @@ class GamesPack:
             ]
             if not pool:
                 return None
+            if filtered_shelf_weights:
+                # Rank this exact eligible category+difficulty shelf before private
+                # history is applied. Excluding a finished board must not promote or
+                # demote the remaining boards differently for each player.
+                effective_weights = _filtered_shelf_weights(pool)
             if exclude_ids:
                 unfinished = [item for item in pool if item.id not in exclude_ids]
                 if unfinished:
@@ -494,10 +507,15 @@ class GamesPack:
 
         # Integer tickets avoid float/version drift while retaining every item with a
         # positive weight. With neutral weight=1 this is exactly the old choice shape.
-        total = sum(_selection_weight(item) for item in pool)
+        def _weight(item: CuratedItem) -> int:
+            if effective_weights is not None:
+                return effective_weights[item.id]
+            return _selection_weight(item)
+
+        total = sum(_weight(item) for item in pool)
         ticket = rng.randrange(total)
         for item in pool:
-            ticket -= _selection_weight(item)
+            ticket -= _weight(item)
             if ticket < 0:
                 return item
         raise AssertionError("weighted curated selection exhausted its ticket range")
@@ -510,6 +528,7 @@ class GamesPack:
         category: str | None = None,
         difficulty: str | None = None,
         min_pool: int | None = None,
+        filtered_shelf_weights: bool = False,
     ) -> CuratedItem | None:
         """Rendezvous-ticket pick: stable for unchanged (day, filters, sidecar).
 
@@ -524,7 +543,8 @@ class GamesPack:
         (``CURATED_CATEGORY_DAILY_MIN_POOL``); a shelf below it would pin one board
         for that category forever, so curated selection declines and leaves the caller's
         category-aware fallback in control. An explicit ``min_pool`` keeps the exact
-        floor it asks for."""
+        floor it asks for. ``filtered_shelf_weights`` is the same opt-in relative
+        weighting mode as :meth:`pick_seeded`; neutral/custom packs ignore it."""
         if min_pool is None:
             if category is not None:
                 min_pool = CURATED_CATEGORY_DAILY_MIN_POOL
@@ -533,10 +553,13 @@ class GamesPack:
         pool = self.pool(game, category=category, difficulty=difficulty)
         floor = max(1, min_pool)
         preferred = [item for item in pool if item._pilot_eligible]
+        effective_weights: dict[str, int] | None = None
         if self._ranked:
             pool = preferred
             if len(pool) < floor:
                 return None
+            if filtered_shelf_weights:
+                effective_weights = _filtered_shelf_weights(pool)
         else:
             if len(pool) < floor:
                 return None
@@ -546,7 +569,12 @@ class GamesPack:
         def _weight(item: CuratedItem) -> tuple[bytes, str]:
             base = f"{daily}:{game}:{category or ''}:{difficulty or ''}:{item.id}"
             tickets = [hashlib.blake2b(base.encode(), digest_size=8).digest()]
-            for ticket in range(1, _selection_weight(item)):
+            weight = (
+                effective_weights[item.id]
+                if effective_weights is not None
+                else _selection_weight(item)
+            )
+            for ticket in range(1, weight):
                 versioned = f"{base}:v37:{ticket}"
                 tickets.append(hashlib.blake2b(versioned.encode(), digest_size=8).digest())
             return min(tickets), item.id
@@ -559,6 +587,21 @@ def _selection_weight(item: CuratedItem) -> int:
     value = item._selection_weight
     valid = isinstance(value, int) and not isinstance(value, bool) and 1 <= value <= 5
     return value if valid else 1
+
+
+def _filtered_shelf_weights(items: list[CuratedItem]) -> dict[str, int]:
+    """Return positive quintile tickets relative to one already-filtered shelf.
+
+    Global V37 weights compare a Contexto target with every target in the game. For a
+    chosen category and difficulty, those global quintiles can flatten a small shelf
+    even when its score spread is meaningful. This helper keeps every retained board
+    reachable while deterministically mapping that exact eligible shelf to 1..5 tickets.
+    """
+    ordered = sorted(items, key=lambda item: (-item._pilot_score, item.id))
+    count = len(ordered)
+    if not count:
+        return {}
+    return {item.id: 5 - min(4, (5 * index) // count) for index, item in enumerate(ordered)}
 
 
 def normalized_text_sha256(path: Path) -> str:

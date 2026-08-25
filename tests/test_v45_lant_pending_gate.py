@@ -141,7 +141,7 @@ def test_v45_rankings_and_frozen_derived_catalog_track_the_clean_pack() -> None:
     assert rankings["meta"]["counts"] == {
         "total": 618,
         "approved": 610,
-        "pilot_eligible": 449,
+        "pilot_eligible": 448,
         "by_game": {
             "conexiuni": 232,
             "contexto": 207,
@@ -150,7 +150,7 @@ def test_v45_rankings_and_frozen_derived_catalog_track_the_clean_pack() -> None:
         },
         "eligible_by_game": {
             "conexiuni": 74,
-            "contexto": 202,
+            "contexto": 201,
             "lant": 94,
             "alchimie": 79,
         },

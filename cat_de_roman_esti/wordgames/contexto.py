@@ -783,7 +783,11 @@ class CreateGameView(ContractAPIView):
         if daily is not None:
             seed = daily_seed(daily, GAME_KEY)
             curated = get_pack().pick_daily(
-                GAME_KEY, daily, category=category, difficulty=difficulty
+                GAME_KEY,
+                daily,
+                category=category,
+                difficulty=difficulty,
+                filtered_shelf_weights=True,
             )
         else:
             curated = get_pack().pick_seeded(
@@ -792,6 +796,7 @@ class CreateGameView(ContractAPIView):
                 category=category,
                 difficulty=difficulty,
                 exclude_ids=excluded_pack_ids(request, GAME_KEY),
+                filtered_shelf_weights=True,
             )
         if curated is not None:
             # session.category echoes only a player-REQUESTED theme. A curated daily
