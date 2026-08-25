@@ -1,90 +1,85 @@
-# Task Result — V68 Romanian-language and grammar morphology
+# Task Result — V68/V69/navigation production rollout
 
-## Summary
+## Result
 
-- V67 is landed and pushed on final `main` head
-  `46cf65f05a39b001e429c9f0a14fe0bfb611cb38`. Exact feature run `32772547384`,
-  evidence run `32773388527`, and landed-main run `32774376592` are green.
-- Anonymous production remains on exact V65 app commit
-  `aefcc2c64feda8b18bd66d68f5330bfe75c1d9de`.
-- The fixed V68 funnel contains 50 normalized-unique Romanian-language and grammar case
-  surfaces. It adds exactly 48 aliases across 24 existing owners while rejecting
-  _punctului_ and _punctelor_ because neither ordinary form has one safely bounded
-  punctuation sense.
-- V68 remains intentionally uncommitted, unlanded, undeployed, and without CI.
+- V68, V69, and the persistent-navigation change are landed and pushed in the integrated
+  main release at exact 60c3fd5318a483b0e4001481d036358a855a7961.
+- Exact CI is green: V68 feature/main 32907211185 / 32907879041, V69 feature/main
+  32908368059 / 32909044614, and navigation feature/main
+  32908981966 / 32909756110.
+- Anonymous production was deployed on 2026-08-26 at exact 60c3fd5318a and passed generic,
+  UI-asset, derived-game, and V69 Contexto diagnostics.
 
-## Frozen review contract
+## Delivered behavior
 
-- Candidate-funnel digest:
-  `ff4cee7a4ac2f39601a19efd3aad2a305e85303e282451ba606fe1c8b68b3377`.
-- Build: `fixture-v68-romanian-language-and-grammar-morphology`.
-- Fixture counts: 2,364 nodes / 9,217 edges / 8,306 aliases / 180 puzzles.
-- Contexto projection: 473 terms across 26 domains.
-- Exact delta: +48 aliases; no projection, node, edge, puzzle, game record, hold
-  disposition, ranking row, or derived board.
-- Earlier accepted inventories retain their owners; earlier rejected, deferred, held, and
-  unauthored surfaces retain their prior absence or disposition.
+- V68 adds 48 reviewed Romanian-language and grammar aliases across 24 bounded existing
+  owners. It retains 2,364 nodes / 9,217 edges / 8,306 aliases / 180 puzzles and changes no
+  topology, board payload, session, account, or frontend behavior.
+  Its frozen 50-surface review digest is
+  ff4cee7a4ac2f39601a19efd3aad2a305e85303e282451ba606fe1c8b68b3377; punctului and
+  punctelor remain rejected.
+- V69 reserves ct_muzica_163 from selection and ranks each requested Contexto shelf with
+  deterministic positive quintile tickets. It retains 201 eligible Contexto targets,
+  618 total / 448 eligible original-game boards, and the exact frozen 336 derived boards.
+- GameShell navigation remains visible below the mobile safe area and uses Ieși. Explicit
+  Conexiuni exit removes only its own resume pointer and replaces browser history, while
+  page refresh resumes and Escape/Backspace still clears selection.
+- Intrusul is the sole Începe aici recommendation. Conexiuni explains all three difficulty
+  tiers, keeps only its next-move coach sticky, and leaves feedback/clues in document flow.
+- The ADR sequence is V68 ADR-0092, V69 ADR-0093, and navigation ADR-0094. ADR-0091 remains
+  superseded by ADR-0092; ADR-0094 changes only ADR-0052's lobby recommendation.
 
-## Implementation scope
+## Final artifact evidence
 
-- The worktree contains the reviewed V68 data module, rollback-safe apply wrapper,
-  two-reviewer archive, ADR-0092, and focused regression contract.
-- The first transaction rejected two six-word candidates and restored all artifacts. The
-  corrected five-word _părții/părților de vorbire în română_ pair is triple-absent,
-  source-backed, validator-compliant, and included in the recomputed digest.
-- Regenerated the alias-bearing KG/mobile/ranking/derived wrappers and migrated current
-  build/count/hash pins.
-- Games-pack bytes, ranking rows, derived boards, projection inventory, V49 ledger,
-  sessions, accounts, frontend, and deployment remain preserved by scope.
+- KG: ed247c0fbb426781c05dd81a6d38de3e3a8d5b702b558f6fd6ff9a4e565a4128.
+- Games pack: 05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed.
+- Ranking: c32b648885cf9d0aad718bda9c1dcbd86f49ddda6819ceb14a7c372e32ddb424.
+- Derived: 9199f60c41d334f620403ca68926790b57292d71761175a470ba7385af52da91.
+- Mobile: 1a9f0c5182630a1cc6fe89c28546884d5f61d6781ff374da8fc003691df70cae.
+- V49 ledger: e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29.
+- Protected nodes-without-aliases:
+  c1ca327243b25415e1d7158436d00e36a3f1b53c15bc77590c9d6677d04678f0.
+- Protected edges: f62f0730a3e79c1498776049d86e1013e877bc74433360b2fcfaf3f1253a89b0.
+- Protected puzzles: 3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc.
+- Ranking rows: faf7b1a5224b082619641de3565f2131e2ca425b41258cdd4df0b57e9cda7031.
+- Derived boards: 71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6.
 
-## Artifact evidence
+## Verification
 
-- KG: `ed247c0fbb426781c05dd81a6d38de3e3a8d5b702b558f6fd6ff9a4e565a4128`.
-- Games pack:
-  `05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed`.
-- Ranking wrapper:
-  `b521d5d698a036aa81589ba059d7c04d731dbd69a2bf1a2f6b627e881a19bfe6`.
-- Derived wrapper:
-  `e7acd141a357409559a93f68514b977dbd697e19a97939afa9bb200d9d70dc97`.
-- Mobile wrapper:
-  `1a9f0c5182630a1cc6fe89c28546884d5f61d6781ff374da8fc003691df70cae`.
-- V49 ledger:
-  `e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29`.
-- Frozen V67 invariant hashes remain unchanged: nodes without aliases
-  `c1ca327243b25415e1d7158436d00e36a3f1b53c15bc77590c9d6677d04678f0`, edges
-  `f62f0730a3e79c1498776049d86e1013e877bc74433360b2fcfaf3f1253a89b0`, puzzles
-  `3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc`, ranking rows
-  `46aabcea827c3eed9d64dd7249ea1514d4b211a5b95c4bbea2d8a825e29d86e0`, and derived
-  boards `71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6`.
+- Frontend 29/29, ESLint, typecheck/build, 472-module Vite build, tracked-static byte parity,
+  manifest graph, and 118.17/120 KiB initial bundle gate passed.
+- Backend preservation tests, V68/V69 focused tests, ranking/derived tests and generators,
+  fixture/pack validators, Ruff, mirrors, and whitespace passed.
+- Chrome at maximum scroll on 390 × 620, 360 × 430, and 375 × 330 kept a 44 px exit visible
+  with zero sticky overlap; the 360 × 430 header/coach gap was 7 px. Refresh retained the
+  Conexiuni board, explicit exit cleared only its token, and Back remained at the lobby.
+- CI run pairs 32907211185/32907879041, 32908368059/32909044614, and
+  32908981966/32909756110 all completed successfully.
 
-## Verification state
+## Production evidence
 
-- Focused V68 passed 6/6; affected V31–V33/V44/V47–V68 passed 191/191; accounts-on
-  passed 53/53; sessions passed 16/16; exact full backend passed 871/871 in 569.61 seconds
-  on stable CPU14 scheduler placement.
-- Fixture/pack/ranking/derived validators, 618/449 ranking inventory, 336 derived boards,
-  strict Lanț 3 checked / 0 flagged / 0 FAIL with 16 WARN, mirrors, exact-delta, inherited
-  bindings, protected surfaces, immutable payloads, and source coupling are green.
-- Ruff lint, new-file format, mirrors, exact-delta, inherited bindings, 49 protected
-  surfaces, immutable payloads, source coupling, and whitespace are green.
-- V68 has no commit and therefore no exact-head CI run.
+- Active image
+  sha256:7a9b6dbc5832aa9d3601a7216114499e0a56453bf83b9cd34cc266eb8c3da955
+  is tagged release-60c3fd5318a. The production checkout is clean, and the container is
+  healthy with zero restarts and zero error-log markers.
+- Retained rollback images are V65 sha256:71f3e2cc tagged rollback-aefcc2c64fed and V61
+  sha256:efa179af tagged rollback-1c42de0.
+- Caddy was retained. Accounts/debug are off, submissions return HTTP 503, and no database,
+  OAuth, worker, environment, DNS, TLS, or infrastructure change occurred.
+- Public health, healthz, me, Intrusul, and Perechi smokes passed across 14 categories.
+  The public manifest reports V68 hash
+  sha256:54f4d41b3ca4bea0d3160ea81364c68940a5bdeef1e4c2f67f263c1e29fe4002
+  with 2,364 / 9,217 / 180 counts.
+- Production served exact files assets/index-DNdfJLWK.js, assets/index-DiCPhhaT.css,
+  assets/Alchimie-L2bxBlOx.js, and assets/Conexiuni-BF-X6jR1.js exactly. The V69 Contexto
+  refren diagnostic returned rank 170.
+- Rollout risk: npm audit now reports five high advisories. Two are shipped
+  react-router/react-router-dom 7.18.1 issues fixed by 7.18.2
+  (GHSA-qwww-vcr4-c8h2). Exact V65 already used 7.18.1, and this BrowserRouter-only SPA
+  does not use RSC/actions, so rollback does not reduce exposure. No dependency was changed
+  in this evidence-only commit.
 
-## Production state
+## Next action
 
-- The production host checkout remains clean at exact V65
-  `aefcc2c64feda8b18bd66d68f5330bfe75c1d9de`; the healthy app image begins
-  `sha256:71f3e2cc`, has zero restarts, and is tagged `release-aefcc2c64fed`.
-- `rollback-1c42de0` preserves the previous V61 image `sha256:efa179af`. Caddy was not
-  recreated; no env, DNS, TLS, database, OAuth, extra worker, or infrastructure changed.
-- Accounts and debug are off, `CAT_SUBMISSIONS_DIR` is absent, and submissions return HTTP
-  503. The public manifest continues to report the V65 build and counts 2,364/9,217/180.
-- V68 changes no database, OAuth, worker, session, frontend, DNS, TLS, or infrastructure
-  behavior and is not deployed.
-
-## Risks and release result
-
-- _Punctului_ and _punctelor_ must remain absent from exact, projection, and fuzzy
-  resolution. Aliases must not create edges or broaden projection resolution.
-- V68 is implemented, uncommitted, unlanded, and undeployed. Commit it and require exact
-  feature CI before landing. Production remains on exact V65 app commit
-  `aefcc2c64feda8b18bd66d68f5330bfe75c1d9de`.
+Start V70 social-and-civic-life morphology from the final documented main. V70 has not
+started.
