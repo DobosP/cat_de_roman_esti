@@ -1,7 +1,7 @@
 # ADR-0096: Bound literature-and-storytelling case morphology
 
 Date: 2026-08-26
-Status: accepted
+Status: superseded-by ADR-0097
 
 ## Decision
 

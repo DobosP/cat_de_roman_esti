@@ -66,11 +66,18 @@ _V70_RANKINGS_SHA256 = "3f90dc5162a2931967eef7a63c50707eb9e9a0f060684337f5638cfc
 _V70_DERIVED_SHA256 = "7aa1596ca6dd55451c5e8da6b99a5852e319742f1893dd630c0c22795255b5a1"
 _V70_MOBILE_SHA256 = "c0f49ed6c084ecff0a76d24fb4153a25cd3b32e333ab4794a8a11140a343ee6d"
 
-# Exact V71 whole-artifact pins after applying the reviewed alias transaction.
-_KG_SHA256 = "9134f057be13538cf9c4f48b50d41e06a1e6bfb36f26a5cb59cd925f9b900640"
-_RANKINGS_SHA256 = "f9c114570006938ec6602e9318e49a145bedd378be16120cacb4b6c9a2107a51"
-_DERIVED_SHA256 = "37ddf1a45ad04eeaf115589112269bc6cf3a2e19e61576a15c0acc426d168662"
-_MOBILE_SHA256 = "a627e1234e88ccd174369ec19e58d912faaf526025c3955305c6c6c79ae2595e"
+# Exact V71 historical pins remain fixed after the V72 transaction.
+_V71_KG_SHA256 = "9134f057be13538cf9c4f48b50d41e06a1e6bfb36f26a5cb59cd925f9b900640"
+_V71_RANKINGS_SHA256 = "f9c114570006938ec6602e9318e49a145bedd378be16120cacb4b6c9a2107a51"
+_V71_DERIVED_SHA256 = "37ddf1a45ad04eeaf115589112269bc6cf3a2e19e61576a15c0acc426d168662"
+_V71_MOBILE_SHA256 = "a627e1234e88ccd174369ec19e58d912faaf526025c3955305c6c6c79ae2595e"
+
+# Current V72 wrapper pins; V71's review and source assertions remain historical.
+_CURRENT_BUILD_VERSION = "fixture-v72-romanian-dishes-and-pastries-morphology"
+_KG_SHA256 = "fa9575db4819fa314e43218a0ad953f52c3e6ee2e34cac105dbc88e2d2247106"
+_RANKINGS_SHA256 = "45dfd81444dec14b4b639122fe30dea58f05ca76440003eb5280cc01bfcdc3e9"
+_DERIVED_SHA256 = "8cff438c25deb5084c0311e808941bfef23e3c7bdbf93242a7a53348a6d2ef57"
+_MOBILE_SHA256 = "4c01361f94adbc50677bb63b5463063e38ccf2783b4627befc7c2c13d33a9e8e"
 
 # Immutable payload pins must not move during this alias-only wave.
 _PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
@@ -224,11 +231,11 @@ def test_v71_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     assert all(svc.resolve(surface) is None for surface in _REJECTED)
     assert all(resolve_projection(surface) is None for surface in set(aliases) | _REJECTED)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
-    assert fixture["meta"]["build_version"] == DATA.BUILD_VERSION
+    assert fixture["meta"]["build_version"] == _CURRENT_BUILD_VERSION
     assert fixture["meta"]["counts"]["nodes"] == 2364
     assert fixture["meta"]["counts"]["edges"] == 9217
     assert fixture["meta"]["counts"]["puzzles"] == 180
-    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8400
+    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8450
 
 
 def test_v71_aliases_play_in_contexto_and_only_on_existing_legal_lant_hops() -> None:
@@ -350,12 +357,12 @@ def test_v71_preserves_v70_selection_projection_topology_and_frozen_payloads() -
     assert len(PROJECTION_TERMS) == 473
     assert len({term.domain for term in PROJECTION_TERMS}) == 26
     assert _sha256(_PACKAGE_KG) == _KG_SHA256
-    assert _KG_SHA256 != _V70_KG_SHA256
+    assert _KG_SHA256 != _V71_KG_SHA256 != _V70_KG_SHA256
     assert _sha256(_PACKAGE_PACK) == _PACK_SHA256
     assert _sha256(_PACKAGE_RANKINGS) == _RANKINGS_SHA256
-    assert _RANKINGS_SHA256 != _V70_RANKINGS_SHA256
+    assert _RANKINGS_SHA256 != _V71_RANKINGS_SHA256 != _V70_RANKINGS_SHA256
     assert _sha256(_PACKAGE_DERIVED) == _DERIVED_SHA256
-    assert _DERIVED_SHA256 != _V70_DERIVED_SHA256
+    assert _DERIVED_SHA256 != _V71_DERIVED_SHA256 != _V70_DERIVED_SHA256
     assert DEFAULT_DERIVED_CATALOG_SHA256 == _DERIVED_SHA256
     assert _PACKAGE_PACK.read_bytes() == _TEST_PACK.read_bytes()
     assert _PACKAGE_RANKINGS.read_bytes() == _TEST_RANKINGS.read_bytes()
@@ -383,11 +390,11 @@ def test_v71_mobile_contract_and_v49_ledger_persist_exactly() -> None:
 
     assert checked_in == mobile_app_pack_snapshot(_PACKAGE_KG)
     assert _sha256(_MOBILE_CONTRACT) == _MOBILE_SHA256
-    assert _MOBILE_SHA256 != _V70_MOBILE_SHA256
+    assert _MOBILE_SHA256 != _V71_MOBILE_SHA256 != _V70_MOBILE_SHA256
     assert _MOBILE_CONTRACT.read_bytes() == (
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
-    assert checked_in["manifest"]["build_version"] == DATA.BUILD_VERSION
+    assert checked_in["manifest"]["build_version"] == _CURRENT_BUILD_VERSION
     assert checked_in["manifest"]["counts"] == {
         "nodes": 2364,
         "edges": 9217,

@@ -1,37 +1,40 @@
-# Task Result — V71 applied snapshot with green local verification
+# Task Result — V72 applied snapshot
 
 ## Result
 
-- The fixed V71 funnel reviewed 50 normalized-unique case surfaces across 25 existing
-  literature-and-storytelling owners.
-- Reviewers A and B independently accepted the same 48 surfaces across 24 owners and
-  rejected `intrigii` and `intrigilor`, with zero deferrals or projections.
-- The rollback-safe transaction applied exactly the unanimous 48-surface intersection.
-  Build fixture-v71-literature-and-storytelling-morphology contains 2,364 nodes / 9,217
-  edges / 8,400 aliases / 180 puzzles.
-- The two rejected forms are the exact reviewed actionable-fuzzy deny set. Exact
-  `intrigă`, its existing aliases, advisory suggestions, and unrelated fuzzy typos remain.
+- The fixed V72 funnel reviewed 50 normalized-unique genitive/dative surfaces across 25
+  existing Romanian dishes-and-pastries owners.
+- Reviewers A and B independently accepted all 50 surfaces, with zero rejections,
+  deferrals, or projections. Qualified bulz and gogoși forms avoid unsafe bare polysemes.
+- The rollback-safe transaction applied exactly the unanimous 50-surface intersection.
+  Build fixture-v72-romanian-dishes-and-pastries-morphology contains 2,364 nodes / 9,217
+  edges / 8,450 aliases / 180 puzzles.
+- V71's exact reviewed actionable-fuzzy deny set remains `intrigii` and `intrigilor`.
 
 ## Frozen review contract
 
 - Candidate digest:
-  85e26519b648dbf28813a150955305c223feb5d627199d5ba689d709c526c64a.
+  78924a29cb235e55f0dae0f0a047ab26e8e20234eab794c6e051cc9496294e6b.
 - Accepted direct-map digest:
-  91c1c76b3ee8000114ba1b615b67b7f9b1bc5cf4a8f8d0135d17bdb60fbb2e8b.
+  afcf6ea8956ce157f3245064415aa64183bda6bc8ce4504eaf807bfe4215ed61.
 - Wrapped accepted-object digest:
-  3f7af2251392b31459e16309dee20bd480ddb9e50655c5c08c2171f1eca698d7.
-- No projection, node, edge, puzzle, game record, hold disposition, ranking row, or
-  derived board was added.
+  61301d077cc9ac123642c519773fe5a322d32be1f89ce44ab64465c52b39475c.
+- All owners are gastronomie concepts with 4–23 legal non-distractor incoming Lanț
+  predecessors. Exact, projection, inherited-ledger, prior-review, prior-owner, beginner,
+  and wrong-fuzzy collision counts are zero.
+- Pre-apply fuzzy results are 20 intended, 30 unresolved, and zero wrong-owner. No node,
+  edge, puzzle, projection, game record, hold disposition, ranking row, or derived board
+  was added.
 
 ## Applied artifact evidence
 
-- KG: 9134f057be13538cf9c4f48b50d41e06a1e6bfb36f26a5cb59cd925f9b900640.
+- KG: fa9575db4819fa314e43218a0ad953f52c3e6ee2e34cac105dbc88e2d2247106.
 - Games pack: 05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed.
-- Ranking: f9c114570006938ec6602e9318e49a145bedd378be16120cacb4b6c9a2107a51.
-- Derived: 37ddf1a45ad04eeaf115589112269bc6cf3a2e19e61576a15c0acc426d168662.
-- Mobile: a627e1234e88ccd174369ec19e58d912faaf526025c3955305c6c6c79ae2595e.
+- Ranking: 45dfd81444dec14b4b639122fe30dea58f05ca76440003eb5280cc01bfcdc3e9.
+- Derived: 8cff438c25deb5084c0311e808941bfef23e3c7bdbf93242a7a53348a6d2ef57.
+- Mobile: 4c01361f94adbc50677bb63b5463063e38ccf2783b4627befc7c2c13d33a9e8e.
 - Server manifest content:
-  sha256:130e1a14a3331a89e3418858d8737c66b0817fc994efed05fc4c124d1509ac0f.
+  sha256:6a388f9bdb391ffca61ce4d51ab28255c00ed619142ded51cedd26c02bb9213d.
 - Mobile public content remains
   sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11fc8cfc5ef87727ab.
 - V49 ledger: e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29.
@@ -46,37 +49,32 @@
 
 - The review archive records both complete reviewer partitions, collision evidence, final
   intersection, fuzzy-deny evidence, applied count, build identifier, and exact pins.
-- README and docs/MOBILE_CONTRACT.md identify V71 and 8,400 typed aliases.
-- ADR-0096 bounds the unanimous addition, supersedes ADR-0095 only at the V70 build/count,
-  and records a two-polyseme exception to ADR-0022/0062 fuzzy action. Other fuzzy, Contexto,
-  navigation, session, and privacy contracts remain preserved.
+- README and docs/MOBILE_CONTRACT.md identify V72 and 8,450 typed aliases.
+- ADR-0097 bounds the unanimous addition and supersedes ADR-0096 only at its V71
+  build/count decision. Contexto, fuzzy deny, navigation, session, privacy, and frontend
+  contracts remain preserved.
 
 ## Verification state
 
-- The complete backend command passed 892/892 with no skips, failures, or warnings.
-  Accounts-on passed 53/53, sessions 16/16, V71 7/7, the combined V71/Contexto/Lanț
-  fuzzy slice 20/20, and current-pin propagation 189/189.
-- Fixture validation reported 0 errors; games-pack validation passed. Ranking regeneration
-  checked 618 total / 448 eligible records, and derived regeneration checked 336 boards.
-- Repo-wide Ruff lint, V71 scripts/test formatting, KG/ranking/derived mirrors, artifact hashes,
-  stale-pin scan, review JSON/digests, whitespace, and git diff checks are green. A broad
-  non-gate format audit still identifies 119 untouched legacy files.
-- No V71 feature CI exists. Local green gates do not claim a committed, landed, pushed, or
-  deployed result.
+- Complete backend passed 898/898; accounts-on 53/53, sessions 16/16, focused V72 6/6,
+  combined V71/V72 13/13, and historical/current-pin propagation 196/196 passed.
+- The transaction dry-run and apply passed with zero topology or projection changes.
+- Ranking regeneration checked 618 total / 448 eligible records, and derived regeneration
+  checked 336 boards.
+- Both validators, repo-wide Ruff lint, touched-file formatting, mirrors, hashes, stale-pin
+  scan, JSON/digests, whitespace, and git diff checks are green. No feature CI is claimed.
 
 ## Release state
 
-- V71 is intentionally uncommitted, unlanded, unpushed, and undeployed.
-- Documented main is exact 2d1b7b975eb3f8cbcdb7d6e623b55e31c372ebc8; V70 exact
-  feature/main CI 32935538976/32936248214 are green.
+- V72 is intentionally uncommitted, unlanded, unpushed, and undeployed.
+- Its exact V71 parent is b3630aefc5a64e2c210a90d9bab2d40d0d1b4e59.
 - Anonymous production remains exact 60c3fd5318a483b0e4001481d036358a855a7961,
   healthy on release image
   sha256:7a9b6dbc5832aa9d3601a7216114499e0a56453bf83b9cd34cc266eb8c3da955.
 - No database, OAuth, worker, account, frontend, session, environment, DNS, TLS, Caddy, or
-  infrastructure behavior changed. Runtime behavior changes only for the two reviewed
-  actionable-fuzzy denials.
+  infrastructure behavior changed.
 
 ## Next action
 
-Review and commit the green local snapshot, require exact feature CI, then land and deploy
-only as separately requested steps.
+Review the green uncommitted snapshot. Commit, push, require exact feature CI, and land
+only as separately requested steps; deploy only when separately requested.

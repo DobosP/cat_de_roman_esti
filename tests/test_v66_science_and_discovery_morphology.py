@@ -49,11 +49,11 @@ _LEDGER = _ROOT / "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 _REVIEW = _ROOT / "docs/reviews/v66-science-and-discovery-morphology/vocabulary.json"
 
-# Current V71 whole-artifact pins; the immutable payload pins below must not move.
-_KG_SHA256 = "9134f057be13538cf9c4f48b50d41e06a1e6bfb36f26a5cb59cd925f9b900640"
-_RANKINGS_SHA256 = "f9c114570006938ec6602e9318e49a145bedd378be16120cacb4b6c9a2107a51"
-_DERIVED_SHA256 = "37ddf1a45ad04eeaf115589112269bc6cf3a2e19e61576a15c0acc426d168662"
-_MOBILE_SHA256 = "a627e1234e88ccd174369ec19e58d912faaf526025c3955305c6c6c79ae2595e"
+# Current V72 whole-artifact pins; the immutable payload pins below must not move.
+_KG_SHA256 = "fa9575db4819fa314e43218a0ad953f52c3e6ee2e34cac105dbc88e2d2247106"
+_RANKINGS_SHA256 = "45dfd81444dec14b4b639122fe30dea58f05ca76440003eb5280cc01bfcdc3e9"
+_DERIVED_SHA256 = "8cff438c25deb5084c0311e808941bfef23e3c7bdbf93242a7a53348a6d2ef57"
+_MOBILE_SHA256 = "4c01361f94adbc50677bb63b5463063e38ccf2783b4627befc7c2c13d33a9e8e"
 
 # Immutable payload pins must not move during this alias-only wave.
 _PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
@@ -275,12 +275,12 @@ def test_v66_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     assert all(resolve_projection(surface) is None for surface in set(aliases) | _REJECTED)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert fixture["meta"]["build_version"] == (
-        "fixture-v71-literature-and-storytelling-morphology"
+        "fixture-v72-romanian-dishes-and-pastries-morphology"
     )
     assert fixture["meta"]["counts"]["nodes"] == 2364
     assert fixture["meta"]["counts"]["edges"] == 9217
     assert fixture["meta"]["counts"]["puzzles"] == 180
-    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8400
+    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8450
 
 
 def test_v66_aliases_play_in_contexto_and_only_on_existing_legal_lant_hops() -> None:
@@ -386,7 +386,7 @@ def test_v66_mobile_contract_and_v49_ledger_persist_exactly() -> None:
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
     assert checked_in["manifest"]["build_version"] == (
-        "fixture-v71-literature-and-storytelling-morphology"
+        "fixture-v72-romanian-dishes-and-pastries-morphology"
     )
     assert checked_in["manifest"]["counts"] == {
         "nodes": 2364,

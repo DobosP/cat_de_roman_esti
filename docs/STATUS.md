@@ -2,35 +2,36 @@
 
 _As of 2026-08-26. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-26 (complete local V71 backend, accounts, sessions, focused
-resolver tests, validators, generators, Ruff, mirrors, hashes, JSON/digests, whitespace,
-and diff checks are green; V71 feature CI has not run)._
+_Last verified: 2026-08-26 (complete local V72 backend, accounts, sessions, focused and
+historical resolver tests, validators, generators, Ruff, mirrors, hashes, JSON/digests,
+whitespace, and diff checks are green)._
 
-## Current work — V71 applied snapshot
+## Current work — V72 applied snapshot
 
-- The fixed 25-owner / 50-surface funnel produced 48 unanimously accepted aliases across
-  24 existing literature-and-storytelling owners. Both reviewers rejected `intrigii` and
-  `intrigilor`, with zero deferrals, projections, or quota.
-- The local transaction applied exactly those 48 aliases. Build
-  fixture-v71-literature-and-storytelling-morphology has 2,364 nodes / 9,217 edges / 8,400
+- Two independent reviews unanimously accepted 50 normalized-unique genitive/dative aliases
+  for 25 existing Romanian dishes-and-pastries owners, with zero rejections, deferrals, or
+  projections. Qualified bulz and gogoși forms avoid unsafe bare polysemes.
+- The rollback-safe transaction applied exactly those 50 aliases. Build
+  fixture-v72-romanian-dishes-and-pastries-morphology has 2,364 nodes / 9,217 edges / 8,450
   aliases / 180 puzzles; projections, topology, pack rows, and frozen boards are unchanged.
-- Both rejected forms remain absent from exact/projection resolution and are the complete
-  reviewed actionable-fuzzy deny set. Exact `intrigă` and advisory suggestions still work.
-- V71 is intentionally uncommitted, unlanded, unpushed, and undeployed. All required local
-  gates are green; feature CI has not run and is not claimed.
-- ADR-0096 supersedes ADR-0095 only at its V70 build/count decision and records a narrow
-  two-surface exception to ADR-0022/0062 fuzzy action. V69 Contexto selection,
-  navigation, sessions, privacy, and all other fuzzy behavior remain unchanged.
+- All owners are gastronomie concepts with 4–23 legal non-distractor incoming Lanț
+  predecessors. Pre-apply fuzzy results were 20 intended, 30 unresolved, and zero wrong.
+- V71's reviewed actionable-fuzzy deny set remains exactly `intrigii` and `intrigilor`;
+  the inherited 70-term cumulative nonaccepted ledger is unchanged.
+- V72 is intentionally uncommitted, unlanded, unpushed, and undeployed. Feature CI has not
+  run and is not claimed.
+- ADR-0097 supersedes ADR-0096 only at its V71 build/count decision. Contexto selection,
+  navigation, sessions, privacy, frontend, and all other fuzzy behavior remain unchanged.
 
-## V71 artifact pins
+## V72 artifact pins
 
-Build: fixture-v71-literature-and-storytelling-morphology; KG:
-9134f057be13538cf9c4f48b50d41e06a1e6bfb36f26a5cb59cd925f9b900640;
+Build: fixture-v72-romanian-dishes-and-pastries-morphology; KG:
+fa9575db4819fa314e43218a0ad953f52c3e6ee2e34cac105dbc88e2d2247106;
 pack: 05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed;
-ranking: f9c114570006938ec6602e9318e49a145bedd378be16120cacb4b6c9a2107a51;
-derived: 37ddf1a45ad04eeaf115589112269bc6cf3a2e19e61576a15c0acc426d168662;
-mobile: a627e1234e88ccd174369ec19e58d912faaf526025c3955305c6c6c79ae2595e;
-server manifest content: sha256:130e1a14a3331a89e3418858d8737c66b0817fc994efed05fc4c124d1509ac0f;
+ranking: 45dfd81444dec14b4b639122fe30dea58f05ca76440003eb5280cc01bfcdc3e9;
+derived: 8cff438c25deb5084c0311e808941bfef23e3c7bdbf93242a7a53348a6d2ef57;
+mobile: 4c01361f94adbc50677bb63b5463063e38ccf2783b4627befc7c2c13d33a9e8e;
+server manifest content: sha256:6a388f9bdb391ffca61ce4d51ab28255c00ed619142ded51cedd26c02bb9213d;
 ledger: e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29.
 Protected payload pins remain: nodes without aliases
 c1ca327243b25415e1d7158436d00e36a3f1b53c15bc77590c9d6677d04678f0;
@@ -39,13 +40,14 @@ puzzles 3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc;
 ranking rows faf7b1a5224b082619641de3565f2131e2ca425b41258cdd4df0b57e9cda7031;
 derived boards 71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6.
 
-## V71 local verification
+## V72 local verification
 
-- Complete backend passed 892/892; accounts-on 53/53, sessions 16/16, V71 7/7, combined
-  V71/Contexto/Lanț fuzzy 20/20, and current-pin propagation 189/189 passed.
-- Fixture validator reported 0 errors; games-pack validation passed. Ranking regeneration
+- Complete backend passed 898/898; accounts-on 53/53, sessions 16/16, focused V72 6/6,
+  combined V71/V72 13/13, and historical/current-pin propagation 196/196 passed.
+- The transaction dry-run and apply completed with zero topology or projection changes.
+  Fixture validation reported 0 errors; games-pack validation passed. Ranking regeneration
   checked 618 total / 448 eligible records; derived regeneration checked 336 boards.
-- Repo-wide Ruff lint, V71 scripts/test formatting, mirrors, hashes, stale-pin scan,
+- Repo-wide Ruff lint, touched-file formatting, mirrors, hashes, stale-pin scan,
   JSON/digests, whitespace, and git diff checks are green.
 
 ## Preserved inventory and runtime
@@ -61,16 +63,15 @@ derived boards 71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6.
 
 Pack inventory remains **618 = 610 approved + 8 pending** across 14 categories; original
 ranking remains 448 eligible, Contexto 201 eligible, and derived payload 336 boards.
-V51–V71 reviewed inventories retain their owners; V49 retains 104 Lanț rejections.
+V51–V72 reviewed inventories retain their owners; V49 retains 104 Lanț rejections.
 Sessions retain the 7,200-second sliding TTL, 1,000-entry per-game cap, per-entry locks,
 64 KiB request ceiling, deterministic selection, and server-private answers.
 
 ## Documented main and production
 
-- The documented main baseline is exact 2d1b7b975eb3f8cbcdb7d6e623b55e31c372ebc8;
-  its deployed application ancestor is exact 60c3fd5318a483b0e4001481d036358a855a7961.
-- V70 exact feature/main CI 32935538976/32936248214 are green at 2d1b7b9. No V71 commit,
-  push, feature CI, main merge, or deployment exists.
+- The V72 worktree's exact V71 parent is b3630aefc5a64e2c210a90d9bab2d40d0d1b4e59.
+  Landing and CI state are recorded by the orchestrating session; this snapshot makes no
+  claim that V72 is on main.
 - Anonymous production remains healthy at 60c3fd5318a on image
   sha256:7a9b6dbc5832aa9d3601a7216114499e0a56453bf83b9cd34cc266eb8c3da955,
   tagged release-60c3fd5318a, with zero restarts and zero error-log markers.
@@ -88,5 +89,5 @@ Sessions retain the 7,200-second sliding TTL, 1,000-entry per-game cap, per-entr
 
 ## Next verified work
 
-- Review and commit the green local snapshot, require exact feature CI, then land and
-  deploy only as separately requested steps.
+- Review the green uncommitted snapshot. Commit, push, require exact feature CI, and land
+  only as separately requested steps; deploy only when separately requested.

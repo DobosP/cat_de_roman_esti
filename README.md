@@ -9,9 +9,9 @@ The name is a pun on *"cât de român ești"* — "how Romanian are you".
 
 ## Web app — the word-game arcade
 
-The current V71 work targets a **text-only arcade** of six word games over the same Romanian
-concept graph (**2,364 concepts / 9,217 links / 8,400 typed aliases / 180 puzzles**,
-`fixture-v71-literature-and-storytelling-morphology` — generated hashes and gate state are
+The current V72 work targets a **text-only arcade** of six word games over the same Romanian
+concept graph (**2,364 concepts / 9,217 links / 8,450 typed aliases / 180 puzzles**,
+`fixture-v72-romanian-dishes-and-pastries-morphology` — generated hashes and gate state are
 recorded in `docs/STATUS.md`; no graph visualization). All six are
 **server-authoritative** (the BFF validates moves and hides answers):
 
