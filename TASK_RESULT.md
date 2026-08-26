@@ -1,41 +1,35 @@
-# Task Result — V68/V69/navigation production rollout
+# Task Result — V70 applied snapshot with green local verification
 
 ## Result
 
-- V68, V69, and the persistent-navigation change are landed and pushed in the integrated
-  main release at exact 60c3fd5318a483b0e4001481d036358a855a7961.
-- Exact CI is green: V68 feature/main 32907211185 / 32907879041, V69 feature/main
-  32908368059 / 32909044614, and navigation feature/main
-  32908981966 / 32909756110.
-- Anonymous production was deployed on 2026-08-26 at exact 60c3fd5318a and passed generic,
-  UI-asset, derived-game, and V69 Contexto diagnostics.
+- The fixed V70 funnel reviewed 50 normalized-unique case surfaces across 25 existing
+  social-and-civic-life owners.
+- Reviewers A and B independently accepted the same 46 surfaces across 23 owners and
+  rejected legii, legilor, băncii, and băncilor, with zero deferrals.
+- The transaction applied exactly the unanimous 46-surface intersection. Build
+  fixture-v70-social-and-civic-life-morphology now contains 2,364 nodes / 9,217 edges /
+  8,352 aliases / 180 puzzles.
 
-## Delivered behavior
+## Frozen review contract
 
-- V68 adds 48 reviewed Romanian-language and grammar aliases across 24 bounded existing
-  owners. It retains 2,364 nodes / 9,217 edges / 8,306 aliases / 180 puzzles and changes no
-  topology, board payload, session, account, or frontend behavior.
-  Its frozen 50-surface review digest is
-  ff4cee7a4ac2f39601a19efd3aad2a305e85303e282451ba606fe1c8b68b3377; punctului and
-  punctelor remain rejected.
-- V69 reserves ct_muzica_163 from selection and ranks each requested Contexto shelf with
-  deterministic positive quintile tickets. It retains 201 eligible Contexto targets,
-  618 total / 448 eligible original-game boards, and the exact frozen 336 derived boards.
-- GameShell navigation remains visible below the mobile safe area and uses Ieși. Explicit
-  Conexiuni exit removes only its own resume pointer and replaces browser history, while
-  page refresh resumes and Escape/Backspace still clears selection.
-- Intrusul is the sole Începe aici recommendation. Conexiuni explains all three difficulty
-  tiers, keeps only its next-move coach sticky, and leaves feedback/clues in document flow.
-- The ADR sequence is V68 ADR-0092, V69 ADR-0093, and navigation ADR-0094. ADR-0091 remains
-  superseded by ADR-0092; ADR-0094 changes only ADR-0052's lobby recommendation.
+- Candidate digest:
+  254b4a6f9211f1f7f43e4dc3e44d36ce5c01d9d07e4aca3a7702705574408793.
+- Accepted direct-map digest:
+  4b4c1bac2346eafd084f0305dd02d10c5fe9d8afd4f5bc8a2a8ff3ba6c59b9b6.
+- Wrapped accepted-object digest:
+  1a5015583488ba9a092c6c8956728d3691e97f59bdab1f81ba9c331576d751c3.
+- The four rejected forms remain blocked. No projection, node, edge, puzzle, game record,
+  hold disposition, ranking row, or derived board was added.
 
-## Final artifact evidence
+## Applied artifact evidence
 
-- KG: ed247c0fbb426781c05dd81a6d38de3e3a8d5b702b558f6fd6ff9a4e565a4128.
+- KG: 76fc1f933000f56c0c0d46588f61eeb9c9e03af5608c950a3884550e5a3108b0.
 - Games pack: 05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed.
-- Ranking: c32b648885cf9d0aad718bda9c1dcbd86f49ddda6819ceb14a7c372e32ddb424.
-- Derived: 9199f60c41d334f620403ca68926790b57292d71761175a470ba7385af52da91.
-- Mobile: 1a9f0c5182630a1cc6fe89c28546884d5f61d6781ff374da8fc003691df70cae.
+- Ranking: 3f90dc5162a2931967eef7a63c50707eb9e9a0f060684337f5638cfc4fe287fc.
+- Derived: 7aa1596ca6dd55451c5e8da6b99a5852e319742f1893dd630c0c22795255b5a1.
+- Mobile: c0f49ed6c084ecff0a76d24fb4153a25cd3b32e333ab4794a8a11140a343ee6d.
+- Server manifest content:
+  sha256:34320f0370381f756cc6e93503b26cb7af44eb6decd71fbdca5fecbb3b3a8774.
 - V49 ledger: e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29.
 - Protected nodes-without-aliases:
   c1ca327243b25415e1d7158436d00e36a3f1b53c15bc77590c9d6677d04678f0.
@@ -44,42 +38,37 @@
 - Ranking rows: faf7b1a5224b082619641de3565f2131e2ca425b41258cdd4df0b57e9cda7031.
 - Derived boards: 71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6.
 
-## Verification
+## Documentation and decision
 
-- Frontend 29/29, ESLint, typecheck/build, 472-module Vite build, tracked-static byte parity,
-  manifest graph, and 118.17/120 KiB initial bundle gate passed.
-- Backend preservation tests, V68/V69 focused tests, ranking/derived tests and generators,
-  fixture/pack validators, Ruff, mirrors, and whitespace passed.
-- Chrome at maximum scroll on 390 × 620, 360 × 430, and 375 × 330 kept a 44 px exit visible
-  with zero sticky overlap; the 360 × 430 header/coach gap was 7 px. Refresh retained the
-  Conexiuni board, explicit exit cleared only its token, and Back remained at the lobby.
-- CI run pairs 32907211185/32907879041, 32908368059/32909044614, and
-  32908981966/32909756110 all completed successfully.
+- The review archive records both complete reviewer partitions, collision evidence, final
+  intersection, applied count, build identifier, and exact artifact pins.
+- README and docs/MOBILE_CONTRACT.md identify V70 and 8,352 typed aliases.
+- ADR-0095 bounds the unanimous V70 addition and supersedes ADR-0092 only at the prior
+  build/count decision; V69 Contexto and navigation contracts remain preserved.
 
-## Production evidence
+## Verification state
 
-- Active image
-  sha256:7a9b6dbc5832aa9d3601a7216114499e0a56453bf83b9cd34cc266eb8c3da955
-  is tagged release-60c3fd5318a. The production checkout is clean, and the container is
-  healthy with zero restarts and zero error-log markers.
-- Retained rollback images are V65 sha256:71f3e2cc tagged rollback-aefcc2c64fed and V61
-  sha256:efa179af tagged rollback-1c42de0.
-- Caddy was retained. Accounts/debug are off, submissions return HTTP 503, and no database,
-  OAuth, worker, environment, DNS, TLS, or infrastructure change occurred.
-- Public health, healthz, me, Intrusul, and Perechi smokes passed across 14 categories.
-  The public manifest reports V68 hash
-  sha256:54f4d41b3ca4bea0d3160ea81364c68940a5bdeef1e4c2f67f263c1e29fe4002
-  with 2,364 / 9,217 / 180 counts.
-- Production served exact files assets/index-DNdfJLWK.js, assets/index-DiCPhhaT.css,
-  assets/Alchimie-L2bxBlOx.js, and assets/Conexiuni-BF-X6jR1.js exactly. The V69 Contexto
-  refren diagnostic returned rank 170.
-- Rollout risk: npm audit now reports five high advisories. Two are shipped
-  react-router/react-router-dom 7.18.1 issues fixed by 7.18.2
-  (GHSA-qwww-vcr4-c8h2). Exact V65 already used 7.18.1, and this BrowserRouter-only SPA
-  does not use RSC/actions, so rollback does not reduce exposure. No dependency was changed
-  in this evidence-only commit.
+- The complete backend command exited 0 over 885 collected tests. Accounts-on passed
+  53/53, V70 passed 6/6, sessions passed 16/16, and the pin-sensitive/preservation set
+  passed 270/270.
+- Fixture validation reported 0 errors; games-pack validation passed. Ranking regeneration
+  checked 618 total / 448 eligible records, and derived regeneration checked 336 boards.
+- Repo-wide Ruff, KG/ranking/derived mirrors, artifact hashes, stale-pin scan,
+  review-JSON/digest consistency, whitespace, and git diff checks are green.
+- No V70 feature CI exists yet. Local green gates do not claim a committed, landed, pushed,
+  or deployed result.
+
+## Release state
+
+- V70 is intentionally uncommitted, unlanded, unpushed, and undeployed.
+- Documented main remains exact 047d3978175f4210698e44839ace3c9d8883dfe1.
+- Anonymous production remains exact 60c3fd5318a483b0e4001481d036358a855a7961,
+  healthy on release image
+  sha256:7a9b6dbc5832aa9d3601a7216114499e0a56453bf83b9cd34cc266eb8c3da955.
+- No database, OAuth, worker, account, frontend, session, environment, DNS, TLS, Caddy, or
+  infrastructure behavior changed.
 
 ## Next action
 
-Start V70 social-and-civic-life morphology from the final documented main. V70 has not
-started.
+Commit the green local snapshot, require exact feature CI, then land and deploy as
+separately authorized steps.

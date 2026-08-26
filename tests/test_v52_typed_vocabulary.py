@@ -51,10 +51,10 @@ _LEDGER = _ROOT / "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 _REVIEW = _ROOT / "docs/reviews/v52-household-morphology/vocabulary.json"
 
-_KG_SHA256 = "ed247c0fbb426781c05dd81a6d38de3e3a8d5b702b558f6fd6ff9a4e565a4128"
+_KG_SHA256 = "76fc1f933000f56c0c0d46588f61eeb9c9e03af5608c950a3884550e5a3108b0"
 _PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
-_RANKINGS_SHA256 = "c32b648885cf9d0aad718bda9c1dcbd86f49ddda6819ceb14a7c372e32ddb424"
-_DERIVED_SHA256 = "9199f60c41d334f620403ca68926790b57292d71761175a470ba7385af52da91"
+_RANKINGS_SHA256 = "3f90dc5162a2931967eef7a63c50707eb9e9a0f060684337f5638cfc4fe287fc"
+_DERIVED_SHA256 = "7aa1596ca6dd55451c5e8da6b99a5852e319742f1893dd630c0c22795255b5a1"
 _CANDIDATE_FUNNEL_SHA256 = (
     "21bf03bc35819a0957d98cbef23a060daf8abf63c5afdaed5c0a53a9d7b7a535"
 )
@@ -176,12 +176,12 @@ def test_v52_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     assert all(resolve_projection(surface) is None for surface in set(aliases) | _REJECTED)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert fixture["meta"]["build_version"] == (
-        "fixture-v68-romanian-language-and-grammar-morphology"
+        "fixture-v70-social-and-civic-life-morphology"
     )
     assert fixture["meta"]["counts"]["nodes"] == 2364
     assert fixture["meta"]["counts"]["edges"] == 9217
     assert fixture["meta"]["counts"]["puzzles"] == 180
-    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8306
+    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8352
 
 
 def test_v52_aliases_play_in_contexto_and_only_on_existing_legal_lant_hops() -> None:
@@ -276,7 +276,7 @@ def test_v52_mobile_contract_and_v49_ledger_persist_exactly() -> None:
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
     assert checked_in["manifest"]["build_version"] == (
-        "fixture-v68-romanian-language-and-grammar-morphology"
+        "fixture-v70-social-and-civic-life-morphology"
     )
     assert checked_in["manifest"]["counts"] == {
         "nodes": 2364,

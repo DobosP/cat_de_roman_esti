@@ -1,7 +1,7 @@
 # ADR-0092: Bound Romanian-language and grammar case morphology
 
 Date: 2026-08-24
-Status: accepted
+Status: superseded-by ADR-0095
 
 ## Decision
 
