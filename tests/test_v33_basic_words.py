@@ -215,7 +215,7 @@ def test_v33_source_inventory_builder_application_counts_and_mirrors():
     assert len(built["edges"]) == _EXPECTED_AUTHORED_EDGE_COUNT
     assert built == DATA.build_nodes_and_edges()
     assert fixture["meta"]["build_version"] == (
-        "fixture-v70-social-and-civic-life-morphology"
+        "fixture-v71-literature-and-storytelling-morphology"
     )
     assert (len(fixture["kg_nodes"]), len(fixture["kg_edges"])) == (
         _EXPECTED_NODE_COUNT,
@@ -226,8 +226,8 @@ def test_v33_source_inventory_builder_application_counts_and_mirrors():
     # ADR-0075 thirty-two, ADR-0076 through ADR-0079 forty-eight each, and
     # ADR-0080 contributed forty-six aliases; ADR-0081 through ADR-0084
     # contributed forty-eight each. V61 through V68 contribute forty-eight aliases each;
-    # V69 has no vocabulary module, and V70 contributes forty-six aliases.
-    assert alias_count == _V32_ALIAS_COUNT + authored_alias_count + 952
+    # V69 has no vocabulary module; V70 contributes forty-six aliases and V71 forty-eight.
+    assert alias_count == _V32_ALIAS_COUNT + authored_alias_count + 1000
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert _PACKAGE_PACK.read_bytes() == _TEST_PACK.read_bytes()
 
@@ -536,7 +536,7 @@ def test_v33_mobile_contract_is_exact_current_and_public():
 
     assert checked_in == mobile_app_pack_snapshot(_PACKAGE_KG)
     assert checked_in["manifest"]["build_version"] == (
-        "fixture-v70-social-and-civic-life-morphology"
+        "fixture-v71-literature-and-storytelling-morphology"
     )
     assert checked_in["manifest"]["counts"] == {
         "nodes": _EXPECTED_NODE_COUNT,

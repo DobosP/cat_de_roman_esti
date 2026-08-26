@@ -1,7 +1,7 @@
 # ADR-0095: Bound social-and-civic-life case morphology
 
 Date: 2026-08-26
-Status: accepted
+Status: superseded-by ADR-0096
 
 ## Decision
 

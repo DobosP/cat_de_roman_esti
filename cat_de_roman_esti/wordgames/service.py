@@ -62,6 +62,15 @@ def normalize(text: str) -> str:
     return " ".join(no_accents.casefold().split())
 
 
+# Reviewed polysemes that are close enough to a shipped alias to cross the generic
+# typo threshold, but whose ordinary meaning cannot be bound to that one owner. Keep
+# this finite and review-backed; exact aliases still belong in the fixture (ADR-0096).
+REVIEWED_FUZZY_DENY_SURFACES: frozenset[str] = frozenset({"intrigii", "intrigilor"})
+_REVIEWED_FUZZY_DENY_KEYS = frozenset(
+    normalize(surface) for surface in REVIEWED_FUZZY_DENY_SURFACES
+)
+
+
 @dataclass
 class WordGameService:
     """Read-only operations over one KG, shared by every word game."""
@@ -165,7 +174,9 @@ class WordGameService:
         ``AUTO_ACCEPT_MARGIN`` of it; anything weaker or ambiguous returns None so the
         caller falls back to the advisory suggestion flow. Deterministic: ratios are
         pure functions of the keys, and an exact tie between two nodes always reads as
-        ambiguity rather than an arbitrary pick.
+        ambiguity rather than an arbitrary pick. A finite set of independently reviewed
+        polysemous surfaces is denied before scoring (ADR-0096), so typo confidence cannot
+        silently override a vocabulary rejection.
         """
         key = normalize(text)
         if not key:
@@ -173,6 +184,8 @@ class WordGameService:
         exact = self._index.get(key)
         if exact is not None:
             return exact
+        if key in _REVIEWED_FUZZY_DENY_KEYS:
+            return None
         # Any node able to win — or to block a winner as a close second — scores at
         # least this floor, so the scan can skip everything below it cheaply.
         floor = AUTO_ACCEPT_RATIO - AUTO_ACCEPT_MARGIN

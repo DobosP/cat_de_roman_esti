@@ -48,11 +48,11 @@ _LEDGER = _ROOT / "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 _REVIEW = _ROOT / "docs/reviews/v57-creative-arts-morphology/vocabulary.json"
 
-_KG_SHA256 = "76fc1f933000f56c0c0d46588f61eeb9c9e03af5608c950a3884550e5a3108b0"
+_KG_SHA256 = "9134f057be13538cf9c4f48b50d41e06a1e6bfb36f26a5cb59cd925f9b900640"
 _PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
-_RANKINGS_SHA256 = "3f90dc5162a2931967eef7a63c50707eb9e9a0f060684337f5638cfc4fe287fc"
-_DERIVED_SHA256 = "7aa1596ca6dd55451c5e8da6b99a5852e319742f1893dd630c0c22795255b5a1"
-_MOBILE_SHA256 = "c0f49ed6c084ecff0a76d24fb4153a25cd3b32e333ab4794a8a11140a343ee6d"
+_RANKINGS_SHA256 = "f9c114570006938ec6602e9318e49a145bedd378be16120cacb4b6c9a2107a51"
+_DERIVED_SHA256 = "37ddf1a45ad04eeaf115589112269bc6cf3a2e19e61576a15c0acc426d168662"
+_MOBILE_SHA256 = "a627e1234e88ccd174369ec19e58d912faaf526025c3955305c6c6c79ae2595e"
 _CANDIDATE_FUNNEL_SHA256 = (
     "1637e4c45028f6aa07ce3fb87dbb1d774174edd09c54c41b89a65bf18bf03d39"
 )
@@ -207,12 +207,12 @@ def test_v57_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     assert all(resolve_projection(surface) is None for surface in set(aliases) | _REJECTED)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert fixture["meta"]["build_version"] == (
-        "fixture-v70-social-and-civic-life-morphology"
+        "fixture-v71-literature-and-storytelling-morphology"
     )
     assert fixture["meta"]["counts"]["nodes"] == 2364
     assert fixture["meta"]["counts"]["edges"] == 9217
     assert fixture["meta"]["counts"]["puzzles"] == 180
-    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8352
+    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8400
 
 
 def test_v57_aliases_play_in_contexto_and_only_on_existing_legal_lant_hops() -> None:
@@ -312,7 +312,7 @@ def test_v57_mobile_contract_and_v49_ledger_persist_exactly() -> None:
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
     assert checked_in["manifest"]["build_version"] == (
-        "fixture-v70-social-and-civic-life-morphology"
+        "fixture-v71-literature-and-storytelling-morphology"
     )
     assert checked_in["manifest"]["counts"] == {
         "nodes": 2364,
