@@ -1,4 +1,4 @@
-# Task Result — V72 applied snapshot
+# Task Result — V72 landed and deployed
 
 ## Result
 
@@ -62,19 +62,25 @@
 - Ranking regeneration checked 618 total / 448 eligible records, and derived regeneration
   checked 336 boards.
 - Both validators, repo-wide Ruff lint, touched-file formatting, mirrors, hashes, stale-pin
-  scan, JSON/digests, whitespace, and git diff checks are green. No feature CI is claimed.
+  scan, JSON/digests, whitespace, and git diff checks are green.
+- Exact feature/main Actions runs `33023808156`/`33024392655` passed frontend and Python
+  3.12/3.14 at V72 commit `6ee86935038744c0066cac6a50865f76eab93e37`.
 
 ## Release state
 
-- V72 is intentionally uncommitted, unlanded, unpushed, and undeployed.
-- Its exact V71 parent is b3630aefc5a64e2c210a90d9bab2d40d0d1b4e59.
-- Anonymous production remains exact 60c3fd5318a483b0e4001481d036358a855a7961,
-  healthy on release image
-  sha256:7a9b6dbc5832aa9d3601a7216114499e0a56453bf83b9cd34cc266eb8c3da955.
+- V72 is committed, pushed, and fast-forward landed at exact
+  `6ee86935038744c0066cac6a50865f76eab93e37`.
+- Anonymous production was upgraded to that exact application revision on 2026-08-27.
+  Image sha256:30b39c0bba954074de6cdecd377a9742f627f4900caccbae8805d132f5c317bd
+  is healthy with zero restarts and tagged release-6ee869350387.
+- The prior V68 image is preserved as rollback-60c3fd5318a. Exact manifest/hash/counts,
+  health, accounts-off, submissions-disabled, 14-category, Intrusul/Perechi, UI asset,
+  V72 alias-resolution, and delayed log smokes passed.
 - No database, OAuth, worker, account, frontend, session, environment, DNS, TLS, Caddy, or
   infrastructure behavior changed.
 
 ## Next action
 
-Review the green uncommitted snapshot. Commit, push, require exact feature CI, and land
-only as separately requested steps; deploy only when separately requested.
+Gate this docs-only rollout record through exact feature and main CI before landing, then
+retire the landed local worktrees/branches while retaining remote refs unless deletion is
+separately approved.

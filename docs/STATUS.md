@@ -1,10 +1,10 @@
 # Status — cat_de_roman_esti
 
-_As of 2026-08-26. This file is the repository's current source of truth._
+_As of 2026-08-27. This file is the repository's current source of truth._
 
-_Last verified: 2026-08-26 (complete local V72 backend, accounts, sessions, focused and
-historical resolver tests, validators, generators, Ruff, mirrors, hashes, JSON/digests,
-whitespace, and diff checks are green)._
+_Last verified: 2026-08-27 (complete local V72 gates, exact feature and landed-main CI,
+and anonymous production identity, health, gameplay, account-mode, asset, and log smokes
+are green)._
 
 ## Current work — V72 applied snapshot
 
@@ -18,8 +18,9 @@ whitespace, and diff checks are green)._
   predecessors. Pre-apply fuzzy results were 20 intended, 30 unresolved, and zero wrong.
 - V71's reviewed actionable-fuzzy deny set remains exactly `intrigii` and `intrigilor`;
   the inherited 70-term cumulative nonaccepted ledger is unchanged.
-- V72 is intentionally uncommitted, unlanded, unpushed, and undeployed. Feature CI has not
-  run and is not claimed.
+- V72 is committed, pushed, and fast-forward landed at exact
+  `6ee86935038744c0066cac6a50865f76eab93e37`; feature/main Actions runs
+  `33023808156`/`33024392655` passed frontend and Python 3.12/3.14 on attempt 1.
 - ADR-0097 supersedes ADR-0096 only at its V71 build/count decision. Contexto selection,
   navigation, sessions, privacy, frontend, and all other fuzzy behavior remain unchanged.
 
@@ -69,19 +70,17 @@ Sessions retain the 7,200-second sliding TTL, 1,000-entry per-game cap, per-entr
 
 ## Documented main and production
 
-- The V72 worktree's exact V71 parent is b3630aefc5a64e2c210a90d9bab2d40d0d1b4e59.
-  Landing and CI state are recorded by the orchestrating session; this snapshot makes no
-  claim that V72 is on main.
-- Anonymous production remains healthy at 60c3fd5318a on image
-  sha256:7a9b6dbc5832aa9d3601a7216114499e0a56453bf83b9cd34cc266eb8c3da955,
-  tagged release-60c3fd5318a, with zero restarts and zero error-log markers.
-- Retained rollbacks are V65 sha256:71f3e2cc / rollback-aefcc2c64fed and V61
-  sha256:efa179af / rollback-1c42de0. Caddy remains retained.
+- Anonymous production was upgraded from V68 `60c3fd5318a` to exact V72
+  `6ee86935038744c0066cac6a50865f76eab93e37` on 2026-08-27. The healthy app image is
+  sha256:30b39c0bba954074de6cdecd377a9742f627f4900caccbae8805d132f5c317bd,
+  tagged release-6ee869350387, with zero restarts and zero error-log markers.
+- `rollback-60c3fd5318a` preserves the prior V68 image sha256:7a9b6dbc5832; older V65/V61
+  rollbacks remain retained. Caddy kept the same container/image and zero restarts.
 - Production checkout is clean; accounts/debug are off; submissions return 503. No
-  database, OAuth, worker, environment, DNS, TLS, or infrastructure change occurred.
-- Health, healthz, me, Intrusul/Perechi, exact UI assets, and V69 Contexto refren rank-170
-  smokes remain green. Production still reports V68 manifest hash
-  sha256:54f4d41b3ca4bea0d3160ea81364c68940a5bdeef1e4c2f67f263c1e29fe4002
+  database, OAuth, worker, environment, DNS, TLS, Caddy, or infrastructure change occurred.
+- Health, healthz, me, all 14 categories, Intrusul/Perechi, exact UI assets, and a V72
+  Contexto alias smoke are green. Production reports the V72 manifest hash
+  sha256:6a388f9bdb391ffca61ce4d51ab28255c00ed619142ded51cedd26c02bb9213d
   with counts 2,364 / 9,217 / 180.
 - Rollout risk remains five high npm advisories; react-router/react-router-dom 7.18.1 carry
   GHSA-qwww-vcr4-c8h2, fixed in 7.18.2. V65 had the same lock and rollback does not reduce
@@ -89,5 +88,6 @@ Sessions retain the 7,200-second sliding TTL, 1,000-entry per-game cap, per-entr
 
 ## Next verified work
 
-- Review the green uncommitted snapshot. Commit, push, require exact feature CI, and land
-  only as separately requested steps; deploy only when separately requested.
+- Gate this docs-only rollout record through exact feature and main CI before landing.
+- Keep rollback-60c3fd5318a through the next successful rollout; start a later bounded
+  vocabulary wave from final documented main only when requested.
