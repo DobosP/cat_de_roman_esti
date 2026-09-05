@@ -20,14 +20,14 @@ import critique_pack  # noqa: E402
 IDS = ("ct_meme_net_238", "ct_societate_257", "lt_literatura_210")
 
 
-def _fresh_dossiers(path: Path) -> dict[str, dict]:
+def _fresh_dossiers(path: Path, ids: tuple[str, ...] = IDS) -> dict[str, dict]:
     path.mkdir()
     pack, svc, strong, regions = critique_pack.load_all(
         critique_pack.PACKAGE_PACK, critique_pack.PACKAGE_KG
     )
     _, _, selected = critique_pack.run(
         pack, svc, strong, regions, list(build_review_artifact.GAME_KINDS),
-        {"pending"}, set(IDS),
+        {"pending"}, set(ids),
     )
     dossiers = {}
     for game, record, findings in selected:
@@ -39,7 +39,7 @@ def _fresh_dossiers(path: Path) -> dict[str, dict]:
             json.dumps(dossier, ensure_ascii=False, indent=1) + "\n",
             encoding="utf-8",
         )
-    assert set(dossiers) == set(IDS)
+    assert set(dossiers) == set(ids)
     return dossiers
 
 
@@ -141,6 +141,7 @@ def test_builds_conservative_v2_artifacts_accepted_by_applier(tmp_path: Path) ->
             assert row["verifier_lost"] is False
 
     assert {path.stem for path in (out / "dossiers").glob("*.json")} == set(IDS)
+    assert not list(tmp_path.glob(".out.review-artifact-*"))
 
 
 @pytest.mark.parametrize(
@@ -188,6 +189,7 @@ def test_invalid_reviews_fail_before_overwriting_output(
         _run(analyst_path, verifier_path, dossier_dir, out)
     assert target.read_bytes() == sentinel
     assert not (out / "lant_verdicts.json").exists()
+    assert not list(tmp_path.glob(".out.review-artifact-*"))
 
 
 def test_missing_or_extra_dossiers_fail_without_creating_output(tmp_path: Path) -> None:
@@ -198,6 +200,7 @@ def test_missing_or_extra_dossiers_fail_without_creating_output(tmp_path: Path) 
     with pytest.raises(SystemExit, match="dossier batch mismatch"):
         _run(analyst_path, verifier_path, dossier_dir, out)
     assert not out.exists()
+    assert not list(tmp_path.glob(".out.review-artifact-*"))
 
 
 def test_self_consistent_but_outdated_dossier_fails_before_output(tmp_path: Path) -> None:
@@ -216,6 +219,7 @@ def test_self_consistent_but_outdated_dossier_fails_before_output(tmp_path: Path
     with pytest.raises(SystemExit, match="stale dossiers for current pending content"):
         _run(analyst_path, verifier_path, dossier_dir, out)
     assert not out.exists()
+    assert not list(tmp_path.glob(".out.review-artifact-*"))
 
 
 def test_valid_batch_does_not_mix_with_stale_output_artifacts(tmp_path: Path) -> None:
@@ -228,3 +232,51 @@ def test_valid_batch_does_not_mix_with_stale_output_artifacts(tmp_path: Path) ->
         _run(analyst_path, verifier_path, dossier_dir, out)
     assert stale.read_bytes() == b"old batch\n"
     assert not (out / "contexto_verdicts.json").exists()
+    assert not list(tmp_path.glob(".out.review-artifact-*"))
+
+
+def test_alchimie_input_fails_without_fabricating_projection_evidence(
+    tmp_path: Path,
+) -> None:
+    item_id = "al_gastronomie_026"
+    dossier_dir = tmp_path / "dossiers"
+    dossiers = _fresh_dossiers(dossier_dir, (item_id,))
+    analyst_path = tmp_path / "analyst.json"
+    verifier_path = tmp_path / "verifier.json"
+    for role, path in (("analyst", analyst_path), ("verifier", verifier_path)):
+        _write(path, {
+            "reviewer": f"independent-{role}-alchimie",
+            "role": role,
+            "input_ids": [item_id],
+            "items": [{
+                "id": item_id,
+                "game": "alchimie",
+                "verdict": "keep",
+                "review_binding": dossiers[item_id]["review_binding"],
+                "rationale": "Judecata nu pretinde verificarea proiecției private.",
+                "sources": ["https://example.org/alchimie"] if role == "verifier" else [],
+            }],
+        })
+    out = tmp_path / "out"
+
+    with pytest.raises(SystemExit, match="do not support Alchimie projection evidence"):
+        _run(analyst_path, verifier_path, dossier_dir, out)
+    assert not out.exists()
+    assert not list(tmp_path.glob(".out.review-artifact-*"))
+
+
+def test_validation_stage_uses_output_parent_and_is_removed(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    analyst_path, verifier_path, dossier_dir, out, _, _, _ = _inputs(tmp_path)
+    real_mkdtemp = build_review_artifact.tempfile.mkdtemp
+    seen = []
+
+    def observed_mkdtemp(*, prefix: str, dir: Path) -> str:
+        seen.append((prefix, Path(dir)))
+        return real_mkdtemp(prefix=prefix, dir=dir)
+
+    monkeypatch.setattr(build_review_artifact.tempfile, "mkdtemp", observed_mkdtemp)
+    assert _run(analyst_path, verifier_path, dossier_dir, out) == 0
+    assert seen == [(".out.review-artifact-", tmp_path)]
+    assert not list(tmp_path.glob(".out.review-artifact-*"))

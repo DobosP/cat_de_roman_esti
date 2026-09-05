@@ -30,8 +30,8 @@ the quality and promotion requirements are [the critique rubric](CRITIQUE_RUBRIC
    PYTHONPATH=. <interp> scripts/apply_rereview.py --dir <scratch>/<wave>-verdicts
    ```
 
-   The current V2 projection contract accepts Alchimie-only batches; a batch that mixes
-   Alchimie with another game fails closed before output.
+   This portable serializer supports Conexiuni, Contexto, and Lanț. Alchimie retains its
+   existing projection-bound workflow; passing an Alchimie ID here fails before output.
 
 5. Run the content gates and refresh only the digest-bound artifacts affected by the pack:
 

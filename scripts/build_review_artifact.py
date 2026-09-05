@@ -169,19 +169,6 @@ def policy(analyst: str, verifier: str, final: str) -> str:
     return "conservative-keep"
 
 
-def projection_audit_path(dossier_dir: Path) -> Path:
-    candidates = (
-        dossier_dir / apply_rereview.ALCHIMIE_PROJECTION_AUDIT,
-        dossier_dir.parent / apply_rereview.ALCHIMIE_PROJECTION_AUDIT,
-    )
-    for path in candidates:
-        if path.is_file():
-            return path
-    fail(
-        "Alchimie review needs projection-audit.json beside or inside the dossier directory"
-    )
-
-
 def build_artifacts(
     analyst: dict,
     verifier: dict,
@@ -190,8 +177,7 @@ def build_artifacts(
     analyst_blob: bytes,
     verifier_blob: bytes,
     dossiers: dict[str, dict],
-    dossier_dir: Path,
-) -> tuple[dict[str, dict], Path | None]:
+) -> dict[str, dict]:
     input_ids = analyst["input_ids"]
     if verifier["input_ids"] != input_ids:
         fail("analyst and verifier batches differ")
@@ -211,14 +197,8 @@ def build_artifacts(
             fail(f"verifier judgment does not match dossier for {item_id}")
 
     batch_games = {dossiers[item_id]["game"] for item_id in input_ids}
-    if "alchimie" in batch_games and len(batch_games) > 1:
-        fail("mixed Alchimie batches are unsupported by the current V2 applier")
-
-    audit_path = None
-    projection_digest = None
-    if any(dossiers[item_id]["game"] == "alchimie" for item_id in input_ids):
-        audit_path = projection_audit_path(dossier_dir)
-        projection_digest = hashlib.sha256(audit_path.read_bytes()).hexdigest()
+    if "alchimie" in batch_games:
+        fail("portable review artifacts do not support Alchimie projection evidence")
 
     provenance = {
         "analyst": {
@@ -252,8 +232,6 @@ def build_artifacts(
             "mode": "gate",
             "input_ids": input_ids,
         }
-        if game == "alchimie":
-            batch["projection_audit_sha256"] = projection_digest
         rows = []
         for item_id in game_ids:
             left = analyst_items[item_id]
@@ -272,9 +250,6 @@ def build_artifacts(
                 "analyst_review": dict(left),
                 "verifier_review": dict(right),
             }
-            if game == "alchimie":
-                row["analyst_projection_audit_sha256"] = projection_digest
-                row["verifier_projection_audit_sha256"] = projection_digest
             rows.append(row)
         artifacts[game] = {
             "game": game,
@@ -291,25 +266,29 @@ def build_artifacts(
             },
             "provenance": provenance,
         }
-    return artifacts, audit_path
+    return artifacts
 
 
 def validated_staging(
     artifacts: dict[str, dict],
     dossiers: dict[str, dict],
-    audit_path: Path | None,
+    staging_parent: Path,
+    output_name: str,
 ) -> Path:
-    staging = Path(tempfile.mkdtemp(prefix="review-artifact-"))
-    dossier_out = staging / "dossiers"
-    dossier_out.mkdir()
-    for item_id, dossier in dossiers.items():
-        (dossier_out / f"{item_id}.json").write_text(
-            json.dumps(dossier, ensure_ascii=False, indent=1) + "\n",
-            encoding="utf-8",
-        )
-    if audit_path is not None:
-        shutil.copyfile(audit_path, staging / apply_rereview.ALCHIMIE_PROJECTION_AUDIT)
+    if not staging_parent.is_dir():
+        fail(f"output parent directory does not exist: {staging_parent}")
+    staging = Path(tempfile.mkdtemp(
+        prefix=f".{output_name}.review-artifact-",
+        dir=staging_parent,
+    ))
     try:
+        dossier_out = staging / "dossiers"
+        dossier_out.mkdir()
+        for item_id, dossier in dossiers.items():
+            (dossier_out / f"{item_id}.json").write_text(
+                json.dumps(dossier, ensure_ascii=False, indent=1) + "\n",
+                encoding="utf-8",
+            )
         for game, artifact in artifacts.items():
             path = staging / f"{game}_verdicts.json"
             path.write_text(
@@ -317,10 +296,6 @@ def validated_staging(
                 encoding="utf-8",
             )
             apply_rereview.validated_artifact(artifact, game, path)
-            if game == "alchimie":
-                apply_rereview.validate_live_alchimie_projection_source(
-                    artifact["batch"], path
-                )
     except BaseException:
         shutil.rmtree(staging)
         raise
@@ -353,9 +328,6 @@ def write_outputs(staging: Path, out_dir: Path, games: set[str]) -> None:
     target_dossiers.mkdir(exist_ok=True)
     for path in sorted(source_dossiers.glob("*.json")):
         atomic_write(target_dossiers / path.name, path.read_bytes())
-    audit = staging / apply_rereview.ALCHIMIE_PROJECTION_AUDIT
-    if audit.exists():
-        atomic_write(out_dir / audit.name, audit.read_bytes())
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -371,7 +343,7 @@ def main(argv: list[str] | None = None) -> int:
     if verifier["input_ids"] != analyst["input_ids"]:
         fail("analyst and verifier batches differ")
     dossiers = read_dossiers(args.dossiers, analyst["input_ids"])
-    artifacts, audit_path = build_artifacts(
+    artifacts = build_artifacts(
         analyst,
         verifier,
         args.analyst,
@@ -379,9 +351,13 @@ def main(argv: list[str] | None = None) -> int:
         analyst_blob,
         verifier_blob,
         dossiers,
-        args.dossiers,
     )
-    staging = validated_staging(artifacts, dossiers, audit_path)
+    staging = validated_staging(
+        artifacts,
+        dossiers,
+        args.out.parent,
+        args.out.name,
+    )
     try:
         write_outputs(staging, args.out, set(artifacts))
     finally:

@@ -22,8 +22,8 @@ The tool preserves each raw judgment, rationale, and source list plus both input
 reviewer identities, roles, and byte-level SHA-256 digests. It derives the version-2 gate
 rows with `apply_rereview.synthesized_gate_verdict`: only two promotions promote, either
 rejection rejects, and every other combination keeps the item pending. It validates every
-finished file through `apply_rereview.validated_artifact` before writing output. Alchimie
-also retains and revalidates its required live-projection evidence.
+finished file through `apply_rereview.validated_artifact` before writing output. Temporary
+validation files live under the caller's existing output parent and are always removed.
 
 ## Consequences
 
@@ -31,9 +31,9 @@ Missing, duplicate, stale, partial, role-confused, same-identity, or malformed i
 before an output file is changed. Existing unrelated per-game artifacts and dossier files
 also block the write so an old batch cannot be mixed into a new one.
 
-The current applier's live-projection contract cannot represent Alchimie rows inside a
-cross-game batch. This tool accepts Alchimie-only evidence and rejects a mixed Alchimie
-batch before output; changing that existing projection boundary is outside this decision.
+Alchimie reviewers must explicitly bind the private live-recipe projection. Because this
+portable input does not carry that reviewer-authored binding, the tool rejects every
+Alchimie ID before output and leaves the existing projection-bound workflow unchanged.
 
 The tool serializes already-authored judgments; it does not review content, alter the rubric
 or model workflow, promote a pack item, or set verification flags outside its validated
