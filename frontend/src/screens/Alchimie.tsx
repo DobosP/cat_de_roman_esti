@@ -23,6 +23,7 @@ import { NextMove } from "../components/PlayGuide";
 import { DifficultyPicker } from "../components/DifficultyPicker";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
+import { useSavedGameResume } from "../hooks/useSavedGameResume";
 import { gameByKey } from "../games";
 import { sound } from "../sound";
 import { bestScore } from "../scores";
@@ -35,6 +36,8 @@ const DEF = gameByKey("alchimie");
 
 const GOLD = "#ffd166";
 const REACTION_LOG_LIMIT = 12;
+
+const isTerminalResume = (state: AlchimieState) => state.won === true;
 
 type CraftedItem = InventoryItem & { parents: [Concept, Concept] };
 
@@ -125,7 +128,6 @@ export default function Alchimie({
   const [category, setCategory] = useState<string | null>(null);
   const [isRecord, setIsRecord] = useState(false);
   const [isPuzzleRecord, setIsPuzzleRecord] = useState(false);
-  const resumeAttempted = useRef(false);
   const combineInFlight = useRef(false);
   const inventoryButtons = useRef(new Map<string, HTMLButtonElement>());
   const active = useActiveGame("alchimie");
@@ -133,45 +135,35 @@ export default function Alchimie({
 
   const best = useMemo(() => bestScore(GAME_KEY), []);
 
-  useEffect(() => {
-    if (resumeAttempted.current) return;
-    resumeAttempted.current = true;
-    const id = active.peek();
-    if (!id) return;
+  const applyResumedGame = useCallback(
+    (s: AlchimieState) => {
+      setState(s);
+      setDifficulty(s.difficulty);
+      setCategory(s.board_category ?? null);
+      setSelected([]);
+      setEmptyPairKey(null);
+      setEmptyRecoveryActive(false);
+      setFreshIds(new Set());
+      setHintIds(new Set());
+      setInventoryView("useful");
+      setInventoryQuery("");
+      setLastMessage(null);
+      setIsRecord(false);
+      setIsPuzzleRecord(false);
+      onToast("Joc reluat.", "info");
+    },
+    [onToast],
+  );
 
-    // No abort/cleanup on purpose: the ref guard blocks StrictMode's second run, so
-    // the FIRST run's result must be allowed to land (a cancelled-flag cleanup would
-    // discard it and resume would never happen in dev). Modern React ignores a
-    // post-unmount state update.
-    setLoading(true);
-    void (async () => {
-      try {
-        const s = await alchimieApi.get(id);
-        if (s.won === true) {
-          active.forget();
-          return;
-        }
-        setState(s);
-        setDifficulty(s.difficulty);
-        setCategory(s.board_category ?? null);
-        setSelected([]);
-        setEmptyPairKey(null);
-        setEmptyRecoveryActive(false);
-        setFreshIds(new Set());
-        setHintIds(new Set());
-        setInventoryView("useful");
-        setInventoryQuery("");
-        setLastMessage(null);
-        setIsRecord(false);
-        setIsPuzzleRecord(false);
-        onToast("Joc reluat.", "info");
-      } catch {
-        active.forget();
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [active, onToast]);
+  useSavedGameResume({
+    active,
+    load: alchimieApi.get,
+    isTerminal: isTerminalResume,
+    terminal: "discard",
+    transient: "forget",
+    setPending: setLoading,
+    onResume: applyResumedGame,
+  });
 
   const start = useCallback(
     async (opts: CreateOpts = {}) => {

@@ -100,7 +100,7 @@ src/
     Confetti.tsx      One-shot deterministic celebration burst; honours reduced motion.
     AccountBar.tsx    Optional account/ranking controls.
     SoundToggle.tsx   Persisted mute control.
-  hooks/              useActiveGame, useAuth, useRecordScore.
+  hooks/              useActiveGame, useSavedGameResume, useAuth, useRecordScore.
   games.ts            Single registry for the six games: routes, titles, accents, icons.
   categories.ts       KG category → color/label map, mirroring the --cat-* CSS variables.
   scores.ts           Offline localStorage personal-best store (per game + per puzzle).

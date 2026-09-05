@@ -6,7 +6,7 @@
 // Server-authoritative: the grouping + solution live on the server; this component renders
 // what it returns and surfaces a personal best + a shareable result on finish.
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, m } from "framer-motion";
 import { ApiError } from "../api/client";
 import {
@@ -26,6 +26,7 @@ import { DifficultyPicker } from "../components/DifficultyPicker";
 import { NextMove } from "../components/PlayGuide";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
+import { useSavedGameResume } from "../hooks/useSavedGameResume";
 import { sound } from "../sound";
 import { categoryColor, categoryLabel } from "../categories";
 import { CategoryPicker } from "../components/CategoryPicker";
@@ -35,6 +36,8 @@ import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 
 const GAME_KEY = "conexiuni";
 const DEF = gameByKey("conexiuni");
+
+const isTerminalResume = (state: ConexiuniState) => state.won || state.lost;
 
 interface SelfProps {
   onExit: () => void;
@@ -80,7 +83,6 @@ const unsolvedTileIds = (fresh: ConexiuniState) => {
 
 export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const active = useActiveGame(GAME_KEY);
-  const resumeOnce = useRef(false);
   const [state, setState] = useState<ConexiuniState | null>(null);
   const [loading, setLoading] = useState(() => active.peek() !== null);
   const [busy, setBusy] = useState(false);
@@ -197,42 +199,32 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     }
   }, [applyAuthoritativeState]);
 
-  useEffect(() => {
-    if (resumeOnce.current) return;
-    resumeOnce.current = true;
+  const applyResumedGame = useCallback(
+    (s: ConexiuniState) => {
+      setState(s);
+      setDifficulty(s.difficulty);
+      setCategory(s.board_category ?? null);
+      setRecordHit(false);
+      setPuzzleRecordHit(false);
+      setSelected([]);
+      setBlockedGuess(null);
+      setHint(null);
+      setShuffleNonce(0);
+      setShake(0);
+      onToast("Joc reluat.", "info");
+    },
+    [onToast],
+  );
 
-    const id = active.peek();
-    if (!id) {
-      setLoading(false);
-      return;
-    }
-
-    setLoading(true);
-    void (async () => {
-      try {
-        const s = await conexiuniApi.get(id);
-        if (s.won || s.lost) {
-          active.forget();
-          return;
-        }
-        setState(s);
-        setDifficulty(s.difficulty);
-        setCategory(s.board_category ?? null);
-        setRecordHit(false);
-        setPuzzleRecordHit(false);
-        setSelected([]);
-        setBlockedGuess(null);
-        setHint(null);
-        setShuffleNonce(0);
-        setShake(0);
-        onToast("Joc reluat.", "info");
-      } catch {
-        active.forget();
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [active, onToast]);
+  useSavedGameResume({
+    active,
+    load: conexiuniApi.get,
+    isTerminal: isTerminalResume,
+    terminal: "discard",
+    transient: "forget",
+    setPending: setLoading,
+    onResume: applyResumedGame,
+  });
 
   const puzzleKey = useMemo(() => {
     if (!state || !finished) return null;

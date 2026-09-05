@@ -23,6 +23,7 @@ import { DifficultyPicker } from "../components/DifficultyPicker";
 import { NextMove } from "../components/PlayGuide";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
+import { useSavedGameResume } from "../hooks/useSavedGameResume";
 import { sound } from "../sound";
 import { bestScore } from "../scores";
 import { gameByKey } from "../games";
@@ -32,6 +33,8 @@ import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 
 const GAME_KEY = "lant";
 const DEF = gameByKey("lant");
+
+const isTerminalResume = (state: LantState) => state.won;
 
 const DIFFICULTIES: { key: Difficulty; label: string; hint: string }[] = [
   { key: "usor", label: "Ușor", hint: "recomandat" },
@@ -128,7 +131,6 @@ export default function Lant({
     isPuzzleBest: boolean;
   } | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const resumeTried = useRef(false);
 
   const focusInputForFinePointer = useCallback(() => {
     if (window.matchMedia("(pointer: fine)").matches) {
@@ -192,35 +194,29 @@ export default function Lant({
     [onToast, difficulty, category, active],
   );
 
-  useEffect(() => {
-    if (resumeTried.current) return;
-    resumeTried.current = true;
-    const id = active.peek();
-    if (!id) return;
+  const applyResumedGame = useCallback(
+    (fresh: LantState) => {
+      setHint(null);
+      setProgress(null);
+      setScored(null);
+      setDifficulty(fresh.difficulty);
+      setCategory(fresh.board_category ?? null);
+      setState(fresh);
+      setText("");
+      onToast("Joc reluat.", "info");
+    },
+    [onToast],
+  );
 
-    setLoading(true);
-    void (async () => {
-      try {
-        const fresh = await getLant(id);
-        if (fresh.won) {
-          active.forget();
-          return;
-        }
-        setHint(null);
-        setProgress(null);
-        setScored(null);
-        setDifficulty(fresh.difficulty);
-        setCategory(fresh.board_category ?? null);
-        setState(fresh);
-        setText("");
-        onToast("Joc reluat.", "info");
-      } catch {
-        active.forget();
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [active, onToast]);
+  useSavedGameResume({
+    active,
+    load: getLant,
+    isTerminal: isTerminalResume,
+    terminal: "discard",
+    transient: "forget",
+    setPending: setLoading,
+    onResume: applyResumedGame,
+  });
 
   // Record the score exactly once when the game is won.
   useEffect(() => {

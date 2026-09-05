@@ -29,6 +29,7 @@ import {
 import { bestScore } from "../scores";
 import { useRecordScore } from "../hooks/useRecordScore";
 import { useActiveGame } from "../hooks/useActiveGame";
+import { useSavedGameResume } from "../hooks/useSavedGameResume";
 import { gameByKey } from "../games";
 import { categoryColor, categoryLabel } from "../categories";
 import { CategoryPicker } from "../components/CategoryPicker";
@@ -37,6 +38,8 @@ import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
 const GAME_KEY = "contexto";
 const DEF = gameByKey("contexto");
 const CLUE_UNLOCK_ATTEMPTS = 3;
+
+const isTerminalResume = (state: ContextoState) => state.won || state.gave_up;
 
 const DIFFICULTY_LABEL: Record<Difficulty, string> = {
   usor: "Ușor",
@@ -208,7 +211,6 @@ export default function CaldRece({
   const inputRef = useRef<HTMLInputElement>(null);
   const recordOnce = useRecordScore("contexto");
   const active = useActiveGame("contexto");
-  const resumeOnce = useRef(false);
 
   const best = bestScore(GAME_KEY);
 
@@ -243,44 +245,35 @@ export default function CaldRece({
     [active, onToast],
   );
 
-  useEffect(() => {
-    if (resumeOnce.current) return;
-    resumeOnce.current = true;
+  const applyResumedGame = useCallback(
+    (saved: ContextoState) => {
+      setState(saved);
+      setDifficulty(saved.difficulty);
+      setCategory(saved.board_category ?? null);
+      setLatestId(null);
+      setFeedback(null);
+      setGuessView("best");
+      setConfirmReveal(false);
+      setText("");
+      setRecovery(null);
+      setIsRecord(false);
+      setIsPuzzleRecord(false);
+      setShowIntro(false);
+      window.setTimeout(() => inputRef.current?.focus(), 0);
+      onToast("Joc reluat.", "info");
+    },
+    [onToast],
+  );
 
-    const id = active.peek();
-    if (!id) return;
-
-    const resume = async () => {
-      setBusy(true);
-      try {
-        const saved = await contextoApi.getGame(id);
-        if (saved.won || saved.gave_up) {
-          active.forget();
-          return;
-        }
-        setState(saved);
-        setDifficulty(saved.difficulty);
-        setCategory(saved.board_category ?? null);
-        setLatestId(null);
-        setFeedback(null);
-        setGuessView("best");
-        setConfirmReveal(false);
-        setText("");
-        setRecovery(null);
-        setIsRecord(false);
-        setIsPuzzleRecord(false);
-        setShowIntro(false);
-        window.setTimeout(() => inputRef.current?.focus(), 0);
-        onToast("Joc reluat.", "info");
-      } catch {
-        active.forget();
-      } finally {
-        setBusy(false);
-      }
-    };
-
-    void resume();
-  }, [active, onToast]);
+  useSavedGameResume({
+    active,
+    load: contextoApi.getGame,
+    isTerminal: isTerminalResume,
+    terminal: "discard",
+    transient: "forget",
+    setPending: setBusy,
+    onResume: applyResumedGame,
+  });
 
   const won = state?.won ?? false;
   const gaveUp = state?.gave_up ?? false;

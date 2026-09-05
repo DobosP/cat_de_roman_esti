@@ -24,6 +24,7 @@ import { nextActiveTileId } from "../perechiFocus.mjs";
 import { gameByKey } from "../games";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
+import { useSavedGameResume } from "../hooks/useSavedGameResume";
 import {
   lastDerivedReplayId,
   rememberDerivedReplayId,
@@ -35,6 +36,8 @@ import "../styles/perechi.css";
 
 const GAME_KEY = "perechi";
 const DEF = gameByKey(GAME_KEY);
+
+const isTerminalResume = (state: PerechiState) => state.won || state.lost;
 
 interface Props {
   onExit: () => void;
@@ -51,7 +54,6 @@ type PendingFocus = { kind: "tile"; id: string } | { kind: "result" } | null;
 export default function Perechi({ onExit, onToast }: Props) {
   const active = useActiveGame(GAME_KEY);
   const recordOnce = useRecordScore(GAME_KEY);
-  const resumeOnce = useRef(false);
   const startInFlight = useRef(false);
   const actionInFlight = useRef(false);
   const tileRefs = useRef(new Map<string, HTMLButtonElement>());
@@ -139,35 +141,29 @@ export default function Perechi({ onExit, onToast }: Props) {
     [active, onToast],
   );
 
-  useEffect(() => {
-    if (resumeOnce.current) return;
-    resumeOnce.current = true;
-    const gameId = active.peek();
-    if (!gameId) {
-      setLoading(false);
-      return;
-    }
-    setLoading(true);
-    void (async () => {
-      try {
-        const fresh = await perechiApi.get(gameId);
-        setState(fresh);
-        setSelected(null);
-        setChecking(null);
-        setFeedback(
-          fresh.won || fresh.lost ? null : "Joc reluat. Atinge primul cuvânt.",
-        );
-      } catch (error) {
-        if (error instanceof ApiError && error.status === 404) {
-          active.forget();
-        } else {
-          onToast("Nu am putut relua jocul. Încercăm din nou la următoarea deschidere.", "error");
-        }
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [active, onToast]);
+  const applyResumedGame = useCallback((fresh: PerechiState) => {
+    setState(fresh);
+    setSelected(null);
+    setChecking(null);
+    setFeedback(fresh.won || fresh.lost ? null : "Joc reluat. Atinge primul cuvânt.");
+  }, []);
+  const reportResumeFailure = useCallback(() => {
+    onToast(
+      "Nu am putut relua jocul. Încercăm din nou la următoarea deschidere.",
+      "error",
+    );
+  }, [onToast]);
+
+  useSavedGameResume({
+    active,
+    load: perechiApi.get,
+    isTerminal: isTerminalResume,
+    terminal: "adopt",
+    transient: "retain",
+    setPending: setLoading,
+    onResume: applyResumedGame,
+    onTransientError: reportResumeFailure,
+  });
 
   const puzzleKey = useMemo(() => {
     if (!state || !finished || !state.solution) return null;
