@@ -9,7 +9,7 @@ Last verified: 2026-09-06 — V74/V75 locally integrated; final combined gates p
 - V74 restores transiently unavailable rounds, rejects stale resume responses, recovers terminal results,
   retains retry after failed fresh creation, and preserves terminal Contexto/Lanț state (ADR-0101).
 - Scrolling HUD/history are keyboard-reachable; all six intro/live/result states pass rendered audits and
-  full desktop keyboard rounds (ADR-0103). Local score deduplication is under final review (ADR-0105).
+  full desktop keyboard rounds (ADR-0103). Local scores and bounded private receipts now persist atomically (ADR-0105).
 - V75 adds two reviewed Contexto food targets after dropping three weak candidates. Reusable pack-only
   import/review tools and bound evidence: ADRs 0102/0104/0106; `docs/reviews/v75-contexto-food/README.md`.
 - Served KG remains `fixture-v72-romanian-dishes-and-pastries-morphology`: 2,364 nodes / 9,217 edges /

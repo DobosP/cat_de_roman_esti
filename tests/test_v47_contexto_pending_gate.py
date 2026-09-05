@@ -192,7 +192,7 @@ def test_v47_pack_applies_only_the_bound_outcomes_and_keeps_unique_live_targets(
     }
     assert pack["meta"]["id_high_water"]["contexto"] == 319
     assert Counter(record["status"] for record in contexto.values()) == {
-        "approved": 205,
+        "approved": 207,
         "pending": 2,
     }
     assert statuses == {"approved": 612, "pending": 8}

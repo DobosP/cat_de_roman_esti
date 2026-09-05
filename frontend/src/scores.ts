@@ -33,7 +33,6 @@ export interface GameRecord {
 }
 
 const STORAGE_KEY = "cat_wordgame_scores_v1";
-const RECEIPT_STORAGE_KEY = "cat_wordgame_score_receipts_v1";
 const SCORE_STORE_LOCK = "cat_wordgame_scores_v1_transaction";
 const EXPORT_SCHEMA = "cat-wordgame-history-v2";
 const GAME_CAP = 16;
@@ -45,6 +44,8 @@ const DERIVED_STARTER_COMPLETIONS = 3;
 const DAILY_CIRCUIT_SCORE_CAP = 1_000;
 /** Reserved key inside the same payload; never a game key, so it's excluded from GAME_CAP. */
 const STREAK_KEY = "_streak";
+/** Private receipt metadata committed atomically with score rows and stripped by `load()`. */
+const RECEIPTS_KEY = "_completionReceipts";
 /** Sanity bound only — a real streak never approaches this. */
 const DAILY_STREAK_CAP = 20_000;
 
@@ -85,10 +86,10 @@ export interface GameScoreEntry extends ScoreEntry {
   game: string;
 }
 
-function loadRaw(): Record<string, unknown> {
-  if (typeof localStorage === "undefined") return {};
+function loadRaw(storage = browserStorage()): Record<string, unknown> {
+  if (!storage) return {};
   try {
-    const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    const parsed = JSON.parse(storage.getItem(STORAGE_KEY) || "{}");
     return isRecord(parsed) ? parsed : {};
   } catch {
     return {};
@@ -99,15 +100,23 @@ function load(): Board {
   return normalizeBoard(loadRaw());
 }
 
-/** `streak` is written verbatim (undefined omits the key, preserving nothing). */
-function save(board: Board, streak?: unknown): void {
-  if (typeof localStorage === "undefined") return;
+/** Reserved metadata is written verbatim; undefined omits that key. */
+function save(
+  board: Board,
+  streak?: unknown,
+  receipts?: unknown,
+  storage = browserStorage(),
+): boolean {
+  if (!storage) return false;
   try {
     const payload: Record<string, unknown> = { ...board };
     if (streak !== undefined) payload[STREAK_KEY] = streak;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    if (receipts !== undefined) payload[RECEIPTS_KEY] = receipts;
+    storage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    return true;
   } catch {
     /* best-effort */
+    return false;
   }
 }
 
@@ -174,14 +183,15 @@ export async function recordScoreCompletionOnce(
     if (!storage || !receiptGame || !receiptId) {
       return recordScore(game, score, detail, options);
     }
-    const ledger = loadReceiptLedger(storage, now);
+    const raw = loadRaw(storage);
+    const ledger = normalizeReceiptLedger(raw[RECEIPTS_KEY], now);
     if (ledger[receiptGame]?.some((receipt) => receipt.id === receiptId)) return null;
 
-    const outcome = recordScore(game, score, detail, options);
+    const update = buildScoreUpdate(raw, game, score, detail, options);
     ledger[receiptGame] = [{ id: receiptId, at: now }, ...(ledger[receiptGame] ?? [])]
       .slice(0, RECEIPT_CAP_PER_GAME);
-    saveReceiptLedger(storage, ledger);
-    return outcome;
+    save(update.board, update.streak, { version: 1, games: ledger }, storage);
+    return update.outcome;
   };
 
   if (!locks) return transaction();
@@ -202,6 +212,18 @@ export function recordScore(
   options: RecordScoreOptions = {},
 ): RecordOutcome {
   const raw = loadRaw();
+  const update = buildScoreUpdate(raw, game, score, detail, options);
+  save(update.board, update.streak, raw[RECEIPTS_KEY]);
+  return update.outcome;
+}
+
+function buildScoreUpdate(
+  raw: Record<string, unknown>,
+  game: string,
+  score: number,
+  detail: string,
+  options: RecordScoreOptions,
+): { board: Board; streak: unknown; outcome: RecordOutcome } {
   const board = normalizeBoard(raw);
   const rec: GameRecord = board[game] ?? {
     best: null,
@@ -222,7 +244,13 @@ export function recordScore(
     daily: options.daily?.trim() || undefined,
     category: options.category?.trim() || undefined,
   });
-  if (!entry) return { isBest: false, isPuzzleBest: false, prev, prevPuzzle: null };
+  if (!entry) {
+    return {
+      board,
+      streak: raw[STREAK_KEY],
+      outcome: { isBest: false, isPuzzleBest: false, prev, prevPuzzle: null },
+    };
+  }
   const isBest = prev === null || score > prev.score;
   const prevPuzzle = puzzleKey ? (rec.puzzles?.[puzzleKey] ?? null) : null;
   const isPuzzleBest = puzzleKey !== null && (prevPuzzle === null || score > prevPuzzle.score);
@@ -247,8 +275,7 @@ export function recordScore(
   const streak = dailyDay
     ? advanceStreak(normalizeStreak(raw[STREAK_KEY], board), dailyDay)
     : raw[STREAK_KEY];
-  save(board, streak);
-  return { isBest, isPuzzleBest, prev, prevPuzzle };
+  return { board, streak, outcome: { isBest, isPuzzleBest, prev, prevPuzzle } };
 }
 
 export function bestScore(game: string): ScoreEntry | null {
@@ -413,19 +440,12 @@ export function importScores(raw: string): ImportOutcome {
   }
 
   // The daily streak is local-device state, not imported/exported history.
-  save(current, localStreak);
+  save(current, localStreak, existingRaw[RECEIPTS_KEY]);
   return { games: Object.keys(incoming).length, entries };
 }
 
 export function clearScores(): void {
   save({});
-  const storage = browserStorage();
-  if (!storage) return;
-  try {
-    storage.removeItem(RECEIPT_STORAGE_KEY);
-  } catch {
-    /* best-effort */
-  }
 }
 
 function browserStorage(): Pick<Storage, "getItem" | "setItem" | "removeItem"> | null {
@@ -445,13 +465,9 @@ function browserLocks(): ScoreLockManager | null {
   }
 }
 
-function loadReceiptLedger(
-  storage: Pick<Storage, "getItem" | "setItem" | "removeItem">,
-  now: number,
-): ScoreReceiptLedger {
+function normalizeReceiptLedger(value: unknown, now: number): ScoreReceiptLedger {
   try {
-    const parsed: unknown = JSON.parse(storage.getItem(RECEIPT_STORAGE_KEY) || "{}");
-    const source = isRecord(parsed) && isRecord(parsed.games) ? parsed.games : {};
+    const source = isRecord(value) && isRecord(value.games) ? value.games : {};
     const ledger: ScoreReceiptLedger = {};
     for (const [rawGame, rawReceipts] of Object.entries(source).slice(0, GAME_CAP)) {
       const game = normalizeReceiptGame(rawGame);
@@ -476,17 +492,6 @@ function loadReceiptLedger(
   }
 }
 
-function saveReceiptLedger(
-  storage: Pick<Storage, "getItem" | "setItem" | "removeItem">,
-  ledger: ScoreReceiptLedger,
-): void {
-  try {
-    storage.setItem(RECEIPT_STORAGE_KEY, JSON.stringify({ version: 1, games: ledger }));
-  } catch {
-    /* best-effort */
-  }
-}
-
 function normalizeReceiptGame(value: unknown): string | null {
   if (typeof value !== "string" || !/^[a-z0-9_-]{1,64}$/.test(value)) return null;
   return value;
@@ -501,7 +506,7 @@ function normalizeBoard(value: unknown): Board {
   if (!isRecord(value)) return {};
   const board: Board = {};
   const gameEntries = Object.entries(value)
-    .filter(([key]) => key !== STREAK_KEY)
+    .filter(([key]) => key !== STREAK_KEY && key !== RECEIPTS_KEY)
     .slice(0, GAME_CAP);
   for (const [game, rawRec] of gameEntries) {
     if (!isRecord(rawRec)) continue;
