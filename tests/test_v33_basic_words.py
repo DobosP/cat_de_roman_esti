@@ -32,6 +32,9 @@ _TEST_KG = _ROOT / "tests/fixtures/kg_sample.json"
 _PACKAGE_PACK = _ROOT / "cat_de_roman_esti/fixtures/games_pack.json"
 _TEST_PACK = _ROOT / "tests/fixtures/games_pack.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
+
+# Current served pack pin; the wave-local DATA baseline remains historical evidence.
+_CURRENT_PACK_SHA256 = "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5"
 _V48_AUDIT = (
     _ROOT / "docs/reviews/v48-alchimie-pending-gate/projection-audit.json"
 )
@@ -43,9 +46,10 @@ _V32_ALIAS_COUNT = 7333
 
 # These are fingerprints of current legacy behavior. Profile pins move only with a gated
 # content wave; ADR-0067's removal of two false e-SIGUR edges intentionally changed the
-# Contexto closure; V45-V47 strict cleanup narrows dormant pending inventory.
+# Contexto closure; V45-V47 strict cleanup narrows dormant pending inventory; V75 adds two
+# independently reviewed Contexto targets.
 _V32_CONTEXTO_PROFILE_SHA256 = (
-    "7ed3bd1237d4ee7c1b4ff332da191ad6bd2ac9e8eb005b4ea4a25753fea57ca8"
+    "5b2a2a7bb2ec09e84b29a9689748d1d8c89347f8355e77300bb8219039a5cd9b"
 )
 _V32_LANT_PROFILE_SHA256 = (
     "6fe32a7aacb464d8d30ae2d97bc02e9ed0ef5413ee264e2424f13388a7f8e8c2"
@@ -426,20 +430,20 @@ def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
     )
 
     assert DATA.GAME_ITEM_IDS == ()
-    assert hashlib.sha256(package_blob).hexdigest() == DATA.BASELINE_PACK_SHA256
+    assert hashlib.sha256(package_blob).hexdigest() == _CURRENT_PACK_SHA256
     assert package_blob == _TEST_PACK.read_bytes()
     assert {
         game: len(pack[game])
         for game in ("conexiuni", "contexto", "lant", "alchimie")
     } == {
         "conexiuni": 232,
-        "contexto": 207,
+        "contexto": 209,
         "lant": 97,
         "alchimie": 82,
     }
     # ADR-0068 promotes two bound Contexto targets; V47 promotes one more; V48 promotes
     # one Alchimie board, archives 17 rejects, and retains three A5 holds.
-    assert statuses == {"approved": 610, "pending": 8}
+    assert statuses == {"approved": 612, "pending": 8}
     assert len(DATA.REVIEW_ITEM_IDS) == len(set(DATA.REVIEW_ITEM_IDS)) == 33
     v48_audit = json.loads(_V48_AUDIT.read_text(encoding="utf-8"))
     v48_source_records = {

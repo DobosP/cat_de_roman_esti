@@ -38,9 +38,9 @@ _PENDING_ID_SET_SHA256 = "d7cbc45ce53f4c70e2d3c3d8214e5f49964422f703f3004514ab08
 _VERDICTS_SHA256 = "e14ceab934c7e19ce8a2f1a2cdcf9e03650654e5ae268fa6e04f51401368b8d7"
 _PROJECTION_SHA256 = "486aa09129e6ad1e4b4477b4721782ee7e041c1e3329714d82897ccb9757571c"
 _PRE_APPLY_PACK_SHA256 = "c4542d4201c45b04f58563eb08aa2ba0973389f453f5181f53066a88df550d05"
-_PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
-_RANKINGS_SHA256 = "45dfd81444dec14b4b639122fe30dea58f05ca76440003eb5280cc01bfcdc3e9"
-_DERIVED_SHA256 = "8cff438c25deb5084c0311e808941bfef23e3c7bdbf93242a7a53348a6d2ef57"
+_PACK_SHA256 = "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5"
+_RANKINGS_SHA256 = "118d8561a329fd6a4646524ee9b033302735708a66d8a5921245942d5616eb74"
+_DERIVED_SHA256 = "2839606ad82ae781cd57c8c265b636871f9326733881240855a3c95f3dd94f1c"
 _FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
 _KG_SHA256 = "f2a4229c05072028fef1d8e68e97a6fe2e7c74c535bcca0fca0a0708acf5ed12"
 _RUBRIC_SHA256 = "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3"
@@ -341,12 +341,12 @@ def test_v48_pack_rankings_and_frozen_derived_mirrors_track_the_gate() -> None:
 
     assert pack["meta"]["counts"] == {
         "conexiuni": 232,
-        "contexto": 207,
+        "contexto": 209,
         "lant": 97,
         "alchimie": 82,
     }
     assert pack["meta"]["id_high_water"]["alchimie"] == 106
-    assert statuses == {"approved": 610, "pending": 8}
+    assert statuses == {"approved": 612, "pending": 8}
     assert Counter(row["status"] for row in live.values()) == {
         "approved": 79,
         "pending": 3,
@@ -360,18 +360,18 @@ def test_v48_pack_rankings_and_frozen_derived_mirrors_track_the_gate() -> None:
     rankings = _json(_PACKAGE_RANKINGS)
     assert rankings["meta"]["pack_sha256"] == _PACK_SHA256
     assert rankings["meta"]["counts"] == {
-        "total": 618,
-        "approved": 610,
-        "pilot_eligible": 448,
+        "total": 620,
+        "approved": 612,
+        "pilot_eligible": 450,
         "by_game": {
             "conexiuni": 232,
-            "contexto": 207,
+            "contexto": 209,
             "lant": 97,
             "alchimie": 82,
         },
         "eligible_by_game": {
             "conexiuni": 74,
-            "contexto": 201,
+            "contexto": 203,
             "lant": 94,
             "alchimie": 79,
         },
