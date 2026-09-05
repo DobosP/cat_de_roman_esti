@@ -4,7 +4,7 @@ Text-only word-game arcade SPA: **React 19.2 + Vite 8.1 + TypeScript** (no graph
 visualization — the old force-graph SPA was removed 2026-06-22, see
 `../docs/adr/0001-pivot-to-word-game-arcade.md`).
 
-Four word games over the Romanian concept graph, all **server-authoritative**: the
+Six word games over the Romanian concept graph, all **server-authoritative**: the
 Django BFF owns the KG, validates every move, and hides answers under
 `/api/wordgames/*`; the SPA only renders responses. No API key, no game logic, and
 no secrets ever live in the client.
@@ -27,6 +27,7 @@ make dev             # vite + uvicorn --reload together
 ## Build
 
 ```bash
+npm test             # node --test tests/*.test.mjs (frontend contracts, CI step)
 npm run lint         # ESLint 10 flat-config checks
 npm run typecheck    # tsc --noEmit
 npm run build        # typecheck + Vite build + initial-transfer/font gates
@@ -52,7 +53,15 @@ src/
     contexto.ts       server contract under /api/wordgames/<game>/* (create game,
     lant.ts           get state, guess/combine/move/hint/undo/reset as each game
     conexiuni.ts      defines them).
+    intrusul.ts       Intrusul: the server owns the answer and score; before the round
+                      ends the browser only receives visible tiles and earned feedback.
+    perechi.ts        Perechi: pair mappings, provenance and scoring stay server-side;
+                      the UI renders solved pairs and the one explicitly earned hint.
+    meta.ts           Category taxonomy endpoint (ADR-0011), fetched once per page load.
+    auth.ts           Account, private score-copy and verified-ranking transport
+                      (same-origin session cookies + X-CSRFToken).
   screens/
+    Home.tsx          Arcade lobby: one card per game plus the local records/history panel.
     Alchimie.tsx      Combine two concepts into a new one until you craft the target
                       (à la Infinite Craft).
     CaldRece.tsx      Hidden secret concept; each guess reports hot/cold closeness
@@ -61,15 +70,30 @@ src/
                       (à la The Wiki Game).
     Conexiuni.tsx     Group 16 concepts into 4 hidden categories, 4 mistakes allowed
                       (à la NYT Connections).
+    Intrusul.tsx      Tap the one concept that does not belong with the other three.
+    Perechi.tsx       Eight visible words, four semantic matches; the second tile submits.
+    Ranking.tsx       Public online leaderboard, one view per game (opt-in signed-in rows).
   components/
     GameShell.tsx     Shared per-game header: back-to-menu + status-badge slot.
+    GameIntro.tsx     Shared "before you play" card: icon, title, how-to, start, daily.
+    Hud.tsx           Uniform status cluster: moves/lives/difficulty badges.
+    PlayGuide.tsx     Step-by-step how-to-play list used by the intro cards.
     DifficultyPicker.tsx  Shared segmented difficulty control.
+    CategoryPicker.tsx    Chip row for a game's category/theme (ADR-0011).
     ResultCard.tsx    Shared end-of-game card: score, "Record!", share/copy, replay.
+    Confetti.tsx      One-shot deterministic celebration burst; honours reduced motion.
     AccountBar.tsx    Optional account/ranking controls.
     SoundToggle.tsx   Persisted mute control.
+  hooks/              useActiveGame, useAuth, useRecordScore.
+  games.ts            Single registry for the six games: routes, titles, accents, icons.
+  categories.ts       KG category → color/label map, mirroring the --cat-* CSS variables.
   scores.ts           Offline localStorage personal-best store (per game + per puzzle).
+  scoreSync.ts        Upload-only private copy of completed rows for consenting accounts.
+  derivedReplay.ts    Bounded replay continuity for the two derived games (opaque ids only).
   share.ts            Deterministic share/copy payload around the server-authored result.
   sound.ts            Web-Audio synthesized SFX (no audio assets).
+  *.mjs / *.d.mts     Framework-free logic units (async single-flight, Perechi focus,
+                      release recovery) exercised directly by `npm test`.
   styles/
     arcade.css        Deep dark palette, CSS-variable tokens, layout, and game styles.
     fonts.css         Explicit Romanian-capable Latin/Latin Extended font faces.

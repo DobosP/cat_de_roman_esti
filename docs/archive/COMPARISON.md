@@ -1,4 +1,5 @@
 # cat_de_roman_esti vs. existing word games — quantity & quality
+SUPERSEDED — snapshot as of the v11 curation pass (2026-07-09): four games, 657 approved, 1,453 nodes. Current counts (six games, 618 pack + derived, 2,364 nodes) live in [../STATUS.md](../STATUS.md). Kept as a dated record.
 
 _As of the v11 curation-fix pass (2026-07-09). Positions the game against the formats it borrows from._
 

@@ -2,26 +2,22 @@
 
 ## Branch & merge policy
 
-**Direct local merges to `main` are allowed.** Prefer a **feature branch** for substantial
-work, then fast-forward / merge it into `main` locally once the gate is green.
+Policy: [ADR-0004](docs/adr/0004-branch-merge-policy.md) — direct local merges to `main` once the
+gate is green; pushing to `origin` is explicit-request-only; substantial work goes on a `feat/…` /
+`fix/…` branch in its own worktree (see [`AGENTS.md`](AGENTS.md) "Parallel work").
 
-- Do substantial work on a **feature branch** (e.g. `feat/…`, `fix/…`); trivial changes may
-  land on `main` directly.
-- Merge into `main` only when the gate is green (`.github/workflows/ci.yml`: fixture
-  validation + ruff + pytest on py3.11/3.12, and the frontend eslint + build).
-- **Pushing to `origin` is still opt-in:** assistants must NOT `git push` or open a remote
-  PR without an explicit request — local merges to `main` are fine, publishing is not.
-
-_(Relaxed 2026-06-22 from the earlier PR-only rule, by request.)_
-
-## Local quality gate (run before opening a PR)
+## Local quality gate (run before merging)
 
 ```bash
-python scripts/validate_fixture.py     # KG fixture must be GREEN
-pytest -q                              # backend (offline against the bundled fixture)
-ruff check                             # lint
-( cd frontend && npm run lint && npm run build )   # tsc + eslint + vite build
+python scripts/validate_fixture.py                       # KG fixture must be GREEN
+python scripts/validate_games_pack.py                    # curated pack must be GREEN
+ruff check                                               # lint
+pytest -q                                                # backend (offline fixture, accounts off)
+CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 pytest -q tests/accounts
+( cd frontend && npm test && npm run lint && npm run build )
 ```
+
+Interpreter + expected outputs: [`docs/agent-testing.md`](docs/agent-testing.md).
 
 See [`docs/STATUS.md`](docs/STATUS.md) for current phase and [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
 for the game model. Editing KG content? Use `scripts/expand_content.py` (it regenerates

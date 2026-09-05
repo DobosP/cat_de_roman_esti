@@ -1,19 +1,10 @@
 # cat_de_roman_esti
 
-A terminal "semantic network hop" game over the Romanian knowledge graph. You get a
-START concept and a TARGET concept; hop along semantic edges to reach the target in as
-few hops as possible. Two modes: **easy** (distractors filtered, edge labels + hints
-shown) and **hard** (decoys kept, labels + hints hidden).
-
-The name is a pun on *"cât de român ești"* — "how Romanian are you".
-
-## Web app — the word-game arcade
-
-The current V72 work targets a **text-only arcade** of six word games over the same Romanian
-concept graph (**2,364 concepts / 9,217 links / 8,450 typed aliases / 180 puzzles**,
+A **text-only arcade of six Romanian word games** over one concept graph
+(**2,364 concepts / 9,217 links / 8,450 typed aliases / 180 puzzles**,
 `fixture-v72-romanian-dishes-and-pastries-morphology` — generated hashes and gate state are
-recorded in `docs/STATUS.md`; no graph visualization). All six are
-**server-authoritative** (the BFF validates moves and hides answers):
+recorded in `docs/STATUS.md`; no graph visualization). All six are **server-authoritative**:
+the Django BFF validates every move and hides the answers.
 
 - **Alchimie** *(à la Infinite Craft)* — combine two concepts into a new one (their shared
   link) and keep crafting until you reach the target.
@@ -26,18 +17,23 @@ recorded in `docs/STATUS.md`; no graph visualization). All six are
 - **Lanțul Cuvintelor** *(à la The Wiki Game)* — type a concept linked to the current one
   and hop word-by-word to the target in as few moves as possible.
 
-The terminal CLI below is the original semantic-hop game.
+The terminal CLI `cat-de-roman` is the original semantic-hop game: from a START concept,
+hop along semantic edges to a TARGET in as few hops as possible, in **easy** (distractors
+filtered, edge labels + hints shown) or **hard** (decoys kept, labels + hints hidden) mode.
+The name is a pun on *"cât de român ești"* — "how Romanian are you".
 
 ## Stack
 
-- **Python >= 3.11**, standard library only at runtime (no hard deps).
+- **Python >= 3.11**; the CLI is stdlib-only; the web app needs the `web` extra (Django 5.2 +
+  DRF + uvicorn, pinned by `constraints.txt`).
+- Frontend: React 19.2 + Vite 8.1 + TypeScript, Node 24 — see [`frontend/README.md`](frontend/README.md).
 - Vendored stdlib HTTP client (`roedu_client.py`, urllib) for the RO-EDU data platform.
 - Dev tooling: `pytest` + `ruff` (line-length 100, select E,F,I,UP,B).
 - Data source: the `kg_nodes` / `kg_edges` / `kg_puzzles` products served by
   `ro_data_server` (producer: `romania_scraper`). Plays fully offline against a bundled
   fixture too.
 
-## Quick start
+## Quick start (CLI)
 
 ```bash
 # install (editable, with dev tools)
@@ -65,9 +61,13 @@ server, no API key. Pick whichever of the three paths suits you.
 ### One command (local)
 
 ```bash
+pip install -c constraints.txt -e ".[dev,web]"   # backend + web extra, pinned
 ./run.sh            # builds the SPA if missing, then serves the BFF
 # open the printed URL, e.g. http://127.0.0.1:8000
 ```
+
+On the fleet laptop: `CDR_PYTHON=~/work/cat_de_roman_esti/.venv/bin/python ./run.sh` —
+run.sh's default interpreter (run.sh:26) has no Django.
 
 `./run.sh` (or `make run`) builds the React SPA into `cat_de_roman_esti/web/static`
 only if the build is missing, then boots the BFF on port **8000** (auto-falling back to
@@ -116,47 +116,21 @@ ROEDU_API_URL=http://localhost:8077 ROEDU_API_KEY=cat-de-roman-dev ./run.sh
 # or with compose: ROEDU_API_URL=... docker compose up --build
 ```
 
-## Demo
-
-```
-$ cat-de-roman --offline --category literatura --difficulty easy
-
-Start: Mihai Eminescu  ->  Target: Romantism
-Type a number to hop, 'q' to quit.
-
-================================================================
-  HOPS: 0   PAR: 2   MODE: easy
-  TARGET : Romantism  (literatura)
-           Curent literar din secolul al XIX-lea.
-  CURRENT: Mihai Eminescu  (person)
-           Poet roman, autor al poemului Luceafarul.
-----------------------------------------------------------------
-  Neighbours you can hop to:
-  [1] Luceafarul — a scris   <hint>
-  [2] Ion Creanga — prieten cu
-  [3] Junimea — membru al
-
-hop > 1
-  → hopped to Luceafarul
-  ...
-  [1] Romantism — apartine curentului   <hint>
-hop > 1
-  → hopped to Romantism
-
-################################################################
-  WIN! 2 hops (par 2).  SCORE: 1000
-################################################################
-```
-
 ## Tests & lint
 
+The CI gate set (`.github/workflows/ci.yml`), runnable locally:
+
 ```bash
-python -m pytest -q
-ruff check
+python scripts/validate_fixture.py                       # KG fixture content gate
+python scripts/validate_games_pack.py                    # curated pack content gate
+ruff check                                               # lint
+pytest -q                                                # backend (accounts off)
+CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 pytest -q tests/accounts
+( cd frontend && npm test && npm run lint && npm run build )
 ```
 
 Tests run entirely against a fake in-process client / the bundled fixture — **no live
-server required**.
+server required**. Interpreter and expected outputs: [`docs/agent-testing.md`](docs/agent-testing.md).
 
 ## Contributing
 
@@ -166,9 +140,16 @@ Direct **local** merges to `main` are allowed once the CI gate is green; **pushi
 
 ## Docs
 
+- [`docs/STATUS.md`](docs/STATUS.md) — current truth: state, pins, verification record, next actions.
+- [`AGENTS.md`](AGENTS.md) — operating contract for agent sessions (Claude Code and Codex).
+- [`docs/agent-map.md`](docs/agent-map.md) — entry points, task routes, do-not-load list.
+- [`docs/agent-testing.md`](docs/agent-testing.md) — gate commands with expected output.
 - [`docs/KG_CONTRACT.md`](docs/KG_CONTRACT.md) — the authoritative KG contract v1 (ADR-0002).
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — the **terminal hop game** architecture; the web product is the word-game arcade (ADR-0001).
 - [`docs/MOBILE_CONTRACT.md`](docs/MOBILE_CONTRACT.md) — stable operationIds + `GET /api/manifest` for the generated mobile client (ADR-0003).
+- [`docs/CRITIQUE_RUBRIC.md`](docs/CRITIQUE_RUBRIC.md) — content critique rubric every pack item passes before `approved` (ADR-0067; ADR-0023 superseded).
+- [`docs/DEPLOY.md`](docs/DEPLOY.md) — anonymous vs accounts stack, Hetzner/Cloudflare/Caddy, go-live compliance checklist.
+- [`docs/compliance/README.md`](docs/compliance/README.md) — DRAFT legal pack RO/EN (not agent-facing).
 - [`docs/PILOT_BOARD_RANKING.md`](docs/PILOT_BOARD_RANKING.md) — private V37 pre-playtest
   board estimate: reproduction and interpretation (ADR-0051).
 - [`docs/V38_DERIVED_GAMES.md`](docs/V38_DERIVED_GAMES.md) — private V38 derived-game
@@ -183,5 +164,8 @@ Direct **local** merges to `main` are allowed once the CI gate is green; **pushi
 - [`docs/V42_REFINEMENT.md`](docs/V42_REFINEMENT.md) — V42 bounded recovery, truthful
   category dailies, and the local streak/diploma loop (ADR-0062–0064).
 - [`docs/ROEDU_INTEGRATION.md`](docs/ROEDU_INTEGRATION.md) — products, key, field mapping, fail-closed gate, offline fixture.
-- [`docs/STATUS.md`](docs/STATUS.md) — phase / built / wired / blockers / next.
-- [`docs/adr/`](docs/adr/) — architecture decision records (0001 = arcade pivot, no graph UI).
+- [`frontend/README.md`](frontend/README.md) — SPA develop/build/layout.
+- History (never edited): [`docs/adr/`](docs/adr/) decision records (0001 = arcade pivot, no
+  graph UI; newest 0097) · [`docs/reviews/`](docs/reviews/) per-wave evidence ·
+  [`docs/handoffs/`](docs/handoffs/) dated records · [`docs/archive/`](docs/archive/)
+  superseded snapshots.
