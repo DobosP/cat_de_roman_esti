@@ -36,7 +36,8 @@ The existing V2 applier validated fresh bindings and applied two promotions.
 - `gastronomie/runtime_openers.json`: 25 real guess-route probes, five per fixed target.
 - `analyst-review.json`, `verifier-review.json`, `VERIFIER_REVIEW.md`: independent, bound
   judgments, objections and source URLs. Reviewers were root and session_refactor;
-  candidate preparation was wave_audit.
+  candidate preparation was wave_audit. These are independently authored Codex-agent
+  judgments with source checks, not human SME approval or Romanian-player playtests.
 - `verdicts/contexto_verdicts.json` and its `dossiers/`: serialized V2 decisions, raw-review
   digests, exact coverage and the pending dossiers used for promotion.
 - `selection-impact.json`: independent before/after selection sampling and public API probes.

@@ -20,7 +20,9 @@ that human acceptance passed. Current facts and exact pins: [STATUS](STATUS.md).
 Decisions and full evidence: [ADR index](adr/README.md), [V75 review](reviews/v75-contexto-food/README.md),
 [runtime measurements](reviews/v74-runtime-measurements/README.md). Refactors preserve
 server authority, hidden answers, session bounds, intentional game differences and scoring.
-The derived catalog remains frozen at 336 boards.
+The derived catalog remains frozen at 336 boards. Content critiques are independently
+authored Codex-agent judgments with source checks; they are not Romanian-player sessions
+or human subject-expert approval.
 
 ## Quality coverage and limits
 
@@ -40,6 +42,8 @@ The derived catalog remains frozen at 336 boards.
 - Run the Romanian-player protocol below; observe comprehension, fairness and replay interest.
 - Test real Android/iOS devices and the intended browser set; Chromium emulation is partial evidence.
 - Select and verify a usable public feedback email or URL; the owner question remains unanswered.
+- Reverify the configured `CAT_LEGAL_OPERATOR` and `CAT_LEGAL_CONTACT_EMAIL` and public legal pages
+  against DEPLOY; a feedback URL alone does not satisfy those rollout requirements.
 - Authorize a release, preserve the deployed image, execute the [deployment and rollback procedure](DEPLOY.md),
   and re-run public health/config/content/asset smokes. Keep production anonymous.
 

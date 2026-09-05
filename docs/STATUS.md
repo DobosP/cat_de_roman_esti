@@ -78,7 +78,8 @@ verification records remain in WORKLOG. The local runtime sample includes 100 Co
 ## Remaining gates
 
 - Complete final independently verifiable candidate checks in `docs/BETA_CANDIDATE.md`.
-- Owner selects feedback contact; Romanian-player playtests and real-device/browser checks remain unrun.
+- Owner selects feedback contact; player and real-device checks remain unrun. Reverify legal operator/contact
+  configuration and legal pages per DEPLOY; independent content judgments here are from Codex agents.
 - Public rollout requires explicit authorization and live smoke/rollback verification. Technical candidate
   status does not establish enjoyment or permission to publish.
 - Accounts remain outside the anonymous beta scope until DEPLOY's go-live checklist and compliance review pass.
