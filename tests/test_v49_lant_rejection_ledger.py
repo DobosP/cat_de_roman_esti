@@ -50,12 +50,12 @@ _V45_PRE_APPLY_PACK_SHA256 = (
     "742478415995b67379ba6fe58f939132abbff141aef7af392eff05b70e7845b6"
 )
 _V45_PRE_APPLY_COMMIT = "246e8577412831405c67bfd6e8843121d8309cd0"
-_V48_PACK_SHA256 = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
+_V48_PACK_SHA256 = "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5"
 _CURRENT_RANKINGS_SHA256 = (
-    "45dfd81444dec14b4b639122fe30dea58f05ca76440003eb5280cc01bfcdc3e9"
+    "118d8561a329fd6a4646524ee9b033302735708a66d8a5921245942d5616eb74"
 )
 _CURRENT_DERIVED_SHA256 = (
-    "8cff438c25deb5084c0311e808941bfef23e3c7bdbf93242a7a53348a6d2ef57"
+    "2839606ad82ae781cd57c8c265b636871f9326733881240855a3c95f3dd94f1c"
 )
 _FROZEN_DERIVED_BOARDS_SHA256 = (
     "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
@@ -603,7 +603,7 @@ def test_v49_ledger_is_non_runtime_and_preserves_pack_boards_and_sessions() -> N
 
     assert pack["meta"]["counts"] == {
         "conexiuni": 232,
-        "contexto": 207,
+        "contexto": 209,
         "lant": 97,
         "alchimie": 82,
     }
@@ -611,20 +611,20 @@ def test_v49_ledger_is_non_runtime_and_preserves_pack_boards_and_sessions() -> N
         row["status"]
         for game in ("conexiuni", "contexto", "lant", "alchimie")
         for row in pack[game]
-    ) == {"approved": 610, "pending": 8}
+    ) == {"approved": 612, "pending": 8}
     assert rankings["meta"]["counts"] == {
-        "total": 618,
-        "approved": 610,
-        "pilot_eligible": 448,
+        "total": 620,
+        "approved": 612,
+        "pilot_eligible": 450,
         "by_game": {
             "conexiuni": 232,
-            "contexto": 207,
+            "contexto": 209,
             "lant": 97,
             "alchimie": 82,
         },
         "eligible_by_game": {
             "conexiuni": 74,
-            "contexto": 201,
+            "contexto": 203,
             "lant": 94,
             "alchimie": 79,
         },

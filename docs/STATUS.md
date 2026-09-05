@@ -15,7 +15,7 @@ Last verified: 2026-09-06 — V73 browser baseline and shared refactors verified
   `33023808156`/`33024392655` green on Python 3.12/3.14 + frontend.
 - ADR-0099 consolidates six endpoint transactions; ADR-0100 extracts saved-game resume without behavior changes.
 - V75 adds reusable `--pack-only` import protection and a validated two-reviewer artifact
-  builder for non-Alchimie pack games (ADR-0102/0104); served content is unchanged.
+  builder for non-Alchimie pack games (ADR-0102/0104); current fixture contracts pin its promotion.
 - V72 wave: 50 unanimously reviewed genitive/dative aliases for 25 gastronomie owners, zero rejections; the V71
   actionable-fuzzy deny set stays exactly `intrigii`, `intrigilor`; the 70-term nonaccepted ledger is unchanged.
   Evidence: `docs/reviews/v72-romanian-dishes-and-pastries-morphology/README.md`.
@@ -96,7 +96,6 @@ mobile public content sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11fc8
 | 2026-09-05 | `check_project_contexts.py --work-root ~/work` | row `ok`, thin pointer yes (reads the shared checkout) |
 | 2026-09-06 | session/store + six game suites; request limits; ruff, docs, whitespace | 264 + 9 passed; all green |
 | 2026-09-06 | portable review artifact targeted pytest + Ruff | 14 passed; green |
-
 2026-09-05 runs used `~/work/cat_de_roman_esti/.venv/bin/python` with `PYTHONPATH=.` from the docs worktree.
 The full suite was green at host load average ≈ 28; the same alchimie test fails on its own at load ≈ 39, so the
 45 s budget is load-sensitive, not a behavior regression.

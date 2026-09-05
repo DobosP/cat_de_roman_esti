@@ -36,7 +36,7 @@ _V48_AUDIT_PATH = (
 # V48's bound projection audit.
 _V23_INVENTORY_FLOOR = {
     "conexiuni": (232, 232, 0),
-    "contexto": (207, 205, 2),
+    "contexto": (209, 207, 2),
     "lant": (97, 94, 3),
     "alchimie": (82, 79, 3),
 }
@@ -103,10 +103,10 @@ def test_v14_pack_inventory_and_review_split():
     # 2026-07-29: + 13 ADR-0065 gate promotions among these games' totals = 585 approved.
     # V45/V46 clear stale pending debt; V47 adds one strict Contexto promotion; V48
     # promotes one Alchimie board and removes 17 quality rejects.
-    assert sum(expected[0] for expected in _V23_INVENTORY_FLOOR.values()) == 618
+    assert sum(expected[0] for expected in _V23_INVENTORY_FLOOR.values()) == 620
     # 2026-07-30 (ADR-0066/0067/0068): + 18 owner, + 3 strict-gate, then + 2
-    # bound Contexto promotions.
-    assert sum(expected[1] for expected in _V23_INVENTORY_FLOOR.values()) == 610
+    # bound Contexto promotions, then V75's two reviewed food targets.
+    assert sum(expected[1] for expected in _V23_INVENTORY_FLOOR.values()) == 612
     assert sum(expected[2] for expected in _V23_INVENTORY_FLOOR.values()) == 8
 
     live_alchimie = {record["id"] for record in pack["alchimie"]}

@@ -84,8 +84,8 @@ def test_contexto_retains_201_unique_targets_across_every_category() -> None:
     pack = load_pack()
     eligible = [item for item in pack.pool("contexto") if item._pilot_eligible]
 
-    assert len(eligible) == 201
-    assert len({str(item.payload["target"]) for item in eligible}) == 201
+    assert len(eligible) == 203
+    assert len({str(item.payload["target"]) for item in eligible}) == 203
     assert {item.category for item in eligible} == set(CATEGORIES)
     assert _RESERVE_ID in {item.id for item in pack.pool("contexto")}
     assert _RESERVE_ID not in {item.id for item in eligible}
