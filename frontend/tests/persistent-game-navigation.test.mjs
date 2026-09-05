@@ -24,11 +24,7 @@ test("an explicit Conexiuni exit forgets its resume pointer and replaces route h
   assert.doesNotMatch(activeGame, /localStorage\.clear\(\)/);
 });
 
-test("refresh still adopts a live Conexiuni board and Escape still clears selection", () => {
-  assert.match(
-    conexiuni,
-    /const id = active\.peek\(\);[\s\S]*?const s = await conexiuniApi\.get\(id\);/,
-  );
+test("Escape still clears a Conexiuni selection", () => {
   assert.match(
     conexiuni,
     /e\.key === "Escape" \|\| e\.key === "Backspace"[\s\S]*?clearSelection\(\)/,

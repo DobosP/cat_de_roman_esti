@@ -24,6 +24,7 @@ import { ResultCard } from "../components/ResultCard";
 import { gameByKey } from "../games";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
+import { useSavedGameResume } from "../hooks/useSavedGameResume";
 import {
   lastDerivedReplayId,
   rememberDerivedReplayId,
@@ -35,6 +36,8 @@ import "../styles/intrusul.css";
 
 const GAME_KEY = "intrusul";
 const DEF = gameByKey(GAME_KEY);
+
+const isTerminalResume = (state: IntrusulState) => state.won || state.lost;
 
 interface Props {
   onExit: () => void;
@@ -49,7 +52,6 @@ interface StartOpts {
 export default function Intrusul({ onExit, onToast }: Props) {
   const active = useActiveGame(GAME_KEY);
   const recordOnce = useRecordScore(GAME_KEY);
-  const resumeOnce = useRef(false);
   const startInFlight = useRef(false);
   const actionInFlight = useRef(false);
   const [state, setState] = useState<IntrusulState | null>(null);
@@ -102,35 +104,31 @@ export default function Intrusul({ onExit, onToast }: Props) {
     [active, onToast],
   );
 
-  useEffect(() => {
-    if (resumeOnce.current) return;
-    resumeOnce.current = true;
-    const gameId = active.peek();
-    if (!gameId) {
-      setLoading(false);
-      return;
-    }
-    setLoading(true);
-    void (async () => {
-      try {
-        const fresh = await intrusulApi.get(gameId);
-        setState(fresh);
-        setFeedback(
-          fresh.won || fresh.lost
-            ? null
-            : "Joc reluat. Atinge cuvântul care nu se potrivește.",
-        );
-      } catch (error) {
-        if (error instanceof ApiError && error.status === 404) {
-          active.forget();
-        } else {
-          onToast("Nu am putut relua jocul. Încercăm din nou la următoarea deschidere.", "error");
-        }
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [active, onToast]);
+  const applyResumedGame = useCallback((fresh: IntrusulState) => {
+    setState(fresh);
+    setFeedback(
+      fresh.won || fresh.lost
+        ? null
+        : "Joc reluat. Atinge cuvântul care nu se potrivește.",
+    );
+  }, []);
+  const reportResumeFailure = useCallback(() => {
+    onToast(
+      "Nu am putut relua jocul. Încercăm din nou la următoarea deschidere.",
+      "error",
+    );
+  }, [onToast]);
+
+  useSavedGameResume({
+    active,
+    load: intrusulApi.get,
+    isTerminal: isTerminalResume,
+    terminal: "adopt",
+    transient: "retain",
+    setPending: setLoading,
+    onResume: applyResumedGame,
+    onTransientError: reportResumeFailure,
+  });
 
   const puzzleKey = useMemo(() => {
     if (!state || !finished || !state.solution) return null;

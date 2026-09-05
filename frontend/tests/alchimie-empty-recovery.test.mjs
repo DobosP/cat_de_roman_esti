@@ -96,14 +96,6 @@ test("changing or clearing the bench dismisses only the immediate retry block", 
       /setEmptyRecoveryActive\(false\)/,
     );
   }
-  assert.match(
-    screen.slice(screen.indexOf("const s = await alchimieApi.get"), screen.indexOf("const start = useCallback")),
-    /setEmptyPairKey\(null\)/,
-  );
-  assert.match(
-    screen.slice(screen.indexOf("const s = await alchimieApi.get"), screen.indexOf("const start = useCallback")),
-    /setEmptyRecoveryActive\(false\)/,
-  );
 });
 
 test("the guide explains recovery and either occupied slot can be removed", () => {

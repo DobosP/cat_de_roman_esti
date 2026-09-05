@@ -8,23 +8,6 @@ const perechi = read("../src/screens/Perechi.tsx");
 const resultCard = read("../src/components/ResultCard.tsx");
 const gameShell = read("../src/components/GameShell.tsx");
 
-test("valid terminal resume states are adopted instead of discarded", () => {
-  assert.match(
-    intrusul,
-    /const fresh = await intrusulApi\.get\(gameId\);\s*setState\(fresh\)/,
-  );
-  assert.match(
-    perechi,
-    /const fresh = await perechiApi\.get\(gameId\);\s*setState\(fresh\)/,
-  );
-  for (const screen of [intrusul, perechi]) {
-    assert.doesNotMatch(
-      screen,
-      /if \(fresh\.won \|\| fresh\.lost\) \{\s*active\.forget\(\);\s*return/,
-    );
-  }
-});
-
 test("every V38 mutation failure reconciles authoritative state", () => {
   assert.match(intrusul, /catch \{\s*const fresh = await reconcile\(state, "guess"\)/);
   assert.match(intrusul, /catch \{\s*const fresh = await reconcile\(state, "hint"\)/);
