@@ -149,6 +149,7 @@ Direct **local** merges to `main` are allowed once the CI gate is green; **pushi
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — the **terminal hop game** architecture; the web product is the word-game arcade (ADR-0001).
 - [`docs/MOBILE_CONTRACT.md`](docs/MOBILE_CONTRACT.md) — stable operationIds + `GET /api/manifest` for the generated mobile client (ADR-0003).
 - [`docs/CRITIQUE_RUBRIC.md`](docs/CRITIQUE_RUBRIC.md) — content critique rubric every pack item passes before `approved` (ADR-0067; ADR-0023 superseded).
+- [`docs/PACK_ONLY_CONTENT_WAVES.md`](docs/PACK_ONLY_CONTENT_WAVES.md) — bounded authored-instance wave checklist (ADR-0102).
 - [`docs/DEPLOY.md`](docs/DEPLOY.md) — anonymous vs accounts stack, Hetzner/Cloudflare/Caddy, go-live compliance checklist.
 - [`docs/compliance/README.md`](docs/compliance/README.md) — DRAFT legal pack RO/EN (not agent-facing).
 - [`docs/PILOT_BOARD_RANKING.md`](docs/PILOT_BOARD_RANKING.md) — private V37 pre-playtest

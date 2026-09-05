@@ -9,3 +9,4 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0098 | [Real browser game journeys](0098-protect-real-browser-game-journeys.md) | accepted |
 | 0099 | [Shared session endpoint transactions](0099-consolidate-session-endpoint-transactions.md) | accepted |
 | 0100 | [Shared saved-game resume lifecycle](0100-extract-saved-game-resume-lifecycle.md) | accepted |
+| 0102 | [Pack-only content-wave workflow](0102-pack-only-content-wave-workflow.md) | accepted |

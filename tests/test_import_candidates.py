@@ -363,6 +363,66 @@ def test_invalid_verification_aborts_before_graph_or_pack_mutation(tmp_path, mon
     assert not (batch / "curation_report.txt").exists()
 
 
+def test_pack_only_rejects_topology_before_transaction_or_mutation(tmp_path, monkeypatch):
+    batch = _write_batch(tmp_path)
+    transaction_files = tuple(tmp_path / f"content-{index}.json" for index in range(4))
+    originals = {path: f"original-{index}".encode() for index, path in enumerate(transaction_files)}
+    for path, blob in originals.items():
+        path.write_bytes(blob)
+
+    transaction_started = False
+    densify_called = False
+
+    def unexpected_transaction(_paths):
+        nonlocal transaction_started
+        transaction_started = True
+        raise AssertionError("--pack-only must reject before its transaction")
+
+    def unexpected_densify(*_args, **_kwargs):
+        nonlocal densify_called
+        densify_called = True
+        raise AssertionError("--pack-only must not merge topology")
+
+    monkeypatch.setattr(import_candidates, "TRANSACTION_FILES", transaction_files)
+    monkeypatch.setattr(import_candidates, "file_transaction", unexpected_transaction)
+    monkeypatch.setattr(import_candidates.densify_content, "run", unexpected_densify)
+
+    with pytest.raises(SystemExit, match="invalid pack-only candidate batch") as exc:
+        import_candidates.main(
+            ["import_candidates.py", "--dir", str(batch), "--pack-only"]
+        )
+
+    assert "nodes must be empty for --pack-only" in str(exc.value)
+    assert "edges must be empty for --pack-only" in str(exc.value)
+    assert transaction_started is False
+    assert densify_called is False
+    assert {path: path.read_bytes() for path in transaction_files} == originals
+    assert not (batch / "curation_report.txt").exists()
+
+
+def test_pack_only_accepts_empty_topology_and_uses_pack_rebuild(tmp_path, monkeypatch):
+    transaction_files = tuple(tmp_path / f"content-{index}.json" for index in range(4))
+    for path in transaction_files:
+        path.write_bytes(b"original")
+    bundles = {"gastronomie": {"cand": {"nodes": [], "edges": []}}}
+    observed = []
+
+    monkeypatch.setattr(import_candidates, "TRANSACTION_FILES", transaction_files)
+    monkeypatch.setattr(import_candidates, "preflight_candidates", lambda _path: bundles)
+
+    def no_write_import(_bundles, _dir, *, skip_merge):
+        observed.append(skip_merge)
+        return {"approved": 0, "pending": 0, "skipped": 0}, {}, tmp_path / "report.txt", 0
+
+    monkeypatch.setattr(import_candidates, "_import_verified", no_write_import)
+    assert import_candidates.main(
+        ["import_candidates.py", "--dir", str(tmp_path / "batch"), "--pack-only"]
+    ) == 0
+
+    assert observed == [True]
+    assert [path.read_bytes() for path in transaction_files] == [b"original"] * 4
+
+
 def test_main_restores_all_transaction_files_after_import_failure(tmp_path, monkeypatch):
     transaction_files = tuple(tmp_path / f"content-{index}.json" for index in range(4))
     originals = {

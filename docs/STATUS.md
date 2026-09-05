@@ -4,18 +4,16 @@ Last verified: 2026-09-06 — V73 browser baseline and shared refactors verified
 
 ## Current state
 
-- V73 baseline: real-backend browser journeys protect all six games on desktop and mobile emulation
-  (ADR-0098). Public seed-38 snapshots protect deterministic selection before shared refactors.
-- Product line: six-game arcade (Django BFF + React SPA) + terminal CLI, served offline from
+- V73 baseline: real-backend browser journeys protect all six games on desktop/mobile (ADR-0098); seed-38 snapshots protect deterministic selection.
+- Product line: six-game arcade (Django BFF + React SPA) + terminal CLI, offline from
   `cat_de_roman_esti/fixtures/kg_sample.json`, build `fixture-v72-romanian-dishes-and-pastries-morphology`:
   2,364 nodes / 9,217 edges / 8,450 aliases / 180 puzzles (verified against the fixture `meta.counts` 2026-09-05).
 - `kg_real.json` is a thin real-corpus export (932 nodes / 135 edges / 13 puzzles, no aliases) — **not** the served
   build; pointing `CAT_KG_FIXTURE` at it silently empties every curated category (data.py:27,34-36).
 - Landed: V72 fast-forwarded on `main` at `6ee8693`; the rollout record `02dba24` is also on `main`. Actions runs
   `33023808156`/`33024392655` green on Python 3.12/3.14 + frontend.
-- ADR-0099 consolidates the six existing-session endpoint transaction wrappers without changing
-  session bounds or API behavior. ADR-0100 extracts the six saved-game resume flows without changing their distinct
-  terminal/error policies; ADR-0097 remains the newest vocabulary/build decision.
+- ADR-0099 consolidates six endpoint transactions; ADR-0100 extracts saved-game resume without behavior changes.
+- V75 adds reusable `--pack-only` importer protection; no candidate batch has changed served content.
 - V72 wave: 50 unanimously reviewed genitive/dative aliases for 25 gastronomie owners, zero rejections; the V71
   actionable-fuzzy deny set stays exactly `intrigii`, `intrigilor`; the 70-term nonaccepted ledger is unchanged.
   Evidence: `docs/reviews/v72-romanian-dishes-and-pastries-morphology/README.md`.
@@ -118,5 +116,5 @@ The full suite was green at host load average ≈ 28; the same alchimie test fai
 
 - `README.md` — orientation + the full doc index. `AGENTS.md` — operating contract (Claude Code and Codex).
 - `docs/agent-map.md` — entry points and task routes. `docs/agent-testing.md` — gate commands + expected output.
-- `docs/adr/` — decisions (newest ADR-0100). `docs/reviews/<wave>/` — per-wave evidence.
+- `docs/adr/` — decisions (newest ADR-0102). `docs/reviews/<wave>/` — per-wave evidence.
 - `docs/handoffs/` — dated records. `docs/archive/` — superseded snapshots.
