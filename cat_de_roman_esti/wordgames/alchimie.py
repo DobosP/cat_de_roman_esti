@@ -19,7 +19,7 @@ from __future__ import annotations
 import random
 import threading
 from dataclasses import dataclass, field
-from functools import lru_cache, wraps
+from functools import lru_cache
 from itertools import combinations
 
 from django.urls import path
@@ -36,6 +36,7 @@ from ..web.http import (
     query_str,
 )
 from ._progress import excluded_pack_ids, record_finished
+from ._session_endpoint import atomic_session
 from .categories import category_label, is_known, known_keys
 from .packs import (
     ALCHIMIE_MAX_ACTIONS,
@@ -195,19 +196,7 @@ class AlchimieSession:
 
 
 store: SessionStore[AlchimieSession] = SessionStore()
-
-
-def _atomic_session(method):
-    """Run one request against a pinned, exclusively locked game session."""
-
-    @wraps(method)
-    def wrapped(self, request, game_id: str):
-        with store.transaction(game_id) as session:
-            if session is None:
-                raise http_error(404, "Joc inexistent.")
-            return method(self, request, game_id, session)
-
-    return wrapped
+_atomic_session = atomic_session(lambda: store, "Joc inexistent.")
 
 
 # --------------------------------------------------------------------- instance builder

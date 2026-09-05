@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-06 — V73 browser baseline verified locally; production smokes last run 2026-08-27, not re-run.
+Last verified: 2026-09-06 — V73 browser baseline and session extraction verified locally; production smokes last run 2026-08-27, not re-run.
 
 ## Current state
 
@@ -13,8 +13,8 @@ Last verified: 2026-09-06 — V73 browser baseline verified locally; production 
   build; pointing `CAT_KG_FIXTURE` at it silently empties every curated category (data.py:27,34-36).
 - Landed: V72 fast-forwarded on `main` at `6ee8693`; the rollout record `02dba24` is also on `main`. Actions runs
   `33023808156`/`33024392655` green on Python 3.12/3.14 + frontend.
-- Newest decision: ADR-0097 supersedes ADR-0096 only at its V71 build/count decision; Contexto selection,
-  navigation, sessions, privacy, frontend, and all other fuzzy behavior are unchanged.
+- ADR-0099 consolidates the six existing-session endpoint transaction wrappers without changing
+  session bounds or API behavior. ADR-0097 remains the newest content/build decision.
 - V72 wave: 50 unanimously reviewed genitive/dative aliases for 25 gastronomie owners, zero rejections; the V71
   actionable-fuzzy deny set stays exactly `intrigii`, `intrigilor`; the 70-term nonaccepted ledger is unchanged.
   Evidence: `docs/reviews/v72-romanian-dishes-and-pastries-morphology/README.md`.
@@ -94,6 +94,7 @@ mobile public content sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11fc8
 | 2026-09-05 | frontend `npm ci && npm test && npm run lint && npm run build` | not run (no `frontend/node_modules`; docs-only change) |
 | 2026-09-05 | `python3 ~/work/agent-ops/scripts/check_docs.py .` | `files=29 dead_links=0 stale_terms=0 retired_verbs=0 orphans=0` |
 | 2026-09-05 | `check_project_contexts.py --work-root ~/work` | row `ok`, thin pointer yes (reads the shared checkout) |
+| 2026-09-06 | session/store + six game suites; request limits; ruff, docs, whitespace | 264 + 9 passed; all green |
 
 2026-09-05 runs used `~/work/cat_de_roman_esti/.venv/bin/python` with `PYTHONPATH=.` from the docs worktree.
 The full suite was green at host load average ≈ 28; the same alchimie test fails on its own at load ≈ 39, so the

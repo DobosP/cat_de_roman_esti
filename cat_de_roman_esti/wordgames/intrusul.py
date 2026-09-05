@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import random
 from dataclasses import dataclass, field
-from functools import wraps
 
 from django.urls import path
 from drf_spectacular.utils import extend_schema
@@ -27,6 +26,7 @@ from ..web.http import (
     query_str,
 )
 from ._progress import excluded_pack_ids, record_finished
+from ._session_endpoint import atomic_session
 from .categories import category_label, is_known
 from .derived_catalog import DerivedBoard, DerivedCatalog, get_derived_catalog
 from .service import (
@@ -89,17 +89,7 @@ def _catalog_or_503() -> DerivedCatalog:
         raise http_error(503, "Catalogul Intrusul este invalid.") from exc
 
 
-def _atomic_session(method):
-    """Pin one session and serialize every compound read/mutation against it."""
-
-    @wraps(method)
-    def wrapped(self, request, game_id: str):
-        with store.transaction(game_id) as session:
-            if session is None:
-                raise http_error(404, "Joc inexistent")
-            return method(self, request, game_id, session)
-
-    return wrapped
+_atomic_session = atomic_session(lambda: store, "Joc inexistent")
 
 
 def _concept(node_id: str) -> dict[str, str]:
