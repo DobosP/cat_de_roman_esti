@@ -13,7 +13,8 @@ Last verified: 2026-09-06 — V73 browser baseline and shared refactors verified
 - Landed: V72 fast-forwarded on `main` at `6ee8693`; the rollout record `02dba24` is also on `main`. Actions runs
   `33023808156`/`33024392655` green on Python 3.12/3.14 + frontend.
 - ADR-0099 consolidates six endpoint transactions; ADR-0100 extracts saved-game resume without behavior changes.
-- V75 adds reusable `--pack-only` importer protection; no candidate batch has changed served content.
+- V75 adds reusable `--pack-only` import protection and a validated two-reviewer artifact
+  builder (ADR-0102/0104); no candidate batch has changed served content.
 - V72 wave: 50 unanimously reviewed genitive/dative aliases for 25 gastronomie owners, zero rejections; the V71
   actionable-fuzzy deny set stays exactly `intrigii`, `intrigilor`; the 70-term nonaccepted ledger is unchanged.
   Evidence: `docs/reviews/v72-romanian-dishes-and-pastries-morphology/README.md`.
@@ -36,7 +37,6 @@ Sessions retain the 7,200-second sliding TTL, 1,000-entry per-game cap, per-entr
 64 KiB request ceiling, deterministic selection, and server-private answers.
 
 ## Artifact pins (V72)
-
 Build: fixture-v72-romanian-dishes-and-pastries-morphology; KG:
 fa9575db4819fa314e43218a0ad953f52c3e6ee2e34cac105dbc88e2d2247106;
 pack: 05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed;
@@ -94,6 +94,7 @@ mobile public content sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11fc8
 | 2026-09-05 | `python3 ~/work/agent-ops/scripts/check_docs.py .` | `files=29 dead_links=0 stale_terms=0 retired_verbs=0 orphans=0` |
 | 2026-09-05 | `check_project_contexts.py --work-root ~/work` | row `ok`, thin pointer yes (reads the shared checkout) |
 | 2026-09-06 | session/store + six game suites; request limits; ruff, docs, whitespace | 264 + 9 passed; all green |
+| 2026-09-06 | portable review artifact targeted pytest + Ruff | 12 passed; green |
 
 2026-09-05 runs used `~/work/cat_de_roman_esti/.venv/bin/python` with `PYTHONPATH=.` from the docs worktree.
 The full suite was green at host load average ≈ 28; the same alchimie test fails on its own at load ≈ 39, so the
@@ -108,7 +109,6 @@ The full suite was green at host load average ≈ 28; the same alchimie test fai
   load (green in the full run at load ≈ 28, red alone at load ≈ 39 on 2026-09-05).
 
 ## Open gates
-
 - Accounts-stack go-live: the `docs/DEPLOY.md` go-live checklist plus `docs/compliance/` lawyer review
   (DEPLOY.md:35-40). Production runs anonymous mode until both are satisfied.
 
@@ -116,5 +116,5 @@ The full suite was green at host load average ≈ 28; the same alchimie test fai
 
 - `README.md` — orientation + the full doc index. `AGENTS.md` — operating contract (Claude Code and Codex).
 - `docs/agent-map.md` — entry points and task routes. `docs/agent-testing.md` — gate commands + expected output.
-- `docs/adr/` — decisions (newest ADR-0102). `docs/reviews/<wave>/` — per-wave evidence.
+- `docs/adr/` — decisions (newest ADR-0104). `docs/reviews/<wave>/` — per-wave evidence.
 - `docs/handoffs/` — dated records. `docs/archive/` — superseded snapshots.

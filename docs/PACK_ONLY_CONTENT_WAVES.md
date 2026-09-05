@@ -19,12 +19,19 @@ the quality and promotion requirements are [the critique rubric](CRITIQUE_RUBRIC
    ```
 
 4. Require an analyst critique and an adversarial Romanian-web verification for every ID.
-   Their version-2 `<game>_verdicts.json` must carry the exact dossier/rubric bindings and
-   complete verifier coverage. Apply only the fresh, complete batch:
+   Their separate JSON files use the portable contract in [ADR-0104](adr/0104-portable-independent-review-artifacts.md):
+   exact shared `input_ids`, distinct reviewer IDs, and one dossier-bound judgment per ID.
+   Build the version-2 files, then apply only the fresh, complete batch:
 
    ```bash
+   PYTHONPATH=. <interp> scripts/build_review_artifact.py \
+     --analyst <analyst.json> --verifier <verifier.json> \
+     --dossiers <scratch>/<wave>-dossiers --out <scratch>/<wave>-verdicts
    PYTHONPATH=. <interp> scripts/apply_rereview.py --dir <scratch>/<wave>-verdicts
    ```
+
+   The current V2 projection contract accepts Alchimie-only batches; a batch that mixes
+   Alchimie with another game fails closed before output.
 
 5. Run the content gates and refresh only the digest-bound artifacts affected by the pack:
 
