@@ -248,6 +248,36 @@ def test_win_includes_score_and_share():
     assert final["share"] == body["share"]
 
 
+def test_undo_cannot_reopen_or_rerecord_a_won_game(monkeypatch):
+    recorded: list[tuple[str, str | None]] = []
+    monkeypatch.setattr(
+        lant,
+        "record_finished",
+        lambda _request, game, pack_id, **_kwargs: recorded.append((game, pack_id)),
+    )
+    game = _create(seed=19)
+    _win(game)
+    url = f"/api/wordgames/lant/games/{game['game_id']}"
+    terminal_state = c.get(url).json()
+    calls_after_win = list(recorded)
+
+    stale_undo = c.post(f"{url}/undo")
+    repeated_stale_undo = c.post(f"{url}/undo")
+    assert stale_undo.status_code == repeated_stale_undo.status_code == 200
+    assert stale_undo.json() == repeated_stale_undo.json() == terminal_state
+    assert c.get(url).json() == terminal_state
+    assert recorded == calls_after_win
+
+    replay = c.post(
+        f"{url}/move",
+        {"text": game["target"]["label"]},
+        content_type="application/json",
+    )
+    assert replay.status_code == 200 and replay.json()["won"] is True
+    assert c.get(url).json() == terminal_state
+    assert recorded == calls_after_win
+
+
 def test_score_formula_holds_on_win():
     game = _create()
     optimal = game["optimal"]
