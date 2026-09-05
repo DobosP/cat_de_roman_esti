@@ -136,7 +136,7 @@ export default function Alchimie({
   const best = useMemo(() => bestScore(GAME_KEY), []);
 
   const applyResumedGame = useCallback(
-    (s: AlchimieState) => {
+    (s: AlchimieState, { terminal }: { terminal: boolean }) => {
       setState(s);
       setDifficulty(s.difficulty);
       setCategory(s.board_category ?? null);
@@ -150,23 +150,22 @@ export default function Alchimie({
       setLastMessage(null);
       setIsRecord(false);
       setIsPuzzleRecord(false);
-      onToast("Joc reluat.", "info");
+      if (!terminal) onToast("Joc reluat.", "info");
     },
     [onToast],
   );
 
-  useSavedGameResume({
+  const { recovery: resumeRecovery, retryResume, cancelResume } = useSavedGameResume({
     active,
     load: alchimieApi.get,
     isTerminal: isTerminalResume,
-    terminal: "discard",
-    transient: "forget",
     setPending: setLoading,
     onResume: applyResumedGame,
   });
 
   const start = useCallback(
     async (opts: CreateOpts = {}) => {
+      cancelResume();
       setLoading(true);
       try {
         const s = await alchimieApi.create(opts);
@@ -193,7 +192,7 @@ export default function Alchimie({
         setLoading(false);
       }
     },
-    [active, onToast],
+    [active, cancelResume, onToast],
   );
 
   const won = state?.won ?? false;
@@ -235,7 +234,7 @@ export default function Alchimie({
   // Record the score exactly once when a game is won.
   useEffect(() => {
     if (!state || !state.won || state.score === undefined) return;
-    active.forget();
+    active.forgetIfCurrent(state.game_id);
     const movesLabel = state.moves === 1 ? "combinație" : "combinații";
     const detail = state.daily
       ? `Zilnic ${state.daily} · ${state.moves} ${movesLabel}`
@@ -540,6 +539,11 @@ export default function Alchimie({
           <GameShell onExit={onExit} accent={DEF.accent} />
 
           <GameIntro
+            resumeRecovery={resumeRecovery ? {
+              kind: resumeRecovery.kind,
+              canRetry: resumeRecovery.kind === "failed" || resumeRecovery.hasCurrent,
+              onRetry: retryResume,
+            } : null}
             icon={DEF.icon}
             title={DEF.title}
             tag={DEF.tag}

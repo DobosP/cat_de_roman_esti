@@ -108,41 +108,6 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const best = useMemo(() => bestScore(GAME_KEY), [state]);
 
-  const start = useCallback(
-    async (mode: StartMode) => {
-      setLoading(true);
-      setRecordHit(false);
-      setPuzzleRecordHit(false);
-      try {
-        const s =
-          mode.kind === "daily"
-            ? // Daily carries difficulty like the other games (shared board, no theme).
-              await conexiuniApi.create({ daily: todayLocal(), difficulty })
-            : await conexiuniApi.create({
-                difficulty: mode.difficulty,
-                category: category ?? undefined,
-              });
-        setState(s);
-        active.remember(s.game_id);
-        setSelected([]);
-        setBlockedGuess(null);
-        setHint(null);
-        setShuffleNonce(0);
-        setShake(0);
-      } catch (err) {
-        onToast(
-          err instanceof ApiError
-            ? `Nu am putut porni jocul (${err.status}).`
-            : "Nu am putut porni jocul.",
-          "error",
-        );
-      } finally {
-        setLoading(false);
-      }
-    },
-    [active, onToast, category, difficulty],
-  );
-
   // Solved-id set so solved tiles drop out of the grid.
   const solvedIds = useMemo(() => {
     const s = new Set<string>();
@@ -200,7 +165,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   }, [applyAuthoritativeState]);
 
   const applyResumedGame = useCallback(
-    (s: ConexiuniState) => {
+    (s: ConexiuniState, { terminal }: { terminal: boolean }) => {
       setState(s);
       setDifficulty(s.difficulty);
       setCategory(s.board_category ?? null);
@@ -211,20 +176,54 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       setHint(null);
       setShuffleNonce(0);
       setShake(0);
-      onToast("Joc reluat.", "info");
+      if (!terminal) onToast("Joc reluat.", "info");
     },
     [onToast],
   );
 
-  useSavedGameResume({
+  const { recovery: resumeRecovery, retryResume, cancelResume } = useSavedGameResume({
     active,
     load: conexiuniApi.get,
     isTerminal: isTerminalResume,
-    terminal: "discard",
-    transient: "forget",
     setPending: setLoading,
     onResume: applyResumedGame,
   });
+
+  const start = useCallback(
+    async (mode: StartMode) => {
+      cancelResume();
+      setLoading(true);
+      setRecordHit(false);
+      setPuzzleRecordHit(false);
+      try {
+        const s =
+          mode.kind === "daily"
+            ? // Daily carries difficulty like the other games (shared board, no theme).
+              await conexiuniApi.create({ daily: todayLocal(), difficulty })
+            : await conexiuniApi.create({
+                difficulty: mode.difficulty,
+                category: category ?? undefined,
+              });
+        setState(s);
+        active.remember(s.game_id);
+        setSelected([]);
+        setBlockedGuess(null);
+        setHint(null);
+        setShuffleNonce(0);
+        setShake(0);
+      } catch (err) {
+        onToast(
+          err instanceof ApiError
+            ? `Nu am putut porni jocul (${err.status}).`
+            : "Nu am putut porni jocul.",
+          "error",
+        );
+      } finally {
+        setLoading(false);
+      }
+    },
+    [active, cancelResume, onToast, category, difficulty],
+  );
 
   const puzzleKey = useMemo(() => {
     if (!state || !finished) return null;
@@ -255,7 +254,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   // Record the score + best once, on transition into a finished state.
   useEffect(() => {
     if (!state || !finished || state.score === undefined) return;
-    active.forget();
+    active.forgetIfCurrent(state.game_id);
     const detail = state.won
       ? `${state.mistakes} greșeli`
       : `pierdut · ${state.mistakes} greșeli`;
@@ -467,6 +466,11 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
           <GameShell onExit={handleExit} accent={DEF.accent} />
 
           <GameIntro
+            resumeRecovery={resumeRecovery ? {
+              kind: resumeRecovery.kind,
+              canRetry: resumeRecovery.kind === "failed" || resumeRecovery.hasCurrent,
+              onRetry: retryResume,
+            } : null}
             icon={DEF.icon}
             title={DEF.title}
             tag={DEF.tag}

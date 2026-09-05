@@ -214,8 +214,37 @@ export default function CaldRece({
 
   const best = bestScore(GAME_KEY);
 
+  const applyResumedGame = useCallback(
+    (saved: ContextoState, { terminal }: { terminal: boolean }) => {
+      setState(saved);
+      setDifficulty(saved.difficulty);
+      setCategory(saved.board_category ?? null);
+      setLatestId(null);
+      setFeedback(null);
+      setGuessView("best");
+      setConfirmReveal(false);
+      setText("");
+      setRecovery(null);
+      setIsRecord(false);
+      setIsPuzzleRecord(false);
+      setShowIntro(false);
+      window.setTimeout(() => inputRef.current?.focus(), 0);
+      if (!terminal) onToast("Joc reluat.", "info");
+    },
+    [onToast],
+  );
+
+  const { recovery: resumeRecovery, retryResume, cancelResume } = useSavedGameResume({
+    active,
+    load: contextoApi.getGame,
+    isTerminal: isTerminalResume,
+    setPending: setBusy,
+    onResume: applyResumedGame,
+  });
+
   const start = useCallback(
     async (opts: CreateOpts = {}) => {
+      cancelResume();
       setBusy(true);
       try {
         const fresh = await contextoApi.createGame(opts);
@@ -242,38 +271,8 @@ export default function CaldRece({
         setBusy(false);
       }
     },
-    [active, onToast],
+    [active, cancelResume, onToast],
   );
-
-  const applyResumedGame = useCallback(
-    (saved: ContextoState) => {
-      setState(saved);
-      setDifficulty(saved.difficulty);
-      setCategory(saved.board_category ?? null);
-      setLatestId(null);
-      setFeedback(null);
-      setGuessView("best");
-      setConfirmReveal(false);
-      setText("");
-      setRecovery(null);
-      setIsRecord(false);
-      setIsPuzzleRecord(false);
-      setShowIntro(false);
-      window.setTimeout(() => inputRef.current?.focus(), 0);
-      onToast("Joc reluat.", "info");
-    },
-    [onToast],
-  );
-
-  useSavedGameResume({
-    active,
-    load: contextoApi.getGame,
-    isTerminal: isTerminalResume,
-    terminal: "discard",
-    transient: "forget",
-    setPending: setBusy,
-    onResume: applyResumedGame,
-  });
 
   const won = state?.won ?? false;
   const gaveUp = state?.gave_up ?? false;
@@ -302,7 +301,7 @@ export default function CaldRece({
   // Record the score exactly once when a game is won.
   useEffect(() => {
     if (!state || (!state.won && !state.gave_up)) return;
-    active.forget();
+    active.forgetIfCurrent(state.game_id);
     if (!state.won || state.score === undefined) return;
     const attemptsLabel = state.attempts === 1 ? "încercare" : "încercări";
     const detail = state.daily
@@ -535,6 +534,11 @@ export default function CaldRece({
           </div>
 
           <GameIntro
+            resumeRecovery={resumeRecovery ? {
+              kind: resumeRecovery.kind,
+              canRetry: resumeRecovery.kind === "failed" || resumeRecovery.hasCurrent,
+              onRetry: retryResume,
+            } : null}
             icon={`${DEF.icon}🧊`}
             title={DEF.title}
             tag={DEF.tag}

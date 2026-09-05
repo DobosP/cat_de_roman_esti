@@ -13,9 +13,8 @@ Last verified: 2026-09-06 — V73 browser baseline and shared refactors verified
   build; pointing `CAT_KG_FIXTURE` at it silently empties every curated category (data.py:27,34-36).
 - Landed: V72 fast-forwarded on `main` at `6ee8693`; the rollout record `02dba24` is also on `main`. Actions runs
   `33023808156`/`33024392655` green on Python 3.12/3.14 + frontend.
-- ADR-0099 consolidates the six existing-session endpoint transaction wrappers without changing
-  session bounds or API behavior. ADR-0100 extracts the six saved-game resume flows without changing their distinct
-  terminal/error policies; ADR-0097 remains the newest vocabulary/build decision.
+- ADR-0099 consolidates existing-session transactions. ADR-0100 extracts saved-game resume;
+  ADR-0101 adds pointer-safe retry and terminal recovery across all six games.
 - V72 wave: 50 unanimously reviewed genitive/dative aliases for 25 gastronomie owners, zero rejections; the V71
   actionable-fuzzy deny set stays exactly `intrigii`, `intrigilor`; the 70-term nonaccepted ledger is unchanged.
   Evidence: `docs/reviews/v72-romanian-dishes-and-pastries-morphology/README.md`.
@@ -38,7 +37,6 @@ Sessions retain the 7,200-second sliding TTL, 1,000-entry per-game cap, per-entr
 64 KiB request ceiling, deterministic selection, and server-private answers.
 
 ## Artifact pins (V72)
-
 Build: fixture-v72-romanian-dishes-and-pastries-morphology; KG:
 fa9575db4819fa314e43218a0ad953f52c3e6ee2e34cac105dbc88e2d2247106;
 pack: 05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed;
@@ -92,7 +90,7 @@ mobile public content sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11fc8
 | 2026-09-05 | accounts-on `pytest -q tests/accounts` | 53 passed |
 | 2026-09-05 | alchimie sparse-recipes test alone at load ≈ 39 | failed: 49.0 s vs the 45 s budget (timing only) |
 | 2026-09-05 | full backend `pytest -q` | 898 passed in 399.96 s (6m40s) |
-| 2026-09-06 | frontend `npm ci && npm test && npm run lint && npm run build` | 163 passed; lint/build green |
+| 2026-09-06 | V74 frontend + real-BFF resume recovery | 165 + 30 browser passed; lint/build green |
 | 2026-09-05 | `python3 ~/work/agent-ops/scripts/check_docs.py .` | `files=29 dead_links=0 stale_terms=0 retired_verbs=0 orphans=0` |
 | 2026-09-05 | `check_project_contexts.py --work-root ~/work` | row `ok`, thin pointer yes (reads the shared checkout) |
 | 2026-09-06 | session/store + six game suites; request limits; ruff, docs, whitespace | 264 + 9 passed; all green |
@@ -118,5 +116,5 @@ The full suite was green at host load average ≈ 28; the same alchimie test fai
 
 - `README.md` — orientation + the full doc index. `AGENTS.md` — operating contract (Claude Code and Codex).
 - `docs/agent-map.md` — entry points and task routes. `docs/agent-testing.md` — gate commands + expected output.
-- `docs/adr/` — decisions (newest ADR-0100). `docs/reviews/<wave>/` — per-wave evidence.
+- `docs/adr/` — decisions (newest ADR-0101). `docs/reviews/<wave>/` — per-wave evidence.
 - `docs/handoffs/` — dated records. `docs/archive/` — superseded snapshots.
