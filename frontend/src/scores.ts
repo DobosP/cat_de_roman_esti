@@ -33,10 +33,14 @@ export interface GameRecord {
 }
 
 const STORAGE_KEY = "cat_wordgame_scores_v1";
+const RECEIPT_STORAGE_KEY = "cat_wordgame_score_receipts_v1";
+const SCORE_STORE_LOCK = "cat_wordgame_scores_v1_transaction";
 const EXPORT_SCHEMA = "cat-wordgame-history-v2";
 const GAME_CAP = 16;
 const RECENT_CAP = 50;
 const PUZZLE_CAP = 100;
+const RECEIPT_CAP_PER_GAME = 1_000;
+const RECEIPT_TTL_MS = 24 * 60 * 60 * 1_000;
 const DERIVED_STARTER_COMPLETIONS = 3;
 const DAILY_CIRCUIT_SCORE_CAP = 1_000;
 /** Reserved key inside the same payload; never a game key, so it's excluded from GAME_CAP. */
@@ -123,6 +127,71 @@ export interface RecordScoreOptions {
   daily?: string | null;
   /** Category/theme key for category-scoped runs. */
   category?: string | null;
+}
+
+interface ScoreReceipt {
+  id: string;
+  at: number;
+}
+
+type ScoreReceiptLedger = Record<string, ScoreReceipt[]>;
+
+interface ScoreLockManager {
+  request<T>(name: string, callback: () => T | PromiseLike<T>): Promise<T>;
+}
+
+interface CompletionRuntime {
+  /** Test seam; production resolves the same-origin browser storage. */
+  storage?: Pick<Storage, "getItem" | "setItem" | "removeItem"> | null;
+  /** Test seam; production uses `navigator.locks` when supported. */
+  locks?: ScoreLockManager | null;
+  /** Test seam for deterministic expiry checks. */
+  now?: number;
+}
+
+/**
+ * Record one server-terminal session once per browser profile.
+ *
+ * Web Locks serialize the whole-board read/modify/write across same-origin tabs. Browsers
+ * without that API still use the bounded receipt ledger for sequential/reload deduplication,
+ * but cannot promise strict concurrency safety across tabs.
+ */
+export async function recordScoreCompletionOnce(
+  game: string,
+  gameId: string,
+  score: number,
+  detail: string,
+  options: RecordScoreOptions = {},
+  runtime: CompletionRuntime = {},
+): Promise<RecordOutcome | null> {
+  const storage = runtime.storage === undefined ? browserStorage() : runtime.storage;
+  const locks = runtime.locks === undefined ? browserLocks() : runtime.locks;
+  const now = Number.isFinite(runtime.now) ? Math.max(0, runtime.now ?? 0) : Date.now();
+  const receiptGame = normalizeReceiptGame(game);
+  const receiptId = normalizeReceiptId(gameId);
+
+  const transaction = () => {
+    if (!storage || !receiptGame || !receiptId) {
+      return recordScore(game, score, detail, options);
+    }
+    const ledger = loadReceiptLedger(storage, now);
+    if (ledger[receiptGame]?.some((receipt) => receipt.id === receiptId)) return null;
+
+    const outcome = recordScore(game, score, detail, options);
+    ledger[receiptGame] = [{ id: receiptId, at: now }, ...(ledger[receiptGame] ?? [])]
+      .slice(0, RECEIPT_CAP_PER_GAME);
+    saveReceiptLedger(storage, ledger);
+    return outcome;
+  };
+
+  if (!locks) return transaction();
+  try {
+    return await locks.request(SCORE_STORE_LOCK, transaction);
+  } catch {
+    // Lock acquisition can be unavailable despite an exposed API. Preserve local play with
+    // the same receipt check; concurrent tabs are best-effort on this path.
+    return transaction();
+  }
 }
 
 /** Record a finished game for `game`. New best = strictly higher score. */
@@ -350,6 +419,82 @@ export function importScores(raw: string): ImportOutcome {
 
 export function clearScores(): void {
   save({});
+  const storage = browserStorage();
+  if (!storage) return;
+  try {
+    storage.removeItem(RECEIPT_STORAGE_KEY);
+  } catch {
+    /* best-effort */
+  }
+}
+
+function browserStorage(): Pick<Storage, "getItem" | "setItem" | "removeItem"> | null {
+  try {
+    return typeof localStorage === "undefined" ? null : localStorage;
+  } catch {
+    return null;
+  }
+}
+
+function browserLocks(): ScoreLockManager | null {
+  try {
+    if (typeof navigator === "undefined" || !navigator.locks) return null;
+    return navigator.locks as unknown as ScoreLockManager;
+  } catch {
+    return null;
+  }
+}
+
+function loadReceiptLedger(
+  storage: Pick<Storage, "getItem" | "setItem" | "removeItem">,
+  now: number,
+): ScoreReceiptLedger {
+  try {
+    const parsed: unknown = JSON.parse(storage.getItem(RECEIPT_STORAGE_KEY) || "{}");
+    const source = isRecord(parsed) && isRecord(parsed.games) ? parsed.games : {};
+    const ledger: ScoreReceiptLedger = {};
+    for (const [rawGame, rawReceipts] of Object.entries(source).slice(0, GAME_CAP)) {
+      const game = normalizeReceiptGame(rawGame);
+      if (!game || !Array.isArray(rawReceipts)) continue;
+      const byId = new Map<string, ScoreReceipt>();
+      for (const rawReceipt of rawReceipts) {
+        if (!isRecord(rawReceipt)) continue;
+        const id = normalizeReceiptId(rawReceipt.id);
+        const at = typeof rawReceipt.at === "number" ? rawReceipt.at : Number.NaN;
+        if (!id || !Number.isFinite(at) || at <= now - RECEIPT_TTL_MS || at > now) continue;
+        const previous = byId.get(id);
+        if (!previous || at > previous.at) byId.set(id, { id, at });
+      }
+      const receipts = [...byId.values()]
+        .sort((left, right) => right.at - left.at || left.id.localeCompare(right.id))
+        .slice(0, RECEIPT_CAP_PER_GAME);
+      if (receipts.length) ledger[game] = receipts;
+    }
+    return ledger;
+  } catch {
+    return {};
+  }
+}
+
+function saveReceiptLedger(
+  storage: Pick<Storage, "getItem" | "setItem" | "removeItem">,
+  ledger: ScoreReceiptLedger,
+): void {
+  try {
+    storage.setItem(RECEIPT_STORAGE_KEY, JSON.stringify({ version: 1, games: ledger }));
+  } catch {
+    /* best-effort */
+  }
+}
+
+function normalizeReceiptGame(value: unknown): string | null {
+  if (typeof value !== "string" || !/^[a-z0-9_-]{1,64}$/.test(value)) return null;
+  return value;
+}
+
+function normalizeReceiptId(value: unknown): string | null {
+  if (typeof value !== "string" || !/^[A-Za-z0-9-]{1,128}$/.test(value)) return null;
+  return value;
 }
 
 function normalizeBoard(value: unknown): Board {

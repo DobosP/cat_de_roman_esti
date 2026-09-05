@@ -181,17 +181,22 @@ export default function Perechi({ onExit, onToast }: Props) {
     const detail = state.won
       ? `${state.mistakes} ${state.mistakes === 1 ? "greșeală" : "greșeli"}`
       : `pierdut · ${state.mistakes} greșeli`;
-    const outcome = recordOnce(state.game_id, state.score, detail, {
+    let current = true;
+    void recordOnce(state.game_id, state.score, detail, {
       puzzleKey,
       daily: state.daily,
       category: state.board_category,
+    }).then((outcome) => {
+      if (!current || !outcome) return;
+      if (state.won) sound.playWin();
+      else sound.playError();
+      setRecordHit(outcome.isBest);
+      setPuzzleRecordHit(outcome.isPuzzleBest);
+      if (outcome.isBest || outcome.isPuzzleBest) sound.playRecord();
     });
-    if (!outcome) return;
-    if (state.won) sound.playWin();
-    else sound.playError();
-    setRecordHit(outcome.isBest);
-    setPuzzleRecordHit(outcome.isPuzzleBest);
-    if (outcome.isBest || outcome.isPuzzleBest) sound.playRecord();
+    return () => {
+      current = false;
+    };
   }, [active, finished, puzzleKey, recordOnce, state]);
 
   const reconcile = useCallback(
