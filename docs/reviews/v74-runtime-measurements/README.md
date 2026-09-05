@@ -32,19 +32,33 @@ initialization. In the warm process, the first Alchimie sample added 60.9 MB RSS
 later game samples added at most 1.1 MB; do not divide these process-level deltas into a
 session-size estimate.
 
-The highest-value concern is **Alchimie create variance**: nine warm creates had a 29.076 ms
+The highest-value follow-up is **Alchimie create variance**: nine warm creates had a 29.076 ms
 median but a 263.526 ms maximum/p95. Its bounded recipe search is the likely investigation
-target before adding concurrency or a latency commitment. This evidence proposes no new
-threshold: one nine-round local sample cannot set an SLO. Lanț actions are the next highest
-warm median (4.779 ms), still measured without network or contention.
+target before adding concurrency or a latency commitment. This is not a release blocker or
+a proposed threshold: one nine-round local sample cannot set an SLO. Lanț actions are the
+next highest warm median (4.779 ms), still measured without network or contention.
 
 Contexto's finite guess-history path remains a separate capacity concern. A session can
-retain up to the stated 2,836 known guess IDs; this run deliberately stopped at ten per
-round (90 accepted entries across nine short-lived sessions) and did not allocate hundreds
-or thousands of heavy sessions. The result is an extrapolation boundary, not proof of
-worst-history memory or latency. Existing protection is the 7,200-second sliding TTL and
-1,000-entry cap **per game** in `SessionStore`; those stores also require the one-worker
-deployment constraint in [DEPLOY.md](../../DEPLOY.md).
+retain up to the stated 2,836 known guess IDs. The historical nine-round report uses ten
+distinct terms per session (90 stored guesses), not repeated submissions. The current
+harness rejects `--contexto-guesses > 10`, its fixed distinct-term corpus, and reports both
+the total and maximum distinct attempts rather than inferring them from successful replies.
+Existing protection is the 7,200-second sliding TTL and 1,000-entry cap **per game** in
+`SessionStore`; those stores also require the one-worker deployment constraint in
+[DEPLOY.md](../../DEPLOY.md).
+
+### Bounded 100-session Contexto sample
+
+The follow-up sample is scratch evidence at
+`/home/dobo/work/_temp/v74-runtime-measurements/contexto-100-sessions.json`, run offline
+with 100 deterministic sessions and ten distinct terms each. It retained **100 sessions /
+1,000 distinct guesses**, measured 64,360,448 bytes process RSS growth from 45,633,536 to
+109,993,984 bytes, create median/p95/max **6.964 / 8.231 / 325.589 ms**, and action
+median/p95/max **0.539 / 1.174 / 2.461 ms**. At measurement the machine had load averages
+**8.072 / 7.432 / 7.508** (1/5/15 minutes), CPython 3.12.3, Linux 6.8.0, and 32 logical
+CPUs. This still includes fixture/Django initialization in the RSS delta and is neither a
+per-session memory value nor a 2,836-history worst case; it deliberately avoids a
+thousands-heavy-session allocation.
 
 ## Reproduce locally
 
@@ -59,9 +73,12 @@ PYTHONPATH=. CAT_ACCOUNTS_ENABLED=0 /home/dobo/work/cat_de_roman_esti/.venv/bin/
 ```
 
 The default is intentionally small: nine rounds per game and ten Contexto attempts per
-round. `--rounds` and `--contexto-guesses` are positive, explicit overrides. The script
-uses only public response fields to form tile and move actions; its fixed Contexto words are
-ordinary guesses, not answers or test hints.
+round. `--rounds` is positive and `--contexto-guesses` is explicitly bounded to the ten
+distinct supplied terms. Before Django starts, the script forces accounts off, clears the
+RO-EDU URL/key, pins `CAT_KG_FIXTURE` to the bundled fixture, and sets the exact Django
+settings module; inherited service configuration cannot change the workload. It uses only
+public response fields to form tile and move actions; its fixed Contexto words are ordinary
+guesses, not answers or test hints.
 
 ## Anonymous V72 release and rollback check
 
