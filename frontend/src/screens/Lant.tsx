@@ -223,19 +223,25 @@ export default function Lant({
   useEffect(() => {
     if (!state?.won || state.score === undefined) return;
     active.forgetIfCurrent(state.game_id);
+    const score = state.score;
     const detail = `${state.moves}/${state.optimal} mutări${
       state.daily ? ` · ${state.daily}` : ""
     }`;
-    const outcome = recordOnce(state.game_id, state.score, detail, {
+    let current = true;
+    void recordOnce(state.game_id, score, detail, {
       puzzleKey,
       difficulty: state.difficulty,
       daily: state.daily,
       category: state.board_category,
+    }).then((outcome) => {
+      if (!current || !outcome) return;
+      const { isBest, isPuzzleBest } = outcome;
+      setScored({ score, isBest, isPuzzleBest });
+      if (isBest || isPuzzleBest) sound.playRecord();
     });
-    if (!outcome) return;
-    const { isBest, isPuzzleBest } = outcome;
-    setScored({ score: state.score, isBest, isPuzzleBest });
-    if (isBest || isPuzzleBest) sound.playRecord();
+    return () => {
+      current = false;
+    };
   }, [state, puzzleKey, recordOnce, active]);
 
   useEffect(() => {

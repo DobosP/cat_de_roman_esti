@@ -53,6 +53,24 @@ async function timesPlayed(page, game) {
   );
 }
 
+function heldRoutes(expected) {
+  let arrivals = 0;
+  let markReady;
+  let release;
+  const ready = new Promise((resolve) => { markReady = resolve; });
+  const held = new Promise((resolve) => { release = resolve; });
+  return {
+    ready,
+    release,
+    handler: async (route) => {
+      arrivals += 1;
+      if (arrivals === expected) markReady();
+      await held;
+      await route.continue();
+    },
+  };
+}
+
 test.describe("V74 saved-game recovery", () => {
   for (const game of games) {
     test(`${game.key} retains a transiently unavailable game and retries it`, async ({ page, request }) => {
@@ -198,5 +216,97 @@ test.describe("V74 saved-game recovery", () => {
     await expect(page.locator(game.board)).toBeVisible();
     expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game)))
       .not.toBe(oldGame.game_id);
+  });
+
+  test("two tabs adopt one terminal session but append its local score once", async ({ context, page, request }) => {
+    const game = games.find(({ key }) => key === "contexto");
+    const terminal = await finishThroughBff(request, game);
+    const otherTab = await context.newPage();
+    await Promise.all([page.goto(game.path), otherTab.goto(game.path)]);
+    expect(await page.evaluate(() => typeof navigator.locks?.request === "function")).toBe(true);
+    await remember(page, game, terminal.game_id);
+
+    // Model the cross-process interleaving where both tabs read the same current pointer
+    // before either synchronous remove reaches the shared storage area. The second remove
+    // releases both effects; subsequent removals use the native implementation.
+    const removeBarrier = `${activeKey(game)}_score_test_barrier`;
+    for (const tab of [page, otherTab]) {
+      await tab.addInitScript(({ active, barrier }) => {
+        const originalRemove = Storage.prototype.removeItem;
+        Storage.prototype.removeItem = function removeItem(key) {
+          if (key !== active || localStorage.getItem(`${barrier}_done`) === "1") {
+            return originalRemove.call(this, key);
+          }
+          const count = Number(localStorage.getItem(barrier) || "0") + 1;
+          localStorage.setItem(barrier, String(count));
+          if (count < 2) return;
+          localStorage.setItem(`${barrier}_done`, "1");
+          originalRemove.call(this, barrier);
+          return originalRemove.call(this, key);
+        };
+      }, { active: activeKey(game), barrier: removeBarrier });
+    }
+
+    const gate = heldRoutes(2);
+    await page.route(`**${gameURL(game, terminal.game_id)}`, gate.handler, { times: 1 });
+    await otherTab.route(`**${gameURL(game, terminal.game_id)}`, gate.handler, { times: 1 });
+    const reloads = [
+      page.reload({ waitUntil: "domcontentloaded" }),
+      otherTab.reload({ waitUntil: "domcontentloaded" }),
+    ];
+    await gate.ready;
+    gate.release();
+    await Promise.all(reloads);
+
+    await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
+    await expect(otherTab.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
+    await expect.poll(() => timesPlayed(page, game)).toBe(1);
+    await expect.poll(() => page.evaluate(
+      ([scoresKey, gameKey]) => {
+        const board = JSON.parse(localStorage.getItem(scoresKey) || "{}");
+        return board[gameKey]?.recent?.length ?? 0;
+      },
+      [SCORES_KEY, game.key],
+    )).toBe(1);
+
+    // Reintroducing the same still-live terminal ID exercises the persisted receipt, rather
+    // than relying on the normal terminal effect having removed the resume pointer.
+    await remember(page, game, terminal.game_id);
+    await page.reload();
+    await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
+    await expect.poll(() => timesPlayed(page, game)).toBe(1);
+    await otherTab.close();
+  });
+
+  test("simultaneous terminal sessions from different games preserve both score rows", async ({ context, page, request }) => {
+    const intrusul = games.find(({ key }) => key === "intrusul");
+    const perechi = games.find(({ key }) => key === "perechi");
+    const [intrusulTerminal, perechiTerminal] = await Promise.all([
+      finishThroughBff(request, intrusul),
+      finishThroughBff(request, perechi),
+    ]);
+    const otherTab = await context.newPage();
+    await Promise.all([page.goto("/"), otherTab.goto("/")]);
+    await remember(page, intrusul, intrusulTerminal.game_id);
+    await remember(page, perechi, perechiTerminal.game_id);
+
+    const gate = heldRoutes(2);
+    await page.route(`**${gameURL(intrusul, intrusulTerminal.game_id)}`, gate.handler, { times: 1 });
+    await otherTab.route(`**${gameURL(perechi, perechiTerminal.game_id)}`, gate.handler, { times: 1 });
+    const navigations = [
+      page.goto(intrusul.path, { waitUntil: "domcontentloaded" }),
+      otherTab.goto(perechi.path, { waitUntil: "domcontentloaded" }),
+    ];
+    await gate.ready;
+    gate.release();
+    await Promise.all(navigations);
+
+    await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
+    await expect(otherTab.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
+    await expect.poll(async () => [
+      await timesPlayed(page, intrusul),
+      await timesPlayed(page, perechi),
+    ]).toEqual([1, 1]);
+    await otherTab.close();
   });
 });

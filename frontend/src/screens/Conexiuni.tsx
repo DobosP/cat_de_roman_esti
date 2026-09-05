@@ -259,23 +259,28 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     const detail = state.won
       ? `${state.mistakes} greșeli`
       : `pierdut · ${state.mistakes} greșeli`;
-    const outcome = recordOnce(state.game_id, state.score, detail, {
+    let current = true;
+    void recordOnce(state.game_id, state.score, detail, {
       puzzleKey,
       difficulty: state.difficulty,
       daily: state.daily,
       category: state.board_category,
+    }).then((outcome) => {
+      if (!current || !outcome) return;
+      const { isBest, isPuzzleBest } = outcome;
+      if (state.won) sound.playWin();
+      else sound.playError();
+      if (isBest) {
+        setRecordHit(true);
+        sound.playRecord();
+      } else if (isPuzzleBest) {
+        sound.playRecord();
+      }
+      setPuzzleRecordHit(isPuzzleBest);
     });
-    if (!outcome) return;
-    const { isBest, isPuzzleBest } = outcome;
-    if (state.won) sound.playWin();
-    else sound.playError();
-    if (isBest) {
-      setRecordHit(true);
-      sound.playRecord();
-    } else if (isPuzzleBest) {
-      sound.playRecord();
-    }
-    setPuzzleRecordHit(isPuzzleBest);
+    return () => {
+      current = false;
+    };
   }, [active, finished, puzzleKey, recordOnce, state]);
 
   const toggle = useCallback(

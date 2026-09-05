@@ -4,7 +4,11 @@
 // game id so replays record again but re-renders never do.
 
 import { useCallback, useRef } from "react";
-import { recordScore, type RecordOutcome, type RecordScoreOptions } from "../scores";
+import {
+  recordScoreCompletionOnce,
+  type RecordOutcome,
+  type RecordScoreOptions,
+} from "../scores";
 import { pushLatest } from "../scoreSync";
 
 export type RecordOnce = (
@@ -12,17 +16,27 @@ export type RecordOnce = (
   score: number,
   detail: string,
   options?: RecordScoreOptions,
-) => RecordOutcome | null;
+) => Promise<RecordOutcome | null>;
 
 export function useRecordScore(game: string): RecordOnce {
-  const recorded = useRef<string | null>(null);
+  const recorded = useRef<{
+    gameId: string;
+    outcome: Promise<RecordOutcome | null>;
+  } | null>(null);
   return useCallback(
     (gameId, score, detail, options) => {
-      if (!gameId || recorded.current === gameId) return null;
-      recorded.current = gameId;
-      const outcome = recordScore(game, score, detail, options);
-      // Mirror to the account when signed in + consented (no-op otherwise).
-      void pushLatest(game);
+      if (!gameId) return Promise.resolve(null);
+      if (recorded.current?.gameId === gameId) return recorded.current.outcome;
+      const outcome = recordScoreCompletionOnce(game, gameId, score, detail, options)
+        .then((fresh) => {
+          // Mirror only a newly recorded row to the account when signed in + consented.
+          if (fresh) void pushLatest(game);
+          return fresh;
+        })
+        .catch(() => null);
+      // StrictMode's effect teardown/setup receives the same completion promise. Keeping only
+      // the current game bounds the ref across arbitrarily many replays.
+      recorded.current = { gameId, outcome };
       return outcome;
     },
     [game],

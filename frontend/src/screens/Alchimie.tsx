@@ -240,21 +240,26 @@ export default function Alchimie({
     const detail = state.daily
       ? `Zilnic ${state.daily} · ${state.moves} ${movesLabel}`
       : `${DIFFICULTY_LABEL[state.difficulty]} · ${state.moves} ${movesLabel}`;
-    const outcome = recordOnce(state.game_id, state.score, detail, {
+    let current = true;
+    void recordOnce(state.game_id, state.score, detail, {
       puzzleKey,
       difficulty: state.difficulty,
       daily: state.daily,
       category: state.board_category,
+    }).then((outcome) => {
+      if (!current || !outcome) return;
+      const { isBest, isPuzzleBest } = outcome;
+      setIsPuzzleRecord(isPuzzleBest);
+      if (isBest) {
+        setIsRecord(true);
+        sound.playRecord();
+      } else if (isPuzzleBest) {
+        sound.playRecord();
+      }
     });
-    if (!outcome) return;
-    const { isBest, isPuzzleBest } = outcome;
-    setIsPuzzleRecord(isPuzzleBest);
-    if (isBest) {
-      setIsRecord(true);
-      sound.playRecord();
-    } else if (isPuzzleBest) {
-      sound.playRecord();
-    }
+    return () => {
+      current = false;
+    };
   }, [state, puzzleKey, recordOnce, active]);
 
   const toggle = useCallback(

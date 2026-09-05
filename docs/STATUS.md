@@ -16,8 +16,9 @@ Last verified: 2026-09-06 — V74 targeted reliability/accessibility gates green
   build; pointing `CAT_KG_FIXTURE` at it silently empties every curated category (data.py:27,34-36).
 - Landed: V72 fast-forwarded on `main` at `6ee8693`; the rollout record `02dba24` is also on `main`. Actions runs
   `33023808156`/`33024392655` green on Python 3.12/3.14 + frontend.
-- ADR-0099 consolidates existing-session transactions; ADR-0101 adds safe resume retry and terminal recovery. Contexto giveup
-  and Lanț undo now keep terminal sessions immutable; ADR-0097 remains the newest vocabulary/build decision.
+- ADR-0099 consolidates existing-session transactions; ADR-0101 adds safe resume retry and terminal recovery;
+  ADR-0105 bounds and deduplicates local terminal score receipts across Web-Lock-capable tabs. Contexto
+  giveup and Lanț undo keep terminal sessions immutable; ADR-0097 remains the newest vocabulary/build decision.
 - V72 wave: 50 unanimously reviewed genitive/dative aliases for 25 gastronomie owners, zero rejections; the V71
   actionable-fuzzy deny set stays exactly `intrigii`, `intrigilor`; the 70-term nonaccepted ledger is unchanged.
   Evidence: `docs/reviews/v72-romanian-dishes-and-pastries-morphology/README.md`.
@@ -89,6 +90,7 @@ mobile public content sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11fc8
 | 2026-09-05 | alchimie sparse-recipes test alone at load ≈ 39 | failed: 49.0 s vs the 45 s budget (timing only) |
 | 2026-09-06 | integrated full backend `pytest -q` | 922 passed in 270.26 s |
 | 2026-09-06 | V74 frontend resume implementation + browser recovery | 165 native + 30 browser passed; lint/build green; 118.17 KiB gzip |
+| 2026-09-06 | V74 local terminal-score receipt regression | 172 native + 17 desktop browser passed; lint/build green; 118.66 KiB gzip |
 | 2026-09-05 | `python3 ~/work/agent-ops/scripts/check_docs.py .` | `files=29 dead_links=0 stale_terms=0 retired_verbs=0 orphans=0` |
 | 2026-09-05 | `check_project_contexts.py --work-root ~/work` | row `ok`, thin pointer yes (reads the shared checkout) |
 | 2026-09-06 | session/store + six game suites; request limits; ruff, docs, whitespace | 264 + 9 passed; all green |

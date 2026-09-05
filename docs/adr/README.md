@@ -13,4 +13,4 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0102 | Pack-only content wave workflow | reserved: V75 tooling |
 | 0103 | [Keyboard-reachable game status](0103-make-game-status-keyboard-reachable.md) | accepted |
 | 0104 | Independent review artifact assembly | reserved: V75 tooling |
-| 0105 | Idempotent local completion recording | reserved: V74 reliability |
+| 0105 | [Idempotent local completion recording](0105-deduplicate-local-terminal-score-receipts.md) | accepted |
