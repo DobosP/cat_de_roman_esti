@@ -1,0 +1,121 @@
+{
+  "schema": "v75-contexto-food-allocation-v1",
+  "baseline_commit": "f75a75c",
+  "candidate_sha256": "sha256:baef6c35007d7da7982058f0bbb220b3fbf95f91377247412368f63898e38431",
+  "import_command": "scripts/import_candidates.py --dir <scratch>/v75-contexto-food --pack-only",
+  "import_result": {
+    "approved": 0,
+    "pending": 2,
+    "skipped": 3
+  },
+  "allocations": [
+    {
+      "raw_ref": "contexto[0]",
+      "id": "ct_gastronomie_318",
+      "target": "n_gas_mici"
+    },
+    {
+      "raw_ref": "contexto[2]",
+      "id": "ct_gastronomie_319",
+      "target": "n_gas_salata_boeuf"
+    }
+  ],
+  "promotion_result": {
+    "promote": 2,
+    "reject": 0,
+    "keep": 0
+  },
+  "preservation": {
+    "existing_pack_records_unchanged": 618,
+    "existing_ranking_quality_status_eligibility_unchanged": 618,
+    "derived_boards_unchanged": 336,
+    "aliases_added": 0,
+    "nodes_added": 0,
+    "edges_added": 0,
+    "puzzles_added": 0
+  },
+  "selection_weight_changes": {
+    "ct_sport_094": [
+      5,
+      4
+    ],
+    "ct_gastronomie_127": [
+      5,
+      4
+    ],
+    "ct_meme_net_160": [
+      4,
+      3
+    ],
+    "ct_societate_087": [
+      3,
+      2
+    ]
+  },
+  "artifact_sha256": {
+    "cat_de_roman_esti/fixtures/games_pack.json": {
+      "before": "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed",
+      "after": "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5"
+    },
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": {
+      "before": "45dfd81444dec14b4b639122fe30dea58f05ca76440003eb5280cc01bfcdc3e9",
+      "after": "118d8561a329fd6a4646524ee9b033302735708a66d8a5921245942d5616eb74"
+    },
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": {
+      "before": "8cff438c25deb5084c0311e808941bfef23e3c7bdbf93242a7a53348a6d2ef57",
+      "after": "2839606ad82ae781cd57c8c265b636871f9326733881240855a3c95f3dd94f1c"
+    },
+    "cat_de_roman_esti/fixtures/kg_sample.json": {
+      "before": "fa9575db4819fa314e43218a0ad953f52c3e6ee2e34cac105dbc88e2d2247106",
+      "after": "fa9575db4819fa314e43218a0ad953f52c3e6ee2e34cac105dbc88e2d2247106"
+    },
+    "tests/fixtures/cat_mobile_app_pack_contract.json": {
+      "before": "4c01361f94adbc50677bb63b5463063e38ccf2783b4627befc7c2c13d33a9e8e",
+      "after": "4c01361f94adbc50677bb63b5463063e38ccf2783b4627befc7c2c13d33a9e8e"
+    },
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": {
+      "before": "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29",
+      "after": "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29"
+    },
+    "cat_de_roman_esti/fixtures/contexto_impact_reserve_v69.json": {
+      "before": "4c41d092c895c61aaccfbda3cb9522c4d5767a88d9af9343efccc182f71e7612",
+      "after": "4c41d092c895c61aaccfbda3cb9522c4d5767a88d9af9343efccc182f71e7612"
+    }
+  },
+  "ranking_counts": {
+    "before": {
+      "total": 618,
+      "approved": 610,
+      "pilot_eligible": 448,
+      "by_game": {
+        "conexiuni": 232,
+        "contexto": 207,
+        "lant": 97,
+        "alchimie": 82
+      },
+      "eligible_by_game": {
+        "conexiuni": 74,
+        "contexto": 201,
+        "lant": 94,
+        "alchimie": 79
+      }
+    },
+    "after": {
+      "total": 620,
+      "approved": 612,
+      "pilot_eligible": 450,
+      "by_game": {
+        "conexiuni": 232,
+        "contexto": 209,
+        "lant": 97,
+        "alchimie": 82
+      },
+      "eligible_by_game": {
+        "conexiuni": 74,
+        "contexto": 203,
+        "lant": 94,
+        "alchimie": 79
+      }
+    }
+  }
+}

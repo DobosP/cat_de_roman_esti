@@ -1,0 +1,112 @@
+{
+ "game": "contexto",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "ct_gastronomie_318",
+   "ct_gastronomie_319"
+  ]
+ },
+ "verdicts": {
+  "ct_gastronomie_318": "promote",
+  "ct_gastronomie_319": "promote"
+ },
+ "perItem": [
+  {
+   "id": "ct_gastronomie_318",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:409604fd59411c095bd7ebff8ec78cfaa2c93a915770881053e7d6068975c43d",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_318",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:409604fd59411c095bd7ebff8ec78cfaa2c93a915770881053e7d6068975c43d",
+    "rationale": "C1: concrete dish, with the culinary noun defined as mititei. C2/A1/A2: familiar Romanian food; the independent factual review supports recurrent national and 1 Mai coverage. The adversarial verifier must independently establish two recognition signals and challenge adjective polysemy. C3: 20 incoming legal neighbors; recognizable Grătar, Muștar, Carne, Mâncare, Cartofi prăjiți and Sosuri provide a defensible cooking and serving neighborhood without depending on beer or the Obor variant. C4: real API guesses grătar rank 2, muștar rank 3, carne rank 5 and mâncare rank 9 are all distance 1/Fierbinte. C5: the bare food noun is interpretable, while the adjective mici is a real objection for the verifier to assess. C6: salience 0.9765 exceeds the usor floor. Strict lint found zero issues in the exact batch. Recommend promote for the legible neighborhood and tested openings; this is not human enjoyment evidence.",
+    "sources": [
+     "https://agerpres.ro/economic/2025/04/29/un-sfert-dintre-romani-asociaza-ziua-de-1-mai-cu-gratarele-si-socializarea-studiu--1444181"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_318",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:409604fd59411c095bd7ebff8ec78cfaa2c93a915770881053e7d6068975c43d",
+    "rationale": "A1/A2: recognition and Romanian social relevance clear the usor floor through independent signals rather than one media mention: the substantial Romanian Wikipedia article has steady monthly use, a 2025 AGERPRES survey of 1,015 respondents reports mici as the leading grill food, Digi24 documents continuing 1 Mai demand, and DLRLC/DEX records the culinary noun decades earlier. A3/A4/A7: the target description honestly states grilled minced meat and its distinctive mustard/grill/1 Mai associations; the evidence supports those claims, play does not depend on Bere, and generic secondary neighbors do not carry the route. A5: no boundary trigger; alcohol is an optional neighbor, not required play value. A6: no existing Contexto record, demotion, or reserve entry uses this target; cross-game appearances are not a same-mechanic reskin. C1: a concrete named dish. C2: the multi-source current and historical record supports the usor recognition band. C3: the lint-clean dossier has 20 incoming neighbors and shows at least ten recognizable direct neighbors, including Grătar, Muștar, Grătarul de 1 Mai, Bere, Carne, Mititeii de la Obor, Grătar la iarbă, Mâncare, Cartofi prăjiți, and Sosuri. C4: actual routes put grătar at rank 2 and muștar at rank 3, both distance 1/Fierbinte; bere and carne are rank 5. C5: the adjectival homograph is real, but the isolated bare plural is the conventional dish noun; mic does not resolve, while Mici, mititei, and micii resolve to this target, and the food-specific neighborhood disambiguates immediately. C6: salience 0.9765 is far above the 0.60 usor warning floor. Refute-first result: the polysemy objection is bounded and does not overturn promotion.",
+    "sources": [
+     "https://ro.wikipedia.org/wiki/Mititei",
+     "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/ro.wikipedia.org/all-access/user/Mititei/monthly/20250901/20260831",
+     "https://agerpres.ro/economic/2025/04/29/un-sfert-dintre-romani-asociaza-ziua-de-1-mai-cu-gratarele-si-socializarea-studiu--1444181",
+     "https://www.digi24.ro/stiri/actualitate/ce-mananca-romanii-de-1-mai-desi-micul-este-regale-incontestabil-al-acestei-sarbatori-alte-alimente-vin-tare-din-urma-3220059",
+     "https://www.romania-actualitati.ro/stiri/romania/romanii-vor-manca-de-1-mai-mici-cat-pentru-o-luna-id70618.html",
+     "https://dexonline.ro/definitie/mititel",
+     "https://dexonline.ro/definitie/mic"
+    ]
+   }
+  },
+  {
+   "id": "ct_gastronomie_319",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:1ec1629e5b7ae1e5205a3cc5bf03a8899893c5841f5bc750fdf9424c60d49108",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_319",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:1ec1629e5b7ae1e5205a3cc5bf03a8899893c5841f5bc750fdf9424c60d49108",
+    "rationale": "C1: concrete named dish. C2/A1/A2: Romanian holiday-meal usage is supported by independent factual review; broad recognition requires the verifier’s independent two-signal check. C3: ten legal incoming neighbors, including recognizable salad, potato, pickles, egg, Salată de icre and festive-meal concepts. Core ingredient and food associations support an opening independently of television context. C4: real API guesses salată rank 2, cartof rank 4 and murături rank 6 are all distance 1/Fierbinte; projected maioneză is rank 28, distance 2/Cald. C5: the descriptive dish name has a dominant food sense. The verifier must check ordinary accepted forms; unknown Revelion limits one free association without breaking the documented core openings. C6: salience 0.9139 exceeds the usor floor; strict lint found zero issues in the exact batch. Recommend promote, without a quota; retain pending or reject if the verifier refutes recognition or semantic feedback.",
+    "sources": [
+     "https://www.protv.ro/articol/124617-retete-de-paste-iulia-parlea-ne-a-dezvaluit-reteta-de-salata-de-boeuf-care-nu-lipseste-niciodata-de-pe-masa-de-paste"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_319",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:1ec1629e5b7ae1e5205a3cc5bf03a8899893c5841f5bc750fdf9424c60d49108",
+    "rationale": "A1/A2: recognition and active Romanian relevance clear the usor floor through independent current and historical signals: the Romanian Wikipedia article has year-round traffic with expected holiday peaks, current HotNews and PRO TV coverage treats the dish as established holiday food, Digi24 records it in ordinary holiday consumption, and a directly digitized Romanian recipe documents the name and recognizable ingredients in 1926. A3/A4/A7: the description is honest about the common meat, vegetable, mayonnaise, decoration, and holiday form while allowing documented recipe variation; the ingredient links are specific and verifiable. A5: no boundary trigger. A6: no existing Contexto record, demotion, or reserve entry uses this target; appearances in Conexiuni do not duplicate the mechanic. C1: a concrete dish with a stable conventional name. C2: multiple current national-media signals plus the 1926 recipe and sustained encyclopedia use support the usor band and cross-generational familiarity. C3: all ten direct predecessors were inspected; even excluding the runtime-unresolved Revelion shorthand, nine recognizable direct neighbors remain, including Mese de sărbători, Salată, Masa de Crăciun, Cartof, Murături, Sosuri, Masa de Paște, Ou, and Salată de icre. C4: actual routes put salată at rank 2, cartof at rank 4, and murături at rank 6, all distance 1/Fierbinte; maioneză is distance 2/rank 28/Cald. C5: the full label is unambiguous; beef, chicken, or meatless recipe variants remain variants of the same named dish rather than separate senses. Exact resolution accepts the full form with or without diacritics plus salată boeuf, salată boef, and boeuf. C6: salience 0.9139 is far above the 0.60 usor warning floor. Refute-first result: the long label and failed Revelion probe are real limitations, but neither defeats the dense core gradient or the dominant sense.",
+    "sources": [
+     "https://ro.wikipedia.org/wiki/Salat%C4%83_de_boeuf",
+     "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/ro.wikipedia.org/all-access/user/Salat%C4%83_de_boeuf/monthly/20250901/20260831",
+     "https://hotnews.ro/salata-de-boeuf-e-mancare-dumnezeiasca-istoria-celui-mai-controversat-preparat-romanesc-de-sarbatoare-diferentele-dintre-primele-retete-si-cele-de-acum-2133928",
+     "https://www.protv.ro/articol/124617-retete-de-paste-iulia-parlea-ne-a-dezvaluit-reteta-de-salata-de-boeuf-care-nu-lipseste-niciodata-de-pe-masa-de-paste",
+     "https://www.digi24.ro/video/stiri/la-veterinar-dupa-mesele-de-sarbatori-caini-si-pisici-hraniti-cu-sarmale-salata-de-boeuf-sau-slanina-au-primit-pomana-porcului-2203555",
+     "https://llll.ro/henriette-krupenski-sturdza/carte-de-bucate-vesela/"
+    ]
+   }
+  }
+ ],
+ "coverage": {
+  "total": 2,
+  "verified": 2,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "provenance": {
+  "analyst": {
+   "path": "/home/dobo/work/_temp/v75-contexto-food/analyst-review.json",
+   "sha256": "sha256:b67f5b57aacace1cca8032963b8c75054933b3162aed4c1a9a59ab85fb2d507c",
+   "reviewer": "root",
+   "role": "analyst"
+  },
+  "verifier": {
+   "path": "/home/dobo/work/_temp/v75-contexto-food/verifier-review.json",
+   "sha256": "sha256:de84934989833355787de3e141baeb828fe94519b114bbee01ed7ec37dcc2cc8",
+   "reviewer": "session_refactor",
+   "role": "verifier"
+  }
+ }
+}

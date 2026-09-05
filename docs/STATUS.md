@@ -4,6 +4,7 @@ Last verified: 2026-09-06 — V73 browser baseline and shared refactors verified
 
 ## Current state
 
+- V75: two independently reviewed Contexto food targets promoted (ADR-0106); 203 eligible, +2 playable and zero aliases.
 - V73 baseline: real-backend browser journeys protect all six games on desktop/mobile (ADR-0098); seed-38 snapshots protect deterministic selection.
 - Product line: six-game arcade (Django BFF + React SPA) + terminal CLI, offline from
   `cat_de_roman_esti/fixtures/kg_sample.json`, build `fixture-v72-romanian-dishes-and-pastries-morphology`:
@@ -24,19 +25,19 @@ Last verified: 2026-09-06 — V73 browser baseline and shared refactors verified
 | Game | Total | Approved | Pending | Runtime eligible/preferred |
 |---|---:|---:|---:|---:|
 | Conexiuni | 232 | 232 | 0 | 74 eligible |
-| Cald sau Rece | 207 | 205 | 2 | 201 eligible |
+| Cald sau Rece | 209 | 207 | 2 | 203 eligible |
 | Lanțul Cuvintelor | 97 | 94 | 3 | 94 eligible |
 | Alchimie | 82 | 79 | 3 | 79 eligible |
 | Intrusul | 183 | 183 | 0 | 144 preferred |
 | Perechi | 153 | 153 | 0 | 113 preferred |
 
-Pack inventory remains **618 = 610 approved + 8 pending** across 14 categories; original
-ranking remains 448 eligible, Contexto 201 eligible, and derived payload 336 boards.
+Pack inventory remains **620 = 612 approved + 8 pending** across 14 categories; original
+ranking totals 450 eligible, Contexto 203 eligible, and derived payload 336 boards.
 V51–V72 reviewed inventories retain their owners; V49 retains 104 Lanț rejections.
 Sessions retain the 7,200-second sliding TTL, 1,000-entry per-game cap, per-entry locks,
 64 KiB request ceiling, deterministic selection, and server-private answers.
 
-## Artifact pins (V72)
+## Historical artifact pins (V72; V75 pins in the review allocation receipt)
 Build: fixture-v72-romanian-dishes-and-pastries-morphology; KG:
 fa9575db4819fa314e43218a0ad953f52c3e6ee2e34cac105dbc88e2d2247106;
 pack: 05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed;

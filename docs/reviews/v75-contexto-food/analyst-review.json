@@ -1,0 +1,30 @@
+{
+  "reviewer": "root",
+  "role": "analyst",
+  "input_ids": [
+    "ct_gastronomie_318",
+    "ct_gastronomie_319"
+  ],
+  "items": [
+    {
+      "id": "ct_gastronomie_318",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:409604fd59411c095bd7ebff8ec78cfaa2c93a915770881053e7d6068975c43d",
+      "rationale": "C1: concrete dish, with the culinary noun defined as mititei. C2/A1/A2: familiar Romanian food; the independent factual review supports recurrent national and 1 Mai coverage. The adversarial verifier must independently establish two recognition signals and challenge adjective polysemy. C3: 20 incoming legal neighbors; recognizable Grătar, Muștar, Carne, Mâncare, Cartofi prăjiți and Sosuri provide a defensible cooking and serving neighborhood without depending on beer or the Obor variant. C4: real API guesses grătar rank 2, muștar rank 3, carne rank 5 and mâncare rank 9 are all distance 1/Fierbinte. C5: the bare food noun is interpretable, while the adjective mici is a real objection for the verifier to assess. C6: salience 0.9765 exceeds the usor floor. Strict lint found zero issues in the exact batch. Recommend promote for the legible neighborhood and tested openings; this is not human enjoyment evidence.",
+      "sources": [
+        "https://agerpres.ro/economic/2025/04/29/un-sfert-dintre-romani-asociaza-ziua-de-1-mai-cu-gratarele-si-socializarea-studiu--1444181"
+      ]
+    },
+    {
+      "id": "ct_gastronomie_319",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:1ec1629e5b7ae1e5205a3cc5bf03a8899893c5841f5bc750fdf9424c60d49108",
+      "rationale": "C1: concrete named dish. C2/A1/A2: Romanian holiday-meal usage is supported by independent factual review; broad recognition requires the verifier’s independent two-signal check. C3: ten legal incoming neighbors, including recognizable salad, potato, pickles, egg, Salată de icre and festive-meal concepts. Core ingredient and food associations support an opening independently of television context. C4: real API guesses salată rank 2, cartof rank 4 and murături rank 6 are all distance 1/Fierbinte; projected maioneză is rank 28, distance 2/Cald. C5: the descriptive dish name has a dominant food sense. The verifier must check ordinary accepted forms; unknown Revelion limits one free association without breaking the documented core openings. C6: salience 0.9139 exceeds the usor floor; strict lint found zero issues in the exact batch. Recommend promote, without a quota; retain pending or reject if the verifier refutes recognition or semantic feedback.",
+      "sources": [
+        "https://www.protv.ro/articol/124617-retete-de-paste-iulia-parlea-ne-a-dezvaluit-reteta-de-salata-de-boeuf-care-nu-lipseste-niciodata-de-pe-masa-de-paste"
+      ]
+    }
+  ]
+}

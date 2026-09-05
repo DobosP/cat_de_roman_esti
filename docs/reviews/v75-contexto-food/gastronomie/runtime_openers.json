@@ -1,0 +1,1323 @@
+[
+  {
+    "target": "n_gas_mici",
+    "guesses": [
+      {
+        "text": "grătar",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_v2gas_gratar",
+            "label": "Grătar",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          },
+          "guesses": [
+            {
+              "id": "n_v2gas_gratar",
+              "label": "Grătar",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            }
+          ],
+          "attempts": 1,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "first",
+            "message": "Primul reper: #2."
+          },
+          "clues_used": 0,
+          "clue_available": false
+        }
+      },
+      {
+        "text": "muștar",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_gas_mustar",
+            "label": "Muștar",
+            "distance": 1,
+            "rank": 3,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 2
+          },
+          "guesses": [
+            {
+              "id": "n_v2gas_gratar",
+              "label": "Grătar",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_gas_mustar",
+              "label": "Muștar",
+              "distance": 1,
+              "rank": 3,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 2
+            }
+          ],
+          "attempts": 2,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "colder",
+            "message": "Mai rece cu un loc.",
+            "rank_delta": -1
+          },
+          "clues_used": 0,
+          "clue_available": false
+        }
+      },
+      {
+        "text": "bere",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_v3gas_bere",
+            "label": "Bere",
+            "distance": 1,
+            "rank": 5,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 3
+          },
+          "guesses": [
+            {
+              "id": "n_v2gas_gratar",
+              "label": "Grătar",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_gas_mustar",
+              "label": "Muștar",
+              "distance": 1,
+              "rank": 3,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 2
+            },
+            {
+              "id": "n_v3gas_bere",
+              "label": "Bere",
+              "distance": 1,
+              "rank": 5,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 3
+            }
+          ],
+          "attempts": 3,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "colder",
+            "message": "Mai rece cu 2 locuri.",
+            "rank_delta": -2
+          },
+          "clues_used": 0,
+          "clue_available": true,
+          "next_clue_kind": "category"
+        }
+      },
+      {
+        "text": "carne",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_v4gas_carne",
+            "label": "Carne",
+            "distance": 1,
+            "rank": 5,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 4
+          },
+          "guesses": [
+            {
+              "id": "n_v2gas_gratar",
+              "label": "Grătar",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_gas_mustar",
+              "label": "Muștar",
+              "distance": 1,
+              "rank": 3,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 2
+            },
+            {
+              "id": "n_v3gas_bere",
+              "label": "Bere",
+              "distance": 1,
+              "rank": 5,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 3
+            },
+            {
+              "id": "n_v4gas_carne",
+              "label": "Carne",
+              "distance": 1,
+              "rank": 5,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 4
+            }
+          ],
+          "attempts": 4,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "same",
+            "message": "La fel de aproape ca încercarea trecută.",
+            "rank_delta": 0
+          },
+          "clues_used": 0,
+          "clue_available": true,
+          "next_clue_kind": "category"
+        }
+      },
+      {
+        "text": "mâncare",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_v4gas_mancare",
+            "label": "Mâncare",
+            "distance": 1,
+            "rank": 9,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 5
+          },
+          "guesses": [
+            {
+              "id": "n_v2gas_gratar",
+              "label": "Grătar",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_gas_mustar",
+              "label": "Muștar",
+              "distance": 1,
+              "rank": 3,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 2
+            },
+            {
+              "id": "n_v3gas_bere",
+              "label": "Bere",
+              "distance": 1,
+              "rank": 5,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 3
+            },
+            {
+              "id": "n_v4gas_carne",
+              "label": "Carne",
+              "distance": 1,
+              "rank": 5,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            {
+              "id": "n_v4gas_mancare",
+              "label": "Mâncare",
+              "distance": 1,
+              "rank": 9,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 5
+            }
+          ],
+          "attempts": 5,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "colder",
+            "message": "Mai rece cu 4 locuri.",
+            "rank_delta": -4
+          },
+          "clues_used": 0,
+          "clue_available": true,
+          "next_clue_kind": "category"
+        }
+      }
+    ]
+  },
+  {
+    "target": "n_gas_cozonac",
+    "guesses": [
+      {
+        "text": "desert",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_v2gas_desert",
+            "label": "Desert",
+            "distance": 1,
+            "rank": 3,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          },
+          "guesses": [
+            {
+              "id": "n_v2gas_desert",
+              "label": "Desert",
+              "distance": 1,
+              "rank": 3,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            }
+          ],
+          "attempts": 1,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "first",
+            "message": "Primul reper: #3."
+          },
+          "clues_used": 0,
+          "clue_available": false
+        }
+      },
+      {
+        "text": "Crăciun",
+        "status": 200,
+        "response": {
+          "ok": false,
+          "message": "Nu cunosc acest concept",
+          "suggestions": [],
+          "guesses": [
+            {
+              "id": "n_v2gas_desert",
+              "label": "Desert",
+              "distance": 1,
+              "rank": 3,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            }
+          ],
+          "attempts": 1,
+          "won": false,
+          "reachable_count": 2288,
+          "clues_used": 0,
+          "clue_available": false
+        }
+      },
+      {
+        "text": "Paște",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_v3gas_paste",
+            "label": "Paste",
+            "distance": 2,
+            "rank": 118,
+            "temperature": "Caldut",
+            "closeness": 95,
+            "attempt_number": 2
+          },
+          "guesses": [
+            {
+              "id": "n_v2gas_desert",
+              "label": "Desert",
+              "distance": 1,
+              "rank": 3,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_v3gas_paste",
+              "label": "Paste",
+              "distance": 2,
+              "rank": 118,
+              "temperature": "Caldut",
+              "closeness": 95,
+              "attempt_number": 2
+            }
+          ],
+          "attempts": 2,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "colder",
+            "message": "Mai rece cu 115 locuri.",
+            "rank_delta": -115
+          },
+          "clues_used": 0,
+          "clue_available": false
+        }
+      },
+      {
+        "text": "făină",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_v24_food_pantry_faina",
+            "label": "Făină",
+            "distance": 4,
+            "rank": 498,
+            "temperature": "Rece",
+            "closeness": 78,
+            "attempt_number": 3
+          },
+          "guesses": [
+            {
+              "id": "n_v2gas_desert",
+              "label": "Desert",
+              "distance": 1,
+              "rank": 3,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_v3gas_paste",
+              "label": "Paste",
+              "distance": 2,
+              "rank": 118,
+              "temperature": "Caldut",
+              "closeness": 95,
+              "attempt_number": 2
+            },
+            {
+              "id": "n_v24_food_pantry_faina",
+              "label": "Făină",
+              "distance": 4,
+              "rank": 498,
+              "temperature": "Rece",
+              "closeness": 78,
+              "attempt_number": 3
+            }
+          ],
+          "attempts": 3,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "colder",
+            "message": "Mai rece cu 380 locuri.",
+            "rank_delta": -380
+          },
+          "clues_used": 0,
+          "clue_available": true,
+          "next_clue_kind": "category"
+        }
+      },
+      {
+        "text": "zahăr",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_v24_food_pantry_zahar",
+            "label": "Zahăr",
+            "distance": 4,
+            "rank": 498,
+            "temperature": "Rece",
+            "closeness": 78,
+            "attempt_number": 4
+          },
+          "guesses": [
+            {
+              "id": "n_v2gas_desert",
+              "label": "Desert",
+              "distance": 1,
+              "rank": 3,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_v3gas_paste",
+              "label": "Paste",
+              "distance": 2,
+              "rank": 118,
+              "temperature": "Caldut",
+              "closeness": 95,
+              "attempt_number": 2
+            },
+            {
+              "id": "n_v24_food_pantry_faina",
+              "label": "Făină",
+              "distance": 4,
+              "rank": 498,
+              "temperature": "Rece",
+              "closeness": 78,
+              "attempt_number": 3
+            },
+            {
+              "id": "n_v24_food_pantry_zahar",
+              "label": "Zahăr",
+              "distance": 4,
+              "rank": 498,
+              "temperature": "Rece",
+              "closeness": 78,
+              "attempt_number": 4
+            }
+          ],
+          "attempts": 4,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "same",
+            "message": "La fel de aproape ca încercarea trecută.",
+            "rank_delta": 0
+          },
+          "clues_used": 0,
+          "clue_available": true,
+          "next_clue_kind": "category"
+        }
+      }
+    ]
+  },
+  {
+    "target": "n_gas_salata_boeuf",
+    "guesses": [
+      {
+        "text": "salată",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_v3gas_salata",
+            "label": "Salată",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          },
+          "guesses": [
+            {
+              "id": "n_v3gas_salata",
+              "label": "Salată",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            }
+          ],
+          "attempts": 1,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "first",
+            "message": "Primul reper: #2."
+          },
+          "clues_used": 0,
+          "clue_available": false
+        }
+      },
+      {
+        "text": "murături",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_gas_muraturi",
+            "label": "Murături",
+            "distance": 1,
+            "rank": 6,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 2
+          },
+          "guesses": [
+            {
+              "id": "n_v3gas_salata",
+              "label": "Salată",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_gas_muraturi",
+              "label": "Murături",
+              "distance": 1,
+              "rank": 6,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 2
+            }
+          ],
+          "attempts": 2,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "colder",
+            "message": "Mai rece cu 4 locuri.",
+            "rank_delta": -4
+          },
+          "clues_used": 0,
+          "clue_available": false
+        }
+      },
+      {
+        "text": "cartof",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_v2lim_cartof",
+            "label": "Cartof",
+            "distance": 1,
+            "rank": 4,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 3
+          },
+          "guesses": [
+            {
+              "id": "n_v3gas_salata",
+              "label": "Salată",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_v2lim_cartof",
+              "label": "Cartof",
+              "distance": 1,
+              "rank": 4,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 3
+            },
+            {
+              "id": "n_gas_muraturi",
+              "label": "Murături",
+              "distance": 1,
+              "rank": 6,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 2
+            }
+          ],
+          "attempts": 3,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "warmer",
+            "message": "Mai cald cu 2 locuri.",
+            "rank_delta": 2
+          },
+          "clues_used": 0,
+          "clue_available": true,
+          "next_clue_kind": "category"
+        }
+      },
+      {
+        "text": "maioneză",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "ctxp_6bf1b10a4a2a9af50ab8",
+            "label": "Maioneză",
+            "distance": 2,
+            "rank": 28,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 4
+          },
+          "guesses": [
+            {
+              "id": "n_v3gas_salata",
+              "label": "Salată",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_v2lim_cartof",
+              "label": "Cartof",
+              "distance": 1,
+              "rank": 4,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 3
+            },
+            {
+              "id": "n_gas_muraturi",
+              "label": "Murături",
+              "distance": 1,
+              "rank": 6,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 2
+            },
+            {
+              "id": "ctxp_6bf1b10a4a2a9af50ab8",
+              "label": "Maioneză",
+              "distance": 2,
+              "rank": 28,
+              "temperature": "Cald",
+              "closeness": 99,
+              "attempt_number": 4
+            }
+          ],
+          "attempts": 4,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "colder",
+            "message": "Mai rece cu 24 locuri.",
+            "rank_delta": -24
+          },
+          "clues_used": 0,
+          "clue_available": true,
+          "next_clue_kind": "category"
+        }
+      },
+      {
+        "text": "Revelion",
+        "status": 200,
+        "response": {
+          "ok": false,
+          "message": "Nu cunosc acest concept",
+          "suggestions": [],
+          "guesses": [
+            {
+              "id": "n_v3gas_salata",
+              "label": "Salată",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_v2lim_cartof",
+              "label": "Cartof",
+              "distance": 1,
+              "rank": 4,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 3
+            },
+            {
+              "id": "n_gas_muraturi",
+              "label": "Murături",
+              "distance": 1,
+              "rank": 6,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 2
+            },
+            {
+              "id": "ctxp_6bf1b10a4a2a9af50ab8",
+              "label": "Maioneză",
+              "distance": 2,
+              "rank": 28,
+              "temperature": "Cald",
+              "closeness": 99,
+              "attempt_number": 4
+            }
+          ],
+          "attempts": 4,
+          "won": false,
+          "reachable_count": 2288,
+          "clues_used": 0,
+          "clue_available": true,
+          "next_clue_kind": "category"
+        }
+      }
+    ]
+  },
+  {
+    "target": "n_gas_paine_de_casa",
+    "guesses": [
+      {
+        "text": "pâine",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_v4gas_paine",
+            "label": "Pâine",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          },
+          "guesses": [
+            {
+              "id": "n_v4gas_paine",
+              "label": "Pâine",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            }
+          ],
+          "attempts": 1,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "first",
+            "message": "Primul reper: #2."
+          },
+          "clues_used": 0,
+          "clue_available": false
+        }
+      },
+      {
+        "text": "făină",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_v24_food_pantry_faina",
+            "label": "Făină",
+            "distance": 4,
+            "rank": 603,
+            "temperature": "Rece",
+            "closeness": 74,
+            "attempt_number": 2
+          },
+          "guesses": [
+            {
+              "id": "n_v4gas_paine",
+              "label": "Pâine",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_v24_food_pantry_faina",
+              "label": "Făină",
+              "distance": 4,
+              "rank": 603,
+              "temperature": "Rece",
+              "closeness": 74,
+              "attempt_number": 2
+            }
+          ],
+          "attempts": 2,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "colder",
+            "message": "Mai rece cu 601 locuri.",
+            "rank_delta": -601
+          },
+          "clues_used": 0,
+          "clue_available": false
+        }
+      },
+      {
+        "text": "apă",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_v4gas_apa",
+            "label": "Apă",
+            "distance": 1,
+            "rank": 10,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 3
+          },
+          "guesses": [
+            {
+              "id": "n_v4gas_paine",
+              "label": "Pâine",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_v4gas_apa",
+              "label": "Apă",
+              "distance": 1,
+              "rank": 10,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 3
+            },
+            {
+              "id": "n_v24_food_pantry_faina",
+              "label": "Făină",
+              "distance": 4,
+              "rank": 603,
+              "temperature": "Rece",
+              "closeness": 74,
+              "attempt_number": 2
+            }
+          ],
+          "attempts": 3,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "warmer",
+            "message": "Mai cald cu 593 locuri.",
+            "rank_delta": 593
+          },
+          "clues_used": 0,
+          "clue_available": true,
+          "next_clue_kind": "category"
+        }
+      },
+      {
+        "text": "drojdie",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "ctxp_3218ea40b036e40101f5",
+            "label": "Drojdie",
+            "distance": 2,
+            "rank": 21,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 4
+          },
+          "guesses": [
+            {
+              "id": "n_v4gas_paine",
+              "label": "Pâine",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_v4gas_apa",
+              "label": "Apă",
+              "distance": 1,
+              "rank": 10,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 3
+            },
+            {
+              "id": "ctxp_3218ea40b036e40101f5",
+              "label": "Drojdie",
+              "distance": 2,
+              "rank": 21,
+              "temperature": "Cald",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            {
+              "id": "n_v24_food_pantry_faina",
+              "label": "Făină",
+              "distance": 4,
+              "rank": 603,
+              "temperature": "Rece",
+              "closeness": 74,
+              "attempt_number": 2
+            }
+          ],
+          "attempts": 4,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "colder",
+            "message": "Mai rece cu 11 locuri.",
+            "rank_delta": -11
+          },
+          "clues_used": 0,
+          "clue_available": true,
+          "next_clue_kind": "category"
+        }
+      },
+      {
+        "text": "cuptor",
+        "status": 200,
+        "response": {
+          "ok": false,
+          "message": "Nu cunosc acest concept. Poate cautai: Sculptor?",
+          "suggestions": [
+            "Sculptor"
+          ],
+          "guesses": [
+            {
+              "id": "n_v4gas_paine",
+              "label": "Pâine",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_v4gas_apa",
+              "label": "Apă",
+              "distance": 1,
+              "rank": 10,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 3
+            },
+            {
+              "id": "ctxp_3218ea40b036e40101f5",
+              "label": "Drojdie",
+              "distance": 2,
+              "rank": 21,
+              "temperature": "Cald",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            {
+              "id": "n_v24_food_pantry_faina",
+              "label": "Făină",
+              "distance": 4,
+              "rank": 603,
+              "temperature": "Rece",
+              "closeness": 74,
+              "attempt_number": 2
+            }
+          ],
+          "attempts": 4,
+          "won": false,
+          "reachable_count": 2288,
+          "clues_used": 0,
+          "clue_available": true,
+          "next_clue_kind": "category"
+        }
+      }
+    ]
+  },
+  {
+    "target": "n_v3gas_clatite",
+    "guesses": [
+      {
+        "text": "desert",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_v2gas_desert",
+            "label": "Desert",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          },
+          "guesses": [
+            {
+              "id": "n_v2gas_desert",
+              "label": "Desert",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            }
+          ],
+          "attempts": 1,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "first",
+            "message": "Primul reper: #2."
+          },
+          "clues_used": 0,
+          "clue_available": false
+        }
+      },
+      {
+        "text": "ou",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_v4gas_ou",
+            "label": "Ou",
+            "distance": 1,
+            "rank": 4,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 2
+          },
+          "guesses": [
+            {
+              "id": "n_v2gas_desert",
+              "label": "Desert",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_v4gas_ou",
+              "label": "Ou",
+              "distance": 1,
+              "rank": 4,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 2
+            }
+          ],
+          "attempts": 2,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "colder",
+            "message": "Mai rece cu 2 locuri.",
+            "rank_delta": -2
+          },
+          "clues_used": 0,
+          "clue_available": false
+        }
+      },
+      {
+        "text": "lapte",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte",
+            "distance": 2,
+            "rank": 38,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 3
+          },
+          "guesses": [
+            {
+              "id": "n_v2gas_desert",
+              "label": "Desert",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_v4gas_ou",
+              "label": "Ou",
+              "distance": 1,
+              "rank": 4,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 2
+            },
+            {
+              "id": "n_v4gas_lapte",
+              "label": "Lapte",
+              "distance": 2,
+              "rank": 38,
+              "temperature": "Cald",
+              "closeness": 98,
+              "attempt_number": 3
+            }
+          ],
+          "attempts": 3,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "colder",
+            "message": "Mai rece cu 34 locuri.",
+            "rank_delta": -34
+          },
+          "clues_used": 0,
+          "clue_available": true,
+          "next_clue_kind": "category"
+        }
+      },
+      {
+        "text": "făină",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_v24_food_pantry_faina",
+            "label": "Făină",
+            "distance": 6,
+            "rank": 1696,
+            "temperature": "Inghetat",
+            "closeness": 26,
+            "attempt_number": 4
+          },
+          "guesses": [
+            {
+              "id": "n_v2gas_desert",
+              "label": "Desert",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_v4gas_ou",
+              "label": "Ou",
+              "distance": 1,
+              "rank": 4,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 2
+            },
+            {
+              "id": "n_v4gas_lapte",
+              "label": "Lapte",
+              "distance": 2,
+              "rank": 38,
+              "temperature": "Cald",
+              "closeness": 98,
+              "attempt_number": 3
+            },
+            {
+              "id": "n_v24_food_pantry_faina",
+              "label": "Făină",
+              "distance": 6,
+              "rank": 1696,
+              "temperature": "Inghetat",
+              "closeness": 26,
+              "attempt_number": 4
+            }
+          ],
+          "attempts": 4,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "colder",
+            "message": "Mai rece cu 1658 locuri.",
+            "rank_delta": -1658
+          },
+          "clues_used": 0,
+          "clue_available": true,
+          "next_clue_kind": "category"
+        }
+      },
+      {
+        "text": "dulceață",
+        "status": 200,
+        "response": {
+          "ok": true,
+          "guess": {
+            "id": "n_v17gas_dulceata",
+            "label": "Dulceață",
+            "distance": 1,
+            "rank": 6,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 5
+          },
+          "guesses": [
+            {
+              "id": "n_v2gas_desert",
+              "label": "Desert",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            {
+              "id": "n_v4gas_ou",
+              "label": "Ou",
+              "distance": 1,
+              "rank": 4,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 2
+            },
+            {
+              "id": "n_v17gas_dulceata",
+              "label": "Dulceață",
+              "distance": 1,
+              "rank": 6,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 5
+            },
+            {
+              "id": "n_v4gas_lapte",
+              "label": "Lapte",
+              "distance": 2,
+              "rank": 38,
+              "temperature": "Cald",
+              "closeness": 98,
+              "attempt_number": 3
+            },
+            {
+              "id": "n_v24_food_pantry_faina",
+              "label": "Făină",
+              "distance": 6,
+              "rank": 1696,
+              "temperature": "Inghetat",
+              "closeness": 26,
+              "attempt_number": 4
+            }
+          ],
+          "attempts": 5,
+          "won": false,
+          "reachable_count": 2288,
+          "feedback": {
+            "kind": "warmer",
+            "message": "Mai cald cu 1690 locuri.",
+            "rank_delta": 1690
+          },
+          "clues_used": 0,
+          "clue_available": true,
+          "next_clue_kind": "category"
+        }
+      }
+    ]
+  }
+]
