@@ -42,6 +42,22 @@ serves a "run npm run build" placeholder instead of 500-ing.
 
 ## Layout
 
+Browser journeys follow [ADR-0098](../docs/adr/0098-protect-real-browser-game-journeys.md).
+With Python web dependencies available as `python3`, run:
+
+```bash
+npm ci
+npx playwright install chromium
+npm run build
+npm run test:e2e
+```
+
+The runner starts its own offline anonymous BFF on port 8138. On the fleet host, put
+the project `.venv/bin` and the Node 24 runtime first on `PATH`. Failure artifacts live
+in ignored `test-results/`; `CDR_E2E_OUTPUT_DIR` can redirect them. The frozen public
+seeded starts are in `e2e/seeded-starts.json`; regenerate only after an intentional,
+reviewed selection change with `PYTHONPATH=.. python3 e2e/solutions.py --write-starts`.
+
 ```
 src/
   main.tsx            React root.

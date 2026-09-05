@@ -1,9 +1,11 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-05 — docs refresh; local gates re-run on this host (see Verification record). Production smokes last run 2026-08-27, not re-run.
+Last verified: 2026-09-06 — V73 browser baseline verified locally; production smokes last run 2026-08-27, not re-run.
 
 ## Current state
 
+- V73 baseline: real-backend browser journeys protect all six games on desktop and mobile emulation
+  (ADR-0098). Public seed-38 snapshots protect deterministic selection before shared refactors.
 - Product line: six-game arcade (Django BFF + React SPA) + terminal CLI, served offline from
   `cat_de_roman_esti/fixtures/kg_sample.json`, build `fixture-v72-romanian-dishes-and-pastries-morphology`:
   2,364 nodes / 9,217 edges / 8,450 aliases / 180 puzzles (verified against the fixture `meta.counts` 2026-09-05).
@@ -74,6 +76,7 @@ mobile public content sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11fc8
 
 | Date | Command | Result |
 |---|---|---|
+| 2026-09-06 | `npm run test:e2e` + strengthened progress/snapshot checks | 48 passed; updated 24 affected journeys passed |
 | 2026-08-27 | full backend `pytest -q` | 898/898 passed |
 | 2026-08-27 | accounts-on suite, sessions, focused V72, combined V71/V72, pin propagation | 53/53, 16/16, 6/6, 13/13, 196/196 passed |
 | 2026-08-27 | transaction dry-run + apply | zero topology or projection change |

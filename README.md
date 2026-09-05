@@ -144,6 +144,7 @@ Direct **local** merges to `main` are allowed once the CI gate is green; **pushi
 - [`AGENTS.md`](AGENTS.md) — operating contract for agent sessions (Claude Code and Codex).
 - [`docs/agent-map.md`](docs/agent-map.md) — entry points, task routes, do-not-load list.
 - [`docs/agent-testing.md`](docs/agent-testing.md) — gate commands with expected output.
+- [`docs/adr/0098-protect-real-browser-game-journeys.md`](docs/adr/0098-protect-real-browser-game-journeys.md) — real browser regression gate across all six games.
 - [`docs/KG_CONTRACT.md`](docs/KG_CONTRACT.md) — the authoritative KG contract v1 (ADR-0002).
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — the **terminal hop game** architecture; the web product is the word-game arcade (ADR-0001).
 - [`docs/MOBILE_CONTRACT.md`](docs/MOBILE_CONTRACT.md) — stable operationIds + `GET /api/manifest` for the generated mobile client (ADR-0003).

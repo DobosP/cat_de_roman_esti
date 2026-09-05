@@ -25,6 +25,7 @@ Below, `<interp>` = `~/work/cat_de_roman_esti/.venv/bin/python`.
 | Lint | `<interp> -m ruff check` | `All checks passed!` |
 | Whitespace | `git diff --check` | no output |
 | Frontend | `cd frontend && npm ci && npm test && npm run lint && npm run build` | build lands `cat_de_roman_esti/web/static/index.html` (ci.yml:92-95) |
+| Browser | `cd frontend && npm run test:e2e` (after build + `npx playwright install chromium`) | six real-backend games, desktop + mobile; Python web runtime on `PATH` |
 | Docs | `python3 ~/work/agent-ops/scripts/check_docs.py .` | `dead_links=0 stale_terms=0 retired_verbs=0 orphans=0` |
 
 `pyproject.toml` sets `addopts = "-q"`, so a passing run prints dots only; add `-o addopts=""` when you

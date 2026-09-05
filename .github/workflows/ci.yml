@@ -93,3 +93,23 @@ jobs:
           npm run build
           test -f ../cat_de_roman_esti/web/static/index.html
           ls ../cat_de_roman_esti/web/static/assets/*.js >/dev/null
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install offline browser-test backend
+        run: python -m pip install -c ../constraints.txt -e "..[web]"
+
+      - name: Install browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Real game journeys (desktop + mobile emulation)
+        run: npm run test:e2e
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: browser-failures
+          path: frontend/test-results/
+          retention-days: 7
