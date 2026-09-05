@@ -1,21 +1,18 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-06 — V73 browser baseline and shared refactors verified locally; production smokes last run 2026-08-27, not re-run.
+Last verified: 2026-09-06 — V73 browser baseline/shared refactors and V74 frontend dependency gate verified locally; production smokes last run 2026-08-27, not re-run.
 
 ## Current state
 
-- V73 baseline: real-backend browser journeys protect all six games on desktop and mobile emulation
-  (ADR-0098). Public seed-38 snapshots protect deterministic selection before shared refactors.
-- Product line: six-game arcade (Django BFF + React SPA) + terminal CLI, served offline from
+- V73 baseline: real-backend browser journeys protect all six games on desktop/mobile (ADR-0098); seed-38 snapshots protect deterministic selection.
+- Product line: six-game arcade (Django BFF + React SPA) + terminal CLI, offline from
   `cat_de_roman_esti/fixtures/kg_sample.json`, build `fixture-v72-romanian-dishes-and-pastries-morphology`:
   2,364 nodes / 9,217 edges / 8,450 aliases / 180 puzzles (verified against the fixture `meta.counts` 2026-09-05).
 - `kg_real.json` is a thin real-corpus export (932 nodes / 135 edges / 13 puzzles, no aliases) — **not** the served
   build; pointing `CAT_KG_FIXTURE` at it silently empties every curated category (data.py:27,34-36).
 - Landed: V72 fast-forwarded on `main` at `6ee8693`; the rollout record `02dba24` is also on `main`. Actions runs
   `33023808156`/`33024392655` green on Python 3.12/3.14 + frontend.
-- ADR-0099 consolidates the six existing-session endpoint transaction wrappers without changing
-  session bounds or API behavior. ADR-0100 extracts the six saved-game resume flows without changing their distinct
-  terminal/error policies; ADR-0097 remains the newest vocabulary/build decision.
+- ADR-0099 consolidates six endpoint transactions; ADR-0100 extracts saved-game resume without behavior changes.
 - V72 wave: 50 unanimously reviewed genitive/dative aliases for 25 gastronomie owners, zero rejections; the V71
   actionable-fuzzy deny set stays exactly `intrigii`, `intrigilor`; the 70-term nonaccepted ledger is unchanged.
   Evidence: `docs/reviews/v72-romanian-dishes-and-pastries-morphology/README.md`.
@@ -93,6 +90,7 @@ mobile public content sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11fc8
 | 2026-09-05 | alchimie sparse-recipes test alone at load ≈ 39 | failed: 49.0 s vs the 45 s budget (timing only) |
 | 2026-09-05 | full backend `pytest -q` | 898 passed in 399.96 s (6m40s) |
 | 2026-09-06 | frontend `npm ci && npm test && npm run lint && npm run build` | 163 passed; lint/build green |
+| 2026-09-06 | V74 `npm ci` · `npm audit` · test · lint · build | 0 advisories; 163 passed; 118.17/120 KiB gzip |
 | 2026-09-05 | `python3 ~/work/agent-ops/scripts/check_docs.py .` | `files=29 dead_links=0 stale_terms=0 retired_verbs=0 orphans=0` |
 | 2026-09-05 | `check_project_contexts.py --work-root ~/work` | row `ok`, thin pointer yes (reads the shared checkout) |
 | 2026-09-06 | session/store + six game suites; request limits; ruff, docs, whitespace | 264 + 9 passed; all green |
@@ -105,7 +103,7 @@ The full suite was green at host load average ≈ 28; the same alchimie test fai
 
 - Keep `rollback-60c3fd5318a` through the next successful rollout.
 - Start a later bounded vocabulary wave from documented `main` only when requested.
-- npm advisory remediation (react-router 7.18.1 → 7.18.2) is a separate task.
+- Integrate the V74 dependency patch before the next rollout.
 - Decide whether the 45 s wall-clock budget at `tests/test_alchimie_sparse_recipes.py:211` should tolerate host
   load (green in the full run at load ≈ 28, red alone at load ≈ 39 on 2026-09-05).
 
