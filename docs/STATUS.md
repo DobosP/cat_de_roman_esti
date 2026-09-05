@@ -3,7 +3,7 @@
 Last verified: 2026-09-06 — V73 browser baseline and shared refactors verified locally; production smokes last run 2026-08-27, not re-run.
 
 ## Current state
-- V75: two reviewed Contexto targets promoted (ADR-0106); +2 playable, zero aliases; 50 content/tooling checks pass.
+- V75: two reviewed Contexto targets promoted (ADR-0106); +2 playable, zero aliases; 52 content/tooling checks pass; selection effects recorded.
 - V73 baseline: real-backend browser journeys protect all six games on desktop/mobile (ADR-0098); seed-38 snapshots protect deterministic selection.
 - Product line: six-game arcade (Django BFF + React SPA) + terminal CLI, offline from
   `cat_de_roman_esti/fixtures/kg_sample.json`, build `fixture-v72-romanian-dishes-and-pastries-morphology`:

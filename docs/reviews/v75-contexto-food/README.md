@@ -39,6 +39,7 @@ The existing V2 applier validated fresh bindings and applied two promotions.
   candidate preparation was wave_audit.
 - `verdicts/contexto_verdicts.json` and its `dossiers/`: serialized V2 decisions, raw-review
   digests, exact coverage and the pending dossiers used for promotion.
+- `selection-impact.json`: independent before/after selection sampling and public API probes.
 - `allocation-receipt.json`: raw-reference-to-ID map, before/after artifact hashes,
   counts and the precise selection-weight changes.
 
@@ -55,6 +56,14 @@ There are zero new aliases, nodes, edges or puzzles. All 618 previous pack recor
 all 336 frozen Intrusul/Perechi boards remain identical. Existing ranking scores, approval
 and eligibility remain identical; adding two strong targets shifts ordinal ranks and
 four existing Contexto selection-weight bands. The receipt records those exact changes.
+
+Across seeds 0–99 and September 2026 daily dates, all same-artifact repeat runs matched.
+The other five games had zero selection changes. Contexto changed 81/100 unfiltered seeded
+selections and 1/30 daily selections; the gastronomie/usor shelf changed 55/100 and 10/30.
+These are release-to-release sampling effects, not a repeat-rate or enjoyment measure.
+Scoped public API seeds 5 and 6 select the new targets, hide the answer on creation, accept
+ordinary warm guesses and finish with a server-scored win. The existing seed-38 public
+start snapshot remains unchanged, even though it does not expose the selected target.
 
 The next useful content investigation is the rejected candidates' ingredient/holiday
 feedback, including the Paște/Paste sense collision. It requires separately reviewed

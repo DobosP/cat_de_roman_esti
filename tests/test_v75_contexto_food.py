@@ -8,6 +8,8 @@ import json
 from collections import Counter
 from pathlib import Path
 
+import pytest
+
 from cat_de_roman_esti.wordgames.packs import get_pack
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -131,3 +133,36 @@ def test_five_candidate_dispositions_and_two_independent_promotions_are_bound() 
             assert row["verdict"] == final[role] == final["final"] == "promote"
             assert row["review_binding"] == final["review_binding"]
     assert len(reviewer_ids) == 2
+
+
+@pytest.mark.parametrize(
+    ("seed", "opener", "answer", "target"),
+    [(5, "grătar", "mici", "n_gas_mici"),
+     (6, "salată", "salata de boeuf", "n_gas_salata_boeuf")],
+)
+def test_new_targets_are_publicly_selectable_warm_and_winnable(
+    seed: int, opener: str, answer: str, target: str,
+) -> None:
+    pytest.importorskip("django")
+    from django.test import Client
+
+    client = Client()
+    response = client.post(
+        f"/api/wordgames/contexto/games?seed={seed}&category=gastronomie&difficulty=usor"
+    )
+    assert response.status_code == 200
+    initial = response.json()
+    assert not ({"target", "solution", "score", "source_id"} & initial.keys())
+    url = f"/api/wordgames/contexto/games/{initial['game_id']}/guess"
+    warm = client.post(url, {"text": opener}, content_type="application/json")
+    assert warm.status_code == 200
+    assert warm.json()["guess"]["distance"] == 1
+    assert warm.json()["guess"]["rank"] == 2
+    assert warm.json()["guess"]["temperature"] == "Fierbinte"
+    assert warm.json()["won"] is False
+    win = client.post(url, {"text": answer}, content_type="application/json")
+    assert win.status_code == 200
+    assert win.json()["won"] is True
+    assert win.json()["guess"]["id"] == target
+    assert win.json()["attempts"] == 2
+    assert win.json()["score"] == 940
