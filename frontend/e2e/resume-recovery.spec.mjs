@@ -10,6 +10,7 @@ import {
 } from "./games.mjs";
 
 const SCORES_KEY = "cat_wordgame_scores_v1";
+const SCORE_LOCK = "cat_wordgame_scores_v1_transaction";
 
 async function createThroughBff(request, game) {
   const query = new URLSearchParams({ seed: "38", difficulty: "usor" });
@@ -71,6 +72,24 @@ function heldRoutes(expected) {
   };
 }
 
+async function holdScoreLock(page) {
+  await page.evaluate(async (name) => {
+    let release;
+    const blocked = new Promise((resolve) => { release = resolve; });
+    globalThis.__releaseScoreLock = release;
+    await new Promise((acquired) => {
+      void navigator.locks.request(name, async () => {
+        acquired();
+        await blocked;
+      });
+    });
+  }, SCORE_LOCK);
+}
+
+async function releaseScoreLock(page) {
+  await page.evaluate(() => globalThis.__releaseScoreLock());
+}
+
 test.describe("V74 saved-game recovery", () => {
   for (const game of games) {
     test(`${game.key} retains a transiently unavailable game and retries it`, async ({ page, request }) => {
@@ -118,6 +137,56 @@ test.describe("V74 saved-game recovery", () => {
       expect(await timesPlayed(page, game)).toBe(1);
     });
   }
+
+  test("a queued terminal score keeps every saved game recoverable until its write finishes", async ({ context, request }) => {
+    const holder = await context.newPage();
+    await holder.goto("/");
+    expect(await holder.evaluate(() => typeof navigator.locks?.request === "function")).toBe(true);
+
+    for (const game of games) {
+      const terminal = await finishThroughBff(request, game);
+      let player = await context.newPage();
+      await player.goto(game.path);
+      await remember(player, game, terminal.game_id);
+      await holdScoreLock(holder);
+
+      await player.reload();
+      await expect(player.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
+      expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
+        .toBe(terminal.game_id);
+
+      if (game.key === "contexto") {
+        await player.getByRole("button", { name: "Meniu" }).click();
+        await expect(player).toHaveURL(/\/$/);
+        expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
+          .toBe(terminal.game_id);
+        await player.goto(game.path);
+        await expect(player.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
+      }
+
+      await player.getByRole("button", { name: "Schimbă opțiunile" }).click();
+      expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
+        .toBe(terminal.game_id);
+      await player.reload();
+      await expect(player.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
+      expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
+        .toBe(terminal.game_id);
+
+      await player.close();
+      player = await context.newPage();
+      await player.goto(game.path);
+      await expect(player.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
+      expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
+        .toBe(terminal.game_id);
+
+      await releaseScoreLock(holder);
+      await expect.poll(() => timesPlayed(player, game)).toBe(1);
+      await expect.poll(() => player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
+        .toBeNull();
+      await player.close();
+    }
+    await holder.close();
+  });
 
   for (const staleStatus of [200, 404]) {
     test(`a stale ${staleStatus} response cannot displace another tab's game`, async ({ context, page, request }) => {

@@ -301,8 +301,10 @@ export default function CaldRece({
   // Record the score exactly once when a game is won.
   useEffect(() => {
     if (!state || (!state.won && !state.gave_up)) return;
-    active.forgetIfCurrent(state.game_id);
-    if (!state.won || state.score === undefined) return;
+    if (!state.won || state.score === undefined) {
+      active.forgetIfCurrent(state.game_id);
+      return;
+    }
     const attemptsLabel = state.attempts === 1 ? "încercare" : "încercări";
     const detail = state.daily
       ? `Zilnic ${state.daily} · ${state.attempts} ${attemptsLabel}`
@@ -314,6 +316,7 @@ export default function CaldRece({
       daily: state.daily,
       category: state.board_category,
     }).then((outcome) => {
+      active.forgetIfCurrent(state.game_id);
       if (!current || !outcome) return;
       const { isBest, isPuzzleBest } = outcome;
       setIsPuzzleRecord(isPuzzleBest);
@@ -484,22 +487,21 @@ export default function CaldRece({
   }, [sharePayload, onToast]);
 
   const showOptions = useCallback(() => {
-    active.forget();
+    if (!finished) active.forget();
     setConfirmReveal(false);
     setFeedback(null);
     setRecovery(null);
     setShowIntro(true);
-  }, [active]);
+  }, [active, finished]);
 
-  // Leaving to the menu is permanent: drop the resume token so the game does not
-  // silently reappear when the player comes back (they start fresh from the intro).
-  // A genuine page refresh — which never calls this — still resumes via useActiveGame.
+  // Live-board exits are permanent. Terminal cleanup is conditional on its own ID: scored
+  // wins wait for completion, while a no-score giveup is cleared by its terminal effect.
   const handleExit = useCallback(() => {
-    active.forget();
+    if (!finished) active.forget();
     setConfirmReveal(false);
     setFeedback(null);
     onExit();
-  }, [active, onExit]);
+  }, [active, finished, onExit]);
 
   const guesses = state?.guesses ?? [];
   const bestGuess = guesses[0];

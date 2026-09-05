@@ -234,7 +234,6 @@ export default function Alchimie({
   // Record the score exactly once when a game is won.
   useEffect(() => {
     if (!state || !state.won || state.score === undefined) return;
-    active.forgetIfCurrent(state.game_id);
     const movesLabel = state.moves === 1 ? "combinație" : "combinații";
     const detail = state.daily
       ? `Zilnic ${state.daily} · ${state.moves} ${movesLabel}`
@@ -246,6 +245,7 @@ export default function Alchimie({
       daily: state.daily,
       category: state.board_category,
     }).then((outcome) => {
+      active.forgetIfCurrent(state.game_id);
       if (!current || !outcome) return;
       const { isBest, isPuzzleBest } = outcome;
       setIsPuzzleRecord(isPuzzleBest);
@@ -392,14 +392,14 @@ export default function Alchimie({
   }, [state, busy, active, onToast]);
 
   const newGame = useCallback(() => {
-    active.forget();
+    if (!state?.won) active.forget();
     setSelected([]);
     setEmptyPairKey(null);
     setEmptyRecoveryActive(false);
     setInventoryView("useful");
     setInventoryQuery("");
     setState(null);
-  }, [active]);
+  }, [active, state?.won]);
 
   // Ask for a gentle nudge: the server points at a useful pair (it costs some score).
   const doHint = useCallback(async () => {

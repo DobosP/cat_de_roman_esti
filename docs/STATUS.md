@@ -89,7 +89,7 @@ mobile public content sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11fc8
 | 2026-09-05 | alchimie sparse-recipes test alone at load ≈ 39 | failed: 49.0 s vs the 45 s budget (timing only) |
 | 2026-09-06 | integrated full backend `pytest -q` | 922 passed in 270.26 s |
 | 2026-09-06 | V74 frontend resume implementation + browser recovery | 165 native + 30 browser passed; lint/build green; 118.17 KiB gzip |
-| 2026-09-06 | V74 atomic local terminal-score receipts | 173 native + 2 focused desktop browser passed; lint/build green; 118.73 KiB gzip |
+| 2026-09-06 | V74 atomic/recoverable terminal-score receipts | 173 native + 9 focused desktop browser passed; lint/build green; 118.72 KiB gzip |
 | 2026-09-05 | `python3 ~/work/agent-ops/scripts/check_docs.py .` | `files=29 dead_links=0 stale_terms=0 retired_verbs=0 orphans=0` |
 | 2026-09-05 | `check_project_contexts.py --work-root ~/work` | row `ok`, thin pointer yes (reads the shared checkout) |
 | 2026-09-06 | session/store + six game suites; request limits; ruff, docs, whitespace | 264 + 9 passed; all green |
