@@ -71,9 +71,26 @@ export default function Intrusul({ onExit, onToast }: Props) {
     if (!startInFlight.current) onExit();
   }, [onExit]);
 
+  const applyResumedGame = useCallback((fresh: IntrusulState) => {
+    setState(fresh);
+    setFeedback(
+      fresh.won || fresh.lost
+        ? null
+        : "Joc reluat. Atinge cuvântul care nu se potrivește.",
+    );
+  }, []);
+  const { recovery: resumeRecovery, retryResume, cancelResume } = useSavedGameResume({
+    active,
+    load: intrusulApi.get,
+    isTerminal: isTerminalResume,
+    setPending: setLoading,
+    onResume: applyResumedGame,
+  });
+
   const start = useCallback(
     async ({ daily, previousGameId }: StartOpts = {}) => {
       if (!acquireFlight(startInFlight)) return;
+      cancelResume();
       setLoading(true);
       setFeedback(null);
       setRecordHit(false);
@@ -101,34 +118,8 @@ export default function Intrusul({ onExit, onToast }: Props) {
         setLoading(false);
       }
     },
-    [active, onToast],
+    [active, cancelResume, onToast],
   );
-
-  const applyResumedGame = useCallback((fresh: IntrusulState) => {
-    setState(fresh);
-    setFeedback(
-      fresh.won || fresh.lost
-        ? null
-        : "Joc reluat. Atinge cuvântul care nu se potrivește.",
-    );
-  }, []);
-  const reportResumeFailure = useCallback(() => {
-    onToast(
-      "Nu am putut relua jocul. Încercăm din nou la următoarea deschidere.",
-      "error",
-    );
-  }, [onToast]);
-
-  useSavedGameResume({
-    active,
-    load: intrusulApi.get,
-    isTerminal: isTerminalResume,
-    terminal: "adopt",
-    transient: "retain",
-    setPending: setLoading,
-    onResume: applyResumedGame,
-    onTransientError: reportResumeFailure,
-  });
 
   const puzzleKey = useMemo(() => {
     if (!state || !finished || !state.solution) return null;
@@ -153,7 +144,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   useEffect(() => {
     if (!state || !finished || state.score === undefined) return;
     if (!state.daily) rememberDerivedReplayId(GAME_KEY, state.game_id);
-    active.forget();
+    active.forgetIfCurrent(state.game_id);
     const detail = state.won
       ? `${state.mistakes} ${state.mistakes === 1 ? "greșeală" : "greșeli"}`
       : `pierdut · ${state.mistakes} greșeli`;
@@ -252,6 +243,11 @@ export default function Intrusul({ onExit, onToast }: Props) {
         <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
           <GameShell onExit={exitSafely} accent={DEF.accent} busy={loading} />
           <GameIntro
+            resumeRecovery={resumeRecovery ? {
+              kind: resumeRecovery.kind,
+              canRetry: resumeRecovery.kind === "failed" || resumeRecovery.hasCurrent,
+              onRetry: retryResume,
+            } : null}
             icon={DEF.icon}
             title={DEF.title}
             tag={DEF.tag}

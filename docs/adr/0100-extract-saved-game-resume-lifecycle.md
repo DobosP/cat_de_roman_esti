@@ -1,7 +1,7 @@
 # ADR-0100: Extract the saved-game resume lifecycle
 
 Date: 2026-09-06
-Status: accepted
+Status: partially-superseded-by ADR-0101
 
 ## Decision
 

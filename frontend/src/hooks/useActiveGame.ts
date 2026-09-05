@@ -14,6 +14,10 @@ export interface ActiveGameMemo {
   remember: (gameId: string) => void;
   /** Forget it (call when the game finishes or the player starts fresh). */
   forget: () => void;
+  /** Forget `gameId` only while it is still the remembered game. */
+  forgetIfCurrent: (gameId: string) => boolean;
+  /** Whether `gameId` is still the remembered game. */
+  isCurrent: (gameId: string) => boolean;
   /** The remembered id for this game, if any. */
   peek: () => string | null;
 }
@@ -34,6 +38,22 @@ export function useActiveGame(game: GameKey): ActiveGameMemo {
           localStorage.removeItem(key);
         } catch {
           /* best-effort */
+        }
+      },
+      forgetIfCurrent: (gameId: string) => {
+        try {
+          if (localStorage.getItem(key) !== gameId) return false;
+          localStorage.removeItem(key);
+          return true;
+        } catch {
+          return false;
+        }
+      },
+      isCurrent: (gameId: string) => {
+        try {
+          return localStorage.getItem(key) === gameId;
+        } catch {
+          return false;
         }
       },
       peek: () => {

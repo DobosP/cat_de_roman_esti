@@ -11,6 +11,12 @@ import { Badge, Button } from "@roedu/ui";
 import type { ScoreEntry } from "../scores";
 import { PlayGuide, type PlayGuideStep } from "./PlayGuide";
 
+export interface ResumeRecoveryNotice {
+  kind: "failed" | "changed";
+  canRetry: boolean;
+  onRetry: () => void;
+}
+
 export function GameIntro({
   icon,
   title,
@@ -26,6 +32,7 @@ export function GameIntro({
   onDaily,
   dailyLabel = "Provocarea zilei",
   starting = false,
+  resumeRecovery,
 }: {
   icon: ReactNode;
   title: string;
@@ -47,6 +54,8 @@ export function GameIntro({
   dailyLabel?: string;
   /** Disables actions while the game is being created. */
   starting?: boolean;
+  /** Persistent recovery for a saved game that could not safely be adopted. */
+  resumeRecovery?: ResumeRecoveryNotice | null;
 }) {
   return (
     <m.div
@@ -77,6 +86,23 @@ export function GameIntro({
       {steps && <PlayGuide steps={steps} />}
 
       {children && <div className="col game-intro-extras">{children}</div>}
+
+      {resumeRecovery && (
+        <div className="card col" role="alert" style={{ gap: 10, padding: 14, width: "100%" }}>
+          <strong>
+            {resumeRecovery.kind === "failed"
+              ? "Nu am putut relua jocul salvat. Nu l-am șters."
+              : "Jocul salvat s-a schimbat în altă filă."}
+          </strong>
+          {resumeRecovery.canRetry && (
+            <Button variant="secondary" onClick={resumeRecovery.onRetry} disabled={starting}>
+              {resumeRecovery.kind === "failed"
+                ? "Reîncearcă reluarea"
+                : "Încarcă jocul curent"}
+            </Button>
+          )}
+        </div>
+      )}
 
       <div className="row center wrap game-intro-actions" style={{ gap: 12, marginTop: 6 }}>
         <Button autoFocus onClick={onStart} disabled={starting} size="lg">

@@ -5,11 +5,9 @@
 /**
  * @template T
  * @param {{
- *   active: {peek: () => string | null, forget: () => void},
+ *   active: {peek: () => string | null, isCurrent: (gameId: string) => boolean, forgetIfCurrent: (gameId: string) => boolean},
  *   load: (gameId: string) => Promise<T>,
  *   isTerminal: (state: T) => boolean,
- *   terminal: "adopt" | "discard",
- *   transient: "forget" | "retain",
  *   isMissing: (error: unknown) => boolean,
  * }} options
  */
@@ -23,24 +21,34 @@ export function createSavedGameResume(options) {
 
     try {
       const state = await options.load(savedId);
-      const terminal = options.isTerminal(state);
-      if (terminal && options.terminal === "discard") {
-        options.active.forget();
-        return { kind: "terminal-discarded", gameId: savedId, state };
+      if (!options.active.isCurrent(savedId)) {
+        return { kind: "superseded", gameId: savedId };
       }
+      const terminal = options.isTerminal(state);
       return { kind: "resumed", gameId: savedId, state, terminal };
     } catch (error) {
+      if (!options.active.isCurrent(savedId)) {
+        return { kind: "superseded", gameId: savedId };
+      }
       if (options.isMissing(error)) {
-        options.active.forget();
+        if (!options.active.forgetIfCurrent(savedId)) {
+          return { kind: "superseded", gameId: savedId };
+        }
         return { kind: "missing", gameId: savedId, error };
       }
-      if (options.transient === "forget") options.active.forget();
       return { kind: "failed", gameId: savedId, error };
     }
   };
 
   return {
     hasSavedGame: savedId !== null && savedId !== "",
+    isCurrent() {
+      return savedId !== null && savedId !== "" && options.active.isCurrent(savedId);
+    },
+    hasCurrent() {
+      const current = options.active.peek();
+      return current !== null && current !== "";
+    },
     runOnce() {
       inFlight ??= run();
       return inFlight;
@@ -55,6 +63,7 @@ export function createSavedGameResume(options) {
  *   setPending: (pending: boolean) => void,
  *   onResume: (state: T, detail: {gameId: string, terminal: boolean}) => void,
  *   onTransientError?: (error: unknown) => void,
+ *   onSuperseded?: (hasCurrent: boolean) => void,
  * }} handlers
  */
 export function subscribeSavedGameResume(attempt, handlers) {
@@ -71,6 +80,13 @@ export function subscribeSavedGameResume(attempt, handlers) {
   void attempt.runOnce().then((outcome) => {
     if (!subscribed) return;
     try {
+      if (
+        outcome.kind !== "none" &&
+        (!attempt.isCurrent() && (outcome.kind !== "missing" || attempt.hasCurrent()))
+      ) {
+        handlers.onSuperseded?.(attempt.hasCurrent());
+        return;
+      }
       if (outcome.kind === "resumed") {
         handlers.onResume(outcome.state, {
           gameId: outcome.gameId,
@@ -78,6 +94,8 @@ export function subscribeSavedGameResume(attempt, handlers) {
         });
       } else if (outcome.kind === "failed") {
         handlers.onTransientError?.(outcome.error);
+      } else if (outcome.kind === "superseded") {
+        handlers.onSuperseded?.(attempt.hasCurrent());
       }
     } finally {
       if (subscribed) handlers.setPending(false);

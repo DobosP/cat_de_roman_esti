@@ -168,6 +168,6 @@ Direct **local** merges to `main` are allowed once the CI gate is green; **pushi
 - [`docs/ROEDU_INTEGRATION.md`](docs/ROEDU_INTEGRATION.md) — products, key, field mapping, fail-closed gate, offline fixture.
 - [`frontend/README.md`](frontend/README.md) — SPA develop/build/layout.
 - History (never edited): [`docs/adr/`](docs/adr/) decision records (0001 = arcade pivot, no
-  graph UI; newest 0100) · [`docs/reviews/`](docs/reviews/) per-wave evidence ·
+  graph UI; newest 0101) · [`docs/reviews/`](docs/reviews/) per-wave evidence ·
   [`docs/handoffs/`](docs/handoffs/) dated records · [`docs/archive/`](docs/archive/)
   superseded snapshots.

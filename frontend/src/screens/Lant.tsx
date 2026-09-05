@@ -164,8 +164,31 @@ export default function Lant({
     });
   }, [state, puzzleKey]);
 
+  const applyResumedGame = useCallback(
+    (fresh: LantState, { terminal }: { terminal: boolean }) => {
+      setHint(null);
+      setProgress(null);
+      setScored(null);
+      setDifficulty(fresh.difficulty);
+      setCategory(fresh.board_category ?? null);
+      setState(fresh);
+      setText("");
+      if (!terminal) onToast("Joc reluat.", "info");
+    },
+    [onToast],
+  );
+
+  const { recovery: resumeRecovery, retryResume, cancelResume } = useSavedGameResume({
+    active,
+    load: getLant,
+    isTerminal: isTerminalResume,
+    setPending: setLoading,
+    onResume: applyResumedGame,
+  });
+
   const start = useCallback(
     async (opts?: { difficulty?: Difficulty; daily?: string }) => {
+      cancelResume();
       setLoading(true);
       setHint(null);
       setProgress(null);
@@ -192,37 +215,13 @@ export default function Lant({
         setLoading(false);
       }
     },
-    [onToast, difficulty, category, active],
+    [onToast, difficulty, category, active, cancelResume],
   );
-
-  const applyResumedGame = useCallback(
-    (fresh: LantState) => {
-      setHint(null);
-      setProgress(null);
-      setScored(null);
-      setDifficulty(fresh.difficulty);
-      setCategory(fresh.board_category ?? null);
-      setState(fresh);
-      setText("");
-      onToast("Joc reluat.", "info");
-    },
-    [onToast],
-  );
-
-  useSavedGameResume({
-    active,
-    load: getLant,
-    isTerminal: isTerminalResume,
-    terminal: "discard",
-    transient: "forget",
-    setPending: setLoading,
-    onResume: applyResumedGame,
-  });
 
   // Record the score exactly once when the game is won.
   useEffect(() => {
     if (!state?.won || state.score === undefined) return;
-    active.forget();
+    active.forgetIfCurrent(state.game_id);
     const detail = `${state.moves}/${state.optimal} mutări${
       state.daily ? ` · ${state.daily}` : ""
     }`;
@@ -398,6 +397,11 @@ export default function Lant({
           <GameShell onExit={onExit} accent={DEF.accent} />
 
           <GameIntro
+            resumeRecovery={resumeRecovery ? {
+              kind: resumeRecovery.kind,
+              canRetry: resumeRecovery.kind === "failed" || resumeRecovery.hasCurrent,
+              onRetry: retryResume,
+            } : null}
             icon={DEF.icon}
             title={DEF.title}
             tag={DEF.tag}
