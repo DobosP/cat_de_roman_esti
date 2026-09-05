@@ -40,6 +40,16 @@ CONTEXT0_TERMS = (
     "carte",
     "mâncare",
 )
+OFFLINE_FIXTURE = ROOT / "cat_de_roman_esti/fixtures/kg_sample.json"
+
+
+def configure_offline_environment() -> None:
+    """Make a standalone measurement independent of inherited service settings."""
+    os.environ["CAT_ACCOUNTS_ENABLED"] = "0"
+    os.environ["ROEDU_API_URL"] = ""
+    os.environ["ROEDU_API_KEY"] = ""
+    os.environ["CAT_KG_FIXTURE"] = str(OFFLINE_FIXTURE)
+    os.environ["DJANGO_SETTINGS_MODULE"] = "cat_de_roman_esti.web.settings"
 
 
 def rss_bytes() -> int | None:
@@ -109,7 +119,7 @@ def create_url(game: str, seed: int) -> str:
 def measure_game(game: str, rounds: int, contexto_guesses: int) -> dict[str, object]:
     import django
 
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cat_de_roman_esti.web.settings")
+    configure_offline_environment()
     django.setup()
     from django.test import Client
 
@@ -117,20 +127,23 @@ def measure_game(game: str, rounds: int, contexto_guesses: int) -> dict[str, obj
     creates: list[dict[str, float]] = []
     actions: list[dict[str, float]] = []
     rss_before = rss_bytes()
-    accepted_contexto_guesses = 0
+    contexto_distinct_total = 0
+    contexto_distinct_max = 0
     for round_index in range(rounds):
         state, sample = timed(client.post, create_url(game, 10_000 + round_index))
         creates.append(sample)
         game_id = str(state["game_id"])
         attempts = contexto_guesses if game == "contexto" else 1
+        previous_attempts = 0
         for guess_index in range(attempts):
             url, body = action_for(game, game_id, state, guess_index)
             state, sample = timed(client.post, url, body)
             actions.append(sample)
-            if game == "contexto" and state.get("ok") and not state.get("won"):
-                accepted_contexto_guesses = max(
-                    accepted_contexto_guesses, int(state.get("attempts", 0))
-                )
+            if game == "contexto" and state.get("ok"):
+                current_attempts = int(state.get("attempts", previous_attempts))
+                contexto_distinct_total += max(0, current_attempts - previous_attempts)
+                previous_attempts = current_attempts
+                contexto_distinct_max = max(contexto_distinct_max, current_attempts)
             if state.get("won") or state.get("lost"):
                 break
     rss_after = rss_bytes()
@@ -140,7 +153,10 @@ def measure_game(game: str, rounds: int, contexto_guesses: int) -> dict[str, obj
         "create": summarize(creates),
         "action": summarize(actions),
         "contexto_requested_guesses_per_round": contexto_guesses if game == "contexto" else None,
-        "contexto_max_accepted_guesses": accepted_contexto_guesses if game == "contexto" else None,
+        "contexto_distinct_guesses_total": contexto_distinct_total if game == "contexto" else None,
+        "contexto_max_distinct_guesses_per_session": (
+            contexto_distinct_max if game == "contexto" else None
+        ),
         "rss_before_bytes": rss_before,
         "rss_after_bytes": rss_after,
         "rss_delta_bytes": (
@@ -160,7 +176,7 @@ def cold_game(game: str, contexto_guesses: int) -> dict[str, object]:
         "--contexto-guesses",
         str(contexto_guesses),
     ]
-    env = {**os.environ, "CAT_ACCOUNTS_ENABLED": "0", "PYTHONHASHSEED": "0"}
+    env = {**os.environ, "PYTHONHASHSEED": "0"}
     raw = check_output(command, cwd=ROOT, env=env, text=True)
     return json.loads(raw)
 
@@ -171,12 +187,20 @@ def environment() -> dict[str, object]:
         "implementation": platform.python_implementation(),
         "platform": platform.platform(),
         "cpu_count": os.cpu_count(),
+        "load_average": list(os.getloadavg()) if hasattr(os, "getloadavg") else None,
         "rss_api": "/proc/self/status VmRSS (current resident bytes)",
         "rusage_maxrss_kib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
         "transport": (
             "Django in-process test Client; no listener, network, remote KG, database, or accounts"
         ),
     }
+
+
+def validate_workload(rounds: int, contexto_guesses: int) -> None:
+    if rounds < 1:
+        raise ValueError("--rounds must be positive")
+    if not 1 <= contexto_guesses <= len(CONTEXT0_TERMS):
+        raise ValueError(f"--contexto-guesses must be in 1..{len(CONTEXT0_TERMS)}")
 
 
 def main() -> int:
@@ -188,17 +212,19 @@ def main() -> int:
         "--contexto-guesses",
         type=int,
         default=10,
-        help="typed guesses per Contexto round (default: 10)",
+        help="distinct typed guesses per Contexto round, 1..10 (default: 10)",
     )
     parser.add_argument("--report", type=Path, help="write combined JSON evidence here")
     parser.add_argument("--one-game", choices=GAMES, help=argparse.SUPPRESS)
     args = parser.parse_args()
-    if args.rounds < 1 or args.contexto_guesses < 1:
-        parser.error("--rounds and --contexto-guesses must be positive")
-    os.environ["CAT_ACCOUNTS_ENABLED"] = "0"
+    try:
+        validate_workload(args.rounds, args.contexto_guesses)
+    except ValueError as exc:
+        parser.error(str(exc))
+    configure_offline_environment()
     if args.one_game:
         result = measure_game(args.one_game, args.rounds, args.contexto_guesses)
-        print(json.dumps(result, sort_keys=True))
+        print(json.dumps({"environment": environment(), "measurement": result}, sort_keys=True))
         return 0
     report = {
         "schema": 1,
@@ -213,7 +239,7 @@ def main() -> int:
             "no_private_answers_read": True,
         },
         "environment": environment(),
-        "cold": [cold_game(game, args.contexto_guesses) for game in GAMES],
+        "cold": [cold_game(game, args.contexto_guesses)["measurement"] for game in GAMES],
         "warm": [measure_game(game, args.rounds, args.contexto_guesses) for game in GAMES],
     }
     encoded = json.dumps(report, indent=2, sort_keys=True) + "\n"
