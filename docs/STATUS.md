@@ -67,8 +67,8 @@ mobile public content: `sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11f
 | V74 backend Python 3.14 | 929 passed; accounts 53 passed (also 53 on Python 3.12) |
 | V74 browser before final score correction | 102 passed; added failed-create/retained-retry cases 12 passed |
 | V75 review/tooling/content | 52 checks passed; validators GREEN; public warm-guess/win paths confirmed |
-| Dependency/runtime | npm audit 0 findings; bounded offline latency/RSS evidence archived |
-| Final combined candidate | pending current-pin updates, atomic score persistence, independent review and full gates |
+| Dependency/runtime | npm audit 0 findings; bounded offline latency/RSS evidence archived, including integrated V75 sample |
+| Final combined candidate | in progress; remaining historical V25 current-pack pin corrected without changing its baseline |
 
 Commands and runtime paths: `docs/agent-testing.md`. Historical timing sensitivity and full prior
 verification records remain in WORKLOG. The local runtime sample includes 100 Contexto sessions /

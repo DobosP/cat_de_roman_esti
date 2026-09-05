@@ -95,3 +95,18 @@ V72 deployment; it does not provision infrastructure or contact production.
 4. If a release smoke or runtime symptom fails, restore the recorded V72 commit/image by
    the same DEPLOY rollback procedure, then re-run its health checks. Do not use `down -v`
    or Docker pruning because that can remove the preserved rollback image or named data.
+
+## Integrated V75 candidate sample
+
+`v75-candidate-measurements.json` repeats the bounded workload against integrated backend
+and V75 content at `c50b059` on 2026-09-06. The machine's load averages were
+16.177 / 18.758 / 13.901, substantially above the earlier sample. Warm create median/p95
+in milliseconds were Alchimie 59.914/435.617, Intrusul 0.495/36.648, Perechi 0.430/2.108,
+Conexiuni 0.417/1.767, Contexto 10.331/12.476 and Lanț 3.437/5.633. Warm action medians
+ranged from 0.375 ms (Perechi) to 7.982 ms (Lanț). Each cold sample was one fresh process;
+all inputs used public response fields and the same fixed ordinary Contexto guesses.
+
+These are local workload observations, not a controlled before/after speed comparison:
+host load differed, and Contexto's expanded pool changes selected targets for some seeds.
+No latency threshold was relaxed. Use the archived samples to choose a controlled
+concurrency measurement before setting a production latency or capacity commitment.

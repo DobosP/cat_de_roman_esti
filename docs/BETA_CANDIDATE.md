@@ -2,41 +2,52 @@
 
 Valid until: the next verified quality wave — then refresh this living checklist.
 
-Target: public anonymous beta for Romanian players. Current implementation, artifact pins
-and executed checks are in [STATUS](STATUS.md); this checklist separates technical evidence
-from acceptance that requires players or a production release. Accounts remain a separate
-scope under [DEPLOY](DEPLOY.md).
+Target: public anonymous beta for Romanian players. Technical implementation is complete;
+final integrated verification is running. This is not authorization to deploy or a claim
+that human acceptance passed. Current facts and exact pins: [STATUS](STATUS.md).
 
-## Bounded sequence
+## Completed sequence and acceptance
 
-| Wave | Problem / hypothesis | Acceptance | State |
-|---|---|---|---|
-| V73 | Duplicated lifecycle plumbing makes fixes drift between games | Preserve representative seeded boards, real complete rounds/replay, progressed reload, expiration and start retry; shared backend transactions and frontend resume; independent review | Implemented; integrated local gates passed (922 backend, 53 accounts, 163 frontend, 48 browser) |
-| V74 | Temporary resume errors can discard recoverable rounds; stale responses and terminal actions can change the wrong state | Retain recoverable IDs, provide a clear retry, reject stale results and preserve terminal results; browser regressions plus targeted concurrency/side-effect tests | Confirmed issues; implementation follows V73 |
-| V74 | Keyboard, focus, contrast and mobile behavior lack rendered evidence | Audit all six intro/live/result states; correct reproducible issues; automate repeatable checks | Pending |
-| V75 | Recent alias waves did not increase eligible playable boards | Reusable bounded pack-only import/review path; execute one independently reviewed candidate batch; report eligible delta, rejected/pending candidates, unchanged protected payloads | Five familiar-food Contexto candidates proposed; unreviewed |
-| Candidate gate | Dependency and operational risk remains unmeasured or unresolved | Remediate reachable installed advisories, run local release/performance checks, record production/human gates distinctly | Pending |
-
-Each new wave records the problem, baseline, expected player benefit, acceptance criteria,
-scope, independent review and measured result. Further waves follow demonstrated deficits;
-alias totals and code churn are not success criteria. Refactor decisions:
-[browser baseline](adr/0098-protect-real-browser-game-journeys.md),
-[server transactions](adr/0099-consolidate-session-endpoint-transactions.md),
-[saved-game lifecycle](adr/0100-extract-saved-game-resume-lifecycle.md).
-
-## Coverage and remaining questions
-
-| Area | Evidence so far | Required before technical candidate |
+| Wave | Problem addressed | Evidence / outcome |
 |---|---|---|
-| Game rules and privacy | Existing Python contracts; private test-process solution oracle; server-scored browser rounds for all six | Integrated required backend/accounts/content gates; terminal-action regressions |
-| Resume and recovery | All six progressed reload, expired ID, failed start and replay journeys pass on desktop/mobile emulation | Transient recovery, stale-ID guard, terminal score recovery, failed-action/stuck journeys |
-| Presentation and access | Direct mobile play through an Intrusul win and Alchimie opening; repeatable Chromium mobile journeys | All six rendered layout, keyboard/focus and accessibility checks; record browser/device limits |
-| Romanian gameplay | Current approved stock and holds retained; no new content accepted yet | Rubric-bound independent reviews, recognizable warm guesses/routes, rejection evidence and a real playable-content wave |
-| Maintainability | Shared narrow lifecycle extractions; mechanisms and tests remain game-specific | Reusable pack-only workflow with no silent KG omission or derived-catalog expansion |
-| Performance | Existing generation and transfer budgets; initial gzip transfer 118.17 KiB against 120 KiB gate | Record cold/warm create/action latency and bounded-session memory under a stated local load |
-| Dependencies | Lock audit found six high advisories; SPA and build-only exposures distinguished | Apply supported fixes, rerun audit and affected gates; document any unresolved exposure |
-| Production | Last documented rollout is anonymous V72 on 2026-08-27 | Authorized deployment, current public-page/config checks, release smoke and rollback rehearsal |
-| Player feedback | No feedback intake established for anonymous beta | Owner selects a usable contact route; do not enable account/submission storage implicitly |
+| V73 | Duplicated lifecycle plumbing made shared fixes prone to drift | Narrow backend transaction and frontend resume extractions; 922 backend, 53 accounts, 163 native and 48 real-BFF browser checks passed before intentional behavior changes |
+| V74 | Temporary resume errors could discard recoverable games; stale responses and terminal actions could corrupt state | All six retain recoverable IDs, show retry, recover terminal results and keep retry after failed fresh creates; Contexto giveup and Lanț undo preserve terminal state |
+| V74 | Scrolling status lacked keyboard access and rendered evidence | Focusable HUD/Lanț history; all six intro/live/result states audited for WCAG A/AA rules, viewport overflow, and complete desktop keyboard play; Perechi focus checked after tile removal |
+| V74 | Two tabs could record the same terminal result twice | Whole-board Web Lock plus one atomic score/receipt payload; bounded private receipts, forced storage-failure tests, same-game and different-game browser concurrency cases |
+| V74 | Dependency and runtime risks lacked current evidence | Clean Node24 install/audit reports zero findings; initial transfer 118.73/120 KiB; cold/warm route and bounded RSS measurements archived with limits |
+| V75 | Alias growth did not add playable stock | Reusable pack-only import and independent-review serializer; five candidates screened, three dropped, two promoted; Contexto eligibility 201→203 with exact preservation/selection evidence |
+
+Decisions and full evidence: [ADR index](adr/README.md), [V75 review](reviews/v75-contexto-food/README.md),
+[runtime measurements](reviews/v74-runtime-measurements/README.md). Refactors preserve
+server authority, hidden answers, session bounds, intentional game differences and scoring.
+The derived catalog remains frozen at 336 boards.
+
+## Quality coverage and limits
+
+| Area | Evidence and remaining uncertainty |
+|---|---|
+| Rules, hints and progression | All six seeded rounds reach server-scored results; replay, progressed reload, mistake counters, failed action/start recovery and expiration have real-BFF coverage. Automated solves do not establish intuitiveness or enjoyment. |
+| Romanian content and difficulty | Independent factual, recognition, ambiguity and warm-opener reviews promoted only two easy food targets. Ordinary ingredient/holiday probes rejected three. Existing editorial holds and historical rejection evidence remain intact. |
+| Onboarding and presentation | Shared intros, categories, HUD, action feedback and results were inspected; mobile layout and rendered states are audited. No broad redesign was justified by this evidence. Real-device rendering and human comprehension are still pending. |
+| Keyboard and accessibility | Desktop essential controls support Tab/Space/Enter completion; Perechi focus is checked after pairs disappear and at result. Automated Axe checks run on settled intro/live/result states. Text-entry tests use programmatic fill after keyboard focus; no actual screen-reader usability study ran. |
+| Reliability and storage | Retry, stale ID handling, unmount/loading ownership, immutable terminal actions and duplicate completion are covered. Strict concurrent-tab local-score protection requires Web Locks; fallback is best effort. Receipt TTL is 24h with 1,000 IDs per game; a deliberately retained terminal session can record again after expiry. |
+| Maintainability and extension | Shared lifecycle code stays narrow, mechanics explicit. Pack-only imports reject topology, V2 artifacts bind two independent complete reviews, and generated fixtures remain tool-owned. Portable review assembly supports Conexiuni/Contexto/Lanț; Alchimie retains its separate projection-bound workflow. |
+| Performance and dependencies | Measured offline routing/serialization/game cost and bounded process RSS; no production load/SLO claim. Alchimie generation variance and worst-case Contexto history capacity remain measurement follow-ups. |
+| Release operations | Local tests force offline anonymous mode. Last documented production is V72; no push, deployment, accounts enablement, contact with players or production re-verification occurred. |
+
+## Release gates still requiring external evidence or an owner decision
+
+- Run the Romanian-player protocol below; observe comprehension, fairness and replay interest.
+- Test real Android/iOS devices and the intended browser set; Chromium emulation is partial evidence.
+- Select and verify a usable public feedback email or URL; the owner question remains unanswered.
+- Authorize a release, preserve the deployed image, execute the [deployment and rollback procedure](DEPLOY.md),
+  and re-run public health/config/content/asset smokes. Keep production anonymous.
+
+The next useful product iteration is driven by those observations. The clearest existing
+content follow-up is the rejected batch's ingredient/holiday feedback, including Paște/Paste
+interpretation, under fresh independent reviews. Additional vocabulary totals alone do not
+satisfy that problem. Accounts, derived-catalog expansion and another game require their
+separate documented gates.
 
 ## Romanian-player playtest protocol — not yet run
 

@@ -28,6 +28,8 @@ _TEST_KG = _ROOT / "tests/fixtures/kg_sample.json"
 _PACKAGE_PACK = _ROOT / "cat_de_roman_esti/fixtures/games_pack.json"
 _TEST_PACK = _ROOT / "tests/fixtures/games_pack.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
+# Current served pack; the V25 DATA baseline remains historical evidence.
+_CURRENT_PACK_SHA256 = "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5"
 _V48_AUDIT = (
     _ROOT / "docs/reviews/v48-alchimie-pending-gate/projection-audit.json"
 )
@@ -196,8 +198,8 @@ def test_v25_edge_catalog_is_specific_and_has_bounded_endpoint_fanout():
     assert max(endpoint_counts.values()) <= 3
 
 
-def test_v25_pack_is_byte_stable_and_the_33_review_items_remain_playable():
-    assert hashlib.sha256(_PACKAGE_PACK.read_bytes()).hexdigest() == DATA.BASELINE_PACK_SHA256
+def test_v25_review_items_remain_playable_in_the_current_pack():
+    assert hashlib.sha256(_PACKAGE_PACK.read_bytes()).hexdigest() == _CURRENT_PACK_SHA256
     pack = _pack()
     svc = _service()
     records = {
