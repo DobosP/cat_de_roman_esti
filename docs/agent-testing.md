@@ -1,6 +1,6 @@
 # Agent Testing Guide — cat_de_roman_esti
 
-Last verified: 2026-09-05
+Last verified: 2026-09-06
 
 ## Environment
 - Interpreter: `~/work/cat_de_roman_esti/.venv/bin/python` (Python 3.12.3; Django 5.2.16, pytest 9.1.1,
@@ -18,7 +18,7 @@ Below, `<interp>` = `~/work/cat_de_roman_esti/.venv/bin/python`.
 |---|---|---|
 | Word-game sessions | `PYTHONPATH=. <interp> -m pytest tests/test_wordgames_session_store.py -q` | `16 passed` |
 | KG/app-pack contract | `PYTHONPATH=. <interp> -m pytest tests/test_app_pack_contract.py tests/test_data_client.py -q` | `23 passed` |
-| Full backend | `PYTHONPATH=. <interp> -m pytest -q` | `898 passed`, ~7 min on this host (load ≈ 28) |
+| Full backend | `PYTHONPATH=. <interp> -m pytest -q` | `922 passed`, 4m30s for V73 (load ≈ 5) |
 | Accounts suite | `CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=. <interp> -m pytest -q tests/accounts` | `53 passed` |
 | Fixture gate | `<interp> scripts/validate_fixture.py` | `GREEN: fixture is valid (0 errors)` |
 | Pack gate | `<interp> scripts/validate_games_pack.py` | `games pack GREEN` |

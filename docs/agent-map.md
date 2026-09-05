@@ -15,7 +15,7 @@
 | Curated pack | `cat_de_roman_esti/fixtures/games_pack.json` | Four pack games; Intrusul/Perechi come from `derived_catalog_v38.json`. |
 | Frontend | `frontend/src/` | SPA screens/api/components (`frontend/README.md`). |
 | Content scripts | `scripts/` | 85 Python scripts: `validate_fixture.py`, `validate_games_pack.py`, `critique_pack.py`, `expand_content.py`, `import_candidates.py`, versioned `apply_*`. |
-| Tests | `tests/` | 898 tests; `tests/accounts/` only with `CAT_ACCOUNTS_ENABLED=1`. |
+| Tests | `tests/` | 922 backend tests; `tests/accounts/` only with `CAT_ACCOUNTS_ENABLED=1`. |
 | Wave evidence | `docs/reviews/<wave>/` | Dated per-wave records (history). |
 | Workflows | `.claude/workflows/` | Claude-Code-only orchestration scripts (see `CLAUDE.md`). |
 | Status | `docs/STATUS.md` | Single source of current truth. |

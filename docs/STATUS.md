@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-06 — V73 browser baseline and shared refactors verified locally; production smokes last run 2026-08-27, not re-run.
+Last verified: 2026-09-06 — V73 integrated refactor gates green locally; production smokes last run 2026-08-27, not re-run.
 
 ## Current state
 
@@ -69,7 +69,7 @@ mobile public content sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11fc8
   Contexto alias smoke are green. Production reports the V72 manifest hash
   sha256:6a388f9bdb391ffca61ce4d51ab28255c00ed619142ded51cedd26c02bb9213d
   with counts 2,364 / 9,217 / 180.
-- Rollout risk remains five high npm advisories; react-router/react-router-dom 7.18.1 carry
+- Current local lock audit reports six high npm advisories; react-router/react-router-dom 7.18.1 carry
   GHSA-qwww-vcr4-c8h2, fixed in 7.18.2. V65 had the same lock and rollback does not reduce
   exposure; dependency remediation is separate.
 
@@ -77,37 +77,30 @@ mobile public content sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11fc8
 
 | Date | Command | Result |
 |---|---|---|
-| 2026-09-06 | `npm run test:e2e` + strengthened progress/snapshot checks | 48 passed; updated 24 affected journeys passed |
-| 2026-08-27 | full backend `pytest -q` | 898/898 passed |
-| 2026-08-27 | accounts-on suite, sessions, focused V72, combined V71/V72, pin propagation | 53/53, 16/16, 6/6, 13/13, 196/196 passed |
-| 2026-08-27 | transaction dry-run + apply | zero topology or projection change |
-| 2026-08-27 | `validate_fixture.py` · `validate_games_pack.py` | 0 errors · pack valid |
-| 2026-08-27 | ranking + derived regeneration | 618 total / 448 eligible; 336 boards |
-| 2026-08-27 | ruff, formatting, mirrors, hashes, stale-pin, JSON/digests, whitespace | green |
+| 2026-09-06 | `npm run test:e2e` + strengthened progress/snapshot checks | 48/48 passed against integrated refactors; frozen starts unchanged |
 | 2026-09-05 | `pytest tests/test_wordgames_session_store.py -q` | 16 passed |
 | 2026-09-05 | `pytest tests/test_app_pack_contract.py tests/test_data_client.py -q` | 23 passed |
-| 2026-09-05 | `ruff check` | All checks passed! |
-| 2026-09-05 | `scripts/validate_fixture.py` | GREEN: fixture is valid (0 errors) |
-| 2026-09-05 | `scripts/validate_games_pack.py` | games pack GREEN |
-| 2026-09-05 | accounts-on `pytest -q tests/accounts` | 53 passed |
+| 2026-09-06 | `ruff check`, docs, whitespace | all green |
+| 2026-09-06 | `scripts/validate_fixture.py` | GREEN: fixture is valid (0 errors) |
+| 2026-09-06 | `scripts/validate_games_pack.py` | games pack GREEN |
+| 2026-09-06 | integrated accounts-on `pytest -q tests/accounts` | 53 passed |
 | 2026-09-05 | alchimie sparse-recipes test alone at load ≈ 39 | failed: 49.0 s vs the 45 s budget (timing only) |
-| 2026-09-05 | full backend `pytest -q` | 898 passed in 399.96 s (6m40s) |
-| 2026-09-06 | frontend `npm ci && npm test && npm run lint && npm run build` | 163 passed; lint/build green |
+| 2026-09-06 | integrated full backend `pytest -q` | 922 passed in 270.26 s |
+| 2026-09-06 | frontend `npm ci && npm test && npm run lint && npm run build` | 163 passed; lint/build green; 118.17 KiB initial gzip |
 | 2026-09-05 | `python3 ~/work/agent-ops/scripts/check_docs.py .` | `files=29 dead_links=0 stale_terms=0 retired_verbs=0 orphans=0` |
 | 2026-09-05 | `check_project_contexts.py --work-root ~/work` | row `ok`, thin pointer yes (reads the shared checkout) |
 | 2026-09-06 | session/store + six game suites; request limits; ruff, docs, whitespace | 264 + 9 passed; all green |
 
-2026-09-05 runs used `~/work/cat_de_roman_esti/.venv/bin/python` with `PYTHONPATH=.` from the docs worktree.
-The full suite was green at host load average ≈ 28; the same alchimie test fails on its own at load ≈ 39, so the
-45 s budget is load-sensitive, not a behavior regression.
+2026-09-05/06 runs used `~/work/cat_de_roman_esti/.venv/bin/python` with `PYTHONPATH=.` from the docs worktree.
+V73 full-suite load was ≈ 5; the unchanged Alchimie timing gate passed. Historical timing sensitivity remains
+documented in `docs/agent-testing.md`. Python 3.14 CI and production have not been run for V73.
 
 ## Next actions
 
 - Keep `rollback-60c3fd5318a` through the next successful rollout.
-- Start a later bounded vocabulary wave from documented `main` only when requested.
-- npm advisory remediation (react-router 7.18.1 → 7.18.2) is a separate task.
-- Decide whether the 45 s wall-clock budget at `tests/test_alchimie_sparse_recipes.py:211` should tolerate host
-  load (green in the full run at load ≈ 28, red alone at load ≈ 39 on 2026-09-05).
+- Complete the refactor-first anonymous-beta quality goal; remaining gates and playtest protocol:
+  `docs/BETA_CANDIDATE.md`. V74 targets reliability/UX; V75 prepares a reviewed playable-content wave.
+- Remediate the six currently reported high npm advisories and measure candidate performance.
 
 ## Open gates
 

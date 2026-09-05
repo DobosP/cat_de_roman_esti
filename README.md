@@ -141,6 +141,7 @@ Direct **local** merges to `main` are allowed once the CI gate is green; **pushi
 ## Docs
 
 - [`docs/STATUS.md`](docs/STATUS.md) — current truth: state, pins, verification record, next actions.
+- [`docs/BETA_CANDIDATE.md`](docs/BETA_CANDIDATE.md) — anonymous-beta evidence, bounded quality waves, outstanding gates and Romanian-player playtest protocol.
 - [`AGENTS.md`](AGENTS.md) — operating contract for agent sessions (Claude Code and Codex).
 - [`docs/agent-map.md`](docs/agent-map.md) — entry points, task routes, do-not-load list.
 - [`docs/agent-testing.md`](docs/agent-testing.md) — gate commands with expected output.
