@@ -365,6 +365,57 @@ def test_giveup_reveals_target() -> None:
     assert after.status_code == 400
 
 
+def test_giveup_cannot_change_or_rerecord_a_terminal_game(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from cat_de_roman_esti.wordgames import contexto
+
+    recorded: list[tuple[str, str | None]] = []
+    monkeypatch.setattr(
+        contexto,
+        "record_finished",
+        lambda _request, game, pack_id, **_kwargs: recorded.append((game, pack_id)),
+    )
+    client = make_client()
+
+    won_game = client.post(f"/api/wordgames/contexto/games?seed={SEED}").json()
+    won_session = contexto.store.get(won_game["game_id"])
+    assert won_session is not None
+    target_label = contexto.get_service().label(won_session.target)
+    won_url = f"/api/wordgames/contexto/games/{won_game['game_id']}"
+    won = client.post(
+        f"{won_url}/guess",
+        {"text": target_label},
+        content_type="application/json",
+    )
+    assert won.status_code == 200 and won.json()["won"] is True
+    won_state = client.get(won_url).json()
+    calls_after_win = list(recorded)
+
+    stale_reveal = client.post(f"{won_url}/giveup")
+    repeated_stale_reveal = client.post(f"{won_url}/giveup")
+    assert stale_reveal.status_code == repeated_stale_reveal.status_code == 400
+    assert stale_reveal.json() == repeated_stale_reveal.json() == {
+        "detail": "Jocul s-a terminat"
+    }
+    assert client.get(won_url).json() == won_state
+    assert won_session.won is True and won_session.gave_up is False
+    assert recorded == calls_after_win
+
+    given_up_game = client.post(f"/api/wordgames/contexto/games?seed={SEED + 1}").json()
+    given_up_url = f"/api/wordgames/contexto/games/{given_up_game['game_id']}"
+    first_reveal = client.post(f"{given_up_url}/giveup")
+    assert first_reveal.status_code == 200
+    given_up_state = client.get(given_up_url).json()
+    calls_after_giveup = list(recorded)
+
+    repeated_reveal = client.post(f"{given_up_url}/giveup")
+    assert repeated_reveal.status_code == 400
+    assert repeated_reveal.json() == {"detail": "Jocul s-a terminat"}
+    assert client.get(given_up_url).json() == given_up_state
+    assert recorded == calls_after_giveup
+
+
 def test_get_state_keeps_target_hidden() -> None:
     c = make_client()
     target_id, target_label, _, _ = _target_of()

@@ -902,6 +902,8 @@ class UndoView(ContractAPIView):
     @extend_schema(operation_id="lant_undo", tags=["lant"])
     @_atomic_session
     def post(self, request, game_id: str, session: LantSession):
+        if session.won:
+            return Response(_state(game_id, session))
         # Never step below the start.
         if len(session.chain) > 1:
             session.chain.pop()

@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-06 — V74 keyboard/accessibility and action-recovery checks green locally; production smokes last run 2026-08-27, not re-run.
+Last verified: 2026-09-06 — V74 targeted reliability/accessibility gates green; integrated gates pending. Production last checked 2026-08-27.
 
 ## Current state
 
@@ -15,9 +15,8 @@ Last verified: 2026-09-06 — V74 keyboard/accessibility and action-recovery che
   build; pointing `CAT_KG_FIXTURE` at it silently empties every curated category (data.py:27,34-36).
 - Landed: V72 fast-forwarded on `main` at `6ee8693`; the rollout record `02dba24` is also on `main`. Actions runs
   `33023808156`/`33024392655` green on Python 3.12/3.14 + frontend.
-- ADR-0099 consolidates the six existing-session endpoint transaction wrappers without changing
-  session bounds or API behavior. ADR-0100 extracts the six saved-game resume flows without changing their distinct
-  terminal/error policies; ADR-0097 remains the newest vocabulary/build decision.
+- ADR-0099 consolidates existing-session transactions; ADR-0100 extracts saved-game resume flows. Contexto giveup
+  and Lanț undo now keep terminal sessions immutable; ADR-0097 remains the newest vocabulary/build decision.
 - V72 wave: 50 unanimously reviewed genitive/dative aliases for 25 gastronomie owners, zero rejections; the V71
   actionable-fuzzy deny set stays exactly `intrigii`, `intrigilor`; the 70-term nonaccepted ledger is unchanged.
   Evidence: `docs/reviews/v72-romanian-dishes-and-pastries-morphology/README.md`.
@@ -93,6 +92,7 @@ mobile public content sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11fc8
 | 2026-09-05 | `python3 ~/work/agent-ops/scripts/check_docs.py .` | `files=29 dead_links=0 stale_terms=0 retired_verbs=0 orphans=0` |
 | 2026-09-05 | `check_project_contexts.py --work-root ~/work` | row `ok`, thin pointer yes (reads the shared checkout) |
 | 2026-09-06 | session/store + six game suites; request limits; ruff, docs, whitespace | 264 + 9 passed; all green |
+| 2026-09-06 | Contexto/Lanț terminal + shared session/request-limit tests | 156 + 9 passed |
 
 2026-09-05/06 runs used `~/work/cat_de_roman_esti/.venv/bin/python` with `PYTHONPATH=.` from the docs worktree.
 V73 full-suite load was ≈ 5; the unchanged Alchimie timing gate passed. Historical timing sensitivity remains
@@ -112,7 +112,5 @@ documented in `docs/agent-testing.md`. Python 3.14 CI and production have not be
 
 ## Doc map
 
-- `README.md` — orientation + the full doc index. `AGENTS.md` — operating contract (Claude Code and Codex).
-- `docs/agent-map.md` — entry points and task routes. `docs/agent-testing.md` — gate commands + expected output.
-- `docs/adr/` — decisions (newest ADR-0100). `docs/reviews/<wave>/` — per-wave evidence.
-- `docs/handoffs/` — dated records. `docs/archive/` — superseded snapshots.
+- `README.md` / `AGENTS.md` — orientation and contract; `docs/agent-map.md` / `docs/agent-testing.md` — routes and gates.
+- `docs/adr/` (newest ADR-0100), `docs/reviews/`, `docs/handoffs/`, and `docs/archive/` — decisions and history.

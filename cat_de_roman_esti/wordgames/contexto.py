@@ -1048,6 +1048,8 @@ class GiveUpView(ContractAPIView):
     @extend_schema(operation_id="contexto_give_up", tags=["contexto"])
     @_atomic_session
     def post(self, request, game_id: str, session: ContextoSession):
+        if session.won or session.gave_up:
+            raise http_error(400, "Jocul s-a terminat")
         session.gave_up = True
         record_finished(request, GAME_KEY, session.pack_id)
         return Response(_state(game_id, session))
