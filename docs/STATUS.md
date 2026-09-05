@@ -63,12 +63,12 @@ mobile public content: `sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11f
 | Scope | Verified result |
 |---|---|
 | V73 integrated baseline/refactors | 922 backend, 53 accounts, 163 native frontend, 48 browser passed |
-| V74 backend Python 3.12 | 924 passed; five subsequently added runtime-harness tests passed separately |
-| V74 backend Python 3.14 | 929 passed; accounts 53 passed (also 53 on Python 3.12) |
-| V74 browser before final score correction | 102 passed; added failed-create/retained-retry cases 12 passed |
+| Final backend Python 3.12.3 | 951 passed in 450.85 s; accounts 53 passed |
+| Final backend Python 3.14.4 | 951 passed in 262.15 s; accounts 53 passed |
+| Browser before final saved-result correction | 106 desktop/mobile checks passed |
 | V75 review/tooling/content | 52 checks passed; validators GREEN; public warm-guess/win paths confirmed |
 | Dependency/runtime | npm audit 0 findings; bounded offline latency/RSS evidence archived, including integrated V75 sample |
-| Final combined candidate | in progress; remaining historical V25 current-pack pin corrected without changing its baseline |
+| Final frontend candidate | saved-result cleanup correction under independent review; full frontend gates follow |
 
 Commands and runtime paths: `docs/agent-testing.md`. Historical timing sensitivity and full prior
 verification records remain in WORKLOG. The local runtime sample includes 100 Contexto sessions /
