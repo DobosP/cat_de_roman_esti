@@ -14,8 +14,8 @@
 | Served KG build | `cat_de_roman_esti/fixtures/kg_sample.json` | V72 build. `kg_real.json` is a thin corpus export, **not** the served graph (data.py:27,34-36). |
 | Curated pack | `cat_de_roman_esti/fixtures/games_pack.json` | Four pack games; Intrusul/Perechi come from `derived_catalog_v38.json`. |
 | Frontend | `frontend/src/` | SPA screens/api/components (`frontend/README.md`). |
-| Content scripts | `scripts/` | 85 Python scripts: `validate_fixture.py`, `validate_games_pack.py`, `critique_pack.py`, `expand_content.py`, `import_candidates.py`, versioned `apply_*`. |
-| Tests | `tests/` | 922 backend tests; `tests/accounts/` only with `CAT_ACCOUNTS_ENABLED=1`. |
+| Content scripts | `scripts/` | Validators, critique, import and review artifact assembly; `expand_content.py` is V2-only history. |
+| Tests | `tests/` | Backend contracts; current totals in STATUS; accounts require `CAT_ACCOUNTS_ENABLED=1`. |
 | Wave evidence | `docs/reviews/<wave>/` | Dated per-wave records (history). |
 | Workflows | `.claude/workflows/` | Claude-Code-only orchestration scripts (see `CLAUDE.md`). |
 | Status | `docs/STATUS.md` | Single source of current truth. |
@@ -24,7 +24,7 @@
 | Task | Start here | Verify with |
 |---|---|---|
 | Word-game session fix | `cat_de_roman_esti/wordgames/service.py` + matching test | targeted pytest (`docs/agent-testing.md`) |
-| New game / content wave | `docs/CRITIQUE_RUBRIC.md`, newest `docs/reviews/<wave>/README.md`, `scripts/expand_content.py` | both validators + full pytest |
+| New pack-only content wave | `docs/PACK_ONLY_CONTENT_WAVES.md`, `docs/CRITIQUE_RUBRIC.md`, newest review README | bound review, both validators + full pytest |
 | BFF / API change | `cat_de_roman_esti/web/urls.py`, `docs/MOBILE_CONTRACT.md` | pytest + manifest hash in `docs/STATUS.md` |
 | Frontend | `frontend/src/` | `npm test && npm run lint && npm run build`; commit `web/static` (ADR-0020) |
 | Deploy | `docs/DEPLOY.md`, `docker-compose.prod.yml`, `deploy/Caddyfile` | smokes recorded in `docs/STATUS.md` |

@@ -1,0 +1,760 @@
+{
+  "purpose": "read-only KG screening for independent V75 review; not a factual or quality verdict",
+  "fixture_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__v75-pack-wave-tooling/cat_de_roman_esti/fixtures/kg_sample.json",
+  "fixture_sha256": "fa9575db4819fa314e43218a0ad953f52c3e6ee2e34cac105dbc88e2d2247106",
+  "candidate_path": "/home/dobo/work/_temp/v75-contexto-food/gastronomie/candidates.json",
+  "candidate_sha256": "sha256:baef6c35007d7da7982058f0bbb220b3fbf95f91377247412368f63898e38431",
+  "targets": [
+    {
+      "target": {
+        "id": "n_gas_mici",
+        "label": "Mici",
+        "category": "gastronomie",
+        "node_type": "concept",
+        "salience": 0.9765
+      },
+      "already_contexto_target": false,
+      "runtime_screen": {
+        "reachable": 2288,
+        "responsive_1_5": 2270,
+        "direct_predecessor_count": 20,
+        "runtime_minimums": {
+          "reachable": 120,
+          "responsive_1_5": 40
+        }
+      },
+      "direct_gradient_candidates": [
+        {
+          "id": "n_v2gas_gratar",
+          "label": "Grătar",
+          "category": "gastronomie",
+          "salience": 0.9125,
+          "strength": 0.95,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_mustar",
+          "label": "Muștar",
+          "category": "gastronomie",
+          "salience": 0.8317,
+          "strength": 0.93,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_gratar_1_mai",
+          "label": "Grătarul de 1 Mai",
+          "category": "gastronomie",
+          "salience": 0.8036,
+          "strength": 0.92,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v3gas_bere",
+          "label": "Bere",
+          "category": "gastronomie",
+          "salience": 0.6296,
+          "strength": 0.88,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v4gas_carne",
+          "label": "Carne",
+          "category": "gastronomie",
+          "salience": 0.9259,
+          "strength": 0.88,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_mititei_obor",
+          "label": "Mititeii de la Obor",
+          "category": "gastronomie",
+          "salience": 0.4641,
+          "strength": 0.85,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v11via_gratar_iarba",
+          "label": "Grătar la iarbă",
+          "category": "viata_de_roman",
+          "salience": 0.79,
+          "strength": 0.84,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v4gas_mancare",
+          "label": "Mâncare",
+          "category": "gastronomie",
+          "salience": 0.9301,
+          "strength": 0.83,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v3gas_cartofi_prajiti",
+          "label": "Cartofi prăjiți",
+          "category": "gastronomie",
+          "salience": 0.6932,
+          "strength": 0.79,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v2gas_sosuri",
+          "label": "Sosuri",
+          "category": "gastronomie",
+          "salience": 0.7846,
+          "strength": 0.76,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v2gas_mancare_stradala",
+          "label": "Mâncare stradală",
+          "category": "gastronomie",
+          "salience": 0.7037,
+          "strength": 0.72,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v4gas_condiment",
+          "label": "Condiment",
+          "category": "gastronomie",
+          "salience": 0.5774,
+          "strength": 0.72,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_paine_de_casa",
+          "label": "Pâine de casă",
+          "category": "gastronomie",
+          "salience": 0.8422,
+          "strength": 0.7,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v4gas_sare",
+          "label": "Sare",
+          "category": "gastronomie",
+          "salience": 0.9041,
+          "strength": 0.7,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v4gas_usturoi",
+          "label": "Usturoi",
+          "category": "gastronomie",
+          "salience": 0.7023,
+          "strength": 0.66,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_bucuresti",
+          "label": "București",
+          "category": "geografie",
+          "salience": 0.6721,
+          "strength": 0.58,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_ftv_chefi_la_cutite",
+          "label": "Chefi la cuțite",
+          "category": "film_tv",
+          "salience": 0.7726,
+          "strength": 0.46,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_covrigi_buzau",
+          "label": "Covrigi de Buzău",
+          "category": "gastronomie",
+          "salience": 0.7635,
+          "strength": 0.46,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_mujdei",
+          "label": "Mujdei",
+          "category": "gastronomie",
+          "salience": 0.7993,
+          "strength": 0.45,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_saorma_de_toate",
+          "label": "Șaorma cu de toate",
+          "category": "gastronomie",
+          "salience": 0.9013,
+          "strength": 0.44,
+          "hops_to_target": 1
+        }
+      ],
+      "editorial_assessment": {
+        "recognition": "not assessed; independent Romanian-web verifier required",
+        "nameability": "not assessed; independent rubric critique required",
+        "dominant_sense": "not assessed; independent rubric critique required",
+        "warm_opener": "not assessed; reviewers must test an intuitive opener in runtime terms"
+      }
+    },
+    {
+      "target": {
+        "id": "n_gas_cozonac",
+        "label": "Cozonac",
+        "category": "gastronomie",
+        "node_type": "concept",
+        "salience": 0.9737
+      },
+      "already_contexto_target": false,
+      "runtime_screen": {
+        "reachable": 2288,
+        "responsive_1_5": 2159,
+        "direct_predecessor_count": 22,
+        "runtime_minimums": {
+          "reachable": 120,
+          "responsive_1_5": 40
+        }
+      },
+      "direct_gradient_candidates": [
+        {
+          "id": "n_gas_masa_craciun",
+          "label": "Masa de Crăciun",
+          "category": "gastronomie",
+          "salience": 0.9659,
+          "strength": 0.92,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_masa_paste",
+          "label": "Masa de Paște",
+          "category": "gastronomie",
+          "salience": 0.9413,
+          "strength": 0.9,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_mese_sarbatori",
+          "label": "Mese de sărbători",
+          "category": "gastronomie",
+          "salience": 0.9716,
+          "strength": 0.9,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v2gas_desert",
+          "label": "Desert",
+          "category": "gastronomie",
+          "salience": 0.8464,
+          "strength": 0.9,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_vdr_miros_de_cozonac",
+          "label": "Mirosul de cozonac",
+          "category": "viata_de_roman",
+          "salience": 0.7473,
+          "strength": 0.9,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v4gas_dulce",
+          "label": "Dulce",
+          "category": "gastronomie",
+          "salience": 0.7333,
+          "strength": 0.84,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v17gas_pasca",
+          "label": "Pască",
+          "category": "gastronomie",
+          "salience": 0.72,
+          "strength": 0.8,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_oua_rosii",
+          "label": "Ouă roșii",
+          "category": "gastronomie",
+          "salience": 0.7544,
+          "strength": 0.72,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v21gas_cornulete",
+          "label": "Cornulețe",
+          "category": "gastronomie",
+          "salience": 0.55,
+          "strength": 0.7,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v4gas_bucatarie",
+          "label": "Bucătărie",
+          "category": "gastronomie",
+          "salience": 0.8809,
+          "strength": 0.7,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v4gas_prajitura",
+          "label": "Prăjitură",
+          "category": "gastronomie",
+          "salience": 0.67,
+          "strength": 0.7,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v2mem_clip_culinar",
+          "label": "Clip culinar",
+          "category": "meme_net",
+          "salience": 0.3796,
+          "strength": 0.68,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v3gas_cafea",
+          "label": "Cafea",
+          "category": "gastronomie",
+          "salience": 0.4239,
+          "strength": 0.68,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_placinte_poale_brau",
+          "label": "Poale-n brâu",
+          "category": "gastronomie",
+          "salience": 0.6158,
+          "strength": 0.62,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v4gas_fruct",
+          "label": "Fruct",
+          "category": "gastronomie",
+          "salience": 0.902,
+          "strength": 0.6,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v2gas_mirodenii",
+          "label": "Mirodenii",
+          "category": "gastronomie",
+          "salience": 0.5553,
+          "strength": 0.58,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v17gas_mucenici",
+          "label": "Mucenici",
+          "category": "gastronomie",
+          "salience": 0.58,
+          "strength": 0.55,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_papanasi",
+          "label": "Papanași",
+          "category": "gastronomie",
+          "salience": 0.9491,
+          "strength": 0.54,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v17gas_coliva",
+          "label": "Colivă",
+          "category": "gastronomie",
+          "salience": 0.62,
+          "strength": 0.5,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v2gas_placinte",
+          "label": "Plăcinte",
+          "category": "gastronomie",
+          "salience": 0.6308,
+          "strength": 0.5,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_baclava_dobrogeana",
+          "label": "Baclava dobrogeană",
+          "category": "gastronomie",
+          "salience": 0.5193,
+          "strength": 0.42,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_ftv_chefi_la_cutite",
+          "label": "Chefi la cuțite",
+          "category": "film_tv",
+          "salience": 0.7726,
+          "strength": 0.38,
+          "hops_to_target": 1
+        }
+      ],
+      "editorial_assessment": {
+        "recognition": "not assessed; independent Romanian-web verifier required",
+        "nameability": "not assessed; independent rubric critique required",
+        "dominant_sense": "not assessed; independent rubric critique required",
+        "warm_opener": "not assessed; reviewers must test an intuitive opener in runtime terms"
+      }
+    },
+    {
+      "target": {
+        "id": "n_gas_salata_boeuf",
+        "label": "Salată de boeuf",
+        "category": "gastronomie",
+        "node_type": "concept",
+        "salience": 0.9139
+      },
+      "already_contexto_target": false,
+      "runtime_screen": {
+        "reachable": 2288,
+        "responsive_1_5": 2028,
+        "direct_predecessor_count": 10,
+        "runtime_minimums": {
+          "reachable": 120,
+          "responsive_1_5": 40
+        }
+      },
+      "direct_gradient_candidates": [
+        {
+          "id": "n_gas_mese_sarbatori",
+          "label": "Mese de sărbători",
+          "category": "gastronomie",
+          "salience": 0.9716,
+          "strength": 0.88,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v3gas_salata",
+          "label": "Salată",
+          "category": "gastronomie",
+          "salience": 0.355,
+          "strength": 0.88,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_masa_craciun",
+          "label": "Masa de Crăciun",
+          "category": "gastronomie",
+          "salience": 0.9659,
+          "strength": 0.85,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v2lim_cartof",
+          "label": "Cartof",
+          "category": "limba",
+          "salience": 0.7178,
+          "strength": 0.85,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_muraturi",
+          "label": "Murături",
+          "category": "gastronomie",
+          "salience": 0.8914,
+          "strength": 0.78,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v2gas_sosuri",
+          "label": "Sosuri",
+          "category": "gastronomie",
+          "salience": 0.7846,
+          "strength": 0.72,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_vdr_revelion_la_televizor",
+          "label": "Revelionul la televizor",
+          "category": "viata_de_roman",
+          "salience": 0.8359,
+          "strength": 0.72,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_masa_paste",
+          "label": "Masa de Paște",
+          "category": "gastronomie",
+          "salience": 0.9413,
+          "strength": 0.62,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v4gas_ou",
+          "label": "Ou",
+          "category": "gastronomie",
+          "salience": 0.734,
+          "strength": 0.62,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v17gas_salata_icre",
+          "label": "Salată de icre",
+          "category": "gastronomie",
+          "salience": 0.66,
+          "strength": 0.6,
+          "hops_to_target": 1
+        }
+      ],
+      "editorial_assessment": {
+        "recognition": "not assessed; independent Romanian-web verifier required",
+        "nameability": "not assessed; independent rubric critique required",
+        "dominant_sense": "not assessed; independent rubric critique required",
+        "warm_opener": "not assessed; reviewers must test an intuitive opener in runtime terms"
+      }
+    },
+    {
+      "target": {
+        "id": "n_gas_paine_de_casa",
+        "label": "Pâine de casă",
+        "category": "gastronomie",
+        "node_type": "concept",
+        "salience": 0.8422
+      },
+      "already_contexto_target": false,
+      "runtime_screen": {
+        "reachable": 2288,
+        "responsive_1_5": 2241,
+        "direct_predecessor_count": 17,
+        "runtime_minimums": {
+          "reachable": 120,
+          "responsive_1_5": 40
+        }
+      },
+      "direct_gradient_candidates": [
+        {
+          "id": "n_v4gas_paine",
+          "label": "Pâine",
+          "category": "gastronomie",
+          "salience": 0.9273,
+          "strength": 0.9,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_zacusca",
+          "label": "Zacuscă",
+          "category": "gastronomie",
+          "salience": 0.9695,
+          "strength": 0.88,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_salata_vinete",
+          "label": "Salată de vinete",
+          "category": "gastronomie",
+          "salience": 0.8528,
+          "strength": 0.82,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_slanina_ceapa",
+          "label": "Slănină cu ceapă",
+          "category": "gastronomie",
+          "salience": 0.8605,
+          "strength": 0.8,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v21gas_paine_cu_maia",
+          "label": "Pâine cu maia",
+          "category": "gastronomie",
+          "salience": 0.5,
+          "strength": 0.8,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_covrigi_buzau",
+          "label": "Covrigi de Buzău",
+          "category": "gastronomie",
+          "salience": 0.7635,
+          "strength": 0.72,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_mici",
+          "label": "Mici",
+          "category": "gastronomie",
+          "salience": 0.9765,
+          "strength": 0.7,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_vdr_gospodaria_bunicilor",
+          "label": "Gospodăria bunicilor",
+          "category": "viata_de_roman",
+          "salience": 0.9146,
+          "strength": 0.7,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_fasole_ciolan",
+          "label": "Fasole cu ciolan",
+          "category": "gastronomie",
+          "salience": 0.9111,
+          "strength": 0.68,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v4gas_apa",
+          "label": "Apă",
+          "category": "gastronomie",
+          "salience": 0.968,
+          "strength": 0.68,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_gratar_1_mai",
+          "label": "Grătarul de 1 Mai",
+          "category": "gastronomie",
+          "salience": 0.8036,
+          "strength": 0.55,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v11gas_magiun_topoloveni",
+          "label": "Magiun de Topoloveni",
+          "category": "gastronomie",
+          "salience": 0.62,
+          "strength": 0.55,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v2gas_gratar",
+          "label": "Grătar",
+          "category": "gastronomie",
+          "salience": 0.9125,
+          "strength": 0.55,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v3gas_friptura",
+          "label": "Friptură",
+          "category": "gastronomie",
+          "salience": 0.8598,
+          "strength": 0.55,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_cascaval_pane",
+          "label": "Cașcaval pane",
+          "category": "gastronomie",
+          "salience": 0.4371,
+          "strength": 0.52,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_supa_galuste",
+          "label": "Supă cu găluște",
+          "category": "gastronomie",
+          "salience": 0.5265,
+          "strength": 0.44,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_vdr_lapte_si_corn",
+          "label": "Lapte și corn",
+          "category": "viata_de_roman",
+          "salience": 0.8331,
+          "strength": 0.42,
+          "hops_to_target": 1
+        }
+      ],
+      "editorial_assessment": {
+        "recognition": "not assessed; independent Romanian-web verifier required",
+        "nameability": "not assessed; independent rubric critique required",
+        "dominant_sense": "not assessed; independent rubric critique required",
+        "warm_opener": "not assessed; reviewers must test an intuitive opener in runtime terms"
+      }
+    },
+    {
+      "target": {
+        "id": "n_v3gas_clatite",
+        "label": "Clătite",
+        "category": "gastronomie",
+        "node_type": "concept",
+        "salience": 0.7951
+      },
+      "already_contexto_target": false,
+      "runtime_screen": {
+        "reachable": 2288,
+        "responsive_1_5": 1688,
+        "direct_predecessor_count": 8,
+        "runtime_minimums": {
+          "reachable": 120,
+          "responsive_1_5": 40
+        }
+      },
+      "direct_gradient_candidates": [
+        {
+          "id": "n_v2gas_desert",
+          "label": "Desert",
+          "category": "gastronomie",
+          "salience": 0.8464,
+          "strength": 0.82,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_papanasi",
+          "label": "Papanași",
+          "category": "gastronomie",
+          "salience": 0.9491,
+          "strength": 0.78,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v4gas_ou",
+          "label": "Ou",
+          "category": "gastronomie",
+          "salience": 0.734,
+          "strength": 0.76,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v3gas_inghetata",
+          "label": "Înghețată",
+          "category": "gastronomie",
+          "salience": 0.2826,
+          "strength": 0.72,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v17gas_dulceata",
+          "label": "Dulceață",
+          "category": "gastronomie",
+          "salience": 0.76,
+          "strength": 0.7,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v2gas_placinte",
+          "label": "Plăcinte",
+          "category": "gastronomie",
+          "salience": 0.6308,
+          "strength": 0.66,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_v17gas_gogosi",
+          "label": "Gogoși",
+          "category": "gastronomie",
+          "salience": 0.72,
+          "strength": 0.65,
+          "hops_to_target": 1
+        },
+        {
+          "id": "n_gas_branza_smantana",
+          "label": "Brânză cu smântână",
+          "category": "gastronomie",
+          "salience": 0.8999,
+          "strength": 0.45,
+          "hops_to_target": 1
+        }
+      ],
+      "editorial_assessment": {
+        "recognition": "not assessed; independent Romanian-web verifier required",
+        "nameability": "not assessed; independent rubric critique required",
+        "dominant_sense": "not assessed; independent rubric critique required",
+        "warm_opener": "not assessed; reviewers must test an intuitive opener in runtime terms"
+      }
+    }
+  ]
+}

@@ -439,6 +439,25 @@ def preflight_candidates(gen_dir: Path) -> dict[str, dict]:
     return bundles
 
 
+def pack_only_topology_errors(raw_bundles: dict[str, dict]) -> list[str]:
+    """Reject topology input before a pack-only transaction can begin.
+
+    ``--skip-merge`` remains available for a caller that has already merged a
+    reviewed graph.  ``--pack-only`` is the safer authored-instance path: it
+    makes an accidentally supplied node or edge fail closed rather than silently
+    leaving that reviewed topology out of the import.
+    """
+
+    errors: list[str] = []
+    for category, bundle in sorted(raw_bundles.items()):
+        candidate = bundle["cand"]
+        for key in ("nodes", "edges"):
+            rows = candidate.get(key)
+            if rows:
+                errors.append(f"{category}/candidates.json: {key} must be empty for --pack-only")
+    return errors
+
+
 def next_item_number(items: list[dict], prefix: str) -> int:
     '''Allocate after the highest occupied global suffix, never after list length.'''
     numbers = []
@@ -832,16 +851,26 @@ def main(argv: list[str]) -> int:
     parser.add_argument(
         "--skip-merge", action="store_true", help="pack rebuild only (graph already merged)"
     )
+    parser.add_argument(
+        "--pack-only",
+        action="store_true",
+        help="instance-only import; reject nonempty nodes or edges before mutation",
+    )
     args = parser.parse_args(argv[1:])
     gen_dir = Path(args.dir)
 
     # Verification is pure and complete before the transaction snapshots any mutable file.
     raw_bundles = preflight_candidates(gen_dir)
+    if args.pack_only:
+        topology_errors = pack_only_topology_errors(raw_bundles)
+        if topology_errors:
+            detail = "\n- ".join(topology_errors)
+            raise SystemExit(f"invalid pack-only candidate batch:\n- {detail}")
     with file_transaction(TRANSACTION_FILES):
         stats, counts, report_path, report_lines = _import_verified(
             raw_bundles,
             gen_dir,
-            skip_merge=args.skip_merge,
+            skip_merge=args.skip_merge or args.pack_only,
         )
 
     print(f"\nimport_candidates: {stats['approved']} approved, {stats['pending']} pending, "

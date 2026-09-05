@@ -1,0 +1,506 @@
+{
+  "schema": "v75-contexto-food-selection-impact-v1",
+  "reviewer": "session_refactor",
+  "base_commit": "f75a75c",
+  "after_commit": "7e8147597f72eff829219dc52af8867f36afc966",
+  "method": {
+    "explicit_load_pack_paths": true,
+    "explicit_load_derived_catalog_paths": true,
+    "seed_range": "0..99",
+    "daily_dates": [
+      "2026-09-01",
+      "2026-09-02",
+      "2026-09-03",
+      "2026-09-04",
+      "2026-09-05",
+      "2026-09-06",
+      "2026-09-07",
+      "2026-09-08",
+      "2026-09-09",
+      "2026-09-10",
+      "2026-09-11",
+      "2026-09-12",
+      "2026-09-13",
+      "2026-09-14",
+      "2026-09-15",
+      "2026-09-16",
+      "2026-09-17",
+      "2026-09-18",
+      "2026-09-19",
+      "2026-09-20",
+      "2026-09-21",
+      "2026-09-22",
+      "2026-09-23",
+      "2026-09-24",
+      "2026-09-25",
+      "2026-09-26",
+      "2026-09-27",
+      "2026-09-28",
+      "2026-09-29",
+      "2026-09-30"
+    ],
+    "contexto_filtered_shelf_weights": true,
+    "other_curated_filtered_shelf_weights": false,
+    "derived_seed_options": "unfiltered, starter=False, balance_categories=False",
+    "repeat_runs_per_artifact": 2
+  },
+  "artifact_sha256": {
+    "before": {
+      "games_pack.json": "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed",
+      "board_rankings_v37.json": "45dfd81444dec14b4b639122fe30dea58f05ca76440003eb5280cc01bfcdc3e9",
+      "derived_catalog_v38.json": "8cff438c25deb5084c0311e808941bfef23e3c7bdbf93242a7a53348a6d2ef57"
+    },
+    "after": {
+      "games_pack.json": "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5",
+      "board_rankings_v37.json": "118d8561a329fd6a4646524ee9b033302735708a66d8a5921245942d5616eb74",
+      "derived_catalog_v38.json": "2839606ad82ae781cd57c8c265b636871f9326733881240855a3c95f3dd94f1c"
+    }
+  },
+  "preservation": {
+    "before_pack_count": 618,
+    "after_pack_count": 620,
+    "added_ids": [
+      "ct_gastronomie_318",
+      "ct_gastronomie_319"
+    ],
+    "removed_ids": [],
+    "all_old_pack_records_byte_equivalent_json": true,
+    "new_eligible": {
+      "ct_gastronomie_318": true,
+      "ct_gastronomie_319": true
+    },
+    "old_score_status_eligibility_fields_unchanged": true,
+    "selection_weight_changes": {
+      "ct_gastronomie_127": {
+        "before": 5,
+        "after": 4
+      },
+      "ct_sport_094": {
+        "before": 5,
+        "after": 4
+      },
+      "ct_meme_net_160": {
+        "before": 4,
+        "after": 3
+      },
+      "ct_societate_087": {
+        "before": 3,
+        "after": 2
+      }
+    },
+    "selection_weight_change_count": 4,
+    "generated_rank_changes_count": 204,
+    "generated_rank_changes_sample": {
+      "ct_arta_cultura_003": {
+        "before": 187,
+        "after": 189
+      },
+      "ct_arta_cultura_004": {
+        "before": 132,
+        "after": 134
+      },
+      "ct_arta_cultura_005": {
+        "before": 173,
+        "after": 175
+      },
+      "ct_arta_cultura_006": {
+        "before": 151,
+        "after": 153
+      },
+      "ct_arta_cultura_007": {
+        "before": 109,
+        "after": 111
+      },
+      "ct_arta_cultura_008": {
+        "before": 168,
+        "after": 170
+      },
+      "ct_arta_cultura_009": {
+        "before": 152,
+        "after": 154
+      },
+      "ct_arta_cultura_010": {
+        "before": 84,
+        "after": 86
+      },
+      "ct_arta_cultura_116": {
+        "before": 123,
+        "after": 125
+      },
+      "ct_arta_cultura_117": {
+        "before": 113,
+        "after": 115
+      },
+      "ct_arta_cultura_118": {
+        "before": 137,
+        "after": 139
+      },
+      "ct_arta_cultura_119": {
+        "before": 179,
+        "after": 181
+      }
+    },
+    "derived_board_count_before": 336,
+    "derived_board_count_after": 336,
+    "derived_boards_exactly_unchanged": true,
+    "before_eligible_count": 448,
+    "after_eligible_count": 450
+  },
+  "selection_summary": {
+    "conexiuni:unfiltered": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 0,
+        "unchanged_count": 100,
+        "change_examples": []
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 0,
+        "unchanged_count": 30,
+        "change_examples": []
+      }
+    },
+    "contexto:unfiltered": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 81,
+        "unchanged_count": 19,
+        "change_examples": [
+          {
+            "input": 0,
+            "before": "ct_personalitati_082",
+            "after": "ct_personalitati_075"
+          },
+          {
+            "input": 1,
+            "before": "ct_geografie_031",
+            "after": "ct_geografie_001"
+          },
+          {
+            "input": 3,
+            "before": "ct_literatura_228",
+            "after": "ct_literatura_054"
+          },
+          {
+            "input": 4,
+            "before": "ct_literatura_156",
+            "after": "ct_literatura_053"
+          },
+          {
+            "input": 5,
+            "before": "ct_meme_net_059",
+            "after": "ct_literatura_232"
+          },
+          {
+            "input": 6,
+            "before": "ct_viata_de_roman_273",
+            "after": "ct_viata_de_roman_197"
+          },
+          {
+            "input": 7,
+            "before": "ct_muzica_071",
+            "after": "ct_muzica_068"
+          },
+          {
+            "input": 8,
+            "before": "ct_literatura_053",
+            "after": "ct_limba_226"
+          }
+        ]
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 1,
+        "unchanged_count": 29,
+        "change_examples": [
+          {
+            "input": "2026-09-05",
+            "before": "ct_istorie_308",
+            "after": "ct_gastronomie_318"
+          }
+        ]
+      }
+    },
+    "contexto:gastronomie_usor": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 55,
+        "unchanged_count": 45,
+        "change_examples": [
+          {
+            "input": 1,
+            "before": "ct_gastronomie_020",
+            "after": "ct_gastronomie_024"
+          },
+          {
+            "input": 5,
+            "before": "ct_gastronomie_300",
+            "after": "ct_gastronomie_318"
+          },
+          {
+            "input": 6,
+            "before": "ct_gastronomie_300",
+            "after": "ct_gastronomie_319"
+          },
+          {
+            "input": 7,
+            "before": "ct_gastronomie_127",
+            "after": "ct_gastronomie_128"
+          },
+          {
+            "input": 9,
+            "before": "ct_gastronomie_128",
+            "after": "ct_gastronomie_300"
+          },
+          {
+            "input": 10,
+            "before": "ct_gastronomie_300",
+            "after": "ct_gastronomie_318"
+          },
+          {
+            "input": 11,
+            "before": "ct_gastronomie_128",
+            "after": "ct_gastronomie_300"
+          },
+          {
+            "input": 13,
+            "before": "ct_gastronomie_024",
+            "after": "ct_gastronomie_127"
+          }
+        ]
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 10,
+        "unchanged_count": 20,
+        "change_examples": [
+          {
+            "input": "2026-09-03",
+            "before": "ct_gastronomie_300",
+            "after": "ct_gastronomie_318"
+          },
+          {
+            "input": "2026-09-10",
+            "before": "ct_gastronomie_024",
+            "after": "ct_gastronomie_318"
+          },
+          {
+            "input": "2026-09-13",
+            "before": "ct_gastronomie_024",
+            "after": "ct_gastronomie_128"
+          },
+          {
+            "input": "2026-09-17",
+            "before": "ct_gastronomie_127",
+            "after": "ct_gastronomie_319"
+          },
+          {
+            "input": "2026-09-18",
+            "before": "ct_gastronomie_024",
+            "after": "ct_gastronomie_318"
+          },
+          {
+            "input": "2026-09-19",
+            "before": "ct_gastronomie_019",
+            "after": "ct_gastronomie_024"
+          },
+          {
+            "input": "2026-09-20",
+            "before": "ct_gastronomie_019",
+            "after": "ct_gastronomie_319"
+          },
+          {
+            "input": "2026-09-22",
+            "before": "ct_gastronomie_300",
+            "after": "ct_gastronomie_318"
+          }
+        ]
+      }
+    },
+    "lant:unfiltered": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 0,
+        "unchanged_count": 100,
+        "change_examples": []
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 0,
+        "unchanged_count": 30,
+        "change_examples": []
+      }
+    },
+    "alchimie:unfiltered": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 0,
+        "unchanged_count": 100,
+        "change_examples": []
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 0,
+        "unchanged_count": 30,
+        "change_examples": []
+      }
+    },
+    "intrusul:unfiltered": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 0,
+        "unchanged_count": 100,
+        "change_examples": []
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 0,
+        "unchanged_count": 30,
+        "change_examples": []
+      }
+    },
+    "perechi:unfiltered": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 0,
+        "unchanged_count": 100,
+        "change_examples": []
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 0,
+        "unchanged_count": 30,
+        "change_examples": []
+      }
+    }
+  },
+  "same_artifact_repeatability": {
+    "all_scenarios_equal_on_second_run": true,
+    "scenario_count": 7,
+    "sequences_checked": 28
+  },
+  "new_target_reachability": {
+    "ct_gastronomie_318": {
+      "contexto:gastronomie_usor": {
+        "seeds": [
+          5,
+          10,
+          19,
+          24,
+          27,
+          33,
+          37,
+          38,
+          42,
+          53,
+          58,
+          62,
+          69,
+          74
+        ],
+        "daily": [
+          "2026-09-03",
+          "2026-09-10",
+          "2026-09-18",
+          "2026-09-22"
+        ]
+      },
+      "contexto:unfiltered": {
+        "seeds": [],
+        "daily": [
+          "2026-09-05"
+        ]
+      }
+    },
+    "ct_gastronomie_319": {
+      "contexto:gastronomie_usor": {
+        "seeds": [
+          6,
+          20,
+          23,
+          26,
+          68,
+          77,
+          84,
+          86,
+          95
+        ],
+        "daily": [
+          "2026-09-17",
+          "2026-09-20",
+          "2026-09-27",
+          "2026-09-28"
+        ]
+      },
+      "contexto:unfiltered": {
+        "seeds": [],
+        "daily": []
+      }
+    }
+  },
+  "public_api_regression_inputs": [
+    {
+      "expected_pack_id": "ct_gastronomie_318",
+      "seed": 5,
+      "create_url": "/api/wordgames/contexto/games?seed=5&category=gastronomie&difficulty=usor",
+      "statuses": [
+        200,
+        200,
+        200
+      ],
+      "private_selected_pack_id": "ct_gastronomie_318",
+      "create_secret_hidden": true,
+      "warm_input": "grătar",
+      "warm_result": {
+        "label": "Grătar",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99
+      },
+      "win_input": "mici",
+      "win_result": {
+        "won": true,
+        "attempts": 2,
+        "label": "Mici",
+        "target_id": "n_gas_mici",
+        "score": 940
+      }
+    },
+    {
+      "expected_pack_id": "ct_gastronomie_319",
+      "seed": 6,
+      "create_url": "/api/wordgames/contexto/games?seed=6&category=gastronomie&difficulty=usor",
+      "statuses": [
+        200,
+        200,
+        200
+      ],
+      "private_selected_pack_id": "ct_gastronomie_319",
+      "create_secret_hidden": true,
+      "warm_input": "salată",
+      "warm_result": {
+        "label": "Salată",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99
+      },
+      "win_input": "salată de boeuf",
+      "win_result": {
+        "won": true,
+        "attempts": 2,
+        "label": "Salată de boeuf",
+        "target_id": "n_gas_salata_boeuf",
+        "score": 940
+      }
+    }
+  ],
+  "limits": [
+    "100 integer seeds and 30 consecutive dates are a bounded sample, not an exhaustive distribution proof.",
+    "API route probes are recorded separately after this artifact-level audit.",
+    "Derived catalog metadata hashes legitimately change with its pack/ranking inputs; board payloads are compared exactly.",
+    "Unfiltered selection changes can reflect addition plus the four intentional global weight-band shifts; this bounded audit does not attribute each remap to one cause."
+  ]
+}

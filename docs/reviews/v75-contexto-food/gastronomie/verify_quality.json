@@ -1,0 +1,32 @@
+{
+  "category": "gastronomie",
+  "candidate_sha256": "sha256:baef6c35007d7da7982058f0bbb220b3fbf95f91377247412368f63898e38431",
+  "coverage_note": "Independent root quality screen of exact five author-frozen candidates, all77 direct neighbors and25 real-route naive guesses in runtime_openers.json. Three rejected before staging, two kept only for pending bound-dossier review; no approval or human enjoyment claim. Factual reviewer was session_refactor; candidate author was wave_audit.",
+  "instances": [
+    {
+      "ref": "contexto[0]",
+      "verdict": "keep",
+      "note": "C1/C2: familiar concrete dish, provisionally suitable for usor; independent factual review supports Romanian usage. C3: >=5 recognizable direct neighbors (Grătar, Muștar, Bere, Carne, Mâncare; all tested through actual guess route). C4: grătar rank2, muștar3, bere/carne5, all distance1/Fierbinte. C5: noun food sense is explicit in dossier; adjective ambiguity remains for adversarial assessment. C6: salience .9765. Pending dossier gate must independently verify recognition and sense, not human acceptance."
+    },
+    {
+      "ref": "contexto[1]",
+      "verdict": "drop",
+      "note": "Do not stage: obvious baking ingredients făină and zahăr both score distance4/Rece, while Crăciun is unknown and Paște silently resolves to Pasta/Paste. Desert is warm but does not compensate for misleading primary holiday/baking paths in an usor round. Keep candidate/evidence as rejected; no topology change or approved-stock demotion."
+    },
+    {
+      "ref": "contexto[2]",
+      "verdict": "keep",
+      "note": "C1/C2: familiar concrete named dish; independent factual review supports holiday usage, broad recognition still needs adversarial gate. C3/C4: salată rank2, cartof4, murături6 all direct/Fierbinte; maioneză distance2/Cald (rank28). At least5 legible direct neighbors include Salată, Cartof, Murături, Ou, Salată de icre and holiday meals. C5: distinctive dish label; C6 salience .9139. Revelion is unknown; record limited alias coverage but core salad/ingredient opening paths work."
+    },
+    {
+      "ref": "contexto[3]",
+      "verdict": "drop",
+      "note": "Do not stage: Pâine is hot (rank2) but the primary ingredient făină is distance4/Rece and cuptor is unknown with Sculptor suggestion. Apă and drojdie work, yet the qualified target plus misleading baking path is not a coherent usor expansion. Reject this candidate for current topology; no approved-stock demotion."
+    },
+    {
+      "ref": "contexto[4]",
+      "verdict": "drop",
+      "note": "Do not stage: primary ingredient făină is distance6/Inghetat, rank1696. Desert/Ou/Dulceață are warm and engine floors pass, but the frozen ordinary ingredient contradicts the intuitive recipe path. Prioritize reliable content over candidate count; defer topology repair to a separately reviewed wave."
+    }
+  ]
+}
