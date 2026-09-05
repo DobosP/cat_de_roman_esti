@@ -49,8 +49,7 @@ Existing protection is the 7,200-second sliding TTL and 1,000-entry cap **per ga
 
 ### Bounded 100-session Contexto sample
 
-The follow-up sample is scratch evidence at
-`/home/dobo/work/_temp/v74-runtime-measurements/contexto-100-sessions.json`, run offline
+The follow-up sample is archived in `contexto-100-sessions.json`, run offline
 with 100 deterministic sessions and ten distinct terms each. It retained **100 sessions /
 1,000 distinct guesses**, measured 64,360,448 bytes process RSS growth from 45,633,536 to
 109,993,984 bytes, create median/p95/max **6.964 / 8.231 / 325.589 ms**, and action
@@ -82,8 +81,8 @@ guesses, not answers or test hints.
 
 ## Anonymous V72 release and rollback check
 
-This is a local checklist for a release candidate already deployed in anonymous V72 mode;
-it does not provision infrastructure or contact production.
+This is a local checklist for releasing a new candidate from the last documented anonymous
+V72 deployment; it does not provision infrastructure or contact production.
 
 1. Run the local runtime command above and the release's required validators/tests. Record
    the candidate commit, image digest, manifest hash, benchmark JSON, machine/load details,
