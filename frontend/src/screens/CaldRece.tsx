@@ -234,7 +234,7 @@ export default function CaldRece({
     [onToast],
   );
 
-  const { recovery: resumeRecovery, retryResume, cancelResume } = useSavedGameResume({
+  const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
     active,
     load: contextoApi.getGame,
     isTerminal: isTerminalResume,
@@ -250,6 +250,7 @@ export default function CaldRece({
         const fresh = await contextoApi.createGame(opts);
         setState(fresh);
         active.remember(fresh.game_id);
+        dismissRecovery();
         setLatestId(null);
         setFeedback(null);
         setGuessView("best");
@@ -271,7 +272,7 @@ export default function CaldRece({
         setBusy(false);
       }
     },
-    [active, cancelResume, onToast],
+    [active, cancelResume, dismissRecovery, onToast],
   );
 
   const won = state?.won ?? false;

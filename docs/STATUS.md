@@ -4,6 +4,7 @@ Last verified: 2026-09-06 — V74 targeted reliability/accessibility gates green
 
 ## Current state
 
+- V74: a failed fresh start keeps saved-round retry available; all six games pass the added desktop/mobile check.
 - V74: scrolling status and Lanț history are keyboard-reachable; rendered intro/live/result audits and
   full desktop keyboard rounds pass across all six games (ADR-0103). Integrated V74 gates are pending.
 - V73 baseline: real-backend browser journeys protect all six games on desktop and mobile emulation

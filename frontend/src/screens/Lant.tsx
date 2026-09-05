@@ -178,7 +178,7 @@ export default function Lant({
     [onToast],
   );
 
-  const { recovery: resumeRecovery, retryResume, cancelResume } = useSavedGameResume({
+  const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
     active,
     load: getLant,
     isTerminal: isTerminalResume,
@@ -202,6 +202,7 @@ export default function Lant({
           category: opts?.daily ? undefined : (category ?? undefined),
         });
         active.remember(fresh.game_id);
+        dismissRecovery();
         setState(fresh);
         setText("");
       } catch (err) {
@@ -215,7 +216,7 @@ export default function Lant({
         setLoading(false);
       }
     },
-    [onToast, difficulty, category, active, cancelResume],
+    [onToast, difficulty, category, active, cancelResume, dismissRecovery],
   );
 
   // Record the score exactly once when the game is won.

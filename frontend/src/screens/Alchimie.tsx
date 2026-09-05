@@ -155,7 +155,7 @@ export default function Alchimie({
     [onToast],
   );
 
-  const { recovery: resumeRecovery, retryResume, cancelResume } = useSavedGameResume({
+  const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
     active,
     load: alchimieApi.get,
     isTerminal: isTerminalResume,
@@ -171,6 +171,7 @@ export default function Alchimie({
         const s = await alchimieApi.create(opts);
         setState(s);
         active.remember(s.game_id);
+        dismissRecovery();
         setSelected([]);
         setEmptyPairKey(null);
         setEmptyRecoveryActive(false);
@@ -192,7 +193,7 @@ export default function Alchimie({
         setLoading(false);
       }
     },
-    [active, cancelResume, onToast],
+    [active, cancelResume, dismissRecovery, onToast],
   );
 
   const won = state?.won ?? false;

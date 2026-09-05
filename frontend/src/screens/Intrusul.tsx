@@ -79,7 +79,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
         : "Joc reluat. Atinge cuvântul care nu se potrivește.",
     );
   }, []);
-  const { recovery: resumeRecovery, retryResume, cancelResume } = useSavedGameResume({
+  const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
     active,
     load: intrusulApi.get,
     isTerminal: isTerminalResume,
@@ -106,6 +106,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
         const fresh = await intrusulApi.create(opts);
         setState(fresh);
         active.remember(fresh.game_id);
+        dismissRecovery();
       } catch (error) {
         onToast(
           error instanceof ApiError
@@ -118,7 +119,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
         setLoading(false);
       }
     },
-    [active, cancelResume, onToast],
+    [active, cancelResume, dismissRecovery, onToast],
   );
 
   const puzzleKey = useMemo(() => {

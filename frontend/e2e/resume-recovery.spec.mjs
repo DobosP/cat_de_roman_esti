@@ -75,6 +75,17 @@ test.describe("V74 saved-game recovery", () => {
       expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game)))
         .toBe(state.game_id);
 
+      // Choosing a new round must not remove the saved-round fallback if create fails.
+      await page.route(`**/api/wordgames/${game.key}/games?*`, (route) => route.fulfill({
+        status: 503, contentType: "application/json", body: JSON.stringify({ detail: "Temporar indisponibil." }),
+      }), { times: 1 });
+      const failedCreate = page.waitForResponse((response) => response.request().method() === "POST" &&
+        new URL(response.url()).pathname === `/api/wordgames/${game.key}/games`);
+      await page.getByRole("button", { name: /^Joacă(?: →)?$/ }).click();
+      expect((await failedCreate).status()).toBe(503);
+      await expect(page.getByRole("button", { name: "Reîncearcă reluarea" })).toBeEnabled();
+      expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game))).toBe(state.game_id);
+
       const resumed = page.waitForResponse((response) =>
         response.request().method() === "GET" &&
         new URL(response.url()).pathname === gameURL(game, state.game_id));

@@ -14,6 +14,7 @@ export interface SavedGameResumeControl {
   recovery: ResumeRecovery | null;
   retryResume: () => void;
   cancelResume: () => void;
+  dismissRecovery: () => void;
 }
 
 interface SavedGameResumeOptions<T> {
@@ -73,8 +74,9 @@ export function useSavedGameResume<T>({
 
   const cancelResume = useCallback(() => {
     unsubscribeRef.current?.();
-    setRecovery(null);
   }, []);
 
-  return { recovery, retryResume, cancelResume };
+  const dismissRecovery = useCallback(() => setRecovery(null), []);
+
+  return { recovery, retryResume, cancelResume, dismissRecovery };
 }

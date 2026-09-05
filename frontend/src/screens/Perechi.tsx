@@ -112,7 +112,7 @@ export default function Perechi({ onExit, onToast }: Props) {
     setChecking(null);
     setFeedback(fresh.won || fresh.lost ? null : "Joc reluat. Atinge primul cuvânt.");
   }, []);
-  const { recovery: resumeRecovery, retryResume, cancelResume } = useSavedGameResume({
+  const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
     active,
     load: perechiApi.get,
     isTerminal: isTerminalResume,
@@ -141,6 +141,7 @@ export default function Perechi({ onExit, onToast }: Props) {
         const fresh = await perechiApi.create(opts);
         setState(fresh);
         active.remember(fresh.game_id);
+        dismissRecovery();
       } catch (error) {
         onToast(
           error instanceof ApiError
@@ -153,7 +154,7 @@ export default function Perechi({ onExit, onToast }: Props) {
         setLoading(false);
       }
     },
-    [active, cancelResume, onToast],
+    [active, cancelResume, dismissRecovery, onToast],
   );
 
   const puzzleKey = useMemo(() => {

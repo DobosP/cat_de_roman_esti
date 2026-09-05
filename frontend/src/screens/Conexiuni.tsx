@@ -181,7 +181,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     [onToast],
   );
 
-  const { recovery: resumeRecovery, retryResume, cancelResume } = useSavedGameResume({
+  const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
     active,
     load: conexiuniApi.get,
     isTerminal: isTerminalResume,
@@ -206,6 +206,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               });
         setState(s);
         active.remember(s.game_id);
+        dismissRecovery();
         setSelected([]);
         setBlockedGuess(null);
         setHint(null);
@@ -222,7 +223,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         setLoading(false);
       }
     },
-    [active, cancelResume, onToast, category, difficulty],
+    [active, cancelResume, dismissRecovery, onToast, category, difficulty],
   );
 
   const puzzleKey = useMemo(() => {
