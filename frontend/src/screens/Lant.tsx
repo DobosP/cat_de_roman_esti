@@ -222,7 +222,6 @@ export default function Lant({
   // Record the score exactly once when the game is won.
   useEffect(() => {
     if (!state?.won || state.score === undefined) return;
-    active.forgetIfCurrent(state.game_id);
     const score = state.score;
     const detail = `${state.moves}/${state.optimal} mutări${
       state.daily ? ` · ${state.daily}` : ""
@@ -234,6 +233,7 @@ export default function Lant({
       daily: state.daily,
       category: state.board_category,
     }).then((outcome) => {
+      active.forgetIfCurrent(state.game_id);
       if (!current || !outcome) return;
       const { isBest, isPuzzleBest } = outcome;
       setScored({ score, isBest, isPuzzleBest });
@@ -638,7 +638,6 @@ export default function Lant({
             onCopy={() => void handleCopy()}
             onReplay={() => void start({ difficulty: state.difficulty })}
             onOptions={() => {
-              active.forget();
               setState(null);
             }}
             onExit={onExit}

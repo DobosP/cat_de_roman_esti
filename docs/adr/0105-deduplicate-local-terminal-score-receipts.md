@@ -11,9 +11,11 @@ the whole board. A reserved private field in that same local-storage payload ret
 game-ID receipts for 24 hours, prunes malformed and future rows, and keeps at most 1,000
 receipts per game. The updated score board and receipt are committed by one storage write.
 
-The six terminal effects await the recorder and ignore late UI callbacks after cleanup.
-Strict Mode setups reuse the same in-component promise. Contexto giveup continues to clear
-its resume pointer without recording a score.
+The six terminal effects retain their active resume pointer until the recorder settles, then
+conditionally clear their own game ID before suppressing late UI callbacks. Terminal options
+and exits leave that cleanup to the effect, so a reload or closed tab cannot strand a queued
+result. Strict Mode setups reuse the same in-component promise. Contexto giveup continues to
+clear its own resume pointer immediately without recording a score.
 
 Keep receipts out of score rows, history export/import, and account score transport. Ordinary
 score writes and imports preserve the private field, while clearing local score history also

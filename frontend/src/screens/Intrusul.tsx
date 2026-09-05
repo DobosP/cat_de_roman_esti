@@ -145,7 +145,6 @@ export default function Intrusul({ onExit, onToast }: Props) {
   useEffect(() => {
     if (!state || !finished || state.score === undefined) return;
     if (!state.daily) rememberDerivedReplayId(GAME_KEY, state.game_id);
-    active.forgetIfCurrent(state.game_id);
     const detail = state.won
       ? `${state.mistakes} ${state.mistakes === 1 ? "greșeală" : "greșeli"}`
       : `pierdut · ${state.mistakes} greșeli`;
@@ -156,6 +155,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
       difficulty: state.difficulty,
       category: state.board_category,
     }).then((outcome) => {
+      active.forgetIfCurrent(state.game_id);
       if (!current || !outcome) return;
       if (state.won) sound.playWin();
       else sound.playError();
@@ -396,7 +396,6 @@ export default function Intrusul({ onExit, onToast }: Props) {
             replayLabel={state.daily ? "Joacă liber →" : undefined}
             onOptions={() => {
               if (startInFlight.current) return;
-              active.forget();
               setState(null);
             }}
             onExit={exitSafely}

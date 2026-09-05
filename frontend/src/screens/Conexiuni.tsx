@@ -255,7 +255,6 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   // Record the score + best once, on transition into a finished state.
   useEffect(() => {
     if (!state || !finished || state.score === undefined) return;
-    active.forgetIfCurrent(state.game_id);
     const detail = state.won
       ? `${state.mistakes} greșeli`
       : `pierdut · ${state.mistakes} greșeli`;
@@ -266,6 +265,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       daily: state.daily,
       category: state.board_category,
     }).then((outcome) => {
+      active.forgetIfCurrent(state.game_id);
       if (!current || !outcome) return;
       const { isBest, isPuzzleBest } = outcome;
       if (state.won) sound.playWin();
@@ -423,16 +423,15 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     else onToast("Nu am putut copia.", "error");
   }, [sharePayload, onToast]);
 
-  // Ieși means a deliberate exit, not a temporary route hop. Forget only this game's
-  // resume pointer before replacing the route; a page refresh never calls this and still
-  // resumes the live board through useActiveGame.
+  // A live-board exit is permanent. A terminal board keeps its pointer until the queued
+  // score completion settles, so closing this document cannot lose an unrecorded result.
   const handleExit = useCallback(() => {
-    active.forget();
+    if (!finished) active.forget();
     setSelected([]);
     setBlockedGuess(null);
     setHint(null);
     onExit();
-  }, [active, onExit]);
+  }, [active, finished, onExit]);
 
   // Keyboard: Enter submits a full selection, Escape/Backspace clears it. Inert when
   // no board is active, while a request is in flight, or once the game is finished.
@@ -789,7 +788,6 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               onCopy={copyShare}
               onReplay={() => void start({ kind: "seed", difficulty })}
               onOptions={() => {
-                active.forget();
                 setState(null);
               }}
               onExit={handleExit}

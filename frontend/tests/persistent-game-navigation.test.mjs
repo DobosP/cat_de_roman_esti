@@ -9,14 +9,14 @@ const conexiuni = read("../src/screens/Conexiuni.tsx");
 const activeGame = read("../src/hooks/useActiveGame.ts");
 const css = read("../src/styles/arcade.css");
 
-test("an explicit Conexiuni exit forgets its resume pointer and replaces route history", () => {
+test("a live Conexiuni exit forgets its pointer while a terminal score owns cleanup", () => {
   assert.match(app, /navigate\("\/", \{ replace: true \}\)/);
 
   const exit = conexiuni.match(
-    /const handleExit = useCallback\(\(\) => \{[\s\S]*?\n {2}\}, \[active, onExit\]\);/,
+    /const handleExit = useCallback\(\(\) => \{[\s\S]*?\n {2}\}, \[active, finished, onExit\]\);/,
   );
   assert.ok(exit);
-  assert.match(exit[0], /active\.forget\(\);[\s\S]*?onExit\(\);/);
+  assert.match(exit[0], /if \(!finished\) active\.forget\(\);[\s\S]*?onExit\(\);/);
   assert.doesNotMatch(exit[0], /localStorage\.(?:clear|removeItem)/);
   assert.equal((conexiuni.match(/onExit=\{handleExit\}/g) ?? []).length, 3);
   assert.match(activeGame, /const key = `\$\{PREFIX\}\$\{game\}`/);

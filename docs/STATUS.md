@@ -9,7 +9,8 @@ Last verified: 2026-09-06 — V74/V75 locally integrated; final combined gates p
 - V74 restores transiently unavailable rounds, rejects stale resume responses, recovers terminal results,
   retains retry after failed fresh creation, and preserves terminal Contexto/Lanț state (ADR-0101).
 - Scrolling HUD/history are keyboard-reachable; all six intro/live/result states pass rendered audits and
-  full desktop keyboard rounds (ADR-0103). Local scores and bounded private receipts now persist atomically (ADR-0105).
+  full desktop keyboard rounds (ADR-0103). Scores/receipts persist atomically; terminal IDs remain recoverable
+  until recording settles, including options/exits and reloads (ADR-0105).
 - V75 adds two reviewed Contexto food targets after dropping three weak candidates. Reusable pack-only
   import/review tools and bound evidence: ADRs 0102/0104/0106; `docs/reviews/v75-contexto-food/README.md`.
 - Served KG remains `fixture-v72-romanian-dishes-and-pastries-morphology`: 2,364 nodes / 9,217 edges /
@@ -68,7 +69,7 @@ mobile public content: `sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11f
 | Browser before final saved-result correction | 106 desktop/mobile checks passed |
 | V75 review/tooling/content | 52 checks passed; validators GREEN; public warm-guess/win paths confirmed |
 | Dependency/runtime | npm audit 0 findings; bounded offline latency/RSS evidence archived, including integrated V75 sample |
-| Final frontend candidate | saved-result cleanup correction under independent review; full frontend gates follow |
+| Final frontend candidate | saved-result correction independently reviewed without findings; full frontend gates running |
 
 Commands and runtime paths: `docs/agent-testing.md`. Historical timing sensitivity and full prior
 verification records remain in WORKLOG. The local runtime sample includes 100 Contexto sessions /
