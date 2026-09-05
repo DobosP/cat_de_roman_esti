@@ -46,7 +46,7 @@
   `romania_scraper` venv: it has no Django — `pytest --co` = 7 collection errors, 402/898 tests (verified 2026-09-05).
 - Install into a fresh venv: `pip install -c constraints.txt -e ".[dev,web]"` (ci.yml:48)
 - Targeted test: `PYTHONPATH=. ~/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_wordgames_session_store.py -q` → 16 passed
-- Full suite: same interpreter, `-m pytest -q` (898 tests, ~7 min on this host); accounts suite:
+- Full suite: same interpreter, `-m pytest -q` (current result in `docs/STATUS.md`; load-sensitive); accounts suite:
   `CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 <interpreter> -m pytest -q tests/accounts` (ci.yml:61)
 - Content gates: `<interpreter> scripts/validate_fixture.py` → `GREEN: fixture is valid (0 errors)` ·
   `<interpreter> scripts/validate_games_pack.py` → `games pack GREEN` (ci.yml:51-55)

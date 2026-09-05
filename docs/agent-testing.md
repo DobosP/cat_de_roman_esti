@@ -9,7 +9,8 @@ Last verified: 2026-09-06
 - Fresh venv: `pip install -c constraints.txt -e ".[dev,web]"` (ci.yml:48).
 - Never use the `romania_scraper` venv: it has no Django, so collection gives 7 errors and only
   402 of 898 tests (verified 2026-09-05).
-- Frontend needs Node 24 (ci.yml:76).
+- Frontend needs Node 24 (ci.yml:76). Verify both `node -v` and `npm -v`; the candidate
+  clean install used Node 24.20.0/npm 11.19.0. The host npm 9 shim omitted a Rolldown binding.
 
 Below, `<interp>` = `~/work/cat_de_roman_esti/.venv/bin/python`.
 
@@ -18,14 +19,14 @@ Below, `<interp>` = `~/work/cat_de_roman_esti/.venv/bin/python`.
 |---|---|---|
 | Word-game sessions | `PYTHONPATH=. <interp> -m pytest tests/test_wordgames_session_store.py -q` | `16 passed` |
 | KG/app-pack contract | `PYTHONPATH=. <interp> -m pytest tests/test_app_pack_contract.py tests/test_data_client.py -q` | `23 passed` |
-| Full backend | `PYTHONPATH=. <interp> -m pytest -q` | `922 passed`, 4m30s for V73 (load ≈ 5) |
+| Full backend | `PYTHONPATH=. <interp> -m pytest -q` | Current totals in [STATUS](STATUS.md); several minutes, depending on load |
 | Accounts suite | `CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=. <interp> -m pytest -q tests/accounts` | `53 passed` |
 | Fixture gate | `<interp> scripts/validate_fixture.py` | `GREEN: fixture is valid (0 errors)` |
 | Pack gate | `<interp> scripts/validate_games_pack.py` | `games pack GREEN` |
 | Lint | `<interp> -m ruff check` | `All checks passed!` |
 | Whitespace | `git diff --check` | no output |
 | Frontend | `cd frontend && npm ci && npm test && npm run lint && npm run build` | build lands `cat_de_roman_esti/web/static/index.html` (ci.yml:92-95) |
-| Browser | `cd frontend && npm run test:e2e` (after build + `npx playwright install chromium`) | six real-backend games, desktop + mobile; Python web runtime on `PATH` |
+| Browser | `cd frontend && npm run test:e2e` (after build + `npx playwright install chromium`) | six real-backend games, desktop + mobile; Python web runtime on `PATH`; optional `CDR_E2E_PORT` |
 | Docs | `python3 ~/work/agent-ops/scripts/check_docs.py .` | `dead_links=0 stale_terms=0 retired_verbs=0 orphans=0` |
 
 `pyproject.toml` sets `addopts = "-q"`, so a passing run prints dots only; add `-o addopts=""` when you
