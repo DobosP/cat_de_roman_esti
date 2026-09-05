@@ -21,7 +21,6 @@ import random
 from bisect import bisect_left
 from dataclasses import dataclass, field
 from enum import StrEnum
-from functools import wraps
 
 from django.urls import path
 from drf_spectacular.utils import extend_schema
@@ -37,6 +36,7 @@ from ..web.http import (
     query_str,
 )
 from ._progress import excluded_pack_ids, record_finished
+from ._session_endpoint import atomic_session
 from .categories import CATEGORY_LABELS as _SHARED_CATEGORY_LABELS
 from .categories import category_label, is_known
 from .contexto_feedback import feedback_proxy_id
@@ -171,19 +171,7 @@ class _FeedbackScore:
 
 
 store: SessionStore[ContextoSession] = SessionStore()
-
-
-def _atomic_session(method):
-    """Run one request against a pinned, exclusively locked game session."""
-
-    @wraps(method)
-    def wrapped(self, request, game_id: str):
-        with store.transaction(game_id) as session:
-            if session is None:
-                raise http_error(404, "Joc inexistent")
-            return method(self, request, game_id, session)
-
-    return wrapped
+_atomic_session = atomic_session(lambda: store, "Joc inexistent")
 
 
 # --------------------------------------------------------------------------- scoring
