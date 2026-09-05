@@ -100,7 +100,8 @@ documented in `docs/agent-testing.md`. Python 3.14 CI and production have not be
 - Keep `rollback-60c3fd5318a` through the next successful rollout.
 - Complete the refactor-first anonymous-beta quality goal; remaining gates and playtest protocol:
   `docs/BETA_CANDIDATE.md`. V74 targets reliability/UX; V75 prepares a reviewed playable-content wave.
-- Remediate the six currently reported high npm advisories and measure candidate performance.
+- Remediate the six currently reported high npm advisories; V74 local route/runtime evidence is
+  `docs/reviews/v74-runtime-measurements/README.md` (Alchimie create variance needs follow-up).
 
 ## Open gates
 
