@@ -2,7 +2,9 @@ import { defineConfig, devices } from "@playwright/test";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
-const baseURL = "http://127.0.0.1:8138";
+const port = Number(process.env.CDR_E2E_PORT || 8138);
+if (!Number.isInteger(port) || port < 1024 || port > 65535) throw new Error("Invalid CDR_E2E_PORT");
+const baseURL = `http://127.0.0.1:${port}`;
 
 export default defineConfig({
   testDir: "./e2e",
@@ -26,7 +28,7 @@ export default defineConfig({
     { name: "mobile", use: { ...devices["Pixel 7"] } },
   ],
   webServer: {
-    command: "python3 -m cat_de_roman_esti.web --host 127.0.0.1 --port 8138 --log-level warning",
+    command: `python3 -m cat_de_roman_esti.web --host 127.0.0.1 --port ${port} --log-level warning`,
     cwd: root,
     url: `${baseURL}/api/health`,
     reuseExistingServer: false,

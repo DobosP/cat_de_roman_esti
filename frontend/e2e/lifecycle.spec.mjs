@@ -1,6 +1,22 @@
 import { test, expect } from "@playwright/test";
 import { games, activeKey, gameURL, deterministicStarts, seededStarts, solution, start, solve, act } from "./games.mjs";
 
+async function visibleProgress(page, game, state) {
+  if (game.key === "conexiuni") {
+    await expect(page.getByLabel(`${state.lives} greșeli disponibile`, { exact: true })).toBeVisible();
+    return;
+  }
+  const label = game.key === "alchimie" ? /^Combinații$/i :
+    game.key === "lant" ? /^Mutări$/i : /^Încercări$/i;
+  const value = game.key === "alchimie" ? String(state.moves) :
+    game.key === "lant" ? `${state.moves} ${state.moves === 1 ? "mutare" : "mutări"}` :
+    game.key === "contexto" ? `${state.attempts} ${state.attempts === 1 ? "încercare" : "încercări"}` :
+    `${state.remaining_mistakes} rămase`;
+  await expect(page.locator(".hud .stat-badge").filter({
+    has: page.locator(".stat-badge-label", { hasText: label }),
+  }).locator(".stat-badge-value")).toHaveText(value);
+}
+
 for (const game of games) {
   test.describe(game.key, () => {
     test.beforeEach(async ({ page }) => {
@@ -35,11 +51,13 @@ for (const game of games) {
       const expected = await (await request.get(gameURL(game, state.game_id))).json();
       expect(expected.won).toBe(false);
       expect(expected).not.toEqual(state);
+      await visibleProgress(page, game, expected);
       const resumed = page.waitForResponse((r) => r.request().method() === "GET" &&
         new URL(r.url()).pathname === gameURL(game, state.game_id));
       await page.reload();
       expect(await (await resumed).json()).toEqual(expected);
       await expect(page.locator(game.board)).toBeVisible();
+      await visibleProgress(page, game, expected);
       expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game)))
         .toBe(state.game_id);
     });
@@ -71,6 +89,23 @@ for (const game of games) {
       await page.getByRole("button", { name: /^Joacă(?: →)?$/ }).click();
       expect((await created).status()).toBe(200);
       await expect(page.locator(game.board)).toBeVisible();
+    });
+
+    test("keeps a round playable after a failed action and reload", async ({ page, request }) => {
+      const state = await start(page, game);
+      const step = solution(game).steps[0];
+      await page.route(`**${gameURL(game, state.game_id)}/${step.action}`, (route) => route.fulfill({
+        status: 503, contentType: "application/json", body: JSON.stringify({ detail: "Încearcă din nou." }),
+      }), { times: 1 });
+      expect((await act(page, game, step)).status()).toBe(503);
+      expect(await (await request.get(gameURL(game, state.game_id))).json()).toEqual(state);
+      expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game))).toBe(state.game_id);
+      const resumed = page.waitForResponse((r) => r.request().method() === "GET" &&
+        new URL(r.url()).pathname === gameURL(game, state.game_id));
+      await page.reload();
+      expect(await (await resumed).json()).toEqual(state);
+      await expect(page.locator(game.board)).toBeVisible();
+      expect((await act(page, game, step)).status()).toBe(200);
     });
   });
 }

@@ -64,7 +64,8 @@ type RecoveryFeedback = {
 
 function Breadcrumb({ path }: { path: PathStep[] }) {
   return (
-    <div className="row wrap breadcrumb-trail" style={{ gap: 6, alignItems: "center" }}>
+    <div className="row wrap breadcrumb-trail" role="group" aria-label="Traseul parcurs"
+      tabIndex={0} style={{ gap: 6, alignItems: "center" }}>
       <AnimatePresence initial={false}>
         {path.map((step, i) => (
           <m.span

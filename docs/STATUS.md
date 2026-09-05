@@ -1,9 +1,11 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-06 — V73 integrated refactor gates green locally; production smokes last run 2026-08-27, not re-run.
+Last verified: 2026-09-06 — V74 keyboard/accessibility and action-recovery checks green locally; production smokes last run 2026-08-27, not re-run.
 
 ## Current state
 
+- V74: scrolling status and Lanț history are keyboard-reachable; rendered intro/live/result audits and
+  full desktop keyboard rounds pass across all six games (ADR-0103). Integrated V74 gates are pending.
 - V73 baseline: real-backend browser journeys protect all six games on desktop and mobile emulation
   (ADR-0098). Public seed-38 snapshots protect deterministic selection before shared refactors.
 - Product line: six-game arcade (Django BFF + React SPA) + terminal CLI, served offline from
@@ -77,6 +79,7 @@ mobile public content sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11fc8
 
 | Date | Command | Result |
 |---|---|---|
+| 2026-09-06 | V74 rendered access/keyboard and failed-action recovery browser checks | 12 + 12 passed, desktop/mobile |
 | 2026-09-06 | `npm run test:e2e` + strengthened progress/snapshot checks | 48/48 passed against integrated refactors; frozen starts unchanged |
 | 2026-09-05 | `pytest tests/test_wordgames_session_store.py -q` | 16 passed |
 | 2026-09-05 | `pytest tests/test_app_pack_contract.py tests/test_data_client.py -q` | 23 passed |

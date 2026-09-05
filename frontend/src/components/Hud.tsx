@@ -28,7 +28,8 @@ export function StatBadge({
 /** Right-aligned wrap row for StatBadges + small actions inside a GameShell. */
 export function Hud({ children }: { children: ReactNode }) {
   return (
-    <div className="row wrap hud" style={{ gap: 8, alignItems: "center" }}>
+    <div className="row wrap hud" role="group" aria-label="Starea jocului" tabIndex={0}
+      style={{ gap: 8, alignItems: "center" }}>
       {children}
     </div>
   );

@@ -52,11 +52,12 @@ npm run build
 npm run test:e2e
 ```
 
-The runner starts its own offline anonymous BFF on port 8138. On the fleet host, put
+The runner starts its own offline anonymous BFF on port 8138 (`CDR_E2E_PORT` overrides it). On the fleet host, put
 the project `.venv/bin` and the Node 24 runtime first on `PATH`. Failure artifacts live
 in ignored `test-results/`; `CDR_E2E_OUTPUT_DIR` can redirect them. The frozen public
 seeded starts are in `e2e/seeded-starts.json`; regenerate only after an intentional,
 reviewed selection change with `PYTHONPATH=.. python3 e2e/solutions.py --write-starts`.
+Rendered accessibility and keyboard coverage follow [ADR-0103](../docs/adr/0103-make-game-status-keyboard-reachable.md).
 
 ```
 src/
