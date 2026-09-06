@@ -17,3 +17,4 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0106 | [Two reviewed Contexto food targets](0106-add-reviewed-contexto-food-targets.md) | accepted |
 | 0107 | [Reviewed Romanian input senses](0107-preserve-reviewed-romanian-input-senses.md) | accepted |
 | 0108 | [Bounded flour ingredient associations](0108-add-bounded-flour-ingredient-associations.md) | accepted |
+| 0109 | [Defer dessert targets after fresh feedback review](0109-defer-dessert-targets-after-feedback-review.md) | accepted |

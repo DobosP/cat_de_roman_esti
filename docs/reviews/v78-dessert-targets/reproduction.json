@@ -1,0 +1,12 @@
+{
+  "scope": "Independent second execution of the same archived runner, not an independently implemented probe harness",
+  "original_executor": "wave_audit",
+  "repeat_executor": "root",
+  "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python <scratch>/runtime_openers.py --root . --out <scratch>/runtime-openers-independent.json",
+  "comparison": "cmp <scratch>/runtime-openers.json <scratch>/runtime-openers-independent.json",
+  "exit_code": 0,
+  "probe_count": 68,
+  "original_sha256": "fc438e6698094ae7bf0720c30341083586128143ebf5b55a01a124d34e6bee80",
+  "repeat_sha256": "fc438e6698094ae7bf0720c30341083586128143ebf5b55a01a124d34e6bee80",
+  "byte_identical": true
+}

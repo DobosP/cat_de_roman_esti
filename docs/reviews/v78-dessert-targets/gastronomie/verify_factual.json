@@ -1,0 +1,21 @@
+{
+  "category": "gastronomie",
+  "candidate_sha256": "sha256:7a7c22fba430bbd23d84dd33d78979ba6b28670338151daeacf7999dce621b38",
+  "reviewed_refs": [
+    "contexto[0]",
+    "contexto[1]"
+  ],
+  "issues": [
+    {
+      "ref": "contexto[0]",
+      "severity": "note",
+      "issue": "ACCEPTAT factual pentru trimiterea la evaluarea de calitate: Cozonac denumește fără echivoc preparatul din aluat dospit dulce; făina, ouăle, laptele, untul și zahărul sunt ingrediente lexicografic atestate, iar nuca/cacaua și asocierea cu Paștele și Crăciunul sunt documentate. Expresia argotică «a dospi cozonacul» nu creează un al doilea sens nominal dominant pentru eticheta izolată."
+    },
+    {
+      "ref": "contexto[1]",
+      "severity": "note",
+      "issue": "ACCEPTAT factual pentru trimiterea la evaluarea de calitate: Clătite denumește preparatul din foi subțiri gătite în tigaie, cu umpluturi dulci sau sărate; făina, ouăle, laptele, dulceața și brânza sunt documentate. Forma «clătite» poate apărea gramatical și ca participiu/adjectiv al verbului «a clăti», dar izolată și în categoria gastronomie are dominant sensul preparatului, fără o a doua entitate nominală concurentă."
+    }
+  ],
+  "coverage_note": "Revizuire factuală independentă completă a exact celor două instanțe Contexto din fișierul candidat înghețat: contexto[0] Cozonac și contexto[1] Clătite. Au fost inspectate toate array-urile candidatului (niciun nod, edge sau alt joc), cele două noduri existente și toate cele 32 de asocieri directe nedistractoare care pot ajunge la ținte în graful V77 (23 pentru Cozonac, 9 pentru Clătite). Rezultat factual: 2 acceptate pentru etapa de calitate, 0 blocate, 0 fixuri. Sursele, semnalele independente de recunoaștere, limitele și obiecțiile de gameplay rămase sunt consemnate în FACTUAL_REVIEW.md."
+}

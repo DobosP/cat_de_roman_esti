@@ -1,0 +1,30 @@
+{
+  "scope": "Final read-only V78 documentation review: README, accepted ADR-0109, STATUS, and BETA_CANDIDATE, checked against current V78 evidence and Contexto projection/scoring source.",
+  "sources": {
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v78-dessert-targets/docs/reviews/v78-dessert-targets/README.md": "sha256:111e6de87b936fec0de537abc96bd14e84495d89ae934bafbbbde9ae531c5c8c",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v78-dessert-targets/docs/adr/0109-defer-dessert-targets-after-feedback-review.md": "sha256:99d7b1b0fcb2e82bc7a7b301215d9b3fd4c394e0d5891b446cd3f443a5ed84a7",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v78-dessert-targets/docs/STATUS.md": "sha256:63a86578c3c552442f74ae7cbabc238f182171552dfa6e9a1cd4977910316812",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v78-dessert-targets/docs/BETA_CANDIDATE.md": "sha256:49656eb92de6e61aa986f1837b113af4220a94f88594a7428fca9ce702e4a97c",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v78-dessert-targets/docs/reviews/v78-dessert-targets/runtime-openers.json": "sha256:fc438e6698094ae7bf0720c30341083586128143ebf5b55a01a124d34e6bee80",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v78-dessert-targets/docs/reviews/v78-dessert-targets/runtime-openers.py.txt": "sha256:1730b8e77aff1ce1a434d3bc96d70f44023f913b46271e4be0727f48b07fc19b",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v78-dessert-targets/docs/reviews/v78-dessert-targets/candidate-metrics.json": "sha256:6fb7b050711a802e7616e7f79abac427f64685f701d75a4965b46f9abe7bf531",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v78-dessert-targets/docs/reviews/v78-dessert-targets/preflight.json": "sha256:fe60104ab74bcfb1350028812c3fea7b1a335fa4bc73c88c8bb98ffb32b814d1",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v78-dessert-targets/docs/reviews/v78-dessert-targets/reproduction.json": "sha256:73473c5676d84c814cec854f065ef86f228b2f6ba967592caa6f7fba1ce2b791",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v78-dessert-targets/docs/reviews/v78-dessert-targets/preservation.json": "sha256:dc0896a9bed241f1bdab45e72ae88ba1d464c041595fe305e0903e9b55d92816",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v78-dessert-targets/docs/reviews/v78-dessert-targets/verification.json": "sha256:9d4bca1a3431301a91f8b39e878a16cabb7866d0b5d022aba5f58400551b844f",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v78-dessert-targets/cat_de_roman_esti/wordgames/contexto.py": "sha256:e248eed373c3a732f4316b52b2c9114942f3db29cf3594fcc8ec8ce99eed676d",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v78-dessert-targets/cat_de_roman_esti/wordgames/contexto_projection.py": "sha256:f87364166b58ed2096a1d060ee94af95a2fb731813160d03ca8e58e2e0a31fe4"
+  },
+  "result": "approved-no-actionable-findings",
+  "confirmed": [
+    "README and ADR correctly describe raw candidate drops before staging, with no allocated IDs, pending dossiers, V2 promotion artifacts, approved-stock demotion, runtime change, or served-artifact change.",
+    "reproduction.json names a second executor, command, exit code 0, 68 probes, matching SHA-256 values, and byte_identical true; README’s reproduction statement is now supported.",
+    "candidate-metrics.json supports the distinct graph facts (Cozonac 23 and Clătite 9 incoming non-distractor neighbors and passing runtime floors). README correctly leaves recognizability to factual/quality review and treats numerical warm-openers as insufficient for fairness.",
+    "runtime-openers.json supports all cited core values: Cozonac Nucă 4/504/Rece, Fruct 1/17/Fierbinte, Unt 4/503/Rece; Clătite Gem 6/1699/Înghețat, Dulceață 1/7/Fierbinte, Unt/Miere 6/1698/Înghețat.",
+    "contexto_projection.py maps gem and nucă to Miere. contexto.py gives projections synthetic public IDs and calls scoring with nonwinning=True; README and ADR now correctly require projected gem to remain nonwinning when the private Dulceață anchor is the target, while direct Dulceață stays an ordinary exact win.",
+    "STATUS records 91 targeted tests for each Python runtime, 173 native frontend tests, 68 probes, validators, preserved artifacts, zero npm-audit findings, and explicitly says V78 did not rerun full/accounts/browser suites. verification.json supports these V78 claims; BETA_CANDIDATE keeps the V77 full/browser totals identified as prior evidence.",
+    "No V78 code, pack, fixture, ranking, derived catalog, mobile payload, or runtime behavior is presented as changed."
+  ],
+  "coverage_limit": "Factual/adversarial review files referenced by README may arrive after this review. Their temporary absence was not treated as a finding at parent direction; refresh only if their final content conflicts with the reviewed claims or alters a bound document.",
+  "recommendations": []
+}

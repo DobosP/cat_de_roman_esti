@@ -3,7 +3,8 @@
 Valid until: the next verified quality wave — then refresh this living checklist.
 
 Target: public anonymous beta for Romanian players. **Technical candidate complete through
-V77 and locally verified.** Public beta release still requires the external checks below.
+V77 and locally verified; V78 completes candidate review without changing served content.**
+Public beta release still requires the external checks below.
 Current facts and exact pins: [STATUS](STATUS.md).
 
 ## Completed sequence and acceptance
@@ -18,6 +19,7 @@ Current facts and exact pins: [STATUS](STATUS.md).
 | V75 | Alias growth did not add playable stock | Reusable pack-only import and independent-review serializer; five candidates screened, three dropped, two promoted; Contexto eligibility 201→203 with exact preservation/selection evidence |
 | V76 | Accented holiday spellings could play pasta or falsely win | `Paște`/`Paștele` are unresolved without attempts/moves/suggestions; valid food/compound inputs and 13,177 authored surface mappings remain intact; zero content/artifact changes |
 | V77 | Ordinary flour guesses were distant from familiar dishes; the graph builder reused retired edge IDs | Two reviewed ingredient links accepted, bread deferred after a misleading Stilou route; allocator advances beyond present IDs; all pack/ranking/frozen-board/puzzle records preserved |
+| V78 | Repaired flour alone did not establish dessert-target fairness | 68 fresh API probes and independent reviews defer both candidates: Nucă remains cold for Cozonac; Gem is frozen for Clătite while Dulceață is hot; no served-content changes |
 
 Final V77 gates: **983 backend tests on each of Python 3.12.3 and 3.14.6**, 53 accounts
 tests on each runtime, **173 native frontend tests and 108 desktop/mobile browser checks**.
@@ -29,7 +31,7 @@ Accounts were enabled only for their isolated test suite. Exact results, deliber
 changes and the deferred bread edge are tracked in STATUS and the V77 review archive.
 
 Decisions and full evidence: [ADR index](adr/README.md), [V75 review](reviews/v75-contexto-food/README.md),
-[V77 review](reviews/v77-flour-associations/README.md),
+[V77 review](reviews/v77-flour-associations/README.md), [V78 review](reviews/v78-dessert-targets/README.md),
 [runtime measurements](reviews/v74-runtime-measurements/README.md). Refactors preserve
 server authority, hidden answers, session bounds, intentional game differences and scoring.
 The derived catalog remains frozen at 336 boards. Content critiques are independently
@@ -41,7 +43,7 @@ or human subject-expert approval.
 | Area | Evidence and remaining uncertainty |
 |---|---|
 | Rules, hints and progression | All six seeded rounds reach server-scored results; replay, progressed reload, mistake counters, failed action/start recovery and expiration have real-BFF coverage. Automated solves do not establish intuitiveness or enjoyment. |
-| Romanian content and difficulty | Independent factual, recognition, ambiguity and warm-opener reviews promoted only two easy food targets. Ordinary ingredient/holiday probes rejected three. Existing editorial holds and historical rejection evidence remain intact. |
+| Romanian content and difficulty | Independent factual, recognition, ambiguity and warm-opener reviews promoted only two easy food targets. Ordinary ingredient/holiday probes rejected three in V75. V78 freshly defers Cozonac/Clătite despite repaired flour; accepted nut/jam inputs still give misleading feedback. Existing editorial holds and historical rejection evidence remain intact. |
 | Onboarding and presentation | Shared intros, categories, HUD, action feedback and results were inspected; mobile layout and rendered states are audited. No broad redesign was justified by this evidence. Real-device rendering and human comprehension are still pending. |
 | Keyboard and accessibility | Desktop essential controls support Tab/Space/Enter completion; Perechi focus is checked after pairs disappear and at result. Automated Axe checks run on settled intro/live/result states. Text-entry tests use programmatic fill after keyboard focus; no actual screen-reader usability study ran. |
 | Reliability and storage | Retry, stale ID handling, unmount/loading ownership, immutable terminal actions and duplicate completion are covered. Strict concurrent-tab local-score protection requires Web Locks; fallback is best effort. Receipt TTL is 24h with 1,000 IDs per game; a deliberately retained terminal session can record again after expiry. |
@@ -60,10 +62,12 @@ or human subject-expert approval.
   and re-run public health/config/content/asset smokes. Keep production anonymous.
 
 The next useful product iteration is driven by those observations. The clearest existing
-content follow-up is the rejected batch's ingredient/holiday feedback under fresh independent
-reviews. V76 prevents the accented Paște/Paste misinterpretation; it adds no holiday concept
-or flour association. Additional vocabulary totals alone do not
-satisfy that problem. Accounts, derived-catalog expansion and another game require their
+content follow-up is the Gem projection, whose honey anchor makes the ordinary filling
+frozen for Clătite. Review a distinct Dulceață-based feedback alternative, including effects
+on all existing targets and exact-win privacy, before any mapping or promotion. V78 also
+retains Cozonac’s nut-route objection; V77’s bread route remains deferred. V76 prevents the
+accented Paște/Paste misinterpretation. Additional vocabulary totals alone do not resolve
+these feedback problems. Accounts, derived-catalog expansion and another game require their
 separate documented gates.
 
 ## Romanian-player playtest protocol — not yet run

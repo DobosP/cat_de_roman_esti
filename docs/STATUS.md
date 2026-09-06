@@ -1,11 +1,12 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-06 — V77 ingredient wave verified locally. Production last checked 2026-08-27.
+Last verified: 2026-09-06 — V78 candidate review verified locally. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-  V75 landed at `d127abb`; V76 landed locally at `9ef9dc7`. V77 completes the bounded ingredient follow-up.
+  V75 landed at `d127abb`; V76 at `9ef9dc7`; V77 at `9abbc52`, all locally.
+  V78 completes fresh dessert-target screening with two drops and no served-content change.
   Technical candidate complete; public rollout remains subject to the external gates below.
 - V73 shared session transactions and saved-game lifecycle landed locally at `f75a75c` (ADRs 0098–0100).
 - V74 restores transiently unavailable rounds, rejects stale resume responses, recovers terminal results,
@@ -21,6 +22,9 @@ Last verified: 2026-09-06 — V77 ingredient wave verified locally. Production l
 - V77 adds two directed flour ingredient links; bread is deferred after a misleading warm-guess route.
   The generator preserves retired edge-ID gaps. No pack records or aliases change (ADR-0108);
   evidence: `docs/reviews/v77-flour-associations/README.md`.
+- V78 re-reviews Cozonac/Clătite using 68 ordinary API probes: cold Nucă and frozen Gem
+  still contradict obvious filling guesses. Both raw candidates are dropped before staging (ADR-0109);
+  evidence: `docs/reviews/v78-dessert-targets/README.md`. No IDs, rows, mappings or artifacts change.
 - Served KG is `fixture-v77-flour-associations`: 2,364 nodes / 9,219 edges /
   8,450 aliases / 180 puzzles. `kg_real.json` is a thin export and is not the served fixture.
 
@@ -69,6 +73,14 @@ mobile public content: `sha256:7e90ec33dfddf74723dcea1ffc0e787c58ee8ae1f457b7152
 
 ## Verification
 
+V78: 68 API probes independently reproduce byte-exact; 91 focused Contexto/V76/V77 tests pass
+on Python 3.12.3 and 3.14.6. Both validators and bound raw-candidate preflight pass; all nine
+served/derived/ledger artifacts match V77 exactly. The frontend clean install, 173 native tests,
+lint/typecheck and retained bundle check pass (Node 24.19.0/npm 11.17.0; zero audit findings).
+Ruff, docs and whitespace pass. V78 changes only review/status documentation; no full backend,
+accounts or browser suite was rerun. Exact V78 checks: `docs/reviews/v78-dessert-targets/verification.json`.
+The unchanged runtime retains the V77 integration evidence below.
+
 | Scope | Verified result |
 |---|---|
 | V77 targeted / independent review | 19 ingredient/allocator/V43 checks passed independently; factual, impact, implementation and docs reviews complete |
@@ -90,7 +102,9 @@ verification records remain in WORKLOG. The local runtime sample includes 100 Co
 
 ## Remaining gates
 
-- Technical gates are complete; next content wave re-reviews Cozonac/Clătite; bread stays deferred.
+- Technical gates retain V77 evidence. Next: review the Gem projection’s honey anchor and measure
+  a distinct Dulceață-based feedback alternative; no future mapping/promotion is approved.
+  Cozonac’s nut route and bread remain deferred.
   Release protocol and external evidence checklist: `docs/BETA_CANDIDATE.md`.
 - Owner selects feedback contact; player and real-device checks remain unrun. Reverify legal operator/contact
   configuration and legal pages per DEPLOY; independent content judgments here are from Codex agents.
@@ -101,4 +115,4 @@ verification records remain in WORKLOG. The local runtime sample includes 100 Co
 ## Doc map
 
 - `README.md` / `AGENTS.md`: orientation/contract; `docs/agent-map.md` / `docs/agent-testing.md`: routes/gates.
-- `docs/adr/` (newest 0108), `docs/reviews/`, WORKLOG: decisions/evidence/history.
+- `docs/adr/` (newest 0109), `docs/reviews/`, WORKLOG: decisions/evidence/history.

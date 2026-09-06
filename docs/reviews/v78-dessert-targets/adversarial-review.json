@@ -1,0 +1,71 @@
+{
+  "reviewer": "session_refactor",
+  "role": "independent_adversarial_reviewer",
+  "stage": "pre_staging_raw_candidate_review",
+  "gate_contract": "informational pre-staging review; not a V2 pending-dossier verdict artifact",
+  "bindings": {
+    "candidate_sha256": "sha256:7a7c22fba430bbd23d84dd33d78979ba6b28670338151daeacf7999dce621b38",
+    "runtime_openers_sha256": "sha256:fc438e6698094ae7bf0720c30341083586128143ebf5b55a01a124d34e6bee80",
+    "kg_sha256": "sha256:c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+    "fixture_build_version": "fixture-v77-flour-associations"
+  },
+  "input_refs": [
+    "contexto[0]",
+    "contexto[1]"
+  ],
+  "items": [
+    {
+      "ref": "contexto[0]",
+      "target": "n_gas_cozonac",
+      "label": "Cozonac",
+      "judgment": "drop_before_staging",
+      "criteria": {
+        "C1": "pass: concrete, spontaneously nameable food",
+        "C2": "pass: historic dictionaries plus a current national-TV contest independently support easy-band familiarity",
+        "C3": "fail on legibility despite passing the numeric/direct-neighbor floor: 23 incoming neighbors exist, but defining recipe and holiday approaches receive contradictory or unavailable feedback",
+        "C4": "minimum pass only: flour, dessert and fruit are within one hop and several other obvious guesses are warm; the minimum does not cure the cold defining walnut path",
+        "C5": "pass: the isolated noun has a dominant food sense; a fixed argot expression is not a competing standalone referent",
+        "C6": "pass: salience 0.9737 exceeds the easy threshold"
+      },
+      "refute_first": "The strongest promotion case is substantial: flour ranks 2/Fierbinte, dessert 4/Fierbinte, fruit 17/Fierbinte, sugar 25/Cald and egg 37/Cald, while the target is famous and unambiguous. That proves an obvious opener exists. It does not prove a coherent easy round. Walnut is a defining, source-backed cozonac filling but the accepted Nucă projection is rank 504/Rece; butter is rank 503/Rece. Meanwhile generic Fruct is rank 17/Fierbinte. The target description foregrounds walnut and the two major holidays, yet Crăciun and Paște are unresolved inputs. For an easy target, this rejects a normal player model of the dish after rewarding a generic category route. The objection is about current feedback, not target obscurity or the validity of the new flour edge.",
+      "factual_anchor": "DEX defines the dish from sweet leavened dough and longstanding sources attest it across generations. PRO TV's five-generation recipe uses walnut and cocoa and explicitly ties it to Easter and Christmas; the 2025 La Măruță cozonac contest supplies an independent current general-audience signal.",
+      "sources": [
+        "https://dexonline.ro/definitie/cozonac",
+        "https://assets.protv.ro/assets/regulamente/Regulament-Cozonacul-de-aur-Paste-2025.pdf",
+        "https://foodstory.protv.ro/deserturi/chef-adrian-hadean-dezvaluie-reteta-de-cozonac-cu-nuca-transmisa-in-familia-lui-de-cinci-generatii",
+        "https://agerpres.ro/social/2021/04/29/traditii-in-bucate-cozonac-moldovenesc-reinventat-dar-cu-acelasi-gust-desavarsit--705669"
+      ]
+    },
+    {
+      "ref": "contexto[1]",
+      "target": "n_v3gas_clatite",
+      "label": "Clătite",
+      "judgment": "drop_before_staging",
+      "criteria": {
+        "C1": "pass: concrete, spontaneously nameable food",
+        "C2": "pass: a historical dictionary record and independent 2022/2024/2025 national-media use support easy-band familiarity",
+        "C3": "fail on whole-neighborhood legibility despite nine recognizable direct predecessors: a common filling alternative receives the coldest band next to an equivalent-use hot filling",
+        "C4": "minimum pass only: flour, dessert, egg and dulceață are one hop/Fierbinte and milk is two hops/Cald; the minimum does not excuse the gem/dulceață contradiction",
+        "C5": "pass: standalone Clătite under gastronomie dominantly names the dish; the participial/adjectival form of a clăti requires syntactic context",
+        "C6": "pass: salience 0.7951 exceeds the easy threshold"
+      },
+      "refute_first": "This is the closer case: flour ranks 2, dessert 3, egg 5 and dulceață 7, all Fierbinte, with milk rank 40/Cald. Those are several excellent openers and formally satisfy C4. The remaining contradiction is still material at easy difficulty. Romanian culinary sources present gem and dulceață as ordinary alternative clătite fillings; DEX defines gem as a fruit-and-sugar preserve. Yet Dulceață is one hop/Fierbinte while the accepted Gem projection is six hops/rank 1699/Inghetat; butter and honey are likewise six hops/Inghetat. The service therefore gives a confident, severely misleading score for a conventional filling rather than merely lacking an obscure term. Familiarity and four good openers do not make that whole-player path coherent. A future repair should preserve gem as a distinct guess and improve association feedback, not turn it into an exact Dulceață answer.",
+      "factual_anchor": "DLRLC defines clătită as a thin cooked preparation with jam, cheese or vegetables. AGERPRES lists the common flour/egg/milk batter and both sweet and savory fillings. PRO TV's 2025 broadcast demonstrates savory cheese filling and a jam-filled dessert variant, while an older Romanian clătite business profile lists both dulceață and gem fillings in the same menu context.",
+      "sources": [
+        "https://dexonline.ro/definitie/cl%C4%83tit%C4%83/909496",
+        "https://dexonline.ro/intrare/gem/22871",
+        "https://agerpres.ro/zigzag/2022/02/01/it-s-today-my-favorite-day-2-februarie---ziua-cartitei-a-cititului-cu-voce-tare-si-a-clatitelor--857650",
+        "https://www.protv.ro/emisiuni/vorbeste-lumea/articol/116358-majda-face-senzatie-la-vorbeste-lumea-care-este-secretul-clatitelor-care-au-innebunit-toata-echipa",
+        "https://foodstory.protv.ro/eveniment/interviu-foodstory-doua-fete-indragostite-de-clatite-vand-bunatati-pe-doua-roti-la-creperie-d-rsquo-amour"
+      ]
+    }
+  ],
+  "overall": {
+    "judgment_counts": {
+      "drop_before_staging": 2,
+      "advance_to_staging": 0
+    },
+    "conclusion": "Both raw candidates are factually sound, familiar and unambiguous, but neither should stage on the bound V77 graph. Each satisfies C4's explicit at-least-one-warm-opener minimum. The independent drop rests on severe contradictory feedback for defining ordinary guesses at usor difficulty, which fails whole-neighborhood legibility and the rubric's broader fairness purpose.",
+    "limits": "Independent agent review, not a human Romanian playtest. No candidate, graph, projection, source or fixture file was changed. A later graph/projection change requires fresh bound probes and review."
+  }
+}

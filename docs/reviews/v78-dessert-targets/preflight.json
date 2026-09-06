@@ -1,0 +1,18 @@
+{
+  "command": "PYTHONPATH=.:scripts <python> import_candidates.preflight_candidates(<scratch>/import); pack_only_topology_errors; candidate_import_status for both verdicts",
+  "mode": "read-only preflight; no importer transaction or staging",
+  "bound_categories": [
+    "gastronomie"
+  ],
+  "raw_candidate_count": 2,
+  "quality_verdicts": {
+    "contexto[0]": "drop",
+    "contexto[1]": "drop"
+  },
+  "staging_statuses": [
+    null,
+    null
+  ],
+  "topology_errors": [],
+  "candidate_sha256": "sha256:7a7c22fba430bbd23d84dd33d78979ba6b28670338151daeacf7999dce621b38"
+}

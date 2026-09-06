@@ -160,3 +160,29 @@ Ruff/docs/whitespace GREEN. ADR-0108 and `docs/reviews/v77-flour-associations/` 
 bounded acceptance, rejected-bread evidence, hashes, reproduction and exact results.
 Landing is local only; production/feedback/player/device/legal verification gates
 remain as recorded in BETA_CANDIDATE. Next: fresh Cozonac/Clătite target reviews.
+
+
+## V78 — fresh dessert-target screening, 2026-09-06
+
+Valid until: the next relevant food-feedback or target wave — then treat as history.
+
+V77 was already on clean local main at `9abbc52`. Re-reviewed the two existing
+Cozonac/Clătite candidates using a new exact two-row batch, independent factual
+screening, an ordinary-player quality screen and adversarial diagnosis. All 68
+fixed-target API probes were reproduced byte-exact by a second executor of the
+same runner. Flour now works, but Nucă remains cold for Cozonac and Gem remains
+frozen for Clătite while Dulceață is hot. Both targets are dropped before staging;
+no pending IDs or promotions were created. Gem and Nucă currently borrow Miere
+in Contexto's projection table. ADR-0109 and the V78 review archive preserve the
+negative result and the bounded next Gem-feedback hypothesis.
+
+All nine generated/ledger artifacts remain byte-identical to V77; runtime,
+frontend assets, existing content and session limits are untouched. Fresh checks:
+91 focused tests on each of Python 3.12.3/3.14.6, both content validators,
+read-only batch preflight, 173 native frontend tests, clean npm install/audit,
+lint/typecheck and bundle budget. V77's full backend/accounts/browser evidence
+remains prior evidence; those suites were not rerun for documentation-only V78.
+Ruff, docs and whitespace checks are recorded in the V78 verification file.
+No push, deployment or human-playtest claim. The next wave should assess Gem's
+feedback anchor with distinct projection identity and exact-win/privacy guards,
+then review effects across current targets before any change or promotion.

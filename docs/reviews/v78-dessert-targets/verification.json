@@ -1,0 +1,140 @@
+{
+  "date": "2026-09-06",
+  "baseline_commit": "9abbc5289d97881ccd7a927c779fccfaacfe8e91",
+  "runtimes": {
+    "python312": "3.12.3",
+    "python314": "3.14.6",
+    "node": "24.19.0",
+    "npm": "11.17.0"
+  },
+  "scope": "Documentation and negative raw-candidate review only; all runtime/source/generated artifacts unchanged",
+  "not_rerun": [
+    "full backend suite",
+    "accounts suite",
+    "desktop/mobile browser suite",
+    "frontend build"
+  ],
+  "retained_evidence": "V77 verification.json records 983 full backend checks and53accounts on each Python, plus108browser journeys; those are previous results, not V78 reruns. No rebuilding tracked frontend assets.",
+  "checks": {
+    "targeted312": {
+      "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_wordgames_contexto.py tests/test_v76_romanian_input_senses.py tests/test_v77_flour_associations.py -q -o addopts=\"\"",
+      "exit_code": 0,
+      "log_sha256": "9cbfc15ac13af1f2871487045e2cb82b0f95027aba20626fe4d793cc161bc037",
+      "tail": [
+        "........................................................................ [ 79%]",
+        "...................                                                      [100%]",
+        "91 passed in 9.88s"
+      ]
+    },
+    "targeted314": {
+      "command": "PYTHONPATH=. <scratch>/py314/bin/python -m pytest tests/test_wordgames_contexto.py tests/test_v76_romanian_input_senses.py tests/test_v77_flour_associations.py -q -o addopts=\"\"",
+      "exit_code": 0,
+      "log_sha256": "eb649a5091108b963552b492417ad5fe46ff8e39417f9557be303eefa4853b31",
+      "tail": [
+        "........................................................................ [ 79%]",
+        "...................                                                      [100%]",
+        "91 passed in 10.34s"
+      ]
+    },
+    "fixture": {
+      "command": "PYTHONPATH=. <python312> scripts/validate_fixture.py",
+      "exit_code": 0,
+      "log_sha256": "04d3922145859011327396909af07bc4cebf98c8cf6e75fdc289f2521d5a1272",
+      "tail": [
+        "  [  ok] puzzle_ids_resolve           0 error(s)",
+        "  [  ok] puzzle_shortest_path         0 error(s)",
+        "  [  ok] puzzle_category_scope        0 error(s)",
+        "  [  ok] puzzle_distractor_shortcut   0 error(s)",
+        "------------------------------------------------------------",
+        "GREEN: fixture is valid (0 errors)"
+      ]
+    },
+    "pack": {
+      "command": "PYTHONPATH=. <python312> scripts/validate_games_pack.py",
+      "exit_code": 0,
+      "log_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+      "tail": [
+        "  unique_ids               ok",
+        "  playability              ok",
+        "  meta_counts              ok",
+        "  id_high_water            ok",
+        "",
+        "games pack GREEN"
+      ]
+    },
+    "frontend_install": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm ci",
+      "exit_code": 0,
+      "log_sha256": "da68658a58402877195f736178d6c1492617ae6078c53633423a7715665089af",
+      "tail": [
+        "added 171 packages, and audited 172 packages in 1s",
+        "",
+        "46 packages are looking for funding",
+        "  run `npm fund` for details",
+        "",
+        "found 0 vulnerabilities"
+      ]
+    },
+    "frontend_native": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm test",
+      "exit_code": 0,
+      "log_sha256": "a974c1761e0c556ced742c3f6528569adea7a598e2cb5db4f939fc628a525009",
+      "tail": [
+        "ℹ pass 173",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 362.762482"
+      ],
+      "result": "173 passed"
+    },
+    "frontend_lint": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm run lint",
+      "exit_code": 0,
+      "log_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 lint",
+        "> eslint .",
+        ""
+      ]
+    },
+    "frontend_typecheck": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm run typecheck",
+      "exit_code": 0,
+      "log_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 typecheck",
+        "> tsc --noEmit",
+        ""
+      ]
+    },
+    "frontend_bundle": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm run check:bundle",
+      "exit_code": 0,
+      "log_sha256": "ff5f74fc33a8767e2f3d406bf9184d98122b943cf9adbfdc7bc1ac45ff0b2be7",
+      "tail": [
+        "",
+        "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+        "     8.23 KiB  assets/index-DiCPhhaT.css",
+        "   110.50 KiB  assets/index-SV5smC6j.js",
+        "   118.73 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ]
+    },
+    "candidate_preflight": {
+      "evidence": "preflight.json",
+      "result": "Complete exact-batch factual/quality bindings pass; both drops map to no staging status; no transaction ran"
+    },
+    "probe_reproduction": {
+      "evidence": "reproduction.json",
+      "result": "68 API probes, second execution of same runner byte-exact"
+    },
+    "preservation": {
+      "evidence": "preservation.json",
+      "result": "Nine generated/ledger artifacts byte-identical to V77; no source/runtime edits"
+    }
+  }
+}

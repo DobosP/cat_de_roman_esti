@@ -1,0 +1,118 @@
+#!/usr/bin/env python3
+"""Capture fixed-target Contexto feedback through the real Django API, offline.
+
+Run from any checkout:
+  PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python \
+    /home/dobo/work/_temp/v78-dessert-targets/runtime_openers.py \
+    --root /path/to/cat_de_roman_esti --out /path/to/runtime-openers.json
+
+This creates one bounded temporary Contexto session per probe and deletes it after the
+response. It does not select from, stage, or modify the games pack.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import sys
+from pathlib import Path
+
+TARGETS = ("n_gas_cozonac", "n_v3gas_clatite")
+ORDINARY_INPUTS = (
+    "făină", "zahăr", "ou", "ouă", "lapte", "unt", "desert", "gem", "miere",
+    "nucă", "sărbătoare", "sărbători", "Crăciun", "Paște", "cuptor", "fruct",
+    "ciocolată", "dulceață", "cacao", "cocoa", "rahat", "stafide", "aluat", "tigaie",
+)
+SPELLING_AND_WIN_INPUTS = {
+    "n_gas_cozonac": ("faina", "zahar", "nuca", "cozonac", "COZONAC", "cozonacul", "cozonacului"),
+    "n_v3gas_clatite": ("faina", "ciocolata", "clătite", "clatite", "CLATITE", "clătitele", "clătită"),
+}
+NEGATIVE_CONTROLS = ("stilou", "fotbal", "curcubeu")
+PUBLIC_FIELDS = ("id", "label", "distance", "rank", "temperature", "closeness")
+
+
+def _edge_brief(svc, src: str, dst: str, *, direction: str) -> dict[str, object]:
+    edge = svc.link(src, dst)
+    assert edge is not None
+    neighbor = dst if direction == "outgoing" else src
+    return {
+        "id": neighbor,
+        "label": svc.label(neighbor),
+        "relation": edge.relation,
+        "label_ro": edge.label_ro,
+        "strength": edge.strength,
+    }
+
+
+def _target_neighborhood(svc, target: str) -> dict[str, object]:
+    return {
+        "target": target,
+        "label": svc.label(target),
+        "outgoing": [
+            _edge_brief(svc, target, node_id, direction="outgoing")
+            for node_id in svc.neighbor_ids(target)
+        ],
+        "incoming": [
+            _edge_brief(svc, node_id, target, direction="incoming")
+            for node_id in svc.predecessor_ids(target)
+        ],
+    }
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--root", type=Path, required=True)
+    parser.add_argument("--out", type=Path, required=True)
+    args = parser.parse_args()
+    root = args.root.resolve()
+    sys.path.insert(0, str(root))
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cat_de_roman_esti.web.settings")
+    import django
+    django.setup()
+    from django.test import Client
+    from cat_de_roman_esti.wordgames import contexto
+    from cat_de_roman_esti.wordgames.service import get_service
+
+    svc = get_service()
+    probes: list[dict[str, object]] = []
+    for target in TARGETS:
+        inputs = (*ORDINARY_INPUTS, *SPELLING_AND_WIN_INPUTS[target], *NEGATIVE_CONTROLS)
+        for text in inputs:
+            game_id = contexto.store.create(contexto._build_session(target, "usor", None))
+            try:
+                response = Client().post(
+                    f"/api/wordgames/contexto/games/{game_id}/guess",
+                    {"text": text},
+                    content_type="application/json",
+                )
+                body = response.json()
+                guess = body.get("guesses", [])
+                probes.append({
+                    "target": target,
+                    "target_label": svc.label(target),
+                    "input": text,
+                    "resolved_id": svc.resolve(text),
+                    "status": response.status_code,
+                    "ok": body.get("ok"),
+                    "won": body.get("won", False),
+                    "attempts": body.get("attempts"),
+                    "answer_hidden": "target" not in body,
+                    "guess": {key: guess[0][key] for key in PUBLIC_FIELDS if key in guess[0]} if guess else None,
+                    "message": body.get("message"),
+                    "suggestions": body.get("suggestions", []),
+                })
+            finally:
+                contexto.store.delete(game_id)
+    payload = {
+        "method": "fixed target sessions via /api/wordgames/contexto/games/<id>/guess; temporary sessions deleted",
+        "fixture_build_version": "fixture-v77-flour-associations",
+        "targets": [_target_neighborhood(svc, target) for target in TARGETS],
+        "probes": probes,
+    }
+    args.out.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"wrote {args.out}: {len(probes)} API probes")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

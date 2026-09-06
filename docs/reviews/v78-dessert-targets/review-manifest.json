@@ -1,0 +1,70 @@
+{
+  "schema": "v78-negative-candidate-review-v1",
+  "baseline_commit": "9abbc5289d97881ccd7a927c779fccfaacfe8e91",
+  "reviewers": {
+    "candidate_author_and_probe_runner": "wave_audit",
+    "raw_quality_screen": "root",
+    "factual_and_adversarial_review": "session_refactor",
+    "independent_source_diagnosis": "resume_refactor",
+    "second_probe_execution": "root",
+    "final_documentation_review": "wave_audit"
+  },
+  "coverage": "2 raw candidates;68 API probes;both dropped before staging. Independent agent judgments, not human playtests. No V2 pending-dossier artifact.",
+  "archive_files": {
+    "ADVERSARIAL_REVIEW.md": "sha256:c0468a2e2c642d01b9da0b03731b0651b26e116db9926e16af7ee276761c7d99",
+    "DIAGNOSIS.md": "sha256:67904c223f8dbc0076f97c2bdccc910b726930321f2a0c067fe1bddc20af6c52",
+    "FACTUAL_REVIEW.md": "sha256:489ce67c5913463b64c53dc0b5b778eabf29c131f980eda3e287801b17d34119",
+    "PROBE_FINDINGS.md": "sha256:44fc2f8606ed81494affc948c46420d7829cb643ea77bbf2e783489aa432816a",
+    "README.md": "sha256:111e6de87b936fec0de537abc96bd14e84495d89ae934bafbbbde9ae531c5c8c",
+    "adversarial-review.json": "sha256:2266e9a3d6add10b7981539123419bedfc3c70aeee42486f330969cc278ea780",
+    "candidate-metrics.json": "sha256:6fb7b050711a802e7616e7f79abac427f64685f701d75a4965b46f9abe7bf531",
+    "gastronomie/candidates.json": "sha256:7a7c22fba430bbd23d84dd33d78979ba6b28670338151daeacf7999dce621b38",
+    "gastronomie/verify_factual.json": "sha256:67241b37b3a4cb5f25e2847e31484d9134e0e972d28475afdcfddf2f4d5b0147",
+    "gastronomie/verify_quality.json": "sha256:1244dfec1792796234456b3268438bee822859867627deb556e52b3a8af9dd50",
+    "implementation-review.json": "sha256:afaf52edc699b3ecc56b8cc8779db6530cf7c27ebe4d2d261e5fa838e3c8ef15",
+    "preflight.json": "sha256:fe60104ab74bcfb1350028812c3fea7b1a335fa4bc73c88c8bb98ffb32b814d1",
+    "preservation.json": "sha256:dc0896a9bed241f1bdab45e72ae88ba1d464c041595fe305e0903e9b55d92816",
+    "reproduction.json": "sha256:73473c5676d84c814cec854f065ef86f228b2f6ba967592caa6f7fba1ce2b791",
+    "runtime-openers.json": "sha256:fc438e6698094ae7bf0720c30341083586128143ebf5b55a01a124d34e6bee80",
+    "runtime-openers.py.txt": "sha256:1730b8e77aff1ce1a434d3bc96d70f44023f913b46271e4be0727f48b07fc19b",
+    "verification.json": "sha256:9d4bca1a3431301a91f8b39e878a16cabb7866d0b5d022aba5f58400551b844f"
+  },
+  "source_files": {
+    "docs/CRITIQUE_RUBRIC.md": "sha256:29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+    "docs/PACK_ONLY_CONTENT_WAVES.md": "sha256:27879db6522466637b97f9d17430af7aeb961e13b4923c9269c74aeb93ea77a9",
+    "docs/STATUS.md": "sha256:63a86578c3c552442f74ae7cbabc238f182171552dfa6e9a1cd4977910316812",
+    "docs/BETA_CANDIDATE.md": "sha256:49656eb92de6e61aa986f1837b113af4220a94f88594a7428fca9ce702e4a97c",
+    "docs/adr/0109-defer-dessert-targets-after-feedback-review.md": "sha256:99d7b1b0fcb2e82bc7a7b301215d9b3fd4c394e0d5891b446cd3f443a5ed84a7",
+    "scripts/import_candidates.py": "sha256:09dc1cfaddf7ac8ea4bd4f376efe8e605ede88f1c7a8005fbb0d8caac58d46c2",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "sha256:f87364166b58ed2096a1d060ee94af95a2fb731813160d03ca8e58e2e0a31fe4",
+    "cat_de_roman_esti/wordgames/contexto.py": "sha256:e248eed373c3a732f4316b52b2c9114942f3db29cf3594fcc8ec8ce99eed676d",
+    "cat_de_roman_esti/wordgames/service.py": "sha256:abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "sha256:c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370"
+  },
+  "final_static_checks": {
+    "ruff": {
+      "command": "PYTHONPATH=. <python312> -m ruff check",
+      "exit_code": 0,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "output": "All checks passed!\n"
+    },
+    "docs": {
+      "command": "python3 /home/dobo/work/agent-ops/scripts/check_docs.py .",
+      "exit_code": 0,
+      "log_sha256": "db6dd9bbc5c475130e84ca048aa85d9e4562c167172910a2d7b38bcbdc920bc5",
+      "output": "# check_docs /home/dobo/work/_worktrees/cat_de_roman_esti/content__v78-dessert-targets\nfiles=31 dead_links=0 stale_terms=0 retired_verbs=0 orphans=0\n\n## dead links\n(none)\n\n## stale model terms\n(none)\n\n## retired ops verbs\n(none)\n\n## orphan docs\n(none)\n"
+    },
+    "whitespace": {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output": ""
+    }
+  },
+  "scope_notes": [
+    "Manifest excludes its own bytes to avoid a circular binding.",
+    "Source and archive paths identify the reviewed local wave; original raw-review scratch paths are provenance, archived files retain exact original bytes.",
+    "Source diagnosis V79 predictions are hypotheses; its preliminary unarchived target sweep is not accepted repair-impact evidence.",
+    "All content and runtime paths are unchanged from baseline main; no candidate import/apply transaction ran."
+  ]
+}
