@@ -1,0 +1,106 @@
+{
+  "schema": "v80-clatite-public-api-probe-v1",
+  "scope": "real Django create/guess routes; selected pack ID read only from private test oracle",
+  "probes": [
+    {
+      "seed": 5,
+      "create_url": "/api/wordgames/contexto/games?seed=5&category=gastronomie&difficulty=usor",
+      "create_status": 200,
+      "selected_pack_id_private_test_oracle": "ct_gastronomie_300",
+      "create_target_hidden": true
+    },
+    {
+      "seed": 6,
+      "create_url": "/api/wordgames/contexto/games?seed=6&category=gastronomie&difficulty=usor",
+      "create_status": 200,
+      "selected_pack_id_private_test_oracle": "ct_gastronomie_319",
+      "create_target_hidden": true
+    },
+    {
+      "seed": 19,
+      "create_url": "/api/wordgames/contexto/games?seed=19&category=gastronomie&difficulty=usor",
+      "create_status": 200,
+      "selected_pack_id_private_test_oracle": "ct_gastronomie_318",
+      "create_target_hidden": true
+    },
+    {
+      "seed": 20,
+      "create_url": "/api/wordgames/contexto/games?seed=20&category=gastronomie&difficulty=usor",
+      "create_status": 200,
+      "selected_pack_id_private_test_oracle": "ct_gastronomie_320",
+      "create_target_hidden": true,
+      "play": {
+        "warm_status": 200,
+        "warm_input": "făină",
+        "warm_guess": {
+          "id": "n_v24_food_pantry_faina",
+          "label": "Făină",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "warm_won": false,
+        "warm_target_hidden": true,
+        "win_status": 200,
+        "win_input": "clătite",
+        "win_won": true,
+        "win_attempts": 2,
+        "win_guess": {
+          "id": "n_v3gas_clatite",
+          "label": "Clătite",
+          "distance": 0,
+          "rank": 1,
+          "temperature": "Gasit",
+          "closeness": 100,
+          "attempt_number": 2
+        },
+        "score": 940
+      }
+    },
+    {
+      "seed": 46,
+      "create_url": "/api/wordgames/contexto/games?seed=46&category=gastronomie&difficulty=usor",
+      "create_status": 200,
+      "selected_pack_id_private_test_oracle": "ct_gastronomie_320",
+      "create_target_hidden": true,
+      "play": {
+        "warm_status": 200,
+        "warm_input": "făină",
+        "warm_guess": {
+          "id": "n_v24_food_pantry_faina",
+          "label": "Făină",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "warm_won": false,
+        "warm_target_hidden": true,
+        "win_status": 200,
+        "win_input": "clătite",
+        "win_won": true,
+        "win_attempts": 2,
+        "win_guess": {
+          "id": "n_v3gas_clatite",
+          "label": "Clătite",
+          "distance": 0,
+          "rank": 1,
+          "temperature": "Gasit",
+          "closeness": 100,
+          "attempt_number": 2
+        },
+        "score": 940
+      }
+    }
+  ],
+  "v75_seed_maintenance": {
+    "seed_5_before": "ct_gastronomie_318",
+    "seed_5_after": "ct_gastronomie_300",
+    "seed_6_before": "ct_gastronomie_319",
+    "seed_6_after": "ct_gastronomie_319",
+    "replacement_seed_for_ct_gastronomie_318": 19
+  }
+}

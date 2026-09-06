@@ -1,0 +1,330 @@
+{
+  "schema": "v80-clatite-independent-selection-impact-v1",
+  "valid_until": "the pack, rankings, derived catalog, selector implementations, or V80 candidate changes",
+  "inputs": {
+    "baseline": {
+      "path": "/home/dobo/work/_temp/v80-clatite-target/impact/baseline.json",
+      "sha256": "07232cc0228becbea98ce98b4c17969694b88fbaf274bad96ac56ad4d91382d5"
+    },
+    "candidate": {
+      "path": "/home/dobo/work/_temp/v80-clatite-target/impact/candidate.json",
+      "sha256": "d82edf7810bfd67b35eee2e0e01b196afa5c777e4d70eacaba6618b0a3de067c"
+    },
+    "comparison": {
+      "path": "/home/dobo/work/_temp/v80-clatite-target/impact/comparison.json",
+      "sha256": "0201c59c6aca80f95d1051f0625ce1c85a7ae26388d47923eb3696c5189d3ea0"
+    },
+    "public_api": {
+      "path": "/home/dobo/work/_temp/v80-clatite-target/impact/public-api.json",
+      "sha256": "7396adaa42bac50713ceb8ede14a43fbf43592d98eda04b6d429528a2fb6647b"
+    },
+    "root_artifact_delta": {
+      "path": "/home/dobo/work/_temp/v80-clatite-target/artifact-delta.json",
+      "sha256": "aec41d40408dc94d6103c7d71e4de617679c65c4a09866d920f947c20405721b"
+    },
+    "baseline_tree_manifest": {
+      "path": "/home/dobo/work/_temp/v80-clatite-target/impact/baseline-tree/manifest.json",
+      "sha256": "475064cf0dd6bfaa100a4e41c348a824f69194c81858966ad1fbd88c2128ee57"
+    }
+  },
+  "source_bindings": {
+    "baseline_git_head": "9c208a96628b3d92910637fa634d4c998fe0e67d",
+    "baseline_packs_source_sha256": "6404b4c8ed2813680a684d9e33e6ea33c6f968c95e025bd2a0eb1af3b1349607",
+    "baseline_derived_source_sha256": "d08ed9550f55d9abe2ab5439ecba8b03ea4f7ba69ba3d577541882a0452c0e60",
+    "candidate_packs_source_sha256": "6404b4c8ed2813680a684d9e33e6ea33c6f968c95e025bd2a0eb1af3b1349607",
+    "candidate_derived_source_sha256": "f1346b11cb5beda43164bcb1f407705834a750a48e728d925b5215f53066148d"
+  },
+  "artifact_sha256": {
+    "before": {
+      "cat_de_roman_esti/fixtures/kg_sample.json": "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+      "tests/fixtures/kg_sample.json": "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+      "cat_de_roman_esti/fixtures/games_pack.json": "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5",
+      "tests/fixtures/games_pack.json": "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5",
+      "cat_de_roman_esti/fixtures/board_rankings_v37.json": "53c2542b845d2560a900712381ab4c28cb1b9789beaae9690639647871e905d3",
+      "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "84aaa772746dac0eb4e1366738f467afad86c543c7430cb67810475d5a296878",
+      "tests/fixtures/cat_mobile_app_pack_contract.json": "869499abccc3e6b5befe5d889a0e24c4d3bd67096c4d0a69c58d925680612a28",
+      "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29",
+      "cat_de_roman_esti/fixtures/contexto_impact_reserve_v69.json": "4c41d092c895c61aaccfbda3cb9522c4d5767a88d9af9343efccc182f71e7612"
+    },
+    "after": {
+      "cat_de_roman_esti/fixtures/kg_sample.json": "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+      "tests/fixtures/kg_sample.json": "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+      "cat_de_roman_esti/fixtures/games_pack.json": "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29",
+      "tests/fixtures/games_pack.json": "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29",
+      "cat_de_roman_esti/fixtures/board_rankings_v37.json": "823c5f302bd36c833283038affb1125dc434a1d34fba635e71c06b721cda4cec",
+      "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "0787a4325c84753c739e7900f174cc99f46e9a4d3fbd8ce1e035cdf84c9b6ae2",
+      "tests/fixtures/cat_mobile_app_pack_contract.json": "869499abccc3e6b5befe5d889a0e24c4d3bd67096c4d0a69c58d925680612a28",
+      "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29",
+      "cat_de_roman_esti/fixtures/contexto_impact_reserve_v69.json": "4c41d092c895c61aaccfbda3cb9522c4d5767a88d9af9343efccc182f71e7612"
+    },
+    "additional_test_mirrors": {
+      "tests/fixtures/board_rankings_v37.json": {
+        "before": "53c2542b845d2560a900712381ab4c28cb1b9789beaae9690639647871e905d3",
+        "after": "823c5f302bd36c833283038affb1125dc434a1d34fba635e71c06b721cda4cec"
+      },
+      "tests/fixtures/derived_catalog_v38.json": {
+        "before": "84aaa772746dac0eb4e1366738f467afad86c543c7430cb67810475d5a296878",
+        "after": "0787a4325c84753c739e7900f174cc99f46e9a4d3fbd8ce1e035cdf84c9b6ae2"
+      }
+    }
+  },
+  "counts": {
+    "before": {
+      "pack_records": 620,
+      "approved_pack_records": 612,
+      "pending_pack_records": 8,
+      "ranking_rows": 620,
+      "ranking_eligible": 450,
+      "derived_boards": 336
+    },
+    "after": {
+      "pack_records": 621,
+      "approved_pack_records": 613,
+      "pending_pack_records": 8,
+      "ranking_rows": 621,
+      "ranking_eligible": 451,
+      "derived_boards": 336
+    }
+  },
+  "preservation": {
+    "all_620_previous_pack_records_exact": true,
+    "all_8_previous_pending_holds_exact": true,
+    "old_ranking_quality_status_eligibility_exact": true,
+    "old_rank_changes": {
+      "count": 158,
+      "games": [
+        "contexto"
+      ],
+      "delta_counts": {
+        "1": 158
+      }
+    },
+    "old_global_selection_weight_changes": {
+      "ct_meme_net_064": {
+        "before": 4,
+        "after": 3
+      }
+    },
+    "all_336_derived_rows_and_payloads_exact": true,
+    "changed_artifacts": {
+      "cat_de_roman_esti/fixtures/games_pack.json": {
+        "before": "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5",
+        "after": "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29"
+      },
+      "tests/fixtures/games_pack.json": {
+        "before": "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5",
+        "after": "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29"
+      },
+      "cat_de_roman_esti/fixtures/board_rankings_v37.json": {
+        "before": "53c2542b845d2560a900712381ab4c28cb1b9789beaae9690639647871e905d3",
+        "after": "823c5f302bd36c833283038affb1125dc434a1d34fba635e71c06b721cda4cec"
+      },
+      "cat_de_roman_esti/fixtures/derived_catalog_v38.json": {
+        "before": "84aaa772746dac0eb4e1366738f467afad86c543c7430cb67810475d5a296878",
+        "after": "0787a4325c84753c739e7900f174cc99f46e9a4d3fbd8ce1e035cdf84c9b6ae2"
+      }
+    }
+  },
+  "new_record": {
+    "difficulty": "usor",
+    "target": "n_v3gas_clatite",
+    "id": "ct_gastronomie_320",
+    "category": "gastronomie",
+    "source": "ai",
+    "status": "approved"
+  },
+  "new_ranking": {
+    "id": "ct_gastronomie_320",
+    "game": "contexto",
+    "status": "approved",
+    "romanian_familiarity": 78,
+    "play_quality": 90,
+    "pilot_score": 83,
+    "rank": 52,
+    "pilot_eligible": true,
+    "selection_weight": 4
+  },
+  "contexto_gastronomie_usor_shelf": {
+    "before_count": 8,
+    "after_count": 9,
+    "new_target": {
+      "pilot_score": 83,
+      "global_rank": 52,
+      "global_selection_weight": 4,
+      "filtered_shelf_rank": 9,
+      "filtered_shelf_weight": 1
+    },
+    "effective_weight_changes": {
+      "ct_gastronomie_019": {
+        "before": {
+          "pilot_score": 88,
+          "global_rank": 27,
+          "global_selection_weight": 5,
+          "filtered_shelf_rank": 6,
+          "filtered_shelf_weight": 2
+        },
+        "after": {
+          "pilot_score": 88,
+          "global_rank": 27,
+          "global_selection_weight": 5,
+          "filtered_shelf_rank": 6,
+          "filtered_shelf_weight": 3
+        }
+      },
+      "ct_gastronomie_127": {
+        "before": {
+          "pilot_score": 84,
+          "global_rank": 46,
+          "global_selection_weight": 4,
+          "filtered_shelf_rank": 8,
+          "filtered_shelf_weight": 1
+        },
+        "after": {
+          "pilot_score": 84,
+          "global_rank": 46,
+          "global_selection_weight": 4,
+          "filtered_shelf_rank": 8,
+          "filtered_shelf_weight": 2
+        }
+      },
+      "ct_gastronomie_320": {
+        "before": null,
+        "after": {
+          "pilot_score": 83,
+          "global_rank": 52,
+          "global_selection_weight": 4,
+          "filtered_shelf_rank": 9,
+          "filtered_shelf_weight": 1
+        }
+      }
+    }
+  },
+  "same_artifact_determinism": {
+    "repeat_runs": 2,
+    "scenario_count": 7,
+    "sequences_exact": 28
+  },
+  "selection_summary": {
+    "alchimie:unfiltered": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 0,
+        "unchanged_count": 100
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 0,
+        "unchanged_count": 30
+      }
+    },
+    "conexiuni:unfiltered": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 0,
+        "unchanged_count": 100
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 0,
+        "unchanged_count": 30
+      }
+    },
+    "contexto:gastronomie_usor": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 50,
+        "unchanged_count": 50
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 3,
+        "unchanged_count": 27
+      }
+    },
+    "contexto:unfiltered": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 65,
+        "unchanged_count": 35
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 0,
+        "unchanged_count": 30
+      }
+    },
+    "intrusul:unfiltered": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 0,
+        "unchanged_count": 100
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 0,
+        "unchanged_count": 30
+      }
+    },
+    "lant:unfiltered": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 0,
+        "unchanged_count": 100
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 0,
+        "unchanged_count": 30
+      }
+    },
+    "perechi:unfiltered": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 0,
+        "unchanged_count": 100
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 0,
+        "unchanged_count": 30
+      }
+    }
+  },
+  "new_target_reachability": {
+    "contexto:gastronomie_usor": {
+      "seeds": [
+        20,
+        46
+      ],
+      "daily": [
+        "2026-09-18"
+      ]
+    },
+    "contexto:unfiltered": {
+      "seeds": [
+        1,
+        54
+      ],
+      "daily": []
+    }
+  },
+  "public_api": {
+    "seeds_20_and_46": "selected ct_gastronomie_320; create and Făină feedback hide the target; Făină is distance 1/rank 2/Fierbinte; exact Clătite wins on attempt 2 with server score 940",
+    "v75_seed_maintenance": {
+      "seed_5_before": "ct_gastronomie_318",
+      "seed_5_after": "ct_gastronomie_300",
+      "seed_6_before": "ct_gastronomie_319",
+      "seed_6_after": "ct_gastronomie_319",
+      "replacement_seed_for_ct_gastronomie_318": 19
+    }
+  },
+  "review": {
+    "verdict": "accept",
+    "basis": "The single reviewed target is reachable in bounded seeded/daily samples; the other five games remain exact; old records, holds, quality, eligibility, and frozen boards are preserved; rank and ticket shifts are fully bounded; and the real public route demonstrates useful feedback, privacy, and scoring.",
+    "limits": [
+      "100 integer seeds and 30 September 2026 dates are bounded samples, not a distribution proof.",
+      "Selector captures intentionally omit account history, starter mode, and API session creation.",
+      "Public API coverage is limited to five maintenance/new-target seeds and two full Clătite rounds."
+    ]
+  }
+}

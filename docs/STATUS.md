@@ -1,12 +1,13 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-06 — V79 Gem feedback verified locally. Production last checked 2026-08-27.
+Last verified: 2026-09-06 — V80 Clătite target verified locally. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
   V75 landed at `d127abb`; V76 at `9ef9dc7`; V77 at `9abbc52`, all locally.
-  V78 at `010cfd1` deferred both dessert candidates; V79 repairs bounded Gem feedback.
+  V78 at `010cfd1` deferred both dessert candidates; V79 at `9c208a9` repaired bounded Gem feedback.
+  V80 promotes the freshly reviewed Clătite target; Cozonac and bread remain deferred.
   Technical candidate complete; public rollout remains subject to the external gates below.
 - V73 shared session transactions and saved-game lifecycle landed locally at `f75a75c` (ADRs 0098–0100).
 - V74 restores transiently unavailable rounds, rejects stale resume responses, recovers terminal results,
@@ -28,6 +29,9 @@ Last verified: 2026-09-06 — V79 Gem feedback verified locally. Production last
 - V79 gives Gem an authored strong, direct Dulceață neighborhood while retaining its Miere fallback.
   Papanași improves; the other 206 approved targets stay exact. All 473 terms remain unchanged;
   same helper protects scoring/suggestions and exact wins (ADR-0110). No target is promoted.
+- V80 adds only `ct_gastronomie_320` (Clătite), gastronomie/usor, through fresh unanimous
+  dossier-bound review. All 620 prior records and 336 frozen boards remain exact (ADR-0111).
+  Evidence: `docs/reviews/v80-clatite-target/README.md`; no graph/runtime game-logic change.
 - Served KG is `fixture-v77-flour-associations`: 2,364 nodes / 9,219 edges /
   8,450 aliases / 180 puzzles. `kg_real.json` is a thin export and is not the served fixture.
 
@@ -36,25 +40,25 @@ Last verified: 2026-09-06 — V79 Gem feedback verified locally. Production last
 | Game | Total | Approved | Pending | Runtime eligible/preferred |
 |---|---:|---:|---:|---:|
 | Conexiuni | 232 | 232 | 0 | 74 eligible |
-| Cald sau Rece | 209 | 207 | 2 | 203 eligible |
+| Cald sau Rece | 210 | 208 | 2 | 204 eligible |
 | Lanțul Cuvintelor | 97 | 94 | 3 | 94 eligible |
 | Alchimie | 82 | 79 | 3 | 79 eligible |
 | Intrusul | 183 | 183 | 0 | 144 preferred |
 | Perechi | 153 | 153 | 0 | 113 preferred |
 
-Pack **620 = 612 approved + 8 pending**; original ranking **450 eligible**, +2 Contexto targets.
-V77 preserves all 620 pack/ranking rows, 336 frozen boards, 180 puzzles and all aliases/holds.
-Two directed ingredient edges and three node degrees change; mobile and metadata are regenerated.
-Contexto flour/sugar paths and ordinal guess ranks change; board eligibility and weights stay exact.
+Pack **621 = 613 approved + 8 pending**; original four-game ranking **451 eligible**.
+V80 preserves all 620 old pack records, their scores/status/eligibility and all 336 frozen boards.
+158 old Contexto ordinals move +1; one global weight and two existing filtered-shelf weights change.
+KG, mobile payload, aliases, puzzles and holds stay exact. Only generated catalog bindings advance.
 Sessions retain 7,200-second sliding TTL, 1,000 entries per game, per-entry locks, 64 KiB requests,
 bounded histories/caches and server-private answers. V49 retains 104 Lanț rejections; the 70-term
 nonaccepted ledger and V71 `intrigii`/`intrigilor` actionable-fuzzy deny remain intact.
 
 ## Current artifact pins
 
-- `games_pack.json`: `9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5`
-- `board_rankings_v37.json`: `53c2542b845d2560a900712381ab4c28cb1b9789beaae9690639647871e905d3`
-- `derived_catalog_v38.json`: `84aaa772746dac0eb4e1366738f467afad86c543c7430cb67810475d5a296878`
+- `games_pack.json`: `27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29`
+- `board_rankings_v37.json`: `823c5f302bd36c833283038affb1125dc434a1d34fba635e71c06b721cda4cec`
+- `derived_catalog_v38.json`: `0787a4325c84753c739e7900f174cc99f46e9a4d3fbd8ce1e035cdf84c9b6ae2`
 - `kg_sample.json`: `c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370`
 - `cat_mobile_app_pack_contract.json`: `869499abccc3e6b5befe5d889a0e24c4d3bd67096c4d0a69c58d925680612a28`
 - `lant_rejection_tombstones.json`: `e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29`
@@ -76,32 +80,31 @@ mobile public content: `sha256:7e90ec33dfddf74723dcea1ffc0e787c58ee8ae1f457b7152
 
 ## Verification
 
-V79 verification uses the final bounded implementation. Exact commands and source bindings:
-`docs/reviews/v79-gem-feedback/verification.json`. V77/V78 records remain historical evidence.
+V80 exact commands and source/artifact bindings: `docs/reviews/v80-clatite-target/verification.json`.
+V79 verification remains historical evidence for the bounded Gem policy.
 
 | Scope | Verified result |
 |---|---|
-| V79 focused / independent review | 13 focused regressions; independent V79/V44 run 25 passed; factual, impact and implementation reviews approved |
-| V79 backend Python 3.12.3 | 996 passed in 278.39 s; accounts 53 passed in 1.99 s |
-| V79 backend Python 3.14.6 | 996 passed in 247.49 s; accounts 53 passed in 2.12 s |
-| V79 frontend, Node 24.19.0 / npm 11.17.0 | clean install; 173 native passed; lint/typecheck GREEN; npm audit zero findings |
-| V79 real-BFF browser run | 108 desktop/mobile checks passed in 4.2 min against the final bounded runtime |
-| V79 content preservation | All nine generated/ledger artifacts exact; both validators GREEN; all 473 original projection terms exact |
-| V79 impact / privacy | 207 approved targets swept: only Papanași changes; 206 exact. Six of 2,364 nodes borrow Dulceață; Socată excluded; hidden/nonwinning behavior preserved |
+| V80 focused / independent review | 30 V75/V77/V80 cases passed; independent ranking/derived 35 passed; fresh factual, quality, verifier and implementation reviews accepted |
+| V80 backend Python 3.12.3 | 1006 passed in 294.27 s; accounts 53 passed in 2.59 s |
+| V80 backend Python 3.14.6 | 1006 passed in 255.22 s; accounts 53 passed in 3.50 s |
+| V80 frontend, Node 24.19.0 / npm 11.17.0 | clean install; 173 native passed; lint/typecheck GREEN; npm audit zero findings |
+| V80 real-BFF browser run | 108 desktop/mobile checks passed in 4.2 min against final content |
+| V80 content gates | Both validators GREEN; all package/test mirrors exact; 620 prior pack rows and 336 frozen boards exact |
+| V80 selection / public API | Repeated 100-seed and September daily samples deterministic; other five games unchanged; new target hidden, warm and winnable through public create seeds 20/46 |
 | Unchanged frontend build | V75 assets retained; typecheck/bundle GREEN, 118.73/120 KiB initial gzip; no frontend source changed |
-| Final integration | No remaining source/test review finding; Ruff, docs and whitespace GREEN |
+| Final integration | Current pins refreshed; historical hashes reconstructed and raw reviews preserved; Ruff, docs and whitespace GREEN |
 
-The first global Gem anchor trial was rejected for misleading savory feedback. The final
-rule excludes weak, reversed, distractor and indirect routes; no new per-session field/cache.
-V78's 68-probe replay changes only Gem→Clătite; 67 responses remain exact. Full before/after
-receipt and reproducible runners: `docs/reviews/v79-gem-feedback/README.md`.
-Commands/runtime paths: `docs/agent-testing.md`; historical full verification stays in WORKLOG.
-Prior bounded latency/RSS measurements retain their stated limits in the V74 review archive.
+The new target has hot flour/egg/jam and warm milk/cheese paths. Reviewers retained the
+cold butter/oil/honey/nut and unknown chocolate/dough findings as limits, not silent passes.
+The V80 receipt records 158 ordinal changes, one global and two filtered weight changes.
+No session, scoring or graph logic changed. Commands/runtime paths: `docs/agent-testing.md`.
+Historical verification and measured runtime limits remain in WORKLOG and their review archives.
 
 ## Remaining gates
 
-- Next content step: freshly review Clătite after the bounded Gem repair; no promotion is implied.
-  Cozonac’s nut/Gem routes and bread remain deferred; widening local feedback needs new review.
+- Next bounded investigation: honest nut feedback for Cozonac; no mapping or promotion is implied.
+  Cozonac and bread remain deferred. Widening local feedback needs new semantic/impact review.
   Release protocol and external evidence checklist: `docs/BETA_CANDIDATE.md`.
 - Owner selects feedback contact; player and real-device checks remain unrun. Reverify legal operator/contact
   configuration and legal pages per DEPLOY; independent content judgments here are from Codex agents.
@@ -112,4 +115,4 @@ Prior bounded latency/RSS measurements retain their stated limits in the V74 rev
 ## Doc map
 
 - `README.md` / `AGENTS.md`: orientation/contract; `docs/agent-map.md` / `docs/agent-testing.md`: routes/gates.
-- `docs/adr/` (newest 0110), `docs/reviews/`, WORKLOG: decisions/evidence/history.
+- `docs/adr/` (newest 0111), `docs/reviews/`, WORKLOG: decisions/evidence/history.

@@ -1,0 +1,138 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+from pathlib import Path
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cat_de_roman_esti.web.settings")
+
+import django
+
+django.setup()
+
+from django.test import Client
+
+from cat_de_roman_esti.wordgames import contexto
+from cat_de_roman_esti.wordgames.service import get_service
+
+OUT = Path("/home/dobo/work/_temp/v80-clatite-target/impact/public-api.json")
+SEEDS = (5, 6, 19, 20, 46)
+NEW_ID = "ct_gastronomie_320"
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def strings(value):
+    if isinstance(value, str):
+        yield value
+    elif isinstance(value, dict):
+        for item in value.values():
+            yield from strings(item)
+    elif isinstance(value, list):
+        for item in value:
+            yield from strings(item)
+
+
+def target_hidden(body: dict, target_id: str, target_label: str) -> bool:
+    values = set(strings(body))
+    return (
+        "target" not in body
+        and "solution" not in body
+        and target_id not in values
+        and target_label not in values
+    )
+
+
+def main() -> None:
+    client = Client()
+    svc = get_service()
+    probes = []
+    for seed in SEEDS:
+        path = (
+            f"/api/wordgames/contexto/games?seed={seed}"
+            "&category=gastronomie&difficulty=usor"
+        )
+        created_response = client.post(path)
+        created = created_response.json()
+        game_id = created["game_id"]
+        try:
+            with contexto.store.transaction(game_id) as session:
+                if session is None:
+                    raise RuntimeError("new Contexto session disappeared")
+                pack_id = session.pack_id
+                target_id = session.target
+            target_label = svc.label(target_id)
+            row = {
+                "seed": seed,
+                "create_url": path,
+                "create_status": created_response.status_code,
+                "selected_pack_id_private_test_oracle": pack_id,
+                "create_target_hidden": target_hidden(created, target_id, target_label),
+            }
+            if pack_id == NEW_ID:
+                warm_response = client.post(
+                    f"/api/wordgames/contexto/games/{game_id}/guess",
+                    {"text": "făină"},
+                    content_type="application/json",
+                )
+                warm = warm_response.json()
+                win_response = client.post(
+                    f"/api/wordgames/contexto/games/{game_id}/guess",
+                    {"text": "clătite"},
+                    content_type="application/json",
+                )
+                win = win_response.json()
+                row["play"] = {
+                    "warm_status": warm_response.status_code,
+                    "warm_input": "făină",
+                    "warm_guess": warm["guess"],
+                    "warm_won": warm["won"],
+                    "warm_target_hidden": target_hidden(warm, target_id, target_label),
+                    "win_status": win_response.status_code,
+                    "win_input": "clătite",
+                    "win_won": win["won"],
+                    "win_attempts": win["attempts"],
+                    "win_guess": win["guess"],
+                    "score": win["score"],
+                }
+            probes.append(row)
+        finally:
+            if not contexto.store.delete(game_id):
+                raise RuntimeError(f"failed to delete probe session {game_id}")
+    expected = {
+        5: "ct_gastronomie_300",
+        6: "ct_gastronomie_319",
+        19: "ct_gastronomie_318",
+        20: NEW_ID,
+        46: NEW_ID,
+    }
+    assert {row["seed"]: row["selected_pack_id_private_test_oracle"] for row in probes} == expected
+    assert all(row["create_target_hidden"] for row in probes)
+    for row in probes:
+        if row["seed"] in (20, 46):
+            play = row["play"]
+            assert play["warm_won"] is False and play["warm_target_hidden"] is True
+            assert play["warm_guess"]["temperature"] == "Fierbinte"
+            assert play["win_won"] is True and play["win_guess"]["id"] == "n_v3gas_clatite"
+    document = {
+        "schema": "v80-clatite-public-api-probe-v1",
+        "scope": "real Django create/guess routes; selected pack ID read only from private test oracle",
+        "probes": probes,
+        "v75_seed_maintenance": {
+            "seed_5_before": "ct_gastronomie_318",
+            "seed_5_after": "ct_gastronomie_300",
+            "seed_6_before": "ct_gastronomie_319",
+            "seed_6_after": "ct_gastronomie_319",
+            "replacement_seed_for_ct_gastronomie_318": 19,
+        },
+    }
+    OUT.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({"out": str(OUT), "sha256": sha256(OUT)}, indent=2))
+
+
+if __name__ == "__main__":
+    main()

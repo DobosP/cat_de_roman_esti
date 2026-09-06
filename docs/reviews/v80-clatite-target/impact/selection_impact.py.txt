@@ -1,0 +1,412 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import random
+import subprocess
+import sys
+from datetime import date, timedelta
+from pathlib import Path
+
+GAME_PACK = ("conexiuni", "contexto", "lant", "alchimie")
+GAME_DERIVED = ("intrusul", "perechi")
+ARTIFACTS = (
+    "cat_de_roman_esti/fixtures/kg_sample.json",
+    "tests/fixtures/kg_sample.json",
+    "cat_de_roman_esti/fixtures/games_pack.json",
+    "tests/fixtures/games_pack.json",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json",
+    "tests/fixtures/cat_mobile_app_pack_contract.json",
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json",
+    "cat_de_roman_esti/fixtures/contexto_impact_reserve_v69.json",
+)
+PACK_REL = "cat_de_roman_esti/fixtures/games_pack.json"
+RANK_REL = "cat_de_roman_esti/fixtures/board_rankings_v37.json"
+DERIVED_REL = "cat_de_roman_esti/fixtures/derived_catalog_v38.json"
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def canonical(value: object) -> str:
+    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+
+
+def _git(root: Path, *args: str) -> str:
+    return subprocess.check_output(["git", *args], cwd=root, text=True).strip()
+
+
+def _load_runtime(root: Path, pack_raw: dict, rankings_raw: dict, derived_raw: dict):
+    sys.path.insert(0, str(root))
+    from cat_de_roman_esti.wordgames.derived_catalog import DerivedBoard, DerivedCatalog
+    from cat_de_roman_esti.wordgames.packs import GamesPack, _parse_items
+
+    ratings = {row["id"]: row for row in rankings_raw["boards"]}
+    pack = GamesPack(_parse_items(pack_raw, ratings), ranked=True)
+    boards = [
+        DerivedBoard(
+            game=row["game"],
+            category=row["category"],
+            difficulty=row["difficulty"],
+            payload=row["payload"],
+            _catalog_id=row["id"],
+            _source_id=row["source_id"],
+            _romanian_familiarity=row["romanian_familiarity"],
+            _play_quality=row["play_quality"],
+            _standard_score=row["standard_score"],
+            _starter_score=row["starter_score"],
+            _starter_eligible=row["starter_eligible"],
+            _standard_rank=row["standard_rank"],
+            _starter_rank=row["starter_rank"],
+        )
+        for row in derived_raw["boards"]
+    ]
+    return pack, DerivedCatalog(boards)
+
+
+def _pick_sequences(pack, derived) -> dict:
+    dates = [(date(2026, 9, 1) + timedelta(days=i)).isoformat() for i in range(30)]
+    scenarios: dict[str, dict] = {}
+    for game in GAME_PACK:
+        filtered = game == "contexto"
+        scenarios[f"{game}:unfiltered"] = {
+            "selector": "GamesPack; no category/difficulty/history filters",
+            "filtered_shelf_weights": filtered,
+            "seeds": [
+                pack.pick_seeded(
+                    game,
+                    random.Random(seed),
+                    filtered_shelf_weights=filtered,
+                ).id
+                for seed in range(100)
+            ],
+            "daily": [
+                pack.pick_daily(
+                    game,
+                    day,
+                    filtered_shelf_weights=filtered,
+                ).id
+                for day in dates
+            ],
+        }
+    scenarios["contexto:gastronomie_usor"] = {
+        "selector": "GamesPack; category=gastronomie, difficulty=usor, no history",
+        "filtered_shelf_weights": True,
+        "seeds": [
+            pack.pick_seeded(
+                "contexto",
+                random.Random(seed),
+                category="gastronomie",
+                difficulty="usor",
+                filtered_shelf_weights=True,
+            ).id
+            for seed in range(100)
+        ],
+        "daily": [
+            pack.pick_daily(
+                "contexto",
+                day,
+                category="gastronomie",
+                difficulty="usor",
+                filtered_shelf_weights=True,
+            ).id
+            for day in dates
+        ],
+    }
+    for game in GAME_DERIVED:
+        scenarios[f"{game}:unfiltered"] = {
+            "selector": (
+                "DerivedCatalog; no filters/history, starter=False, "
+                "balance_categories=False"
+            ),
+            "filtered_shelf_weights": False,
+            "seeds": [
+                derived.pick_seeded(
+                    game,
+                    random.Random(seed),
+                    starter=False,
+                    balance_categories=False,
+                )._catalog_id
+                for seed in range(100)
+            ],
+            "daily": [derived.pick_daily(game, day)._catalog_id for day in dates],
+        }
+    return scenarios
+
+
+def capture(root: Path, out: Path, phase: str) -> None:
+    root = root.resolve()
+    pack_raw = json.loads((root / PACK_REL).read_text(encoding="utf-8"))
+    rankings_raw = json.loads((root / RANK_REL).read_text(encoding="utf-8"))
+    derived_raw = json.loads((root / DERIVED_REL).read_text(encoding="utf-8"))
+    assert sum(len(pack_raw[game]) for game in GAME_PACK) == len(rankings_raw["boards"])
+    assert {row["id"] for row in rankings_raw["boards"]} == {
+        row["id"] for game in GAME_PACK for row in pack_raw[game]
+    }
+    pack, derived = _load_runtime(root, pack_raw, rankings_raw, derived_raw)
+    first = _pick_sequences(pack, derived)
+    second = _pick_sequences(pack, derived)
+    if first != second:
+        raise RuntimeError("same-artifact selector replay drift")
+    artifact_hashes = {
+        relative: sha256(root / relative)
+        for relative in ARTIFACTS
+        if (root / relative).exists()
+    }
+    document = {
+        "schema": "v80-clatite-selection-snapshot-v1",
+        "phase": phase,
+        "method": {
+            "seed_range": "0..99",
+            "daily_dates": "2026-09-01..2026-09-30",
+            "selector_calls_per_sequence": 130,
+            "same_artifact_repeat_runs": 2,
+            "same_artifact_repeat_exact": True,
+            "pack_construction": (
+                "GamesPack(_parse_items(raw pack, complete raw ranking index), ranked=True)"
+            ),
+            "derived_construction": (
+                "DerivedCatalog from every raw frozen board; production selector methods"
+            ),
+            "sessions_or_api_requests": 0,
+        },
+        "bindings": {
+            "git_head": _git(root, "rev-parse", "HEAD"),
+            "git_status": _git(root, "status", "--short").splitlines(),
+            "packs_source_sha256": sha256(root / "cat_de_roman_esti/wordgames/packs.py"),
+            "derived_source_sha256": sha256(
+                root / "cat_de_roman_esti/wordgames/derived_catalog.py"
+            ),
+            "artifact_sha256": artifact_hashes,
+        },
+        "counts": {
+            "pack_records": sum(len(pack_raw[game]) for game in GAME_PACK),
+            "approved_pack_records": sum(
+                row["status"] == "approved"
+                for game in GAME_PACK
+                for row in pack_raw[game]
+            ),
+            "pending_pack_records": sum(
+                row["status"] == "pending"
+                for game in GAME_PACK
+                for row in pack_raw[game]
+            ),
+            "ranking_rows": len(rankings_raw["boards"]),
+            "ranking_eligible": sum(row["pilot_eligible"] for row in rankings_raw["boards"]),
+            "derived_boards": len(derived_raw["boards"]),
+        },
+        "pack": pack_raw,
+        "rankings": rankings_raw,
+        "derived": derived_raw,
+        "selections": first,
+    }
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({"out": str(out), "sha256": sha256(out), "counts": document["counts"]}, indent=2))
+
+
+def _indexed_pack(snapshot: dict) -> dict[str, dict]:
+    return {
+        row["id"]: row
+        for game in GAME_PACK
+        for row in snapshot["pack"][game]
+    }
+
+
+def _changes(before: list[str], after: list[str], inputs: list[object]) -> dict:
+    rows = [
+        {"input": input_value, "before": old, "after": new}
+        for input_value, old, new in zip(inputs, before, after, strict=True)
+        if old != new
+    ]
+    return {
+        "sample_count": len(before),
+        "changed_count": len(rows),
+        "unchanged_count": len(before) - len(rows),
+        "changes": rows,
+    }
+
+
+def _contexto_gastronomie_usor_shelf(pack: dict[str, dict], rankings: dict[str, dict]) -> dict:
+    eligible = [
+        rankings[item_id]
+        for item_id, row in pack.items()
+        if rankings[item_id]["game"] == "contexto"
+        and row["status"] == "approved"
+        and row["category"] == "gastronomie"
+        and row["difficulty"] == "usor"
+        and rankings[item_id]["pilot_eligible"]
+    ]
+    ordered = sorted(eligible, key=lambda row: (-row["pilot_score"], row["id"]))
+    count = len(ordered)
+    return {
+        row["id"]: {
+            "pilot_score": row["pilot_score"],
+            "global_rank": row["rank"],
+            "global_selection_weight": row["selection_weight"],
+            "filtered_shelf_rank": index + 1,
+            "filtered_shelf_weight": 5 - min(4, (5 * index) // count),
+        }
+        for index, row in enumerate(ordered)
+    }
+
+
+def compare(before_path: Path, after_path: Path, out: Path) -> None:
+    before = json.loads(before_path.read_text(encoding="utf-8"))
+    after = json.loads(after_path.read_text(encoding="utf-8"))
+    bp, ap = _indexed_pack(before), _indexed_pack(after)
+    br = {row["id"]: row for row in before["rankings"]["boards"]}
+    ar = {row["id"]: row for row in after["rankings"]["boards"]}
+    bd = {row["id"]: row for row in before["derived"]["boards"]}
+    ad = {row["id"]: row for row in after["derived"]["boards"]}
+    shared_rank_fields = (
+        "game", "status", "romanian_familiarity", "play_quality", "pilot_score",
+        "pilot_eligible",
+    )
+    rank_field_drift = {
+        item_id: {
+            field: {"before": br[item_id][field], "after": ar[item_id][field]}
+            for field in shared_rank_fields
+            if br[item_id][field] != ar[item_id][field]
+        }
+        for item_id in sorted(br.keys() & ar.keys())
+        if any(br[item_id][field] != ar[item_id][field] for field in shared_rank_fields)
+    }
+    rank_changes = {
+        item_id: {"before": br[item_id]["rank"], "after": ar[item_id]["rank"]}
+        for item_id in sorted(br.keys() & ar.keys())
+        if br[item_id]["rank"] != ar[item_id]["rank"]
+    }
+    weight_changes = {
+        item_id: {
+            "before": br[item_id]["selection_weight"],
+            "after": ar[item_id]["selection_weight"],
+        }
+        for item_id in sorted(br.keys() & ar.keys())
+        if br[item_id]["selection_weight"] != ar[item_id]["selection_weight"]
+    }
+    inputs_seed = list(range(100))
+    inputs_daily = [
+        (date(2026, 9, 1) + timedelta(days=i)).isoformat() for i in range(30)
+    ]
+    selection = {}
+    for name in sorted(before["selections"]):
+        b = before["selections"][name]
+        a = after["selections"][name]
+        selection[name] = {
+            "seeds": _changes(b["seeds"], a["seeds"], inputs_seed),
+            "daily": _changes(b["daily"], a["daily"], inputs_daily),
+        }
+    new_ids = sorted(ap.keys() - bp.keys())
+    new_rank_ids = sorted(ar.keys() - br.keys())
+    before_shelf = _contexto_gastronomie_usor_shelf(bp, br)
+    after_shelf = _contexto_gastronomie_usor_shelf(ap, ar)
+    shelf_changes = {
+        item_id: {"before": before_shelf.get(item_id), "after": after_shelf.get(item_id)}
+        for item_id in sorted(before_shelf.keys() | after_shelf.keys())
+        if before_shelf.get(item_id) != after_shelf.get(item_id)
+    }
+    result = {
+        "schema": "v80-clatite-selection-comparison-v1",
+        "inputs": {
+            "before": {"path": str(before_path), "sha256": sha256(before_path)},
+            "after": {"path": str(after_path), "sha256": sha256(after_path)},
+        },
+        "bindings": {"before": before["bindings"], "after": after["bindings"]},
+        "counts": {"before": before["counts"], "after": after["counts"]},
+        "preservation": {
+            "added_pack_ids": new_ids,
+            "removed_pack_ids": sorted(bp.keys() - ap.keys()),
+            "all_previous_pack_records_exact": all(ap.get(k) == v for k, v in bp.items()),
+            "all_previous_pending_holds_exact": all(
+                ap.get(k) == v for k, v in bp.items() if v["status"] == "pending"
+            ),
+            "added_ranking_ids": new_rank_ids,
+            "removed_ranking_ids": sorted(br.keys() - ar.keys()),
+            "old_ranking_quality_status_eligibility_drift": rank_field_drift,
+            "old_rank_changes": rank_changes,
+            "old_selection_weight_changes": weight_changes,
+            "derived_board_ids_exact": set(bd) == set(ad),
+            "all_derived_board_rows_exact": bd == ad,
+            "derived_board_payloads_exact": all(
+                ad.get(k, {}).get("payload") == v["payload"] for k, v in bd.items()
+            ),
+            "artifact_hash_changes": {
+                path: {
+                    "before": digest,
+                    "after": after["bindings"]["artifact_sha256"].get(path),
+                }
+                for path, digest in before["bindings"]["artifact_sha256"].items()
+                if after["bindings"]["artifact_sha256"].get(path) != digest
+            },
+        },
+        "new_pack_records": {item_id: ap[item_id] for item_id in new_ids},
+        "new_ranking_rows": {item_id: ar[item_id] for item_id in new_rank_ids},
+        "contexto_gastronomie_usor_shelf": {
+            "before_count": len(before_shelf),
+            "after_count": len(after_shelf),
+            "all_before": before_shelf,
+            "all_after": after_shelf,
+            "changes": shelf_changes,
+        },
+        "selection_summary": selection,
+        "new_target_reachability": {
+            item_id: {
+                scenario: {
+                    kind: [
+                        change["input"]
+                        for change in details[kind]["changes"]
+                        if change["after"] == item_id
+                    ]
+                    for kind in ("seeds", "daily")
+                }
+                for scenario, details in selection.items()
+                if any(
+                    change["after"] == item_id
+                    for kind in ("seeds", "daily")
+                    for change in details[kind]["changes"]
+                )
+            }
+            for item_id in new_ids
+        },
+    }
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({
+        "out": str(out),
+        "sha256": sha256(out),
+        "added": new_ids,
+        "pack_preserved": result["preservation"]["all_previous_pack_records_exact"],
+        "holds_preserved": result["preservation"]["all_previous_pending_holds_exact"],
+        "derived_rows_preserved": result["preservation"]["all_derived_board_rows_exact"],
+        "selection_changed": {
+            name: {k: v[k]["changed_count"] for k in ("seeds", "daily")}
+            for name, v in selection.items()
+        },
+    }, ensure_ascii=False, indent=2))
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    sub = parser.add_subparsers(dest="command", required=True)
+    cap = sub.add_parser("capture")
+    cap.add_argument("--root", type=Path, required=True)
+    cap.add_argument("--phase", required=True)
+    cap.add_argument("--out", type=Path, required=True)
+    comp = sub.add_parser("compare")
+    comp.add_argument("--before", type=Path, required=True)
+    comp.add_argument("--after", type=Path, required=True)
+    comp.add_argument("--out", type=Path, required=True)
+    args = parser.parse_args()
+    if args.command == "capture":
+        capture(args.root, args.out, args.phase)
+    else:
+        compare(args.before, args.after, args.out)
+
+
+if __name__ == "__main__":
+    main()

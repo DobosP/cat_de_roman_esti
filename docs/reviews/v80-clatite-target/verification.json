@@ -1,0 +1,228 @@
+{
+  "date": "2026-09-06",
+  "baseline_commit": "9c208a96628b3d92910637fa634d4c998fe0e67d",
+  "runtimes": {
+    "python312": "3.12.3",
+    "python314": "3.14.6",
+    "node": "24.19.0",
+    "npm": "11.17.0"
+  },
+  "checks": {
+    "backend312": {
+      "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest -q -o addopts=\"\"",
+      "exit_code": 0,
+      "log_sha256": "657b4e6f6366b0acacb5961b9e0bf5d814f85cde5c7728b3c0d97693bda29a94",
+      "tail": [
+        "........................................................................ [ 71%]",
+        "........................................................................ [ 78%]",
+        "........................................................................ [ 85%]",
+        "........................................................................ [ 93%]",
+        "......................................................................   [100%]",
+        "1006 passed in 294.27s (0:04:54)"
+      ]
+    },
+    "backend314": {
+      "command": "PYTHONPATH=. <scratch>/py314/bin/python -m pytest -q -o addopts=\"\"",
+      "exit_code": 0,
+      "log_sha256": "c543387ce1fa5e79eadf202a26cbe30508d2d9c217aff5fa8abb2a832fffda1e",
+      "tail": [
+        "........................................................................ [ 71%]",
+        "........................................................................ [ 78%]",
+        "........................................................................ [ 85%]",
+        "........................................................................ [ 93%]",
+        "......................................................................   [100%]",
+        "1006 passed in 255.22s (0:04:15)"
+      ]
+    },
+    "accounts312": {
+      "command": "CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=. <python312> -m pytest tests/accounts -q -o addopts=\"\"",
+      "exit_code": 0,
+      "log_sha256": "c6ab37ee9aed1f1522d750315b9c65a32fce58a33571d31f75d43f6ab849d94a",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 2.59s"
+      ]
+    },
+    "accounts314": {
+      "command": "CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=. <python314> -m pytest tests/accounts -q -o addopts=\"\"",
+      "exit_code": 0,
+      "log_sha256": "1165919995ecc4f4a9a4afa66d4e93de1e686a436be93c69eefa6b68c9f7af75",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 3.50s"
+      ]
+    },
+    "focused": {
+      "command": "PYTHONPATH=. <python312> -m pytest tests/test_v80_clatite_target.py tests/test_v75_contexto_food.py tests/test_v77_flour_associations.py -q -o addopts=\"\"",
+      "exit_code": 0,
+      "log_sha256": "20f0fe45e2c39782006d22b5e93a43e2efeb985d6a69ddcce818c9f13e8956f5",
+      "tail": [
+        "..............................                                           [100%]",
+        "30 passed in 0.66s"
+      ]
+    },
+    "fixture": {
+      "command": "PYTHONPATH=. <python312> scripts/validate_fixture.py",
+      "exit_code": 0,
+      "log_sha256": "589744a7c642b7cf2f7bff52d34084a4a6858932ac5ace2030e96c59d1d9674f",
+      "tail": [
+        "  [  ok] puzzle_ids_resolve           0 error(s)",
+        "  [  ok] puzzle_shortest_path         0 error(s)",
+        "  [  ok] puzzle_category_scope        0 error(s)",
+        "  [  ok] puzzle_distractor_shortcut   0 error(s)",
+        "------------------------------------------------------------",
+        "GREEN: fixture is valid (0 errors)"
+      ]
+    },
+    "pack": {
+      "command": "PYTHONPATH=. <python312> scripts/validate_games_pack.py",
+      "exit_code": 0,
+      "log_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+      "tail": [
+        "  unique_ids               ok",
+        "  playability              ok",
+        "  meta_counts              ok",
+        "  id_high_water            ok",
+        "",
+        "games pack GREEN"
+      ]
+    },
+    "frontend_install": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm ci",
+      "exit_code": 0,
+      "log_sha256": "2f7c71e16d3435bb7d94f0da950a9cbdfa91141d40341cc50533d54f38b59ea8",
+      "tail": [
+        "added 171 packages, and audited 172 packages in 3s",
+        "",
+        "46 packages are looking for funding",
+        "  run `npm fund` for details",
+        "",
+        "found 0 vulnerabilities"
+      ]
+    },
+    "frontend_native": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm test",
+      "exit_code": 0,
+      "log_sha256": "45787a38879e66ba4f96fee8e369156e63829074f8140ba4b360fe661b678ac9",
+      "tail": [
+        "ℹ pass 173",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 461.259751"
+      ]
+    },
+    "frontend_lint": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm run lint",
+      "exit_code": 0,
+      "log_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 lint",
+        "> eslint .",
+        ""
+      ]
+    },
+    "frontend_typecheck": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm run typecheck",
+      "exit_code": 0,
+      "log_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 typecheck",
+        "> tsc --noEmit",
+        ""
+      ]
+    },
+    "frontend_bundle": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm run check:bundle",
+      "exit_code": 0,
+      "log_sha256": "ff5f74fc33a8767e2f3d406bf9184d98122b943cf9adbfdc7bc1ac45ff0b2be7",
+      "tail": [
+        "",
+        "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+        "     8.23 KiB  assets/index-DiCPhhaT.css",
+        "   110.50 KiB  assets/index-SV5smC6j.js",
+        "   118.73 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ]
+    },
+    "browser": {
+      "command": "cd frontend && PATH=<Node24>:/home/dobo/work/cat_de_roman_esti/.venv/bin:$PATH CDR_E2E_PORT=8154 CDR_E2E_OUTPUT_DIR=<scratch>/browser-results npm run test:e2e",
+      "exit_code": 0,
+      "log_sha256": "62fa7a7a3788f576fd310d74585fe1681438de1e6771ec7e616732a9b48f8f95",
+      "tail": [
+        "  ✓  105 [mobile] › e2e/resume-recovery.spec.mjs:203:5 › V74 saved-game recovery › a stale 404 response cannot displace another tab's game (1.0s)",
+        "  ✓  106 [mobile] › e2e/resume-recovery.spec.mjs:248:3 › V74 saved-game recovery › an unmounted resume cannot finish a newer route's create loading (1.7s)",
+        "  ✓  107 [mobile] › e2e/resume-recovery.spec.mjs:290:3 › V74 saved-game recovery › two tabs adopt one terminal session but append its local score once (1.7s)",
+        "  ✓  108 [mobile] › e2e/resume-recovery.spec.mjs:350:3 › V74 saved-game recovery › simultaneous terminal sessions from different games preserve both score rows (953ms)",
+        "",
+        "  108 passed (4.2m)"
+      ]
+    },
+    "ruff": {
+      "command": "PYTHONPATH=. <python312> -m ruff check",
+      "exit_code": 0,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "tail": [
+        "All checks passed!"
+      ]
+    },
+    "independent": {
+      "evidence": "implementation-review.json",
+      "result": "30 V75/V77/V80 cases and 35 ranking/derived cases passed; independent V2/artifact review accepted."
+    },
+    "promotion": {
+      "import": "0 approved, 1 pending, 0 skipped",
+      "strict_critique": "1 item checked, 0 flagged, 0 FAIL findings",
+      "serialized_gate": "one exact V2 artifact, two independent promote verdicts",
+      "apply": "promote 1, ct_gastronomie_320 approved",
+      "artifacts": [
+        "gastronomie/",
+        "verdicts/",
+        "artifact-delta.json"
+      ]
+    },
+    "reapply": {
+      "evidence": "reapply-guard.json",
+      "result": "Refused because ct320 is approved, expected pending; neither pack mirror changed."
+    },
+    "selection": {
+      "evidence": "impact/final-receipt.json",
+      "result": "Repeated 100 seeds and 30 September dates per scope match exactly. Five other games are unchanged. Contexto unfiltered changes 65/100 seeds and 0/30 dates; gastronomie/usor changes 50/100 seeds and 3/30 dates. Public seeds 20/46 hide the answer, accept warm flour and win at attempt 2 with score 940."
+    },
+    "docs": {
+      "command": "python3 /home/dobo/work/agent-ops/scripts/check_docs.py .",
+      "exit_code": 0,
+      "log_sha256": "3e27ef45e92dd9d4c2a47b31d07a46ebf662e5d455258af49455a3eb253b76c2",
+      "output": "# check_docs /home/dobo/work/_worktrees/cat_de_roman_esti/content__v80-clatite-target\nfiles=31 dead_links=0 stale_terms=0 retired_verbs=0 orphans=0\n\n## dead links\n(none)\n\n## stale model terms\n(none)\n\n## retired ops verbs\n(none)\n\n## orphan docs\n(none)\n"
+    },
+    "whitespace": {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output": ""
+    },
+    "complete_branch_whitespace": {
+      "command": "git diff --check 9c208a96628b3d92910637fa634d4c998fe0e67d",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output": ""
+    }
+  },
+  "scope": "One independently reviewed Contexto record; generated pack/ranking/derived artifacts and trusted catalog digest updated. No game/scoring/session/graph logic or frontend source changed.",
+  "intermediate_findings": [
+    "Probe capture initially listed outgoing neighbors only. It was corrected before final review to separate nine incoming (including Făină) from eight outgoing, and expanded to 28 target probes.",
+    "Historical V75/V77 assertions now reconstruct the complete pre-V80 pack/rankings/derived artifacts; their original hashes and raw review files remain intact.",
+    "Current hash/count/seed expectations were refreshed for the new pack; no historical DATA constants or archived judgments were rewritten.",
+    "One stale V77 no-promotion assertion was corrected to reconstruct the historical pack. Strict single-row coverage and reviewer-loss flags were then added to the V80 provenance test before full matrix runs.",
+    "Five new test comments exceeded the line-length limit. They were wrapped after the green full suites; no executable source or assertions changed. Whole-repository Ruff then passed.",
+    "The staged-file gate found three Markdown hard-break trailing spaces in the newly added independent report. Its author removed only the trailing whitespace; the authoritative review JSON stayed byte-identical. The complete baseline-to-final diff was checked before landing."
+  ],
+  "notes": [
+    "Accounts enabled only for isolated tests; no push, deployment, production verification or human playtest.",
+    "Frontend assets retained; no rebuild because frontend source is unchanged.",
+    "All generated fixtures were produced through the supported importer/applier/builders, never hand-edited."
+  ]
+}

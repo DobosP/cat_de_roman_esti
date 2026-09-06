@@ -11,6 +11,7 @@ from pathlib import Path
 import pytest
 
 from cat_de_roman_esti.wordgames.packs import get_pack
+from tests.content_history import before_v80_derived, before_v80_pack, before_v80_rankings
 
 ROOT = Path(__file__).resolve().parent.parent
 FIXTURES = ROOT / "cat_de_roman_esti/fixtures"
@@ -42,7 +43,7 @@ def digest(value: dict) -> str:
 
 
 def test_only_two_reviewed_records_are_added_to_the_previous_pack() -> None:
-    pack = read(FIXTURES / "games_pack.json")
+    pack = before_v80_pack(read(FIXTURES / "games_pack.json"))
     new = {row["id"]: row for row in pack["contexto"] if row["id"] in NEW_TARGETS}
     assert {key: row["target"] for key, row in new.items()} == NEW_TARGETS
     assert all(
@@ -60,11 +61,11 @@ def test_only_two_reviewed_records_are_added_to_the_previous_pack() -> None:
     assert digest(previous) == OLD_PACK_SHA
     pool = get_pack().pool("contexto", category="gastronomie", difficulty="usor")
     assert {row.id for row in pool if row._pilot_eligible} >= NEW_TARGETS.keys()
-    assert get_pack().selectable_count("contexto") == 203
+    assert get_pack().selectable_count("contexto") == 204
 
 
 def test_rank_changes_are_limited_to_new_targets_ordinals_and_four_weight_bands() -> None:
-    ranking = read(FIXTURES / "board_rankings_v37.json")
+    ranking = before_v80_rankings(read(FIXTURES / "board_rankings_v37.json"))
     previous = copy.deepcopy(ranking)
     new_rows = [row for row in ranking["boards"] if row["id"] in NEW_TARGETS]
     assert len(new_rows) == 2 and all(row["pilot_eligible"] for row in new_rows)
@@ -89,7 +90,7 @@ def test_rank_changes_are_limited_to_new_targets_ordinals_and_four_weight_bands(
 
 
 def test_derived_boards_kg_and_mobile_payloads_are_preserved() -> None:
-    derived = read(FIXTURES / "derived_catalog_v38.json")
+    derived = before_v80_derived(read(FIXTURES / "derived_catalog_v38.json"))
     derived["meta"]["kg_sha256"] = V75_KG_SHA
     derived["meta"]["pack_sha256"] = OLD_PACK_SHA
     derived["meta"]["v37_rankings_sha256"] = OLD_RANKINGS_SHA
@@ -142,7 +143,7 @@ def test_five_candidate_dispositions_and_two_independent_promotions_are_bound() 
 
 @pytest.mark.parametrize(
     ("seed", "opener", "answer", "target"),
-    [(5, "grătar", "mici", "n_gas_mici"),
+    [(19, "grătar", "mici", "n_gas_mici"),
      (6, "salată", "salata de boeuf", "n_gas_salata_boeuf")],
 )
 def test_new_targets_are_publicly_selectable_warm_and_winnable(

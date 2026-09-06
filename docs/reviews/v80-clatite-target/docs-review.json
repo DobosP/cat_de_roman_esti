@@ -1,0 +1,35 @@
+{
+  "schema": "v80-final-documentation-review-v3",
+  "reviewer": "wave_audit",
+  "date": "2026-09-06",
+  "scope": [
+    "docs/reviews/v80-clatite-target/README.md",
+    "docs/adr/0111-promote-reviewed-clatite-target.md",
+    "docs/STATUS.md",
+    "docs/BETA_CANDIDATE.md",
+    "docs/reviews/v80-clatite-target/verification.json",
+    "docs/reviews/v80-clatite-target/impact/final-receipt.json",
+    "docs/reviews/v80-clatite-target/review-manifest.json"
+  ],
+  "bindings": {
+    "readme_sha256": "sha256:3c50f6347fef4fc4d50d0e156ac87578819713ff04d7dad106d6063c42efe604",
+    "adr_0111_sha256": "sha256:efd7cd9a224cfb7cfd00960b37db6db61475e81b94de9147e09171ed69cc2be4",
+    "status_sha256": "sha256:3dd4248f649759ee539ac6d502d994ace1f1c37caf6a18de72068c28d93c0f58",
+    "beta_candidate_sha256": "sha256:9ba79aca10c0133b47c221d6f7a66b4868fe327d48aa768f88c60064cc00fc32",
+    "verification_sha256": "sha256:59f7a8ef8e4b899522fca7d58945e0733a821ab6d661afe5c682178d41c38ee6",
+    "impact_receipt_sha256": "sha256:7f06245d3e7348c892de07e9e8d68cb6bd50bbbbfb7b89e6b40de0febdd0fd19",
+    "review_manifest_sha256": "sha256:4c05d423c9342c4a2008d838da3bf0d2a86beaed91daadc5f270878099ce3fc6"
+  },
+  "verified_facts": {
+    "candidate": "Only ct_gastronomie_320 targets existing n_v3gas_clatite in gastronomie/usor.",
+    "counts": "Pack 621 = 613 approved + 8 pending; Contexto 210 total / 208 approved / 2 pending / 204 eligible; ranking 451 eligible; frozen derived boards 336.",
+    "preservation": "All 620 prior rows and eight prior pending holds remain exact. KG, mobile, aliases, puzzles, runtime and frontend source remain unchanged; pack/ranking/derived bindings advance.",
+    "ranking_and_selection": "New global row is rank 52, pilot score 83, global weight 4. 158 old Contexto ordinal ranks move +1; only ct_meme_net_064 changes global weight 4->3. The gastronomie/usor shelf changes 8->9, with documented filtered ticket changes.",
+    "sampling_limits": "The release-to-release seed/date samples are labeled bounded and deterministic, not a distribution, enjoyment, player-grade or human-playtest claim. The rejected V79 global and one-hop alternatives remain separate historical evidence.",
+    "verification": "The archive states final 1006-test matrices on Python 3.12/3.14, 53 accounts per runtime, 173 frontend native and 108 browser checks, and distinguishes retained frontend assets from source changes. V80 changes selection, not word-scoring.",
+    "archive_formatting": "IMPLEMENTATION_REVIEW.md is bound at e4b51d…afd9 after removal of three trailing hard-break spaces; authoritative implementation-review.json remains byte-identical at 8fc8b…a8b1. verification.json records complete baseline-to-final diff whitespace success."
+  },
+  "manifest_validation": "All 29 archive-file and all 12 source-file SHA-256 bindings in review-manifest.json match current bytes. This review is intentionally outside the manifest to avoid circular binding.",
+  "findings": [],
+  "verdict": "approve"
+}

@@ -1,0 +1,247 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import hashlib
+import json
+from collections import Counter
+from pathlib import Path
+
+HERE = Path("/home/dobo/work/_temp/v80-clatite-target/impact")
+ROOT = Path("/home/dobo/work/_worktrees/cat_de_roman_esti/content__v80-clatite-target")
+PATHS = {
+    "baseline": HERE / "baseline.json",
+    "candidate": HERE / "candidate.json",
+    "comparison": HERE / "comparison.json",
+    "public_api": HERE / "public-api.json",
+    "root_artifact_delta": HERE.parent / "artifact-delta.json",
+    "baseline_tree_manifest": HERE / "baseline-tree/manifest.json",
+}
+OUT = HERE / "final-receipt.json"
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def load(name: str) -> dict:
+    return json.loads(PATHS[name].read_text(encoding="utf-8"))
+
+
+def main() -> None:
+    baseline = load("baseline")
+    candidate = load("candidate")
+    comparison = load("comparison")
+    public = load("public_api")
+    baseline_tree = load("baseline_tree_manifest")
+    preserve = comparison["preservation"]
+    assert baseline["counts"] == {
+        "pack_records": 620,
+        "approved_pack_records": 612,
+        "pending_pack_records": 8,
+        "ranking_rows": 620,
+        "ranking_eligible": 450,
+        "derived_boards": 336,
+    }
+    assert candidate["counts"] == {
+        "pack_records": 621,
+        "approved_pack_records": 613,
+        "pending_pack_records": 8,
+        "ranking_rows": 621,
+        "ranking_eligible": 451,
+        "derived_boards": 336,
+    }
+    assert preserve["added_pack_ids"] == ["ct_gastronomie_320"]
+    assert preserve["removed_pack_ids"] == []
+    assert preserve["all_previous_pack_records_exact"] is True
+    assert preserve["all_previous_pending_holds_exact"] is True
+    assert preserve["old_ranking_quality_status_eligibility_drift"] == {}
+    assert preserve["added_ranking_ids"] == ["ct_gastronomie_320"]
+    assert preserve["removed_ranking_ids"] == []
+    assert preserve["derived_board_ids_exact"] is True
+    assert preserve["all_derived_board_rows_exact"] is True
+    assert preserve["derived_board_payloads_exact"] is True
+    assert preserve["old_selection_weight_changes"] == {
+        "ct_meme_net_064": {"before": 4, "after": 3}
+    }
+    rank_changes = preserve["old_rank_changes"]
+    assert len(rank_changes) == 158
+    assert all(change["after"] == change["before"] + 1 for change in rank_changes.values())
+    baseline_rankings = {row["id"]: row for row in baseline["rankings"]["boards"]}
+    assert {baseline_rankings[item_id]["game"] for item_id in rank_changes} == {"contexto"}
+    expected_new_ranking = {
+        "id": "ct_gastronomie_320",
+        "game": "contexto",
+        "status": "approved",
+        "romanian_familiarity": 78,
+        "play_quality": 90,
+        "pilot_score": 83,
+        "rank": 52,
+        "pilot_eligible": True,
+        "selection_weight": 4,
+    }
+    assert comparison["new_ranking_rows"] == {
+        "ct_gastronomie_320": expected_new_ranking
+    }
+    shelf = comparison["contexto_gastronomie_usor_shelf"]
+    assert (shelf["before_count"], shelf["after_count"]) == (8, 9)
+    filtered_weight_changes = {
+        item_id: change
+        for item_id, change in shelf["changes"].items()
+        if change["before"] is None
+        or change["before"]["filtered_shelf_weight"]
+        != change["after"]["filtered_shelf_weight"]
+    }
+    assert set(filtered_weight_changes) == {
+        "ct_gastronomie_019", "ct_gastronomie_127", "ct_gastronomie_320"
+    }
+    summaries = comparison["selection_summary"]
+    other_games = ("alchimie", "conexiuni", "intrusul", "lant", "perechi")
+    for game in other_games:
+        scenario = summaries[f"{game}:unfiltered"]
+        assert scenario["seeds"]["changed_count"] == 0
+        assert scenario["daily"]["changed_count"] == 0
+    assert summaries["contexto:unfiltered"]["seeds"]["changed_count"] == 65
+    assert summaries["contexto:unfiltered"]["daily"]["changed_count"] == 0
+    assert summaries["contexto:gastronomie_usor"]["seeds"]["changed_count"] == 50
+    assert summaries["contexto:gastronomie_usor"]["daily"]["changed_count"] == 3
+    assert baseline["method"]["same_artifact_repeat_exact"] is True
+    assert candidate["method"]["same_artifact_repeat_exact"] is True
+    reachability = comparison["new_target_reachability"]["ct_gastronomie_320"]
+    assert reachability == {
+        "contexto:gastronomie_usor": {
+            "seeds": [20, 46], "daily": ["2026-09-18"]
+        },
+        "contexto:unfiltered": {"seeds": [1, 54], "daily": []},
+    }
+    public_by_seed = {row["seed"]: row for row in public["probes"]}
+    assert {
+        seed: row["selected_pack_id_private_test_oracle"]
+        for seed, row in public_by_seed.items()
+    } == {
+        5: "ct_gastronomie_300",
+        6: "ct_gastronomie_319",
+        19: "ct_gastronomie_318",
+        20: "ct_gastronomie_320",
+        46: "ct_gastronomie_320",
+    }
+    for seed in (20, 46):
+        row = public_by_seed[seed]
+        play = row["play"]
+        assert row["create_target_hidden"] is True
+        assert play["warm_target_hidden"] is True and play["warm_won"] is False
+        assert play["warm_guess"] == {
+            "id": "n_v24_food_pantry_faina",
+            "label": "Făină",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1,
+        }
+        assert play["win_won"] is True and play["score"] == 940
+    selection_counts = {
+        scenario: {
+            kind: {
+                key: details[kind][key]
+                for key in ("sample_count", "changed_count", "unchanged_count")
+            }
+            for kind in ("seeds", "daily")
+        }
+        for scenario, details in summaries.items()
+    }
+    rank_delta_counts = Counter(
+        change["after"] - change["before"] for change in rank_changes.values()
+    )
+    mirrored_generated = {}
+    for name in ("board_rankings_v37.json", "derived_catalog_v38.json"):
+        served = f"cat_de_roman_esti/fixtures/{name}"
+        mirror = f"tests/fixtures/{name}"
+        before_served = baseline["bindings"]["artifact_sha256"][served]
+        before_mirror = baseline_tree["files"][mirror]
+        after_served = candidate["bindings"]["artifact_sha256"][served]
+        after_mirror = sha256(ROOT / mirror)
+        assert before_mirror == before_served
+        assert after_mirror == after_served
+        mirrored_generated[mirror] = {"before": before_mirror, "after": after_mirror}
+    receipt = {
+        "schema": "v80-clatite-independent-selection-impact-v1",
+        "valid_until": (
+            "the pack, rankings, derived catalog, selector implementations, or V80 "
+            "candidate changes"
+        ),
+        "inputs": {
+            name: {"path": str(path), "sha256": sha256(path)}
+            for name, path in PATHS.items()
+        },
+        "source_bindings": {
+            "baseline_git_head": baseline["bindings"]["git_head"],
+            "baseline_packs_source_sha256": baseline["bindings"]["packs_source_sha256"],
+            "baseline_derived_source_sha256": baseline["bindings"]["derived_source_sha256"],
+            "candidate_packs_source_sha256": candidate["bindings"]["packs_source_sha256"],
+            "candidate_derived_source_sha256": candidate["bindings"]["derived_source_sha256"],
+        },
+        "artifact_sha256": {
+            "before": baseline["bindings"]["artifact_sha256"],
+            "after": candidate["bindings"]["artifact_sha256"],
+            "additional_test_mirrors": mirrored_generated,
+        },
+        "counts": comparison["counts"],
+        "preservation": {
+            "all_620_previous_pack_records_exact": True,
+            "all_8_previous_pending_holds_exact": True,
+            "old_ranking_quality_status_eligibility_exact": True,
+            "old_rank_changes": {
+                "count": len(rank_changes),
+                "games": ["contexto"],
+                "delta_counts": {str(k): v for k, v in sorted(rank_delta_counts.items())},
+            },
+            "old_global_selection_weight_changes": preserve[
+                "old_selection_weight_changes"
+            ],
+            "all_336_derived_rows_and_payloads_exact": True,
+            "changed_artifacts": preserve["artifact_hash_changes"],
+        },
+        "new_record": comparison["new_pack_records"]["ct_gastronomie_320"],
+        "new_ranking": expected_new_ranking,
+        "contexto_gastronomie_usor_shelf": {
+            "before_count": shelf["before_count"],
+            "after_count": shelf["after_count"],
+            "new_target": shelf["all_after"]["ct_gastronomie_320"],
+            "effective_weight_changes": filtered_weight_changes,
+        },
+        "same_artifact_determinism": {
+            "repeat_runs": 2,
+            "scenario_count": 7,
+            "sequences_exact": 28,
+        },
+        "selection_summary": selection_counts,
+        "new_target_reachability": reachability,
+        "public_api": {
+            "seeds_20_and_46": (
+                "selected ct_gastronomie_320; create and Făină feedback hide the target; "
+                "Făină is distance 1/rank 2/Fierbinte; exact Clătite wins on attempt 2 "
+                "with server score 940"
+            ),
+            "v75_seed_maintenance": public["v75_seed_maintenance"],
+        },
+        "review": {
+            "verdict": "accept",
+            "basis": (
+                "The single reviewed target is reachable in bounded seeded/daily samples; "
+                "the other five games remain exact; old records, holds, quality, eligibility, "
+                "and frozen boards are preserved; rank and ticket shifts are fully bounded; "
+                "and the real public route demonstrates useful feedback, privacy, and scoring."
+            ),
+            "limits": [
+                "100 integer seeds and 30 September 2026 dates are bounded samples, not a distribution proof.",
+                "Selector captures intentionally omit account history, starter mode, and API session creation.",
+                "Public API coverage is limited to five maintenance/new-target seeds and two full Clătite rounds.",
+            ],
+        },
+    }
+    OUT.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(sha256(OUT))
+
+
+if __name__ == "__main__":
+    main()

@@ -34,7 +34,7 @@ _TEST_PACK = _ROOT / "tests/fixtures/games_pack.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 
 # Current served pack pin; the wave-local DATA baseline remains historical evidence.
-_CURRENT_PACK_SHA256 = "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5"
+_CURRENT_PACK_SHA256 = "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29"
 _V48_AUDIT = (
     _ROOT / "docs/reviews/v48-alchimie-pending-gate/projection-audit.json"
 )
@@ -45,10 +45,10 @@ _EXPECTED_LOCAL_EDGE_COUNT = 36
 _V32_ALIAS_COUNT = 7333
 
 # This is the current served Contexto distance profile. V77's two directed flour edges
-# change it; the V75/V76 profile digest was
+# and V80's approved target change it; the V75/V76 profile digest was
 # 5b2a2a7bb2ec09e84b29a9689748d1d8c89347f8355e77300bb8219039a5cd9b.
 _CURRENT_CONTEXTO_PROFILE_SHA256 = (
-    "8e3b3ad5b20ccad2ef636ca206193311bc940ee0b60df0a44405fecf50f13dd6"
+    "b1ccbea70faea1255813c4dfdedcf9d99d804d1be9257de047f6046a98ce9a8d"
 )
 _V32_LANT_PROFILE_SHA256 = (
     "6fe32a7aacb464d8d30ae2d97bc02e9ed0ef5413ee264e2424f13388a7f8e8c2"
@@ -436,13 +436,13 @@ def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
         for game in ("conexiuni", "contexto", "lant", "alchimie")
     } == {
         "conexiuni": 232,
-        "contexto": 209,
+        "contexto": 210,
         "lant": 97,
         "alchimie": 82,
     }
     # ADR-0068 promotes two bound Contexto targets; V47 promotes one more; V48 promotes
     # one Alchimie board, archives 17 rejects, and retains three A5 holds.
-    assert statuses == {"approved": 612, "pending": 8}
+    assert statuses == {"approved": 613, "pending": 8}
     assert len(DATA.REVIEW_ITEM_IDS) == len(set(DATA.REVIEW_ITEM_IDS)) == 33
     v48_audit = json.loads(_V48_AUDIT.read_text(encoding="utf-8"))
     v48_source_records = {

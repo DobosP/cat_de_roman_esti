@@ -37,13 +37,13 @@ ARTIFACT_SHA256 = {
         "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370"
     ),
     "cat_de_roman_esti/fixtures/games_pack.json": (
-        "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5"
+        "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29"
     ),
     "cat_de_roman_esti/fixtures/board_rankings_v37.json": (
-        "53c2542b845d2560a900712381ab4c28cb1b9789beaae9690639647871e905d3"
+        "823c5f302bd36c833283038affb1125dc434a1d34fba635e71c06b721cda4cec"
     ),
     "cat_de_roman_esti/fixtures/derived_catalog_v38.json": (
-        "84aaa772746dac0eb4e1366738f467afad86c543c7430cb67810475d5a296878"
+        "0787a4325c84753c739e7900f174cc99f46e9a4d3fbd8ce1e035cdf84c9b6ae2"
     ),
     "tests/fixtures/cat_mobile_app_pack_contract.json": (
         "869499abccc3e6b5befe5d889a0e24c4d3bd67096c4d0a69c58d925680612a28"

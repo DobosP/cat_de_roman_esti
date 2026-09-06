@@ -216,3 +216,34 @@ the V79 archive bind final source/tests/results and preserve the rejected global
 trial. The full matrix was repeated after adding the six-node guard; no runtime
 changed between runs. Next: fresh Clătite content review. No push, deployment or
 human-playtest claim.
+
+
+## V80 — reviewed Clătite target, 2026-09-06
+
+Valid until: the bound candidate, content or relevant runtime changes — then treat as history.
+
+V79 was already landed at `9c208a9`. A fresh one-row Clătite candidate passed
+independent factual and quality screening, strict pending critique and unanimous
+dossier-bound analyst/verifier review. The supported importer staged one pending
+row; the V2 applier promoted `ct_gastronomie_320` in gastronomie/usor. Reviewers
+retained the cold fat/honey/nut and missing chocolate/dough limitations explicitly.
+The repaired flour/egg/milk/jam/dairy paths now support a coherent easy round.
+
+Pack stock is 621 = 613 approved + eight existing holds; Contexto has 204 eligible
+targets. Every old pack row, score/status/eligibility and all 336 frozen boards
+remain exact. Generated ranking/derived bindings and the trusted catalog digest
+advance; KG, mobile, aliases, puzzles and game logic do not change. The receipt
+records 158 old Contexto ordinal shifts, one global and two filtered weight changes.
+The other five games retain all sampled selections; repeated current-artifact
+selection is deterministic. Public seed 20 selects the new hidden, warm, winnable
+round; current Mici smoke moves to seed 19 while Salată de boeuf retains seed 6.
+
+Both full suites pass 1,006 tests (Python 3.12.3: 294.27 s; 3.14.6: 255.22 s), plus
+53 accounts tests each. Thirty historical/new content cases and 35 independent
+ranking/derived cases pass. Node 24.19.0/npm 11.17.0: clean install/audit zero,
+173 native, lint/typecheck/bundle and 108 desktop/mobile checks pass. Validators,
+Ruff/docs/whitespace and stale-reapply refusal are green. Historical SHA assertions
+remain meaningful through exact pre-V80 reconstruction; raw review history is
+untouched. ADR-0111 and the V80 archive bind acceptance and the final evidence.
+Next: independently investigate honest nut feedback for Cozonac; bread remains
+deferred. No push, deployment or human-playtest claim.

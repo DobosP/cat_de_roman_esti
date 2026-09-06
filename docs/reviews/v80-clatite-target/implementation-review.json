@@ -1,0 +1,63 @@
+{
+ "reviewer": "session_refactor",
+ "role": "independent-implementation-reviewer",
+ "wave": "v80-clatite-target",
+ "baseline_commit": "9c208a96628b3d92910637fa634d4c998fe0e67d",
+ "verdict": "accept",
+ "scope": {
+  "new_id": "ct_gastronomie_320",
+  "game": "contexto",
+  "target": "n_v3gas_clatite",
+  "category": "gastronomie",
+  "difficulty": "usor"
+ },
+ "bindings": {
+  "candidate": "sha256:87e8b3b4133a82c83542070f6f3228d7482b8e775d66fed660574148220e67dd",
+  "factual_screen": "sha256:d749f061f40b013b7dbe24b3727dd62c7e318af7b66f6c7cdf8d104cded38428",
+  "quality_screen": "sha256:aeb517a8bb36ea33539e6adaf7ff21253c43803e3aee9b2b6df41d73387fc924",
+  "analyst_review": "sha256:b135b828e4c6c56bc457df0e2fa21207c27a908d632f59bdb4cf16627a19b1a5",
+  "verifier_review": "sha256:9691760173c24802eef64b87b1c3ab36e7f78804752b537f4e0ccf847807a7b3",
+  "v2_verdict": "sha256:9b65db4c81684c848e81cc6d158404021fedfab01aae80db45991da4bb619352",
+  "dossier": "sha256:ecc49e659884599caa44a276e205e8ad1e03f23b99b437b38cdf2936517a0d7a",
+  "dossier_review_binding": "sha256:dfa63711feac4a57e664e72420e73ae4d1a775382056e9c1e78f575fc06234b9",
+  "artifact_delta": "sha256:aec41d40408dc94d6103c7d71e4de617679c65c4a09866d920f947c20405721b",
+  "games_pack": "sha256:27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29",
+  "board_rankings": "sha256:823c5f302bd36c833283038affb1125dc434a1d34fba635e71c06b721cda4cec",
+  "derived_catalog": "sha256:0787a4325c84753c739e7900f174cc99f46e9a4d3fbd8ce1e035cdf84c9b6ae2",
+  "knowledge_graph": "sha256:c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+  "mobile_contract": "sha256:869499abccc3e6b5befe5d889a0e24c4d3bd67096c4d0a69c58d925680612a28",
+  "derived_runtime_pin_source": "sha256:f1346b11cb5beda43164bcb1f407705834a750a48e728d925b5215f53066148d",
+  "history_helper": "sha256:e51f62aa076e91c2c10a0f1dbe7693bcc1fb4d15cdcb60495632a0f06f54aa3b",
+  "v80_tests": "sha256:6d256e05fff2eae4aa628d6d2bbb0e8d1951efc60ad796f81535856008b99b7d"
+ },
+ "artifact_findings": {
+  "pack": "One approved Contexto row was added. Every baseline row in all four curated game arrays remains structurally exact and in its prior order.",
+  "rankings": "The new row is eligible at rank 52 with familiarity 78, play quality 90, pilot score 83 and weight 4. All 620 prior rows retain status, scores, eligibility and other non-ordinal fields; the sole old weight change is ct_meme_net_064 from 4 to 3.",
+  "derived": "All 336 frozen boards are exact; only metadata bindings changed.",
+  "unchanged": "The knowledge graph and mobile contract are byte-identical to the baseline.",
+  "provenance": "The V2 artifact has exact one-item coverage, two distinct reviewers, exact embedded raw payloads and raw-byte hashes, a valid rebuilt dossier binding, and a unanimous promote policy."
+ },
+ "test_review": {
+  "result": "pass",
+  "assessment": "The V80 test pins the one new row, complete prior pack and ranking reconstructions, the exact allowed weight change, all frozen derived boards, strict one-item V2 provenance, and public route privacy/resume/repeat/win behavior. The history helper reverses only the reviewed V80 row, ordinal shifts, one named weight change and metadata; the live ranking suite separately enforces contiguous deterministic ranks.",
+  "commands": [
+   "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest -q tests/test_v75_contexto_food.py tests/test_v77_flour_associations.py tests/test_v80_clatite_target.py",
+   "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest -q tests/test_board_rankings_v37.py tests/test_v38_ranked_catalog.py",
+   "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python scripts/validate_games_pack.py",
+   "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m ruff check tests/content_history.py tests/test_v75_contexto_food.py tests/test_v77_flour_associations.py tests/test_v80_clatite_target.py cat_de_roman_esti/wordgames/derived_catalog.py",
+   "git diff --check"
+  ],
+  "results": [
+   "30 passed",
+   "35 passed",
+   "games pack GREEN",
+   "ruff passed",
+   "diff check passed"
+  ]
+ },
+ "findings": [],
+ "limitations": [
+  "This review is limited to the V80 content delta, evidence chain, generated artifacts, reconstruction helper and targeted tests.",
+  "No full test suite or human playtest was run by this reviewer."
+ ]
+}

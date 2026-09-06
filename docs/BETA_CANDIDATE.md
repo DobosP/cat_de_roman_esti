@@ -3,7 +3,7 @@
 Valid until: the next verified quality wave — then refresh this living checklist.
 
 Target: public anonymous beta for Romanian players. **Technical candidate complete through
-V79 and locally verified.** V78 deferred two candidates; V79 repairs bounded Gem feedback.
+V80 and locally verified.** Clătite joins the reviewed easy Contexto stock after V77/V79 repairs.
 Public beta release still requires the external checks below.
 Current facts and exact pins: [STATUS](STATUS.md).
 
@@ -21,19 +21,20 @@ Current facts and exact pins: [STATUS](STATUS.md).
 | V77 | Ordinary flour guesses were distant from familiar dishes; the graph builder reused retired edge IDs | Two reviewed ingredient links accepted, bread deferred after a misleading Stilou route; allocator advances beyond present IDs; all pack/ranking/frozen-board/puzzle records preserved |
 | V78 | Repaired flour alone did not establish dessert-target fairness | 68 fresh API probes and independent reviews defer both candidates: Nucă remains cold for Cozonac; Gem is frozen for Clătite while Dulceață is hot; no served-content changes |
 | V79 | Gem inherited misleading honey feedback; a global preserve anchor polluted savory rounds | Reviewed direct associations at strength ≥0.60 repair Papanași and fixed Clătite feedback; other 206 approved target responses and content artifacts remain exact; projection privacy is preserved |
+| V80 | Repaired Clătite needed a fresh promotion review | Unanimous dossier-bound approval adds one easy target; all 620 old records and 336 frozen boards exact; known cold/unknown inputs remain documented |
 
-Final V79 gates: **996 backend tests on each of Python 3.12.3 and 3.14.6**, 53 accounts
+Final V80 gates: **1,006 backend tests on each of Python 3.12.3 and 3.14.6**, 53 accounts
 tests on each runtime, **173 native frontend tests and 108 desktop/mobile browser checks**.
 Clean install, frontend lint/typecheck, both content validators, Ruff, docs and whitespace
 passed. The npm audit reports zero vulnerabilities. Independent factual, impact,
 implementation and documentation reviews found no remaining actionable issues. Frontend
 assets remain at V75; typecheck and the 118.73/120 KiB budget check passed without rebuilding.
-Accounts were enabled only for their isolated test suite. Exact results, deliberate guess-rank
-changes and excluded routes are tracked in STATUS and the V79 review archive.
+Accounts were enabled only for their isolated test suite. Exact results, selection
+changes and remaining content limits are tracked in STATUS and the V80 review archive.
 
 Decisions and full evidence: [ADR index](adr/README.md), [V75 review](reviews/v75-contexto-food/README.md),
 [V77 review](reviews/v77-flour-associations/README.md), [V78 review](reviews/v78-dessert-targets/README.md),
-[V79 review](reviews/v79-gem-feedback/README.md),
+[V79 review](reviews/v79-gem-feedback/README.md), [V80 review](reviews/v80-clatite-target/README.md),
 [runtime measurements](reviews/v74-runtime-measurements/README.md). Refactors preserve
 server authority, hidden answers, session bounds, intentional game differences and scoring.
 The derived catalog remains frozen at 336 boards. Content critiques are independently
@@ -45,7 +46,7 @@ or human subject-expert approval.
 | Area | Evidence and remaining uncertainty |
 |---|---|
 | Rules, hints and progression | All six seeded rounds reach server-scored results; replay, progressed reload, mistake counters, failed action/start recovery and expiration have real-BFF coverage. Automated solves do not establish intuitiveness or enjoyment. |
-| Romanian content and difficulty | Independent factual, recognition, ambiguity and warm-opener reviews promoted only two easy food targets. Ordinary ingredient/holiday probes rejected three in V75. V78 freshly defers Cozonac/Clătite despite repaired flour; accepted nut/jam inputs gave misleading feedback. V79 repairs Gem only in a reviewed direct preserve neighborhood; target promotion still needs a fresh review. Existing editorial holds and historical rejection evidence remain intact. |
+| Romanian content and difficulty | Independent factual, recognition, ambiguity and warm-opener reviews promoted only two easy food targets. Ordinary ingredient/holiday probes rejected three in V75. V78 freshly defers Cozonac/Clătite despite repaired flour; accepted nut/jam inputs gave misleading feedback. V79 repairs Gem only in a reviewed direct preserve neighborhood; V80 independently promotes Clătite after reviewing the remaining imperfect inputs. Existing editorial holds and historical rejection evidence remain intact. |
 | Onboarding and presentation | Shared intros, categories, HUD, action feedback and results were inspected; mobile layout and rendered states are audited. No broad redesign was justified by this evidence. Real-device rendering and human comprehension are still pending. |
 | Keyboard and accessibility | Desktop essential controls support Tab/Space/Enter completion; Perechi focus is checked after pairs disappear and at result. Automated Axe checks run on settled intro/live/result states. Text-entry tests use programmatic fill after keyboard focus; no actual screen-reader usability study ran. |
 | Reliability and storage | Retry, stale ID handling, unmount/loading ownership, immutable terminal actions and duplicate completion are covered. Strict concurrent-tab local-score protection requires Web Locks; fallback is best effort. Receipt TTL is 24h with 1,000 IDs per game; a deliberately retained terminal session can record again after expiry. |
@@ -64,10 +65,10 @@ or human subject-expert approval.
   and re-run public health/config/content/asset smokes. Keep production anonymous.
 
 The next useful product iteration is driven by those observations. The clearest existing
-content follow-up is a fresh Clătite target review after V79 repairs the Gem filling route.
-The bounded policy leaves all other ordinary V78 probes intact and does not promote a target.
-Cozonac still has the nut-route objection; V77’s bread route remains deferred. V76 prevents
-the accented Paște/Paste misinterpretation. Additional vocabulary totals alone do not resolve
+content follow-up is Cozonac’s nut-feedback objection. V80 promoted only Clătite after a
+fresh review; that approval does not resolve Cozonac or V77’s deferred bread route. An honest
+nut association needs independent semantic and impact review before any mapping or topology
+change. V76 prevents the accented Paște/Paste misinterpretation. Additional vocabulary totals alone do not resolve
 these feedback problems. Accounts, derived-catalog expansion and another game require their
 separate documented gates.
 

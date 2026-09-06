@@ -1,0 +1,1267 @@
+{
+  "bindings": {
+    "candidate": "sha256:87e8b3b4133a82c83542070f6f3228d7482b8e775d66fed660574148220e67dd",
+    "contexto": "sha256:bdef59b96dd7f3b06321b20463987e7d4140625e60b07bc043383cd3caf3282f",
+    "kg": "sha256:c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+    "projection": "sha256:d6b80f7cb7abcce77c64d04d94ff2cf7e178ffd6bb1d48cbd7b4a9e441fd9cb1"
+  },
+  "control_target": {
+    "id": "n_gas_papanasi",
+    "label": "Papanași"
+  },
+  "direct_incoming_non_distractor_neighbors": [
+    {
+      "edge_id": "de2925",
+      "id": "n_gas_branza_smantana",
+      "label": "Brânză cu smântână",
+      "relation": "related_to",
+      "strength": 0.45
+    },
+    {
+      "edge_id": "de2923",
+      "id": "n_gas_papanasi",
+      "label": "Papanași",
+      "relation": "same_category",
+      "strength": 0.78
+    },
+    {
+      "edge_id": "de5534",
+      "id": "n_v17gas_dulceata",
+      "label": "Dulceață",
+      "relation": "related_to",
+      "strength": 0.7
+    },
+    {
+      "edge_id": "de5542",
+      "id": "n_v17gas_gogosi",
+      "label": "Gogoși",
+      "relation": "same_category",
+      "strength": 0.65
+    },
+    {
+      "edge_id": "de8556",
+      "id": "n_v24_food_pantry_faina",
+      "label": "Făină",
+      "relation": "part_of",
+      "strength": 0.97
+    },
+    {
+      "edge_id": "de2922",
+      "id": "n_v2gas_desert",
+      "label": "Desert",
+      "relation": "related_to",
+      "strength": 0.82
+    },
+    {
+      "edge_id": "de2924",
+      "id": "n_v2gas_placinte",
+      "label": "Plăcinte",
+      "relation": "same_category",
+      "strength": 0.66
+    },
+    {
+      "edge_id": "de2927",
+      "id": "n_v3gas_inghetata",
+      "label": "Înghețată",
+      "relation": "related_to",
+      "strength": 0.72
+    },
+    {
+      "edge_id": "de3753",
+      "id": "n_v4gas_ou",
+      "label": "Ou",
+      "relation": "part_of",
+      "strength": 0.76
+    }
+  ],
+  "direct_outgoing_non_distractor_neighbors": [
+    {
+      "edge_id": "de2925",
+      "id": "n_gas_branza_smantana",
+      "label": "Brânză cu smântână",
+      "relation": "related_to",
+      "strength": 0.45
+    },
+    {
+      "edge_id": "de2923",
+      "id": "n_gas_papanasi",
+      "label": "Papanași",
+      "relation": "same_category",
+      "strength": 0.78
+    },
+    {
+      "edge_id": "de5534",
+      "id": "n_v17gas_dulceata",
+      "label": "Dulceață",
+      "relation": "related_to",
+      "strength": 0.7
+    },
+    {
+      "edge_id": "de5542",
+      "id": "n_v17gas_gogosi",
+      "label": "Gogoși",
+      "relation": "same_category",
+      "strength": 0.65
+    },
+    {
+      "edge_id": "de2922",
+      "id": "n_v2gas_desert",
+      "label": "Desert",
+      "relation": "related_to",
+      "strength": 0.82
+    },
+    {
+      "edge_id": "de2924",
+      "id": "n_v2gas_placinte",
+      "label": "Plăcinte",
+      "relation": "same_category",
+      "strength": 0.66
+    },
+    {
+      "edge_id": "de2927",
+      "id": "n_v3gas_inghetata",
+      "label": "Înghețată",
+      "relation": "related_to",
+      "strength": 0.72
+    },
+    {
+      "edge_id": "de3753",
+      "id": "n_v4gas_ou",
+      "label": "Ou",
+      "relation": "part_of",
+      "strength": 0.76
+    }
+  ],
+  "negative_control_responses": {
+    "chocolate": {
+      "attempts": 0,
+      "clue_available": false,
+      "clues_used": 0,
+      "guesses": [],
+      "message": "Nu cunosc acest concept",
+      "ok": false,
+      "reachable_count": 2288,
+      "suggestions": [],
+      "won": false
+    },
+    "dulceață": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #12."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 99,
+        "distance": 1,
+        "id": "n_v17gas_dulceata",
+        "label": "Dulceață",
+        "rank": 12,
+        "temperature": "Fierbinte"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 99,
+          "distance": 1,
+          "id": "n_v17gas_dulceata",
+          "label": "Dulceață",
+          "rank": 12,
+          "temperature": "Fierbinte"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "făină": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #24."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 99,
+        "distance": 2,
+        "id": "n_v24_food_pantry_faina",
+        "label": "Făină",
+        "rank": 24,
+        "temperature": "Cald"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 99,
+          "distance": 2,
+          "id": "n_v24_food_pantry_faina",
+          "label": "Făină",
+          "rank": 24,
+          "temperature": "Cald"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "gem": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #13."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 99,
+        "distance": 1,
+        "id": "ctxp_fab0f46e7bcd5932442e",
+        "label": "Gem",
+        "rank": 13,
+        "temperature": "Fierbinte"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 99,
+          "distance": 1,
+          "id": "ctxp_fab0f46e7bcd5932442e",
+          "label": "Gem",
+          "rank": 13,
+          "temperature": "Fierbinte"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "stilou": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #458."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 80,
+        "distance": 4,
+        "id": "n_v24_school_supplies_stilou",
+        "label": "Stilou",
+        "rank": 458,
+        "temperature": "Rece"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 80,
+          "distance": 4,
+          "id": "n_v24_school_supplies_stilou",
+          "label": "Stilou",
+          "rank": 458,
+          "temperature": "Rece"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    }
+  },
+  "probe_words": [
+    "făină",
+    "faina",
+    "zahăr",
+    "ou",
+    "ouă",
+    "lapte",
+    "desert",
+    "gem",
+    "dulceață",
+    "brânză",
+    "smântână",
+    "tigaie",
+    "unt",
+    "miere",
+    "nucă",
+    "ulei",
+    "apă",
+    "ciocolată",
+    "aluat",
+    "chocolate",
+    "dough",
+    "clătite",
+    "clatite",
+    "clătită",
+    "clatita",
+    "clătitele",
+    "clătitei",
+    "clătitelor"
+  ],
+  "repeat_resume": {
+    "first": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #8."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 99,
+        "distance": 1,
+        "id": "ctxp_fab0f46e7bcd5932442e",
+        "label": "Gem",
+        "rank": 8,
+        "temperature": "Fierbinte"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 99,
+          "distance": 1,
+          "id": "ctxp_fab0f46e7bcd5932442e",
+          "label": "Gem",
+          "rank": 8,
+          "temperature": "Fierbinte"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "repeated": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "repeat",
+        "message": "Deja încercat — rămâne #8."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 99,
+        "distance": 1,
+        "id": "ctxp_fab0f46e7bcd5932442e",
+        "label": "Gem",
+        "rank": 8,
+        "temperature": "Fierbinte"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 99,
+          "distance": 1,
+          "id": "ctxp_fab0f46e7bcd5932442e",
+          "label": "Gem",
+          "rank": 8,
+          "temperature": "Fierbinte"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "resumed": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "difficulty": "usor",
+      "game_id": "ccde91bf-0396-4f1f-9688-9cfc14d213b3",
+      "gave_up": false,
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 99,
+          "distance": 1,
+          "id": "ctxp_fab0f46e7bcd5932442e",
+          "label": "Gem",
+          "rank": 8,
+          "temperature": "Fierbinte"
+        }
+      ],
+      "reachable_count": 2288,
+      "won": false
+    }
+  },
+  "responses": {
+    "aluat": {
+      "attempts": 0,
+      "clue_available": false,
+      "clues_used": 0,
+      "guesses": [],
+      "message": "Nu cunosc acest concept. Poate cautai: Alună?",
+      "ok": false,
+      "reachable_count": 2288,
+      "suggestions": [
+        "Alună",
+        "Palat"
+      ],
+      "won": false
+    },
+    "apă": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #181."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 92,
+        "distance": 3,
+        "id": "n_v4gas_apa",
+        "label": "Apă",
+        "rank": 181,
+        "temperature": "Caldut"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 92,
+          "distance": 3,
+          "id": "n_v4gas_apa",
+          "label": "Apă",
+          "rank": 181,
+          "temperature": "Caldut"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "brânză": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #30."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 99,
+        "distance": 2,
+        "id": "n_v2gas_branza",
+        "label": "Brânză",
+        "rank": 30,
+        "temperature": "Cald"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 99,
+          "distance": 2,
+          "id": "n_v2gas_branza",
+          "label": "Brânză",
+          "rank": 30,
+          "temperature": "Cald"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "chocolate": {
+      "attempts": 0,
+      "clue_available": false,
+      "clues_used": 0,
+      "guesses": [],
+      "message": "Nu cunosc acest concept",
+      "ok": false,
+      "reachable_count": 2288,
+      "suggestions": [],
+      "won": false
+    },
+    "ciocolată": {
+      "attempts": 0,
+      "clue_available": false,
+      "clues_used": 0,
+      "guesses": [],
+      "message": "Nu cunosc acest concept. Poate cautai: Ciocolata ROM?",
+      "ok": false,
+      "reachable_count": 2288,
+      "suggestions": [
+        "Ciocolata ROM"
+      ],
+      "won": false
+    },
+    "clatita": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "found",
+        "message": "Exact — ai găsit răspunsul!"
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 100,
+        "distance": 0,
+        "id": "n_v3gas_clatite",
+        "label": "Clătite",
+        "rank": 1,
+        "temperature": "Gasit"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 100,
+          "distance": 0,
+          "id": "n_v3gas_clatite",
+          "label": "Clătite",
+          "rank": 1,
+          "temperature": "Gasit"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "score": 1000,
+      "share": "cat_de_roman_esti · Cald sau Rece\n🎯\n1 incercari",
+      "target": {
+        "description": "Foi subțiri din aluat prăjit, umplute de obicei dulce sau sărat.",
+        "id": "n_v3gas_clatite",
+        "label": "Clătite"
+      },
+      "won": true
+    },
+    "clatite": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "found",
+        "message": "Exact — ai găsit răspunsul!"
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 100,
+        "distance": 0,
+        "id": "n_v3gas_clatite",
+        "label": "Clătite",
+        "rank": 1,
+        "temperature": "Gasit"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 100,
+          "distance": 0,
+          "id": "n_v3gas_clatite",
+          "label": "Clătite",
+          "rank": 1,
+          "temperature": "Gasit"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "score": 1000,
+      "share": "cat_de_roman_esti · Cald sau Rece\n🎯\n1 incercari",
+      "target": {
+        "description": "Foi subțiri din aluat prăjit, umplute de obicei dulce sau sărat.",
+        "id": "n_v3gas_clatite",
+        "label": "Clătite"
+      },
+      "won": true
+    },
+    "clătite": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "found",
+        "message": "Exact — ai găsit răspunsul!"
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 100,
+        "distance": 0,
+        "id": "n_v3gas_clatite",
+        "label": "Clătite",
+        "rank": 1,
+        "temperature": "Gasit"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 100,
+          "distance": 0,
+          "id": "n_v3gas_clatite",
+          "label": "Clătite",
+          "rank": 1,
+          "temperature": "Gasit"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "score": 1000,
+      "share": "cat_de_roman_esti · Cald sau Rece\n🎯\n1 incercari",
+      "target": {
+        "description": "Foi subțiri din aluat prăjit, umplute de obicei dulce sau sărat.",
+        "id": "n_v3gas_clatite",
+        "label": "Clătite"
+      },
+      "won": true
+    },
+    "clătitei": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "found",
+        "message": "Exact — ai găsit răspunsul!"
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 100,
+        "distance": 0,
+        "id": "n_v3gas_clatite",
+        "label": "Clătite",
+        "rank": 1,
+        "temperature": "Gasit"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 100,
+          "distance": 0,
+          "id": "n_v3gas_clatite",
+          "label": "Clătite",
+          "rank": 1,
+          "temperature": "Gasit"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "score": 1000,
+      "share": "cat_de_roman_esti · Cald sau Rece\n🎯\n1 incercari",
+      "target": {
+        "description": "Foi subțiri din aluat prăjit, umplute de obicei dulce sau sărat.",
+        "id": "n_v3gas_clatite",
+        "label": "Clătite"
+      },
+      "won": true
+    },
+    "clătitele": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "found",
+        "message": "Exact — ai găsit răspunsul!"
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 100,
+        "distance": 0,
+        "id": "n_v3gas_clatite",
+        "label": "Clătite",
+        "rank": 1,
+        "temperature": "Gasit"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 100,
+          "distance": 0,
+          "id": "n_v3gas_clatite",
+          "label": "Clătite",
+          "rank": 1,
+          "temperature": "Gasit"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "score": 1000,
+      "share": "cat_de_roman_esti · Cald sau Rece\n🎯\n1 incercari",
+      "target": {
+        "description": "Foi subțiri din aluat prăjit, umplute de obicei dulce sau sărat.",
+        "id": "n_v3gas_clatite",
+        "label": "Clătite"
+      },
+      "won": true
+    },
+    "clătitelor": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "found",
+        "message": "Exact — ai găsit răspunsul!"
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 100,
+        "distance": 0,
+        "id": "n_v3gas_clatite",
+        "label": "Clătite",
+        "rank": 1,
+        "temperature": "Gasit"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 100,
+          "distance": 0,
+          "id": "n_v3gas_clatite",
+          "label": "Clătite",
+          "rank": 1,
+          "temperature": "Gasit"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "score": 1000,
+      "share": "cat_de_roman_esti · Cald sau Rece\n🎯\n1 incercari",
+      "target": {
+        "description": "Foi subțiri din aluat prăjit, umplute de obicei dulce sau sărat.",
+        "id": "n_v3gas_clatite",
+        "label": "Clătite"
+      },
+      "won": true
+    },
+    "clătită": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "found",
+        "message": "Exact — ai găsit răspunsul!"
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 100,
+        "distance": 0,
+        "id": "n_v3gas_clatite",
+        "label": "Clătite",
+        "rank": 1,
+        "temperature": "Gasit"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 100,
+          "distance": 0,
+          "id": "n_v3gas_clatite",
+          "label": "Clătite",
+          "rank": 1,
+          "temperature": "Gasit"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "score": 1000,
+      "share": "cat_de_roman_esti · Cald sau Rece\n🎯\n1 incercari",
+      "target": {
+        "description": "Foi subțiri din aluat prăjit, umplute de obicei dulce sau sărat.",
+        "id": "n_v3gas_clatite",
+        "label": "Clătite"
+      },
+      "won": true
+    },
+    "desert": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #3."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 99,
+        "distance": 1,
+        "id": "n_v2gas_desert",
+        "label": "Desert",
+        "rank": 3,
+        "temperature": "Fierbinte"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 99,
+          "distance": 1,
+          "id": "n_v2gas_desert",
+          "label": "Desert",
+          "rank": 3,
+          "temperature": "Fierbinte"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "dough": {
+      "attempts": 0,
+      "clue_available": false,
+      "clues_used": 0,
+      "guesses": [],
+      "message": "Nu cunosc acest concept",
+      "ok": false,
+      "reachable_count": 2288,
+      "suggestions": [],
+      "won": false
+    },
+    "dulceață": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #7."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 99,
+        "distance": 1,
+        "id": "n_v17gas_dulceata",
+        "label": "Dulceață",
+        "rank": 7,
+        "temperature": "Fierbinte"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 99,
+          "distance": 1,
+          "id": "n_v17gas_dulceata",
+          "label": "Dulceață",
+          "rank": 7,
+          "temperature": "Fierbinte"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "faina": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #2."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 99,
+        "distance": 1,
+        "id": "n_v24_food_pantry_faina",
+        "label": "Făină",
+        "rank": 2,
+        "temperature": "Fierbinte"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 99,
+          "distance": 1,
+          "id": "n_v24_food_pantry_faina",
+          "label": "Făină",
+          "rank": 2,
+          "temperature": "Fierbinte"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "făină": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #2."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 99,
+        "distance": 1,
+        "id": "n_v24_food_pantry_faina",
+        "label": "Făină",
+        "rank": 2,
+        "temperature": "Fierbinte"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 99,
+          "distance": 1,
+          "id": "n_v24_food_pantry_faina",
+          "label": "Făină",
+          "rank": 2,
+          "temperature": "Fierbinte"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "gem": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #8."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 99,
+        "distance": 1,
+        "id": "ctxp_fab0f46e7bcd5932442e",
+        "label": "Gem",
+        "rank": 8,
+        "temperature": "Fierbinte"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 99,
+          "distance": 1,
+          "id": "ctxp_fab0f46e7bcd5932442e",
+          "label": "Gem",
+          "rank": 8,
+          "temperature": "Fierbinte"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "lapte": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #40."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 98,
+        "distance": 2,
+        "id": "n_v4gas_lapte",
+        "label": "Lapte",
+        "rank": 40,
+        "temperature": "Cald"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 98,
+          "distance": 2,
+          "id": "n_v4gas_lapte",
+          "label": "Lapte",
+          "rank": 40,
+          "temperature": "Cald"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "miere": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #1698."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 26,
+        "distance": 6,
+        "id": "n_v24_food_breakfast_miere",
+        "label": "Miere",
+        "rank": 1698,
+        "temperature": "Inghetat"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 26,
+          "distance": 6,
+          "id": "n_v24_food_breakfast_miere",
+          "label": "Miere",
+          "rank": 1698,
+          "temperature": "Inghetat"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "nucă": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #1699."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 26,
+        "distance": 6,
+        "id": "ctxp_92113401f76976ac37f7",
+        "label": "Nucă",
+        "rank": 1699,
+        "temperature": "Inghetat"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 26,
+          "distance": 6,
+          "id": "ctxp_92113401f76976ac37f7",
+          "label": "Nucă",
+          "rank": 1699,
+          "temperature": "Inghetat"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "ou": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #5."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 99,
+        "distance": 1,
+        "id": "n_v4gas_ou",
+        "label": "Ou",
+        "rank": 5,
+        "temperature": "Fierbinte"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 99,
+          "distance": 1,
+          "id": "n_v4gas_ou",
+          "label": "Ou",
+          "rank": 5,
+          "temperature": "Fierbinte"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "ouă": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #5."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 99,
+        "distance": 1,
+        "id": "n_v4gas_ou",
+        "label": "Ou",
+        "rank": 5,
+        "temperature": "Fierbinte"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 99,
+          "distance": 1,
+          "id": "n_v4gas_ou",
+          "label": "Ou",
+          "rank": 5,
+          "temperature": "Fierbinte"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "smântână": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #22."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 99,
+        "distance": 2,
+        "id": "n_v20gas_smantana",
+        "label": "Smântână",
+        "rank": 22,
+        "temperature": "Cald"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 99,
+          "distance": 2,
+          "id": "n_v20gas_smantana",
+          "label": "Smântână",
+          "rank": 22,
+          "temperature": "Cald"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "tigaie": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #185."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 92,
+        "distance": 4,
+        "id": "n_v30_kitchen_cookware_tigaie",
+        "label": "Tigaie",
+        "rank": 185,
+        "temperature": "Caldut"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 92,
+          "distance": 4,
+          "id": "n_v30_kitchen_cookware_tigaie",
+          "label": "Tigaie",
+          "rank": 185,
+          "temperature": "Caldut"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "ulei": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #1698."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 26,
+        "distance": 6,
+        "id": "n_v24_food_pantry_ulei",
+        "label": "Ulei",
+        "rank": 1698,
+        "temperature": "Inghetat"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 26,
+          "distance": 6,
+          "id": "n_v24_food_pantry_ulei",
+          "label": "Ulei",
+          "rank": 1698,
+          "temperature": "Inghetat"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "unt": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #1698."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 26,
+        "distance": 6,
+        "id": "n_v24_food_breakfast_unt",
+        "label": "Unt",
+        "rank": 1698,
+        "temperature": "Inghetat"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 26,
+          "distance": 6,
+          "id": "n_v24_food_breakfast_unt",
+          "label": "Unt",
+          "rank": 1698,
+          "temperature": "Inghetat"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    },
+    "zahăr": {
+      "attempts": 1,
+      "clue_available": false,
+      "clues_used": 0,
+      "feedback": {
+        "kind": "first",
+        "message": "Primul reper: #11."
+      },
+      "guess": {
+        "attempt_number": 1,
+        "closeness": 99,
+        "distance": 2,
+        "id": "n_v24_food_pantry_zahar",
+        "label": "Zahăr",
+        "rank": 11,
+        "temperature": "Fierbinte"
+      },
+      "guesses": [
+        {
+          "attempt_number": 1,
+          "closeness": 99,
+          "distance": 2,
+          "id": "n_v24_food_pantry_zahar",
+          "label": "Zahăr",
+          "rank": 11,
+          "temperature": "Fierbinte"
+        }
+      ],
+      "ok": true,
+      "reachable_count": 2288,
+      "won": false
+    }
+  },
+  "schema": "v80-clatite-fixed-target-probes-v1",
+  "sessions_deleted": true,
+  "target": {
+    "id": "n_v3gas_clatite",
+    "label": "Clătite"
+  }
+}

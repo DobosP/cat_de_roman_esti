@@ -1,0 +1,62 @@
+{
+  "schema": "v80-content-review-v1",
+  "baseline_commit": "9c208a96628b3d92910637fa634d4c998fe0e67d",
+  "reviewers": {
+    "candidate_author_and_probe_runner": "wave_audit",
+    "quality_and_analyst": "root",
+    "factual_verifier_and_implementation": "session_refactor",
+    "independent_selection_impact": "resume_refactor",
+    "documentation": "wave_audit"
+  },
+  "coverage": "Exactly one raw candidate, one staged ID and unanimous V2 promotion. Full preservation/selection evidence; independent agent judgments, not human playtests.",
+  "archive_files": {
+    "FACTUAL_REVIEW.md": "sha256:8ae326a3590d646f862352c16456302ff0100ed3e992522cb14ce8538c3b4c72",
+    "IMPLEMENTATION_REVIEW.md": "sha256:e4b51d541afa8ad524c1c5477dcf9d12411d0fde38dcf5a338aae21cddc8afd9",
+    "README.md": "sha256:3c50f6347fef4fc4d50d0e156ac87578819713ff04d7dad106d6063c42efe604",
+    "VERIFIER_REVIEW.md": "sha256:2b8015bd7f308c374594d40a1e5ab84cfc86ba625eeb40ad8192498541c1b787",
+    "analyst-review.json": "sha256:b135b828e4c6c56bc457df0e2fa21207c27a908d632f59bdb4cf16627a19b1a5",
+    "artifact-delta.json": "sha256:aec41d40408dc94d6103c7d71e4de617679c65c4a09866d920f947c20405721b",
+    "gastronomie/candidates.json": "sha256:87e8b3b4133a82c83542070f6f3228d7482b8e775d66fed660574148220e67dd",
+    "gastronomie/verify_factual.json": "sha256:d749f061f40b013b7dbe24b3727dd62c7e318af7b66f6c7cdf8d104cded38428",
+    "gastronomie/verify_quality.json": "sha256:aeb517a8bb36ea33539e6adaf7ff21253c43803e3aee9b2b6df41d73387fc924",
+    "impact/baseline-tree-manifest.json": "sha256:475064cf0dd6bfaa100a4e41c348a824f69194c81858966ad1fbd88c2128ee57",
+    "impact/baseline.json": "sha256:07232cc0228becbea98ce98b4c17969694b88fbaf274bad96ac56ad4d91382d5",
+    "impact/build_final_receipt.py.txt": "sha256:94ed0ffece83ff41f7e1aeae9154fcfcf97eccb9c7cb39235506eabfd7bdb0a0",
+    "impact/candidate.json": "sha256:d82edf7810bfd67b35eee2e0e01b196afa5c777e4d70eacaba6618b0a3de067c",
+    "impact/comparison.json": "sha256:0201c59c6aca80f95d1051f0625ce1c85a7ae26388d47923eb3696c5189d3ea0",
+    "impact/final-receipt.json": "sha256:7f06245d3e7348c892de07e9e8d68cb6bd50bbbbfb7b89e6b40de0febdd0fd19",
+    "impact/final-report.md": "sha256:f74c81012ba80787ad52302549dc61b0b726e1f3bc7a4238693dba330be9acc8",
+    "impact/public-api.json": "sha256:7396adaa42bac50713ceb8ede14a43fbf43592d98eda04b6d429528a2fb6647b",
+    "impact/public_api_probe.py.txt": "sha256:63e4e3fb42f7cc33c659e2fc22a9d81a8d70fb44284794f9b5762cc1dc8def6a",
+    "impact/selection_impact.py.txt": "sha256:b03d03ee129d939d7a1f4068923e2c372d3544f5a50ab2be18ffe6097fdd5940",
+    "implementation-review.json": "sha256:8fc8b362e080fca6e1c0a343b0de852e248280c0467ff255f4838eb2853da8b1",
+    "reapply-guard.json": "sha256:de004146d92c9854a6d3b19acded2ff48b8e7548eb2bbceaa4588669c932c77b",
+    "runtime-independent.json": "sha256:01db4ac4f48944a730b92dfe4538aff1f9f6b948eaf9a54665df44a3a97a2a79",
+    "runtime-openers.json": "sha256:251be6d78f287b878fdd1b7a1734773cad670f58683efae8110026cb99859ca3",
+    "runtime-probes.py.txt": "sha256:b00a63c0621fe8850421efa3010b6d587206dff101ccf15cb43004388fe54786",
+    "runtime-report.md": "sha256:6bd3b683f0ce14df4238757613b48c6bca1669e3866d71d103d782d1cdac9d8a",
+    "verdicts/contexto_verdicts.json": "sha256:9b65db4c81684c848e81cc6d158404021fedfab01aae80db45991da4bb619352",
+    "verdicts/dossiers/ct_gastronomie_320.json": "sha256:ecc49e659884599caa44a276e205e8ad1e03f23b99b437b38cdf2936517a0d7a",
+    "verification.json": "sha256:59f7a8ef8e4b899522fca7d58945e0733a821ab6d661afe5c682178d41c38ee6",
+    "verifier-review.json": "sha256:9691760173c24802eef64b87b1c3ab36e7f78804752b537f4e0ccf847807a7b3"
+  },
+  "source_files": {
+    "cat_de_roman_esti/wordgames/derived_catalog.py": "sha256:f1346b11cb5beda43164bcb1f407705834a750a48e728d925b5215f53066148d",
+    "cat_de_roman_esti/fixtures/games_pack.json": "sha256:27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "sha256:823c5f302bd36c833283038affb1125dc434a1d34fba635e71c06b721cda4cec",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "sha256:0787a4325c84753c739e7900f174cc99f46e9a4d3fbd8ce1e035cdf84c9b6ae2",
+    "tests/content_history.py": "sha256:e51f62aa076e91c2c10a0f1dbe7693bcc1fb4d15cdcb60495632a0f06f54aa3b",
+    "tests/test_v80_clatite_target.py": "sha256:6d256e05fff2eae4aa628d6d2bbb0e8d1951efc60ad796f81535856008b99b7d",
+    "tests/test_v75_contexto_food.py": "sha256:c7f466ce5f5bb0096f9a79a6ace6cabe66ab9d57e46cb50a62cdc7912e9bed70",
+    "tests/test_v77_flour_associations.py": "sha256:0716ce803291ef190bdb23f3b6b7c2207e52d6158440f00ed348e6492ce1901f",
+    "docs/STATUS.md": "sha256:3dd4248f649759ee539ac6d502d994ace1f1c37caf6a18de72068c28d93c0f58",
+    "docs/BETA_CANDIDATE.md": "sha256:9ba79aca10c0133b47c221d6f7a66b4868fe327d48aa768f88c60064cc00fc32",
+    "docs/adr/0111-promote-reviewed-clatite-target.md": "sha256:efd7cd9a224cfb7cfd00960b37db6db61475e81b94de9147e09171ed69cc2be4",
+    "docs/CRITIQUE_RUBRIC.md": "sha256:29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3"
+  },
+  "notes": [
+    "Archive paths are relative to this review directory; original absolute scratch paths identify provenance and can be matched by file name and hash.",
+    "Manifest excludes itself and the later docs-review.json to avoid circular bindings; the final documentation review binds this manifest.",
+    "Baseline-tree file contents can be restored from the recorded Git commit; its manifest is archived, not the duplicate scratch checkout."
+  ]
+}

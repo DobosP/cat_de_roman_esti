@@ -15,6 +15,7 @@ from django.test import Client  # noqa: E402
 
 from cat_de_roman_esti.wordgames import contexto, lant  # noqa: E402
 from cat_de_roman_esti.wordgames.service import get_service  # noqa: E402
+from tests.content_history import before_v80_pack, before_v80_rankings  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 FLOUR = "n_v24_food_pantry_faina"
@@ -62,10 +63,15 @@ def test_all_pack_records_ranking_rows_and_frozen_boards_remain_exact():
     package = ROOT / "cat_de_roman_esti/fixtures"
     pack = (package / "games_pack.json").read_bytes()
     assert pack == (ROOT / "tests/fixtures/games_pack.json").read_bytes()
-    assert hashlib.sha256(pack).hexdigest() == (
+    restored_pack = (
+        json.dumps(before_v80_pack(json.loads(pack)), ensure_ascii=False, indent=1) + "\n"
+    ).encode()
+    assert hashlib.sha256(restored_pack).hexdigest() == (
         "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5"
     )
-    rankings = json.loads((package / "board_rankings_v37.json").read_bytes())
+    rankings = before_v80_rankings(
+        json.loads((package / "board_rankings_v37.json").read_bytes())
+    )
     assert len(rankings["boards"]) == 620
     ranked_payload = (json.dumps(rankings["boards"], ensure_ascii=False, indent=1) + "\n").encode()
     assert hashlib.sha256(ranked_payload).hexdigest() == (
@@ -92,7 +98,7 @@ def test_flour_is_a_direct_ingredient_without_a_reverse_shortcut(target):
 @pytest.mark.parametrize("target", TARGETS)
 @pytest.mark.parametrize("surface", ("făină", "FAINA", "făinii"))
 def test_flour_feedback_is_hot_private_and_survives_resume(target, surface):
-    # These rejected V75 candidate targets are intentionally fixed here, not promoted.
+    # Fix both targets here; Clătite is separately promoted and exercised by V80.
     client = Client()
     game_id = contexto.store.create(contexto._build_session(target, "usor", None))
     url = f"/api/wordgames/contexto/games/{game_id}"
@@ -140,7 +146,9 @@ def test_lant_exposes_the_reviewed_ingredient_step(target):
 
 
 def test_no_rejected_food_candidate_was_promoted_by_the_graph_wave():
-    pack = json.loads((ROOT / "cat_de_roman_esti/fixtures/games_pack.json").read_text())
+    pack = before_v80_pack(
+        json.loads((ROOT / "cat_de_roman_esti/fixtures/games_pack.json").read_text())
+    )
     candidates = {*TARGETS, "n_gas_paine_de_casa"}
     assert not candidates & {row["target"] for row in pack["contexto"]}
 

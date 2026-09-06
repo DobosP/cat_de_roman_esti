@@ -48,16 +48,16 @@ _LEDGER = _ROOT / "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 _REVIEW = _ROOT / "docs/reviews/v63-film-and-television-morphology/vocabulary.json"
 
-# Current V77 whole-artifact pins; historical review and data evidence remains immutable.
+# Current V80 whole-artifact pins; historical review and data evidence remains immutable.
 _KG_SHA256 = "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370"
-_PACK_SHA256 = "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5"
-_RANKINGS_SHA256 = "53c2542b845d2560a900712381ab4c28cb1b9789beaae9690639647871e905d3"
-_DERIVED_SHA256 = "84aaa772746dac0eb4e1366738f467afad86c543c7430cb67810475d5a296878"
+_PACK_SHA256 = "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29"
+_RANKINGS_SHA256 = "823c5f302bd36c833283038affb1125dc434a1d34fba635e71c06b721cda4cec"
+_DERIVED_SHA256 = "0787a4325c84753c739e7900f174cc99f46e9a4d3fbd8ce1e035cdf84c9b6ae2"
 _MOBILE_SHA256 = "869499abccc3e6b5befe5d889a0e24c4d3bd67096c4d0a69c58d925680612a28"
 _CANDIDATE_FUNNEL_SHA256 = (
     "73f31447e8fff86bb918d3830ebf886ba6fc1d2f14a1a88793fa396c03b5acef"
 )
-_RANKING_ROWS_SHA256 = "80fc0672c82efa6317ec6e9f0a793efc12cad68a94093d2a8beabc9be34866cf"
+_RANKING_ROWS_SHA256 = "665b40e7d8f0ac1ae98f581238b31cf95a1d777785cd81a63c0e651eb1d269fa"
 _FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
 _NODES_WITHOUT_ALIASES_SHA256 = (
     "518836374f3e9e8650be84b13772d59b05d35313a13b5d20aaa4e9aa5729dd3e"

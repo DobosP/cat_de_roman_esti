@@ -1,0 +1,96 @@
+#!/usr/bin/env python3
+"""Offline fixed-target Contexto evidence for the V80 Clătite candidate."""
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+from pathlib import Path
+
+os.environ["DJANGO_SETTINGS_MODULE"] = "cat_de_roman_esti.web.settings"
+os.environ["CAT_ACCOUNTS_ENABLED"] = "0"
+os.environ["ROEDU_API_URL"] = ""
+os.environ["ROEDU_API_KEY"] = ""
+
+import django
+
+django.setup()
+
+from django.test import Client
+from cat_de_roman_esti.wordgames import contexto
+from cat_de_roman_esti.wordgames.service import get_service
+
+ROOT = Path(__file__).resolve().parents[2] / "_worktrees/cat_de_roman_esti/content__v80-clatite-target"
+TARGET = "n_v3gas_clatite"
+CONTROL_TARGET = "n_gas_papanasi"
+WORDS = [
+    "făină", "faina", "zahăr", "ou", "ouă", "lapte", "desert", "gem", "dulceață",
+    "brânză", "smântână", "tigaie", "unt", "miere", "nucă", "ulei", "apă",
+    "ciocolată", "aluat", "chocolate", "dough", "clătite", "clatite", "clătită", "clatita", "clătitele", "clătitei", "clătitelor",
+]
+
+
+def digest(relative: str) -> str:
+    return "sha256:" + hashlib.sha256((ROOT / relative).read_bytes()).hexdigest()
+
+
+def probe(target: str, text: str) -> dict:
+    game_id = contexto.store.create(contexto._build_session(target, "usor", None))
+    url = f"/api/wordgames/contexto/games/{game_id}"
+    try:
+        response = Client().post(url + "/guess", {"text": text}, content_type="application/json").json()
+        return response
+    finally:
+        contexto.store.delete(game_id)
+
+
+def repeat_resume() -> dict:
+    game_id = contexto.store.create(contexto._build_session(TARGET, "usor", None))
+    url = f"/api/wordgames/contexto/games/{game_id}"
+    client = Client()
+    try:
+        first = client.post(url + "/guess", {"text": "gem"}, content_type="application/json").json()
+        resumed = client.get(url).json()
+        repeated = client.post(url + "/guess", {"text": " GEM "}, content_type="application/json").json()
+        return {"first": first, "resumed": resumed, "repeated": repeated}
+    finally:
+        contexto.store.delete(game_id)
+
+
+def main() -> None:
+    svc = get_service()
+    rows = {word: probe(TARGET, word) for word in WORDS}
+    controls = {word: probe(CONTROL_TARGET, word) for word in ("gem", "dulceață", "făină", "stilou", "chocolate")}
+    outgoing_neighbors = []
+    for node_id in svc.neighbor_ids(TARGET):
+        edge = svc.link(TARGET, node_id)
+        assert edge is not None
+        outgoing_neighbors.append({"id": node_id, "label": svc.label(node_id), "strength": edge.strength, "relation": edge.relation, "edge_id": edge.id})
+    incoming_neighbors = []
+    for node_id in svc.predecessor_ids(TARGET):
+        edge = svc.link(node_id, TARGET)
+        assert edge is not None
+        incoming_neighbors.append({"id": node_id, "label": svc.label(node_id), "strength": edge.strength, "relation": edge.relation, "edge_id": edge.id})
+    result = {
+        "schema": "v80-clatite-fixed-target-probes-v1",
+        "target": {"id": TARGET, "label": svc.label(TARGET)},
+        "control_target": {"id": CONTROL_TARGET, "label": svc.label(CONTROL_TARGET)},
+        "bindings": {
+            "kg": digest("cat_de_roman_esti/fixtures/kg_sample.json"),
+            "projection": digest("cat_de_roman_esti/wordgames/contexto_projection.py"),
+            "contexto": digest("cat_de_roman_esti/wordgames/contexto.py"),
+            "candidate": "sha256:87e8b3b4133a82c83542070f6f3228d7482b8e775d66fed660574148220e67dd",
+        },
+        "probe_words": WORDS,
+        "responses": rows,
+        "negative_control_responses": controls,
+        "repeat_resume": repeat_resume(),
+        "direct_outgoing_non_distractor_neighbors": outgoing_neighbors,
+        "direct_incoming_non_distractor_neighbors": incoming_neighbors,
+        "sessions_deleted": True,
+    }
+    print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

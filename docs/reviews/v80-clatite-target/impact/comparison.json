@@ -1,0 +1,1656 @@
+{
+  "schema": "v80-clatite-selection-comparison-v1",
+  "inputs": {
+    "before": {
+      "path": "/home/dobo/work/_temp/v80-clatite-target/impact/baseline.json",
+      "sha256": "07232cc0228becbea98ce98b4c17969694b88fbaf274bad96ac56ad4d91382d5"
+    },
+    "after": {
+      "path": "/home/dobo/work/_temp/v80-clatite-target/impact/candidate.json",
+      "sha256": "d82edf7810bfd67b35eee2e0e01b196afa5c777e4d70eacaba6618b0a3de067c"
+    }
+  },
+  "bindings": {
+    "before": {
+      "git_head": "9c208a96628b3d92910637fa634d4c998fe0e67d",
+      "git_status": [],
+      "packs_source_sha256": "6404b4c8ed2813680a684d9e33e6ea33c6f968c95e025bd2a0eb1af3b1349607",
+      "derived_source_sha256": "d08ed9550f55d9abe2ab5439ecba8b03ea4f7ba69ba3d577541882a0452c0e60",
+      "artifact_sha256": {
+        "cat_de_roman_esti/fixtures/kg_sample.json": "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+        "tests/fixtures/kg_sample.json": "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+        "cat_de_roman_esti/fixtures/games_pack.json": "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5",
+        "tests/fixtures/games_pack.json": "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5",
+        "cat_de_roman_esti/fixtures/board_rankings_v37.json": "53c2542b845d2560a900712381ab4c28cb1b9789beaae9690639647871e905d3",
+        "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "84aaa772746dac0eb4e1366738f467afad86c543c7430cb67810475d5a296878",
+        "tests/fixtures/cat_mobile_app_pack_contract.json": "869499abccc3e6b5befe5d889a0e24c4d3bd67096c4d0a69c58d925680612a28",
+        "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29",
+        "cat_de_roman_esti/fixtures/contexto_impact_reserve_v69.json": "4c41d092c895c61aaccfbda3cb9522c4d5767a88d9af9343efccc182f71e7612"
+      }
+    },
+    "after": {
+      "git_head": "9c208a96628b3d92910637fa634d4c998fe0e67d",
+      "git_status": [
+        "M cat_de_roman_esti/fixtures/board_rankings_v37.json",
+        " M cat_de_roman_esti/fixtures/derived_catalog_v38.json",
+        " M cat_de_roman_esti/fixtures/games_pack.json",
+        " M cat_de_roman_esti/wordgames/derived_catalog.py",
+        " M tests/fixtures/board_rankings_v37.json",
+        " M tests/fixtures/derived_catalog_v38.json",
+        " M tests/fixtures/games_pack.json"
+      ],
+      "packs_source_sha256": "6404b4c8ed2813680a684d9e33e6ea33c6f968c95e025bd2a0eb1af3b1349607",
+      "derived_source_sha256": "f1346b11cb5beda43164bcb1f407705834a750a48e728d925b5215f53066148d",
+      "artifact_sha256": {
+        "cat_de_roman_esti/fixtures/kg_sample.json": "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+        "tests/fixtures/kg_sample.json": "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+        "cat_de_roman_esti/fixtures/games_pack.json": "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29",
+        "tests/fixtures/games_pack.json": "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29",
+        "cat_de_roman_esti/fixtures/board_rankings_v37.json": "823c5f302bd36c833283038affb1125dc434a1d34fba635e71c06b721cda4cec",
+        "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "0787a4325c84753c739e7900f174cc99f46e9a4d3fbd8ce1e035cdf84c9b6ae2",
+        "tests/fixtures/cat_mobile_app_pack_contract.json": "869499abccc3e6b5befe5d889a0e24c4d3bd67096c4d0a69c58d925680612a28",
+        "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29",
+        "cat_de_roman_esti/fixtures/contexto_impact_reserve_v69.json": "4c41d092c895c61aaccfbda3cb9522c4d5767a88d9af9343efccc182f71e7612"
+      }
+    }
+  },
+  "counts": {
+    "before": {
+      "pack_records": 620,
+      "approved_pack_records": 612,
+      "pending_pack_records": 8,
+      "ranking_rows": 620,
+      "ranking_eligible": 450,
+      "derived_boards": 336
+    },
+    "after": {
+      "pack_records": 621,
+      "approved_pack_records": 613,
+      "pending_pack_records": 8,
+      "ranking_rows": 621,
+      "ranking_eligible": 451,
+      "derived_boards": 336
+    }
+  },
+  "preservation": {
+    "added_pack_ids": [
+      "ct_gastronomie_320"
+    ],
+    "removed_pack_ids": [],
+    "all_previous_pack_records_exact": true,
+    "all_previous_pending_holds_exact": true,
+    "added_ranking_ids": [
+      "ct_gastronomie_320"
+    ],
+    "removed_ranking_ids": [],
+    "old_ranking_quality_status_eligibility_drift": {},
+    "old_rank_changes": {
+      "ct_arta_cultura_003": {
+        "before": 189,
+        "after": 190
+      },
+      "ct_arta_cultura_004": {
+        "before": 134,
+        "after": 135
+      },
+      "ct_arta_cultura_005": {
+        "before": 175,
+        "after": 176
+      },
+      "ct_arta_cultura_006": {
+        "before": 153,
+        "after": 154
+      },
+      "ct_arta_cultura_007": {
+        "before": 111,
+        "after": 112
+      },
+      "ct_arta_cultura_008": {
+        "before": 170,
+        "after": 171
+      },
+      "ct_arta_cultura_009": {
+        "before": 154,
+        "after": 155
+      },
+      "ct_arta_cultura_010": {
+        "before": 86,
+        "after": 87
+      },
+      "ct_arta_cultura_116": {
+        "before": 125,
+        "after": 126
+      },
+      "ct_arta_cultura_117": {
+        "before": 115,
+        "after": 116
+      },
+      "ct_arta_cultura_118": {
+        "before": 139,
+        "after": 140
+      },
+      "ct_arta_cultura_119": {
+        "before": 181,
+        "after": 182
+      },
+      "ct_arta_cultura_120": {
+        "before": 101,
+        "after": 102
+      },
+      "ct_arta_cultura_194": {
+        "before": 164,
+        "after": 165
+      },
+      "ct_film_tv_012": {
+        "before": 56,
+        "after": 57
+      },
+      "ct_film_tv_013": {
+        "before": 79,
+        "after": 80
+      },
+      "ct_film_tv_014": {
+        "before": 155,
+        "after": 156
+      },
+      "ct_film_tv_015": {
+        "before": 171,
+        "after": 172
+      },
+      "ct_film_tv_017": {
+        "before": 146,
+        "after": 147
+      },
+      "ct_film_tv_018": {
+        "before": 196,
+        "after": 197
+      },
+      "ct_film_tv_124": {
+        "before": 62,
+        "after": 63
+      },
+      "ct_film_tv_126": {
+        "before": 192,
+        "after": 193
+      },
+      "ct_film_tv_202": {
+        "before": 147,
+        "after": 148
+      },
+      "ct_film_tv_203": {
+        "before": 135,
+        "after": 136
+      },
+      "ct_gastronomie_022": {
+        "before": 63,
+        "after": 64
+      },
+      "ct_gastronomie_025": {
+        "before": 104,
+        "after": 105
+      },
+      "ct_gastronomie_130": {
+        "before": 148,
+        "after": 149
+      },
+      "ct_gastronomie_131": {
+        "before": 120,
+        "after": 121
+      },
+      "ct_gastronomie_132": {
+        "before": 116,
+        "after": 117
+      },
+      "ct_geografie_001": {
+        "before": 105,
+        "after": 106
+      },
+      "ct_geografie_027": {
+        "before": 176,
+        "after": 177
+      },
+      "ct_geografie_028": {
+        "before": 117,
+        "after": 118
+      },
+      "ct_geografie_029": {
+        "before": 197,
+        "after": 198
+      },
+      "ct_geografie_030": {
+        "before": 209,
+        "after": 210
+      },
+      "ct_geografie_031": {
+        "before": 208,
+        "after": 209
+      },
+      "ct_geografie_032": {
+        "before": 126,
+        "after": 127
+      },
+      "ct_geografie_033": {
+        "before": 177,
+        "after": 178
+      },
+      "ct_geografie_034": {
+        "before": 112,
+        "after": 113
+      },
+      "ct_geografie_134": {
+        "before": 53,
+        "after": 54
+      },
+      "ct_geografie_136": {
+        "before": 136,
+        "after": 137
+      },
+      "ct_geografie_137": {
+        "before": 198,
+        "after": 199
+      },
+      "ct_geografie_138": {
+        "before": 199,
+        "after": 200
+      },
+      "ct_geografie_214": {
+        "before": 106,
+        "after": 107
+      },
+      "ct_istorie_001": {
+        "before": 89,
+        "after": 90
+      },
+      "ct_istorie_036": {
+        "before": 140,
+        "after": 141
+      },
+      "ct_istorie_037": {
+        "before": 204,
+        "after": 205
+      },
+      "ct_istorie_038": {
+        "before": 97,
+        "after": 98
+      },
+      "ct_istorie_039": {
+        "before": 113,
+        "after": 114
+      },
+      "ct_istorie_040": {
+        "before": 127,
+        "after": 128
+      },
+      "ct_istorie_041": {
+        "before": 102,
+        "after": 103
+      },
+      "ct_istorie_042": {
+        "before": 121,
+        "after": 122
+      },
+      "ct_istorie_139": {
+        "before": 98,
+        "after": 99
+      },
+      "ct_istorie_142": {
+        "before": 178,
+        "after": 179
+      },
+      "ct_istorie_143": {
+        "before": 156,
+        "after": 157
+      },
+      "ct_istorie_144": {
+        "before": 132,
+        "after": 133
+      },
+      "ct_istorie_308": {
+        "before": 114,
+        "after": 115
+      },
+      "ct_istorie_309": {
+        "before": 149,
+        "after": 150
+      },
+      "ct_istorie_310": {
+        "before": 190,
+        "after": 191
+      },
+      "ct_limba_043": {
+        "before": 150,
+        "after": 151
+      },
+      "ct_limba_044": {
+        "before": 122,
+        "after": 123
+      },
+      "ct_limba_045": {
+        "before": 157,
+        "after": 158
+      },
+      "ct_limba_046": {
+        "before": 161,
+        "after": 162
+      },
+      "ct_limba_047": {
+        "before": 191,
+        "after": 192
+      },
+      "ct_limba_048": {
+        "before": 184,
+        "after": 185
+      },
+      "ct_limba_049": {
+        "before": 185,
+        "after": 186
+      },
+      "ct_limba_050": {
+        "before": 202,
+        "after": 203
+      },
+      "ct_limba_145": {
+        "before": 64,
+        "after": 65
+      },
+      "ct_limba_147": {
+        "before": 54,
+        "after": 55
+      },
+      "ct_limba_148": {
+        "before": 141,
+        "after": 142
+      },
+      "ct_limba_149": {
+        "before": 193,
+        "after": 194
+      },
+      "ct_limba_150": {
+        "before": 207,
+        "after": 208
+      },
+      "ct_limba_224": {
+        "before": 151,
+        "after": 152
+      },
+      "ct_limba_226": {
+        "before": 182,
+        "after": 183
+      },
+      "ct_literatura_051": {
+        "before": 65,
+        "after": 66
+      },
+      "ct_literatura_052": {
+        "before": 107,
+        "after": 108
+      },
+      "ct_literatura_053": {
+        "before": 158,
+        "after": 159
+      },
+      "ct_literatura_054": {
+        "before": 142,
+        "after": 143
+      },
+      "ct_literatura_056": {
+        "before": 186,
+        "after": 187
+      },
+      "ct_literatura_057": {
+        "before": 137,
+        "after": 138
+      },
+      "ct_literatura_058": {
+        "before": 179,
+        "after": 180
+      },
+      "ct_literatura_156": {
+        "before": 90,
+        "after": 91
+      },
+      "ct_literatura_228": {
+        "before": 71,
+        "after": 72
+      },
+      "ct_literatura_230": {
+        "before": 162,
+        "after": 163
+      },
+      "ct_literatura_231": {
+        "before": 72,
+        "after": 73
+      },
+      "ct_literatura_232": {
+        "before": 93,
+        "after": 94
+      },
+      "ct_meme_net_060": {
+        "before": 94,
+        "after": 95
+      },
+      "ct_meme_net_061": {
+        "before": 73,
+        "after": 74
+      },
+      "ct_meme_net_062": {
+        "before": 80,
+        "after": 81
+      },
+      "ct_meme_net_063": {
+        "before": 57,
+        "after": 58
+      },
+      "ct_meme_net_064": {
+        "before": 87,
+        "after": 88
+      },
+      "ct_meme_net_066": {
+        "before": 99,
+        "after": 100
+      },
+      "ct_meme_net_160": {
+        "before": 88,
+        "after": 89
+      },
+      "ct_meme_net_162": {
+        "before": 58,
+        "after": 59
+      },
+      "ct_meme_net_236": {
+        "before": 95,
+        "after": 96
+      },
+      "ct_meme_net_297": {
+        "before": 55,
+        "after": 56
+      },
+      "ct_muzica_069": {
+        "before": 172,
+        "after": 173
+      },
+      "ct_muzica_070": {
+        "before": 133,
+        "after": 134
+      },
+      "ct_muzica_072": {
+        "before": 143,
+        "after": 144
+      },
+      "ct_muzica_074": {
+        "before": 74,
+        "after": 75
+      },
+      "ct_muzica_163": {
+        "before": 81,
+        "after": 82
+      },
+      "ct_muzica_165": {
+        "before": 59,
+        "after": 60
+      },
+      "ct_muzica_167": {
+        "before": 123,
+        "after": 124
+      },
+      "ct_muzica_168": {
+        "before": 83,
+        "after": 84
+      },
+      "ct_muzica_241": {
+        "before": 75,
+        "after": 76
+      },
+      "ct_muzica_243": {
+        "before": 66,
+        "after": 67
+      },
+      "ct_muzica_244": {
+        "before": 76,
+        "after": 77
+      },
+      "ct_muzica_312": {
+        "before": 128,
+        "after": 129
+      },
+      "ct_muzica_313": {
+        "before": 165,
+        "after": 166
+      },
+      "ct_personalitati_075": {
+        "before": 77,
+        "after": 78
+      },
+      "ct_personalitati_076": {
+        "before": 82,
+        "after": 83
+      },
+      "ct_personalitati_082": {
+        "before": 183,
+        "after": 184
+      },
+      "ct_personalitati_171": {
+        "before": 103,
+        "after": 104
+      },
+      "ct_personalitati_172": {
+        "before": 67,
+        "after": 68
+      },
+      "ct_personalitati_173": {
+        "before": 108,
+        "after": 109
+      },
+      "ct_personalitati_174": {
+        "before": 152,
+        "after": 153
+      },
+      "ct_societate_083": {
+        "before": 109,
+        "after": 110
+      },
+      "ct_societate_084": {
+        "before": 100,
+        "after": 101
+      },
+      "ct_societate_085": {
+        "before": 118,
+        "after": 119
+      },
+      "ct_societate_086": {
+        "before": 144,
+        "after": 145
+      },
+      "ct_societate_087": {
+        "before": 129,
+        "after": 130
+      },
+      "ct_societate_088": {
+        "before": 163,
+        "after": 164
+      },
+      "ct_societate_089": {
+        "before": 173,
+        "after": 174
+      },
+      "ct_societate_090": {
+        "before": 159,
+        "after": 160
+      },
+      "ct_societate_175": {
+        "before": 91,
+        "after": 92
+      },
+      "ct_societate_178": {
+        "before": 166,
+        "after": 167
+      },
+      "ct_societate_257": {
+        "before": 92,
+        "after": 93
+      },
+      "ct_societate_290": {
+        "before": 84,
+        "after": 85
+      },
+      "ct_societate_291": {
+        "before": 200,
+        "after": 201
+      },
+      "ct_societate_292": {
+        "before": 206,
+        "after": 207
+      },
+      "ct_societate_293": {
+        "before": 145,
+        "after": 146
+      },
+      "ct_societate_294": {
+        "before": 138,
+        "after": 139
+      },
+      "ct_sport_095": {
+        "before": 110,
+        "after": 111
+      },
+      "ct_sport_096": {
+        "before": 194,
+        "after": 195
+      },
+      "ct_sport_097": {
+        "before": 180,
+        "after": 181
+      },
+      "ct_sport_184": {
+        "before": 130,
+        "after": 131
+      },
+      "ct_sport_261": {
+        "before": 78,
+        "after": 79
+      },
+      "ct_sport_262": {
+        "before": 60,
+        "after": 61
+      },
+      "ct_sport_263": {
+        "before": 68,
+        "after": 69
+      },
+      "ct_sport_316": {
+        "before": 61,
+        "after": 62
+      },
+      "ct_stiinta_099": {
+        "before": 167,
+        "after": 168
+      },
+      "ct_stiinta_100": {
+        "before": 203,
+        "after": 204
+      },
+      "ct_stiinta_101": {
+        "before": 201,
+        "after": 202
+      },
+      "ct_stiinta_102": {
+        "before": 205,
+        "after": 206
+      },
+      "ct_stiinta_103": {
+        "before": 187,
+        "after": 188
+      },
+      "ct_stiinta_105": {
+        "before": 195,
+        "after": 196
+      },
+      "ct_stiinta_106": {
+        "before": 160,
+        "after": 161
+      },
+      "ct_stiinta_189": {
+        "before": 85,
+        "after": 86
+      },
+      "ct_stiinta_190": {
+        "before": 124,
+        "after": 125
+      },
+      "ct_stiinta_191": {
+        "before": 168,
+        "after": 169
+      },
+      "ct_stiinta_266": {
+        "before": 169,
+        "after": 170
+      },
+      "ct_stiinta_267": {
+        "before": 69,
+        "after": 70
+      },
+      "ct_stiinta_268": {
+        "before": 174,
+        "after": 175
+      },
+      "ct_stiinta_295": {
+        "before": 131,
+        "after": 132
+      },
+      "ct_viata_de_roman_107": {
+        "before": 96,
+        "after": 97
+      },
+      "ct_viata_de_roman_108": {
+        "before": 52,
+        "after": 53
+      },
+      "ct_viata_de_roman_113": {
+        "before": 188,
+        "after": 189
+      },
+      "ct_viata_de_roman_197": {
+        "before": 70,
+        "after": 71
+      },
+      "ct_viata_de_roman_198": {
+        "before": 119,
+        "after": 120
+      }
+    },
+    "old_selection_weight_changes": {
+      "ct_meme_net_064": {
+        "before": 4,
+        "after": 3
+      }
+    },
+    "derived_board_ids_exact": true,
+    "all_derived_board_rows_exact": true,
+    "derived_board_payloads_exact": true,
+    "artifact_hash_changes": {
+      "cat_de_roman_esti/fixtures/games_pack.json": {
+        "before": "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5",
+        "after": "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29"
+      },
+      "tests/fixtures/games_pack.json": {
+        "before": "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5",
+        "after": "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29"
+      },
+      "cat_de_roman_esti/fixtures/board_rankings_v37.json": {
+        "before": "53c2542b845d2560a900712381ab4c28cb1b9789beaae9690639647871e905d3",
+        "after": "823c5f302bd36c833283038affb1125dc434a1d34fba635e71c06b721cda4cec"
+      },
+      "cat_de_roman_esti/fixtures/derived_catalog_v38.json": {
+        "before": "84aaa772746dac0eb4e1366738f467afad86c543c7430cb67810475d5a296878",
+        "after": "0787a4325c84753c739e7900f174cc99f46e9a4d3fbd8ce1e035cdf84c9b6ae2"
+      }
+    }
+  },
+  "new_pack_records": {
+    "ct_gastronomie_320": {
+      "difficulty": "usor",
+      "target": "n_v3gas_clatite",
+      "id": "ct_gastronomie_320",
+      "category": "gastronomie",
+      "source": "ai",
+      "status": "approved"
+    }
+  },
+  "new_ranking_rows": {
+    "ct_gastronomie_320": {
+      "id": "ct_gastronomie_320",
+      "game": "contexto",
+      "status": "approved",
+      "romanian_familiarity": 78,
+      "play_quality": 90,
+      "pilot_score": 83,
+      "rank": 52,
+      "pilot_eligible": true,
+      "selection_weight": 4
+    }
+  },
+  "contexto_gastronomie_usor_shelf": {
+    "before_count": 8,
+    "after_count": 9,
+    "all_before": {
+      "ct_gastronomie_300": {
+        "pilot_score": 94,
+        "global_rank": 1,
+        "global_selection_weight": 5,
+        "filtered_shelf_rank": 1,
+        "filtered_shelf_weight": 5
+      },
+      "ct_gastronomie_318": {
+        "pilot_score": 93,
+        "global_rank": 4,
+        "global_selection_weight": 5,
+        "filtered_shelf_rank": 2,
+        "filtered_shelf_weight": 5
+      },
+      "ct_gastronomie_024": {
+        "pilot_score": 90,
+        "global_rank": 14,
+        "global_selection_weight": 5,
+        "filtered_shelf_rank": 3,
+        "filtered_shelf_weight": 4
+      },
+      "ct_gastronomie_128": {
+        "pilot_score": 90,
+        "global_rank": 15,
+        "global_selection_weight": 5,
+        "filtered_shelf_rank": 4,
+        "filtered_shelf_weight": 4
+      },
+      "ct_gastronomie_319": {
+        "pilot_score": 90,
+        "global_rank": 16,
+        "global_selection_weight": 5,
+        "filtered_shelf_rank": 5,
+        "filtered_shelf_weight": 3
+      },
+      "ct_gastronomie_019": {
+        "pilot_score": 88,
+        "global_rank": 27,
+        "global_selection_weight": 5,
+        "filtered_shelf_rank": 6,
+        "filtered_shelf_weight": 2
+      },
+      "ct_gastronomie_020": {
+        "pilot_score": 87,
+        "global_rank": 30,
+        "global_selection_weight": 5,
+        "filtered_shelf_rank": 7,
+        "filtered_shelf_weight": 2
+      },
+      "ct_gastronomie_127": {
+        "pilot_score": 84,
+        "global_rank": 46,
+        "global_selection_weight": 4,
+        "filtered_shelf_rank": 8,
+        "filtered_shelf_weight": 1
+      }
+    },
+    "all_after": {
+      "ct_gastronomie_300": {
+        "pilot_score": 94,
+        "global_rank": 1,
+        "global_selection_weight": 5,
+        "filtered_shelf_rank": 1,
+        "filtered_shelf_weight": 5
+      },
+      "ct_gastronomie_318": {
+        "pilot_score": 93,
+        "global_rank": 4,
+        "global_selection_weight": 5,
+        "filtered_shelf_rank": 2,
+        "filtered_shelf_weight": 5
+      },
+      "ct_gastronomie_024": {
+        "pilot_score": 90,
+        "global_rank": 14,
+        "global_selection_weight": 5,
+        "filtered_shelf_rank": 3,
+        "filtered_shelf_weight": 4
+      },
+      "ct_gastronomie_128": {
+        "pilot_score": 90,
+        "global_rank": 15,
+        "global_selection_weight": 5,
+        "filtered_shelf_rank": 4,
+        "filtered_shelf_weight": 4
+      },
+      "ct_gastronomie_319": {
+        "pilot_score": 90,
+        "global_rank": 16,
+        "global_selection_weight": 5,
+        "filtered_shelf_rank": 5,
+        "filtered_shelf_weight": 3
+      },
+      "ct_gastronomie_019": {
+        "pilot_score": 88,
+        "global_rank": 27,
+        "global_selection_weight": 5,
+        "filtered_shelf_rank": 6,
+        "filtered_shelf_weight": 3
+      },
+      "ct_gastronomie_020": {
+        "pilot_score": 87,
+        "global_rank": 30,
+        "global_selection_weight": 5,
+        "filtered_shelf_rank": 7,
+        "filtered_shelf_weight": 2
+      },
+      "ct_gastronomie_127": {
+        "pilot_score": 84,
+        "global_rank": 46,
+        "global_selection_weight": 4,
+        "filtered_shelf_rank": 8,
+        "filtered_shelf_weight": 2
+      },
+      "ct_gastronomie_320": {
+        "pilot_score": 83,
+        "global_rank": 52,
+        "global_selection_weight": 4,
+        "filtered_shelf_rank": 9,
+        "filtered_shelf_weight": 1
+      }
+    },
+    "changes": {
+      "ct_gastronomie_019": {
+        "before": {
+          "pilot_score": 88,
+          "global_rank": 27,
+          "global_selection_weight": 5,
+          "filtered_shelf_rank": 6,
+          "filtered_shelf_weight": 2
+        },
+        "after": {
+          "pilot_score": 88,
+          "global_rank": 27,
+          "global_selection_weight": 5,
+          "filtered_shelf_rank": 6,
+          "filtered_shelf_weight": 3
+        }
+      },
+      "ct_gastronomie_127": {
+        "before": {
+          "pilot_score": 84,
+          "global_rank": 46,
+          "global_selection_weight": 4,
+          "filtered_shelf_rank": 8,
+          "filtered_shelf_weight": 1
+        },
+        "after": {
+          "pilot_score": 84,
+          "global_rank": 46,
+          "global_selection_weight": 4,
+          "filtered_shelf_rank": 8,
+          "filtered_shelf_weight": 2
+        }
+      },
+      "ct_gastronomie_320": {
+        "before": null,
+        "after": {
+          "pilot_score": 83,
+          "global_rank": 52,
+          "global_selection_weight": 4,
+          "filtered_shelf_rank": 9,
+          "filtered_shelf_weight": 1
+        }
+      }
+    }
+  },
+  "selection_summary": {
+    "alchimie:unfiltered": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 0,
+        "unchanged_count": 100,
+        "changes": []
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 0,
+        "unchanged_count": 30,
+        "changes": []
+      }
+    },
+    "conexiuni:unfiltered": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 0,
+        "unchanged_count": 100,
+        "changes": []
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 0,
+        "unchanged_count": 30,
+        "changes": []
+      }
+    },
+    "contexto:gastronomie_usor": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 50,
+        "unchanged_count": 50,
+        "changes": [
+          {
+            "input": 0,
+            "before": "ct_gastronomie_128",
+            "after": "ct_gastronomie_319"
+          },
+          {
+            "input": 1,
+            "before": "ct_gastronomie_024",
+            "after": "ct_gastronomie_020"
+          },
+          {
+            "input": 2,
+            "before": "ct_gastronomie_019",
+            "after": "ct_gastronomie_319"
+          },
+          {
+            "input": 5,
+            "before": "ct_gastronomie_318",
+            "after": "ct_gastronomie_300"
+          },
+          {
+            "input": 7,
+            "before": "ct_gastronomie_128",
+            "after": "ct_gastronomie_127"
+          },
+          {
+            "input": 9,
+            "before": "ct_gastronomie_300",
+            "after": "ct_gastronomie_128"
+          },
+          {
+            "input": 10,
+            "before": "ct_gastronomie_318",
+            "after": "ct_gastronomie_300"
+          },
+          {
+            "input": 11,
+            "before": "ct_gastronomie_300",
+            "after": "ct_gastronomie_128"
+          },
+          {
+            "input": 13,
+            "before": "ct_gastronomie_127",
+            "after": "ct_gastronomie_024"
+          },
+          {
+            "input": 20,
+            "before": "ct_gastronomie_319",
+            "after": "ct_gastronomie_320"
+          },
+          {
+            "input": 22,
+            "before": "ct_gastronomie_024",
+            "after": "ct_gastronomie_020"
+          },
+          {
+            "input": 23,
+            "before": "ct_gastronomie_319",
+            "after": "ct_gastronomie_318"
+          },
+          {
+            "input": 26,
+            "before": "ct_gastronomie_319",
+            "after": "ct_gastronomie_318"
+          },
+          {
+            "input": 32,
+            "before": "ct_gastronomie_020",
+            "after": "ct_gastronomie_019"
+          },
+          {
+            "input": 33,
+            "before": "ct_gastronomie_318",
+            "after": "ct_gastronomie_300"
+          },
+          {
+            "input": 36,
+            "before": "ct_gastronomie_128",
+            "after": "ct_gastronomie_127"
+          },
+          {
+            "input": 40,
+            "before": "ct_gastronomie_300",
+            "after": "ct_gastronomie_128"
+          },
+          {
+            "input": 44,
+            "before": "ct_gastronomie_300",
+            "after": "ct_gastronomie_128"
+          },
+          {
+            "input": 45,
+            "before": "ct_gastronomie_127",
+            "after": "ct_gastronomie_024"
+          },
+          {
+            "input": 46,
+            "before": "ct_gastronomie_020",
+            "after": "ct_gastronomie_320"
+          },
+          {
+            "input": 49,
+            "before": "ct_gastronomie_020",
+            "after": "ct_gastronomie_019"
+          },
+          {
+            "input": 52,
+            "before": "ct_gastronomie_127",
+            "after": "ct_gastronomie_024"
+          },
+          {
+            "input": 53,
+            "before": "ct_gastronomie_318",
+            "after": "ct_gastronomie_300"
+          },
+          {
+            "input": 54,
+            "before": "ct_gastronomie_024",
+            "after": "ct_gastronomie_020"
+          },
+          {
+            "input": 55,
+            "before": "ct_gastronomie_020",
+            "after": "ct_gastronomie_019"
+          },
+          {
+            "input": 56,
+            "before": "ct_gastronomie_300",
+            "after": "ct_gastronomie_319"
+          },
+          {
+            "input": 58,
+            "before": "ct_gastronomie_318",
+            "after": "ct_gastronomie_300"
+          },
+          {
+            "input": 60,
+            "before": "ct_gastronomie_128",
+            "after": "ct_gastronomie_127"
+          },
+          {
+            "input": 62,
+            "before": "ct_gastronomie_318",
+            "after": "ct_gastronomie_300"
+          },
+          {
+            "input": 63,
+            "before": "ct_gastronomie_300",
+            "after": "ct_gastronomie_128"
+          },
+          {
+            "input": 65,
+            "before": "ct_gastronomie_300",
+            "after": "ct_gastronomie_128"
+          },
+          {
+            "input": 66,
+            "before": "ct_gastronomie_020",
+            "after": "ct_gastronomie_019"
+          },
+          {
+            "input": 67,
+            "before": "ct_gastronomie_020",
+            "after": "ct_gastronomie_019"
+          },
+          {
+            "input": 68,
+            "before": "ct_gastronomie_319",
+            "after": "ct_gastronomie_318"
+          },
+          {
+            "input": 71,
+            "before": "ct_gastronomie_128",
+            "after": "ct_gastronomie_127"
+          },
+          {
+            "input": 72,
+            "before": "ct_gastronomie_020",
+            "after": "ct_gastronomie_019"
+          },
+          {
+            "input": 73,
+            "before": "ct_gastronomie_127",
+            "after": "ct_gastronomie_024"
+          },
+          {
+            "input": 74,
+            "before": "ct_gastronomie_318",
+            "after": "ct_gastronomie_319"
+          },
+          {
+            "input": 75,
+            "before": "ct_gastronomie_300",
+            "after": "ct_gastronomie_128"
+          },
+          {
+            "input": 78,
+            "before": "ct_gastronomie_024",
+            "after": "ct_gastronomie_319"
+          },
+          {
+            "input": 79,
+            "before": "ct_gastronomie_024",
+            "after": "ct_gastronomie_020"
+          },
+          {
+            "input": 80,
+            "before": "ct_gastronomie_127",
+            "after": "ct_gastronomie_024"
+          },
+          {
+            "input": 82,
+            "before": "ct_gastronomie_024",
+            "after": "ct_gastronomie_020"
+          },
+          {
+            "input": 84,
+            "before": "ct_gastronomie_319",
+            "after": "ct_gastronomie_318"
+          },
+          {
+            "input": 87,
+            "before": "ct_gastronomie_024",
+            "after": "ct_gastronomie_020"
+          },
+          {
+            "input": 89,
+            "before": "ct_gastronomie_020",
+            "after": "ct_gastronomie_019"
+          },
+          {
+            "input": 91,
+            "before": "ct_gastronomie_020",
+            "after": "ct_gastronomie_019"
+          },
+          {
+            "input": 92,
+            "before": "ct_gastronomie_300",
+            "after": "ct_gastronomie_128"
+          },
+          {
+            "input": 93,
+            "before": "ct_gastronomie_300",
+            "after": "ct_gastronomie_319"
+          },
+          {
+            "input": 95,
+            "before": "ct_gastronomie_319",
+            "after": "ct_gastronomie_318"
+          }
+        ]
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 3,
+        "unchanged_count": 27,
+        "changes": [
+          {
+            "input": "2026-09-13",
+            "before": "ct_gastronomie_128",
+            "after": "ct_gastronomie_127"
+          },
+          {
+            "input": "2026-09-18",
+            "before": "ct_gastronomie_318",
+            "after": "ct_gastronomie_320"
+          },
+          {
+            "input": "2026-09-19",
+            "before": "ct_gastronomie_024",
+            "after": "ct_gastronomie_019"
+          }
+        ]
+      }
+    },
+    "contexto:unfiltered": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 65,
+        "unchanged_count": 35,
+        "changes": [
+          {
+            "input": 0,
+            "before": "ct_personalitati_075",
+            "after": "ct_muzica_312"
+          },
+          {
+            "input": 1,
+            "before": "ct_geografie_001",
+            "after": "ct_gastronomie_320"
+          },
+          {
+            "input": 3,
+            "before": "ct_literatura_054",
+            "after": "ct_literatura_052"
+          },
+          {
+            "input": 4,
+            "before": "ct_literatura_053",
+            "after": "ct_literatura_052"
+          },
+          {
+            "input": 5,
+            "before": "ct_literatura_232",
+            "after": "ct_literatura_231"
+          },
+          {
+            "input": 7,
+            "before": "ct_muzica_068",
+            "after": "ct_muzica_067"
+          },
+          {
+            "input": 8,
+            "before": "ct_limba_226",
+            "after": "ct_limba_223"
+          },
+          {
+            "input": 9,
+            "before": "ct_sport_097",
+            "after": "ct_sport_095"
+          },
+          {
+            "input": 10,
+            "before": "ct_viata_de_roman_197",
+            "after": "ct_viata_de_roman_193"
+          },
+          {
+            "input": 11,
+            "before": "ct_sport_093",
+            "after": "ct_sport_092"
+          },
+          {
+            "input": 12,
+            "before": "ct_sport_184",
+            "after": "ct_sport_183"
+          },
+          {
+            "input": 13,
+            "before": "ct_literatura_298",
+            "after": "ct_literatura_232"
+          },
+          {
+            "input": 15,
+            "before": "ct_limba_145",
+            "after": "ct_limba_047"
+          },
+          {
+            "input": 16,
+            "before": "ct_muzica_241",
+            "after": "ct_muzica_168"
+          },
+          {
+            "input": 17,
+            "before": "ct_stiinta_265",
+            "after": "ct_stiinta_264"
+          },
+          {
+            "input": 18,
+            "before": "ct_istorie_042",
+            "after": "ct_istorie_041"
+          },
+          {
+            "input": 20,
+            "before": "ct_geografie_134",
+            "after": "ct_geografie_033"
+          },
+          {
+            "input": 21,
+            "before": "ct_istorie_036",
+            "after": "ct_geografie_214"
+          },
+          {
+            "input": 22,
+            "before": "ct_geografie_028",
+            "after": "ct_geografie_001"
+          },
+          {
+            "input": 23,
+            "before": "ct_meme_net_157",
+            "after": "ct_meme_net_066"
+          },
+          {
+            "input": 24,
+            "before": "ct_muzica_313",
+            "after": "ct_muzica_312"
+          },
+          {
+            "input": 25,
+            "before": "ct_muzica_311",
+            "after": "ct_muzica_245"
+          },
+          {
+            "input": 26,
+            "before": "ct_limba_046",
+            "after": "ct_limba_044"
+          },
+          {
+            "input": 33,
+            "before": "ct_viata_de_roman_197",
+            "after": "ct_viata_de_roman_193"
+          },
+          {
+            "input": 34,
+            "before": "ct_stiinta_267",
+            "after": "ct_stiinta_266"
+          },
+          {
+            "input": 36,
+            "before": "ct_muzica_070",
+            "after": "ct_muzica_068"
+          },
+          {
+            "input": 38,
+            "before": "ct_societate_090",
+            "after": "ct_societate_088"
+          },
+          {
+            "input": 39,
+            "before": "ct_limba_145",
+            "after": "ct_limba_048"
+          },
+          {
+            "input": 41,
+            "before": "ct_muzica_312",
+            "after": "ct_muzica_311"
+          },
+          {
+            "input": 44,
+            "before": "ct_societate_084",
+            "after": "ct_societate_083"
+          },
+          {
+            "input": 45,
+            "before": "ct_meme_net_061",
+            "after": "ct_meme_net_060"
+          },
+          {
+            "input": 50,
+            "before": "ct_stiinta_099",
+            "after": "ct_sport_314"
+          },
+          {
+            "input": 51,
+            "before": "ct_literatura_156",
+            "after": "ct_literatura_057"
+          },
+          {
+            "input": 52,
+            "before": "ct_meme_net_060",
+            "after": "ct_meme_net_059"
+          },
+          {
+            "input": 53,
+            "before": "ct_limba_148",
+            "after": "ct_limba_147"
+          },
+          {
+            "input": 54,
+            "before": "ct_geografie_027",
+            "after": "ct_gastronomie_320"
+          },
+          {
+            "input": 56,
+            "before": "ct_viata_de_roman_113",
+            "after": "ct_viata_de_roman_112"
+          },
+          {
+            "input": 60,
+            "before": "ct_meme_net_162",
+            "after": "ct_meme_net_160"
+          },
+          {
+            "input": 61,
+            "before": "ct_sport_314",
+            "after": "ct_sport_263"
+          },
+          {
+            "input": 62,
+            "before": "ct_viata_de_roman_198",
+            "after": "ct_viata_de_roman_197"
+          },
+          {
+            "input": 63,
+            "before": "ct_sport_091",
+            "after": "ct_societate_296"
+          },
+          {
+            "input": 64,
+            "before": "ct_sport_259",
+            "after": "ct_sport_183"
+          },
+          {
+            "input": 65,
+            "before": "ct_societate_086",
+            "after": "ct_societate_085"
+          },
+          {
+            "input": 68,
+            "before": "ct_sport_181",
+            "after": "ct_sport_097"
+          },
+          {
+            "input": 71,
+            "before": "ct_muzica_068",
+            "after": "ct_muzica_067"
+          },
+          {
+            "input": 73,
+            "before": "ct_meme_net_063",
+            "after": "ct_meme_net_062"
+          },
+          {
+            "input": 74,
+            "before": "ct_stiinta_264",
+            "after": "ct_stiinta_190"
+          },
+          {
+            "input": 77,
+            "before": "ct_literatura_231",
+            "after": "ct_literatura_228"
+          },
+          {
+            "input": 78,
+            "before": "ct_istorie_144",
+            "after": "ct_istorie_139"
+          },
+          {
+            "input": 79,
+            "before": "ct_geografie_032",
+            "after": "ct_geografie_029"
+          },
+          {
+            "input": 80,
+            "before": "ct_meme_net_061",
+            "after": "ct_meme_net_060"
+          },
+          {
+            "input": 81,
+            "before": "ct_stiinta_189",
+            "after": "ct_stiinta_105"
+          },
+          {
+            "input": 82,
+            "before": "ct_geografie_032",
+            "after": "ct_geografie_029"
+          },
+          {
+            "input": 84,
+            "before": "ct_meme_net_064",
+            "after": "ct_meme_net_063"
+          },
+          {
+            "input": 85,
+            "before": "ct_limba_044",
+            "after": "ct_limba_043"
+          },
+          {
+            "input": 87,
+            "before": "ct_geografie_032",
+            "after": "ct_geografie_030"
+          },
+          {
+            "input": 88,
+            "before": "ct_personalitati_172",
+            "after": "ct_personalitati_171"
+          },
+          {
+            "input": 90,
+            "before": "ct_limba_046",
+            "after": "ct_limba_044"
+          },
+          {
+            "input": 92,
+            "before": "ct_societate_090",
+            "after": "ct_societate_088"
+          },
+          {
+            "input": 93,
+            "before": "ct_sport_314",
+            "after": "ct_sport_263"
+          },
+          {
+            "input": 94,
+            "before": "ct_viata_de_roman_110",
+            "after": "ct_viata_de_roman_109"
+          },
+          {
+            "input": 95,
+            "before": "ct_stiinta_295",
+            "after": "ct_stiinta_267"
+          },
+          {
+            "input": 97,
+            "before": "ct_istorie_310",
+            "after": "ct_istorie_308"
+          },
+          {
+            "input": 98,
+            "before": "ct_muzica_168",
+            "after": "ct_muzica_167"
+          },
+          {
+            "input": 99,
+            "before": "ct_personalitati_174",
+            "after": "ct_personalitati_173"
+          }
+        ]
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 0,
+        "unchanged_count": 30,
+        "changes": []
+      }
+    },
+    "intrusul:unfiltered": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 0,
+        "unchanged_count": 100,
+        "changes": []
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 0,
+        "unchanged_count": 30,
+        "changes": []
+      }
+    },
+    "lant:unfiltered": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 0,
+        "unchanged_count": 100,
+        "changes": []
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 0,
+        "unchanged_count": 30,
+        "changes": []
+      }
+    },
+    "perechi:unfiltered": {
+      "seeds": {
+        "sample_count": 100,
+        "changed_count": 0,
+        "unchanged_count": 100,
+        "changes": []
+      },
+      "daily": {
+        "sample_count": 30,
+        "changed_count": 0,
+        "unchanged_count": 30,
+        "changes": []
+      }
+    }
+  },
+  "new_target_reachability": {
+    "ct_gastronomie_320": {
+      "contexto:gastronomie_usor": {
+        "seeds": [
+          20,
+          46
+        ],
+        "daily": [
+          "2026-09-18"
+        ]
+      },
+      "contexto:unfiltered": {
+        "seeds": [
+          1,
+          54
+        ],
+        "daily": []
+      }
+    }
+  }
+}
