@@ -1,0 +1,114 @@
+#!/usr/bin/env python3
+"""Capture compact Contexto API evidence from one independently imported checkout.
+
+Run this same file in separate subprocesses with --root pointing at baseline and
+candidate checkouts. --review-dir and --baseline-pack bind identical input inventories.
+"""
+import argparse
+import hashlib
+import json
+import os
+import sys
+from pathlib import Path
+
+
+def digest(path):
+    return 'sha256:' + hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def stable_hash(value):
+    blob = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+    return 'sha256:' + hashlib.sha256(blob.encode()).hexdigest()
+
+
+def compact_json(value, level=0):
+    indent = '  ' * level
+    if isinstance(value, dict) and any(isinstance(item, (dict, list)) for item in value.values()):
+        entries = [json.dumps(key, ensure_ascii=False) + ': ' + compact_json(item, level + 1) for key, item in value.items()]
+        return '{\n' + ',\n'.join('  ' + indent + entry for entry in entries) + '\n' + indent + '}'
+    if isinstance(value, list) and any(isinstance(item, (dict, list)) for item in value):
+        return '[\n' + ',\n'.join('  ' + indent + compact_json(item, level + 1) for item in value) + '\n' + indent + ']'
+    return json.dumps(value, ensure_ascii=False, separators=(',', ':'))
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--root', type=Path, required=True)
+    parser.add_argument('--review-dir', type=Path, required=True)
+    parser.add_argument('--baseline-pack', type=Path, required=True)
+    parser.add_argument('--output', type=Path, required=True)
+    args = parser.parse_args()
+    root = args.root.resolve()
+    sys.path.insert(0, str(root))
+    os.environ['DJANGO_SETTINGS_MODULE'] = 'cat_de_roman_esti.web.settings'
+    os.environ['CAT_ACCOUNTS_ENABLED'] = '0'
+    os.environ['ROEDU_API_URL'] = ''
+    os.environ['ROEDU_API_KEY'] = ''
+    import django
+    django.setup()
+    from django.test import Client
+    from cat_de_roman_esti.wordgames import contexto
+    from cat_de_roman_esti.wordgames.service import get_service
+    from cat_de_roman_esti.wordgames.contexto_projection import resolve_projection, suggest_projection
+    candidate_path = args.review_dir / 'gastronomie/candidates.json'
+    morphology_path = args.review_dir / 'morphology-candidates.json'
+    candidates = json.loads(candidate_path.read_text())['contexto']
+    morphology = json.loads(morphology_path.read_text())
+    baseline = json.loads(args.baseline_pack.read_text())['contexto']
+    approved = [row for row in baseline if row.get('status') == 'approved']
+    selected = {row['target']: row['difficulty'] for row in candidates}
+    entries = [{'id': row['id'], 'target': row['target']} for row in approved] + [{'id': f'contexto[{i}]', 'target': row['target']} for i, row in enumerate(candidates)]
+    target_ids = sorted({row['target'] for row in entries})
+    assert len(approved) == 216 and len(entries) == 221 and len(target_ids) == 218
+    svc = get_service()
+    client = Client()
+    words = ['gem', 'ulei', 'sare', 'ardei']
+    source_paths = ['cat_de_roman_esti/wordgames/contexto.py', 'cat_de_roman_esti/wordgames/contexto_projection.py', 'cat_de_roman_esti/wordgames/contexto_feedback.py', 'cat_de_roman_esti/wordgames/service.py']
+    bindings = {path: digest(root / path) for path in source_paths}
+
+    def probe(target, word):
+        game_id = contexto.store.create(contexto._build_session(target, selected.get(target, 'normal'), None))
+        try:
+            response = client.post(f'/api/wordgames/contexto/games/{game_id}/guess', {'text': word}, content_type='application/json')
+            if response.status_code != 200:
+                raise RuntimeError(f'{target}/{word}: HTTP {response.status_code}')
+            data = response.json()
+            guess = data.get('guess', {})
+            def strings(value):
+                if isinstance(value, str):
+                    yield value
+                elif isinstance(value, dict):
+                    for item in value.values():
+                        yield from strings(item)
+                elif isinstance(value, list):
+                    for item in value:
+                        yield from strings(item)
+            if not data.get('won'):
+                public_strings = set(strings(data))
+                assert target not in public_strings and svc.label(target) not in public_strings
+            return {'text': word, 'accepted': bool(guess), 'id': guess.get('id'), 'label': guess.get('label'), 'distance': guess.get('distance'), 'rank': guess.get('rank'), 'temperature': guess.get('temperature'), 'closeness': guess.get('closeness'), 'attempts': data.get('attempts'), 'won': bool(data.get('won'))}
+        finally:
+            contexto.store.delete(game_id)
+
+    canonical = [{'entry_id': row['id'], 'target': row['target'], 'label': svc.label(row['target']), 'guesses': [probe(row['target'], word) for word in words]} for row in entries]
+    common = ['gem', 'dulceață', 'sare', 'ulei', 'ardei', 'desert', 'făină', 'nucă', 'zahăr', 'lapte', 'unt', 'cartof', 'brânză', 'mămăligă', 'orez', 'carne', 'legume', 'prăjitură', 'sarmale', 'stilou', 'biserică', 'română', 'corp', 'drojdie', 'tigaie']
+    sample = []
+    for target in selected:
+        session = contexto._build_session(target, selected[target], None)
+        tested_words = common + [svc.label(target)] + morphology['aliases'].get(target, [])
+        sample.append({'target': target, 'label': svc.label(target), 'difficulty': selected[target], 'incoming': [{'id': node, 'label': svc.label(node), 'relation': svc.link(node, target).relation, 'strength': svc.link(node, target).strength} for node in svc.predecessor_ids(target)], 'reachable': session.reachable, 'responsive': sum(n for hops, n in session.dist_hist.items() if 1 <= hops <= 5), 'guesses': [probe(target, word) for word in dict.fromkeys(tested_words)]})
+    control_ids = ['n_gas_papanasi', 'n_v3gas_clatite', 'n_gas_cozonac', 'n_gas_sarmale', 'n_v4soc_casa', 'n_v4sti_planta', 'n_v24_food_pantry_ulei', 'n_v4gas_sare', 'n_v24_food_salad_veg_ardei', 'n_v24_food_breakfast_miere']
+    controls = [{'target': target, 'label': svc.label(target), 'guesses': [probe(target, word) for word in words + ['dulceață', svc.label(target)]]} for target in control_ids]
+    omitted = []
+    for surface in morphology['omitted_surfaces']:
+        projection = resolve_projection(surface)
+        omitted.append({'surface': surface, 'exact': svc.resolve(surface), 'fuzzy': svc.resolve_fuzzy(surface), 'suggestions': svc.suggest(surface), 'projection': None if projection is None else projection.key, 'projection_suggestions': [term.key for term in suggest_projection(surface)]})
+    accepted_forms = [{'target': target, 'surface': surface, 'exact': svc.resolve(surface), 'fuzzy': svc.resolve_fuzzy(surface)} for target, forms in morphology['aliases'].items() for surface in forms]
+    result = {'schema': 'v83-contexto-runtime-capture-v1', 'candidate_sha256': digest(candidate_path), 'morphology_sha256': digest(morphology_path), 'kg_sha256': digest(root / 'cat_de_roman_esti/fixtures/kg_sample.json'), 'baseline_pack_sha256': digest(args.baseline_pack), 'source_bindings': bindings, 'scope': {'baseline_approved': len(approved), 'new_targets': len(selected), 'all_record_count': len(entries), 'distinct_target_count': len(target_ids), 'canonical_input_count': len(words), 'canonical_observations': len(entries) * len(words), 'fresh_api_guesses': sum(len(row['guesses']) for rows in (canonical, sample, controls) for row in rows), 'omitted_forms': len(omitted), 'accepted_form_probes': len(accepted_forms), 'limit': 'Complete for four named canonical inputs across baseline-approved plus candidate targets; other typed inputs and all possible sessions are not exhaustively covered.', 'sessions_deleted': True, 'nonwinning_answer_hidden': True}, 'canonical': canonical, 'sample': sample, 'controls': controls, 'omitted': omitted, 'accepted_forms': accepted_forms}
+    result['canonical_sha256'] = stable_hash(canonical)
+    result['omitted_sha256'] = stable_hash(omitted)
+    args.output.write_text(compact_json(result) + '\n')
+
+
+if __name__ == '__main__':
+    main()

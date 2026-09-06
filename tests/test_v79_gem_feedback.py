@@ -8,6 +8,8 @@ from pathlib import Path
 
 import pytest
 
+from tests.current_content import CURRENT_CONTENT
+
 pytest.importorskip("django")
 
 from django.test import Client  # noqa: E402
@@ -35,19 +37,19 @@ _ALL_BASELINE_PROJECTIONS_SHA256 = (
 )
 ARTIFACT_SHA256 = {
     "cat_de_roman_esti/fixtures/kg_sample.json": (
-        "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331"
+        CURRENT_CONTENT.kg_sha256
     ),
     "cat_de_roman_esti/fixtures/games_pack.json": (
-        "26d61a029a6c706a02a15991730725a3421dfa1f9b36537032291828a44ab070"
+        CURRENT_CONTENT.pack_sha256
     ),
     "cat_de_roman_esti/fixtures/board_rankings_v37.json": (
-        "fc31646b058bf2caaaf63a90ac172e504fd2bd89c4028102c4570d054f9a40a8"
+        CURRENT_CONTENT.rankings_sha256
     ),
     "cat_de_roman_esti/fixtures/derived_catalog_v38.json": (
-        "cf9ed7cba4bc82025297907a5131df7c7f61c06ac43722d22d591790e6facf9a"
+        CURRENT_CONTENT.derived_sha256
     ),
     "tests/fixtures/cat_mobile_app_pack_contract.json": (
-        "9012a0e6c6f48397a94ff8bfcbf297ea58e357ac283c978e4e9542ea66ae77b1"
+        CURRENT_CONTENT.mobile_sha256
     ),
 }
 

@@ -1,8 +1,8 @@
 # cat_de_roman_esti
 
 A **text-only arcade of six Romanian word games** over one concept graph
-(**2,365 concepts / 9,223 links / 8,451 typed aliases / 180 puzzles**,
-`fixture-v81-nuca-feedback` — generated hashes and gate state are
+(**2,365 concepts / 9,223 links / 8,475 typed aliases / 180 puzzles**,
+`fixture-v83-food-input-and-feedback` — generated hashes and gate state are
 recorded in `docs/STATUS.md`; no graph visualization). All six are **server-authoritative**:
 the Django BFF validates every move and hides the answers.
 

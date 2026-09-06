@@ -1,105 +1,103 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-06 — V82 landed locally; V83 started. Production last checked 2026-08-27.
+Last verified: 2026-09-07 — V83 integration complete, with documented timing retry. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-  V82 is merged into local main at `e5f7d96`. V83 branch: `feat/v83-food-input-and-feedback`.
-- New version objectives are ADR-0113: coherent playable batches with enabling fixes, explicit
-  baseline/outcomes, focused development checks and required final integration gates. Report
-  concepts, connections, forms, synonyms, rounds, eligibility and visible fixes separately.
-- V82 adds eight reviewed Contexto rounds: Cozonac, Pască, Muștar, Mujdei, Ciorbă de burtă,
-  Urdă, Friptură and Bulz; four easy and four normal. All eight are runtime selectable.
-- V82 makes the defining `burtă` guess hot/nonwinning for exactly Ciorbă de burtă, keeping its
-  original body meaning elsewhere. Gem/Nucă policies and all 472 projection rows remain exact
-  (ADR-0114; `docs/reviews/v82-playable-content-batch/README.md`).
-- V82 adds reusable `scripts/report_content_delta.py`. Actual gains: eight rounds and one
-  feedback repair; zero concepts/edges/forms/synonyms. No new boards in the other five games.
-- V82 removes repeated Alchimie graph queries using a 4,096-pair memo local to one cold build
-  (ADR-0115). All 82 curated projections and 12 mined sessions remain exact; graph queries in
-  the mined sample fall 88.89%. The existing 45-second timing gate passes at 29.96 seconds.
-- V73/V74 session/resume/recovery, keyboard accessibility and atomic terminal recording remain
-  protected (ADRs 0098–0105). V76 preserves accented Paște/Paștele input senses (ADR-0107).
-- Served KG: `fixture-v81-nuca-feedback`, 2,365 nodes / 9,223 edges / 8,451 aliases / 180 puzzles.
-  `kg_real.json` remains a thin export, not the served graph.
+  V82 landed locally at `e5f7d96`; landing record `38f0d62`. V83 candidate branch:
+  `feat/v83-food-input-and-feedback`, ready for its next landing request. No push or deployment occurred.
+- ADR-0113 governs complete player-outcome batches and honest concept/edge/form/round counts.
+- V83 adds five reviewed Contexto rounds: Cornulețe, Gogoși, Telemea, Cartofi prăjiți and
+  Ardei umpluți. All five are runtime selectable after complete independent promotion review.
+- V83 adds 24 reviewed grammatical/qualified forms across eight existing food concepts.
+  All 13,180 older authored surface owners and 11 excluded forms' resolution/suggestion
+  behavior remain exact; these forms are not new concepts or synonyms (ADR-0117).
+- Six exact-target feedback repairs make Gem useful for Cornulețe/Gogoși, Ulei for Gogoși/
+  Cartofi prăjiți, Sare for Telemea and Ardei for Ardei umpluți. They remain nonwinning,
+  keep submitted identity/private answers, and do not spread through target neighbors.
+- Current test hashes/counts use one manually authored immutable snapshot; historical evidence
+  remains separate. Named-round journeys find bounded current seeds and still use real APIs
+  (ADR-0116). The refactor avoids repeated current-pin edits without weakening old constraints.
+- V82 Alchimie pair reuse, V73/V74 reliability/accessibility and V76 input-sense guards remain.
+- Served KG: `fixture-v83-food-input-and-feedback`, 2,365 nodes / 9,223 edges / 8,475 aliases /
+  180 puzzles. `kg_real.json` remains a thin export, not the served graph.
 
 ## Inventory and invariants
 
 | Game | Total | Approved | Pending | Runtime eligible/preferred |
 |---|---:|---:|---:|---:|
 | Conexiuni | 232 | 232 | 0 | 74 eligible |
-| Cald sau Rece | 218 | 216 | 2 | 212 eligible |
+| Cald sau Rece | 223 | 221 | 2 | 217 eligible |
 | Lanțul Cuvintelor | 97 | 94 | 3 | 94 eligible |
 | Alchimie | 82 | 79 | 3 | 79 eligible |
 | Intrusul | 183 | 183 | 0 | 144 preferred |
 | Perechi | 153 | 153 | 0 | 113 preferred |
 
-Pack **629 = 621 approved + 8 pending**; original four-game ranking **459 eligible**.
-All 621 previous pack records, 336 frozen boards and 180 puzzles remain exact. KG, aliases,
-mobile, old semantic distances, scores/status/eligibility, 71 legacy proxies and prior holds
-are unchanged. Nine Contexto weight bands and insertion ordinals change as stock grows.
-The receipt reconstructs complete pre-V82 pack/ranking/derived artifacts by original hash.
+Pack **634 = 626 approved + 8 pending**; original four-game ranking **464 eligible**.
+All 629 old pack records, 336 frozen boards, graph edges and 180 puzzles remain exact.
+Only 24 aliases and KG build metadata change; four Contexto weight bands and insertion ranks
+change as stock grows. Full baseline KG/pack/ranking/derived hashes reconstruct exactly.
+All 472 projection rows, 71 legacy proxies and existing Nucă/Burtă policies remain intact;
+Gem retains its old six-member neighborhood in addition to the two explicitly reviewed targets.
 Sessions retain 7,200-second sliding TTL, 1,000 entries/game, per-entry locks, 64 KiB requests,
-bounded histories/caches and private answers. Prior word-resolution/ledger safeguards remain.
+bounded histories/caches and private answers. Prior rejection/word-resolution safeguards remain.
 
 ## Current artifact pins
 
-- `games_pack.json`: `26d61a029a6c706a02a15991730725a3421dfa1f9b36537032291828a44ab070`
-- `board_rankings_v37.json`: `fc31646b058bf2caaaf63a90ac172e504fd2bd89c4028102c4570d054f9a40a8`
-- `derived_catalog_v38.json`: `cf9ed7cba4bc82025297907a5131df7c7f61c06ac43722d22d591790e6facf9a`
-- `kg_sample.json`: `fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331`
-- `cat_mobile_app_pack_contract.json`: `9012a0e6c6f48397a94ff8bfcbf297ea58e357ac283c978e4e9542ea66ae77b1`
+- `games_pack.json`: `78e680f3849f9a9de2a2675cbe7349ba23c8165f415cfc89a7533121bc34399c`
+- `board_rankings_v37.json`: `f80397b3fc1dbfb58c9b4daf1e74fcebc43b698a5e290660333dad71a5d8dfb2`
+- `derived_catalog_v38.json`: `e406f182bbc8629b05dac9f2d58b51de45113f2917b8beeb078f8ddccf2a66af`
+- `kg_sample.json`: `4ce12d15ec247ebcaba3e119caed91f8d2624b09fa5568a8d7ece728f76a8a5e`
+- `cat_mobile_app_pack_contract.json`: `ea2fe6b05df3104f674905c971f506fdf41168c6c9760bab7b2a780fcaae93a0`
 - `lant_rejection_tombstones.json`: `e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29`
 - `contexto_impact_reserve_v69.json`: `4c41d092c895c61aaccfbda3cb9522c4d5767a88d9af9343efccc182f71e7612`
 
-Server KG content: `sha256:11b2d0e96d9f66ccfb239d21b1b6dd12e6616f1bfacf9522611fdfd08d90c6d2`.
-Mobile content: `sha256:5ea700a00708cf799a4cad8dcc99c54cb6595f0e99c217b5d890b9a829195918`.
+Server KG content: `sha256:bb2ab1ce02ba2f197b1d824ae7b102524b2ac7e4deec161324f6500e700db4b6`.
+Mobile content: `sha256:5ea700a00708cf799a4cad8dcc99c54cb6595f0e99c217b5d890b9a829195918`;
+its data payload is unchanged, with refreshed build metadata.
 
 ## Production — last observed 2026-08-27
 
 - Last documented deployment remains anonymous V72 `6ee86935038744c0066cac6a50865f76eab93e37`,
   image `sha256:30b39c0bba954074de6cdecd377a9742f627f4900caccbae8805d132f5c317bd`.
 - Accounts/debug were off; submissions unavailable; health/config/assets and alias smoke passed.
-  No production check, push or deployment was performed for this local V82 candidate.
+  No production check, push or deployment was performed for this local V83 candidate.
 - Preserve `rollback-60c3fd5318a` through the next successful rollout; procedure: `docs/DEPLOY.md`.
-- Local clean Node24 install/audit reports zero vulnerabilities. Production's V72 lock remains
-  unpatched by this local work. Frontend app sources/assets remain at their prior version.
+- Clean local Node24 install/audit reports zero vulnerabilities. Frontend app sources/assets
+  remain at their prior version; production's V72 dependency lock is unpatched by this work.
 
 ## Verification
 
-- Independent factual/quality screens: eight raw candidates covered; strict critique eight/zero
-  flags; independent bound analyst/verifier both promote all eight; supported V2 apply GREEN.
-- Fresh API evidence: 764 guesses across 23 sampled food targets. Exactly one observation changes
-  after the feedback fix; 763 remain exact. Every KG target is covered by the policy-boundary test.
-- Full backend: 1,057 passed on Python 3.12.3 (641.60 s) and 3.14.6 (588.88 s); accounts
-  53 passed on each (7.57/7.71 s). No skipped tests in either final backend run.
-- Frontend: 173 native tests, lint/typecheck and 118.73/120 KiB bundle check passed; all
-  108 desktop/mobile browser checks passed (7.7 min). App sources/assets remain unchanged.
-- Focused and independent content, history, projection-equivalence and memo checks passed.
-  Both validators, strict pending gate, Ruff/docs/whitespace GREEN. Exact commands/results:
-  `docs/reviews/v82-playable-content-batch/verification.json`.
-- Public seed-38 starting snapshots regenerate unchanged. Selection samples repeat exactly over
-  100 seeds/30 September dates; other curated games match, Contexto changes are disclosed.
-- Initial full run exposed two stale current-inventory/profile expectations and the existing
-  Alchimie timing failure at host load 75. Expectations were corrected with old-profile proof;
-  the measured generator optimization retains exact games and the original timing ceiling.
-  Later stale daily/policy expectations were corrected, and a seed-dependent typo skip was
-  replaced by an always-exercised fixed-target test. The final complete runs are green.
+- Independent lexical review: 24 accepted; factual/quality screens: five raw references covered.
+  Strict pending critique: five/zero flags; independent bound judges promote all five; apply GREEN.
+- Separate-checkout API comparison: 884 canonical observations over 216 old approved records plus
+  five candidates (218 distinct targets), exactly six changes/878 exact; 60 extra controls exact.
+- New forms, excluded inputs, privacy, repeats, resume, clues and exact wins pass focused checks.
+  Whole-KG target-boundary tests pass; all old authored surface owners remain exact.
+- Broad focused integration: 156 passed across V75–V83 history, feedback and public journeys.
+  Independent implementation/history review: 53 passed, no blockers. Current-pin checks pass.
+- Selection repeats across 100 seeds/30 September dates; other curated games and eight reviewed
+  fixed-date observations match. Contexto remapping is disclosed. Seed-38 start snapshots exact.
+- Python 3.12: 1,115 passed; Python 3.14: 1,114 passed, sole load-sensitive Alchimie timing
+  case passed on retry (21.96s against unchanged 45s limit). Accounts: 53 passed on each.
+- Frontend: 173 native and 108 desktop/mobile browser checks passed; lint/typecheck/build and
+  118.73/120 KiB bundle pass. Reload checks now bind to the new document's state request;
+  rebuilt application assets remain byte-identical. Validators, pending gate, Ruff/docs/whitespace pass.
+  Commands, initial failures and retries: `docs/reviews/v83-food-input-and-feedback/verification.json`.
 
 ## Remaining gates
 
-- V83 starts from the green V82 baseline: batch ordinary food-input/feedback repairs with
-  several reviewed rounds, and reduce repeated current-artifact test-pin maintenance.
-- Next batch candidates: deficient whey/grain/oven/pan and ingredient forms; over-warm soup/polenta
-  feedback; the 15 named food dispositions and prior bread findings. Use ADR-0113 to choose scope.
+- V83 is ready on its task branch; its next landing request can merge the verified candidate.
+- Next coherent feedback work: broad Drojdie approximation and false-hot food/holiday routes;
+  the remaining grain, biscuit/apple, whey, oven/pan inputs and V82 candidate dispositions.
 - Owner selects feedback contact; Romanian-player and real-device checks remain unrun. Reverify
   legal operator/contact configuration and legal pages per DEPLOY before public rollout.
 - Public rollout requires explicit authorization and live smoke/rollback verification. Keep accounts
   outside the anonymous beta until DEPLOY's go-live checklist and compliance review pass.
-- Release protocol and external evidence: `docs/BETA_CANDIDATE.md`; agent reviews are not playtests.
+- Release protocol/external evidence: `docs/BETA_CANDIDATE.md`; agent reviews are not playtests.
 
 ## Doc map
 
 - `README.md` / `AGENTS.md`: orientation; `docs/agent-map.md` / `docs/agent-testing.md`: routes/gates.
-- `docs/adr/` (newest 0115), `docs/reviews/`, WORKLOG: decisions, evidence and history.
+- `docs/adr/` (newest 0117), `docs/reviews/`, WORKLOG: decisions, evidence and history.

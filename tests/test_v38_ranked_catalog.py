@@ -19,6 +19,7 @@ from cat_de_roman_esti.wordgames.derived_catalog import (
     score_band_weight,
 )
 from cat_de_roman_esti.wordgames.packs import load_pack, normalized_text_sha256
+from tests.current_content import CURRENT_CONTENT
 
 
 def _board(
@@ -49,9 +50,14 @@ def _board(
 
 def test_bundled_catalog_loads_exact_private_inventory() -> None:
     catalog = load_derived_catalog()
-    assert catalog.counts() == {"intrusul": 183, "perechi": 153}
-    assert {board._source_id for board in catalog.pool("intrusul")}.__len__() == 66
-    assert {board._source_id for board in catalog.pool("perechi")}.__len__() == 51
+    assert catalog.counts() == CURRENT_CONTENT.derived_counts["by_game"]
+    sources = CURRENT_CONTENT.derived_counts["sources_by_game"]
+    assert {board._source_id for board in catalog.pool("intrusul")}.__len__() == sources[
+        "intrusul"
+    ]
+    assert {board._source_id for board in catalog.pool("perechi")}.__len__() == sources[
+        "perechi"
+    ]
     first = catalog.pool("intrusul")[0]
     assert not hasattr(first, "id") and not hasattr(first, "source_id")
     assert first._source_id not in repr(first)
@@ -111,7 +117,7 @@ def test_explicit_catalog_requires_matching_digest(tmp_path: Path) -> None:
         load_derived_catalog(path, expected_sha256="0" * 64)
     assert load_derived_catalog(
         path, expected_sha256=normalized_text_sha256(path)
-    ).counts() == {"intrusul": 183, "perechi": 153}
+    ).counts() == CURRENT_CONTENT.derived_counts["by_game"]
 
 
 @pytest.mark.parametrize(
@@ -146,10 +152,7 @@ def test_exact_bundled_source_env_is_not_a_runtime_override(
         monkeypatch.chdir(repo_root)
         value = default.relative_to(repo_root)
     monkeypatch.setenv(name, str(value))
-    assert load_derived_catalog().counts() == {
-        "intrusul": 183,
-        "perechi": 153,
-    }
+    assert load_derived_catalog().counts() == CURRENT_CONTENT.derived_counts["by_game"]
 
 
 @pytest.mark.parametrize(
@@ -179,7 +182,7 @@ def test_installed_package_without_docs_uses_pinned_rubric(
     missing = tmp_path / "installed" / "docs" / "CRITIQUE_RUBRIC.md"
     monkeypatch.setattr(derived_catalog, "DEFAULT_RUBRIC", missing)
     assert not missing.exists()
-    assert load_derived_catalog().counts() == {"intrusul": 183, "perechi": 153}
+    assert load_derived_catalog().counts() == CURRENT_CONTENT.derived_counts["by_game"]
 
 
 def test_equal_scores_receive_equal_stable_ticket_bands() -> None:

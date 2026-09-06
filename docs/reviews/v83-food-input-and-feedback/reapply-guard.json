@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+    "scripts/apply_common_words_v24.py",
+    "--data-module",
+    "food_input_v83_data"
+  ],
+  "expected_exit_code": 1,
+  "actual_exit_code": 1,
+  "all_files_exact": true,
+  "artifact_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "4ce12d15ec247ebcaba3e119caed91f8d2624b09fa5568a8d7ece728f76a8a5e",
+    "tests/fixtures/kg_sample.json": "4ce12d15ec247ebcaba3e119caed91f8d2624b09fa5568a8d7ece728f76a8a5e",
+    "cat_de_roman_esti/fixtures/games_pack.json": "78e680f3849f9a9de2a2675cbe7349ba23c8165f415cfc89a7533121bc34399c",
+    "tests/fixtures/games_pack.json": "78e680f3849f9a9de2a2675cbe7349ba23c8165f415cfc89a7533121bc34399c",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "ea2fe6b05df3104f674905c971f506fdf41168c6c9760bab7b2a780fcaae93a0"
+  },
+  "tail": [
+    "apply_common_words_v24: ERROR — common-word wave is already applied (fixture-v83-food-input-and-feedback); transaction restored"
+  ]
+}

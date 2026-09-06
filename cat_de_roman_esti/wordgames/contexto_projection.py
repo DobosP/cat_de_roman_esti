@@ -1197,13 +1197,18 @@ class ProjectionNeighborhood:
     anchor_id: str
     min_strength: float
     include_direct_neighbors: bool = True
+    exact_target_ids: frozenset[str] = frozenset()
 
 
 # These are local feedback improvements, not global synonym mappings (ADR-0110).
 # Gem may borrow the fruit-preserve neighborhood, excluding the weak seasonal
-# Socată edge and all multi-hop routes. Elsewhere its existing anchor is retained.
+# Socată edge and all multi-hop routes. Named filled pastries use exact-target-only
+# feedback; elsewhere Gem's existing anchor is retained.
 PROJECTION_NEIGHBORHOODS: dict[str, ProjectionNeighborhood] = {
-    "gem": ProjectionNeighborhood("n_v17gas_dulceata", min_strength=0.60),
+    "gem": ProjectionNeighborhood(
+        "n_v17gas_dulceata", min_strength=0.60,
+        exact_target_ids=frozenset({"n_v21gas_cornulete", "n_v17gas_gogosi"}),
+    ),
     # The soup's defining ingredient is relevant to that exact target. Keep the body
     # meaning for every other target, including any strong neighbor of the soup.
     "burta": ProjectionNeighborhood(

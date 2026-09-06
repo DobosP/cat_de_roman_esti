@@ -15,13 +15,13 @@ from tests.content_history import (
     before_v82_pack,
     before_v82_rankings,
 )
+from tests.content_scenarios import contexto_seed
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "cat_de_roman_esti/fixtures"
 REVIEW = ROOT / "docs/reviews/v80-clatite-target"
 NEW_ID = "ct_gastronomie_320"
 TARGET = "n_v3gas_clatite"
-PUBLIC_SEED = 9
 
 
 def _read(path: Path) -> dict:
@@ -120,9 +120,10 @@ def test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win(
 
     from cat_de_roman_esti.wordgames.contexto import store
 
+    seed = contexto_seed(TARGET, difficulty="usor")
     client = Client()
     response = client.post(
-        f"/api/wordgames/contexto/games?seed={PUBLIC_SEED}&category=gastronomie&difficulty=usor"
+        f"/api/wordgames/contexto/games?seed={seed}&category=gastronomie&difficulty=usor"
     )
     assert response.status_code == 200
     initial = response.json()

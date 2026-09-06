@@ -19,6 +19,7 @@ from cat_de_roman_esti.wordgames.contexto import (
     RESPONSIVE_MAX_HOPS,
 )
 from cat_de_roman_esti.wordgames.service import WordGameService, normalize
+from tests.current_content import CURRENT_CONTENT
 
 _ROOT = Path(__file__).resolve().parent.parent
 _PACKAGE_KG = _ROOT / "cat_de_roman_esti/fixtures/kg_sample.json"
@@ -28,7 +29,7 @@ _TEST_PACK = _ROOT / "tests/fixtures/games_pack.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 
 # Current served pack pin; the wave-local DATA baseline remains historical evidence.
-_CURRENT_PACK_SHA256 = "26d61a029a6c706a02a15991730725a3421dfa1f9b36537032291828a44ab070"
+_CURRENT_PACK_SHA256 = CURRENT_CONTENT.pack_sha256
 _EXPECTED_EDGE_COUNT = 51
 
 
@@ -107,7 +108,7 @@ def test_v31_source_inventory_floor_and_mirrors_survive_additive_waves():
     assert len(DATA.SEMANTIC_EDGES) == len(edge_keys) == _EXPECTED_EDGE_COUNT
     assert len(fixture["kg_nodes"]) >= 2251
     assert len(fixture["kg_edges"]) >= 9014
-    assert len(fixture["kg_puzzles"]) == 180
+    assert len(fixture["kg_puzzles"]) == CURRENT_CONTENT.kg_counts["puzzles"]
     assert alias_count >= 7264
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert _PACKAGE_PACK.read_bytes() == _TEST_PACK.read_bytes()
@@ -279,13 +280,11 @@ def test_v31_keeps_the_entire_game_pack_byte_stable_without_adding_items():
     assert DATA.GAME_ITEM_IDS == ()
     assert hashlib.sha256(package_blob).hexdigest() == _CURRENT_PACK_SHA256
     assert package_blob == _TEST_PACK.read_bytes()
-    assert {game: len(pack[game]) for game in ("conexiuni", "contexto", "lant", "alchimie")} == {
-        "conexiuni": 232,
-        "contexto": 218,
-        "lant": 97,
-        "alchimie": 82,
-    }
-    assert statuses == {"approved": 621, "pending": 8}
+    assert {
+        game: len(pack[game])
+        for game in ("conexiuni", "contexto", "lant", "alchimie")
+    } == CURRENT_CONTENT.pack_counts
+    assert statuses == CURRENT_CONTENT.status_counts
 
 
 def test_v31_mobile_contract_stays_current_and_keeps_v31_public():
@@ -296,7 +295,7 @@ def test_v31_mobile_contract_stays_current_and_keeps_v31_public():
     counts = checked_in["manifest"]["counts"]
     assert counts["nodes"] >= 2251
     assert counts["edges"] >= 9014
-    assert counts["puzzles"] == 180
+    assert counts["puzzles"] == CURRENT_CONTENT.mobile_counts["puzzles"]
     for concept in DATA.CONCEPTS:
         assert mobile_by_id[concept.node_id] == {
             "id": concept.node_id,

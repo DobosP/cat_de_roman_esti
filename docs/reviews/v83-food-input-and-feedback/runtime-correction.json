@@ -1,0 +1,80 @@
+{
+  "schema": "v83-contexto-runtime-correction-v1",
+  "baseline_commit": "38f0d62ff1cd72003ae94ed691db4c44eb78c794",
+  "candidate_sha256": "sha256:51ab54de798a66dbef8d764496b5769b1b8bb0169f5e27481bf1da57e3ddd001",
+  "morphology_sha256": "sha256:8f2097c79462f5a83b3784f41d2b441e7cf76b8562e66324afd3c0cb07ddd21e",
+  "before_kg_sha256": "sha256:fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331",
+  "after_kg_sha256": "sha256:4ce12d15ec247ebcaba3e119caed91f8d2624b09fa5568a8d7ece728f76a8a5e",
+  "before_source_bindings": {"cat_de_roman_esti/wordgames/contexto.py":"sha256:253a315224fdcff537754eb0c38db43c7247f49865ccef40a610b384b26bc6a1","cat_de_roman_esti/wordgames/contexto_projection.py":"sha256:91c9220fda2430e74ad10b2e621d9394fab7358ebf220bfcaf2b2fe37f3a27cb","cat_de_roman_esti/wordgames/contexto_feedback.py":"sha256:05a1075ba93c4ca2d00da0819c9d4f541330ba727e4b71f556d346a647131f24","cat_de_roman_esti/wordgames/service.py":"sha256:abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"},
+  "after_source_bindings": {"cat_de_roman_esti/wordgames/contexto.py":"sha256:cb2ad03fc5d3b4ec0367cb82de63a7f915471bfd270b9d6b0071507fd3102118","cat_de_roman_esti/wordgames/contexto_projection.py":"sha256:236c23a823851e13c61f6bae7ce749515ff332792bfe8acfd7699f71a23bebb3","cat_de_roman_esti/wordgames/contexto_feedback.py":"sha256:b783941257c4955e2dafaa90cfaba08e258f82dca587b689c4fd87236a2ccb6c","cat_de_roman_esti/wordgames/service.py":"sha256:abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"},
+  "scope": {
+    "baseline_approved_records": 216,
+    "baseline_unique_targets": 213,
+    "candidate_records": 5,
+    "total_records": 221,
+    "total_unique_targets": 218,
+    "canonical_inputs": ["gem","ulei","sare","ardei"],
+    "canonical_observations": 884,
+    "changed": 6,
+    "unchanged": 878,
+    "baseline_approved_observations_unchanged": 864,
+    "all_possible_inputs": false
+  },
+  "before_canonical_sha256": "sha256:bded9774783a49a56fc8fc5a71de6905cc611fc82284f684ceb842ace1f5c8de",
+  "after_canonical_sha256": "sha256:ebd618f17f7d6acf08f1f83be286b2865c3a8eda4ec329921e205bfad8bd3c47",
+  "changed": [
+    {
+      "entry": "contexto[0]",
+      "input": "gem",
+      "before": {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":5,"rank":597,"temperature":"Rece","closeness":74,"attempts":1,"won":false},
+      "after": {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+      "target": "n_v21gas_cornulete",
+      "target_label": "Cornulețe"
+    },
+    {
+      "entry": "contexto[1]",
+      "input": "gem",
+      "before": {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":5,"rank":1685,"temperature":"Inghetat","closeness":26,"attempts":1,"won":false},
+      "after": {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+      "target": "n_v17gas_gogosi",
+      "target_label": "Gogoși"
+    },
+    {
+      "entry": "contexto[1]",
+      "input": "ulei",
+      "before": {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":5,"rank":1684,"temperature":"Inghetat","closeness":26,"attempts":1,"won":false},
+      "after": {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+      "target": "n_v17gas_gogosi",
+      "target_label": "Gogoși"
+    },
+    {
+      "entry": "contexto[2]",
+      "input": "sare",
+      "before": {"text":"sare","accepted":true,"id":"n_v4gas_sare","label":"Sare","distance":4,"rank":240,"temperature":"Rece","closeness":90,"attempts":1,"won":false},
+      "after": {"text":"sare","accepted":true,"id":"n_v4gas_sare","label":"Sare","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+      "target": "n_gas_telemea",
+      "target_label": "Telemea"
+    },
+    {
+      "entry": "contexto[3]",
+      "input": "ulei",
+      "before": {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":5,"rank":1189,"temperature":"Foarte rece","closeness":48,"attempts":1,"won":false},
+      "after": {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+      "target": "n_v3gas_cartofi_prajiti",
+      "target_label": "Cartofi prăjiți"
+    },
+    {
+      "entry": "contexto[4]",
+      "input": "ardei",
+      "before": {"text":"ardei","accepted":true,"id":"n_v24_food_salad_veg_ardei","label":"Ardei","distance":5,"rank":1785,"temperature":"Inghetat","closeness":22,"attempts":1,"won":false},
+      "after": {"text":"ardei","accepted":true,"id":"n_v24_food_salad_veg_ardei","label":"Ardei","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+      "target": "n_gas_ardei_umpluti",
+      "target_label": "Ardei umpluți"
+    }
+  ],
+  "controls": {"targets":10,"observations":60,"changed":0,"before_sha256":"sha256:cae6448425a9f025e851eb79cccd70cb8cd8722d632ba74f3ed87a91c0bd053b","after_sha256":"sha256:cae6448425a9f025e851eb79cccd70cb8cd8722d632ba74f3ed87a91c0bd053b"},
+  "candidate_sample": {"targets":5,"observations":142,"changed":13,"before_sha256":"sha256:87f4ffe926273dfebb7fcbbdc9f237800124b896cf251c4cf9b0faa638394a1b","after_sha256":"sha256:761b890462614a602cd66693da99c7135804bf61b25759b4d92342ed41130219","note":"Six repaired canonical feedback cases plus seven newly accepted typed forms change public summaries; the remaining five sampled new aliases already produced the same public guess through prior fuzzy handling."},
+  "omitted_forms": {"count":11,"exact_owner_changes":0,"fuzzy_owner_changes":0,"native_suggestion_changes":0,"projection_changes":0,"projection_suggestion_changes":0,"before_sha256":"sha256:57998efe88fbc171c7be0e16d99ed2eb2480b6fcc5bcdbf3603425aa448725a4","after_sha256":"sha256:57998efe88fbc171c7be0e16d99ed2eb2480b6fcc5bcdbf3603425aa448725a4","exact_all_unresolved":true,"note":"The complete identical before/after outcomes are retained once in runtime-evidence.json. Unchanged fuzzy and suggestion outcomes do not imply that every omitted surface was previously without a suggestion."},
+  "accepted_forms": {"count":24,"exact_before":0,"exact_after":24,"wrong_owner_after":0,"before_sha256":"sha256:51755e83af11821d6947fdb9ce32c36ee14c60f56da8f88f05c131331d3c45df","after_sha256":"sha256:f3d818a2f3e75328c3ac352973c1ea6bdf960be1e66b5590306f510543372dba"},
+  "privacy": "Every observed nonwinning response lacked the target ID and exact target label; all created sessions were deleted in finally. Session lifetime/capacity were not changed or independently exhaustively re-tested here."
+}

@@ -1,0 +1,485 @@
+{
+  "schema": "v83-contexto-runtime-evidence-v1",
+  "candidate_sha256": "sha256:51ab54de798a66dbef8d764496b5769b1b8bb0169f5e27481bf1da57e3ddd001",
+  "morphology_sha256": "sha256:8f2097c79462f5a83b3784f41d2b441e7cf76b8562e66324afd3c0cb07ddd21e",
+  "kg_sha256": "sha256:4ce12d15ec247ebcaba3e119caed91f8d2624b09fa5568a8d7ece728f76a8a5e",
+  "baseline_pack_sha256": "sha256:26d61a029a6c706a02a15991730725a3421dfa1f9b36537032291828a44ab070",
+  "source_bindings": {"cat_de_roman_esti/wordgames/contexto.py":"sha256:cb2ad03fc5d3b4ec0367cb82de63a7f915471bfd270b9d6b0071507fd3102118","cat_de_roman_esti/wordgames/contexto_projection.py":"sha256:236c23a823851e13c61f6bae7ce749515ff332792bfe8acfd7699f71a23bebb3","cat_de_roman_esti/wordgames/contexto_feedback.py":"sha256:b783941257c4955e2dafaa90cfaba08e258f82dca587b689c4fd87236a2ccb6c","cat_de_roman_esti/wordgames/service.py":"sha256:abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"},
+  "scope": {"baseline_approved":216,"new_targets":5,"all_record_count":221,"distinct_target_count":218,"canonical_input_count":4,"canonical_observations":884,"fresh_api_guesses":1086,"omitted_forms":11,"accepted_form_probes":24,"limit":"Complete for four named canonical inputs across baseline-approved plus candidate targets; other typed inputs and all possible sessions are not exhaustively covered.","sessions_deleted":true,"nonwinning_answer_hidden":true},
+  "capture_method": "Separate subprocess per checkout; real Django Client POST endpoint and fresh fixed-target session per input. Only stable public identity/scoring/win fields are compared; random session IDs and opaque confirmation tokens are excluded.",
+  "sample": [
+    {
+      "target": "n_v21gas_cornulete",
+      "label": "Cornulețe",
+      "difficulty": "normal",
+      "incoming": [
+        {"id":"n_gas_cozonac","label":"Cozonac","relation":"related_to","strength":0.7},
+        {"id":"n_gas_masa_craciun","label":"Masa de Crăciun","relation":"related_to","strength":0.8},
+        {"id":"n_v18gas_salam_de_biscuiti","label":"Salam de biscuiți","relation":"same_category","strength":0.75},
+        {"id":"n_v4gas_prajitura","label":"Prăjitură","relation":"is_a","strength":0.75},
+        {"id":"n_v81_food_pantry_nuca","label":"Nucă","relation":"part_of","strength":0.9}
+      ],
+      "reachable": 2289,
+      "responsive": 1548,
+      "guesses": [
+        {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"dulceață","accepted":true,"id":"n_v17gas_dulceata","label":"Dulceață","distance":3,"rank":146,"temperature":"Caldut","closeness":94,"attempts":1,"won":false},
+        {"text":"sare","accepted":true,"id":"n_v4gas_sare","label":"Sare","distance":4,"rank":221,"temperature":"Caldut","closeness":90,"attempts":1,"won":false},
+        {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":5,"rank":596,"temperature":"Rece","closeness":74,"attempts":1,"won":false},
+        {"text":"ardei","accepted":true,"id":"n_v24_food_salad_veg_ardei","label":"Ardei","distance":7,"rank":2238,"temperature":"Inghetat","closeness":2,"attempts":1,"won":false},
+        {"text":"desert","accepted":true,"id":"n_v2gas_desert","label":"Desert","distance":2,"rank":14,"temperature":"Cald","closeness":99,"attempts":1,"won":false},
+        {"text":"făină","accepted":true,"id":"n_v24_food_pantry_faina","label":"Făină","distance":2,"rank":9,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"nucă","accepted":true,"id":"n_v81_food_pantry_nuca","label":"Nucă","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"zahăr","accepted":true,"id":"n_v24_food_pantry_zahar","label":"Zahăr","distance":3,"rank":52,"temperature":"Cald","closeness":98,"attempts":1,"won":false},
+        {"text":"lapte","accepted":true,"id":"n_v4gas_lapte","label":"Lapte","distance":3,"rank":143,"temperature":"Caldut","closeness":94,"attempts":1,"won":false},
+        {"text":"unt","accepted":true,"id":"n_v24_food_breakfast_unt","label":"Unt","distance":5,"rank":596,"temperature":"Rece","closeness":74,"attempts":1,"won":false},
+        {"text":"cartof","accepted":true,"id":"n_v2lim_cartof","label":"Cartof","distance":3,"rank":62,"temperature":"Cald","closeness":97,"attempts":1,"won":false},
+        {"text":"brânză","accepted":true,"id":"n_v2gas_branza","label":"Brânză","distance":3,"rank":127,"temperature":"Caldut","closeness":94,"attempts":1,"won":false},
+        {"text":"mămăligă","accepted":true,"id":"n_gas_mamaliga","label":"Mămăligă","distance":3,"rank":55,"temperature":"Cald","closeness":98,"attempts":1,"won":false},
+        {"text":"orez","accepted":true,"id":"n_v3gas_orez","label":"Orez","distance":3,"rank":60,"temperature":"Cald","closeness":97,"attempts":1,"won":false},
+        {"text":"carne","accepted":true,"id":"n_v4gas_carne","label":"Carne","distance":3,"rank":61,"temperature":"Cald","closeness":97,"attempts":1,"won":false},
+        {"text":"legume","accepted":true,"id":"n_v4gas_legume","label":"Legume","distance":3,"rank":164,"temperature":"Caldut","closeness":93,"attempts":1,"won":false},
+        {"text":"prăjitură","accepted":true,"id":"n_v4gas_prajitura","label":"Prăjitură","distance":1,"rank":4,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"sarmale","accepted":true,"id":"n_gas_sarmale","label":"Sarmale","distance":2,"rank":8,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"stilou","accepted":true,"id":"n_v24_school_supplies_stilou","label":"Stilou","distance":5,"rank":710,"temperature":"Rece","closeness":69,"attempts":1,"won":false},
+        {"text":"biserică","accepted":true,"id":"n_v4soc_biserica","label":"biserică","distance":3,"rank":164,"temperature":"Caldut","closeness":93,"attempts":1,"won":false},
+        {"text":"română","accepted":true,"id":"n_limba_romana","label":"Limba română","distance":4,"rank":478,"temperature":"Rece","closeness":79,"attempts":1,"won":false},
+        {"text":"corp","accepted":true,"id":"n_v4sti_corp","label":"corp","distance":6,"rank":1772,"temperature":"Inghetat","closeness":23,"attempts":1,"won":false},
+        {"text":"drojdie","accepted":true,"id":"ctxp_3218ea40b036e40101f5","label":"Drojdie","distance":3,"rank":58,"temperature":"Cald","closeness":98,"attempts":1,"won":false},
+        {"text":"tigaie","accepted":true,"id":"n_v30_kitchen_cookware_tigaie","label":"Tigaie","distance":3,"rank":82,"temperature":"Caldut","closeness":96,"attempts":1,"won":false},
+        {"text":"Cornulețe","accepted":true,"id":"n_v21gas_cornulete","label":"Cornulețe","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true},
+        {"text":"cornuleț cu gem","accepted":true,"id":"n_v21gas_cornulete","label":"Cornulețe","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true},
+        {"text":"cornulețul cu gem","accepted":true,"id":"n_v21gas_cornulete","label":"Cornulețe","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true},
+        {"text":"cornulețului cu gem","accepted":true,"id":"n_v21gas_cornulete","label":"Cornulețe","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true},
+        {"text":"cornulețelor cu gem","accepted":true,"id":"n_v21gas_cornulete","label":"Cornulețe","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true}
+      ]
+    },
+    {
+      "target": "n_v17gas_gogosi",
+      "label": "Gogoși",
+      "difficulty": "usor",
+      "incoming": [
+        {"id":"n_gas_papanasi","label":"Papanași","relation":"same_category","strength":0.75},
+        {"id":"n_v17gas_kurtoskalacs","label":"Kürtőskalács","relation":"same_category","strength":0.55},
+        {"id":"n_v18gas_ciocolata_dubai","label":"Ciocolata Dubai","relation":"related_to","strength":0.5},
+        {"id":"n_v18gas_langosi","label":"Langoși","relation":"related_to","strength":0.65},
+        {"id":"n_v2gas_desert","label":"Desert","relation":"is_a","strength":0.85},
+        {"id":"n_v2gas_mancare_stradala","label":"Mâncare stradală","relation":"related_to","strength":0.7},
+        {"id":"n_v3gas_clatite","label":"Clătite","relation":"same_category","strength":0.65}
+      ],
+      "reachable": 2289,
+      "responsive": 2130,
+      "guesses": [
+        {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"dulceață","accepted":true,"id":"n_v17gas_dulceata","label":"Dulceață","distance":2,"rank":36,"temperature":"Cald","closeness":98,"attempts":1,"won":false},
+        {"text":"sare","accepted":true,"id":"n_v4gas_sare","label":"Sare","distance":3,"rank":171,"temperature":"Caldut","closeness":93,"attempts":1,"won":false},
+        {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"ardei","accepted":true,"id":"n_v24_food_salad_veg_ardei","label":"Ardei","distance":6,"rank":2221,"temperature":"Inghetat","closeness":3,"attempts":1,"won":false},
+        {"text":"desert","accepted":true,"id":"n_v2gas_desert","label":"Desert","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"făină","accepted":true,"id":"n_v24_food_pantry_faina","label":"Făină","distance":2,"rank":20,"temperature":"Cald","closeness":99,"attempts":1,"won":false},
+        {"text":"nucă","accepted":true,"id":"n_v81_food_pantry_nuca","label":"Nucă","distance":5,"rank":1685,"temperature":"Inghetat","closeness":26,"attempts":1,"won":false},
+        {"text":"zahăr","accepted":true,"id":"n_v24_food_pantry_zahar","label":"Zahăr","distance":3,"rank":66,"temperature":"Cald","closeness":97,"attempts":1,"won":false},
+        {"text":"lapte","accepted":true,"id":"n_v4gas_lapte","label":"Lapte","distance":2,"rank":44,"temperature":"Cald","closeness":98,"attempts":1,"won":false},
+        {"text":"unt","accepted":true,"id":"n_v24_food_breakfast_unt","label":"Unt","distance":5,"rank":1684,"temperature":"Inghetat","closeness":26,"attempts":1,"won":false},
+        {"text":"cartof","accepted":true,"id":"n_v2lim_cartof","label":"Cartof","distance":3,"rank":80,"temperature":"Caldut","closeness":97,"attempts":1,"won":false},
+        {"text":"brânză","accepted":true,"id":"n_v2gas_branza","label":"Brânză","distance":2,"rank":27,"temperature":"Cald","closeness":99,"attempts":1,"won":false},
+        {"text":"mămăligă","accepted":true,"id":"n_gas_mamaliga","label":"Mămăligă","distance":3,"rank":61,"temperature":"Cald","closeness":97,"attempts":1,"won":false},
+        {"text":"orez","accepted":true,"id":"n_v3gas_orez","label":"Orez","distance":4,"rank":453,"temperature":"Rece","closeness":80,"attempts":1,"won":false},
+        {"text":"carne","accepted":true,"id":"n_v4gas_carne","label":"Carne","distance":3,"rank":115,"temperature":"Caldut","closeness":95,"attempts":1,"won":false},
+        {"text":"legume","accepted":true,"id":"n_v4gas_legume","label":"Legume","distance":4,"rank":453,"temperature":"Rece","closeness":80,"attempts":1,"won":false},
+        {"text":"prăjitură","accepted":true,"id":"n_v4gas_prajitura","label":"Prăjitură","distance":2,"rank":12,"temperature":"Cald","closeness":99,"attempts":1,"won":false},
+        {"text":"sarmale","accepted":true,"id":"n_gas_sarmale","label":"Sarmale","distance":3,"rank":85,"temperature":"Caldut","closeness":96,"attempts":1,"won":false},
+        {"text":"stilou","accepted":true,"id":"n_v24_school_supplies_stilou","label":"Stilou","distance":5,"rank":1384,"temperature":"Foarte rece","closeness":40,"attempts":1,"won":false},
+        {"text":"biserică","accepted":true,"id":"n_v4soc_biserica","label":"biserică","distance":3,"rank":113,"temperature":"Caldut","closeness":95,"attempts":1,"won":false},
+        {"text":"română","accepted":true,"id":"n_limba_romana","label":"Limba română","distance":4,"rank":790,"temperature":"Rece","closeness":66,"attempts":1,"won":false},
+        {"text":"corp","accepted":true,"id":"n_v4sti_corp","label":"corp","distance":5,"rank":1897,"temperature":"Inghetat","closeness":17,"attempts":1,"won":false},
+        {"text":"drojdie","accepted":true,"id":"ctxp_3218ea40b036e40101f5","label":"Drojdie","distance":2,"rank":27,"temperature":"Cald","closeness":99,"attempts":1,"won":false},
+        {"text":"tigaie","accepted":true,"id":"n_v30_kitchen_cookware_tigaie","label":"Tigaie","distance":4,"rank":407,"temperature":"Rece","closeness":82,"attempts":1,"won":false},
+        {"text":"Gogoși","accepted":true,"id":"n_v17gas_gogosi","label":"Gogoși","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true},
+        {"text":"gogoașa prăjită","accepted":true,"id":"n_v17gas_gogosi","label":"Gogoși","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true}
+      ]
+    },
+    {
+      "target": "n_gas_telemea",
+      "label": "Telemea",
+      "difficulty": "usor",
+      "incoming": [
+        {"id":"n_gas_branza_smantana","label":"Brânză cu smântână","relation":"same_category","strength":0.68},
+        {"id":"n_gas_bulz","label":"Bulz","relation":"part_of","strength":0.76},
+        {"id":"n_gas_mamaliga","label":"Mămăligă","relation":"related_to","strength":0.82},
+        {"id":"n_gas_placinte_poale_brau","label":"Poale-n brâu","relation":"same_category","strength":0.4},
+        {"id":"n_gas_urda","label":"Urdă","relation":"same_category","strength":0.6},
+        {"id":"n_v11gas_tochitura_moldoveneasca","label":"Tochitură moldovenească","relation":"associated_with","strength":0.5},
+        {"id":"n_v20gas_telemea_ibanesti","label":"Telemea de Ibănești","relation":"is_a","strength":0.9},
+        {"id":"n_v2gas_branza","label":"Brânză","relation":"is_a","strength":0.94},
+        {"id":"n_v2gas_placinte","label":"Plăcinte","relation":"related_to","strength":0.7},
+        {"id":"n_v42gas_branza_burduf","label":"Brânză de burduf","relation":"related_to","strength":0.7}
+      ],
+      "reachable": 2289,
+      "responsive": 1715,
+      "guesses": [
+        {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":5,"rank":835,"temperature":"Rece","closeness":64,"attempts":1,"won":false},
+        {"text":"dulceață","accepted":true,"id":"n_v17gas_dulceata","label":"Dulceață","distance":3,"rank":79,"temperature":"Caldut","closeness":97,"attempts":1,"won":false},
+        {"text":"sare","accepted":true,"id":"n_v4gas_sare","label":"Sare","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":5,"rank":834,"temperature":"Rece","closeness":64,"attempts":1,"won":false},
+        {"text":"ardei","accepted":true,"id":"n_v24_food_salad_veg_ardei","label":"Ardei","distance":6,"rank":2000,"temperature":"Inghetat","closeness":13,"attempts":1,"won":false},
+        {"text":"desert","accepted":true,"id":"n_v2gas_desert","label":"Desert","distance":2,"rank":41,"temperature":"Cald","closeness":98,"attempts":1,"won":false},
+        {"text":"făină","accepted":true,"id":"n_v24_food_pantry_faina","label":"Făină","distance":3,"rank":96,"temperature":"Caldut","closeness":96,"attempts":1,"won":false},
+        {"text":"nucă","accepted":true,"id":"n_v81_food_pantry_nuca","label":"Nucă","distance":5,"rank":835,"temperature":"Rece","closeness":64,"attempts":1,"won":false},
+        {"text":"zahăr","accepted":true,"id":"n_v24_food_pantry_zahar","label":"Zahăr","distance":4,"rank":313,"temperature":"Rece","closeness":86,"attempts":1,"won":false},
+        {"text":"lapte","accepted":true,"id":"n_v4gas_lapte","label":"Lapte","distance":2,"rank":14,"temperature":"Cald","closeness":99,"attempts":1,"won":false},
+        {"text":"unt","accepted":true,"id":"n_v24_food_breakfast_unt","label":"Unt","distance":5,"rank":834,"temperature":"Rece","closeness":64,"attempts":1,"won":false},
+        {"text":"cartof","accepted":true,"id":"n_v2lim_cartof","label":"Cartof","distance":3,"rank":220,"temperature":"Caldut","closeness":90,"attempts":1,"won":false},
+        {"text":"brânză","accepted":true,"id":"n_v2gas_branza","label":"Brânză","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"mămăligă","accepted":true,"id":"n_gas_mamaliga","label":"Mămăligă","distance":1,"rank":4,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"orez","accepted":true,"id":"n_v3gas_orez","label":"Orez","distance":3,"rank":69,"temperature":"Caldut","closeness":97,"attempts":1,"won":false},
+        {"text":"carne","accepted":true,"id":"n_v4gas_carne","label":"Carne","distance":2,"rank":38,"temperature":"Cald","closeness":98,"attempts":1,"won":false},
+        {"text":"legume","accepted":true,"id":"n_v4gas_legume","label":"Legume","distance":3,"rank":110,"temperature":"Caldut","closeness":95,"attempts":1,"won":false},
+        {"text":"prăjitură","accepted":true,"id":"n_v4gas_prajitura","label":"Prăjitură","distance":3,"rank":77,"temperature":"Caldut","closeness":97,"attempts":1,"won":false},
+        {"text":"sarmale","accepted":true,"id":"n_gas_sarmale","label":"Sarmale","distance":2,"rank":19,"temperature":"Cald","closeness":99,"attempts":1,"won":false},
+        {"text":"stilou","accepted":true,"id":"n_v24_school_supplies_stilou","label":"Stilou","distance":5,"rank":731,"temperature":"Rece","closeness":68,"attempts":1,"won":false},
+        {"text":"biserică","accepted":true,"id":"n_v4soc_biserica","label":"biserică","distance":4,"rank":630,"temperature":"Rece","closeness":73,"attempts":1,"won":false},
+        {"text":"română","accepted":true,"id":"n_limba_romana","label":"Limba română","distance":4,"rank":405,"temperature":"Rece","closeness":82,"attempts":1,"won":false},
+        {"text":"corp","accepted":true,"id":"n_v4sti_corp","label":"corp","distance":5,"rank":1398,"temperature":"Foarte rece","closeness":39,"attempts":1,"won":false},
+        {"text":"drojdie","accepted":true,"id":"ctxp_3218ea40b036e40101f5","label":"Drojdie","distance":2,"rank":13,"temperature":"Cald","closeness":99,"attempts":1,"won":false},
+        {"text":"tigaie","accepted":true,"id":"n_v30_kitchen_cookware_tigaie","label":"Tigaie","distance":4,"rank":222,"temperature":"Caldut","closeness":90,"attempts":1,"won":false},
+        {"text":"Telemea","accepted":true,"id":"n_gas_telemea","label":"Telemea","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true},
+        {"text":"telemelei","accepted":true,"id":"n_gas_telemea","label":"Telemea","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true},
+        {"text":"telemele","accepted":true,"id":"n_gas_telemea","label":"Telemea","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true},
+        {"text":"telemelele","accepted":true,"id":"n_gas_telemea","label":"Telemea","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true},
+        {"text":"telemelelor","accepted":true,"id":"n_gas_telemea","label":"Telemea","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true}
+      ]
+    },
+    {
+      "target": "n_v3gas_cartofi_prajiti",
+      "label": "Cartofi prăjiți",
+      "difficulty": "usor",
+      "incoming": [
+        {"id":"n_gas_mici","label":"Mici","relation":"related_to","strength":0.79},
+        {"id":"n_gas_saorma_de_toate","label":"Șaorma cu de toate","relation":"related_to","strength":0.75},
+        {"id":"n_v19gas_air_fryer","label":"Air fryer","relation":"related_to","strength":0.6},
+        {"id":"n_v20gas_snitel","label":"Șnițel","relation":"associated_with","strength":0.8},
+        {"id":"n_v2gas_mancare_stradala","label":"Mâncare stradală","relation":"related_to","strength":0.78},
+        {"id":"n_v2lim_cartof","label":"Cartof","relation":"part_of","strength":0.95}
+      ],
+      "reachable": 2289,
+      "responsive": 2127,
+      "guesses": [
+        {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":5,"rank":1190,"temperature":"Foarte rece","closeness":48,"attempts":1,"won":false},
+        {"text":"dulceață","accepted":true,"id":"n_v17gas_dulceata","label":"Dulceață","distance":4,"rank":341,"temperature":"Rece","closeness":85,"attempts":1,"won":false},
+        {"text":"sare","accepted":true,"id":"n_v4gas_sare","label":"Sare","distance":2,"rank":29,"temperature":"Cald","closeness":99,"attempts":1,"won":false},
+        {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"ardei","accepted":true,"id":"n_v24_food_salad_veg_ardei","label":"Ardei","distance":6,"rank":2163,"temperature":"Inghetat","closeness":6,"attempts":1,"won":false},
+        {"text":"desert","accepted":true,"id":"n_v2gas_desert","label":"Desert","distance":3,"rank":110,"temperature":"Caldut","closeness":95,"attempts":1,"won":false},
+        {"text":"făină","accepted":true,"id":"n_v24_food_pantry_faina","label":"Făină","distance":4,"rank":370,"temperature":"Rece","closeness":84,"attempts":1,"won":false},
+        {"text":"nucă","accepted":true,"id":"n_v81_food_pantry_nuca","label":"Nucă","distance":5,"rank":1190,"temperature":"Foarte rece","closeness":48,"attempts":1,"won":false},
+        {"text":"zahăr","accepted":true,"id":"n_v24_food_pantry_zahar","label":"Zahăr","distance":5,"rank":1169,"temperature":"Foarte rece","closeness":49,"attempts":1,"won":false},
+        {"text":"lapte","accepted":true,"id":"n_v4gas_lapte","label":"Lapte","distance":4,"rank":339,"temperature":"Rece","closeness":85,"attempts":1,"won":false},
+        {"text":"unt","accepted":true,"id":"n_v24_food_breakfast_unt","label":"Unt","distance":5,"rank":1189,"temperature":"Foarte rece","closeness":48,"attempts":1,"won":false},
+        {"text":"cartof","accepted":true,"id":"n_v2lim_cartof","label":"Cartof","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"brânză","accepted":true,"id":"n_v2gas_branza","label":"Brânză","distance":3,"rank":79,"temperature":"Caldut","closeness":97,"attempts":1,"won":false},
+        {"text":"mămăligă","accepted":true,"id":"n_gas_mamaliga","label":"Mămăligă","distance":4,"rank":323,"temperature":"Rece","closeness":86,"attempts":1,"won":false},
+        {"text":"orez","accepted":true,"id":"n_v3gas_orez","label":"Orez","distance":4,"rank":327,"temperature":"Rece","closeness":86,"attempts":1,"won":false},
+        {"text":"carne","accepted":true,"id":"n_v4gas_carne","label":"Carne","distance":2,"rank":13,"temperature":"Cald","closeness":99,"attempts":1,"won":false},
+        {"text":"legume","accepted":true,"id":"n_v4gas_legume","label":"Legume","distance":3,"rank":70,"temperature":"Caldut","closeness":97,"attempts":1,"won":false},
+        {"text":"prăjitură","accepted":true,"id":"n_v4gas_prajitura","label":"Prăjitură","distance":4,"rank":376,"temperature":"Rece","closeness":84,"attempts":1,"won":false},
+        {"text":"sarmale","accepted":true,"id":"n_gas_sarmale","label":"Sarmale","distance":3,"rank":59,"temperature":"Cald","closeness":97,"attempts":1,"won":false},
+        {"text":"stilou","accepted":true,"id":"n_v24_school_supplies_stilou","label":"Stilou","distance":5,"rank":1666,"temperature":"Inghetat","closeness":27,"attempts":1,"won":false},
+        {"text":"biserică","accepted":true,"id":"n_v4soc_biserica","label":"biserică","distance":5,"rank":1331,"temperature":"Foarte rece","closeness":42,"attempts":1,"won":false},
+        {"text":"română","accepted":true,"id":"n_limba_romana","label":"Limba română","distance":3,"rank":296,"temperature":"Rece","closeness":87,"attempts":1,"won":false},
+        {"text":"corp","accepted":true,"id":"n_v4sti_corp","label":"corp","distance":5,"rank":1278,"temperature":"Foarte rece","closeness":44,"attempts":1,"won":false},
+        {"text":"drojdie","accepted":true,"id":"ctxp_3218ea40b036e40101f5","label":"Drojdie","distance":2,"rank":18,"temperature":"Cald","closeness":99,"attempts":1,"won":false},
+        {"text":"tigaie","accepted":true,"id":"n_v30_kitchen_cookware_tigaie","label":"Tigaie","distance":3,"rank":126,"temperature":"Caldut","closeness":95,"attempts":1,"won":false},
+        {"text":"Cartofi prăjiți","accepted":true,"id":"n_v3gas_cartofi_prajiti","label":"Cartofi prăjiți","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true},
+        {"text":"cartof prăjit","accepted":true,"id":"n_v3gas_cartofi_prajiti","label":"Cartofi prăjiți","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true},
+        {"text":"cartofului prăjit","accepted":true,"id":"n_v3gas_cartofi_prajiti","label":"Cartofi prăjiți","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true},
+        {"text":"cartofilor prăjiți","accepted":true,"id":"n_v3gas_cartofi_prajiti","label":"Cartofi prăjiți","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true}
+      ]
+    },
+    {
+      "target": "n_gas_ardei_umpluti",
+      "label": "Ardei umpluți",
+      "difficulty": "normal",
+      "incoming": [
+        {"id":"n_gas_bors","label":"Borș","relation":"related_to","strength":0.36},
+        {"id":"n_gas_mamaliga","label":"Mămăligă","relation":"related_to","strength":0.62},
+        {"id":"n_gas_sarmale","label":"Sarmale","relation":"same_category","strength":0.74},
+        {"id":"n_gas_varza_a_la_cluj","label":"Varză a la Cluj","relation":"same_category","strength":0.68},
+        {"id":"n_gas_zacusca","label":"Zacuscă","relation":"related_to","strength":0.42},
+        {"id":"n_v3gas_orez","label":"Orez","relation":"part_of","strength":0.86},
+        {"id":"n_v4gas_legume","label":"Legume","relation":"part_of","strength":0.75},
+        {"id":"n_v4gas_rosie","label":"Roșie","relation":"related_to","strength":0.68}
+      ],
+      "reachable": 2289,
+      "responsive": 2153,
+      "guesses": [
+        {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":4,"rank":468,"temperature":"Rece","closeness":80,"attempts":1,"won":false},
+        {"text":"dulceață","accepted":true,"id":"n_v17gas_dulceata","label":"Dulceață","distance":3,"rank":188,"temperature":"Caldut","closeness":92,"attempts":1,"won":false},
+        {"text":"sare","accepted":true,"id":"n_v4gas_sare","label":"Sare","distance":3,"rank":106,"temperature":"Caldut","closeness":95,"attempts":1,"won":false},
+        {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":4,"rank":467,"temperature":"Rece","closeness":80,"attempts":1,"won":false},
+        {"text":"ardei","accepted":true,"id":"n_v24_food_salad_veg_ardei","label":"Ardei","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"desert","accepted":true,"id":"n_v2gas_desert","label":"Desert","distance":3,"rank":136,"temperature":"Caldut","closeness":94,"attempts":1,"won":false},
+        {"text":"făină","accepted":true,"id":"n_v24_food_pantry_faina","label":"Făină","distance":4,"rank":360,"temperature":"Rece","closeness":84,"attempts":1,"won":false},
+        {"text":"nucă","accepted":true,"id":"n_v81_food_pantry_nuca","label":"Nucă","distance":4,"rank":468,"temperature":"Rece","closeness":80,"attempts":1,"won":false},
+        {"text":"zahăr","accepted":true,"id":"n_v24_food_pantry_zahar","label":"Zahăr","distance":4,"rank":467,"temperature":"Rece","closeness":80,"attempts":1,"won":false},
+        {"text":"lapte","accepted":true,"id":"n_v4gas_lapte","label":"Lapte","distance":3,"rank":110,"temperature":"Caldut","closeness":95,"attempts":1,"won":false},
+        {"text":"unt","accepted":true,"id":"n_v24_food_breakfast_unt","label":"Unt","distance":4,"rank":467,"temperature":"Rece","closeness":80,"attempts":1,"won":false},
+        {"text":"cartof","accepted":true,"id":"n_v2lim_cartof","label":"Cartof","distance":3,"rank":139,"temperature":"Caldut","closeness":94,"attempts":1,"won":false},
+        {"text":"brânză","accepted":true,"id":"n_v2gas_branza","label":"Brânză","distance":3,"rank":94,"temperature":"Caldut","closeness":96,"attempts":1,"won":false},
+        {"text":"mămăligă","accepted":true,"id":"n_gas_mamaliga","label":"Mămăligă","distance":1,"rank":7,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"orez","accepted":true,"id":"n_v3gas_orez","label":"Orez","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"carne","accepted":true,"id":"n_v4gas_carne","label":"Carne","distance":2,"rank":21,"temperature":"Cald","closeness":99,"attempts":1,"won":false},
+        {"text":"legume","accepted":true,"id":"n_v4gas_legume","label":"Legume","distance":1,"rank":3,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"prăjitură","accepted":true,"id":"n_v4gas_prajitura","label":"Prăjitură","distance":4,"rank":389,"temperature":"Rece","closeness":83,"attempts":1,"won":false},
+        {"text":"sarmale","accepted":true,"id":"n_gas_sarmale","label":"Sarmale","distance":1,"rank":4,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"stilou","accepted":true,"id":"n_v24_school_supplies_stilou","label":"Stilou","distance":5,"rank":1844,"temperature":"Inghetat","closeness":19,"attempts":1,"won":false},
+        {"text":"biserică","accepted":true,"id":"n_v4soc_biserica","label":"biserică","distance":3,"rank":146,"temperature":"Caldut","closeness":94,"attempts":1,"won":false},
+        {"text":"română","accepted":true,"id":"n_limba_romana","label":"Limba română","distance":3,"rank":354,"temperature":"Rece","closeness":85,"attempts":1,"won":false},
+        {"text":"corp","accepted":true,"id":"n_v4sti_corp","label":"corp","distance":4,"rank":796,"temperature":"Rece","closeness":65,"attempts":1,"won":false},
+        {"text":"drojdie","accepted":true,"id":"ctxp_3218ea40b036e40101f5","label":"Drojdie","distance":2,"rank":11,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"tigaie","accepted":true,"id":"n_v30_kitchen_cookware_tigaie","label":"Tigaie","distance":3,"rank":70,"temperature":"Caldut","closeness":97,"attempts":1,"won":false},
+        {"text":"Ardei umpluți","accepted":true,"id":"n_gas_ardei_umpluti","label":"Ardei umpluți","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true}
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "target": "n_gas_papanasi",
+      "label": "Papanași",
+      "guesses": [
+        {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":1,"rank":13,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":5,"rank":1291,"temperature":"Foarte rece","closeness":44,"attempts":1,"won":false},
+        {"text":"sare","accepted":true,"id":"n_v4gas_sare","label":"Sare","distance":4,"rank":320,"temperature":"Rece","closeness":86,"attempts":1,"won":false},
+        {"text":"ardei","accepted":true,"id":"n_v24_food_salad_veg_ardei","label":"Ardei","distance":6,"rank":1984,"temperature":"Inghetat","closeness":13,"attempts":1,"won":false},
+        {"text":"dulceață","accepted":true,"id":"n_v17gas_dulceata","label":"Dulceață","distance":1,"rank":12,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"Papanași","accepted":true,"id":"n_gas_papanasi","label":"Papanași","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true}
+      ]
+    },
+    {
+      "target": "n_v3gas_clatite",
+      "label": "Clătite",
+      "guesses": [
+        {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":1,"rank":8,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":6,"rank":1699,"temperature":"Inghetat","closeness":26,"attempts":1,"won":false},
+        {"text":"sare","accepted":true,"id":"n_v4gas_sare","label":"Sare","distance":4,"rank":204,"temperature":"Caldut","closeness":91,"attempts":1,"won":false},
+        {"text":"ardei","accepted":true,"id":"n_v24_food_salad_veg_ardei","label":"Ardei","distance":6,"rank":2197,"temperature":"Inghetat","closeness":4,"attempts":1,"won":false},
+        {"text":"dulceață","accepted":true,"id":"n_v17gas_dulceata","label":"Dulceață","distance":1,"rank":7,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"Clătite","accepted":true,"id":"n_v3gas_clatite","label":"Clătite","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true}
+      ]
+    },
+    {
+      "target": "n_gas_cozonac",
+      "label": "Cozonac",
+      "guesses": [
+        {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":4,"rank":505,"temperature":"Rece","closeness":78,"attempts":1,"won":false},
+        {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":4,"rank":504,"temperature":"Rece","closeness":78,"attempts":1,"won":false},
+        {"text":"sare","accepted":true,"id":"n_v4gas_sare","label":"Sare","distance":3,"rank":188,"temperature":"Caldut","closeness":92,"attempts":1,"won":false},
+        {"text":"ardei","accepted":true,"id":"n_v24_food_salad_veg_ardei","label":"Ardei","distance":6,"rank":2195,"temperature":"Inghetat","closeness":4,"attempts":1,"won":false},
+        {"text":"dulceață","accepted":true,"id":"n_v17gas_dulceata","label":"Dulceață","distance":2,"rank":81,"temperature":"Caldut","closeness":97,"attempts":1,"won":false},
+        {"text":"Cozonac","accepted":true,"id":"n_gas_cozonac","label":"Cozonac","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true}
+      ]
+    },
+    {
+      "target": "n_gas_sarmale",
+      "label": "Sarmale",
+      "guesses": [
+        {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":4,"rank":775,"temperature":"Rece","closeness":66,"attempts":1,"won":false},
+        {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":4,"rank":774,"temperature":"Rece","closeness":66,"attempts":1,"won":false},
+        {"text":"sare","accepted":true,"id":"n_v4gas_sare","label":"Sare","distance":2,"rank":73,"temperature":"Caldut","closeness":97,"attempts":1,"won":false},
+        {"text":"ardei","accepted":true,"id":"n_v24_food_salad_veg_ardei","label":"Ardei","distance":5,"rank":2089,"temperature":"Inghetat","closeness":9,"attempts":1,"won":false},
+        {"text":"dulceață","accepted":true,"id":"n_v17gas_dulceata","label":"Dulceață","distance":3,"rank":267,"temperature":"Rece","closeness":88,"attempts":1,"won":false},
+        {"text":"Sarmale","accepted":true,"id":"n_gas_sarmale","label":"Sarmale","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true}
+      ]
+    },
+    {
+      "target": "n_v4soc_casa",
+      "label": "casă",
+      "guesses": [
+        {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":1,"rank":6,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":1,"rank":5,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"sare","accepted":true,"id":"n_v4gas_sare","label":"Sare","distance":3,"rank":227,"temperature":"Caldut","closeness":90,"attempts":1,"won":false},
+        {"text":"ardei","accepted":true,"id":"n_v24_food_salad_veg_ardei","label":"Ardei","distance":5,"rank":1753,"temperature":"Inghetat","closeness":23,"attempts":1,"won":false},
+        {"text":"dulceață","accepted":true,"id":"n_v17gas_dulceata","label":"Dulceață","distance":4,"rank":496,"temperature":"Rece","closeness":78,"attempts":1,"won":false},
+        {"text":"casă","accepted":true,"id":"n_v4soc_casa","label":"casă","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true}
+      ]
+    },
+    {
+      "target": "n_v4sti_planta",
+      "label": "plantă",
+      "guesses": [
+        {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":4,"rank":294,"temperature":"Rece","closeness":87,"attempts":1,"won":false},
+        {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":4,"rank":293,"temperature":"Rece","closeness":87,"attempts":1,"won":false},
+        {"text":"sare","accepted":true,"id":"n_v4gas_sare","label":"Sare","distance":4,"rank":378,"temperature":"Rece","closeness":84,"attempts":1,"won":false},
+        {"text":"ardei","accepted":true,"id":"n_v24_food_salad_veg_ardei","label":"Ardei","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"dulceață","accepted":true,"id":"n_v17gas_dulceata","label":"Dulceață","distance":3,"rank":138,"temperature":"Caldut","closeness":94,"attempts":1,"won":false},
+        {"text":"plantă","accepted":true,"id":"n_v4sti_planta","label":"plantă","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true}
+      ]
+    },
+    {
+      "target": "n_v24_food_pantry_ulei",
+      "label": "Ulei",
+      "guesses": [
+        {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":5,"rank":666,"temperature":"Rece","closeness":71,"attempts":1,"won":false},
+        {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true},
+        {"text":"sare","accepted":true,"id":"n_v4gas_sare","label":"Sare","distance":3,"rank":61,"temperature":"Cald","closeness":97,"attempts":1,"won":false},
+        {"text":"ardei","accepted":true,"id":"n_v24_food_salad_veg_ardei","label":"Ardei","distance":6,"rank":1716,"temperature":"Inghetat","closeness":25,"attempts":1,"won":false},
+        {"text":"dulceață","accepted":true,"id":"n_v17gas_dulceata","label":"Dulceață","distance":4,"rank":205,"temperature":"Caldut","closeness":91,"attempts":1,"won":false},
+        {"text":"Ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true}
+      ]
+    },
+    {
+      "target": "n_v4gas_sare",
+      "label": "Sare",
+      "guesses": [
+        {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":4,"rank":552,"temperature":"Rece","closeness":76,"attempts":1,"won":false},
+        {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":4,"rank":551,"temperature":"Rece","closeness":76,"attempts":1,"won":false},
+        {"text":"sare","accepted":true,"id":"n_v4gas_sare","label":"Sare","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true},
+        {"text":"ardei","accepted":true,"id":"n_v24_food_salad_veg_ardei","label":"Ardei","distance":5,"rank":1590,"temperature":"Foarte rece","closeness":31,"attempts":1,"won":false},
+        {"text":"dulceață","accepted":true,"id":"n_v17gas_dulceata","label":"Dulceață","distance":3,"rank":121,"temperature":"Caldut","closeness":95,"attempts":1,"won":false},
+        {"text":"Sare","accepted":true,"id":"n_v4gas_sare","label":"Sare","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true}
+      ]
+    },
+    {
+      "target": "n_v24_food_salad_veg_ardei",
+      "label": "Ardei",
+      "guesses": [
+        {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":5,"rank":673,"temperature":"Rece","closeness":71,"attempts":1,"won":false},
+        {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":5,"rank":672,"temperature":"Rece","closeness":71,"attempts":1,"won":false},
+        {"text":"sare","accepted":true,"id":"n_v4gas_sare","label":"Sare","distance":3,"rank":67,"temperature":"Cald","closeness":97,"attempts":1,"won":false},
+        {"text":"ardei","accepted":true,"id":"n_v24_food_salad_veg_ardei","label":"Ardei","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true},
+        {"text":"dulceață","accepted":true,"id":"n_v17gas_dulceata","label":"Dulceață","distance":4,"rank":218,"temperature":"Caldut","closeness":91,"attempts":1,"won":false},
+        {"text":"Ardei","accepted":true,"id":"n_v24_food_salad_veg_ardei","label":"Ardei","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true}
+      ]
+    },
+    {
+      "target": "n_v24_food_breakfast_miere",
+      "label": "Miere",
+      "guesses": [
+        {"text":"gem","accepted":true,"id":"ctxp_fab0f46e7bcd5932442e","label":"Gem","distance":1,"rank":2,"temperature":"Fierbinte","closeness":99,"attempts":1,"won":false},
+        {"text":"ulei","accepted":true,"id":"n_v24_food_pantry_ulei","label":"Ulei","distance":5,"rank":667,"temperature":"Rece","closeness":71,"attempts":1,"won":false},
+        {"text":"sare","accepted":true,"id":"n_v4gas_sare","label":"Sare","distance":3,"rank":61,"temperature":"Cald","closeness":97,"attempts":1,"won":false},
+        {"text":"ardei","accepted":true,"id":"n_v24_food_salad_veg_ardei","label":"Ardei","distance":6,"rank":1716,"temperature":"Inghetat","closeness":25,"attempts":1,"won":false},
+        {"text":"dulceață","accepted":true,"id":"n_v17gas_dulceata","label":"Dulceață","distance":4,"rank":206,"temperature":"Caldut","closeness":91,"attempts":1,"won":false},
+        {"text":"Miere","accepted":true,"id":"n_v24_food_breakfast_miere","label":"Miere","distance":0,"rank":1,"temperature":"Gasit","closeness":100,"attempts":1,"won":true}
+      ]
+    }
+  ],
+  "omitted": [
+    {
+      "surface": "bulzuri",
+      "exact": null,
+      "fuzzy": null,
+      "suggestions": [],
+      "projection": null,
+      "projection_suggestions": []
+    },
+    {
+      "surface": "bulzului",
+      "exact": null,
+      "fuzzy": null,
+      "suggestions": ["Bulz"],
+      "projection": null,
+      "projection_suggestions": []
+    },
+    {
+      "surface": "gogoșii",
+      "exact": null,
+      "fuzzy": "n_v17gas_gogosi",
+      "suggestions": ["Gogoși"],
+      "projection": null,
+      "projection_suggestions": []
+    },
+    {
+      "surface": "gogoșilor",
+      "exact": null,
+      "fuzzy": null,
+      "suggestions": ["Gogoși"],
+      "projection": null,
+      "projection_suggestions": []
+    },
+    {
+      "surface": "cornuleț",
+      "exact": null,
+      "fuzzy": "n_v21gas_cornulete",
+      "suggestions": ["Cornulețe"],
+      "projection": null,
+      "projection_suggestions": []
+    },
+    {
+      "surface": "cornulețului",
+      "exact": null,
+      "fuzzy": null,
+      "suggestions": ["Cornulețe"],
+      "projection": null,
+      "projection_suggestions": []
+    },
+    {
+      "surface": "mujdeiuri",
+      "exact": null,
+      "fuzzy": null,
+      "suggestions": ["Mujdei"],
+      "projection": null,
+      "projection_suggestions": []
+    },
+    {
+      "surface": "mujdeiurile",
+      "exact": null,
+      "fuzzy": null,
+      "suggestions": ["Mujdei","Ulei"],
+      "projection": null,
+      "projection_suggestions": []
+    },
+    {
+      "surface": "mujdeiurilor",
+      "exact": null,
+      "fuzzy": null,
+      "suggestions": ["Ulei","Mujdei"],
+      "projection": null,
+      "projection_suggestions": []
+    },
+    {
+      "surface": "păști",
+      "exact": null,
+      "fuzzy": null,
+      "suggestions": ["pește","Paste","Mască"],
+      "projection": null,
+      "projection_suggestions": ["pastila"]
+    },
+    {
+      "surface": "păștii",
+      "exact": null,
+      "fuzzy": null,
+      "suggestions": ["pește"],
+      "projection": null,
+      "projection_suggestions": []
+    }
+  ],
+  "accepted_forms": [
+    {"target":"n_gas_urda","surface":"urdei","exact":"n_gas_urda","fuzzy":"n_gas_urda"},
+    {"target":"n_gas_urda","surface":"urde","exact":"n_gas_urda","fuzzy":"n_gas_urda"},
+    {"target":"n_gas_urda","surface":"urdele","exact":"n_gas_urda","fuzzy":"n_gas_urda"},
+    {"target":"n_gas_urda","surface":"urdelor","exact":"n_gas_urda","fuzzy":"n_gas_urda"},
+    {"target":"n_gas_telemea","surface":"telemelei","exact":"n_gas_telemea","fuzzy":"n_gas_telemea"},
+    {"target":"n_gas_telemea","surface":"telemele","exact":"n_gas_telemea","fuzzy":"n_gas_telemea"},
+    {"target":"n_gas_telemea","surface":"telemelele","exact":"n_gas_telemea","fuzzy":"n_gas_telemea"},
+    {"target":"n_gas_telemea","surface":"telemelelor","exact":"n_gas_telemea","fuzzy":"n_gas_telemea"},
+    {"target":"n_gas_mujdei","surface":"mujdeiului","exact":"n_gas_mujdei","fuzzy":"n_gas_mujdei"},
+    {"target":"n_gas_mujdei","surface":"mujdeie","exact":"n_gas_mujdei","fuzzy":"n_gas_mujdei"},
+    {"target":"n_gas_mujdei","surface":"mujdeiele","exact":"n_gas_mujdei","fuzzy":"n_gas_mujdei"},
+    {"target":"n_gas_mujdei","surface":"mujdeielor","exact":"n_gas_mujdei","fuzzy":"n_gas_mujdei"},
+    {"target":"n_v3gas_friptura","surface":"fripturii","exact":"n_v3gas_friptura","fuzzy":"n_v3gas_friptura"},
+    {"target":"n_v3gas_friptura","surface":"fripturilor","exact":"n_v3gas_friptura","fuzzy":"n_v3gas_friptura"},
+    {"target":"n_v3gas_cartofi_prajiti","surface":"cartof prăjit","exact":"n_v3gas_cartofi_prajiti","fuzzy":"n_v3gas_cartofi_prajiti"},
+    {"target":"n_v3gas_cartofi_prajiti","surface":"cartofului prăjit","exact":"n_v3gas_cartofi_prajiti","fuzzy":"n_v3gas_cartofi_prajiti"},
+    {"target":"n_v3gas_cartofi_prajiti","surface":"cartofilor prăjiți","exact":"n_v3gas_cartofi_prajiti","fuzzy":"n_v3gas_cartofi_prajiti"},
+    {"target":"n_gas_bulz","surface":"bulzuri cu brânză","exact":"n_gas_bulz","fuzzy":"n_gas_bulz"},
+    {"target":"n_gas_bulz","surface":"bulzurile cu brânză","exact":"n_gas_bulz","fuzzy":"n_gas_bulz"},
+    {"target":"n_v21gas_cornulete","surface":"cornuleț cu gem","exact":"n_v21gas_cornulete","fuzzy":"n_v21gas_cornulete"},
+    {"target":"n_v21gas_cornulete","surface":"cornulețul cu gem","exact":"n_v21gas_cornulete","fuzzy":"n_v21gas_cornulete"},
+    {"target":"n_v21gas_cornulete","surface":"cornulețului cu gem","exact":"n_v21gas_cornulete","fuzzy":"n_v21gas_cornulete"},
+    {"target":"n_v21gas_cornulete","surface":"cornulețelor cu gem","exact":"n_v21gas_cornulete","fuzzy":"n_v21gas_cornulete"},
+    {"target":"n_v17gas_gogosi","surface":"gogoașa prăjită","exact":"n_v17gas_gogosi","fuzzy":"n_v17gas_gogosi"}
+  ],
+  "all_canonical_sha256": "sha256:ebd618f17f7d6acf08f1f83be286b2865c3a8eda4ec329921e205bfad8bd3c47",
+  "all_canonical_archive": "Full scalar canonical captures remain scratch-only; reproduce with runtime-probes.py.txt against the bound checkouts/inventory. The correction receipt archives every changed row and hashes/counts for the complete comparison."
+}

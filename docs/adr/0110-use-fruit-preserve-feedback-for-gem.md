@@ -1,6 +1,6 @@
 # ADR-0110: Borrow reviewed direct fruit-preserve feedback for Gem
 
-- Status: accepted
+- Status: partially superseded by ADR-0117 for two additional exact-target Gem associations; other decisions remain accepted.
 - Date: 2026-09-06
 
 ## Context

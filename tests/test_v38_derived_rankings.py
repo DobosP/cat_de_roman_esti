@@ -10,6 +10,8 @@ from pathlib import Path
 
 import pytest
 
+from tests.current_content import CURRENT_CONTENT
+
 _ROOT = Path(__file__).resolve().parent.parent
 
 
@@ -47,12 +49,7 @@ def test_generated_catalog_is_exact_complete_and_byte_identical(generated: dict)
     expected = BUILD.render_catalog(generated)
     assert BUILD.PACKAGE_CATALOG.read_bytes() == expected
     assert BUILD.TEST_CATALOG.read_bytes() == expected
-    assert generated["meta"]["counts"] == {
-        "total": 336,
-        "by_game": {"intrusul": 183, "perechi": 153},
-        "sources_by_game": {"intrusul": 66, "perechi": 51},
-        "starter_by_game": {"intrusul": 24, "perechi": 26},
-    }
+    assert generated['meta']['counts'] == CURRENT_CONTENT.derived_counts
     assert tuple(generated["meta"]) == BUILD.META_FIELDS
     assert tuple(generated["meta"]["counts"]) == BUILD.COUNT_FIELDS
     assert all(tuple(row) == BUILD.BOARD_FIELDS for row in generated["boards"])

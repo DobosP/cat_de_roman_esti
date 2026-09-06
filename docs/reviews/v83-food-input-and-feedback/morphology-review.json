@@ -1,0 +1,94 @@
+{
+  "reviewer": "session_refactor",
+  "role": "independent_romanian_semantic_verifier",
+  "morphology_candidate_sha256": "sha256:8f2097c79462f5a83b3784f41d2b441e7cf76b8562e66324afd3c0cb07ddd21e",
+  "baseline_commit": "38f0d62ff1cd72003ae94ed691db4c44eb78c794",
+  "baseline_kg_sha256": "sha256:fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331",
+  "verdict": "accept",
+  "accepted_surface_count": 24,
+  "rejected_surface_count": 0,
+  "items": [
+    {
+      "owner": "n_gas_urda",
+      "verdict": "accept",
+      "surfaces": ["urdei", "urde", "urdele", "urdelor"],
+      "finding": "DOOM3 gives genitive-dative definite «urdei» and permits plural «urde» for product sorts; «urdele» and «urdelor» are the corresponding regular articulated plural forms. They denote the dairy concept and do not introduce the compound plant «urda-vacii»."
+    },
+    {
+      "owner": "n_gas_telemea",
+      "verdict": "accept",
+      "surfaces": ["telemelei", "telemele", "telemelele", "telemelelor"],
+      "finding": "DOOM3 gives «telemelei» and permits «telemele» for product sorts; the two longer forms are regular definite/genitive plural forms. All retain the same brined-cheese referent."
+    },
+    {
+      "owner": "n_gas_mujdei",
+      "verdict": "accept",
+      "surfaces": ["mujdeiului", "mujdeie", "mujdeiele", "mujdeielor"],
+      "finding": "DOOM3 prefers plural «mujdeie», and the DOR paradigm supplies «mujdeiului», «mujdeiele» and «mujdeielor». Rare «mujdeiuri» variants remain excluded. A rare adult argot homograph is not used by the content and does not dominate these culinary forms in a gastronomy context."
+    },
+    {
+      "owner": "n_v3gas_friptura",
+      "verdict": "accept",
+      "surfaces": ["fripturii", "fripturilor"],
+      "finding": "These are the regular genitive-dative definite singular and plural forms of «friptură» and retain the prepared-meat referent."
+    },
+    {
+      "owner": "n_v3gas_cartofi_prajiti",
+      "verdict": "accept",
+      "surfaces": ["cartof prăjit", "cartofului prăjit", "cartofilor prăjiți"],
+      "finding": "The singular and both case forms have correct noun-adjective agreement and denote an instance or inflected mention of the same fried-potato food concept."
+    },
+    {
+      "owner": "n_gas_bulz",
+      "verdict": "accept",
+      "surfaces": ["bulzuri cu brânză", "bulzurile cu brânză"],
+      "finding": "DEX/MDA attest neutral plural «bulzuri». The retained «cu brânză» qualifier selects the food and preserves V72's exclusion of bare lump, rock, lumber and place readings."
+    },
+    {
+      "owner": "n_v21gas_cornulete",
+      "verdict": "accept",
+      "surfaces": ["cornuleț cu gem", "cornulețul cu gem", "cornulețului cu gem", "cornulețelor cu gem"],
+      "finding": "DOOM3 supports the singular/plural/case paradigm. Because bare «cornuleț» has many horn, plant and figurative senses, every new form keeps «cu gem», which sources document as a normal pastry filling."
+    },
+    {
+      "owner": "n_v17gas_gogosi",
+      "verdict": "accept",
+      "surfaces": ["gogoașa prăjită"],
+      "finding": "This is the regular definite singular plus agreeing adjective. «Prăjită» selects the pastry against lie, swelling, gall and cocoon senses, preserving the V72 qualifier rule."
+    }
+  ],
+  "preserved_omissions": [
+    "bulzuri",
+    "bulzului",
+    "gogoșii",
+    "gogoșilor",
+    "cornuleț",
+    "cornulețului",
+    "mujdeiuri",
+    "mujdeiurile",
+    "mujdeiurilor",
+    "păști",
+    "păștii"
+  ],
+  "collision_review": {
+    "exact_owner_collisions": 0,
+    "projection_collisions": 0,
+    "ledger_collisions": 0,
+    "beginner_benchmark_collisions": 0,
+    "existing_fuzzy_to_intended_owner": 9,
+    "currently_unresolved": 15,
+    "finding": "No proposed surface resolves exactly or by projection to another owner. Existing fuzzy matches point only to the intended owner; unresolved forms become ordinary typed aliases. Unique technical ownership was not treated as semantic proof: ambiguous bare forms remain excluded or receive an explicit food qualifier."
+  },
+  "sources": [
+    "https://dexonline.ro/definitie/urd%C4%83",
+    "https://dexonline.ro/definitie/telemea",
+    "https://dexonline.ro/definitie/mujdei",
+    "https://dexonline.ro/definitie/friptur%C4%83",
+    "https://dexonline.ro/definitie/cartof",
+    "https://dexonline.ro/definitie/bulz",
+    "https://dexonline.ro/intrare/cornule%C8%9B/13187",
+    "https://dexonline.ro/definitie/gogoa%C8%99%C4%83",
+    "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/cornulete-cu-untura-id594322.html"
+  ],
+  "limitation": "This verifies Romanian form and same-referent safety for the exact frozen list. It does not classify the forms as new synonyms, approve additional bare forms, or replace collision, reconstruction and all-game resolution tests."
+}

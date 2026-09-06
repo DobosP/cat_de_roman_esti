@@ -31,6 +31,15 @@ INGREDIENT_FEEDBACK_POLICIES: dict[str, IngredientFeedbackPolicy] = {
     ),
 }
 
+# Reviewed ingredient associations for these exact dishes only. Each submitted
+# ingredient keeps its own identity and cannot win by borrowing the target's feedback.
+EXACT_TARGET_FEEDBACK_PAIRS: frozenset[tuple[str, str]] = frozenset({
+    ("n_v24_food_pantry_ulei", "n_v17gas_gogosi"),
+    ("n_v24_food_pantry_ulei", "n_v3gas_cartofi_prajiti"),
+    ("n_v4gas_sare", "n_gas_telemea"),
+    ("n_v24_food_salad_veg_ardei", "n_gas_ardei_umpluti"),
+})
+
 # (mature feedback anchor, everyday node ids).  Grouping keeps the intended semantic
 # context visible while still producing an exact, collision-checked node map.
 COMMON_FEEDBACK_PROXY_GROUPS: tuple[tuple[str, tuple[str, ...]], ...] = (

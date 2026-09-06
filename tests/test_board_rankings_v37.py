@@ -8,6 +8,8 @@ from pathlib import Path
 
 import pytest
 
+from tests.current_content import CURRENT_CONTENT
+
 _REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
@@ -241,23 +243,7 @@ def test_artifact_is_complete_exactly_bound_and_byte_identical(generated: dict) 
     assert meta["rubric_sha256"] == RANK.critique_pack.normalized_text_sha256(
         RANK.critique_pack.RUBRIC_PATH
     )
-    assert meta["counts"] == {
-        "total": 629,
-        "approved": 621,
-        "pilot_eligible": 459,
-        "by_game": {
-            "conexiuni": 232,
-            "contexto": 218,
-            "lant": 97,
-            "alchimie": 82,
-        },
-        "eligible_by_game": {
-            "conexiuni": 74,
-            "contexto": 212,
-            "lant": 94,
-            "alchimie": 79,
-        },
-    }
+    assert meta["counts"] == CURRENT_CONTENT.ranking_counts
 
 
 def test_every_pack_record_has_one_matching_score_row(generated: dict) -> None:
@@ -368,7 +354,11 @@ def test_ranks_and_selection_quintiles_recompute_exactly(generated: dict) -> Non
 def test_default_checker_is_green_and_prints_a_human_audit(capsys) -> None:
     assert RANK.main(["rank_games_pack.py"]) == 0
     output = capsys.readouterr().out
-    assert "629 total / 459 pilot-eligible" in output
+    expected_summary = (
+        f"{CURRENT_CONTENT.ranking_counts['total']} total / "
+        f"{CURRENT_CONTENT.ranking_counts['pilot_eligible']} pilot-eligible"
+    )
+    assert expected_summary in output
     assert "conexiuni" in output and "contexto" in output
     assert "lant" in output and "alchimie" in output
     assert "top:" in output

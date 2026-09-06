@@ -11,6 +11,7 @@ from pathlib import Path
 from cat_de_roman_esti.data import load_fixture
 from cat_de_roman_esti.wordgames.packs import validate_payload
 from cat_de_roman_esti.wordgames.service import WordGameService
+from tests.current_content import CURRENT_CONTENT
 
 _ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_ROOT / "scripts"))
@@ -31,7 +32,7 @@ _PACKAGE_DERIVED = _ROOT / "cat_de_roman_esti/fixtures/derived_catalog_v38.json"
 _TEST_DERIVED = _ROOT / "tests/fixtures/derived_catalog_v38.json"
 
 _PENDING_ID_SET_SHA256 = "300d8e841ec55c68519de3f18fb4ab6cbed0912c6b0028fe1744afa7b78a373f"
-_FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
+_FROZEN_BOARDS_SHA256 = CURRENT_CONTENT.frozen_boards_sha256
 _KEPT = {
     "lt_literatura_210",
     "lt_stiinta_216",
@@ -114,18 +115,13 @@ def test_v45_pack_keeps_only_the_three_unanimous_repair_holds() -> None:
         for record in pack[game]
     )
 
-    assert pack["meta"]["counts"] == {
-        "conexiuni": 232,
-        "contexto": 218,
-        "lant": 97,
-        "alchimie": 82,
-    }
+    assert pack['meta']['counts'] == CURRENT_CONTENT.pack_counts
     assert pack["meta"]["id_high_water"]["lant"] == 219
     assert Counter(record["status"] for record in lant.values()) == {
         "approved": 94,
         "pending": 3,
     }
-    assert statuses == {"approved": 621, "pending": 8}
+    assert statuses == CURRENT_CONTENT.status_counts
     assert {item_id for item_id, record in lant.items() if record["status"] == "pending"} == _KEPT
     assert not {
         item_id for item_id, verdict in verdicts.items() if verdict == "reject"
@@ -138,23 +134,7 @@ def test_v45_pack_keeps_only_the_three_unanimous_repair_holds() -> None:
 def test_v45_rankings_and_frozen_derived_catalog_track_the_clean_pack() -> None:
     assert _PACKAGE_RANKINGS.read_bytes() == _TEST_RANKINGS.read_bytes()
     rankings = _json(_PACKAGE_RANKINGS)
-    assert rankings["meta"]["counts"] == {
-        "total": 629,
-        "approved": 621,
-        "pilot_eligible": 459,
-        "by_game": {
-            "conexiuni": 232,
-            "contexto": 218,
-            "lant": 97,
-            "alchimie": 82,
-        },
-        "eligible_by_game": {
-            "conexiuni": 74,
-            "contexto": 212,
-            "lant": 94,
-            "alchimie": 79,
-        },
-    }
+    assert rankings['meta']['counts'] == CURRENT_CONTENT.ranking_counts
     ranked = {row["id"]: row for row in rankings["boards"]}
     assert all(ranked[item_id]["pilot_eligible"] is False for item_id in _KEPT)
 
@@ -162,4 +142,4 @@ def test_v45_rankings_and_frozen_derived_catalog_track_the_clean_pack() -> None:
     derived = _json(_PACKAGE_DERIVED)
     boards_blob = (json.dumps(derived["boards"], ensure_ascii=False, indent=1) + "\n").encode()
     assert hashlib.sha256(boards_blob).hexdigest() == _FROZEN_BOARDS_SHA256
-    assert derived["meta"]["counts"]["by_game"] == {"intrusul": 183, "perechi": 153}
+    assert derived['meta']['counts']['by_game'] == CURRENT_CONTENT.derived_counts["by_game"]

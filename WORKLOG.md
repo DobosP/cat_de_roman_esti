@@ -341,3 +341,34 @@ local main to `e5f7d96`. Removed its merged local branch, worktree and scratch; 
 branch existed, and no push or deployment occurred. V83 starts on
 `feat/v83-food-input-and-feedback` under ADR-0113, combining ordinary food-input/feedback
 repairs with a reviewed playable batch and less repetitive artifact-pin maintenance.
+
+## V83 food input and feedback candidate, 2026-09-07
+
+Valid until: the reviewed content, policies or validation bindings change — then treat as history.
+
+V83 adds five independently reviewed Contexto rounds (Cornulețe, Gogoși, Telemea, Cartofi
+prăjiți and Ardei umpluți), increasing eligibility 212→217. It accepts 24 grammatical or
+qualified forms across eight existing concepts and repairs six exact-target ingredient/filling
+feedback pairs. New concepts, shared KG edges and genuine synonyms: zero. All 629 old pack
+records, 336 frozen boards, 180 puzzles, older surface owners and excluded-input behavior
+remain exact. Independent review, full baseline inverses, 884 before/after observations
+(six intended changes) and 60 extra controls support the bounded change. Known false-hot
+Sarmale/Drojdie feedback and missing production/utensil vocabulary remain follow-ups.
+
+ADR-0116 centralizes manually authored current test expectations while retaining historical
+pins and uses bounded named-round seed lookup for API journeys. It also repairs a proven
+old-document response race in browser reload assertions. ADR-0117 records the forms and
+explicit feedback pairs; ADR-0110 is partially superseded for Gem's two additional targets.
+Runtime scoring, answer privacy, session TTL/size limits and test thresholds remain unchanged.
+
+Python 3.12 passed all 1,115 tests in 751.83s. Python 3.14 passed 1,114 with only the known
+Alchimie timing case over its unchanged 45s ceiling (50.30s); that case passed on retry at
+21.96s. Accounts passed 53 on each runtime. Frontend passed 173 native tests and all 108
+browser checks after fixing the reload race; the earlier browser run's nine failures and
+host-pressure observations remain disclosed. Lint/typecheck/build/bundle, both validators,
+pending gate, Ruff/docs/whitespace pass. Rebuilt application assets are byte-identical.
+The V83 archive binds exact commands, source bytes, independent reviews and artifact hashes.
+
+V82 is merged into local main at `e5f7d96`, followed by landing record `38f0d62`; V83 remains
+on `feat/v83-food-input-and-feedback`, ready for its next landing request. No push, deployment,
+real-device acceptance or human playtest occurred. Anonymous public-beta external gates remain.

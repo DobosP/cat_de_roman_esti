@@ -15,6 +15,7 @@ from cat_de_roman_esti.wordgames.service import (
     DEFAULT_MAX_SESSIONS,
     DEFAULT_SESSION_TTL_SECONDS,
 )
+from tests.current_content import CURRENT_CONTENT
 
 _ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_ROOT / "scripts"))
@@ -50,15 +51,15 @@ _V45_PRE_APPLY_PACK_SHA256 = (
     "742478415995b67379ba6fe58f939132abbff141aef7af392eff05b70e7845b6"
 )
 _V45_PRE_APPLY_COMMIT = "246e8577412831405c67bfd6e8843121d8309cd0"
-_V48_PACK_SHA256 = "26d61a029a6c706a02a15991730725a3421dfa1f9b36537032291828a44ab070"
+_V48_PACK_SHA256 = CURRENT_CONTENT.pack_sha256
 _CURRENT_RANKINGS_SHA256 = (
-    "fc31646b058bf2caaaf63a90ac172e504fd2bd89c4028102c4570d054f9a40a8"
+    CURRENT_CONTENT.rankings_sha256
 )
 _CURRENT_DERIVED_SHA256 = (
-    "cf9ed7cba4bc82025297907a5131df7c7f61c06ac43722d22d591790e6facf9a"
+    CURRENT_CONTENT.derived_sha256
 )
 _FROZEN_DERIVED_BOARDS_SHA256 = (
-    "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
+    CURRENT_CONTENT.frozen_boards_sha256
 )
 _V45_KEEPS = {
     "lt_literatura_210",
@@ -601,38 +602,14 @@ def test_v49_ledger_is_non_runtime_and_preserves_pack_boards_and_sessions() -> N
     }
     boards_blob = (json.dumps(derived["boards"], ensure_ascii=False, indent=1) + "\n").encode()
 
-    assert pack["meta"]["counts"] == {
-        "conexiuni": 232,
-        "contexto": 218,
-        "lant": 97,
-        "alchimie": 82,
-    }
+    assert pack['meta']['counts'] == CURRENT_CONTENT.pack_counts
     assert Counter(
         row["status"]
         for game in ("conexiuni", "contexto", "lant", "alchimie")
         for row in pack[game]
-    ) == {"approved": 621, "pending": 8}
-    assert rankings["meta"]["counts"] == {
-        "total": 629,
-        "approved": 621,
-        "pilot_eligible": 459,
-        "by_game": {
-            "conexiuni": 232,
-            "contexto": 218,
-            "lant": 97,
-            "alchimie": 82,
-        },
-        "eligible_by_game": {
-            "conexiuni": 74,
-            "contexto": 212,
-            "lant": 94,
-            "alchimie": 79,
-        },
-    }
-    assert derived["meta"]["counts"]["by_game"] == {
-        "intrusul": 183,
-        "perechi": 153,
-    }
+    ) == CURRENT_CONTENT.status_counts
+    assert rankings['meta']['counts'] == CURRENT_CONTENT.ranking_counts
+    assert derived['meta']['counts']['by_game'] == CURRENT_CONTENT.derived_counts["by_game"]
     assert hashlib.sha256(boards_blob).hexdigest() == _FROZEN_DERIVED_BOARDS_SHA256
     assert rejected_ids.isdisjoint(pack_ids)
     assert rejected_pairs.isdisjoint(

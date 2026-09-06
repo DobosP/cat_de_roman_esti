@@ -9,6 +9,8 @@ from pathlib import Path
 
 import pytest
 
+from tests.current_content import CURRENT_CONTENT
+
 pytest.importorskip("django")
 
 from django.test import Client  # noqa: E402
@@ -82,10 +84,10 @@ def test_all_pack_records_ranking_rows_and_frozen_boards_remain_exact():
         "80fc0672c82efa6317ec6e9f0a793efc12cad68a94093d2a8beabc9be34866cf"
     )
     derived = json.loads((package / "derived_catalog_v38.json").read_bytes())
-    assert len(derived["boards"]) == 336
+    assert len(derived["boards"]) == CURRENT_CONTENT.derived_counts["total"]
     payload = (json.dumps(derived["boards"], ensure_ascii=False, indent=1) + "\n").encode()
     assert hashlib.sha256(payload).hexdigest() == (
-        "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
+        CURRENT_CONTENT.frozen_boards_sha256
     )
 
 

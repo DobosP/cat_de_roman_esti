@@ -16,11 +16,72 @@ _V81_RECEIPT = Path(__file__).resolve().parents[1] / (
 _V82_RECEIPT = Path(__file__).resolve().parents[1] / (
     "docs/reviews/v82-playable-content-batch/artifact-delta.json"
 )
+_V83_REVIEW = Path(__file__).resolve().parents[1] / "docs/reviews/v83-food-input-and-feedback"
+
+
+def v83_added_forms() -> set[str]:
+    receipt = json.loads((_V83_REVIEW / "morphology-delta.json").read_bytes())
+    return {
+        form for change in receipt["alias_changes"].values()
+        for form in change["after"] if form not in change["before"]
+    }
+
+
+def before_v83_fixture(current: dict) -> dict:
+    receipt = json.loads((_V83_REVIEW / "morphology-delta.json").read_bytes())
+    restored = deepcopy(current)
+    assert restored["meta"] == receipt["after_kg_meta"]
+    for row in restored["kg_nodes"]:
+        change = receipt["alias_changes"].get(row["id"])
+        if change is not None:
+            assert row["aliases"] == change["after"]
+            row["aliases"] = change["before"]
+    restored["meta"] = receipt["baseline_kg_meta"]
+    return restored
+
+
+def before_v83_pack(current: dict) -> dict:
+    receipt = json.loads((_V83_REVIEW / "artifact-delta.json").read_bytes())
+    restored = deepcopy(current)
+    assert restored["meta"] == receipt["after_pack_meta"]
+    for row in receipt["new_records"]:
+        assert row in restored["contexto"]
+        restored["contexto"].remove(row)
+    restored["meta"] = receipt["baseline_pack_meta"]
+    return restored
+
+
+def before_v83_rankings(current: dict) -> dict:
+    receipt = json.loads((_V83_REVIEW / "artifact-delta.json").read_bytes())
+    restored = deepcopy(current)
+    assert restored["meta"] == receipt["after_rankings_meta"]
+    added = {row["id"] for row in receipt["new_records"]}
+    assert added <= {row["id"] for row in restored["boards"]}
+    restored["boards"] = [row for row in restored["boards"] if row["id"] not in added]
+    ranks: Counter[str] = Counter()
+    for row in restored["boards"]:
+        ranks[row["game"]] += 1
+        row["rank"] = ranks[row["game"]]
+        change = receipt["selection_weight_changes"].get(row["id"])
+        if change is not None:
+            before, after = change
+            assert row["selection_weight"] == after
+            row["selection_weight"] = before
+    restored["meta"] = receipt["baseline_rankings_meta"]
+    return restored
+
+
+def before_v83_derived(current: dict) -> dict:
+    receipt = json.loads((_V83_REVIEW / "artifact-delta.json").read_bytes())
+    restored = deepcopy(current)
+    assert restored["meta"] == receipt["after_derived_meta"]
+    restored["meta"] = receipt["baseline_derived_meta"]
+    return restored
 
 
 def before_v82_pack(current: dict) -> dict:
     receipt = json.loads(_V82_RECEIPT.read_bytes())
-    restored = deepcopy(current)
+    restored = before_v83_pack(current)
     assert restored["meta"] == receipt["after_pack_meta"]
     for row in receipt["new_records"]:
         assert row in restored["contexto"]
@@ -31,7 +92,7 @@ def before_v82_pack(current: dict) -> dict:
 
 def before_v82_rankings(current: dict) -> dict:
     receipt = json.loads(_V82_RECEIPT.read_bytes())
-    restored = deepcopy(current)
+    restored = before_v83_rankings(current)
     assert restored["meta"] == receipt["after_rankings_meta"]
     new_ids = {row["id"] for row in receipt["new_records"]}
     assert new_ids <= {row["id"] for row in restored["boards"]}
@@ -51,7 +112,7 @@ def before_v82_rankings(current: dict) -> dict:
 
 def before_v82_derived(current: dict) -> dict:
     receipt = json.loads(_V82_RECEIPT.read_bytes())
-    restored = deepcopy(current)
+    restored = before_v83_derived(current)
     assert restored["meta"] == receipt["after_derived_meta"]
     restored["meta"] = receipt["baseline_derived_meta"]
     return restored
@@ -59,7 +120,7 @@ def before_v82_derived(current: dict) -> dict:
 
 def before_v81_fixture(current: dict) -> dict:
     receipt = json.loads(_V81_RECEIPT.read_bytes())
-    restored = deepcopy(current)
+    restored = before_v83_fixture(current)
     assert restored["meta"] == receipt["after_kg_meta"]
     new_node = receipt["new_node"]
     assert new_node in restored["kg_nodes"]

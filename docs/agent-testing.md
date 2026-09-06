@@ -1,6 +1,6 @@
 # Agent Testing Guide — cat_de_roman_esti
 
-Last verified: 2026-09-06
+Last verified: 2026-09-07
 
 ## Environment
 - Interpreter: `~/work/cat_de_roman_esti/.venv/bin/python` (Python 3.12.3; Django 5.2.16, pytest 9.1.1,
@@ -46,3 +46,7 @@ need the `N passed` summary line to paste into the verification record.
   average ≈ 28 and failed alone at 49.0 s at load ≈ 39. Check `uptime` and re-run on a quieter host before
   treating a failure as a regression; no assertion other than the timing one fails.
 - `tests/accounts/` is collect-ignored unless `CAT_ACCOUNTS_ENABLED=1` (pyproject.toml:75-77).
+
+Current content expectations and named-round fixtures: see
+[ADR-0116](adr/0116-share-current-content-test-expectations.md), `tests/current_content.py`
+and `tests/content_scenarios.py`. Historical review and reconstruction pins remain separate.

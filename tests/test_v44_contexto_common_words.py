@@ -9,6 +9,8 @@ from pathlib import Path
 
 import pytest
 
+from tests.current_content import CURRENT_CONTENT
+
 pytest.importorskip("django")
 
 from django.test import Client  # noqa: E402
@@ -106,16 +108,19 @@ def test_v44_alias_source_is_exact_bounded_and_applied_to_both_kg_copies() -> No
     assert resolve_projection("a sosi") is not None
 
     meta = fixture["meta"]
-    assert meta["build_version"] == "fixture-v81-nuca-feedback"
-    assert meta["counts"]["nodes"] == 2365
-    assert meta["counts"]["edges"] == 9223
-    assert meta["counts"]["puzzles"] == 180
-    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8451
+    assert meta["build_version"] == CURRENT_CONTENT.build_version
+    assert meta["counts"]["nodes"] == CURRENT_CONTENT.kg_counts["nodes"]
+    assert meta["counts"]["edges"] == CURRENT_CONTENT.kg_counts["edges"]
+    assert meta["counts"]["puzzles"] == CURRENT_CONTENT.kg_counts["puzzles"]
+    assert (
+        sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"])
+        == CURRENT_CONTENT.kg_counts["aliases"]
+    )
 
 
 def test_v44_projection_funnel_is_explicit_nonwinning_and_collision_safe() -> None:
     review = _json(_REVIEW)
-    assert len(PROJECTION_TERMS) == 472
+    assert len(PROJECTION_TERMS) == CURRENT_CONTENT.projection_terms
     assert review["accepted_projections"] == _NEW_PROJECTIONS
     for surface, anchor_id in _NEW_PROJECTIONS.items():
         term = resolve_projection(surface)
@@ -140,7 +145,11 @@ def test_proxy_inventory_exactly_covers_the_four_shipped_sink_meshes() -> None:
         *V33_DATA.NEW_NODE_IDS,
     }
     svc = get_service()
-    assert len(expected) == len(COMMON_FEEDBACK_PROXIES) == 71
+    assert (
+        len(expected)
+        == len(COMMON_FEEDBACK_PROXIES)
+        == CURRENT_CONTENT.legacy_feedback_proxies
+    )
     assert set(COMMON_FEEDBACK_PROXIES) == expected
     assert len(set(COMMON_FEEDBACK_PROXIES.values())) == 26
     assert set(COMMON_FEEDBACK_PROXIES).isdisjoint(COMMON_FEEDBACK_PROXIES.values())
@@ -166,7 +175,7 @@ def test_every_proxy_anchor_reaches_every_selectable_unique_target() -> None:
     targets = {target_by_id[row["id"]] for row in eligible}
     svc = get_service()
 
-    assert len(eligible) == len(targets) == 212
+    assert len(eligible) == len(targets) == CURRENT_CONTENT.contexto_eligible
     for anchor_id in set(COMMON_FEEDBACK_PROXIES.values()):
         assert targets <= set(svc.distances_from(anchor_id))
     for node_id in COMMON_FEEDBACK_PROXIES:
@@ -332,7 +341,7 @@ def test_bound_promotions_and_duplicate_reserve_cleanup_are_exact() -> None:
         for row in pack[game]
     )
 
-    assert statuses == {"approved": 621, "pending": 8}
+    assert statuses == CURRENT_CONTENT.status_counts
     assert rows["ct_literatura_298"]["status"] == "approved"
     assert rows["ct_viata_de_roman_299"]["status"] == "approved"
     assert ranked["ct_literatura_298"]["pilot_eligible"] is True

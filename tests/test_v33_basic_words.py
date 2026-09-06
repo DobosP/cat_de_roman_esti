@@ -25,6 +25,7 @@ from cat_de_roman_esti.wordgames.packs import (
     lant_branch_profile,
 )
 from cat_de_roman_esti.wordgames.service import WordGameService, normalize
+from tests.current_content import CURRENT_CONTENT
 
 _ROOT = Path(__file__).resolve().parent.parent
 _PACKAGE_KG = _ROOT / "cat_de_roman_esti/fixtures/kg_sample.json"
@@ -34,22 +35,22 @@ _TEST_PACK = _ROOT / "tests/fixtures/games_pack.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 
 # Current served pack pin; the wave-local DATA baseline remains historical evidence.
-_CURRENT_PACK_SHA256 = "26d61a029a6c706a02a15991730725a3421dfa1f9b36537032291828a44ab070"
+_CURRENT_PACK_SHA256 = CURRENT_CONTENT.pack_sha256
 _V48_AUDIT = (
     _ROOT / "docs/reviews/v48-alchimie-pending-gate/projection-audit.json"
 )
-_EXPECTED_NODE_COUNT = 2365
-_EXPECTED_EDGE_COUNT = 9223
+_EXPECTED_NODE_COUNT = CURRENT_CONTENT.kg_counts["nodes"]
+_EXPECTED_EDGE_COUNT = CURRENT_CONTENT.kg_counts["edges"]
 _EXPECTED_AUTHORED_EDGE_COUNT = 54
 _EXPECTED_LOCAL_EDGE_COUNT = 36
 _V32_ALIAS_COUNT = 7333
+_V33_TO_V82_ADDITIONAL_ALIAS_COUNT = 1051
+_V82_ALIAS_COUNT = 8451
 
 # This is the current served Contexto distance profile. V77's flour edges, V80's
 # target, and V81's walnut routes change it; the V75/V76 profile digest was
 # 5b2a2a7bb2ec09e84b29a9689748d1d8c89347f8355e77300bb8219039a5cd9b.
-_CURRENT_CONTEXTO_PROFILE_SHA256 = (
-    "5acb450afb9b79ec8237f79f18784e0f0ba54e2994e750657f64f0197194a227"
-)
+_CURRENT_CONTEXTO_PROFILE_SHA256 = CURRENT_CONTENT.contexto_profile_sha256
 _V32_LANT_PROFILE_SHA256 = (
     "6fe32a7aacb464d8d30ae2d97bc02e9ed0ef5413ee264e2424f13388a7f8e8c2"
 )
@@ -218,20 +219,24 @@ def test_v33_source_inventory_builder_application_counts_and_mirrors():
     assert len(built["edges"]) == _EXPECTED_AUTHORED_EDGE_COUNT
     assert built == DATA.build_nodes_and_edges()
     assert fixture["meta"]["build_version"] == (
-        "fixture-v81-nuca-feedback"
+        CURRENT_CONTENT.build_version
     )
     assert (len(fixture["kg_nodes"]), len(fixture["kg_edges"])) == (
         _EXPECTED_NODE_COUNT,
         _EXPECTED_EDGE_COUNT,
     )
-    assert len(fixture["kg_puzzles"]) == 180
+    assert len(fixture["kg_puzzles"]) == CURRENT_CONTENT.kg_counts["puzzles"]
     # ADR-0065 contributed 40 aliases, ADR-0068 twelve, ADR-0074 eight,
     # ADR-0075 thirty-two, ADR-0076 through ADR-0079 forty-eight each, and
     # ADR-0080 contributed forty-six aliases; ADR-0081 through ADR-0084
     # contributed forty-eight each. V61 through V68 contribute forty-eight aliases each;
     # V69 has no vocabulary module; V70 contributes forty-six aliases, V71 forty-eight,
     # V72 fifty, and V81 one exact walnut form.
-    assert alias_count == _V32_ALIAS_COUNT + authored_alias_count + 1051
+    assert (
+        _V32_ALIAS_COUNT + authored_alias_count + _V33_TO_V82_ADDITIONAL_ALIAS_COUNT
+        == _V82_ALIAS_COUNT
+    )
+    assert alias_count == CURRENT_CONTENT.kg_counts["aliases"]
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert _PACKAGE_PACK.read_bytes() == _TEST_PACK.read_bytes()
 
@@ -434,15 +439,10 @@ def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
     assert {
         game: len(pack[game])
         for game in ("conexiuni", "contexto", "lant", "alchimie")
-    } == {
-        "conexiuni": 232,
-        "contexto": 218,
-        "lant": 97,
-        "alchimie": 82,
-    }
+    } == CURRENT_CONTENT.pack_counts
     # ADR-0068 promotes two bound Contexto targets; V47 promotes one more; V48 promotes
     # one Alchimie board, archives 17 rejects, and retains three A5 holds.
-    assert statuses == {"approved": 621, "pending": 8}
+    assert statuses == CURRENT_CONTENT.status_counts
     assert len(DATA.REVIEW_ITEM_IDS) == len(set(DATA.REVIEW_ITEM_IDS)) == 33
     v48_audit = json.loads(_V48_AUDIT.read_text(encoding="utf-8"))
     v48_source_records = {
@@ -540,13 +540,9 @@ def test_v33_mobile_contract_is_exact_current_and_public():
 
     assert checked_in == mobile_app_pack_snapshot(_PACKAGE_KG)
     assert checked_in["manifest"]["build_version"] == (
-        "fixture-v81-nuca-feedback"
+        CURRENT_CONTENT.build_version
     )
-    assert checked_in["manifest"]["counts"] == {
-        "nodes": _EXPECTED_NODE_COUNT,
-        "edges": _EXPECTED_EDGE_COUNT,
-        "puzzles": 180,
-    }
+    assert checked_in["manifest"]["counts"] == CURRENT_CONTENT.mobile_counts
     for concept in DATA.CONCEPTS:
         assert mobile_by_id[concept.node_id] == {
             "id": concept.node_id,

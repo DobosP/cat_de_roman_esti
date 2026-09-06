@@ -20,6 +20,7 @@ from cat_de_roman_esti.wordgames.derived_catalog import (
     DEFAULT_DERIVED_CATALOG_SHA256,
 )
 from cat_de_roman_esti.wordgames.service import get_service
+from tests.current_content import CURRENT_CONTENT
 
 _ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_ROOT / "scripts"))
@@ -39,10 +40,10 @@ _PACKAGE_DERIVED = _ROOT / "cat_de_roman_esti/fixtures/derived_catalog_v38.json"
 _TEST_DERIVED = _ROOT / "tests/fixtures/derived_catalog_v38.json"
 
 _PENDING_ID_SET_SHA256 = "508ac4014f6c519fc0891b92474e683e9a26078e86091cee8ee77a1aa10e97c1"
-_PACK_SHA256 = "26d61a029a6c706a02a15991730725a3421dfa1f9b36537032291828a44ab070"
-_RANKINGS_SHA256 = "fc31646b058bf2caaaf63a90ac172e504fd2bd89c4028102c4570d054f9a40a8"
-_DERIVED_SHA256 = "cf9ed7cba4bc82025297907a5131df7c7f61c06ac43722d22d591790e6facf9a"
-_FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
+_PACK_SHA256 = CURRENT_CONTENT.pack_sha256
+_RANKINGS_SHA256 = CURRENT_CONTENT.rankings_sha256
+_DERIVED_SHA256 = CURRENT_CONTENT.derived_sha256
+_FROZEN_BOARDS_SHA256 = CURRENT_CONTENT.frozen_boards_sha256
 
 _PROMOTED = {"ct_gastronomie_300"}
 _KEPT = {"ct_meme_net_238", "ct_societate_257"}
@@ -184,18 +185,13 @@ def test_v47_pack_applies_only_the_bound_outcomes_and_keeps_unique_live_targets(
         for record in pack[game]
     )
 
-    assert pack["meta"]["counts"] == {
-        "conexiuni": 232,
-        "contexto": 218,
-        "lant": 97,
-        "alchimie": 82,
-    }
-    assert pack["meta"]["id_high_water"]["contexto"] == 328
+    assert pack['meta']['counts'] == CURRENT_CONTENT.pack_counts
+    assert pack["meta"]["id_high_water"]["contexto"] == CURRENT_CONTENT.contexto_id_high_water
     assert Counter(record["status"] for record in contexto.values()) == {
-        "approved": 216,
+        "approved": CURRENT_CONTENT.contexto_approved,
         "pending": 2,
     }
-    assert statuses == {"approved": 621, "pending": 8}
+    assert statuses == CURRENT_CONTENT.status_counts
     assert contexto["ct_gastronomie_300"]["status"] == "approved"
     assert {item_id for item_id, row in contexto.items() if row["status"] == "pending"} == _KEPT
     assert _REJECTED.isdisjoint(contexto)
@@ -207,7 +203,12 @@ def test_v47_pack_applies_only_the_bound_outcomes_and_keeps_unique_live_targets(
         if row["game"] == "contexto" and row["pilot_eligible"]
     }
     eligible_targets = [contexto[item_id]["target"] for item_id in eligible_ids]
-    assert len(eligible_ids) == len(eligible_targets) == len(set(eligible_targets)) == 212
+    assert (
+        len(eligible_ids)
+        == len(eligible_targets)
+        == len(set(eligible_targets))
+        == CURRENT_CONTENT.contexto_eligible
+    )
 
 
 def test_v47_archive_preserves_every_removed_record_binding_without_a_ledger() -> None:
@@ -233,23 +234,7 @@ def test_v47_rankings_and_frozen_derived_catalog_track_the_clean_pack() -> None:
     assert hashlib.sha256(_PACKAGE_PACK.read_bytes()).hexdigest() == _PACK_SHA256
     assert hashlib.sha256(_PACKAGE_RANKINGS.read_bytes()).hexdigest() == _RANKINGS_SHA256
     rankings = _json(_PACKAGE_RANKINGS)
-    assert rankings["meta"]["counts"] == {
-        "total": 629,
-        "approved": 621,
-        "pilot_eligible": 459,
-        "by_game": {
-            "conexiuni": 232,
-            "contexto": 218,
-            "lant": 97,
-            "alchimie": 82,
-        },
-        "eligible_by_game": {
-            "conexiuni": 74,
-            "contexto": 212,
-            "lant": 94,
-            "alchimie": 79,
-        },
-    }
+    assert rankings['meta']['counts'] == CURRENT_CONTENT.ranking_counts
     ranked = {row["id"]: row for row in rankings["boards"]}
     assert ranked["ct_gastronomie_300"]["pilot_eligible"] is True
     assert ranked["ct_gastronomie_300"]["pilot_score"] == 94
@@ -262,10 +247,7 @@ def test_v47_rankings_and_frozen_derived_catalog_track_the_clean_pack() -> None:
     derived = _json(_PACKAGE_DERIVED)
     boards_blob = (json.dumps(derived["boards"], ensure_ascii=False, indent=1) + "\n").encode()
     assert hashlib.sha256(boards_blob).hexdigest() == _FROZEN_BOARDS_SHA256
-    assert derived["meta"]["counts"]["by_game"] == {
-        "intrusul": 183,
-        "perechi": 153,
-    }
+    assert derived['meta']['counts']['by_game'] == CURRENT_CONTENT.derived_counts["by_game"]
     assert _REJECTED.isdisjoint(board["source_id"] for board in derived["boards"])
 
     assert store._ttl == 7200

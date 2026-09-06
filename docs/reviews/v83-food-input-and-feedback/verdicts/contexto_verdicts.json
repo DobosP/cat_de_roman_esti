@@ -1,0 +1,222 @@
+{
+ "game": "contexto",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "ct_gastronomie_329",
+   "ct_gastronomie_330",
+   "ct_gastronomie_331",
+   "ct_gastronomie_332",
+   "ct_gastronomie_333"
+  ]
+ },
+ "verdicts": {
+  "ct_gastronomie_329": "promote",
+  "ct_gastronomie_330": "promote",
+  "ct_gastronomie_331": "promote",
+  "ct_gastronomie_332": "promote",
+  "ct_gastronomie_333": "promote"
+ },
+ "perItem": [
+  {
+   "id": "ct_gastronomie_329",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:aaa425337ac53fd6aaec8d14a4ff3e28ad9bd452e84288d9b86f80ce388ce3de",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_329",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:aaa425337ac53fd6aaec8d14a4ff3e28ad9bd452e84288d9b86f80ce388ce3de",
+    "rationale": "C1/C2/C5/C6: Cornulete is a concrete familiar pastry; normal is conservative at salience .55. The food meaning dominates standalone plural; new singular/case inputs keep cu gem against horn and figurative senses. DEX, RRI and current Romanian institutional recipe coverage independently support recognition and jam/nut filling (A1/A2/A4). All five direct incoming neighbors are recognizable: pastry, Christmas meal, biscuit cake, cozonac and walnut (C3). Actual Gem and Nuca now rank2 hot, Prăjitură4 and Cozonac6 hot, Faina9 hot and dessert14 warm (C4). This repairs the prior filling contradiction in the same wave. Sarmale8 remains over-warm via holiday context; butter/oil remain cold. These are real remaining weaknesses, but several defining filling/baking approaches now outrank or rival the noise. No alcohol/adult-dependent play, invented regional exclusivity or duplicate target (A3/A5/A6/A7). Promote this bound target while retaining the explicit noise and incompleteness limits.",
+    "sources": [
+     "https://dexonline.ro/intrare/cornule%C8%9B/13187",
+     "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/cornulete-cu-untura-id594322.html"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_329",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:aaa425337ac53fd6aaec8d14a4ff3e28ad9bd452e84288d9b86f80ce388ce3de",
+    "rationale": "A1/A2/C2: Cornulețe clears normal through DEX/MDA pastry evidence, older/current RRI and current AGERPRES regional-recipe coverage. A3/A4/A7: the rolled filled pastry, jam/walnut/rahat and home/holiday claims are specific and sourced. A5/A6: no boundary trigger or approved Contexto duplicate. C1: concrete food. C3: exactly five recognizable direct neighbors, zero lint flags and 2,289 reachable. C4: repaired Gem and Nucă rank2, Prăjitură4, Cozonac6, Făină9, Desert14. C5: bare singular has horn/botanical/figurative senses, but standalone plural in gastronomie and all new cu gem forms select pastry. C6: .55 clears normal. Refute-first, unrelated Sarmale remains rank8/Fierbinte, while butter/oil are Rece596 and rahat is unknown. That noise is material, but four distinct defining/category paths rank at or above it and make the target navigable. Promote at normal without claiming uniform feedback or a human playtest.",
+    "sources": [
+     "https://dexonline.ro/intrare/cornule%C8%9B/13187",
+     "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/cornulete-cu-untura-id594322.html",
+     "https://agerpres.ro/comunicate/2026/04/29/comunicat-de-presa---universitatea-de-stiinte-agricole-si-medicina-veterinara-cluj-napoca--1551177"
+    ]
+   }
+  },
+  {
+   "id": "ct_gastronomie_330",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:ae29cdd807424511698e88fa4c725e52e8fff7aacd575dd90b8ba848161de932",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_330",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:ae29cdd807424511698e88fa4c725e52e8fff7aacd575dd90b8ba848161de932",
+    "rationale": "C1/C2/C5/C6: Gogosi is an ordinary concrete fried-dough dessert with easy-band salience .72 and broad recognition. Lie, swelling and cocoon senses exist but need different context; new gogoașa prăjită explicitly selects the food. DEX and older/current Romanian radio/TV family recipes independently support the meaning and standard frying process (A1/A2/A4). Seven direct neighbors cover dessert, papanasi, clatite, langosi and street/fair food (C3). Repaired Ulei and Gem now each rank2 hot/nonwinning, matching Dessert2 and strong pastry peers; flour20, yeast27, milk44 and sugar66 are warm (C4). Oil is central to conventional frying, while jam is an ordinary filling/serving variant; neither is a universal claim about baked or plain variants (A3/A7). Butter/nut remain frozen and pan cold, which is disclosed. The defining frying plus ordinary filling approaches now work without changing identity or granting an ingredient win. No duplicate or editorial hold trigger (A5/A6). Promote.",
+    "sources": [
+     "https://dexonline.ro/definitie/gogoa%C8%99%C4%83",
+     "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/gogosi-2-id594656.html",
+     "https://www.protv.ro/emisiuni/vorbeste-lumea/articol/121951-gogosile-florentei-au-facut-ravagii-la-vorbeste-lumea-iata-reteta-simpla-care-iese-perfect-de-fiecare-data"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_330",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:ae29cdd807424511698e88fa4c725e52e8fff7aacd575dd90b8ba848161de932",
+    "rationale": "A1/A2/C2: Gogoși is universal cross-generational Romanian food vocabulary, supported by DEX/DLRLC, RRI and current national PRO TV family-recipe coverage. A3/A4/A7: standard leavened dough fried in oil, dusted with sugar and optionally served or filled with gem is honest; seven dessert/fried-dough/street-food neighbors are factual. A5/A6: no trigger or duplicate. C1: concrete dessert. C3: seven direct neighbors, zero flags, 2,289 reachable. C4: repaired Gem, Ulei and Desert rank2; Papanași3, Prăjitură12, Făină20, Drojdie27, Lapte44. C5: gogoși can mean lies and the noun has cocoon/swelling senses, but those normally require phrase/context; gastronomie and qualified gogoașa prăjită select food. C6: .72 clears usor. Refute-first, butter/nut remain frozen and pan is Rece407; gem is a variant, not universal. The two repaired routes plus dessert and dough routes independently support easy play. Promote.",
+    "sources": [
+     "https://dexonline.ro/definitie/gogoa%C8%99%C4%83",
+     "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/gogosi-2-id594656.html",
+     "https://www.protv.ro/emisiuni/vorbeste-lumea/articol/121951-gogosile-florentei-au-facut-ravagii-la-vorbeste-lumea-iata-reteta-simpla-care-iese-perfect-de-fiecare-data",
+     "https://www.protv.ro/articol/131043-care-este-secretul-gogosilor-pufoase-fara-goluri-de-aer-in-interior"
+    ]
+   }
+  },
+  {
+   "id": "ct_gastronomie_331",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:85f6ce32d3be12c2cc94bd3e929b7ba9ee9cf12eb4b0dd513b9df419c0a4990b",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_331",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:85f6ce32d3be12c2cc94bd3e929b7ba9ee9cf12eb4b0dd513b9df419c0a4990b",
+    "rationale": "C1/C2/C5/C6: Telemea is a concrete, unambiguous and broadly familiar brined cheese; salience .6784 supports easy. DEX, EU product specifications/production evidence and current Romanian public-institution coverage provide independent recognition/factual signals (A1/A2/A4). All ten direct neighbors are familiar dairy, cheese, polenta, pastry or serving concepts; the route does not depend on identifying a particular PDO region (C3/A7). Repaired Sare2 now agrees with Branza2, Mamaliga4, Placinte6 and milk14 (C4). Brining makes salt a defining association, with variable actual saltiness; the source remains a nonwinning salt guess. Four normative case/sort-plural inputs are exact. Unknown saramura and spuriously warm Drojdie13 remain significant gaps, but the strongest defining salt/cheese/use routes are coherent. No duplicate target, adult framing or generic regional premise (A3/A5/A6). Promote without claiming all production vocabulary or temperature feedback is correct.",
+    "sources": [
+     "https://dexonline.ro/definitie/telemea",
+     "https://eur-lex.europa.eu/legal-content/RO/TXT/PDF/?uri=CELEX%3A32016R0365",
+     "https://agerpres.ro/comunicate/2026/06/29/comunicat-de-presa---romfilatelia--1571276"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_331",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:85f6ce32d3be12c2cc94bd3e929b7ba9ee9cf12eb4b0dd513b9df419c0a4990b",
+    "rationale": "A1/A2/C2: Telemea clears easy through DEX, EU evidence of national standardized production (about 24,000 tonnes in 2014), protected-product specifications and current AGERPRES/Romfilatelia coverage. A3/A4/A7: brined cheese and its salt, dairy, polenta, pastry and Romanian-cheese relations are specific. A5/A6: no trigger or duplicate. C1/C5: concrete cheese with one dominant sense. C3: ten recognizable direct neighbors, zero flags, 2,289 reachable. C4: repaired Sare and Brânză rank2, Mămăligă4, Plăcinte6, Lapte14. All four reviewed case/sort-plural forms win. C6: .6784 clears usor. Refute-first, defining saramură remains unknown and Drojdie is spuriously warm13; butter/oil are cold. Salt supplies the missing defining process cue, while cheese/polenta/pastry/milk give independent ordinary routes. The yeast anomaly does not dominate the top feedback. Promote with the brine-vocabulary gap disclosed.",
+    "sources": [
+     "https://dexonline.ro/definitie/telemea",
+     "https://eur-lex.europa.eu/legal-content/RO/TXT/PDF/?uri=OJ%3AC%3A2015%3A006%3AFULL",
+     "https://eur-lex.europa.eu/legal-content/RO/TXT/PDF/?uri=CELEX%3A32016R0365",
+     "https://agerpres.ro/comunicate/2026/06/29/comunicat-de-presa---romfilatelia--1571276"
+    ]
+   }
+  },
+  {
+   "id": "ct_gastronomie_332",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:f6a1486d36c7e9ad9d44be55ee1880e4ca299a9761117ca59a7f44d9bf5d3a8d",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_332",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:f6a1486d36c7e9ad9d44be55ee1880e4ca299a9761117ca59a7f44d9bf5d3a8d",
+    "rationale": "C1/C2/C5/C6: Cartofi prajiti is a concrete universally nameable snack/garnish with one dominant compound sense; salience .6932 clears easy. Durable national-media preparation/use coverage and the ordinary noun/adjective food meaning support recognition and frying facts (A1/A2/A4). Its six direct neighbors are recognizable ingredient, cooking-device and serving contexts: potato, street food, mici, shaorma, air fryer and snitel (C3). The repaired Ulei2 now agrees with Cartof2, Snitel3, Mici4 and street-food5; salt29 is warm (C4). Conventional frying uses oil, while low/no-oil oven and air-fryer variants remain disclosed exceptions (A3/A7). Three singular/case forms now resolve exactly. Drojdie18 remains misleadingly warm, butter very cold and pan only lukewarm; this is incomplete feedback, but central potato/oil and common serving approaches now work. No duplicate, adult-dependent content or regional exclusivity (A5/A6). Promote.",
+    "sources": [
+     "https://www.protv.ro/articol/130951-cum-faci-cartofi-prajiti-crocanti-la-exterior-si-moi-in-interior-secretul-celor-mai-buni-cartofi-facuti-acasa",
+     "https://foodstory.protv.ro/diverse/cum-sa-prepari-mai-sanatos-cartofii-prajiti-reguli-de-care-sa-tii-cont"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_332",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:f6a1486d36c7e9ad9d44be55ee1880e4ca299a9761117ca59a7f44d9bf5d3a8d",
+    "rationale": "A1/A2/C2: Cartofi prăjiți is universal contemporary and cross-generational food vocabulary; older/current PRO TV coverage uses the unqualified dish and documents ordinary oil frying. A3/A4/A7: cut potatoes fried in oil and served as snack/garnish is honest, with air-fryer/no-oil variants explicitly qualified; all six direct ingredient/preparation/serving neighbors are specific. A5/A6: no trigger or duplicate. C1/C5: concrete unambiguous compound. C3: six recognizable direct neighbors, zero flags, 2,289 reachable. C4: repaired Ulei and Cartof rank2, Șnițel3, Mici4, Mâncare stradală5, Air fryer7; Sare29 remains warm. Three new singular/case forms win. C6: .6932 clears usor. Refute-first, Drojdie is spuriously warm18, Tigaie only Călduț126 and butter very cold. The top seven results still contain five highly legible concepts, led by both defining inputs. Promote without claiming every variant uses oil.",
+    "sources": [
+     "https://www.protv.ro/articol/130951-cum-faci-cartofi-prajiti-crocanti-la-exterior-si-moi-in-interior-secretul-celor-mai-buni-cartofi-facuti-acasa",
+     "https://foodstory.protv.ro/diverse/cum-sa-prepari-mai-sanatos-cartofii-prajiti-reguli-de-care-sa-tii-cont",
+     "https://foodstory.protv.ro/diverse/cartofi-prajiti-ca-la-fast-food-varianta-sanatoasa-de-gatit-acasa",
+     "https://www.protv.ro/emisiuni/vorbeste-lumea/articol/126155-secretul-gratarului-perfect-de-1-mai-ce-nu-ti-spune-nimeni-despre-mici-cartofi-si-combinatiile-care-iti-distrug-digestia"
+    ]
+   }
+  },
+  {
+   "id": "ct_gastronomie_333",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:1c57f75d35b312bcf950cdc4b94a9fc34a7a4f239ecdaf17342bc6f961ea15cf",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_333",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:1c57f75d35b312bcf950cdc4b94a9fc34a7a4f239ecdaf17342bc6f961ea15cf",
+    "rationale": "C1/C2/C5/C6: Ardei umpluti is a familiar concrete dish with an unambiguous compound; normal is conservative at salience .5882. MDA explicitly defines peppers filled with meat/rice, and older/current RRI/TV independently document ordinary and vegetarian preparations (A1/A2/A4). All eight incoming neighbors support rice, vegetables, similar fillings, sauce or serving associations; weak zacusca/bors links are secondary (C3/A7). Repaired Ardei2 now joins Orez2, Legume3, Sarmale4, Rosie5 and Mamaliga7; meat21 is warm (C4). Pepper is constitutive but remains an ingredient, not a synonym or winning answer. Meat is common rather than universal. Drojdie11 remains falsely hot through an older broad projection and oil/butter are cold; these weaknesses stay visible in the decision. The defining pepper shell and filling routes now provide multiple much stronger approaches. No duplicate, adult framing or regional premise (A3/A5/A6). Promote this bound normal target.",
+    "sources": [
+     "https://dexonline.ro/intrare/ardei/3226",
+     "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/ardei-umpluti-id593861.html",
+     "https://www.protv.ro/emisiuni/vorbeste-lumea/articol/127718-iata-cum-poti-sa-faci-cei-mai-gustosi-ardei-umpluti-secretul-pentru-o-umplutura-frageda-si-aromata-si-reteta-pas-cu-pas"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_333",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:1c57f75d35b312bcf950cdc4b94a9fc34a7a4f239ecdaf17342bc6f961ea15cf",
+    "rationale": "A1/A2/C2: Ardei umpluți is broadly known, with MDA2 explicitly defining the compound and older/current RRI plus current PRO TV documenting family recipes. A3/A4/A7: pepper shell and meat/rice or vegetarian fillings are honest; rice, vegetable, tomato, sarmale and serving relations are specific. A5/A6: no trigger or duplicate. C1/C5: concrete compound with one dominant dish sense. C3: eight recognizable direct neighbors, zero flags, 2,289 reachable. C4: repaired Ardei and Orez rank2, Legume3, Sarmale4, Roșie5, Mămăligă7 and Carne21. Ardei keeps its own public identity and cannot win. C6: .5882 clears normal. Refute-first, Drojdie is misleadingly Fierbinte11 while oil/butter are cold; meat is not universal because fasting versions exist. Six more obvious defining/filling/serving routes precede yeast, so the anomaly does not make the normal target opaque. Promote with the noise and variant qualification recorded.",
+    "sources": [
+     "https://dexonline.ro/intrare/ardei/3226",
+     "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/ardei-umpluti-id593861.html",
+     "https://www.rri.ro/tag/ardei-umpluti",
+     "https://www.protv.ro/emisiuni/vorbeste-lumea/articol/127718-iata-cum-poti-sa-faci-cei-mai-gustosi-ardei-umpluti-secretul-pentru-o-umplutura-frageda-si-aromata-si-reteta-pas-cu-pas"
+    ]
+   }
+  }
+ ],
+ "coverage": {
+  "total": 5,
+  "verified": 5,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "provenance": {
+  "analyst": {
+   "path": "docs/reviews/v83-food-input-and-feedback/analyst-review.json",
+   "sha256": "sha256:b2dffdc4f4fd54ad803f19a309005e792b11c1abd610232889ea88436d7ef228",
+   "reviewer": "root",
+   "role": "analyst"
+  },
+  "verifier": {
+   "path": "docs/reviews/v83-food-input-and-feedback/verifier-review.json",
+   "sha256": "sha256:783073cc931739dbbd27a8de14ba5c84b9b635ebcbc88a562d75bf173b68556e",
+   "reviewer": "session_refactor",
+   "role": "verifier"
+  }
+ }
+}

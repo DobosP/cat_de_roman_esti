@@ -11,6 +11,8 @@ from pathlib import Path
 
 import pytest
 
+from tests.current_content import CURRENT_CONTENT
+
 pytest.importorskip("django")
 
 from django.test import Client  # noqa: E402
@@ -72,23 +74,23 @@ _V71_RANKINGS_SHA256 = "f9c114570006938ec6602e9318e49a145bedd378be16120cacb4b6c9
 _V71_DERIVED_SHA256 = "37ddf1a45ad04eeaf115589112269bc6cf3a2e19e61576a15c0acc426d168662"
 _V71_MOBILE_SHA256 = "a627e1234e88ccd174369ec19e58d912faaf526025c3955305c6c6c79ae2595e"
 
-# Current V80 wrapper pins; V71's review and source assertions remain historical.
-_CURRENT_BUILD_VERSION = "fixture-v81-nuca-feedback"
-_KG_SHA256 = "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331"
-_RANKINGS_SHA256 = "fc31646b058bf2caaaf63a90ac172e504fd2bd89c4028102c4570d054f9a40a8"
-_DERIVED_SHA256 = "cf9ed7cba4bc82025297907a5131df7c7f61c06ac43722d22d591790e6facf9a"
-_MOBILE_SHA256 = "9012a0e6c6f48397a94ff8bfcbf297ea58e357ac283c978e4e9542ea66ae77b1"
+# Current shared wrapper pins; V71's review and source assertions remain historical.
+_CURRENT_BUILD_VERSION = CURRENT_CONTENT.build_version
+_KG_SHA256 = CURRENT_CONTENT.kg_sha256
+_RANKINGS_SHA256 = CURRENT_CONTENT.rankings_sha256
+_DERIVED_SHA256 = CURRENT_CONTENT.derived_sha256
+_MOBILE_SHA256 = CURRENT_CONTENT.mobile_sha256
 
 # V80 updates current pack, ranking and derived pins.
 # V77 tests still reconstruct the exact V76 topology.
-_PACK_SHA256 = "26d61a029a6c706a02a15991730725a3421dfa1f9b36537032291828a44ab070"
+_PACK_SHA256 = CURRENT_CONTENT.pack_sha256
 _CANDIDATE_FUNNEL_SHA256 = "85e26519b648dbf28813a150955305c223feb5d627199d5ba689d709c526c64a"
 _ACCEPTED_MAP_SHA256 = "91c1c76b3ee8000114ba1b615b67b7f9b1bc5cf4a8f8d0135d17bdb60fbb2e8b"
-_RANKING_ROWS_SHA256 = "e5c2f3c761b2c6cdd206d26e4d0546a83b564bd395020d0fac80996a521153a9"
-_FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
-_NODES_WITHOUT_ALIASES_SHA256 = "b1e54aa885302131fb26b9a8740d63399196235f4c0786eb7382dfa77c05d178"
-_EDGES_SHA256 = "913b938c4d6206a11e07e9a13878a6ec117b1586868f44394c9626607979dc3d"
-_PUZZLES_SHA256 = "3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc"
+_RANKING_ROWS_SHA256 = CURRENT_CONTENT.ranking_rows_sha256
+_FROZEN_BOARDS_SHA256 = CURRENT_CONTENT.frozen_boards_sha256
+_NODES_WITHOUT_ALIASES_SHA256 = CURRENT_CONTENT.nodes_without_aliases_sha256
+_EDGES_SHA256 = CURRENT_CONTENT.edges_sha256
+_PUZZLES_SHA256 = CURRENT_CONTENT.puzzles_sha256
 _RESERVE_SHA256 = "4c41d092c895c61aaccfbda3cb9522c4d5767a88d9af9343efccc182f71e7612"
 _V49_LEDGER_SHA256 = "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29"
 _REJECTED_TARGETS = {
@@ -233,10 +235,13 @@ def test_v71_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     assert all(resolve_projection(surface) is None for surface in set(aliases) | _REJECTED)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert fixture["meta"]["build_version"] == _CURRENT_BUILD_VERSION
-    assert fixture["meta"]["counts"]["nodes"] == 2365
-    assert fixture["meta"]["counts"]["edges"] == 9223
-    assert fixture["meta"]["counts"]["puzzles"] == 180
-    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8451
+    assert fixture["meta"]["counts"]["nodes"] == CURRENT_CONTENT.kg_counts["nodes"]
+    assert fixture["meta"]["counts"]["edges"] == CURRENT_CONTENT.kg_counts["edges"]
+    assert fixture["meta"]["counts"]["puzzles"] == CURRENT_CONTENT.kg_counts["puzzles"]
+    assert (
+        sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"])
+        == CURRENT_CONTENT.kg_counts["aliases"]
+    )
 
 
 def test_v71_aliases_play_in_contexto_and_only_on_existing_legal_lant_hops() -> None:
@@ -355,8 +360,8 @@ def test_v71_preserves_v70_selection_projection_topology_and_frozen_payloads() -
         for node in fixture["kg_nodes"]
     ]
 
-    assert len(PROJECTION_TERMS) == 472
-    assert len({term.domain for term in PROJECTION_TERMS}) == 26
+    assert len(PROJECTION_TERMS) == CURRENT_CONTENT.projection_terms
+    assert len({term.domain for term in PROJECTION_TERMS}) == CURRENT_CONTENT.projection_domains
     assert _sha256(_PACKAGE_KG) == _KG_SHA256
     assert _KG_SHA256 != _V71_KG_SHA256 != _V70_KG_SHA256
     assert _sha256(_PACKAGE_PACK) == _PACK_SHA256
@@ -396,11 +401,7 @@ def test_v71_mobile_contract_and_v49_ledger_persist_exactly() -> None:
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
     assert checked_in["manifest"]["build_version"] == _CURRENT_BUILD_VERSION
-    assert checked_in["manifest"]["counts"] == {
-        "nodes": 2365,
-        "edges": 9223,
-        "puzzles": 180,
-    }
+    assert checked_in["manifest"]["counts"] == CURRENT_CONTENT.mobile_counts
 
     assert _sha256(_LEDGER) == _V49_LEDGER_SHA256
     assert ledger["meta"]["count"] == len(ledger["items"]) == 104

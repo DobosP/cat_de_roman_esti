@@ -1,0 +1,47 @@
+{
+  "associations": [
+    {
+      "source_kind": "projection",
+      "source": "gem",
+      "target": "n_v21gas_cornulete",
+      "scope": "exact_target_only",
+      "nonwinning": true
+    },
+    {
+      "source_kind": "projection",
+      "source": "gem",
+      "target": "n_v17gas_gogosi",
+      "scope": "exact_target_only",
+      "nonwinning": true
+    },
+    {
+      "source_kind": "native",
+      "source": "n_v24_food_pantry_ulei",
+      "target": "n_v17gas_gogosi",
+      "scope": "exact_target_only",
+      "nonwinning": true
+    },
+    {
+      "source_kind": "native",
+      "source": "n_v24_food_pantry_ulei",
+      "target": "n_v3gas_cartofi_prajiti",
+      "scope": "exact_target_only",
+      "nonwinning": true
+    },
+    {
+      "source_kind": "native",
+      "source": "n_v4gas_sare",
+      "target": "n_gas_telemea",
+      "scope": "exact_target_only",
+      "nonwinning": true
+    },
+    {
+      "source_kind": "native",
+      "source": "n_v24_food_salad_veg_ardei",
+      "target": "n_gas_ardei_umpluti",
+      "scope": "exact_target_only",
+      "nonwinning": true
+    }
+  ],
+  "preserve": "Original identity, exact-self wins, fallback and every other target; no graph edges or aliases are implied by these associations."
+}

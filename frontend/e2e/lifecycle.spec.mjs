@@ -1,6 +1,30 @@
 import { test, expect } from "@playwright/test";
 import { games, activeKey, gameURL, deterministicStarts, seededStarts, solution, start, solve, act } from "./games.mjs";
 
+async function reloadState(page, game, id) {
+  // A failed action may already have a recovery GET in flight. Match a request
+  // issued by the new document, and read its body before any further navigation.
+  let navigated = false;
+  const onNavigation = (frame) => {
+    if (frame === page.mainFrame()) navigated = true;
+  };
+  page.on("framenavigated", onNavigation);
+  const body = page.waitForRequest((request) => navigated &&
+    request.method() === "GET" && new URL(request.url()).pathname === gameURL(game, id))
+    .then(async (request) => {
+      const response = await request.response();
+      expect(response).not.toBeNull();
+      expect(response.status()).toBe(200);
+      return response.json();
+    });
+  try {
+    const [state] = await Promise.all([body, page.reload()]);
+    return state;
+  } finally {
+    page.off("framenavigated", onNavigation);
+  }
+}
+
 async function visibleProgress(page, game, state) {
   if (game.key === "conexiuni") {
     await expect(page.getByLabel(`${state.lives} greșeli disponibile`, { exact: true })).toBeVisible();
@@ -52,10 +76,7 @@ for (const game of games) {
       expect(expected.won).toBe(false);
       expect(expected).not.toEqual(state);
       await visibleProgress(page, game, expected);
-      const resumed = page.waitForResponse((r) => r.request().method() === "GET" &&
-        new URL(r.url()).pathname === gameURL(game, state.game_id));
-      await page.reload();
-      expect(await (await resumed).json()).toEqual(expected);
+      expect(await reloadState(page, game, state.game_id)).toEqual(expected);
       await expect(page.locator(game.board)).toBeVisible();
       await visibleProgress(page, game, expected);
       expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game)))
@@ -100,10 +121,7 @@ for (const game of games) {
       expect((await act(page, game, step)).status()).toBe(503);
       expect(await (await request.get(gameURL(game, state.game_id))).json()).toEqual(state);
       expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game))).toBe(state.game_id);
-      const resumed = page.waitForResponse((r) => r.request().method() === "GET" &&
-        new URL(r.url()).pathname === gameURL(game, state.game_id));
-      await page.reload();
-      expect(await (await resumed).json()).toEqual(state);
+      expect(await reloadState(page, game, state.game_id)).toEqual(state);
       await expect(page.locator(game.board)).toBeVisible();
       expect((await act(page, game, step)).status()).toBe(200);
     });

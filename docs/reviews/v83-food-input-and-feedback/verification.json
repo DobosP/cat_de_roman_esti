@@ -1,0 +1,397 @@
+{
+  "schema_version": 2,
+  "date": "2026-09-07",
+  "baseline_commit": "38f0d62ff1cd72003ae94ed691db4c44eb78c794",
+  "candidate_branch": "feat/v83-food-input-and-feedback",
+  "gate_result": "passed_after_documented_timing_retry_and_reload_test_fix",
+  "gate_results": {
+    "backend312": "1115 passed in one full run; no skips",
+    "backend314": "1114 passed in full run; sole known load-sensitive timing case passed unchanged on targeted retry; no claim of one all-green full run",
+    "accounts": "53 passed on each of Python3.12 and Python3.14",
+    "frontend": "173 native and108 browser checks passed; lint/typecheck/build/bundle passed",
+    "content_and_static": "validators, pending gate, Ruff, docs and whitespace passed"
+  },
+  "runs": {
+    "accounts312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v83-food-input-and-feedback",
+      "exit_code": 0,
+      "elapsed_seconds": 8.46,
+      "log_sha256": "f8f6a4b8b001a64824520788ddc8dc5ce96318443b90d83d3cbdf452fb4c3a4d",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 6.29s"
+      ]
+    },
+    "backend312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v83-food-input-and-feedback",
+      "exit_code": 0,
+      "elapsed_seconds": 760.74,
+      "log_sha256": "0a32c7278050e307a07e0afcf13b91832539a8dfccf76987882819394eb340a9",
+      "tail": [
+        "........................................................................ [ 64%]",
+        "........................................................................ [ 71%]",
+        "........................................................................ [ 77%]",
+        "........................................................................ [ 83%]",
+        "........................................................................ [ 90%]",
+        "........................................................................ [ 96%]",
+        "...................................                                      [100%]",
+        "1115 passed in 751.83s (0:12:31)"
+      ]
+    },
+    "backend314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v83-food-input-and-feedback/py314/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v83-food-input-and-feedback",
+      "exit_code": 1,
+      "elapsed_seconds": 682.91,
+      "log_sha256": "34eb14905d6fcc00e780657fb4ac2d120a00f9b238af93b1a458972ee6499ea6",
+      "tail": [
+        "        # coarse regression ceiling; the structural bounds below remain the correctness gate.",
+        ">       assert elapsed < 45.0",
+        "E       assert 50.29623336598161 < 45.0",
+        "",
+        "tests/test_alchimie_sparse_recipes.py:211: AssertionError",
+        "=========================== short test summary info ============================",
+        "FAILED tests/test_alchimie_sparse_recipes.py::test_many_mined_sessions_stay_bounded_solvable_and_fast",
+        "1 failed, 1114 passed in 664.63s (0:11:04)"
+      ]
+    },
+    "browser": {
+      "command": [
+        "npm",
+        "run",
+        "test:e2e"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v83-food-input-and-feedback/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 454.18,
+      "log_sha256": "0908246a7d3fbfb8f1376573e7b67ae1bf28b592ecd96418ef6f945d9ec83f17",
+      "tail": [
+        "  ✓  103 [mobile] › e2e/resume-recovery.spec.mjs:152:3 › V74 saved-game recovery › a queued terminal score keeps every saved game recoverable until its write finishes (20.9s)",
+        "  ✓  104 [mobile] › e2e/resume-recovery.spec.mjs:203:5 › V74 saved-game recovery › a stale 200 response cannot displace another tab's game (2.2s)",
+        "  ✓  105 [mobile] › e2e/resume-recovery.spec.mjs:203:5 › V74 saved-game recovery › a stale 404 response cannot displace another tab's game (2.3s)",
+        "  ✓  106 [mobile] › e2e/resume-recovery.spec.mjs:248:3 › V74 saved-game recovery › an unmounted resume cannot finish a newer route's create loading (2.6s)",
+        "  ✓  107 [mobile] › e2e/resume-recovery.spec.mjs:290:3 › V74 saved-game recovery › two tabs adopt one terminal session but append its local score once (2.7s)",
+        "  ✓  108 [mobile] › e2e/resume-recovery.spec.mjs:350:3 › V74 saved-game recovery › simultaneous terminal sessions from different games preserve both score rows (2.3s)",
+        "",
+        "  108 passed (6.9m)"
+      ]
+    },
+    "docs": {
+      "command": [
+        "python3",
+        "/home/dobo/work/agent-ops/scripts/check_docs.py",
+        "."
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v83-food-input-and-feedback",
+      "exit_code": 0,
+      "elapsed_seconds": 0.11,
+      "log_sha256": "346b96e5f14a4fdc6ecafdacc0d236d52ec84c1b96c6f296297b2fafa5675b6c",
+      "tail": [
+        "## stale model terms",
+        "(none)",
+        "",
+        "## retired ops verbs",
+        "(none)",
+        "",
+        "## orphan docs",
+        "(none)"
+      ]
+    },
+    "fixture": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_fixture.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v83-food-input-and-feedback",
+      "exit_code": 0,
+      "elapsed_seconds": 0.95,
+      "log_sha256": "5ae7b493cc74f47f484718be6a1a323053b03bd36fe097d7efddc1d997bf75cb",
+      "tail": [
+        "  [  ok] puzzle_hop_band              0 error(s)",
+        "  [  ok] puzzle_hints                 0 error(s)",
+        "  [  ok] puzzle_ids_resolve           0 error(s)",
+        "  [  ok] puzzle_shortest_path         0 error(s)",
+        "  [  ok] puzzle_category_scope        0 error(s)",
+        "  [  ok] puzzle_distractor_shortcut   0 error(s)",
+        "------------------------------------------------------------",
+        "GREEN: fixture is valid (0 errors)"
+      ]
+    },
+    "frontend_bundle": {
+      "command": [
+        "npm",
+        "run",
+        "check:bundle"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v83-food-input-and-feedback/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 1.1,
+      "log_sha256": "ff5f74fc33a8767e2f3d406bf9184d98122b943cf9adbfdc7bc1ac45ff0b2be7",
+      "tail": [
+        "> cat-de-roman-esti-frontend@0.1.0 check:bundle",
+        "> node scripts/check-bundle-budget.mjs",
+        "",
+        "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+        "     8.23 KiB  assets/index-DiCPhhaT.css",
+        "   110.50 KiB  assets/index-SV5smC6j.js",
+        "   118.73 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ]
+    },
+    "frontend_lint": {
+      "command": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v83-food-input-and-feedback/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 15.29,
+      "log_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 lint",
+        "> eslint .",
+        ""
+      ]
+    },
+    "frontend_native": {
+      "command": [
+        "npm",
+        "test"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v83-food-input-and-feedback/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 21.08,
+      "log_sha256": "f796712bb04970d446c90ffa54715aa48a93fea494c7e00525fa48ed222076cb",
+      "tail": [
+        "ℹ tests 173",
+        "ℹ suites 0",
+        "ℹ pass 173",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 5928.139628"
+      ]
+    },
+    "frontend_typecheck": {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v83-food-input-and-feedback/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 5.63,
+      "log_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 typecheck",
+        "> tsc --noEmit",
+        ""
+      ]
+    },
+    "pack": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_games_pack.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v83-food-input-and-feedback",
+      "exit_code": 0,
+      "elapsed_seconds": 10.71,
+      "log_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+      "tail": [
+        "  structure                ok",
+        "  item_shape               ok",
+        "  unique_ids               ok",
+        "  playability              ok",
+        "  meta_counts              ok",
+        "  id_high_water            ok",
+        "",
+        "games pack GREEN"
+      ]
+    },
+    "pending": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/critique_pack.py",
+        "--status",
+        "pending",
+        "--strict"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v83-food-input-and-feedback",
+      "exit_code": 0,
+      "elapsed_seconds": 0.54,
+      "log_sha256": "f19d308c2a43b0b95b9b12f3458a99e9f64ce7c982f4f113f1997cbbcffae852",
+      "tail": [
+        "critique_pack: 8 item(s) checked, 0 flagged, 0 FAIL finding(s)",
+        "  member_overuse       WARN x65",
+        "  nondistinctive_region_link WARN x16"
+      ]
+    },
+    "ruff": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v83-food-input-and-feedback",
+      "exit_code": 0,
+      "elapsed_seconds": 0.13,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "tail": [
+        "All checks passed!"
+      ]
+    },
+    "whitespace": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v83-food-input-and-feedback",
+      "exit_code": 0,
+      "elapsed_seconds": 0.28,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tail": []
+    },
+    "backend314_timing_retry": {
+      "reproduction_command": [
+        "/home/dobo/work/_temp/feat__v83-food-input-and-feedback/py314/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_alchimie_sparse_recipes.py::test_many_mined_sessions_stay_bounded_solvable_and_fast",
+        "-q",
+        "-o",
+        "addopts=",
+        "--durations=1"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v83-food-input-and-feedback",
+      "observed_exit_code": 0,
+      "log_sha256": "b749269de71f4243f251a14d558c2f1465c679b89bf8d66271d9809127a747ba",
+      "tail": [
+        ".                                                                        [100%]",
+        "============================= slowest 1 durations ==============================",
+        "21.96s call     tests/test_alchimie_sparse_recipes.py::test_many_mined_sessions_stay_bounded_solvable_and_fast",
+        "1 passed in 22.90s"
+      ]
+    },
+    "accounts314": {
+      "reproduction_command": [
+        "/home/dobo/work/_temp/feat__v83-food-input-and-feedback/py314/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v83-food-input-and-feedback",
+      "observed_exit_code": 0,
+      "log_sha256": "1346a7d5482c61eb72d1a692fff0dea4d53e5f42d564d66da2e525f12f03c568",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 7.07s"
+      ]
+    }
+  },
+  "initial_browser_run": {
+    "command": [
+      "npm",
+      "run",
+      "test:e2e"
+    ],
+    "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v83-food-input-and-feedback/frontend",
+    "exit_code": 1,
+    "elapsed_seconds": 1004.3,
+    "log_sha256": "39940f80216d3874dd33b55e8c14cadde7dc694d13fbb6e6c95085e878c6da6b",
+    "tail": [
+      "    [desktop] › e2e/accessibility.spec.mjs:36:3 › contexto intro, live board and result are accessible without page overflow ",
+      "    [desktop] › e2e/lifecycle.spec.mjs:94:5 › alchimie › keeps a round playable after a failed action and reload ",
+      "    [desktop] › e2e/lifecycle.spec.mjs:94:5 › perechi › keeps a round playable after a failed action and reload ",
+      "    [desktop] › e2e/lifecycle.spec.mjs:26:5 › conexiuni › plays a real seeded round to a server-scored result and replays ",
+      "    [mobile] › e2e/accessibility.spec.mjs:36:3 › conexiuni intro, live board and result are accessible without page overflow ",
+      "    [mobile] › e2e/accessibility.spec.mjs:36:3 › contexto intro, live board and result are accessible without page overflow ",
+      "    [mobile] › e2e/accessibility.spec.mjs:36:3 › lant intro, live board and result are accessible without page overflow ",
+      "  99 passed (16.7m)"
+    ]
+  },
+  "retry_explanations": {
+    "backend314": {
+      "failed_test": "tests/test_alchimie_sparse_recipes.py::test_many_mined_sessions_stay_bounded_solvable_and_fast",
+      "observed_initial_seconds": 50.29623336598161,
+      "unchanged_limit_seconds": 45.0,
+      "retry_pytest_call_seconds": 21.96,
+      "reason": "Known load-sensitive check documented in agent-testing.md; observed host load125–157 on32 CPUs during the initial matrix. No Alchimie runtime or graph topology changes in V83; unchanged targeted case passed on retry."
+    },
+    "browser": {
+      "initial_result": "99 passed,9 failed; crashes/timeouts under observed heavy host pressure and one trace-confirmed stale-response-body race",
+      "confirmed_race": "Recovery GET began291400.229ms, before reload291470.060ms; response arrived291483ms and its body read failed after navigation. Actual new-document GET began293421ms and returned the expected850-byte state.",
+      "fix": "Reload assertions now await an exact state GET issued after main-frame navigation and consume its specific response immediately. Existing state comparisons and timeouts retained.",
+      "final_result": "108 passed, no failures or skips",
+      "causal_limit": "Resource pressure was observed; this does not establish the cause of every browser crash."
+    }
+  },
+  "additional_checks": {
+    "v75_through_v83_integration": "156 passed in9.13s",
+    "independent_implementation_review": "53 passed in3.60s; no material blockers",
+    "new_v83_tests": "58 passed in4.57s; included in final full suites",
+    "frontend_build": {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v83-food-input-and-feedback/frontend",
+      "observed_exit_code": 0,
+      "log_sha256": "4f3397c15909f5736c8faa045c2a70ff9540d93b32f8625a758728f753533931",
+      "application_assets": "byte-identical to baseline; no diff under cat_de_roman_esti/web/static"
+    },
+    "post_build_web": "tests/test_web.py:12 passed in6.54s",
+    "independent_final_browser_audit": "Receipt/log hash match;108 passing entries; zero failures/skips; Playwright last-run status passed"
+  },
+  "environment": {
+    "python": [
+      "3.12.3",
+      "3.14.6"
+    ],
+    "node": "24.20.0",
+    "npm": "11.19.0",
+    "backend": "Anonymous/debug-off and external data disabled; PYTHONPATH points at candidate worktree",
+    "accounts": "CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 only for isolated accounts suites",
+    "browser": "CDR_E2E_PORT=8183; Node24 and Python3.12 web runtime on PATH"
+  },
+  "notes": [
+    "Reproduction commands on log-only retries describe how to repeat the observed checks; JSON command receipts preserve captured invocations for all wrapped runs.",
+    "Clean Node24 npm install/audit found zero vulnerabilities.",
+    "No test threshold, scoring formula, session TTL or size bound was relaxed.",
+    "Historical review archives and all old authored surface owners remain intact.",
+    "No push, deployment, human playtest or real-device acceptance was performed."
+  ]
+}

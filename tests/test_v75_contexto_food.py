@@ -12,6 +12,8 @@ import pytest
 
 from cat_de_roman_esti.wordgames.packs import get_pack
 from tests.content_history import before_v80_derived, before_v80_pack, before_v80_rankings
+from tests.content_scenarios import contexto_seed
+from tests.current_content import CURRENT_CONTENT
 
 ROOT = Path(__file__).resolve().parent.parent
 FIXTURES = ROOT / "cat_de_roman_esti/fixtures"
@@ -98,9 +100,9 @@ def test_derived_boards_kg_and_mobile_payloads_are_preserved() -> None:
     # Current-artifact pins; V77 separately reconstructs the complete V75/V76 KG.
     expected = {
         FIXTURES / "kg_sample.json":
-            "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331",
+            CURRENT_CONTENT.kg_sha256,
         ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json":
-            "9012a0e6c6f48397a94ff8bfcbf297ea58e357ac283c978e4e9542ea66ae77b1",
+            CURRENT_CONTENT.mobile_sha256,
         FIXTURES / "lant_rejection_tombstones.json":
             "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29",
     }
@@ -142,16 +144,17 @@ def test_five_candidate_dispositions_and_two_independent_promotions_are_bound() 
 
 
 @pytest.mark.parametrize(
-    ("seed", "opener", "answer", "target"),
-    [(0, "grătar", "mici", "n_gas_mici"),
-     (11, "salată", "salata de boeuf", "n_gas_salata_boeuf")],
+    ("opener", "answer", "target"),
+    [("grătar", "mici", "n_gas_mici"),
+     ("salată", "salata de boeuf", "n_gas_salata_boeuf")],
 )
 def test_new_targets_are_publicly_selectable_warm_and_winnable(
-    seed: int, opener: str, answer: str, target: str,
+    opener: str, answer: str, target: str,
 ) -> None:
     pytest.importorskip("django")
     from django.test import Client
 
+    seed = contexto_seed(target, difficulty="usor")
     client = Client()
     response = client.post(
         f"/api/wordgames/contexto/games?seed={seed}&category=gastronomie&difficulty=usor"

@@ -18,9 +18,11 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0107 | [Reviewed Romanian input senses](0107-preserve-reviewed-romanian-input-senses.md) | accepted |
 | 0108 | [Bounded flour ingredient associations](0108-add-bounded-flour-ingredient-associations.md) | accepted |
 | 0109 | [Defer dessert targets after fresh feedback review](0109-defer-dessert-targets-after-feedback-review.md) | accepted |
-| 0110 | [Fruit-preserve feedback for Gem](0110-use-fruit-preserve-feedback-for-gem.md) | accepted |
+| 0110 | [Fruit-preserve feedback for Gem](0110-use-fruit-preserve-feedback-for-gem.md) | partially superseded by 0117 |
 | 0111 | [Reviewed Clătite target](0111-promote-reviewed-clatite-target.md) | accepted |
 | 0112 | [Reviewed walnut input](0112-add-reviewed-walnut-input.md) | accepted |
 | 0113 | [Outcome-based version batches](0113-outcome-based-version-batches.md) | accepted |
 | 0114 | [Reviewed food batch and scoped tripe feedback](0114-reviewed-food-batch-and-scoped-tripe-feedback.md) | accepted |
 | 0115 | [Bounded reuse during Alchimie generation](0115-reuse-alchimie-pair-results-within-a-build.md) | accepted |
+| 0116 | [Shared current-content test expectations](0116-share-current-content-test-expectations.md) | accepted |
+| 0117 | [Food forms and exact-target feedback](0117-food-forms-and-exact-target-feedback.md) | accepted |

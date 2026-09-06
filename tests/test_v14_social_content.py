@@ -6,6 +6,8 @@ import json
 from collections import Counter
 from pathlib import Path
 
+from tests.current_content import CURRENT_CONTENT
+
 _ROOT = Path(__file__).resolve().parent.parent
 _PACK_PATH = _ROOT / "tests" / "fixtures" / "games_pack.json"
 _KG_PATH = _ROOT / "tests" / "fixtures" / "kg_sample.json"
@@ -34,12 +36,7 @@ _V48_AUDIT_PATH = (
 # V48 promoted one, retained three A5 holds, and archived 17 rejected Alchimie records.
 # Those games now use exact lower baselines, with the removed Alchimie rows preserved in
 # V48's bound projection audit.
-_V23_INVENTORY_FLOOR = {
-    "conexiuni": (232, 232, 0),
-    "contexto": (218, 216, 2),
-    "lant": (97, 94, 3),
-    "alchimie": (82, 79, 3),
-}
+_V23_INVENTORY_FLOOR = CURRENT_CONTENT.game_inventory
 
 _NEW_CONTEXTO_TARGETS = {
     "ct_societate_290": "n_v11soc_diaspora",
@@ -103,11 +100,17 @@ def test_v14_pack_inventory_and_review_split():
     # 2026-07-29: + 13 ADR-0065 gate promotions among these games' totals = 585 approved.
     # V45/V46 clear stale pending debt; V47 adds one strict Contexto promotion; V48
     # promotes one Alchimie board and removes 17 quality rejects.
-    assert sum(expected[0] for expected in _V23_INVENTORY_FLOOR.values()) == 629
+    assert sum(expected[0] for expected in _V23_INVENTORY_FLOOR.values()) == (
+        CURRENT_CONTENT.ranking_counts["total"]
+    )
     # 2026-07-30 (ADR-0066/0067/0068): + 18 owner, + 3 strict-gate, then + 2
     # bound Contexto promotions, then V75's two reviewed food targets.
-    assert sum(expected[1] for expected in _V23_INVENTORY_FLOOR.values()) == 621
-    assert sum(expected[2] for expected in _V23_INVENTORY_FLOOR.values()) == 8
+    assert sum(expected[1] for expected in _V23_INVENTORY_FLOOR.values()) == (
+        CURRENT_CONTENT.status_counts["approved"]
+    )
+    assert sum(expected[2] for expected in _V23_INVENTORY_FLOOR.values()) == (
+        CURRENT_CONTENT.status_counts["pending"]
+    )
 
     live_alchimie = {record["id"] for record in pack["alchimie"]}
     archived = {

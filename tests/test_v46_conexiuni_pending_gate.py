@@ -8,6 +8,8 @@ import sys
 from collections import Counter
 from pathlib import Path
 
+from tests.current_content import CURRENT_CONTENT
+
 _ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_ROOT / "scripts"))
 
@@ -29,7 +31,7 @@ _TOMBSTONES = (
 )
 
 _PENDING_ID_SET_SHA256 = "0bd5fd1667b33897aa0954c7155552ccfa84d0cfb0f2111d4fc1195dfa221593"
-_FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
+_FROZEN_BOARDS_SHA256 = CURRENT_CONTENT.frozen_boards_sha256
 _HUMAN_ONLY_REJECTS = {
     "cx_societate_294",
     "cx_societate_295",
@@ -128,17 +130,12 @@ def test_v46_pack_removes_only_the_rejected_pending_conexiuni_records() -> None:
         for record in pack[game]
     )
 
-    assert pack["meta"]["counts"] == {
-        "conexiuni": 232,
-        "contexto": 218,
-        "lant": 97,
-        "alchimie": 82,
-    }
+    assert pack['meta']['counts'] == CURRENT_CONTENT.pack_counts
     assert pack["meta"]["id_high_water"]["conexiuni"] == 361
     assert Counter(record["status"] for record in conexiuni.values()) == {
         "approved": 232
     }
-    assert statuses == {"approved": 621, "pending": 8}
+    assert statuses == CURRENT_CONTENT.status_counts
     assert rejected.isdisjoint(conexiuni)
 
 
@@ -171,23 +168,7 @@ def test_v46_rejection_ledger_cross_binds_every_removed_record() -> None:
 def test_v46_rankings_and_frozen_derived_catalog_track_the_clean_pack() -> None:
     assert _PACKAGE_RANKINGS.read_bytes() == _TEST_RANKINGS.read_bytes()
     rankings = _json(_PACKAGE_RANKINGS)
-    assert rankings["meta"]["counts"] == {
-        "total": 629,
-        "approved": 621,
-        "pilot_eligible": 459,
-        "by_game": {
-            "conexiuni": 232,
-            "contexto": 218,
-            "lant": 97,
-            "alchimie": 82,
-        },
-        "eligible_by_game": {
-            "conexiuni": 74,
-            "contexto": 212,
-            "lant": 94,
-            "alchimie": 79,
-        },
-    }
+    assert rankings['meta']['counts'] == CURRENT_CONTENT.ranking_counts
     rejected = set(_json(_VERDICTS)["verdicts"])
     assert rejected.isdisjoint(row["id"] for row in rankings["boards"])
 
@@ -195,8 +176,5 @@ def test_v46_rankings_and_frozen_derived_catalog_track_the_clean_pack() -> None:
     derived = _json(_PACKAGE_DERIVED)
     boards_blob = (json.dumps(derived["boards"], ensure_ascii=False, indent=1) + "\n").encode()
     assert hashlib.sha256(boards_blob).hexdigest() == _FROZEN_BOARDS_SHA256
-    assert derived["meta"]["counts"]["by_game"] == {
-        "intrusul": 183,
-        "perechi": 153,
-    }
+    assert derived['meta']['counts']['by_game'] == CURRENT_CONTENT.derived_counts["by_game"]
     assert rejected.isdisjoint(board["source_id"] for board in derived["boards"])

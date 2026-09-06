@@ -8,7 +8,14 @@ from pathlib import Path
 
 import pytest
 
-from tests.content_history import before_v82_derived, before_v82_pack, before_v82_rankings
+from tests.content_history import (
+    before_v82_derived,
+    before_v82_pack,
+    before_v82_rankings,
+    before_v83_fixture,
+)
+from tests.content_scenarios import contexto_seed
+from tests.current_content import CURRENT_CONTENT
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "cat_de_roman_esti/fixtures"
@@ -68,9 +75,11 @@ def test_all_eight_reviewed_targets_are_approved_and_runtime_selectable():
     assert not old_ids & new_ids
     pool = get_pack().pool("contexto", category="gastronomie")
     assert {row.id for row in pool if row._pilot_eligible} >= new_ids
-    assert get_pack().selectable_count("contexto") == 212
-    # This content batch changes neither the KG vocabulary nor the shared graph.
-    assert hashlib.sha256((FIXTURES / "kg_sample.json").read_bytes()).hexdigest() == (
+    assert get_pack().selectable_count("contexto") == CURRENT_CONTENT.contexto_eligible
+    # V82 changed neither KG vocabulary nor graph; undo later reviewed additions first.
+    fixture = before_v83_fixture(_read(FIXTURES / "kg_sample.json"))
+    blob = (json.dumps(fixture, ensure_ascii=False, indent=2) + "\n").encode()
+    assert hashlib.sha256(blob).hexdigest() == (
         "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331"
     )
 
@@ -112,7 +121,7 @@ def test_public_food_round_has_useful_guesses_resume_repeats_and_exact_win(
 
     from cat_de_roman_esti.wordgames.contexto import store
 
-    seed = _read(REVIEW / "public-seeds.json")[target]
+    seed = contexto_seed(target, difficulty=difficulty)
     client = Client()
     response = client.post(
         f"/api/wordgames/contexto/games?seed={seed}&category=gastronomie&difficulty={difficulty}"

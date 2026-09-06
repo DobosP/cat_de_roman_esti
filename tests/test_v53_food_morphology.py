@@ -9,6 +9,8 @@ from pathlib import Path
 
 import pytest
 
+from tests.current_content import CURRENT_CONTENT
+
 pytest.importorskip("django")
 
 from django.test import Client  # noqa: E402
@@ -48,20 +50,20 @@ _LEDGER = _ROOT / "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 _REVIEW = _ROOT / "docs/reviews/v53-food-morphology/vocabulary.json"
 
-_KG_SHA256 = "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331"
-_PACK_SHA256 = "26d61a029a6c706a02a15991730725a3421dfa1f9b36537032291828a44ab070"
-_RANKINGS_SHA256 = "fc31646b058bf2caaaf63a90ac172e504fd2bd89c4028102c4570d054f9a40a8"
-_DERIVED_SHA256 = "cf9ed7cba4bc82025297907a5131df7c7f61c06ac43722d22d591790e6facf9a"
+_KG_SHA256 = CURRENT_CONTENT.kg_sha256
+_PACK_SHA256 = CURRENT_CONTENT.pack_sha256
+_RANKINGS_SHA256 = CURRENT_CONTENT.rankings_sha256
+_DERIVED_SHA256 = CURRENT_CONTENT.derived_sha256
 _CANDIDATE_FUNNEL_SHA256 = (
     "58e31f0326251acafc2ccd70fbd690b7cfc6c43c71299e23ffe158ecdd4b7785"
 )
-_RANKING_ROWS_SHA256 = "e5c2f3c761b2c6cdd206d26e4d0546a83b564bd395020d0fac80996a521153a9"
-_FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
+_RANKING_ROWS_SHA256 = CURRENT_CONTENT.ranking_rows_sha256
+_FROZEN_BOARDS_SHA256 = CURRENT_CONTENT.frozen_boards_sha256
 _NODES_WITHOUT_ALIASES_SHA256 = (
-    "b1e54aa885302131fb26b9a8740d63399196235f4c0786eb7382dfa77c05d178"
+    CURRENT_CONTENT.nodes_without_aliases_sha256
 )
-_EDGES_SHA256 = "913b938c4d6206a11e07e9a13878a6ec117b1586868f44394c9626607979dc3d"
-_PUZZLES_SHA256 = "3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc"
+_EDGES_SHA256 = CURRENT_CONTENT.edges_sha256
+_PUZZLES_SHA256 = CURRENT_CONTENT.puzzles_sha256
 _V49_LEDGER_SHA256 = "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29"
 _REJECTED = {"mesei", "meselor"}
 
@@ -173,12 +175,15 @@ def test_v53_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     assert all(resolve_projection(surface) is None for surface in set(aliases) | _REJECTED)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert fixture["meta"]["build_version"] == (
-        "fixture-v81-nuca-feedback"
+        CURRENT_CONTENT.build_version
     )
-    assert fixture["meta"]["counts"]["nodes"] == 2365
-    assert fixture["meta"]["counts"]["edges"] == 9223
-    assert fixture["meta"]["counts"]["puzzles"] == 180
-    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8451
+    assert fixture["meta"]["counts"]["nodes"] == CURRENT_CONTENT.kg_counts["nodes"]
+    assert fixture["meta"]["counts"]["edges"] == CURRENT_CONTENT.kg_counts["edges"]
+    assert fixture["meta"]["counts"]["puzzles"] == CURRENT_CONTENT.kg_counts["puzzles"]
+    assert (
+        sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"])
+        == CURRENT_CONTENT.kg_counts["aliases"]
+    )
 
 
 def test_v53_aliases_play_in_contexto_and_only_on_existing_legal_lant_hops() -> None:
@@ -241,8 +246,8 @@ def test_v53_preserves_projection_topology_pack_and_frozen_board_payloads() -> N
         for node in fixture["kg_nodes"]
     ]
 
-    assert len(PROJECTION_TERMS) == 472
-    assert len({term.domain for term in PROJECTION_TERMS}) == 26
+    assert len(PROJECTION_TERMS) == CURRENT_CONTENT.projection_terms
+    assert len({term.domain for term in PROJECTION_TERMS}) == CURRENT_CONTENT.projection_domains
     assert _sha256(_PACKAGE_KG) == _KG_SHA256
     assert _sha256(_PACKAGE_PACK) == _PACK_SHA256
     assert _sha256(_PACKAGE_RANKINGS) == _RANKINGS_SHA256
@@ -273,13 +278,9 @@ def test_v53_mobile_contract_and_v49_ledger_persist_exactly() -> None:
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
     assert checked_in["manifest"]["build_version"] == (
-        "fixture-v81-nuca-feedback"
+        CURRENT_CONTENT.build_version
     )
-    assert checked_in["manifest"]["counts"] == {
-        "nodes": 2365,
-        "edges": 9223,
-        "puzzles": 180,
-    }
+    assert checked_in["manifest"]["counts"] == CURRENT_CONTENT.mobile_counts
 
     assert _sha256(_LEDGER) == _V49_LEDGER_SHA256
     assert ledger["meta"]["count"] == len(ledger["items"]) == 104

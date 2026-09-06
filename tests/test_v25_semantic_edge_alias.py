@@ -21,6 +21,7 @@ from cat_de_roman_esti.wordgames.packs import (
     validate_payload,
 )
 from cat_de_roman_esti.wordgames.service import WordGameService, normalize
+from tests.current_content import CURRENT_CONTENT
 
 _ROOT = Path(__file__).resolve().parent.parent
 _PACKAGE_KG = _ROOT / "cat_de_roman_esti/fixtures/kg_sample.json"
@@ -29,7 +30,7 @@ _PACKAGE_PACK = _ROOT / "cat_de_roman_esti/fixtures/games_pack.json"
 _TEST_PACK = _ROOT / "tests/fixtures/games_pack.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 # Current served pack; the V25 DATA baseline remains historical evidence.
-_CURRENT_PACK_SHA256 = "26d61a029a6c706a02a15991730725a3421dfa1f9b36537032291828a44ab070"
+_CURRENT_PACK_SHA256 = CURRENT_CONTENT.pack_sha256
 _V48_AUDIT = (
     _ROOT / "docs/reviews/v48-alchimie-pending-gate/projection-audit.json"
 )
@@ -112,7 +113,7 @@ def test_v25_inventory_floor_and_mirrors_survive_later_additive_waves():
 
     assert len(fixture["kg_nodes"]) >= 2184
     assert len(fixture["kg_edges"]) >= 8792
-    assert len(fixture["kg_puzzles"]) == 180
+    assert len(fixture["kg_puzzles"]) == CURRENT_CONTENT.kg_counts["puzzles"]
     assert aliases >= 7033
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert _PACKAGE_PACK.read_bytes() == _TEST_PACK.read_bytes()
@@ -281,7 +282,7 @@ def test_v25_mobile_contract_stays_current_after_later_additive_waves():
     counts = checked_in["manifest"]["counts"]
     assert counts["nodes"] >= 2184
     assert counts["edges"] >= 8792
-    assert counts["puzzles"] == 180
+    assert counts["puzzles"] == CURRENT_CONTENT.mobile_counts["puzzles"]
 
 
 def test_v25_mobile_refresh_failure_restores_all_five_transaction_files(
