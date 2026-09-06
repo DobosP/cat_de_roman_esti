@@ -1,0 +1,277 @@
+{
+  "pasta_node": {
+    "id": "n_v3gas_paste",
+    "label": "Paste",
+    "description": "Preparat din aluat de grâu dur, fiert și servit cu sos.",
+    "aliases": [
+      "paste făinoase",
+      "pastele"
+    ]
+  },
+  "holiday_exact_node_present": false,
+  "masa_de_paste": {
+    "resolve": "n_gas_masa_paste",
+    "id": "n_gas_masa_paste"
+  },
+  "forms": {
+    "accented_nfc": {
+      "text": "Paște",
+      "codepoints": [
+        "U+0050",
+        "U+0061",
+        "U+0219",
+        "U+0074",
+        "U+0065"
+      ],
+      "normalized": "paste",
+      "resolve": "n_v3gas_paste",
+      "resolve_fuzzy": "n_v3gas_paste",
+      "suggest": [
+        "Paste",
+        "Pate",
+        "pistă"
+      ],
+      "projection": null,
+      "projection_suggest": [
+        "pajiște",
+        "spate"
+      ]
+    },
+    "accented_article_nfc": {
+      "text": "paștele",
+      "codepoints": [
+        "U+0070",
+        "U+0061",
+        "U+0219",
+        "U+0074",
+        "U+0065",
+        "U+006C",
+        "U+0065"
+      ],
+      "normalized": "pastele",
+      "resolve": "n_v3gas_paste",
+      "resolve_fuzzy": "n_v3gas_paste",
+      "suggest": [
+        "Paste",
+        "pistă",
+        "pește"
+      ],
+      "projection": null,
+      "projection_suggest": []
+    },
+    "uppercase": {
+      "text": "PAȘTE",
+      "codepoints": [
+        "U+0050",
+        "U+0041",
+        "U+0218",
+        "U+0054",
+        "U+0045"
+      ],
+      "normalized": "paste",
+      "resolve": "n_v3gas_paste",
+      "resolve_fuzzy": "n_v3gas_paste",
+      "suggest": [
+        "Paste",
+        "Pate",
+        "pistă"
+      ],
+      "projection": null,
+      "projection_suggest": [
+        "pajiște",
+        "spate"
+      ]
+    },
+    "decomposed_comma": {
+      "text": "Paște",
+      "codepoints": [
+        "U+0050",
+        "U+0061",
+        "U+0073",
+        "U+0326",
+        "U+0074",
+        "U+0065"
+      ],
+      "normalized": "paste",
+      "resolve": "n_v3gas_paste",
+      "resolve_fuzzy": "n_v3gas_paste",
+      "suggest": [
+        "Paste",
+        "Pate",
+        "pistă"
+      ],
+      "projection": null,
+      "projection_suggest": [
+        "pajiște",
+        "spate"
+      ]
+    },
+    "legacy_cedilla": {
+      "text": "Paşte",
+      "codepoints": [
+        "U+0050",
+        "U+0061",
+        "U+015F",
+        "U+0074",
+        "U+0065"
+      ],
+      "normalized": "paste",
+      "resolve": "n_v3gas_paste",
+      "resolve_fuzzy": "n_v3gas_paste",
+      "suggest": [
+        "Paste",
+        "Pate",
+        "pistă"
+      ],
+      "projection": null,
+      "projection_suggest": [
+        "pajiște",
+        "spate"
+      ]
+    },
+    "legacy_cedilla_article": {
+      "text": "paştele",
+      "codepoints": [
+        "U+0070",
+        "U+0061",
+        "U+015F",
+        "U+0074",
+        "U+0065",
+        "U+006C",
+        "U+0065"
+      ],
+      "normalized": "pastele",
+      "resolve": "n_v3gas_paste",
+      "resolve_fuzzy": "n_v3gas_paste",
+      "suggest": [
+        "Paste",
+        "pistă",
+        "pește"
+      ],
+      "projection": null,
+      "projection_suggest": []
+    },
+    "accentless": {
+      "text": "paste",
+      "codepoints": [
+        "U+0070",
+        "U+0061",
+        "U+0073",
+        "U+0074",
+        "U+0065"
+      ],
+      "normalized": "paste",
+      "resolve": "n_v3gas_paste",
+      "resolve_fuzzy": "n_v3gas_paste",
+      "suggest": [
+        "Paste",
+        "Pate",
+        "pistă"
+      ],
+      "projection": null,
+      "projection_suggest": [
+        "pajiște",
+        "spate"
+      ]
+    },
+    "accentless_article": {
+      "text": "pastele",
+      "codepoints": [
+        "U+0070",
+        "U+0061",
+        "U+0073",
+        "U+0074",
+        "U+0065",
+        "U+006C",
+        "U+0065"
+      ],
+      "normalized": "pastele",
+      "resolve": "n_v3gas_paste",
+      "resolve_fuzzy": "n_v3gas_paste",
+      "suggest": [
+        "Paste",
+        "pistă",
+        "pește"
+      ],
+      "projection": null,
+      "projection_suggest": []
+    },
+    "compound": {
+      "text": "paste făinoase",
+      "codepoints": [
+        "U+0070",
+        "U+0061",
+        "U+0073",
+        "U+0074",
+        "U+0065",
+        "U+0020",
+        "U+0066",
+        "U+0103",
+        "U+0069",
+        "U+006E",
+        "U+006F",
+        "U+0061",
+        "U+0073",
+        "U+0065"
+      ],
+      "normalized": "paste fainoase",
+      "resolve": "n_v3gas_paste",
+      "resolve_fuzzy": "n_v3gas_paste",
+      "suggest": [
+        "Paste"
+      ],
+      "projection": null,
+      "projection_suggest": []
+    },
+    "toothpaste_compound": {
+      "text": "pastele de dinți",
+      "codepoints": [
+        "U+0070",
+        "U+0061",
+        "U+0073",
+        "U+0074",
+        "U+0065",
+        "U+006C",
+        "U+0065",
+        "U+0020",
+        "U+0064",
+        "U+0065",
+        "U+0020",
+        "U+0064",
+        "U+0069",
+        "U+006E",
+        "U+021B",
+        "U+0069"
+      ],
+      "normalized": "pastele de dinti",
+      "resolve": "n_v31_hygiene_oral_pasta_dinti",
+      "resolve_fuzzy": "n_v31_hygiene_oral_pasta_dinti",
+      "suggest": [
+        "Pastă de dinți",
+        "Periuță de dinți"
+      ],
+      "projection": null,
+      "projection_suggest": []
+    }
+  },
+  "lant_predecessor_bypass": [
+    {
+      "current": "n_v2gas_branza",
+      "current_label": "Brânză",
+      "linked": true,
+      "resolved": "n_v3gas_paste"
+    },
+    {
+      "current": "n_v2gas_mirodenii",
+      "current_label": "Mirodenii",
+      "linked": true,
+      "resolved": "n_v3gas_paste"
+    },
+    {
+      "current": "n_v2gas_sosuri",
+      "current_label": "Sosuri",
+      "linked": true,
+      "resolved": "n_v3gas_paste"
+    }
+  ]
+}

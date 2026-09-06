@@ -15,3 +15,4 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0104 | [Portable independent reviews](0104-portable-independent-review-artifacts.md) | accepted |
 | 0105 | [Idempotent local completion recording](0105-deduplicate-local-terminal-score-receipts.md) | accepted |
 | 0106 | [Two reviewed Contexto food targets](0106-add-reviewed-contexto-food-targets.md) | accepted |
+| 0107 | [Reviewed Romanian input senses](0107-preserve-reviewed-romanian-input-senses.md) | accepted |

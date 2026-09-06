@@ -1,0 +1,40 @@
+import json
+import unicodedata
+
+import django
+
+django.setup()
+
+from cat_de_roman_esti.wordgames.service import get_service, normalize
+from cat_de_roman_esti.wordgames.contexto_projection import resolve_projection, suggest_projection
+from cat_de_roman_esti.wordgames.lant import _resolve_neighbor
+svc=get_service(); target='n_v3gas_paste'
+forms={
+ 'accented_nfc':'Paște','accented_article_nfc':'paștele','uppercase':'PAȘTE',
+ 'decomposed_comma':unicodedata.normalize('NFD','Paște'),'legacy_cedilla':'Paşte','legacy_cedilla_article':'paştele',
+ 'accentless':'paste','accentless_article':'pastele','compound':'paste făinoase',
+ 'toothpaste_compound':'pastele de dinți',
+}
+rows={}
+for name,text in forms.items():
+ rows[name]={
+  'text':text,'codepoints':['U+%04X'%ord(c) for c in text],
+  'normalized':normalize(text),'resolve':svc.resolve(text),'resolve_fuzzy':svc.resolve_fuzzy(text),
+  'suggest':svc.suggest(text),'projection':getattr(resolve_projection(text),'surface',None),
+  'projection_suggest':[x.surface for x in suggest_projection(text)],
+ }
+predecessors=svc.predecessor_ids(target)
+links=[]
+for current in predecessors:
+ resolved=_resolve_neighbor('Paște',current,current)
+ links.append({'current':current,'current_label':svc.label(current),'linked':svc.link(current,target) is not None,'resolved':resolved})
+node=svc.node(target)
+out={
+ 'pasta_node':{'id':node.id,'label':node.label_ro,'description':node.description,'aliases':list(node.aliases)},
+ 'holiday_exact_node_present':any(normalize(svc.label(i))==normalize('Paște') and i!=target for i in svc.all_ids()),
+ 'masa_de_paste':{'resolve':svc.resolve('Masa de Paște'),'id':'n_gas_masa_paste'},
+ 'forms':rows,'lant_predecessor_bypass':links,
+}
+path='/home/dobo/work/_temp/v76-romanian-input-senses/linguistic-review/current-behavior.json'
+open(path,'w').write(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps(out,ensure_ascii=False,indent=2))

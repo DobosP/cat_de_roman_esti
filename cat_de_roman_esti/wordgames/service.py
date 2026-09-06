@@ -70,6 +70,18 @@ _REVIEWED_FUZZY_DENY_KEYS = frozenset(
     normalize(surface) for surface in REVIEWED_FUZZY_DENY_SURFACES
 )
 
+# These complete accented forms have reviewed senses absent from the KG. Folding them
+# would play the unrelated pasta label/alias instead. Keep the valid unaccented forms
+# and qualified compounds available; this is not a general diacritic rule (ADR-0107).
+_REVIEWED_UNRESOLVED_SPELLINGS = frozenset({"paște", "paștele"})
+_ROMANIAN_COMMA_BELOW = str.maketrans({"ş": "ș", "ţ": "ț"})
+
+
+def is_reviewed_unresolved_spelling(text: str) -> bool:
+    """Recognize the finite sense exclusions before accent folding or correction."""
+    spelling = unicodedata.normalize("NFKC", text).casefold().translate(_ROMANIAN_COMMA_BELOW)
+    return " ".join(spelling.split()) in _REVIEWED_UNRESOLVED_SPELLINGS
+
 
 @dataclass
 class WordGameService:
@@ -129,7 +141,7 @@ class WordGameService:
 
     def resolve(self, text: str) -> str | None:
         """Map free-typed text to a node id (exact id or normalized label), else None."""
-        if not text:
+        if not text or is_reviewed_unresolved_spelling(text):
             return None
         key = normalize(text)
         return self._index.get(key)
@@ -145,6 +157,8 @@ class WordGameService:
         this only powers advisory hints; actionable or confirmable correction is
         :meth:`resolve_fuzzy`'s (much stricter) job.
         """
+        if is_reviewed_unresolved_spelling(text):
+            return []
         key = normalize(text)
         if not key:
             return []
@@ -178,6 +192,8 @@ class WordGameService:
         polysemous surfaces is denied before scoring (ADR-0096), so typo confidence cannot
         silently override a vocabulary rejection.
         """
+        if is_reviewed_unresolved_spelling(text):
+            return None
         key = normalize(text)
         if not key:
             return None

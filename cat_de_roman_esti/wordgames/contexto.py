@@ -46,7 +46,13 @@ from .contexto_projection import (
     suggest_projection,
 )
 from .packs import get_pack
-from .service import SessionCapacityError, SessionStore, daily_seed, get_service
+from .service import (
+    SessionCapacityError,
+    SessionStore,
+    daily_seed,
+    get_service,
+    is_reviewed_unresolved_spelling,
+)
 
 GAME_KEY = "contexto"
 _DIFFICULTIES = ("usor", "normal", "greu")
@@ -828,9 +834,10 @@ class GuessView(ContractAPIView):
             raise http_error(400, "Scrie un concept")
 
         node_id = svc.resolve(text)
+        unresolved_spelling = is_reviewed_unresolved_spelling(text)
         projection: ProjectionTerm | None = None
         corrected = False
-        if node_id is None:
+        if node_id is None and not unresolved_spelling:
             # Contexto's extra vocabulary is exact-surface only and is checked before
             # fuzzy KG correction, so an authored everyday word cannot be reinterpreted
             # as a similarly spelled historical/technical concept.
@@ -886,7 +893,7 @@ class GuessView(ContractAPIView):
                 ):
                     continue
                 kg_suggestions.append(label)
-            projected_suggestions = [
+            projected_suggestions = [] if unresolved_spelling else [
                 term.label
                 for term in suggest_projection(text)
                 if _feedback_anchor_id(svc, term.anchor_id, session.target)

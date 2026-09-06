@@ -46,6 +46,7 @@ from .service import (
     WordGameService,
     daily_seed,
     get_service,
+    is_reviewed_unresolved_spelling,
     normalize,
 )
 
@@ -182,6 +183,8 @@ def _resolve_neighbor(text: str, current: str, target: str) -> str | None:
     text is truly ambiguous — disambiguation favours the player: hop to the candidate
     closest to the target, deterministically.
     """
+    if is_reviewed_unresolved_spelling(text):
+        return None
     svc = get_service()
     primary = svc.resolve(text)
     key = normalize(text)
@@ -774,6 +777,12 @@ class MoveView(ContractAPIView):
         svc = get_service()
         if not body.text or not body.text.strip():
             return Response({"ok": False, "last_error": "Scrie un concept"})
+        # ID-free choices and local homonym matching also fold accents. Preserve the
+        # reviewed unsupported sense before either shortcut can play an unrelated node.
+        if is_reviewed_unresolved_spelling(body.text):
+            return Response(
+                {"ok": False, "last_error": "Nu cunosc acest concept", "suggestions": []}
+            )
 
         prev = session.current
         # An ID-free chip submits its public label. Recompute the authored menu at this

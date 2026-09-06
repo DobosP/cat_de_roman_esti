@@ -2,9 +2,9 @@
 
 Valid until: the next verified quality wave — then refresh this living checklist.
 
-Target: public anonymous beta for Romanian players. **Technical candidate complete and locally
-verified.** Public beta release still requires the external checks below. Current facts and
-exact pins: [STATUS](STATUS.md).
+Target: public anonymous beta for Romanian players. V75 is locally verified; V76 adds a
+reviewed input-sense fix and is under final verification. Public beta release still requires
+the external checks below. Current facts and exact pins: [STATUS](STATUS.md).
 
 ## Completed sequence and acceptance
 
@@ -16,13 +16,15 @@ exact pins: [STATUS](STATUS.md).
 | V74 | Two tabs could record the same terminal result twice; queued scores could lose their resume pointer | Whole-board Web Lock plus one atomic score/receipt payload; bounded private receipts, storage-failure/concurrency cases, and all-six held-lock options/reload/close recovery |
 | V74 | Dependency and runtime risks lacked current evidence | Clean Node24 install/audit reports zero findings; initial transfer 118.73/120 KiB; cold/warm route and bounded RSS measurements archived with limits |
 | V75 | Alias growth did not add playable stock | Reusable pack-only import and independent-review serializer; five candidates screened, three dropped, two promoted; Contexto eligibility 201→203 with exact preservation/selection evidence |
+| V76 | Accented holiday spellings could play pasta or falsely win | `Paște`/`Paștele` are unresolved without attempts/moves/suggestions; valid food/compound inputs and 13,177 authored surface mappings remain intact; zero content/artifact changes |
 
-Final integrated gates: **951 backend tests on each of Python 3.12.3 and 3.14.4**, 53 accounts
+V75 integrated gates: **951 backend tests on each of Python 3.12.3 and 3.14.4**, 53 accounts
 tests on each runtime, **173 native frontend tests and 108 desktop/mobile browser checks**.
 Clean install, lint/typecheck/build, both content validators, Ruff, docs and whitespace passed.
 The npm audit reports zero vulnerabilities. Independent implementation and integration reviews
-found no remaining actionable issues. The last frontend code tested is `3c03ad0`; final status
-updates are documentation only. Accounts were enabled only for their isolated test suite.
+found no remaining actionable issues. Frontend code remains at the version tested in `3c03ad0`.
+V76 targeted checks and independent review passed; full results are tracked in STATUS.
+Accounts were enabled only for their isolated test suite.
 
 Decisions and full evidence: [ADR index](adr/README.md), [V75 review](reviews/v75-contexto-food/README.md),
 [runtime measurements](reviews/v74-runtime-measurements/README.md). Refactors preserve
@@ -55,8 +57,9 @@ or human subject-expert approval.
   and re-run public health/config/content/asset smokes. Keep production anonymous.
 
 The next useful product iteration is driven by those observations. The clearest existing
-content follow-up is the rejected batch's ingredient/holiday feedback, including Paște/Paste
-interpretation, under fresh independent reviews. Additional vocabulary totals alone do not
+content follow-up is the rejected batch's ingredient/holiday feedback under fresh independent
+reviews. V76 prevents the accented Paște/Paste misinterpretation; it adds no holiday concept
+or flour association. Additional vocabulary totals alone do not
 satisfy that problem. Accounts, derived-catalog expansion and another game require their
 separate documented gates.
 

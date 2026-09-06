@@ -1,11 +1,11 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-06 — V73–V75 technical candidate verified locally. Production last checked 2026-08-27.
+Last verified: 2026-09-06 — V76 input fix independently reviewed; full gates running. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-  Technical beta candidate complete; public rollout remains subject to the external gates below.
+  V75 technical candidate landed locally at `d127abb`; V76 is under final verification.
 - V73 shared session transactions and saved-game lifecycle landed locally at `f75a75c` (ADRs 0098–0100).
 - V74 restores transiently unavailable rounds, rejects stale resume responses, recovers terminal results,
   retains retry after failed fresh creation, and preserves terminal Contexto/Lanț state (ADR-0101).
@@ -14,6 +14,9 @@ Last verified: 2026-09-06 — V73–V75 technical candidate verified locally. Pr
   until recording settles, including options/exits and reloads (ADR-0105).
 - V75 adds two reviewed Contexto food targets after dropping three weak candidates. Reusable pack-only
   import/review tools and bound evidence: ADRs 0102/0104/0106; `docs/reviews/v75-contexto-food/README.md`.
+- V76 prevents accented `Paște`/`Paștele` from playing the unrelated pasta concept in Contexto/Lanț.
+  Ordinary `paste`/`pastele`, compounds and all 13,177 existing surface mappings remain intact (ADR-0107).
+  No content or frontend artifact changes; evidence: `docs/reviews/v76-romanian-input-senses/README.md`.
 - Served KG remains `fixture-v72-romanian-dishes-and-pastries-morphology`: 2,364 nodes / 9,217 edges /
   8,450 aliases / 180 puzzles. `kg_real.json` is a thin export and is not the served fixture.
 
@@ -64,6 +67,7 @@ mobile public content: `sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11f
 
 | Scope | Verified result |
 |---|---|
+| V76 targeted / independent review | 137 alias/Contexto/Lanț tests passed; independent 17-case regression rerun GREEN; full gates running |
 | V73 integrated baseline/refactors | 922 backend, 53 accounts, 163 native frontend, 48 browser passed |
 | Final backend Python 3.12.3 | 951 passed in 450.85 s; accounts 53 passed |
 | Final backend Python 3.14.4 | 951 passed in 262.15 s; accounts 53 passed |
@@ -73,7 +77,7 @@ mobile public content: `sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11f
 | Dependency/runtime | npm audit 0 findings; bounded offline latency/RSS evidence archived, including integrated V75 sample |
 | Final integration | independent reviews found no remaining actionable issues; both validators, Ruff, docs and whitespace GREEN |
 
-Final frontend code was tested at `3c03ad0`; subsequent candidate changes are documentation only.
+V75 frontend code was tested at `3c03ad0`; V76 changes backend input handling only.
 Commands and runtime paths: `docs/agent-testing.md`. Historical timing sensitivity and full prior
 verification records remain in WORKLOG. The local runtime sample includes 100 Contexto sessions /
 1,000 distinct guesses; its load, process-RSS limitations and latency data are in
@@ -81,7 +85,7 @@ verification records remain in WORKLOG. The local runtime sample includes 100 Co
 
 ## Remaining gates
 
-- Technical checks are complete; release protocol and external evidence checklist: `docs/BETA_CANDIDATE.md`.
+- Complete V76 full gates; release protocol and external evidence checklist: `docs/BETA_CANDIDATE.md`.
 - Owner selects feedback contact; player and real-device checks remain unrun. Reverify legal operator/contact
   configuration and legal pages per DEPLOY; independent content judgments here are from Codex agents.
 - Public rollout requires explicit authorization and live smoke/rollback verification. Technical candidate
@@ -91,4 +95,4 @@ verification records remain in WORKLOG. The local runtime sample includes 100 Co
 ## Doc map
 
 - `README.md` / `AGENTS.md`: orientation/contract; `docs/agent-map.md` / `docs/agent-testing.md`: routes/gates.
-- `docs/adr/` (newest 0106), `docs/reviews/`, WORKLOG: decisions/evidence/history.
+- `docs/adr/` (newest 0107), `docs/reviews/`, WORKLOG: decisions/evidence/history.

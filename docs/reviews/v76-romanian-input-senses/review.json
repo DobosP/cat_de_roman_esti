@@ -1,0 +1,47 @@
+{
+  "reviewer": "session_refactor",
+  "role": "independent_linguistic_safety_reviewer",
+  "scope": ["Paște", "paștele", "n_v3gas_paste"],
+  "verdict": "approve_bounded_proposal_with_conditions",
+  "decision": {
+    "reject_as_pasta": ["Paște", "paștele"],
+    "preserve_as_pasta": ["paste", "pastele", "paste făinoase"],
+    "proxy_to_masa_de_paste": false,
+    "add_graph_node": false
+  },
+  "required_conditions": [
+    "Use a diacritic-preserving whole-surface guard before accent-insensitive exact and fuzzy lookup.",
+    "Canonicalize case, Unicode composition, whitespace, and Romanian cedilla/comma variants.",
+    "Apply the guard to ordinary resolution, Contexto fallback/advice, and Lanț local visible-neighbor resolution.",
+    "Denied forms must not mutate score, guess history, or movement and must not suggest Paste as a correction."
+  ],
+  "evidence": [
+    {
+      "source": "DOOM 3 (2021), Paște",
+      "url": "https://dexonline.ro/definitie/pa%C8%99te/1258487",
+      "finding": "Paște/Paști names the holiday; articulated forms are Paștele/Paștile."
+    },
+    {
+      "source": "DOOM 3 (2021), pastă",
+      "url": "https://dexonline.ro/definitie/past%C4%83/1280847",
+      "finding": "The plural of pastă is unaccented paste."
+    },
+    {
+      "source": "DEX '09, pastă",
+      "url": "https://dexonline.ro/definitie/past%C4%83/866867",
+      "finding": "Pastă has plural paste; paste făinoase denotes pasta products."
+    },
+    {
+      "source": "DEX/DOOM entries, paștele",
+      "url": "https://dexonline.ro/definitie/pa%C8%99tele",
+      "finding": "Accented forms belong to holiday and recorded consecrated-food senses, not pasta."
+    }
+  ],
+  "demonstrated_code_risks": [
+    "Accent-folded normalization makes paște collide with paste.",
+    "Current suggestions offer Paste for Paște.",
+    "Contexto can fall through to unrelated projection suggestions after KG rejection.",
+    "Lanț local visible-neighbor matching can select pasta before generic resolver guards."
+  ],
+  "limitations": "Independent agent review, not a human SME review; direct doom.lingv.ro UI unavailable, so source-specific DOOM entries hosted by dexonline were used; no repository edits."
+}
