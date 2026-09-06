@@ -1,0 +1,47 @@
+{
+  "schema": "v79-independent-implementation-privacy-review-v1",
+  "reviewer": "session_refactor",
+  "role": "independent_implementation_privacy_reviewer",
+  "date": "2026-09-06",
+  "bindings": {
+    "baseline_commit": "010cfd176dcaa78aac660aea71e154691bd010f3",
+    "proposal_sha256": "sha256:58629365916673283e56c77edcd88afa7b75e63615e78863a909705865ef7fbd",
+    "candidate_projection_source_sha256": "sha256:a93dc84a6443abd19e34b9fa75df8df04f344cb50ef80e305c2063c6ed06f423",
+    "unchanged_contexto_source_sha256": "sha256:e248eed373c3a732f4316b52b2c9114942f3db29cf3594fcc8ec8ce99eed676d",
+    "v79_test_sha256": "sha256:804f8910ef4c8d09e0eb1e7f6609d3d37a87c6e2c32f5925029250a828ee2141",
+    "kg_sha256": "sha256:c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+    "factual_review_sha256": "sha256:b1ae2bc95892b296dff46a8a43367fbeafd2e1bb686a2633b14ec1d5119c79fd",
+    "impact_baseline_sha256": "sha256:79ca578f1380264d8d6b82dad07c06bf24fdccbbbd5af6fb00354d3654150c0f",
+    "impact_candidate_sha256": "sha256:a312c8afeb8182d0f8cbdf8f7690d32bd804d41d480bfb4dfa42fb9d6e13fe3c",
+    "impact_comparison_sha256": "sha256:48a28d21516c75c4c9da4bb8d4382a11cc091461115e7816fb1a7b577d1b936e"
+  },
+  "verdict": "defer_do_not_land_candidate_mapping",
+  "technical_assessment": {
+    "source_scope": "The runtime source diff moves only gem from the Miere override tuple to a one-surface Dulceață override tuple. No Contexto scorer, resolver, graph, pack or other-game source changes.",
+    "preserved_contract": "Surface/key gem, domain ingrediente, explicit mapping kind, rank penalty 1 and public ID ctxp_fab0f46e7bcd5932442e are exact. The other 472 projection rows are byte-canonically pinned.",
+    "nonwinning": "Actual-route tests prove projected Gem does not win when Dulceață is hidden, remains rank >=2/closeness <100, and direct dulceață still wins at rank 1.",
+    "privacy": "Actual-route payloads omit target/solution, target ID/label and anchor_id. The Clătite response is also asserted not to contain the private Dulceață anchor. A real gemm typo suggests Gem for a nonsecret target but suppresses Gem and Dulceață when the private anchor is the hidden target.",
+    "state_behavior": "First guess, normalized repeat, attempt count and resumed guesses are covered. The synthetic public ID remains stable.",
+    "cross_game_and_artifacts": "Lanț rejects gem without mutation. KG, games pack, board rankings, derived catalog and mobile pack hashes remain exact.",
+    "focused_verification": "Independent run: PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest -q tests/test_v79_gem_feedback.py => 6 passed; scoped ruff and git diff --check passed."
+  },
+  "blocking_finding": {
+    "severity": "blocking_gameplay_semantics",
+    "location": "cat_de_roman_esti/wordgames/contexto_projection.py anchor override for gem",
+    "finding": "A shared Dulceață anchor fixes Clătite but inherits Dulceață's full graph neighborhood for every Contexto target. The all-approved-target sweep finds 13 newly warm eligible gastronomie targets. Several are demonstrably misleading: Gem becomes Cald for Grătarul de 1 Mai and Murături, and Călduț for Ciorbă rădăuțeană, Fasole cu ciolan, Must și pastramă, Șaorma cu de toate, Mămăligă and Salată de boeuf. This violates the proposal's goal of honest feedback even though the mapping itself is lexically closer than Miere.",
+    "evidence": {
+      "approved_targets_swept": 207,
+      "eligible_targets": 203,
+      "projection_terms": 473,
+      "newly_warm_eligible_gastronomie_targets": 13,
+      "clatite_before": "rank 1699 / Inghetat",
+      "clatite_after": "rank 8 / Fierbinte",
+      "all_sweep_targets_hidden": true,
+      "mapping_change_is_only_expected_gem_anchor": true
+    },
+    "required_disposition": "Do not land the proposed shared-anchor mapping. Retain the V78 defer until a separately reviewed narrower mechanism or topology change avoids savory spillover; such redesign is outside this review."
+  },
+  "privacy_findings": [],
+  "implementation_findings": [],
+  "limits": "The source implementation is technically narrow and its focused privacy/state tests are adequate for the stated contract. The blocking verdict is driven by measured public feedback semantics across the served Contexto inventory. No full suite or human playtest was performed, and no repository file was edited by this reviewer."
+}

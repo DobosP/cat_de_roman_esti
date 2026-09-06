@@ -1,12 +1,12 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-06 — V78 candidate review verified locally. Production last checked 2026-08-27.
+Last verified: 2026-09-06 — V79 Gem feedback verified locally. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
   V75 landed at `d127abb`; V76 at `9ef9dc7`; V77 at `9abbc52`, all locally.
-  V78 completes fresh dessert-target screening with two drops and no served-content change.
+  V78 at `010cfd1` deferred both dessert candidates; V79 repairs bounded Gem feedback.
   Technical candidate complete; public rollout remains subject to the external gates below.
 - V73 shared session transactions and saved-game lifecycle landed locally at `f75a75c` (ADRs 0098–0100).
 - V74 restores transiently unavailable rounds, rejects stale resume responses, recovers terminal results,
@@ -25,6 +25,9 @@ Last verified: 2026-09-06 — V78 candidate review verified locally. Production 
 - V78 re-reviews Cozonac/Clătite using 68 ordinary API probes: cold Nucă and frozen Gem
   still contradict obvious filling guesses. Both raw candidates are dropped before staging (ADR-0109);
   evidence: `docs/reviews/v78-dessert-targets/README.md`. No IDs, rows, mappings or artifacts change.
+- V79 gives Gem an authored strong, direct Dulceață neighborhood while retaining its Miere fallback.
+  Papanași improves; the other 206 approved targets stay exact. All 473 terms remain unchanged;
+  same helper protects scoring/suggestions and exact wins (ADR-0110). No target is promoted.
 - Served KG is `fixture-v77-flour-associations`: 2,364 nodes / 9,219 edges /
   8,450 aliases / 180 puzzles. `kg_real.json` is a thin export and is not the served fixture.
 
@@ -73,38 +76,32 @@ mobile public content: `sha256:7e90ec33dfddf74723dcea1ffc0e787c58ee8ae1f457b7152
 
 ## Verification
 
-V78: 68 API probes independently reproduce byte-exact; 91 focused Contexto/V76/V77 tests pass
-on Python 3.12.3 and 3.14.6. Both validators and bound raw-candidate preflight pass; all nine
-served/derived/ledger artifacts match V77 exactly. The frontend clean install, 173 native tests,
-lint/typecheck and retained bundle check pass (Node 24.19.0/npm 11.17.0; zero audit findings).
-Ruff, docs and whitespace pass. V78 changes only review/status documentation; no full backend,
-accounts or browser suite was rerun. Exact V78 checks: `docs/reviews/v78-dessert-targets/verification.json`.
-The unchanged runtime retains the V77 integration evidence below.
+V79 verification uses the final bounded implementation. Exact commands and source bindings:
+`docs/reviews/v79-gem-feedback/verification.json`. V77/V78 records remain historical evidence.
 
 | Scope | Verified result |
 |---|---|
-| V77 targeted / independent review | 19 ingredient/allocator/V43 checks passed independently; factual, impact, implementation and docs reviews complete |
-| V77 backend Python 3.12.3 | 983 passed in 233.94 s; accounts 53 passed in 1.98 s |
-| V77 backend Python 3.14.6 | 983 passed in 204.06 s; accounts 53 passed in 1.81 s |
-| V77 frontend, Node 24.20.0 / npm 11.19.0 | clean install; 173 native passed; lint/typecheck GREEN; npm audit zero findings |
-| V77 real-BFF browser run | 108 desktop/mobile checks passed in 4.2 min against the final two-edge fixture |
-| Unchanged frontend build | V75 assets retained; typecheck/bundle check GREEN, 118.73/120 KiB initial gzip; backend-only V77 did not rebuild them |
-| V77 content preservation | 620 pack/ranking rows, 336 frozen boards, 180 puzzles exact; both validators GREEN; repeated apply fails without mutation |
-| Dependency/runtime | Prior bounded offline latency/RSS evidence retained; no new runtime/session code or dependencies |
-| Final integration | No remaining review findings; Ruff, docs and whitespace GREEN; current pins corrected without rewriting historical evidence |
+| V79 focused / independent review | 13 focused regressions; independent V79/V44 run 25 passed; factual, impact and implementation reviews approved |
+| V79 backend Python 3.12.3 | 996 passed in 278.39 s; accounts 53 passed in 1.99 s |
+| V79 backend Python 3.14.6 | 996 passed in 247.49 s; accounts 53 passed in 2.12 s |
+| V79 frontend, Node 24.19.0 / npm 11.17.0 | clean install; 173 native passed; lint/typecheck GREEN; npm audit zero findings |
+| V79 real-BFF browser run | 108 desktop/mobile checks passed in 4.2 min against the final bounded runtime |
+| V79 content preservation | All nine generated/ledger artifacts exact; both validators GREEN; all 473 original projection terms exact |
+| V79 impact / privacy | 207 approved targets swept: only Papanași changes; 206 exact. Six of 2,364 nodes borrow Dulceață; Socată excluded; hidden/nonwinning behavior preserved |
+| Unchanged frontend build | V75 assets retained; typecheck/bundle GREEN, 118.73/120 KiB initial gzip; no frontend source changed |
+| Final integration | No remaining source/test review finding; Ruff, docs and whitespace GREEN |
 
-Exact commands, reviewed scope, intermediate findings and final results:
-`docs/reviews/v77-flour-associations/verification.json`. V76 verification is preserved at `9ef9dc7`.
-Commands and runtime paths: `docs/agent-testing.md`. Historical timing sensitivity and full prior
-verification records remain in WORKLOG. The local runtime sample includes 100 Contexto sessions /
-1,000 distinct guesses; its load, process-RSS limitations and latency data are in
-`docs/reviews/v74-runtime-measurements/README.md`.
+The first global Gem anchor trial was rejected for misleading savory feedback. The final
+rule excludes weak, reversed, distractor and indirect routes; no new per-session field/cache.
+V78's 68-probe replay changes only Gem→Clătite; 67 responses remain exact. Full before/after
+receipt and reproducible runners: `docs/reviews/v79-gem-feedback/README.md`.
+Commands/runtime paths: `docs/agent-testing.md`; historical full verification stays in WORKLOG.
+Prior bounded latency/RSS measurements retain their stated limits in the V74 review archive.
 
 ## Remaining gates
 
-- Technical gates retain V77 evidence. Next: review the Gem projection’s honey anchor and measure
-  a distinct Dulceață-based feedback alternative; no future mapping/promotion is approved.
-  Cozonac’s nut route and bread remain deferred.
+- Next content step: freshly review Clătite after the bounded Gem repair; no promotion is implied.
+  Cozonac’s nut/Gem routes and bread remain deferred; widening local feedback needs new review.
   Release protocol and external evidence checklist: `docs/BETA_CANDIDATE.md`.
 - Owner selects feedback contact; player and real-device checks remain unrun. Reverify legal operator/contact
   configuration and legal pages per DEPLOY; independent content judgments here are from Codex agents.
@@ -115,4 +112,4 @@ verification records remain in WORKLOG. The local runtime sample includes 100 Co
 ## Doc map
 
 - `README.md` / `AGENTS.md`: orientation/contract; `docs/agent-map.md` / `docs/agent-testing.md`: routes/gates.
-- `docs/adr/` (newest 0109), `docs/reviews/`, WORKLOG: decisions/evidence/history.
+- `docs/adr/` (newest 0110), `docs/reviews/`, WORKLOG: decisions/evidence/history.

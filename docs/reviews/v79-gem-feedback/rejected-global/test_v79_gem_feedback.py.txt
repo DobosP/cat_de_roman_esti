@@ -1,0 +1,207 @@
+"""V79: Gem remains a Contexto-only projection with dessert-coherent feedback."""
+
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path
+
+import pytest
+
+pytest.importorskip("django")
+
+from django.test import Client  # noqa: E402
+
+from cat_de_roman_esti.wordgames import contexto, lant  # noqa: E402
+from cat_de_roman_esti.wordgames.contexto_projection import (  # noqa: E402
+    PROJECTION_TERMS,
+    resolve_projection,
+    suggest_projection,
+)
+from cat_de_roman_esti.wordgames.service import get_service  # noqa: E402
+
+ROOT = Path(__file__).resolve().parents[1]
+CLATITE = "n_v3gas_clatite"
+DULCEATA = "n_v17gas_dulceata"
+MIERE = "n_v24_food_breakfast_miere"
+UNT = "n_v24_food_breakfast_unt"
+GEM_PUBLIC_ID = "ctxp_fab0f46e7bcd5932442e"
+_NON_GEM_PROJECTIONS_SHA256 = "58b711378697a49d31b7fd77ace766caa2cb051f2cd2d687b96d12ff86396014"
+ARTIFACT_SHA256 = {
+    "cat_de_roman_esti/fixtures/kg_sample.json": (
+        "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370"
+    ),
+    "cat_de_roman_esti/fixtures/games_pack.json": (
+        "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5"
+    ),
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": (
+        "53c2542b845d2560a900712381ab4c28cb1b9789beaae9690639647871e905d3"
+    ),
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": (
+        "84aaa772746dac0eb4e1366738f467afad86c543c7430cb67810475d5a296878"
+    ),
+    "tests/fixtures/cat_mobile_app_pack_contract.json": (
+        "869499abccc3e6b5befe5d889a0e24c4d3bd67096c4d0a69c58d925680612a28"
+    ),
+}
+
+
+def _projection_rows_except_gem() -> list[tuple[str, str, str, int, str, str]]:
+    return [
+        (
+            term.surface,
+            term.anchor_id,
+            term.domain,
+            term.rank_penalty,
+            term.mapping_kind,
+            term.public_id,
+        )
+        for term in PROJECTION_TERMS
+        if term.key != "gem"
+    ]
+
+
+def _assert_secret_hidden(body: dict, target: str) -> None:
+    svc = get_service()
+    assert "target" not in body and "solution" not in body
+    assert target not in str(body)
+    assert svc.label(target) not in str(body)
+
+
+def _contexto_game(target: str) -> tuple[Client, str]:
+    game_id = contexto.store.create(contexto._build_session(target, "usor", None))
+    return Client(), f"/api/wordgames/contexto/games/{game_id}"
+
+
+def _guess(client: Client, url: str, text: str) -> dict:
+    return client.post(
+        url + "/guess", {"text": text}, content_type="application/json"
+    ).json()
+
+
+def test_gem_mapping_changes_only_its_private_anchor() -> None:
+    gem = resolve_projection("gem")
+    nuca = resolve_projection("nucă")
+    aluna = resolve_projection("alună")
+    assert gem is not None and nuca is not None and aluna is not None
+    assert (
+        gem.surface,
+        gem.key,
+        gem.domain,
+        gem.anchor_id,
+        gem.rank_penalty,
+        gem.mapping_kind,
+        gem.public_id,
+    ) == (
+        "gem",
+        "gem",
+        "ingrediente",
+        DULCEATA,
+        1,
+        "explicit",
+        GEM_PUBLIC_ID,
+    )
+    assert nuca.anchor_id == aluna.anchor_id == MIERE
+    blob = json.dumps(
+        _projection_rows_except_gem(), ensure_ascii=False, separators=(",", ":")
+    ).encode()
+    assert hashlib.sha256(blob).hexdigest() == _NON_GEM_PROJECTIONS_SHA256
+
+
+def test_gem_is_hot_for_clatite_and_repeats_survive_resume() -> None:
+    client, url = _contexto_game(CLATITE)
+    try:
+        first = _guess(client, url, "gem")
+        assert first["ok"] is True and first["won"] is False and first["attempts"] == 1
+        assert first["guess"] == {
+            "id": GEM_PUBLIC_ID,
+            "label": "Gem",
+            "distance": 1,
+            "rank": 8,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1,
+        }
+        _assert_secret_hidden(first, CLATITE)
+        assert "anchor_id" not in str(first)
+        assert DULCEATA not in str(first)
+        assert get_service().label(DULCEATA) not in str(first)
+        resumed = client.get(url).json()
+        assert resumed["attempts"] == 1 and resumed["guesses"] == first["guesses"]
+        repeated = _guess(client, url, " GEM ")
+        assert repeated["attempts"] == 1
+        assert repeated["feedback"]["kind"] == "repeat"
+    finally:
+        contexto.store.delete(url.rsplit("/", 1)[-1])
+
+
+def test_gem_never_wins_when_its_private_anchor_is_the_target() -> None:
+    client, url = _contexto_game(DULCEATA)
+    try:
+        projected = _guess(client, url, "gem")
+        assert projected["ok"] is True
+        assert projected["won"] is False and projected["attempts"] == 1
+        assert projected["guess"]["id"] == GEM_PUBLIC_ID
+        assert projected["guess"]["rank"] >= 2
+        assert projected["guess"]["closeness"] < 100
+        _assert_secret_hidden(projected, DULCEATA)
+        exact = _guess(client, url, "dulceață")
+        assert exact["won"] is True
+        assert exact["guess"]["id"] == DULCEATA
+        assert exact["guess"]["rank"] == 1
+    finally:
+        contexto.store.delete(url.rsplit("/", 1)[-1])
+
+
+def test_gem_typo_suggestion_is_public_only_when_its_anchor_is_not_secret() -> None:
+    terms = suggest_projection("gemm")
+    assert [term.label for term in terms] == ["Gem"]
+
+    client, url = _contexto_game(CLATITE)
+    try:
+        nonsecret = _guess(client, url, "gemm")
+        assert nonsecret["ok"] is False and nonsecret["attempts"] == 0
+        assert "Gem" in nonsecret["suggestions"]
+    finally:
+        contexto.store.delete(url.rsplit("/", 1)[-1])
+
+    client, url = _contexto_game(DULCEATA)
+    try:
+        secret = _guess(client, url, "gemm")
+        assert secret["ok"] is False and secret["attempts"] == 0
+        assert "Gem" not in secret["suggestions"]
+        assert "Dulceață" not in secret["suggestions"]
+        _assert_secret_hidden(secret, DULCEATA)
+    finally:
+        contexto.store.delete(url.rsplit("/", 1)[-1])
+
+
+def test_exact_miere_and_unt_stay_kg_words_and_lant_rejects_gem() -> None:
+    svc = get_service()
+    assert svc.resolve("miere") == MIERE and svc.resolve("unt") == UNT
+    assert resolve_projection("miere") is None and resolve_projection("unt") is None
+    start = svc.predecessor_ids(DULCEATA)[0]
+    game_id = lant.store.create(
+        lant.LantSession(start=start, target=DULCEATA, optimal=1, chain=[start])
+    )
+    try:
+        client = Client()
+        before = client.get(f"/api/wordgames/lant/games/{game_id}").json()
+        response = client.post(
+            f"/api/wordgames/lant/games/{game_id}/move",
+            {"text": "gem"},
+            content_type="application/json",
+        ).json()
+        assert response["ok"] is False
+        assert lant._resolve_neighbor("gem", start, DULCEATA) is None
+        assert client.get(f"/api/wordgames/lant/games/{game_id}").json() == before
+    finally:
+        lant.store.delete(game_id)
+
+
+def test_v79_keeps_all_served_artifact_bytes_pinned() -> None:
+    actual = {
+        relative: hashlib.sha256((ROOT / relative).read_bytes()).hexdigest()
+        for relative in ARTIFACT_SHA256
+    }
+    assert actual == ARTIFACT_SHA256

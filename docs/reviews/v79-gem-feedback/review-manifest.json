@@ -1,0 +1,57 @@
+{
+  "schema": "v79-bounded-feedback-review-v1",
+  "baseline_commit": "010cfd176dcaa78aac660aea71e154691bd010f3",
+  "reviewers": {
+    "implementation": "root",
+    "regression_tests": "wave_audit",
+    "independent_factual_and_privacy": "session_refactor",
+    "independent_impact": "resume_refactor",
+    "documentation": "wave_audit"
+  },
+  "coverage": "Single Gem policy; all 207 approved Contexto targets and 2,364 known concepts audited. No target promotion or human-playtest claim.",
+  "archive_files": {
+    "FACTUAL_REVIEW.md": "sha256:bd41e3092cea032e55590fb5ec7adc70d2d04dba0d42180b730721e0d8ec2cfe",
+    "IMPLEMENTATION_REVIEW.md": "sha256:97cbaad29e066b0a31be15f4891ff3fce9c22c044c46e6b4c038775ae74e5748",
+    "README.md": "sha256:bdaf57091c23dd37673412f066f7ab34f71e46846e168f298a8828c69847dc46",
+    "factual-review.json": "sha256:97b40e20d560a252662f810a65559733cbec40734b42b087413e6fc2675c6bc4",
+    "impact/baseline-bounded-replay.json": "sha256:d5fda11a6a0e8a0ba6611bb847cbb1dc9268075bd04d0313985c0524c9af0b70",
+    "impact/baseline.json": "sha256:79ca578f1380264d8d6b82dad07c06bf24fdccbbbd5af6fb00354d3654150c0f",
+    "impact/bounded-candidate.json": "sha256:1eed3edf4480a1102b5cc72b156b4bfda248c701402bd9fbfdecbec1057d8d40",
+    "impact/bounded-comparison.json": "sha256:154f491d7ad625665b7ec07ee6e278d527680f56c8c23e63688b50510b9aa1f8",
+    "impact/build_final_receipt.py.txt": "sha256:945079bf7debc268c13d7d13ef0f3e71abac1420ebaf9b985856fb9d06323b38",
+    "impact/candidate.json": "sha256:a312c8afeb8182d0f8cbdf8f7690d32bd804d41d480bfb4dfa42fb9d6e13fe3c",
+    "impact/comparison.json": "sha256:48a28d21516c75c4c9da4bb8d4382a11cc091461115e7816fb1a7b577d1b936e",
+    "impact/final-receipt.json": "sha256:8f8c53dbbaf6590fe05cf04098f40118cb1be487ea631d1a6e2be85b1cc29144",
+    "impact/final-report.md": "sha256:a55ef5014e9fe247aa67e332b514e33480832aaec005e76d8a318d998fe30796",
+    "impact/gem_feedback_impact.py.txt": "sha256:c759e51c601006389eef88c6d992e85f176d8dbaf11f969711ba735c024ce489",
+    "impact/proximity-simulation.json": "sha256:a497387bca6f0ed5fd8b51c1725f2a20cf941852228708a1f8cbd77773fa36c0",
+    "impact/simulate_proximity_policy.py.txt": "sha256:2cad29d077590a88261bcac556721848cb5934e5b8efc0a2cfc64171d32370ec",
+    "implementation-review.json": "sha256:05fa099a6efdbc62804b58d8a56a37d3b218a54c2726fae8ca3b47170f85379e",
+    "openers-delta.json": "sha256:b03324d20580a24d8a5ab77d91365bf18d4f3a75c55e7410037ee00b4e9d2492",
+    "preservation.json": "sha256:c04abb7435fde8650e578d236ab79845234db3b216f6ebf9b316893a1e91b8ed",
+    "proposal-bounded.json": "sha256:cde39575f4b3ac13a3139f00216af79f2e2edcfcfc9d7735286c7a213bf615b5",
+    "rejected-global/FACTUAL_REVIEW.md": "sha256:11ddcb6f05a3f00f2ec014f6775f721672ee28dcadd5363312d0f999938c37bf",
+    "rejected-global/IMPLEMENTATION_REVIEW.md": "sha256:fe941f0f944b9dd86c7fc56428bc0757735d3601163c8fceec235496b3ba6c42",
+    "rejected-global/contexto_projection.py.txt": "sha256:a93dc84a6443abd19e34b9fa75df8df04f344cb50ef80e305c2063c6ed06f423",
+    "rejected-global/factual-review.json": "sha256:b1ae2bc95892b296dff46a8a43367fbeafd2e1bb686a2633b14ec1d5119c79fd",
+    "rejected-global/implementation-review.json": "sha256:a9537625d5356af54c7211997711e23844347a204f5bb144235f31b7a2f9bd07",
+    "rejected-global/openers-after.json": "sha256:76d13a07cdac2b87efd1cf931628fbb6d12480192e2c9762c4a6ffa3314084e0",
+    "rejected-global/proposal.json": "sha256:58629365916673283e56c77edcd88afa7b75e63615e78863a909705865ef7fbd",
+    "rejected-global/test_v79_gem_feedback.py.txt": "sha256:804f8910ef4c8d09e0eb1e7f6609d3d37a87c6e2c32f5925029250a828ee2141",
+    "verification.json": "sha256:5e7bf5f8733cd3299e97f7a217e5e880f1b7bf20b25f8618df599f88cc1c0391"
+  },
+  "source_files": {
+    "cat_de_roman_esti/wordgames/contexto.py": "sha256:bdef59b96dd7f3b06321b20463987e7d4140625e60b07bc043383cd3caf3282f",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "sha256:d6b80f7cb7abcce77c64d04d94ff2cf7e178ffd6bb1d48cbd7b4a9e441fd9cb1",
+    "tests/test_v79_gem_feedback.py": "sha256:d387e166a7fe5cc473d2b64c86ab88e67280d47bc9d9778fac43b573ca4b210a",
+    "docs/adr/0110-use-fruit-preserve-feedback-for-gem.md": "sha256:e3145d58435bbd45e4367dd2e7ededfd4cf96c36d1b37fa2d48140e2e459ca35",
+    "docs/STATUS.md": "sha256:867ba85672e64b8fc7cf77b701ef0cce87abe27cdfb6efa32b40a0a5aaa7868d",
+    "docs/BETA_CANDIDATE.md": "sha256:6a509d0837a3fe0ee6a2cbf6624ff50212fa6c182e8d7c4261c709dbd1153a62",
+    "docs/CRITIQUE_RUBRIC.md": "sha256:29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3"
+  },
+  "notes": [
+    "Archive paths are relative to this review directory; original absolute scratch paths in raw receipts identify provenance and are mapped by matching file names/hashes.",
+    "The manifest excludes itself to avoid a circular hash.",
+    "Rejected-global artifacts and one-hop simulation are historical experiments, not the accepted implementation."
+  ]
+}

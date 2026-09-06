@@ -1,0 +1,93 @@
+{
+  "schema": "v79-independent-factual-semantic-review-v1",
+  "reviewer": "session_refactor",
+  "role": "independent_factual_semantic_reviewer",
+  "date": "2026-09-06",
+  "bindings": {
+    "baseline_commit": "010cfd176dcaa78aac660aea71e154691bd010f3",
+    "proposal_path": "/home/dobo/work/_temp/v79-gem-feedback/proposal.json",
+    "proposal_sha256": "sha256:58629365916673283e56c77edcd88afa7b75e63615e78863a909705865ef7fbd",
+    "kg_path": "cat_de_roman_esti/fixtures/kg_sample.json",
+    "kg_sha256": "sha256:c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+    "projection_source_path": "cat_de_roman_esti/wordgames/contexto_projection.py",
+    "projection_source_sha256": "sha256:f87364166b58ed2096a1d060ee94af95a2fb731813160d03ca8e58e2e0a31fe4",
+    "contexto_source_path": "cat_de_roman_esti/wordgames/contexto.py",
+    "contexto_source_sha256": "sha256:e248eed373c3a732f4316b52b2c9114942f3db29cf3594fcc8ec8ce99eed676d"
+  },
+  "proposal": {
+    "surface": "gem",
+    "old_anchor": "n_v24_food_breakfast_miere",
+    "recommended_anchor": "n_v17gas_dulceata",
+    "preserve": {
+      "domain": "ingrediente",
+      "rank_penalty": 1,
+      "mapping_kind": "explicit",
+      "public_id": "ctxp_fab0f46e7bcd5932442e",
+      "nonwinning": true
+    }
+  },
+  "verdict": "factually_supported_for_bounded_implementation_and_impact_review",
+  "findings": [
+    {
+      "topic": "lexical_semantics",
+      "judgment": "support",
+      "detail": "Official Romanian product rules define gem as a gelled mixture of sugars with fruit pulp or puree and water. DEX defines dulceață as fruit or petals boiled in sugar syrup. They are distinct preparations but share the specific fruit-preserve semantic neighborhood."
+    },
+    {
+      "topic": "old_anchor_comparison",
+      "judgment": "support_change",
+      "detail": "Romanian law defines miere as a natural sweet substance produced by Apis mellifera from nectar or plant/insect secretions. Sweetness and breakfast use are generic overlaps; honey lacks the fruit-preserve identity that gem shares with dulceață. Dulceață is therefore the more honest existing approximate feedback anchor."
+    },
+    {
+      "topic": "culinary_usage",
+      "judgment": "support",
+      "detail": "Romanian culinary media use both gem and dulceață as ordinary clătite fillings, including a menu account that lists both terms in parallel. The bound KG already links Dulceață directly to Clătite as an umplutură de clătite, so the proposed anchor reflects documented usage rather than an invented route."
+    },
+    {
+      "topic": "distinction_from_exact_alias",
+      "judgment": "must_preserve",
+      "detail": "Gem and dulceață differ in fruit form, consistency and conventional preparation; they are close concepts, not exact lexical equivalents. The proposal is acceptable only while gem remains a projection-only synthetic public guess with rank penalty 1 and nonwinning behavior, including when Dulceață is the hidden target."
+    },
+    {
+      "topic": "polysemy",
+      "judgment": "known_unchanged_limit",
+      "detail": "Gem is also first-person singular and third-person plural present of a geme; English-influenced uses may evoke a jewel, although standard Romanian uses gemă for that noun. The proposal does not add or broaden the surface: current code already accepts exact normalized gem under the ingrediente projection domain. Re-anchoring improves the authored food reading but cannot disambiguate sentence-free verb intent."
+    }
+  ],
+  "covered_scope": [
+    "exact proposal bytes and preserved projection fields",
+    "current gem projection entry and public synthetic ID",
+    "current Dulceață and Miere KG node meanings and incident culinary topology",
+    "Romanian legal and dictionary definitions of gem, dulceață and miere",
+    "Romanian culinary use of gem and dulceață as clătite fillings",
+    "homography and exact-win distinction"
+  ],
+  "recommendation": "Proceed with the single Contexto feedback-anchor change for testing and all-approved-target impact review. Do not create an alias, exact win, node, edge, pack row or target promotion. This factual recommendation does not establish gameplay fairness, privacy, regression safety or automatic promotion of Clătite.",
+  "sources": [
+    {
+      "url": "https://legislatie.just.ro/Public/DetaliiDocument/47448",
+      "use": "Official Romanian norm defining gem as sugars plus fruit pulp/puree and water with gel consistency."
+    },
+    {
+      "url": "https://dexonline.ro/intrare/dulcea%C8%9B%C4%83/17877",
+      "use": "Romanian dictionary record distinguishing dulceață, including the fruit/petals-in-sugar-syrup food sense."
+    },
+    {
+      "url": "https://legislatie.just.ro/Public/DetaliiDocument/226401",
+      "use": "Romanian apiculture law defining honey as a natural sweet substance produced by bees."
+    },
+    {
+      "url": "https://dexonline.ro/definitie/gem/definitii",
+      "use": "DEX entries for the fruit preserve and the homographic present-tense form of a geme."
+    },
+    {
+      "url": "https://www.protv.ro/emisiuni/vorbeste-lumea/articol/116358-majda-face-senzatie-la-vorbeste-lumea-care-este-secretul-clatitelor-care-au-innebunit-toata-echipa",
+      "use": "Current Romanian broadcast culinary use of dulceață as a clătite filling."
+    },
+    {
+      "url": "https://foodstory.protv.ro/eveniment/interviu-foodstory-doua-fete-indragostite-de-clatite-vand-bunatati-pe-doua-roti-la-creperie-d-rsquo-amour",
+      "use": "Romanian culinary account listing both gem and dulceață as parallel clătite fillings."
+    }
+  ],
+  "limitations": "Independent Codex-agent factual judgment, not a human linguistic or gameplay study. It reviews one already accepted projection surface and one proposed anchor substitution; cross-target ranking effects and code privacy must be reviewed separately after implementation."
+}

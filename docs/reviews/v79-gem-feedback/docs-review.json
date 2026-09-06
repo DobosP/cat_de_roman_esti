@@ -1,0 +1,34 @@
+{
+  "schema": "v79-final-docs-precision-review-v3",
+  "reviewer": "wave_audit",
+  "date": "2026-09-06",
+  "scope": [
+    "docs/reviews/v79-gem-feedback/README.md",
+    "docs/adr/0110-use-fruit-preserve-feedback-for-gem.md",
+    "docs/STATUS.md",
+    "docs/BETA_CANDIDATE.md",
+    "docs/reviews/v79-gem-feedback/verification.json",
+    "docs/reviews/v79-gem-feedback/review-manifest.json"
+  ],
+  "bindings": {
+    "readme_sha256": "sha256:bdaf57091c23dd37673412f066f7ab34f71e46846e168f298a8828c69847dc46",
+    "adr_0110_sha256": "sha256:e3145d58435bbd45e4367dd2e7ededfd4cf96c36d1b37fa2d48140e2e459ca35",
+    "status_sha256": "sha256:867ba85672e64b8fc7cf77b701ef0cce87abe27cdfb6efa32b40a0a5aaa7868d",
+    "beta_candidate_sha256": "sha256:6a509d0837a3fe0ee6a2cbf6624ff50212fa6c182e8d7c4261c709dbd1153a62",
+    "verification_sha256": "sha256:5e7bf5f8733cd3299e97f7a217e5e880f1b7bf20b25f8618df599f88cc1c0391",
+    "review_manifest_sha256": "sha256:fdcc702dcfc3fed574cb824467c0bca106811b98249f84202f2720ea079799d0",
+    "projection_source_sha256": "sha256:d6b80f7cb7abcce77c64d04d94ff2cf7e178ffd6bb1d48cbd7b4a9e441fd9cb1",
+    "contexto_source_sha256": "sha256:bdef59b96dd7f3b06321b20463987e7d4140625e60b07bc043383cd3caf3282f",
+    "v79_test_sha256": "sha256:d387e166a7fe5cc473d2b64c86ab88e67280d47bc9d9778fac43b573ca4b210a"
+  },
+  "verified_claims": {
+    "accepted_policy": "Gem retains its Miere projection row and borrows Dulceață only for self or a directed, non-distractor edge at strength >= 0.60; scoring and typo-suggestion filtering share the helper.",
+    "reviewed_effective_targets": ["Dulceață", "Papanași", "Magiun de Topoloveni", "Conserve de iarnă", "Clătite", "Fruct"],
+    "rejected_experiments": "The global substitution was rejected after 13 newly warm eligible food targets. One-hop-only borrowing was simulated, not landed, and includes Socată through its weak 0.45 edge.",
+    "impact": "The final receipt records 207 approved / 203 eligible API probes: Papanași alone changes and the other 206 Gem responses are exact.",
+    "verification": "The final bounded implementation records 996 tests on Python 3.12 and 3.14, 53 accounts per runtime, 13 focused, 173 native frontend and 108 browser checks; the archive distinguishes the earlier 995-test pre-inventory run."
+  },
+  "archive_validation": "All 29 archive-file and seven source-file hashes in review-manifest.json match current bytes. verification.json and the populated manifest resolve the prior missing-receipt finding.",
+  "findings": [],
+  "verdict": "approve"
+}

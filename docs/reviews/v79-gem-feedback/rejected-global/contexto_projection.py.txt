@@ -944,7 +944,8 @@ _ANCHOR_CLUSTERS: tuple[tuple[str, tuple[str, ...]], ...] = (
         "n_v4gas_legume",
         ("linte", "năut", "broccoli", "avocado", "țelină"),
     ),
-    ("n_v24_food_breakfast_miere", ("gem", "nucă", "alună")),
+    ("n_v17gas_dulceata", ("gem",)),
+    ("n_v24_food_breakfast_miere", ("nucă", "alună")),
     ("n_v3gas_cafea", ("cacao", "cappuccino", "espresso", "cafea cu lapte")),
     ("n_v24_food_snack_ceai", ("ceai verde", "ciocolată caldă")),
     ("n_v4gas_lapte", ("milkshake", "smoothie")),
@@ -1187,22 +1188,6 @@ def _build_terms() -> tuple[ProjectionTerm, ...]:
 
 PROJECTION_TERMS = _build_terms()
 PROJECTION_INDEX = {term.key: term for term in PROJECTION_TERMS}
-
-
-@dataclass(frozen=True, slots=True)
-class ProjectionNeighborhood:
-    """Borrow only reviewed, strong direct associations of another concept."""
-
-    anchor_id: str
-    min_strength: float
-
-
-# These are local feedback improvements, not global synonym mappings (ADR-0110).
-# Gem may borrow the fruit-preserve neighborhood, excluding the weak seasonal
-# Socată edge and all multi-hop routes. Elsewhere its existing anchor is retained.
-PROJECTION_NEIGHBORHOODS: dict[str, ProjectionNeighborhood] = {
-    "gem": ProjectionNeighborhood("n_v17gas_dulceata", min_strength=0.60),
-}
 
 # One human-legible representative per authored domain. Tests pin these semantic
 # pairings and require the audit to cover every domain, preventing a later mechanical

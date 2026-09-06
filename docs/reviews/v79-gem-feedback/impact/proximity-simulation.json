@@ -1,0 +1,412 @@
+{
+  "kind": "counterfactual-policy-simulation-from-real-endpoint-captures",
+  "bindings": {
+    "baseline_json_sha256": "79ca578f1380264d8d6b82dad07c06bf24fdccbbbd5af6fb00354d3654150c0f",
+    "candidate_json_sha256": "a312c8afeb8182d0f8cbdf8f7690d32bd804d41d480bfb4dfa42fb9d6e13fe3c",
+    "baseline": {
+      "phase": "baseline",
+      "git_head": "010cfd176dcaa78aac660aea71e154691bd010f3",
+      "source_sha256": "f87364166b58ed2096a1d060ee94af95a2fb731813160d03ca8e58e2e0a31fe4",
+      "kg_sha256": "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+      "pack_sha256": "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5",
+      "rankings_sha256": "53c2542b845d2560a900712381ab4c28cb1b9789beaae9690639647871e905d3",
+      "derived_sha256": "84aaa772746dac0eb4e1366738f467afad86c543c7430cb67810475d5a296878",
+      "approved_targets": 207,
+      "eligible_targets": 203,
+      "projection_terms": 473
+    },
+    "global_candidate": {
+      "phase": "candidate",
+      "git_head": "010cfd176dcaa78aac660aea71e154691bd010f3",
+      "source_sha256": "a93dc84a6443abd19e34b9fa75df8df04f344cb50ef80e305c2063c6ed06f423",
+      "kg_sha256": "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+      "pack_sha256": "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5",
+      "rankings_sha256": "53c2542b845d2560a900712381ab4c28cb1b9789beaae9690639647871e905d3",
+      "derived_sha256": "84aaa772746dac0eb4e1366738f467afad86c543c7430cb67810475d5a296878",
+      "approved_targets": 207,
+      "eligible_targets": 203,
+      "projection_terms": 473
+    }
+  },
+  "dulceata_directed_non_distractor_neighborhood": [
+    {
+      "target_id": "n_v17gas_dulceata",
+      "target_label": "Dulceață",
+      "distance": 0,
+      "edge": null,
+      "approved_pack_rows": []
+    },
+    {
+      "target_id": "n_gas_papanasi",
+      "target_label": "Papanași",
+      "distance": 1,
+      "edge": {
+        "relation": "related_to",
+        "label": "se toarnă peste papanași",
+        "strength": 0.7
+      },
+      "approved_pack_rows": [
+        {
+          "id": "ct_gastronomie_128",
+          "pilot_eligible": true
+        }
+      ]
+    },
+    {
+      "target_id": "n_v11gas_magiun_topoloveni",
+      "target_label": "Magiun de Topoloveni",
+      "distance": 1,
+      "edge": {
+        "relation": "same_category",
+        "label": "dulciuri de borcan din fructe",
+        "strength": 0.6
+      },
+      "approved_pack_rows": []
+    },
+    {
+      "target_id": "n_v18gas_socata",
+      "target_label": "Socată",
+      "distance": 1,
+      "edge": {
+        "relation": "related_to",
+        "label": "preparate de casă sezoniere",
+        "strength": 0.45
+      },
+      "approved_pack_rows": []
+    },
+    {
+      "target_id": "n_v2gas_conserve_iarna",
+      "target_label": "Conserve de iarnă",
+      "distance": 1,
+      "edge": {
+        "relation": "is_a",
+        "label": "conservă dulce de iarnă",
+        "strength": 0.8
+      },
+      "approved_pack_rows": []
+    },
+    {
+      "target_id": "n_v3gas_clatite",
+      "target_label": "Clătite",
+      "distance": 1,
+      "edge": {
+        "relation": "related_to",
+        "label": "umplutură de clătite",
+        "strength": 0.7
+      },
+      "approved_pack_rows": []
+    },
+    {
+      "target_id": "n_v4gas_fruct",
+      "target_label": "Fruct",
+      "distance": 1,
+      "edge": {
+        "relation": "related_to",
+        "label": "făcută din fructe",
+        "strength": 0.85
+      },
+      "approved_pack_rows": []
+    }
+  ],
+  "policies": {
+    "distance_0_or_1": {
+      "approved_targets_using_dulceata": [
+        {
+          "pack_id": "ct_gastronomie_128",
+          "target_id": "n_gas_papanasi",
+          "target_label": "Papanași",
+          "pilot_eligible": true,
+          "selected_anchor": "n_v17gas_dulceata",
+          "feedback": {
+            "id": "ctxp_fab0f46e7bcd5932442e",
+            "label": "Gem",
+            "distance": 1,
+            "rank": 13,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          },
+          "target_hidden": true
+        }
+      ],
+      "counts": {
+        "approved": 207,
+        "eligible": 203,
+        "using_dulceata": 1,
+        "eligible_using_dulceata": 1,
+        "all_hidden": true
+      }
+    },
+    "self_or_direct_strength_gte_0_60": {
+      "approved_targets_using_dulceata": [
+        {
+          "pack_id": "ct_gastronomie_128",
+          "target_id": "n_gas_papanasi",
+          "target_label": "Papanași",
+          "pilot_eligible": true,
+          "selected_anchor": "n_v17gas_dulceata",
+          "feedback": {
+            "id": "ctxp_fab0f46e7bcd5932442e",
+            "label": "Gem",
+            "distance": 1,
+            "rank": 13,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          },
+          "target_hidden": true
+        }
+      ],
+      "counts": {
+        "approved": 207,
+        "eligible": 203,
+        "using_dulceata": 1,
+        "eligible_using_dulceata": 1,
+        "all_hidden": true
+      }
+    }
+  },
+  "strength_policy_fixed_target_public_probes": {
+    "n_v24_food_breakfast_miere": {
+      "selected_capture": "before",
+      "probes": {
+        "gem": {
+          "status": 200,
+          "body": {
+            "ok": true,
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2288,
+            "guess": {
+              "id": "ctxp_fab0f46e7bcd5932442e",
+              "label": "Gem",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "ctxp_fab0f46e7bcd5932442e",
+                "label": "Gem",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              }
+            ]
+          },
+          "target_hidden": true
+        },
+        "gem_typo": {
+          "status": 200,
+          "body": {
+            "ok": false,
+            "message": "Nu cunosc acest concept",
+            "suggestions": [],
+            "attempts": 0,
+            "won": false,
+            "reachable_count": 2288,
+            "guesses": []
+          },
+          "target_hidden": true
+        },
+        "exact": {
+          "status": 200,
+          "body": {
+            "ok": true,
+            "attempts": 1,
+            "won": true,
+            "reachable_count": 2288,
+            "guess": {
+              "id": "n_v24_food_breakfast_miere",
+              "label": "Miere",
+              "distance": 0,
+              "rank": 1,
+              "temperature": "Gasit",
+              "closeness": 100,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "n_v24_food_breakfast_miere",
+                "label": "Miere",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 1
+              }
+            ]
+          },
+          "target_hidden": false
+        }
+      }
+    },
+    "n_v17gas_dulceata": {
+      "selected_capture": "after",
+      "probes": {
+        "gem": {
+          "status": 200,
+          "body": {
+            "ok": true,
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2288,
+            "guess": {
+              "id": "ctxp_fab0f46e7bcd5932442e",
+              "label": "Gem",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "ctxp_fab0f46e7bcd5932442e",
+                "label": "Gem",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              }
+            ]
+          },
+          "target_hidden": true
+        },
+        "gem_typo": {
+          "status": 200,
+          "body": {
+            "ok": false,
+            "message": "Nu cunosc acest concept",
+            "suggestions": [],
+            "attempts": 0,
+            "won": false,
+            "reachable_count": 2288,
+            "guesses": []
+          },
+          "target_hidden": true
+        },
+        "exact": {
+          "status": 200,
+          "body": {
+            "ok": true,
+            "attempts": 1,
+            "won": true,
+            "reachable_count": 2288,
+            "guess": {
+              "id": "n_v17gas_dulceata",
+              "label": "Dulceață",
+              "distance": 0,
+              "rank": 1,
+              "temperature": "Gasit",
+              "closeness": 100,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "n_v17gas_dulceata",
+                "label": "Dulceață",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 1
+              }
+            ]
+          },
+          "target_hidden": false
+        }
+      }
+    },
+    "n_v3gas_clatite": {
+      "selected_capture": "after",
+      "probes": {
+        "gem": {
+          "status": 200,
+          "body": {
+            "ok": true,
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2288,
+            "guess": {
+              "id": "ctxp_fab0f46e7bcd5932442e",
+              "label": "Gem",
+              "distance": 1,
+              "rank": 8,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "ctxp_fab0f46e7bcd5932442e",
+                "label": "Gem",
+                "distance": 1,
+                "rank": 8,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 1
+              }
+            ]
+          },
+          "target_hidden": true
+        },
+        "gem_typo": {
+          "status": 200,
+          "body": {
+            "ok": false,
+            "message": "Nu cunosc acest concept. Poate cautai: Gem?",
+            "suggestions": [
+              "Gem"
+            ],
+            "attempts": 0,
+            "won": false,
+            "reachable_count": 2288,
+            "guesses": []
+          },
+          "target_hidden": true
+        },
+        "exact": {
+          "status": 200,
+          "body": {
+            "ok": true,
+            "attempts": 1,
+            "won": true,
+            "reachable_count": 2288,
+            "guess": {
+              "id": "n_v3gas_clatite",
+              "label": "Clătite",
+              "distance": 0,
+              "rank": 1,
+              "temperature": "Gasit",
+              "closeness": 100,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "n_v3gas_clatite",
+                "label": "Clătite",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 1
+              }
+            ]
+          },
+          "target_hidden": false
+        }
+      }
+    }
+  },
+  "review_finding": {
+    "distance_only_no_go_target": "n_v18gas_socata",
+    "reason": "distance-only borrowing would make Gem a distance-1/Fierbinte proxy through the weak generic 0.45 seasonal-home-preparations edge",
+    "minimum_credible_boundary": "self or reviewed directed edge strength >= 0.60; an explicit reviewed allowlist is safer than treating future strong edges as automatically honest"
+  }
+}

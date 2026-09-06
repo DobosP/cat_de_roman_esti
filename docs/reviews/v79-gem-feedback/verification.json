@@ -1,0 +1,210 @@
+{
+  "date": "2026-09-06",
+  "baseline_commit": "010cfd176dcaa78aac660aea71e154691bd010f3",
+  "runtimes": {
+    "python312": "3.12.3",
+    "python314": "3.14.6",
+    "node": "24.19.0",
+    "npm": "11.17.0"
+  },
+  "source_and_tests": {
+    "cat_de_roman_esti/wordgames/contexto.py": "bdef59b96dd7f3b06321b20463987e7d4140625e60b07bc043383cd3caf3282f",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "d6b80f7cb7abcce77c64d04d94ff2cf7e178ffd6bb1d48cbd7b4a9e441fd9cb1",
+    "tests/test_v79_gem_feedback.py": "d387e166a7fe5cc473d2b64c86ab88e67280d47bc9d9778fac43b573ca4b210a"
+  },
+  "checks": {
+    "backend312": {
+      "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest -q -o addopts=\"\"",
+      "exit_code": 0,
+      "log_sha256": "6698ac4601e0a20f120b0b02038f36334a9906bdaf9537fe5b8c1d08db5f235f",
+      "tail": [
+        "........................................................................ [ 72%]",
+        "........................................................................ [ 79%]",
+        "........................................................................ [ 86%]",
+        "........................................................................ [ 93%]",
+        "............................................................             [100%]",
+        "996 passed in 278.39s (0:04:38)"
+      ]
+    },
+    "backend314": {
+      "command": "PYTHONPATH=. <scratch>/py314/bin/python -m pytest -q -o addopts=\"\"",
+      "exit_code": 0,
+      "log_sha256": "5ab85c8c8372815244ab529d45c483d0d87cb8987dbf82a3e29adfd36e7db1dc",
+      "tail": [
+        "........................................................................ [ 72%]",
+        "........................................................................ [ 79%]",
+        "........................................................................ [ 86%]",
+        "........................................................................ [ 93%]",
+        "............................................................             [100%]",
+        "996 passed in 247.49s (0:04:07)"
+      ]
+    },
+    "accounts312": {
+      "command": "CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=. <python312> -m pytest tests/accounts -q -o addopts=\"\"",
+      "exit_code": 0,
+      "log_sha256": "d437e793c2a1244eb6081934778ac9c84bf8c15a0f1aa37227bf22013e9caba3",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 1.99s"
+      ]
+    },
+    "accounts314": {
+      "command": "CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=. <python314> -m pytest tests/accounts -q -o addopts=\"\"",
+      "exit_code": 0,
+      "log_sha256": "521333eae3bf46ecad983d6367168269f2f47dbd59c7cbc59d14971a685beb7e",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 2.12s"
+      ]
+    },
+    "focused": {
+      "command": "PYTHONPATH=. <python312> -m pytest tests/test_v79_gem_feedback.py -q -o addopts=\"\"",
+      "exit_code": 0,
+      "log_sha256": "499a67bff3d5411b5c5391eb0ed53e818c7522e93ed0c36c92c79e1ae33f8786",
+      "tail": [
+        ".............                                                            [100%]",
+        "13 passed in 0.37s"
+      ]
+    },
+    "fixture": {
+      "command": "PYTHONPATH=. <python312> scripts/validate_fixture.py",
+      "exit_code": 0,
+      "log_sha256": "cde1724e016e489b81ccb95fc6faa27573ebaff1a7ef550252aa1c076fe48e20",
+      "tail": [
+        "  [  ok] puzzle_ids_resolve           0 error(s)",
+        "  [  ok] puzzle_shortest_path         0 error(s)",
+        "  [  ok] puzzle_category_scope        0 error(s)",
+        "  [  ok] puzzle_distractor_shortcut   0 error(s)",
+        "------------------------------------------------------------",
+        "GREEN: fixture is valid (0 errors)"
+      ]
+    },
+    "pack": {
+      "command": "PYTHONPATH=. <python312> scripts/validate_games_pack.py",
+      "exit_code": 0,
+      "log_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+      "tail": [
+        "  unique_ids               ok",
+        "  playability              ok",
+        "  meta_counts              ok",
+        "  id_high_water            ok",
+        "",
+        "games pack GREEN"
+      ]
+    },
+    "frontend_install": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm ci",
+      "exit_code": 0,
+      "log_sha256": "da68658a58402877195f736178d6c1492617ae6078c53633423a7715665089af",
+      "tail": [
+        "added 171 packages, and audited 172 packages in 1s",
+        "",
+        "46 packages are looking for funding",
+        "  run `npm fund` for details",
+        "",
+        "found 0 vulnerabilities"
+      ]
+    },
+    "frontend_native": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm test",
+      "exit_code": 0,
+      "log_sha256": "572e05d18ca2d6b6c787a7b74df16623d105ff06ea49e3e3dd46589bf08f3e31",
+      "tail": [
+        "ℹ pass 173",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 374.184071"
+      ]
+    },
+    "frontend_lint": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm run lint",
+      "exit_code": 0,
+      "log_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 lint",
+        "> eslint .",
+        ""
+      ]
+    },
+    "frontend_typecheck": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm run typecheck",
+      "exit_code": 0,
+      "log_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 typecheck",
+        "> tsc --noEmit",
+        ""
+      ]
+    },
+    "frontend_bundle": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm run check:bundle",
+      "exit_code": 0,
+      "log_sha256": "ff5f74fc33a8767e2f3d406bf9184d98122b943cf9adbfdc7bc1ac45ff0b2be7",
+      "tail": [
+        "",
+        "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+        "     8.23 KiB  assets/index-DiCPhhaT.css",
+        "   110.50 KiB  assets/index-SV5smC6j.js",
+        "   118.73 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ]
+    },
+    "browser": {
+      "command": "cd frontend && PATH=<Node24>:/home/dobo/work/cat_de_roman_esti/.venv/bin:$PATH CDR_E2E_PORT=8153 CDR_E2E_OUTPUT_DIR=<scratch>/browser-results npm run test:e2e",
+      "exit_code": 0,
+      "log_sha256": "18fee7b316af8d55dbd7337b8e83e36d18d8629e3a79f3136857571b064998de",
+      "tail": [
+        "  ✓  105 [mobile] › e2e/resume-recovery.spec.mjs:203:5 › V74 saved-game recovery › a stale 404 response cannot displace another tab's game (1.0s)",
+        "  ✓  106 [mobile] › e2e/resume-recovery.spec.mjs:248:3 › V74 saved-game recovery › an unmounted resume cannot finish a newer route's create loading (1.7s)",
+        "  ✓  107 [mobile] › e2e/resume-recovery.spec.mjs:290:3 › V74 saved-game recovery › two tabs adopt one terminal session but append its local score once (1.7s)",
+        "  ✓  108 [mobile] › e2e/resume-recovery.spec.mjs:350:3 › V74 saved-game recovery › simultaneous terminal sessions from different games preserve both score rows (992ms)",
+        "",
+        "  108 passed (4.2m)"
+      ]
+    },
+    "ruff": {
+      "command": "PYTHONPATH=. <python312> -m ruff check",
+      "exit_code": 0,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "tail": [
+        "All checks passed!"
+      ]
+    },
+    "independent": {
+      "result": "25 V79/V44 tests, scoped Ruff and whitespace passed",
+      "evidence": "implementation-review.json"
+    },
+    "impact": {
+      "result": "207 real API target probes; 206 exact responses, only Papanași changes. Forced-default replay reproduces all 207 original rows. Helper audit covers 2,364 targets; exactly six borrow Dulceață. All 473 term rows and content artifacts remain exact.",
+      "evidence": "impact/final-receipt.json"
+    },
+    "docs": {
+      "command": "python3 /home/dobo/work/agent-ops/scripts/check_docs.py .",
+      "exit_code": 0,
+      "log_sha256": "3bcaff0246bd00e48a624fcb7c49b5da9d8afb650f29d987537a8d333bd7eaa2",
+      "output": "# check_docs /home/dobo/work/_worktrees/cat_de_roman_esti/fix__v79-gem-feedback\nfiles=31 dead_links=0 stale_terms=0 retired_verbs=0 orphans=0\n\n## dead links\n(none)\n\n## stale model terms\n(none)\n\n## retired ops verbs\n(none)\n\n## orphan docs\n(none)\n"
+    },
+    "whitespace": {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output": ""
+    }
+  },
+  "intermediate_findings": [
+    "The global Gem→Dulceață experiment passed six local regressions but was rejected by the 207-target impact review: 13 newly warm targets included unrelated savory foods.",
+    "One-hop-only borrowing was simulated, not implemented. It included the weak seasonal Socată link. The final policy requires reviewed direct-edge strength >=0.60.",
+    "The first final-source matrix passed 995 tests on both Python versions. A reviewer then requested the exact six-node inventory guard; after adding it, the full matrix passed 996 on both. Runtime source did not change between matrices. The accounts and browser checks exercised the final runtime.",
+    "Archive binding validation caught a stale early copy of the bounded factual JSON. The completed reviewer output replaced it, and its binding now matches the final implementation review. No raw reviewer judgment was edited."
+  ],
+  "scope_notes": [
+    "No frontend source changed; retained assets verified without regeneration.",
+    "Accounts were enabled only in their isolated test suite.",
+    "No push, deployment, production verification or human playtest occurred.",
+    "No new BFS, per-session field or cache; sliding TTL 7,200 seconds, maximum 1,000 entries, 64 KiB requests and private answers remain intact."
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "schema": "v79-independent-bounded-factual-semantic-review-v2",
+  "reviewer": "session_refactor",
+  "role": "independent_factual_semantic_reviewer",
+  "date": "2026-09-06",
+  "bindings": {
+    "baseline_commit": "010cfd176dcaa78aac660aea71e154691bd010f3",
+    "proposal_path": "/home/dobo/work/_temp/v79-gem-feedback/proposal-bounded.json",
+    "proposal_sha256": "sha256:cde39575f4b3ac13a3139f00216af79f2e2edcfcfc9d7735286c7a213bf615b5",
+    "kg_path": "cat_de_roman_esti/fixtures/kg_sample.json",
+    "kg_sha256": "sha256:c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+    "projection_source_path": "cat_de_roman_esti/wordgames/contexto_projection.py",
+    "projection_source_sha256": "sha256:d6b80f7cb7abcce77c64d04d94ff2cf7e178ffd6bb1d48cbd7b4a9e441fd9cb1",
+    "contexto_source_path": "cat_de_roman_esti/wordgames/contexto.py",
+    "contexto_source_sha256": "sha256:bdef59b96dd7f3b06321b20463987e7d4140625e60b07bc043383cd3caf3282f"
+  },
+  "proposal": {
+    "surface": "gem",
+    "default_anchor": "n_v24_food_breakfast_miere",
+    "local_anchor": "n_v17gas_dulceata",
+    "policy": "local anchor for self or directed non-distractor local-anchor-to-target edge with strength >= 0.60; default anchor otherwise",
+    "preserve": {
+      "domain": "ingrediente",
+      "rank_penalty": 1,
+      "mapping_kind": "explicit",
+      "public_id": "ctxp_fab0f46e7bcd5932442e",
+      "nonwinning": true
+    }
+  },
+  "verdict": "approve_bounded_policy_for_implementation_and_impact_review",
+  "effective_local_targets": [
+    {
+      "target_id": "n_v17gas_dulceata",
+      "target_label": "Dulceață",
+      "basis": "self",
+      "judgment": "close fruit-preserve concept; preserve distinction through nonwinning projection semantics"
+    },
+    {
+      "target_id": "n_gas_papanasi",
+      "target_label": "Papanași",
+      "edge_id": "de5533",
+      "relation": "related_to",
+      "label": "se toarnă peste papanași",
+      "strength": 0.7,
+      "judgment": "both gem and dulceață are documented ordinary toppings"
+    },
+    {
+      "target_id": "n_v11gas_magiun_topoloveni",
+      "target_label": "Magiun de Topoloveni",
+      "edge_id": "de5535",
+      "relation": "same_category",
+      "label": "dulciuri de borcan din fructe",
+      "strength": 0.6,
+      "judgment": "distinct but closely related fruit-preserve product"
+    },
+    {
+      "target_id": "n_v2gas_conserve_iarna",
+      "target_label": "Conserve de iarnă",
+      "edge_id": "de5531",
+      "relation": "is_a",
+      "label": "conservă dulce de iarnă",
+      "strength": 0.8,
+      "judgment": "honest fruit-preserve subset relation; broad target can include savory preserves"
+    },
+    {
+      "target_id": "n_v3gas_clatite",
+      "target_label": "Clătite",
+      "edge_id": "de5534",
+      "relation": "related_to",
+      "label": "umplutură de clătite",
+      "strength": 0.7,
+      "judgment": "both gem and dulceață are documented ordinary fillings"
+    },
+    {
+      "target_id": "n_v4gas_fruct",
+      "target_label": "Fruct",
+      "edge_id": "de5532",
+      "relation": "related_to",
+      "label": "făcută din fructe",
+      "strength": 0.85,
+      "judgment": "definitional ingredient relation under the official gem norm"
+    }
+  ],
+  "excluded_semantic_trap": {
+    "target_id": "n_v18gas_socata",
+    "target_label": "Socată",
+    "edge_id": "de6128",
+    "relation": "related_to",
+    "label": "preparate de casă sezoniere",
+    "strength": 0.45,
+    "judgment": "must fall back to Miere; a seasonal elderflower drink does not justify fruit-preserve warmth"
+  },
+  "findings": [
+    {
+      "topic": "lexical_semantics",
+      "judgment": "support",
+      "detail": "Gem and dulceață are distinct preparations in the same fruit-preserve neighborhood; miere is bee-produced and remains only the broad fallback."
+    },
+    {
+      "topic": "boundedness",
+      "judgment": "support_with_fixture_guard",
+      "detail": "Self or a strong direct authored edge prevents the multi-hop spillover demonstrated by the rejected global mapping. The 0.60 floor excludes the one current semantically misleading direct edge, Socată at 0.45."
+    },
+    {
+      "topic": "future_topology",
+      "judgment": "must_re_review",
+      "detail": "The numeric floor is a reviewed boundary over this exact KG, not a generic semantic rule. Fixture hashing and explicit target enumeration must fail when graph topology changes."
+    },
+    {
+      "topic": "exact_win_and_privacy",
+      "judgment": "must_preserve",
+      "detail": "Gem remains a synthetic nonwinning projection. Scoring and target-aware suggestion filtering must use one private effective-anchor helper without exposing either anchor or the hidden target."
+    }
+  ],
+  "sources": [
+    "https://legislatie.just.ro/Public/DetaliiDocument/47448",
+    "https://dexonline.ro/intrare/dulcea%C8%9B%C4%83/17877",
+    "https://legislatie.just.ro/Public/DetaliiDocument/226401",
+    "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/papanasi-cu-smantana-si-dulceata-2-id594703.html",
+    "https://eur-lex.europa.eu/legal-content/RO/TXT/?uri=oj%3AJOC_2010_241_R_0003_01",
+    "https://www.protv.ro/emisiuni/vorbeste-lumea/articol/116358-majda-face-senzatie-la-vorbeste-lumea-care-este-secretul-clatitelor-care-au-innebunit-toata-echipa",
+    "https://dexonline.ro/lexem/socat%C4%83/53139"
+  ],
+  "limitations": "Independent Codex-agent semantic review, not a human linguistic or gameplay study. Approval is bound to the exact proposal, sources and KG. Final landing remains conditional on code, privacy, target enumeration and all-approved-target impact review."
+}

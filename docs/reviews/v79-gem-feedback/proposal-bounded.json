@@ -1,0 +1,19 @@
+{
+  "schema": "v79-bounded-projection-neighborhood-proposal-v2",
+  "baseline_commit": "010cfd176dcaa78aac660aea71e154691bd010f3",
+  "surface": "gem",
+  "default_anchor": "n_v24_food_breakfast_miere",
+  "local_anchor": "n_v17gas_dulceata",
+  "use_local_when": "target is the local anchor, or a directed non-distractor local-anchor-to-target edge has strength >=0.60",
+  "min_strength": 0.6,
+  "fallback": "Preserve default Miere anchor for missing local concept, weak edge, reversed-only edge, distractor, indirect path or unrelated target.",
+  "preserve": {
+    "surface": "gem",
+    "domain": "ingrediente",
+    "rank_penalty": 1,
+    "mapping_kind": "explicit",
+    "public_id": "ctxp_fab0f46e7bcd5932442e",
+    "other_projection_terms": 472
+  },
+  "scope": "Contexto accepted guesses and secret-aware suggestions use the same private anchor helper. No exact alias, new surface, KG, pack, target promotion or other game change."
+}

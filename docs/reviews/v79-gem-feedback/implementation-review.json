@@ -1,0 +1,89 @@
+{
+  "schema": "v79-independent-bounded-implementation-review-v2",
+  "reviewer": "session_refactor",
+  "role": "independent_implementation_privacy_reviewer",
+  "date": "2026-09-06",
+  "bindings": {
+    "baseline_commit": "010cfd176dcaa78aac660aea71e154691bd010f3",
+    "proposal_path": "/home/dobo/work/_temp/v79-gem-feedback/proposal-bounded.json",
+    "proposal_sha256": "sha256:cde39575f4b3ac13a3139f00216af79f2e2edcfcfc9d7735286c7a213bf615b5",
+    "projection_source_path": "cat_de_roman_esti/wordgames/contexto_projection.py",
+    "projection_source_sha256": "sha256:d6b80f7cb7abcce77c64d04d94ff2cf7e178ffd6bb1d48cbd7b4a9e441fd9cb1",
+    "contexto_source_path": "cat_de_roman_esti/wordgames/contexto.py",
+    "contexto_source_sha256": "sha256:bdef59b96dd7f3b06321b20463987e7d4140625e60b07bc043383cd3caf3282f",
+    "test_path": "tests/test_v79_gem_feedback.py",
+    "test_sha256": "sha256:d387e166a7fe5cc473d2b64c86ab88e67280d47bc9d9778fac43b573ca4b210a",
+    "impact_receipt_path": "/home/dobo/work/_temp/v79-gem-feedback/impact/final-receipt.json",
+    "impact_receipt_sha256": "sha256:8f8c53dbbaf6590fe05cf04098f40118cb1be487ea631d1a6e2be85b1cc29144",
+    "impact_report_path": "/home/dobo/work/_temp/v79-gem-feedback/impact/final-report.md",
+    "impact_report_sha256": "sha256:a55ef5014e9fe247aa67e332b514e33480832aaec005e76d8a318d998fe30796",
+    "bounded_factual_review_path": "/home/dobo/work/_temp/v79-gem-feedback/bounded/factual/factual-review.json",
+    "bounded_factual_review_sha256": "sha256:97b40e20d560a252662f810a65559733cbec40734b42b087413e6fc2675c6bc4",
+    "kg_sha256": "sha256:c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+    "pack_sha256": "sha256:9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5",
+    "rankings_sha256": "sha256:53c2542b845d2560a900712381ab4c28cb1b9789beaae9690639647871e905d3",
+    "derived_sha256": "sha256:84aaa772746dac0eb4e1366738f467afad86c543c7430cb67810475d5a296878"
+  },
+  "verdict": "approve",
+  "findings": [],
+  "source_review": {
+    "policy_matches_proposal": true,
+    "default_miere_preserved": true,
+    "direction_preserved": true,
+    "distractors_excluded": true,
+    "minimum_strength_inclusive": 0.6,
+    "indirect_paths_excluded": true,
+    "missing_anchor_falls_back": true,
+    "guess_and_suggestion_share_helper": true,
+    "other_games_unchanged": true
+  },
+  "privacy_and_mechanics": {
+    "projection_terms": 473,
+    "projection_rows_unchanged": true,
+    "public_id": "ctxp_fab0f46e7bcd5932442e",
+    "rank_penalty": 1,
+    "nonwinning_for_miere": true,
+    "nonwinning_for_dulceata": true,
+    "private_anchor_not_serialized": true,
+    "hidden_targets_not_serialized": true,
+    "suggestion_filter_uses_effective_anchor": true,
+    "repeat_and_resume_preserved": true
+  },
+  "effective_local_targets": [
+    "n_v17gas_dulceata",
+    "n_gas_papanasi",
+    "n_v11gas_magiun_topoloveni",
+    "n_v2gas_conserve_iarna",
+    "n_v3gas_clatite",
+    "n_v4gas_fruct"
+  ],
+  "impact": {
+    "approved_targets": 207,
+    "eligible_targets": 203,
+    "changed_targets": 1,
+    "changed_target_ids": ["n_gas_papanasi"],
+    "unchanged_targets": 206,
+    "newly_hot_cross_category": 0,
+    "all_targets_hidden": true,
+    "eligible_change": {
+      "pack_id": "ct_gastronomie_128",
+      "before": {"distance": 5, "rank": 1291, "temperature": "Foarte rece", "closeness": 44},
+      "after": {"distance": 1, "rank": 13, "temperature": "Fierbinte", "closeness": 99}
+    }
+  },
+  "verification": [
+    {
+      "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest -q tests/test_v79_gem_feedback.py tests/test_v44_contexto_common_words.py",
+      "result": "25 passed"
+    },
+    {
+      "command": "/home/dobo/work/cat_de_roman_esti/.venv/bin/python -m ruff check cat_de_roman_esti/wordgames/contexto.py cat_de_roman_esti/wordgames/contexto_projection.py tests/test_v79_gem_feedback.py",
+      "result": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    }
+  ],
+  "residual_limit": "The 0.60 threshold is approved only for the six effective targets in the bound KG. Exact target enumeration and content hashes must force semantic re-review if graph topology changes. No human-playtest or target-promotion conclusion is made."
+}

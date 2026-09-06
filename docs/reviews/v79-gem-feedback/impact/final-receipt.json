@@ -1,0 +1,288 @@
+{
+  "kind": "v79-gem-feedback-independent-impact-receipt",
+  "inputs": {
+    "original_baseline": {
+      "path": "/home/dobo/work/_temp/v79-gem-feedback/impact/baseline.json",
+      "sha256": "79ca578f1380264d8d6b82dad07c06bf24fdccbbbd5af6fb00354d3654150c0f"
+    },
+    "baseline_replay": {
+      "path": "/home/dobo/work/_temp/v79-gem-feedback/impact/baseline-bounded-replay.json",
+      "sha256": "d5fda11a6a0e8a0ba6611bb847cbb1dc9268075bd04d0313985c0524c9af0b70"
+    },
+    "bounded_candidate": {
+      "path": "/home/dobo/work/_temp/v79-gem-feedback/impact/bounded-candidate.json",
+      "sha256": "1eed3edf4480a1102b5cc72b156b4bfda248c701402bd9fbfdecbec1057d8d40"
+    },
+    "bounded_comparison": {
+      "path": "/home/dobo/work/_temp/v79-gem-feedback/impact/bounded-comparison.json",
+      "sha256": "154f491d7ad625665b7ec07ee6e278d527680f56c8c23e63688b50510b9aa1f8"
+    },
+    "rejected_global_candidate": {
+      "path": "/home/dobo/work/_temp/v79-gem-feedback/impact/candidate.json",
+      "sha256": "a312c8afeb8182d0f8cbdf8f7690d32bd804d41d480bfb4dfa42fb9d6e13fe3c"
+    },
+    "rejected_global_comparison": {
+      "path": "/home/dobo/work/_temp/v79-gem-feedback/impact/comparison.json",
+      "sha256": "48a28d21516c75c4c9da4bb8d4382a11cc091461115e7816fb1a7b577d1b936e"
+    },
+    "proximity_simulation": {
+      "path": "/home/dobo/work/_temp/v79-gem-feedback/impact/proximity-simulation.json",
+      "sha256": "a497387bca6f0ed5fd8b51c1725f2a20cf941852228708a1f8cbd77773fa36c0"
+    },
+    "bounded_proposal": {
+      "path": "/home/dobo/work/_temp/v79-gem-feedback/proposal-bounded.json",
+      "sha256": "cde39575f4b3ac13a3139f00216af79f2e2edcfcfc9d7735286c7a213bf615b5"
+    }
+  },
+  "source_bindings": {
+    "baseline_projection_source_sha256": "f87364166b58ed2096a1d060ee94af95a2fb731813160d03ca8e58e2e0a31fe4",
+    "baseline_contexto_source_sha256": "e248eed373c3a732f4316b52b2c9114942f3db29cf3594fcc8ec8ce99eed676d",
+    "candidate_projection_source_sha256": "d6b80f7cb7abcce77c64d04d94ff2cf7e178ffd6bb1d48cbd7b4a9e441fd9cb1",
+    "candidate_contexto_source_sha256": "bdef59b96dd7f3b06321b20463987e7d4140625e60b07bc043383cd3caf3282f",
+    "kg_sha256": "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+    "pack_sha256": "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5",
+    "rankings_sha256": "53c2542b845d2560a900712381ab4c28cb1b9789beaae9690639647871e905d3",
+    "derived_sha256": "84aaa772746dac0eb4e1366738f467afad86c543c7430cb67810475d5a296878"
+  },
+  "baseline_reproduction": {
+    "approved_207_exact": true,
+    "original_fixed_targets_exact": true
+  },
+  "projection_contract": {
+    "terms": 473,
+    "all_term_mappings_exact": true,
+    "neighborhoods": {
+      "gem": {
+        "anchor_id": "n_v17gas_dulceata",
+        "min_strength": 0.6
+      }
+    },
+    "gem_public_id": "ctxp_fab0f46e7bcd5932442e",
+    "gem_default_anchor": "n_v24_food_breakfast_miere",
+    "gem_rank_penalty": 1
+  },
+  "approved_sweep": {
+    "total": 207,
+    "eligible": 203,
+    "feedback_changed": 1,
+    "eligible_feedback_changed": 1,
+    "changed_targets": [
+      {
+        "pack_id": "ct_gastronomie_128",
+        "target_id": "n_gas_papanasi",
+        "target_label": "Papanași",
+        "category": "gastronomie",
+        "pilot_eligible": true,
+        "before": {
+          "id": "ctxp_fab0f46e7bcd5932442e",
+          "label": "Gem",
+          "distance": 5,
+          "rank": 1291,
+          "temperature": "Foarte rece",
+          "closeness": 44,
+          "attempt_number": 1
+        },
+        "after": {
+          "id": "ctxp_fab0f46e7bcd5932442e",
+          "label": "Gem",
+          "distance": 1,
+          "rank": 13,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        }
+      }
+    ],
+    "temperature_transitions": [
+      {
+        "before": "Caldut",
+        "after": "Caldut",
+        "count": 8
+      },
+      {
+        "before": "Foarte rece",
+        "after": "Fierbinte",
+        "count": 1
+      },
+      {
+        "before": "Foarte rece",
+        "after": "Foarte rece",
+        "count": 39
+      },
+      {
+        "before": "Inghetat",
+        "after": "Inghetat",
+        "count": 132
+      },
+      {
+        "before": "Rece",
+        "after": "Rece",
+        "count": 27
+      }
+    ],
+    "newly_hot_cross_category": [],
+    "all_targets_hidden": true
+  },
+  "fixed_target_public_probes": {
+    "n_v24_food_breakfast_miere": {
+      "target_label": "Miere",
+      "gem": {
+        "id": "ctxp_fab0f46e7bcd5932442e",
+        "label": "Gem",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "gem_target_hidden": true,
+      "gem_nonwinning": true,
+      "gem_typo_suggestions": [],
+      "gem_typo_target_hidden": true,
+      "exact_wins": true
+    },
+    "n_v17gas_dulceata": {
+      "target_label": "Dulceață",
+      "gem": {
+        "id": "ctxp_fab0f46e7bcd5932442e",
+        "label": "Gem",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "gem_target_hidden": true,
+      "gem_nonwinning": true,
+      "gem_typo_suggestions": [],
+      "gem_typo_target_hidden": true,
+      "exact_wins": true
+    },
+    "n_gas_papanasi": {
+      "target_label": "Papanași",
+      "gem": {
+        "id": "ctxp_fab0f46e7bcd5932442e",
+        "label": "Gem",
+        "distance": 1,
+        "rank": 13,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "gem_target_hidden": true,
+      "gem_nonwinning": true,
+      "gem_typo_suggestions": [
+        "Gem"
+      ],
+      "gem_typo_target_hidden": true,
+      "exact_wins": true
+    },
+    "n_v11gas_magiun_topoloveni": {
+      "target_label": "Magiun de Topoloveni",
+      "gem": {
+        "id": "ctxp_fab0f46e7bcd5932442e",
+        "label": "Gem",
+        "distance": 1,
+        "rank": 5,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "gem_target_hidden": true,
+      "gem_nonwinning": true,
+      "gem_typo_suggestions": [
+        "Gem"
+      ],
+      "gem_typo_target_hidden": true,
+      "exact_wins": true
+    },
+    "n_v18gas_socata": {
+      "target_label": "Socată",
+      "gem": {
+        "id": "ctxp_fab0f46e7bcd5932442e",
+        "label": "Gem",
+        "distance": 4,
+        "rank": 663,
+        "temperature": "Rece",
+        "closeness": 71,
+        "attempt_number": 1
+      },
+      "gem_target_hidden": true,
+      "gem_nonwinning": true,
+      "gem_typo_suggestions": [
+        "Gem"
+      ],
+      "gem_typo_target_hidden": true,
+      "exact_wins": true
+    },
+    "n_v2gas_conserve_iarna": {
+      "target_label": "Conserve de iarnă",
+      "gem": {
+        "id": "ctxp_fab0f46e7bcd5932442e",
+        "label": "Gem",
+        "distance": 1,
+        "rank": 6,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "gem_target_hidden": true,
+      "gem_nonwinning": true,
+      "gem_typo_suggestions": [
+        "Gem"
+      ],
+      "gem_typo_target_hidden": true,
+      "exact_wins": true
+    },
+    "n_v3gas_clatite": {
+      "target_label": "Clătite",
+      "gem": {
+        "id": "ctxp_fab0f46e7bcd5932442e",
+        "label": "Gem",
+        "distance": 1,
+        "rank": 8,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "gem_target_hidden": true,
+      "gem_nonwinning": true,
+      "gem_typo_suggestions": [
+        "Gem"
+      ],
+      "gem_typo_target_hidden": true,
+      "exact_wins": true
+    },
+    "n_v4gas_fruct": {
+      "target_label": "Fruct",
+      "gem": {
+        "id": "ctxp_fab0f46e7bcd5932442e",
+        "label": "Gem",
+        "distance": 1,
+        "rank": 4,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "gem_target_hidden": true,
+      "gem_nonwinning": true,
+      "gem_typo_suggestions": [
+        "Gem"
+      ],
+      "gem_typo_target_hidden": true,
+      "exact_wins": true
+    }
+  },
+  "content_artifacts_unchanged": {
+    "kg_sha256": true,
+    "pack_sha256": true,
+    "rankings_sha256": true,
+    "derived_sha256": true
+  },
+  "review": {
+    "rejected_global_anchor": "13 approved targets became newly warm, including misleading Cald feedback for Grătarul de 1 Mai and Murături",
+    "rejected_distance_only": "Socată is a weak 0.45 direct neighbor and would inherit Fierbinte feedback",
+    "bounded_candidate": "accept",
+    "basis": "Only eligible Papanași changes in the 207-target shelf; the direct 0.70 topping relation is exact. Reviewed >=0.60 neighbors are semantically legible; Socată remains on the old anchor. Public IDs, non-win behavior, suggestion filtering, secrets, content artifacts, and all other projection mappings are preserved."
+  }
+}

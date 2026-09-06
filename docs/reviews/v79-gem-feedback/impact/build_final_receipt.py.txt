@@ -1,0 +1,133 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path
+
+HERE = Path('/home/dobo/work/_temp/v79-gem-feedback/impact')
+PROPOSAL = Path('/home/dobo/work/_temp/v79-gem-feedback/proposal-bounded.json')
+PATHS = {
+    'original_baseline': HERE / 'baseline.json',
+    'baseline_replay': HERE / 'baseline-bounded-replay.json',
+    'bounded_candidate': HERE / 'bounded-candidate.json',
+    'bounded_comparison': HERE / 'bounded-comparison.json',
+    'rejected_global_candidate': HERE / 'candidate.json',
+    'rejected_global_comparison': HERE / 'comparison.json',
+    'proximity_simulation': HERE / 'proximity-simulation.json',
+}
+OUT = HERE / 'final-receipt.json'
+
+
+def sha(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def load(key: str):
+    return json.loads(PATHS[key].read_text(encoding='utf-8'))
+
+
+def main() -> None:
+    original = load('original_baseline')
+    replay = load('baseline_replay')
+    candidate = load('bounded_candidate')
+    comparison = load('bounded_comparison')
+    original_sweep = {r['pack_id']: r for r in original['approved_target_gem_feedback']}
+    replay_sweep = {r['pack_id']: r for r in replay['approved_target_gem_feedback']}
+    if original_sweep != replay_sweep:
+        raise RuntimeError('forced-default replay does not match pre-edit endpoint baseline')
+    for target, probes in original['fixed_target_public_probes'].items():
+        if replay['fixed_target_public_probes'][target] != probes:
+            raise RuntimeError(f'fixed baseline replay drift for {target}')
+    if not comparison['bounded_policy_is_expected']:
+        raise RuntimeError('bounded policy shape is not the reviewed one')
+    if not comparison['all_sweep_targets_hidden']:
+        raise RuntimeError('a sweep target leaked')
+    if not all(comparison['unchanged_artifact_hashes'].values()):
+        raise RuntimeError('a preserved content artifact changed')
+
+    fixed = {}
+    for target, probes in candidate['fixed_target_public_probes'].items():
+        gem = probes['gem']
+        typo = probes['gem_typo']
+        exact = probes['exact']
+        fixed[target] = {
+            'target_label': next(
+                row['target_label']
+                for row in [
+                    *candidate['approved_target_gem_feedback'],
+                    {'target_id': target, 'target_label': exact['body']['guess']['label']},
+                ]
+                if row['target_id'] == target
+            ),
+            'gem': gem['body']['guess'],
+            'gem_target_hidden': gem['target_hidden'],
+            'gem_nonwinning': gem['body']['won'] is False,
+            'gem_typo_suggestions': typo['body'].get('suggestions', []),
+            'gem_typo_target_hidden': typo['target_hidden'],
+            'exact_wins': exact['body']['won'] is True,
+        }
+
+    receipt = {
+        'kind': 'v79-gem-feedback-independent-impact-receipt',
+        'inputs': {
+            key: {'path': str(path), 'sha256': sha(path)} for key, path in PATHS.items()
+        } | {'bounded_proposal': {'path': str(PROPOSAL), 'sha256': sha(PROPOSAL)}},
+        'source_bindings': {
+            'baseline_projection_source_sha256': candidate['meta']['baseline_projection_source_sha256'],
+            'baseline_contexto_source_sha256': candidate['meta']['baseline_contexto_source_sha256'],
+            'candidate_projection_source_sha256': candidate['meta']['projection_source_sha256'],
+            'candidate_contexto_source_sha256': candidate['meta']['contexto_source_sha256'],
+            'kg_sha256': candidate['meta']['kg_sha256'],
+            'pack_sha256': candidate['meta']['pack_sha256'],
+            'rankings_sha256': candidate['meta']['rankings_sha256'],
+            'derived_sha256': candidate['meta']['derived_sha256'],
+        },
+        'baseline_reproduction': {
+            'approved_207_exact': original_sweep == replay_sweep,
+            'original_fixed_targets_exact': all(
+                replay['fixed_target_public_probes'][target] == probes
+                for target, probes in original['fixed_target_public_probes'].items()
+            ),
+        },
+        'projection_contract': {
+            'terms': candidate['meta']['projection_terms'],
+            'all_term_mappings_exact': comparison['all_projection_mappings_exact'],
+            'neighborhoods': candidate['projection_neighborhoods'],
+            'gem_public_id': candidate['projection_mappings']['gem']['public_id'],
+            'gem_default_anchor': candidate['projection_mappings']['gem']['anchor_id'],
+            'gem_rank_penalty': candidate['projection_mappings']['gem']['rank_penalty'],
+        },
+        'approved_sweep': {
+            **comparison['approved_target_counts'],
+            'changed_targets': comparison['changed_feedback'],
+            'temperature_transitions': comparison['temperature_transitions'],
+            'newly_hot_cross_category': comparison['newly_hot_cross_category'],
+            'all_targets_hidden': comparison['all_sweep_targets_hidden'],
+        },
+        'fixed_target_public_probes': fixed,
+        'content_artifacts_unchanged': comparison['unchanged_artifact_hashes'],
+        'review': {
+            'rejected_global_anchor': (
+                '13 approved targets became newly warm, including misleading Cald feedback '
+                'for Grătarul de 1 Mai and Murături'
+            ),
+            'rejected_distance_only': (
+                'Socată is a weak 0.45 direct neighbor and would inherit Fierbinte feedback'
+            ),
+            'bounded_candidate': 'accept',
+            'basis': (
+                'Only eligible Papanași changes in the 207-target shelf; the direct 0.70 '
+                'topping relation is exact. Reviewed >=0.60 neighbors are semantically '
+                'legible; Socată remains on the old anchor. Public IDs, non-win behavior, '
+                'suggestion filtering, secrets, content artifacts, and all other projection '
+                'mappings are preserved.'
+            ),
+        },
+    }
+    OUT.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    print(sha(OUT))
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,133 @@
+#!/usr/bin/env python3
+"""Simulate target-aware Gem anchoring from two real endpoint captures.
+
+This does not change or execute prospective source. It selects the already captured
+real Miere response (baseline) or real Dulceață response (global candidate) according
+to the stated private-target policy.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path
+
+from cat_de_roman_esti.wordgames.service import get_service
+
+ROOT = Path('/home/dobo/work/_temp/v79-gem-feedback/impact')
+BEFORE = ROOT / 'baseline.json'
+AFTER = ROOT / 'candidate.json'
+OUT = ROOT / 'proximity-simulation.json'
+ANCHOR = 'n_v17gas_dulceata'
+
+
+def digest(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def main() -> None:
+    before = json.loads(BEFORE.read_text(encoding='utf-8'))
+    after = json.loads(AFTER.read_text(encoding='utf-8'))
+    svc = get_service()
+    old = {row['pack_id']: row for row in before['approved_target_gem_feedback']}
+    new = {row['pack_id']: row for row in after['approved_target_gem_feedback']}
+    if set(old) != set(new):
+        raise RuntimeError('capture target sets differ')
+
+    neighbors = []
+    for target in [ANCHOR, *svc.neighbor_ids(ANCHOR)]:
+        edge = None if target == ANCHOR else svc.link(ANCHOR, target)
+        neighbors.append({
+            'target_id': target,
+            'target_label': svc.label(target),
+            'distance': svc.distance(ANCHOR, target),
+            'edge': None if edge is None else {
+                'relation': edge.relation,
+                'label': edge.label_ro,
+                'strength': edge.strength,
+            },
+            'approved_pack_rows': [
+                {'id': row['pack_id'], 'pilot_eligible': row['pilot_eligible']}
+                for row in old.values() if row['target_id'] == target
+            ],
+        })
+
+    def choose(row_before, row_after, *, threshold: float | None):
+        target = row_before['target_id']
+        distance = svc.distance(ANCHOR, target)
+        edge = None if target == ANCHOR else svc.link(ANCHOR, target)
+        use_new = target == ANCHOR or (
+            distance == 1
+            and (threshold is None or (edge is not None and edge.strength >= threshold))
+        )
+        selected = row_after if use_new else row_before
+        return {
+            'pack_id': row_before['pack_id'],
+            'target_id': target,
+            'target_label': row_before['target_label'],
+            'pilot_eligible': row_before['pilot_eligible'],
+            'selected_anchor': ANCHOR if use_new else 'n_v24_food_breakfast_miere',
+            'feedback': selected['body']['guess'],
+            'target_hidden': selected['target_hidden'],
+        }
+
+    policies = {}
+    for name, threshold in [('distance_0_or_1', None), ('self_or_direct_strength_gte_0_60', 0.60)]:
+        rows = [choose(old[key], new[key], threshold=threshold) for key in sorted(old)]
+        changed = [row for row in rows if row['selected_anchor'] == ANCHOR]
+        policies[name] = {
+            'approved_targets_using_dulceata': changed,
+            'counts': {
+                'approved': len(rows),
+                'eligible': sum(row['pilot_eligible'] for row in rows),
+                'using_dulceata': len(changed),
+                'eligible_using_dulceata': sum(row['pilot_eligible'] for row in changed),
+                'all_hidden': all(row['target_hidden'] for row in rows),
+            },
+        }
+
+    fixed = {}
+    for target in ('n_v24_food_breakfast_miere', ANCHOR, 'n_v3gas_clatite'):
+        distance = svc.distance(ANCHOR, target)
+        edge = None if target == ANCHOR else svc.link(ANCHOR, target)
+        use_new = target == ANCHOR or (
+            distance == 1 and edge is not None and edge.strength >= 0.60
+        )
+        phase = 'after' if use_new else 'before'
+        fixed[target] = {
+            'selected_capture': phase,
+            'probes': (after if use_new else before)['fixed_target_public_probes'][target],
+        }
+
+    document = {
+        'kind': 'counterfactual-policy-simulation-from-real-endpoint-captures',
+        'bindings': {
+            'baseline_json_sha256': digest(BEFORE),
+            'candidate_json_sha256': digest(AFTER),
+            'baseline': before['meta'],
+            'global_candidate': after['meta'],
+        },
+        'dulceata_directed_non_distractor_neighborhood': neighbors,
+        'policies': policies,
+        'strength_policy_fixed_target_public_probes': fixed,
+        'review_finding': {
+            'distance_only_no_go_target': 'n_v18gas_socata',
+            'reason': (
+                'distance-only borrowing would make Gem a distance-1/Fierbinte proxy '
+                'through the weak generic 0.45 seasonal-home-preparations edge'
+            ),
+            'minimum_credible_boundary': (
+                'self or reviewed directed edge strength >= 0.60; an explicit reviewed '
+                'allowlist is safer than treating future strong edges as automatically honest'
+            ),
+        },
+    }
+    OUT.write_text(json.dumps(document, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    print(json.dumps({
+        'neighbors': neighbors,
+        'policy_counts': {key: value['counts'] for key, value in policies.items()},
+        'output_sha256': digest(OUT),
+    }, ensure_ascii=False, indent=2))
+
+
+if __name__ == '__main__':
+    main()

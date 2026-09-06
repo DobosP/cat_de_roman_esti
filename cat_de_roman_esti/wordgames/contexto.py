@@ -41,6 +41,7 @@ from .categories import CATEGORY_LABELS as _SHARED_CATEGORY_LABELS
 from .categories import category_label, is_known
 from .contexto_feedback import feedback_proxy_id
 from .contexto_projection import (
+    PROJECTION_NEIGHBORHOODS,
     ProjectionTerm,
     resolve_projection,
     suggest_projection,
@@ -196,6 +197,19 @@ def _feedback_anchor_id(svc, node_id: str, target_id: str) -> str:
     if proxy_id != node_id and svc.exists(proxy_id):
         return proxy_id
     return node_id
+
+
+def _projection_anchor_id(svc, term: ProjectionTerm, target_id: str) -> str:
+    """Use an authored neighborhood only for its strong, directed local links."""
+
+    neighborhood = PROJECTION_NEIGHBORHOODS.get(term.key)
+    if neighborhood is not None and svc.exists(neighborhood.anchor_id):
+        if target_id == neighborhood.anchor_id:
+            return neighborhood.anchor_id
+        edge = svc.link(neighborhood.anchor_id, target_id)
+        if edge is not None and edge.strength >= neighborhood.min_strength:
+            return neighborhood.anchor_id
+    return term.anchor_id
 
 
 def rank_for(
@@ -896,7 +910,9 @@ class GuessView(ContractAPIView):
             projected_suggestions = [] if unresolved_spelling else [
                 term.label
                 for term in suggest_projection(text)
-                if _feedback_anchor_id(svc, term.anchor_id, session.target)
+                if _feedback_anchor_id(
+                    svc, _projection_anchor_id(svc, term, session.target), session.target
+                )
                 != session.target
             ]
             suggestions: list[str] = []
@@ -925,7 +941,10 @@ class GuessView(ContractAPIView):
                 }
             )
 
-        submitted_id = projection.anchor_id if projection is not None else node_id
+        submitted_id = (
+            _projection_anchor_id(svc, projection, session.target)
+            if projection is not None else node_id
+        )
         if submitted_id is None:  # narrowed above; keeps type checkers honest.
             raise RuntimeError("accepted Contexto guess has no scoring anchor")
         score = _score_feedback(

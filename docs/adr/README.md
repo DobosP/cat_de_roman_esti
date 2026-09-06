@@ -18,3 +18,4 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0107 | [Reviewed Romanian input senses](0107-preserve-reviewed-romanian-input-senses.md) | accepted |
 | 0108 | [Bounded flour ingredient associations](0108-add-bounded-flour-ingredient-associations.md) | accepted |
 | 0109 | [Defer dessert targets after fresh feedback review](0109-defer-dessert-targets-after-feedback-review.md) | accepted |
+| 0110 | [Fruit-preserve feedback for Gem](0110-use-fruit-preserve-feedback-for-gem.md) | accepted |

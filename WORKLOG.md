@@ -186,3 +186,33 @@ Ruff, docs and whitespace checks are recorded in the V78 verification file.
 No push, deployment or human-playtest claim. The next wave should assess Gem's
 feedback anchor with distinct projection identity and exact-win/privacy guards,
 then review effects across current targets before any change or promotion.
+
+
+## V79 — bounded Gem feedback, 2026-09-06
+
+Valid until: the relevant projection, Contexto routes or bound content changes — then treat as history.
+
+Continued from clean local V78 `010cfd1`. The first global Gem→Dulceață trial
+repaired Clătite but made unrelated savory targets warm; the 207-target impact
+review rejected it despite green local tests. A one-hop-only simulation also
+included weak seasonal Socată. The accepted policy retains every original term
+and Gem's Miere default, borrowing Dulceață only for self or a reviewed directed
+non-distractor edge at strength >=0.60. Both guesses and suggestions use the
+same private helper. Exactly six graph concepts qualify, with an explicit
+regression guard. Gem remains distinct and nonwinning; exact answers still win.
+
+Of 207 approved targets (203 eligible), only Papanași changes: rank 1291/very cold
+to rank 13/hot. Fixed Clătite improves rank 1699/frozen to rank 8/hot. All other
+206 approved responses, all 473 projection rows and all content artifacts remain
+exact; selection, score rules and session bounds remain intact.
+Cozonac/Clătite remain deferred targets; no promotion or topology edit occurred.
+
+Final full suites: 996 passed on Python 3.12.3 (278.39 s) and 3.14.6 (247.49 s), plus
+53 accounts tests each. Focused 13 passed; independent V79/V44 25 passed. Node 24.19.0
+and npm 11.17.0: clean install/audit zero, 173 native, lint/typecheck/bundle and
+108 desktop/mobile checks passed. Both content validators, Ruff/docs/whitespace
+and independent factual, impact/implementation reviews are green. ADR-0110 and
+the V79 archive bind final source/tests/results and preserve the rejected global
+trial. The full matrix was repeated after adding the six-node guard; no runtime
+changed between runs. Next: fresh Clătite content review. No push, deployment or
+human-playtest claim.
