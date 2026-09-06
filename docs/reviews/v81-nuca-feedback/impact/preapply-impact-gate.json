@@ -1,0 +1,105 @@
+{
+  "schema": "v81-preapply-impact-gate-v1",
+  "valid_until": "V81 proposal, runtime policy, or KG fixture changes",
+  "verdict": "accept_bounded_hybrid_for_actual_apply",
+  "bindings": {
+    "baseline.json": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/baseline.json",
+      "sha256": "6e1121ad9b544f716d43470e00d794b1cb7c650b3c75fc085e6a41590f6585a8"
+    },
+    "sim-one.json": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/sim-one.json",
+      "sha256": "5669bde1cc2aab6bca30443c7ebdb4d15d82aa99521f4f8acd35c20b286e66ec"
+    },
+    "sim-four.json": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/sim-four.json",
+      "sha256": "f6991c0e6a12dcd6a1557bac7191dbcfb2e18282180a3da66e70a67a59bfe582"
+    },
+    "compare-one.json": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/compare-one.json",
+      "sha256": "66f3c7bc8d81a0985ae3be283abbeb1d9ffe34b7a5b56e83935f4339a5545334"
+    },
+    "compare-four.json": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/compare-four.json",
+      "sha256": "39d376a5269326c32e69a221aacb71b97453c95d8182757143a98407dd3df3d2"
+    },
+    "sim-exact-final-policy.json": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/sim-exact-final-policy.json",
+      "sha256": "c32d22fd53ec236c066ad78e170ed7e40fed8a5a4eb3e09ce5e9ed1cf3bfca09"
+    },
+    "compare-exact-final-policy.json": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/compare-exact-final-policy.json",
+      "sha256": "9033bf98f98d8b91749715ef5449586ae54c77cddeb69394539f89ab03f2ab62"
+    },
+    "ordinal-impact-bounded-final.json": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/ordinal-impact-bounded-final.json",
+      "sha256": "5f7368cfc73b7698c06ccf6297c60cd3b29cd2eb1490545c05107a0d686573ab"
+    },
+    "nuca_feedback_impact.py": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/nuca_feedback_impact.py",
+      "sha256": "0bafb084a70f476c3ae9050ee3cad63ea9122af2d59ea6ff1a5388ca52b84548"
+    },
+    "audit_existing_guess_ordinals.py": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/audit_existing_guess_ordinals.py",
+      "sha256": "a298e875446ccd6082d31cf7a70742be84486fb1a861faa01a7fd62dca3ccef5"
+    }
+  },
+  "proposal": {
+    "path": "/home/dobo/work/_temp/v81-nuca-feedback/proposal.json",
+    "sha256": "0612129b282feb6124c2992078178efc17fa088b0b425dbccf3291ee10b34d8a"
+  },
+  "factual_review": {
+    "path": "/home/dobo/work/_temp/v81-nuca-feedback/factual/factual-review.json",
+    "sha256": "ce87c81e0108c8b5dac4e1faec9436d1cfda7a89073e116eaf91bec9a3f3bb06"
+  },
+  "approved_contexto": {
+    "targets": 208,
+    "eligible": 204,
+    "native_temperature_changes": [
+      {
+        "pack_id": "ct_gastronomie_131",
+        "target": "Baclava dobrogeană",
+        "before": {
+          "distance": 5,
+          "rank": 1873,
+          "temperature": "Inghetat",
+          "closeness": 18
+        },
+        "after": {
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99
+        }
+      }
+    ],
+    "fallback_distance_same": 207,
+    "fallback_temperature_same": 207,
+    "rank_plus_one": 145,
+    "rank_same": 62,
+    "all_nonwin_targets_hidden": true
+  },
+  "existing_guess_ordinal_audit": {
+    "old_nodes_checked": 491712,
+    "rank_changed": 222582,
+    "rank_plus_one": 222582,
+    "temperature_changed": 121,
+    "closeness_changed": 7151,
+    "targets": 208,
+    "targets_reachable_plus_one": 208,
+    "targets_with_rank_changes": 208,
+    "targets_with_temperature_changes": 31
+  },
+  "existing_node_distance_regressions": 0,
+  "rejected_candidates": {
+    "one_edge_global_native": {
+      "reason": "misleading transitive warmth including savory targets; also fails normal topology floor",
+      "artifact": "sim-one.json"
+    },
+    "four_edge_global_native": {
+      "reason": "adds misleading geography/history warmth through transitive recipe paths",
+      "artifact": "sim-four.json"
+    },
+    "alias_warning": "Earlier rejected simulations used provisional aliases; only `nucile` is in the frozen factual proposal."
+  }
+}

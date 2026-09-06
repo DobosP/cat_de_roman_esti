@@ -247,3 +247,37 @@ remain meaningful through exact pre-V80 reconstruction; raw review history is
 untouched. ADR-0111 and the V80 archive bind acceptance and the final evidence.
 Next: independently investigate honest nut feedback for Cozonac; bread remains
 deferred. No push, deployment or human-playtest claim.
+
+
+## V81 — real walnut input with bounded feedback, 2026-09-06
+
+Valid until: the bound word, topology, policies or game content changes — then treat as history.
+
+V80 was already merged at `dbbcf6e`. V81 adds one Nucă concept, sole alias nucile,
+and four source-backed outgoing recipe links through the existing V24 transaction.
+The ordinary density guard stays intact; ADR-0112 narrowly permits four outgoing
+links for this new node and partially supersedes ADR-0033's cap. Naive graph
+simulations were rejected for savory/regional/history warmth. The accepted native
+Contexto rule uses only self or strong direct ingredient links; Miere remains the
+penalized fallback elsewhere. Other 472 projection rows, 71 legacy proxies and
+Gem policy remain exact. Ambiguous tree forms and part/whole aliases are deferred.
+
+Actual graph: 2,365 nodes, 9,223 edges, 8,451 aliases. All 621 pack records, 336
+frozen boards and 180 puzzles stay exact. Only Baclava gets newly hot Nucă feedback
+among 208 approved targets; Cozonac/Colivă/Cornulețe fixed recipe probes are hot.
+Across 491,712 old-node scores, old distances stay exact; 222,582 ranks move +1
+and 121 marginal tier crossings are documented. Baclava's private estimate rises
+one point and four adjacent ordinals shift; no weights/eligibility/status change.
+All-six-game profiles and bounded seed/date samples remain stable.
+
+Final serial gates: 1,024 tests on Python 3.12.3 (443.33 s) and 3.14.6 (620.63 s),
+53 accounts each, 173 frontend native checks and 108 browser checks (5.3 min).
+Validators, Ruff/docs/whitespace, semantic/implementation/impact reviews and
+already-applied refusal pass. Earlier parallel runs exposed stale expected counts
+and the documented timing sensitivity; neither the 45-second gate nor behavior
+was relaxed. The browser-start snapshot was regenerated for reachable_count +1.
+No frontend app source/assets or dependencies changed. Historical graph/ranking,
+projection and 13,177-word-resolution proofs remain intact through exact inverses.
+Evidence: ADR-0112 and docs/reviews/v81-nuca-feedback/. Next: fresh Cozonac target
+review; bread and other approximate vocabulary remain deferred. Land means merge
+into main; no push, deployment or human-playtest claim.

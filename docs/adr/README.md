@@ -20,3 +20,4 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0109 | [Defer dessert targets after fresh feedback review](0109-defer-dessert-targets-after-feedback-review.md) | accepted |
 | 0110 | [Fruit-preserve feedback for Gem](0110-use-fruit-preserve-feedback-for-gem.md) | accepted |
 | 0111 | [Reviewed Clătite target](0111-promote-reviewed-clatite-target.md) | accepted |
+| 0112 | [Reviewed walnut input](0112-add-reviewed-walnut-input.md) | accepted |

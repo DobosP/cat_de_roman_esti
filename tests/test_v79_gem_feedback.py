@@ -21,6 +21,7 @@ from cat_de_roman_esti.wordgames.contexto_projection import (  # noqa: E402
     suggest_projection,
 )
 from cat_de_roman_esti.wordgames.service import WordGameService, get_service  # noqa: E402
+from tests.content_history import before_v81_projection_rows  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 CLATITE = "n_v3gas_clatite"
@@ -34,19 +35,19 @@ _ALL_BASELINE_PROJECTIONS_SHA256 = (
 )
 ARTIFACT_SHA256 = {
     "cat_de_roman_esti/fixtures/kg_sample.json": (
-        "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370"
+        "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331"
     ),
     "cat_de_roman_esti/fixtures/games_pack.json": (
         "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29"
     ),
     "cat_de_roman_esti/fixtures/board_rankings_v37.json": (
-        "823c5f302bd36c833283038affb1125dc434a1d34fba635e71c06b721cda4cec"
+        "fa1094a6c51e6d51cdafc5fecd302ef43bd3f44ff0e5aa7b36b7397a8ef7b546"
     ),
     "cat_de_roman_esti/fixtures/derived_catalog_v38.json": (
-        "0787a4325c84753c739e7900f174cc99f46e9a4d3fbd8ce1e035cdf84c9b6ae2"
+        "f66624bfe2e5ef434c9d47eb21b128d569637ac941b85834b2c0a5a196de7a6a"
     ),
     "tests/fixtures/cat_mobile_app_pack_contract.json": (
-        "869499abccc3e6b5befe5d889a0e24c4d3bd67096c4d0a69c58d925680612a28"
+        "9012a0e6c6f48397a94ff8bfcbf297ea58e357ac283c978e4e9542ea66ae77b1"
     ),
 }
 
@@ -103,7 +104,8 @@ def test_gem_preserves_all_baseline_fields_and_has_one_local_policy() -> None:
     gem = resolve_projection("gem")
     nuca = resolve_projection("nucă")
     aluna = resolve_projection("alună")
-    assert gem is not None and nuca is not None and aluna is not None
+    assert gem is not None and nuca is None and aluna is not None
+    assert get_service().resolve("nucă") == "n_v81_food_pantry_nuca"
     assert (
         gem.surface,
         gem.key,
@@ -121,8 +123,10 @@ def test_gem_preserves_all_baseline_fields_and_has_one_local_policy() -> None:
         "explicit",
         GEM_PUBLIC_ID,
     )
-    assert nuca.anchor_id == aluna.anchor_id == MIERE
-    blob = json.dumps(_projection_rows(), ensure_ascii=False, separators=(",", ":")).encode()
+    assert aluna.anchor_id == MIERE
+    blob = json.dumps(
+        before_v81_projection_rows(_projection_rows()), ensure_ascii=False, separators=(",", ":")
+    ).encode()
     assert hashlib.sha256(blob).hexdigest() == _ALL_BASELINE_PROJECTIONS_SHA256
     assert set(PROJECTION_NEIGHBORHOODS) == {"gem"}
     policy = PROJECTION_NEIGHBORHOODS["gem"]
@@ -237,13 +241,13 @@ def test_gem_typo_suggestion_follows_the_effective_anchor_privacy() -> None:
 @pytest.mark.parametrize(
     ("target", "distance", "rank", "temperature", "closeness"),
     [
-        ("n_gas_muraturi", 4, 622, "Rece", 73),
-        ("n_gas_gratar_1_mai", 5, 1618, "Inghetat", 29),
-        ("n_gas_ciorba_radauteana", 5, 1486, "Foarte rece", 35),
-        ("n_gas_salata_boeuf", 5, 1040, "Foarte rece", 55),
+        ("n_gas_muraturi", 4, 623, "Rece", 73),
+        ("n_gas_gratar_1_mai", 5, 1619, "Inghetat", 29),
+        ("n_gas_ciorba_radauteana", 5, 1487, "Foarte rece", 35),
+        ("n_gas_salata_boeuf", 5, 1041, "Foarte rece", 55),
     ],
 )
-def test_gem_keeps_baseline_cold_feedback_for_unrelated_food_targets(
+def test_gem_keeps_cold_feedback_for_unrelated_food_targets(
     target: str, distance: int, rank: int, temperature: str, closeness: int
 ) -> None:
     client, url = _contexto_game(target)

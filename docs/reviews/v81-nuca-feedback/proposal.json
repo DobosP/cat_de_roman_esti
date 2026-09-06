@@ -1,0 +1,76 @@
+{
+  "schema": "v81-reviewed-native-walnut-v1",
+  "baseline_commit": "dbbcf6e8b810fb990c9acffb42d6426138551637",
+  "build_version": "fixture-v81-nuca-feedback",
+  "node": {
+    "id": "n_v81_food_pantry_nuca",
+    "node_type": "concept",
+    "label_ro": "Nucă",
+    "category": "gastronomie",
+    "description": "Fructul nucului, cu coajă tare și miez comestibil folosit în preparate dulci.",
+    "salience": 0.9,
+    "aliases": [
+      "nucile"
+    ]
+  },
+  "edges": [
+    {
+      "src": "n_v81_food_pantry_nuca",
+      "dst": "n_gas_cozonac",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru",
+      "strength": 0.97,
+      "bidirectional": 0,
+      "is_distractor": 0
+    },
+    {
+      "src": "n_v81_food_pantry_nuca",
+      "dst": "n_v17gas_coliva",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru",
+      "strength": 0.97,
+      "bidirectional": 0,
+      "is_distractor": 0
+    },
+    {
+      "src": "n_v81_food_pantry_nuca",
+      "dst": "n_gas_baclava_dobrogeana",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru",
+      "strength": 0.95,
+      "bidirectional": 0,
+      "is_distractor": 0
+    },
+    {
+      "src": "n_v81_food_pantry_nuca",
+      "dst": "n_v21gas_cornulete",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru",
+      "strength": 0.9,
+      "bidirectional": 0,
+      "is_distractor": 0
+    }
+  ],
+  "excluded_forms": [
+    "nuci",
+    "nucii",
+    "nucilor",
+    "nuc",
+    "nucul",
+    "nucului",
+    "miez de nucă",
+    "nucă de cocos"
+  ],
+  "contexto_policy": {
+    "native_node": "n_v81_food_pantry_nuca",
+    "fallback_anchor": "n_v24_food_breakfast_miere",
+    "native_when": "exact self or direct directed non-distractor part_of edge labeled ingredient pentru with strength >=0.90",
+    "min_strength": 0.9,
+    "outside_native_zone": "Preserve prior Miere approximation with one-rank proxy penalty and no false exact win.",
+    "remove_only_projection_surface": "nucă",
+    "preserve_projection_terms": 472,
+    "preserve_legacy_common_proxies": 71,
+    "preserve_gem_policy": true
+  },
+  "scope": "One real node, one unambiguous alias, four independently supported outgoing recipe edges, bounded Contexto native feedback. No incoming edges, game rows/promotions, applier density exception or unrelated facts."
+}

@@ -1,0 +1,110 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import hashlib
+import json
+import random
+import subprocess
+from datetime import date, timedelta
+from pathlib import Path
+
+from cat_de_roman_esti.wordgames.derived_catalog import DerivedBoard, DerivedCatalog
+from cat_de_roman_esti.wordgames.packs import GamesPack, _parse_items
+
+ROOT = Path("/home/dobo/work/_worktrees/cat_de_roman_esti/fix__v81-nuca-feedback")
+OUT = Path("/home/dobo/work/_temp/v81-nuca-feedback/impact/actual-selection-comparison.json")
+BASE = "dbbcf6e8b810fb990c9acffb42d6426138551637"
+PACK = "cat_de_roman_esti/fixtures/games_pack.json"
+RANK = "cat_de_roman_esti/fixtures/board_rankings_v37.json"
+DERIVED = "cat_de_roman_esti/fixtures/derived_catalog_v38.json"
+PACK_GAMES = ("conexiuni", "contexto", "lant", "alchimie")
+DERIVED_GAMES = ("intrusul", "perechi")
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def old_json(path: str):
+    return json.loads(subprocess.check_output(["git", "show", f"{BASE}:{path}"], cwd=ROOT))
+
+
+def current_json(path: str):
+    return json.loads((ROOT / path).read_text(encoding="utf-8"))
+
+
+def runtimes(pack_raw, rankings_raw, derived_raw):
+    ratings = {row["id"]: row for row in rankings_raw["boards"]}
+    pack = GamesPack(_parse_items(pack_raw, ratings), ranked=True)
+    boards = [
+        DerivedBoard(
+            game=row["game"], category=row["category"], difficulty=row["difficulty"],
+            payload=row["payload"], _catalog_id=row["id"], _source_id=row["source_id"],
+            _romanian_familiarity=row["romanian_familiarity"], _play_quality=row["play_quality"],
+            _standard_score=row["standard_score"], _starter_score=row["starter_score"],
+            _starter_eligible=row["starter_eligible"], _standard_rank=row["standard_rank"],
+            _starter_rank=row["starter_rank"],
+        )
+        for row in derived_raw["boards"]
+    ]
+    return pack, DerivedCatalog(boards)
+
+
+def sequences(pack, derived):
+    days = [(date(2026, 9, 1) + timedelta(days=i)).isoformat() for i in range(30)]
+    result = {}
+    for game in PACK_GAMES:
+        filtered = game == "contexto"
+        result[game] = {
+            "seeds": [pack.pick_seeded(game, random.Random(seed), filtered_shelf_weights=filtered).id for seed in range(100)],
+            "daily": [pack.pick_daily(game, day, filtered_shelf_weights=filtered).id for day in days],
+        }
+    result["contexto:gastronomie_usor"] = {
+        "seeds": [pack.pick_seeded("contexto", random.Random(seed), category="gastronomie", difficulty="usor", filtered_shelf_weights=True).id for seed in range(100)],
+        "daily": [pack.pick_daily("contexto", day, category="gastronomie", difficulty="usor", filtered_shelf_weights=True).id for day in days],
+    }
+    for game in DERIVED_GAMES:
+        result[game] = {
+            "seeds": [derived.pick_seeded(game, random.Random(seed), starter=False, balance_categories=False)._catalog_id for seed in range(100)],
+            "daily": [derived.pick_daily(game, day)._catalog_id for day in days],
+        }
+    return result
+
+
+def main():
+    before_raw = tuple(old_json(path) for path in (PACK, RANK, DERIVED))
+    after_raw = tuple(current_json(path) for path in (PACK, RANK, DERIVED))
+    before = runtimes(*before_raw)
+    after = runtimes(*after_raw)
+    b1, b2 = sequences(*before), sequences(*before)
+    a1, a2 = sequences(*after), sequences(*after)
+    rows = {}
+    for scenario in b1:
+        rows[scenario] = {
+            kind: {
+                "sample_count": len(b1[scenario][kind]),
+                "changed_count": sum(x != y for x, y in zip(b1[scenario][kind], a1[scenario][kind], strict=True)),
+            }
+            for kind in ("seeds", "daily")
+        }
+    doc = {
+        "schema": "v81-actual-selection-comparison-v1",
+        "valid_until": "V81 pack, ranking rows, derived boards, or selector code changes",
+        "bindings": {
+            "baseline_commit": BASE,
+            "current_head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
+            "current_hashes": {path: sha256(ROOT / path) for path in (PACK, RANK, DERIVED)},
+            "packs_source_sha256": sha256(ROOT / "cat_de_roman_esti/wordgames/packs.py"),
+            "derived_source_sha256": sha256(ROOT / "cat_de_roman_esti/wordgames/derived_catalog.py"),
+        },
+        "method": {"seed_range": "0..99", "daily": "2026-09-01..2026-09-30", "same_artifact_repeat_exact": b1 == b2 and a1 == a2},
+        "selection_changes": rows,
+        "all_selection_samples_exact": b1 == a1,
+    }
+    OUT.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(doc, ensure_ascii=False, indent=2))
+    print(sha256(OUT))
+
+
+if __name__ == "__main__":
+    main()

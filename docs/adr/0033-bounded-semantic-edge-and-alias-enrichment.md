@@ -1,7 +1,7 @@
 # ADR-0033: Enrich aliases and semantic edges without widening sense ambiguity
 
 Date: 2026-07-17
-Status: accepted
+Status: accepted; fan-out cap partially superseded for the new V81 Nucă node by [ADR-0112](0112-add-reviewed-walnut-input.md).
 
 ## Decision
 

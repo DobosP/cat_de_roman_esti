@@ -39,7 +39,7 @@ from ._progress import excluded_pack_ids, record_finished
 from ._session_endpoint import atomic_session
 from .categories import CATEGORY_LABELS as _SHARED_CATEGORY_LABELS
 from .categories import category_label, is_known
-from .contexto_feedback import feedback_proxy_id
+from .contexto_feedback import INGREDIENT_FEEDBACK_POLICIES, feedback_proxy_id
 from .contexto_projection import (
     PROJECTION_NEIGHBORHOODS,
     ProjectionTerm,
@@ -187,12 +187,25 @@ def _feedback_anchor_id(svc, node_id: str, target_id: str) -> str:
 
     V30--V33 everyday nodes are deliberately inbound-only in the shared graph.  Their
     public identity remains the submitted node, while Cald sau Rece borrows a mature
-    semantic anchor for feedback.  Custom fixtures that do not carry the reviewed anchor
-    retain their original behavior.
+    semantic anchor for feedback. Native ingredients retain direct reviewed recipe links
+    and use their prior approximation elsewhere. Custom fixtures without the fallback
+    anchor retain their original behavior.
     """
 
     if node_id == target_id:
         return node_id
+    policy = INGREDIENT_FEEDBACK_POLICIES.get(node_id)
+    if policy is not None and svc.exists(node_id):
+        edge = svc.link(node_id, target_id)
+        if (
+            edge is not None
+            and edge.relation == "part_of"
+            and edge.label_ro == "ingredient pentru"
+            and edge.strength >= policy.min_strength
+        ):
+            return node_id
+        if svc.exists(policy.fallback_anchor_id):
+            return policy.fallback_anchor_id
     proxy_id = feedback_proxy_id(node_id)
     if proxy_id != node_id and svc.exists(proxy_id):
         return proxy_id

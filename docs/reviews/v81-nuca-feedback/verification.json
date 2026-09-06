@@ -1,0 +1,241 @@
+{
+  "date": "2026-09-06",
+  "baseline_commit": "dbbcf6e8b810fb990c9acffb42d6426138551637",
+  "runtimes": {
+    "python312": "3.12.3",
+    "python314": "3.14.6",
+    "node": "24.19.0",
+    "npm": "11.17.0"
+  },
+  "checks": {
+    "backend312": {
+      "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest -q -o addopts=\"\"",
+      "exit_code": 0,
+      "log_sha256": "adae69d42d8a44f65012e6ae0fc8f1998922c17fe510c0851ab547e2faa51adb",
+      "tail": [
+        "........................................................................ [ 77%]",
+        "........................................................................ [ 84%]",
+        "........................................................................ [ 91%]",
+        "........................................................................ [ 98%]",
+        "................                                                         [100%]",
+        "1024 passed in 443.33s (0:07:23)"
+      ]
+    },
+    "backend314": {
+      "command": "PYTHONPATH=. <scratch>/py314/bin/python -m pytest -q -o addopts=\"\"",
+      "exit_code": 0,
+      "log_sha256": "4a36c4e60395e58996c6a7a124202e4c627de4d6eeab1bde9d5c49d4ff4ceb7d",
+      "tail": [
+        "........................................................................ [ 77%]",
+        "........................................................................ [ 84%]",
+        "........................................................................ [ 91%]",
+        "........................................................................ [ 98%]",
+        "................                                                         [100%]",
+        "1024 passed in 620.63s (0:10:20)"
+      ]
+    },
+    "accounts312": {
+      "command": "CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=. <python312> -m pytest tests/accounts -q -o addopts=\"\"",
+      "exit_code": 0,
+      "log_sha256": "47beecdb0f1aad735c744b9f03a2382eb92eb54d3c915a9af0be5bc32de506f6",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 5.43s"
+      ]
+    },
+    "accounts314": {
+      "command": "CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=. <python314> -m pytest tests/accounts -q -o addopts=\"\"",
+      "exit_code": 0,
+      "log_sha256": "a3b5ff41605b86e1001742489ef06792fb8d636018a2e14d0a07caad1e8642c6",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 6.85s"
+      ]
+    },
+    "history": {
+      "command": "PYTHONPATH=. <python312> -m pytest tests/test_v75_contexto_food.py tests/test_v77_flour_associations.py tests/test_v79_gem_feedback.py tests/test_v80_clatite_target.py tests/test_v81_history.py -q -o addopts=\"\"",
+      "exit_code": 0,
+      "log_sha256": "1d455f3fc4d2830e984dabce5c3caddedc0a84582aae9e010924551243416e45",
+      "tail": [
+        "...............................................                          [100%]",
+        "47 passed in 3.25s"
+      ]
+    },
+    "resolution_history": {
+      "command": "PYTHONPATH=. <python312> -m pytest tests/test_v76_romanian_input_senses.py tests/test_v81_history.py -q -o addopts=\"\"",
+      "exit_code": 0,
+      "log_sha256": "547263ab9745a3eca5f2c6ca9249dc4c310d2ba65388599834a72305d881b844",
+      "tail": [
+        ".....................                                                    [100%]",
+        "21 passed in 2.01s"
+      ]
+    },
+    "fixture": {
+      "command": "PYTHONPATH=. <python312> scripts/validate_fixture.py",
+      "exit_code": 0,
+      "log_sha256": "eaf257b514d593ef337fdf2220cc0be6b9cd252cfefd6eb72251f17f603c2f9d",
+      "tail": [
+        "  [  ok] puzzle_ids_resolve           0 error(s)",
+        "  [  ok] puzzle_shortest_path         0 error(s)",
+        "  [  ok] puzzle_category_scope        0 error(s)",
+        "  [  ok] puzzle_distractor_shortcut   0 error(s)",
+        "------------------------------------------------------------",
+        "GREEN: fixture is valid (0 errors)"
+      ]
+    },
+    "pack": {
+      "command": "PYTHONPATH=. <python312> scripts/validate_games_pack.py",
+      "exit_code": 0,
+      "log_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+      "tail": [
+        "  unique_ids               ok",
+        "  playability              ok",
+        "  meta_counts              ok",
+        "  id_high_water            ok",
+        "",
+        "games pack GREEN"
+      ]
+    },
+    "frontend_install": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm ci",
+      "exit_code": 0,
+      "log_sha256": "1073b7123800c06d0dba68bf5b6518bd8a14c23542ae1cff7256af880d0ef996",
+      "tail": [
+        "added 171 packages, and audited 172 packages in 4s",
+        "",
+        "46 packages are looking for funding",
+        "  run `npm fund` for details",
+        "",
+        "found 0 vulnerabilities"
+      ]
+    },
+    "frontend_native": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm test",
+      "exit_code": 0,
+      "log_sha256": "4a748c5d91c41f3b43f2887a3438427c771e1e4c87512df21cd089470b350ceb",
+      "tail": [
+        "ℹ pass 173",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 1057.860148"
+      ]
+    },
+    "frontend_lint": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm run lint",
+      "exit_code": 0,
+      "log_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 lint",
+        "> eslint .",
+        ""
+      ]
+    },
+    "frontend_typecheck": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm run typecheck",
+      "exit_code": 0,
+      "log_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 typecheck",
+        "> tsc --noEmit",
+        ""
+      ]
+    },
+    "frontend_bundle": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm run check:bundle",
+      "exit_code": 0,
+      "log_sha256": "ff5f74fc33a8767e2f3d406bf9184d98122b943cf9adbfdc7bc1ac45ff0b2be7",
+      "tail": [
+        "",
+        "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+        "     8.23 KiB  assets/index-DiCPhhaT.css",
+        "   110.50 KiB  assets/index-SV5smC6j.js",
+        "   118.73 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ]
+    },
+    "browser": {
+      "command": "PATH=<Node24>:/home/dobo/work/cat_de_roman_esti/.venv/bin:$PATH CDR_E2E_PORT=8155 CDR_E2E_OUTPUT_DIR=<scratch>/browser-results-final npm --prefix frontend run test:e2e",
+      "exit_code": 0,
+      "log_sha256": "a9f42e7cd2ad95301f483546589bdd1d48da4da4266cdd2f6ad1584dcf4db60e",
+      "tail": [
+        "  ✓  105 [mobile] › e2e/resume-recovery.spec.mjs:203:5 › V74 saved-game recovery › a stale 404 response cannot displace another tab's game (1.1s)",
+        "  ✓  106 [mobile] › e2e/resume-recovery.spec.mjs:248:3 › V74 saved-game recovery › an unmounted resume cannot finish a newer route's create loading (1.8s)",
+        "  ✓  107 [mobile] › e2e/resume-recovery.spec.mjs:290:3 › V74 saved-game recovery › two tabs adopt one terminal session but append its local score once (1.8s)",
+        "  ✓  108 [mobile] › e2e/resume-recovery.spec.mjs:350:3 › V74 saved-game recovery › simultaneous terminal sessions from different games preserve both score rows (1.1s)",
+        "",
+        "  108 passed (5.3m)"
+      ]
+    },
+    "ruff": {
+      "command": "PYTHONPATH=. <python312> -m ruff check",
+      "exit_code": 0,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "tail": [
+        "All checks passed!"
+      ]
+    },
+    "independent_review": {
+      "result": "Final 14 behavior tests plus baseline reconstruction and V77/V79 checks: 45 passed independently; factual, implementation and all-six-game impact reviews accepted.",
+      "evidence": "implementation-review.json"
+    },
+    "reapply": {
+      "result": "Already-applied wave refused, five transaction files byte-identical.",
+      "evidence": "reapply-guard.json"
+    },
+    "generator": {
+      "command": "PYTHONPATH=. <python312> scripts/apply_nuca_feedback_v81.py; then rank_games_pack.py --write and build_derived_catalog_v38.py --write",
+      "result": "One node, one alias, four directed edges. Five-file transaction GREEN; no game items staged. Puzzles regenerated identically, pack byte-exact, 336 frozen boards exact. Trusted derived digest refreshed only after payload proof.",
+      "evidence": "artifact-delta.json"
+    },
+    "impact": {
+      "result": "208 approved API targets; only Baclava newly hot for Nucă. All old paths, curated profiles and bounded selection samples preserved; 222,582 +1 ranks and 121 marginal temperature crossings disclosed.",
+      "evidence": "impact/final-impact-receipt.json"
+    },
+    "docs": {
+      "command": "python3 /home/dobo/work/agent-ops/scripts/check_docs.py .",
+      "exit_code": 0,
+      "log_sha256": "7151e0c36510d8905544f380ff1d6f87502ebe0c7e20283629d49f78f94a8f12",
+      "output": "# check_docs /home/dobo/work/_worktrees/cat_de_roman_esti/fix__v81-nuca-feedback\nfiles=31 dead_links=0 stale_terms=0 retired_verbs=0 orphans=0\n\n## dead links\n(none)\n\n## stale model terms\n(none)\n\n## retired ops verbs\n(none)\n\n## orphan docs\n(none)\n"
+    },
+    "staged_whitespace": {
+      "command": "git diff --cached --check",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output": ""
+    },
+    "complete_branch_whitespace": {
+      "command": "git diff --check dbbcf6e8b810fb990c9acffb42d6426138551637",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output": ""
+    }
+  },
+  "source_and_test_sha256": {
+    "cat_de_roman_esti/wordgames/contexto.py": "be73a3aaedfb8a3164643fd350052e12560dc52d6df21225d99d2c0e82688dd5",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "05a1075ba93c4ca2d00da0819c9d4f541330ba727e4b71f556d346a647131f24",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "da816f4038ab01b619662409e0a5f20cfad8a81a2e5b1544fe8dbf517b060ec1",
+    "scripts/nuca_feedback_v81_data.py": "daea0d654ecd7f05fde467b7eccfad00e76d597f67b0a4106554a3de52004f07",
+    "scripts/apply_nuca_feedback_v81.py": "7338e31899c31b5243da8d568b719cf7b5b67ffbe9742b575d249be8a541c824",
+    "tests/test_v81_nuca_feedback.py": "0095e936a034ab2b4e2c9c4d51fc2a22e570a977b5455edd85e513d152e5fb77",
+    "tests/test_v81_history.py": "8eafa04f0618fdc4da5a836c08b5815f09ce9f7fb26db4bc920b456a425a1afa",
+    "tests/content_history.py": "4c310c66dcb6b74c731e6d33b7326065dcc93322219c09cbdcc14d9f2554214b",
+    "frontend/e2e/seeded-starts.json": "482344df66a38c0d1497811398b36133782ebe75d6065a8d3009f2a08f441f09"
+  },
+  "intermediate_findings": [
+    "Naive one-edge and four-edge graph simulations were rejected for transitive false warmth. The final graph retains four factual recipe links and uses bounded Contexto native feedback.",
+    "Unambiguous nucile was the sole accepted alias. Broader/tree/kernel/coconut forms in early simulations were not imported.",
+    "Current V47 responsive/rank values and V72 degree/mobile-hash expectations were refreshed for the extra reachable node. No semantic assertion or timing threshold was weakened.",
+    "The first browser run passed 106 cases and failed two Contexto startup snapshot assertions (reachable_count 2288 versus 2289). The existing solutions.py --write-starts generator changed exactly that field; the complete rerun passed 108.",
+    "The generation timing gate failed at 53.14 seconds during parallel/high host load and at 49.93 seconds in an isolated run while host load remained high. No code or 45-second ceiling was changed. The final serial full suites passed all 1024 tests on both runtimes. Static diagnosis and its unmeasured limits are archived.",
+    "Existing game and historical content tests use exact inverse reconstruction of the V81/V80 deltas. Raw historical reviews and original SHA assertions remain intact."
+  ],
+  "notes": [
+    "Frontend application source/assets are unchanged; only the generated browser test snapshot changed. No bundle regeneration.",
+    "Accounts enabled only for isolated tests. No push, deployment, production verification or human playtest.",
+    "The paired heavy performance comparison was not executed; no CPU/profile measurement from it is claimed."
+  ]
+}

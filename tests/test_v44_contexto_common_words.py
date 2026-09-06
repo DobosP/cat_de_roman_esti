@@ -106,16 +106,16 @@ def test_v44_alias_source_is_exact_bounded_and_applied_to_both_kg_copies() -> No
     assert resolve_projection("a sosi") is not None
 
     meta = fixture["meta"]
-    assert meta["build_version"] == "fixture-v77-flour-associations"
-    assert meta["counts"]["nodes"] == 2364
-    assert meta["counts"]["edges"] == 9219
+    assert meta["build_version"] == "fixture-v81-nuca-feedback"
+    assert meta["counts"]["nodes"] == 2365
+    assert meta["counts"]["edges"] == 9223
     assert meta["counts"]["puzzles"] == 180
-    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8450
+    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8451
 
 
 def test_v44_projection_funnel_is_explicit_nonwinning_and_collision_safe() -> None:
     review = _json(_REVIEW)
-    assert len(PROJECTION_TERMS) == 473
+    assert len(PROJECTION_TERMS) == 472
     assert review["accepted_projections"] == _NEW_PROJECTIONS
     for surface, anchor_id in _NEW_PROJECTIONS.items():
         term = resolve_projection(surface)

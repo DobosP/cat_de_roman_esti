@@ -1,0 +1,171 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+from collections import Counter
+from pathlib import Path
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cat_de_roman_esti.web.settings")
+
+import django
+
+django.setup()
+
+from cat_de_roman_esti.graph import Graph
+from cat_de_roman_esti.wordgames import contexto
+from cat_de_roman_esti.wordgames.contexto_feedback import feedback_proxy_id
+from cat_de_roman_esti.wordgames.packs import get_pack
+from cat_de_roman_esti.wordgames.service import WordGameService, get_service
+
+ROOT = Path("/home/dobo/work/_worktrees/cat_de_roman_esti/fix__v81-nuca-feedback")
+SCRATCH = Path("/home/dobo/work/_temp/v81-nuca-feedback")
+KG_PATH = ROOT / "cat_de_roman_esti/fixtures/kg_sample.json"
+PROPOSAL_PATH = SCRATCH / "proposal.json"
+OUT_PATH = SCRATCH / "impact/ordinal-impact-bounded-final.json"
+NEW_NODE = "n_v81_food_pantry_nuca"
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def candidate_service() -> WordGameService:
+    raw = json.loads(KG_PATH.read_text(encoding="utf-8"))
+    proposal = json.loads(PROPOSAL_PATH.read_text(encoding="utf-8"))
+    node = {**proposal["node"], "difficulty_tier": "easy", "degree": 4}
+    edges = [
+        {
+            "id": f"v81-sim-{index}",
+            "src_id": item["src"],
+            "dst_id": item["dst"],
+            "relation": item["relation"],
+            "label_ro": item["label_ro"],
+            "strength": item["strength"],
+            "is_distractor": item["is_distractor"],
+            "bidirectional": item["bidirectional"],
+        }
+        for index, item in enumerate(proposal["edges"], 1)
+    ]
+    return WordGameService(
+        Graph.from_records([*raw["kg_nodes"], node], [*raw["kg_edges"], *edges])
+    )
+
+
+def session_for(svc: WordGameService, target: str, difficulty: str, category: str):
+    old = contexto.get_service
+    contexto.get_service = lambda: svc
+    try:
+        return contexto._build_session(target, difficulty, None, category=category)
+    finally:
+        contexto.get_service = old
+
+
+def score_old_node(svc, session, distances, submitted_id):
+    anchor_id = feedback_proxy_id(submitted_id)
+    if anchor_id != submitted_id and not svc.exists(anchor_id):
+        anchor_id = submitted_id
+    distance = distances.get(anchor_id)
+    weighted = session.weighted_dist.get(anchor_id)
+    rank = contexto.rank_for(session, distance, weighted)
+    if anchor_id != submitted_id:
+        rank = max(2, min(session.reachable + 1, rank + 1))
+        if distance == 0:
+            distance = 1
+    return {
+        "distance": distance,
+        "weighted_distance": weighted,
+        "rank": rank,
+        "temperature": contexto.temperature_for(
+            session, distance, weighted, rank_override=rank
+        ),
+        "closeness": contexto.closeness_for(
+            session, distance, weighted, rank_override=rank
+        ),
+    }
+
+
+def main() -> None:
+    baseline = get_service()
+    candidate = candidate_service()
+    nodes = sorted(baseline.graph.nodes)
+    target_rows = []
+    totals = Counter()
+    temperature_crossings = []
+    distance_regressions = []
+    for item in get_pack().pool("contexto"):
+        target = str(item.payload["target"])
+        bs = session_for(baseline, target, item.difficulty, item.category)
+        cs = session_for(candidate, target, item.difficulty, item.category)
+        bd = baseline.distances_to(target)
+        cd = candidate.distances_to(target)
+        target_counts = Counter()
+        target_crossings = []
+        for node_id in nodes:
+            if bd.get(node_id) != cd.get(node_id):
+                distance_regressions.append(
+                    {"pack_id": item.id, "node_id": node_id, "before": bd.get(node_id), "after": cd.get(node_id)}
+                )
+            old = score_old_node(baseline, bs, bd, node_id)
+            new = score_old_node(candidate, cs, cd, node_id)
+            target_counts["old_nodes_checked"] += 1
+            target_counts["rank_changed"] += old["rank"] != new["rank"]
+            target_counts["rank_plus_one"] += new["rank"] == old["rank"] + 1
+            target_counts["temperature_changed"] += old["temperature"] != new["temperature"]
+            target_counts["closeness_changed"] += old["closeness"] != new["closeness"]
+            if old["temperature"] != new["temperature"]:
+                target_crossings.append(
+                    {
+                        "node_id": node_id,
+                        "label": baseline.label(node_id),
+                        "before": old,
+                        "after": new,
+                    }
+                )
+        totals.update(target_counts)
+        totals["targets"] += 1
+        totals["targets_reachable_plus_one"] += cs.reachable == bs.reachable + 1
+        totals["targets_with_rank_changes"] += bool(target_counts["rank_changed"])
+        totals["targets_with_temperature_changes"] += bool(target_counts["temperature_changed"])
+        if target_crossings:
+            temperature_crossings.append(
+                {
+                    "pack_id": item.id,
+                    "target_id": target,
+                    "target_label": baseline.label(target),
+                    "changes": target_crossings,
+                }
+            )
+        target_rows.append(
+            {
+                "pack_id": item.id,
+                "target_id": target,
+                "target_label": baseline.label(target),
+                "pilot_eligible": item._pilot_eligible,
+                "before_reachable": bs.reachable,
+                "after_reachable": cs.reachable,
+                **target_counts,
+            }
+        )
+    document = {
+        "schema": "v81-existing-guess-ordinal-impact-v1",
+        "bindings": {
+            "kg_path": str(KG_PATH),
+            "kg_sha256": sha256(KG_PATH),
+            "proposal_path": str(PROPOSAL_PATH),
+            "proposal_sha256": sha256(PROPOSAL_PATH),
+            "old_nodes": len(nodes),
+        },
+        "totals": totals,
+        "existing_node_distance_regressions": distance_regressions,
+        "temperature_crossings": temperature_crossings,
+        "targets": target_rows,
+    }
+    OUT_PATH.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({"totals": totals, "distance_regressions": len(distance_regressions), "temperature_crossing_targets": len(temperature_crossings)}, ensure_ascii=False, indent=2))
+    print(sha256(OUT_PATH))
+
+
+if __name__ == "__main__":
+    main()

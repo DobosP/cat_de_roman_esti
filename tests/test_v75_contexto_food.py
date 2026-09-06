@@ -98,9 +98,9 @@ def test_derived_boards_kg_and_mobile_payloads_are_preserved() -> None:
     # Current-artifact pins; V77 separately reconstructs the complete V75/V76 KG.
     expected = {
         FIXTURES / "kg_sample.json":
-            "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+            "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331",
         ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json":
-            "869499abccc3e6b5befe5d889a0e24c4d3bd67096c4d0a69c58d925680612a28",
+            "9012a0e6c6f48397a94ff8bfcbf297ea58e357ac283c978e4e9542ea66ae77b1",
         FIXTURES / "lant_rejection_tombstones.json":
             "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29",
     }

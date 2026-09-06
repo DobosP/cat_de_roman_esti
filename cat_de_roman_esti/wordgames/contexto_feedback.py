@@ -1,4 +1,4 @@
-"""Reviewed Contexto-only scoring proxies for inbound-only everyday nodes.
+"""Reviewed Contexto-only scoring proxies for everyday nodes.
 
 The V30--V33 beginner meshes deliberately accept edges from the mature graph without
 providing a path back.  That topology is useful to Lanț and Alchimie, but it makes every
@@ -6,11 +6,30 @@ one of those familiar concepts an unreachable Cald sau Rece guess.  These explic
 proxies affect feedback only: the submitted node keeps its public identity, and an exact
 target match bypasses the proxy in :mod:`contexto`.
 
-Each proxy is a mature, recognizable concept connected to the mapped node by an authored
+Each legacy proxy is a mature, recognizable concept connected to the mapped node by an authored
 semantic path of at most three hops.  The inventory is closed and validated in V44 tests.
+
+Native ingredient policies keep direct reviewed recipe feedback while retaining a prior
+projection's approximation elsewhere. They do not add synonym aliases or graph shortcuts.
 """
 
 from __future__ import annotations
+
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True, slots=True)
+class IngredientFeedbackPolicy:
+    fallback_anchor_id: str
+    min_strength: float
+
+
+# V81: preserve Nucă's prior approximate feedback outside its reviewed recipe edges.
+INGREDIENT_FEEDBACK_POLICIES: dict[str, IngredientFeedbackPolicy] = {
+    "n_v81_food_pantry_nuca": IngredientFeedbackPolicy(
+        "n_v24_food_breakfast_miere", min_strength=0.90,
+    ),
+}
 
 # (mature feedback anchor, everyday node ids).  Grouping keeps the intended semantic
 # context visible while still producing an exact, collision-checked node map.

@@ -1,0 +1,106 @@
+{
+  "schema": "v81-independent-implementation-review-v1",
+  "valid_until": "The V81 proposal, implementation sources, data module, generated artifacts, tests, historical reconstruction, ADR-0112 scope, or bound impact receipt changes.",
+  "reviewer": "session_refactor",
+  "role": "independent_implementation_reviewer",
+  "baseline_commit": "dbbcf6e8b810fb990c9acffb42d6426138551637",
+  "verdict": "accept",
+  "findings": [],
+  "bindings": {
+    "proposal": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/proposal.json",
+      "sha256": "0612129b282feb6124c2992078178efc17fa088b0b425dbccf3291ee10b34d8a"
+    },
+    "factual_review": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/factual/factual-review.json",
+      "sha256": "ce87c81e0108c8b5dac4e1faec9436d1cfda7a89073e116eaf91bec9a3f3bb06"
+    },
+    "contexto_feedback": {
+      "path": "cat_de_roman_esti/wordgames/contexto_feedback.py",
+      "sha256": "05a1075ba93c4ca2d00da0819c9d4f541330ba727e4b71f556d346a647131f24"
+    },
+    "contexto_core": {
+      "path": "cat_de_roman_esti/wordgames/contexto.py",
+      "sha256": "be73a3aaedfb8a3164643fd350052e12560dc52d6df21225d99d2c0e82688dd5"
+    },
+    "contexto_projection": {
+      "path": "cat_de_roman_esti/wordgames/contexto_projection.py",
+      "sha256": "da816f4038ab01b619662409e0a5f20cfad8a81a2e5b1544fe8dbf517b060ec1"
+    },
+    "data_module": {
+      "path": "scripts/nuca_feedback_v81_data.py",
+      "sha256": "daea0d654ecd7f05fde467b7eccfad00e76d597f67b0a4106554a3de52004f07"
+    },
+    "applier_wrapper": {
+      "path": "scripts/apply_nuca_feedback_v81.py",
+      "sha256": "7338e31899c31b5243da8d568b719cf7b5b67ffbe9742b575d249be8a541c824"
+    },
+    "history_helper": {
+      "path": "tests/content_history.py",
+      "sha256": "4c310c66dcb6b74c731e6d33b7326065dcc93322219c09cbdcc14d9f2554214b"
+    },
+    "history_tests": {
+      "path": "tests/test_v81_history.py",
+      "sha256": "8eafa04f0618fdc4da5a836c08b5815f09ce9f7fb26db4bc920b456a425a1afa"
+    },
+    "behavior_tests": {
+      "path": "tests/test_v81_nuca_feedback.py",
+      "sha256": "0095e936a034ab2b4e2c9c4d51fc2a22e570a977b5455edd85e513d152e5fb77"
+    },
+    "artifact_delta": {
+      "path": "docs/reviews/v81-nuca-feedback/artifact-delta.json",
+      "sha256": "59321a57549720b688fce22981e7dd92192779daa0aac883ca36224cb89a1033"
+    },
+    "impact_receipt": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/final-impact-receipt.json",
+      "sha256": "c680aaaaa38ce641bee07d345ae430b9a437c7e0bc9265337847336084234070"
+    },
+    "impact_report": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/FINAL_IMPACT_REVIEW.md",
+      "sha256": "94b073005f7bc307c7099e0b17372e7605042aa42462a2f753d5a7eb242981f4"
+    },
+    "adr_0112": {
+      "path": "docs/adr/0112-add-reviewed-walnut-input.md",
+      "sha256": "46582f9a1b03005e227958b8f4fc22763da9db0226fb2f1dd113bec9c0168b4b"
+    }
+  },
+  "generated_artifacts": {
+    "kg_sample_sha256": "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331",
+    "games_pack_sha256": "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29",
+    "board_rankings_sha256": "fa1094a6c51e6d51cdafc5fecd302ef43bd3f44ff0e5aa7b36b7397a8ef7b546",
+    "derived_catalog_sha256": "f66624bfe2e5ef434c9d47eb21b128d569637ac941b85834b2c0a5a196de7a6a",
+    "mobile_contract_sha256": "9012a0e6c6f48397a94ff8bfcbf297ea58e357ac283c978e4e9542ea66ae77b1"
+  },
+  "checks": {
+    "proposal_alignment": "Exact one Nucă node, sole alias nucile, and four forward non-distractor part_of/ingredient pentru edges at 0.97, 0.97, 0.95, and 0.90; generated IDs de8557 through de8560; no incoming edge or game item.",
+    "applier_scope": "The thin wrapper uses the existing supported V24 transaction with the V81 data module. No applier or density exception was introduced.",
+    "contexto_policy": "Exact self bypasses proxying. Native feedback requires the reviewed node to exist and an exact forward, non-distractor part_of edge labeled ingredient pentru at strength >=0.90. Reverse, weak, distractor, wrong-relation, and wrong-label cases retain Miere fallback; source inspection confirms a custom graph without Miere falls back to native behavior.",
+    "privacy_and_wins": "Changed anchors retain rank >=2 and feedback distance >=1. Exact Nucă/nucile wins only when Nucă is the target. Guesses, fuzzy confirmation, unknown suggestions, and warmer clues share the private anchor helper; public guesses keep Nucă identity and never expose the Miere anchor or secret target.",
+    "input_scope": "Nucă, accentless nuca, uppercase variants through ordinary normalization, and sole alias nucile resolve to the native node. Ambiguous tree/fruit forms nuci, nucii, nucilor; tree forms; miez de nucă; and nucă de cocos remain unresolved and do not fuzzy-score. Advisory Nucă suggestions are suppressed when Nucă or its private Miere anchor is secret.",
+    "clues": "Direct inspection and a focused real-route test show Nucă as a playable rank-2 warmer clue for Baclava while remaining nonwinning and private; the shared scorer gives the same playable rank for all reviewed recipe edges and a penalized nonwinning rank-2 Miere proxy. Hidden Nucă is excluded as the target. Existing played-anchor deduplication applies to both native and fallback anchors.",
+    "content_delta": "Actual KG is 2365 nodes, 9223 edges, 180 puzzles, and 8451 aliases. Old edges are byte-equivalent; only the four recipe target nodes change, by degree +1. Pack 621 records and all 180 puzzles are byte-exact; all 336 frozen derived board payloads are exact.",
+    "cross_game_impact": "Independent actual-route evidence found zero Conexiuni, Lanț, Alchimie, Intrusul/Perechi, puzzle, or bounded selection changes. Across 208 approved Contexto targets, only valid Baclava becomes Fierbinte; 207 targets keep prior Nucă fallback distance and temperature. One added reachable leaf causes documented +1 ordinal and sparse percentile-boundary changes without changing old semantic distances.",
+    "rankings": "Baclava gains one familiarity, quality, and pilot-score point and moves 121 to 117; four displaced rows move by one. No status, eligibility, or selection-weight changes.",
+    "history": "The reconstruction helper asserts the exact V81 after-state and restores the pre-wave KG, ranking order/rows, derived metadata, and retired projection row. Historical tests bind the reconstructed baseline KG, rankings, derived artifact, unchanged pack, and 180 puzzles to immutable hashes.",
+    "decision_scope": "ADR-0112 explicitly permits four outgoing edges only for this new Nucă node, while retaining the normal density rule and forbidding broader aliases, reverse edges, or old-node fan-out changes."
+  },
+  "verification": [
+    {
+      "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest -q tests/test_v81_nuca_feedback.py tests/test_v81_history.py tests/test_v77_flour_associations.py tests/test_v79_gem_feedback.py",
+      "result": "45 passed"
+    },
+    {
+      "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m ruff check cat_de_roman_esti/wordgames/contexto.py cat_de_roman_esti/wordgames/contexto_feedback.py cat_de_roman_esti/wordgames/contexto_projection.py scripts/nuca_feedback_v81_data.py scripts/apply_nuca_feedback_v81.py tests/content_history.py tests/test_v81_history.py tests/test_v81_nuca_feedback.py",
+      "result": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    }
+  ],
+  "limitations": [
+    "This reviewer did not run the full test suite.",
+    "The selector evidence covers 100 seeds and 30 September daily values per game and the Contexto gastronomie/usor shelf; it is bounded rather than exhaustive.",
+    "Nucă is not a current pack target. Exact-self and non-packed recipe behavior are controlled private-session checks; human playtesting and future target review remain separate."
+  ]
+}

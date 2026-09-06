@@ -1,0 +1,68 @@
+{
+  "schema": "v81-alchimie-mining-static-diagnosis-v1",
+  "valid_until": "Alchimie mining code, V81 graph delta, or the 12-seed timing gate changes",
+  "baseline_commit": "dbbcf6e8b810fb990c9acffb42d6426138551637",
+  "timing_gate": {
+    "test": "tests/test_alchimie_sparse_recipes.py::test_many_mined_sessions_stay_bounded_solvable_and_fast",
+    "workload": "12 sequential _build_session calls; seeds 0..11; difficulties usor/normal/greu by seed modulo 3; cold projection cache",
+    "limit_seconds": 45.0
+  },
+  "observations": {
+    "alchimie_source_changed_by_v81": false,
+    "graph_delta": "one gastronomie node and four outgoing gastronomie recipe edges; no incoming edge",
+    "seed_categories": {
+      "0": "viata_de_roman",
+      "1": "gastronomie",
+      "2": "viata_de_roman",
+      "3": "geografie",
+      "4": "geografie",
+      "5": "personalitati",
+      "6": "stiinta",
+      "7": "limba",
+      "8": "geografie",
+      "9": "meme_net",
+      "10": "personalitati",
+      "11": "meme_net"
+    },
+    "structurally_exact_sessions": 11,
+    "potentially_rng_shifted_sessions": 1,
+    "gastronomie_seed_pool": {
+      "baseline": 184,
+      "actual": 185,
+      "new_node_index_in_salience_order": 36,
+      "selected_seed_inventory_size_before_graph_search": 7
+    }
+  },
+  "timing_evidence": [
+    {
+      "source": "root-reported first full Python 3.12 run",
+      "elapsed_seconds": 53.14,
+      "host_load": "34-43",
+      "result": "failed timing ceiling"
+    },
+    {
+      "source": "root-reported isolated retry under the same high-load interval",
+      "elapsed_seconds": 49.93,
+      "host_load": "34-43",
+      "result": "failed timing ceiling"
+    },
+    {
+      "source": "root-reported final uncontested full Python 3.12 run",
+      "elapsed_seconds": "less than 45; exact value not supplied",
+      "host_load": 11,
+      "result": "passed timing ceiling with unchanged graph and Alchimie implementation"
+    },
+    {
+      "source": "root-reported full Python 3.14 run",
+      "elapsed_seconds": "less than 45; exact value not supplied",
+      "host_load": "not supplied",
+      "result": "passed timing ceiling"
+    }
+  ],
+  "assessment": "No demonstrated deterministic V81 performance regression. Category scoping makes 11 of the 12 fixed-seed sessions structurally insensitive to the gastronomie-only graph delta. Seed 1 can select a different gastronomie inventory because the eligible pool grows by one, so a small workload difference remains possible, but the identical implementation and actual graph pass the strict ceiling when run uncontested. The two failures cluster under extreme host load. This supports host contention as the observed failure cause without changing the threshold.",
+  "limitations": [
+    "The requested paired fresh-process benchmark was deliberately not launched after root asked to hold it during the final suite and then canceled it after the uncontested gate passed.",
+    "No CPU-time/wall-time ratio or exact seed-1 mined-session profile was collected.",
+    "The passing final-run timings are root-reported, not independently measured by this reviewer."
+  ]
+}

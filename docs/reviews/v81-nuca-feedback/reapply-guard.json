@@ -1,0 +1,20 @@
+{
+  "command": "PYTHONPATH=. <python312> scripts/apply_nuca_feedback_v81.py",
+  "exit_code": 1,
+  "before_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331",
+    "tests/fixtures/kg_sample.json": "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331",
+    "cat_de_roman_esti/fixtures/games_pack.json": "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29",
+    "tests/fixtures/games_pack.json": "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "9012a0e6c6f48397a94ff8bfcbf297ea58e357ac283c978e4e9542ea66ae77b1"
+  },
+  "after_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331",
+    "tests/fixtures/kg_sample.json": "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331",
+    "cat_de_roman_esti/fixtures/games_pack.json": "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29",
+    "tests/fixtures/games_pack.json": "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "9012a0e6c6f48397a94ff8bfcbf297ea58e357ac283c978e4e9542ea66ae77b1"
+  },
+  "unchanged": true,
+  "output": "apply_common_words_v24: ERROR — common-word wave is already applied (fixture-v81-nuca-feedback); transaction restored"
+}

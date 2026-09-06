@@ -51,19 +51,19 @@ _LEDGER = _ROOT / "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 _REVIEW = _ROOT / "docs/reviews/v52-household-morphology/vocabulary.json"
 
-_KG_SHA256 = "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370"
+_KG_SHA256 = "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331"
 _PACK_SHA256 = "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29"
-_RANKINGS_SHA256 = "823c5f302bd36c833283038affb1125dc434a1d34fba635e71c06b721cda4cec"
-_DERIVED_SHA256 = "0787a4325c84753c739e7900f174cc99f46e9a4d3fbd8ce1e035cdf84c9b6ae2"
+_RANKINGS_SHA256 = "fa1094a6c51e6d51cdafc5fecd302ef43bd3f44ff0e5aa7b36b7397a8ef7b546"
+_DERIVED_SHA256 = "f66624bfe2e5ef434c9d47eb21b128d569637ac941b85834b2c0a5a196de7a6a"
 _CANDIDATE_FUNNEL_SHA256 = (
     "21bf03bc35819a0957d98cbef23a060daf8abf63c5afdaed5c0a53a9d7b7a535"
 )
-_RANKING_ROWS_SHA256 = "665b40e7d8f0ac1ae98f581238b31cf95a1d777785cd81a63c0e651eb1d269fa"
+_RANKING_ROWS_SHA256 = "68eb332f2e0f940cf413c020bf104679afeac1cbc0b742b30826b4e3f5c1db28"
 _FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
 _NODES_WITHOUT_ALIASES_SHA256 = (
-    "518836374f3e9e8650be84b13772d59b05d35313a13b5d20aaa4e9aa5729dd3e"
+    "b1e54aa885302131fb26b9a8740d63399196235f4c0786eb7382dfa77c05d178"
 )
-_EDGES_SHA256 = "bdd6a4d45baeec1c389f2beb97d4cc07671e5a2310ec9ba25dd1e024dbf9c76b"
+_EDGES_SHA256 = "913b938c4d6206a11e07e9a13878a6ec117b1586868f44394c9626607979dc3d"
 _PUZZLES_SHA256 = "3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc"
 _V49_LEDGER_SHA256 = "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29"
 _REJECTED = {"păturile", "păturilor"}
@@ -176,12 +176,12 @@ def test_v52_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     assert all(resolve_projection(surface) is None for surface in set(aliases) | _REJECTED)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert fixture["meta"]["build_version"] == (
-        "fixture-v77-flour-associations"
+        "fixture-v81-nuca-feedback"
     )
-    assert fixture["meta"]["counts"]["nodes"] == 2364
-    assert fixture["meta"]["counts"]["edges"] == 9219
+    assert fixture["meta"]["counts"]["nodes"] == 2365
+    assert fixture["meta"]["counts"]["edges"] == 9223
     assert fixture["meta"]["counts"]["puzzles"] == 180
-    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8450
+    assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8451
 
 
 def test_v52_aliases_play_in_contexto_and_only_on_existing_legal_lant_hops() -> None:
@@ -244,7 +244,7 @@ def test_v52_preserves_projection_topology_pack_and_frozen_board_payloads() -> N
         for node in fixture["kg_nodes"]
     ]
 
-    assert len(PROJECTION_TERMS) == 473
+    assert len(PROJECTION_TERMS) == 472
     assert len({term.domain for term in PROJECTION_TERMS}) == 26
     assert _sha256(_PACKAGE_KG) == _KG_SHA256
     assert _sha256(_PACKAGE_PACK) == _PACK_SHA256
@@ -276,11 +276,11 @@ def test_v52_mobile_contract_and_v49_ledger_persist_exactly() -> None:
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
     assert checked_in["manifest"]["build_version"] == (
-        "fixture-v77-flour-associations"
+        "fixture-v81-nuca-feedback"
     )
     assert checked_in["manifest"]["counts"] == {
-        "nodes": 2364,
-        "edges": 9219,
+        "nodes": 2365,
+        "edges": 9223,
         "puzzles": 180,
     }
 

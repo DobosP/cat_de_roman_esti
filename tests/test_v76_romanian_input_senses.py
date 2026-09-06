@@ -41,6 +41,7 @@ def test_every_existing_label_id_and_alias_keeps_its_resolution():
     surfaces = sorted({
         text
         for node in svc.graph.nodes.values()
+        if node.id != "n_v81_food_pantry_nuca"  # V81 adds three new authored surfaces.
         for text in (node.id, node.label_ro, *node.aliases)
     })
     rows = [(surface, svc.resolve(surface)) for surface in surfaces]

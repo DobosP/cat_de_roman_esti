@@ -38,17 +38,17 @@ _CURRENT_PACK_SHA256 = "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc696
 _V48_AUDIT = (
     _ROOT / "docs/reviews/v48-alchimie-pending-gate/projection-audit.json"
 )
-_EXPECTED_NODE_COUNT = 2364
-_EXPECTED_EDGE_COUNT = 9219
+_EXPECTED_NODE_COUNT = 2365
+_EXPECTED_EDGE_COUNT = 9223
 _EXPECTED_AUTHORED_EDGE_COUNT = 54
 _EXPECTED_LOCAL_EDGE_COUNT = 36
 _V32_ALIAS_COUNT = 7333
 
-# This is the current served Contexto distance profile. V77's two directed flour edges
-# and V80's approved target change it; the V75/V76 profile digest was
+# This is the current served Contexto distance profile. V77's flour edges, V80's
+# target, and V81's walnut routes change it; the V75/V76 profile digest was
 # 5b2a2a7bb2ec09e84b29a9689748d1d8c89347f8355e77300bb8219039a5cd9b.
 _CURRENT_CONTEXTO_PROFILE_SHA256 = (
-    "b1ccbea70faea1255813c4dfdedcf9d99d804d1be9257de047f6046a98ce9a8d"
+    "714f9ecbcd8f180a11cc4e674f876704333aa8db3caacf229eab72a7001b79e3"
 )
 _V32_LANT_PROFILE_SHA256 = (
     "6fe32a7aacb464d8d30ae2d97bc02e9ed0ef5413ee264e2424f13388a7f8e8c2"
@@ -218,7 +218,7 @@ def test_v33_source_inventory_builder_application_counts_and_mirrors():
     assert len(built["edges"]) == _EXPECTED_AUTHORED_EDGE_COUNT
     assert built == DATA.build_nodes_and_edges()
     assert fixture["meta"]["build_version"] == (
-        "fixture-v77-flour-associations"
+        "fixture-v81-nuca-feedback"
     )
     assert (len(fixture["kg_nodes"]), len(fixture["kg_edges"])) == (
         _EXPECTED_NODE_COUNT,
@@ -230,8 +230,8 @@ def test_v33_source_inventory_builder_application_counts_and_mirrors():
     # ADR-0080 contributed forty-six aliases; ADR-0081 through ADR-0084
     # contributed forty-eight each. V61 through V68 contribute forty-eight aliases each;
     # V69 has no vocabulary module; V70 contributes forty-six aliases, V71 forty-eight,
-    # and V72 fifty.
-    assert alias_count == _V32_ALIAS_COUNT + authored_alias_count + 1050
+    # V72 fifty, and V81 one exact walnut form.
+    assert alias_count == _V32_ALIAS_COUNT + authored_alias_count + 1051
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert _PACKAGE_PACK.read_bytes() == _TEST_PACK.read_bytes()
 
@@ -540,7 +540,7 @@ def test_v33_mobile_contract_is_exact_current_and_public():
 
     assert checked_in == mobile_app_pack_snapshot(_PACKAGE_KG)
     assert checked_in["manifest"]["build_version"] == (
-        "fixture-v77-flour-associations"
+        "fixture-v81-nuca-feedback"
     )
     assert checked_in["manifest"]["counts"] == {
         "nodes": _EXPECTED_NODE_COUNT,

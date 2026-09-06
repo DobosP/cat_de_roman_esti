@@ -1,0 +1,372 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import subprocess
+from pathlib import Path
+
+ROOT = Path("/home/dobo/work/_worktrees/cat_de_roman_esti/fix__v81-nuca-feedback")
+COZONAC = "n_gas_cozonac"
+NUCA = "nucă"
+FIXED_INPUTS = ("Nucă", "nuca", "nuci", "nucile", "alună", "miere", "fistic", "cozonac")
+RECIPE_TARGETS = (
+    "n_gas_cozonac",
+    "n_v17gas_coliva",
+    "n_gas_baclava_dobrogeana",
+    "n_v21gas_cornulete",
+)
+NEW_NODE_ID = "n_v81_food_pantry_nuca"
+MIERE_ID = "n_v24_food_breakfast_miere"
+FILES = {
+    "kg": ROOT / "cat_de_roman_esti/fixtures/kg_sample.json",
+    "pack": ROOT / "cat_de_roman_esti/fixtures/games_pack.json",
+    "rankings": ROOT / "cat_de_roman_esti/fixtures/board_rankings_v37.json",
+    "derived": ROOT / "cat_de_roman_esti/fixtures/derived_catalog_v38.json",
+    "mobile": ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json",
+    "projection_source": ROOT / "cat_de_roman_esti/wordgames/contexto_projection.py",
+    "contexto_source": ROOT / "cat_de_roman_esti/wordgames/contexto.py",
+    "service_source": ROOT / "cat_de_roman_esti/wordgames/service.py",
+}
+PROPOSAL = ROOT.parent.parent.parent / "_temp/v81-nuca-feedback/proposal.json"
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def strings(value):
+    if isinstance(value, str):
+        yield value
+    elif isinstance(value, dict):
+        for item in value.values():
+            yield from strings(item)
+    elif isinstance(value, list):
+        for item in value:
+            yield from strings(item)
+
+
+def ids(value):
+    if isinstance(value, dict):
+        for key, item in value.items():
+            if key == "id":
+                yield item
+            yield from ids(item)
+    elif isinstance(value, list):
+        for item in value:
+            yield from ids(item)
+
+
+def public_subset(body: dict) -> dict:
+    return {
+        key: body.get(key)
+        for key in (
+            "ok", "needs_confirmation", "message", "suggestions", "attempts", "won",
+            "reachable_count", "guess", "guesses", "feedback", "score",
+        )
+        if key in body
+    }
+
+
+def capture(phase: str, output: Path, simulate_edges: int, bounded_proxy: bool) -> None:
+    import django
+
+    django.setup()
+    from django.test import Client
+
+    from cat_de_roman_esti.wordgames import contexto
+    from cat_de_roman_esti.wordgames.contexto_projection import (
+        PROJECTION_NEIGHBORHOODS,
+        PROJECTION_TERMS,
+        resolve_projection,
+        suggest_projection,
+    )
+    from cat_de_roman_esti.wordgames.packs import get_pack
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames.service import WordGameService, get_service
+
+    client = Client()
+    simulation = None
+    if simulate_edges:
+        if simulate_edges not in (1, 4):
+            raise ValueError("simulate_edges must be 0, 1, or 4")
+        raw_kg = json.loads(FILES["kg"].read_text(encoding="utf-8"))
+        proposal = json.loads(PROPOSAL.read_text(encoding="utf-8"))
+        node_id = NEW_NODE_ID
+        node = {
+            **proposal["node"],
+            "difficulty_tier": "easy",
+            "degree": simulate_edges,
+        }
+        selected_edges = proposal["edges"][:simulate_edges]
+        edges = [
+            {
+                "id": f"v81-sim-{index}",
+                "src_id": item["src"],
+                "dst_id": item["dst"],
+                "relation": item["relation"],
+                "label_ro": item["label_ro"],
+                "strength": item["strength"],
+                "is_distractor": item["is_distractor"],
+                "bidirectional": item["bidirectional"],
+            }
+            for index, item in enumerate(selected_edges, 1)
+        ]
+        graph = Graph.from_records([*raw_kg["kg_nodes"], node], [*raw_kg["kg_edges"], *edges])
+        svc = WordGameService(graph)
+        contexto.get_service = lambda: svc
+        if bounded_proxy:
+            original_feedback_anchor_id = contexto._feedback_anchor_id
+
+            def bounded_feedback_anchor_id(service, node_id: str, target_id: str) -> str:
+                if node_id != NEW_NODE_ID:
+                    return original_feedback_anchor_id(service, node_id, target_id)
+                if node_id == target_id:
+                    return node_id
+                edge = service.link(node_id, target_id)
+                if (
+                    edge is not None
+                    and edge.relation == "part_of"
+                    and edge.label_ro == "ingredient pentru"
+                    and edge.strength >= 0.90
+                ):
+                    return node_id
+                return MIERE_ID if service.exists(MIERE_ID) else node_id
+
+            contexto._feedback_anchor_id = bounded_feedback_anchor_id
+        simulation = {"node": node, "edges": edges}
+    else:
+        svc = get_service()
+    pack = get_pack()
+
+    def post_for(target: str, text: str, *, difficulty="usor", category="gastronomie"):
+        session = contexto._build_session(target, difficulty, None, category=category)
+        game_id = contexto.store.create(session)
+        try:
+            response = client.post(
+                f"/api/wordgames/contexto/games/{game_id}/guess",
+                {"text": text},
+                content_type="application/json",
+            )
+            body = response.json()
+            target_label = svc.label(target)
+            return {
+                "status": response.status_code,
+                "body": public_subset(body),
+                "target_hidden": (
+                    "target" not in body
+                    and "solution" not in body
+                    and target not in set(ids(body))
+                    and target_label not in set(strings(body))
+                ),
+            }
+        finally:
+            if not contexto.store.delete(game_id):
+                raise RuntimeError(f"temporary session was not deleted: {game_id}")
+
+    approved = pack.pool("contexto")
+    sweep = []
+    for item in approved:
+        target = str(item.payload["target"])
+        result = post_for(
+            target,
+            NUCA,
+            difficulty=item.difficulty,
+            category=item.category,
+        )
+        sweep.append(
+            {
+                "pack_id": item.id,
+                "target_id": target,
+                "target_label": svc.label(target),
+                "category": item.category,
+                "difficulty": item.difficulty,
+                "pilot_eligible": item._pilot_eligible,
+                **result,
+            }
+        )
+
+    fixed = {text: post_for(COZONAC, text) for text in FIXED_INPUTS}
+    has_nuca = svc.exists(NEW_NODE_ID)
+    recipe_targets = {
+        target: post_for(target, NUCA)
+        for target in RECIPE_TARGETS
+    } if has_nuca else {}
+    self_target = {
+        text: post_for(NEW_NODE_ID, text)
+        for text in ("Nucă", "nuca", "nuci", "nucile", "miere")
+    } if has_nuca else {}
+    resolution = {}
+    for text in FIXED_INPUTS:
+        projection = resolve_projection(text)
+        resolution[text] = {
+            "exact_id": svc.resolve(text),
+            "fuzzy_id": svc.resolve_fuzzy(text),
+            "projection": None
+            if projection is None
+            else {
+                "surface": projection.surface,
+                "anchor_id": projection.anchor_id,
+                "domain": projection.domain,
+                "rank_penalty": projection.rank_penalty,
+                "mapping_kind": projection.mapping_kind,
+                "public_id": projection.public_id,
+            },
+            "projection_suggestions": [
+                {"surface": term.surface, "anchor_id": term.anchor_id, "public_id": term.public_id}
+                for term in suggest_projection(text)
+            ],
+        }
+    mappings = {
+        term.key: {
+            "surface": term.surface,
+            "anchor_id": term.anchor_id,
+            "domain": term.domain,
+            "rank_penalty": term.rank_penalty,
+            "mapping_kind": term.mapping_kind,
+            "public_id": term.public_id,
+        }
+        for term in PROJECTION_TERMS
+    }
+    kg = json.loads(FILES["kg"].read_text(encoding="utf-8"))
+    document = {
+        "schema": "v81-nuca-feedback-impact-capture-v1",
+        "meta": {
+            "phase": phase,
+            "git_head": subprocess.check_output(
+                ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
+            ).strip(),
+            "git_status": subprocess.check_output(
+                ["git", "status", "--short"], cwd=ROOT, text=True
+            ).splitlines(),
+            "approved_targets": len(approved),
+            "eligible_targets": sum(item._pilot_eligible for item in approved),
+            "projection_terms": len(mappings),
+            "nodes": len(kg["kg_nodes"]),
+            "edges": len(kg["kg_edges"]),
+            "aliases": sum(len(node.get("aliases", [])) for node in kg["kg_nodes"]),
+            "effective_nodes": len(svc.graph.nodes),
+            "effective_edges": len(svc.graph.edges),
+            "simulation": simulation,
+            "bounded_proxy": bounded_proxy,
+            "sha256": {key: sha256(path) for key, path in FILES.items()},
+            "proposal": {"path": str(PROPOSAL), "sha256": sha256(PROPOSAL)},
+        },
+        "projection_mappings": mappings,
+        "projection_neighborhoods": {
+            key: {"anchor_id": value.anchor_id, "min_strength": value.min_strength}
+            for key, value in sorted(PROJECTION_NEIGHBORHOODS.items())
+        },
+        "input_resolution": resolution,
+        "cozonac_fixed_input_probes": fixed,
+        "recipe_target_nuca_probes": recipe_targets,
+        "nuca_self_target_probes": self_target,
+        "approved_target_nuca_feedback": sweep,
+    }
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(document["meta"], ensure_ascii=False, indent=2))
+    print(sha256(output))
+
+
+def compare(before_path: Path, after_path: Path, output: Path) -> None:
+    before = json.loads(before_path.read_text(encoding="utf-8"))
+    after = json.loads(after_path.read_text(encoding="utf-8"))
+    bs = {row["pack_id"]: row for row in before["approved_target_nuca_feedback"]}
+    a_s = {row["pack_id"]: row for row in after["approved_target_nuca_feedback"]}
+    if set(bs) != set(a_s):
+        raise RuntimeError("approved target batch changed")
+    changed = []
+    for pack_id in sorted(bs):
+        old = bs[pack_id]
+        new = a_s[pack_id]
+        if old["body"] != new["body"]:
+            changed.append(
+                {
+                    "pack_id": pack_id,
+                    "target_id": old["target_id"],
+                    "target_label": old["target_label"],
+                    "category": old["category"],
+                    "pilot_eligible": old["pilot_eligible"],
+                    "before": old["body"],
+                    "after": new["body"],
+                }
+            )
+    bm = before["projection_mappings"]
+    am = after["projection_mappings"]
+    mapping_changes = {
+        key: {"before": bm.get(key), "after": am.get(key)}
+        for key in sorted(set(bm) | set(am))
+        if bm.get(key) != am.get(key)
+    }
+    result = {
+        "schema": "v81-nuca-feedback-impact-comparison-v1",
+        "inputs": {
+            "before": {"path": str(before_path), "sha256": sha256(before_path)},
+            "after": {"path": str(after_path), "sha256": sha256(after_path)},
+        },
+        "bindings": {"before": before["meta"], "after": after["meta"]},
+        "projection_mapping_changes": mapping_changes,
+        "input_resolution_changes": {
+            text: {
+                "before": before["input_resolution"][text],
+                "after": after["input_resolution"][text],
+            }
+            for text in FIXED_INPUTS
+            if before["input_resolution"][text] != after["input_resolution"][text]
+        },
+        "cozonac_fixed_input_changes": {
+            text: {
+                "before": before["cozonac_fixed_input_probes"][text],
+                "after": after["cozonac_fixed_input_probes"][text],
+            }
+            for text in FIXED_INPUTS
+            if before["cozonac_fixed_input_probes"][text]
+            != after["cozonac_fixed_input_probes"][text]
+        },
+        "approved_target_counts": {
+            "total": len(bs),
+            "eligible": sum(row["pilot_eligible"] for row in bs.values()),
+            "feedback_changed": len(changed),
+            "eligible_feedback_changed": sum(row["pilot_eligible"] for row in changed),
+        },
+        "changed_feedback": changed,
+        "all_before_targets_hidden": all(row["target_hidden"] for row in bs.values()),
+        "all_after_targets_hidden": all(row["target_hidden"] for row in a_s.values()),
+        "artifact_hash_changes": {
+            key: {
+                "before": before["meta"]["sha256"][key],
+                "after": after["meta"]["sha256"][key],
+            }
+            for key in FILES
+            if before["meta"]["sha256"][key] != after["meta"]["sha256"][key]
+        },
+    }
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(result["approved_target_counts"], indent=2))
+    print(sha256(output))
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    sub = parser.add_subparsers(dest="command", required=True)
+    cap = sub.add_parser("capture")
+    cap.add_argument("--phase", required=True)
+    cap.add_argument("--out", type=Path, required=True)
+    cap.add_argument("--simulate-edges", type=int, default=0)
+    cap.add_argument("--bounded-proxy", action="store_true")
+    comp = sub.add_parser("compare")
+    comp.add_argument("--before", type=Path, required=True)
+    comp.add_argument("--after", type=Path, required=True)
+    comp.add_argument("--out", type=Path, required=True)
+    args = parser.parse_args()
+    if args.command == "capture":
+        capture(args.phase, args.out, args.simulate_edges, args.bounded_proxy)
+    else:
+        compare(args.before, args.after, args.out)
+
+
+if __name__ == "__main__":
+    main()

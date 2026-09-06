@@ -1,0 +1,113 @@
+{
+ "reviewer": "session_refactor",
+ "role": "independent-factual-semantic-reviewer",
+ "wave": "v81-nuca-feedback",
+ "verdict": "accept",
+ "proposal_sha256": "sha256:0612129b282feb6124c2992078178efc17fa088b0b425dbccf3291ee10b34d8a",
+ "baseline_commit": "dbbcf6e8b810fb990c9acffb42d6426138551637",
+ "baseline_bindings": {
+  "knowledge_graph": "sha256:c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+  "contexto_projection": "sha256:d6b80f7cb7abcce77c64d04d94ff2cf7e178ffd6bb1d48cbd7b4a9e441fd9cb1",
+  "contexto_route": "sha256:bdef59b96dd7f3b06321b20463987e7d4140625e60b07bc043383cd3caf3282f"
+ },
+ "node": {
+  "id": "n_v81_food_pantry_nuca",
+  "verdict": "accept",
+  "meaning": "edible walnut fruit and culinary kernel",
+  "description_verdict": "accurate and not exclusive of savory uses",
+  "salience_verdict": "0.90 is credible editorial calibration for an easy, basic food word; sources do not numerically derive it",
+  "aliases": {
+   "accepted": [
+    "nucile"
+   ],
+   "covered_by_canonical_normalization": [
+    "nucă",
+    "nuca",
+    "NUCĂ",
+    "NUCA"
+   ],
+   "excluded": {
+    "nuci / nucii / nucilor": "collide with masculine walnut-tree inflections; Nuci is also a place name",
+    "nuc / nucul / nucului": "walnut tree or wood",
+    "miez de nucă": "edible kernel is part of the fruit rather than a strict whole-node alias",
+    "nucă de cocos": "distinct compound and food",
+    "other nut species": "alună, migdală, fistic and caju are separate concepts"
+   }
+  }
+ },
+ "edges": [
+  {
+   "dst": "n_gas_cozonac",
+   "strength": 0.97,
+   "verdict": "accept",
+   "qualification": "ordinary prominent filling, but not universal across all cozonac recipes"
+  },
+  {
+   "dst": "n_v17gas_coliva",
+   "strength": 0.97,
+   "verdict": "accept",
+   "qualification": "strong traditional ingredient; boiled grain remains the ritual dish's irreducible core"
+  },
+  {
+   "dst": "n_gas_baclava_dobrogeana",
+   "strength": 0.95,
+   "verdict": "accept",
+   "qualification": "common Dobrogean/Balkan filling, with pistachio and other variants also possible"
+  },
+  {
+   "dst": "n_v21gas_cornulete",
+   "strength": 0.9,
+   "verdict": "accept",
+   "qualification": "common variant filling or dough ingredient; jam, rahat, vanilla and other versions remain ordinary"
+  }
+ ],
+ "edge_shape": {
+  "source": "n_v81_food_pantry_nuca",
+  "relation": "part_of",
+  "label_ro": "ingredient pentru",
+  "bidirectional": 0,
+  "is_distractor": 0,
+  "verdict": "accept",
+  "qualification": "weights express reviewed association strength, not a claim that walnut is mandatory in every recipe"
+ },
+ "contexto_policy": {
+  "verdict": "accept",
+  "native_when": "exact self or direct directed non-distractor part_of edge labeled ingredient pentru with strength >=0.90",
+  "fallback": "prior Miere approximation with one-rank proxy penalty and no false exact win",
+  "reason": "relation-driven boundary gives honest native feedback only for reviewed ingredient destinations and suppresses unrelated multi-hop warmth",
+  "required_guards": [
+   "exact Nucă bypasses proxying",
+   "Nucă remains nonwinning when Miere or another fallback target is secret",
+   "guess scoring and suggestion suppression share the same target-aware helper",
+   "future qualifying edges require review because they expand the native-feedback zone"
+  ]
+ },
+ "sources": [
+  "https://dexonline.ro/intrare/nuc%C4%83/38186",
+  "https://dexonline.ro/intrare/nuc/38185",
+  "https://doom.lingv.ro/studiu_introductiv/observatii_recomandari",
+  "https://primarianuciilfov.ro/nuci/",
+  "https://agerpres.ro/social/2021/04/29/traditii-in-bucate-cozonac-moldovenesc-reinventat-dar-cu-acelasi-gust-desavarsit--705669",
+  "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/cozonac-id593926.html",
+  "https://www.protv.ro/emisiuni/vorbeste-lumea/articol/120853-reteta-de-cozonac-cu-nuca-cacao-si-ciocolata-a-majdei-secretul-unui-aluat-perfect",
+  "https://www.digi24.ro/magazin/stil-de-viata/culinar/cele-mai-bune-retete-de-cozonac-pentru-paste-2026-ingredientele-recomandate-de-specialistii-in-gastronomie-pentru-un-aluat-perfect-3703649",
+  "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/coliva-reinterpretata-id911961.html",
+  "https://portal.eduhr.ro/wp-content/uploads/2021/11/A448.pdf",
+  "https://unireaprajituri.ro/wp-content/uploads/2018/12/Cartea_Unirea_100_de_Secrete_Dulci.pdf",
+  "https://www.protv.ro/emisiuni/arena-bucatarilor/articol/55451-arena-bucatarilor-salata-de-caracatita",
+  "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/cornulete-cu-untura-id594322.html",
+  "https://agerpres.ro/social/2021/12/24/tradi-ii-in-bucate-mures-galustele-cu-pasat-sarmalele-si-raciturile-de-porc---nelipsite-din-meniul-d--837407"
+ ],
+ "implementation_checks_required": [
+  "exact node, alias, edge and policy shape",
+  "all-target Contexto impact and exact native-target inventory",
+  "unrelated and fallback controls",
+  "privacy, nonwinning, typo-suggestion and exact-win behavior",
+  "other 472 projection terms, closed 71 proxy inventory and Gem policy exact",
+  "KG, pack, ranking, derived, mobile and other-game preservation"
+ ],
+ "limitations": [
+  "This is an independent Codex factual/semantic review, not a human Romanian SME or playtest.",
+  "Factual acceptance does not replace final implementation or whole-inventory gameplay review."
+ ]
+}

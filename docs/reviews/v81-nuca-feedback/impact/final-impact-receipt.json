@@ -1,0 +1,347 @@
+{
+  "schema": "v81-independent-final-impact-receipt-v1",
+  "valid_until": "the V81 KG, Contexto feedback/projection policy, games pack, rankings, derived catalog, or selector code changes",
+  "verdict": "accept_no_cross_game_blocker",
+  "scope": "Read-only independent impact review against baseline commit dbbcf6e8; scratch runners only. Factual source review and human playtesting remain separate.",
+  "bindings": {
+    "baseline": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/baseline.json",
+      "sha256": "6e1121ad9b544f716d43470e00d794b1cb7c650b3c75fc085e6a41590f6585a8"
+    },
+    "actual_contexto": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/actual-contexto-208.json",
+      "sha256": "d4d9268f50457aae13545584e252671e2e1ba854548d3a894ed8ea2a11cb1585"
+    },
+    "actual_contexto_comparison": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/actual-contexto-208-comparison.json",
+      "sha256": "7886f2fbddae0cf77777d18aba1d45e866ee6c5fe7b30f8dd8aebea3afbb7cd8"
+    },
+    "actual_all_six": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/actual-all-six-impact.json",
+      "sha256": "7467f467999c45d903ce451bd1b167f851f70e7bee631c82a11e2f8f14c18048"
+    },
+    "actual_old_guess_ordinals": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/actual-existing-guess-ordinal-impact.json",
+      "sha256": "ba10bf87f24548d5a4b6a2bc9dd53fdca7a55934c42c87d5d8970173f02d9ecf"
+    },
+    "selection": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/actual-selection-comparison.json",
+      "sha256": "e1e4e9050d2055feab325a53127ed89efc61aa3dd71ebe70b70f734518972599"
+    },
+    "pending_critique": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/pending-critique-actual.json",
+      "sha256": "e04547990d42a0bbc43bdd447681d0b0670eaa6dbf172f31363acc80c520afaf"
+    },
+    "preapply_gate": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/preapply-impact-gate.json",
+      "sha256": "da3d3a3d93d8455a93451fa191f083b438666b6f631c4e4de6df805a394c47cd"
+    },
+    "rejected_one_edge": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/sim-one.json",
+      "sha256": "5669bde1cc2aab6bca30443c7ebdb4d15d82aa99521f4f8acd35c20b286e66ec"
+    },
+    "rejected_four_edge": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/sim-four.json",
+      "sha256": "f6991c0e6a12dcd6a1557bac7191dbcfb2e18282180a3da66e70a67a59bfe582"
+    },
+    "runner_contexto": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/nuca_feedback_impact.py",
+      "sha256": "08b3c2a04436634913256feb94290d9f4f3a2237793b709e676060fdc69cb343"
+    },
+    "runner_all_six": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/actual_all_six_impact.py",
+      "sha256": "eb29d8b332f73a34d990abd29e6dc0e836341fafc562c90f50aca1c900c92687"
+    },
+    "runner_ordinals": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/audit_actual_existing_guess_ordinals.py",
+      "sha256": "f1a6887917d7e7324051554712e28c59aedbabb7665be458bc7786576275de13"
+    },
+    "runner_selection": {
+      "path": "/home/dobo/work/_temp/v81-nuca-feedback/impact/actual_selection_compare.py",
+      "sha256": "d2a4fe032b674d8068ca9a1fe30eecbddabe5d8b83a59eb68aec1ab89714d18d"
+    }
+  },
+  "proposal": {
+    "path": "/home/dobo/work/_temp/v81-nuca-feedback/proposal.json",
+    "sha256": "0612129b282feb6124c2992078178efc17fa088b0b425dbccf3291ee10b34d8a"
+  },
+  "factual_review": {
+    "path": "/home/dobo/work/_temp/v81-nuca-feedback/factual/factual-review.json",
+    "sha256": "ce87c81e0108c8b5dac4e1faec9436d1cfda7a89073e116eaf91bec9a3f3bb06"
+  },
+  "artifact_delta": {
+    "path": "/home/dobo/work/_temp/v81-nuca-feedback/artifact-delta.json",
+    "sha256": "59321a57549720b688fce22981e7dd92192779daa0aac883ca36224cb89a1033"
+  },
+  "actual_hashes": {
+    "kg": "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331",
+    "pack": "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29",
+    "rankings": "fa1094a6c51e6d51cdafc5fecd302ef43bd3f44ff0e5aa7b36b7397a8ef7b546",
+    "derived": "f66624bfe2e5ef434c9d47eb21b128d569637ac941b85834b2c0a5a196de7a6a",
+    "mobile": "9012a0e6c6f48397a94ff8bfcbf297ea58e357ac283c978e4e9542ea66ae77b1",
+    "projection_source": "da816f4038ab01b619662409e0a5f20cfad8a81a2e5b1544fe8dbf517b060ec1",
+    "contexto_source": "be73a3aaedfb8a3164643fd350052e12560dc52d6df21225d99d2c0e82688dd5",
+    "service_source": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"
+  },
+  "contexto_approved_api": {
+    "targets": 208,
+    "eligible": 204,
+    "actual_matches_preapply_simulation": true,
+    "only_temperature_change": {
+      "pack_id": "ct_gastronomie_131",
+      "target": "Baclava dobrogeană",
+      "before": "distance 5, rank 1873, Inghetat, closeness 18",
+      "after": "distance 1, rank 2, Fierbinte, closeness 99, nonwinning"
+    },
+    "fallback_targets_with_same_distance_and_temperature": 207,
+    "rank_plus_one": 145,
+    "rank_same": 62,
+    "all_nonwinning_targets_hidden": true,
+    "identities": "Nucă/nuca and sole alias nucile resolve to the real node; exact Nucă self wins; nuci remains unresolved and is only a target-filtered advisory suggestion.",
+    "recipe_feedback": "Cozonac, Colivă, Baclava dobrogeană and Cornulețe each score Nucă at distance 1/rank 2/Fierbinte without a false win."
+  },
+  "existing_guess_normalization": {
+    "old_nodes_checked": 491712,
+    "rank_changed": 222582,
+    "rank_plus_one": 222582,
+    "temperature_changed": 121,
+    "closeness_changed": 7151,
+    "targets": 208,
+    "targets_reachable_plus_one": 208,
+    "targets_with_rank_changes": 208,
+    "targets_with_temperature_changes": 31,
+    "old_node_distance_changes": 0,
+    "temperature_transitions": {
+      "Inghetat_to_Foarte_rece": 93,
+      "Rece_to_Foarte_rece": 15,
+      "Caldut_to_Rece": 11,
+      "Cald_to_Caldut": 2
+    },
+    "assessment": "Sparse percentile-boundary effects from one extra reachable leaf; no old semantic path changes."
+  },
+  "all_six": {
+    "all_621_pack_records_exact": true,
+    "payload_validation_changes": 0,
+    "pending_critique": {
+      "items": 8,
+      "flagged": 0,
+      "fails": 0
+    },
+    "conexiuni": {
+      "records": 232,
+      "fairness_or_critique_changes": 0
+    },
+    "lant": {
+      "records": 97,
+      "distance_profile_or_shortest_path_changes": 0
+    },
+    "alchimie": {
+      "records": 82,
+      "closure_par_opening_recipe_or_projection_changes": 0
+    },
+    "intrusul_perechi": {
+      "raw_before_after": [
+        [
+          800,
+          9164
+        ],
+        [
+          800,
+          9164
+        ]
+      ],
+      "selected": [
+        336,
+        336
+      ],
+      "changed_selected_rows": 0,
+      "frozen_336_exact": true
+    },
+    "puzzles_180_exact": true,
+    "selection_samples": {
+      "100_seeds_plus_30_september_dailies_per_game_and_contexto_shelf": true,
+      "same_artifact_repeat_exact": true
+    },
+    "nuca_pack_occurrences": 0
+  },
+  "rankings": {
+    "changed_rows": [
+      {
+        "id": "ct_gastronomie_131",
+        "before": {
+          "id": "ct_gastronomie_131",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 55,
+          "play_quality": 88,
+          "pilot_score": 68,
+          "rank": 121,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        },
+        "after": {
+          "id": "ct_gastronomie_131",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 56,
+          "play_quality": 89,
+          "pilot_score": 69,
+          "rank": 117,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        }
+      },
+      {
+        "id": "ct_gastronomie_132",
+        "before": {
+          "id": "ct_gastronomie_132",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 55,
+          "play_quality": 91,
+          "pilot_score": 69,
+          "rank": 117,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        },
+        "after": {
+          "id": "ct_gastronomie_132",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 55,
+          "play_quality": 91,
+          "pilot_score": 69,
+          "rank": 118,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        }
+      },
+      {
+        "id": "ct_geografie_028",
+        "before": {
+          "id": "ct_geografie_028",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 59,
+          "play_quality": 85,
+          "pilot_score": 69,
+          "rank": 118,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        },
+        "after": {
+          "id": "ct_geografie_028",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 59,
+          "play_quality": 85,
+          "pilot_score": 69,
+          "rank": 119,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        }
+      },
+      {
+        "id": "ct_societate_085",
+        "before": {
+          "id": "ct_societate_085",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 59,
+          "play_quality": 85,
+          "pilot_score": 69,
+          "rank": 119,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        },
+        "after": {
+          "id": "ct_societate_085",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 59,
+          "play_quality": 85,
+          "pilot_score": 69,
+          "rank": 120,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        }
+      },
+      {
+        "id": "ct_viata_de_roman_198",
+        "before": {
+          "id": "ct_viata_de_roman_198",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 57,
+          "play_quality": 87,
+          "pilot_score": 69,
+          "rank": 120,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        },
+        "after": {
+          "id": "ct_viata_de_roman_198",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 57,
+          "play_quality": 87,
+          "pilot_score": 69,
+          "rank": 121,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        }
+      }
+    ],
+    "selection_weight_status_eligibility_changes": 0
+  },
+  "graph_direction": {
+    "nodes": "2364→2365",
+    "edges": "9219→9223",
+    "aliases": "8450→8451",
+    "nuca_predecessors": [],
+    "outgoing_edges": [
+      {
+        "dst": "n_gas_cozonac",
+        "relation": "part_of",
+        "label": "ingredient pentru",
+        "strength": 0.97,
+        "distractor": false,
+        "bidirectional": false
+      },
+      {
+        "dst": "n_v17gas_coliva",
+        "relation": "part_of",
+        "label": "ingredient pentru",
+        "strength": 0.97,
+        "distractor": false,
+        "bidirectional": false
+      },
+      {
+        "dst": "n_gas_baclava_dobrogeana",
+        "relation": "part_of",
+        "label": "ingredient pentru",
+        "strength": 0.95,
+        "distractor": false,
+        "bidirectional": false
+      },
+      {
+        "dst": "n_v21gas_cornulete",
+        "relation": "part_of",
+        "label": "ingredient pentru",
+        "strength": 0.9,
+        "distractor": false,
+        "bidirectional": false
+      }
+    ]
+  },
+  "rejected_designs": {
+    "one_edge_global_native": "Rejected: misleading transitive warmth including Chefi la cuțite/Tobă and savory foods; normal topology floor also failed.",
+    "four_edge_global_native": "Rejected: misleading transitive warmth expanded into geography/history through Baclava links.",
+    "alias_scope": "Earlier simulations used provisional aliases. They are historical rejected evidence; final node has only nucile."
+  },
+  "limitations": [
+    "The 100-seed/30-day selector sample is bounded, not exhaustive.",
+    "No full suite was run by this reviewer.",
+    "Nucă is not a current pack item; self-target and non-packed recipe probes are controlled private-session behavior checks."
+  ]
+}

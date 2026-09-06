@@ -1,0 +1,46 @@
+{
+  "schema": "v81-final-docs-review-v1",
+  "reviewer": "wave_audit",
+  "scope": "Final documentation and archive-binding review only; no gates rerun.",
+  "verdict": "accept",
+  "findings": [],
+  "document_bindings": {
+    "review_readme": {
+      "path": "docs/reviews/v81-nuca-feedback/README.md",
+      "sha256": "35c26220fbbc1f7916109d2eab63f52507d88d38c26ff03b8324ded43a4775b9"
+    },
+    "adr_0112": {
+      "path": "docs/adr/0112-add-reviewed-walnut-input.md",
+      "sha256": "46582f9a1b03005e227958b8f4fc22763da9db0226fb2f1dd113bec9c0168b4b"
+    },
+    "status": {
+      "path": "docs/STATUS.md",
+      "sha256": "95312a2125a2aab67e8fedf9bc4587234a1ec71971ed723d77771e3313db44f1"
+    },
+    "beta_candidate": {
+      "path": "docs/BETA_CANDIDATE.md",
+      "sha256": "a8b1a0db0b26a5fabb5e1eec65a452a289b64a8525fd25c8122a102b6a63fd9a"
+    },
+    "verification": {
+      "path": "docs/reviews/v81-nuca-feedback/verification.json",
+      "sha256": "e6fbf42f5fac4b7b2eecc3ebae75defca7848f2c15df5ed3027064b4790230a9"
+    },
+    "manifest": {
+      "path": "docs/reviews/v81-nuca-feedback/review-manifest.json",
+      "sha256": "a4cc49f81266ccae9f752c898575ae4ea0eecd5a4e247d5e0d30b3dedfc72d72"
+    }
+  },
+  "manifest_validation": {
+    "archive_hashes": 36,
+    "source_hashes": 20,
+    "mismatches": []
+  },
+  "checked": [
+    "README, STATUS and BETA consistently distinguish Baclava as the sole newly hot approved Contexto response from the 121 ordinal-normalization temperature-boundary crossings for old guesses.",
+    "The current counts are consistently 2365 nodes, 9223 edges, 8451 aliases and 180 puzzles; scope remains one Nucă node, one alias and four directed recipe edges without a target promotion.",
+    "Claims preserve old semantic distances/paths, the 621-record pack, 180 puzzles and 336 frozen boards while explicitly disclosing changed ordinals, ranking estimates and regenerated metadata.",
+    "Selection claims are limited to the recorded 100-seed and 30-daily samples; documents do not treat them as universal future-selection or human-playtest evidence.",
+    "Verification records 1024 backend passes on each stated runtime, accounts 53 on each, 173 native, 108 browser, validator/lint/docs/whitespace results, and clearly labels the paired performance probe unexecuted without relaxing the timing ceiling."
+  ],
+  "manifest_exclusion": "This review remains in scratch and is intentionally not added to review-manifest.json, so it can bind the manifest without a hash cycle."
+}

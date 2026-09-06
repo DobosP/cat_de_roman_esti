@@ -40,8 +40,8 @@ _TEST_DERIVED = _ROOT / "tests/fixtures/derived_catalog_v38.json"
 
 _PENDING_ID_SET_SHA256 = "508ac4014f6c519fc0891b92474e683e9a26078e86091cee8ee77a1aa10e97c1"
 _PACK_SHA256 = "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29"
-_RANKINGS_SHA256 = "823c5f302bd36c833283038affb1125dc434a1d34fba635e71c06b721cda4cec"
-_DERIVED_SHA256 = "0787a4325c84753c739e7900f174cc99f46e9a4d3fbd8ce1e035cdf84c9b6ae2"
+_RANKINGS_SHA256 = "fa1094a6c51e6d51cdafc5fecd302ef43bd3f44ff0e5aa7b36b7397a8ef7b546"
+_DERIVED_SHA256 = "f66624bfe2e5ef434c9d47eb21b128d569637ac941b85834b2c0a5a196de7a6a"
 _FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
 
 _PROMOTED = {"ct_gastronomie_300"}
@@ -150,7 +150,7 @@ def test_v47_live_feedback_proves_mancare_and_rejects_the_misleading_family_fiel
     family_target = "n_v4soc_familie"
 
     assert len(svc.predecessor_ids(food_target)) == 15
-    assert _responsive_count(svc.distances_to(food_target)) == 2259
+    assert _responsive_count(svc.distances_to(food_target)) == 2260
     assert all(
         svc.resolve(surface) == food_target
         for surface in ("mâncare", "mâncarea", "mâncăruri", "mâncărurile")
@@ -162,7 +162,7 @@ def test_v47_live_feedback_proves_mancare_and_rejects_the_misleading_family_fiel
         node_id = svc.resolve(surface)
         assert node_id is not None
         score = _score_feedback(svc, family, node_id)
-        assert score.rank == 2079
+        assert score.rank == 2080
         assert temperature_for(
             family,
             score.feedback_distance,

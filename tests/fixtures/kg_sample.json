@@ -1,16 +1,16 @@
 {
   "meta": {
-    "build_version": "fixture-v77-flour-associations",
+    "build_version": "fixture-v81-nuca-feedback",
     "generated_at": "2026-06-21T00:00:00Z",
-    "note": "v77: two reviewed directed flour-to-dish ingredient links; existing nodes, aliases and game records preserved, legacy puzzles regenerated deterministically.",
+    "note": "v81: one reviewed walnut concept with four directed recipe ingredient links; no game records or existing aliases, legacy puzzles regenerated deterministically.",
     "counts": {
-      "nodes": 2364,
-      "edges": 9219,
+      "nodes": 2365,
+      "edges": 9223,
       "puzzles": 180,
       "by_category": {
         "arta_cultura": 128,
         "film_tv": 157,
-        "gastronomie": 215,
+        "gastronomie": 216,
         "geografie": 164,
         "istorie": 148,
         "limba": 149,
@@ -6070,7 +6070,7 @@
       "description": "Aluat dulce cu nucă, cacao sau rahat, nelipsit de la Crăciun și Paște.",
       "salience": 0.9737,
       "difficulty_tier": "easy",
-      "degree": 26,
+      "degree": 27,
       "aliases": [
         "cozonacul",
         "cozonaci",
@@ -6693,7 +6693,7 @@
       "description": "Desert cu foi, nucă și sirop, intrat firesc în peisajul culinar dobrogean.",
       "salience": 0.5193,
       "difficulty_tier": "medium",
-      "degree": 15,
+      "degree": 16,
       "aliases": [
         "baclavaua dobrogeană",
         "baclava din Dobrogea",
@@ -23475,7 +23475,7 @@
       "description": "Preparat ritual din grâu fiert îndulcit, amestecat cu nucă și pudrat cu zahăr. Se împarte la pomeniri și parastase în tradiția ortodoxă.",
       "salience": 0.62,
       "difficulty_tier": "medium",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "colivă de grâu",
         "colivă cu nucă",
@@ -30066,7 +30066,7 @@
       "description": "Fursecuri fragede rulate, umplute cu rahat, gem sau nucă și pudrate din belșug cu zahăr. Se coc tradițional în casă înainte de Crăciun, odată cu cozonacul.",
       "salience": 0.55,
       "difficulty_tier": "medium",
-      "degree": 4,
+      "degree": 5,
       "aliases": [
         "cornulețele",
         "cornulețe cu rahat",
@@ -36774,6 +36774,19 @@
       "degree": 1,
       "aliases": [
         "iepurasul"
+      ]
+    },
+    {
+      "id": "n_v81_food_pantry_nuca",
+      "node_type": "concept",
+      "label_ro": "Nucă",
+      "category": "gastronomie",
+      "description": "Fructul nucului, cu coajă tare și miez comestibil folosit în preparate dulci.",
+      "salience": 0.9,
+      "difficulty_tier": "easy",
+      "degree": 4,
+      "aliases": [
+        "nucile"
       ]
     }
   ],
@@ -128965,6 +128978,46 @@
       "relation": "part_of",
       "label_ro": "ingredient pentru",
       "strength": 0.97,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8557",
+      "src_id": "n_v81_food_pantry_nuca",
+      "dst_id": "n_gas_cozonac",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru",
+      "strength": 0.97,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8558",
+      "src_id": "n_v81_food_pantry_nuca",
+      "dst_id": "n_v17gas_coliva",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru",
+      "strength": 0.97,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8559",
+      "src_id": "n_v81_food_pantry_nuca",
+      "dst_id": "n_gas_baclava_dobrogeana",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru",
+      "strength": 0.95,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8560",
+      "src_id": "n_v81_food_pantry_nuca",
+      "dst_id": "n_v21gas_cornulete",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru",
+      "strength": 0.9,
       "is_distractor": 0,
       "bidirectional": 0
     }

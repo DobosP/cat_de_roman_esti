@@ -1,0 +1,5770 @@
+{
+  "schema": "v81-actual-all-six-impact-v1",
+  "valid_until": "V81 fixture, game pack, ranking, derived catalog, or runtime graph logic changes",
+  "bindings": {
+    "baseline_commit": "dbbcf6e8b810fb990c9acffb42d6426138551637",
+    "current_head": "dbbcf6e8b810fb990c9acffb42d6426138551637",
+    "git_status": [
+      " M cat_de_roman_esti/fixtures/board_rankings_v37.json",
+      " M cat_de_roman_esti/fixtures/derived_catalog_v38.json",
+      " M cat_de_roman_esti/fixtures/kg_sample.json",
+      " M cat_de_roman_esti/wordgames/contexto.py",
+      " M cat_de_roman_esti/wordgames/contexto_feedback.py",
+      " M cat_de_roman_esti/wordgames/contexto_projection.py",
+      " M cat_de_roman_esti/wordgames/derived_catalog.py",
+      " M tests/content_history.py",
+      " M tests/fixtures/board_rankings_v37.json",
+      " M tests/fixtures/cat_mobile_app_pack_contract.json",
+      " M tests/fixtures/derived_catalog_v38.json",
+      " M tests/fixtures/kg_sample.json",
+      " M tests/test_v33_basic_words.py",
+      " M tests/test_v44_contexto_common_words.py",
+      " M tests/test_v47_contexto_pending_gate.py",
+      " M tests/test_v48_alchimie_pending_gate.py",
+      " M tests/test_v49_lant_rejection_ledger.py",
+      " M tests/test_v50_synonyms_basic_words.py",
+      " M tests/test_v51_typed_vocabulary.py",
+      " M tests/test_v52_typed_vocabulary.py",
+      " M tests/test_v53_food_morphology.py",
+      " M tests/test_v54_people_morphology.py",
+      " M tests/test_v55_place_morphology.py",
+      " M tests/test_v56_nature_morphology.py",
+      " M tests/test_v57_creative_arts_morphology.py",
+      " M tests/test_v58_school_literacy_morphology.py",
+      " M tests/test_v59_human_anatomy_morphology.py",
+      " M tests/test_v60_sports_ecosystem_morphology.py",
+      " M tests/test_v61_home_care_and_maintenance_morphology.py",
+      " M tests/test_v62_transport_and_mobility_morphology.py",
+      " M tests/test_v63_film_and_television_morphology.py",
+      " M tests/test_v64_history_and_heritage_morphology.py",
+      " M tests/test_v65_music_and_performance_morphology.py",
+      " M tests/test_v66_science_and_discovery_morphology.py",
+      " M tests/test_v67_online_content_and_social_media_morphology.py",
+      " M tests/test_v68_romanian_language_and_grammar_morphology.py",
+      " M tests/test_v70_social_and_civic_life_morphology.py",
+      " M tests/test_v71_literature_and_storytelling_morphology.py",
+      " M tests/test_v72_romanian_dishes_and_pastries_morphology.py",
+      " M tests/test_wordgames_contexto.py",
+      "?? docs/reviews/v81-nuca-feedback/",
+      "?? scripts/apply_nuca_feedback_v81.py",
+      "?? scripts/nuca_feedback_v81_data.py",
+      "?? tests/test_v81_nuca_feedback.py"
+    ],
+    "current_hashes": {
+      "cat_de_roman_esti/fixtures/kg_sample.json": "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331",
+      "cat_de_roman_esti/fixtures/games_pack.json": "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29",
+      "cat_de_roman_esti/fixtures/board_rankings_v37.json": "fa1094a6c51e6d51cdafc5fecd302ef43bd3f44ff0e5aa7b36b7397a8ef7b546",
+      "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "f66624bfe2e5ef434c9d47eb21b128d569637ac941b85834b2c0a5a196de7a6a",
+      "tests/fixtures/cat_mobile_app_pack_contract.json": "9012a0e6c6f48397a94ff8bfcbf297ea58e357ac283c978e4e9542ea66ae77b1"
+    }
+  },
+  "pack_exact": true,
+  "pack_counts": {
+    "conexiuni": 232,
+    "contexto": 210,
+    "lant": 97,
+    "alchimie": 82
+  },
+  "occurrences": [
+    {
+      "game": "conexiuni",
+      "record": "cx_gastronomie_019",
+      "status": "approved",
+      "difficulty": "normal",
+      "touched": [
+        {
+          "id": "n_gas_baclava_dobrogeana",
+          "role": "group:g1"
+        },
+        {
+          "id": "n_gas_cozonac",
+          "role": "group:g1"
+        }
+      ]
+    },
+    {
+      "game": "conexiuni",
+      "record": "cx_gastronomie_102",
+      "status": "approved",
+      "difficulty": "usor",
+      "touched": [
+        {
+          "id": "n_gas_cozonac",
+          "role": "group:g2"
+        }
+      ]
+    },
+    {
+      "game": "conexiuni",
+      "record": "cx_gastronomie_170",
+      "status": "approved",
+      "difficulty": "usor",
+      "touched": [
+        {
+          "id": "n_gas_cozonac",
+          "role": "group:g1"
+        }
+      ]
+    },
+    {
+      "game": "conexiuni",
+      "record": "cx_gastronomie_171",
+      "status": "approved",
+      "difficulty": "normal",
+      "touched": [
+        {
+          "id": "n_gas_baclava_dobrogeana",
+          "role": "group:g1"
+        }
+      ]
+    },
+    {
+      "game": "conexiuni",
+      "record": "cx_gastronomie_247",
+      "status": "approved",
+      "difficulty": "usor",
+      "touched": [
+        {
+          "id": "n_gas_cozonac",
+          "role": "group:g1"
+        }
+      ]
+    },
+    {
+      "game": "conexiuni",
+      "record": "cx_gastronomie_250",
+      "status": "approved",
+      "difficulty": "greu",
+      "touched": [
+        {
+          "id": "n_gas_baclava_dobrogeana",
+          "role": "group:g1"
+        }
+      ]
+    },
+    {
+      "game": "conexiuni",
+      "record": "cx_gastronomie_296",
+      "status": "approved",
+      "difficulty": "usor",
+      "touched": [
+        {
+          "id": "n_gas_cozonac",
+          "role": "group:g1"
+        }
+      ]
+    },
+    {
+      "game": "conexiuni",
+      "record": "cx_gastronomie_301",
+      "status": "approved",
+      "difficulty": "usor",
+      "touched": [
+        {
+          "id": "n_v21gas_cornulete",
+          "role": "group:g2"
+        },
+        {
+          "id": "n_gas_cozonac",
+          "role": "group:g2"
+        }
+      ]
+    },
+    {
+      "game": "conexiuni",
+      "record": "cx_geografie_110",
+      "status": "approved",
+      "difficulty": "normal",
+      "touched": [
+        {
+          "id": "n_gas_baclava_dobrogeana",
+          "role": "group:g3"
+        }
+      ]
+    },
+    {
+      "game": "conexiuni",
+      "record": "cx_geografie_252",
+      "status": "approved",
+      "difficulty": "normal",
+      "touched": [
+        {
+          "id": "n_gas_baclava_dobrogeana",
+          "role": "group:g1"
+        }
+      ]
+    },
+    {
+      "game": "conexiuni",
+      "record": "cx_limba_125",
+      "status": "approved",
+      "difficulty": "greu",
+      "touched": [
+        {
+          "id": "n_gas_cozonac",
+          "role": "group:g4"
+        }
+      ]
+    },
+    {
+      "game": "conexiuni",
+      "record": "cx_personalitati_213",
+      "status": "approved",
+      "difficulty": "greu",
+      "touched": [
+        {
+          "id": "n_gas_cozonac",
+          "role": "group:g1"
+        }
+      ]
+    },
+    {
+      "game": "conexiuni",
+      "record": "cx_societate_220",
+      "status": "approved",
+      "difficulty": "greu",
+      "touched": [
+        {
+          "id": "n_gas_baclava_dobrogeana",
+          "role": "group:g2"
+        }
+      ]
+    },
+    {
+      "game": "conexiuni",
+      "record": "cx_viata_de_roman_170",
+      "status": "approved",
+      "difficulty": "usor",
+      "touched": [
+        {
+          "id": "n_gas_cozonac",
+          "role": "group:g1"
+        }
+      ]
+    },
+    {
+      "game": "contexto",
+      "record": "ct_gastronomie_131",
+      "status": "approved",
+      "difficulty": "greu",
+      "touched": [
+        {
+          "id": "n_gas_baclava_dobrogeana",
+          "role": "target"
+        }
+      ]
+    },
+    {
+      "game": "lant",
+      "record": "lt_gastronomie_018",
+      "status": "approved",
+      "difficulty": "usor",
+      "touched": [
+        {
+          "id": "n_gas_cozonac",
+          "role": "target"
+        }
+      ]
+    },
+    {
+      "game": "lant",
+      "record": "lt_gastronomie_105",
+      "status": "approved",
+      "difficulty": "usor",
+      "touched": [
+        {
+          "id": "n_gas_cozonac",
+          "role": "start"
+        }
+      ]
+    }
+  ],
+  "validation": [],
+  "contexto": [
+    {
+      "record": "ct_arta_cultura_003",
+      "status": "approved",
+      "target": "n_ansamblul_targu_jiu",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1966,
+        1967
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.76
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_arta_cultura_004",
+      "status": "approved",
+      "target": "n_rapsodia_romana",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2141,
+        2142
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.26
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_arta_cultura_005",
+      "status": "approved",
+      "target": "n_voronet",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1790,
+        1791
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.95
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_arta_cultura_006",
+      "status": "approved",
+      "target": "n_doina",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2197,
+        2198
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.069999999999999
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_arta_cultura_007",
+      "status": "approved",
+      "target": "n_o_scrisoare_pierduta",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2127,
+        2128
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.29
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_arta_cultura_008",
+      "status": "approved",
+      "target": "n_noul_val_romanesc",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2194,
+        2195
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.09
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_arta_cultura_009",
+      "status": "approved",
+      "target": "n_ceramica_de_horezu",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2219,
+        2220
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.73
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_arta_cultura_010",
+      "status": "approved",
+      "target": "n_ateneul_roman",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2273,
+        2274
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.83
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_arta_cultura_116",
+      "status": "approved",
+      "target": "n_folclor_romanesc",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2256,
+        2257
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        5.010000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_arta_cultura_117",
+      "status": "approved",
+      "target": "n_cinematografia_romaneasca",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2284,
+        2285
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.180000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_arta_cultura_118",
+      "status": "approved",
+      "target": "n_patrimoniu_unesco",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2166,
+        2167
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.0200000000000005
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_arta_cultura_119",
+      "status": "approved",
+      "target": "n_horezu",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2066,
+        2067
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        5.13
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_arta_cultura_120",
+      "status": "approved",
+      "target": "n_artx_teatru_romanesc",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2266,
+        2267
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.18
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_arta_cultura_194",
+      "status": "approved",
+      "target": "n_arta_plastica",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2239,
+        2239
+      ],
+      "nuca_hops": [
+        null,
+        6
+      ],
+      "nuca_weighted": [
+        null,
+        6.91
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_film_tv_011",
+      "status": "approved",
+      "target": "n_ftv_las_fierbinti",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2253,
+        2254
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.04
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_film_tv_012",
+      "status": "approved",
+      "target": "n_ftv_liceenii",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2243,
+        2244
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.250000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_film_tv_013",
+      "status": "approved",
+      "target": "n_ftv_filantropica",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2283,
+        2284
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.87
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_film_tv_014",
+      "status": "approved",
+      "target": "n_ftv_premiile_gopo",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2209,
+        2210
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.159999999999999
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_film_tv_015",
+      "status": "approved",
+      "target": "n_ftv_vrei_sa_fii_milionar",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2210,
+        2211
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        4.13
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_film_tv_016",
+      "status": "approved",
+      "target": "n_ftv_toma_caragiu",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2128,
+        2129
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.0
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_film_tv_017",
+      "status": "approved",
+      "target": "n_ftv_leana",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2016,
+        2017
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.87
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_film_tv_018",
+      "status": "approved",
+      "target": "n_cristian_mungiu",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2158,
+        2159
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.1
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_film_tv_124",
+      "status": "approved",
+      "target": "n_ftv_chefi_la_cutite",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2221,
+        2222
+      ],
+      "nuca_hops": [
+        null,
+        2
+      ],
+      "nuca_weighted": [
+        null,
+        2.6500000000000004
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_film_tv_126",
+      "status": "approved",
+      "target": "n_ftv_teo_show",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2009,
+        2010
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.890000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_film_tv_202",
+      "status": "approved",
+      "target": "n_ftv_morometii_film",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2167,
+        2167
+      ],
+      "nuca_hops": [
+        null,
+        6
+      ],
+      "nuca_weighted": [
+        null,
+        6.98
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_film_tv_203",
+      "status": "approved",
+      "target": "n_v2fil_reality_show",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2117,
+        2118
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.9300000000000006
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_gastronomie_019",
+      "status": "approved",
+      "target": "n_gas_sarmale",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2240,
+        2241
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.2300000000000004
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_gastronomie_020",
+      "status": "approved",
+      "target": "n_gas_gratar_1_mai",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2124,
+        2125
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        5.22
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_gastronomie_021",
+      "status": "approved",
+      "target": "n_gas_zacusca",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2203,
+        2204
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.59
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_gastronomie_022",
+      "status": "approved",
+      "target": "n_gas_ciorba_radauteana",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2145,
+        2146
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.6800000000000006
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_gastronomie_023",
+      "status": "approved",
+      "target": "n_gas_fasole_ciolan",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2144,
+        2145
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.7699999999999996
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_gastronomie_024",
+      "status": "approved",
+      "target": "n_gas_masa_craciun",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2052,
+        2053
+      ],
+      "nuca_hops": [
+        null,
+        2
+      ],
+      "nuca_weighted": [
+        null,
+        2.1100000000000003
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_gastronomie_025",
+      "status": "approved",
+      "target": "n_gas_must_pastrama",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2175,
+        2176
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.95
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_gastronomie_026",
+      "status": "approved",
+      "target": "n_gas_saorma_de_toate",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2268,
+        2269
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        4.08
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_gastronomie_127",
+      "status": "approved",
+      "target": "n_gas_mamaliga",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2204,
+        2205
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.37
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_gastronomie_128",
+      "status": "approved",
+      "target": "n_gas_papanasi",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1930,
+        1931
+      ],
+      "nuca_hops": [
+        null,
+        2
+      ],
+      "nuca_weighted": [
+        null,
+        2.49
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_gastronomie_129",
+      "status": "approved",
+      "target": "n_gas_muraturi",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2245,
+        2246
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.4699999999999998
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_gastronomie_130",
+      "status": "approved",
+      "target": "n_gas_toba",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1378,
+        1379
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.2700000000000005
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_gastronomie_131",
+      "status": "approved",
+      "target": "n_gas_baclava_dobrogeana",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2192,
+        2193
+      ],
+      "nuca_hops": [
+        null,
+        1
+      ],
+      "nuca_weighted": [
+        null,
+        1.05
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_gastronomie_132",
+      "status": "approved",
+      "target": "n_gas_mititei_obor",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2268,
+        2269
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        5.02
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_gastronomie_300",
+      "status": "approved",
+      "target": "n_v4gas_mancare",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2259,
+        2260
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.3500000000000005
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_gastronomie_318",
+      "status": "approved",
+      "target": "n_gas_mici",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2270,
+        2271
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        4.14
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_gastronomie_319",
+      "status": "approved",
+      "target": "n_gas_salata_boeuf",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2028,
+        2029
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.25
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_gastronomie_320",
+      "status": "approved",
+      "target": "n_v3gas_clatite",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1690,
+        1691
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.3100000000000005
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_geografie_001",
+      "status": "approved",
+      "target": "n_bucuresti",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2286,
+        2287
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.73
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_geografie_027",
+      "status": "approved",
+      "target": "n_transfagarasan",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2020,
+        2021
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.11
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_geografie_028",
+      "status": "approved",
+      "target": "n_delta_dunarii",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2253,
+        2254
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.49
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_geografie_029",
+      "status": "approved",
+      "target": "n_mures",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2218,
+        2219
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.760000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_geografie_030",
+      "status": "approved",
+      "target": "n_lacul_rosu",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1358,
+        1359
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.38
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_geografie_031",
+      "status": "approved",
+      "target": "n_pestera_scarisoara",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1556,
+        1557
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.2
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_geografie_032",
+      "status": "approved",
+      "target": "n_constanta",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2259,
+        2260
+      ],
+      "nuca_hops": [
+        null,
+        2
+      ],
+      "nuca_weighted": [
+        null,
+        2.5300000000000002
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_geografie_033",
+      "status": "approved",
+      "target": "n_muntii_apuseni",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2040,
+        2041
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.09
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_geografie_034",
+      "status": "approved",
+      "target": "n_carpati",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2262,
+        2263
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        5.13
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_geografie_134",
+      "status": "approved",
+      "target": "n_dunarea",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2271,
+        2272
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.83
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_geografie_136",
+      "status": "approved",
+      "target": "n_muntii_fagaras",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2252,
+        2253
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.09
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_geografie_137",
+      "status": "approved",
+      "target": "n_podisul_transilvaniei",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2247,
+        2248
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.88
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_geografie_138",
+      "status": "approved",
+      "target": "n_geox_techirghiol",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2138,
+        2139
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.4799999999999995
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_geografie_214",
+      "status": "approved",
+      "target": "n_marea_neagra",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2240,
+        2241
+      ],
+      "nuca_hops": [
+        null,
+        2
+      ],
+      "nuca_weighted": [
+        null,
+        2.63
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_istorie_001",
+      "status": "approved",
+      "target": "n_stefan_cel_mare",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2206,
+        2207
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.75
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_istorie_036",
+      "status": "approved",
+      "target": "n_mihai_viteazul",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2219,
+        2220
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.8500000000000005
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_istorie_037",
+      "status": "approved",
+      "target": "n_alexandru_ioan_cuza",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2106,
+        2107
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.28
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_istorie_038",
+      "status": "approved",
+      "target": "n_marea_unire_1918",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2234,
+        2235
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        5.1499999999999995
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_istorie_039",
+      "status": "approved",
+      "target": "n_dacia",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2187,
+        2188
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.0200000000000005
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_istorie_040",
+      "status": "approved",
+      "target": "n_carol_i",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2218,
+        2219
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.9799999999999995
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_istorie_041",
+      "status": "approved",
+      "target": "n_revolutia_1989",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2229,
+        2230
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        5.05
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_istorie_042",
+      "status": "approved",
+      "target": "n_vlad_tepes",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2193,
+        2194
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.7299999999999995
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_istorie_139",
+      "status": "approved",
+      "target": "n_transilvania",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2286,
+        2287
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.58
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_istorie_142",
+      "status": "approved",
+      "target": "n_razboaiele_daco_romane",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2011,
+        2012
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.97
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_istorie_143",
+      "status": "approved",
+      "target": "n_tratatul_trianon",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2196,
+        2197
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.86
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_istorie_144",
+      "status": "approved",
+      "target": "n_comunismul_in_romania",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2237,
+        2238
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.88
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_istorie_308",
+      "status": "approved",
+      "target": "n_v11ist_revolutia_1848",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2181,
+        2182
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.000000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_istorie_309",
+      "status": "approved",
+      "target": "n_v20ist_abdicarea_regelui_mihai",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1832,
+        1833
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.03
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_istorie_310",
+      "status": "approved",
+      "target": "n_istx_constantin_brancoveanu",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1860,
+        1861
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.87
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_limba_043",
+      "status": "approved",
+      "target": "n_dex",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2241,
+        2242
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.03
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_limba_044",
+      "status": "approved",
+      "target": "n_gramatica",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2229,
+        2230
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.49
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_limba_045",
+      "status": "approved",
+      "target": "n_ortografie",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2154,
+        2155
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.17
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_limba_046",
+      "status": "approved",
+      "target": "n_limba_latina",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2168,
+        2169
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.17
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_limba_047",
+      "status": "approved",
+      "target": "n_norma_academiei",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2215,
+        2216
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.830000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_limba_048",
+      "status": "approved",
+      "target": "n_aromana",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2251,
+        2252
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.79
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_limba_049",
+      "status": "approved",
+      "target": "n_neologisme_franceze",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2225,
+        2226
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.31
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_limba_050",
+      "status": "approved",
+      "target": "n_substrat_dacic",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2142,
+        2143
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.25
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_limba_145",
+      "status": "approved",
+      "target": "n_limba_romana",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2282,
+        2283
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.99
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_limba_147",
+      "status": "approved",
+      "target": "n_lbax_dor",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2225,
+        2226
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.13
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_limba_148",
+      "status": "approved",
+      "target": "n_v2lim_grai",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2168,
+        2169
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.27
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_limba_149",
+      "status": "approved",
+      "target": "n_etimologie",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2049,
+        2049
+      ],
+      "nuca_hops": [
+        null,
+        6
+      ],
+      "nuca_weighted": [
+        null,
+        7.47
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_limba_150",
+      "status": "approved",
+      "target": "n_meglenoromana",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2183,
+        2184
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        5.1899999999999995
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_limba_223",
+      "status": "approved",
+      "target": "n_v2lim_cuvant",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2194,
+        2195
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.17
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_limba_224",
+      "status": "approved",
+      "target": "n_lbax_regionalisme",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1969,
+        1970
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.580000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_limba_226",
+      "status": "approved",
+      "target": "n_alfabetul_chirilic",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1827,
+        1827
+      ],
+      "nuca_hops": [
+        null,
+        6
+      ],
+      "nuca_weighted": [
+        null,
+        7.2700000000000005
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_literatura_051",
+      "status": "approved",
+      "target": "n_mihai_eminescu",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2267,
+        2268
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.03
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_literatura_052",
+      "status": "approved",
+      "target": "n_ion_luca_caragiale",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2151,
+        2152
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.2700000000000005
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_literatura_053",
+      "status": "approved",
+      "target": "n_junimea",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2221,
+        2222
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.03
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_literatura_054",
+      "status": "approved",
+      "target": "n_realism",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2172,
+        2173
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.4799999999999995
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_literatura_056",
+      "status": "approved",
+      "target": "n_moara_cu_noroc",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1953,
+        1953
+      ],
+      "nuca_hops": [
+        null,
+        6
+      ],
+      "nuca_weighted": [
+        null,
+        7.31
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_literatura_057",
+      "status": "approved",
+      "target": "n_luceafarul",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2013,
+        2013
+      ],
+      "nuca_hops": [
+        null,
+        6
+      ],
+      "nuca_weighted": [
+        null,
+        7.079999999999999
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_literatura_058",
+      "status": "approved",
+      "target": "n_ion_roman",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2198,
+        2199
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.9799999999999995
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_literatura_156",
+      "status": "approved",
+      "target": "n_v2lit_sat_romanesc",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2134,
+        2135
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.2
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_literatura_228",
+      "status": "approved",
+      "target": "n_v2lit_roman_literar",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2250,
+        2251
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.03
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_literatura_230",
+      "status": "approved",
+      "target": "n_modernism",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2152,
+        2152
+      ],
+      "nuca_hops": [
+        null,
+        6
+      ],
+      "nuca_weighted": [
+        null,
+        7.250000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_literatura_231",
+      "status": "approved",
+      "target": "n_v2lit_basm_cult",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2148,
+        2149
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.38
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_literatura_232",
+      "status": "approved",
+      "target": "n_v2lit_dramaturgie",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2137,
+        2138
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.099999999999999
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_literatura_298",
+      "status": "approved",
+      "target": "n_v23lit_capra_cu_trei_iezi",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1977,
+        1978
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.9399999999999995
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_meme_net_059",
+      "status": "approved",
+      "target": "n_net_dorel",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2045,
+        2046
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.150000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_meme_net_060",
+      "status": "approved",
+      "target": "n_net_ghita_ciobanul",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2270,
+        2271
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.91
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_meme_net_061",
+      "status": "approved",
+      "target": "n_net_robotzi",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2154,
+        2155
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.98
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_meme_net_062",
+      "status": "approved",
+      "target": "n_net_mircea_bravo",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2180,
+        2181
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.05
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_meme_net_063",
+      "status": "approved",
+      "target": "n_net_selly",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2049,
+        2050
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.750000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_meme_net_064",
+      "status": "approved",
+      "target": "n_net_micutzu",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2280,
+        2281
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.180000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_meme_net_066",
+      "status": "approved",
+      "target": "n_net_algoritm_social",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2183,
+        2184
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.7299999999999995
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_meme_net_157",
+      "status": "approved",
+      "target": "n_net_meme_romanesc",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2180,
+        2181
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.11
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_meme_net_158",
+      "status": "approved",
+      "target": "n_net_youtube_ro",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2276,
+        2277
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.7299999999999995
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_meme_net_159",
+      "status": "approved",
+      "target": "n_v2mem_replici_memorabile",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2220,
+        2221
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.27
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_meme_net_160",
+      "status": "approved",
+      "target": "n_net_reclama_cult",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2224,
+        2225
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.67
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_meme_net_162",
+      "status": "approved",
+      "target": "n_net_umor_autoironic",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2177,
+        2178
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.61
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_meme_net_236",
+      "status": "approved",
+      "target": "n_net_thumbnail_cu_sageata",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2035,
+        2036
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.97
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_meme_net_238",
+      "status": "pending",
+      "target": "n_v3mem_shitpost",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2078,
+        2079
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.430000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_meme_net_297",
+      "status": "approved",
+      "target": "n_v4mem_internet",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2215,
+        2216
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.7
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_067",
+      "status": "approved",
+      "target": "n_muz_dragostea_din_tei",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2231,
+        2232
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.97
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_068",
+      "status": "approved",
+      "target": "n_muz_untold",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2255,
+        2256
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.8500000000000005
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_069",
+      "status": "approved",
+      "target": "n_muz_ploaia_cargo",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2020,
+        2021
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.8100000000000005
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_070",
+      "status": "approved",
+      "target": "n_muz_bug_mafia",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1492,
+        1492
+      ],
+      "nuca_hops": [
+        null,
+        6
+      ],
+      "nuca_weighted": [
+        null,
+        7.33
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_071",
+      "status": "approved",
+      "target": "n_muz_florin_salam",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1949,
+        1950
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.26
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_072",
+      "status": "approved",
+      "target": "n_muz_carlas_dreams",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1846,
+        1847
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.329999999999999
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_073",
+      "status": "approved",
+      "target": "n_muz_stereo_love",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2090,
+        2091
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.97
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_074",
+      "status": "approved",
+      "target": "n_muz_cerbul_de_aur",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2240,
+        2241
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        5.239999999999999
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_163",
+      "status": "approved",
+      "target": "n_muz_refren_viral",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2202,
+        2203
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.97
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_164",
+      "status": "approved",
+      "target": "n_muz_pop_dance_ro",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2265,
+        2266
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.8500000000000005
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_165",
+      "status": "approved",
+      "target": "n_muz_neversea",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2217,
+        2218
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.6500000000000004
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_167",
+      "status": "approved",
+      "target": "n_muz_acasa_smiley",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2076,
+        2077
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.21
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_168",
+      "status": "approved",
+      "target": "n_muz_phoenix",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2253,
+        2254
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.97
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_241",
+      "status": "approved",
+      "target": "n_muz_festivaluri_muzicale",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2184,
+        2185
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.75
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_243",
+      "status": "approved",
+      "target": "n_muz_hip_hop_ro",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2140,
+        2141
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.2299999999999995
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_244",
+      "status": "approved",
+      "target": "n_muz_rock_ro",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2261,
+        2262
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.63
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_245",
+      "status": "approved",
+      "target": "n_muz_manele",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2162,
+        2163
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.329999999999999
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_311",
+      "status": "approved",
+      "target": "n_muz_ozone",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2223,
+        2224
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        5.28
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_312",
+      "status": "approved",
+      "target": "n_v11muz_festivalul_mamaia",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2135,
+        2136
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.79
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_muzica_313",
+      "status": "approved",
+      "target": "n_muz_vama_veche",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2224,
+        2225
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.5300000000000002
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_personalitati_075",
+      "status": "approved",
+      "target": "n_constantin_brancusi",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2234,
+        2235
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.79
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_personalitati_076",
+      "status": "approved",
+      "target": "n_george_enescu",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2264,
+        2265
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        5.21
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_personalitati_082",
+      "status": "approved",
+      "target": "n_generatia_interbelica",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2037,
+        2038
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.080000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_personalitati_171",
+      "status": "approved",
+      "target": "n_gheorghe_hagi",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2223,
+        2224
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.55
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_personalitati_172",
+      "status": "approved",
+      "target": "n_perx_regina_maria",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2111,
+        2112
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.84
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_personalitati_173",
+      "status": "approved",
+      "target": "n_simona_halep",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2122,
+        2123
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.75
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_personalitati_174",
+      "status": "approved",
+      "target": "n_emil_cioran",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2165,
+        2165
+      ],
+      "nuca_hops": [
+        null,
+        6
+      ],
+      "nuca_weighted": [
+        null,
+        7.2
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_societate_083",
+      "status": "approved",
+      "target": "n_academia_romana",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2285,
+        2286
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.73
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_societate_084",
+      "status": "approved",
+      "target": "n_constitutia",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2235,
+        2236
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.83
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_societate_085",
+      "status": "approved",
+      "target": "n_parlamentul_romaniei",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2263,
+        2264
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.74
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_societate_086",
+      "status": "approved",
+      "target": "n_democratie",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2194,
+        2195
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.95
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_societate_087",
+      "status": "approved",
+      "target": "n_universitatea_bucuresti",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2281,
+        2282
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.88
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_societate_088",
+      "status": "approved",
+      "target": "n_vot",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2104,
+        2105
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.06
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_societate_089",
+      "status": "approved",
+      "target": "n_separatia_puterilor",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2122,
+        2123
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.98
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_societate_090",
+      "status": "approved",
+      "target": "n_bnr",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2267,
+        2268
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.72
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_societate_175",
+      "status": "approved",
+      "target": "n_v2soc_administratie_locala",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2131,
+        2132
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.01
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_societate_178",
+      "status": "approved",
+      "target": "n_socx_industria_romaneasca",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2056,
+        2057
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.329999999999999
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_societate_257",
+      "status": "pending",
+      "target": "n_v2soc_industrie",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2239,
+        2240
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        5.19
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_societate_290",
+      "status": "approved",
+      "target": "n_v11soc_diaspora",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2226,
+        2227
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        5.03
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_societate_291",
+      "status": "approved",
+      "target": "n_minoritati_nationale",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2224,
+        2225
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.080000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_societate_292",
+      "status": "approved",
+      "target": "n_avocatul_poporului",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2044,
+        2045
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.74
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_societate_293",
+      "status": "approved",
+      "target": "n_v3soc_protest",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2176,
+        2177
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.76
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_societate_294",
+      "status": "approved",
+      "target": "n_v3soc_mass_media",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2147,
+        2148
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.86
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_societate_296",
+      "status": "approved",
+      "target": "n_v3soc_scoala",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2237,
+        2238
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.640000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_sport_091",
+      "status": "approved",
+      "target": "n_spt_romania_argentina_1994",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2048,
+        2049
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.73
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_sport_092",
+      "status": "approved",
+      "target": "n_spt_eroul_de_la_sevilla",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1929,
+        1929
+      ],
+      "nuca_hops": [
+        null,
+        6
+      ],
+      "nuca_weighted": [
+        null,
+        6.8500000000000005
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_sport_093",
+      "status": "approved",
+      "target": "n_spt_nadia_zecele_perfect",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1929,
+        1930
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.890000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_sport_094",
+      "status": "approved",
+      "target": "n_spt_simona_wimbledon_2019",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1576,
+        1577
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.78
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_sport_095",
+      "status": "approved",
+      "target": "n_spt_record_100m_liber_2022",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1749,
+        1750
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.970000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_sport_096",
+      "status": "approved",
+      "target": "n_spt_cel_mai_inalt_nba",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1620,
+        1621
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.090000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_sport_097",
+      "status": "approved",
+      "target": "n_spt_delta_pagaia",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2099,
+        2100
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.63
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_sport_181",
+      "status": "approved",
+      "target": "n_spt_generatia_de_aur",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2205,
+        2206
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.61
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_sport_183",
+      "status": "approved",
+      "target": "n_spt_david_popovici",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2212,
+        2213
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.91
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_sport_184",
+      "status": "approved",
+      "target": "n_spt_liga_campionilor_handbal",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1792,
+        1793
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.090000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_sport_259",
+      "status": "approved",
+      "target": "n_spt_helmut_duckadam",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1996,
+        1997
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.93
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_sport_261",
+      "status": "approved",
+      "target": "n_spt_cristina_neagu",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2185,
+        2186
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.95
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_sport_262",
+      "status": "approved",
+      "target": "n_spt_ivan_patzaichin",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2255,
+        2256
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.63
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_sport_263",
+      "status": "approved",
+      "target": "n_v2spo_turneu_grand_slam",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1497,
+        1498
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.86
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_sport_314",
+      "status": "approved",
+      "target": "n_spt_finala_sevilla_1986",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2003,
+        2004
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.89
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_sport_315",
+      "status": "approved",
+      "target": "n_spt_helmut_duckadam",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1996,
+        1997
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.93
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_sport_316",
+      "status": "approved",
+      "target": "n_spt_ivan_patzaichin",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2255,
+        2256
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.63
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_sport_317",
+      "status": "approved",
+      "target": "n_spt_generatia_de_aur",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2205,
+        2206
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.61
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_stiinta_099",
+      "status": "approved",
+      "target": "n_efectul_coanda",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2055,
+        2056
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.1499999999999995
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_stiinta_100",
+      "status": "approved",
+      "target": "n_insulina",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1856,
+        1856
+      ],
+      "nuca_hops": [
+        null,
+        6
+      ],
+      "nuca_weighted": [
+        null,
+        7.11
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_stiinta_101",
+      "status": "approved",
+      "target": "n_ribozom",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1966,
+        1966
+      ],
+      "nuca_hops": [
+        null,
+        6
+      ],
+      "nuca_weighted": [
+        null,
+        7.03
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_stiinta_102",
+      "status": "approved",
+      "target": "n_stilou_rezervor",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2031,
+        2032
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.010000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_stiinta_103",
+      "status": "approved",
+      "target": "n_speologie",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2237,
+        2238
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.73
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_stiinta_105",
+      "status": "approved",
+      "target": "n_coanda_1910",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1865,
+        1866
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.09
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_stiinta_106",
+      "status": "approved",
+      "target": "n_muzeul_antipa",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2268,
+        2269
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.9799999999999995
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_stiinta_189",
+      "status": "approved",
+      "target": "n_v2sti_inginerie",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2244,
+        2245
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.83
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_stiinta_190",
+      "status": "approved",
+      "target": "n_henri_coanda",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2204,
+        2205
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.99
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_stiinta_191",
+      "status": "approved",
+      "target": "n_george_palade",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2256,
+        2257
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.0
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_stiinta_264",
+      "status": "approved",
+      "target": "n_v2sti_biologie",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2254,
+        2255
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.61
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_stiinta_265",
+      "status": "approved",
+      "target": "n_v3sti_experiment",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2155,
+        2156
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.72
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_stiinta_266",
+      "status": "approved",
+      "target": "n_aviatie",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2235,
+        2236
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.029999999999999
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_stiinta_267",
+      "status": "approved",
+      "target": "n_v2sti_celula",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2046,
+        2047
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.930000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_stiinta_268",
+      "status": "approved",
+      "target": "n_aerodinamica",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2050,
+        2050
+      ],
+      "nuca_hops": [
+        null,
+        6
+      ],
+      "nuca_weighted": [
+        null,
+        6.56
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_stiinta_295",
+      "status": "approved",
+      "target": "n_v3sti_vaccin",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2091,
+        2091
+      ],
+      "nuca_hops": [
+        null,
+        6
+      ],
+      "nuca_weighted": [
+        null,
+        6.81
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_viata_de_roman_107",
+      "status": "approved",
+      "target": "n_vdr_cheia_de_la_gat",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2014,
+        2015
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.7
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_viata_de_roman_108",
+      "status": "approved",
+      "target": "n_vdr_vecin_bormasina",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1939,
+        1940
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.38
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_viata_de_roman_109",
+      "status": "approved",
+      "target": "n_vdr_mamaliga_bunicii",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2213,
+        2214
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.61
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_viata_de_roman_110",
+      "status": "approved",
+      "target": "n_vdr_dacia_1310",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2229,
+        2230
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        5.09
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_viata_de_roman_111",
+      "status": "approved",
+      "target": "n_vdr_punga_cu_pungi",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2076,
+        2077
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.67
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_viata_de_roman_112",
+      "status": "approved",
+      "target": "n_vdr_sarmale_craciun",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2147,
+        2148
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.3100000000000005
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_viata_de_roman_113",
+      "status": "approved",
+      "target": "n_vdr_teletext",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2199,
+        2200
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.930000000000001
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_viata_de_roman_114",
+      "status": "approved",
+      "target": "n_vdr_lapte_si_corn",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2173,
+        2174
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.61
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_viata_de_roman_193",
+      "status": "approved",
+      "target": "n_vdr_viata_la_bloc",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2210,
+        2211
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        5.24
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_viata_de_roman_197",
+      "status": "approved",
+      "target": "n_vdr_portbagaj_plin",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2137,
+        2138
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.87
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_viata_de_roman_198",
+      "status": "approved",
+      "target": "n_vdr_avizier_bloc",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1673,
+        1674
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        6.44
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_viata_de_roman_273",
+      "status": "approved",
+      "target": "n_vdr_lasa_ca_merge",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2217,
+        2218
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.97
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_viata_de_roman_274",
+      "status": "approved",
+      "target": "n_vdr_descurcare_romaneasca",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2213,
+        2214
+      ],
+      "nuca_hops": [
+        null,
+        4
+      ],
+      "nuca_weighted": [
+        null,
+        4.89
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_viata_de_roman_275",
+      "status": "approved",
+      "target": "n_vdr_calendar_obiceiuri",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        2220,
+        2221
+      ],
+      "nuca_hops": [
+        null,
+        3
+      ],
+      "nuca_weighted": [
+        null,
+        3.3500000000000005
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    },
+    {
+      "record": "ct_viata_de_roman_299",
+      "status": "approved",
+      "target": "n_v23via_abecedar",
+      "reachable": [
+        2288,
+        2289
+      ],
+      "responsive": [
+        1984,
+        1985
+      ],
+      "nuca_hops": [
+        null,
+        5
+      ],
+      "nuca_weighted": [
+        null,
+        5.74
+      ],
+      "changed_node_count": 1,
+      "changed_nodes_sample": [
+        "n_v81_food_pantry_nuca"
+      ]
+    }
+  ],
+  "lant": [],
+  "alchimie": [],
+  "conexiuni": [],
+  "derived": {
+    "raw_counts": [
+      [
+        800,
+        9164
+      ],
+      [
+        800,
+        9164
+      ]
+    ],
+    "selected_counts": [
+      336,
+      336
+    ],
+    "selected_by_game": [
+      {
+        "intrusul": 183,
+        "perechi": 153
+      },
+      {
+        "intrusul": 183,
+        "perechi": 153
+      }
+    ],
+    "removed_ids": [],
+    "added_ids": [],
+    "changed_common_count": 0,
+    "changed_common": [],
+    "removed": [],
+    "added": [],
+    "baseline_equals_frozen_boards": true,
+    "baseline_rebuild_equals_baseline_frozen_boards": true,
+    "current_rebuild_equals_current_frozen_boards": true
+  },
+  "artifact_preservation": {
+    "ranking_rows_exact": false,
+    "ranking_changed_rows": [
+      {
+        "id": "ct_gastronomie_131",
+        "before": {
+          "id": "ct_gastronomie_131",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 55,
+          "play_quality": 88,
+          "pilot_score": 68,
+          "rank": 121,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        },
+        "after": {
+          "id": "ct_gastronomie_131",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 56,
+          "play_quality": 89,
+          "pilot_score": 69,
+          "rank": 117,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        }
+      },
+      {
+        "id": "ct_gastronomie_132",
+        "before": {
+          "id": "ct_gastronomie_132",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 55,
+          "play_quality": 91,
+          "pilot_score": 69,
+          "rank": 117,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        },
+        "after": {
+          "id": "ct_gastronomie_132",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 55,
+          "play_quality": 91,
+          "pilot_score": 69,
+          "rank": 118,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        }
+      },
+      {
+        "id": "ct_geografie_028",
+        "before": {
+          "id": "ct_geografie_028",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 59,
+          "play_quality": 85,
+          "pilot_score": 69,
+          "rank": 118,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        },
+        "after": {
+          "id": "ct_geografie_028",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 59,
+          "play_quality": 85,
+          "pilot_score": 69,
+          "rank": 119,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        }
+      },
+      {
+        "id": "ct_societate_085",
+        "before": {
+          "id": "ct_societate_085",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 59,
+          "play_quality": 85,
+          "pilot_score": 69,
+          "rank": 119,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        },
+        "after": {
+          "id": "ct_societate_085",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 59,
+          "play_quality": 85,
+          "pilot_score": 69,
+          "rank": 120,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        }
+      },
+      {
+        "id": "ct_viata_de_roman_198",
+        "before": {
+          "id": "ct_viata_de_roman_198",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 57,
+          "play_quality": 87,
+          "pilot_score": 69,
+          "rank": 120,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        },
+        "after": {
+          "id": "ct_viata_de_roman_198",
+          "game": "contexto",
+          "status": "approved",
+          "romanian_familiarity": 57,
+          "play_quality": 87,
+          "pilot_score": 69,
+          "rank": 121,
+          "pilot_eligible": true,
+          "selection_weight": 3
+        }
+      }
+    ],
+    "ranking_metadata_changed_keys": [
+      "meta"
+    ],
+    "derived_boards_exact": true,
+    "mobile_puzzles_exact": true,
+    "mobile_expected_node_delta": [
+      2364,
+      2365
+    ],
+    "mobile_expected_edge_delta": [
+      9219,
+      9223
+    ],
+    "mobile_changed_top_keys": [
+      "kg_edges",
+      "kg_nodes",
+      "manifest"
+    ]
+  },
+  "graph_delta": {
+    "nodes": [
+      2364,
+      2365
+    ],
+    "edges": [
+      9219,
+      9223
+    ],
+    "added_node_ids": [
+      "n_v81_food_pantry_nuca"
+    ],
+    "removed_node_ids": [],
+    "nuca_outgoing": [
+      {
+        "dst": "n_gas_cozonac",
+        "relation": "part_of",
+        "label": "ingredient pentru",
+        "strength": 0.97,
+        "distractor": false,
+        "bidirectional": false
+      },
+      {
+        "dst": "n_v17gas_coliva",
+        "relation": "part_of",
+        "label": "ingredient pentru",
+        "strength": 0.97,
+        "distractor": false,
+        "bidirectional": false
+      },
+      {
+        "dst": "n_gas_baclava_dobrogeana",
+        "relation": "part_of",
+        "label": "ingredient pentru",
+        "strength": 0.95,
+        "distractor": false,
+        "bidirectional": false
+      },
+      {
+        "dst": "n_v21gas_cornulete",
+        "relation": "part_of",
+        "label": "ingredient pentru",
+        "strength": 0.9,
+        "distractor": false,
+        "bidirectional": false
+      }
+    ],
+    "nuca_predecessors": []
+  }
+}

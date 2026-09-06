@@ -1,0 +1,37 @@
+{
+  "schema": "v81-docs-semantic-review-v1",
+  "scope": "README, ADR-0112 and ADR-0033 only; STATUS, BETA_CANDIDATE and verification intentionally excluded while finalization is pending.",
+  "reviewer": "wave_audit",
+  "verdict": "accept",
+  "findings": [],
+  "document_bindings": {
+    "readme": {
+      "path": "docs/reviews/v81-nuca-feedback/README.md",
+      "sha256": "35c26220fbbc1f7916109d2eab63f52507d88d38c26ff03b8324ded43a4775b9"
+    },
+    "adr_0112": {
+      "path": "docs/adr/0112-add-reviewed-walnut-input.md",
+      "sha256": "46582f9a1b03005e227958b8f4fc22763da9db0226fb2f1dd113bec9c0168b4b"
+    },
+    "adr_0033": {
+      "path": "docs/adr/0033-bounded-semantic-edge-and-alias-enrichment.md",
+      "sha256": "2c159f43d7c9a39abd9c79e5539e034795e2f3bb4e58f380366e49177392d9c4"
+    }
+  },
+  "evidence_bindings": {
+    "proposal": "0612129b282feb6124c2992078178efc17fa088b0b425dbccf3291ee10b34d8a",
+    "factual_review": "ce87c81e0108c8b5dac4e1faec9436d1cfda7a89073e116eaf91bec9a3f3bb06",
+    "artifact_delta": "59321a57549720b688fce22981e7dd92192779daa0aac883ca36224cb89a1033",
+    "final_impact_receipt": "c680aaaaa38ce641bee07d345ae430b9a437c7e0bc9265337847336084234070",
+    "actual_contexto_comparison": "7886f2fbddae0cf77777d18aba1d45e866ee6c5fe7b30f8dd8aebea3afbb7cd8",
+    "ordinal_impact": "ba10bf87f24548d5a4b6a2bc9dd53fdca7a55934c42c87d5d8970173f02d9ecf",
+    "selection_comparison": "e1e4e9050d2055feab325a53127ed89efc61aa3dd71ebe70b70f734518972599"
+  },
+  "checked": [
+    "The README and ADR state one Nucă node, one alias, four directed non-distractor recipe edges and the exact 2365/9223/8451/180 artifact counts.",
+    "They distinguish Baclava's ranking-estimate and ordinal effects from selection-weight, approval, eligibility and target-promotion effects; the receipt records no weight/status/eligibility change.",
+    "The declared preservation of the 621-record pack, 336 frozen boards, 180 puzzles, 472 remaining projection rows and 71 proxy rows is consistent with the artifact and impact receipts.",
+    "The 121 temperature-boundary effects are disclosed as ordinal normalization effects with no old distance/path claim, and the selection statement is expressly bounded to 100 seeds plus 30 daily dates.",
+    "ADR-0112 precisely limits the ADR-0033 partial supersession to this node's four-edge fan-out; the remaining ADR-0033 transaction and alias safeguards remain stated and applicable."
+  ]
+}

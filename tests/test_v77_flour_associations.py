@@ -15,7 +15,11 @@ from django.test import Client  # noqa: E402
 
 from cat_de_roman_esti.wordgames import contexto, lant  # noqa: E402
 from cat_de_roman_esti.wordgames.service import get_service  # noqa: E402
-from tests.content_history import before_v80_pack, before_v80_rankings  # noqa: E402
+from tests.content_history import (  # noqa: E402
+    before_v80_pack,
+    before_v80_rankings,
+    before_v81_fixture,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 FLOUR = "n_v24_food_pantry_faina"
@@ -25,7 +29,7 @@ TARGETS = ("n_gas_cozonac", "n_v3gas_clatite")
 def test_graph_delta_reconstructs_the_exact_v76_fixture():
     """Pin history independently so refreshing current-artifact tests cannot hide drift."""
     fixture_path = ROOT / "cat_de_roman_esti/fixtures/kg_sample.json"
-    fixture = json.loads(fixture_path.read_bytes())
+    fixture = before_v81_fixture(json.loads(fixture_path.read_bytes()))
     receipt = json.loads(
         (ROOT / "docs/reviews/v77-flour-associations/artifact-delta.json").read_bytes()
     )
