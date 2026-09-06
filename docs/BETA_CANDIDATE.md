@@ -2,9 +2,9 @@
 
 Valid until: the next verified quality wave — then refresh this living checklist.
 
-Target: public anonymous beta for Romanian players. V75 is locally verified; V76 adds a
-reviewed input-sense fix and is under final verification. Public beta release still requires
-the external checks below. Current facts and exact pins: [STATUS](STATUS.md).
+Target: public anonymous beta for Romanian players. **Technical candidate complete through
+V76 and locally verified.** Public beta release still requires the external checks below.
+Current facts and exact pins: [STATUS](STATUS.md).
 
 ## Completed sequence and acceptance
 
@@ -18,13 +18,14 @@ the external checks below. Current facts and exact pins: [STATUS](STATUS.md).
 | V75 | Alias growth did not add playable stock | Reusable pack-only import and independent-review serializer; five candidates screened, three dropped, two promoted; Contexto eligibility 201→203 with exact preservation/selection evidence |
 | V76 | Accented holiday spellings could play pasta or falsely win | `Paște`/`Paștele` are unresolved without attempts/moves/suggestions; valid food/compound inputs and 13,177 authored surface mappings remain intact; zero content/artifact changes |
 
-V75 integrated gates: **951 backend tests on each of Python 3.12.3 and 3.14.4**, 53 accounts
+Final V76 gates: **968 backend tests on each of Python 3.12.3 and 3.14.6**, 53 accounts
 tests on each runtime, **173 native frontend tests and 108 desktop/mobile browser checks**.
-Clean install, lint/typecheck/build, both content validators, Ruff, docs and whitespace passed.
-The npm audit reports zero vulnerabilities. Independent implementation and integration reviews
-found no remaining actionable issues. Frontend code remains at the version tested in `3c03ad0`.
-V76 targeted checks and independent review passed; full results are tracked in STATUS.
-Accounts were enabled only for their isolated test suite.
+Clean install, frontend lint, both content validators, Ruff, docs and whitespace passed.
+The npm audit reports zero vulnerabilities. Independent implementation and evidence reviews
+found no remaining actionable issues. Frontend code/assets remain at the V75 version whose
+typecheck/build passed; backend-only V76 did not rebuild them. V76 code was verified at
+`3ad960e`; final status updates are documentation only. Accounts were enabled only for their
+isolated test suite. Exact results and limits are tracked in STATUS.
 
 Decisions and full evidence: [ADR index](adr/README.md), [V75 review](reviews/v75-contexto-food/README.md),
 [runtime measurements](reviews/v74-runtime-measurements/README.md). Refactors preserve

@@ -1,11 +1,12 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-06 — V76 input fix independently reviewed; full gates running. Production last checked 2026-08-27.
+Last verified: 2026-09-06 — V73–V76 technical candidate verified locally. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-  V75 technical candidate landed locally at `d127abb`; V76 is under final verification.
+  V75 landed locally at `d127abb`; V76 completes its reviewed input-sense follow-up.
+  Technical candidate complete; public rollout remains subject to the external gates below.
 - V73 shared session transactions and saved-game lifecycle landed locally at `f75a75c` (ADRs 0098–0100).
 - V74 restores transiently unavailable rounds, rejects stale resume responses, recovers terminal results,
   retains retry after failed fresh creation, and preserves terminal Contexto/Lanț state (ADR-0101).
@@ -67,17 +68,18 @@ mobile public content: `sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11f
 
 | Scope | Verified result |
 |---|---|
-| V76 targeted / independent review | 137 alias/Contexto/Lanț tests passed; independent 17-case regression rerun GREEN; full gates running |
-| V73 integrated baseline/refactors | 922 backend, 53 accounts, 163 native frontend, 48 browser passed |
-| Final backend Python 3.12.3 | 951 passed in 450.85 s; accounts 53 passed |
-| Final backend Python 3.14.4 | 951 passed in 262.15 s; accounts 53 passed |
-| Final frontend, Node 24.20.0 / npm 11.19.0 | clean install; 173 native passed; lint/typecheck/build GREEN; 118.73/120 KiB initial gzip |
-| Final real-BFF browser run | 108 desktop/mobile checks passed in 4.7 min, including all-six delayed score/reload/options recovery |
+| V76 targeted / independent review | 137 alias/Contexto/Lanț tests passed; independent 17-case regression rerun GREEN; evidence/scope audit found no issues |
+| V76 backend Python 3.12.3 | 968 passed in 276.99 s; accounts 53 passed |
+| V76 backend Python 3.14.6 | 968 passed in 228.06 s; accounts 53 passed |
+| V76 frontend, Node 24.20.0 / npm 11.19.0 | clean install; 173 native passed; lint GREEN; npm audit zero findings |
+| V76 real-BFF browser run | 108 desktop/mobile checks passed in 4.3 min; direct holiday rejection/pasta acceptance/reload check passed |
+| Unchanged frontend build | V75 typecheck/build GREEN; identical assets retained, 118.73/120 KiB initial gzip; backend-only V76 did not rebuild them |
 | V75 review/tooling/content | 52 checks passed; validators GREEN; public warm-guess/win paths confirmed |
 | Dependency/runtime | npm audit 0 findings; bounded offline latency/RSS evidence archived, including integrated V75 sample |
 | Final integration | independent reviews found no remaining actionable issues; both validators, Ruff, docs and whitespace GREEN |
 
-V75 frontend code was tested at `3c03ad0`; V76 changes backend input handling only.
+V76 code was verified at `3ad960e`; final status updates are documentation only.
+Earlier V75 verification remains in the status snapshot at `d127abb`.
 Commands and runtime paths: `docs/agent-testing.md`. Historical timing sensitivity and full prior
 verification records remain in WORKLOG. The local runtime sample includes 100 Contexto sessions /
 1,000 distinct guesses; its load, process-RSS limitations and latency data are in
@@ -85,7 +87,7 @@ verification records remain in WORKLOG. The local runtime sample includes 100 Co
 
 ## Remaining gates
 
-- Complete V76 full gates; release protocol and external evidence checklist: `docs/BETA_CANDIDATE.md`.
+- Technical gates are complete; release protocol and external evidence checklist: `docs/BETA_CANDIDATE.md`.
 - Owner selects feedback contact; player and real-device checks remain unrun. Reverify legal operator/contact
   configuration and legal pages per DEPLOY; independent content judgments here are from Codex agents.
 - Public rollout requires explicit authorization and live smoke/rollback verification. Technical candidate
