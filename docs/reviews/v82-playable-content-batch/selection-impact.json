@@ -1,0 +1,43 @@
+{
+  "seeds_per_scope": 100,
+  "dates_per_scope": 30,
+  "month": "2026-09",
+  "changed_selections": {
+    "conexiuni:None:None": {
+      "seeds": 0,
+      "days": 0
+    },
+    "contexto:None:None": {
+      "seeds": 85,
+      "days": 0
+    },
+    "contexto:gastronomie:usor": {
+      "seeds": 96,
+      "days": 10
+    },
+    "contexto:gastronomie:normal": {
+      "seeds": 86,
+      "days": 9
+    },
+    "lant:None:None": {
+      "seeds": 0,
+      "days": 0
+    },
+    "alchimie:None:None": {
+      "seeds": 0,
+      "days": 0
+    }
+  },
+  "same_artifacts_repeat_exactly": true,
+  "derived_boards": "all336 payloads remain exact; separate browser journeys cover their public selection",
+  "limitation": "bounded sampling; not all possible seeds or dates",
+  "reviewed_regression_date": {
+    "game": "contexto",
+    "date": "2026-12-31",
+    "difficulty": "normal",
+    "filtered_shelf_weights": false,
+    "before": "ct_muzica_243",
+    "after": "ct_gastronomie_328",
+    "reason": "Newly approved Bulz enters the candidate pool; the other seven fixed-date regression observations remain exact."
+  }
+}

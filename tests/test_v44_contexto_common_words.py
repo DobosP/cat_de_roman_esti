@@ -166,7 +166,7 @@ def test_every_proxy_anchor_reaches_every_selectable_unique_target() -> None:
     targets = {target_by_id[row["id"]] for row in eligible}
     svc = get_service()
 
-    assert len(eligible) == len(targets) == 204
+    assert len(eligible) == len(targets) == 212
     for anchor_id in set(COMMON_FEEDBACK_PROXIES.values()):
         assert targets <= set(svc.distances_from(anchor_id))
     for node_id in COMMON_FEEDBACK_PROXIES:
@@ -332,7 +332,7 @@ def test_bound_promotions_and_duplicate_reserve_cleanup_are_exact() -> None:
         for row in pack[game]
     )
 
-    assert statuses == {"approved": 613, "pending": 8}
+    assert statuses == {"approved": 621, "pending": 8}
     assert rows["ct_literatura_298"]["status"] == "approved"
     assert rows["ct_viata_de_roman_299"]["status"] == "approved"
     assert ranked["ct_literatura_298"]["pilot_eligible"] is True

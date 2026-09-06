@@ -161,7 +161,7 @@ def test_nuca_projection_removal_preserves_every_other_v79_row_and_policy() -> N
     assert set(INGREDIENT_FEEDBACK_POLICIES) == {NUCA}
     policy = INGREDIENT_FEEDBACK_POLICIES[NUCA]
     assert (policy.fallback_anchor_id, policy.min_strength) == (MIERE, 0.90)
-    assert set(PROJECTION_NEIGHBORHOODS) == {"gem"}
+    assert set(PROJECTION_NEIGHBORHOODS) == {"gem", "burta"}
 
 
 def test_native_ingredient_policy_requires_direct_direction_strength_relation_and_label() -> None:

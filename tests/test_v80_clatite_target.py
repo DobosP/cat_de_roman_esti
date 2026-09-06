@@ -8,14 +8,20 @@ from pathlib import Path
 
 import pytest
 
-from tests.content_history import before_v80_derived, before_v80_pack, before_v80_rankings
+from tests.content_history import (
+    before_v80_derived,
+    before_v80_pack,
+    before_v80_rankings,
+    before_v82_pack,
+    before_v82_rankings,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "cat_de_roman_esti/fixtures"
 REVIEW = ROOT / "docs/reviews/v80-clatite-target"
 NEW_ID = "ct_gastronomie_320"
 TARGET = "n_v3gas_clatite"
-PUBLIC_SEED = 20
+PUBLIC_SEED = 9
 
 
 def _read(path: Path) -> dict:
@@ -38,12 +44,13 @@ def test_only_the_reviewed_row_is_added_and_earlier_pack_is_exact() -> None:
         "id": NEW_ID, "target": TARGET, "difficulty": "usor",
         "category": "gastronomie", "source": "ai", "status": "approved",
     }]
-    assert pack["meta"]["counts"]["contexto"] == 210
-    assert pack["meta"]["id_high_water"]["contexto"] == 320
+    baseline_pack = before_v82_pack(pack)
+    assert baseline_pack["meta"]["counts"]["contexto"] == 210
+    assert baseline_pack["meta"]["id_high_water"]["contexto"] == 320
     assert _digest(before_v80_pack(pack)) == (
         "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5"
     )
-    assert get_pack().selectable_count("contexto") == 204
+    assert get_pack().selectable_count("contexto") >= 204
     pool = get_pack().pool("contexto", category="gastronomie", difficulty="usor")
     assert any(row.id == NEW_ID and row._pilot_eligible for row in pool)
 
@@ -51,7 +58,7 @@ def test_only_the_reviewed_row_is_added_and_earlier_pack_is_exact() -> None:
 def test_existing_rankings_and_frozen_boards_reconstruct_exact_baseline() -> None:
     rankings = _read(FIXTURES / "board_rankings_v37.json")
     derived = _read(FIXTURES / "derived_catalog_v38.json")
-    assert len(rankings["boards"]) == 621
+    assert len(before_v82_rankings(rankings)["boards"]) == 621
     assert len(derived["boards"]) == 336
     assert _read(REVIEW / "artifact-delta.json")["selection_weight_changes"] == {
         "ct_meme_net_064": [4, 3],

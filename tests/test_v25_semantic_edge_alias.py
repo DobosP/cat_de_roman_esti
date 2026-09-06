@@ -29,7 +29,7 @@ _PACKAGE_PACK = _ROOT / "cat_de_roman_esti/fixtures/games_pack.json"
 _TEST_PACK = _ROOT / "tests/fixtures/games_pack.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 # Current served pack; the V25 DATA baseline remains historical evidence.
-_CURRENT_PACK_SHA256 = "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29"
+_CURRENT_PACK_SHA256 = "26d61a029a6c706a02a15991730725a3421dfa1f9b36537032291828a44ab070"
 _V48_AUDIT = (
     _ROOT / "docs/reviews/v48-alchimie-pending-gate/projection-audit.json"
 )

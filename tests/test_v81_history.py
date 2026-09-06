@@ -8,7 +8,12 @@ from pathlib import Path
 
 import pytest
 
-from tests.content_history import before_v81_derived, before_v81_fixture, before_v81_rankings
+from tests.content_history import (
+    before_v81_derived,
+    before_v81_fixture,
+    before_v81_rankings,
+    before_v82_pack,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "cat_de_roman_esti/fixtures"
@@ -36,7 +41,9 @@ def test_complete_pre_v81_artifacts_reconstruct_exactly(filename, restore, inden
 def test_pack_and_every_existing_puzzle_are_unchanged():
     blob = (FIXTURES / "games_pack.json").read_bytes()
     assert blob == (ROOT / "tests/fixtures/games_pack.json").read_bytes()
-    assert hashlib.sha256(blob).hexdigest() == (
+    baseline_pack = before_v82_pack(json.loads(blob))
+    restored = (json.dumps(baseline_pack, ensure_ascii=False, indent=1) + "\n").encode()
+    assert hashlib.sha256(restored).hexdigest() == (
         "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29"
     )
     current = json.loads((FIXTURES / "kg_sample.json").read_bytes())

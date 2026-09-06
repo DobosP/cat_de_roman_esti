@@ -13,6 +13,48 @@ _RECEIPT = Path(__file__).resolve().parents[1] / (
 _V81_RECEIPT = Path(__file__).resolve().parents[1] / (
     "docs/reviews/v81-nuca-feedback/artifact-delta.json"
 )
+_V82_RECEIPT = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v82-playable-content-batch/artifact-delta.json"
+)
+
+
+def before_v82_pack(current: dict) -> dict:
+    receipt = json.loads(_V82_RECEIPT.read_bytes())
+    restored = deepcopy(current)
+    assert restored["meta"] == receipt["after_pack_meta"]
+    for row in receipt["new_records"]:
+        assert row in restored["contexto"]
+        restored["contexto"].remove(row)
+    restored["meta"] = receipt["baseline_pack_meta"]
+    return restored
+
+
+def before_v82_rankings(current: dict) -> dict:
+    receipt = json.loads(_V82_RECEIPT.read_bytes())
+    restored = deepcopy(current)
+    assert restored["meta"] == receipt["after_rankings_meta"]
+    new_ids = {row["id"] for row in receipt["new_records"]}
+    assert new_ids <= {row["id"] for row in restored["boards"]}
+    restored["boards"] = [row for row in restored["boards"] if row["id"] not in new_ids]
+    ranks: Counter[str] = Counter()
+    for row in restored["boards"]:
+        ranks[row["game"]] += 1
+        row["rank"] = ranks[row["game"]]
+        change = receipt["selection_weight_changes"].get(row["id"])
+        if change is not None:
+            before, after = change
+            assert row["selection_weight"] == after
+            row["selection_weight"] = before
+    restored["meta"] = receipt["baseline_rankings_meta"]
+    return restored
+
+
+def before_v82_derived(current: dict) -> dict:
+    receipt = json.loads(_V82_RECEIPT.read_bytes())
+    restored = deepcopy(current)
+    assert restored["meta"] == receipt["after_derived_meta"]
+    restored["meta"] = receipt["baseline_derived_meta"]
+    return restored
 
 
 def before_v81_fixture(current: dict) -> dict:
@@ -45,7 +87,7 @@ def before_v81_fixture(current: dict) -> dict:
 
 def before_v81_rankings(current: dict) -> dict:
     receipt = json.loads(_V81_RECEIPT.read_bytes())
-    restored = deepcopy(current)
+    restored = before_v82_rankings(current)
     assert restored["meta"] == receipt["after_rankings_meta"]
     rows = {row["id"]: row for row in restored["boards"]}
     assert len(rows) == len(restored["boards"])
@@ -60,7 +102,7 @@ def before_v81_rankings(current: dict) -> dict:
 
 def before_v81_derived(current: dict) -> dict:
     receipt = json.loads(_V81_RECEIPT.read_bytes())
-    restored = deepcopy(current)
+    restored = before_v82_derived(current)
     assert restored["meta"] == receipt["after_derived_meta"]
     restored["meta"] = receipt["baseline_derived_meta"]
     return restored
@@ -81,7 +123,7 @@ def before_v81_projection_rows(current: list[tuple]) -> list[tuple]:
 
 def before_v80_pack(current: dict) -> dict:
     receipt = json.loads(_RECEIPT.read_bytes())
-    restored = deepcopy(current)
+    restored = before_v82_pack(current)
     restored["contexto"] = [
         row for row in restored["contexto"] if row["id"] not in receipt["new_ids"]
     ]

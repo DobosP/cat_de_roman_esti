@@ -38,13 +38,13 @@ ARTIFACT_SHA256 = {
         "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331"
     ),
     "cat_de_roman_esti/fixtures/games_pack.json": (
-        "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29"
+        "26d61a029a6c706a02a15991730725a3421dfa1f9b36537032291828a44ab070"
     ),
     "cat_de_roman_esti/fixtures/board_rankings_v37.json": (
-        "fa1094a6c51e6d51cdafc5fecd302ef43bd3f44ff0e5aa7b36b7397a8ef7b546"
+        "fc31646b058bf2caaaf63a90ac172e504fd2bd89c4028102c4570d054f9a40a8"
     ),
     "cat_de_roman_esti/fixtures/derived_catalog_v38.json": (
-        "f66624bfe2e5ef434c9d47eb21b128d569637ac941b85834b2c0a5a196de7a6a"
+        "cf9ed7cba4bc82025297907a5131df7c7f61c06ac43722d22d591790e6facf9a"
     ),
     "tests/fixtures/cat_mobile_app_pack_contract.json": (
         "9012a0e6c6f48397a94ff8bfcbf297ea58e357ac283c978e4e9542ea66ae77b1"
@@ -128,9 +128,10 @@ def test_gem_preserves_all_baseline_fields_and_has_one_local_policy() -> None:
         before_v81_projection_rows(_projection_rows()), ensure_ascii=False, separators=(",", ":")
     ).encode()
     assert hashlib.sha256(blob).hexdigest() == _ALL_BASELINE_PROJECTIONS_SHA256
-    assert set(PROJECTION_NEIGHBORHOODS) == {"gem"}
+    assert set(PROJECTION_NEIGHBORHOODS) == {"gem", "burta"}
     policy = PROJECTION_NEIGHBORHOODS["gem"]
     assert (policy.anchor_id, policy.min_strength) == (DULCEATA, 0.60)
+    assert policy.include_direct_neighbors is True
 
 
 def test_gem_neighborhood_requires_strong_direct_non_distractor_edge() -> None:

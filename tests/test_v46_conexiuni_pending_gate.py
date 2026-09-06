@@ -130,7 +130,7 @@ def test_v46_pack_removes_only_the_rejected_pending_conexiuni_records() -> None:
 
     assert pack["meta"]["counts"] == {
         "conexiuni": 232,
-        "contexto": 210,
+        "contexto": 218,
         "lant": 97,
         "alchimie": 82,
     }
@@ -138,7 +138,7 @@ def test_v46_pack_removes_only_the_rejected_pending_conexiuni_records() -> None:
     assert Counter(record["status"] for record in conexiuni.values()) == {
         "approved": 232
     }
-    assert statuses == {"approved": 613, "pending": 8}
+    assert statuses == {"approved": 621, "pending": 8}
     assert rejected.isdisjoint(conexiuni)
 
 
@@ -172,18 +172,18 @@ def test_v46_rankings_and_frozen_derived_catalog_track_the_clean_pack() -> None:
     assert _PACKAGE_RANKINGS.read_bytes() == _TEST_RANKINGS.read_bytes()
     rankings = _json(_PACKAGE_RANKINGS)
     assert rankings["meta"]["counts"] == {
-        "total": 621,
-        "approved": 613,
-        "pilot_eligible": 451,
+        "total": 629,
+        "approved": 621,
+        "pilot_eligible": 459,
         "by_game": {
             "conexiuni": 232,
-            "contexto": 210,
+            "contexto": 218,
             "lant": 97,
             "alchimie": 82,
         },
         "eligible_by_game": {
             "conexiuni": 74,
-            "contexto": 204,
+            "contexto": 212,
             "lant": 94,
             "alchimie": 79,
         },

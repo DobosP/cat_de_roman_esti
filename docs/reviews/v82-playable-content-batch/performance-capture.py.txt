@@ -1,0 +1,51 @@
+"""Run from either checkout with PYTHONPATH=. and --mode mined|curated --output SCRATCH.
+
+The payload hash covers complete dataclasses, including private recipes and routes.
+Keep this developer-only output out of web responses and frontend assets.
+"""
+import argparse
+import dataclasses
+import hashlib
+import json
+import os
+import random
+import time
+from pathlib import Path
+
+os.environ.update(DJANGO_SETTINGS_MODULE="cat_de_roman_esti.web.settings",
+                  ROEDU_API_URL="", ROEDU_API_KEY="", CAT_ACCOUNTS_ENABLED="0")
+import django
+
+django.setup()
+from cat_de_roman_esti.wordgames import alchimie as A
+
+
+def encode(value):
+    if dataclasses.is_dataclass(value):
+        return {f.name: encode(getattr(value, f.name)) for f in dataclasses.fields(value)}
+    if isinstance(value, dict):
+        return sorted([[encode(k), encode(v)] for k, v in value.items()], key=lambda x: repr(x[0]))
+    if isinstance(value, (tuple, list)):
+        return [encode(x) for x in value]
+    if isinstance(value, (set, frozenset)):
+        return sorted([encode(x) for x in value], key=repr)
+    return value
+
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--mode", choices=("mined", "curated"), required=True)
+parser.add_argument("--output", type=Path, required=True)
+args = parser.parse_args()
+A._build_recipe_projection_cached.cache_clear()
+started = time.monotonic()
+if args.mode == "mined":
+    payload = [encode(A._build_session(random.Random(seed),
+               difficulty=("usor", "normal", "greu")[seed % 3])) for seed in range(12)]
+else:
+    rows = json.loads(Path("cat_de_roman_esti/fixtures/games_pack.json").read_bytes())["alchimie"]
+    payload = {r["id"]: encode(A._build_recipe_projection(r["seeds"], r["target"],
+               r.get("category"))) for r in rows}
+blob = (json.dumps(payload, ensure_ascii=False, indent=1) + "\n").encode()
+args.output.write_bytes(blob)
+print(json.dumps({"entries": len(payload), "payload_sha256": hashlib.sha256(blob).hexdigest(),
+                  "elapsed_seconds": round(time.monotonic() - started, 2)}))

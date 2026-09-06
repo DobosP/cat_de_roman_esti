@@ -28,7 +28,7 @@ _TEST_PACK = _ROOT / "tests/fixtures/games_pack.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 
 # Current served pack pin; the wave-local DATA baseline remains historical evidence.
-_CURRENT_PACK_SHA256 = "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29"
+_CURRENT_PACK_SHA256 = "26d61a029a6c706a02a15991730725a3421dfa1f9b36537032291828a44ab070"
 _EXPECTED_EDGE_COUNT = 51
 
 
@@ -281,11 +281,11 @@ def test_v31_keeps_the_entire_game_pack_byte_stable_without_adding_items():
     assert package_blob == _TEST_PACK.read_bytes()
     assert {game: len(pack[game]) for game in ("conexiuni", "contexto", "lant", "alchimie")} == {
         "conexiuni": 232,
-        "contexto": 210,
+        "contexto": 218,
         "lant": 97,
         "alchimie": 82,
     }
-    assert statuses == {"approved": 613, "pending": 8}
+    assert statuses == {"approved": 621, "pending": 8}
 
 
 def test_v31_mobile_contract_stays_current_and_keeps_v31_public():

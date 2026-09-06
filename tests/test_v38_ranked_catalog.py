@@ -247,14 +247,15 @@ def test_daily_selection_is_stable_and_order_independent() -> None:
         assert left._catalog_id == right._catalog_id
 
 
-def test_v37_daily_assignments_remain_unchanged() -> None:
+def test_reviewed_daily_assignments_match_current_inventory() -> None:
     pack = load_pack()
     expected = {
         # ADR-0066: the previous winners were owner-demoted; deterministic re-pick.
         ("conexiuni", "2026-07-19"): "cx_meme_net_201",
         ("conexiuni", "2026-12-31"): "cx_viata_de_roman_288",
         ("contexto", "2026-07-19"): "ct_viata_de_roman_273",
-        ("contexto", "2026-12-31"): "ct_muzica_243",
+        # V82: the newly reviewed Bulz target wins this normal-pool date.
+        ("contexto", "2026-12-31"): "ct_gastronomie_328",
         ("lant", "2026-07-19"): "lt_viata_de_roman_094",
         ("lant", "2026-12-31"): "lt_film_tv_011",
         ("alchimie", "2026-07-19"): "al_muzica_066",

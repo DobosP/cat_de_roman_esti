@@ -1,0 +1,91 @@
+{
+ "id": "ct_gastronomie_323",
+ "game": "contexto",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "dca0be3941f37b5dce082177dbb286cb3b7e48436431afe47c0fbc9b62575d30",
+ "kg_sha256": "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331",
+ "lint_findings": [],
+ "target": {
+  "id": "n_gas_mustar",
+  "label": "Muștar",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.8317,
+  "degree": 8,
+  "incoming_degree": 8,
+  "description": "Sos iute-acrișor aproape obligatoriu lângă mici, cârnați sau grătare."
+ },
+ "reachable": 2289,
+ "strong_neighbors": [
+  {
+   "id": "n_gas_mici",
+   "label": "Mici",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.9765,
+   "degree": 20,
+   "incoming_degree": 20,
+   "description": "Mititei fripți pe grătar, asociați popular cu muștar, pâine și ieșiri de 1 Mai.",
+   "strength": 0.93
+  },
+  {
+   "id": "n_v2gas_sosuri",
+   "label": "Sosuri",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.7846,
+   "degree": 12,
+   "incoming_degree": 12,
+   "description": "Adaosuri lichide sau cremoase care completează mâncarea.",
+   "strength": 0.9
+  },
+  {
+   "id": "n_gas_mititei_obor",
+   "label": "Mititeii de la Obor",
+   "node_type": "place",
+   "category": "gastronomie",
+   "salience": 0.4641,
+   "degree": 7,
+   "incoming_degree": 7,
+   "description": "Reper bucureștean de mici la grătar, coadă și muștar în Piața Obor.",
+   "strength": 0.82
+  },
+  {
+   "id": "n_gas_gratar_1_mai",
+   "label": "Grătarul de 1 Mai",
+   "node_type": "event",
+   "category": "gastronomie",
+   "salience": 0.8036,
+   "degree": 8,
+   "incoming_degree": 8,
+   "description": "Ritual urban și de picnic: mici, fum, muștar și aglomerație la iarbă verde.",
+   "strength": 0.78
+  },
+  {
+   "id": "n_v2gas_gratar",
+   "label": "Grătar",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.9125,
+   "degree": 13,
+   "incoming_degree": 13,
+   "description": "Tehnică și ocazie socială de fript carne sau legume pe jar.",
+   "strength": 0.78
+  },
+  {
+   "id": "n_v4gas_condiment",
+   "label": "Condiment",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.5774,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Ingredient folosit în cantități mici pentru aromă și gust.",
+   "strength": 0.7
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:7a8f037be6e0272f4b2598bb3ba67c030db87132ef357695f95eae7ad3044a1e"
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "v82-burta-bounded-reprobe-comparison-v1",
+  "candidate_sha256": "sha256:c1b2bf353fac92124cf2c3866d8ef352eefa7308cfb254d3b01a28922d0171d0",
+  "before_source_bindings": {
+    "cat_de_roman_esti/wordgames/contexto.py": "sha256:be73a3aaedfb8a3164643fd350052e12560dc52d6df21225d99d2c0e82688dd5",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "sha256:da816f4038ab01b619662409e0a5f20cfad8a81a2e5b1544fe8dbf517b060ec1",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "sha256:05a1075ba93c4ca2d00da0819c9d4f541330ba727e4b71f556d346a647131f24"
+  },
+  "after_source_bindings": {
+    "cat_de_roman_esti/wordgames/contexto.py": "sha256:253a315224fdcff537754eb0c38db43c7247f49865ccef40a610b384b26bc6a1",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "sha256:91c9220fda2430e74ad10b2e621d9394fab7358ebf220bfcaf2b2fe37f3a27cb",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "sha256:05a1075ba93c4ca2d00da0819c9d4f541330ba727e4b71f556d346a647131f24"
+  },
+  "before_kg_sha256": "sha256:fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331",
+  "after_kg_sha256": "sha256:fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331",
+  "scope": {
+    "same_sampled_targets": 23,
+    "same_fresh_session_guesses": 764,
+    "changed_guesses": 1,
+    "unchanged_guesses": 763,
+    "exhaustive": false,
+    "limitation": "Only these fixed-session inputs were compared. Full KG target policy boundaries are separately tested; this is not an all-input API exhaustiveness claim."
+  },
+  "changed_observations": [
+    {
+      "target": "n_gas_ciorba_burta",
+      "text": "burtă",
+      "before": {
+        "text": "burtă",
+        "accepted": true,
+        "guess_label": "Burtă",
+        "distance": 4,
+        "rank": 434,
+        "temperature": "Rece",
+        "won": false
+      },
+      "after": {
+        "text": "burtă",
+        "accepted": true,
+        "guess_label": "Burtă",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "won": false
+      }
+    }
+  ]
+}

@@ -1478,29 +1478,34 @@ def test_exact_alias_and_diacritic_free_guesses_skip_confirmation() -> None:
 
 def test_typo_of_the_target_is_a_legitimate_win() -> None:
     """A confidently corrected target typo WINS — a typo must not rob the answer."""
+    from cat_de_roman_esti.wordgames import contexto
     from cat_de_roman_esti.wordgames.service import get_service
 
     c = make_client()
     svc = get_service()
-    target_label = _reveal_target_label(c)
-    target = svc.resolve(target_label)
+    # Keep the correction contract independent of content-driven public seed changes.
+    # Public selection has separate coverage; this target must exercise a real typo.
+    target = "n_gas_cozonac"
+    target_label = svc.label(target)
     typo = _typo(target_label)
-    if svc.resolve(typo) is not None or svc.resolve_fuzzy(typo) != target:
-        pytest.skip("secret label does not confidently auto-correct on this fixture")
-    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
-    body = c.post(
-        f"/api/wordgames/contexto/games/{gid}/guess",
-        {"text": typo},
-        content_type="application/json",
-    ).json()
-    assert body["ok"] is True
-    assert body["won"] is True
-    assert body["guess"]["distance"] == 0
-    assert body["guess"]["closeness"] == 100
-    assert body["message"] == f"Am înțeles: {target_label}."
-    assert body["attempts"] == 1
-    assert body["target"]["id"] == target
-    assert body["score"] == 1000  # solved on the first (auto-accepted) attempt
+    assert svc.resolve(typo) is None and svc.resolve_fuzzy(typo) == target
+    gid = contexto.store.create(contexto._build_session(target, "normal", None))
+    try:
+        body = c.post(
+            f"/api/wordgames/contexto/games/{gid}/guess",
+            {"text": typo},
+            content_type="application/json",
+        ).json()
+        assert body["ok"] is True
+        assert body["won"] is True
+        assert body["guess"]["distance"] == 0
+        assert body["guess"]["closeness"] == 100
+        assert body["message"] == f"Am înțeles: {target_label}."
+        assert body["attempts"] == 1
+        assert body["target"]["id"] == target
+        assert body["score"] == 1000  # solved on the first (auto-accepted) attempt
+    finally:
+        contexto.store.delete(gid)
 
 
 # ----------------------------------------- new: graded similarity ranking (ADR-0021)

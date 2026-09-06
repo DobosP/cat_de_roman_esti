@@ -91,6 +91,9 @@ MAX_ROUTE_CANDIDATES = 128
 MAX_RECIPE_PAIRS = 24
 MAX_RESULTS_PER_RECIPE = 2
 MAX_PROJECTED_CONCEPTS = 32
+# One cold projection reuses graph results across BFS inventory states. This local
+# memo stops retaining pairs at capacity and is discarded when that build returns.
+MAX_PAIR_RESULT_CACHE = 4096
 # Every remembered experiment is one unordered pair of projected concepts.  Because a
 # session can own at most 32 projected concepts, the complete memory is structurally
 # bounded at C(32, 2) rather than relying on eviction that could make repeats costly again.
@@ -394,6 +397,7 @@ def _build_recipe_projection_cached(
     minimum_par: int | None = None
     state_count = 1
     exhausted = False
+    pair_results: dict[RecipePair, frozenset[str]] = {}
 
     def reconstruct(
         owned: frozenset[str], pair: RecipePair, fresh: frozenset[str]
@@ -413,13 +417,14 @@ def _build_recipe_projection_cached(
         next_layer: set[frozenset[str]] = set()
         for owned in sorted(frontier, key=lambda state: tuple(sorted(state))):
             for pair in combinations(sorted(owned), 2):
-                fresh = frozenset(
-                    node_id
-                    for node_id in svc.common_neighbors(
-                        pair[0], pair[1], category=category
-                    )
-                    if node_id not in owned
-                )
+                results = pair_results.get(pair)
+                if results is None:
+                    results = frozenset(svc.common_neighbors(pair[0], pair[1], category=category))
+                    if len(pair_results) < MAX_PAIR_RESULT_CACHE:
+                        pair_results[pair] = results
+                if not results:
+                    continue
+                fresh = results - owned
                 if not fresh:
                     continue
                 if target in fresh:

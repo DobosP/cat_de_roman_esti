@@ -1,0 +1,80 @@
+{
+ "id": "ct_gastronomie_322",
+ "game": "contexto",
+ "category": "gastronomie",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "16e390b319b4a5aa72a0414dec050eabeccf972acb03131836a812d8decd74d7",
+ "kg_sha256": "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v17gas_pasca",
+  "label": "Pască",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.72,
+  "degree": 5,
+  "incoming_degree": 5,
+  "description": "Cozonac rotund umplut cu brânză dulce și stafide, copt tradițional pentru masa de Paște. În unele zone se duce la biserică pentru sfințire în noaptea de Înviere."
+ },
+ "reachable": 2289,
+ "strong_neighbors": [
+  {
+   "id": "n_gas_masa_paste",
+   "label": "Masa de Paște",
+   "node_type": "event",
+   "category": "gastronomie",
+   "salience": 0.9413,
+   "degree": 15,
+   "incoming_degree": 15,
+   "description": "Masă festivă cu ouă roșii, drob, miel, cozonac și preparate de primăvară.",
+   "strength": 0.9
+  },
+  {
+   "id": "n_v2gas_desert",
+   "label": "Desert",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.8464,
+   "degree": 24,
+   "incoming_degree": 24,
+   "description": "Fel dulce servit la finalul mesei sau la sărbători.",
+   "strength": 0.85
+  },
+  {
+   "id": "n_gas_cozonac",
+   "label": "Cozonac",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.9737,
+   "degree": 22,
+   "incoming_degree": 24,
+   "description": "Aluat dulce cu nucă, cacao sau rahat, nelipsit de la Crăciun și Paște.",
+   "strength": 0.8
+  },
+  {
+   "id": "n_v2gas_branza",
+   "label": "Brânză",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.9238,
+   "degree": 12,
+   "incoming_degree": 13,
+   "description": "Produs lactat folosit în feluri sărate, deserturi și gustări.",
+   "strength": 0.75
+  },
+  {
+   "id": "n_gas_oua_rosii",
+   "label": "Ouă roșii",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.7544,
+   "degree": 11,
+   "incoming_degree": 11,
+   "description": "Ouă vopsite pentru Paște, ciocnite la masa festivă.",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:714ca1f1ee77069b005beb94865c6ffe18460de4b16b6444ce050ea58d5f680e"
+}

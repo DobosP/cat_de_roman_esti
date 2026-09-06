@@ -80,12 +80,12 @@ def test_v69_impact_reserve_is_mirrored_exact_and_demoted_only_once() -> None:
     assert ranked[_RESERVE_ID]["selection_weight"] == 1
 
 
-def test_contexto_retains_204_unique_targets_across_every_category() -> None:
+def test_contexto_retains_212_unique_targets_across_every_category() -> None:
     pack = load_pack()
     eligible = [item for item in pack.pool("contexto") if item._pilot_eligible]
 
-    assert len(eligible) == 204
-    assert len({str(item.payload["target"]) for item in eligible}) == 204
+    assert len(eligible) == 212
+    assert len({str(item.payload["target"]) for item in eligible}) == 212
     assert {item.category for item in eligible} == set(CATEGORIES)
     assert _RESERVE_ID in {item.id for item in pack.pool("contexto")}
     assert _RESERVE_ID not in {item.id for item in eligible}

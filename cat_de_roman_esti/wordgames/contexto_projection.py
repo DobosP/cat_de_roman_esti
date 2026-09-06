@@ -1192,10 +1192,11 @@ PROJECTION_INDEX = {term.key: term for term in PROJECTION_TERMS}
 
 @dataclass(frozen=True, slots=True)
 class ProjectionNeighborhood:
-    """Borrow only reviewed, strong direct associations of another concept."""
+    """Borrow an exact concept, optionally including its strong direct associations."""
 
     anchor_id: str
     min_strength: float
+    include_direct_neighbors: bool = True
 
 
 # These are local feedback improvements, not global synonym mappings (ADR-0110).
@@ -1203,6 +1204,11 @@ class ProjectionNeighborhood:
 # Socată edge and all multi-hop routes. Elsewhere its existing anchor is retained.
 PROJECTION_NEIGHBORHOODS: dict[str, ProjectionNeighborhood] = {
     "gem": ProjectionNeighborhood("n_v17gas_dulceata", min_strength=0.60),
+    # The soup's defining ingredient is relevant to that exact target. Keep the body
+    # meaning for every other target, including any strong neighbor of the soup.
+    "burta": ProjectionNeighborhood(
+        "n_gas_ciorba_burta", min_strength=0.60, include_direct_neighbors=False
+    ),
 }
 
 # One human-legible representative per authored domain. Tests pin these semantic

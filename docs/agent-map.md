@@ -23,6 +23,7 @@
 ## Common task routes
 | Task | Start here | Verify with |
 |---|---|---|
+| Start the next version | `docs/adr/0113-outcome-based-version-batches.md` + current STATUS backlog | explicit player outcomes, focused development checks, integrated gates and `scripts/report_content_delta.py` |
 | Word-game session fix | `cat_de_roman_esti/wordgames/service.py` + matching test | targeted pytest (`docs/agent-testing.md`) |
 | New pack-only content wave | `docs/PACK_ONLY_CONTENT_WAVES.md`, `docs/CRITIQUE_RUBRIC.md`, newest review README | bound review, both validators + full pytest |
 | BFF / API change | `cat_de_roman_esti/web/urls.py`, `docs/MOBILE_CONTRACT.md` | pytest + manifest hash in `docs/STATUS.md` |

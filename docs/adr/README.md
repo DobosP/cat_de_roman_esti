@@ -21,3 +21,6 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0110 | [Fruit-preserve feedback for Gem](0110-use-fruit-preserve-feedback-for-gem.md) | accepted |
 | 0111 | [Reviewed Clătite target](0111-promote-reviewed-clatite-target.md) | accepted |
 | 0112 | [Reviewed walnut input](0112-add-reviewed-walnut-input.md) | accepted |
+| 0113 | [Outcome-based version batches](0113-outcome-based-version-batches.md) | accepted |
+| 0114 | [Reviewed food batch and scoped tripe feedback](0114-reviewed-food-batch-and-scoped-tripe-feedback.md) | accepted |
+| 0115 | [Bounded reuse during Alchimie generation](0115-reuse-alchimie-pair-results-within-a-build.md) | accepted |

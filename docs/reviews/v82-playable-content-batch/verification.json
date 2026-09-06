@@ -1,0 +1,293 @@
+{
+  "date": "2026-09-06",
+  "baseline_commit": "953391999a8b9f43cb96885716f1413445465123",
+  "runtimes": {
+    "python312": "3.12.3",
+    "python314": "3.14.6",
+    "node": "24.20.0",
+    "npm": "11.19.0"
+  },
+  "checks": {
+    "fixture": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_fixture.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v82-playable-content-batch",
+      "exit_code": 0,
+      "elapsed_seconds": 0.32,
+      "log_sha256": "4336e34b2cf7451ffa9c8616302553641b108500f1a3cdd88686ce3f014d114f",
+      "tail": [
+        "  [  ok] puzzle_hop_band              0 error(s)",
+        "  [  ok] puzzle_hints                 0 error(s)",
+        "  [  ok] puzzle_ids_resolve           0 error(s)",
+        "  [  ok] puzzle_shortest_path         0 error(s)",
+        "  [  ok] puzzle_category_scope        0 error(s)",
+        "  [  ok] puzzle_distractor_shortcut   0 error(s)",
+        "------------------------------------------------------------",
+        "GREEN: fixture is valid (0 errors)"
+      ]
+    },
+    "pack": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_games_pack.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v82-playable-content-batch",
+      "exit_code": 0,
+      "elapsed_seconds": 11.28,
+      "log_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+      "tail": [
+        "  structure                ok",
+        "  item_shape               ok",
+        "  unique_ids               ok",
+        "  playability              ok",
+        "  meta_counts              ok",
+        "  id_high_water            ok",
+        "",
+        "games pack GREEN"
+      ]
+    },
+    "pending": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/critique_pack.py",
+        "--status",
+        "pending",
+        "--strict"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v82-playable-content-batch",
+      "exit_code": 0,
+      "elapsed_seconds": 0.6,
+      "log_sha256": "f19d308c2a43b0b95b9b12f3458a99e9f64ce7c982f4f113f1997cbbcffae852",
+      "tail": [
+        "critique_pack: 8 item(s) checked, 0 flagged, 0 FAIL finding(s)",
+        "  member_overuse       WARN x65",
+        "  nondistinctive_region_link WARN x16"
+      ]
+    },
+    "ruff": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v82-playable-content-batch",
+      "exit_code": 0,
+      "elapsed_seconds": 0.17,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "tail": [
+        "All checks passed!"
+      ]
+    },
+    "accounts312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v82-playable-content-batch",
+      "exit_code": 0,
+      "elapsed_seconds": 9.93,
+      "log_sha256": "4e8bec69a89c5e480608baa8464cd9d435247259e7b1f5936c4a4b29d01cf4ec",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 7.57s"
+      ]
+    },
+    "accounts314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v82-playable-content-batch/py314/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v82-playable-content-batch",
+      "exit_code": 0,
+      "elapsed_seconds": 10.85,
+      "log_sha256": "b4c6926a4d44e85dbe903b9546a25eee486e47eba85dd11a143be22b3c73b4b6",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 7.71s"
+      ]
+    },
+    "backend312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v82-playable-content-batch",
+      "exit_code": 0,
+      "elapsed_seconds": 644.5,
+      "log_sha256": "70adb80fa1ef9bd52476c177f81b75a258f8fc9da5ee307ec0f314cdc0687ae0",
+      "tail": [
+        "........................................................................ [ 61%]",
+        "........................................................................ [ 68%]",
+        "........................................................................ [ 74%]",
+        "........................................................................ [ 81%]",
+        "........................................................................ [ 88%]",
+        "........................................................................ [ 95%]",
+        ".................................................                        [100%]",
+        "1057 passed in 641.60s (0:10:41)"
+      ]
+    },
+    "backend314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v82-playable-content-batch/py314/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v82-playable-content-batch",
+      "exit_code": 0,
+      "elapsed_seconds": 593.94,
+      "log_sha256": "6a3f61ba12be0540816c3d1c50ed475bc2023f804df6378a674394ac9378fc0e",
+      "tail": [
+        "........................................................................ [ 61%]",
+        "........................................................................ [ 68%]",
+        "........................................................................ [ 74%]",
+        "........................................................................ [ 81%]",
+        "........................................................................ [ 88%]",
+        "........................................................................ [ 95%]",
+        ".................................................                        [100%]",
+        "1057 passed in 588.88s (0:09:48)"
+      ]
+    },
+    "browser": {
+      "command": [
+        "npm",
+        "run",
+        "test:e2e"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v82-playable-content-batch/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 463.82,
+      "log_sha256": "ce7e48134ca720e230f208ec0a35da73e9106178fdb8ede1635b9638a55f01a7",
+      "tail": [
+        "  ✓  103 [mobile] › e2e/resume-recovery.spec.mjs:152:3 › V74 saved-game recovery › a queued terminal score keeps every saved game recoverable until its write finishes (21.6s)",
+        "  ✓  104 [mobile] › e2e/resume-recovery.spec.mjs:203:5 › V74 saved-game recovery › a stale 200 response cannot displace another tab's game (2.5s)",
+        "  ✓  105 [mobile] › e2e/resume-recovery.spec.mjs:203:5 › V74 saved-game recovery › a stale 404 response cannot displace another tab's game (2.5s)",
+        "  ✓  106 [mobile] › e2e/resume-recovery.spec.mjs:248:3 › V74 saved-game recovery › an unmounted resume cannot finish a newer route's create loading (3.0s)",
+        "  ✓  107 [mobile] › e2e/resume-recovery.spec.mjs:290:3 › V74 saved-game recovery › two tabs adopt one terminal session but append its local score once (3.2s)",
+        "  ✓  108 [mobile] › e2e/resume-recovery.spec.mjs:350:3 › V74 saved-game recovery › simultaneous terminal sessions from different games preserve both score rows (2.5s)",
+        "",
+        "  108 passed (7.7m)"
+      ]
+    },
+    "frontend_bundle": {
+      "command": [
+        "npm",
+        "run",
+        "check:bundle"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v82-playable-content-batch/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 0.34,
+      "log_sha256": "ff5f74fc33a8767e2f3d406bf9184d98122b943cf9adbfdc7bc1ac45ff0b2be7",
+      "tail": [
+        "> cat-de-roman-esti-frontend@0.1.0 check:bundle",
+        "> node scripts/check-bundle-budget.mjs",
+        "",
+        "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+        "     8.23 KiB  assets/index-DiCPhhaT.css",
+        "   110.50 KiB  assets/index-SV5smC6j.js",
+        "   118.73 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ]
+    },
+    "frontend_lint": {
+      "command": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v82-playable-content-batch/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 17.07,
+      "log_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 lint",
+        "> eslint .",
+        ""
+      ]
+    },
+    "frontend_native": {
+      "command": [
+        "npm",
+        "test"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v82-playable-content-batch/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 2.29,
+      "log_sha256": "9105e2fabb9b0b6e741fdde607a423cf5fb86336e2181d69a48eb5e26167ceae",
+      "tail": [
+        "ℹ tests 173",
+        "ℹ suites 0",
+        "ℹ pass 173",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 1541.971814"
+      ]
+    },
+    "frontend_typecheck": {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v82-playable-content-batch/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 8.37,
+      "log_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 typecheck",
+        "> tsc --noEmit",
+        ""
+      ]
+    }
+  },
+  "focused_checks": {
+    "content_history_and_public_journeys": "48 passed in 32.05s",
+    "current_artifact_pins": "44 passed in 18.02s; two additional current inventory/profile cases passed in 7.19s",
+    "independent_implementation": "24 passed in 2.54s;5 memo cases in 0.47s",
+    "memo_and_cache_isolation": "7 passed in 0.93s",
+    "unchanged_mining_time_limit": "passed at 29.96s against 45s ceiling",
+    "final_policy_and_non_skipping_typo_regressions": "2 passed in 1.00s"
+  },
+  "initial_findings": {
+    "first_full_run": "Stopped after 3 failed/367 passed: two stale current-inventory expectations and unchanged Alchimie 52.73 s timing under load 75.",
+    "second_full_run": "433 passed then expected normal-pool December 31 daily changed to newly reviewed Bulz; expectation and selection receipt updated.",
+    "third_full_run": "1055 passed,1 stale V81 policy-inventory assertion failed,1 seed-dependent typo test skipped. Policy expectation now includes burta; typo uses a fixed real target and no skip.",
+    "resolution": "All current runtime/backend tests subsequently passed in full on both Python versions, including 1057 tests per runtime."
+  },
+  "notes": [
+    "Both backend suites ran in anonymous/debug-off mode; accounts were enabled only in isolated account suites.",
+    "Backend starts were staggered past generation-time checks; remaining suites and browser validation overlapped.",
+    "Frontend source/assets and seed38 public starting snapshots remain unchanged; clean Node24 npm install/audit found zero vulnerabilities.",
+    "No push, deployment, Romanian-player playtest or real-device acceptance was performed.",
+    "Frontend assets were retained because frontend application sources did not change; no redundant rebuild was performed."
+  ],
+  "final_fast_checks": {
+    "ruff": "passed after final test-fixture updates",
+    "docs": "files31; dead_links0; stale_terms0; retired_verbs0; orphans0",
+    "whitespace": "git diff --check passed"
+  }
+}

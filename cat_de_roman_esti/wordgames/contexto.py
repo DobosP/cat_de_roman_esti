@@ -213,15 +213,16 @@ def _feedback_anchor_id(svc, node_id: str, target_id: str) -> str:
 
 
 def _projection_anchor_id(svc, term: ProjectionTerm, target_id: str) -> str:
-    """Use an authored neighborhood only for its strong, directed local links."""
+    """Use an authored exact target and, when enabled, strong directed local links."""
 
     neighborhood = PROJECTION_NEIGHBORHOODS.get(term.key)
     if neighborhood is not None and svc.exists(neighborhood.anchor_id):
         if target_id == neighborhood.anchor_id:
             return neighborhood.anchor_id
-        edge = svc.link(neighborhood.anchor_id, target_id)
-        if edge is not None and edge.strength >= neighborhood.min_strength:
-            return neighborhood.anchor_id
+        if neighborhood.include_direct_neighbors:
+            edge = svc.link(neighborhood.anchor_id, target_id)
+            if edge is not None and edge.strength >= neighborhood.min_strength:
+                return neighborhood.anchor_id
     return term.anchor_id
 
 

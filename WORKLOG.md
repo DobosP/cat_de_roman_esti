@@ -281,3 +281,52 @@ projection and 13,177-word-resolution proofs remain intact through exact inverse
 Evidence: ADR-0112 and docs/reviews/v81-nuca-feedback/. Next: fresh Cozonac target
 review; bread and other approximate vocabulary remain deferred. Land means merge
 into main; no push, deployment or human-playtest claim.
+
+
+## V82 — playable food batch and bounded generation reuse, 2026-09-06
+
+Valid until: the bound content, scoring policies or generation implementation changes — then treat as history.
+
+V81 was already merged into local main at `9533919`. V82 records the owner's expanded
+version objectives in ADR-0113: coherent playable batches with enabling fixes and honest
+baseline-to-candidate counts. The new report tool distinguishes graph concepts, connections,
+forms, approvals, runtime-ranked eligibility and frozen boards; aliases are not inferred
+synonyms. Agent-map and the pack-only workflow point future versions to these objectives.
+
+Twenty-three food targets were screened with 764 fixed-session probes. Eight received
+complete independent factual/quality screens and unanimous dossier-bound analyst/verifier
+promotion: Cozonac, Pască, Muștar, Mujdei, Ciorbă de burtă, Urdă, Friptură and Bulz. The
+supported importer/serializer/applier added `ct_gastronomie_321`–`328`. Contexto selectable
+stock grows 204→212; pack stock is 629 = 621 approved + eight original pending holds.
+No graph concept, edge, form, genuine synonym, other-game record or frozen board is added.
+
+The defining `burtă` guess was cold for the soup. ADR-0114 adds explicit target-only
+projection feedback: rank434/Rece becomes rank2/Fierbinte without winning; all 472 original
+projection rows remain exact and other targets keep body feedback. Exactly 1 of 764 repeated
+probes changes. All 621 prior pack records, all 336 frozen boards, the KG/mobile/puzzles and
+old quality/status/eligibility remain exact. Nine global Contexto weight bands change;
+selection remains deterministic, with daily/seed changes recorded. Complete V81 artifact
+hashes reconstruct through a compact inverse receipt. Fifteen omitted targets and ordinary
+cold/unknown ingredient/form gaps remain documented rather than implicitly approved.
+
+The initial full gate exposed stale current-inventory/profile expectations and the known
+Alchimie timing failure: 52.73 s versus 45 s at host load 75. Profiling found 20,606,576 graph queries
+in twelve mined sessions. ADR-0115 uses a local 4,096-pair memo with uncached fallback after
+capacity; query count falls 88.89% to 2,288,987. Complete dataclasses for all 82 curated
+projections and twelve mined sessions remain exact, including recipes/routes/par/private
+quality. The unchanged timing test passes at 29.96 s. Later stale daily/policy expectations
+were fixed, and a seed-dependent typo skip became a deterministic real-target regression.
+No test threshold, session bound or search limit was relaxed.
+
+Final full gates: **1,057 passed on Python 3.12.3 in 641.60 s and Python 3.14.6 in 588.88 s**, with
+zero skips; accounts 53 passed on each. Frontend 173 native tests, lint/typecheck and retained
+118.73/120 KiB bundle pass; **108 desktop/mobile browser checks passed in 7.7 min**. Clean Node 24
+install/audit reports zero vulnerabilities. Validators, strict pending gate, Ruff, docs and
+whitespace pass. Frontend application/assets and regenerated seed-38 starting snapshots are
+unchanged. Backend starts were staggered past their timing checks, then independent gates
+overlapped. Exact commands, source bindings and intermediate failures are in the V82 archive.
+
+V82 is a committed local candidate on `feat/v82-playable-content-batch`; no push, deployment,
+real-device check or human playtest is claimed. The next landing request can merge this
+verified batch. Further content work should combine relevant feedback/vocabulary repairs
+with fresh playable candidates under ADR-0113. Public anonymous-beta external gates remain.

@@ -39,9 +39,9 @@ _PACKAGE_DERIVED = _ROOT / "cat_de_roman_esti/fixtures/derived_catalog_v38.json"
 _TEST_DERIVED = _ROOT / "tests/fixtures/derived_catalog_v38.json"
 
 _PENDING_ID_SET_SHA256 = "508ac4014f6c519fc0891b92474e683e9a26078e86091cee8ee77a1aa10e97c1"
-_PACK_SHA256 = "27ce95294b7a8ea39aedc3f22e125650d0f06d9ecbcf0fb7af4bc6966d59cb29"
-_RANKINGS_SHA256 = "fa1094a6c51e6d51cdafc5fecd302ef43bd3f44ff0e5aa7b36b7397a8ef7b546"
-_DERIVED_SHA256 = "f66624bfe2e5ef434c9d47eb21b128d569637ac941b85834b2c0a5a196de7a6a"
+_PACK_SHA256 = "26d61a029a6c706a02a15991730725a3421dfa1f9b36537032291828a44ab070"
+_RANKINGS_SHA256 = "fc31646b058bf2caaaf63a90ac172e504fd2bd89c4028102c4570d054f9a40a8"
+_DERIVED_SHA256 = "cf9ed7cba4bc82025297907a5131df7c7f61c06ac43722d22d591790e6facf9a"
 _FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
 
 _PROMOTED = {"ct_gastronomie_300"}
@@ -186,16 +186,16 @@ def test_v47_pack_applies_only_the_bound_outcomes_and_keeps_unique_live_targets(
 
     assert pack["meta"]["counts"] == {
         "conexiuni": 232,
-        "contexto": 210,
+        "contexto": 218,
         "lant": 97,
         "alchimie": 82,
     }
-    assert pack["meta"]["id_high_water"]["contexto"] == 320
+    assert pack["meta"]["id_high_water"]["contexto"] == 328
     assert Counter(record["status"] for record in contexto.values()) == {
-        "approved": 208,
+        "approved": 216,
         "pending": 2,
     }
-    assert statuses == {"approved": 613, "pending": 8}
+    assert statuses == {"approved": 621, "pending": 8}
     assert contexto["ct_gastronomie_300"]["status"] == "approved"
     assert {item_id for item_id, row in contexto.items() if row["status"] == "pending"} == _KEPT
     assert _REJECTED.isdisjoint(contexto)
@@ -207,7 +207,7 @@ def test_v47_pack_applies_only_the_bound_outcomes_and_keeps_unique_live_targets(
         if row["game"] == "contexto" and row["pilot_eligible"]
     }
     eligible_targets = [contexto[item_id]["target"] for item_id in eligible_ids]
-    assert len(eligible_ids) == len(eligible_targets) == len(set(eligible_targets)) == 204
+    assert len(eligible_ids) == len(eligible_targets) == len(set(eligible_targets)) == 212
 
 
 def test_v47_archive_preserves_every_removed_record_binding_without_a_ledger() -> None:
@@ -234,18 +234,18 @@ def test_v47_rankings_and_frozen_derived_catalog_track_the_clean_pack() -> None:
     assert hashlib.sha256(_PACKAGE_RANKINGS.read_bytes()).hexdigest() == _RANKINGS_SHA256
     rankings = _json(_PACKAGE_RANKINGS)
     assert rankings["meta"]["counts"] == {
-        "total": 621,
-        "approved": 613,
-        "pilot_eligible": 451,
+        "total": 629,
+        "approved": 621,
+        "pilot_eligible": 459,
         "by_game": {
             "conexiuni": 232,
-            "contexto": 210,
+            "contexto": 218,
             "lant": 97,
             "alchimie": 82,
         },
         "eligible_by_game": {
             "conexiuni": 74,
-            "contexto": 204,
+            "contexto": 212,
             "lant": 94,
             "alchimie": 79,
         },

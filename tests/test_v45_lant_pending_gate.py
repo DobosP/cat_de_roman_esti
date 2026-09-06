@@ -116,7 +116,7 @@ def test_v45_pack_keeps_only_the_three_unanimous_repair_holds() -> None:
 
     assert pack["meta"]["counts"] == {
         "conexiuni": 232,
-        "contexto": 210,
+        "contexto": 218,
         "lant": 97,
         "alchimie": 82,
     }
@@ -125,7 +125,7 @@ def test_v45_pack_keeps_only_the_three_unanimous_repair_holds() -> None:
         "approved": 94,
         "pending": 3,
     }
-    assert statuses == {"approved": 613, "pending": 8}
+    assert statuses == {"approved": 621, "pending": 8}
     assert {item_id for item_id, record in lant.items() if record["status"] == "pending"} == _KEPT
     assert not {
         item_id for item_id, verdict in verdicts.items() if verdict == "reject"
@@ -139,18 +139,18 @@ def test_v45_rankings_and_frozen_derived_catalog_track_the_clean_pack() -> None:
     assert _PACKAGE_RANKINGS.read_bytes() == _TEST_RANKINGS.read_bytes()
     rankings = _json(_PACKAGE_RANKINGS)
     assert rankings["meta"]["counts"] == {
-        "total": 621,
-        "approved": 613,
-        "pilot_eligible": 451,
+        "total": 629,
+        "approved": 621,
+        "pilot_eligible": 459,
         "by_game": {
             "conexiuni": 232,
-            "contexto": 210,
+            "contexto": 218,
             "lant": 97,
             "alchimie": 82,
         },
         "eligible_by_game": {
             "conexiuni": 74,
-            "contexto": 204,
+            "contexto": 212,
             "lant": 94,
             "alchimie": 79,
         },

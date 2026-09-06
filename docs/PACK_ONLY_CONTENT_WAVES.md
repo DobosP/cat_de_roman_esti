@@ -5,6 +5,10 @@ in the served KG. The governing decision is [ADR-0102](adr/0102-pack-only-conten
 the quality and promotion requirements are [the critique rubric](CRITIQUE_RUBRIC.md).
 `scripts/expand_content.py` is V2-only history and is outside this workflow.
 
+For version scope and outcome reporting, see
+[ADR-0113](adr/0113-outcome-based-version-batches.md). Capture the baseline commit before
+authoring so the final inventory comparison covers the whole batch.
+
 1. Create `<scratch>/<wave>/<category>/candidates.json` with all six arrays. `nodes` and
    `edges` must be empty. Include only supported instance payloads; do not reuse retired IDs.
 2. Obtain independent `verify_factual.json` and `verify_quality.json` artifacts. Each binds
@@ -46,3 +50,13 @@ the quality and promotion requirements are [the critique rubric](CRITIQUE_RUBRIC
 
 The derived builder keeps its frozen source-ID set. A pack digest refreshes its metadata;
 it does not authorize widening the 336-board payload.
+
+After the integrated checks, generate the version's content inventory report:
+
+```bash
+python3 scripts/report_content_delta.py --baseline <baseline-commit> --text
+```
+
+Omit `--text` for JSON with added, removed and changed IDs. The report distinguishes forms,
+pack stock, approvals and declared ranking eligibility; actual runtime selection still needs
+the game checks above. Alias data alone cannot establish a count of genuine synonyms.
