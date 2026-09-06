@@ -1,11 +1,11 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-06 — V82 complete local integration GREEN. Production last checked 2026-08-27.
+Last verified: 2026-09-06 — V82 landed locally; V83 started. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-  V81 is merged into local main at `9533919`. V82 candidate: `feat/v82-playable-content-batch`.
+  V82 is merged into local main at `e5f7d96`. V83 branch: `feat/v83-food-input-and-feedback`.
 - New version objectives are ADR-0113: coherent playable batches with enabling fixes, explicit
   baseline/outcomes, focused development checks and required final integration gates. Report
   concepts, connections, forms, synonyms, rounds, eligibility and visible fixes separately.
@@ -89,7 +89,8 @@ Mobile content: `sha256:5ea700a00708cf799a4cad8dcc99c54cb6595f0e99c217b5d890b9a8
 
 ## Remaining gates
 
-- V82 is committed as a ready local candidate; the next landing request can merge its branch.
+- V83 starts from the green V82 baseline: batch ordinary food-input/feedback repairs with
+  several reviewed rounds, and reduce repeated current-artifact test-pin maintenance.
 - Next batch candidates: deficient whey/grain/oven/pan and ingredient forms; over-warm soup/polenta
   feedback; the 15 named food dispositions and prior bread findings. Use ADR-0113 to choose scope.
 - Owner selects feedback contact; Romanian-player and real-device checks remain unrun. Reverify

@@ -330,3 +330,14 @@ V82 is a committed local candidate on `feat/v82-playable-content-batch`; no push
 real-device check or human playtest is claimed. The next landing request can merge this
 verified batch. Further content work should combine relevant feedback/vocabulary repairs
 with fresh playable candidates under ADR-0113. Public anonymous-beta external gates remain.
+
+
+## V82 local landing and V83 start, 2026-09-06
+
+Valid until: the next landing or version changes these facts — then treat as history.
+
+Verified the complete V82 source/review manifest and green gate receipts, then fast-forwarded
+local main to `e5f7d96`. Removed its merged local branch, worktree and scratch; no origin
+branch existed, and no push or deployment occurred. V83 starts on
+`feat/v83-food-input-and-feedback` under ADR-0113, combining ordinary food-input/feedback
+repairs with a reviewed playable batch and less repetitive artifact-pin maintenance.
