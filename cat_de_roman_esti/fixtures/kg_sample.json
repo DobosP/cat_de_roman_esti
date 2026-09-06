@@ -1,11 +1,11 @@
 {
   "meta": {
-    "build_version": "fixture-v72-romanian-dishes-and-pastries-morphology",
+    "build_version": "fixture-v77-flour-associations",
     "generated_at": "2026-06-21T00:00:00Z",
-    "note": "v72: fifty unanimously reviewed Romanian dishes-and-pastries genitive/dative forms; no nodes, edges, projections, or game records.",
+    "note": "v77: two reviewed directed flour-to-dish ingredient links; existing nodes, aliases and game records preserved, legacy puzzles regenerated deterministically.",
     "counts": {
       "nodes": 2364,
-      "edges": 9217,
+      "edges": 9219,
       "puzzles": 180,
       "by_category": {
         "arta_cultura": 128,
@@ -6070,7 +6070,7 @@
       "description": "Aluat dulce cu nucă, cacao sau rahat, nelipsit de la Crăciun și Paște.",
       "salience": 0.9737,
       "difficulty_tier": "easy",
-      "degree": 25,
+      "degree": 26,
       "aliases": [
         "cozonacul",
         "cozonaci",
@@ -14119,7 +14119,7 @@
       "description": "Foi subțiri din aluat prăjit, umplute de obicei dulce sau sărat.",
       "salience": 0.7951,
       "difficulty_tier": "easy",
-      "degree": 8,
+      "degree": 9,
       "aliases": [
         "clătită",
         "clătitele",
@@ -31825,7 +31825,7 @@
       "description": "Concept cotidian din grupul «ingrediente de bază»: Făină.",
       "salience": 0.88,
       "difficulty_tier": "easy",
-      "degree": 4,
+      "degree": 6,
       "aliases": [
         "făinii",
         "făinuri",
@@ -128947,6 +128947,26 @@
       "strength": 0.7,
       "is_distractor": 0,
       "bidirectional": 1
+    },
+    {
+      "id": "de8555",
+      "src_id": "n_v24_food_pantry_faina",
+      "dst_id": "n_gas_cozonac",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru",
+      "strength": 0.97,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8556",
+      "src_id": "n_v24_food_pantry_faina",
+      "dst_id": "n_v3gas_clatite",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru",
+      "strength": 0.97,
+      "is_distractor": 0,
+      "bidirectional": 0
     }
   ],
   "kg_puzzles": [

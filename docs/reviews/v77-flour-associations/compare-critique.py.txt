@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+"""Read-only V77 dossier snapshot for baseline or an already-built prospective KG."""
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__v77-flour-associations')
+sys.path[:0] = [str(ROOT), str(ROOT / 'scripts')]
+import critique_pack  # noqa: E402
+from cat_de_roman_esti.wordgames.packs import GAME_KINDS  # noqa: E402
+
+PACK = ROOT / 'cat_de_roman_esti/fixtures/games_pack.json'
+AFFECTED = {'n_gas_cozonac', 'n_v3gas_clatite'}
+RELEASED_CONTEXTO = {'ct_gastronomie_318', 'ct_gastronomie_319'}
+
+
+def contains(record: dict, ids: set[str]) -> bool:
+    return any(str(tile) in ids for group in record.get('groups', {}).values() for tile in group)
+
+
+def snapshot(records: list[tuple[str, dict, list[dict]]], svc, strong, regions) -> list[dict]:
+    return [
+        {
+            'id': record['id'],
+            'status': record['status'],
+            'payload': record,
+            'findings': findings,
+            'dossier': critique_pack.build_dossier(record, game, svc, strong, findings, regions),
+        }
+        for game, record, findings in records
+    ]
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--kg', required=True, type=Path, help='baseline or already-generated prospective KG')
+    parser.add_argument('--out', required=True, type=Path)
+    args = parser.parse_args()
+    pack, svc, strong, regions = critique_pack.load_all(PACK, args.kg)
+    _, _, pending_selected = critique_pack.run(pack, svc, strong, regions, list(GAME_KINDS), {'pending'}, None)
+    _, _, approved_conexiuni = critique_pack.run(pack, svc, strong, regions, ['conexiuni'], {'approved'}, None)
+    _, _, approved_contexto = critique_pack.run(pack, svc, strong, regions, ['contexto'], {'approved'}, None)
+    pending = snapshot(pending_selected, svc, strong, regions)
+    conexiuni = snapshot([row for row in approved_conexiuni if contains(row[1], AFFECTED)], svc, strong, regions)
+    contexto = snapshot([row for row in approved_contexto if row[1]['id'] in RELEASED_CONTEXTO], svc, strong, regions)
+    if len(pending) != 8:
+        raise SystemExit(f'expected the eight preserved holds, got {len(pending)}')
+    if {row['id'] for row in contexto} != RELEASED_CONTEXTO:
+        raise SystemExit('released V75 Contexto targets missing')
+    args.out.write_text(json.dumps({
+        'kg': str(args.kg),
+        'pending': pending,
+        'affected_conexiuni': conexiuni,
+        'released_contexto': contexto,
+    }, ensure_ascii=False, indent=2) + '\n')
+    print(f'wrote {args.out}: 8 pending, {len(conexiuni)} affected Conexiuni, 2 released Contexto')
+    return 0
+
+if __name__ == '__main__':
+    raise SystemExit(main())

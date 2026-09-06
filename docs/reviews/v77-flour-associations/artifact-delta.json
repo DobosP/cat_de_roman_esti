@@ -1,0 +1,232 @@
+{
+  "baseline_commit": "9ef9dc71fd26896596f513299137cfa02f26e767",
+  "artifacts": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": {
+      "before": "fa9575db4819fa314e43218a0ad953f52c3e6ee2e34cac105dbc88e2d2247106",
+      "after": "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370"
+    },
+    "cat_de_roman_esti/fixtures/games_pack.json": {
+      "before": "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5",
+      "after": "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5"
+    },
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": {
+      "before": "118d8561a329fd6a4646524ee9b033302735708a66d8a5921245942d5616eb74",
+      "after": "53c2542b845d2560a900712381ab4c28cb1b9789beaae9690639647871e905d3"
+    },
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": {
+      "before": "2839606ad82ae781cd57c8c265b636871f9326733881240855a3c95f3dd94f1c",
+      "after": "84aaa772746dac0eb4e1366738f467afad86c543c7430cb67810475d5a296878"
+    },
+    "tests/fixtures/cat_mobile_app_pack_contract.json": {
+      "before": "4c01361f94adbc50677bb63b5463063e38ccf2783b4627befc7c2c13d33a9e8e",
+      "after": "869499abccc3e6b5befe5d889a0e24c4d3bd67096c4d0a69c58d925680612a28"
+    }
+  },
+  "baseline_meta": {
+    "build_version": "fixture-v72-romanian-dishes-and-pastries-morphology",
+    "generated_at": "2026-06-21T00:00:00Z",
+    "note": "v72: fifty unanimously reviewed Romanian dishes-and-pastries genitive/dative forms; no nodes, edges, projections, or game records.",
+    "counts": {
+      "nodes": 2364,
+      "edges": 9217,
+      "puzzles": 180,
+      "by_category": {
+        "arta_cultura": 128,
+        "film_tv": 157,
+        "gastronomie": 215,
+        "geografie": 164,
+        "istorie": 148,
+        "limba": 149,
+        "literatura": 143,
+        "meme_net": 158,
+        "muzica": 146,
+        "personalitati": 129,
+        "societate": 197,
+        "sport": 160,
+        "stiinta": 191,
+        "viata_de_roman": 279
+      },
+      "puzzles_by_cat_diff": {
+        "arta_cultura/easy": 6,
+        "arta_cultura/hard": 6,
+        "film_tv/easy": 6,
+        "film_tv/hard": 6,
+        "gastronomie/easy": 6,
+        "gastronomie/hard": 6,
+        "geografie/easy": 6,
+        "geografie/hard": 6,
+        "istorie/easy": 6,
+        "istorie/hard": 6,
+        "limba/easy": 6,
+        "limba/hard": 6,
+        "literatura/easy": 6,
+        "literatura/hard": 6,
+        "meme_net/easy": 6,
+        "meme_net/hard": 6,
+        "mixed/easy": 6,
+        "mixed/hard": 6,
+        "muzica/easy": 6,
+        "muzica/hard": 6,
+        "personalitati/easy": 6,
+        "personalitati/hard": 6,
+        "societate/easy": 6,
+        "societate/hard": 6,
+        "sport/easy": 6,
+        "sport/hard": 6,
+        "stiinta/easy": 6,
+        "stiinta/hard": 6,
+        "viata_de_roman/easy": 6,
+        "viata_de_roman/hard": 6
+      }
+    }
+  },
+  "new_edges": [
+    {
+      "id": "de8555",
+      "src_id": "n_v24_food_pantry_faina",
+      "dst_id": "n_gas_cozonac",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru",
+      "strength": 0.97,
+      "is_distractor": 0,
+      "bidirectional": 0
+    },
+    {
+      "id": "de8556",
+      "src_id": "n_v24_food_pantry_faina",
+      "dst_id": "n_v3gas_clatite",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru",
+      "strength": 0.97,
+      "is_distractor": 0,
+      "bidirectional": 0
+    }
+  ],
+  "changed_nodes": {
+    "n_gas_cozonac": {
+      "before": {
+        "id": "n_gas_cozonac",
+        "node_type": "concept",
+        "label_ro": "Cozonac",
+        "category": "gastronomie",
+        "description": "Aluat dulce cu nucă, cacao sau rahat, nelipsit de la Crăciun și Paște.",
+        "salience": 0.9737,
+        "difficulty_tier": "easy",
+        "degree": 25,
+        "aliases": [
+          "cozonacul",
+          "cozonaci",
+          "cozonacii",
+          "cozonac cu nucă",
+          "cozonac de casă",
+          "cozonacului",
+          "cozonacilor"
+        ]
+      },
+      "after": {
+        "id": "n_gas_cozonac",
+        "node_type": "concept",
+        "label_ro": "Cozonac",
+        "category": "gastronomie",
+        "description": "Aluat dulce cu nucă, cacao sau rahat, nelipsit de la Crăciun și Paște.",
+        "salience": 0.9737,
+        "difficulty_tier": "easy",
+        "degree": 26,
+        "aliases": [
+          "cozonacul",
+          "cozonaci",
+          "cozonacii",
+          "cozonac cu nucă",
+          "cozonac de casă",
+          "cozonacului",
+          "cozonacilor"
+        ]
+      }
+    },
+    "n_v3gas_clatite": {
+      "before": {
+        "id": "n_v3gas_clatite",
+        "node_type": "concept",
+        "label_ro": "Clătite",
+        "category": "gastronomie",
+        "description": "Foi subțiri din aluat prăjit, umplute de obicei dulce sau sărat.",
+        "salience": 0.7951,
+        "difficulty_tier": "easy",
+        "degree": 8,
+        "aliases": [
+          "clătită",
+          "clătitele",
+          "clătitei",
+          "clătitelor"
+        ]
+      },
+      "after": {
+        "id": "n_v3gas_clatite",
+        "node_type": "concept",
+        "label_ro": "Clătite",
+        "category": "gastronomie",
+        "description": "Foi subțiri din aluat prăjit, umplute de obicei dulce sau sărat.",
+        "salience": 0.7951,
+        "difficulty_tier": "easy",
+        "degree": 9,
+        "aliases": [
+          "clătită",
+          "clătitele",
+          "clătitei",
+          "clătitelor"
+        ]
+      }
+    },
+    "n_v24_food_pantry_faina": {
+      "before": {
+        "id": "n_v24_food_pantry_faina",
+        "node_type": "concept",
+        "label_ro": "Făină",
+        "category": "gastronomie",
+        "description": "Concept cotidian din grupul «ingrediente de bază»: Făină.",
+        "salience": 0.88,
+        "difficulty_tier": "easy",
+        "degree": 4,
+        "aliases": [
+          "făinii",
+          "făinuri",
+          "făinurile"
+        ]
+      },
+      "after": {
+        "id": "n_v24_food_pantry_faina",
+        "node_type": "concept",
+        "label_ro": "Făină",
+        "category": "gastronomie",
+        "description": "Concept cotidian din grupul «ingrediente de bază»: Făină.",
+        "salience": 0.88,
+        "difficulty_tier": "easy",
+        "degree": 6,
+        "aliases": [
+          "făinii",
+          "făinuri",
+          "făinurile"
+        ]
+      }
+    }
+  },
+  "changed_puzzles": {},
+  "board_rankings_v37.json": {
+    "counts": [
+      620,
+      620
+    ],
+    "added": [],
+    "removed": [],
+    "changed": {}
+  },
+  "derived_catalog_v38.json": {
+    "counts": [
+      336,
+      336
+    ],
+    "added": [],
+    "removed": [],
+    "changed": {}
+  }
+}

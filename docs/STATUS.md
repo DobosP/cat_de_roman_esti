@@ -1,11 +1,11 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-06 — V73–V76 technical candidate verified locally. Production last checked 2026-08-27.
+Last verified: 2026-09-06 — V77 ingredient wave verified locally. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-  V75 landed locally at `d127abb`; V76 completes its reviewed input-sense follow-up.
+  V75 landed at `d127abb`; V76 landed locally at `9ef9dc7`. V77 completes the bounded ingredient follow-up.
   Technical candidate complete; public rollout remains subject to the external gates below.
 - V73 shared session transactions and saved-game lifecycle landed locally at `f75a75c` (ADRs 0098–0100).
 - V74 restores transiently unavailable rounds, rejects stale resume responses, recovers terminal results,
@@ -18,7 +18,10 @@ Last verified: 2026-09-06 — V73–V76 technical candidate verified locally. Pr
 - V76 prevents accented `Paște`/`Paștele` from playing the unrelated pasta concept in Contexto/Lanț.
   Ordinary `paste`/`pastele`, compounds and all 13,177 existing surface mappings remain intact (ADR-0107).
   No content or frontend artifact changes; evidence: `docs/reviews/v76-romanian-input-senses/README.md`.
-- Served KG remains `fixture-v72-romanian-dishes-and-pastries-morphology`: 2,364 nodes / 9,217 edges /
+- V77 adds two directed flour ingredient links; bread is deferred after a misleading warm-guess route.
+  The generator preserves retired edge-ID gaps. No pack records or aliases change (ADR-0108);
+  evidence: `docs/reviews/v77-flour-associations/README.md`.
+- Served KG is `fixture-v77-flour-associations`: 2,364 nodes / 9,219 edges /
   8,450 aliases / 180 puzzles. `kg_real.json` is a thin export and is not the served fixture.
 
 ## Inventory and invariants
@@ -33,9 +36,9 @@ Last verified: 2026-09-06 — V73–V76 technical candidate verified locally. Pr
 | Perechi | 153 | 153 | 0 | 113 preferred |
 
 Pack **620 = 612 approved + 8 pending**; original ranking **450 eligible**, +2 Contexto targets.
-All prior 618 pack rows and 336 frozen derived boards remain exact. Four Contexto weight bands and
-its ordinal ranks change; selection remains deterministic within an artifact set. Other games' sampled
-seeded/daily selections are unchanged. KG topology, aliases, mobile content and editorial holds are unchanged.
+V77 preserves all 620 pack/ranking rows, 336 frozen boards, 180 puzzles and all aliases/holds.
+Two directed ingredient edges and three node degrees change; mobile and metadata are regenerated.
+Contexto flour/sugar paths and ordinal guess ranks change; board eligibility and weights stay exact.
 Sessions retain 7,200-second sliding TTL, 1,000 entries per game, per-entry locks, 64 KiB requests,
 bounded histories/caches and server-private answers. V49 retains 104 Lanț rejections; the 70-term
 nonaccepted ledger and V71 `intrigii`/`intrigilor` actionable-fuzzy deny remain intact.
@@ -43,16 +46,16 @@ nonaccepted ledger and V71 `intrigii`/`intrigilor` actionable-fuzzy deny remain 
 ## Current artifact pins
 
 - `games_pack.json`: `9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5`
-- `board_rankings_v37.json`: `118d8561a329fd6a4646524ee9b033302735708a66d8a5921245942d5616eb74`
-- `derived_catalog_v38.json`: `2839606ad82ae781cd57c8c265b636871f9326733881240855a3c95f3dd94f1c`
-- `kg_sample.json`: `fa9575db4819fa314e43218a0ad953f52c3e6ee2e34cac105dbc88e2d2247106`
-- `cat_mobile_app_pack_contract.json`: `4c01361f94adbc50677bb63b5463063e38ccf2783b4627befc7c2c13d33a9e8e`
+- `board_rankings_v37.json`: `53c2542b845d2560a900712381ab4c28cb1b9789beaae9690639647871e905d3`
+- `derived_catalog_v38.json`: `84aaa772746dac0eb4e1366738f467afad86c543c7430cb67810475d5a296878`
+- `kg_sample.json`: `c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370`
+- `cat_mobile_app_pack_contract.json`: `869499abccc3e6b5befe5d889a0e24c4d3bd67096c4d0a69c58d925680612a28`
 - `lant_rejection_tombstones.json`: `e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29`
 - `contexto_impact_reserve_v69.json`: `4c41d092c895c61aaccfbda3cb9522c4d5767a88d9af9343efccc182f71e7612`
 
-The V75 allocation receipt records before/after pins and exact preserved payloads. Server KG manifest:
-`sha256:6a388f9bdb391ffca61ce4d51ab28255c00ed619142ded51cedd26c02bb9213d`;
-mobile public content: `sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11fc8cfc5ef87727ab`.
+The V77 artifact-delta receipt records before/after pins and preserved payloads. Server KG manifest:
+`sha256:d45e82150eea141c92d09125a64ec74f6c536d3876a8bc417814ad6bbd8a31a8`;
+mobile public content: `sha256:7e90ec33dfddf74723dcea1ffc0e787c58ee8ae1f457b71528678db0918788ba`.
 
 ## Production — last observed 2026-08-27
 
@@ -68,18 +71,18 @@ mobile public content: `sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11f
 
 | Scope | Verified result |
 |---|---|
-| V76 targeted / independent review | 137 alias/Contexto/Lanț tests passed; independent 17-case regression rerun GREEN; evidence/scope audit found no issues |
-| V76 backend Python 3.12.3 | 968 passed in 276.99 s; accounts 53 passed |
-| V76 backend Python 3.14.6 | 968 passed in 228.06 s; accounts 53 passed |
-| V76 frontend, Node 24.20.0 / npm 11.19.0 | clean install; 173 native passed; lint GREEN; npm audit zero findings |
-| V76 real-BFF browser run | 108 desktop/mobile checks passed in 4.3 min; direct holiday rejection/pasta acceptance/reload check passed |
-| Unchanged frontend build | V75 typecheck/build GREEN; identical assets retained, 118.73/120 KiB initial gzip; backend-only V76 did not rebuild them |
-| V75 review/tooling/content | 52 checks passed; validators GREEN; public warm-guess/win paths confirmed |
-| Dependency/runtime | npm audit 0 findings; bounded offline latency/RSS evidence archived, including integrated V75 sample |
-| Final integration | independent reviews found no remaining actionable issues; both validators, Ruff, docs and whitespace GREEN |
+| V77 targeted / independent review | 19 ingredient/allocator/V43 checks passed independently; factual, impact, implementation and docs reviews complete |
+| V77 backend Python 3.12.3 | 983 passed in 233.94 s; accounts 53 passed in 1.98 s |
+| V77 backend Python 3.14.6 | 983 passed in 204.06 s; accounts 53 passed in 1.81 s |
+| V77 frontend, Node 24.20.0 / npm 11.19.0 | clean install; 173 native passed; lint/typecheck GREEN; npm audit zero findings |
+| V77 real-BFF browser run | 108 desktop/mobile checks passed in 4.2 min against the final two-edge fixture |
+| Unchanged frontend build | V75 assets retained; typecheck/bundle check GREEN, 118.73/120 KiB initial gzip; backend-only V77 did not rebuild them |
+| V77 content preservation | 620 pack/ranking rows, 336 frozen boards, 180 puzzles exact; both validators GREEN; repeated apply fails without mutation |
+| Dependency/runtime | Prior bounded offline latency/RSS evidence retained; no new runtime/session code or dependencies |
+| Final integration | No remaining review findings; Ruff, docs and whitespace GREEN; current pins corrected without rewriting historical evidence |
 
-V76 code was verified at `3ad960e`; final status updates are documentation only.
-Earlier V75 verification remains in the status snapshot at `d127abb`.
+Exact commands, reviewed scope, intermediate findings and final results:
+`docs/reviews/v77-flour-associations/verification.json`. V76 verification is preserved at `9ef9dc7`.
 Commands and runtime paths: `docs/agent-testing.md`. Historical timing sensitivity and full prior
 verification records remain in WORKLOG. The local runtime sample includes 100 Contexto sessions /
 1,000 distinct guesses; its load, process-RSS limitations and latency data are in
@@ -87,7 +90,8 @@ verification records remain in WORKLOG. The local runtime sample includes 100 Co
 
 ## Remaining gates
 
-- Technical gates are complete; release protocol and external evidence checklist: `docs/BETA_CANDIDATE.md`.
+- Technical gates are complete; next content wave re-reviews Cozonac/Clătite; bread stays deferred.
+  Release protocol and external evidence checklist: `docs/BETA_CANDIDATE.md`.
 - Owner selects feedback contact; player and real-device checks remain unrun. Reverify legal operator/contact
   configuration and legal pages per DEPLOY; independent content judgments here are from Codex agents.
 - Public rollout requires explicit authorization and live smoke/rollback verification. Technical candidate
@@ -97,4 +101,4 @@ verification records remain in WORKLOG. The local runtime sample includes 100 Co
 ## Doc map
 
 - `README.md` / `AGENTS.md`: orientation/contract; `docs/agent-map.md` / `docs/agent-testing.md`: routes/gates.
-- `docs/adr/` (newest 0107), `docs/reviews/`, WORKLOG: decisions/evidence/history.
+- `docs/adr/` (newest 0108), `docs/reviews/`, WORKLOG: decisions/evidence/history.

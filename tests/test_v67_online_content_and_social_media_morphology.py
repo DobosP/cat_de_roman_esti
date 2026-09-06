@@ -54,19 +54,19 @@ _LEDGER = _ROOT / "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json"
 _MOBILE_CONTRACT = _ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json"
 _REVIEW = _ROOT / "docs/reviews/v67-online-content-and-social-media-morphology/vocabulary.json"
 
-# Current V75 whole-artifact pins; the immutable payload pins below must not move.
-_KG_SHA256 = "fa9575db4819fa314e43218a0ad953f52c3e6ee2e34cac105dbc88e2d2247106"
-_RANKINGS_SHA256 = "118d8561a329fd6a4646524ee9b033302735708a66d8a5921245942d5616eb74"
-_DERIVED_SHA256 = "2839606ad82ae781cd57c8c265b636871f9326733881240855a3c95f3dd94f1c"
-_MOBILE_SHA256 = "4c01361f94adbc50677bb63b5463063e38ccf2783b4627befc7c2c13d33a9e8e"
+# Current V77 whole-artifact pins; historical review and data evidence remains immutable.
+_KG_SHA256 = "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370"
+_RANKINGS_SHA256 = "53c2542b845d2560a900712381ab4c28cb1b9789beaae9690639647871e905d3"
+_DERIVED_SHA256 = "84aaa772746dac0eb4e1366738f467afad86c543c7430cb67810475d5a296878"
+_MOBILE_SHA256 = "869499abccc3e6b5befe5d889a0e24c4d3bd67096c4d0a69c58d925680612a28"
 
-# Immutable payload pins must not move during this alias-only wave.
+# V77 advances current topology pins; V77 reconstruction tests retain exact V76 topology evidence.
 _PACK_SHA256 = "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5"
 _CANDIDATE_FUNNEL_SHA256 = "d694a4baca37eb864e0acf9fdd9608f01b4f24346cea9589bde2931b551663e3"
 _RANKING_ROWS_SHA256 = "80fc0672c82efa6317ec6e9f0a793efc12cad68a94093d2a8beabc9be34866cf"
 _FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
-_NODES_WITHOUT_ALIASES_SHA256 = "c1ca327243b25415e1d7158436d00e36a3f1b53c15bc77590c9d6677d04678f0"
-_EDGES_SHA256 = "f62f0730a3e79c1498776049d86e1013e877bc74433360b2fcfaf3f1253a89b0"
+_NODES_WITHOUT_ALIASES_SHA256 = "518836374f3e9e8650be84b13772d59b05d35313a13b5d20aaa4e9aa5729dd3e"
+_EDGES_SHA256 = "bdd6a4d45baeec1c389f2beb97d4cc07671e5a2310ec9ba25dd1e024dbf9c76b"
 _PUZZLES_SHA256 = "3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc"
 _V49_LEDGER_SHA256 = "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29"
 _REJECTED_TARGETS = {
@@ -283,10 +283,10 @@ def test_v67_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     assert all(resolve_projection(surface) is None for surface in set(aliases) | _REJECTED)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
     assert fixture["meta"]["build_version"] == (
-        "fixture-v72-romanian-dishes-and-pastries-morphology"
+        "fixture-v77-flour-associations"
     )
     assert fixture["meta"]["counts"]["nodes"] == 2364
-    assert fixture["meta"]["counts"]["edges"] == 9217
+    assert fixture["meta"]["counts"]["edges"] == 9219
     assert fixture["meta"]["counts"]["puzzles"] == 180
     assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8450
 
@@ -394,11 +394,11 @@ def test_v67_mobile_contract_and_v49_ledger_persist_exactly() -> None:
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
     assert checked_in["manifest"]["build_version"] == (
-        "fixture-v72-romanian-dishes-and-pastries-morphology"
+        "fixture-v77-flour-associations"
     )
     assert checked_in["manifest"]["counts"] == {
         "nodes": 2364,
-        "edges": 9217,
+        "edges": 9219,
         "puzzles": 180,
     }
 

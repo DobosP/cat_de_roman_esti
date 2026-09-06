@@ -24,6 +24,7 @@ tests/fixtures/kg_sample.json  &&  python scripts/densify_content.py
 from __future__ import annotations
 
 import json
+import re
 import sys
 from collections import Counter
 from pathlib import Path
@@ -78,6 +79,22 @@ def die(msg: str) -> NoReturn:
 def _edge_key(src: str, dst: str, relation: str) -> tuple:
     a, b = sorted((src, dst))
     return (a, b, relation)
+
+
+_GENERATED_EDGE_ID_RE = re.compile(r"^(?:de|dd)(\d+)$")
+
+
+def _next_generated_edge_number(edge_ids: set[str]) -> int:
+    """Allocate above present generated IDs instead of filling a retired gap."""
+    highest = max(
+        (
+            int(match.group(1))
+            for edge_id in edge_ids
+            if (match := _GENERATED_EDGE_ID_RE.fullmatch(edge_id)) is not None
+        ),
+        default=0,
+    )
+    return highest + 1
 
 
 def main() -> int:
@@ -155,13 +172,13 @@ def run(dense: dict, build_version: str, note: str) -> int:
                 node["aliases"] = current
 
     # ---- merge new edges (resolve + dedup) ----
-    edge_seq = 0
+    edge_seq = _next_generated_edge_number(existing_edge_ids)
 
     def next_edge_id(distractor: bool) -> str:
         nonlocal edge_seq
         while True:
-            edge_seq += 1
             eid = f"{'dd' if distractor else 'de'}{edge_seq}"
+            edge_seq += 1
             if eid not in existing_edge_ids:
                 return eid
 

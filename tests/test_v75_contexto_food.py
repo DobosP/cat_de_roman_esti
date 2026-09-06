@@ -22,6 +22,8 @@ NEW_TARGETS = {
 OLD_PACK_SHA = "05e80ab2ffb8ec185ad445305a728c784a93e683474d5ec645c10aa1247184ed"
 OLD_RANKINGS_SHA = "45dfd81444dec14b4b639122fe30dea58f05ca76440003eb5280cc01bfcdc3e9"
 OLD_DERIVED_SHA = "8cff438c25deb5084c0311e808941bfef23e3c7bdbf93242a7a53348a6d2ef57"
+# V75 reconstruction uses its original KG binding; V77 changes only that wrapper.
+V75_KG_SHA = "fa9575db4819fa314e43218a0ad953f52c3e6ee2e34cac105dbc88e2d2247106"
 WEIGHT_CHANGES = {
     "ct_sport_094": (5, 4),
     "ct_gastronomie_127": (5, 4),
@@ -76,6 +78,7 @@ def test_rank_changes_are_limited_to_new_targets_ordinals_and_four_weight_bands(
             before, after = WEIGHT_CHANGES[row["id"]]
             assert row["selection_weight"] == after
             row["selection_weight"] = before
+    previous["meta"]["kg_sha256"] = V75_KG_SHA
     previous["meta"]["pack_sha256"] = OLD_PACK_SHA
     counts = previous["meta"]["counts"]
     counts.update(total=618, approved=610, pilot_eligible=448)
@@ -87,14 +90,16 @@ def test_rank_changes_are_limited_to_new_targets_ordinals_and_four_weight_bands(
 
 def test_derived_boards_kg_and_mobile_payloads_are_preserved() -> None:
     derived = read(FIXTURES / "derived_catalog_v38.json")
+    derived["meta"]["kg_sha256"] = V75_KG_SHA
     derived["meta"]["pack_sha256"] = OLD_PACK_SHA
     derived["meta"]["v37_rankings_sha256"] = OLD_RANKINGS_SHA
     assert digest(derived) == OLD_DERIVED_SHA
+    # Current-artifact pins; V77 separately reconstructs the complete V75/V76 KG.
     expected = {
         FIXTURES / "kg_sample.json":
-            "fa9575db4819fa314e43218a0ad953f52c3e6ee2e34cac105dbc88e2d2247106",
+            "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
         ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json":
-            "4c01361f94adbc50677bb63b5463063e38ccf2783b4627befc7c2c13d33a9e8e",
+            "869499abccc3e6b5befe5d889a0e24c4d3bd67096c4d0a69c58d925680612a28",
         FIXTURES / "lant_rejection_tombstones.json":
             "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29",
     }

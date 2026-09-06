@@ -138,3 +138,25 @@ documented in `docs/agent-testing.md`. Python 3.14 CI and production have not be
 
 - `README.md` / `AGENTS.md` — orientation and contract; `docs/agent-map.md` / `docs/agent-testing.md` — routes and gates.
 - `docs/adr/` (newest ADR-0103), `docs/reviews/`, `docs/handoffs/`, and `docs/archive/` — decisions and history.
+
+
+## V77 — bounded flour routes, 2026-09-06
+
+Valid until: the next relevant content wave — then treat as history.
+
+Continued from local V76 `9ef9dc7`. V77 accepts Făină→Cozonac and Făină→Clătite;
+the factually valid bread link was deferred after it made flour warm for Stiloul
+cu rezervor. Fixed generated edge-ID allocation so retired gaps remain absent.
+The final KG has 2,364 nodes, 9,219 edges, 8,450 aliases and 180 unchanged puzzles.
+All 620 pack/ranking rows and 336 frozen derived boards remain exact. Historical
+review files remain untouched; current test pins were refreshed and V77 separately
+reconstructs the exact prior KG. No game candidates were promoted.
+
+Both Python 3.12.3/3.14.6 full suites passed 983 tests, plus 53 accounts tests each.
+Frontend: 173 native tests and 108 final-fixture desktop/mobile checks passed;
+clean install/audit zero findings, lint/typecheck and retained 118.73 KiB budget GREEN.
+Independent factual, impact, implementation and docs reviews complete; validators,
+Ruff/docs/whitespace GREEN. ADR-0108 and `docs/reviews/v77-flour-associations/` hold
+bounded acceptance, rejected-bread evidence, hashes, reproduction and exact results.
+Landing is local only; production/feedback/player/device/legal verification gates
+remain as recorded in BETA_CANDIDATE. Next: fresh Cozonac/Clătite target reviews.

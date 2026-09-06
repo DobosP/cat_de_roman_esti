@@ -1,0 +1,157 @@
+{
+  "reviewer": "session_refactor",
+  "role": "independent_implementation_reviewer",
+  "baseline_commit": "9ef9dc71fd26896596f513299137cfa02f26e767",
+  "verdict": "approve_no_remaining_implementation_findings",
+  "supersedes_review_sha256": "50371a7965789f60de9d0ed055b2fa5626034d99f84a322a3f9fb1ba8021d871",
+  "bindings_sha256": {
+    "data_module": "a6221d0bdeeea1e6632c1914a076d834411f70fb1e21068b13ff0556c393f973",
+    "applier_wrapper": "79c2af2c9730ed077aa167228739f6f4bae7cd4cec4da08490099e84d3876a4b",
+    "allocator": "535e70abc770c80627034b193dbd457e8597568b0914bf3e73f197605e570ca4",
+    "v77_tests": "ef395acc9b7c513602021ac3f4333fd4a04759fd1790ed3493fa0b7587375828",
+    "allocator_test": "429963ff54071b924ec1bd6d4584e612ad6ad2d0b3790ded3f2bfecfce890eab",
+    "retired_id_guard_test": "9e199438ab05df39f76fdc53858c18bfc9847ce051cfaba05a5580a2c23b287a",
+    "final_kg": "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370",
+    "final_rankings": "53c2542b845d2560a900712381ab4c28cb1b9789beaae9690639647871e905d3",
+    "final_derived": "84aaa772746dac0eb4e1366738f467afad86c543c7430cb67810475d5a296878",
+    "final_mobile_contract": "869499abccc3e6b5befe5d889a0e24c4d3bd67096c4d0a69c58d925680612a28",
+    "factual_review": "0b024100f773c2edd1d573b668627924c0545d96ed0defac306a7a0036a0ff1b",
+    "artifact_delta": "6db23fd86bed2d4e285ea77e6f92f74b242d8d2507369b618dafc6663a20b69b"
+  },
+  "final_scope": {
+    "accepted_edges": [
+      {
+        "id": "de8555",
+        "src_id": "n_v24_food_pantry_faina",
+        "dst_id": "n_gas_cozonac",
+        "relation": "part_of",
+        "label_ro": "ingredient pentru",
+        "strength": 0.97,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      {
+        "id": "de8556",
+        "src_id": "n_v24_food_pantry_faina",
+        "dst_id": "n_v3gas_clatite",
+        "relation": "part_of",
+        "label_ro": "ingredient pentru",
+        "strength": 0.97,
+        "is_distractor": 0,
+        "bidirectional": 0
+      }
+    ],
+    "deferred_factually_valid_edge": {
+      "src_id": "n_v24_food_pantry_faina",
+      "dst_id": "n_gas_paine_de_casa",
+      "reason": "Refute-first gameplay review found an unintended bread/Lapte și corn route that made flour Călduț for the Stilou target.",
+      "absent_from_module_receipt_and_final_kg": true
+    },
+    "new_nodes": 0,
+    "new_aliases": 0,
+    "new_game_items": 0
+  },
+  "factual_binding": {
+    "raw_review_result": "All three ingredient facts remain accepted as facts.",
+    "quality_selection": "Only Cozonac and Clătite are implemented; factual validity did not override the independent gameplay defer for Pâine de casă.",
+    "implemented_items_match_factual_items_and_edge_shape": true
+  },
+  "allocator_review": {
+    "result": "approved",
+    "behavior": "Generated de/dd IDs now start above the highest present numeric generated-ID suffix, so retired gaps are not reused; custom and malformed IDs do not affect parsing.",
+    "final_new_ids": [
+      "de8555",
+      "de8556"
+    ],
+    "retired_ids_absent": [
+      "de7495",
+      "de7498"
+    ],
+    "test_coverage": "Covers a retired de7495 gap, a higher dd suffix, nonnumeric/custom IDs, playable and distractor allocation, and repeatability."
+  },
+  "independent_baseline_comparison": {
+    "nodes": {
+      "before": 2364,
+      "after": 2364,
+      "added": 0,
+      "removed": 0
+    },
+    "edges": {
+      "before": 9217,
+      "after": 9219,
+      "added_exactly_reviewed": 2,
+      "removed": 0,
+      "changed_existing": 0
+    },
+    "node_changes": {
+      "n_v24_food_pantry_faina.degree": [
+        4,
+        6
+      ],
+      "n_gas_cozonac.degree": [
+        25,
+        26
+      ],
+      "n_v3gas_clatite.degree": [
+        8,
+        9
+      ]
+    },
+    "other_node_fields_changed": 0,
+    "all_aliases_exact": true,
+    "aliases_total": [
+      8450,
+      8450
+    ],
+    "puzzles": {
+      "count": 180,
+      "payload_exact": true
+    },
+    "games_pack": {
+      "count": 620,
+      "bytes_exact": true,
+      "sha256": "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5"
+    },
+    "ranking_rows": {
+      "count": 620,
+      "payload_exact": true,
+      "payload_sha256": "80fc0672c82efa6317ec6e9f0a793efc12cad68a94093d2a8beabc9be34866cf",
+      "only_wrapper_change": "meta.kg_sha256"
+    },
+    "derived_boards": {
+      "count": 336,
+      "payload_exact": true,
+      "payload_sha256": "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6",
+      "only_wrapper_changes": [
+        "meta.kg_sha256",
+        "meta.v37_rankings_sha256"
+      ]
+    },
+    "mobile_contract": "Only manifest fields and de8555/de8556 were added; public node and puzzle payloads remained exact."
+  },
+  "safety_review": {
+    "data_module": "Side-effect free; emits zero nodes, aliases and game items and exactly the two selected directed edges.",
+    "wrapper": "Delegates to the established apply_common_words_v24 transaction with the V77 data module.",
+    "applier": [
+      "Preflights endpoints, duplicate edges, normalized fields, expected degrees and intuitive pairs.",
+      "Snapshots both KG mirrors, both pack mirrors and mobile contract; writes atomically and restores all snapshots on any BaseException.",
+      "Verifies merged direction/fields, approved-pack stability and no-game-item byte stability, then validates mirrors and refreshed mobile output."
+    ],
+    "reconstruction_test": "Reverses only the two receipt edges and three degree changes, restores baseline metadata, and reproduces the immutable V76 KG hash. This indirectly binds all aliases, existing edges and 180 puzzle payloads.",
+    "artifact_payload_tests": "Immutable payload hashes bind all 620 pack records, all 620 ranking rows and all 336 frozen derived boards."
+  },
+  "focused_verification": {
+    "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_v77_flour_associations.py tests/test_v43_content_cleanup.py tests/test_densify_edge_ids.py -q -o addopts=\"\"",
+    "result": "19 passed in 0.53s",
+    "stilou_guard": "passed; flour is not Fierbinte/Cald/Călduț for n_stilou_rezervor and no flour→Pâine de casă edge exists.",
+    "retired_id_guard": "passed; de7495 and de7498 remain absent."
+  },
+  "resolved_findings": [
+    "The earlier three-edge scope was superseded after the Pâine de casă gameplay spillover was demonstrated.",
+    "The generated-edge allocator no longer fills retired numeric ID gaps.",
+    "The V77 preservation test now binds the exact 620 ranking-row payload."
+  ],
+  "remaining_findings": [],
+  "integration_note": "The repository review README was still being updated by the root session during this review; final documentation must describe two implemented edges and the separate bread quality defer.",
+  "limits": "No full suite and no review of concurrent historical current-pin maintenance; root owns those integration gates."
+}

@@ -1,0 +1,243 @@
+from __future__ import annotations
+
+import copy
+import json
+import os
+from pathlib import Path
+
+from cat_de_roman_esti.data import load_fixture
+from cat_de_roman_esti.wordgames import alchimie
+from cat_de_roman_esti.wordgames.packs import (
+    _closure_generations,
+    _opening_pairs,
+    lant_branch_profile,
+    minimum_alchimie_actions,
+    validate_payload,
+)
+from cat_de_roman_esti.wordgames.service import WordGameService
+from scripts import build_derived_catalog_v38 as derived
+from scripts import critique_pack
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__v77-flour-associations')
+SCRATCH = Path('/home/dobo/work/_temp/v77-flour-associations/impact-review')
+KG_PATH = Path(os.environ.get(
+    'V77_BASE_KG', ROOT / 'cat_de_roman_esti/fixtures/kg_sample.json'
+))
+PACK_PATH = ROOT / 'cat_de_roman_esti/fixtures/games_pack.json'
+CATALOG_PATH = ROOT / 'cat_de_roman_esti/fixtures/derived_catalog_v38.json'
+FLOUR = 'n_v24_food_pantry_faina'
+TARGETS = tuple(filter(None, os.environ.get(
+    'V77_TARGETS',
+    'n_gas_cozonac,n_gas_paine_de_casa,n_v3gas_clatite',
+).split(',')))
+IDS = {FLOUR, *TARGETS}
+
+
+def projection(svc, rec):
+    ref = alchimie._ProjectionServiceRef(svc)
+    value = alchimie._build_recipe_projection_cached(
+        tuple(rec['seeds']), rec['target'], rec.get('category'), ref
+    )
+    if value is None:
+        return None
+    return {
+        'par': value.par,
+        'recipes': [
+            [list(pair), list(outputs)] for pair, outputs in sorted(value.recipes.items())
+        ],
+        'routes': [
+            [[list(pair), list(outputs)] for pair, outputs in route]
+            for route in value.routes
+        ],
+    }
+
+
+def make_service(kg, path):
+    path.write_text(json.dumps(kg, ensure_ascii=False), encoding='utf-8')
+    return WordGameService(load_fixture(path).graph)
+
+
+def main():
+    SCRATCH.mkdir(parents=True, exist_ok=True)
+    pack = json.loads(PACK_PATH.read_text(encoding='utf-8'))
+    kg = json.loads(KG_PATH.read_text(encoding='utf-8'))
+    prospective = copy.deepcopy(kg)
+    for index, dst in enumerate(TARGETS, 1):
+        prospective['kg_edges'].append({
+            'id': f'scratch_v77_{index}', 'src_id': FLOUR, 'dst_id': dst,
+            'relation': 'part_of', 'label_ro': 'ingredient pentru',
+            'strength': 0.97, 'is_distractor': 0, 'bidirectional': 0,
+        })
+    baseline_svc = make_service(kg, SCRATCH / 'baseline.json')
+    prospective_svc = make_service(prospective, SCRATCH / 'prospective.json')
+    report = {}
+
+    game_kinds = ('conexiuni', 'contexto', 'lant', 'alchimie')
+    report['pack_counts'] = {game: len(pack[game]) for game in game_kinds}
+    report['occurrences'] = []
+    for game in game_kinds:
+        records = pack[game]
+        for rec in records:
+            touched = []
+            if game == 'conexiuni':
+                for group, members in rec['groups'].items():
+                    for nid in IDS.intersection(members):
+                        touched.append({'id': nid, 'role': f'group:{group}'})
+            else:
+                for field in ('target', 'start'):
+                    if rec.get(field) in IDS:
+                        touched.append({'id': rec[field], 'role': field})
+                for nid in IDS.intersection(rec.get('seeds', [])):
+                    touched.append({'id': nid, 'role': 'seed'})
+            if touched:
+                report['occurrences'].append({
+                    'game': game, 'record': rec['id'], 'status': rec['status'],
+                    'difficulty': rec['difficulty'], 'touched': touched,
+                })
+
+    report['validation'] = []
+    for game in game_kinds:
+        records = pack[game]
+        for rec in records:
+            before = validate_payload(rec, game, baseline_svc)
+            after = validate_payload(rec, game, prospective_svc)
+            if before != after:
+                report['validation'].append({
+                    'game': game, 'record': rec['id'], 'status': rec['status'],
+                    'before': before, 'after': after,
+                })
+
+    report['contexto'] = []
+    for rec in pack['contexto']:
+        target = rec['target']
+        bd, ad = baseline_svc.distances_to(target), prospective_svc.distances_to(target)
+        bw = baseline_svc.weighted_distances_to(target)
+        aw = prospective_svc.weighted_distances_to(target)
+        changed_nodes = sorted(
+            nid for nid in set(bd) | set(ad) | set(bw) | set(aw)
+            if bd.get(nid) != ad.get(nid) or bw.get(nid) != aw.get(nid)
+        )
+        if changed_nodes:
+            report['contexto'].append({
+                'record': rec['id'], 'status': rec['status'], 'target': target,
+                'reachable': [len(bd), len(ad)],
+                'responsive': [sum(1 <= d <= 5 for d in bd.values()), sum(1 <= d <= 5 for d in ad.values())],
+                'flour_hops': [bd.get(FLOUR), ad.get(FLOUR)],
+                'flour_weighted': [bw.get(FLOUR), aw.get(FLOUR)],
+                'changed_node_count': len(changed_nodes),
+                'changed_nodes_sample': changed_nodes[:20],
+            })
+
+    report['lant'] = []
+    for rec in pack['lant']:
+        before_dist = baseline_svc.distance(rec['start'], rec['target'])
+        after_dist = prospective_svc.distance(rec['start'], rec['target'])
+        before_profile = lant_branch_profile(baseline_svc, rec['start'], rec['target'], before_dist) if before_dist is not None else None
+        after_profile = lant_branch_profile(prospective_svc, rec['start'], rec['target'], after_dist) if after_dist is not None else None
+        before_paths = critique_pack.representative_shortest_paths(baseline_svc, rec['start'], rec['target'], before_dist) if before_dist else []
+        after_paths = critique_pack.representative_shortest_paths(prospective_svc, rec['start'], rec['target'], after_dist) if after_dist else []
+        if (before_dist, before_profile, before_paths) != (after_dist, after_profile, after_paths):
+            report['lant'].append({
+                'record': rec['id'], 'status': rec['status'], 'start': rec['start'],
+                'target': rec['target'], 'stored': rec['optimal'],
+                'distance': [before_dist, after_dist],
+                'profile': [before_profile, after_profile],
+                'before_paths': before_paths, 'after_paths': after_paths,
+            })
+
+    report['alchimie'] = []
+    for index, rec in enumerate(pack['alchimie'], 1):
+        category = rec.get('category')
+        before_closure = _closure_generations(baseline_svc, rec['seeds'], category)
+        after_closure = _closure_generations(prospective_svc, rec['seeds'], category)
+        before_actions = minimum_alchimie_actions(baseline_svc, rec['seeds'], rec['target'], category)
+        after_actions = minimum_alchimie_actions(prospective_svc, rec['seeds'], rec['target'], category)
+        before_open = _opening_pairs(baseline_svc, rec['seeds'], category)
+        after_open = _opening_pairs(prospective_svc, rec['seeds'], category)
+        before_recipe = critique_pack.minimum_alchimie_recipe(baseline_svc, rec['seeds'], rec['target'], category, 6)
+        after_recipe = critique_pack.minimum_alchimie_recipe(prospective_svc, rec['seeds'], rec['target'], category, 6)
+        before_projection = projection(baseline_svc, rec)
+        after_projection = projection(prospective_svc, rec)
+        changed = sorted(nid for nid in set(before_closure) | set(after_closure) if before_closure.get(nid) != after_closure.get(nid))
+        if changed or (before_actions, before_open, before_recipe, before_projection) != (after_actions, after_open, after_recipe, after_projection):
+            report['alchimie'].append({
+                'record': rec['id'], 'status': rec['status'], 'target': rec['target'],
+                'seeds': rec['seeds'], 'depth': rec['target_depth'],
+                'closure_size': [len(before_closure), len(after_closure)],
+                'changed_closure_count': len(changed), 'changed_closure_sample': changed[:30],
+                'actions': [before_actions, after_actions], 'openings': [before_open, after_open],
+                'minimum_recipe_changed': before_recipe != after_recipe,
+                'projection_changed': before_projection != after_projection,
+                'before_minimum_recipe': before_recipe, 'after_minimum_recipe': after_recipe,
+                'before_projection': before_projection, 'after_projection': after_projection,
+            })
+
+    report['conexiuni'] = []
+    for rec in pack['conexiuni']:
+        members = {nid for ids in rec['groups'].values() for nid in ids}
+        node_types = {nid: baseline_svc.node(nid).node_type for nid in members}
+        bn = {nid: set(baseline_svc.neighbor_ids(nid)) for nid in members}
+        an = {nid: set(prospective_svc.neighbor_ids(nid)) for nid in members}
+        bf = critique_pack.fairness_counts(rec['groups'], bn, node_types)
+        af = critique_pack.fairness_counts(rec['groups'], an, node_types)
+        group_for = {nid: group for group, ids in rec['groups'].items() for nid in ids}
+        new_cross = [
+            [FLOUR, dst, group_for[FLOUR], group_for[dst]] for dst in TARGETS
+            if FLOUR in members and dst in members and group_for[FLOUR] != group_for[dst]
+        ]
+        if bf != af or new_cross:
+            report['conexiuni'].append({
+                'record': rec['id'], 'status': rec['status'], 'fairness': [bf, af],
+                'new_symmetric_critique_cross_edges': new_cross,
+            })
+
+    source_ids = derived._V38_SOURCE_SNAPSHOT
+    records = [r for r in pack['conexiuni'] if r['id'] in source_ids]
+    def derive_for(graph_kg, svc):
+        strengths, linked = derived._edge_maps(graph_kg)
+        raw_i = derived._intrusul_candidates(records, svc, strengths, linked)
+        raw_p = derived._perechi_candidates(records, svc, strengths)
+        rows = derived._rank_and_cap([*raw_i, *raw_p])
+        return raw_i, raw_p, rows
+    bi, bp, brows = derive_for(kg, baseline_svc)
+    ai, ap, arows = derive_for(prospective, prospective_svc)
+    by_id_before = {r['id']: r for r in brows}
+    by_id_after = {r['id']: r for r in arows}
+    changed_common = sorted(i for i in by_id_before.keys() & by_id_after if by_id_before[i] != by_id_after[i])
+    report['derived'] = {
+        'raw_counts': [[len(bi), len(bp)], [len(ai), len(ap)]],
+        'selected_counts': [len(brows), len(arows)],
+        'selected_by_game': [
+            {g: sum(r['game'] == g for r in rows) for g in derived.DERIVED_GAMES}
+            for rows in (brows, arows)
+        ],
+        'removed_ids': sorted(by_id_before.keys() - by_id_after.keys()),
+        'added_ids': sorted(by_id_after.keys() - by_id_before.keys()),
+        'changed_common_count': len(changed_common),
+        'changed_common': [
+            {'id': i, 'source': by_id_before[i]['source_id'], 'game': by_id_before[i]['game'],
+             'before_rank': [by_id_before[i]['standard_rank'], by_id_before[i]['starter_rank']],
+             'after_rank': [by_id_after[i]['standard_rank'], by_id_after[i]['starter_rank']]}
+            for i in changed_common
+        ],
+        'removed': [by_id_before[i] for i in sorted(by_id_before.keys() - by_id_after.keys())],
+        'added': [by_id_after[i] for i in sorted(by_id_after.keys() - by_id_before.keys())],
+    }
+    existing = json.loads(CATALOG_PATH.read_text(encoding='utf-8'))['boards']
+    report['derived']['baseline_equals_frozen_boards'] = brows == existing
+
+    (SCRATCH / 'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
+    print(json.dumps({
+        'pack_counts': report['pack_counts'],
+        'occurrences': len(report['occurrences']),
+        'validation_changes': len(report['validation']),
+        'contexto_changes': len(report['contexto']),
+        'lant_changes': len(report['lant']),
+        'alchimie_changes': len(report['alchimie']),
+        'conexiuni_changes': len(report['conexiuni']),
+        'derived': {k:v for k,v in report['derived'].items() if k not in {'removed','added','changed_common'}},
+    }, ensure_ascii=False, indent=2))
+
+
+if __name__ == '__main__':
+    main()

@@ -69,11 +69,12 @@ _V71_RANKINGS_SHA256 = "f9c114570006938ec6602e9318e49a145bedd378be16120cacb4b6c9
 _V71_DERIVED_SHA256 = "37ddf1a45ad04eeaf115589112269bc6cf3a2e19e61576a15c0acc426d168662"
 _V71_MOBILE_SHA256 = "a627e1234e88ccd174369ec19e58d912faaf526025c3955305c6c6c79ae2595e"
 
-# Current V75 whole-artifact pins; the V72 alias-transaction evidence below is immutable.
-_KG_SHA256 = "fa9575db4819fa314e43218a0ad953f52c3e6ee2e34cac105dbc88e2d2247106"
-_RANKINGS_SHA256 = "118d8561a329fd6a4646524ee9b033302735708a66d8a5921245942d5616eb74"
-_DERIVED_SHA256 = "2839606ad82ae781cd57c8c265b636871f9326733881240855a3c95f3dd94f1c"
-_MOBILE_SHA256 = "4c01361f94adbc50677bb63b5463063e38ccf2783b4627befc7c2c13d33a9e8e"
+# Current V77 whole-artifact pins; the V72 alias-transaction evidence below is immutable.
+_CURRENT_BUILD_VERSION = "fixture-v77-flour-associations"
+_KG_SHA256 = "c158262f7216c3b7ec2381f9fbe5ffc5d2ac987ad6a1d56de61e58ec276eb370"
+_RANKINGS_SHA256 = "53c2542b845d2560a900712381ab4c28cb1b9789beaae9690639647871e905d3"
+_DERIVED_SHA256 = "84aaa772746dac0eb4e1366738f467afad86c543c7430cb67810475d5a296878"
+_MOBILE_SHA256 = "869499abccc3e6b5befe5d889a0e24c4d3bd67096c4d0a69c58d925680612a28"
 
 # V75 advances the served pack; V72's payload and review-evidence pins below stay immutable.
 _PACK_SHA256 = "9f559e33eac688868dfdf562f62022a3df629c9cb389b957dda0896d7cec70b5"
@@ -82,8 +83,8 @@ _ACCEPTED_MAP_SHA256 = "afcf6ea8956ce157f3245064415aa64183bda6bc8ce4504eaf807bfe
 _ACCEPTED_WRAPPED_SHA256 = "61301d077cc9ac123642c519773fe5a322d32be1f89ce44ab64465c52b39475c"
 _RANKING_ROWS_SHA256 = "80fc0672c82efa6317ec6e9f0a793efc12cad68a94093d2a8beabc9be34866cf"
 _FROZEN_BOARDS_SHA256 = "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
-_NODES_WITHOUT_ALIASES_SHA256 = "c1ca327243b25415e1d7158436d00e36a3f1b53c15bc77590c9d6677d04678f0"
-_EDGES_SHA256 = "f62f0730a3e79c1498776049d86e1013e877bc74433360b2fcfaf3f1253a89b0"
+_NODES_WITHOUT_ALIASES_SHA256 = "518836374f3e9e8650be84b13772d59b05d35313a13b5d20aaa4e9aa5729dd3e"
+_EDGES_SHA256 = "bdd6a4d45baeec1c389f2beb97d4cc07671e5a2310ec9ba25dd1e024dbf9c76b"
 _PUZZLES_SHA256 = "3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc"
 _RESERVE_SHA256 = "4c41d092c895c61aaccfbda3cb9522c4d5767a88d9af9343efccc182f71e7612"
 _V49_LEDGER_SHA256 = "e3d8166aa5c59c2ff1e7cba06be4fcd505d02a8c98224ab2fe6126d6c826cc29"
@@ -229,9 +230,9 @@ def test_v72_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     assert svc.resolve("tochiturilor moldovenești") == "n_v11gas_tochitura_moldoveneasca"
     assert all(resolve_projection(surface) is None for surface in aliases)
     assert _PACKAGE_KG.read_bytes() == _TEST_KG.read_bytes()
-    assert fixture["meta"]["build_version"] == DATA.BUILD_VERSION
+    assert fixture["meta"]["build_version"] == _CURRENT_BUILD_VERSION
     assert fixture["meta"]["counts"]["nodes"] == 2364
-    assert fixture["meta"]["counts"]["edges"] == 9217
+    assert fixture["meta"]["counts"]["edges"] == 9219
     assert fixture["meta"]["counts"]["puzzles"] == 180
     assert sum(len(node.get("aliases", ())) for node in fixture["kg_nodes"]) == 8450
 
@@ -345,14 +346,14 @@ def test_v72_mobile_contract_and_v49_ledger_persist_exactly() -> None:
     assert _MOBILE_CONTRACT.read_bytes() == (
         json.dumps(checked_in, ensure_ascii=False, indent=1) + "\n"
     ).encode("utf-8")
-    assert checked_in["manifest"]["build_version"] == DATA.BUILD_VERSION
+    assert checked_in["manifest"]["build_version"] == _CURRENT_BUILD_VERSION
     assert checked_in["manifest"]["counts"] == {
         "nodes": 2364,
-        "edges": 9217,
+        "edges": 9219,
         "puzzles": 180,
     }
     assert checked_in["manifest"]["content_hash"] == (
-        "sha256:9e93479d2e417346dfabe7da8e5ffdc9078a0f75add14f11fc8cfc5ef87727ab"
+        "sha256:7e90ec33dfddf74723dcea1ffc0e787c58ee8ae1f457b71528678db0918788ba"
     )
 
     assert _sha256(_LEDGER) == _V49_LEDGER_SHA256

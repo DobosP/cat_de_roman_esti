@@ -1,0 +1,26 @@
+from pathlib import Path
+import json,os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django
+django.setup()
+from django.test import Client
+from cat_de_roman_esti.data import load_fixture
+from cat_de_roman_esti.wordgames import contexto
+from cat_de_roman_esti.wordgames.service import WordGameService
+root=Path.cwd(); scratch=Path('/home/dobo/work/_temp/v77-flour-associations')
+paths={'before':scratch/'baseline/kg_sample.json','after':root/'cat_de_roman_esti/fixtures/kg_sample.json'}
+probes={'n_stilou_rezervor':['făină'], 'n_gas_cozonac':['făină','zahăr','ouă','lapte','Paște'], 'n_gas_paine_de_casa':['făină','apă','cuptor'], 'n_v3gas_clatite':['făină','ouă','lapte'], 'n_gas_mici':['făină','grătar','muștar'], 'n_gas_salata_boeuf':['făină','salată','cartof','murături']}
+output={}
+for label,path in paths.items():
+ svc=WordGameService(load_fixture(path).graph); contexto.get_service=lambda:svc; rows=[]
+ for target,terms in probes.items():
+  for term in terms:
+   game_id=contexto.store.create(contexto._build_session(target,'usor',None)); url=f'/api/wordgames/contexto/games/{game_id}'
+   client=Client(); res=client.post(url+'/guess', {'text':term},content_type='application/json'); body=res.json()
+   row={'target':target,'target_label':svc.label(target),'input':term,'status':res.status_code,'ok':body['ok'],'answer_hidden':'target' not in body,'attempts':body['attempts']}
+   if body.get('guesses'): row['guess']={k:v for k,v in body['guesses'][0].items() if k in {'id','label','distance','rank','temperature','closeness'}}
+   rows.append(row)
+ output[label]=rows
+(scratch/'runtime-openers.json').write_text(json.dumps(output,ensure_ascii=False,indent=2)+'\n')
+for a,b in zip(output['before'],output['after']):
+ if a['input']=='făină': print(a['target_label'],a.get('guess'),'=>',b.get('guess'))

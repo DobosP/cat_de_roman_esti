@@ -3,7 +3,7 @@
 Valid until: the next verified quality wave — then refresh this living checklist.
 
 Target: public anonymous beta for Romanian players. **Technical candidate complete through
-V76 and locally verified.** Public beta release still requires the external checks below.
+V77 and locally verified.** Public beta release still requires the external checks below.
 Current facts and exact pins: [STATUS](STATUS.md).
 
 ## Completed sequence and acceptance
@@ -17,17 +17,19 @@ Current facts and exact pins: [STATUS](STATUS.md).
 | V74 | Dependency and runtime risks lacked current evidence | Clean Node24 install/audit reports zero findings; initial transfer 118.73/120 KiB; cold/warm route and bounded RSS measurements archived with limits |
 | V75 | Alias growth did not add playable stock | Reusable pack-only import and independent-review serializer; five candidates screened, three dropped, two promoted; Contexto eligibility 201→203 with exact preservation/selection evidence |
 | V76 | Accented holiday spellings could play pasta or falsely win | `Paște`/`Paștele` are unresolved without attempts/moves/suggestions; valid food/compound inputs and 13,177 authored surface mappings remain intact; zero content/artifact changes |
+| V77 | Ordinary flour guesses were distant from familiar dishes; the graph builder reused retired edge IDs | Two reviewed ingredient links accepted, bread deferred after a misleading Stilou route; allocator advances beyond present IDs; all pack/ranking/frozen-board/puzzle records preserved |
 
-Final V76 gates: **968 backend tests on each of Python 3.12.3 and 3.14.6**, 53 accounts
+Final V77 gates: **983 backend tests on each of Python 3.12.3 and 3.14.6**, 53 accounts
 tests on each runtime, **173 native frontend tests and 108 desktop/mobile browser checks**.
-Clean install, frontend lint, both content validators, Ruff, docs and whitespace passed.
-The npm audit reports zero vulnerabilities. Independent implementation and evidence reviews
-found no remaining actionable issues. Frontend code/assets remain at the V75 version whose
-typecheck/build passed; backend-only V76 did not rebuild them. V76 code was verified at
-`3ad960e`; final status updates are documentation only. Accounts were enabled only for their
-isolated test suite. Exact results and limits are tracked in STATUS.
+Clean install, frontend lint/typecheck, both content validators, Ruff, docs and whitespace
+passed. The npm audit reports zero vulnerabilities. Independent factual, impact,
+implementation and documentation reviews found no remaining actionable issues. Frontend
+assets remain at V75; typecheck and the 118.73/120 KiB budget check passed without rebuilding.
+Accounts were enabled only for their isolated test suite. Exact results, deliberate guess-rank
+changes and the deferred bread edge are tracked in STATUS and the V77 review archive.
 
 Decisions and full evidence: [ADR index](adr/README.md), [V75 review](reviews/v75-contexto-food/README.md),
+[V77 review](reviews/v77-flour-associations/README.md),
 [runtime measurements](reviews/v74-runtime-measurements/README.md). Refactors preserve
 server authority, hidden answers, session bounds, intentional game differences and scoring.
 The derived catalog remains frozen at 336 boards. Content critiques are independently

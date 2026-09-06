@@ -1,0 +1,149 @@
+{
+  "date": "2026-09-06",
+  "runtime": {
+    "python312": "3.12.3",
+    "python314": "3.14.6",
+    "node": "24.20.0",
+    "npm": "11.19.0"
+  },
+  "checks": {
+    "backend312": {
+      "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest -q -o addopts=\"\"",
+      "log": "backend312-final.log",
+      "log_sha256": "65da77633de76efc00f34f8037e37920a85af0b5729042d144a8317248cd5966",
+      "tail": [
+        "........................................................................ [ 87%]",
+        "........................................................................ [ 95%]",
+        "...............................................                          [100%]",
+        "983 passed in 233.94s (0:03:53)"
+      ]
+    },
+    "accounts312": {
+      "command": "CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/accounts -q -o addopts=\"\"",
+      "log": "accounts312-final.log",
+      "log_sha256": "935b73823fee36131ab9cb400eb27fe9400b06e87f2bcdd5467870d9332ed002",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 1.98s"
+      ]
+    },
+    "browser": {
+      "command": "PATH=<Node24>:/home/dobo/work/cat_de_roman_esti/.venv/bin:$PATH CAT_ACCOUNTS_ENABLED=0 CAT_DEBUG=1 ROEDU_API_URL= ROEDU_API_KEY= CDR_E2E_PORT=8151 npm --prefix frontend run test:e2e",
+      "log": "browser-final.log",
+      "log_sha256": "1ccd393b53c93ca45da06f4e8bb2909126f752f62f45391f91a71590a387f9dc",
+      "tail": [
+        "  ✓  107 [mobile] › e2e/resume-recovery.spec.mjs:290:3 › V74 saved-game recovery › two tabs adopt one terminal session but append its local score once (1.7s)",
+        "  ✓  108 [mobile] › e2e/resume-recovery.spec.mjs:350:3 › V74 saved-game recovery › simultaneous terminal sessions from different games preserve both score rows (935ms)",
+        "",
+        "  108 passed (4.2m)"
+      ]
+    },
+    "fixture": {
+      "command": "PYTHONPATH=. <python312> scripts/validate_fixture.py",
+      "log": "fixture-validator-final.log",
+      "log_sha256": "b1a30e9ce9a0a5486c249d1b2e1c966f66c762f5168025b82967e4d6a137cd31",
+      "tail": [
+        "  [  ok] puzzle_category_scope        0 error(s)",
+        "  [  ok] puzzle_distractor_shortcut   0 error(s)",
+        "------------------------------------------------------------",
+        "GREEN: fixture is valid (0 errors)"
+      ]
+    },
+    "pack": {
+      "command": "PYTHONPATH=. <python312> scripts/validate_games_pack.py",
+      "log": "pack-validator-final.log",
+      "log_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+      "tail": [
+        "  meta_counts              ok",
+        "  id_high_water            ok",
+        "",
+        "games pack GREEN"
+      ]
+    },
+    "native": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm test",
+      "log": "frontend-native.log",
+      "log_sha256": "d7e4da3de5787c7bb54e6573c193c0b7bb8e0971e643d271235ded65c3ff95f6",
+      "tail": [
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 426.163469"
+      ],
+      "result": "173 passed"
+    },
+    "frontend_lint": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm run lint",
+      "log": "frontend-lint.log",
+      "log_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 lint",
+        "> eslint .",
+        ""
+      ]
+    },
+    "frontend_typecheck": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm run typecheck",
+      "log": "frontend-typecheck.log",
+      "log_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 typecheck",
+        "> tsc --noEmit",
+        ""
+      ]
+    },
+    "frontend_bundle": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm run check:bundle",
+      "log": "frontend-bundle.log",
+      "log_sha256": "ff5f74fc33a8767e2f3d406bf9184d98122b943cf9adbfdc7bc1ac45ff0b2be7",
+      "tail": [
+        "     8.23 KiB  assets/index-DiCPhhaT.css",
+        "   110.50 KiB  assets/index-SV5smC6j.js",
+        "   118.73 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ]
+    },
+    "frontend_install": {
+      "command": "cd frontend && PATH=<Node24>:$PATH npm ci",
+      "result": "clean install, 0 vulnerabilities"
+    },
+    "backend314": {
+      "command": "PYTHONPATH=. <python314> -m pytest -q -o addopts=\"\"",
+      "log": "backend314-final.log",
+      "log_sha256": "fd1292dba1356a852b5e74c14e2e20f4c43cec9813717fe04d918363f3961b3a",
+      "tail": [
+        "........................................................................ [ 87%]",
+        "........................................................................ [ 95%]",
+        "...............................................                          [100%]",
+        "983 passed in 204.06s (0:03:24)"
+      ]
+    },
+    "accounts314": {
+      "command": "CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=. <python314> -m pytest tests/accounts -q -o addopts=\"\"",
+      "log": "accounts314-final.log",
+      "log_sha256": "dc3b9d0e807dd4faef58a85291904e356d557e325e512e032513862fd8151a9b",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 1.81s"
+      ]
+    },
+    "static": {
+      "commands": [
+        "python -m ruff check",
+        "python3 /home/dobo/work/agent-ops/scripts/check_docs.py .",
+        "git diff --check"
+      ],
+      "result": "GREEN"
+    }
+  },
+  "intermediate_findings_resolved": [
+    "The factually valid bread edge made flour misleadingly warm for a fountain pen; it was removed before the final build.",
+    "The graph builder reused retired edge IDs; its generated sequence now advances beyond the highest present generated ID and has a merge-path regression.",
+    "Historical current-artifact/profile assertions were refreshed, including the mobile public-content hash, while archived evidence and full V76 graph reconstruction remain exact."
+  ],
+  "unchanged_frontend": "V75 build artifacts retained; current typecheck and bundle budget pass; backend-only wave did not regenerate static.",
+  "python314_path": "/home/dobo/work/_temp/v77-flour-associations/py314/bin/python (fresh Python 3.14.6 venv; installed -c constraints.txt -e .[dev,web])",
+  "status": "green"
+}

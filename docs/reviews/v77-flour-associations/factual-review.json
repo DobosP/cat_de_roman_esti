@@ -1,0 +1,49 @@
+{
+  "reviewer": "session_refactor",
+  "role": "independent_factual_reviewer",
+  "base": "9ef9dc7",
+  "verdict": "accept_all_three_no_factual_blocker",
+  "items": [
+    {
+      "src": "n_v24_food_pantry_faina",
+      "dst": "n_gas_cozonac",
+      "verdict": "accept",
+      "finding": "White wheat flour is a foundational cozonac dough ingredient in an industry standard and an independent household recipe.",
+      "sources": [
+        "https://rompan.ro/servicii/informatii-de-specialitate/standarde/standarde-profesionale/cozonaci/",
+        "https://agerpres.ro/social/2021/04/29/traditii-in-bucate-cozonac-moldovenesc-reinventat-dar-cu-acelasi-gust-desavarsit--705669"
+      ]
+    },
+    {
+      "src": "n_v24_food_pantry_faina",
+      "dst": "n_gas_paine_de_casa",
+      "verdict": "accept",
+      "finding": "Flour is the foundational material for ordinary bread dough, including Romanian house bread; the generic flour concept covers common flour types.",
+      "sources": [
+        "https://rompan.ro/16-octombrie-ziua-mondiala-a-painii/",
+        "https://rompan.ro/servicii/informatii-de-specialitate/standarde/standarde-profesionale/faina/faina-alba/",
+        "https://agerpres.ro/comunicate/2025/10/15/comunicat-de-presa---patronatul-roman-din-industria-de-morarit-panificatie-si-produse-fainoase---rom--1493906"
+      ]
+    },
+    {
+      "src": "n_v24_food_pantry_faina",
+      "dst": "n_v3gas_clatite",
+      "verdict": "accept",
+      "finding": "Flour is present across ordinary classic, sweet, savory, and fasting clătite recipes; flourless novelties do not negate the common association.",
+      "sources": [
+        "https://agerpres.ro/zigzag/2022/02/01/it-s-today-my-favorite-day-2-februarie---ziua-cartitei-a-cititului-cu-voce-tare-si-a-clatitelor--857650",
+        "https://www.oetker.ro/retete/r/clatite-clasice",
+        "https://www.mega-image.ro/inspiratie/idei-pentru-tine/top-cele-mai-gustoase-clatite"
+      ]
+    }
+  ],
+  "edge_shape": {
+    "relation": "part_of",
+    "label_ro": "ingredient pentru",
+    "strength": 0.97,
+    "bidirectional": 0,
+    "assessment": "Direction and one-way shape match the intended V25 strong-link repair convention. The strength is an editorial weight, not a source-measured probability."
+  },
+  "qualification": "Alternative and flourless recipes exist, but the wording does not claim universality and each ordinary association remains strong.",
+  "scope_exclusions": ["new targets", "new aliases", "candidate promotion", "gameplay enjoyment"]
+}

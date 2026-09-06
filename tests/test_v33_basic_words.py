@@ -39,17 +39,16 @@ _V48_AUDIT = (
     _ROOT / "docs/reviews/v48-alchimie-pending-gate/projection-audit.json"
 )
 _EXPECTED_NODE_COUNT = 2364
-_EXPECTED_EDGE_COUNT = 9217
+_EXPECTED_EDGE_COUNT = 9219
 _EXPECTED_AUTHORED_EDGE_COUNT = 54
 _EXPECTED_LOCAL_EDGE_COUNT = 36
 _V32_ALIAS_COUNT = 7333
 
-# These are fingerprints of current legacy behavior. Profile pins move only with a gated
-# content wave; ADR-0067's removal of two false e-SIGUR edges intentionally changed the
-# Contexto closure; V45-V47 strict cleanup narrows dormant pending inventory; V75 adds two
-# independently reviewed Contexto targets.
-_V32_CONTEXTO_PROFILE_SHA256 = (
-    "5b2a2a7bb2ec09e84b29a9689748d1d8c89347f8355e77300bb8219039a5cd9b"
+# This is the current served Contexto distance profile. V77's two directed flour edges
+# change it; the V75/V76 profile digest was
+# 5b2a2a7bb2ec09e84b29a9689748d1d8c89347f8355e77300bb8219039a5cd9b.
+_CURRENT_CONTEXTO_PROFILE_SHA256 = (
+    "8e3b3ad5b20ccad2ef636ca206193311bc940ee0b60df0a44405fecf50f13dd6"
 )
 _V32_LANT_PROFILE_SHA256 = (
     "6fe32a7aacb464d8d30ae2d97bc02e9ed0ef5413ee264e2424f13388a7f8e8c2"
@@ -219,7 +218,7 @@ def test_v33_source_inventory_builder_application_counts_and_mirrors():
     assert len(built["edges"]) == _EXPECTED_AUTHORED_EDGE_COUNT
     assert built == DATA.build_nodes_and_edges()
     assert fixture["meta"]["build_version"] == (
-        "fixture-v72-romanian-dishes-and-pastries-morphology"
+        "fixture-v77-flour-associations"
     )
     assert (len(fixture["kg_nodes"]), len(fixture["kg_edges"])) == (
         _EXPECTED_NODE_COUNT,
@@ -493,7 +492,7 @@ def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
     )
 
 
-def test_v33_preserves_legacy_contexto_lant_and_alchimie_profiles():
+def test_v33_tracks_current_contexto_and_preserves_lant_and_alchimie_profiles():
     pack = _pack()
     svc = _service()
     contexto = {
@@ -530,7 +529,7 @@ def test_v33_preserves_legacy_contexto_lant_and_alchimie_profiles():
         for record in pack["alchimie"]
     }
 
-    assert _digest(contexto) == _V32_CONTEXTO_PROFILE_SHA256
+    assert _digest(contexto) == _CURRENT_CONTEXTO_PROFILE_SHA256
     assert _digest(lant) == _V32_LANT_PROFILE_SHA256
     assert _digest(alchimie) == _V32_ALCHIMIE_PROFILE_SHA256
 
@@ -541,7 +540,7 @@ def test_v33_mobile_contract_is_exact_current_and_public():
 
     assert checked_in == mobile_app_pack_snapshot(_PACKAGE_KG)
     assert checked_in["manifest"]["build_version"] == (
-        "fixture-v72-romanian-dishes-and-pastries-morphology"
+        "fixture-v77-flour-associations"
     )
     assert checked_in["manifest"]["counts"] == {
         "nodes": _EXPECTED_NODE_COUNT,
