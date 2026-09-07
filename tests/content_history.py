@@ -20,11 +20,14 @@ _V83_REVIEW = Path(__file__).resolve().parents[1] / "docs/reviews/v83-food-input
 _V84_RECEIPT = Path(__file__).resolve().parents[1] / (
     "docs/reviews/v84-six-game-graph-quality/artifact-delta.json"
 )
+_V85_RECEIPT = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v85-ingredient-feedback-and-board-clarity/artifact-delta.json"
+)
 
 
-def _before_v84(current: dict, filename: str) -> dict:
+def _reverse_reviewed_delta(current: dict, filename: str, receipt_path: Path) -> dict:
     """Peel only exact reviewed additions/corrections before checking old wave pins."""
-    receipt = json.loads(_V84_RECEIPT.read_bytes())["files"][filename]
+    receipt = json.loads(receipt_path.read_bytes())["files"][filename]
     restored = deepcopy(current)
     head = {key: value for key, value in restored.items() if not isinstance(value, list)}
     assert head == receipt["head_after"]
@@ -58,6 +61,27 @@ def _before_v84(current: dict, filename: str) -> dict:
     return restored
 
 
+def before_v85_fixture(current: dict) -> dict:
+    return _reverse_reviewed_delta(current, "kg_sample.json", _V85_RECEIPT)
+
+
+def before_v85_pack(current: dict) -> dict:
+    return _reverse_reviewed_delta(current, "games_pack.json", _V85_RECEIPT)
+
+
+def before_v85_rankings(current: dict) -> dict:
+    return _reverse_reviewed_delta(current, "board_rankings_v37.json", _V85_RECEIPT)
+
+
+def before_v85_derived(current: dict) -> dict:
+    return _reverse_reviewed_delta(current, "derived_catalog_v38.json", _V85_RECEIPT)
+
+
+def _before_v84(current: dict, filename: str) -> dict:
+    previous = _reverse_reviewed_delta(current, filename, _V85_RECEIPT)
+    return _reverse_reviewed_delta(previous, filename, _V84_RECEIPT)
+
+
 def before_v84_fixture(current: dict) -> dict:
     return _before_v84(current, "kg_sample.json")
 
@@ -76,13 +100,32 @@ def before_v84_derived(current: dict) -> dict:
 
 def before_v84_projection_rows(current: list[tuple]) -> list[tuple]:
     """Restore the exact retired Drojdie row from the committed V83 module."""
-    restored = list(current)
+    restored = before_v85_projection_rows(current)
     assert not any(row[0] == "drojdie" for row in restored)
     index = next(i for i, row in enumerate(restored) if row[0] == "gem")
     restored.insert(index, (
         "drojdie", "n_v4gas_mancare", "ingrediente", 1, "domain_fallback",
         "ctxp_3218ea40b036e40101f5",
     ))
+    return restored
+
+
+def before_v85_projection_rows(current: list[tuple]) -> list[tuple]:
+    """Restore only V85's two native replacements to their exact V84 positions."""
+    restored = list(current)
+    for index, successor, row in (
+        (29, "piper", (
+            "scorțișoară", "n_v4gas_mancare", "ingrediente", 1, "domain_fallback",
+            "ctxp_ed454bb254e529d7508c",
+        )),
+        (38, "cappuccino", (
+            "cacao", "n_v3gas_cafea", "băuturi", 1, "explicit",
+            "ctxp_73226150ba2fe847d20e",
+        )),
+    ):
+        assert not any(existing[0] == row[0] for existing in restored)
+        assert restored[index][0] == successor
+        restored.insert(index, row)
     return restored
 
 

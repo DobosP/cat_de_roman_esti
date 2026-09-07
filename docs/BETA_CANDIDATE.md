@@ -2,10 +2,10 @@
 
 Valid until: the next verified quality wave — then refresh this living checklist.
 
-Target: public anonymous beta for Romanian players. **V84 adds guidance to all six games,
-earned Alchimie explanations, 15 concepts, 57 links and four reviewed playable rounds.**
-One false graph link is removed. V84 is verified and merged into local main; V85 begins
-with another reviewed quality/content batch. Public rollout still requires the external checks below.
+Target: public anonymous beta for Romanian players. **V84 is merged locally; V85 is a
+verified candidate with eight ingredient concepts, 40 new links, a corrected regional
+relation, clearer board labels and five new playable rounds.** Public rollout still
+requires the external checks below.
 Current facts and exact pins: [STATUS](STATUS.md).
 
 ## Version objectives
@@ -40,6 +40,19 @@ a reviewed lexical equivalent. Drojdie's generic-food projection is retired, coo
 false-hot meat/cheese targets. [ADR-0119](adr/0119-in-round-help-and-earned-link-explanations.md)
 keeps rules available in each live game and shows only earned, oriented Alchimie relations.
 
+V85 makes cinnamon/cocoa native, adds 25 accepted forms and repairs butter/apple-pie
+feedback. Four new Contexto targets (Ecler, Amandină, Halva, Înghețată) bring eligibility
+220→224; Stafide→Brânză brings Lanț 95→96. One live Intrusul clue now states the truthful
+dairy category; board identities and choices remain stable. The stored Conexiuni source
+correction does not widen its eligible pool. See [ADR-0120](adr/0120-native-ingredients-and-audited-vocabulary.md)
+and [ADR-0121](adr/0121-exact-label-corrections-with-stable-board-identities.md).
+
+V85 full gates: **1,299 backend tests on each Python version, 53 accounts tests each,
+177 native frontend tests and 122 browser checks** passed. The application assets remain
+byte-identical at 118.87/120 KiB. Historical observations are retained while current rank
+expectations track the reviewed graph. [V85 review](reviews/v85-ingredient-feedback-and-board-clarity/README.md)
+records exact quantities, source evidence, warnings and remaining semantic noise.
+
 ## Sequence and acceptance
 
 | Wave | Problem addressed | Evidence / outcome |
@@ -59,6 +72,7 @@ keeps rules available in each live game and shows only earned, oriented Alchimie
 | V82 | Tiny content increments left repaired associations without enough new playable rounds; cold generation repeated millions of graph queries | Eight food targets independently reviewed, promoted and selectable; defining Burtă feedback repaired within the batch; bounded Alchimie pair reuse preserves exact games; reusable delta reporting and compact probes added. Full integration gate GREEN |
 | V83 | Ordinary forms and central ingredient guesses blocked a fresh food batch; repeated current pins slowed extension | Five targets promoted, six exact-target feedback pairs repaired and 24 forms accepted; old surface owners/records/frozen boards exact; current expectations centralized. Backend/accounts/frontend/browser validation complete, with one documented timing retry |
 | V84 | Missing everyday concepts, false generic-food feedback and invisible combination explanations limited realistic play | Fifteen concepts, 57 links, one false edge removed, 42 forms, three Contexto rounds and one Lanț route; in-round help across all six games and earned Alchimie explanations. All old playable recipe books/routes/frozen boards preserved; full integration GREEN |
+| V85 | Approximate ingredient guesses and misleading labels weakened otherwise familiar rounds | Eight concepts, 25 forms, 40 new links plus one relabelled relation; one served dairy clue corrected; four Contexto targets and one Lanț route. Full integration GREEN |
 
 V84 focused checks pass: **62 new graph/game checks**, **183 historical/current checks**,
 independent implementation review and 3,757 before/after observations per checkout. All
@@ -109,7 +123,7 @@ or human subject-expert approval.
 | Area | Evidence and remaining uncertainty |
 |---|---|
 | Rules, hints and progression | All six seeded rounds reach server-scored results; replay, progressed reload, mistake counters, failed action/start recovery and expiration have real-BFF coverage. Automated solves do not establish intuitiveness or enjoyment. |
-| Romanian content and difficulty | V84 adds 15 real concepts, 57 specific links and four reviewed rounds; 42 forms preserve deliberate sense exclusions. Drojdie's old meat/cheese false-hot cases cool, and defining apple/biscuit/whey/brine associations work. Cinnamon/bread and oven/biscuit-dessert rankings remain noisy; human fairness/enjoyment is unmeasured. |
+| Romanian content and difficulty | V85 adds eight concepts, 40 new links, 25 forms and five reviewed rounds, retaining V84's gains. Native cinnamon is cold for bread/Sarmale and hot for apple pie; cocoa and butter have direct dessert cues, and one dairy clue is corrected. Indirect oven/yeast feedback remains too warm for some desserts, and refrigerator/temperature clues remain weak. Human fairness/enjoyment is unmeasured. |
 | Onboarding and presentation | Shared intros, categories, HUD, action feedback and results were inspected; mobile layout and rendered states are audited. No broad redesign was justified by this evidence. Real-device rendering and human comprehension are still pending. |
 | Keyboard and accessibility | Desktop essential controls support Tab/Space/Enter completion; Perechi focus is checked after pairs disappear and at result. Automated Axe checks run on settled intro/live/result states. Text-entry tests use programmatic fill after keyboard focus; no actual screen-reader usability study ran. |
 | Reliability and storage | Retry, stale ID handling, unmount/loading ownership, immutable terminal actions and duplicate completion are covered. Strict concurrent-tab local-score protection requires Web Locks; fallback is best effort. Receipt TTL is 24h with 1,000 IDs per game; a deliberately retained terminal session can record again after expiry. |
@@ -127,10 +141,10 @@ or human subject-expert approval.
 - Authorize a release, preserve the deployed image, execute the [deployment and rollback procedure](DEPLOY.md),
   and re-run public health/config/content/asset smokes. Keep production anonymous.
 
-Player observations should guide the next product iteration. V84 addresses the broad
-Drojdie approximation and the grain, biscuit/apple, whey and qualified oven vocabulary.
-Follow-ups include remaining generic spice/cocoa projections, false-hot holiday routes,
-butter/preparation feedback and old derived-board wording that treats Urdă as inherently salty. The
+Player observations should guide the next product iteration. V84/V85 address the broad
+Drojdie/cinnamon/cocoa approximations, ingredient vocabulary, butter/apple-pie feedback
+and the misleading Urdă salt claim. Follow-ups include indirect oven/yeast and refrigerator
+feedback, unrecognized temperature words, variant-specific routes and suggestion coverage. The
 [V82 dispositions](reviews/v82-playable-content-batch/shortlist/dispositions.json) retain
 other investigated candidates. Repairs and fresh playable reviews belong together where
 feasible; these are investigation candidates, not approved promotions. Generic Pâine now

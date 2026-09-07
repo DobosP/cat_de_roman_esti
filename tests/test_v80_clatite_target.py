@@ -15,8 +15,10 @@ from tests.content_history import (
     before_v82_pack,
     before_v82_rankings,
     before_v84_fixture,
+    before_v85_fixture,
 )
 from tests.content_scenarios import contexto_seed
+from tests.current_content import CURRENT_CONTENT
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "cat_de_roman_esti/fixtures"
@@ -113,7 +115,7 @@ def test_exact_candidate_has_two_independently_bound_promotions() -> None:
      ("lapte", 2, 40, "Cald"), ("brânză", 2, 30, "Cald"),
      ("smântână", 2, 22, "Cald")],
 )
-@pytest.mark.parametrize("graph_epoch", ("before_v84", "current"))
+@pytest.mark.parametrize("graph_epoch", ("before_v84", "before_v85", "current"))
 def test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win(
     opener: str, distance: int, rank: int, temperature: str,
     graph_epoch: str, monkeypatch,
@@ -126,15 +128,19 @@ def test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win(
     from cat_de_roman_esti.wordgames.contexto import store
     from cat_de_roman_esti.wordgames.service import WordGameService
 
-    if graph_epoch == "before_v84":
-        prior = before_v84_fixture(_read(FIXTURES / "kg_sample.json"))
+    if graph_epoch != "current":
+        restore = before_v84_fixture if graph_epoch == "before_v84" else before_v85_fixture
+        prior = restore(_read(FIXTURES / "kg_sample.json"))
         svc = WordGameService(Graph.from_records(prior["kg_nodes"], prior["kg_edges"]))
         monkeypatch.setattr(contexto, "get_service", lambda: svc)
-    # New cereals/process words enter the distance distribution. Preserve the old
-    # numerical observations above and pin the three reviewed current rank shifts.
-    expected_rank = rank if graph_epoch == "before_v84" else {
-        "lapte": 47, "brânză": 34, "smântână": 26,
-    }.get(opener, rank)
+    # Both previous distributions remain exact historical expectations. Current
+    # positions are manually reviewed once in the shared served-content snapshot.
+    if graph_epoch == "before_v84":
+        expected_rank = rank
+    elif graph_epoch == "before_v85":
+        expected_rank = {"lapte": 47, "brânză": 34, "smântână": 26}.get(opener, rank)
+    else:
+        expected_rank = CURRENT_CONTENT.clatite_opener_ranks[opener]
 
     seed = contexto_seed(TARGET, difficulty="usor")
     client = Client()

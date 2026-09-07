@@ -1,0 +1,32 @@
+{
+  "category": "gastronomie",
+  "candidate_sha256": "sha256:d1aa287a6a1e88d8ecbe635e64aa03dd5877db67fd4f8d132ad47c4358915edc",
+  "instances": [
+    {
+      "ref": "contexto[0]",
+      "verdict": "keep",
+      "note": "C1/C2/C5: concrete widely familiar cofetărie pastry, no target duplicate. C3:5 incoming,2312 reachable,882 responsive. C4: vanilla/chocolate5 hot, pastry/peer cakes2 hot, cocoa8 hot. C6: salience0.55 is below easy warning threshold, but recipe/broadcast recognition supports easy pending staging; judges must decide. Controls: bread254 cold, cinnamon72 lukewarm, Stilou991 very cold. Yeast43 warm though choux does not require yeast; butter50/milk58 warm behind new direct ingredients. This residual production noise is disclosed, not erased."
+    },
+    {
+      "ref": "contexto[1]",
+      "verdict": "keep",
+      "note": "C1/C2/C5: recognizable cocoa cake with one dominant culinary sense, new target. C3:7 incoming,2312 reachable,1461 responsive. C4: cocoa/chocolate5 hot, pastry2 hot, eclair/savarină3 hot; vanilla11 hot is supported by recipe variants. C6: salience0.56 under-rates ordinary familiarity; keep easy for bound judge review. Bread321 cold and Stilou773 cold. Cinnamon50, yeast/oven41 and Sarmale67 remain warm indirect noise; the direct defining core outranks these. No universal-ranking correctness claim."
+    },
+    {
+      "ref": "contexto[2]",
+      "verdict": "keep",
+      "note": "C1/C2/C5: familiar seed confection; global recipe diversity does not change the dominant dessert sense. C3:5 incoming,2312 reachable,1743 responsive. C4: cocoa/sunflower2 hot; fasting-food4 and baclava6 hot. C6: salience0.50 needs explicit recognition review, supported by long-lived producer and broadcast evidence. Cinnamon72 and bread86 lukewarm; Stilou739 cold. Oven/tray/yeast45 still warm for this non-baked confection, but much weaker than defining ingredients. Keep for adversarial judgment, not guaranteed promotion."
+    },
+    {
+      "ref": "contexto[3]",
+      "verdict": "keep",
+      "note": "C1/C2/C5: universally familiar frozen dessert, not obscure despite graph salience0.2826. C3:6 incoming,2312 reachable,1639 responsive. C4: vanilla/cocoa3 hot, dessert2, milk7, fistic6 and crepes5 hot. Easy label follows ordinary recognition rather than the misleading numeric prior. Controls: sunflower240 cold, bread132 and Sarmale80 lukewarm, Stilou411 cold. Cocoa/vanilla outrank oven/yeast51 warm and cinnamon57 warm. Baclava9 remains unexpectedly hot and milk does not define all non-dairy variants; disclose these for judges."
+    },
+    {
+      "ref": "lant[0]",
+      "verdict": "keep",
+      "note": "D1/D2/D4/D5: familiar dried-fruit-to-cheese endpoints with two distinct named sweet-cheese preparations; honest easy two-hop arc. D3:2 valid first hops, narrowest layer2,2 intermediate nodes, no choke. Both strongest routes use precise ingredient associations, not taxonomy/region/holiday filler. Ingredient pairing is a semantic association and does not claim raisins become cheese. No existing exact endpoint pair. Raw keep authorizes pending staging only; independent dossier review remains mandatory."
+    }
+  ],
+  "coverage_note": "All5 raw records screened against rubricA/C/D; all proposed as pending only. Four salience warnings explicitly justified by recognition evidence, never silently ignored.100 first-guess API requests covering98 distinct target/input pairs; exact feedback saved. Two additional route ideas deferred as possible missing-direct-association artifacts."
+}

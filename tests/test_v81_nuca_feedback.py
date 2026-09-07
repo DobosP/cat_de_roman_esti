@@ -25,7 +25,7 @@ from cat_de_roman_esti.wordgames.contexto_projection import (  # noqa: E402
     resolve_projection,
 )
 from cat_de_roman_esti.wordgames.service import WordGameService, get_service  # noqa: E402
-from tests.content_history import before_v84_fixture  # noqa: E402
+from tests.content_history import before_v84_fixture, before_v85_fixture  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -137,8 +137,21 @@ def test_nuca_has_only_the_reviewed_native_surface_and_direct_recipe_edges() -> 
     assert resolve_projection("nucă") is None
 
     actual = {target: svc.link(NUCA, target) for target in TARGETS}
-    assert set(svc.neighbor_ids(NUCA)) == set(TARGETS)
-    assert svc.predecessor_ids(NUCA) == []
+    prior = before_v85_fixture(fixture)
+    previous = WordGameService(Graph.from_records(prior["kg_nodes"], prior["kg_edges"]))
+    assert set(previous.neighbor_ids(NUCA)) == set(TARGETS)
+    assert previous.predecessor_ids(NUCA) == []
+    reviewed_peers = {"n_v85_food_migdale", "n_v85_food_alune_padure"}
+    assert set(svc.neighbor_ids(NUCA)) == set(TARGETS) | reviewed_peers
+    assert set(svc.predecessor_ids(NUCA)) == reviewed_peers
+    for peer in reviewed_peers:
+        for source, target in ((NUCA, peer), (peer, NUCA)):
+            edge = svc.link(source, target)
+            assert edge is not None
+            assert (edge.relation, edge.label_ro, edge.strength,
+                    edge.bidirectional, edge.is_distractor) == (
+                "same_category", "fructe cu coajă lemnoasă comestibile", 0.7, True, False,
+            )
     for target, strength in TARGETS.items():
         edge = actual[target]
         assert edge is not None

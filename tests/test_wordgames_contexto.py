@@ -806,6 +806,7 @@ def test_projection_is_large_balanced_collision_free_and_legibility_audited() ->
     from collections import Counter
 
     from cat_de_roman_esti.wordgames.contexto_projection import (
+        NATIVE_PROJECTION_REPLACEMENTS,
         PROJECTION_LEGIBILITY_AUDIT,
         PROJECTION_OVERRIDE_CLUSTERS,
         PROJECTION_TERMS,
@@ -820,7 +821,24 @@ def test_projection_is_large_balanced_collision_free_and_legibility_audited() ->
     # ADR-0074 added twelve reviewed projections; ADR-0075 adds eight more.
     assert len(PROJECTION_TERMS) == CURRENT_CONTENT.projection_terms
     assert len(domains) == CURRENT_CONTENT.projection_domains
-    assert min(domains.values()) >= 14
+    assert NATIVE_PROJECTION_REPLACEMENTS == (
+        ("nucă", "ingrediente", "n_v81_food_pantry_nuca"),
+        ("drojdie", "ingrediente", "n_v84_food_drojdie"),
+        ("scorțișoară", "ingrediente", "n_v85_food_scortisoara"),
+        ("cacao", "băuturi", "n_v85_food_cacao"),
+    )
+    native_keys = [normalize_projection_surface(surface)
+                   for surface, _domain, _owner in NATIVE_PROJECTION_REPLACEMENTS]
+    assert len(native_keys) == len(set(native_keys))
+    assert set(native_keys).isdisjoint(keys)
+    native_domains = Counter(domain for _surface, domain, _owner in NATIVE_PROJECTION_REPLACEMENTS)
+    assert set(native_domains) <= set(domains)
+    # A reviewed native identity still contributes its accepted word to coverage.
+    # Upgrading it must not force a filler synthetic term or reduce the floor.
+    assert min((domains + native_domains).values()) >= 14
+    for surface, _domain, owner in NATIVE_PROJECTION_REPLACEMENTS:
+        assert svc.resolve(surface) == owner
+        assert resolve_projection(surface) is None
     assert len(keys) == len(set(keys))
     assert len({term.public_id for term in PROJECTION_TERMS}) == len(PROJECTION_TERMS)
     assert all(term.public_id.startswith("ctxp_") for term in PROJECTION_TERMS)
@@ -844,6 +862,28 @@ def test_projection_is_large_balanced_collision_free_and_legibility_audited() ->
                 assert svc.resolve(surface) is not None  # intentionally screened KG owner
             else:
                 assert term.anchor_id == anchor
+
+
+def test_v84_projection_inventory_retains_its_historical_synthetic_floor() -> None:
+    import hashlib
+    import json
+    from collections import Counter
+
+    from cat_de_roman_esti.wordgames.contexto_projection import PROJECTION_TERMS
+    from tests.content_history import before_v85_projection_rows
+
+    rows = before_v85_projection_rows([
+        (term.surface, term.anchor_id, term.domain, term.rank_penalty,
+         term.mapping_kind, term.public_id)
+        for term in PROJECTION_TERMS
+    ])
+    assert len(rows) == 471
+    assert min(Counter(row[2] for row in rows).values()) >= 14
+    assert hashlib.sha256(json.dumps(
+        rows, ensure_ascii=False, separators=(",", ":"),
+    ).encode()).hexdigest() == (
+        "9635fc961b2c2d20f0165496d43a77ed6ad56ad823a192995cff6b8f1e7630c5"
+    )
 
 
 def test_every_projection_term_uses_an_explicit_cluster_or_named_domain_fallback() -> None:

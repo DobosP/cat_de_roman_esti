@@ -26,6 +26,10 @@ from pathlib import Path
 _ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_ROOT))
 
+from cat_de_roman_esti.wordgames.label_corrections import (  # noqa: E402
+    correction_sources,
+    identity_payload,
+)
 from cat_de_roman_esti.wordgames.packs import (  # noqa: E402
     DEFAULT_PACK,
     DEFAULT_RANKINGS,
@@ -86,6 +90,10 @@ def _lower_quartile(values: list[float]) -> float:
 
 
 def _candidate_id(game: str, source_id: str, payload: dict) -> str:
+    # A reviewed wording repair must not reshuffle the frozen diversity-first cap.
+    # The complete source record is bound in generate_catalog; only identity uses
+    # its historical labels.  Served candidate payloads retain the corrected text.
+    payload = identity_payload(game, source_id, payload)
     canonical = json.dumps(
         {"game": game, "source_id": source_id, "payload": payload},
         ensure_ascii=False,
@@ -371,6 +379,7 @@ def generate_catalog() -> dict:
     pack, svc, _, _ = critique_pack.load_all(
         critique_pack.PACKAGE_PACK, critique_pack.PACKAGE_KG
     )
+    correction_sources(pack)
     # ADR-0054 defers Intrusul/Perechi expansion until the anonymous pilot: the derived
     # catalog reproduces the frozen V38 source snapshot below, independent of live pack
     # status or eligibility churn (ADR-0065 added eligible boards; the ADR-0066 owner wave

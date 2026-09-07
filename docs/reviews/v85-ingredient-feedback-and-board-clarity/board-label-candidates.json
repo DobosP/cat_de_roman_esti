@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "39b64cb",
+  "scope": "exact approved source-label correction; no status, members, order, board IDs or selection edits",
+  "policy_path": "cat_de_roman_esti/wordgames/label_corrections.py",
+  "policy_sha256": "552b4cd698115370e8f16a1ac1ed45f12c29888dc36593b3c8243fd0032b33a0",
+  "corrections": [
+    {
+      "item_id": "cx_gastronomie_171",
+      "before_sha256": "baf8750543974819f7d65cf6d3b7f09a00c2117c7448c71aeaefb7b107e9ab56",
+      "groups": [
+        {
+          "key": "g1",
+          "before": "Localitatea e deja în meniu",
+          "after": "Denumiri cu trimitere geografică",
+          "members": [
+            "n_gas_varza_a_la_cluj",
+            "n_gas_covrigi_buzau",
+            "n_gas_baclava_dobrogeana",
+            "n_gas_bucovina_gastronomica"
+          ]
+        },
+        {
+          "key": "g3",
+          "before": "Alb, sărat, din zona laptelui",
+          "after": "Produse lactate",
+          "members": [
+            "n_v2gas_branza",
+            "n_gas_telemea",
+            "n_gas_urda",
+            "n_gas_branza_smantana"
+          ]
+        }
+      ]
+    }
+  ],
+  "after_record_sha256": "e6a28e3f206ed295a3019c30876349efec1e409359df42daee45a397c2f189e9",
+  "served_delta": {
+    "intrusul": [
+      {
+        "id": "vi_1535ff1ac283061d41a1",
+        "path": "payload.group_label",
+        "before": "Alb, sărat, din zona laptelui",
+        "after": "Produse lactate"
+      }
+    ],
+    "perechi": []
+  },
+  "factual_sources": [
+    {
+      "url": "https://dexonline.ro/intrare/urd%C4%83/59516",
+      "basis": "DEX: milk derivative from whey; DLRM: sweet soft cheese. Salt is not a universal predicate."
+    },
+    {
+      "url": "https://dexonline.ro/intrare/Dobrogea/141324",
+      "basis": "DOOM: Dobrogea is a region."
+    },
+    {
+      "url": "https://dexonline.ro/definitie/bucovina",
+      "basis": "Enciclopedic: Bucovina is a historical province."
+    }
+  ],
+  "review_status": "proposed; independent review required before application"
+}

@@ -419,3 +419,42 @@ receipts, including 1,207 backend tests and 53 accounts tests on both Python ver
 177 native frontend tests and 122 browser checks. Landed `eb4155c` into local main with
 this documentation update. V85 continues with ingredients/feedback and board clarity,
 new concepts, specific graph links and reviewed playable content. No push or deployment.
+
+
+## V85 ingredient feedback and board clarity, 2026-09-08
+
+Valid until: the reviewed content, behavior or validation bindings change — then treat as history.
+
+V84 landed at `eb4155c`, followed by local landing record `39b64cb`. V85 adds eight native
+culinary concepts, 25 accepted forms and 40 specific links, plus one corrected Mucenici/Moldova
+description. The latter preserves the relation's endpoints, strength and directions; physical
+edge changes are 41 added IDs and one retired ID. Forms are not counted as synonyms.
+
+Native cinnamon and cocoa remove known food/coffee approximations. Cinnamon cools from
+hot to cold for bread/Sarmale and becomes hot for apple pie; butter and cocoa gain appropriate
+direct dessert cues. ADR-0120 explicitly changes the domain audit from synthetic-only to
+accepted words including four exact native migrations. All 469 retained projection rows and
+71 legacy proxies remain exact; the metadata does not participate in scoring.
+
+Independent review promotes Ecler, Amandină, Halva and Înghețată Contexto rounds plus
+Stafide→Brânză in Lanț, with real routes through Pască and Poale-n brâu. Contexto eligibility
+grows 220→224 and Lanț 95→96. Four salience warnings are explicitly justified; all eight prior
+pending holds remain. The pack now contains 643 records, 635 approved and eight pending.
+
+Two exact source labels are repaired. One served Intrusul clue now says “Produse lactate”.
+The shared builder/runtime policy preserves all 336 derived identities, partitions, choices
+and ranks, while rejecting stale or partial changes. No new Conexiuni/Perechi/Alchimie rounds
+are claimed. All 82 prior Alchimie projections, 98 Lanț profiles and 180 legacy puzzles remain
+exact. Indirect oven/yeast noise, weak cold clues and limited initial route suggestions remain.
+
+Final gates: 1,299 backend tests on both Python 3.12.3 and 3.14.6, 53 accounts tests each,
+177 native frontend tests and 122 browser checks pass. Validators, pending gate, Ruff,
+docs/whitespace and lint/typecheck/build/bundle pass. Application assets remain byte-identical;
+initial transfer is 118.87/120 KiB. Seventy-seven focused checks and 5,376 first guesses per
+checkout support the reviewed delta. Seven stale Clătite rank expectations were corrected
+with old observations retained on restored graphs; both full matrices pass without retries.
+The actual corrected Intrusul clue was inspected at 390×844 in browser emulation.
+
+V85 is ready on `feat/v85-ingredient-feedback-and-board-clarity` for its next landing request.
+Shared main remains at `39b64cb`. No push, deployment, real-device acceptance or human playtest
+occurred. Exact reviews, receipts and file bindings are in the V85 review archive.

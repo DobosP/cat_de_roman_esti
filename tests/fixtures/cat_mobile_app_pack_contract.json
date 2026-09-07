@@ -4,12 +4,12 @@
   "app": "cat_de_roman_esti",
   "schema_version": 1,
   "manifest_version": 1,
-  "build_version": "fixture-v84-six-game-graph-quality",
+  "build_version": "fixture-v85-ingredient-feedback-and-board-clarity",
   "generated_at": "2026-06-21T00:00:00Z",
-  "content_hash": "sha256:10984193d18dd817029c5972fe84e39bb490c4ef819399408cd54c299c67ed00",
+  "content_hash": "sha256:39da1d1b2ed32509d4ce6974251304454aa8d5b84976f9e475bd381626571c2c",
   "counts": {
-   "nodes": 2380,
-   "edges": 9279,
+   "nodes": 2388,
+   "edges": 9319,
    "puzzles": 180
   }
  },
@@ -9289,6 +9289,38 @@
   {
    "id": "n_v84_food_zer",
    "label_ro": "Zer"
+  },
+  {
+   "id": "n_v85_food_alune_padure",
+   "label_ro": "Alune de pădure"
+  },
+  {
+   "id": "n_v85_food_cacao",
+   "label_ro": "Cacao"
+  },
+  {
+   "id": "n_v85_food_ciocolata",
+   "label_ro": "Ciocolată"
+  },
+  {
+   "id": "n_v85_food_migdale",
+   "label_ro": "Migdale"
+  },
+  {
+   "id": "n_v85_food_scortisoara",
+   "label_ro": "Scorțișoară"
+  },
+  {
+   "id": "n_v85_food_seminte_floarea_soarelui",
+   "label_ro": "Semințe de floarea-soarelui"
+  },
+  {
+   "id": "n_v85_food_stafide",
+   "label_ro": "Stafide"
+  },
+  {
+   "id": "n_v85_food_vanilie",
+   "label_ro": "Vanilie"
   },
   {
    "id": "n_varful_moldoveanu",
@@ -37422,11 +37454,6 @@
    "dst_id": "n_v2gas_desert"
   },
   {
-   "id": "de5559",
-   "src_id": "n_v17gas_mucenici",
-   "dst_id": "n_moldova_reg"
-  },
-  {
    "id": "de556",
    "src_id": "n_gas_caltabos",
    "dst_id": "n_gas_toba"
@@ -54407,9 +54434,69 @@
    "dst_id": "n_v84_food_arpacas"
   },
   {
+   "id": "de8618",
+   "src_id": "n_v85_food_scortisoara",
+   "dst_id": "n_v42gas_placinta_mere"
+  },
+  {
+   "id": "de8619",
+   "src_id": "n_v85_food_scortisoara",
+   "dst_id": "n_v21gas_turta_dulce"
+  },
+  {
    "id": "de862",
    "src_id": "n_net_mircea_bravo",
    "dst_id": "n_net_sketch_online"
+  },
+  {
+   "id": "de8620",
+   "src_id": "n_v85_food_scortisoara",
+   "dst_id": "n_v17gas_mucenici"
+  },
+  {
+   "id": "de8621",
+   "src_id": "n_v85_food_scortisoara",
+   "dst_id": "n_v4gas_condiment"
+  },
+  {
+   "id": "de8622",
+   "src_id": "n_v85_food_cacao",
+   "dst_id": "n_v18gas_salam_de_biscuiti"
+  },
+  {
+   "id": "de8623",
+   "src_id": "n_v85_food_cacao",
+   "dst_id": "n_v18gas_amandina"
+  },
+  {
+   "id": "de8624",
+   "src_id": "n_v85_food_cacao",
+   "dst_id": "n_gas_cozonac"
+  },
+  {
+   "id": "de8625",
+   "src_id": "n_v85_food_cacao",
+   "dst_id": "n_v21gas_halva"
+  },
+  {
+   "id": "de8626",
+   "src_id": "n_v85_food_cacao",
+   "dst_id": "n_v85_food_ciocolata"
+  },
+  {
+   "id": "de8627",
+   "src_id": "n_v85_food_cacao",
+   "dst_id": "n_v3gas_inghetata"
+  },
+  {
+   "id": "de8628",
+   "src_id": "n_v85_food_vanilie",
+   "dst_id": "n_v21gas_ecler"
+  },
+  {
+   "id": "de8629",
+   "src_id": "n_v85_food_vanilie",
+   "dst_id": "n_v3gas_inghetata"
   },
   {
    "id": "de863",
@@ -54417,14 +54504,159 @@
    "dst_id": "n_net_parodie_online"
   },
   {
+   "id": "de8630",
+   "src_id": "n_v85_food_vanilie",
+   "dst_id": "n_v3gas_clatite"
+  },
+  {
+   "id": "de8631",
+   "src_id": "n_v85_food_vanilie",
+   "dst_id": "n_v17gas_pasca"
+  },
+  {
+   "id": "de8632",
+   "src_id": "n_v85_food_vanilie",
+   "dst_id": "n_gas_placinte_poale_brau"
+  },
+  {
+   "id": "de8633",
+   "src_id": "n_v85_food_vanilie",
+   "dst_id": "n_gas_cozonac"
+  },
+  {
+   "id": "de8634",
+   "src_id": "n_v85_food_ciocolata",
+   "dst_id": "n_v18gas_amandina"
+  },
+  {
+   "id": "de8635",
+   "src_id": "n_v85_food_ciocolata",
+   "dst_id": "n_v21gas_ecler"
+  },
+  {
+   "id": "de8636",
+   "src_id": "n_v85_food_ciocolata",
+   "dst_id": "n_v18gas_salam_de_biscuiti"
+  },
+  {
+   "id": "de8637",
+   "src_id": "n_v85_food_ciocolata",
+   "dst_id": "n_v3gas_clatite"
+  },
+  {
+   "id": "de8638",
+   "src_id": "n_v85_food_ciocolata",
+   "dst_id": "n_gas_cozonac"
+  },
+  {
+   "id": "de8639",
+   "src_id": "n_v24_food_small_fruit_strugure",
+   "dst_id": "n_v85_food_stafide"
+  },
+  {
    "id": "de864",
    "src_id": "n_net_mircea_bravo",
    "dst_id": "n_net_bunica_mircea_bravo"
   },
   {
+   "id": "de8640",
+   "src_id": "n_v85_food_stafide",
+   "dst_id": "n_v17gas_pasca"
+  },
+  {
+   "id": "de8641",
+   "src_id": "n_v85_food_stafide",
+   "dst_id": "n_gas_placinte_poale_brau"
+  },
+  {
+   "id": "de8642",
+   "src_id": "n_v85_food_stafide",
+   "dst_id": "n_gas_cozonac"
+  },
+  {
+   "id": "de8643",
+   "src_id": "n_v85_food_stafide",
+   "dst_id": "n_v18gas_salam_de_biscuiti"
+  },
+  {
+   "id": "de8644",
+   "src_id": "n_v85_food_migdale",
+   "dst_id": "n_v85_food_alune_padure"
+  },
+  {
+   "id": "de8645",
+   "src_id": "n_v85_food_migdale",
+   "dst_id": "n_v81_food_pantry_nuca"
+  },
+  {
+   "id": "de8646",
+   "src_id": "n_v85_food_migdale",
+   "dst_id": "n_v18gas_fistic"
+  },
+  {
+   "id": "de8647",
+   "src_id": "n_v85_food_alune_padure",
+   "dst_id": "n_v81_food_pantry_nuca"
+  },
+  {
+   "id": "de8648",
+   "src_id": "n_v85_food_alune_padure",
+   "dst_id": "n_v18gas_fistic"
+  },
+  {
+   "id": "de8649",
+   "src_id": "n_v85_food_migdale",
+   "dst_id": "n_v24_food_snack_biscuit"
+  },
+  {
    "id": "de865",
    "src_id": "n_net_mircea_bravo",
    "dst_id": "n_net_vlog_de_familie"
+  },
+  {
+   "id": "de8650",
+   "src_id": "n_v85_food_migdale",
+   "dst_id": "n_v21gas_cornulete"
+  },
+  {
+   "id": "de8651",
+   "src_id": "n_v85_food_alune_padure",
+   "dst_id": "n_v24_food_snack_biscuit"
+  },
+  {
+   "id": "de8652",
+   "src_id": "n_v85_food_alune_padure",
+   "dst_id": "n_v85_food_ciocolata"
+  },
+  {
+   "id": "de8653",
+   "src_id": "n_v85_food_seminte_floarea_soarelui",
+   "dst_id": "n_v21gas_halva"
+  },
+  {
+   "id": "de8654",
+   "src_id": "n_v85_food_seminte_floarea_soarelui",
+   "dst_id": "n_v24_food_pantry_ulei"
+  },
+  {
+   "id": "de8655",
+   "src_id": "n_v85_food_seminte_floarea_soarelui",
+   "dst_id": "n_v4gas_paine"
+  },
+  {
+   "id": "de8656",
+   "src_id": "n_v85_food_seminte_floarea_soarelui",
+   "dst_id": "n_v3gas_salata"
+  },
+  {
+   "id": "de8657",
+   "src_id": "n_v24_food_breakfast_unt",
+   "dst_id": "n_v42gas_placinta_mere"
+  },
+  {
+   "id": "de8658",
+   "src_id": "n_v17gas_mucenici",
+   "dst_id": "n_moldova_reg"
   },
   {
    "id": "de866",

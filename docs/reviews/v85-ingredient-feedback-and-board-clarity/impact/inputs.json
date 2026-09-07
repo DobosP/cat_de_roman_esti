@@ -1,0 +1,492 @@
+{
+  "WORDS": [
+    "Scorțișoară",
+    "Cacao",
+    "Unt",
+    "Cuptor de bucătărie",
+    "cuptor",
+    "Vanilie",
+    "Praf de copt",
+    "Miere",
+    "Nucă",
+    "Gem",
+    "Drojdie",
+    "Biscuit",
+    "Măr",
+    "Sare",
+    "Ulei",
+    "Carne",
+    "Brânză",
+    "Lapte",
+    "Făină"
+  ],
+  "NODES": [
+    {
+      "id": "n_v85_food_scortisoara",
+      "label_ro": "Scorțișoară",
+      "category": "gastronomie",
+      "description": "Condiment din scoarță aromată, folosit la plăcinta cu mere și la alte deserturi.",
+      "aliases": [
+        "scorțișoarei",
+        "scorțișoară măcinată",
+        "batoane de scorțișoară"
+      ],
+      "node_type": "concept",
+      "salience": 0.8
+    },
+    {
+      "id": "n_v85_food_cacao",
+      "label_ro": "Cacao",
+      "category": "gastronomie",
+      "description": "Pudră alimentară obținută din boabe de cacao, folosită în deserturi și băuturi.",
+      "aliases": [
+        "cacaua",
+        "cacauei",
+        "pudră de cacao"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    },
+    {
+      "id": "n_v85_food_vanilie",
+      "label_ro": "Vanilie",
+      "category": "gastronomie",
+      "description": "Ingredient aromat din păstăile de vanilie, folosit la creme și alte deserturi.",
+      "aliases": [
+        "vanilia",
+        "vaniliei",
+        "păstaie de vanilie"
+      ],
+      "node_type": "concept",
+      "salience": 0.8
+    },
+    {
+      "id": "n_v85_food_ciocolata",
+      "label_ro": "Ciocolată",
+      "category": "gastronomie",
+      "description": "Produs dulce pe bază de cacao, consumat ca atare sau folosit la deserturi.",
+      "aliases": [
+        "ciocolate",
+        "ciocolatei",
+        "ciocolată de menaj"
+      ],
+      "node_type": "concept",
+      "salience": 0.9
+    },
+    {
+      "id": "n_v85_food_stafide",
+      "label_ro": "Stafide",
+      "category": "gastronomie",
+      "description": "Boabe de struguri uscate, folosite și în umpluturi dulci.",
+      "aliases": [
+        "stafidă",
+        "stafidele",
+        "stafidelor"
+      ],
+      "node_type": "concept",
+      "salience": 0.8
+    },
+    {
+      "id": "n_v85_food_migdale",
+      "label_ro": "Migdale",
+      "category": "gastronomie",
+      "description": "Miezuri comestibile de migdal dulce, folosite ca gustare și în patiserie.",
+      "aliases": [
+        "migdală",
+        "migdalele",
+        "migdalelor",
+        "migdale dulci"
+      ],
+      "node_type": "concept",
+      "salience": 0.75
+    },
+    {
+      "id": "n_v85_food_alune_padure",
+      "label_ro": "Alune de pădure",
+      "category": "gastronomie",
+      "description": "Fructe cu coajă lemnoasă și miez comestibil, distincte de arahide.",
+      "aliases": [
+        "alună de pădure",
+        "alunele de pădure",
+        "alunelor de pădure"
+      ],
+      "node_type": "concept",
+      "salience": 0.75
+    },
+    {
+      "id": "n_v85_food_seminte_floarea_soarelui",
+      "label_ro": "Semințe de floarea-soarelui",
+      "category": "gastronomie",
+      "description": "Semințe cu miez comestibil, folosite pentru ulei, halva și alte preparate.",
+      "aliases": [
+        "semințele de floarea-soarelui",
+        "semințelor de floarea-soarelui",
+        "sămânță de floarea-soarelui"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    }
+  ],
+  "EDGES": [
+    {
+      "src": "n_v85_food_scortisoara",
+      "dst": "n_v42gas_placinta_mere",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează umpluturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_scortisoara",
+      "dst": "n_v21gas_turta_dulce",
+      "relation": "ingredient_variant",
+      "label_ro": "mirodenie în rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_scortisoara",
+      "dst": "n_v17gas_mucenici",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează varianta fiartă de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_scortisoara",
+      "dst": "n_v4gas_condiment",
+      "relation": "instance_of",
+      "label_ro": "este un",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_cacao",
+      "dst": "n_v18gas_salam_de_biscuiti",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_cacao",
+      "dst": "n_v18gas_amandina",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru blat și cremă de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_cacao",
+      "dst": "n_gas_cozonac",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient în umpluturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_cacao",
+      "dst": "n_v21gas_halva",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_cacao",
+      "dst": "n_v85_food_ciocolata",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient în unele rețete de casă de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_cacao",
+      "dst": "n_v3gas_inghetata",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_vanilie",
+      "dst": "n_v21gas_ecler",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează crema din",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_vanilie",
+      "dst": "n_v3gas_inghetata",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_vanilie",
+      "dst": "n_v3gas_clatite",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează unele aluaturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_vanilie",
+      "dst": "n_v17gas_pasca",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_vanilie",
+      "dst": "n_gas_placinte_poale_brau",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează umpluturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_vanilie",
+      "dst": "n_gas_cozonac",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_ciocolata",
+      "dst": "n_v18gas_amandina",
+      "relation": "ingredient_variant",
+      "label_ro": "folosită în unele glazuri pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_ciocolata",
+      "dst": "n_v21gas_ecler",
+      "relation": "ingredient_variant",
+      "label_ro": "folosită în unele creme pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_ciocolata",
+      "dst": "n_v18gas_salam_de_biscuiti",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient în unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_ciocolata",
+      "dst": "n_v3gas_clatite",
+      "relation": "ingredient_variant",
+      "label_ro": "folosită în unele umpluturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_ciocolata",
+      "dst": "n_gas_cozonac",
+      "relation": "ingredient_variant",
+      "label_ro": "folosită în unele umpluturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_food_small_fruit_strugure",
+      "dst": "n_v85_food_stafide",
+      "relation": "processed_into",
+      "label_ro": "boabele sale se usucă pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_stafide",
+      "dst": "n_v17gas_pasca",
+      "relation": "ingredient_variant",
+      "label_ro": "intră în umpluturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_stafide",
+      "dst": "n_gas_placinte_poale_brau",
+      "relation": "ingredient_variant",
+      "label_ro": "intră în umpluturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_stafide",
+      "dst": "n_gas_cozonac",
+      "relation": "ingredient_variant",
+      "label_ro": "intră în unele umpluturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_stafide",
+      "dst": "n_v18gas_salam_de_biscuiti",
+      "relation": "ingredient_variant",
+      "label_ro": "se adaugă în unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_migdale",
+      "dst": "n_v85_food_alune_padure",
+      "relation": "same_category",
+      "label_ro": "fructe cu coajă lemnoasă comestibile",
+      "bidirectional": 1,
+      "is_distractor": 0,
+      "strength": 0.7
+    },
+    {
+      "src": "n_v85_food_migdale",
+      "dst": "n_v81_food_pantry_nuca",
+      "relation": "same_category",
+      "label_ro": "fructe cu coajă lemnoasă comestibile",
+      "bidirectional": 1,
+      "is_distractor": 0,
+      "strength": 0.7
+    },
+    {
+      "src": "n_v85_food_migdale",
+      "dst": "n_v18gas_fistic",
+      "relation": "same_category",
+      "label_ro": "fructe cu coajă lemnoasă comestibile",
+      "bidirectional": 1,
+      "is_distractor": 0,
+      "strength": 0.7
+    },
+    {
+      "src": "n_v85_food_alune_padure",
+      "dst": "n_v81_food_pantry_nuca",
+      "relation": "same_category",
+      "label_ro": "fructe cu coajă lemnoasă comestibile",
+      "bidirectional": 1,
+      "is_distractor": 0,
+      "strength": 0.7
+    },
+    {
+      "src": "n_v85_food_alune_padure",
+      "dst": "n_v18gas_fistic",
+      "relation": "same_category",
+      "label_ro": "fructe cu coajă lemnoasă comestibile",
+      "bidirectional": 1,
+      "is_distractor": 0,
+      "strength": 0.7
+    },
+    {
+      "src": "n_v85_food_migdale",
+      "dst": "n_v24_food_snack_biscuit",
+      "relation": "ingredient_variant",
+      "label_ro": "folosite în unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_migdale",
+      "dst": "n_v21gas_cornulete",
+      "relation": "ingredient_variant",
+      "label_ro": "folosite în unele aluaturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_alune_padure",
+      "dst": "n_v24_food_snack_biscuit",
+      "relation": "ingredient_variant",
+      "label_ro": "folosite în unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_alune_padure",
+      "dst": "n_v85_food_ciocolata",
+      "relation": "ingredient_variant",
+      "label_ro": "miez adăugat în unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_seminte_floarea_soarelui",
+      "dst": "n_v21gas_halva",
+      "relation": "raw_material_for",
+      "label_ro": "miez măcinat pentru unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_seminte_floarea_soarelui",
+      "dst": "n_v24_food_pantry_ulei",
+      "relation": "processed_into",
+      "label_ro": "se presează pentru unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_seminte_floarea_soarelui",
+      "dst": "n_v4gas_paine",
+      "relation": "ingredient_variant",
+      "label_ro": "se adaugă în unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_seminte_floarea_soarelui",
+      "dst": "n_v3gas_salata",
+      "relation": "ingredient_variant",
+      "label_ro": "miez presărat în unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_food_breakfast_unt",
+      "dst": "n_v42gas_placinta_mere",
+      "relation": "ingredient_variant",
+      "label_ro": "folosit în unele foi pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    }
+  ]
+}

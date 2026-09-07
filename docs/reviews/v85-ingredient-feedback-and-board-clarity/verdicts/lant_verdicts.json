@@ -1,0 +1,74 @@
+{
+ "game": "lant",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "ct_gastronomie_337",
+   "ct_gastronomie_338",
+   "ct_gastronomie_339",
+   "ct_gastronomie_340",
+   "lt_gastronomie_221"
+  ]
+ },
+ "verdicts": {
+  "lt_gastronomie_221": "promote"
+ },
+ "perItem": [
+  {
+   "id": "lt_gastronomie_221",
+   "game": "lant",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:7adf86b9d9ad1637dc819c2f742d778b6ebcdc41965f41dff6f7ef807101e93d",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "lt_gastronomie_221",
+    "game": "lant",
+    "verdict": "promote",
+    "review_binding": "sha256:7adf86b9d9ad1637dc819c2f742d778b6ebcdc41965f41dff6f7ef807101e93d",
+    "rationale": "A1/A2/D1: Stafide and Brânză are independently familiar foods. D2/D5: both exact shortest routes pass through a named sweet-cheese preparation, Pască or Poale-n brâu; each published recipe contains raisins and cheese. This is a meaningful ingredient-to-dish-to-ingredient bridge, not physical conversion or a generic geography/taxonomy path. D3: two credible first hops, minimum intermediate width2 and two distinct intermediate nodes, no choke point. D4: two hops supports easy. A3/A4/A7: variant-qualified raisin filling and explicit cheese relations are truthful; the two intermediate foods are distinct. A5/A6: no boundary trigger, existing endpoint pair or rejection-ledger duplicate. No route depends on the corrected Mucenici regional label. Promote with both real API alternatives, resume and exact typed forms verified after selection.",
+    "sources": [
+     "https://jamilacuisine.ro/pasca-cu-aluat-de-cozonac-reteta-video/",
+     "https://jamilacuisine.ro/poale-n-brau-pas-cu-pas-reteta-video/"
+    ]
+   },
+   "verifier_review": {
+    "id": "lt_gastronomie_221",
+    "game": "lant",
+    "verdict": "promote",
+    "review_binding": "sha256:7adf86b9d9ad1637dc819c2f742d778b6ebcdc41965f41dff6f7ef807101e93d",
+    "rationale": "A1/A2/D1: Stafide and Brânză are familiar concrete food endpoints; established 2013/2015 Romanian recipes show both ingredients together in ordinary Pască and Poale-n brâu fillings. A3/A4/D2: each edge is a specific ingredient/preparation relation with an honest displayed label, not taxonomy, regional coincidence or a claim that raisins become cheese. A5/A6: no adult premise or existing exact/reverse endpoint pair. D3:2 distinct credible shortest first hops and 2 intermediates, no choke; both direct API routes won in 2 moves, while a premature direct cheese guess was rejected without changing progress. D4/D5: easy two-hop discovery through recognizable sweet-cheese preparations is appropriate. The initial three suggestions show Pască but not Poale-n brâu; the second path is available by typing and was verified with resume. This is a disclosed suggestion-coverage limitation, not a missing route. Promote.",
+    "sources": [
+     "https://jamilacuisine.ro/pasca-cu-aluat-de-cozonac-reteta-video/",
+     "https://jamilacuisine.ro/poale-n-brau-pas-cu-pas-reteta-video/"
+    ]
+   }
+  }
+ ],
+ "coverage": {
+  "total": 1,
+  "verified": 1,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "provenance": {
+  "analyst": {
+   "path": "docs/reviews/v85-ingredient-feedback-and-board-clarity/analyst-review.json",
+   "sha256": "sha256:bf2615f12a59a71631b869c4e6e1e63da8335a9e73c233dd5399b6fb96a8e6fb",
+   "reviewer": "root-v85",
+   "role": "analyst"
+  },
+  "verifier": {
+   "path": "docs/reviews/v85-ingredient-feedback-and-board-clarity/verifier-review.json",
+   "sha256": "sha256:f0f4e88e4ce02913f4aea193714af452d1c987e3d8433063880fcdffba78c2b8",
+   "reviewer": "v85_baseline_and_tests_independent_verifier",
+   "role": "verifier"
+  }
+ }
+}

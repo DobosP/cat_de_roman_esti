@@ -41,7 +41,7 @@ from cat_de_roman_esti.wordgames.service import (  # noqa: E402
     get_service,
     normalize,
 )
-from tests.content_history import before_v84_fixture  # noqa: E402
+from tests.content_history import before_v84_fixture, before_v85_fixture  # noqa: E402
 
 _ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_ROOT / "scripts"))
@@ -226,6 +226,8 @@ def test_v72_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     historical_svc = WordGameService(Graph.from_records(
         historical["kg_nodes"], historical["kg_edges"],
     ))
+    v84 = before_v85_fixture(fixture)
+    v84_svc = WordGameService(Graph.from_records(v84["kg_nodes"], v84["kg_edges"]))
     reviewed_additions = {
         "n_v17gas_coliva": {"n_v84_food_arpacas"},
         "n_gas_cozonac": {
@@ -243,9 +245,11 @@ def test_v72_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
         before = set(historical_svc.predecessor_ids(node_id))
         assert 4 <= len(before) <= 24
         assert all(historical_svc.link(parent, node_id) is not None for parent in before)
-        # Preserve the original bound and require exactly the reviewed new inputs;
-        # a blanket higher ceiling would also permit unrelated graph drift.
-        assert set(svc.predecessor_ids(node_id)) == before | reviewed_additions.get(node_id, set())
+        # Keep V84's exact additions on its reconstructed graph. Later reviewed
+        # ingredients have their own full artifact and graph-delta contracts.
+        expected_v84 = before | reviewed_additions.get(node_id, set())
+        assert set(v84_svc.predecessor_ids(node_id)) == expected_v84
+        assert all(svc.link(parent, node_id) is not None for parent in expected_v84)
     assert svc.resolve("bulzurilor cu brânză") == "n_gas_bulz"
     assert svc.resolve("gogoșilor prăjite") == "n_v17gas_gogosi"
     assert svc.resolve("cârnaților de Pleșcoi") == "n_v17gas_carnati_plescoi"

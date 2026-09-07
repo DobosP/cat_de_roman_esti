@@ -1,0 +1,39 @@
+{
+  "category": "gastronomie",
+  "candidate_sha256": "sha256:d1aa287a6a1e88d8ecbe635e64aa03dd5877db67fd4f8d132ad47c4358915edc",
+  "reviewed_refs": [
+    "contexto[0]",
+    "contexto[1]",
+    "contexto[2]",
+    "contexto[3]",
+    "lant[0]"
+  ],
+  "issues": [
+    {
+      "ref": "contexto[0]",
+      "severity": "note",
+      "issue": "Ecler is a concrete familiar filled choux pastry. Five recognizable incoming neighbors: Amandină, Savarină, Prăjitură, Vanilie and Ciocolată. Direct vanilla-pod cream and chocolate-cream variants are documented by JamilaCuisine; existing pastry relatives are honest cofetărie peers. The target has no exact record anywhere in the current pack. Neither yeast nor every possible flavor is claimed as necessary."
+    },
+    {
+      "ref": "contexto[1]",
+      "severity": "note",
+      "issue": "Amandină is a concrete familiar cocoa cake. Seven incoming neighbors include cocoa, chocolate, eclair, savarină, Joffre and two clear dessert/pastry categories. JamilaCuisine2013 and ProTV2016/2026 recipes document cocoa sponge/cream and chocolate glaze variants. No origin, universal alcohol ingredient or mandatory chocolate-glaze claim is introduced."
+    },
+    {
+      "ref": "contexto[2]",
+      "severity": "note",
+      "issue": "Halva is a familiar confection with seed-based variants. Five incoming neighbors are cocoa, sunflower seeds, Baclava dobrogeană, Mâncare de post and Dulce. Feleacul lists actual sunflower/cocoa formulations; Romanian Wikipedia and Radio Romania show sustained domestic culinary presence. Not every halva is sunflower-based, and the variant edges say so."
+    },
+    {
+      "ref": "contexto[3]",
+      "severity": "note",
+      "issue": "Înghețată is an ordinary concrete frozen dessert. Six incoming neighbors include vanilla, cocoa, milk, fistic, dessert and crepes. Named recipes use vanilla/cocoa flavors and milk; a manufacturer recipe explicitly serves ice cream with crepes. Non-dairy or non-cocoa variants remain valid; the graph does not claim all preparations use every ingredient."
+    },
+    {
+      "ref": "lant[0]",
+      "severity": "note",
+      "issue": "Stafide→Brânză has exactly two shortest routes: Stafide→Pască→Brânză and Stafide→Poale-n brâu→Brânză. Both documented sweet-cheese recipes include raisins; these are ingredient-to-preparation-to-ingredient associations, not a physical transformation of raisins into cheese. Exact endpoints are new in the current pack; both routes have different first hops and no intermediate choke."
+    }
+  ],
+  "coverage_note": "Complete factual screen of all5 frozen raw records against current applied V85 graph. Sources, route exclusions and residual rank noise appear in CANDIDATE_REVIEW.md; final bound analyst/verifier decisions remain required."
+}

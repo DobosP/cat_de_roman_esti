@@ -1,0 +1,86 @@
+{
+ "id": "ct_gastronomie_337",
+ "game": "contexto",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "7a70d23ac9493f34d4567c7b5288a704424b2a3d6be4d01c886aa334f49a30ea",
+ "kg_sha256": "b7d28b990d37164d8e41a93965a5824162ded56b2907ac03388fee717eb144b2",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Ecler salience 0.55 < 0.60 (usor floor)"
+  }
+ ],
+ "target": {
+  "id": "n_v21gas_ecler",
+  "label": "Ecler",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.55,
+  "degree": 3,
+  "incoming_degree": 5,
+  "description": "Prăjitură de cofetărie din aluat opărit, umplută cu cremă de vanilie și glazurată cu ciocolată sau fondant. Un clasic al cofetăriilor românești, cerut și astăzi la felie cu amandina și savarina."
+ },
+ "reachable": 2312,
+ "strong_neighbors": [
+  {
+   "id": "n_v18gas_amandina",
+   "label": "Amandină",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.56,
+   "degree": 5,
+   "incoming_degree": 7,
+   "description": "Prăjitură clasică de cofetărie românească: blat de cacao însiropat, cremă de ciocolată și glazură de fondant. Reper al cofetăriilor de cartier de zeci de ani.",
+   "strength": 0.85
+  },
+  {
+   "id": "n_v21gas_savarina",
+   "label": "Savarină",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.55,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Prăjitură clasică de cofetărie: aluat bine însiropat, glazură și mult frișcă deasupra. Face parte din trioul nostalgic al cofetăriilor românești, alături de amandină și ecler.",
+   "strength": 0.85
+  },
+  {
+   "id": "n_v4gas_prajitura",
+   "label": "Prăjitură",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.67,
+   "degree": 12,
+   "incoming_degree": 12,
+   "description": "Preparat dulce copt sau asamblat, servit ca desert.",
+   "strength": 0.85
+  },
+  {
+   "id": "n_v85_food_ciocolata",
+   "label": "Ciocolată",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.9,
+   "degree": 5,
+   "incoming_degree": 2,
+   "description": "Produs dulce pe bază de cacao, consumat ca atare sau folosit la deserturi.",
+   "strength": 0.8
+  },
+  {
+   "id": "n_v85_food_vanilie",
+   "label": "Vanilie",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.8,
+   "degree": 6,
+   "incoming_degree": 0,
+   "description": "Ingredient aromat din păstăile de vanilie, folosit la creme și alte deserturi.",
+   "strength": 0.8
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:be6c9525a1450d8112cbb7897bf8df73911b2cddf5b83d0b53d0e1a3da27bfe2"
+}

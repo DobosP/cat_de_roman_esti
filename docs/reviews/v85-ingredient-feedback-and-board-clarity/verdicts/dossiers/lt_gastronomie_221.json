@@ -1,0 +1,128 @@
+{
+ "id": "lt_gastronomie_221",
+ "game": "lant",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "17335b04606d40c7695a028af0fcce8106313918410ae9bb971c0f5f3f7c7251",
+ "kg_sha256": "b7d28b990d37164d8e41a93965a5824162ded56b2907ac03388fee717eb144b2",
+ "lint_findings": [],
+ "start": {
+  "id": "n_v85_food_stafide",
+  "label": "Stafide",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.8,
+  "degree": 4,
+  "incoming_degree": 1,
+  "description": "Boabe de struguri uscate, folosite și în umpluturi dulci."
+ },
+ "target": {
+  "id": "n_v2gas_branza",
+  "label": "Brânză",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.9238,
+  "degree": 13,
+  "incoming_degree": 14,
+  "description": "Produs lactat folosit în feluri sărate, deserturi și gustări."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v85_food_stafide",
+     "label": "Stafide"
+    },
+    {
+     "id": "n_gas_placinte_poale_brau",
+     "label": "Poale-n brâu"
+    },
+    {
+     "id": "n_v2gas_branza",
+     "label": "Brânză"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v85_food_stafide",
+      "label": "Stafide"
+     },
+     "to": {
+      "id": "n_gas_placinte_poale_brau",
+      "label": "Poale-n brâu"
+     },
+     "relation": "ingredient_variant",
+     "label": "intră în umpluturi de",
+     "strength": 0.8
+    },
+    {
+     "from": {
+      "id": "n_gas_placinte_poale_brau",
+      "label": "Poale-n brâu"
+     },
+     "to": {
+      "id": "n_v2gas_branza",
+      "label": "Brânză"
+     },
+     "relation": "related_to",
+     "label": "umplutură cu brânză",
+     "strength": 0.82
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v85_food_stafide",
+     "label": "Stafide"
+    },
+    {
+     "id": "n_v17gas_pasca",
+     "label": "Pască"
+    },
+    {
+     "id": "n_v2gas_branza",
+     "label": "Brânză"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v85_food_stafide",
+      "label": "Stafide"
+     },
+     "to": {
+      "id": "n_v17gas_pasca",
+      "label": "Pască"
+     },
+     "relation": "ingredient_variant",
+     "label": "intră în umpluturi de",
+     "strength": 0.8
+    },
+    {
+     "from": {
+      "id": "n_v17gas_pasca",
+      "label": "Pască"
+     },
+     "to": {
+      "id": "n_v2gas_branza",
+      "label": "Brânză"
+     },
+     "relation": "related_to",
+     "label": "umplută cu brânză dulce",
+     "strength": 0.75
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:7adf86b9d9ad1637dc819c2f742d778b6ebcdc41965f41dff6f7ef807101e93d"
+}

@@ -152,7 +152,12 @@ def test_v47_deterministic_floor_is_green_but_human_c1_c3_gate_is_stricter() -> 
 
 @pytest.mark.parametrize(
     ("graph_epoch", "responsive", "food_projections", "family_rank"),
-    [("before_v84", 2260, 19, 2080), ("current", 2275, 18, 2095)],
+    [
+        ("before_v84", 2260, 19, 2080),
+        ("current", *(CURRENT_CONTENT.feedback_observations[key] for key in (
+            "food_responsive", "food_direct_projections", "family_member_rank",
+        ))),
+    ],
 )
 def test_v47_live_feedback_proves_mancare_and_rejects_the_misleading_family_field(
     graph_epoch, responsive, food_projections, family_rank, monkeypatch,

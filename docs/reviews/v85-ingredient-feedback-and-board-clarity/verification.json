@@ -1,0 +1,374 @@
+{
+  "schema_version": 2,
+  "date": "2026-09-08",
+  "baseline_commit": "39b64cb15cf40bbcd2000b3b12770e616d7d357f",
+  "candidate_branch": "feat/v85-ingredient-feedback-and-board-clarity",
+  "result": "passed",
+  "checks": {
+    "backend312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v85-ingredient-feedback-and-board-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 682.9,
+      "log_sha256": "d33ab16c8bda29327f2040d3668553559290196317d8ed7fac06227106d30cdd",
+      "tail": [
+        "........................................................................ [ 49%]",
+        "........................................................................ [ 55%]",
+        "........................................................................ [ 60%]",
+        "........................................................................ [ 66%]",
+        "........................................................................ [ 72%]",
+        "........................................................................ [ 77%]",
+        "........................................................................ [ 83%]",
+        "........................................................................ [ 88%]",
+        "........................................................................ [ 94%]",
+        "........................................................................ [ 99%]",
+        "...                                                                      [100%]",
+        "1299 passed in 679.74s (0:11:19)"
+      ]
+    },
+    "accounts312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v85-ingredient-feedback-and-board-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 8.35,
+      "log_sha256": "c84fa91d19c2b05e46e03c96ba5dd1f6c33d5551847ba33ac0bdf6691a016b9b",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 6.40s"
+      ]
+    },
+    "backend314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v85-ingredient-feedback-and-board-clarity/py314/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v85-ingredient-feedback-and-board-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 600.75,
+      "log_sha256": "2dc011df90e39770356e856c1a151476e6aa141986b5526f1e00570710f8d033",
+      "tail": [
+        "........................................................................ [ 49%]",
+        "........................................................................ [ 55%]",
+        "........................................................................ [ 60%]",
+        "........................................................................ [ 66%]",
+        "........................................................................ [ 72%]",
+        "........................................................................ [ 77%]",
+        "........................................................................ [ 83%]",
+        "........................................................................ [ 88%]",
+        "........................................................................ [ 94%]",
+        "........................................................................ [ 99%]",
+        "...                                                                      [100%]",
+        "1299 passed in 595.00s (0:09:54)"
+      ]
+    },
+    "accounts314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v85-ingredient-feedback-and-board-clarity/py314/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v85-ingredient-feedback-and-board-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 8.87,
+      "log_sha256": "f36d9b534e93e85b2637f3025dc13b1a63fbf0f7b4e831d727082aa3b3fe1a76",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 6.52s"
+      ]
+    },
+    "frontend_native": {
+      "command": [
+        "npm",
+        "test"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v85-ingredient-feedback-and-board-clarity/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 1.62,
+      "log_sha256": "21b8df1f5f6ac9e6dc7377f8a1e4389acbf10c502af416693af4b10c48ed1987",
+      "tail": [
+        "✔ the starter chip appears on Intrusul/Perechi cards only pre-graduation (0.237744ms)",
+        "✔ the hero tagline names the cultural range and keeps the h1 untouched (0.204941ms)",
+        "✔ meta-loop CSS lives under its V42 anchor and keeps the diploma action >=44px (0.792014ms)",
+        "✔ optional account controls stay outside the initial bundle graph (0.155951ms)",
+        "ℹ tests 177",
+        "ℹ suites 0",
+        "ℹ pass 177",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 1268.816128"
+      ]
+    },
+    "frontend_lint": {
+      "command": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v85-ingredient-feedback-and-board-clarity/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 13.34,
+      "log_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 lint",
+        "> eslint .",
+        ""
+      ]
+    },
+    "frontend_typecheck": {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v85-ingredient-feedback-and-board-clarity/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 5.73,
+      "log_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 typecheck",
+        "> tsc --noEmit",
+        ""
+      ]
+    },
+    "frontend_bundle": {
+      "command": [
+        "npm",
+        "run",
+        "check:bundle"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v85-ingredient-feedback-and-board-clarity/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 0.3,
+      "log_sha256": "0540520e0caf90dd16e71bbc29420bc4f9b88121f8a6ed7f2afc23fdd08d574f",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 check:bundle",
+        "> node scripts/check-bundle-budget.mjs",
+        "",
+        "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+        "     8.38 KiB  assets/index-CkVCIp7R.css",
+        "   110.49 KiB  assets/index-DrZ9bHv_.js",
+        "   118.87 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ]
+    },
+    "browser": {
+      "command": [
+        "npm",
+        "run",
+        "test:e2e"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v85-ingredient-feedback-and-board-clarity/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 463.11,
+      "log_sha256": "d6f65e91a5f7bf702257f992a7535e89de16ef91e672c8ac637b30905c025547",
+      "tail": [
+        "  ✓  113 [mobile] › e2e/resume-recovery.spec.mjs:95:5 › V74 saved-game recovery › contexto retains a transiently unavailable game and retries it (3.3s)",
+        "  ✓  114 [mobile] › e2e/resume-recovery.spec.mjs:135:5 › V74 saved-game recovery › contexto recovers a terminal game and scores it exactly once (3.1s)",
+        "  ✓  115 [mobile] › e2e/resume-recovery.spec.mjs:95:5 › V74 saved-game recovery › lant retains a transiently unavailable game and retries it (2.8s)",
+        "  ✓  116 [mobile] › e2e/resume-recovery.spec.mjs:135:5 › V74 saved-game recovery › lant recovers a terminal game and scores it exactly once (2.5s)",
+        "  ✓  117 [mobile] › e2e/resume-recovery.spec.mjs:152:3 › V74 saved-game recovery › a queued terminal score keeps every saved game recoverable until its write finishes (20.4s)",
+        "  ✓  118 [mobile] › e2e/resume-recovery.spec.mjs:203:5 › V74 saved-game recovery › a stale 200 response cannot displace another tab's game (2.3s)",
+        "  ✓  119 [mobile] › e2e/resume-recovery.spec.mjs:203:5 › V74 saved-game recovery › a stale 404 response cannot displace another tab's game (2.3s)",
+        "  ✓  120 [mobile] › e2e/resume-recovery.spec.mjs:248:3 › V74 saved-game recovery › an unmounted resume cannot finish a newer route's create loading (2.7s)",
+        "  ✓  121 [mobile] › e2e/resume-recovery.spec.mjs:290:3 › V74 saved-game recovery › two tabs adopt one terminal session but append its local score once (3.1s)",
+        "  ✓  122 [mobile] › e2e/resume-recovery.spec.mjs:350:3 › V74 saved-game recovery › simultaneous terminal sessions from different games preserve both score rows (2.3s)",
+        "",
+        "  122 passed (7.7m)"
+      ]
+    },
+    "fixture": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_fixture.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v85-ingredient-feedback-and-board-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 0.36,
+      "log_sha256": "3a7b0981ed5b34f50d3841d99cdfa6c570856dc711ca5306ab7e2757c5114caf",
+      "tail": [
+        "  [  ok] alias_unique                 0 error(s)",
+        "  [  ok] label_style                  0 error(s)",
+        "  [  ok] meta_counts                  0 error(s)",
+        "  [  ok] puzzle_par                   0 error(s)",
+        "  [  ok] puzzle_hop_band              0 error(s)",
+        "  [  ok] puzzle_hints                 0 error(s)",
+        "  [  ok] puzzle_ids_resolve           0 error(s)",
+        "  [  ok] puzzle_shortest_path         0 error(s)",
+        "  [  ok] puzzle_category_scope        0 error(s)",
+        "  [  ok] puzzle_distractor_shortcut   0 error(s)",
+        "------------------------------------------------------------",
+        "GREEN: fixture is valid (0 errors)"
+      ]
+    },
+    "pack": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_games_pack.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v85-ingredient-feedback-and-board-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 11.49,
+      "log_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+      "tail": [
+        "  copies_identical         ok",
+        "  structure                ok",
+        "  item_shape               ok",
+        "  unique_ids               ok",
+        "  playability              ok",
+        "  meta_counts              ok",
+        "  id_high_water            ok",
+        "",
+        "games pack GREEN"
+      ]
+    },
+    "pending": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/critique_pack.py",
+        "--status",
+        "pending",
+        "--strict"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v85-ingredient-feedback-and-board-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 0.65,
+      "log_sha256": "f19d308c2a43b0b95b9b12f3458a99e9f64ce7c982f4f113f1997cbbcffae852",
+      "tail": [
+        "critique_pack: 8 item(s) checked, 0 flagged, 0 FAIL finding(s)",
+        "  member_overuse       WARN x65",
+        "  nondistinctive_region_link WARN x16"
+      ]
+    },
+    "ruff": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v85-ingredient-feedback-and-board-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 0.06,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "tail": [
+        "All checks passed!"
+      ]
+    },
+    "docs": {
+      "command": [
+        "python3",
+        "/home/dobo/work/agent-ops/scripts/check_docs.py",
+        "."
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v85-ingredient-feedback-and-board-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 0.11,
+      "log_sha256": "ed7e04c768cba4bbef80a9fda9470a1ee0698165d9096091ab774af73d6e5530",
+      "tail": [
+        "",
+        "## dead links",
+        "(none)",
+        "",
+        "## stale model terms",
+        "(none)",
+        "",
+        "## retired ops verbs",
+        "(none)",
+        "",
+        "## orphan docs",
+        "(none)"
+      ]
+    },
+    "whitespace": {
+      "command": [
+        "git",
+        "diff",
+        "HEAD",
+        "--check"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v85-ingredient-feedback-and-board-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 0.19,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tail": []
+    }
+  },
+  "focused_checks": {
+    "ingredient_and_board": "77 passed in 12.24s; all five new public rounds and both Lanț routes covered",
+    "broad_content": "599 cases across 58 modules: 592 passed and 7 old Clătite rank expectations failed; 48-case follow-up passed in 15.827s with historical values retained",
+    "graph_impact": "5376 first guesses per checkout over 224 old approved records and 24 inputs; 45 new directed journeys; all 82 old Alchimie projections and 98 Lanț profiles preserved",
+    "promotion": "5 complete raw screens and separate bound analyst/verifier promotion judgments; 0 FAIL and 4 explicitly justified salience WARNs",
+    "expanded_verifier": "82 first guesses, 8 clue/repeat/resume/win journeys and both Lanț routes",
+    "wording": "2 exact source labels; 1 served Intrusul label, with all 336 identities, partitions and ranks retained"
+  },
+  "initial_findings": [
+    "Original graph batch regenerated from the verified baseline after a newly discovered Mucenici preparation label error was reviewed; only that relation label changes in the replacement.",
+    "Some focused board checks encountered the deliberate pending-import phase before the matching receipt was refreshed; no guard was weakened. Final synchronized 77-case run passes.",
+    "Seven historical Clătite rank pins changed with the reviewed graph. V83 and V84 observations remain tested on reconstructed graphs; current ranks are immutable reviewed expectations.",
+    "Verifier top-level evidence metadata was moved to its companion file to satisfy the existing strict portable-review schema; judgments and bindings were unchanged."
+  ],
+  "build": {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "observed_exit_code": 0,
+    "log_sha256": "e7abf9291690f12f3a6b07141e00a152d476c6e737b0ff34e3b5774d989e7dd5",
+    "initial_transfer_kib": 118.87,
+    "unchanged_limit_kib": 120,
+    "application_assets": "regenerated and byte-identical to V84",
+    "seed38": "current snapshot regenerated; Contexto reachability and Lanț selected round change"
+  },
+  "environment": {
+    "python": [
+      "3.12.3",
+      "3.14.6"
+    ],
+    "node": "24.20.0",
+    "npm": "11.19.0",
+    "backend": "anonymous/debug-off, external data disabled, PYTHONPATH=candidate",
+    "accounts": "enabled with debug only in isolated account suites",
+    "browser": "one Chromium worker, desktop and Pixel 7 emulation, local BFF, no retries",
+    "install": "fresh constrained Python3.14 environment; Node24 npm ci/audit reports zero vulnerabilities"
+  },
+  "limits": [
+    "No runtime scoring formula, timing ceiling, request size or session bound was relaxed.",
+    "The projection-only 14-per-domain floor was deliberately replaced by a 14 accepted-word audit including four exact native migrations; historical synthetic coverage remains tested.",
+    "No push, deployment, human playtest or real-device acceptance was performed."
+  ],
+  "visual": {
+    "receipt": "visual-review.json",
+    "screenshot": "screenshots/intrusul-dairy-mobile.png",
+    "result": "passed",
+    "viewport": "390x844; actual public Intrusul journey with corrected hint"
+  }
+}

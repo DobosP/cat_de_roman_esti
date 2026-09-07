@@ -33,6 +33,8 @@ class CurrentContentSnapshot:
     game_inventory: Mapping[str, tuple[int, int, int]]
     ranking_counts: Mapping[str, int | Mapping[str, int]]
     derived_counts: Mapping[str, int | Mapping[str, int]]
+    feedback_observations: Mapping[str, int]
+    clatite_opener_ranks: Mapping[str, int]
     contexto_approved: int
     contexto_eligible: int
     contexto_id_high_water: int
@@ -92,79 +94,79 @@ class CurrentContentSnapshot:
 
 
 CURRENT_CONTENT = CurrentContentSnapshot(
-    build_version="fixture-v84-six-game-graph-quality",
+    build_version="fixture-v85-ingredient-feedback-and-board-clarity",
     artifact_sha256=_frozen(
         {
             "cat_de_roman_esti/fixtures/kg_sample.json": (
-                "3fb0f97c5b4c813eb72d8fd3589c4ce92f724d0565db840c1bc3909458a60ab0"
+                "b7d28b990d37164d8e41a93965a5824162ded56b2907ac03388fee717eb144b2"
             ),
             "cat_de_roman_esti/fixtures/games_pack.json": (
-                "c843705d565770d6916567be8b7c627c16bfdcf9dd8368e6a333f0f222484b57"
+                "835937cc369918a0070a8d09a35f3982f21f74275476f061aa6c05242d270b4d"
             ),
             "cat_de_roman_esti/fixtures/board_rankings_v37.json": (
-                "67a7a3274f24485d45ab75191a9701482c0959be4029e29e47c7c576360a6075"
+                "21ff49faabb631e2a62cd07e15a6f1de69b7cb9ad04f900344771b7fefeeac0b"
             ),
             "cat_de_roman_esti/fixtures/derived_catalog_v38.json": (
-                "579128d90d34a57a093202e54babe76b1ceb6840a36e332c9ecc540a8fb5251a"
+                "66f4aebe9d64f638cfc8d48d51692b27a0f846d56e072a9a028a33b72d6e1ec7"
             ),
             "tests/fixtures/cat_mobile_app_pack_contract.json": (
-                "43e18a0b84b81196573bca0c5643c117def93535c38fa67b52adf5da63fd3166"
+                "d1f5808af8e0e5188b84ad4591891aa029e7f6e59fdb0c7cc14d7dd6775d2d09"
             ),
         }
     ),
     payload_sha256=_frozen(
         {
             "ranking_rows": (
-                "bc8b055086548c7ed69712a3c8804c76175e44cb74e0562f3047b15d1fac5d23"
+                "f0673338b8fd00862f4e0eb933d53d0ea1e254d5d6560df1f01411629d074617"
             ),
             "frozen_derived_boards": (
-                "71a2acefb7e0ec62da32ad2645238d73d5e83375808160c0bd1800febd3a73b6"
+                "1aa4138171644870f65ca1925f05c066f94e0dac087fd3682b5c374f225b86db"
             ),
             "kg_nodes_without_aliases": (
-                "ae230c3696da3f8823339cfd07b88fc6fe037a0c8377bb1ad0b4e7a77237a33a"
+                "ed099e61d2369421e139a20566d387313a57f1367d65c5cb009e00765c696c6f"
             ),
             "kg_edges": (
-                "aac243f6d75566598f321f5622ba0b0d39662cacdc8e30c7df3d53b990ee12e8"
+                "e33a25235ccc2f5af771120fef9e91c59e8a082253b0e38929d7303bac118f4d"
             ),
             "kg_puzzles": (
                 "3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc"
             ),
             "contexto_profile": (
-                "9e56ca1f7e2e647b7695b4e1931fea644076f8e3a26aa0abf633b709cd38769c"
+                "aaf2bb348db02403b3c278bf9640d4513d1fc54fc99fcb1663bcc3835eb92673"
             ),
             "alchimie_closure_profile": (
                 "94eccce7dd6c9555afcc64566c5e5b82368fbfe746c1298f53a3e62681b27b32"
             ),
             "mobile_content": (
-                "10984193d18dd817029c5972fe84e39bb490c4ef819399408cd54c299c67ed00"
+                "39da1d1b2ed32509d4ce6974251304454aa8d5b84976f9e475bd381626571c2c"
             ),
         }
     ),
-    kg_counts=_frozen({"nodes": 2380, "edges": 9279, "aliases": 8517, "puzzles": 180}),
-    mobile_counts=_frozen({"nodes": 2380, "edges": 9279, "puzzles": 180}),
-    pack_counts=_frozen({"conexiuni": 232, "contexto": 226, "lant": 98, "alchimie": 82}),
+    kg_counts=_frozen({"nodes": 2388, "edges": 9319, "aliases": 8542, "puzzles": 180}),
+    mobile_counts=_frozen({"nodes": 2388, "edges": 9319, "puzzles": 180}),
+    pack_counts=_frozen({"conexiuni": 232, "contexto": 230, "lant": 99, "alchimie": 82}),
     pack_id_high_water=_frozen(
-        {"conexiuni": 361, "contexto": 336, "lant": 220, "alchimie": 106}
+        {"conexiuni": 361, "contexto": 340, "lant": 221, "alchimie": 106}
     ),
-    status_counts=_frozen({"approved": 630, "pending": 8}),
+    status_counts=_frozen({"approved": 635, "pending": 8}),
     game_inventory=_frozen(
         {
             "conexiuni": (232, 232, 0),
-            "contexto": (226, 224, 2),
-            "lant": (98, 95, 3),
+            "contexto": (230, 228, 2),
+            "lant": (99, 96, 3),
             "alchimie": (82, 79, 3),
         }
     ),
     ranking_counts=_frozen(
         {
-            "total": 638,
-            "approved": 630,
-            "pilot_eligible": 468,
+            "total": 643,
+            "approved": 635,
+            "pilot_eligible": 473,
             "by_game": _frozen(
-                {"conexiuni": 232, "contexto": 226, "lant": 98, "alchimie": 82}
+                {"conexiuni": 232, "contexto": 230, "lant": 99, "alchimie": 82}
             ),
             "eligible_by_game": _frozen(
-                {"conexiuni": 74, "contexto": 220, "lant": 95, "alchimie": 79}
+                {"conexiuni": 74, "contexto": 224, "lant": 96, "alchimie": 79}
             ),
         }
     ),
@@ -176,10 +178,21 @@ CURRENT_CONTENT = CurrentContentSnapshot(
             "starter_by_game": _frozen({"intrusul": 24, "perechi": 26}),
         }
     ),
-    contexto_approved=224,
-    contexto_eligible=220,
-    contexto_id_high_water=336,
-    projection_terms=471,
+    feedback_observations=_frozen(
+        {
+            "food_responsive": 2283,
+            "food_direct_projections": 17,
+            "family_member_rank": 2104,
+        }
+    ),
+    clatite_opener_ranks=_frozen(
+        {"făină": 2, "ou": 7, "gem": 10, "dulceață": 9,
+         "lapte": 51, "brânză": 38, "smântână": 28}
+    ),
+    contexto_approved=228,
+    contexto_eligible=224,
+    contexto_id_high_water=340,
+    projection_terms=469,
     projection_domains=26,
     legacy_feedback_proxies=71,
 )

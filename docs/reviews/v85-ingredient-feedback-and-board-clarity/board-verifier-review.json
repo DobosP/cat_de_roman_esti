@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "reviewer": "v85_ingredient_research",
+  "independent_of_board_implementation": true,
+  "reviewed_date": "2026-09-07",
+  "baseline_commit": "39b64cb",
+  "verdict": "accept",
+  "scope": {
+    "source_id": "cx_gastronomie_171",
+    "source_label_edits": 2,
+    "served_intrusul_label_edits": 1,
+    "served_intrusul_id": "vi_1535ff1ac283061d41a1",
+    "perechi_edits": 0,
+    "status_or_partition_edits": 0,
+    "new_board_count": 0,
+    "conexiuni_pilot_eligibility_changed": false
+  },
+  "checks": {
+    "actual_git_source_binding": true,
+    "candidate_policy_binding": true,
+    "exact_after_record_digest": true,
+    "only_two_pack_labels_change": true,
+    "complete_source_required_before_generator_identity_fold": true,
+    "complete_source_and_payload_required_before_runtime_id_check": true,
+    "custom_rebound_source_refused": true,
+    "duplicate_missing_mixed_stale_repeat_refused": true,
+    "rollback_verified": true,
+    "catalog_delta": "one display label among336 rows; all IDs/order/ranks/partitions/source sets and153 Perechi rows unchanged",
+    "focused_tests": {
+      "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_v85_board_label_corrections.py -q -o addopts=''",
+      "exit_code": 0,
+      "passed": 20,
+      "seconds": 5.32
+    },
+    "independent_tamper_fields_refused": [
+      "category",
+      "difficulty",
+      "title",
+      "description",
+      "id",
+      "status",
+      "groups",
+      "group_labels",
+      "order",
+      "unexpected"
+    ]
+  },
+  "limitations": [
+    "Exact wording repair only; unchanged source editorial debt remains.",
+    "Conexiuni source not currently pilot eligible.",
+    "Perechi has no served source child and no improvement is claimed.",
+    "Requires normal sidecar regeneration and full integration before release."
+  ],
+  "bindings": {
+    "docs/reviews/v85-ingredient-feedback-and-board-clarity/board-label-candidates.json": "1c8f680d95107c4238250b87d9c31509d8cd08152d0ad6fc5e5c738f09efe291",
+    "cat_de_roman_esti/wordgames/label_corrections.py": "552b4cd698115370e8f16a1ac1ed45f12c29888dc36593b3c8243fd0032b33a0",
+    "scripts/apply_pack_label_corrections.py": "c323ea955f0f14d61f7b856fb8e8cb1741d94f997e7cb9790798c4957c117db3",
+    "scripts/content_file_transaction.py": "79c9e54d501c692816238afd8aea4189bc01d7946f46c8ae840211676c4dbd82",
+    "scripts/build_derived_catalog_v38.py": "bf2584427da05b2afa3156ca750d21968ae98de222b3325d50b11a69ea269986",
+    "cat_de_roman_esti/wordgames/derived_catalog.py": "9998c1906c457649952b6fdb43a50e36650abe679036228506f8eb2e0e088ac0",
+    "tests/test_v85_board_label_corrections.py": "b250beaee9d597f5f119f9bd3895b43888f3e388bd6a8c6433945547b965925d",
+    "docs/reviews/v85-ingredient-feedback-and-board-clarity/BOARD_CLARITY_REVIEW.md": "2fd40e64b1362e56f08eed9e84856a391ed94d91c4fe7ddaaa085bb3755ba1bb",
+    "docs/reviews/v85-ingredient-feedback-and-board-clarity/BOARD_VERIFIER_REVIEW.md": "4ac6c005dfea0e2dd79ee4ddd751e69dc8385823925b22baf908de1386d0cae0"
+  }
+}

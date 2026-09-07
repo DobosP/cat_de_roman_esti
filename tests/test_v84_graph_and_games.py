@@ -22,8 +22,9 @@ from cat_de_roman_esti.wordgames import lant as L
 from cat_de_roman_esti.wordgames.contexto_projection import resolve_projection  # noqa: E402
 from cat_de_roman_esti.wordgames.packs import get_pack  # noqa: E402
 from cat_de_roman_esti.wordgames.service import get_service  # noqa: E402
-from tests.content_history import before_v84_fixture  # noqa: E402
+from tests.content_history import before_v84_fixture, before_v85_fixture  # noqa: E402
 from tests.content_scenarios import contexto_seed  # noqa: E402
+from tests.current_content import CURRENT_CONTENT  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 REVIEW = ROOT / "docs/reviews/v84-six-game-graph-quality"
@@ -141,8 +142,12 @@ def test_graph_delta_restores_the_full_v83_snapshot_and_old_surface_owners():
 
     raw = _json(FIXTURE)
     assert FIXTURE.read_bytes() == (ROOT / "tests/fixtures/kg_sample.json").read_bytes()
-    assert (len(raw["kg_nodes"]), len(raw["kg_edges"]), len(raw["kg_puzzles"])) == (2380, 9279, 180)
-    assert sum(len(node.get("aliases", [])) for node in raw["kg_nodes"]) == 8517
+    assert (len(raw["kg_nodes"]), len(raw["kg_edges"]), len(raw["kg_puzzles"])) == tuple(
+        CURRENT_CONTENT.kg_counts[key] for key in ("nodes", "edges", "puzzles")
+    )
+    assert sum(len(node.get("aliases", [])) for node in raw["kg_nodes"]) == (
+        CURRENT_CONTENT.kg_counts["aliases"]
+    )
     baseline = before_v84_fixture(raw)
     encoded = (json.dumps(baseline, ensure_ascii=False, indent=2) + "\n").encode()
     assert hashlib.sha256(encoded).hexdigest() == (
@@ -309,13 +314,30 @@ def test_specific_food_inputs_are_hot_without_changing_identity_or_revealing_ans
 @pytest.mark.parametrize(("target", "rank", "temperature"), [
     ("n_gas_sarmale", 246, "Rece"), ("n_gas_telemea", 203, "Caldut"),
 ])
-def test_yeast_no_longer_inherits_generic_food_hotness(target, rank, temperature):
+@pytest.mark.parametrize("graph_epoch", ("before_v85", "current"))
+def test_yeast_no_longer_inherits_generic_food_hotness(
+    target, rank, temperature, graph_epoch, monkeypatch,
+):
+    if graph_epoch == "before_v85":
+        from cat_de_roman_esti.graph import Graph
+        from cat_de_roman_esti.wordgames.service import WordGameService
+
+        previous = before_v85_fixture(_json(FIXTURE))
+        svc = WordGameService(Graph.from_records(previous["kg_nodes"], previous["kg_edges"]))
+        monkeypatch.setattr(C, "get_service", lambda: svc)
     client = Client()
     gid = C.store.create(C._build_session(target, "normal", None))
     try:
         body = _post(client, f"/api/wordgames/contexto/games/{gid}/guess", text="drojdie")
         assert body["guess"]["id"] == PREFIX + "drojdie"
-        assert (body["guess"]["rank"], body["guess"]["temperature"]) == (rank, temperature)
+        assert body["guess"]["temperature"] == temperature
+        assert body["guess"]["distance"] == 3
+        if graph_epoch == "before_v85":
+            assert body["guess"]["rank"] == rank
+        else:
+            # More reachable concepts can move numerical rank positions without
+            # reviving the retired broad-food association or a direct/hot claim.
+            assert body["guess"]["rank"] > 1
         assert body["ok"] and not body["won"]
         _hidden(body, target)
     finally:

@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "reviewer": "independent v85_board_clarity agent",
+  "reviewed_on": "2026-09-07",
+  "verdict": "accept",
+  "scope": "Exact one-label correction addendum; original eight concepts, 25 forms and 40 new links remain accepted and byte-equivalent at the authored record level.",
+  "module_path": "scripts/ingredient_graph_v85_data.py",
+  "module_sha256": "efdbffe1ec142c42ebdd602346819ea49e6b344a1000040f57390ec659fe9c25",
+  "original_candidate_sha256": "be8e06af36b6b0e389ef1cc879ba8be6fb2a27b6ed0c960a78f0a2dde4fddd2b",
+  "original_graph_review_sha256": "e9e5663f9d5f7c19626cecfb3e20ce154655868371e231fbdd74375b05e50b0a",
+  "correction_path": "docs/reviews/v85-ingredient-feedback-and-board-clarity/mucenici-link-correction.json",
+  "correction_sha256": "8066e18d5585ad0e9158817e77668276ae2c2bb0569ef57d7825cdd2a699140d",
+  "before": {
+    "id": "de5559",
+    "src_id": "n_v17gas_mucenici",
+    "dst_id": "n_moldova_reg",
+    "relation": "related_to",
+    "label_ro": "varianta fiartă, moldovenească",
+    "strength": 0.6,
+    "is_distractor": 0,
+    "bidirectional": 1
+  },
+  "replacement": {
+    "relation": "related_to",
+    "label_ro": "varianta coaptă, moldovenească",
+    "strength": 0.6,
+    "is_distractor": 0,
+    "bidirectional": 1,
+    "src": "n_v17gas_mucenici",
+    "dst": "n_moldova_reg"
+  },
+  "checks": {
+    "original_nodes_exact": true,
+    "original_40_edges_exact_and_ordered": true,
+    "sole_appended_edge_exact": true,
+    "sole_removal_exact_baseline_record": true,
+    "only_semantic_field_changed": "label_ro",
+    "endpoints_relation_strength_direction_distractor_flag_unchanged": true,
+    "new_concepts": 8,
+    "new_alias_forms": 25,
+    "new_links": 40,
+    "new_allowed_directions": 45,
+    "relabelled_existing_links": 1,
+    "authored_add_records": 41,
+    "authored_remove_records": 1,
+    "net_edge_growth": 40
+  },
+  "sources": [
+    {
+      "url": "https://jamilacuisine.ro/mucenici-moldovenesti-de-post-reteta-video/",
+      "evidence": "Original 2014 recipe bakes the Moldavian dough and adds syrup/honey/nuts after baking."
+    },
+    {
+      "url": "https://www.lauraadamache.ro/2011/03/mucenici-moldovenesti.html",
+      "evidence": "Original 2011 author describes Moldavian mucenici as baked and distinguishes boiled Muntenian mucenici."
+    },
+    {
+      "url": "https://jamilacuisine.ro/mucenici-muntenesti-fierti-reteta-video/",
+      "evidence": "Original 2017 boiled Muntenian recipe names the contrasting preparation and uses cinnamon."
+    }
+  ],
+  "reason": "The former label attributed the boiled preparation to Moldova. Replacing only fiartă with coaptă corrects a specific factual predicate and stays coherent with the new cinnamon edge explicitly naming the boiled variant.",
+  "limits": [
+    "A new generated edge ID is expected because the shared transaction removes the exact old record and adds its replacement. This is one relabelled relation, not a forty-first new link.",
+    "Source endpoints, relation type, strength and two already-valid directions remain unchanged; no regional association expansion is accepted.",
+    "Final regenerated artifact hashes, exact reconstruction and game integration remain root-session gates."
+  ],
+  "required_revisions": []
+}

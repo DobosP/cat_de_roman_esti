@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "reviewed_date": "2026-09-07",
+  "reviewer": "v85_board_clarity",
+  "verdict": "accept",
+  "independent_of_trusted_digest_update": true,
+  "scope": "Only the trusted generated-artifact digest changed after the separate independent board-code review. This addendum verifies that root-authored digest update and final tests; it does not claim a new independent review of the policy this worker originally implemented.",
+  "original_review_path": "docs/reviews/v85-ingredient-feedback-and-board-clarity/board-verifier-review.json",
+  "original_review_sha256": "5e581133393b6422795998c76248abbc7c6f563f77cfe0a2a7d74ea340e1d364",
+  "runtime_path": "cat_de_roman_esti/wordgames/derived_catalog.py",
+  "original_runtime_sha256": "9998c1906c457649952b6fdb43a50e36650abe679036228506f8eb2e0e088ac0",
+  "final_runtime_sha256": "7bfd51090554372bf72008f8029580665237d88712085cc8594f0f3e3d24bb34",
+  "proof": "Substituting only the 64-character DEFAULT_DERIVED_CATALOG_SHA256 literal back to its prior value exactly reproduces the independently reviewed runtime file SHA-256. No other byte differs.",
+  "old_trusted_artifact_sha256": "579128d90d34a57a093202e54babe76b1ceb6840a36e332c9ecc540a8fb5251a",
+  "final_trusted_artifact_sha256": "66f4aebe9d64f638cfc8d48d51692b27a0f846d56e072a9a028a33b72d6e1ec7",
+  "artifact_mirrors_identical": true,
+  "all_other_reviewed_policy_builder_transaction_sources_exact": true,
+  "validation": {
+    "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_v85_ingredient_graph.py tests/test_v85_board_label_corrections.py -q -o addopts=''",
+    "exit_code": 0,
+    "passed": 77,
+    "seconds": 12.24,
+    "ingredient_and_public_cases": 57,
+    "board_cases": 20,
+    "log_path": "/home/dobo/work/_temp/feat__v85-ingredient-feedback-and-board-clarity/boards/final-focused.log",
+    "log_sha256": "6e921439ce6616bb7ea72a030e3b59e00a78b6b69432f8a2797d6a41252beff8",
+    "test_sources": {
+      "tests/test_v85_ingredient_graph.py": "63305faab3a543854fc8ba1adb7de6cb8642e001d1dcf4a2b39ba1f3886cd05e",
+      "tests/test_v85_board_label_corrections.py": "b1bd70e02660a50089df9a03a6737bfa374570716fbcd964c46e8cc23e8bcdda"
+    },
+    "artifact_bindings": {
+      "cat_de_roman_esti/fixtures/kg_sample.json": "b7d28b990d37164d8e41a93965a5824162ded56b2907ac03388fee717eb144b2",
+      "cat_de_roman_esti/fixtures/games_pack.json": "835937cc369918a0070a8d09a35f3982f21f74275476f061aa6c05242d270b4d",
+      "cat_de_roman_esti/fixtures/board_rankings_v37.json": "21ff49faabb631e2a62cd07e15a6f1de69b7cb9ad04f900344771b7fefeeac0b",
+      "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "66f4aebe9d64f638cfc8d48d51692b27a0f846d56e072a9a028a33b72d6e1ec7",
+      "docs/reviews/v85-ingredient-feedback-and-board-clarity/artifact-delta.json": "a8c4597003bc81b59ccd3a18ddb34a68a4c92ab828ab702add810e5a0b9f6558"
+    }
+  },
+  "required_revisions": [],
+  "remaining_gate": "Full release matrix is the root session responsibility; no further source or test edits are needed for this lane."
+}

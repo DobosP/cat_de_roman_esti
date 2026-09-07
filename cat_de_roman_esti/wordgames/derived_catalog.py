@@ -18,6 +18,7 @@ from pathlib import Path
 from types import MappingProxyType
 
 from ..data import DEFAULT_FIXTURE
+from .label_corrections import correction_sources, identity_payload
 from .packs import (
     DEFAULT_PACK,
     DEFAULT_RANKINGS,
@@ -37,7 +38,7 @@ MAX_VARIANTS_PER_SOURCE = 3
 _PREFERRED_STANDARD_SCORE = 55
 # Updated only with a reviewed, generator-produced bundled artifact.
 DEFAULT_DERIVED_CATALOG_SHA256 = (
-    "579128d90d34a57a093202e54babe76b1ceb6840a36e332c9ecc540a8fb5251a"
+    "66f4aebe9d64f638cfc8d48d51692b27a0f846d56e072a9a028a33b72d6e1ec7"
 )
 
 _META_FIELDS = {
@@ -329,6 +330,7 @@ class DerivedCatalog:
 
 
 def _candidate_id(game: str, source_id: str, payload: dict) -> str:
+    payload = identity_payload(game, source_id, payload)
     canonical = json.dumps(
         {"game": game, "source_id": source_id, "payload": payload},
         ensure_ascii=False,
@@ -536,6 +538,7 @@ def load_derived_catalog(
         raise ValueError("derived catalog: counts must be non-negative integers")
 
     pack = json.loads(DEFAULT_PACK.read_text(encoding="utf-8"))
+    correction_sources(pack)
     sources = {str(rec["id"]): rec for rec in pack["conexiuni"]}
     # The catalog is a frozen artifact whose sources were pilot-eligible at freeze time
     # (V38 snapshot; ADR-0054). Live eligibility churn — ADR-0065 additions or ADR-0066

@@ -1,0 +1,86 @@
+{
+ "id": "ct_gastronomie_339",
+ "game": "contexto",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "01b8d70813d13eae9536cdcb10563017515f4f710313d5fd48c8a77d0636f73f",
+ "kg_sha256": "b7d28b990d37164d8e41a93965a5824162ded56b2907ac03388fee717eb144b2",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Halva salience 0.50 < 0.60 (usor floor)"
+  }
+ ],
+ "target": {
+  "id": "n_v21gas_halva",
+  "label": "Halva",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.5,
+  "degree": 3,
+  "incoming_degree": 5,
+  "description": "Dulce dens din semințe de floarea-soarelui sau susan, popular în perioadele de post și rămas un gust al copilăriei. Se găsește de la tarabele din piețe până la supermarketuri."
+ },
+ "reachable": 2312,
+ "strong_neighbors": [
+  {
+   "id": "n_v85_food_cacao",
+   "label": "Cacao",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.85,
+   "degree": 6,
+   "incoming_degree": 0,
+   "description": "Pudră alimentară obținută din boabe de cacao, folosită în deserturi și băuturi.",
+   "strength": 0.8
+  },
+  {
+   "id": "n_v85_food_seminte_floarea_soarelui",
+   "label": "Semințe de floarea-soarelui",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.85,
+   "degree": 4,
+   "incoming_degree": 0,
+   "description": "Semințe cu miez comestibil, folosite pentru ulei, halva și alte preparate.",
+   "strength": 0.8
+  },
+  {
+   "id": "n_v17gas_mancare_de_post",
+   "label": "Mâncare de post",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.7,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Preparate gătite fără carne, ouă sau lactate în perioadele de post ortodox. Restaurantele și magazinele oferă astăzi meniuri și produse marcate „de post”.",
+   "strength": 0.75
+  },
+  {
+   "id": "n_v4gas_dulce",
+   "label": "Dulce",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.7333,
+   "degree": 8,
+   "incoming_degree": 8,
+   "description": "Preparat sau gust cu zahăr, asociat mai ales deserturilor.",
+   "strength": 0.75
+  },
+  {
+   "id": "n_gas_baclava_dobrogeana",
+   "label": "Baclava dobrogeană",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.5193,
+   "degree": 11,
+   "incoming_degree": 12,
+   "description": "Desert cu foi, nucă și sirop, intrat firesc în peisajul culinar dobrogean.",
+   "strength": 0.7
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:16c82c1883a949c3b1955338e540fe67e28432d98f6c32b0c0428bf30b0ac151"
+}

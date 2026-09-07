@@ -1,0 +1,108 @@
+{
+ "id": "ct_gastronomie_338",
+ "game": "contexto",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "078a83f4370399b387715c05073216d84d68eb1330fd9c6d2570e11720baae6f",
+ "kg_sha256": "b7d28b990d37164d8e41a93965a5824162ded56b2907ac03388fee717eb144b2",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Amandină salience 0.56 < 0.60 (usor floor)"
+  }
+ ],
+ "target": {
+  "id": "n_v18gas_amandina",
+  "label": "Amandină",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.56,
+  "degree": 5,
+  "incoming_degree": 7,
+  "description": "Prăjitură clasică de cofetărie românească: blat de cacao însiropat, cremă de ciocolată și glazură de fondant. Reper al cofetăriilor de cartier de zeci de ani."
+ },
+ "reachable": 2312,
+ "strong_neighbors": [
+  {
+   "id": "n_v4gas_prajitura",
+   "label": "Prăjitură",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.67,
+   "degree": 12,
+   "incoming_degree": 12,
+   "description": "Preparat dulce copt sau asamblat, servit ca desert.",
+   "strength": 0.9
+  },
+  {
+   "id": "n_v21gas_ecler",
+   "label": "Ecler",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.55,
+   "degree": 3,
+   "incoming_degree": 5,
+   "description": "Prăjitură de cofetărie din aluat opărit, umplută cu cremă de vanilie și glazurată cu ciocolată sau fondant. Un clasic al cofetăriilor românești, cerut și astăzi la felie cu amandina și savarina.",
+   "strength": 0.85
+  },
+  {
+   "id": "n_v21gas_savarina",
+   "label": "Savarină",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.55,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Prăjitură clasică de cofetărie: aluat bine însiropat, glazură și mult frișcă deasupra. Face parte din trioul nostalgic al cofetăriilor românești, alături de amandină și ecler.",
+   "strength": 0.85
+  },
+  {
+   "id": "n_v85_food_cacao",
+   "label": "Cacao",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.85,
+   "degree": 6,
+   "incoming_degree": 0,
+   "description": "Pudră alimentară obținută din boabe de cacao, folosită în deserturi și băuturi.",
+   "strength": 0.8
+  },
+  {
+   "id": "n_v85_food_ciocolata",
+   "label": "Ciocolată",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.9,
+   "degree": 5,
+   "incoming_degree": 2,
+   "description": "Produs dulce pe bază de cacao, consumat ca atare sau folosit la deserturi.",
+   "strength": 0.8
+  },
+  {
+   "id": "n_v2gas_desert",
+   "label": "Desert",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.8464,
+   "degree": 24,
+   "incoming_degree": 24,
+   "description": "Fel dulce servit la finalul mesei sau la sărbători.",
+   "strength": 0.75
+  },
+  {
+   "id": "n_v11gas_joffre",
+   "label": "Joffre",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.44,
+   "degree": 4,
+   "incoming_degree": 3,
+   "description": "Prăjitură de ciocolată legată de tradiția cofetăriei Capșa.",
+   "strength": 0.7
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:3db3ba1f34cfcf4468440b66bc3a62b48e689d4f493e6b434d5e349c6eb40ec6"
+}

@@ -1,0 +1,867 @@
+{
+  "schema": 1,
+  "status": "proposal_requires_independent_review_before_apply",
+  "baseline_commit": "39b64cb",
+  "baseline_fixture_sha256": "3fb0f97c5b4c813eb72d8fd3589c4ce92f724d0565db840c1bc3909458a60ab0",
+  "nodes": [
+    {
+      "id": "n_v85_food_scortisoara",
+      "label_ro": "Scorțișoară",
+      "category": "gastronomie",
+      "description": "Condiment din scoarță aromată, folosit la plăcinta cu mere și la alte deserturi.",
+      "aliases": [
+        "scorțișoarei",
+        "scorțișoară măcinată",
+        "batoane de scorțișoară"
+      ],
+      "node_type": "concept",
+      "salience": 0.8
+    },
+    {
+      "id": "n_v85_food_cacao",
+      "label_ro": "Cacao",
+      "category": "gastronomie",
+      "description": "Pudră alimentară obținută din boabe de cacao, folosită în deserturi și băuturi.",
+      "aliases": [
+        "cacaua",
+        "cacauei",
+        "pudră de cacao"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    },
+    {
+      "id": "n_v85_food_vanilie",
+      "label_ro": "Vanilie",
+      "category": "gastronomie",
+      "description": "Ingredient aromat din păstăile de vanilie, folosit la creme și alte deserturi.",
+      "aliases": [
+        "vanilia",
+        "vaniliei",
+        "păstaie de vanilie"
+      ],
+      "node_type": "concept",
+      "salience": 0.8
+    },
+    {
+      "id": "n_v85_food_ciocolata",
+      "label_ro": "Ciocolată",
+      "category": "gastronomie",
+      "description": "Produs dulce pe bază de cacao, consumat ca atare sau folosit la deserturi.",
+      "aliases": [
+        "ciocolate",
+        "ciocolatei",
+        "ciocolată de menaj"
+      ],
+      "node_type": "concept",
+      "salience": 0.9
+    },
+    {
+      "id": "n_v85_food_stafide",
+      "label_ro": "Stafide",
+      "category": "gastronomie",
+      "description": "Boabe de struguri uscate, folosite și în umpluturi dulci.",
+      "aliases": [
+        "stafidă",
+        "stafidele",
+        "stafidelor"
+      ],
+      "node_type": "concept",
+      "salience": 0.8
+    },
+    {
+      "id": "n_v85_food_migdale",
+      "label_ro": "Migdale",
+      "category": "gastronomie",
+      "description": "Miezuri comestibile de migdal dulce, folosite ca gustare și în patiserie.",
+      "aliases": [
+        "migdală",
+        "migdalele",
+        "migdalelor",
+        "migdale dulci"
+      ],
+      "node_type": "concept",
+      "salience": 0.75
+    },
+    {
+      "id": "n_v85_food_alune_padure",
+      "label_ro": "Alune de pădure",
+      "category": "gastronomie",
+      "description": "Fructe cu coajă lemnoasă și miez comestibil, distincte de arahide.",
+      "aliases": [
+        "alună de pădure",
+        "alunele de pădure",
+        "alunelor de pădure"
+      ],
+      "node_type": "concept",
+      "salience": 0.75
+    },
+    {
+      "id": "n_v85_food_seminte_floarea_soarelui",
+      "label_ro": "Semințe de floarea-soarelui",
+      "category": "gastronomie",
+      "description": "Semințe cu miez comestibil, folosite pentru ulei, halva și alte preparate.",
+      "aliases": [
+        "semințele de floarea-soarelui",
+        "semințelor de floarea-soarelui",
+        "sămânță de floarea-soarelui"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    }
+  ],
+  "edges": [
+    {
+      "src": "n_v85_food_scortisoara",
+      "dst": "n_v42gas_placinta_mere",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează umpluturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_scortisoara",
+      "dst": "n_v21gas_turta_dulce",
+      "relation": "ingredient_variant",
+      "label_ro": "mirodenie în rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_scortisoara",
+      "dst": "n_v17gas_mucenici",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează varianta fiartă de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_scortisoara",
+      "dst": "n_v4gas_condiment",
+      "relation": "instance_of",
+      "label_ro": "este un",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_cacao",
+      "dst": "n_v18gas_salam_de_biscuiti",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_cacao",
+      "dst": "n_v18gas_amandina",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru blat și cremă de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_cacao",
+      "dst": "n_gas_cozonac",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient în umpluturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_cacao",
+      "dst": "n_v21gas_halva",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_cacao",
+      "dst": "n_v85_food_ciocolata",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient în unele rețete de casă de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_cacao",
+      "dst": "n_v3gas_inghetata",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_vanilie",
+      "dst": "n_v21gas_ecler",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează crema din",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_vanilie",
+      "dst": "n_v3gas_inghetata",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_vanilie",
+      "dst": "n_v3gas_clatite",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează unele aluaturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_vanilie",
+      "dst": "n_v17gas_pasca",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_vanilie",
+      "dst": "n_gas_placinte_poale_brau",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează umpluturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_vanilie",
+      "dst": "n_gas_cozonac",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_ciocolata",
+      "dst": "n_v18gas_amandina",
+      "relation": "ingredient_variant",
+      "label_ro": "folosită în unele glazuri pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_ciocolata",
+      "dst": "n_v21gas_ecler",
+      "relation": "ingredient_variant",
+      "label_ro": "folosită în unele creme pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_ciocolata",
+      "dst": "n_v18gas_salam_de_biscuiti",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient în unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_ciocolata",
+      "dst": "n_v3gas_clatite",
+      "relation": "ingredient_variant",
+      "label_ro": "folosită în unele umpluturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_ciocolata",
+      "dst": "n_gas_cozonac",
+      "relation": "ingredient_variant",
+      "label_ro": "folosită în unele umpluturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_food_small_fruit_strugure",
+      "dst": "n_v85_food_stafide",
+      "relation": "processed_into",
+      "label_ro": "boabele sale se usucă pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_stafide",
+      "dst": "n_v17gas_pasca",
+      "relation": "ingredient_variant",
+      "label_ro": "intră în umpluturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_stafide",
+      "dst": "n_gas_placinte_poale_brau",
+      "relation": "ingredient_variant",
+      "label_ro": "intră în umpluturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_stafide",
+      "dst": "n_gas_cozonac",
+      "relation": "ingredient_variant",
+      "label_ro": "intră în unele umpluturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_stafide",
+      "dst": "n_v18gas_salam_de_biscuiti",
+      "relation": "ingredient_variant",
+      "label_ro": "se adaugă în unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_migdale",
+      "dst": "n_v85_food_alune_padure",
+      "relation": "same_category",
+      "label_ro": "fructe cu coajă lemnoasă comestibile",
+      "bidirectional": 1,
+      "is_distractor": 0,
+      "strength": 0.7
+    },
+    {
+      "src": "n_v85_food_migdale",
+      "dst": "n_v81_food_pantry_nuca",
+      "relation": "same_category",
+      "label_ro": "fructe cu coajă lemnoasă comestibile",
+      "bidirectional": 1,
+      "is_distractor": 0,
+      "strength": 0.7
+    },
+    {
+      "src": "n_v85_food_migdale",
+      "dst": "n_v18gas_fistic",
+      "relation": "same_category",
+      "label_ro": "fructe cu coajă lemnoasă comestibile",
+      "bidirectional": 1,
+      "is_distractor": 0,
+      "strength": 0.7
+    },
+    {
+      "src": "n_v85_food_alune_padure",
+      "dst": "n_v81_food_pantry_nuca",
+      "relation": "same_category",
+      "label_ro": "fructe cu coajă lemnoasă comestibile",
+      "bidirectional": 1,
+      "is_distractor": 0,
+      "strength": 0.7
+    },
+    {
+      "src": "n_v85_food_alune_padure",
+      "dst": "n_v18gas_fistic",
+      "relation": "same_category",
+      "label_ro": "fructe cu coajă lemnoasă comestibile",
+      "bidirectional": 1,
+      "is_distractor": 0,
+      "strength": 0.7
+    },
+    {
+      "src": "n_v85_food_migdale",
+      "dst": "n_v24_food_snack_biscuit",
+      "relation": "ingredient_variant",
+      "label_ro": "folosite în unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_migdale",
+      "dst": "n_v21gas_cornulete",
+      "relation": "ingredient_variant",
+      "label_ro": "folosite în unele aluaturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_alune_padure",
+      "dst": "n_v24_food_snack_biscuit",
+      "relation": "ingredient_variant",
+      "label_ro": "folosite în unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_alune_padure",
+      "dst": "n_v85_food_ciocolata",
+      "relation": "ingredient_variant",
+      "label_ro": "miez adăugat în unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_seminte_floarea_soarelui",
+      "dst": "n_v21gas_halva",
+      "relation": "raw_material_for",
+      "label_ro": "miez măcinat pentru unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_seminte_floarea_soarelui",
+      "dst": "n_v24_food_pantry_ulei",
+      "relation": "processed_into",
+      "label_ro": "se presează pentru unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_seminte_floarea_soarelui",
+      "dst": "n_v4gas_paine",
+      "relation": "ingredient_variant",
+      "label_ro": "se adaugă în unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_seminte_floarea_soarelui",
+      "dst": "n_v3gas_salata",
+      "relation": "ingredient_variant",
+      "label_ro": "miez presărat în unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_food_breakfast_unt",
+      "dst": "n_v42gas_placinta_mere",
+      "relation": "ingredient_variant",
+      "label_ro": "folosit în unele foi pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    }
+  ],
+  "remove_edges": [],
+  "sources": {
+    "cinnamon_definition": {
+      "url": "https://www.kamis.ro/produse/produse-gastro/produse-gastro/scortisoara-gastro",
+      "evidence": "Manufacturer identifies cinnamon as bark-derived spice; only that definition is used."
+    },
+    "apple_pie": {
+      "url": "https://jamilacuisine.ro/placinta-cu-mere-reteta-video/",
+      "evidence": "Recipe lists cinnamon in apple filling and butter in its pastry. Both are recipe associations, not universal requirements."
+    },
+    "gingerbread": {
+      "url": "https://www.oetker.ro/produsele/p/mix-pentru-turta-dulce",
+      "evidence": "Manufacturer gingerbread ingredient list explicitly includes cinnamon."
+    },
+    "mucenici": {
+      "url": "https://jamilacuisine.ro/mucenici-muntenesti-fierti-reteta-video/",
+      "evidence": "Recipe for boiled Muntenian variant uses cinnamon sticks and a vanilla pod. Label must name the boiled variant."
+    },
+    "biscuit_salami": {
+      "url": "https://jamilacuisine.ro/salam-de-biscuiti-facut-in-casa-reteta-video/",
+      "evidence": "Recipe directly lists cocoa and raisins for biscuit salami; chilled assembly does not bake the assembled dessert."
+    },
+    "amandina": {
+      "url": "https://jamilacuisine.ro/prajitura-amandina-amandine-facute-in-casa/",
+      "evidence": "Cocoa is used in sponge and cream; bitter chocolate is used in the illustrated glaze variant."
+    },
+    "cozonac": {
+      "url": "https://jamilacuisine.ro/cozonac-cu-aluat-oparit-cozonaci-babani-si-pufosi-reteta-video/",
+      "evidence": "The named cozonac recipe uses vanilla paste, cocoa and raisins; filling variants are explicitly allowed."
+    },
+    "halva": {
+      "url": "https://feleacul.ro/produse/halva",
+      "evidence": "Manufacturer lists sunflower seeds in classic and cocoa halva, and cocoa only in its cocoa variant."
+    },
+    "cocoa_forms": {
+      "url": "https://dexonline.ro/definitie/cacao",
+      "evidence": "DOOM3 gives articulated cacaua; displayed paradigm gives cacauei. Powder and drink senses are related but not identical."
+    },
+    "chocolate_home": {
+      "url": "https://www.roberteisler.ro/retete/ciocolata-de-casa-1",
+      "evidence": "Chef recipe uses cocoa powder in homemade chocolate and roasted hazelnuts as optional topping; does not prove all commercial chocolate contains cocoa powder."
+    },
+    "eclairs": {
+      "url": "https://jamilacuisine.ro/eclere-pas-cu-pas-reteta-video/",
+      "evidence": "Recipe uses a vanilla pod in cream and explicitly offers grated-chocolate cream as a variant."
+    },
+    "ice_cream": {
+      "url": "https://jamilacuisine.ro/inghetata-de-vanilie-reteta-video/",
+      "evidence": "Base uses vanilla pods; the author explicitly says cocoa can flavor that base for chocolate ice cream."
+    },
+    "crepes": {
+      "url": "https://jamilacuisine.ro/clatite-clasice-frantuzesti-pufoase-si-delicioase-reteta-video/",
+      "evidence": "Recipe has vanilla paste or essence in the batter and offers chocolate filling as a choice."
+    },
+    "pasca": {
+      "url": "https://jamilacuisine.ro/pasca-cu-aluat-de-cozonac-reteta-video/",
+      "evidence": "Recipe has raisins in sweet-cheese filling and vanilla in dough/filling."
+    },
+    "poale": {
+      "url": "https://jamilacuisine.ro/poale-n-brau-pas-cu-pas-reteta-video/",
+      "evidence": "Sweet-cheese filling includes raisins and vanilla pod. No claim that telemea belongs in this filling."
+    },
+    "chocolate_biscuit_salami": {
+      "url": "https://desertdecasa.ro/salam-de-biscuiti/",
+      "evidence": "Maria Popa recipe lists chocolate as an ingredient in this biscuit-salami variant."
+    },
+    "chocolate_cozonac": {
+      "url": "https://jamilacuisine.ro/cozonac-pufos-cu-ciocolata-si-fistic-reteta-video/",
+      "evidence": "Recipe has chocolate filling as a chosen cozonac variant."
+    },
+    "raisin_definition": {
+      "url": "https://dexonline.ro/definitie/stafid%C4%83/846038",
+      "evidence": "DEX2009 identifies raisins as dried grapes; not a synonym for fresh grapes."
+    },
+    "nut_category": {
+      "url": "https://eur-lex.europa.eu/eli/reg/2011/1169/2013-12-06/ron/pdf",
+      "evidence": "Annex II item8 groups almonds, hazelnuts, walnuts and pistachios as culinary tree nuts. Used as lexical food grouping, not botanical family or health advice."
+    },
+    "almond_biscuit": {
+      "url": "https://www.bucataras.ro/retete/biscuiti-cu-migdale-63417.html",
+      "evidence": "Named author Oana recipe places actual almond flakes on biscuits; almond essence alone would not establish the proposed link."
+    },
+    "almond_crescent": {
+      "url": "https://teoskitchen.ro/2017/09/cornulete-cu-migdale.html",
+      "evidence": "Teo recipe contains ground almonds and vanilla pod in crescent cookies; nuts may vary. This is a variant, not all cornulete."
+    },
+    "hazelnut_biscuit": {
+      "url": "https://www.pakmaya.ro/reteta/biscuiti-cu-alune-de-padure",
+      "evidence": "Manufacturer recipe explicitly places a hazelnut in each biscuit."
+    },
+    "sunflower_oil": {
+      "url": "https://sanovita.ro/blog/de-ce-folosesti-ulei-presat-la-rece-in-bucataria-ta/",
+      "evidence": "Producer describes sunflower-seed oil as extracted from seeds. Only production origin is used; unrelated nutritional claims are excluded."
+    },
+    "sunflower_bread": {
+      "url": "https://savoriurbane.com/paine-neagra-cu-seminte-diana/",
+      "evidence": "Recipe adds sunflower seeds to black bread dough; variant claim only."
+    },
+    "sunflower_salad": {
+      "url": "https://sanovita.ro/blog/salata-vitality-cu-telina-si-seminte/",
+      "evidence": "Producer recipe scatters sunflower seeds over vegetable salad; variant claim only."
+    }
+  },
+  "edge_source_bindings": [
+    {
+      "edge_index": 0,
+      "sources": [
+        "apple_pie"
+      ]
+    },
+    {
+      "edge_index": 1,
+      "sources": [
+        "gingerbread"
+      ]
+    },
+    {
+      "edge_index": 2,
+      "sources": [
+        "mucenici"
+      ]
+    },
+    {
+      "edge_index": 3,
+      "sources": [
+        "cinnamon_definition"
+      ]
+    },
+    {
+      "edge_index": 4,
+      "sources": [
+        "biscuit_salami"
+      ]
+    },
+    {
+      "edge_index": 5,
+      "sources": [
+        "amandina"
+      ]
+    },
+    {
+      "edge_index": 6,
+      "sources": [
+        "cozonac"
+      ]
+    },
+    {
+      "edge_index": 7,
+      "sources": [
+        "halva"
+      ]
+    },
+    {
+      "edge_index": 8,
+      "sources": [
+        "chocolate_home"
+      ]
+    },
+    {
+      "edge_index": 9,
+      "sources": [
+        "ice_cream"
+      ]
+    },
+    {
+      "edge_index": 10,
+      "sources": [
+        "eclairs"
+      ]
+    },
+    {
+      "edge_index": 11,
+      "sources": [
+        "ice_cream"
+      ]
+    },
+    {
+      "edge_index": 12,
+      "sources": [
+        "crepes"
+      ]
+    },
+    {
+      "edge_index": 13,
+      "sources": [
+        "pasca"
+      ]
+    },
+    {
+      "edge_index": 14,
+      "sources": [
+        "poale"
+      ]
+    },
+    {
+      "edge_index": 15,
+      "sources": [
+        "cozonac"
+      ]
+    },
+    {
+      "edge_index": 16,
+      "sources": [
+        "amandina"
+      ]
+    },
+    {
+      "edge_index": 17,
+      "sources": [
+        "eclairs"
+      ]
+    },
+    {
+      "edge_index": 18,
+      "sources": [
+        "chocolate_biscuit_salami"
+      ]
+    },
+    {
+      "edge_index": 19,
+      "sources": [
+        "crepes"
+      ]
+    },
+    {
+      "edge_index": 20,
+      "sources": [
+        "chocolate_cozonac"
+      ]
+    },
+    {
+      "edge_index": 21,
+      "sources": [
+        "raisin_definition"
+      ]
+    },
+    {
+      "edge_index": 22,
+      "sources": [
+        "pasca"
+      ]
+    },
+    {
+      "edge_index": 23,
+      "sources": [
+        "poale"
+      ]
+    },
+    {
+      "edge_index": 24,
+      "sources": [
+        "cozonac"
+      ]
+    },
+    {
+      "edge_index": 25,
+      "sources": [
+        "biscuit_salami"
+      ]
+    },
+    {
+      "edge_index": 26,
+      "sources": [
+        "nut_category"
+      ]
+    },
+    {
+      "edge_index": 27,
+      "sources": [
+        "nut_category"
+      ]
+    },
+    {
+      "edge_index": 28,
+      "sources": [
+        "nut_category"
+      ]
+    },
+    {
+      "edge_index": 29,
+      "sources": [
+        "nut_category"
+      ]
+    },
+    {
+      "edge_index": 30,
+      "sources": [
+        "nut_category"
+      ]
+    },
+    {
+      "edge_index": 31,
+      "sources": [
+        "almond_biscuit"
+      ]
+    },
+    {
+      "edge_index": 32,
+      "sources": [
+        "almond_crescent"
+      ]
+    },
+    {
+      "edge_index": 33,
+      "sources": [
+        "hazelnut_biscuit"
+      ]
+    },
+    {
+      "edge_index": 34,
+      "sources": [
+        "chocolate_home"
+      ]
+    },
+    {
+      "edge_index": 35,
+      "sources": [
+        "halva"
+      ]
+    },
+    {
+      "edge_index": 36,
+      "sources": [
+        "sunflower_oil"
+      ]
+    },
+    {
+      "edge_index": 37,
+      "sources": [
+        "sunflower_bread"
+      ]
+    },
+    {
+      "edge_index": 38,
+      "sources": [
+        "sunflower_salad"
+      ]
+    },
+    {
+      "edge_index": 39,
+      "sources": [
+        "apple_pie"
+      ]
+    }
+  ],
+  "candidate_summary": {
+    "new_concepts": 8,
+    "new_alias_forms": 25,
+    "new_edges": 40,
+    "allowed_directions": 45,
+    "old_nodes_checked": 2380,
+    "old_authored_surfaces": 10897,
+    "old_normalized_surface_keys": 10894,
+    "duplicate_alias_collisions": [],
+    "new_incident_neighbors": {
+      "Scorțișoară": 4,
+      "Cacao": 6,
+      "Vanilie": 6,
+      "Ciocolată": 7,
+      "Stafide": 5,
+      "Migdale": 5,
+      "Alune de pădure": 5,
+      "Semințe de floarea-soarelui": 4
+    }
+  },
+  "projection_retirements": [
+    "scorțișoară",
+    "cacao"
+  ],
+  "preserve_projection_surfaces": [
+    "alună",
+    "floarea-soarelui",
+    "cappuccino",
+    "espresso",
+    "cafea cu lapte",
+    "ciocolată caldă"
+  ],
+  "deferred": [
+    "Semințe de mac",
+    "Susan alimentar",
+    "Praf de copt"
+  ],
+  "limits": [
+    "Native source nodes are not automatically suitable hidden targets.",
+    "All recipe edges preserve ingredient-to-dish direction, except the five explicit culinary category pairs.",
+    "No broad food or dessert hub links are added.",
+    "Only exact recipe variant claims are made; not every preparation includes these ingredients.",
+    "New nodes and links alone do not automatically improve frozen Intrusul/Perechi boards.",
+    "No unrelated existing edge has yet been identified as false enough to remove.",
+    "No generic chocolate brand ownership or alcohol-related value is added.",
+    "Recipe and manufacturer sourcing is not proof of player enjoyment."
+  ]
+}

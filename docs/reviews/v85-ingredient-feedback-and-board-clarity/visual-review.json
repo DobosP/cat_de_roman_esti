@@ -1,0 +1,33 @@
+{
+  "date": "2026-09-08",
+  "result": "passed",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "surface": "local built SPA in desktop Chromium mobile viewport emulation",
+  "public_create": {
+    "seed": 1,
+    "category": "gastronomie",
+    "difficulty": "normal",
+    "starter": false,
+    "expected_label": "Produse lactate"
+  },
+  "actions": [
+    "Create the seed-1 gastronomie normal Intrusul game through the public endpoint",
+    "Choose Urdă incorrectly",
+    "Request Arată indiciul",
+    "Inspect the screenshot and check horizontal overflow"
+  ],
+  "observations": [
+    "The visible clue is Trei țin de Produse lactate.",
+    "Urdă remains marked as belonging to the group, with two attempts left.",
+    "The board and hint fit the 390-pixel viewport with no horizontal overflow."
+  ],
+  "screenshot": "screenshots/intrusul-dairy-mobile.png",
+  "screenshot_sha256": "ab2a77f34e59d4802c9d8b7ccfb490bac7cb898912549351230ca9147fc73a8c",
+  "local_server_stopped": true,
+  "limitations": [
+    "Desktop browser emulation only; no human playtest or real-device acceptance."
+  ]
+}

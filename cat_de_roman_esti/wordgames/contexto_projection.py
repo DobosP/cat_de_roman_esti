@@ -852,6 +852,8 @@ _EXISTING_KG_SURFACES = frozenset(
         "dulceață",
         "nucă",
         "drojdie",
+        "scorțișoară",
+        "cacao",
         "compot",
         "interfon",
         "tricou",
@@ -932,6 +934,17 @@ _EXISTING_KG_SURFACES = frozenset(
         "fitness",
         "box",
     )
+)
+
+
+# Exact reviewed migrations retain vocabulary coverage without retaining a synthetic
+# approximation. Tuples are (surface, original audited domain, native concept ID).
+# This is audit metadata only: it neither resolves inputs nor creates scoring proxies.
+NATIVE_PROJECTION_REPLACEMENTS: tuple[tuple[str, str, str], ...] = (
+    ("nucă", "ingrediente", "n_v81_food_pantry_nuca"),
+    ("drojdie", "ingrediente", "n_v84_food_drojdie"),
+    ("scorțișoară", "ingrediente", "n_v85_food_scortisoara"),
+    ("cacao", "băuturi", "n_v85_food_cacao"),
 )
 
 

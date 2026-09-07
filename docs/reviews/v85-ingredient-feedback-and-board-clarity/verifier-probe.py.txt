@@ -1,0 +1,65 @@
+import dataclasses, hashlib, json, os, sys
+from pathlib import Path
+root=Path(sys.argv[1]);out=Path(sys.argv[2]);dossier_dir=Path(sys.argv[3]);sys.path.insert(0,str(root))
+os.environ['DJANGO_SETTINGS_MODULE']='cat_de_roman_esti.web.settings';os.environ['CAT_ACCOUNTS_ENABLED']='0';os.environ['ROEDU_API_URL']='';os.environ['ROEDU_API_KEY']=''
+import django
+django.setup()
+from django.test import Client
+from cat_de_roman_esti.wordgames import contexto as C,lant as L
+from cat_de_roman_esti.wordgames.service import get_service
+svc=get_service();client=Client()
+dossiers={p.stem:json.loads(p.read_bytes()) for p in sorted(dossier_dir.glob('*.json'))}
+result={'role':'independent verifier','kg_sha256':hashlib.sha256((root/'cat_de_roman_esti/fixtures/kg_sample.json').read_bytes()).hexdigest(),'contexto':{},'lant':{}}
+
+def post(url,payload=None):
+ r=client.post(url,payload or {},content_type='application/json');assert r.status_code==200,(url,r.status_code,r.content[:100]);return r.json()
+
+def hidden(body,target):
+ assert 'target' not in body and 'solution' not in body and 'anchor_id' not in str(body)
+ assert target not in str(body) and svc.label(target).casefold() not in str(body).casefold()
+
+for key,d in dossiers.items():
+ assert d['kg_sha256']==result['kg_sha256'],(key,d['kg_sha256'],result['kg_sha256'])
+ if d['game']!='contexto':continue
+ target=d['target']['id'];template=C._build_session(target,'usor',None,category='gastronomie')
+ words=list(dict.fromkeys([n['label'] for n in d['strong_neighbors']]+['desert','dulce','vanilie','cacao','lapte','unt','făină','pâine','drojdie','cuptor de bucătărie','scorțișoară','sarmale','stilou','frigider','rece']))
+ observed={}
+ for word in words:
+  gid=C.store.create(dataclasses.replace(template,guesses={},order=[]));url=f'/api/wordgames/contexto/games/{gid}'
+  try:
+   b=post(url+'/guess',{'text':word});hidden(b,target)
+   observed[word]={'ok':b['ok'],'won':b['won'],'needs_confirmation':b.get('needs_confirmation',False),'guess':b.get('guess')}
+   assert not b['won']
+  finally:C.store.delete(gid)
+ journeys=[]
+ for iteration in range(2):
+  gid=C.store.create(C._build_session(target,'usor',None,category='gastronomie'));url=f'/api/wordgames/contexto/games/{gid}'
+  try:
+   hidden(client.get(url).json(),target)
+   for word in ['fotbal','stilou','curcubeu']:
+    b=post(url+'/guess',{'text':word});hidden(b,target);assert b['ok'] and not b['won']
+   clue=post(url+'/clue');hidden(clue,target)
+   guess=post(url+'/guess',{'text':clue['word']['label']});hidden(guess,target);assert guess['ok'] and not guess['won']
+   repeat=post(url+'/guess',{'text':clue['word']['label'].upper()});assert repeat['attempts']==guess['attempts'] and repeat['feedback']['kind']=='repeat'
+   assert client.get(url).json()['guesses']==repeat['guesses']
+   win=post(url+'/guess',{'text':svc.label(target)});assert win['won'] and win['guess']['rank']==1 and client.get(url).json()['won']
+   journeys.append({'clue':clue['word']['label'],'clue_kind':clue['clue_kind'],'clue_guess':guess['guess'],'attempts_to_win':win['attempts'],'won':win['won']})
+  finally:C.store.delete(gid)
+ assert journeys[0]==journeys[1],(key,journeys)
+ result['contexto'][key]={'review_binding':d['review_binding'],'first_guesses':observed,'repeated_journey':journeys[0],'deterministic_replays':2}
+ print(key,len(words),'first guesses; deterministic clue and win',journeys[0]['clue'],flush=True)
+
+d=dossiers['lt_gastronomie_221'];start=d['start']['id'];target=d['target']['id']
+for path in d['representative_shortest_paths']:
+ via=path['nodes'][1]['id'];gid=L.store.create(L.LantSession(start=start,target=target,optimal=2,difficulty='usor',chain=[start]));url=f'/api/wordgames/lant/games/{gid}'
+ try:
+  initial=client.get(url).json();direct=post(url+'/move',{'text':svc.label(target)})
+  assert not direct['ok'] and client.get(url).json()['moves']==0
+  first=post(url+'/move',{'text':svc.label(via)});assert first['ok'] and not first['won'] and first['moves']==1
+  assert client.get(url).json()['path']==first['path']
+  win=post(url+'/move',{'text':svc.label(target)});assert win['ok'] and win['won'] and win['moves']==2 and client.get(url).json()['won']
+  result['lant'][via]={'initial_choices':initial.get('choices'),'direct_target_rejected':not direct['ok'],'first':first['path'],'win':win['path'],'won':win['won'],'moves':win['moves']}
+ finally:L.store.delete(gid)
+result['first_guess_count']=sum(len(row['first_guesses']) for row in result['contexto'].values())
+out.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+print('Complete',result['first_guess_count'],'first guesses;8 Contexto clue/resume/win journeys;2 Lanț paths',flush=True)

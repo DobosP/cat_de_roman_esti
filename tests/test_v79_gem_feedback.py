@@ -23,7 +23,11 @@ from cat_de_roman_esti.wordgames.contexto_projection import (  # noqa: E402
     suggest_projection,
 )
 from cat_de_roman_esti.wordgames.service import WordGameService, get_service  # noqa: E402
-from tests.content_history import before_v81_projection_rows, before_v84_fixture  # noqa: E402
+from tests.content_history import (  # noqa: E402
+    before_v81_projection_rows,
+    before_v84_fixture,
+    before_v85_fixture,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 CLATITE = "n_v3gas_clatite"
@@ -179,7 +183,14 @@ def test_gem_effective_dulceata_neighborhood_is_exactly_the_reviewed_six() -> No
     assert SOCATA not in effective_targets
 
 
-def test_gem_is_hot_for_clatite_and_repeats_survive_resume() -> None:
+@pytest.mark.parametrize("graph_epoch", ("before_v85", "current"))
+def test_gem_is_hot_for_clatite_and_repeats_survive_resume(graph_epoch, monkeypatch) -> None:
+    if graph_epoch == "before_v85":
+        prior = before_v85_fixture(json.loads(
+            (ROOT / "cat_de_roman_esti/fixtures/kg_sample.json").read_bytes()
+        ))
+        svc = WordGameService(Graph.from_records(prior["kg_nodes"], prior["kg_edges"]))
+        monkeypatch.setattr(contexto, "get_service", lambda: svc)
     client, url = _contexto_game(CLATITE)
     try:
         first = _guess(client, url, "gem")
@@ -188,7 +199,9 @@ def test_gem_is_hot_for_clatite_and_repeats_survive_resume() -> None:
             "id": GEM_PUBLIC_ID,
             "label": "Gem",
             "distance": 1,
-            "rank": 8,
+            "rank": 8 if graph_epoch == "before_v85" else (
+                CURRENT_CONTENT.clatite_opener_ranks["gem"]
+            ),
             "temperature": "Fierbinte",
             "closeness": 99,
             "attempt_number": 1,

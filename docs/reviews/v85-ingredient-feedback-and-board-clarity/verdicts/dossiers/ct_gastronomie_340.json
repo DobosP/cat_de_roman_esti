@@ -1,0 +1,86 @@
+{
+ "id": "ct_gastronomie_340",
+ "game": "contexto",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "a4058773492665008a37d8fdcb9376511625883675f8aae8a7494a6fe75f7633",
+ "kg_sha256": "b7d28b990d37164d8e41a93965a5824162ded56b2907ac03388fee717eb144b2",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Înghețată salience 0.28 < 0.60 (usor floor)"
+  }
+ ],
+ "target": {
+  "id": "n_v3gas_inghetata",
+  "label": "Înghețată",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.2826,
+  "degree": 4,
+  "incoming_degree": 6,
+  "description": "Desert rece, cremos, din lapte sau apă, zahăr și arome."
+ },
+ "reachable": 2312,
+ "strong_neighbors": [
+  {
+   "id": "n_v2gas_desert",
+   "label": "Desert",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.8464,
+   "degree": 24,
+   "incoming_degree": 24,
+   "description": "Fel dulce servit la finalul mesei sau la sărbători.",
+   "strength": 0.92
+  },
+  {
+   "id": "n_v85_food_cacao",
+   "label": "Cacao",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.85,
+   "degree": 6,
+   "incoming_degree": 0,
+   "description": "Pudră alimentară obținută din boabe de cacao, folosită în deserturi și băuturi.",
+   "strength": 0.8
+  },
+  {
+   "id": "n_v85_food_vanilie",
+   "label": "Vanilie",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.8,
+   "degree": 6,
+   "incoming_degree": 0,
+   "description": "Ingredient aromat din păstăile de vanilie, folosit la creme și alte deserturi.",
+   "strength": 0.8
+  },
+  {
+   "id": "n_v3gas_clatite",
+   "label": "Clătite",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.7951,
+   "degree": 8,
+   "incoming_degree": 11,
+   "description": "Foi subțiri din aluat prăjit, umplute de obicei dulce sau sărat.",
+   "strength": 0.72
+  },
+  {
+   "id": "n_v18gas_fistic",
+   "label": "Fistic",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.58,
+   "degree": 5,
+   "incoming_degree": 5,
+   "description": "Aroma-vedetă a anilor 2024–2025: de la ciocolata Dubai la înghețată, creme și lattea de fistic. Cererea uriașă a scumpit fisticul pe piața mondială în 2025.",
+   "strength": 0.7
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:cb268b302a7a946b26ccc4e8f52eb9a5fb8823032b1973d838d09070e9df3f3f"
+}
