@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import unicodedata
+from pathlib import Path
 
 import pytest
 
@@ -15,7 +16,7 @@ from django.test import Client  # noqa: E402
 from cat_de_roman_esti.graph import Graph  # noqa: E402
 from cat_de_roman_esti.wordgames import contexto, lant  # noqa: E402
 from cat_de_roman_esti.wordgames.service import WordGameService, get_service  # noqa: E402
-from tests.content_history import v83_added_forms  # noqa: E402
+from tests.content_history import before_v81_fixture  # noqa: E402
 
 PASTA = "n_v3gas_paste"
 HOLIDAY_FORMS = ("Paște", "Paștele")
@@ -39,13 +40,14 @@ def test_explicit_accented_senses_are_neither_resolved_nor_suggested(surface, va
 def test_every_existing_label_id_and_alias_keeps_its_resolution():
     """Snapshot all 13,177 authored surfaces before the V76 behavior change."""
     svc = get_service()
-    later_forms = v83_added_forms()
+    baseline = before_v81_fixture(json.loads(
+        (Path(__file__).resolve().parents[1] / "cat_de_roman_esti/fixtures/kg_sample.json")
+        .read_bytes()
+    ))
     surfaces = sorted({
         text
-        for node in svc.graph.nodes.values()
-        if node.id != "n_v81_food_pantry_nuca"  # V81 adds three new authored surfaces.
-        for text in (node.id, node.label_ro, *node.aliases)
-        if text not in later_forms
+        for node in baseline["kg_nodes"]
+        for text in (node["id"], node["label_ro"], *node.get("aliases", []))
     })
     rows = [(surface, svc.resolve(surface)) for surface in surfaces]
     assert len(rows) == 13177

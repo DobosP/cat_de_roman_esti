@@ -23,7 +23,7 @@ from cat_de_roman_esti.wordgames.contexto_projection import (  # noqa: E402
     suggest_projection,
 )
 from cat_de_roman_esti.wordgames.service import WordGameService, get_service  # noqa: E402
-from tests.content_history import before_v81_projection_rows  # noqa: E402
+from tests.content_history import before_v81_projection_rows, before_v84_fixture  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 CLATITE = "n_v3gas_clatite"
@@ -250,14 +250,22 @@ def test_gem_typo_suggestion_follows_the_effective_anchor_privacy() -> None:
         ("n_gas_salata_boeuf", 5, 1041, "Foarte rece", 55),
     ],
 )
+@pytest.mark.parametrize("graph_epoch", ("before_v84", "current"))
 def test_gem_keeps_cold_feedback_for_unrelated_food_targets(
-    target: str, distance: int, rank: int, temperature: str, closeness: int
+    target: str, distance: int, rank: int, temperature: str, closeness: int,
+    graph_epoch: str, monkeypatch,
 ) -> None:
+    if graph_epoch == "before_v84":
+        prior = before_v84_fixture(json.loads(
+            (ROOT / "cat_de_roman_esti/fixtures/kg_sample.json").read_bytes()
+        ))
+        svc = WordGameService(Graph.from_records(prior["kg_nodes"], prior["kg_edges"]))
+        monkeypatch.setattr(contexto, "get_service", lambda: svc)
     client, url = _contexto_game(target)
     try:
         response = _guess(client, url, "gem")
         assert response["ok"] is True and response["won"] is False
-        assert response["guess"] == {
+        expected = {
             "id": GEM_PUBLIC_ID,
             "label": "Gem",
             "distance": distance,
@@ -266,6 +274,20 @@ def test_gem_keeps_cold_feedback_for_unrelated_food_targets(
             "closeness": closeness,
             "attempt_number": 1,
         }
+        if graph_epoch == "before_v84":
+            # Retain the archived numerical observation on its original graph.
+            assert response["guess"] == expected
+        else:
+            # A larger graph changes rank positions; the cold honey fallback remains
+            # a public observable association rather than a frozen inventory size.
+            honey = _guess(client, url, "miere")["guess"]
+            guess = response["guess"]
+            assert guess["id"] == GEM_PUBLIC_ID and guess["label"] == "Gem"
+            assert guess["distance"] == honey["distance"] == distance
+            assert guess["temperature"] == honey["temperature"] == temperature
+            assert guess["rank"] == honey["rank"] + 1
+            assert 0 <= honey["closeness"] - guess["closeness"] <= 1
+            _assert_secret_hidden(response, target)
     finally:
         contexto.store.delete(url.rsplit("/", 1)[-1])
 

@@ -1,0 +1,27 @@
+{
+  "category": "gastronomie",
+  "candidate_sha256": "sha256:ecbe2c60260a886cbdd3de1ecdc688cd4f163d03ce33226d8a83d4264de16ca2",
+  "instances": [
+    {
+      "ref": "contexto[0]",
+      "verdict": "keep",
+      "note": "C1/C2/C5/C6: common concrete apple pie; usor salience 0.60; no exact target reuse. C3: 5 incoming recognizable neighbors;2,304 reachable and101 within 3 hops. C4: Plăcinte rank 2 hot; apple/dough/sucitor/tray rank 3 hot; flour11 hot; food21 and dessert26 warm. Train1216 very cold and football458 cold. Limitations: butter506 cold despite common butter variants; yeast11 hot through dough although yeast is optional; qualified oven78 lukewarm. These are disclosed for adversarial review, not treated as universally realistic scoring."
+    },
+    {
+      "ref": "contexto[1]",
+      "verdict": "keep",
+      "note": "C1/C2/C5/C6: familiar biscuit dessert; usor salience 0.68; fresh target. C3: 6 incoming neighbors;2,304 reachable and260 within 3 hops. C4: dessert2, biscuit3, butter3, pastry7 hot; food18 warm; milk61 warm. Train1968 frozen and football976 very cold. Residual preparation noise: oven36 and tray36 warm although this is commonly a no-bake dessert; yeast77 and Sarmale86 only lukewarm. The defining biscuit/butter/desert route outranks those weak routes; judges should explicitly assess this limitation."
+    },
+    {
+      "ref": "contexto[2]",
+      "verdict": "keep",
+      "note": "C1/C2/C5/C6: universally familiar concrete staple; usor salience 0.9273; neither generic Pâine nor its specific house/sourdough variants have approved Contexto records, so the target is fresh. C3: 18 incoming recognizable neighbors;2,304 reachable and400 within 3 hops. C4: food3 hot; dough/yeast/qualified oven7 hot; flour/grain/water45 warm. Flour improved from baseline 391 cold. Stilou219 and Christmas108 remain lukewarm, Sarmale27 warm; none dominates rank 7 production core, but Sarmale remains above flour within its warm band. Prior V77 flour→Stiloul cu rezervor control remains cold618 despite improving from very cold1280. Human enjoyment and complete semantic correctness are unmeasured."
+    },
+    {
+      "ref": "lant[0]",
+      "verdict": "keep",
+      "note": "D1/D2/D4/D5: familiar flour-to-pastry endpoints, honest 2-hop easy band, exact pair absent from pack/rejection ledger. D3: 2 valid first hops, narrowest intermediate layer 2, no intermediate choke point. Main route Făină → Aluat → Cornulețe is a direct cooking progression; alternative Făină → Cozonac → Cornulețe is a recognizable seasonal baking association. The alternative is weaker and needs adversarial D2 review, but the board is not held together only by generic taxonomy or holiday co-occurrence. Raw keep means pending staging, not promotion."
+    }
+  ],
+  "coverage_note": "All four frozen raw refs screened against rubric A/C/D and current complete inventory. Prospective directed topology and native scoring measured by independent scratch harness; one additional flour Contexto candidate and broader Lant proposals explicitly deferred. These are pending-stage judgments, not promotion or human playtests. Prospective feedback must be rechecked against final applied graph."
+}

@@ -1,0 +1,143 @@
+{
+ "game": "contexto",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "ct_gastronomie_334",
+   "ct_gastronomie_335",
+   "ct_gastronomie_336",
+   "lt_gastronomie_220"
+  ]
+ },
+ "verdicts": {
+  "ct_gastronomie_334": "promote",
+  "ct_gastronomie_335": "promote",
+  "ct_gastronomie_336": "promote"
+ },
+ "perItem": [
+  {
+   "id": "ct_gastronomie_334",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:9c0e00188149528555adb4e18b0923d0d9ca042d7b3d4061276d3c46d4287a38",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_334",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:9c0e00188149528555adb4e18b0923d0d9ca042d7b3d4061276d3c46d4287a38",
+    "rationale": "A1/A2/C1/C2/C5: Plăcintă cu mere is an ordinary concrete home-baked dessert with one dominant compound sense, supported by a Romanian manufacturer recipe and recipe-library coverage. C6 salience0.60 meets easy; C3 all five directed incoming neighbors (apple, pies, dough, rolling pin and tray) are recognizable, with2304 reachable. C4 actual core apple/dough/tray/sucitor rank3 hot, pies2 and flour11hot; unrelated train/football cold. A3/A4/A7: precise ingredient, shaping and baking links state their actual roles, no invented regional exclusivity or ingredient universality. A5/A6: fresh target, no editorial trigger. Butter506cold and optional yeast11hot are remaining noise; qualified oven78 is only lukewarm. The repaired defining apple and dough routes clearly outperform these weaknesses, so promote this bound easy target without claiming complete recipe semantics.",
+    "sources": [
+     "https://www.pastebaneasa.ro/retete/placinta-cu-mere/",
+     "https://digital.bibliotecaarad.ro/files/original/d64f6b3103080d1994b6f1de452a49ce9e54c086.pdf"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_334",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:9c0e00188149528555adb4e18b0923d0d9ca042d7b3d4061276d3c46d4287a38",
+    "rationale": "A1/A2/C2: a familiar apple-filled domestic pastry, with older Digi24 Christmas-menu coverage, current TVR broadcast metadata and independent Romanian manufacturer recipes. A3/A4/A7: Băneasa directly documents flour dough, apple filling, rolling pin and baking tray; these are specific preparation relations, not exclusive regional claims. A5/A6: no adult or alcohol-dependent premise, and no prior Contexto record for this target. C1/C5: concrete, explicitly qualified dish. C3: five recognizable incoming neighbors and 2,304 reachable. C4: Plăcinte rank 2; Măr, Aluat, Sucitor and Tavă de copt rank 3; Făină 11. C6: .60 meets easy. Refute-first: Drojdie 11 is overly hot for an optional variant, Unt 506 is cold, and oven 78 only lukewarm. These imperfections do not displace the five independent immediate category/fruit/dough/preparation clues, so the target remains navigable at easy. In 31 real-API opener probes the target stayed private; the nonwinning Plăcinte 2 clue reproduced and exact answer won at rank 1. Promote, without claiming complete ingredient realism.",
+    "sources": [
+     "https://www.pastebaneasa.ro/retete/placinta-cu-mere/",
+     "https://www.oetker.ro/retete/r/placinta-clasica-cu-mere",
+     "https://www.digi24.ro/stiri/actualitate/social/cat-costa-masa-de-craciun-produsele-traditionale-maresc-de-trei-patru-ori-cheltuielile-338418",
+     "https://www.youtube.com/watch?v=9YOl1-wgaw8"
+    ]
+   }
+  },
+  {
+   "id": "ct_gastronomie_335",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:baae5f59a5138fa2de746c668a0837b78b75cb0d13852e3f6729a0294df2e435",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_335",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:baae5f59a5138fa2de746c668a0837b78b75cb0d13852e3f6729a0294df2e435",
+    "rationale": "A1/A2/C1/C2/C5: Salam de biscuiți is a familiar concrete biscuit dessert, with a compound distinct from meat salami; national radio and current Romanian home-recipe coverage support recognition. C6salience0.68 supports easy; C3six direct familiar neighbors include biscuit, butter, dessert, pastry, cornulețe and childhood context,2304reachable. C4dessert2,biscuit3,butter3 and pastry7 are hot; food18/milk61warm. A3/A4/A7: biscuits define the dish, butter is a documented variant; no claim that every recipe contains butter. A5/A6fresh and no editorial hold. Oven/tray36warm is a residual misleading baking route for this usually no-bake dessert; yeast77/Sarmale86are lukewarm. Defining non-baking ingredient routes rank far closer, with input identity preserved and no false win. Promote while explicitly recording the no-bake inconsistency.",
+    "sources": [
+     "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/salam-de-biscuiti-id594218.html"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_335",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:baae5f59a5138fa2de746c668a0837b78b75cb0d13852e3f6729a0294df2e435",
+    "rationale": "A1/A2/C2: Radio România Internațional describes longstanding domestic popularity, including communist-era accessibility; PRO TV aired a named version in December 2023. A3/A4/A7: the qualified biscuit dessert has documented biscuit and butter-variant links, with no required oven step or universal butter requirement. A5/A6: no boundary trigger or prior target record. C1/C5: concrete compound, plainly distinct from meat salami. C3: six recognizable incoming neighbors and 2,304 reachable. C4: Desert 2, Biscuit 3, Unt 3 and Prăjitură 7 create a clear navigable core. C6: .68 meets easy. Refute-first: oven/tray36 are misleadingly warm for a no-bake dish; Cacao 62 is warm but trails them, cinnamon 19 is also too warm, and yeast 77/meat dish 86 remain lukewarm. Defining biscuit3 and common butter3 still outrank that preparation noise, while cocoa remains usable within two hops. This is a meaningful playable target with an explicit remaining ranking limitation, not a claim that all ingredients are ordered correctly. All 31 opener probes preserved the answer, Desert 2 clue replayed nonwinning, and exact answer won. Promote.",
+    "sources": [
+     "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/salam-de-biscuiti-id594218.html",
+     "https://www.protv.ro/emisiuni/vorbeste-lumea/clip/52864-salam-de-biscuiti-cu-fistic-si-merisoare"
+    ]
+   }
+  },
+  {
+   "id": "ct_gastronomie_336",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:ef41ad1656450431c79be54779596cb269d88c7cf973f9832b0e2646bc780c35",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_336",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:ef41ad1656450431c79be54779596cb269d88c7cf973f9832b0e2646bc780c35",
+    "rationale": "A1/A2/C1/C2/C5: generic Pâine is a universally familiar concrete staple, distinct from the graph concepts Pâine de casă and Pâine cu maia. Dictionary/manufacturer evidence supports everyday food and production knowledge; C6salience0.9273 supports easy. C3eighteen incoming neighbors provide recognizable cutting, serving and production context;2304reachable. C4dough,yeast and qualified oven are hot7; flour/grain/water warm45, with flour improved from cold391. A3/A4/A7yeast is conventional rather than universal; links retain specific process wording and no fabricated regional association. A5/A6no editorial trigger or duplicate target. Sarmale27still outranks flour within warm band and Stilou219/Christmas108are lukewarm, but none outranks the production core. V77 rejected Făină→Pâine de casă remains absent, and Făină→Stiloul cu rezervor remains cold618. This is a new review of the separate generic target after substantive graph changes, not reuse of the prior rejected claim. Promote with those limits.",
+    "sources": [
+     "https://dexonline.ro/definitie/p%C3%A2ine",
+     "https://www.oetker.ro/retete/r/paine-cu-drojdie-uscata"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_336",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:ef41ad1656450431c79be54779596cb269d88c7cf973f9832b0e2646bc780c35",
+    "rationale": "A1/A2/C2: Pâine is the ordinary staple, documented in historical and modern dictionaries and a TVR 2024 bread-baking program. A3/A4/A7: specific dough/oven and qualified yeast associations are supported by dictionary definitions and an actual Romanian bread recipe; no universal commercial-yeast claim. A5/A6: no existing round for this target; generic Pâine is distinct from the V77 deferred Pâine de casă edge, which remains absent. C1/C5: a concrete food with one dominant standalone sense; idioms do not make the food label ambiguous. C3: 18 incoming neighbors and 2,304 reachable. C4: Mâncare 3, Aluat/Drojdie/oven/Secară7 and Făină 45 within 2 hops give multiple recognizable openers. C6: .9273 exceeds easy. Refute-first: projected Scorțișoară 4 is spuriously hotter than the production core; Unt 429 is cold; Stilou 219 is lukewarm and Sarmale 27 outranks flour. The cinnamon defect is real and must remain disclosed, but does not remove or contradict the three independent rank 7 direct production cues, the usual food3 opener, or the clear target identity. Therefore it does not make this round unfair under C1-C6; promote with that residual proxy issue, not by counting mere floor compliance.31 private opener probes, safe Cuțit 2 clue and exact rank 1 win pass; V77 flour→pen control stays Rece 618/d4.",
+    "sources": [
+     "https://dexonline.ro/intrare/p%C3%A2ine/40183",
+     "https://www.oetker.ro/retete/r/paine-cu-maia",
+     "https://www.youtube.com/watch?v=9YOl1-wgaw8"
+    ]
+   }
+  }
+ ],
+ "coverage": {
+  "total": 3,
+  "verified": 3,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "provenance": {
+  "analyst": {
+   "path": "docs/reviews/v84-six-game-graph-quality/analyst-review.json",
+   "sha256": "sha256:e060e3b827e872e43cd9b5225ded48842d9148dcb03a66fc5ceda685c35068c0",
+   "reviewer": "root-v84",
+   "role": "analyst"
+  },
+  "verifier": {
+   "path": "docs/reviews/v84-six-game-graph-quality/verifier-review.json",
+   "sha256": "sha256:7298daa0a13b8c60249419de77badaa4d7ac4956ce8205741a0fc8aeaa3017af",
+   "reviewer": "v84_interface_review",
+   "role": "verifier"
+  }
+ }
+}

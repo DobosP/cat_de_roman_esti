@@ -1,0 +1,21 @@
+# Independent V84 graph review
+
+Valid until: the bound candidate/module or reviewed transaction implementation changes — then treat as history.
+
+Reviewed 2026-09-07 by `v84_gameplay_review`, independently of the graph proposer and module author. **Accept** the 15 concepts, 42 forms, 57 additions and exact `de520` removal. This is a factual/lexical graph review; curated-round promotion and final game integration remain separate checks.
+
+- Module SHA256: `86ac73d6aec018e246d6b94a73cabad0184cc7c3d8160300ab051756dae9fb25`.
+- Candidate SHA256: `50dc48c4000905e5b3a1e56ed3c3c5add45c2fcd859691b74113ab072902dc60`.
+- Exhaustive item verdicts and implementation hashes: [graph-review.json](graph-review.json).
+
+The module and candidate match exactly. An independent baseline scan confirms all 15 IDs are new, all 57 label/form surfaces are normalized-distinct, and there are zero collisions with older labels/forms. The 42 aliases include one attested lexical equivalent, `făină de porumb`; the rest are grammatical or qualified forms. They are not 42 new synonyms.
+
+The identities preserve useful distinctions: whey is not cheese, groats are not flour, and different cereals are not interchangeable ingredients. Qualified `Cuptor de bucătărie`, `Cheag alimentar`, baking-tray forms and rolling-pin plurals preserve omitted senses. The final candidate contains no barley-to-beer edge. `Saramură` denotes brine here; its fish-dish sense requires separate consideration before using it as a hidden target. [DEX milling and lexical evidence](https://dexonline.ro/definitie/m%C4%83lai), [groats](https://dexonline.ro/definitie/arpaca%C8%99), [rolling-pin forms](https://dexonline.ro/definitie/sucitoare).
+
+The directed preparation links are factual. I directly read yeast/dough preparations, rolled cornulețe, apple filling and rolling-pin use, biscuit-dessert ingredients and colivă. The full Paste Băneasa page was accessible to this reviewer. The general Oetker product-range page is a weak method citation; the named cozonac recipe below directly confirms the tray and oven. The IULS biscuit PDF was unavailable, so actual IKEA oat-biscuit products independently support that qualified variant claim. [Cozonac](https://www.oetker.ro/retete/r/cozonac-moldovenesc), [cornulețe](https://www.nutella.com/ro/ro/lasa-te-inspirat/retete/cornulete-cu-fructe-uscate), [apple pie](https://www.pastebaneasa.ro/retete/placinta-cu-mere/), [oat biscuits](https://www.ikea.com/ro/ro/cat/kafferep-37807/).
+
+The Telemea process/specification supports rennet, whey separation and brine; the Cașcaval specification supports its rennet production link. No rennet-to-Urdă ingredient claim is introduced. Removing `de520` is justified: Poale-n brâu is a filled pastry, not a cheese, so its old cheese-category predicate is false. [Telemea process](https://agriculture.ec.europa.eu/farming/geographical-indications-and-quality-schemes/geographical-indications-food-and-drink/telemea-de-sibiu-pgi_ro), [brine specification](https://eur-lex.europa.eu/legal-content/RO/TXT/?uri=CELEX:52019XC0617(01)), [Cașcaval specification](https://eur-lex.europa.eu/legal-content/RO/TXT/PDF/?uri=CELEX:52020XC0116(01)), [Poale-n brâu](https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/placinte-moldovenesti-id1033103.html).
+
+**Transaction review: accept after correction.** I reproduced a flaw where duplicate baseline edge IDs let one exact review remove two records, including an unreviewed record. The added uniqueness guard now rejects that reproduction; the regression covers distinct records sharing an ID. Exact prior-record binding, stale/partial/type rejection, nonmutating preflight, allocation above original IDs, dry-run behavior and rollback are sound in the reviewed scope.
+
+**Limits:** salience is editorial, not measured recognition. Incident degree is not outgoing degree: Zer has four incident neighbors but one outgoing continuation; Saramură and Arpacaș have two outgoing continuations each. Truthful edges can still generate noisy hot/cold routes or associative crafts. Directed runtime quality, old-round preservation and selection effects must be measured; this review does not certify every mined recipe or add boards to frozen games.

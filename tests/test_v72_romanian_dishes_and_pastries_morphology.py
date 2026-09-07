@@ -17,7 +17,12 @@ pytest.importorskip("django")
 
 from django.test import Client  # noqa: E402
 
-from cat_de_roman_esti.data import load_fixture, mobile_app_pack_snapshot  # noqa: E402
+from cat_de_roman_esti.data import (  # noqa: E402
+    load_fixture,
+    mobile_app_pack_content_hash,
+    mobile_app_pack_snapshot,
+)
+from cat_de_roman_esti.graph import Graph  # noqa: E402
 from cat_de_roman_esti.wordgames.contexto import _build_session  # noqa: E402
 from cat_de_roman_esti.wordgames.contexto import store as contexto_store  # noqa: E402
 from cat_de_roman_esti.wordgames.contexto_projection import (  # noqa: E402
@@ -36,6 +41,7 @@ from cat_de_roman_esti.wordgames.service import (  # noqa: E402
     get_service,
     normalize,
 )
+from tests.content_history import before_v84_fixture  # noqa: E402
 
 _ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_ROOT / "scripts"))
@@ -216,15 +222,30 @@ def test_v72_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors() -
     owners = set(aliases.values())
     assert all(svc.node(node_id).node_type == "concept" for node_id in owners)
     assert all(svc.node(node_id).category == "gastronomie" for node_id in owners)
-    assert all(
-        4
-        <= sum(
-            svc.link(predecessor_id, node_id) is not None
-            for predecessor_id in svc.predecessor_ids(node_id)
-        )
-        <= 24
-        for node_id in owners
-    )
+    historical = before_v84_fixture(fixture)
+    historical_svc = WordGameService(Graph.from_records(
+        historical["kg_nodes"], historical["kg_edges"],
+    ))
+    reviewed_additions = {
+        "n_v17gas_coliva": {"n_v84_food_arpacas"},
+        "n_gas_cozonac": {
+            "n_v84_food_cuptor", "n_v84_food_drojdie", "n_v84_food_tava_copt",
+        },
+        "n_v17gas_gogosi": {"n_v84_food_aluat", "n_v84_food_drojdie"},
+        "n_gas_mamaliga": {"n_v84_food_malai"},
+        "n_v2gas_placinte": {"n_v84_food_sucitor"},
+        "n_v18gas_salam_de_biscuiti": {
+            "n_v24_food_breakfast_unt", "n_v24_food_snack_biscuit",
+        },
+    }
+    assert set(reviewed_additions) <= owners
+    for node_id in owners:
+        before = set(historical_svc.predecessor_ids(node_id))
+        assert 4 <= len(before) <= 24
+        assert all(historical_svc.link(parent, node_id) is not None for parent in before)
+        # Preserve the original bound and require exactly the reviewed new inputs;
+        # a blanket higher ceiling would also permit unrelated graph drift.
+        assert set(svc.predecessor_ids(node_id)) == before | reviewed_additions.get(node_id, set())
     assert svc.resolve("bulzurilor cu brânză") == "n_gas_bulz"
     assert svc.resolve("gogoșilor prăjite") == "n_v17gas_gogosi"
     assert svc.resolve("cârnaților de Pleșcoi") == "n_v17gas_carnati_plescoi"
@@ -354,6 +375,12 @@ def test_v72_mobile_contract_and_v49_ledger_persist_exactly() -> None:
     assert checked_in["manifest"]["build_version"] == _CURRENT_BUILD_VERSION
     assert checked_in["manifest"]["counts"] == CURRENT_CONTENT.mobile_counts
     assert checked_in["manifest"]["content_hash"] == (
+        "sha256:" + CURRENT_CONTENT.payload_sha256["mobile_content"]
+    )
+    historical = before_v84_fixture(_json(_PACKAGE_KG))
+    assert mobile_app_pack_content_hash(
+        historical["kg_nodes"], historical["kg_edges"], historical["kg_puzzles"],
+    ) == (
         "sha256:5ea700a00708cf799a4cad8dcc99c54cb6595f0e99c217b5d890b9a829195918"
     )
 

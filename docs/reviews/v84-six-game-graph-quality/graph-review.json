@@ -1,0 +1,1019 @@
+{
+  "schema_version": 1,
+  "reviewer": "v84_gameplay_review",
+  "reviewed_date": "2026-09-07",
+  "scope": "Independent factual/lexical graph review; not curated-round promotion, final integration approval or human playtest.",
+  "module_path": "scripts/kitchen_graph_v84_data.py",
+  "module_sha256": "86ac73d6aec018e246d6b94a73cabad0184cc7c3d8160300ab051756dae9fb25",
+  "candidate_path": "docs/reviews/v84-six-game-graph-quality/graph-candidates.json",
+  "candidate_sha256": "50dc48c4000905e5b3a1e56ed3c3c5add45c2fcd859691b74113ab072902dc60",
+  "verdict": "accept",
+  "counts": {
+    "nodes": 15,
+    "forms": 42,
+    "edges": 57,
+    "removals": 1,
+    "old_surface_collisions": 0,
+    "new_surface_collisions": 0
+  },
+  "nodes": [
+    {
+      "id": "n_v84_food_drojdie",
+      "verdict": "accept",
+      "reason": "Baking preparation is a real missing concept; no sediment or figurative aliases. Remove the old broad projection when native identity is integrated.",
+      "incident_neighbors": 4,
+      "direct_outgoing_neighbors": 4
+    },
+    {
+      "id": "n_v84_food_aluat",
+      "verdict": "accept",
+      "reason": "Flour/liquid mixture; all four article/case/plural forms are ordinary. No coca/cocă expansion.",
+      "incident_neighbors": 8,
+      "direct_outgoing_neighbors": 4
+    },
+    {
+      "id": "n_v84_food_cuptor",
+      "verdict": "accept",
+      "reason": "Qualified culinary oven label and all four qualified forms preserve the bare cuptor exclusion.",
+      "incident_neighbors": 4,
+      "direct_outgoing_neighbors": 3
+    },
+    {
+      "id": "n_v84_food_zer",
+      "verdict": "accept",
+      "reason": "Whey is separated from coagulated milk and is an input to Urdă; it is not synonymous with milk or cheese.",
+      "incident_neighbors": 4,
+      "direct_outgoing_neighbors": 1
+    },
+    {
+      "id": "n_v84_food_saramura",
+      "verdict": "accept",
+      "reason": "Culinary brine is distinct from a fish dish. Described sense and specific process links are valid; reassess polysemy before using bare Saramură as a hidden target.",
+      "incident_neighbors": 4,
+      "direct_outgoing_neighbors": 2
+    },
+    {
+      "id": "n_v84_food_grau",
+      "verdict": "accept",
+      "reason": "Wheat is distinct from other cereals; boabe de grâu qualifies the ingredient quantity and grâne is excluded.",
+      "incident_neighbors": 6,
+      "direct_outgoing_neighbors": 6
+    },
+    {
+      "id": "n_v84_food_orz",
+      "verdict": "accept",
+      "reason": "Barley and its groats relation are valid. The final candidate removes the beer edge and beer wording.",
+      "incident_neighbors": 4,
+      "direct_outgoing_neighbors": 4
+    },
+    {
+      "id": "n_v84_food_ovaz",
+      "verdict": "accept",
+      "reason": "Oats are a cereal and a documented biscuit variant ingredient; not every biscuit contains oats.",
+      "incident_neighbors": 4,
+      "direct_outgoing_neighbors": 4
+    },
+    {
+      "id": "n_v84_food_secara",
+      "verdict": "accept",
+      "reason": "Rye flour and rye bread are valid. Secarei is the accepted genitive/dative form.",
+      "incident_neighbors": 5,
+      "direct_outgoing_neighbors": 5
+    },
+    {
+      "id": "n_v84_food_malai",
+      "verdict": "accept",
+      "reason": "Corn milling product. Făină de porumb is an attested lexical equivalent here; commercial granulation differs, so do not claim universal recipe substitution.",
+      "incident_neighbors": 4,
+      "direct_outgoing_neighbors": 3
+    },
+    {
+      "id": "n_v84_food_gris",
+      "verdict": "accept",
+      "reason": "Granular cereal milling product used in soup dumplings; not identical to fine flour or groats.",
+      "incident_neighbors": 5,
+      "direct_outgoing_neighbors": 4
+    },
+    {
+      "id": "n_v84_food_arpacas",
+      "verdict": "accept",
+      "reason": "Dehulled/polished cereal grains can be wheat or barley; the description mentions cooking use, not an exclusive crop.",
+      "incident_neighbors": 4,
+      "direct_outgoing_neighbors": 2
+    },
+    {
+      "id": "n_v84_food_cheag",
+      "verdict": "accept",
+      "reason": "Qualified food coagulant excludes the bare blood-clot/anatomical/metaphoric senses. Some cheese varieties use rennet; Urdă receives no rennet ingredient claim.",
+      "incident_neighbors": 4,
+      "direct_outgoing_neighbors": 4
+    },
+    {
+      "id": "n_v84_food_tava_copt",
+      "verdict": "accept",
+      "reason": "Qualified baking tray avoids accepting a generic serving tray as an oven utensil.",
+      "incident_neighbors": 4,
+      "direct_outgoing_neighbors": 4
+    },
+    {
+      "id": "n_v84_food_sucitor",
+      "verdict": "accept",
+      "reason": "Ordinary rolling-pin sense. Qualified plural sucitoare de bucătărie avoids the bird noun; făcăleț/vergea remain excluded.",
+      "incident_neighbors": 4,
+      "direct_outgoing_neighbors": 4
+    }
+  ],
+  "forms": [
+    {
+      "node_id": "n_v84_food_drojdie",
+      "form": "drojdia",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_drojdie",
+      "form": "drojdie de panificație",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_drojdie",
+      "form": "drojdia de panificație",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_aluat",
+      "form": "aluatul",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_aluat",
+      "form": "aluatului",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_aluat",
+      "form": "aluaturi",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_aluat",
+      "form": "aluaturile",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_cuptor",
+      "form": "cuptorul de bucătărie",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_cuptor",
+      "form": "cuptorului de bucătărie",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_cuptor",
+      "form": "cuptoare de bucătărie",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_cuptor",
+      "form": "cuptoarele de bucătărie",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_zer",
+      "form": "zerul",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_zer",
+      "form": "zerului",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_saramura",
+      "form": "saramurii",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_saramura",
+      "form": "saramură alimentară",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_grau",
+      "form": "grâul",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_grau",
+      "form": "grâului",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_grau",
+      "form": "boabe de grâu",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_orz",
+      "form": "orzul",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_orz",
+      "form": "orzului",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_orz",
+      "form": "boabe de orz",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_ovaz",
+      "form": "ovăzul",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_ovaz",
+      "form": "ovăzului",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_ovaz",
+      "form": "boabe de ovăz",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_secara",
+      "form": "secarei",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_secara",
+      "form": "boabe de secară",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_malai",
+      "form": "mălaiul",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_malai",
+      "form": "mălaiului",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_malai",
+      "form": "făină de porumb",
+      "verdict": "accept",
+      "kind": "lexical_equivalent"
+    },
+    {
+      "node_id": "n_v84_food_gris",
+      "form": "grișul",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_gris",
+      "form": "grișului",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_arpacas",
+      "form": "arpacașul",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_arpacas",
+      "form": "arpacașului",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_cheag",
+      "form": "cheagul alimentar",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_cheag",
+      "form": "cheag pentru brânză",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_tava_copt",
+      "form": "tăvi de copt",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_tava_copt",
+      "form": "tăvile de copt",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_tava_copt",
+      "form": "tavă pentru cuptor",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_sucitor",
+      "form": "sucitorul",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_sucitor",
+      "form": "sucitorului",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_sucitor",
+      "form": "sucitoare de bucătărie",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    },
+    {
+      "node_id": "n_v84_food_sucitor",
+      "form": "sucitor de bucătărie",
+      "verdict": "accept",
+      "kind": "grammatical_or_qualified_form"
+    }
+  ],
+  "edges": [
+    {
+      "index": 0,
+      "src": "n_v84_food_grau",
+      "dst": "n_v84_food_orz",
+      "relation": "same_category",
+      "record_sha256": "7aad9999e52a2bfb2d97aace451b83ef3bd8944c0ee8b68117a407851a189ea1",
+      "verdict": "accept",
+      "reason": "The narrow shared class is true; this does not equate ingredients or assert that they transform into one another."
+    },
+    {
+      "index": 1,
+      "src": "n_v84_food_grau",
+      "dst": "n_v84_food_ovaz",
+      "relation": "same_category",
+      "record_sha256": "14a72e315479c8b4c74a839837e7a65a48569b9d3a5e5f4060fe69ea607995b8",
+      "verdict": "accept",
+      "reason": "The narrow shared class is true; this does not equate ingredients or assert that they transform into one another."
+    },
+    {
+      "index": 2,
+      "src": "n_v84_food_grau",
+      "dst": "n_v84_food_secara",
+      "relation": "same_category",
+      "record_sha256": "8a589d12ae5b6625fb9afe7f059a5d5733dc9610005f18b54443a91534bc15a6",
+      "verdict": "accept",
+      "reason": "The narrow shared class is true; this does not equate ingredients or assert that they transform into one another."
+    },
+    {
+      "index": 3,
+      "src": "n_v84_food_orz",
+      "dst": "n_v84_food_ovaz",
+      "relation": "same_category",
+      "record_sha256": "6db41eb6779e835524e64763c63eecb2d01513e75f5be98462452432a401a3bd",
+      "verdict": "accept",
+      "reason": "The narrow shared class is true; this does not equate ingredients or assert that they transform into one another."
+    },
+    {
+      "index": 4,
+      "src": "n_v84_food_orz",
+      "dst": "n_v84_food_secara",
+      "relation": "same_category",
+      "record_sha256": "47f5a573f8ef7a9ad81cddc0d50d0d93eddc5b7788a58e40b36647a6a3bbea81",
+      "verdict": "accept",
+      "reason": "The narrow shared class is true; this does not equate ingredients or assert that they transform into one another."
+    },
+    {
+      "index": 5,
+      "src": "n_v84_food_ovaz",
+      "dst": "n_v84_food_secara",
+      "relation": "same_category",
+      "record_sha256": "f608725139ce4281c10718ae7e4c78c67492b2ea50660b7fa3c93fdd7b6a9d6c",
+      "verdict": "accept",
+      "reason": "The narrow shared class is true; this does not equate ingredients or assert that they transform into one another."
+    },
+    {
+      "index": 6,
+      "src": "n_v84_food_grau",
+      "dst": "n_v24_food_pantry_faina",
+      "relation": "processed_into",
+      "record_sha256": "dd83739ec69a325916bb9f25b4404795bc17434e42714b6622250c2c215faf13",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 7,
+      "src": "n_v84_food_grau",
+      "dst": "n_v84_food_gris",
+      "relation": "processed_into",
+      "record_sha256": "64bbef939c505d8904e604635369d9a8abf38af39ffb7cdbe1712bcf16e4902b",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 8,
+      "src": "n_v84_food_grau",
+      "dst": "n_v84_food_arpacas",
+      "relation": "processed_into",
+      "record_sha256": "fa64fb2f86c8b4285ca2a758fa586f44ee20a0751dd4d5729b803710d89a817c",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 9,
+      "src": "n_v84_food_orz",
+      "dst": "n_v84_food_arpacas",
+      "relation": "processed_into",
+      "record_sha256": "71ea26918cc5819cd5d63cf34107496516db9f73b3fabf1d713a786288187f1a",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 10,
+      "src": "n_v84_food_ovaz",
+      "dst": "n_v24_food_snack_biscuit",
+      "relation": "ingredient_variant",
+      "record_sha256": "a3a4585c2389a3d9163d4279a3e33c1cf63766be1fdd0fd2dcd1a1c1a259ca2e",
+      "verdict": "accept",
+      "reason": "The qualified some-variants wording is supported by an actual recipe/product; no universal ingredient claim."
+    },
+    {
+      "index": 11,
+      "src": "n_v84_food_secara",
+      "dst": "n_v24_food_pantry_faina",
+      "relation": "processed_into",
+      "record_sha256": "fe3a9429b480321dfc19e346cd5681fa1c19a6d2db0c99932a99dc2eec09c3f1",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 12,
+      "src": "n_v84_food_secara",
+      "dst": "n_v4gas_paine",
+      "relation": "raw_material_for",
+      "record_sha256": "8b808a6664e368499a22c6ad8084278fc137d4590667fecc94c2d58c57b245ff",
+      "verdict": "accept",
+      "reason": "The specified milk-processing/material relation is supported; no reverse production or ingredient identity is implied."
+    },
+    {
+      "index": 13,
+      "src": "n_v2lim_porumb",
+      "dst": "n_v84_food_malai",
+      "relation": "processed_into",
+      "record_sha256": "e0547165959f26167c7022c5c57d80dae70e762ac85150e72ed4a7c6037817ea",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 14,
+      "src": "n_v84_food_malai",
+      "dst": "n_gas_mamaliga",
+      "relation": "part_of",
+      "record_sha256": "9aea3cde30eb1bb01c41f5573427a91dc8041cc0ea3c890e53658d66fa1715c8",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 15,
+      "src": "n_v84_food_gris",
+      "dst": "n_gas_supa_galuste",
+      "relation": "part_of",
+      "record_sha256": "bc239e528a7b546fd29c44e2dba69cbd9839acda309a52c4c9e5476434ad3f8f",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 16,
+      "src": "n_v84_food_arpacas",
+      "dst": "n_v17gas_coliva",
+      "relation": "part_of",
+      "record_sha256": "9f1b3781714f978c5cb94cdbdea641e80e9cb32fc563110ed10f882f577d718c",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 17,
+      "src": "n_v24_food_pantry_faina",
+      "dst": "n_v84_food_aluat",
+      "relation": "part_of",
+      "record_sha256": "2ec9cc4973b9ba4037fa6087ed34e7bb827e442496c4931094fcd166488637e1",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 18,
+      "src": "n_v4gas_apa",
+      "dst": "n_v84_food_aluat",
+      "relation": "part_of",
+      "record_sha256": "4fca08db43bb70d285193412b67b13c6b4ae1878ce932003bf5f7ef3023c57be",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 19,
+      "src": "n_v84_food_drojdie",
+      "dst": "n_v84_food_aluat",
+      "relation": "leavens",
+      "record_sha256": "b842c615685cbd41d074c545c0a8c18ea6a915ec19c8452cf17ac2a85cb12397",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 20,
+      "src": "n_v84_food_drojdie",
+      "dst": "n_v4gas_paine",
+      "relation": "part_of",
+      "record_sha256": "db7d2edb8b87791cf9623a65632501639fa9007f74dc521284cb16fd7ec26a7f",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 21,
+      "src": "n_v84_food_drojdie",
+      "dst": "n_gas_cozonac",
+      "relation": "part_of",
+      "record_sha256": "eeeb001ec0bdb0de09b450be7d1d903b269d490325c38fcd0a2c32889a7c8953",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 22,
+      "src": "n_v84_food_drojdie",
+      "dst": "n_v17gas_gogosi",
+      "relation": "ingredient_variant",
+      "record_sha256": "d226e12ae7dcd8e8f0a0be05c6a17fc0479fcbe04f60dba86223f04ac9d2e709",
+      "verdict": "accept",
+      "reason": "The qualified some-variants wording is supported by an actual recipe/product; no universal ingredient claim."
+    },
+    {
+      "index": 23,
+      "src": "n_v84_food_aluat",
+      "dst": "n_v4gas_paine",
+      "relation": "prepared_into",
+      "record_sha256": "28232f0026cc3e0abd382abf12847b00866b03bc8cd7175f242b327899ffbe2e",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 24,
+      "src": "n_v84_food_cuptor",
+      "dst": "n_v4gas_paine",
+      "relation": "used_to_cook",
+      "record_sha256": "0f4d21f30b5691849cc0390a0883ad23b7b055b3793d38548604d1a8d736fbc1",
+      "verdict": "accept",
+      "reason": "The utensil/preparation role is a documented culinary use; the authored direction is appropriate."
+    },
+    {
+      "index": 25,
+      "src": "n_v84_food_aluat",
+      "dst": "n_v17gas_gogosi",
+      "relation": "prepared_into",
+      "record_sha256": "6a159adea8c06717a99fef9c07bb55dfc75cc00f7368eaa131b27d6cf958c155",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 26,
+      "src": "n_v84_food_aluat",
+      "dst": "n_v21gas_cornulete",
+      "relation": "prepared_into",
+      "record_sha256": "e7fd96855d56ea8d3b320c77ce2aa3f19c139defb21bd47aa973d5556bb65576",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 27,
+      "src": "n_v84_food_cuptor",
+      "dst": "n_v21gas_cornulete",
+      "relation": "used_to_cook",
+      "record_sha256": "b9ca5efd347ee477f61e4d649461f9d61c2709fe116ae20121ece37fd244eaaf",
+      "verdict": "accept",
+      "reason": "The utensil/preparation role is a documented culinary use; the authored direction is appropriate."
+    },
+    {
+      "index": 28,
+      "src": "n_v84_food_aluat",
+      "dst": "n_v42gas_placinta_mere",
+      "relation": "part_of",
+      "record_sha256": "e7b422b6da9027d02d3a1b90e2ebb504c4ed8d50617a6e5a34cb0d65e3771e91",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 29,
+      "src": "n_v24_food_orchard_mar",
+      "dst": "n_v42gas_placinta_mere",
+      "relation": "part_of",
+      "record_sha256": "379a1a370009518e347c465c38c1a903e4e40eb4ad3878a6f0dac440f258c36a",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 30,
+      "src": "n_v24_food_snack_biscuit",
+      "dst": "n_v18gas_salam_de_biscuiti",
+      "relation": "part_of",
+      "record_sha256": "37bd2811ecf32b45efc43a7b6a31ee7aac234c13565e6d55479b75699504faa9",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 31,
+      "src": "n_v24_food_breakfast_unt",
+      "dst": "n_v18gas_salam_de_biscuiti",
+      "relation": "ingredient_variant",
+      "record_sha256": "835a13b8b79f61e36bed177d12159654fb6b26f92680c56c7b1ccd058f0b74f7",
+      "verdict": "accept",
+      "reason": "The qualified some-variants wording is supported by an actual recipe/product; no universal ingredient claim."
+    },
+    {
+      "index": 32,
+      "src": "n_v84_food_tava_copt",
+      "dst": "n_v84_food_cuptor",
+      "relation": "used_with",
+      "record_sha256": "a2c34301c2ce596f0ace0c4f9e36393ff1053b76f2c476fe2a022b27dd4faf23",
+      "verdict": "accept",
+      "reason": "The utensil/preparation role is a documented culinary use; the authored direction is appropriate."
+    },
+    {
+      "index": 33,
+      "src": "n_v84_food_tava_copt",
+      "dst": "n_v21gas_cornulete",
+      "relation": "used_to_cook",
+      "record_sha256": "5998c7fc0d237376ab7b4eb3588ef35c8226332663eae53e6d33cbff65b00c0e",
+      "verdict": "accept",
+      "reason": "The utensil/preparation role is a documented culinary use; the authored direction is appropriate."
+    },
+    {
+      "index": 34,
+      "src": "n_v84_food_tava_copt",
+      "dst": "n_gas_cozonac",
+      "relation": "used_to_cook",
+      "record_sha256": "6765ef90f17e74f4af1af935a787b8afc91cedba42136ca8e619a8fc9364ec61",
+      "verdict": "accept",
+      "reason": "The utensil/preparation role is a documented culinary use; the authored direction is appropriate."
+    },
+    {
+      "index": 35,
+      "src": "n_v84_food_tava_copt",
+      "dst": "n_v42gas_placinta_mere",
+      "relation": "used_to_cook",
+      "record_sha256": "f44a257ec00a9e5f84f9b9ba96bb279033a9b8bd506a40f82859c458e3a0deaa",
+      "verdict": "accept",
+      "reason": "The utensil/preparation role is a documented culinary use; the authored direction is appropriate."
+    },
+    {
+      "index": 36,
+      "src": "n_v84_food_sucitor",
+      "dst": "n_v84_food_aluat",
+      "relation": "shapes",
+      "record_sha256": "fb82ca26d50a15677fd60b15cdd43070363689c2bf020a95cf7af7cfbd1e4545",
+      "verdict": "accept",
+      "reason": "The utensil/preparation role is a documented culinary use; the authored direction is appropriate."
+    },
+    {
+      "index": 37,
+      "src": "n_v84_food_sucitor",
+      "dst": "n_v2gas_placinte",
+      "relation": "used_to_prepare",
+      "record_sha256": "da80e85d01c8024660bc5f62abfde9e84a5b3c36741a4023c2efb1297bbc62c6",
+      "verdict": "accept",
+      "reason": "The utensil/preparation role is a documented culinary use; the authored direction is appropriate."
+    },
+    {
+      "index": 38,
+      "src": "n_v84_food_sucitor",
+      "dst": "n_v3gas_paste",
+      "relation": "used_to_prepare",
+      "record_sha256": "244e1b28b99c00de7f6e8253dab1aff1ed7305f28e48d9b191f221fe358edb12",
+      "verdict": "accept",
+      "reason": "The utensil/preparation role is a documented culinary use; the authored direction is appropriate."
+    },
+    {
+      "index": 39,
+      "src": "n_v84_food_sucitor",
+      "dst": "n_v42gas_placinta_mere",
+      "relation": "used_to_prepare",
+      "record_sha256": "87a240d3b20bcf0ec6c43e5280e98aaaaf6dacefdd03a2681ec6d19ad6826f00",
+      "verdict": "accept",
+      "reason": "The utensil/preparation role is a documented culinary use; the authored direction is appropriate."
+    },
+    {
+      "index": 40,
+      "src": "n_v84_food_cuptor",
+      "dst": "n_gas_cozonac",
+      "relation": "used_to_cook",
+      "record_sha256": "5539be08586e0e440b22b5d0153b2dfc8097be49f41e10353fc78062283b19ff",
+      "verdict": "accept",
+      "reason": "The utensil/preparation role is a documented culinary use; the authored direction is appropriate."
+    },
+    {
+      "index": 41,
+      "src": "n_v4gas_sare",
+      "dst": "n_v84_food_saramura",
+      "relation": "part_of",
+      "record_sha256": "9b143998f79bb2bc499a9cfb8467eaa7b46ce5e5e4cdb606a9e8035983d9ff04",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 42,
+      "src": "n_v4gas_apa",
+      "dst": "n_v84_food_saramura",
+      "relation": "part_of",
+      "record_sha256": "31f4a69e011fee1decef630777c5769f6dc3f25272a53dab6c441d72787e3ea4",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 43,
+      "src": "n_v84_food_saramura",
+      "dst": "n_gas_telemea",
+      "relation": "used_to_prepare",
+      "record_sha256": "8885d3b8744a8efe0873c6e1e8828923da50193f0ac68c2cc4ce1c28fd0a9e11",
+      "verdict": "accept",
+      "reason": "The utensil/preparation role is a documented culinary use; the authored direction is appropriate."
+    },
+    {
+      "index": 44,
+      "src": "n_v84_food_saramura",
+      "dst": "n_gas_muraturi",
+      "relation": "used_to_prepare",
+      "record_sha256": "54bf5eede6f2140afd8f563d1d43d44e6a3b923bc2ff8443fa00746bf6ccd141",
+      "verdict": "accept",
+      "reason": "The utensil/preparation role is a documented culinary use; the authored direction is appropriate."
+    },
+    {
+      "index": 45,
+      "src": "n_v4gas_lapte",
+      "dst": "n_v84_food_zer",
+      "relation": "processed_into",
+      "record_sha256": "2f15a6e4ba197fdec74ade93083f25bb163bb5ef44fd6b6cdcca328722baf670",
+      "verdict": "accept",
+      "reason": "The named ingredient/material/process association is factual in the described culinary sense; keep its authored direction."
+    },
+    {
+      "index": 46,
+      "src": "n_v2gas_branza",
+      "dst": "n_v84_food_zer",
+      "relation": "production_byproduct",
+      "record_sha256": "5e3967a8b383ca627a4d052aec3a2613f60d59c92b3338cd07fdea1d6f6e9892",
+      "verdict": "accept",
+      "reason": "The specified milk-processing/material relation is supported; no reverse production or ingredient identity is implied."
+    },
+    {
+      "index": 47,
+      "src": "n_gas_telemea",
+      "dst": "n_v84_food_zer",
+      "relation": "production_byproduct",
+      "record_sha256": "a512840a79c0170f46d25cc2f4f5fb0d26e33f195e5ebdb514e651975e8c2b43",
+      "verdict": "accept",
+      "reason": "The specified milk-processing/material relation is supported; no reverse production or ingredient identity is implied."
+    },
+    {
+      "index": 48,
+      "src": "n_v84_food_zer",
+      "dst": "n_gas_urda",
+      "relation": "raw_material_for",
+      "record_sha256": "fbb7030a1d3bbf1a0ddb56c6ac02029ea5a13b9e6d3780298fabbf8a953f0edc",
+      "verdict": "accept",
+      "reason": "The specified milk-processing/material relation is supported; no reverse production or ingredient identity is implied."
+    },
+    {
+      "index": 49,
+      "src": "n_v84_food_cheag",
+      "dst": "n_v4gas_lapte",
+      "relation": "coagulates",
+      "record_sha256": "fbe976ca975d0ded1e1e2923f2fb72d913ca5fd1e2391912e5452f02bdc04d21",
+      "verdict": "accept",
+      "reason": "The specified milk-processing/material relation is supported; no reverse production or ingredient identity is implied."
+    },
+    {
+      "index": 50,
+      "src": "n_v84_food_cheag",
+      "dst": "n_v2gas_branza",
+      "relation": "used_to_prepare",
+      "record_sha256": "8500fa6af6b3af6ea6fdca28199d048881e9f681247a5bcbc324522a61a7d2b2",
+      "verdict": "accept",
+      "reason": "The utensil/preparation role is a documented culinary use; the authored direction is appropriate."
+    },
+    {
+      "index": 51,
+      "src": "n_v84_food_cheag",
+      "dst": "n_gas_telemea",
+      "relation": "used_to_prepare",
+      "record_sha256": "18e6ab41952334200c70d0b72fe56713f465f13e95571b9965064f71292ad096",
+      "verdict": "accept",
+      "reason": "The utensil/preparation role is a documented culinary use; the authored direction is appropriate."
+    },
+    {
+      "index": 52,
+      "src": "n_v84_food_cheag",
+      "dst": "n_v20gas_cascaval",
+      "relation": "used_to_prepare",
+      "record_sha256": "343d927c40e1fd09b700e008de0538b1c397ae4ff2b3e22d654813466898a615",
+      "verdict": "accept",
+      "reason": "The utensil/preparation role is a documented culinary use; the authored direction is appropriate."
+    },
+    {
+      "index": 53,
+      "src": "n_v84_food_malai",
+      "dst": "n_v84_food_gris",
+      "relation": "same_category",
+      "record_sha256": "85c452467705ad1911c77ba64c5622eb833ba7165d7a641e211ab6f002d3226b",
+      "verdict": "accept",
+      "reason": "The narrow shared class is true; this does not equate ingredients or assert that they transform into one another."
+    },
+    {
+      "index": 54,
+      "src": "n_v84_food_malai",
+      "dst": "n_v24_food_pantry_faina",
+      "relation": "same_category",
+      "record_sha256": "3270dc854b0c91d0a7ade3b40eb6b0565f24aee5fdfaa93189ab4ac7c6afa264",
+      "verdict": "accept",
+      "reason": "The narrow shared class is true; this does not equate ingredients or assert that they transform into one another."
+    },
+    {
+      "index": 55,
+      "src": "n_v84_food_gris",
+      "dst": "n_v24_food_pantry_faina",
+      "relation": "same_category",
+      "record_sha256": "0990a7c421f2e9d9d90cc72ce68b74826727cfe0ab5e12269cc669cfa0b821ee",
+      "verdict": "accept",
+      "reason": "The narrow shared class is true; this does not equate ingredients or assert that they transform into one another."
+    },
+    {
+      "index": 56,
+      "src": "n_v84_food_gris",
+      "dst": "n_v84_food_arpacas",
+      "relation": "same_category",
+      "record_sha256": "09fe411876c51ac158435034b923b0c93288d9ce177a9756bdf214f8983014ce",
+      "verdict": "accept",
+      "reason": "The narrow shared class is true; this does not equate ingredients or assert that they transform into one another."
+    }
+  ],
+  "removals": [
+    {
+      "id": "de520",
+      "verdict": "accept",
+      "reason": "Poale-n brâu is a pastry, so the cheese same_category predicate is false. Exact complete record matches baseline."
+    }
+  ],
+  "sources_checked": [
+    {
+      "url": "https://www.oetker.ro/retete/r/cozonac-moldovenesc",
+      "supports": "Yeast dough, baking tray and oven for cozonac; directly read method."
+    },
+    {
+      "url": "https://www.oetker.ro/retete/r/gogosi-glazurate",
+      "supports": "Yeast dough and shaped doughnut variant; directly read method."
+    },
+    {
+      "url": "https://www.nutella.com/ro/ro/lasa-te-inspirat/retete/cornulete-cu-fructe-uscate",
+      "supports": "Rolled dough, lined tray and oven for cornulețe; directly read method."
+    },
+    {
+      "url": "https://www.pastebaneasa.ro/retete/placinta-cu-mere/",
+      "supports": "Apple filling, dough, rolling pin, tray and oven; full page directly accessible to this reviewer."
+    },
+    {
+      "url": "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/salam-de-biscuiti-id594218.html",
+      "supports": "Biscuits and butter variant in the named dessert."
+    },
+    {
+      "url": "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/coliva-2-id594496.html",
+      "supports": "Arpacaș as a colivă ingredient."
+    },
+    {
+      "url": "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/placinte-moldovenesti-id1033103.html",
+      "supports": "Poale-n brâu is a dough pastry with filling, not a cheese."
+    },
+    {
+      "url": "https://www.ikea.com/ro/ro/cat/kafferep-37807/",
+      "supports": "Actual oat-biscuit products; no nutrition or popularity inference."
+    },
+    {
+      "url": "https://agriculture.ec.europa.eu/farming/geographical-indications-and-quality-schemes/geographical-indications-food-and-drink/telemea-de-sibiu-pgi_ro",
+      "supports": "Rennet coagulation, whey separation and pressing in Telemea production."
+    },
+    {
+      "url": "https://eur-lex.europa.eu/legal-content/RO/TXT/?uri=CELEX:52019XC0617(01)",
+      "supports": "Telemea specification explicitly includes preservation in brine."
+    },
+    {
+      "url": "https://eur-lex.europa.eu/legal-content/RO/TXT/PDF/?uri=CELEX:52020XC0116(01)",
+      "supports": "Cașcaval de Săveni specification explicitly includes rennet coagulation."
+    },
+    {
+      "url": "https://dexonline.ro/definitie/sucitoare",
+      "supports": "Sucitor culinary sense, plural, case forms and distinct bird noun."
+    },
+    {
+      "url": "https://dexonline.ro/definitie/m%C4%83lai",
+      "supports": "Corn milling product and făină de porumb lexical equivalence."
+    },
+    {
+      "url": "https://dexonline.ro/definitie/gri%C8%99",
+      "supports": "Granular cereal product and soup/dumpling use."
+    },
+    {
+      "url": "https://dexonline.ro/definitie/arpaca%C8%99",
+      "supports": "Wheat/barley/millet dehulled-grain definition."
+    },
+    {
+      "url": "https://dexonline.ro/definitie/secar%C4%83",
+      "supports": "Rye and the secarei case form."
+    },
+    {
+      "url": "https://dexonline.ro/definitie/zer",
+      "supports": "Whey identity."
+    },
+    {
+      "url": "https://dexonline.ro/definitie/urda",
+      "supports": "Whey-cheese identity."
+    },
+    {
+      "url": "https://dexonline.ro/intrare/drojdie/17744",
+      "supports": "Baking preparation sense and alternative senses."
+    },
+    {
+      "url": "https://dexonline.ro/definitie/aluat/322624",
+      "supports": "Dough identity."
+    },
+    {
+      "url": "https://dexonline.ro/intrare/cuptor/14390",
+      "supports": "Oven identity and need for culinary qualification."
+    },
+    {
+      "url": "https://dexonline.ro/intrare/saramur%C4%83/50165",
+      "supports": "Brine identity."
+    },
+    {
+      "url": "https://dexonline.ro/definitie/tav%C4%83",
+      "supports": "Tray identity and qualified culinary use."
+    }
+  ],
+  "limitations": [
+    "Salience values are editorial estimates, not measured recognition rates.",
+    "Four incident neighbors is not four outgoing game continuations; report both counts.",
+    "Specific truthful edges can still create false-hot paths or unintuitive shared-neighbor crafts; runtime impact review remains necessary.",
+    "No new Conexiuni/Intrusul/Perechi content is implied by this graph review.",
+    "The IULS biscuit PDF was not retrievable by this reviewer; oat variants are independently verified from IKEA products instead."
+  ],
+  "transaction_review": {
+    "verdict": "accept_after_fix",
+    "fixed_finding": "Duplicate baseline IDs could delete an unreviewed same-ID record; uniqueness guard now rejects the independent reproduction.",
+    "checks": [
+      "Exact/stale/partial/retyped/duplicate review rejection",
+      "Nonmutating preflight",
+      "Retired ID not reused within transaction",
+      "BaseException rollback preserves snapshotted artifacts",
+      "Dry run avoids writer"
+    ],
+    "source_sha256": {
+      "scripts/densify_content.py": "8ca4e0bff847e4174b274c2389cf22380ce943db57360c7a37d69c8a2c3cc2ce",
+      "scripts/apply_common_words_v24.py": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91",
+      "tests/test_reviewed_graph_removals.py": "2ad543d5a6f9d0f2add1d844065501e227658859dfe3f920e00b656c95ae7324"
+    }
+  }
+}

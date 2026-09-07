@@ -1,0 +1,55 @@
+{
+  "reviewer": "root-v84",
+  "role": "analyst",
+  "input_ids": [
+    "ct_gastronomie_334",
+    "ct_gastronomie_335",
+    "ct_gastronomie_336",
+    "lt_gastronomie_220"
+  ],
+  "items": [
+    {
+      "id": "ct_gastronomie_334",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:9c0e00188149528555adb4e18b0923d0d9ca042d7b3d4061276d3c46d4287a38",
+      "rationale": "A1/A2/C1/C2/C5: Plăcintă cu mere is an ordinary concrete home-baked dessert with one dominant compound sense, supported by a Romanian manufacturer recipe and recipe-library coverage. C6 salience0.60 meets easy; C3 all five directed incoming neighbors (apple, pies, dough, rolling pin and tray) are recognizable, with2304 reachable. C4 actual core apple/dough/tray/sucitor rank3 hot, pies2 and flour11hot; unrelated train/football cold. A3/A4/A7: precise ingredient, shaping and baking links state their actual roles, no invented regional exclusivity or ingredient universality. A5/A6: fresh target, no editorial trigger. Butter506cold and optional yeast11hot are remaining noise; qualified oven78 is only lukewarm. The repaired defining apple and dough routes clearly outperform these weaknesses, so promote this bound easy target without claiming complete recipe semantics.",
+      "sources": [
+        "https://www.pastebaneasa.ro/retete/placinta-cu-mere/",
+        "https://digital.bibliotecaarad.ro/files/original/d64f6b3103080d1994b6f1de452a49ce9e54c086.pdf"
+      ]
+    },
+    {
+      "id": "ct_gastronomie_335",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:baae5f59a5138fa2de746c668a0837b78b75cb0d13852e3f6729a0294df2e435",
+      "rationale": "A1/A2/C1/C2/C5: Salam de biscuiți is a familiar concrete biscuit dessert, with a compound distinct from meat salami; national radio and current Romanian home-recipe coverage support recognition. C6salience0.68 supports easy; C3six direct familiar neighbors include biscuit, butter, dessert, pastry, cornulețe and childhood context,2304reachable. C4dessert2,biscuit3,butter3 and pastry7 are hot; food18/milk61warm. A3/A4/A7: biscuits define the dish, butter is a documented variant; no claim that every recipe contains butter. A5/A6fresh and no editorial hold. Oven/tray36warm is a residual misleading baking route for this usually no-bake dessert; yeast77/Sarmale86are lukewarm. Defining non-baking ingredient routes rank far closer, with input identity preserved and no false win. Promote while explicitly recording the no-bake inconsistency.",
+      "sources": [
+        "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/salam-de-biscuiti-id594218.html"
+      ]
+    },
+    {
+      "id": "ct_gastronomie_336",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:ef41ad1656450431c79be54779596cb269d88c7cf973f9832b0e2646bc780c35",
+      "rationale": "A1/A2/C1/C2/C5: generic Pâine is a universally familiar concrete staple, distinct from the graph concepts Pâine de casă and Pâine cu maia. Dictionary/manufacturer evidence supports everyday food and production knowledge; C6salience0.9273 supports easy. C3eighteen incoming neighbors provide recognizable cutting, serving and production context;2304reachable. C4dough,yeast and qualified oven are hot7; flour/grain/water warm45, with flour improved from cold391. A3/A4/A7yeast is conventional rather than universal; links retain specific process wording and no fabricated regional association. A5/A6no editorial trigger or duplicate target. Sarmale27still outranks flour within warm band and Stilou219/Christmas108are lukewarm, but none outranks the production core. V77 rejected Făină→Pâine de casă remains absent, and Făină→Stiloul cu rezervor remains cold618. This is a new review of the separate generic target after substantive graph changes, not reuse of the prior rejected claim. Promote with those limits.",
+      "sources": [
+        "https://dexonline.ro/definitie/p%C3%A2ine",
+        "https://www.oetker.ro/retete/r/paine-cu-drojdie-uscata"
+      ]
+    },
+    {
+      "id": "lt_gastronomie_220",
+      "game": "lant",
+      "verdict": "promote",
+      "review_binding": "sha256:fbb1ce8a58dcfdfd5b71c7fa3a56625899dfd337fc639fd2bd54c36c14b4d3c6",
+      "rationale": "A1/A2/D1: visible Făină and Cornulețe are familiar household baking concepts; independent Romanian recipe evidence supports recognition. D2/D5: Făină→Aluat→Cornulețe reads as ingredient to dough to shaped pastry. The alternative Făină→Cozonac→Cornulețe uses an explicitly labeled shared holiday-baking association, not a physical transformation; it is weaker but legible. D3the exact directed dossier has two valid first hops, minimum intermediate width2 and two shortest-path intermediates, with no choke point. D4two hops fits easy. The salience_floorWARN0.55 for Cornulețe is acknowledged: unlike hidden-word discovery, the endpoint is displayed, and the main route uses elementary familiar dough, so this modest editorial salience estimate does not make the easy route obscure. A3/A4/A7each relation label is honest; no regional exclusivity. A5/A6fresh directed endpoint pair and no tombstone/editorial trigger. Promote with the weaker seasonal alternative disclosed and both real API routes tested.",
+      "sources": [
+        "https://www.nutella.com/ro/ro/lasa-te-inspirat/retete/cornulete-cu-fructe-uscate",
+        "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/cornulete-cu-untura-id594322.html"
+      ]
+    }
+  ]
+}

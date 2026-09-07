@@ -83,6 +83,7 @@ class Batch:
     intuitive_pairs: tuple[tuple[str, str], ...]
     build_version: str
     note: str
+    remove_edges: tuple[dict, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -351,6 +352,11 @@ def _load_batch(module_name: str = "common_words_v24_data") -> Batch:
     game_items = built_game_items
     if game_items is None:
         game_items = _module_constant(module, "GAME_ITEMS", default=None)
+    remove_edges = _module_constant(module, "REMOVE_EDGES", default=())
+    if not isinstance(remove_edges, (list, tuple)) or any(
+        not isinstance(record, dict) for record in remove_edges
+    ):
+        fail("REMOVE_EDGES must be a sequence of complete prior edge records")
     return Batch(
         nodes=nodes,
         edges=edges,
@@ -373,6 +379,7 @@ def _load_batch(module_name: str = "common_words_v24_data") -> Batch:
         intuitive_pairs=tuple(pairs),
         build_version=build_version,
         note=note,
+        remove_edges=tuple(deepcopy(remove_edges)),
     )
 
 
@@ -458,10 +465,15 @@ def _detect_already_applied(batch: Batch, fixture: dict) -> None:
 
 
 def _preflight(batch: Batch, fixture: dict) -> ProbePlan:
-    if not batch.nodes and not batch.edges and not batch.aliases:
+    if not batch.nodes and not batch.edges and not batch.aliases and not batch.remove_edges:
         fail("the common-word wave is empty")
     existing_nodes = list(fixture["kg_nodes"])
-    existing_edges = list(fixture["kg_edges"])
+    try:
+        existing_edges = densify_content.remove_reviewed_edges(
+            fixture["kg_edges"], batch.remove_edges
+        )
+    except ValueError as exc:
+        fail(str(exc))
     existing_node_ids = {str(node["id"]) for node in existing_nodes}
     incoming_ids = [str(node["id"]) for node in batch.nodes]
     duplicate_ids = sorted(node_id for node_id, count in Counter(incoming_ids).items() if count > 1)
@@ -548,7 +560,7 @@ def _preflight(batch: Batch, fixture: dict) -> ProbePlan:
             f"unresolved={unresolved_benchmark}"
         )
 
-    existing_edge_ids = {str(edge["id"]) for edge in existing_edges}
+    existing_edge_ids = {str(edge["id"]) for edge in fixture["kg_edges"]}
     supplied_edge_ids = [str(edge["id"]) for edge in batch.edges if "id" in edge]
     duplicate_edge_ids = sorted(
         edge_id for edge_id, count in Counter(supplied_edge_ids).items() if count > 1
@@ -588,6 +600,8 @@ def _preflight(batch: Batch, fixture: dict) -> ProbePlan:
             playable_neighbors[dst].add(src)
     for edge in batch.edges:
         touched.update((str(edge["src"]), str(edge["dst"])))
+    for edge in batch.remove_edges:
+        touched.update((str(edge["src_id"]), str(edge["dst_id"])))
     isolated = sorted(node_id for node_id in incoming_ids if degrees[node_id] == 0)
     if isolated:
         fail(f"new common-word nodes must not be isolated: {isolated}")
@@ -637,6 +651,9 @@ def _preflight(batch: Batch, fixture: dict) -> ProbePlan:
 def _verify_merged_graph(batch: Batch, plan: ProbePlan, fixture: dict) -> None:
     nodes = list(fixture["kg_nodes"])
     edges = list(fixture["kg_edges"])
+    removed_ids = {edge["id"] for edge in batch.remove_edges}
+    if removed_ids & {edge["id"] for edge in edges}:
+        fail("reviewed removed edge IDs are still present or were reused")
     if len(nodes) != plan.baseline_node_count + len(batch.nodes):
         fail("merged node count does not equal baseline plus the authored wave")
     if len(edges) != plan.baseline_edge_count + len(batch.edges):
@@ -849,7 +866,11 @@ def apply(*, dry_run: bool = False, module_name: str = "common_words_v24_data") 
             return
 
         rc = densify_content.run(
-            {"nodes": list(batch.nodes), "edges": list(batch.edges), "aliases": batch.aliases},
+            {
+                "nodes": list(batch.nodes), "edges": list(batch.edges),
+                "aliases": batch.aliases,
+                "remove_edges": list(getattr(batch, "remove_edges", ())),
+            },
             batch.build_version,
             batch.note,
         )

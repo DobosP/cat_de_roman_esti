@@ -20,6 +20,7 @@ from cat_de_roman_esti.wordgames.contexto_projection import (  # noqa: E402
     suggest_projection,
 )
 from cat_de_roman_esti.wordgames.service import WordGameService, get_service  # noqa: E402
+from tests.content_history import before_v84_projection_rows  # noqa: E402
 
 SOUP = "n_gas_ciorba_burta"
 BODY = "n_v4sti_corp"
@@ -56,11 +57,11 @@ def _edge(edge_id: str, src: str, dst: str, *, bidirectional: bool = False) -> d
 
 
 def test_all_projection_rows_and_body_meaning_remain_exactly_v81():
-    rows = [
+    rows = before_v84_projection_rows([
         (term.surface, term.anchor_id, term.domain, term.rank_penalty,
          term.mapping_kind, term.public_id)
         for term in PROJECTION_TERMS
-    ]
+    ])
     assert len(rows) == 472
     blob = json.dumps(rows, ensure_ascii=False, separators=(",", ":")).encode()
     assert hashlib.sha256(blob).hexdigest() == V81_PROJECTION_SHA256

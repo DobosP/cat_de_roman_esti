@@ -1,0 +1,221 @@
+{
+  "baseline_commit": "83538809d4913c4b22f36cf92c4f1502f50f83f3",
+  "seeds_per_scope": 100,
+  "dates_per_scope": 30,
+  "month": "2026-09",
+  "scope_count": 22,
+  "changed_selections": {
+    "conexiuni:None:None": {
+      "seeds": 0,
+      "dates": 0
+    },
+    "conexiuni:None:usor": {
+      "seeds": 0,
+      "dates": 0
+    },
+    "conexiuni:None:normal": {
+      "seeds": 0,
+      "dates": 0
+    },
+    "contexto:None:None": {
+      "seeds": 74,
+      "dates": 0
+    },
+    "contexto:None:usor": {
+      "seeds": 66,
+      "dates": 1
+    },
+    "contexto:None:normal": {
+      "seeds": 0,
+      "dates": 0
+    },
+    "contexto:gastronomie:usor": {
+      "seeds": 16,
+      "dates": 4
+    },
+    "contexto:gastronomie:normal": {
+      "seeds": 1,
+      "dates": 1
+    },
+    "lant:None:None": {
+      "seeds": 45,
+      "dates": 1
+    },
+    "lant:None:usor": {
+      "seeds": 41,
+      "dates": 1
+    },
+    "lant:None:normal": {
+      "seeds": 0,
+      "dates": 0
+    },
+    "lant:gastronomie:usor": {
+      "seeds": 17,
+      "dates": 5
+    },
+    "lant:gastronomie:normal": {
+      "seeds": 0,
+      "dates": 0
+    },
+    "alchimie:None:None": {
+      "seeds": 0,
+      "dates": 0
+    },
+    "alchimie:None:usor": {
+      "seeds": 0,
+      "dates": 0
+    },
+    "alchimie:None:normal": {
+      "seeds": 0,
+      "dates": 0
+    },
+    "lant_runtime:None:usor": {
+      "seeds": 41,
+      "dates": 1
+    },
+    "lant_runtime:gastronomie:usor": {
+      "seeds": 17,
+      "dates": 5
+    },
+    "intrusul:None:starter=False": {
+      "seeds": 0,
+      "dates": 0
+    },
+    "intrusul:None:starter=True": {
+      "seeds": 0,
+      "dates": 0
+    },
+    "perechi:None:starter=False": {
+      "seeds": 0,
+      "dates": 0
+    },
+    "perechi:None:starter=True": {
+      "seeds": 0,
+      "dates": 0
+    }
+  },
+  "repeat_exact": true,
+  "reviewed_fixed_dates": {
+    "conexiuni:2026-07-19": {
+      "before": "cx_meme_net_201",
+      "after": "cx_meme_net_201"
+    },
+    "conexiuni:2026-12-31": {
+      "before": "cx_viata_de_roman_288",
+      "after": "cx_viata_de_roman_288"
+    },
+    "contexto:2026-07-19": {
+      "before": "ct_viata_de_roman_273",
+      "after": "ct_viata_de_roman_273"
+    },
+    "contexto:2026-12-31": {
+      "before": "ct_gastronomie_328",
+      "after": "ct_gastronomie_328"
+    },
+    "lant:2026-07-19": {
+      "before": "lt_viata_de_roman_094",
+      "after": "lt_viata_de_roman_094"
+    },
+    "lant:2026-12-31": {
+      "before": "lt_film_tv_011",
+      "after": "lt_film_tv_011"
+    },
+    "alchimie:2026-07-19": {
+      "before": "al_muzica_066",
+      "after": "al_muzica_066"
+    },
+    "alchimie:2026-12-31": {
+      "before": "al_film_tv_106",
+      "after": "al_film_tv_106"
+    }
+  },
+  "reviewed_date_changes": {},
+  "new_records_observed": {
+    "contexto:None:None": {
+      "seeds": [
+        "ct_gastronomie_335",
+        "ct_gastronomie_336"
+      ],
+      "dates": []
+    },
+    "contexto:None:usor": {
+      "seeds": [
+        "ct_gastronomie_336"
+      ],
+      "dates": [
+        "ct_gastronomie_336"
+      ]
+    },
+    "contexto:gastronomie:usor": {
+      "seeds": [
+        "ct_gastronomie_334",
+        "ct_gastronomie_336"
+      ],
+      "dates": [
+        "ct_gastronomie_336"
+      ]
+    },
+    "lant:None:None": {
+      "seeds": [
+        "lt_gastronomie_220"
+      ],
+      "dates": [
+        "lt_gastronomie_220"
+      ]
+    },
+    "lant:None:usor": {
+      "seeds": [
+        "lt_gastronomie_220"
+      ],
+      "dates": [
+        "lt_gastronomie_220"
+      ]
+    },
+    "lant:gastronomie:usor": {
+      "seeds": [
+        "lt_gastronomie_220"
+      ],
+      "dates": [
+        "lt_gastronomie_220"
+      ]
+    },
+    "lant_runtime:None:usor": {
+      "seeds": [
+        "lt_gastronomie_220"
+      ],
+      "dates": [
+        "lt_gastronomie_220"
+      ]
+    },
+    "lant_runtime:gastronomie:usor": {
+      "seeds": [
+        "lt_gastronomie_220"
+      ],
+      "dates": [
+        "lt_gastronomie_220"
+      ]
+    }
+  },
+  "scope_note": "Catalog samples use all difficulties plus easy/normal unfiltered shelves; Contexto and Lanț include easy/normal food shelves. Contexto uses relative shelf weights. Lanț_runtime additionally invokes the actual easy width-preference selector. Derived samples include established/starter profiles and their shared daily. Eight historical fixed dates preserve V83 normal/default-weight semantics. No history exclusions. Bounded sampling, not all seeds.",
+  "interpretation": "Same-artifact repeated candidate selections are exact. Before/after remapping is an intended consequence of the reviewed graph ranking/weight refresh and four new approved records; it is not nondeterminism. Unchanged source records do not imply fixed seed/date choices across content versions.",
+  "artifact_bindings": {
+    "baseline": {
+      "cat_de_roman_esti/fixtures/kg_sample.json": "4ce12d15ec247ebcaba3e119caed91f8d2624b09fa5568a8d7ece728f76a8a5e",
+      "cat_de_roman_esti/fixtures/games_pack.json": "78e680f3849f9a9de2a2675cbe7349ba23c8165f415cfc89a7533121bc34399c",
+      "cat_de_roman_esti/fixtures/board_rankings_v37.json": "f80397b3fc1dbfb58c9b4daf1e74fcebc43b698a5e290660333dad71a5d8dfb2",
+      "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "e406f182bbc8629b05dac9f2d58b51de45113f2917b8beeb078f8ddccf2a66af"
+    },
+    "candidate": {
+      "cat_de_roman_esti/fixtures/kg_sample.json": "3fb0f97c5b4c813eb72d8fd3589c4ce92f724d0565db840c1bc3909458a60ab0",
+      "cat_de_roman_esti/fixtures/games_pack.json": "c843705d565770d6916567be8b7c627c16bfdcf9dd8368e6a333f0f222484b57",
+      "cat_de_roman_esti/fixtures/board_rankings_v37.json": "67a7a3274f24485d45ab75191a9701482c0959be4029e29e47c7c576360a6075",
+      "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "579128d90d34a57a093202e54babe76b1ceb6840a36e332c9ecc540a8fb5251a"
+    }
+  },
+  "evidence_sha256": {
+    "selection_capture.py": "2f6a918ea2deded546801b4673a8fc8fea4b67bc4e760182c1ee0f08d8ac6c63",
+    "selection-baseline.json": "97ab3f50d8d0d20898acc5db60059b4904cd4138f51d95f123aa1c936ceea595",
+    "selection-candidate.json": "ac66e0d13ba09af8e12c5f1e26fea51ead54a87c30f3e766e0f305f04a8fbaf8",
+    "selection-repeat.json": "ac66e0d13ba09af8e12c5f1e26fea51ead54a87c30f3e766e0f305f04a8fbaf8"
+  }
+}

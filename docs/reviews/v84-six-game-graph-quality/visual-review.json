@@ -1,0 +1,20 @@
+{
+  "checks": [
+    {
+      "file": "screenshots/alchimie-earned.png",
+      "viewport": "1280x950",
+      "observation": "Earned concepts display the two authored oriented links in a readable discovery card; target, actions and inventory remain distinct."
+    },
+    {
+      "file": "screenshots/perechi-help-mobile.png",
+      "viewport": "390x844",
+      "observation": "Open help remains below the compact header; rules and board are readable without a new overlap or page overflow. Existing HUD remains horizontally scrollable."
+    }
+  ],
+  "browser": "Local Chromium against the built V84 app, Romanian locale and reduced motion",
+  "scope": "Assistant visual inspection plus automated desktop/mobile browser checks; not a real-device or human-player usability study.",
+  "sha256": {
+    "alchimie-earned.png": "f9988e74f9b782b5a91de926a923765269e6fcdb3a43303fae8d50df935cce8e",
+    "perechi-help-mobile.png": "ff84edaaeedd2e6a57ac4605fa23414661adb844699dcd056d5e21368af925d0"
+  }
+}

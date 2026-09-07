@@ -70,7 +70,7 @@ test("Romanian labels wrap on a responsive Connections board and long paths scro
 });
 
 test("global shortcuts ignore focused controls instead of double-submitting", () => {
-  const selector = /target\?\.closest\(\s*'button, a, input, textarea, select, \[role="button"\], \[contenteditable="true"\]'/;
+  const selector = /target\?\.closest\(\s*'button, a, input, textarea, select, summary, \[role="button"\], \[contenteditable="true"\]'/;
   for (const screen of [alchimie, lant, conexiuni]) {
     assert.match(screen, /e\.defaultPrevented/);
     assert.match(screen, selector);

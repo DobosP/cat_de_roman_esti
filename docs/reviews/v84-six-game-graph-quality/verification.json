@@ -1,0 +1,458 @@
+{
+  "schema_version": 2,
+  "date": "2026-09-07",
+  "baseline_commit": "83538809d4913c4b22f36cf92c4f1502f50f83f3",
+  "candidate_branch": "feat/v84-six-game-graph-quality",
+  "result": "passed",
+  "final_backend_results": {
+    "backend312": [
+      1207,
+      767.72
+    ],
+    "backend314": [
+      1207,
+      667.85
+    ],
+    "accounts312": [
+      53,
+      7.84
+    ],
+    "accounts314": [
+      53,
+      8.05
+    ]
+  },
+  "checks": {
+    "backend312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v84-six-game-graph-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 771.0,
+      "log_sha256": "ad25944352a660644132199722d6ace6faa7e8652066cc678519b82ec70f79fd",
+      "tail": [
+        "........................................................................ [ 41%]",
+        "........................................................................ [ 47%]",
+        "........................................................................ [ 53%]",
+        "........................................................................ [ 59%]",
+        "........................................................................ [ 65%]",
+        "........................................................................ [ 71%]",
+        "........................................................................ [ 77%]",
+        "........................................................................ [ 83%]",
+        "........................................................................ [ 89%]",
+        "........................................................................ [ 95%]",
+        ".......................................................                  [100%]",
+        "1207 passed in 767.72s (0:12:47)"
+      ]
+    },
+    "accounts312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v84-six-game-graph-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 10.26,
+      "log_sha256": "d317464ed50fb084ad25ed6cfa5793b5ee904089de5f5c11e28c298e1030aff7",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 7.84s"
+      ]
+    },
+    "backend314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v84-six-game-graph-quality/py314/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v84-six-game-graph-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 671.6,
+      "log_sha256": "272c7f21c75a0dec70946540658754b02014cb738a5f19c799a228a174d78bfd",
+      "tail": [
+        "........................................................................ [ 41%]",
+        "........................................................................ [ 47%]",
+        "........................................................................ [ 53%]",
+        "........................................................................ [ 59%]",
+        "........................................................................ [ 65%]",
+        "........................................................................ [ 71%]",
+        "........................................................................ [ 77%]",
+        "........................................................................ [ 83%]",
+        "........................................................................ [ 89%]",
+        "........................................................................ [ 95%]",
+        ".......................................................                  [100%]",
+        "1207 passed in 667.85s (0:11:07)"
+      ]
+    },
+    "accounts314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v84-six-game-graph-quality/py314/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v84-six-game-graph-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 11.03,
+      "log_sha256": "425ce9434c23e7c687e31ab5f7c1ce892e8393890b18988b75356f0f9b9a5e59",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 8.05s"
+      ]
+    },
+    "frontend_native": {
+      "command": [
+        "npm",
+        "test"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v84-six-game-graph-quality/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 1.6,
+      "log_sha256": "049964a724110aa64d27927e141afeeddb9d344ae8396f74a7477c5146f19fb1",
+      "tail": [
+        "✔ the starter chip appears on Intrusul/Perechi cards only pre-graduation (0.310136ms)",
+        "✔ the hero tagline names the cultural range and keeps the h1 untouched (0.290049ms)",
+        "✔ meta-loop CSS lives under its V42 anchor and keeps the diploma action >=44px (0.255664ms)",
+        "✔ optional account controls stay outside the initial bundle graph (0.145534ms)",
+        "ℹ tests 177",
+        "ℹ suites 0",
+        "ℹ pass 177",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 1266.471101"
+      ]
+    },
+    "frontend_lint": {
+      "command": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v84-six-game-graph-quality/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 14.97,
+      "log_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 lint",
+        "> eslint .",
+        ""
+      ]
+    },
+    "frontend_typecheck": {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v84-six-game-graph-quality/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 6.66,
+      "log_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 typecheck",
+        "> tsc --noEmit",
+        ""
+      ]
+    },
+    "frontend_bundle": {
+      "command": [
+        "npm",
+        "run",
+        "check:bundle"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v84-six-game-graph-quality/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 0.34,
+      "log_sha256": "0540520e0caf90dd16e71bbc29420bc4f9b88121f8a6ed7f2afc23fdd08d574f",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 check:bundle",
+        "> node scripts/check-bundle-budget.mjs",
+        "",
+        "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+        "     8.38 KiB  assets/index-CkVCIp7R.css",
+        "   110.49 KiB  assets/index-DrZ9bHv_.js",
+        "   118.87 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ]
+    },
+    "browser": {
+      "command": [
+        "npm",
+        "run",
+        "test:e2e"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v84-six-game-graph-quality/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 498.49,
+      "log_sha256": "e8e5bda7480cfea93439f32cb28511a1028686f79d1bcf59b50b44e76f67a5a6",
+      "tail": [
+        "  ✓  113 [mobile] › e2e/resume-recovery.spec.mjs:95:5 › V74 saved-game recovery › contexto retains a transiently unavailable game and retries it (3.1s)",
+        "  ✓  114 [mobile] › e2e/resume-recovery.spec.mjs:135:5 › V74 saved-game recovery › contexto recovers a terminal game and scores it exactly once (3.2s)",
+        "  ✓  115 [mobile] › e2e/resume-recovery.spec.mjs:95:5 › V74 saved-game recovery › lant retains a transiently unavailable game and retries it (3.1s)",
+        "  ✓  116 [mobile] › e2e/resume-recovery.spec.mjs:135:5 › V74 saved-game recovery › lant recovers a terminal game and scores it exactly once (3.2s)",
+        "  ✓  117 [mobile] › e2e/resume-recovery.spec.mjs:152:3 › V74 saved-game recovery › a queued terminal score keeps every saved game recoverable until its write finishes (21.3s)",
+        "  ✓  118 [mobile] › e2e/resume-recovery.spec.mjs:203:5 › V74 saved-game recovery › a stale 200 response cannot displace another tab's game (2.5s)",
+        "  ✓  119 [mobile] › e2e/resume-recovery.spec.mjs:203:5 › V74 saved-game recovery › a stale 404 response cannot displace another tab's game (2.4s)",
+        "  ✓  120 [mobile] › e2e/resume-recovery.spec.mjs:248:3 › V74 saved-game recovery › an unmounted resume cannot finish a newer route's create loading (2.9s)",
+        "  ✓  121 [mobile] › e2e/resume-recovery.spec.mjs:290:3 › V74 saved-game recovery › two tabs adopt one terminal session but append its local score once (3.2s)",
+        "  ✓  122 [mobile] › e2e/resume-recovery.spec.mjs:350:3 › V74 saved-game recovery › simultaneous terminal sessions from different games preserve both score rows (2.5s)",
+        "",
+        "  122 passed (8.3m)"
+      ]
+    },
+    "fixture": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_fixture.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v84-six-game-graph-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 0.48,
+      "log_sha256": "236848c7947615d3eb7571904d6bcc191a3dcd8235ca77fbf069ccafce31dce0",
+      "tail": [
+        "  [  ok] alias_unique                 0 error(s)",
+        "  [  ok] label_style                  0 error(s)",
+        "  [  ok] meta_counts                  0 error(s)",
+        "  [  ok] puzzle_par                   0 error(s)",
+        "  [  ok] puzzle_hop_band              0 error(s)",
+        "  [  ok] puzzle_hints                 0 error(s)",
+        "  [  ok] puzzle_ids_resolve           0 error(s)",
+        "  [  ok] puzzle_shortest_path         0 error(s)",
+        "  [  ok] puzzle_category_scope        0 error(s)",
+        "  [  ok] puzzle_distractor_shortcut   0 error(s)",
+        "------------------------------------------------------------",
+        "GREEN: fixture is valid (0 errors)"
+      ]
+    },
+    "pack": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_games_pack.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v84-six-game-graph-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 13.77,
+      "log_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+      "tail": [
+        "  copies_identical         ok",
+        "  structure                ok",
+        "  item_shape               ok",
+        "  unique_ids               ok",
+        "  playability              ok",
+        "  meta_counts              ok",
+        "  id_high_water            ok",
+        "",
+        "games pack GREEN"
+      ]
+    },
+    "pending": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/critique_pack.py",
+        "--status",
+        "pending",
+        "--strict"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v84-six-game-graph-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 0.75,
+      "log_sha256": "f19d308c2a43b0b95b9b12f3458a99e9f64ce7c982f4f113f1997cbbcffae852",
+      "tail": [
+        "critique_pack: 8 item(s) checked, 0 flagged, 0 FAIL finding(s)",
+        "  member_overuse       WARN x65",
+        "  nondistinctive_region_link WARN x16"
+      ]
+    },
+    "ruff": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v84-six-game-graph-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 0.08,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "tail": [
+        "All checks passed!"
+      ]
+    },
+    "docs": {
+      "command": [
+        "python3",
+        "/home/dobo/work/agent-ops/scripts/check_docs.py",
+        "."
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v84-six-game-graph-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 0.18,
+      "log_sha256": "276511f69c31786d17014d5dc0af44df040f43b56e70d4054ca7fdc9bd60bff0",
+      "tail": [
+        "",
+        "## dead links",
+        "(none)",
+        "",
+        "## stale model terms",
+        "(none)",
+        "",
+        "## retired ops verbs",
+        "(none)",
+        "",
+        "## orphan docs",
+        "(none)"
+      ]
+    },
+    "whitespace": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v84-six-game-graph-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 0.28,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tail": []
+    }
+  },
+  "initial_runs": {
+    "initial-backend312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v84-six-game-graph-quality",
+      "exit_code": 1,
+      "elapsed_seconds": 786.5,
+      "log_sha256": "27ddef1d18efd57e9bb99caa518b7988e05b8655c2f3fde6f960a79d68ed6e4b",
+      "tail": [
+        "E         ",
+        "E         - sha256:5ea700a00708cf799a4cad8dcc99c54cb6595f0e99c217b5d890b9a829195918",
+        "E         + sha256:10984193d18dd817029c5972fe84e39bb490c4ef819399408cd54c299c67ed00",
+        "",
+        "tests/test_v72_romanian_dishes_and_pastries_morphology.py:356: AssertionError",
+        "=========================== short test summary info ============================",
+        "FAILED tests/test_games_pack_invariants.py::test_every_approved_lant_has_real_shortest_path_choices",
+        "FAILED tests/test_v45_lant_pending_gate.py::test_v45_pack_keeps_only_the_three_unanimous_repair_holds",
+        "FAILED tests/test_v47_contexto_pending_gate.py::test_v47_live_feedback_proves_mancare_and_rejects_the_misleading_family_field",
+        "FAILED tests/test_v72_romanian_dishes_and_pastries_morphology.py::test_v72_alias_batch_is_exact_collision_free_and_applied_to_both_mirrors",
+        "FAILED tests/test_v72_romanian_dishes_and_pastries_morphology.py::test_v72_mobile_contract_and_v49_ledger_persist_exactly",
+        "5 failed, 1201 passed in 783.07s (0:13:03)"
+      ]
+    },
+    "initial-backend314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v84-six-game-graph-quality/py314/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "observed_wrapper_exit_code": 130,
+      "status": "interrupted",
+      "reason": "Stopped to reload corrected stale inventory and feedback expectations discovered by the other full run; runtime and content unchanged.",
+      "log_sha256": "fef828814c52a0ad79001fcd43997c02a6a6da365192dd19059c77bca3e2a8b1",
+      "tail": [
+        "........................................................................ [ 11%]",
+        "..................................................................F..... [ 17%]",
+        "........................................................................ [ 23%]",
+        "........................................................................ [ 29%]",
+        "........................................................................ [ 35%]",
+        "..........................................F........F.................... [ 41%]",
+        "........................................................................ [ 47%]",
+        "............................................."
+      ]
+    },
+    "second-interrupted-backend314": {
+      "status": "interrupted",
+      "observed_wrapper_exit_code": 130,
+      "reason": "Reload corrected V72 historical graph and mobile expectations found by the completed initial3.12 run; no runtime/content change.",
+      "log_sha256": "31fa99452ec8156f847160936b65ddfc43a81331fbd7f7e194ab350207aacaa9",
+      "tail": [
+        "........................................................................ [ 17%]",
+        "........................................................................ [ 23%]",
+        "........................................................................ [ 29%]",
+        "........................................................................ [ 35%]",
+        "........................................................................ [ 41%]",
+        "........................................................................ [ 47%]",
+        "........................................................................ [ 53%]",
+        "..........F...F.............................................."
+      ]
+    }
+  },
+  "initial_findings": {
+    "completed_initial312": "1201 passed, five stale historical expectations failed: approved Lanț count, Lanț ID high-water, Mâncare responsiveness, V72 incoming-degree range and mobile content hash.",
+    "resolution": "Historical observations remain tested on the reconstructed V83 graph; current counts/hashes use reviewed immutable expectations, and predecessor sets permit exactly the reviewed additions. No runtime/content or ceiling change was used to make these checks pass.",
+    "targeted_confirmation": "Whole V72 and the initial failed cases:10 passed in7.18s; earlier three whole files:22 passed in30.45s.",
+    "interrupted314": "Two diagnostic runs were stopped to reload corrected expectations; their partial logs are preserved and are not counted as successful full runs.",
+    "final": "Fresh complete backend runs pass on both Python versions; both unchanged early timing checks pass inside their full suites."
+  },
+  "focused_and_independent_checks": {
+    "v84_graph_games": "62 passed in6.06s, including all42 forms and four public create/play/resume/win journeys",
+    "historical_current_v75_v83_v33": "183 passed in38.10s",
+    "alchimie_explanations_existing_runtime": "50 passed in123.69s",
+    "removals_and_prior_transaction": "19 passed in2.29s",
+    "independent_implementation": "15 passed in0.77s; no blockers",
+    "graph_impact": "3757 first-guess observations per checkout; all82 old playable recipe projections and97 old Lanț profiles exact; all67 new directed one-hop journeys pass",
+    "bound_final_review": "93 opener probes, three private clue/win journeys, both new Lanț paths and retained cold V77 pen control",
+    "selection": "22 scopes ×100 seeds/30 dates; candidate repeat exact, eight old fixed-date observations exact; changed Contexto/Lanț choices disclosed",
+    "visual": "Inspected built desktop earned-link and mobile help screenshots; local visual server stopped afterward"
+  },
+  "build": {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "observed_exit_code": 0,
+    "log_sha256": "4da14159804fc2045f1d7d0232b6bbc32395e52c5b37bb26c5bc054918d9930e",
+    "initial_transfer_kib": 118.87,
+    "unchanged_limit_kib": 120,
+    "seed38": "Regenerated real public starts; additive Alchimie links, larger Contexto reachability and intended Lanț selection change are bound in seed38-impact.json"
+  },
+  "environment": {
+    "python": [
+      "3.12.3",
+      "3.14.6"
+    ],
+    "node": "24.20.0",
+    "npm": "11.19.0",
+    "backend": "PYTHONPATH=candidate; anonymous/debug-off; external data disabled",
+    "accounts": "Enabled with debug only for isolated account test suites",
+    "browser": "Local anonymous BFF on8184, one Chromium worker, no retries, desktop and Pixel7 emulation",
+    "dependency_install": "Fresh Node24 npm ci/audit found zero vulnerabilities; separate Python3.14 environment installed using repository constraints"
+  },
+  "limits": [
+    "Graph and feedback improvements are bounded measurements, not proof of perfect semantics or human enjoyment.",
+    "No timing threshold, session TTL/size bound, request limit or scoring formula was relaxed.",
+    "No push, deployment, real-device acceptance or Romanian-player playtest occurred."
+  ]
+}

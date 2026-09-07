@@ -7,6 +7,8 @@
 
 import type { ReactNode } from "react";
 import { Button } from "@roedu/ui";
+import type { GameKey } from "../games";
+import { GameHelp } from "./GameHelp";
 
 export function GameShell({
   onExit,
@@ -14,6 +16,7 @@ export function GameShell({
   title,
   children,
   busy = false,
+  helpGame,
 }: {
   /** Return to the arcade home. */
   onExit: () => void;
@@ -25,35 +28,40 @@ export function GameShell({
   children?: ReactNode;
   /** Disable the exit action while the host is creating or replacing a game. */
   busy?: boolean;
+  /** Answer-free rules below the header for an active round. */
+  helpGame?: GameKey;
 }) {
   return (
-    <div className="row spread game-shell-header" style={{ gap: 12 }}>
-      <div className="row game-shell-main" style={{ gap: 10, alignItems: "center" }}>
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={onExit}
-          disabled={busy}
-          aria-busy={busy || undefined}
-          aria-label={busy ? "Se pregătește jocul" : "Ieși la lista de jocuri"}
-        >
-          <span aria-hidden>{busy ? "⏳" : "←"}</span>{" "}
-          {busy ? "Se pregătește…" : "Ieși"}
-        </Button>
-        {title && (
-          <strong
-            className="game-shell-title"
-            style={{ fontFamily: "var(--font-display)", color: accent, fontSize: "1.05rem" }}
+    <>
+      <div className="row spread game-shell-header" style={{ gap: 12 }}>
+        <div className="row game-shell-main" style={{ gap: 10, alignItems: "center" }}>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={onExit}
+            disabled={busy}
+            aria-busy={busy || undefined}
+            aria-label={busy ? "Se pregătește jocul" : "Ieși la lista de jocuri"}
           >
-            {title}
-          </strong>
+            <span aria-hidden>{busy ? "⏳" : "←"}</span>{" "}
+            {busy ? "Se pregătește…" : "Ieși"}
+          </Button>
+          {title && (
+            <strong
+              className="game-shell-title"
+              style={{ fontFamily: "var(--font-display)", color: accent, fontSize: "1.05rem" }}
+            >
+              {title}
+            </strong>
+          )}
+        </div>
+        {children && (
+          <div className="game-shell-status">
+            {children}
+          </div>
         )}
       </div>
-      {children && (
-        <div className="game-shell-status">
-          {children}
-        </div>
-      )}
-    </div>
+      {helpGame && <GameHelp game={helpGame} />}
+    </>
   );
 }

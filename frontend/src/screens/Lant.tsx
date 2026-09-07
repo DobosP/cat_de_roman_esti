@@ -256,7 +256,7 @@ export default function Lant({
       const target = e.target instanceof Element ? e.target : null;
       if (
         e.defaultPrevented ||
-        target?.closest('button, a, input, textarea, select, [role="button"], [contenteditable="true"]')
+        target?.closest('button, a, input, textarea, select, summary, [role="button"], [contenteditable="true"]')
       ) {
         return;
       }
@@ -481,7 +481,7 @@ export default function Lant({
     <div className="screen-pad fill">
       <div className="container col game-container" style={{ gap: 18 }}>
         {/* header */}
-        <GameShell onExit={onExit} accent={DEF.accent} title={DEF.title}>
+        <GameShell onExit={onExit} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY}>
           <Hud>
             {state.daily && (
               <StatBadge

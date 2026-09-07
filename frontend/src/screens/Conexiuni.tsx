@@ -444,7 +444,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         e.defaultPrevented ||
         (e.key === "Enter" &&
           target?.closest(
-            'button, a, input, textarea, select, [role="button"], [contenteditable="true"]',
+            'button, a, input, textarea, select, summary, [role="button"], [contenteditable="true"]',
           ))
       ) {
         return;
@@ -528,7 +528,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     <div className="screen-pad fill" style={{ overflowY: "auto" }}>
       <div className="container col game-container" style={{ gap: 16, paddingBottom: 32 }}>
         {/* Header */}
-        <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title}>
+        <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY}>
           <Hud>
             {state.daily && (
               <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} title="Provocarea zilei" />

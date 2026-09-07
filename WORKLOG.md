@@ -372,3 +372,39 @@ The V83 archive binds exact commands, source bytes, independent reviews and arti
 V82 is merged into local main at `e5f7d96`, followed by landing record `38f0d62`; V83 remains
 on `feat/v83-food-input-and-feedback`, ready for its next landing request. No push, deployment,
 real-device acceptance or human playtest occurred. Anonymous public-beta external gates remain.
+
+
+## V84 six-game guidance and culinary graph quality, 2026-09-07
+
+Valid until: the reviewed content, behavior or validation bindings change — then treat as history.
+
+Started from V83 already on local main at `8353880`. V84 adds native in-round Romanian
+help to all six games, including safe Enter behavior, and earned Alchimie explanations
+with actual oriented graph relations retained after resume. It adds 15 culinary concepts,
+42 forms and 57 specific links, and removes one false Telemea/Poale-n brâu cheese edge.
+One lexical equivalent is explicitly reviewed; the remaining forms are not counted as
+synonyms. Only 25 old node degree fields change; all old aliases and retained edges stay exact.
+
+Independent bound review promotes three Contexto rounds (Plăcintă cu mere, Salam de biscuiți,
+generic Pâine) and one Lanț route (Făină→Cornulețe). Eligibility grows 217→220 and 94→95.
+All 634 old pack records, 336 frozen boards and 180 legacy puzzles stay exact. All 82 old playable
+Alchimie projections and 97 old Lanț profiles stay exact; broader theoretical crafting closure
+changes are measured separately. Six false-hot yeast/meat-or-cheese associations cool;
+cinnamon/bread, cocoa/oven and other remaining feedback noise are explicitly disclosed.
+
+Source and exact-edge removal reviews pass, including an independently found duplicate-ID
+helper flaw fixed before content mutation. Full baseline inverses, 3,757 observations per
+checkout, 67 new directed-link journeys and four real public journeys support the change.
+Five stale historical test expectations surfaced in the initial integration run; original
+values remain checked on restored V83 data and current assertions bind the reviewed delta.
+
+Fresh full gates: **1,207 passed on Python 3.12.3 in 767.72s and Python 3.14.6
+in 667.85s**, 53 accounts each, 177 native frontend and 122 browser checks. No skips,
+browser retries or relaxed thresholds. Build/bundle 118.87/120 KiB, both validators, pending
+gate, lint/typecheck, Ruff/docs/whitespace and independent reviews pass. Actual built desktop
+and mobile screenshots were inspected. Initial failures and interrupted diagnostic runs
+are retained in the verification receipt; all final source/review bytes are manifest-bound.
+
+V84 is a committed local candidate on `feat/v84-six-game-graph-quality`, ready for its next
+landing request. Shared main remains at V83. No push, deployment, real-device acceptance or
+human playtest occurred. Public anonymous-beta external gates remain in BETA_CANDIDATE/DEPLOY.

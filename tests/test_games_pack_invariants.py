@@ -14,6 +14,8 @@ from pathlib import Path
 
 import pytest
 
+from tests.current_content import CURRENT_CONTENT
+
 _REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
@@ -160,8 +162,7 @@ def test_every_approved_lant_has_real_shortest_path_choices():
 
     svc = get_service()
     items = get_pack().pool("lant")
-    # v14-era boards + 9 promoted (5 in v16, 4 in v21), minus re-derivation retirements.
-    assert len(items) == 94
+    assert len(items) == CURRENT_CONTENT.game_inventory["lant"][1]
     assert "lt_stiinta_200" not in {item.id for item in items}
     for item in items:
         first_hop, min_width, _ = lant_branch_profile(

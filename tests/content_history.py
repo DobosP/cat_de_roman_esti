@@ -17,6 +17,73 @@ _V82_RECEIPT = Path(__file__).resolve().parents[1] / (
     "docs/reviews/v82-playable-content-batch/artifact-delta.json"
 )
 _V83_REVIEW = Path(__file__).resolve().parents[1] / "docs/reviews/v83-food-input-and-feedback"
+_V84_RECEIPT = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v84-six-game-graph-quality/artifact-delta.json"
+)
+
+
+def _before_v84(current: dict, filename: str) -> dict:
+    """Peel only exact reviewed additions/corrections before checking old wave pins."""
+    receipt = json.loads(_V84_RECEIPT.read_bytes())["files"][filename]
+    restored = deepcopy(current)
+    head = {key: value for key, value in restored.items() if not isinstance(value, list)}
+    assert head == receipt["head_after"]
+    for table, changes in receipt["tables"].items():
+        rows = restored[table]
+        assert isinstance(rows, list)
+        for added in changes["added"]:
+            assert rows.count(added) == 1
+            rows.remove(added)
+        by_id = {row["id"]: row for row in rows}
+        assert len(by_id) == len(rows)
+        for row_id, change in changes["changed"].items():
+            assert by_id[row_id] == change["after"]
+            by_id[row_id] = change["before"]
+        rows = [by_id[row["id"]] for row in rows]
+        for removal in sorted(changes["removed"], key=lambda record: record["index"]):
+            row = removal["row"]
+            assert row["id"] not in by_id
+            assert 0 <= removal["index"] <= len(rows)
+            rows.insert(removal["index"], row)
+            by_id[row["id"]] = row
+        if (order := changes["baseline_order"]) is not None:
+            assert len(order) == len(set(order)) == len(rows)
+            assert set(order) == set(by_id)
+            rows = [by_id[row_id] for row_id in order]
+        restored[table] = rows
+    for key in head:
+        if key not in receipt["head_before"]:
+            del restored[key]
+    restored.update(receipt["head_before"])
+    return restored
+
+
+def before_v84_fixture(current: dict) -> dict:
+    return _before_v84(current, "kg_sample.json")
+
+
+def before_v84_pack(current: dict) -> dict:
+    return _before_v84(current, "games_pack.json")
+
+
+def before_v84_rankings(current: dict) -> dict:
+    return _before_v84(current, "board_rankings_v37.json")
+
+
+def before_v84_derived(current: dict) -> dict:
+    return _before_v84(current, "derived_catalog_v38.json")
+
+
+def before_v84_projection_rows(current: list[tuple]) -> list[tuple]:
+    """Restore the exact retired Drojdie row from the committed V83 module."""
+    restored = list(current)
+    assert not any(row[0] == "drojdie" for row in restored)
+    index = next(i for i, row in enumerate(restored) if row[0] == "gem")
+    restored.insert(index, (
+        "drojdie", "n_v4gas_mancare", "ingrediente", 1, "domain_fallback",
+        "ctxp_3218ea40b036e40101f5",
+    ))
+    return restored
 
 
 def v83_added_forms() -> set[str]:
@@ -29,7 +96,7 @@ def v83_added_forms() -> set[str]:
 
 def before_v83_fixture(current: dict) -> dict:
     receipt = json.loads((_V83_REVIEW / "morphology-delta.json").read_bytes())
-    restored = deepcopy(current)
+    restored = before_v84_fixture(current)
     assert restored["meta"] == receipt["after_kg_meta"]
     for row in restored["kg_nodes"]:
         change = receipt["alias_changes"].get(row["id"])
@@ -42,7 +109,7 @@ def before_v83_fixture(current: dict) -> dict:
 
 def before_v83_pack(current: dict) -> dict:
     receipt = json.loads((_V83_REVIEW / "artifact-delta.json").read_bytes())
-    restored = deepcopy(current)
+    restored = before_v84_pack(current)
     assert restored["meta"] == receipt["after_pack_meta"]
     for row in receipt["new_records"]:
         assert row in restored["contexto"]
@@ -53,7 +120,7 @@ def before_v83_pack(current: dict) -> dict:
 
 def before_v83_rankings(current: dict) -> dict:
     receipt = json.loads((_V83_REVIEW / "artifact-delta.json").read_bytes())
-    restored = deepcopy(current)
+    restored = before_v84_rankings(current)
     assert restored["meta"] == receipt["after_rankings_meta"]
     added = {row["id"] for row in receipt["new_records"]}
     assert added <= {row["id"] for row in restored["boards"]}
@@ -73,7 +140,7 @@ def before_v83_rankings(current: dict) -> dict:
 
 def before_v83_derived(current: dict) -> dict:
     receipt = json.loads((_V83_REVIEW / "artifact-delta.json").read_bytes())
-    restored = deepcopy(current)
+    restored = before_v84_derived(current)
     assert restored["meta"] == receipt["after_derived_meta"]
     restored["meta"] = receipt["baseline_derived_meta"]
     return restored
@@ -172,7 +239,7 @@ def before_v81_derived(current: dict) -> dict:
 def before_v81_projection_rows(current: list[tuple]) -> list[tuple]:
     """Restore the one retired synthetic row for the V79 history fingerprint."""
 
-    restored = list(current)
+    restored = before_v84_projection_rows(current)
     assert not any(row[0] == "nucă" for row in restored)
     index = next(i for i, row in enumerate(restored) if row[0] == "alună")
     restored.insert(index, (

@@ -1,0 +1,62 @@
+{
+  "reviewer": "v84_interface_review",
+  "role": "verifier",
+  "input_ids": [
+    "ct_gastronomie_334",
+    "ct_gastronomie_335",
+    "ct_gastronomie_336",
+    "lt_gastronomie_220"
+  ],
+  "items": [
+    {
+      "id": "ct_gastronomie_334",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:9c0e00188149528555adb4e18b0923d0d9ca042d7b3d4061276d3c46d4287a38",
+      "rationale": "A1/A2/C2: a familiar apple-filled domestic pastry, with older Digi24 Christmas-menu coverage, current TVR broadcast metadata and independent Romanian manufacturer recipes. A3/A4/A7: Băneasa directly documents flour dough, apple filling, rolling pin and baking tray; these are specific preparation relations, not exclusive regional claims. A5/A6: no adult or alcohol-dependent premise, and no prior Contexto record for this target. C1/C5: concrete, explicitly qualified dish. C3: five recognizable incoming neighbors and 2,304 reachable. C4: Plăcinte rank 2; Măr, Aluat, Sucitor and Tavă de copt rank 3; Făină 11. C6: .60 meets easy. Refute-first: Drojdie 11 is overly hot for an optional variant, Unt 506 is cold, and oven 78 only lukewarm. These imperfections do not displace the five independent immediate category/fruit/dough/preparation clues, so the target remains navigable at easy. In 31 real-API opener probes the target stayed private; the nonwinning Plăcinte 2 clue reproduced and exact answer won at rank 1. Promote, without claiming complete ingredient realism.",
+      "sources": [
+        "https://www.pastebaneasa.ro/retete/placinta-cu-mere/",
+        "https://www.oetker.ro/retete/r/placinta-clasica-cu-mere",
+        "https://www.digi24.ro/stiri/actualitate/social/cat-costa-masa-de-craciun-produsele-traditionale-maresc-de-trei-patru-ori-cheltuielile-338418",
+        "https://www.youtube.com/watch?v=9YOl1-wgaw8"
+      ]
+    },
+    {
+      "id": "ct_gastronomie_335",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:baae5f59a5138fa2de746c668a0837b78b75cb0d13852e3f6729a0294df2e435",
+      "rationale": "A1/A2/C2: Radio România Internațional describes longstanding domestic popularity, including communist-era accessibility; PRO TV aired a named version in December 2023. A3/A4/A7: the qualified biscuit dessert has documented biscuit and butter-variant links, with no required oven step or universal butter requirement. A5/A6: no boundary trigger or prior target record. C1/C5: concrete compound, plainly distinct from meat salami. C3: six recognizable incoming neighbors and 2,304 reachable. C4: Desert 2, Biscuit 3, Unt 3 and Prăjitură 7 create a clear navigable core. C6: .68 meets easy. Refute-first: oven/tray36 are misleadingly warm for a no-bake dish; Cacao 62 is warm but trails them, cinnamon 19 is also too warm, and yeast 77/meat dish 86 remain lukewarm. Defining biscuit3 and common butter3 still outrank that preparation noise, while cocoa remains usable within two hops. This is a meaningful playable target with an explicit remaining ranking limitation, not a claim that all ingredients are ordered correctly. All 31 opener probes preserved the answer, Desert 2 clue replayed nonwinning, and exact answer won. Promote.",
+      "sources": [
+        "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/salam-de-biscuiti-id594218.html",
+        "https://www.protv.ro/emisiuni/vorbeste-lumea/clip/52864-salam-de-biscuiti-cu-fistic-si-merisoare"
+      ]
+    },
+    {
+      "id": "ct_gastronomie_336",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:ef41ad1656450431c79be54779596cb269d88c7cf973f9832b0e2646bc780c35",
+      "rationale": "A1/A2/C2: Pâine is the ordinary staple, documented in historical and modern dictionaries and a TVR 2024 bread-baking program. A3/A4/A7: specific dough/oven and qualified yeast associations are supported by dictionary definitions and an actual Romanian bread recipe; no universal commercial-yeast claim. A5/A6: no existing round for this target; generic Pâine is distinct from the V77 deferred Pâine de casă edge, which remains absent. C1/C5: a concrete food with one dominant standalone sense; idioms do not make the food label ambiguous. C3: 18 incoming neighbors and 2,304 reachable. C4: Mâncare 3, Aluat/Drojdie/oven/Secară7 and Făină 45 within 2 hops give multiple recognizable openers. C6: .9273 exceeds easy. Refute-first: projected Scorțișoară 4 is spuriously hotter than the production core; Unt 429 is cold; Stilou 219 is lukewarm and Sarmale 27 outranks flour. The cinnamon defect is real and must remain disclosed, but does not remove or contradict the three independent rank 7 direct production cues, the usual food3 opener, or the clear target identity. Therefore it does not make this round unfair under C1-C6; promote with that residual proxy issue, not by counting mere floor compliance.31 private opener probes, safe Cuțit 2 clue and exact rank 1 win pass; V77 flour→pen control stays Rece 618/d4.",
+      "sources": [
+        "https://dexonline.ro/intrare/p%C3%A2ine/40183",
+        "https://www.oetker.ro/retete/r/paine-cu-maia",
+        "https://www.youtube.com/watch?v=9YOl1-wgaw8"
+      ]
+    },
+    {
+      "id": "lt_gastronomie_220",
+      "game": "lant",
+      "verdict": "promote",
+      "review_binding": "sha256:fbb1ce8a58dcfdfd5b71c7fa3a56625899dfd337fc639fd2bd54c36c14b4d3c6",
+      "rationale": "A1/A2/D1: Făină and the displayed Cornulețe endpoint are ordinary food vocabulary; historical dictionary pastry evidence and the 2024 RRI cornulețe program independently support recognition. A3/A4: flour-to-dough and rolled dough-to-cornulețe are directly documented by DLRLC/Ferrero/RRI; the alternative flour-to-cozonac ingredient link is ordinary baking. A5/A6: no boundary trigger, existing exact/reversed endpoint pair or rejection-tombstone duplicate. D2: the Aluat route is a precise preparation sequence. The alternate Cozonac→Cornulețe edge is a weaker holiday-baking association, supported by a named Christmas menu; it must not be presented as physical conversion or the only proof of playability. D3: two credible first hops and two distinct intermediate nodes; no intermediate choke. D4/D5: a two-hop easy bridge from ingredient to finished pastry is inferable and rewarding without obscure knowledge. Explicitly resolve salience_floor WARN: Cornulețe .55 slightly misses the numeric .60 flag, but documentary familiarity and its visible endpoint justify easy; no salience edited to evade the warning. Both actual API paths win in 2 moves. Promote because the new precise route supplies semantic substance alongside the weaker existing alternative.",
+      "sources": [
+        "https://dexonline.ro/definitie/aluat/892091",
+        "https://dexonline.ro/intrare/cornule%C8%9B/13187",
+        "https://www.nutella.com/ro/ro/lasa-te-inspirat/retete/cornulete-cu-fructe-uscate",
+        "https://www.rri.ro/rubrici/secretele-bucatariei-romanesti/cornulete-cu-untura-id594322.html",
+        "https://www.digi24.ro/stiri/actualitate/social/cat-costa-masa-de-craciun-produsele-traditionale-maresc-de-trei-patru-ori-cheltuielile-338418"
+      ]
+    }
+  ]
+}

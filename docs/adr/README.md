@@ -26,3 +26,5 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0115 | [Bounded reuse during Alchimie generation](0115-reuse-alchimie-pair-results-within-a-build.md) | accepted |
 | 0116 | [Shared current-content test expectations](0116-share-current-content-test-expectations.md) | accepted |
 | 0117 | [Food forms and exact-target feedback](0117-food-forms-and-exact-target-feedback.md) | accepted |
+| 0118 | [Reviewed culinary graph corrections](0118-reviewed-culinary-graph-corrections.md) | accepted |
+| 0119 | [In-round help and earned link explanations](0119-in-round-help-and-earned-link-explanations.md) | accepted |

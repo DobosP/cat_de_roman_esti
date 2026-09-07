@@ -851,6 +851,7 @@ _EXISTING_KG_SURFACES = frozenset(
         "smântână",
         "dulceață",
         "nucă",
+        "drojdie",
         "compot",
         "interfon",
         "tricou",

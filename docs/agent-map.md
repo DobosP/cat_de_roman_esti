@@ -11,7 +11,7 @@
 | Word games | `cat_de_roman_esti/wordgames/` | `service.py` owns sessions; one module per game (alchimie, conexiuni, contexto, intrusul, lant, perechi); `packs.py` loads the curated pack. |
 | BFF | `cat_de_roman_esti/web/` | `settings.py`, `urls.py`, `http.py`, `legal.py`, `spa.py`; run with `python -m cat_de_roman_esti.web`. |
 | CLI | `cat_de_roman_esti/cli.py`, `engine.py`, `graph.py`, `data.py` | Original semantic-hop game (`docs/ARCHITECTURE.md`). |
-| Served KG build | `cat_de_roman_esti/fixtures/kg_sample.json` | V83 build. `kg_real.json` is a thin corpus export, **not** the served graph (data.py:27,34-36). |
+| Served KG build | `cat_de_roman_esti/fixtures/kg_sample.json` | V84 build. `kg_real.json` is a thin corpus export, **not** the served graph (data.py:27,34-36). |
 | Curated pack | `cat_de_roman_esti/fixtures/games_pack.json` | Four pack games; Intrusul/Perechi come from `derived_catalog_v38.json`. |
 | Frontend | `frontend/src/` | SPA screens/api/components (`frontend/README.md`). |
 | Content scripts | `scripts/` | Validators, critique, import and review artifact assembly; `expand_content.py` is V2-only history. |
@@ -33,7 +33,7 @@
 
 ## Do not load by default
 - `cat_de_roman_esti/web/static/` (tracked build bundle) and `frontend/node_modules/`.
-- `docs/reviews/**/*.json` and the fixture JSONs in full (2,364 nodes — query them with a script).
+- `docs/reviews/**/*.json` and the fixture JSONs in full (query large inventories with a script).
 - `docs/compliance/` unless the task is legal.
 - Caches, logs, and env files.
 

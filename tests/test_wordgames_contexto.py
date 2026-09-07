@@ -8,6 +8,8 @@ pytest.importorskip("django")
 
 from django.test import Client  # noqa: E402
 
+from tests.current_content import CURRENT_CONTENT  # noqa: E402
+
 
 def make_client() -> Client:
     return Client()
@@ -816,8 +818,8 @@ def test_projection_is_large_balanced_collision_free_and_legibility_audited() ->
     keys = [term.key for term in PROJECTION_TERMS]
     domains = Counter(term.domain for term in PROJECTION_TERMS)
     # ADR-0074 added twelve reviewed projections; ADR-0075 adds eight more.
-    assert len(PROJECTION_TERMS) == 472
-    assert len(domains) == 26
+    assert len(PROJECTION_TERMS) == CURRENT_CONTENT.projection_terms
+    assert len(domains) == CURRENT_CONTENT.projection_domains
     assert min(domains.values()) >= 14
     assert len(keys) == len(set(keys))
     assert len({term.public_id for term in PROJECTION_TERMS}) == len(PROJECTION_TERMS)

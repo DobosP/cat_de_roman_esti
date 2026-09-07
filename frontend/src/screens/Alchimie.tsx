@@ -507,7 +507,7 @@ export default function Alchimie({
         e.defaultPrevented ||
         (e.key === "Enter" &&
           target?.closest(
-            'button, a, input, textarea, select, [role="button"], [contenteditable="true"]',
+            'button, a, input, textarea, select, summary, [role="button"], [contenteditable="true"]',
           ))
       ) {
         return;
@@ -601,7 +601,7 @@ export default function Alchimie({
     <div className="screen-pad fill" style={{ overflowY: "auto" }}>
       <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
         {/* Header */}
-        <GameShell onExit={onExit} accent={DEF.accent} title={DEF.title}>
+        <GameShell onExit={onExit} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY}>
           <Hud>
             {state.daily ? (
               <StatBadge
@@ -1091,6 +1091,9 @@ export default function Alchimie({
                     </strong>
                   </span>
                 )}
+                {winningReaction?.results.map((item) => (
+                  <EarnedLinks key={item.id} item={item} />
+                ))}
               </>
             </ResultCard>
           )}
@@ -1160,6 +1163,23 @@ function ReactionRow({
           );
         })}
       </span>
+      {reaction.results.map((item) => <EarnedLinks key={item.id} item={item} />)}
+    </div>
+  );
+}
+
+function EarnedLinks({ item }: { item: InventoryItem }) {
+  if (!item.links?.length) return null;
+  return (
+    <div className="alchemy-earned-links">
+      <strong>Legături descoperite: {item.label}</strong>
+      <ul>
+        {item.links.map((link, index) => (
+          <li key={`${link.source.id}:${link.target.id}:${index}`}>
+            {link.source.label} — {link.label} → {link.target.label}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

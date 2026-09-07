@@ -2,10 +2,10 @@
 
 Valid until: the next verified quality wave — then refresh this living checklist.
 
-Target: public anonymous beta for Romanian players. **V83 adds five reviewed playable
-rounds, six bounded feedback repairs and 24 word forms; validation is complete, including
-a documented timing retry.** V82 is merged into local main. V83 is ready on its branch. Public rollout still
-requires the external checks below.
+Target: public anonymous beta for Romanian players. **V84 adds guidance to all six games,
+earned Alchimie explanations, 15 concepts, 57 links and four reviewed playable rounds.**
+One false graph link is removed. V83 is already on local main; V84 is verified and ready
+on its task branch. Public rollout still requires the external checks below.
 Current facts and exact pins: [STATUS](STATUS.md).
 
 ## Version objectives
@@ -32,6 +32,14 @@ consolidates current test expectations while keeping historical evidence indepen
 [ADR-0117](adr/0117-food-forms-and-exact-target-feedback.md) records the content decision.
 V83's final verification and retry evidence are recorded below and in its review archive.
 
+V84 adds specific dough, grain, whey, brining and cooking-equipment vocabulary under
+[ADR-0118](adr/0118-reviewed-culinary-graph-corrections.md). Contexto gains Plăcintă cu mere,
+Salam de biscuiți and generic Pâine (217→220 selectable); Lanț gains Făină→Cornulețe
+(94→95). Forty-two forms retain exact sense boundaries; only one is explicitly counted as
+a reviewed lexical equivalent. Drojdie's generic-food projection is retired, cooling six
+false-hot meat/cheese targets. [ADR-0119](adr/0119-in-round-help-and-earned-link-explanations.md)
+keeps rules available in each live game and shows only earned, oriented Alchimie relations.
+
 ## Sequence and acceptance
 
 | Wave | Problem addressed | Evidence / outcome |
@@ -50,6 +58,16 @@ V83's final verification and retry evidence are recorded below and in its review
 | V81 | Nucă borrowed honey feedback; naive topology spread false warmth | One real word, sole unambiguous alias and four recipe edges; native Contexto feedback is limited to reviewed direct associations; all game records, puzzles and frozen boards preserved |
 | V82 | Tiny content increments left repaired associations without enough new playable rounds; cold generation repeated millions of graph queries | Eight food targets independently reviewed, promoted and selectable; defining Burtă feedback repaired within the batch; bounded Alchimie pair reuse preserves exact games; reusable delta reporting and compact probes added. Full integration gate GREEN |
 | V83 | Ordinary forms and central ingredient guesses blocked a fresh food batch; repeated current pins slowed extension | Five targets promoted, six exact-target feedback pairs repaired and 24 forms accepted; old surface owners/records/frozen boards exact; current expectations centralized. Backend/accounts/frontend/browser validation complete, with one documented timing retry |
+| V84 | Missing everyday concepts, false generic-food feedback and invisible combination explanations limited realistic play | Fifteen concepts, 57 links, one false edge removed, 42 forms, three Contexto rounds and one Lanț route; in-round help across all six games and earned Alchimie explanations. All old playable recipe books/routes/frozen boards preserved; full integration GREEN |
+
+V84 focused checks pass: **62 new graph/game checks**, **183 historical/current checks**,
+independent implementation review and 3,757 before/after observations per checkout. All
+four new public journeys work. Final full gates pass: 1,207 backend tests on each of
+Python 3.12.3/3.14.6, 53 accounts tests each, 177 native frontend tests and 122 browser checks.
+Five stale historical assertions were repaired before the fresh complete green runs;
+original evidence and unchanged limits remain covered in the verification record.
+The frontend build passes at **118.87/120 KiB**. See the
+[V84 review](reviews/v84-six-game-graph-quality/README.md) for complete quantities and limits.
 
 V83: **1,115 backend tests passed on Python 3.12.3**. Python 3.14.6's full run passed 1,114;
 the sole failure was the known load-sensitive Alchimie timing case (50.30s against 45s),
@@ -91,7 +109,7 @@ or human subject-expert approval.
 | Area | Evidence and remaining uncertainty |
 |---|---|
 | Rules, hints and progression | All six seeded rounds reach server-scored results; replay, progressed reload, mistake counters, failed action/start recovery and expiration have real-BFF coverage. Automated solves do not establish intuitiveness or enjoyment. |
-| Romanian content and difficulty | V83 promotes Cornulețe, Gogoși, Telemea, Cartofi prăjiți and Ardei umpluți after repairing six core feedback pairs. All 24 new grammatical forms resolve correctly and prior ambiguous exclusions remain unchanged. The 884-observation comparison changes exactly six intended pairs, with 878 unchanged and 60 additional controls exact. False-hot Sarmale/Drojdie and missing production/utensil words remain explicit limitations; human fairness/enjoyment is unmeasured. |
+| Romanian content and difficulty | V84 adds 15 real concepts, 57 specific links and four reviewed rounds; 42 forms preserve deliberate sense exclusions. Drojdie's old meat/cheese false-hot cases cool, and defining apple/biscuit/whey/brine associations work. Cinnamon/bread and oven/biscuit-dessert rankings remain noisy; human fairness/enjoyment is unmeasured. |
 | Onboarding and presentation | Shared intros, categories, HUD, action feedback and results were inspected; mobile layout and rendered states are audited. No broad redesign was justified by this evidence. Real-device rendering and human comprehension are still pending. |
 | Keyboard and accessibility | Desktop essential controls support Tab/Space/Enter completion; Perechi focus is checked after pairs disappear and at result. Automated Axe checks run on settled intro/live/result states. Text-entry tests use programmatic fill after keyboard focus; no actual screen-reader usability study ran. |
 | Reliability and storage | Retry, stale ID handling, unmount/loading ownership, immutable terminal actions and duplicate completion are covered. Strict concurrent-tab local-score protection requires Web Locks; fallback is best effort. Receipt TTL is 24h with 1,000 IDs per game; a deliberately retained terminal session can record again after expiry. |
@@ -109,13 +127,15 @@ or human subject-expert approval.
 - Authorize a release, preserve the deployed image, execute the [deployment and rollback procedure](DEPLOY.md),
   and re-run public health/config/content/asset smokes. Keep production anonymous.
 
-Player observations should guide the next product iteration. V83's review also identifies
-a coherent follow-up around the broad Drojdie approximation, false-hot food/holiday routes,
-and the remaining grain, biscuit/apple, whey and oven/pan vocabulary. The
+Player observations should guide the next product iteration. V84 addresses the broad
+Drojdie approximation and the grain, biscuit/apple, whey and qualified oven vocabulary.
+Follow-ups include remaining generic spice/cocoa projections, false-hot holiday routes,
+butter/preparation feedback and old derived-board wording that treats Urdă as inherently salty. The
 [V82 dispositions](reviews/v82-playable-content-batch/shortlist/dispositions.json) retain
 other investigated candidates. Repairs and fresh playable reviews belong together where
-feasible; these are investigation candidates, not approved promotions. Bread remains
-deferred. Accounts, derived-catalog expansion and another game retain their separate gates.
+feasible; these are investigation candidates, not approved promotions. Generic Pâine now
+passes review; the earlier direct Făină→Pâine de casă edge remains deferred. Accounts,
+derived-catalog expansion and another game retain their separate gates.
 
 ## Romanian-player playtest protocol — not yet run
 

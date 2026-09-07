@@ -1,0 +1,60 @@
+#!/usr/bin/env python3
+"""Read-only finite catalog selection sample from one checkout per process."""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import random
+import sys
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--root', type=Path, required=True)
+parser.add_argument('--out', type=Path, required=True)
+args = parser.parse_args()
+root = args.root.resolve()
+sys.path.insert(0, str(root))
+os.environ['DJANGO_SETTINGS_MODULE'] = 'cat_de_roman_esti.web.settings'
+os.environ['CAT_ACCOUNTS_ENABLED'] = '0'
+os.environ['ROEDU_API_URL'] = ''
+os.environ['ROEDU_API_KEY'] = ''
+import django
+django.setup()
+from cat_de_roman_esti.wordgames.packs import get_pack
+from cat_de_roman_esti.wordgames.derived_catalog import get_derived_catalog
+from cat_de_roman_esti.wordgames import lant
+
+pack = get_pack()
+catalog = get_derived_catalog()
+days = [f'2026-09-{day:02}' for day in range(1, 31)]
+result = {'bindings': {}, 'scopes': {}, 'reviewed_dates': {}}
+for relative in ['cat_de_roman_esti/fixtures/kg_sample.json', 'cat_de_roman_esti/fixtures/games_pack.json', 'cat_de_roman_esti/fixtures/board_rankings_v37.json', 'cat_de_roman_esti/fixtures/derived_catalog_v38.json']:
+    result['bindings'][relative] = hashlib.sha256((root / relative).read_bytes()).hexdigest()
+for game in ('conexiuni', 'contexto', 'lant', 'alchimie'):
+    scopes = [(None, None), (None, 'usor'), (None, 'normal')]
+    if game in {'contexto', 'lant'}:
+        scopes.extend([('gastronomie', 'usor'), ('gastronomie', 'normal')])
+    for category, difficulty in scopes:
+        kwargs = dict(category=category, difficulty=difficulty, filtered_shelf_weights=game == 'contexto')
+        result['scopes'][f'{game}:{category}:{difficulty}'] = {
+            'seeds': [getattr(pack.pick_seeded(game, random.Random(seed), **kwargs), 'id', None) for seed in range(100)],
+            'dates': [getattr(pack.pick_daily(game, day, **kwargs), 'id', None) for day in days],
+        }
+    # Preserve exactly the V83 historical receipt's default weighting and normal band.
+    for day in ('2026-07-19', '2026-12-31'):
+        result['reviewed_dates'][f'{game}:{day}'] = getattr(pack.pick_daily(game, day, difficulty='normal'), 'id', None)
+for category in (None, 'gastronomie'):
+    # Lanț's actual easy selector adds a width preference beyond the raw ranked pool.
+    result['scopes'][f'lant_runtime:{category}:usor'] = {
+        'seeds': [getattr(lant._pick_curated(random.Random(seed), daily=None, category=category, difficulty='usor', exclude_ids=set()), 'id', None) for seed in range(100)],
+        'dates': [getattr(lant._pick_curated(random.Random(0), daily=day, category=category, difficulty='usor', exclude_ids=set()), 'id', None) for day in days],
+    }
+for game in ('intrusul', 'perechi'):
+    for starter in (False, True):
+        result['scopes'][f'{game}:None:starter={starter}'] = {
+            'seeds': [getattr(catalog.pick_seeded(game, random.Random(seed), starter=starter, balance_categories=starter), '_catalog_id', None) for seed in range(100)],
+            # Shared daily deliberately ignores starter state.
+            'dates': [getattr(catalog.pick_daily(game, day), '_catalog_id', None) for day in days],
+        }
+args.out.write_text(json.dumps(result, ensure_ascii=False, separators=(',', ':')) + '\n')
+print(f"{len(result['scopes'])} scopes × 100 seeds / 30 dates; 8 historical fixed dates")

@@ -1,0 +1,41 @@
+{
+  "baseline_commit": "83538809d4913c4b22f36cf92c4f1502f50f83f3",
+  "scope": "Pre-promotion graph impact over original inventory; later pack-only rounds do not change these old-target observations.",
+  "raw_capture_sha256": {
+    "baseline.json": "10f5bb876ca58a72646dc7a6f032baed1fc6af32fc63a74c42ad0667a44bda2b",
+    "candidate.json": "ab50835df5d50d271e18ee711adf92c5384b43eb4e92b74ee164d50c7830d7e7",
+    "comparison.json": "a362c233422efe05f9fdd2e33df0cb128cd83afdc4c67ed22995d3e3fd02faf4",
+    "baseline-pack.json": "78e680f3849f9a9de2a2675cbe7349ba23c8165f415cfc89a7533121bc34399c"
+  },
+  "logs": {
+    "baseline.log": [
+      "captured pack, frozen boards and all Lanț profiles",
+      "captured 20 Alchimie projections",
+      "captured 40 Alchimie projections",
+      "captured 60 Alchimie projections",
+      "captured 80 Alchimie projections",
+      "captured all Alchimie projections",
+      "captured 50 Contexto records × 17 inputs",
+      "captured 100 Contexto records × 17 inputs",
+      "captured 150 Contexto records × 17 inputs",
+      "captured 200 Contexto records × 17 inputs",
+      "captured all approved Contexto inputs",
+      "complete: 67 oriented direct route probes"
+    ],
+    "candidate.log": [
+      "captured pack, frozen boards and all Lanț profiles",
+      "captured 20 Alchimie projections",
+      "captured 40 Alchimie projections",
+      "captured 60 Alchimie projections",
+      "captured 80 Alchimie projections",
+      "captured all Alchimie projections",
+      "captured 50 Contexto records × 17 inputs",
+      "captured 100 Contexto records × 17 inputs",
+      "captured 150 Contexto records × 17 inputs",
+      "captured 200 Contexto records × 17 inputs",
+      "captured all approved Contexto inputs",
+      "complete: 67 oriented direct route probes"
+    ]
+  },
+  "reproduction": "Extract baseline games_pack.json from commit8353880. Run capture.py.txt with independent baseline/candidate --root, --inputs inputs.json, --baseline-pack extracted file and distinct --out files; compare.py.txt compares them. Raw duplicate captures remain in task scratch, outside git."
+}

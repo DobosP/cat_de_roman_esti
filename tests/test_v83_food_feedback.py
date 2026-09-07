@@ -24,6 +24,7 @@ from cat_de_roman_esti.wordgames.contexto_projection import (  # noqa: E402
     resolve_projection,
 )
 from cat_de_roman_esti.wordgames.service import WordGameService, get_service  # noqa: E402
+from tests.content_history import before_v84_projection_rows  # noqa: E402
 
 ULEI = "n_v24_food_pantry_ulei"
 SARE = "n_v4gas_sare"
@@ -72,11 +73,11 @@ def _digest(value) -> str:
 
 
 def test_projection_inventory_and_prior_policies_remain_exact():
-    rows = [
+    rows = before_v84_projection_rows([
         (term.surface, term.anchor_id, term.domain, term.rank_penalty,
          term.mapping_kind, term.public_id)
         for term in PROJECTION_TERMS
-    ]
+    ])
     assert len(rows) == 472
     assert _digest(rows) == "a422bf531cfadb66ffe3aacc08db8ac51c3cc06e74bb5e9d762f54353d2088a1"
     assert len(COMMON_FEEDBACK_PROXIES) == 71

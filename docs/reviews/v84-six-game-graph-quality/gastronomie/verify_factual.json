@@ -1,0 +1,33 @@
+{
+  "category": "gastronomie",
+  "candidate_sha256": "sha256:ecbe2c60260a886cbdd3de1ecdc688cd4f163d03ce33226d8a83d4264de16ca2",
+  "reviewed_refs": [
+    "contexto[0]",
+    "contexto[1]",
+    "contexto[2]",
+    "lant[0]"
+  ],
+  "issues": [
+    {
+      "ref": "contexto[0]",
+      "severity": "note",
+      "issue": "Factual accept for pending staging: Plăcintă cu mere is a familiar baked dish with apple filling and dough. Its five directed incoming neighbors are apple, pies, dough, rolling pin and baking tray. Manufacturer recipes and library recipe excerpts support these specific ingredient, tool and type links. No universal claim about yeast, butter or one regional recipe is made."
+    },
+    {
+      "ref": "contexto[1]",
+      "severity": "note",
+      "issue": "Factual accept for pending staging: Salam de biscuiți is a dessert made with biscuits; RRI documents a butter variant. Its six direct incoming neighbors are Cornulețe, Unt, Biscuit, Desert, Prăjitură and Copilăria anilor 90. National-radio history and current broadcast recipes support the dessert and familiar home-preparation context. The title has a distinct dessert sense; ordinary meat salami is not an alias."
+    },
+    {
+      "ref": "contexto[2]",
+      "severity": "note",
+      "issue": "Factual accept for pending staging: Pâine is the ordinary staple bread concept, distinct from the existing Pâine de casă node. Dictionary and manufacturer process evidence support flour/dough/yeast/oven links; rye is a documented flour source. Existing spread, knife, packed-food and family-table neighbors are recognizable food-use associations. Yeast is conventional, not obligatory for every bread. The prior V77 rejected-edge decision remains respected: no direct Făină → Pâine de casă edge is proposed."
+    },
+    {
+      "ref": "lant[0]",
+      "severity": "note",
+      "issue": "Factual accept for pending staging: the two shortest Făină → Cornulețe routes pass through Aluat or Cozonac. Flour forms dough; dough is rolled into cornulețe; flour is an ingredient in cozonac. Published Romanian Christmas food accounts and supermarket recipes place cozonac and cornulețe in the same home-baking context. That second route is a seasonal association, not a claim of physical transformation; the precise dough route is independently meaningful."
+    }
+  ],
+  "coverage_note": "Complete scout factual screen of all four frozen raw references using prospective root-authored V84 graph. Source citations, recognition, prior deferrals and residual noise are in CANDIDATE_REVIEW.md. Final bound judges and post-apply runtime evidence remain required."
+}

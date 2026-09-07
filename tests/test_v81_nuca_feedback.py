@@ -25,6 +25,7 @@ from cat_de_roman_esti.wordgames.contexto_projection import (  # noqa: E402
     resolve_projection,
 )
 from cat_de_roman_esti.wordgames.service import WordGameService, get_service  # noqa: E402
+from tests.content_history import before_v84_fixture  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -150,7 +151,9 @@ def test_nuca_has_only_the_reviewed_native_surface_and_direct_recipe_edges() -> 
 
 
 def test_nuca_projection_removal_preserves_every_other_v79_row_and_policy() -> None:
-    rows = _rows()
+    from tests.content_history import before_v84_projection_rows
+
+    rows = before_v84_projection_rows(_rows())
     assert len(rows) == 472
     assert _REMOVED_NUCA_ROW not in rows
     assert _digest(rows) == _V81_OTHER_ROWS_SHA256
@@ -255,18 +258,33 @@ def test_baclava_warm_clue_uses_nuca_without_disclosing_a_hidden_nuca_target() -
         ("n_marea_neagra", 5, 1815, "Inghetat", 21),
     ],
 )
+@pytest.mark.parametrize("graph_epoch", ("before_v84", "current"))
 def test_nuca_keeps_miere_baseline_feedback_outside_its_recipe_zone(
     target: str, distance: int, rank: int, temperature: str, closeness: int,
+    graph_epoch: str, monkeypatch,
 ) -> None:
+    if graph_epoch == "before_v84":
+        prior = before_v84_fixture(json.loads(
+            (ROOT / "cat_de_roman_esti/fixtures/kg_sample.json").read_bytes()
+        ))
+        svc = WordGameService(Graph.from_records(prior["kg_nodes"], prior["kg_edges"]))
+        monkeypatch.setattr(contexto, "get_service", lambda: svc)
     client, url = _private_game(target)
     try:
         response = _guess(client, url, "nucă")
         guess = response["guess"]
         assert response["won"] is False and guess["id"] == NUCA
-        assert (guess["distance"], guess["temperature"], guess["closeness"]) == (
-            distance, temperature, closeness,
-        )
-        assert guess["rank"] in {rank, rank + 1}
+        if graph_epoch == "before_v84":
+            assert (guess["distance"], guess["temperature"], guess["closeness"]) == (
+                distance, temperature, closeness,
+            )
+            assert guess["rank"] in {rank, rank + 1}
+        else:
+            honey = _guess(client, url, "miere")["guess"]
+            assert guess["distance"] == honey["distance"] == distance
+            assert guess["temperature"] == honey["temperature"] == temperature
+            assert guess["rank"] == honey["rank"] + 1
+            assert 0 <= honey["closeness"] - guess["closeness"] <= 1
         _assert_hidden(response, target)
     finally:
         contexto.store.delete(url.rsplit("/", 1)[-1])

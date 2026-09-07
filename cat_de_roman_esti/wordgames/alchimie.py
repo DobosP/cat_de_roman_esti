@@ -745,10 +745,45 @@ def _inventory_flags(
     }
 
 
+def _earned_links(
+    node_id: str,
+    parents: tuple[str, str] | None,
+    visible_ids: set[str],
+) -> list[dict[str, object]]:
+    """Explain an earned result with its two actual, oriented graph associations.
+
+    A semantic craft is not an ingredient claim. Keep each edge's authored direction
+    and wording; never invent an explanation or enumerate unearned recipe outputs.
+    The existing inventory lineage bounds this to two links, with no session storage.
+    """
+    if parents is None or node_id not in visible_ids:
+        return []
+    svc = get_service()
+    links: list[dict[str, object]] = []
+    for parent in sorted(set(parents)):
+        if parent not in visible_ids or parent == node_id:
+            continue
+        edge = svc.link(parent, node_id)
+        if (
+            edge is None
+            or edge.is_distractor
+            or not edge.label_ro.strip()
+            or {edge.src_id, edge.dst_id} != {parent, node_id}
+        ):
+            continue
+        links.append({
+            "source": _concept(edge.src_id),
+            "target": _concept(edge.dst_id),
+            "label": edge.label_ro,
+        })
+    return links
+
+
 def _inventory_payload(session: AlchimieSession) -> list[dict[str, object]]:
     """Inventory in discovery order, each item carrying its parent concepts (the WHY)."""
     svc = get_service()
     flags = _inventory_flags(session)
+    visible_ids = set(session.order)
     out: list[dict[str, object]] = []
     for nid in session.order:
         parents = session.owned[nid]
@@ -760,6 +795,7 @@ def _inventory_payload(session: AlchimieSession) -> list[dict[str, object]]:
                 "parents": (
                     [_concept(parents[0]), _concept(parents[1])] if parents else None
                 ),
+                "links": _earned_links(nid, parents, visible_ids),
                 "recent": recent,
                 "useful": useful,
                 "ready": ready,

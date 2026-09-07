@@ -8,6 +8,10 @@ import sys
 from collections import Counter
 from pathlib import Path
 
+import pytest
+
+from cat_de_roman_esti.graph import Graph
+from cat_de_roman_esti.wordgames import contexto
 from cat_de_roman_esti.wordgames.contexto import (
     _build_session,
     _responsive_count,
@@ -19,7 +23,8 @@ from cat_de_roman_esti.wordgames.contexto_projection import PROJECTION_TERMS
 from cat_de_roman_esti.wordgames.derived_catalog import (
     DEFAULT_DERIVED_CATALOG_SHA256,
 )
-from cat_de_roman_esti.wordgames.service import get_service
+from cat_de_roman_esti.wordgames.service import WordGameService, get_service
+from tests.content_history import before_v84_fixture, before_v84_projection_rows
 from tests.current_content import CURRENT_CONTENT
 
 _ROOT = Path(__file__).resolve().parent.parent
@@ -145,25 +150,43 @@ def test_v47_deterministic_floor_is_green_but_human_c1_c3_gate_is_stricter() -> 
     assert rows["ct_societate_303"]["final"] == "reject"
 
 
-def test_v47_live_feedback_proves_mancare_and_rejects_the_misleading_family_field() -> None:
+@pytest.mark.parametrize(
+    ("graph_epoch", "responsive", "food_projections", "family_rank"),
+    [("before_v84", 2260, 19, 2080), ("current", 2275, 18, 2095)],
+)
+def test_v47_live_feedback_proves_mancare_and_rejects_the_misleading_family_field(
+    graph_epoch, responsive, food_projections, family_rank, monkeypatch,
+) -> None:
     svc = get_service()
+    projections = [
+        (term.surface, term.anchor_id, term.domain, term.rank_penalty,
+         term.mapping_kind, term.public_id)
+        for term in PROJECTION_TERMS
+    ]
+    if graph_epoch == "before_v84":
+        prior = before_v84_fixture(_json(
+            _ROOT / "cat_de_roman_esti/fixtures/kg_sample.json"
+        ))
+        svc = WordGameService(Graph.from_records(prior["kg_nodes"], prior["kg_edges"]))
+        monkeypatch.setattr(contexto, "get_service", lambda: svc)
+        projections = before_v84_projection_rows(projections)
     food_target = "n_v4gas_mancare"
     family_target = "n_v4soc_familie"
 
     assert len(svc.predecessor_ids(food_target)) == 15
-    assert _responsive_count(svc.distances_to(food_target)) == 2260
+    assert _responsive_count(svc.distances_to(food_target)) == responsive
     assert all(
         svc.resolve(surface) == food_target
         for surface in ("mâncare", "mâncarea", "mâncăruri", "mâncărurile")
     )
-    assert sum(term.anchor_id == food_target for term in PROJECTION_TERMS) == 19
+    assert sum(row[1] == food_target for row in projections) == food_projections
 
     family = _build_session(family_target, "usor", None)
     for surface in ("mamă", "tată", "bunică", "bunic", "frate", "soră"):
         node_id = svc.resolve(surface)
         assert node_id is not None
         score = _score_feedback(svc, family, node_id)
-        assert score.rank == 2080
+        assert score.rank == family_rank
         assert temperature_for(
             family,
             score.feedback_distance,

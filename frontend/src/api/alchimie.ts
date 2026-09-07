@@ -9,11 +9,20 @@ export interface Concept {
   label: string;
 }
 
+/** An earned association in the direction of the authored connection. */
+export interface EarnedLink {
+  source: Concept;
+  target: Concept;
+  label: string;
+}
+
 /** An inventory entry; `parents` is the two concepts it was combined FROM (null for seeds). */
 export interface InventoryItem {
   id: string;
   label: string;
   parents: [Concept, Concept] | null;
+  /** At most two links between this earned result and its already-owned parents. */
+  links: EarnedLink[];
   /** Recently added to the bounded workspace. */
   recent: boolean;
   /** Still participates in at least one recipe with an unseen result. */

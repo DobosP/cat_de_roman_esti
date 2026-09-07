@@ -14,6 +14,7 @@ from tests.content_history import (
     before_v80_rankings,
     before_v82_pack,
     before_v82_rankings,
+    before_v84_fixture,
 )
 from tests.content_scenarios import contexto_seed
 
@@ -112,13 +113,28 @@ def test_exact_candidate_has_two_independently_bound_promotions() -> None:
      ("lapte", 2, 40, "Cald"), ("brânză", 2, 30, "Cald"),
      ("smântână", 2, 22, "Cald")],
 )
+@pytest.mark.parametrize("graph_epoch", ("before_v84", "current"))
 def test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win(
     opener: str, distance: int, rank: int, temperature: str,
+    graph_epoch: str, monkeypatch,
 ) -> None:
     pytest.importorskip("django")
     from django.test import Client
 
+    from cat_de_roman_esti.graph import Graph
+    from cat_de_roman_esti.wordgames import contexto
     from cat_de_roman_esti.wordgames.contexto import store
+    from cat_de_roman_esti.wordgames.service import WordGameService
+
+    if graph_epoch == "before_v84":
+        prior = before_v84_fixture(_read(FIXTURES / "kg_sample.json"))
+        svc = WordGameService(Graph.from_records(prior["kg_nodes"], prior["kg_edges"]))
+        monkeypatch.setattr(contexto, "get_service", lambda: svc)
+    # New cereals/process words enter the distance distribution. Preserve the old
+    # numerical observations above and pin the three reviewed current rank shifts.
+    expected_rank = rank if graph_epoch == "before_v84" else {
+        "lapte": 47, "brânză": 34, "smântână": 26,
+    }.get(opener, rank)
 
     seed = contexto_seed(TARGET, difficulty="usor")
     client = Client()
@@ -136,7 +152,7 @@ def test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win(
         body = warm.json()
         assert body["won"] is False and body["attempts"] == 1
         assert (body["guess"]["distance"], body["guess"]["rank"],
-                body["guess"]["temperature"]) == (distance, rank, temperature)
+                body["guess"]["temperature"]) == (distance, expected_rank, temperature)
         assert TARGET not in str(body) and "anchor_id" not in str(body)
         resumed = client.get(url).json()
         assert resumed["guesses"] == body["guesses"] and resumed["attempts"] == 1

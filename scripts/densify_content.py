@@ -97,6 +97,28 @@ def _next_generated_edge_number(edge_ids: set[str]) -> int:
     return highest + 1
 
 
+def remove_reviewed_edges(edges: list[dict], removals: object) -> list[dict]:
+    """Remove only complete, exact prior records; stale or partial reviews fail closed."""
+    if not isinstance(removals, (list, tuple)):
+        raise ValueError("edge removals must be a sequence of complete records")
+    by_id = {edge["id"]: edge for edge in edges}
+    if len(by_id) != len(edges):
+        raise ValueError("baseline contains duplicate edge IDs; removal is ambiguous")
+    removed: set[str] = set()
+    for record in removals:
+        if not isinstance(record, dict) or not isinstance(record.get("id"), str):
+            raise ValueError("edge removal must contain a complete record with a string id")
+        edge_id = record["id"]
+        if edge_id in removed:
+            raise ValueError(f"duplicate edge removal: {edge_id}")
+        if edge_id not in by_id or json.dumps(record, sort_keys=True) != json.dumps(
+            by_id[edge_id], sort_keys=True
+        ):
+            raise ValueError(f"edge removal does not match the exact current record: {edge_id}")
+        removed.add(edge_id)
+    return [edge for edge in edges if edge["id"] not in removed]
+
+
 def main() -> int:
     if not DENSE_DATA.exists():
         die(f"dense data not found: {DENSE_DATA}")
@@ -119,6 +141,9 @@ def run(dense: dict, build_version: str, note: str) -> int:
     edges: list[dict] = list(data["kg_edges"])
     node_ids = {n["id"] for n in nodes}
     existing_edge_ids = {e["id"] for e in edges}
+    # Allocate against every original ID, including removed records, so a correction
+    # cannot recycle its retired ID for one of the new links in this transaction.
+    edges = remove_reviewed_edges(edges, dense.get("remove_edges", ()))
     edge_keys = {_edge_key(e["src_id"], e["dst_id"], e["relation"]) for e in edges}
 
     # ---- merge new nodes ----

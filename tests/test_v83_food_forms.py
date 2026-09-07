@@ -10,7 +10,7 @@ from pathlib import Path
 
 import pytest
 
-from tests.content_history import before_v83_fixture, v83_added_forms
+from tests.content_history import before_v83_fixture, before_v84_fixture, v83_added_forms
 
 ROOT = Path(__file__).resolve().parents[1]
 REVIEW = ROOT / "docs/reviews/v83-food-input-and-feedback"
@@ -33,8 +33,8 @@ def test_authoring_module_contains_exactly_the_reviewed_aliases():
 def test_alias_only_kg_delta_reconstructs_complete_v82_fixture():
     blob = (ROOT / "cat_de_roman_esti/fixtures/kg_sample.json").read_bytes()
     assert blob == (ROOT / "tests/fixtures/kg_sample.json").read_bytes()
-    current = json.loads(blob)
-    before = before_v83_fixture(current)
+    current = before_v84_fixture(json.loads(blob))
+    before = before_v83_fixture(json.loads(blob))
     encoded = (json.dumps(before, ensure_ascii=False, indent=2) + "\n").encode()
     assert hashlib.sha256(encoded).hexdigest() == (
         "fc3ea5a27e3bcb1da72fb3146316d7709da37012dddc494de0d6d4370862a331"
@@ -50,10 +50,12 @@ def test_every_old_authored_surface_retains_its_exact_owner():
     from cat_de_roman_esti.wordgames.service import get_service
 
     svc = get_service()
-    added = v83_added_forms()
+    baseline = before_v83_fixture(json.loads(
+        (ROOT / "cat_de_roman_esti/fixtures/kg_sample.json").read_bytes()
+    ))
     surfaces = sorted({
-        text for node in svc.graph.nodes.values()
-        for text in (node.id, node.label_ro, *node.aliases) if text not in added
+        text for node in baseline["kg_nodes"]
+        for text in (node["id"], node["label_ro"], *node.get("aliases", []))
     })
     rows = [(surface, svc.resolve(surface)) for surface in surfaces]
     assert len(rows) == 13180

@@ -1025,6 +1025,60 @@ input:focus-visible {
   margin-left: auto;
 }
 
+.game-help {
+  min-width: 0;
+  border-bottom: 1px solid var(--surface-border);
+  font-size: 0.88rem;
+}
+
+.game-help > summary {
+  min-height: 44px;
+  padding: 11px 4px;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.game-help > summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.game-help-copy {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.game-help-copy dt {
+  font-weight: 600;
+}
+
+.game-help-copy dd {
+  margin: 3px 0 12px;
+  color: var(--text-dim);
+}
+
+.game-help-note {
+  margin: 0 0 12px;
+}
+
+.alchemy-earned-links {
+  flex-basis: 100%;
+  min-width: 0;
+  margin-top: 4px;
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+
+.alchemy-earned-links ul {
+  margin: 5px 0 0;
+  padding-left: 20px;
+  color: var(--text-dim);
+}
+
 .hud {
   justify-content: flex-end;
 }

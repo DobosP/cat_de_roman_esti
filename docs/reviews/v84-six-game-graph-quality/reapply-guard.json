@@ -1,0 +1,23 @@
+{
+  "command": [
+    "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+    "scripts/apply_common_words_v24.py",
+    "--data-module",
+    "kitchen_graph_v84_data"
+  ],
+  "expected_exit_code": 1,
+  "observed_exit_code": 1,
+  "all_nine_artifacts_exact": true,
+  "artifact_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "3fb0f97c5b4c813eb72d8fd3589c4ce92f724d0565db840c1bc3909458a60ab0",
+    "cat_de_roman_esti/fixtures/games_pack.json": "c843705d565770d6916567be8b7c627c16bfdcf9dd8368e6a333f0f222484b57",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "67a7a3274f24485d45ab75191a9701482c0959be4029e29e47c7c576360a6075",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "579128d90d34a57a093202e54babe76b1ceb6840a36e332c9ecc540a8fb5251a",
+    "tests/fixtures/kg_sample.json": "3fb0f97c5b4c813eb72d8fd3589c4ce92f724d0565db840c1bc3909458a60ab0",
+    "tests/fixtures/games_pack.json": "c843705d565770d6916567be8b7c627c16bfdcf9dd8368e6a333f0f222484b57",
+    "tests/fixtures/board_rankings_v37.json": "67a7a3274f24485d45ab75191a9701482c0959be4029e29e47c7c576360a6075",
+    "tests/fixtures/derived_catalog_v38.json": "579128d90d34a57a093202e54babe76b1ceb6840a36e332c9ecc540a8fb5251a",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "43e18a0b84b81196573bca0c5643c117def93535c38fa67b52adf5da63fd3166"
+  },
+  "output": "apply_common_words_v24: ERROR — common-word wave is already applied (fixture-v84-six-game-graph-quality); transaction restored"
+}

@@ -14,6 +14,7 @@ from pathlib import Path
 import pytest
 
 from cat_de_roman_esti.data import load_fixture, mobile_app_pack_snapshot
+from cat_de_roman_esti.graph import Graph
 from cat_de_roman_esti.wordgames.contexto import (
     MIN_REACHABLE,
     MIN_RESPONSIVE,
@@ -25,6 +26,7 @@ from cat_de_roman_esti.wordgames.packs import (
     lant_branch_profile,
 )
 from cat_de_roman_esti.wordgames.service import WordGameService, normalize
+from tests.content_history import before_v84_fixture, before_v84_pack
 from tests.current_content import CURRENT_CONTENT
 
 _ROOT = Path(__file__).resolve().parent.parent
@@ -492,8 +494,9 @@ def test_v33_keeps_curated_pack_and_both_critique_reports_stable():
     )
 
 
-def test_v33_tracks_current_contexto_and_preserves_lant_and_alchimie_profiles():
+def test_v33_tracks_current_profiles_and_retains_historical_alchimie_profile():
     pack = _pack()
+    historical_pack = before_v84_pack(pack)
     svc = _service()
     contexto = {
         record["id"]: sorted(svc.distances_to(record["target"]).items())
@@ -509,29 +512,38 @@ def test_v33_tracks_current_contexto_and_preserves_lant_and_alchimie_profiles():
                 record["optimal"],
             ),
         ]
-        for record in pack["lant"]
+        for record in historical_pack["lant"]
     }
-    alchimie = {
-        record["id"]: {
-            "opening_pairs": _opening_pairs(
-                svc,
-                record["seeds"],
-                record.get("category"),
-            ),
-            "generations": sorted(
-                _closure_generations(
-                    svc,
+    def alchimie_profile(service):
+        return {
+            record["id"]: {
+                "opening_pairs": _opening_pairs(
+                    service,
                     record["seeds"],
                     record.get("category"),
-                ).items()
-            ),
+                ),
+                "generations": sorted(
+                    _closure_generations(
+                        service,
+                        record["seeds"],
+                        record.get("category"),
+                    ).items()
+                ),
+            }
+            for record in historical_pack["alchimie"]
         }
-        for record in pack["alchimie"]
-    }
+
+    old_fixture = before_v84_fixture(_fixture())
+    old_service = WordGameService(Graph.from_records(
+        old_fixture["kg_nodes"], old_fixture["kg_edges"],
+    ))
 
     assert _digest(contexto) == _CURRENT_CONTEXTO_PROFILE_SHA256
     assert _digest(lant) == _V32_LANT_PROFILE_SHA256
-    assert _digest(alchimie) == _V32_ALCHIMIE_PROFILE_SHA256
+    assert _digest(alchimie_profile(old_service)) == _V32_ALCHIMIE_PROFILE_SHA256
+    assert _digest(alchimie_profile(svc)) == (
+        CURRENT_CONTENT.payload_sha256["alchimie_closure_profile"]
+    )
 
 
 def test_v33_mobile_contract_is_exact_current_and_public():

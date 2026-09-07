@@ -289,7 +289,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   return (
     <div className="screen-pad fill intrusul-game">
       <div className="container col game-container" style={{ gap: 14, paddingBottom: 32 }}>
-        <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} busy={loading}>
+        <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY} busy={loading}>
           <Hud>
             {state.daily && <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} />}
             <StatBadge

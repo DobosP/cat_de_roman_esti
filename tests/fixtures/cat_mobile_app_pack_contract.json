@@ -4,12 +4,12 @@
   "app": "cat_de_roman_esti",
   "schema_version": 1,
   "manifest_version": 1,
-  "build_version": "fixture-v83-food-input-and-feedback",
+  "build_version": "fixture-v84-six-game-graph-quality",
   "generated_at": "2026-06-21T00:00:00Z",
-  "content_hash": "sha256:5ea700a00708cf799a4cad8dcc99c54cb6595f0e99c217b5d890b9a829195918",
+  "content_hash": "sha256:10984193d18dd817029c5972fe84e39bb490c4ef819399408cd54c299c67ed00",
   "counts": {
-   "nodes": 2365,
-   "edges": 9223,
+   "nodes": 2380,
+   "edges": 9279,
    "puzzles": 180
   }
  },
@@ -9229,6 +9229,66 @@
   {
    "id": "n_v81_food_pantry_nuca",
    "label_ro": "Nucă"
+  },
+  {
+   "id": "n_v84_food_aluat",
+   "label_ro": "Aluat"
+  },
+  {
+   "id": "n_v84_food_arpacas",
+   "label_ro": "Arpacaș"
+  },
+  {
+   "id": "n_v84_food_cheag",
+   "label_ro": "Cheag alimentar"
+  },
+  {
+   "id": "n_v84_food_cuptor",
+   "label_ro": "Cuptor de bucătărie"
+  },
+  {
+   "id": "n_v84_food_drojdie",
+   "label_ro": "Drojdie"
+  },
+  {
+   "id": "n_v84_food_grau",
+   "label_ro": "Grâu"
+  },
+  {
+   "id": "n_v84_food_gris",
+   "label_ro": "Griș"
+  },
+  {
+   "id": "n_v84_food_malai",
+   "label_ro": "Mălai"
+  },
+  {
+   "id": "n_v84_food_orz",
+   "label_ro": "Orz"
+  },
+  {
+   "id": "n_v84_food_ovaz",
+   "label_ro": "Ovăz"
+  },
+  {
+   "id": "n_v84_food_saramura",
+   "label_ro": "Saramură"
+  },
+  {
+   "id": "n_v84_food_secara",
+   "label_ro": "Secară"
+  },
+  {
+   "id": "n_v84_food_sucitor",
+   "label_ro": "Sucitor"
+  },
+  {
+   "id": "n_v84_food_tava_copt",
+   "label_ro": "Tavă de copt"
+  },
+  {
+   "id": "n_v84_food_zer",
+   "label_ro": "Zer"
   },
   {
    "id": "n_varful_moldoveanu",
@@ -35377,11 +35437,6 @@
    "dst_id": "n_bucegi"
   },
   {
-   "id": "de520",
-   "src_id": "n_gas_telemea",
-   "dst_id": "n_gas_placinte_poale_brau"
-  },
-  {
    "id": "de5200",
    "src_id": "n_v11lim_mioara_avram",
    "dst_id": "n_gramatica"
@@ -54037,9 +54092,104 @@
    "dst_id": "n_v21gas_cornulete"
   },
   {
+   "id": "de8561",
+   "src_id": "n_v84_food_grau",
+   "dst_id": "n_v84_food_orz"
+  },
+  {
+   "id": "de8562",
+   "src_id": "n_v84_food_grau",
+   "dst_id": "n_v84_food_ovaz"
+  },
+  {
+   "id": "de8563",
+   "src_id": "n_v84_food_grau",
+   "dst_id": "n_v84_food_secara"
+  },
+  {
+   "id": "de8564",
+   "src_id": "n_v84_food_orz",
+   "dst_id": "n_v84_food_ovaz"
+  },
+  {
+   "id": "de8565",
+   "src_id": "n_v84_food_orz",
+   "dst_id": "n_v84_food_secara"
+  },
+  {
+   "id": "de8566",
+   "src_id": "n_v84_food_ovaz",
+   "dst_id": "n_v84_food_secara"
+  },
+  {
+   "id": "de8567",
+   "src_id": "n_v84_food_grau",
+   "dst_id": "n_v24_food_pantry_faina"
+  },
+  {
+   "id": "de8568",
+   "src_id": "n_v84_food_grau",
+   "dst_id": "n_v84_food_gris"
+  },
+  {
+   "id": "de8569",
+   "src_id": "n_v84_food_grau",
+   "dst_id": "n_v84_food_arpacas"
+  },
+  {
    "id": "de857",
    "src_id": "n_net_mester_improvizat",
    "dst_id": "n_vdr_lasa_ca_merge"
+  },
+  {
+   "id": "de8570",
+   "src_id": "n_v84_food_orz",
+   "dst_id": "n_v84_food_arpacas"
+  },
+  {
+   "id": "de8571",
+   "src_id": "n_v84_food_ovaz",
+   "dst_id": "n_v24_food_snack_biscuit"
+  },
+  {
+   "id": "de8572",
+   "src_id": "n_v84_food_secara",
+   "dst_id": "n_v24_food_pantry_faina"
+  },
+  {
+   "id": "de8573",
+   "src_id": "n_v84_food_secara",
+   "dst_id": "n_v4gas_paine"
+  },
+  {
+   "id": "de8574",
+   "src_id": "n_v2lim_porumb",
+   "dst_id": "n_v84_food_malai"
+  },
+  {
+   "id": "de8575",
+   "src_id": "n_v84_food_malai",
+   "dst_id": "n_gas_mamaliga"
+  },
+  {
+   "id": "de8576",
+   "src_id": "n_v84_food_gris",
+   "dst_id": "n_gas_supa_galuste"
+  },
+  {
+   "id": "de8577",
+   "src_id": "n_v84_food_arpacas",
+   "dst_id": "n_v17gas_coliva"
+  },
+  {
+   "id": "de8578",
+   "src_id": "n_v24_food_pantry_faina",
+   "dst_id": "n_v84_food_aluat"
+  },
+  {
+   "id": "de8579",
+   "src_id": "n_v4gas_apa",
+   "dst_id": "n_v84_food_aluat"
   },
   {
    "id": "de858",
@@ -54047,9 +54197,109 @@
    "dst_id": "n_net_am_facut_cu_manuta_mea"
   },
   {
+   "id": "de8580",
+   "src_id": "n_v84_food_drojdie",
+   "dst_id": "n_v84_food_aluat"
+  },
+  {
+   "id": "de8581",
+   "src_id": "n_v84_food_drojdie",
+   "dst_id": "n_v4gas_paine"
+  },
+  {
+   "id": "de8582",
+   "src_id": "n_v84_food_drojdie",
+   "dst_id": "n_gas_cozonac"
+  },
+  {
+   "id": "de8583",
+   "src_id": "n_v84_food_drojdie",
+   "dst_id": "n_v17gas_gogosi"
+  },
+  {
+   "id": "de8584",
+   "src_id": "n_v84_food_aluat",
+   "dst_id": "n_v4gas_paine"
+  },
+  {
+   "id": "de8585",
+   "src_id": "n_v84_food_cuptor",
+   "dst_id": "n_v4gas_paine"
+  },
+  {
+   "id": "de8586",
+   "src_id": "n_v84_food_aluat",
+   "dst_id": "n_v17gas_gogosi"
+  },
+  {
+   "id": "de8587",
+   "src_id": "n_v84_food_aluat",
+   "dst_id": "n_v21gas_cornulete"
+  },
+  {
+   "id": "de8588",
+   "src_id": "n_v84_food_cuptor",
+   "dst_id": "n_v21gas_cornulete"
+  },
+  {
+   "id": "de8589",
+   "src_id": "n_v84_food_aluat",
+   "dst_id": "n_v42gas_placinta_mere"
+  },
+  {
    "id": "de859",
    "src_id": "n_net_mester_improvizat",
    "dst_id": "n_net_umor_autoironic"
+  },
+  {
+   "id": "de8590",
+   "src_id": "n_v24_food_orchard_mar",
+   "dst_id": "n_v42gas_placinta_mere"
+  },
+  {
+   "id": "de8591",
+   "src_id": "n_v24_food_snack_biscuit",
+   "dst_id": "n_v18gas_salam_de_biscuiti"
+  },
+  {
+   "id": "de8592",
+   "src_id": "n_v24_food_breakfast_unt",
+   "dst_id": "n_v18gas_salam_de_biscuiti"
+  },
+  {
+   "id": "de8593",
+   "src_id": "n_v84_food_tava_copt",
+   "dst_id": "n_v84_food_cuptor"
+  },
+  {
+   "id": "de8594",
+   "src_id": "n_v84_food_tava_copt",
+   "dst_id": "n_v21gas_cornulete"
+  },
+  {
+   "id": "de8595",
+   "src_id": "n_v84_food_tava_copt",
+   "dst_id": "n_gas_cozonac"
+  },
+  {
+   "id": "de8596",
+   "src_id": "n_v84_food_tava_copt",
+   "dst_id": "n_v42gas_placinta_mere"
+  },
+  {
+   "id": "de8597",
+   "src_id": "n_v84_food_sucitor",
+   "dst_id": "n_v84_food_aluat"
+  },
+  {
+   "id": "de8598",
+   "src_id": "n_v84_food_sucitor",
+   "dst_id": "n_v2gas_placinte"
+  },
+  {
+   "id": "de8599",
+   "src_id": "n_v84_food_sucitor",
+   "dst_id": "n_v3gas_paste"
   },
   {
    "id": "de86",
@@ -54062,9 +54312,99 @@
    "dst_id": "n_net_am_facut_cu_manuta_mea"
   },
   {
+   "id": "de8600",
+   "src_id": "n_v84_food_sucitor",
+   "dst_id": "n_v42gas_placinta_mere"
+  },
+  {
+   "id": "de8601",
+   "src_id": "n_v84_food_cuptor",
+   "dst_id": "n_gas_cozonac"
+  },
+  {
+   "id": "de8602",
+   "src_id": "n_v4gas_sare",
+   "dst_id": "n_v84_food_saramura"
+  },
+  {
+   "id": "de8603",
+   "src_id": "n_v4gas_apa",
+   "dst_id": "n_v84_food_saramura"
+  },
+  {
+   "id": "de8604",
+   "src_id": "n_v84_food_saramura",
+   "dst_id": "n_gas_telemea"
+  },
+  {
+   "id": "de8605",
+   "src_id": "n_v84_food_saramura",
+   "dst_id": "n_gas_muraturi"
+  },
+  {
+   "id": "de8606",
+   "src_id": "n_v4gas_lapte",
+   "dst_id": "n_v84_food_zer"
+  },
+  {
+   "id": "de8607",
+   "src_id": "n_v2gas_branza",
+   "dst_id": "n_v84_food_zer"
+  },
+  {
+   "id": "de8608",
+   "src_id": "n_gas_telemea",
+   "dst_id": "n_v84_food_zer"
+  },
+  {
+   "id": "de8609",
+   "src_id": "n_v84_food_zer",
+   "dst_id": "n_gas_urda"
+  },
+  {
    "id": "de861",
    "src_id": "n_vdr_lasa_ca_merge",
    "dst_id": "n_limba_romana"
+  },
+  {
+   "id": "de8610",
+   "src_id": "n_v84_food_cheag",
+   "dst_id": "n_v4gas_lapte"
+  },
+  {
+   "id": "de8611",
+   "src_id": "n_v84_food_cheag",
+   "dst_id": "n_v2gas_branza"
+  },
+  {
+   "id": "de8612",
+   "src_id": "n_v84_food_cheag",
+   "dst_id": "n_gas_telemea"
+  },
+  {
+   "id": "de8613",
+   "src_id": "n_v84_food_cheag",
+   "dst_id": "n_v20gas_cascaval"
+  },
+  {
+   "id": "de8614",
+   "src_id": "n_v84_food_malai",
+   "dst_id": "n_v84_food_gris"
+  },
+  {
+   "id": "de8615",
+   "src_id": "n_v84_food_malai",
+   "dst_id": "n_v24_food_pantry_faina"
+  },
+  {
+   "id": "de8616",
+   "src_id": "n_v84_food_gris",
+   "dst_id": "n_v24_food_pantry_faina"
+  },
+  {
+   "id": "de8617",
+   "src_id": "n_v84_food_gris",
+   "dst_id": "n_v84_food_arpacas"
   },
   {
    "id": "de862",

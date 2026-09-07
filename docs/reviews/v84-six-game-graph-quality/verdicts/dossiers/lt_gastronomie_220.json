@@ -1,0 +1,134 @@
+{
+ "id": "lt_gastronomie_220",
+ "game": "lant",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "e6aaa484b05e28e65966d86dacab1765100b6f55769a39438b0f5c81469e7664",
+ "kg_sha256": "3fb0f97c5b4c813eb72d8fd3589c4ce92f724d0565db840c1bc3909458a60ab0",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Cornulețe salience 0.55 < 0.60 (usor floor)"
+  }
+ ],
+ "start": {
+  "id": "n_v24_food_pantry_faina",
+  "label": "Făină",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.88,
+  "degree": 7,
+  "incoming_degree": 6,
+  "description": "Concept cotidian din grupul «ingrediente de bază»: Făină."
+ },
+ "target": {
+  "id": "n_v21gas_cornulete",
+  "label": "Cornulețe",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.55,
+  "degree": 4,
+  "incoming_degree": 8,
+  "description": "Fursecuri fragede rulate, umplute cu rahat, gem sau nucă și pudrate din belșug cu zahăr. Se coc tradițional în casă înainte de Crăciun, odată cu cozonacul."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v24_food_pantry_faina",
+     "label": "Făină"
+    },
+    {
+     "id": "n_gas_cozonac",
+     "label": "Cozonac"
+    },
+    {
+     "id": "n_v21gas_cornulete",
+     "label": "Cornulețe"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v24_food_pantry_faina",
+      "label": "Făină"
+     },
+     "to": {
+      "id": "n_gas_cozonac",
+      "label": "Cozonac"
+     },
+     "relation": "part_of",
+     "label": "ingredient pentru",
+     "strength": 0.97
+    },
+    {
+     "from": {
+      "id": "n_gas_cozonac",
+      "label": "Cozonac"
+     },
+     "to": {
+      "id": "n_v21gas_cornulete",
+      "label": "Cornulețe"
+     },
+     "relation": "related_to",
+     "label": "coapte împreună de sărbători",
+     "strength": 0.7
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v24_food_pantry_faina",
+     "label": "Făină"
+    },
+    {
+     "id": "n_v84_food_aluat",
+     "label": "Aluat"
+    },
+    {
+     "id": "n_v21gas_cornulete",
+     "label": "Cornulețe"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v24_food_pantry_faina",
+      "label": "Făină"
+     },
+     "to": {
+      "id": "n_v84_food_aluat",
+      "label": "Aluat"
+     },
+     "relation": "part_of",
+     "label": "se amestecă pentru",
+     "strength": 0.8
+    },
+    {
+     "from": {
+      "id": "n_v84_food_aluat",
+      "label": "Aluat"
+     },
+     "to": {
+      "id": "n_v21gas_cornulete",
+      "label": "Cornulețe"
+     },
+     "relation": "prepared_into",
+     "label": "se rulează pentru",
+     "strength": 0.8
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:fbb1ce8a58dcfdfd5b71c7fa3a56625899dfd337fc639fd2bd54c36c14b4d3c6"
+}

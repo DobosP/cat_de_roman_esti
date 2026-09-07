@@ -11,6 +11,7 @@ from pathlib import Path
 from cat_de_roman_esti.data import load_fixture
 from cat_de_roman_esti.wordgames.packs import validate_payload
 from cat_de_roman_esti.wordgames.service import WordGameService
+from tests.content_history import before_v84_pack
 from tests.current_content import CURRENT_CONTENT
 
 _ROOT = Path(__file__).resolve().parent.parent
@@ -116,9 +117,10 @@ def test_v45_pack_keeps_only_the_three_unanimous_repair_holds() -> None:
     )
 
     assert pack['meta']['counts'] == CURRENT_CONTENT.pack_counts
-    assert pack["meta"]["id_high_water"]["lant"] == 219
+    assert before_v84_pack(pack)["meta"]["id_high_water"]["lant"] == 219
+    assert pack["meta"]["id_high_water"]["lant"] == CURRENT_CONTENT.pack_id_high_water["lant"]
     assert Counter(record["status"] for record in lant.values()) == {
-        "approved": 94,
+        "approved": CURRENT_CONTENT.game_inventory["lant"][1],
         "pending": 3,
     }
     assert statuses == CURRENT_CONTENT.status_counts

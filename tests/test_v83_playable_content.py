@@ -10,6 +10,7 @@ import pytest
 
 from tests.content_history import before_v83_derived, before_v83_pack, before_v83_rankings
 from tests.content_scenarios import contexto_seed
+from tests.current_content import CURRENT_CONTENT
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "cat_de_roman_esti/fixtures"
@@ -57,9 +58,9 @@ def test_exact_five_new_records_are_approved_and_runtime_selectable():
     assert all(r["status"] == "approved" and r["category"] == "gastronomie" for r in added)
     assert {r["id"] for r in added} == {f"ct_gastronomie_{i}" for i in range(329, 334)}
     pack = _read(FIXTURES / "games_pack.json")
-    assert pack["meta"]["counts"]["contexto"] == 223
-    assert pack["meta"]["id_high_water"]["contexto"] == 333
-    assert get_pack().selectable_count("contexto") == 217
+    assert pack["meta"]["counts"]["contexto"] == CURRENT_CONTENT.pack_counts["contexto"]
+    assert pack["meta"]["id_high_water"]["contexto"] == CURRENT_CONTENT.contexto_id_high_water
+    assert get_pack().selectable_count("contexto") == CURRENT_CONTENT.contexto_eligible
     pool = get_pack().pool("contexto", category="gastronomie")
     assert {r.id for r in pool if r._pilot_eligible} >= {r["id"] for r in added}
 

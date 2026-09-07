@@ -607,7 +607,7 @@ export default function CaldRece({
     <div className="screen-pad fill">
       <div className="container col game-container" style={{ gap: 16, paddingBlock: 8 }}>
         {/* header */}
-        <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title}>
+        <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY}>
           <Hud>
             <StatBadge
               label="Mod"

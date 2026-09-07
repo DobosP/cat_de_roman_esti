@@ -1,0 +1,103 @@
+#!/usr/bin/env python3
+"""Independent exact-dossier API checks; writes evidence only to scratch."""
+import dataclasses
+import hashlib
+import json
+import os
+from pathlib import Path
+import sys
+
+root = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v84-six-game-graph-quality')
+scratch = Path('/home/dobo/work/_temp/feat__v84-six-game-graph-quality')
+sys.path.insert(0, str(root))
+sys.path.insert(0, str(root / 'scripts'))
+os.environ['DJANGO_SETTINGS_MODULE'] = 'cat_de_roman_esti.web.settings'
+os.environ['CAT_ACCOUNTS_ENABLED'] = '0'
+os.environ['ROEDU_API_URL'] = ''
+os.environ['ROEDU_API_KEY'] = ''
+import django
+django.setup()
+from django.test import Client
+import critique_pack
+from cat_de_roman_esti.wordgames import contexto as c, lant, packs
+from cat_de_roman_esti.wordgames.service import get_service
+svc = get_service()
+client = Client()
+inputs = json.loads((scratch / 'impact/inputs.json').read_text())
+raw_pack = json.loads((root / 'cat_de_roman_esti/fixtures/games_pack.json').read_text())
+words = list(dict.fromkeys(['Drojdie', 'Biscuit', 'Măr', 'Zer', 'Saramură'] + [row['label_ro'] for row in inputs['NODES']] + ['Făină', 'Desert', 'Plăcinte', 'Mâncare', 'Prăjitură', 'Unt', 'Lapte', 'Tren', 'Fotbal', 'Stilou', 'Zahăr', 'Cacao', 'Scorțișoară', 'Sarmale']))
+result = {'reviewer': 'v84_interface_review', 'words': words, 'items': {}, 'flour_pen_guard': None}
+
+for file in sorted((scratch / 'dossiers').glob('*.json')):
+    d = json.loads(file.read_text())
+    assert critique_pack.dossier_review_binding(d) == d['review_binding']
+    assert hashlib.sha256((root / 'cat_de_roman_esti/fixtures/kg_sample.json').read_bytes()).hexdigest() == d['kg_sha256']
+    record = next(row for row in raw_pack[d['game']] if row['id'] == d['id'])
+    assert critique_pack.canonical_json_sha256(record) == d['record_sha256']
+    assert not packs.validate_payload(record, d['game'], svc)
+    output = {'review_binding': d['review_binding'], 'record_sha256': d['record_sha256']}
+    result['items'][d['id']] = output
+    if d['game'] == 'contexto':
+        target = d['target']['id']
+        template = c._build_session(target, 'usor', None, category='gastronomie')
+        output['probes'] = {}
+        for word in words:
+            gid = c.store.create(dataclasses.replace(template, guesses={}, order=[]))
+            try:
+                response = client.post(f'/api/wordgames/contexto/games/{gid}/guess', {'text': word}, content_type='application/json')
+                data = response.json()
+                assert response.status_code == 200
+                assert 'target' not in data and not data.get('won'), (d['id'], word)
+                assert target not in json.dumps(data), (d['id'], word)
+                guess = data.get('guess', {})
+                output['probes'][word] = {'ok': data.get('ok'), 'attempts': data.get('attempts'), 'needs_confirmation': data.get('needs_confirmation',False), 'resolved_label':data.get('resolved_label'), 'guess': {key:guess.get(key) for key in ['id','label','rank','distance','temperature']}}
+            finally:
+                c.store.delete(gid)
+        gid = c.store.create(dataclasses.replace(template, guesses={}, order=[]))
+        url = f'/api/wordgames/contexto/games/{gid}'
+        try:
+            for word in ['Tren','Fotbal','Stilou']:
+                data = client.post(url+'/guess', {'text':word}, content_type='application/json').json()
+                assert data['ok'] and not data['won']
+            clues=[]
+            for _ in range(1 if template.category else 2):
+                response=client.post(url+'/clue')
+                assert response.status_code==200,(d['id'],response.content)
+                data=response.json();assert 'target' not in data and target not in json.dumps(data)
+                clues.append(data)
+            output['clue_kinds']=[clue['clue_kind'] for clue in clues]
+            output['warm_clue']=clues[-1].get('word')
+            if output['warm_clue']:
+                replay=client.post(url+'/guess',{'text':output['warm_clue']['label']},content_type='application/json').json()
+                assert not replay['won'] and replay['guess']['rank']==output['warm_clue']['rank']
+            before=client.get(url).json()
+            assert target not in json.dumps(before)
+            won=client.post(url+'/guess',{'text':d['target']['label']},content_type='application/json').json()
+            assert won['won'] and won['guess']['id']==target and won['guess']['rank']==1
+            output['journey']={'private_until_exact_win':True,'win_rank':1,'attempts':won['attempts']}
+        finally:c.store.delete(gid)
+    else:
+        output['routes']=[]
+        for route in d['representative_shortest_paths']:
+            nodes=[row['id'] for row in route['nodes']]
+            gid=lant.store.create(lant.LantSession(nodes[0],nodes[-1],2,chain=[nodes[0]],category='gastronomie'))
+            url=f'/api/wordgames/lant/games/{gid}'
+            try:
+                for node in nodes[1:]:
+                    response=client.post(url+'/move',{'text':svc.label(node)},content_type='application/json')
+                    assert response.status_code==200,response.content
+                    data=response.json()
+                    assert data['current']['id']==node
+                assert data['won'] and data['moves']==2
+                output['routes'].append({'nodes':nodes,'won':True,'moves':2})
+            finally:lant.store.delete(gid)
+
+target='n_stilou_rezervor'
+gid=c.store.create(c._build_session(target,'usor',None))
+try:
+    data=client.post(f'/api/wordgames/contexto/games/{gid}/guess',{'text':'Făină'},content_type='application/json').json()
+    result['flour_pen_guard']=data['guess']
+    assert data['guess']['temperature'] not in ['Fierbinte','Cald','Caldut']
+finally:c.store.delete(gid)
+(scratch/'impact/pending-evidence.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({'items':list(result['items']),'probes_per_contexto':len(words),'exact_win_journeys':3,'lant_routes':2,'flour_pen':result['flour_pen_guard']},ensure_ascii=False))
