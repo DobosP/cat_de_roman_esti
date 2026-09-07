@@ -4,8 +4,8 @@ Valid until: the next verified quality wave — then refresh this living checkli
 
 Target: public anonymous beta for Romanian players. **V84 adds guidance to all six games,
 earned Alchimie explanations, 15 concepts, 57 links and four reviewed playable rounds.**
-One false graph link is removed. V83 is already on local main; V84 is verified and ready
-on its task branch. Public rollout still requires the external checks below.
+One false graph link is removed. V84 is verified and merged into local main; V85 begins
+with another reviewed quality/content batch. Public rollout still requires the external checks below.
 Current facts and exact pins: [STATUS](STATUS.md).
 
 ## Version objectives

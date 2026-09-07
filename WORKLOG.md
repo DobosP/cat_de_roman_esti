@@ -408,3 +408,14 @@ are retained in the verification receipt; all final source/review bytes are mani
 V84 is a committed local candidate on `feat/v84-six-game-graph-quality`, ready for its next
 landing request. Shared main remains at V83. No push, deployment, real-device acceptance or
 human playtest occurred. Public anonymous-beta external gates remain in BETA_CANDIDATE/DEPLOY.
+
+
+## V84 local landing and V85 start, 2026-09-07
+
+Valid until: the next landing or version changes these facts — then treat as history.
+
+Verified all 109 V84 source/artifact/review manifest entries and 15 final green gate
+receipts, including 1,207 backend tests and 53 accounts tests on both Python versions,
+177 native frontend tests and 122 browser checks. Landed `eb4155c` into local main with
+this documentation update. V85 continues with ingredients/feedback and board clarity,
+new concepts, specific graph links and reviewed playable content. No push or deployment.

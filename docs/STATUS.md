@@ -1,11 +1,11 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-07 — V84 full integration GREEN; committed candidate ready for landing. Production last checked 2026-08-27.
+Last verified: 2026-09-07 — V84 full integration GREEN; landed locally; V85 starts next. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-  V83 is on local main at `8353880`. V84 candidate: `feat/v84-six-game-graph-quality`.
+  V84 is merged into local main at `eb4155c`. V85 starts from this verified content.
   No push or deployment was performed in this version.
 - V84 adds in-round Romanian rules, feedback interpretation and recovery help to all six
   games. Keyboard/touch disclosure preserves progress and selection; Enter cannot submit it.
@@ -85,7 +85,8 @@ Mobile content: `sha256:10984193d18dd817029c5972fe84e39bb490c4ef819399408cd54c29
 
 ## Remaining gates
 
-- V84 is ready on its task branch; its next landing request can merge the verified candidate.
+- V85 continues the six-game quality work with reviewed ingredients/feedback and board clarity,
+  new concepts and playable content under ADR-0113. Its final integration is not yet complete.
 - Remaining food feedback: Scorțișoară is too hot for Pâine; oven is too warm for the no-bake
   biscuit dessert and outranks cocoa; butter/apple-pie and other production inputs remain noisy.
   Directed input-only concepts are not automatically eligible targets or new curated boards.
