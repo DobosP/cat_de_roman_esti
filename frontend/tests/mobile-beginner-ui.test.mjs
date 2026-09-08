@@ -30,10 +30,10 @@ test("all games teach the loop with a semantic three-step guide", () => {
   }
 });
 
-test("mobile layout keeps status and category rails compact with 44px targets", () => {
+test("mobile layout wraps status and keeps category rails compact with 44px targets", () => {
   assert.match(css, /@media \(pointer: coarse\)[\s\S]*?\.roedu-btn,[\s\S]*?min-height: 44px/);
   assert.match(css, /@media \(pointer: coarse\)[\s\S]*?\.chip \{[\s\S]*?min-height: 44px/);
-  assert.match(css, /\.hud \{[\s\S]*?overflow-x: auto/);
+  assert.match(css, /@media \(max-width: 640px\)[\s\S]*?\.hud \{\s*width: 100%;\s*flex-wrap: wrap;/);
   assert.match(css, /\.category-picker-options \{[\s\S]*?flex-wrap: nowrap;[\s\S]*?overflow-x: auto/);
   assert.match(css, /\.alchemy-bench \{[\s\S]*?position: sticky/);
   assert.match(alchimie, /className="alchemy-slot-label"/);

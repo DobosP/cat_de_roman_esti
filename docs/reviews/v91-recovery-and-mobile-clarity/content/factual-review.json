@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "kind": "independent-approved-stock-revision-review",
+  "date": "2026-09-08",
+  "independent_of_author": true,
+  "game": "alchimie",
+  "verdict": "accept",
+  "applied": false,
+  "review_binding": "sha256:b5e181aa856470707564fa9ff3596c8bc73b3cd22ece22f1f441d7871cb573ba",
+  "before_record_sha256": "bb0ef938d92416b955abbf23602c47c63dd49700f0c866061b4ce0390c49b11a",
+  "after_record_sha256": "5666d5978c89ba537de7239f9ba205b395378bdfc20400466e4c2ced246aded5",
+  "changed_record_fields": [
+    "seeds"
+  ],
+  "source_bindings": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "e32139529aacc88e2f453ac1cee1d8cd9a2cd1b16f3ee0551a5a76779192391e",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "cat_de_roman_esti/wordgames/alchimie.py": "4ffd2eaf65b5e942992d7d84b52b8e221f1e2c7dfb7edff19fe35e0e74236ec8",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db"
+  },
+  "input_file_sha256": {
+    "author-review.md": "c5fefc88de5bd5d3863124d5ac01cdb961a7c58ba0cc121138f39e387b04a9c4",
+    "replacement-proposal.json": "1b5b5686d39c9f4ec6ac170a60b56180be38a9b8dd9c8c24f0458e9d0988658a",
+    "candidate-dossier.json": "1167dd460ae618c5916a81b98426d1bdcf57938fb53670c50b51359eec4c349a",
+    "candidate-profile.json": "1093381dc4e500661e04acc8d3797459c5a5231e69d18789f2c0f4115f9888e5",
+    "before-dossier.json": "06fe7c766ffb5e5ef2b5dd2198d406e5c067494ee6dea9842b582cd3a8cdb1a5",
+    "before-profile.json": "ed1b09058e94f931fba762c2b6776887ee29fabafc9f6df1aaaf0ae27b2a1406",
+    "projection-comparison.json": "bd83aaaf61c3b3d4f3ab5bbd8440eebfffba5462a42a6b6d895a03ccc6bbe5b3",
+    "bff-journeys.json": "b9da89a4e6be9fefc846523991d1dcad825233e4b829aba0e80a7de637fbcce6",
+    "variant-screen.json": "db824306e9b4eb644b0c4d220accea8033b213a2f5319712daad5f8379a5eb13",
+    "label-only-followup-proposal.json": "e879ad4fc3af5190ff53410aa016367176cd6914236283e5148f2034e366d928"
+  },
+  "criteria": {
+    "A1": {
+      "verdict": "pass",
+      "reason": "Neagu and the four major Romanian football club names have sustained public sports visibility. National team, sports club and women’s handball are ordinary categories. The visible, explained handball Champions League target is recognizable enough for this association task; this is an editorial inference from media and competition history, not a measured universal recognition rate."
+    },
+    "A2": {
+      "verdict": "pass",
+      "reason": "Primary IHF/EHF/LPF records plus Romanian Digi24/TVR reporting establish current public relevance. Pre-2010 records support Neagu, the competition, CFR, Rapid and Dinamo. FCSB is accepted by current-name national broadcast/media presence across recent years; no disputed historical-name continuity is asserted."
+    },
+    "A3": {
+      "verdict": "pass",
+      "reason": "The displayed target is explicitly handball and club competition. Club sportiv is an honest shared category for the four football clubs. No recipe says that Neagu played for Dinamo, Rapid, FCSB or CFR. The three old present-tense edge labels are a separate historical-copy debt, not new facts introduced by the seed revision."
+    },
+    "A4": {
+      "verdict": "pass",
+      "reason": "IHF confirms Neagu’s national-team, handball and club career and 2015 Champions League win; EHF independently confirms the club competition. LPF identifies the four football clubs. The existing links used by all six private recipes match the loaded KG after canonical JSON normalization."
+    },
+    "A5": {
+      "verdict": "pass",
+      "reason": "No adult, alcohol, profanity or insensitive-history framing. The proposal replaces one existing approved round in place and does not add a duplicate board."
+    },
+    "A6": {
+      "verdict": "pass",
+      "reason": "One exact approved record changes seeds only; unchanged ID/target/status/difficulty. This is an existing-stock repair, not a new board presented as fresh content."
+    },
+    "A7": {
+      "verdict": "pass",
+      "reason": "The final association is anchored to Neagu’s specific handball Champions League career. The football clubs contribute explicit is-a club typing, not a spurious regional or biographic distinction. Generic Club sportiv alone does not explain the target; Neagu is necessary."
+    },
+    "E1": {
+      "verdict": "pass",
+      "reason": "All six seeds are recognizable sports concepts and each participates in at least one opening. This removes the three initially depleted old seeds. Four club tiles give alternative entry choices to one category idea; their repetition limits breadth but none is computational filler."
+    },
+    "E2": {
+      "verdict": "pass",
+      "reason": "Four productive opening pairs express two intuitive ideas: Neagu plus national team identifies women’s handball; paired football clubs identify sports club. The three club pairs are not three distinct semantic discoveries. At least two semantically different opening ideas exist."
+    },
+    "E3": {
+      "verdict": "pass",
+      "reason": "Either discovered women’s handball or sports club combines with Neagu toward the visible Champions League goal. The club route crosses football to handball through an explicit shared category; it does not require knowing a football club’s handball history."
+    },
+    "E4": {
+      "verdict": "pass",
+      "reason": "Target and aliases are absent from seeds. None of the four seed openings yields the target. Rebuilt minimum par remains two actions. Reusing Neagu is a purposeful anchor and does not make the first pair a free answer."
+    },
+    "E5": {
+      "verdict": "pass",
+      "reason": "The actual served projection has six single-result recipes and four two-action routes. Its four openings, not the dossier’s eleven full-graph openings or 145-concept closure, are the player-facing choice evidence."
+    }
+  },
+  "warnings": [
+    {
+      "check": "salience_floor",
+      "status": "retained-accepted-with-reason",
+      "value": 0.4323,
+      "threshold": 0.6,
+      "reason": "Target has historical Romanian club visibility and recent mainstream Neagu/Champions League coverage; target name and explanation are visible from the start. This supports A1/A2/E3 for easy association play, not a universal recognition claim or the separate Contexto C2 standard."
+    },
+    {
+      "check": "four_club_balance",
+      "status": "nonblocking-quality-limitation",
+      "reason": "Four football club seeds occupy most inventory and three successful pairs share Club sportiv. Describe this as four pairs and two ideas. Other club pairs are equally sensible in the real world but absent from the bounded private book; this remains a curated recipe puzzle, not an exhaustive classifier."
+    }
+  ],
+  "sources_checked_on": "2026-09-08",
+  "sources": [
+    {
+      "id": "ihf-neagu",
+      "url": "https://www.ihf.info/media-center/news/unstoppable-8-says-farewell-was-my-calling",
+      "publisher": "IHF",
+      "published": "2025-06-03",
+      "primary": true,
+      "supports": "Career in Romanian women’s handball and clubs; 2015 Champions League trophy; four world-player awards; final official match already played; national appearances from 2007."
+    },
+    {
+      "id": "ehf-club",
+      "url": "https://www.eurohandball.com/en/news/en/all-eyes-on-the-title-with-neagu-on-board/",
+      "publisher": "EHF",
+      "published": "2017-09-23",
+      "primary": true,
+      "supports": "Women’s Champions League is a club competition; Neagu joined CSM in 2017, after CSM’s 2016 title. No false 2016 Neagu championship attribution."
+    },
+    {
+      "id": "ehf-history",
+      "url": "https://www.eurohandball.com/en/news/en/regained-optimism/",
+      "publisher": "EHF",
+      "published": "2009-04-16",
+      "primary": true,
+      "supports": "Romanian Oltchim participation and local supporter presence in Champions League before 2010."
+    },
+    {
+      "id": "lpf-clubs",
+      "url": "https://lpf.ro/cluburi",
+      "publisher": "LPF",
+      "primary": true,
+      "supports": "Current official listings for Dinamo, Rapid, FCSB and CFR; national league broadcast presence."
+    },
+    {
+      "id": "uefa-history",
+      "url": "https://www.uefa.com/news-media/news/01cd-0e6f5de8b57d-86882fccb6da-1000--cfr-cluj-crowned-in-romania/",
+      "publisher": "UEFA",
+      "published": "2008-05-07",
+      "primary": true,
+      "supports": "CFR, Rapid and Dinamo in prominent Romanian/European competition before 2010. Does not establish disputed FCSB legal continuity."
+    },
+    {
+      "id": "digi24-neagu",
+      "url": "https://www.digi24.ro/stiri/actualitate/ultimul-meci-din-cariera-cristinei-neagu-presedintele-nicusor-dan-asista-la-gala-de-retragere-a-sportivei-3275259",
+      "publisher": "Digi24",
+      "published": "2025-06-08",
+      "primary": false,
+      "supports": "Independent mainstream Romanian coverage of Neagu’s retirement, national-team medals and Champions League title."
+    },
+    {
+      "id": "tvr-clubs",
+      "url": "https://tvrinfo.ro/fotbal-dinamo-rapid-0-0-pas-gresit-pentru-giulesteni-in-cursa-pentru-europa/",
+      "publisher": "TVR",
+      "primary": false,
+      "supports": "Routine Romanian national-broadcaster reporting containing the four club names; independent public-salience signal."
+    },
+    {
+      "id": "lpf-fcsb-2024",
+      "url": "https://lpf.ro/noutati/fcsb-campioana-superligii-romaniei/5038",
+      "publisher": "LPF",
+      "published": "2024-04-28",
+      "primary": true,
+      "supports": "FCSB’s 2023–24 national title."
+    },
+    {
+      "id": "lpf-fcsb-2025",
+      "url": "https://lpf.ro/buletin/superliga-fcsb-campioana-editiei-2024-2025/1030",
+      "publisher": "LPF",
+      "published": "2025-06-06",
+      "primary": true,
+      "supports": "FCSB’s 2024–25 national title and second consecutive title."
+    },
+    {
+      "id": "lpf-cfr",
+      "url": "https://lpf.ro/buletin/lotul-campioanei-cfr-cluj-in-editia-2021-2022/340",
+      "publisher": "LPF",
+      "primary": true,
+      "supports": "CFR’s eight titles and five consecutive titles through 2022."
+    },
+    {
+      "id": "uefa-fcsb",
+      "url": "https://www.uefa.com/uefaeuropaleague/history/h2h/50065/5312/",
+      "publisher": "UEFA",
+      "primary": true,
+      "supports": "FCSB played Lyon in the 2024–25 Europa League round of 16."
+    }
+  ],
+  "optional_label_review": {
+    "verdict": "approve",
+    "applied": false,
+    "proposal_file_sha256": "e879ad4fc3af5190ff53410aa016367176cd6914236283e5148f2034e366d928",
+    "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "allowed_changes": [
+      {
+        "id": "de1218",
+        "before": "joacă",
+        "after": "a jucat"
+      },
+      {
+        "id": "de2664",
+        "before": "joacă pentru România",
+        "after": "a jucat pentru România"
+      },
+      {
+        "id": "de2665",
+        "before": "joacă la cluburi",
+        "after": "a jucat la cluburi"
+      }
+    ],
+    "reason": "IHF confirms the completed playing career and national-team/club participation. Past tense preserves true historical associations. Approval is solely for these three label_ro strings, with every other edge field and topology unchanged; it is separate from the seed-only verdict."
+  },
+  "authorization_limit": "Review proposal only. Does not itself authorize a write, alter approval status, clear the separate quality gate, change other records or initiate V92.",
+  "reviewer": "v91_content_factual",
+  "item_id": "al_sport_083",
+  "proposal": "revise",
+  "input_sha256": {
+    "replacement-proposal.json": "1b5b5686d39c9f4ec6ac170a60b56180be38a9b8dd9c8c24f0458e9d0988658a",
+    "candidate-dossier.json": "1167dd460ae618c5916a81b98426d1bdcf57938fb53670c50b51359eec4c349a",
+    "candidate-profile.json": "1093381dc4e500661e04acc8d3797459c5a5231e69d18789f2c0f4115f9888e5",
+    "before-profile.json": "ed1b09058e94f931fba762c2b6776887ee29fabafc9f6df1aaaf0ae27b2a1406"
+  }
+}

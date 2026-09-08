@@ -1,0 +1,378 @@
+{
+  "reviewer": "v91_final_ui_audit",
+  "verdict": "accept",
+  "blocking_findings": [],
+  "scope": "Independent static source and focused evidence audit of completed V91 shared mobile layout and Intrusul/Perechi recovery; no browser run or build by this auditor.",
+  "source_review": [
+    "App normal-flow notice row and independent scrollable screen viewport.",
+    "GameShell measured sticky offset, ResizeObserver cleanup and full-title wrapping.",
+    "Hud named group semantics, wrapping badges and removal of redundant scrolling tab stop.",
+    "App-scoped CSS preserves package visuals and notice announcements; short-viewport sticky fallback and long-heading wrapping.",
+    "Intrusul/Perechi current action, saved pointer and response identity checks; bounded failed-read snapshot with GET-only retry.",
+    "Retry retains original saved-pointer claim so a removed pointer cannot revive an old terminal state.",
+    "Owned 404 conditionally forgets only the matching pointer; changed ownership loads the current round.",
+    "Presence layout effect and synchronous Exit invalidation suppress departure adoption; terminal score effect requires presence.",
+    "Perechi queued focus binds game and pointer and is cleared at departure.",
+    "Focused browser source uses real BFF commits with controlled transport failures and checks state, request counts, ownership, scoring and focus."
+  ],
+  "historical_distinctions": [
+    "Paid clue persistence and the one-hint server cap predate V91.",
+    "Actual unmount was already safe; the reproduced race occurs while departure animation keeps a screen mounted.",
+    "Two initial Back non-reproductions remain historical observations; later four Back failures are preserved.",
+    "Third-candidate exit 143 has an unestablished cause and its four failures are not treated as a green gate.",
+    "Earlier mobile build is not claimed to equal the final rebuilt assets; unchanged shared source and final42 bindings are checked separately."
+  ],
+  "original_detail_images": [
+    {
+      "path": "derived-recovery/final-intrusul-failed-read.png",
+      "sha256": "cc0771fb32455e68cfa430cb33903226b2a1d1ecf783f0f7b668e327cf0b02d6"
+    },
+    {
+      "path": "derived-recovery/final-perechi-late-mutation-pointer.png",
+      "sha256": "77025c7fb7ffe6c735d80c338e9254f4b5bd2236ae5eee713f2328ac5fa61915"
+    },
+    {
+      "path": "mobile/before-touch/alchimie-320-resume.png",
+      "sha256": "5f5158b6a21d1c064d73ec0be6781ac7bd3daebb46ab30b0661a1ad9fa74e241"
+    },
+    {
+      "path": "mobile/after-built/alchimie-320-resume.png",
+      "sha256": "343b5688f9e213257a1f00a0d1e8b23cb434057fac604a411576e82a73c7bc93"
+    },
+    {
+      "path": "mobile/after-built-verified-notices/contexto-1280-resume.png",
+      "sha256": "42ab5142214a8e184dc61d4449379673e16aa9766f781c2462728e49866a71de"
+    }
+  ],
+  "scratch_runner_receipt": {
+    "runner": "/home/dobo/work/_temp/feat__v91-recovery-and-mobile-clarity/final-ui-audit/verify.py",
+    "runner_sha256": "3c445704f5bd2e88f7badcd528dbae872b395389b10b437818034329cf91a06e",
+    "receipt_sha256": "c3654cd9ded83ad436f2aaa5d440e411b41f927c006145f5337d0ff5975331b2",
+    "log_sha256": "65402dc84075fa735f3e38e71d32a786c78f449857e027a2e05dd10089067aa8",
+    "attempts": 1,
+    "exit_code": 0
+  },
+  "verification": {
+    "checked_at": "2026-09-08T21:05:25.078796+00:00",
+    "errors": [],
+    "recovery_archives": {
+      "baseline": {
+        "members": 36,
+        "archive_sha256": "557508c698f1a167a88bfcc2c8cccfa13c8370e733891714ef69d4d7a2199951",
+        "decoded_tar_sha256": "7fa64508c4f522302a05f102173d954260b17a93dd591a278cfc0faffe96805b",
+        "manifest_sha256": "5dafada32a6474b1ebdb5f4222117dec21410b1a952cb5a2ccdc93c0d000eaf9",
+        "gzip_mtime": 0
+      },
+      "initial-candidate": {
+        "members": 48,
+        "archive_sha256": "e176ebaac2901235f5fe88d256d0b073568075509320adb25b3719101822234d",
+        "decoded_tar_sha256": "c6a91b3cd6a231dc1c51c4106547e89abaf19a5d1db8f2eddcd24a7bdeb6c0ca",
+        "manifest_sha256": "e5717d7368c84726facee9194d7920ad266c39fc9ac2975852c6a1d58e71a48e",
+        "gzip_mtime": 0
+      },
+      "review-findings": {
+        "members": 9,
+        "archive_sha256": "ab965912b2114cb2759cfc8aa9f57affef4aaadaac12a07c5c5eb967584f47c1",
+        "decoded_tar_sha256": "392a613f5eebb54062ec8fe4d51b6ef523b1e5ab78699e550ef5e92097f793c1",
+        "manifest_sha256": "f9383abcbc0bfcc9585a2afcfaeaed4f7c6964e2c8b440eac3aa2baa9dea4f1f",
+        "gzip_mtime": 0
+      },
+      "third-candidate": {
+        "members": 40,
+        "archive_sha256": "4b3f2f2f3fc1b31d444bd14504be627087a4237efc5d7d13fc6b155abec2e78d",
+        "decoded_tar_sha256": "853c643fd0e75804faa3f58ad21001d4074a5d13ef3a8f80d12e1a6818031465",
+        "manifest_sha256": "9c9c52fdaf35cd062f8804e84fbfbada682107b2bab5a51f9e3f63733ba62b55",
+        "gzip_mtime": 0
+      },
+      "independent-final": {
+        "members": 32,
+        "archive_sha256": "709f3e31acf17b1efbcd2dc70fb1f5b7a12b513feae546c157d822a396056557",
+        "decoded_tar_sha256": "e5a028ff262caed8247b53c55adb901b5b5ea9216dcde53dd33c00ffdbfcab1e",
+        "manifest_sha256": "46bc9ac29548a8e7fc22f8d405cdff08d66e53cf1c68c943d8c5587bf071eccd",
+        "gzip_mtime": 0
+      },
+      "final-candidate": {
+        "members": 34,
+        "archive_sha256": "d809444f25abb087338a9f4bf07e0638179fd8647da0bbb478b970da62e4a027",
+        "decoded_tar_sha256": "d397fee0affb4565d9de93b992520572a40a8f21c51759ef27f2b9edb1dc6729",
+        "manifest_sha256": "957d5e89e92db69d8c69b362e88e838adab70e65bf6e2ddada7d1cbca5309b9d",
+        "gzip_mtime": 0
+      }
+    },
+    "baseline_static_git_pins": 23,
+    "final_recovery_pins": {
+      "count": 42,
+      "mismatches": []
+    },
+    "current_static_files": 23,
+    "recovery_results": {
+      "browser_pass_lines": 80,
+      "back_pass_lines": 4,
+      "manual_captures": [
+        {
+          "game": "intrusul",
+          "scenario": "failed-read",
+          "ui": {
+            "feedback": [],
+            "retry": 1,
+            "loadCurrent": 0,
+            "enabledTiles": 0,
+            "results": 0,
+            "intro": 0,
+            "storage": {
+              "saved": "8aa92c78-419d-47f1-bce4-f617afdf8759",
+              "played": 0
+            }
+          }
+        },
+        {
+          "game": "intrusul",
+          "scenario": "late-mutation-pointer",
+          "ui": {
+            "feedback": [],
+            "retry": 0,
+            "loadCurrent": 1,
+            "enabledTiles": 0,
+            "results": 0,
+            "intro": 0,
+            "storage": {
+              "saved": "40ff74c1-3367-4a5a-8290-99a565ff48fc",
+              "played": 0
+            }
+          }
+        },
+        {
+          "game": "intrusul",
+          "scenario": "late-read-pointer",
+          "ui": {
+            "feedback": [],
+            "retry": 0,
+            "loadCurrent": 1,
+            "enabledTiles": 0,
+            "results": 0,
+            "intro": 0,
+            "storage": {
+              "saved": "907fe81a-54d5-41b1-b4b9-af0dfbfc9baf",
+              "played": 0
+            }
+          }
+        },
+        {
+          "game": "perechi",
+          "scenario": "failed-read",
+          "ui": {
+            "feedback": [],
+            "retry": 1,
+            "loadCurrent": 0,
+            "enabledTiles": 0,
+            "results": 0,
+            "intro": 0,
+            "storage": {
+              "saved": "624c6bab-7141-4700-accc-aa254a2d45cb",
+              "played": 0
+            }
+          }
+        },
+        {
+          "game": "perechi",
+          "scenario": "late-mutation-pointer",
+          "ui": {
+            "feedback": [],
+            "retry": 0,
+            "loadCurrent": 1,
+            "enabledTiles": 0,
+            "results": 0,
+            "intro": 0,
+            "storage": {
+              "saved": "35c403c2-ce0c-46c1-bc76-acd56698d531",
+              "played": 0
+            }
+          }
+        },
+        {
+          "game": "perechi",
+          "scenario": "late-read-pointer",
+          "ui": {
+            "feedback": [],
+            "retry": 0,
+            "loadCurrent": 1,
+            "enabledTiles": 0,
+            "results": 0,
+            "intro": 0,
+            "storage": {
+              "saved": "07b1fbe4-7028-46d4-8bc1-2cc61b823849",
+              "played": 0
+            }
+          }
+        }
+      ],
+      "browser_exit_code": 0
+    },
+    "independent_recovery_pins": {
+      "count": 39,
+      "mismatches": []
+    },
+    "independent_results": {
+      "back_stats": {
+        "startTime": "2026-09-08T20:53:47.262Z",
+        "duration": 30520.904000000002,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "pointer_retry_cases": [
+        {
+          "game": "intrusul",
+          "before": {
+            "pointer": "78d16a2f-a103-4f1b-bd34-260eb4228ca9",
+            "played": 0
+          },
+          "removed": {
+            "pointer": null,
+            "played": 0
+          },
+          "after": {
+            "pointer": null,
+            "played": 0
+          },
+          "counts": {
+            "reads": 1,
+            "mutations": 1
+          },
+          "committedWon": true,
+          "committedScore": 1000,
+          "changedControlVisible": 1,
+          "resultVisible": false
+        },
+        {
+          "game": "perechi",
+          "before": {
+            "pointer": "be284534-e57d-4202-9fab-ea7c97e99200",
+            "played": 0
+          },
+          "removed": {
+            "pointer": null,
+            "played": 0
+          },
+          "after": {
+            "pointer": null,
+            "played": 0
+          },
+          "counts": {
+            "reads": 1,
+            "mutations": 1
+          },
+          "committedWon": true,
+          "committedScore": 1000,
+          "changedControlVisible": 1,
+          "resultVisible": false
+        }
+      ]
+    },
+    "mobile_artifacts": {
+      "count": 255,
+      "gzip_payloads": 40,
+      "manifest_sha256": "f0fc6d1b317a35e4f0913abe085b2d8d3334cfa9a96a3a539413b19912fc474f"
+    },
+    "mobile_shared_source_pins": {
+      "count": 4,
+      "mismatches": []
+    },
+    "installed_toast_pins": {
+      "count": 3,
+      "mismatches": []
+    },
+    "mobile_older_build_differences": [
+      "cat_de_roman_esti/web/static/.vite/manifest.json",
+      "cat_de_roman_esti/web/static/assets/AccountBar-VpF6pbTp.js",
+      "cat_de_roman_esti/web/static/assets/Alchimie-DDtJcfYR.js",
+      "cat_de_roman_esti/web/static/assets/CaldRece-CeA6LXQv.js",
+      "cat_de_roman_esti/web/static/assets/CategoryPicker-CElFTTWB.js",
+      "cat_de_roman_esti/web/static/assets/Conexiuni-DE8E4Uol.js",
+      "cat_de_roman_esti/web/static/assets/Intrusul-BSM4eH5b.js",
+      "cat_de_roman_esti/web/static/assets/Lant-DkuCebkg.js",
+      "cat_de_roman_esti/web/static/assets/Perechi-Bt8sPsx-.js",
+      "cat_de_roman_esti/web/static/assets/Ranking-tdfRY-9n.js",
+      "cat_de_roman_esti/web/static/assets/index-2IzK_e_9.js",
+      "cat_de_roman_esti/web/static/assets/scoreSync-Bmm9Bc6n.js",
+      "cat_de_roman_esti/web/static/assets/useSavedGameResume-CwFZRnja.js",
+      "cat_de_roman_esti/web/static/index.html",
+      "frontend/src/screens/Intrusul.tsx",
+      "frontend/src/screens/Perechi.tsx"
+    ],
+    "mobile_results": {
+      "stats": {
+        "startTime": "2026-09-08T20:24:11.799Z",
+        "duration": 141278.73899999997,
+        "expected": 14,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "result_count": 14,
+      "valid_embedded_attachment_bodies": 134
+    },
+    "root_rebuild_receipts": {
+      "frontend_build": {
+        "receipt_sha256": "e670b890166e2277f3739569fa9166f80b3944077928fff571940c99f3aba388",
+        "command": [
+          "npm",
+          "run",
+          "build"
+        ],
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity/frontend",
+        "exit_code": 0,
+        "elapsed_seconds": 5.46,
+        "log_sha256": "206634456186025338402d5b33d7fd0614b0c969803082ac862f414c868dc184",
+        "tail": [
+          "../cat_de_roman_esti/web/static/assets/index-CUTlrBK1.js                             348.55 kB │ gzip: 114.57 kB",
+          "",
+          "✓ built in 1.44s",
+          "",
+          "> cat-de-roman-esti-frontend@0.1.0 check:bundle",
+          "> node scripts/check-bundle-budget.mjs",
+          "",
+          "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+          "   110.54 KiB  assets/index-CUTlrBK1.js",
+          "     8.53 KiB  assets/index-D9HNWgEs.css",
+          "   119.08 KiB  total",
+          "Romanian font subsets: 4 (Latin + Latin Extended only)"
+        ]
+      },
+      "frontend_bundle": {
+        "receipt_sha256": "637df306b5ba3e13f3e80fb5e7e9341887971a81d01e39d886881b09e6744af5",
+        "command": [
+          "npm",
+          "run",
+          "check:bundle"
+        ],
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity/frontend",
+        "exit_code": 0,
+        "elapsed_seconds": 0.27,
+        "log_sha256": "375dd3a6a442ffc039a2d689cd6479fcd88bc3838b7768a91c9521a95a09598d",
+        "tail": [
+          "",
+          "> cat-de-roman-esti-frontend@0.1.0 check:bundle",
+          "> node scripts/check-bundle-budget.mjs",
+          "",
+          "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+          "   110.54 KiB  assets/index-CUTlrBK1.js",
+          "     8.53 KiB  assets/index-D9HNWgEs.css",
+          "   119.08 KiB  total",
+          "Romanian font subsets: 4 (Latin + Latin Extended only)"
+        ]
+      }
+    },
+    "limits": [
+      "Read-only audit; no browser run or build performed by this auditor.",
+      "Focused evidence only; full integration gates remain owned by root and are not declared passed here.",
+      "Mobile focused evidence uses its earlier build; four shared files and installed Toast inputs remain exact, while final42 pins bind current rebuilt static assets.",
+      "Physical devices, actual keyboard opening, player acceptance and deployment are outside this audit."
+    ],
+    "verdict": "accept",
+    "runner_sha256": "3c445704f5bd2e88f7badcd528dbae872b395389b10b437818034329cf91a06e"
+  },
+  "full_integration_gate_status": "Pending at audit; owned by coordinating root.",
+  "authorization_boundary": "Locally land verified V91 and stop the paused loop. No V92, push or deployment."
+}

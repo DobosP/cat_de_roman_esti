@@ -1,0 +1,39 @@
+{
+  "read_only": true,
+  "initial_attempts": [
+    {
+      "exit_code": 1,
+      "error": "KeyError: 'edges'",
+      "cause": "Inspection assumed the fixture used edges; actual key is kg_edges."
+    },
+    {
+      "exit_code": 1,
+      "error": "AssertionError: de1219",
+      "cause": "Raw fixture records omit runtime default fields; comparing them directly with serialized runtime edge records was invalid."
+    },
+    {
+      "exit_code": 1,
+      "error": "AssertionError: de1219",
+      "cause": "dataclasses.asdict preserves tags as a tuple while JSON profile stores a list. Corrected comparison uses canonical JSON serialization."
+    }
+  ],
+  "final_attempt": {
+    "exit_code": 0,
+    "checks": [
+      "Five proposal source hashes match live files",
+      "Canonical before and after records match proposal digests",
+      "Candidate dossier binding recomputes exactly",
+      "Only seeds differ in the record",
+      "Every private-recipe edge equals the runtime KG edge under canonical JSON",
+      "Every optional label proposal old edge equals runtime KG under canonical JSON",
+      "All six candidate seeds participate in an opening",
+      "Independent projection rebuild has exact candidate recipes, par 2 and four routes"
+    ],
+    "result": "PASS; book par 2, recipes 6, routes 4, opening pairs 4"
+  },
+  "limitations": [
+    "No full matrix or browser run performed by factual reviewer",
+    "Inspection failures are harness failures and did not mutate source/data",
+    "The author BFF journeys are inspected evidence, not independently rerun BFF evidence"
+  ]
+}

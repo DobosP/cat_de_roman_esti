@@ -1,0 +1,300 @@
+{
+  "id": "al_sport_083",
+  "game": "alchimie",
+  "category": "sport",
+  "difficulty": "usor",
+  "status": "approved",
+  "record_sha256": "5666d5978c89ba537de7239f9ba205b395378bdfc20400466e4c2ced246aded5",
+  "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+  "lint_findings": [
+    {
+      "check": "salience_floor",
+      "level": "WARN",
+      "detail": "Liga Campionilor la handbal salience 0.43 < 0.60 (usor floor)"
+    }
+  ],
+  "target": {
+    "id": "n_spt_liga_campionilor_handbal",
+    "label": "Liga Campionilor la handbal",
+    "node_type": "event",
+    "category": "sport",
+    "salience": 0.4323,
+    "degree": 9,
+    "incoming_degree": 9,
+    "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit."
+  },
+  "seeds": [
+    {
+      "id": "n_spt_cristina_neagu",
+      "label": "Cristina Neagu",
+      "node_type": "person",
+      "category": "sport",
+      "salience": 0.7719,
+      "degree": 9,
+      "incoming_degree": 9,
+      "description": "Fostă handbalistă română, desemnată de patru ori cea mai bună jucătoare a lumii; s-a retras în 2025."
+    },
+    {
+      "id": "n_v2spo_echipa_nationala",
+      "label": "Echipă națională",
+      "node_type": "concept",
+      "category": "sport",
+      "salience": 0.928,
+      "degree": 24,
+      "incoming_degree": 24,
+      "description": "Selecționată care reprezintă o țară în competiții sportive."
+    },
+    {
+      "id": "n_v11spo_dinamo_bucuresti",
+      "label": "Dinamo București",
+      "node_type": "org",
+      "category": "sport",
+      "salience": 0.81,
+      "degree": 9,
+      "incoming_degree": 8,
+      "description": "Club bucureștean major, rival tradițional pentru Steaua și Rapid."
+    },
+    {
+      "id": "n_v11spo_rapid_bucuresti",
+      "label": "Rapid București",
+      "node_type": "org",
+      "category": "sport",
+      "salience": 0.82,
+      "degree": 8,
+      "incoming_degree": 7,
+      "description": "Club istoric din Giulești, cu identitate feroviară și suporteri celebri."
+    },
+    {
+      "id": "n_v18spo_fcsb",
+      "label": "FCSB",
+      "node_type": "org",
+      "category": "sport",
+      "salience": 0.72,
+      "degree": 8,
+      "incoming_degree": 8,
+      "description": "Clubul de fotbal bucureștean care a dominat Superliga recent, campioană a României în sezoanele 2023-24 și 2024-25. În Europa League 2024-25 a prins primăvara europeană, cea mai bună campanie continentală a unui club românesc din ultimii ani."
+    },
+    {
+      "id": "n_v18spo_cfr_cluj",
+      "label": "CFR Cluj",
+      "node_type": "org",
+      "category": "sport",
+      "salience": 0.5,
+      "degree": 8,
+      "incoming_degree": 8,
+      "description": "Clubul din Gruia, de opt ori campion al României, cu cinci titluri consecutive între 2018 și 2022. Principala rivală la titlu a FCSB-ului în fotbalul intern recent."
+    }
+  ],
+  "target_depth": 2,
+  "craft_profile": {
+    "opening_pairs": 11,
+    "closure_size": 145,
+    "target_generation": 2
+  },
+  "productive_openings": [
+    {
+      "pair": [
+        {
+          "id": "n_v11spo_dinamo_bucuresti",
+          "label": "Dinamo București"
+        },
+        {
+          "id": "n_v18spo_fcsb",
+          "label": "FCSB"
+        }
+      ],
+      "result_count": 3,
+      "results": [
+        {
+          "id": "n_v2spo_club_sportiv",
+          "label": "Club sportiv"
+        },
+        {
+          "id": "n_v21spo_eternul_derby",
+          "label": "Eternul derby"
+        },
+        {
+          "id": "n_v17spo_superliga",
+          "label": "Superliga României"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_v11spo_rapid_bucuresti",
+          "label": "Rapid București"
+        },
+        {
+          "id": "n_v18spo_cfr_cluj",
+          "label": "CFR Cluj"
+        }
+      ],
+      "result_count": 3,
+      "results": [
+        {
+          "id": "n_v21spo_adrian_mutu",
+          "label": "Adrian Mutu"
+        },
+        {
+          "id": "n_v2spo_club_sportiv",
+          "label": "Club sportiv"
+        },
+        {
+          "id": "n_v17spo_superliga",
+          "label": "Superliga României"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_v11spo_rapid_bucuresti",
+          "label": "Rapid București"
+        },
+        {
+          "id": "n_v18spo_fcsb",
+          "label": "FCSB"
+        }
+      ],
+      "result_count": 3,
+      "results": [
+        {
+          "id": "n_v11spo_arena_nationala",
+          "label": "Arena Națională"
+        },
+        {
+          "id": "n_v2spo_club_sportiv",
+          "label": "Club sportiv"
+        },
+        {
+          "id": "n_v17spo_superliga",
+          "label": "Superliga României"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_spt_cristina_neagu",
+          "label": "Cristina Neagu"
+        },
+        {
+          "id": "n_v2spo_echipa_nationala",
+          "label": "Echipă națională"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_v3spo_handbal",
+          "label": "Handbal"
+        },
+        {
+          "id": "n_spt_handbal_feminin",
+          "label": "Handbal feminin"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_v11spo_dinamo_bucuresti",
+          "label": "Dinamo București"
+        },
+        {
+          "id": "n_v11spo_rapid_bucuresti",
+          "label": "Rapid București"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_v2spo_club_sportiv",
+          "label": "Club sportiv"
+        },
+        {
+          "id": "n_v17spo_superliga",
+          "label": "Superliga României"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_v11spo_dinamo_bucuresti",
+          "label": "Dinamo București"
+        },
+        {
+          "id": "n_v18spo_cfr_cluj",
+          "label": "CFR Cluj"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_v2spo_club_sportiv",
+          "label": "Club sportiv"
+        },
+        {
+          "id": "n_v17spo_superliga",
+          "label": "Superliga României"
+        }
+      ]
+    }
+  ],
+  "minimum_action_recipe": [
+    {
+      "pair": [
+        {
+          "id": "n_spt_cristina_neagu",
+          "label": "Cristina Neagu"
+        },
+        {
+          "id": "n_v2spo_echipa_nationala",
+          "label": "Echipă națională"
+        }
+      ],
+      "result_count": 2,
+      "results": [
+        {
+          "id": "n_spt_handbal_feminin",
+          "label": "Handbal feminin"
+        },
+        {
+          "id": "n_v3spo_handbal",
+          "label": "Handbal"
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "n_spt_cristina_neagu",
+          "label": "Cristina Neagu"
+        },
+        {
+          "id": "n_spt_handbal_feminin",
+          "label": "Handbal feminin"
+        }
+      ],
+      "result_count": 3,
+      "results": [
+        {
+          "id": "n_spt_liga_campionilor_handbal",
+          "label": "Liga Campionilor la handbal"
+        },
+        {
+          "id": "n_v19spo_csm_bucuresti",
+          "label": "CSM București"
+        },
+        {
+          "id": "n_v19spo_retragerea_cristinei_neagu",
+          "label": "Retragerea Cristinei Neagu"
+        }
+      ]
+    }
+  ],
+  "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+  "review_binding": "sha256:b5e181aa856470707564fa9ff3596c8bc73b3cd22ece22f1f441d7871cb573ba"
+}

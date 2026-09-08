@@ -1,0 +1,30 @@
+import hashlib,json,os,subprocess,sys,time
+from pathlib import Path
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity')
+OUT=Path('/home/dobo/work/_temp/feat__v91-recovery-and-mobile-clarity/application');OUT.mkdir(exist_ok=True)
+PY='/home/dobo/work/cat_de_roman_esti/.venv/bin/python'
+sys.path.insert(0,str(ROOT))
+from scripts.content_file_transaction import file_transaction
+ENV=os.environ.copy();ENV.update(PYTHONPATH=str(ROOT),CAT_ACCOUNTS_ENABLED='0',CAT_DEBUG='0',ROEDU_API_URL='',ROEDU_API_KEY='')
+
+def run(name,command):
+ log=OUT/(name+'.log');assert not log.exists(),name
+ print('START',name,flush=True);start=time.monotonic()
+ with log.open('w') as h:
+  p=subprocess.Popen(command,cwd=ROOT,env=ENV,stdout=h,stderr=subprocess.STDOUT)
+  while True:
+   try:code=p.wait(timeout=30);break
+   except subprocess.TimeoutExpired:print('RUNNING',name,round(time.monotonic()-start,1),flush=True)
+ blob=log.read_bytes();record={'command':command,'cwd':str(ROOT),'exit_code':code,'elapsed_seconds':round(time.monotonic()-start,2),'log_sha256':hashlib.sha256(blob).hexdigest(),'tail':blob.decode(errors='replace').splitlines()[-6:]}
+ log.with_suffix('.json').write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n');print('END',name,code,record['elapsed_seconds'],flush=True)
+ if code:raise RuntimeError(name+' failed')
+
+run('seed_dry_run',[PY,'scripts/apply_sport_seed_revision_v91.py'])
+paths=[ROOT/folder/name for folder in ['cat_de_roman_esti/fixtures','tests/fixtures'] for name in ['games_pack.json','board_rankings_v37.json','derived_catalog_v38.json']]
+paths.append(ROOT/'tests/fixtures/cat_mobile_app_pack_contract.json')
+with file_transaction(paths):
+ run('seed_apply',[PY,'scripts/apply_sport_seed_revision_v91.py','--write'])
+ run('rankings_generate',[PY,'scripts/rank_games_pack.py','--write'])
+ run('derived_generate',[PY,'scripts/build_derived_catalog_v38.py','--write'])
+ run('mobile_generate',[PY,'scripts/export_mobile_app_pack.py','tests/fixtures/cat_mobile_app_pack_contract.json'])
+print('APPLICATION AND GENERATION GREEN',flush=True)

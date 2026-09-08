@@ -1,0 +1,1203 @@
+{
+  "record": {
+    "difficulty": "usor",
+    "seeds": [
+      "n_spt_washington_bullets",
+      "n_v3spo_medalie",
+      "n_spt_record_100m_liber_2022",
+      "n_spt_cristina_neagu",
+      "n_spt_bazin_olimpic",
+      "n_spt_tricolorii"
+    ],
+    "target": "n_spt_liga_campionilor_handbal",
+    "target_depth": 2,
+    "id": "al_sport_083",
+    "category": "sport",
+    "source": "ai",
+    "status": "approved"
+  },
+  "record_sha256": "bb0ef938d92416b955abbf23602c47c63dd49700f0c866061b4ce0390c49b11a",
+  "validation_errors": [],
+  "initial_payload": {
+    "game_id": "content-review-local",
+    "target": {
+      "id": null,
+      "label": "Liga Campionilor la handbal",
+      "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+      "revealed": false
+    },
+    "inventory": [
+      {
+        "id": "n_spt_washington_bullets",
+        "label": "Washington Bullets",
+        "parents": null,
+        "links": [],
+        "recent": true,
+        "useful": true,
+        "ready": true,
+        "depleted": false
+      },
+      {
+        "id": "n_v3spo_medalie",
+        "label": "Medalie",
+        "parents": null,
+        "links": [],
+        "recent": true,
+        "useful": false,
+        "ready": false,
+        "depleted": true
+      },
+      {
+        "id": "n_spt_record_100m_liber_2022",
+        "label": "Recordul la 100 m liber din 2022",
+        "parents": null,
+        "links": [],
+        "recent": true,
+        "useful": false,
+        "ready": false,
+        "depleted": true
+      },
+      {
+        "id": "n_spt_cristina_neagu",
+        "label": "Cristina Neagu",
+        "parents": null,
+        "links": [],
+        "recent": true,
+        "useful": true,
+        "ready": true,
+        "depleted": false
+      },
+      {
+        "id": "n_spt_bazin_olimpic",
+        "label": "Bazin olimpic",
+        "parents": null,
+        "links": [],
+        "recent": true,
+        "useful": false,
+        "ready": false,
+        "depleted": true
+      },
+      {
+        "id": "n_spt_tricolorii",
+        "label": "Tricolorii",
+        "parents": null,
+        "links": [],
+        "recent": true,
+        "useful": true,
+        "ready": true,
+        "depleted": false
+      }
+    ],
+    "inventory_summary": {
+      "active": 3,
+      "depleted": 3,
+      "total": 6
+    },
+    "discovered_count": 0,
+    "seed_count": 6,
+    "moves": 0,
+    "attempted_count": 0,
+    "difficulty": "usor",
+    "target_depth": 2,
+    "won": false,
+    "hints_used": 0,
+    "hint_stage": "output",
+    "hint_available": false,
+    "recipe_summary": {
+      "pairs": 7,
+      "routes": 4,
+      "max_results": 2
+    },
+    "board_category": "sport"
+  },
+  "opening_pairs": [
+    {
+      "pair": [
+        "n_spt_cristina_neagu",
+        "n_spt_tricolorii"
+      ],
+      "pair_labels": [
+        "Cristina Neagu",
+        "Tricolorii"
+      ],
+      "outputs": [
+        "n_v2spo_echipa_nationala"
+      ],
+      "output_labels": [
+        "Echipă națională"
+      ],
+      "actual_edges": [
+        {
+          "id": "de2664",
+          "src_id": "n_spt_cristina_neagu",
+          "dst_id": "n_v2spo_echipa_nationala",
+          "relation": "related_to",
+          "label_ro": "joacă pentru România",
+          "strength": 0.82,
+          "is_distractor": false,
+          "bidirectional": true,
+          "tags": [],
+          "facets": {},
+          "source": "",
+          "redistributable": false
+        },
+        {
+          "id": "de2695",
+          "src_id": "n_spt_tricolorii",
+          "dst_id": "n_v2spo_echipa_nationala",
+          "relation": "is_a",
+          "label_ro": "sunt naționala",
+          "strength": 0.94,
+          "is_distractor": false,
+          "bidirectional": true,
+          "tags": [],
+          "facets": {},
+          "source": "",
+          "redistributable": false
+        }
+      ]
+    },
+    {
+      "pair": [
+        "n_spt_cristina_neagu",
+        "n_spt_washington_bullets"
+      ],
+      "pair_labels": [
+        "Cristina Neagu",
+        "Washington Bullets"
+      ],
+      "outputs": [
+        "n_v2spo_club_sportiv"
+      ],
+      "output_labels": [
+        "Club sportiv"
+      ],
+      "actual_edges": [
+        {
+          "id": "de2665",
+          "src_id": "n_spt_cristina_neagu",
+          "dst_id": "n_v2spo_club_sportiv",
+          "relation": "related_to",
+          "label_ro": "joacă la cluburi",
+          "strength": 0.68,
+          "is_distractor": false,
+          "bidirectional": true,
+          "tags": [],
+          "facets": {},
+          "source": "",
+          "redistributable": false
+        },
+        {
+          "id": "de2638",
+          "src_id": "n_spt_washington_bullets",
+          "dst_id": "n_v2spo_club_sportiv",
+          "relation": "is_a",
+          "label_ro": "este club",
+          "strength": 0.88,
+          "is_distractor": false,
+          "bidirectional": true,
+          "tags": [],
+          "facets": {},
+          "source": "",
+          "redistributable": false
+        }
+      ]
+    }
+  ],
+  "book": {
+    "par": 2,
+    "recipes": [
+      {
+        "pair": [
+          "n_spt_cristina_neagu",
+          "n_spt_handbal_feminin"
+        ],
+        "pair_labels": [
+          "Cristina Neagu",
+          "Handbal feminin"
+        ],
+        "outputs": [
+          "n_spt_liga_campionilor_handbal"
+        ],
+        "output_labels": [
+          "Liga Campionilor la handbal"
+        ],
+        "actual_edges": [
+          {
+            "id": "de1219",
+            "src_id": "n_spt_cristina_neagu",
+            "dst_id": "n_spt_liga_campionilor_handbal",
+            "relation": "related_to",
+            "label_ro": "a jucat în",
+            "strength": 0.86,
+            "is_distractor": false,
+            "bidirectional": true,
+            "tags": [],
+            "facets": {},
+            "source": "",
+            "redistributable": false
+          },
+          {
+            "id": "de1222",
+            "src_id": "n_spt_handbal_feminin",
+            "dst_id": "n_spt_liga_campionilor_handbal",
+            "relation": "related_to",
+            "label_ro": "are competiția",
+            "strength": 0.8,
+            "is_distractor": false,
+            "bidirectional": true,
+            "tags": [],
+            "facets": {},
+            "source": "",
+            "redistributable": false
+          }
+        ]
+      },
+      {
+        "pair": [
+          "n_spt_cristina_neagu",
+          "n_spt_tricolorii"
+        ],
+        "pair_labels": [
+          "Cristina Neagu",
+          "Tricolorii"
+        ],
+        "outputs": [
+          "n_v2spo_echipa_nationala"
+        ],
+        "output_labels": [
+          "Echipă națională"
+        ],
+        "actual_edges": [
+          {
+            "id": "de2664",
+            "src_id": "n_spt_cristina_neagu",
+            "dst_id": "n_v2spo_echipa_nationala",
+            "relation": "related_to",
+            "label_ro": "joacă pentru România",
+            "strength": 0.82,
+            "is_distractor": false,
+            "bidirectional": true,
+            "tags": [],
+            "facets": {},
+            "source": "",
+            "redistributable": false
+          },
+          {
+            "id": "de2695",
+            "src_id": "n_spt_tricolorii",
+            "dst_id": "n_v2spo_echipa_nationala",
+            "relation": "is_a",
+            "label_ro": "sunt naționala",
+            "strength": 0.94,
+            "is_distractor": false,
+            "bidirectional": true,
+            "tags": [],
+            "facets": {},
+            "source": "",
+            "redistributable": false
+          }
+        ]
+      },
+      {
+        "pair": [
+          "n_spt_cristina_neagu",
+          "n_spt_washington_bullets"
+        ],
+        "pair_labels": [
+          "Cristina Neagu",
+          "Washington Bullets"
+        ],
+        "outputs": [
+          "n_v2spo_club_sportiv"
+        ],
+        "output_labels": [
+          "Club sportiv"
+        ],
+        "actual_edges": [
+          {
+            "id": "de2665",
+            "src_id": "n_spt_cristina_neagu",
+            "dst_id": "n_v2spo_club_sportiv",
+            "relation": "related_to",
+            "label_ro": "joacă la cluburi",
+            "strength": 0.68,
+            "is_distractor": false,
+            "bidirectional": true,
+            "tags": [],
+            "facets": {},
+            "source": "",
+            "redistributable": false
+          },
+          {
+            "id": "de2638",
+            "src_id": "n_spt_washington_bullets",
+            "dst_id": "n_v2spo_club_sportiv",
+            "relation": "is_a",
+            "label_ro": "este club",
+            "strength": 0.88,
+            "is_distractor": false,
+            "bidirectional": true,
+            "tags": [],
+            "facets": {},
+            "source": "",
+            "redistributable": false
+          }
+        ]
+      },
+      {
+        "pair": [
+          "n_spt_cristina_neagu",
+          "n_v2spo_club_sportiv"
+        ],
+        "pair_labels": [
+          "Cristina Neagu",
+          "Club sportiv"
+        ],
+        "outputs": [
+          "n_spt_liga_campionilor_handbal"
+        ],
+        "output_labels": [
+          "Liga Campionilor la handbal"
+        ],
+        "actual_edges": [
+          {
+            "id": "de1219",
+            "src_id": "n_spt_cristina_neagu",
+            "dst_id": "n_spt_liga_campionilor_handbal",
+            "relation": "related_to",
+            "label_ro": "a jucat în",
+            "strength": 0.86,
+            "is_distractor": false,
+            "bidirectional": true,
+            "tags": [],
+            "facets": {},
+            "source": "",
+            "redistributable": false
+          },
+          {
+            "id": "de2635",
+            "src_id": "n_spt_liga_campionilor_handbal",
+            "dst_id": "n_v2spo_club_sportiv",
+            "relation": "related_to",
+            "label_ro": "competiție de cluburi",
+            "strength": 0.86,
+            "is_distractor": false,
+            "bidirectional": true,
+            "tags": [],
+            "facets": {},
+            "source": "",
+            "redistributable": false
+          }
+        ]
+      },
+      {
+        "pair": [
+          "n_spt_cristina_neagu",
+          "n_v2spo_echipa_nationala"
+        ],
+        "pair_labels": [
+          "Cristina Neagu",
+          "Echipă națională"
+        ],
+        "outputs": [
+          "n_spt_handbal_feminin",
+          "n_v3spo_handbal"
+        ],
+        "output_labels": [
+          "Handbal feminin",
+          "Handbal"
+        ],
+        "actual_edges": [
+          {
+            "id": "de1218",
+            "src_id": "n_spt_cristina_neagu",
+            "dst_id": "n_spt_handbal_feminin",
+            "relation": "is_a",
+            "label_ro": "joacă",
+            "strength": 0.94,
+            "is_distractor": false,
+            "bidirectional": true,
+            "tags": [],
+            "facets": {},
+            "source": "",
+            "redistributable": false
+          },
+          {
+            "id": "de3378",
+            "src_id": "n_v3spo_handbal",
+            "dst_id": "n_spt_cristina_neagu",
+            "relation": "related_to",
+            "label_ro": "campioană de handbal",
+            "strength": 0.86,
+            "is_distractor": false,
+            "bidirectional": true,
+            "tags": [],
+            "facets": {},
+            "source": "",
+            "redistributable": false
+          },
+          {
+            "id": "de2632",
+            "src_id": "n_spt_handbal_feminin",
+            "dst_id": "n_v2spo_echipa_nationala",
+            "relation": "related_to",
+            "label_ro": "are națională",
+            "strength": 0.78,
+            "is_distractor": false,
+            "bidirectional": true,
+            "tags": [],
+            "facets": {},
+            "source": "",
+            "redistributable": false
+          },
+          {
+            "id": "de3380",
+            "src_id": "n_v3spo_handbal",
+            "dst_id": "n_v2spo_echipa_nationala",
+            "relation": "related_to",
+            "label_ro": "națională de handbal",
+            "strength": 0.67,
+            "is_distractor": false,
+            "bidirectional": true,
+            "tags": [],
+            "facets": {},
+            "source": "",
+            "redistributable": false
+          }
+        ]
+      },
+      {
+        "pair": [
+          "n_spt_handbal_feminin",
+          "n_v2spo_club_sportiv"
+        ],
+        "pair_labels": [
+          "Handbal feminin",
+          "Club sportiv"
+        ],
+        "outputs": [
+          "n_spt_liga_campionilor_handbal"
+        ],
+        "output_labels": [
+          "Liga Campionilor la handbal"
+        ],
+        "actual_edges": [
+          {
+            "id": "de1222",
+            "src_id": "n_spt_handbal_feminin",
+            "dst_id": "n_spt_liga_campionilor_handbal",
+            "relation": "related_to",
+            "label_ro": "are competiția",
+            "strength": 0.8,
+            "is_distractor": false,
+            "bidirectional": true,
+            "tags": [],
+            "facets": {},
+            "source": "",
+            "redistributable": false
+          },
+          {
+            "id": "de2635",
+            "src_id": "n_spt_liga_campionilor_handbal",
+            "dst_id": "n_v2spo_club_sportiv",
+            "relation": "related_to",
+            "label_ro": "competiție de cluburi",
+            "strength": 0.86,
+            "is_distractor": false,
+            "bidirectional": true,
+            "tags": [],
+            "facets": {},
+            "source": "",
+            "redistributable": false
+          }
+        ]
+      },
+      {
+        "pair": [
+          "n_spt_handbal_feminin",
+          "n_v3spo_handbal"
+        ],
+        "pair_labels": [
+          "Handbal feminin",
+          "Handbal"
+        ],
+        "outputs": [
+          "n_spt_liga_campionilor_handbal"
+        ],
+        "output_labels": [
+          "Liga Campionilor la handbal"
+        ],
+        "actual_edges": [
+          {
+            "id": "de1222",
+            "src_id": "n_spt_handbal_feminin",
+            "dst_id": "n_spt_liga_campionilor_handbal",
+            "relation": "related_to",
+            "label_ro": "are competiția",
+            "strength": 0.8,
+            "is_distractor": false,
+            "bidirectional": true,
+            "tags": [],
+            "facets": {},
+            "source": "",
+            "redistributable": false
+          },
+          {
+            "id": "de3379",
+            "src_id": "n_v3spo_handbal",
+            "dst_id": "n_spt_liga_campionilor_handbal",
+            "relation": "related_to",
+            "label_ro": "competiție de handbal",
+            "strength": 0.84,
+            "is_distractor": false,
+            "bidirectional": true,
+            "tags": [],
+            "facets": {},
+            "source": "",
+            "redistributable": false
+          }
+        ]
+      }
+    ],
+    "routes": [
+      [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_washington_bullets"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Washington Bullets"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ],
+          "actual_edges": [
+            {
+              "id": "de2665",
+              "src_id": "n_spt_cristina_neagu",
+              "dst_id": "n_v2spo_club_sportiv",
+              "relation": "related_to",
+              "label_ro": "joacă la cluburi",
+              "strength": 0.68,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            },
+            {
+              "id": "de2638",
+              "src_id": "n_spt_washington_bullets",
+              "dst_id": "n_v2spo_club_sportiv",
+              "relation": "is_a",
+              "label_ro": "este club",
+              "strength": 0.88,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ],
+          "actual_edges": [
+            {
+              "id": "de1219",
+              "src_id": "n_spt_cristina_neagu",
+              "dst_id": "n_spt_liga_campionilor_handbal",
+              "relation": "related_to",
+              "label_ro": "a jucat în",
+              "strength": 0.86,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            },
+            {
+              "id": "de2635",
+              "src_id": "n_spt_liga_campionilor_handbal",
+              "dst_id": "n_v2spo_club_sportiv",
+              "relation": "related_to",
+              "label_ro": "competiție de cluburi",
+              "strength": 0.86,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_tricolorii"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Tricolorii"
+          ],
+          "outputs": [
+            "n_v2spo_echipa_nationala"
+          ],
+          "output_labels": [
+            "Echipă națională"
+          ],
+          "actual_edges": [
+            {
+              "id": "de2664",
+              "src_id": "n_spt_cristina_neagu",
+              "dst_id": "n_v2spo_echipa_nationala",
+              "relation": "related_to",
+              "label_ro": "joacă pentru România",
+              "strength": 0.82,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            },
+            {
+              "id": "de2695",
+              "src_id": "n_spt_tricolorii",
+              "dst_id": "n_v2spo_echipa_nationala",
+              "relation": "is_a",
+              "label_ro": "sunt naționala",
+              "strength": 0.94,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_echipa_nationala"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Echipă națională"
+          ],
+          "outputs": [
+            "n_spt_handbal_feminin"
+          ],
+          "output_labels": [
+            "Handbal feminin"
+          ],
+          "actual_edges": [
+            {
+              "id": "de1218",
+              "src_id": "n_spt_cristina_neagu",
+              "dst_id": "n_spt_handbal_feminin",
+              "relation": "is_a",
+              "label_ro": "joacă",
+              "strength": 0.94,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            },
+            {
+              "id": "de2632",
+              "src_id": "n_spt_handbal_feminin",
+              "dst_id": "n_v2spo_echipa_nationala",
+              "relation": "related_to",
+              "label_ro": "are națională",
+              "strength": 0.78,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_handbal_feminin"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Handbal feminin"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ],
+          "actual_edges": [
+            {
+              "id": "de1219",
+              "src_id": "n_spt_cristina_neagu",
+              "dst_id": "n_spt_liga_campionilor_handbal",
+              "relation": "related_to",
+              "label_ro": "a jucat în",
+              "strength": 0.86,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            },
+            {
+              "id": "de1222",
+              "src_id": "n_spt_handbal_feminin",
+              "dst_id": "n_spt_liga_campionilor_handbal",
+              "relation": "related_to",
+              "label_ro": "are competiția",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_tricolorii"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Tricolorii"
+          ],
+          "outputs": [
+            "n_v2spo_echipa_nationala"
+          ],
+          "output_labels": [
+            "Echipă națională"
+          ],
+          "actual_edges": [
+            {
+              "id": "de2664",
+              "src_id": "n_spt_cristina_neagu",
+              "dst_id": "n_v2spo_echipa_nationala",
+              "relation": "related_to",
+              "label_ro": "joacă pentru România",
+              "strength": 0.82,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            },
+            {
+              "id": "de2695",
+              "src_id": "n_spt_tricolorii",
+              "dst_id": "n_v2spo_echipa_nationala",
+              "relation": "is_a",
+              "label_ro": "sunt naționala",
+              "strength": 0.94,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_echipa_nationala"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Echipă națională"
+          ],
+          "outputs": [
+            "n_spt_handbal_feminin",
+            "n_v3spo_handbal"
+          ],
+          "output_labels": [
+            "Handbal feminin",
+            "Handbal"
+          ],
+          "actual_edges": [
+            {
+              "id": "de1218",
+              "src_id": "n_spt_cristina_neagu",
+              "dst_id": "n_spt_handbal_feminin",
+              "relation": "is_a",
+              "label_ro": "joacă",
+              "strength": 0.94,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            },
+            {
+              "id": "de3378",
+              "src_id": "n_v3spo_handbal",
+              "dst_id": "n_spt_cristina_neagu",
+              "relation": "related_to",
+              "label_ro": "campioană de handbal",
+              "strength": 0.86,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            },
+            {
+              "id": "de2632",
+              "src_id": "n_spt_handbal_feminin",
+              "dst_id": "n_v2spo_echipa_nationala",
+              "relation": "related_to",
+              "label_ro": "are națională",
+              "strength": 0.78,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            },
+            {
+              "id": "de3380",
+              "src_id": "n_v3spo_handbal",
+              "dst_id": "n_v2spo_echipa_nationala",
+              "relation": "related_to",
+              "label_ro": "națională de handbal",
+              "strength": 0.67,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_handbal_feminin",
+            "n_v3spo_handbal"
+          ],
+          "pair_labels": [
+            "Handbal feminin",
+            "Handbal"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ],
+          "actual_edges": [
+            {
+              "id": "de1222",
+              "src_id": "n_spt_handbal_feminin",
+              "dst_id": "n_spt_liga_campionilor_handbal",
+              "relation": "related_to",
+              "label_ro": "are competiția",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            },
+            {
+              "id": "de3379",
+              "src_id": "n_v3spo_handbal",
+              "dst_id": "n_spt_liga_campionilor_handbal",
+              "relation": "related_to",
+              "label_ro": "competiție de handbal",
+              "strength": 0.84,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_tricolorii"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Tricolorii"
+          ],
+          "outputs": [
+            "n_v2spo_echipa_nationala"
+          ],
+          "output_labels": [
+            "Echipă națională"
+          ],
+          "actual_edges": [
+            {
+              "id": "de2664",
+              "src_id": "n_spt_cristina_neagu",
+              "dst_id": "n_v2spo_echipa_nationala",
+              "relation": "related_to",
+              "label_ro": "joacă pentru România",
+              "strength": 0.82,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            },
+            {
+              "id": "de2695",
+              "src_id": "n_spt_tricolorii",
+              "dst_id": "n_v2spo_echipa_nationala",
+              "relation": "is_a",
+              "label_ro": "sunt naționala",
+              "strength": 0.94,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_echipa_nationala"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Echipă națională"
+          ],
+          "outputs": [
+            "n_spt_handbal_feminin"
+          ],
+          "output_labels": [
+            "Handbal feminin"
+          ],
+          "actual_edges": [
+            {
+              "id": "de1218",
+              "src_id": "n_spt_cristina_neagu",
+              "dst_id": "n_spt_handbal_feminin",
+              "relation": "is_a",
+              "label_ro": "joacă",
+              "strength": 0.94,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            },
+            {
+              "id": "de2632",
+              "src_id": "n_spt_handbal_feminin",
+              "dst_id": "n_v2spo_echipa_nationala",
+              "relation": "related_to",
+              "label_ro": "are națională",
+              "strength": 0.78,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_washington_bullets"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Washington Bullets"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ],
+          "actual_edges": [
+            {
+              "id": "de2665",
+              "src_id": "n_spt_cristina_neagu",
+              "dst_id": "n_v2spo_club_sportiv",
+              "relation": "related_to",
+              "label_ro": "joacă la cluburi",
+              "strength": 0.68,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            },
+            {
+              "id": "de2638",
+              "src_id": "n_spt_washington_bullets",
+              "dst_id": "n_v2spo_club_sportiv",
+              "relation": "is_a",
+              "label_ro": "este club",
+              "strength": 0.88,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_handbal_feminin",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Handbal feminin",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ],
+          "actual_edges": [
+            {
+              "id": "de1222",
+              "src_id": "n_spt_handbal_feminin",
+              "dst_id": "n_spt_liga_campionilor_handbal",
+              "relation": "related_to",
+              "label_ro": "are competiția",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            },
+            {
+              "id": "de2635",
+              "src_id": "n_spt_liga_campionilor_handbal",
+              "dst_id": "n_v2spo_club_sportiv",
+              "relation": "related_to",
+              "label_ro": "competiție de cluburi",
+              "strength": 0.86,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          ]
+        }
+      ]
+    ],
+    "candidate_quality": [
+      [
+        2,
+        0.68,
+        0.8200000000000001
+      ],
+      [
+        3,
+        0.78,
+        0.8566666666666666
+      ],
+      [
+        3,
+        0.67,
+        0.8316666666666667
+      ],
+      [
+        3,
+        0.67,
+        0.83125
+      ],
+      [
+        4,
+        0.68,
+        0.8375
+      ],
+      [
+        4,
+        0.68,
+        0.8225
+      ],
+      [
+        4,
+        0.68,
+        0.77875
+      ],
+      [
+        4,
+        0.68,
+        0.77875
+      ],
+      [
+        4,
+        0.67,
+        0.81875
+      ]
+    ]
+  }
+}

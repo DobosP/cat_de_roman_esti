@@ -1,0 +1,333 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-08",
+  "kind": "independent-v91-migration-and-history-audit",
+  "reviewer": "v91_migration_audit",
+  "verdict": "accept",
+  "findings": [],
+  "scope": "Bounded source/test audit of the exact seed-only approved-stock migration, V91 inverse, V90 normalization, current artifact pins, and derived bundled hash. No source, data, static, or status files were edited by this reviewer.",
+  "baseline_commit": "e2e03638b90fc9248c33f70eedaa8c9c5fbd87ad",
+  "source_and_evidence_sha256": {
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "01fc906e390b8d3135f1856930458aa86873a525049b419eceb8652c72f717f8",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "53fb3e4555205179072bd54a45f5b1b185de064625893dcf288902574a075e64",
+    "cat_de_roman_esti/fixtures/games_pack.json": "6bf27de5da270258290ecb4ed41c3ef60a609e3e153855f38b7556a7f2aedeca",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/wordgames/derived_catalog.py": "0937c225efaa0f3017969750457cf0983c7a91f8bef90a84918fec689600e31b",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "docs/adr/0140-reviewed-sport-seed-revision.md": "e8626a1465049ba99c3c8f83fd9bf3e291f4226abdc7efaa3a7092c469391e45",
+    "docs/reviews/v91-recovery-and-mobile-clarity/artifact-delta.json": "f4306490be4d67db4e798cc6567a79eb91a6ead636b5e917af91bfa18769f806",
+    "docs/reviews/v91-recovery-and-mobile-clarity/content/all-83-books-before.json.gz": "095011246b1d3549b1ae895407264365e841d2dd94dfaf9a3d2c4350455c0659",
+    "docs/reviews/v91-recovery-and-mobile-clarity/content/all-83-books-candidate.json.gz": "787396a03727cf47978df3b32664ff26f5ccdd03cf4cdd12db5755e97900d3f4",
+    "docs/reviews/v91-recovery-and-mobile-clarity/content/before-profile.json": "ed1b09058e94f931fba762c2b6776887ee29fabafc9f6df1aaaf0ae27b2a1406",
+    "docs/reviews/v91-recovery-and-mobile-clarity/content/candidate-dossier.json": "1167dd460ae618c5916a81b98426d1bdcf57938fb53670c50b51359eec4c349a",
+    "docs/reviews/v91-recovery-and-mobile-clarity/content/candidate-profile.json": "1093381dc4e500661e04acc8d3797459c5a5231e69d18789f2c0f4115f9888e5",
+    "docs/reviews/v91-recovery-and-mobile-clarity/content/factual-review.json": "7d3f25286dad4834435bec62ad0bcfad43f846a5b68398145dc4d6fc4df82186",
+    "docs/reviews/v91-recovery-and-mobile-clarity/content/quality-review.json": "43adeb4cfa02b1723ce2733904fe88669da34c813ed27293f7be05886ed3a351",
+    "docs/reviews/v91-recovery-and-mobile-clarity/content/replacement-proposal.json": "1b5b5686d39c9f4ec6ac170a60b56180be38a9b8dd9c8c24f0458e9d0988658a",
+    "scripts/apply_sport_seed_revision_v91.py": "310230f4152c9007b7586c0f23c8cafd0ca469345a95f5b0d9bb7b6889bea356",
+    "scripts/content_file_transaction.py": "79c9e54d501c692816238afd8aea4189bc01d7946f46c8ae840211676c4dbd82",
+    "tests/content_history.py": "978abbcbab7ddae470b8d2848c33bdc764e778e924459bc9a5f154aaec538ee7",
+    "tests/current_content.py": "b7829bb479c236b1fe01f03e59530d85839974d2fcde4fbcc3512291d3263a73",
+    "tests/fixtures/board_rankings_v37.json": "01fc906e390b8d3135f1856930458aa86873a525049b419eceb8652c72f717f8",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f",
+    "tests/fixtures/derived_catalog_v38.json": "53fb3e4555205179072bd54a45f5b1b185de064625893dcf288902574a075e64",
+    "tests/fixtures/games_pack.json": "6bf27de5da270258290ecb4ed41c3ef60a609e3e153855f38b7556a7f2aedeca",
+    "tests/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "tests/test_v89_household_content.py": "c75666c6b5842adbd920f131d7517696d6a16bfa9cf60b7002600e8d127d3232",
+    "tests/test_v90_household_graph.py": "ebc29d6e6759435f8e3b5f46c764658177d14175f4ed0fe683fd7c19e28cc740",
+    "tests/test_v91_content_history.py": "68be4962e8bc6269b5e8168558bb0f8af98b149509106718fb6f6b269b6f49be",
+    "tests/test_v91_sport_seed_revision.py": "cfaa51427f67218136e083fc0d683c0e07a18d6caab18a5327f3f7293a27cc53"
+  },
+  "checks": [
+    "Only the exact frozen before/after al_sport_083 records are accepted, and only ordered seeds may differ; status remains approved.",
+    "Two nonempty case-folded distinct reviewer identities must provide accepted revise verdicts with matching item, record, dossier, source, and four input digests. Missing, stale, rejected, tampered, or duplicate review inputs fail before a write.",
+    "Actual validator, critique dossier, uncached recipe projection, initial inventory flags, four openings, and full reviewed initial profile are rebuilt. The frozen approved record is never staged as pending.",
+    "Dry run is the default. Both pack mirrors are snapshotted and checked, source/mirror checks repeat before writes, both complete resulting packs are validated, and a failing transaction restores and byte-verifies both original mirrors, including an injected KeyboardInterrupt.",
+    "V91 inverse checks complete canonical current and restored bytes. Historical V90 assertions still restore V89 exact pins, while the V90 stock-preservation comparison now uses the correct V90 pack boundary.",
+    "Independent git-show baseline comparison matches all five receipt hashes and both mirrored copies. KG and mobile artifacts remain byte-identical; only al_sport_083 changes among 661 pack records; all 336 derived boards remain exact.",
+    "The only derived runtime source change is its bundled SHA literal, and it matches the regenerated catalog. Existing hash and source freshness enforcement is retained."
+  ],
+  "verification": {
+    "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest -q tests/test_v91_sport_seed_revision.py tests/test_v91_content_history.py tests/test_v90_household_graph.py tests/test_v89_household_content.py",
+    "exit_code": 0,
+    "attempts": 1,
+    "passed": 85,
+    "failed": 0,
+    "skipped": 0,
+    "collected_by_file": {
+      "tests/test_v91_sport_seed_revision.py": 37,
+      "tests/test_v91_content_history.py": 7,
+      "tests/test_v90_household_graph.py": 33,
+      "tests/test_v89_household_content.py": 8
+    },
+    "collection_command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest -o addopts= --collect-only -q tests/test_v91_sport_seed_revision.py tests/test_v91_content_history.py tests/test_v90_household_graph.py tests/test_v89_household_content.py",
+    "collection_exit_code": 0,
+    "logs": {
+      "migration-audit.tests.log.gz": {
+        "decoded_sha256": "e35c4fb0464f9c25fb1600faa381b8d99b1dfac2853362d44748385704772fe8",
+        "archive_sha256": "da74b59228eff48164d8936bd8ba544d2a13264af64282c862ac984a1cd2ef5c",
+        "decoded_bytes": 160,
+        "archive_bytes": 42
+      },
+      "migration-audit.collection.log.gz": {
+        "decoded_sha256": "4b49103bc336d2541f9ed3297b176508d6c9b9e60c9107ee183e62339b63e856",
+        "archive_sha256": "f629a83e49d3a018e200e3ac7ccd5b0185c1fc994148d33c89855167ebc646f2",
+        "decoded_bytes": 10348,
+        "archive_bytes": 1653
+      }
+    }
+  },
+  "artifact_comparison": {
+    "kg_sample.json": {
+      "baseline_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+      "current_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+      "byte_identical": true,
+      "tables": {
+        "kg_nodes": {
+          "added": 0,
+          "removed": 0,
+          "changed_ids": [],
+          "reordered": false
+        },
+        "kg_edges": {
+          "added": 0,
+          "removed": 0,
+          "changed_ids": [],
+          "reordered": false
+        },
+        "kg_puzzles": {
+          "added": 0,
+          "removed": 0,
+          "changed_ids": [],
+          "reordered": false
+        }
+      }
+    },
+    "games_pack.json": {
+      "baseline_sha256": "e32139529aacc88e2f453ac1cee1d8cd9a2cd1b16f3ee0551a5a76779192391e",
+      "current_sha256": "6bf27de5da270258290ecb4ed41c3ef60a609e3e153855f38b7556a7f2aedeca",
+      "byte_identical": false,
+      "tables": {
+        "conexiuni": {
+          "added": 0,
+          "removed": 0,
+          "changed_ids": [],
+          "reordered": false
+        },
+        "contexto": {
+          "added": 0,
+          "removed": 0,
+          "changed_ids": [],
+          "reordered": false
+        },
+        "lant": {
+          "added": 0,
+          "removed": 0,
+          "changed_ids": [],
+          "reordered": false
+        },
+        "alchimie": {
+          "added": 0,
+          "removed": 0,
+          "changed_ids": [
+            "al_sport_083"
+          ],
+          "reordered": false
+        }
+      }
+    },
+    "board_rankings_v37.json": {
+      "baseline_sha256": "b5beb978b911c952ef2632cb2d93bc695be19f226b4a4661d77e26b335413fab",
+      "current_sha256": "01fc906e390b8d3135f1856930458aa86873a525049b419eceb8652c72f717f8",
+      "byte_identical": false,
+      "tables": {
+        "boards": {
+          "added": 0,
+          "removed": 0,
+          "changed_ids": [
+            "al_viata_de_roman_093",
+            "al_gastronomie_027",
+            "al_istorie_034",
+            "al_literatura_049",
+            "al_meme_net_057",
+            "al_gastronomie_026",
+            "al_istorie_036",
+            "al_limba_046",
+            "al_meme_net_058",
+            "al_muzica_064",
+            "al_arta_cultura_014",
+            "al_limba_042",
+            "al_meme_net_056",
+            "al_meme_net_059",
+            "al_societate_074",
+            "al_sport_083"
+          ],
+          "reordered": true
+        }
+      }
+    },
+    "derived_catalog_v38.json": {
+      "baseline_sha256": "6ac090bc2186bf00209913d1123ba3f54de9f7b02f9fa2a781f2dfcccbbf58a9",
+      "current_sha256": "53fb3e4555205179072bd54a45f5b1b185de064625893dcf288902574a075e64",
+      "byte_identical": false,
+      "tables": {
+        "boards": {
+          "added": 0,
+          "removed": 0,
+          "changed_ids": [],
+          "reordered": false
+        }
+      }
+    },
+    "cat_mobile_app_pack_contract.json": {
+      "baseline_sha256": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f",
+      "current_sha256": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f",
+      "byte_identical": true,
+      "tables": {
+        "kg_nodes": {
+          "added": 0,
+          "removed": 0,
+          "changed_ids": [],
+          "reordered": false
+        },
+        "kg_edges": {
+          "added": 0,
+          "removed": 0,
+          "changed_ids": [],
+          "reordered": false
+        },
+        "kg_puzzles": {
+          "added": 0,
+          "removed": 0,
+          "changed_ids": [],
+          "reordered": false
+        }
+      }
+    }
+  },
+  "ranking_changes": {
+    "al_viata_de_roman_093": {
+      "rank": [
+        23,
+        24
+      ]
+    },
+    "al_gastronomie_027": {
+      "rank": [
+        24,
+        25
+      ]
+    },
+    "al_istorie_034": {
+      "rank": [
+        25,
+        26
+      ]
+    },
+    "al_literatura_049": {
+      "rank": [
+        26,
+        27
+      ]
+    },
+    "al_meme_net_057": {
+      "rank": [
+        27,
+        28
+      ]
+    },
+    "al_gastronomie_026": {
+      "rank": [
+        28,
+        29
+      ]
+    },
+    "al_istorie_036": {
+      "rank": [
+        29,
+        30
+      ]
+    },
+    "al_limba_046": {
+      "rank": [
+        30,
+        31
+      ]
+    },
+    "al_meme_net_058": {
+      "rank": [
+        31,
+        32
+      ]
+    },
+    "al_muzica_064": {
+      "rank": [
+        32,
+        33
+      ]
+    },
+    "al_arta_cultura_014": {
+      "rank": [
+        33,
+        34
+      ]
+    },
+    "al_limba_042": {
+      "rank": [
+        34,
+        35
+      ],
+      "selection_weight": [
+        4,
+        3
+      ]
+    },
+    "al_meme_net_056": {
+      "rank": [
+        35,
+        36
+      ]
+    },
+    "al_meme_net_059": {
+      "rank": [
+        36,
+        37
+      ]
+    },
+    "al_societate_074": {
+      "rank": [
+        37,
+        38
+      ]
+    },
+    "al_sport_083": {
+      "romanian_familiarity": [
+        49,
+        60
+      ],
+      "play_quality": [
+        93,
+        85
+      ],
+      "pilot_score": [
+        67,
+        70
+      ],
+      "rank": [
+        38,
+        23
+      ],
+      "selection_weight": [
+        3,
+        4
+      ]
+    }
+  },
+  "limits": [
+    "This audit is not a factual or player-quality re-review; it verifies the exact independently reviewed candidate and integration safeguards.",
+    "The script is a serial offline migration, not a concurrent content editing service.",
+    "Full backend/accounts/frontend release gates and local landing remain the root session responsibility.",
+    "Three existing present-tense Neagu edge labels remain unchanged, as explicitly excluded from the seed-only revision.",
+    "V91 is the final authorized version; no V92 is requested or created by this audit."
+  ]
+}

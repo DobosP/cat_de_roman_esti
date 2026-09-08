@@ -42,6 +42,10 @@ _V90_RECEIPT = Path(__file__).resolve().parents[1] / (
     "docs/reviews/v90-household-discovery-and-critique-gates/artifact-delta.json"
 )
 
+_V91_RECEIPT = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v91-recovery-and-mobile-clarity/artifact-delta.json"
+)
+
 
 def _reverse_reviewed_delta(current: dict, filename: str, receipt_path: Path) -> dict:
     """Peel only exact reviewed additions/corrections before checking old wave pins."""
@@ -94,8 +98,14 @@ def _reverse_bound_delta(current: dict, filename: str, receipt_path: Path) -> di
     return restored
 
 
+def before_v91_artifact(current: dict, filename: str) -> dict:
+    """Restore exact V90 content before checking earlier historical receipts."""
+    return _reverse_bound_delta(current, filename, _V91_RECEIPT)
+
+
 def _before_v90(current: dict, filename: str) -> dict:
-    return _reverse_bound_delta(current, filename, _V90_RECEIPT)
+    previous = before_v91_artifact(current, filename)
+    return _reverse_bound_delta(previous, filename, _V90_RECEIPT)
 
 
 def before_v90_fixture(current: dict) -> dict:

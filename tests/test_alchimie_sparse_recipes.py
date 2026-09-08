@@ -20,7 +20,11 @@ from cat_de_roman_esti.graph import Graph  # noqa: E402
 from cat_de_roman_esti.wordgames import alchimie as A  # noqa: E402
 from cat_de_roman_esti.wordgames.packs import CuratedItem, get_pack  # noqa: E402
 from cat_de_roman_esti.wordgames.service import WordGameService  # noqa: E402
-from tests.content_history import before_v88_fixture, before_v88_pack  # noqa: E402
+from tests.content_history import (  # noqa: E402
+    before_v88_fixture,
+    before_v88_pack,
+    before_v91_artifact,
+)
 from tests.current_content import CURRENT_CONTENT  # noqa: E402
 
 
@@ -76,8 +80,34 @@ def v87_projection_snapshot():
     return rows, minima
 
 
+@pytest.fixture(scope="module")
+def v90_projection_snapshot(approved_projections):
+    """Restore only the reviewed Sport seeds; preserve the complete V90 contract."""
+    fixtures = Path(__file__).resolve().parents[1] / "cat_de_roman_esti/fixtures"
+    graph = json.loads((fixtures / "kg_sample.json").read_bytes())
+    assert before_v91_artifact(graph, "kg_sample.json") == graph
+    current = json.loads((fixtures / "games_pack.json").read_bytes())
+    previous = before_v91_artifact(current, "games_pack.json")
+    before = {row["id"]: row for row in previous["alchimie"]}
+    after = {row["id"]: row for row in current["alchimie"]}
+    assert before.keys() == after.keys()
+    assert [key for key in before if before[key] != after[key]] == ["al_sport_083"]
+    record = before["al_sport_083"]
+    old_projection = A._build_recipe_projection(
+        record["seeds"], record["target"], record["category"],
+    )
+    assert old_projection is not None
+    rows, minima = [], []
+    for item, projection in approved_projections[0]:
+        if item.id == "al_sport_083":
+            projection = old_projection
+        rows.append(_projection_row(item, projection))
+        minima.extend(A._route_quality(route)[0] for route in projection.routes)
+    return rows, minima
+
+
 def test_all_approved_boards_have_sparse_deterministic_target_routes(
-    approved_projections, v87_projection_snapshot,
+    approved_projections, v87_projection_snapshot, v90_projection_snapshot,
 ) -> None:
     projections, elapsed = approved_projections
     rows = [_projection_row(item, projection) for item, projection in projections]
@@ -89,7 +119,21 @@ def test_all_approved_boards_have_sparse_deterministic_target_routes(
     assert len(historical_rows) == 79  # ADR-0072's stock remains exact before V88.
     assert digest == "50f82c4660c54708e00cdd31e28c68a60034c83444a2a9dd2d5cc879500c2683"
     assert len(rows) == CURRENT_CONTENT.game_inventory["alchimie"][1]
-    assert [row for row in rows if row["id"] != "al_gastronomie_107"] == historical_rows
+    previous_rows, _previous_minima = v90_projection_snapshot
+    assert len(previous_rows) == 80
+    assert hashlib.sha256(json.dumps(
+        previous_rows, sort_keys=True, separators=(",", ":"),
+    ).encode()).hexdigest() == (
+        "422eb7f711b6cfb1593a0d3b8b8176f16afdf412303b1c65e1da14a1c6ecf1ad"
+    )
+    assert [row for row in previous_rows if row["id"] != "al_gastronomie_107"] == historical_rows
+    assert hashlib.sha256(json.dumps(
+        rows, sort_keys=True, separators=(",", ":"),
+    ).encode()).hexdigest() == (
+        "1e8a7956c6a63bb62d6e9ca42dc00d240efe02438bb33c7344805a5223094d04"
+    )
+    assert [old["id"] for old, new in zip(previous_rows, rows, strict=True)
+            if old != new] == ["al_sport_083"]
     assert elapsed < 30.0
     assert Counter(row["routes"] for row in historical_rows) == {1: 5, 2: 6, 3: 7, 4: 61}
     assert Counter(row["routes"] for row in rows) == {1: 5, 2: 6, 3: 8, 4: 61}
@@ -127,14 +171,16 @@ def test_all_approved_boards_have_sparse_deterministic_target_routes(
             A._projected_opening_pair_count(item.payload["seeds"], projection.recipes)
         ] += 1
 
-    assert recipe_count == 555  # V88 adds five reviewed Cremșnit recipes.
-    assert tied_count == 77
+    assert sum(len(row["recipes"]) for row in previous_rows) == 555
+    assert sum(len(recipe) == 4 for row in previous_rows for recipe in row["recipes"]) == 77
+    assert recipe_count == 554  # V91 replaces Sport 083's seven recipes with six.
+    assert tied_count == 76  # Its old two-result recipe is no longer needed.
     assert sum(count for openings, count in opening_counts.items() if openings >= 2) == 64
     assert opening_counts[1] == 16
 
 
 def test_selected_routes_prefer_the_strongest_discovered_shortest_alternative(
-    approved_projections, v87_projection_snapshot,
+    approved_projections, v87_projection_snapshot, v90_projection_snapshot,
 ) -> None:
     projections, _elapsed = approved_projections
     selected_minima: list[float] = []
@@ -157,7 +203,8 @@ def test_selected_routes_prefer_the_strongest_discovered_shortest_alternative(
 
     assert min(selected_minima) == pytest.approx(0.40)
     assert median(v87_projection_snapshot[1]) == pytest.approx(0.66)
-    assert median(selected_minima) == pytest.approx(0.67)
+    assert median(v90_projection_snapshot[1]) == pytest.approx(0.67)
+    assert median(selected_minima) == pytest.approx(0.68)
     assert weak_fallbacks == [
         "al_gastronomie_027",
         "al_gastronomie_029",

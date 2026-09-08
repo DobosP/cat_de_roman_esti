@@ -27,17 +27,22 @@ function responseFor(page, id, action, method = "POST") {
   return page.waitForResponse((response) => response.request().method() === method && new URL(response.url()).pathname === path);
 }
 
-async function unlock(request, id, inventory) {
+async function unlock(request, id, nextPair) {
+  const pairs = solution(game).hint_setup;
   let state = await serverState(request, id);
-  for (let a = 0; a < inventory.length && !state.hint_available; a += 1) {
-    for (let b = a + 1; b < inventory.length && !state.hint_available; b += 1) {
-      const response = await request.post(`${gameURL(game, id)}/combine`, { data: { a: inventory[a].id, b: inventory[b].id } });
-      expect(response.status()).toBe(200);
-      state = await response.json();
-    }
+  const inventory = state.inventory;
+  while (!state.hint_available && nextPair < pairs.length) {
+    const response = await request.post(`${gameURL(game, id)}/combine`, { data: pairs[nextPair] });
+    nextPair += 1;
+    expect(response.status()).toBe(200);
+    state = await response.json();
+    expect(state.already_tried).toBe(false);
+    expect(state.discovered).toEqual([]);
+    expect(state.inventory).toEqual(inventory);
+    expect(state.won).toBe(false);
   }
   expect(state.hint_available).toBe(true);
-  return state;
+  return nextPair;
 }
 
 async function prepare(page, request, { hints = 0, solved = 0 } = {}) {
@@ -45,8 +50,9 @@ async function prepare(page, request, { hints = 0, solved = 0 } = {}) {
   for (const step of steps().slice(0, solved)) {
     expect((await request.post(`${gameURL(game, initial.game_id)}/combine`, { data: step.payload })).status()).toBe(200);
   }
+  let nextHintPair = 0;
   for (let index = 0; index < hints; index += 1) {
-    await unlock(request, initial.game_id, initial.inventory);
+    nextHintPair = await unlock(request, initial.game_id, nextHintPair);
     if (index < hints - 1) {
       expect((await request.post(`${gameURL(game, initial.game_id)}/hint`)).status()).toBe(200);
     }
@@ -130,9 +136,13 @@ test("lost productive combine restores the exact earned inventory and private ta
   await settledScreenshot(page, "recovered-inventory.png", page.locator(game.board));
 });
 
-for (const hints of [1, 2]) {
-  test(`lost paid ${hints === 1 ? "output" : "pair"} clue survives GET and resume without another charge`, async ({ page, request }) => {
-    const initial = await prepare(page, request, { hints });
+for (const { kind, hints, solved } of [
+  { kind: "output", hints: 1, solved: 0 },
+  { kind: "pair", hints: 2, solved: 0 },
+  { kind: "category", hints: 1, solved: 1 },
+]) {
+  test(`lost paid ${kind} clue survives GET and resume without another charge`, async ({ page, request }) => {
+    const initial = await prepare(page, request, { hints, solved });
     const counts = traffic(page, initial.game_id);
     const committed = await loseCommittedResponse(page, initial.game_id, "hint");
     expect((await askHint(page, initial.game_id)).status()).toBe(503);
@@ -140,17 +150,37 @@ for (const hints of [1, 2]) {
     const fresh = await serverState(request, initial.game_id);
     expect(fresh.hints_used).toBe(hints);
     expect(fresh.earned_hint).toEqual(committed().earned_hint);
-    expect(fresh.earned_hint.hint_kind).toBe(hints === 1 ? "output" : "pair");
+    expect(fresh.earned_hint.hint_kind).toBe(kind);
     expect(fresh.target.id).toBeNull();
+    expect(fresh.target.revealed).toBe(false);
+    expect(fresh.recipes).toBeUndefined();
+    expect(fresh.routes).toBeUndefined();
+    if (kind === "output") {
+      expect(fresh.earned_hint.hint).toBeNull();
+      expect(Object.keys(fresh.earned_hint.hint_output)).toEqual(["label"]);
+    } else if (kind === "category") {
+      expect(fresh.earned_hint.hint).toBeNull();
+      expect(fresh.earned_hint.hint_output).toBeNull();
+    } else {
+      expect(fresh.earned_hint.hint_output).toBeNull();
+      expect(fresh.earned_hint.hint).toHaveLength(2);
+      for (const item of fresh.earned_hint.hint) {
+        expect(initial.inventory.some((owned) => owned.id === item.id)).toBe(true);
+      }
+    }
     expect(fresh.hint_available).toBe(false);
     await expect(page.locator(".alchemy-earned-hint")).toHaveText(fresh.earned_hint.message);
     await expect(hintButton(page)).toHaveCount(0);
-    await expect(page.getByRole("button", { name: /^Scoate .* din alambic$/ })).toHaveCount(hints === 1 ? 0 : 2);
+    await expect(page.getByRole("button", { name: /^Scoate .* din alambic$/ })).toHaveCount(kind === "pair" ? 2 : 0);
     expect(counts).toEqual({ reads: 1, mutations: 1 });
-    await settledScreenshot(page, `recovered-hint-${hints}.png`, page.locator(".alchemy-earned-hint"));
+    await settledScreenshot(page, `recovered-hint-${kind}.png`, page.locator(".alchemy-earned-hint"));
     await page.reload();
     await expect(page.locator(".alchemy-earned-hint")).toHaveText(fresh.earned_hint.message);
-    expect((await serverState(request, initial.game_id)).hints_used).toBe(hints);
+    const resumed = await serverState(request, initial.game_id);
+    expect(resumed.hints_used).toBe(hints);
+    expect(resumed.earned_hint).toEqual(fresh.earned_hint);
+    expect(resumed.target.id).toBeNull();
+    expect(resumed.target.revealed).toBe(false);
     expect(counts).toEqual({ reads: 2, mutations: 1 });
   });
 }

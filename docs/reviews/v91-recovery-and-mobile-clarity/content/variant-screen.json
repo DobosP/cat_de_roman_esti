@@ -1,0 +1,2202 @@
+{
+  "scope": "19 finite existing-node seed substitutions tested in memory; no graph mutation; author screen is not an independent verdict",
+  "variants": [
+    {
+      "proposal": 1,
+      "status": "not-selected: stronger same-target candidate combines two distinct opening ideas, six useful seeds, four domestic clubs and no Neagu/foreign-club opening",
+      "seed_labels": [
+        "Cristina Neagu",
+        "Dinamo București",
+        "Rapid București",
+        "FCSB",
+        "FC Barcelona"
+      ],
+      "seeds": [
+        "n_spt_cristina_neagu",
+        "n_v11spo_dinamo_bucuresti",
+        "n_v11spo_rapid_bucuresti",
+        "n_v18spo_fcsb",
+        "n_spt_fc_barcelona"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [],
+      "opening_pairs": 4,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_fc_barcelona"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "FC Barcelona"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v11spo_rapid_bucuresti"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "Rapid București"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v18spo_fcsb"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "FCSB"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_rapid_bucuresti",
+            "n_v18spo_fcsb"
+          ],
+          "pair_labels": [
+            "Rapid București",
+            "FCSB"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        }
+      ]
+    },
+    {
+      "proposal": 2,
+      "status": "rejected-initially-depleted-seeds",
+      "seed_labels": [
+        "Cristina Neagu",
+        "Dinamo București",
+        "Rapid București",
+        "FCSB",
+        "FC Barcelona",
+        "CFR Cluj"
+      ],
+      "seeds": [
+        "n_spt_cristina_neagu",
+        "n_v11spo_dinamo_bucuresti",
+        "n_v11spo_rapid_bucuresti",
+        "n_v18spo_fcsb",
+        "n_spt_fc_barcelona",
+        "n_v18spo_cfr_cluj"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [
+        "FC Barcelona"
+      ],
+      "opening_pairs": 4,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v11spo_rapid_bucuresti"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "Rapid București"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v18spo_fcsb"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "FCSB"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_rapid_bucuresti",
+            "n_v18spo_cfr_cluj"
+          ],
+          "pair_labels": [
+            "Rapid București",
+            "CFR Cluj"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_rapid_bucuresti",
+            "n_v18spo_fcsb"
+          ],
+          "pair_labels": [
+            "Rapid București",
+            "FCSB"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        }
+      ]
+    },
+    {
+      "proposal": 3,
+      "status": "rejected-initially-depleted-seeds",
+      "seed_labels": [
+        "Cristina Neagu",
+        "Dinamo București",
+        "Rapid București",
+        "FCSB",
+        "FC Barcelona",
+        "Tricolorii"
+      ],
+      "seeds": [
+        "n_spt_cristina_neagu",
+        "n_v11spo_dinamo_bucuresti",
+        "n_v11spo_rapid_bucuresti",
+        "n_v18spo_fcsb",
+        "n_spt_fc_barcelona",
+        "n_spt_tricolorii"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [
+        "Tricolorii"
+      ],
+      "opening_pairs": 4,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_fc_barcelona"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "FC Barcelona"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v11spo_rapid_bucuresti"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "Rapid București"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v18spo_fcsb"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "FCSB"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_rapid_bucuresti",
+            "n_v18spo_fcsb"
+          ],
+          "pair_labels": [
+            "Rapid București",
+            "FCSB"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        }
+      ]
+    },
+    {
+      "proposal": 4,
+      "status": "not-selected: stronger same-target candidate combines two distinct opening ideas, six useful seeds, four domestic clubs and no Neagu/foreign-club opening",
+      "seed_labels": [
+        "Cristina Neagu",
+        "FC Barcelona",
+        "FCSB",
+        "CFR Cluj",
+        "echipă",
+        "suporter"
+      ],
+      "seeds": [
+        "n_spt_cristina_neagu",
+        "n_spt_fc_barcelona",
+        "n_v18spo_fcsb",
+        "n_v18spo_cfr_cluj",
+        "n_v4spo_echipa",
+        "n_v4spo_suporter"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [],
+      "opening_pairs": 4,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_fc_barcelona"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "FC Barcelona"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_v18spo_cfr_cluj",
+            "n_v18spo_fcsb"
+          ],
+          "pair_labels": [
+            "CFR Cluj",
+            "FCSB"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v18spo_fcsb",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "FCSB",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v4spo_echipa",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "echipă",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        }
+      ]
+    },
+    {
+      "proposal": 5,
+      "status": "rejected-initially-depleted-seeds",
+      "seed_labels": [
+        "Cristina Neagu",
+        "FC Barcelona",
+        "FCSB",
+        "Antrenor",
+        "antrenament",
+        "tricou"
+      ],
+      "seeds": [
+        "n_spt_cristina_neagu",
+        "n_spt_fc_barcelona",
+        "n_v18spo_fcsb",
+        "n_v3spo_antrenor",
+        "n_v4spo_antrenament",
+        "n_v4spo_tricou"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [
+        "FCSB",
+        "antrenament",
+        "tricou"
+      ],
+      "opening_pairs": 2,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_fc_barcelona"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "FC Barcelona"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_echipa_nationala"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Echipă națională"
+          ],
+          "outputs": [
+            "n_spt_handbal_feminin",
+            "n_v3spo_handbal"
+          ],
+          "output_labels": [
+            "Handbal feminin",
+            "Handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v3spo_antrenor"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Antrenor"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv",
+            "n_v2spo_echipa_nationala"
+          ],
+          "output_labels": [
+            "Club sportiv",
+            "Echipă națională"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_handbal_feminin",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Handbal feminin",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_handbal_feminin",
+            "n_v3spo_handbal"
+          ],
+          "pair_labels": [
+            "Handbal feminin",
+            "Handbal"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        }
+      ]
+    },
+    {
+      "proposal": 6,
+      "status": "rejected-initially-depleted-seeds",
+      "seed_labels": [
+        "Cristina Neagu",
+        "Dinamo București",
+        "Rapid București",
+        "echipă",
+        "suporter",
+        "tricou"
+      ],
+      "seeds": [
+        "n_spt_cristina_neagu",
+        "n_v11spo_dinamo_bucuresti",
+        "n_v11spo_rapid_bucuresti",
+        "n_v4spo_echipa",
+        "n_v4spo_suporter",
+        "n_v4spo_tricou"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [
+        "tricou"
+      ],
+      "opening_pairs": 4,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v4spo_echipa"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "echipă"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v11spo_rapid_bucuresti"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "Rapid București"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v4spo_echipa",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "echipă",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        }
+      ]
+    },
+    {
+      "proposal": 7,
+      "status": "not-selected: stronger same-target candidate combines two distinct opening ideas, six useful seeds, four domestic clubs and no Neagu/foreign-club opening",
+      "seed_labels": [
+        "Handbal",
+        "FC Barcelona",
+        "FCSB",
+        "CFR Cluj",
+        "echipă",
+        "suporter"
+      ],
+      "seeds": [
+        "n_v3spo_handbal",
+        "n_spt_fc_barcelona",
+        "n_v18spo_fcsb",
+        "n_v18spo_cfr_cluj",
+        "n_v4spo_echipa",
+        "n_v4spo_suporter"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [],
+      "opening_pairs": 4,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_fc_barcelona",
+            "n_v18spo_cfr_cluj"
+          ],
+          "pair_labels": [
+            "FC Barcelona",
+            "CFR Cluj"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v18spo_cfr_cluj",
+            "n_v18spo_fcsb"
+          ],
+          "pair_labels": [
+            "CFR Cluj",
+            "FCSB"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v18spo_fcsb",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "FCSB",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v2spo_club_sportiv",
+            "n_v3spo_handbal"
+          ],
+          "pair_labels": [
+            "Club sportiv",
+            "Handbal"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_v4spo_echipa",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "echipă",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        }
+      ]
+    },
+    {
+      "proposal": 8,
+      "status": "rejected-initially-depleted-seeds",
+      "seed_labels": [
+        "Handbal feminin",
+        "Dinamo București",
+        "Rapid București",
+        "echipă",
+        "suporter",
+        "tricou"
+      ],
+      "seeds": [
+        "n_spt_handbal_feminin",
+        "n_v11spo_dinamo_bucuresti",
+        "n_v11spo_rapid_bucuresti",
+        "n_v4spo_echipa",
+        "n_v4spo_suporter",
+        "n_v4spo_tricou"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [
+        "tricou"
+      ],
+      "opening_pairs": 4,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_handbal_feminin",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Handbal feminin",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v11spo_rapid_bucuresti"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "Rapid București"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v4spo_echipa"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "echipă"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v4spo_echipa",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "echipă",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        }
+      ]
+    },
+    {
+      "proposal": 9,
+      "status": "not-selected: stronger same-target candidate combines two distinct opening ideas, six useful seeds, four domestic clubs and no Neagu/foreign-club opening",
+      "seed_labels": [
+        "Cristina Neagu",
+        "Echipă națională",
+        "FCSB",
+        "CFR Cluj",
+        "echipă",
+        "suporter"
+      ],
+      "seeds": [
+        "n_spt_cristina_neagu",
+        "n_v2spo_echipa_nationala",
+        "n_v18spo_fcsb",
+        "n_v18spo_cfr_cluj",
+        "n_v4spo_echipa",
+        "n_v4spo_suporter"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [],
+      "opening_pairs": 4,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_handbal_feminin"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Handbal feminin"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_echipa_nationala"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Echipă națională"
+          ],
+          "outputs": [
+            "n_spt_handbal_feminin"
+          ],
+          "output_labels": [
+            "Handbal feminin"
+          ]
+        },
+        {
+          "pair": [
+            "n_v18spo_cfr_cluj",
+            "n_v18spo_fcsb"
+          ],
+          "pair_labels": [
+            "CFR Cluj",
+            "FCSB"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v18spo_fcsb",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "FCSB",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v4spo_echipa",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "echipă",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        }
+      ]
+    },
+    {
+      "proposal": 10,
+      "status": "not-selected: stronger same-target candidate combines two distinct opening ideas, six useful seeds, four domestic clubs and no Neagu/foreign-club opening",
+      "seed_labels": [
+        "Cristina Neagu",
+        "Echipă națională",
+        "Dinamo București",
+        "Rapid București",
+        "FC Barcelona",
+        "suporter"
+      ],
+      "seeds": [
+        "n_spt_cristina_neagu",
+        "n_v2spo_echipa_nationala",
+        "n_v11spo_dinamo_bucuresti",
+        "n_v11spo_rapid_bucuresti",
+        "n_spt_fc_barcelona",
+        "n_v4spo_suporter"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [],
+      "opening_pairs": 4,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_fc_barcelona"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "FC Barcelona"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_handbal_feminin"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Handbal feminin"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_echipa_nationala"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Echipă națională"
+          ],
+          "outputs": [
+            "n_spt_handbal_feminin"
+          ],
+          "output_labels": [
+            "Handbal feminin"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v11spo_rapid_bucuresti"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "Rapid București"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        }
+      ]
+    },
+    {
+      "proposal": 11,
+      "status": "rejected-initially-depleted-seeds",
+      "seed_labels": [
+        "Cristina Neagu",
+        "Tricolorii",
+        "Dinamo București",
+        "Rapid București",
+        "FC Barcelona",
+        "suporter"
+      ],
+      "seeds": [
+        "n_spt_cristina_neagu",
+        "n_spt_tricolorii",
+        "n_v11spo_dinamo_bucuresti",
+        "n_v11spo_rapid_bucuresti",
+        "n_spt_fc_barcelona",
+        "n_v4spo_suporter"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [
+        "Tricolorii"
+      ],
+      "opening_pairs": 4,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_fc_barcelona"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "FC Barcelona"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v11spo_rapid_bucuresti"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "Rapid București"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        }
+      ]
+    },
+    {
+      "proposal": 12,
+      "status": "not-selected: stronger same-target candidate combines two distinct opening ideas, six useful seeds, four domestic clubs and no Neagu/foreign-club opening",
+      "seed_labels": [
+        "Cristina Neagu",
+        "FC Barcelona",
+        "CFR Cluj",
+        "FCSB",
+        "Galatasaray",
+        "Inter Milano"
+      ],
+      "seeds": [
+        "n_spt_cristina_neagu",
+        "n_spt_fc_barcelona",
+        "n_v18spo_cfr_cluj",
+        "n_v18spo_fcsb",
+        "n_spt_galatasaray",
+        "n_v20spo_inter_milano"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [],
+      "opening_pairs": 4,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_fc_barcelona"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "FC Barcelona"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_fc_barcelona",
+            "n_spt_galatasaray"
+          ],
+          "pair_labels": [
+            "FC Barcelona",
+            "Galatasaray"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_galatasaray",
+            "n_v20spo_inter_milano"
+          ],
+          "pair_labels": [
+            "Galatasaray",
+            "Inter Milano"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v18spo_cfr_cluj",
+            "n_v18spo_fcsb"
+          ],
+          "pair_labels": [
+            "CFR Cluj",
+            "FCSB"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        }
+      ]
+    },
+    {
+      "proposal": 13,
+      "status": "not-selected: stronger same-target candidate combines two distinct opening ideas, six useful seeds, four domestic clubs and no Neagu/foreign-club opening",
+      "seed_labels": [
+        "Cristina Neagu",
+        "Dinamo București",
+        "Rapid București",
+        "FC Barcelona",
+        "echipă",
+        "suporter"
+      ],
+      "seeds": [
+        "n_spt_cristina_neagu",
+        "n_v11spo_dinamo_bucuresti",
+        "n_v11spo_rapid_bucuresti",
+        "n_spt_fc_barcelona",
+        "n_v4spo_echipa",
+        "n_v4spo_suporter"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [],
+      "opening_pairs": 4,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_fc_barcelona"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "FC Barcelona"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v11spo_rapid_bucuresti"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "Rapid București"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v4spo_echipa",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "echipă",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        }
+      ]
+    },
+    {
+      "proposal": 14,
+      "status": "rejected-initially-depleted-seeds",
+      "seed_labels": [
+        "Cristina Neagu",
+        "Echipă națională",
+        "Antrenor",
+        "FCSB",
+        "CFR Cluj",
+        "suporter"
+      ],
+      "seeds": [
+        "n_spt_cristina_neagu",
+        "n_v2spo_echipa_nationala",
+        "n_v3spo_antrenor",
+        "n_v18spo_fcsb",
+        "n_v18spo_cfr_cluj",
+        "n_v4spo_suporter"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [
+        "Antrenor"
+      ],
+      "opening_pairs": 4,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_handbal_feminin"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Handbal feminin"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v18spo_cfr_cluj"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "CFR Cluj"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_echipa_nationala"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Echipă națională"
+          ],
+          "outputs": [
+            "n_spt_handbal_feminin"
+          ],
+          "output_labels": [
+            "Handbal feminin"
+          ]
+        },
+        {
+          "pair": [
+            "n_v18spo_cfr_cluj",
+            "n_v18spo_fcsb"
+          ],
+          "pair_labels": [
+            "CFR Cluj",
+            "FCSB"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v18spo_fcsb",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "FCSB",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        }
+      ]
+    },
+    {
+      "proposal": 15,
+      "status": "not-selected: stronger same-target candidate combines two distinct opening ideas, six useful seeds, four domestic clubs and no Neagu/foreign-club opening",
+      "seed_labels": [
+        "Cristina Neagu",
+        "Echipă națională",
+        "Dinamo București",
+        "Rapid București",
+        "FCSB",
+        "suporter"
+      ],
+      "seeds": [
+        "n_spt_cristina_neagu",
+        "n_v2spo_echipa_nationala",
+        "n_v11spo_dinamo_bucuresti",
+        "n_v11spo_rapid_bucuresti",
+        "n_v18spo_fcsb",
+        "n_v4spo_suporter"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [],
+      "opening_pairs": 4,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_handbal_feminin"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Handbal feminin"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_echipa_nationala"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Echipă națională"
+          ],
+          "outputs": [
+            "n_spt_handbal_feminin"
+          ],
+          "output_labels": [
+            "Handbal feminin"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v18spo_fcsb"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "FCSB"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_rapid_bucuresti",
+            "n_v18spo_fcsb"
+          ],
+          "pair_labels": [
+            "Rapid București",
+            "FCSB"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        }
+      ]
+    },
+    {
+      "proposal": 16,
+      "status": "not-selected: stronger same-target candidate combines two distinct opening ideas, six useful seeds, four domestic clubs and no Neagu/foreign-club opening",
+      "seed_labels": [
+        "Cristina Neagu",
+        "Echipă națională",
+        "Dinamo București",
+        "Rapid București",
+        "echipă",
+        "suporter"
+      ],
+      "seeds": [
+        "n_spt_cristina_neagu",
+        "n_v2spo_echipa_nationala",
+        "n_v11spo_dinamo_bucuresti",
+        "n_v11spo_rapid_bucuresti",
+        "n_v4spo_echipa",
+        "n_v4spo_suporter"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [],
+      "opening_pairs": 4,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_handbal_feminin"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Handbal feminin"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_echipa_nationala"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Echipă națională"
+          ],
+          "outputs": [
+            "n_spt_handbal_feminin"
+          ],
+          "output_labels": [
+            "Handbal feminin"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v11spo_rapid_bucuresti"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "Rapid București"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v4spo_echipa",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "echipă",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        }
+      ]
+    },
+    {
+      "proposal": 17,
+      "status": "selected-for-independent-review",
+      "seed_labels": [
+        "Cristina Neagu",
+        "Echipă națională",
+        "Dinamo București",
+        "Rapid București",
+        "FCSB",
+        "CFR Cluj"
+      ],
+      "seeds": [
+        "n_spt_cristina_neagu",
+        "n_v2spo_echipa_nationala",
+        "n_v11spo_dinamo_bucuresti",
+        "n_v11spo_rapid_bucuresti",
+        "n_v18spo_fcsb",
+        "n_v18spo_cfr_cluj"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [],
+      "opening_pairs": 4,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_handbal_feminin"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Handbal feminin"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_echipa_nationala"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Echipă națională"
+          ],
+          "outputs": [
+            "n_spt_handbal_feminin"
+          ],
+          "output_labels": [
+            "Handbal feminin"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v18spo_fcsb"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "FCSB"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_rapid_bucuresti",
+            "n_v18spo_cfr_cluj"
+          ],
+          "pair_labels": [
+            "Rapid București",
+            "CFR Cluj"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_rapid_bucuresti",
+            "n_v18spo_fcsb"
+          ],
+          "pair_labels": [
+            "Rapid București",
+            "FCSB"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        }
+      ]
+    },
+    {
+      "proposal": 18,
+      "status": "rejected-initially-depleted-seeds",
+      "seed_labels": [
+        "Cristina Neagu",
+        "Echipă națională",
+        "FCSB",
+        "CFR Cluj",
+        "antrenament",
+        "suporter"
+      ],
+      "seeds": [
+        "n_spt_cristina_neagu",
+        "n_v2spo_echipa_nationala",
+        "n_v18spo_fcsb",
+        "n_v18spo_cfr_cluj",
+        "n_v4spo_antrenament",
+        "n_v4spo_suporter"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [
+        "antrenament"
+      ],
+      "opening_pairs": 4,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_handbal_feminin"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Handbal feminin"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v18spo_cfr_cluj"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "CFR Cluj"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_echipa_nationala"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Echipă națională"
+          ],
+          "outputs": [
+            "n_spt_handbal_feminin"
+          ],
+          "output_labels": [
+            "Handbal feminin"
+          ]
+        },
+        {
+          "pair": [
+            "n_v18spo_cfr_cluj",
+            "n_v18spo_fcsb"
+          ],
+          "pair_labels": [
+            "CFR Cluj",
+            "FCSB"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_v18spo_fcsb",
+            "n_v4spo_suporter"
+          ],
+          "pair_labels": [
+            "FCSB",
+            "suporter"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        }
+      ]
+    },
+    {
+      "proposal": 19,
+      "status": "not-selected: stronger same-target candidate combines two distinct opening ideas, six useful seeds, four domestic clubs and no Neagu/foreign-club opening",
+      "seed_labels": [
+        "Cristina Neagu",
+        "Echipă națională",
+        "Dinamo București",
+        "Rapid București",
+        "FC Barcelona"
+      ],
+      "seeds": [
+        "n_spt_cristina_neagu",
+        "n_v2spo_echipa_nationala",
+        "n_v11spo_dinamo_bucuresti",
+        "n_v11spo_rapid_bucuresti",
+        "n_spt_fc_barcelona"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "par": 2,
+      "depleted": [],
+      "opening_pairs": 3,
+      "routes": 4,
+      "recipes": [
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_fc_barcelona"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "FC Barcelona"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_spt_handbal_feminin"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Handbal feminin"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_club_sportiv"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Club sportiv"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_cristina_neagu",
+            "n_v2spo_echipa_nationala"
+          ],
+          "pair_labels": [
+            "Cristina Neagu",
+            "Echipă națională"
+          ],
+          "outputs": [
+            "n_spt_handbal_feminin",
+            "n_v3spo_handbal"
+          ],
+          "output_labels": [
+            "Handbal feminin",
+            "Handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_spt_handbal_feminin",
+            "n_v3spo_handbal"
+          ],
+          "pair_labels": [
+            "Handbal feminin",
+            "Handbal"
+          ],
+          "outputs": [
+            "n_spt_liga_campionilor_handbal"
+          ],
+          "output_labels": [
+            "Liga Campionilor la handbal"
+          ]
+        },
+        {
+          "pair": [
+            "n_v11spo_dinamo_bucuresti",
+            "n_v11spo_rapid_bucuresti"
+          ],
+          "pair_labels": [
+            "Dinamo București",
+            "Rapid București"
+          ],
+          "outputs": [
+            "n_v2spo_club_sportiv"
+          ],
+          "output_labels": [
+            "Club sportiv"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,14 +1,15 @@
 // Perechi — eight visible words, four semantic matches. Choosing the second tile
 // submits immediately: no drag gesture, no extra confirmation, no client-side answer map.
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, m } from "framer-motion";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, m, useIsPresent } from "framer-motion";
 import { Button, type ToastKind } from "@roedu/ui";
 import {
   acquireFlight,
-  recoverAuthoritative,
   releaseFlight,
 } from "../asyncControl.mjs";
+import { ApiError } from "../api/client";
+import { createGameActionOwner, recoverOwnedGameAction, type GameActionTicket } from "../gameActionRecovery.mjs";
 import {
   perechiApi,
   type CreatePerechiOpts,
@@ -48,17 +49,35 @@ interface StartOpts {
   previousGameId?: string;
 }
 
-type PendingFocus = { kind: "tile"; id: string } | { kind: "result" } | null;
+type PendingFocus = ({ kind: "tile"; id: string } | { kind: "result" }) & {
+  gameId: string;
+  savedId: string | null;
+};
 
 export default function Perechi({ onExit, onToast }: Props) {
   const active = useActiveGame(GAME_KEY);
+  const isPresent = useIsPresent();
   const recordOnce = useRecordScore(GAME_KEY);
   const startInFlight = useRef(false);
-  const actionInFlight = useRef(false);
+  const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
+  const [actionSync, setActionSync] = useState<{
+    previous: PerechiState;
+    action: "match" | "hint";
+    kind: "failed" | "changed";
+    savedId: string | null;
+  } | null>(null);
+  useEffect(() => () => actionOwner.invalidate(), [actionOwner]);
   const tileRefs = useRef(new Map<string, HTMLButtonElement>());
   const resultFocusRef = useRef<HTMLDivElement>(null);
-  const pendingFocus = useRef<PendingFocus>(null);
+  const pendingFocus = useRef<PendingFocus | null>(null);
   const focusedTileBeforeMutation = useRef<string | null>(null);
+  useLayoutEffect(() => {
+    if (!isPresent) {
+      actionOwner.invalidate();
+      pendingFocus.current = null;
+      focusedTileBeforeMutation.current = null;
+    }
+  }, [actionOwner, isPresent]);
   const [state, setState] = useState<PerechiState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
@@ -70,33 +89,43 @@ export default function Perechi({ onExit, onToast }: Props) {
   const [puzzleRecordHit, setPuzzleRecordHit] = useState(false);
 
   const finished = Boolean(state?.won || state?.lost);
+  const actionsLocked = !isPresent || loading || busy || actionSync !== null;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const best = useMemo(() => bestScore(GAME_KEY), [state]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const starterVisible = useMemo(() => needsDerivedStarter(GAME_KEY), [state]);
   const exitSafely = useCallback(() => {
-    if (!startInFlight.current) onExit();
-  }, [onExit]);
+    if (startInFlight.current) return;
+    actionOwner.invalidate();
+    pendingFocus.current = null;
+    focusedTileBeforeMutation.current = null;
+    onExit();
+  }, [actionOwner, onExit]);
   const queueFocusAfterUpdate = useCallback(
     (fresh: PerechiState, candidateIds: readonly string[]) => {
       const focusedId = focusedTileBeforeMutation.current;
       if (!focusedId || !candidateIds.includes(focusedId)) return;
+      const ownership = { gameId: fresh.game_id, savedId: active.peek() };
       if (fresh.won || fresh.lost) {
-        pendingFocus.current = { kind: "result" };
+        pendingFocus.current = { kind: "result", ...ownership };
         return;
       }
       if (!fresh.tiles.find((tile) => tile.id === focusedId)?.solved) return;
       const nextId = nextActiveTileId(fresh.tiles, focusedId);
       pendingFocus.current = nextId
-        ? { kind: "tile", id: nextId }
-        : { kind: "result" };
+        ? { kind: "tile", id: nextId, ...ownership }
+        : { kind: "result", ...ownership };
     },
-    [],
+    [active],
   );
 
   useEffect(() => {
     const pending = pendingFocus.current;
     if (!pending) return;
+    if (state?.game_id !== pending.gameId || active.peek() !== pending.savedId) {
+      pendingFocus.current = null;
+      return;
+    }
     const target =
       pending.kind === "tile"
         ? tileRefs.current.get(pending.id)
@@ -104,15 +133,20 @@ export default function Perechi({ onExit, onToast }: Props) {
     if (!target) return;
     target.focus();
     pendingFocus.current = null;
-  }, [finished, state?.solved_count]);
+  }, [active, finished, state?.game_id, state?.solved_count]);
 
   const applyResumedGame = useCallback((fresh: PerechiState) => {
+    actionOwner.invalidate();
+    setActionSync(null);
+    setBusy(false);
     setStartFailed(false);
     setState(fresh);
     setSelected(null);
     setChecking(null);
+    pendingFocus.current = null;
+    focusedTileBeforeMutation.current = null;
     setFeedback(fresh.won || fresh.lost ? null : "Joc reluat. Atinge primul cuvânt.");
-  }, []);
+  }, [actionOwner]);
   const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
     active,
     load: perechiApi.get,
@@ -123,7 +157,11 @@ export default function Perechi({ onExit, onToast }: Props) {
 
   const start = useCallback(
     async ({ daily, previousGameId }: StartOpts = {}) => {
+      if (!isPresent) return;
       if (!acquireFlight(startInFlight)) return;
+      actionOwner.invalidate();
+      pendingFocus.current = null;
+      focusedTileBeforeMutation.current = null;
       cancelResume();
       setStartFailed(false);
       setLoading(true);
@@ -137,6 +175,8 @@ export default function Perechi({ onExit, onToast }: Props) {
       try {
         const fresh = await perechiApi.create(opts);
         setState(fresh);
+        setActionSync(null);
+        setBusy(false);
         active.remember(fresh.game_id);
         dismissRecovery();
         setSelected(null);
@@ -151,7 +191,7 @@ export default function Perechi({ onExit, onToast }: Props) {
         setLoading(false);
       }
     },
-    [active, cancelResume, dismissRecovery],
+    [active, actionOwner, cancelResume, dismissRecovery, isPresent],
   );
 
   const puzzleKey = useMemo(() => {
@@ -173,7 +213,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   }, [finished, puzzleKey, state]);
 
   useEffect(() => {
-    if (!state || !finished || state.score === undefined) return;
+    if (!isPresent || !state || !finished || state.score === undefined) return;
     if (!state.daily) rememberDerivedReplayId(GAME_KEY, state.game_id);
     const detail = state.won
       ? `${state.mistakes} ${state.mistakes === 1 ? "greșeală" : "greșeli"}`
@@ -195,22 +235,60 @@ export default function Perechi({ onExit, onToast }: Props) {
     return () => {
       current = false;
     };
-  }, [active, finished, puzzleKey, recordOnce, state]);
+  }, [active, finished, isPresent, puzzleKey, recordOnce, state]);
+
+  const beginAction = useCallback((previous: PerechiState, action: "match" | "hint") => {
+    if (!isPresent || startInFlight.current) return null;
+    const ticket = actionOwner.begin(previous.game_id);
+    if (!ticket) return null;
+    if (!actionOwner.owns(ticket)) {
+      actionOwner.finish(ticket);
+      setActionSync({ previous, action, savedId: ticket.savedId, kind: "changed" });
+      return null;
+    }
+    return ticket;
+  }, [actionOwner, isPresent]);
+
+  const mayAdoptAction = useCallback((ticket: GameActionTicket, previous: PerechiState, action: "match" | "hint") => {
+    if (!actionOwner.isCurrent(ticket)) return false;
+    if (!actionOwner.owns(ticket)) {
+      setActionSync({ previous, action, savedId: ticket.savedId, kind: "changed" });
+      return false;
+    }
+    return true;
+  }, [actionOwner]);
 
   const reconcile = useCallback(
-    async (previous: PerechiState, action: "match" | "hint") => {
-      const recovered = await recoverAuthoritative(() => perechiApi.get(previous.game_id));
-      if (!recovered.ok) {
-        setFeedback("Nu am putut confirma acțiunea. Jocul rămâne salvat; încearcă din nou.");
-        return null;
+    async (ticket: GameActionTicket, previous: PerechiState, action: "match" | "hint") => {
+      const recovered = await recoverOwnedGameAction(
+        actionOwner, ticket, perechiApi.get,
+        (error) => error instanceof ApiError && error.status === 404,
+      );
+      if (!mayAdoptAction(ticket, previous, action)) return;
+      if (recovered.kind === "missing") {
+        if (ticket.savedId === ticket.gameId && !active.forgetIfCurrent(ticket.gameId)) {
+          setActionSync({ previous, action, savedId: ticket.savedId, kind: "changed" });
+          return;
+        }
+        setActionSync(null);
+        setState(null);
+        setFeedback(null);
+        onToast("Jocul nu mai este disponibil. Poți începe altul.", "info");
+        return;
       }
-      const fresh = recovered.value;
+      if (recovered.kind !== "recovered") {
+        setActionSync({ previous, action, savedId: ticket.savedId, kind: "failed" });
+        setFeedback(null);
+        return;
+      }
+      const fresh = recovered.state;
       if (
         action === "match" &&
         (fresh.solved_count > previous.solved_count || fresh.won || fresh.lost)
       ) {
         queueFocusAfterUpdate(fresh, [...tileRefs.current.keys()]);
       }
+      setActionSync(null);
       setState(fresh);
       setSelected(null);
       setChecking(null);
@@ -225,20 +303,55 @@ export default function Perechi({ onExit, onToast }: Props) {
       } else {
         setFeedback("Joc sincronizat. Poți continua.");
       }
-      return fresh;
     },
-    [queueFocusAfterUpdate],
+    [actionOwner, active, mayAdoptAction, onToast, queueFocusAfterUpdate],
   );
+
+  const retryActionSync = useCallback(async () => {
+    if (!isPresent || !state || busy || !actionSync) return;
+    if (actionSync.kind === "changed") {
+      actionOwner.invalidate();
+      setActionSync(null);
+      setState(null);
+      setLoading(true);
+      retryResume();
+      return;
+    }
+    const { previous, action } = actionSync;
+    if (state.game_id !== previous.game_id) return;
+    const ticket = beginAction(previous, action);
+    if (!ticket) return;
+    // A retry continues the original ownership claim, including a known saved ID.
+    // It must not reinterpret a pointer removed since the failed read as unavailable storage.
+    if (ticket.savedId !== actionSync.savedId) {
+      actionOwner.finish(ticket);
+      setActionSync({ ...actionSync, kind: "changed" });
+      return;
+    }
+    setBusy(true);
+    try {
+      await reconcile(ticket, previous, action);
+    } finally {
+      if (actionOwner.finish(ticket)) setBusy(false);
+    }
+  }, [state, busy, actionSync, actionOwner, beginAction, isPresent, reconcile, retryResume]);
 
   const submitPair = useCallback(
     async (ids: [string, string]) => {
-      if (!state || finished || busy || !acquireFlight(actionInFlight)) return;
+      if (!state || finished || actionsLocked) return;
+      const ticket = beginAction(state, "match");
+      if (!ticket) return;
       focusedTileBeforeMutation.current =
         ids.find((id) => tileRefs.current.get(id) === document.activeElement) ?? null;
       setChecking(ids);
       setBusy(true);
       try {
         const result = await perechiApi.match(state.game_id, ids);
+        if (!mayAdoptAction(ticket, state, "match")) return;
+        if (result.game_id !== ticket.gameId) {
+          await reconcile(ticket, state, "match");
+          return;
+        }
         queueFocusAfterUpdate(result, ids);
         setState(result);
         setSelected(null);
@@ -257,21 +370,20 @@ export default function Perechi({ onExit, onToast }: Props) {
           sound.playError();
         }
       } catch {
-        const fresh = await reconcile(state, "match");
-        if (!fresh) sound.playError();
+        await reconcile(ticket, state, "match");
       } finally {
-        releaseFlight(actionInFlight);
-        focusedTileBeforeMutation.current = null;
-        setChecking(null);
-        setBusy(false);
+        if (actionOwner.finish(ticket)) {
+          setChecking(null);
+          setBusy(false);
+        }
       }
     },
-    [busy, finished, queueFocusAfterUpdate, reconcile, state],
+    [actionsLocked, actionOwner, beginAction, finished, mayAdoptAction, queueFocusAfterUpdate, reconcile, state],
   );
 
   const choose = useCallback(
     (id: string) => {
-      if (!state || finished || busy) return;
+      if (!state || finished || actionsLocked || actionOwner.hasPending()) return;
       sound.playSelect();
       if (selected === id) {
         setSelected(null);
@@ -286,35 +398,39 @@ export default function Perechi({ onExit, onToast }: Props) {
       const pair: [string, string] = [selected, id];
       void submitPair(pair);
     },
-    [busy, finished, selected, state, submitPair],
+    [actionsLocked, actionOwner, finished, selected, state, submitPair],
   );
 
   const requestHint = useCallback(async () => {
     if (
       !state ||
       finished ||
-      busy ||
-      !state.hint_available ||
-      !acquireFlight(actionInFlight)
+      actionsLocked ||
+      !state.hint_available
     ) {
       return;
     }
+    const ticket = beginAction(state, "hint");
+    if (!ticket) return;
     focusedTileBeforeMutation.current = null;
     setBusy(true);
     try {
       const fresh = await perechiApi.hint(state.game_id);
+      if (!mayAdoptAction(ticket, state, "hint")) return;
+      if (fresh.game_id !== ticket.gameId) {
+        await reconcile(ticket, state, "hint");
+        return;
+      }
       setState(fresh);
       setSelected(null);
       setFeedback(`Indiciu: ${fresh.hint.label}. Atinge cele două cuvinte marcate.`);
       sound.playSelect();
     } catch {
-      const fresh = await reconcile(state, "hint");
-      if (!fresh) sound.playError();
+      await reconcile(ticket, state, "hint");
     } finally {
-      releaseFlight(actionInFlight);
-      setBusy(false);
+      if (actionOwner.finish(ticket)) setBusy(false);
     }
-  }, [busy, finished, reconcile, state]);
+  }, [actionsLocked, actionOwner, beginAction, finished, mayAdoptAction, reconcile, state]);
 
   const copyShare = useCallback(async () => {
     if (!sharePayload) return;
@@ -381,7 +497,19 @@ export default function Perechi({ onExit, onToast }: Props) {
           </Hud>
         </GameShell>
 
-        {!finished && (
+        {!finished && actionSync && (
+          <div className="card col perechi-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
+            <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
+            <span>{actionSync.kind === "changed"
+              ? "Încarcă jocul curent pentru a continua."
+              : "Acțiunea poate fi deja salvată. Verifică jocul înainte de o nouă alegere sau de un indiciu."}</span>
+            <Button type="button" onClick={() => void retryActionSync()} disabled={busy || !isPresent}>
+              {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
+            </Button>
+          </div>
+        )}
+
+        {!finished && !actionSync && (
           <NextMove
             icon={selected ? "👉" : "👆"}
             title={selected ? "Atinge perechea lui" : "Atinge primul cuvânt"}
@@ -434,7 +562,7 @@ export default function Perechi({ onExit, onToast }: Props) {
                     isHinted ? " perechi-tile--hinted" : ""
                   }`}
                   onClick={() => choose(tile.id)}
-                  disabled={busy}
+                  disabled={actionsLocked}
                   aria-pressed={isSelected}
                   aria-label={`${tile.label}${isHinted ? ", marcat de indiciu" : ""}`}
                   whileTap={{ scale: 0.97 }}
@@ -448,7 +576,7 @@ export default function Perechi({ onExit, onToast }: Props) {
         )}
 
         <AnimatePresence mode="wait">
-          {!finished && feedback && (
+          {!finished && !actionSync && feedback && (
             <m.div
               key={feedback}
               className="perechi-feedback card"
@@ -467,7 +595,7 @@ export default function Perechi({ onExit, onToast }: Props) {
           <div className="perechi-actions">
             <Button
               variant="secondary"
-              disabled={busy || !state.hint_available}
+              disabled={actionsLocked || !state.hint_available}
               onClick={() => void requestHint()}
               title={
                 state.hint_available
@@ -486,7 +614,7 @@ export default function Perechi({ onExit, onToast }: Props) {
             {selected && (
               <Button
                 variant="secondary"
-                disabled={busy}
+                disabled={actionsLocked}
                 onClick={() => {
                   setSelected(null);
                   setFeedback("Alegerea a fost golită.");
@@ -516,6 +644,7 @@ export default function Perechi({ onExit, onToast }: Props) {
               replayLabel={state.daily ? "Joacă liber →" : undefined}
               onOptions={() => {
                 if (startInFlight.current) return;
+                actionOwner.invalidate();
                 setState(null);
               }}
               onExit={exitSafely}

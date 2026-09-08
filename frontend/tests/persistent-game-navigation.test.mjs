@@ -37,7 +37,7 @@ test("narrow screens keep exit visible and offset every second sticky game surfa
   assert.match(shell, /\{busy \? "Se pregătește…" : "Ieși"\}/);
   assert.match(
     css,
-    /@media \(max-width: 640px\)[\s\S]*?--game-shell-sticky-top: env\(safe-area-inset-top\);[\s\S]*?--game-shell-sticky-offset: calc\(env\(safe-area-inset-top\) \+ 60px\);[\s\S]*?\.game-shell-header \{[\s\S]*?position: sticky;[\s\S]*?top: var\(--game-shell-sticky-top\);[\s\S]*?z-index: 12;/,
+    /@media \(max-width: 640px\)[\s\S]*?--game-shell-sticky-top: env\(safe-area-inset-top\);[\s\S]*?--game-shell-sticky-offset: calc\(env\(safe-area-inset-top\) \+ var\(--game-shell-header-height, 52px\) \+ 8px\);[\s\S]*?\.game-shell-header \{[\s\S]*?position: sticky;[\s\S]*?top: var\(--game-shell-sticky-top\);[\s\S]*?z-index: 12;/,
   );
   for (const selector of [
     "connections-coach-stack",
@@ -53,10 +53,7 @@ test("narrow screens keep exit visible and offset every second sticky game surfa
     );
   }
   assert.doesNotMatch(css, /\.game-shell-title \{\s*display: none/);
-  assert.match(
-    css,
-    /@media \(max-width: 360px\) \{[\s\S]*?\.game-shell-title \{[\s\S]*?clip: rect\(0 0 0 0\)/,
-  );
+  assert.doesNotMatch(css, /\.game-shell-title \{[^}]*clip:/);
 });
 
 test("only the compact Conexiuni coach sticks; feedback remains before the board", () => {

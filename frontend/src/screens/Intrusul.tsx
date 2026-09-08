@@ -2,14 +2,15 @@
 // Every decision and point comes from the server; the browser only adds compact,
 // touch-first feedback around the earned public state.
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, m } from "framer-motion";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, m, useIsPresent } from "framer-motion";
 import { Button, type ToastKind } from "@roedu/ui";
 import {
   acquireFlight,
-  recoverAuthoritative,
   releaseFlight,
 } from "../asyncControl.mjs";
+import { ApiError } from "../api/client";
+import { createGameActionOwner, recoverOwnedGameAction, type GameActionTicket } from "../gameActionRecovery.mjs";
 import {
   intrusulApi,
   type CreateIntrusulOpts,
@@ -50,9 +51,22 @@ interface StartOpts {
 
 export default function Intrusul({ onExit, onToast }: Props) {
   const active = useActiveGame(GAME_KEY);
+  const isPresent = useIsPresent();
   const recordOnce = useRecordScore(GAME_KEY);
   const startInFlight = useRef(false);
-  const actionInFlight = useRef(false);
+  const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
+  const [actionSync, setActionSync] = useState<{
+    previous: IntrusulState;
+    action: "guess" | "hint";
+    kind: "failed" | "changed";
+    savedId: string | null;
+  } | null>(null);
+  useEffect(() => () => actionOwner.invalidate(), [actionOwner]);
+  useLayoutEffect(() => {
+    if (!isPresent) {
+      actionOwner.invalidate();
+    }
+  }, [actionOwner, isPresent]);
   const [state, setState] = useState<IntrusulState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
   const [loading, setLoading] = useState(() => active.peek() !== null);
@@ -62,16 +76,22 @@ export default function Intrusul({ onExit, onToast }: Props) {
   const [puzzleRecordHit, setPuzzleRecordHit] = useState(false);
 
   const finished = Boolean(state?.won || state?.lost);
+  const actionsLocked = !isPresent || loading || busy || actionSync !== null;
   // Re-read after a terminal write when the player returns to this intro.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const best = useMemo(() => bestScore(GAME_KEY), [state]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const starterVisible = useMemo(() => needsDerivedStarter(GAME_KEY), [state]);
   const exitSafely = useCallback(() => {
-    if (!startInFlight.current) onExit();
-  }, [onExit]);
+    if (startInFlight.current) return;
+    actionOwner.invalidate();
+    onExit();
+  }, [actionOwner, onExit]);
 
   const applyResumedGame = useCallback((fresh: IntrusulState) => {
+    actionOwner.invalidate();
+    setActionSync(null);
+    setBusy(false);
     setStartFailed(false);
     setState(fresh);
     setFeedback(
@@ -79,7 +99,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
         ? null
         : "Joc reluat. Atinge cuvântul care nu se potrivește.",
     );
-  }, []);
+  }, [actionOwner]);
   const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
     active,
     load: intrusulApi.get,
@@ -90,7 +110,9 @@ export default function Intrusul({ onExit, onToast }: Props) {
 
   const start = useCallback(
     async ({ daily, previousGameId }: StartOpts = {}) => {
+      if (!isPresent) return;
       if (!acquireFlight(startInFlight)) return;
+      actionOwner.invalidate();
       cancelResume();
       setStartFailed(false);
       setLoading(true);
@@ -104,6 +126,8 @@ export default function Intrusul({ onExit, onToast }: Props) {
       try {
         const fresh = await intrusulApi.create(opts);
         setState(fresh);
+        setActionSync(null);
+        setBusy(false);
         active.remember(fresh.game_id);
         dismissRecovery();
         setFeedback(null);
@@ -116,7 +140,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
         setLoading(false);
       }
     },
-    [active, cancelResume, dismissRecovery],
+    [active, actionOwner, cancelResume, dismissRecovery, isPresent],
   );
 
   const puzzleKey = useMemo(() => {
@@ -140,7 +164,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   }, [finished, puzzleKey, state]);
 
   useEffect(() => {
-    if (!state || !finished || state.score === undefined) return;
+    if (!isPresent || !state || !finished || state.score === undefined) return;
     if (!state.daily) rememberDerivedReplayId(GAME_KEY, state.game_id);
     const detail = state.won
       ? `${state.mistakes} ${state.mistakes === 1 ? "greșeală" : "greșeli"}`
@@ -163,16 +187,54 @@ export default function Intrusul({ onExit, onToast }: Props) {
     return () => {
       current = false;
     };
-  }, [active, finished, puzzleKey, recordOnce, state]);
+  }, [active, finished, isPresent, puzzleKey, recordOnce, state]);
+
+  const beginAction = useCallback((previous: IntrusulState, action: "guess" | "hint") => {
+    if (!isPresent || startInFlight.current) return null;
+    const ticket = actionOwner.begin(previous.game_id);
+    if (!ticket) return null;
+    if (!actionOwner.owns(ticket)) {
+      actionOwner.finish(ticket);
+      setActionSync({ previous, action, savedId: ticket.savedId, kind: "changed" });
+      return null;
+    }
+    return ticket;
+  }, [actionOwner, isPresent]);
+
+  const mayAdoptAction = useCallback((ticket: GameActionTicket, previous: IntrusulState, action: "guess" | "hint") => {
+    if (!actionOwner.isCurrent(ticket)) return false;
+    if (!actionOwner.owns(ticket)) {
+      setActionSync({ previous, action, savedId: ticket.savedId, kind: "changed" });
+      return false;
+    }
+    return true;
+  }, [actionOwner]);
 
   const reconcile = useCallback(
-    async (previous: IntrusulState, action: "guess" | "hint") => {
-      const recovered = await recoverAuthoritative(() => intrusulApi.get(previous.game_id));
-      if (!recovered.ok) {
-        setFeedback("Nu am putut confirma acțiunea. Jocul rămâne salvat; încearcă din nou.");
-        return null;
+    async (ticket: GameActionTicket, previous: IntrusulState, action: "guess" | "hint") => {
+      const recovered = await recoverOwnedGameAction(
+        actionOwner, ticket, intrusulApi.get,
+        (error) => error instanceof ApiError && error.status === 404,
+      );
+      if (!mayAdoptAction(ticket, previous, action)) return;
+      if (recovered.kind === "missing") {
+        if (ticket.savedId === ticket.gameId && !active.forgetIfCurrent(ticket.gameId)) {
+          setActionSync({ previous, action, savedId: ticket.savedId, kind: "changed" });
+          return;
+        }
+        setActionSync(null);
+        setState(null);
+        setFeedback(null);
+        onToast("Jocul nu mai este disponibil. Poți începe altul.", "info");
+        return;
       }
-      const fresh = recovered.value;
+      if (recovered.kind !== "recovered") {
+        setActionSync({ previous, action, savedId: ticket.savedId, kind: "failed" });
+        setFeedback(null);
+        return;
+      }
+      const fresh = recovered.state;
+      setActionSync(null);
       setState(fresh);
       if (fresh.won || fresh.lost) {
         setFeedback(null);
@@ -183,57 +245,94 @@ export default function Intrusul({ onExit, onToast }: Props) {
       } else {
         setFeedback("Joc sincronizat. Poți continua.");
       }
-      return fresh;
     },
-    [],
+    [actionOwner, active, mayAdoptAction, onToast],
   );
+
+  const retryActionSync = useCallback(async () => {
+    if (!isPresent || !state || busy || !actionSync) return;
+    if (actionSync.kind === "changed") {
+      actionOwner.invalidate();
+      setActionSync(null);
+      setState(null);
+      setLoading(true);
+      retryResume();
+      return;
+    }
+    const { previous, action } = actionSync;
+    if (state.game_id !== previous.game_id) return;
+    const ticket = beginAction(previous, action);
+    if (!ticket) return;
+    // A retry continues the original ownership claim, including a known saved ID.
+    // It must not reinterpret a pointer removed since the failed read as unavailable storage.
+    if (ticket.savedId !== actionSync.savedId) {
+      actionOwner.finish(ticket);
+      setActionSync({ ...actionSync, kind: "changed" });
+      return;
+    }
+    setBusy(true);
+    try {
+      await reconcile(ticket, previous, action);
+    } finally {
+      if (actionOwner.finish(ticket)) setBusy(false);
+    }
+  }, [state, busy, actionSync, actionOwner, beginAction, isPresent, reconcile, retryResume]);
 
   const choose = useCallback(
     async (id: string) => {
-      if (!state || finished || busy || !acquireFlight(actionInFlight)) return;
+      if (!state || finished || actionsLocked) return;
+      const ticket = beginAction(state, "guess");
+      if (!ticket) return;
       setBusy(true);
       try {
         const result = await intrusulApi.guess(state.game_id, id);
+        if (!mayAdoptAction(ticket, state, "guess")) return;
+        if (result.game_id !== ticket.gameId) {
+          await reconcile(ticket, state, "guess");
+          return;
+        }
         setState(result);
         setFeedback(result.message);
         // The terminal effect owns the win sound and score recording.
         if (!result.correct && result.already_tried) sound.playUndo();
         else if (!result.correct) sound.playError();
       } catch {
-        const fresh = await reconcile(state, "guess");
-        if (!fresh) sound.playError();
+        await reconcile(ticket, state, "guess");
       } finally {
-        releaseFlight(actionInFlight);
-        setBusy(false);
+        if (actionOwner.finish(ticket)) setBusy(false);
       }
     },
-    [busy, finished, reconcile, state],
+    [actionsLocked, actionOwner, beginAction, finished, mayAdoptAction, reconcile, state],
   );
 
   const requestHint = useCallback(async () => {
     if (
       !state ||
       finished ||
-      busy ||
-      !state.hint_available ||
-      !acquireFlight(actionInFlight)
+      actionsLocked ||
+      !state.hint_available
     ) {
       return;
     }
+    const ticket = beginAction(state, "hint");
+    if (!ticket) return;
     setBusy(true);
     try {
       const fresh = await intrusulApi.hint(state.game_id);
+      if (!mayAdoptAction(ticket, state, "hint")) return;
+      if (fresh.game_id !== ticket.gameId) {
+        await reconcile(ticket, state, "hint");
+        return;
+      }
       setState(fresh);
       setFeedback(fresh.clue?.message ?? "Indiciul este pe tablă.");
       sound.playSelect();
     } catch {
-      const fresh = await reconcile(state, "hint");
-      if (!fresh) sound.playError();
+      await reconcile(ticket, state, "hint");
     } finally {
-      releaseFlight(actionInFlight);
-      setBusy(false);
+      if (actionOwner.finish(ticket)) setBusy(false);
     }
-  }, [busy, finished, reconcile, state]);
+  }, [actionsLocked, actionOwner, beginAction, finished, mayAdoptAction, reconcile, state]);
 
   const copyShare = useCallback(async () => {
     if (!sharePayload) return;
@@ -298,7 +397,19 @@ export default function Intrusul({ onExit, onToast }: Props) {
           </Hud>
         </GameShell>
 
-        {!finished && (
+        {!finished && actionSync && (
+          <div className="card col intrusul-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
+            <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
+            <span>{actionSync.kind === "changed"
+              ? "Încarcă jocul curent pentru a continua."
+              : "Acțiunea poate fi deja salvată. Verifică jocul înainte de o nouă alegere sau de un indiciu."}</span>
+            <Button type="button" onClick={() => void retryActionSync()} disabled={busy || !isPresent}>
+              {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
+            </Button>
+          </div>
+        )}
+
+        {!finished && !actionSync && (
           <NextMove
             icon="🔎"
             title="Care este intrusul?"
@@ -327,7 +438,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
                   type="button"
                   className={`card intrusul-tile${tried ? " intrusul-tile--tried" : ""}`}
                   onClick={() => void choose(tile.id)}
-                  disabled={busy}
+                  disabled={actionsLocked}
                   aria-label={`${tile.label}${tried ? ", face parte din grup; repetarea este fără cost" : ""}`}
                   whileTap={{ scale: 0.97 }}
                 >
@@ -340,7 +451,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
         )}
 
         <AnimatePresence mode="wait">
-          {!finished && feedback && (
+          {!finished && !actionSync && feedback && (
             <m.div
               key={feedback}
               className="intrusul-feedback card"
@@ -359,7 +470,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
           <div className="intrusul-actions">
             <Button
               variant="secondary"
-              disabled={busy || !state.hint_available}
+              disabled={actionsLocked || !state.hint_available}
               onClick={() => void requestHint()}
               title={
                 state.hint_available
@@ -395,6 +506,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
             replayLabel={state.daily ? "Joacă liber →" : undefined}
             onOptions={() => {
               if (startInFlight.current) return;
+              actionOwner.invalidate();
               setState(null);
             }}
             onExit={exitSafely}

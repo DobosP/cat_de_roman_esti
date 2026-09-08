@@ -1,0 +1,34 @@
+{
+  "kind": "v91-sport-seed-writer-targeted-verification",
+  "date": "2026-09-08",
+  "test_command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_v91_sport_seed_revision.py -q --basetemp=/home/dobo/work/_temp/feat__v91-recovery-and-mobile-clarity/seed-revision-pytest",
+  "test_exit_code": 0,
+  "passed": 37,
+  "failed": 0,
+  "skipped": 0,
+  "log": "seed-revision-targeted.log",
+  "log_sha256": "498e6947c683cfc4d9d8dd6500f7bced1426c92501b2b6f938049aa6eb2024c6",
+  "lint_command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m ruff check scripts/apply_sport_seed_revision_v91.py tests/test_v91_sport_seed_revision.py",
+  "lint_exit_code": 0,
+  "initial_lint_findings": "First lint call reported two E501 lines (102 and 103 columns); wrapped those two lines before the passing lint and only test run. Initial output is retained in the tool record, not this pytest log.",
+  "input_sha256": {
+    "scripts/apply_sport_seed_revision_v91.py": "310230f4152c9007b7586c0f23c8cafd0ca469345a95f5b0d9bb7b6889bea356",
+    "tests/test_v91_sport_seed_revision.py": "cfaa51427f67218136e083fc0d683c0e07a18d6caab18a5327f3f7293a27cc53",
+    "docs/adr/0140-reviewed-sport-seed-revision.md": "e8626a1465049ba99c3c8f83fd9bf3e291f4226abdc7efaa3a7092c469391e45"
+  },
+  "data_mutation": "None in served fixtures. Positive writes and failure rollback cases used isolated copies reconstructed to the pinned V90 baseline.",
+  "coverage": [
+    "dry run exact live dossier and profile",
+    "positive write through real validators on both copies, exact sole-seeds delta",
+    "missing or unaccepted or stale input/source-bound verdicts",
+    "duplicate reviewer identities",
+    "input tamper with edited review hashes",
+    "proposal expansion including non-seed fields",
+    "source and before-pack drift",
+    "pack and KG mirror mismatch",
+    "live productive-opening and dossier drift",
+    "validation failure, interrupted second write and post-write corruption rollback",
+    "reapplication rejection",
+    "CLI explicit write switch"
+  ]
+}

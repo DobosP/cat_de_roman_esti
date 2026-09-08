@@ -1,0 +1,30 @@
+import hashlib,json,os
+from pathlib import Path
+os.environ.update(DJANGO_SETTINGS_MODULE='cat_de_roman_esti.web.settings',CAT_ACCOUNTS_ENABLED='0',CAT_DEBUG='0',ROEDU_API_URL='',ROEDU_API_KEY='')
+import django
+django.setup()
+from django.test import Client
+from cat_de_roman_esti.wordgames import alchimie as a
+ROOT=Path.cwd();REVIEW=ROOT/'docs/reviews/v91-recovery-and-mobile-clarity'
+profile=json.loads((REVIEW/'content/candidate-profile.json').read_bytes())
+records=[];client=Client()
+for route in profile['book']['routes']:
+ r=client.post('/api/wordgames/alchimie/games?seed=38&difficulty=usor');assert r.status_code==200
+ initial=r.json();game_id=initial['game_id'];session=a.store.get(game_id)
+ try:
+  assert session.pack_id=='al_sport_083'
+  assert session.seeds==profile['record']['seeds']
+  assert all(row['useful'] and row['ready'] and not row['depleted'] for row in initial['inventory'])
+  events=[{'method':'POST create','status':r.status_code,'body':initial}]
+  for step in route:
+   r=client.post(f'/api/wordgames/alchimie/games/{game_id}/combine',{'a':step['pair'][0],'b':step['pair'][1]},content_type='application/json');assert r.status_code==200
+   events.append({'method':'POST combine','pair':step['pair_labels'],'status':r.status_code,'body':r.json()})
+  assert events[-1]['body']['won'] and events[-1]['body']['moves']==2 and events[-1]['body']['score']==1000
+  r=client.get(f'/api/wordgames/alchimie/games/{game_id}');assert r.status_code==200 and r.json()['won'] and r.json()['score']==1000
+  events.append({'method':'GET resume','status':r.status_code,'body':r.json()})
+  for event in events:event['body']['game_id']='normalized-fresh-public-session'
+  records.append(events)
+ finally:a.store.delete(game_id)
+result={'scope':'Four fresh public seed38 Alchimie routes; only random game_id normalized in complete response bodies. In-process Django BFF, not browser or human acceptance.','requests':sum(map(len,records)),'journeys':records,'input_sha256':{n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in ['cat_de_roman_esti/fixtures/games_pack.json','cat_de_roman_esti/fixtures/kg_sample.json','cat_de_roman_esti/wordgames/alchimie.py','frontend/e2e/seeded-starts.json']}}
+(REVIEW/'content/final-public-bff-journeys.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+print('GREEN',len(records),'public routes',result['requests'],'requests;4wins par2 score1000; sessions deleted')

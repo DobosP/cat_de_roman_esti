@@ -1,12 +1,12 @@
 # Agent Testing Guide — cat_de_roman_esti
 
-Last verified: 2026-09-08
+Last verified: 2026-09-09
 
 ## Environment
 - Interpreter: `~/work/cat_de_roman_esti/.venv/bin/python` (Python 3.12.3; Django 5.2.16, pytest 9.1.1,
   pytest-django). It is gitignored and lives only in the shared checkout.
 - From a task worktree, prefix every command with `PYTHONPATH=.`.
-- V90 integration uses Python 3.12.3 and a fresh constrained Python 3.14.6 environment;
+- V91 integration uses Python 3.12.3 and a fresh constrained Python 3.14.6 environment;
   exact completed gate results belong in [STATUS](STATUS.md).
 - Fresh venv: `pip install -c constraints.txt -e ".[dev,web]"` (ci.yml:48).
 - Never use the `romania_scraper` venv: it has no Django, so collection gives 7 errors and only
@@ -44,7 +44,7 @@ need the `N passed` summary line to paste into the verification record.
 
 ## Known flaky / blocked
 - `tests/test_alchimie_sparse_recipes.py::test_many_mined_sessions_stay_bounded_solvable_and_fast` asserts
-  `elapsed < 45.0` (line 211) and is load-sensitive: on 2026-09-05 it passed inside the full suite at host load
+  `elapsed < 45.0` (line 293) and is load-sensitive: on 2026-09-05 it passed inside the full suite at host load
   average ≈ 28 and failed alone at 49.0 s at load ≈ 39. Check `uptime` and re-run on a quieter host before
   treating a failure as a regression; no assertion other than the timing one fails.
 - `tests/accounts/` is collect-ignored unless `CAT_ACCOUNTS_ENABLED=1` (pyproject.toml:75-77).

@@ -1,5 +1,5 @@
 // Hud — the uniform status cluster next to the GameShell header: small stat
-// badges (moves, lives, difficulty, …) that look identical across all four games.
+// badges (moves, lives, difficulty, …) that look identical across all six games.
 
 import type { ReactNode } from "react";
 import { Badge } from "@roedu/ui";
@@ -28,7 +28,7 @@ export function StatBadge({
 /** Right-aligned wrap row for StatBadges + small actions inside a GameShell. */
 export function Hud({ children }: { children: ReactNode }) {
   return (
-    <div className="row wrap hud" role="group" aria-label="Starea jocului" tabIndex={0}
+    <div className="row wrap hud" role="group" aria-label="Starea jocului"
       style={{ gap: 8, alignItems: "center" }}>
       {children}
     </div>

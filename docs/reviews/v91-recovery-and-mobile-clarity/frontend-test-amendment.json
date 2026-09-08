@@ -1,0 +1,16 @@
+{
+  "reason": "Correct deterministic clue setup after accepted Sport seed revision. Preserve output/pair and add explicit anti-spoiler category recovery. Test-process helper adds only owned barren input pairs; original six-game initial/steps/practice fields and seeded-starts bytes unchanged.",
+  "changed_frozen_inputs": {
+    "frontend/e2e/alchimie-action-recovery.spec.mjs": {
+      "before": "42e12e20cf81ab10a4a1cc31d2203caeb11900de61360373a002512fe140c9c0",
+      "after": "1d59ca30401c5d828b5dd8c33f8976323996e4ffafbec83990835c824a4ad302"
+    },
+    "frontend/e2e/solutions.py": {
+      "before": "36c136cab6a7416f65a8e1ea72f6d07cefb810e8053997d33b96785ac9eaca38",
+      "after": "1c782ee28d7f66fd4194f8bc8700bab23e48d295c1dbd96eaa196d00872b4f5e"
+    }
+  },
+  "backend_freeze_sha256": "b22bcd9500efe78a34995114414737f8cabd18b722bbe17c283dcc52d2bcf2f8",
+  "backend_gate": "Both fullPython/account matrices used exactly unchanged backend/runtime/data/tests inputs. These two frontend test-only files are not referenced by backend tests. No backend rerun required.",
+  "frontend_gate": "Prior completedfull browser338passed/2failed retained. Finalfull browser342cases will use2isolatedworkers/0retries after focused34pass. Existinggame/mobile/recovery sources and static unchanged; oldfocusedhelper hashes are historical after this amendment."
+}

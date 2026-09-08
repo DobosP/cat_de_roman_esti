@@ -100,20 +100,20 @@ CURRENT_CONTENT = CurrentContentSnapshot(
             'd4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109'
         ),
         'cat_de_roman_esti/fixtures/games_pack.json': (
-            'e32139529aacc88e2f453ac1cee1d8cd9a2cd1b16f3ee0551a5a76779192391e'
+            '6bf27de5da270258290ecb4ed41c3ef60a609e3e153855f38b7556a7f2aedeca'
         ),
         'cat_de_roman_esti/fixtures/board_rankings_v37.json': (
-            'b5beb978b911c952ef2632cb2d93bc695be19f226b4a4661d77e26b335413fab'
+            '01fc906e390b8d3135f1856930458aa86873a525049b419eceb8652c72f717f8'
         ),
         'cat_de_roman_esti/fixtures/derived_catalog_v38.json': (
-            '6ac090bc2186bf00209913d1123ba3f54de9f7b02f9fa2a781f2dfcccbbf58a9'
+            '53fb3e4555205179072bd54a45f5b1b185de064625893dcf288902574a075e64'
         ),
         'tests/fixtures/cat_mobile_app_pack_contract.json': (
             '5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f'
         ),
     }),
     payload_sha256=_frozen({
-        'ranking_rows': 'bf321fe40377f02f0ed5cb107c303eb87fac9428f7296549a55c8659acc3ba08',
+        'ranking_rows': '5bb5a8986421ac66057ae292bed95f9f3a4ba86a8eb55ff971017c3b436b7b4d',
         'frozen_derived_boards': '1aa4138171644870f65ca1925f05c066f94e0dac087fd3682b5c374f225b86db',
         'kg_nodes_without_aliases': (
             '413ef622714003dfb7c0b4ff90a84d7c3f943ede2d62aee934385ed12eadd8c0'

@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-09",
+  "reviewer": "v91_migration_audit",
+  "kind": "bounded-sparse-recipe-expectation-correction",
+  "finding": "Two stale current-content test expectations, not a recipe-engine regression. The reviewed Sport 083 replacement is the sole projection change.",
+  "repo_edits_by_reviewer": [],
+  "initial_test_run": {
+    "exit_code": 1,
+    "failed": 2,
+    "elapsed_seconds": 32.81,
+    "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest -o addopts= -vv --tb=long tests/test_alchimie_sparse_recipes.py::test_all_approved_boards_have_sparse_deterministic_target_routes tests/test_alchimie_sparse_recipes.py::test_selected_routes_prefer_the_strongest_discovered_shortest_alternative",
+    "source_sha256": "2f5f75d41119d509a579f0f6b7def008d29ad0aaf6d9aebbbb8545a9cbd7b250"
+  },
+  "candidate_validation": {
+    "exit_code": 0,
+    "passed": 2,
+    "failed": 0,
+    "elapsed_seconds": 33.91,
+    "tested_source_sha256": "094588e85c72ae04fa8e3fe9c9730b0505832a0785b9d280c019d20875a1be62",
+    "tested_repository_layout_source_sha256": "a8b0846d262467718c30e6a6938112b32f476cbadd14207926aefa19f26de107",
+    "final_source_sha256": "9332d773e439a9002d08d2f6be7430530020b2941d4fc610443492d0438ab750",
+    "patch_sha256": "9d3ba657c40695b31900299e59fdad6d1d83260ebb24cbd98a0691a97089055f",
+    "candidate_copy_difference": "Only fixture-root lookup replaces __file__-relative discovery with the explicit frozen repository path.",
+    "lint_correction": "Split three imported names onto separate lines. Original and final candidate ASTs compare equal; initial lint failure and both source snapshots are retained.",
+    "final_ruff_exit_code": 0,
+    "git_apply_check_exit_code": 0
+  },
+  "preserved_checks": [
+    "Exact V87 79-board digest and route distribution",
+    "Exact reconstructed V90 80-board digest, 555 recipes, 77 two-result recipes and median 0.67",
+    "New exact V91 80-board digest and only Sport 083 differs",
+    "All per-board target depth, route/recipe/result/concept bounds, required tied outputs, minimum plan solvability, strongest shortest alternative ordering, weak route exclusion and cold performance ceiling",
+    "Five known weak fallbacks and minimum strength 0.40",
+    "64 boards with at least two openings and 16 with one opening"
+  ],
+  "current_metrics": {
+    "boards": 80,
+    "recipes": 554,
+    "two_result_recipes": 76,
+    "median_selected_strength": 0.68,
+    "opening_counts": {
+      "1": 16,
+      "2": 27,
+      "3": 29,
+      "4": 7,
+      "5": 1
+    }
+  },
+  "cold_metrics_artifact_sha256": "61bea1cd3c58c1a04f0654dcd6049c426cc9052ceacd79fa05cbb985dca050d9",
+  "raw_logs": {
+    "initial-two-tests.log.gz": {
+      "decoded_sha256": "e431fc896fc4b22e0b36073c0fb875aeac965e9e4c15d1156d7c838093536d50",
+      "archive_sha256": "2f4fb16b3874406e16b626a1e0820c17c2afad00b9e28282f0a33ed7dbe308cb",
+      "decoded_bytes": 409033,
+      "archive_bytes": 46962
+    },
+    "metrics.log.gz": {
+      "decoded_sha256": "9d769a0bea6521999f4fe6c42156e3f5f8d416476d47f0db373c913a5ce72816",
+      "archive_sha256": "04ec3f51de3acdc8db367258c95692e5a5f881b1fb5d56174b454afa18269b48",
+      "decoded_bytes": 4053,
+      "archive_bytes": 909
+    },
+    "candidate-two-tests.log.gz": {
+      "decoded_sha256": "4e712686420f98c5e8d1f8e88924f11ff6862e98ca55719065cea8f663b0002e",
+      "archive_sha256": "5d11691d876f421ebe422bcaf2af22d079afe361d2a968b391fe7492f10db75a",
+      "decoded_bytes": 943,
+      "archive_bytes": 448
+    },
+    "initial-candidate-lint.log.gz": {
+      "decoded_sha256": "1c32cd85ad865ac4165f009b53f3add90586e585415ec1e3773b5867910d3a20",
+      "archive_sha256": "d9c312989dc80aef17ff3f60a0a1dd2621cf344d9980400bfe57d4f21204c8d9",
+      "decoded_bytes": 935,
+      "archive_bytes": 489
+    },
+    "final-candidate-lint.log.gz": {
+      "decoded_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "archive_sha256": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd",
+      "decoded_bytes": 19,
+      "archive_bytes": 39
+    }
+  },
+  "files_sha256": {
+    "original-repository-source.py": "2f5f75d41119d509a579f0f6b7def008d29ad0aaf6d9aebbbb8545a9cbd7b250",
+    "capture_metrics.py": "9d862ef29e9b98ef692ddb101f279caead7f83a372d690ce15112c006285f16d",
+    "metrics.json": "61bea1cd3c58c1a04f0654dcd6049c426cc9052ceacd79fa05cbb985dca050d9",
+    "draft_patch.py": "176e020ac5073de59afda532a2335e11d617e1acc5d58895bf02bdc732384500",
+    "sparse-recipe-expectations.patch": "9d3ba657c40695b31900299e59fdad6d1d83260ebb24cbd98a0691a97089055f",
+    "candidate-original-layout.py": "9332d773e439a9002d08d2f6be7430530020b2941d4fc610443492d0438ab750",
+    "test_candidate_sparse_recipes.py": "3f724c2306bd22111d7ebe0d43dec8b557d49c34d740a401d11aed089b08c4e3",
+    "initial-candidate-original-layout.py": "a8b0846d262467718c30e6a6938112b32f476cbadd14207926aefa19f26de107",
+    "initial-test_candidate_sparse_recipes.py": "094588e85c72ae04fa8e3fe9c9730b0505832a0785b9d280c019d20875a1be62"
+  },
+  "next_action": "Root applies the scratch patch after preserving the intentionally incomplete initial red matrix, then reruns the complete final backend gates. Runtime, data and frontend remain unchanged by this correction."
+}

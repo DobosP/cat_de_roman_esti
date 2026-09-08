@@ -1,0 +1,70 @@
+{
+  "kind": "independent-approved-stock-revision-review",
+  "reviewer": "root-quality",
+  "date": "2026-09-08",
+  "verdict": "accept",
+  "proposal": "revise",
+  "item_id": "al_sport_083",
+  "review_binding": "sha256:b5e181aa856470707564fa9ff3596c8bc73b3cd22ece22f1f441d7871cb573ba",
+  "before_record_sha256": "bb0ef938d92416b955abbf23602c47c63dd49700f0c866061b4ce0390c49b11a",
+  "after_record_sha256": "5666d5978c89ba537de7239f9ba205b395378bdfc20400466e4c2ced246aded5",
+  "input_sha256": {
+    "replacement-proposal.json": "1b5b5686d39c9f4ec6ac170a60b56180be38a9b8dd9c8c24f0458e9d0988658a",
+    "candidate-dossier.json": "1167dd460ae618c5916a81b98426d1bdcf57938fb53670c50b51359eec4c349a",
+    "candidate-profile.json": "1093381dc4e500661e04acc8d3797459c5a5231e69d18789f2c0f4115f9888e5",
+    "before-profile.json": "ed1b09058e94f931fba762c2b6776887ee29fabafc9f6df1aaaf0ae27b2a1406"
+  },
+  "source_bindings": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "e32139529aacc88e2f453ac1cee1d8cd9a2cd1b16f3ee0551a5a76779192391e",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "cat_de_roman_esti/wordgames/alchimie.py": "4ffd2eaf65b5e942992d7d84b52b8e221f1e2c7dfb7edff19fe35e0e74236ec8",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db"
+  },
+  "criteria": {
+    "A1": "PASS: the displayed target and Neagu anchor fit mainstream Sport play; club names have national competition/broadcast presence. This is an editorial inference, not measured recognition.",
+    "A2": "PASS: IHF career history and current LPF/TVR coverage establish sustained sports relevance; UEFA 2008 records add older CFR/Rapid/Dinamo presence. No FCSB legal continuity claim.",
+    "A3": "PASS with existing copy debt: all seeds concern sport; football clubs yield their actual category. The Neagu node explicitly says retired2025, although three older edge labels retain present tense. That separate label proposal is not applied here.",
+    "A4": "PASS: IHF confirms Neagu national-team, club and 2015 Champions League history; EHF confirms competition context; LPF lists the four clubs. No recipe says Neagu played for any of those football clubs.",
+    "A5": "PASS: no adult framing, sensitive humor or newly duplicated board; this edits one existing ID.",
+    "A6": "PASS for revision: existing round identity/target/difficulty is retained, with no additional re-skin counted as new content.",
+    "A7": "PASS: club membership is definitional and Neagu supplies the specific final competition association; no fabricated regional or generic co-occurrence edge.",
+    "E1": "PASS: six recognizable sport seeds, each in an actual productive opening; three initial depleted items are removed. Four clubs emphasize one idea but none is unreachable filler.",
+    "E2": "PASS: Neagu+national team→women’s handball and two football clubs→sports club are two intuitive ideas. Four productive pairs do not constitute four distinct ideas. The sparse book deliberately does not accept every plausible club pair; no claim of complete graph closure.",
+    "E3": "PASS: the visible target explanation names Neagu, supporting discovery of her sport or club category followed by a second combination with her. All four selected routes reach the target in two actions.",
+    "E4": "PASS: target is neither seed nor alias/near-synonym; no seed pair directly gives it.",
+    "E5": "PASS: six private recipes and four routes remain bounded; one output per recipe. The full-graph closure145 is not the served book."
+  },
+  "sources": [
+    {
+      "url": "https://www.ihf.info/media-center/news/unstoppable-8-says-farewell-was-my-calling",
+      "supports": "Neagu career, national team, clubs, retirement and2015 title",
+      "opened": "2026-09-08"
+    },
+    {
+      "url": "https://www.eurohandball.com/en/news/en/all-eyes-on-the-title-with-neagu-on-board/",
+      "supports": "Club competition and Neagu context",
+      "opened": "2026-09-08"
+    },
+    {
+      "url": "https://lpf.ro/cluburi",
+      "supports": "Current football club identities",
+      "opened": "2026-09-08"
+    },
+    {
+      "url": "https://tvrinfo.ro/fotbal-dinamo-rapid-0-0-pas-gresit-pentru-giulesteni-in-cursa-pentru-europa/",
+      "supports": "2025 broadcast coverage of all four clubs",
+      "opened": "2026-09-08"
+    },
+    {
+      "url": "https://www.uefa.com/news-media/news/01cd-0e6f5de8b57d-86882fccb6da-1000--cfr-cluj-crowned-in-romania/",
+      "supports": "2008 CFR, Rapid and Dinamo competition presence",
+      "opened": "2026-09-08"
+    }
+  ],
+  "limitations": [
+    "Target salience0.4323 WARN retained; no audience survey or human playtest.",
+    "Only six-seed replacement approved; three past-tense labels remain a separate unapplied proposal.",
+    "No new concept/link/form/synonym/round and no approval-status change."
+  ]
+}

@@ -772,3 +772,26 @@ shows Intrusul/Perechi clues already surviveGET and repeated hints are rejected 
 another charge. Browser uncertainty/ownership still needs reproduction. Existing Sport
 record083 and four thin approved Contexto targets are review questions, not approved
 changes. No V91 implementation is claimed; finish its green local landing, then stop.
+
+## V91 verified candidate (2026-09-09)
+
+Valid until: the verified candidate is locally landed — then treat as history.
+
+Final version under ADR-0137: shared mobile titles/HUD/notices, owned Intrusul/Perechi
+recovery with retry and animated departure protection, and one reviewed Sport083 seed
+revision (ADR-0138–0140). Zero new concepts/links/forms/synonyms/rounds; all six seeds now
+useful, four opening pairs/two ideas, six recipes/four routes/par 2. Graph/mobile and the
+other 660 pack records/82 Alchimie books/336 derived boards remain exact. Ranking changes
+and unresolved salience/label/household questions are explicit in STATUS and the review.
+
+All 16 local gates pass: 1652 backend+53 accounts on Python 3.12 and 3.14; 193 frontend native
+and 342 real-browser cases (two workers,zero retries); validators,lint,type/build/budget,
+Ruff,docs and whitespace. Bundle 119.08/120KiB. Independent migration/history 85, recovery 80,
+mobile 14 and corrected Alchimie 34 focused checks pass. The initial interrupted backend red
+run (1265 pass/two stale expectations) and completed browser red run (338 pass/two old hint
+setups) are retained. Exact historical snapshots and all three clue kinds stay covered.
+Serving code/data/assets remain unchanged through these test-only amendments.
+
+Evidence is under docs/reviews/v91-recovery-and-mobile-clarity/. Land locally, clean only
+this verified worktree/branch/scratch, keep recurrence paused and do not start V92. No push,
+deployment, accounts rollout or human/device acceptance is claimed.

@@ -72,6 +72,10 @@ export default function App() {
           <Suspense fallback={null}>
             <AccountBar />
           </Suspense>
+          <div className="app-notices">
+            <ToastStack toasts={toasts} onDismiss={dismissToast} />
+          </div>
+          <div className="app-content">
           <AnimatePresence mode="wait">
             <Suspense
               key={location.pathname}
@@ -150,8 +154,7 @@ export default function App() {
               </Routes>
             </Suspense>
           </AnimatePresence>
-
-          <ToastStack toasts={toasts} onDismiss={dismissToast} />
+          </div>
         </div>
       </LazyMotion>
     </MotionConfig>

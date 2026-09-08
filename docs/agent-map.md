@@ -43,4 +43,4 @@
 - The `romania_scraper` venv has no Django — use the interpreter named in `docs/agent-testing.md`.
 - Pointing `CAT_KG_FIXTURE` at `kg_real.json` silently empties every curated category (data.py:34-36).
 - ADR-0020: frontend source changes ship the regenerated `web/static` bundle; backend-only changes must not.
-- `tests/test_alchimie_sparse_recipes.py:211` asserts a 45 s wall-clock budget and fails under host load.
+- `tests/test_alchimie_sparse_recipes.py:293` asserts a 45 s wall-clock budget and fails under host load.

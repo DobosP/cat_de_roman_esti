@@ -47,6 +47,9 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0136 | [Recover uncertain Alchimie actions](0136-reconcile-uncertain-alchimie-actions.md) | accepted |
 
 | 0137 | [Finish V91 and stop automatic iteration](0137-finish-v91-and-stop-iteration-loop.md) | accepted |
+| 0138 | [Owned Intrusul and Perechi action recovery](0138-owned-intrusul-perechi-recovery.md) | accepted |
+| 0139 | [Visible mobile status and notices](0139-visible-mobile-status-and-notices.md) | accepted |
+| 0140 | [Reviewed Sport seed revision](0140-reviewed-sport-seed-revision.md) | accepted |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially

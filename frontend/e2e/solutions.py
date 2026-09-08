@@ -11,6 +11,7 @@ import importlib
 import json
 import os
 import sys
+from itertools import combinations
 from pathlib import Path
 from urllib.parse import urlencode
 
@@ -41,6 +42,7 @@ def solution(game: str) -> dict:
     session = module.store.get(initial["game_id"])
     svc = get_service()
     steps = []
+    hint_setup = None
 
     def tiles(action: str, ids: list[str]) -> None:
         payload = {"id": ids[0]} if game == "intrusul" else {"ids": ids}
@@ -63,6 +65,15 @@ def solution(game: str) -> dict:
             raise ValueError("browser fixture needs a nonempty crafting plan")
         for pair in plan:
             tiles("combine", list(pair))
+        # Only the test process reads this private projection. These inputs are
+        # already-owned seeds; no output/target IDs or recipe map leave this helper.
+        hint_setup = [
+            {"a": a, "b": b}
+            for a, b in combinations(sorted(session.owned), 2)
+            if not session.recipes.get(module._pair_key(a, b))
+        ]
+        if len(hint_setup) < 2 * module.NUDGE_AFTER_FRUITLESS:
+            raise ValueError("browser fixture needs enough barren pairs for both hint stages")
     elif game == "contexto":
         steps.append({"action": "guess", "payload": {"text": svc.label(session.target)}})
     elif game == "lant":
@@ -92,7 +103,10 @@ def solution(game: str) -> dict:
                     if n != session.target and svc.resolve(svc.label(n)) == n)
         practice = {"action": "guess", "payload": {"text": svc.label(node)}}
     initial.pop("game_id")
-    return {"initial": initial, "steps": steps, "practice": practice}
+    result = {"initial": initial, "steps": steps, "practice": practice}
+    if hint_setup is not None:
+        result["hint_setup"] = hint_setup
+    return result
 
 
 if __name__ == "__main__":

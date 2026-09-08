@@ -1,0 +1,16 @@
+from pathlib import Path
+import gzip,hashlib,io,json,tarfile
+root=Path(__file__).resolve().parent
+for stem,archive_name in [('baseline','baseline-evidence.tar.gz'),('initial-candidate','initial-candidate-evidence.tar.gz'),('review-findings','review-findings-evidence.tar.gz'),('third-candidate','third-candidate-evidence.tar.gz'),('independent-final','independent-final-evidence.tar.gz'),('final-candidate','final-candidate-evidence.tar.gz')]:
+ manifest_path=root/f'{stem}-manifest.json'
+ if not manifest_path.exists():continue
+ manifest=json.loads(manifest_path.read_text());raw=(root/archive_name).read_bytes()
+ assert raw[4:8]==b'\0'*4,(stem,'gzipmtime')
+ assert hashlib.sha256(raw).hexdigest()==manifest['archive_sha256'],(stem,'archivehash')
+ with tarfile.open(fileobj=io.BytesIO(gzip.decompress(raw))) as tar:
+  entries={x.name:tar.extractfile(x).read() for x in tar.getmembers() if x.isfile()}
+ assert set(entries)==set(manifest['entries']),(stem,'entries')
+ for name,expected in manifest['entries'].items():
+  assert hashlib.sha256(entries[name]).hexdigest()==expected['sha256'],(stem,name,'hash')
+  assert len(entries[name])==expected['bytes'],(stem,name,'bytes')
+ print(f'{stem}: {len(entries)} exact entries, gzipmtime0, archivehash GREEN')

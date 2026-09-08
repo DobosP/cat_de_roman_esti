@@ -1,0 +1,1899 @@
+{
+  "method": "Django in-process real GET/combine handlers; ephemeral sessions built from raw proposed record, no approved-pack mutation or database writes",
+  "before": [
+    {
+      "method": "GET",
+      "status": 200,
+      "response": {
+        "game_id": "ephemeral-content-review-session",
+        "target": {
+          "id": null,
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": false
+        },
+        "inventory": [
+          {
+            "id": "n_spt_washington_bullets",
+            "label": "Washington Bullets",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v3spo_medalie",
+            "label": "Medalie",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_bazin_olimpic",
+            "label": "Bazin olimpic",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_tricolorii",
+            "label": "Tricolorii",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          }
+        ],
+        "inventory_summary": {
+          "active": 3,
+          "depleted": 3,
+          "total": 6
+        },
+        "discovered_count": 0,
+        "seed_count": 6,
+        "moves": 0,
+        "attempted_count": 0,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": false,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 7,
+          "routes": 4,
+          "max_results": 2
+        },
+        "board_category": "sport"
+      }
+    },
+    {
+      "method": "POST combine",
+      "pair": [
+        "n_spt_cristina_neagu",
+        "n_spt_washington_bullets"
+      ],
+      "pair_labels": [
+        "Cristina Neagu",
+        "Washington Bullets"
+      ],
+      "status": 200,
+      "response": {
+        "game_id": "ephemeral-content-review-session",
+        "target": {
+          "id": null,
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": false
+        },
+        "inventory": [
+          {
+            "id": "n_spt_washington_bullets",
+            "label": "Washington Bullets",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v3spo_medalie",
+            "label": "Medalie",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_bazin_olimpic",
+            "label": "Bazin olimpic",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_tricolorii",
+            "label": "Tricolorii",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v2spo_club_sportiv",
+            "label": "Club sportiv",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_spt_washington_bullets",
+                "label": "Washington Bullets"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "joacă la cluburi"
+              },
+              {
+                "source": {
+                  "id": "n_spt_washington_bullets",
+                  "label": "Washington Bullets"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "este club"
+              }
+            ],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          }
+        ],
+        "inventory_summary": {
+          "active": 3,
+          "depleted": 4,
+          "total": 7
+        },
+        "discovered_count": 1,
+        "seed_count": 6,
+        "moves": 1,
+        "attempted_count": 1,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": false,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 7,
+          "routes": 4,
+          "max_results": 2
+        },
+        "board_category": "sport",
+        "discovered": [
+          {
+            "id": "n_v2spo_club_sportiv",
+            "label": "Club sportiv"
+          }
+        ],
+        "already_tried": false,
+        "message": "Ai descoperit: Club sportiv."
+      }
+    },
+    {
+      "method": "POST combine",
+      "pair": [
+        "n_spt_cristina_neagu",
+        "n_v2spo_club_sportiv"
+      ],
+      "pair_labels": [
+        "Cristina Neagu",
+        "Club sportiv"
+      ],
+      "status": 200,
+      "response": {
+        "game_id": "ephemeral-content-review-session",
+        "target": {
+          "id": "n_spt_liga_campionilor_handbal",
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": true
+        },
+        "inventory": [
+          {
+            "id": "n_spt_washington_bullets",
+            "label": "Washington Bullets",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v3spo_medalie",
+            "label": "Medalie",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_bazin_olimpic",
+            "label": "Bazin olimpic",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_tricolorii",
+            "label": "Tricolorii",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v2spo_club_sportiv",
+            "label": "Club sportiv",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_spt_washington_bullets",
+                "label": "Washington Bullets"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "joacă la cluburi"
+              },
+              {
+                "source": {
+                  "id": "n_spt_washington_bullets",
+                  "label": "Washington Bullets"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "este club"
+              }
+            ],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_liga_campionilor_handbal",
+            "label": "Liga Campionilor la handbal",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_v2spo_club_sportiv",
+                "label": "Club sportiv"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_spt_liga_campionilor_handbal",
+                  "label": "Liga Campionilor la handbal"
+                },
+                "label": "a jucat în"
+              },
+              {
+                "source": {
+                  "id": "n_spt_liga_campionilor_handbal",
+                  "label": "Liga Campionilor la handbal"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "competiție de cluburi"
+              }
+            ],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          }
+        ],
+        "inventory_summary": {
+          "active": 2,
+          "depleted": 6,
+          "total": 8
+        },
+        "discovered_count": 2,
+        "seed_count": 6,
+        "moves": 2,
+        "attempted_count": 2,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": true,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 7,
+          "routes": 4,
+          "max_results": 2
+        },
+        "board_category": "sport",
+        "score": 1000,
+        "share": "cat_de_roman_esti · Alchimie · Sport\n⚗️ 2 combinatii · 1000 pct ✨",
+        "discovered": [
+          {
+            "id": "n_spt_liga_campionilor_handbal",
+            "label": "Liga Campionilor la handbal"
+          }
+        ],
+        "already_tried": false,
+        "message": "Ai descoperit tinta: Liga Campionilor la handbal!"
+      }
+    },
+    {
+      "method": "GET resume",
+      "status": 200,
+      "response": {
+        "game_id": "ephemeral-content-review-session",
+        "target": {
+          "id": "n_spt_liga_campionilor_handbal",
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": true
+        },
+        "inventory": [
+          {
+            "id": "n_spt_washington_bullets",
+            "label": "Washington Bullets",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v3spo_medalie",
+            "label": "Medalie",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_bazin_olimpic",
+            "label": "Bazin olimpic",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_tricolorii",
+            "label": "Tricolorii",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v2spo_club_sportiv",
+            "label": "Club sportiv",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_spt_washington_bullets",
+                "label": "Washington Bullets"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "joacă la cluburi"
+              },
+              {
+                "source": {
+                  "id": "n_spt_washington_bullets",
+                  "label": "Washington Bullets"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "este club"
+              }
+            ],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_liga_campionilor_handbal",
+            "label": "Liga Campionilor la handbal",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_v2spo_club_sportiv",
+                "label": "Club sportiv"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_spt_liga_campionilor_handbal",
+                  "label": "Liga Campionilor la handbal"
+                },
+                "label": "a jucat în"
+              },
+              {
+                "source": {
+                  "id": "n_spt_liga_campionilor_handbal",
+                  "label": "Liga Campionilor la handbal"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "competiție de cluburi"
+              }
+            ],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          }
+        ],
+        "inventory_summary": {
+          "active": 2,
+          "depleted": 6,
+          "total": 8
+        },
+        "discovered_count": 2,
+        "seed_count": 6,
+        "moves": 2,
+        "attempted_count": 2,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": true,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 7,
+          "routes": 4,
+          "max_results": 2
+        },
+        "board_category": "sport",
+        "score": 1000,
+        "share": "cat_de_roman_esti · Alchimie · Sport\n⚗️ 2 combinatii · 1000 pct ✨"
+      }
+    }
+  ],
+  "candidate_club": [
+    {
+      "method": "GET",
+      "status": 200,
+      "response": {
+        "game_id": "ephemeral-content-review-session",
+        "target": {
+          "id": null,
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": false
+        },
+        "inventory": [
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v2spo_echipa_nationala",
+            "label": "Echipă națională",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v11spo_dinamo_bucuresti",
+            "label": "Dinamo București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v11spo_rapid_bucuresti",
+            "label": "Rapid București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v18spo_fcsb",
+            "label": "FCSB",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v18spo_cfr_cluj",
+            "label": "CFR Cluj",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          }
+        ],
+        "inventory_summary": {
+          "active": 6,
+          "depleted": 0,
+          "total": 6
+        },
+        "discovered_count": 0,
+        "seed_count": 6,
+        "moves": 0,
+        "attempted_count": 0,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": false,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 6,
+          "routes": 4,
+          "max_results": 1
+        },
+        "board_category": "sport"
+      }
+    },
+    {
+      "method": "POST combine",
+      "pair": [
+        "n_v11spo_dinamo_bucuresti",
+        "n_v18spo_fcsb"
+      ],
+      "pair_labels": [
+        "Dinamo București",
+        "FCSB"
+      ],
+      "status": 200,
+      "response": {
+        "game_id": "ephemeral-content-review-session",
+        "target": {
+          "id": null,
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": false
+        },
+        "inventory": [
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v2spo_echipa_nationala",
+            "label": "Echipă națională",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v11spo_dinamo_bucuresti",
+            "label": "Dinamo București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v11spo_rapid_bucuresti",
+            "label": "Rapid București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v18spo_fcsb",
+            "label": "FCSB",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v18spo_cfr_cluj",
+            "label": "CFR Cluj",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v2spo_club_sportiv",
+            "label": "Club sportiv",
+            "parents": [
+              {
+                "id": "n_v11spo_dinamo_bucuresti",
+                "label": "Dinamo București"
+              },
+              {
+                "id": "n_v18spo_fcsb",
+                "label": "FCSB"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_v11spo_dinamo_bucuresti",
+                  "label": "Dinamo București"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "este un club sportiv"
+              },
+              {
+                "source": {
+                  "id": "n_v18spo_fcsb",
+                  "label": "FCSB"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "este un"
+              }
+            ],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          }
+        ],
+        "inventory_summary": {
+          "active": 3,
+          "depleted": 4,
+          "total": 7
+        },
+        "discovered_count": 1,
+        "seed_count": 6,
+        "moves": 1,
+        "attempted_count": 1,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": false,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 6,
+          "routes": 4,
+          "max_results": 1
+        },
+        "board_category": "sport",
+        "discovered": [
+          {
+            "id": "n_v2spo_club_sportiv",
+            "label": "Club sportiv"
+          }
+        ],
+        "already_tried": false,
+        "message": "Ai descoperit: Club sportiv."
+      }
+    },
+    {
+      "method": "POST combine",
+      "pair": [
+        "n_spt_cristina_neagu",
+        "n_v2spo_club_sportiv"
+      ],
+      "pair_labels": [
+        "Cristina Neagu",
+        "Club sportiv"
+      ],
+      "status": 200,
+      "response": {
+        "game_id": "ephemeral-content-review-session",
+        "target": {
+          "id": "n_spt_liga_campionilor_handbal",
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": true
+        },
+        "inventory": [
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v2spo_echipa_nationala",
+            "label": "Echipă națională",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v11spo_dinamo_bucuresti",
+            "label": "Dinamo București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v11spo_rapid_bucuresti",
+            "label": "Rapid București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v18spo_fcsb",
+            "label": "FCSB",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v18spo_cfr_cluj",
+            "label": "CFR Cluj",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v2spo_club_sportiv",
+            "label": "Club sportiv",
+            "parents": [
+              {
+                "id": "n_v11spo_dinamo_bucuresti",
+                "label": "Dinamo București"
+              },
+              {
+                "id": "n_v18spo_fcsb",
+                "label": "FCSB"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_v11spo_dinamo_bucuresti",
+                  "label": "Dinamo București"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "este un club sportiv"
+              },
+              {
+                "source": {
+                  "id": "n_v18spo_fcsb",
+                  "label": "FCSB"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "este un"
+              }
+            ],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_liga_campionilor_handbal",
+            "label": "Liga Campionilor la handbal",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_v2spo_club_sportiv",
+                "label": "Club sportiv"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_spt_liga_campionilor_handbal",
+                  "label": "Liga Campionilor la handbal"
+                },
+                "label": "a jucat în"
+              },
+              {
+                "source": {
+                  "id": "n_spt_liga_campionilor_handbal",
+                  "label": "Liga Campionilor la handbal"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "competiție de cluburi"
+              }
+            ],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          }
+        ],
+        "inventory_summary": {
+          "active": 2,
+          "depleted": 6,
+          "total": 8
+        },
+        "discovered_count": 2,
+        "seed_count": 6,
+        "moves": 2,
+        "attempted_count": 2,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": true,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 6,
+          "routes": 4,
+          "max_results": 1
+        },
+        "board_category": "sport",
+        "score": 1000,
+        "share": "cat_de_roman_esti · Alchimie · Sport\n⚗️ 2 combinatii · 1000 pct ✨",
+        "discovered": [
+          {
+            "id": "n_spt_liga_campionilor_handbal",
+            "label": "Liga Campionilor la handbal"
+          }
+        ],
+        "already_tried": false,
+        "message": "Ai descoperit tinta: Liga Campionilor la handbal!"
+      }
+    },
+    {
+      "method": "GET resume",
+      "status": 200,
+      "response": {
+        "game_id": "ephemeral-content-review-session",
+        "target": {
+          "id": "n_spt_liga_campionilor_handbal",
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": true
+        },
+        "inventory": [
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v2spo_echipa_nationala",
+            "label": "Echipă națională",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v11spo_dinamo_bucuresti",
+            "label": "Dinamo București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v11spo_rapid_bucuresti",
+            "label": "Rapid București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v18spo_fcsb",
+            "label": "FCSB",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v18spo_cfr_cluj",
+            "label": "CFR Cluj",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v2spo_club_sportiv",
+            "label": "Club sportiv",
+            "parents": [
+              {
+                "id": "n_v11spo_dinamo_bucuresti",
+                "label": "Dinamo București"
+              },
+              {
+                "id": "n_v18spo_fcsb",
+                "label": "FCSB"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_v11spo_dinamo_bucuresti",
+                  "label": "Dinamo București"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "este un club sportiv"
+              },
+              {
+                "source": {
+                  "id": "n_v18spo_fcsb",
+                  "label": "FCSB"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "este un"
+              }
+            ],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_liga_campionilor_handbal",
+            "label": "Liga Campionilor la handbal",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_v2spo_club_sportiv",
+                "label": "Club sportiv"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_spt_liga_campionilor_handbal",
+                  "label": "Liga Campionilor la handbal"
+                },
+                "label": "a jucat în"
+              },
+              {
+                "source": {
+                  "id": "n_spt_liga_campionilor_handbal",
+                  "label": "Liga Campionilor la handbal"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "competiție de cluburi"
+              }
+            ],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          }
+        ],
+        "inventory_summary": {
+          "active": 2,
+          "depleted": 6,
+          "total": 8
+        },
+        "discovered_count": 2,
+        "seed_count": 6,
+        "moves": 2,
+        "attempted_count": 2,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": true,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 6,
+          "routes": 4,
+          "max_results": 1
+        },
+        "board_category": "sport",
+        "score": 1000,
+        "share": "cat_de_roman_esti · Alchimie · Sport\n⚗️ 2 combinatii · 1000 pct ✨"
+      }
+    }
+  ],
+  "candidate_handball": [
+    {
+      "method": "GET",
+      "status": 200,
+      "response": {
+        "game_id": "ephemeral-content-review-session",
+        "target": {
+          "id": null,
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": false
+        },
+        "inventory": [
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v2spo_echipa_nationala",
+            "label": "Echipă națională",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v11spo_dinamo_bucuresti",
+            "label": "Dinamo București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v11spo_rapid_bucuresti",
+            "label": "Rapid București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v18spo_fcsb",
+            "label": "FCSB",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v18spo_cfr_cluj",
+            "label": "CFR Cluj",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          }
+        ],
+        "inventory_summary": {
+          "active": 6,
+          "depleted": 0,
+          "total": 6
+        },
+        "discovered_count": 0,
+        "seed_count": 6,
+        "moves": 0,
+        "attempted_count": 0,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": false,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 6,
+          "routes": 4,
+          "max_results": 1
+        },
+        "board_category": "sport"
+      }
+    },
+    {
+      "method": "POST combine",
+      "pair": [
+        "n_spt_cristina_neagu",
+        "n_v2spo_echipa_nationala"
+      ],
+      "pair_labels": [
+        "Cristina Neagu",
+        "Echipă națională"
+      ],
+      "status": 200,
+      "response": {
+        "game_id": "ephemeral-content-review-session",
+        "target": {
+          "id": null,
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": false
+        },
+        "inventory": [
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v2spo_echipa_nationala",
+            "label": "Echipă națională",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v11spo_dinamo_bucuresti",
+            "label": "Dinamo București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v11spo_rapid_bucuresti",
+            "label": "Rapid București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v18spo_fcsb",
+            "label": "FCSB",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v18spo_cfr_cluj",
+            "label": "CFR Cluj",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_handbal_feminin",
+            "label": "Handbal feminin",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_v2spo_echipa_nationala",
+                "label": "Echipă națională"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_spt_handbal_feminin",
+                  "label": "Handbal feminin"
+                },
+                "label": "joacă"
+              },
+              {
+                "source": {
+                  "id": "n_spt_handbal_feminin",
+                  "label": "Handbal feminin"
+                },
+                "target": {
+                  "id": "n_v2spo_echipa_nationala",
+                  "label": "Echipă națională"
+                },
+                "label": "are națională"
+              }
+            ],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          }
+        ],
+        "inventory_summary": {
+          "active": 6,
+          "depleted": 1,
+          "total": 7
+        },
+        "discovered_count": 1,
+        "seed_count": 6,
+        "moves": 1,
+        "attempted_count": 1,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": false,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 6,
+          "routes": 4,
+          "max_results": 1
+        },
+        "board_category": "sport",
+        "discovered": [
+          {
+            "id": "n_spt_handbal_feminin",
+            "label": "Handbal feminin"
+          }
+        ],
+        "already_tried": false,
+        "message": "Ai descoperit: Handbal feminin."
+      }
+    },
+    {
+      "method": "POST combine",
+      "pair": [
+        "n_spt_cristina_neagu",
+        "n_spt_handbal_feminin"
+      ],
+      "pair_labels": [
+        "Cristina Neagu",
+        "Handbal feminin"
+      ],
+      "status": 200,
+      "response": {
+        "game_id": "ephemeral-content-review-session",
+        "target": {
+          "id": "n_spt_liga_campionilor_handbal",
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": true
+        },
+        "inventory": [
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v2spo_echipa_nationala",
+            "label": "Echipă națională",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v11spo_dinamo_bucuresti",
+            "label": "Dinamo București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v11spo_rapid_bucuresti",
+            "label": "Rapid București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v18spo_fcsb",
+            "label": "FCSB",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v18spo_cfr_cluj",
+            "label": "CFR Cluj",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_handbal_feminin",
+            "label": "Handbal feminin",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_v2spo_echipa_nationala",
+                "label": "Echipă națională"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_spt_handbal_feminin",
+                  "label": "Handbal feminin"
+                },
+                "label": "joacă"
+              },
+              {
+                "source": {
+                  "id": "n_spt_handbal_feminin",
+                  "label": "Handbal feminin"
+                },
+                "target": {
+                  "id": "n_v2spo_echipa_nationala",
+                  "label": "Echipă națională"
+                },
+                "label": "are națională"
+              }
+            ],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_liga_campionilor_handbal",
+            "label": "Liga Campionilor la handbal",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_spt_handbal_feminin",
+                "label": "Handbal feminin"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_spt_liga_campionilor_handbal",
+                  "label": "Liga Campionilor la handbal"
+                },
+                "label": "a jucat în"
+              },
+              {
+                "source": {
+                  "id": "n_spt_handbal_feminin",
+                  "label": "Handbal feminin"
+                },
+                "target": {
+                  "id": "n_spt_liga_campionilor_handbal",
+                  "label": "Liga Campionilor la handbal"
+                },
+                "label": "are competiția"
+              }
+            ],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          }
+        ],
+        "inventory_summary": {
+          "active": 4,
+          "depleted": 4,
+          "total": 8
+        },
+        "discovered_count": 2,
+        "seed_count": 6,
+        "moves": 2,
+        "attempted_count": 2,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": true,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 6,
+          "routes": 4,
+          "max_results": 1
+        },
+        "board_category": "sport",
+        "score": 1000,
+        "share": "cat_de_roman_esti · Alchimie · Sport\n⚗️ 2 combinatii · 1000 pct ✨",
+        "discovered": [
+          {
+            "id": "n_spt_liga_campionilor_handbal",
+            "label": "Liga Campionilor la handbal"
+          }
+        ],
+        "already_tried": false,
+        "message": "Ai descoperit tinta: Liga Campionilor la handbal!"
+      }
+    },
+    {
+      "method": "GET resume",
+      "status": 200,
+      "response": {
+        "game_id": "ephemeral-content-review-session",
+        "target": {
+          "id": "n_spt_liga_campionilor_handbal",
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": true
+        },
+        "inventory": [
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v2spo_echipa_nationala",
+            "label": "Echipă națională",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v11spo_dinamo_bucuresti",
+            "label": "Dinamo București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v11spo_rapid_bucuresti",
+            "label": "Rapid București",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v18spo_fcsb",
+            "label": "FCSB",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v18spo_cfr_cluj",
+            "label": "CFR Cluj",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_handbal_feminin",
+            "label": "Handbal feminin",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_v2spo_echipa_nationala",
+                "label": "Echipă națională"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_spt_handbal_feminin",
+                  "label": "Handbal feminin"
+                },
+                "label": "joacă"
+              },
+              {
+                "source": {
+                  "id": "n_spt_handbal_feminin",
+                  "label": "Handbal feminin"
+                },
+                "target": {
+                  "id": "n_v2spo_echipa_nationala",
+                  "label": "Echipă națională"
+                },
+                "label": "are națională"
+              }
+            ],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_liga_campionilor_handbal",
+            "label": "Liga Campionilor la handbal",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_spt_handbal_feminin",
+                "label": "Handbal feminin"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_spt_liga_campionilor_handbal",
+                  "label": "Liga Campionilor la handbal"
+                },
+                "label": "a jucat în"
+              },
+              {
+                "source": {
+                  "id": "n_spt_handbal_feminin",
+                  "label": "Handbal feminin"
+                },
+                "target": {
+                  "id": "n_spt_liga_campionilor_handbal",
+                  "label": "Liga Campionilor la handbal"
+                },
+                "label": "are competiția"
+              }
+            ],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          }
+        ],
+        "inventory_summary": {
+          "active": 4,
+          "depleted": 4,
+          "total": 8
+        },
+        "discovered_count": 2,
+        "seed_count": 6,
+        "moves": 2,
+        "attempted_count": 2,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": true,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 6,
+          "routes": 4,
+          "max_results": 1
+        },
+        "board_category": "sport",
+        "score": 1000,
+        "share": "cat_de_roman_esti · Alchimie · Sport\n⚗️ 2 combinatii · 1000 pct ✨"
+      }
+    }
+  ]
+}

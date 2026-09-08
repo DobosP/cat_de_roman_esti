@@ -1,0 +1,58 @@
+{
+  "reviewed_at": "2026-09-08T21:32:09.553261+00:00",
+  "reviewer": "Independent recovery_review agent",
+  "verdict": "accept",
+  "findings": [],
+  "scope": "Only the two authorized Alchimie browser-test setup files; no runtime, backend, data, static or build changes.",
+  "current_file_sha256": {
+    "frontend/e2e/solutions.py": "1c782ee28d7f66fd4194f8bc8700bab23e48d295c1dbd96eaa196d00872b4f5e",
+    "frontend/e2e/alchimie-action-recovery.spec.mjs": "1d59ca30401c5d828b5dd8c33f8976323996e4ffafbec83990835c824a4ad302"
+  },
+  "independent_checks": {
+    "two_file_diff_review": "Accepted deterministic private-projection filtering, monotonic pair cursor, setup assertions and distinct output/pair/category recovery cases.",
+    "repeated_current_alchimie_helper_outputs_exact": true,
+    "current_alchimie_output_matches_after_snapshot": true,
+    "unique_hint_setup_pairs": 11,
+    "pair_shape": "Distinct already-owned a/b IDs only; no output or target IDs or recipe map added.",
+    "all_six_existing_fields_equal": {
+      "alchimie": {
+        "initial": true,
+        "steps": true,
+        "practice": true
+      },
+      "intrusul": {
+        "initial": true,
+        "steps": true,
+        "practice": true
+      },
+      "perechi": {
+        "initial": true,
+        "steps": true,
+        "practice": true
+      },
+      "conexiuni": {
+        "initial": true,
+        "steps": true,
+        "practice": true
+      },
+      "contexto": {
+        "initial": true,
+        "steps": true,
+        "practice": true
+      },
+      "lant": {
+        "initial": true,
+        "steps": true,
+        "practice": true
+      }
+    },
+    "only_added_output_field": "alchimie.hint_setup",
+    "recovery_coverage_review": "Setup checks HTTP200, no repeat/discovery/inventory change/win; clue cases check exact earned cue, hidden target ID, hint shape, selection slots, one recovery GET and unchanged hint charge after reload."
+  },
+  "owning_agent_browser_gate": {
+    "reported_result": "34/34 passed, exit0, about2.0min;30source/data/static hashes unchanged",
+    "attribution": "Run by the owning agent, not independently rerun by this reviewer.",
+    "log": "focused-browser.log"
+  },
+  "reviewer_changes": "Only this requested scratch review receipt; no repository edits or BFF lifecycle changes."
+}

@@ -1,0 +1,46 @@
+{
+  "archive_sha256": "ab965912b2114cb2759cfc8aa9f57affef4aaadaac12a07c5c5eb967584f47c1",
+  "entries": {
+    "back-navigation-held-win.json": {
+      "sha256": "666edf93016028c7a00e96b30bca4e0e0a5d3fa821955af9281086043b5e8235",
+      "bytes": 4603
+    },
+    "back-navigation-held-win.mjs": {
+      "sha256": "d2b97e560b4faf07d7abeaa8cda3273b21e2df7815ca67cf24cf07b376ac28e3",
+      "bytes": 4415
+    },
+    "intrusul-back-navigation-held-win.png": {
+      "sha256": "d28c33fe5085d32877423ba5682d451f827b36e52cb78df39da1ee1a51c039f7",
+      "bytes": 186746
+    },
+    "intrusul-removed-pointer-after-failed-get.png": {
+      "sha256": "aa27a90d99ff5cbfefd20e4ffb8ccb3d396cb01948c0181516b4d686f0655a02",
+      "bytes": 129746
+    },
+    "perechi-back-navigation-held-win.png": {
+      "sha256": "4051d9e6646ceb159d063be39769fbe4e66495b7deb6e85225a1af930151ded4",
+      "bytes": 202617
+    },
+    "perechi-removed-pointer-after-failed-get.png": {
+      "sha256": "27a51dcd7264907a1472312da2b9a87fc73145f287863a6786413decff4b4019",
+      "bytes": 145854
+    },
+    "removed-pointer-after-failed-get-stability.json": {
+      "sha256": "32182f2cbe3c7a42c53de544c437901b19f1791066589e5a3d1157ae0ca69610",
+      "bytes": 2346
+    },
+    "removed-pointer-after-failed-get.json": {
+      "sha256": "1d898d46afd7854c99f74d147efd6fb2f685fb11fac13b3e1290a02af0dd3c01",
+      "bytes": 2358
+    },
+    "removed-pointer-after-failed-get.mjs": {
+      "sha256": "c3d19ef879f86581b01a2e6157e4c333d06ae58d5be9a7b8933079ce5680c853",
+      "bytes": 4816
+    }
+  },
+  "findings": [
+    "P2: removing saved pointer between a failed verification and manual retry reclaims the old terminal round; reproduced in both games with nine stable source/static hashes.",
+    "Browser Back via actual SPA navigation preserves both pointers and does not score held winning replies; ten source/static hashes stable."
+  ],
+  "resolution": "Retain original savedId in ActionSync; reject mismatched retry ticket before GET. Independent static re-review accepts correction; rebuilt regression pending."
+}

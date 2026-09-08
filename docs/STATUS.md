@@ -1,42 +1,39 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-08 — V90 landed locally; finish V91, then stop automatic iteration. Production last checked 2026-08-27.
+Last verified: 2026-09-09 — V91 verified for local landing; automatic iteration is stopped. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-  V90 is merged through `13a78fd`, including implementation `0039b1e`; it follows V89.
-  V91 is the final authorized task on `feat/v91-recovery-and-mobile-clarity`. Finish its
-  green local landing, then stop; do not start V92 (ADR-0137).
-- V90 adds Praf, Firimitură and Scamă: three concepts, 17 directed links, ten grammatical
-  forms and zero synonyms. Thirteen old node degree fields regenerate; every old semantic
-  field, owner, stored form, edge and all 180 CLI puzzles remain unchanged.
-- Praf becomes native, retiring its synthetic ID/Pământ fallback and unused three-target
-  neighborhood. Other 464 projection rows, 26 domains, 71 scorer proxies, 11 native exact
-  pairs and four audit-only native tuples remain unchanged. Exact forms share one attempt;
-  dust remains nonwinning against tool targets. No scoring formula changes (ADR-0135).
-- Two new easy Cald sau Rece rounds are approved: Făraș355 and Aspirator356. Both final
-  independent judgments pass full C1–C6 on exact dossiers, with five/eight incoming cues.
-  V89 rejected IDs352/354 remain history. Burete is dropped before staging for weak dish
-  cues despite six incoming neighbors; the investigated Conexiuni/Lanț rounds stay held.
-- The plate→sponge edge de8797 opens exactly seven old kitchen nodes to the wider graph:
-  Oală, Tigaie, Cană, Castron, Farfurie, Furculiță and Lingură. Removing it restores the
-  six previously connected cleaning proxies; other sink boundaries remain. Reachability
-  grows 2343→2353 through three new/seven old nodes; the proxy mapping stays exact.
-- C3 now fails pending targets with fewer than five unique valid incoming neighbors and
-  warns on approved stock. Numerical counts do not certify recognition. Four approved
-  warnings leave existing scores/eligibility unchanged; A5 holds remain (ADR-0134).
-- Alchimie recovers uncertain combine/hint/reset/win responses through one owned GET.
-  A failed read retains a visible read-only retry and locks mutations. One already-paid
-  public clue survives GET/resume; new unique combines/reset clear it. Stale or cross-tab
-  responses cannot adopt another game or record an old result (ADR-0136).
-- Served KG: `fixture-v90-household-discovery`, 2,416 nodes / 9,459 edges /
-  8,641 stored aliases / 180 puzzles. `kg_real.json` remains a thin export, not the served KG.
+  V90 is landed locally through `e2e0363`, including implementation `0039b1e`.
+  V91 on `feat/v91-recovery-and-mobile-clarity` is the final authorized version.
+  Automatic recurrence is paused; land V91 when green, then stop. No V92 (ADR-0137).
+- Intrusul and Perechi now retain visible verification after failed recovery reads.
+  Mutations stay locked; each retry reads once. Original saved-pointer ownership survives
+  retries, including another tab removing its pointer. Successful replies also require
+  matching game identity and ownership. Owned 404 returns to setup; changed ownership
+  offers the current round. Animated Exit/Back departure invalidates stale replies,
+  scoring and pending Perechi focus before passive effects (ADR-0138).
+- Both games already preserved paid clues and capped hints at one. No backend clue or
+  second-charge fix is claimed. Actual unmount was safe; the reproduced departure race
+  occurred while the animation kept a screen mounted.
+- Shared mobile headers display full titles and wrapping status badges. Notices occupy
+  their own row above the scrollable screen. Measured header height positions sticky
+  controls; short viewports retain normal flow. Long headings wrap at 200% text size.
+  Toast announcements, dismissal, lifetime and package visuals remain (ADR-0139).
+- Existing easy Sport Alchimie 083 now starts with Neagu, Echipă națională, Dinamo,
+  Rapid, FCSB and CFR Cluj. Six useful seeds replace a start with three depleted items.
+  Four productive pairs represent two ideas; six recipes/four routes retain par 2.
+  ID, target, difficulty, source and approval stay unchanged (ADR-0140).
+- V91 adds zero concepts, links, forms, synonyms or rounds; one round is revised.
+  The exact approved-stock writer requires two bound independent accepts, reconstructs
+  the dossier and live private book, and validates/rolls back both pack mirrors.
+  Target salience 0.4323 remains an editorially accepted warning, not measured recognition.
 
 ## Inventory and invariants
 
 | Game | Total | Approved | Pending | Runtime eligible/preferred |
-|---|---:|---:|---:|---:|
+|---|---:|---:|---:|---|
 | Conexiuni | 234 | 234 | 0 | 76 eligible |
 | Cald sau Rece | 244 | 242 | 2 | 238 eligible |
 | Lanțul Cuvintelor | 100 | 97 | 3 | 97 eligible |
@@ -44,18 +41,21 @@ Last verified: 2026-09-08 — V90 landed locally; finish V91, then stop automati
 | Intrusul | 183 | 183 | 0 | 144 preferred |
 | Perechi | 153 | 153 | 0 | 113 preferred |
 
-Pack **661 = 653 approved + 8 pending**; original four-game ranking **491 eligible**.
-All 659 old pack records, 83 complete Alchimie books/profiles, 100 Lanț route profiles
-and 336 complete derived rows/payloads remain exact. One nonshortest water menu choice
-changes Aluat→Burete on lt_stiinta_216; all 206 shown shortest first hops remain.
-Sessions retain 7,200-second sliding TTL, 1,000 entries/game, locks, 64 KiB requests and
-bounded histories/caches. The new Alchimie cue is one bounded public object, not a history.
+Pack **661 = 653 approved + 8 pending**, with **491 eligible** original four-game records.
+KG remains `fixture-v90-household-discovery`: **2416 nodes/9459 links/8641 forms/180 puzzles**.
+All KG/mobile bytes, the other 660 pack records and 336 complete derived boards stay exact.
+The other 82 Alchimie books remain exact; all100 Lanț records are unchanged.
+Sport 083's heuristic score rises67→70 (familiarity 49→60, play quality 93→85), rank 38→23
+and weight 3→4. Fifteen other Alchimie ordinal ranks shift; al_limba_042 weight 4→3.
+No other score, eligibility or approval changes. Only Alchimie's seeded start changes.
+Sessions keep 7200-second sliding TTL, 1000 entries/game, locks, 64 KiB requests and bounded
+histories/caches. Projection 464/26 domains, 71 proxies, 11 native pairs and 4 audit tuples remain.
 
 ## Current artifact pins
 
-- `games_pack.json`: `e32139529aacc88e2f453ac1cee1d8cd9a2cd1b16f3ee0551a5a76779192391e`
-- `board_rankings_v37.json`: `b5beb978b911c952ef2632cb2d93bc695be19f226b4a4661d77e26b335413fab`
-- `derived_catalog_v38.json`: `6ac090bc2186bf00209913d1123ba3f54de9f7b02f9fa2a781f2dfcccbbf58a9`
+- `games_pack.json`: `6bf27de5da270258290ecb4ed41c3ef60a609e3e153855f38b7556a7f2aedeca`
+- `board_rankings_v37.json`: `01fc906e390b8d3135f1856930458aa86873a525049b419eceb8652c72f717f8`
+- `derived_catalog_v38.json`: `53fb3e4555205179072bd54a45f5b1b185de064625893dcf288902574a075e64`
 - `kg_sample.json`: `d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109`
 - `cat_mobile_app_pack_contract.json`: `5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f`
 - Rubric: `3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101`
@@ -65,51 +65,45 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
 
 ## Verification
 
-- Independent graph factual/quality, Praf implementation, topology, Alchimie and final
-  content/history reviews accept the bounded changes. Graph preflight: 324 beginner and
-  17 direct-link probes. Supported serial application/import/two promotions are GREEN.
-- Critique: 166 focused tests and all 242 pregraph profiles pass; no score/eligibility loss.
-  History/migration: 367 tests, including 53 new cases, pass; five artifact inverses and
-  normal/exception cache teardown restore exact V89 history and current V90 behavior.
-- Alchimie: 74 focused backend, 32 browser and two independent repeated-read-failure
-  cases pass. Source-shape/locator/stale-rubric and reviewer-harness failures are archived.
-- Full frontend is GREEN: **193 native /246 browser checks**, no retries; lint/typecheck/
-  build/bundle pass at **118.88/120 KiB**. Full Python3.12: **1,608 backend /53 accounts pass**.
-- Python3.14 also passes **1,608 backend /53 accounts**. Its first process ended143
-  without a summary and remains archived/excluded; cause unestablished. The same command
-  passed separately with periodic progress output. All 16 final gates are GREEN.
-- Final impact: 240 old approved records ×70 words, 16,800 fresh requests on each side.
-  **11,120 selected feedback observations are exact; 5,680 change**, including 2,880 newly
-  recognized inputs and 240 Praf identity migrations. This is not full HTTP-body equality.
-  No compared win flag changes; 17 new direct-link wins pass. Only Contexto's seeded start
-  changes reachability; the other five are byte-identical. Full raw hashes/logs are retained.
-- Final independent audits accept all 16 receipts, 1,635 frozen inputs and 340 final
-  present/deleted-file bindings. An earlier verifier note was preserved byte-for-byte
-  inside the review folder. Candidate evidence is sealed by `13a78fd`; later status notes
-  are documentation only. Evidence: `docs/reviews/v90-household-discovery-and-critique-gates/`.
+- All 16 final local gates are GREEN. Python 3.12 and 3.14 each pass **1652 backend/53
+  accounts tests**. Frontend passes **193 native/342 browser checks**, lint/typecheck/
+  build/bundle, with two isolated browser workers and zero retries at **119.08/120KiB**.
+- Independent factual/quality judges accept the exact Sport revision. The writer's 37
+  guard/transaction tests and real serial application pass. Independent migration/history
+  audit passes 85 tests; all 83 live books match the exact reviewed candidate.
+- Four fresh public seed 38 Sport journeys all win at par 2/1000 points: 16 actual BFF
+  requests, four sessions deleted. Only Alchimie's six-game seeded start changes.
+- Recovery passes 80 focused browser cases and 26 native checks; independent review adds
+  four Back and two removed-pointer checks. Six archives retain 199 exact raw entries.
+  Mobile passes 14 focused browser/10 native checks with 255 verified raw/decoded bindings.
+- Two stale backend expectations were corrected while preserving complete V87/V90 checks.
+  The first red run was deliberately interrupted after 1265 passes/two failures; it is
+  excluded. Both subsequent complete Python matrices pass. Current approved books have
+  554 recipes/76 two-result recipes/median 0.68; V90 retains 555/77/0.67 in history.
+- Initial full browser 338 pass/two failures exposed old hint setup after Sport's new opener.
+  The test-only correction preserves all six original solution fields and explicitly
+  covers output/pair/category clues: 34 focused and 342 final full checks pass.
+- Original failures, non-reproductions, traces, intermediate catalog-pin 503 and earlier
+  recovery-run 143 are retained with precise scope. Separate freeze receipts account for
+  the two test-only amendments; serving runtime/data and final UI assets stayed exact.
+- Evidence: `docs/reviews/v91-recovery-and-mobile-clarity/verification.json`, immutable
+  review inputs, independent audits and final file ledger. Human/player/device acceptance
+  remains unrun. V90 evidence stays in its historical review folder.
 
-## Production — last observed 2026-08-27
+## Production and remaining work
 
 - Last documented deployment: anonymous V72 `6ee86935038744c0066cac6a50865f76eab93e37`,
-  image `sha256:30b39c0bba954074de6cdecd377a9742f627f4900caccbae8805d132f5c317bd`.
-- Accounts/debug were off. No production check, push, deployment or external contact
-  occurred in V90. Preserve `rollback-60c3fd5318a` for the next separately authorized rollout.
-
-## Remaining gates and costs
-
-- Finish V91: remaining Intrusul/Perechi recovery reproduction, shared mobile HUD/notice
-  clarity and existing easy-content review, including al_sport_083 and four C3 warnings.
-  No V91 implementation or promotion yet. Stop after its landing; no V92 is authorized.
-  Human/player/device acceptance remains unrun.
-- Praf loses its broad earth approximation: 227 old-target ranks rise and 13 fall; Mop2→6
-  remains hot. Other changed same-rank observations include closeness and 20 temperature
-  shifts. The eight lower-rank existing-identity changes all concern Mop, not universal gains.
-- Seventeen stress words remain unknown, including murdărie/pardoseală/curățenie/gunoi.
-  Burete's plate proxy and generic floor cues remain weak; truthful links do not approve it.
-- The four thin approved C3 warnings, earlier hidden-target holds, operator/legal checks,
-  feedback contact and rollout remain open. Keep accounts out until DEPLOY's checklist passes.
+ image `sha256:30b39c0bba954074de6cdecd377a9742f627f4900caccbae8805d132f5c317bd`.
+ No production check, push or deployment in V91. Accounts remain outside this scope.
+ Preserve `rollback-60c3fd5318a` for the next separately authorized rollout.
+- V91 is verified for local landing and cleanup. Stop there; no further version is authorized.
+ Human/player/device acceptance, operator/legal checks, feedback contact and rollout remain.
+- Three Neagu edge labels have a factually reviewed past-tense proposal, unapplied in V91.
+ Four thin approved Contexto neighborhoods and 17 unknown household surfaces remain open.
+ Earlier hidden-target/A5 holds are unchanged; no automatic demotion or approval occurred.
+ Keep accounts out until the DEPLOY checklist passes.
 
 ## Doc map
 
-- `README.md` / `AGENTS.md`: orientation; `docs/agent-map.md` / `docs/agent-testing.md`: routes/gates.
-- `docs/adr/` (newest 0137), `docs/reviews/`, WORKLOG: decisions, evidence and history.
+- `README.md`/`AGENTS.md`: orientation; `docs/agent-map.md`/`docs/agent-testing.md`: routes/gates.
+- `docs/adr/` (newest 0140), `docs/reviews/`, WORKLOG: decisions, evidence and history.

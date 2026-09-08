@@ -1,0 +1,68 @@
+"""Generate a reversible V91 receipt only after root confirms artifact freeze."""
+from __future__ import annotations
+
+import hashlib
+import json
+import subprocess
+from copy import deepcopy
+from pathlib import Path
+
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity')
+BASELINE = 'e2e03638b90fc9248c33f70eedaa8c9c5fbd87ad'
+FILES = ('kg_sample.json', 'games_pack.json', 'board_rankings_v37.json', 'derived_catalog_v38.json', 'cat_mobile_app_pack_contract.json')
+REVIEW = ROOT / 'docs/reviews/v91-recovery-and-mobile-clarity'
+
+
+def sha(blob):
+    return hashlib.sha256(blob).hexdigest()
+
+
+def dump(value, indent):
+    return (json.dumps(value, ensure_ascii=False, indent=indent) + '\n').encode()
+
+
+receipt = {'schema_version': 1, 'baseline_commit': BASELINE, 'files': {}}
+for filename in FILES:
+    path = ('tests/fixtures/' if filename == 'cat_mobile_app_pack_contract.json' else 'cat_de_roman_esti/fixtures/') + filename
+    old_bytes = subprocess.check_output(['git', 'show', BASELINE + ':' + path], cwd=ROOT)
+    new_bytes = (ROOT / path).read_bytes()
+    old, new = json.loads(old_bytes), json.loads(new_bytes)
+    indent = 2 if filename == 'kg_sample.json' else 1
+    assert dump(old, indent) == old_bytes
+    assert dump(new, indent) == new_bytes
+    assert new_bytes == (ROOT / 'tests/fixtures' / filename).read_bytes()
+    tables = {}
+    assert {k for k,v in old.items() if isinstance(v,list)} == {
+        k for k,v in new.items() if isinstance(v,list)
+    }
+    for key, old_rows in old.items():
+        if not isinstance(old_rows, list):
+            continue
+        new_rows = new[key]
+        before = {row['id']: row for row in old_rows}
+        after = {row['id']: row for row in new_rows}
+        assert len(before) == len(old_rows) and len(after) == len(new_rows)
+        added = [row for row in new_rows if row['id'] not in before]
+        removed = [dict(index=i, row=row) for i,row in enumerate(old_rows) if row['id'] not in after]
+        changed = {
+            row['id']: {'before': row, 'after': after[row['id']]}
+            for row in old_rows if row['id'] in after and row != after[row['id']]
+        }
+        restored = [row['id'] for row in new_rows if row['id'] in before]
+        for removal in removed:
+            restored.insert(removal['index'], removal['row']['id'])
+        old_order = [row['id'] for row in old_rows]
+        tables[key] = dict(added=added, removed=removed, changed=changed,
+                           baseline_order=None if restored == old_order else old_order)
+    receipt['files'][filename] = dict(
+        baseline_sha256=sha(old_bytes), after_sha256=sha(new_bytes),
+        head_before={k:v for k,v in old.items() if not isinstance(v,list)},
+        head_after={k:v for k,v in new.items() if not isinstance(v,list)},
+        tables=tables,
+    )
+(REVIEW / 'artifact-delta.json').write_bytes(dump(receipt, 2))
+print(json.dumps({fn: {'before': item['baseline_sha256'], 'after': item['after_sha256'],
+                      'tables': {key: {field: len(value) if isinstance(value,(list,dict)) else value
+                                       for field,value in table.items()}
+                                 for key,table in item['tables'].items()}}
+                  for fn,item in receipt['files'].items()}, indent=2))

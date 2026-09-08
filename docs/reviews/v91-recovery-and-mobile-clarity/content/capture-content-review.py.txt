@@ -1,0 +1,193 @@
+from __future__ import annotations
+
+import copy
+import dataclasses
+import gzip
+import hashlib
+import json
+import os
+from pathlib import Path
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cat_de_roman_esti.web.settings")
+import django
+
+django.setup()
+
+from django.test import Client
+from cat_de_roman_esti.wordgames import alchimie as a
+from cat_de_roman_esti.wordgames.service import get_service
+from cat_de_roman_esti.wordgames.packs import validate_payload
+from scripts import critique_pack as cp
+
+ROOT = Path.cwd()
+OUT = ROOT / "docs/reviews/v91-recovery-and-mobile-clarity/content"
+OUT.mkdir(parents=True, exist_ok=True)
+svc = get_service()
+pack, dossier_svc, strong, regions = cp.load_all(cp.PACKAGE_PACK, cp.PACKAGE_KG)
+baseline = next(r for r in pack["alchimie"] if r["id"] == "al_sport_083")
+candidate = copy.deepcopy(baseline)
+candidate["seeds"] = [svc.resolve(label) for label in [
+    "Cristina Neagu", "Echipă națională", "Dinamo București",
+    "Rapid București", "FCSB", "CFR Cluj",
+]]
+assert all(candidate["seeds"])
+
+def canonical(value):
+    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
+
+def sha(value):
+    return hashlib.sha256(canonical(value)).hexdigest()
+
+def write(name, value):
+    (OUT / name).write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
+
+def recipe(step):
+    pair, outputs = step
+    return {
+        "pair": list(pair), "pair_labels": [svc.label(n) for n in pair],
+        "outputs": list(outputs), "output_labels": [svc.label(n) for n in outputs],
+        "actual_edges": [dataclasses.asdict(svc.link(parent, output))
+                         for parent in pair for output in outputs],
+    }
+
+def book(rec):
+    projection = a._build_recipe_projection(rec["seeds"], rec["target"], rec["category"])
+    if projection is None:
+        return None
+    return {
+        "par": projection.par,
+        "recipes": [recipe(step) for step in projection.recipes.items()],
+        "routes": [[recipe(step) for step in route] for route in projection.routes],
+        "candidate_quality": projection.candidate_quality,
+    }
+
+def session(rec):
+    projection = a._build_recipe_projection(rec["seeds"], rec["target"], rec["category"])
+    assert projection and projection.par == rec["target_depth"]
+    current = a.AlchimieSession(
+        seeds=rec["seeds"], target=rec["target"], target_depth=projection.par,
+        difficulty=rec["difficulty"], category=rec["category"], pack_id=rec["id"],
+        recipes=projection.recipes, routes=projection.routes,
+    )
+    for node in current.seeds:
+        current.add(node, None)
+    return current
+
+def profile(rec):
+    current = session(rec)
+    state = a._state_payload("content-review-local", current)
+    owned = set(rec["seeds"])
+    return {
+        "record": rec,
+        "record_sha256": sha(rec),
+        "validation_errors": validate_payload(rec, "alchimie", svc),
+        "initial_payload": state,
+        "opening_pairs": [recipe((pair, outputs)) for pair, outputs in current.recipes.items()
+                          if set(pair) <= owned and any(n not in owned for n in outputs)],
+        "book": book(rec),
+    }
+
+def journey(rec, pairs):
+    current = session(rec)
+    game_id = a.store.create(current)
+    client = Client()
+    events = []
+    try:
+        response = client.get(f"/api/wordgames/alchimie/games/{game_id}")
+        assert response.status_code == 200
+        payload = response.json()
+        payload["game_id"] = "ephemeral-content-review-session"
+        assert payload["target"]["id"] is None
+        assert "recipes" not in payload and "routes" not in payload
+        events.append({"method": "GET", "status": response.status_code, "response": payload})
+        for labels in pairs:
+            pair = [svc.resolve(label) for label in labels]
+            response = client.post(f"/api/wordgames/alchimie/games/{game_id}/combine",
+                                   data={"a": pair[0], "b": pair[1]}, content_type="application/json")
+            assert response.status_code == 200
+            payload = response.json()
+            payload["game_id"] = "ephemeral-content-review-session"
+            events.append({"method": "POST combine", "pair": pair, "pair_labels": labels,
+                           "status": response.status_code, "response": payload})
+        assert payload["won"] and payload["moves"] == 2 and payload["score"] == 1000
+        assert payload["target"]["id"] == rec["target"]
+        response = client.get(f"/api/wordgames/alchimie/games/{game_id}")
+        resumed = response.json()
+        resumed["game_id"] = "ephemeral-content-review-session"
+        assert resumed["won"] and resumed["score"] == 1000
+        events.append({"method": "GET resume", "status": response.status_code, "response": resumed})
+    finally:
+        a.store.delete(game_id)
+    return events
+
+bindings = {str(path.relative_to(ROOT)): hashlib.sha256(path.read_bytes()).hexdigest() for path in [
+    cp.PACKAGE_PACK, cp.PACKAGE_KG, ROOT / "docs/CRITIQUE_RUBRIC.md",
+    ROOT / "cat_de_roman_esti/wordgames/alchimie.py",
+    ROOT / "cat_de_roman_esti/wordgames/packs.py",
+]}
+write("replacement-proposal.json", {
+    "kind": "approved-stock-revision-proposal-only", "date": "2026-09-08",
+    "applied": False, "before": baseline, "after": candidate,
+    "before_record_sha256": sha(baseline), "after_record_sha256": sha(candidate),
+    "changed_record_fields": ["seeds"], "source_bindings": bindings,
+    "proposed_counts": {"new_concepts": 0, "new_links": 0, "new_forms": 0,
+                        "new_synonyms": 0, "new_rounds": 0, "revised_rounds": 1},
+})
+for name, record in [("before", baseline), ("candidate", candidate)]:
+    write(f"{name}-profile.json", profile(record))
+    prospective = copy.deepcopy(pack)
+    prospective["alchimie"] = [record if r["id"] == record["id"] else r
+                                for r in prospective["alchimie"]]
+    items, findings, selected = cp.run(prospective, dossier_svc, strong, regions,
+                                     ["alchimie"], {"approved"}, {record["id"]})
+    assert len(selected) == 1
+    game, selected_record, lint = selected[0]
+    write(f"{name}-dossier.json", cp.build_dossier(selected_record, game, dossier_svc,
+                                                 strong, lint, regions))
+    assert not any(item["level"] == "FAIL" for item in lint)
+
+all_books_before = {r["id"]: book(r) for r in pack["alchimie"]}
+a._build_recipe_projection_cached.cache_clear()
+all_books_candidate = {r["id"]: book(candidate if r["id"] == candidate["id"] else r)
+                       for r in pack["alchimie"]}
+changed = [key for key in all_books_before if canonical(all_books_before[key])
+           != canonical(all_books_candidate[key])]
+assert changed == ["al_sport_083"], changed
+for name, books in [("before", all_books_before), ("candidate", all_books_candidate)]:
+    payload = canonical(books)
+    (OUT / f"all-83-books-{name}.json.gz").write_bytes(gzip.compress(payload, mtime=0))
+write("projection-comparison.json", {
+    "source_bindings": bindings, "method": "cold private projection per 83 pack records per side; candidate record only substituted in memory",
+    "before_sha256": sha(all_books_before), "candidate_sha256": sha(all_books_candidate),
+    "book_count_per_side": len(all_books_before), "changed_ids": changed,
+    "unchanged_book_count": len(all_books_before) - len(changed),
+    "profiles": {name: {"par": payload["par"], "pairs": len(payload["recipes"]),
+                        "routes": len(payload["routes"])}
+                 for name, payload in [("before", all_books_before["al_sport_083"]),
+                                       ("candidate", all_books_candidate["al_sport_083"])]},
+})
+write("bff-journeys.json", {
+    "method": "Django in-process real GET/combine handlers; ephemeral sessions built from raw proposed record, no approved-pack mutation or database writes",
+    "before": journey(baseline, [["Cristina Neagu", "Washington Bullets"],
+                                  ["Cristina Neagu", "Club sportiv"]]),
+    "candidate_club": journey(candidate, [["Dinamo București", "FCSB"],
+                                          ["Cristina Neagu", "Club sportiv"]]),
+    "candidate_handball": journey(candidate, [["Cristina Neagu", "Echipă națională"],
+                                              ["Cristina Neagu", "Handbal feminin"]]),
+})
+write("label-only-followup-proposal.json", {
+    "kind": "optional-factual-copy-proposal-only", "applied": False,
+    "reason": "Neagu's description already states retirement in 2025. Three route edges retain present tense. Past tense makes the historical associations explicit.",
+    "source": "https://www.ihf.info/media-center/news/unstoppable-8-says-farewell-was-my-calling",
+    "changes": [{"edge": dataclasses.asdict(svc.link(svc.resolve("Cristina Neagu"), svc.resolve(label))),
+                 "replacement_label_ro": replacement}
+                for label, replacement in [("Handbal feminin", "a jucat"),
+                                           ("Echipă națională", "a jucat pentru România"),
+                                           ("Club sportiv", "a jucat la cluburi")]],
+    "new_links": 0, "changed_topology": False,
+})
+assert bindings == {path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest() for path in bindings}
+print(json.dumps({"before_par": 2, "candidate_par": 2, "initial_active": [
+    a._state_payload("x", session(r))["inventory_summary"] for r in [baseline, candidate]],
+    "changed_book_ids": changed, "books_per_side": len(all_books_before),
+    "journeys": 3, "requests": 12, "artifacts": str(OUT)}, ensure_ascii=False))

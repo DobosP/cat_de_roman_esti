@@ -1,0 +1,22 @@
+import hashlib,json,subprocess,sys
+from pathlib import Path
+root=Path("/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity")
+out=Path("/home/dobo/work/_temp/feat__v91-recovery-and-mobile-clarity/integration-freeze.json")
+paths=set(subprocess.check_output(["git","ls-files","--cached","--others","--exclude-standard"],cwd=root,text=True).splitlines())
+selected={}
+for name in sorted(paths):
+ p=root/name
+ if not p.is_file() or "/web/static/" in name: continue
+ # These closure outputs contain or bind this freeze and cannot be inputs to themselves.
+ if name in {"docs/reviews/v91-recovery-and-mobile-clarity/integration-freeze.json",
+             "docs/reviews/v91-recovery-and-mobile-clarity/verification.json",
+             "docs/reviews/v91-recovery-and-mobile-clarity/review-manifest.json"}: continue
+ source=name.startswith(("cat_de_roman_esti/","tests/","scripts/","frontend/")) or name in ("pyproject.toml","constraints.txt","docs/CRITIQUE_RUBRIC.md")
+ evidence=name.startswith("docs/reviews/") and p.suffix!=".md"
+ if source or evidence:selected[name]=hashlib.sha256(p.read_bytes()).hexdigest()
+if sys.argv[1]=="write":
+ out.write_text(json.dumps(selected,indent=2)+"\n"); print("Frozen",len(selected),"runtime/test/rubric and existing review inputs")
+else:
+ old=json.loads(out.read_text()); new_reviews=[n for n in selected if n not in old and n.startswith("docs/reviews/")]
+ changed=[n for n in sorted(set(old)|set(selected)) if n not in new_reviews and old.get(n)!=selected.get(n)]
+ print("Changed frozen inputs:",changed); print("Additional post-freeze review files:",len(new_reviews)); assert not changed

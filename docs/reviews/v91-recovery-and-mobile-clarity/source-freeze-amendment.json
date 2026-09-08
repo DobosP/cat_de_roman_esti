@@ -1,0 +1,11 @@
+{
+  "reason": "Two stale backend-test expectations; preserve complete V87/V90 snapshots and bind the reviewed Sport-only change. Initial backend run deliberately interrupted and excluded. Final both Python matrices start after this amendment.",
+  "changed_frozen_inputs": {
+    "tests/test_alchimie_sparse_recipes.py": {
+      "before": "2f5f75d41119d509a579f0f6b7def008d29ad0aaf6d9aebbbb8545a9cbd7b250",
+      "after": "9332d773e439a9002d08d2f6be7430530020b2941d4fc610443492d0438ab750"
+    }
+  },
+  "initial_freeze_sha256": "6193e161a27e55616db9aade30cb08b24570e21583a9b6ec7599c31806b18cf8",
+  "frontend_gate": "Full frontend continues against identical frontend source/tests, served runtime, data and static inputs. The amended backend pytest module is not a frontend/BFF input. No frontend rerun is needed for this test-only amendment."
+}

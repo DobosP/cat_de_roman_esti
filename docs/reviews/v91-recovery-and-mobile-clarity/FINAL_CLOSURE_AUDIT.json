@@ -1,0 +1,433 @@
+{
+  "reviewer": "v91_final_ui_audit",
+  "verdict": "accept",
+  "findings": [],
+  "scope": "Independent final V91 closure audit before local merge; no tests, browser, build or runtime edits by this auditor.",
+  "audited_manifest_sha256": "a63165d2c854657d0b38ce54f74cd20240e03c13b7fa85a3e6954b5ea9f39758",
+  "audited_manifest_bindings": 480,
+  "final_freeze_sha256": "5be289877b18d70887d4c0fa4282c6b83f941f29ea0dd942ffdf066a1304d3fc",
+  "final_freeze_inputs": 2091,
+  "verification": {
+    "checked_at": "2026-09-08T21:51:59.269647+00:00",
+    "errors": [],
+    "audited_manifest": {
+      "sha256": "a63165d2c854657d0b38ce54f74cd20240e03c13b7fa85a3e6954b5ea9f39758",
+      "bindings": 480,
+      "groups": {
+        "sources": 21,
+        "artifacts": 22,
+        "decision_files": 4,
+        "documentation": 5,
+        "review_files": 415,
+        "removed_files": 13
+      },
+      "changed_paths_including_manifest": 481,
+      "unbound_changed_paths": [],
+      "extra_bindings": []
+    },
+    "amendments": {
+      "backend expectation": {
+        "changed_paths": {
+          "tests/test_alchimie_sparse_recipes.py": {
+            "before": "2f5f75d41119d509a579f0f6b7def008d29ad0aaf6d9aebbbb8545a9cbd7b250",
+            "after": "9332d773e439a9002d08d2f6be7430530020b2941d4fc610443492d0438ab750"
+          }
+        },
+        "new_review_inputs": 41
+      },
+      "frontend setup": {
+        "changed_paths": {
+          "frontend/e2e/alchimie-action-recovery.spec.mjs": {
+            "before": "42e12e20cf81ab10a4a1cc31d2203caeb11900de61360373a002512fe140c9c0",
+            "after": "1d59ca30401c5d828b5dd8c33f8976323996e4ffafbec83990835c824a4ad302"
+          },
+          "frontend/e2e/solutions.py": {
+            "before": "36c136cab6a7416f65a8e1ea72f6d07cefb810e8053997d33b96785ac9eaca38",
+            "after": "1c782ee28d7f66fd4194f8bc8700bab23e48d295c1dbd96eaa196d00872b4f5e"
+          }
+        },
+        "new_review_inputs": 56
+      }
+    },
+    "freezes": {
+      "initial": {
+        "count": 1994,
+        "sha256": "6193e161a27e55616db9aade30cb08b24570e21583a9b6ec7599c31806b18cf8"
+      },
+      "backend": {
+        "count": 2035,
+        "sha256": "b22bcd9500efe78a34995114414737f8cabd18b722bbe17c283dcc52d2bcf2f8",
+        "current_differences": [
+          "frontend/e2e/alchimie-action-recovery.spec.mjs",
+          "frontend/e2e/solutions.py"
+        ]
+      },
+      "final": {
+        "count": 2091,
+        "sha256": "5be289877b18d70887d4c0fa4282c6b83f941f29ea0dd942ffdf066a1304d3fc",
+        "current_differences": []
+      }
+    },
+    "gates": {
+      "backend312": {
+        "exit_code": 0,
+        "command": [
+          "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "-o",
+          "addopts="
+        ],
+        "archive_sha256": "d2b5cbfdb785f0ef8c302e91e290f40b1dcc89df87d55eca2e67cc0793ee6e47",
+        "decoded_sha256": "b9e58097eceed93e9d4f897ef6941194f8e27998501d8ce937159b08ff75915f",
+        "last_line": "1652 passed in 914.63s (0:15:14)"
+      },
+      "accounts312": {
+        "exit_code": 0,
+        "command": [
+          "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+          "-m",
+          "pytest",
+          "tests/accounts",
+          "-q",
+          "-o",
+          "addopts="
+        ],
+        "archive_sha256": "29511f1adfb9f4e3dfd67956a270ab7935c95f9a86a2ff1af7e5c6741a7f9a0e",
+        "decoded_sha256": "f285dcbdbe1147d5a5b04f54c82797e4df57ffdbf6c79da82c56a781cd041dcc",
+        "last_line": "53 passed in 3.59s"
+      },
+      "backend314": {
+        "exit_code": 0,
+        "command": [
+          "/home/dobo/work/_temp/feat__v91-recovery-and-mobile-clarity/py314/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "-o",
+          "addopts="
+        ],
+        "archive_sha256": "dd63bc2f50f3e3d9e2e8f7aef9312ee6391fa577408b34053280bf06ebc44905",
+        "decoded_sha256": "0ab813cb2805fff22282d39f836b2bf8fc5b06bb9086e4b28463ac900e7a843a",
+        "last_line": "1652 passed in 816.30s (0:13:36)"
+      },
+      "accounts314": {
+        "exit_code": 0,
+        "command": [
+          "/home/dobo/work/_temp/feat__v91-recovery-and-mobile-clarity/py314/bin/python",
+          "-m",
+          "pytest",
+          "tests/accounts",
+          "-q",
+          "-o",
+          "addopts="
+        ],
+        "archive_sha256": "e1f50aa84af83932decc5fa8d9d1a6630420ebcfbcd58ecd56cf8701facf1299",
+        "decoded_sha256": "8250398a772f42bf853d39bf0c33b67a6de1b08b4ccd795b125f8d8fcc29fcf3",
+        "last_line": "53 passed in 3.58s"
+      },
+      "frontend_native": {
+        "exit_code": 0,
+        "command": [
+          "npm",
+          "test"
+        ],
+        "archive_sha256": "31f895c2b30d09cc6296b0afc0daa69824d177302d96a0bd92f4af415ecefa63",
+        "decoded_sha256": "77f7794a740a750ca17d7e66d91bc734cee15c390178602131271e14e8067502",
+        "last_line": "ℹ duration_ms 587.24049"
+      },
+      "frontend_lint": {
+        "exit_code": 0,
+        "command": [
+          "npm",
+          "run",
+          "lint"
+        ],
+        "archive_sha256": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a",
+        "decoded_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+        "last_line": ""
+      },
+      "frontend_typecheck": {
+        "exit_code": 0,
+        "command": [
+          "npm",
+          "run",
+          "typecheck"
+        ],
+        "archive_sha256": "d0e30d1dc915362da5e6d51943f265c1840c3182f61f2cd8a65a8159c982ac05",
+        "decoded_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+        "last_line": ""
+      },
+      "frontend_build": {
+        "exit_code": 0,
+        "command": [
+          "npm",
+          "run",
+          "build"
+        ],
+        "archive_sha256": "1a19dad78cbf4884f41c6961c56847e6c8728c63f84994bec54f69199c7ae005",
+        "decoded_sha256": "a005c8d4367fa14d0aca7ff572a8e8f2cb521867c5cc916c25656cde293c0aff",
+        "last_line": "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      },
+      "frontend_bundle": {
+        "exit_code": 0,
+        "command": [
+          "npm",
+          "run",
+          "check:bundle"
+        ],
+        "archive_sha256": "a7341135e931c5beb80c7c9e2539895fbe97ddbe46f602aed0f750fba0b20475",
+        "decoded_sha256": "375dd3a6a442ffc039a2d689cd6479fcd88bc3838b7768a91c9521a95a09598d",
+        "last_line": "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      },
+      "browser": {
+        "exit_code": 0,
+        "command": [
+          "npm",
+          "run",
+          "test:e2e",
+          "--",
+          "--workers=2"
+        ],
+        "archive_sha256": "6abeb3219f6e2143b2a6dfd721b7eda8a628decd2561ae79f613441de22e7f7d",
+        "decoded_sha256": "0d833722ab1a7f836ef9364e3263ff1fdfc774f28d6cb63b93accb006cb1ec26",
+        "last_line": "  342 passed (10.0m)"
+      },
+      "fixture": {
+        "exit_code": 0,
+        "command": [
+          "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+          "scripts/validate_fixture.py"
+        ],
+        "archive_sha256": "ca56952e35e91dd1f92e1ef547246b570f23f1a8acae77e37ecd94b27bd79ba3",
+        "decoded_sha256": "317133e362be2cf8d078dd67edb2842d8ae8fea30ff57dad128bc0514f575d66",
+        "last_line": "GREEN: fixture is valid (0 errors)"
+      },
+      "pack": {
+        "exit_code": 0,
+        "command": [
+          "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+          "scripts/validate_games_pack.py"
+        ],
+        "archive_sha256": "09f01c42a2829a3b8877e60802bae8967baeb530df5220cbc675238466da65a4",
+        "decoded_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+        "last_line": "games pack GREEN"
+      },
+      "pending": {
+        "exit_code": 0,
+        "command": [
+          "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+          "scripts/critique_pack.py",
+          "--status",
+          "pending",
+          "--strict"
+        ],
+        "archive_sha256": "beccbf15577ac4c2020c302579819da43b23a3548cab6e7afe5fc83ca4af4959",
+        "decoded_sha256": "f19d308c2a43b0b95b9b12f3458a99e9f64ce7c982f4f113f1997cbbcffae852",
+        "last_line": "  nondistinctive_region_link WARN x16"
+      },
+      "ruff": {
+        "exit_code": 0,
+        "command": [
+          "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+          "-m",
+          "ruff",
+          "check"
+        ],
+        "archive_sha256": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd",
+        "decoded_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "last_line": "All checks passed!"
+      },
+      "docs": {
+        "exit_code": 0,
+        "command": [
+          "python3",
+          "/home/dobo/work/agent-ops/scripts/check_docs.py",
+          "."
+        ],
+        "archive_sha256": "f8d2b07f02c6fdb7b054f2c79890998f44cf188b81cb9dcacde0ede5556c23bb",
+        "decoded_sha256": "c08acd79e8775352229c6420255a2d10821c56a5fb3cfcbfcd9d8edca3c9be43",
+        "last_line": "(none)"
+      },
+      "whitespace": {
+        "exit_code": 0,
+        "command": [
+          "git",
+          "diff",
+          "HEAD",
+          "--check"
+        ],
+        "archive_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "last_line": ""
+      }
+    },
+    "verification_sha256": "c080b16b203218ded8cc90e361e4cd564a79722355cfe8420db38ee104002f45",
+    "browser_configuration": {
+      "config_sha256": "4dcad7d73cdc4e10133afaa143417621ce5a445978c30740dad08fbfabcc0541",
+      "workers": 2,
+      "retries": 0,
+      "unique_pass_entries": 342
+    },
+    "earlier_ui_evidence": {
+      "audit_sha256": "42d4de68ae514c255393794ad8955efb5c66aeb4cb416d8d3f1a79fa7663b7a7",
+      "expected_historical_pin_difference": [
+        "frontend/e2e/solutions.py"
+      ],
+      "current_static_and_ui_source_mismatches": []
+    },
+    "alchimie_test_setup": {
+      "archive_sha256": "888125255b943c7327c16b3b425629315cdb8b2f3c5c9f4c58ad0003eeee7acf",
+      "decoded_sha256": "b49b41491099c7ae0d54fb9ef06fdf2cfe0f24f1f602dc5751fe4c95277f16ae",
+      "member_count": 24,
+      "existing_field_comparisons": {
+        "alchimie": {
+          "initial": true,
+          "steps": true,
+          "practice": true
+        },
+        "intrusul": {
+          "initial": true,
+          "steps": true,
+          "practice": true
+        },
+        "perechi": {
+          "initial": true,
+          "steps": true,
+          "practice": true
+        },
+        "conexiuni": {
+          "initial": true,
+          "steps": true,
+          "practice": true
+        },
+        "contexto": {
+          "initial": true,
+          "steps": true,
+          "practice": true
+        },
+        "lant": {
+          "initial": true,
+          "steps": true,
+          "practice": true
+        }
+      },
+      "hint_setup_pairs": 11,
+      "focused_passes": 34,
+      "focused_input_count": 30,
+      "independent_verdict": "accept"
+    },
+    "preserved_red_runs": {
+      "backend": {
+        "exit_code": 2,
+        "decoded_sha256": "ed9da73c212eca1fcb5e7d9a84100ab177e424b89b5de60896fc6c8815ffa2b7",
+        "summary": "2 failed, 1265 passed"
+      },
+      "browser": {
+        "exit_code": 1,
+        "decoded_sha256": "b073ea8bfe29c280541e21d7f4a1b05b8ca201ab1a322379261addcd6fdfbdc0",
+        "summary": "338 passed"
+      }
+    },
+    "preserved_red_browser_artifacts": {
+      "archive_sha256": "aa3b0a28536f8c9810ac44138d18e6704bb23b8d4f629c25d201625ef5485dc9",
+      "decoded_sha256": "a8769f6c23659d7de992a75644c3ed5597d3392b38165fcab8a8790284992f8d",
+      "member_count": 73
+    },
+    "sparse_recipe_sources": {
+      "archive_sha256": "632a28aae4d8dad3ca1d109171c650ec39e8141a1a3a454fdfc3ebd5207d750c",
+      "decoded_sha256": "82c9a6f186776d44f4012d93019d78b6f15bf796c301121f7c52e841d8ab0869",
+      "member_count": 7
+    },
+    "doc_lines": {
+      "docs/STATUS.md": 109,
+      "docs/agent-map.md": 46,
+      "docs/agent-testing.md": 54
+    },
+    "stop_authority": {
+      "id": "romanian-arcade-version-loop",
+      "kind": "heartbeat",
+      "status": "PAUSED",
+      "adr0137_sha256": "d587a1117821113715a58685c17f43509be6eb50546fc2a9af8782f796c9afe5",
+      "scope": "Finish green local V91 merge and verified cleanup, then stop. No V92, push or deployment."
+    },
+    "patch_packaging": {
+      "reason": "Git staged-whitespace gate flags spaces that are meaningful blank-context lines of the preserved unifieddiff. Keep exact evidence bytes in gzip rather than rewriting the patch. No runtime/test/data or decoded evidence content changes.",
+      "logical_name": "sparse-recipe-expectations.patch",
+      "archive": "sparse-recipe-expectations.patch.gz",
+      "decoded_sha256": "9d3ba657c40695b31900299e59fdad6d1d83260ebb24cbd98a0691a97089055f",
+      "archive_sha256": "6a4c1a343d0360aec0d0874b0b5a4f9b50d4c4312df1a91347f36b05b80abe16",
+      "decoded_bytes": 5049,
+      "archive_bytes": 1809,
+      "gzip_mtime": 0,
+      "whitespace_failure_count": 8,
+      "preserved_old_freeze_count": 2067,
+      "preserved_old_manifest_sha256": "e4a67eeba43b0bb7a9ab24d04d7479f8e71a54be86449ae349029255bd5c4034",
+      "new_review_freeze_inputs": 25
+    },
+    "source_coverage": {
+      "current_source_paths": 420,
+      "unbound_source_paths": []
+    },
+    "verdict": "accept",
+    "runner_sha256": "89f9a1998c3a383c653ae7509cd7c289ae1eeb0993f0e405bb66631156717e89"
+  },
+  "source_review": [
+    "The backend test correction retains exact V87 and V90 projection digests, original total/tied recipe counts and median strengths, while separately checking current V91 values and the sole Sport083 change.",
+    "The two frontend test-helper edits derive distinct already-owned barren pairs, advance a monotonic setup cursor, assert no discovery/inventory change and add a category-clue case while retaining output/pair recovery and hidden-target assertions.",
+    "Current primary STATUS and V91 README report completed local gates and retain human/device/production limits; older focused pending statements remain historical records.",
+    "All serving runtime/data and final UI/static inputs remain exact across documented test-only amendments and lossless raw-patch packaging."
+  ],
+  "first_attempt": {
+    "verdict": "reject",
+    "scope": "Independent audit harness and concurrent evidence-wrapping transition; no product or gate failure.",
+    "explanation": "The first probe used the superseded475/2067 counts while wrapping had produced480/2091. Git rename detection hid four removed paths in its coverage enumeration; the summary regex also matched the word failed in passing test titles. The original runner/log/receipt/snapshot are retained. The corrected probe uses the notified immutable hashes, --no-renames and result-summary matching."
+  },
+  "final_attempt": {
+    "exit_code": 0,
+    "errors": []
+  },
+  "evidence": {
+    "path": "final-closure-audit-evidence.tar.gz",
+    "archive_sha256": "ce8f7bb92d9b715415e2065b166e1a7dd2499b68fe105578c1b6f7b7c7f6f0be",
+    "decoded_sha256": "9ab026cac3ef2c7c7ddce1d4f3d0eae13ea2c9d868ede30fcbc2ede858b4e5a8",
+    "gzip_mtime": 0,
+    "entries": {
+      "attempt1-verify.py": {
+        "sha256": "ddc5974050f3fc94d74fb58458aa199d9c3350e57e813d24f4ec7c4470fb01fd",
+        "bytes": 15042
+      },
+      "attempt1-verify.log": {
+        "sha256": "e4471b04c99f9044a9faa3e9084073f874a77d7c9ceeb09ddea8d2bf65ed3191",
+        "bytes": 286
+      },
+      "attempt1-receipt.json": {
+        "sha256": "3f1d97040d7d65a433e1710fd0d20d838911060f1b51cd312ab5fc09c4827946",
+        "bytes": 11829
+      },
+      "attempt1-audited-review-manifest.json": {
+        "sha256": "a63165d2c854657d0b38ce54f74cd20240e03c13b7fa85a3e6954b5ea9f39758",
+        "bytes": 78182
+      },
+      "verify.py": {
+        "sha256": "89f9a1998c3a383c653ae7509cd7c289ae1eeb0993f0e405bb66631156717e89",
+        "bytes": 17570
+      },
+      "verify.log": {
+        "sha256": "d35008cef4945b02a2c0ec83e54be9f42e78e40e3d5d0f735ef3ef8e718d41e2",
+        "bytes": 138
+      },
+      "receipt.json": {
+        "sha256": "c355226c4cc8cc75d1b66626c6f69ebf66c54d0f3b465d8fc61fa87afd685b11",
+        "bytes": 12366
+      },
+      "audited-review-manifest.json": {
+        "sha256": "a63165d2c854657d0b38ce54f74cd20240e03c13b7fa85a3e6954b5ea9f39758",
+        "bytes": 78182
+      }
+    }
+  },
+  "closure_boundary": "Accept verified local V91 merge and verified task cleanup. Keep the loop paused and stop; no V92, push or deployment. This receipt does not claim the merge has already happened.",
+  "ledger_handoff": "The coordinating root may preserve this audited manifest and regenerate the final ledger by adding only these new audit artifacts; existing audited bindings must remain exact."
+}

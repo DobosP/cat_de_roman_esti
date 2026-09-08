@@ -1,0 +1,165 @@
+{
+  "checkedAt": "2026-09-08T20:54:55.042226+00:00",
+  "verdict": "accept",
+  "scope": "Intrusul/Perechi V91 owned recovery and presence departure guards",
+  "backCases": {
+    "startTime": "2026-09-08T20:53:47.262Z",
+    "duration": 30520.904000000002,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "pointerRetryCases": [
+    {
+      "game": "intrusul",
+      "before": {
+        "pointer": "78d16a2f-a103-4f1b-bd34-260eb4228ca9",
+        "played": 0
+      },
+      "removed": {
+        "pointer": null,
+        "played": 0
+      },
+      "after": {
+        "pointer": null,
+        "played": 0
+      },
+      "counts": {
+        "reads": 1,
+        "mutations": 1
+      },
+      "committedWon": true,
+      "committedScore": 1000,
+      "changedControlVisible": 1,
+      "resultVisible": false
+    },
+    {
+      "game": "perechi",
+      "before": {
+        "pointer": "be284534-e57d-4202-9fab-ea7c97e99200",
+        "played": 0
+      },
+      "removed": {
+        "pointer": null,
+        "played": 0
+      },
+      "after": {
+        "pointer": null,
+        "played": 0
+      },
+      "counts": {
+        "reads": 1,
+        "mutations": 1
+      },
+      "committedWon": true,
+      "committedScore": 1000,
+      "changedControlVisible": 1,
+      "resultVisible": false
+    }
+  ],
+  "inputsBefore": {
+    "frontend/src/screens/Intrusul.tsx": "6cdf10bdd37338709585546aa0bf68f441a38c880d570b3e7e3c401a01d584aa",
+    "frontend/src/screens/Perechi.tsx": "9ef326d1d32d2008232d45a1bb83c4f24b785526656bbf4618f1db50bb624dbe",
+    "frontend/src/gameActionRecovery.mjs": "b73851fd616aed6489139cd800bad2e8e6ab3480664470e765fd044ba9eb6267",
+    "frontend/src/App.tsx": "ffc34759f016984c2d078ca0a717fd1ce3337f579c17afd58ab4e78ea13bf121",
+    "frontend/src/hooks/useSavedGameResume.ts": "dff224adb580b3996c9145decb87fce217125de2cf1350b2e144919bc81070a5",
+    "frontend/src/hooks/useActiveGame.ts": "08e3dc295f75ee5b11f14a86b7b2836f7af73d7f5238decf7c650004c391cd02",
+    "frontend/src/hooks/useRecordScore.ts": "303cda5da3e26595ed39a5f9b2028ed6634318fc6c4a02bb9480dc310f3fee4b",
+    "frontend/e2e/derived-action-recovery.spec.mjs": "47f9a58afcbf8aee32ee30fe96c087db9bd9c89ecca4443457d483f03a4064d3",
+    "frontend/e2e/games.mjs": "47c7b3ad534fcb7c1756f02e9501420c737b7ef7fcd03d713239508807b54e61",
+    "frontend/e2e/solutions.py": "36c136cab6a7416f65a8e1ea72f6d07cefb810e8053997d33b96785ac9eaca38",
+    "frontend/e2e/seeded-starts.json": "aa06ee72ff7c2948c027636dc8c339fb91034f4bbfd349e0f269236aa317d41f",
+    "frontend/playwright.config.mjs": "4dcad7d73cdc4e10133afaa143417621ce5a445978c30740dad08fbfabcc0541",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "064ab3148d6490421846ed1965d4b77104236db77116a7fb1264c140618993c0",
+    "cat_de_roman_esti/web/static/assets/AccountBar-mOLes7YU.js": "8703171e7f6df8c2777c983081ddcc6aadedb9ff7c932d62891303a01f3b3d46",
+    "cat_de_roman_esti/web/static/assets/Alchimie-CHO8JNl6.js": "c38f9afd06e7e036af0e317d69e0a3540eb5c58e85f660d9074d995e40d74c54",
+    "cat_de_roman_esti/web/static/assets/CaldRece-N5SuLeY-.js": "430b22ad6e08e540c60812d221ef228962174014b04a7d81b4dd14baa783fdad",
+    "cat_de_roman_esti/web/static/assets/CategoryPicker-4kKssI1G.js": "e8c92a5d200763e081b89066ba06bbcdc104627828bc8c8e9d3ed947d7ddfe89",
+    "cat_de_roman_esti/web/static/assets/Conexiuni-DHnkpaVN.js": "922eaefb7edd17d73a39dde200af3155b2d19a337a826fb3d6e134d11a023a77",
+    "cat_de_roman_esti/web/static/assets/Intrusul-BMAa8k2-.js": "b387ac9f2a893aa6e3b3609e44fa14defdf16c2e941f2f352710b324ae5d0402",
+    "cat_de_roman_esti/web/static/assets/Intrusul-Cqfmxx4e.css": "c9c51b66e08113c848f1be5c9b594aa5d213d5b84032ffda5b10041793b0d483",
+    "cat_de_roman_esti/web/static/assets/Lant-DaUqEGNe.js": "dac5570fb33efaaf60cd64e90ec873b3af67d04e8935c3a78c9a23843812c8e2",
+    "cat_de_roman_esti/web/static/assets/Perechi-BmknC8dD.css": "76604a113f482ffd476479da328e6c23d9e9723c90de93eda66849c22470c53e",
+    "cat_de_roman_esti/web/static/assets/Perechi-C60yeT6P.js": "8871a431a35e5eda65caaacf0b731d5a2bdc492c77aeba5b406ff382154cd19c",
+    "cat_de_roman_esti/web/static/assets/Ranking-CmIpE2C9.js": "16e29b7300ad25678f820e8bb4efb9b3114111d216b8ed8ea6627505eea793a1",
+    "cat_de_roman_esti/web/static/assets/auth-BQkoQX_A.js": "ee61fc763443c23091582de09978fcc1382b27c066e60eab8eebcfce65eaa8f3",
+    "cat_de_roman_esti/web/static/assets/derivedReplay-BkW_Ev1N.js": "c4043b79927c87e6b88f99ca3c248f4b97a72f6cc328b4f0957a7348c9e4e195",
+    "cat_de_roman_esti/web/static/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a",
+    "cat_de_roman_esti/web/static/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2",
+    "cat_de_roman_esti/web/static/assets/index-CUTlrBK1.js": "afdf884cfc61f245e15962b8556f6ebd79a83cda02fbe1bcd7a1803257ae80f5",
+    "cat_de_roman_esti/web/static/assets/index-D9HNWgEs.css": "69fdcc4d03965c06d8d2fe53adcbcfcb6ff75cb0c2b64a013e5ec05d6c3988c2",
+    "cat_de_roman_esti/web/static/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956",
+    "cat_de_roman_esti/web/static/assets/inter-latin-wght-normal-Dx4kXJAl.woff2": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+    "cat_de_roman_esti/web/static/assets/scoreSync-B_JcWr2_.js": "d31e543a4e6708f1d0d90f9261d92719d66fdec81ce28c4be698abbb500efd06",
+    "cat_de_roman_esti/web/static/assets/useSavedGameResume-BxKsqTRy.js": "498a4c1c92ea439fb806a92cfcbef7438c790443d69898c6e61944285b614dd6",
+    "cat_de_roman_esti/web/static/index.html": "61174138bdc846555bd0ec3dd6d51535ea2763d45ad0ce3ef41173ebfcd0f022",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/games_pack.json": "6bf27de5da270258290ecb4ed41c3ef60a609e3e153855f38b7556a7f2aedeca",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "53fb3e4555205179072bd54a45f5b1b185de064625893dcf288902574a075e64",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "01fc906e390b8d3135f1856930458aa86873a525049b419eceb8652c72f717f8"
+  },
+  "inputsAfter": {
+    "frontend/src/screens/Intrusul.tsx": "6cdf10bdd37338709585546aa0bf68f441a38c880d570b3e7e3c401a01d584aa",
+    "frontend/src/screens/Perechi.tsx": "9ef326d1d32d2008232d45a1bb83c4f24b785526656bbf4618f1db50bb624dbe",
+    "frontend/src/gameActionRecovery.mjs": "b73851fd616aed6489139cd800bad2e8e6ab3480664470e765fd044ba9eb6267",
+    "frontend/src/App.tsx": "ffc34759f016984c2d078ca0a717fd1ce3337f579c17afd58ab4e78ea13bf121",
+    "frontend/src/hooks/useSavedGameResume.ts": "dff224adb580b3996c9145decb87fce217125de2cf1350b2e144919bc81070a5",
+    "frontend/src/hooks/useActiveGame.ts": "08e3dc295f75ee5b11f14a86b7b2836f7af73d7f5238decf7c650004c391cd02",
+    "frontend/src/hooks/useRecordScore.ts": "303cda5da3e26595ed39a5f9b2028ed6634318fc6c4a02bb9480dc310f3fee4b",
+    "frontend/e2e/derived-action-recovery.spec.mjs": "47f9a58afcbf8aee32ee30fe96c087db9bd9c89ecca4443457d483f03a4064d3",
+    "frontend/e2e/games.mjs": "47c7b3ad534fcb7c1756f02e9501420c737b7ef7fcd03d713239508807b54e61",
+    "frontend/e2e/solutions.py": "36c136cab6a7416f65a8e1ea72f6d07cefb810e8053997d33b96785ac9eaca38",
+    "frontend/e2e/seeded-starts.json": "aa06ee72ff7c2948c027636dc8c339fb91034f4bbfd349e0f269236aa317d41f",
+    "frontend/playwright.config.mjs": "4dcad7d73cdc4e10133afaa143417621ce5a445978c30740dad08fbfabcc0541",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "064ab3148d6490421846ed1965d4b77104236db77116a7fb1264c140618993c0",
+    "cat_de_roman_esti/web/static/assets/AccountBar-mOLes7YU.js": "8703171e7f6df8c2777c983081ddcc6aadedb9ff7c932d62891303a01f3b3d46",
+    "cat_de_roman_esti/web/static/assets/Alchimie-CHO8JNl6.js": "c38f9afd06e7e036af0e317d69e0a3540eb5c58e85f660d9074d995e40d74c54",
+    "cat_de_roman_esti/web/static/assets/CaldRece-N5SuLeY-.js": "430b22ad6e08e540c60812d221ef228962174014b04a7d81b4dd14baa783fdad",
+    "cat_de_roman_esti/web/static/assets/CategoryPicker-4kKssI1G.js": "e8c92a5d200763e081b89066ba06bbcdc104627828bc8c8e9d3ed947d7ddfe89",
+    "cat_de_roman_esti/web/static/assets/Conexiuni-DHnkpaVN.js": "922eaefb7edd17d73a39dde200af3155b2d19a337a826fb3d6e134d11a023a77",
+    "cat_de_roman_esti/web/static/assets/Intrusul-BMAa8k2-.js": "b387ac9f2a893aa6e3b3609e44fa14defdf16c2e941f2f352710b324ae5d0402",
+    "cat_de_roman_esti/web/static/assets/Intrusul-Cqfmxx4e.css": "c9c51b66e08113c848f1be5c9b594aa5d213d5b84032ffda5b10041793b0d483",
+    "cat_de_roman_esti/web/static/assets/Lant-DaUqEGNe.js": "dac5570fb33efaaf60cd64e90ec873b3af67d04e8935c3a78c9a23843812c8e2",
+    "cat_de_roman_esti/web/static/assets/Perechi-BmknC8dD.css": "76604a113f482ffd476479da328e6c23d9e9723c90de93eda66849c22470c53e",
+    "cat_de_roman_esti/web/static/assets/Perechi-C60yeT6P.js": "8871a431a35e5eda65caaacf0b731d5a2bdc492c77aeba5b406ff382154cd19c",
+    "cat_de_roman_esti/web/static/assets/Ranking-CmIpE2C9.js": "16e29b7300ad25678f820e8bb4efb9b3114111d216b8ed8ea6627505eea793a1",
+    "cat_de_roman_esti/web/static/assets/auth-BQkoQX_A.js": "ee61fc763443c23091582de09978fcc1382b27c066e60eab8eebcfce65eaa8f3",
+    "cat_de_roman_esti/web/static/assets/derivedReplay-BkW_Ev1N.js": "c4043b79927c87e6b88f99ca3c248f4b97a72f6cc328b4f0957a7348c9e4e195",
+    "cat_de_roman_esti/web/static/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a",
+    "cat_de_roman_esti/web/static/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2",
+    "cat_de_roman_esti/web/static/assets/index-CUTlrBK1.js": "afdf884cfc61f245e15962b8556f6ebd79a83cda02fbe1bcd7a1803257ae80f5",
+    "cat_de_roman_esti/web/static/assets/index-D9HNWgEs.css": "69fdcc4d03965c06d8d2fe53adcbcfcb6ff75cb0c2b64a013e5ec05d6c3988c2",
+    "cat_de_roman_esti/web/static/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956",
+    "cat_de_roman_esti/web/static/assets/inter-latin-wght-normal-Dx4kXJAl.woff2": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+    "cat_de_roman_esti/web/static/assets/scoreSync-B_JcWr2_.js": "d31e543a4e6708f1d0d90f9261d92719d66fdec81ce28c4be698abbb500efd06",
+    "cat_de_roman_esti/web/static/assets/useSavedGameResume-BxKsqTRy.js": "498a4c1c92ea439fb806a92cfcbef7438c790443d69898c6e61944285b614dd6",
+    "cat_de_roman_esti/web/static/index.html": "61174138bdc846555bd0ec3dd6d51535ea2763d45ad0ce3ef41173ebfcd0f022",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/games_pack.json": "6bf27de5da270258290ecb4ed41c3ef60a609e3e153855f38b7556a7f2aedeca",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "53fb3e4555205179072bd54a45f5b1b185de064625893dcf288902574a075e64",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "01fc906e390b8d3135f1856930458aa86873a525049b419eceb8652c72f717f8"
+  },
+  "all39InputsStable": true,
+  "changedInputs": [],
+  "artifacts": {
+    "presence-final-back.log": "789dca0a0871c89014ac76dc361c36573f53e93f0107f684112aba6216fd58b2",
+    "presence-final-inputs-before.json": "9d74bbbf927ccba7c0c4feac39e43849ee2b4a77b131e5da94834c99873984c6",
+    "presence-final-null-pointer-retry.json": "d44abef7cd7a047e5fa822f3278dda19846e1de679cfd4718d319f741b6ed4a1",
+    "presence-final-null-pointer-retry.mjs": "5b5863fe74ad699dce1b4b2385a062f4c9c6523efd71b48c169f1626fa3a93f2",
+    "presence-final-null-pointer.log": "50dfc484bebcb67b7bc72175bd177427feef6f0e910787711e340e445b887df0",
+    "presence-final-results/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+    "presence-final-results/derived-action-recovery-in-42377-ly-arrives-during-departure-desktop/test-finished-1.png": "2e35f6474f6edc563b3cdcd729dff5186bb556bbb22e8905bef718585cbe2019",
+    "presence-final-results/derived-action-recovery-in-42377-ly-arrives-during-departure-desktop/trace.zip": "d67c8ba0290e61a71861282f91a9e74451587e226045c46f476833d87f88caca",
+    "presence-final-results/derived-action-recovery-in-42377-ly-arrives-during-departure-mobile/test-finished-1.png": "c3ad88bfea7244c153eb1221f668b03a60340f964523e64d8e70bb8ad1bb49de",
+    "presence-final-results/derived-action-recovery-in-42377-ly-arrives-during-departure-mobile/trace.zip": "d6639adb26b02c4e512a744b88ba748c300b23799d7bdcf1fe811dec6de126ba",
+    "presence-final-results/derived-action-recovery-pe-13412-ly-arrives-during-departure-desktop/test-finished-1.png": "0f433c61fede3dc23ce0e459ec20a3adf905ac93e27930f7eac967aae41c18e3",
+    "presence-final-results/derived-action-recovery-pe-13412-ly-arrives-during-departure-desktop/trace.zip": "2d3b4d936ea207aceb58bb6bf83032ccc5fbd33b16554b498f84617960e462c2",
+    "presence-final-results/derived-action-recovery-pe-13412-ly-arrives-during-departure-mobile/test-finished-1.png": "034e365b79ad65190f83e50711cc5303c6174ef769c44a932484be9f7060592a",
+    "presence-final-results/derived-action-recovery-pe-13412-ly-arrives-during-departure-mobile/trace.zip": "1c2056f1a04d49417492548cbf671f412491ef7c0c8bd23a4155360d42914f82",
+    "presence-final-results.json": "ffae2e195d4453408d37466ac459ed74b35c67f1113b1ae91e1f1f9e77932595",
+    "presence-final.config.mjs": "b7fe0d6b384f399680a6e8bbf45063a2580ffc8a8ab65091b5ac5cec5a50b63a"
+  },
+  "serverLifecycle": "Reused parent Playwright BFF on8188; no start/stop",
+  "remaining": "Root full80 suite and final landing gates owned by orchestrator"
+}

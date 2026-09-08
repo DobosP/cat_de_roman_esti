@@ -146,8 +146,9 @@ def test_five_exact_v89_artifacts_reconstruct_without_accepting_unreviewed_rows(
 
 
 def test_old659_pack_records_83_alchimie_100_lant_and_336_derived_rows_remain_exact():
-    live = _read(FIXTURES / "games_pack.json")
-    old = history.before_v90_pack(live)
+    current_pack = _read(FIXTURES / "games_pack.json")
+    live = history.before_v91_artifact(current_pack, "games_pack.json")
+    old = history.before_v90_pack(current_pack)
     games = ("conexiuni", "contexto", "lant", "alchimie")
     assert sum(len(old[game]) for game in games) == 659
     for game in games:

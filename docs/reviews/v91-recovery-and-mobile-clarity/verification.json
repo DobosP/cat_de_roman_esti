@@ -1,0 +1,502 @@
+{
+  "schema_version": 2,
+  "date": "2026-09-09",
+  "baseline_commit": "e2e03638b90fc9248c33f70eedaa8c9c5fbd87ad",
+  "candidate_branch": "feat/v91-recovery-and-mobile-clarity",
+  "result": "passed",
+  "checks": {
+    "backend312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 916.52,
+      "log_sha256": "b9e58097eceed93e9d4f897ef6941194f8e27998501d8ce937159b08ff75915f",
+      "tail": [
+        "........................................................................ [ 56%]",
+        "........................................................................ [ 61%]",
+        "........................................................................ [ 65%]",
+        "........................................................................ [ 69%]",
+        "........................................................................ [ 74%]",
+        "........................................................................ [ 78%]",
+        "........................................................................ [ 82%]",
+        "........................................................................ [ 87%]",
+        "........................................................................ [ 91%]",
+        "........................................................................ [ 95%]",
+        "....................................................................     [100%]",
+        "1652 passed in 914.63s (0:15:14)"
+      ],
+      "archive": {
+        "path": "integration-logs/backend312.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "b9e58097eceed93e9d4f897ef6941194f8e27998501d8ce937159b08ff75915f",
+        "archive_sha256": "d2b5cbfdb785f0ef8c302e91e290f40b1dcc89df87d55eca2e67cc0793ee6e47",
+        "decoded_bytes": 1873,
+        "archive_bytes": 146
+      }
+    },
+    "accounts312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 4.58,
+      "log_sha256": "f285dcbdbe1147d5a5b04f54c82797e4df57ffdbf6c79da82c56a781cd041dcc",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 3.59s"
+      ],
+      "archive": {
+        "path": "integration-logs/accounts312.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "f285dcbdbe1147d5a5b04f54c82797e4df57ffdbf6c79da82c56a781cd041dcc",
+        "archive_sha256": "29511f1adfb9f4e3dfd67956a270ab7935c95f9a86a2ff1af7e5c6741a7f9a0e",
+        "decoded_bytes": 99,
+        "archive_bytes": 52
+      }
+    },
+    "backend314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v91-recovery-and-mobile-clarity/py314/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 820.36,
+      "log_sha256": "0ab813cb2805fff22282d39f836b2bf8fc5b06bb9086e4b28463ac900e7a843a",
+      "tail": [
+        "........................................................................ [ 56%]",
+        "........................................................................ [ 61%]",
+        "........................................................................ [ 65%]",
+        "........................................................................ [ 69%]",
+        "........................................................................ [ 74%]",
+        "........................................................................ [ 78%]",
+        "........................................................................ [ 82%]",
+        "........................................................................ [ 87%]",
+        "........................................................................ [ 91%]",
+        "........................................................................ [ 95%]",
+        "....................................................................     [100%]",
+        "1652 passed in 816.30s (0:13:36)"
+      ],
+      "archive": {
+        "path": "integration-logs/backend314.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "0ab813cb2805fff22282d39f836b2bf8fc5b06bb9086e4b28463ac900e7a843a",
+        "archive_sha256": "dd63bc2f50f3e3d9e2e8f7aef9312ee6391fa577408b34053280bf06ebc44905",
+        "decoded_bytes": 1873,
+        "archive_bytes": 145
+      }
+    },
+    "accounts314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v91-recovery-and-mobile-clarity/py314/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 5.03,
+      "log_sha256": "8250398a772f42bf853d39bf0c33b67a6de1b08b4ccd795b125f8d8fcc29fcf3",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 3.58s"
+      ],
+      "archive": {
+        "path": "integration-logs/accounts314.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "8250398a772f42bf853d39bf0c33b67a6de1b08b4ccd795b125f8d8fcc29fcf3",
+        "archive_sha256": "e1f50aa84af83932decc5fa8d9d1a6630420ebcfbcd58ecd56cf8701facf1299",
+        "decoded_bytes": 99,
+        "archive_bytes": 52
+      }
+    },
+    "frontend_native": {
+      "command": [
+        "npm",
+        "test"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 0.82,
+      "log_sha256": "77f7794a740a750ca17d7e66d91bc734cee15c390178602131271e14e8067502",
+      "tail": [
+        "✔ the starter chip appears on Intrusul/Perechi cards only pre-graduation (0.095661ms)",
+        "✔ the hero tagline names the cultural range and keeps the h1 untouched (0.075369ms)",
+        "✔ meta-loop CSS lives under its V42 anchor and keeps the diploma action >=44px (0.112096ms)",
+        "✔ optional account controls stay outside the initial bundle graph (0.060434ms)",
+        "ℹ tests 193",
+        "ℹ suites 0",
+        "ℹ pass 193",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 587.24049"
+      ],
+      "archive": {
+        "path": "integration-logs/frontend_native.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "77f7794a740a750ca17d7e66d91bc734cee15c390178602131271e14e8067502",
+        "archive_sha256": "31f895c2b30d09cc6296b0afc0daa69824d177302d96a0bd92f4af415ecefa63",
+        "decoded_bytes": 16478,
+        "archive_bytes": 6612
+      }
+    },
+    "frontend_lint": {
+      "command": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 5.23,
+      "log_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 lint",
+        "> eslint .",
+        ""
+      ],
+      "archive": {
+        "path": "integration-logs/frontend_lint.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+        "archive_sha256": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a",
+        "decoded_bytes": 53,
+        "archive_bytes": 70
+      }
+    },
+    "frontend_typecheck": {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 2.32,
+      "log_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 typecheck",
+        "> tsc --noEmit",
+        ""
+      ],
+      "archive": {
+        "path": "integration-logs/frontend_typecheck.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+        "archive_sha256": "d0e30d1dc915362da5e6d51943f265c1840c3182f61f2cd8a65a8159c982ac05",
+        "decoded_bytes": 62,
+        "archive_bytes": 82
+      }
+    },
+    "frontend_build": {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 4.13,
+      "log_sha256": "a005c8d4367fa14d0aca7ff572a8e8f2cb521867c5cc916c25656cde293c0aff",
+      "tail": [
+        "../cat_de_roman_esti/web/static/assets/index-CUTlrBK1.js                             348.55 kB │ gzip: 114.57 kB",
+        "",
+        "✓ built in 844ms",
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 check:bundle",
+        "> node scripts/check-bundle-budget.mjs",
+        "",
+        "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+        "   110.54 KiB  assets/index-CUTlrBK1.js",
+        "     8.53 KiB  assets/index-D9HNWgEs.css",
+        "   119.08 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ],
+      "archive": {
+        "path": "integration-logs/frontend_build.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "a005c8d4367fa14d0aca7ff572a8e8f2cb521867c5cc916c25656cde293c0aff",
+        "archive_sha256": "1a19dad78cbf4884f41c6961c56847e6c8728c63f84994bec54f69199c7ae005",
+        "decoded_bytes": 3123,
+        "archive_bytes": 976
+      }
+    },
+    "frontend_bundle": {
+      "command": [
+        "npm",
+        "run",
+        "check:bundle"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 0.17,
+      "log_sha256": "375dd3a6a442ffc039a2d689cd6479fcd88bc3838b7768a91c9521a95a09598d",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 check:bundle",
+        "> node scripts/check-bundle-budget.mjs",
+        "",
+        "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+        "   110.54 KiB  assets/index-CUTlrBK1.js",
+        "     8.53 KiB  assets/index-D9HNWgEs.css",
+        "   119.08 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ],
+      "archive": {
+        "path": "integration-logs/frontend_bundle.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "375dd3a6a442ffc039a2d689cd6479fcd88bc3838b7768a91c9521a95a09598d",
+        "archive_sha256": "a7341135e931c5beb80c7c9e2539895fbe97ddbe46f602aed0f750fba0b20475",
+        "decoded_bytes": 292,
+        "archive_bytes": 232
+      }
+    },
+    "browser": {
+      "command": [
+        "npm",
+        "run",
+        "test:e2e",
+        "--",
+        "--workers=2"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 597.96,
+      "log_sha256": "0d833722ab1a7f836ef9364e3263ff1fdfc774f28d6cb63b93accb006cb1ec26",
+      "tail": [
+        "  ✓  333 [mobile] › e2e/start-failure.spec.mjs:93:3 › intrusul retains its completed result when replay creation fails (3.8s)",
+        "  ✓  334 [mobile] › e2e/start-failure.spec.mjs:50:3 › perechi keeps a failed new start visible and retries the selected options (3.3s)",
+        "  ✓  335 [mobile] › e2e/start-failure.spec.mjs:93:3 › perechi retains its completed result when replay creation fails (4.4s)",
+        "  ✓  336 [mobile] › e2e/start-failure.spec.mjs:50:3 › conexiuni keeps a failed new start visible and retries the selected options (4.1s)",
+        "  ✓  337 [mobile] › e2e/start-failure.spec.mjs:93:3 › conexiuni retains its completed result when replay creation fails (7.6s)",
+        "  ✓  338 [mobile] › e2e/start-failure.spec.mjs:50:3 › contexto keeps a failed new start visible and retries the selected options (3.3s)",
+        "  ✓  339 [mobile] › e2e/start-failure.spec.mjs:93:3 › contexto retains its completed result when replay creation fails (3.7s)",
+        "  ✓  340 [mobile] › e2e/start-failure.spec.mjs:50:3 › lant keeps a failed new start visible and retries the selected options (3.1s)",
+        "  ✓  341 [mobile] › e2e/start-failure.spec.mjs:93:3 › lant retains its completed result when replay creation fails (2.9s)",
+        "  ✓  342 [mobile] › e2e/start-failure.spec.mjs:143:1 › alchimie retains its live round and blocks actions while another round is pending (2.6s)",
+        "",
+        "  342 passed (10.0m)"
+      ],
+      "archive": {
+        "path": "integration-logs/browser.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "0d833722ab1a7f836ef9364e3263ff1fdfc774f28d6cb63b93accb006cb1ec26",
+        "archive_sha256": "6abeb3219f6e2143b2a6dfd721b7eda8a628decd2561ae79f613441de22e7f7d",
+        "decoded_bytes": 53151,
+        "archive_bytes": 6182
+      }
+    },
+    "fixture": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_fixture.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 0.32,
+      "log_sha256": "317133e362be2cf8d078dd67edb2842d8ae8fea30ff57dad128bc0514f575d66",
+      "tail": [
+        "  [  ok] alias_unique                 0 error(s)",
+        "  [  ok] label_style                  0 error(s)",
+        "  [  ok] meta_counts                  0 error(s)",
+        "  [  ok] puzzle_par                   0 error(s)",
+        "  [  ok] puzzle_hop_band              0 error(s)",
+        "  [  ok] puzzle_hints                 0 error(s)",
+        "  [  ok] puzzle_ids_resolve           0 error(s)",
+        "  [  ok] puzzle_shortest_path         0 error(s)",
+        "  [  ok] puzzle_category_scope        0 error(s)",
+        "  [  ok] puzzle_distractor_shortcut   0 error(s)",
+        "------------------------------------------------------------",
+        "GREEN: fixture is valid (0 errors)"
+      ],
+      "archive": {
+        "path": "integration-logs/fixture.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "317133e362be2cf8d078dd67edb2842d8ae8fea30ff57dad128bc0514f575d66",
+        "archive_sha256": "ca56952e35e91dd1f92e1ef547246b570f23f1a8acae77e37ecd94b27bd79ba3",
+        "decoded_bytes": 1035,
+        "archive_bytes": 320
+      }
+    },
+    "pack": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_games_pack.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 12.67,
+      "log_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+      "tail": [
+        "  copies_identical         ok",
+        "  structure                ok",
+        "  item_shape               ok",
+        "  unique_ids               ok",
+        "  playability              ok",
+        "  meta_counts              ok",
+        "  id_high_water            ok",
+        "",
+        "games pack GREEN"
+      ],
+      "archive": {
+        "path": "integration-logs/pack.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+        "archive_sha256": "09f01c42a2829a3b8877e60802bae8967baeb530df5220cbc675238466da65a4",
+        "decoded_bytes": 228,
+        "archive_bytes": 128
+      }
+    },
+    "pending": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/critique_pack.py",
+        "--status",
+        "pending",
+        "--strict"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 0.57,
+      "log_sha256": "f19d308c2a43b0b95b9b12f3458a99e9f64ce7c982f4f113f1997cbbcffae852",
+      "tail": [
+        "critique_pack: 8 item(s) checked, 0 flagged, 0 FAIL finding(s)",
+        "  member_overuse       WARN x65",
+        "  nondistinctive_region_link WARN x16"
+      ],
+      "archive": {
+        "path": "integration-logs/pending.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "f19d308c2a43b0b95b9b12f3458a99e9f64ce7c982f4f113f1997cbbcffae852",
+        "archive_sha256": "beccbf15577ac4c2020c302579819da43b23a3548cab6e7afe5fc83ca4af4959",
+        "decoded_bytes": 133,
+        "archive_bytes": 135
+      }
+    },
+    "ruff": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 0.06,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "tail": [
+        "All checks passed!"
+      ],
+      "archive": {
+        "path": "integration-logs/ruff.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "archive_sha256": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd",
+        "decoded_bytes": 19,
+        "archive_bytes": 39
+      }
+    },
+    "docs": {
+      "command": [
+        "python3",
+        "/home/dobo/work/agent-ops/scripts/check_docs.py",
+        "."
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 0.12,
+      "log_sha256": "c08acd79e8775352229c6420255a2d10821c56a5fb3cfcbfcd9d8edca3c9be43",
+      "tail": [
+        "",
+        "## dead links",
+        "(none)",
+        "",
+        "## stale model terms",
+        "(none)",
+        "",
+        "## retired ops verbs",
+        "(none)",
+        "",
+        "## orphan docs",
+        "(none)"
+      ],
+      "archive": {
+        "path": "integration-logs/docs.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "c08acd79e8775352229c6420255a2d10821c56a5fb3cfcbfcd9d8edca3c9be43",
+        "archive_sha256": "f8d2b07f02c6fdb7b054f2c79890998f44cf188b81cb9dcacde0ede5556c23bb",
+        "decoded_bytes": 261,
+        "archive_bytes": 185
+      }
+    },
+    "whitespace": {
+      "command": [
+        "git",
+        "diff",
+        "HEAD",
+        "--check"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v91-recovery-and-mobile-clarity",
+      "exit_code": 0,
+      "elapsed_seconds": 0.16,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tail": [],
+      "archive": {
+        "path": "integration-logs/whitespace.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "archive_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "decoded_bytes": 0,
+        "archive_bytes": 20
+      }
+    }
+  },
+  "input_freeze_sha256": "5be289877b18d70887d4c0fa4282c6b83f941f29ea0dd942ffdf066a1304d3fc",
+  "backend_input_freeze_sha256": "b22bcd9500efe78a34995114414737f8cabd18b722bbe17c283dcc52d2bcf2f8",
+  "test_amendments": [
+    "source-freeze-amendment.json",
+    "frontend-test-amendment.json"
+  ],
+  "scope_note": "Final V91 local gates. The first backend312 run was deliberately interrupted after two isolated stale Sport expectations; its red partial result is excluded. Both full Python matrices then passed with the corrected historical/current assertions. The first full browser run completed338pass/2fail from old hint setup; original traces/logs are retained. Final full browser runs all342cases with2isolatedworkers and0retries after test-only setup correction. Source-freeze-amendment.json and frontend-test-amendment.json bind the two narrowly scoped test amendments; all serving runtime/data and final UI assets stayed unchanged. No push/deployment or V92."
+}

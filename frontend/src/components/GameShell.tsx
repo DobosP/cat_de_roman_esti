@@ -5,7 +5,7 @@
 // title so each game keeps its own colour identity while sharing the exact same
 // layout, tap-targets, and accessibility wiring.
 
-import type { ReactNode } from "react";
+import { useLayoutEffect, useRef, type ReactNode } from "react";
 import { Button } from "@roedu/ui";
 import type { GameKey } from "../games";
 import { GameHelp } from "./GameHelp";
@@ -31,9 +31,29 @@ export function GameShell({
   /** Answer-free rules below the header for an active round. */
   helpGame?: GameKey;
 }) {
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const header = headerRef.current;
+    const scroller = header?.closest<HTMLElement>(".screen-pad");
+    if (!header || !scroller) return;
+    // Badges can wrap again after a clue, font load, resize or text zoom. Keep
+    // the other sticky controls below the actual header, including those cases.
+    const measure = () => scroller.style.setProperty(
+      "--game-shell-header-height", `${header.offsetHeight}px`,
+    );
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(header);
+    return () => {
+      observer.disconnect();
+      scroller.style.removeProperty("--game-shell-header-height");
+    };
+  }, []);
+
   return (
     <>
-      <div className="row spread game-shell-header" style={{ gap: 12 }}>
+      <div ref={headerRef} className="row spread game-shell-header" style={{ gap: 12 }}>
         <div className="row game-shell-main" style={{ gap: 10, alignItems: "center" }}>
           <Button
             variant="secondary"
