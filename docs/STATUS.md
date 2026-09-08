@@ -1,12 +1,13 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-08 — V89 GREEN candidate; local landing pending. Production last checked 2026-08-27.
+Last verified: 2026-09-08 — V89 landed locally; V90 started; local loop active. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-  V88 is merged at `000b0a2`, recorded by local main `b614bfe`. V89 is implemented on
-  `feat/v89-feedback-and-conexiuni-recovery`; the local loop continues (ADR-0127).
+  V89 is merged at `143bfdb`, following V88 `000b0a2` and its landing record `b614bfe`.
+  V90 starts on `feat/v90-household-discovery-and-critique-gates`; the local loop
+  continues until stopped (ADR-0127).
 - Conexiuni reconciles lost guess/clue responses with one owned GET. Earned clues,
   solved groups and wins/losses recover without replaying a mutation. Failed verification
   retains a visible read-only retry and locks board actions; stale replies cannot adopt
@@ -76,7 +77,10 @@ Mobile content: `sha256:f8f5c13f2cb302338f35adf38e311906856d24cb04f58592c77783a5
   assertion included new Mop. The exact test-only correction passes 110 focused cases;
   final full backends pass **1,531 tests each on Python 3.12.3 /3.14.6**, plus
   **53 accounts tests each**. All 407 integration input hashes remain unchanged.
-  Current evidence: `docs/reviews/v89-feedback-and-conexiuni-recovery/`.
+  Final independent audit accepts all 16 receipts and 407 input hashes. The final
+  candidate manifest binds 237 present/deleted files, including its audit snapshot/pair.
+  Evidence is sealed by implementation commit `143bfdb`; later status notes are docs only.
+  `docs/reviews/v89-feedback-and-conexiuni-recovery/`.
 
 ## Production — last observed 2026-08-27
 
@@ -88,8 +92,9 @@ Mobile content: `sha256:f8f5c13f2cb302338f35adf38e311906856d24cb04f58592c77783a5
 
 ## Remaining gates
 
-- Complete the final evidence audit and land V89 locally; then start V90 household
-  discovery and critique improvements under the owner-authorized recurring loop.
+- V90 starts household vocabulary and truthful directed-discovery work, a necessary
+  incoming-neighbor critique floor, and an all-six-game review. Alchimie lost-action
+  behavior requires actual reproduction before choosing a fix. No V90 promotion yet.
 - The household screen finds 19/33 deliberately broad tested surfaces unrecognized,
   including murdărie/firimituri/pardoseală. This is a stress sample, not a player-frequency
   estimate. Electricitate→Aspirator remains cold378 while Apă is hot9; broader semantic

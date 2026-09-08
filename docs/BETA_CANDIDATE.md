@@ -4,7 +4,8 @@ Valid until: the next verified quality wave — then refresh this living checkli
 
 Target: public anonymous beta for Romanian players. **V89 implements recoverable
 Conexiuni actions, one reviewed Mop round and four exact feedback corrections.
-Full integration is GREEN; V89 awaits local landing. V88 is merged at `000b0a2`.**
+Full integration is GREEN and V89 is landed locally at `143bfdb`. V90 starts household
+discovery and critique improvements; V88 remains in its ancestry at `000b0a2`.**
 The recurring local iteration follows [ADR-0127](adr/0127-recurring-local-version-loop.md)
 until the owner stops it. No push or deployment occurred.
 Public rollout still requires the external checks below.

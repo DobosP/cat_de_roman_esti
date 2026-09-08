@@ -671,3 +671,25 @@ The first backend run passed1,530 and failed one historical V44 sink assertion t
 included the new Mop target. Its original evidence is preserved; the narrow test-only
 correction passes110 focused checks and both final full matrices. All16 final gates
 are green and runtime/data remain exact. No V89 landing claimed by this candidate record.
+
+## V89 landing and V90 start (2026-09-08)
+
+Valid until: V90 completes — then treat this transition record as history.
+
+V89 `143bfdb56dc3e8cd765fda30ca23fb6a0e30b55c` was fast-forwarded into local main after
+16 green gates and independent content, recovery, feedback, historical-correction and
+final integration audits. The final candidate manifest binds237 present/deleted files,
+including the earlier committed kickoff, immutable audit input and final audit pair.
+The407 input hashes remain exact after the sole historical-test correction; all runtime,
+frontend and data bytes are the same as the reviewed/passing candidate. The original
+1,530-pass/one-failure run remains archived. Candidate evidence refers to implementation
+commit143bfdb; this landing record only updates living status documentation.
+
+V90's task worktree exists on `feat/v90-household-discovery-and-critique-gates`. It starts
+with ordinary household vocabulary, factual incoming discovery links, necessary C3
+floor diagnostics and an all-six-game assessment. The held pending Contexto records
+have8/13 incoming neighbors; no floor exception is needed, and their A5 holds remain.
+Investigate any effect of approved warnings on ranking before implementing the check.
+Alchimie lost-action behavior needs a real baseline reproduction before a recovery fix.
+The local recurring loop remains ACTIVE. No push, deployment or external contact occurred.
+Clean up only the verified-merged V89 branch/worktree/scratch after this record is merged.
