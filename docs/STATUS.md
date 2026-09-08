@@ -1,12 +1,12 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-08 — V85 full integration GREEN; candidate ready for local landing. Production last checked 2026-08-27.
+Last verified: 2026-09-08 — V85 full integration GREEN; landed locally; V86 starts next. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-  V84 landed locally at `eb4155c`, followed by landing record `39b64cb`.
-  V85 candidate: `feat/v85-ingredient-feedback-and-board-clarity`. No push or deployment.
+  V85 is merged into local main at `317ae7d`, following V84 and its record `39b64cb`.
+  V86 starts from this verified content. No push or deployment.
 - V85 adds eight culinary concepts, 25 accepted forms and 40 new specific links.
   One existing Mucenici/Moldova relation is relabelled correctly as the baked variant,
   preserving its endpoints, strength and directions (41 added edge IDs / one retired ID).
@@ -87,7 +87,8 @@ Mobile content: `sha256:39da1d1b2ed32509d4ce6974251304454aa8d5b84976f9e475bd3816
 
 ## Remaining gates
 
-- V85 is ready on its task branch for its next landing request.
+- V86 continues reviewed gameplay, input/feedback and content improvements. Its final
+  implementation and integration are not yet complete.
 - Indirect oven/yeast feedback remains too warm for some desserts; refrigerator is weak for
   Înghețată and bare “rece” is not accepted. The legal Poale-n brâu route is not shown among
   the initial three Lanț suggestions. Human fairness and enjoyment remain unmeasured.

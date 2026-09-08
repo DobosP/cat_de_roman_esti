@@ -2,9 +2,9 @@
 
 Valid until: the next verified quality wave — then refresh this living checklist.
 
-Target: public anonymous beta for Romanian players. **V84 is merged locally; V85 is a
-verified candidate with eight ingredient concepts, 40 new links, a corrected regional
-relation, clearer board labels and five new playable rounds.** Public rollout still
+Target: public anonymous beta for Romanian players. **V85 is merged locally with eight
+ingredient concepts, 40 new links, a corrected regional relation, clearer board labels
+and five new playable rounds. V86 starts the next reviewed quality/content batch.** Public rollout still
 requires the external checks below.
 Current facts and exact pins: [STATUS](STATUS.md).
 

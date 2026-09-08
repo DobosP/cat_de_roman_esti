@@ -458,3 +458,15 @@ The actual corrected Intrusul clue was inspected at 390×844 in browser emulatio
 V85 is ready on `feat/v85-ingredient-feedback-and-board-clarity` for its next landing request.
 Shared main remains at `39b64cb`. No push, deployment, real-device acceptance or human playtest
 occurred. Exact reviews, receipts and file bindings are in the V85 review archive.
+
+
+## V85 local landing and V86 start, 2026-09-08
+
+Valid until: the next landing or version changes these facts — then treat as history.
+
+Verified all 82 V85 manifest bindings at `317ae7d` and all 15 actual final green gate
+receipts, including 1,299 backend tests and 53 accounts tests on each Python version,
+177 native frontend tests and 122 browser checks. Landed that candidate into local main
+with this documentation record. V86 begins another batch of player-visible fixes,
+reviewed concepts/links and playable content; remaining preparation/cooling feedback and
+Lanț suggestion coverage are initial investigation candidates. No push or deployment.
