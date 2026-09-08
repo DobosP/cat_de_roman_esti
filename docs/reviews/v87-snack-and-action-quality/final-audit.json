@@ -1,0 +1,614 @@
+{
+  "schema_version": 1,
+  "reviewer": "v84_graph_research",
+  "audited_date": "2026-09-08",
+  "baseline_commit": "daae025b19517c18cba2f46c6b11ea4991d9a19c",
+  "candidate_branch": "feat/v87-snack-and-action-quality",
+  "verdict": "accept",
+  "scope": "Independent final verification of individual source/artifact/doc/review bindings, deletion evidence, original execution receipts, lossless logs, content/provenance claims and retained failures. No test rerun or runtime/test edit.",
+  "manifest_hash_intentionally_excluded": true,
+  "manifest_policy": "This audit binds individual reviewed files and gates, never review-manifest.json itself; root may regenerate that manifest to include these two new audit artifacts.",
+  "binding_counts": {
+    "sources": 23,
+    "artifacts": 26,
+    "decision_files": 3,
+    "documentation": 5,
+    "review_files": 95,
+    "present_files": 152,
+    "removed_files": 13,
+    "total": 165
+  },
+  "reviewed_files": {
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "da434a56703eaf2cbe5694c380fc27a3ee2edb9659c060bbb6ced2752d4020c6",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "8fc5829b07ae2bbcfcc4701c5539d35b09d3df5f2ccc25b19a2478bfcf938802",
+    "cat_de_roman_esti/wordgames/derived_catalog.py": "fc586eb0c6a0febc67d68c542df82a1d57d18bf4cbf7ca6e1013f54fbc2be3fb",
+    "frontend/e2e/contexto-action-recovery.spec.mjs": "da6c7c56eb59939471fd2e4da378b3f9fe0c86e3544fc2185feba30ace1af1a6",
+    "frontend/src/contextoActionRecovery.d.mts": "ce08589d200a173aff56ae2ec502ea89668dda14e4f5323557445ad583d95c6b",
+    "frontend/src/contextoActionRecovery.mjs": "40ece15c03a1a27d69eba02ea3d51b242e7405f72713ab9dc7999139d644f9d0",
+    "frontend/src/screens/CaldRece.tsx": "693793475686b08197ae3d2e4a6f40e6a01965a1b9c73469895fd2cf6df09a13",
+    "frontend/tests/cald-rece-recovery.test.mjs": "48c33b457f70e1263642a4b06ea5e7c4a49ae72a9fd878ef604b61275fc826c6",
+    "frontend/tests/contexto-action-recovery.test.mjs": "a7c912b512a08e2ecb52b0770e6e159f8cde9e1b6c76d350a1f71ad36a1c8bbe",
+    "frontend/tests/contexto-progressive-clue.test.mjs": "00b8bef8db7bc07b61e6e5f6925653b9d1a4d08fcc83371dbf3e1492631129c2",
+    "frontend/tests/v42-caldrece-legend-confirm.test.mjs": "93f27564377736a23061388ac64bc7758b79c845f2cad3750e645761b4a2f454",
+    "scripts/snack_graph_v87_data.py": "f781e6b9152dbcfe3019d7cbe8a3f684d5575b221ce67753b8e060e29ddf80f6",
+    "tests/content_history.py": "459483e487f3f9b5807b34da35a8c30c66f2135b8cc80360ea96f9f30d00fd5b",
+    "tests/current_content.py": "8a663ceed593e9a4293480ced596e53c26718253a5a21f17472d29e56cda022c",
+    "tests/test_v79_gem_feedback.py": "a21775c365c7d5cb10f187ee5856ec6a0597de33d9303459dd29bbbe25d2a154",
+    "tests/test_v81_nuca_feedback.py": "f046673705d4f73c91957f94a69ce5d716a80bd7175f86bf467b23e44ab6a904",
+    "tests/test_v82_burta_feedback.py": "8a2348a2e8c86aea0984538495dd78ca70729494ce00c264f8934ac324e1b1a7",
+    "tests/test_v83_food_feedback.py": "b0ae19c7ed3aac5157d5c25c3910f1e8a39c967ed8575f974f946fa8d41c3f3c",
+    "tests/test_v85_ingredient_graph.py": "b36f8158b2b1c31ed51914706ff571c788025aa820a5d21c3117f1f27c2ac741",
+    "tests/test_v86_preparation_graph.py": "0471521943940c50526ac57bd9c14950e4af9a2881fd1404e9faaf694887afd0",
+    "tests/test_v87_snack_graph.py": "d2154e85384c6004e8082b243589d0ca69f09fa5aafa448a076d534f4a0e7391",
+    "tests/test_wordgames_contexto.py": "80ae194215801f136db601d02b2d9af3568defae0643dbf49f7d8efcdc3151ad",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "53defb36ab442aee1135ae3dd0522559abe27234048f9accdfbd5c9fe75eccc3",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "f4e16944845311eeba231f866c5578a4f1de9ee40e08857cca575930a2bf1278",
+    "cat_de_roman_esti/fixtures/games_pack.json": "536036f6d030be4e8750fb104325b67a9363535506d453ef8a0e0a824a3b63ab",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "96d50f8b724b9d1d1ff5d02b5a9a206445d7d9edead778d6db173f00ac094bfa",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "9fb0f0eee097f16170df013cc9989a3b6e1014a657f3ae596acc782449e70735",
+    "cat_de_roman_esti/web/static/assets/AccountBar-CuCxjHy5.js": "d241355914a349faba7126dae6e984529a11811105763fde6e6d7746c46b67ec",
+    "cat_de_roman_esti/web/static/assets/Alchimie-D4OZVBXY.js": "de8e13fbd472db88343522989e43d1875c3f44a3c9873c9988ffd85621e92100",
+    "cat_de_roman_esti/web/static/assets/CaldRece-BEMhlZ9U.js": "b6ca53885211a04dc3fbb5a439c6a03edda26ae02f1f89e1cf3f94a05e384dd8",
+    "cat_de_roman_esti/web/static/assets/CategoryPicker-kbXR-Xa0.js": "9a46dc67502262f535609c780dac8e0164914f284f96452b39e8c4f3a99bfb57",
+    "cat_de_roman_esti/web/static/assets/Conexiuni-BGydfuC4.js": "7bd71ee2accb78eb2e0a001e2ccf30cc27d8b90c3ef163aea2b8ae18134113b7",
+    "cat_de_roman_esti/web/static/assets/Intrusul-D39bEt_t.js": "89fd277d944277348f8982bfdf1cb0a273fc9df8b848d024532c2a485c3f39d0",
+    "cat_de_roman_esti/web/static/assets/Lant-CbJzEg37.js": "61de5e81fec977a267cb596ee8309a56f9a32b32702d73a3fef4bba87dde5855",
+    "cat_de_roman_esti/web/static/assets/Perechi-HTAUDrQU.js": "20de68e96d35c6a4708223273940baf7d91c8ce9c58291e7ca498c9bb4b48d87",
+    "cat_de_roman_esti/web/static/assets/Ranking-B-HH2Hrj.js": "a17769d2b7cbc186daea3d7e2417503370191bc1b79b081d08e7f225343cb5fa",
+    "cat_de_roman_esti/web/static/assets/asyncControl-CGqc6tQz.js": "efc028c5b5002b9295cfbfa73a547d1abe9b83e2f95bdbc19f81b1464d9aa317",
+    "cat_de_roman_esti/web/static/assets/derivedReplay-BkW_Ev1N.js": "c4043b79927c87e6b88f99ca3c248f4b97a72f6cc328b4f0957a7348c9e4e195",
+    "cat_de_roman_esti/web/static/assets/index-Cj06vA4u.js": "ed30e1129d031b57885733292a6a57e81a8cf7e23779ca402acafcf39faf950d",
+    "cat_de_roman_esti/web/static/assets/scoreSync-BdSu3oAn.js": "c65bc7e17fe0ed395a5cb47cf426a0d74aa1a6c5a1604f450e51344b7bb6ee9c",
+    "cat_de_roman_esti/web/static/assets/useSavedGameResume-DhoZzkqG.js": "ace13eb951496568157e098e6766e4286df9fc2c375471626e436f81bd912781",
+    "cat_de_roman_esti/web/static/index.html": "18d977970e42de18adf48b0be8bb8f7eb5cf405858e8e314d31302ae5c7a934b",
+    "frontend/e2e/seeded-starts.json": "19cce8271ed192c05e28f3521ee84572d2c4f44104d4726e8b1c6c75cc77ef05",
+    "tests/fixtures/board_rankings_v37.json": "53defb36ab442aee1135ae3dd0522559abe27234048f9accdfbd5c9fe75eccc3",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "f0c346bff24fc821d56be1d41d15c7fca57c4473b637006679f712238a965ecf",
+    "tests/fixtures/derived_catalog_v38.json": "f4e16944845311eeba231f866c5578a4f1de9ee40e08857cca575930a2bf1278",
+    "tests/fixtures/games_pack.json": "536036f6d030be4e8750fb104325b67a9363535506d453ef8a0e0a824a3b63ab",
+    "tests/fixtures/kg_sample.json": "96d50f8b724b9d1d1ff5d02b5a9a206445d7d9edead778d6db173f00ac094bfa",
+    "docs/adr/0125-reviewed-snack-concepts-and-biscuit-cues.md": "cd35d64e71deb845a8b76b9711c04707e5f778b98cbbaf0e58812ab1a450fc17",
+    "docs/adr/0126-reconcile-uncertain-contexto-actions.md": "4e83a3dc48f83789824070372e8383570574921c2544f6b123419a2bbc79d0fd",
+    "docs/adr/README.md": "e551470fe7c7b4da19596bbe0a26302ed40a74cb6d1321db0482ef26e4f1ccd8",
+    "README.md": "333fc4fad44b04faf06008e1ae2dc41451ae619cf3a69414a3f36e58aad8543a",
+    "WORKLOG.md": "61f1b35700b9fd53a33c66c8bd9b976c96f9937d85f06a2eb7ef0ac4bededd94",
+    "docs/BETA_CANDIDATE.md": "77541ccee9d3c57baabc9359fb9ef1926eba5d1ce89c61804990c926ceca229e",
+    "docs/STATUS.md": "c4216eb245601bc7d399f1c2e3e2175a634c243d0720f96a1976e10accadaefe",
+    "docs/agent-map.md": "be54846755ac6e22769c723c5b9bf114e28c94e7f50c4e9d465e39546c450830",
+    "docs/reviews/v87-snack-and-action-quality/CODE_REVIEW.md": "899616992ee68c3645614c9f84fba2ed33e31b087d1359f7f0c92f5d5a31a609",
+    "docs/reviews/v87-snack-and-action-quality/GRAPH_AUTHORING.md": "28e237dd728f3de63fab84300b7a30512750593e9f0c2a6e3703f7b9c2844a0e",
+    "docs/reviews/v87-snack-and-action-quality/GRAPH_REVIEW.md": "508659a10da3d63336c04f671b64a59ad2730f606b22820600d85cdaa9512c67",
+    "docs/reviews/v87-snack-and-action-quality/README.md": "4b98b1daf1d95aef4b1034e733c4c472f44236282953b20f55938c03f32cef61",
+    "docs/reviews/v87-snack-and-action-quality/VERIFIER_REVIEW.md": "c59a6ecf7019dabbf9814bd5a8b39906362c552e36bdfd0c7c64bff2edb5133f",
+    "docs/reviews/v87-snack-and-action-quality/action/README.md": "b3bedbe335a66025a9132d02e5608458940b2d86220b2bcdf573c1a8ca9dafa3",
+    "docs/reviews/v87-snack-and-action-quality/action/proof/baseline-proof.log.gz": "712d75a30e6b6b277729c2aa6ff181ebc0a952661eccc895784eb54c84a9ec69",
+    "docs/reviews/v87-snack-and-action-quality/action/proof/baseline.spec.mjs.gz": "a82a2fdee90ce87ccc0aaaa47c355bc02044fc5a3a9a51bc9df809b5ab77c481",
+    "docs/reviews/v87-snack-and-action-quality/action/proof/lost-clue.json": "289b479cf0212f2a7b7aced051c8358b85e56916fe86539311502f1b7f62e0f3",
+    "docs/reviews/v87-snack-and-action-quality/action/proof/lost-win.json": "c598f614d085bd7fd3d9b4c5f43cd0ddd83584883d4b7b6a21bcf2f432786807",
+    "docs/reviews/v87-snack-and-action-quality/action/proof/lost-win.png": "b3e11cabc900b70dc7069006cd79867f4c9512f5af897738a666c70061808631",
+    "docs/reviews/v87-snack-and-action-quality/action/proof/playwright.config.mjs.gz": "76aa735d86f52e40f874d1e5d5a11791db962ad8f8f30b9a6d7670c0659f3c30",
+    "docs/reviews/v87-snack-and-action-quality/action/runs/browser-initial.log.gz": "4fb6826f3faab742f06a60e596287f9cb3994f0766defca887b999fac0f8c0f2",
+    "docs/reviews/v87-snack-and-action-quality/action/runs/build-final.log.gz": "fa0e6f3eda52f8908bcf408204194294c0837f9e33a94a2e963070dd9c6cb857",
+    "docs/reviews/v87-snack-and-action-quality/action/runs/lint-final.log.gz": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a",
+    "docs/reviews/v87-snack-and-action-quality/action/runs/native-after-expectation-update.log.gz": "5655f12f7220e8bc2150a2de7ce7d0a3deac31229b34994b21829e0079bc5173",
+    "docs/reviews/v87-snack-and-action-quality/action/runs/native-final.log.gz": "ab068450a3a72b4f772bb20b36d99d557f5141630e69c7e5ca57db487e6641ed",
+    "docs/reviews/v87-snack-and-action-quality/action/runs/native-initial.log.gz": "1ff633f09134a4dcf155cd48d015ab62c00f3614aafed40d24f19b74a516b4b2",
+    "docs/reviews/v87-snack-and-action-quality/action/screenshots/desktop-read-only-recovery.png": "df91af25df296c52e72a25641d9d7d27e5fb93ca16d8e34ac86747852c18600e",
+    "docs/reviews/v87-snack-and-action-quality/action/screenshots/mobile-read-only-recovery.png": "355a5ae0eaee0845bf3969c525ee271e311b58bff25bf96aaae32c61dc722c4c",
+    "docs/reviews/v87-snack-and-action-quality/action/verification.json": "57c81fac68e6c617f3ef95d42f03d8359ccd2dfec139595a4a01cf8224a756f6",
+    "docs/reviews/v87-snack-and-action-quality/analyst-review.json": "f19961bb4a6e283173721a830cb0b8c7e62cf35a1f14441ac876e4065e79224a",
+    "docs/reviews/v87-snack-and-action-quality/artifact-delta.json": "c0a69fa97ee45d744278d054d8585e3a30a5952ed861c4e691b40f8e3c04e0c4",
+    "docs/reviews/v87-snack-and-action-quality/audit-representative-change.json": "2e83a7f238c2e16e47a72c15a923a56a2635e4f80d8636a7f164b554991cf10b",
+    "docs/reviews/v87-snack-and-action-quality/code-review.json": "de562875865dd18a7bb5a170c633087710a4da11be955a18d4e042d237dca9f5",
+    "docs/reviews/v87-snack-and-action-quality/content-delta.json": "a97555980009867abb75ee4a4f7b61b8af246c16a306854701bb342b292d3d26",
+    "docs/reviews/v87-snack-and-action-quality/dossiers/ct_gastronomie_346.json": "52403a060048545f271657d8a6fac0cefeb59c7a10727ab2483e519e22a1e8e8",
+    "docs/reviews/v87-snack-and-action-quality/dossiers/ct_gastronomie_347.json": "0820680a647323a1a02430bb704a37878a4cd1000b3b20141fe9b99f5cdc846d",
+    "docs/reviews/v87-snack-and-action-quality/dossiers/ct_gastronomie_348.json": "2ababe9417b5528518fe38995f1a890ec62fd9fbf8a514112ea2f335c3ca8cac",
+    "docs/reviews/v87-snack-and-action-quality/dossiers/ct_gastronomie_349.json": "9163a918f778e19f53982aa21a6732db40afb46ef650bd1b48291ec20e572f80",
+    "docs/reviews/v87-snack-and-action-quality/dossiers/ct_gastronomie_350.json": "bece2b7e6ee6cf56c30f1cd97eeceab04cf279c13ae83cc58fc78483b2c902fd",
+    "docs/reviews/v87-snack-and-action-quality/dossiers/ct_gastronomie_351.json": "823da847d8df48da0a2fec420b556a0a87eb800dbc6536a3ad11dc9c3d75f0ca",
+    "docs/reviews/v87-snack-and-action-quality/feedback-isolation-review.json": "3a442d04a972aa5f096e578a0154163e2bda8d03860333cc8b5db59603a4ffe2",
+    "docs/reviews/v87-snack-and-action-quality/gastronomie/CANDIDATE_FACTS.md": "e6dd9d26ff6a30d5f65c263303e721529d449e1d65323ca1408f446f1eea24cf",
+    "docs/reviews/v87-snack-and-action-quality/gastronomie/QUALITY_SCREEN.md": "4af7d7e2f8109ccbb94f46edc714ea3d3acde90faced4ae5e004ebc864012e56",
+    "docs/reviews/v87-snack-and-action-quality/gastronomie/biscuit-tort-column-after.json": "d438be26f16166e5f86991b1bf66f70a8d59bcd8d286a7e038aae52e5310742d",
+    "docs/reviews/v87-snack-and-action-quality/gastronomie/candidates.json": "b64deecee12dd3177d69367b738f56e76b6fd244684ad9c5f7f6ca2cc6a2f12e",
+    "docs/reviews/v87-snack-and-action-quality/gastronomie/quality-after-five-scopes.json": "5ccd9270d608f79dc0572a844085500d43aacde161e35918559af3c7de9b0e31",
+    "docs/reviews/v87-snack-and-action-quality/gastronomie/quality-before.json": "33f47ca6cf5e15b2674b53a93262307c4e6409f79bb40935ad36e4f614ee8631",
+    "docs/reviews/v87-snack-and-action-quality/gastronomie/verify_factual.json": "732e3b54be6878421f6343f4ab614a8fb97c23d59f0cbd3d66ed12f1111cfc85",
+    "docs/reviews/v87-snack-and-action-quality/gastronomie/verify_quality.json": "030811e03df024690e7bad1ee6a144fab53388ff0228899551e5f52af41c8d3d",
+    "docs/reviews/v87-snack-and-action-quality/graph-candidates.json": "6840ba5930e75e94c0d605e9428bec59b6ebda6fb640881d8ff41de2df8c707e",
+    "docs/reviews/v87-snack-and-action-quality/graph-delta-check.json": "a7acd79bc52095ab66883bc534221a906ccc0a4fb0bf450dfa0947c8575ba125",
+    "docs/reviews/v87-snack-and-action-quality/graph-review.json": "3ed6859e156f45eb9f28fca91b0bc9f8d09dabc0e76a41dea72838db8b3654e1",
+    "docs/reviews/v87-snack-and-action-quality/impact/IMPACT_REVIEW.md": "91b0f0ab13654c88936f480794067810d4181bbb4a1ebac61aa6f22219897939",
+    "docs/reviews/v87-snack-and-action-quality/impact/artifact-delta-summary.json": "046848a0e35d0ee2d1fe80f903acb2cf7d28e8f3d778388953e90faa173c7de6",
+    "docs/reviews/v87-snack-and-action-quality/impact/artifact-receipt.json": "48f41a6c0d8fc1f6858b5a17dbe543a5fe698b29e488a8e6a27557a440719f94",
+    "docs/reviews/v87-snack-and-action-quality/impact/capture-receipt.json": "1d923852700c777dbd5ab80e9f9c1bfa5e5159a8c6dcbd78ac1ee32af767512b",
+    "docs/reviews/v87-snack-and-action-quality/impact/capture.py.txt": "b45fd8cf3899eda8f28f0a0aca89cab60d9edb8058f3acd9139a90ed3aa653fa",
+    "docs/reviews/v87-snack-and-action-quality/impact/compare.py.txt": "1807f55b581f4b4db37e5267f29261046556133abc4620c91cd33e12cd8269a1",
+    "docs/reviews/v87-snack-and-action-quality/impact/cooler-old-target-cues.json": "4a5a7898cb82073225e59b923b36db1a5f3aed42625d51ca06bd0a2c5db19904",
+    "docs/reviews/v87-snack-and-action-quality/impact/core-associations.json": "c8b263b59aa35363075dacbc03f657eadfe3a3b8e0896e93a3db9b7bbdbd43a6",
+    "docs/reviews/v87-snack-and-action-quality/impact/create_artifact_delta.py.txt": "8436cc76e37ddf6daeb5535ae5c8d9bc603f9c54a6a44fcf7f9e1430d78f7c95",
+    "docs/reviews/v87-snack-and-action-quality/impact/current-measurements.json": "89e88d08c8b97c2c434424e446876cbd375ee8455b5443fe957606ec3e037425",
+    "docs/reviews/v87-snack-and-action-quality/impact/feedback-corrections.json": "591dd1248ec601a1eaec3ad772588548f5c44c9a0728175b19fc7043310780b9",
+    "docs/reviews/v87-snack-and-action-quality/impact/focused-compatibility.json": "d89b8282982aeffa44bdaf8f3d77ed2502055ffafdf588b8b2b5007711c737fe",
+    "docs/reviews/v87-snack-and-action-quality/impact/inputs.json": "c323fcab43f1efa33038fa80596fd8e9c1e0ff92994c7f0e72a3d6b2cb4d841b",
+    "docs/reviews/v87-snack-and-action-quality/impact/lant-guidance.json": "cad7e978bcaa82fd570b8a0a136ce13ebbc229048454ac406df3b23bc48e82be",
+    "docs/reviews/v87-snack-and-action-quality/impact/measure_current_content.py.txt": "81b446763592fdc69c2df8dbb54e1c8791a6a698902fd1d4edb07e8eadf00dd7",
+    "docs/reviews/v87-snack-and-action-quality/impact/raw/baseline-candidate-inputs.json.gz": "b37e62c2aa2696a849c82866818b53c1dc60caff65731528a3e3ed6ff8aaabc2",
+    "docs/reviews/v87-snack-and-action-quality/impact/raw/baseline.json.gz": "00d668824708b55272460a9ae0e899d165c03e9a04be94f2d0781984127bf0cd",
+    "docs/reviews/v87-snack-and-action-quality/impact/raw/final-candidate.json.gz": "92eff520208b4e7a0fb231fcadc6e45c3c556828ff8de28b056acf71eafcda36",
+    "docs/reviews/v87-snack-and-action-quality/impact/raw/focused-compatibility-followup.log.gz": "b2f930b29f7cfc3f48d9a3c110087a58408e4dee0c617c30c8a72fbb9dabf573",
+    "docs/reviews/v87-snack-and-action-quality/impact/raw/focused-compatibility.log.gz": "87bf035f6a8b5af83007e98e46ae054f0e602d03b2a6e931da3d4bb4eb483b69",
+    "docs/reviews/v87-snack-and-action-quality/impact/summary.json": "0fbe2b5c58b4cc8c74ea889659fca567c5f440395768d6bd0e6a53896c9209c3",
+    "docs/reviews/v87-snack-and-action-quality/runs/accounts312.log.gz": "1d1da07854b4a09e5da237abff5b4a6c35ebebb062d3ffb7cd82ad408627616c",
+    "docs/reviews/v87-snack-and-action-quality/runs/accounts314.log.gz": "7bc2898b4039237c753d70893ec7cd0c75442e38701b354976f0e8e0a5ebd640",
+    "docs/reviews/v87-snack-and-action-quality/runs/backend312-initial.log.gz": "90e923ed10d40e657c31796b1592383aababa9931aee11c2a3decadc30d134d9",
+    "docs/reviews/v87-snack-and-action-quality/runs/backend312.log.gz": "4e93ce1f40efa1ff1575df801db131547af27d662156bf996cbd5f06f54bbb6a",
+    "docs/reviews/v87-snack-and-action-quality/runs/backend314-initial.log.gz": "34660fcea8831496f3430ef3afac940d09e68665aede20a2d0ba361c73ae2321",
+    "docs/reviews/v87-snack-and-action-quality/runs/backend314.log.gz": "e671ca321eda82ab052398ed5c8665ea726b0d6a51222bef8783e64514a7a993",
+    "docs/reviews/v87-snack-and-action-quality/runs/browser.log.gz": "dd3a2fb361d2817ce8f62cdce70764a0d4ebf2ba1dadc8c3025748470c71059b",
+    "docs/reviews/v87-snack-and-action-quality/runs/docs.log.gz": "d81811f2119b5b0e8812fe6f71764fe9c545c29efc38b4a33b301aaeb169661f",
+    "docs/reviews/v87-snack-and-action-quality/runs/fixture.log.gz": "ee89706aaec0ee681464790b536dfa3cd9460119c5c147f6e24950a0daf68450",
+    "docs/reviews/v87-snack-and-action-quality/runs/frontend_build.log.gz": "bc80869e0aa4ebdf6e31ae13296a60e70f3bf96d6f196301ba61b02451b3d387",
+    "docs/reviews/v87-snack-and-action-quality/runs/frontend_bundle.log.gz": "66eb4b6a4f29695849d885efe77a549fdc4790e2a94fdf39e6f2ba55b6dcae4d",
+    "docs/reviews/v87-snack-and-action-quality/runs/frontend_lint.log.gz": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a",
+    "docs/reviews/v87-snack-and-action-quality/runs/frontend_native.log.gz": "e7b6db9ec295c00739a07581fecd2fbe1ff39035ef063abefa9a70edbd28ff5c",
+    "docs/reviews/v87-snack-and-action-quality/runs/frontend_typecheck.log.gz": "d0e30d1dc915362da5e6d51943f265c1840c3182f61f2cd8a65a8159c982ac05",
+    "docs/reviews/v87-snack-and-action-quality/runs/pack.log.gz": "09f01c42a2829a3b8877e60802bae8967baeb530df5220cbc675238466da65a4",
+    "docs/reviews/v87-snack-and-action-quality/runs/pending.log.gz": "beccbf15577ac4c2020c302579819da43b23a3548cab6e7afe5fc83ca4af4959",
+    "docs/reviews/v87-snack-and-action-quality/runs/projection-compatibility-final.log.gz": "d4b2955e470cfe4bd850cbf8661d662e49effaf98f6bf92c517c20d4b8641c15",
+    "docs/reviews/v87-snack-and-action-quality/runs/ruff.log.gz": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd",
+    "docs/reviews/v87-snack-and-action-quality/runs/snack-final.log.gz": "4457835eec9b27d521986246365f171d6d118dda7cb7352b3ea00878d5bbf244",
+    "docs/reviews/v87-snack-and-action-quality/runs/whitespace.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "docs/reviews/v87-snack-and-action-quality/verdicts/contexto_verdicts.json": "11c0aaf1776e6570d29325f653be6bcb8cae162170b1d6238edb78553dfdd8e9",
+    "docs/reviews/v87-snack-and-action-quality/verdicts/dossiers/ct_gastronomie_346.json": "52403a060048545f271657d8a6fac0cefeb59c7a10727ab2483e519e22a1e8e8",
+    "docs/reviews/v87-snack-and-action-quality/verdicts/dossiers/ct_gastronomie_347.json": "0820680a647323a1a02430bb704a37878a4cd1000b3b20141fe9b99f5cdc846d",
+    "docs/reviews/v87-snack-and-action-quality/verdicts/dossiers/ct_gastronomie_348.json": "2ababe9417b5528518fe38995f1a890ec62fd9fbf8a514112ea2f335c3ca8cac",
+    "docs/reviews/v87-snack-and-action-quality/verdicts/dossiers/ct_gastronomie_349.json": "9163a918f778e19f53982aa21a6732db40afb46ef650bd1b48291ec20e572f80",
+    "docs/reviews/v87-snack-and-action-quality/verdicts/dossiers/ct_gastronomie_350.json": "bece2b7e6ee6cf56c30f1cd97eeceab04cf279c13ae83cc58fc78483b2c902fd",
+    "docs/reviews/v87-snack-and-action-quality/verdicts/dossiers/ct_gastronomie_351.json": "823da847d8df48da0a2fec420b556a0a87eb800dbc6536a3ad11dc9c3d75f0ca",
+    "docs/reviews/v87-snack-and-action-quality/verification.json": "f2c1781916d8afeae1efacc3aa5204cc2c346092c1c5a3c121dd4b3ca35976a2",
+    "docs/reviews/v87-snack-and-action-quality/verifier-metadata.json": "95ae05d9210916f2eb6bc12e853e3e2a115de514d84e269fddf23660cc2b9c9e",
+    "docs/reviews/v87-snack-and-action-quality/verifier-review.json": "61779a2a7ef5337dcf68eb896fc9a6d4d4c334c2fd0210bed93d5814a4664a2f"
+  },
+  "removed_files": {
+    "cat_de_roman_esti/web/static/assets/AccountBar-cD7oIyeO.js": {
+      "baseline_sha256": "51e0558586b91634a8263babe52378ee28fdeb7d614777321a1b39779ea51ea0",
+      "absent_from_candidate": true
+    },
+    "cat_de_roman_esti/web/static/assets/Alchimie-2srKqXXu.js": {
+      "baseline_sha256": "fe5a96d92a036b18ca1b786e775d620e1c74c6eab884f0ff6a6dadb7f2a33d5f",
+      "absent_from_candidate": true
+    },
+    "cat_de_roman_esti/web/static/assets/CaldRece-pkKZ-ngs.js": {
+      "baseline_sha256": "5d1c4b358cdd71b79eeccc3b359d2a684b61dff1f14de02fc040e7af5e054343",
+      "absent_from_candidate": true
+    },
+    "cat_de_roman_esti/web/static/assets/CategoryPicker-Bwh_Wfhl.js": {
+      "baseline_sha256": "2a73765012ca2fb9573acbf821e7d816e40361e46bab51b35c8c5223c637e1e8",
+      "absent_from_candidate": true
+    },
+    "cat_de_roman_esti/web/static/assets/Conexiuni-BZ5Ynbkq.js": {
+      "baseline_sha256": "6d351b925b1c6db8a533b9620838a27894966894f08663df028c4cfa69a05459",
+      "absent_from_candidate": true
+    },
+    "cat_de_roman_esti/web/static/assets/Intrusul-BiP9ld3f.js": {
+      "baseline_sha256": "99d4027df70d4c530f24e5febbe3fb5ee2c1257738edb956cf490b0956504809",
+      "absent_from_candidate": true
+    },
+    "cat_de_roman_esti/web/static/assets/Lant-DZRuYe7n.js": {
+      "baseline_sha256": "b15ccaac427afc007478f5b314a8647e826fabc65ce911cd91bf8febaeced774",
+      "absent_from_candidate": true
+    },
+    "cat_de_roman_esti/web/static/assets/Perechi-BJ_yrW3p.js": {
+      "baseline_sha256": "2957793f339efa8814a6579b1bd84f1a7e57dc3bc15add490f097091506323f5",
+      "absent_from_candidate": true
+    },
+    "cat_de_roman_esti/web/static/assets/Ranking-Dn8OVbUI.js": {
+      "baseline_sha256": "9ffac815bb6af6086699991fc95b1e4913e7279734368f0ddcae98c17b21b4fe",
+      "absent_from_candidate": true
+    },
+    "cat_de_roman_esti/web/static/assets/derivedReplay-CnQX9aof.js": {
+      "baseline_sha256": "cedbd987045fa176ec799bd0b34b1ed0af00809fd396f55fa99a700be41883d9",
+      "absent_from_candidate": true
+    },
+    "cat_de_roman_esti/web/static/assets/index-Zh1eP30a.js": {
+      "baseline_sha256": "50ac2b6083e669fb129887c3d178f0f592c546dacb0788ae8f29431fcbfb0dc0",
+      "absent_from_candidate": true
+    },
+    "cat_de_roman_esti/web/static/assets/scoreSync-BUGXUU8N.js": {
+      "baseline_sha256": "dfea9bd06077cd11c9a72de09c951245a43fce6cf05bab0cf9582804b29a15c0",
+      "absent_from_candidate": true
+    },
+    "cat_de_roman_esti/web/static/assets/useSavedGameResume-C8FjrCgD.js": {
+      "baseline_sha256": "d76a582d2bc0178675402188a27d53b27973fe5593801bf6ae7b64fa61b7ab12",
+      "absent_from_candidate": true
+    }
+  },
+  "final_gates": {
+    "backend312": {
+      "exit_code": 0,
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "elapsed_seconds": 616.11,
+      "passed_tests": 1409,
+      "log": "docs/reviews/v87-snack-and-action-quality/runs/backend312.log.gz",
+      "decoded_sha256": "31f0d156b8a8fa793dba6a9ece81e7409ad7f3efad16203ca6b4fdb5db4591f9",
+      "archive_sha256": "4e93ce1f40efa1ff1575df801db131547af27d662156bf996cbd5f06f54bbb6a",
+      "gzip_mtime": 0,
+      "actual_execution_receipt_sha256": "e37cd2448fbe5180c2658f98948999118e37ad7863f7961d806b935ca10497fa"
+    },
+    "accounts312": {
+      "exit_code": 0,
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "elapsed_seconds": 7.39,
+      "passed_tests": 53,
+      "log": "docs/reviews/v87-snack-and-action-quality/runs/accounts312.log.gz",
+      "decoded_sha256": "75c96bab9e4b2d4a8d09d439e3ea3722b076adf7363a4079c7a2109eafbf4a79",
+      "archive_sha256": "1d1da07854b4a09e5da237abff5b4a6c35ebebb062d3ffb7cd82ad408627616c",
+      "gzip_mtime": 0,
+      "actual_execution_receipt_sha256": "ff1758cfca21d3cb20f1bd1a604f1bad5e7628e000b24c96cf72380c024d2846"
+    },
+    "backend314": {
+      "exit_code": 0,
+      "command": [
+        "/home/dobo/work/_temp/feat__v87-snack-and-action-quality/py314/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "elapsed_seconds": 483.04,
+      "passed_tests": 1409,
+      "log": "docs/reviews/v87-snack-and-action-quality/runs/backend314.log.gz",
+      "decoded_sha256": "4d2206ef08c1cff0f70dd1bd097f6de84322803f01016eda77fa118942d086f6",
+      "archive_sha256": "e671ca321eda82ab052398ed5c8665ea726b0d6a51222bef8783e64514a7a993",
+      "gzip_mtime": 0,
+      "actual_execution_receipt_sha256": "a98456bc42e16047f123923ab33b7a8a5cacb62bbbeaa97979ac6d31dea73717"
+    },
+    "accounts314": {
+      "exit_code": 0,
+      "command": [
+        "/home/dobo/work/_temp/feat__v87-snack-and-action-quality/py314/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "elapsed_seconds": 7.91,
+      "passed_tests": 53,
+      "log": "docs/reviews/v87-snack-and-action-quality/runs/accounts314.log.gz",
+      "decoded_sha256": "62c793953d0066a11c6f3fcbe3798d0e30206c2644316707d83802b1b918afaf",
+      "archive_sha256": "7bc2898b4039237c753d70893ec7cd0c75442e38701b354976f0e8e0a5ebd640",
+      "gzip_mtime": 0,
+      "actual_execution_receipt_sha256": "9650ab3b185b1e3891be7dc94851c7574a59e400e46f6b5fe9d77d6a15d10dce"
+    },
+    "frontend_native": {
+      "exit_code": 0,
+      "command": [
+        "npm",
+        "test"
+      ],
+      "elapsed_seconds": 1.55,
+      "passed_tests": 193,
+      "log": "docs/reviews/v87-snack-and-action-quality/runs/frontend_native.log.gz",
+      "decoded_sha256": "ef1b4c6dbebbd78758f758cadcdb0b81fb2b7e32b06a6df047a08a797d07c399",
+      "archive_sha256": "e7b6db9ec295c00739a07581fecd2fbe1ff39035ef063abefa9a70edbd28ff5c",
+      "gzip_mtime": 0,
+      "actual_execution_receipt_sha256": "15d46c4fe446efac9d640a0e090a392bd0d95ab981a23ba581a0ea492597a4a1"
+    },
+    "frontend_lint": {
+      "exit_code": 0,
+      "command": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "elapsed_seconds": 13.1,
+      "passed_tests": null,
+      "log": "docs/reviews/v87-snack-and-action-quality/runs/frontend_lint.log.gz",
+      "decoded_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "archive_sha256": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a",
+      "gzip_mtime": 0,
+      "actual_execution_receipt_sha256": "deec3a7d20ef2106181f0f702618b0f76f19a978c5d07fffc921632a880eae27"
+    },
+    "frontend_typecheck": {
+      "exit_code": 0,
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "elapsed_seconds": 6.32,
+      "passed_tests": null,
+      "log": "docs/reviews/v87-snack-and-action-quality/runs/frontend_typecheck.log.gz",
+      "decoded_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+      "archive_sha256": "d0e30d1dc915362da5e6d51943f265c1840c3182f61f2cd8a65a8159c982ac05",
+      "gzip_mtime": 0,
+      "actual_execution_receipt_sha256": "2d7812a8be7ffddf125382800e886b3677a6f99f7686fd117ec5593cb4efc31a"
+    },
+    "frontend_build": {
+      "exit_code": 0,
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "elapsed_seconds": 8.51,
+      "passed_tests": null,
+      "log": "docs/reviews/v87-snack-and-action-quality/runs/frontend_build.log.gz",
+      "decoded_sha256": "f865ab93d5ce41f465fb738529ff090457459e68810aef552be3bb349a38bf20",
+      "archive_sha256": "bc80869e0aa4ebdf6e31ae13296a60e70f3bf96d6f196301ba61b02451b3d387",
+      "gzip_mtime": 0,
+      "actual_execution_receipt_sha256": "3e74080d33fb6d3c6837473ba7bca2f40d613b0f84360a6d5b5cf24616acdb86"
+    },
+    "frontend_bundle": {
+      "exit_code": 0,
+      "command": [
+        "npm",
+        "run",
+        "check:bundle"
+      ],
+      "elapsed_seconds": 0.24,
+      "passed_tests": null,
+      "log": "docs/reviews/v87-snack-and-action-quality/runs/frontend_bundle.log.gz",
+      "decoded_sha256": "3e971872f1dab8e94a19cb6628912163bbf7bb08322ffceb724674ba08b25479",
+      "archive_sha256": "66eb4b6a4f29695849d885efe77a549fdc4790e2a94fdf39e6f2ba55b6dcae4d",
+      "gzip_mtime": 0,
+      "actual_execution_receipt_sha256": "16f7d2baf891b12f42db607b0915c31fd19afd3e2dc77c9fef8db6b2b0920b4a"
+    },
+    "browser": {
+      "exit_code": 0,
+      "command": [
+        "npm",
+        "run",
+        "test:e2e"
+      ],
+      "elapsed_seconds": 540.71,
+      "passed_tests": 168,
+      "log": "docs/reviews/v87-snack-and-action-quality/runs/browser.log.gz",
+      "decoded_sha256": "9b85b3a559c1a50cafa01d7c80a2aa34ed1f4e1a338c0ed4e7a0048d2c97c8b7",
+      "archive_sha256": "dd3a2fb361d2817ce8f62cdce70764a0d4ebf2ba1dadc8c3025748470c71059b",
+      "gzip_mtime": 0,
+      "actual_execution_receipt_sha256": "9fdb62a8bbfffa1cae14290fb57d3b3053a1ee342fb06c531e8f05664dd66e69"
+    },
+    "fixture": {
+      "exit_code": 0,
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_fixture.py"
+      ],
+      "elapsed_seconds": 0.27,
+      "passed_tests": null,
+      "log": "docs/reviews/v87-snack-and-action-quality/runs/fixture.log.gz",
+      "decoded_sha256": "1fa41416d417e35f484b52468a80103ff5e450f99e4f2e9af3941d72e26c132d",
+      "archive_sha256": "ee89706aaec0ee681464790b536dfa3cd9460119c5c147f6e24950a0daf68450",
+      "gzip_mtime": 0,
+      "actual_execution_receipt_sha256": "d31bb57d45e08f7b4850a68c113ff187036b7cdf8e036cdf47b685b8b900c241"
+    },
+    "pack": {
+      "exit_code": 0,
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_games_pack.py"
+      ],
+      "elapsed_seconds": 10.36,
+      "passed_tests": null,
+      "log": "docs/reviews/v87-snack-and-action-quality/runs/pack.log.gz",
+      "decoded_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+      "archive_sha256": "09f01c42a2829a3b8877e60802bae8967baeb530df5220cbc675238466da65a4",
+      "gzip_mtime": 0,
+      "actual_execution_receipt_sha256": "d7502c9b34bb30a1604b38e68a608b87bc48a86282a268b675ae236ab90aeac5"
+    },
+    "pending": {
+      "exit_code": 0,
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/critique_pack.py",
+        "--status",
+        "pending",
+        "--strict"
+      ],
+      "elapsed_seconds": 0.56,
+      "passed_tests": null,
+      "log": "docs/reviews/v87-snack-and-action-quality/runs/pending.log.gz",
+      "decoded_sha256": "f19d308c2a43b0b95b9b12f3458a99e9f64ce7c982f4f113f1997cbbcffae852",
+      "archive_sha256": "beccbf15577ac4c2020c302579819da43b23a3548cab6e7afe5fc83ca4af4959",
+      "gzip_mtime": 0,
+      "actual_execution_receipt_sha256": "76865f45f025cb60d89e753e0b2d06cabb5daa2c064424d0c3ea2cea663feb5e"
+    },
+    "ruff": {
+      "exit_code": 0,
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check"
+      ],
+      "elapsed_seconds": 0.09,
+      "passed_tests": null,
+      "log": "docs/reviews/v87-snack-and-action-quality/runs/ruff.log.gz",
+      "decoded_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "archive_sha256": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd",
+      "gzip_mtime": 0,
+      "actual_execution_receipt_sha256": "a2eff41a0851a5f137a2863ccaa004582110ca70a1e0f142598325193355cdd9"
+    },
+    "docs": {
+      "exit_code": 0,
+      "command": [
+        "python3",
+        "/home/dobo/work/agent-ops/scripts/check_docs.py",
+        "."
+      ],
+      "elapsed_seconds": 0.09,
+      "passed_tests": null,
+      "log": "docs/reviews/v87-snack-and-action-quality/runs/docs.log.gz",
+      "decoded_sha256": "4093da53c7f7c00e9c1bcea6d0be93e9ad7914df9d832c2e9f8bcb8aa765ca56",
+      "archive_sha256": "d81811f2119b5b0e8812fe6f71764fe9c545c29efc38b4a33b301aaeb169661f",
+      "gzip_mtime": 0,
+      "actual_execution_receipt_sha256": "6b650f51238a757be67235677eb8eae27d978a3869d555824bc2005d3f5bf0bb"
+    },
+    "whitespace": {
+      "exit_code": 0,
+      "command": [
+        "git",
+        "diff",
+        "HEAD",
+        "--check"
+      ],
+      "elapsed_seconds": 0.21,
+      "passed_tests": null,
+      "log": "docs/reviews/v87-snack-and-action-quality/runs/whitespace.log.gz",
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "archive_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "gzip_mtime": 0,
+      "actual_execution_receipt_sha256": "1b64732bde66443dacfb8eb15acb6b776058fe8d21564bb7641e039e66c7e385"
+    }
+  },
+  "initial_full_backend_runs": {
+    "backend312": {
+      "exit_code": 1,
+      "passed": 1408,
+      "failed": 1,
+      "failing_test": "test_projection_guess_uses_anchor_scale_and_dedupes_normalized_surface",
+      "log": "docs/reviews/v87-snack-and-action-quality/runs/backend312-initial.log.gz",
+      "decoded_sha256": "b52c4455d5054d101b808679e5f1f1658b58cec4666a59e4c93779875de3f64c",
+      "archive_sha256": "90e923ed10d40e657c31796b1592383aababa9931aee11c2a3decadc30d134d9",
+      "gzip_mtime": 0
+    },
+    "backend314": {
+      "exit_code": 1,
+      "passed": 1408,
+      "failed": 1,
+      "failing_test": "test_projection_guess_uses_anchor_scale_and_dedupes_normalized_surface",
+      "log": "docs/reviews/v87-snack-and-action-quality/runs/backend314-initial.log.gz",
+      "decoded_sha256": "ce0215ea4687f9a187dcde33a75881cadf7c71d46f5f01b46a78142b9cdd1fd9",
+      "archive_sha256": "34660fcea8831496f3430ef3afac940d09e68665aede20a2d0ba361c73ae2321",
+      "gzip_mtime": 0
+    }
+  },
+  "raw_impact_archives": [
+    {
+      "path": "docs/reviews/v87-snack-and-action-quality/impact/raw/baseline.json.gz",
+      "archive_sha256": "00d668824708b55272460a9ae0e899d165c03e9a04be94f2d0781984127bf0cd",
+      "decoded_sha256": "f36ea97b824718dd6f1446ecac06adeac93a771d972520e198b168b2e8ac18ac",
+      "decoded_bytes": 2231801,
+      "archive_bytes": 136961,
+      "gzip_mtime": 0
+    },
+    {
+      "path": "docs/reviews/v87-snack-and-action-quality/impact/raw/baseline-candidate-inputs.json.gz",
+      "archive_sha256": "b37e62c2aa2696a849c82866818b53c1dc60caff65731528a3e3ed6ff8aaabc2",
+      "decoded_sha256": "77ac84c0231e0d33cc4856645234f0c1916e71ae251f47d9ef762a0848d02450",
+      "decoded_bytes": 2387743,
+      "archive_bytes": 140276,
+      "gzip_mtime": 0
+    },
+    {
+      "path": "docs/reviews/v87-snack-and-action-quality/impact/raw/final-candidate.json.gz",
+      "archive_sha256": "92eff520208b4e7a0fb231fcadc6e45c3c556828ff8de28b056acf71eafcda36",
+      "decoded_sha256": "e6da5c804aee98da6e1ccb881d28161620918ba655414b5704e541f08046446e",
+      "decoded_bytes": 2460870,
+      "archive_bytes": 151910,
+      "gzip_mtime": 0
+    },
+    {
+      "path": "docs/reviews/v87-snack-and-action-quality/impact/raw/focused-compatibility.log.gz",
+      "archive_sha256": "87bf035f6a8b5af83007e98e46ae054f0e602d03b2a6e931da3d4bb4eb483b69",
+      "decoded_sha256": "5c4318e0dc499f997e98bfb7015cf4735e0459fe70d85d13631d3b6435aee8c3",
+      "decoded_bytes": 1730,
+      "archive_bytes": 595,
+      "gzip_mtime": 0
+    },
+    {
+      "path": "docs/reviews/v87-snack-and-action-quality/impact/raw/focused-compatibility-followup.log.gz",
+      "archive_sha256": "b2f930b29f7cfc3f48d9a3c110087a58408e4dee0c617c30c8a72fbb9dabf573",
+      "decoded_sha256": "5603b3bdbd979d86e8c62be43291039331c1f18d392c470cba56f4eba489b84d",
+      "decoded_bytes": 80,
+      "archive_bytes": 33,
+      "gzip_mtime": 0
+    }
+  ],
+  "static_test_correction": {
+    "path": "tests/test_wordgames_contexto.py",
+    "current_sha256": "80ae194215801f136db601d02b2d9af3568defae0643dbf49f7d8efcdc3151ad",
+    "baseline_sha256": "f9c8e60fa074340c5032559e9e83489d95085fd30526c7dbf41a7ef7f355f5a3",
+    "result": "The target test AST is identical after replacing only Brioșă/Chec/BRIOSA fixture literals with retained Chiflă/Covrig/CHIFLA. Anchor scaling, public identity, accent/case deduplication and distinct guesses remain asserted."
+  },
+  "provenance_review": {
+    "graph_candidate_and_module_current": true,
+    "code_source_set_current": true,
+    "independent_promotion_reviewers": [
+      "root-v87-analyst",
+      "v87_independent_quality_and_history_verifier"
+    ],
+    "promoted_ids": [
+      "ct_gastronomie_346",
+      "ct_gastronomie_347",
+      "ct_gastronomie_348",
+      "ct_gastronomie_349",
+      "ct_gastronomie_350",
+      "ct_gastronomie_351"
+    ],
+    "all_dossier_and_raw_candidate_bindings_match": true,
+    "consulted_snack_test_note": "The source review’s earlier consulted snack-test hash is historical; final public-journey/privacy additions are bound by this audit and validated by both complete final backend runs."
+  },
+  "impact_checks": {
+    "records": 233,
+    "distinct_targets": 230,
+    "words_per_record": 39,
+    "observations_per_complete_capture": 9087,
+    "changed_observations": 6941,
+    "alchimie_profiles_exact": 82,
+    "lant_profiles_exact": 100,
+    "derived_capture_exact": true,
+    "new_direct_route_wins": 50,
+    "capture_note": "The initial baseline captured 36 words/8388 observations. The baseline-candidate-inputs archive adds 699 observations for three extra words and explicitly reuses 8388, yielding the complete39-word baseline matrix."
+  },
+  "content_claims": {
+    "new_concepts": 9,
+    "new_forms": 31,
+    "grammatical_or_qualified": 30,
+    "documented_regional_equivalent": "cremeș → Cremșnit",
+    "new_directed_edges": 50,
+    "removed_edges": 0,
+    "new_contexto_rounds": 6,
+    "contexto_total": 241,
+    "contexto_approved": 239,
+    "contexto_eligible": 235,
+    "other_new_curated_rounds": 0,
+    "new_derived_boards": 0
+  },
+  "docs_checks": {
+    "cremes_evidence_correctly_attributed": true,
+    "bread_feedback_tradeoff_disclosed": true,
+    "changed_observations_not_all_repairs": true,
+    "initial_failures_and_fresh_green_reruns_disclosed": true,
+    "no_push_deploy_or_v87_merge_claimed": true
+  },
+  "current_blockers": [],
+  "limits": [
+    "This is a reviewer attribution and hash-bound audit, not a cryptographic signing-key attestation.",
+    "Source, content, gates and files are bound as observed; later modifications require renewed review.",
+    "No tests, push, deployment or V87 merge were performed by this audit.",
+    "Human playtesting, real-device acceptance and production smoke remain outside this local candidate."
+  ]
+}

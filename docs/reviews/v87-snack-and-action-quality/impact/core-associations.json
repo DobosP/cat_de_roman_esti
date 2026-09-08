@@ -1,0 +1,109 @@
+{
+  "Biscuit": {
+    "scope": "Separate actual baseline/private target probes; Biscuit was not an approved old target.",
+    "after_stage": "Graph applied, before the five feedback fixes, projection audit change and exact-pair isolation guard. These hashes intentionally bind that original actual probe stage.",
+    "before_source_sha256": {
+      "cat_de_roman_esti/fixtures/kg_sample.json": "b612eda1fb8712fb57f1e16ca2a4fed3e5f6cec847c977ab45ee420c575ffa1a",
+      "cat_de_roman_esti/wordgames/contexto.py": "cb2ad03fc5d3b4ec0367cb82de63a7f915471bfd270b9d6b0071507fd3102118",
+      "cat_de_roman_esti/wordgames/contexto_feedback.py": "206257795327a499a3be19cc3608c0d9320777e6e7ad4da839d10079a524b87d"
+    },
+    "after_source_sha256": {
+      "cat_de_roman_esti/fixtures/kg_sample.json": "96d50f8b724b9d1d1ff5d02b5a9a206445d7d9edead778d6db173f00ac094bfa",
+      "cat_de_roman_esti/wordgames/contexto.py": "cb2ad03fc5d3b4ec0367cb82de63a7f915471bfd270b9d6b0071507fd3102118",
+      "cat_de_roman_esti/wordgames/contexto_feedback.py": "206257795327a499a3be19cc3608c0d9320777e6e7ad4da839d10079a524b87d",
+      "cat_de_roman_esti/wordgames/contexto_projection.py": "5f8f2bb4ca4fdcae2334de6f50c7775cc36ca2b1c705d36a7510b5e3176d2762"
+    },
+    "final_source_sha256": {
+      "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+      "cat_de_roman_esti/wordgames/contexto_feedback.py": "da434a56703eaf2cbe5694c380fc27a3ee2edb9659c060bbb6ced2752d4020c6",
+      "cat_de_roman_esti/wordgames/contexto_projection.py": "8fc5829b07ae2bbcfcc4701c5539d35b09d3df5f2ccc25b19a2478bfcf938802"
+    },
+    "final_reuse_basis": "None of the five exact target scopes targets Biscuit. Native ingredient scoring is unchanged; the isolation guard only affects projected inputs. The new Tort column has its own probe in gastronomie/biscuit-tort-column-after.json. Final public Biscuit journeys also pass in the independent 56-case snack suite. No full Biscuit matrix rerun is claimed.",
+    "incoming_before_after": [
+      5,
+      11
+    ],
+    "words": {
+      "Făină": {
+        "before": {
+          "id": "n_v24_food_pantry_faina",
+          "label": "Făină",
+          "distance": 4,
+          "rank": 147,
+          "temperature": "Caldut",
+          "closeness": 94,
+          "attempt_number": 1
+        },
+        "after": {
+          "id": "n_v24_food_pantry_faina",
+          "label": "Făină",
+          "distance": 1,
+          "rank": 4,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        }
+      },
+      "Unt": {
+        "before": {
+          "id": "n_v24_food_breakfast_unt",
+          "label": "Unt",
+          "distance": 5,
+          "rank": 701,
+          "temperature": "Rece",
+          "closeness": 70,
+          "attempt_number": 1
+        },
+        "after": {
+          "id": "n_v24_food_breakfast_unt",
+          "label": "Unt",
+          "distance": 1,
+          "rank": 4,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        }
+      },
+      "Zahăr": {
+        "before": {
+          "id": "n_v24_food_pantry_zahar",
+          "label": "Zahăr",
+          "distance": 5,
+          "rank": 691,
+          "temperature": "Rece",
+          "closeness": 70,
+          "attempt_number": 1
+        },
+        "after": {
+          "id": "n_v24_food_pantry_zahar",
+          "label": "Zahăr",
+          "distance": 1,
+          "rank": 4,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        }
+      },
+      "Cuptor de bucătărie": {
+        "before": {
+          "id": "n_v84_food_cuptor",
+          "label": "Cuptor de bucătărie",
+          "distance": 4,
+          "rank": 181,
+          "temperature": "Caldut",
+          "closeness": 92,
+          "attempt_number": 1
+        },
+        "after": {
+          "id": "n_v84_food_cuptor",
+          "label": "Cuptor de bucătărie",
+          "distance": 1,
+          "rank": 4,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "category": "gastronomie",
+  "candidate_sha256": "sha256:b64deecee12dd3177d69367b738f56e76b6fd244684ad9c5f7f6ca2cc6a2f12e",
+  "instances": [
+    {
+      "ref": "contexto[0]",
+      "verdict": "keep",
+      "note": "Biscuit: concrete familiar snack, salience 0.87, no old target. C3: 11 incoming, 2330 reachable, 1727 responsive. The previously weak defining guesses are now all rank 4/hot: Făină, Unt, Zahăr and Cuptor de bucătărie. Tea 2 provides a clear safe clue. Real repeat/resume/exact-win journey passed. Broader dessert guesses remain lukewarm and Sarmale 20 is warm; these limits are disclosed. The repaired ingredient core supports pending staging, unlike the earlier five-link-only proposal."
+    },
+    {
+      "ref": "contexto[1]",
+      "verdict": "keep",
+      "note": "Chec: familiar concrete loaf-style cake, distinct dominant food name. C3: 6 incoming, 2330 reachable, 941 responsive; flour/sugar/egg and reviewed variant inputs are hot. Source-overlapping Pandișpan was held as a separate target, but its natural family guess is now rank 2/hot/nonwinning instead of 463/cold through an exact pair. Făină 2 clue, repeat/resume and exact win pass. Prăjitură 148/lukewarm and optional butter 343/cold remain imperfect. Do not describe all chec variants as requiring baking powder. Strong ingredient/family cues support pending staging."
+    },
+    {
+      "ref": "contexto[2]",
+      "verdict": "keep",
+      "note": "Cremșnit: recognizable layered pastry, supported by original recipe and national-TV evidence, with sourced cremeș lexical equivalent. C3: 5 incoming, 2330 reachable, 1072 responsive; vanilla cream and other defining inputs are hot. Native Prăjitură→Cremșnit is repaired from 254/cold to 2/hot/nonwinning. Exact cremeș win and safe clue/repeat/resume/exact-answer journey pass. The projected Tort fallback deliberately does not inherit that native override; its 255/cold negative control passes. Specific pastry/type cues support pending staging without claiming every related dessert guess is correct."
+    },
+    {
+      "ref": "contexto[3]",
+      "verdict": "keep",
+      "note": "Tort Diplomat: concrete familiar named chilled cake; pișcot/cream/gelatin recipe variants distinguish it from loaf cakes. C3: 5 incoming, 2330 reachable, 774 responsive. Defining inputs and the new ordinary Tort projection give hot cues; Tort is rank 2/nonwinning with its own projected ID, never an alias for Diplomat. Safe clue/repeat/resume/exact win pass. The projection uses the dominant food sense and a Prăjitură fallback, with a closed Diplomat override; the dictionary textile sense is disclosed. Broader class/optional vanilla-cream feedback remains noisy. Stage pending for bound judgment."
+    },
+    {
+      "ref": "contexto[4]",
+      "verdict": "keep",
+      "note": "Pișcot: a recognizable specifically shaped sponge biscuit with established Tiramisu/Diplomat use, not a generic Biscuit renamed. C3: 5 incoming, 2330 reachable, 675 responsive. Flour/egg-part/baking cues are hot; the natural Biscuit family guess is repaired from 714/cold to 2/hot/nonwinning while preserving its ID. Făină 2 clue, repeat/resume and exact win pass. Broader Prăjitură and reciprocal Pișcot→generic Biscuit behavior remain imperfect; the corrected defining core now supports pending staging. No blanket synonym or graph reversal is introduced."
+    },
+    {
+      "ref": "contexto[5]",
+      "verdict": "keep",
+      "note": "Ciocolată: familiar solid food sense, with original solid homemade-chocolate evidence for the milk/sugar variants. C3: 5 incoming, 2330 reachable, 1249 responsive; cocoa/milk/sugar provide defining hot cues. Ciocolată caldă retains its old projected drink ID and Tea fallback elsewhere, but its exact solid-chocolate association is repaired from 501/cold to 2/hot/nonwinning. Its user-supplied label is valid echoed text, not an unearned secret field. Safe Lapte 2 clue, repeat/resume and exact solid-food win pass. Optional butter 312/cold and indirect savory/class noise remain disclosed. Stage pending."
+    }
+  ],
+  "coverage_note": "Independent complete six-ref raw quality screen; keep means pending staging, not final promotion. Actual evidence:257 initial first guesses and six full private clue/repeat/resume/win journeys;215 focused after-probes and five affected journeys after the accepted cue repairs. Final isolation checks confirm all five intended hot/nonwinning cues and Tort→Cremșnit cold255, with the original projected IDs/defaults preserved. The audit representative changed only from retired Brioșă to retained Chiflă; source-bound AST evidence shows no numeric effect. No public-selector claim or additional graph change is made. Pandișpan/Brioșă targets remain held, and no Lanț round was forced."
+}

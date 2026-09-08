@@ -94,79 +94,79 @@ class CurrentContentSnapshot:
 
 
 CURRENT_CONTENT = CurrentContentSnapshot(
-    build_version="fixture-v86-preparation-and-route-quality",
+    build_version="fixture-v87-snack-and-action-quality",
     artifact_sha256=_frozen(
         {
             "cat_de_roman_esti/fixtures/kg_sample.json": (
-                "b612eda1fb8712fb57f1e16ca2a4fed3e5f6cec847c977ab45ee420c575ffa1a"
+                "96d50f8b724b9d1d1ff5d02b5a9a206445d7d9edead778d6db173f00ac094bfa"
             ),
             "cat_de_roman_esti/fixtures/games_pack.json": (
-                "b9c8771294abbb2242ca006f64b8bb8dd5e4ae175345383c608c53455015b25d"
+                "536036f6d030be4e8750fb104325b67a9363535506d453ef8a0e0a824a3b63ab"
             ),
             "cat_de_roman_esti/fixtures/board_rankings_v37.json": (
-                "7e46c05207ef102aa7ff877d019235dede5d5e78c0afb19bd005fa413bd384cf"
+                "53defb36ab442aee1135ae3dd0522559abe27234048f9accdfbd5c9fe75eccc3"
             ),
             "cat_de_roman_esti/fixtures/derived_catalog_v38.json": (
-                "55cfcd131f91e5f712c4fcf6b6324a167d0aaca24b59301b86c79a1462d7f68e"
+                "f4e16944845311eeba231f866c5578a4f1de9ee40e08857cca575930a2bf1278"
             ),
             "tests/fixtures/cat_mobile_app_pack_contract.json": (
-                "2222e09de934f8428bd90c5857b49d514587bf5fa2c44ecd4c3c0cec0cf09e3c"
+                "f0c346bff24fc821d56be1d41d15c7fca57c4473b637006679f712238a965ecf"
             ),
         }
     ),
     payload_sha256=_frozen(
         {
             "ranking_rows": (
-                "a0e3dd4a7a2146fab253ea640c9f5e0f84074611f8681a6f06a7287621f1ef9d"
+                "fe9f0cea28159e428323bc15c33fdb6a1e9a05438aad53de7456022c10fba768"
             ),
             "frozen_derived_boards": (
                 "1aa4138171644870f65ca1925f05c066f94e0dac087fd3682b5c374f225b86db"
             ),
             "kg_nodes_without_aliases": (
-                "895441ecc3bff2196a96af2d3c9c780e62bf6e799f5fc9aa7fa84359a749ac22"
+                "b3a14076744a539fb870f6cf623c9736a5883cab70f0118827c37e363952a3ef"
             ),
             "kg_edges": (
-                "8a686cc80c40b95f03df33bbe74047b921a243f67fae20c3a55ba9896f47dd63"
+                "15c1c2dcca5b4ac4cdfe3935cc0b45da63703cf54a32d3698aabc2366c6436e5"
             ),
             "kg_puzzles": (
                 "3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc"
             ),
             "contexto_profile": (
-                "fc141f40dfb5d26ad9986b028ef27ab6b6a8fe4bbada0accdebefda49f2b3353"
+                "e9ee69b1cce346dcbe22feddeff7c01d99c8c1fc21cf881dc9b8f10cda2f94cc"
             ),
             "alchimie_closure_profile": (
                 "94eccce7dd6c9555afcc64566c5e5b82368fbfe746c1298f53a3e62681b27b32"
             ),
             "mobile_content": (
-                "bd2ccd079148398fc7732f9ade2ca6e0259d1613d3a7e5a8f97c791f746e9c82"
+                "7473bfe7d42189a28cf933032705b288ff2933fd8eeaf30c65a2dba3be4e79d4"
             ),
         }
     ),
-    kg_counts=_frozen({"nodes": 2397, "edges": 9360, "aliases": 8572, "puzzles": 180}),
-    mobile_counts=_frozen({"nodes": 2397, "edges": 9360, "puzzles": 180}),
-    pack_counts=_frozen({"conexiuni": 232, "contexto": 235, "lant": 100, "alchimie": 82}),
+    kg_counts=_frozen({"nodes": 2406, "edges": 9410, "aliases": 8603, "puzzles": 180}),
+    mobile_counts=_frozen({"nodes": 2406, "edges": 9410, "puzzles": 180}),
+    pack_counts=_frozen({"conexiuni": 232, "contexto": 241, "lant": 100, "alchimie": 82}),
     pack_id_high_water=_frozen(
-        {"conexiuni": 361, "contexto": 345, "lant": 222, "alchimie": 106}
+        {"conexiuni": 361, "contexto": 351, "lant": 222, "alchimie": 106}
     ),
-    status_counts=_frozen({"approved": 641, "pending": 8}),
+    status_counts=_frozen({"approved": 647, "pending": 8}),
     game_inventory=_frozen(
         {
             "conexiuni": (232, 232, 0),
-            "contexto": (235, 233, 2),
+            "contexto": (241, 239, 2),
             "lant": (100, 97, 3),
             "alchimie": (82, 79, 3),
         }
     ),
     ranking_counts=_frozen(
         {
-            "total": 649,
-            "approved": 641,
-            "pilot_eligible": 479,
+            "total": 655,
+            "approved": 647,
+            "pilot_eligible": 485,
             "by_game": _frozen(
-                {"conexiuni": 232, "contexto": 235, "lant": 100, "alchimie": 82}
+                {"conexiuni": 232, "contexto": 241, "lant": 100, "alchimie": 82}
             ),
             "eligible_by_game": _frozen(
-                {"conexiuni": 74, "contexto": 229, "lant": 97, "alchimie": 79}
+                {"conexiuni": 74, "contexto": 235, "lant": 97, "alchimie": 79}
             ),
         }
     ),
@@ -180,19 +180,19 @@ CURRENT_CONTENT = CurrentContentSnapshot(
     ),
     feedback_observations=_frozen(
         {
-            "food_responsive": 2292,
+            "food_responsive": 2301,
             "food_direct_projections": 17,
-            "family_member_rank": 2112,
+            "family_member_rank": 2119,
         }
     ),
     clatite_opener_ranks=_frozen(
         {"făină": 2, "ou": 7, "gem": 10, "dulceață": 9,
-         "lapte": 57, "brânză": 39, "smântână": 28}
+         "lapte": 34, "brânză": 41, "smântână": 28}
     ),
-    contexto_approved=233,
-    contexto_eligible=229,
-    contexto_id_high_water=345,
-    projection_terms=468,
+    contexto_approved=239,
+    contexto_eligible=235,
+    contexto_id_high_water=351,
+    projection_terms=467,
     projection_domains=26,
     legacy_feedback_proxies=71,
 )

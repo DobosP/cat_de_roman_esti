@@ -68,13 +68,20 @@ test("recovery clears on explicit input and lifecycle transitions", () => {
     screen,
     /if \(e\.key === "Escape" && \(text \|\| recovery \|\| confirmReveal\)\) \{[\s\S]{0,180}setText\(""\);\s*setRecovery\(null\);/,
   );
-  assert.match(screen, /const handleClue[\s\S]{0,180}setRecovery\(null\);/);
-  assert.match(screen, /const handleGiveUp[\s\S]{0,180}setRecovery\(null\);/);
+  for (const [name, next] of [["handleClue", "handleGiveUp"], ["handleGiveUp", "requestRevealConfirmation"]]) {
+    const start = screen.indexOf(`const ${name} = useCallback`);
+    const end = screen.indexOf(`const ${next} = useCallback`, start);
+    assert.ok(start >= 0 && end > start);
+    const action = screen.slice(start, end);
+    assert.match(action, /const ticket = beginAction\(state\);\s*if \(!ticket\) return;/);
+    assert.match(action, /setRecovery\(null\);\s*try \{/);
+  }
   const optionsStart = screen.indexOf("const showOptions = useCallback");
   const optionsEnd = screen.indexOf("const handleExit = useCallback", optionsStart);
   assert.ok(optionsStart >= 0 && optionsEnd > optionsStart);
   const options = screen.slice(optionsStart, optionsEnd);
-  assert.match(options, /if \(startInFlight\.current\) return;/);
-  assert.match(options, /if \(!finished\) active\.forget\(\);/);
+  assert.match(options, /if \(startInFlight\.current \|\| actionOwner\.hasPending\(\) \|\| actionSync\) return;/);
+  assert.match(options, /if \(!finished && state\) active\.forgetIfCurrent\(state\.game_id\);/);
+  assert.match(options, /actionOwner\.invalidate\(\);/);
   assert.match(options, /setRecovery\(null\);\s*setShowIntro\(true\);/);
 });

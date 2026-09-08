@@ -967,12 +967,12 @@ def test_projection_guess_uses_anchor_scale_and_dedupes_normalized_surface() -> 
     session = store.get(gid)
     assert session is not None
     svc = get_service()
-    first = resolve_projection("brioșă")
-    second = resolve_projection("chec")
+    first = resolve_projection("chiflă")
+    second = resolve_projection("covrig")
     assert first is not None and second is not None
     assert first.anchor_id == second.anchor_id
 
-    played = _post_json(c, f"/api/wordgames/contexto/games/{gid}/guess", {"text": "brioșă"})
+    played = _post_json(c, f"/api/wordgames/contexto/games/{gid}/guess", {"text": "chiflă"})
     distance = svc.distance(first.anchor_id, session.target)
     expected = rank_for(session, distance, session.weighted_dist.get(first.anchor_id))
     expected = max(2, min(session.reachable + 1, expected + first.rank_penalty))
@@ -985,11 +985,11 @@ def test_projection_guess_uses_anchor_scale_and_dedupes_normalized_surface() -> 
     repeated = _post_json(
         c,
         f"/api/wordgames/contexto/games/{gid}/guess",
-        {"text": "  BRIOSA  "},
+        {"text": "  CHIFLA  "},
     )
     assert repeated["attempts"] == 1
     # A different authored surface remains a distinct guess even when its anchor matches.
-    other = _post_json(c, f"/api/wordgames/contexto/games/{gid}/guess", {"text": "chec"})
+    other = _post_json(c, f"/api/wordgames/contexto/games/{gid}/guess", {"text": "covrig"})
     assert other["guess"]["id"] == second.public_id
     assert other["attempts"] == 2
 

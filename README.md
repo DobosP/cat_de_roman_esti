@@ -1,8 +1,8 @@
 # cat_de_roman_esti
 
 A **text-only arcade of six Romanian word games** over one concept graph
-(**2,397 concepts / 9,360 links / 8,572 typed aliases / 180 puzzles**,
-`fixture-v86-preparation-and-route-quality` — generated hashes and gate state are
+(**2,406 concepts / 9,410 links / 8,603 typed aliases / 180 puzzles**,
+`fixture-v87-snack-and-action-quality` — generated hashes and gate state are
 recorded in `docs/STATUS.md`; no graph visualization). All six are **server-authoritative**:
 the Django BFF validates every move and hides the answers.
 
@@ -169,6 +169,6 @@ Direct **local** merges to `main` are allowed once the CI gate is green; **pushi
 - [`docs/ROEDU_INTEGRATION.md`](docs/ROEDU_INTEGRATION.md) — products, key, field mapping, fail-closed gate, offline fixture.
 - [`frontend/README.md`](frontend/README.md) — SPA develop/build/layout.
 - History (never edited): [`docs/adr/`](docs/adr/) decision records (0001 = arcade pivot, no
-  graph UI; newest 0112) · [`docs/reviews/`](docs/reviews/) per-wave evidence ·
+  graph UI; newest 0126) · [`docs/reviews/`](docs/reviews/) per-wave evidence ·
   [`docs/handoffs/`](docs/handoffs/) dated records · [`docs/archive/`](docs/archive/)
   superseded snapshots.

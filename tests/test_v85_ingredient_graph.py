@@ -488,11 +488,7 @@ def test_native_replacement_metadata_has_no_resolution_or_scoring_role(monkeypat
     retained = {row[0]: row for row in restored if row[0] not in {"cacao", "scorțișoară"}}
     assert len(restored) == 471 and len(retained) == len(v85_rows) == 469
     assert len(P.PROJECTION_TERMS) == CURRENT_CONTENT.projection_terms
-    for term in P.PROJECTION_TERMS:
-        assert retained[term.surface] == (
-            term.surface, term.anchor_id, term.domain, term.rank_penalty,
-            term.mapping_kind, term.public_id,
-        )
+    assert {row[0]: row for row in v85_rows} == retained
     monkeypatch.setattr(P, "NATIVE_PROJECTION_REPLACEMENTS", ())
     assert [asdict(term) for term in P._build_terms()] == terms
     for surface, owner in (("cacao", PREFIX + "cacao"), ("scorțișoară", PREFIX + "scortisoara")):

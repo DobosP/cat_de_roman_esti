@@ -20,7 +20,10 @@ from cat_de_roman_esti.wordgames.contexto_projection import (  # noqa: E402
     suggest_projection,
 )
 from cat_de_roman_esti.wordgames.service import WordGameService, get_service  # noqa: E402
-from tests.content_history import before_v84_projection_rows  # noqa: E402
+from tests.content_history import (  # noqa: E402
+    before_v84_projection_rows,
+    before_v87_projection_neighborhoods,
+)
 
 SOUP = "n_gas_ciorba_burta"
 BODY = "n_v4sti_corp"
@@ -72,7 +75,7 @@ def test_all_projection_rows_and_body_meaning_remain_exactly_v81():
         "burta", "corp", BODY, 1, "domain_fallback", PUBLIC_ID,
     )
     assert get_service().resolve("burtă") is None
-    assert set(PROJECTION_NEIGHBORHOODS) == {"gem", "burta"}
+    assert set(before_v87_projection_neighborhoods(PROJECTION_NEIGHBORHOODS)) == {"gem", "burta"}
     assert PROJECTION_NEIGHBORHOODS["burta"].include_direct_neighbors is False
     gem = PROJECTION_NEIGHBORHOODS["gem"]
     assert (gem.anchor_id, gem.min_strength, gem.include_direct_neighbors) == (

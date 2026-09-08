@@ -1,0 +1,14 @@
+# V87 final independent audit
+
+Valid until: any bound source, artifact, document, review or gate receipt changes — then treat as history.
+
+Reviewed 2026-09-08 by v84_graph_research. **Accepted; no remaining blocker.** [final-audit.json](final-audit.json) binds the individual reviewed files, deletion evidence and execution receipts. It intentionally does not hash review-manifest.json, so the root may regenerate that manifest to include these two audit files without creating a circular binding.
+
+- All **165 existing bindings** match: 152 present source/artifact/decision/document/review files and 13 removed assets. Deleted-file hashes match baseline `daae025`, and those files are absent from the candidate. Every staged path is covered, apart from the intentionally unhashed manifest itself.
+- All **16 final gates** have matching original execution receipts with exit code 0. Complete gzip logs decode to their declared hashes; compressed hashes and zero gzip timestamps also match. Final results: **1,409 backend tests on each Python runtime, 53 accounts tests each, 193 native tests and 168 browser checks**.
+- Both initial backend failures remain preserved as **1,408 passed and one failed**, with their real exit code 1. Static AST comparison confirms the final failing-test correction changes only retired Brioșă/Chec inputs to retained Chiflă/Covrig inputs; anchor scaling, identity, accent/case deduplication and distinct-guess assertions remain intact.
+- The three raw impact matrices and two compatibility logs are losslessly archived with matching decoded/compressed hashes and zero timestamps. Complete matrices contain **233 old approved records, 230 distinct targets and 39 words per record: 9,087 observations**. All 82 Alchimie profiles, 100 Lanț profiles and complete derived captures compare exactly; all 50 new direct routes record successful one-move journeys. The initial 36-word baseline and its three-word extension are distinguished honestly.
+- Graph/module and independent source-review bindings remain exact. Raw candidate screens, separate analyst/verifier provenance and all six promotion dossier bindings match. The final snack-test additions are covered by current bindings and the complete green backend matrices.
+- Published counts match the actual delta: **nine concepts, 50 directed links, 31 forms and six new Contexto rounds**, with no graph removals or extra rounds in the other games. Cremeș evidence is correctly attributed to linguistic analysis and recipe usage. Bread-feedback regressions and the fact that 6,941 changed observations are not all improvements are explicit. The candidate is ready locally; V87 is not merged, pushed or deployed.
+
+Only these two audit artifacts were written. No tests were rerun and no runtime/test files changed. Human Romanian-player testing, real-device acceptance and production rollout checks remain separate.

@@ -1,0 +1,1134 @@
+{
+  "schema_version": 1,
+  "reviewer": "v84_graph_research",
+  "reviewed_date": "2026-09-08",
+  "scope": "Independent factual and lexical graph review only; not hidden-round promotion, post-apply gameplay validation or human playtesting.",
+  "module_path": "scripts/snack_graph_v87_data.py",
+  "module_sha256": "f781e6b9152dbcfe3019d7cbe8a3f684d5575b221ce67753b8e060e29ddf80f6",
+  "candidate_path": "docs/reviews/v87-snack-and-action-quality/graph-candidates.json",
+  "candidate_sha256": "6840ba5930e75e94c0d605e9428bec59b6ebda6fb640881d8ff41de2df8c707e",
+  "baseline_commit": "daae025b19517c18cba2f46c6b11ea4991d9a19c",
+  "baseline_fixture_sha256": "b612eda1fb8712fb57f1e16ca2a4fed3e5f6cec847c977ab45ee420c575ffa1a",
+  "verdict": "accept",
+  "counts": {
+    "nodes": 9,
+    "forms": 31,
+    "grammatical_or_qualified_forms": 30,
+    "reviewed_lexical_equivalents": 1,
+    "edges": 50,
+    "directed_hops": 50,
+    "removals": 0,
+    "old_surface_collisions": 0,
+    "new_surface_collisions": 0,
+    "deferred_surface_collisions": 0,
+    "deferred_surfaces_checked": 70,
+    "preserved_old_authored_surfaces": 13365
+  },
+  "nodes": [
+    {
+      "node_index": 0,
+      "id": "n_v87_food_chec",
+      "label_ro": "Chec",
+      "verdict": "accept",
+      "reason": "Common baked-cake owner. Its recipe family overlaps Pandișpan, so no absolute leavener or ingredient boundary is asserted.",
+      "incident_neighbors": 7,
+      "incoming_neighbors": 6,
+      "outgoing_neighbors": 1,
+      "forms": [
+        {
+          "form_index": 0,
+          "surface": "checul",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 1,
+          "surface": "checului",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 2,
+          "surface": "checuri",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 3,
+          "surface": "chec de casă",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        }
+      ]
+    },
+    {
+      "node_index": 1,
+      "id": "n_v87_food_pandispan",
+      "label_ro": "Pandișpan",
+      "verdict": "accept",
+      "reason": "Valid culinary input and sponge/base sense; the supported plural is accepted. Hold hidden-target promotion because recipe naming overlaps Chec.",
+      "incident_neighbors": 6,
+      "incoming_neighbors": 5,
+      "outgoing_neighbors": 1,
+      "forms": [
+        {
+          "form_index": 0,
+          "surface": "pandișpanul",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 1,
+          "surface": "pandișpanului",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 2,
+          "surface": "pandișpanuri",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        }
+      ]
+    },
+    {
+      "node_index": 2,
+      "id": "n_v87_food_cremsnit",
+      "label_ro": "Cremșnit",
+      "verdict": "accept",
+      "reason": "Cream-filled sheet pastry. Cremeș is one genuinely attested regional equivalent; the other aliases are grammatical forms.",
+      "incident_neighbors": 6,
+      "incoming_neighbors": 5,
+      "outgoing_neighbors": 1,
+      "forms": [
+        {
+          "form_index": 0,
+          "surface": "cremșnitul",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 1,
+          "surface": "cremșnitului",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 2,
+          "surface": "cremșnituri",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 3,
+          "surface": "cremeș",
+          "verdict": "accept",
+          "kind": "documented_regional_equivalent"
+        }
+      ]
+    },
+    {
+      "node_index": 3,
+      "id": "n_v87_food_tort_diplomat",
+      "label_ro": "Tort Diplomat",
+      "verdict": "accept",
+      "reason": "The full compound names a cold assembled cream/fruit dessert. Bare Tort and Diplomat remain outside this alias set.",
+      "incident_neighbors": 6,
+      "incoming_neighbors": 5,
+      "outgoing_neighbors": 1,
+      "forms": [
+        {
+          "form_index": 0,
+          "surface": "tortul Diplomat",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 1,
+          "surface": "tortului Diplomat",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 2,
+          "surface": "torturi Diplomat",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        }
+      ]
+    },
+    {
+      "node_index": 4,
+      "id": "n_v87_food_piscot",
+      "label_ro": "Pișcot",
+      "verdict": "accept",
+      "reason": "Elongated porous pastry owner is supported by the preparation and literary neuter plural; no Biscuit synonym is added.",
+      "incident_neighbors": 6,
+      "incoming_neighbors": 5,
+      "outgoing_neighbors": 1,
+      "forms": [
+        {
+          "form_index": 0,
+          "surface": "pișcotul",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 1,
+          "surface": "pișcotului",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 2,
+          "surface": "pișcoturi",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 3,
+          "surface": "pișcoturile",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        }
+      ]
+    },
+    {
+      "node_index": 5,
+      "id": "n_v87_food_briosa",
+      "label_ro": "Brioșă",
+      "verdict": "accept",
+      "reason": "Traditional yeast brioche and modern quick-muffin naming breadth is explicit. Forms are ordinary, but hold hidden-target promotion under C5.",
+      "incident_neighbors": 6,
+      "incoming_neighbors": 5,
+      "outgoing_neighbors": 1,
+      "forms": [
+        {
+          "form_index": 0,
+          "surface": "brioșei",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 1,
+          "surface": "brioșe",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 2,
+          "surface": "brioșele",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 3,
+          "surface": "brioșelor",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        }
+      ]
+    },
+    {
+      "node_index": 6,
+      "id": "n_v87_food_praf_copt",
+      "label_ro": "Praf de copt",
+      "verdict": "accept",
+      "reason": "Distinct multi-ingredient baking powder; no yeast or bicarbonate synonym is invented.",
+      "incident_neighbors": 4,
+      "incoming_neighbors": 1,
+      "outgoing_neighbors": 3,
+      "forms": [
+        {
+          "form_index": 0,
+          "surface": "praful de copt",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 1,
+          "surface": "prafului de copt",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 2,
+          "surface": "praf de copt pentru prăjituri",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        }
+      ]
+    },
+    {
+      "node_index": 7,
+      "id": "n_v87_food_bicarbonat",
+      "label_ro": "Bicarbonat de sodiu alimentar",
+      "verdict": "accept",
+      "reason": "Food-qualified sodium bicarbonate avoids capturing the broader bare chemical surface; proposed uses are specifically bounded recipe variants.",
+      "incident_neighbors": 4,
+      "incoming_neighbors": 0,
+      "outgoing_neighbors": 4,
+      "forms": [
+        {
+          "form_index": 0,
+          "surface": "bicarbonatul de sodiu alimentar",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 1,
+          "surface": "bicarbonat alimentar",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 2,
+          "surface": "bicarbonat de sodiu pentru copt",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        }
+      ]
+    },
+    {
+      "node_index": 8,
+      "id": "n_v87_food_gelatina",
+      "label_ro": "Gelatină alimentară",
+      "verdict": "accept",
+      "reason": "Food-qualified gelling protein. Case and preparation qualifiers are accepted; bare Gelatină is not claimed as a new exact owner.",
+      "incident_neighbors": 4,
+      "incoming_neighbors": 0,
+      "outgoing_neighbors": 4,
+      "forms": [
+        {
+          "form_index": 0,
+          "surface": "gelatinei alimentare",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 1,
+          "surface": "gelatină pentru prăjituri",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        },
+        {
+          "form_index": 2,
+          "surface": "gelatină alimentară pudră",
+          "verdict": "accept",
+          "kind": "grammatical_or_qualified_form"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "edge_index": 0,
+      "src": "n_v24_food_pantry_faina",
+      "dst": "n_v24_food_snack_biscuit",
+      "relation": "part_of",
+      "label_ro": "ingredient de bază pentru",
+      "verdict": "accept",
+      "source_keys": [
+        "biscuit"
+      ],
+      "reason": "Manufacturer ingredient list and method explicitly use flour, butter, sugar, both named leaveners and oven baking."
+    },
+    {
+      "edge_index": 1,
+      "src": "n_v24_food_breakfast_unt",
+      "dst": "n_v24_food_snack_biscuit",
+      "relation": "ingredient_variant",
+      "label_ro": "folosit în unele rețete de",
+      "verdict": "accept",
+      "source_keys": [
+        "biscuit"
+      ],
+      "reason": "Manufacturer ingredient list and method explicitly use flour, butter, sugar, both named leaveners and oven baking."
+    },
+    {
+      "edge_index": 2,
+      "src": "n_v24_food_pantry_zahar",
+      "dst": "n_v24_food_snack_biscuit",
+      "relation": "ingredient_variant",
+      "label_ro": "îndulcește unele sortimente de",
+      "verdict": "accept",
+      "source_keys": [
+        "biscuit"
+      ],
+      "reason": "Manufacturer ingredient list and method explicitly use flour, butter, sugar, both named leaveners and oven baking."
+    },
+    {
+      "edge_index": 3,
+      "src": "n_v84_food_cuptor",
+      "dst": "n_v24_food_snack_biscuit",
+      "relation": "preparation_tool",
+      "label_ro": "coace",
+      "verdict": "accept",
+      "source_keys": [
+        "biscuit"
+      ],
+      "reason": "Manufacturer ingredient list and method explicitly use flour, butter, sugar, both named leaveners and oven baking."
+    },
+    {
+      "edge_index": 4,
+      "src": "n_v87_food_praf_copt",
+      "dst": "n_v24_food_snack_biscuit",
+      "relation": "ingredient_variant",
+      "label_ro": "afânează unele aluaturi de",
+      "verdict": "accept",
+      "source_keys": [
+        "biscuit"
+      ],
+      "reason": "Manufacturer ingredient list and method explicitly use flour, butter, sugar, both named leaveners and oven baking."
+    },
+    {
+      "edge_index": 5,
+      "src": "n_v87_food_bicarbonat",
+      "dst": "n_v24_food_snack_biscuit",
+      "relation": "ingredient_variant",
+      "label_ro": "afânează unele aluaturi de",
+      "verdict": "accept",
+      "source_keys": [
+        "biscuit"
+      ],
+      "reason": "Manufacturer ingredient list and method explicitly use flour, butter, sugar, both named leaveners and oven baking."
+    },
+    {
+      "edge_index": 6,
+      "src": "n_v24_food_pantry_faina",
+      "dst": "n_v87_food_chec",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient pentru",
+      "verdict": "accept",
+      "source_keys": [
+        "chec"
+      ],
+      "reason": "Recipe lists all six proposed ingredient inputs and independently describes serving the cake with milk."
+    },
+    {
+      "edge_index": 7,
+      "src": "n_v4gas_ou",
+      "dst": "n_v87_food_chec",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient pentru",
+      "verdict": "accept",
+      "source_keys": [
+        "chec"
+      ],
+      "reason": "Recipe lists all six proposed ingredient inputs and independently describes serving the cake with milk."
+    },
+    {
+      "edge_index": 8,
+      "src": "n_v24_food_pantry_zahar",
+      "dst": "n_v87_food_chec",
+      "relation": "ingredient_variant",
+      "label_ro": "îndulcește",
+      "verdict": "accept",
+      "source_keys": [
+        "chec"
+      ],
+      "reason": "Recipe lists all six proposed ingredient inputs and independently describes serving the cake with milk."
+    },
+    {
+      "edge_index": 9,
+      "src": "n_v24_food_pantry_ulei",
+      "dst": "n_v87_food_chec",
+      "relation": "ingredient_variant",
+      "label_ro": "folosit în unele rețete de",
+      "verdict": "accept",
+      "source_keys": [
+        "chec"
+      ],
+      "reason": "Recipe lists all six proposed ingredient inputs and independently describes serving the cake with milk."
+    },
+    {
+      "edge_index": 10,
+      "src": "n_v85_food_cacao",
+      "dst": "n_v87_food_chec",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează unele variante de",
+      "verdict": "accept",
+      "source_keys": [
+        "chec"
+      ],
+      "reason": "Recipe lists all six proposed ingredient inputs and independently describes serving the cake with milk."
+    },
+    {
+      "edge_index": 11,
+      "src": "n_v87_food_praf_copt",
+      "dst": "n_v87_food_chec",
+      "relation": "ingredient_variant",
+      "label_ro": "afânează unele rețete de",
+      "verdict": "accept",
+      "source_keys": [
+        "chec"
+      ],
+      "reason": "Recipe lists all six proposed ingredient inputs and independently describes serving the cake with milk."
+    },
+    {
+      "edge_index": 12,
+      "src": "n_v24_food_pantry_faina",
+      "dst": "n_v87_food_pandispan",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient pentru",
+      "verdict": "accept",
+      "source_keys": [
+        "pandispan"
+      ],
+      "reason": "Recipe separates egg whites and yolks, uses flour and sugar and bakes the sponge; no universal leavener rule is inferred."
+    },
+    {
+      "edge_index": 13,
+      "src": "n_v86_food_albus",
+      "dst": "n_v87_food_pandispan",
+      "relation": "ingredient_variant",
+      "label_ro": "bătut spumă în unele rețete de",
+      "verdict": "accept",
+      "source_keys": [
+        "pandispan"
+      ],
+      "reason": "Recipe separates egg whites and yolks, uses flour and sugar and bakes the sponge; no universal leavener rule is inferred."
+    },
+    {
+      "edge_index": 14,
+      "src": "n_v86_food_galbenus",
+      "dst": "n_v87_food_pandispan",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient în unele rețete de",
+      "verdict": "accept",
+      "source_keys": [
+        "pandispan"
+      ],
+      "reason": "Recipe separates egg whites and yolks, uses flour and sugar and bakes the sponge; no universal leavener rule is inferred."
+    },
+    {
+      "edge_index": 15,
+      "src": "n_v24_food_pantry_zahar",
+      "dst": "n_v87_food_pandispan",
+      "relation": "ingredient_variant",
+      "label_ro": "îndulcește",
+      "verdict": "accept",
+      "source_keys": [
+        "pandispan"
+      ],
+      "reason": "Recipe separates egg whites and yolks, uses flour and sugar and bakes the sponge; no universal leavener rule is inferred."
+    },
+    {
+      "edge_index": 16,
+      "src": "n_v84_food_cuptor",
+      "dst": "n_v87_food_pandispan",
+      "relation": "preparation_tool",
+      "label_ro": "coace",
+      "verdict": "accept",
+      "source_keys": [
+        "pandispan"
+      ],
+      "reason": "Recipe separates egg whites and yolks, uses flour and sugar and bakes the sponge; no universal leavener rule is inferred."
+    },
+    {
+      "edge_index": 17,
+      "src": "n_v84_food_aluat",
+      "dst": "n_v87_food_cremsnit",
+      "relation": "ingredient_variant",
+      "label_ro": "foile coapte intră în",
+      "verdict": "accept",
+      "source_keys": [
+        "cremsnit"
+      ],
+      "reason": "Pastry sheets, vanilla cream and starch are explicit in the recipe; the finished food is identified as a pastry."
+    },
+    {
+      "edge_index": 18,
+      "src": "n_v86_food_crema_vanilie",
+      "dst": "n_v87_food_cremsnit",
+      "relation": "part_of",
+      "label_ro": "umplutură pentru",
+      "verdict": "accept",
+      "source_keys": [
+        "cremsnit"
+      ],
+      "reason": "Pastry sheets, vanilla cream and starch are explicit in the recipe; the finished food is identified as a pastry."
+    },
+    {
+      "edge_index": 19,
+      "src": "n_v86_food_zahar_pudra",
+      "dst": "n_v87_food_cremsnit",
+      "relation": "ingredient_variant",
+      "label_ro": "pudrează unele variante de",
+      "verdict": "accept",
+      "source_keys": [
+        "cremsnit_cold"
+      ],
+      "reason": "Assembly instructions chill the finished pastry and then dust it with powdered sugar."
+    },
+    {
+      "edge_index": 20,
+      "src": "n_v86_food_amidon",
+      "dst": "n_v87_food_cremsnit",
+      "relation": "ingredient_variant",
+      "label_ro": "îngroașă crema din unele rețete de",
+      "verdict": "accept",
+      "source_keys": [
+        "cremsnit"
+      ],
+      "reason": "Pastry sheets, vanilla cream and starch are explicit in the recipe; the finished food is identified as a pastry."
+    },
+    {
+      "edge_index": 21,
+      "src": "n_v24_home_appliances_frigider",
+      "dst": "n_v87_food_cremsnit",
+      "relation": "stores",
+      "label_ro": "păstrează la rece",
+      "verdict": "accept",
+      "source_keys": [
+        "cremsnit_cold"
+      ],
+      "reason": "Assembly instructions chill the finished pastry and then dust it with powdered sugar."
+    },
+    {
+      "edge_index": 22,
+      "src": "n_v87_food_piscot",
+      "dst": "n_v87_food_tort_diplomat",
+      "relation": "ingredient_variant",
+      "label_ro": "căptușește unele variante de",
+      "verdict": "accept",
+      "source_keys": [
+        "diplomat"
+      ],
+      "reason": "Recipe explicitly includes ladyfingers, whipped cream, gelatin and orange; assembled dessert is chilled in a refrigerator."
+    },
+    {
+      "edge_index": 23,
+      "src": "n_v86_food_frisca",
+      "dst": "n_v87_food_tort_diplomat",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru crema din",
+      "verdict": "accept",
+      "source_keys": [
+        "diplomat"
+      ],
+      "reason": "Recipe explicitly includes ladyfingers, whipped cream, gelatin and orange; assembled dessert is chilled in a refrigerator."
+    },
+    {
+      "edge_index": 24,
+      "src": "n_v87_food_gelatina",
+      "dst": "n_v87_food_tort_diplomat",
+      "relation": "ingredient_variant",
+      "label_ro": "încheagă crema din unele rețete de",
+      "verdict": "accept",
+      "source_keys": [
+        "diplomat"
+      ],
+      "reason": "Recipe explicitly includes ladyfingers, whipped cream, gelatin and orange; assembled dessert is chilled in a refrigerator."
+    },
+    {
+      "edge_index": 25,
+      "src": "n_v24_food_imported_fruit_portocala",
+      "dst": "n_v87_food_tort_diplomat",
+      "relation": "ingredient_variant",
+      "label_ro": "fruct adăugat în unele rețete de",
+      "verdict": "accept",
+      "source_keys": [
+        "diplomat"
+      ],
+      "reason": "Recipe explicitly includes ladyfingers, whipped cream, gelatin and orange; assembled dessert is chilled in a refrigerator."
+    },
+    {
+      "edge_index": 26,
+      "src": "n_v24_home_appliances_frigider",
+      "dst": "n_v87_food_tort_diplomat",
+      "relation": "stores",
+      "label_ro": "răcește și păstrează",
+      "verdict": "accept",
+      "source_keys": [
+        "diplomat"
+      ],
+      "reason": "Recipe explicitly includes ladyfingers, whipped cream, gelatin and orange; assembled dessert is chilled in a refrigerator."
+    },
+    {
+      "edge_index": 27,
+      "src": "n_v24_food_pantry_faina",
+      "dst": "n_v87_food_piscot",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient pentru",
+      "verdict": "accept",
+      "source_keys": [
+        "piscot"
+      ],
+      "reason": "Original preparation separates eggs, adds flour, shapes ladyfingers, dusts with powdered sugar and bakes; Diplomat use is named."
+    },
+    {
+      "edge_index": 28,
+      "src": "n_v86_food_albus",
+      "dst": "n_v87_food_piscot",
+      "relation": "ingredient_variant",
+      "label_ro": "bătut spumă pentru",
+      "verdict": "accept",
+      "source_keys": [
+        "piscot"
+      ],
+      "reason": "Original preparation separates eggs, adds flour, shapes ladyfingers, dusts with powdered sugar and bakes; Diplomat use is named."
+    },
+    {
+      "edge_index": 29,
+      "src": "n_v86_food_galbenus",
+      "dst": "n_v87_food_piscot",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient pentru",
+      "verdict": "accept",
+      "source_keys": [
+        "piscot"
+      ],
+      "reason": "Original preparation separates eggs, adds flour, shapes ladyfingers, dusts with powdered sugar and bakes; Diplomat use is named."
+    },
+    {
+      "edge_index": 30,
+      "src": "n_v86_food_zahar_pudra",
+      "dst": "n_v87_food_piscot",
+      "relation": "ingredient_variant",
+      "label_ro": "pudrează unele variante de",
+      "verdict": "accept",
+      "source_keys": [
+        "piscot"
+      ],
+      "reason": "Original preparation separates eggs, adds flour, shapes ladyfingers, dusts with powdered sugar and bakes; Diplomat use is named."
+    },
+    {
+      "edge_index": 31,
+      "src": "n_v84_food_cuptor",
+      "dst": "n_v87_food_piscot",
+      "relation": "preparation_tool",
+      "label_ro": "coace",
+      "verdict": "accept",
+      "source_keys": [
+        "piscot"
+      ],
+      "reason": "Original preparation separates eggs, adds flour, shapes ladyfingers, dusts with powdered sugar and bakes; Diplomat use is named."
+    },
+    {
+      "edge_index": 32,
+      "src": "n_v24_food_pantry_faina",
+      "dst": "n_v87_food_briosa",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient în unele rețete de",
+      "verdict": "accept",
+      "source_keys": [
+        "briosa_quick"
+      ],
+      "reason": "Manufacturer recipe lists flour, butter, baking powder and solid chocolate pieces in a quick batter preparation."
+    },
+    {
+      "edge_index": 33,
+      "src": "n_v24_food_breakfast_unt",
+      "dst": "n_v87_food_briosa",
+      "relation": "ingredient_variant",
+      "label_ro": "folosit în unele rețete de",
+      "verdict": "accept",
+      "source_keys": [
+        "briosa_quick"
+      ],
+      "reason": "Manufacturer recipe lists flour, butter, baking powder and solid chocolate pieces in a quick batter preparation."
+    },
+    {
+      "edge_index": 34,
+      "src": "n_v87_food_praf_copt",
+      "dst": "n_v87_food_briosa",
+      "relation": "ingredient_variant",
+      "label_ro": "afânează unele variante rapide de",
+      "verdict": "accept",
+      "source_keys": [
+        "briosa_quick"
+      ],
+      "reason": "Manufacturer recipe lists flour, butter, baking powder and solid chocolate pieces in a quick batter preparation."
+    },
+    {
+      "edge_index": 35,
+      "src": "n_v85_food_ciocolata",
+      "dst": "n_v87_food_briosa",
+      "relation": "ingredient_variant",
+      "label_ro": "adăugată în unele variante de",
+      "verdict": "accept",
+      "source_keys": [
+        "briosa_quick"
+      ],
+      "reason": "Manufacturer recipe lists flour, butter, baking powder and solid chocolate pieces in a quick batter preparation."
+    },
+    {
+      "edge_index": 36,
+      "src": "n_v84_food_drojdie",
+      "dst": "n_v87_food_briosa",
+      "relation": "ingredient_variant",
+      "label_ro": "dospește aluatul unor variante de",
+      "verdict": "accept",
+      "source_keys": [
+        "briosa_yeast"
+      ],
+      "reason": "Romanian recipe booklet page 44 (PDF index43) explicitly gives a Brioșe preparation with flour and dried yeast."
+    },
+    {
+      "edge_index": 37,
+      "src": "n_v87_food_bicarbonat",
+      "dst": "n_v87_food_praf_copt",
+      "relation": "part_of",
+      "label_ro": "component în unele formule de",
+      "verdict": "accept",
+      "source_keys": [
+        "powder"
+      ],
+      "reason": "Manufacturer formula lists bicarbonate among several components of a baking powder; the two ingredients are not equated."
+    },
+    {
+      "edge_index": 38,
+      "src": "n_v87_food_bicarbonat",
+      "dst": "n_v21gas_turta_dulce",
+      "relation": "ingredient_variant",
+      "label_ro": "afânează unele rețete de",
+      "verdict": "accept",
+      "source_keys": [
+        "bicarbonat_turta"
+      ],
+      "reason": "Named original gingerbread recipe explicitly lists sodium bicarbonate."
+    },
+    {
+      "edge_index": 39,
+      "src": "n_v87_food_bicarbonat",
+      "dst": "n_gas_mici",
+      "relation": "ingredient_variant",
+      "label_ro": "adăugat în unele rețete de",
+      "verdict": "accept",
+      "source_keys": [
+        "bicarbonat_mici"
+      ],
+      "reason": "Indexed original recipe explicitly lists sodium bicarbonate in its mici mixture. The graph correctly qualifies this as a variant."
+    },
+    {
+      "edge_index": 40,
+      "src": "n_v87_food_gelatina",
+      "dst": "n_v86_food_frisca",
+      "relation": "ingredient_variant",
+      "label_ro": "stabilizează unele variante de",
+      "verdict": "accept",
+      "source_keys": [
+        "gelatina_frisca"
+      ],
+      "reason": "Indexed supplier preparation explicitly incorporates gelatin into whipped cream as a stabilizer; ancillary storage claims are not imported."
+    },
+    {
+      "edge_index": 41,
+      "src": "n_v87_food_gelatina",
+      "dst": "n_v3gas_inghetata",
+      "relation": "ingredient_variant",
+      "label_ro": "stabilizează unele rețete de",
+      "verdict": "accept",
+      "source_keys": [
+        "gelatina_ice"
+      ],
+      "reason": "Original melon ice-cream recipe explicitly incorporates gelatin before freezing; only variant ingredient presence is accepted."
+    },
+    {
+      "edge_index": 42,
+      "src": "n_v87_food_gelatina",
+      "dst": "n_gas_piftie",
+      "relation": "ingredient_variant",
+      "label_ro": "ajută la închegarea unor variante de",
+      "verdict": "accept",
+      "source_keys": [
+        "gelatina_piftie"
+      ],
+      "reason": "Original chicken-wing aspic lists gelatin and adds it to the broth; this does not make added gelatin mandatory for all piftie."
+    },
+    {
+      "edge_index": 43,
+      "src": "n_v24_food_pantry_zahar",
+      "dst": "n_v85_food_ciocolata",
+      "relation": "ingredient_variant",
+      "label_ro": "îndulcește unele sortimente de",
+      "verdict": "accept",
+      "source_keys": [
+        "chocolate_sugar"
+      ],
+      "reason": "Producer ingredient list identifies sugar in its solid homemade chocolate."
+    },
+    {
+      "edge_index": 44,
+      "src": "n_v4gas_lapte",
+      "dst": "n_v85_food_ciocolata",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient în unele rețete de casă de",
+      "verdict": "accept",
+      "source_keys": [
+        "chocolate_milk"
+      ],
+      "reason": "Chef recipe uses liquid milk in addition to milk powder, spreads the mixture in a frame and later cuts solid pieces."
+    },
+    {
+      "edge_index": 45,
+      "src": "n_v87_food_chec",
+      "dst": "n_v4gas_lapte",
+      "relation": "served_together",
+      "label_ro": "se poate servi cu",
+      "verdict": "accept",
+      "source_keys": [
+        "chec"
+      ],
+      "reason": "Recipe lists all six proposed ingredient inputs and independently describes serving the cake with milk."
+    },
+    {
+      "edge_index": 46,
+      "src": "n_v87_food_pandispan",
+      "dst": "n_v18gas_amandina",
+      "relation": "raw_material_for",
+      "label_ro": "varianta cu cacao formează blatul de",
+      "verdict": "accept",
+      "source_keys": [
+        "pandispan_amandina"
+      ],
+      "reason": "Author identifies the cocoa sponge used for Amandină as Pandișpan; the graph specifies that cocoa variant."
+    },
+    {
+      "edge_index": 47,
+      "src": "n_v87_food_cremsnit",
+      "dst": "n_v4gas_prajitura",
+      "relation": "is_a",
+      "label_ro": "este o",
+      "verdict": "accept",
+      "source_keys": [
+        "cremsnit"
+      ],
+      "reason": "Pastry sheets, vanilla cream and starch are explicit in the recipe; the finished food is identified as a pastry."
+    },
+    {
+      "edge_index": 48,
+      "src": "n_v87_food_tort_diplomat",
+      "dst": "n_v2gas_desert",
+      "relation": "is_a",
+      "label_ro": "este un",
+      "verdict": "accept",
+      "source_keys": [
+        "diplomat"
+      ],
+      "reason": "Recipe explicitly includes ladyfingers, whipped cream, gelatin and orange; assembled dessert is chilled in a refrigerator."
+    },
+    {
+      "edge_index": 49,
+      "src": "n_v87_food_briosa",
+      "dst": "n_gas_cozonac",
+      "relation": "related_to",
+      "label_ro": "unele variante au aluat de tip",
+      "verdict": "accept",
+      "source_keys": [
+        "briosa_meaning"
+      ],
+      "reason": "Dictionary describes the traditional pastry through cozonac-like dough and supplies brioșei/brioșe/brioșele/brioșelor forms."
+    }
+  ],
+  "source_checks": [
+    {
+      "key": "biscuit",
+      "url": "https://www.oetker.ro/retete/r/biscuiti-cu-unt-love-letters",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "Manufacturer ingredient list and method explicitly use flour, butter, sugar, both named leaveners and oven baking."
+    },
+    {
+      "key": "chec",
+      "url": "https://jamilacuisine.ro/chec-pufos-cu-cacao-reteta-video/",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "Recipe lists all six proposed ingredient inputs and independently describes serving the cake with milk."
+    },
+    {
+      "key": "chec_overlap",
+      "url": "https://bucate-aromate.ro/2019/07/chec-cu-visine-si-cacao/",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "The original author names the same preparation Chec and Pandișpan and states that it uses no baking powder."
+    },
+    {
+      "key": "pandispan",
+      "url": "https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/pandispan-cu-prune-reteta-video-pentru-o-prajitura-pufoasa-gustoasa-si-economica.html",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "Recipe separates egg whites and yolks, uses flour and sugar and bakes the sponge; no universal leavener rule is inferred."
+    },
+    {
+      "key": "pandispan_amandina",
+      "url": "https://jamilacuisine.ro/prajitura-amandina-amandine-facute-in-casa/",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "Author identifies the cocoa sponge used for Amandină as Pandișpan; the graph specifies that cocoa variant."
+    },
+    {
+      "key": "cremsnit",
+      "url": "https://jamilacuisine.ro/prajitura-cremsnit-pas-cu-pas-reteta-video/",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "Pastry sheets, vanilla cream and starch are explicit in the recipe; the finished food is identified as a pastry."
+    },
+    {
+      "key": "cremsnit_cold",
+      "url": "https://bucate-aromate.ro/2025/10/cremsnit-cu-aluat-de-casa/",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "Assembly instructions chill the finished pastry and then dust it with powdered sugar."
+    },
+    {
+      "key": "cremes_name",
+      "url": "https://jamilacuisine.ro/tort-cremsnit-cu-crema-de-vanilie-reteta-video/",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "The same article uses Cremșnit and Cremeș for the same familiar pastry."
+    },
+    {
+      "key": "diplomat",
+      "url": "https://jamilacuisine.ro/tort-diplomat-facut-in-casa-reteta-video/",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "Recipe explicitly includes ladyfingers, whipped cream, gelatin and orange; assembled dessert is chilled in a refrigerator."
+    },
+    {
+      "key": "piscot",
+      "url": "https://www.barbatlacratita.ro/2016/03/piscoturi-de-casa.html",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "Original preparation separates eggs, adds flour, shapes ladyfingers, dusts with powdered sugar and bakes; Diplomat use is named."
+    },
+    {
+      "key": "briosa_quick",
+      "url": "https://www.oetker.ro/retete/r/briose-cu-bucatele-de-ciocolata",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "Manufacturer recipe lists flour, butter, baking powder and solid chocolate pieces in a quick batter preparation."
+    },
+    {
+      "key": "briosa_yeast",
+      "url": "https://dam.groupeseb.com/m/5111943d0aede5fe/original/NC00126318-Recipe.pdf",
+      "verdict": "supports_bounded_claim",
+      "access": "original manufacturer PDF text; Romanian page44 (zero-based43)",
+      "finding": "Romanian recipe booklet page 44 (PDF index43) explicitly gives a Brioșe preparation with flour and dried yeast."
+    },
+    {
+      "key": "briosa_meaning",
+      "url": "https://dexonline.ro/intrare/brio%C8%99%C4%83/6859",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "Dictionary describes the traditional pastry through cozonac-like dough and supplies brioșei/brioșe/brioșele/brioșelor forms."
+    },
+    {
+      "key": "powder",
+      "url": "https://www.oetker.ro/produsele/p/praf-de-copt-pentru-air-fryer",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "Manufacturer formula lists bicarbonate among several components of a baking powder; the two ingredients are not equated."
+    },
+    {
+      "key": "bicarbonat_turta",
+      "url": "https://jamilacuisine.ro/turta-dulce-glazurata-reteta-video/",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "Named original gingerbread recipe explicitly lists sodium bicarbonate."
+    },
+    {
+      "key": "bicarbonat_mici",
+      "url": "https://jamilacuisine.ro/mici-de-casa-pasta-pentru-mici-suculenti-si-deliciosi-reteta-video/",
+      "verdict": "supports_bounded_claim",
+      "access": "indexed original-source text; direct retrieval intermittently challenged, incomplete or timed out",
+      "finding": "Indexed original recipe explicitly lists sodium bicarbonate in its mici mixture. The graph correctly qualifies this as a variant."
+    },
+    {
+      "key": "gelatina_frisca",
+      "url": "https://exoticwhip.com/ro/blog-ro/reteta-de-frisca-stabilizata/",
+      "verdict": "supports_bounded_claim",
+      "access": "indexed original-source text; direct retrieval intermittently challenged, incomplete or timed out",
+      "finding": "Indexed supplier preparation explicitly incorporates gelatin into whipped cream as a stabilizer; ancillary storage claims are not imported."
+    },
+    {
+      "key": "gelatina_ice",
+      "url": "https://teoskitchen.ro/2008/07/inghetata-de-pepene-galben.html",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "Original melon ice-cream recipe explicitly incorporates gelatin before freezing; only variant ingredient presence is accepted."
+    },
+    {
+      "key": "gelatina_piftie",
+      "url": "https://www.delicatesa.ro/retete/piftie-din-aripioare-de-pui-2728",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "Original chicken-wing aspic lists gelatin and adds it to the broth; this does not make added gelatin mandatory for all piftie."
+    },
+    {
+      "key": "chocolate_sugar",
+      "url": "https://camarabucovinei.ro/products/ciocolata-de-casa",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "Producer ingredient list identifies sugar in its solid homemade chocolate."
+    },
+    {
+      "key": "chocolate_milk",
+      "url": "https://www.roberteisler.ro/retete/ciocolata-de-casa-1",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "Chef recipe uses liquid milk in addition to milk powder, spreads the mixture in a frame and later cuts solid pieces."
+    },
+    {
+      "key": "cremsnit_lexical",
+      "url": "https://editurajunimea.ro/reviste/revista-scriptor/foaie-foi-foitaj/",
+      "verdict": "supports_bounded_claim",
+      "access": "direct original page text",
+      "finding": "Publisher linguistic article reports cremșnituri as the DOOM plural and Cremeș as an attested regional name for the pastry."
+    },
+    {
+      "key": "pandispan_lexical",
+      "url": "https://dexonline.ro/definitie/pandi%C8%99pan/27977",
+      "verdict": "supports_bounded_claim",
+      "access": "indexed original-source text; direct retrieval intermittently challenged, incomplete or timed out",
+      "finding": "Indexed DEX98 entry explicitly lists pandișpanuri; ordinary article/case forms remain within that owner."
+    },
+    {
+      "key": "independent_checlexical",
+      "url": "https://dexonline.ro/definitie/chec",
+      "verdict": "supports_bounded_claim",
+      "access": "indexed DEX/DOOM entry",
+      "finding": "Checuri, checul and checului are ordinary forms of the culinary noun."
+    },
+    {
+      "key": "independent_piscotlexical",
+      "url": "https://dexonline.ro/article/pi%C8%99cot_%C8%99i_servus",
+      "verdict": "supports_bounded_claim",
+      "access": "indexed lexicographic article",
+      "finding": "Literary Romanian uses neuter Pișcot with plural pișcoturi."
+    },
+    {
+      "key": "independent_gelatine_protein",
+      "url": "https://www.gelita.com/en/products-brands/gelatin/gelitar-food-gelatin",
+      "verdict": "supports_bounded_claim",
+      "access": "original manufacturer page",
+      "finding": "Food gelatin is a collagen-derived protein with gelling and stabilizing roles; no health claim is imported."
+    }
+  ],
+  "hold_hidden_targets": [
+    "n_v87_food_pandispan",
+    "n_v87_food_briosa"
+  ],
+  "separate_surfaces": [
+    "ciocolată caldă",
+    "bicarbonat",
+    "bicarbonat de sodiu",
+    "gelatină",
+    "tort",
+    "rece"
+  ],
+  "required_projection_retirements": [
+    "chec",
+    "brioșă"
+  ],
+  "current_blockers": [],
+  "limits": [
+    "All 50 claims remain one-way. Finished-food outgoing links state serving, base, type or dough-family associations rather than reversing ingredient edges.",
+    "Only cremeș is counted as a lexical equivalent; no claim that all 31 forms are synonyms.",
+    "Recipe variants justify ingredient presence without universality, historical exclusivity, health superiority or preparation-safety claims.",
+    "Pandișpan and Brioșă remain on hold as hidden targets; graph input acceptance does not resolve their naming ambiguity.",
+    "In-memory checks verify exact ownership and bounds, not public selections or changed distance/ranking behavior. Post-apply impact and promotion reviews remain necessary.",
+    "No fixture/code edits, apply, full test suite, commit, push or deployment were performed by this reviewer."
+  ]
+}

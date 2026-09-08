@@ -82,9 +82,14 @@ test("a fuzzy correction is offered as an explicit chip and only then costs an a
 
 test("the typed text survives a confirmation request so it stays correctable", () => {
   // setText("") runs only on the accepted branch, after the !res.ok early return.
-  const guess = screen.match(/const handleGuess = useCallback\([\s\S]*?\n {4}\[state, busy, finished, text, onToast\],/);
-  assert.ok(guess);
-  const rejectedBranch = guess[0].slice(guess[0].indexOf("if (!res.ok) {"), guess[0].indexOf('setText("");'));
+  const start = screen.indexOf("const handleGuess = useCallback");
+  const end = screen.indexOf("const handleClue = useCallback", start);
+  assert.ok(start >= 0 && end > start);
+  const guess = screen.slice(start, end);
+  const rejectedStart = guess.indexOf("if (!res.ok) {");
+  const acceptedStart = guess.indexOf('setText("");');
+  assert.ok(rejectedStart >= 0 && acceptedStart > rejectedStart);
+  const rejectedBranch = guess.slice(rejectedStart, acceptedStart);
   assert.doesNotMatch(rejectedBranch, /setText\(/);
   // Once the player starts correcting it, the old label/token action disappears.
   assert.match(

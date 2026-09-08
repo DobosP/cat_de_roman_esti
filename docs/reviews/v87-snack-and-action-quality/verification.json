@@ -1,0 +1,543 @@
+{
+  "schema_version": 2,
+  "date": "2026-09-08",
+  "baseline_commit": "daae025b19517c18cba2f46c6b11ea4991d9a19c",
+  "candidate_branch": "feat/v87-snack-and-action-quality",
+  "result": "passed",
+  "checks": {
+    "backend312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 616.11,
+      "log_sha256": "31f0d156b8a8fa793dba6a9ece81e7409ad7f3efad16203ca6b4fdb5db4591f9",
+      "tail": [
+        "........................................................................ [ 51%]",
+        "........................................................................ [ 56%]",
+        "........................................................................ [ 61%]",
+        "........................................................................ [ 66%]",
+        "........................................................................ [ 71%]",
+        "........................................................................ [ 76%]",
+        "........................................................................ [ 81%]",
+        "........................................................................ [ 86%]",
+        "........................................................................ [ 91%]",
+        "........................................................................ [ 97%]",
+        ".........................................                                [100%]",
+        "1409 passed in 613.57s (0:10:13)"
+      ],
+      "log": "runs/backend312.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "4e93ce1f40efa1ff1575df801db131547af27d662156bf996cbd5f06f54bbb6a"
+    },
+    "accounts312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 7.39,
+      "log_sha256": "75c96bab9e4b2d4a8d09d439e3ea3722b076adf7363a4079c7a2109eafbf4a79",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 5.73s"
+      ],
+      "log": "runs/accounts312.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "1d1da07854b4a09e5da237abff5b4a6c35ebebb062d3ffb7cd82ad408627616c"
+    },
+    "backend314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v87-snack-and-action-quality/py314/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 483.04,
+      "log_sha256": "4d2206ef08c1cff0f70dd1bd097f6de84322803f01016eda77fa118942d086f6",
+      "tail": [
+        "........................................................................ [ 51%]",
+        "........................................................................ [ 56%]",
+        "........................................................................ [ 61%]",
+        "........................................................................ [ 66%]",
+        "........................................................................ [ 71%]",
+        "........................................................................ [ 76%]",
+        "........................................................................ [ 81%]",
+        "........................................................................ [ 86%]",
+        "........................................................................ [ 91%]",
+        "........................................................................ [ 97%]",
+        ".........................................                                [100%]",
+        "1409 passed in 480.20s (0:08:00)"
+      ],
+      "log": "runs/backend314.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "e671ca321eda82ab052398ed5c8665ea726b0d6a51222bef8783e64514a7a993"
+    },
+    "accounts314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v87-snack-and-action-quality/py314/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 7.91,
+      "log_sha256": "62c793953d0066a11c6f3fcbe3798d0e30206c2644316707d83802b1b918afaf",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 5.89s"
+      ],
+      "log": "runs/accounts314.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "7bc2898b4039237c753d70893ec7cd0c75442e38701b354976f0e8e0a5ebd640"
+    },
+    "frontend_native": {
+      "command": [
+        "npm",
+        "test"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 1.55,
+      "log_sha256": "ef1b4c6dbebbd78758f758cadcdb0b81fb2b7e32b06a6df047a08a797d07c399",
+      "tail": [
+        "✔ the starter chip appears on Intrusul/Perechi cards only pre-graduation (0.232458ms)",
+        "✔ the hero tagline names the cultural range and keeps the h1 untouched (0.205921ms)",
+        "✔ meta-loop CSS lives under its V42 anchor and keeps the diploma action >=44px (0.326938ms)",
+        "✔ optional account controls stay outside the initial bundle graph (0.168023ms)",
+        "ℹ tests 193",
+        "ℹ suites 0",
+        "ℹ pass 193",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 1240.862465"
+      ],
+      "log": "runs/frontend_native.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "e7b6db9ec295c00739a07581fecd2fbe1ff39035ef063abefa9a70edbd28ff5c"
+    },
+    "frontend_lint": {
+      "command": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 13.1,
+      "log_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 lint",
+        "> eslint .",
+        ""
+      ],
+      "log": "runs/frontend_lint.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a"
+    },
+    "frontend_typecheck": {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 6.32,
+      "log_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 typecheck",
+        "> tsc --noEmit",
+        ""
+      ],
+      "log": "runs/frontend_typecheck.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "d0e30d1dc915362da5e6d51943f265c1840c3182f61f2cd8a65a8159c982ac05"
+    },
+    "frontend_build": {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 8.51,
+      "log_sha256": "f865ab93d5ce41f465fb738529ff090457459e68810aef552be3bb349a38bf20",
+      "tail": [
+        "../cat_de_roman_esti/web/static/assets/index-Cj06vA4u.js                             348.39 kB │ gzip: 114.55 kB",
+        "",
+        "✓ built in 1.69s",
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 check:bundle",
+        "> node scripts/check-bundle-budget.mjs",
+        "",
+        "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+        "   110.52 KiB  assets/index-Cj06vA4u.js",
+        "     8.38 KiB  assets/index-CkVCIp7R.css",
+        "   118.90 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ],
+      "log": "runs/frontend_build.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "bc80869e0aa4ebdf6e31ae13296a60e70f3bf96d6f196301ba61b02451b3d387"
+    },
+    "frontend_bundle": {
+      "command": [
+        "npm",
+        "run",
+        "check:bundle"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 0.24,
+      "log_sha256": "3e971872f1dab8e94a19cb6628912163bbf7bb08322ffceb724674ba08b25479",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 check:bundle",
+        "> node scripts/check-bundle-budget.mjs",
+        "",
+        "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+        "   110.52 KiB  assets/index-Cj06vA4u.js",
+        "     8.38 KiB  assets/index-CkVCIp7R.css",
+        "   118.90 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ],
+      "log": "runs/frontend_bundle.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "66eb4b6a4f29695849d885efe77a549fdc4790e2a94fdf39e6f2ba55b6dcae4d"
+    },
+    "browser": {
+      "command": [
+        "npm",
+        "run",
+        "test:e2e"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 540.71,
+      "log_sha256": "9b85b3a559c1a50cafa01d7c80a2aa34ed1f4e1a338c0ed4e7a0048d2c97c8b7",
+      "tail": [
+        "  ✓  159 [mobile] › e2e/start-failure.spec.mjs:93:3 › intrusul retains its completed result when replay creation fails (2.9s)",
+        "  ✓  160 [mobile] › e2e/start-failure.spec.mjs:50:3 › perechi keeps a failed new start visible and retries the selected options (2.4s)",
+        "  ✓  161 [mobile] › e2e/start-failure.spec.mjs:93:3 › perechi retains its completed result when replay creation fails (3.4s)",
+        "  ✓  162 [mobile] › e2e/start-failure.spec.mjs:50:3 › conexiuni keeps a failed new start visible and retries the selected options (3.1s)",
+        "  ✓  163 [mobile] › e2e/start-failure.spec.mjs:93:3 › conexiuni retains its completed result when replay creation fails (7.3s)",
+        "  ✓  164 [mobile] › e2e/start-failure.spec.mjs:50:3 › contexto keeps a failed new start visible and retries the selected options (3.1s)",
+        "  ✓  165 [mobile] › e2e/start-failure.spec.mjs:93:3 › contexto retains its completed result when replay creation fails (3.1s)",
+        "  ✓  166 [mobile] › e2e/start-failure.spec.mjs:50:3 › lant keeps a failed new start visible and retries the selected options (2.9s)",
+        "  ✓  167 [mobile] › e2e/start-failure.spec.mjs:93:3 › lant retains its completed result when replay creation fails (2.8s)",
+        "  ✓  168 [mobile] › e2e/start-failure.spec.mjs:143:1 › alchimie retains its live round and blocks actions while another round is pending (3.0s)",
+        "",
+        "  168 passed (9.0m)"
+      ],
+      "log": "runs/browser.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "dd3a2fb361d2817ce8f62cdce70764a0d4ebf2ba1dadc8c3025748470c71059b"
+    },
+    "fixture": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_fixture.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 0.27,
+      "log_sha256": "1fa41416d417e35f484b52468a80103ff5e450f99e4f2e9af3941d72e26c132d",
+      "tail": [
+        "  [  ok] alias_unique                 0 error(s)",
+        "  [  ok] label_style                  0 error(s)",
+        "  [  ok] meta_counts                  0 error(s)",
+        "  [  ok] puzzle_par                   0 error(s)",
+        "  [  ok] puzzle_hop_band              0 error(s)",
+        "  [  ok] puzzle_hints                 0 error(s)",
+        "  [  ok] puzzle_ids_resolve           0 error(s)",
+        "  [  ok] puzzle_shortest_path         0 error(s)",
+        "  [  ok] puzzle_category_scope        0 error(s)",
+        "  [  ok] puzzle_distractor_shortcut   0 error(s)",
+        "------------------------------------------------------------",
+        "GREEN: fixture is valid (0 errors)"
+      ],
+      "log": "runs/fixture.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "ee89706aaec0ee681464790b536dfa3cd9460119c5c147f6e24950a0daf68450"
+    },
+    "pack": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_games_pack.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 10.36,
+      "log_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+      "tail": [
+        "  copies_identical         ok",
+        "  structure                ok",
+        "  item_shape               ok",
+        "  unique_ids               ok",
+        "  playability              ok",
+        "  meta_counts              ok",
+        "  id_high_water            ok",
+        "",
+        "games pack GREEN"
+      ],
+      "log": "runs/pack.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "09f01c42a2829a3b8877e60802bae8967baeb530df5220cbc675238466da65a4"
+    },
+    "pending": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/critique_pack.py",
+        "--status",
+        "pending",
+        "--strict"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 0.56,
+      "log_sha256": "f19d308c2a43b0b95b9b12f3458a99e9f64ce7c982f4f113f1997cbbcffae852",
+      "tail": [
+        "critique_pack: 8 item(s) checked, 0 flagged, 0 FAIL finding(s)",
+        "  member_overuse       WARN x65",
+        "  nondistinctive_region_link WARN x16"
+      ],
+      "log": "runs/pending.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "beccbf15577ac4c2020c302579819da43b23a3548cab6e7afe5fc83ca4af4959"
+    },
+    "ruff": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 0.09,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "tail": [
+        "All checks passed!"
+      ],
+      "log": "runs/ruff.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd"
+    },
+    "docs": {
+      "command": [
+        "python3",
+        "/home/dobo/work/agent-ops/scripts/check_docs.py",
+        "."
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 0.09,
+      "log_sha256": "4093da53c7f7c00e9c1bcea6d0be93e9ad7914df9d832c2e9f8bcb8aa765ca56",
+      "tail": [
+        "",
+        "## dead links",
+        "(none)",
+        "",
+        "## stale model terms",
+        "(none)",
+        "",
+        "## retired ops verbs",
+        "(none)",
+        "",
+        "## orphan docs",
+        "(none)"
+      ],
+      "log": "runs/docs.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "d81811f2119b5b0e8812fe6f71764fe9c545c29efc38b4a33b301aaeb169661f"
+    },
+    "whitespace": {
+      "command": [
+        "git",
+        "diff",
+        "HEAD",
+        "--check"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 0.21,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tail": [],
+      "log": "runs/whitespace.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    }
+  },
+  "focused_evidence": {
+    "snack": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_v87_snack_graph.py",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 8.08,
+      "source_sha256_at_start": {
+        "tests/test_v87_snack_graph.py": "d2154e85384c6004e8082b243589d0ca69f09fa5aafa448a076d534f4a0e7391",
+        "tests/content_history.py": "459483e487f3f9b5807b34da35a8c30c66f2135b8cc80360ea96f9f30d00fd5b",
+        "docs/reviews/v87-snack-and-action-quality/artifact-delta.json": "c0a69fa97ee45d744278d054d8585e3a30a5952ed861c4e691b40f8e3c04e0c4"
+      },
+      "log_sha256": "db11de2126b17a3d590c7c376d18683220d4ac664731c4bfdad763d929299643",
+      "tail": [
+        "........................................................                 [100%]",
+        "56 passed in 6.56s"
+      ],
+      "archived_log": "runs/snack-final.log.gz",
+      "archive_sha256": "4457835eec9b27d521986246365f171d6d118dda7cb7352b3ea00878d5bbf244"
+    },
+    "public_content": "Six new public Contexto journeys pass within the 56 snack cases, covering selection, clues, resume, related projections, repeats and exact wins.",
+    "promotion": "Six complete exact dossiers with zero FAIL/WARN findings; independent bound analyst/verifier reviews promote all six.",
+    "ui": "193 native tests and 20 new actual-BFF browser cases; all 20 also pass in the final 168-case six-game matrix. See action/verification.json.",
+    "historical_impact": "Exact capture, comparison and focused compatibility receipts are archived under impact/.",
+    "projection_compatibility": {
+      "passed": 3,
+      "reported_seconds": 1.31,
+      "log": "runs/projection-compatibility-final.log.gz",
+      "log_sha256": "323093b1d87135d3917cc3d45e9d410ae649c19f1b2cb18d7a212666c1ec2046",
+      "compression": "gzip",
+      "archive_sha256": "d4b2955e470cfe4bd850cbf8661d662e49effaf98f6bf92c517c20d4b8641c15"
+    }
+  },
+  "initial_findings": [
+    "Focused compatibility passed196/197. A V85 historical loop attempted to look up the new Tort projection in its frozen old set; it now compares reconstructed V85 rows to the exact retained historical inventory while preserving live metadata and native-resolution checks. The original failed log and affected-module retry are archived under impact.",
+    "Actual baseline proof reproduced a committed winning guess stranded after response loss and a repeated paid clue charged twice. The two passing proof assertions demonstrate old defects, not acceptance.",
+    "The first native run passed189/192: three historical source-shape assertions pinned old handler windows/dependencies/400-only recovery. They now require bounded function regions, synchronous ownership and authoritative recovery; no app change was made for stale shapes.192 then passed, followed by193 after another owned-pointer behavior test.",
+    "Raw candidate probing found five misleading cold family/type guesses. Three exact native pairs and two projected neighborhoods now give bounded nonwinning hot feedback.",
+    "Independent review found that the new Tort projection inherited the Prăjitură→Cremșnit native exception. Projected scoring and typo filtering now explicitly avoid native exact-pair inheritance; legacy projected proxy behavior is retained.",
+    "Retiring native Brioșă from projections required replacing only its audit representative with retained Chiflă. The other25 representatives and all four older audit tuples remain exact.",
+    "Both initial full backends passed1408/1409: one old projection API test still required retired Brioșă/Chec projections. Retained Chiflă/Covrig now exercise the same anchor-scale, public identity, accent/case dedupe and distinct-guess assertions. The three affected/neighbor checks passed, then both full matrices reran on final code. No runtime or content change was made for this correction."
+  ],
+  "build": {
+    "initial_transfer_kib": 118.9,
+    "unchanged_limit_kib": 120,
+    "seed38": "Only Contexto reachability2321→2330; other starts exact.",
+    "no_new_dependencies": true
+  },
+  "environment": {
+    "python": [
+      "3.12.3",
+      "3.14.4"
+    ],
+    "node": "24.20.0",
+    "npm": "11.19.0",
+    "backend": "anonymous/debug-off, external data disabled, candidate PYTHONPATH",
+    "accounts": "enabled/debug only in isolated accounts suites",
+    "browser": "single Chromium worker, desktop and mobile emulation, local actual BFF, no retries",
+    "install": "Fresh constrained Python3.14 environment and Node24 npm ci; zero reported npm vulnerabilities."
+  },
+  "visual": {
+    "review": "action/README.md",
+    "root_inspected": [
+      "action/screenshots/desktop-read-only-recovery.png",
+      "action/screenshots/mobile-read-only-recovery.png"
+    ],
+    "result": "Recovery notice, read-only retry and disabled mutating controls are legible within both viewports. Existing horizontally scrollable mobile HUD remains. Browser emulation, not real-device acceptance."
+  },
+  "limits": [
+    "No request/session/scoring formula, timing or bundle threshold was relaxed.",
+    "31 forms comprise30 grammatical/qualified forms and one sourced lexical equivalent; generic projected tort is separate.",
+    "No new Lanț,Conexiuni,Alchimie or derived rounds are claimed.",
+    "No push, deployment, human playtest or real-device acceptance occurred."
+  ],
+  "archive_note": "Raw integration/action logs are losslessly gzipped with mtime0 to preserve tool-emitted context and trailing spaces. Receipts bind original decoded and archive bytes.",
+  "initial_full_backend_runs": {
+    "backend312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality",
+      "exit_code": 1,
+      "elapsed_seconds": 608.55,
+      "log_sha256": "b52c4455d5054d101b808679e5f1f1658b58cec4666a59e4c93779875de3f64c",
+      "tail": [
+        "        session = store.get(gid)",
+        "        assert session is not None",
+        "        svc = get_service()",
+        "        first = resolve_projection(\"brioșă\")",
+        "        second = resolve_projection(\"chec\")",
+        ">       assert first is not None and second is not None",
+        "E       assert (None is not None)",
+        "",
+        "tests/test_wordgames_contexto.py:972: AssertionError",
+        "=========================== short test summary info ============================",
+        "FAILED tests/test_wordgames_contexto.py::test_projection_guess_uses_anchor_scale_and_dedupes_normalized_surface",
+        "1 failed, 1408 passed in 606.05s (0:10:06)"
+      ],
+      "log": "runs/backend312-initial.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "90e923ed10d40e657c31796b1592383aababa9931aee11c2a3decadc30d134d9"
+    },
+    "backend314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v87-snack-and-action-quality/py314/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v87-snack-and-action-quality",
+      "exit_code": 1,
+      "elapsed_seconds": 459.95,
+      "log_sha256": "ce0215ea4687f9a187dcde33a75881cadf7c71d46f5f01b46a78142b9cdd1fd9",
+      "tail": [
+        "        session = store.get(gid)",
+        "        assert session is not None",
+        "        svc = get_service()",
+        "        first = resolve_projection(\"brioșă\")",
+        "        second = resolve_projection(\"chec\")",
+        ">       assert first is not None and second is not None",
+        "E       assert (None is not None)",
+        "",
+        "tests/test_wordgames_contexto.py:972: AssertionError",
+        "=========================== short test summary info ============================",
+        "FAILED tests/test_wordgames_contexto.py::test_projection_guess_uses_anchor_scale_and_dedupes_normalized_surface",
+        "1 failed, 1408 passed in 456.74s (0:07:36)"
+      ],
+      "log": "runs/backend314-initial.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "34660fcea8831496f3430ef3afac940d09e68665aede20a2d0ba361c73ae2321"
+    }
+  }
+}

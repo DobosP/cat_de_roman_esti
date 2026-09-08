@@ -1,0 +1,45 @@
+{
+  "category": "gastronomie",
+  "candidate_sha256": "sha256:b64deecee12dd3177d69367b738f56e76b6fd244684ad9c5f7f6ca2cc6a2f12e",
+  "reviewed_refs": [
+    "contexto[0]",
+    "contexto[1]",
+    "contexto[2]",
+    "contexto[3]",
+    "contexto[4]",
+    "contexto[5]"
+  ],
+  "issues": [
+    {
+      "ref": "contexto[0]",
+      "severity": "note",
+      "issue": "Biscuit is a familiar concrete baked snack. The original manufacturer butter-biscuit recipe directly lists flour, butter, sugar, baking powder and food-grade sodium bicarbonate and bakes the cut pieces in an oven. These support six new preparation cues without making all crackers sweet or every biscuit butter-based. Biscuit is not synonymous with Pișcot; the latter is a named shape/texture/use subtype. Current graph feedback and pair fairness still require the separate quality screen."
+    },
+    {
+      "ref": "contexto[1]",
+      "severity": "note",
+      "issue": "Chec is a familiar Romanian cake name documented in longstanding original recipes. Flour, egg, sugar, oil, cocoa and baking powder describe an actual variant, while milk is a documented serving association. Chec does not have a disjoint ingredient or leavener definition from Pandișpan: an included original source calls its no-powder chec a pandișpan. Holding the Pandișpan hidden target avoids forced dual promotion; this overlap still needs explicit quality judgment for natural near guesses."
+    },
+    {
+      "ref": "contexto[2]",
+      "severity": "note",
+      "issue": "Cremșnit is a concrete familiar pastry of baked sheets and vanilla cream. Original recipes support pastry sheets, vanilla cream, starch, powdered-sugar dusting and refrigerator setting, with the completed food a prăjitură. The original2024 JamilaCuisine article uses cremeș for this same food; the alias is a source-supported regional lexical equivalent and has no baseline owner collision. It is not an alias for bare cremă or the separate vanilla-cream ingredient."
+    },
+    {
+      "ref": "contexto[3]",
+      "severity": "note",
+      "issue": "Tort Diplomat is a concrete cold assembled dessert. The original2013 recipe explicitly uses pișcoturi, whipped cream, gelatin and oranges, then sets the assembled dessert in the refrigerator. Gelatin and fruit varieties describe actual recipes, not immutable universal composition. The product is distinct from its ingredients and from generic tort. No bare tort or diplomat profession alias is added and no alcohol guess supplies its value."
+    },
+    {
+      "ref": "contexto[4]",
+      "severity": "note",
+      "issue": "Pișcot is the recognizable elongated porous pastry used in layered desserts. The original2016 preparation separates whites/yolks, combines flour, shapes the pieces, dusts them with powdered sugar and bakes them; it also names their use in Tort Diplomat. These are real ingredients/preparation/use claims. Pișcot overlaps the biscuit/cake vocabulary but is not a complete lexical equivalent of generic Biscuit or Pandișpan; source facts do not by themselves prove that their hidden-target rankings are distinguishable."
+    },
+    {
+      "ref": "contexto[5]",
+      "severity": "note",
+      "issue": "Ciocolată is an existing native solid-food concept, distinct from the projected ciocolată caldă drink. A producer directly lists sugar in solid homemade chocolate; Robert Eisler explicitly uses liquid milk alongside milk powder, sets the mixture in a frame, then cuts solid pieces. Thus the milk edge is not inferred from a hot drink. Existing cocoa, hazelnut and milk-powder neighbors plus these two variant ingredients form five factual direct cues. Sugar and milk are not required in every chocolate, and no brand alias is stolen."
+    }
+  ],
+  "coverage_note": "Complete factual screen of all6 frozen root-selected raw targets. The reviewer authored the underlying graph but did not select or write this raw batch; separate bound analyst/verifier promotion remains mandatory. CANDIDATE_FACTS.md records original sources, recognition and overlapping/deferred meanings. This accepts pending factual staging only, not grading or final promotion."
+}

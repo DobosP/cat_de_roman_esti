@@ -1,0 +1,1068 @@
+{
+  "schema_version": 1,
+  "status": "authored proposal; independent review and measured impact required before apply",
+  "baseline_commit": "daae025b19517c18cba2f46c6b11ea4991d9a19c",
+  "baseline_fixture_sha256": "b612eda1fb8712fb57f1e16ca2a4fed3e5f6cec847c977ab45ee420c575ffa1a",
+  "nodes": [
+    {
+      "id": "n_v87_food_chec",
+      "label_ro": "Chec",
+      "category": "gastronomie",
+      "description": "Prăjitură coaptă de obicei într-o formă alungită, în variante simple, cu cacao sau fructe.",
+      "aliases": [
+        "checul",
+        "checului",
+        "checuri",
+        "chec de casă"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    },
+    {
+      "id": "n_v87_food_pandispan",
+      "label_ro": "Pandișpan",
+      "category": "gastronomie",
+      "description": "Prăjitură sau blat pufos pe bază de ouă bătute, făină și zahăr.",
+      "aliases": [
+        "pandișpanul",
+        "pandișpanului",
+        "pandișpanuri"
+      ],
+      "node_type": "concept",
+      "salience": 0.75
+    },
+    {
+      "id": "n_v87_food_cremsnit",
+      "label_ro": "Cremșnit",
+      "category": "gastronomie",
+      "description": "Prăjitură din foi de aluat și cremă de vanilie, cunoscută și ca cremeș.",
+      "aliases": [
+        "cremșnitul",
+        "cremșnitului",
+        "cremșnituri",
+        "cremeș"
+      ],
+      "node_type": "concept",
+      "salience": 0.75
+    },
+    {
+      "id": "n_v87_food_tort_diplomat",
+      "label_ro": "Tort Diplomat",
+      "category": "gastronomie",
+      "description": "Desert rece cu cremă aerată, fructe și blat sau pișcoturi.",
+      "aliases": [
+        "tortul Diplomat",
+        "tortului Diplomat",
+        "torturi Diplomat"
+      ],
+      "node_type": "concept",
+      "salience": 0.75
+    },
+    {
+      "id": "n_v87_food_piscot",
+      "label_ro": "Pișcot",
+      "category": "gastronomie",
+      "description": "Produs de patiserie alungit și poros, folosit și la asamblarea deserturilor în straturi.",
+      "aliases": [
+        "pișcotul",
+        "pișcotului",
+        "pișcoturi",
+        "pișcoturile"
+      ],
+      "node_type": "concept",
+      "salience": 0.8
+    },
+    {
+      "id": "n_v87_food_briosa",
+      "label_ro": "Brioșă",
+      "category": "gastronomie",
+      "description": "Produs de patiserie copt de obicei în forme mici, în variante dospite sau cu aluat de prăjitură.",
+      "aliases": [
+        "brioșei",
+        "brioșe",
+        "brioșele",
+        "brioșelor"
+      ],
+      "node_type": "concept",
+      "salience": 0.75
+    },
+    {
+      "id": "n_v87_food_praf_copt",
+      "label_ro": "Praf de copt",
+      "category": "gastronomie",
+      "description": "Amestec de ingrediente care afânează aluatul în timpul coacerii.",
+      "aliases": [
+        "praful de copt",
+        "prafului de copt",
+        "praf de copt pentru prăjituri"
+      ],
+      "node_type": "concept",
+      "salience": 0.8
+    },
+    {
+      "id": "n_v87_food_bicarbonat",
+      "label_ro": "Bicarbonat de sodiu alimentar",
+      "category": "gastronomie",
+      "description": "Bicarbonat de sodiu pentru uz alimentar, folosit în unele aluaturi și alte preparate.",
+      "aliases": [
+        "bicarbonatul de sodiu alimentar",
+        "bicarbonat alimentar",
+        "bicarbonat de sodiu pentru copt"
+      ],
+      "node_type": "concept",
+      "salience": 0.75
+    },
+    {
+      "id": "n_v87_food_gelatina",
+      "label_ro": "Gelatină alimentară",
+      "category": "gastronomie",
+      "description": "Ingredient proteic cu rol de gelifiant, folosit la închegarea unor preparate culinare.",
+      "aliases": [
+        "gelatinei alimentare",
+        "gelatină pentru prăjituri",
+        "gelatină alimentară pudră"
+      ],
+      "node_type": "concept",
+      "salience": 0.8
+    }
+  ],
+  "edges": [
+    {
+      "src": "n_v24_food_pantry_faina",
+      "dst": "n_v24_food_snack_biscuit",
+      "relation": "part_of",
+      "label_ro": "ingredient de bază pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_food_breakfast_unt",
+      "dst": "n_v24_food_snack_biscuit",
+      "relation": "ingredient_variant",
+      "label_ro": "folosit în unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_food_pantry_zahar",
+      "dst": "n_v24_food_snack_biscuit",
+      "relation": "ingredient_variant",
+      "label_ro": "îndulcește unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v84_food_cuptor",
+      "dst": "n_v24_food_snack_biscuit",
+      "relation": "preparation_tool",
+      "label_ro": "coace",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v87_food_praf_copt",
+      "dst": "n_v24_food_snack_biscuit",
+      "relation": "ingredient_variant",
+      "label_ro": "afânează unele aluaturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v87_food_bicarbonat",
+      "dst": "n_v24_food_snack_biscuit",
+      "relation": "ingredient_variant",
+      "label_ro": "afânează unele aluaturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_food_pantry_faina",
+      "dst": "n_v87_food_chec",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v4gas_ou",
+      "dst": "n_v87_food_chec",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_food_pantry_zahar",
+      "dst": "n_v87_food_chec",
+      "relation": "ingredient_variant",
+      "label_ro": "îndulcește",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_food_pantry_ulei",
+      "dst": "n_v87_food_chec",
+      "relation": "ingredient_variant",
+      "label_ro": "folosit în unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_cacao",
+      "dst": "n_v87_food_chec",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează unele variante de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v87_food_praf_copt",
+      "dst": "n_v87_food_chec",
+      "relation": "ingredient_variant",
+      "label_ro": "afânează unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_food_pantry_faina",
+      "dst": "n_v87_food_pandispan",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_albus",
+      "dst": "n_v87_food_pandispan",
+      "relation": "ingredient_variant",
+      "label_ro": "bătut spumă în unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_galbenus",
+      "dst": "n_v87_food_pandispan",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient în unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_food_pantry_zahar",
+      "dst": "n_v87_food_pandispan",
+      "relation": "ingredient_variant",
+      "label_ro": "îndulcește",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v84_food_cuptor",
+      "dst": "n_v87_food_pandispan",
+      "relation": "preparation_tool",
+      "label_ro": "coace",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v84_food_aluat",
+      "dst": "n_v87_food_cremsnit",
+      "relation": "ingredient_variant",
+      "label_ro": "foile coapte intră în",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_crema_vanilie",
+      "dst": "n_v87_food_cremsnit",
+      "relation": "part_of",
+      "label_ro": "umplutură pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_zahar_pudra",
+      "dst": "n_v87_food_cremsnit",
+      "relation": "ingredient_variant",
+      "label_ro": "pudrează unele variante de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_amidon",
+      "dst": "n_v87_food_cremsnit",
+      "relation": "ingredient_variant",
+      "label_ro": "îngroașă crema din unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_home_appliances_frigider",
+      "dst": "n_v87_food_cremsnit",
+      "relation": "stores",
+      "label_ro": "păstrează la rece",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v87_food_piscot",
+      "dst": "n_v87_food_tort_diplomat",
+      "relation": "ingredient_variant",
+      "label_ro": "căptușește unele variante de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_frisca",
+      "dst": "n_v87_food_tort_diplomat",
+      "relation": "part_of",
+      "label_ro": "ingredient pentru crema din",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v87_food_gelatina",
+      "dst": "n_v87_food_tort_diplomat",
+      "relation": "ingredient_variant",
+      "label_ro": "încheagă crema din unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_food_imported_fruit_portocala",
+      "dst": "n_v87_food_tort_diplomat",
+      "relation": "ingredient_variant",
+      "label_ro": "fruct adăugat în unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_home_appliances_frigider",
+      "dst": "n_v87_food_tort_diplomat",
+      "relation": "stores",
+      "label_ro": "răcește și păstrează",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_food_pantry_faina",
+      "dst": "n_v87_food_piscot",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_albus",
+      "dst": "n_v87_food_piscot",
+      "relation": "ingredient_variant",
+      "label_ro": "bătut spumă pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_galbenus",
+      "dst": "n_v87_food_piscot",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_zahar_pudra",
+      "dst": "n_v87_food_piscot",
+      "relation": "ingredient_variant",
+      "label_ro": "pudrează unele variante de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v84_food_cuptor",
+      "dst": "n_v87_food_piscot",
+      "relation": "preparation_tool",
+      "label_ro": "coace",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_food_pantry_faina",
+      "dst": "n_v87_food_briosa",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient în unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_food_breakfast_unt",
+      "dst": "n_v87_food_briosa",
+      "relation": "ingredient_variant",
+      "label_ro": "folosit în unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v87_food_praf_copt",
+      "dst": "n_v87_food_briosa",
+      "relation": "ingredient_variant",
+      "label_ro": "afânează unele variante rapide de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_ciocolata",
+      "dst": "n_v87_food_briosa",
+      "relation": "ingredient_variant",
+      "label_ro": "adăugată în unele variante de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v84_food_drojdie",
+      "dst": "n_v87_food_briosa",
+      "relation": "ingredient_variant",
+      "label_ro": "dospește aluatul unor variante de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v87_food_bicarbonat",
+      "dst": "n_v87_food_praf_copt",
+      "relation": "part_of",
+      "label_ro": "component în unele formule de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v87_food_bicarbonat",
+      "dst": "n_v21gas_turta_dulce",
+      "relation": "ingredient_variant",
+      "label_ro": "afânează unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v87_food_bicarbonat",
+      "dst": "n_gas_mici",
+      "relation": "ingredient_variant",
+      "label_ro": "adăugat în unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v87_food_gelatina",
+      "dst": "n_v86_food_frisca",
+      "relation": "ingredient_variant",
+      "label_ro": "stabilizează unele variante de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v87_food_gelatina",
+      "dst": "n_v3gas_inghetata",
+      "relation": "ingredient_variant",
+      "label_ro": "stabilizează unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v87_food_gelatina",
+      "dst": "n_gas_piftie",
+      "relation": "ingredient_variant",
+      "label_ro": "ajută la închegarea unor variante de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_food_pantry_zahar",
+      "dst": "n_v85_food_ciocolata",
+      "relation": "ingredient_variant",
+      "label_ro": "îndulcește unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v4gas_lapte",
+      "dst": "n_v85_food_ciocolata",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient în unele rețete de casă de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v87_food_chec",
+      "dst": "n_v4gas_lapte",
+      "relation": "served_together",
+      "label_ro": "se poate servi cu",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v87_food_pandispan",
+      "dst": "n_v18gas_amandina",
+      "relation": "raw_material_for",
+      "label_ro": "varianta cu cacao formează blatul de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v87_food_cremsnit",
+      "dst": "n_v4gas_prajitura",
+      "relation": "is_a",
+      "label_ro": "este o",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v87_food_tort_diplomat",
+      "dst": "n_v2gas_desert",
+      "relation": "is_a",
+      "label_ro": "este un",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v87_food_briosa",
+      "dst": "n_gas_cozonac",
+      "relation": "related_to",
+      "label_ro": "unele variante au aluat de tip",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    }
+  ],
+  "remove_edges": [],
+  "sources": {
+    "biscuit": {
+      "url": "https://www.oetker.ro/retete/r/biscuiti-cu-unt-love-letters",
+      "evidence": "Original manufacturer recipe explicitly includes flour, butter, sugar, baking powder and food-grade sodium bicarbonate, then bakes the cut biscuits. Variant ingredients are not universal requirements."
+    },
+    "chec": {
+      "url": "https://jamilacuisine.ro/chec-pufos-cu-cacao-reteta-video/",
+      "evidence": "Original2013 recipe includes flour, sugar, egg, oil, cocoa and baking powder; author also explicitly serves slices with milk. Cocoa and leavener are recipe variants."
+    },
+    "chec_overlap": {
+      "url": "https://bucate-aromate.ro/2019/07/chec-cu-visine-si-cacao/",
+      "evidence": "Author calls this chec a pandișpan and uses no baking powder. This refutes any absolute chec/pandișpan or powder/no-powder boundary."
+    },
+    "pandispan": {
+      "url": "https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/pandispan-cu-prune-reteta-video-pentru-o-prajitura-pufoasa-gustoasa-si-economica.html",
+      "evidence": "Original recipe separates egg whites and yolks, combines with sugar/flour and bakes. It explicitly has no baking powder; that observation is for this variant, not every recipe carrying the name."
+    },
+    "pandispan_amandina": {
+      "url": "https://jamilacuisine.ro/prajitura-amandina-amandine-facute-in-casa/",
+      "evidence": "Original Amandină preparation describes its cocoa sponge as pandișpan; the outgoing base-for relation explicitly names the cocoa variant."
+    },
+    "cremsnit": {
+      "url": "https://jamilacuisine.ro/prajitura-cremsnit-pas-cu-pas-reteta-video/",
+      "evidence": "Original2014 recipe uses pastry sheets, vanilla cream and starch; it explicitly calls the finished food a prăjitură."
+    },
+    "cremsnit_cold": {
+      "url": "https://bucate-aromate.ro/2025/10/cremsnit-cu-aluat-de-casa/",
+      "evidence": "Original recipe uses vanilla cream between pastry sheets, chills the assembled pastry in the refrigerator and dusts it with powdered sugar."
+    },
+    "cremes_name": {
+      "url": "https://jamilacuisine.ro/tort-cremsnit-cu-crema-de-vanilie-reteta-video/",
+      "evidence": "Original2024 article uses cremșnit and cremeș for the same pastry. This supports a regional lexical equivalent, not a new separate concept."
+    },
+    "diplomat": {
+      "url": "https://jamilacuisine.ro/tort-diplomat-facut-in-casa-reteta-video/",
+      "evidence": "Original recipe uses pișcoturi, whipped cream, gelatin and oranges and sets the assembled dessert in the refrigerator. These claims describe its actual variant."
+    },
+    "piscot": {
+      "url": "https://www.barbatlacratita.ro/2016/03/piscoturi-de-casa.html",
+      "evidence": "Original2016 recipe separates whites/yolks, adds flour, shapes elongated pieces, dusts with powdered sugar and bakes. It uses pișcoturi in Tort Diplomat."
+    },
+    "briosa_quick": {
+      "url": "https://www.oetker.ro/retete/r/briose-cu-bucatele-de-ciocolata",
+      "evidence": "Manufacturer recipe calls these quick cake-like pieces brioșe and explicitly includes flour, butter, baking powder and chocolate pieces."
+    },
+    "briosa_yeast": {
+      "url": "https://dam.groupeseb.com/m/5111943d0aede5fe/original/NC00126318-Recipe.pdf",
+      "evidence": "Original GroupeSEB recipe booklet has a Brioșe recipe with yeast. This is a different preparation variant, not evidence that yeast and baking powder are interchangeable."
+    },
+    "briosa_meaning": {
+      "url": "https://dexonline.ro/intrare/brio%C8%99%C4%83/6859",
+      "evidence": "DEX describes brioșă as a small pastry from cozonac-like dough; this supports the qualified outgoing dough-family relation and flags modern muffin/brioche sense breadth."
+    },
+    "powder": {
+      "url": "https://www.oetker.ro/produsele/p/praf-de-copt-pentru-air-fryer",
+      "evidence": "Manufacturer lists sodium bicarbonate with other leavening components in a baking-powder variant. Bicarbonate is one constituent, not an alias or complete substitute."
+    },
+    "bicarbonat_turta": {
+      "url": "https://jamilacuisine.ro/turta-dulce-glazurata-reteta-video/",
+      "evidence": "Original2015 gingerbread recipe explicitly uses sodium bicarbonate."
+    },
+    "bicarbonat_mici": {
+      "url": "https://jamilacuisine.ro/mici-de-casa-pasta-pentru-mici-suculenti-si-deliciosi-reteta-video/",
+      "evidence": "Original2025 mici recipe explicitly uses food sodium bicarbonate. No historical-origin or health claim is imported."
+    },
+    "gelatina_frisca": {
+      "url": "https://exoticwhip.com/ro/blog-ro/reteta-de-frisca-stabilizata/",
+      "evidence": "Original cream-equipment supplier preparation adds gelatin to stabilize whipped cream; the graph labels only this stabilized variant."
+    },
+    "gelatina_ice": {
+      "url": "https://teoskitchen.ro/2008/07/inghetata-de-pepene-galben.html",
+      "evidence": "Original2008 melon ice-cream recipe incorporates gelatin into the base before freezing. No health superiority, storage-time or preparation-safety advice is imported."
+    },
+    "gelatina_piftie": {
+      "url": "https://www.delicatesa.ro/retete/piftie-din-aripioare-de-pui-2728",
+      "evidence": "Original2013 chicken-wing piftie recipe explicitly adds gelatin. This is not a claim that all traditional piftie needs added gelatin."
+    },
+    "chocolate_sugar": {
+      "url": "https://camarabucovinei.ro/products/ciocolata-de-casa",
+      "evidence": "Producer names sugar among ingredients of its solid homemade chocolate. Only ingredient presence is used, not claimed geographic exclusivity or nutritional benefit."
+    },
+    "chocolate_milk": {
+      "url": "https://www.roberteisler.ro/retete/ciocolata-de-casa-1",
+      "evidence": "Original chef recipe directly uses liquid milk as well as milk powder, sets the mixture in a frame and cuts it into solid chocolate pieces. This is not the hot-drink sense."
+    },
+    "cremsnit_lexical": {
+      "url": "https://editurajunimea.ro/reviste/revista-scriptor/foaie-foi-foitaj/",
+      "evidence": "Linguistic article records the DOOM plural cremșnituri and describes cremeș as a regional name. The recipe source independently attests that name equivalence."
+    },
+    "pandispan_lexical": {
+      "url": "https://dexonline.ro/definitie/pandi%C8%99pan/27977",
+      "evidence": "Dictionary records pandișpan and its plural pandișpanuri; no claim that the category has a disjoint recipe boundary from chec."
+    }
+  },
+  "edge_source_bindings": [
+    {
+      "edge_index": 0,
+      "sources": [
+        "biscuit"
+      ]
+    },
+    {
+      "edge_index": 1,
+      "sources": [
+        "biscuit"
+      ]
+    },
+    {
+      "edge_index": 2,
+      "sources": [
+        "biscuit"
+      ]
+    },
+    {
+      "edge_index": 3,
+      "sources": [
+        "biscuit"
+      ]
+    },
+    {
+      "edge_index": 4,
+      "sources": [
+        "biscuit"
+      ]
+    },
+    {
+      "edge_index": 5,
+      "sources": [
+        "biscuit"
+      ]
+    },
+    {
+      "edge_index": 6,
+      "sources": [
+        "chec"
+      ]
+    },
+    {
+      "edge_index": 7,
+      "sources": [
+        "chec"
+      ]
+    },
+    {
+      "edge_index": 8,
+      "sources": [
+        "chec"
+      ]
+    },
+    {
+      "edge_index": 9,
+      "sources": [
+        "chec"
+      ]
+    },
+    {
+      "edge_index": 10,
+      "sources": [
+        "chec"
+      ]
+    },
+    {
+      "edge_index": 11,
+      "sources": [
+        "chec"
+      ]
+    },
+    {
+      "edge_index": 12,
+      "sources": [
+        "pandispan"
+      ]
+    },
+    {
+      "edge_index": 13,
+      "sources": [
+        "pandispan"
+      ]
+    },
+    {
+      "edge_index": 14,
+      "sources": [
+        "pandispan"
+      ]
+    },
+    {
+      "edge_index": 15,
+      "sources": [
+        "pandispan"
+      ]
+    },
+    {
+      "edge_index": 16,
+      "sources": [
+        "pandispan"
+      ]
+    },
+    {
+      "edge_index": 17,
+      "sources": [
+        "cremsnit"
+      ]
+    },
+    {
+      "edge_index": 18,
+      "sources": [
+        "cremsnit"
+      ]
+    },
+    {
+      "edge_index": 19,
+      "sources": [
+        "cremsnit_cold"
+      ]
+    },
+    {
+      "edge_index": 20,
+      "sources": [
+        "cremsnit"
+      ]
+    },
+    {
+      "edge_index": 21,
+      "sources": [
+        "cremsnit_cold"
+      ]
+    },
+    {
+      "edge_index": 22,
+      "sources": [
+        "diplomat"
+      ]
+    },
+    {
+      "edge_index": 23,
+      "sources": [
+        "diplomat"
+      ]
+    },
+    {
+      "edge_index": 24,
+      "sources": [
+        "diplomat"
+      ]
+    },
+    {
+      "edge_index": 25,
+      "sources": [
+        "diplomat"
+      ]
+    },
+    {
+      "edge_index": 26,
+      "sources": [
+        "diplomat"
+      ]
+    },
+    {
+      "edge_index": 27,
+      "sources": [
+        "piscot"
+      ]
+    },
+    {
+      "edge_index": 28,
+      "sources": [
+        "piscot"
+      ]
+    },
+    {
+      "edge_index": 29,
+      "sources": [
+        "piscot"
+      ]
+    },
+    {
+      "edge_index": 30,
+      "sources": [
+        "piscot"
+      ]
+    },
+    {
+      "edge_index": 31,
+      "sources": [
+        "piscot"
+      ]
+    },
+    {
+      "edge_index": 32,
+      "sources": [
+        "briosa_quick"
+      ]
+    },
+    {
+      "edge_index": 33,
+      "sources": [
+        "briosa_quick"
+      ]
+    },
+    {
+      "edge_index": 34,
+      "sources": [
+        "briosa_quick"
+      ]
+    },
+    {
+      "edge_index": 35,
+      "sources": [
+        "briosa_quick"
+      ]
+    },
+    {
+      "edge_index": 36,
+      "sources": [
+        "briosa_yeast"
+      ]
+    },
+    {
+      "edge_index": 37,
+      "sources": [
+        "powder"
+      ]
+    },
+    {
+      "edge_index": 38,
+      "sources": [
+        "bicarbonat_turta"
+      ]
+    },
+    {
+      "edge_index": 39,
+      "sources": [
+        "bicarbonat_mici"
+      ]
+    },
+    {
+      "edge_index": 40,
+      "sources": [
+        "gelatina_frisca"
+      ]
+    },
+    {
+      "edge_index": 41,
+      "sources": [
+        "gelatina_ice"
+      ]
+    },
+    {
+      "edge_index": 42,
+      "sources": [
+        "gelatina_piftie"
+      ]
+    },
+    {
+      "edge_index": 43,
+      "sources": [
+        "chocolate_sugar"
+      ]
+    },
+    {
+      "edge_index": 44,
+      "sources": [
+        "chocolate_milk"
+      ]
+    },
+    {
+      "edge_index": 45,
+      "sources": [
+        "chec"
+      ]
+    },
+    {
+      "edge_index": 46,
+      "sources": [
+        "pandispan_amandina"
+      ]
+    },
+    {
+      "edge_index": 47,
+      "sources": [
+        "cremsnit"
+      ]
+    },
+    {
+      "edge_index": 48,
+      "sources": [
+        "diplomat"
+      ]
+    },
+    {
+      "edge_index": 49,
+      "sources": [
+        "briosa_meaning"
+      ]
+    }
+  ],
+  "lexical_equivalents": [
+    {
+      "node_id": "n_v87_food_cremsnit",
+      "surface": "cremeș",
+      "kind": "documented regional name for the same pastry",
+      "sources": [
+        "cremes_name",
+        "cremsnit_lexical"
+      ]
+    }
+  ],
+  "summary": {
+    "concepts": 9,
+    "accepted_forms": 31,
+    "grammatical_or_qualified_forms": 30,
+    "reviewed_lexical_equivalents": 1,
+    "links": 50,
+    "allowed_directions": 50,
+    "removals": 0,
+    "baseline_label_alias_rows": 10969,
+    "label_form_collisions": 0,
+    "deferred_term_collisions": 0,
+    "deferred_terms_checked": 70,
+    "new_incident": {
+      "n_v87_food_chec": 7,
+      "n_v87_food_pandispan": 6,
+      "n_v87_food_cremsnit": 6,
+      "n_v87_food_tort_diplomat": 6,
+      "n_v87_food_piscot": 6,
+      "n_v87_food_briosa": 6,
+      "n_v87_food_praf_copt": 4,
+      "n_v87_food_bicarbonat": 4,
+      "n_v87_food_gelatina": 4
+    },
+    "new_incoming": {
+      "n_v87_food_chec": 6,
+      "n_v87_food_pandispan": 5,
+      "n_v87_food_cremsnit": 5,
+      "n_v87_food_tort_diplomat": 5,
+      "n_v87_food_piscot": 5,
+      "n_v87_food_briosa": 5,
+      "n_v87_food_praf_copt": 1,
+      "n_v87_food_bicarbonat": 0,
+      "n_v87_food_gelatina": 0
+    },
+    "new_outgoing": {
+      "n_v87_food_chec": 1,
+      "n_v87_food_pandispan": 1,
+      "n_v87_food_cremsnit": 1,
+      "n_v87_food_tort_diplomat": 1,
+      "n_v87_food_piscot": 1,
+      "n_v87_food_briosa": 1,
+      "n_v87_food_praf_copt": 3,
+      "n_v87_food_bicarbonat": 4,
+      "n_v87_food_gelatina": 4
+    }
+  },
+  "retire_projection_surfaces": [
+    "chec",
+    "brioșă"
+  ],
+  "preserve_separate_surfaces": [
+    "ciocolată caldă",
+    "bicarbonat",
+    "bicarbonat de sodiu",
+    "gelatină",
+    "tort",
+    "rece"
+  ],
+  "recommended_target_screen": [
+    "n_v24_food_snack_biscuit",
+    "n_v87_food_chec",
+    "n_v87_food_cremsnit",
+    "n_v87_food_tort_diplomat",
+    "n_v87_food_piscot",
+    "n_v85_food_ciocolata"
+  ],
+  "hold_target_screen": {
+    "n_v87_food_pandispan": "Recipe overlap with Chec is explicitly documented; native recognition does not prove a distinct fair hidden target.",
+    "n_v87_food_briosa": "Historical brioche and modern muffin naming overlap; retain variant-specific edges and independently judge C5 before a hidden-target promotion."
+  },
+  "limits": [
+    "No ingredient direction is reversed. Finished foods receive five sourced outgoing serving/base/type/dough-family associations; Pișcot already has the sixth through Tort Diplomat.",
+    "Chec and Pandișpan have overlapping recipes; no universal leavener distinction or forced dual promotion is claimed.",
+    "Brioșă carries explicitly documented recipe-family breadth, not a baking-powder/yeast substitution rule.",
+    "Milk-to-chocolate is a solid homemade-chocolate variant, not the separate hot drink.",
+    "Gelatin, bicarbonate and baking powder are distinct ingredients with qualified names; they are not synonyms for yeast or for one another.",
+    "Cremșnit/cremeș is the one individually documented lexical equivalent; the other30forms are not advertised as synonyms.",
+    "All old Alchimie/Lanț profiles, owners and feedback changes must be measured after apply; no unchanged-profile promise is made by authoring."
+  ]
+}

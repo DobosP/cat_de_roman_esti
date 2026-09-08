@@ -47,6 +47,17 @@ test("guess responses retain progressive clue state from the server", () => {
 });
 
 test("a rejected stale clue refreshes authoritative availability", () => {
-  assert.match(screen, /err instanceof ApiError && err\.status === 400/);
-  assert.match(screen, /setState\(await contextoApi\.getGame\(state\.game_id\)\)/);
+  const start = screen.indexOf("const handleClue = useCallback");
+  const end = screen.indexOf("const handleGiveUp = useCallback", start);
+  assert.ok(start >= 0 && end > start);
+  const clue = screen.slice(start, end);
+  // HTTP400 remains covered; every failed action now follows the same owned GET.
+  assert.match(clue, /catch \{\s*await reconcileAction\(ticket, state\);/);
+  const recoveryStart = screen.indexOf("const reconcileAction = useCallback");
+  const recoveryEnd = screen.indexOf("const retryActionSync = useCallback", recoveryStart);
+  assert.ok(recoveryStart >= 0 && recoveryEnd > recoveryStart);
+  const recovery = screen.slice(recoveryStart, recoveryEnd);
+  assert.match(recovery, /recoverOwnedContextoAction\(\s*actionOwner, ticket, contextoApi\.getGame,/);
+  assert.match(recovery, /if \(!mayAdoptAction\(ticket\)\) return;/);
+  assert.match(recovery, /const fresh = outcome\.state;[\s\S]*?setState\(fresh\);/);
 });

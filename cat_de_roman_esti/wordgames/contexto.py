@@ -186,7 +186,9 @@ _atomic_session = atomic_session(lambda: store, "Joc inexistent")
 
 
 # --------------------------------------------------------------------------- scoring
-def _feedback_anchor_id(svc, node_id: str, target_id: str) -> str:
+def _feedback_anchor_id(
+    svc, node_id: str, target_id: str, *, allow_exact_pairs: bool = True,
+) -> str:
     """Return a reviewed Contexto-only proxy without stealing an exact win.
 
     V30--V33 everyday nodes are deliberately inbound-only in the shared graph.  Their
@@ -199,7 +201,8 @@ def _feedback_anchor_id(svc, node_id: str, target_id: str) -> str:
     if node_id == target_id:
         return node_id
     if (
-        (node_id, target_id) in EXACT_TARGET_FEEDBACK_PAIRS
+        allow_exact_pairs
+        and (node_id, target_id) in EXACT_TARGET_FEEDBACK_PAIRS
         and svc.exists(node_id)
         and svc.exists(target_id)
     ):
@@ -280,7 +283,11 @@ def _score_feedback(
     rank and exact submitted targets bypass proxying in :func:`_feedback_anchor_id`.
     """
 
-    anchor_id = _feedback_anchor_id(svc, submitted_id, session.target)
+    # Projected words have their own reviewed exact-target policy. Their fallback
+    # may retain legacy proxying, but cannot inherit an exact native word's override.
+    anchor_id = _feedback_anchor_id(
+        svc, submitted_id, session.target, allow_exact_pairs=not nonwinning,
+    )
     proxied = anchor_id != submitted_id
     distance = (
         distances.get(anchor_id)
@@ -937,7 +944,8 @@ class GuessView(ContractAPIView):
                 term.label
                 for term in suggest_projection(text)
                 if _feedback_anchor_id(
-                    svc, _projection_anchor_id(svc, term, session.target), session.target
+                    svc, _projection_anchor_id(svc, term, session.target), session.target,
+                    allow_exact_pairs=False,
                 )
                 != session.target
             ]

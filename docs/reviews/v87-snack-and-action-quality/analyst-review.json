@@ -1,0 +1,81 @@
+{
+  "reviewer": "root-v87-analyst",
+  "role": "analyst",
+  "input_ids": [
+    "ct_gastronomie_346",
+    "ct_gastronomie_347",
+    "ct_gastronomie_348",
+    "ct_gastronomie_349",
+    "ct_gastronomie_350",
+    "ct_gastronomie_351"
+  ],
+  "items": [
+    {
+      "id": "ct_gastronomie_346",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:fc9f92b2fb7ebb9fd06cf93820f8b9827b8ea968a6a32bcd1871732e51c06e4a",
+      "rationale": "Biscuit is a familiar concrete snack, salience 0.87, with 11 recognizable incoming cues. The original butter-biscuit recipe directly supports flour, butter, sugar and baking; actual first guesses now rank 4/hot instead of the earlier weak core. Tea 2 is a usable clue. No old target, source rewrite or sense collision; exact answer/repeat/resume and private clue journeys pass. Dessert/class cues and Sarmale 20/warm remain imperfect, but the defining core is now legible. Promote the easy target, without calling all biscuits identical recipes.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/biscuiti-cu-unt-love-letters",
+        "https://jamilacuisine.ro/biscuiti-petit-beurre-facuti-in-casa-reteta-video/"
+      ]
+    },
+    {
+      "id": "ct_gastronomie_347",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:7241ff0ba4f62e6a50be21768389535e33dcbb44da501cc087ed55bb0025c2c7",
+      "rationale": "Chec is a broadly recognizable named loaf cake with 6 incoming cues,2330 reachable and 941 responsive concepts. Flour/egg/sugar and qualified cocoa/leavener variants provide hot openers. I hold the overlapping Pandișpan hidden target; its family guess now ranks 2/hot/nonwinning through a closed pair, not a synonym claim or invented leavener distinction. The original recipe overlap remains explicit. Clue/repeat/resume/exact win pass; generic pastry 148/lukewarm and optional butter 343/cold remain debt. Fresh, unambiguous food target within this batch; promote.",
+      "sources": [
+        "https://jamilacuisine.ro/chec-pufos-cu-cacao-reteta-video/",
+        "https://bucate-aromate.ro/2019/07/chec-cu-visine-si-cacao/"
+      ]
+    },
+    {
+      "id": "ct_gastronomie_348",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:a562f4c7b968d322ad2e04ac1da48a94906110dd8667cc227f6566c2e61f130e",
+      "rationale": "Cremșnit is a familiar concrete layered vanilla-cream pastry with 5 incoming cues and 1072 responsive concepts. Original recipe and dictionary evidence support its composition and the individually reviewed cremeș equivalent. Vanilla cream and other defining inputs are hot; the native pastry-class guess is repaired to 2/hot without winning. The Tort projection intentionally cannot inherit that native exception. Exact cremeș and canonical wins, clues, repeat and resume pass. No salience warning, duplicate or editorial boundary; promote while retaining broader dessert feedback limits.",
+      "sources": [
+        "https://jamilacuisine.ro/prajitura-cremsnit-pas-cu-pas-reteta-video/",
+        "https://jamilacuisine.ro/tort-cremsnit-cu-crema-de-vanilie-reteta-video/",
+        "https://dexonline.ro/definitie/crem%C8%99nit"
+      ]
+    },
+    {
+      "id": "ct_gastronomie_349",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:16f31866bf4b8ba7455e026ccc47f99b9ceca114993dd0f536dfb2cd9a71b31f",
+      "rationale": "Tort Diplomat is a recognizable named chilled cake with a dominant food sense, distinct from a diplomat profession. Its five incoming recipe cues include ladyfingers, cream and qualified gelatin; the specific dish has 774 responsive concepts. The independently reviewed Tort cue is a separate projected food category, rank 2/hot/nonwinning for this exact target, with the secondary textile sense disclosed and no native alias theft. Safe clue/repeat/resume/exact win pass. Optional vanilla cream and broader class feedback remain noisy; no universal recipe claim or target duplicate. Promote.",
+      "sources": [
+        "https://jamilacuisine.ro/tort-diplomat-facut-in-casa-reteta-video/",
+        "https://www.delicatesa.ro/retete/tort-diplomat-cu-piscoturi-2005"
+      ]
+    },
+    {
+      "id": "ct_gastronomie_350",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:08c8c6a82443156c52cd807f2e3723a772bf0c52d3bfc5f5895ab05f209fcf8b",
+      "rationale": "Pișcot is a recognizable elongated sponge biscuit, not the generic Biscuit under another label. Original recipe/type evidence supports five incoming ingredient/baking cues and 675 responsive concepts. The natural Biscuit type guess is now 2/hot/nonwinning, retaining its ID; no reverse graph shortcut or global synonym is added. Flour 2 is a safe clue, and repeat/resume/exact wins pass. Reciprocal Pișcot-to-Biscuit and broader pastry feedback are still imperfect; the selected hidden target nevertheless has a strong defining core. Promote; hold broader Brioșă ambiguity separately.",
+      "sources": [
+        "https://www.barbatlacratita.ro/2016/03/piscoturi-de-casa.html",
+        "https://jamilacuisine.ro/tort-diplomat-facut-in-casa-reteta-video/"
+      ]
+    },
+    {
+      "id": "ct_gastronomie_351",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:67c6fa22a44878faf13de807ee8ea8153ba5a337469f1d18945a0f6e1d9df839",
+      "rationale": "Ciocolată is an ordinary solid food with five incoming cues and 1249 responsive concepts. The original liquid-milk recipe is set in a frame and cut into pieces, so it supports solid chocolate, not a drink conflation. Cocoa, sugar and milk are defining hot cues. Hot chocolate keeps its original projected drink ID and Tea fallback elsewhere; only its exact solid-food association becomes 2/hot/nonwinning. Its echoed user-provided label is not an unearned target field. Clue/repeat/resume/exact solid-answer wins pass. Butter and indirect savory/class noise remain debt. Promote this distinct easy target.",
+      "sources": [
+        "https://www.roberteisler.ro/retete/ciocolata-de-casa-1",
+        "https://camarabucovinei.ro/products/ciocolata-de-casa"
+      ]
+    }
+  ]
+}

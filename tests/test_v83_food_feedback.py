@@ -24,7 +24,11 @@ from cat_de_roman_esti.wordgames.contexto_projection import (  # noqa: E402
     resolve_projection,
 )
 from cat_de_roman_esti.wordgames.service import WordGameService, get_service  # noqa: E402
-from tests.content_history import before_v84_projection_rows  # noqa: E402
+from tests.content_history import (  # noqa: E402
+    before_v84_projection_rows,
+    before_v87_feedback_pairs,
+    before_v87_projection_neighborhoods,
+)
 
 ULEI = "n_v24_food_pantry_ulei"
 SARE = "n_v4gas_sare"
@@ -96,9 +100,10 @@ def test_projection_inventory_and_prior_policies_remain_exact():
         ("n_v21gas_ecler", "n_v86_food_crema_vanilie"),
         ("n_v21gas_savarina", "n_v86_food_frisca"),
     })
-    assert EXACT_TARGET_FEEDBACK_PAIRS - v86_pairs == v83_pairs
-    assert EXACT_TARGET_FEEDBACK_PAIRS == v83_pairs | v86_pairs
-    assert set(PROJECTION_NEIGHBORHOODS) == {"gem", "burta"}
+    prior_pairs = before_v87_feedback_pairs(EXACT_TARGET_FEEDBACK_PAIRS)
+    assert prior_pairs - v86_pairs == v83_pairs
+    assert prior_pairs == v83_pairs | v86_pairs
+    assert set(before_v87_projection_neighborhoods(PROJECTION_NEIGHBORHOODS)) == {"gem", "burta"}
     gem = PROJECTION_NEIGHBORHOODS["gem"]
     assert (gem.anchor_id, gem.min_strength, gem.include_direct_neighbors) == (DULCEATA, 0.60, True)
     assert gem.exact_target_ids == frozenset({CORNULETE, GOGOSI})

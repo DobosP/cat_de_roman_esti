@@ -1,0 +1,3896 @@
+{
+  "candidate_sha256": "sha256:b64deecee12dd3177d69367b738f56e76b6fd244684ad9c5f7f6ca2cc6a2f12e",
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "96d50f8b724b9d1d1ff5d02b5a9a206445d7d9edead778d6db173f00ac094bfa",
+    "cat_de_roman_esti/wordgames/contexto.py": "cb2ad03fc5d3b4ec0367cb82de63a7f915471bfd270b9d6b0071507fd3102118",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "206257795327a499a3be19cc3608c0d9320777e6e7ad4da839d10079a524b87d",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "5f8f2bb4ca4fdcae2334de6f50c7775cc36ca2b1c705d36a7510b5e3176d2762"
+  },
+  "items": {
+    "contexto[0]": {
+      "target": "n_v24_food_snack_biscuit",
+      "label": "Biscuit",
+      "difficulty": "usor",
+      "salience": 0.87,
+      "incoming": [
+        {
+          "id": "n_v24_food_breakfast_unt",
+          "label": "Unt",
+          "relation": "folosit în unele rețete de"
+        },
+        {
+          "id": "n_v24_food_pantry_faina",
+          "label": "Făină",
+          "relation": "ingredient de bază pentru"
+        },
+        {
+          "id": "n_v24_food_pantry_zahar",
+          "label": "Zahăr",
+          "relation": "îndulcește unele sortimente de"
+        },
+        {
+          "id": "n_v24_food_snack_ceai",
+          "label": "Ceai",
+          "relation": "gustare simplă"
+        },
+        {
+          "id": "n_v4gas_mancare",
+          "label": "Mâncare",
+          "relation": "duce la"
+        },
+        {
+          "id": "n_v84_food_cuptor",
+          "label": "Cuptor de bucătărie",
+          "relation": "coace"
+        },
+        {
+          "id": "n_v84_food_ovaz",
+          "label": "Ovăz",
+          "relation": "folosit în unele sortimente de"
+        },
+        {
+          "id": "n_v85_food_alune_padure",
+          "label": "Alune de pădure",
+          "relation": "folosite în unele sortimente de"
+        },
+        {
+          "id": "n_v85_food_migdale",
+          "label": "Migdale",
+          "relation": "folosite în unele sortimente de"
+        },
+        {
+          "id": "n_v87_food_bicarbonat",
+          "label": "Bicarbonat de sodiu alimentar",
+          "relation": "afânează unele aluaturi de"
+        },
+        {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "relation": "afânează unele aluaturi de"
+        }
+      ],
+      "reachable": 2330,
+      "responsive": 1727,
+      "words": {
+        "Biscuit": {
+          "ok": true,
+          "won": true,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_snack_biscuit",
+            "label": "Biscuit",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 1
+          }
+        },
+        "Făină": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_pantry_faina",
+            "label": "Făină",
+            "distance": 1,
+            "rank": 4,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Unt": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_breakfast_unt",
+            "label": "Unt",
+            "distance": 1,
+            "rank": 4,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Zahăr": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_pantry_zahar",
+            "label": "Zahăr",
+            "distance": 1,
+            "rank": 4,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Ou": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_ou",
+            "label": "Ou",
+            "distance": 4,
+            "rank": 204,
+            "temperature": "Caldut",
+            "closeness": 91,
+            "attempt_number": 1
+          }
+        },
+        "Lapte": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte",
+            "distance": 3,
+            "rank": 109,
+            "temperature": "Caldut",
+            "closeness": 95,
+            "attempt_number": 1
+          }
+        },
+        "Desert": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v2gas_desert",
+            "label": "Desert",
+            "distance": 3,
+            "rank": 134,
+            "temperature": "Caldut",
+            "closeness": 94,
+            "attempt_number": 1
+          }
+        },
+        "Prăjitură": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_prajitura",
+            "label": "Prăjitură",
+            "distance": 3,
+            "rank": 137,
+            "temperature": "Caldut",
+            "closeness": 94,
+            "attempt_number": 1
+          }
+        },
+        "Pâine": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_paine",
+            "label": "Pâine",
+            "distance": 3,
+            "rank": 54,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 1
+          }
+        },
+        "Ceai": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_snack_ceai",
+            "label": "Ceai",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Ovăz": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_ovaz",
+            "label": "Ovăz",
+            "distance": 1,
+            "rank": 4,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Migdale": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_migdale",
+            "label": "Migdale",
+            "distance": 1,
+            "rank": 4,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Alune de pădure": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_alune_padure",
+            "label": "Alune de pădure",
+            "distance": 1,
+            "rank": 4,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Cuptor de bucătărie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_cuptor",
+            "label": "Cuptor de bucătărie",
+            "distance": 1,
+            "rank": 4,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Drojdie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_drojdie",
+            "label": "Drojdie",
+            "distance": 4,
+            "rank": 191,
+            "temperature": "Caldut",
+            "closeness": 92,
+            "attempt_number": 1
+          }
+        },
+        "Frigider": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_home_appliances_frigider",
+            "label": "Frigider",
+            "distance": 3,
+            "rank": 38,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 1
+          }
+        },
+        "Congelator": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_kitchen_congelator",
+            "label": "Congelator",
+            "distance": 4,
+            "rank": 191,
+            "temperature": "Caldut",
+            "closeness": 92,
+            "attempt_number": 1
+          }
+        },
+        "Frișcă": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_food_frisca",
+            "label": "Frișcă",
+            "distance": 4,
+            "rank": 398,
+            "temperature": "Rece",
+            "closeness": 83,
+            "attempt_number": 1
+          }
+        },
+        "Cremă de vanilie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_food_crema_vanilie",
+            "label": "Cremă de vanilie",
+            "distance": 5,
+            "rank": 1235,
+            "temperature": "Foarte rece",
+            "closeness": 47,
+            "attempt_number": 1
+          }
+        },
+        "Cacao": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_cacao",
+            "label": "Cacao",
+            "distance": 4,
+            "rank": 204,
+            "temperature": "Caldut",
+            "closeness": 91,
+            "attempt_number": 1
+          }
+        },
+        "Vanilie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_vanilie",
+            "label": "Vanilie",
+            "distance": 4,
+            "rank": 204,
+            "temperature": "Caldut",
+            "closeness": 91,
+            "attempt_number": 1
+          }
+        },
+        "Sarmale": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_gas_sarmale",
+            "label": "Sarmale",
+            "distance": 2,
+            "rank": 20,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Stilou": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_school_supplies_stilou",
+            "label": "Stilou",
+            "distance": 6,
+            "rank": 1746,
+            "temperature": "Inghetat",
+            "closeness": 25,
+            "attempt_number": 1
+          }
+        },
+        "Chec": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_chec",
+            "label": "Chec",
+            "distance": 4,
+            "rank": 295,
+            "temperature": "Rece",
+            "closeness": 87,
+            "attempt_number": 1
+          }
+        },
+        "Pandișpan": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_pandispan",
+            "label": "Pandișpan",
+            "distance": 5,
+            "rank": 1172,
+            "temperature": "Foarte rece",
+            "closeness": 50,
+            "attempt_number": 1
+          }
+        },
+        "Cremșnit": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_cremsnit",
+            "label": "Cremșnit",
+            "distance": 4,
+            "rank": 495,
+            "temperature": "Rece",
+            "closeness": 79,
+            "attempt_number": 1
+          }
+        },
+        "Tort diplomat": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_tort_diplomat",
+            "label": "Tort Diplomat",
+            "distance": 4,
+            "rank": 446,
+            "temperature": "Rece",
+            "closeness": 81,
+            "attempt_number": 1
+          }
+        },
+        "Pișcot": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_piscot",
+            "label": "Pișcot",
+            "distance": 5,
+            "rank": 1235,
+            "temperature": "Foarte rece",
+            "closeness": 47,
+            "attempt_number": 1
+          }
+        },
+        "Brioșă": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_briosa",
+            "label": "Brioșă",
+            "distance": 4,
+            "rank": 204,
+            "temperature": "Caldut",
+            "closeness": 91,
+            "attempt_number": 1
+          }
+        },
+        "Praf de copt": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_praf_copt",
+            "label": "Praf de copt",
+            "distance": 1,
+            "rank": 4,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Bicarbonat alimentar": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_bicarbonat",
+            "label": "Bicarbonat de sodiu alimentar",
+            "distance": 1,
+            "rank": 4,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Gelatină alimentară": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_gelatina",
+            "label": "Gelatină alimentară",
+            "distance": 4,
+            "rank": 398,
+            "temperature": "Rece",
+            "closeness": 83,
+            "attempt_number": 1
+          }
+        },
+        "bicarbonat": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "gelatină": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "tort": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "rece": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "bicarbonat de sodiu": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "cremeș": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_cremsnit",
+            "label": "Cremșnit",
+            "distance": 4,
+            "rank": 495,
+            "temperature": "Rece",
+            "closeness": 79,
+            "attempt_number": 1
+          }
+        },
+        "Bicarbonat de sodiu alimentar": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_bicarbonat",
+            "label": "Bicarbonat de sodiu alimentar",
+            "distance": 1,
+            "rank": 4,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Mâncare": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_mancare",
+            "label": "Mâncare",
+            "distance": 1,
+            "rank": 3,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "ciocolată caldă": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "ctxp_cb75bc0c21d2e2940911",
+            "label": "Ciocolată caldă",
+            "distance": 1,
+            "rank": 3,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "foietaj": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        }
+      },
+      "journey": {
+        "clue": {
+          "label": "Ceai",
+          "rank": 2,
+          "message": "Mai cald: Ceai (#2)."
+        },
+        "repeat_resume": true,
+        "won": true,
+        "attempts": 5
+      }
+    },
+    "contexto[1]": {
+      "target": "n_v87_food_chec",
+      "label": "Chec",
+      "difficulty": "usor",
+      "salience": 0.85,
+      "incoming": [
+        {
+          "id": "n_v24_food_pantry_faina",
+          "label": "Făină",
+          "relation": "ingredient pentru"
+        },
+        {
+          "id": "n_v24_food_pantry_ulei",
+          "label": "Ulei",
+          "relation": "folosit în unele rețete de"
+        },
+        {
+          "id": "n_v24_food_pantry_zahar",
+          "label": "Zahăr",
+          "relation": "îndulcește"
+        },
+        {
+          "id": "n_v4gas_ou",
+          "label": "Ou",
+          "relation": "ingredient pentru"
+        },
+        {
+          "id": "n_v85_food_cacao",
+          "label": "Cacao",
+          "relation": "aromatizează unele variante de"
+        },
+        {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "relation": "afânează unele rețete de"
+        }
+      ],
+      "reachable": 2330,
+      "responsive": 941,
+      "words": {
+        "Biscuit": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_snack_biscuit",
+            "label": "Biscuit",
+            "distance": 5,
+            "rank": 397,
+            "temperature": "Rece",
+            "closeness": 83,
+            "attempt_number": 1
+          }
+        },
+        "Făină": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_pantry_faina",
+            "label": "Făină",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Unt": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_breakfast_unt",
+            "label": "Unt",
+            "distance": 5,
+            "rank": 343,
+            "temperature": "Rece",
+            "closeness": 85,
+            "attempt_number": 1
+          }
+        },
+        "Zahăr": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_pantry_zahar",
+            "label": "Zahăr",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Ou": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_ou",
+            "label": "Ou",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Lapte": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte",
+            "distance": 4,
+            "rank": 161,
+            "temperature": "Caldut",
+            "closeness": 93,
+            "attempt_number": 1
+          }
+        },
+        "Desert": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v2gas_desert",
+            "label": "Desert",
+            "distance": 3,
+            "rank": 51,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 1
+          }
+        },
+        "Prăjitură": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_prajitura",
+            "label": "Prăjitură",
+            "distance": 4,
+            "rank": 148,
+            "temperature": "Caldut",
+            "closeness": 94,
+            "attempt_number": 1
+          }
+        },
+        "Pâine": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_paine",
+            "label": "Pâine",
+            "distance": 4,
+            "rank": 95,
+            "temperature": "Caldut",
+            "closeness": 96,
+            "attempt_number": 1
+          }
+        },
+        "Ceai": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_snack_ceai",
+            "label": "Ceai",
+            "distance": 6,
+            "rank": 976,
+            "temperature": "Foarte rece",
+            "closeness": 58,
+            "attempt_number": 1
+          }
+        },
+        "Ovăz": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_ovaz",
+            "label": "Ovăz",
+            "distance": 3,
+            "rank": 45,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 1
+          }
+        },
+        "Migdale": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_migdale",
+            "label": "Migdale",
+            "distance": 5,
+            "rank": 335,
+            "temperature": "Rece",
+            "closeness": 86,
+            "attempt_number": 1
+          }
+        },
+        "Alune de pădure": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_alune_padure",
+            "label": "Alune de pădure",
+            "distance": 4,
+            "rank": 181,
+            "temperature": "Caldut",
+            "closeness": 92,
+            "attempt_number": 1
+          }
+        },
+        "Cuptor de bucătărie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_cuptor",
+            "label": "Cuptor de bucătărie",
+            "distance": 4,
+            "rank": 123,
+            "temperature": "Caldut",
+            "closeness": 95,
+            "attempt_number": 1
+          }
+        },
+        "Drojdie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_drojdie",
+            "label": "Drojdie",
+            "distance": 4,
+            "rank": 123,
+            "temperature": "Caldut",
+            "closeness": 95,
+            "attempt_number": 1
+          }
+        },
+        "Frigider": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_home_appliances_frigider",
+            "label": "Frigider",
+            "distance": 4,
+            "rank": 79,
+            "temperature": "Caldut",
+            "closeness": 97,
+            "attempt_number": 1
+          }
+        },
+        "Congelator": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_kitchen_congelator",
+            "label": "Congelator",
+            "distance": 4,
+            "rank": 205,
+            "temperature": "Caldut",
+            "closeness": 91,
+            "attempt_number": 1
+          }
+        },
+        "Frișcă": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_food_frisca",
+            "label": "Frișcă",
+            "distance": 4,
+            "rank": 205,
+            "temperature": "Caldut",
+            "closeness": 91,
+            "attempt_number": 1
+          }
+        },
+        "Cremă de vanilie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_food_crema_vanilie",
+            "label": "Cremă de vanilie",
+            "distance": 6,
+            "rank": 1166,
+            "temperature": "Foarte rece",
+            "closeness": 50,
+            "attempt_number": 1
+          }
+        },
+        "Cacao": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_cacao",
+            "label": "Cacao",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Vanilie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_vanilie",
+            "label": "Vanilie",
+            "distance": 3,
+            "rank": 53,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 1
+          }
+        },
+        "Sarmale": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_gas_sarmale",
+            "label": "Sarmale",
+            "distance": 3,
+            "rank": 31,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Stilou": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_school_supplies_stilou",
+            "label": "Stilou",
+            "distance": 7,
+            "rank": 2023,
+            "temperature": "Inghetat",
+            "closeness": 13,
+            "attempt_number": 1
+          }
+        },
+        "Chec": {
+          "ok": true,
+          "won": true,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_chec",
+            "label": "Chec",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 1
+          }
+        },
+        "Pandișpan": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_pandispan",
+            "label": "Pandișpan",
+            "distance": 5,
+            "rank": 463,
+            "temperature": "Rece",
+            "closeness": 80,
+            "attempt_number": 1
+          }
+        },
+        "Cremșnit": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_cremsnit",
+            "label": "Cremșnit",
+            "distance": 5,
+            "rank": 376,
+            "temperature": "Rece",
+            "closeness": 84,
+            "attempt_number": 1
+          }
+        },
+        "Tort diplomat": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_tort_diplomat",
+            "label": "Tort Diplomat",
+            "distance": 4,
+            "rank": 176,
+            "temperature": "Caldut",
+            "closeness": 92,
+            "attempt_number": 1
+          }
+        },
+        "Pișcot": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_piscot",
+            "label": "Pișcot",
+            "distance": 5,
+            "rank": 436,
+            "temperature": "Rece",
+            "closeness": 81,
+            "attempt_number": 1
+          }
+        },
+        "Brioșă": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_briosa",
+            "label": "Brioșă",
+            "distance": 4,
+            "rank": 123,
+            "temperature": "Caldut",
+            "closeness": 95,
+            "attempt_number": 1
+          }
+        },
+        "Praf de copt": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_praf_copt",
+            "label": "Praf de copt",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Bicarbonat alimentar": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_bicarbonat",
+            "label": "Bicarbonat de sodiu alimentar",
+            "distance": 2,
+            "rank": 12,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Gelatină alimentară": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_gelatina",
+            "label": "Gelatină alimentară",
+            "distance": 4,
+            "rank": 205,
+            "temperature": "Caldut",
+            "closeness": 91,
+            "attempt_number": 1
+          }
+        },
+        "bicarbonat": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "gelatină": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "tort": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "rece": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "bicarbonat de sodiu": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "cremeș": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_cremsnit",
+            "label": "Cremșnit",
+            "distance": 5,
+            "rank": 376,
+            "temperature": "Rece",
+            "closeness": 84,
+            "attempt_number": 1
+          }
+        },
+        "Bicarbonat de sodiu alimentar": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_bicarbonat",
+            "label": "Bicarbonat de sodiu alimentar",
+            "distance": 2,
+            "rank": 12,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Ulei": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_pantry_ulei",
+            "label": "Ulei",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "ciocolată caldă": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "ctxp_cb75bc0c21d2e2940911",
+            "label": "Ciocolată caldă",
+            "distance": 6,
+            "rank": 977,
+            "temperature": "Foarte rece",
+            "closeness": 58,
+            "attempt_number": 1
+          }
+        },
+        "foietaj": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        }
+      },
+      "journey": {
+        "clue": {
+          "label": "Făină",
+          "rank": 2,
+          "message": "Mai cald: Făină (#2)."
+        },
+        "repeat_resume": true,
+        "won": true,
+        "attempts": 5
+      }
+    },
+    "contexto[2]": {
+      "target": "n_v87_food_cremsnit",
+      "label": "Cremșnit",
+      "difficulty": "usor",
+      "salience": 0.75,
+      "incoming": [
+        {
+          "id": "n_v24_home_appliances_frigider",
+          "label": "Frigider",
+          "relation": "păstrează la rece"
+        },
+        {
+          "id": "n_v84_food_aluat",
+          "label": "Aluat",
+          "relation": "foile coapte intră în"
+        },
+        {
+          "id": "n_v86_food_amidon",
+          "label": "Amidon alimentar",
+          "relation": "îngroașă crema din unele rețete de"
+        },
+        {
+          "id": "n_v86_food_crema_vanilie",
+          "label": "Cremă de vanilie",
+          "relation": "umplutură pentru"
+        },
+        {
+          "id": "n_v86_food_zahar_pudra",
+          "label": "Zahăr pudră",
+          "relation": "pudrează unele variante de"
+        }
+      ],
+      "reachable": 2330,
+      "responsive": 1072,
+      "words": {
+        "Biscuit": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_snack_biscuit",
+            "label": "Biscuit",
+            "distance": 4,
+            "rank": 97,
+            "temperature": "Caldut",
+            "closeness": 96,
+            "attempt_number": 1
+          }
+        },
+        "Făină": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_pantry_faina",
+            "label": "Făină",
+            "distance": 2,
+            "rank": 10,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Unt": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_breakfast_unt",
+            "label": "Unt",
+            "distance": 4,
+            "rank": 97,
+            "temperature": "Caldut",
+            "closeness": 96,
+            "attempt_number": 1
+          }
+        },
+        "Zahăr": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_pantry_zahar",
+            "label": "Zahăr",
+            "distance": 2,
+            "rank": 10,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Ou": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_ou",
+            "label": "Ou",
+            "distance": 3,
+            "rank": 52,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 1
+          }
+        },
+        "Lapte": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte",
+            "distance": 2,
+            "rank": 10,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Desert": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v2gas_desert",
+            "label": "Desert",
+            "distance": 4,
+            "rank": 143,
+            "temperature": "Caldut",
+            "closeness": 94,
+            "attempt_number": 1
+          }
+        },
+        "Prăjitură": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_prajitura",
+            "label": "Prăjitură",
+            "distance": 4,
+            "rank": 254,
+            "temperature": "Rece",
+            "closeness": 89,
+            "attempt_number": 1
+          }
+        },
+        "Pâine": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_paine",
+            "label": "Pâine",
+            "distance": 4,
+            "rank": 183,
+            "temperature": "Caldut",
+            "closeness": 92,
+            "attempt_number": 1
+          }
+        },
+        "Ceai": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_snack_ceai",
+            "label": "Ceai",
+            "distance": 4,
+            "rank": 97,
+            "temperature": "Caldut",
+            "closeness": 96,
+            "attempt_number": 1
+          }
+        },
+        "Ovăz": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_ovaz",
+            "label": "Ovăz",
+            "distance": 4,
+            "rank": 241,
+            "temperature": "Rece",
+            "closeness": 90,
+            "attempt_number": 1
+          }
+        },
+        "Migdale": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_migdale",
+            "label": "Migdale",
+            "distance": 5,
+            "rank": 412,
+            "temperature": "Rece",
+            "closeness": 82,
+            "attempt_number": 1
+          }
+        },
+        "Alune de pădure": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_alune_padure",
+            "label": "Alune de pădure",
+            "distance": 5,
+            "rank": 412,
+            "temperature": "Rece",
+            "closeness": 82,
+            "attempt_number": 1
+          }
+        },
+        "Cuptor de bucătărie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_cuptor",
+            "label": "Cuptor de bucătărie",
+            "distance": 4,
+            "rank": 198,
+            "temperature": "Caldut",
+            "closeness": 92,
+            "attempt_number": 1
+          }
+        },
+        "Drojdie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_drojdie",
+            "label": "Drojdie",
+            "distance": 2,
+            "rank": 10,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Frigider": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_home_appliances_frigider",
+            "label": "Frigider",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Congelator": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_kitchen_congelator",
+            "label": "Congelator",
+            "distance": 3,
+            "rank": 52,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 1
+          }
+        },
+        "Frișcă": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_food_frisca",
+            "label": "Frișcă",
+            "distance": 4,
+            "rank": 347,
+            "temperature": "Rece",
+            "closeness": 85,
+            "attempt_number": 1
+          }
+        },
+        "Cremă de vanilie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_food_crema_vanilie",
+            "label": "Cremă de vanilie",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Cacao": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_cacao",
+            "label": "Cacao",
+            "distance": 4,
+            "rank": 198,
+            "temperature": "Caldut",
+            "closeness": 92,
+            "attempt_number": 1
+          }
+        },
+        "Vanilie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_vanilie",
+            "label": "Vanilie",
+            "distance": 2,
+            "rank": 10,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Sarmale": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_gas_sarmale",
+            "label": "Sarmale",
+            "distance": 3,
+            "rank": 34,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Stilou": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_school_supplies_stilou",
+            "label": "Stilou",
+            "distance": 5,
+            "rank": 510,
+            "temperature": "Rece",
+            "closeness": 78,
+            "attempt_number": 1
+          }
+        },
+        "Chec": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_chec",
+            "label": "Chec",
+            "distance": 3,
+            "rank": 52,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 1
+          }
+        },
+        "Pandișpan": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_pandispan",
+            "label": "Pandișpan",
+            "distance": 6,
+            "rank": 1238,
+            "temperature": "Foarte rece",
+            "closeness": 47,
+            "attempt_number": 1
+          }
+        },
+        "Cremșnit": {
+          "ok": true,
+          "won": true,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_cremsnit",
+            "label": "Cremșnit",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 1
+          }
+        },
+        "Tort diplomat": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_tort_diplomat",
+            "label": "Tort Diplomat",
+            "distance": 5,
+            "rank": 461,
+            "temperature": "Rece",
+            "closeness": 80,
+            "attempt_number": 1
+          }
+        },
+        "Pișcot": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_piscot",
+            "label": "Pișcot",
+            "distance": 6,
+            "rank": 1194,
+            "temperature": "Foarte rece",
+            "closeness": 49,
+            "attempt_number": 1
+          }
+        },
+        "Brioșă": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_briosa",
+            "label": "Brioșă",
+            "distance": 4,
+            "rank": 198,
+            "temperature": "Caldut",
+            "closeness": 92,
+            "attempt_number": 1
+          }
+        },
+        "Praf de copt": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_praf_copt",
+            "label": "Praf de copt",
+            "distance": 4,
+            "rank": 241,
+            "temperature": "Rece",
+            "closeness": 90,
+            "attempt_number": 1
+          }
+        },
+        "Bicarbonat alimentar": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_bicarbonat",
+            "label": "Bicarbonat de sodiu alimentar",
+            "distance": 5,
+            "rank": 394,
+            "temperature": "Rece",
+            "closeness": 83,
+            "attempt_number": 1
+          }
+        },
+        "Gelatină alimentară": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_gelatina",
+            "label": "Gelatină alimentară",
+            "distance": 4,
+            "rank": 347,
+            "temperature": "Rece",
+            "closeness": 85,
+            "attempt_number": 1
+          }
+        },
+        "bicarbonat": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "gelatină": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "tort": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "rece": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "bicarbonat de sodiu": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "cremeș": {
+          "ok": true,
+          "won": true,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_cremsnit",
+            "label": "Cremșnit",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 1
+          }
+        },
+        "Bicarbonat de sodiu alimentar": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_bicarbonat",
+            "label": "Bicarbonat de sodiu alimentar",
+            "distance": 5,
+            "rank": 394,
+            "temperature": "Rece",
+            "closeness": 83,
+            "attempt_number": 1
+          }
+        },
+        "Aluat": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_aluat",
+            "label": "Aluat",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Amidon alimentar": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_food_amidon",
+            "label": "Amidon alimentar",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Zahăr pudră": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_food_zahar_pudra",
+            "label": "Zahăr pudră",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "ciocolată caldă": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "ctxp_cb75bc0c21d2e2940911",
+            "label": "Ciocolată caldă",
+            "distance": 4,
+            "rank": 98,
+            "temperature": "Caldut",
+            "closeness": 96,
+            "attempt_number": 1
+          }
+        },
+        "foietaj": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        }
+      },
+      "journey": {
+        "clue": {
+          "label": "Frigider",
+          "rank": 2,
+          "message": "Mai cald: Frigider (#2)."
+        },
+        "repeat_resume": true,
+        "won": true,
+        "attempts": 5
+      }
+    },
+    "contexto[3]": {
+      "target": "n_v87_food_tort_diplomat",
+      "label": "Tort Diplomat",
+      "difficulty": "usor",
+      "salience": 0.75,
+      "incoming": [
+        {
+          "id": "n_v24_food_imported_fruit_portocala",
+          "label": "Portocală",
+          "relation": "fruct adăugat în unele rețete de"
+        },
+        {
+          "id": "n_v24_home_appliances_frigider",
+          "label": "Frigider",
+          "relation": "răcește și păstrează"
+        },
+        {
+          "id": "n_v86_food_frisca",
+          "label": "Frișcă",
+          "relation": "ingredient pentru crema din"
+        },
+        {
+          "id": "n_v87_food_gelatina",
+          "label": "Gelatină alimentară",
+          "relation": "încheagă crema din unele rețete de"
+        },
+        {
+          "id": "n_v87_food_piscot",
+          "label": "Pișcot",
+          "relation": "căptușește unele variante de"
+        }
+      ],
+      "reachable": 2330,
+      "responsive": 774,
+      "words": {
+        "Biscuit": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_snack_biscuit",
+            "label": "Biscuit",
+            "distance": 4,
+            "rank": 71,
+            "temperature": "Caldut",
+            "closeness": 97,
+            "attempt_number": 1
+          }
+        },
+        "Făină": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_pantry_faina",
+            "label": "Făină",
+            "distance": 2,
+            "rank": 12,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Unt": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_breakfast_unt",
+            "label": "Unt",
+            "distance": 4,
+            "rank": 71,
+            "temperature": "Caldut",
+            "closeness": 97,
+            "attempt_number": 1
+          }
+        },
+        "Zahăr": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_pantry_zahar",
+            "label": "Zahăr",
+            "distance": 3,
+            "rank": 32,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Ou": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_ou",
+            "label": "Ou",
+            "distance": 3,
+            "rank": 43,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 1
+          }
+        },
+        "Lapte": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte",
+            "distance": 3,
+            "rank": 43,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 1
+          }
+        },
+        "Desert": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v2gas_desert",
+            "label": "Desert",
+            "distance": 3,
+            "rank": 51,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 1
+          }
+        },
+        "Prăjitură": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_prajitura",
+            "label": "Prăjitură",
+            "distance": 4,
+            "rank": 168,
+            "temperature": "Caldut",
+            "closeness": 93,
+            "attempt_number": 1
+          }
+        },
+        "Pâine": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_paine",
+            "label": "Pâine",
+            "distance": 4,
+            "rank": 148,
+            "temperature": "Caldut",
+            "closeness": 94,
+            "attempt_number": 1
+          }
+        },
+        "Ceai": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_snack_ceai",
+            "label": "Ceai",
+            "distance": 4,
+            "rank": 71,
+            "temperature": "Caldut",
+            "closeness": 97,
+            "attempt_number": 1
+          }
+        },
+        "Ovăz": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_ovaz",
+            "label": "Ovăz",
+            "distance": 4,
+            "rank": 190,
+            "temperature": "Caldut",
+            "closeness": 92,
+            "attempt_number": 1
+          }
+        },
+        "Migdale": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_migdale",
+            "label": "Migdale",
+            "distance": 5,
+            "rank": 296,
+            "temperature": "Rece",
+            "closeness": 87,
+            "attempt_number": 1
+          }
+        },
+        "Alune de pădure": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_alune_padure",
+            "label": "Alune de pădure",
+            "distance": 5,
+            "rank": 296,
+            "temperature": "Rece",
+            "closeness": 87,
+            "attempt_number": 1
+          }
+        },
+        "Cuptor de bucătărie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_cuptor",
+            "label": "Cuptor de bucătărie",
+            "distance": 2,
+            "rank": 12,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Drojdie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_drojdie",
+            "label": "Drojdie",
+            "distance": 4,
+            "rank": 160,
+            "temperature": "Caldut",
+            "closeness": 93,
+            "attempt_number": 1
+          }
+        },
+        "Frigider": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_home_appliances_frigider",
+            "label": "Frigider",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Congelator": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_kitchen_congelator",
+            "label": "Congelator",
+            "distance": 4,
+            "rank": 190,
+            "temperature": "Caldut",
+            "closeness": 92,
+            "attempt_number": 1
+          }
+        },
+        "Frișcă": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_food_frisca",
+            "label": "Frișcă",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Cremă de vanilie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_food_crema_vanilie",
+            "label": "Cremă de vanilie",
+            "distance": 6,
+            "rank": 1010,
+            "temperature": "Foarte rece",
+            "closeness": 57,
+            "attempt_number": 1
+          }
+        },
+        "Cacao": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_cacao",
+            "label": "Cacao",
+            "distance": 4,
+            "rank": 160,
+            "temperature": "Caldut",
+            "closeness": 93,
+            "attempt_number": 1
+          }
+        },
+        "Vanilie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_vanilie",
+            "label": "Vanilie",
+            "distance": 2,
+            "rank": 12,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Sarmale": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_gas_sarmale",
+            "label": "Sarmale",
+            "distance": 3,
+            "rank": 32,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Stilou": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_school_supplies_stilou",
+            "label": "Stilou",
+            "distance": 6,
+            "rank": 908,
+            "temperature": "Rece",
+            "closeness": 61,
+            "attempt_number": 1
+          }
+        },
+        "Chec": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_chec",
+            "label": "Chec",
+            "distance": 4,
+            "rank": 190,
+            "temperature": "Caldut",
+            "closeness": 92,
+            "attempt_number": 1
+          }
+        },
+        "Pandișpan": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_pandispan",
+            "label": "Pandișpan",
+            "distance": 5,
+            "rank": 515,
+            "temperature": "Rece",
+            "closeness": 78,
+            "attempt_number": 1
+          }
+        },
+        "Cremșnit": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_cremsnit",
+            "label": "Cremșnit",
+            "distance": 5,
+            "rank": 425,
+            "temperature": "Rece",
+            "closeness": 82,
+            "attempt_number": 1
+          }
+        },
+        "Tort diplomat": {
+          "ok": true,
+          "won": true,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_tort_diplomat",
+            "label": "Tort Diplomat",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 1
+          }
+        },
+        "Pișcot": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_piscot",
+            "label": "Pișcot",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Brioșă": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_briosa",
+            "label": "Brioșă",
+            "distance": 4,
+            "rank": 160,
+            "temperature": "Caldut",
+            "closeness": 93,
+            "attempt_number": 1
+          }
+        },
+        "Praf de copt": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_praf_copt",
+            "label": "Praf de copt",
+            "distance": 5,
+            "rank": 296,
+            "temperature": "Rece",
+            "closeness": 87,
+            "attempt_number": 1
+          }
+        },
+        "Bicarbonat alimentar": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_bicarbonat",
+            "label": "Bicarbonat de sodiu alimentar",
+            "distance": 5,
+            "rank": 281,
+            "temperature": "Rece",
+            "closeness": 88,
+            "attempt_number": 1
+          }
+        },
+        "Gelatină alimentară": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_gelatina",
+            "label": "Gelatină alimentară",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "bicarbonat": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "gelatină": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "tort": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "rece": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "bicarbonat de sodiu": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "cremeș": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_cremsnit",
+            "label": "Cremșnit",
+            "distance": 5,
+            "rank": 425,
+            "temperature": "Rece",
+            "closeness": 82,
+            "attempt_number": 1
+          }
+        },
+        "Bicarbonat de sodiu alimentar": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_bicarbonat",
+            "label": "Bicarbonat de sodiu alimentar",
+            "distance": 5,
+            "rank": 281,
+            "temperature": "Rece",
+            "closeness": 88,
+            "attempt_number": 1
+          }
+        },
+        "Portocală": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_imported_fruit_portocala",
+            "label": "Portocală",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "ciocolată caldă": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "ctxp_cb75bc0c21d2e2940911",
+            "label": "Ciocolată caldă",
+            "distance": 4,
+            "rank": 72,
+            "temperature": "Caldut",
+            "closeness": 97,
+            "attempt_number": 1
+          }
+        },
+        "foietaj": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        }
+      },
+      "journey": {
+        "clue": {
+          "label": "Frigider",
+          "rank": 2,
+          "message": "Mai cald: Frigider (#2)."
+        },
+        "repeat_resume": true,
+        "won": true,
+        "attempts": 5
+      }
+    },
+    "contexto[4]": {
+      "target": "n_v87_food_piscot",
+      "label": "Pișcot",
+      "difficulty": "usor",
+      "salience": 0.8,
+      "incoming": [
+        {
+          "id": "n_v24_food_pantry_faina",
+          "label": "Făină",
+          "relation": "ingredient pentru"
+        },
+        {
+          "id": "n_v84_food_cuptor",
+          "label": "Cuptor de bucătărie",
+          "relation": "coace"
+        },
+        {
+          "id": "n_v86_food_albus",
+          "label": "Albuș",
+          "relation": "bătut spumă pentru"
+        },
+        {
+          "id": "n_v86_food_galbenus",
+          "label": "Gălbenuș",
+          "relation": "ingredient pentru"
+        },
+        {
+          "id": "n_v86_food_zahar_pudra",
+          "label": "Zahăr pudră",
+          "relation": "pudrează unele variante de"
+        }
+      ],
+      "reachable": 2330,
+      "responsive": 675,
+      "words": {
+        "Biscuit": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_snack_biscuit",
+            "label": "Biscuit",
+            "distance": 6,
+            "rank": 714,
+            "temperature": "Rece",
+            "closeness": 69,
+            "attempt_number": 1
+          }
+        },
+        "Făină": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_pantry_faina",
+            "label": "Făină",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Unt": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_breakfast_unt",
+            "label": "Unt",
+            "distance": 6,
+            "rank": 714,
+            "temperature": "Rece",
+            "closeness": 69,
+            "attempt_number": 1
+          }
+        },
+        "Zahăr": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_pantry_zahar",
+            "label": "Zahăr",
+            "distance": 2,
+            "rank": 7,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Ou": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_ou",
+            "label": "Ou",
+            "distance": 2,
+            "rank": 9,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Lapte": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte",
+            "distance": 4,
+            "rank": 128,
+            "temperature": "Caldut",
+            "closeness": 95,
+            "attempt_number": 1
+          }
+        },
+        "Desert": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v2gas_desert",
+            "label": "Desert",
+            "distance": 4,
+            "rank": 114,
+            "temperature": "Caldut",
+            "closeness": 95,
+            "attempt_number": 1
+          }
+        },
+        "Prăjitură": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_prajitura",
+            "label": "Prăjitură",
+            "distance": 5,
+            "rank": 246,
+            "temperature": "Rece",
+            "closeness": 89,
+            "attempt_number": 1
+          }
+        },
+        "Pâine": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_paine",
+            "label": "Pâine",
+            "distance": 4,
+            "rank": 61,
+            "temperature": "Cald",
+            "closeness": 97,
+            "attempt_number": 1
+          }
+        },
+        "Ceai": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_snack_ceai",
+            "label": "Ceai",
+            "distance": 6,
+            "rank": 714,
+            "temperature": "Rece",
+            "closeness": 69,
+            "attempt_number": 1
+          }
+        },
+        "Ovăz": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_ovaz",
+            "label": "Ovăz",
+            "distance": 3,
+            "rank": 32,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Migdale": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_migdale",
+            "label": "Migdale",
+            "distance": 6,
+            "rank": 810,
+            "temperature": "Rece",
+            "closeness": 65,
+            "attempt_number": 1
+          }
+        },
+        "Alune de pădure": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_alune_padure",
+            "label": "Alune de pădure",
+            "distance": 5,
+            "rank": 293,
+            "temperature": "Rece",
+            "closeness": 87,
+            "attempt_number": 1
+          }
+        },
+        "Cuptor de bucătărie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_cuptor",
+            "label": "Cuptor de bucătărie",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Drojdie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_drojdie",
+            "label": "Drojdie",
+            "distance": 5,
+            "rank": 211,
+            "temperature": "Caldut",
+            "closeness": 91,
+            "attempt_number": 1
+          }
+        },
+        "Frigider": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_home_appliances_frigider",
+            "label": "Frigider",
+            "distance": 4,
+            "rank": 44,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 1
+          }
+        },
+        "Congelator": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_kitchen_congelator",
+            "label": "Congelator",
+            "distance": 5,
+            "rank": 211,
+            "temperature": "Caldut",
+            "closeness": 91,
+            "attempt_number": 1
+          }
+        },
+        "Frișcă": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_food_frisca",
+            "label": "Frișcă",
+            "distance": 5,
+            "rank": 355,
+            "temperature": "Rece",
+            "closeness": 85,
+            "attempt_number": 1
+          }
+        },
+        "Cremă de vanilie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_food_crema_vanilie",
+            "label": "Cremă de vanilie",
+            "distance": 7,
+            "rank": 1865,
+            "temperature": "Inghetat",
+            "closeness": 20,
+            "attempt_number": 1
+          }
+        },
+        "Cacao": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_cacao",
+            "label": "Cacao",
+            "distance": 5,
+            "rank": 227,
+            "temperature": "Caldut",
+            "closeness": 90,
+            "attempt_number": 1
+          }
+        },
+        "Vanilie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_vanilie",
+            "label": "Vanilie",
+            "distance": 4,
+            "rank": 117,
+            "temperature": "Caldut",
+            "closeness": 95,
+            "attempt_number": 1
+          }
+        },
+        "Sarmale": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_gas_sarmale",
+            "label": "Sarmale",
+            "distance": 3,
+            "rank": 24,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Stilou": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_school_supplies_stilou",
+            "label": "Stilou",
+            "distance": 7,
+            "rank": 1758,
+            "temperature": "Inghetat",
+            "closeness": 25,
+            "attempt_number": 1
+          }
+        },
+        "Chec": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_chec",
+            "label": "Chec",
+            "distance": 5,
+            "rank": 314,
+            "temperature": "Rece",
+            "closeness": 87,
+            "attempt_number": 1
+          }
+        },
+        "Pandișpan": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_pandispan",
+            "label": "Pandișpan",
+            "distance": 6,
+            "rank": 1027,
+            "temperature": "Foarte rece",
+            "closeness": 56,
+            "attempt_number": 1
+          }
+        },
+        "Cremșnit": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_cremsnit",
+            "label": "Cremșnit",
+            "distance": 6,
+            "rank": 873,
+            "temperature": "Rece",
+            "closeness": 63,
+            "attempt_number": 1
+          }
+        },
+        "Tort diplomat": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_tort_diplomat",
+            "label": "Tort Diplomat",
+            "distance": 5,
+            "rank": 282,
+            "temperature": "Rece",
+            "closeness": 88,
+            "attempt_number": 1
+          }
+        },
+        "Pișcot": {
+          "ok": true,
+          "won": true,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_piscot",
+            "label": "Pișcot",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 1
+          }
+        },
+        "Brioșă": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_briosa",
+            "label": "Brioșă",
+            "distance": 5,
+            "rank": 227,
+            "temperature": "Caldut",
+            "closeness": 90,
+            "attempt_number": 1
+          }
+        },
+        "Praf de copt": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_praf_copt",
+            "label": "Praf de copt",
+            "distance": 6,
+            "rank": 838,
+            "temperature": "Rece",
+            "closeness": 64,
+            "attempt_number": 1
+          }
+        },
+        "Bicarbonat alimentar": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_bicarbonat",
+            "label": "Bicarbonat de sodiu alimentar",
+            "distance": 4,
+            "rank": 86,
+            "temperature": "Caldut",
+            "closeness": 96,
+            "attempt_number": 1
+          }
+        },
+        "Gelatină alimentară": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_gelatina",
+            "label": "Gelatină alimentară",
+            "distance": 5,
+            "rank": 355,
+            "temperature": "Rece",
+            "closeness": 85,
+            "attempt_number": 1
+          }
+        },
+        "bicarbonat": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "gelatină": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "tort": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "rece": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "bicarbonat de sodiu": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "cremeș": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_cremsnit",
+            "label": "Cremșnit",
+            "distance": 6,
+            "rank": 873,
+            "temperature": "Rece",
+            "closeness": 63,
+            "attempt_number": 1
+          }
+        },
+        "Bicarbonat de sodiu alimentar": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_bicarbonat",
+            "label": "Bicarbonat de sodiu alimentar",
+            "distance": 4,
+            "rank": 86,
+            "temperature": "Caldut",
+            "closeness": 96,
+            "attempt_number": 1
+          }
+        },
+        "Albuș": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_food_albus",
+            "label": "Albuș",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Gălbenuș": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_food_galbenus",
+            "label": "Gălbenuș",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Zahăr pudră": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_food_zahar_pudra",
+            "label": "Zahăr pudră",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "ciocolată caldă": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "ctxp_cb75bc0c21d2e2940911",
+            "label": "Ciocolată caldă",
+            "distance": 6,
+            "rank": 715,
+            "temperature": "Rece",
+            "closeness": 69,
+            "attempt_number": 1
+          }
+        },
+        "foietaj": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        }
+      },
+      "journey": {
+        "clue": {
+          "label": "Făină",
+          "rank": 2,
+          "message": "Mai cald: Făină (#2)."
+        },
+        "repeat_resume": true,
+        "won": true,
+        "attempts": 5
+      }
+    },
+    "contexto[5]": {
+      "target": "n_v85_food_ciocolata",
+      "label": "Ciocolată",
+      "difficulty": "usor",
+      "salience": 0.9,
+      "incoming": [
+        {
+          "id": "n_v24_food_pantry_zahar",
+          "label": "Zahăr",
+          "relation": "îndulcește unele sortimente de"
+        },
+        {
+          "id": "n_v4gas_lapte",
+          "label": "Lapte",
+          "relation": "ingredient în unele rețete de casă de"
+        },
+        {
+          "id": "n_v85_food_alune_padure",
+          "label": "Alune de pădure",
+          "relation": "miez adăugat în unele sortimente de"
+        },
+        {
+          "id": "n_v85_food_cacao",
+          "label": "Cacao",
+          "relation": "ingredient în unele rețete de casă de"
+        },
+        {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "relation": "ingredient în unele rețete de casă de"
+        }
+      ],
+      "reachable": 2330,
+      "responsive": 1249,
+      "words": {
+        "Biscuit": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_snack_biscuit",
+            "label": "Biscuit",
+            "distance": 4,
+            "rank": 312,
+            "temperature": "Rece",
+            "closeness": 87,
+            "attempt_number": 1
+          }
+        },
+        "Făină": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_pantry_faina",
+            "label": "Făină",
+            "distance": 3,
+            "rank": 50,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 1
+          }
+        },
+        "Unt": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_breakfast_unt",
+            "label": "Unt",
+            "distance": 4,
+            "rank": 312,
+            "temperature": "Rece",
+            "closeness": 87,
+            "attempt_number": 1
+          }
+        },
+        "Zahăr": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_pantry_zahar",
+            "label": "Zahăr",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Ou": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_ou",
+            "label": "Ou",
+            "distance": 3,
+            "rank": 50,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 1
+          }
+        },
+        "Lapte": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_lapte",
+            "label": "Lapte",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Desert": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v2gas_desert",
+            "label": "Desert",
+            "distance": 3,
+            "rank": 67,
+            "temperature": "Cald",
+            "closeness": 97,
+            "attempt_number": 1
+          }
+        },
+        "Prăjitură": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_prajitura",
+            "label": "Prăjitură",
+            "distance": 3,
+            "rank": 105,
+            "temperature": "Caldut",
+            "closeness": 96,
+            "attempt_number": 1
+          }
+        },
+        "Pâine": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v4gas_paine",
+            "label": "Pâine",
+            "distance": 3,
+            "rank": 47,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 1
+          }
+        },
+        "Ceai": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_food_snack_ceai",
+            "label": "Ceai",
+            "distance": 5,
+            "rank": 500,
+            "temperature": "Rece",
+            "closeness": 79,
+            "attempt_number": 1
+          }
+        },
+        "Ovăz": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_ovaz",
+            "label": "Ovăz",
+            "distance": 5,
+            "rank": 582,
+            "temperature": "Rece",
+            "closeness": 75,
+            "attempt_number": 1
+          }
+        },
+        "Migdale": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_migdale",
+            "label": "Migdale",
+            "distance": 2,
+            "rank": 18,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Alune de pădure": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_alune_padure",
+            "label": "Alune de pădure",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Cuptor de bucătărie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_cuptor",
+            "label": "Cuptor de bucătărie",
+            "distance": 4,
+            "rank": 216,
+            "temperature": "Caldut",
+            "closeness": 91,
+            "attempt_number": 1
+          }
+        },
+        "Drojdie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v84_food_drojdie",
+            "label": "Drojdie",
+            "distance": 4,
+            "rank": 216,
+            "temperature": "Caldut",
+            "closeness": 91,
+            "attempt_number": 1
+          }
+        },
+        "Frigider": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_home_appliances_frigider",
+            "label": "Frigider",
+            "distance": 3,
+            "rank": 50,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 1
+          }
+        },
+        "Congelator": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_kitchen_congelator",
+            "label": "Congelator",
+            "distance": 2,
+            "rank": 12,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Frișcă": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_food_frisca",
+            "label": "Frișcă",
+            "distance": 3,
+            "rank": 99,
+            "temperature": "Caldut",
+            "closeness": 96,
+            "attempt_number": 1
+          }
+        },
+        "Cremă de vanilie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_food_crema_vanilie",
+            "label": "Cremă de vanilie",
+            "distance": 5,
+            "rank": 917,
+            "temperature": "Rece",
+            "closeness": 61,
+            "attempt_number": 1
+          }
+        },
+        "Cacao": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_cacao",
+            "label": "Cacao",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Vanilie": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_vanilie",
+            "label": "Vanilie",
+            "distance": 3,
+            "rank": 99,
+            "temperature": "Caldut",
+            "closeness": 96,
+            "attempt_number": 1
+          }
+        },
+        "Sarmale": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_gas_sarmale",
+            "label": "Sarmale",
+            "distance": 3,
+            "rank": 32,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Stilou": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v24_school_supplies_stilou",
+            "label": "Stilou",
+            "distance": 4,
+            "rank": 169,
+            "temperature": "Caldut",
+            "closeness": 93,
+            "attempt_number": 1
+          }
+        },
+        "Chec": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_chec",
+            "label": "Chec",
+            "distance": 2,
+            "rank": 12,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Pandișpan": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_pandispan",
+            "label": "Pandișpan",
+            "distance": 5,
+            "rank": 778,
+            "temperature": "Rece",
+            "closeness": 67,
+            "attempt_number": 1
+          }
+        },
+        "Cremșnit": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_cremsnit",
+            "label": "Cremșnit",
+            "distance": 4,
+            "rank": 330,
+            "temperature": "Rece",
+            "closeness": 86,
+            "attempt_number": 1
+          }
+        },
+        "Tort diplomat": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_tort_diplomat",
+            "label": "Tort Diplomat",
+            "distance": 4,
+            "rank": 282,
+            "temperature": "Rece",
+            "closeness": 88,
+            "attempt_number": 1
+          }
+        },
+        "Pișcot": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_piscot",
+            "label": "Pișcot",
+            "distance": 5,
+            "rank": 699,
+            "temperature": "Rece",
+            "closeness": 70,
+            "attempt_number": 1
+          }
+        },
+        "Brioșă": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_briosa",
+            "label": "Brioșă",
+            "distance": 4,
+            "rank": 371,
+            "temperature": "Rece",
+            "closeness": 84,
+            "attempt_number": 1
+          }
+        },
+        "Praf de copt": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_praf_copt",
+            "label": "Praf de copt",
+            "distance": 3,
+            "rank": 50,
+            "temperature": "Cald",
+            "closeness": 98,
+            "attempt_number": 1
+          }
+        },
+        "Bicarbonat alimentar": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_bicarbonat",
+            "label": "Bicarbonat de sodiu alimentar",
+            "distance": 4,
+            "rank": 154,
+            "temperature": "Caldut",
+            "closeness": 93,
+            "attempt_number": 1
+          }
+        },
+        "Gelatină alimentară": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_gelatina",
+            "label": "Gelatină alimentară",
+            "distance": 3,
+            "rank": 99,
+            "temperature": "Caldut",
+            "closeness": 96,
+            "attempt_number": 1
+          }
+        },
+        "bicarbonat": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "gelatină": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "tort": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "rece": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "bicarbonat de sodiu": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        },
+        "cremeș": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_cremsnit",
+            "label": "Cremșnit",
+            "distance": 4,
+            "rank": 330,
+            "temperature": "Rece",
+            "closeness": 86,
+            "attempt_number": 1
+          }
+        },
+        "Bicarbonat de sodiu alimentar": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_bicarbonat",
+            "label": "Bicarbonat de sodiu alimentar",
+            "distance": 4,
+            "rank": 154,
+            "temperature": "Caldut",
+            "closeness": 93,
+            "attempt_number": 1
+          }
+        },
+        "Lapte praf": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v86_food_lapte_praf",
+            "label": "Lapte praf",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        },
+        "Ciocolată": {
+          "ok": true,
+          "won": true,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v85_food_ciocolata",
+            "label": "Ciocolată",
+            "distance": 0,
+            "rank": 1,
+            "temperature": "Gasit",
+            "closeness": 100,
+            "attempt_number": 1
+          }
+        },
+        "ciocolată caldă": {
+          "ok": true,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "ctxp_cb75bc0c21d2e2940911",
+            "label": "Ciocolată caldă",
+            "distance": 5,
+            "rank": 501,
+            "temperature": "Rece",
+            "closeness": 79,
+            "attempt_number": 1
+          }
+        },
+        "foietaj": {
+          "ok": false,
+          "won": false,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": null
+        }
+      },
+      "journey": {
+        "clue": {
+          "label": "Lapte",
+          "rank": 2,
+          "message": "Mai cald: Lapte (#2)."
+        },
+        "repeat_resume": true,
+        "won": true,
+        "attempts": 5
+      }
+    }
+  },
+  "first_guess_requests": 257
+}

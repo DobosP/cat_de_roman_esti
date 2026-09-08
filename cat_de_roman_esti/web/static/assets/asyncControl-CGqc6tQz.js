@@ -1,0 +1,1 @@
+function e(e){return e.current?!1:(e.current=!0,!0)}function t(e){e.current=!1}async function n(e){try{return{ok:!0,value:await e()}}catch{return{ok:!1,value:null}}}export{n,t as r,e as t};

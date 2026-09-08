@@ -27,6 +27,7 @@ from tests.content_history import (  # noqa: E402
     before_v81_projection_rows,
     before_v84_fixture,
     before_v85_fixture,
+    before_v87_projection_neighborhoods,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -134,7 +135,7 @@ def test_gem_preserves_all_baseline_fields_and_has_one_local_policy() -> None:
         before_v81_projection_rows(_projection_rows()), ensure_ascii=False, separators=(",", ":")
     ).encode()
     assert hashlib.sha256(blob).hexdigest() == _ALL_BASELINE_PROJECTIONS_SHA256
-    assert set(PROJECTION_NEIGHBORHOODS) == {"gem", "burta"}
+    assert set(before_v87_projection_neighborhoods(PROJECTION_NEIGHBORHOODS)) == {"gem", "burta"}
     policy = PROJECTION_NEIGHBORHOODS["gem"]
     assert (policy.anchor_id, policy.min_strength) == (DULCEATA, 0.60)
     assert policy.include_direct_neighbors is True

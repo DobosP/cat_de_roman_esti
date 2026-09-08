@@ -1,0 +1,45 @@
+{
+  "initial": {
+    "tests": 197,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 48.52,
+    "junit_sha256": "59949d5625e898ed9b634772733a3d34bcc9187c89e511883d31b07cc2598a91",
+    "log_sha256": "5c4318e0dc499f997e98bfb7015cf4735e0459fe70d85d13631d3b6435aee8c3",
+    "log_archive": {
+      "path": "raw/focused-compatibility.log.gz",
+      "encoding": "gzip",
+      "gzip_mtime": 0,
+      "decoded_sha256": "5c4318e0dc499f997e98bfb7015cf4735e0459fe70d85d13631d3b6435aee8c3",
+      "archive_sha256": "87bf035f6a8b5af83007e98e46ae054f0e602d03b2a6e931da3d4bb4eb483b69",
+      "decoded_bytes": 1730,
+      "archive_bytes": 595
+    }
+  },
+  "affected_module_followup": {
+    "tests": 57,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 7.46,
+    "junit_sha256": "ae72fb30e36db03190676486acbb8a8464503bcedf562d34fe914ef7257f182a",
+    "log_sha256": "5603b3bdbd979d86e8c62be43291039331c1f18d392c470cba56f4eba489b84d",
+    "log_archive": {
+      "path": "raw/focused-compatibility-followup.log.gz",
+      "encoding": "gzip",
+      "gzip_mtime": 0,
+      "decoded_sha256": "5603b3bdbd979d86e8c62be43291039331c1f18d392c470cba56f4eba489b84d",
+      "archive_sha256": "b2f930b29f7cfc3f48d9a3c110087a58408e4dee0c617c30c8a72fbb9dabf573",
+      "decoded_bytes": 80,
+      "archive_bytes": 33
+    }
+  },
+  "failure": "V85 metadata test indexed every current projection in a frozen old vocabulary; new Tort raised KeyError. Fixed by comparing the reconstructed V85 row dictionary with the exact 469-row retained snapshot. Live rebuild/no-scoring and native identity checks remain active.",
+  "coverage": "197 cases covering V33/V47 current observations; V79–V83 feedback/Clătite; V85 history/ingredient graph; V86 preparation graph; current projection audit and historical floor. One affected 57-case module rerun, all green. Original failure log retained.",
+  "independent_v87_snack_suite": {
+    "tests": 56,
+    "failures": 0,
+    "reported_by": "ingredient research and graph-test lane"
+  }
+}

@@ -30,6 +30,11 @@ import { bestScore } from "../scores";
 import { useRecordScore } from "../hooks/useRecordScore";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useSavedGameResume } from "../hooks/useSavedGameResume";
+import {
+  createContextoActionOwner,
+  recoverOwnedContextoAction,
+  type ContextoActionTicket,
+} from "../contextoActionRecovery.mjs";
 import { gameByKey } from "../games";
 import { categoryColor, categoryLabel } from "../categories";
 import { CategoryPicker } from "../components/CategoryPicker";
@@ -62,6 +67,7 @@ type GuessRecovery = {
 };
 
 type GuessView = "best" | "recent";
+type ActionSync = { gameId: string; kind: "failed" | "changed" };
 
 const FEEDBACK_ICON: Record<GuessFeedback["kind"], string> = {
   first: "📍",
@@ -203,6 +209,7 @@ export default function CaldRece({
   const [guessView, setGuessView] = useState<GuessView>("best");
   const [confirmReveal, setConfirmReveal] = useState(false);
   const [recovery, setRecovery] = useState<GuessRecovery | null>(null);
+  const [actionSync, setActionSync] = useState<ActionSync | null>(null);
   const [showLegend, setShowLegend] = useState(false);
   const [difficulty, setDifficulty] = useState<Difficulty>("usor");
   const [category, setCategory] = useState<string | null>(null);
@@ -211,13 +218,20 @@ export default function CaldRece({
   const [isRecord, setIsRecord] = useState(false);
   const [isPuzzleRecord, setIsPuzzleRecord] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const unconfirmedAction = useRef(false);
   const recordOnce = useRecordScore("contexto");
   const active = useActiveGame("contexto");
+  const actionOwner = useMemo(() => createContextoActionOwner(active), [active]);
+
+  useEffect(() => () => actionOwner.invalidate(), [actionOwner]);
 
   const best = bestScore(GAME_KEY);
 
   const applyResumedGame = useCallback(
     (saved: ContextoState, { terminal }: { terminal: boolean }) => {
+      actionOwner.invalidate();
+      unconfirmedAction.current = false;
+      setActionSync(null);
       setStartFailed(false);
       setState(saved);
       setDifficulty(saved.difficulty);
@@ -234,7 +248,7 @@ export default function CaldRece({
       window.setTimeout(() => inputRef.current?.focus(), 0);
       if (!terminal) onToast("Joc reluat.", "info");
     },
-    [onToast],
+    [actionOwner, onToast],
   );
 
   const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
@@ -249,6 +263,7 @@ export default function CaldRece({
     async (opts: CreateOpts = {}) => {
       if (startInFlight.current) return;
       startInFlight.current = true;
+      actionOwner.invalidate();
       cancelResume();
       setStartFailed(false);
       setBusy(true);
@@ -257,6 +272,8 @@ export default function CaldRece({
         setState(fresh);
         active.remember(fresh.game_id);
         dismissRecovery();
+        unconfirmedAction.current = false;
+        setActionSync(null);
         setLatestId(null);
         setFeedback(null);
         setGuessView("best");
@@ -274,7 +291,7 @@ export default function CaldRece({
         setBusy(false);
       }
     },
-    [active, cancelResume, dismissRecovery],
+    [active, actionOwner, cancelResume, dismissRecovery],
   );
 
   const won = state?.won ?? false;
@@ -335,13 +352,104 @@ export default function CaldRece({
     };
   }, [state, puzzleKey, recordOnce, active]);
 
+  const beginAction = useCallback((previous: ContextoState) => {
+    if (startInFlight.current) return null;
+    const ticket = actionOwner.begin(previous.game_id);
+    if (!ticket) return null;
+    if (!actionOwner.owns(ticket)) {
+      actionOwner.finish(ticket);
+      setRecovery(null);
+      setConfirmReveal(false);
+      setActionSync({ gameId: previous.game_id, kind: "changed" });
+      return null;
+    }
+    unconfirmedAction.current = true;
+    return ticket;
+  }, [actionOwner]);
+
+  const mayAdoptAction = useCallback((ticket: ContextoActionTicket) => {
+    if (!actionOwner.isCurrent(ticket)) return false;
+    if (!actionOwner.owns(ticket)) {
+      setActionSync({ gameId: ticket.gameId, kind: "changed" });
+      return false;
+    }
+    return true;
+  }, [actionOwner]);
+
+  const reconcileAction = useCallback(async (
+    ticket: ContextoActionTicket,
+    previous: ContextoState,
+  ) => {
+    const outcome = await recoverOwnedContextoAction(
+      actionOwner, ticket, contextoApi.getGame,
+      (error) => error instanceof ApiError && error.status === 404,
+    );
+    if (!mayAdoptAction(ticket)) return;
+    if (outcome.kind === "changed") {
+      setActionSync({ gameId: ticket.gameId, kind: "changed" });
+      return;
+    }
+    if (outcome.kind === "missing") {
+      if (ticket.savedId === ticket.gameId && !active.forgetIfCurrent(ticket.gameId)) {
+        setActionSync({ gameId: ticket.gameId, kind: "changed" });
+        return;
+      }
+      unconfirmedAction.current = false;
+      setActionSync(null);
+      setState(null);
+      setShowIntro(true);
+      onToast("Jocul nu mai este disponibil. Poți începe altul.", "info");
+      return;
+    }
+    if (outcome.kind !== "recovered") {
+      setActionSync({ gameId: ticket.gameId, kind: "failed" });
+      return;
+    }
+    const fresh = outcome.state;
+    unconfirmedAction.current = false;
+    setActionSync(null);
+    setState(fresh);
+    setConfirmReveal(false);
+    setFeedback(null);
+    setLatestId(null);
+    if (fresh.won || fresh.gave_up) {
+      setText("");
+      setRecovery(null);
+      if (fresh.won && !previous.won) sound.playWin();
+    } else {
+      setRecovery({ message: "Joc sincronizat. Poți continua.", choices: [], tone: "info" });
+    }
+  }, [actionOwner, active, mayAdoptAction, onToast]);
+
+  const retryActionSync = useCallback(async () => {
+    if (!state || busy || !actionSync) return;
+    if (actionSync.kind === "changed") {
+      actionOwner.invalidate();
+      setActionSync(null);
+      setShowIntro(true);
+      retryResume();
+      return;
+    }
+    if (state.game_id !== actionSync.gameId) return;
+    const ticket = beginAction(state);
+    if (!ticket) return;
+    setBusy(true);
+    try {
+      await reconcileAction(ticket, state);
+    } finally {
+      if (actionOwner.finish(ticket)) setBusy(false);
+    }
+  }, [state, busy, actionSync, actionOwner, beginAction, reconcileAction, retryResume]);
+
   const handleGuess = useCallback(
     // ``confirm`` accepts a correction the server asked about; only then does it count.
     async (e?: React.FormEvent, confirm?: string) => {
       e?.preventDefault();
-      if (!state || busy || finished) return;
+      if (!state || busy || finished || actionSync) return;
       const q = text.trim();
       if (!q) return;
+      const ticket = beginAction(state);
+      if (!ticket) return;
       setConfirmReveal(false);
       setFeedback(null);
       setBusy(true);
@@ -352,6 +460,8 @@ export default function CaldRece({
           q,
           confirm,
         );
+        if (!mayAdoptAction(ticket)) return;
+        unconfirmedAction.current = false;
         if (!res.ok) {
           sound.playError();
           setRecovery({
@@ -364,7 +474,7 @@ export default function CaldRece({
                 : undefined,
           });
           setState((prev) =>
-            prev
+            prev?.game_id === ticket.gameId
               ? {
                   ...prev,
                   guesses: res.guesses,
@@ -386,7 +496,7 @@ export default function CaldRece({
           setRecovery({ message: res.message, choices: [], tone: "info" });
         }
         setState((prev) =>
-          prev
+          prev?.game_id === ticket.gameId
             ? {
                 ...prev,
                 guesses: res.guesses,
@@ -408,80 +518,67 @@ export default function CaldRece({
         } else {
           sound.playHop();
         }
-      } catch (err) {
-        onToast(
-          err instanceof ApiError
-            ? `Încercarea a eșuat (${err.status}).`
-            : "Încercarea a eșuat. Verifică serverul.",
-          "error",
-        );
+      } catch {
+        await reconcileAction(ticket, state);
       } finally {
-        setBusy(false);
-        inputRef.current?.focus();
+        if (actionOwner.finish(ticket)) {
+          setBusy(false);
+          inputRef.current?.focus();
+        }
       }
     },
-    [state, busy, finished, text, onToast],
+    [state, busy, finished, text, actionSync, beginAction, mayAdoptAction, reconcileAction, actionOwner],
   );
 
   const handleClue = useCallback(async () => {
-    if (!state || busy || finished || !state.clue_available) return;
+    if (!state || busy || finished || actionSync || !state.clue_available) return;
+    const ticket = beginAction(state);
+    if (!ticket) return;
     setConfirmReveal(false);
     setBusy(true);
     setRecovery(null);
     try {
       const res = await contextoApi.requestClue(state.game_id);
+      if (!mayAdoptAction(ticket)) return;
+      unconfirmedAction.current = false;
       sound.playSelect();
       setState(res);
-    } catch (err) {
-      sound.playError();
-      // A stale tab may ask just after its last safe candidate was played elsewhere.
-      // Refresh authoritative availability so a rejected clue cannot leave the button on.
-      if (err instanceof ApiError && err.status === 400) {
-        try {
-          setState(await contextoApi.getGame(state.game_id));
-        } catch {
-          // Keep the current recoverable game visible if the refresh itself fails.
-        }
-      }
-      onToast(
-        err instanceof ApiError
-          ? `Indiciul nu este disponibil (${err.status}).`
-          : "Nu am putut cere indiciul.",
-        "error",
-      );
+    } catch {
+      await reconcileAction(ticket, state);
     } finally {
-      setBusy(false);
-      inputRef.current?.focus();
+      if (actionOwner.finish(ticket)) {
+        setBusy(false);
+        inputRef.current?.focus();
+      }
     }
-  }, [state, busy, finished, onToast]);
+  }, [state, busy, finished, actionSync, beginAction, mayAdoptAction, reconcileAction, actionOwner]);
 
   const handleGiveUp = useCallback(async () => {
-    if (!state || busy || finished) return;
+    if (!state || busy || finished || actionSync) return;
+    const ticket = beginAction(state);
+    if (!ticket) return;
     setConfirmReveal(false);
     setFeedback(null);
     setBusy(true);
     setRecovery(null);
     try {
       const res = await contextoApi.giveUp(state.game_id);
+      if (!mayAdoptAction(ticket)) return;
+      unconfirmedAction.current = false;
       sound.playUndo();
       setState(res);
-    } catch (err) {
-      onToast(
-        err instanceof ApiError
-          ? `Nu am putut renunța (${err.status}).`
-          : "Nu am putut renunța.",
-        "error",
-      );
+    } catch {
+      await reconcileAction(ticket, state);
     } finally {
-      setBusy(false);
+      if (actionOwner.finish(ticket)) setBusy(false);
     }
-  }, [state, busy, finished, onToast]);
+  }, [state, busy, finished, actionSync, beginAction, mayAdoptAction, reconcileAction, actionOwner]);
 
   const requestRevealConfirmation = useCallback(() => {
-    if (!state || busy || finished) return;
+    if (!state || busy || finished || actionSync) return;
     sound.playSelect();
     setConfirmReveal(true);
-  }, [state, busy, finished]);
+  }, [state, busy, finished, actionSync]);
 
   const handleCopy = useCallback(async () => {
     if (!sharePayload) return;
@@ -490,23 +587,29 @@ export default function CaldRece({
   }, [sharePayload, onToast]);
 
   const showOptions = useCallback(() => {
-    if (startInFlight.current) return;
-    if (!finished) active.forget();
+    if (startInFlight.current || actionOwner.hasPending() || actionSync) return;
+    if (!finished && state) active.forgetIfCurrent(state.game_id);
+    actionOwner.invalidate();
     setConfirmReveal(false);
     setFeedback(null);
     setRecovery(null);
     setShowIntro(true);
-  }, [active, finished]);
+  }, [active, finished, state, actionOwner, actionSync]);
 
   // Live-board exits are permanent. Terminal cleanup is conditional on its own ID: scored
   // wins wait for completion, while a no-score giveup is cleared by its terminal effect.
   const handleExit = useCallback(() => {
     if (startInFlight.current) return;
-    if (!finished) active.forget();
+    // An uncertain terminal action may still own a score that has not reached this
+    // screen. Keep its pointer for ordinary saved-game recovery after leaving.
+    if (!finished && state && !actionOwner.hasPending() && !unconfirmedAction.current && !actionSync) {
+      active.forgetIfCurrent(state.game_id);
+    }
+    actionOwner.invalidate();
     setConfirmReveal(false);
     setFeedback(null);
     onExit();
-  }, [active, finished, onExit]);
+  }, [active, finished, state, actionOwner, actionSync, onExit]);
 
   const guesses = state?.guesses ?? [];
   const bestGuess = guesses[0];
@@ -667,6 +770,18 @@ export default function CaldRece({
 
         {/* The form and its three recovery actions stay together above the scrolling list. */}
         <div className="contexto-sticky-controls">
+          {actionSync && !finished && (
+            <div className="card col contexto-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
+              <span>
+                {actionSync.kind === "failed"
+                  ? "Nu am putut verifica dacă acțiunea s-a înregistrat. Verifică jocul înainte să continui."
+                  : "Jocul salvat s-a schimbat. Încarcă jocul curent pentru a continua."}
+              </span>
+              <Button type="button" onClick={() => void retryActionSync()} disabled={busy}>
+                {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
+              </Button>
+            </div>
+          )}
           <form onSubmit={handleGuess} className="row contexto-input-bar" style={{ gap: 8 }}>
             <input
               ref={inputRef}
@@ -687,7 +802,7 @@ export default function CaldRece({
                   setConfirmReveal(false);
                 }
               }}
-              disabled={busy || finished}
+              disabled={busy || finished || actionSync !== null}
               autoComplete="off"
               autoFocus
               spellCheck={false}
@@ -696,7 +811,7 @@ export default function CaldRece({
             />
             <Button
               type="submit"
-              disabled={busy || finished || !text.trim()}
+              disabled={busy || finished || actionSync !== null || !text.trim()}
             >
               Ghicește
             </Button>
@@ -708,7 +823,7 @@ export default function CaldRece({
               variant="secondary"
               size="sm"
               onClick={() => void handleClue()}
-              disabled={busy || finished || !state?.clue_available}
+              disabled={busy || finished || actionSync !== null || !state?.clue_available}
               title={
                 state?.clue_available
                   ? state.next_clue_kind === "warmer"
@@ -726,7 +841,7 @@ export default function CaldRece({
               variant="secondary"
               size="sm"
               onClick={requestRevealConfirmation}
-              disabled={busy || finished || !state}
+              disabled={busy || finished || actionSync !== null || !state}
               aria-expanded={confirmReveal}
               aria-controls="contexto-reveal-confirmation"
             >
@@ -737,7 +852,7 @@ export default function CaldRece({
               variant="secondary"
               size="sm"
               onClick={showOptions}
-              disabled={busy}
+              disabled={busy || actionSync !== null}
               title="Schimbă opțiunile"
             >
               ⚙ Opțiuni
@@ -761,7 +876,7 @@ export default function CaldRece({
                   variant="secondary"
                   size="sm"
                   onClick={() => setConfirmReveal(false)}
-                  disabled={busy}
+                  disabled={busy || actionSync !== null}
                 >
                   Nu
                 </Button>
@@ -769,7 +884,7 @@ export default function CaldRece({
                   type="button"
                   size="sm"
                   onClick={() => void handleGiveUp()}
-                  disabled={busy}
+                  disabled={busy || actionSync !== null}
                 >
                   Da, arată
                 </Button>
@@ -832,7 +947,7 @@ export default function CaldRece({
                     <Button
                       type="button"
                       className="contexto-confirm-chip"
-                      disabled={busy}
+                      disabled={busy || actionSync !== null}
                       onClick={() => {
                         sound.playSelect();
                         void handleGuess(undefined, recovery.confirm?.token);

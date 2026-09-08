@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "reviewer": "v84_graph_research",
+  "reviewed_date": "2026-09-08",
+  "baseline_commit": "daae025b19517c18cba2f46c6b11ea4991d9a19c",
+  "verdict": "accept",
+  "scope": "Independent review of frozen Contexto action-recovery ownership, CaldRece integration, and exact native/projected feedback isolation. No app/test edits or test execution by this reviewer.",
+  "source_sha256": {
+    "frontend/src/contextoActionRecovery.mjs": "40ece15c03a1a27d69eba02ea3d51b242e7405f72713ab9dc7999139d644f9d0",
+    "frontend/src/contextoActionRecovery.d.mts": "ce08589d200a173aff56ae2ec502ea89668dda14e4f5323557445ad583d95c6b",
+    "frontend/src/screens/CaldRece.tsx": "693793475686b08197ae3d2e4a6f40e6a01965a1b9c73469895fd2cf6df09a13",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "da434a56703eaf2cbe5694c380fc27a3ee2edb9659c060bbb6ced2752d4020c6",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "8fc5829b07ae2bbcfcc4701c5539d35b09d3df5f2ccc25b19a2478bfcf938802"
+  },
+  "unchanged_dependency_sha256": {
+    "frontend/src/asyncControl.mjs": "452b9a553cbf319268d32b4f17a0ba70c8692ca43f3fcfd055ccf241412cf211",
+    "frontend/src/hooks/useActiveGame.ts": "08e3dc295f75ee5b11f14a86b7b2836f7af73d7f5238decf7c650004c391cd02",
+    "frontend/src/hooks/useSavedGameResume.ts": "dff224adb580b3996c9145decb87fce217125de2cf1350b2e144919bc81070a5",
+    "frontend/src/hooks/useRecordScore.ts": "303cda5da3e26595ed39a5f9b2028ed6634318fc6c4a02bb9480dc310f3fee4b",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/web/settings.py": "4bc05b880d5cd1c9544ad2a135f5ef71272940e7f8a6438f88207aba121f4848"
+  },
+  "consulted_test_sha256": {
+    "frontend/tests/contexto-action-recovery.test.mjs": "a7c912b512a08e2ecb52b0770e6e159f8cde9e1b6c76d350a1f71ad36a1c8bbe",
+    "frontend/tests/cald-rece-recovery.test.mjs": "48c33b457f70e1263642a4b06ea5e7c4a49ae72a9fd878ef604b61275fc826c6",
+    "frontend/tests/contexto-progressive-clue.test.mjs": "00b8bef8db7bc07b61e6e5f6925653b9d1a4d08fcc83371dbf3e1492631129c2",
+    "frontend/tests/v42-caldrece-legend-confirm.test.mjs": "93f27564377736a23061388ac64bc7758b79c845f2cad3750e645761b4a2f454",
+    "frontend/e2e/contexto-action-recovery.spec.mjs": "da6c7c56eb59939471fd2e4da378b3f9fe0c86e3544fc2185feba30ace1af1a6",
+    "tests/test_v87_snack_graph.py": "abd5546273efb3f349ae9ddcee1239d245927fa97a094bdc5d9c74682eaa8988"
+  },
+  "source_set_sha256": "8520116b058b6de1e7356258322f4cce95c0b62ab09b1d6ae348b8a4298c80d1",
+  "current_blockers": [],
+  "findings": [
+    {
+      "area": "single_action_ownership",
+      "verdict": "accept",
+      "evidence": "A synchronous lock issues one frozen ticket. Both callback adoption and finish require ticket identity; invalidation releases ownership without allowing old completions to clear a newer flight."
+    },
+    {
+      "area": "pointer_before_and_after",
+      "verdict": "accept",
+      "evidence": "beginAction rejects an already different stored ID before any POST. Recovery checks pointer ownership both before and after one GET. Direct POST responses also pass mayAdoptAction. A same-ID operation from a new screen invalidates the earlier ticket."
+    },
+    {
+      "area": "no_mutation_replay",
+      "verdict": "accept",
+      "evidence": "recoverOwnedContextoAction accepts only a load callback, invokes the existing one-shot recoverAuthoritative helper and has no mutation or timer. Guess/clue/giveup catch paths call it once. Failed verification enables an explicit GET-only retry and disables further mutations/options."
+    },
+    {
+      "area": "committed_terminal_and_clue_actions",
+      "verdict": "accept",
+      "evidence": "Recovered authoritative state is adopted wholesale, preserving paid clues and counters. Wins flow through the existing once-per-session score recorder; giveup clears only its own saved pointer and does not write a score. Text is preserved after nonterminal uncertainty and cleared for terminal recovery."
+    },
+    {
+      "area": "missing_and_local_storage",
+      "verdict": "accept",
+      "evidence": "A verified owned 404 returns to setup and conditionally forgets only that ID. A different pointer is never cleared. Local-only rounds remain playable when both saved-pointer observations are null; useActiveGame already catches unavailable-storage access."
+    },
+    {
+      "area": "exit_and_late_results",
+      "verdict": "accept",
+      "evidence": "Exit preserves the pointer while an action or unresolved outcome may have committed a terminal result, then invalidates the owner. Resumes/new creates also invalidate prior tickets. Old completion callbacks cannot adopt state, write a recovered score, or clear a replacement pointer."
+    },
+    {
+      "area": "projected_native_pair_isolation",
+      "verdict": "accept",
+      "evidence": "allow_exact_pairs defaults true. Only projected score paths and projected typo filters disable native exact-pair borrowing. Ingredient policy and legacy feedback proxies continue afterward. Projection-specific exact targets still work through their own neighborhood lookup and cannot win."
+    },
+    {
+      "area": "bounded_policy_scope",
+      "verdict": "accept",
+      "evidence": "Three native pairs and two projection-specific exact targets are explicit. Only the new Tort projection uses a fallback anchor that is itself a native exact-pair source. Tort therefore cannot inherit Prăjitură→Cremșnit, while the native Prăjitură guess retains its override."
+    },
+    {
+      "area": "private_answers_and_resource_bounds",
+      "verdict": "accept",
+      "evidence": "No session field, score formula, request-size setting or store-bound change. Existing private-answer serialization and typed suggestion filtering remain; defaults are 7200-second sliding TTL, 1000 sessions per game and 65536-byte requests."
+    }
+  ],
+  "native_pairs_added": [
+    [
+      "n_v87_food_pandispan",
+      "n_v87_food_chec"
+    ],
+    [
+      "n_v24_food_snack_biscuit",
+      "n_v87_food_piscot"
+    ],
+    [
+      "n_v4gas_prajitura",
+      "n_v87_food_cremsnit"
+    ]
+  ],
+  "projected_exact_targets_added": {
+    "tort": [
+      "n_v87_food_tort_diplomat"
+    ],
+    "ciocolata calda": [
+      "n_v85_food_ciocolata"
+    ]
+  },
+  "projection_source_intersection": [
+    {
+      "surface": "tort",
+      "anchor_id": "n_v4gas_prajitura"
+    }
+  ],
+  "validation_observed": {
+    "native_log_path": "/home/dobo/work/_temp/feat__v87-snack-and-action-quality/action/native-final.log",
+    "native_log_sha256": "33f096599eee70a1e2bf9f50fea99a7c2efed30e86bd5015557dfddb14387366",
+    "tests": 193,
+    "passed": 193,
+    "failed": 0,
+    "skipped": 0,
+    "duration_ms": 1080.705652,
+    "method": "Read the existing completed native log; did not rerun it.",
+    "test_review": "Consulted executable helper cases, adapted existing source assertions, browser recovery traffic/state cases, and backend scope/privacy tests. Browser/full-CI completion is not claimed here."
+  },
+  "limits": [
+    "Acceptance binds the exact current source hashes; any subsequent source change needs re-review.",
+    "The 193-test result is read from the author’s existing log, not independently executed by this reviewer.",
+    "This review does not approve content promotions or assert final browser/full-CI success.",
+    "No mutation replay, new persistence layer, network retry schedule or changed server bounds is introduced."
+  ]
+}

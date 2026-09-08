@@ -128,6 +128,7 @@ _GROUPS: tuple[tuple[str, int, tuple[str, ...]], ...] = (
             "budincă",
             "brioșă",
             "chec",
+            "tort",
             "chiflă",
             "covrig",
             "croasant",
@@ -855,6 +856,8 @@ _EXISTING_KG_SURFACES = frozenset(
         "scorțișoară",
         "cacao",
         "congelator",
+        "chec",
+        "brioșă",
         "compot",
         "interfon",
         "tricou",
@@ -953,6 +956,7 @@ NATIVE_PROJECTION_REPLACEMENTS: tuple[tuple[str, str, str], ...] = (
 # intentionally authored by meaning rather than distributed by position: "espresso"
 # borrows Cafea, never whichever anchor happens to be fourth in a list.
 _ANCHOR_CLUSTERS: tuple[tuple[str, tuple[str, ...]], ...] = (
+    ("n_v4gas_prajitura", ("tort",)),
     ("n_v4gas_paine", ("brioșă", "chec", "chiflă", "covrig", "croasant")),
     ("n_v2lim_cartof", ("piure de cartofi",)),
     ("n_v24_food_pantry_faina", ("tăiței", "cereale", "ramen", "lasagna")),
@@ -1229,13 +1233,22 @@ PROJECTION_NEIGHBORHOODS: dict[str, ProjectionNeighborhood] = {
     "burta": ProjectionNeighborhood(
         "n_gas_ciorba_burta", min_strength=0.60, include_direct_neighbors=False
     ),
+    # The ordinary cake cue stays distinct from this named subtype and cannot win.
+    "tort": ProjectionNeighborhood(
+        "n_v4gas_prajitura", min_strength=0.60, include_direct_neighbors=False,
+        exact_target_ids=frozenset({"n_v87_food_tort_diplomat"}),
+    ),
+    "ciocolata calda": ProjectionNeighborhood(
+        "n_v24_food_snack_ceai", min_strength=0.60, include_direct_neighbors=False,
+        exact_target_ids=frozenset({"n_v85_food_ciocolata"}),
+    ),
 }
 
 # One human-legible representative per authored domain. Tests pin these semantic
 # pairings and require the audit to cover every domain, preventing a later mechanical
 # redistribution from silently turning the projection into arbitrary rank noise.
 PROJECTION_LEGIBILITY_AUDIT: tuple[tuple[str, str, str], ...] = (
-    ("mâncare gătită", "brioșă", "n_v4gas_paine"),
+    ("mâncare gătită", "chiflă", "n_v4gas_paine"),
     ("ingrediente", "linte", "n_v4gas_legume"),
     ("băuturi", "espresso", "n_v3gas_cafea"),
     ("mobilier și casă", "noptieră", "n_v24_home_bed_pat"),

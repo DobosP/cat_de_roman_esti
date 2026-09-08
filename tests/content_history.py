@@ -26,6 +26,9 @@ _V85_RECEIPT = Path(__file__).resolve().parents[1] / (
 _V86_RECEIPT = Path(__file__).resolve().parents[1] / (
     "docs/reviews/v86-preparation-and-route-quality/artifact-delta.json"
 )
+_V87_RECEIPT = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v87-snack-and-action-quality/artifact-delta.json"
+)
 
 
 def _reverse_reviewed_delta(current: dict, filename: str, receipt_path: Path) -> dict:
@@ -64,20 +67,41 @@ def _reverse_reviewed_delta(current: dict, filename: str, receipt_path: Path) ->
     return restored
 
 
+def before_v87_fixture(current: dict) -> dict:
+    return _reverse_reviewed_delta(current, "kg_sample.json", _V87_RECEIPT)
+
+
+def before_v87_pack(current: dict) -> dict:
+    return _reverse_reviewed_delta(current, "games_pack.json", _V87_RECEIPT)
+
+
+def before_v87_rankings(current: dict) -> dict:
+    return _reverse_reviewed_delta(current, "board_rankings_v37.json", _V87_RECEIPT)
+
+
+def before_v87_derived(current: dict) -> dict:
+    return _reverse_reviewed_delta(current, "derived_catalog_v38.json", _V87_RECEIPT)
+
+
+def _before_v86(current: dict, filename: str) -> dict:
+    previous = _reverse_reviewed_delta(current, filename, _V87_RECEIPT)
+    return _reverse_reviewed_delta(previous, filename, _V86_RECEIPT)
+
+
 def before_v86_fixture(current: dict) -> dict:
-    return _reverse_reviewed_delta(current, "kg_sample.json", _V86_RECEIPT)
+    return _before_v86(current, "kg_sample.json")
 
 
 def before_v86_pack(current: dict) -> dict:
-    return _reverse_reviewed_delta(current, "games_pack.json", _V86_RECEIPT)
+    return _before_v86(current, "games_pack.json")
 
 
 def before_v86_rankings(current: dict) -> dict:
-    return _reverse_reviewed_delta(current, "board_rankings_v37.json", _V86_RECEIPT)
+    return _before_v86(current, "board_rankings_v37.json")
 
 
 def before_v86_derived(current: dict) -> dict:
-    return _reverse_reviewed_delta(current, "derived_catalog_v38.json", _V86_RECEIPT)
+    return _before_v86(current, "derived_catalog_v38.json")
 
 
 def before_v85_fixture(current: dict) -> dict:
@@ -97,7 +121,7 @@ def before_v85_derived(current: dict) -> dict:
 
 
 def _before_v85(current: dict, filename: str) -> dict:
-    previous = _reverse_reviewed_delta(current, filename, _V86_RECEIPT)
+    previous = _before_v86(current, filename)
     return _reverse_reviewed_delta(previous, filename, _V85_RECEIPT)
 
 
@@ -155,13 +179,58 @@ def before_v85_projection_rows(current: list[tuple]) -> list[tuple]:
 
 def before_v86_projection_rows(current: list[tuple]) -> list[tuple]:
     """Restore the exact Congelator projection retired by its V86 native concept."""
-    restored = list(current)
+    restored = before_v87_projection_rows(current)
     assert not any(row[0] == "congelator" for row in restored)
     assert restored[86][0] == "hotă de bucătărie"
     restored.insert(86, (
         "congelator", "n_v24_home_appliances_frigider", "ustensile de bucătărie",
         0, "explicit", "ctxp_ab9722a1b626f7b1d9ca",
     ))
+    return restored
+
+
+def before_v87_projection_rows(current: list[tuple]) -> list[tuple]:
+    """Remove the reviewed Tort cue and restore the two exact V86 pastry rows."""
+    restored = list(current)
+    added = (
+        "tort", "n_v4gas_prajitura", "mâncare gătită", 1, "explicit",
+        "ctxp_7de7b40dd74b4b0f44bf",
+    )
+    assert restored.count(added) == 1
+    restored.remove(added)
+    for index, row in (
+        (14, ("brioșă", "n_v4gas_paine", "mâncare gătită", 1, "explicit",
+              "ctxp_48dbb31871219f323569")),
+        (15, ("chec", "n_v4gas_paine", "mâncare gătită", 1, "explicit",
+              "ctxp_2e50eafd1e160b7bc25a")),
+    ):
+        assert not any(existing[0] == row[0] for existing in restored)
+        assert restored[index][0] == "chiflă"
+        restored.insert(index, row)
+    return restored
+
+
+def before_v87_feedback_pairs(current: frozenset[tuple[str, str]]) -> frozenset[tuple[str, str]]:
+    """Peel only the three reviewed V87 native exact-target additions."""
+    added = frozenset({
+        ("n_v87_food_pandispan", "n_v87_food_chec"),
+        ("n_v24_food_snack_biscuit", "n_v87_food_piscot"),
+        ("n_v4gas_prajitura", "n_v87_food_cremsnit"),
+    })
+    assert added <= current
+    return current - added
+
+
+def before_v87_projection_neighborhoods(current: dict) -> dict:
+    """Retain exact older policies while checking the two closed V87 cue policies."""
+    restored = dict(current)
+    for key, anchor, target in (
+        ("tort", "n_v4gas_prajitura", "n_v87_food_tort_diplomat"),
+        ("ciocolata calda", "n_v24_food_snack_ceai", "n_v85_food_ciocolata"),
+    ):
+        policy = restored.pop(key)
+        assert (policy.anchor_id, policy.min_strength, policy.include_direct_neighbors,
+                policy.exact_target_ids) == (anchor, 0.60, False, frozenset({target}))
     return restored
 
 

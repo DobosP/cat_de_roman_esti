@@ -529,3 +529,33 @@ all seven lossless evidence archives and 16 actual final green receipts. These i
 tests and 148 browser checks. Landed that candidate into local main with this record.
 V87 begins a coherent batch of snack/ingredient feedback, reviewed playable content and
 action quality. Candidate quantities do not override the critique rubric. No push or deployment.
+
+## V87 snack and action quality (2026-09-08)
+
+Valid until: the source/artifact bindings change — then treat as history.
+
+V86 `7d8b177` was merged into local main, with landing record `daae025`; its verified-merged
+branch/worktree/scratch were removed. V87 starts from `daae025` and finishes on
+`feat/v87-snack-and-action-quality`, ready for a later local landing. No push/deployment.
+
+V87 adds nine concepts, 50 directed links and 31 forms (30 grammatical/qualified, one
+regional Cremșnit/cremeș equivalent), and promotes six new Contexto rounds: Biscuit, Chec,
+Cremșnit, Tort Diplomat, Pișcot and Ciocolată. Contexto eligibility grows 229→235. Native
+Chec/Brioșă replace broad projections, generic tort is recognized, and five exact
+nonwinning feedback repairs retain identities and isolate projected/native exceptions.
+
+Contexto reconciles lost guess/clue/giveup responses with one owned GET. Failed reads keep
+a visible read-only retry; no lost win, repeated paid clue or stale-tab adoption in the
+added tests. All 649 old pack records, 82 Alchimie / 100 Lanț profiles and 336 derived rows remain
+exact. All 9,087 before/after observations and semantic costs are recorded: Brioșă→Pâine
+becomes too cold while false Zacuscă affinities cool; eight old-native warm→lukewarm
+boundaries preserve distances. No claim that every one of 6,941 changed observations improves.
+
+Full gates: 1,409 backend tests on each Python 3.12.3/3.14.4, 53 accounts each, 193 native
+frontend and 168 desktop/mobile browser checks; validators/pending/Ruff/docs/whitespace
+and lint/typecheck/build/bundle GREEN, 118.90/120 KiB. Original 189/192 native and 196/197
+compatibility runs are preserved; stale assertions were corrected with stronger exact
+historical/owned-action checks. Both full backend matrices reran after one stale projection test correction; no relaxed threshold.
+
+Evidence: `docs/reviews/v87-snack-and-action-quality/README.md`; current truth is STATUS.
+Human/player/device acceptance and production rollout remain pending.

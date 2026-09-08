@@ -1,0 +1,251 @@
+{
+ "game": "contexto",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "ct_gastronomie_346",
+   "ct_gastronomie_347",
+   "ct_gastronomie_348",
+   "ct_gastronomie_349",
+   "ct_gastronomie_350",
+   "ct_gastronomie_351"
+  ]
+ },
+ "verdicts": {
+  "ct_gastronomie_346": "promote",
+  "ct_gastronomie_347": "promote",
+  "ct_gastronomie_348": "promote",
+  "ct_gastronomie_349": "promote",
+  "ct_gastronomie_350": "promote",
+  "ct_gastronomie_351": "promote"
+ },
+ "perItem": [
+  {
+   "id": "ct_gastronomie_346",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:fc9f92b2fb7ebb9fd06cf93820f8b9827b8ea968a6a32bcd1871732e51c06e4a",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_346",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:fc9f92b2fb7ebb9fd06cf93820f8b9827b8ea968a6a32bcd1871732e51c06e4a",
+    "rationale": "Biscuit is a familiar concrete snack, salience 0.87, with 11 recognizable incoming cues. The original butter-biscuit recipe directly supports flour, butter, sugar and baking; actual first guesses now rank 4/hot instead of the earlier weak core. Tea 2 is a usable clue. No old target, source rewrite or sense collision; exact answer/repeat/resume and private clue journeys pass. Dessert/class cues and Sarmale 20/warm remain imperfect, but the defining core is now legible. Promote the easy target, without calling all biscuits identical recipes.",
+    "sources": [
+     "https://www.oetker.ro/retete/r/biscuiti-cu-unt-love-letters",
+     "https://jamilacuisine.ro/biscuiti-petit-beurre-facuti-in-casa-reteta-video/"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_346",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:fc9f92b2fb7ebb9fd06cf93820f8b9827b8ea968a6a32bcd1871732e51c06e4a",
+    "rationale": "A1/A2/C1/C2/C5: Biscuit is a familiar concrete snack with a dominant food meaning, supported by older original household recipes and current manufacturer recipes. Salience 0.87 meets easy. A3/A4/C3/C4: 11 recognizable incoming cues now include the documented flour/butter/sugar/baking core; each repaired input is rank 4/hot rather than the earlier cold or lukewarm result. Tea 2 is a usable safe clue. Actual repeat/resume and exact win pass. A5/A6: no adult premise or old target. Refute-first: Pișcot→generic Biscuit remains too cold, and Sarmale 20 warm, but these do not erase the now-consistent defining core. Promote; this is a substantive repair of the deferred V86 target, not a promotion based on neighbor count alone.",
+    "sources": [
+     "https://jamilacuisine.ro/tort-de-biscuiti-cu-ciocolata-reteta-video/",
+     "https://www.oetker.ro/retete/r/biscuiti-de-paste"
+    ]
+   }
+  },
+  {
+   "id": "ct_gastronomie_347",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:7241ff0ba4f62e6a50be21768389535e33dcbb44da501cc087ed55bb0025c2c7",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_347",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:7241ff0ba4f62e6a50be21768389535e33dcbb44da501cc087ed55bb0025c2c7",
+    "rationale": "Chec is a broadly recognizable named loaf cake with 6 incoming cues,2330 reachable and 941 responsive concepts. Flour/egg/sugar and qualified cocoa/leavener variants provide hot openers. I hold the overlapping Pandișpan hidden target; its family guess now ranks 2/hot/nonwinning through a closed pair, not a synonym claim or invented leavener distinction. The original recipe overlap remains explicit. Clue/repeat/resume/exact win pass; generic pastry 148/lukewarm and optional butter 343/cold remain debt. Fresh, unambiguous food target within this batch; promote.",
+    "sources": [
+     "https://jamilacuisine.ro/chec-pufos-cu-cacao-reteta-video/",
+     "https://bucate-aromate.ro/2019/07/chec-cu-visine-si-cacao/"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_347",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:7241ff0ba4f62e6a50be21768389535e33dcbb44da501cc087ed55bb0025c2c7",
+    "rationale": "A1/A2/C1/C2/C5: Chec is a familiar concrete cake, supported by dictionary and original recipe evidence; salience 0.85 meets easy. A3/A4: actual ingredient variants are respected rather than making baking powder universal. A5/A6: no old target; Pandișpan was deliberately held as a separate hidden target because the selected source uses both names for one recipe. C3/C4: 6 incoming and 2330 reachable, with immediate ingredient cues and a repaired Pandișpan 2/hot/nonwinning family guess. Făină 2 clue and full private recovery/win journey pass. Broader Prăjitură 148/lukewarm and optional butter 343/cold remain limitations. Promote for the clear ingredient/family route, without declaring the two cake words universal synonyms.",
+    "sources": [
+     "https://dexonline.ro/definitie/chec",
+     "https://dexonline.ro/definitie/pandi%C8%99pan/27977",
+     "https://bucate-aromate.ro/2019/07/chec-cu-visine-si-cacao/"
+    ]
+   }
+  },
+  {
+   "id": "ct_gastronomie_348",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:a562f4c7b968d322ad2e04ac1da48a94906110dd8667cc227f6566c2e61f130e",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_348",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:a562f4c7b968d322ad2e04ac1da48a94906110dd8667cc227f6566c2e61f130e",
+    "rationale": "Cremșnit is a familiar concrete layered vanilla-cream pastry with 5 incoming cues and 1072 responsive concepts. Original recipe and dictionary evidence support its composition and the individually reviewed cremeș equivalent. Vanilla cream and other defining inputs are hot; the native pastry-class guess is repaired to 2/hot without winning. The Tort projection intentionally cannot inherit that native exception. Exact cremeș and canonical wins, clues, repeat and resume pass. No salience warning, duplicate or editorial boundary; promote while retaining broader dessert feedback limits.",
+    "sources": [
+     "https://jamilacuisine.ro/prajitura-cremsnit-pas-cu-pas-reteta-video/",
+     "https://jamilacuisine.ro/tort-cremsnit-cu-crema-de-vanilie-reteta-video/",
+     "https://dexonline.ro/definitie/crem%C8%99nit"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_348",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:a562f4c7b968d322ad2e04ac1da48a94906110dd8667cc227f6566c2e61f130e",
+    "rationale": "A1/A2/C1/C2/C5: Cremșnit is a recognizable layered pastry, distinct from generic loaf cakes, with original 2014 and national-TV2016 evidence; salience 0.75 meets easy. The sourced cremeș equivalent also wins exactly. A3/A4/C3/C4: 5 meaningful incoming cues include vanilla cream; the defining native Prăjitură cue is repaired from 254/cold to 2/hot/nonwinning. Safe clue/repeat/resume/exact-win journey passes. A5/A6: no boundary trigger or prior target. The final isolation check intentionally keeps projected Tort→Cremșnit at 255/cold rather than letting the generic projection inherit a native-word override. This remaining related-word asymmetry is explicit; the specific cream and native pastry cues are clear. Promote.",
+    "sources": [
+     "https://jamilacuisine.ro/prajitura-cremsnit-pas-cu-pas-reteta-video/",
+     "https://www.protv.ro/articol/39741-reteta-cremsnit",
+     "https://jamilacuisine.ro/tort-cremsnit-cu-crema-de-vanilie-reteta-video/"
+    ]
+   }
+  },
+  {
+   "id": "ct_gastronomie_349",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:16f31866bf4b8ba7455e026ccc47f99b9ceca114993dd0f536dfb2cd9a71b31f",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_349",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:16f31866bf4b8ba7455e026ccc47f99b9ceca114993dd0f536dfb2cd9a71b31f",
+    "rationale": "Tort Diplomat is a recognizable named chilled cake with a dominant food sense, distinct from a diplomat profession. Its five incoming recipe cues include ladyfingers, cream and qualified gelatin; the specific dish has 774 responsive concepts. The independently reviewed Tort cue is a separate projected food category, rank 2/hot/nonwinning for this exact target, with the secondary textile sense disclosed and no native alias theft. Safe clue/repeat/resume/exact win pass. Optional vanilla cream and broader class feedback remain noisy; no universal recipe claim or target duplicate. Promote.",
+    "sources": [
+     "https://jamilacuisine.ro/tort-diplomat-facut-in-casa-reteta-video/",
+     "https://www.delicatesa.ro/retete/tort-diplomat-cu-piscoturi-2005"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_349",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:16f31866bf4b8ba7455e026ccc47f99b9ceca114993dd0f536dfb2cd9a71b31f",
+    "rationale": "A1/A2/C1/C2/C5: Tort Diplomat is a familiar named chilled cream/fruit cake, documented in original 2013 and national-TV2016 recipes; salience 0.75 meets easy. A3/A4: the pișcot/cream/gelatin variants are concrete and verifiable, without an alcohol-dependent requirement. A5/A6: no old target or generic-cake alias is created. C3/C4: 5 recognizable incoming cues and 2330 reachable; the previously unsupported ordinary Tort word now has its own projected identity and a closed rank 2/hot/nonwinning cue for Diplomat. The dictionary food sense supports the Prăjitură fallback; the secondary textile sense is disclosed. Safe clue/repeat/resume and exact named win pass. Broader class and optional vanilla-cream rankings remain incomplete. Promote because the defining cake opener now works.",
+    "sources": [
+     "https://jamilacuisine.ro/tort-diplomat-facut-in-casa-reteta-video/",
+     "https://www.protv.ro/articol/38901-diplomat",
+     "https://dexonline.ro/definitie/tort"
+    ]
+   }
+  },
+  {
+   "id": "ct_gastronomie_350",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:08c8c6a82443156c52cd807f2e3723a772bf0c52d3bfc5f5895ab05f209fcf8b",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_350",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:08c8c6a82443156c52cd807f2e3723a772bf0c52d3bfc5f5895ab05f209fcf8b",
+    "rationale": "Pișcot is a recognizable elongated sponge biscuit, not the generic Biscuit under another label. Original recipe/type evidence supports five incoming ingredient/baking cues and 675 responsive concepts. The natural Biscuit type guess is now 2/hot/nonwinning, retaining its ID; no reverse graph shortcut or global synonym is added. Flour 2 is a safe clue, and repeat/resume/exact wins pass. Reciprocal Pișcot-to-Biscuit and broader pastry feedback are still imperfect; the selected hidden target nevertheless has a strong defining core. Promote; hold broader Brioșă ambiguity separately.",
+    "sources": [
+     "https://www.barbatlacratita.ro/2016/03/piscoturi-de-casa.html",
+     "https://jamilacuisine.ro/tort-diplomat-facut-in-casa-reteta-video/"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_350",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:08c8c6a82443156c52cd807f2e3723a772bf0c52d3bfc5f5895ab05f209fcf8b",
+    "rationale": "A1/A2/C1/C2/C5: Pișcot is the specifically shaped airy biscuit, supported by dictionary definitions and established Diplomat/Tiramisu use; salience 0.80 meets easy. A3/A4: its egg/flour preparation and serving roles are real. A5/A6: it is a distinct concept, not merely another label for generic Biscuit. C3/C4: 5 recognizable incoming cues and 2330 reachable; the obvious Biscuit family guess now yields 2/hot/nonwinning instead of 714/cold, preserving the submitted biscuit ID. Făină 2 clue and real repeat/resume/exact-win journey pass. Reciprocal generic-biscuit and broad pastry-category feedback remain imperfect, but the selected target now has an honest family opener and defining ingredients. Promote.",
+    "sources": [
+     "https://dexonline.ro/definitie/pi%C8%99cot",
+     "https://www.youtube.com/watch?v=hLVPL_B20qo",
+     "https://jamilacuisine.ro/tort-diplomat-facut-in-casa-reteta-video/"
+    ]
+   }
+  },
+  {
+   "id": "ct_gastronomie_351",
+   "game": "contexto",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:67c6fa22a44878faf13de807ee8ea8153ba5a337469f1d18945a0f6e1d9df839",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "ct_gastronomie_351",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:67c6fa22a44878faf13de807ee8ea8153ba5a337469f1d18945a0f6e1d9df839",
+    "rationale": "Ciocolată is an ordinary solid food with five incoming cues and 1249 responsive concepts. The original liquid-milk recipe is set in a frame and cut into pieces, so it supports solid chocolate, not a drink conflation. Cocoa, sugar and milk are defining hot cues. Hot chocolate keeps its original projected drink ID and Tea fallback elsewhere; only its exact solid-food association becomes 2/hot/nonwinning. Its echoed user-provided label is not an unearned target field. Clue/repeat/resume/exact solid-answer wins pass. Butter and indirect savory/class noise remain debt. Promote this distinct easy target.",
+    "sources": [
+     "https://www.roberteisler.ro/retete/ciocolata-de-casa-1",
+     "https://camarabucovinei.ro/products/ciocolata-de-casa"
+    ]
+   },
+   "verifier_review": {
+    "id": "ct_gastronomie_351",
+    "game": "contexto",
+    "verdict": "promote",
+    "review_binding": "sha256:67c6fa22a44878faf13de807ee8ea8153ba5a337469f1d18945a0f6e1d9df839",
+    "rationale": "A1/A2/C1/C2/C5: Ciocolată is familiar solid-food vocabulary, with the drink meaning separately represented; salience 0.9 meets easy. A3/A4: the actual liquid-milk recipe sets in a frame and is cut into pieces, so it supports a solid homemade-chocolate variant rather than borrowing a beverage claim. Sugar is independently documented by a producer. A5/A6: no prior target or boundary trigger. C3/C4: 5 recognizable ingredient cues and 2330 reachable; cocoa/milk/sugar are hot. The cold 501 hot-drink guess is repaired to 2/hot/nonwinning with its old projected ID and Tea fallback preserved elsewhere. Safe Lapte 2 clue and exact solid-food win pass. User-echoed Ciocolată caldă text is not misclassified as an unearned secret field. Optional butter and savory/class rankings remain debt. Promote.",
+    "sources": [
+     "https://dexonline.ro/definitie/ciocolat%C4%83/23447",
+     "https://www.roberteisler.ro/retete/ciocolata-de-casa-1",
+     "https://camarabucovinei.ro/products/ciocolata-de-casa"
+    ]
+   }
+  }
+ ],
+ "coverage": {
+  "total": 6,
+  "verified": 6,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "provenance": {
+  "analyst": {
+   "path": "docs/reviews/v87-snack-and-action-quality/analyst-review.json",
+   "sha256": "sha256:f19961bb4a6e283173721a830cb0b8c7e62cf35a1f14441ac876e4065e79224a",
+   "reviewer": "root-v87-analyst",
+   "role": "analyst"
+  },
+  "verifier": {
+   "path": "docs/reviews/v87-snack-and-action-quality/verifier-review.json",
+   "sha256": "sha256:61779a2a7ef5337dcf68eb896fc9a6d4d4c334c2fd0210bed93d5814a4664a2f",
+   "reviewer": "v87_independent_quality_and_history_verifier",
+   "role": "verifier"
+  }
+ }
+}

@@ -1,0 +1,107 @@
+{
+  "reviewer": "independent_quality_and_history_lane",
+  "verdict": "accept",
+  "reason": "The runtime nonwinning flag is set only for projected guesses; native guesses and native clues leave the default false. The same allow_exact_pairs=False boundary is used in projected typo filtering. Other proxy/ingredient handling and the exact-self early return remain unchanged.",
+  "source_sha256": {
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "da434a56703eaf2cbe5694c380fc27a3ee2edb9659c060bbb6ced2752d4020c6",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "8fc5829b07ae2bbcfcc4701c5539d35b09d3df5f2ccc25b19a2478bfcf938802"
+  },
+  "projected_base_anchors_intersecting_native_exact_sources": [
+    "tort"
+  ],
+  "old_projected_words_affected": [],
+  "cases": [
+    {
+      "word": "Pandișpan",
+      "target": "n_v87_food_chec",
+      "guess": {
+        "id": "n_v87_food_pandispan",
+        "label": "Pandișpan",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "won": false,
+      "expected_hot": true
+    },
+    {
+      "word": "Biscuit",
+      "target": "n_v87_food_piscot",
+      "guess": {
+        "id": "n_v24_food_snack_biscuit",
+        "label": "Biscuit",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "won": false,
+      "expected_hot": true
+    },
+    {
+      "word": "Prăjitură",
+      "target": "n_v87_food_cremsnit",
+      "guess": {
+        "id": "n_v4gas_prajitura",
+        "label": "Prăjitură",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "won": false,
+      "expected_hot": true
+    },
+    {
+      "word": "tort",
+      "target": "n_v87_food_tort_diplomat",
+      "guess": {
+        "id": "ctxp_7de7b40dd74b4b0f44bf",
+        "label": "Tort",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "won": false,
+      "expected_hot": true
+    },
+    {
+      "word": "ciocolată caldă",
+      "target": "n_v85_food_ciocolata",
+      "guess": {
+        "id": "ctxp_cb75bc0c21d2e2940911",
+        "label": "Ciocolată caldă",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "won": false,
+      "expected_hot": true
+    },
+    {
+      "word": "tort",
+      "target": "n_v87_food_cremsnit",
+      "guess": {
+        "id": "ctxp_7de7b40dd74b4b0f44bf",
+        "label": "Tort",
+        "distance": 4,
+        "rank": 255,
+        "temperature": "Rece",
+        "closeness": 89,
+        "attempt_number": 1
+      },
+      "won": false,
+      "expected_hot": false
+    }
+  ],
+  "note": "Five intended hot cues still work; projected Tort no longer inherits the exact native Prăjitură→Cremșnit override. This is the sole base-anchor composition intersection in current vocabulary. Existing reviewed neighborhood anchors are unchanged, and target overrides use the exact-self guard. No graph, score formula or request/session bound changes."
+}

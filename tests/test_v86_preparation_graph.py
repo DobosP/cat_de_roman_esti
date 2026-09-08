@@ -21,6 +21,7 @@ from cat_de_roman_esti.wordgames import lant as L
 from cat_de_roman_esti.wordgames.packs import get_pack
 from cat_de_roman_esti.wordgames.service import WordGameService, get_service
 from tests.content_scenarios import contexto_seed
+from tests.current_content import CURRENT_CONTENT
 
 ROOT = Path(__file__).resolve().parents[1]
 REVIEW = ROOT / "docs/reviews/v86-preparation-and-route-quality"
@@ -132,15 +133,16 @@ def test_served_graph_is_the_exact_independently_reviewed_preparation_batch():
 
 
 def test_complete_v85_graph_and_every_old_native_owner_reconstruct_exactly():
-    from tests.content_history import before_v86_fixture
+    from tests.content_history import before_v86_fixture, before_v87_fixture
 
     current = _json(FIXTURE)
+    v86 = before_v87_fixture(current)
     baseline = before_v86_fixture(current)
     encoded = (json.dumps(baseline, ensure_ascii=False, indent=2) + "\n").encode()
     assert hashlib.sha256(encoded).hexdigest() == BASELINE_SHA256
     assert FIXTURE.read_bytes() == (ROOT / "tests/fixtures/kg_sample.json").read_bytes()
-    assert len(current["kg_nodes"]) - len(baseline["kg_nodes"]) == 9
-    assert len(current["kg_edges"]) - len(baseline["kg_edges"]) == 41
+    assert len(v86["kg_nodes"]) - len(baseline["kg_nodes"]) == 9
+    assert len(v86["kg_edges"]) - len(baseline["kg_edges"]) == 41
     assert current["kg_puzzles"] == baseline["kg_puzzles"]
     assert all(edge in current["kg_edges"] for edge in baseline["kg_edges"])
     old_nodes = {node["id"]: node for node in baseline["kg_nodes"]}
@@ -290,13 +292,15 @@ def test_freezer_core_outweighs_indirect_oven_and_yeast_without_equating_refrige
 
 
 def test_only_freezer_projection_retires_and_audit_metadata_cannot_score():
-    from tests.content_history import before_v86_projection_rows
+    from tests.content_history import before_v86_projection_rows, before_v87_projection_rows
 
     live = [(term.surface, term.anchor_id, term.domain, term.rank_penalty,
              term.mapping_kind, term.public_id) for term in P.PROJECTION_TERMS]
     before = before_v86_projection_rows(live)
-    assert len(before) == 469 and len(live) == 468
-    assert [row for row in before if row[0] != "congelator"] == live
+    v86 = before_v87_projection_rows(live)
+    assert len(before) == 469 and len(v86) == 468
+    assert [row for row in before if row[0] != "congelator"] == v86
+    assert len(live) == CURRENT_CONTENT.projection_terms
     assert P.resolve_projection("congelator") is None
     assert get_service().resolve("congelator") == "n_v86_kitchen_congelator"
     terms = [asdict(term) for term in P.PROJECTION_TERMS]

@@ -4,12 +4,12 @@
   "app": "cat_de_roman_esti",
   "schema_version": 1,
   "manifest_version": 1,
-  "build_version": "fixture-v86-preparation-and-route-quality",
+  "build_version": "fixture-v87-snack-and-action-quality",
   "generated_at": "2026-06-21T00:00:00Z",
-  "content_hash": "sha256:bd2ccd079148398fc7732f9ade2ca6e0259d1613d3a7e5a8f97c791f746e9c82",
+  "content_hash": "sha256:7473bfe7d42189a28cf933032705b288ff2933fd8eeaf30c65a2dba3be4e79d4",
   "counts": {
-   "nodes": 2397,
-   "edges": 9360,
+   "nodes": 2406,
+   "edges": 9410,
    "puzzles": 180
   }
  },
@@ -9357,6 +9357,42 @@
   {
    "id": "n_v86_kitchen_mixer",
    "label_ro": "Mixer de bucătărie"
+  },
+  {
+   "id": "n_v87_food_bicarbonat",
+   "label_ro": "Bicarbonat de sodiu alimentar"
+  },
+  {
+   "id": "n_v87_food_briosa",
+   "label_ro": "Brioșă"
+  },
+  {
+   "id": "n_v87_food_chec",
+   "label_ro": "Chec"
+  },
+  {
+   "id": "n_v87_food_cremsnit",
+   "label_ro": "Cremșnit"
+  },
+  {
+   "id": "n_v87_food_gelatina",
+   "label_ro": "Gelatină alimentară"
+  },
+  {
+   "id": "n_v87_food_pandispan",
+   "label_ro": "Pandișpan"
+  },
+  {
+   "id": "n_v87_food_piscot",
+   "label_ro": "Pișcot"
+  },
+  {
+   "id": "n_v87_food_praf_copt",
+   "label_ro": "Praf de copt"
+  },
+  {
+   "id": "n_v87_food_tort_diplomat",
+   "label_ro": "Tort Diplomat"
   },
   {
    "id": "n_varful_moldoveanu",
@@ -54930,9 +54966,109 @@
    "dst_id": "n_net_fenomen_viral"
   },
   {
+   "id": "de8700",
+   "src_id": "n_v24_food_pantry_faina",
+   "dst_id": "n_v24_food_snack_biscuit"
+  },
+  {
+   "id": "de8701",
+   "src_id": "n_v24_food_breakfast_unt",
+   "dst_id": "n_v24_food_snack_biscuit"
+  },
+  {
+   "id": "de8702",
+   "src_id": "n_v24_food_pantry_zahar",
+   "dst_id": "n_v24_food_snack_biscuit"
+  },
+  {
+   "id": "de8703",
+   "src_id": "n_v84_food_cuptor",
+   "dst_id": "n_v24_food_snack_biscuit"
+  },
+  {
+   "id": "de8704",
+   "src_id": "n_v87_food_praf_copt",
+   "dst_id": "n_v24_food_snack_biscuit"
+  },
+  {
+   "id": "de8705",
+   "src_id": "n_v87_food_bicarbonat",
+   "dst_id": "n_v24_food_snack_biscuit"
+  },
+  {
+   "id": "de8706",
+   "src_id": "n_v24_food_pantry_faina",
+   "dst_id": "n_v87_food_chec"
+  },
+  {
+   "id": "de8707",
+   "src_id": "n_v4gas_ou",
+   "dst_id": "n_v87_food_chec"
+  },
+  {
+   "id": "de8708",
+   "src_id": "n_v24_food_pantry_zahar",
+   "dst_id": "n_v87_food_chec"
+  },
+  {
+   "id": "de8709",
+   "src_id": "n_v24_food_pantry_ulei",
+   "dst_id": "n_v87_food_chec"
+  },
+  {
    "id": "de871",
    "src_id": "n_net_mircea_bravo",
    "dst_id": "n_cinematografia_romaneasca"
+  },
+  {
+   "id": "de8710",
+   "src_id": "n_v85_food_cacao",
+   "dst_id": "n_v87_food_chec"
+  },
+  {
+   "id": "de8711",
+   "src_id": "n_v87_food_praf_copt",
+   "dst_id": "n_v87_food_chec"
+  },
+  {
+   "id": "de8712",
+   "src_id": "n_v24_food_pantry_faina",
+   "dst_id": "n_v87_food_pandispan"
+  },
+  {
+   "id": "de8713",
+   "src_id": "n_v86_food_albus",
+   "dst_id": "n_v87_food_pandispan"
+  },
+  {
+   "id": "de8714",
+   "src_id": "n_v86_food_galbenus",
+   "dst_id": "n_v87_food_pandispan"
+  },
+  {
+   "id": "de8715",
+   "src_id": "n_v24_food_pantry_zahar",
+   "dst_id": "n_v87_food_pandispan"
+  },
+  {
+   "id": "de8716",
+   "src_id": "n_v84_food_cuptor",
+   "dst_id": "n_v87_food_pandispan"
+  },
+  {
+   "id": "de8717",
+   "src_id": "n_v84_food_aluat",
+   "dst_id": "n_v87_food_cremsnit"
+  },
+  {
+   "id": "de8718",
+   "src_id": "n_v86_food_crema_vanilie",
+   "dst_id": "n_v87_food_cremsnit"
+  },
+  {
+   "id": "de8719",
+   "src_id": "n_v86_food_zahar_pudra",
+   "dst_id": "n_v87_food_cremsnit"
   },
   {
    "id": "de872",
@@ -54940,14 +55076,164 @@
    "dst_id": "n_net_5gang"
   },
   {
+   "id": "de8720",
+   "src_id": "n_v86_food_amidon",
+   "dst_id": "n_v87_food_cremsnit"
+  },
+  {
+   "id": "de8721",
+   "src_id": "n_v24_home_appliances_frigider",
+   "dst_id": "n_v87_food_cremsnit"
+  },
+  {
+   "id": "de8722",
+   "src_id": "n_v87_food_piscot",
+   "dst_id": "n_v87_food_tort_diplomat"
+  },
+  {
+   "id": "de8723",
+   "src_id": "n_v86_food_frisca",
+   "dst_id": "n_v87_food_tort_diplomat"
+  },
+  {
+   "id": "de8724",
+   "src_id": "n_v87_food_gelatina",
+   "dst_id": "n_v87_food_tort_diplomat"
+  },
+  {
+   "id": "de8725",
+   "src_id": "n_v24_food_imported_fruit_portocala",
+   "dst_id": "n_v87_food_tort_diplomat"
+  },
+  {
+   "id": "de8726",
+   "src_id": "n_v24_home_appliances_frigider",
+   "dst_id": "n_v87_food_tort_diplomat"
+  },
+  {
+   "id": "de8727",
+   "src_id": "n_v24_food_pantry_faina",
+   "dst_id": "n_v87_food_piscot"
+  },
+  {
+   "id": "de8728",
+   "src_id": "n_v86_food_albus",
+   "dst_id": "n_v87_food_piscot"
+  },
+  {
+   "id": "de8729",
+   "src_id": "n_v86_food_galbenus",
+   "dst_id": "n_v87_food_piscot"
+  },
+  {
    "id": "de873",
    "src_id": "n_net_selly",
    "dst_id": "n_net_creator_de_continut"
   },
   {
+   "id": "de8730",
+   "src_id": "n_v86_food_zahar_pudra",
+   "dst_id": "n_v87_food_piscot"
+  },
+  {
+   "id": "de8731",
+   "src_id": "n_v84_food_cuptor",
+   "dst_id": "n_v87_food_piscot"
+  },
+  {
+   "id": "de8732",
+   "src_id": "n_v24_food_pantry_faina",
+   "dst_id": "n_v87_food_briosa"
+  },
+  {
+   "id": "de8733",
+   "src_id": "n_v24_food_breakfast_unt",
+   "dst_id": "n_v87_food_briosa"
+  },
+  {
+   "id": "de8734",
+   "src_id": "n_v87_food_praf_copt",
+   "dst_id": "n_v87_food_briosa"
+  },
+  {
+   "id": "de8735",
+   "src_id": "n_v85_food_ciocolata",
+   "dst_id": "n_v87_food_briosa"
+  },
+  {
+   "id": "de8736",
+   "src_id": "n_v84_food_drojdie",
+   "dst_id": "n_v87_food_briosa"
+  },
+  {
+   "id": "de8737",
+   "src_id": "n_v87_food_bicarbonat",
+   "dst_id": "n_v87_food_praf_copt"
+  },
+  {
+   "id": "de8738",
+   "src_id": "n_v87_food_bicarbonat",
+   "dst_id": "n_v21gas_turta_dulce"
+  },
+  {
+   "id": "de8739",
+   "src_id": "n_v87_food_bicarbonat",
+   "dst_id": "n_gas_mici"
+  },
+  {
    "id": "de874",
    "src_id": "n_net_selly",
    "dst_id": "n_net_challenge_online"
+  },
+  {
+   "id": "de8740",
+   "src_id": "n_v87_food_gelatina",
+   "dst_id": "n_v86_food_frisca"
+  },
+  {
+   "id": "de8741",
+   "src_id": "n_v87_food_gelatina",
+   "dst_id": "n_v3gas_inghetata"
+  },
+  {
+   "id": "de8742",
+   "src_id": "n_v87_food_gelatina",
+   "dst_id": "n_gas_piftie"
+  },
+  {
+   "id": "de8743",
+   "src_id": "n_v24_food_pantry_zahar",
+   "dst_id": "n_v85_food_ciocolata"
+  },
+  {
+   "id": "de8744",
+   "src_id": "n_v4gas_lapte",
+   "dst_id": "n_v85_food_ciocolata"
+  },
+  {
+   "id": "de8745",
+   "src_id": "n_v87_food_chec",
+   "dst_id": "n_v4gas_lapte"
+  },
+  {
+   "id": "de8746",
+   "src_id": "n_v87_food_pandispan",
+   "dst_id": "n_v18gas_amandina"
+  },
+  {
+   "id": "de8747",
+   "src_id": "n_v87_food_cremsnit",
+   "dst_id": "n_v4gas_prajitura"
+  },
+  {
+   "id": "de8748",
+   "src_id": "n_v87_food_tort_diplomat",
+   "dst_id": "n_v2gas_desert"
+  },
+  {
+   "id": "de8749",
+   "src_id": "n_v87_food_briosa",
+   "dst_id": "n_gas_cozonac"
   },
   {
    "id": "de875",

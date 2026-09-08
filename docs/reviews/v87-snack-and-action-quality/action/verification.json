@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "reviewed_date": "2026-09-08",
+  "author": "v85_board_clarity (implementation author; self-test and rendered visual QA, not independent code review)",
+  "baseline_commit": "daae025b19517c18cba2f46c6b11ea4991d9a19c",
+  "source_freeze": true,
+  "baseline_reproduction": {
+    "command": "PATH=<shared Python venv>:<Node24>:$PATH CDR_E2E_PORT=8188 npx playwright test --config <task scratch>/action/proof/playwright.config.mjs",
+    "exit_code": 0,
+    "assertions_passed": 2,
+    "reported_duration": "9.6s",
+    "meaning": "Two tests assert and demonstrate bad baseline behavior, not product acceptance.",
+    "findings": [
+      "A committed winning guess with a lost 503 response leaves no result or score; retry returns 400 and still strands the UI.",
+      "A lost committed paid-clue response leaves the old clue button; natural retry spends a second clue."
+    ],
+    "baseline_source_bindings": {
+      "frontend/src/screens/CaldRece.tsx": "7536a3f87727278118ec946b09764df6669b16632f462d2dc9aca82ceec22603",
+      "cat_de_roman_esti/web/static/.vite/manifest.json": "b921bcfa235e2ee811ffd009c9c5df44f9dea0bccd49f439dc8d6b7634cc3b6d"
+    },
+    "files": {
+      "baseline.spec.mjs": {
+        "log": "proof/baseline.spec.mjs.gz",
+        "log_sha256": "285f2606f60eb60f346c9eebea27cd7f1d3ee6cf42c630c57327531f81112fe0",
+        "compression": "gzip",
+        "archive_sha256": "a82a2fdee90ce87ccc0aaaa47c355bc02044fc5a3a9a51bc9df809b5ab77c481"
+      },
+      "playwright.config.mjs": {
+        "log": "proof/playwright.config.mjs.gz",
+        "log_sha256": "1bd34ac9a459e395173641fc68452d4515609bc81cd062290a160412355d3b19",
+        "compression": "gzip",
+        "archive_sha256": "76aa735d86f52e40f874d1e5d5a11791db962ad8f8f30b9a6d7670c0659f3c30"
+      },
+      "lost-win.json": {
+        "sha256": "c598f614d085bd7fd3d9b4c5f43cd0ddd83584883d4b7b6a21bcf2f432786807"
+      },
+      "lost-clue.json": {
+        "sha256": "289b479cf0212f2a7b7aced051c8358b85e56916fe86539311502f1b7f62e0f3"
+      },
+      "lost-win.png": {
+        "sha256": "b3e11cabc900b70dc7069006cd79867f4c9512f5af897738a666c70061808631"
+      }
+    },
+    "log": "proof/baseline-proof.log.gz",
+    "log_sha256": "fcf050e9ec4b6e85eb8900d35a6af69dc9615ff1e8e02e73c223561b90505a45",
+    "compression": "gzip",
+    "archive_sha256": "712d75a30e6b6b277729c2aa6ff181ebc0a952661eccc895784eb54c84a9ec69"
+  },
+  "native_runs": [
+    {
+      "id": "initial",
+      "command": "PATH=<Node24>:$PATH npm test",
+      "exit_code": 1,
+      "tests": 192,
+      "passed": 189,
+      "failed": 3,
+      "failures": "Three historical source-shape checks pinned old handler windows, dependencies and HTTP400-only recovery. They were updated to require bounded handler regions, synchronous ownership, conditional pointer cleanup and the broader authoritative recovery. No application change was made to satisfy stale shapes.",
+      "log": "runs/native-initial.log.gz",
+      "log_sha256": "a6a737dec54c5286fa3321e15b51ca9f49967b4822e2246f30ead556438a3010",
+      "compression": "gzip",
+      "archive_sha256": "1ff633f09134a4dcf155cd48d015ab62c00f3614aafed40d24f19b74a516b4b2"
+    },
+    {
+      "id": "after-expectation-update",
+      "command": "PATH=<Node24>:$PATH npm test",
+      "exit_code": 0,
+      "tests": 192,
+      "passed": 192,
+      "failed": 0,
+      "duration_ms": 1097.930213,
+      "log": "runs/native-after-expectation-update.log.gz",
+      "log_sha256": "055799e1dbd4c18c1a06f1ccacf11a9fb8ad442c33897477ea4d393c8eca1dda",
+      "compression": "gzip",
+      "archive_sha256": "5655f12f7220e8bc2150a2de7ce7d0a3deac31229b34994b21829e0079bc5173"
+    },
+    {
+      "id": "final",
+      "command": "PATH=<Node24>:$PATH npm test",
+      "exit_code": 0,
+      "tests": 193,
+      "passed": 193,
+      "failed": 0,
+      "skipped": 0,
+      "duration_ms": 1080.705652,
+      "coverage_note": "Includes all 177 inherited tests and 16 new actual controller behaviors. The final added case verifies an already different saved pointer pauses before any request.",
+      "log": "runs/native-final.log.gz",
+      "log_sha256": "33f096599eee70a1e2bf9f50fea99a7c2efed30e86bd5015557dfddb14387366",
+      "compression": "gzip",
+      "archive_sha256": "ab068450a3a72b4f772bb20b36d99d557f5141630e69c7e5ca57db487e6641ed"
+    }
+  ],
+  "final_lint": {
+    "command": "PATH=<Node24>:$PATH npm run lint",
+    "exit_code": 0,
+    "log": "runs/lint-final.log.gz",
+    "log_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+    "compression": "gzip",
+    "archive_sha256": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a"
+  },
+  "final_build": {
+    "command": "PATH=<Node24>:$PATH npm run build",
+    "exit_code": 0,
+    "initial_gzip_kib": 118.9,
+    "limit_kib": 120,
+    "threshold_changed": false,
+    "coverage": "TypeScript, Vite build and bundle budget passed. Root subsequently refreshed seed38 content only; application sources and built bytes remained frozen.",
+    "log": "runs/build-final.log.gz",
+    "log_sha256": "3258c1a30ac75c7779b52a8af5608ccae33f8c4c37ae8ec7e115c47b9d9a4c75",
+    "compression": "gzip",
+    "archive_sha256": "fa0e6f3eda52f8908bcf408204194294c0837f9e33a94a2e963070dd9c6cb857"
+  },
+  "browser_runs": [
+    {
+      "id": "first-and-final-focused",
+      "command": "PATH=<shared Python venv>:<Node24>:$PATH CDR_E2E_PORT=8188 CDR_E2E_OUTPUT_DIR=<task scratch>/action/browser-initial-results npx playwright test e2e/contexto-action-recovery.spec.mjs",
+      "exit_code": 0,
+      "selected": 20,
+      "passed": 20,
+      "failed": 0,
+      "desktop": 10,
+      "mobile": 10,
+      "reported_duration": "52.9s",
+      "attempts": 1,
+      "coverage": [
+        "Lost committed winning response adopts server result, records once, clears only its pointer; reload does not double count.",
+        "Lost paid clue response restores first clue with one mutation and one GET, preserving paid counters.",
+        "Lost give-up response adopts terminal answer without a score or replay.",
+        "Failed verification persists beside input, disables mutations and allows only an explicit GET retry.",
+        "Failure before mutation commit restores exact counters, retains text and waits for an explicit later guess.",
+        "Late winning and missing GETs cannot adopt, score or clear another tab’s replacement round.",
+        "Exit invalidates a held recovery; a later screen/new pointer remains untouched.",
+        "An already different saved pointer blocks the old POST before any cost.",
+        "A verified owned missing session returns to setup and clears only its pointer."
+      ],
+      "log": "runs/browser-initial.log.gz",
+      "log_sha256": "496ec720d2f127b6e765d6a26f89c841ab2feff18cdb0b644f46c2ef86434138",
+      "compression": "gzip",
+      "archive_sha256": "4fb6826f3faab742f06a60e596287f9cb3994f0766defca887b999fac0f8c0f2"
+    }
+  ],
+  "no_playwright_retries_or_timeout_relaxations": true,
+  "application_changes_after_first_focused_run": false,
+  "source_bindings": {
+    "frontend/src/contextoActionRecovery.mjs": "40ece15c03a1a27d69eba02ea3d51b242e7405f72713ab9dc7999139d644f9d0",
+    "frontend/src/contextoActionRecovery.d.mts": "ce08589d200a173aff56ae2ec502ea89668dda14e4f5323557445ad583d95c6b",
+    "frontend/src/screens/CaldRece.tsx": "693793475686b08197ae3d2e4a6f40e6a01965a1b9c73469895fd2cf6df09a13",
+    "frontend/tests/contexto-action-recovery.test.mjs": "a7c912b512a08e2ecb52b0770e6e159f8cde9e1b6c76d350a1f71ad36a1c8bbe",
+    "frontend/tests/cald-rece-recovery.test.mjs": "48c33b457f70e1263642a4b06ea5e7c4a49ae72a9fd878ef604b61275fc826c6",
+    "frontend/tests/contexto-progressive-clue.test.mjs": "00b8bef8db7bc07b61e6e5f6925653b9d1a4d08fcc83371dbf3e1492631129c2",
+    "frontend/tests/v42-caldrece-legend-confirm.test.mjs": "93f27564377736a23061388ac64bc7758b79c845f2cad3750e645761b4a2f454",
+    "frontend/e2e/contexto-action-recovery.spec.mjs": "da6c7c56eb59939471fd2e4da378b3f9fe0c86e3544fc2185feba30ace1af1a6",
+    "docs/adr/0126-reconcile-uncertain-contexto-actions.md": "4e83a3dc48f83789824070372e8383570574921c2544f6b123419a2bbc79d0fd"
+  },
+  "unchanged_dependency_bindings": {
+    "frontend/src/asyncControl.mjs": "452b9a553cbf319268d32b4f17a0ba70c8692ca43f3fcfd055ccf241412cf211",
+    "frontend/src/hooks/useActiveGame.ts": "08e3dc295f75ee5b11f14a86b7b2836f7af73d7f5238decf7c650004c391cd02",
+    "frontend/src/hooks/useSavedGameResume.ts": "dff224adb580b3996c9145decb87fce217125de2cf1350b2e144919bc81070a5",
+    "frontend/src/hooks/useRecordScore.ts": "303cda5da3e26595ed39a5f9b2028ed6634318fc6c4a02bb9480dc310f3fee4b",
+    "frontend/e2e/games.mjs": "47c7b3ad534fcb7c1756f02e9501420c737b7ef7fcd03d713239508807b54e61",
+    "frontend/playwright.config.mjs": "4dcad7d73cdc4e10133afaa143417621ce5a445978c30740dad08fbfabcc0541"
+  },
+  "built_manifest_sha256": "9fb0f0eee097f16170df013cc9989a3b6e1014a657f3ae596acc782449e70735",
+  "browser_content_inputs": {
+    "frontend/e2e/seeded-starts.json": "19cce8271ed192c05e28f3521ee84572d2c4f44104d4726e8b1c6c75cc77ef05",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "96d50f8b724b9d1d1ff5d02b5a9a206445d7d9edead778d6db173f00ac094bfa",
+    "cat_de_roman_esti/fixtures/games_pack.json": "536036f6d030be4e8750fb104325b67a9363535506d453ef8a0e0a824a3b63ab",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "f4e16944845311eeba231f866c5578a4f1de9ee40e08857cca575930a2bf1278"
+  },
+  "screenshots": {
+    "screenshots/desktop-read-only-recovery.png": {
+      "sha256": "df91af25df296c52e72a25641d9d7d27e5fb93ca16d8e34ac86747852c18600e",
+      "visually_inspected": true,
+      "observation": "Readable persistent notice and verification button beside retained input; mutation controls visibly disabled; browser assertion verifies notice is within the viewport."
+    },
+    "screenshots/mobile-read-only-recovery.png": {
+      "sha256": "355a5ae0eaee0845bf3969c525ee271e311b58bff25bf96aaae32c61dc722c4c",
+      "visually_inspected": true,
+      "observation": "Readable persistent notice and verification button beside retained input; mutation controls visibly disabled; browser assertion verifies notice is within the viewport."
+    }
+  },
+  "confirmed_invariants": [
+    "No automatic mutation replay; one bounded active ticket, no accumulating client history.",
+    "No new API or session fields, no score changes, 7200-second sliding TTL, 1000 sessions/game and 64 KiB request limits unchanged.",
+    "Only server-confirmed terminal states reveal answers or supply scores.",
+    "Failed GET never falls back to stale state; changed pointer and stale operation cannot adopt or clear replacement state.",
+    "Preexisting saved-pointer change is detected before POST; explicit current-game load reuses saved-resume ownership checks."
+  ],
+  "limits": [
+    "Browser faults replace or delay actual BFF responses; they do not claim backend idempotency or distributed exactly-once execution.",
+    "Mobile header HUD remains its existing horizontal strip; this change concerns recovery controls, whose viewport assertion and screenshot pass.",
+    "Root owns the full combined release matrix and independent code review; this receipt records focused author verification."
+  ],
+  "archive_note": "Raw logs and proof script/config bytes are preserved losslessly using gzip mtime=0. log_sha256 binds decoded bytes and archive_sha256 binds the committed archive. Original files remain in task scratch."
+}
