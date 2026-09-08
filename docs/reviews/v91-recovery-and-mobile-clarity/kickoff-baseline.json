@@ -1,0 +1,119 @@
+{
+  "phase": "V91 measured baseline; complete this version only, no V92",
+  "baseline_commit": "e2e03638b90fc9248c33f70eedaa8c9c5fbd87ad",
+  "date": "2026-09-08",
+  "source_sha256": {
+    "frontend/src/screens/Intrusul.tsx": "57cdc75c05468e692eeb12b3591e5ca7eb3ece5b3806432950bd63936e90f11e",
+    "frontend/src/screens/Perechi.tsx": "5741f63a8edd39bf9f6886004f222f9ea6f1aca6536fadb046b03ee02cf18d37",
+    "frontend/src/components/Hud.tsx": "9abbb288c030e054392ff16597ad2df7aec834558707f05906fbc03a0af6002d",
+    "frontend/src/styles/arcade.css": "a4bd0e004173f408cb301301bf27d9d15a7443c71355e4f080accc2c9715ac8e",
+    "frontend/src/App.tsx": "8e879fc2b334d2039876bc3a8852da239f12457336175291dc26159308571a04",
+    "frontend/src/gameActionRecovery.mjs": "b73851fd616aed6489139cd800bad2e8e6ab3480664470e765fd044ba9eb6267",
+    "frontend/src/hooks/useSavedGameResume.ts": "dff224adb580b3996c9145decb87fce217125de2cf1350b2e144919bc81070a5",
+    "cat_de_roman_esti/wordgames/intrusul.py": "5293a4bdae57d4f1f074d993f832ad8f679d6da0ba7d4d53f285909bcaa86299",
+    "cat_de_roman_esti/wordgames/perechi.py": "7403989c163d6f040229348ac87b5e738628ee3e30576202f8b316cd2d257e63",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e32139529aacc88e2f453ac1cee1d8cd9a2cd1b16f3ee0551a5a76779192391e",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "6ac090bc2186bf00209913d1123ba3f54de9f7b02f9fa2a781f2dfcccbbf58a9"
+  },
+  "actual_paid_hint_resume_probes": [
+    {
+      "game": "intrusul",
+      "before_hint_available": true,
+      "earned_field": "clue",
+      "earned_payload": {
+        "label": "Regi ai manelelor",
+        "message": "Trei cuvinte țin de: Regi ai manelelor."
+      },
+      "post_get_same_earned_payload": true,
+      "hints_used_after_get": 1,
+      "repeat_hint_http": 400,
+      "hints_used_after_rejected_repeat": 1,
+      "source_id": "cx_muzica_053"
+    },
+    {
+      "game": "perechi",
+      "before_hint_available": true,
+      "earned_field": "hint",
+      "earned_payload": {
+        "tiles": [
+          {
+            "id": "n_v11per_corneliu_coposu",
+            "label": "Corneliu Coposu"
+          },
+          {
+            "id": "n_v11per_iuliu_maniu",
+            "label": "Iuliu Maniu"
+          }
+        ],
+        "label": "Opoziție anticomunistă"
+      },
+      "post_get_same_earned_payload": true,
+      "hints_used_after_get": 1,
+      "repeat_hint_http": 400,
+      "hints_used_after_rejected_repeat": 1,
+      "source_id": "cx_personalitati_277"
+    }
+  ],
+  "sport_record": {
+    "difficulty": "usor",
+    "seeds": [
+      "n_spt_washington_bullets",
+      "n_v3spo_medalie",
+      "n_spt_record_100m_liber_2022",
+      "n_spt_cristina_neagu",
+      "n_spt_bazin_olimpic",
+      "n_spt_tricolorii"
+    ],
+    "target": "n_spt_liga_campionilor_handbal",
+    "target_depth": 2,
+    "id": "al_sport_083",
+    "category": "sport",
+    "source": "ai",
+    "status": "approved"
+  },
+  "sport_seed_labels": [
+    "Washington Bullets",
+    "Medalie",
+    "Recordul la 100 m liber din 2022",
+    "Cristina Neagu",
+    "Bazin olimpic",
+    "Tricolorii"
+  ],
+  "approved_thin_targets": [
+    {
+      "id": "ct_geografie_030",
+      "target": "n_lacul_rosu",
+      "label": "Lacul Roșu",
+      "incoming_count": 1,
+      "status": "approved"
+    },
+    {
+      "id": "ct_geografie_031",
+      "target": "n_pestera_scarisoara",
+      "label": "Peștera Scărișoara",
+      "incoming_count": 2,
+      "status": "approved"
+    },
+    {
+      "id": "ct_istorie_309",
+      "target": "n_v20ist_abdicarea_regelui_mihai",
+      "label": "Abdicarea Regelui Mihai",
+      "incoming_count": 4,
+      "status": "approved"
+    },
+    {
+      "id": "ct_muzica_070",
+      "target": "n_muz_bug_mafia",
+      "label": "B.U.G. Mafia",
+      "incoming_count": 4,
+      "status": "approved"
+    }
+  ],
+  "limits": [
+    "This is BFF clue-persistence/cap evidence, not a browser loss or ownership reproduction.",
+    "Existing clues already survive GET; no second hint charge or missing backend cue is claimed.",
+    "Sport recognition/discovery and C3 findings are review questions, not approved revisions.",
+    "No V91 source/data changes or promotions are delivered by kickoff."
+  ]
+}

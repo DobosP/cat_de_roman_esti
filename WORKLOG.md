@@ -762,3 +762,13 @@ landing V91 as well before stopping. Automatic recurrence is paused. Finish the 
 V91 worktree through independent review and green local merge; do not create V92.
 ADR-0137 supersedes continuing-loop authority while retaining all landing/safety gates.
 This is a direct bounded continuation, not permission to land unverified work.
+
+## V91 bounded baseline checkpoint (2026-09-08)
+
+Valid until: V91 changes the bound baseline — then treat as history.
+
+V91 begins abovee2e0363 as the final authorized version. Fresh15-request BFF evidence
+shows Intrusul/Perechi clues already surviveGET and repeated hints are rejected without
+another charge. Browser uncertainty/ownership still needs reproduction. Existing Sport
+record083 and four thin approved Contexto targets are review questions, not approved
+changes. No V91 implementation is claimed; finish its green local landing, then stop.
