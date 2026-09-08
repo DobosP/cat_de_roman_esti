@@ -35,7 +35,7 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0124 | [Persistent game creation failures](0124-persist-new-game-creation-failures.md) | accepted |
 | 0125 | [Reviewed snack concepts and defining biscuit cues](0125-reviewed-snack-concepts-and-biscuit-cues.md) | accepted |
 | 0126 | [Authoritative Contexto action recovery](0126-reconcile-uncertain-contexto-actions.md) | accepted |
-| 0127 | [Recurring verified local version loop](0127-recurring-local-version-loop.md) | accepted |
+| 0127 | [Recurring verified local version loop](0127-recurring-local-version-loop.md) | superseded by 0137 |
 | 0128 | [Recover uncertain Lanț actions](0128-reconcile-uncertain-lant-actions.md) | accepted |
 | 0129 | [Portable projection-bound Alchimie reviews](0129-portable-alchimie-projection-reviews.md) | accepted |
 | 0130 | [Closed native bread-family feedback](0130-closed-native-bread-family-feedback.md) | accepted |
@@ -45,6 +45,8 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0134 | [Directed Contexto incoming-neighbor floor](0134-directed-contexto-neighbor-floor.md) | accepted |
 | 0135 | [Household discovery concepts and native Praf](0135-household-discovery-concepts.md) | accepted |
 | 0136 | [Recover uncertain Alchimie actions](0136-reconcile-uncertain-alchimie-actions.md) | accepted |
+
+| 0137 | [Finish V91 and stop automatic iteration](0137-finish-v91-and-stop-iteration-loop.md) | accepted |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially

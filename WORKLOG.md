@@ -752,3 +752,13 @@ surfaces remain backlog; mined targets are distinct from curated approval.
 The local loop remains active. No push, deployment, accounts rollout or external contact
 occurred. Clean up only the verified-merged V90 branch/worktree/scratch after this record.
 Candidate hashes refer to13a78fd; this transition changes living documentation only.
+
+## Owner stopping point: complete V91 (2026-09-08)
+
+Valid until: V91 lands or the owner changes the scope — then treat as history.
+
+After V90 landed, the owner requested stopping the loop, then explicitly requested
+landing V91 as well before stopping. Automatic recurrence is paused. Finish the existing
+V91 worktree through independent review and green local merge; do not create V92.
+ADR-0137 supersedes continuing-loop authority while retaining all landing/safety gates.
+This is a direct bounded continuation, not permission to land unverified work.

@@ -1,13 +1,13 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-08 — V90 landed locally; V91 started; local loop active. Production last checked 2026-08-27.
+Last verified: 2026-09-08 — V90 landed locally; finish V91, then stop automatic iteration. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
   V90 is merged through `13a78fd`, including implementation `0039b1e`; it follows V89.
-  V91 starts on `feat/v91-recovery-and-mobile-clarity`; the local loop remains active
-  until stopped (ADR-0127).
+  V91 is the final authorized task on `feat/v91-recovery-and-mobile-clarity`. Finish its
+  green local landing, then stop; do not start V92 (ADR-0137).
 - V90 adds Praf, Firimitură and Scamă: three concepts, 17 directed links, ten grammatical
   forms and zero synonyms. Thirteen old node degree fields regenerate; every old semantic
   field, owner, stored form, edge and all 180 CLI puzzles remain unchanged.
@@ -97,9 +97,10 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
 
 ## Remaining gates and costs
 
-- V91 starts remaining Intrusul/Perechi recovery reproduction, shared mobile HUD/notice
+- Finish V91: remaining Intrusul/Perechi recovery reproduction, shared mobile HUD/notice
   clarity and existing easy-content review, including al_sport_083 and four C3 warnings.
-  No V91 implementation or promotion yet; human/player/device acceptance remains unrun.
+  No V91 implementation or promotion yet. Stop after its landing; no V92 is authorized.
+  Human/player/device acceptance remains unrun.
 - Praf loses its broad earth approximation: 227 old-target ranks rise and 13 fall; Mop2→6
   remains hot. Other changed same-rank observations include closeness and 20 temperature
   shifts. The eight lower-rank existing-identity changes all concern Mop, not universal gains.
@@ -111,4 +112,4 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
 ## Doc map
 
 - `README.md` / `AGENTS.md`: orientation; `docs/agent-map.md` / `docs/agent-testing.md`: routes/gates.
-- `docs/adr/` (newest 0136), `docs/reviews/`, WORKLOG: decisions, evidence and history.
+- `docs/adr/` (newest 0137), `docs/reviews/`, WORKLOG: decisions, evidence and history.

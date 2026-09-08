@@ -1,6 +1,6 @@
 # ADR-0127: Continue verified local versions until the owner stops the loop
 
-- Status: accepted
+- Status: superseded by ADR-0137 (automatic iteration stopped; complete V91 only)
 - Date: 2026-09-08
 
 ## Context
@@ -45,3 +45,9 @@ active; its native schedule and machine-specific state remain in the application
 The first V88 implementation and future unattended landings are not yet verified.
 Automated critique and browser emulation do not establish human Romanian-player or
 real-device acceptance. Public rollout remains gated by DEPLOY and BETA_CANDIDATE.
+
+## Owner stop condition
+
+[ADR-0137](0137-finish-v91-and-stop-iteration-loop.md) records the later owner instruction:
+V90 is landed; finish and land V91, then stop. Earlier recurring wakes do not authorize
+V92 or further versions. Existing green local landing and scope boundaries remain.
