@@ -1,59 +1,54 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-08 — V88 landed locally; V89 started; verified local loop active. Production last checked 2026-08-27.
+Last verified: 2026-09-08 — V89 GREEN candidate; local landing pending. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-  V88 is merged at `000b0a2`, following V87 and its landing record `2878417`.
-  V89 starts on `feat/v89-feedback-and-conexiuni-recovery`; the local loop continues (ADR-0127).
-- V88 adds Compas, Echer, Raportor, Mătură, Taburet, Cratiță and qualified Smântână dulce
-  pentru frișcă: seven concepts, 28 forms (25 grammatical + three qualified), zero synonyms.
-  It adds 33 directed links and removes exactly the unsupported fermented-cream→Frișcă
-  edge de8676 (net32). Ordinary Smântână keeps its fermented owner and aliases (ADR-0131).
-- Three new approved/selectable rounds: Alchimie Cremșnit (`al_gastronomie_107`, three
-  actions, four useful openings) and two everyday Conexiuni boards (`cx_viata_de_roman_362/363`).
-  Diplomat is held after the correct cream link made its old seeds a one-pair shortcut;
-  alternative seeds were weak. No new Contexto, Lanț or derived rounds are claimed.
-- Brioșă→Pâine now gives hot, nonwinning feedback through one exact native scope;
-  all 238 other captured approved-record responses stay exact on unchanged graph bytes.
-  Native Mătură/Taburet retire their approximate projections; vocabulary is 465 (ADR-0130/0131).
-- Lanț reconciles uncertain move/undo/hint responses through one owned GET. Failed reads
-  retain a visible read-only retry. One bounded earned hint survives resume without another
-  consumed stage; actual position changes clear it. Stale replies cannot replace a new game.
-  Shared action ownership retains Contexto behavior (ADR-0128).
-- Portable Alchimie reviews now carry exact projection-audit bytes and two independent
-  judge hashes; missing/stale/tampered or mixed-game audit batches fail closed (ADR-0129).
-- Served KG: `fixture-v88-cross-game-quality`, 2,413 nodes / 9,442 edges /
+  V88 is merged at `000b0a2`, recorded by local main `b614bfe`. V89 is implemented on
+  `feat/v89-feedback-and-conexiuni-recovery`; the local loop continues (ADR-0127).
+- Conexiuni reconciles lost guess/clue responses with one owned GET. Earned clues,
+  solved groups and wins/losses recover without replaying a mutation. Failed verification
+  retains a visible read-only retry and locks board actions; stale replies cannot adopt
+  another saved game. A lost first clue now preserves a 150-point finish instead of 50.
+- One new easy Cald sau Rece round: Mop (`ct_viata_de_roman_353`). The two independently
+  reviewed gate judgments reject staged Făraș352/Aspirator354: each has only three
+  recognizable incoming neighbors, below the five required by ADR-0071. Mop has five.
+  Initial screens incorrectly used combined incoming/outgoing counts; corrections and
+  original evidence remain archived. The rejected IDs remain consumed, with dossiers kept.
+- Tort Diplomat→Frișcă now gives rank2/hot, nonwinning feedback through one exact native
+  pair. Praf gets the same related feedback only for Făraș, Mop and Aspirator; its public
+  identity, Pământ fallback and all other scopes remain. Valid feedback does not approve
+  a hidden target. No graph concepts, directed links, forms, synonyms or projection rows added.
+- Served KG remains `fixture-v88-cross-game-quality`: 2,413 nodes / 9,442 edges /
   8,631 aliases / 180 puzzles. `kg_real.json` remains a thin export, not the served graph.
+  V88's truthful fermented/sweet/whipped-cream distinctions remain intact.
 
 ## Inventory and invariants
 
 | Game | Total | Approved | Pending | Runtime eligible/preferred |
 |---|---:|---:|---:|---:|
 | Conexiuni | 234 | 234 | 0 | 76 eligible |
-| Cald sau Rece | 241 | 239 | 2 | 235 eligible |
+| Cald sau Rece | 242 | 240 | 2 | 236 eligible |
 | Lanțul Cuvintelor | 100 | 97 | 3 | 97 eligible |
 | Alchimie | 83 | 80 | 3 | 80 eligible |
 | Intrusul | 183 | 183 | 0 | 144 preferred |
 | Perechi | 153 | 153 | 0 | 113 preferred |
 
-Pack **658 = 650 approved + 8 pending**; original four-game ranking **488 eligible**.
-All 655 old pack records, 82 Alchimie books/profiles, 100 Lanț route profiles and 336
-complete derived rows remain exact. No old eligible/preferred/starter stock is lost.
-One nonshortest Lanț suggestion changes Saramură→Găleată; all 206 shown shortest hops remain.
-All old native owners/forms, 9,409 retained edges and 180 puzzles remain exact.
-Six formerly isolated cleaning nodes gain real paths via Făraș→Mătură→Podea; other old
-beginner meshes remain isolated. All 71 scorer proxies and four prior native-audit tuples stay exact.
-Projection domains remain 26; only the cleaning audit example changes Mătură→Pămătuf.
-Native exact feedback pairs grow 9→10. Sessions retain 7,200-second sliding TTL,
-1,000 entries/game, locks, 64 KiB requests and bounded histories/caches. No scoring formula change.
+Pack **659 = 651 approved + 8 pending**; original four-game ranking **489 eligible**.
+No new Conexiuni, Alchimie, Lanț, Intrusul or Perechi round is claimed in V89.
+All 658 old pack records, 83 Alchimie books/profiles, 100 Lanț profiles/menus and 336
+derived rows/payloads remain exact. All 465 projection rows / 26 domains,
+71 scorer proxies, native owners and graph bytes remain exact. Native exact feedback
+pairs grow 10→11; four preexisting projected neighborhoods gain the one closed Praf entry.
+Sessions retain 7,200-second sliding TTL, 1,000 entries/game, locks, 64 KiB requests and
+bounded histories/caches. No scoring formula, backend session shape or shared action-helper change.
 
 ## Current artifact pins
 
-- `games_pack.json`: `4c7030bd86e966162f4ac51ef00cf3bb649ff7a9d59c8c34e180cb7ff53e1636`
-- `board_rankings_v37.json`: `b19a53983a1b4555c700f717033bb61b66aea9ea2dce643a7df0cf1a31e2c764`
-- `derived_catalog_v38.json`: `1c1613cd4f1e59c2b8d68ded9b071b1f812198f50aca528a3785fef34fad90b8`
+- `games_pack.json`: `c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04`
+- `board_rankings_v37.json`: `ea207d65a1846d2f9bb2945ca9320a8e5e7bdc5e9fe8c31113aaf4f749fdc3d6`
+- `derived_catalog_v38.json`: `4bd3cd515d21627fe42d07149bdf78951164ebfaa30df52fd1259ce26b8470d9`
 - `kg_sample.json`: `2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc`
 - `cat_mobile_app_pack_contract.json`: `d2fbb9f550a05b6b128431ee55787b2b156846887f0bc8ce1908f09e6683b951`
 
@@ -62,42 +57,45 @@ Mobile content: `sha256:f8f5c13f2cb302338f35adf38e311906856d24cb04f58592c77783a5
 
 ## Verification
 
-- Exact independent graph, tooling, recovery, feedback and supplemental reviews accept the
-  bounded scope. Actual preflight: 324 declared beginner entries (322 eligible) / 33 links.
-  Supported graph/import/promotion gates pass; all three dossiers have zero FAIL/WARN.
-- All 59 new graph/history/public cases pass; eight bread cases and 80 targeted Lanț/session
-  checks pass. Tooling: 45 focused and 102 existing critique checks pass.
-- Frontend: **193 native / 188 desktop-mobile browser checks pass**, with no full-run retries.
-  Lint/typecheck/build/bundle pass at 118.92/120 KiB. Backend: **1,508 pass on each Python 3.12.3/3.14.6; accounts 53 each**.
-- Both first full backends: 1,501 passed / seven historical-aggregate/topology failures.
-  Exact historical/current assertions now pass all seven focused checks; bounds stay unchanged.
-- Final impact: 11,233 fresh observations over 239 old approved records / 47 words. Complete
-  baseline ancestry, failed proposals and raw logs survive in lossless hash-bound archives.
-- Seed38 changes Alchimie to Liga Campionilor la handbal and Contexto reachability to 2,343;
-  other four initial payloads remain exact. Tests do not establish human enjoyment.
-- One later Python 3.12 attempt ended with signal 143 before completion; its partial log
-  is preserved and excluded from success counts. The unchanged complete rerun passed.
-- Final validators, pending, Ruff/docs/whitespace pass. All actual receipts and failure
-  evidence: `docs/reviews/v88-cross-game-quality/`.
+- Exact independent recovery/feedback reviews accept the bounded implementation.
+  All three deterministic dossiers have zero FAIL/WARN; final human-style agent judgment
+  still rejects two by directed C3. Supported import/artifact/promotion transactions pass.
+- Feedback: 15 focused tests pass. Independent whole-module AST comparison confirms just
+  one native pair and one projected-neighborhood entry. Eleven separate BFF probes pass;
+  author evidence independently confirms 253/256 responses and 81/84 controls unchanged.
+- Conexiuni lane: 193 native tests, lint/build and 26 desktop/mobile browser cases pass,
+  plus two stronger settled screenshot checks. Bundle is 118.92/120 KiB.
+- Initial lane checks: seven stale native source-shape assertions and eight browser locators
+  failed; exact original failures remain archived. Stronger screenshot assertions resolve
+  a blank mocked-animation capture. Three wrong-directory npm attempts ran no checks.
+- The focused history/content set passes 266 tests. Final impact: 7,169/7,170 old-round
+  observations unchanged; only Diplomat→Frișcă improves. All seeded start payloads stay exact.
+- Full frontend is green: **193 native /214 browser checks**, no retries; lint/typecheck/
+  build/bundle pass. Fixture/pack/pending/Ruff/docs/whitespace pass.
+- First full backend: **1,530 pass /one historical-scope failure**. The V44 pre-V88 sink
+  assertion included new Mop. The exact test-only correction passes 110 focused cases;
+  final full backends pass **1,531 tests each on Python 3.12.3 /3.14.6**, plus
+  **53 accounts tests each**. All 407 integration input hashes remain unchanged.
+  Current evidence: `docs/reviews/v89-feedback-and-conexiuni-recovery/`.
 
 ## Production — last observed 2026-08-27
 
 - Last documented deployment remains anonymous V72 `6ee86935038744c0066cac6a50865f76eab93e37`,
   image `sha256:30b39c0bba954074de6cdecd377a9742f627f4900caccbae8805d132f5c317bd`.
 - Accounts/debug were off; health/config/assets and alias smoke passed. No production check,
-  push or deployment occurred in V88. Preserve `rollback-60c3fd5318a` for the next rollout.
-- Fresh local Python3.14.6 and Node24 dependencies are installed; deployed V72 is unchanged.
+  push or deployment occurred in V89. Preserve `rollback-60c3fd5318a` for the next rollout.
+- Local Python3.12.3, fresh constrained Python3.14.6 and Node24 dependencies are available.
 
 ## Remaining gates
 
-- V89 starts Conexiuni action recovery, household Contexto candidate review and a focused
-  audit of remaining feedback costs. Eight technical profiles and seven private-BFF
-  baselines are recorded in `docs/reviews/v89-feedback-and-conexiuni-recovery/README.md`;
-  its implementation and full verification are pending.
-- Facts improved without universal rank improvement: reverse pastry guesses toward Frișcă and
-  some native household-context guesses cool. Smântână remains warm for Frișcă; qualified
-  whipping cream is hot. No semantic quality claim follows from the 8,540 changed observations.
-- Brioșă/Pandișpan hidden targets and the investigated Diplomat Alchimie round remain held.
+- Complete the final evidence audit and land V89 locally; then start V90 household
+  discovery and critique improvements under the owner-authorized recurring loop.
+- The household screen finds 19/33 deliberately broad tested surfaces unrecognized,
+  including murdărie/firimituri/pardoseală. This is a stress sample, not a player-frequency
+  estimate. Electricitate→Aspirator remains cold378 while Apă is hot9; broader semantic
+  work remains. True Zacuscă→Bucătărie→Frigider→Frișcă remains warm24.
+- Cremșnit/Pișcot→Frișcă remain cold; their variant/indirect associations were not granted
+  the exact Diplomat pair. Brioșă/Pandișpan hidden targets and Diplomat Alchimie stay held.
 - Romanian-player sessions, real-device checks, feedback contact and operator/legal-page
   verification remain unrun. Rollout requires separate authorization and live smoke/rollback
   checks. Keep accounts out until the DEPLOY go-live checklist passes; see BETA_CANDIDATE.
@@ -105,4 +103,4 @@ Mobile content: `sha256:f8f5c13f2cb302338f35adf38e311906856d24cb04f58592c77783a5
 ## Doc map
 
 - `README.md` / `AGENTS.md`: orientation; `docs/agent-map.md` / `docs/agent-testing.md`: routes/gates.
-- `docs/adr/` (newest 0131), `docs/reviews/`, WORKLOG: decisions, evidence and history.
+- `docs/adr/` (newest 0133), `docs/reviews/`, WORKLOG: decisions, evidence and history.

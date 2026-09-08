@@ -1,0 +1,524 @@
+{
+  "date": "2026-09-08",
+  "phase": "Prospective V90 scout only; no approval, implementation, new worktree or playable content delivered",
+  "inspected_task_base_commit": "31ef7a2525bb1e4197ee2663a3d1ac417d37cc54",
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "753c22890e14b8b049f62d249ee92a06b6631fb4589db97dbebd003eaf18b5fd",
+    "scripts/critique_pack.py": "8ed430e2d44716e5a3af49ec2fa1d344dd6f50086c3746f43b89c8c1b97b5916",
+    "scripts/apply_common_words_v24.py": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91",
+    "frontend/src/screens/Alchimie.tsx": "c855ebca0b4a9c1dc96b10ddbe6639d24fa18a644e2eb10887b44454499ddba7",
+    "frontend/src/screens/Intrusul.tsx": "57cdc75c05468e692eeb12b3591e5ca7eb3ece5b3806432950bd63936e90f11e",
+    "frontend/src/screens/Perechi.tsx": "5741f63a8edd39bf9f6886004f222f9ea6f1aca6536fadb046b03ee02cf18d37"
+  },
+  "unknown_stress_surfaces": [
+    {
+      "surface": "murdărie",
+      "native_owner": null,
+      "projection_owner": null
+    },
+    {
+      "surface": "firimituri",
+      "native_owner": null,
+      "projection_owner": null
+    },
+    {
+      "surface": "păr",
+      "native_owner": null,
+      "projection_owner": null
+    },
+    {
+      "surface": "păr de animale",
+      "native_owner": null,
+      "projection_owner": null
+    },
+    {
+      "surface": "sac",
+      "native_owner": null,
+      "projection_owner": null
+    },
+    {
+      "surface": "sac de praf",
+      "native_owner": null,
+      "projection_owner": null
+    },
+    {
+      "surface": "filtru",
+      "native_owner": null,
+      "projection_owner": null
+    },
+    {
+      "surface": "curent",
+      "native_owner": null,
+      "projection_owner": null
+    },
+    {
+      "surface": "măturat",
+      "native_owner": null,
+      "projection_owner": null
+    },
+    {
+      "surface": "aspirare",
+      "native_owner": null,
+      "projection_owner": null
+    },
+    {
+      "surface": "pardoseală",
+      "native_owner": null,
+      "projection_owner": null
+    },
+    {
+      "surface": "parchet",
+      "native_owner": null,
+      "projection_owner": null
+    },
+    {
+      "surface": "gresie",
+      "native_owner": null,
+      "projection_owner": null
+    },
+    {
+      "surface": "covoraș",
+      "native_owner": null,
+      "projection_owner": null
+    },
+    {
+      "surface": "scame",
+      "native_owner": null,
+      "projection_owner": null
+    },
+    {
+      "surface": "cârpă",
+      "native_owner": null,
+      "projection_owner": null
+    },
+    {
+      "surface": "mâner",
+      "native_owner": null,
+      "projection_owner": null
+    },
+    {
+      "surface": "curățenie",
+      "native_owner": null,
+      "projection_owner": null
+    },
+    {
+      "surface": "gunoi",
+      "native_owner": null,
+      "projection_owner": null
+    }
+  ],
+  "related_current_owners": [
+    {
+      "surface": "Praf",
+      "native_owner": null,
+      "description": null,
+      "aliases": null,
+      "projection": {
+        "anchor_id": "n_v24_nature_world_pamant",
+        "public_id": "ctxp_81703160cad7893fa1c9",
+        "domain": "peisaj",
+        "rank_penalty": 1
+      }
+    },
+    {
+      "surface": "a mătura",
+      "native_owner": null,
+      "description": null,
+      "aliases": null,
+      "projection": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "public_id": "ctxp_18371b6f3ee69ca0290e",
+        "domain": "acțiuni cotidiene",
+        "rank_penalty": 1
+      }
+    },
+    {
+      "surface": "a aspira",
+      "native_owner": null,
+      "description": null,
+      "aliases": null,
+      "projection": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "public_id": "ctxp_d58f0a76d14073baeec8",
+        "domain": "acțiuni cotidiene",
+        "rank_penalty": 1
+      }
+    },
+    {
+      "surface": "a curăța",
+      "native_owner": null,
+      "description": null,
+      "aliases": null,
+      "projection": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "public_id": "ctxp_0aaa20dca42fd3a29640",
+        "domain": "acțiuni cotidiene",
+        "rank_penalty": 1
+      }
+    },
+    {
+      "surface": "lavetă",
+      "native_owner": null,
+      "description": null,
+      "aliases": null,
+      "projection": {
+        "anchor_id": "n_v31_cleaning_floor_mop",
+        "public_id": "ctxp_707f2b959672c440a1e9",
+        "domain": "curățenie",
+        "rank_penalty": 1
+      }
+    },
+    {
+      "surface": "cârpă de praf",
+      "native_owner": null,
+      "description": null,
+      "aliases": null,
+      "projection": {
+        "anchor_id": "n_v31_cleaning_floor_mop",
+        "public_id": "ctxp_99732389af3cc927e42d",
+        "domain": "curățenie",
+        "rank_penalty": 1
+      }
+    },
+    {
+      "surface": "Podea",
+      "native_owner": "n_v24_home_surfaces_podea",
+      "description": "Concept cotidian din grupul «suprafețe și deschideri»: Podea.",
+      "aliases": [
+        "podeaua",
+        "podele",
+        "podelele",
+        "podelei",
+        "podelelor"
+      ],
+      "projection": null
+    },
+    {
+      "surface": "Covor",
+      "native_owner": "n_v24_home_textiles_covor",
+      "description": "Concept cotidian din grupul «textile din casă»: Covor.",
+      "aliases": [
+        "covorul",
+        "covoare",
+        "covoarele",
+        "covorului",
+        "covoarelor"
+      ],
+      "projection": null
+    },
+    {
+      "surface": "Electricitate",
+      "native_owner": "n_v3sti_electricitate",
+      "description": "Fenomen legat de sarcini electrice și curent electric.",
+      "aliases": [
+        "electricitatea",
+        "curent electric",
+        "curentul electric"
+      ],
+      "projection": null
+    },
+    {
+      "surface": "Farfurie",
+      "native_owner": "n_v30_kitchen_table_farfurie",
+      "description": "Vas plat din care se servește și se mănâncă mâncarea.",
+      "aliases": [
+        "farfuria",
+        "farfurii",
+        "farfuriile",
+        "farfuriei"
+      ],
+      "projection": null
+    },
+    {
+      "surface": "Chiuvetă",
+      "native_owner": "n_v33_bathroom_fixture_chiuveta",
+      "description": "Recipient fix cu scurgere și robinet, folosit pentru spălat mâinile sau obiecte.",
+      "aliases": [
+        "chiuvete",
+        "chiuvetele",
+        "chiuvetei",
+        "chiuvetei de baie",
+        "chiuvetelor de baie"
+      ],
+      "projection": null
+    },
+    {
+      "surface": "Praf de copt",
+      "native_owner": "n_v87_food_praf_copt",
+      "description": "Amestec de ingrediente care afânează aluatul în timpul coacerii.",
+      "aliases": [
+        "praful de copt",
+        "prafului de copt",
+        "praf de copt pentru prăjituri"
+      ],
+      "projection": null
+    },
+    {
+      "surface": "Lapte praf",
+      "native_owner": "n_v86_food_lapte_praf",
+      "description": "Produs alimentar obținut prin deshidratarea laptelui, folosit și la deserturi.",
+      "aliases": [
+        "laptele praf",
+        "laptelui praf",
+        "lapte praf integral"
+      ],
+      "projection": null
+    }
+  ],
+  "directed_target_state": {
+    "Făraș": {
+      "id": "n_v31_cleaning_floor_faras",
+      "incoming_count": 3,
+      "incoming_ids": [
+        "n_v24_home_surfaces_podea",
+        "n_v31_cleaning_floor_aspirator",
+        "n_v88_cleaning_matura"
+      ],
+      "outgoing_count": 3,
+      "outgoing_ids": [
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_floor_mop",
+        "n_v88_cleaning_matura"
+      ]
+    },
+    "Mop": {
+      "id": "n_v31_cleaning_floor_mop",
+      "incoming_count": 5,
+      "incoming_ids": [
+        "n_v24_home_surfaces_podea",
+        "n_v31_cleaning_floor_faras",
+        "n_v31_cleaning_supply_detergent",
+        "n_v31_cleaning_water_galeata",
+        "n_v88_cleaning_matura"
+      ],
+      "outgoing_count": 2,
+      "outgoing_ids": [
+        "n_v31_cleaning_floor_aspirator",
+        "n_v31_cleaning_water_galeata"
+      ]
+    },
+    "Aspirator": {
+      "id": "n_v31_cleaning_floor_aspirator",
+      "incoming_count": 3,
+      "incoming_ids": [
+        "n_v24_home_surfaces_podea",
+        "n_v31_cleaning_floor_mop",
+        "n_v88_cleaning_matura"
+      ],
+      "outgoing_count": 2,
+      "outgoing_ids": [
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_floor_faras"
+      ]
+    },
+    "Burete de vase": {
+      "id": "n_v31_cleaning_dishes_burete_vase",
+      "incoming_count": 4,
+      "incoming_ids": [
+        "n_v24_action_home_a_spala",
+        "n_v31_cleaning_floor_aspirator",
+        "n_v31_cleaning_floor_faras",
+        "n_v31_cleaning_supply_detergent"
+      ],
+      "outgoing_count": 2,
+      "outgoing_ids": [
+        "n_v31_cleaning_supply_detergent",
+        "n_v31_cleaning_water_galeata"
+      ]
+    },
+    "Mătură": {
+      "id": "n_v88_cleaning_matura",
+      "incoming_count": 1,
+      "incoming_ids": [
+        "n_v31_cleaning_floor_faras"
+      ],
+      "outgoing_count": 4,
+      "outgoing_ids": [
+        "n_v24_home_surfaces_podea",
+        "n_v31_cleaning_floor_aspirator",
+        "n_v31_cleaning_floor_faras",
+        "n_v31_cleaning_floor_mop"
+      ]
+    },
+    "Găleată": {
+      "id": "n_v31_cleaning_water_galeata",
+      "incoming_count": 3,
+      "incoming_ids": [
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_floor_mop",
+        "n_v4gas_apa"
+      ],
+      "outgoing_count": 2,
+      "outgoing_ids": [
+        "n_v31_cleaning_floor_mop",
+        "n_v31_cleaning_supply_detergent"
+      ]
+    },
+    "Detergent": {
+      "id": "n_v31_cleaning_supply_detergent",
+      "incoming_count": 3,
+      "incoming_ids": [
+        "n_v24_action_home_a_spala",
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_water_galeata"
+      ],
+      "outgoing_count": 2,
+      "outgoing_ids": [
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_floor_mop"
+      ]
+    },
+    "Taburet": {
+      "id": "n_v88_home_taburet",
+      "incoming_count": 1,
+      "incoming_ids": [
+        "n_v3muz_pian"
+      ],
+      "outgoing_count": 4,
+      "outgoing_ids": [
+        "n_v24_home_seating_canapea",
+        "n_v24_home_seating_fotoliu",
+        "n_v24_home_seating_scaun",
+        "n_v3muz_pian"
+      ]
+    }
+  },
+  "existing_owner_link_questions": [
+    {
+      "from": "Covor",
+      "to": "Aspirator",
+      "src_id": "n_v24_home_textiles_covor",
+      "dst_id": "n_v31_cleaning_floor_aspirator",
+      "exists_now": false,
+      "disposition": "Exact meaning, direction, label, strength and broader impact require original-source review before authoring."
+    },
+    {
+      "from": "Electricitate",
+      "to": "Aspirator",
+      "src_id": "n_v3sti_electricitate",
+      "dst_id": "n_v31_cleaning_floor_aspirator",
+      "exists_now": false,
+      "disposition": "Exact meaning, direction, label, strength and broader impact require original-source review before authoring."
+    },
+    {
+      "from": "Farfurie",
+      "to": "Burete de vase",
+      "src_id": "n_v30_kitchen_table_farfurie",
+      "dst_id": "n_v31_cleaning_dishes_burete_vase",
+      "exists_now": false,
+      "disposition": "Exact meaning, direction, label, strength and broader impact require original-source review before authoring."
+    },
+    {
+      "from": "Apă",
+      "to": "Burete de vase",
+      "src_id": "n_v4gas_apa",
+      "dst_id": "n_v31_cleaning_dishes_burete_vase",
+      "exists_now": false,
+      "disposition": "Exact meaning, direction, label, strength and broader impact require original-source review before authoring."
+    },
+    {
+      "from": "Chiuvetă",
+      "to": "Burete de vase",
+      "src_id": "n_v33_bathroom_fixture_chiuveta",
+      "dst_id": "n_v31_cleaning_dishes_burete_vase",
+      "exists_now": false,
+      "disposition": "Exact meaning, direction, label, strength and broader impact require original-source review before authoring."
+    }
+  ],
+  "prospective_new_concepts": [
+    {
+      "label_question": "Praf",
+      "id": "not allocated",
+      "reason": "Known projected dust/floor-tool mismatch and absent native directed source. Native owner would be a substantive projection retirement with ID/meaning impact, not a free alias."
+    },
+    {
+      "label_question": "Firimitură",
+      "id": "not allocated",
+      "reason": "Unrecognized ordinary crumb cue and possible source-backed food-to-cleaning bridge; independently verify definitions and complete neighborhood."
+    },
+    {
+      "label_question": "Scamă",
+      "id": "not allocated",
+      "reason": "Unrecognized textile-lint cue with possible useful source/collection relations; verify recognition and exact sense before authoring."
+    }
+  ],
+  "safe_form_review_candidates": [
+    "pardoseală vs Podea",
+    "covoraș vs Covor",
+    "măturat vs projected a mătura",
+    "aspirare vs projected a aspira",
+    "curățenie vs projected a curăța",
+    "cârpă vs projected lavetă/cârpă de praf"
+  ],
+  "qualified_sense_questions": [
+    "păr and păr de animale",
+    "sac and sac de praf",
+    "filtru",
+    "curent",
+    "parchet",
+    "gresie",
+    "murdărie",
+    "gunoi",
+    "mâner"
+  ],
+  "reopen_conditions": [
+    "Consult preserved V89 rejected record/dossier bindings under ADR0071.",
+    "Require at least5 unique recognizable directed predecessors; native projections do not count as KG nodes.",
+    "Use source-supported links that are useful independently of a target quota.",
+    "Fresh ordinary first-guess/clue/repeat/resume/exact-win journeys, full rubric, two independent current-bound judgments."
+  ],
+  "proposed_deterministic_lint": {
+    "status": "research/design suggestion, not implemented",
+    "necessary_fail_condition": "fewer than5 unique existing incoming non-distractor nodes excluding target itself",
+    "pending": "FAIL",
+    "approved": "WARN/proposal only, no automatic demotion",
+    "not_automatable": [
+      "recognition",
+      "predicate honesty",
+      "five equally defining approaches",
+      "human enjoyment"
+    ],
+    "keep_separate": [
+      "all incoming count",
+      "strong incoming list at existing0.6 threshold",
+      "graph-applicator four-incident/two-same-category preflight",
+      "Contexto responsive/total-reach floors"
+    ],
+    "meaningful_test_cases": [
+      "outgoing-only cannot pass",
+      "duplicate edges collapse",
+      "distractors excluded",
+      "bidirectional reverse incoming included",
+      "self-loop excluded",
+      "missing targets handled",
+      "pending/approved severity",
+      "stable sorted evidence",
+      "stale dossier bindings rejected"
+    ]
+  },
+  "all_six_game_scope": {
+    "contexto": "Useful ordinary input recognition plus genuinely improved incoming discovery before reauthoring rejected rounds.",
+    "conexiuni": "Only source-backed strict household/material predicates with full inventory duplicate/reskin/reuse checks; preserveV89 action recovery.",
+    "lant": "Inspect multiple credible first hops and bottlenecks for food-crumb/textile-cleaning arcs; compare all old menus and shortest routes.",
+    "alchimie": "Compare sparse recipe books for unintended noise; separately reproduce uncertain combine/reset/hint behavior before extending owned GET recovery.",
+    "intrusul": "Compare full derived rows and preferred/starter stock; count new boards only after supported generation and judgment.",
+    "perechi": "Compare full derived rows/stock and concrete pair predicates; existing handlers already attempt reconciliation."
+  },
+  "source_leads_already_opened": [
+    "https://dexonline.ro/definitie/praf/876302",
+    "https://leifheit.ro/ro/acasa/164-leifheit-set-maturafaras.html",
+    "https://www.karcher.com/ro/ro/home-and-garden/produse/aspiratoare-c4250",
+    "https://www.viledaromania.ro/ScourersAndSponges/Vileda-Bure%C8%9Bi-PUR-ACTIVE-Colors-4-1-/p/149444",
+    "https://www.viledaromania.ro/Mops/Cap-de-mop-Turbo-2in1/p/151609"
+  ],
+  "limits": [
+    "No new original-source review for prospective unknown meanings/links yet.",
+    "No new BFF matrices or browser fault reproductions run in this scout.",
+    "No graph/source/test edits; only prospective review artifacts written.",
+    "No new concept IDs allocated and no target/board count promised."
+  ],
+  "markdown_sha256": "507b0ccae0072a93a177f8aa4718c67451f01ff85ae29ea61d507c476b94e844"
+}

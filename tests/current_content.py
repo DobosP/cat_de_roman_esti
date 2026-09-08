@@ -101,13 +101,13 @@ CURRENT_CONTENT = CurrentContentSnapshot(
                 "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc"
             ),
             "cat_de_roman_esti/fixtures/games_pack.json": (
-                "4c7030bd86e966162f4ac51ef00cf3bb649ff7a9d59c8c34e180cb7ff53e1636"
+                "c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04"
             ),
             "cat_de_roman_esti/fixtures/board_rankings_v37.json": (
-                "b19a53983a1b4555c700f717033bb61b66aea9ea2dce643a7df0cf1a31e2c764"
+                "ea207d65a1846d2f9bb2945ca9320a8e5e7bdc5e9fe8c31113aaf4f749fdc3d6"
             ),
             "cat_de_roman_esti/fixtures/derived_catalog_v38.json": (
-                "1c1613cd4f1e59c2b8d68ded9b071b1f812198f50aca528a3785fef34fad90b8"
+                "4bd3cd515d21627fe42d07149bdf78951164ebfaa30df52fd1259ce26b8470d9"
             ),
             "tests/fixtures/cat_mobile_app_pack_contract.json": (
                 "d2fbb9f550a05b6b128431ee55787b2b156846887f0bc8ce1908f09e6683b951"
@@ -117,7 +117,7 @@ CURRENT_CONTENT = CurrentContentSnapshot(
     payload_sha256=_frozen(
         {
             "ranking_rows": (
-                "b80be93f072ab75158902092a6bd1e49afdaf1be2018e5d2b8632dde70ca29d6"
+                "a1dd53370a292585456bcf91bbab5991419503339e033247859a11ee2825b6e0"
             ),
             "frozen_derived_boards": (
                 "1aa4138171644870f65ca1925f05c066f94e0dac087fd3682b5c374f225b86db"
@@ -132,7 +132,7 @@ CURRENT_CONTENT = CurrentContentSnapshot(
                 "3f66da71a5677ee56dbd96a46568a61f4494ac51fc41b47ec70bb54a126f27fc"
             ),
             "contexto_profile": (
-                "82cb55b827cee27819c19a7dfd205c92ebf32717f0de5de4acfe32605948acdf"
+                "baa8ceb8a234567bc6938a3af60bdc05505100809743bb123582d9270d1bac56"
             ),
             "alchimie_closure_profile": (
                 "94eccce7dd6c9555afcc64566c5e5b82368fbfe746c1298f53a3e62681b27b32"
@@ -144,29 +144,29 @@ CURRENT_CONTENT = CurrentContentSnapshot(
     ),
     kg_counts=_frozen({"nodes": 2413, "edges": 9442, "aliases": 8631, "puzzles": 180}),
     mobile_counts=_frozen({"nodes": 2413, "edges": 9442, "puzzles": 180}),
-    pack_counts=_frozen({"conexiuni": 234, "contexto": 241, "lant": 100, "alchimie": 83}),
+    pack_counts=_frozen({"conexiuni": 234, "contexto": 242, "lant": 100, "alchimie": 83}),
     pack_id_high_water=_frozen(
-        {"conexiuni": 363, "contexto": 351, "lant": 222, "alchimie": 107}
+        {"conexiuni": 363, "contexto": 354, "lant": 222, "alchimie": 107}
     ),
-    status_counts=_frozen({"approved": 650, "pending": 8}),
+    status_counts=_frozen({"approved": 651, "pending": 8}),
     game_inventory=_frozen(
         {
             "conexiuni": (234, 234, 0),
-            "contexto": (241, 239, 2),
+            "contexto": (242, 240, 2),
             "lant": (100, 97, 3),
             "alchimie": (83, 80, 3),
         }
     ),
     ranking_counts=_frozen(
         {
-            "total": 658,
-            "approved": 650,
-            "pilot_eligible": 488,
+            "total": 659,
+            "approved": 651,
+            "pilot_eligible": 489,
             "by_game": _frozen(
-                {"conexiuni": 234, "contexto": 241, "lant": 100, "alchimie": 83}
+                {"conexiuni": 234, "contexto": 242, "lant": 100, "alchimie": 83}
             ),
             "eligible_by_game": _frozen(
-                {"conexiuni": 76, "contexto": 235, "lant": 97, "alchimie": 80}
+                {"conexiuni": 76, "contexto": 236, "lant": 97, "alchimie": 80}
             ),
         }
     ),
@@ -189,9 +189,9 @@ CURRENT_CONTENT = CurrentContentSnapshot(
         {"făină": 2, "ou": 7, "gem": 10, "dulceață": 9,
          "lapte": 34, "brânză": 41, "smântână": 28}
     ),
-    contexto_approved=239,
-    contexto_eligible=235,
-    contexto_id_high_water=351,
+    contexto_approved=240,
+    contexto_eligible=236,
+    contexto_id_high_water=354,
     projection_terms=465,
     projection_domains=26,
     legacy_feedback_proxies=71,

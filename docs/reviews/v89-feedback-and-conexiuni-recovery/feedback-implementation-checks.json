@@ -1,0 +1,441 @@
+{
+  "date": "2026-09-08",
+  "baseline_commit": "b614bfe735a27b9703025420daf603118f6a7f74",
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "4c7030bd86e966162f4ac51ef00cf3bb649ff7a9d59c8c34e180cb7ff53e1636",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "753c22890e14b8b049f62d249ee92a06b6631fb4589db97dbebd003eaf18b5fd",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"
+  },
+  "ast_checks": {
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": {
+      "whole_module_ast_exact_after_removing_one_approved_entry": true,
+      "removed_entries": 1
+    },
+    "cat_de_roman_esti/wordgames/contexto_projection.py": {
+      "whole_module_ast_exact_after_removing_one_approved_entry": true,
+      "removed_entries": 1
+    }
+  },
+  "byte_exact_sources": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": true,
+    "cat_de_roman_esti/fixtures/games_pack.json": true,
+    "cat_de_roman_esti/wordgames/contexto.py": true,
+    "cat_de_roman_esti/wordgames/service.py": true
+  },
+  "actual_independent_bff_probes": [
+    {
+      "word": "Tort Diplomat",
+      "target": "Frișcă",
+      "response": {
+        "ok": true,
+        "guess": {
+          "id": "n_v87_food_tort_diplomat",
+          "label": "Tort Diplomat",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "guesses": [
+          {
+            "id": "n_v87_food_tort_diplomat",
+            "label": "Tort Diplomat",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 1,
+        "won": false,
+        "reachable_count": 2343,
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #2."
+        },
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "word": "tort",
+      "target": "Frișcă",
+      "response": {
+        "ok": true,
+        "guess": {
+          "id": "ctxp_7de7b40dd74b4b0f44bf",
+          "label": "Tort",
+          "distance": 4,
+          "rank": 182,
+          "temperature": "Caldut",
+          "closeness": 92,
+          "attempt_number": 1
+        },
+        "guesses": [
+          {
+            "id": "ctxp_7de7b40dd74b4b0f44bf",
+            "label": "Tort",
+            "distance": 4,
+            "rank": 182,
+            "temperature": "Caldut",
+            "closeness": 92,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 1,
+        "won": false,
+        "reachable_count": 2343,
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #182."
+        },
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "word": "Tort Diplomat",
+      "target": "Cremșnit",
+      "response": {
+        "ok": true,
+        "guess": {
+          "id": "n_v87_food_tort_diplomat",
+          "label": "Tort Diplomat",
+          "distance": 5,
+          "rank": 465,
+          "temperature": "Rece",
+          "closeness": 80,
+          "attempt_number": 1
+        },
+        "guesses": [
+          {
+            "id": "n_v87_food_tort_diplomat",
+            "label": "Tort Diplomat",
+            "distance": 5,
+            "rank": 465,
+            "temperature": "Rece",
+            "closeness": 80,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 1,
+        "won": false,
+        "reachable_count": 2343,
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #465."
+        },
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "word": "Zacuscă",
+      "target": "Frișcă",
+      "response": {
+        "ok": true,
+        "guess": {
+          "id": "n_gas_zacusca",
+          "label": "Zacuscă",
+          "distance": 3,
+          "rank": 24,
+          "temperature": "Cald",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "guesses": [
+          {
+            "id": "n_gas_zacusca",
+            "label": "Zacuscă",
+            "distance": 3,
+            "rank": 24,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 1,
+        "won": false,
+        "reachable_count": 2343,
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #24."
+        },
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "word": "Smântână",
+      "target": "Frișcă",
+      "response": {
+        "ok": true,
+        "guess": {
+          "id": "n_v20gas_smantana",
+          "label": "Smântână",
+          "distance": 3,
+          "rank": 34,
+          "temperature": "Cald",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "guesses": [
+          {
+            "id": "n_v20gas_smantana",
+            "label": "Smântână",
+            "distance": 3,
+            "rank": 34,
+            "temperature": "Cald",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 1,
+        "won": false,
+        "reachable_count": 2343,
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #34."
+        },
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "word": "praf",
+      "target": "Făraș",
+      "response": {
+        "ok": true,
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "guesses": [
+          {
+            "id": "ctxp_81703160cad7893fa1c9",
+            "label": "Praf",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 1,
+        "won": false,
+        "reachable_count": 2343,
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #2."
+        },
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "word": "praf",
+      "target": "Mop",
+      "response": {
+        "ok": true,
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "guesses": [
+          {
+            "id": "ctxp_81703160cad7893fa1c9",
+            "label": "Praf",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 1,
+        "won": false,
+        "reachable_count": 2343,
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #2."
+        },
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "word": "praf",
+      "target": "Aspirator",
+      "response": {
+        "ok": true,
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "guesses": [
+          {
+            "id": "ctxp_81703160cad7893fa1c9",
+            "label": "Praf",
+            "distance": 1,
+            "rank": 2,
+            "temperature": "Fierbinte",
+            "closeness": 99,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 1,
+        "won": false,
+        "reachable_count": 2343,
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #2."
+        },
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "word": "praf",
+      "target": "Mătură",
+      "response": {
+        "ok": true,
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 9,
+          "rank": 2256,
+          "temperature": "Inghetat",
+          "closeness": 4,
+          "attempt_number": 1
+        },
+        "guesses": [
+          {
+            "id": "ctxp_81703160cad7893fa1c9",
+            "label": "Praf",
+            "distance": 9,
+            "rank": 2256,
+            "temperature": "Inghetat",
+            "closeness": 4,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 1,
+        "won": false,
+        "reachable_count": 2343,
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #2256."
+        },
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "word": "noroi",
+      "target": "Făraș",
+      "response": {
+        "ok": true,
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 8,
+          "rank": 2256,
+          "temperature": "Inghetat",
+          "closeness": 4,
+          "attempt_number": 1
+        },
+        "guesses": [
+          {
+            "id": "ctxp_c89dd916043693908936",
+            "label": "Noroi",
+            "distance": 8,
+            "rank": 2256,
+            "temperature": "Inghetat",
+            "closeness": 4,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 1,
+        "won": false,
+        "reachable_count": 2343,
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #2256."
+        },
+        "clues_used": 0,
+        "clue_available": false
+      }
+    },
+    {
+      "word": "bolovan",
+      "target": "Aspirator",
+      "response": {
+        "ok": true,
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 8,
+          "rank": 2022,
+          "temperature": "Inghetat",
+          "closeness": 14,
+          "attempt_number": 1
+        },
+        "guesses": [
+          {
+            "id": "ctxp_290e3606858168a62e12",
+            "label": "Bolovan",
+            "distance": 8,
+            "rank": 2022,
+            "temperature": "Inghetat",
+            "closeness": 14,
+            "attempt_number": 1
+          }
+        ],
+        "attempts": 1,
+        "won": false,
+        "reachable_count": 2343,
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #2022."
+        },
+        "clues_used": 0,
+        "clue_available": false
+      }
+    }
+  ],
+  "independent_probe_count": 11,
+  "all_probe_sessions_deleted": true,
+  "projection_term_count": 465,
+  "legacy_native_proxy_count": 71,
+  "native_exact_pair_count": 11,
+  "projection_neighborhood_count": 5,
+  "praf_term": {
+    "surface": "praf",
+    "anchor_id": "n_v24_nature_world_pamant",
+    "domain": "peisaj",
+    "rank_penalty": 1,
+    "mapping_kind": "explicit"
+  },
+  "praf_public_id": "ctxp_81703160cad7893fa1c9",
+  "method": "Whole AST comparison to baseline after deleting only the reviewed one native tuple and one projected dictionary entry. Eleven additional independent fresh private-BFF probes, all cleaned up. No source/data mutation."
+}

@@ -1,0 +1,204 @@
+{
+  "date": "2026-09-08",
+  "reviewer": "independent V89 final content/history reviewer",
+  "decision": "accept audited content and historical preservation; final integration is required before landing",
+  "baseline": "b614bfe735a27b9703025420daf603118f6a7f74",
+  "source_sha256": {
+    "tests/content_history.py": "260bcff2abea53347733f71386e83dd28ead084e3f36fb157f7c149042a88d31",
+    "tests/current_content.py": "8ac236eaa02afb98d74df52f529fcd429fdc540aab6797d5499fdc83032622cb",
+    "tests/test_v89_household_content.py": "5165e2e08682451ce3e094ef25a5b781e47187aa5eb6dbf66ba2d2e22922b9bb",
+    "tests/test_v89_feedback.py": "acd73c65c8d1c7a22bc5153415a9235a1ce4df06020786ad66b1d0526c8ec500",
+    "tests/test_v88_bread_feedback.py": "e6992b63bc85ab421c81aad40246c1b6304b33533a4ece0ab7c5530a5cb662e4",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "753c22890e14b8b049f62d249ee92a06b6631fb4589db97dbebd003eaf18b5fd",
+    "cat_de_roman_esti/wordgames/derived_catalog.py": "3c4f1c74924a53238e3ec5d0f0e540fc8999432a11ed39ee95af3dccea54d340",
+    "cat_de_roman_esti/wordgames/packs.py": "6404b4c8ed2813680a684d9e33e6ea33c6f968c95e025bd2a0eb1af3b1349607",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "ea207d65a1846d2f9bb2945ca9320a8e5e7bdc5e9fe8c31113aaf4f749fdc3d6",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "4bd3cd515d21627fe42d07149bdf78951164ebfaa30df52fd1259ce26b8470d9",
+    "tests/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "tests/fixtures/games_pack.json": "c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04",
+    "tests/fixtures/board_rankings_v37.json": "ea207d65a1846d2f9bb2945ca9320a8e5e7bdc5e9fe8c31113aaf4f749fdc3d6",
+    "tests/fixtures/derived_catalog_v38.json": "4bd3cd515d21627fe42d07149bdf78951164ebfaa30df52fd1259ce26b8470d9",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "d2fbb9f550a05b6b128431ee55787b2b156846887f0bc8ce1908f09e6683b951",
+    "frontend/e2e/seeded-starts.json": "eaf3e13ecc4a158ad2afb31b90190a89be8fbd2ac1e8d45409a84cdcd30cc097",
+    "scripts/build_review_artifact.py": "963c5671281934fa95ff30cda8a04344204f9ab78f0ffe191acc90d02984cd20",
+    "scripts/apply_rereview.py": "3da2a214612674f22edfeec11ffeebed02a9489ea93df78b812631e0a220ea5b",
+    "scripts/critique_pack.py": "8ed430e2d44716e5a3af49ec2fa1d344dd6f50086c3746f43b89c8c1b97b5916",
+    "docs/CRITIQUE_RUBRIC.md": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+    "docs/adr/0071-gate-contexto-by-feedback-legibility.md": "f580039b2939ca4e179c6cfefee2ee0cff034dc8eb49cc7e09cbc0081bbf8a3c",
+    "docs/adr/0133-closed-dust-and-whipped-cream-feedback.md": "6e97c1f95a0800debe40505da1fa9ec553293e04f347b6ef3e6365122b20aaaf"
+  },
+  "evidence_sha256": {
+    "artifact-delta.json": "53a606d683f56e4ee91b9a8bf57f0bb1e2355dcc932446b9d4bfdca76b59f16a",
+    "analyst.json": "638db2d9ccf63dc9b8e1fe10fab9c4e812b0b6ff20e85f09c8bcb8417df83f69",
+    "verifier.json": "f0d213f28507491a1005a29751a7d787dac352219573c5ba048c44b7e52e8419",
+    "final-gate/contexto_verdicts.json": "72c398198f605c3e69ca5d0372e6d1d0da5ba9f989d6acb28a80bab813d39ca3",
+    "dossiers/ct_viata_de_roman_352.json": "160610dbb99ad242a29a3193f5da90ef6a55537d4a035051bfda8c529545c0e3",
+    "dossiers/ct_viata_de_roman_353.json": "41d33a6b6a953635203dc04d43587c0ca949e42ebe45d5d924d49d80efd637ee",
+    "dossiers/ct_viata_de_roman_354.json": "490ca3ee8ad9aeb24f20a0b35fede5b2bac286189e70776bfc904a110cfad2a3",
+    "author-candidates/viata_de_roman/candidates.json": "a7e22a7d4b1c84f5450e167b0854d5e8a5532f0f8f0b733da10a3b955860cdc4",
+    "author-candidates/viata_de_roman/verify_factual.json": "6a252a6dd084c5da8493fb1bba2087346650ca1e30bec2a0a50bd2cce5c255c9",
+    "author-candidates/viata_de_roman/verify_quality.json": "d181cd5e09e82d919f1b2517ae3e35c4992d08833baaecea2b8ef455601284c9",
+    "C3_REVIEW_CORRECTION.md": "c6f0b45b4dc801c98254c2283496331a7165117f5354821c29f85e3911a087e5",
+    "quality-screen/independent-probes.json": "eb6c79f0f2270783e83d7f0cb1f1241ace46f8ba5343feeabdfadb1e868176e9",
+    "quality-screen/README.md": "7e0f5505e9cf95c126d30904b2c4ad0858871ff727a77d2f2001867c8c243985",
+    "impact/capture-receipt.json": "4c22e430e374508a124dbc39c39611ceb2765db5a2bbe81e8a34238324842fd8",
+    "impact/inputs.json": "5a14500782e0057a98f6bcf466878df62207344234e2e0d9d346e47cc094ae3d",
+    "impact/comparison.json": "4010d9c159568a915ce1c7550e6ae1597b177c380480d5ab5ff20b4ae028a56a",
+    "impact/capture.py.txt": "b45fd8cf3899eda8f28f0a0aca89cab60d9edb8058f3acd9139a90ed3aa653fa",
+    "impact/compare.py.txt": "1807f55b581f4b4db37e5267f29261046556133abc4620c91cd33e12cd8269a1",
+    "history-tests/verification.json": "c0555a0961342522861a54554e0a13f325a061705ac208009dcbc0444809569f",
+    "history-tests/measured-pins.json": "22c9e6671dc744a1a5851ab3cfdf0e20fd0cb8d865b892ac11025c46f52e686f",
+    "root-checks/logs.json": "54287d37470ca2156b6572ed336f46b4cb8e218f93390ae4b78d9e6304425f80",
+    "feedback-implementation-review.json": "bc6595685f453d86e0a600d96dbe9750040fb7a314e6237a0be28ac7957ff7b6",
+    "feedback-implementation-checks.json": "a408b199d7c15e4eb04069b52511672fc5d342939d92f5f1029c79a173ee2d35"
+  },
+  "audit_script_sha256": "92ac7e31cb03393fe9947d5a95a32994652eb19f46bcb2ab4a390accec8e9d3f",
+  "checks": {
+    "date": "2026-09-08",
+    "baseline": "b614bfe735a27b9703025420daf603118f6a7f74",
+    "artifact_checks": {
+      "cat_de_roman_esti/fixtures/kg_sample.json": {
+        "baseline_sha256": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+        "current_sha256": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+        "restored_exact_baseline_bytes": true
+      },
+      "cat_de_roman_esti/fixtures/games_pack.json": {
+        "baseline_sha256": "4c7030bd86e966162f4ac51ef00cf3bb649ff7a9d59c8c34e180cb7ff53e1636",
+        "current_sha256": "c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04",
+        "restored_exact_baseline_bytes": true
+      },
+      "cat_de_roman_esti/fixtures/board_rankings_v37.json": {
+        "baseline_sha256": "b19a53983a1b4555c700f717033bb61b66aea9ea2dce643a7df0cf1a31e2c764",
+        "current_sha256": "ea207d65a1846d2f9bb2945ca9320a8e5e7bdc5e9fe8c31113aaf4f749fdc3d6",
+        "restored_exact_baseline_bytes": true
+      },
+      "cat_de_roman_esti/fixtures/derived_catalog_v38.json": {
+        "baseline_sha256": "1c1613cd4f1e59c2b8d68ded9b071b1f812198f50aca528a3785fef34fad90b8",
+        "current_sha256": "4bd3cd515d21627fe42d07149bdf78951164ebfaa30df52fd1259ce26b8470d9",
+        "restored_exact_baseline_bytes": true
+      }
+    },
+    "historical_functions_compared": [
+      "before_v81_fixture",
+      "before_v83_fixture",
+      "before_v84_fixture",
+      "before_v85_fixture",
+      "before_v86_fixture",
+      "before_v87_fixture",
+      "before_v88_fixture",
+      "before_v80_pack",
+      "before_v82_pack",
+      "before_v83_pack",
+      "before_v84_pack",
+      "before_v85_pack",
+      "before_v86_pack",
+      "before_v87_pack",
+      "before_v88_pack",
+      "before_v80_rankings",
+      "before_v81_rankings",
+      "before_v82_rankings",
+      "before_v83_rankings",
+      "before_v84_rankings",
+      "before_v85_rankings",
+      "before_v86_rankings",
+      "before_v87_rankings",
+      "before_v88_rankings",
+      "before_v80_derived",
+      "before_v81_derived",
+      "before_v82_derived",
+      "before_v83_derived",
+      "before_v84_derived",
+      "before_v85_derived",
+      "before_v86_derived",
+      "before_v87_derived",
+      "before_v88_derived"
+    ],
+    "old_records_exact": 658,
+    "new_approved_round": "ct_viata_de_roman_353",
+    "rejected_ids": [
+      "ct_viata_de_roman_352",
+      "ct_viata_de_roman_354"
+    ],
+    "contexto_id_high_water": 354,
+    "observations_each_capture": 7170,
+    "unchanged_observations": 7169,
+    "changed_observations": [
+      {
+        "id": "ct_gastronomie_344",
+        "target": "n_v86_food_frisca",
+        "word": "Tort Diplomat",
+        "before": {
+          "http": 200,
+          "ok": true,
+          "won": false,
+          "attempts": 1,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_tort_diplomat",
+            "label": "Tort Diplomat",
+            "rank": 345,
+            "distance": 5,
+            "temperature": "Rece",
+            "closeness": 85
+          }
+        },
+        "after": {
+          "http": 200,
+          "ok": true,
+          "won": false,
+          "attempts": 1,
+          "needs_confirmation": false,
+          "resolved_label": null,
+          "guess": {
+            "id": "n_v87_food_tort_diplomat",
+            "label": "Tort Diplomat",
+            "rank": 2,
+            "distance": 1,
+            "temperature": "Fierbinte",
+            "closeness": 99
+          }
+        }
+      }
+    ],
+    "alchimie_profiles_exact": 83,
+    "lant_profiles_and_menus_exact": 100,
+    "derived_boards_and_payloads_exact": 336,
+    "shortest_shown_hops_exact": 206,
+    "impact_archives_verified": 5,
+    "history_logs_verified": 2,
+    "root_logs_verified": 10,
+    "focused_tests": 266,
+    "seeded_starts_exact": true,
+    "current_literals_static": true,
+    "final_portable_gate_bound": true,
+    "raw_quality_original_preserved": true
+  },
+  "additional_checks": [
+    "Independently recomputed current Contexto distance-profile SHA baa8ceb8a234567bc6938a3af60bdc05505100809743bb123582d9270d1bac56 and verified 240 approved / 236 selectable / high-water 354.",
+    "Current artifact/count/payload expectations remain explicit reviewed literals; only CurrentContentSnapshot and _frozen construct the current snapshot.",
+    "before_v89_feedback_pairs exactly restores the ten baseline native tuples. Closed Praf removal restores the four baseline neighborhood keys and validates all policy fields.",
+    "Source/receipt hashes were compared directly with git baseline bytes and current filesystem bytes. No heavy pytest, browser or live impact capture was repeated."
+  ],
+  "documentation_issue": {
+    "finding": "V89 README initially attributed the plural Mop win to the public seeded journey, whose actual test submits canonical Mop.",
+    "resolution": "Root corrected it to distinguish the public canonical win and the independent private mopurile proof. No source/test change required.",
+    "status": "resolved"
+  },
+  "remaining_before_landing": [
+    "Both full backend runtimes, accounts, frontend/browser and all content/docs/whitespace gates must finish green on final bound inputs.",
+    "Root reports the first full Python 3.12 run found V44 historical-scope failure: its pre-V88 closed-mesh assertion uses the newly extended V89 target set. Preserve that original failed receipt, review the narrow historical/current scope correction and rerun required final gates. This audit does not approve landing a failed suite.",
+    "Bind the final source, generated assets, immutable evidence and actual 16 completed receipts in the final manifest, then perform the requested final hash audit."
+  ],
+  "limits": [
+    "Only Mop 353 is a new public round. Făraș 352 / Aspirator 354 are rejected and absent; three private Praf target checks do not equal three served rounds.",
+    "C3 union-count mistake remains exact in raw staging artifacts with explicit later corrections. Current promotion requires five incoming predecessors.",
+    "Impact scope is 239 old approved records and 30 named words per record, not every possible user input. All 7,170 observations on each side are freshly computed, with no reuse.",
+    "Nineteen unknown stress surfaces, alternate-direction/hub ranking costs, Romanian-player sessions and physical-device checks remain separate release work."
+  ]
+}

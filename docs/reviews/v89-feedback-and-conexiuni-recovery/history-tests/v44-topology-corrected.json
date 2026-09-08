@@ -1,0 +1,63 @@
+{
+  "stage": "focused correction after first full Python 3.12 run completed with one historical-target-scope failure",
+  "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_v44_contexto_common_words.py tests/test_v89_household_content.py tests/test_v89_feedback.py tests/test_v88_bread_feedback.py tests/test_v88_everyday_graph.py tests/test_v85_history.py tests/test_v81_history.py -q -o addopts=",
+  "exit_code": 0,
+  "result": {
+    "passed": 110,
+    "failed": 0,
+    "seconds": 18.67
+  },
+  "change": "Only the V44 historical topology test changed. Its closed-sink checks use the exact 235 V88 targets reconstructed from bound pack/ranking history. Current 236-target anchor reachability, the exact 71-proxy hash, six opened cleaning nodes and unchanged Mop native ownership/Podea proxy remain asserted. Exactly the same six proxies reach Mop in pre-V88/current/bridge-removed graphs.",
+  "runtime_data_frontend_changed": false,
+  "sources_sha256": {
+    "tests/test_v44_contexto_common_words.py": "7b6a29497c76d9baa8d70cf034088c37133a1b0d61b5c9f659803cc401ae303d",
+    "tests/test_v89_household_content.py": "5165e2e08682451ce3e094ef25a5b781e47187aa5eb6dbf66ba2d2e22922b9bb",
+    "tests/test_v89_feedback.py": "acd73c65c8d1c7a22bc5153415a9235a1ce4df06020786ad66b1d0526c8ec500",
+    "tests/test_v88_bread_feedback.py": "e6992b63bc85ab421c81aad40246c1b6304b33533a4ece0ab7c5530a5cb662e4",
+    "tests/test_v88_everyday_graph.py": "b6c3dd3284a7d9b92b0cea194acf2d38820d79fbbffda5e3cec7262cbb763a71",
+    "tests/test_v85_history.py": "aca50f86c8fb4018ebec0b0a1047d9d30acf6fd92fd109d1d7dde5bc7fb26a7e",
+    "tests/test_v81_history.py": "8f30c24d5a98f0dc2787a3c2e68fc086ba1b5eea41f260e195444d9e45f1f05f",
+    "tests/content_history.py": "260bcff2abea53347733f71386e83dd28ead084e3f36fb157f7c149042a88d31",
+    "tests/current_content.py": "8ac236eaa02afb98d74df52f529fcd429fdc540aab6797d5499fdc83032622cb",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "753c22890e14b8b049f62d249ee92a06b6631fb4589db97dbebd003eaf18b5fd",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "ea207d65a1846d2f9bb2945ca9320a8e5e7bdc5e9fe8c31113aaf4f749fdc3d6",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "4bd3cd515d21627fe42d07149bdf78951164ebfaa30df52fd1259ce26b8470d9"
+  },
+  "logs": {
+    "v44-topology-corrected.log": {
+      "archive": "v44-topology-corrected.log.gz",
+      "sha256": "41c575811014fcc0195cc1983664043f5811a88e24587c5eecd832307d4e266c",
+      "archive_sha256": "95859d50e6404ed14a232a9eb83976fa0741f04b9943d5c923ab9bc058498b06",
+      "bytes": 181,
+      "archive_bytes": 63
+    },
+    "v44-topology-ruff.log": {
+      "archive": "v44-topology-ruff.log.gz",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "archive_sha256": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd",
+      "bytes": 19,
+      "archive_bytes": 39
+    },
+    "v44-topology-whitespace.log": {
+      "archive": "v44-topology-whitespace.log.gz",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "archive_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "bytes": 0,
+      "archive_bytes": 20
+    },
+    "v44-topology-correction.diff": {
+      "archive": "v44-topology-correction.diff.gz",
+      "sha256": "33d7049f5dd30d0af8bf09eb7ee439a783681873d3c0b20d2008589ef5b91e08",
+      "archive_sha256": "8511baee8b096a70b6a97c6bf48f62fd0a28c77950108597beed2742fbd49216",
+      "bytes": 3165,
+      "archive_bytes": 1121
+    }
+  },
+  "lint_exit_code": 0,
+  "whitespace_exit_code": 0,
+  "initial_failure": "v44-topology-initial.json"
+}

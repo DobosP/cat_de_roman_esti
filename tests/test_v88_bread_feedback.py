@@ -13,7 +13,7 @@ from cat_de_roman_esti.wordgames import contexto as C
 from cat_de_roman_esti.wordgames.contexto_feedback import EXACT_TARGET_FEEDBACK_PAIRS
 from cat_de_roman_esti.wordgames.contexto_projection import resolve_projection
 from cat_de_roman_esti.wordgames.service import get_service
-from tests.content_history import before_v88_feedback_pairs
+from tests.content_history import before_v88_feedback_pairs, before_v89_feedback_pairs
 
 BRIOSA = "n_v87_food_briosa"
 PAINE = "n_v4gas_paine"
@@ -57,7 +57,8 @@ def test_native_bread_family_forms_are_hot_distinct_and_free_to_repeat(word):
 def test_bread_exception_is_one_closed_scope_and_cannot_be_borrowed_by_projections():
     svc = get_service()
     before = before_v88_feedback_pairs(EXACT_TARGET_FEEDBACK_PAIRS)
-    assert len(before) == 9 and EXACT_TARGET_FEEDBACK_PAIRS - before == {(BRIOSA, PAINE)}
+    at_v88 = before_v89_feedback_pairs(EXACT_TARGET_FEEDBACK_PAIRS)
+    assert len(before) == 9 and at_v88 - before == {(BRIOSA, PAINE)}
     for target in [*svc.graph.nodes, "missing_target"]:
         assert C._feedback_anchor_id(svc, BRIOSA, target) == (PAINE if target == PAINE else BRIOSA)
         assert C._feedback_anchor_id(svc, BRIOSA, target, allow_exact_pairs=False) == BRIOSA

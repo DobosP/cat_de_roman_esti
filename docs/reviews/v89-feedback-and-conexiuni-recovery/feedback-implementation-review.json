@@ -1,0 +1,92 @@
+{
+  "reviewer": "independent V89 feedback reviewer",
+  "date": "2026-09-08",
+  "decision": "accept bounded implementation; integrated gates and final content judgments required",
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "4c7030bd86e966162f4ac51ef00cf3bb649ff7a9d59c8c34e180cb7ff53e1636",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "753c22890e14b8b049f62d249ee92a06b6631fb4589db97dbebd003eaf18b5fd",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"
+  },
+  "artifact_sha256": {
+    "feedback-implementation-checks.json": "a408b199d7c15e4eb04069b52511672fc5d342939d92f5f1029c79a173ee2d35",
+    "review-feedback-implementation.py.txt": "a46b5c885f215499f83615bbc3fe4d6c5ac0894db828c6405770dbe282a44188",
+    "feedback-implementation-review.md": "7aee61c3b8784f7082c082e73a7a6c98f9822a3fe073e205352cb7877b4ebbdb",
+    "feedback-implementation-initial-interruption.txt": "9700979fbe772e04a1216e9f88304224975187abd8d3c2ae2e13117553f45d15",
+    "review-feedback-implementation-initial.py.txt": "f768c832f0411c2fb412d6286af62e06f37ef956d2072607d36586236560d6d4",
+    "author-screening/postfix-first-guesses.json": "1982b0f089b7c9a05b17eab28371103712182443e6cafb6e4c085be277522b20",
+    "author-screening/postfix-journeys.json": "f95f6c0bffb86daafaaec982c0ee268f63e09ec8048d4cb5d0f45838c0510820",
+    "author-screening/postfix-negative-controls.json": "2ff42ff5e95e8a0c1e59760758c089f80b80750a86bedef7f4195df4f296e24a",
+    "author-screening/postfix-comparison.json": "55fd89498161c87343173a8515f0db1650fdf0c621801df5c9e046ac1a54fbe8",
+    "author-candidates/viata_de_roman/verify_factual.json": "6a252a6dd084c5da8493fb1bba2087346650ca1e30bec2a0a50bd2cce5c255c9"
+  },
+  "independent_method": "Whole AST comparison to baseline after deleting only the reviewed one native tuple and one projected dictionary entry. Eleven additional independent fresh private-BFF probes, all cleaned up. No source/data mutation.",
+  "ast_checks": {
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": {
+      "whole_module_ast_exact_after_removing_one_approved_entry": true,
+      "removed_entries": 1
+    },
+    "cat_de_roman_esti/wordgames/contexto_projection.py": {
+      "whole_module_ast_exact_after_removing_one_approved_entry": true,
+      "removed_entries": 1
+    }
+  },
+  "byte_exact_sources": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": true,
+    "cat_de_roman_esti/fixtures/games_pack.json": true,
+    "cat_de_roman_esti/wordgames/contexto.py": true,
+    "cat_de_roman_esti/wordgames/service.py": true
+  },
+  "approved_scope": {
+    "native_pair": [
+      "n_v87_food_tort_diplomat",
+      "n_v86_food_frisca"
+    ],
+    "projection_key": "praf",
+    "projection_exact_target_ids": [
+      "n_v31_cleaning_floor_aspirator",
+      "n_v31_cleaning_floor_faras",
+      "n_v31_cleaning_floor_mop"
+    ],
+    "include_direct_neighbors": false,
+    "praf_public_id": "ctxp_81703160cad7893fa1c9",
+    "praf_preserved_term": {
+      "surface": "praf",
+      "anchor_id": "n_v24_nature_world_pamant",
+      "domain": "peisaj",
+      "rank_penalty": 1,
+      "mapping_kind": "explicit"
+    }
+  },
+  "inventory": {
+    "projection_term_count": 465,
+    "legacy_native_proxy_count": 71,
+    "native_exact_pair_count": 11,
+    "projection_neighborhood_count": 5
+  },
+  "independent_live_probe_count": 11,
+  "sessions_cleaned": true,
+  "author_evidence_independently_compared": {
+    "first_guess_full_responses": 256,
+    "exact_unchanged": 253,
+    "changed_exact_pairs": 3,
+    "all_eight_profiles_exact": true,
+    "isolation_pairs": 84,
+    "isolation_unchanged": 81,
+    "complete_author_journeys_read": 3
+  },
+  "initial_interruption": "The first reviewer run reached final hash guard after11 BFF assertions, then failed while its binding included a concurrently changing test file. Script and failure evidence retained. Completed runtime-scoped run passed; earlier requests not counted as additional coverage.",
+  "required_final_checks": [
+    "Parent-owned targeted tests and full integration on final bytes.",
+    "Fresh bound C1-C6 dossiers and independent portable judgments before promotion.",
+    "Keep the already documented hub-ranking and held-target limits."
+  ],
+  "limits": [
+    "No runtime/data/test edits by reviewer.",
+    "No full-suite rerun performed by this reviewer.",
+    "Private automated sessions and author reports are not Romanian human playtesting.",
+    "Scope fixes4 submitted-word/target relations, not4new graph facts or words."
+  ]
+}

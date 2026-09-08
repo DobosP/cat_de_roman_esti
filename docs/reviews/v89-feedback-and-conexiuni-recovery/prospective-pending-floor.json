@@ -1,0 +1,251 @@
+{
+  "date": "2026-09-08",
+  "phase": "Read-only proposed-rule compatibility scout; no lint or content changes",
+  "conclusion": "Current8pending strict rail remains green under the proposed numeric5-incoming floor; no exemption or weakened threshold needed.",
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04",
+    "scripts/critique_pack.py": "8ed430e2d44716e5a3af49ec2fa1d344dd6f50086c3746f43b89c8c1b97b5916",
+    "docs/adr/0071-gate-contexto-by-feedback-legibility.md": "f580039b2939ca4e179c6cfefee2ee0cff034dc8eb49cc7e09cbc0081bbf8a3c",
+    "docs/reviews/v47-contexto-pending-gate/contexto_verdicts.json": "33077b5d8639f70bb20aa1466b0d654d691d4bfe7aa51e7e059c1d02e304552d"
+  },
+  "original_scout_sha256_unchanged": {
+    "prospective-scout.md": "507b0ccae0072a93a177f8aa4718c67451f01ff85ae29ea61d507c476b94e844",
+    "prospective-scout.json": "b81ffeac1bd0c7adc9ace79811cf4dc5e915b352c01a563efc0f0d74c4618aad"
+  },
+  "pending_counts": {
+    "contexto": 2,
+    "conexiuni": 0,
+    "lant": 3,
+    "alchimie": 3
+  },
+  "pending_contexto": [
+    {
+      "record": {
+        "difficulty": "greu",
+        "target": "n_v3mem_shitpost",
+        "id": "ct_meme_net_238",
+        "category": "meme_net",
+        "source": "ai",
+        "status": "pending"
+      },
+      "target_label": "Shitpost",
+      "unique_non_distractor_incoming_count": 8,
+      "strong_incoming_count": 8,
+      "predecessors": [
+        {
+          "id": "n_net_comentarii_online",
+          "label": "Comentarii online",
+          "strength": 0.68,
+          "is_distractor": false
+        },
+        {
+          "id": "n_net_internet_romanesc",
+          "label": "Internetul românesc",
+          "strength": 0.78,
+          "is_distractor": false
+        },
+        {
+          "id": "n_net_meme_romanesc",
+          "label": "Memă românească",
+          "strength": 0.86,
+          "is_distractor": false
+        },
+        {
+          "id": "n_net_parodie_online",
+          "label": "Parodie online",
+          "strength": 0.68,
+          "is_distractor": false
+        },
+        {
+          "id": "n_net_sketch_online",
+          "label": "Sketch online",
+          "strength": 0.62,
+          "is_distractor": false
+        },
+        {
+          "id": "n_v18mem_brainrot",
+          "label": "Brainrot",
+          "strength": 0.6,
+          "is_distractor": false
+        },
+        {
+          "id": "n_v2mem_comedie_online",
+          "label": "Comedie online",
+          "strength": 0.74,
+          "is_distractor": false
+        },
+        {
+          "id": "n_v4mem_mema",
+          "label": "Memă",
+          "strength": 0.72,
+          "is_distractor": false
+        }
+      ],
+      "proposed_numeric_floor_fails": false,
+      "historical_V47_verdict": {
+        "id": "ct_meme_net_238",
+        "game": "contexto",
+        "analyst": "keep",
+        "verifier": "keep",
+        "final": "keep",
+        "verified": true,
+        "verifier_lost": false,
+        "review_binding": "sha256:d1f80276d736e8db37356c191c14d8ed40d832363dbe3b2f568065b451b54d29",
+        "policy": "unanimous-keep",
+        "failure_modes": [
+          "A5",
+          "C2"
+        ],
+        "metrics": {
+          "direct_incoming": 8,
+          "responsive": 2078,
+          "direct_projections": 0,
+          "direct_feedback_proxies": 0
+        },
+        "reasoning": "Shitpost has adequate graph density and Memă as an obvious opener, but cross-generational recognition is doubtful and the profanity-derived target triggers the mandatory ADR-0019/A5 owner boundary. Gate mode therefore keeps it pending rather than auto-shipping or auto-rejecting it."
+      }
+    },
+    {
+      "record": {
+        "difficulty": "normal",
+        "target": "n_v2soc_industrie",
+        "id": "ct_societate_257",
+        "category": "societate",
+        "source": "ai",
+        "status": "pending"
+      },
+      "target_label": "Industrie",
+      "unique_non_distractor_incoming_count": 13,
+      "strong_incoming_count": 13,
+      "predecessors": [
+        {
+          "id": "n_socx_automobile_dacia",
+          "label": "Automobile Dacia",
+          "strength": 0.78,
+          "is_distractor": false
+        },
+        {
+          "id": "n_socx_craiova",
+          "label": "Craiova",
+          "strength": 0.6,
+          "is_distractor": false
+        },
+        {
+          "id": "n_socx_electroputere_craiova",
+          "label": "Electroputere Craiova",
+          "strength": 0.76,
+          "is_distractor": false
+        },
+        {
+          "id": "n_socx_industria_romaneasca",
+          "label": "Industria românească",
+          "strength": 0.86,
+          "is_distractor": false
+        },
+        {
+          "id": "n_socx_pitesti",
+          "label": "Pitești",
+          "strength": 0.63,
+          "is_distractor": false
+        },
+        {
+          "id": "n_socx_universitatea_politehnica_bucuresti",
+          "label": "Universitatea Politehnica din București",
+          "strength": 0.7,
+          "is_distractor": false
+        },
+        {
+          "id": "n_socx_uzina_resita",
+          "label": "Uzinele Reșița",
+          "strength": 0.78,
+          "is_distractor": false
+        },
+        {
+          "id": "n_v17soc_sectorul_it",
+          "label": "Sectorul IT românesc",
+          "strength": 0.7,
+          "is_distractor": false
+        },
+        {
+          "id": "n_v2soc_port",
+          "label": "Port",
+          "strength": 0.62,
+          "is_distractor": false
+        },
+        {
+          "id": "n_v4soc_fabrica",
+          "label": "fabrică",
+          "strength": 0.88,
+          "is_distractor": false
+        },
+        {
+          "id": "n_v4soc_firma",
+          "label": "firmă",
+          "strength": 0.72,
+          "is_distractor": false
+        },
+        {
+          "id": "n_v4soc_munca",
+          "label": "muncă",
+          "strength": 0.78,
+          "is_distractor": false
+        },
+        {
+          "id": "n_v4soc_serviciu",
+          "label": "serviciu",
+          "strength": 0.7,
+          "is_distractor": false
+        }
+      ],
+      "proposed_numeric_floor_fails": false,
+      "historical_V47_verdict": {
+        "id": "ct_societate_257",
+        "game": "contexto",
+        "analyst": "keep",
+        "verifier": "keep",
+        "final": "keep",
+        "verified": true,
+        "verifier_lost": false,
+        "review_binding": "sha256:a3ca820107a1b65c4b54e94caeda971c63a6d278124cb082dd2fdb9d1283c3e8",
+        "policy": "unanimous-keep",
+        "failure_modes": [
+          "A5",
+          "C1"
+        ],
+        "metrics": {
+          "direct_incoming": 13,
+          "responsive": 2239,
+          "direct_projections": 0,
+          "direct_feedback_proxies": 0
+        },
+        "reasoning": "Industrie is an abstract economic category and would fail C1 on quality alone. It is also a near-duplicate of served ct_societate_178 / Industria românească: the targets have a strength-0.86 direct link and share five high-signal predecessors. A5 requires an owner-boundary keep in gate mode."
+      }
+    }
+  ],
+  "proposed_added_numeric_failures": 0,
+  "actual_current_command": {
+    "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python scripts/critique_pack.py --status pending --strict",
+    "exit_code": 0,
+    "stdout": "critique_pack: 8 item(s) checked, 0 flagged, 0 FAIL finding(s)\n  member_overuse       WARN x65\n  nondistinctive_region_link WARN x16\n",
+    "runs": 1
+  },
+  "strict_contract": {
+    "selection_without_ids": "All selected games with status pending",
+    "exit1_condition": "--strict and at least one selected item FAIL",
+    "warnings": "Displayed, nonfatal",
+    "invalid_explicit_selection": "exit2"
+  },
+  "owner_hold_contract": [
+    "A5 holdings remain pending and unserved; numeric pass does not approve recognition, ontology or uniqueness.",
+    "No other-game count or status is changed.",
+    "Future low-degree A5 holds would conflict with an unconditional global pendingFAIL rail; do not invent an exemption or auto-reject them. Resolve any actual future conflict explicitly."
+  ],
+  "implementation_tests_to_add": [
+    "Currenttwo owner-held records remain numeric passes without changing pending status.",
+    "Synthetic4incoming target fails despite abundant outgoing neighbors.",
+    "A5/editorial outcomes not inferred from numeric pass."
+  ],
+  "markdown_sha256": "93e7abe785ca792bdb398f8ec87d20216ee5f745b17a4b130be4fff2a35ed518",
+  "remaining_preimplementation_check": "Inspect whether approved-stock WARN findings influence ranker scoring or eligibility, to avoid an indirect automatic demotion of old stock. Numeric passing of current A5 holds does not authorize promotion."
+}

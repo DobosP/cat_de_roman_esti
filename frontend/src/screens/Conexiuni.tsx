@@ -9,6 +9,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, m } from "framer-motion";
 import { ApiError } from "../api/client";
+import { createGameActionOwner, recoverOwnedGameAction, type GameActionTicket } from "../gameActionRecovery.mjs";
 import {
   conexiuniApi,
   GROUP_SIZE,
@@ -71,6 +72,8 @@ const selectionKey = (ids: readonly string[]) => JSON.stringify([...ids].sort())
 const ONE_AWAY_GUIDANCE =
   "Aproape: 3 din 4. Schimbă o piesă.";
 type BlockedGuess = { key: string; oneAway: boolean };
+type DuplicateRecovery = { guess: string[]; message: string };
+type ActionSync = { gameId: string; kind: "failed" | "changed"; duplicate?: DuplicateRecovery };
 
 const unsolvedTileIds = (fresh: ConexiuniState) => {
   const solved = new Set(
@@ -88,6 +91,10 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const startInFlight = useRef(false);
   const [loading, setLoading] = useState(() => active.peek() !== null);
   const [busy, setBusy] = useState(false);
+  const [actionSync, setActionSync] = useState<ActionSync | null>(null);
+  const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
+  useEffect(() => () => actionOwner.invalidate(), [actionOwner]);
+  const actionsLocked = busy || loading || actionSync !== null;
   const [selected, setSelected] = useState<string[]>([]);
   // A server-confirmed one-away or duplicate set that must change before resubmission.
   // Only the oneAway flag may surface the stronger 3-of-4 guidance.
@@ -156,18 +163,11 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     setHint(null);
   }, []);
 
-  const refreshAuthoritativeState = useCallback(async (gameId: string) => {
-    try {
-      const fresh = await conexiuniApi.get(gameId);
-      applyAuthoritativeState(fresh);
-      return fresh;
-    } catch {
-      return null;
-    }
-  }, [applyAuthoritativeState]);
-
   const applyResumedGame = useCallback(
     (s: ConexiuniState, { terminal }: { terminal: boolean }) => {
+      actionOwner.invalidate();
+      setActionSync(null);
+      setBusy(false);
       setStartFailed(false);
       setState(s);
       setDifficulty(s.difficulty);
@@ -181,7 +181,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       setShake(0);
       if (!terminal) onToast("Joc reluat.", "info");
     },
-    [onToast],
+    [actionOwner, onToast],
   );
 
   const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
@@ -196,6 +196,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     async (mode: StartMode) => {
       if (startInFlight.current) return;
       startInFlight.current = true;
+      actionOwner.invalidate();
       cancelResume();
       setStartFailed(false);
       setLoading(true);
@@ -209,6 +210,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                 category: category ?? undefined,
               });
         setState(s);
+        setActionSync(null);
+        setBusy(false);
         active.remember(s.game_id);
         dismissRecovery();
         setRecordHit(false);
@@ -225,7 +228,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         setLoading(false);
       }
     },
-    [active, cancelResume, dismissRecovery, category, difficulty],
+    [active, actionOwner, cancelResume, dismissRecovery, category, difficulty],
   );
 
   const puzzleKey = useMemo(() => {
@@ -287,7 +290,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
 
   const toggle = useCallback(
     (id: string) => {
-      if (busy || finished) return;
+      if (actionsLocked || finished || actionOwner.hasPending()) return;
       // Decide outside the updater so the sound side-effect stays StrictMode-safe and
       // fires only on a real change (selecting/deselecting, not a capped 5th click).
       const wasSelected = selected.includes(id);
@@ -303,29 +306,115 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         return [...prev, id];
       });
     },
-    [busy, finished, selected],
+    [actionsLocked, actionOwner, finished, selected],
   );
 
   const clearSelection = useCallback(() => {
-    if (busy || finished) return;
+    if (actionsLocked || finished || actionOwner.hasPending()) return;
     setSelected([]);
     setBlockedGuess(null);
     setHint(null);
-  }, [busy, finished]);
+  }, [actionsLocked, actionOwner, finished]);
 
   const shuffle = useCallback(() => {
-    if (busy || finished) return;
+    if (actionsLocked || finished || actionOwner.hasPending()) return;
     sound.playSelect();
     setShuffleNonce((n) => n + 1);
-  }, [busy, finished]);
+  }, [actionsLocked, actionOwner, finished]);
+
+  const beginAction = useCallback((previous: ConexiuniState) => {
+    if (startInFlight.current) return null;
+    const ticket = actionOwner.begin(previous.game_id);
+    if (!ticket) return null;
+    if (!actionOwner.owns(ticket)) {
+      actionOwner.finish(ticket);
+      setBlockedGuess(null);
+      setHint(null);
+      setActionSync({ gameId: previous.game_id, kind: "changed" });
+      return null;
+    }
+    return ticket;
+  }, [actionOwner]);
+
+  const mayAdoptAction = useCallback((ticket: GameActionTicket) => {
+    if (!actionOwner.isCurrent(ticket)) return false;
+    if (!actionOwner.owns(ticket)) {
+      setActionSync({ gameId: ticket.gameId, kind: "changed" });
+      return false;
+    }
+    return true;
+  }, [actionOwner]);
+
+  const reconcileAction = useCallback(async (ticket: GameActionTicket, duplicate?: DuplicateRecovery) => {
+    const outcome = await recoverOwnedGameAction(
+      actionOwner, ticket, conexiuniApi.get,
+      (error) => error instanceof ApiError && error.status === 404,
+    );
+    if (!mayAdoptAction(ticket)) return;
+    if (outcome.kind === "missing") {
+      if (ticket.savedId === ticket.gameId && !active.forgetIfCurrent(ticket.gameId)) {
+        setActionSync({ gameId: ticket.gameId, kind: "changed" });
+        return;
+      }
+      setActionSync(null);
+      setState(null);
+      setSelected([]);
+      setBlockedGuess(null);
+      setHint(null);
+      onToast("Jocul nu mai este disponibil. Poți începe altul.", "info");
+      return;
+    }
+    if (outcome.kind !== "recovered") {
+      setActionSync({ gameId: ticket.gameId, kind: outcome.kind === "changed" ? "changed" : "failed", duplicate });
+      return;
+    }
+    const fresh = outcome.state;
+    setActionSync(null);
+    applyAuthoritativeState(fresh);
+    // GET exposes earned groups/clues and terminal results, never the lost one-away verdict.
+    if (!fresh.won && !fresh.lost) {
+      const freshAvailable = unsolvedTileIds(fresh);
+      if (duplicate && duplicate.guess.every((id) => freshAvailable.has(id))) {
+        setSelected(duplicate.guess);
+        setBlockedGuess({ key: selectionKey(duplicate.guess), oneAway: false });
+        setHint(`${duplicate.message} Schimbă cel puțin o piesă înainte de o nouă verificare.`);
+      } else {
+        setHint("Joc sincronizat. Poți continua.");
+      }
+    }
+  }, [actionOwner, active, applyAuthoritativeState, mayAdoptAction, onToast]);
+
+  const retryActionSync = useCallback(async () => {
+    if (!state || busy || !actionSync) return;
+    if (actionSync.kind === "changed") {
+      actionOwner.invalidate();
+      setActionSync(null);
+      setState(null);
+      setLoading(true);
+      retryResume();
+      return;
+    }
+    if (state.game_id !== actionSync.gameId) return;
+    const ticket = beginAction(state);
+    if (!ticket) return;
+    setBusy(true);
+    try {
+      await reconcileAction(ticket, actionSync.duplicate);
+    } finally {
+      if (actionOwner.finish(ticket)) setBusy(false);
+    }
+  }, [state, busy, actionSync, actionOwner, beginAction, reconcileAction, retryResume]);
 
   const submit = useCallback(async () => {
-    if (!state || selected.length !== GROUP_SIZE || busy || exactBlockedRetry) return;
+    if (!state || finished || selected.length !== GROUP_SIZE || actionsLocked || exactBlockedRetry) return;
+    const ticket = beginAction(state);
+    if (!ticket) return;
     const guess = [...selected];
     const guessKey = selectionKey(guess);
     setBusy(true);
     try {
       const res: GuessResult = await conexiuniApi.guess(state.game_id, guess);
+      if (!mayAdoptAction(ticket)) return;
       setState(res);
       if (res.correct) {
         sound.playWin();
@@ -357,66 +446,34 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         }
       }
     } catch (err) {
-      sound.playError();
-      const message =
-        err instanceof ApiError
-          ? err.message || `Verificare respinsă (${err.status}).`
-          : "Verificare respinsă.";
-      const fresh =
-        err instanceof ApiError && (err.status === 400 || err.status === 409)
-          ? await refreshAuthoritativeState(state.game_id)
-          : null;
-      if (err instanceof ApiError && err.status === 409) {
-        const freshAvailable = fresh ? unsolvedTileIds(fresh) : null;
-        const retryStillVisible =
-          freshAvailable === null || guess.every((id) => freshAvailable.has(id));
-        if (!fresh?.won && !fresh?.lost && retryStillVisible) {
-          setSelected(guess);
-          setBlockedGuess({ key: guessKey, oneAway: false });
-          setHint(`${message} Schimbă cel puțin o piesă înainte de o nouă verificare.`);
-        }
-      } else if (!fresh?.won && !fresh?.lost) {
-        onToast(message, "error");
-      }
+      const duplicate = err instanceof ApiError && err.status === 409
+        ? { guess, message: err.message || "Combinația a fost deja verificată." }
+        : undefined;
+      await reconcileAction(ticket, duplicate);
     } finally {
-      setBusy(false);
+      if (actionOwner.finish(ticket)) setBusy(false);
     }
-  }, [state, selected, busy, exactBlockedRetry, onToast, refreshAuthoritativeState]);
+  }, [state, finished, selected, actionsLocked, exactBlockedRetry, beginAction,
+    mayAdoptAction, onToast, reconcileAction, actionOwner]);
 
   const requestClue = useCallback(async () => {
-    if (!state || busy || finished || !state.clue_available) return;
+    if (!state || actionsLocked || finished || !state.clue_available) return;
+    const ticket = beginAction(state);
+    if (!ticket) return;
     setBusy(true);
     try {
       const res = await conexiuniApi.clue(state.game_id);
+      if (!mayAdoptAction(ticket)) return;
       sound.playSelect();
       applyAuthoritativeState(res);
-      // The authoritative clue is rendered once in the compact board guidance card.
-      // Applying it also retires stale selected ids and prior local feedback.
-    } catch (err) {
-      sound.playError();
-      const fresh =
-        err instanceof ApiError && (err.status === 400 || err.status === 409)
-          ? await refreshAuthoritativeState(state.game_id)
-          : null;
-      if (!fresh?.won && !fresh?.lost) {
-        onToast(
-          err instanceof ApiError
-            ? err.message || `Indiciu respins (${err.status}).`
-            : "Indiciu respins.",
-          "error",
-        );
-      }
+      // Render the earned clue once; retire invisible selected ids and stale feedback.
+    } catch {
+      await reconcileAction(ticket);
     } finally {
-      setBusy(false);
+      if (actionOwner.finish(ticket)) setBusy(false);
     }
-  }, [
-    state,
-    busy,
-    finished,
-    onToast,
-    applyAuthoritativeState,
-    refreshAuthoritativeState,
-  ]);
+  }, [state, actionsLocked, finished, beginAction, mayAdoptAction,
+    applyAuthoritativeState, reconcileAction, actionOwner]);
 
   const copyShare = useCallback(async () => {
     if (!sharePayload) return;
@@ -425,23 +482,26 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     else onToast("Nu am putut copia.", "error");
   }, [sharePayload, onToast]);
 
-  // A live-board exit is permanent. A terminal board keeps its pointer until the queued
-  // score completion settles, so closing this document cannot lose an unrecorded result.
+  // An ordinary live-board exit is permanent. Uncertain actions preserve the pointer
+  // for resume; terminal score completion owns its conditional cleanup.
   const handleExit = useCallback(() => {
     if (startInFlight.current) return;
-    if (!finished) active.forget();
+    if (!finished && state && !busy && !actionSync && !actionOwner.hasPending()) {
+      active.forgetIfCurrent(state.game_id);
+    }
+    actionOwner.invalidate();
     setSelected([]);
     setBlockedGuess(null);
     setHint(null);
     onExit();
-  }, [active, finished, onExit]);
+  }, [active, state, busy, actionSync, actionOwner, finished, onExit]);
 
   // Keyboard: Enter submits a full selection, Escape/Backspace clears it. Inert when
   // no board is active, while a request is in flight, or once the game is finished.
   useEffect(() => {
     if (!state || finished) return;
     const onKey = (e: KeyboardEvent) => {
-      if (busy) return;
+      if (actionsLocked || actionOwner.hasPending()) return;
       const target = e.target instanceof Element ? e.target : null;
       if (
         e.defaultPrevented ||
@@ -464,7 +524,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [state, finished, busy, selected, exactBlockedRetry, submit, clearSelection]);
+  }, [state, finished, actionsLocked, actionOwner, selected, exactBlockedRetry, submit, clearSelection]);
 
   // ----------------------------------------------------------------- INTRO
   if (!state) {
@@ -602,7 +662,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                   </span>
                   <Button
                     type="button"
-                    disabled={busy || selected.length !== GROUP_SIZE || exactBlockedRetry}
+                    disabled={actionsLocked || selected.length !== GROUP_SIZE || exactBlockedRetry}
                     onClick={submit}
                     style={{ borderColor: DEF.accent }}
                   >
@@ -613,6 +673,18 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
             />
           </div>
         )}
+
+        {!finished && actionSync ? (
+          <div className="card col connections-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
+            <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
+            <span>{actionSync.kind === "changed"
+              ? "Încarcă jocul curent pentru a continua."
+              : "Acțiunea poate fi deja salvată. Verifică jocul înainte de o nouă combinație sau un indiciu."}</span>
+            <Button type="button" onClick={() => void retryActionSync()} disabled={busy}>
+              {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
+            </Button>
+          </div>
+        ) : null}
 
         {/* Feedback stays immediately before the board without enlarging the sticky coach. */}
         <AnimatePresence>
@@ -677,18 +749,18 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                     exit={{ scale: 0.4, opacity: 0 }}
                     transition={{ type: "spring", stiffness: 320, damping: 20 }}
                     onClick={() => toggle(t.id)}
-                    disabled={busy}
+                    disabled={actionsLocked}
                     aria-pressed={isSel}
                     title={t.label}
                     className="card center connection-tile"
                     style={{
                       padding: "12px 6px",
                       minHeight: 64,
-                      cursor: busy ? "default" : "pointer",
+                      cursor: actionsLocked ? "default" : "pointer",
                       textAlign: "center",
                       fontSize: "0.82rem",
                       lineHeight: 1.15,
-                      opacity: busy && !isSel ? 0.55 : 1,
+                      opacity: actionsLocked && !isSel ? 0.55 : 1,
                       borderColor: isSel ? DEF.accent : "var(--surface-border)",
                       background: isSel
                         ? `color-mix(in srgb, var(--surface) 65%, ${DEF.accent})`
@@ -713,7 +785,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               <Button
                 type="button"
                 variant="secondary"
-                disabled={busy || !state.clue_available}
+                disabled={actionsLocked || !state.clue_available}
                 onClick={() => void requestClue()}
                 title={
                   state.clue_available
@@ -737,7 +809,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               <Button
                 type="button"
                 variant="secondary"
-                disabled={busy || remainingTiles.length <= GROUP_SIZE}
+                disabled={actionsLocked || remainingTiles.length <= GROUP_SIZE}
                 onClick={shuffle}
                 title="Amestecă pozițiile pieselor"
               >
@@ -746,7 +818,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               <Button
                 type="button"
                 variant="secondary"
-                disabled={busy || selected.length === 0}
+                disabled={actionsLocked || selected.length === 0}
                 onClick={clearSelection}
               >
                 Golește
@@ -795,6 +867,9 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               onReplay={() => void start({ kind: "seed", difficulty })}
               onOptions={() => {
                 if (startInFlight.current) return;
+                actionOwner.invalidate();
+                setActionSync(null);
+                setBusy(false);
                 setState(null);
               }}
               onExit={handleExit}

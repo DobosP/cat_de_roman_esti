@@ -1,0 +1,477 @@
+{
+  "version": 89,
+  "baseline": "b614bfe735a27b9703025420daf603118f6a7f74",
+  "runtime": {
+    "node": "24.20.0",
+    "npm": "11.19.0",
+    "python": "3.12.3"
+  },
+  "checks": [
+    {
+      "key": "install",
+      "command": "npm ci",
+      "cwd": "frontend",
+      "exit_code": 0,
+      "log": "npm-ci.log.gz"
+    },
+    {
+      "key": "native_initial",
+      "command": "npm test",
+      "cwd": "frontend",
+      "exit_code": 1,
+      "passed": 186,
+      "failed": 7,
+      "log": "native-initial.log.gz",
+      "meaning": "Seven old source-shape assertions needed to express owned recovery and conditional exit; no product rollback."
+    },
+    {
+      "key": "native_final",
+      "command": "npm test",
+      "cwd": "frontend",
+      "exit_code": 0,
+      "passed": 193,
+      "failed": 0,
+      "duration_ms": 1212.858576,
+      "log": "native-final.log.gz"
+    },
+    {
+      "key": "lint",
+      "command": "npm run lint",
+      "cwd": "frontend",
+      "exit_code": 0,
+      "log": "lint-final.log.gz"
+    },
+    {
+      "key": "build",
+      "command": "npm run build",
+      "cwd": "frontend",
+      "exit_code": 0,
+      "initial_gzip_kib": 118.92,
+      "limit_kib": 120,
+      "log": "build.log.gz",
+      "includes": [
+        "TypeScript noEmit",
+        "Vite build",
+        "bundle budget"
+      ]
+    },
+    {
+      "key": "browser_initial",
+      "command": "npm run test:e2e -- e2e/conexiuni-action-recovery.spec.mjs",
+      "cwd": "frontend",
+      "port": 8188,
+      "exit_code": 1,
+      "passed": 18,
+      "failed": 8,
+      "log": "browser-initial.log.gz",
+      "spec_archive": "browser-initial.spec.mjs.gz",
+      "meaning": "Four feedback-locator failures per device: exact text omitted the existing decorative arrow. Structural snapshots confirmed intended recovery. Locator edits occurred during this development run; it is retained as failed evidence, not a final source-bound gate."
+    },
+    {
+      "key": "browser_behavior",
+      "command": "npm run test:e2e -- e2e/conexiuni-action-recovery.spec.mjs",
+      "cwd": "frontend",
+      "port": 8188,
+      "exit_code": 0,
+      "passed": 26,
+      "failed": 0,
+      "reported_duration": "2.2m",
+      "log": "browser-final.log.gz",
+      "spec_archive": "browser-behavior.spec.mjs.gz",
+      "meaning": "All13 actual-BFF journeys on desktop/mobile. Product code unchanged from native/build."
+    },
+    {
+      "key": "browser_visual",
+      "command": "npm run test:e2e -- e2e/conexiuni-action-recovery.spec.mjs --grep 'failed verification persists'",
+      "cwd": "frontend",
+      "port": 8188,
+      "exit_code": 0,
+      "passed": 2,
+      "failed": 0,
+      "duration_seconds": 22.1,
+      "log": "browser-screenshots.log.gz",
+      "spec_sha256": "5327a0eb2e08f6ce91c3da348ae9b0e2f96a31bdfebb85418a1ae366c8ef76b7",
+      "meaning": "Strengthened screenshot case advances mocked animation frames500ms and asserts outer .screen opacity1. Final spec differs from26-pass spec only by those added assertions/comment."
+    }
+  ],
+  "sources": [
+    {
+      "path": "frontend/src/screens/Conexiuni.tsx",
+      "sha256": "92dab5ec36e4eff3698f84b500a8308514fda7e9b592d447fcff9eebb9720104"
+    },
+    {
+      "path": "frontend/tests/conexiuni-one-away.test.mjs",
+      "sha256": "a195f8d568ce4bc6126cfb215e19322efc769d5d63e3495784de2406c510cf85"
+    },
+    {
+      "path": "frontend/tests/persistent-game-navigation.test.mjs",
+      "sha256": "96daf743869fee56d3858e42c2b275fd05c29283647b84388ce5a59b87e3e43f"
+    },
+    {
+      "path": "frontend/e2e/conexiuni-action-recovery.spec.mjs",
+      "sha256": "5327a0eb2e08f6ce91c3da348ae9b0e2f96a31bdfebb85418a1ae366c8ef76b7"
+    },
+    {
+      "path": "frontend/src/gameActionRecovery.mjs",
+      "sha256": "b73851fd616aed6489139cd800bad2e8e6ab3480664470e765fd044ba9eb6267"
+    },
+    {
+      "path": "frontend/src/gameActionRecovery.d.mts",
+      "sha256": "7aa55580ab260591cb72eac5809cb541bb4f0787065051d70a12fd9a7fbc0f3c"
+    },
+    {
+      "path": "frontend/src/api/conexiuni.ts",
+      "sha256": "02f9e3f7fc8d89f6fdb83a9da2955b31adc6912b08174ed934c778f97bdc3c77"
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/conexiuni.py",
+      "sha256": "2bdb6bfe8955fe80c8b1d79e005f65ad0d18108db976ac5105436d543ff3a1f1"
+    },
+    {
+      "path": "docs/adr/0132-reconcile-uncertain-conexiuni-actions.md",
+      "sha256": "c51945e8576f9f8802d30d24139777eeabfa562a5f43e0ce88436360e42077a3"
+    }
+  ],
+  "archives": [
+    {
+      "source": "baseline.mjs",
+      "archive": "baseline.mjs.gz",
+      "decoded_sha256": "acc07fe6febd5b96dcfcd16f6b422d14a1226a3a3a9299d8e342e54cee34e68f",
+      "archive_sha256": "c58055b53d60e5837e079359c781d434a448ff76cae501ff20bde6b79cfbb4f3",
+      "decoded_bytes": 4696
+    },
+    {
+      "source": "baseline.log",
+      "archive": "baseline.log.gz",
+      "decoded_sha256": "6308b27711c5279c8633c6aa813a47d1ab94ca54390bedeadc11bcd62b28a1e8",
+      "archive_sha256": "0fa1ebe4988c1c1453371d5c1336e1318d2041283671ca9a6714f6031171beb1",
+      "decoded_bytes": 1139
+    },
+    {
+      "source": "npm-ci.log",
+      "archive": "npm-ci.log.gz",
+      "decoded_sha256": "0aa646ee640d36c363bd04ef0c5b079525d99977720dfea4b70f9287639324e9",
+      "archive_sha256": "1f5343f0580c28d6eb000dd66bf0ccad9aa59745a7dfbc4f3e135c80d0e236d2",
+      "decoded_bytes": 143
+    },
+    {
+      "source": "native-initial.log",
+      "archive": "native-initial.log.gz",
+      "decoded_sha256": "20c436ca930d2a8641da072ad6f4ab565c4ececa02cd23c0ca5f49f496aa1f18",
+      "archive_sha256": "481bda9db243b2efb92bd4d2eea4a5c1f871a53049a5cd93c47e3225ec007313",
+      "decoded_bytes": 160980
+    },
+    {
+      "source": "native-command-directory-error.log",
+      "archive": "native-command-directory-error.log.gz",
+      "decoded_sha256": "049c87a156d8d454a65d2c25be9a99b012b5359081972e0b013f6f50ba433f2c",
+      "archive_sha256": "4046d050a37c66429e88f64fe953fb136fe24b377dc84f952171f55ed90e9a11",
+      "decoded_bytes": 575
+    },
+    {
+      "source": "native-final.log",
+      "archive": "native-final.log.gz",
+      "decoded_sha256": "b9b5201d7df8afdd82f815a8080df3fa90638e236c5152f674eb9f7eb0617917",
+      "archive_sha256": "f8391139e8b2ea41a6c4ce87f62ca891369c244f471da1f055010dde7d7ef625",
+      "decoded_bytes": 16432
+    },
+    {
+      "source": "lint-initial.log",
+      "archive": "lint-initial.log.gz",
+      "decoded_sha256": "0d59e81e63851c026c1ec6e086b3c1991bfb9ff17aad8f1f1b64ce478f1b16c3",
+      "archive_sha256": "d362078b4f90ecaf7acbe1e3821031c7ceea34ef69e7b484fa411071015d8a51",
+      "decoded_bytes": 575
+    },
+    {
+      "source": "lint-frontend.log",
+      "archive": "lint-frontend.log.gz",
+      "decoded_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "archive_sha256": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a",
+      "decoded_bytes": 53
+    },
+    {
+      "source": "lint-command-directory-error.log",
+      "archive": "lint-command-directory-error.log.gz",
+      "decoded_sha256": "cddbf678faabc88481d899ff8462ee589e40d08ebe38a6deceea30dd5060fd95",
+      "archive_sha256": "dd9f5195c8830277debff8822ffee298b1a12e7d9b6cbff7b15a60ddbae22128",
+      "decoded_bytes": 575
+    },
+    {
+      "source": "lint-final.log",
+      "archive": "lint-final.log.gz",
+      "decoded_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "archive_sha256": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a",
+      "decoded_bytes": 53
+    },
+    {
+      "source": "build.log",
+      "archive": "build.log.gz",
+      "decoded_sha256": "13d7eb752ba7f3e065e27eae41ef39829eec71ac0b48f880858c9bf72a3c8648",
+      "archive_sha256": "a6516a5cfdc0202c8f3938604724f2fd125d483748c710adf99414a41e63e9b0",
+      "decoded_bytes": 3353
+    },
+    {
+      "source": "browser-initial.spec.mjs",
+      "archive": "browser-initial.spec.mjs.gz",
+      "decoded_sha256": "0e62cd029d190025b4893a09ea25d1987c5df82fc24985c8e0940c70d4d6b794",
+      "archive_sha256": "eb496032c9158c59ab702ab5d59e0c592a9c1f2d585b30855959e6b0312504ca",
+      "decoded_bytes": 18946
+    },
+    {
+      "source": "browser-initial.log",
+      "archive": "browser-initial.log.gz",
+      "decoded_sha256": "3b8042507f58304c573d53013c55278014b6ecb36e58858e038f97230c2c98a9",
+      "archive_sha256": "c7aeb008494a1199415107a329d79f7eab9b8e2ffa0c1ef58a12371875adc372",
+      "decoded_bytes": 32224
+    },
+    {
+      "source": "browser-behavior.spec.mjs",
+      "archive": "browser-behavior.spec.mjs.gz",
+      "decoded_sha256": "f3561e56e3572a49926f75fd65cecdc2525dfaba074f5122a599d6bda682d44c",
+      "archive_sha256": "671a28891d267a780421501cc197e1409f156c2e01451f092cc3246d5e0d8785",
+      "decoded_bytes": 19385
+    },
+    {
+      "source": "browser-final.log",
+      "archive": "browser-final.log.gz",
+      "decoded_sha256": "c34570b70b5324e6ab1b0b6773d87c68536f72b321ec419ff0c73d713f0f5db3",
+      "archive_sha256": "65d1e89f60d45a25e1fa2cf9e07c2978fd014a7da29c55da3329e5ebf6f00f76",
+      "decoded_bytes": 5806
+    },
+    {
+      "source": "browser-screenshots.log",
+      "archive": "browser-screenshots.log.gz",
+      "decoded_sha256": "3f67c896e217641a8a0a12bba2d9e3d50d0db673e49f2ecbe81e355fcfccf9fa",
+      "archive_sha256": "e65765ade4065f3e7df80e75d28507738cb4025905af0391bd2a54aa5841989a",
+      "decoded_bytes": 1140
+    },
+    {
+      "source": "browser-results/conexiuni-action-recovery--2bac9-ack-still-requires-a-change-desktop/error-context.md",
+      "archive": "initial-failure-01.md.gz",
+      "decoded_sha256": "05da627ff285e549bd6a61748ddf7c7622ca1e90b38387a98f25b69deffc789a",
+      "archive_sha256": "ac7a22f0061cf3814d0a909b8cc643c8c44bfb80fa1baa8bb7fb6d9c5ed07853",
+      "decoded_bytes": 10754
+    },
+    {
+      "source": "browser-results/conexiuni-action-recovery--2bac9-ack-still-requires-a-change-mobile/error-context.md",
+      "archive": "initial-failure-02.md.gz",
+      "decoded_sha256": "d3d5f9dde6fee0fd427513f1cfbb7ba42f602e23a97444ff7fa3def9826af049",
+      "archive_sha256": "f16e716536bd5d75e0ae8c2ecb720cef505e8d88073607c32b4d092d6b166aec",
+      "decoded_bytes": 10938
+    },
+    {
+      "source": "browser-results/conexiuni-action-recovery--729db-ctly-and-retains-100-points-desktop/error-context.md",
+      "archive": "initial-failure-03.md.gz",
+      "decoded_sha256": "9f1ffd34ea34e64bc5e5aa4d004619c775d488aaee83556bf3b7741ad0cc2c98",
+      "archive_sha256": "068f2aa62d4638b97d94d531fff79f7b3b99691c22001b23a887743db87a2980",
+      "decoded_bytes": 13621
+    },
+    {
+      "source": "browser-results/conexiuni-action-recovery--729db-ctly-and-retains-100-points-mobile/error-context.md",
+      "archive": "initial-failure-04.md.gz",
+      "decoded_sha256": "028c1cfba94230578610ec30af03a97e905188f0d6d5791e6d93c491f8822089",
+      "archive_sha256": "9ed8482d311cddba49284bbd40401283c95dd2a130896541e4a05fac4bb9ae03",
+      "decoded_bytes": 13605
+    },
+    {
+      "source": "browser-results/conexiuni-action-recovery--b8f90--earned-clue-without-replay-desktop/error-context.md",
+      "archive": "initial-failure-05.md.gz",
+      "decoded_sha256": "bf2eb3a8dcdea36f909ed6686c5ed4bd09f03e8f677106a562faada982145e51",
+      "archive_sha256": "7e18d0744a564f6b2fbc6cf786d1306f3cc1326f8ce47c21699a6ae6fa88821a",
+      "decoded_bytes": 15246
+    },
+    {
+      "source": "browser-results/conexiuni-action-recovery--b8f90--earned-clue-without-replay-mobile/error-context.md",
+      "archive": "initial-failure-06.md.gz",
+      "decoded_sha256": "02b4c815e4406721b01088d4524df553fb03abe442a85c42116bb1b3ec415804",
+      "archive_sha256": "e3eda83be3e8f5354be6a048d8788a0d67e388ed2aee59aeefa07e077c60da1e",
+      "decoded_bytes": 15310
+    },
+    {
+      "source": "browser-results/conexiuni-action-recovery--cf368-erification-and-manual-read-desktop/error-context.md",
+      "archive": "initial-failure-07.md.gz",
+      "decoded_sha256": "914fbc99724efab4d6d65cba1a0a90100a1e1c0fdb6dd5bb01657710c6182845",
+      "archive_sha256": "45d3497d3bb6305261057f586442b847fb444a6bfe2daa0aab37a92291026767",
+      "decoded_bytes": 9709
+    },
+    {
+      "source": "browser-results/conexiuni-action-recovery--cf368-erification-and-manual-read-mobile/error-context.md",
+      "archive": "initial-failure-08.md.gz",
+      "decoded_sha256": "ca13d473fd91d1f07d2e228e9963468d24f35f88f791af949046ca6e4e099ad4",
+      "archive_sha256": "204ec4e43168b593d8bffb4e98d5c33cb7031b19020729d4c8dd1b6267f64b1c",
+      "decoded_bytes": 9875
+    }
+  ],
+  "images": [
+    {
+      "path": "baseline-lost-clue.png",
+      "sha256": "80576ec7a68669dcffd7c759b815095ae42c80feded177f11c09f86eb2e6d5fd",
+      "source": "baseline-lost-clue.png"
+    },
+    {
+      "path": "baseline-lost-group.png",
+      "sha256": "7033588da08f9a6a8e82d7b1960e4df07835957183aed7a8b31add965bf0707c",
+      "source": "baseline-lost-group.png"
+    },
+    {
+      "path": "baseline-lost-loss.png",
+      "sha256": "7161091f1a0b62ffd2c756ee44cf2d916a9a754bdc28c3f21d8e586362bbbaef",
+      "source": "baseline-lost-loss.png"
+    },
+    {
+      "path": "baseline-lost-win.png",
+      "sha256": "f5c9503cb2f24196fe466d8b5482b0940bff525dbe2e86093d10e9dd27fd10e3",
+      "source": "baseline-lost-win.png"
+    },
+    {
+      "path": "initial-failure-01.png",
+      "sha256": "43e545b169a168e01fbe947f36939f95863279ad05fa0840bb36ba4347b3d2cd",
+      "source": "browser-results/conexiuni-action-recovery--2bac9-ack-still-requires-a-change-desktop/test-failed-1.png"
+    },
+    {
+      "path": "initial-failure-02.png",
+      "sha256": "d26c3c11cb7761d72a9da3f27c7def86275b0dd238314bb4e695f529f48c4f0b",
+      "source": "browser-results/conexiuni-action-recovery--2bac9-ack-still-requires-a-change-mobile/test-failed-1.png"
+    },
+    {
+      "path": "initial-failure-03.png",
+      "sha256": "396715427e32536ccbe644ad0ab3c0c2e9fddc12abeb64fedf36ca7a5b5ee20e",
+      "source": "browser-results/conexiuni-action-recovery--729db-ctly-and-retains-100-points-desktop/test-failed-1.png"
+    },
+    {
+      "path": "initial-failure-04.png",
+      "sha256": "1e66a058ab572470af4481288907e6c5faddb26b16ba4735f8e56aff900c919a",
+      "source": "browser-results/conexiuni-action-recovery--729db-ctly-and-retains-100-points-mobile/test-failed-1.png"
+    },
+    {
+      "path": "initial-failure-05.png",
+      "sha256": "7e93b9e6ef5790d48f3cada6bff327eb7511e9d5739df4b677f6d729d339540c",
+      "source": "browser-results/conexiuni-action-recovery--b8f90--earned-clue-without-replay-desktop/test-failed-1.png"
+    },
+    {
+      "path": "initial-failure-06.png",
+      "sha256": "8d9c6d75d7d3de4f209d084cf4ba5ec5ac3a40596bda52b5b82f8c7957ee4020",
+      "source": "browser-results/conexiuni-action-recovery--b8f90--earned-clue-without-replay-mobile/test-failed-1.png"
+    },
+    {
+      "path": "initial-failure-07.png",
+      "sha256": "5d578e2b387e77dbafb5734be18b7693c5d0bff18cea65c5b5a93a5f67e0fa87",
+      "source": "browser-results/conexiuni-action-recovery--cf368-erification-and-manual-read-desktop/test-failed-1.png"
+    },
+    {
+      "path": "initial-failure-08.png",
+      "sha256": "81e36dcf1999705e75d86c064fc8fd55362030994392f1b3402698beecf4752c",
+      "source": "browser-results/conexiuni-action-recovery--cf368-erification-and-manual-read-mobile/test-failed-1.png"
+    },
+    {
+      "path": "initial-recovered-loss-desktop.png",
+      "sha256": "e6301399b795e6fdc961e13ba6f10e3da169ca033dd49b1a8d7c1f43dbe402dd",
+      "source": "browser-results/conexiuni-action-recovery--10a67-terminal-score-exactly-once-desktop/recovered-loss.png"
+    },
+    {
+      "path": "initial-recovered-loss-mobile.png",
+      "sha256": "21027fb4bd606125541364bc53c2a73df61d8f775cfd17ee07a12c6d89bdc343",
+      "source": "browser-results/conexiuni-action-recovery--10a67-terminal-score-exactly-once-mobile/recovered-loss.png"
+    },
+    {
+      "path": "initial-recovered-win-desktop.png",
+      "sha256": "4c41c568734c3ddc5e3f1d01592e17f6caac42cefd0b7709514e01b5a2a5af89",
+      "source": "browser-results/conexiuni-action-recovery--87c4d-terminal-score-exactly-once-desktop/recovered-win.png"
+    },
+    {
+      "path": "initial-recovered-win-mobile.png",
+      "sha256": "7216bc00fe53763131ee4f0638f886e2f6f53d0bbe2ce7abc7bceafff0b39454",
+      "source": "browser-results/conexiuni-action-recovery--87c4d-terminal-score-exactly-once-mobile/recovered-win.png"
+    },
+    {
+      "path": "initial-read-only-recovery-desktop.png",
+      "sha256": "b050ae9dd40a781f7f04054ba252a2f2b40bccff591ac7bc74268462f9515a45",
+      "source": "browser-results/conexiuni-action-recovery--ad19c-ion-and-retries-by-GET-only-desktop/read-only-recovery.png"
+    },
+    {
+      "path": "initial-read-only-recovery-mobile.png",
+      "sha256": "ebff0f98dc714e03f6d35277c867a25159e1c07fb00d241dcb4323d3164535ac",
+      "source": "browser-results/conexiuni-action-recovery--ad19c-ion-and-retries-by-GET-only-mobile/read-only-recovery.png"
+    },
+    {
+      "path": "behavior-recovered-loss-desktop.png",
+      "sha256": "7fd45e00720722cb1cbf776a90fd323c90938375b3a3f5542f45ef140e8b1a4a",
+      "source": "browser-results-final/conexiuni-action-recovery--10a67-terminal-score-exactly-once-desktop/recovered-loss.png"
+    },
+    {
+      "path": "behavior-recovered-loss-mobile.png",
+      "sha256": "8a715671baf56355e06ec5b659567e167b8d4bcdb23be25d8e1390e04f271112",
+      "source": "browser-results-final/conexiuni-action-recovery--10a67-terminal-score-exactly-once-mobile/recovered-loss.png"
+    },
+    {
+      "path": "behavior-recovered-clue-desktop.png",
+      "sha256": "7d48b892d480644f0f6fa2f0f8a748ca17b54fbf2af35412b9a7a8da8c3ab24c",
+      "source": "browser-results-final/conexiuni-action-recovery--729db-ctly-and-retains-100-points-desktop/recovered-clue.png"
+    },
+    {
+      "path": "behavior-recovered-clue-mobile.png",
+      "sha256": "562b1dfc5a8243536282f83cd3586052edcb9196ac7d99fe0b65e0825067298f",
+      "source": "browser-results-final/conexiuni-action-recovery--729db-ctly-and-retains-100-points-mobile/recovered-clue.png"
+    },
+    {
+      "path": "behavior-recovered-win-desktop.png",
+      "sha256": "e555b4c22c9d9a014ead132241b10b1d870a966928e9d07e4b3e2a36c3fa7fa9",
+      "source": "browser-results-final/conexiuni-action-recovery--87c4d-terminal-score-exactly-once-desktop/recovered-win.png"
+    },
+    {
+      "path": "behavior-recovered-win-mobile.png",
+      "sha256": "75eef7679ca380a96a265330dc20159f57aa2acd06cb375d1a2c4258314739ba",
+      "source": "browser-results-final/conexiuni-action-recovery--87c4d-terminal-score-exactly-once-mobile/recovered-win.png"
+    },
+    {
+      "path": "behavior-read-only-recovery-desktop.png",
+      "sha256": "b050ae9dd40a781f7f04054ba252a2f2b40bccff591ac7bc74268462f9515a45",
+      "source": "browser-results-final/conexiuni-action-recovery--ad19c-ion-and-retries-by-GET-only-desktop/read-only-recovery.png"
+    },
+    {
+      "path": "behavior-read-only-recovery-mobile.png",
+      "sha256": "95dd31fbb741faab76f30172d9a6289fe6e038d68a18de0d7121fe174882a342",
+      "source": "browser-results-final/conexiuni-action-recovery--ad19c-ion-and-retries-by-GET-only-mobile/read-only-recovery.png"
+    },
+    {
+      "path": "final-read-only-recovery-desktop.png",
+      "sha256": "caff592f68b851efd428f38e18f3bcd992d8f6d5a57e9427e150e810633afcc0",
+      "source": "browser-screenshot-results/conexiuni-action-recovery--ad19c-ion-and-retries-by-GET-only-desktop/read-only-recovery.png"
+    },
+    {
+      "path": "final-read-only-recovery-mobile.png",
+      "sha256": "95dd31fbb741faab76f30172d9a6289fe6e038d68a18de0d7121fe174882a342",
+      "source": "browser-screenshot-results/conexiuni-action-recovery--ad19c-ion-and-retries-by-GET-only-mobile/read-only-recovery.png"
+    }
+  ],
+  "initial_command_errors": [
+    {
+      "archive": "lint-initial.log.gz",
+      "exit_code": 254
+    },
+    {
+      "archive": "native-command-directory-error.log.gz",
+      "exit_code": 254
+    },
+    {
+      "archive": "lint-command-directory-error.log.gz",
+      "exit_code": 254
+    }
+  ],
+  "visual_qa": {
+    "inspected": [
+      "initial-read-only-recovery-mobile.png",
+      "initial-recovered-win-desktop.png",
+      "behavior-recovered-win-desktop.png",
+      "behavior-recovered-clue-mobile.png",
+      "final-read-only-recovery-desktop.png"
+    ],
+    "finding": "Initial/behavior desktop read-only screenshots were blank because the mocked outer screen animation had not advanced; stricter final proof is visible. Initial desktop win clipped its result in the scroll container; behavior proof scrolls the actions into view. Mobile recovery copy and button are readable; existing HUD scroll/toast overlap remains.",
+    "human_playtesting": false
+  },
+  "limitations": [
+    "GET confirms state without attributing a request or reconstructing one_away.",
+    "Saved-pointer ownership is not a distributed exactly-once protocol.",
+    "Broader V89 final integration and independent review are separate gates."
+  ]
+}

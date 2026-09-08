@@ -32,7 +32,7 @@ test("Conexiuni snapshots and retains only a recoverable one-away guess", () => 
 test("Conexiuni blocks unchanged retries in submit, keyboard, and button paths", () => {
   assert.match(
     screen,
-    /selected\.length !== GROUP_SIZE \|\| busy \|\| exactBlockedRetry/,
+    /selected\.length !== GROUP_SIZE \|\| actionsLocked \|\| exactBlockedRetry/,
   );
   assert.match(
     screen,
@@ -40,7 +40,7 @@ test("Conexiuni blocks unchanged retries in submit, keyboard, and button paths",
   );
   assert.match(
     screen,
-    /disabled=\{busy \|\| selected\.length !== GROUP_SIZE \|\| exactBlockedRetry\}/,
+    /disabled=\{actionsLocked \|\| selected\.length !== GROUP_SIZE \|\| exactBlockedRetry\}/,
   );
   assert.match(screen, /exactBlockedRetry \? "Schimbă o piesă" : "Verifică"/);
 });
@@ -48,7 +48,7 @@ test("Conexiuni blocks unchanged retries in submit, keyboard, and button paths",
 test("Conexiuni preserves only a still-visible server-rejected duplicate", () => {
   assert.match(
     screen,
-    /err\.status === 409\) \{[\s\S]{0,240}guess\.every\(\(id\) => freshAvailable\.has\(id\)\);\s*if \(!fresh\?\.won && !fresh\?\.lost && retryStillVisible\) \{\s*setSelected\(guess\);/,
+    /if \(!fresh\.won && !fresh\.lost\) \{\s*const freshAvailable = unsolvedTileIds\(fresh\);\s*if \(duplicate && duplicate\.guess\.every\(\(id\) => freshAvailable\.has\(id\)\)\) \{\s*setSelected\(duplicate\.guess\);/,
   );
   assert.match(screen, /const unsolvedTileIds = \(fresh: ConexiuniState\)/);
   assert.match(
@@ -66,7 +66,7 @@ test("Conexiuni preserves only a still-visible server-rejected duplicate", () =>
 });
 
 test("Conexiuni never turns a generic duplicate rejection into one-away feedback", () => {
-  assert.match(screen, /setBlockedGuess\(\{ key: guessKey, oneAway: false \}\)/);
+  assert.match(screen, /setBlockedGuess\(\{ key: selectionKey\(duplicate\.guess\), oneAway: false \}\)/);
   assert.match(screen, /feedback = blockedGuess\?\.oneAway \? ONE_AWAY_GUIDANCE : hint/);
   assert.doesNotMatch(screen, /blockedGuess !== null \? ONE_AWAY_GUIDANCE/);
 });
@@ -88,8 +88,8 @@ test("mobile recovery and clues stay in normal flow immediately above the board"
   assert.doesNotMatch(screen, /setHint\(res\.clue\.message\)/);
   assert.doesNotMatch(screen, /onToast\("Indiciu deblocat\./);
   assert.doesNotMatch(screen, /onToast\("Aproape! 3 din 4\.|onToast\("Nu e grupul/);
-  assert.match(screen, /refreshAuthoritativeState\(state\.game_id\)/);
-  assert.match(screen, /err\.status === 400 \|\| err\.status === 409/);
+  assert.match(screen, /await reconcileAction\(ticket\)/);
+  assert.match(screen, /actionOwner, ticket, conexiuniApi\.get/);
 });
 
 test("authoritative refresh retires invisible selections without duplicating terminal errors", () => {
@@ -99,11 +99,10 @@ test("authoritative refresh retires invisible selections without duplicating ter
     screen,
     /setState\(fresh\);[\s\S]{0,240}setBlockedGuess\(null\);\s*setHint\(null\);/,
   );
-  assert.match(
-    screen,
-    /else if \(!fresh\?\.won && !fresh\?\.lost\) \{\s*onToast\(message, "error"\);/,
-  );
-  assert.match(screen, /if \(!fresh\?\.won && !fresh\?\.lost\) \{\s*onToast\(/);
+  const reconcile = screen.slice(screen.indexOf("  const reconcileAction ="), screen.indexOf("  const retryActionSync ="));
+  assert.match(reconcile, /applyAuthoritativeState\(fresh\);[\s\S]*if \(!fresh\.won && !fresh\.lost\)/);
+  assert.doesNotMatch(reconcile, /onToast\([^;]+"error"/);
+  assert.doesNotMatch(reconcile, /ONE_AWAY_GUIDANCE|\.one_away/);
 });
 
 test("the sticky coach keeps the bounded mistake budget visible without membership", () => {
@@ -135,7 +134,7 @@ test("Indiciu unlocks up to a second clue and reflects remaining availability", 
     /const clueMistakesRemaining = Math\.max\(0, clueMistakesNeeded - \(state\?\.mistakes \?\? 0\)\);/,
   );
   // The button stays gated by the server's clue_available flag at every stage...
-  assert.match(screen, /disabled=\{busy \|\| !state\.clue_available\}/);
+  assert.match(screen, /disabled=\{actionsLocked \|\| !state\.clue_available\}/);
   // ...while its title distinguishes "not yet unlocked" from "both spent".
   assert.match(
     screen,

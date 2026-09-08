@@ -1,0 +1,47 @@
+import hashlib,json,os
+from pathlib import Path
+os.environ.update(DJANGO_SETTINGS_MODULE='cat_de_roman_esti.web.settings',CAT_ACCOUNTS_ENABLED='0',CAT_DEBUG='0',ROEDU_API_URL='',ROEDU_API_KEY='')
+import django
+django.setup()
+from django.test import Client
+from cat_de_roman_esti.wordgames import contexto as C
+from cat_de_roman_esti.wordgames.service import get_service,normalize
+root=Path.cwd();out=root/'docs/reviews/v89-feedback-and-conexiuni-recovery/author-screening';svc=get_service();client=Client()
+targets={'Făraș':'Mătură','Mop':'Podea','Aspirator':'Mătură','Burete de vase':'Detergent','Mătură':'Făraș','Găleată':'Apă','Detergent':'A spăla','Taburet':'Scaun'}
+files=['cat_de_roman_esti/fixtures/kg_sample.json','cat_de_roman_esti/wordgames/contexto.py','cat_de_roman_esti/wordgames/contexto_feedback.py','cat_de_roman_esti/wordgames/contexto_projection.py','cat_de_roman_esti/wordgames/service.py']
+result={'stage':'private BFF baseline journeys; technical flow checks do not grant content quality approval','source_sha256':{p:hashlib.sha256((root/p).read_bytes()).hexdigest() for p in files},'journeys':[]}
+def hidden(body,target,label):
+ assert 'target' not in body
+ def walk(v):
+  if isinstance(v,dict):
+   for k,z in v.items():
+    assert k not in {'target','target_id','description','path','route'}
+    walk(z)
+  elif isinstance(v,list):
+   for z in v:walk(z)
+  elif isinstance(v,str):
+   assert v!=target
+   assert normalize(v)!=normalize(label)
+ walk(body)
+for label,opener in targets.items():
+ target=svc.resolve(label);gid=C.store.create(C._build_session(target,'usor',None,category='viata_de_roman'));url=f'/api/wordgames/contexto/games/{gid}';steps=[]
+ def request(name,path='',data=None):
+  response=client.get(url) if data is None else client.post(url+path,data,content_type='application/json')
+  assert response.status_code==200,(name,response.status_code,response.content)
+  body=response.json();steps.append({'step':name,'response':body});return body
+ try:
+  hidden(request('initial GET'),target,label)
+  for attempt,word in enumerate(['stilou','fotbal','București'],1):
+   b=request('unrelated guess '+word,'/guess',{'text':word});assert b['attempts']==attempt and not b['won'];hidden(b,target,label)
+  b=request('warmer clue','/clue',{});assert b['clue_kind']=='warmer' and b['clues_used']==1 and b['word']['rank']>1;hidden(b,target,label)
+  b=request('resume after clue');assert b['attempts']==3 and b['clues_used']==1;hidden(b,target,label)
+  b=request('ordinary opener '+opener,'/guess',{'text':opener});assert b['attempts']==4 and not b['won'];hidden(b,target,label);guesses=b['guesses']
+  b=request('repeat upper case','/guess',{'text':opener.upper()});assert b['attempts']==4 and b['feedback']['kind']=='repeat' and b['guesses']==guesses;hidden(b,target,label)
+  b=request('resume after repeat');assert b['attempts']==4 and b['guesses']==guesses;hidden(b,target,label)
+  b=request('exact win','/guess',{'text':label});assert b['won'] and b['attempts']==5 and b['clues_used']==1 and b['guess']['id']==target and b['guess']['rank']==1
+  b=request('resume terminal');assert b['won'] and b['score']==steps[-2]['response']['score']
+  result['journeys'].append({'label':label,'target':target,'opener':opener,'assertions_passed':True,'steps':steps})
+  print(label, 'clue',steps[4]['response']['word'],'opener rank',steps[6]['response']['guess']['rank'],flush=True)
+ finally:C.store.delete(gid)
+(out/'baseline-journeys.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+(out/'capture-journeys.py.txt').write_bytes(Path(__file__).read_bytes())

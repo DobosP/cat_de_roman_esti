@@ -1,0 +1,111 @@
+import ast, gzip, hashlib, json, os, subprocess, sys
+from pathlib import Path
+r=Path.cwd(); review=r/'docs/reviews/v89-feedback-and-conexiuni-recovery'; baseline='b614bfe735a27b9703025420daf603118f6a7f74'
+h=lambda b:hashlib.sha256(b).hexdigest()
+canonical=lambda x:json.dumps(x,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
+def oldbytes(path):return subprocess.check_output(['git','show',f'{baseline}:{path}'])
+def load(path):return json.loads(path.read_bytes())
+from tests import content_history as current
+from tests.current_content import CURRENT_CONTENT
+old={'__file__':str(r/'tests/content_history.py')};exec(compile(oldbytes('tests/content_history.py'),'baseline-history','exec'),old)
+files={'fixture':'kg_sample.json','pack':'games_pack.json','rankings':'board_rankings_v37.json','derived':'derived_catalog_v38.json'}
+checked={};hist=[]
+for kind,name in files.items():
+ rel='cat_de_roman_esti/fixtures/'+name;blob=(r/rel).read_bytes();now=json.loads(blob);before=json.loads(oldbytes(rel));indent=2 if kind=='fixture' else 1
+ assert h(blob)==CURRENT_CONTENT.artifact_sha256[rel]
+ assert blob==(r/'tests/fixtures'/name).read_bytes()
+ restored=getattr(current,f'before_v89_{kind}')(now)
+ assert (json.dumps(restored,ensure_ascii=False,indent=indent)+'\n').encode()==oldbytes(rel)
+ assert now==json.loads(blob)
+ for version in range(80,89):
+  fname=f'before_v{version}_{kind}'
+  if fname in old:
+   actual=getattr(current,fname)(now);expected=old[fname](before);assert actual==expected,fname;hist.append(fname)
+ checked[rel]={'baseline_sha256':h(oldbytes(rel)),'current_sha256':h(blob),'restored_exact_baseline_bytes':True}
+print('artifact/history chain verified',len(hist),flush=True)
+pack=load(r/'cat_de_roman_esti/fixtures/games_pack.json');prior=json.loads(oldbytes('cat_de_roman_esti/fixtures/games_pack.json'))
+games=['conexiuni','contexto','lant','alchimie'];oldcount=0
+for game in games:
+ a={x['id']:x for x in prior[game]};b={x['id']:x for x in pack[game]};assert {k:b[k] for k in a}==a;oldcount+=len(a)
+ assert set(b)-set(a)==({'ct_viata_de_roman_353'} if game=='contexto' else set())
+assert oldcount==658 and sum(map(lambda g:len(pack[g]),games))==659
+assert pack['meta']['id_high_water']['contexto']==354
+assert not {'ct_viata_de_roman_352','ct_viata_de_roman_354'}&{x['id'] for x in pack['contexto']}
+ranking=load(r/'cat_de_roman_esti/fixtures/board_rankings_v37.json')
+assert h((json.dumps(ranking['boards'],ensure_ascii=False,indent=1)+'\n').encode())==CURRENT_CONTENT.payload_sha256['ranking_rows']
+assert ranking['meta']['counts']==dict(CURRENT_CONTENT.ranking_counts)
+for rel in ['cat_de_roman_esti/fixtures/kg_sample.json','tests/fixtures/kg_sample.json','tests/fixtures/cat_mobile_app_pack_contract.json','frontend/e2e/seeded-starts.json']:
+ assert (r/rel).read_bytes()==oldbytes(rel),rel
+# Current pins remain explicit reviewed data, not fixture-derived expectations.
+tree=ast.parse((r/'tests/current_content.py').read_text());assignment=next(n.value for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='CURRENT_CONTENT' for t in n.targets))
+assert {n.func.id for n in ast.walk(assignment) if isinstance(n,ast.Call) and isinstance(n.func,ast.Name)}=={'CurrentContentSnapshot','_frozen'}
+# Verify all immutable impact archives, source receipts, and actual complete observations.
+impact=review/'impact';receipt=load(impact/'capture-receipt.json');captures={}
+assert h((impact/'inputs.json').read_bytes())==receipt['inputs_sha256']
+for key,a in receipt['archives'].items():
+ blob=(impact/a['path']).read_bytes();raw=gzip.decompress(blob)
+ assert h(blob)==a['archive_sha256'] and h(raw)==a['decoded_sha256'] and len(raw)==a['decoded_bytes'] and len(blob)==a['archive_bytes']
+ if key in ['baseline.json','candidate.json']:captures[key]=json.loads(raw)
+for key,x in captures.items():
+ assert len(x['contexto'])==239 and x['contexto_api_requests']==7170 and x['contexto_observations_reused']==0
+ assert len(x['inputs'])==30 and sum(len(v['words']) for v in x['contexto'].values())==7170
+ assert x['inputs_sha256']==receipt['inputs_sha256']
+ assert x['source_sha256']==receipt['captures'][key]['sources']
+ for rel,sha in x['source_sha256'].items():assert h(oldbytes(rel) if key=='baseline.json' else (r/rel).read_bytes())==sha,rel
+before,after=[captures[k] for k in ['baseline.json','candidate.json']]
+assert before['inputs']==after['inputs'];assert before['audited_pack_sha256']==after['audited_pack_sha256']==h(canonical(prior))
+changes=[]
+for item_id,row in before['contexto'].items():
+ assert row['target']==after['contexto'][item_id]['target']
+ for word,response in row['words'].items():
+  newer=after['contexto'][item_id]['words'][word]
+  if newer!=response:changes.append({'id':item_id,'target':row['target'],'word':word,'before':response,'after':newer})
+assert len(changes)==1 and changes[0]['word']=='Tort Diplomat' and changes[0]['target']=='n_v86_food_frisca'
+assert changes[0]['before']['guess']['rank']==345 and changes[0]['after']['guess']['rank']==2 and not changes[0]['after']['won']
+assert changes==load(impact/'comparison.json')['contexto']['changes']
+for key in ['alchimie','lant','lant_choices','derived']:assert before[key]==after[key],key
+assert len(before['alchimie'])==83 and len(before['lant'])==len(before['lant_choices'])==100
+assert sum(len(v['boards']) for v in before['derived'].values())==336
+assert sum(len(v['shortest_hops_shown']) for v in before['lant_choices'].values())==206
+for key,x in before['alchimie'].items():assert h(canonical(x['projection']))==x['projection_sha256'],key
+assert before['direct_routes']==after['direct_routes']==[]
+for game in games:
+ a=before['pack'][game];b=after['pack'][game]
+ assert {key:b['records'][key] for key in a['records']}==a['records']
+ assert set(a['eligible'])<=set(b['eligible'])
+print('impact all observations/profiles exact except one intended pair',flush=True)
+# Source-bound focused history receipt and raw outputs.
+hr=review/'history-tests';hv=load(hr/'verification.json')
+for rel,sha in hv['sources_sha256'].items():assert h((r/rel).read_bytes())==sha,rel
+for key,a in hv['logs'].items():
+ blob=(hr/a['archive']).read_bytes();raw=gzip.decompress(blob)
+ assert h(blob)==a['archive_sha256'] and h(raw)==a['sha256'] and len(raw)==a['bytes']
+ if key=='focused-initial.log':assert '266 passed' in raw.decode()
+assert hv['exit_code']==0 and hv['result']['passed']==266 and hv['result']['failed']==0
+rootlogs=load(review/'root-checks/logs.json')
+for key,a in rootlogs.items():
+ blob=(review/'root-checks'/a['path']).read_bytes();raw=gzip.decompress(blob)
+ assert h(blob)==a['archive_sha256'] and h(raw)==a['decoded_sha256'] and len(raw)==a['decoded_bytes'] and len(blob)==a['archive_bytes']
+# Final portable review remains bound to original pending dossiers after apply.
+sys.path.insert(0,str(r/'scripts'))
+os.environ.update(DJANGO_SETTINGS_MODULE='cat_de_roman_esti.web.settings',CAT_ACCOUNTS_ENABLED='0',CAT_DEBUG='0',ROEDU_API_URL='',ROEDU_API_KEY='')
+import django;django.setup()
+import critique_pack
+artifact=load(review/'final-gate/contexto_verdicts.json');verdicts={'ct_viata_de_roman_352':'reject','ct_viata_de_roman_353':'promote','ct_viata_de_roman_354':'reject'}
+assert artifact['verdicts']==verdicts
+for role in ['analyst','verifier']:
+ p=review/f'{role}.json';j=load(p);assert artifact['provenance'][role]['sha256']=='sha256:'+h(p.read_bytes())
+ assert j['input_ids']==list(verdicts)
+ for item,row in zip(j['items'],artifact['perItem'],strict=True):
+  assert item==row[f'{role}_review'];d=load(review/'dossiers'/f"{item['id']}.json")
+  assert d['review_binding']==item['review_binding']==row['review_binding']==critique_pack.dossier_review_binding(d)
+  assert d['rubric_sha256']==h((r/'docs/CRITIQUE_RUBRIC.md').read_bytes())
+  assert d['kg_sha256']==h((r/'cat_de_roman_esti/fixtures/kg_sample.json').read_bytes())
+  assert row['final']==verdicts[item['id']] and row['verified'] and not row['verifier_lost']
+assert artifact['coverage']=={'total':3,'verified':3,'unverifiedClean':0,'verifiersLost':0,'lost':0}
+assert artifact['provenance']['analyst']['reviewer']!=artifact['provenance']['verifier']['reviewer']
+assert h((review/'author-candidates/viata_de_roman/verify_quality.json').read_bytes())=='d181cd5e09e82d919f1b2517ae3e35c4992d08833baaecea2b8ef455601284c9'
+assert h((review/'author-candidates/viata_de_roman/candidates.json').read_bytes())=='a7e22a7d4b1c84f5450e167b0854d5e8a5532f0f8f0b733da10a3b955860cdc4'
+print('history receipts and immutable final gate verified',flush=True)
+result={'date':'2026-09-08','baseline':baseline,'artifact_checks':checked,'historical_functions_compared':hist,'old_records_exact':658,'new_approved_round':'ct_viata_de_roman_353','rejected_ids':list(k for k,v in verdicts.items() if v=='reject'),'contexto_id_high_water':354,'observations_each_capture':7170,'unchanged_observations':7169,'changed_observations':changes,'alchimie_profiles_exact':83,'lant_profiles_and_menus_exact':100,'derived_boards_and_payloads_exact':336,'shortest_shown_hops_exact':206,'impact_archives_verified':len(receipt['archives']),'history_logs_verified':len(hv['logs']),'root_logs_verified':len(rootlogs),'focused_tests':266,'seeded_starts_exact':True,'current_literals_static':True,'final_portable_gate_bound':True,'raw_quality_original_preserved':True}
+Path('/home/dobo/work/_temp/feat__v89-feedback-and-conexiuni-recovery/final-audit/checks.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')

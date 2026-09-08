@@ -1,0 +1,118 @@
+{
+  "date": "2026-09-08",
+  "reviewer": "independent V89 Conexiuni code review lane",
+  "baseline": "b614bfe735a27b9703025420daf603118f6a7f74",
+  "decision": "accept",
+  "blockers": [],
+  "source_set_sha256": "3e61204c0df8e6f1734c9514b2729aa2f7691c01312884fbb1b2e5fb3f2311d9",
+  "source_set_hash_encoding": "sha256 of UTF-8 JSON source_sha256 with sorted keys and separators comma/colon",
+  "source_sha256": {
+    "frontend/src/screens/Conexiuni.tsx": "92dab5ec36e4eff3698f84b500a8308514fda7e9b592d447fcff9eebb9720104",
+    "frontend/tests/conexiuni-one-away.test.mjs": "a195f8d568ce4bc6126cfb215e19322efc769d5d63e3495784de2406c510cf85",
+    "frontend/tests/persistent-game-navigation.test.mjs": "96daf743869fee56d3858e42c2b275fd05c29283647b84388ce5a59b87e3e43f",
+    "docs/adr/0132-reconcile-uncertain-conexiuni-actions.md": "c51945e8576f9f8802d30d24139777eeabfa562a5f43e0ce88436360e42077a3"
+  },
+  "unchanged_dependency_sha256": {
+    "frontend/src/gameActionRecovery.mjs": "b73851fd616aed6489139cd800bad2e8e6ab3480664470e765fd044ba9eb6267",
+    "frontend/src/gameActionRecovery.d.mts": "7aa55580ab260591cb72eac5809cb541bb4f0787065051d70a12fd9a7fbc0f3c",
+    "frontend/src/asyncControl.mjs": "452b9a553cbf319268d32b4f17a0ba70c8692ca43f3fcfd055ccf241412cf211",
+    "frontend/src/hooks/useActiveGame.ts": "08e3dc295f75ee5b11f14a86b7b2836f7af73d7f5238decf7c650004c391cd02",
+    "frontend/src/hooks/useSavedGameResume.ts": "dff224adb580b3996c9145decb87fce217125de2cf1350b2e144919bc81070a5",
+    "frontend/src/savedGameResume.mjs": "4c5a64e59da67cdf08e1870de9063ac9c5004e134f6d84397fdf89e7a3f0f0d3",
+    "frontend/src/hooks/useRecordScore.ts": "303cda5da3e26595ed39a5f9b2028ed6634318fc6c4a02bb9480dc310f3fee4b",
+    "frontend/src/scores.ts": "ec724ecaecf66f54f6a3a3a37ba8f5aaf89e9556fefbd4528c4296948c33321a",
+    "frontend/src/api/conexiuni.ts": "02f9e3f7fc8d89f6fdb83a9da2955b31adc6912b08174ed934c778f97bdc3c77",
+    "cat_de_roman_esti/wordgames/conexiuni.py": "2bdb6bfe8955fe80c8b1d79e005f65ad0d18108db976ac5105436d543ff3a1f1",
+    "cat_de_roman_esti/wordgames/_session_endpoint.py": "d6f5f7ed35fefc9394da4c72fe9d65f76cf7c82df832c5b3d14f7df04ec4f29f",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/web/http.py": "cae7428c92a442cb2ab5f3f695cd3c55759e06a0886ddb43b7edd449ab6304c5",
+    "cat_de_roman_esti/web/settings.py": "4bc05b880d5cd1c9544ad2a135f5ef71272940e7f8a6438f88207aba121f4848"
+  },
+  "observed_scratch_evidence_sha256": {
+    "baseline.mjs": "acc07fe6febd5b96dcfcd16f6b422d14a1226a3a3a9299d8e342e54cee34e68f",
+    "baseline-proof.json": "21470e6ce84533c2f770e051b7dacadf6e26d98edbcda24d4a5895b1800e6dd5",
+    "baseline.log": "6308b27711c5279c8633c6aa813a47d1ab94ca54390bedeadc11bcd62b28a1e8",
+    "native-initial.log": "20c436ca930d2a8641da072ad6f4ab565c4ececa02cd23c0ca5f49f496aa1f18",
+    "native-final.log": "b9b5201d7df8afdd82f815a8080df3fa90638e236c5152f674eb9f7eb0617917",
+    "lint-frontend.log": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+    "build.log": "13d7eb752ba7f3e065e27eae41ef39829eec71ac0b48f880858c9bf72a3c8648",
+    "browser-initial.spec.mjs": "0e62cd029d190025b4893a09ea25d1987c5df82fc24985c8e0940c70d4d6b794",
+    "browser-initial.log": "3b8042507f58304c573d53013c55278014b6ecb36e58858e038f97230c2c98a9"
+  },
+  "observed_scratch_evidence_location": "conex-action within the V89 task scratch; final lane archives must preserve these original bytes/hashes",
+  "checks": [
+    {
+      "id": "synchronous-owner",
+      "result": "pass",
+      "evidence": "Guess, clue and manual verification call begin before setting busy. The frozen ticket is the only current owner; finish of an old ticket cannot unlock a new one. Tile/keyboard/shuffle/clear handlers also observe synchronous pending ownership."
+    },
+    {
+      "id": "read-only-recovery",
+      "result": "pass",
+      "evidence": "Every still-owned ambiguous mutation failure uses one same-session GET through recoverOwnedGameAction; that helper has no POST callback, loop or replay. Invalidated or foreign tickets perform no extra read, and mismatched GET game_id is rejected."
+    },
+    {
+      "id": "earned-state-and-selection",
+      "result": "pass",
+      "evidence": "Successful verification replaces the complete Conexiuni state, including earned solved groups, redacted clues, mistake counts and terminal scores. Selection is intersected with currently unsolved ids, or cleared at finish. No local clue payment or guessed solved group is synthesized."
+    },
+    {
+      "id": "duplicate-and-one-away",
+      "result": "pass",
+      "evidence": "Only a successful guess response can set oneAway true. Lost one-away responses become neutral synchronization feedback. An explicit HTTP 409 retains at most four submitted ids and its message through failed verification; after a successful nonterminal read the still-visible duplicate remains blocked with oneAway false. All board actions remain locked while verification is unresolved."
+    },
+    {
+      "id": "ownership-and-lifecycle",
+      "result": "pass",
+      "evidence": "Saved pointer ownership is checked before POST and after awaits. Different pointers produce a current-game resume action. Unmount, new-round attempts, saved-game adoption and options invalidate tickets. Late reads cannot adopt state, clear another pointer or release a new lock."
+    },
+    {
+      "id": "missing-and-exit",
+      "result": "pass",
+      "evidence": "An owned404 conditionally forgets only the same saved id and returns to setup. Ordinary live exits conditionally forget their own id; exits during in-flight or unresolved actions preserve the pointer. Stable-null storage allows local play and local missing-state handling, while any different remembered id takes precedence."
+    },
+    {
+      "id": "terminal-score",
+      "result": "pass",
+      "evidence": "Recovered wins/losses enter the unchanged score-completion effect and useRecordScore receipt. Only a returned server score is recorded; stale or failed reads cannot fabricate terminal state. Conditional cleanup cannot clear a newer saved id."
+    },
+    {
+      "id": "server-bounds-and-privacy",
+      "result": "pass",
+      "evidence": "All 14 reviewed dependency files are byte-identical to baseline. Backend keeps 7,200-second sliding TTL, 1,000 sessions/game, per-session transactions, 64 KiB requests, four mistakes/two clues and bounded guess history. GET exposes only earned groups/clues until terminal reveal."
+    },
+    {
+      "id": "test-adaptations",
+      "result": "pass",
+      "evidence": "Seven stale native source-shape assertions were adapted to the real owned recovery handlers without removing duplicate, one-away or exit safeguards. Native log confirms 193 passed / 0 failed. Initial 26-case real-BFF browser run has 18 passes / eight locator failures; corrected frozen-spec run remains the builders gate."
+    },
+    {
+      "id": "baseline-proof",
+      "result": "pass",
+      "evidence": "Four baseline cases committed a clue, solved group, final win or final loss, returned 503, then recorded zero client GETs and absent earned results. First lost-clue retry consumed the second clue; actual final score 50 versus 150 with one clue. I inspected exact captured fields and reproduction script."
+    },
+    {
+      "id": "final-evidence-supplement",
+      "result": "pass",
+      "evidence": "Verified all 9 lane source hashes, 24 archive hashes with decoded hashes/byte counts, and 28 image hashes. Read final logs: 26 behavior cases passed; two stricter screenshot cases passed. Final test diff only adds 500 ms of mocked animation frames and exact outer-screen opacity assertion. No product change since accepted source set."
+    }
+  ],
+  "integration_status": "Focused behavior 26/26 and stricter screenshot 2/2 receipts independently verified; full version integration remains required. No heavy suite repeated by reviewer.",
+  "visual_observations": [
+    "Initial recovered-win desktop screenshot shows earned groups and terminal result correctly; it is not a full proof of every result control.",
+    "Initial read-only-recovery desktop screenshot is blank background because the mocked-clock outer transition was not settled. The builder was notified to capture settled visual evidence; this is an evidence issue, not a code blocker.",
+    "Final desktop read-only image independently viewed: recovery copy/button visible and board actions dimmed/locked. Final desktop recovered-win image independently viewed: server score 1000, receipt indication and all result actions visible. Initial visual defects remain preserved in the lane archives."
+  ],
+  "limitations": [
+    "A GET confirms current state without attributing it to one browser/request. Saved-pointer ownership is a local browser guard, not a distributed exactly-once protocol.",
+    "A lost one-away verdict cannot be reconstructed from GET. Retrying that already committed guess can receive 409 once; the confirmed duplicate is then retained and blocked.",
+    "This code review does not replace full integration, Romanian-player sessions or real-device release checks."
+  ],
+  "initial_integration_status": "Independent code accepted; corrected focused browser receipt and complete version matrix remain required before landing. This reviewer did not repeat heavy tests.",
+  "final_browser_test_sha256": "5327a0eb2e08f6ce91c3da348ae9b0e2f96a31bdfebb85418a1ae366c8ef76b7",
+  "final_durable_evidence_sha256": {
+    "docs/reviews/v89-feedback-and-conexiuni-recovery/conex-action/verification.json": "32dcc2cbd8e40cb67143f55f9bfd2dbdb94d7c918d446862889fda9f9336ba38",
+    "docs/reviews/v89-feedback-and-conexiuni-recovery/conex-action/preserved-behavior.json": "ea90131f25259310e905a3c57a7dc79afbcceb8c23c7a463536a1c390eaa8b18",
+    "docs/reviews/v89-feedback-and-conexiuni-recovery/conex-action/README.md": "66d5b575b34aa9e7ed2eb2fec5e83910e99d7a83dd50240bc1300133ac872ebb"
+  }
+}

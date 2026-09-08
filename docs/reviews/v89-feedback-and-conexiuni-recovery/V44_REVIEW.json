@@ -1,0 +1,63 @@
+{
+  "date": "2026-09-08",
+  "reviewer": "independent V89 historical topology test reviewer",
+  "decision": "accept isolated V44 historical/current scope correction",
+  "blockers": [],
+  "baseline": "b614bfe735a27b9703025420daf603118f6a7f74",
+  "source_sha256": {
+    "tests/test_v44_contexto_common_words.py": "7b6a29497c76d9baa8d70cf034088c37133a1b0d61b5c9f659803cc401ae303d",
+    "tests/content_history.py": "260bcff2abea53347733f71386e83dd28ead084e3f36fb157f7c149042a88d31",
+    "tests/current_content.py": "8ac236eaa02afb98d74df52f529fcd429fdc540aab6797d5499fdc83032622cb",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "ea207d65a1846d2f9bb2945ca9320a8e5e7bdc5e9fe8c31113aaf4f749fdc3d6"
+  },
+  "baseline_test_sha256": "959028ac3a5d3c956e8b57284abdff626b2e765aa7feae55c9e51fc7d8a6c395",
+  "exact_diff_sha256": "33d7049f5dd30d0af8bf09eb7ee439a783681873d3c0b20d2008589ef5b91e08",
+  "evidence_sha256": {
+    "history-tests/v44-topology-initial.json": "7d29c555c94594e7e6a1aca130e7e8cbbd194499ec5bfddfc4ac2da4701dac99",
+    "history-tests/v44-topology-corrected.json": "af0ca89b0c2bef913a19b4f92214845f7f29b1ec2516e92f2f455660f349786e",
+    "FINAL_CONTENT_REVIEW.json": "addfb135caa9c8a9e3c4c180db6852134e76ac376ff9f90dc16be7b22457c64b"
+  },
+  "checks": [
+    {
+      "id": "isolated-change",
+      "result": "pass",
+      "evidence": "Whole-module AST is unchanged after excluding the one revised test and its two new historical-helper imports. Exact archived patch matches current git diff."
+    },
+    {
+      "id": "historical-scope",
+      "result": "pass",
+      "evidence": "Historical pack and rankings are restored via already reviewed before_v89 helpers. The test requires exactly 235 distinct old eligible targets and asserts the current target set adds only native Mop. Original pre-V88 and bridge-removed disjointness checks now use that correct historical set."
+    },
+    {
+      "id": "current-coverage",
+      "result": "pass",
+      "evidence": "All 236 current eligible/unique targets remain required to be reachable from every current proxy anchor. The historical scoping change does not narrow this loop."
+    },
+    {
+      "id": "exact-proxies-and-topology",
+      "result": "pass",
+      "evidence": "The original 71-proxy count and exact mapping SHA def769935fe81552daa94f711ee2b5a3b6e777269fcc3a8c98e30c86db3c9e84 remain. Original six opened cleaning nodes and factual bridge assertions remain. Additional checks require the same exact six proxies to reach Mop in pre-V88, current and bridge-removed graphs, native Mop identity/self-distance zero, and its unchanged Podea proxy."
+    },
+    {
+      "id": "actual-receipts",
+      "result": "pass",
+      "evidence": "Verified all 16 corrected-run source hashes, four corrected log/diff archives and the original failure archive, including decoded hashes/lengths. Actual focused result: 110 passed in 18.67 seconds; Ruff/whitespace exit zero. Original focused reproduction remains 1 failed in 2.61 seconds. No test rerun by this reviewer."
+    },
+    {
+      "id": "preservation",
+      "result": "pass",
+      "evidence": "Prior FINAL_CONTENT_REVIEW.json retains original SHA addfb135caa9c8a9e3c4c180db6852134e76ac376ff9f90dc16be7b22457c64b. This separate acceptance closes only its requested narrow test-review condition and does not rewrite initial audit or failed evidence."
+    }
+  ],
+  "remaining_before_landing": [
+    "Complete the final full backend matrices on the corrected frozen test input and all remaining version gates.",
+    "Verify actual completed green receipts and final source/artifact/evidence manifest before local merge."
+  ],
+  "limitations": [
+    "The test correction distinguishes historical and current invariants; it does not add graph links or change game behavior.",
+    "Focused tests and this source/evidence inspection do not substitute for full integration or human release acceptance."
+  ]
+}

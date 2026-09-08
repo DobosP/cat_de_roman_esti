@@ -1,0 +1,74 @@
+{
+  "stage": "focused development checks after final content/runtime freeze; does not replace full integration gates",
+  "baseline_commit": "b614bfe735a27b9703025420daf603118f6a7f74",
+  "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_v89_household_content.py tests/test_v88_bread_feedback.py tests/test_v88_everyday_graph.py tests/test_v87_snack_graph.py tests/test_v86_preparation_graph.py tests/test_v85_history.py tests/test_v83_food_feedback.py tests/test_v82_burta_feedback.py tests/test_v82_playable_content.py tests/test_v81_history.py tests/test_v81_nuca_feedback.py tests/test_v79_gem_feedback.py tests/test_v33_basic_words.py -q -o addopts=",
+  "exit_code": 0,
+  "result": {
+    "passed": 266,
+    "failed": 0,
+    "seconds": 74.65,
+    "new_household_cases": 8
+  },
+  "sources_sha256": {
+    "tests/test_v89_household_content.py": "5165e2e08682451ce3e094ef25a5b781e47187aa5eb6dbf66ba2d2e22922b9bb",
+    "tests/test_v88_bread_feedback.py": "e6992b63bc85ab421c81aad40246c1b6304b33533a4ece0ab7c5530a5cb662e4",
+    "tests/test_v88_everyday_graph.py": "b6c3dd3284a7d9b92b0cea194acf2d38820d79fbbffda5e3cec7262cbb763a71",
+    "tests/test_v87_snack_graph.py": "16f3d3ac300b9c1e9ec4e03951f731ecd2181c2d739ba87a90067cffc21641df",
+    "tests/test_v86_preparation_graph.py": "1409e4bea77b76d966d3f4ad218fdeb20d9ee08a33326a03164cb291ce4b2d67",
+    "tests/test_v85_history.py": "aca50f86c8fb4018ebec0b0a1047d9d30acf6fd92fd109d1d7dde5bc7fb26a7e",
+    "tests/test_v83_food_feedback.py": "b0ae19c7ed3aac5157d5c25c3910f1e8a39c967ed8575f974f946fa8d41c3f3c",
+    "tests/test_v82_burta_feedback.py": "8a2348a2e8c86aea0984538495dd78ca70729494ce00c264f8934ac324e1b1a7",
+    "tests/test_v82_playable_content.py": "b3aa9f6659a208571f1a0b761b9bcb4d5ab3b97e108bdd9d74d50f75821143b4",
+    "tests/test_v81_history.py": "8f30c24d5a98f0dc2787a3c2e68fc086ba1b5eea41f260e195444d9e45f1f05f",
+    "tests/test_v81_nuca_feedback.py": "f046673705d4f73c91957f94a69ce5d716a80bd7175f86bf467b23e44ab6a904",
+    "tests/test_v79_gem_feedback.py": "a21775c365c7d5cb10f187ee5856ec6a0597de33d9303459dd29bbbe25d2a154",
+    "tests/test_v33_basic_words.py": "a4d95b9712df1ab2492f19f559632171918ca6e3ee13aa2472cd1d5fb79d5d39",
+    "tests/content_history.py": "260bcff2abea53347733f71386e83dd28ead084e3f36fb157f7c149042a88d31",
+    "tests/current_content.py": "8ac236eaa02afb98d74df52f529fcd429fdc540aab6797d5499fdc83032622cb",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "753c22890e14b8b049f62d249ee92a06b6631fb4589db97dbebd003eaf18b5fd",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/wordgames/packs.py": "6404b4c8ed2813680a684d9e33e6ea33c6f968c95e025bd2a0eb1af3b1349607",
+    "docs/reviews/v89-feedback-and-conexiuni-recovery/artifact-delta.json": "53a606d683f56e4ee91b9a8bf57f0bb1e2355dcc932446b9d4bfdca76b59f16a",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "ea207d65a1846d2f9bb2945ca9320a8e5e7bdc5e9fe8c31113aaf4f749fdc3d6",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "4bd3cd515d21627fe42d07149bdf78951164ebfaa30df52fd1259ce26b8470d9"
+  },
+  "logs": {
+    "focused-initial.log": {
+      "archive": "focused-initial.log.gz",
+      "sha256": "efbec46c9fc99f7381c252b98bf0fe46f60d326262e74bc5d5276d51da5c36a4",
+      "archive_sha256": "09ad2c51c50bb704e7210023a833905e973dd8e888387bd750b630128d165d46",
+      "bytes": 351,
+      "archive_bytes": 84
+    },
+    "ruff.log": {
+      "archive": "ruff.log.gz",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "archive_sha256": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd",
+      "bytes": 19,
+      "archive_bytes": 39
+    }
+  },
+  "lint": {
+    "exit_code": 0,
+    "result": "All checks passed!",
+    "note": "An initial lint check reported one 102-character test assertion (E501); its wrapping was corrected before the first focused pytest run. No pytest failure occurred."
+  },
+  "content_scope": {
+    "new_public_target": "n_v31_cleaning_floor_mop",
+    "approved_id": "ct_viata_de_roman_353",
+    "rejected_ids": [
+      "ct_viata_de_roman_352",
+      "ct_viata_de_roman_354"
+    ],
+    "preserved_old_pack_records": 658,
+    "preserved_alchimie_records": 83,
+    "preserved_lant_records": 100,
+    "preserved_derived_rows": 336,
+    "graph_changed": false,
+    "mobile_changed": false
+  }
+}

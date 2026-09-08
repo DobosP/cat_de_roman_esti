@@ -1,0 +1,4892 @@
+{
+  "stage": "private BFF baseline journeys; technical flow checks do not grant content quality approval",
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "961aece7245e2772b8d36f9c3181c1150c8f6a22c4c72a3000fd6616ac9cacb8",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "ba46d827dbe6e001a10bdd801d396abd67dfb4245c48b48b16024bf468c72d65",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"
+  },
+  "journeys": [
+    {
+      "label": "Făraș",
+      "target": "n_v31_cleaning_floor_faras",
+      "opener": "Mătură",
+      "assertions_passed": true,
+      "steps": [
+        {
+          "step": "initial GET",
+          "response": {
+            "game_id": "831e5b75-6627-438b-8a8c-ca6bf8a3b756",
+            "attempts": 0,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [],
+            "clues_used": 0,
+            "clue_available": false,
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "unrelated guess stilou",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_school_supplies_stilou",
+              "label": "Stilou",
+              "distance": 7,
+              "rank": 905,
+              "temperature": "Rece",
+              "closeness": 61,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 905,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "first",
+              "message": "Primul reper: #905."
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "step": "unrelated guess fotbal",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_fotbal",
+              "label": "Fotbal",
+              "distance": 7,
+              "rank": 956,
+              "temperature": "Foarte rece",
+              "closeness": 59,
+              "attempt_number": 2
+            },
+            "guesses": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 905,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 956,
+                "temperature": "Foarte rece",
+                "closeness": 59,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 2,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 51 locuri.",
+              "rank_delta": -51
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "step": "unrelated guess București",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_bucuresti",
+              "label": "București",
+              "distance": 5,
+              "rank": 191,
+              "temperature": "Caldut",
+              "closeness": 92,
+              "attempt_number": 3
+            },
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 191,
+                "temperature": "Caldut",
+                "closeness": 92,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 905,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 956,
+                "temperature": "Foarte rece",
+                "closeness": 59,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 3,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 714 locuri mai aproape.",
+              "rank_delta": 714
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "warmer"
+          }
+        },
+        {
+          "step": "warmer clue",
+          "response": {
+            "ok": true,
+            "clue_kind": "warmer",
+            "word": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            },
+            "message": "Mai cald: Podea.",
+            "game_id": "831e5b75-6627-438b-8a8c-ca6bf8a3b756",
+            "attempts": 3,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 191,
+                "temperature": "Caldut",
+                "closeness": 92,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 905,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 956,
+                "temperature": "Foarte rece",
+                "closeness": 59,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "resume after clue",
+          "response": {
+            "game_id": "831e5b75-6627-438b-8a8c-ca6bf8a3b756",
+            "attempts": 3,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 191,
+                "temperature": "Caldut",
+                "closeness": 92,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 905,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 956,
+                "temperature": "Foarte rece",
+                "closeness": 59,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "ordinary opener Mătură",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v88_cleaning_matura",
+              "label": "Mătură",
+              "distance": 1,
+              "rank": 4,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_v88_cleaning_matura",
+                "label": "Mătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 191,
+                "temperature": "Caldut",
+                "closeness": 92,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 905,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 956,
+                "temperature": "Foarte rece",
+                "closeness": 59,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 187 locuri mai aproape.",
+              "rank_delta": 187
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            }
+          }
+        },
+        {
+          "step": "repeat upper case",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v88_cleaning_matura",
+              "label": "Mătură",
+              "distance": 1,
+              "rank": 4,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_v88_cleaning_matura",
+                "label": "Mătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 191,
+                "temperature": "Caldut",
+                "closeness": 92,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 905,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 956,
+                "temperature": "Foarte rece",
+                "closeness": 59,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "repeat",
+              "message": "Deja încercat — rămâne #4."
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            }
+          }
+        },
+        {
+          "step": "resume after repeat",
+          "response": {
+            "game_id": "831e5b75-6627-438b-8a8c-ca6bf8a3b756",
+            "attempts": 4,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_v88_cleaning_matura",
+                "label": "Mătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 191,
+                "temperature": "Caldut",
+                "closeness": 92,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 905,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 956,
+                "temperature": "Foarte rece",
+                "closeness": 59,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "exact win",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v31_cleaning_floor_faras",
+              "label": "Făraș",
+              "distance": 0,
+              "rank": 1,
+              "temperature": "Gasit",
+              "closeness": 100,
+              "attempt_number": 5
+            },
+            "guesses": [
+              {
+                "id": "n_v31_cleaning_floor_faras",
+                "label": "Făraș",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v88_cleaning_matura",
+                "label": "Mătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 191,
+                "temperature": "Caldut",
+                "closeness": 92,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 905,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 956,
+                "temperature": "Foarte rece",
+                "closeness": 59,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 5,
+            "won": true,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "found",
+              "message": "Exact — ai găsit răspunsul!"
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            },
+            "target": {
+              "id": "n_v31_cleaning_floor_faras",
+              "label": "Făraș",
+              "description": "Obiect plat cu mâner, folosit pentru a aduna praful de pe podea."
+            },
+            "score": 640,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟨🟨🟩🟩🎯\n5 incercari\nindiciu x1"
+          }
+        },
+        {
+          "step": "resume terminal",
+          "response": {
+            "game_id": "831e5b75-6627-438b-8a8c-ca6bf8a3b756",
+            "attempts": 5,
+            "won": true,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_v31_cleaning_floor_faras",
+                "label": "Făraș",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v88_cleaning_matura",
+                "label": "Mătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 191,
+                "temperature": "Caldut",
+                "closeness": 92,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 905,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 956,
+                "temperature": "Foarte rece",
+                "closeness": 59,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            },
+            "board_category": "viata_de_roman",
+            "target": {
+              "id": "n_v31_cleaning_floor_faras",
+              "label": "Făraș",
+              "description": "Obiect plat cu mâner, folosit pentru a aduna praful de pe podea."
+            },
+            "score": 640,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟨🟨🟩🟩🎯\n5 incercari\nindiciu x1"
+          }
+        }
+      ]
+    },
+    {
+      "label": "Mop",
+      "target": "n_v31_cleaning_floor_mop",
+      "opener": "Podea",
+      "assertions_passed": true,
+      "steps": [
+        {
+          "step": "initial GET",
+          "response": {
+            "game_id": "85f9a086-7b54-4d0b-9cc4-ed134aa687e0",
+            "attempts": 0,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [],
+            "clues_used": 0,
+            "clue_available": false,
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "unrelated guess stilou",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_school_supplies_stilou",
+              "label": "Stilou",
+              "distance": 6,
+              "rank": 1394,
+              "temperature": "Foarte rece",
+              "closeness": 41,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1394,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "first",
+              "message": "Primul reper: #1394."
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "step": "unrelated guess fotbal",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_fotbal",
+              "label": "Fotbal",
+              "distance": 7,
+              "rank": 1575,
+              "temperature": "Foarte rece",
+              "closeness": 33,
+              "attempt_number": 2
+            },
+            "guesses": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1394,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1575,
+                "temperature": "Foarte rece",
+                "closeness": 33,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 2,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 181 locuri.",
+              "rank_delta": -181
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "step": "unrelated guess București",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_bucuresti",
+              "label": "București",
+              "distance": 5,
+              "rank": 411,
+              "temperature": "Rece",
+              "closeness": 82,
+              "attempt_number": 3
+            },
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 411,
+                "temperature": "Rece",
+                "closeness": 82,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1394,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1575,
+                "temperature": "Foarte rece",
+                "closeness": 33,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 3,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 983 locuri mai aproape.",
+              "rank_delta": 983
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "warmer"
+          }
+        },
+        {
+          "step": "warmer clue",
+          "response": {
+            "ok": true,
+            "clue_kind": "warmer",
+            "word": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            },
+            "message": "Mai cald: Podea.",
+            "game_id": "85f9a086-7b54-4d0b-9cc4-ed134aa687e0",
+            "attempts": 3,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 411,
+                "temperature": "Rece",
+                "closeness": 82,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1394,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1575,
+                "temperature": "Foarte rece",
+                "closeness": 33,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "resume after clue",
+          "response": {
+            "game_id": "85f9a086-7b54-4d0b-9cc4-ed134aa687e0",
+            "attempts": 3,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 411,
+                "temperature": "Rece",
+                "closeness": 82,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1394,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1575,
+                "temperature": "Foarte rece",
+                "closeness": 33,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "ordinary opener Podea",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_home_surfaces_podea",
+              "label": "Podea",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 411,
+                "temperature": "Rece",
+                "closeness": 82,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1394,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1575,
+                "temperature": "Foarte rece",
+                "closeness": 33,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 409 locuri mai aproape.",
+              "rank_delta": 409
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            }
+          }
+        },
+        {
+          "step": "repeat upper case",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_home_surfaces_podea",
+              "label": "Podea",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 411,
+                "temperature": "Rece",
+                "closeness": 82,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1394,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1575,
+                "temperature": "Foarte rece",
+                "closeness": 33,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "repeat",
+              "message": "Deja încercat — rămâne #2."
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            }
+          }
+        },
+        {
+          "step": "resume after repeat",
+          "response": {
+            "game_id": "85f9a086-7b54-4d0b-9cc4-ed134aa687e0",
+            "attempts": 4,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 411,
+                "temperature": "Rece",
+                "closeness": 82,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1394,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1575,
+                "temperature": "Foarte rece",
+                "closeness": 33,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "exact win",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v31_cleaning_floor_mop",
+              "label": "Mop",
+              "distance": 0,
+              "rank": 1,
+              "temperature": "Gasit",
+              "closeness": 100,
+              "attempt_number": 5
+            },
+            "guesses": [
+              {
+                "id": "n_v31_cleaning_floor_mop",
+                "label": "Mop",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 411,
+                "temperature": "Rece",
+                "closeness": 82,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1394,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1575,
+                "temperature": "Foarte rece",
+                "closeness": 33,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 5,
+            "won": true,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "found",
+              "message": "Exact — ai găsit răspunsul!"
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            },
+            "target": {
+              "id": "n_v31_cleaning_floor_mop",
+              "label": "Mop",
+              "description": "Unealtă cu coadă și cap absorbant, folosită pentru a spăla podeaua."
+            },
+            "score": 640,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟧🟧🟩🟩🎯\n5 incercari\nindiciu x1"
+          }
+        },
+        {
+          "step": "resume terminal",
+          "response": {
+            "game_id": "85f9a086-7b54-4d0b-9cc4-ed134aa687e0",
+            "attempts": 5,
+            "won": true,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_v31_cleaning_floor_mop",
+                "label": "Mop",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v24_home_surfaces_podea",
+                "label": "Podea",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 411,
+                "temperature": "Rece",
+                "closeness": 82,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1394,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1575,
+                "temperature": "Foarte rece",
+                "closeness": 33,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            },
+            "board_category": "viata_de_roman",
+            "target": {
+              "id": "n_v31_cleaning_floor_mop",
+              "label": "Mop",
+              "description": "Unealtă cu coadă și cap absorbant, folosită pentru a spăla podeaua."
+            },
+            "score": 640,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟧🟧🟩🟩🎯\n5 incercari\nindiciu x1"
+          }
+        }
+      ]
+    },
+    {
+      "label": "Aspirator",
+      "target": "n_v31_cleaning_floor_aspirator",
+      "opener": "Mătură",
+      "assertions_passed": true,
+      "steps": [
+        {
+          "step": "initial GET",
+          "response": {
+            "game_id": "34bb38e9-0063-49d9-9bf0-2f083ce8258e",
+            "attempts": 0,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [],
+            "clues_used": 0,
+            "clue_available": false,
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "unrelated guess stilou",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_school_supplies_stilou",
+              "label": "Stilou",
+              "distance": 7,
+              "rank": 1008,
+              "temperature": "Foarte rece",
+              "closeness": 57,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 1008,
+                "temperature": "Foarte rece",
+                "closeness": 57,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "first",
+              "message": "Primul reper: #1008."
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "step": "unrelated guess fotbal",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_fotbal",
+              "label": "Fotbal",
+              "distance": 7,
+              "rank": 1077,
+              "temperature": "Foarte rece",
+              "closeness": 54,
+              "attempt_number": 2
+            },
+            "guesses": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 1008,
+                "temperature": "Foarte rece",
+                "closeness": 57,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1077,
+                "temperature": "Foarte rece",
+                "closeness": 54,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 2,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 69 locuri.",
+              "rank_delta": -69
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "step": "unrelated guess București",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_bucuresti",
+              "label": "București",
+              "distance": 5,
+              "rank": 298,
+              "temperature": "Rece",
+              "closeness": 87,
+              "attempt_number": 3
+            },
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 298,
+                "temperature": "Rece",
+                "closeness": 87,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 1008,
+                "temperature": "Foarte rece",
+                "closeness": 57,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1077,
+                "temperature": "Foarte rece",
+                "closeness": 54,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 3,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 710 locuri mai aproape.",
+              "rank_delta": 710
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "warmer"
+          }
+        },
+        {
+          "step": "warmer clue",
+          "response": {
+            "ok": true,
+            "clue_kind": "warmer",
+            "word": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            },
+            "message": "Mai cald: Podea.",
+            "game_id": "34bb38e9-0063-49d9-9bf0-2f083ce8258e",
+            "attempts": 3,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 298,
+                "temperature": "Rece",
+                "closeness": 87,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 1008,
+                "temperature": "Foarte rece",
+                "closeness": 57,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1077,
+                "temperature": "Foarte rece",
+                "closeness": 54,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "resume after clue",
+          "response": {
+            "game_id": "34bb38e9-0063-49d9-9bf0-2f083ce8258e",
+            "attempts": 3,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 298,
+                "temperature": "Rece",
+                "closeness": 87,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 1008,
+                "temperature": "Foarte rece",
+                "closeness": 57,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1077,
+                "temperature": "Foarte rece",
+                "closeness": 54,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "ordinary opener Mătură",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v88_cleaning_matura",
+              "label": "Mătură",
+              "distance": 1,
+              "rank": 4,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_v88_cleaning_matura",
+                "label": "Mătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 298,
+                "temperature": "Rece",
+                "closeness": 87,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 1008,
+                "temperature": "Foarte rece",
+                "closeness": 57,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1077,
+                "temperature": "Foarte rece",
+                "closeness": 54,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 294 locuri mai aproape.",
+              "rank_delta": 294
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            }
+          }
+        },
+        {
+          "step": "repeat upper case",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v88_cleaning_matura",
+              "label": "Mătură",
+              "distance": 1,
+              "rank": 4,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_v88_cleaning_matura",
+                "label": "Mătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 298,
+                "temperature": "Rece",
+                "closeness": 87,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 1008,
+                "temperature": "Foarte rece",
+                "closeness": 57,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1077,
+                "temperature": "Foarte rece",
+                "closeness": 54,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "repeat",
+              "message": "Deja încercat — rămâne #4."
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            }
+          }
+        },
+        {
+          "step": "resume after repeat",
+          "response": {
+            "game_id": "34bb38e9-0063-49d9-9bf0-2f083ce8258e",
+            "attempts": 4,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_v88_cleaning_matura",
+                "label": "Mătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 298,
+                "temperature": "Rece",
+                "closeness": 87,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 1008,
+                "temperature": "Foarte rece",
+                "closeness": 57,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1077,
+                "temperature": "Foarte rece",
+                "closeness": 54,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "exact win",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v31_cleaning_floor_aspirator",
+              "label": "Aspirator",
+              "distance": 0,
+              "rank": 1,
+              "temperature": "Gasit",
+              "closeness": 100,
+              "attempt_number": 5
+            },
+            "guesses": [
+              {
+                "id": "n_v31_cleaning_floor_aspirator",
+                "label": "Aspirator",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v88_cleaning_matura",
+                "label": "Mătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 298,
+                "temperature": "Rece",
+                "closeness": 87,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 1008,
+                "temperature": "Foarte rece",
+                "closeness": 57,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1077,
+                "temperature": "Foarte rece",
+                "closeness": 54,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 5,
+            "won": true,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "found",
+              "message": "Exact — ai găsit răspunsul!"
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            },
+            "target": {
+              "id": "n_v31_cleaning_floor_aspirator",
+              "label": "Aspirator",
+              "description": "Aparat care trage praful și murdăria de pe podele și covoare."
+            },
+            "score": 640,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟨🟨🟩🟩🎯\n5 incercari\nindiciu x1"
+          }
+        },
+        {
+          "step": "resume terminal",
+          "response": {
+            "game_id": "34bb38e9-0063-49d9-9bf0-2f083ce8258e",
+            "attempts": 5,
+            "won": true,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_v31_cleaning_floor_aspirator",
+                "label": "Aspirator",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v88_cleaning_matura",
+                "label": "Mătură",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 298,
+                "temperature": "Rece",
+                "closeness": 87,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 1008,
+                "temperature": "Foarte rece",
+                "closeness": 57,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1077,
+                "temperature": "Foarte rece",
+                "closeness": 54,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 2,
+              "message": "Mai cald: Podea (#2)."
+            },
+            "board_category": "viata_de_roman",
+            "target": {
+              "id": "n_v31_cleaning_floor_aspirator",
+              "label": "Aspirator",
+              "description": "Aparat care trage praful și murdăria de pe podele și covoare."
+            },
+            "score": 640,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟨🟨🟩🟩🎯\n5 incercari\nindiciu x1"
+          }
+        }
+      ]
+    },
+    {
+      "label": "Burete de vase",
+      "target": "n_v31_cleaning_dishes_burete_vase",
+      "opener": "Detergent",
+      "assertions_passed": true,
+      "steps": [
+        {
+          "step": "initial GET",
+          "response": {
+            "game_id": "0e5f4e06-a46a-416a-8ebe-adb964cd6f2b",
+            "attempts": 0,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [],
+            "clues_used": 0,
+            "clue_available": false,
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "unrelated guess stilou",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_school_supplies_stilou",
+              "label": "Stilou",
+              "distance": 7,
+              "rank": 994,
+              "temperature": "Foarte rece",
+              "closeness": 58,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 994,
+                "temperature": "Foarte rece",
+                "closeness": 58,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "first",
+              "message": "Primul reper: #994."
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "step": "unrelated guess fotbal",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_fotbal",
+              "label": "Fotbal",
+              "distance": 7,
+              "rank": 1078,
+              "temperature": "Foarte rece",
+              "closeness": 54,
+              "attempt_number": 2
+            },
+            "guesses": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 994,
+                "temperature": "Foarte rece",
+                "closeness": 58,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1078,
+                "temperature": "Foarte rece",
+                "closeness": 54,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 2,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 84 locuri.",
+              "rank_delta": -84
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "step": "unrelated guess București",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_bucuresti",
+              "label": "București",
+              "distance": 5,
+              "rank": 308,
+              "temperature": "Rece",
+              "closeness": 87,
+              "attempt_number": 3
+            },
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 308,
+                "temperature": "Rece",
+                "closeness": 87,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 994,
+                "temperature": "Foarte rece",
+                "closeness": 58,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1078,
+                "temperature": "Foarte rece",
+                "closeness": 54,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 3,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 686 locuri mai aproape.",
+              "rank_delta": 686
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "warmer"
+          }
+        },
+        {
+          "step": "warmer clue",
+          "response": {
+            "ok": true,
+            "clue_kind": "warmer",
+            "word": {
+              "label": "A spăla",
+              "rank": 3,
+              "message": "Mai cald: A spăla (#3)."
+            },
+            "message": "Mai cald: A spăla.",
+            "game_id": "0e5f4e06-a46a-416a-8ebe-adb964cd6f2b",
+            "attempts": 3,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 308,
+                "temperature": "Rece",
+                "closeness": 87,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 994,
+                "temperature": "Foarte rece",
+                "closeness": 58,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1078,
+                "temperature": "Foarte rece",
+                "closeness": 54,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "A spăla",
+              "rank": 3,
+              "message": "Mai cald: A spăla (#3)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "resume after clue",
+          "response": {
+            "game_id": "0e5f4e06-a46a-416a-8ebe-adb964cd6f2b",
+            "attempts": 3,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 308,
+                "temperature": "Rece",
+                "closeness": 87,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 994,
+                "temperature": "Foarte rece",
+                "closeness": 58,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1078,
+                "temperature": "Foarte rece",
+                "closeness": 54,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "A spăla",
+              "rank": 3,
+              "message": "Mai cald: A spăla (#3)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "ordinary opener Detergent",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v31_cleaning_supply_detergent",
+              "label": "Detergent",
+              "distance": 1,
+              "rank": 4,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_v31_cleaning_supply_detergent",
+                "label": "Detergent",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 308,
+                "temperature": "Rece",
+                "closeness": 87,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 994,
+                "temperature": "Foarte rece",
+                "closeness": 58,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1078,
+                "temperature": "Foarte rece",
+                "closeness": 54,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 304 locuri mai aproape.",
+              "rank_delta": 304
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "A spăla",
+              "rank": 3,
+              "message": "Mai cald: A spăla (#3)."
+            }
+          }
+        },
+        {
+          "step": "repeat upper case",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v31_cleaning_supply_detergent",
+              "label": "Detergent",
+              "distance": 1,
+              "rank": 4,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_v31_cleaning_supply_detergent",
+                "label": "Detergent",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 308,
+                "temperature": "Rece",
+                "closeness": 87,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 994,
+                "temperature": "Foarte rece",
+                "closeness": 58,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1078,
+                "temperature": "Foarte rece",
+                "closeness": 54,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "repeat",
+              "message": "Deja încercat — rămâne #4."
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "A spăla",
+              "rank": 3,
+              "message": "Mai cald: A spăla (#3)."
+            }
+          }
+        },
+        {
+          "step": "resume after repeat",
+          "response": {
+            "game_id": "0e5f4e06-a46a-416a-8ebe-adb964cd6f2b",
+            "attempts": 4,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_v31_cleaning_supply_detergent",
+                "label": "Detergent",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 308,
+                "temperature": "Rece",
+                "closeness": 87,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 994,
+                "temperature": "Foarte rece",
+                "closeness": 58,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1078,
+                "temperature": "Foarte rece",
+                "closeness": 54,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "A spăla",
+              "rank": 3,
+              "message": "Mai cald: A spăla (#3)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "exact win",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v31_cleaning_dishes_burete_vase",
+              "label": "Burete de vase",
+              "distance": 0,
+              "rank": 1,
+              "temperature": "Gasit",
+              "closeness": 100,
+              "attempt_number": 5
+            },
+            "guesses": [
+              {
+                "id": "n_v31_cleaning_dishes_burete_vase",
+                "label": "Burete de vase",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v31_cleaning_supply_detergent",
+                "label": "Detergent",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 308,
+                "temperature": "Rece",
+                "closeness": 87,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 994,
+                "temperature": "Foarte rece",
+                "closeness": 58,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1078,
+                "temperature": "Foarte rece",
+                "closeness": 54,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 5,
+            "won": true,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "found",
+              "message": "Exact — ai găsit răspunsul!"
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "A spăla",
+              "rank": 3,
+              "message": "Mai cald: A spăla (#3)."
+            },
+            "target": {
+              "id": "n_v31_cleaning_dishes_burete_vase",
+              "label": "Burete de vase",
+              "description": "Obiect moale și poros folosit pentru a spăla vasele."
+            },
+            "score": 640,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟨🟨🟩🟩🎯\n5 incercari\nindiciu x1"
+          }
+        },
+        {
+          "step": "resume terminal",
+          "response": {
+            "game_id": "0e5f4e06-a46a-416a-8ebe-adb964cd6f2b",
+            "attempts": 5,
+            "won": true,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_v31_cleaning_dishes_burete_vase",
+                "label": "Burete de vase",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v31_cleaning_supply_detergent",
+                "label": "Detergent",
+                "distance": 1,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 308,
+                "temperature": "Rece",
+                "closeness": 87,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 7,
+                "rank": 994,
+                "temperature": "Foarte rece",
+                "closeness": 58,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1078,
+                "temperature": "Foarte rece",
+                "closeness": 54,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "A spăla",
+              "rank": 3,
+              "message": "Mai cald: A spăla (#3)."
+            },
+            "board_category": "viata_de_roman",
+            "target": {
+              "id": "n_v31_cleaning_dishes_burete_vase",
+              "label": "Burete de vase",
+              "description": "Obiect moale și poros folosit pentru a spăla vasele."
+            },
+            "score": 640,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟨🟨🟩🟩🎯\n5 incercari\nindiciu x1"
+          }
+        }
+      ]
+    },
+    {
+      "label": "Mătură",
+      "target": "n_v88_cleaning_matura",
+      "opener": "Făraș",
+      "assertions_passed": true,
+      "steps": [
+        {
+          "step": "initial GET",
+          "response": {
+            "game_id": "209518f6-ffb7-49d2-a13a-9b1f5ffa3e5e",
+            "attempts": 0,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [],
+            "clues_used": 0,
+            "clue_available": false,
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "unrelated guess stilou",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_school_supplies_stilou",
+              "label": "Stilou",
+              "distance": 8,
+              "rank": 906,
+              "temperature": "Rece",
+              "closeness": 61,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 8,
+                "rank": 906,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "first",
+              "message": "Primul reper: #906."
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "step": "unrelated guess fotbal",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_fotbal",
+              "label": "Fotbal",
+              "distance": 8,
+              "rank": 955,
+              "temperature": "Foarte rece",
+              "closeness": 59,
+              "attempt_number": 2
+            },
+            "guesses": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 8,
+                "rank": 906,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 8,
+                "rank": 955,
+                "temperature": "Foarte rece",
+                "closeness": 59,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 2,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 49 locuri.",
+              "rank_delta": -49
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "step": "unrelated guess București",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_bucuresti",
+              "label": "București",
+              "distance": 6,
+              "rank": 192,
+              "temperature": "Caldut",
+              "closeness": 92,
+              "attempt_number": 3
+            },
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 6,
+                "rank": 192,
+                "temperature": "Caldut",
+                "closeness": 92,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 8,
+                "rank": 906,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 8,
+                "rank": 955,
+                "temperature": "Foarte rece",
+                "closeness": 59,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 3,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 714 locuri mai aproape.",
+              "rank_delta": 714
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "warmer"
+          }
+        },
+        {
+          "step": "warmer clue",
+          "response": {
+            "ok": true,
+            "clue_kind": "warmer",
+            "word": {
+              "label": "Podea",
+              "rank": 3,
+              "message": "Mai cald: Podea (#3)."
+            },
+            "message": "Mai cald: Podea.",
+            "game_id": "209518f6-ffb7-49d2-a13a-9b1f5ffa3e5e",
+            "attempts": 3,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 6,
+                "rank": 192,
+                "temperature": "Caldut",
+                "closeness": 92,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 8,
+                "rank": 906,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 8,
+                "rank": 955,
+                "temperature": "Foarte rece",
+                "closeness": 59,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 3,
+              "message": "Mai cald: Podea (#3)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "resume after clue",
+          "response": {
+            "game_id": "209518f6-ffb7-49d2-a13a-9b1f5ffa3e5e",
+            "attempts": 3,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 6,
+                "rank": 192,
+                "temperature": "Caldut",
+                "closeness": 92,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 8,
+                "rank": 906,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 8,
+                "rank": 955,
+                "temperature": "Foarte rece",
+                "closeness": 59,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 3,
+              "message": "Mai cald: Podea (#3)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "ordinary opener Făraș",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v31_cleaning_floor_faras",
+              "label": "Făraș",
+              "distance": 2,
+              "rank": 4,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_v31_cleaning_floor_faras",
+                "label": "Făraș",
+                "distance": 2,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 6,
+                "rank": 192,
+                "temperature": "Caldut",
+                "closeness": 92,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 8,
+                "rank": 906,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 8,
+                "rank": 955,
+                "temperature": "Foarte rece",
+                "closeness": 59,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 188 locuri mai aproape.",
+              "rank_delta": 188
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 3,
+              "message": "Mai cald: Podea (#3)."
+            }
+          }
+        },
+        {
+          "step": "repeat upper case",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v31_cleaning_floor_faras",
+              "label": "Făraș",
+              "distance": 2,
+              "rank": 4,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_v31_cleaning_floor_faras",
+                "label": "Făraș",
+                "distance": 2,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 6,
+                "rank": 192,
+                "temperature": "Caldut",
+                "closeness": 92,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 8,
+                "rank": 906,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 8,
+                "rank": 955,
+                "temperature": "Foarte rece",
+                "closeness": 59,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "repeat",
+              "message": "Deja încercat — rămâne #4."
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 3,
+              "message": "Mai cald: Podea (#3)."
+            }
+          }
+        },
+        {
+          "step": "resume after repeat",
+          "response": {
+            "game_id": "209518f6-ffb7-49d2-a13a-9b1f5ffa3e5e",
+            "attempts": 4,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_v31_cleaning_floor_faras",
+                "label": "Făraș",
+                "distance": 2,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 6,
+                "rank": 192,
+                "temperature": "Caldut",
+                "closeness": 92,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 8,
+                "rank": 906,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 8,
+                "rank": 955,
+                "temperature": "Foarte rece",
+                "closeness": 59,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 3,
+              "message": "Mai cald: Podea (#3)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "exact win",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v88_cleaning_matura",
+              "label": "Mătură",
+              "distance": 0,
+              "rank": 1,
+              "temperature": "Gasit",
+              "closeness": 100,
+              "attempt_number": 5
+            },
+            "guesses": [
+              {
+                "id": "n_v88_cleaning_matura",
+                "label": "Mătură",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v31_cleaning_floor_faras",
+                "label": "Făraș",
+                "distance": 2,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 6,
+                "rank": 192,
+                "temperature": "Caldut",
+                "closeness": 92,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 8,
+                "rank": 906,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 8,
+                "rank": 955,
+                "temperature": "Foarte rece",
+                "closeness": 59,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 5,
+            "won": true,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "found",
+              "message": "Exact — ai găsit răspunsul!"
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 3,
+              "message": "Mai cald: Podea (#3)."
+            },
+            "target": {
+              "id": "n_v88_cleaning_matura",
+              "label": "Mătură",
+              "description": "Unealtă cu coadă și peri sau nuiele, folosită la strângerea prafului și a gunoiului de pe suprafețe."
+            },
+            "score": 640,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟨🟨🟩🟩🎯\n5 incercari\nindiciu x1"
+          }
+        },
+        {
+          "step": "resume terminal",
+          "response": {
+            "game_id": "209518f6-ffb7-49d2-a13a-9b1f5ffa3e5e",
+            "attempts": 5,
+            "won": true,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_v88_cleaning_matura",
+                "label": "Mătură",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v31_cleaning_floor_faras",
+                "label": "Făraș",
+                "distance": 2,
+                "rank": 4,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 6,
+                "rank": 192,
+                "temperature": "Caldut",
+                "closeness": 92,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 8,
+                "rank": 906,
+                "temperature": "Rece",
+                "closeness": 61,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 8,
+                "rank": 955,
+                "temperature": "Foarte rece",
+                "closeness": 59,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Podea",
+              "rank": 3,
+              "message": "Mai cald: Podea (#3)."
+            },
+            "board_category": "viata_de_roman",
+            "target": {
+              "id": "n_v88_cleaning_matura",
+              "label": "Mătură",
+              "description": "Unealtă cu coadă și peri sau nuiele, folosită la strângerea prafului și a gunoiului de pe suprafețe."
+            },
+            "score": 640,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟨🟨🟩🟩🎯\n5 incercari\nindiciu x1"
+          }
+        }
+      ]
+    },
+    {
+      "label": "Găleată",
+      "target": "n_v31_cleaning_water_galeata",
+      "opener": "Apă",
+      "assertions_passed": true,
+      "steps": [
+        {
+          "step": "initial GET",
+          "response": {
+            "game_id": "121ca233-7465-47d4-a861-a13948fae65d",
+            "attempts": 0,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [],
+            "clues_used": 0,
+            "clue_available": false,
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "unrelated guess stilou",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_school_supplies_stilou",
+              "label": "Stilou",
+              "distance": 5,
+              "rank": 1378,
+              "temperature": "Foarte rece",
+              "closeness": 41,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 5,
+                "rank": 1378,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "first",
+              "message": "Primul reper: #1378."
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "step": "unrelated guess fotbal",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_fotbal",
+              "label": "Fotbal",
+              "distance": 6,
+              "rank": 1539,
+              "temperature": "Foarte rece",
+              "closeness": 34,
+              "attempt_number": 2
+            },
+            "guesses": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 5,
+                "rank": 1378,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 6,
+                "rank": 1539,
+                "temperature": "Foarte rece",
+                "closeness": 34,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 2,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 161 locuri.",
+              "rank_delta": -161
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "step": "unrelated guess București",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_bucuresti",
+              "label": "București",
+              "distance": 4,
+              "rank": 356,
+              "temperature": "Rece",
+              "closeness": 85,
+              "attempt_number": 3
+            },
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 4,
+                "rank": 356,
+                "temperature": "Rece",
+                "closeness": 85,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 5,
+                "rank": 1378,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 6,
+                "rank": 1539,
+                "temperature": "Foarte rece",
+                "closeness": 34,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 3,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 1022 locuri mai aproape.",
+              "rank_delta": 1022
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "warmer"
+          }
+        },
+        {
+          "step": "warmer clue",
+          "response": {
+            "ok": true,
+            "clue_kind": "warmer",
+            "word": {
+              "label": "Apă",
+              "rank": 2,
+              "message": "Mai cald: Apă (#2)."
+            },
+            "message": "Mai cald: Apă.",
+            "game_id": "121ca233-7465-47d4-a861-a13948fae65d",
+            "attempts": 3,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 4,
+                "rank": 356,
+                "temperature": "Rece",
+                "closeness": 85,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 5,
+                "rank": 1378,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 6,
+                "rank": 1539,
+                "temperature": "Foarte rece",
+                "closeness": 34,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Apă",
+              "rank": 2,
+              "message": "Mai cald: Apă (#2)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "resume after clue",
+          "response": {
+            "game_id": "121ca233-7465-47d4-a861-a13948fae65d",
+            "attempts": 3,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 4,
+                "rank": 356,
+                "temperature": "Rece",
+                "closeness": 85,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 5,
+                "rank": 1378,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 6,
+                "rank": 1539,
+                "temperature": "Foarte rece",
+                "closeness": 34,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Apă",
+              "rank": 2,
+              "message": "Mai cald: Apă (#2)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "ordinary opener Apă",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v4gas_apa",
+              "label": "Apă",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_v4gas_apa",
+                "label": "Apă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 4,
+                "rank": 356,
+                "temperature": "Rece",
+                "closeness": 85,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 5,
+                "rank": 1378,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 6,
+                "rank": 1539,
+                "temperature": "Foarte rece",
+                "closeness": 34,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 354 locuri mai aproape.",
+              "rank_delta": 354
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Apă",
+              "rank": 2,
+              "message": "Mai cald: Apă (#2)."
+            }
+          }
+        },
+        {
+          "step": "repeat upper case",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v4gas_apa",
+              "label": "Apă",
+              "distance": 1,
+              "rank": 2,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_v4gas_apa",
+                "label": "Apă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 4,
+                "rank": 356,
+                "temperature": "Rece",
+                "closeness": 85,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 5,
+                "rank": 1378,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 6,
+                "rank": 1539,
+                "temperature": "Foarte rece",
+                "closeness": 34,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "repeat",
+              "message": "Deja încercat — rămâne #2."
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Apă",
+              "rank": 2,
+              "message": "Mai cald: Apă (#2)."
+            }
+          }
+        },
+        {
+          "step": "resume after repeat",
+          "response": {
+            "game_id": "121ca233-7465-47d4-a861-a13948fae65d",
+            "attempts": 4,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_v4gas_apa",
+                "label": "Apă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 4,
+                "rank": 356,
+                "temperature": "Rece",
+                "closeness": 85,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 5,
+                "rank": 1378,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 6,
+                "rank": 1539,
+                "temperature": "Foarte rece",
+                "closeness": 34,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Apă",
+              "rank": 2,
+              "message": "Mai cald: Apă (#2)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "exact win",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v31_cleaning_water_galeata",
+              "label": "Găleată",
+              "distance": 0,
+              "rank": 1,
+              "temperature": "Gasit",
+              "closeness": 100,
+              "attempt_number": 5
+            },
+            "guesses": [
+              {
+                "id": "n_v31_cleaning_water_galeata",
+                "label": "Găleată",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v4gas_apa",
+                "label": "Apă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 4,
+                "rank": 356,
+                "temperature": "Rece",
+                "closeness": 85,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 5,
+                "rank": 1378,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 6,
+                "rank": 1539,
+                "temperature": "Foarte rece",
+                "closeness": 34,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 5,
+            "won": true,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "found",
+              "message": "Exact — ai găsit răspunsul!"
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Apă",
+              "rank": 2,
+              "message": "Mai cald: Apă (#2)."
+            },
+            "target": {
+              "id": "n_v31_cleaning_water_galeata",
+              "label": "Găleată",
+              "description": "Recipient cu mâner folosit pentru a duce apă sau alte lichide."
+            },
+            "score": 640,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟧🟧🟩🟩🎯\n5 incercari\nindiciu x1"
+          }
+        },
+        {
+          "step": "resume terminal",
+          "response": {
+            "game_id": "121ca233-7465-47d4-a861-a13948fae65d",
+            "attempts": 5,
+            "won": true,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_v31_cleaning_water_galeata",
+                "label": "Găleată",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v4gas_apa",
+                "label": "Apă",
+                "distance": 1,
+                "rank": 2,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 4,
+                "rank": 356,
+                "temperature": "Rece",
+                "closeness": 85,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 5,
+                "rank": 1378,
+                "temperature": "Foarte rece",
+                "closeness": 41,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 6,
+                "rank": 1539,
+                "temperature": "Foarte rece",
+                "closeness": 34,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Apă",
+              "rank": 2,
+              "message": "Mai cald: Apă (#2)."
+            },
+            "board_category": "viata_de_roman",
+            "target": {
+              "id": "n_v31_cleaning_water_galeata",
+              "label": "Găleată",
+              "description": "Recipient cu mâner folosit pentru a duce apă sau alte lichide."
+            },
+            "score": 640,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟧🟧🟩🟩🎯\n5 incercari\nindiciu x1"
+          }
+        }
+      ]
+    },
+    {
+      "label": "Detergent",
+      "target": "n_v31_cleaning_supply_detergent",
+      "opener": "A spăla",
+      "assertions_passed": true,
+      "steps": [
+        {
+          "step": "initial GET",
+          "response": {
+            "game_id": "d749c638-7b56-4b85-8257-15d4a9dafa84",
+            "attempts": 0,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [],
+            "clues_used": 0,
+            "clue_available": false,
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "unrelated guess stilou",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_school_supplies_stilou",
+              "label": "Stilou",
+              "distance": 6,
+              "rank": 1436,
+              "temperature": "Foarte rece",
+              "closeness": 39,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1436,
+                "temperature": "Foarte rece",
+                "closeness": 39,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "first",
+              "message": "Primul reper: #1436."
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "step": "unrelated guess fotbal",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_fotbal",
+              "label": "Fotbal",
+              "distance": 7,
+              "rank": 1603,
+              "temperature": "Foarte rece",
+              "closeness": 32,
+              "attempt_number": 2
+            },
+            "guesses": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1436,
+                "temperature": "Foarte rece",
+                "closeness": 39,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1603,
+                "temperature": "Foarte rece",
+                "closeness": 32,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 2,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 167 locuri.",
+              "rank_delta": -167
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "step": "unrelated guess București",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_bucuresti",
+              "label": "București",
+              "distance": 5,
+              "rank": 418,
+              "temperature": "Rece",
+              "closeness": 82,
+              "attempt_number": 3
+            },
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 418,
+                "temperature": "Rece",
+                "closeness": 82,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1436,
+                "temperature": "Foarte rece",
+                "closeness": 39,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1603,
+                "temperature": "Foarte rece",
+                "closeness": 32,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 3,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 1018 locuri mai aproape.",
+              "rank_delta": 1018
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "warmer"
+          }
+        },
+        {
+          "step": "warmer clue",
+          "response": {
+            "ok": true,
+            "clue_kind": "warmer",
+            "word": {
+              "label": "A spăla",
+              "rank": 3,
+              "message": "Mai cald: A spăla (#3)."
+            },
+            "message": "Mai cald: A spăla.",
+            "game_id": "d749c638-7b56-4b85-8257-15d4a9dafa84",
+            "attempts": 3,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 418,
+                "temperature": "Rece",
+                "closeness": 82,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1436,
+                "temperature": "Foarte rece",
+                "closeness": 39,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1603,
+                "temperature": "Foarte rece",
+                "closeness": 32,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "A spăla",
+              "rank": 3,
+              "message": "Mai cald: A spăla (#3)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "resume after clue",
+          "response": {
+            "game_id": "d749c638-7b56-4b85-8257-15d4a9dafa84",
+            "attempts": 3,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 418,
+                "temperature": "Rece",
+                "closeness": 82,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1436,
+                "temperature": "Foarte rece",
+                "closeness": 39,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1603,
+                "temperature": "Foarte rece",
+                "closeness": 32,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "A spăla",
+              "rank": 3,
+              "message": "Mai cald: A spăla (#3)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "ordinary opener A spăla",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_action_home_a_spala",
+              "label": "A spăla",
+              "distance": 1,
+              "rank": 3,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_v24_action_home_a_spala",
+                "label": "A spăla",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 418,
+                "temperature": "Rece",
+                "closeness": 82,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1436,
+                "temperature": "Foarte rece",
+                "closeness": 39,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1603,
+                "temperature": "Foarte rece",
+                "closeness": 32,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 415 locuri mai aproape.",
+              "rank_delta": 415
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "A spăla",
+              "rank": 3,
+              "message": "Mai cald: A spăla (#3)."
+            }
+          }
+        },
+        {
+          "step": "repeat upper case",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_action_home_a_spala",
+              "label": "A spăla",
+              "distance": 1,
+              "rank": 3,
+              "temperature": "Fierbinte",
+              "closeness": 99,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_v24_action_home_a_spala",
+                "label": "A spăla",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 418,
+                "temperature": "Rece",
+                "closeness": 82,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1436,
+                "temperature": "Foarte rece",
+                "closeness": 39,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1603,
+                "temperature": "Foarte rece",
+                "closeness": 32,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "repeat",
+              "message": "Deja încercat — rămâne #3."
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "A spăla",
+              "rank": 3,
+              "message": "Mai cald: A spăla (#3)."
+            }
+          }
+        },
+        {
+          "step": "resume after repeat",
+          "response": {
+            "game_id": "d749c638-7b56-4b85-8257-15d4a9dafa84",
+            "attempts": 4,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_v24_action_home_a_spala",
+                "label": "A spăla",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 418,
+                "temperature": "Rece",
+                "closeness": 82,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1436,
+                "temperature": "Foarte rece",
+                "closeness": 39,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1603,
+                "temperature": "Foarte rece",
+                "closeness": 32,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "A spăla",
+              "rank": 3,
+              "message": "Mai cald: A spăla (#3)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "exact win",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v31_cleaning_supply_detergent",
+              "label": "Detergent",
+              "distance": 0,
+              "rank": 1,
+              "temperature": "Gasit",
+              "closeness": 100,
+              "attempt_number": 5
+            },
+            "guesses": [
+              {
+                "id": "n_v31_cleaning_supply_detergent",
+                "label": "Detergent",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v24_action_home_a_spala",
+                "label": "A spăla",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 418,
+                "temperature": "Rece",
+                "closeness": 82,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1436,
+                "temperature": "Foarte rece",
+                "closeness": 39,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1603,
+                "temperature": "Foarte rece",
+                "closeness": 32,
+                "attempt_number": 2
+              }
+            ],
+            "attempts": 5,
+            "won": true,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "found",
+              "message": "Exact — ai găsit răspunsul!"
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "A spăla",
+              "rank": 3,
+              "message": "Mai cald: A spăla (#3)."
+            },
+            "target": {
+              "id": "n_v31_cleaning_supply_detergent",
+              "label": "Detergent",
+              "description": "Produs de curățare folosit pentru vase, haine sau suprafețe."
+            },
+            "score": 640,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟧🟧🟩🟩🎯\n5 incercari\nindiciu x1"
+          }
+        },
+        {
+          "step": "resume terminal",
+          "response": {
+            "game_id": "d749c638-7b56-4b85-8257-15d4a9dafa84",
+            "attempts": 5,
+            "won": true,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_v31_cleaning_supply_detergent",
+                "label": "Detergent",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_v24_action_home_a_spala",
+                "label": "A spăla",
+                "distance": 1,
+                "rank": 3,
+                "temperature": "Fierbinte",
+                "closeness": 99,
+                "attempt_number": 4
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 5,
+                "rank": 418,
+                "temperature": "Rece",
+                "closeness": 82,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1436,
+                "temperature": "Foarte rece",
+                "closeness": 39,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 7,
+                "rank": 1603,
+                "temperature": "Foarte rece",
+                "closeness": 32,
+                "attempt_number": 2
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "A spăla",
+              "rank": 3,
+              "message": "Mai cald: A spăla (#3)."
+            },
+            "board_category": "viata_de_roman",
+            "target": {
+              "id": "n_v31_cleaning_supply_detergent",
+              "label": "Detergent",
+              "description": "Produs de curățare folosit pentru vase, haine sau suprafețe."
+            },
+            "score": 640,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟧🟧🟩🟩🎯\n5 incercari\nindiciu x1"
+          }
+        }
+      ]
+    },
+    {
+      "label": "Taburet",
+      "target": "n_v88_home_taburet",
+      "opener": "Scaun",
+      "assertions_passed": true,
+      "steps": [
+        {
+          "step": "initial GET",
+          "response": {
+            "game_id": "8ba3d960-781a-4eb0-ab67-bc28a3ed148c",
+            "attempts": 0,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [],
+            "clues_used": 0,
+            "clue_available": false,
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "unrelated guess stilou",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_school_supplies_stilou",
+              "label": "Stilou",
+              "distance": 6,
+              "rank": 1365,
+              "temperature": "Foarte rece",
+              "closeness": 42,
+              "attempt_number": 1
+            },
+            "guesses": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1365,
+                "temperature": "Foarte rece",
+                "closeness": 42,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 1,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "first",
+              "message": "Primul reper: #1365."
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "step": "unrelated guess fotbal",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_fotbal",
+              "label": "Fotbal",
+              "distance": 6,
+              "rank": 1164,
+              "temperature": "Foarte rece",
+              "closeness": 50,
+              "attempt_number": 2
+            },
+            "guesses": [
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 6,
+                "rank": 1164,
+                "temperature": "Foarte rece",
+                "closeness": 50,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1365,
+                "temperature": "Foarte rece",
+                "closeness": 42,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 2,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 201 locuri mai aproape.",
+              "rank_delta": 201
+            },
+            "clues_used": 0,
+            "clue_available": false
+          }
+        },
+        {
+          "step": "unrelated guess București",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_bucuresti",
+              "label": "București",
+              "distance": 4,
+              "rank": 93,
+              "temperature": "Caldut",
+              "closeness": 96,
+              "attempt_number": 3
+            },
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 4,
+                "rank": 93,
+                "temperature": "Caldut",
+                "closeness": 96,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 6,
+                "rank": 1164,
+                "temperature": "Foarte rece",
+                "closeness": 50,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1365,
+                "temperature": "Foarte rece",
+                "closeness": 42,
+                "attempt_number": 1
+              }
+            ],
+            "attempts": 3,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "new-best",
+              "message": "Cel mai bun: cu 1071 locuri mai aproape.",
+              "rank_delta": 1071
+            },
+            "clues_used": 0,
+            "clue_available": true,
+            "next_clue_kind": "warmer"
+          }
+        },
+        {
+          "step": "warmer clue",
+          "response": {
+            "ok": true,
+            "clue_kind": "warmer",
+            "word": {
+              "label": "Dinu Lipatti",
+              "rank": 4,
+              "message": "Mai cald: Dinu Lipatti (#4)."
+            },
+            "message": "Mai cald: Dinu Lipatti.",
+            "game_id": "8ba3d960-781a-4eb0-ab67-bc28a3ed148c",
+            "attempts": 3,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 4,
+                "rank": 93,
+                "temperature": "Caldut",
+                "closeness": 96,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 6,
+                "rank": 1164,
+                "temperature": "Foarte rece",
+                "closeness": 50,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1365,
+                "temperature": "Foarte rece",
+                "closeness": 42,
+                "attempt_number": 1
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Dinu Lipatti",
+              "rank": 4,
+              "message": "Mai cald: Dinu Lipatti (#4)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "resume after clue",
+          "response": {
+            "game_id": "8ba3d960-781a-4eb0-ab67-bc28a3ed148c",
+            "attempts": 3,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 4,
+                "rank": 93,
+                "temperature": "Caldut",
+                "closeness": 96,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 6,
+                "rank": 1164,
+                "temperature": "Foarte rece",
+                "closeness": 50,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1365,
+                "temperature": "Foarte rece",
+                "closeness": 42,
+                "attempt_number": 1
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Dinu Lipatti",
+              "rank": 4,
+              "message": "Mai cald: Dinu Lipatti (#4)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "ordinary opener Scaun",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_home_seating_scaun",
+              "label": "Scaun",
+              "distance": 7,
+              "rank": 2189,
+              "temperature": "Inghetat",
+              "closeness": 7,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 4,
+                "rank": 93,
+                "temperature": "Caldut",
+                "closeness": 96,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 6,
+                "rank": 1164,
+                "temperature": "Foarte rece",
+                "closeness": 50,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1365,
+                "temperature": "Foarte rece",
+                "closeness": 42,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_seating_scaun",
+                "label": "Scaun",
+                "distance": 7,
+                "rank": 2189,
+                "temperature": "Inghetat",
+                "closeness": 7,
+                "attempt_number": 4
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "colder",
+              "message": "Mai rece cu 2096 locuri.",
+              "rank_delta": -2096
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Dinu Lipatti",
+              "rank": 4,
+              "message": "Mai cald: Dinu Lipatti (#4)."
+            }
+          }
+        },
+        {
+          "step": "repeat upper case",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v24_home_seating_scaun",
+              "label": "Scaun",
+              "distance": 7,
+              "rank": 2189,
+              "temperature": "Inghetat",
+              "closeness": 7,
+              "attempt_number": 4
+            },
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 4,
+                "rank": 93,
+                "temperature": "Caldut",
+                "closeness": 96,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 6,
+                "rank": 1164,
+                "temperature": "Foarte rece",
+                "closeness": 50,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1365,
+                "temperature": "Foarte rece",
+                "closeness": 42,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_seating_scaun",
+                "label": "Scaun",
+                "distance": 7,
+                "rank": 2189,
+                "temperature": "Inghetat",
+                "closeness": 7,
+                "attempt_number": 4
+              }
+            ],
+            "attempts": 4,
+            "won": false,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "repeat",
+              "message": "Deja încercat — rămâne #2189."
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Dinu Lipatti",
+              "rank": 4,
+              "message": "Mai cald: Dinu Lipatti (#4)."
+            }
+          }
+        },
+        {
+          "step": "resume after repeat",
+          "response": {
+            "game_id": "8ba3d960-781a-4eb0-ab67-bc28a3ed148c",
+            "attempts": 4,
+            "won": false,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 4,
+                "rank": 93,
+                "temperature": "Caldut",
+                "closeness": 96,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 6,
+                "rank": 1164,
+                "temperature": "Foarte rece",
+                "closeness": 50,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1365,
+                "temperature": "Foarte rece",
+                "closeness": 42,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_seating_scaun",
+                "label": "Scaun",
+                "distance": 7,
+                "rank": 2189,
+                "temperature": "Inghetat",
+                "closeness": 7,
+                "attempt_number": 4
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Dinu Lipatti",
+              "rank": 4,
+              "message": "Mai cald: Dinu Lipatti (#4)."
+            },
+            "board_category": "viata_de_roman"
+          }
+        },
+        {
+          "step": "exact win",
+          "response": {
+            "ok": true,
+            "guess": {
+              "id": "n_v88_home_taburet",
+              "label": "Taburet",
+              "distance": 0,
+              "rank": 1,
+              "temperature": "Gasit",
+              "closeness": 100,
+              "attempt_number": 5
+            },
+            "guesses": [
+              {
+                "id": "n_v88_home_taburet",
+                "label": "Taburet",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 4,
+                "rank": 93,
+                "temperature": "Caldut",
+                "closeness": 96,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 6,
+                "rank": 1164,
+                "temperature": "Foarte rece",
+                "closeness": 50,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1365,
+                "temperature": "Foarte rece",
+                "closeness": 42,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_seating_scaun",
+                "label": "Scaun",
+                "distance": 7,
+                "rank": 2189,
+                "temperature": "Inghetat",
+                "closeness": 7,
+                "attempt_number": 4
+              }
+            ],
+            "attempts": 5,
+            "won": true,
+            "reachable_count": 2343,
+            "feedback": {
+              "kind": "found",
+              "message": "Exact — ai găsit răspunsul!"
+            },
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Dinu Lipatti",
+              "rank": 4,
+              "message": "Mai cald: Dinu Lipatti (#4)."
+            },
+            "target": {
+              "id": "n_v88_home_taburet",
+              "label": "Taburet",
+              "description": "Scaun de dimensiuni mici, de obicei fără spătar și fără brațe."
+            },
+            "score": 640,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟧🟨🟩🟥🎯\n5 incercari\nindiciu x1"
+          }
+        },
+        {
+          "step": "resume terminal",
+          "response": {
+            "game_id": "8ba3d960-781a-4eb0-ab67-bc28a3ed148c",
+            "attempts": 5,
+            "won": true,
+            "gave_up": false,
+            "reachable_count": 2343,
+            "difficulty": "usor",
+            "guesses": [
+              {
+                "id": "n_v88_home_taburet",
+                "label": "Taburet",
+                "distance": 0,
+                "rank": 1,
+                "temperature": "Gasit",
+                "closeness": 100,
+                "attempt_number": 5
+              },
+              {
+                "id": "n_bucuresti",
+                "label": "București",
+                "distance": 4,
+                "rank": 93,
+                "temperature": "Caldut",
+                "closeness": 96,
+                "attempt_number": 3
+              },
+              {
+                "id": "n_fotbal",
+                "label": "Fotbal",
+                "distance": 6,
+                "rank": 1164,
+                "temperature": "Foarte rece",
+                "closeness": 50,
+                "attempt_number": 2
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "label": "Stilou",
+                "distance": 6,
+                "rank": 1365,
+                "temperature": "Foarte rece",
+                "closeness": 42,
+                "attempt_number": 1
+              },
+              {
+                "id": "n_v24_home_seating_scaun",
+                "label": "Scaun",
+                "distance": 7,
+                "rank": 2189,
+                "temperature": "Inghetat",
+                "closeness": 7,
+                "attempt_number": 4
+              }
+            ],
+            "clues_used": 1,
+            "clue_available": false,
+            "warm_clue": {
+              "label": "Dinu Lipatti",
+              "rank": 4,
+              "message": "Mai cald: Dinu Lipatti (#4)."
+            },
+            "board_category": "viata_de_roman",
+            "target": {
+              "id": "n_v88_home_taburet",
+              "label": "Taburet",
+              "description": "Scaun de dimensiuni mici, de obicei fără spătar și fără brațe."
+            },
+            "score": 640,
+            "share": "cat_de_roman_esti · Cald sau Rece · Viața în România\n🟧🟨🟩🟥🎯\n5 incercari\nindiciu x1"
+          }
+        }
+      ]
+    }
+  ]
+}

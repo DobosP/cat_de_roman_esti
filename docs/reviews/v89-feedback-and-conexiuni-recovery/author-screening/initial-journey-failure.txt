@@ -1,0 +1,12 @@
+Initial author journey stopped at its warmer-clue assertion.
+Invocation: PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python <scratch>/content/journeys.py
+Exit: 1
+Traceback (most recent call last):
+  File "<scratch>/content/journeys.py", line 36, in <module>
+    b=request('warmer clue','/clue',{});assert b['clue_kind']=='warmer' and b['clues_used']==1 and b['word']['rank']>1;hidden(b,target,label)
+AssertionError
+
+The preserved initial source gives category as the daily positional argument.
+The category was therefore unknown to the session and the first earned clue correctly
+returned a category stage. The probe was corrected, with no application change.
+This file records the observed failure and explanation; it is not a raw stderr log.

@@ -10,7 +10,7 @@ from pathlib import Path
 
 import pytest
 
-from tests.content_history import before_v88_fixture
+from tests.content_history import before_v88_fixture, before_v89_pack, before_v89_rankings
 from tests.current_content import CURRENT_CONTENT
 
 pytest.importorskip("django")
@@ -176,6 +176,21 @@ def test_every_proxy_anchor_reaches_every_selectable_unique_target() -> None:
         if row["game"] == "contexto" and row["pilot_eligible"]
     ]
     targets = {target_by_id[row["id"]] for row in eligible}
+    historical_pack = before_v89_pack(pack)
+    historical_rankings = before_v89_rankings(rankings)
+    historical_target_by_id = {
+        row["id"]: row["target"] for row in historical_pack["contexto"]
+    }
+    historical_eligible = [
+        row for row in historical_rankings["boards"]
+        if row["game"] == "contexto" and row["pilot_eligible"]
+    ]
+    historical_targets = {
+        historical_target_by_id[row["id"]] for row in historical_eligible
+    }
+    mop = "n_v31_cleaning_floor_mop"
+    assert len(historical_eligible) == len(historical_targets) == 235
+    assert historical_targets < targets and targets - historical_targets == {mop}
     svc = get_service()
     fixture = _json(_PACKAGE_KG)
     prior = before_v88_fixture(fixture)
@@ -204,13 +219,21 @@ def test_every_proxy_anchor_reaches_every_selectable_unique_target() -> None:
     for anchor_id in set(COMMON_FEEDBACK_PROXIES.values()):
         assert targets <= set(svc.distances_from(anchor_id))
     for node_id in COMMON_FEEDBACK_PROXIES:
-        assert targets.isdisjoint(prior_svc.distances_from(node_id))
-        assert (not targets.isdisjoint(svc.distances_from(node_id))) is (
+        assert historical_targets.isdisjoint(prior_svc.distances_from(node_id))
+        assert (not historical_targets.isdisjoint(svc.distances_from(node_id))) is (
             node_id in opened_cleaning_ids
         )
-        # Removing only the reviewed Făraș→Mătură link restores all 71 sinks.
-        # The mature-target feedback mappings themselves remain byte-exact.
-        assert targets.isdisjoint(closed_svc.distances_from(node_id))
+        # Removing Făraș→Mătură restores isolation from the exact 235 V88 targets.
+        # Mop was already reachable inside the cleaning mesh before becoming public.
+        assert historical_targets.isdisjoint(closed_svc.distances_from(node_id))
+    assert targets & set(COMMON_FEEDBACK_PROXIES) == {mop}
+    assert COMMON_FEEDBACK_PROXIES[mop] == "n_v24_home_surfaces_podea"
+    for graph_svc in (prior_svc, svc, closed_svc):
+        assert graph_svc.resolve("mop") == mop and graph_svc.distance(mop, mop) == 0
+        assert {
+            node_id for node_id in COMMON_FEEDBACK_PROXIES
+            if mop in graph_svc.distances_from(node_id)
+        } == opened_cleaning_ids
 
 
 def test_proxy_feedback_keeps_public_identity_and_never_stacks_penalties() -> None:

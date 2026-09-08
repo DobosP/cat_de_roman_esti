@@ -1,0 +1,4107 @@
+{
+  "phase": "Independent V89 baseline feedback paths; native runtime unchanged",
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "4c7030bd86e966162f4ac51ef00cf3bb649ff7a9d59c8c34e180cb7ff53e1636",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "961aece7245e2772b8d36f9c3181c1150c8f6a22c4c72a3000fd6616ac9cacb8",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "ba46d827dbe6e001a10bdd801d396abd67dfb4245c48b48b16024bf468c72d65",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"
+  },
+  "method": "Actual private-BFF first guesses plus independently reconstructed forward shortest and minimum-weight paths over service non-distractor adjacency. Tied paths choose lexicographic node IDs. Weighted paths are globally minimum weight, not constrained to the minimum BFS hop count, matching the runtime. All private sessions removed.",
+  "rows": [
+    {
+      "input": "Tort Diplomat",
+      "input_id": "n_v87_food_tort_diplomat",
+      "target": "Frișcă",
+      "target_id": "n_v86_food_frisca",
+      "anchor": "Tort Diplomat",
+      "anchor_id": "n_v87_food_tort_diplomat",
+      "score": {
+        "anchor_id": "n_v87_food_tort_diplomat",
+        "distance": 5,
+        "weighted_distance": 5.819999999999999,
+        "rank": 345,
+        "feedback_distance": 5
+      },
+      "actual_bff_guess": {
+        "id": "n_v87_food_tort_diplomat",
+        "label": "Tort Diplomat",
+        "distance": 5,
+        "rank": 345,
+        "temperature": "Rece",
+        "closeness": 85,
+        "attempt_number": 1
+      },
+      "actual_bff_won": false,
+      "native_shortest": {
+        "cost": 5,
+        "steps": [
+          {
+            "from": "Tort Diplomat",
+            "to": "Desert",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8748",
+              "src_id": "n_v87_food_tort_diplomat",
+              "dst_id": "n_v2gas_desert",
+              "relation": "is_a",
+              "label_ro": "este un",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Desert",
+            "to": "Cozonac",
+            "forward_cost": 1.1,
+            "edge": {
+              "id": "de1571",
+              "src_id": "n_gas_cozonac",
+              "dst_id": "n_v2gas_desert",
+              "relation": "is_a",
+              "label_ro": "este desert",
+              "strength": 0.9,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Cozonac",
+            "to": "Bucătărie",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3775",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_cozonac",
+              "relation": "related_to",
+              "label_ro": "se coace în",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "native_weighted": {
+        "cost": 5.819999999999999,
+        "steps": [
+          {
+            "from": "Tort Diplomat",
+            "to": "Desert",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8748",
+              "src_id": "n_v87_food_tort_diplomat",
+              "dst_id": "n_v2gas_desert",
+              "relation": "is_a",
+              "label_ro": "este un",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Desert",
+            "to": "Cozonac",
+            "forward_cost": 1.1,
+            "edge": {
+              "id": "de1571",
+              "src_id": "n_gas_cozonac",
+              "dst_id": "n_v2gas_desert",
+              "relation": "is_a",
+              "label_ro": "este desert",
+              "strength": 0.9,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Cozonac",
+            "to": "Bucătărie",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3775",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_cozonac",
+              "relation": "related_to",
+              "label_ro": "se coace în",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_shortest": {
+        "cost": 5,
+        "steps": [
+          {
+            "from": "Tort Diplomat",
+            "to": "Desert",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8748",
+              "src_id": "n_v87_food_tort_diplomat",
+              "dst_id": "n_v2gas_desert",
+              "relation": "is_a",
+              "label_ro": "este un",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Desert",
+            "to": "Cozonac",
+            "forward_cost": 1.1,
+            "edge": {
+              "id": "de1571",
+              "src_id": "n_gas_cozonac",
+              "dst_id": "n_v2gas_desert",
+              "relation": "is_a",
+              "label_ro": "este desert",
+              "strength": 0.9,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Cozonac",
+            "to": "Bucătărie",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3775",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_cozonac",
+              "relation": "related_to",
+              "label_ro": "se coace în",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_weighted": {
+        "cost": 5.819999999999999,
+        "steps": [
+          {
+            "from": "Tort Diplomat",
+            "to": "Desert",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8748",
+              "src_id": "n_v87_food_tort_diplomat",
+              "dst_id": "n_v2gas_desert",
+              "relation": "is_a",
+              "label_ro": "este un",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Desert",
+            "to": "Cozonac",
+            "forward_cost": 1.1,
+            "edge": {
+              "id": "de1571",
+              "src_id": "n_gas_cozonac",
+              "dst_id": "n_v2gas_desert",
+              "relation": "is_a",
+              "label_ro": "este desert",
+              "strength": 0.9,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Cozonac",
+            "to": "Bucătărie",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3775",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_cozonac",
+              "relation": "related_to",
+              "label_ro": "se coace în",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": "Zacuscă",
+      "input_id": "n_gas_zacusca",
+      "target": "Frișcă",
+      "target_id": "n_v86_food_frisca",
+      "anchor": "Zacuscă",
+      "anchor_id": "n_gas_zacusca",
+      "score": {
+        "anchor_id": "n_gas_zacusca",
+        "distance": 3,
+        "weighted_distance": 3.4799999999999995,
+        "rank": 24,
+        "feedback_distance": 3
+      },
+      "actual_bff_guess": {
+        "id": "n_gas_zacusca",
+        "label": "Zacuscă",
+        "distance": 3,
+        "rank": 24,
+        "temperature": "Cald",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "actual_bff_won": false,
+      "native_shortest": {
+        "cost": 3,
+        "steps": [
+          {
+            "from": "Zacuscă",
+            "to": "Bucătărie",
+            "forward_cost": 1.26,
+            "edge": {
+              "id": "de3776",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_zacusca",
+              "relation": "related_to",
+              "label_ro": "se prepară în",
+              "strength": 0.74,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "native_weighted": {
+        "cost": 3.4800000000000004,
+        "steps": [
+          {
+            "from": "Zacuscă",
+            "to": "Bucătărie",
+            "forward_cost": 1.26,
+            "edge": {
+              "id": "de3776",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_zacusca",
+              "relation": "related_to",
+              "label_ro": "se prepară în",
+              "strength": 0.74,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_shortest": {
+        "cost": 3,
+        "steps": [
+          {
+            "from": "Zacuscă",
+            "to": "Bucătărie",
+            "forward_cost": 1.26,
+            "edge": {
+              "id": "de3776",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_zacusca",
+              "relation": "related_to",
+              "label_ro": "se prepară în",
+              "strength": 0.74,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_weighted": {
+        "cost": 3.4800000000000004,
+        "steps": [
+          {
+            "from": "Zacuscă",
+            "to": "Bucătărie",
+            "forward_cost": 1.26,
+            "edge": {
+              "id": "de3776",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_zacusca",
+              "relation": "related_to",
+              "label_ro": "se prepară în",
+              "strength": 0.74,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": "Cremșnit",
+      "input_id": "n_v87_food_cremsnit",
+      "target": "Frișcă",
+      "target_id": "n_v86_food_frisca",
+      "anchor": "Cremșnit",
+      "anchor_id": "n_v87_food_cremsnit",
+      "score": {
+        "anchor_id": "n_v87_food_cremsnit",
+        "distance": 5,
+        "weighted_distance": 6.02,
+        "rank": 504,
+        "feedback_distance": 5
+      },
+      "actual_bff_guess": {
+        "id": "n_v87_food_cremsnit",
+        "label": "Cremșnit",
+        "distance": 5,
+        "rank": 504,
+        "temperature": "Rece",
+        "closeness": 79,
+        "attempt_number": 1
+      },
+      "actual_bff_won": false,
+      "native_shortest": {
+        "cost": 5,
+        "steps": [
+          {
+            "from": "Cremșnit",
+            "to": "Prăjitură",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8747",
+              "src_id": "n_v87_food_cremsnit",
+              "dst_id": "n_v4gas_prajitura",
+              "relation": "is_a",
+              "label_ro": "este o",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Prăjitură",
+            "to": "Cozonac",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3748",
+              "src_id": "n_v4gas_prajitura",
+              "dst_id": "n_gas_cozonac",
+              "relation": "same_category",
+              "label_ro": "produs dulce",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Cozonac",
+            "to": "Bucătărie",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3775",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_cozonac",
+              "relation": "related_to",
+              "label_ro": "se coace în",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "native_weighted": {
+        "cost": 6.0200000000000005,
+        "steps": [
+          {
+            "from": "Cremșnit",
+            "to": "Prăjitură",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8747",
+              "src_id": "n_v87_food_cremsnit",
+              "dst_id": "n_v4gas_prajitura",
+              "relation": "is_a",
+              "label_ro": "este o",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Prăjitură",
+            "to": "Cozonac",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3748",
+              "src_id": "n_v4gas_prajitura",
+              "dst_id": "n_gas_cozonac",
+              "relation": "same_category",
+              "label_ro": "produs dulce",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Cozonac",
+            "to": "Bucătărie",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3775",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_cozonac",
+              "relation": "related_to",
+              "label_ro": "se coace în",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_shortest": {
+        "cost": 5,
+        "steps": [
+          {
+            "from": "Cremșnit",
+            "to": "Prăjitură",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8747",
+              "src_id": "n_v87_food_cremsnit",
+              "dst_id": "n_v4gas_prajitura",
+              "relation": "is_a",
+              "label_ro": "este o",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Prăjitură",
+            "to": "Cozonac",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3748",
+              "src_id": "n_v4gas_prajitura",
+              "dst_id": "n_gas_cozonac",
+              "relation": "same_category",
+              "label_ro": "produs dulce",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Cozonac",
+            "to": "Bucătărie",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3775",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_cozonac",
+              "relation": "related_to",
+              "label_ro": "se coace în",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_weighted": {
+        "cost": 6.0200000000000005,
+        "steps": [
+          {
+            "from": "Cremșnit",
+            "to": "Prăjitură",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8747",
+              "src_id": "n_v87_food_cremsnit",
+              "dst_id": "n_v4gas_prajitura",
+              "relation": "is_a",
+              "label_ro": "este o",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Prăjitură",
+            "to": "Cozonac",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3748",
+              "src_id": "n_v4gas_prajitura",
+              "dst_id": "n_gas_cozonac",
+              "relation": "same_category",
+              "label_ro": "produs dulce",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Cozonac",
+            "to": "Bucătărie",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3775",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_cozonac",
+              "relation": "related_to",
+              "label_ro": "se coace în",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": "Pișcot",
+      "input_id": "n_v87_food_piscot",
+      "target": "Frișcă",
+      "target_id": "n_v86_food_frisca",
+      "anchor": "Pișcot",
+      "anchor_id": "n_v87_food_piscot",
+      "score": {
+        "anchor_id": "n_v87_food_piscot",
+        "distance": 6,
+        "weighted_distance": 7.02,
+        "rank": 944,
+        "feedback_distance": 6
+      },
+      "actual_bff_guess": {
+        "id": "n_v87_food_piscot",
+        "label": "Pișcot",
+        "distance": 6,
+        "rank": 944,
+        "temperature": "Foarte rece",
+        "closeness": 60,
+        "attempt_number": 1
+      },
+      "actual_bff_won": false,
+      "native_shortest": {
+        "cost": 6,
+        "steps": [
+          {
+            "from": "Pișcot",
+            "to": "Tort Diplomat",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8722",
+              "src_id": "n_v87_food_piscot",
+              "dst_id": "n_v87_food_tort_diplomat",
+              "relation": "ingredient_variant",
+              "label_ro": "căptușește unele variante de",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Tort Diplomat",
+            "to": "Desert",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8748",
+              "src_id": "n_v87_food_tort_diplomat",
+              "dst_id": "n_v2gas_desert",
+              "relation": "is_a",
+              "label_ro": "este un",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Desert",
+            "to": "Cozonac",
+            "forward_cost": 1.1,
+            "edge": {
+              "id": "de1571",
+              "src_id": "n_gas_cozonac",
+              "dst_id": "n_v2gas_desert",
+              "relation": "is_a",
+              "label_ro": "este desert",
+              "strength": 0.9,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Cozonac",
+            "to": "Bucătărie",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3775",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_cozonac",
+              "relation": "related_to",
+              "label_ro": "se coace în",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "native_weighted": {
+        "cost": 7.0200000000000005,
+        "steps": [
+          {
+            "from": "Pișcot",
+            "to": "Tort Diplomat",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8722",
+              "src_id": "n_v87_food_piscot",
+              "dst_id": "n_v87_food_tort_diplomat",
+              "relation": "ingredient_variant",
+              "label_ro": "căptușește unele variante de",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Tort Diplomat",
+            "to": "Desert",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8748",
+              "src_id": "n_v87_food_tort_diplomat",
+              "dst_id": "n_v2gas_desert",
+              "relation": "is_a",
+              "label_ro": "este un",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Desert",
+            "to": "Cozonac",
+            "forward_cost": 1.1,
+            "edge": {
+              "id": "de1571",
+              "src_id": "n_gas_cozonac",
+              "dst_id": "n_v2gas_desert",
+              "relation": "is_a",
+              "label_ro": "este desert",
+              "strength": 0.9,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Cozonac",
+            "to": "Bucătărie",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3775",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_cozonac",
+              "relation": "related_to",
+              "label_ro": "se coace în",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_shortest": {
+        "cost": 6,
+        "steps": [
+          {
+            "from": "Pișcot",
+            "to": "Tort Diplomat",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8722",
+              "src_id": "n_v87_food_piscot",
+              "dst_id": "n_v87_food_tort_diplomat",
+              "relation": "ingredient_variant",
+              "label_ro": "căptușește unele variante de",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Tort Diplomat",
+            "to": "Desert",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8748",
+              "src_id": "n_v87_food_tort_diplomat",
+              "dst_id": "n_v2gas_desert",
+              "relation": "is_a",
+              "label_ro": "este un",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Desert",
+            "to": "Cozonac",
+            "forward_cost": 1.1,
+            "edge": {
+              "id": "de1571",
+              "src_id": "n_gas_cozonac",
+              "dst_id": "n_v2gas_desert",
+              "relation": "is_a",
+              "label_ro": "este desert",
+              "strength": 0.9,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Cozonac",
+            "to": "Bucătărie",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3775",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_cozonac",
+              "relation": "related_to",
+              "label_ro": "se coace în",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_weighted": {
+        "cost": 7.0200000000000005,
+        "steps": [
+          {
+            "from": "Pișcot",
+            "to": "Tort Diplomat",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8722",
+              "src_id": "n_v87_food_piscot",
+              "dst_id": "n_v87_food_tort_diplomat",
+              "relation": "ingredient_variant",
+              "label_ro": "căptușește unele variante de",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Tort Diplomat",
+            "to": "Desert",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8748",
+              "src_id": "n_v87_food_tort_diplomat",
+              "dst_id": "n_v2gas_desert",
+              "relation": "is_a",
+              "label_ro": "este un",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Desert",
+            "to": "Cozonac",
+            "forward_cost": 1.1,
+            "edge": {
+              "id": "de1571",
+              "src_id": "n_gas_cozonac",
+              "dst_id": "n_v2gas_desert",
+              "relation": "is_a",
+              "label_ro": "este desert",
+              "strength": 0.9,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Cozonac",
+            "to": "Bucătărie",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3775",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_cozonac",
+              "relation": "related_to",
+              "label_ro": "se coace în",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": "Prăjitură",
+      "input_id": "n_v4gas_prajitura",
+      "target": "Frișcă",
+      "target_id": "n_v86_food_frisca",
+      "anchor": "Prăjitură",
+      "anchor_id": "n_v4gas_prajitura",
+      "score": {
+        "anchor_id": "n_v4gas_prajitura",
+        "distance": 4,
+        "weighted_distance": 4.819999999999999,
+        "rank": 181,
+        "feedback_distance": 4
+      },
+      "actual_bff_guess": {
+        "id": "n_v4gas_prajitura",
+        "label": "Prăjitură",
+        "distance": 4,
+        "rank": 181,
+        "temperature": "Caldut",
+        "closeness": 92,
+        "attempt_number": 1
+      },
+      "actual_bff_won": false,
+      "native_shortest": {
+        "cost": 4,
+        "steps": [
+          {
+            "from": "Prăjitură",
+            "to": "Cozonac",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3748",
+              "src_id": "n_v4gas_prajitura",
+              "dst_id": "n_gas_cozonac",
+              "relation": "same_category",
+              "label_ro": "produs dulce",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Cozonac",
+            "to": "Bucătărie",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3775",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_cozonac",
+              "relation": "related_to",
+              "label_ro": "se coace în",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "native_weighted": {
+        "cost": 4.82,
+        "steps": [
+          {
+            "from": "Prăjitură",
+            "to": "Cozonac",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3748",
+              "src_id": "n_v4gas_prajitura",
+              "dst_id": "n_gas_cozonac",
+              "relation": "same_category",
+              "label_ro": "produs dulce",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Cozonac",
+            "to": "Bucătărie",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3775",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_cozonac",
+              "relation": "related_to",
+              "label_ro": "se coace în",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_shortest": {
+        "cost": 4,
+        "steps": [
+          {
+            "from": "Prăjitură",
+            "to": "Cozonac",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3748",
+              "src_id": "n_v4gas_prajitura",
+              "dst_id": "n_gas_cozonac",
+              "relation": "same_category",
+              "label_ro": "produs dulce",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Cozonac",
+            "to": "Bucătărie",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3775",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_cozonac",
+              "relation": "related_to",
+              "label_ro": "se coace în",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_weighted": {
+        "cost": 4.82,
+        "steps": [
+          {
+            "from": "Prăjitură",
+            "to": "Cozonac",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3748",
+              "src_id": "n_v4gas_prajitura",
+              "dst_id": "n_gas_cozonac",
+              "relation": "same_category",
+              "label_ro": "produs dulce",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Cozonac",
+            "to": "Bucătărie",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3775",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_cozonac",
+              "relation": "related_to",
+              "label_ro": "se coace în",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": "Smântână",
+      "input_id": "n_v20gas_smantana",
+      "target": "Frișcă",
+      "target_id": "n_v86_food_frisca",
+      "anchor": "Smântână",
+      "anchor_id": "n_v20gas_smantana",
+      "score": {
+        "anchor_id": "n_v20gas_smantana",
+        "distance": 3,
+        "weighted_distance": 3.5999999999999996,
+        "rank": 34,
+        "feedback_distance": 3
+      },
+      "actual_bff_guess": {
+        "id": "n_v20gas_smantana",
+        "label": "Smântână",
+        "distance": 3,
+        "rank": 34,
+        "temperature": "Cald",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "actual_bff_won": false,
+      "native_shortest": {
+        "cost": 3,
+        "steps": [
+          {
+            "from": "Smântână",
+            "to": "Lapte",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de6670",
+              "src_id": "n_v20gas_smantana",
+              "dst_id": "n_v4gas_lapte",
+              "relation": "associated_with",
+              "label_ro": "obținută din lapte",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Lapte",
+            "to": "Smântână dulce pentru frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8771",
+              "src_id": "n_v4gas_lapte",
+              "dst_id": "n_v88_food_smantana_dulce",
+              "relation": "raw_material_for",
+              "label_ro": "grăsimea sa este separată pentru",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Smântână dulce pentru frișcă",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8772",
+              "src_id": "n_v88_food_smantana_dulce",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "processed_into",
+              "label_ro": "se bate pentru",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "native_weighted": {
+        "cost": 3.5999999999999996,
+        "steps": [
+          {
+            "from": "Smântână",
+            "to": "Lapte",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de6670",
+              "src_id": "n_v20gas_smantana",
+              "dst_id": "n_v4gas_lapte",
+              "relation": "associated_with",
+              "label_ro": "obținută din lapte",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Lapte",
+            "to": "Smântână dulce pentru frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8771",
+              "src_id": "n_v4gas_lapte",
+              "dst_id": "n_v88_food_smantana_dulce",
+              "relation": "raw_material_for",
+              "label_ro": "grăsimea sa este separată pentru",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Smântână dulce pentru frișcă",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8772",
+              "src_id": "n_v88_food_smantana_dulce",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "processed_into",
+              "label_ro": "se bate pentru",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_shortest": {
+        "cost": 3,
+        "steps": [
+          {
+            "from": "Smântână",
+            "to": "Lapte",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de6670",
+              "src_id": "n_v20gas_smantana",
+              "dst_id": "n_v4gas_lapte",
+              "relation": "associated_with",
+              "label_ro": "obținută din lapte",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Lapte",
+            "to": "Smântână dulce pentru frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8771",
+              "src_id": "n_v4gas_lapte",
+              "dst_id": "n_v88_food_smantana_dulce",
+              "relation": "raw_material_for",
+              "label_ro": "grăsimea sa este separată pentru",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Smântână dulce pentru frișcă",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8772",
+              "src_id": "n_v88_food_smantana_dulce",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "processed_into",
+              "label_ro": "se bate pentru",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_weighted": {
+        "cost": 3.5999999999999996,
+        "steps": [
+          {
+            "from": "Smântână",
+            "to": "Lapte",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de6670",
+              "src_id": "n_v20gas_smantana",
+              "dst_id": "n_v4gas_lapte",
+              "relation": "associated_with",
+              "label_ro": "obținută din lapte",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Lapte",
+            "to": "Smântână dulce pentru frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8771",
+              "src_id": "n_v4gas_lapte",
+              "dst_id": "n_v88_food_smantana_dulce",
+              "relation": "raw_material_for",
+              "label_ro": "grăsimea sa este separată pentru",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Smântână dulce pentru frișcă",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8772",
+              "src_id": "n_v88_food_smantana_dulce",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "processed_into",
+              "label_ro": "se bate pentru",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": "Smântână dulce pentru frișcă",
+      "input_id": "n_v88_food_smantana_dulce",
+      "target": "Frișcă",
+      "target_id": "n_v86_food_frisca",
+      "anchor": "Smântână dulce pentru frișcă",
+      "anchor_id": "n_v88_food_smantana_dulce",
+      "score": {
+        "anchor_id": "n_v88_food_smantana_dulce",
+        "distance": 1,
+        "weighted_distance": 1.2,
+        "rank": 2,
+        "feedback_distance": 1
+      },
+      "actual_bff_guess": {
+        "id": "n_v88_food_smantana_dulce",
+        "label": "Smântână dulce pentru frișcă",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "actual_bff_won": false,
+      "native_shortest": {
+        "cost": 1,
+        "steps": [
+          {
+            "from": "Smântână dulce pentru frișcă",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8772",
+              "src_id": "n_v88_food_smantana_dulce",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "processed_into",
+              "label_ro": "se bate pentru",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "native_weighted": {
+        "cost": 1.2,
+        "steps": [
+          {
+            "from": "Smântână dulce pentru frișcă",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8772",
+              "src_id": "n_v88_food_smantana_dulce",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "processed_into",
+              "label_ro": "se bate pentru",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_shortest": {
+        "cost": 1,
+        "steps": [
+          {
+            "from": "Smântână dulce pentru frișcă",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8772",
+              "src_id": "n_v88_food_smantana_dulce",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "processed_into",
+              "label_ro": "se bate pentru",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_weighted": {
+        "cost": 1.2,
+        "steps": [
+          {
+            "from": "Smântână dulce pentru frișcă",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8772",
+              "src_id": "n_v88_food_smantana_dulce",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "processed_into",
+              "label_ro": "se bate pentru",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": "Savarină",
+      "input_id": "n_v21gas_savarina",
+      "target": "Frișcă",
+      "target_id": "n_v86_food_frisca",
+      "anchor": "Frișcă",
+      "anchor_id": "n_v86_food_frisca",
+      "score": {
+        "anchor_id": "n_v86_food_frisca",
+        "distance": 0,
+        "weighted_distance": 0.0,
+        "rank": 2,
+        "feedback_distance": 1
+      },
+      "actual_bff_guess": {
+        "id": "n_v21gas_savarina",
+        "label": "Savarină",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "actual_bff_won": false,
+      "native_shortest": {
+        "cost": 5,
+        "steps": [
+          {
+            "from": "Savarină",
+            "to": "Desert",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de7163",
+              "src_id": "n_v21gas_savarina",
+              "dst_id": "n_v2gas_desert",
+              "relation": "related_to",
+              "label_ro": "desert de cofetărie",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Desert",
+            "to": "Cozonac",
+            "forward_cost": 1.1,
+            "edge": {
+              "id": "de1571",
+              "src_id": "n_gas_cozonac",
+              "dst_id": "n_v2gas_desert",
+              "relation": "is_a",
+              "label_ro": "este desert",
+              "strength": 0.9,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Cozonac",
+            "to": "Bucătărie",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3775",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_cozonac",
+              "relation": "related_to",
+              "label_ro": "se coace în",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "native_weighted": {
+        "cost": 5.819999999999999,
+        "steps": [
+          {
+            "from": "Savarină",
+            "to": "Desert",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de7163",
+              "src_id": "n_v21gas_savarina",
+              "dst_id": "n_v2gas_desert",
+              "relation": "related_to",
+              "label_ro": "desert de cofetărie",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Desert",
+            "to": "Cozonac",
+            "forward_cost": 1.1,
+            "edge": {
+              "id": "de1571",
+              "src_id": "n_gas_cozonac",
+              "dst_id": "n_v2gas_desert",
+              "relation": "is_a",
+              "label_ro": "este desert",
+              "strength": 0.9,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Cozonac",
+            "to": "Bucătărie",
+            "forward_cost": 1.3,
+            "edge": {
+              "id": "de3775",
+              "src_id": "n_v4gas_bucatarie",
+              "dst_id": "n_gas_cozonac",
+              "relation": "related_to",
+              "label_ro": "se coace în",
+              "strength": 0.7,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Bucătărie",
+            "to": "Frigider",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8103",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v4gas_bucatarie",
+              "relation": "located_in",
+              "label_ro": "se află în bucătărie",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frigider",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8681",
+              "src_id": "n_v24_home_appliances_frigider",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "stores",
+              "label_ro": "păstrează la rece",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_shortest": {
+        "cost": 0,
+        "steps": []
+      },
+      "effective_weighted": {
+        "cost": 0,
+        "steps": []
+      }
+    },
+    {
+      "input": "Zahăr",
+      "input_id": "n_v24_food_pantry_zahar",
+      "target": "Frișcă",
+      "target_id": "n_v86_food_frisca",
+      "anchor": "Zahăr",
+      "anchor_id": "n_v24_food_pantry_zahar",
+      "score": {
+        "anchor_id": "n_v24_food_pantry_zahar",
+        "distance": 2,
+        "weighted_distance": 2.4,
+        "rank": 11,
+        "feedback_distance": 2
+      },
+      "actual_bff_guess": {
+        "id": "n_v24_food_pantry_zahar",
+        "label": "Zahăr",
+        "distance": 2,
+        "rank": 11,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "actual_bff_won": false,
+      "native_shortest": {
+        "cost": 2,
+        "steps": [
+          {
+            "from": "Zahăr",
+            "to": "Zahăr pudră",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8667",
+              "src_id": "n_v24_food_pantry_zahar",
+              "dst_id": "n_v86_food_zahar_pudra",
+              "relation": "processed_into",
+              "label_ro": "se macină fin pentru",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Zahăr pudră",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8668",
+              "src_id": "n_v86_food_zahar_pudra",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "ingredient_variant",
+              "label_ro": "îndulcește unele variante de",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "native_weighted": {
+        "cost": 2.4,
+        "steps": [
+          {
+            "from": "Zahăr",
+            "to": "Zahăr pudră",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8667",
+              "src_id": "n_v24_food_pantry_zahar",
+              "dst_id": "n_v86_food_zahar_pudra",
+              "relation": "processed_into",
+              "label_ro": "se macină fin pentru",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Zahăr pudră",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8668",
+              "src_id": "n_v86_food_zahar_pudra",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "ingredient_variant",
+              "label_ro": "îndulcește unele variante de",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_shortest": {
+        "cost": 2,
+        "steps": [
+          {
+            "from": "Zahăr",
+            "to": "Zahăr pudră",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8667",
+              "src_id": "n_v24_food_pantry_zahar",
+              "dst_id": "n_v86_food_zahar_pudra",
+              "relation": "processed_into",
+              "label_ro": "se macină fin pentru",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Zahăr pudră",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8668",
+              "src_id": "n_v86_food_zahar_pudra",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "ingredient_variant",
+              "label_ro": "îndulcește unele variante de",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_weighted": {
+        "cost": 2.4,
+        "steps": [
+          {
+            "from": "Zahăr",
+            "to": "Zahăr pudră",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8667",
+              "src_id": "n_v24_food_pantry_zahar",
+              "dst_id": "n_v86_food_zahar_pudra",
+              "relation": "processed_into",
+              "label_ro": "se macină fin pentru",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Zahăr pudră",
+            "to": "Frișcă",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8668",
+              "src_id": "n_v86_food_zahar_pudra",
+              "dst_id": "n_v86_food_frisca",
+              "relation": "ingredient_variant",
+              "label_ro": "îndulcește unele variante de",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": "Scaun",
+      "input_id": "n_v24_home_seating_scaun",
+      "target": "Taburet",
+      "target_id": "n_v88_home_taburet",
+      "anchor": "Scaun",
+      "anchor_id": "n_v24_home_seating_scaun",
+      "score": {
+        "anchor_id": "n_v24_home_seating_scaun",
+        "distance": 7,
+        "weighted_distance": 8.92,
+        "rank": 2189,
+        "feedback_distance": 7
+      },
+      "actual_bff_guess": {
+        "id": "n_v24_home_seating_scaun",
+        "label": "Scaun",
+        "distance": 7,
+        "rank": 2189,
+        "temperature": "Inghetat",
+        "closeness": 7,
+        "attempt_number": 1
+      },
+      "actual_bff_won": false,
+      "native_shortest": {
+        "cost": 7,
+        "steps": [
+          {
+            "from": "Scaun",
+            "to": "casă",
+            "forward_cost": 1.1400000000000001,
+            "edge": {
+              "id": "de7737",
+              "src_id": "n_v24_home_seating_scaun",
+              "dst_id": "n_v4soc_casa",
+              "relation": "beginner_exit",
+              "label_ro": "ține de",
+              "strength": 0.86,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "casă",
+            "to": "Frig în casă",
+            "forward_cost": 1.26,
+            "edge": {
+              "id": "de4764",
+              "src_id": "n_v4soc_casa",
+              "dst_id": "n_v2via_frig_in_casa",
+              "relation": "related_to",
+              "label_ro": "poate avea",
+              "strength": 0.74,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frig în casă",
+            "to": "Nu ieși cu capul ud!",
+            "forward_cost": 1.3399999999999999,
+            "edge": {
+              "id": "de2856",
+              "src_id": "n_vdr_nu_iesi_capul_ud",
+              "dst_id": "n_v2via_frig_in_casa",
+              "relation": "related_to",
+              "label_ro": "invocă frigul",
+              "strength": 0.66,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Nu ieși cu capul ud!",
+            "to": "Limba română",
+            "forward_cost": 1.42,
+            "edge": {
+              "id": "de1419",
+              "src_id": "n_vdr_nu_iesi_capul_ud",
+              "dst_id": "n_limba_romana",
+              "relation": "related_to",
+              "label_ro": "formulă părintească",
+              "strength": 0.58,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Limba română",
+            "to": "Pop mainstream românesc",
+            "forward_cost": 1.28,
+            "edge": {
+              "id": "de1030",
+              "src_id": "n_muz_pop_mainstream_ro",
+              "dst_id": "n_limba_romana",
+              "relation": "related_to",
+              "label_ro": "cântat în română",
+              "strength": 0.72,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Pop mainstream românesc",
+            "to": "Pian",
+            "forward_cost": 1.48,
+            "edge": {
+              "id": "de3208",
+              "src_id": "n_v3muz_pian",
+              "dst_id": "n_muz_pop_mainstream_ro",
+              "relation": "related_to",
+              "label_ro": "aranjament pop",
+              "strength": 0.52,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Pian",
+            "to": "Taburet",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8765",
+              "src_id": "n_v3muz_pian",
+              "dst_id": "n_v88_home_taburet",
+              "relation": "played_from",
+              "label_ro": "se poate cânta așezat pe un",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "native_weighted": {
+        "cost": 8.92,
+        "steps": [
+          {
+            "from": "Scaun",
+            "to": "casă",
+            "forward_cost": 1.1400000000000001,
+            "edge": {
+              "id": "de7737",
+              "src_id": "n_v24_home_seating_scaun",
+              "dst_id": "n_v4soc_casa",
+              "relation": "beginner_exit",
+              "label_ro": "ține de",
+              "strength": 0.86,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "casă",
+            "to": "Populație",
+            "forward_cost": 1.22,
+            "edge": {
+              "id": "de4484",
+              "src_id": "n_v4soc_casa",
+              "dst_id": "n_v3soc_populatie",
+              "relation": "related_to",
+              "label_ro": "locuită de oameni",
+              "strength": 0.78,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Populație",
+            "to": "România",
+            "forward_cost": 1.1400000000000001,
+            "edge": {
+              "id": "de3330",
+              "src_id": "n_v3soc_populatie",
+              "dst_id": "n_romania_stat",
+              "relation": "related_to",
+              "label_ro": "populația României",
+              "strength": 0.86,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "România",
+            "to": "Pop-dance românesc",
+            "forward_cost": 1.3599999999999999,
+            "edge": {
+              "id": "de1035",
+              "src_id": "n_muz_pop_dance_ro",
+              "dst_id": "n_romania_stat",
+              "relation": "related_to",
+              "label_ro": "export pop românesc",
+              "strength": 0.64,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Pop-dance românesc",
+            "to": "Pop mainstream românesc",
+            "forward_cost": 1.38,
+            "edge": {
+              "id": "de1046",
+              "src_id": "n_muz_pop_dance_ro",
+              "dst_id": "n_muz_pop_mainstream_ro",
+              "relation": "same_category",
+              "label_ro": "pop de radio",
+              "strength": 0.62,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Pop mainstream românesc",
+            "to": "Pian",
+            "forward_cost": 1.48,
+            "edge": {
+              "id": "de3208",
+              "src_id": "n_v3muz_pian",
+              "dst_id": "n_muz_pop_mainstream_ro",
+              "relation": "related_to",
+              "label_ro": "aranjament pop",
+              "strength": 0.52,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Pian",
+            "to": "Taburet",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8765",
+              "src_id": "n_v3muz_pian",
+              "dst_id": "n_v88_home_taburet",
+              "relation": "played_from",
+              "label_ro": "se poate cânta așezat pe un",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_shortest": {
+        "cost": 7,
+        "steps": [
+          {
+            "from": "Scaun",
+            "to": "casă",
+            "forward_cost": 1.1400000000000001,
+            "edge": {
+              "id": "de7737",
+              "src_id": "n_v24_home_seating_scaun",
+              "dst_id": "n_v4soc_casa",
+              "relation": "beginner_exit",
+              "label_ro": "ține de",
+              "strength": 0.86,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "casă",
+            "to": "Frig în casă",
+            "forward_cost": 1.26,
+            "edge": {
+              "id": "de4764",
+              "src_id": "n_v4soc_casa",
+              "dst_id": "n_v2via_frig_in_casa",
+              "relation": "related_to",
+              "label_ro": "poate avea",
+              "strength": 0.74,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Frig în casă",
+            "to": "Nu ieși cu capul ud!",
+            "forward_cost": 1.3399999999999999,
+            "edge": {
+              "id": "de2856",
+              "src_id": "n_vdr_nu_iesi_capul_ud",
+              "dst_id": "n_v2via_frig_in_casa",
+              "relation": "related_to",
+              "label_ro": "invocă frigul",
+              "strength": 0.66,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Nu ieși cu capul ud!",
+            "to": "Limba română",
+            "forward_cost": 1.42,
+            "edge": {
+              "id": "de1419",
+              "src_id": "n_vdr_nu_iesi_capul_ud",
+              "dst_id": "n_limba_romana",
+              "relation": "related_to",
+              "label_ro": "formulă părintească",
+              "strength": 0.58,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Limba română",
+            "to": "Pop mainstream românesc",
+            "forward_cost": 1.28,
+            "edge": {
+              "id": "de1030",
+              "src_id": "n_muz_pop_mainstream_ro",
+              "dst_id": "n_limba_romana",
+              "relation": "related_to",
+              "label_ro": "cântat în română",
+              "strength": 0.72,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Pop mainstream românesc",
+            "to": "Pian",
+            "forward_cost": 1.48,
+            "edge": {
+              "id": "de3208",
+              "src_id": "n_v3muz_pian",
+              "dst_id": "n_muz_pop_mainstream_ro",
+              "relation": "related_to",
+              "label_ro": "aranjament pop",
+              "strength": 0.52,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Pian",
+            "to": "Taburet",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8765",
+              "src_id": "n_v3muz_pian",
+              "dst_id": "n_v88_home_taburet",
+              "relation": "played_from",
+              "label_ro": "se poate cânta așezat pe un",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_weighted": {
+        "cost": 8.92,
+        "steps": [
+          {
+            "from": "Scaun",
+            "to": "casă",
+            "forward_cost": 1.1400000000000001,
+            "edge": {
+              "id": "de7737",
+              "src_id": "n_v24_home_seating_scaun",
+              "dst_id": "n_v4soc_casa",
+              "relation": "beginner_exit",
+              "label_ro": "ține de",
+              "strength": 0.86,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "casă",
+            "to": "Populație",
+            "forward_cost": 1.22,
+            "edge": {
+              "id": "de4484",
+              "src_id": "n_v4soc_casa",
+              "dst_id": "n_v3soc_populatie",
+              "relation": "related_to",
+              "label_ro": "locuită de oameni",
+              "strength": 0.78,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Populație",
+            "to": "România",
+            "forward_cost": 1.1400000000000001,
+            "edge": {
+              "id": "de3330",
+              "src_id": "n_v3soc_populatie",
+              "dst_id": "n_romania_stat",
+              "relation": "related_to",
+              "label_ro": "populația României",
+              "strength": 0.86,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "România",
+            "to": "Pop-dance românesc",
+            "forward_cost": 1.3599999999999999,
+            "edge": {
+              "id": "de1035",
+              "src_id": "n_muz_pop_dance_ro",
+              "dst_id": "n_romania_stat",
+              "relation": "related_to",
+              "label_ro": "export pop românesc",
+              "strength": 0.64,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Pop-dance românesc",
+            "to": "Pop mainstream românesc",
+            "forward_cost": 1.38,
+            "edge": {
+              "id": "de1046",
+              "src_id": "n_muz_pop_dance_ro",
+              "dst_id": "n_muz_pop_mainstream_ro",
+              "relation": "same_category",
+              "label_ro": "pop de radio",
+              "strength": 0.62,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Pop mainstream românesc",
+            "to": "Pian",
+            "forward_cost": 1.48,
+            "edge": {
+              "id": "de3208",
+              "src_id": "n_v3muz_pian",
+              "dst_id": "n_muz_pop_mainstream_ro",
+              "relation": "related_to",
+              "label_ro": "aranjament pop",
+              "strength": 0.52,
+              "is_distractor": false,
+              "bidirectional": true,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Pian",
+            "to": "Taburet",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8765",
+              "src_id": "n_v3muz_pian",
+              "dst_id": "n_v88_home_taburet",
+              "relation": "played_from",
+              "label_ro": "se poate cânta așezat pe un",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": "Mătură",
+      "input_id": "n_v88_cleaning_matura",
+      "target": "Aspirator",
+      "target_id": "n_v31_cleaning_floor_aspirator",
+      "anchor": "Mătură",
+      "anchor_id": "n_v88_cleaning_matura",
+      "score": {
+        "anchor_id": "n_v88_cleaning_matura",
+        "distance": 1,
+        "weighted_distance": 1.2,
+        "rank": 4,
+        "feedback_distance": 1
+      },
+      "actual_bff_guess": {
+        "id": "n_v88_cleaning_matura",
+        "label": "Mătură",
+        "distance": 1,
+        "rank": 4,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "actual_bff_won": false,
+      "native_shortest": {
+        "cost": 1,
+        "steps": [
+          {
+            "from": "Mătură",
+            "to": "Aspirator",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8778",
+              "src_id": "n_v88_cleaning_matura",
+              "dst_id": "n_v31_cleaning_floor_aspirator",
+              "relation": "alternative_to",
+              "label_ro": "alternativă pentru strângerea murdăriei uscate de pe podea",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "native_weighted": {
+        "cost": 1.2,
+        "steps": [
+          {
+            "from": "Mătură",
+            "to": "Aspirator",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8778",
+              "src_id": "n_v88_cleaning_matura",
+              "dst_id": "n_v31_cleaning_floor_aspirator",
+              "relation": "alternative_to",
+              "label_ro": "alternativă pentru strângerea murdăriei uscate de pe podea",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_shortest": {
+        "cost": 1,
+        "steps": [
+          {
+            "from": "Mătură",
+            "to": "Aspirator",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8778",
+              "src_id": "n_v88_cleaning_matura",
+              "dst_id": "n_v31_cleaning_floor_aspirator",
+              "relation": "alternative_to",
+              "label_ro": "alternativă pentru strângerea murdăriei uscate de pe podea",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_weighted": {
+        "cost": 1.2,
+        "steps": [
+          {
+            "from": "Mătură",
+            "to": "Aspirator",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8778",
+              "src_id": "n_v88_cleaning_matura",
+              "dst_id": "n_v31_cleaning_floor_aspirator",
+              "relation": "alternative_to",
+              "label_ro": "alternativă pentru strângerea murdăriei uscate de pe podea",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": "Aspirator",
+      "input_id": "n_v31_cleaning_floor_aspirator",
+      "target": "Mătură",
+      "target_id": "n_v88_cleaning_matura",
+      "anchor": "Podea",
+      "anchor_id": "n_v24_home_surfaces_podea",
+      "score": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 2,
+        "weighted_distance": 2.23,
+        "rank": 4,
+        "feedback_distance": 2
+      },
+      "actual_bff_guess": {
+        "id": "n_v31_cleaning_floor_aspirator",
+        "label": "Aspirator",
+        "distance": 2,
+        "rank": 4,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "actual_bff_won": false,
+      "native_shortest": {
+        "cost": 2,
+        "steps": [
+          {
+            "from": "Aspirator",
+            "to": "Făraș",
+            "forward_cost": 1.04,
+            "edge": {
+              "id": "de8340",
+              "src_id": "n_v31_cleaning_floor_aspirator",
+              "dst_id": "n_v31_cleaning_floor_faras",
+              "relation": "same_floor_task",
+              "label_ro": "adună murdăria de pe podea, ca fărașul",
+              "strength": 0.96,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Făraș",
+            "to": "Mătură",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8762",
+              "src_id": "n_v31_cleaning_floor_faras",
+              "dst_id": "n_v88_cleaning_matura",
+              "relation": "collects_from",
+              "label_ro": "colectează gunoiul strâns cu",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "native_weighted": {
+        "cost": 2.24,
+        "steps": [
+          {
+            "from": "Aspirator",
+            "to": "Făraș",
+            "forward_cost": 1.04,
+            "edge": {
+              "id": "de8340",
+              "src_id": "n_v31_cleaning_floor_aspirator",
+              "dst_id": "n_v31_cleaning_floor_faras",
+              "relation": "same_floor_task",
+              "label_ro": "adună murdăria de pe podea, ca fărașul",
+              "strength": 0.96,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Făraș",
+            "to": "Mătură",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8762",
+              "src_id": "n_v31_cleaning_floor_faras",
+              "dst_id": "n_v88_cleaning_matura",
+              "relation": "collects_from",
+              "label_ro": "colectează gunoiul strâns cu",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_shortest": {
+        "cost": 2,
+        "steps": [
+          {
+            "from": "Podea",
+            "to": "Făraș",
+            "forward_cost": 1.03,
+            "edge": {
+              "id": "de8348",
+              "src_id": "n_v24_home_surfaces_podea",
+              "dst_id": "n_v31_cleaning_floor_faras",
+              "relation": "cleaned_with",
+              "label_ro": "se curăță folosind fărașul",
+              "strength": 0.97,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Făraș",
+            "to": "Mătură",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8762",
+              "src_id": "n_v31_cleaning_floor_faras",
+              "dst_id": "n_v88_cleaning_matura",
+              "relation": "collects_from",
+              "label_ro": "colectează gunoiul strâns cu",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_weighted": {
+        "cost": 2.23,
+        "steps": [
+          {
+            "from": "Podea",
+            "to": "Făraș",
+            "forward_cost": 1.03,
+            "edge": {
+              "id": "de8348",
+              "src_id": "n_v24_home_surfaces_podea",
+              "dst_id": "n_v31_cleaning_floor_faras",
+              "relation": "cleaned_with",
+              "label_ro": "se curăță folosind fărașul",
+              "strength": 0.97,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Făraș",
+            "to": "Mătură",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8762",
+              "src_id": "n_v31_cleaning_floor_faras",
+              "dst_id": "n_v88_cleaning_matura",
+              "relation": "collects_from",
+              "label_ro": "colectează gunoiul strâns cu",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": "Făraș",
+      "input_id": "n_v31_cleaning_floor_faras",
+      "target": "Mătură",
+      "target_id": "n_v88_cleaning_matura",
+      "anchor": "Podea",
+      "anchor_id": "n_v24_home_surfaces_podea",
+      "score": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 2,
+        "weighted_distance": 2.23,
+        "rank": 4,
+        "feedback_distance": 2
+      },
+      "actual_bff_guess": {
+        "id": "n_v31_cleaning_floor_faras",
+        "label": "Făraș",
+        "distance": 2,
+        "rank": 4,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "actual_bff_won": false,
+      "native_shortest": {
+        "cost": 1,
+        "steps": [
+          {
+            "from": "Făraș",
+            "to": "Mătură",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8762",
+              "src_id": "n_v31_cleaning_floor_faras",
+              "dst_id": "n_v88_cleaning_matura",
+              "relation": "collects_from",
+              "label_ro": "colectează gunoiul strâns cu",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "native_weighted": {
+        "cost": 1.2,
+        "steps": [
+          {
+            "from": "Făraș",
+            "to": "Mătură",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8762",
+              "src_id": "n_v31_cleaning_floor_faras",
+              "dst_id": "n_v88_cleaning_matura",
+              "relation": "collects_from",
+              "label_ro": "colectează gunoiul strâns cu",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_shortest": {
+        "cost": 2,
+        "steps": [
+          {
+            "from": "Podea",
+            "to": "Făraș",
+            "forward_cost": 1.03,
+            "edge": {
+              "id": "de8348",
+              "src_id": "n_v24_home_surfaces_podea",
+              "dst_id": "n_v31_cleaning_floor_faras",
+              "relation": "cleaned_with",
+              "label_ro": "se curăță folosind fărașul",
+              "strength": 0.97,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Făraș",
+            "to": "Mătură",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8762",
+              "src_id": "n_v31_cleaning_floor_faras",
+              "dst_id": "n_v88_cleaning_matura",
+              "relation": "collects_from",
+              "label_ro": "colectează gunoiul strâns cu",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_weighted": {
+        "cost": 2.23,
+        "steps": [
+          {
+            "from": "Podea",
+            "to": "Făraș",
+            "forward_cost": 1.03,
+            "edge": {
+              "id": "de8348",
+              "src_id": "n_v24_home_surfaces_podea",
+              "dst_id": "n_v31_cleaning_floor_faras",
+              "relation": "cleaned_with",
+              "label_ro": "se curăță folosind fărașul",
+              "strength": 0.97,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          },
+          {
+            "from": "Făraș",
+            "to": "Mătură",
+            "forward_cost": 1.2,
+            "edge": {
+              "id": "de8762",
+              "src_id": "n_v31_cleaning_floor_faras",
+              "dst_id": "n_v88_cleaning_matura",
+              "relation": "collects_from",
+              "label_ro": "colectează gunoiul strâns cu",
+              "strength": 0.8,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": "Mop",
+      "input_id": "n_v31_cleaning_floor_mop",
+      "target": "Aspirator",
+      "target_id": "n_v31_cleaning_floor_aspirator",
+      "anchor": "Podea",
+      "anchor_id": "n_v24_home_surfaces_podea",
+      "score": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 1,
+        "weighted_distance": 1.01,
+        "rank": 3,
+        "feedback_distance": 1
+      },
+      "actual_bff_guess": {
+        "id": "n_v31_cleaning_floor_mop",
+        "label": "Mop",
+        "distance": 1,
+        "rank": 3,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "actual_bff_won": false,
+      "native_shortest": {
+        "cost": 1,
+        "steps": [
+          {
+            "from": "Mop",
+            "to": "Aspirator",
+            "forward_cost": 1.04,
+            "edge": {
+              "id": "de8339",
+              "src_id": "n_v31_cleaning_floor_mop",
+              "dst_id": "n_v31_cleaning_floor_aspirator",
+              "relation": "same_floor_task",
+              "label_ro": "curăță podeaua, ca aspiratorul",
+              "strength": 0.96,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "native_weighted": {
+        "cost": 1.04,
+        "steps": [
+          {
+            "from": "Mop",
+            "to": "Aspirator",
+            "forward_cost": 1.04,
+            "edge": {
+              "id": "de8339",
+              "src_id": "n_v31_cleaning_floor_mop",
+              "dst_id": "n_v31_cleaning_floor_aspirator",
+              "relation": "same_floor_task",
+              "label_ro": "curăță podeaua, ca aspiratorul",
+              "strength": 0.96,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_shortest": {
+        "cost": 1,
+        "steps": [
+          {
+            "from": "Podea",
+            "to": "Aspirator",
+            "forward_cost": 1.01,
+            "edge": {
+              "id": "de8347",
+              "src_id": "n_v24_home_surfaces_podea",
+              "dst_id": "n_v31_cleaning_floor_aspirator",
+              "relation": "cleaned_with",
+              "label_ro": "se curăță cu aspiratorul",
+              "strength": 0.99,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_weighted": {
+        "cost": 1.01,
+        "steps": [
+          {
+            "from": "Podea",
+            "to": "Aspirator",
+            "forward_cost": 1.01,
+            "edge": {
+              "id": "de8347",
+              "src_id": "n_v24_home_surfaces_podea",
+              "dst_id": "n_v31_cleaning_floor_aspirator",
+              "relation": "cleaned_with",
+              "label_ro": "se curăță cu aspiratorul",
+              "strength": 0.99,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "input": "Burete de vase",
+      "input_id": "n_v31_cleaning_dishes_burete_vase",
+      "target": "Detergent",
+      "target_id": "n_v31_cleaning_supply_detergent",
+      "anchor": "A spăla",
+      "anchor_id": "n_v24_action_home_a_spala",
+      "score": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 1,
+        "weighted_distance": 1.02,
+        "rank": 4,
+        "feedback_distance": 1
+      },
+      "actual_bff_guess": {
+        "id": "n_v31_cleaning_dishes_burete_vase",
+        "label": "Burete de vase",
+        "distance": 1,
+        "rank": 4,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "actual_bff_won": false,
+      "native_shortest": {
+        "cost": 1,
+        "steps": [
+          {
+            "from": "Burete de vase",
+            "to": "Detergent",
+            "forward_cost": 1.01,
+            "edge": {
+              "id": "de8335",
+              "src_id": "n_v31_cleaning_dishes_burete_vase",
+              "dst_id": "n_v31_cleaning_supply_detergent",
+              "relation": "holds_cleaner",
+              "label_ro": "ține detergent în timpul spălării",
+              "strength": 0.99,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "native_weighted": {
+        "cost": 1.01,
+        "steps": [
+          {
+            "from": "Burete de vase",
+            "to": "Detergent",
+            "forward_cost": 1.01,
+            "edge": {
+              "id": "de8335",
+              "src_id": "n_v31_cleaning_dishes_burete_vase",
+              "dst_id": "n_v31_cleaning_supply_detergent",
+              "relation": "holds_cleaner",
+              "label_ro": "ține detergent în timpul spălării",
+              "strength": 0.99,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_shortest": {
+        "cost": 1,
+        "steps": [
+          {
+            "from": "A spăla",
+            "to": "Detergent",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8346",
+              "src_id": "n_v24_action_home_a_spala",
+              "dst_id": "n_v31_cleaning_supply_detergent",
+              "relation": "uses_cleaner",
+              "label_ro": "poate folosi detergent",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      },
+      "effective_weighted": {
+        "cost": 1.02,
+        "steps": [
+          {
+            "from": "A spăla",
+            "to": "Detergent",
+            "forward_cost": 1.02,
+            "edge": {
+              "id": "de8346",
+              "src_id": "n_v24_action_home_a_spala",
+              "dst_id": "n_v31_cleaning_supply_detergent",
+              "relation": "uses_cleaner",
+              "label_ro": "poate folosi detergent",
+              "strength": 0.98,
+              "is_distractor": false,
+              "bidirectional": false,
+              "tags": [],
+              "facets": {},
+              "source": "",
+              "redistributable": false
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

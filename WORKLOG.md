@@ -650,3 +650,24 @@ Făraș, Mop, Aspirator and Burete de vase; the other four remain held for missi
 sense or cue issues. No V89 source/content edits or promotions yet. The kickoff prioritizes
 Conexiuni response-loss recovery and bounded pastry/household feedback review. Docs and
 whitespace checks pass; no full suite rerun for this documentation-only checkpoint.
+
+## V89 implementation and directed review (2026-09-08)
+
+Valid until: V89 lands — then treat this candidate record as history.
+
+V89 implements owned Conexiuni action recovery, four bounded feedback scopes and one
+new approved/selectable Mop round. All658 old pack records,83 Alchimie projections,
+100 Lanț profiles/menus and336 derived boards remain exact. KG/mobile bytes and all
+seeded starts remain exact. Pack659=651approved+8pending; Contexto236eligible.
+
+The initial household screen used union adjacency rather than incoming neighbors.
+Final dossiers show3/5/3 incoming cues; both judges reject Făraș352/Aspirator354 and
+promote onlyMop353 under ADR-0071. Original raw evidence, corrections, three dossiers
+and final portable gate remain preserved; no graph facts are invented to fill the gap.
+Supported import/promotion and regeneration complete serially. Focused266 history/content
+and15feedback checks pass. Final full integration passes1,531 backend tests on each
+Python3.12.3/3.14.6,53 accounts each,193 native and214 desktop/mobile browser checks.
+The first backend run passed1,530 and failed one historical V44 sink assertion that
+included the new Mop target. Its original evidence is preserved; the narrow test-only
+correction passes110 focused checks and both final full matrices. All16 final gates
+are green and runtime/data remain exact. No V89 landing claimed by this candidate record.

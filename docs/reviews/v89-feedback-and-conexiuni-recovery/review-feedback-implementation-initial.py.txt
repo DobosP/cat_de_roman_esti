@@ -1,0 +1,71 @@
+import ast
+import hashlib
+import json
+import os
+import subprocess
+from pathlib import Path
+from dataclasses import asdict
+
+os.environ.update(DJANGO_SETTINGS_MODULE='cat_de_roman_esti.web.settings',CAT_ACCOUNTS_ENABLED='0',CAT_DEBUG='0',ROEDU_API_URL='',ROEDU_API_KEY='')
+import django
+django.setup()
+from django.test import Client
+from cat_de_roman_esti.wordgames import contexto as C, contexto_projection as P, contexto_feedback as F
+from cat_de_roman_esti.wordgames.service import get_service
+
+root=Path.cwd(); out=root/'docs/reviews/v89-feedback-and-conexiuni-recovery'
+baseline='b614bfe735a27b9703025420daf603118f6a7f74'
+pair=('n_v87_food_tort_diplomat','n_v86_food_frisca')
+ast_checks={}
+for file in ['cat_de_roman_esti/wordgames/contexto_feedback.py','cat_de_roman_esti/wordgames/contexto_projection.py']:
+    old=ast.parse(subprocess.check_output(['git','show',f'{baseline}:{file}'],text=True))
+    new=ast.parse((root/file).read_text())
+    removed=0
+    for node in new.body:
+        if isinstance(node,ast.AnnAssign) and isinstance(node.target,ast.Name):
+            if node.target.id=='EXACT_TARGET_FEEDBACK_PAIRS':
+                arg=node.value.args[0]
+                retained=[]
+                for el in arg.elts:
+                    if ast.literal_eval(el)==pair:
+                        removed+=1
+                    else:retained.append(el)
+                arg.elts=retained
+            if node.target.id=='PROJECTION_NEIGHBORHOODS':
+                retained=[(k,v) for k,v in zip(node.value.keys,node.value.values) if ast.literal_eval(k)!='praf']
+                removed+=len(node.value.keys)-len(retained)
+                node.value.keys=[k for k,v in retained];node.value.values=[v for k,v in retained]
+    assert removed==1
+    assert ast.dump(old)==ast.dump(new),file
+    ast_checks[file]={'whole_module_ast_exact_after_removing_one_approved_entry':True,'removed_entries':removed}
+
+files=['cat_de_roman_esti/fixtures/kg_sample.json','cat_de_roman_esti/fixtures/games_pack.json','cat_de_roman_esti/wordgames/contexto.py','cat_de_roman_esti/wordgames/contexto_feedback.py','cat_de_roman_esti/wordgames/contexto_projection.py','cat_de_roman_esti/wordgames/service.py','tests/test_v89_feedback.py']
+hashes={file:hashlib.sha256((root/file).read_bytes()).hexdigest() for file in files}
+unchanged={file:hashlib.sha256(subprocess.check_output(['git','show',f'{baseline}:{file}'])).hexdigest()==hashes[file] for file in files if file not in ast_checks and not file.startswith('tests/')}
+assert all(unchanged.values())
+svc=get_service(); rows=[]
+for word,target_name in [('Tort Diplomat','Frișcă'),('tort','Frișcă'),('Tort Diplomat','Cremșnit'),('Zacuscă','Frișcă'),('Smântână','Frișcă'),('praf','Făraș'),('praf','Mop'),('praf','Aspirator'),('praf','Mătură'),('noroi','Făraș'),('bolovan','Aspirator')]:
+    target=svc.resolve(target_name)
+    assert target
+    gid=C.store.create(C._build_session(target,'usor',None))
+    try:
+        response=Client().post(f'/api/wordgames/contexto/games/{gid}/guess',{'text':word},content_type='application/json')
+        assert response.status_code==200
+        body=response.json();assert not body['won'] and target not in [g['id'] for g in body['guesses']]
+        assert 'target' not in body and 'solution' not in body
+        rows.append({'word':word,'target':target_name,'response':body})
+    finally:C.store.delete(gid)
+assert rows[0]['response']['guess']['rank']==2
+assert rows[0]['response']['guess']['id']==pair[0]
+assert rows[1]['response']['guess']['rank']>2
+assert rows[3]['response']['guess']['rank']==24
+assert rows[4]['response']['guess']['rank']==34
+for row in rows[5:8]:
+    assert row['response']['guess']['rank']==2
+    assert row['response']['guess']['id']=='ctxp_81703160cad7893fa1c9'
+for row in rows[8:]:assert row['response']['guess']['rank']>1000
+assert {file:hashlib.sha256((root/file).read_bytes()).hexdigest() for file in files}==hashes
+result={'date':'2026-09-08','baseline_commit':baseline,'source_sha256':hashes,'ast_checks':ast_checks,'byte_exact_sources':unchanged,'actual_independent_bff_probes':rows,'independent_probe_count':len(rows),'all_probe_sessions_deleted':True,'projection_term_count':len(P.PROJECTION_TERMS),'legacy_native_proxy_count':len(F.COMMON_FEEDBACK_PROXIES),'native_exact_pair_count':len(F.EXACT_TARGET_FEEDBACK_PAIRS),'projection_neighborhood_count':len(P.PROJECTION_NEIGHBORHOODS),'praf_term':asdict(P.resolve_projection('praf')),'praf_public_id':P.resolve_projection('praf').public_id,'method':'Whole AST comparison to baseline after deleting only the reviewed one native tuple and one projected dictionary entry. Eleven additional independent fresh private-BFF probes, all cleaned up. No source/data mutation.'}
+(out/'feedback-implementation-checks.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+(out/'review-feedback-implementation.py.txt').write_bytes(Path(__file__).read_bytes())
+print(json.dumps({'checks':ast_checks,'byte_exact':unchanged,'probe_ranks':[(r['word'],r['target'],r['response']['guess']['rank']) for r in rows],'source_sha256':hashes},ensure_ascii=False,indent=2))

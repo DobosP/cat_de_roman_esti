@@ -1,0 +1,203 @@
+{
+  "schema": "V89 author-only exact projected feedback proposal; not applied or independently accepted",
+  "candidate_sha256": "a7e22a7d4b1c84f5450e167b0854d5e8a5532f0f8f0b733da10a3b955860cdc4",
+  "baseline_capture_sha256": "4f798a54558d4134a1288cf291e610a9495231a140a2ff693922bf989061bae8",
+  "baseline_source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "961aece7245e2772b8d36f9c3181c1150c8f6a22c4c72a3000fd6616ac9cacb8",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "ba46d827dbe6e001a10bdd801d396abd67dfb4245c48b48b16024bf468c72d65",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"
+  },
+  "surface": "praf",
+  "public_id": "ctxp_81703160cad7893fa1c9",
+  "existing_anchor_id": "n_v24_nature_world_pamant",
+  "existing_domain": "peisaj",
+  "existing_rank_penalty": 1,
+  "proposed_neighborhood": {
+    "anchor_id": "n_v24_nature_world_pamant",
+    "min_strength": 0.6,
+    "include_direct_neighbors": false,
+    "exact_target_ids": [
+      "n_v31_cleaning_floor_aspirator",
+      "n_v31_cleaning_floor_faras",
+      "n_v31_cleaning_floor_mop"
+    ]
+  },
+  "rationale": "Fine dust suspended in air or deposited on household surfaces is a central object of dry collecting, vacuuming and modern microfiber mopping. Keep Pământ for all other targets. Do not claim all dust is earth or every mop is designed for dry dusting.",
+  "targets": [
+    {
+      "label": "Făraș",
+      "target_id": "n_v31_cleaning_floor_faras",
+      "baseline_guess": {
+        "id": "ctxp_81703160cad7893fa1c9",
+        "label": "Praf",
+        "distance": 8,
+        "rank": 2256,
+        "temperature": "Inghetat",
+        "closeness": 4,
+        "attempt_number": 1
+      },
+      "incoming": [
+        {
+          "id": "n_v24_home_surfaces_podea",
+          "label": "Podea"
+        },
+        {
+          "id": "n_v31_cleaning_floor_aspirator",
+          "label": "Aspirator"
+        },
+        {
+          "id": "n_v88_cleaning_matura",
+          "label": "Mătură"
+        }
+      ],
+      "outgoing": [
+        {
+          "id": "n_v31_cleaning_dishes_burete_vase",
+          "label": "Burete de vase"
+        },
+        {
+          "id": "n_v31_cleaning_floor_mop",
+          "label": "Mop"
+        },
+        {
+          "id": "n_v88_cleaning_matura",
+          "label": "Mătură"
+        }
+      ],
+      "distinct_direct_neighbors": 5,
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/f%C4%83ra%C8%99/1341866",
+          "claim": "CADE1926–1931 describes the scoop used to collect sweepings."
+        },
+        {
+          "url": "https://leifheit.ro/ro/acasa/164-leifheit-set-maturafaras.html",
+          "claim": "Manufacturer-branded dustpan-and-brush instructions explicitly collect fine dust; the implements store together."
+        }
+      ]
+    },
+    {
+      "label": "Mop",
+      "target_id": "n_v31_cleaning_floor_mop",
+      "baseline_guess": {
+        "id": "ctxp_81703160cad7893fa1c9",
+        "label": "Praf",
+        "distance": 7,
+        "rank": 1528,
+        "temperature": "Foarte rece",
+        "closeness": 35,
+        "attempt_number": 1
+      },
+      "incoming": [
+        {
+          "id": "n_v24_home_surfaces_podea",
+          "label": "Podea"
+        },
+        {
+          "id": "n_v31_cleaning_floor_faras",
+          "label": "Făraș"
+        },
+        {
+          "id": "n_v31_cleaning_supply_detergent",
+          "label": "Detergent"
+        },
+        {
+          "id": "n_v31_cleaning_water_galeata",
+          "label": "Găleată"
+        },
+        {
+          "id": "n_v88_cleaning_matura",
+          "label": "Mătură"
+        }
+      ],
+      "outgoing": [
+        {
+          "id": "n_v31_cleaning_floor_aspirator",
+          "label": "Aspirator"
+        },
+        {
+          "id": "n_v31_cleaning_water_galeata",
+          "label": "Găleată"
+        }
+      ],
+      "distinct_direct_neighbors": 6,
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/mop",
+          "claim": "DEX2009 and DOOM2005/2021 name the household floor-washing tool."
+        },
+        {
+          "url": "https://www.viledaromania.ro/Mops/Cap-de-mop-Turbo-2in1/p/151609",
+          "claim": "Original Romanian manufacturer instructions explicitly say the microfiber mop collects dust and hair from floors. This supports a dust association without asserting every mop is a dry duster."
+        },
+        {
+          "url": "https://www.viledaromania.ro/spin-mops/turbo-spin-mop",
+          "claim": "Manufacturer names mop/bucket, water absorption, hard floors and particle collection."
+        }
+      ]
+    },
+    {
+      "label": "Aspirator",
+      "target_id": "n_v31_cleaning_floor_aspirator",
+      "baseline_guess": {
+        "id": "ctxp_81703160cad7893fa1c9",
+        "label": "Praf",
+        "distance": 8,
+        "rank": 2022,
+        "temperature": "Inghetat",
+        "closeness": 14,
+        "attempt_number": 1
+      },
+      "incoming": [
+        {
+          "id": "n_v24_home_surfaces_podea",
+          "label": "Podea"
+        },
+        {
+          "id": "n_v31_cleaning_floor_mop",
+          "label": "Mop"
+        },
+        {
+          "id": "n_v88_cleaning_matura",
+          "label": "Mătură"
+        }
+      ],
+      "outgoing": [
+        {
+          "id": "n_v31_cleaning_dishes_burete_vase",
+          "label": "Burete de vase"
+        },
+        {
+          "id": "n_v31_cleaning_floor_faras",
+          "label": "Făraș"
+        }
+      ],
+      "distinct_direct_neighbors": 5,
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/aspirator",
+          "claim": "DEX1998/2009 records the suction apparatus for dust and other particles/gases."
+        },
+        {
+          "url": "https://www.karcher.com/ro/ro/home-garden/aspiratoare.html",
+          "claim": "Original household vacuum description names dust collection, hard floors and carpets."
+        }
+      ]
+    }
+  ],
+  "required_acceptance": [
+    "Each exact Praf→target is accepted, nonwinning, hot and rank>1 with the same projected ID and normal attempt/repeat accounting.",
+    "All non-whitelisted targets retain their exact baseline Praf response, including Pământ, Mătură, Burete de vase, Găleată, Detergent, native Praf de copt and Lapte praf.",
+    "Other Pământ-cluster terms such as noroi and bolovan do not inherit this exact surface exception.",
+    "No graph node/edge/form is created; no native exact-pair cascade or broad Casa/Aspirator proxy is introduced.",
+    "No private answer IDs, descriptions, routes or hidden labels appear before exact win.",
+    "Missing neighborhood anchor in custom fixtures retains the existing fallback behavior."
+  ],
+  "held_targets": [
+    "Burete de vase: dish-specific cue/neighborhood weakness; no casual bathroom-owner or graph repair.",
+    "Mătură, Găleată, Detergent: four-neighbor holds.",
+    "Taburet: four neighbors, frozen chair cue and music-led clue."
+  ]
+}

@@ -1,0 +1,67 @@
+import hashlib, json, os
+from pathlib import Path
+os.environ.update(DJANGO_SETTINGS_MODULE="cat_de_roman_esti.web.settings", CAT_ACCOUNTS_ENABLED="0", CAT_DEBUG="0", ROEDU_API_URL="", ROEDU_API_KEY="")
+import django
+django.setup()
+from django.test import Client
+from cat_de_roman_esti.wordgames import contexto as C
+from cat_de_roman_esti.wordgames.service import get_service, normalize
+root=Path.cwd(); out=root/"docs/reviews/v89-feedback-and-conexiuni-recovery/quality-screen"; out.mkdir(exist_ok=True)
+svc=get_service(); client=Client()
+candidate=root/"docs/reviews/v89-feedback-and-conexiuni-recovery/author-candidates/viata_de_roman/candidates.json"
+assert hashlib.sha256(candidate.read_bytes()).hexdigest()=="a7e22a7d4b1c84f5450e167b0854d5e8a5532f0f8f0b733da10a3b955860cdc4"
+words=["murdărie","firimituri","păr","păr de animale","sac","sac de praf","filtru","curent","electricitate","a mătura","măturat","a aspira","aspirare","a curăța","pardoseală","parchet","gresie","covoraș","scame","cârpă","coadă","mâner","curățenie","gunoi","găleată","apă","detergent","praf","podea","mătură","casă","București","fotbal"]
+files=["cat_de_roman_esti/fixtures/kg_sample.json","cat_de_roman_esti/fixtures/games_pack.json","cat_de_roman_esti/wordgames/contexto.py","cat_de_roman_esti/wordgames/contexto_feedback.py","cat_de_roman_esti/wordgames/contexto_projection.py","cat_de_roman_esti/wordgames/service.py"]
+result={"date":"2026-09-08","reviewer":"independent raw quality lane","scope":"fresh private BFF sessions, not public selectors or human playtests","candidate_sha256":hashlib.sha256(candidate.read_bytes()).hexdigest(),"source_sha256":{p:hashlib.sha256((root/p).read_bytes()).hexdigest() for p in files},"profiles":[],"first_guesses":[],"journeys":[]}
+pack=json.loads((root/files[1]).read_text())
+def hidden(body,target,label):
+ def walk(v):
+  if isinstance(v,dict):
+   assert not set(v)&{"target","target_id","description","path","route"}
+   for value in v.values():walk(value)
+  elif isinstance(v,list):
+   for value in v:walk(value)
+  elif isinstance(v,str):
+   assert v!=target and normalize(v)!=normalize(label)
+ walk(body)
+for label,approach,win in [("Făraș","mătură","fărașele"),("Mop","apă","mopurile"),("Aspirator","covor","aspiratoarele")]:
+ target=svc.resolve(label); node=svc.node(target); dist=svc.distances_to(target)
+ neighbors=sorted(set(svc.predecessor_ids(target))|set(svc.neighbor_ids(target)))
+ profile={"label":label,"target":target,"salience":node.salience,"reachable":len(dist),"responsive":sum(1<=d<=5 for d in dist.values()),"distinct_direct_neighbors":[],"existing_contexto_records":[p for p in pack["contexto"] if p["target"]==target]}
+ for n in neighbors:
+  directions=[]
+  for left,right in [(n,target),(target,n)]:
+   edge=svc.link(left,right)
+   if edge:directions.append({"from":left,"to":right,"relation":edge.relation,"label":edge.label_ro,"strength":edge.strength})
+  profile["distinct_direct_neighbors"].append({"id":n,"label":svc.label(n),"native_guess_anchor":C._feedback_anchor_id(svc,n,target),"links":directions})
+ result["profiles"].append(profile)
+ for word in words:
+  gid=C.store.create(C._build_session(target,"usor",None,category="viata_de_roman"))
+  try:
+   response=client.post(f"/api/wordgames/contexto/games/{gid}/guess",{"text":word},content_type="application/json")
+   body=response.json();assert response.status_code==200 and not body.get("won"),(label,word,response.status_code)
+   hidden(body,target,label)
+   result["first_guesses"].append({"target":label,"word":word,"response":body})
+  finally:C.store.delete(gid)
+ gid=C.store.create(C._build_session(target,"usor",None,category="viata_de_roman"));url=f"/api/wordgames/contexto/games/{gid}"; steps=[]
+ def call(name,path="",data=None):
+  response=client.get(url) if data is None else client.post(url+path,data,content_type="application/json")
+  assert response.status_code==200,(label,name,response.status_code)
+  body=response.json();steps.append({"step":name,"response":body});return body
+ try:
+  hidden(call("initial"),target,label)
+  for w in ["stilou","fotbal","București"]:hidden(call(w,"/guess",{"text":w}),target,label)
+  clue=call("warmer clue","/clue",{});assert clue["clue_kind"]=="warmer" and clue["clues_used"]==1;hidden(clue,target,label)
+  for w in ["casă",approach,"praf"]:hidden(call(w,"/guess",{"text":w}),target,label)
+  before=steps[-1]["response"];assert before["guess"]["rank"]==2 and not before["won"]
+  repeat=call("uppercase dust repeat","/guess",{"text":"PRAF"});assert repeat["attempts"]==before["attempts"] and repeat["guesses"]==before["guesses"]
+  saved=call("resume");assert saved["guesses"]==before["guesses"] and saved["clues_used"]==1;hidden(saved,target,label)
+  final=call("native plural win","/guess",{"text":win});assert final["won"] and final["guess"]["rank"]==1 and final["guess"]["id"]==target
+  terminal=call("terminal resume");assert terminal["won"] and terminal["score"]==final["score"]
+  result["journeys"].append({"target":label,"win_form":win,"checks_passed":True,"steps":steps})
+ finally:C.store.delete(gid)
+ print(label,[(x["word"],x["response"].get("guess",{}).get("rank"),x["response"].get("feedback",{}).get("kind")) for x in result["first_guesses"] if x["target"]==label],flush=True)
+result["first_guess_count"]=len(result["first_guesses"]);result["journey_request_count"]=sum(len(x["steps"]) for x in result["journeys"])
+(out/"independent-probes.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n")
+(out/"capture-independent-probes.py.txt").write_bytes(Path(__file__).read_bytes())
+print("Fresh first guesses",result["first_guess_count"],"journey requests",result["journey_request_count"])

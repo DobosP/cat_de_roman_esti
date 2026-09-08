@@ -2,10 +2,9 @@
 
 Valid until: the next verified quality wave — then refresh this living checklist.
 
-Target: public anonymous beta for Romanian players. **V88 is implemented with seven new
-concepts, three reviewed rounds across Alchimie/Conexiuni and recoverable Lanț actions;
-full integration is GREEN and V88 is landed locally at `000b0a2`. V89 starts the next
-feedback and Conexiuni-recovery batch.**
+Target: public anonymous beta for Romanian players. **V89 implements recoverable
+Conexiuni actions, one reviewed Mop round and four exact feedback corrections.
+Full integration is GREEN; V89 awaits local landing. V88 is merged at `000b0a2`.**
 The recurring local iteration follows [ADR-0127](adr/0127-recurring-local-version-loop.md)
 until the owner stops it. No push or deployment occurred.
 Public rollout still requires the external checks below.
@@ -116,11 +115,20 @@ and Conexiuni `cx_viata_de_roman_362` / `cx_viata_de_roman_363`. The pack contai
 No Contexto, Lanț, Intrusul or Perechi round is added in V88. Tort Diplomat remains held
 after recipe-sense and useful-depth review; the batch does not force its proposed count.
 
+V89 adds only Mop353: **659 records /651 approved /8 pending**, with **489 eligible**.
+Two initial household candidates are rejected after final directed-neighbor review:
+Făraș/Aspirator have3 incoming cues each; Mop has5. The original union-degree mistake
+and both corrections remain in [the V89 review](reviews/v89-feedback-and-conexiuni-recovery/README.md).
+[ADR-0133](adr/0133-closed-dust-and-whipped-cream-feedback.md) records specific Diplomat/Frișcă
+and Praf feedback; [ADR-0132](adr/0132-reconcile-uncertain-conexiuni-actions.md) records lost-action
+recovery, earned clues and persistent read-only verification. No KG word, link or form is added.
+The following inventory is current; V88 evidence below remains its historical verification.
+
 | Game | Total | Approved | Pending | Eligible / preferred |
 |---|---:|---:|---:|---:|
 | Alchimie | 83 | 80 | 3 | 80 eligible |
 | Conexiuni | 234 | 234 | 0 | 76 eligible |
-| Cald sau Rece | 241 | 239 | 2 | 235 eligible |
+| Cald sau Rece | 242 | 240 | 2 | 236 eligible |
 | Lanțul Cuvintelor | 100 | 97 | 3 | 97 eligible |
 | Intrusul | 183 | 183 | 0 | 144 preferred |
 | Perechi | 153 | 153 | 0 | 113 preferred |
@@ -180,6 +188,7 @@ improvements; the exact affected examples remain in the impact report.
 | V85 | Approximate ingredient guesses and misleading labels weakened otherwise familiar rounds | Eight concepts, 25 forms, 40 new links plus one relabelled relation; one served dairy clue corrected; four Contexto targets and one Lanț route. Full integration GREEN |
 | V86 | Weak preparation/cooling clues, hidden short routes and disappearing creation errors | Nine concepts, 30 forms, 41 links and six reviewed rounds; two exact feedback corrections; 59 old approved Lanț menus improve; all-six-game failure/replay recovery preserves state and action visibility. Full integration GREEN |
 | V87 | Weak snack-defining cues and lost paid/terminal action responses | Nine concepts, 31 forms, 50 directed links, six promoted Contexto targets and five bounded feedback repairs; owned authoritative recovery without mutation replay. Full 1,409 backend tests per runtime, 53 accounts each, 193 native/168 browser checks pass |
+| V89 | Lost Conexiuni actions, household feedback and directed-neighbor quality gaps | One Mop round, four exact feedback scopes, owned Conexiuni recovery; two candidates rejected under C3. Full integration GREEN: 1,531 backend tests per runtime, 53 accounts each, 193 native and 214 browser checks. |
 | V88 | Missing everyday tools, a false cream sense, inaccessible recipe-review tooling and lost Lanț actions | Seven concepts, 28 forms, 33 links added/one removed; one Alchimie and two Conexiuni rounds; portable projection-bound Alchimie review; owned Lanț action and earned-hint recovery. Frontend 193 native/188 browser checks GREEN; full backend 1,508 per runtime and accounts 53 each GREEN |
 
 V84 focused checks pass: **62 new graph/game checks**, **183 historical/current checks**,
@@ -306,3 +315,8 @@ guide the next wave; automated agents cannot supply them or establish enjoyment.
 Human acceptance and real-device/browser coverage remain **pending** until observed. A green
 technical candidate is not permission to publish and is not evidence that public beta
 acceptance has passed.
+
+V89 closes the recorded Tort Diplomat→Frișcă cost with one exact native hot pair.
+Cremșnit/Pișcot and the truthful Zacuscă route retain their prior feedback. The household
+stress sample exposes19 unknown words and several weak alternate approaches; these and
+the two rejected hidden targets remain next-version work, not a claim of broad completion.

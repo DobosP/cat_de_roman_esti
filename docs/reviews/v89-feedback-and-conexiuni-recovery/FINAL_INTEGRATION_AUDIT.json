@@ -1,0 +1,314 @@
+{
+  "date": "2026-09-08",
+  "reviewer": "independent V89 final integration and manifest reviewer",
+  "decision": "accept immutable prelanding snapshot and all 16 final green receipts",
+  "blockers": [],
+  "baseline_commit": "b614bfe735a27b9703025420daf603118f6a7f74",
+  "audit_input_manifest": {
+    "path": "docs/reviews/v89-feedback-and-conexiuni-recovery/audit-input-manifest.json",
+    "sha256": "f57af19677fc2ed2b8dbd53b96a99f7fb56687c17495f6d834a3c9e61d78c93b",
+    "sections": {
+      "sources": 13,
+      "artifacts": 20,
+      "decision_files": 3,
+      "documentation": 5,
+      "review_files": 181,
+      "removed_files": 12
+    },
+    "existing_files_verified": 222,
+    "removed_files_verified": 12,
+    "complete_baseline_delta": true,
+    "expected_snapshot_exclusions": [
+      "docs/reviews/v89-feedback-and-conexiuni-recovery/audit-input-manifest.json",
+      "docs/reviews/v89-feedback-and-conexiuni-recovery/review-manifest.json"
+    ],
+    "no_unexpected_omissions_or_extra_bindings": true
+  },
+  "verification_sha256": "f481308eb8415bdc93f2525f63b1d98b4cd48de9832cbc06ae12a2ddaf2bd234",
+  "frozen_inputs": {
+    "path": "docs/reviews/v89-feedback-and-conexiuni-recovery/integration-freeze.json",
+    "sha256": "e3efed86e15b679b40994f17e4a1de7805c8ba23f73e13f3ebec2028701dc635",
+    "count": 407,
+    "all_current_hashes_match": true,
+    "initial_freeze_sha256": "6a58934b00eceb5039ac68bc71bdd5949afd836345ddcdc2800889ddf293641e",
+    "initial_and_final_path_sets_equal": true,
+    "sole_changed_input": {
+      "path": "tests/test_v44_contexto_common_words.py",
+      "before_sha256": "959028ac3a5d3c956e8b57284abdff626b2e765aa7feae55c9e51fc7d8a6c395",
+      "after_sha256": "7b6a29497c76d9baa8d70cf034088c37133a1b0d61b5c9f659803cc401ae303d"
+    },
+    "application_frontend_data_inputs_unchanged_except_reviewed_python_test": true,
+    "generated_static_files_in_407_input_freeze": 0,
+    "generated_static_files_bound_by_manifest": 14
+  },
+  "final_gate_receipts": {
+    "backend312": {
+      "exit_code": 0,
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "elapsed_seconds": 920.39,
+      "decoded_sha256": "81eb430b51517859c8b1f04ea41c10a03cd2ce5d6d6876074c304580891f2029",
+      "archive_sha256": "44cd5e14e94e0799858920438cd01ddcb6979743c614ba39bf68e70f3737cad9",
+      "decoded_bytes": 1793,
+      "archive_bytes": 145
+    },
+    "accounts312": {
+      "exit_code": 0,
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "elapsed_seconds": 9.19,
+      "decoded_sha256": "f97df56c9ff375d9b544cd1d47c5641409a062ee40243a4a2002b778607bdfd8",
+      "archive_sha256": "29eca78f9e3d30d1f1f7cf9659e323b5c1ecf4996d76e2c89b90e3de0ba2e776",
+      "decoded_bytes": 99,
+      "archive_bytes": 52
+    },
+    "backend314": {
+      "exit_code": 0,
+      "command": [
+        "/home/dobo/work/_temp/feat__v89-feedback-and-conexiuni-recovery/py314/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "elapsed_seconds": 814.02,
+      "decoded_sha256": "fdec3225e193b4a6a4db8f7fa7c81795166999f6d4308c02d49959dae22b7db2",
+      "archive_sha256": "7948fee524241441c227caaedf4c440481939f7e0579dd29bc144fd6f816a14f",
+      "decoded_bytes": 1793,
+      "archive_bytes": 144
+    },
+    "accounts314": {
+      "exit_code": 0,
+      "command": [
+        "/home/dobo/work/_temp/feat__v89-feedback-and-conexiuni-recovery/py314/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "elapsed_seconds": 11.16,
+      "decoded_sha256": "81dbd412228220226deda8ffc8ef687128f4a6009a9f5907a2d21b0fb39ca0ff",
+      "archive_sha256": "09e24de78d84317a509e2bb69f3d049ab6fa54302e77937938f52c7dbb1560d6",
+      "decoded_bytes": 99,
+      "archive_bytes": 52
+    },
+    "frontend_native": {
+      "exit_code": 0,
+      "command": [
+        "npm",
+        "test"
+      ],
+      "elapsed_seconds": 1.42,
+      "decoded_sha256": "7bc01817faa57ac886eee10f7b48e3c674589bbebd5398e9d919458453916e4f",
+      "archive_sha256": "632506b85fd19434764aeb4653e494bac9aca53149bc1c60879efec63b9366e0",
+      "decoded_bytes": 16437,
+      "archive_bytes": 6670
+    },
+    "frontend_lint": {
+      "exit_code": 0,
+      "command": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "elapsed_seconds": 13.75,
+      "decoded_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "archive_sha256": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a",
+      "decoded_bytes": 53,
+      "archive_bytes": 70
+    },
+    "frontend_typecheck": {
+      "exit_code": 0,
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "elapsed_seconds": 6.52,
+      "decoded_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+      "archive_sha256": "d0e30d1dc915362da5e6d51943f265c1840c3182f61f2cd8a65a8159c982ac05",
+      "decoded_bytes": 62,
+      "archive_bytes": 82
+    },
+    "frontend_build": {
+      "exit_code": 0,
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "elapsed_seconds": 10.11,
+      "decoded_sha256": "96b2ff0314d91b1a5fe5020baa5c218ec99b9a773ec3eda70c850fb5d7d6fce6",
+      "archive_sha256": "5b47500a5580ea5ee2fe321131b3757cfafa655380823970e2f5e35615ad00d9",
+      "decoded_bytes": 3353,
+      "archive_bytes": 1027
+    },
+    "frontend_bundle": {
+      "exit_code": 0,
+      "command": [
+        "npm",
+        "run",
+        "check:bundle"
+      ],
+      "elapsed_seconds": 0.27,
+      "decoded_sha256": "423fce99258e3e0b52f896cfb334ee249dd33d253aab89f0b24a049b17e19bdf",
+      "archive_sha256": "ef23a4a631359760270c3e23efeafa14dbd81d719e4caf7a72859019d06827c4",
+      "decoded_bytes": 292,
+      "archive_bytes": 233
+    },
+    "browser": {
+      "exit_code": 0,
+      "command": [
+        "npm",
+        "run",
+        "test:e2e"
+      ],
+      "elapsed_seconds": 781.14,
+      "decoded_sha256": "a9a3eb7c4a72cb46f8a324b62f20dad2f4ec1b21765c76a8db193d96cc3527c3",
+      "archive_sha256": "68b01aee7520da17e888fbeace9f929f1f127a18cdab734ef9ff5534dc7aa4ba",
+      "decoded_bytes": 32590,
+      "archive_bytes": 4111
+    },
+    "fixture": {
+      "exit_code": 0,
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_fixture.py"
+      ],
+      "elapsed_seconds": 0.36,
+      "decoded_sha256": "d595f822ab42f18de5c3379ce1b2cd7ed3b8ad3f2ac083543bfa9aabff064829",
+      "archive_sha256": "ff326fb207cb010f620abb390db12f0a8213c2fd6234dbf1b5da32bda8ff6725",
+      "decoded_bytes": 1039,
+      "archive_bytes": 323
+    },
+    "pack": {
+      "exit_code": 0,
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_games_pack.py"
+      ],
+      "elapsed_seconds": 12.65,
+      "decoded_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+      "archive_sha256": "09f01c42a2829a3b8877e60802bae8967baeb530df5220cbc675238466da65a4",
+      "decoded_bytes": 228,
+      "archive_bytes": 128
+    },
+    "pending": {
+      "exit_code": 0,
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/critique_pack.py",
+        "--status",
+        "pending",
+        "--strict"
+      ],
+      "elapsed_seconds": 0.52,
+      "decoded_sha256": "f19d308c2a43b0b95b9b12f3458a99e9f64ce7c982f4f113f1997cbbcffae852",
+      "archive_sha256": "beccbf15577ac4c2020c302579819da43b23a3548cab6e7afe5fc83ca4af4959",
+      "decoded_bytes": 133,
+      "archive_bytes": 135
+    },
+    "ruff": {
+      "exit_code": 0,
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check"
+      ],
+      "elapsed_seconds": 0.12,
+      "decoded_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "archive_sha256": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd",
+      "decoded_bytes": 19,
+      "archive_bytes": 39
+    },
+    "docs": {
+      "exit_code": 0,
+      "command": [
+        "python3",
+        "/home/dobo/work/agent-ops/scripts/check_docs.py",
+        "."
+      ],
+      "elapsed_seconds": 0.15,
+      "decoded_sha256": "83b5bb7c7e9b6b9d64b5d4350c58f56c84e1e1675d42a2dd401c377370b44ae4",
+      "archive_sha256": "7927364655f60715ec7754bc4517dfdc755f18ad0161648dc220024ae5c0116a",
+      "decoded_bytes": 265,
+      "archive_bytes": 191
+    },
+    "whitespace": {
+      "exit_code": 0,
+      "command": [
+        "git",
+        "diff",
+        "HEAD",
+        "--check"
+      ],
+      "elapsed_seconds": 0.06,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "archive_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "decoded_bytes": 0,
+      "archive_bytes": 20
+    }
+  },
+  "observed_results": {
+    "backend312_passed": 1531,
+    "backend314_passed": 1531,
+    "accounts312_passed": 53,
+    "accounts314_passed": 53,
+    "frontend_native_passed": 193,
+    "browser_passed": 214,
+    "browser_retries": 0,
+    "initial_bundle_gzip_kib": 118.92,
+    "bundle_limit_kib": 120,
+    "all_final_exit_codes": 0
+  },
+  "initial_failure": {
+    "receipt_path": "docs/reviews/v89-feedback-and-conexiuni-recovery/initial-integration/backend312.json",
+    "receipt_sha256": "75952c5c9b4b39d3175d932b898b3cea2b220bc877cc8c1a8206dae1541a72ee",
+    "exit_code": 1,
+    "passed": 1530,
+    "failed": 1,
+    "summary": "1 failed, 1530 passed in 913.36s (0:15:13)",
+    "preserved_raw_and_archive_hashes_verified": true,
+    "corrective_review_path": "docs/reviews/v89-feedback-and-conexiuni-recovery/V44_REVIEW.json",
+    "corrective_review_sha256": "bdd071883e31332a097b16b71cc0652ec6cc861bceec261200f9d4ec14bb66ea"
+  },
+  "main_at_review": {
+    "path": "/home/dobo/work/cat_de_roman_esti",
+    "head": "b614bfe735a27b9703025420daf603118f6a7f74",
+    "porcelain_empty": true
+  },
+  "method": [
+    "Hashed every snapshot-listed existing file; checked every listed removed path absent and hashed its exact baseline git blob.",
+    "Compared the complete no-rename b614bfe-to-current tracked delta plus every nonignored untracked file with manifest coverage. Only the explicitly excluded snapshot/final-manifest files remain outside coverage at audit start.",
+    "Verified both 407-file freeze maps and every final filesystem hash; only the isolated historical test differs. Application, frontend and data inputs retain their tested state. Generated static files are outside this source freeze: all 14 changed generated files match the immutable manifest, and their filenames appear in the successful frontend build output.",
+    "Verified all 16 actual archived logs against decoded/archive hashes and byte lengths; exact final log tails equal the published receipt tails. Checked actual backend/accounts/native/browser count lines, bundle result and zero Playwright retries.",
+    "Verified original failed backend log/archive and reviewed correction without changing any historical review or receipt. No research, test suite, generation, source/data edit or git mutation was performed."
+  ],
+  "remaining_orchestrator_actions": [
+    "Bind this audit JSON, its Markdown companion and the immutable audit-input-manifest in the regenerated final review-manifest.",
+    "Recheck final documentation/whitespace and verify newly bound audit files and unchanged snapshot inputs before local landing.",
+    "Require main to remain clean at b614bfe until the authorized local merge. No push or deployment is covered by this audit."
+  ],
+  "limits": [
+    "The 16-gate receipt set is immutable evidence of the tested version; adding audit prose does not warrant inventing or rewriting execution receipts.",
+    "The pending-content gate retains its documented historical WARN findings; exit zero is not a claim that the graph has no editorial debt.",
+    "Technical integration and agent review do not establish Romanian-player enjoyment, physical-device release acceptance or deployment readiness."
+  ]
+}

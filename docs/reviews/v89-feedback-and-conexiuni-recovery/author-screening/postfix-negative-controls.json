@@ -1,0 +1,2621 @@
+{
+  "stage": "post-fix author isolation proof using two real private BFF requests per pair",
+  "baseline_method": "Temporarily replace only Contexto PROJECTION_NEIGHBORHOODS in this isolated process with identical current map minus accepted Praf key. This reconstructs the unchanged baseline Praf policy; it is not a separately executed historical application build. No filesystem/runtime source mutation.",
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "753c22890e14b8b049f62d249ee92a06b6631fb4589db97dbebd003eaf18b5fd",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"
+  },
+  "pairs": 84,
+  "bff_requests": 168,
+  "expected_and_actual_changed_pairs": 3,
+  "unchanged_control_pairs": 81,
+  "observations": [
+    {
+      "target": "Făraș",
+      "word": "praf",
+      "before": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 8,
+          "rank": 2256,
+          "temperature": "Inghetat",
+          "closeness": 4,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": true
+    },
+    {
+      "target": "Făraș",
+      "word": "noroi",
+      "before": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 8,
+          "rank": 2256,
+          "temperature": "Inghetat",
+          "closeness": 4,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 8,
+          "rank": 2256,
+          "temperature": "Inghetat",
+          "closeness": 4,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Făraș",
+      "word": "bolovan",
+      "before": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 8,
+          "rank": 2256,
+          "temperature": "Inghetat",
+          "closeness": 4,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 8,
+          "rank": 2256,
+          "temperature": "Inghetat",
+          "closeness": 4,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Făraș",
+      "word": "praf de copt",
+      "before": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 5,
+          "rank": 106,
+          "temperature": "Caldut",
+          "closeness": 96,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 5,
+          "rank": 106,
+          "temperature": "Caldut",
+          "closeness": 96,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Făraș",
+      "word": "lapte praf",
+      "before": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 7,
+          "rank": 1381,
+          "temperature": "Foarte rece",
+          "closeness": 41,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 7,
+          "rank": 1381,
+          "temperature": "Foarte rece",
+          "closeness": 41,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Făraș",
+      "word": "Pământ",
+      "before": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 8,
+          "rank": 2255,
+          "temperature": "Inghetat",
+          "closeness": 4,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 8,
+          "rank": 2255,
+          "temperature": "Inghetat",
+          "closeness": 4,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Mop",
+      "word": "praf",
+      "before": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 7,
+          "rank": 1528,
+          "temperature": "Foarte rece",
+          "closeness": 35,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": true
+    },
+    {
+      "target": "Mop",
+      "word": "noroi",
+      "before": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 7,
+          "rank": 1528,
+          "temperature": "Foarte rece",
+          "closeness": 35,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 7,
+          "rank": 1528,
+          "temperature": "Foarte rece",
+          "closeness": 35,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Mop",
+      "word": "bolovan",
+      "before": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 7,
+          "rank": 1528,
+          "temperature": "Foarte rece",
+          "closeness": 35,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 7,
+          "rank": 1528,
+          "temperature": "Foarte rece",
+          "closeness": 35,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Mop",
+      "word": "praf de copt",
+      "before": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 5,
+          "rank": 308,
+          "temperature": "Rece",
+          "closeness": 87,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 5,
+          "rank": 308,
+          "temperature": "Rece",
+          "closeness": 87,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Mop",
+      "word": "lapte praf",
+      "before": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 7,
+          "rank": 1586,
+          "temperature": "Foarte rece",
+          "closeness": 32,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 7,
+          "rank": 1586,
+          "temperature": "Foarte rece",
+          "closeness": 32,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Mop",
+      "word": "Pământ",
+      "before": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 7,
+          "rank": 1527,
+          "temperature": "Foarte rece",
+          "closeness": 35,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 7,
+          "rank": 1527,
+          "temperature": "Foarte rece",
+          "closeness": 35,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Aspirator",
+      "word": "praf",
+      "before": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 8,
+          "rank": 2022,
+          "temperature": "Inghetat",
+          "closeness": 14,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": true
+    },
+    {
+      "target": "Aspirator",
+      "word": "noroi",
+      "before": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 8,
+          "rank": 2022,
+          "temperature": "Inghetat",
+          "closeness": 14,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 8,
+          "rank": 2022,
+          "temperature": "Inghetat",
+          "closeness": 14,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Aspirator",
+      "word": "bolovan",
+      "before": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 8,
+          "rank": 2022,
+          "temperature": "Inghetat",
+          "closeness": 14,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 8,
+          "rank": 2022,
+          "temperature": "Inghetat",
+          "closeness": 14,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Aspirator",
+      "word": "praf de copt",
+      "before": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 5,
+          "rank": 190,
+          "temperature": "Caldut",
+          "closeness": 92,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 5,
+          "rank": 190,
+          "temperature": "Caldut",
+          "closeness": 92,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Aspirator",
+      "word": "lapte praf",
+      "before": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 7,
+          "rank": 1643,
+          "temperature": "Inghetat",
+          "closeness": 30,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 7,
+          "rank": 1643,
+          "temperature": "Inghetat",
+          "closeness": 30,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Aspirator",
+      "word": "Pământ",
+      "before": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 8,
+          "rank": 2021,
+          "temperature": "Inghetat",
+          "closeness": 14,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 8,
+          "rank": 2021,
+          "temperature": "Inghetat",
+          "closeness": 14,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Burete de vase",
+      "word": "praf",
+      "before": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 8,
+          "rank": 1954,
+          "temperature": "Inghetat",
+          "closeness": 17,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 8,
+          "rank": 1954,
+          "temperature": "Inghetat",
+          "closeness": 17,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Burete de vase",
+      "word": "noroi",
+      "before": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 8,
+          "rank": 1954,
+          "temperature": "Inghetat",
+          "closeness": 17,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 8,
+          "rank": 1954,
+          "temperature": "Inghetat",
+          "closeness": 17,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Burete de vase",
+      "word": "bolovan",
+      "before": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 8,
+          "rank": 1954,
+          "temperature": "Inghetat",
+          "closeness": 17,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 8,
+          "rank": 1954,
+          "temperature": "Inghetat",
+          "closeness": 17,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Burete de vase",
+      "word": "praf de copt",
+      "before": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 5,
+          "rank": 199,
+          "temperature": "Caldut",
+          "closeness": 92,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 5,
+          "rank": 199,
+          "temperature": "Caldut",
+          "closeness": 92,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Burete de vase",
+      "word": "lapte praf",
+      "before": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 7,
+          "rank": 1927,
+          "temperature": "Inghetat",
+          "closeness": 18,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 7,
+          "rank": 1927,
+          "temperature": "Inghetat",
+          "closeness": 18,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Burete de vase",
+      "word": "Pământ",
+      "before": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 8,
+          "rank": 1953,
+          "temperature": "Inghetat",
+          "closeness": 17,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 8,
+          "rank": 1953,
+          "temperature": "Inghetat",
+          "closeness": 17,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Mătură",
+      "word": "praf",
+      "before": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 9,
+          "rank": 2256,
+          "temperature": "Inghetat",
+          "closeness": 4,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 9,
+          "rank": 2256,
+          "temperature": "Inghetat",
+          "closeness": 4,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Mătură",
+      "word": "noroi",
+      "before": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 9,
+          "rank": 2256,
+          "temperature": "Inghetat",
+          "closeness": 4,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 9,
+          "rank": 2256,
+          "temperature": "Inghetat",
+          "closeness": 4,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Mătură",
+      "word": "bolovan",
+      "before": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 9,
+          "rank": 2256,
+          "temperature": "Inghetat",
+          "closeness": 4,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 9,
+          "rank": 2256,
+          "temperature": "Inghetat",
+          "closeness": 4,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Mătură",
+      "word": "praf de copt",
+      "before": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 6,
+          "rank": 106,
+          "temperature": "Caldut",
+          "closeness": 96,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 6,
+          "rank": 106,
+          "temperature": "Caldut",
+          "closeness": 96,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Mătură",
+      "word": "lapte praf",
+      "before": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 8,
+          "rank": 1379,
+          "temperature": "Foarte rece",
+          "closeness": 41,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 8,
+          "rank": 1379,
+          "temperature": "Foarte rece",
+          "closeness": 41,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Mătură",
+      "word": "Pământ",
+      "before": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 9,
+          "rank": 2255,
+          "temperature": "Inghetat",
+          "closeness": 4,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 9,
+          "rank": 2255,
+          "temperature": "Inghetat",
+          "closeness": 4,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Găleată",
+      "word": "praf",
+      "before": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 6,
+          "rank": 1496,
+          "temperature": "Foarte rece",
+          "closeness": 36,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 6,
+          "rank": 1496,
+          "temperature": "Foarte rece",
+          "closeness": 36,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Găleată",
+      "word": "noroi",
+      "before": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 6,
+          "rank": 1496,
+          "temperature": "Foarte rece",
+          "closeness": 36,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 6,
+          "rank": 1496,
+          "temperature": "Foarte rece",
+          "closeness": 36,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Găleată",
+      "word": "bolovan",
+      "before": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 6,
+          "rank": 1496,
+          "temperature": "Foarte rece",
+          "closeness": 36,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 6,
+          "rank": 1496,
+          "temperature": "Foarte rece",
+          "closeness": 36,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Găleată",
+      "word": "praf de copt",
+      "before": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 5,
+          "rank": 907,
+          "temperature": "Rece",
+          "closeness": 61,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 5,
+          "rank": 907,
+          "temperature": "Rece",
+          "closeness": 61,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Găleată",
+      "word": "lapte praf",
+      "before": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 6,
+          "rank": 1546,
+          "temperature": "Foarte rece",
+          "closeness": 34,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 6,
+          "rank": 1546,
+          "temperature": "Foarte rece",
+          "closeness": 34,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Găleată",
+      "word": "Pământ",
+      "before": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 6,
+          "rank": 1495,
+          "temperature": "Foarte rece",
+          "closeness": 36,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 6,
+          "rank": 1495,
+          "temperature": "Foarte rece",
+          "closeness": 36,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Detergent",
+      "word": "praf",
+      "before": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 7,
+          "rank": 1560,
+          "temperature": "Foarte rece",
+          "closeness": 33,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 7,
+          "rank": 1560,
+          "temperature": "Foarte rece",
+          "closeness": 33,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Detergent",
+      "word": "noroi",
+      "before": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 7,
+          "rank": 1560,
+          "temperature": "Foarte rece",
+          "closeness": 33,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 7,
+          "rank": 1560,
+          "temperature": "Foarte rece",
+          "closeness": 33,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Detergent",
+      "word": "bolovan",
+      "before": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 7,
+          "rank": 1560,
+          "temperature": "Foarte rece",
+          "closeness": 33,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 7,
+          "rank": 1560,
+          "temperature": "Foarte rece",
+          "closeness": 33,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Detergent",
+      "word": "praf de copt",
+      "before": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 5,
+          "rank": 308,
+          "temperature": "Rece",
+          "closeness": 87,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 5,
+          "rank": 308,
+          "temperature": "Rece",
+          "closeness": 87,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Detergent",
+      "word": "lapte praf",
+      "before": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 7,
+          "rank": 1614,
+          "temperature": "Foarte rece",
+          "closeness": 31,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 7,
+          "rank": 1614,
+          "temperature": "Foarte rece",
+          "closeness": 31,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Detergent",
+      "word": "Pământ",
+      "before": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 7,
+          "rank": 1559,
+          "temperature": "Foarte rece",
+          "closeness": 33,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 7,
+          "rank": 1559,
+          "temperature": "Foarte rece",
+          "closeness": 33,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Taburet",
+      "word": "praf",
+      "before": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 7,
+          "rank": 2129,
+          "temperature": "Inghetat",
+          "closeness": 9,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 7,
+          "rank": 2129,
+          "temperature": "Inghetat",
+          "closeness": 9,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Taburet",
+      "word": "noroi",
+      "before": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 7,
+          "rank": 2129,
+          "temperature": "Inghetat",
+          "closeness": 9,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 7,
+          "rank": 2129,
+          "temperature": "Inghetat",
+          "closeness": 9,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Taburet",
+      "word": "bolovan",
+      "before": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 7,
+          "rank": 2129,
+          "temperature": "Inghetat",
+          "closeness": 9,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 7,
+          "rank": 2129,
+          "temperature": "Inghetat",
+          "closeness": 9,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Taburet",
+      "word": "praf de copt",
+      "before": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 8,
+          "rank": 2326,
+          "temperature": "Inghetat",
+          "closeness": 1,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 8,
+          "rank": 2326,
+          "temperature": "Inghetat",
+          "closeness": 1,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Taburet",
+      "word": "lapte praf",
+      "before": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 7,
+          "rank": 2093,
+          "temperature": "Inghetat",
+          "closeness": 11,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 7,
+          "rank": 2093,
+          "temperature": "Inghetat",
+          "closeness": 11,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Taburet",
+      "word": "Pământ",
+      "before": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 7,
+          "rank": 2128,
+          "temperature": "Inghetat",
+          "closeness": 9,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 7,
+          "rank": 2128,
+          "temperature": "Inghetat",
+          "closeness": 9,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Pământ",
+      "word": "praf",
+      "before": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Pământ",
+      "word": "noroi",
+      "before": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Pământ",
+      "word": "bolovan",
+      "before": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Pământ",
+      "word": "praf de copt",
+      "before": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 6,
+          "rank": 1604,
+          "temperature": "Foarte rece",
+          "closeness": 32,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 6,
+          "rank": 1604,
+          "temperature": "Foarte rece",
+          "closeness": 32,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Pământ",
+      "word": "lapte praf",
+      "before": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 7,
+          "rank": 2204,
+          "temperature": "Inghetat",
+          "closeness": 6,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 7,
+          "rank": 2204,
+          "temperature": "Inghetat",
+          "closeness": 6,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Pământ",
+      "word": "Pământ",
+      "before": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 0,
+          "rank": 1,
+          "temperature": "Gasit",
+          "closeness": 100,
+          "attempt_number": 1
+        },
+        "won": true,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 0,
+          "rank": 1,
+          "temperature": "Gasit",
+          "closeness": 100,
+          "attempt_number": 1
+        },
+        "won": true,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Praf de copt",
+      "word": "praf",
+      "before": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 999,
+          "rank": 3,
+          "temperature": "Inghetat",
+          "closeness": 0,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 999,
+          "rank": 3,
+          "temperature": "Inghetat",
+          "closeness": 0,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Praf de copt",
+      "word": "noroi",
+      "before": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 999,
+          "rank": 3,
+          "temperature": "Inghetat",
+          "closeness": 0,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 999,
+          "rank": 3,
+          "temperature": "Inghetat",
+          "closeness": 0,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Praf de copt",
+      "word": "bolovan",
+      "before": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 999,
+          "rank": 3,
+          "temperature": "Inghetat",
+          "closeness": 0,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 999,
+          "rank": 3,
+          "temperature": "Inghetat",
+          "closeness": 0,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Praf de copt",
+      "word": "praf de copt",
+      "before": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 0,
+          "rank": 1,
+          "temperature": "Gasit",
+          "closeness": 100,
+          "attempt_number": 1
+        },
+        "won": true,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 0,
+          "rank": 1,
+          "temperature": "Gasit",
+          "closeness": 100,
+          "attempt_number": 1
+        },
+        "won": true,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Praf de copt",
+      "word": "lapte praf",
+      "before": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 999,
+          "rank": 3,
+          "temperature": "Inghetat",
+          "closeness": 0,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 999,
+          "rank": 3,
+          "temperature": "Inghetat",
+          "closeness": 0,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Praf de copt",
+      "word": "Pământ",
+      "before": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 999,
+          "rank": 3,
+          "temperature": "Inghetat",
+          "closeness": 0,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 999,
+          "rank": 3,
+          "temperature": "Inghetat",
+          "closeness": 0,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Lapte praf",
+      "word": "praf",
+      "before": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 6,
+          "rank": 1593,
+          "temperature": "Foarte rece",
+          "closeness": 32,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 6,
+          "rank": 1593,
+          "temperature": "Foarte rece",
+          "closeness": 32,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Lapte praf",
+      "word": "noroi",
+      "before": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 6,
+          "rank": 1593,
+          "temperature": "Foarte rece",
+          "closeness": 32,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 6,
+          "rank": 1593,
+          "temperature": "Foarte rece",
+          "closeness": 32,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Lapte praf",
+      "word": "bolovan",
+      "before": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 6,
+          "rank": 1593,
+          "temperature": "Foarte rece",
+          "closeness": 32,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 6,
+          "rank": 1593,
+          "temperature": "Foarte rece",
+          "closeness": 32,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Lapte praf",
+      "word": "praf de copt",
+      "before": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 3,
+          "rank": 43,
+          "temperature": "Cald",
+          "closeness": 98,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 3,
+          "rank": 43,
+          "temperature": "Cald",
+          "closeness": 98,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Lapte praf",
+      "word": "lapte praf",
+      "before": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 0,
+          "rank": 1,
+          "temperature": "Gasit",
+          "closeness": 100,
+          "attempt_number": 1
+        },
+        "won": true,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 0,
+          "rank": 1,
+          "temperature": "Gasit",
+          "closeness": 100,
+          "attempt_number": 1
+        },
+        "won": true,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Lapte praf",
+      "word": "Pământ",
+      "before": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 6,
+          "rank": 1592,
+          "temperature": "Foarte rece",
+          "closeness": 32,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 6,
+          "rank": 1592,
+          "temperature": "Foarte rece",
+          "closeness": 32,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Frișcă",
+      "word": "praf",
+      "before": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 7,
+          "rank": 2086,
+          "temperature": "Inghetat",
+          "closeness": 11,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 7,
+          "rank": 2086,
+          "temperature": "Inghetat",
+          "closeness": 11,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Frișcă",
+      "word": "noroi",
+      "before": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 7,
+          "rank": 2086,
+          "temperature": "Inghetat",
+          "closeness": 11,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 7,
+          "rank": 2086,
+          "temperature": "Inghetat",
+          "closeness": 11,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Frișcă",
+      "word": "bolovan",
+      "before": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 7,
+          "rank": 2086,
+          "temperature": "Inghetat",
+          "closeness": 11,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 7,
+          "rank": 2086,
+          "temperature": "Inghetat",
+          "closeness": 11,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Frișcă",
+      "word": "praf de copt",
+      "before": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 4,
+          "rank": 174,
+          "temperature": "Caldut",
+          "closeness": 93,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 4,
+          "rank": 174,
+          "temperature": "Caldut",
+          "closeness": 93,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Frișcă",
+      "word": "lapte praf",
+      "before": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 4,
+          "rank": 240,
+          "temperature": "Rece",
+          "closeness": 90,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 4,
+          "rank": 240,
+          "temperature": "Rece",
+          "closeness": 90,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Frișcă",
+      "word": "Pământ",
+      "before": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 7,
+          "rank": 2085,
+          "temperature": "Inghetat",
+          "closeness": 11,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 7,
+          "rank": 2085,
+          "temperature": "Inghetat",
+          "closeness": 11,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Cozonac",
+      "word": "praf",
+      "before": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 5,
+          "rank": 1933,
+          "temperature": "Inghetat",
+          "closeness": 18,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 5,
+          "rank": 1933,
+          "temperature": "Inghetat",
+          "closeness": 18,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Cozonac",
+      "word": "noroi",
+      "before": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 5,
+          "rank": 1933,
+          "temperature": "Inghetat",
+          "closeness": 18,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 5,
+          "rank": 1933,
+          "temperature": "Inghetat",
+          "closeness": 18,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Cozonac",
+      "word": "bolovan",
+      "before": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 5,
+          "rank": 1933,
+          "temperature": "Inghetat",
+          "closeness": 18,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 5,
+          "rank": 1933,
+          "temperature": "Inghetat",
+          "closeness": 18,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Cozonac",
+      "word": "praf de copt",
+      "before": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 2,
+          "rank": 74,
+          "temperature": "Caldut",
+          "closeness": 97,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 2,
+          "rank": 74,
+          "temperature": "Caldut",
+          "closeness": 97,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Cozonac",
+      "word": "lapte praf",
+      "before": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 2,
+          "rank": 74,
+          "temperature": "Caldut",
+          "closeness": 97,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 2,
+          "rank": 74,
+          "temperature": "Caldut",
+          "closeness": 97,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Cozonac",
+      "word": "Pământ",
+      "before": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 5,
+          "rank": 1932,
+          "temperature": "Inghetat",
+          "closeness": 18,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 5,
+          "rank": 1932,
+          "temperature": "Inghetat",
+          "closeness": 18,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Zacuscă",
+      "word": "praf",
+      "before": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 5,
+          "rank": 2192,
+          "temperature": "Inghetat",
+          "closeness": 6,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_81703160cad7893fa1c9",
+          "label": "Praf",
+          "distance": 5,
+          "rank": 2192,
+          "temperature": "Inghetat",
+          "closeness": 6,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Zacuscă",
+      "word": "noroi",
+      "before": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 5,
+          "rank": 2192,
+          "temperature": "Inghetat",
+          "closeness": 6,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_c89dd916043693908936",
+          "label": "Noroi",
+          "distance": 5,
+          "rank": 2192,
+          "temperature": "Inghetat",
+          "closeness": 6,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Zacuscă",
+      "word": "bolovan",
+      "before": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 5,
+          "rank": 2192,
+          "temperature": "Inghetat",
+          "closeness": 6,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "ctxp_290e3606858168a62e12",
+          "label": "Bolovan",
+          "distance": 5,
+          "rank": 2192,
+          "temperature": "Inghetat",
+          "closeness": 6,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Zacuscă",
+      "word": "praf de copt",
+      "before": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 4,
+          "rank": 713,
+          "temperature": "Rece",
+          "closeness": 70,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v87_food_praf_copt",
+          "label": "Praf de copt",
+          "distance": 4,
+          "rank": 713,
+          "temperature": "Rece",
+          "closeness": 70,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Zacuscă",
+      "word": "lapte praf",
+      "before": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 4,
+          "rank": 713,
+          "temperature": "Rece",
+          "closeness": 70,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v86_food_lapte_praf",
+          "label": "Lapte praf",
+          "distance": 4,
+          "rank": 713,
+          "temperature": "Rece",
+          "closeness": 70,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    },
+    {
+      "target": "Zacuscă",
+      "word": "Pământ",
+      "before": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 5,
+          "rank": 2191,
+          "temperature": "Inghetat",
+          "closeness": 6,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "after": {
+        "guess": {
+          "id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "distance": 5,
+          "rank": 2191,
+          "temperature": "Inghetat",
+          "closeness": 6,
+          "attempt_number": 1
+        },
+        "won": false,
+        "attempts": 1
+      },
+      "expected_changed": false
+    }
+  ]
+}

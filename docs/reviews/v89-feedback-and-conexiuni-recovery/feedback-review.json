@@ -1,0 +1,106 @@
+{
+  "reviewer": "independent V89 feedback reviewer",
+  "date": "2026-09-08",
+  "phase": "baseline recommendation; final runtime acceptance pending",
+  "decision": "accept proposed single native Tort Diplomat to Frisca nonwinning exact pair; no graph edits",
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "4c7030bd86e966162f4ac51ef00cf3bb649ff7a9d59c8c34e180cb7ff53e1636",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "961aece7245e2772b8d36f9c3181c1150c8f6a22c4c72a3000fd6616ac9cacb8",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "ba46d827dbe6e001a10bdd801d396abd67dfb4245c48b48b16024bf468c72d65",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"
+  },
+  "evidence_sha256": {
+    "feedback-path-probes.json": "5a8529cdf2a8be6ff5e2f8cc6e8e621d69c2166b5c15c301212e271c262b89fc",
+    "trace-feedback.py.txt": "4d444d420a755d421f1436964fca5dbc995c4d056bbd04adec5a7f13c0d00475",
+    "feedback-review.md": "d988e8d9a3060546d7f4aff7322883903e2673539c39e1da3beda5f7c7f0306b"
+  },
+  "proposed_exact_native_pair": [
+    "n_v87_food_tort_diplomat",
+    "n_v86_food_frisca"
+  ],
+  "approved_fact": "Original recipe authors use whipped cream as an incorporated defining Diplomat cream component, independently of optional outside decoration. The existing opposite directed ingredient relation is consistent.",
+  "editorial_judgment": "Hot nonwinning feedback for this submitted dessert and hidden whipped cream is fair under the existing finite policy. Rank 2 is policy, not a scientifically measured semantic distance or a source claim.",
+  "required_controls": [
+    "Preserve actual native submitted ID, exact Frișcă wins and pre-win answer privacy.",
+    "No inherited exact pair for projected tort or another pastry.",
+    "No recipe/graph direction changes, no sour-cream ownership reversal and no numeric scoring formula changes.",
+    "Prove all other captured target responses remain exact for this one policy change."
+  ],
+  "held_repairs": [
+    {
+      "input": "Cremșnit",
+      "target": "Frișcă",
+      "reason": "Whipped cream is evidenced in particular variants; a mainstream vanilla filling also omits it. Do not generalize to an equally strong near-target override."
+    },
+    {
+      "input": "Pișcot",
+      "target": "Frișcă",
+      "reason": "Ladyfinger is an independently baked egg/flour/sugar product. Co-use in Diplomat is weaker than a defining ingredient relation."
+    },
+    {
+      "input": "Prăjitură",
+      "target": "Frișcă",
+      "reason": "Class-wide assertion is overbroad."
+    }
+  ],
+  "zacusca_control": {
+    "rank": 24,
+    "temperature": "Cald",
+    "bfs_hops": 3,
+    "weighted_cost": 3.4800000000000004,
+    "path": [
+      "Zacuscă",
+      "Bucătărie",
+      "Frigider",
+      "Frișcă"
+    ],
+    "edge_ids": [
+      "de3776",
+      "de8103",
+      "de8681"
+    ],
+    "decision": "Preserve all three factually coherent links. The location/storage hub causes unwanted warmth; this does not justify deletion or a negative blacklist."
+  },
+  "household_controls": {
+    "existing_proxy_inventory": 71,
+    "findings": [
+      "Făraș/Mop/Aspirator use Podea; Burete de vase/Detergent use A spăla, except exact wins.",
+      "Actual nearby household feedback may be better than native hop evidence alone implies.",
+      "Scaun to Taburet remains rank2189 and culturally indirect; keep target held."
+    ]
+  },
+  "web_sources": [
+    {
+      "url": "https://pofta-buna.com/tort-diplomat-reteta-clasica/",
+      "type": "original recipe author",
+      "claim": "Diplomat has whipped-cream mousse, fruit, sponge or ladyfingers."
+    },
+    {
+      "url": "https://www.barbatlacratita.ro/2012/12/tort-diplomat-reteta.html",
+      "type": "independent original recipe author",
+      "claim": "Whipped liquid cream is incorporated in the cooled filling; outer cream decoration is optional."
+    },
+    {
+      "url": "https://pofta-buna.com/cremes-prajitura-foietaj-frisca-crema-vanilie/",
+      "type": "original recipe author",
+      "claim": "A Cremșnit variant adds whipped cream."
+    },
+    {
+      "url": "https://www.oetker.ro/retete/r/crema-de-vanilie-pentru-cremsnit-crema-fiarta",
+      "type": "maker recipe",
+      "claim": "Vanilla Cremșnit filling with eggs, milk, flour, butter, sugar; no whipped cream listed."
+    },
+    {
+      "url": "https://pofta-buna.com/piscoturi-de-sampanie-savoiardi/",
+      "type": "original recipe author",
+      "claim": "Savoiardi is a baked egg/flour/sugar biscuit, with no whipped cream required."
+    }
+  ],
+  "limits": [
+    "15 fresh private-BFF first guesses, not human playtesting or the full historical impact matrix.",
+    "No runtime, graph, tests or approved-round edits made by this reviewer.",
+    "Savori Urbane returned403; its search snippets were not relied on for acceptance."
+  ]
+}

@@ -1,0 +1,4 @@
+Initial independent review script, 2026-09-08: whole-module AST checks, baseline source checks and all11 live BFF assertions completed. Final hash consistency assertion failed while tests/test_v89_feedback.py was also included and the parent was concurrently editing test coverage. No completed receipt is claimed for that run. The script then scoped the consistency binding to the six reviewed runtime/data files; current tests are reviewed separately. The initial11 successful requests are diagnostic history, not additive final independent coverage.
+Exact failing assertion:
+assert {file:hashlib.sha256((root/file).read_bytes()).hexdigest() for file in files}==hashes
+AssertionError

@@ -1,0 +1,23 @@
+"""Measure final V89 expectation changes for explicit review before updating literals."""
+import hashlib
+import json
+from pathlib import Path
+
+from cat_de_roman_esti.wordgames.service import get_service
+
+root = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v89-feedback-and-conexiuni-recovery')
+files = ('kg_sample.json', 'games_pack.json', 'board_rankings_v37.json', 'derived_catalog_v38.json')
+artifacts = {filename: json.loads((root / 'cat_de_roman_esti/fixtures' / filename).read_bytes())
+             for filename in files}
+sha = lambda blob: hashlib.sha256(blob).hexdigest()
+pack, ranking = artifacts['games_pack.json'], artifacts['board_rankings_v37.json']
+svc = get_service()
+contexto = {row['id']: sorted(svc.distances_to(row['target']).items()) for row in pack['contexto']}
+measurements = {
+    'artifact_sha256': {file: sha((root / 'cat_de_roman_esti/fixtures' / file).read_bytes()) for file in files},
+    'ranking_rows': sha((json.dumps(ranking['boards'], ensure_ascii=False, indent=1) + '\n').encode()),
+    'contexto_profile': sha(json.dumps(contexto, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()),
+    'pack_meta': pack['meta'],
+    'ranking_counts': ranking['meta']['counts'],
+}
+print(json.dumps(measurements, ensure_ascii=False, indent=2))

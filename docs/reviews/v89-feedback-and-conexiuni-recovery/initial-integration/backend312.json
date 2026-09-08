@@ -1,0 +1,36 @@
+{
+  "command": [
+    "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-o",
+    "addopts="
+  ],
+  "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v89-feedback-and-conexiuni-recovery",
+  "exit_code": 1,
+  "elapsed_seconds": 916.67,
+  "log_sha256": "1783aecde9e8f877e5cd6a484bf77f9a600cd0bce8a993ef802a1da914b2ec2c",
+  "tail": [
+    "        for node_id in COMMON_FEEDBACK_PROXIES:",
+    ">           assert targets.isdisjoint(prior_svc.distances_from(node_id))",
+    "E           AssertionError: assert False",
+    "E            +  where False = <built-in method isdisjoint of set object at 0x7dcf1d31b760>({'n_v31_cleaning_dishes_burete_vase': 0, 'n_v31_cleaning_supply_detergent': 1, 'n_v31_cleaning_water_galeata': 1, 'n_v31_cleaning_floor_mop': 2, ...})",
+    "E            +    where <built-in method isdisjoint of set object at 0x7dcf1d31b760> = {'n_academia_romana', 'n_aerodinamica', 'n_alexandru_ioan_cuza', 'n_alfabetul_chirilic', 'n_ansamblul_targu_jiu', 'n_aromana', ...}.isdisjoint",
+    "E            +    and   {'n_v31_cleaning_dishes_burete_vase': 0, 'n_v31_cleaning_supply_detergent': 1, 'n_v31_cleaning_water_galeata': 1, 'n_v31_cleaning_floor_mop': 2, ...} = distances_from('n_v31_cleaning_dishes_burete_vase')",
+    "E            +      where distances_from = WordGameService(graph=Graph(nodes={'n_alba_iulia': Node(id='n_alba_iulia', node_type='place', label_ro='Alba Iulia', c...via_tabla_scolara', 'n_vdr_apometre', 'n_vdr_nu_iesi_capul_ud', 'n_v23via_nu_te_supara_frate', 'n_v23via_elasticul'})}).distances_from",
+    "",
+    "tests/test_v44_contexto_common_words.py:207: AssertionError",
+    "=========================== short test summary info ============================",
+    "FAILED tests/test_v44_contexto_common_words.py::test_every_proxy_anchor_reaches_every_selectable_unique_target",
+    "1 failed, 1530 passed in 913.36s (0:15:13)"
+  ],
+  "archive": {
+    "path": "backend312.log.gz",
+    "gzip_mtime": 0,
+    "decoded_sha256": "1783aecde9e8f877e5cd6a484bf77f9a600cd0bce8a993ef802a1da914b2ec2c",
+    "archive_sha256": "2f44b980ed96201e74ae8f7a0d2a7901621ca0d070fb5ff3a28eca4ee811c014",
+    "decoded_bytes": 5381,
+    "archive_bytes": 1455
+  }
+}

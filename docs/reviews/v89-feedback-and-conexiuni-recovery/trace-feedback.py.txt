@@ -1,0 +1,70 @@
+import dataclasses
+import hashlib
+import heapq
+import json
+import math
+import os
+from collections import deque
+from pathlib import Path
+
+os.environ.update(DJANGO_SETTINGS_MODULE='cat_de_roman_esti.web.settings', CAT_ACCOUNTS_ENABLED='0', CAT_DEBUG='0', ROEDU_API_URL='', ROEDU_API_KEY='')
+import django
+django.setup()
+from django.test import Client
+from cat_de_roman_esti.wordgames import contexto as C
+from cat_de_roman_esti.wordgames.service import get_service
+
+root=Path.cwd()
+svc=get_service()
+
+def path(src, dst, weighted=False):
+    frontier=[(0,src)]
+    distances={src:0}
+    prev={}
+    while frontier:
+        score,node=heapq.heappop(frontier)
+        if score != distances[node]:
+            continue
+        if node==dst:
+            steps=[]
+            while node!=src:
+                before=prev[node]
+                edge=svc.link(before,node)
+                steps.append({'from':svc.label(before),'to':svc.label(node),'forward_cost':svc._fwd_cost[before][node],'edge':dataclasses.asdict(edge)})
+                node=before
+            return {'cost':score,'steps':steps[::-1]}
+        for nxt in sorted(svc.neighbor_ids(node)):
+            cost=svc._fwd_cost[node][nxt] if weighted else 1
+            new=score+cost
+            if new < distances.get(nxt, math.inf):
+                distances[nxt]=new
+                prev[nxt]=node
+                heapq.heappush(frontier,(new,nxt))
+
+rows=[]
+for name,target_label in [(n,'Frișcă') for n in ['Tort Diplomat','Zacuscă','Cremșnit','Pișcot','Prăjitură','Smântână','Smântână dulce pentru frișcă','Savarină','Zahăr']]+[(n,t) for n,t in [('Scaun','Taburet'),('Mătură','Aspirator'),('Aspirator','Mătură'),('Făraș','Mătură'),('Mop','Aspirator'),('Burete de vase','Detergent')]]:
+    nid=svc.resolve(name);target=svc.resolve(target_label)
+    assert nid and target, (name,target_label)
+    session=C._build_session(target,'usor',None)
+    anchor=C._feedback_anchor_id(svc,nid,target)
+    score=C._score_feedback(svc,session,nid)
+    gid=C.store.create(session)
+    try:
+        response=Client().post(f'/api/wordgames/contexto/games/{gid}/guess',{'text':name},content_type='application/json')
+        assert response.status_code==200,response.content
+        body=response.json()
+        assert not body['won']
+    finally:
+        C.store.delete(gid)
+    rows.append({'input':name,'input_id':nid,'target':target_label,'target_id':target,'anchor':svc.label(anchor),'anchor_id':anchor,'score':dataclasses.asdict(score),'actual_bff_guess':body['guess'],'actual_bff_won':body['won'],'native_shortest':path(nid,target),'native_weighted':path(nid,target,True),'effective_shortest':path(anchor,target),'effective_weighted':path(anchor,target,True)})
+
+files=['cat_de_roman_esti/fixtures/kg_sample.json','cat_de_roman_esti/fixtures/games_pack.json','cat_de_roman_esti/wordgames/contexto.py','cat_de_roman_esti/wordgames/contexto_feedback.py','cat_de_roman_esti/wordgames/contexto_projection.py','cat_de_roman_esti/wordgames/service.py']
+result={'phase':'Independent V89 baseline feedback paths; native runtime unchanged','source_sha256':{f:hashlib.sha256((root/f).read_bytes()).hexdigest() for f in files},'method':'Actual private-BFF first guesses plus independently reconstructed forward shortest and minimum-weight paths over service non-distractor adjacency. Tied paths choose lexicographic node IDs. Weighted paths are globally minimum weight, not constrained to the minimum BFS hop count, matching the runtime. All private sessions removed.','rows':rows}
+out=root/'docs/reviews/v89-feedback-and-conexiuni-recovery'
+(out/'feedback-path-probes.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+(out/'trace-feedback.py.txt').write_bytes(Path(__file__).read_bytes())
+for row in rows:
+    print(row['input'],'→',row['target'],'anchor',row['anchor'],'rank',row['score']['rank'],row['actual_bff_guess']['temperature'])
+    for kind in ['native_shortest','native_weighted']:
+        print(' ',kind,row[kind]['cost'], ' → '.join([row[kind]['steps'][0]['from']]+[s['to'] for s in row[kind]['steps']]))
+print('hashes',json.dumps(result['source_sha256']))

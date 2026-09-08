@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "b614bfe735a27b9703025420daf603118f6a7f74",
+  "candidate_stage": "Final V89 runtime and one-round promotion before full integration",
+  "inputs_sha256": "5a14500782e0057a98f6bcf466878df62207344234e2e0d9d346e47cc094ae3d",
+  "old_contexto_records": 239,
+  "words_per_record": 30,
+  "observations_per_capture": 7170,
+  "reused_observations": 0,
+  "captures": {
+    "baseline.json": {
+      "sources": {
+        "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+        "cat_de_roman_esti/fixtures/games_pack.json": "4c7030bd86e966162f4ac51ef00cf3bb649ff7a9d59c8c34e180cb7ff53e1636",
+        "cat_de_roman_esti/fixtures/board_rankings_v37.json": "b19a53983a1b4555c700f717033bb61b66aea9ea2dce643a7df0cf1a31e2c764",
+        "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "1c1613cd4f1e59c2b8d68ded9b071b1f812198f50aca528a3785fef34fad90b8",
+        "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+        "cat_de_roman_esti/wordgames/contexto_projection.py": "ba46d827dbe6e001a10bdd801d396abd67dfb4245c48b48b16024bf468c72d65",
+        "cat_de_roman_esti/wordgames/alchimie.py": "370a4b847de19f4256ada16d7da035a3be9da15ac90d4f3e0a6e70c5e8131712",
+        "cat_de_roman_esti/wordgames/lant.py": "cf22b4ff5dbb2d99f80ccdbb3e4c886751d0030c5cf6402dd993f1be2334f78b",
+        "cat_de_roman_esti/wordgames/contexto_feedback.py": "961aece7245e2772b8d36f9c3181c1150c8f6a22c4c72a3000fd6616ac9cacb8"
+      },
+      "elapsed_seconds": 58.834,
+      "api_requests": 7170
+    },
+    "candidate.json": {
+      "sources": {
+        "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+        "cat_de_roman_esti/fixtures/games_pack.json": "c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04",
+        "cat_de_roman_esti/fixtures/board_rankings_v37.json": "ea207d65a1846d2f9bb2945ca9320a8e5e7bdc5e9fe8c31113aaf4f749fdc3d6",
+        "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "4bd3cd515d21627fe42d07149bdf78951164ebfaa30df52fd1259ce26b8470d9",
+        "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+        "cat_de_roman_esti/wordgames/contexto_projection.py": "753c22890e14b8b049f62d249ee92a06b6631fb4589db97dbebd003eaf18b5fd",
+        "cat_de_roman_esti/wordgames/alchimie.py": "370a4b847de19f4256ada16d7da035a3be9da15ac90d4f3e0a6e70c5e8131712",
+        "cat_de_roman_esti/wordgames/lant.py": "cf22b4ff5dbb2d99f80ccdbb3e4c886751d0030c5cf6402dd993f1be2334f78b",
+        "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363"
+      },
+      "elapsed_seconds": 59.605,
+      "api_requests": 7170
+    }
+  },
+  "archives": {
+    "baseline.json": {
+      "path": "raw/baseline.json.gz",
+      "encoding": "gzip",
+      "gzip_mtime": 0,
+      "decoded_sha256": "b2bbc0eac9a95607b605f874edd15eb7fe0c4c964608130c460787eb00835ef6",
+      "archive_sha256": "d7b734ebba867255a1f2d768fbbfc3fc1c74caa1db29ec7627297b89035fdce7",
+      "decoded_bytes": 2030210,
+      "archive_bytes": 138677
+    },
+    "candidate.json": {
+      "path": "raw/candidate.json.gz",
+      "encoding": "gzip",
+      "gzip_mtime": 0,
+      "decoded_sha256": "d08edaf5bfad33a8698f109eb439b1fe5245c5d0c684261c52126e6f3ff83060",
+      "archive_sha256": "b7b91cba830c889b8f7035e51410b20d63164b8e3800063cb94d043aaccd9106",
+      "decoded_bytes": 2030405,
+      "archive_bytes": 138754
+    },
+    "baseline-pack.json": {
+      "path": "raw/baseline-pack.json.gz",
+      "encoding": "gzip",
+      "gzip_mtime": 0,
+      "decoded_sha256": "4c7030bd86e966162f4ac51ef00cf3bb649ff7a9d59c8c34e180cb7ff53e1636",
+      "archive_sha256": "74535b86f9ead40a2476425bbacd2f06b0a070d52d959de02f571e600084fb6e",
+      "decoded_bytes": 385973,
+      "archive_bytes": 58164
+    },
+    "baseline.log": {
+      "path": "raw/baseline.log.gz",
+      "encoding": "gzip",
+      "gzip_mtime": 0,
+      "decoded_sha256": "55c403455fd6760b169e6eae9f98eebd48f86aa4ee0ba3f46e06a3c3e2c6d601",
+      "archive_sha256": "25b9f1f2704a53efd0f29bb903b0382e8d3d1d779487e58228a43c64d284a9af",
+      "decoded_bytes": 496,
+      "archive_bytes": 206
+    },
+    "candidate.log": {
+      "path": "raw/candidate.log.gz",
+      "encoding": "gzip",
+      "gzip_mtime": 0,
+      "decoded_sha256": "55c403455fd6760b169e6eae9f98eebd48f86aa4ee0ba3f46e06a3c3e2c6d601",
+      "archive_sha256": "25b9f1f2704a53efd0f29bb903b0382e8d3d1d779487e58228a43c64d284a9af",
+      "decoded_bytes": 496,
+      "archive_bytes": 206
+    }
+  }
+}

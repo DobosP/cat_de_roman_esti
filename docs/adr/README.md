@@ -44,3 +44,5 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially
 superseded by ADR-0131 for the six cleaning-node topology boundary; their other scope remains.
+| 0132 | [Recover uncertain Conexiuni actions](0132-reconcile-uncertain-conexiuni-actions.md) | accepted |
+| 0133 | [Closed dust and whipped-cream feedback](0133-closed-dust-and-whipped-cream-feedback.md) | accepted |

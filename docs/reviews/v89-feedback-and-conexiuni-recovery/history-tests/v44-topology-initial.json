@@ -1,0 +1,20 @@
+{
+  "stage": "read-only focused reproduction while first full backend remained active; no source edits",
+  "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_v44_contexto_common_words.py::test_every_proxy_anchor_reaches_every_selectable_unique_target -q -o addopts=",
+  "exit_code": 1,
+  "result": "1 failed in 2.61s",
+  "failure": "The V88 historical closed-sink assertion incorrectly includes the V89-selected Mop target; Burete de vase already reached Mop inside its old cleaning component. All current proxy-anchor reachability assertions passed before this historical assertion.",
+  "sources_sha256": {
+    "tests/test_v44_contexto_common_words.py": "959028ac3a5d3c956e8b57284abdff626b2e765aa7feae55c9e51fc7d8a6c395",
+    "tests/content_history.py": "260bcff2abea53347733f71386e83dd28ead084e3f36fb157f7c149042a88d31",
+    "tests/current_content.py": "8ac236eaa02afb98d74df52f529fcd429fdc540aab6797d5499fdc83032622cb",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "ea207d65a1846d2f9bb2945ca9320a8e5e7bdc5e9fe8c31113aaf4f749fdc3d6"
+  },
+  "log": {
+    "archive": "v44-topology-initial.log.gz",
+    "sha256": "e06f8d0a2dd79b16120a82dfe890f3c6192eb7c704c39965a1eb8dd57c195e70",
+    "archive_sha256": "844675a180be19b2c460e516e752ed7de5445d50637e0c8c7b9c0973469662b8"
+  }
+}

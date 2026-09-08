@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from collections import Counter
 from copy import deepcopy
@@ -31,6 +32,10 @@ _V87_RECEIPT = Path(__file__).resolve().parents[1] / (
 )
 _V88_RECEIPT = Path(__file__).resolve().parents[1] / (
     "docs/reviews/v88-cross-game-quality/artifact-delta.json"
+)
+
+_V89_RECEIPT = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v89-feedback-and-conexiuni-recovery/artifact-delta.json"
 )
 
 
@@ -70,24 +75,60 @@ def _reverse_reviewed_delta(current: dict, filename: str, receipt_path: Path) ->
     return restored
 
 
+def _before_v89(current: dict, filename: str) -> dict:
+    """Bind every current byte before peeling the V89 pack-only content delta."""
+    receipt = json.loads(_V89_RECEIPT.read_bytes())["files"][filename]
+    indent = 2 if filename == "kg_sample.json" else 1
+
+    def digest(value):
+        blob = (json.dumps(value, ensure_ascii=False, indent=indent) + "\n").encode()
+        return hashlib.sha256(blob).hexdigest()
+
+    assert digest(current) == receipt["after_sha256"]
+    restored = _reverse_reviewed_delta(current, filename, _V89_RECEIPT)
+    assert digest(restored) == receipt["baseline_sha256"]
+    return restored
+
+
+def before_v89_fixture(current: dict) -> dict:
+    return _before_v89(current, "kg_sample.json")
+
+
+def before_v89_pack(current: dict) -> dict:
+    return _before_v89(current, "games_pack.json")
+
+
+def before_v89_rankings(current: dict) -> dict:
+    return _before_v89(current, "board_rankings_v37.json")
+
+
+def before_v89_derived(current: dict) -> dict:
+    return _before_v89(current, "derived_catalog_v38.json")
+
+
+def _before_v88(current: dict, filename: str) -> dict:
+    previous = _before_v89(current, filename)
+    return _reverse_reviewed_delta(previous, filename, _V88_RECEIPT)
+
+
 def before_v88_fixture(current: dict) -> dict:
-    return _reverse_reviewed_delta(current, "kg_sample.json", _V88_RECEIPT)
+    return _before_v88(current, "kg_sample.json")
 
 
 def before_v88_pack(current: dict) -> dict:
-    return _reverse_reviewed_delta(current, "games_pack.json", _V88_RECEIPT)
+    return _before_v88(current, "games_pack.json")
 
 
 def before_v88_rankings(current: dict) -> dict:
-    return _reverse_reviewed_delta(current, "board_rankings_v37.json", _V88_RECEIPT)
+    return _before_v88(current, "board_rankings_v37.json")
 
 
 def before_v88_derived(current: dict) -> dict:
-    return _reverse_reviewed_delta(current, "derived_catalog_v38.json", _V88_RECEIPT)
+    return _before_v88(current, "derived_catalog_v38.json")
 
 
 def _before_v87(current: dict, filename: str) -> dict:
-    previous = _reverse_reviewed_delta(current, filename, _V88_RECEIPT)
+    previous = _before_v88(current, filename)
     return _reverse_reviewed_delta(previous, filename, _V87_RECEIPT)
 
 
@@ -253,8 +294,16 @@ def before_v88_projection_rows(current: list[tuple]) -> list[tuple]:
     return restored
 
 
+def before_v89_feedback_pairs(current: frozenset[tuple[str, str]]) -> frozenset[tuple[str, str]]:
+    """Peel only the reviewed Diplomat-to-whipped-cream native cue."""
+    added = frozenset({("n_v87_food_tort_diplomat", "n_v86_food_frisca")})
+    assert added <= current
+    return current - added
+
+
 def before_v88_feedback_pairs(current: frozenset[tuple[str, str]]) -> frozenset[tuple[str, str]]:
     """Peel only V88's independently reviewed native bread-family cue."""
+    current = before_v89_feedback_pairs(current)
     added = frozenset({("n_v87_food_briosa", "n_v4gas_paine")})
     assert added <= current
     return current - added
@@ -272,9 +321,23 @@ def before_v87_feedback_pairs(current: frozenset[tuple[str, str]]) -> frozenset[
     return current - added
 
 
+def before_v89_projection_neighborhoods(current: dict) -> dict:
+    """Restore the exact V88 policies after validating the three closed dust scopes."""
+    restored = dict(current)
+    policy = restored.pop("praf")
+    assert (policy.anchor_id, policy.min_strength, policy.include_direct_neighbors,
+            policy.exact_target_ids) == (
+        "n_v24_nature_world_pamant", 0.60, False, frozenset({
+            "n_v31_cleaning_floor_faras", "n_v31_cleaning_floor_mop",
+            "n_v31_cleaning_floor_aspirator",
+        }),
+    )
+    return restored
+
+
 def before_v87_projection_neighborhoods(current: dict) -> dict:
     """Retain exact older policies while checking the two closed V87 cue policies."""
-    restored = dict(current)
+    restored = before_v89_projection_neighborhoods(current)
     for key, anchor, target in (
         ("tort", "n_v4gas_prajitura", "n_v87_food_tort_diplomat"),
         ("ciocolata calda", "n_v24_food_snack_ceai", "n_v85_food_ciocolata"),
