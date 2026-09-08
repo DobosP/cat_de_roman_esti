@@ -1,12 +1,13 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-08 — V86 landed locally; V87 full integration GREEN; ready for local landing. Production last checked 2026-08-27.
+Last verified: 2026-09-08 — V87 landed locally; V88 started; recurring local version loop active. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-  V86 is merged into local main at `7d8b177`, with landing record `daae025`.
-  V87 is on `feat/v87-snack-and-action-quality`; no push or deployment.
+  V87 is merged into local main at `fa8cffd`, following V86 and its record `daae025`.
+  V88 starts on `feat/v88-cross-game-quality`; no push or deployment.
+  Owner-authorized recurring local iteration continues until stopped (ADR-0127).
 - V87 adds nine snack/preparation concepts, 31 accepted forms and 50 directed links;
   no removals. Chec, Pandișpan, Cremșnit, Tort Diplomat, Pișcot, Brioșă, Praf de copt,
   Bicarbonat de sodiu alimentar and Gelatină alimentară gain specific recipe/type cues.
@@ -88,7 +89,9 @@ Mobile content: `sha256:7473bfe7d42189a28cf933032705b288ff2933fd8eeaf30c65a2dba3
 
 ## Remaining gates
 
-- V87 is complete on its task branch and ready for local landing; it is not merged.
+- V88 starts a cross-game batch: investigate bread-family feedback, broaden playable
+  content beyond Contexto and remove concrete content/reliability obstacles. Its new
+  implementation and full integration are not yet complete.
 - Pandișpan/Chec overlap and Brioșă's brioche/muffin meanings hold the two hidden targets.
   Native Brioșă→Pâine falls from rank 2/hot to 424/cold after its broad projection retires;
   former false Zacuscă affinities cool. Generic pastry, optional butter/dairy, reciprocal
@@ -101,4 +104,4 @@ Mobile content: `sha256:7473bfe7d42189a28cf933032705b288ff2933fd8eeaf30c65a2dba3
 ## Doc map
 
 - `README.md` / `AGENTS.md`: orientation; `docs/agent-map.md` / `docs/agent-testing.md`: routes/gates.
-- `docs/adr/` (newest 0126), `docs/reviews/`, WORKLOG: decisions, evidence and history.
+- `docs/adr/` (newest 0127), `docs/reviews/`, WORKLOG: decisions, evidence and history.

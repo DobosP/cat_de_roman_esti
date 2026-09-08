@@ -559,3 +559,21 @@ historical/owned-action checks. Both full backend matrices reran after one stale
 
 Evidence: `docs/reviews/v87-snack-and-action-quality/README.md`; current truth is STATUS.
 Human/player/device acceptance and production rollout remain pending.
+
+## V87 landing and V88 loop start (2026-09-08)
+
+Valid until: the next version landing — then treat as history.
+
+Verified V87 `fa8cffd4bc100eb867c992d346b4b93551a76bdd` against all 167 recorded
+file/deletion bindings and 16 actual green gate receipts, then fast-forwarded local
+main. Its final tests remain 1,409 backend per Python runtime, 53 accounts each,
+193 native frontend and 168 browser checks. No runtime/content edits or test reruns
+were required for this landing. A stale V87 summary-table phrase was corrected to
+reflect its already recorded full integration result.
+
+The owner authorized recurring local versions until stopped. ADR-0127 records the
+work/verify/review/land/start-next protocol and unchanged publication boundaries.
+The native recurring task was created and confirmed active. V88 begins on
+`feat/v88-cross-game-quality`, initially investigating breadth beyond Contexto,
+bread-family feedback, and concrete content-extension/reliability obstacles.
+Its first implementation and full integration are pending. No push or deployment.

@@ -35,3 +35,4 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0124 | [Persistent game creation failures](0124-persist-new-game-creation-failures.md) | accepted |
 | 0125 | [Reviewed snack concepts and defining biscuit cues](0125-reviewed-snack-concepts-and-biscuit-cues.md) | accepted |
 | 0126 | [Authoritative Contexto action recovery](0126-reconcile-uncertain-contexto-actions.md) | accepted |
+| 0127 | [Recurring verified local version loop](0127-recurring-local-version-loop.md) | accepted |

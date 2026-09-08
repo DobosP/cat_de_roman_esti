@@ -2,10 +2,11 @@
 
 Valid until: the next verified quality wave — then refresh this living checklist.
 
-Target: public anonymous beta for Romanian players. **V86 is merged locally at `7d8b177`,
-with its record at `daae025`. V87 adds nine snack/preparation concepts, 50 directed links,
-six playable Contexto targets and recovery for uncertain Contexto actions. It is on its
-task branch with full integration GREEN, ready for local landing; it has not been merged or deployed.**
+Target: public anonymous beta for Romanian players. **V87 is merged locally at `fa8cffd`,
+with nine snack/preparation concepts, 50 directed links, six playable Contexto targets
+and recovery for uncertain Contexto actions. V88 starts the next cross-game batch.**
+The recurring local iteration follows [ADR-0127](adr/0127-recurring-local-version-loop.md)
+until the owner stops it. No push or deployment occurred.
 Public rollout still requires the external checks below.
 Current facts and exact pins: [STATUS](STATUS.md).
 
@@ -121,7 +122,7 @@ retains baseline defects and the initial native source-shape failures separately
 | V84 | Missing everyday concepts, false generic-food feedback and invisible combination explanations limited realistic play | Fifteen concepts, 57 links, one false edge removed, 42 forms, three Contexto rounds and one Lanț route; in-round help across all six games and earned Alchimie explanations. All old playable recipe books/routes/frozen boards preserved; full integration GREEN |
 | V85 | Approximate ingredient guesses and misleading labels weakened otherwise familiar rounds | Eight concepts, 25 forms, 40 new links plus one relabelled relation; one served dairy clue corrected; four Contexto targets and one Lanț route. Full integration GREEN |
 | V86 | Weak preparation/cooling clues, hidden short routes and disappearing creation errors | Nine concepts, 30 forms, 41 links and six reviewed rounds; two exact feedback corrections; 59 old approved Lanț menus improve; all-six-game failure/replay recovery preserves state and action visibility. Full integration GREEN |
-| V87 | Weak snack-defining cues and lost paid/terminal action responses | Nine concepts, 31 forms, 50 directed links, six promoted Contexto targets and five bounded feedback repairs; owned authoritative recovery without mutation replay. Focused 193 native/20 browser checks pass; full integration pending |
+| V87 | Weak snack-defining cues and lost paid/terminal action responses | Nine concepts, 31 forms, 50 directed links, six promoted Contexto targets and five bounded feedback repairs; owned authoritative recovery without mutation replay. Full 1,409 backend tests per runtime, 53 accounts each, 193 native/168 browser checks pass |
 
 V84 focused checks pass: **62 new graph/game checks**, **183 historical/current checks**,
 independent implementation review and 3,757 before/after observations per checkout. All
