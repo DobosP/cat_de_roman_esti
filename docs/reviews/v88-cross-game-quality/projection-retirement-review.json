@@ -1,0 +1,48 @@
+{
+  "schema": "v88-projection-retirement-independent-review-v1",
+  "reviewer": "v88_independent_review",
+  "decision": "accept",
+  "source_path": "cat_de_roman_esti/wordgames/contexto_projection.py",
+  "source_sha256": "ba46d827dbe6e001a10bdd801d396abd67dfb4245c48b48b16024bf468c72d65",
+  "baseline_source_sha256": "8fc5829b07ae2bbcfcc4701c5539d35b09d3df5f2ccc25b19a2478bfcf938802",
+  "baseline_terms": 467,
+  "current_terms": 465,
+  "removed_terms": {
+    "matura": {
+      "surface": "mătură",
+      "anchor_id": "n_v31_cleaning_floor_aspirator",
+      "domain": "curățenie",
+      "rank_penalty": 1,
+      "mapping_kind": "explicit"
+    },
+    "taburet": {
+      "surface": "taburet",
+      "anchor_id": "n_v4soc_casa",
+      "domain": "mobilier și casă",
+      "rank_penalty": 1,
+      "mapping_kind": "domain_fallback"
+    }
+  },
+  "retained_terms_exact": true,
+  "functions_and_classes_ast_exact": true,
+  "audit_only_changes": [
+    {
+      "before": [
+        "curățenie",
+        "mătură",
+        "n_v31_cleaning_floor_aspirator"
+      ],
+      "after": [
+        "curățenie",
+        "pămătuf",
+        "n_v31_cleaning_floor_aspirator"
+      ]
+    }
+  ],
+  "reason": "Native Mătură and Taburet now own their inputs, so their approximation entries are retired through the existing exclusion set. All 465 retained term records remain exact; no new projection term, rank penalty, mapping or scoring code is introduced. The cleaning audit example changes to retained Pămătuf with the same Aspirator anchor; it is metadata, not a runtime remapping.",
+  "blockers": [],
+  "limits": [
+    "This source diff review does not assert that native graph feedback equals old approximate feedback; final version impact capture measures those changes.",
+    "The separate Brioșă exact pair and full session/runtime integration are outside this file review."
+  ]
+}

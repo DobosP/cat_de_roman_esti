@@ -54,6 +54,8 @@ export interface LantState {
   moves: number;
   optimal: number;
   won: boolean;
+  /** Already requested help for this position; reading never escalates it. */
+  earned_hint?: HintResult;
   difficulty: Difficulty;
   /** Four to six safe local hops when available; never the full route corridor. */
   choices: LantChoice[];

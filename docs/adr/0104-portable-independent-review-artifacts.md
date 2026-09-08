@@ -1,6 +1,6 @@
 # ADR-0104: Build portable artifacts from independent review judgments
 
-- Status: accepted
+- Status: partially superseded by ADR-0129 (Alchimie exclusion only)
 - Date: 2026-09-06
 
 ## Context

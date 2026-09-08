@@ -1,6 +1,7 @@
 # ADR-0068: Repair Contexto common-word feedback and require unique targets
 
-- Status: superseded-by ADR-0074
+- Status: partially superseded by ADR-0074 (projection inventory) and ADR-0131
+  (six cleaning-node topology premise); other policy retained
 - Date: 2026-07-30
 
 ## Context

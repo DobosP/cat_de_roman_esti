@@ -1,0 +1,83 @@
+{
+  "schema": "v88-supplemental-independent-review-v1",
+  "reviewer": "v88_independent_review",
+  "reviewed_at": "2026-09-08",
+  "decision": "accept_local_iteration_with_explicit_limits",
+  "blocking_findings": [],
+  "bindings": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "4c7030bd86e966162f4ac51ef00cf3bb649ff7a9d59c8c34e180cb7ff53e1636",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "b19a53983a1b4555c700f717033bb61b66aea9ea2dce643a7df0cf1a31e2c764",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "1c1613cd4f1e59c2b8d68ded9b071b1f812198f50aca528a3785fef34fad90b8",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "ba46d827dbe6e001a10bdd801d396abd67dfb4245c48b48b16024bf468c72d65",
+    "cat_de_roman_esti/wordgames/alchimie.py": "370a4b847de19f4256ada16d7da035a3be9da15ac90d4f3e0a6e70c5e8131712",
+    "cat_de_roman_esti/wordgames/lant.py": "cf22b4ff5dbb2d99f80ccdbb3e4c886751d0030c5cf6402dd993f1be2334f78b",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "961aece7245e2772b8d36f9c3181c1150c8f6a22c4c72a3000fd6616ac9cacb8",
+    "docs/adr/0131-everyday-tools-and-cream-sense-correction.md": "c32bd2cf7fb5f92db7cf9d3af669a931b7959f4f391fff743250aeedb8e96cf4",
+    "docs/adr/0039-hygiene-anatomy-cleaning-word-meshes.md": "ccd58ff40bd2a86cd542929d45863f9bc1c0e6cab144b19ed473b012e030cc9f",
+    "docs/adr/0068-contexto-common-word-feedback-and-unique-targets.md": "b3d74311de4c2093441c065eb620b3ab4a1fa754a689b88a4f9b38bd7e2eb2c7",
+    "tests/test_v31_basic_words.py": "dcd1d2f0c0cf65b30ab636d762ad2d6dab4ddd2d4627a5facf93280afcc4399a",
+    "tests/test_v44_contexto_common_words.py": "959028ac3a5d3c956e8b57284abdff626b2e765aa7feae55c9e51fc7d8a6c395",
+    "tests/test_alchimie_sparse_recipes.py": "2f5f75d41119d509a579f0f6b7def008d29ad0aaf6d9aebbbb8545a9cbd7b250",
+    "tests/content_history.py": "03e495ccfde06efe865eec3af11468a6b642907271fb72fde93a12b0a83ce82b",
+    "tests/current_content.py": "47603509741186cfc156ed7dc98d3bab588066dbed5e7e264ed092051eeeafa5",
+    "tests/test_v88_everyday_graph.py": "b6c3dd3284a7d9b92b0cea194acf2d38820d79fbbffda5e3cec7262cbb763a71",
+    "docs/reviews/v88-cross-game-quality/artifact-delta.json": "b652d5db26d43e4e42005522bf2c318a9c91a416ec4613a04641fcb11a6653e5",
+    "docs/reviews/v88-cross-game-quality/impact/IMPACT_REVIEW.md": "7db1520c4592373422a2f53f4fc9594bc9987acf64a612f99d9fc101b0b1564c",
+    "docs/reviews/v88-cross-game-quality/impact/capture-receipt.json": "4e4538d29b208aa18bb078c8e08bfa26fd018a48ee61d4b2e4aad5fa7915913c",
+    "docs/reviews/v88-cross-game-quality/impact/summary.json": "2d79a0035645c1e5574bdb0394f74c1c0e0ed7c74651bee522d04b3b8b893716",
+    "docs/reviews/v88-cross-game-quality/impact/core-associations.json": "d50270ffda7e364b4ee36fe636bd480b6a228c592a8038adb1aa9ea8c83026d1",
+    "docs/reviews/v88-cross-game-quality/impact/cooler-old-target-cues.json": "e83432e99607047f95d100af410fc53a6f8cbb5e82a3d634c2e09b5c6f634ab4",
+    "docs/reviews/v88-cross-game-quality/impact/warmer-old-target-cues.json": "c200ce7283ba250d3dbadd3cb79f35f995b7be79c5d467837d952b6f3a529461",
+    "docs/reviews/v88-cross-game-quality/impact/lant-guidance.json": "45b48ad373a0834c6cc5db42481177fa361b050658178a9b7558f2e23323d801"
+  },
+  "checks": [
+    {
+      "area": "bounded_cleaning_topology",
+      "decision": "accept_explicit_change",
+      "reason": "Făraș→Mătură collects_from and Mătură→Podea cleans are true directed uses. They invalidate the earlier sink premise for six V31 cleaning nodes, which ADR0131 now partially supersedes explicitly. This is a raw-reachability decision, not an assertion that all old graph distances or menus remain equal."
+    },
+    {
+      "area": "test_approach",
+      "decision": "accept_exact_assertions",
+      "reason": "Inspected frozen V31/V44 edits: reconstruct the pre-V88 fixture, assert previous isolation, name exactly six current escaping cleaning nodes, preserve the other 65 legacy proxy-source sinks, assert both bridge relations, and prove deleting only the Făraș bridge from an in-memory graph restores isolation. This tests cause and scope instead of skipping the old failure. V88 inverse tests pin reconstructed original bytes and reject changed metadata."
+    },
+    {
+      "area": "legacy_proxies",
+      "decision": "retained_exact",
+      "reason": "Independently loaded baseline/current feedback modules: all 71 COMMON_FEEDBACK_PROXIES equal, canonical SHA256 def769935fe81552daa94f711ee2b5a3b6e777269fcc3a8c98e30c86db3c9e84. V44 keeps anchor reachability, identity/nonwinning/penalty checks and the new exact hash guard."
+    },
+    {
+      "area": "historical_alchimie_expectations",
+      "decision": "accept_stock_extension",
+      "reason": "Inspected sparse-recipe test changes: exact historical 79-row digest and median 0.66 remain checked on reconstructed V87; current 80 rows equal history plus Cremșnit, median 0.67 and five added recipes. Performance and per-projection route/result/concept bounds remain. No assertion is removed merely because the median changed."
+    },
+    {
+      "area": "impact_evidence",
+      "decision": "verified_current_receipt_bindings",
+      "reason": "Independently checked baseline-reviewed/final lossless archive and decoded hashes, all nine final captured artifact/runtime source hashes, and every derived report hash. No broad first-guess capture or heavy suite was rerun. All 655 old records, 82 old Alchimie profiles, 100 old Lanț profiles and 336 derived board rows are exact; no old eligible/preferred/starter entry lost. One nonshortest Lanț menu entry changes within six choices; all 206 shown shortest options retained."
+    },
+    {
+      "area": "cream_feedback_cost",
+      "decision": "accept_with_priority_limit",
+      "reason": "Removing the incorrect fermented-cream→Frișcă edge fixes owner semantics. It also cools natural reverse dessert inputs: Tort Diplomat142/lukewarm→345/cold, Cremșnit228/lukewarm→504/cold, Pișcot390/cold→944/very cold and Prăjitură53/warm→181/lukewarm. These are real ranking regressions, not gains. Captured new qualified cream remains2/hot, Zahăr becomes11/hot, exact target and eligibility remain. The target retains obvious successful approaches, so this does not require preserving a false graph edge or block local V88 landing after green integration. No claim of uniformly improved semantic feedback is warranted."
+    },
+    {
+      "area": "household_feedback_cost",
+      "decision": "accept_native_identity_tradeoff",
+      "reason": "Of 306 cooler observations, 290 are the two retired approximate identities. Native Taburet stops inheriting broad Casa affinities and Mătură stops borrowing Aspirator. This removes many accidental warm associations but also cools plausible home contexts: Taburet→Viața la bloc39/warm→678/cold and neighbor-with-drill59/warm→1096/very cold. These losses must stay visible; do not restore universal fallback purely to preserve scores. No accepted input is lost."
+    }
+  ],
+  "priority_followups": [
+    "Review meaningful dessert-first guesses toward Frișcă with exact owner/target scope. Preserve the correct sweet/sour distinction and existing nonwinning/projection isolation.",
+    "Review native household contextual cues using specific associations. Measure both meaningful cooling and incidental warming rather than counting every changed response as improvement."
+  ],
+  "limits": [
+    "This supplements prior graph, factual, projection and item reviews; it is not another content promotion.",
+    "The author’s revised selectors and both full backend matrices still need to pass before landing. I inspected frozen test code; I did not run or claim those in-flight checks.",
+    "The impact matrix samples 47 words over 239 old approved records, not the whole input vocabulary or human sessions. Numeric salience, rankings and semantic intuitiveness are not proven by inventory preservation.",
+    "All 188 browser tests were reported green by the orchestrator; this reviewer did not independently rerun or bind those external receipts here.",
+    "No production deployment or human release-readiness approval follows from this local-iteration acceptance."
+  ]
+}

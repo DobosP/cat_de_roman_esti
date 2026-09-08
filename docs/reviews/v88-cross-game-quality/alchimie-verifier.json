@@ -1,0 +1,21 @@
+{
+  "reviewer": "v88_independent_factual_and_projection_verifier",
+  "role": "verifier",
+  "input_ids": [
+    "al_gastronomie_107"
+  ],
+  "items": [
+    {
+      "id": "al_gastronomie_107",
+      "game": "alchimie",
+      "verdict": "promote",
+      "review_binding": "sha256:11f9dc3ce06653f25f3b2a56cf38113a34d43c0926e49d22f08ad2fb92d695b5",
+      "rationale": "A1–A4: five familiar pantry ingredients and a recognizable pastry; independently opened original Cremșnit and puff-pastry recipes support cream/sheets and flour/water associations. This is associative crafting, not a sufficient five-ingredient cooking instruction. A5/A6: no boundary trigger, no prior Alchimie target Cremșnit and no old record sharing four seeds. E1: flour/water naturally suggest dough; milk/vanilla suggest vanilla cream; sugar participates in two alternative cream openings, so every seed has a useful role. E2: the actual sparse book has four productive openings, of which Flour+Water→Aluat and Milk+Vanilla→Cremă de vanilie are clearly inferable. Sugar+Milk and Sugar+Vanilla→that cream are weaker associative shortcuts, explicitly accepted because they converge on the same already legible component rather than adding unrelated output. E3/E4: making the two components then combining Aluat+Cremă de vanilie→Cremșnit is a satisfying three-action assembly; the target is neither a seed/alias nor an immediate one-pair result. E5: five recipe pairs, eight projected concepts, three route variants of the same assembly and max one result per pair remain narrow. The generic dossier closure of 167 and six generic openings are not the served book. I independently reproduced the exact audit using the current runtime, verified current pack/KG bytes and dossier binding, and inspected all five sparse pairs/three routes. All audit bounds and strict dossier lints pass. Promote on these exact bindings; ingredient incompleteness and the two weaker cream cues remain editorial limits. This is agent review, not human playtesting. The rubric has E1–E5; no invented E6 criterion is claimed.",
+      "sources": [
+        "https://jamilacuisine.ro/prajitura-cremsnit-pas-cu-pas-reteta-video/",
+        "https://jamilacuisine.ro/aluat-de-foietaj-pas-cu-pas-reteta-video/"
+      ],
+      "projection_audit_sha256": "646d60abf1815a22453252a80e6f87c73b3b5abb9e58ab78aa1d4787870dbaf0"
+    }
+  ]
+}

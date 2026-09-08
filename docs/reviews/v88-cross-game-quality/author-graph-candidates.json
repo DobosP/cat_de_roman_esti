@@ -1,0 +1,562 @@
+{
+  "schema": "v88-authored-graph-proposal-v1",
+  "role": "author proposal; requires independent review before application",
+  "nodes": [
+    {
+      "id": "n_v88_school_compas",
+      "label_ro": "Compas",
+      "category": "viata_de_roman",
+      "description": "Instrument cu două brațe articulate pentru trasarea cercurilor și a arcelor de cerc.",
+      "aliases": [
+        "compasul",
+        "compasului",
+        "compasuri",
+        "compasurile"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    },
+    {
+      "id": "n_v88_school_echer",
+      "label_ro": "Echer",
+      "category": "viata_de_roman",
+      "description": "Instrument triunghiular pentru trasarea și verificarea unghiurilor drepte și a liniilor perpendiculare.",
+      "aliases": [
+        "echerul",
+        "echerului",
+        "echere",
+        "echerele"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    },
+    {
+      "id": "n_v88_school_raportor",
+      "label_ro": "Raportor",
+      "category": "viata_de_roman",
+      "description": "Instrument gradat pentru măsurarea și construirea unghiurilor.",
+      "aliases": [
+        "raportorul",
+        "raportorului",
+        "raportoare",
+        "raportoarele"
+      ],
+      "node_type": "concept",
+      "salience": 0.8
+    },
+    {
+      "id": "n_v88_cleaning_matura",
+      "label_ro": "Mătură",
+      "category": "viata_de_roman",
+      "description": "Unealtă cu coadă și peri sau nuiele, folosită la strângerea prafului și a gunoiului de pe suprafețe.",
+      "aliases": [
+        "mături",
+        "măturile",
+        "măturii",
+        "măturilor"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    },
+    {
+      "id": "n_v88_home_taburet",
+      "label_ro": "Taburet",
+      "category": "viata_de_roman",
+      "description": "Scaun de dimensiuni mici, de obicei fără spătar și fără brațe.",
+      "aliases": [
+        "taburetul",
+        "taburetului",
+        "taburete",
+        "taburetele"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    },
+    {
+      "id": "n_v88_kitchen_cratita",
+      "label_ro": "Cratiță",
+      "category": "gastronomie",
+      "description": "Vas de bucătărie cu pereți relativ scunzi, folosit pentru fierberea sau prăjirea preparatelor.",
+      "aliases": [
+        "cratițe",
+        "cratițele",
+        "cratiței",
+        "cratițelor"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    },
+    {
+      "id": "n_v88_food_smantana_dulce",
+      "label_ro": "Smântână dulce pentru frișcă",
+      "category": "gastronomie",
+      "description": "Smântână nefermentată cu un conținut de grăsime potrivit pentru aerare prin batere, folosită la prepararea frișcăi.",
+      "aliases": [
+        "smântânii dulci pentru frișcă",
+        "smântână pentru frișcă",
+        "smântână lichidă pentru frișcă",
+        "smântână dulce lichidă pentru frișcă"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    }
+  ],
+  "edges": [
+    {
+      "src": "n_v88_school_compas",
+      "dst": "n_v3art_desen",
+      "relation": "used_for",
+      "label_ro": "folosit la realizarea unui desen geometric",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v2sti_matematica",
+      "dst": "n_v88_school_compas",
+      "relation": "uses_tool",
+      "label_ro": "folosește la construcții sau măsurători geometrice",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_school_supplies_rigla",
+      "dst": "n_v88_school_compas",
+      "relation": "used_together",
+      "label_ro": "folosite împreună în truse de geometrie",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_school_echer",
+      "dst": "n_v3art_desen",
+      "relation": "used_for",
+      "label_ro": "folosit la realizarea unui desen geometric",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v2sti_matematica",
+      "dst": "n_v88_school_echer",
+      "relation": "uses_tool",
+      "label_ro": "folosește la construcții sau măsurători geometrice",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_school_supplies_rigla",
+      "dst": "n_v88_school_echer",
+      "relation": "used_together",
+      "label_ro": "folosite împreună în truse de geometrie",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_school_raportor",
+      "dst": "n_v3art_desen",
+      "relation": "used_for",
+      "label_ro": "folosit la realizarea unui desen geometric",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v2sti_matematica",
+      "dst": "n_v88_school_raportor",
+      "relation": "uses_tool",
+      "label_ro": "folosește la construcții sau măsurători geometrice",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_school_supplies_rigla",
+      "dst": "n_v88_school_raportor",
+      "relation": "used_together",
+      "label_ro": "folosite împreună în truse de geometrie",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_school_compas",
+      "dst": "n_v24_school_writing_creion",
+      "relation": "uses_tool",
+      "label_ro": "unele modele prind un creion pentru trasare",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_cleaning_matura",
+      "dst": "n_v24_home_surfaces_podea",
+      "relation": "cleans",
+      "label_ro": "mătură",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_cleaning_matura",
+      "dst": "n_v31_cleaning_floor_faras",
+      "relation": "sweeps_into",
+      "label_ro": "împinge gunoiul în",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v31_cleaning_floor_faras",
+      "dst": "n_v88_cleaning_matura",
+      "relation": "collects_from",
+      "label_ro": "colectează gunoiul strâns cu",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_home_taburet",
+      "dst": "n_v24_home_seating_scaun",
+      "relation": "is_a",
+      "label_ro": "este un tip de scaun",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_home_taburet",
+      "dst": "n_v3muz_pian",
+      "relation": "seat_for",
+      "label_ro": "unele modele sunt folosite pentru a sta la",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v3muz_pian",
+      "dst": "n_v88_home_taburet",
+      "relation": "played_from",
+      "label_ro": "se poate cânta așezat pe un",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_kitchen_cratita",
+      "dst": "n_v24_home_appliances_aragaz",
+      "relation": "heated_on",
+      "label_ro": "se încălzește pentru gătit pe",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_home_appliances_aragaz",
+      "dst": "n_v88_kitchen_cratita",
+      "relation": "heats",
+      "label_ro": "încălzește pentru gătit o",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_kitchen_cratita",
+      "dst": "n_v4gas_bucatarie",
+      "relation": "used_in",
+      "label_ro": "vas folosit în",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_kitchen_cratita",
+      "dst": "n_v4gas_supa",
+      "relation": "used_to_cook",
+      "label_ro": "poate fierbe",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v4gas_supa",
+      "dst": "n_v88_kitchen_cratita",
+      "relation": "prepared_in",
+      "label_ro": "poate fi preparată într-o",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v4gas_lapte",
+      "dst": "n_v88_food_smantana_dulce",
+      "relation": "raw_material_for",
+      "label_ro": "grăsimea sa este separată pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_food_smantana_dulce",
+      "dst": "n_v86_food_frisca",
+      "relation": "processed_into",
+      "label_ro": "se bate pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_food_smantana_dulce",
+      "dst": "n_v86_kitchen_mixer",
+      "relation": "prepared_with",
+      "label_ro": "se poate bate cu",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_food_smantana_dulce",
+      "dst": "n_v86_food_zahar_pudra",
+      "relation": "sweetened_with",
+      "label_ro": "se poate îndulci cu",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_school_echer",
+      "dst": "n_v88_school_compas",
+      "relation": "used_together",
+      "label_ro": "folosite împreună în truse de geometrie",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_school_raportor",
+      "dst": "n_v88_school_echer",
+      "relation": "used_together",
+      "label_ro": "folosite împreună în truse de geometrie",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_cleaning_matura",
+      "dst": "n_v31_cleaning_floor_mop",
+      "relation": "used_before",
+      "label_ro": "strânge murdăria uscată înainte de spălarea cu",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_cleaning_matura",
+      "dst": "n_v31_cleaning_floor_aspirator",
+      "relation": "alternative_to",
+      "label_ro": "alternativă pentru strângerea murdăriei uscate de pe podea",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_home_taburet",
+      "dst": "n_v24_home_seating_fotoliu",
+      "relation": "footrest_for",
+      "label_ro": "modelele joase sprijină picioarele celui așezat într-un",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_home_taburet",
+      "dst": "n_v24_home_seating_canapea",
+      "relation": "footrest_for",
+      "label_ro": "modelele joase sprijină picioarele celui așezat pe o",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_kitchen_cratita",
+      "dst": "n_v84_food_cuptor",
+      "relation": "used_in",
+      "label_ro": "modelele compatibile pot găti în",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_food_smantana_dulce",
+      "dst": "n_v87_food_tort_diplomat",
+      "relation": "ingredient_variant",
+      "label_ro": "se bate pentru crema din",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    }
+  ],
+  "edge_source_refs": [
+    "geometry-manufacturer",
+    "geometry-school",
+    "geometry-manufacturer",
+    "geometry-manufacturer",
+    "geometry-school",
+    "geometry-manufacturer",
+    "geometry-manufacturer",
+    "geometry-school",
+    "geometry-manufacturer",
+    "compass-manufacturer",
+    "cleaning-manufacturer",
+    "cleaning-manufacturer",
+    "cleaning-manufacturer",
+    "taburet-dictionary",
+    "taburet-dictionary",
+    "taburet-dictionary",
+    "cookware-manufacturer",
+    "cookware-manufacturer",
+    "cratita-dictionary",
+    "cookware-recipe",
+    "cookware-recipe",
+    "sweet-cream-product",
+    "sweet-cream-whipping",
+    "sweet-cream-whipping",
+    "sweet-cream-whipping",
+    "geometry-manufacturer",
+    "geometry-manufacturer",
+    "floor-workflow",
+    "floor-workflow",
+    "taburet-footrest",
+    "taburet-footrest",
+    "oven-safe-cookware",
+    "sweet-cream-diplomat"
+  ],
+  "sources": {
+    "geometry-manufacturer": {
+      "url": "https://www.staedtler.com/intl/en/products/technical-drawing-instruments/geometry-set/",
+      "claim": "Manufacturer lists compass, ruler, protractor and set squares in geometry sets; use in drawing is explicit."
+    },
+    "geometry-school": {
+      "url": "https://www.edu.ro/sites/default/files/_fi%C8%99iere/Minister/2021/inv.preuniversitar/repere%20curriculum%20clasa%20a%20IX-a%202021%20-%202022/Anexa%2013_RM_%20FABRICAREA%20PROD%20LEMN.pdf",
+      "claim": "Romanian Ministry material identifies echer, compas, riglă and raportor as measuring and drawing instruments."
+    },
+    "compass-manufacturer": {
+      "url": "https://us.maped.com/product/study-metal-compass-with-universal-holder/",
+      "claim": "The manufacturer explicitly supplies a universal holder that accepts a standard pencil or pen."
+    },
+    "cleaning-manufacturer": {
+      "url": "https://www.vileda.co.uk/brooms-dustpans",
+      "claim": "Brooms sweep dust/debris on floors into dustpans; both are paired for cleaning."
+    },
+    "cookware-manufacturer": {
+      "url": "https://www.tefal.ro/articole-de-bucatarie/oale-si-tigai",
+      "claim": "Manufacturer distinguishes cratiță from oală/tigaie and supplies cookware for stovetop cooking."
+    },
+    "cookware-recipe": {
+      "url": "https://www.tefal.ro/medias/DIGITAL-RECIPES-QUICK-CHEF.pdf?context=bWFzdGVyfHJvb3R8MTgxNTE2MDR8YXBwbGljYXRpb24vcGRmfGgyMS9oYjcvMTQ0NzE2Mjg3NTA4NzgucGRmfGZiMTg3ZTllYWJlNGM0OWU0Yzk0NDdlYTcyYWY1YzI2MTY1NjUxMWE0OGRmODYxN2Q4ZmE4YmFiZGQ2MTYzZjk",
+      "claim": "Tefal recipe book prepares soup vegetables in a cratiță."
+    },
+    "n_v88_school_compas-dictionary": {
+      "url": "https://dexonline.ro/definitie/compas",
+      "claim": "DEX/DOOM entries establish the object sense and the ordinary noun inflection; no synonym is imported."
+    },
+    "n_v88_school_echer-dictionary": {
+      "url": "https://dexonline.ro/definitie/echer",
+      "claim": "DEX/DOOM entries establish the object sense and the ordinary noun inflection; no synonym is imported."
+    },
+    "n_v88_school_raportor-dictionary": {
+      "url": "https://dexonline.ro/definitie/raportor",
+      "claim": "DEX/DOOM entries establish the object sense and the ordinary noun inflection; no synonym is imported."
+    },
+    "n_v88_cleaning_matura-dictionary": {
+      "url": "https://dexonline.ro/definitie/mătură",
+      "claim": "DEX/DOOM entries establish the object sense and the ordinary noun inflection; no synonym is imported."
+    },
+    "n_v88_home_taburet-dictionary": {
+      "url": "https://dexonline.ro/definitie/taburet",
+      "claim": "DEX/DOOM entries establish the object sense and the ordinary noun inflection; no synonym is imported."
+    },
+    "n_v88_kitchen_cratita-dictionary": {
+      "url": "https://dexonline.ro/definitie/cratiță",
+      "claim": "DEX/DOOM entries establish the object sense and the ordinary noun inflection; no synonym is imported."
+    },
+    "cratita-dictionary": {
+      "url": "https://dexonline.ro/definitie/cratiță",
+      "claim": "DEX/DOOM entries establish the object sense and the ordinary noun inflection; no synonym is imported."
+    },
+    "taburet-dictionary": {
+      "url": "https://dexonline.ro/definitie/taburet",
+      "claim": "DEX/DOOM entries establish the object sense and the ordinary noun inflection; no synonym is imported."
+    },
+    "sweet-cream-product": {
+      "url": "https://ladorna.ro/smantani/",
+      "claim": "Dairy manufacturer distinguishes its whipping-cream range from cooking cream, and describes milk-derived cream; qualified liquid whipping cream is not fermented sour cream."
+    },
+    "sweet-cream-whipping": {
+      "url": "https://www.oetker-professional.ro/produsele-noastre/intaritor-de-frisca",
+      "claim": "Manufacturer explicitly names cold sweet whipping cream and powdered sugar beaten with a mixer into whipped cream."
+    },
+    "n_v88_food_smantana_dulce-usage": {
+      "url": "https://www.oetker-professional.ro/produsele-noastre/intaritor-de-frisca",
+      "claim": "Exact qualified ingredient phrase; one genitive phrase and three narrower liquid/whipping descriptions are accepted forms, not synonyms for sour cream or ready-whipped Frișcă."
+    },
+    "floor-workflow": {
+      "url": "https://www.vileda.co.uk/cleanspiration/cleaning-tips/faq-floor-still-dirty",
+      "claim": "Manufacturer recommends sweeping OR vacuuming dry dirt before mopping; supports the bounded alternative dry-cleaning role and the before-mop order."
+    },
+    "taburet-footrest": {
+      "url": "https://dexonline.ro/definitie/taburet",
+      "claim": "DLRLC explicitly describes a low stool placed before an armchair or sofa to support the seated person’s feet; DEX records the specialized footstool sense."
+    },
+    "taburet-footrest-product": {
+      "url": "https://www.ikea.com/ro/ro/p/fammarp-fotoliu-si-taburet-metal-viarp-bej-maro-s59487829/",
+      "claim": "Manufacturer pairs taburet with an armchair and explains compatible sofa-family arrangements; corroborates actual furniture use."
+    },
+    "oven-safe-cookware": {
+      "url": "https://www.services.tefal.ro/Articole-de-buc%C4%83t%C4%83rie/Ingenio/Gama-de-oale-%C8%99i-tig%C4%83i-Ingenio-Unlimited/p/RANGE-24BF-G",
+      "claim": "Manufacturer states that suitable Ingenio cookware can cook on the hob and in the oven. Only compatible vessel models are claimed."
+    },
+    "sweet-cream-diplomat": {
+      "url": "https://jamilacuisine.ro/tort-diplomat-facut-in-casa-reteta-video/",
+      "claim": "Original recipe lists liquid whipping cream; the new source denotes that liquid cream before whipping, rather than the old explicitly fermented Smântână node."
+    }
+  },
+  "counts": {
+    "concepts": 7,
+    "forms": 28,
+    "grammatical_forms": 25,
+    "qualified_forms": 3,
+    "directed_links": 33,
+    "removed_directed_links": 1,
+    "net_directed_links": 32,
+    "lexical_equivalents": 0
+  },
+  "source_module_sha256": "5fa229dd7332b489f509ba9b4f6b7b1e13f71954a6ce86999cc31d69d528a249",
+  "sense_limits": [
+    "Compas means the drawing instrument here, not a navigation compass.",
+    "Raportor means the angle-measuring instrument here, not a reporting person; raportoare is the neuter plural.",
+    "Taburet includes a primary seat and specialized piano-seat/footstool uses; the board uses the primary seating sense.",
+    "Mătură means the cleaning tool; accent-insensitive input also accepts the identical-looking verb form.",
+    "Cratiță is a distinct low-sided cooking vessel, not imported as an alias for Oală.",
+    "No hidden Contexto round is proposed for these new nodes.",
+    "Smântână remains the existing fermented sour-cream owner. The new qualified whipping cream never owns bare smântână, smântână dulce, or ready-whipped Frișcă.",
+    "Removing de8676 corrects the old false fermented-cream-to-Frișcă relation. The new cream→Frișcă link names its correct nonfermented source.",
+    "The redundant Echer→Riglă used_together reciprocal is omitted. Sweeps_into/collects_from and seat_for/played_from encode distinct directional roles already stated by their labels; they are not symmetric aliases."
+  ],
+  "remove_edges": [
+    {
+      "id": "de8676",
+      "src_id": "n_v20gas_smantana",
+      "dst_id": "n_v86_food_frisca",
+      "relation": "processed_into",
+      "label_ro": "sortimentele dulci potrivite se bat pentru",
+      "strength": 0.8,
+      "is_distractor": 0,
+      "bidirectional": 0
+    }
+  ]
+}

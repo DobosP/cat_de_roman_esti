@@ -13,12 +13,14 @@ from collections import Counter
 from pathlib import Path
 
 from cat_de_roman_esti.data import load_fixture, mobile_app_pack_snapshot
+from cat_de_roman_esti.graph import Graph
 from cat_de_roman_esti.wordgames.contexto import (
     MIN_REACHABLE,
     MIN_RESPONSIVE,
     RESPONSIVE_MAX_HOPS,
 )
 from cat_de_roman_esti.wordgames.service import WordGameService, normalize
+from tests.content_history import before_v88_fixture
 from tests.current_content import CURRENT_CONTENT
 
 _ROOT = Path(__file__).resolve().parent.parent
@@ -201,6 +203,23 @@ def test_v31_exact_semantic_edges_and_inbound_beginner_topology():
         and int(match.group(1)) > 31
     }
     mature_legacy_ids = legacy_ids - later_wave_ids
+    historical = before_v88_fixture(fixture)
+    historical_svc = WordGameService(Graph.from_records(
+        historical["kg_nodes"], historical["kg_edges"],
+    ))
+    opened_cleaning_ids = {
+        "n_v31_cleaning_dishes_burete_vase", "n_v31_cleaning_supply_detergent",
+        "n_v31_cleaning_floor_aspirator", "n_v31_cleaning_floor_faras",
+        "n_v31_cleaning_floor_mop", "n_v31_cleaning_water_galeata",
+    }
+    bridge = [edge for edge in fixture["kg_edges"] if (
+        edge["src_id"], edge["dst_id"]
+    ) == ("n_v31_cleaning_floor_faras", "n_v88_cleaning_matura")]
+    assert len(bridge) == 1 and bridge[0]["relation"] == "collects_from"
+    assert svc.link("n_v88_cleaning_matura", "n_v24_home_surfaces_podea").relation == "cleans"
+    closed_svc = WordGameService(Graph.from_records(
+        fixture["kg_nodes"], [edge for edge in fixture["kg_edges"] if edge != bridge[0]],
+    ))
     incident = [
         edge
         for edge in fixture["kg_edges"]
@@ -250,7 +269,13 @@ def test_v31_exact_semantic_edges_and_inbound_beginner_topology():
             sum(1 for distance in inbound.values() if 1 <= distance <= RESPONSIVE_MAX_HOPS)
             >= MIN_RESPONSIVE
         )
-        assert not (mature_legacy_ids & set(svc.distances_from(node_id)))
+        # ADR-0131 opens exactly the reviewed six-node cleaning mesh in V88.
+        # The V31/V87 isolation contract remains exact in reconstructed history.
+        assert not (mature_legacy_ids & set(historical_svc.distances_from(node_id)))
+        assert bool(mature_legacy_ids & set(svc.distances_from(node_id))) is (
+            node_id in opened_cleaning_ids
+        )
+        assert not (mature_legacy_ids & set(closed_svc.distances_from(node_id)))
 
 
 def test_v31_preserves_prior_coverage_and_resolves_its_extension():

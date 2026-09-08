@@ -43,6 +43,7 @@ EXACT_TARGET_FEEDBACK_PAIRS: frozenset[tuple[str, str]] = frozenset({
     ("n_v87_food_pandispan", "n_v87_food_chec"),
     ("n_v24_food_snack_biscuit", "n_v87_food_piscot"),
     ("n_v4gas_prajitura", "n_v87_food_cremsnit"),
+    ("n_v87_food_briosa", "n_v4gas_paine"),
 })
 
 # (mature feedback anchor, everyday node ids).  Grouping keeps the intended semantic

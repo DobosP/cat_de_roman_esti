@@ -57,7 +57,7 @@ test("a rejected stale clue refreshes authoritative availability", () => {
   const recoveryEnd = screen.indexOf("const retryActionSync = useCallback", recoveryStart);
   assert.ok(recoveryStart >= 0 && recoveryEnd > recoveryStart);
   const recovery = screen.slice(recoveryStart, recoveryEnd);
-  assert.match(recovery, /recoverOwnedContextoAction\(\s*actionOwner, ticket, contextoApi\.getGame,/);
+  assert.match(recovery, /recoverOwnedGameAction\(\s*actionOwner, ticket, contextoApi\.getGame,/);
   assert.match(recovery, /if \(!mayAdoptAction\(ticket\)\) return;/);
   assert.match(recovery, /const fresh = outcome\.state;[\s\S]*?setState\(fresh\);/);
 });

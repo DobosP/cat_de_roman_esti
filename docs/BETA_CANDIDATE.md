@@ -2,9 +2,10 @@
 
 Valid until: the next verified quality wave — then refresh this living checklist.
 
-Target: public anonymous beta for Romanian players. **V87 is merged locally at `fa8cffd`,
-with nine snack/preparation concepts, 50 directed links, six playable Contexto targets
-and recovery for uncertain Contexto actions. V88 starts the next cross-game batch.**
+Target: public anonymous beta for Romanian players. **V88 is implemented with seven new
+concepts, three reviewed rounds across Alchimie/Conexiuni and recoverable Lanț actions;
+full integration is GREEN and V88 is ready for local landing.** Local main records
+landed V87 `fa8cffd` through `2878417`.
 The recurring local iteration follows [ADR-0127](adr/0127-recurring-local-version-loop.md)
 until the owner stops it. No push or deployment occurred.
 Public rollout still requires the external checks below.
@@ -101,6 +102,62 @@ exact impact comparisons and the disclosed Brioșă bread-feedback regression. T
 [action receipt](reviews/v87-snack-and-action-quality/action/verification.json)
 retains baseline defects and the initial native source-shape failures separately.
 
+V88 adds **seven concepts, 28 accepted forms and 33 directed links**, removing the one
+false fermented-Smântână→Frișcă link for **32 net new links**. Forms comprise 25 grammatical
+and three qualified expressions, with **zero new synonyms**. Compas, Echer, Raportor,
+Mătură, Taburet, Cratiță and Smântână dulce pentru frișcă support specific reviewed uses.
+The served build is `fixture-v88-cross-game-quality`: **2,413 concepts / 9,442 links /
+8,631 forms / 180 puzzles**. [ADR-0131](adr/0131-everyday-tools-and-cream-sense-correction.md)
+records the cream correction, projection retirements and bounded cleaning-graph opening.
+
+Three new rounds are approved and selectable: Alchimie Cremșnit (`al_gastronomie_107`)
+and Conexiuni `cx_viata_de_roman_362` / `cx_viata_de_roman_363`. The pack contains **658 records:
+650 approved and eight pending**, with **488 eligible** across its four games.
+No Contexto, Lanț, Intrusul or Perechi round is added in V88. Tort Diplomat remains held
+after recipe-sense and useful-depth review; the batch does not force its proposed count.
+
+| Game | Total | Approved | Pending | Eligible / preferred |
+|---|---:|---:|---:|---:|
+| Alchimie | 83 | 80 | 3 | 80 eligible |
+| Conexiuni | 234 | 234 | 0 | 76 eligible |
+| Cald sau Rece | 241 | 239 | 2 | 235 eligible |
+| Lanțul Cuvintelor | 100 | 97 | 3 | 97 eligible |
+| Intrusul | 183 | 183 | 0 | 144 preferred |
+| Perechi | 153 | 153 | 0 | 113 preferred |
+
+All 655 old pack records, 82 Alchimie profiles, 100 Lanț profiles and 336 derived rows
+remain exact. One nonshortest Lanț menu entry changes from Saramură to Găleată;
+all 206 previously shown shortest first hops remain available, with no lost eligibility.
+Native Mătură and Taburet replace two approximations, leaving 465 projected inputs.
+A closed native Brioșă→Pâine repair gives rank 2/hot without a false synonym or global
+bread projection; [ADR-0130](adr/0130-closed-native-bread-family-feedback.md) records its
+qualified family interpretation and retained hidden-target holds.
+
+Lanț move, undo and hint failures now reconcile through one owned GET. A failed read
+keeps a persistent read-only retry and disables mutations; earned help survives recovery
+and resume without spending another stage. [ADR-0128](adr/0128-reconcile-uncertain-lant-actions.md)
+records the shared action owner and one bounded current-position hint payload.
+[ADR-0129](adr/0129-portable-alchimie-projection-reviews.md) extends portable independent
+review to Alchimie while retaining exact audit/source/projection/batch bindings and two
+independent judgments. It makes later recipe batches easier to review without weakening
+promotion gates.
+
+V88 frontend integration is GREEN: **193 native tests and 188 desktop/mobile browser
+checks**, with lint, typecheck, build and the **118.92/120 KiB** budget passing. Initial
+backend integration passed 1,501 tests and failed seven historical/aggregate assertions.
+Their source-aware corrections passed all seven focused cases. Final full backends passed
+**1,508 tests each on Python 3.12.3 / 3.14.6**, plus **53 accounts tests each**. One
+intermediate Python 3.12 attempt was terminated before completion; its preserved partial
+log is excluded from success counts and the unchanged complete rerun passed.
+Final gate state and actual receipts belong in [STATUS](STATUS.md) and the
+[V88 review](reviews/v88-cross-game-quality/README.md).
+
+The [independent supplemental review](reviews/v88-cross-game-quality/SUPPLEMENTAL_REVIEW.md)
+accepts the measured tradeoffs conditionally on full green integration. Correcting cream
+sense cools plausible pastry guesses toward Frișcă, and retiring broad proxies cools some
+Taburet/Mătură home context. These are disclosed quality costs, not universal feedback
+improvements; the exact affected examples remain in the impact report.
+
 ## Sequence and acceptance
 
 | Wave | Problem addressed | Evidence / outcome |
@@ -123,6 +180,7 @@ retains baseline defects and the initial native source-shape failures separately
 | V85 | Approximate ingredient guesses and misleading labels weakened otherwise familiar rounds | Eight concepts, 25 forms, 40 new links plus one relabelled relation; one served dairy clue corrected; four Contexto targets and one Lanț route. Full integration GREEN |
 | V86 | Weak preparation/cooling clues, hidden short routes and disappearing creation errors | Nine concepts, 30 forms, 41 links and six reviewed rounds; two exact feedback corrections; 59 old approved Lanț menus improve; all-six-game failure/replay recovery preserves state and action visibility. Full integration GREEN |
 | V87 | Weak snack-defining cues and lost paid/terminal action responses | Nine concepts, 31 forms, 50 directed links, six promoted Contexto targets and five bounded feedback repairs; owned authoritative recovery without mutation replay. Full 1,409 backend tests per runtime, 53 accounts each, 193 native/168 browser checks pass |
+| V88 | Missing everyday tools, a false cream sense, inaccessible recipe-review tooling and lost Lanț actions | Seven concepts, 28 forms, 33 links added/one removed; one Alchimie and two Conexiuni rounds; portable projection-bound Alchimie review; owned Lanț action and earned-hint recovery. Frontend 193 native/188 browser checks GREEN; full backend 1,508 per runtime and accounts 53 each GREEN |
 
 V84 focused checks pass: **62 new graph/game checks**, **183 historical/current checks**,
 independent implementation review and 3,757 before/after observations per checkout. All
@@ -172,12 +230,12 @@ or human subject-expert approval.
 
 | Area | Evidence and remaining uncertainty |
 |---|---|
-| Rules, hints and progression | All six seeded games have server-scored completion coverage. V86 made short Lanț alternatives and creation/replay failures visible. V87 recovers uncertain Contexto wins, clues and give-ups without replaying actions; failed verification keeps input and an actionable retry. Automated solves do not establish enjoyment. |
-| Romanian content and difficulty | V87 adds nine snack/preparation concepts, 50 links, 31 forms and six reviewed Contexto rounds, including the previously deferred Biscuit. Three native and two projected feedback repairs retain distinct food senses. Pandișpan/Brioșă targets remain deferred; indirect oven/yeast/Sarmale and some butter/dairy feedback remain noisy. Human fairness/enjoyment is unmeasured. |
+| Rules, hints and progression | All six seeded games have server-scored completion coverage. V88 recovers Lanț moves, undo, hints and wins without mutation replay; earned hints survive resume without escalating. V86 route-choice and V87 Contexto recovery remain covered. Automated solves do not establish enjoyment. |
+| Romanian content and difficulty | V88 adds seven everyday/preparation concepts, 28 forms and three rounds across Alchimie/Conexiuni, and repairs native Brioșă→Pâine feedback. Correct whipping-cream ownership exposes reverse pastry→Frișcă cooling; native Taburet/Mătură lose some broad home affinities. No old eligibility is lost. Pandișpan/Brioșă targets and the new Diplomat recipe remain held. Human fairness/enjoyment is unmeasured. |
 | Onboarding and presentation | Shared intros, categories, HUD, action feedback and results were inspected; mobile layout and rendered states are audited. No broad redesign was justified by this evidence. Real-device rendering and human comprehension are still pending. |
 | Keyboard and accessibility | Desktop essential controls support Tab/Space/Enter completion; Perechi focus is checked after pairs disappear and at result. Automated Axe checks run on settled intro/live/result states. Text-entry tests use programmatic fill after keyboard focus; no actual screen-reader usability study ran. |
-| Reliability and storage | Retry, stale ID handling, unmount/loading ownership, immutable terminal actions and duplicate completion are covered. V87 adds actual committed-response loss and delayed/cross-tab recovery checks; a preexisting foreign pointer blocks the old POST before it can spend an action. Strict concurrent-tab local-score protection requires Web Locks; fallback is best effort. Receipt TTL is 24h with 1,000 IDs per game; a deliberately retained terminal session can record again after expiry. |
-| Maintainability and extension | Shared lifecycle code stays narrow, mechanics explicit. Pack-only imports reject topology, V2 artifacts bind two independent complete reviews, and generated fixtures remain tool-owned. Portable review assembly supports Conexiuni/Contexto/Lanț; Alchimie retains its separate projection-bound workflow. V82 adds reusable delta reporting and compact probes so later batches can measure actual playable gains without large duplicated response archives. |
+| Reliability and storage | Retry, stale IDs, unmount/loading ownership, immutable terminal actions and duplicate completion are covered. Contexto and Lanț have actual committed-response-loss and delayed/cross-tab recovery checks; an already different pointer blocks the old POST. Lanț stores one earned hint payload, not a history. Strict concurrent-tab score protection requires Web Locks; fallback is best effort. Receipt TTL is 24h with 1,000 IDs/game; retained terminal sessions can record again after expiry. |
+| Maintainability and extension | Shared lifecycle code stays narrow and mechanics explicit. V88 shares the owned action helper across Contexto/Lanț and extends portable independent review to Alchimie with exact source, sparse-projection, audit and batch bindings. All four pack games retain two complete independent judgments and generated transactions. Content-delta reporting and compact probes measure playable gains separately from metadata churn. |
 | Performance and dependencies | Measured offline routing/serialization/game cost and bounded process RSS; no production load/SLO claim. Alchimie generation variance and worst-case Contexto history capacity remain measurement follow-ups. |
 | Release operations | Local tests force offline anonymous mode. Last documented production is V72; no push, deployment, accounts enablement, contact with players or production re-verification occurred. |
 
@@ -191,9 +249,10 @@ or human subject-expert approval.
 - Authorize a release, preserve the deployed image, execute the [deployment and rollback procedure](DEPLOY.md),
   and re-run public health/config/content/asset smokes. Keep production anonymous.
 
-Player observations should guide the next product iteration. V84–V87 address ingredient
+Player observations should guide the next product iteration. V84–V88 address ingredient
 approximations, specific preparation/cooling cues, board wording, visible route alternatives
-and failed-game creation/replay, with V87 adding snack cues and uncertain-action recovery.
+and failed-game creation/replay. V88 adds everyday concepts, cross-game rounds and Lanț
+action recovery; semantic follow-ups include the newly measured cream and home-context costs.
 Biscuit is now promoted; Pandișpan and Brioșă remain inputs while their target rounds are
 deferred. Follow-ups include indirect oven/yeast/Sarmale associations, butter/dairy feedback,
 unrecognized temperature words and variant-specific routes. The
@@ -207,6 +266,14 @@ V87 impact also records a remaining input regression: native Brioșă→Pâine i
 424/cold after its former broad bread projection retires (previously rank 2/hot).
 False Zacuscă affinities cool; eight old-native warm→lukewarm shifts keep their
 distances. Correct concept ownership does not make every feedback change an improvement.
+
+V88 closes that recorded Brioșă→Pâine regression with the exact native rank 2/hot pair.
+It does not restore the broad projection or resolve every pastry/household association.
+In the V88 impact sample, Tort Diplomat→Frișcă is 345/cold, Cremșnit→Frișcă 504/cold,
+Pișcot→Frișcă 944/very cold and Prăjitură→Frișcă 181/lukewarm. Qualified whipping cream
+is 2/hot and Zahăr is 11/hot, while unrelated Zacuscă remains 24/warm. Taburet→Viața la
+bloc becomes 678/cold. These concrete follow-ups require focused review without restoring
+false edges or universal approximations.
 
 ## Romanian-player playtest protocol — not yet run
 

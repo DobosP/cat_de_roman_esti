@@ -1,0 +1,11 @@
+import os,sys,json
+from pathlib import Path
+repo=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality');sys.path[:0]=[str(repo),str(repo/'scripts')];os.chdir(repo);os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django;django.setup()
+from cat_de_roman_esti.wordgames import packs
+from cat_de_roman_esti.wordgames.service import get_service
+from critique_pack import representative_shortest_paths
+svc=get_service();ns={n['label_ro']:n['id'] for n in json.load(open(repo/'cat_de_roman_esti/fixtures/kg_sample.json'))['kg_nodes']};rows=[]
+for start,target in [('Făină','Tort Diplomat'),('Lapte','Cremșnit'),('Vanilie','Pâine'),('Albuș','Tort Diplomat'),('Cacao','Cremșnit')]:
+ a,b=ns[start],ns[target];dist=svc.distance(a,b);r={'start':start,'target':target,'distance':dist,'branch_profile':packs.lant_branch_profile(svc,a,b,dist),'routes':representative_shortest_paths(svc,a,b,dist)};rows.append(r)
+Path('/home/dobo/work/_temp/feat__v88-cross-game-quality/content/lant-screen.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2)+'\n');print(json.dumps(rows,ensure_ascii=False))

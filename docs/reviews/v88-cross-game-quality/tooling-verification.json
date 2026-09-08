@@ -1,0 +1,55 @@
+{
+  "schema": "author-tooling-verification-v1",
+  "date": "2026-09-08",
+  "reviewer": "v88_review_tooling (implementation author; independent review remains required)",
+  "python": "3.12.3",
+  "source_frozen": true,
+  "source_files": {
+    "scripts/build_review_artifact.py": "963c5671281934fa95ff30cda8a04344204f9ab78f0ffe191acc90d02984cd20",
+    "tests/test_build_review_artifact.py": "b996a52c0cf37d6cbbc30c9d07026212c40446b86dcadd3f774fb1d681c46dd0",
+    "docs/PACK_ONLY_CONTENT_WAVES.md": "269be4c1670c400a93ff5505894e72ab8eab695834a1ccf82113be501aab0121",
+    "docs/adr/0104-portable-independent-review-artifacts.md": "4e88ccc7cea74eae66443488cd676a30c5d203d814a74bea7c5e4e9d8b82c3c7",
+    "docs/adr/0129-portable-alchimie-projection-reviews.md": "1cc9e165c9237fb4840afd727f682b5440ec026dac8e0ca127f455afd5bc1354"
+  },
+  "checks": [
+    {
+      "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_build_review_artifact.py tests/test_v48_alchimie_pending_gate.py -q -o addopts=''",
+      "exit_code": 0,
+      "summary": "44 passed in 40.83s",
+      "log": "docs/reviews/v88-cross-game-quality/tooling/focused.log.gz",
+      "decoded_sha256": "ab92cf5bf16434cf97fe9099e4fb998b3933c565f33644a2a8c173b2bfd0b2a2",
+      "archive_sha256": "29d62aa3562e342da0a25917a0b4e03e5f508e44bafbc795ed3798462bb53678"
+    },
+    {
+      "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_critique_pack.py -q -o addopts=''",
+      "exit_code": 0,
+      "summary": "102 passed in 16.53s",
+      "log": "docs/reviews/v88-cross-game-quality/tooling/critique.log.gz",
+      "decoded_sha256": "bac801a748bbf60c956f25c0c6f1e360bacf6f0ca8c967c78f54e375d69232b0",
+      "archive_sha256": "783b6b1ff40391afbadb0749dd473bea766382a930aad2d1e862e0b92d3cb450"
+    },
+    {
+      "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_build_review_artifact.py tests/test_v48_alchimie_pending_gate.py -q -o addopts=''",
+      "exit_code": 0,
+      "summary": "45 passed in 44.78s",
+      "log": "docs/reviews/v88-cross-game-quality/tooling/final-focused.log.gz",
+      "decoded_sha256": "e37ba435d284b5313e9285ced1d22bfc8913dae6597dd5eee6fb7c28ebc5dc1f",
+      "archive_sha256": "9364ba5054bde107c90c95481acd0ee1f57a761942703fabc926a5edf715e1df"
+    }
+  ],
+  "lint": "Final targeted Ruff passed; initial targeted Ruff found two E501 test-only line lengths, then corrected.",
+  "whitespace": "Targeted git diff --check passed.",
+  "sequence_notes": [
+    "The first retained focused run passed 44 tests. One explicit unsorted-batch regression was then added, and final focused coverage passed 45 tests. Serializer source did not change between those runs.",
+    "An early uncaptured builder smoke ran while the test contract was being updated; its result is not retained and is not counted as verification.",
+    "No full integration suite or fixture/static mutation was performed in this lane."
+  ],
+  "retained_boundaries": [
+    "existing apply_rereview.py and audit_alchimie_projections.py unchanged",
+    "distinct analyst/verifier identity and complete current dossier batch",
+    "sorted Alchimie-only batch; mixed-game Alchimie rejected",
+    "byte-exact supplied audit; mandatory per-item raw audit hashes from both reviewers",
+    "archived projection reconstruction and live pack/KG/rubric/runtime/generator/source bindings before output copy",
+    "strict prospective inventory critique and transactional mutation remain the applier boundary"
+  ]
+}

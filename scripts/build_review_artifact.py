@@ -33,6 +33,7 @@ ROOT_KEYS = frozenset({"reviewer", "role", "input_ids", "items"})
 ITEM_KEYS = frozenset(
     {"id", "game", "verdict", "review_binding", "rationale", "sources"}
 )
+ALCHIMIE_ITEM_KEYS = ITEM_KEYS | {"projection_audit_sha256"}
 ROLES = frozenset({"analyst", "verifier"})
 
 
@@ -42,6 +43,14 @@ def fail(message: str) -> None:
 
 def sha256_uri(blob: bytes) -> str:
     return "sha256:" + hashlib.sha256(blob).hexdigest()
+
+
+def valid_projection_digest(value: object) -> bool:
+    return (
+        isinstance(value, str)
+        and len(value) == 64
+        and all(char in "0123456789abcdef" for char in value)
+    )
 
 
 def valid_url(value: object) -> bool:
@@ -82,7 +91,10 @@ def read_review(path: Path, expected_role: str) -> tuple[dict, bytes]:
 
     seen: set[str] = set()
     for item in items:
-        if not isinstance(item, dict) or set(item) != ITEM_KEYS:
+        if not isinstance(item, dict):
+            fail(f"invalid {expected_role} item schema: {path}")
+        keys = ALCHIMIE_ITEM_KEYS if item.get("game") == "alchimie" else ITEM_KEYS
+        if set(item) != keys:
             fail(f"invalid {expected_role} item schema: {path}")
         item_id = item.get("id")
         game = item.get("game")
@@ -103,12 +115,29 @@ def read_review(path: Path, expected_role: str) -> tuple[dict, bytes]:
             or not rationale.strip()
             or not valid_sources
             or (expected_role == "verifier" and not sources)
+            or (
+                game == "alchimie"
+                and not valid_projection_digest(item["projection_audit_sha256"])
+            )
         ):
             fail(f"invalid {expected_role} judgment for {item_id!r}: {path}")
         seen.add(item_id)
     if seen != set(input_ids) or len(items) != len(input_ids):
         fail(f"incomplete {expected_role} item coverage: {path}")
     return data, blob
+
+
+def read_projection_audit(path: Path | None) -> bytes | None:
+    if path is None:
+        return None
+    try:
+        blob = path.read_bytes()
+        data = json.loads(blob.decode("utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        fail(f"cannot read Alchimie projection audit {path}: {exc}")
+    if not isinstance(data, dict):
+        fail(f"invalid Alchimie projection audit: {path}")
+    return blob
 
 
 def read_dossiers(dossier_dir: Path, input_ids: list[str]) -> dict[str, dict]:
@@ -177,6 +206,7 @@ def build_artifacts(
     analyst_blob: bytes,
     verifier_blob: bytes,
     dossiers: dict[str, dict],
+    projection_blob: bytes | None = None,
 ) -> dict[str, dict]:
     input_ids = analyst["input_ids"]
     if verifier["input_ids"] != input_ids:
@@ -198,7 +228,17 @@ def build_artifacts(
 
     batch_games = {dossiers[item_id]["game"] for item_id in input_ids}
     if "alchimie" in batch_games:
-        fail("portable review artifacts do not support Alchimie projection evidence")
+        if batch_games != {"alchimie"} or input_ids != sorted(input_ids):
+            fail("Alchimie projection evidence requires a sorted Alchimie-only batch")
+        if projection_blob is None:
+            fail("Alchimie reviews require --projection-audit")
+        projection_digest = hashlib.sha256(projection_blob).hexdigest()
+        for item_id in input_ids:
+            for role, items in (("analyst", analyst_items), ("verifier", verifier_items)):
+                if items[item_id]["projection_audit_sha256"] != projection_digest:
+                    fail(f"{role} projection audit does not match supplied bytes for {item_id}")
+    elif projection_blob is not None:
+        fail("projection audit supplied without an Alchimie batch")
 
     provenance = {
         "analyst": {
@@ -232,6 +272,8 @@ def build_artifacts(
             "mode": "gate",
             "input_ids": input_ids,
         }
+        if game == "alchimie":
+            batch["projection_audit_sha256"] = projection_digest
         rows = []
         for item_id in game_ids:
             left = analyst_items[item_id]
@@ -250,6 +292,9 @@ def build_artifacts(
                 "analyst_review": dict(left),
                 "verifier_review": dict(right),
             }
+            if game == "alchimie":
+                row["analyst_projection_audit_sha256"] = left["projection_audit_sha256"]
+                row["verifier_projection_audit_sha256"] = right["projection_audit_sha256"]
             rows.append(row)
         artifacts[game] = {
             "game": game,
@@ -274,6 +319,7 @@ def validated_staging(
     dossiers: dict[str, dict],
     staging_parent: Path,
     output_name: str,
+    projection_blob: bytes | None = None,
 ) -> Path:
     if not staging_parent.is_dir():
         fail(f"output parent directory does not exist: {staging_parent}")
@@ -282,6 +328,8 @@ def validated_staging(
         dir=staging_parent,
     ))
     try:
+        if projection_blob is not None:
+            (staging / apply_rereview.ALCHIMIE_PROJECTION_AUDIT).write_bytes(projection_blob)
         dossier_out = staging / "dossiers"
         dossier_out.mkdir()
         for item_id, dossier in dossiers.items():
@@ -295,7 +343,9 @@ def validated_staging(
                 json.dumps(artifact, ensure_ascii=False, indent=1) + "\n",
                 encoding="utf-8",
             )
-            apply_rereview.validated_artifact(artifact, game, path)
+            _, batch, _ = apply_rereview.validated_artifact(artifact, game, path)
+            if game == "alchimie":
+                apply_rereview.validate_live_alchimie_projection_source(batch, path)
     except BaseException:
         shutil.rmtree(staging)
         raise
@@ -320,7 +370,12 @@ def write_outputs(staging: Path, out_dir: Path, games: set[str]) -> None:
     stale_dossiers = sorted(existing_dossiers - expected_dossiers)
     if stale_dossiers:
         fail("output directory contains stale dossiers: " + ", ".join(stale_dossiers))
+    audit_name = apply_rereview.ALCHIMIE_PROJECTION_AUDIT
+    if (out_dir / audit_name).exists() and not (staging / audit_name).is_file():
+        fail("output directory contains a stale projection audit")
     out_dir.mkdir(parents=True, exist_ok=True)
+    if (staging / audit_name).is_file():
+        atomic_write(out_dir / audit_name, (staging / audit_name).read_bytes())
     for path in sorted(staging.glob("*_verdicts.json")):
         atomic_write(out_dir / path.name, path.read_bytes())
     source_dossiers = staging / "dossiers"
@@ -335,6 +390,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--analyst", required=True, type=Path)
     parser.add_argument("--verifier", required=True, type=Path)
     parser.add_argument("--dossiers", required=True, type=Path)
+    parser.add_argument(
+        "--projection-audit", type=Path,
+        help="exact reviewer-bound live projection audit for an Alchimie-only batch",
+    )
     parser.add_argument("--out", required=True, type=Path)
     args = parser.parse_args(argv)
 
@@ -343,6 +402,7 @@ def main(argv: list[str] | None = None) -> int:
     if verifier["input_ids"] != analyst["input_ids"]:
         fail("analyst and verifier batches differ")
     dossiers = read_dossiers(args.dossiers, analyst["input_ids"])
+    projection_blob = read_projection_audit(args.projection_audit)
     artifacts = build_artifacts(
         analyst,
         verifier,
@@ -351,12 +411,14 @@ def main(argv: list[str] | None = None) -> int:
         analyst_blob,
         verifier_blob,
         dossiers,
+        projection_blob,
     )
     staging = validated_staging(
         artifacts,
         dossiers,
         args.out.parent,
         args.out.name,
+        projection_blob,
     )
     try:
         write_outputs(staging, args.out, set(artifacts))

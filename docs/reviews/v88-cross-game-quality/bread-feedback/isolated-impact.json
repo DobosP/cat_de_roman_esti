@@ -1,0 +1,47 @@
+{
+  "phase": "only the reviewed native pair changed; pre-graph V88",
+  "baseline_file_sha256": "1c7af8da917cc2eb85a119ddbd9ab454d3d3ec8f754561e4a5fd5ba4795b4d0d",
+  "contexto_source_sha256": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+  "feedback_before_sha256": "da434a56703eaf2cbe5694c380fc27a3ee2edb9659c060bbb6ced2752d4020c6",
+  "feedback_after_sha256": "961aece7245e2772b8d36f9c3181c1150c8f6a22c4c72a3000fd6616ac9cacb8",
+  "observations": 239,
+  "unchanged": 238,
+  "changed": [
+    {
+      "id": "ct_gastronomie_336",
+      "target": "n_v4gas_paine",
+      "before": {
+        "http": 200,
+        "ok": true,
+        "won": false,
+        "attempts": 1,
+        "needs_confirmation": false,
+        "resolved_label": null,
+        "guess": {
+          "id": "n_v87_food_briosa",
+          "label": "Brioșă",
+          "rank": 424,
+          "distance": 4,
+          "temperature": "Rece",
+          "closeness": 82
+        }
+      },
+      "after": {
+        "http": 200,
+        "ok": true,
+        "won": false,
+        "attempts": 1,
+        "needs_confirmation": false,
+        "resolved_label": null,
+        "guess": {
+          "id": "n_v87_food_briosa",
+          "label": "Brioșă",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "closeness": 99
+        }
+      }
+    }
+  ]
+}

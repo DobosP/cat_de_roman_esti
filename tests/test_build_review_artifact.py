@@ -14,6 +14,7 @@ _REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_REPO_ROOT / "scripts"))
 
 import apply_rereview  # noqa: E402
+import audit_alchimie_projections  # noqa: E402
 import build_review_artifact  # noqa: E402
 import critique_pack  # noqa: E402
 
@@ -95,13 +96,19 @@ def _inputs(tmp_path: Path) -> tuple[Path, Path, Path, Path, dict, dict, dict]:
     )
 
 
-def _run(analyst: Path, verifier: Path, dossiers: Path, out: Path) -> int:
-    return build_review_artifact.main([
+def _run(
+    analyst: Path, verifier: Path, dossiers: Path, out: Path,
+    projection: Path | None = None,
+) -> int:
+    args = [
         "--analyst", str(analyst),
         "--verifier", str(verifier),
         "--dossiers", str(dossiers),
         "--out", str(out),
-    ])
+    ]
+    if projection is not None:
+        args.extend(["--projection-audit", str(projection)])
+    return build_review_artifact.main(args)
 
 
 def test_builds_conservative_v2_artifacts_accepted_by_applier(tmp_path: Path) -> None:
@@ -259,8 +266,220 @@ def test_alchimie_input_fails_without_fabricating_projection_evidence(
         })
     out = tmp_path / "out"
 
-    with pytest.raises(SystemExit, match="do not support Alchimie projection evidence"):
+    with pytest.raises(SystemExit, match="invalid analyst item schema"):
         _run(analyst_path, verifier_path, dossier_dir, out)
+    assert not out.exists()
+    assert not list(tmp_path.glob(".out.review-artifact-*"))
+
+
+@pytest.fixture(scope="module")
+def alchimie_evidence(tmp_path_factory: pytest.TempPathFactory) -> tuple[dict, dict]:
+    dossier_dir = tmp_path_factory.mktemp("alchimie-source") / "dossiers"
+    dossiers = _fresh_dossiers(dossier_dir, ("al_gastronomie_026",))
+    audit = audit_alchimie_projections.build_artifact(sorted(dossiers), dossier_dir)
+    return dossiers, audit
+
+
+def _alchimie_inputs(
+    tmp_path: Path, evidence: tuple[dict, dict],
+) -> tuple[Path, Path, Path, Path, Path, dict, dict]:
+    dossiers, audit = deepcopy(evidence)
+    dossier_dir = tmp_path / "dossiers"
+    dossier_dir.mkdir()
+    for item_id, dossier in dossiers.items():
+        _write(dossier_dir / f"{item_id}.json", dossier)
+    audit_path = tmp_path / "source-projection.json"
+    # Deliberately noncanonical whitespace must survive publication unchanged.
+    audit_path.write_bytes(json.dumps(audit, ensure_ascii=False, indent=3).encode() + b"\n\n")
+    digest = hashlib.sha256(audit_path.read_bytes()).hexdigest()
+    reviews = []
+    paths = []
+    for role in ("analyst", "verifier"):
+        review = {
+            "reviewer": f"independent-{role}-alchimie",
+            "role": role,
+            "input_ids": sorted(dossiers),
+            "items": [{
+                "id": item_id,
+                "game": "alchimie",
+                "verdict": "keep",
+                "review_binding": dossier["review_binding"],
+                "rationale": "Proiecția și traseele sunt verificate; lotul rămâne pending.",
+                "sources": ["https://example.org/alchimie"] if role == "verifier" else [],
+                "projection_audit_sha256": digest,
+            } for item_id, dossier in dossiers.items()],
+        }
+        path = tmp_path / f"{role}.json"
+        _write(path, review)
+        paths.append(path)
+        reviews.append(review)
+    return (*paths, dossier_dir, tmp_path / "out", audit_path, *reviews)
+
+
+def test_alchimie_preserves_independently_bound_audit_and_raw_judgments(
+    tmp_path: Path, alchimie_evidence: tuple[dict, dict],
+) -> None:
+    analyst, verifier, dossiers, out, audit, left, right = _alchimie_inputs(
+        tmp_path, alchimie_evidence,
+    )
+    assert _run(analyst, verifier, dossiers, out, audit) == 0
+    assert (out / "projection-audit.json").read_bytes() == audit.read_bytes()
+    path = out / "alchimie_verdicts.json"
+    artifact = json.loads(path.read_bytes())
+    verdicts, batch, bindings = apply_rereview.validated_artifact(artifact, "alchimie", path)
+    apply_rereview.validate_live_alchimie_projection_source(batch, path)
+    assert verdicts == {"al_gastronomie_026": "keep"}
+    assert bindings == {
+        "al_gastronomie_026": alchimie_evidence[0]["al_gastronomie_026"]["review_binding"],
+    }
+    assert artifact["perItem"][0]["analyst_review"] == left["items"][0]
+    assert artifact["perItem"][0]["verifier_review"] == right["items"][0]
+    assert batch["projection_audit_sha256"] == hashlib.sha256(audit.read_bytes()).hexdigest()
+    assert not list(tmp_path.glob(".out.review-artifact-*"))
+
+
+@pytest.mark.parametrize("case", [
+    "missing-audit", "missing-analyst-binding", "missing-verifier-binding",
+    "invalid-digest", "analyst-different-audit", "verifier-different-audit",
+    "changed-audit-bytes", "invalid-json", "nonobject-json", "same-reviewer",
+    "changed-projection", "missing-row", "duplicate-row", "changed-batch",
+    "changed-dossier-manifest", "changed-record", "stale-pack", "stale-kg",
+    "stale-rubric", "stale-runtime", "stale-generator",
+])
+def test_alchimie_invalid_evidence_never_overwrites_output(
+    tmp_path: Path, alchimie_evidence: tuple[dict, dict], case: str,
+) -> None:
+    analyst, verifier, dossiers, out, audit, left, right = _alchimie_inputs(
+        tmp_path, alchimie_evidence,
+    )
+    data = json.loads(audit.read_bytes())
+    if case == "missing-audit":
+        audit = None
+    elif case == "missing-analyst-binding":
+        del left["items"][0]["projection_audit_sha256"]
+    elif case == "missing-verifier-binding":
+        del right["items"][0]["projection_audit_sha256"]
+    elif case == "invalid-digest":
+        right["items"][0]["projection_audit_sha256"] = "sha256:" + "0" * 64
+    elif case == "analyst-different-audit":
+        left["items"][0]["projection_audit_sha256"] = "0" * 64
+    elif case == "verifier-different-audit":
+        right["items"][0]["projection_audit_sha256"] = "0" * 64
+    elif case == "changed-audit-bytes":
+        audit.write_bytes(audit.read_bytes() + b"\n")
+    elif case == "invalid-json":
+        audit.write_bytes(b"{")
+    elif case == "nonobject-json":
+        audit.write_bytes(b"[]")
+    elif case == "same-reviewer":
+        right["reviewer"] = left["reviewer"]
+    else:
+        if case == "changed-projection":
+            data["items"][0]["projected_opening_pair_count"] += 1
+        elif case == "missing-row":
+            data["items"] = []
+        elif case == "duplicate-row":
+            data["items"] *= 2
+        elif case == "changed-batch":
+            data["input_ids"] = ["al_invented_999"]
+        elif case == "changed-dossier-manifest":
+            data["dossier_manifest_sha256"] = "0" * 64
+        elif case == "changed-record":
+            data["items"][0]["source_record"]["difficulty"] = "greu"
+            data["items"][0]["record_sha256"] = critique_pack.canonical_json_sha256(
+                data["items"][0]["source_record"],
+            )
+        elif case == "stale-runtime":
+            data["runtime_sources"][0]["sha256"] = "0" * 64
+            data["runtime_source_manifest_sha256"] = hashlib.sha256(json.dumps(
+                data["runtime_sources"], ensure_ascii=False, sort_keys=True,
+                separators=(",", ":"),
+            ).encode()).hexdigest()
+        elif case == "stale-generator":
+            data["generator"]["sha256"] = "0" * 64
+        else:
+            data[case.removeprefix("stale-") + "_sha256"] = "0" * 64
+        # Even coordinated digest restamping cannot hide stale or altered evidence.
+        digest = hashlib.sha256(_write(audit, data)).hexdigest()
+        left["items"][0]["projection_audit_sha256"] = digest
+        right["items"][0]["projection_audit_sha256"] = digest
+    _write(analyst, left)
+    _write(verifier, right)
+    out.mkdir()
+    (out / "dossiers").mkdir()
+    for name in (
+        "alchimie_verdicts.json", "projection-audit.json", "dossiers/al_gastronomie_026.json",
+    ):
+        (out / name).write_bytes(b"preexisting bytes\n")
+    before = {
+        str(path.relative_to(out)): path.read_bytes()
+        for path in out.rglob("*") if path.is_file()
+    }
+    with pytest.raises(SystemExit):
+        _run(analyst, verifier, dossiers, out, audit)
+    after = {
+        str(path.relative_to(out)): path.read_bytes()
+        for path in out.rglob("*") if path.is_file()
+    }
+    assert after == before
+    assert not list(tmp_path.glob(".out.review-artifact-*"))
+
+
+def test_alchimie_mixed_game_batch_is_explicitly_rejected(
+    tmp_path: Path, alchimie_evidence: tuple[dict, dict],
+) -> None:
+    analyst, verifier, dossiers, out, audit, left, right = _alchimie_inputs(
+        tmp_path, alchimie_evidence,
+    )
+    extra_dir = tmp_path / "extra"
+    extra = _fresh_dossiers(extra_dir, (IDS[0],))[IDS[0]]
+    _write(dossiers / f"{IDS[0]}.json", extra)
+    for path, review in ((analyst, left), (verifier, right)):
+        review["input_ids"].append(IDS[0])
+        review["items"].append({
+            "id": IDS[0], "game": "contexto", "verdict": "keep",
+            "review_binding": extra["review_binding"], "rationale": "Separat.",
+            "sources": ["https://example.org/contexto"],
+        })
+        _write(path, review)
+    with pytest.raises(SystemExit, match="sorted Alchimie-only batch"):
+        _run(analyst, verifier, dossiers, out, audit)
+    assert not out.exists()
+
+
+def test_non_alchimie_batch_rejects_unused_or_stale_projection_audit(tmp_path: Path) -> None:
+    analyst, verifier, dossiers, out, _, _, _ = _inputs(tmp_path)
+    audit = tmp_path / "projection.json"
+    _write(audit, {})
+    with pytest.raises(SystemExit, match="without an Alchimie batch"):
+        _run(analyst, verifier, dossiers, out, audit)
+    assert not out.exists()
+    out.mkdir()
+    (out / "projection-audit.json").write_bytes(b"old audit\n")
+    with pytest.raises(SystemExit, match="stale projection audit"):
+        _run(analyst, verifier, dossiers, out)
+    assert (out / "projection-audit.json").read_bytes() == b"old audit\n"
+    assert not list(out.glob("*_verdicts.json"))
+
+
+def test_alchimie_unsorted_batch_is_rejected_before_audit_output(tmp_path: Path) -> None:
+    ids = ("al_gastronomie_030", "al_gastronomie_026")
+    dossier_dir = tmp_path / "dossiers"
+    dossiers = _fresh_dossiers(dossier_dir, ids)
+    for role in ("analyst", "verifier"):
+        _write(tmp_path / f"{role}.json", {
+            "reviewer": f"independent-{role}", "role": role, "input_ids": list(ids),
+            "items": [{
+                "id": item_id, "game": "alchimie", "verdict": "keep",
+                "review_binding": dossiers[item_id]["review_binding"],
+                "rationale": "Ambele proiecții necesită verificare.",
+                "sources": ["https://example.org/alchimie"],
+                "projection_audit_sha256": "0" * 64,
+            } for item_id in ids],
+        })
+    out = tmp_path / "out"
+    with pytest.raises(SystemExit, match="sorted Alchimie-only batch"):
+        _run(tmp_path / "analyst.json", tmp_path / "verifier.json", dossier_dir, out)
     assert not out.exists()
     assert not list(tmp_path.glob(".out.review-artifact-*"))
 

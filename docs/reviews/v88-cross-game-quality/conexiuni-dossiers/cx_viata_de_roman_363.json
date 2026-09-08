@@ -1,0 +1,200 @@
+{
+ "id": "cx_viata_de_roman_363",
+ "game": "conexiuni",
+ "category": "viata_de_roman",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "84f69fe0269502b104db68babb47ec6a8f159c02efc4241710459b3e3aa30339",
+ "kg_sha256": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+ "lint_findings": [],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 0
+ },
+ "groups": [
+  {
+   "label": "Componente ale unui circuit electric casnic",
+   "members": [
+    {
+     "id": "n_v33_electric_light_bec",
+     "label": "Bec",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.94,
+     "degree": 2,
+     "incoming_degree": 3,
+     "description": "Obiect care produce lumină când primește energie electrică."
+    },
+    {
+     "id": "n_v33_electric_outlet_priza",
+     "label": "Priză electrică",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.94,
+     "degree": 2,
+     "incoming_degree": 3,
+     "description": "Punct fix în care se introduce un ștecher pentru alimentarea unui aparat."
+    },
+    {
+     "id": "n_v33_electric_plug_stecher",
+     "label": "Ștecher",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.93,
+     "degree": 2,
+     "incoming_degree": 2,
+     "description": "Piesă cu pini introdusă într-o priză electrică."
+    },
+    {
+     "id": "n_v33_electric_control_intrerupator",
+     "label": "Întrerupător de lumină",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.94,
+     "degree": 2,
+     "incoming_degree": 3,
+     "description": "Dispozitiv care aprinde sau stinge lumina."
+    }
+   ]
+  },
+  {
+   "label": "Unelte manuale de atelier",
+   "members": [
+    {
+     "id": "n_v32_workshop_hand_ciocan",
+     "label": "Ciocan",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.94,
+     "degree": 2,
+     "incoming_degree": 3,
+     "description": "Unealtă cu mâner și cap greu, folosită pentru a bate cuie."
+    },
+    {
+     "id": "n_v32_workshop_hand_surubelnita",
+     "label": "Șurubelniță",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.93,
+     "degree": 2,
+     "incoming_degree": 2,
+     "description": "Unealtă folosită pentru a strânge sau desface șuruburi."
+    },
+    {
+     "id": "n_v32_workshop_hand_cleste",
+     "label": "Clește",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.91,
+     "degree": 2,
+     "incoming_degree": 5,
+     "description": "Unealtă cu două brațe, folosită pentru a prinde, îndoi sau tăia."
+    },
+    {
+     "id": "n_v32_workshop_cut_fierastrau",
+     "label": "Fierăstrău",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.92,
+     "degree": 2,
+     "incoming_degree": 2,
+     "description": "Unealtă cu lamă dințată, folosită pentru a tăia lemn sau alte materiale."
+    }
+   ]
+  },
+  {
+   "label": "Mobilier pe care te așezi",
+   "members": [
+    {
+     "id": "n_v24_home_seating_scaun",
+     "label": "Scaun",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.88,
+     "degree": 3,
+     "incoming_degree": 2,
+     "description": "Concept cotidian din grupul «mobilier pentru șezut»: Scaun."
+    },
+    {
+     "id": "n_v24_home_seating_canapea",
+     "label": "Canapea",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.88,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Concept cotidian din grupul «mobilier pentru șezut»: Canapea."
+    },
+    {
+     "id": "n_v24_home_seating_fotoliu",
+     "label": "Fotoliu",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.88,
+     "degree": 2,
+     "incoming_degree": 5,
+     "description": "Concept cotidian din grupul «mobilier pentru șezut»: Fotoliu."
+    },
+    {
+     "id": "n_v88_home_taburet",
+     "label": "Taburet",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.85,
+     "degree": 4,
+     "incoming_degree": 1,
+     "description": "Scaun de dimensiuni mici, de obicei fără spătar și fără brațe."
+    }
+   ]
+  },
+  {
+   "label": "Vase pentru gătit la cald",
+   "members": [
+    {
+     "id": "n_v30_kitchen_cookware_oala",
+     "label": "Oală",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.93,
+     "degree": 2,
+     "incoming_degree": 3,
+     "description": "Vas adânc folosit pe aragaz pentru a fierbe și a găti mâncare."
+    },
+    {
+     "id": "n_v30_kitchen_cookware_tigaie",
+     "label": "Tigaie",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.93,
+     "degree": 2,
+     "incoming_degree": 3,
+     "description": "Vas de gătit puțin adânc, cu mâner, folosit mai ales pentru prăjire."
+    },
+    {
+     "id": "n_v88_kitchen_cratita",
+     "label": "Cratiță",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.85,
+     "degree": 4,
+     "incoming_degree": 2,
+     "description": "Vas de bucătărie cu pereți relativ scunzi, folosit pentru fierberea sau prăjirea preparatelor."
+    },
+    {
+     "id": "n_v84_food_tava_copt",
+     "label": "Tavă de copt",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.85,
+     "degree": 4,
+     "incoming_degree": 0,
+     "description": "Recipient cu margini ridicate în care se așază alimentele pentru cuptor."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:7fd041a88311676a6e0794062ddb63dc65d9b73804dd361c935e5157986062d0"
+}

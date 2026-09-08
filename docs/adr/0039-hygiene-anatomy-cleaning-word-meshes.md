@@ -1,7 +1,7 @@
 # ADR-0039: Add hygiene, anatomy, and cleaning word meshes
 
 Date: 2026-07-18
-Status: accepted
+Status: partially superseded by ADR-0131 (cleaning-node sink cut and deferred Mătură ownership)
 
 ## Decision
 Add seventeen first-class easy concepts for personal hygiene, lower-limb anatomy, and

@@ -1,0 +1,687 @@
+{
+  "schema_version": 2,
+  "date": "2026-09-08",
+  "baseline_commit": "2878417ed43aaf790badfa09297ea122121b9449",
+  "candidate_branch": "feat/v88-cross-game-quality",
+  "result": "passed",
+  "checks": {
+    "backend312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 814.92,
+      "log_sha256": "b606d73e782811224e04763b7383056dc47b2f36782dc832a84c9207e6af3b43",
+      "tail": [
+        "........................................................................ [ 52%]",
+        "........................................................................ [ 57%]",
+        "........................................................................ [ 62%]",
+        "........................................................................ [ 66%]",
+        "........................................................................ [ 71%]",
+        "........................................................................ [ 76%]",
+        "........................................................................ [ 81%]",
+        "........................................................................ [ 85%]",
+        "........................................................................ [ 90%]",
+        "........................................................................ [ 95%]",
+        "....................................................................     [100%]",
+        "1508 passed in 811.86s (0:13:31)"
+      ],
+      "log": "runs/backend312.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "5ec56358d339bd48ce54748ba41cb9115c6a8e15a5be3c49b2f7790c0143269a"
+    },
+    "accounts312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 9.17,
+      "log_sha256": "13b0f0b6465ffaa1ddaa58858199a0d713d8a1f83d3d3e37654a712ffbb6e09c",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 7.08s"
+      ],
+      "log": "runs/accounts312.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "c9cb56c47525debabf981981fe6192bdff230fb40790ce0550affea0adf80497"
+    },
+    "backend314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v88-cross-game-quality/py314/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 722.41,
+      "log_sha256": "b59787d0a00b7d8bd7f2ae103d4a1d32bae02e99922d36281e5b1c007cb49f98",
+      "tail": [
+        "........................................................................ [ 52%]",
+        "........................................................................ [ 57%]",
+        "........................................................................ [ 62%]",
+        "........................................................................ [ 66%]",
+        "........................................................................ [ 71%]",
+        "........................................................................ [ 76%]",
+        "........................................................................ [ 81%]",
+        "........................................................................ [ 85%]",
+        "........................................................................ [ 90%]",
+        "........................................................................ [ 95%]",
+        "....................................................................     [100%]",
+        "1508 passed in 718.67s (0:11:58)"
+      ],
+      "log": "runs/backend314.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "ee58869f5925788c3bde62d31d9657624ebd865ab419801a8bd9f7436ecd4896"
+    },
+    "accounts314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v88-cross-game-quality/py314/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 9.7,
+      "log_sha256": "b678455b948cccc47a21b6bd6347c0456b714b04e0f603e8b8fc17eea00d6c44",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 7.32s"
+      ],
+      "log": "runs/accounts314.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "29dea6ac7de295cb71a4c1e890d191e7aa91b74655c361cff7f1d810592167cc"
+    },
+    "frontend_native": {
+      "command": [
+        "npm",
+        "test"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 1.88,
+      "log_sha256": "839499f5e2a38c7cf8b73deb8e21cd8e5e643658a62072945a2338bd748ef21d",
+      "tail": [
+        "✔ the starter chip appears on Intrusul/Perechi cards only pre-graduation (0.261861ms)",
+        "✔ the hero tagline names the cultural range and keeps the h1 untouched (0.241007ms)",
+        "✔ meta-loop CSS lives under its V42 anchor and keeps the diploma action >=44px (0.306157ms)",
+        "✔ optional account controls stay outside the initial bundle graph (0.17465ms)",
+        "ℹ tests 193",
+        "ℹ suites 0",
+        "ℹ pass 193",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 1337.885176"
+      ],
+      "log": "runs/frontend_native.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "89d0e7c9b42b44870770413f9128c09c6150ac5d04125147391c13585f63ee13"
+    },
+    "frontend_lint": {
+      "command": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 17.27,
+      "log_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 lint",
+        "> eslint .",
+        ""
+      ],
+      "log": "runs/frontend_lint.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a"
+    },
+    "frontend_typecheck": {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 8.7,
+      "log_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 typecheck",
+        "> tsc --noEmit",
+        ""
+      ],
+      "log": "runs/frontend_typecheck.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "d0e30d1dc915362da5e6d51943f265c1840c3182f61f2cd8a65a8159c982ac05"
+    },
+    "frontend_build": {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 11.59,
+      "log_sha256": "b0ca34f8e36a63761f78eadfec693770fa0d3ce6cb564f3607980740a2e2b863",
+      "tail": [
+        "../cat_de_roman_esti/web/static/assets/index-1lSIVFBz.js                             348.44 kB │ gzip: 114.58 kB",
+        "",
+        "✓ built in 2.22s",
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 check:bundle",
+        "> node scripts/check-bundle-budget.mjs",
+        "",
+        "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+        "   110.54 KiB  assets/index-1lSIVFBz.js",
+        "     8.38 KiB  assets/index-CkVCIp7R.css",
+        "   118.92 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ],
+      "log": "runs/frontend_build.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "163000c0f1829731c5638af5a1055aab80e4994a38b4b612f9fe153282574394"
+    },
+    "frontend_bundle": {
+      "command": [
+        "npm",
+        "run",
+        "check:bundle"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 0.28,
+      "log_sha256": "81ac90800069ddb0221d30003e9c0b187a7509aa90e026faab9874b8f94cb9d8",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 check:bundle",
+        "> node scripts/check-bundle-budget.mjs",
+        "",
+        "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+        "   110.54 KiB  assets/index-1lSIVFBz.js",
+        "     8.38 KiB  assets/index-CkVCIp7R.css",
+        "   118.92 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ],
+      "log": "runs/frontend_bundle.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "9267803f1308ec6d30e7902b87894a8ebdd50433fa559a55b25dad9415c1109b"
+    },
+    "browser": {
+      "command": [
+        "npm",
+        "run",
+        "test:e2e"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 689.86,
+      "log_sha256": "864dd4703a2a8ced89f6cd1c95bd86de605f73e3453e087a56919d89029b204c",
+      "tail": [
+        "  ✓  179 [mobile] › e2e/start-failure.spec.mjs:93:3 › intrusul retains its completed result when replay creation fails (3.4s)",
+        "  ✓  180 [mobile] › e2e/start-failure.spec.mjs:50:3 › perechi keeps a failed new start visible and retries the selected options (3.1s)",
+        "  ✓  181 [mobile] › e2e/start-failure.spec.mjs:93:3 › perechi retains its completed result when replay creation fails (4.2s)",
+        "  ✓  182 [mobile] › e2e/start-failure.spec.mjs:50:3 › conexiuni keeps a failed new start visible and retries the selected options (3.3s)",
+        "  ✓  183 [mobile] › e2e/start-failure.spec.mjs:93:3 › conexiuni retains its completed result when replay creation fails (8.2s)",
+        "  ✓  184 [mobile] › e2e/start-failure.spec.mjs:50:3 › contexto keeps a failed new start visible and retries the selected options (3.0s)",
+        "  ✓  185 [mobile] › e2e/start-failure.spec.mjs:93:3 › contexto retains its completed result when replay creation fails (3.4s)",
+        "  ✓  186 [mobile] › e2e/start-failure.spec.mjs:50:3 › lant keeps a failed new start visible and retries the selected options (3.1s)",
+        "  ✓  187 [mobile] › e2e/start-failure.spec.mjs:93:3 › lant retains its completed result when replay creation fails (3.5s)",
+        "  ✓  188 [mobile] › e2e/start-failure.spec.mjs:143:1 › alchimie retains its live round and blocks actions while another round is pending (3.2s)",
+        "",
+        "  188 passed (11.5m)"
+      ],
+      "log": "runs/browser.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "5ebbb6ce15a46f0aef461d9ae61fd5d455534d1f9721d6ef091b060a29da5d3c"
+    },
+    "fixture": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_fixture.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 0.33,
+      "log_sha256": "2ea91a1601e1229b41b1f97d001ac3cb14827ba9afa7e98d46600fc614bab815",
+      "tail": [
+        "  [  ok] alias_unique                 0 error(s)",
+        "  [  ok] label_style                  0 error(s)",
+        "  [  ok] meta_counts                  0 error(s)",
+        "  [  ok] puzzle_par                   0 error(s)",
+        "  [  ok] puzzle_hop_band              0 error(s)",
+        "  [  ok] puzzle_hints                 0 error(s)",
+        "  [  ok] puzzle_ids_resolve           0 error(s)",
+        "  [  ok] puzzle_shortest_path         0 error(s)",
+        "  [  ok] puzzle_category_scope        0 error(s)",
+        "  [  ok] puzzle_distractor_shortcut   0 error(s)",
+        "------------------------------------------------------------",
+        "GREEN: fixture is valid (0 errors)"
+      ],
+      "log": "runs/fixture.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "45cb03fd7929a15decbe32302cb9cecac59fe790807031a4a19b75a7cc7d34d4"
+    },
+    "pack": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_games_pack.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 13.32,
+      "log_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+      "tail": [
+        "  copies_identical         ok",
+        "  structure                ok",
+        "  item_shape               ok",
+        "  unique_ids               ok",
+        "  playability              ok",
+        "  meta_counts              ok",
+        "  id_high_water            ok",
+        "",
+        "games pack GREEN"
+      ],
+      "log": "runs/pack.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "09f01c42a2829a3b8877e60802bae8967baeb530df5220cbc675238466da65a4"
+    },
+    "pending": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/critique_pack.py",
+        "--status",
+        "pending",
+        "--strict"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 0.59,
+      "log_sha256": "f19d308c2a43b0b95b9b12f3458a99e9f64ce7c982f4f113f1997cbbcffae852",
+      "tail": [
+        "critique_pack: 8 item(s) checked, 0 flagged, 0 FAIL finding(s)",
+        "  member_overuse       WARN x65",
+        "  nondistinctive_region_link WARN x16"
+      ],
+      "log": "runs/pending.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "beccbf15577ac4c2020c302579819da43b23a3548cab6e7afe5fc83ca4af4959"
+    },
+    "ruff": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 0.09,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "tail": [
+        "All checks passed!"
+      ],
+      "log": "runs/ruff.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd"
+    },
+    "docs": {
+      "command": [
+        "python3",
+        "/home/dobo/work/agent-ops/scripts/check_docs.py",
+        "."
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 0.15,
+      "log_sha256": "1b3049914b075e251f1f0f40e86a1827b2d4ed03b0e74479134fa00680b983cc",
+      "tail": [
+        "",
+        "## dead links",
+        "(none)",
+        "",
+        "## stale model terms",
+        "(none)",
+        "",
+        "## retired ops verbs",
+        "(none)",
+        "",
+        "## orphan docs",
+        "(none)"
+      ],
+      "log": "runs/docs.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "04a6e7852a3295310594005fd6adf63413d086e49b4b96c5ecd4eb4fe0a8be7f"
+    },
+    "whitespace": {
+      "command": [
+        "git",
+        "diff",
+        "HEAD",
+        "--check"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality",
+      "exit_code": 0,
+      "elapsed_seconds": 0.28,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tail": [],
+      "log": "runs/whitespace.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    }
+  },
+  "initial_full_backend_runs": {
+    "backend312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality",
+      "exit_code": 1,
+      "elapsed_seconds": 902.12,
+      "log_sha256": "f8cf758232ea41a432206df58e577c4da65f53821b96d7cdcf21a15ff7716861",
+      "tail": [
+        "E       assert 107 == 106",
+        "",
+        "tests/test_v48_alchimie_pending_gate.py:344: AssertionError",
+        "=========================== short test summary info ============================",
+        "FAILED tests/test_alchimie_sparse_recipes.py::test_all_approved_boards_have_sparse_deterministic_target_routes",
+        "FAILED tests/test_alchimie_sparse_recipes.py::test_selected_routes_prefer_the_strongest_discovered_shortest_alternative",
+        "FAILED tests/test_v14_social_content.py::test_v14_pack_inventory_and_review_split",
+        "FAILED tests/test_v31_basic_words.py::test_v31_exact_semantic_edges_and_inbound_beginner_topology",
+        "FAILED tests/test_v44_contexto_common_words.py::test_every_proxy_anchor_reaches_every_selectable_unique_target",
+        "FAILED tests/test_v46_conexiuni_pending_gate.py::test_v46_pack_removes_only_the_rejected_pending_conexiuni_records",
+        "FAILED tests/test_v48_alchimie_pending_gate.py::test_v48_pack_rankings_and_frozen_derived_mirrors_track_the_gate",
+        "7 failed, 1501 passed in 898.44s (0:14:58)"
+      ],
+      "log": "runs/backend312-initial.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "e918926c23e9df48374468266cbe1735d9d399692751f0e60f7d83f008d27325"
+    },
+    "backend314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v88-cross-game-quality/py314/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality",
+      "exit_code": 1,
+      "elapsed_seconds": 808.38,
+      "log_sha256": "45a90d32f384e94eaaaee06cc328e7f1c007ee97e4f2b71b8c9162fc40682c26",
+      "tail": [
+        "E       assert 107 == 106",
+        "",
+        "tests/test_v48_alchimie_pending_gate.py:344: AssertionError",
+        "=========================== short test summary info ============================",
+        "FAILED tests/test_alchimie_sparse_recipes.py::test_all_approved_boards_have_sparse_deterministic_target_routes",
+        "FAILED tests/test_alchimie_sparse_recipes.py::test_selected_routes_prefer_the_strongest_discovered_shortest_alternative",
+        "FAILED tests/test_v14_social_content.py::test_v14_pack_inventory_and_review_split",
+        "FAILED tests/test_v31_basic_words.py::test_v31_exact_semantic_edges_and_inbound_beginner_topology",
+        "FAILED tests/test_v44_contexto_common_words.py::test_every_proxy_anchor_reaches_every_selectable_unique_target",
+        "FAILED tests/test_v46_conexiuni_pending_gate.py::test_v46_pack_removes_only_the_rejected_pending_conexiuni_records",
+        "FAILED tests/test_v48_alchimie_pending_gate.py::test_v48_pack_rankings_and_frozen_derived_mirrors_track_the_gate",
+        "7 failed, 1501 passed in 802.06s (0:13:22)"
+      ],
+      "log": "runs/backend314-initial.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "d343103f14f9cbfcc2020d422f95f190d3822471d621f5c0d0f58199519d44ce"
+    }
+  },
+  "pipeline_evidence": {
+    "graph-preflight": {
+      "observed_exit_code": 1,
+      "log": "pipeline/graph-preflight.log.gz",
+      "compression": "gzip",
+      "log_sha256": "f2a4858b02a3f8e1408358904c82502db56c3ae7f7e524dcbc1907486ab11c75",
+      "archive_sha256": "ef91354d4ae25e4569f5ae62cdf20b0e549e8aa3d140c69e206bbf7e07b441d7"
+    },
+    "final-graph-preflight": {
+      "observed_exit_code": 0,
+      "log": "pipeline/final-graph-preflight.log.gz",
+      "compression": "gzip",
+      "log_sha256": "a3b76281a9af169ad1a4c2253770650ab6d70dda65af739aae14d7b8e5b1176b",
+      "archive_sha256": "53041ece40480d04d401d3ab170a50b5d54025e6296ed0da2a4da1053244ec9c"
+    },
+    "final-graph-apply": {
+      "observed_exit_code": 1,
+      "log": "pipeline/final-graph-apply.log.gz",
+      "compression": "gzip",
+      "log_sha256": "e21884bfb6214e1c83a464605ef6fd37349a395f6df802ca9535bce6c35d14e8",
+      "archive_sha256": "5f38b816bbeeb2f22d75c9799e46e51fd6da46b88dd2a514ababc5ccefa81559"
+    },
+    "import": {
+      "observed_exit_code": 0,
+      "log": "pipeline/import.log.gz",
+      "compression": "gzip",
+      "log_sha256": "593d6fa5ee3364568540c1f414234cab8d195404dc4a0776b1e0100a5791516c",
+      "archive_sha256": "a7bd0cd815c29507017c6124f273ffad83fc236f1fb128fffd92060f68bd0896"
+    },
+    "final-graph-apply-serial": {
+      "observed_exit_code": 0,
+      "log": "pipeline/final-graph-apply-serial.log.gz",
+      "compression": "gzip",
+      "log_sha256": "d9e48b03afb43d834b9511662948ffe525f51bf167ab3f29f81d0a7593a44a88",
+      "archive_sha256": "4e85085b8fe28b303f403aa79a218b8f0a69575ac998779c2a2a1f4011880eaf"
+    },
+    "import-serial": {
+      "observed_exit_code": 0,
+      "log": "pipeline/import-serial.log.gz",
+      "compression": "gzip",
+      "log_sha256": "ef9ac5750ea3decf759721712c5ade1aeed863081db67bfde8c9bb387a0f4410",
+      "archive_sha256": "f2a101848ba37227aaf6046378c6a2108b077eeb65d93d2e80a373a78ad0a2ba"
+    },
+    "alchimie-critique": {
+      "observed_exit_code": 0,
+      "log": "pipeline/alchimie-critique.log.gz",
+      "compression": "gzip",
+      "log_sha256": "c2609097bf347d85fc4ee35898e58dac2888fa3cf5ed72ed4a10a038fa8ef584",
+      "archive_sha256": "a90a29e82f5ff17d55bad206820e8d04056e60ad55a526964252caf7a764c3d6"
+    },
+    "alchimie-audit": {
+      "observed_exit_code": 0,
+      "log": "pipeline/alchimie-audit.log.gz",
+      "compression": "gzip",
+      "log_sha256": "20e260659365c08b53f41225e4b6109c257388ec0b308fbe2d25895ddc96e1a7",
+      "archive_sha256": "e71898457f43c67d2b7e28c9b770f1a309ec065100c645ae380397a4e09df0b3"
+    },
+    "alchimie-build-verdict": {
+      "observed_exit_code": 0,
+      "log": "pipeline/alchimie-build-verdict.log.gz",
+      "compression": "gzip",
+      "log_sha256": "655b0571a375ea79c173ba0f50a8c093351f6ca3af3e331e4f3029e6f9a4d7df",
+      "archive_sha256": "74004cbaafcd5525584f9db06c97abca6ca9a12a928ce3917abb592c797c06fc"
+    },
+    "alchimie-promote": {
+      "observed_exit_code": 0,
+      "log": "pipeline/alchimie-promote.log.gz",
+      "compression": "gzip",
+      "log_sha256": "2320669a7c70878193f3655e8d13ac714bda5a28203efecb51a111378e1364d9",
+      "archive_sha256": "c74e05f8ff11dbdd03e193177ee034bee96610e45e52d0ead99046d6b9cdacbe"
+    },
+    "conexiuni-critique": {
+      "observed_exit_code": 2,
+      "log": "pipeline/conexiuni-critique.log.gz",
+      "compression": "gzip",
+      "log_sha256": "d3082e0688e3e1d91fdbe1847714a9e700ec4966651275e0962a39910f2fa3ea",
+      "archive_sha256": "16fe9d7596ee5c679ef226a90da4e069029aa758c98242376103d6196b763034"
+    },
+    "conexiuni-critique-final": {
+      "observed_exit_code": 0,
+      "log": "pipeline/conexiuni-critique-final.log.gz",
+      "compression": "gzip",
+      "log_sha256": "2a7297fdaa4d3f7ff9f6774a63d6a656619b95a98b1fa489072148396923977f",
+      "archive_sha256": "bfba0c863e7af7a957b23462eac5f9bd02d3f5655a9898a2208d3cc5cb7bd4ee"
+    },
+    "conexiuni-build-verdict": {
+      "observed_exit_code": 0,
+      "log": "pipeline/conexiuni-build-verdict.log.gz",
+      "compression": "gzip",
+      "log_sha256": "e9d27608f50fe6cd55a7fccf3a4cf758f3c76d85862dd3fc3cff84514e7b8651",
+      "archive_sha256": "a83128722d2ce597af49e3e55b268850fff887fc1ad2fd0aae977c72542d9e29"
+    },
+    "conexiuni-promote": {
+      "observed_exit_code": 0,
+      "log": "pipeline/conexiuni-promote.log.gz",
+      "compression": "gzip",
+      "log_sha256": "74215f86eee281c52a1e20c10c74e6787db54b6701ad74ec7d56faa9e0d6ccba",
+      "archive_sha256": "33301b2e072c16a712e51d5e4a33114a449046b0558ebf1a0d8a84a3f314af51"
+    },
+    "rank": {
+      "observed_exit_code": 0,
+      "log": "pipeline/rank.log.gz",
+      "compression": "gzip",
+      "log_sha256": "b94e976dd4851f0e1f50be9eab29b34ee3040df23f14e187e3f288cca207fe0d",
+      "archive_sha256": "cf9b747619239b2756d230f066d7df7d840fb064cc4c6dcb65ecb117c8b9a4b6"
+    },
+    "derived": {
+      "observed_exit_code": 0,
+      "log": "pipeline/derived.log.gz",
+      "compression": "gzip",
+      "log_sha256": "21929e317d7bf3959434fe1f4ed8c782eee34a8512b235a650f5cae0bd5a8865",
+      "archive_sha256": "5202a96c74f363f7002838514a3a35dc9531c96d4cfae8e1cdc0d2a133703dba"
+    },
+    "mobile": {
+      "observed_exit_code": 0,
+      "log": "pipeline/mobile.log.gz",
+      "compression": "gzip",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "archive_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "seed-snapshot": {
+      "observed_exit_code": 0,
+      "log": "pipeline/seed-snapshot.log.gz",
+      "compression": "gzip",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "archive_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "transaction-order-recovery.json": {
+      "log": "pipeline/transaction-order-recovery.json.gz",
+      "compression": "gzip",
+      "log_sha256": "a3b00fee3b3b0176822a1ed775210899aa6e974f721163ecb6106e396a7194fc",
+      "archive_sha256": "4a9d7068059829f77ee5dcb6fef72832de543af5f0c74d46d534b949547e503a"
+    },
+    "initial-import-curation-report.txt": {
+      "log": "pipeline/initial-import-curation-report.txt.gz",
+      "compression": "gzip",
+      "log_sha256": "e60090c7ae0ad26bcbeabe5458ab12403e10025af49c426d2542d88ff13ca833",
+      "archive_sha256": "36b6a933829f8f3f9051a9759a6f0ab9dec7a95b17a63b2d4c2ce79deb3c0a9c"
+    }
+  },
+  "focused_evidence": {
+    "content": "content-checks/verification.json:59 final new graph/history/public cases pass; original23/50,49/49,2/2 and282/285 development results remain distinct.",
+    "compatibility": "content-checks/diagnostic-remediation.json: seven full-suite failures reproduced, corrected with exact historical/current assertions and all7 passed.",
+    "tooling": "tooling-verification.json:45 final serializer/V48 cases and102 existing critique cases passed. Archived44-case earlier stage is retained.",
+    "lant": "lant-action/verification.json:80 backend,193 native,20 browser cases plus4 settled screenshot cases. Actual baseline defects and all logs preserved.",
+    "bread": "bread-feedback/verification.json:8 focused cases pass; isolated-impact.json records one changed and238 exact responses on unchanged graph bytes.",
+    "impact": "impact/capture-receipt.json:11233 fresh final observations; all655 old source records,82 Alchimie projections,100 Lanț profiles and336 derived rows exact; semantic costs disclosed."
+  },
+  "initial_findings": [
+    "The first proposed Conexiuni writing/bed groups reused3/4 members of a rejected board. They were replaced before import; raw novelty failures are preserved.",
+    "The first graph proposal and initial independent review missed canonical reciprocal-key deduplication and distinct/same-category neighbor floors. Supported preflight rejected it; corrected source-backed graph has fresh exact review and real preflight evidence.",
+    "Independent factual review rejected fermented Smântână as a sweet whipping-cream seed. The graph now owns qualified sweet cream and removes the false old edge. A true cream→Diplomat ingredient link exposed a one-pair shortcut; alternative seed sets were weak, so Diplomat is held.",
+    "Root launched the first pack import before graph application finished. The no-game-items pack guard detected the write and restored its transaction. All five files were verified byte-identical to baseline; graph application and import then ran strictly sequentially and passed. No approved data was lost.",
+    "The first Conexiuni critique command used space-separated IDs; CLI exited2 before work. Correct comma-separated invocation passed.",
+    "New graph tests initially assumed invalid Lanț moves returned full state. They now verify invalid response and authoritative GET state; an early projection assertion ran before its pending source edit. Original27 failures are preserved.",
+    "Three new inverse assertions initially used two-space JSON formatting for one-space artifact files. Reconstruction was exact; the format assertion was corrected and all59 new tests passed.",
+    "The first bread evidence test expected a verdict field where the independent contract uses decision; it now requires the exact accepted decision and exact proposal hash. Initial83/84 and final8/8 are preserved.",
+    "Both initial full backends passed1501/1508. Five stale aggregate/inventory assumptions and two former topology assumptions were corrected: historical fingerprints/isolation remain exact on reconstructedV87, current counts use shared pins, and exactly six reviewed cleaning escapes are required. No game code, content, performance threshold or current sparse bound changed for those test corrections.",
+    "After the seven test corrections, Python3.14 passed its complete suite. The concurrent Python3.12 runner ended with observed exit143 before completion and no reported failure markers; its cause was not established. Its partial log is preserved and does not count as a pass. The same complete3.12 suite was then restarted alone without source/test changes."
+  ],
+  "build": {
+    "initial_transfer_kib": 118.92,
+    "unchanged_limit_kib": 120,
+    "no_new_dependencies": true,
+    "seed38": "Alchimie starts Liga Campionilor la handbal instead of Impozit; Contexto reachable_count2330→2343; other four initial payloads exact."
+  },
+  "environment": {
+    "python": [
+      "3.12.3",
+      "3.14.6"
+    ],
+    "node": "24.20.0",
+    "npm": "11.19.0",
+    "backend": "Anonymous/debug-off; external data disabled; candidate PYTHONPATH.",
+    "accounts": "Enabled/debug only in isolated accounts suites.",
+    "browser": "One Chromium worker, desktop/mobile emulation, actual local BFF, no retries.",
+    "install": "Fresh constrained Python3.14 and Node24 dependency setup."
+  },
+  "visual": {
+    "root_inspected": [
+      "lant-action/final-recovered-hint-mobile.png",
+      "lant-action/initial-read-only-recovery-mobile.png",
+      "lant-action/final-recovered-win-desktop.png"
+    ],
+    "result": "Earned hint and continued stage are readable; retry is adjacent to disabled input/choices; settled win displays authoritative1000 points. Existing sticky/horizontally scrollable HUD retained; emulation, not real-device acceptance."
+  },
+  "limits": [
+    "Three new rounds: one Alchimie and two Conexiuni; no new Contexto/Lanț/derived rounds.",
+    "Seven concepts,28 forms (25 grammatical+3qualified),33 new directed links andone removed link; zero synonyms.",
+    "Six formerly isolated cleaning nodes gain real outgoing paths, while all71 existing Contexto proxy mappings remain exact.",
+    "Dessert→Frișcă and some native household-context feedback cool;8540 changed observations are not8540 improvements. See supplemental review and full impact report.",
+    "No push, deployment, accounts enablement, human playtest or real-device acceptance. Local landing follows the separately authorized recurring loop."
+  ],
+  "archive_note": "Raw logs and complete impact matrices are lossless gzip with zero timestamps, binding both decoded and archive bytes. Initial failures remain separate from final green receipts.",
+  "interrupted_backend_attempts": {
+    "backend312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "outer_runner_command": [
+        "python3",
+        "/home/dobo/work/_temp/feat__v88-cross-game-quality/run_gate.py",
+        "backend312"
+      ],
+      "observed_outer_exit_code": 143,
+      "result": "incomplete: SIGTERM termination observed; cause not established",
+      "log_sha256": "20d38646c8d84c90e795058cb18342107907f6935bf1c16c0605acd31c208c58",
+      "tail": [
+        "........................................................................ [ 76%]",
+        "........................................................................ [ 81%]",
+        "........................................................................ [ 85%]",
+        "........................................................................ [ 90%]",
+        "........................................."
+      ],
+      "source_changes_since_start": false,
+      "next": "Rerun the same complete suite alone, then accounts; no source or test changes.",
+      "log": "runs/backend312-interrupted.log.gz",
+      "compression": "gzip",
+      "archive_sha256": "4611f92050c0345e24d55bca280cc1dc5b263fe260d96f12714d5715ff099064"
+    }
+  }
+}

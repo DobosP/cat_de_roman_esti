@@ -34,8 +34,23 @@ authoring so the final inventory comparison covers the whole batch.
    PYTHONPATH=. <interp> scripts/apply_rereview.py --dir <scratch>/<wave>-verdicts
    ```
 
-   This portable serializer supports Conexiuni, Contexto, and Lanț. Alchimie retains its
-   existing projection-bound workflow; passing an Alchimie ID here fails before output.
+   For Alchimie, follow [ADR-0129](adr/0129-portable-alchimie-projection-reviews.md).
+   Keep its sorted exact IDs in a separate Alchimie-only batch. Generate the live recipe
+   audit after staging and dossier creation, then give the same audit to both reviewers:
+
+   ```bash
+   PYTHONPATH=. <interp> scripts/audit_alchimie_projections.py --ids <sorted-alchimie-ids> \
+     --dossier <scratch>/<wave>-dossiers --json <scratch>/<wave>-projection-audit.json
+   ```
+
+   Include `projection_audit_sha256` on every Alchimie raw judgment: the audit file's
+   exact lowercase 64-character SHA-256, without a `sha256:` prefix. Each reviewer must
+   assess the displayed openings, sparse routes, exact action par and choice bounds.
+   Add `--projection-audit <scratch>/<wave>-projection-audit.json` to the builder command.
+   The completed output includes that audit's original bytes and the bound dossiers.
+   A changed pack, KG, rubric, runtime, generator, dossier or projection requires fresh
+   evidence and review. Run `apply_rereview.py` afterward for the unchanged strict
+   prospective-inventory promotion gate; creating the artifact does not promote content.
 
 5. Run the content gates and refresh only the digest-bound artifacts affected by the pack:
 

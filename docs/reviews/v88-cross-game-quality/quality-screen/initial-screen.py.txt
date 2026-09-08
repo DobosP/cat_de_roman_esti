@@ -1,0 +1,66 @@
+import os,sys,json,copy,itertools,hashlib,pathlib
+repo=pathlib.Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality')
+scratch=pathlib.Path('/home/dobo/work/_temp/feat__v88-cross-game-quality/independent-quality')
+sys.path[:0]=[str(repo),str(repo/'scripts')];os.chdir(repo);os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django;django.setup()
+from django.test import Client
+import critique_pack as c
+import everyday_graph_v88_data as new
+from cat_de_roman_esti.graph import Node,Edge
+from cat_de_roman_esti.wordgames.service import WordGameService
+from cat_de_roman_esti.wordgames import alchimie as a
+h=lambda b:hashlib.sha256(b).hexdigest()
+review=repo/'docs/reviews/v88-cross-game-quality'
+raw={name:json.loads((review/'author-candidates'/name/'candidates.json').read_text()) for name in ['gastronomie','viata_de_roman']}
+pack,base,strong,regions=c.load_all(c.PACKAGE_PACK,c.PACKAGE_KG)
+g=copy.deepcopy(base.graph)
+missing=[n for n in new.NODES if n['id'] not in g.nodes]
+if missing:
+ assert len(missing)==len(new.NODES)
+ for n in new.NODES:g.add_node(Node.from_record(n))
+ for i,e in enumerate(new.EDGES):
+  g.add_edge(Edge.from_record(dict(e,id=f'v88_quality_preview_{i}',src_id=e['src'],dst_id=e['dst'])));strong[e['src']][e['dst']]=strong[e['dst']][e['src']]=e['strength']
+svc=WordGameService(g);a.get_service=lambda:svc
+client=Client();out={'scope':'Independent private proposed-candidate BFF probes and in-memory prospective critique; not public selectable stock or final bound promotion dossiers.','graph_proposal_added_in_memory':bool(missing),'kg_file_sha256':h(c.PACKAGE_KG.read_bytes()),'module_sha256':h((repo/'scripts/everyday_graph_v88_data.py').read_bytes()),'candidate_sha256':{name:h((review/'author-candidates'/name/'candidates.json').read_bytes()) for name in raw},'alchimie':[],'conexiuni':[]}
+def new_session(item,p):
+ session=a.AlchimieSession(seeds=list(item['seeds']),target=item['target'],target_depth=p.par,difficulty=item['difficulty'],category='gastronomie',recipes=p.recipes,routes=p.routes)
+ for seed in item['seeds']:session.add(seed,None)
+ return a.store.create(session)
+def combine(gid,pair):
+ r=client.post(f'/api/wordgames/alchimie/games/{gid}/combine',{'a':pair[0],'b':pair[1]},content_type='application/json');assert r.status_code==200;return r.json()
+for index,item in enumerate(raw['gastronomie']['alchimie']):
+ p=a._build_recipe_projection(item['seeds'],item['target'],'gastronomie');assert p
+ row={'ref':f'alchimie[{index}]','target':svc.label(item['target']),'par':p.par,'recipes':len(p.recipes),'routes':len(p.routes),'opening_results':[],'route_journeys':[]}
+ for pair in itertools.combinations(item['seeds'],2):
+  gid=new_session(item,p)
+  try:
+   state=client.get(f'/api/wordgames/alchimie/games/{gid}').json();assert item['target'] not in json.dumps(state);assert not {'recipes','routes'} & state.keys()
+   r=combine(gid,pair);assert not r['won'];row['opening_results'].append({'pair':[svc.label(x) for x in pair],'discovered':[n['label'] for n in r['discovered']]})
+  finally:assert a.store.delete(gid)
+ for route in p.routes:
+  gid=new_session(item,p);steps=[]
+  try:
+   for pair,outputs in route:
+    r=combine(gid,pair);assert [n['id'] for n in r['discovered']]==list(outputs);steps.append({'pair':[svc.label(x) for x in pair],'discovered':[n['label'] for n in r['discovered']],'won':r['won']})
+   assert r['won'] and r['score']==1000 and r['moves']==p.par
+   refreshed=client.get(f'/api/wordgames/alchimie/games/{gid}').json();assert refreshed['won'] and refreshed['score']==1000
+   repeat=combine(gid,route[-1][0]);assert repeat['score']==1000 and repeat['moves']==p.par and not repeat['discovered']
+   row['route_journeys'].append({'steps':steps,'score':r['score'],'resume_repeat_stable':True})
+  finally:assert a.store.delete(gid)
+ used={n for pair in p.recipes for n in pair};row['unused_seeds']=[svc.label(n) for n in item['seeds'] if n not in used];assert not row['unused_seeds']
+ row['productive_openings']=sum(bool(r['discovered']) for r in row['opening_results']);assert row['productive_openings']==4
+ out['alchimie'].append(row)
+rows=[]
+for i,item in enumerate(raw['viata_de_roman']['conexiuni']):
+ rec={'id':f'cx_v88_independent_quality_{i}','category':'viata_de_roman','status':'pending','source':'ai','difficulty':item['difficulty'],'groups':{f'g{j+1}':r['tiles'] for j,r in enumerate(item['groups'])},'group_labels':{f'g{j+1}':r['label'] for j,r in enumerate(item['groups'])},'order':[n for group in item['groups'] for n in group['tiles']]};rows.append(rec)
+pack['conexiuni']+=rows
+_,_,selected=c.run(pack,svc,strong,regions,['conexiuni'],{'pending'},{r['id'] for r in rows})
+for game,rec,fs in selected:
+ d=c.build_dossier(rec,game,svc,strong,fs,regions)
+ out['conexiuni'].append({'id':rec['id'],'lint_findings':fs,'fairness':d['fairness'],'cross_group_strong_edges':d['cross_group_strong_edges'],'types':sorted({n['node_type'] for group in d['groups'] for n in group['members']}),'minimum_salience':min(n['salience'] for group in d['groups'] for n in group['members'])})
+ assert not fs and not d['fairness']['unfair_tiles'] and not d['fairness']['contested_tiles'] and d['fairness']['engine_unfair_raw']==0 and not d['cross_group_strong_edges']
+assert len(selected)==2
+out['private_sessions_created_and_deleted']=27
+(scratch/'screen.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({k:v for k,v in out.items() if k not in ['alchimie','conexiuni']},ensure_ascii=False))
+print('PASS: 20 fresh opening probes; seven perfect route/resume/repeat journeys; both prospective Conexiuni boards have zero findings.')

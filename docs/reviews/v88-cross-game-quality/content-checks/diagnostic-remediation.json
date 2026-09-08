@@ -1,0 +1,121 @@
+{
+  "schema": "v88-scoped-backend-remediation-v1",
+  "verified_at_utc": "2026-09-08T13:08:07.958642+00:00",
+  "authorization": "Root authorized precise stale-test updates after seven real tracebacks, with ADR-0131 explicitly recording the reviewed six-node mesh opening. No runtime/content edit authorized or performed.",
+  "collection_count": 1508,
+  "selectors": [
+    "tests/test_alchimie_sparse_recipes.py::test_all_approved_boards_have_sparse_deterministic_target_routes",
+    "tests/test_alchimie_sparse_recipes.py::test_selected_routes_prefer_the_strongest_discovered_shortest_alternative",
+    "tests/test_v14_social_content.py::test_v14_pack_inventory_and_review_split",
+    "tests/test_v31_basic_words.py::test_v31_exact_semantic_edges_and_inbound_beginner_topology",
+    "tests/test_v44_contexto_common_words.py::test_every_proxy_anchor_reaches_every_selectable_unique_target",
+    "tests/test_v46_conexiuni_pending_gate.py::test_v46_pack_removes_only_the_rejected_pending_conexiuni_records",
+    "tests/test_v48_alchimie_pending_gate.py::test_v48_pack_rankings_and_frozen_derived_mirrors_track_the_gate"
+  ],
+  "initial_diagnostic": {
+    "failed": 7,
+    "passed": 0,
+    "exit_code": 1,
+    "seconds": 19.27
+  },
+  "followup": {
+    "passed": 7,
+    "failed": 0,
+    "exit_code": 0,
+    "seconds": 36.41
+  },
+  "retained_contracts": {
+    "historical_fixture_sha256": "96d50f8b724b9d1d1ff5d02b5a9a206445d7d9edead778d6db173f00ac094bfa",
+    "historical_approved_alchimie": 79,
+    "historical_sparse_digest": "50f82c4660c54708e00cdd31e28c68a60034c83444a2a9dd2d5cc879500c2683",
+    "historical_route_minimum_median": 0.66,
+    "current_approved_alchimie": 80,
+    "current_route_minimum_median": 0.67,
+    "current_recipe_pairs": 555,
+    "two_result_recipe_pairs": 77,
+    "current_boards_with_at_least_two_openings": 64,
+    "current_boards_with_one_opening": 16,
+    "unchanged_proxy_mappings": 71,
+    "proxy_mapping_sha256": "def769935fe81552daa94f711ee2b5a3b6e777269fcc3a8c98e30c86db3c9e84",
+    "new_proxy_mesh_escape_ids": [
+      "n_v31_cleaning_dishes_burete_vase",
+      "n_v31_cleaning_supply_detergent",
+      "n_v31_cleaning_floor_aspirator",
+      "n_v31_cleaning_floor_faras",
+      "n_v31_cleaning_floor_mop",
+      "n_v31_cleaning_water_galeata"
+    ],
+    "bridge": [
+      "n_v31_cleaning_floor_faras",
+      "n_v88_cleaning_matura",
+      "n_v24_home_surfaces_podea"
+    ],
+    "counterfactual": "Deleting only the reviewed Făraș→Mătură edge from an in-memory current graph restores all prior isolated meshes; all other prior isolated nodes remain isolated in the actual current graph."
+  },
+  "sources": [
+    {
+      "path": "tests/test_alchimie_sparse_recipes.py",
+      "before_sha256": "1855b6b60afa35a851442c529a92f142fc917a43f735ffac4e36408a038a9ce1",
+      "after_sha256": "2f5f75d41119d509a579f0f6b7def008d29ad0aaf6d9aebbbb8545a9cbd7b250"
+    },
+    {
+      "path": "tests/test_v14_social_content.py",
+      "before_sha256": "db1c57b257bf02e95dd19574404e6648c59fa69cacd48a1a4177889f31e0a036",
+      "after_sha256": "73bc70d2487b11bb1c5f96fc592d43214e4c8ddf4f81c3e37c18ef35d234ad00"
+    },
+    {
+      "path": "tests/test_v31_basic_words.py",
+      "before_sha256": "6da40c314ef38b515da9e860dec35504143f5e5a8bf9e9ea6ee11536fd80709b",
+      "after_sha256": "dcd1d2f0c0cf65b30ab636d762ad2d6dab4ddd2d4627a5facf93280afcc4399a"
+    },
+    {
+      "path": "tests/test_v44_contexto_common_words.py",
+      "before_sha256": "7859bcae3cf5539d91ebb40ce9c043e308440d771d14546a25519e69c7c76360",
+      "after_sha256": "959028ac3a5d3c956e8b57284abdff626b2e765aa7feae55c9e51fc7d8a6c395"
+    },
+    {
+      "path": "tests/test_v46_conexiuni_pending_gate.py",
+      "before_sha256": "f1e9054f06847003acd18f42dc6a7a697f3da8b84bab51508cbf9b0054b82424",
+      "after_sha256": "5d444f90c3b93e22a0d2f4afd690bd33e59cab7558271f9d30c382aa614b867a"
+    },
+    {
+      "path": "tests/test_v48_alchimie_pending_gate.py",
+      "before_sha256": "a657491776455c4a74c1b5abd2cfdc8823a8fdf5f006f09262704c3f53c74324",
+      "after_sha256": "8f155a9097e14b8ce87f8a04a9e7f7e68f18a0d5f0a69a7031d7a2c0afaef8b4"
+    }
+  ],
+  "archives": [
+    {
+      "path": "content-checks/backend-collected.txt.gz",
+      "decoded_sha256": "dd233d8b94e74f7ddf672b3d6629b4ebc89630cf32c42318b4d420b4f2180aae",
+      "archive_sha256": "bc8836a183cdb9d0eb3766a96645974de8760673ec180ce8fc4ad7e830129700"
+    },
+    {
+      "path": "content-checks/failure-position-map.json.gz",
+      "decoded_sha256": "0adf49ec7bc174956c74793da34a0201d9a5dc808c123c9ff054d6261481c307",
+      "archive_sha256": "c0940907077ef18139829d366c5669d7de99d721464cbf098bfea9099190e9a6"
+    },
+    {
+      "path": "content-checks/failed-selectors-diagnostic.log.gz",
+      "decoded_sha256": "c3cf302285ea42ef7b18025ea3af047c2897fc30429063e8adf918aaa0d1cdc1",
+      "archive_sha256": "0aa96d167e7ae1cfb7267f3e7fe68c619b33f98546d3944112b249f3aa3f3827"
+    },
+    {
+      "path": "content-checks/topology-diagnostic.json.gz",
+      "decoded_sha256": "66d4f0ad52f767bacd4b690f9e5cd1464364530d355fc4083705856555908121",
+      "archive_sha256": "3801ee67cefcb7afd708d6f6924e6e6576ad3b9af6b2910ea4fc459179c28db5"
+    },
+    {
+      "path": "content-checks/failed-selectors-followup.log.gz",
+      "decoded_sha256": "3b539e29631932e18181cb1673690f7cbd97e954a638e79b2c0010743ebd2f28",
+      "archive_sha256": "d409bffe0818b355eae80e5bd1abd056e089e16d66d31895fc195fa663594ffd"
+    },
+    {
+      "path": "content-checks/v87-proxy-mapping.json.gz",
+      "decoded_sha256": "c361f45c7cb0e99644daea736757bf18ec7461647eb8782868d9201779289f37",
+      "archive_sha256": "e01b592fd3d3d5527ec19f1d4e699f1b1305c3444c886440d465b8be71c2218c"
+    }
+  ],
+  "ruff": "All six changed test files passed.",
+  "full_matrix": "Both initial full backend runs remain root-owned evidence; only these seven selectors were rerun by this lane. Root owns subsequent full integration gates."
+}

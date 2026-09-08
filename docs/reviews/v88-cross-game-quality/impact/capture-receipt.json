@@ -1,0 +1,488 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "2878417ed43aaf790badfa09297ea122121b9449",
+  "candidate_stage": "Final frozen V88 backend after all three content promotions",
+  "input_sha256": "b6942f6c1060f0928eb5f3d7008e281ee4e395c63e9cbb4f55625025c48d4559",
+  "audited_pack_sha256": "1112dbb83689c3e29a375c37f01a41471eddd783a5f9b5ac2194939d1d867909",
+  "old_contexto_records": 239,
+  "old_contexto_distinct_targets": 236,
+  "words_per_record": 47,
+  "observations_per_capture": 11233,
+  "captures": {
+    "baseline.json": {
+      "sha256": "802df7ed45f0e8adcedc8e2f1f0b51341c141215b7608a465a17f0802d5def5c",
+      "source_sha256": {
+        "cat_de_roman_esti/fixtures/kg_sample.json": "96d50f8b724b9d1d1ff5d02b5a9a206445d7d9edead778d6db173f00ac094bfa",
+        "cat_de_roman_esti/fixtures/games_pack.json": "536036f6d030be4e8750fb104325b67a9363535506d453ef8a0e0a824a3b63ab",
+        "cat_de_roman_esti/fixtures/board_rankings_v37.json": "53defb36ab442aee1135ae3dd0522559abe27234048f9accdfbd5c9fe75eccc3",
+        "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "f4e16944845311eeba231f866c5578a4f1de9ee40e08857cca575930a2bf1278",
+        "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+        "cat_de_roman_esti/wordgames/contexto_projection.py": "8fc5829b07ae2bbcfcc4701c5539d35b09d3df5f2ccc25b19a2478bfcf938802",
+        "cat_de_roman_esti/wordgames/alchimie.py": "370a4b847de19f4256ada16d7da035a3be9da15ac90d4f3e0a6e70c5e8131712",
+        "cat_de_roman_esti/wordgames/lant.py": "4476748cd4a1a41c12f53080b036b246f762ffc8fa9512d233bf7821b0faf123",
+        "cat_de_roman_esti/wordgames/contexto_feedback.py": "da434a56703eaf2cbe5694c380fc27a3ee2edb9659c060bbb6ced2752d4020c6"
+      },
+      "input_file": "inputs.json",
+      "inputs_sha256": "921b1b39b24c8a96424234bfe11b54ff20529d1e6c88f069eb25e8238d7c090e",
+      "words_per_record": 38,
+      "observations": 9082,
+      "contexto_api_requests": 9082,
+      "contexto_observations_reused": 0,
+      "reuse_source": null,
+      "verified_reused_observations": 0,
+      "elapsed_seconds": 61.291,
+      "archive": {
+        "path": "raw/baseline.json.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "802df7ed45f0e8adcedc8e2f1f0b51341c141215b7608a465a17f0802d5def5c",
+        "archive_sha256": "c93a860d866278d2fc7671d15161d4c2fe83f7efa3fb20cd5931b5f0f3b22f80",
+        "decoded_bytes": 2453973,
+        "archive_bytes": 151260
+      }
+    },
+    "baseline-expanded.json": {
+      "sha256": "1c7af8da917cc2eb85a119ddbd9ab454d3d3ec8f754561e4a5fd5ba4795b4d0d",
+      "source_sha256": {
+        "cat_de_roman_esti/fixtures/kg_sample.json": "96d50f8b724b9d1d1ff5d02b5a9a206445d7d9edead778d6db173f00ac094bfa",
+        "cat_de_roman_esti/fixtures/games_pack.json": "536036f6d030be4e8750fb104325b67a9363535506d453ef8a0e0a824a3b63ab",
+        "cat_de_roman_esti/fixtures/board_rankings_v37.json": "53defb36ab442aee1135ae3dd0522559abe27234048f9accdfbd5c9fe75eccc3",
+        "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "f4e16944845311eeba231f866c5578a4f1de9ee40e08857cca575930a2bf1278",
+        "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+        "cat_de_roman_esti/wordgames/contexto_projection.py": "8fc5829b07ae2bbcfcc4701c5539d35b09d3df5f2ccc25b19a2478bfcf938802",
+        "cat_de_roman_esti/wordgames/alchimie.py": "370a4b847de19f4256ada16d7da035a3be9da15ac90d4f3e0a6e70c5e8131712",
+        "cat_de_roman_esti/wordgames/lant.py": "4476748cd4a1a41c12f53080b036b246f762ffc8fa9512d233bf7821b0faf123",
+        "cat_de_roman_esti/wordgames/contexto_feedback.py": "da434a56703eaf2cbe5694c380fc27a3ee2edb9659c060bbb6ced2752d4020c6"
+      },
+      "input_file": "expanded-inputs.json",
+      "inputs_sha256": "1d4a8039761b935853a84d693d5b28508bea71e9a0322504fd749c4a546a8e86",
+      "words_per_record": 40,
+      "observations": 9560,
+      "contexto_api_requests": 478,
+      "contexto_observations_reused": 9082,
+      "reuse_source": "baseline.json",
+      "verified_reused_observations": 9082,
+      "elapsed_seconds": 23.369,
+      "archive": {
+        "path": "raw/baseline-expanded.json.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "1c7af8da917cc2eb85a119ddbd9ab454d3d3ec8f754561e4a5fd5ba4795b4d0d",
+        "archive_sha256": "71966eb0c3ff6a6288ec8b393dcb6006bba93769c83999a6d3de59aebe0b945b",
+        "decoded_bytes": 2554696,
+        "archive_bytes": 152146
+      }
+    },
+    "baseline-final-inputs.json": {
+      "sha256": "9fbfd3360be089dcdf79c552b12267b7d52b9762f32211ecfb8ba41ffba540db",
+      "source_sha256": {
+        "cat_de_roman_esti/fixtures/kg_sample.json": "96d50f8b724b9d1d1ff5d02b5a9a206445d7d9edead778d6db173f00ac094bfa",
+        "cat_de_roman_esti/fixtures/games_pack.json": "536036f6d030be4e8750fb104325b67a9363535506d453ef8a0e0a824a3b63ab",
+        "cat_de_roman_esti/fixtures/board_rankings_v37.json": "53defb36ab442aee1135ae3dd0522559abe27234048f9accdfbd5c9fe75eccc3",
+        "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "f4e16944845311eeba231f866c5578a4f1de9ee40e08857cca575930a2bf1278",
+        "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+        "cat_de_roman_esti/wordgames/contexto_projection.py": "8fc5829b07ae2bbcfcc4701c5539d35b09d3df5f2ccc25b19a2478bfcf938802",
+        "cat_de_roman_esti/wordgames/alchimie.py": "370a4b847de19f4256ada16d7da035a3be9da15ac90d4f3e0a6e70c5e8131712",
+        "cat_de_roman_esti/wordgames/lant.py": "4476748cd4a1a41c12f53080b036b246f762ffc8fa9512d233bf7821b0faf123",
+        "cat_de_roman_esti/wordgames/contexto_feedback.py": "da434a56703eaf2cbe5694c380fc27a3ee2edb9659c060bbb6ced2752d4020c6"
+      },
+      "input_file": "final-inputs.json",
+      "inputs_sha256": "d2cfc80c612a27b17e2159e6ed41bb420ab1f71a41338b99126245ffca823b58",
+      "words_per_record": 41,
+      "observations": 9799,
+      "contexto_api_requests": 239,
+      "contexto_observations_reused": 9560,
+      "reuse_source": "baseline-expanded.json",
+      "verified_reused_observations": 9560,
+      "elapsed_seconds": 8.72,
+      "archive": {
+        "path": "raw/baseline-final-inputs.json.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "9fbfd3360be089dcdf79c552b12267b7d52b9762f32211ecfb8ba41ffba540db",
+        "archive_sha256": "2eb14f42c734779624314e330e3c3827f0ce0b7e52779819dcd4378aa056823a",
+        "decoded_bytes": 2609989,
+        "archive_bytes": 154167
+      }
+    },
+    "baseline-reviewed.json": {
+      "sha256": "26efc4a08412a4cfb364e4d3997e595b6837296e42fd53ee057067234571a7b6",
+      "source_sha256": {
+        "cat_de_roman_esti/fixtures/kg_sample.json": "96d50f8b724b9d1d1ff5d02b5a9a206445d7d9edead778d6db173f00ac094bfa",
+        "cat_de_roman_esti/fixtures/games_pack.json": "536036f6d030be4e8750fb104325b67a9363535506d453ef8a0e0a824a3b63ab",
+        "cat_de_roman_esti/fixtures/board_rankings_v37.json": "53defb36ab442aee1135ae3dd0522559abe27234048f9accdfbd5c9fe75eccc3",
+        "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "f4e16944845311eeba231f866c5578a4f1de9ee40e08857cca575930a2bf1278",
+        "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+        "cat_de_roman_esti/wordgames/contexto_projection.py": "8fc5829b07ae2bbcfcc4701c5539d35b09d3df5f2ccc25b19a2478bfcf938802",
+        "cat_de_roman_esti/wordgames/alchimie.py": "370a4b847de19f4256ada16d7da035a3be9da15ac90d4f3e0a6e70c5e8131712",
+        "cat_de_roman_esti/wordgames/lant.py": "4476748cd4a1a41c12f53080b036b246f762ffc8fa9512d233bf7821b0faf123",
+        "cat_de_roman_esti/wordgames/contexto_feedback.py": "da434a56703eaf2cbe5694c380fc27a3ee2edb9659c060bbb6ced2752d4020c6"
+      },
+      "input_file": "reviewed-inputs.json",
+      "inputs_sha256": "b6942f6c1060f0928eb5f3d7008e281ee4e395c63e9cbb4f55625025c48d4559",
+      "words_per_record": 47,
+      "observations": 11233,
+      "contexto_api_requests": 1434,
+      "contexto_observations_reused": 9799,
+      "reuse_source": "baseline-final-inputs.json",
+      "verified_reused_observations": 9799,
+      "elapsed_seconds": 51.259,
+      "archive": {
+        "path": "raw/baseline-reviewed.json.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "26efc4a08412a4cfb364e4d3997e595b6837296e42fd53ee057067234571a7b6",
+        "archive_sha256": "760376eb6956f371fa0a9beb96fa85a3f6846629963db8c55893e3b62768eb33",
+        "decoded_bytes": 2939427,
+        "archive_bytes": 160637
+      }
+    },
+    "final.json": {
+      "sha256": "f38bd5caf146a6334ec5a74c8d6ec5c7da4a0fd02e24ce39365e178ca517317b",
+      "source_sha256": {
+        "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+        "cat_de_roman_esti/fixtures/games_pack.json": "4c7030bd86e966162f4ac51ef00cf3bb649ff7a9d59c8c34e180cb7ff53e1636",
+        "cat_de_roman_esti/fixtures/board_rankings_v37.json": "b19a53983a1b4555c700f717033bb61b66aea9ea2dce643a7df0cf1a31e2c764",
+        "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "1c1613cd4f1e59c2b8d68ded9b071b1f812198f50aca528a3785fef34fad90b8",
+        "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+        "cat_de_roman_esti/wordgames/contexto_projection.py": "ba46d827dbe6e001a10bdd801d396abd67dfb4245c48b48b16024bf468c72d65",
+        "cat_de_roman_esti/wordgames/alchimie.py": "370a4b847de19f4256ada16d7da035a3be9da15ac90d4f3e0a6e70c5e8131712",
+        "cat_de_roman_esti/wordgames/lant.py": "cf22b4ff5dbb2d99f80ccdbb3e4c886751d0030c5cf6402dd993f1be2334f78b",
+        "cat_de_roman_esti/wordgames/contexto_feedback.py": "961aece7245e2772b8d36f9c3181c1150c8f6a22c4c72a3000fd6616ac9cacb8"
+      },
+      "input_file": "reviewed-inputs.json",
+      "inputs_sha256": "b6942f6c1060f0928eb5f3d7008e281ee4e395c63e9cbb4f55625025c48d4559",
+      "words_per_record": 47,
+      "observations": 11233,
+      "contexto_api_requests": 11233,
+      "contexto_observations_reused": 0,
+      "reuse_source": null,
+      "verified_reused_observations": 0,
+      "elapsed_seconds": 82.181,
+      "archive": {
+        "path": "raw/final.json.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "f38bd5caf146a6334ec5a74c8d6ec5c7da4a0fd02e24ce39365e178ca517317b",
+        "archive_sha256": "3135f6ccbd6979d3e892f1ad2ca4c83a7092f94ff049abd7fc6908e224983489",
+        "decoded_bytes": 2988987,
+        "archive_bytes": 167327
+      }
+    }
+  },
+  "inputs": {
+    "inputs.json": {
+      "sha256": "921b1b39b24c8a96424234bfe11b54ff20529d1e6c88f069eb25e8238d7c090e"
+    },
+    "expanded-inputs.json": {
+      "sha256": "1d4a8039761b935853a84d693d5b28508bea71e9a0322504fd749c4a546a8e86"
+    },
+    "final-inputs.json": {
+      "sha256": "d2cfc80c612a27b17e2159e6ed41bb420ab1f71a41338b99126245ffca823b58"
+    },
+    "reviewed-inputs.json": {
+      "sha256": "b6942f6c1060f0928eb5f3d7008e281ee4e395c63e9cbb4f55625025c48d4559"
+    }
+  },
+  "logs": {
+    "baseline.log": {
+      "path": "raw/baseline.log.gz",
+      "encoding": "gzip",
+      "gzip_mtime": 0,
+      "decoded_sha256": "e6e8e43e740384ceb3934b1985c20ad6d924ce6c9b343aff7e917163b2c8326d",
+      "archive_sha256": "339f89e74cca6400346e3fc1bdb8c176d4ad00d1f8ab1ffc78372bea518dc25f",
+      "decoded_bytes": 496,
+      "archive_bytes": 207
+    },
+    "baseline-expanded.log": {
+      "path": "raw/baseline-expanded.log.gz",
+      "encoding": "gzip",
+      "gzip_mtime": 0,
+      "decoded_sha256": "fbbcf18f5f02f5d04f81416f7fb0e91e71212c6f23877c0686c0ee44fc49e20e",
+      "archive_sha256": "722f15d816f1440dfb1bea95e60f3c03e5a7efc5dbc40d2c141fded7e6395d90",
+      "decoded_bytes": 295,
+      "archive_bytes": 150
+    },
+    "baseline-final-inputs.log": {
+      "path": "raw/baseline-final-inputs.log.gz",
+      "encoding": "gzip",
+      "gzip_mtime": 0,
+      "decoded_sha256": "eb4bd7f15bbb6052d6eaa1359e8f4063f3cf4f3e85353da23dbd699ced80d92f",
+      "archive_sha256": "b09eb36f92b9784cdb715c2eeabe012ecaed6c060633c5bdbfeca155af8dd6c8",
+      "decoded_bytes": 295,
+      "archive_bytes": 151
+    },
+    "baseline-reviewed.log": {
+      "path": "raw/baseline-reviewed.log.gz",
+      "encoding": "gzip",
+      "gzip_mtime": 0,
+      "decoded_sha256": "096608472d8e2da2f6b1a32e9d0b4ebbab855887d2ef489b71ae9a371758a34a",
+      "archive_sha256": "db4d3f54f54c3dedce911c0463faa37217f7ed240c90734f7d91ef375addf908",
+      "decoded_bytes": 295,
+      "archive_bytes": 151
+    },
+    "final.log": {
+      "path": "raw/final.log.gz",
+      "encoding": "gzip",
+      "gzip_mtime": 0,
+      "decoded_sha256": "8c39599daaac29bac224a5ae6e186564f514a3b48a750e0f6ad0e98ce06c5d24",
+      "archive_sha256": "c10749699159a432579b0f5c53c29f1f84b46090a5431e7ff1d0abe76b055470",
+      "decoded_bytes": 497,
+      "archive_bytes": 208
+    }
+  },
+  "reproducers": {
+    "capture.py.txt": {
+      "sha256": "b45fd8cf3899eda8f28f0a0aca89cab60d9edb8058f3acd9139a90ed3aa653fa"
+    },
+    "compare.py.txt": {
+      "sha256": "1807f55b581f4b4db37e5267f29261046556133abc4620c91cd33e12cd8269a1"
+    },
+    "analyze-final.py.txt": {
+      "sha256": "16cc97debdfcd2bcffb1c0640144a9325b275ae6c10591c376644cf2aec1da59"
+    },
+    "archive-final.py.txt": {
+      "sha256": "31215c594bae0e7c390fc62c9478d3b414314302f14252a29fbf05072700537e"
+    }
+  },
+  "structural_scopes": {
+    "old_pack_records": 655,
+    "alchimie": 82,
+    "lant": 100,
+    "derived": 336,
+    "new_direct_routes": 33
+  },
+  "limitations": "Old-approved-target first guesses and deterministic profiles; not human playtests, new-round review, public selection journeys or full integration tests.",
+  "source_verification": {
+    "baseline": "All nine captured artifact/runtime byte hashes match the explicit baseline commit.",
+    "final": "All nine captured artifact/runtime byte hashes still match the frozen worktree.",
+    "supplemental": "Tracked package Python source fingerprints below were read at archive finalization; the baseline is bound to the explicit commit. They supplement the nine capture-time hashes."
+  },
+  "supplemental_source_sha256": {
+    "cat_de_roman_esti/__init__.py": {
+      "baseline": "9045bbe751a4623a7b749938ebf66a040d7469908404571796e1c983453e2ca7",
+      "final": "9045bbe751a4623a7b749938ebf66a040d7469908404571796e1c983453e2ca7"
+    },
+    "cat_de_roman_esti/_roedu_client_core.py": {
+      "baseline": "9b79c18a181b624ebab4f5a6abb6bf3483b08b3378e98d6b84a1b8fc51ad72fc",
+      "final": "9b79c18a181b624ebab4f5a6abb6bf3483b08b3378e98d6b84a1b8fc51ad72fc"
+    },
+    "cat_de_roman_esti/accounts/__init__.py": {
+      "baseline": "974cd3c19124849fc8a7e046c0dab899bf295ad5a8f928a6e3bf4f65a4011576",
+      "final": "974cd3c19124849fc8a7e046c0dab899bf295ad5a8f928a6e3bf4f65a4011576"
+    },
+    "cat_de_roman_esti/accounts/apps.py": {
+      "baseline": "ed9c015f247f3e124ee51bdf6eec67ae92012db1c16553b81858da4db156c3da",
+      "final": "ed9c015f247f3e124ee51bdf6eec67ae92012db1c16553b81858da4db156c3da"
+    },
+    "cat_de_roman_esti/accounts/migrations/0001_initial.py": {
+      "baseline": "144d0365351cb2a9d32253a0b34844793ec3c870057fed6d5ae2293487997087",
+      "final": "144d0365351cb2a9d32253a0b34844793ec3c870057fed6d5ae2293487997087"
+    },
+    "cat_de_roman_esti/accounts/migrations/0002_profile_show_on_ranking.py": {
+      "baseline": "793f73138837af5e1b629d0512420bc45053bed9f88da59dcbe8c44367ba0080",
+      "final": "793f73138837af5e1b629d0512420bc45053bed9f88da59dcbe8c44367ba0080"
+    },
+    "cat_de_roman_esti/accounts/migrations/0003_playedpuzzle.py": {
+      "baseline": "d8e12f637b9717d4f7f795b56ff4e813c09a094f947e25c42ee77abce5c94f17",
+      "final": "d8e12f637b9717d4f7f795b56ff4e813c09a094f947e25c42ee77abce5c94f17"
+    },
+    "cat_de_roman_esti/accounts/migrations/0004_verified_ranking_privacy.py": {
+      "baseline": "fce80364a35c886c29ce059ade61e0476199d3b8ebe7a11bb951344856e9a459",
+      "final": "fce80364a35c886c29ce059ade61e0476199d3b8ebe7a11bb951344856e9a459"
+    },
+    "cat_de_roman_esti/accounts/migrations/__init__.py": {
+      "baseline": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cat_de_roman_esti/accounts/models.py": {
+      "baseline": "4b264909fbf4510b1e906f700c5a763356add7f3f3568c48a1d983c3786891eb",
+      "final": "4b264909fbf4510b1e906f700c5a763356add7f3f3568c48a1d983c3786891eb"
+    },
+    "cat_de_roman_esti/accounts/progress.py": {
+      "baseline": "174766559c4afc855bae86f725d3fa444b59e65de9e3eb6cce6ad07a39c7eefd",
+      "final": "174766559c4afc855bae86f725d3fa444b59e65de9e3eb6cce6ad07a39c7eefd"
+    },
+    "cat_de_roman_esti/accounts/urls.py": {
+      "baseline": "b2da3f65e48ed49b7bf311b3c69a2ef5e8374cf063c162809eaddd6a4ea583c5",
+      "final": "b2da3f65e48ed49b7bf311b3c69a2ef5e8374cf063c162809eaddd6a4ea583c5"
+    },
+    "cat_de_roman_esti/accounts/views.py": {
+      "baseline": "649bd698141eb45b95717a81820b641ababbdf48b79891b245f5a12a3edaa1c2",
+      "final": "649bd698141eb45b95717a81820b641ababbdf48b79891b245f5a12a3edaa1c2"
+    },
+    "cat_de_roman_esti/cli.py": {
+      "baseline": "1f862f56dced71d59574895a92954868c2dd94583e92f9c48bebef4b5a6845f4",
+      "final": "1f862f56dced71d59574895a92954868c2dd94583e92f9c48bebef4b5a6845f4"
+    },
+    "cat_de_roman_esti/data.py": {
+      "baseline": "dfd183e5a653d64d75ac8f509a2c4b70d33bc76b9cf9c005b2280ce470bb74dc",
+      "final": "dfd183e5a653d64d75ac8f509a2c4b70d33bc76b9cf9c005b2280ce470bb74dc"
+    },
+    "cat_de_roman_esti/engine.py": {
+      "baseline": "5c81f86ade0e31838bedcdbc2bf0e4e037cf8d410e0daecca6caa7fa894cb507",
+      "final": "5c81f86ade0e31838bedcdbc2bf0e4e037cf8d410e0daecca6caa7fa894cb507"
+    },
+    "cat_de_roman_esti/graph.py": {
+      "baseline": "496b56900c46fec1f9aacbe3ab5c0bb220e06058d64da840aaadee405ab115b0",
+      "final": "496b56900c46fec1f9aacbe3ab5c0bb220e06058d64da840aaadee405ab115b0"
+    },
+    "cat_de_roman_esti/roedu_client.py": {
+      "baseline": "b8aafe122cb4dee7399bfbd0fcc159e97b39168b30575ccb6b4180cdbf0182eb",
+      "final": "b8aafe122cb4dee7399bfbd0fcc159e97b39168b30575ccb6b4180cdbf0182eb"
+    },
+    "cat_de_roman_esti/web/__init__.py": {
+      "baseline": "9e0612204ee300a1d4b0e7deedadaaddfc34e4aba9fa7accd524746a7f530674",
+      "final": "9e0612204ee300a1d4b0e7deedadaaddfc34e4aba9fa7accd524746a7f530674"
+    },
+    "cat_de_roman_esti/web/__main__.py": {
+      "baseline": "df11e20f9e5e536d62a96bf65288b4f4bd4e79fad78c65f5aa52959a0390c9ac",
+      "final": "df11e20f9e5e536d62a96bf65288b4f4bd4e79fad78c65f5aa52959a0390c9ac"
+    },
+    "cat_de_roman_esti/web/asgi.py": {
+      "baseline": "a11eb9edce8ecdd7d3602acdfe284da41b4e51dfc27a0fbc25b7951d803cb9ee",
+      "final": "a11eb9edce8ecdd7d3602acdfe284da41b4e51dfc27a0fbc25b7951d803cb9ee"
+    },
+    "cat_de_roman_esti/web/asgi_limits.py": {
+      "baseline": "26e2c412c71560b71138617513424d627fe1bde78d32f60281dd0728633a9685",
+      "final": "26e2c412c71560b71138617513424d627fe1bde78d32f60281dd0728633a9685"
+    },
+    "cat_de_roman_esti/web/http.py": {
+      "baseline": "cae7428c92a442cb2ab5f3f695cd3c55759e06a0886ddb43b7edd449ab6304c5",
+      "final": "cae7428c92a442cb2ab5f3f695cd3c55759e06a0886ddb43b7edd449ab6304c5"
+    },
+    "cat_de_roman_esti/web/legal.py": {
+      "baseline": "d6eb6c769b319e37fa0d1261659ca3f813f2a749d45bbbcbe14c26a86e918c4a",
+      "final": "d6eb6c769b319e37fa0d1261659ca3f813f2a749d45bbbcbe14c26a86e918c4a"
+    },
+    "cat_de_roman_esti/web/meta.py": {
+      "baseline": "09e64141f93906d4cd0083981a3caddb2e0de4b5110afbd5ebf72236c88dcba6",
+      "final": "09e64141f93906d4cd0083981a3caddb2e0de4b5110afbd5ebf72236c88dcba6"
+    },
+    "cat_de_roman_esti/web/settings.py": {
+      "baseline": "4bc05b880d5cd1c9544ad2a135f5ef71272940e7f8a6438f88207aba121f4848",
+      "final": "4bc05b880d5cd1c9544ad2a135f5ef71272940e7f8a6438f88207aba121f4848"
+    },
+    "cat_de_roman_esti/web/spa.py": {
+      "baseline": "705d0c9378b9823d5d0ad40c1f6ce09c2dc41ecd9ea3ae714381e0787581c2d5",
+      "final": "705d0c9378b9823d5d0ad40c1f6ce09c2dc41ecd9ea3ae714381e0787581c2d5"
+    },
+    "cat_de_roman_esti/web/urls.py": {
+      "baseline": "b486f55f778e384fded10a6ba87dd7bdf3188e81965c3867f3d9090ab0bbbf0f",
+      "final": "b486f55f778e384fded10a6ba87dd7bdf3188e81965c3867f3d9090ab0bbbf0f"
+    },
+    "cat_de_roman_esti/web/wsgi.py": {
+      "baseline": "9c36307f06e02e167dc98d6db419f648a17faffb9dd74531d8e1b8220f640118",
+      "final": "9c36307f06e02e167dc98d6db419f648a17faffb9dd74531d8e1b8220f640118"
+    },
+    "cat_de_roman_esti/wordgames/__init__.py": {
+      "baseline": "9c0d15b79b798a4d6da3181c3909b956b8d11286c8cea448565f6adb82f0adb5",
+      "final": "9c0d15b79b798a4d6da3181c3909b956b8d11286c8cea448565f6adb82f0adb5"
+    },
+    "cat_de_roman_esti/wordgames/_progress.py": {
+      "baseline": "8d879da8446b2d90e7f0a5682ba9e3079681e00a8b72a9a5e8b7020c16ab8b48",
+      "final": "8d879da8446b2d90e7f0a5682ba9e3079681e00a8b72a9a5e8b7020c16ab8b48"
+    },
+    "cat_de_roman_esti/wordgames/_session_endpoint.py": {
+      "baseline": "d6f5f7ed35fefc9394da4c72fe9d65f76cf7c82df832c5b3d14f7df04ec4f29f",
+      "final": "d6f5f7ed35fefc9394da4c72fe9d65f76cf7c82df832c5b3d14f7df04ec4f29f"
+    },
+    "cat_de_roman_esti/wordgames/alchimie.py": {
+      "baseline": "370a4b847de19f4256ada16d7da035a3be9da15ac90d4f3e0a6e70c5e8131712",
+      "final": "370a4b847de19f4256ada16d7da035a3be9da15ac90d4f3e0a6e70c5e8131712"
+    },
+    "cat_de_roman_esti/wordgames/categories.py": {
+      "baseline": "718acb594b21d655845809d72321b73da2cdc9986205741c01aa83cf8fc825dd",
+      "final": "718acb594b21d655845809d72321b73da2cdc9986205741c01aa83cf8fc825dd"
+    },
+    "cat_de_roman_esti/wordgames/conexiuni.py": {
+      "baseline": "2bdb6bfe8955fe80c8b1d79e005f65ad0d18108db976ac5105436d543ff3a1f1",
+      "final": "2bdb6bfe8955fe80c8b1d79e005f65ad0d18108db976ac5105436d543ff3a1f1"
+    },
+    "cat_de_roman_esti/wordgames/contexto.py": {
+      "baseline": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+      "final": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa"
+    },
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": {
+      "baseline": "da434a56703eaf2cbe5694c380fc27a3ee2edb9659c060bbb6ced2752d4020c6",
+      "final": "961aece7245e2772b8d36f9c3181c1150c8f6a22c4c72a3000fd6616ac9cacb8"
+    },
+    "cat_de_roman_esti/wordgames/contexto_projection.py": {
+      "baseline": "8fc5829b07ae2bbcfcc4701c5539d35b09d3df5f2ccc25b19a2478bfcf938802",
+      "final": "ba46d827dbe6e001a10bdd801d396abd67dfb4245c48b48b16024bf468c72d65"
+    },
+    "cat_de_roman_esti/wordgames/derived_catalog.py": {
+      "baseline": "fc586eb0c6a0febc67d68c542df82a1d57d18bf4cbf7ca6e1013f54fbc2be3fb",
+      "final": "b1aef0506850289849f5f812107faea28654975b4bf5d08def865dda2c902d87"
+    },
+    "cat_de_roman_esti/wordgames/intrusul.py": {
+      "baseline": "5293a4bdae57d4f1f074d993f832ad8f679d6da0ba7d4d53f285909bcaa86299",
+      "final": "5293a4bdae57d4f1f074d993f832ad8f679d6da0ba7d4d53f285909bcaa86299"
+    },
+    "cat_de_roman_esti/wordgames/label_corrections.py": {
+      "baseline": "552b4cd698115370e8f16a1ac1ed45f12c29888dc36593b3c8243fd0032b33a0",
+      "final": "552b4cd698115370e8f16a1ac1ed45f12c29888dc36593b3c8243fd0032b33a0"
+    },
+    "cat_de_roman_esti/wordgames/lant.py": {
+      "baseline": "4476748cd4a1a41c12f53080b036b246f762ffc8fa9512d233bf7821b0faf123",
+      "final": "cf22b4ff5dbb2d99f80ccdbb3e4c886751d0030c5cf6402dd993f1be2334f78b"
+    },
+    "cat_de_roman_esti/wordgames/packs.py": {
+      "baseline": "6404b4c8ed2813680a684d9e33e6ea33c6f968c95e025bd2a0eb1af3b1349607",
+      "final": "6404b4c8ed2813680a684d9e33e6ea33c6f968c95e025bd2a0eb1af3b1349607"
+    },
+    "cat_de_roman_esti/wordgames/perechi.py": {
+      "baseline": "7403989c163d6f040229348ac87b5e738628ee3e30576202f8b316cd2d257e63",
+      "final": "7403989c163d6f040229348ac87b5e738628ee3e30576202f8b316cd2d257e63"
+    },
+    "cat_de_roman_esti/wordgames/service.py": {
+      "baseline": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+      "final": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"
+    },
+    "cat_de_roman_esti/wordgames/submissions.py": {
+      "baseline": "c448c39c1b8bef2a7cca4873953b2ebab9a1a3c750608d0d715352b7d36df889",
+      "final": "c448c39c1b8bef2a7cca4873953b2ebab9a1a3c750608d0d715352b7d36df889"
+    }
+  },
+  "audited_pack_archive": {
+    "path": "raw/baseline-pack.json.gz",
+    "encoding": "gzip",
+    "gzip_mtime": 0,
+    "decoded_sha256": "536036f6d030be4e8750fb104325b67a9363535506d453ef8a0e0a824a3b63ab",
+    "archive_sha256": "fb6b206878d11ed951f7ce14916173620e7936a9484d04722ff34f761292bc06",
+    "decoded_bytes": 382500,
+    "archive_bytes": 57480
+  },
+  "full_comparison_archive": {
+    "path": "raw/comparison.json.gz",
+    "encoding": "gzip",
+    "gzip_mtime": 0,
+    "decoded_sha256": "26bdce5bdc41324aa32adec6c8a2aa18c2694e09f5321b3bb710a736fae2f9f5",
+    "archive_sha256": "cc56bd13a9d0cc3aa2a6247052239cefeb85b81929c393f672826961b40df724",
+    "decoded_bytes": 8309779,
+    "archive_bytes": 251035
+  },
+  "comparison_stdout_archive": {
+    "path": "raw/comparison-summary.json.gz",
+    "encoding": "gzip",
+    "gzip_mtime": 0,
+    "decoded_sha256": "845cbdf5cbae79e027e6409027ee49d51cc24079425ee3e4d01782bfe911fb6a",
+    "archive_sha256": "b7a03731971ee1a55ed646b05c0fe2e87c96fe48471a06074fbaf752bf2cfe53",
+    "decoded_bytes": 21312,
+    "archive_bytes": 2104
+  },
+  "derived_reports_sha256": {
+    "IMPACT_REVIEW.md": "7db1520c4592373422a2f53f4fc9594bc9987acf64a612f99d9fc101b0b1564c",
+    "cooler-old-target-cues.json": "e83432e99607047f95d100af410fc53a6f8cbb5e82a3d634c2e09b5c6f634ab4",
+    "core-associations.json": "d50270ffda7e364b4ee36fe636bd480b6a228c592a8038adb1aa9ea8c83026d1",
+    "expanded-inputs.json": "1d4a8039761b935853a84d693d5b28508bea71e9a0322504fd749c4a546a8e86",
+    "final-inputs.json": "d2cfc80c612a27b17e2159e6ed41bb420ab1f71a41338b99126245ffca823b58",
+    "inputs.json": "921b1b39b24c8a96424234bfe11b54ff20529d1e6c88f069eb25e8238d7c090e",
+    "lant-guidance.json": "45b48ad373a0834c6cc5db42481177fa361b050658178a9b7558f2e23323d801",
+    "lost-input-acceptance.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "reviewed-inputs.json": "b6942f6c1060f0928eb5f3d7008e281ee4e395c63e9cbb4f55625025c48d4559",
+    "summary.json": "2d79a0035645c1e5574bdb0394f74c1c0e0ed7c74651bee522d04b3b8b893716",
+    "warmer-old-target-cues.json": "c200ce7283ba250d3dbadd3cb79f35f995b7be79c5d467837d952b6f3a529461"
+  },
+  "provenance": "The four original baseline stages were preserved and not recomputed. Each expansion reused only source-identical structural profiles and observations; every reused observation was rechecked against its archived predecessor. The final capture made all 11,233 requests fresh once after backend freeze. Full matrices, original capture logs, original comparison output and audited pack survive losslessly in gzip archives with zero timestamps and both decoded/archive hashes. No initial evidence was overwritten."
+}

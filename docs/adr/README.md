@@ -12,7 +12,7 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0101 | [Reliable saved-game recovery](0101-recover-saved-game-resume-failures.md) | accepted |
 | 0102 | [Pack-only content waves](0102-pack-only-content-wave-workflow.md) | accepted |
 | 0103 | [Keyboard-reachable game status](0103-make-game-status-keyboard-reachable.md) | accepted |
-| 0104 | [Portable independent reviews](0104-portable-independent-review-artifacts.md) | accepted |
+| 0104 | [Portable independent reviews](0104-portable-independent-review-artifacts.md) | partially superseded by 0129 |
 | 0105 | [Idempotent local completion recording](0105-deduplicate-local-terminal-score-receipts.md) | accepted |
 | 0106 | [Two reviewed Contexto food targets](0106-add-reviewed-contexto-food-targets.md) | accepted |
 | 0107 | [Reviewed Romanian input senses](0107-preserve-reviewed-romanian-input-senses.md) | accepted |
@@ -31,8 +31,16 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0120 | [Native ingredients and audited vocabulary](0120-native-ingredients-and-audited-vocabulary.md) | accepted |
 | 0121 | [Exact labels and stable board identities](0121-exact-label-corrections-with-stable-board-identities.md) | accepted |
 | 0122 | [Visible alternative routes in Lanț](0122-visible-alternative-routes-in-lant.md) | accepted |
-| 0123 | [Reviewed preparation and cooling concepts](0123-reviewed-preparation-and-cooling-concepts.md) | accepted |
+| 0123 | [Reviewed preparation and cooling concepts](0123-reviewed-preparation-and-cooling-concepts.md) | partially superseded by 0131 |
 | 0124 | [Persistent game creation failures](0124-persist-new-game-creation-failures.md) | accepted |
 | 0125 | [Reviewed snack concepts and defining biscuit cues](0125-reviewed-snack-concepts-and-biscuit-cues.md) | accepted |
 | 0126 | [Authoritative Contexto action recovery](0126-reconcile-uncertain-contexto-actions.md) | accepted |
 | 0127 | [Recurring verified local version loop](0127-recurring-local-version-loop.md) | accepted |
+| 0128 | [Recover uncertain Lanț actions](0128-reconcile-uncertain-lant-actions.md) | accepted |
+| 0129 | [Portable projection-bound Alchimie reviews](0129-portable-alchimie-projection-reviews.md) | accepted |
+| 0130 | [Closed native bread-family feedback](0130-closed-native-bread-family-feedback.md) | accepted |
+| 0131 | [Everyday tools and cream-sense correction](0131-everyday-tools-and-cream-sense-correction.md) | accepted |
+
+Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
+and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially
+superseded by ADR-0131 for the six cleaning-node topology boundary; their other scope remains.

@@ -589,3 +589,36 @@ match the V87 record. This is a started version, not a completed release candida
 The initial scope includes cross-game content, Lanț action recovery and a possible
 projection-bound Alchimie review-tool extension. No runtime/content edits or full
 suite reruns in this checkpoint; documentation and whitespace checks pass.
+
+## V88 completed candidate (2026-09-08)
+
+Valid until: the final source/artifact bindings change — then treat as history.
+
+V88 completes on `feat/v88-cross-game-quality` above baseline `2878417`. Seven new
+concepts, 28 forms (25 grammatical + three qualified), 33 directed additions and one
+removed false fermented-cream edge produce net 32 links. It promotes Cremșnit Alchimie
+`al_gastronomie_107` and Conexiuni `cx_viata_de_roman_362/363`: 658 total, 650 approved,
+488 eligible. No new Contexto/Lanț/derived rounds or lexical equivalents.
+
+Lanț now recovers uncertain move/undo/hint responses and retained earned hints with one
+owned read, without mutation replay. Alchimie portable reviews bind exact live sparse
+projection evidence to distinct judges. Brioșă→Pâine gains one closed native hot cue;
+Mătură/Taburet projections retire. Six cleaning nodes acquire real outgoing paths while
+all 71 scorer mappings remain unchanged. Original cream/novelty/mechanical failures and
+the root's rolled-back overlapping import are preserved, not counted as successes.
+
+All 655 old pack records, 82 Alchimie books/profiles, 100 Lanț route profiles and 336 full
+derived rows remain exact. All 206 previously shown shortest hops remain; one nonshortest
+choice changes. The 11,233-observation impact records native-identity gains and semantic
+costs, including weaker reverse pastry→Frișcă and household-context cues. Independent
+supplemental review accepts these explicit limits for the local iteration.
+
+Full gates: 1,508 backend tests on each Python 3.12.3/3.14.6, 53 accounts each, 193 native
+frontend and 188 browser cases; validators/pending/Ruff/docs/whitespace and
+lint/typecheck/build/bundle GREEN at 118.92/120 KiB. Initial full matrices had seven
+historical/aggregate assertion failures, fixed without changing runtime/data/bounds.
+A subsequent Python 3.12 runner exited 143 before completion; its partial log is retained
+and excluded. The unchanged complete rerun passed. No push or deployment.
+
+Complete evidence: `docs/reviews/v88-cross-game-quality/README.md`. The recurring local
+loop remains active; human/device acceptance and production rollout are still separate.

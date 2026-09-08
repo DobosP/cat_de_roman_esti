@@ -57,7 +57,7 @@ FORMS = {
     )),
 }
 PREDECESSORS = {
-    "n_v86_food_frisca": "n_v20gas_smantana",
+    "n_v86_food_frisca": "n_v85_food_vanilie",
     "n_v86_food_albus": "n_v4gas_ou",
     "n_v86_food_galbenus": "n_v4gas_ou",
     "n_v86_food_zahar_pudra": "n_v24_food_pantry_zahar",
@@ -98,7 +98,7 @@ def _assigned(tree, name):
     ))
 
 
-def test_served_graph_is_the_exact_independently_reviewed_preparation_batch():
+def test_reconstructed_v86_graph_matches_its_exact_independent_preparation_review():
     candidate_bytes = (REVIEW / "graph-candidates.json").read_bytes()
     assert hashlib.sha256(candidate_bytes).hexdigest() == GRAPH_SHA256
     candidate = json.loads(candidate_bytes)
@@ -121,7 +121,12 @@ def test_served_graph_is_the_exact_independently_reviewed_preparation_batch():
         actual = nodes[expected["id"]]
         assert {key: actual[key] for key in expected} == expected
         assert (actual["label_ro"], tuple(actual["aliases"])) == FORMS[expected["id"]]
-    svc = get_service()
+    from tests.content_history import before_v87_fixture
+
+    historical = before_v87_fixture(_json(FIXTURE))
+    svc = WordGameService(Graph.from_records(
+        historical["kg_nodes"], historical["kg_edges"],
+    ))
     for expected in candidate["edges"]:
         edge = svc.link(expected["src"], expected["dst"])
         assert edge is not None and not edge.is_distractor
@@ -208,10 +213,19 @@ def test_all_reachable_preparation_forms_are_valid_typed_lant_destinations(owner
             L.store.delete(gid)
 
 
-def test_all_41_new_links_work_forward_and_refuse_the_unreviewed_reverse_move():
+def test_all_41_v86_links_keep_their_exact_historical_direction_contract(monkeypatch):
     edges = _json(REVIEW / "graph-candidates.json")["edges"]
     assert len(edges) == 41 and all(not edge["bidirectional"] for edge in edges)
-    svc, client = get_service(), Client()
+    from tests.content_history import before_v87_fixture
+
+    historical = before_v87_fixture(_json(FIXTURE))
+    svc = WordGameService(Graph.from_records(
+        historical["kg_nodes"], historical["kg_edges"],
+    ))
+    # V88 deliberately removes de8676. This replays the recorded V86 graph,
+    # while the V88 tests require the corrected current sour/sweet-cream boundary.
+    monkeypatch.setattr(L, "get_service", lambda: svc)
+    client = Client()
     for edge in edges:
         start, target = edge["src"], edge["dst"]
         assert svc.link(start, target) is not None and svc.link(target, start) is None
@@ -239,7 +253,6 @@ def test_all_41_new_links_work_forward_and_refuse_the_unreviewed_reverse_move():
 @pytest.mark.parametrize(("surface", "owner", "target"), [
     ("congelator", "n_v86_kitchen_congelator", "n_v3gas_inghetata"),
     ("frișcă", "n_v86_food_frisca", "n_v21gas_savarina"),
-    ("smântână", "n_v20gas_smantana", "n_v86_food_frisca"),
     ("vanilie", "n_v85_food_vanilie", "n_v86_food_frisca"),
     ("mixer de bucătărie", "n_v86_kitchen_mixer", "n_v86_food_frisca"),
     ("zahăr pudră", "n_v86_food_zahar_pudra", "n_v86_food_frisca"),
@@ -336,8 +349,19 @@ def test_qualified_starch_mixer_and_existing_ingredients_keep_their_sense_bounda
     ("n_v86_food_zahar_pudra", "n_v20gas_smantana", "n_v86_food_frisca"),
     ("n_v86_food_galbenus", "n_v86_food_amidon", "n_v86_food_crema_vanilie"),
 ])
-def test_preparation_pairs_create_earned_alchimie_explanations(left, right, target):
+def test_reviewed_preparation_pairs_create_earned_alchimie_explanations(
+    left, right, target, monkeypatch,
+):
     svc = get_service()
+    if right == "n_v20gas_smantana":
+        # The old raw/sour cream recipe is historical after V88 corrects de8676.
+        from tests.content_history import before_v87_fixture
+
+        historical = before_v87_fixture(_json(FIXTURE))
+        svc = WordGameService(Graph.from_records(
+            historical["kg_nodes"], historical["kg_edges"],
+        ))
+        monkeypatch.setattr(A, "get_service", lambda: svc)
     projection = A._build_recipe_projection([left, right], target, "gastronomie")
     assert projection is not None and projection.par == 1
     assert target in projection.recipes[tuple(sorted((left, right)))]

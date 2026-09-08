@@ -1,0 +1,70 @@
+{
+  "schema": "v88-portable-alchimie-independent-review-v1",
+  "reviewer": "v88_independent_review",
+  "reviewed_at": "2026-09-08",
+  "decision": "accept",
+  "source_files": {
+    "scripts/build_review_artifact.py": "963c5671281934fa95ff30cda8a04344204f9ab78f0ffe191acc90d02984cd20",
+    "tests/test_build_review_artifact.py": "b996a52c0cf37d6cbbc30c9d07026212c40446b86dcadd3f774fb1d681c46dd0",
+    "docs/PACK_ONLY_CONTENT_WAVES.md": "269be4c1670c400a93ff5505894e72ab8eab695834a1ccf82113be501aab0121",
+    "docs/adr/0104-portable-independent-review-artifacts.md": "4e88ccc7cea74eae66443488cd676a30c5d203d814a74bea7c5e4e9d8b82c3c7",
+    "docs/adr/0129-portable-alchimie-projection-reviews.md": "1cc9e165c9237fb4840afd727f682b5440ec026dac8e0ca127f455afd5bc1354"
+  },
+  "source_manifest_sha256": "cd0201c48f01cce28512f7812553acda032fcdb5f1385d931a0f42e09ea60006",
+  "unchanged_dependency_files": {
+    "scripts/apply_rereview.py": "3da2a214612674f22edfeec11ffeebed02a9489ea93df78b812631e0a220ea5b",
+    "scripts/audit_alchimie_projections.py": "306f2f539a9837cda4b39f6bc08f69823d389db9a4f080d452b33ae16028f4ea",
+    "cat_de_roman_esti/wordgames/alchimie.py": "370a4b847de19f4256ada16d7da035a3be9da15ac90d4f3e0a6e70c5e8131712",
+    "cat_de_roman_esti/wordgames/packs.py": "6404b4c8ed2813680a684d9e33e6ea33c6f968c95e025bd2a0eb1af3b1349607"
+  },
+  "author_verification_sha256": "0871e6acbafad52277246647e7575b959306d5e39b348378388fc608d316fd4b",
+  "checks": [
+    {
+      "id": "exact_per_reviewer_audit_binding",
+      "verdict": "accept",
+      "reason": "Only Alchimie items gain one mandatory strict lowercase SHA256 field. Both raw item hashes must equal the supplied immutable byte buffer; preserved judgments and existing V2 audit fields agree."
+    },
+    {
+      "id": "current_complete_sorted_batch",
+      "verdict": "accept",
+      "reason": "Both input ID arrays must agree, identities differ case-insensitively, raw item coverage is exact, dossier inventory is exact/fresh/current-pending. Any Alchimie member requires a sorted Alchimie-only batch."
+    },
+    {
+      "id": "archived_and_live_evidence",
+      "verdict": "accept",
+      "reason": "Private staging first reproduces the full archived projection through unchanged validated_artifact, then validates current pack/KG/rubric/runtime/generator/source record hashes. Coordinated restamping of changed rows cannot replace replay validation."
+    },
+    {
+      "id": "no_premature_copy",
+      "verdict": "accept",
+      "reason": "All artifact and live-source checks complete inside private staging before write_outputs. Exception cleanup removes private staging; output prechecks reject stale games/dossiers/audit before copying."
+    },
+    {
+      "id": "byte_exact_audit_and_conservative_judgments",
+      "verdict": "accept",
+      "reason": "Original audit bytes are copied directly; builder never regenerates evidence or fills missing reviewer fields. Existing synthesized gate policy is unchanged."
+    },
+    {
+      "id": "mutation_boundary",
+      "verdict": "accept",
+      "reason": "No changes to apply_rereview, audit generator, Alchimie runtime or pack rules. The strict prospective-inventory gate remains required at apply time."
+    },
+    {
+      "id": "regression_evidence",
+      "verdict": "accept",
+      "reason": "Independently decoded and hash-verified actual 44-test initial, 102-critique and 45-test final logs. Final tests exercise 21 evidence failures, byte-preserving output, mixed games, unsorted IDs and stale non-Alchimie audit. No heavy suite was rerun."
+    },
+    {
+      "id": "documentation",
+      "verdict": "accept",
+      "reason": "Guide matches CLI and current audit contract. ADR0129 records exact extension and limits; ADR0104 changes only its superseded status pointer."
+    }
+  ],
+  "blockers": [],
+  "limits": [
+    "Agent code review is not independent human acceptance of any content.",
+    "Distinct reviewer IDs are an audit contract, not cryptographic proof of separate people.",
+    "As before, publication uses per-file atomic writes rather than an atomic directory transaction; unexpected filesystem I/O failure can leave partial artifact output, which the unchanged applier validates before pack mutation.",
+    "Full integration is the orchestrator responsibility and is not claimed by the focused author receipts."
+  ]
+}

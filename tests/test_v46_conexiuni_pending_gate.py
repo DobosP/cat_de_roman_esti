@@ -131,9 +131,11 @@ def test_v46_pack_removes_only_the_rejected_pending_conexiuni_records() -> None:
     )
 
     assert pack['meta']['counts'] == CURRENT_CONTENT.pack_counts
-    assert pack["meta"]["id_high_water"]["conexiuni"] == 361
+    assert pack["meta"]["id_high_water"]["conexiuni"] == (
+        CURRENT_CONTENT.pack_id_high_water["conexiuni"]
+    )
     assert Counter(record["status"] for record in conexiuni.values()) == {
-        "approved": 232
+        "approved": CURRENT_CONTENT.game_inventory["conexiuni"][1]
     }
     assert statuses == CURRENT_CONTENT.status_counts
     assert rejected.isdisjoint(conexiuni)

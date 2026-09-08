@@ -6,6 +6,7 @@ import json
 from collections import Counter
 from pathlib import Path
 
+from tests.content_history import before_v88_pack
 from tests.current_content import CURRENT_CONTENT
 
 _ROOT = Path(__file__).resolve().parent.parent
@@ -121,7 +122,7 @@ def test_v14_pack_inventory_and_review_split():
     assert len(v48_audit["items"]) == 21
     assert len(archived) == 17
     assert all(record["status"] == "pending" for record in archived.values())
-    assert len(pack["alchimie"]) + len(archived) == 99
+    assert len(before_v88_pack(pack)["alchimie"]) + len(archived) == 99
 
 
 def test_v14_adds_contemporary_civic_education_science_and_digital_play():

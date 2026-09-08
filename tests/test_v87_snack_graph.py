@@ -130,10 +130,10 @@ def test_served_snack_graph_matches_the_complete_independent_review():
 
 
 def test_complete_v86_graph_and_all_old_native_owners_reconstruct_exactly():
-    from tests.content_history import before_v87_fixture
+    from tests.content_history import before_v87_fixture, before_v88_fixture
 
-    current = _json(FIXTURE)
-    baseline = before_v87_fixture(current)
+    current = before_v88_fixture(_json(FIXTURE))
+    baseline = before_v87_fixture(_json(FIXTURE))
     encoded = (json.dumps(baseline, ensure_ascii=False, indent=2) + "\n").encode()
     assert hashlib.sha256(encoded).hexdigest() == BASELINE_SHA256
     assert FIXTURE.read_bytes() == (ROOT / "tests/fixtures/kg_sample.json").read_bytes()
@@ -308,11 +308,12 @@ def test_new_finished_foods_are_usable_native_guesses_with_real_outgoing_associa
 
 
 def test_only_chec_and_briosa_projections_retire_without_scoring_from_audit_metadata():
-    from tests.content_history import before_v87_projection_rows
+    from tests.content_history import before_v87_projection_rows, before_v88_projection_rows
 
     live = [(term.surface, term.anchor_id, term.domain, term.rank_penalty,
              term.mapping_kind, term.public_id) for term in P.PROJECTION_TERMS]
     before = before_v87_projection_rows(live)
+    live = before_v88_projection_rows(live)
     assert len(before) == 468 and len(live) == 467
     assert [row for row in before if row[0] not in {"chec", "brioșă"}] == [
         row for row in live if row[0] != "tort"

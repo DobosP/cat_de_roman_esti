@@ -7,6 +7,7 @@ import json
 import random
 import time
 from collections import Counter
+from pathlib import Path
 from statistics import median
 
 import pytest
@@ -17,8 +18,10 @@ from django.test import Client  # noqa: E402
 
 from cat_de_roman_esti.graph import Graph  # noqa: E402
 from cat_de_roman_esti.wordgames import alchimie as A  # noqa: E402
-from cat_de_roman_esti.wordgames.packs import get_pack  # noqa: E402
+from cat_de_roman_esti.wordgames.packs import CuratedItem, get_pack  # noqa: E402
 from cat_de_roman_esti.wordgames.service import WordGameService  # noqa: E402
+from tests.content_history import before_v88_fixture, before_v88_pack  # noqa: E402
+from tests.current_content import CURRENT_CONTENT  # noqa: E402
 
 
 def _projection_row(item, projection: A.RecipeProjection) -> dict[str, object]:
@@ -46,19 +49,50 @@ def approved_projections() -> tuple[list[tuple[object, A.RecipeProjection]], flo
     return out, time.perf_counter() - started
 
 
+@pytest.fixture(scope="module")
+def v87_projection_snapshot():
+    """Retain the exact 79-board contract on the reconstructed pre-V88 graph."""
+    fixtures = Path(__file__).resolve().parents[1] / "cat_de_roman_esti/fixtures"
+    graph = before_v88_fixture(json.loads((fixtures / "kg_sample.json").read_bytes()))
+    pack = before_v88_pack(json.loads((fixtures / "games_pack.json").read_bytes()))
+    svc = WordGameService(Graph.from_records(graph["kg_nodes"], graph["kg_edges"]))
+    rows, minima = [], []
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(A, "get_service", lambda: svc)
+        for record in sorted(pack["alchimie"], key=lambda item: item["id"]):
+            if record["status"] != "approved":
+                continue
+            item = CuratedItem(
+                record["id"], "alchimie", record["category"], record["difficulty"],
+                record["source"], record["status"],
+                {key: record[key] for key in ("seeds", "target", "target_depth")},
+            )
+            projection = A._build_recipe_projection(
+                item.payload["seeds"], item.payload["target"], item.category,
+            )
+            assert projection is not None
+            rows.append(_projection_row(item, projection))
+            minima.extend(A._route_quality(route)[0] for route in projection.routes)
+    return rows, minima
+
+
 def test_all_approved_boards_have_sparse_deterministic_target_routes(
-    approved_projections,
+    approved_projections, v87_projection_snapshot,
 ) -> None:
     projections, elapsed = approved_projections
     rows = [_projection_row(item, projection) for item, projection in projections]
+    historical_rows, _historical_minima = v87_projection_snapshot
     digest = hashlib.sha256(
-        json.dumps(rows, sort_keys=True, separators=(",", ":")).encode()
+        json.dumps(historical_rows, sort_keys=True, separators=(",", ":")).encode()
     ).hexdigest()
 
-    assert len(rows) == 79  # ADR-0072: al_literatura_097 promoted
+    assert len(historical_rows) == 79  # ADR-0072's stock remains exact before V88.
     assert digest == "50f82c4660c54708e00cdd31e28c68a60034c83444a2a9dd2d5cc879500c2683"
+    assert len(rows) == CURRENT_CONTENT.game_inventory["alchimie"][1]
+    assert [row for row in rows if row["id"] != "al_gastronomie_107"] == historical_rows
     assert elapsed < 30.0
-    assert Counter(row["routes"] for row in rows) == {1: 5, 2: 6, 3: 7, 4: 61}
+    assert Counter(row["routes"] for row in historical_rows) == {1: 5, 2: 6, 3: 7, 4: 61}
+    assert Counter(row["routes"] for row in rows) == {1: 5, 2: 6, 3: 8, 4: 61}
 
     recipe_count = 0
     tied_count = 0
@@ -93,14 +127,14 @@ def test_all_approved_boards_have_sparse_deterministic_target_routes(
             A._projected_opening_pair_count(item.payload["seeds"], projection.recipes)
         ] += 1
 
-    assert recipe_count == 550
+    assert recipe_count == 555  # V88 adds five reviewed Cremșnit recipes.
     assert tied_count == 77
-    assert sum(count for openings, count in opening_counts.items() if openings >= 2) == 63
+    assert sum(count for openings, count in opening_counts.items() if openings >= 2) == 64
     assert opening_counts[1] == 16
 
 
 def test_selected_routes_prefer_the_strongest_discovered_shortest_alternative(
-    approved_projections,
+    approved_projections, v87_projection_snapshot,
 ) -> None:
     projections, _elapsed = approved_projections
     selected_minima: list[float] = []
@@ -122,7 +156,8 @@ def test_selected_routes_prefer_the_strongest_discovered_shortest_alternative(
                 weak_fallbacks.append(item.id)
 
     assert min(selected_minima) == pytest.approx(0.40)
-    assert median(selected_minima) == pytest.approx(0.66)
+    assert median(v87_projection_snapshot[1]) == pytest.approx(0.66)
+    assert median(selected_minima) == pytest.approx(0.67)
     assert weak_fallbacks == [
         "al_gastronomie_027",
         "al_gastronomie_029",

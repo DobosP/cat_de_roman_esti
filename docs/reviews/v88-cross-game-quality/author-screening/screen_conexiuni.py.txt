@@ -1,0 +1,29 @@
+import os,sys,json,copy,random,hashlib
+from pathlib import Path
+repo=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality');scratch=Path('/home/dobo/work/_temp/feat__v88-cross-game-quality/content');sys.path[:0]=[str(repo),str(repo/'scripts')];os.chdir(repo)
+import critique_pack as c
+import everyday_graph_v88_data as new
+from cat_de_roman_esti.graph import Node,Edge
+from cat_de_roman_esti.wordgames.service import WordGameService
+pack,base,strong,regions=c.load_all(c.PACKAGE_PACK,c.PACKAGE_KG)
+g=copy.deepcopy(base.graph)
+for n in new.NODES:g.add_node(Node.from_record(n))
+for i,e in enumerate(new.EDGES):
+ r=dict(e,id=f'preview_v88_{i}',src_id=e['src'],dst_id=e['dst']);g.add_edge(Edge.from_record(r));a,b=e['src'],e['dst'];strong[a][b]=strong[b][a]=e['strength']
+svc=WordGameService(graph=g);ns={n.label_ro:n.id for n in g.nodes.values()}
+def grp(label,labels):return {'label':label,'tiles':[ns[x] for x in labels]}
+a=[grp('Instrumente din trusa de geometrie',['Riglă','Compas','Echer','Raportor']),grp('Pentru curățarea podelei',['Mătură','Făraș','Mop','Aspirator']),grp('Obiecte sanitare racordate la apă',['Chiuvetă','Cadă de baie','Robinet','Vas de toaletă']),grp('Unelte pentru grădinărit',['Lopată','Greblă','Stropitoare','Roabă'])]
+b=[grp('Componente ale unui circuit electric casnic',['Bec','Priză electrică','Ștecher','Întrerupător de lumină']),grp('Unelte manuale de atelier',['Ciocan','Șurubelniță','Clește','Fierăstrău']),grp('Mobilier pe care te așezi',['Scaun','Canapea','Fotoliu','Taburet']),grp('Vase pentru gătit la cald',['Oală','Tigaie','Cratiță','Tavă de copt'])]
+# Deliberately rejected alternative combines overlapping geometry/writing tools.
+cx=[{'difficulty':'usor','groups':a},{'difficulty':'usor','groups':b},{'difficulty':'usor','groups':a[:1]+b[:1]+a[1:3]}]
+rows=[]
+for i,item in enumerate(cx):
+ rec={'id':f'cx_v88_author_{i+1:02d}','category':'viata_de_roman','status':'pending','source':'ai','difficulty':item['difficulty'],'groups':{f'g{j+1}':r['tiles'] for j,r in enumerate(item['groups'])},'group_labels':{f'g{j+1}':r['label'] for j,r in enumerate(item['groups'])},'order':[t for r in item['groups'] for t in r['tiles']]};rows.append(rec)
+pack['conexiuni']+=rows[:2]
+findings,pf,selected=c.run(pack,svc,strong,regions,['conexiuni'],{'pending'},{r['id'] for r in rows[:2]})
+results=[]
+for game,rec,fs in selected:
+ dossier=c.build_dossier(rec,game,svc,strong,fs,regions);dossier.pop('review_binding',None);dossier['preview_only']='In-memory authored graph; NOT a final import or promotion dossier.';dossier['authored_module_sha256']=hashlib.sha256((repo/'scripts/everyday_graph_v88_data.py').read_bytes()).hexdigest();results.append(dossier)
+print(json.dumps(results,ensure_ascii=False,indent=2));(scratch/'conexiuni-screen.json').write_text(json.dumps(results,ensure_ascii=False,indent=2)+'\n')
+for category,game,items in [('viata_de_roman','conexiuni',cx[:2])]:
+ p=repo/'docs/reviews/v88-cross-game-quality/author-candidates'/category;p.mkdir(parents=True,exist_ok=True);raw={k:[] for k in ('nodes','edges','conexiuni','contexto','lant','alchimie')};raw[game]=items;(p/'candidates.json').write_text(json.dumps(raw,ensure_ascii=False,indent=2)+'\n')

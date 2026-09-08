@@ -1,0 +1,132 @@
+{
+  "schema": "v88-author-factual-notes-v1",
+  "role": "author notes only, not an independent factual gate",
+  "candidate_files": {
+    "author-candidates/gastronomie/candidates.json": "455d1ab60f6994fd7dd189bce03afa4000eec57efc565ea6e6fda60647403009",
+    "author-candidates/viata_de_roman/candidates.json": "5cca4616b5d6f6cd9694db2bc306ebe934385acc77a4375f5b0355b42d86a4d9"
+  },
+  "items": {
+    "gastronomie/alchimie[0]": {
+      "target": "Cremșnit",
+      "sources": [
+        "https://jamilacuisine.ro/prajitura-cremsnit-pas-cu-pas-reteta-video/"
+      ],
+      "facts": "The original 2014 recipe uses pastry sheets, milk, sugar and vanilla cream. Flour and water make dough; dough sheets with vanilla cream identify Cremșnit.",
+      "player_arc": "Make Aluat and Cremă de vanilie separately, then assemble the pastry.",
+      "limits": "Alchimie is pair-association crafting: the five visible ingredients are not a complete literal recipe. Milk+sugar and sugar+vanilla are associative cream openings, not sufficient cooking instructions."
+    },
+    "viata_de_roman/conexiuni[0]": {
+      "sources": [
+        "https://www.staedtler.com/intl/en/products/technical-drawing-instruments/geometry-set/",
+        "https://www.vileda.co.uk/brooms-dustpans",
+        "https://www.vileda.com/mops",
+        "https://www.grohe.ro/ro_ro/serviciile-noastre/clipuri-montaj/prezentare-instructiuni-montaj.html",
+        "https://www.gardena.com/ro/produse/sol-teren/combisystem/grebla/901041301.html"
+      ],
+      "facts": "The four quads use membership/function predicates: geometry-kit instruments; floor-cleaning implements; water-connected sanitary fittings; gardening implements.",
+      "crossfit_walk": "No writing instruments share this board. Rake and broom both collect debris, but the ordinary domestic-floor tools are broom/dustpan/mop/vacuum; rake is a garden implement for soil/plant debris. A watering can is mobile, not connected to the plumbing. Robinet is a plumbing fitting rather than a garden implement.",
+      "difficulty": "Easy functional classification. The geometry group relies on recognizing a familiar school kit; it does not claim all four tools are graduated."
+    },
+    "viata_de_roman/conexiuni[1]": {
+      "sources": [
+        "https://www.ikea.com/ro/ro/cat/taburete-22659/",
+        "https://dexonline.ro/definitie/taburet",
+        "https://www.tefal.ro/articole-de-bucatarie/oale-si-tigai"
+      ],
+      "facts": "Electrical circuit components; manually operated workshop tools; furniture designed for sitting; vessels for hot cooking. All16 tiles are concepts.",
+      "crossfit_walk": "Hand tools may have electrical variants, but the graph nodes and quartet denote the ordinary manual tool senses. Cooking vessels are not seating furniture. Oală/Cratiță/Tigaie have neighboring everyday senses, but they intentionally remain in the same group. No electrical appliance is displayed outside the circuit-components group.",
+      "difficulty": "Easy functional classification. Recognizing a circuit component versus a device is the most specific category."
+    }
+  },
+  "preserved_evidence": [
+    {
+      "path": "author-screening/alchimie-screen.json.gz",
+      "uncompressed_sha256": "e3a9eeb18db258c2454ddf03659ad8d544f48f4aa2fda1a1511061d4c52219a4",
+      "gzip_sha256": "8e86b16b2d0de86873d0eeb3902b7c26b0f22926b86ccf00ae40574e20c41eef",
+      "bytes": 20103
+    },
+    {
+      "path": "author-screening/diplomat-final.json.gz",
+      "uncompressed_sha256": "66f246c96d849ea9cc811d6b5a79e110de57ca83aa913b75782d09a30318109c",
+      "gzip_sha256": "574e4909d3d71c2e0289c786e20780560ee117ef985e37f1cfc70b59b13ecb63",
+      "bytes": 3169
+    },
+    {
+      "path": "author-screening/diplomat-orange.json.gz",
+      "uncompressed_sha256": "69a482b2237715d79fd732aba0ddc1a31731731a5108200cc8fc004214d24cb8",
+      "gzip_sha256": "be663fa4b3eeec04962c2f938408d8549e57b1f1820fd9a9e0b039cb54619080",
+      "bytes": 3193
+    },
+    {
+      "path": "author-screening/conexiuni-screen.log.gz",
+      "uncompressed_sha256": "6f6a09d498d21c30ef9579935c1bd1b7e6f5a73f60f828e407708101af5bfd22",
+      "gzip_sha256": "18833fc836c92900e070804f6ae56eedf5ad87a445ab47c6992cdbc3d26d43b8",
+      "bytes": 14801
+    },
+    {
+      "path": "author-screening/conexiuni-screen.json.gz",
+      "uncompressed_sha256": "f821c30a7d7e2095fc92132cb4bb1dbaec5bd10d023fe5498b316462d8ccdc4e",
+      "gzip_sha256": "36d3d485264070ee0b41c7ef4d942ed50836da2cd0d7ed173db33b19f05ea752",
+      "bytes": 14354
+    },
+    {
+      "path": "author-screening/conexiuni-rejected-crossfit.json.gz",
+      "uncompressed_sha256": "185dfb3996177ef4a489d4f7ec641c1a018a4973c24ee28d0e4dbc508b184a2e",
+      "gzip_sha256": "a6be32e3dfcbccbd893bcd5edadc318482d4cb2855e21320895b77c4101fea2d",
+      "bytes": 1346
+    },
+    {
+      "path": "author-screening/lant-screen.json.gz",
+      "uncompressed_sha256": "5fae3a0c12756ded7d97e0a1165dff285bd3e9b92d9062543f12978d734238ec",
+      "gzip_sha256": "946746cafc46df02e1f903cf0d13a57140669e654c273a20715c9b36d8f579da",
+      "bytes": 16319
+    }
+  ],
+  "additional_lant_suggestion": {
+    "start": "n_v85_food_cacao",
+    "target": "n_v87_food_cremsnit",
+    "difficulty": "normal",
+    "distance": 4,
+    "first_hops": 3,
+    "minimum_layer": 2,
+    "intermediate_nodes": 7,
+    "source": "author-screening/lant-screen.json.gz",
+    "role": "Held after root challenge: credible branches converge on milk/cream; broad kitchen/fridge route is insufficient independent branch quality. No import.",
+    "limits": "Milk→cream and cream→Cremșnit are specific; the alternate Cozonac→Bucătărie→Frigider route is broader. Do not count as a delivered round."
+  },
+  "final_author_outcome": {
+    "forward_for_independent_review": [
+      "gastronomie/alchimie[0]",
+      "viata_de_roman/conexiuni[0]",
+      "viata_de_roman/conexiuni[1]"
+    ],
+    "hold": [
+      "archived Diplomat candidate; excluded from final raw batch"
+    ],
+    "graph_counts": {
+      "new_nodes": 7,
+      "new_forms": 28,
+      "new_edges": 33,
+      "removed_edges": 1
+    },
+    "accepted_forms_breakdown": {
+      "grammatical": 25,
+      "qualified": 3,
+      "lexical_equivalents": 0
+    },
+    "note": "Three proposed promotions across two games; numerical planning floor never overrides quality."
+  },
+  "held_diplomat_history": {
+    "target": "Tort Diplomat",
+    "sources": [
+      "https://jamilacuisine.ro/tort-diplomat-facut-in-casa-reteta-video/",
+      "https://www.barbatlacratita.ro/2016/03/piscoturi-de-casa.html",
+      "https://www.oetker-professional.ro/produsele-noastre/intaritor-de-frisca"
+    ],
+    "facts": "Qualified sweet whipping cream replaces the old explicitly fermented Smântână input. Its truthful direct ingredient edge and the Portocală edge make this exact seed set a one-action target.",
+    "player_arc": "The original apparent two-action arc is invalid after the necessary graph truth correction.",
+    "limits": "The raw record remains for complete independent rejection coverage, not promotion. Six alternative seed frames expose unused seeds, double-cream routes or weak tool/sugar-only output; no variant is forwarded.",
+    "author_decision": "hold",
+    "archive": "author-screening/preflight-revision/sweet-cream-diplomat-one-pair-candidates.json.gz"
+  }
+}

@@ -1,0 +1,20 @@
+"""Read final candidate artifacts into a reviewable pin report; never edits test data."""
+from __future__ import annotations
+import os,sys,json,hashlib,subprocess
+from collections import Counter
+from pathlib import Path
+root=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality');os.chdir(root);sys.path.insert(0,str(root));os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django;django.setup()
+from cat_de_roman_esti.wordgames import contexto as c,contexto_projection as p
+from cat_de_roman_esti.wordgames.packs import _opening_pairs,_closure_generations
+from cat_de_roman_esti.wordgames.service import get_service
+svc=get_service();paths=['cat_de_roman_esti/fixtures/'+x for x in ['kg_sample.json','games_pack.json','board_rankings_v37.json','derived_catalog_v38.json']]+['tests/fixtures/cat_mobile_app_pack_contract.json'];blobs={path:(root/path).read_bytes() for path in paths};kg,pack,ranking,derived,mobile=[json.loads(b) for b in blobs.values()]
+sha=lambda b:hashlib.sha256(b).hexdigest()
+canonical=lambda v:sha(json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
+pretty=lambda v:sha((json.dumps(v,ensure_ascii=False,indent=1)+'\n').encode())
+old_pack=json.loads(subprocess.check_output(['git','show','2878417ed43aaf790badfa09297ea122121b9449:cat_de_roman_esti/fixtures/games_pack.json'],cwd=root))
+cp={r['id']:sorted(svc.distances_to(r['target']).items()) for r in pack['contexto']}
+ap={r['id']:{'opening_pairs':_opening_pairs(svc,r['seeds'],r.get('category')),'generations':sorted(_closure_generations(svc,r['seeds'],r.get('category')).items())} for r in old_pack['alchimie']}
+family=c._build_session('n_v4soc_familie','usor',None);clatite=c._build_session('n_v3gas_clatite','usor',None)
+report={'build_version':kg['meta']['build_version'],'artifact_sha256':{path:sha(b) for path,b in blobs.items()},'payload_sha256':{'ranking_rows':pretty(ranking['boards']),'frozen_derived_boards':pretty(derived['boards']),'kg_nodes_without_aliases':canonical([{k:v for k,v in n.items() if k!='aliases'} for n in kg['kg_nodes']]),'kg_edges':canonical(kg['kg_edges']),'kg_puzzles':canonical(kg['kg_puzzles']),'contexto_profile':canonical(cp),'alchimie_closure_profile':canonical(ap),'mobile_content':mobile['manifest']['content_hash'].removeprefix('sha256:')},'kg_counts':{'nodes':len(kg['kg_nodes']),'edges':len(kg['kg_edges']),'aliases':sum(len(n.get('aliases',[])) for n in kg['kg_nodes']),'puzzles':len(kg['kg_puzzles'])},'mobile_counts':mobile['manifest']['counts'],'pack_counts':pack['meta']['counts'],'pack_id_high_water':pack['meta']['id_high_water'],'status_counts':dict(Counter(r['status'] for g in ('conexiuni','contexto','lant','alchimie') for r in pack[g])),'game_inventory':{g:[len(pack[g]),sum(r['status']=='approved' for r in pack[g]),sum(r['status']=='pending' for r in pack[g])] for g in ('conexiuni','contexto','lant','alchimie')},'ranking_counts':ranking['meta']['counts'],'derived_counts':derived['meta']['counts'],'feedback_observations':{'food_responsive':c._responsive_count(svc.distances_to('n_v4gas_mancare')),'food_direct_projections':sum(t.anchor_id=='n_v4gas_mancare' for t in p.PROJECTION_TERMS),'family_member_rank':c._score_feedback(svc,family,svc.resolve('mamă')).rank},'clatite_opener_ranks':{word:c._score_feedback(svc,clatite,svc.resolve(word)).rank if svc.resolve(word) else c._score_feedback(svc,clatite,c._projection_anchor_id(svc,p.resolve_projection(word),clatite.target),rank_penalty=p.resolve_projection(word).rank_penalty,nonwinning=True).rank for word in ('făină','ou','gem','dulceață','lapte','brânză','smântână')},'projection_terms':len(p.PROJECTION_TERMS),'projection_domains':len({t.domain for t in p.PROJECTION_TERMS})}
+out=Path('/home/dobo/work/_temp/feat__v88-cross-game-quality/content/current-pins-report.json');out.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n');print(json.dumps(report,ensure_ascii=False,indent=2))

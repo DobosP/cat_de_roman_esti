@@ -1,0 +1,151 @@
+#!/usr/bin/env python3
+"""Archive exact V88 impact evidence and verify all reused observations."""
+import gzip
+import hashlib
+import io
+import json
+import shutil
+import subprocess
+from pathlib import Path
+
+SCRATCH = Path('/home/dobo/work/_temp/feat__v88-cross-game-quality/impact')
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality')
+OUT = ROOT / 'docs/reviews/v88-cross-game-quality/impact'
+BASELINE_COMMIT = '2878417ed43aaf790badfa09297ea122121b9449'
+OUT.mkdir(parents=True, exist_ok=True)
+(OUT / 'raw').mkdir(exist_ok=True)
+
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def canonical(value):
+    return sha(json.dumps(value, ensure_ascii=False, sort_keys=True,
+                          separators=(',', ':')).encode())
+
+
+def archive(name):
+    raw = (SCRATCH / name).read_bytes()
+    destination = OUT / 'raw' / (name + '.gz')
+    stream = io.BytesIO()
+    with gzip.GzipFile(filename='', mode='wb', fileobj=stream, mtime=0) as handle:
+        handle.write(raw)
+    packed = stream.getvalue()
+    assert gzip.decompress(packed) == raw
+    assert int.from_bytes(packed[4:8], 'little') == 0
+    destination.write_bytes(packed)
+    return {'path': str(destination.relative_to(OUT)), 'encoding': 'gzip',
+            'gzip_mtime': 0, 'decoded_sha256': sha(raw), 'archive_sha256': sha(packed),
+            'decoded_bytes': len(raw), 'archive_bytes': len(packed)}
+
+
+stages = [
+    ('baseline.json', 'inputs.json', None),
+    ('baseline-expanded.json', 'expanded-inputs.json', 'baseline.json'),
+    ('baseline-final-inputs.json', 'final-inputs.json', 'baseline-expanded.json'),
+    ('baseline-reviewed.json', 'reviewed-inputs.json', 'baseline-final-inputs.json'),
+    ('final.json', 'reviewed-inputs.json', None),
+]
+decoded = {name: json.loads((SCRATCH / name).read_text()) for name, _, _ in stages}
+baseline = decoded['baseline-reviewed.json']
+final = decoded['final.json']
+audited_pack = json.loads((SCRATCH / 'baseline-pack.json').read_text())
+receipt = {
+    'schema_version': 1,
+    'baseline_commit': BASELINE_COMMIT,
+    'candidate_stage': 'Final frozen V88 backend after all three content promotions',
+    'input_sha256': sha((SCRATCH / 'reviewed-inputs.json').read_bytes()),
+    'audited_pack_sha256': canonical(audited_pack),
+    'old_contexto_records': len(baseline['contexto']),
+    'old_contexto_distinct_targets': len({row['target'] for row in baseline['contexto'].values()}),
+    'words_per_record': len(baseline['inputs']),
+    'observations_per_capture': len(baseline['contexto']) * len(baseline['inputs']),
+    'captures': {}, 'inputs': {}, 'logs': {}, 'reproducers': {},
+    'structural_scopes': {'old_pack_records': 655, 'alchimie': 82, 'lant': 100,
+                          'derived': 336, 'new_direct_routes': 33},
+    'limitations': 'Old-approved-target first guesses and deterministic profiles; not '
+                   'human playtests, new-round review, public selection journeys or full integration tests.',
+}
+for name, input_name, prior_name in stages:
+    value = decoded[name]
+    assert 'direct_routes' in value
+    assert value['inputs_sha256'] == sha((SCRATCH / input_name).read_bytes())
+    assert value['audited_pack_sha256'] == receipt['audited_pack_sha256']
+    reused_count = 0
+    if prior_name:
+        prior = decoded[prior_name]
+        assert prior['source_sha256'] == value['source_sha256']
+        for key in ('pack', 'derived', 'lant', 'lant_choices', 'alchimie'):
+            assert prior[key] == value[key]
+        for key, row in prior['contexto'].items():
+            current = {word.casefold(): item for word, item in value['contexto'][key]['words'].items()}
+            for word, item in row['words'].items():
+                assert current[word.casefold()] == item
+                reused_count += 1
+        assert reused_count == value['contexto_observations_reused']
+    else:
+        assert value['contexto_observations_reused'] == 0
+    total = sum(len(row['words']) for row in value['contexto'].values())
+    assert value['contexto_api_requests'] + value['contexto_observations_reused'] == total
+    receipt['captures'][name] = {
+        'sha256': sha((SCRATCH / name).read_bytes()),
+        'source_sha256': value['source_sha256'], 'input_file': input_name,
+        'inputs_sha256': value['inputs_sha256'], 'words_per_record': len(value['inputs']),
+        'observations': total, 'contexto_api_requests': value['contexto_api_requests'],
+        'contexto_observations_reused': value['contexto_observations_reused'],
+        'reuse_source': prior_name, 'verified_reused_observations': reused_count,
+        'elapsed_seconds': value['elapsed_seconds'], 'archive': archive(name),
+    }
+    log_name = name.removesuffix('.json') + '.log'
+    receipt['logs'][log_name] = archive(log_name)
+    if input_name not in receipt['inputs']:
+        shutil.copyfile(SCRATCH / input_name, OUT / input_name)
+        receipt['inputs'][input_name] = {'sha256': sha((OUT / input_name).read_bytes())}
+
+for path, expected in baseline['source_sha256'].items():
+    old_bytes = subprocess.check_output(['git', '-C', str(ROOT), 'show', f'{BASELINE_COMMIT}:{path}'])
+    assert sha(old_bytes) == expected, f'baseline source differs: {path}'
+for path, expected in final['source_sha256'].items():
+    assert sha((ROOT / path).read_bytes()) == expected, f'final source changed: {path}'
+assert baseline['alchimie'] == final['alchimie']
+assert baseline['lant'] == final['lant']
+assert baseline['derived'] == final['derived']
+receipt['source_verification'] = {
+    'baseline': 'All nine captured artifact/runtime byte hashes match the explicit baseline commit.',
+    'final': 'All nine captured artifact/runtime byte hashes still match the frozen worktree.',
+    'supplemental': 'Tracked package Python source fingerprints below were read at archive finalization; '
+                    'the baseline is bound to the explicit commit. They supplement the nine capture-time hashes.',
+}
+source_paths = subprocess.check_output([
+    'git', '-C', str(ROOT), 'ls-files', 'cat_de_roman_esti/*.py', 'cat_de_roman_esti/**/*.py'
+], text=True).splitlines()
+receipt['supplemental_source_sha256'] = {}
+for path in sorted(set(source_paths)):
+    receipt['supplemental_source_sha256'][path] = {
+        'baseline': sha(subprocess.check_output(['git', '-C', str(ROOT), 'show', f'{BASELINE_COMMIT}:{path}'])),
+        'final': sha((ROOT / path).read_bytes()),
+    }
+receipt['audited_pack_archive'] = archive('baseline-pack.json')
+receipt['full_comparison_archive'] = archive('comparison.json')
+receipt['comparison_stdout_archive'] = archive('comparison-summary.json')
+for name in ('capture.py', 'compare.py', 'analyze-final.py', 'archive-final.py'):
+    destination = OUT / (name + '.txt')
+    shutil.copyfile(SCRATCH / name, destination)
+    receipt['reproducers'][destination.name] = {'sha256': sha(destination.read_bytes())}
+receipt['derived_reports_sha256'] = {
+    path.name: sha(path.read_bytes()) for path in sorted(OUT.iterdir())
+    if path.is_file() and path.suffix in {'.json', '.md'} and path.name != 'capture-receipt.json'
+}
+receipt['provenance'] = (
+    'The four original baseline stages were preserved and not recomputed. Each expansion '
+    'reused only source-identical structural profiles and observations; every reused observation '
+    'was rechecked against its archived predecessor. The final capture made all 11,233 requests '
+    'fresh once after backend freeze. Full matrices, original capture logs, original comparison '
+    'output and audited pack survive losslessly in gzip archives with zero timestamps and '
+    'both decoded/archive hashes. No initial evidence was overwritten.')
+(OUT / 'capture-receipt.json').write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + '\n')
+print(json.dumps({'captures': len(receipt['captures']), 'final_requests': final['contexto_api_requests'],
+                  'distinct_targets': receipt['old_contexto_distinct_targets'],
+                  'source_files': len(receipt['supplemental_source_sha256']),
+                  'out': str(OUT)}, indent=2))

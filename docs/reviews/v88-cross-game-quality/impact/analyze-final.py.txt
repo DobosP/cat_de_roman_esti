@@ -1,0 +1,121 @@
+#!/usr/bin/env python3
+"""Summarize the preserved full comparison without issuing new API requests."""
+import collections
+import json
+from pathlib import Path
+
+SCRATCH = Path('/home/dobo/work/_temp/feat__v88-cross-game-quality/impact')
+ROOT = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality')
+OUT = ROOT / 'docs/reviews/v88-cross-game-quality/impact'
+OUT.mkdir(parents=True, exist_ok=True)
+before = json.loads((SCRATCH / 'baseline-reviewed.json').read_text())
+after = json.loads((SCRATCH / 'final.json').read_text())
+comparison = json.loads((SCRATCH / 'comparison.json').read_text())
+labels = {v['id']: v['label_ro'] for v in json.loads(
+    (ROOT / 'cat_de_roman_esti/fixtures/kg_sample.json').read_text())['kg_nodes']}
+temperatures = {None: -2, 'Inghetat': 0, 'Foarte rece': 1, 'Rece': 2,
+                'Caldut': 3, 'Cald': 4, 'Fierbinte': 5, 'Gasit': 6}
+
+
+def write(name, value):
+    (OUT / name).write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n')
+
+
+def enrich(row):
+    return {**row, 'target_label': labels[row['target']]}
+
+
+counts = collections.Counter()
+cooler = []
+warmer = []
+lost = []
+for raw in comparison['contexto']['changes']:
+    row = enrich(raw)
+    old, new = row['before'], row['after']
+    old_guess, new_guess = old['guess'], new['guess']
+    counts['changed'] += 1
+    if old['ok'] and new['ok']:
+        counts['changed_among_both_accepted'] += 1
+        counts['identity_changed'] += old_guess['id'] != new_guess['id']
+        counts['temperature_changed'] += old_guess['temperature'] != new_guess['temperature']
+        counts['distance_changed'] += old_guess['distance'] != new_guess['distance']
+        counts['same_temperature_and_distance'] += (
+            old_guess['temperature'] == new_guess['temperature']
+            and old_guess['distance'] == new_guess['distance'])
+        counts['rank_worse'] += new_guess['rank'] > old_guess['rank']
+        counts['rank_better'] += new_guess['rank'] < old_guess['rank']
+        old_t = temperatures[old_guess['temperature']]
+        new_t = temperatures[new_guess['temperature']]
+        if old_t > new_t:
+            cooler.append(row)
+        if old_t < new_t:
+            warmer.append(row)
+    elif old['ok']:
+        counts['lost_acceptance'] += 1
+        lost.append(row)
+    elif new['ok']:
+        counts['newly_accepted'] += 1
+    else:
+        counts['both_unaccepted_changed'] += 1
+counts['cooled'] = len(cooler)
+counts['warmed'] = len(warmer)
+counts['unchanged'] = len(before['contexto']) * len(before['inputs']) - counts['changed']
+counts['old_warm_or_hot_cooled'] = sum(
+    temperatures[row['before']['guess']['temperature']] >= 4 for row in cooler)
+for key in ('lost_acceptance', 'both_unaccepted_changed'):
+    counts.setdefault(key, 0)
+cooler.sort(key=lambda row: (
+    temperatures[row['before']['guess']['temperature']]
+    - temperatures[row['after']['guess']['temperature']],
+    row['after']['guess']['rank'] - row['before']['guess']['rank']), reverse=True)
+warmer.sort(key=lambda row: (
+    temperatures[row['after']['guess']['temperature']]
+    - temperatures[row['before']['guess']['temperature']],
+    row['before']['guess']['rank'] - row['after']['guess']['rank']), reverse=True)
+write('cooler-old-target-cues.json', cooler)
+write('warmer-old-target-cues.json', warmer)
+write('lost-input-acceptance.json', lost)
+
+summary = json.loads((SCRATCH / 'comparison-summary.json').read_text())
+summary['contexto']['counts'] = dict(counts)
+summary['contexto']['distinct_old_targets'] = len({v['target'] for v in before['contexto'].values()})
+summary['contexto']['words_per_record'] = len(before['inputs'])
+summary['contexto']['observations_per_capture'] = len(before['contexto']) * len(before['inputs'])
+summary['contexto']['scope_note'] = (
+    'Changes compare complete first-guess response records. Counts include vocabulary '
+    'acceptance, identity replacement, rank, closeness, distance and temperature changes; '
+    'they are not counts of proven quality improvements.')
+write('summary.json', summary)
+write('lant-guidance.json', comparison['lant_guidance'])
+
+core = {}
+for target, words in {
+    'Pâine': ['Brioșă', 'Chec', 'Biscuit'],
+    'Zacuscă': ['Brioșă', 'Chec'],
+    'Frișcă': ['Smântână', 'smântână fermentată', 'smântână dulce',
+               'smântână pentru frișcă', 'Smântână dulce pentru frișcă'],
+    'Tort Diplomat': ['Smântână', 'smântână dulce', 'smântână pentru frișcă',
+                      'Smântână dulce pentru frișcă', 'Frișcă', 'tort'],
+    'Cremșnit': ['tort', 'Prăjitură', 'Smântână'],
+    'Biscuit': ['Făină', 'Unt', 'Zahăr'],
+}.items():
+    ids = [key for key, row in before['contexto'].items() if labels[row['target']] == target]
+    core[target] = {key: {
+        word: {'before': before['contexto'][key]['words'][word],
+               'after': after['contexto'][key]['words'][word]}
+        for word in words} for key in ids}
+write('core-associations.json', core)
+
+
+def brief(row):
+    old, new = row['before']['guess'], row['after']['guess']
+    return [row['id'], row['word'], row['target_label'],
+            [old['rank'], old['distance'], old['temperature']],
+            [new['rank'], new['distance'], new['temperature']]]
+
+
+print('COUNTS', json.dumps(dict(counts), ensure_ascii=False))
+print('COOLER', json.dumps([brief(row) for row in cooler[:35]], ensure_ascii=False, indent=2))
+print('WARMER', json.dumps([brief(row) for row in warmer[:20]], ensure_ascii=False, indent=2))
+print('WORDS', json.dumps(summary['contexto']['by_word'], ensure_ascii=False, indent=2))
+print('LANT', json.dumps(comparison['lant_guidance']['changed'], ensure_ascii=False, indent=2))

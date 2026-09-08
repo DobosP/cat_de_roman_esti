@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 from collections import Counter
@@ -9,6 +10,7 @@ from pathlib import Path
 
 import pytest
 
+from tests.content_history import before_v88_fixture
 from tests.current_content import CURRENT_CONTENT
 
 pytest.importorskip("django")
@@ -16,6 +18,7 @@ pytest.importorskip("django")
 from django.test import Client  # noqa: E402
 
 from cat_de_roman_esti.data import load_fixture  # noqa: E402
+from cat_de_roman_esti.graph import Graph  # noqa: E402
 from cat_de_roman_esti.wordgames.contexto import (  # noqa: E402
     _build_session,
     _score_feedback,
@@ -174,12 +177,40 @@ def test_every_proxy_anchor_reaches_every_selectable_unique_target() -> None:
     ]
     targets = {target_by_id[row["id"]] for row in eligible}
     svc = get_service()
+    fixture = _json(_PACKAGE_KG)
+    prior = before_v88_fixture(fixture)
+    prior_svc = WordGameService(Graph.from_records(prior["kg_nodes"], prior["kg_edges"]))
+    opened_cleaning_ids = {
+        "n_v31_cleaning_dishes_burete_vase", "n_v31_cleaning_supply_detergent",
+        "n_v31_cleaning_floor_aspirator", "n_v31_cleaning_floor_faras",
+        "n_v31_cleaning_floor_mop", "n_v31_cleaning_water_galeata",
+    }
+    bridge = [edge for edge in fixture["kg_edges"] if (
+        edge["src_id"], edge["dst_id"]
+    ) == ("n_v31_cleaning_floor_faras", "n_v88_cleaning_matura")]
+    assert len(bridge) == 1 and bridge[0]["relation"] == "collects_from"
+    assert svc.link("n_v88_cleaning_matura", "n_v24_home_surfaces_podea").relation == "cleans"
+    closed_svc = WordGameService(Graph.from_records(
+        fixture["kg_nodes"], [edge for edge in fixture["kg_edges"] if edge != bridge[0]],
+    ))
+    assert len(COMMON_FEEDBACK_PROXIES) == CURRENT_CONTENT.legacy_feedback_proxies == 71
+    assert hashlib.sha256(json.dumps(
+        COMMON_FEEDBACK_PROXIES, sort_keys=True, separators=(",", ":"),
+    ).encode()).hexdigest() == (
+        "def769935fe81552daa94f711ee2b5a3b6e777269fcc3a8c98e30c86db3c9e84"
+    )
 
     assert len(eligible) == len(targets) == CURRENT_CONTENT.contexto_eligible
     for anchor_id in set(COMMON_FEEDBACK_PROXIES.values()):
         assert targets <= set(svc.distances_from(anchor_id))
     for node_id in COMMON_FEEDBACK_PROXIES:
-        assert targets.isdisjoint(svc.distances_from(node_id))
+        assert targets.isdisjoint(prior_svc.distances_from(node_id))
+        assert (not targets.isdisjoint(svc.distances_from(node_id))) is (
+            node_id in opened_cleaning_ids
+        )
+        # Removing only the reviewed Făraș→Mătură link restores all 71 sinks.
+        # The mature-target feedback mappings themselves remain byte-exact.
+        assert targets.isdisjoint(closed_svc.distances_from(node_id))
 
 
 def test_proxy_feedback_keeps_public_identity_and_never_stacks_penalties() -> None:

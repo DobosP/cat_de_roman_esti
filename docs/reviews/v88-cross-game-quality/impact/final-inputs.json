@@ -1,0 +1,329 @@
+{
+  "WORDS": [
+    "Brioșă",
+    "Pâine",
+    "Chec",
+    "Zacuscă",
+    "Cozonac",
+    "Făină",
+    "Unt",
+    "Zahăr",
+    "tort",
+    "Prăjitură",
+    "Biscuit",
+    "Compas",
+    "Echer",
+    "Raportor",
+    "Mătură",
+    "Creion",
+    "Riglă",
+    "Pix",
+    "Stilou",
+    "Caiet",
+    "Radieră",
+    "Ciocan",
+    "Șurubelniță",
+    "Clește",
+    "Fierăstrău",
+    "Lopată",
+    "Greblă",
+    "Stropitoare",
+    "Roabă",
+    "Chiuvetă",
+    "Robinet",
+    "Mop",
+    "Aspirator",
+    "Făraș",
+    "Cremșnit",
+    "Tort Diplomat",
+    "Ciocolată",
+    "Pișcot",
+    "Cariocă"
+  ],
+  "NODES": [
+    {
+      "id": "n_v88_school_compas",
+      "label_ro": "Compas",
+      "category": "viata_de_roman",
+      "description": "Instrument cu două brațe articulate pentru trasarea cercurilor și a arcelor de cerc.",
+      "aliases": [
+        "compasul",
+        "compasului",
+        "compasuri",
+        "compasurile"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    },
+    {
+      "id": "n_v88_school_echer",
+      "label_ro": "Echer",
+      "category": "viata_de_roman",
+      "description": "Instrument triunghiular pentru trasarea și verificarea unghiurilor drepte și a liniilor perpendiculare.",
+      "aliases": [
+        "echerul",
+        "echerului",
+        "echere",
+        "echerele"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    },
+    {
+      "id": "n_v88_school_raportor",
+      "label_ro": "Raportor",
+      "category": "viata_de_roman",
+      "description": "Instrument gradat pentru măsurarea și construirea unghiurilor.",
+      "aliases": [
+        "raportorul",
+        "raportorului",
+        "raportoare",
+        "raportoarele"
+      ],
+      "node_type": "concept",
+      "salience": 0.8
+    },
+    {
+      "id": "n_v88_cleaning_matura",
+      "label_ro": "Mătură",
+      "category": "viata_de_roman",
+      "description": "Unealtă cu coadă și peri sau nuiele, folosită la strângerea prafului și a gunoiului de pe suprafețe.",
+      "aliases": [
+        "mături",
+        "măturile",
+        "măturii",
+        "măturilor"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    },
+    {
+      "id": "n_v88_home_taburet",
+      "label_ro": "Taburet",
+      "category": "viata_de_roman",
+      "description": "Scaun de dimensiuni mici, de obicei fără spătar și fără brațe.",
+      "aliases": [
+        "taburetul",
+        "taburetului",
+        "taburete",
+        "taburetele"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    },
+    {
+      "id": "n_v88_kitchen_cratita",
+      "label_ro": "Cratiță",
+      "category": "gastronomie",
+      "description": "Vas de bucătărie cu pereți relativ scunzi, folosit pentru fierberea sau prăjirea preparatelor.",
+      "aliases": [
+        "cratițe",
+        "cratițele",
+        "cratiței",
+        "cratițelor"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    }
+  ],
+  "EDGES": [
+    {
+      "src": "n_v88_school_compas",
+      "dst": "n_v3art_desen",
+      "relation": "used_for",
+      "label_ro": "folosit la realizarea unui desen geometric",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v2sti_matematica",
+      "dst": "n_v88_school_compas",
+      "relation": "uses_tool",
+      "label_ro": "folosește la construcții sau măsurători geometrice",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_school_supplies_rigla",
+      "dst": "n_v88_school_compas",
+      "relation": "used_together",
+      "label_ro": "folosite împreună în truse de geometrie",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_school_echer",
+      "dst": "n_v3art_desen",
+      "relation": "used_for",
+      "label_ro": "folosit la realizarea unui desen geometric",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v2sti_matematica",
+      "dst": "n_v88_school_echer",
+      "relation": "uses_tool",
+      "label_ro": "folosește la construcții sau măsurători geometrice",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_school_supplies_rigla",
+      "dst": "n_v88_school_echer",
+      "relation": "used_together",
+      "label_ro": "folosite împreună în truse de geometrie",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_school_raportor",
+      "dst": "n_v3art_desen",
+      "relation": "used_for",
+      "label_ro": "folosit la realizarea unui desen geometric",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v2sti_matematica",
+      "dst": "n_v88_school_raportor",
+      "relation": "uses_tool",
+      "label_ro": "folosește la construcții sau măsurători geometrice",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_school_supplies_rigla",
+      "dst": "n_v88_school_raportor",
+      "relation": "used_together",
+      "label_ro": "folosite împreună în truse de geometrie",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_school_compas",
+      "dst": "n_v24_school_writing_creion",
+      "relation": "uses_tool",
+      "label_ro": "unele modele prind un creion pentru trasare",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_school_echer",
+      "dst": "n_v24_school_supplies_rigla",
+      "relation": "used_together",
+      "label_ro": "folosite împreună pentru trasări geometrice",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_cleaning_matura",
+      "dst": "n_v24_home_surfaces_podea",
+      "relation": "cleans",
+      "label_ro": "mătură",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_cleaning_matura",
+      "dst": "n_v31_cleaning_floor_faras",
+      "relation": "used_together",
+      "label_ro": "împinge gunoiul în",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v31_cleaning_floor_faras",
+      "dst": "n_v88_cleaning_matura",
+      "relation": "used_together",
+      "label_ro": "colectează gunoiul strâns cu",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_home_taburet",
+      "dst": "n_v24_home_seating_scaun",
+      "relation": "is_a",
+      "label_ro": "este un tip de scaun",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_home_taburet",
+      "dst": "n_v3muz_pian",
+      "relation": "used_together",
+      "label_ro": "unele modele sunt folosite pentru a sta la",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v3muz_pian",
+      "dst": "n_v88_home_taburet",
+      "relation": "used_together",
+      "label_ro": "se poate cânta așezat pe un",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_kitchen_cratita",
+      "dst": "n_v24_home_appliances_aragaz",
+      "relation": "heated_on",
+      "label_ro": "se încălzește pentru gătit pe",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_home_appliances_aragaz",
+      "dst": "n_v88_kitchen_cratita",
+      "relation": "heats",
+      "label_ro": "încălzește pentru gătit o",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_kitchen_cratita",
+      "dst": "n_v4gas_bucatarie",
+      "relation": "used_in",
+      "label_ro": "vas folosit în",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v88_kitchen_cratita",
+      "dst": "n_v4gas_supa",
+      "relation": "used_to_cook",
+      "label_ro": "poate fierbe",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v4gas_supa",
+      "dst": "n_v88_kitchen_cratita",
+      "relation": "prepared_in",
+      "label_ro": "poate fi preparată într-o",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    }
+  ]
+}

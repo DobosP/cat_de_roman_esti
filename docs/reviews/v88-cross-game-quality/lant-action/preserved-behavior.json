@@ -1,0 +1,31 @@
+{
+  "baseline": "fa8cffd",
+  "checks": [
+    {
+      "old_path": "frontend/src/contextoActionRecovery.mjs",
+      "new_path": "frontend/src/gameActionRecovery.mjs",
+      "before_sha256": "40ece15c03a1a27d69eba02ea3d51b242e7405f72713ab9dc7999139d644f9d0",
+      "after_sha256": "b73851fd616aed6489139cd800bad2e8e6ab3480664470e765fd044ba9eb6267",
+      "change": "export/type names only; exact executable body"
+    },
+    {
+      "old_path": "frontend/src/contextoActionRecovery.d.mts",
+      "new_path": "frontend/src/gameActionRecovery.d.mts",
+      "before_sha256": "ce08589d200a173aff56ae2ec502ea89668dda14e4f5323557445ad583d95c6b",
+      "after_sha256": "7aa55580ab260591cb72eac5809cb541bb4f0787065051d70a12fd9a7fbc0f3c",
+      "change": "export/type names only; exact executable body"
+    },
+    {
+      "path": "frontend/src/screens/CaldRece.tsx",
+      "before_sha256": "693793475686b08197ae3d2e4a6f40e6a01965a1b9c73469895fd2cf6df09a13",
+      "after_sha256": "abb68a13b07d12619120d3f7c3532b4a10a40a253c03d819608e9387749ba7ea",
+      "change": "import/export/type names only"
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/lant.py",
+      "before_sha256": "4476748cd4a1a41c12f53080b036b246f762ffc8fa9512d233bf7821b0faf123",
+      "after_sha256": "cf22b4ff5dbb2d99f80ccdbb3e4c886751d0030c5cf6402dd993f1be2334f78b",
+      "change": "HintView AST exact after removing response retention wrapper; stage policy and hint computation unchanged"
+    }
+  ]
+}

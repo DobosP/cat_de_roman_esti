@@ -1,0 +1,209 @@
+{
+  "date": "2026-09-08",
+  "baseline": "fa8cffd",
+  "runtime": {
+    "node": "24.20.0",
+    "npm": "11.19.0",
+    "python": "3.12.3",
+    "browser_port": 8188
+  },
+  "source_sha256": {
+    "cat_de_roman_esti/wordgames/lant.py": "cf22b4ff5dbb2d99f80ccdbb3e4c886751d0030c5cf6402dd993f1be2334f78b",
+    "tests/test_v88_lant_action_recovery.py": "176a22c09b42b0cad848348b5485558259be074812cc61104fb498cf6c751907",
+    "frontend/src/api/lant.ts": "c5441acbf209193f6b8bf9903a04ea3971f8d4e569ed8ff019ebbf6dfee48f1a",
+    "frontend/src/gameActionRecovery.mjs": "b73851fd616aed6489139cd800bad2e8e6ab3480664470e765fd044ba9eb6267",
+    "frontend/src/gameActionRecovery.d.mts": "7aa55580ab260591cb72eac5809cb541bb4f0787065051d70a12fd9a7fbc0f3c",
+    "frontend/src/screens/CaldRece.tsx": "abb68a13b07d12619120d3f7c3532b4a10a40a253c03d819608e9387749ba7ea",
+    "frontend/src/screens/Lant.tsx": "12dbedabf87ef3b97ef420b3f67191565ff1aa58b76827bfb657af05c9d930f3",
+    "frontend/tests/contexto-action-recovery.test.mjs": "440d688185721eedbc81f7fd3b3bb8aa5c70cf6ce6cee90b1edbe9725d566e29",
+    "frontend/tests/contexto-progressive-clue.test.mjs": "2d8cdec13ae05b97bd085470b82a3b30d64091184852b2cc797978dfc30066fb",
+    "frontend/e2e/lant-action-recovery.spec.mjs": "4bb5e3fd0796f0123ee4c5234286cfe1b8e06fd4f7873563deeebdbc87eb2075",
+    "docs/adr/0128-reconcile-uncertain-lant-actions.md": "8193e821628f9b59fe809ec13fad62f854810cef5e8ee82ec165243571ea3043"
+  },
+  "checks": [
+    {
+      "name": "baseline_browser_proof",
+      "exit_code": 0,
+      "log": "baseline.log.gz",
+      "result": "Committed hint lost: direction then alternatives on explicit retry; GET has no earned_hint. Committed win lost: server won, client result absent, played zero."
+    },
+    {
+      "name": "clean_install",
+      "exit_code": 0,
+      "command": "npm ci",
+      "cwd": "frontend",
+      "log": "npm-ci.log.gz"
+    },
+    {
+      "name": "backend_targeted",
+      "exit_code": 0,
+      "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_v88_lant_action_recovery.py tests/test_wordgames_lant.py tests/test_wordgames_session_store.py -q -o addopts=",
+      "cwd": ".",
+      "log": "backend-targeted.log.gz",
+      "passed": 80,
+      "duration_seconds": 182.73,
+      "new_cases": 8
+    },
+    {
+      "name": "native_final",
+      "exit_code": 0,
+      "command": "npm test",
+      "cwd": "frontend",
+      "log": "native-final.log.gz",
+      "passed": 193,
+      "duration_ms": 1288.992094
+    },
+    {
+      "name": "lint_final",
+      "exit_code": 0,
+      "command": "npm run lint",
+      "cwd": "frontend",
+      "log": "lint-final.log.gz"
+    },
+    {
+      "name": "build_final",
+      "exit_code": 0,
+      "command": "npm run build",
+      "cwd": "frontend",
+      "log": "build-final.log.gz",
+      "initial_js_css_gzip_kib": 118.92,
+      "limit_kib": 120
+    },
+    {
+      "name": "focused_browser_first_run",
+      "exit_code": 0,
+      "command": "CDR_E2E_PORT=8188 npm run test:e2e -- lant-action-recovery.spec.mjs",
+      "cwd": "frontend",
+      "log": "browser-initial.log.gz",
+      "passed": 20,
+      "reported_duration": "1.1m",
+      "retries": 0,
+      "tested_spec_archive": "browser-initial.spec.mjs.gz"
+    },
+    {
+      "name": "settled_screenshot_cases",
+      "exit_code": 0,
+      "command": "CDR_E2E_PORT=8188 npm run test:e2e -- lant-action-recovery.spec.mjs --grep 'a lost winning hop|a lost earned hint'",
+      "cwd": "frontend",
+      "log": "browser-screenshots-final.log.gz",
+      "passed": 4,
+      "duration_seconds": 24.7,
+      "retries": 0
+    }
+  ],
+  "initial_findings": [
+    "Two initial Python line-length issues in the new wrapper calls were fixed before the targeted backend run.",
+    "One scratch UI-edit script and two npm commands were initially invoked from the wrong directory. The script made no edit; npm commands exited 254 before running checks. Retained npm logs:lint.log.gz and browser-screenshots.log.gz. Correct-directory runs passed.",
+    "The initial 193-native run passed; the final run after moving the recovery panel beside the input also passed 193.",
+    "All 20 initial browser journeys passed. Initial win screenshots caught a Framer Motion transition before the current label reappeared. Added CSS-opacity screenshot waits and a scrolled hint screenshot, then reran only the four affected desktop/mobile cases; all four passed. No product changes followed the 20-case run."
+  ],
+  "archives": [
+    {
+      "path": "backend-targeted.log.gz",
+      "sha256": "8367ac21e135f0a5d91d31f547791df44b698ea107add9547d1aadfeea4a6bf2",
+      "decoded_sha256": "86d51646eba4edf6450220a48983420c6f4d837c7bed308f62980499ac08fdab",
+      "decoded_bytes": 191
+    },
+    {
+      "path": "baseline.log.gz",
+      "sha256": "1720a03873ddc8b0d624e9a2ada241bb6be2d42dc1a1b9074c811ddecdd7d168",
+      "decoded_sha256": "33a9b81df7f18a69e99362753ab9eb4a11725b5a2f911443e9065004e204869c",
+      "decoded_bytes": 127
+    },
+    {
+      "path": "browser-initial.log.gz",
+      "sha256": "99cba608183755b50bf30f5293601286f59b916092509c3e53f19692283d68c7",
+      "decoded_sha256": "244dfd83ab63568ad64924e976b79a51f775f5890d9ae431050018aa1f81bb03",
+      "decoded_bytes": 3805
+    },
+    {
+      "path": "browser-screenshots-final.log.gz",
+      "sha256": "258251966080bedefdfe972d171badc4c3e3163fb11a6c6dd2e82929c88a6d13",
+      "decoded_sha256": "0b8940b0a08ea89fbfbf62de1bfc2b4521a9c48813781a4c7a56b04cb6df4d57",
+      "decoded_bytes": 1425
+    },
+    {
+      "path": "browser-screenshots.log.gz",
+      "sha256": "7283b09cb74e943886eda15313f302bb30a447bce4b5740d7a63d343dcacd660",
+      "decoded_sha256": "0a0e740d122ec90a4cf09040e79376169585335bfcece66b74e6f908278a7861",
+      "decoded_bytes": 549
+    },
+    {
+      "path": "build-final.log.gz",
+      "sha256": "43b65dc6b0e07ddfa6def721fdaa4e13b65bc067ddd30b59e15d7c523aa5edb5",
+      "decoded_sha256": "666474349a5e526b2c71534ed229957e1c096ef76308f32ecf862f47853a9c21",
+      "decoded_bytes": 3353
+    },
+    {
+      "path": "build.log.gz",
+      "sha256": "3101fb5651f05a11d85f7ca070302fd464c54579ef96f75bb82791feb5e3242d",
+      "decoded_sha256": "021edf83336e71007619a2ce57f950daf0b4a69ad2fb1a1a86de0e8ba9ef9803",
+      "decoded_bytes": 3353
+    },
+    {
+      "path": "lint-final.log.gz",
+      "sha256": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a",
+      "decoded_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "decoded_bytes": 53
+    },
+    {
+      "path": "lint-frontend.log.gz",
+      "sha256": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a",
+      "decoded_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "decoded_bytes": 53
+    },
+    {
+      "path": "lint.log.gz",
+      "sha256": "760fdc2b38bdb5364508a885e2761d3bb0392af64d8b7bbedc75c45903455708",
+      "decoded_sha256": "680f0988278972ab726b5389b25c4cc4e4ff18035fa8f75f9623f0cba9082840",
+      "decoded_bytes": 549
+    },
+    {
+      "path": "native-final.log.gz",
+      "sha256": "404d146b5482f7ca38781d2723f23aa10b5eb87735e53192ac9585e63f1b7743",
+      "decoded_sha256": "3bff182a844847e4c082548ad2288e1a1cab9c00b4830bb2fe5ac458b543f72d",
+      "decoded_bytes": 16391
+    },
+    {
+      "path": "native-initial.log.gz",
+      "sha256": "75950fecd3ca3dab33eb9ddcb2b5671263ee805d793bc5f95ea48f8b9cb2f506",
+      "decoded_sha256": "9b1632b1bc02e707d21d3043d7ac3d042bd28f67ea8ede66c42956906d036443",
+      "decoded_bytes": 16401
+    },
+    {
+      "path": "npm-ci.log.gz",
+      "sha256": "1f5343f0580c28d6eb000dd66bf0ccad9aa59745a7dfbc4f3e135c80d0e236d2",
+      "decoded_sha256": "0aa646ee640d36c363bd04ef0c5b079525d99977720dfea4b70f9287639324e9",
+      "decoded_bytes": 143
+    },
+    {
+      "path": "typecheck.log.gz",
+      "sha256": "d0e30d1dc915362da5e6d51943f265c1840c3182f61f2cd8a65a8159c982ac05",
+      "decoded_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+      "decoded_bytes": 62
+    },
+    {
+      "path": "baseline.mjs.gz",
+      "sha256": "759167d411f670844f68ffd61142ac94179257c3d5ff5769c6c2f6835ba9bdf9",
+      "decoded_sha256": "cb0b152543b1a506d9bd62cddbeb14fd5783a8c98b539b60fc8d51a6a7d98c9b",
+      "decoded_bytes": 3630
+    },
+    {
+      "path": "browser-initial.spec.mjs.gz",
+      "sha256": "37f1a4f9a0b26c7f7dcd3025d8a284a73e7e7ce1778367e9995e6d159b4c0e63",
+      "decoded_sha256": "3667d251d8862a1cf2502177251862dfbae6feaa24e2ecb8c9d80d16cd39a175",
+      "decoded_bytes": 14770,
+      "note": "Exact first20-case source, reconstructed by removing only the two later screenshot-wait changes."
+    }
+  ],
+  "visual_inspection": {
+    "by": "implementing agent; not independent review or human playtesting",
+    "inspected": [
+      "initial-read-only-recovery-mobile.png",
+      "final-recovered-hint-mobile.png",
+      "final-recovered-win-desktop.png"
+    ],
+    "result": "Persistent retry is readable beside disabled actions; earned direction and neutral recovery copy are visible; the settled win renders the target and 1000 score with a record receipt."
+  },
+  "scope_limit": "These are lane checks. Full integration and independent review belong to the version orchestrator."
+}

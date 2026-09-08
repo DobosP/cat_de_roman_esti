@@ -15,6 +15,7 @@ import {
   undoLant,
 } from "../api/lant";
 import { ApiError } from "../api/client";
+import { createGameActionOwner, recoverOwnedGameAction, type GameActionTicket } from "../gameActionRecovery.mjs";
 import { GameShell } from "../components/GameShell";
 import { GameIntro } from "../components/GameIntro";
 import { Hud, StatBadge } from "../components/Hud";
@@ -55,6 +56,8 @@ const PROGRESS_ICON: Record<LantProgress["kind"], string> = {
   dead_end: "↶",
   won: "✓",
 };
+
+type ActionSync = { gameId: string; kind: "failed" | "changed" };
 
 type RecoveryFeedback = {
   message: string;
@@ -122,6 +125,9 @@ export default function Lant({
   const [creating, setCreating] = useState(false);
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
+  const [actionSync, setActionSync] = useState<ActionSync | null>(null);
+  const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
+  useEffect(() => () => actionOwner.invalidate(), [actionOwner]);
   const [shake, setShake] = useState(0);
   const [hint, setHint] = useState<HintResult | null>(null);
   const [progress, setProgress] = useState<LantProgress | null>(null);
@@ -169,7 +175,11 @@ export default function Lant({
 
   const applyResumedGame = useCallback(
     (fresh: LantState, { terminal }: { terminal: boolean }) => {
-      setHint(null);
+      actionOwner.invalidate();
+      setActionSync(null);
+      setBusy(false);
+      setHint(fresh.earned_hint ?? null);
+      setRecovery(null);
       setProgress(null);
       setScored(null);
       setDifficulty(fresh.difficulty);
@@ -179,7 +189,7 @@ export default function Lant({
       setText("");
       if (!terminal) onToast("Joc reluat.", "info");
     },
-    [onToast],
+    [actionOwner, onToast],
   );
 
   const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
@@ -198,6 +208,7 @@ export default function Lant({
     async (opts?: { difficulty?: Difficulty; daily?: string }) => {
       if (startInFlight.current) return;
       startInFlight.current = true;
+      actionOwner.invalidate();
       cancelResume();
       setStartFailed(false);
       setCreating(true);
@@ -210,7 +221,9 @@ export default function Lant({
         });
         active.remember(fresh.game_id);
         dismissRecovery();
-        setHint(null);
+        setActionSync(null);
+        setBusy(false);
+        setHint(fresh.earned_hint ?? null);
         setProgress(null);
         setRecovery(null);
         setScored(null);
@@ -223,7 +236,7 @@ export default function Lant({
         setCreating(false);
       }
     },
-    [difficulty, category, active, cancelResume, dismissRecovery],
+    [difficulty, category, active, actionOwner, cancelResume, dismissRecovery],
   );
 
   // Record the score exactly once when the game is won.
@@ -278,6 +291,7 @@ export default function Lant({
   }, [state?.won, state?.difficulty, start]);
 
   const won = state?.won ?? false;
+  const actionsLocked = busy || loading || actionSync !== null;
   // Moves spent beyond the optimal path length from the original start.
   const overPar = useMemo(() => {
     if (!state) return 0;
@@ -286,16 +300,94 @@ export default function Lant({
   // True distance left, learned from the most recent hint for THIS current node.
   const hintRemaining = hint?.remaining ?? null;
 
+  function beginAction(previous: LantState) {
+    if (startInFlight.current) return null;
+    const ticket = actionOwner.begin(previous.game_id);
+    if (!ticket) return null;
+    if (!actionOwner.owns(ticket)) {
+      actionOwner.finish(ticket);
+      setRecovery(null);
+      setActionSync({ gameId: previous.game_id, kind: "changed" });
+      return null;
+    }
+    return ticket;
+  }
+
+  function mayAdoptAction(ticket: GameActionTicket) {
+    if (!actionOwner.isCurrent(ticket)) return false;
+    if (!actionOwner.owns(ticket)) {
+      setActionSync({ gameId: ticket.gameId, kind: "changed" });
+      return false;
+    }
+    return true;
+  }
+
+  async function reconcileAction(ticket: GameActionTicket, previous: LantState) {
+    const outcome = await recoverOwnedGameAction(
+      actionOwner, ticket, getLant,
+      (error) => error instanceof ApiError && error.status === 404,
+    );
+    if (!mayAdoptAction(ticket)) return;
+    if (outcome.kind === "missing") {
+      if (ticket.savedId === ticket.gameId && !active.forgetIfCurrent(ticket.gameId)) {
+        setActionSync({ gameId: ticket.gameId, kind: "changed" });
+        return;
+      }
+      setActionSync(null);
+      setState(null);
+      onToast("Jocul nu mai este disponibil. Poți începe altul.", "info");
+      return;
+    }
+    if (outcome.kind !== "recovered") {
+      setActionSync({ gameId: ticket.gameId, kind: outcome.kind === "changed" ? "changed" : "failed" });
+      return;
+    }
+    const fresh = outcome.state;
+    setActionSync(null);
+    setState(fresh);
+    setHint(fresh.earned_hint ?? null);
+    // GET carries authoritative position and earned help, not a reconstructed move verdict.
+    setProgress(null);
+    if (fresh.current.id !== previous.current.id || fresh.won) setText("");
+    setRecovery(fresh.won ? null : {
+      message: "Joc sincronizat. Poți continua.", choices: [], tone: "info",
+    });
+    if (fresh.won && !previous.won) sound.playWin();
+  }
+
+  async function retryActionSync() {
+    if (!state || busy || !actionSync) return;
+    if (actionSync.kind === "changed") {
+      actionOwner.invalidate();
+      setActionSync(null);
+      setState(null);
+      setLoading(true);
+      retryResume();
+      return;
+    }
+    if (state.game_id !== actionSync.gameId) return;
+    const ticket = beginAction(state);
+    if (!ticket) return;
+    setBusy(true);
+    try {
+      await reconcileAction(ticket, state);
+    } finally {
+      if (actionOwner.finish(ticket)) setBusy(false);
+    }
+  }
+
   async function submit(choice?: LantChoice) {
-    if (!state || busy || won) return;
+    if (!state || actionsLocked || won) return;
     const value = (choice?.label ?? text).trim();
     if (!value) return;
+    const ticket = beginAction(state);
+    if (!ticket) return;
     setBusy(true);
-    setHint(null);
     setProgress(null);
     setRecovery(null);
     try {
       const res = await moveLant(state.game_id, value);
+      if (!mayAdoptAction(ticket)) return;
       if (!res.ok) {
         sound.playError();
         setShake((s) => s + 1);
@@ -307,11 +399,13 @@ export default function Lant({
         });
         return;
       }
+      setHint(null);
       // Successful hop: server returns the partial state — fold it into our full state.
       setState((prev) =>
-        prev
+        prev?.game_id === ticket.gameId
           ? {
               ...prev,
+              earned_hint: undefined,
               current: res.current ?? prev.current,
               path: res.path ?? prev.path,
               moves: res.moves ?? prev.moves,
@@ -339,43 +433,47 @@ export default function Lant({
       } else {
         sound.playHop();
       }
-    } catch (err) {
-      onToast(
-        err instanceof ApiError
-          ? `Eroare server (${err.status}).`
-          : "Eroare de rețea.",
-        "error",
-      );
+    } catch {
+      await reconcileAction(ticket, state);
     } finally {
-      setBusy(false);
+      if (actionOwner.finish(ticket)) setBusy(false);
     }
   }
 
   async function handleUndo() {
-    if (!state || busy || state.moves === 0) return;
+    if (!state || actionsLocked || won || state.moves === 0) return;
+    const ticket = beginAction(state);
+    if (!ticket) return;
     setBusy(true);
     setHint(null);
     setProgress(null);
     setRecovery(null);
     try {
       const fresh = await undoLant(state.game_id);
+      if (!mayAdoptAction(ticket)) return;
       setState(fresh);
+      setHint(fresh.earned_hint ?? null);
       sound.playUndo();
       focusInputForFinePointer();
     } catch {
-      onToast("Nu am putut anula.", "error");
+      await reconcileAction(ticket, state);
     } finally {
-      setBusy(false);
+      if (actionOwner.finish(ticket)) setBusy(false);
     }
   }
 
   async function handleHint() {
-    if (!state || busy || won) return;
+    if (!state || actionsLocked || won) return;
+    const ticket = beginAction(state);
+    if (!ticket) return;
     setBusy(true);
     setRecovery(null);
     try {
       const res = await hintLant(state.game_id);
+      if (!mayAdoptAction(ticket)) return;
       setHint(res);
+      setState((previous) => previous?.game_id === ticket.gameId
+        ? { ...previous, earned_hint: res } : previous);
       if (res.hint || res.stage) {
         sound.playSelect();
       } else {
@@ -383,9 +481,9 @@ export default function Lant({
         setRecovery({ message, choices: [], tone: "warning" });
       }
     } catch {
-      onToast("Nu am putut obține un indiciu.", "error");
+      await reconcileAction(ticket, state);
     } finally {
-      setBusy(false);
+      if (actionOwner.finish(ticket)) setBusy(false);
     }
   }
 
@@ -601,7 +699,7 @@ export default function Lant({
                   key={`${choice.label}-${choice.relation}`}
                   type="button"
                   className="lant-choice"
-                  disabled={busy}
+                  disabled={actionsLocked}
                   aria-label={`Salt la ${choice.label}: ${choice.relation}`}
                   onClick={() => void submit(choice)}
                 >
@@ -677,13 +775,25 @@ export default function Lant({
             className="col"
             style={{ gap: 10 }}
           >
+        {actionSync ? (
+          <div className="card col lant-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
+            <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
+            <span>{actionSync.kind === "changed"
+              ? "Încarcă jocul curent pentru a continua."
+              : "Acțiunea poate fi deja salvată. Verifică jocul înainte de următorul salt sau indiciu."}</span>
+            <Button type="button" onClick={() => void retryActionSync()} disabled={busy}>
+              {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
+            </Button>
+          </div>
+        ) : null}
+
             <div className="row word-hop-input" style={{ gap: 8 }}>
               <input
                 ref={inputRef}
                 className="field fill"
                 placeholder="Sau scrie alt concept…"
                 value={text}
-                disabled={busy}
+                disabled={actionsLocked}
                 onChange={(e) => setText(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") void submit();
@@ -699,7 +809,7 @@ export default function Lant({
               />
               <Button
                 type="button"
-                disabled={busy || !text.trim()}
+                disabled={actionsLocked || !text.trim()}
                 onClick={() => void submit()}
               >
                 {busy ? "…" : "Salt"}
@@ -715,7 +825,7 @@ export default function Lant({
                     ? "lant-undo lant-undo--recommended"
                     : "lant-undo"
                 }
-                disabled={busy || state.moves === 0}
+                disabled={actionsLocked || state.moves === 0}
                 onClick={() => void handleUndo()}
                 aria-label={
                   state.backtrack_recommended
@@ -728,7 +838,7 @@ export default function Lant({
               <Button
                 type="button"
                 variant="secondary"
-                disabled={busy}
+                disabled={actionsLocked}
                 onClick={() => void handleHint()}
               >
                 {hint?.stage === "direction" || hint?.stage === "alternatives"
@@ -777,6 +887,7 @@ export default function Lant({
                             key={choice}
                             type="button"
                             variant="secondary"
+                            disabled={actionsLocked}
                             onClick={() => {
                               setText(choice);
                               focusInputForFinePointer();
@@ -826,6 +937,7 @@ export default function Lant({
                             type="button"
                             variant="secondary"
                             title={choice.relation}
+                            disabled={actionsLocked}
                             onClick={() => {
                               setText(choice.label);
                               focusInputForFinePointer();
@@ -840,6 +952,7 @@ export default function Lant({
                       <button
                         type="button"
                         className="hint-fill-button"
+                        disabled={actionsLocked}
                         title="Pune în căsuță"
                         onClick={() => {
                           if (hint.hint) setText(hint.hint.label);
@@ -854,7 +967,7 @@ export default function Lant({
                       <Button
                         type="button"
                         variant="secondary"
-                        disabled={busy || state.moves === 0}
+                        disabled={actionsLocked || state.moves === 0}
                         onClick={() => void handleUndo()}
                       >
                         ↶ Anulează ultimul salt

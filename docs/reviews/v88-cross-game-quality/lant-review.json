@@ -1,0 +1,108 @@
+{
+  "date": "2026-09-08",
+  "reviewer": "independent V88 Lanț code review lane",
+  "baseline": "fa8cffd",
+  "decision": "accept",
+  "blockers": [],
+  "source_set_sha256": "3b219485a4e5858b668f0486c362f46eba895955908ea9a751e1c9ce477bedda",
+  "source_set_hash_encoding": "sha256 of UTF-8 JSON source_sha256 with sorted keys and separators comma/colon",
+  "source_sha256": {
+    "cat_de_roman_esti/wordgames/lant.py": "cf22b4ff5dbb2d99f80ccdbb3e4c886751d0030c5cf6402dd993f1be2334f78b",
+    "tests/test_v88_lant_action_recovery.py": "176a22c09b42b0cad848348b5485558259be074812cc61104fb498cf6c751907",
+    "frontend/src/api/lant.ts": "c5441acbf209193f6b8bf9903a04ea3971f8d4e569ed8ff019ebbf6dfee48f1a",
+    "frontend/src/gameActionRecovery.mjs": "b73851fd616aed6489139cd800bad2e8e6ab3480664470e765fd044ba9eb6267",
+    "frontend/src/gameActionRecovery.d.mts": "7aa55580ab260591cb72eac5809cb541bb4f0787065051d70a12fd9a7fbc0f3c",
+    "frontend/src/screens/CaldRece.tsx": "abb68a13b07d12619120d3f7c3532b4a10a40a253c03d819608e9387749ba7ea",
+    "frontend/src/screens/Lant.tsx": "12dbedabf87ef3b97ef420b3f67191565ff1aa58b76827bfb657af05c9d930f3",
+    "frontend/tests/contexto-action-recovery.test.mjs": "440d688185721eedbc81f7fd3b3bb8aa5c70cf6ce6cee90b1edbe9725d566e29",
+    "frontend/tests/contexto-progressive-clue.test.mjs": "2d8cdec13ae05b97bd085470b82a3b30d64091184852b2cc797978dfc30066fb",
+    "frontend/e2e/lant-action-recovery.spec.mjs": "4bb5e3fd0796f0123ee4c5234286cfe1b8e06fd4f7873563deeebdbc87eb2075",
+    "docs/adr/0128-reconcile-uncertain-lant-actions.md": "8193e821628f9b59fe809ec13fad62f854810cef5e8ee82ec165243571ea3043"
+  },
+  "unchanged_dependency_sha256": {
+    "frontend/src/asyncControl.mjs": "452b9a553cbf319268d32b4f17a0ba70c8692ca43f3fcfd055ccf241412cf211",
+    "frontend/src/hooks/useActiveGame.ts": "08e3dc295f75ee5b11f14a86b7b2836f7af73d7f5238decf7c650004c391cd02",
+    "frontend/src/hooks/useSavedGameResume.ts": "dff224adb580b3996c9145decb87fce217125de2cf1350b2e144919bc81070a5",
+    "frontend/src/savedGameResume.mjs": "4c5a64e59da67cdf08e1870de9063ac9c5004e134f6d84397fdf89e7a3f0f0d3",
+    "frontend/src/hooks/useRecordScore.ts": "303cda5da3e26595ed39a5f9b2028ed6634318fc6c4a02bb9480dc310f3fee4b",
+    "frontend/src/scores.ts": "ec724ecaecf66f54f6a3a3a37ba8f5aaf89e9556fefbd4528c4296948c33321a",
+    "cat_de_roman_esti/wordgames/_session_endpoint.py": "d6f5f7ed35fefc9394da4c72fe9d65f76cf7c82df832c5b3d14f7df04ec4f29f",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/web/http.py": "cae7428c92a442cb2ab5f3f695cd3c55759e06a0886ddb43b7edd449ab6304c5",
+    "cat_de_roman_esti/web/settings.py": "4bc05b880d5cd1c9544ad2a135f5ef71272940e7f8a6438f88207aba121f4848"
+  },
+  "evidence_sha256": {
+    "docs/reviews/v88-cross-game-quality/lant-action/verification.json": "5924169d1032f60a6d8a333b0810dadedea331365f9d3b650151990a59565f48",
+    "docs/reviews/v88-cross-game-quality/lant-action/preserved-behavior.json": "c3c6dc880ff897551ba5e6e5a52b364af7d64571063c7f06c2fa6d5c7851376c",
+    "docs/reviews/v88-cross-game-quality/lant-action/baseline-proof.json": "b02f69321005adc8f6fd28db718d95f6716c4882f804277a2dc64690e47a2307",
+    "docs/reviews/v88-cross-game-quality/lant-action/README.md": "9f8a89b4e645bf6cc9a112fc0f4d625712c9379448cd9d054a45bf436a9afc99"
+  },
+  "checks": [
+    {
+      "id": "synchronous-owner",
+      "result": "pass",
+      "evidence": "begin acquires one synchronous flight before React state; an identity-bound frozen ticket gates all move, undo, hint and manual verification callbacks. Unrelated or invalidated finish cannot unlock another operation."
+    },
+    {
+      "id": "read-only-recovery",
+      "result": "pass",
+      "evidence": "Each still-owned ambiguous mutation failure invokes one GET. The shared recovery helper receives no mutation callback, performs no replay or retry, and rejects missing/mismatched game_id. Stale or foreign-owned actions perform zero further reads."
+    },
+    {
+      "id": "ownership-and-lifetime",
+      "result": "pass",
+      "evidence": "Ownership checked before POST and after awaits; unmount, new-game attempts and saved-game adoption invalidate tickets. Changed pointers lock mutations and enter explicit saved resume. Verified 404 uses conditional forgetIfCurrent. Leaving retains the pointer."
+    },
+    {
+      "id": "persistent-verification",
+      "result": "pass",
+      "evidence": "Failed GET retains actionSync and disables typed moves, menu moves, undo, hint and hint-fill controls. Manual retry acquires an owner for GET only. Recovered position adopts full server state and clears transient move verdicts."
+    },
+    {
+      "id": "storage-unavailable",
+      "result": "pass",
+      "evidence": "Two null pointer observations permit local-only actions; a later saved pointer disowns them. The existing storage adapter catches unavailable-storage reads/writes, and the generic helper retains the existing unit coverage."
+    },
+    {
+      "id": "score-once",
+      "result": "pass",
+      "evidence": "Recovered wins enter the unchanged server-score effect and useRecordScore completion receipt; current-pointer cleanup is conditional. No score is inferred on failed or stale reads. Browser evidence checks one played game and no replay."
+    },
+    {
+      "id": "hint-lifetime-and-privacy",
+      "result": "pass",
+      "evidence": "GET only includes a previously requested earned_hint. Fresh/unearned, accepted-move, real-undo and won state omit it; rejected moves and undo at start retain it. Reads never call HintView or increment the capped session-wide counter."
+    },
+    {
+      "id": "hint-bounds",
+      "result": "pass",
+      "evidence": "One payload replaces the previous payload; no per-position map/history is introduced. Existing shapes retain at most two named alternatives or one hop with fixed scalar fields and authored strings. Stage cap 3, move cap 64, session TTL 7200, maximum 1000 and 64 KiB requests remain unchanged."
+    },
+    {
+      "id": "hint-alias-and-races",
+      "result": "pass",
+      "evidence": "The Response and session intentionally share one generated dictionary. All current writers replace or clear the field, never mutate that dictionary or its nested lists/dictionaries. Payload construction and GET occur within the same existing session transaction. Later replacement leaves an earlier response reference stable after lock release; JSONRenderer does not mutate it. HTTP clients receive decoded copies and cannot write the stored object."
+    },
+    {
+      "id": "contexto-preserved",
+      "result": "pass",
+      "evidence": "Independently compared the helper, declaration and CaldRece source to fa8cffd: exact text after only export/type/import identifier substitutions. No Contexto executable-body change."
+    },
+    {
+      "id": "hint-policy-preserved",
+      "result": "pass",
+      "evidence": "Independently parsed old/new Lanț code: HintView AST is exact after unwrapping only the response-retention calls. Seven existing runtime functions/classes and ten supporting source files remain exact."
+    },
+    {
+      "id": "evidence-binding",
+      "result": "pass",
+      "evidence": "All 11 lane source hashes and all 16 archive hashes, decoded hashes and decoded byte counts match actual files. Read raw result tails confirming 80 backend, 193 native, 20 initial browser and four settled screenshot cases. No heavy test suite repeated by this reviewer."
+    }
+  ],
+  "limitations": [
+    "This independent code review does not replace the parent version full integration matrix, human playtesting or real-device release checks.",
+    "Saved-pointer ownership is a local browser guard, not a distributed exactly-once protocol. GET confirms the current session state without attributing it to one request or tab.",
+    "The retained payload is safe under the reviewed replacement-only writes. A future in-place payload mutation or response-transforming middleware would require a new alias/serialization review.",
+    "No independent visual inspection or full test rerun was performed here; screenshot execution evidence was verified and implementation visual notes remain separately attributed."
+  ]
+}

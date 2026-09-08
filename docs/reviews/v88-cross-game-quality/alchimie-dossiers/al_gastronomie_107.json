@@ -1,0 +1,283 @@
+{
+ "id": "al_gastronomie_107",
+ "game": "alchimie",
+ "category": "gastronomie",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "27fd1f52c6062e6a82740eb518052fda5480753363afd479a3bbcb8331ac4e47",
+ "kg_sha256": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v87_food_cremsnit",
+  "label": "Cremșnit",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.75,
+  "degree": 1,
+  "incoming_degree": 5,
+  "description": "Prăjitură din foi de aluat și cremă de vanilie, cunoscută și ca cremeș."
+ },
+ "seeds": [
+  {
+   "id": "n_v24_food_pantry_faina",
+   "label": "Făină",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.88,
+   "degree": 12,
+   "incoming_degree": 6,
+   "description": "Concept cotidian din grupul «ingrediente de bază»: Făină."
+  },
+  {
+   "id": "n_v4gas_apa",
+   "label": "Apă",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.968,
+   "degree": 23,
+   "incoming_degree": 20,
+   "description": "Lichid de băut și ingredient de bază în gătit."
+  },
+  {
+   "id": "n_v4gas_lapte",
+   "label": "Lapte",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.9202,
+   "degree": 15,
+   "incoming_degree": 15,
+   "description": "Lichid alimentar folosit ca băutură și ingredient lactat."
+  },
+  {
+   "id": "n_v85_food_vanilie",
+   "label": "Vanilie",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.8,
+   "degree": 8,
+   "incoming_degree": 0,
+   "description": "Ingredient aromat din păstăile de vanilie, folosit la creme și alte deserturi."
+  },
+  {
+   "id": "n_v24_food_pantry_zahar",
+   "label": "Zahăr",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.88,
+   "degree": 9,
+   "incoming_degree": 1,
+   "description": "Concept cotidian din grupul «ingrediente de bază»: Zahăr."
+  }
+ ],
+ "target_depth": 3,
+ "craft_profile": {
+  "opening_pairs": 6,
+  "closure_size": 167,
+  "target_generation": 2
+ },
+ "productive_openings": [
+  {
+   "pair": [
+    {
+     "id": "n_v24_food_pantry_faina",
+     "label": "Făină"
+    },
+    {
+     "id": "n_v24_food_pantry_zahar",
+     "label": "Zahăr"
+    }
+   ],
+   "result_count": 4,
+   "results": [
+    {
+     "id": "n_v24_food_pantry_ulei",
+     "label": "Ulei"
+    },
+    {
+     "id": "n_v24_food_snack_biscuit",
+     "label": "Biscuit"
+    },
+    {
+     "id": "n_v87_food_chec",
+     "label": "Chec"
+    },
+    {
+     "id": "n_v87_food_pandispan",
+     "label": "Pandișpan"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v24_food_pantry_faina",
+     "label": "Făină"
+    },
+    {
+     "id": "n_v85_food_vanilie",
+     "label": "Vanilie"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_gas_cozonac",
+     "label": "Cozonac"
+    },
+    {
+     "id": "n_v3gas_clatite",
+     "label": "Clătite"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v24_food_pantry_zahar",
+     "label": "Zahăr"
+    },
+    {
+     "id": "n_v4gas_lapte",
+     "label": "Lapte"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v85_food_ciocolata",
+     "label": "Ciocolată"
+    },
+    {
+     "id": "n_v86_food_crema_vanilie",
+     "label": "Cremă de vanilie"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v4gas_lapte",
+     "label": "Lapte"
+    },
+    {
+     "id": "n_v85_food_vanilie",
+     "label": "Vanilie"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v86_food_crema_vanilie",
+     "label": "Cremă de vanilie"
+    },
+    {
+     "id": "n_v3gas_inghetata",
+     "label": "Înghețată"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v24_food_pantry_faina",
+     "label": "Făină"
+    },
+    {
+     "id": "n_v4gas_apa",
+     "label": "Apă"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v84_food_aluat",
+     "label": "Aluat"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v24_food_pantry_zahar",
+     "label": "Zahăr"
+    },
+    {
+     "id": "n_v85_food_vanilie",
+     "label": "Vanilie"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v86_food_crema_vanilie",
+     "label": "Cremă de vanilie"
+    }
+   ]
+  }
+ ],
+ "minimum_action_recipe": [
+  {
+   "pair": [
+    {
+     "id": "n_v4gas_lapte",
+     "label": "Lapte"
+    },
+    {
+     "id": "n_v85_food_vanilie",
+     "label": "Vanilie"
+    }
+   ],
+   "result_count": 2,
+   "results": [
+    {
+     "id": "n_v86_food_crema_vanilie",
+     "label": "Cremă de vanilie"
+    },
+    {
+     "id": "n_v3gas_inghetata",
+     "label": "Înghețată"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v24_food_pantry_faina",
+     "label": "Făină"
+    },
+    {
+     "id": "n_v4gas_apa",
+     "label": "Apă"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v84_food_aluat",
+     "label": "Aluat"
+    }
+   ]
+  },
+  {
+   "pair": [
+    {
+     "id": "n_v84_food_aluat",
+     "label": "Aluat"
+    },
+    {
+     "id": "n_v86_food_crema_vanilie",
+     "label": "Cremă de vanilie"
+    }
+   ],
+   "result_count": 1,
+   "results": [
+    {
+     "id": "n_v87_food_cremsnit",
+     "label": "Cremșnit"
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:11f9dc3ce06653f25f3b2a56cf38113a34d43c0926e49d22f08ad2fb92d695b5"
+}

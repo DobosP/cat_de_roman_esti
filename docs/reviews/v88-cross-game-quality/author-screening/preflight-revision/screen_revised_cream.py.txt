@@ -1,0 +1,14 @@
+import os,sys,json
+from pathlib import Path
+repo=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality');scratch=Path('/home/dobo/work/_temp/feat__v88-cross-game-quality/content');sys.path[:0]=[str(repo),str(repo/'scripts')];os.chdir(repo);os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django;django.setup()
+from cat_de_roman_esti.wordgames import alchimie as a,packs
+from cat_de_roman_esti.wordgames.service import WordGameService
+from cat_de_roman_esti.graph import Graph
+import everyday_graph_v88_data as wave
+k=json.loads((repo/'cat_de_roman_esti/fixtures/kg_sample.json').read_text());removed={e['id'] for e in wave.REMOVE_EDGES};edges=[e for e in k['kg_edges'] if e['id'] not in removed]+[dict(e,id=f'author_v88_{i}',src_id=e['src'],dst_id=e['dst']) for i,e in enumerate(wave.EDGES)];g=Graph.from_records(k['kg_nodes']+list(wave.NODES),edges);svc=WordGameService(g);a.get_service=lambda:svc;ns={n.label_ro:n.id for n in g.nodes.values()};cream='Smântână dulce pentru frișcă'
+items=[('orange_collapses',['Făină','Albuș','Portocală',cream,'Zahăr pudră'],'Tort Diplomat'),('yolk',['Făină','Albuș','Gălbenuș',cream,'Zahăr pudră'],'Tort Diplomat'),('vanilla',['Făină','Albuș','Vanilie',cream,'Zahăr pudră'],'Tort Diplomat'),('oven',['Făină','Albuș','Cuptor de bucătărie',cream,'Zahăr pudră'],'Tort Diplomat'),('cremsnit',['Făină','Apă','Lapte','Vanilie','Zahăr'],'Cremșnit')]
+rows=[]
+for ref,labels,targetlabel in items:
+ seeds=[ns[x] for x in labels];target=ns[targetlabel];p=a._build_recipe_projection(seeds,target,'gastronomie');used={n for pair in p.recipes for n in pair} if p else set();row={'ref':ref,'labels':labels,'target':targetlabel,'record':{'category':'gastronomie','difficulty':'normal','seeds':seeds,'target':target,'target_depth':p.par if p else None},'projection':None if p is None else {'par':p.par,'openings':a._projected_opening_pair_count(seeds,p.recipes),'unused_seeds':[svc.label(n) for n in seeds if n not in used],'recipes':[{'pair':[svc.label(n) for n in pair],'results':[svc.label(n) for n in result]} for pair,result in p.recipes.items()],'routes':[[{'pair':[svc.label(n) for n in pair],'results':[svc.label(n) for n in result]} for pair,result in route] for route in p.routes]}};rows.append(row);print(json.dumps(row,ensure_ascii=False),flush=True)
+(scratch/'revised-cream-screen.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2)+'\n')

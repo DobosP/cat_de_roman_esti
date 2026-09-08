@@ -1,0 +1,40 @@
+{
+  "schema": "v88-bread-feedback-independent-review-v1",
+  "reviewer": "v88_independent_review",
+  "reviewed_at": "2026-09-08",
+  "decision": "accept_exact_native_pair_with_disclosed_sense_limit",
+  "bindings": {
+    "docs/reviews/v88-cross-game-quality/bread-feedback/PROPOSAL.md": "cef18b641fd1fc1a702ef95a08c4aa4fb7980d1f183388a12f0d23d75a0562b9",
+    "docs/reviews/v88-cross-game-quality/bread-feedback/proposal.json": "b0b0ce73082bcdc298405ff181ff0078bdb8c23f17c8e7bbc6f473512dbe43bb"
+  },
+  "source_id": "n_v87_food_briosa",
+  "target_id": "n_v4gas_paine",
+  "proposed_rank": 2,
+  "nonwinning": true,
+  "sources": [
+    {
+      "url": "https://dexonline.ro/intrare/brio%C8%99%C4%83/6859",
+      "observation": "Independently opened DEX09 and DLRLC entries; enriched cozonac dough and small-loaf presentation support a bread-family variant, not ordinary-bread identity."
+    },
+    {
+      "url": "https://america.bridor.com/en/products/categories/breads",
+      "observation": "Independently opened manufacturer Breads inventory; authentic brioche burger bun and brioche slider roll demonstrate real bread-family variants."
+    },
+    {
+      "url": "https://www.oetker.ro/produsele/p/mix-pentru-briose-fara-gluten",
+      "observation": "Independently opened Romanian manufacturer page; brioșe and muffins name the same chemically leavened dessert mix, confirming the material alternate sense."
+    }
+  ],
+  "reasoning": "Accept rank2 only as an editorial hot-neighbor judgment for this exact target. A player using the established brioche meaning has reached the bread family; calling it cold is misleading. Rank2 is generous for muffin usage but does not claim synonymy or a unique second-best association, and exact-answer/private-answer constraints remain. Broad projection or an unconditional graph is-a claim would be unsupported.",
+  "uncertainties": [
+    "No human playtest establishes the preferred numerical rank.",
+    "Romanian Brioșă includes a cake-like muffin meaning; this is a deliberate generous interpretation of an input, not permission to expose it as an unqualified hidden target."
+  ],
+  "required_integration_evidence": [
+    "Exactly this native pair changes on identical graph bytes; other targets including Zacuscă remain exact.",
+    "No projected fallback input inherits the native exception.",
+    "Only the exact target wins; forms preserve native ID/repeat semantics and public privacy."
+  ],
+  "blockers": [],
+  "scope": "Proposal review only; implementation and full integration not reviewed by this artifact."
+}

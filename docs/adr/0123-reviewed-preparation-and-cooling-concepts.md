@@ -1,6 +1,6 @@
 # ADR-0123: Extend preparation and cooling through specific reviewed concepts
 
-- Status: accepted
+- Status: partially superseded by ADR-0131 (fermented-Smântână→Frișcă edge only)
 - Date: 2026-09-08
 
 ## Context

@@ -1,0 +1,344 @@
+{
+ "schema": "alchimie-live-projection-audit-v1",
+ "game": "alchimie",
+ "mode": "gate",
+ "status": "pending",
+ "input_ids": [
+  "al_gastronomie_107"
+ ],
+ "input_ids_sha256": "9868429dddc5a1068b42e1b442d8c4a38b303b33849b68b07980bb619cb5a36e",
+ "pack_sha256": "2b4a670daf5032da1fa8b16c55e86b21045c7bbf9c1ba590b2956990e9fa8925",
+ "kg_sha256": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "dossier_manifest_sha256": "561c2a2953e08e7137ead0ff7a77109acee2665691b97bea844efcca70bd102c",
+ "runtime_sources": [
+  {
+   "path": "cat_de_roman_esti/wordgames/alchimie.py",
+   "sha256": "370a4b847de19f4256ada16d7da035a3be9da15ac90d4f3e0a6e70c5e8131712"
+  },
+  {
+   "path": "cat_de_roman_esti/wordgames/packs.py",
+   "sha256": "6404b4c8ed2813680a684d9e33e6ea33c6f968c95e025bd2a0eb1af3b1349607"
+  }
+ ],
+ "runtime_source_manifest_sha256": "a092979564a2ea8731fc16de5241a73b1fec19ac06127244588b09c7c8e15c02",
+ "generator": {
+  "path": "scripts/audit_alchimie_projections.py",
+  "sha256": "306f2f539a9837cda4b39f6bc08f69823d389db9a4f080d452b33ae16028f4ea"
+ },
+ "summary": {
+  "records": 1,
+  "live_opening_floor_failures": 0
+ },
+ "items": [
+  {
+   "id": "al_gastronomie_107",
+   "review_binding": "sha256:11f9dc3ce06653f25f3b2a56cf38113a34d43c0926e49d22f08ad2fb92d695b5",
+   "record_sha256": "27fd1f52c6062e6a82740eb518052fda5480753363afd479a3bbcb8331ac4e47",
+   "source_record": {
+    "difficulty": "normal",
+    "seeds": [
+     "n_v24_food_pantry_faina",
+     "n_v4gas_apa",
+     "n_v4gas_lapte",
+     "n_v85_food_vanilie",
+     "n_v24_food_pantry_zahar"
+    ],
+    "target": "n_v87_food_cremsnit",
+    "target_depth": 3,
+    "id": "al_gastronomie_107",
+    "category": "gastronomie",
+    "source": "ai",
+    "status": "pending"
+   },
+   "category": "gastronomie",
+   "difficulty": "normal",
+   "seeds": [
+    {
+     "id": "n_v24_food_pantry_faina",
+     "label": "Făină"
+    },
+    {
+     "id": "n_v4gas_apa",
+     "label": "Apă"
+    },
+    {
+     "id": "n_v4gas_lapte",
+     "label": "Lapte"
+    },
+    {
+     "id": "n_v85_food_vanilie",
+     "label": "Vanilie"
+    },
+    {
+     "id": "n_v24_food_pantry_zahar",
+     "label": "Zahăr"
+    }
+   ],
+   "target": {
+    "id": "n_v87_food_cremsnit",
+    "label": "Cremșnit"
+   },
+   "declared_target_depth": 3,
+   "exact_action_par": 3,
+   "projection_par": 3,
+   "projection_sha256": "6401be8f0ee8ec0cb865c5460589bdd3a273c5a9df825370d1c087e0b6b77055",
+   "projected_opening_pair_count": 4,
+   "projected_opening_pairs": [
+    {
+     "left": {
+      "id": "n_v24_food_pantry_faina",
+      "label": "Făină"
+     },
+     "right": {
+      "id": "n_v4gas_apa",
+      "label": "Apă"
+     },
+     "results": [
+      {
+       "id": "n_v84_food_aluat",
+       "label": "Aluat"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v24_food_pantry_zahar",
+      "label": "Zahăr"
+     },
+     "right": {
+      "id": "n_v4gas_lapte",
+      "label": "Lapte"
+     },
+     "results": [
+      {
+       "id": "n_v86_food_crema_vanilie",
+       "label": "Cremă de vanilie"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v24_food_pantry_zahar",
+      "label": "Zahăr"
+     },
+     "right": {
+      "id": "n_v85_food_vanilie",
+      "label": "Vanilie"
+     },
+     "results": [
+      {
+       "id": "n_v86_food_crema_vanilie",
+       "label": "Cremă de vanilie"
+      }
+     ]
+    },
+    {
+     "left": {
+      "id": "n_v4gas_lapte",
+      "label": "Lapte"
+     },
+     "right": {
+      "id": "n_v85_food_vanilie",
+      "label": "Vanilie"
+     },
+     "results": [
+      {
+       "id": "n_v86_food_crema_vanilie",
+       "label": "Cremă de vanilie"
+      }
+     ]
+    }
+   ],
+   "route_count": 3,
+   "recipe_pair_count": 5,
+   "projected_concept_count": 8,
+   "max_results_per_pair": 1,
+   "routes": [
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.8,
+     "mean_edge_strength": 0.8,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v24_food_pantry_faina",
+        "label": "Făină"
+       },
+       "right": {
+        "id": "n_v4gas_apa",
+        "label": "Apă"
+       },
+       "results": [
+        {
+         "id": "n_v84_food_aluat",
+         "label": "Aluat"
+        }
+       ],
+       "minimum_edge_strength": 0.8
+      },
+      {
+       "left": {
+        "id": "n_v24_food_pantry_zahar",
+        "label": "Zahăr"
+       },
+       "right": {
+        "id": "n_v4gas_lapte",
+        "label": "Lapte"
+       },
+       "results": [
+        {
+         "id": "n_v86_food_crema_vanilie",
+         "label": "Cremă de vanilie"
+        }
+       ],
+       "minimum_edge_strength": 0.8
+      },
+      {
+       "left": {
+        "id": "n_v84_food_aluat",
+        "label": "Aluat"
+       },
+       "right": {
+        "id": "n_v86_food_crema_vanilie",
+        "label": "Cremă de vanilie"
+       },
+       "results": [
+        {
+         "id": "n_v87_food_cremsnit",
+         "label": "Cremșnit"
+        }
+       ],
+       "minimum_edge_strength": 0.8
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.8,
+     "mean_edge_strength": 0.8,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v24_food_pantry_faina",
+        "label": "Făină"
+       },
+       "right": {
+        "id": "n_v4gas_apa",
+        "label": "Apă"
+       },
+       "results": [
+        {
+         "id": "n_v84_food_aluat",
+         "label": "Aluat"
+        }
+       ],
+       "minimum_edge_strength": 0.8
+      },
+      {
+       "left": {
+        "id": "n_v24_food_pantry_zahar",
+        "label": "Zahăr"
+       },
+       "right": {
+        "id": "n_v85_food_vanilie",
+        "label": "Vanilie"
+       },
+       "results": [
+        {
+         "id": "n_v86_food_crema_vanilie",
+         "label": "Cremă de vanilie"
+        }
+       ],
+       "minimum_edge_strength": 0.8
+      },
+      {
+       "left": {
+        "id": "n_v84_food_aluat",
+        "label": "Aluat"
+       },
+       "right": {
+        "id": "n_v86_food_crema_vanilie",
+        "label": "Cremă de vanilie"
+       },
+       "results": [
+        {
+         "id": "n_v87_food_cremsnit",
+         "label": "Cremșnit"
+        }
+       ],
+       "minimum_edge_strength": 0.8
+      }
+     ]
+    },
+    {
+     "actions": 3,
+     "minimum_edge_strength": 0.8,
+     "mean_edge_strength": 0.8,
+     "steps": [
+      {
+       "left": {
+        "id": "n_v4gas_lapte",
+        "label": "Lapte"
+       },
+       "right": {
+        "id": "n_v85_food_vanilie",
+        "label": "Vanilie"
+       },
+       "results": [
+        {
+         "id": "n_v86_food_crema_vanilie",
+         "label": "Cremă de vanilie"
+        }
+       ],
+       "minimum_edge_strength": 0.8
+      },
+      {
+       "left": {
+        "id": "n_v24_food_pantry_faina",
+        "label": "Făină"
+       },
+       "right": {
+        "id": "n_v4gas_apa",
+        "label": "Apă"
+       },
+       "results": [
+        {
+         "id": "n_v84_food_aluat",
+         "label": "Aluat"
+        }
+       ],
+       "minimum_edge_strength": 0.8
+      },
+      {
+       "left": {
+        "id": "n_v84_food_aluat",
+        "label": "Aluat"
+       },
+       "right": {
+        "id": "n_v86_food_crema_vanilie",
+        "label": "Cremă de vanilie"
+       },
+       "results": [
+        {
+         "id": "n_v87_food_cremsnit",
+         "label": "Cremșnit"
+        }
+       ],
+       "minimum_edge_strength": 0.8
+      }
+     ]
+    }
+   ],
+   "bounds": {
+    "declared_par_matches_exact": true,
+    "projection_par_matches_exact": true,
+    "route_limit": true,
+    "recipe_pair_limit": true,
+    "projected_concept_limit": true,
+    "result_per_pair_limit": true,
+    "e2_live_opening_floor": true
+   }
+  }
+ ]
+}

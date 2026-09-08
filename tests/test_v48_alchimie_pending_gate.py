@@ -341,11 +341,13 @@ def test_v48_pack_rankings_and_frozen_derived_mirrors_track_the_gate() -> None:
     )
 
     assert pack['meta']['counts'] == CURRENT_CONTENT.pack_counts
-    assert pack["meta"]["id_high_water"]["alchimie"] == 106
+    assert pack["meta"]["id_high_water"]["alchimie"] == (
+        CURRENT_CONTENT.pack_id_high_water["alchimie"]
+    )
     assert statuses == CURRENT_CONTENT.status_counts
     assert Counter(row["status"] for row in live.values()) == {
-        "approved": 79,
-        "pending": 3,
+        "approved": CURRENT_CONTENT.game_inventory["alchimie"][1],
+        "pending": CURRENT_CONTENT.game_inventory["alchimie"][2],
     }
     assert live["al_literatura_097"]["status"] == "approved"
     assert {item_id for item_id, row in live.items() if row["status"] == "pending"} == _KEPT

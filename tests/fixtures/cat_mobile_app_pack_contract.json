@@ -4,12 +4,12 @@
   "app": "cat_de_roman_esti",
   "schema_version": 1,
   "manifest_version": 1,
-  "build_version": "fixture-v87-snack-and-action-quality",
+  "build_version": "fixture-v88-cross-game-quality",
   "generated_at": "2026-06-21T00:00:00Z",
-  "content_hash": "sha256:7473bfe7d42189a28cf933032705b288ff2933fd8eeaf30c65a2dba3be4e79d4",
+  "content_hash": "sha256:f8f5c13f2cb302338f35adf38e311906856d24cb04f58592c77783a519a61fd3",
   "counts": {
-   "nodes": 2406,
-   "edges": 9410,
+   "nodes": 2413,
+   "edges": 9442,
    "puzzles": 180
   }
  },
@@ -9393,6 +9393,34 @@
   {
    "id": "n_v87_food_tort_diplomat",
    "label_ro": "Tort Diplomat"
+  },
+  {
+   "id": "n_v88_cleaning_matura",
+   "label_ro": "Mătură"
+  },
+  {
+   "id": "n_v88_food_smantana_dulce",
+   "label_ro": "Smântână dulce pentru frișcă"
+  },
+  {
+   "id": "n_v88_home_taburet",
+   "label_ro": "Taburet"
+  },
+  {
+   "id": "n_v88_kitchen_cratita",
+   "label_ro": "Cratiță"
+  },
+  {
+   "id": "n_v88_school_compas",
+   "label_ro": "Compas"
+  },
+  {
+   "id": "n_v88_school_echer",
+   "label_ro": "Echer"
+  },
+  {
+   "id": "n_v88_school_raportor",
+   "label_ro": "Raportor"
   },
   {
    "id": "n_varful_moldoveanu",
@@ -54826,11 +54854,6 @@
    "dst_id": "n_v3gas_cafea"
   },
   {
-   "id": "de8676",
-   "src_id": "n_v20gas_smantana",
-   "dst_id": "n_v86_food_frisca"
-  },
-  {
    "id": "de8677",
    "src_id": "n_v85_food_vanilie",
    "dst_id": "n_v86_food_frisca"
@@ -55241,9 +55264,109 @@
    "dst_id": "n_net_trending_ro"
   },
   {
+   "id": "de8750",
+   "src_id": "n_v88_school_compas",
+   "dst_id": "n_v3art_desen"
+  },
+  {
+   "id": "de8751",
+   "src_id": "n_v2sti_matematica",
+   "dst_id": "n_v88_school_compas"
+  },
+  {
+   "id": "de8752",
+   "src_id": "n_v24_school_supplies_rigla",
+   "dst_id": "n_v88_school_compas"
+  },
+  {
+   "id": "de8753",
+   "src_id": "n_v88_school_echer",
+   "dst_id": "n_v3art_desen"
+  },
+  {
+   "id": "de8754",
+   "src_id": "n_v2sti_matematica",
+   "dst_id": "n_v88_school_echer"
+  },
+  {
+   "id": "de8755",
+   "src_id": "n_v24_school_supplies_rigla",
+   "dst_id": "n_v88_school_echer"
+  },
+  {
+   "id": "de8756",
+   "src_id": "n_v88_school_raportor",
+   "dst_id": "n_v3art_desen"
+  },
+  {
+   "id": "de8757",
+   "src_id": "n_v2sti_matematica",
+   "dst_id": "n_v88_school_raportor"
+  },
+  {
+   "id": "de8758",
+   "src_id": "n_v24_school_supplies_rigla",
+   "dst_id": "n_v88_school_raportor"
+  },
+  {
+   "id": "de8759",
+   "src_id": "n_v88_school_compas",
+   "dst_id": "n_v24_school_writing_creion"
+  },
+  {
    "id": "de876",
    "src_id": "n_net_5gang",
    "dst_id": "n_net_creator_de_continut"
+  },
+  {
+   "id": "de8760",
+   "src_id": "n_v88_cleaning_matura",
+   "dst_id": "n_v24_home_surfaces_podea"
+  },
+  {
+   "id": "de8761",
+   "src_id": "n_v88_cleaning_matura",
+   "dst_id": "n_v31_cleaning_floor_faras"
+  },
+  {
+   "id": "de8762",
+   "src_id": "n_v31_cleaning_floor_faras",
+   "dst_id": "n_v88_cleaning_matura"
+  },
+  {
+   "id": "de8763",
+   "src_id": "n_v88_home_taburet",
+   "dst_id": "n_v24_home_seating_scaun"
+  },
+  {
+   "id": "de8764",
+   "src_id": "n_v88_home_taburet",
+   "dst_id": "n_v3muz_pian"
+  },
+  {
+   "id": "de8765",
+   "src_id": "n_v3muz_pian",
+   "dst_id": "n_v88_home_taburet"
+  },
+  {
+   "id": "de8766",
+   "src_id": "n_v88_kitchen_cratita",
+   "dst_id": "n_v24_home_appliances_aragaz"
+  },
+  {
+   "id": "de8767",
+   "src_id": "n_v24_home_appliances_aragaz",
+   "dst_id": "n_v88_kitchen_cratita"
+  },
+  {
+   "id": "de8768",
+   "src_id": "n_v88_kitchen_cratita",
+   "dst_id": "n_v4gas_bucatarie"
+  },
+  {
+   "id": "de8769",
+   "src_id": "n_v88_kitchen_cratita",
+   "dst_id": "n_v4gas_supa"
   },
   {
    "id": "de877",
@@ -55251,9 +55374,74 @@
    "dst_id": "n_net_trending_ro"
   },
   {
+   "id": "de8770",
+   "src_id": "n_v4gas_supa",
+   "dst_id": "n_v88_kitchen_cratita"
+  },
+  {
+   "id": "de8771",
+   "src_id": "n_v4gas_lapte",
+   "dst_id": "n_v88_food_smantana_dulce"
+  },
+  {
+   "id": "de8772",
+   "src_id": "n_v88_food_smantana_dulce",
+   "dst_id": "n_v86_food_frisca"
+  },
+  {
+   "id": "de8773",
+   "src_id": "n_v88_food_smantana_dulce",
+   "dst_id": "n_v86_kitchen_mixer"
+  },
+  {
+   "id": "de8774",
+   "src_id": "n_v88_food_smantana_dulce",
+   "dst_id": "n_v86_food_zahar_pudra"
+  },
+  {
+   "id": "de8775",
+   "src_id": "n_v88_school_echer",
+   "dst_id": "n_v88_school_compas"
+  },
+  {
+   "id": "de8776",
+   "src_id": "n_v88_school_raportor",
+   "dst_id": "n_v88_school_echer"
+  },
+  {
+   "id": "de8777",
+   "src_id": "n_v88_cleaning_matura",
+   "dst_id": "n_v31_cleaning_floor_mop"
+  },
+  {
+   "id": "de8778",
+   "src_id": "n_v88_cleaning_matura",
+   "dst_id": "n_v31_cleaning_floor_aspirator"
+  },
+  {
+   "id": "de8779",
+   "src_id": "n_v88_home_taburet",
+   "dst_id": "n_v24_home_seating_fotoliu"
+  },
+  {
    "id": "de878",
    "src_id": "n_net_bromania",
    "dst_id": "n_net_sketch_online"
+  },
+  {
+   "id": "de8780",
+   "src_id": "n_v88_home_taburet",
+   "dst_id": "n_v24_home_seating_canapea"
+  },
+  {
+   "id": "de8781",
+   "src_id": "n_v88_kitchen_cratita",
+   "dst_id": "n_v84_food_cuptor"
+  },
+  {
+   "id": "de8782",
+   "src_id": "n_v88_food_smantana_dulce",
+   "dst_id": "n_v87_food_tort_diplomat"
   },
   {
    "id": "de879",

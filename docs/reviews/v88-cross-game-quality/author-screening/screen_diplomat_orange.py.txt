@@ -1,0 +1,14 @@
+import os,sys,json,itertools
+from pathlib import Path
+repo=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v88-cross-game-quality');sys.path.insert(0,str(repo));os.chdir(repo);os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django;django.setup()
+from cat_de_roman_esti.wordgames import alchimie,packs
+from cat_de_roman_esti.wordgames.service import get_service
+svc=get_service();ns={n['label_ro']:n['id'] for n in json.load(open(repo/'cat_de_roman_esti/fixtures/kg_sample.json'))['kg_nodes']};lab=lambda i:svc.node(i).label_ro
+items=[('diplomat_final',['Făină','Albuș','Portocală','Smântână','Zahăr pudră'],'Tort Diplomat')]
+rows=[]
+for ref,labels,target_label in items:
+ s=[ns[x] for x in labels];t=ns[target_label];p=alchimie._build_recipe_projection(s,t,'gastronomie'); rec={'category':'gastronomie','difficulty':'normal','seeds':s,'target':t,'target_depth':p.par if p else 0}
+ r={'ref':ref,'record':rec,'labels':labels,'target':target_label,'validation_errors':packs.validate_payload(rec,'alchimie',svc),'projection':None if not p else {'par':p.par,'openings':alchimie._projected_opening_pair_count(s,p.recipes),'recipes': [{'pair':[lab(i) for i in pair],'results':[lab(i) for i in result]} for pair,result in p.recipes.items()],'routes':[[{'pair':[lab(i) for i in pair],'results':[lab(i) for i in result]} for pair,result in route] for route in p.routes]}}
+ rows.append(r);print(ref,json.dumps(r,ensure_ascii=False),flush=True)
+Path('/home/dobo/work/_temp/feat__v88-cross-game-quality/content/diplomat-orange.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2)+'\n')

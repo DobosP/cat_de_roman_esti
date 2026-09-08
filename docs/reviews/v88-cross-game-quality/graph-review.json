@@ -1,0 +1,1124 @@
+{
+  "schema": "v88-exact-independent-graph-review-v2",
+  "reviewer": "v88_independent_review",
+  "reviewed_at": "2026-09-08",
+  "decision": "accept",
+  "supersedes": {
+    "artifact_sha256": "7c0188ef8cc2f0a0572b9783912ee6ffae7e4405aa2e964b17490b3898ce1dff",
+    "archive": "author-screening/preflight-revision/docs__reviews__v88-cross-game-quality__graph-review.json.gz",
+    "reason": "Prior independent review checked directed keys and incident edges, missing supported canonical endpoint sorting and distinct/same-category neighbor floors. That acceptance was incomplete; the exact archived judgment is preserved, not silently repaired."
+  },
+  "source_module_sha256": "5fa229dd7332b489f509ba9b4f6b7b1e13f71954a6ce86999cc31d69d528a249",
+  "candidate_sha256": "da00759c270adbdf2b5b37639b7772398172b491489c8eefc95c87a8993b7aad",
+  "baseline_commit": "cb7941baa10c6eba7b6ed0cf737762da91bcd50c",
+  "baseline_fixture_sha256": "96d50f8b724b9d1d1ff5d02b5a9a206445d7d9edead778d6db173f00ac094bfa",
+  "module_candidate_equality": {
+    "nodes": true,
+    "edges": true,
+    "removals": true
+  },
+  "counts": {
+    "concepts": 7,
+    "forms": 28,
+    "grammatical_forms": 25,
+    "qualified_forms": 3,
+    "directed_links": 33,
+    "removed_directed_links": 1,
+    "net_directed_links": 32,
+    "lexical_equivalents": 0
+  },
+  "mechanical_checks": {
+    "actual_supported_preflight": "passed independently using _load_batch and _preflight; read-only",
+    "declared_beginner_benchmark": 324,
+    "nondeferred_eligible_benchmark": 322,
+    "intuitive_link_probes": 33,
+    "canonical_edge_keys": "All endpoint pairs are sorted by existing applier for every relation; all 33 additions unique and absent from retained baseline.",
+    "all_35_label_form_surfaces_unique": true,
+    "old_surface_collisions": [],
+    "deferred_term_collisions": [],
+    "edge_duplicates": [],
+    "missing_endpoints": [],
+    "all_additions_one_way_nondistractor": true,
+    "distinct_playable_neighbors": {
+      "n_v88_school_compas": {
+        "total": 5,
+        "same_category": 3
+      },
+      "n_v88_school_echer": {
+        "total": 5,
+        "same_category": 3
+      },
+      "n_v88_school_raportor": {
+        "total": 4,
+        "same_category": 2
+      },
+      "n_v88_cleaning_matura": {
+        "total": 4,
+        "same_category": 4
+      },
+      "n_v88_home_taburet": {
+        "total": 4,
+        "same_category": 3
+      },
+      "n_v88_kitchen_cratita": {
+        "total": 4,
+        "same_category": 3
+      },
+      "n_v88_food_smantana_dulce": {
+        "total": 5,
+        "same_category": 5
+      }
+    },
+    "removed_edge_exact_baseline_match": true
+  },
+  "nodes": [
+    {
+      "index": 0,
+      "id": "n_v88_school_compas",
+      "record_sha256": "42017c19234d91131937e9f38686765c134df8b2b5ea4b6c4cca3b817302dc6e",
+      "verdict": "accept",
+      "source_ref": "n_v88_school_compas-dictionary",
+      "reason": "Accept the ordinary school drawing instrument; description excludes navigational instrument use. Compass meaning remains disclosed and no hidden target is authorized."
+    },
+    {
+      "index": 1,
+      "id": "n_v88_school_echer",
+      "record_sha256": "cb6973713d77a7ee81028cdae708a718b1cbcfa85ecc7435f54bf750f27f0656",
+      "verdict": "accept",
+      "source_ref": "n_v88_school_echer-dictionary",
+      "reason": "Accept the triangular geometry tool and right-angle/perpendicular construction description; ordinary classroom recognition is supported by national education material."
+    },
+    {
+      "index": 2,
+      "id": "n_v88_school_raportor",
+      "record_sha256": "ee501425709ba6a8e0963cd9aeaa8356a5c2ef7fd0684d653ea6364b37fcb28b",
+      "verdict": "accept",
+      "source_ref": "n_v88_school_raportor-dictionary",
+      "reason": "Accept the angle instrument. DOOM distinguishes neuter raportoare from masculine raportori for a person; only the instrument plural is imported."
+    },
+    {
+      "index": 3,
+      "id": "n_v88_cleaning_matura",
+      "record_sha256": "db1a0a2629132b2bb8f9cca5e35cffdfc694d006d35aace1208b2c33362df645",
+      "verdict": "accept",
+      "source_ref": "n_v88_cleaning_matura-dictionary",
+      "reason": "Accept the ordinary cleaning implement. Botanical senses and the accent-insensitive verbal surface remain possible outside the intended household context; no hidden target is authorized."
+    },
+    {
+      "index": 4,
+      "id": "n_v88_home_taburet",
+      "record_sha256": "f45ea2b6b525ef944fde78d0124f8394c4a7b896768809d4c68aee0138e4c890",
+      "verdict": "accept",
+      "source_ref": "n_v88_home_taburet-dictionary",
+      "reason": "Accept the familiar small seat. Primary seating plus specialized footstool/piano-seat meanings are documented; only qualified piano use is linked."
+    },
+    {
+      "index": 5,
+      "id": "n_v88_kitchen_cratita",
+      "record_sha256": "7c6b33021921a877fdf4fc0b8400527373078968704d55d9007feb8b506fc328",
+      "verdict": "accept",
+      "source_ref": "n_v88_kitchen_cratita-dictionary",
+      "reason": "Accept the familiar cooking vessel as its own concept. Low sides are relative/descriptive, not a universal product specification; no alias ownership is taken from Oală or Tigaie."
+    },
+    {
+      "index": 6,
+      "id": "n_v88_food_smantana_dulce",
+      "record_sha256": "d4b1c552d371fba89b7b350b51d61a4da7f059b5683af718246317797a3c18a1",
+      "verdict": "accept",
+      "source_ref": "sweet-cream-whipping",
+      "reason": "Qualified nonfermented high-fat liquid whipping cream is distinct from the existing fermented Smântână and finished Frișcă owners. The label is supported by Romanian manufacturer usage; the source needs whipping to become the finished product. No broad cream label is taken."
+    }
+  ],
+  "forms": [
+    {
+      "node_index": 0,
+      "form_index": 0,
+      "node_id": "n_v88_school_compas",
+      "form": "compasul",
+      "normalized": "compasul",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "singular definite nominative/accusative",
+      "source_ref": "n_v88_school_compas-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 0,
+      "form_index": 1,
+      "node_id": "n_v88_school_compas",
+      "form": "compasului",
+      "normalized": "compasului",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "singular definite genitive/dative",
+      "source_ref": "n_v88_school_compas-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 0,
+      "form_index": 2,
+      "node_id": "n_v88_school_compas",
+      "form": "compasuri",
+      "normalized": "compasuri",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "plural indefinite",
+      "source_ref": "n_v88_school_compas-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 0,
+      "form_index": 3,
+      "node_id": "n_v88_school_compas",
+      "form": "compasurile",
+      "normalized": "compasurile",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "plural definite nominative/accusative",
+      "source_ref": "n_v88_school_compas-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 1,
+      "form_index": 0,
+      "node_id": "n_v88_school_echer",
+      "form": "echerul",
+      "normalized": "echerul",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "singular definite nominative/accusative",
+      "source_ref": "n_v88_school_echer-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 1,
+      "form_index": 1,
+      "node_id": "n_v88_school_echer",
+      "form": "echerului",
+      "normalized": "echerului",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "singular definite genitive/dative",
+      "source_ref": "n_v88_school_echer-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 1,
+      "form_index": 2,
+      "node_id": "n_v88_school_echer",
+      "form": "echere",
+      "normalized": "echere",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "plural indefinite",
+      "source_ref": "n_v88_school_echer-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 1,
+      "form_index": 3,
+      "node_id": "n_v88_school_echer",
+      "form": "echerele",
+      "normalized": "echerele",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "plural definite nominative/accusative",
+      "source_ref": "n_v88_school_echer-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 2,
+      "form_index": 0,
+      "node_id": "n_v88_school_raportor",
+      "form": "raportorul",
+      "normalized": "raportorul",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "singular definite nominative/accusative",
+      "source_ref": "n_v88_school_raportor-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 2,
+      "form_index": 1,
+      "node_id": "n_v88_school_raportor",
+      "form": "raportorului",
+      "normalized": "raportorului",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "singular definite genitive/dative",
+      "source_ref": "n_v88_school_raportor-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 2,
+      "form_index": 2,
+      "node_id": "n_v88_school_raportor",
+      "form": "raportoare",
+      "normalized": "raportoare",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "neuter plural indefinite (instrument)",
+      "source_ref": "n_v88_school_raportor-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 2,
+      "form_index": 3,
+      "node_id": "n_v88_school_raportor",
+      "form": "raportoarele",
+      "normalized": "raportoarele",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "neuter plural definite nominative/accusative (instrument)",
+      "source_ref": "n_v88_school_raportor-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 3,
+      "form_index": 0,
+      "node_id": "n_v88_cleaning_matura",
+      "form": "mături",
+      "normalized": "maturi",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "plural indefinite",
+      "source_ref": "n_v88_cleaning_matura-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 3,
+      "form_index": 1,
+      "node_id": "n_v88_cleaning_matura",
+      "form": "măturile",
+      "normalized": "maturile",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "plural definite nominative/accusative",
+      "source_ref": "n_v88_cleaning_matura-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 3,
+      "form_index": 2,
+      "node_id": "n_v88_cleaning_matura",
+      "form": "măturii",
+      "normalized": "maturii",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "singular definite genitive/dative",
+      "source_ref": "n_v88_cleaning_matura-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 3,
+      "form_index": 3,
+      "node_id": "n_v88_cleaning_matura",
+      "form": "măturilor",
+      "normalized": "maturilor",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "plural definite genitive/dative",
+      "source_ref": "n_v88_cleaning_matura-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 4,
+      "form_index": 0,
+      "node_id": "n_v88_home_taburet",
+      "form": "taburetul",
+      "normalized": "taburetul",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "singular definite nominative/accusative",
+      "source_ref": "n_v88_home_taburet-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 4,
+      "form_index": 1,
+      "node_id": "n_v88_home_taburet",
+      "form": "taburetului",
+      "normalized": "taburetului",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "singular definite genitive/dative",
+      "source_ref": "n_v88_home_taburet-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 4,
+      "form_index": 2,
+      "node_id": "n_v88_home_taburet",
+      "form": "taburete",
+      "normalized": "taburete",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "plural indefinite",
+      "source_ref": "n_v88_home_taburet-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 4,
+      "form_index": 3,
+      "node_id": "n_v88_home_taburet",
+      "form": "taburetele",
+      "normalized": "taburetele",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "plural definite nominative/accusative",
+      "source_ref": "n_v88_home_taburet-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 5,
+      "form_index": 0,
+      "node_id": "n_v88_kitchen_cratita",
+      "form": "cratițe",
+      "normalized": "cratite",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "plural indefinite",
+      "source_ref": "n_v88_kitchen_cratita-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 5,
+      "form_index": 1,
+      "node_id": "n_v88_kitchen_cratita",
+      "form": "cratițele",
+      "normalized": "cratitele",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "plural definite nominative/accusative",
+      "source_ref": "n_v88_kitchen_cratita-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 5,
+      "form_index": 2,
+      "node_id": "n_v88_kitchen_cratita",
+      "form": "cratiței",
+      "normalized": "cratitei",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "singular definite genitive/dative",
+      "source_ref": "n_v88_kitchen_cratita-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 5,
+      "form_index": 3,
+      "node_id": "n_v88_kitchen_cratita",
+      "form": "cratițelor",
+      "normalized": "cratitelor",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "plural definite genitive/dative",
+      "source_ref": "n_v88_kitchen_cratita-dictionary",
+      "old_owners": []
+    },
+    {
+      "node_index": 6,
+      "form_index": 0,
+      "node_id": "n_v88_food_smantana_dulce",
+      "form": "smântânii dulci pentru frișcă",
+      "normalized": "smantanii dulci pentru frisca",
+      "verdict": "accept",
+      "type": "grammatical_form",
+      "grammar": "feminine singular genitive/dative with agreeing adjective",
+      "source_ref": "n_v88_food_smantana_dulce-usage",
+      "old_owners": []
+    },
+    {
+      "node_index": 6,
+      "form_index": 1,
+      "node_id": "n_v88_food_smantana_dulce",
+      "form": "smântână pentru frișcă",
+      "normalized": "smantana pentru frisca",
+      "verdict": "accept",
+      "type": "qualified_form",
+      "grammar": "qualified liquid/whipping-cream input; not a new lexical equivalent",
+      "source_ref": "n_v88_food_smantana_dulce-usage",
+      "old_owners": []
+    },
+    {
+      "node_index": 6,
+      "form_index": 2,
+      "node_id": "n_v88_food_smantana_dulce",
+      "form": "smântână lichidă pentru frișcă",
+      "normalized": "smantana lichida pentru frisca",
+      "verdict": "accept",
+      "type": "qualified_form",
+      "grammar": "qualified liquid/whipping-cream input; not a new lexical equivalent",
+      "source_ref": "n_v88_food_smantana_dulce-usage",
+      "old_owners": []
+    },
+    {
+      "node_index": 6,
+      "form_index": 3,
+      "node_id": "n_v88_food_smantana_dulce",
+      "form": "smântână dulce lichidă pentru frișcă",
+      "normalized": "smantana dulce lichida pentru frisca",
+      "verdict": "accept",
+      "type": "qualified_form",
+      "grammar": "qualified liquid/whipping-cream input; not a new lexical equivalent",
+      "source_ref": "n_v88_food_smantana_dulce-usage",
+      "old_owners": []
+    }
+  ],
+  "edges": [
+    {
+      "index": 0,
+      "record_sha256": "b11787016475810a5cf3c99dcf1d985e835f1ca5ade713b326d176c158ead369",
+      "src": "n_v88_school_compas",
+      "dst": "n_v3art_desen",
+      "canonical_applier_key": [
+        "n_v3art_desen",
+        "n_v88_school_compas",
+        "used_for"
+      ],
+      "verdict": "accept",
+      "source_ref": "geometry-manufacturer",
+      "reason": "Circle/arc construction produces geometric drawings; education instrument mapping independently reinforces manufacturer geometry-set placement."
+    },
+    {
+      "index": 1,
+      "record_sha256": "f97b6453386faea1dac926af2d7bf8402b85325f2a2cd288181d0a1bb39f6f51",
+      "src": "n_v2sti_matematica",
+      "dst": "n_v88_school_compas",
+      "canonical_applier_key": [
+        "n_v2sti_matematica",
+        "n_v88_school_compas",
+        "uses_tool"
+      ],
+      "verdict": "accept",
+      "source_ref": "geometry-school",
+      "reason": "Compas is used for mathematical geometric constructions; national mathematics remediation explicitly uses compass and ruler for an angle bisector."
+    },
+    {
+      "index": 2,
+      "record_sha256": "b1cd471dbb8a93c869363c94d241b5c41ffd5142a251ff0d3b7e4ec3c90b2b8c",
+      "src": "n_v24_school_supplies_rigla",
+      "dst": "n_v88_school_compas",
+      "canonical_applier_key": [
+        "n_v24_school_supplies_rigla",
+        "n_v88_school_compas",
+        "used_together"
+      ],
+      "verdict": "accept",
+      "source_ref": "geometry-manufacturer",
+      "reason": "Manufacturer Math Set includes both ruler and compass; the label promises co-use in a set, not a synonym or necessary ingredient."
+    },
+    {
+      "index": 3,
+      "record_sha256": "e904dbbdb59583e2879d72e2b7985998a876a63b8a1884ced6dea6a37dc006cc",
+      "src": "n_v88_school_echer",
+      "dst": "n_v3art_desen",
+      "canonical_applier_key": [
+        "n_v3art_desen",
+        "n_v88_school_echer",
+        "used_for"
+      ],
+      "verdict": "accept",
+      "source_ref": "geometry-manufacturer",
+      "reason": "Echer constructs geometric lines/angles; national teaching material explicitly maps it to inclined lines and names ruler/echer for geometric decoration."
+    },
+    {
+      "index": 4,
+      "record_sha256": "a3e96b359a8697d295af42d43b2bbb9877810adefb3ad1f92dc1bc43b943ca10",
+      "src": "n_v2sti_matematica",
+      "dst": "n_v88_school_echer",
+      "canonical_applier_key": [
+        "n_v2sti_matematica",
+        "n_v88_school_echer",
+        "uses_tool"
+      ],
+      "verdict": "accept",
+      "source_ref": "geometry-school",
+      "reason": "Right-angle/set-square work is geometric mathematics; the national teaching material places it among geometric drawing instruments."
+    },
+    {
+      "index": 5,
+      "record_sha256": "83ce00129e31929877ad3d2be10523e9d1661ed51e702c2db10cac5b96a5bfd7",
+      "src": "n_v24_school_supplies_rigla",
+      "dst": "n_v88_school_echer",
+      "canonical_applier_key": [
+        "n_v24_school_supplies_rigla",
+        "n_v88_school_echer",
+        "used_together"
+      ],
+      "verdict": "accept",
+      "source_ref": "geometry-manufacturer",
+      "reason": "Manufacturer geometry set includes ruler and set squares, supporting the exact co-use label."
+    },
+    {
+      "index": 6,
+      "record_sha256": "5f639a077661037a8c85ad4fd7412853e43d3ca893922215d2b7db0728e830db",
+      "src": "n_v88_school_raportor",
+      "dst": "n_v3art_desen",
+      "canonical_applier_key": [
+        "n_v3art_desen",
+        "n_v88_school_raportor",
+        "used_for"
+      ],
+      "verdict": "accept",
+      "source_ref": "geometry-manufacturer",
+      "reason": "Raportor constructs/measures angles in geometric figures; national mathematics guidance explicitly names this use."
+    },
+    {
+      "index": 7,
+      "record_sha256": "6c346bd9b2ed7f7ddebf85dd5a5b4489622d8d16f6bfa4ca3775aff6c00392bc",
+      "src": "n_v2sti_matematica",
+      "dst": "n_v88_school_raportor",
+      "canonical_applier_key": [
+        "n_v2sti_matematica",
+        "n_v88_school_raportor",
+        "uses_tool"
+      ],
+      "verdict": "accept",
+      "source_ref": "geometry-school",
+      "reason": "National mathematics remediation explicitly names rapportor for geometric figures and angle measurement."
+    },
+    {
+      "index": 8,
+      "record_sha256": "bc1d5a9f298d9a2d793090e2bb8a14187ccad566f523aa510c7df837f8c25110",
+      "src": "n_v24_school_supplies_rigla",
+      "dst": "n_v88_school_raportor",
+      "canonical_applier_key": [
+        "n_v24_school_supplies_rigla",
+        "n_v88_school_raportor",
+        "used_together"
+      ],
+      "verdict": "accept",
+      "source_ref": "geometry-manufacturer",
+      "reason": "Manufacturer geometry set includes ruler and protractor; mathematics guidance also combines them for bisectors."
+    },
+    {
+      "index": 9,
+      "record_sha256": "6767d687109d38952665d86d2365f4bae3b94fd15e5bc972396f8772a9368020",
+      "src": "n_v88_school_compas",
+      "dst": "n_v24_school_writing_creion",
+      "canonical_applier_key": [
+        "n_v24_school_writing_creion",
+        "n_v88_school_compas",
+        "uses_tool"
+      ],
+      "verdict": "accept",
+      "source_ref": "compass-manufacturer",
+      "reason": "Maped Study universal-holder compass explicitly accepts a normal pencil or pen. The limited some-models label avoids asserting every compass holds a full pencil."
+    },
+    {
+      "index": 10,
+      "record_sha256": "c17c0e02cd4eca32bdf2f2473eaf4143c3598dd5f3360feb47805d563c004939",
+      "src": "n_v88_cleaning_matura",
+      "dst": "n_v24_home_surfaces_podea",
+      "canonical_applier_key": [
+        "n_v24_home_surfaces_podea",
+        "n_v88_cleaning_matura",
+        "cleans"
+      ],
+      "verdict": "accept",
+      "source_ref": "cleaning-manufacturer",
+      "reason": "Vileda describes brooms collecting fine dust and particles on floor surfaces; cleaning direction is correct."
+    },
+    {
+      "index": 11,
+      "record_sha256": "cab20633e95ad373dc6392afd479563d6edbf7c7d81cc65a11bd69d92608a268",
+      "src": "n_v88_cleaning_matura",
+      "dst": "n_v31_cleaning_floor_faras",
+      "canonical_applier_key": [
+        "n_v31_cleaning_floor_faras",
+        "n_v88_cleaning_matura",
+        "sweeps_into"
+      ],
+      "verdict": "accept",
+      "source_ref": "cleaning-manufacturer",
+      "reason": "Broom sweeps debris into the dustpan; sweeps_into describes that directed role instead of a symmetric co-use key."
+    },
+    {
+      "index": 12,
+      "record_sha256": "03fc5b986127bbdaf8a85e1b746e4b0a4b214ae06be2209c961c15bf6a875e2b",
+      "src": "n_v31_cleaning_floor_faras",
+      "dst": "n_v88_cleaning_matura",
+      "canonical_applier_key": [
+        "n_v31_cleaning_floor_faras",
+        "n_v88_cleaning_matura",
+        "collects_from"
+      ],
+      "verdict": "accept",
+      "source_ref": "cleaning-manufacturer",
+      "reason": "Dustpan collects debris swept by the broom; collects_from describes the complementary direction, not a duplicate symmetric relation."
+    },
+    {
+      "index": 13,
+      "record_sha256": "d96dffd22dcab374c981278cdf8a9773f1ecf28ecca3f580d6da81034867a6c2",
+      "src": "n_v88_home_taburet",
+      "dst": "n_v24_home_seating_scaun",
+      "canonical_applier_key": [
+        "n_v24_home_seating_scaun",
+        "n_v88_home_taburet",
+        "is_a"
+      ],
+      "verdict": "accept",
+      "source_ref": "taburet-dictionary",
+      "reason": "DEX identifies Taburet as a small backless seat; subtype-to-Scaun direction is correct and no reverse is-a edge appears."
+    },
+    {
+      "index": 14,
+      "record_sha256": "7904729a2a472ac32cddec6ca4e0dbdd8db6a7b0ab3dd638dd7a24fc9bcb5bd5",
+      "src": "n_v88_home_taburet",
+      "dst": "n_v3muz_pian",
+      "canonical_applier_key": [
+        "n_v3muz_pian",
+        "n_v88_home_taburet",
+        "seat_for"
+      ],
+      "verdict": "accept",
+      "source_ref": "taburet-dictionary",
+      "reason": "Specialized piano stool is a seat for piano playing; the some-models label avoids claiming every stool has this purpose."
+    },
+    {
+      "index": 15,
+      "record_sha256": "646210ee7fb428fd00f04ae8421c24779c293700fd71a5d5e3ada5968c43c1b8",
+      "src": "n_v3muz_pian",
+      "dst": "n_v88_home_taburet",
+      "canonical_applier_key": [
+        "n_v3muz_pian",
+        "n_v88_home_taburet",
+        "played_from"
+      ],
+      "verdict": "accept",
+      "source_ref": "taburet-dictionary",
+      "reason": "Piano may be played from a stool; played_from is the complementary direction and preserves the qualified reading."
+    },
+    {
+      "index": 16,
+      "record_sha256": "c7f5bb43154f1a56e522c93ba7ff40ba6b0555b178e37ef2c57a1113dae74214",
+      "src": "n_v88_kitchen_cratita",
+      "dst": "n_v24_home_appliances_aragaz",
+      "canonical_applier_key": [
+        "n_v24_home_appliances_aragaz",
+        "n_v88_kitchen_cratita",
+        "heated_on"
+      ],
+      "verdict": "accept",
+      "source_ref": "cookware-manufacturer",
+      "reason": "Tefal catalogue and actual Unlimited cratiță product specify stovetop heat-source compatibility; vessel is heated on the cooker."
+    },
+    {
+      "index": 17,
+      "record_sha256": "3792dd408e51d0b217fbd08ac6a1962c226d90771c454cf3455aef82e90c3ae1",
+      "src": "n_v24_home_appliances_aragaz",
+      "dst": "n_v88_kitchen_cratita",
+      "canonical_applier_key": [
+        "n_v24_home_appliances_aragaz",
+        "n_v88_kitchen_cratita",
+        "heats"
+      ],
+      "verdict": "accept",
+      "source_ref": "cookware-manufacturer",
+      "reason": "The cooker heats the vessel. Complementary direction is true; it does not assert a material or ingredient relation."
+    },
+    {
+      "index": 18,
+      "record_sha256": "e024f8bf91c7b3dc41d74b0e21a67e707bd82567fd8f6d9bf1ac9f0e5aa0a75f",
+      "src": "n_v88_kitchen_cratita",
+      "dst": "n_v4gas_bucatarie",
+      "canonical_applier_key": [
+        "n_v4gas_bucatarie",
+        "n_v88_kitchen_cratita",
+        "used_in"
+      ],
+      "verdict": "accept",
+      "source_ref": "cratita-dictionary",
+      "reason": "Dictionary explicitly defines a kitchen cooking vessel; used_in direction to Bucătărie is appropriate."
+    },
+    {
+      "index": 19,
+      "record_sha256": "e850294820de755666557f9b11721251796106b41b5ec99b7d2a29ac38a709da",
+      "src": "n_v88_kitchen_cratita",
+      "dst": "n_v4gas_supa",
+      "canonical_applier_key": [
+        "n_v4gas_supa",
+        "n_v88_kitchen_cratita",
+        "used_to_cook"
+      ],
+      "verdict": "accept",
+      "source_ref": "cookware-recipe",
+      "reason": "Tefal Quick Chef indexed primary recipe text places soup vegetables and broth in a cratiță and boils them. The may-cook label is truthful."
+    },
+    {
+      "index": 20,
+      "record_sha256": "dcd290db0fe6affbf1bcf84b191b9d7aff662e9cfc57edf0e78bb0dd074cef67",
+      "src": "n_v4gas_supa",
+      "dst": "n_v88_kitchen_cratita",
+      "canonical_applier_key": [
+        "n_v4gas_supa",
+        "n_v88_kitchen_cratita",
+        "prepared_in"
+      ],
+      "verdict": "accept",
+      "source_ref": "cookware-recipe",
+      "reason": "The same soup recipe explicitly uses this vessel; may-be-prepared-in is a qualified independently readable reverse relation."
+    },
+    {
+      "index": 21,
+      "record_sha256": "17366672e28f7177f5cc1addabe5b70adfd1b2f3600591ace73d0a3a7b5c216a",
+      "src": "n_v4gas_lapte",
+      "dst": "n_v88_food_smantana_dulce",
+      "canonical_applier_key": [
+        "n_v4gas_lapte",
+        "n_v88_food_smantana_dulce",
+        "raw_material_for"
+      ],
+      "verdict": "accept",
+      "source_ref": "sweet-cream-product",
+      "reason": "Dairy-industry primary handbook explicitly separates and standardizes milk cream for whipping. Milk is the raw source; this is not an instruction that ordinary milk whips directly."
+    },
+    {
+      "index": 22,
+      "record_sha256": "e52835ff6b6392a7d910a0987dd747b385e449a23ca84d67c8ce04bdbf452b6b",
+      "src": "n_v88_food_smantana_dulce",
+      "dst": "n_v86_food_frisca",
+      "canonical_applier_key": [
+        "n_v86_food_frisca",
+        "n_v88_food_smantana_dulce",
+        "processed_into"
+      ],
+      "verdict": "accept",
+      "source_ref": "sweet-cream-whipping",
+      "reason": "Romanian Oetker instructions whip cold sweet cream into Frișcă; source and finished-product owners are distinct."
+    },
+    {
+      "index": 23,
+      "record_sha256": "8b47f3c19cdcf20a22f76d99a8fa5fc8b48d04fe80637597ac76ecedcfbfd0a7",
+      "src": "n_v88_food_smantana_dulce",
+      "dst": "n_v86_kitchen_mixer",
+      "canonical_applier_key": [
+        "n_v86_kitchen_mixer",
+        "n_v88_food_smantana_dulce",
+        "prepared_with"
+      ],
+      "verdict": "accept",
+      "source_ref": "sweet-cream-whipping",
+      "reason": "The same manufacturer instructions explicitly use a mixer; the may-be-prepared-with wording allows other whipping methods."
+    },
+    {
+      "index": 24,
+      "record_sha256": "2666854228eb3b53c10275838acaf9d19774b2514ad11b4bb67e1c85c57a640a",
+      "src": "n_v88_food_smantana_dulce",
+      "dst": "n_v86_food_zahar_pudra",
+      "canonical_applier_key": [
+        "n_v86_food_zahar_pudra",
+        "n_v88_food_smantana_dulce",
+        "sweetened_with"
+      ],
+      "verdict": "accept",
+      "source_ref": "sweet-cream-whipping",
+      "reason": "Manufacturer preparation adds powdered sugar; the optional sweetened-with wording does not make all whipping cream pre-sweetened."
+    },
+    {
+      "index": 25,
+      "record_sha256": "edf446e75a036150e346ac8a74da8850a02e9a5104e65952b554c0a95b37a9ea",
+      "src": "n_v88_school_echer",
+      "dst": "n_v88_school_compas",
+      "canonical_applier_key": [
+        "n_v88_school_compas",
+        "n_v88_school_echer",
+        "used_together"
+      ],
+      "verdict": "accept",
+      "source_ref": "geometry-manufacturer",
+      "reason": "STAEDTLER Math Set includes compass and set squares together; one directed co-use edge adds this real same-kit neighbor."
+    },
+    {
+      "index": 26,
+      "record_sha256": "4ead6804c7bf764e83cd9eeb9696428e951e70d0a3e6f2c8501519635698b1b4",
+      "src": "n_v88_school_raportor",
+      "dst": "n_v88_school_echer",
+      "canonical_applier_key": [
+        "n_v88_school_echer",
+        "n_v88_school_raportor",
+        "used_together"
+      ],
+      "verdict": "accept",
+      "source_ref": "geometry-manufacturer",
+      "reason": "STAEDTLER geometry set includes protractor and set squares together; one directed co-use edge supports the same kit."
+    },
+    {
+      "index": 27,
+      "record_sha256": "ac2d2a412703771b0d30c7f0271e7b3c7dc022f9bb89fe13c557e58194da824e",
+      "src": "n_v88_cleaning_matura",
+      "dst": "n_v31_cleaning_floor_mop",
+      "canonical_applier_key": [
+        "n_v31_cleaning_floor_mop",
+        "n_v88_cleaning_matura",
+        "used_before"
+      ],
+      "verdict": "accept",
+      "source_ref": "floor-workflow",
+      "reason": "Vileda mopping instructions explicitly remove dry dirt by sweeping before the wet mop step. The direction follows that sequence."
+    },
+    {
+      "index": 28,
+      "record_sha256": "dac4f705da0314e6fe69e6decc21648b05c4c2a5f960d78eb2caf303f4854765",
+      "src": "n_v88_cleaning_matura",
+      "dst": "n_v31_cleaning_floor_aspirator",
+      "canonical_applier_key": [
+        "n_v31_cleaning_floor_aspirator",
+        "n_v88_cleaning_matura",
+        "alternative_to"
+      ],
+      "verdict": "accept",
+      "source_ref": "floor-workflow",
+      "reason": "Vileda offers broom OR vacuum for removing dry floor dirt. The label limits equivalence to that job; this is not a universal capability or noun synonym."
+    },
+    {
+      "index": 29,
+      "record_sha256": "b1c88e9cacd0fa5dca26027a1c55b1462dd55ef0853937558f84494d801597f0",
+      "src": "n_v88_home_taburet",
+      "dst": "n_v24_home_seating_fotoliu",
+      "canonical_applier_key": [
+        "n_v24_home_seating_fotoliu",
+        "n_v88_home_taburet",
+        "footrest_for"
+      ],
+      "verdict": "accept",
+      "source_ref": "taburet-footrest",
+      "reason": "DLRLC explicitly places low stools before an armchair as foot supports; qualified low-model reading avoids universal function."
+    },
+    {
+      "index": 30,
+      "record_sha256": "5fcf0858f0d2e16768666e45647478a54a49bced62eb71b8ec98c2862f3804f6",
+      "src": "n_v88_home_taburet",
+      "dst": "n_v24_home_seating_canapea",
+      "canonical_applier_key": [
+        "n_v24_home_seating_canapea",
+        "n_v88_home_taburet",
+        "footrest_for"
+      ],
+      "verdict": "accept",
+      "source_ref": "taburet-footrest",
+      "reason": "DLRLC explicitly places low stools before a sofa as foot supports; this second seating context is directly stated by the source."
+    },
+    {
+      "index": 31,
+      "record_sha256": "2531051368efb1bad6cec0f89647d7a66e91eae23ad95dfa93928dd541164f56",
+      "src": "n_v88_kitchen_cratita",
+      "dst": "n_v84_food_cuptor",
+      "canonical_applier_key": [
+        "n_v84_food_cuptor",
+        "n_v88_kitchen_cratita",
+        "used_in"
+      ],
+      "verdict": "accept",
+      "source_ref": "oven-safe-cookware",
+      "reason": "Tefal Ingenio instructions explicitly permit suitable cookware on the hob and in the oven. Only compatible models are claimed."
+    },
+    {
+      "index": 32,
+      "record_sha256": "4e32ed4c7d0d07b2022f2107debfa4383424deb1d2a94f257abbb6143ac304eb",
+      "src": "n_v88_food_smantana_dulce",
+      "dst": "n_v87_food_tort_diplomat",
+      "canonical_applier_key": [
+        "n_v87_food_tort_diplomat",
+        "n_v88_food_smantana_dulce",
+        "ingredient_variant"
+      ],
+      "verdict": "accept",
+      "source_ref": "sweet-cream-diplomat",
+      "reason": "The original Diplomat recipe lists liquid whipping cream and explains its aeration into the dessert cream. This exact qualified ingredient belongs to the cake. It is a factual ingredient association, not a complete one-pair recipe or permission to promote a trivial board."
+    }
+  ],
+  "removals": [
+    {
+      "index": 0,
+      "id": "de8676",
+      "record_sha256": "293275912e15c46ef2f8d917ddb2579bc3a970d142b992f52d8718b4b6672798",
+      "verdict": "accept_removal",
+      "reason": "Old Smântână owner explicitly denotes fermented cream, including that alias. Its processed_into Frișcă link attempted to qualify sweet variants without an owner for them. Remove that false owner relation, preserve all sour-cream labels/aliases, and use the new qualified nonfermented owner for the correct whipping relation."
+    }
+  ],
+  "sources": [
+    {
+      "ref": "geometry-manufacturer",
+      "url": "https://www.staedtler.com/intl/en/products/technical-drawing-instruments/geometry-set/",
+      "claim": "Manufacturer lists compass, ruler, protractor and set squares in geometry sets; use in drawing is explicit.",
+      "review_observation": "Opened manufacturer page: geometry/math sets contain ruler, compass, protractor and set squares."
+    },
+    {
+      "ref": "geometry-school",
+      "url": "https://www.edu.ro/sites/default/files/_fi%C8%99iere/Minister/2021/inv.preuniversitar/repere%20curriculum%20clasa%20a%20IX-a%202021%20-%202022/Anexa%2013_RM_%20FABRICAREA%20PROD%20LEMN.pdf",
+      "claim": "Romanian Ministry material identifies echer, compas, riglă and raportor as measuring and drawing instruments.",
+      "review_observation": "Opened Ministry PDF; printed pages31–34 list tool/use mapping, geometric tasks and ruler/echer use. Added direct mathematics-source corroboration below."
+    },
+    {
+      "ref": "compass-manufacturer",
+      "url": "https://us.maped.com/product/study-metal-compass-with-universal-holder/",
+      "claim": "The manufacturer explicitly supplies a universal holder that accepts a standard pencil or pen.",
+      "review_observation": "Opened Maped product page; universal holder accepts included pencil and standard pencil/pen."
+    },
+    {
+      "ref": "cleaning-manufacturer",
+      "url": "https://www.vileda.co.uk/brooms-dustpans",
+      "claim": "Brooms sweep dust/debris on floors into dustpans; both are paired for cleaning.",
+      "review_observation": "Opened Vileda floor-cleaning page; broom bristles capture debris and floor-contact dustpans collect it."
+    },
+    {
+      "ref": "cookware-manufacturer",
+      "url": "https://www.tefal.ro/articole-de-bucatarie/oale-si-tigai",
+      "claim": "Manufacturer distinguishes cratiță from oală/tigaie and supplies cookware for stovetop cooking.",
+      "review_observation": "Opened catalogue distinguishing cratiță/oală/tigaie and actual Unlimited product heat-source compatibility."
+    },
+    {
+      "ref": "cookware-recipe",
+      "url": "https://www.tefal.ro/medias/DIGITAL-RECIPES-QUICK-CHEF.pdf?context=bWFzdGVyfHJvb3R8MTgxNTE2MDR8YXBwbGljYXRpb24vcGRmfGgyMS9oYjcvMTQ0NzE2Mjg3NTA4NzgucGRmfGZiMTg3ZTllYWJlNGM0OWU0Yzk0NDdlYTcyYWY1YzI2MTY1NjUxMWE0OGRmODYxN2Q4ZmE4YmFiZGQ2MTYzZjk",
+      "claim": "Tefal recipe book prepares soup vegetables in a cratiță.",
+      "review_observation": "Original URL open failed (404); official services mirror also could not be fully fetched. Independently retrieved indexed primary-source passage for Supă cremă de napi: vegetables and broth boil together in a cratiță. No full-PDF access is claimed."
+    },
+    {
+      "ref": "n_v88_school_compas-dictionary",
+      "url": "https://dexonline.ro/definitie/compas",
+      "claim": "DEX/DOOM entries establish the object sense and the ordinary noun inflection; no synonym is imported.",
+      "review_observation": "Independently opened the dictionary DEX/DOOM entry and checked the stated object sense and ordinary inflection."
+    },
+    {
+      "ref": "n_v88_school_echer-dictionary",
+      "url": "https://dexonline.ro/definitie/echer",
+      "claim": "DEX/DOOM entries establish the object sense and the ordinary noun inflection; no synonym is imported.",
+      "review_observation": "Independently opened the dictionary DEX/DOOM entry and checked the stated object sense and ordinary inflection."
+    },
+    {
+      "ref": "n_v88_school_raportor-dictionary",
+      "url": "https://dexonline.ro/definitie/raportor",
+      "claim": "DEX/DOOM entries establish the object sense and the ordinary noun inflection; no synonym is imported.",
+      "review_observation": "Independently opened the dictionary DEX/DOOM entry and checked the stated object sense and ordinary inflection."
+    },
+    {
+      "ref": "n_v88_cleaning_matura-dictionary",
+      "url": "https://dexonline.ro/definitie/mătură",
+      "claim": "DEX/DOOM entries establish the object sense and the ordinary noun inflection; no synonym is imported.",
+      "review_observation": "Independently opened the dictionary DEX/DOOM entry and checked the stated object sense and ordinary inflection."
+    },
+    {
+      "ref": "n_v88_home_taburet-dictionary",
+      "url": "https://dexonline.ro/definitie/taburet",
+      "claim": "DEX/DOOM entries establish the object sense and the ordinary noun inflection; no synonym is imported.",
+      "review_observation": "Independently opened the dictionary DEX/DOOM entry and checked the stated object sense and ordinary inflection."
+    },
+    {
+      "ref": "n_v88_kitchen_cratita-dictionary",
+      "url": "https://dexonline.ro/definitie/cratiță",
+      "claim": "DEX/DOOM entries establish the object sense and the ordinary noun inflection; no synonym is imported.",
+      "review_observation": "Independently opened the dictionary DEX/DOOM entry and checked the stated object sense and ordinary inflection."
+    },
+    {
+      "ref": "cratita-dictionary",
+      "url": "https://dexonline.ro/definitie/cratiță",
+      "claim": "DEX/DOOM entries establish the object sense and the ordinary noun inflection; no synonym is imported.",
+      "review_observation": "Independently opened the dictionary DEX/DOOM entry and checked the stated object sense and ordinary inflection."
+    },
+    {
+      "ref": "taburet-dictionary",
+      "url": "https://dexonline.ro/definitie/taburet",
+      "claim": "DEX/DOOM entries establish the object sense and the ordinary noun inflection; no synonym is imported.",
+      "review_observation": "Independently opened the dictionary DEX/DOOM entry and checked the stated object sense and ordinary inflection."
+    },
+    {
+      "ref": "sweet-cream-product",
+      "url": "https://ladorna.ro/smantani/",
+      "claim": "Dairy manufacturer distinguishes its whipping-cream range from cooking cream, and describes milk-derived cream; qualified liquid whipping cream is not fermented sour cream.",
+      "review_observation": "Direct open failed; independently retrieved indexed LaDorna cream-family catalogue listing milk-derived 35% cream. Reviewer added directly opened Tetra Pak dairy handbook for exact separation/whipping process."
+    },
+    {
+      "ref": "sweet-cream-whipping",
+      "url": "https://www.oetker-professional.ro/produsele-noastre/intaritor-de-frisca",
+      "claim": "Manufacturer explicitly names cold sweet whipping cream and powdered sugar beaten with a mixer into whipped cream.",
+      "review_observation": "Direct page was challenge-blocked earlier; independently retrieved official indexed product text naming cold sweet whipping cream, powdered sugar and mixer, producing whipped cream."
+    },
+    {
+      "ref": "n_v88_food_smantana_dulce-usage",
+      "url": "https://www.oetker-professional.ro/produsele-noastre/intaritor-de-frisca",
+      "claim": "Exact qualified ingredient phrase; one genitive phrase and three narrower liquid/whipping descriptions are accepted forms, not synonyms for sour cream or ready-whipped Frișcă.",
+      "review_observation": "Same independently retrieved manufacturer phrase supports qualified usage; grammatical genitive and narrower liquid descriptors were reviewed."
+    },
+    {
+      "ref": "floor-workflow",
+      "url": "https://www.vileda.co.uk/cleanspiration/cleaning-tips/faq-floor-still-dirty",
+      "claim": "Manufacturer recommends sweeping OR vacuuming dry dirt before mopping; supports the bounded alternative dry-cleaning role and the before-mop order.",
+      "review_observation": "The supplied FAQ opened but did not expose its alleged vacuum wording. Independently found the same manufacturer’s How To Mop Floors Effectively page explicitly recommending broom OR vacuum before mopping; cited below."
+    },
+    {
+      "ref": "taburet-footrest",
+      "url": "https://dexonline.ro/definitie/taburet",
+      "claim": "DLRLC explicitly describes a low stool placed before an armchair or sofa to support the seated person’s feet; DEX records the specialized footstool sense.",
+      "review_observation": "Reopened dictionary; DLRLC explicitly names low stool placed before armchair or sofa to support the seated person’s feet."
+    },
+    {
+      "ref": "taburet-footrest-product",
+      "url": "https://www.ikea.com/ro/ro/p/fammarp-fotoliu-si-taburet-metal-viarp-bej-maro-s59487829/",
+      "claim": "Manufacturer pairs taburet with an armchair and explains compatible sofa-family arrangements; corroborates actual furniture use.",
+      "review_observation": "Not needed as a decisive source: the explicit DLRLC armchair/sofa use was independently read."
+    },
+    {
+      "ref": "oven-safe-cookware",
+      "url": "https://www.services.tefal.ro/Articole-de-buc%C4%83t%C4%83rie/Ingenio/Gama-de-oale-%C8%99i-tig%C4%83i-Ingenio-Unlimited/p/RANGE-24BF-G",
+      "claim": "Manufacturer states that suitable Ingenio cookware can cook on the hob and in the oven. Only compatible vessel models are claimed.",
+      "review_observation": "Opened actual Tefal Ingenio manufacturer page; hob and oven cooking are explicit."
+    },
+    {
+      "ref": "sweet-cream-diplomat",
+      "url": "https://jamilacuisine.ro/tort-diplomat-facut-in-casa-reteta-video/",
+      "claim": "Original recipe lists liquid whipping cream; the new source denotes that liquid cream before whipping, rather than the old explicitly fermented Smântână node.",
+      "review_observation": "Independently opened original Jamila Diplomat recipe; liquid whipping cream is a listed ingredient, and the text distinguishes whipping cream choice/whipping stage."
+    }
+  ],
+  "reviewer_additional_sources": [
+    {
+      "ref": "reviewer-mathematics",
+      "url": "https://www.edu.ro/sites/default/files/2024_Analiza_itemi_ENVIII_simulare_Matematica.pdf",
+      "review_observation": "Opened Ministry national eighth-grade mathematics analysis, printed page5: angle instruments and compass/ruler or protractor/ruler bisector constructions."
+    },
+    {
+      "ref": "reviewer-stovetop",
+      "url": "https://www.tefal.ro/cratita-unlimited-g2557172-26cm-invelis-antiaderent-100-sigur-thermo-signaltm-baza-diffusion-aluminiu-negru",
+      "review_observation": "Opened manufacturer product: cratiță is compatible with all stated stovetop heat sources; source supports explicit vessel heating."
+    },
+    {
+      "ref": "reviewer-recipe-services",
+      "url": "https://www.services.tefal.ro/medias/DIGITAL-RECIPES-QUICK-CHEF.pdf?context=bWFzdGVyfHJvb3R8MTgxNTE2MDR8YXBwbGljYXRpb24vcGRmfGgyMS9oYjcvMTQ0NzE2Mjg3NTA4NzgucGRmfGZiMTg3ZTllYWJlNGM0OWU0Yzk0NDdlYTcyYWY1YzI2MTY1NjUxMWE0OGRmODYxN2Q4ZmE4YmFiZGQ2MTYzZjk",
+      "review_observation": "Search returned the recipe-specific primary-source extract with soup heading, vegetables, broth, vessel and boiling step. Full PDF fetch remained unavailable."
+    },
+    {
+      "ref": "reviewer-cream-manufacturing",
+      "url": "https://dairyprocessinghandbook.tetrapak.com/chapter/pasteurized-and-esl-dairy-products",
+      "review_observation": "Directly opened original industry handbook. Whipping-cream production begins with milk separation and fat standardization, then pasteurization/chilling; supports exact source material and distinction from fermented cream."
+    },
+    {
+      "ref": "reviewer-floor-workflow",
+      "url": "https://www.vileda.co.uk/cleaning-tips/how-to-mop-floors-effectively",
+      "review_observation": "Independently retrieved indexed manufacturer instruction to use broom or vacuum for loose dirt before mopping; supports both bounded role alternatives and sequence."
+    }
+  ],
+  "sense_limits": [
+    "Compas means the drawing instrument here, not a navigation compass.",
+    "Raportor means the angle-measuring instrument here, not a reporting person; raportoare is the neuter plural.",
+    "Taburet includes a primary seat and specialized piano-seat/footstool uses; the board uses the primary seating sense.",
+    "Mătură means the cleaning tool; accent-insensitive input also accepts the identical-looking verb form.",
+    "Cratiță is a distinct low-sided cooking vessel, not imported as an alias for Oală.",
+    "No hidden Contexto round is proposed for these new nodes.",
+    "Smântână remains the existing fermented sour-cream owner. The new qualified whipping cream never owns bare smântână, smântână dulce, or ready-whipped Frișcă.",
+    "Removing de8676 corrects the old false fermented-cream-to-Frișcă relation. The new cream→Frișcă link names its correct nonfermented source.",
+    "The redundant Echer→Riglă used_together reciprocal is omitted. Sweeps_into/collects_from and seat_for/played_from encode distinct directional roles already stated by their labels; they are not symmetric aliases.",
+    "Mătură also has botanical senses; board context selects the common cleaning-tool meaning."
+  ],
+  "blockers": [],
+  "limits": [
+    "This accepts graph proposal bytes only. Board critique, prospective eligibility, six-game impact and full integration remain separate gates.",
+    "The added cream→Diplomat edge truthfully models an ingredient but may create a one-pair shortcut for some seed sets; raw Diplomat round has therefore been held rather than weakening this fact.",
+    "Prior exact source observations for unchanged nodes/edges were retained; changed relations, new links, new cream node/forms and removal received fresh review.",
+    "Salience and strength are editorial parameters, not measured frequencies. No hidden Contexto targets or human playtesting are approved.",
+    "Some manufacturer pages were verified via indexed primary-source passages due direct-fetch limitations; those access limits are recorded per source."
+  ]
+}

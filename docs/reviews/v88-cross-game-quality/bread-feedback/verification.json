@@ -1,0 +1,37 @@
+{
+  "phase": "final V88 bread feedback evidence",
+  "tests_source_sha256": "b8709f8acaee379d369d1d8a1e74099c496d54acaebb2f30ee6f17a0cfa7409b",
+  "policy_source_sha256": "961aece7245e2772b8d36f9c3181c1150c8f6a22c4c72a3000fd6616ac9cacb8",
+  "runs": [
+    {
+      "log": "bread-focused.log.gz",
+      "decoded_sha256": "98aa4215ec8a75dbbaedf401341a513274290cd7401cee6bb815b038e289fe66",
+      "archive_sha256": "f2a8257b23135e8e53856fb3a3881b5f136efd87744be687f6dc725125a74d71",
+      "passed": 83,
+      "failed": 1,
+      "reported_seconds": 9.96
+    },
+    {
+      "log": "bread-focused-final.log.gz",
+      "decoded_sha256": "2963c080eaf15eb33f54f8ba947759f6f4106d0f0d10bcff7a1ae7e80667d24d",
+      "archive_sha256": "f4395efb2637493b47f14adab09eaee350232822791be0a08df92ea6b98a0118",
+      "passed": 8,
+      "failed": 0,
+      "reported_seconds": 1.18
+    },
+    {
+      "log": "bread-isolated.log.gz",
+      "decoded_sha256": "b580870c623a9642934da1a123eb4b301e7f543dd1a932a6d368662e7d940da2",
+      "archive_sha256": "73f7c23d5d7c8b047eaa824e0abd8a0137fe8e4582295735570db9bfe66e99fa",
+      "passed": null,
+      "failed": null,
+      "reported_seconds": null
+    }
+  ],
+  "isolated_impact_sha256": "5e39162a9e9ed47942d082e4170959b89236efd3219eef119d77a1714465c227",
+  "notes": [
+    "Initial mixed84-case run had one evidence-test schema assumption; product tests passed.",
+    "Final eight cases enforce exact proposal decision/hash, forms/identity/repeats/privacy/exact wins and closed native/projection scope.",
+    "Isolated pre-graph capture:239 requests, only one reviewedtarget changes;238 exact. Final graph feedback movement is reported separately."
+  ]
+}

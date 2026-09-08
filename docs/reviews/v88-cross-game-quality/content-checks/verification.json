@@ -1,0 +1,91 @@
+{
+  "schema": "v88-content-checks-v1",
+  "frozen_at_utc": "2026-09-08T12:47:47.829266+00:00",
+  "baseline_commit": "2878417ed43aaf790badfa09297ea122121b9449",
+  "sources": {
+    "tests/test_v88_everyday_graph.py": "b6c3dd3284a7d9b92b0cea194acf2d38820d79fbbffda5e3cec7262cbb763a71",
+    "tests/content_history.py": "03e495ccfde06efe865eec3af11468a6b642907271fb72fde93a12b0a83ce82b",
+    "tests/current_content.py": "47603509741186cfc156ed7dc98d3bab588066dbed5e7e264ed092051eeeafa5",
+    "tests/test_v86_preparation_graph.py": "1409e4bea77b76d966d3f4ad218fdeb20d9ee08a33326a03164cb291ce4b2d67",
+    "tests/test_v87_snack_graph.py": "16f3d3ac300b9c1e9ec4e03951f731ecd2181c2d739ba87a90067cffc21641df",
+    "scripts/everyday_graph_v88_data.py": "5fa229dd7332b489f509ba9b4f6b7b1e13f71954a6ce86999cc31d69d528a249",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "ba46d827dbe6e001a10bdd801d396abd67dfb4245c48b48b16024bf468c72d65",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "961aece7245e2772b8d36f9c3181c1150c8f6a22c4c72a3000fd6616ac9cacb8",
+    "cat_de_roman_esti/wordgames/lant.py": "cf22b4ff5dbb2d99f80ccdbb3e4c886751d0030c5cf6402dd993f1be2334f78b"
+  },
+  "artifacts": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "4c7030bd86e966162f4ac51ef00cf3bb649ff7a9d59c8c34e180cb7ff53e1636",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "b19a53983a1b4555c700f717033bb61b66aea9ea2dce643a7df0cf1a31e2c764",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "1c1613cd4f1e59c2b8d68ded9b071b1f812198f50aca528a3785fef34fad90b8",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "d2fbb9f550a05b6b128431ee55787b2b156846887f0bc8ce1908f09e6683b951"
+  },
+  "artifact_delta_sha256": "b652d5db26d43e4e42005522bf2c318a9c91a416ec4613a04641fcb11a6653e5",
+  "checks": [
+    {
+      "path": "content-checks/typed-initial.log.gz",
+      "decoded_sha256": "33696ff1ecf0fb423575b090bf2d43f01c9173bf189887ff3c1410451cae2243",
+      "archive_sha256": "4f2abf53354d460e49b9eaa97da374d89b1774aec42d4db9a4f6af62e8a32aac",
+      "selected": 50,
+      "passed": 23,
+      "failed": 27,
+      "deselected": 8,
+      "note": "New invalid-move assertions wrongly expected complete state in a compact error response;26 such cases failed. One projection-retirement assertion ran before the pending source change."
+    },
+    {
+      "path": "content-checks/typed-followup.log.gz",
+      "decoded_sha256": "ab4fd16d8d525fecaa54a437484d000e341431b02741e8cbd2aa77b6b5e45d1d",
+      "archive_sha256": "3bab3903369fc37ef0403555b56c987bc6a50a8553191cb6e768d5528fd87901",
+      "selected": 49,
+      "passed": 49,
+      "failed": 0,
+      "deselected": 9,
+      "note": "Read authoritative GET state for failed moves; pending projection/inverse/public cases excluded."
+    },
+    {
+      "path": "content-checks/projections-final.log.gz",
+      "decoded_sha256": "81dfef53a6e9dc574b3daed5e03587e196c3d86aff0fe021c08d5ba88ecb6a19",
+      "archive_sha256": "346077ee96502a5a84287a3fd004294c906c1f260dc87d4c211f1808ecf7de96",
+      "selected": 2,
+      "passed": 2,
+      "failed": 0,
+      "deselected": 57,
+      "note": "Exact two projection retirements and sole audit-representative replacement verified after source change."
+    },
+    {
+      "path": "content-checks/compatibility-final.log.gz",
+      "decoded_sha256": "67de9fc6e0a0d624fb6ebcdf9d18e93d45e01b3413564c6414115d1ae6ae303a",
+      "archive_sha256": "f3f9177e28c425cb254cd9da3c464affead11df85742d92fa6fe21f125876f28",
+      "selected": 285,
+      "passed": 282,
+      "failed": 3,
+      "deselected": 0,
+      "note": "All historical/generic and public-journey checks passed. Three new inverse assertions wrongly serialized pack/rankings/derived with KG indentation2 rather than their actual indentation1."
+    },
+    {
+      "path": "content-checks/graph-final.log.gz",
+      "decoded_sha256": "d8f127193d3625e72b3383ba19f346a9218587dfc18ff4e48d1c51dd7b8ec186",
+      "archive_sha256": "c92f4817bf4f27931215a27a3a87693d46feb73b8dc151324ce7ee768b931887",
+      "selected": 59,
+      "passed": 59,
+      "failed": 0,
+      "deselected": 0,
+      "note": "Complete new suite after correcting inverse serialization format; includes exactfour-artifact reconstruction/tamper checks and3public journeys."
+    }
+  ],
+  "final_new_suite": {
+    "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_v88_everyday_graph.py -q -o addopts=",
+    "exit_code": 0,
+    "passed": 59,
+    "seconds": 6.67
+  },
+  "focused_compatibility": {
+    "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_v88_everyday_graph.py tests/test_v86_preparation_graph.py tests/test_v87_snack_graph.py tests/test_wordgames_contexto.py tests/test_v33_basic_words.py tests/test_v47_contexto_pending_gate.py tests/test_v54_people_morphology.py tests/test_v80_clatite_target.py tests/test_v83_food_feedback.py -q -o addopts=",
+    "initial_exit_code": 1,
+    "initial_passed": 282,
+    "initial_failed": 3,
+    "seconds": 95.43,
+    "resolution": "Three new byte-serialization assertions corrected to retain the existing one-space artifact format; all59new cases passed afterward. Other226historical/generic cases passed in the focused run. Full integration remains the root gate."
+  },
+  "ruff": "All five edited test/helper files passed ruff check; no runtime or fixture edits by this test lane."
+}

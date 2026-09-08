@@ -148,6 +148,9 @@ class LantSession:
     # per-position map, so it cannot retain O(n²) tuple keys in the session). It resets
     # only when a fresh game is created.
     hint_requests: int = 0
+    # One already-earned payload for the current position, never a per-node history.
+    # Moves/undo discard it; reading state never computes or consumes more help.
+    earned_hint: dict | None = None
     # Directional feedback (usor + normal) remembers only whether the last two real
     # hops failed to improve directed distance. The capped scalar cannot retain route
     # history.
@@ -473,6 +476,8 @@ def _state(game_id: str, session: LantSession) -> dict:
             session.difficulty == "usor" and session.non_improving_moves >= 2
         ),
     }
+    if session.earned_hint is not None:
+        state["earned_hint"] = session.earned_hint
     if session.daily is not None:
         state["daily"] = session.daily
     if session.category:
@@ -841,6 +846,7 @@ class MoveView(ContractAPIView):
             )
 
         session.chain.append(guess)
+        session.earned_hint = None
         # hint_requests measures help consumed this session, not chain position: a move
         # never resets it (persists until a new game).
         session.won = guess == session.target
@@ -929,6 +935,7 @@ class UndoView(ContractAPIView):
         # Never step below the start.
         if len(session.chain) > 1:
             session.chain.pop()
+            session.earned_hint = None
             # hint_requests measures help consumed this session, not chain position:
             # undo never resets it (persists until a new game).
             session.won = session.current == session.target
@@ -936,14 +943,24 @@ class UndoView(ContractAPIView):
         return Response(_state(game_id, session))
 
 
+def _earned_hint_response(session: LantSession, payload: dict) -> Response:
+    """Retain only help explicitly requested here; GET may repeat, never escalate it."""
+    if not session.won:
+        session.earned_hint = payload
+    return Response(payload)
+
+
 class HintView(ContractAPIView):
     @extend_schema(operation_id="lant_hint", tags=["lant"])
     @_atomic_session
     def post(self, request, game_id: str, session: LantSession):
         if session.won:
-            return Response({"hint": None, "message": "Ai ajuns deja la tinta."})
+            return _earned_hint_response(
+                session, {"hint": None, "message": "Ai ajuns deja la tinta."}
+            )
         if session.moves >= _MAX_MOVES:
-            return Response(
+            return _earned_hint_response(
+                session,
                 {
                     "hint": None,
                     "stage": "backtrack",
@@ -967,7 +984,8 @@ class HintView(ContractAPIView):
             # target — naming only a node they have already visited (never a hidden one).
             for nid in reversed(session.chain):
                 if nid != cur and dist_to_target.get(nid) is not None:
-                    return Response(
+                    return _earned_hint_response(
+                        session,
                         {
                             "hint": None,
                             "stage": "backtrack",
@@ -977,7 +995,8 @@ class HintView(ContractAPIView):
                             ),
                         }
                     )
-            return Response(
+            return _earned_hint_response(
+                session,
                 {"hint": None, "message": "Nicio scurtatura de aici — incearca sa revii."}
             )
 
@@ -1008,7 +1027,8 @@ class HintView(ContractAPIView):
                     for node_id in reversed(session.chain[:-1])
                     if node_id in prior_shortest
                 )
-                return Response(
+                return _earned_hint_response(
+                    session,
                     {
                         "hint": None,
                         "stage": "backtrack",
@@ -1029,7 +1049,8 @@ class HintView(ContractAPIView):
             }
             if asks_here == 1:
                 relation = _short_relation(cur, best)
-                return Response(
+                return _earned_hint_response(
+                    session,
                     {
                         **common,
                         "stage": "direction",
@@ -1054,7 +1075,8 @@ class HintView(ContractAPIView):
                     if len(alternatives) == 1
                     else "Variante utile: "
                 )
-                return Response(
+                return _earned_hint_response(
+                    session,
                     {
                         **common,
                         "stage": "alternatives",
@@ -1065,7 +1087,8 @@ class HintView(ContractAPIView):
                         + ".",
                     }
                 )
-            return Response(
+            return _earned_hint_response(
+                session,
                 {
                     **common,
                     "stage": "hop",
@@ -1075,7 +1098,9 @@ class HintView(ContractAPIView):
                 }
             )
 
-        return Response({"hint": None, "message": "Niciun indiciu disponibil."})
+        return _earned_hint_response(
+            session, {"hint": None, "message": "Niciun indiciu disponibil."}
+        )
 
 
 _BASE = "api/wordgames/lant"

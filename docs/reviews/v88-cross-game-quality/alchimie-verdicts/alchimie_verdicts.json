@@ -1,0 +1,75 @@
+{
+ "game": "alchimie",
+ "mode": "gate",
+ "batch": {
+  "version": 2,
+  "mode": "gate",
+  "input_ids": [
+   "al_gastronomie_107"
+  ],
+  "projection_audit_sha256": "646d60abf1815a22453252a80e6f87c73b3b5abb9e58ab78aa1d4787870dbaf0"
+ },
+ "verdicts": {
+  "al_gastronomie_107": "promote"
+ },
+ "perItem": [
+  {
+   "id": "al_gastronomie_107",
+   "game": "alchimie",
+   "final": "promote",
+   "analyst": "promote",
+   "verifier": "promote",
+   "verified": true,
+   "verifier_lost": false,
+   "review_binding": "sha256:11f9dc3ce06653f25f3b2a56cf38113a34d43c0926e49d22f08ad2fb92d695b5",
+   "policy": "unanimous-promote",
+   "analyst_review": {
+    "id": "al_gastronomie_107",
+    "game": "alchimie",
+    "verdict": "promote",
+    "review_binding": "sha256:11f9dc3ce06653f25f3b2a56cf38113a34d43c0926e49d22f08ad2fb92d695b5",
+    "projection_audit_sha256": "646d60abf1815a22453252a80e6f87c73b3b5abb9e58ab78aa1d4787870dbaf0",
+    "rationale": "Promote the normal Cremșnit round. A1–A7: the familiar named pastry and five ordinary food ingredients have independent recipe/recognition support; the target is new to Alchimie, with no adult framing, regional claim or synonym-as-seed shortcut. E1: Făină, Apă, Lapte, Vanilie and Zahăr are category-coherent, and every seed participates in the live sparse book. E2: four live productive openings include two intuitive ideas, flour+water→dough and milk+vanilla→vanilla cream. E3/E4: independently preparing dough and cream, then assembling them, gives an inferable three-action target; none of the ten seed pairs gives the answer directly. E5 and exact projection gate: the audit binds five recipe pairs, three routes, eight total concepts and one result per pair; every route has par three with minimum/mean edge strength 0.8, all bounds true and zero live opening failures. The dossier broad closure of 167 concepts and six broad openings is not the played recipe book: unrelated oil/biscuit/cake/ice-cream branches are excluded. The same final proposed graph was independently exercised with ten opening probes and three perfect private route/resume/repeat journeys; all won at 1000 and all 13 sessions were removed. The imported audit reproduces those exact useful recipes. All dossier lints are empty and current pack/KG/rubric/runtime/audit bindings match. Limits: Aluat abstracts pastry sheets, and sugar+milk or sugar+vanilla are loose ingredient associations, not complete recipes; this does not claim the five seeds alone cook authentic Cremșnit. The bounded assembly arc remains fair within this association game. Diplomat is excluded and its earlier mechanical screen remains history, not an approved second round.",
+    "sources": [
+     "https://jamilacuisine.ro/prajitura-cremsnit-pas-cu-pas-reteta-video/",
+     "https://www.lauralaurentiu.ro/retete-culinare/prajituri-torturi/cremsnit-crempita-cremes-de-casa.html"
+    ]
+   },
+   "verifier_review": {
+    "id": "al_gastronomie_107",
+    "game": "alchimie",
+    "verdict": "promote",
+    "review_binding": "sha256:11f9dc3ce06653f25f3b2a56cf38113a34d43c0926e49d22f08ad2fb92d695b5",
+    "rationale": "A1–A4: five familiar pantry ingredients and a recognizable pastry; independently opened original Cremșnit and puff-pastry recipes support cream/sheets and flour/water associations. This is associative crafting, not a sufficient five-ingredient cooking instruction. A5/A6: no boundary trigger, no prior Alchimie target Cremșnit and no old record sharing four seeds. E1: flour/water naturally suggest dough; milk/vanilla suggest vanilla cream; sugar participates in two alternative cream openings, so every seed has a useful role. E2: the actual sparse book has four productive openings, of which Flour+Water→Aluat and Milk+Vanilla→Cremă de vanilie are clearly inferable. Sugar+Milk and Sugar+Vanilla→that cream are weaker associative shortcuts, explicitly accepted because they converge on the same already legible component rather than adding unrelated output. E3/E4: making the two components then combining Aluat+Cremă de vanilie→Cremșnit is a satisfying three-action assembly; the target is neither a seed/alias nor an immediate one-pair result. E5: five recipe pairs, eight projected concepts, three route variants of the same assembly and max one result per pair remain narrow. The generic dossier closure of 167 and six generic openings are not the served book. I independently reproduced the exact audit using the current runtime, verified current pack/KG bytes and dossier binding, and inspected all five sparse pairs/three routes. All audit bounds and strict dossier lints pass. Promote on these exact bindings; ingredient incompleteness and the two weaker cream cues remain editorial limits. This is agent review, not human playtesting. The rubric has E1–E5; no invented E6 criterion is claimed.",
+    "sources": [
+     "https://jamilacuisine.ro/prajitura-cremsnit-pas-cu-pas-reteta-video/",
+     "https://jamilacuisine.ro/aluat-de-foietaj-pas-cu-pas-reteta-video/"
+    ],
+    "projection_audit_sha256": "646d60abf1815a22453252a80e6f87c73b3b5abb9e58ab78aa1d4787870dbaf0"
+   },
+   "analyst_projection_audit_sha256": "646d60abf1815a22453252a80e6f87c73b3b5abb9e58ab78aa1d4787870dbaf0",
+   "verifier_projection_audit_sha256": "646d60abf1815a22453252a80e6f87c73b3b5abb9e58ab78aa1d4787870dbaf0"
+  }
+ ],
+ "coverage": {
+  "total": 1,
+  "verified": 1,
+  "unverifiedClean": 0,
+  "verifiersLost": 0,
+  "lost": 0
+ },
+ "provenance": {
+  "analyst": {
+   "path": "docs/reviews/v88-cross-game-quality/alchimie-analyst.json",
+   "sha256": "sha256:2cefbbadda75edcd03a73911a8614aed4576204554226374cbea45f805771bdf",
+   "reviewer": "v88-independent-lant-quality-analyst",
+   "role": "analyst"
+  },
+  "verifier": {
+   "path": "docs/reviews/v88-cross-game-quality/alchimie-verifier.json",
+   "sha256": "sha256:0a5d8d90c3baa29ebd1334baef0ce5f42c2e2b70ea6dd1c1cb0faa5b274524b9",
+   "reviewer": "v88_independent_factual_and_projection_verifier",
+   "role": "verifier"
+  }
+ }
+}

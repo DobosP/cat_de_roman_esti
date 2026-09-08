@@ -31,10 +31,10 @@ import { useRecordScore } from "../hooks/useRecordScore";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useSavedGameResume } from "../hooks/useSavedGameResume";
 import {
-  createContextoActionOwner,
-  recoverOwnedContextoAction,
-  type ContextoActionTicket,
-} from "../contextoActionRecovery.mjs";
+  createGameActionOwner,
+  recoverOwnedGameAction,
+  type GameActionTicket,
+} from "../gameActionRecovery.mjs";
 import { gameByKey } from "../games";
 import { categoryColor, categoryLabel } from "../categories";
 import { CategoryPicker } from "../components/CategoryPicker";
@@ -221,7 +221,7 @@ export default function CaldRece({
   const unconfirmedAction = useRef(false);
   const recordOnce = useRecordScore("contexto");
   const active = useActiveGame("contexto");
-  const actionOwner = useMemo(() => createContextoActionOwner(active), [active]);
+  const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
 
   useEffect(() => () => actionOwner.invalidate(), [actionOwner]);
 
@@ -367,7 +367,7 @@ export default function CaldRece({
     return ticket;
   }, [actionOwner]);
 
-  const mayAdoptAction = useCallback((ticket: ContextoActionTicket) => {
+  const mayAdoptAction = useCallback((ticket: GameActionTicket) => {
     if (!actionOwner.isCurrent(ticket)) return false;
     if (!actionOwner.owns(ticket)) {
       setActionSync({ gameId: ticket.gameId, kind: "changed" });
@@ -377,10 +377,10 @@ export default function CaldRece({
   }, [actionOwner]);
 
   const reconcileAction = useCallback(async (
-    ticket: ContextoActionTicket,
+    ticket: GameActionTicket,
     previous: ContextoState,
   ) => {
-    const outcome = await recoverOwnedContextoAction(
+    const outcome = await recoverOwnedGameAction(
       actionOwner, ticket, contextoApi.getGame,
       (error) => error instanceof ApiError && error.status === 404,
     );
