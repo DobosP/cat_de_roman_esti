@@ -1,0 +1,56 @@
+{
+  "reviewer": "v90_critique_independent",
+  "decision": "accept_documentation_layout_relocation",
+  "reviewed_at_utc": "2026-09-08T19:47:39.978458+00:00",
+  "candidate_commit": "0039b1e5c38d6b8bd4a59e99c600dea7da5ec440",
+  "baseline_main": "190d7fdb86487c641d8a781ef7a5ce21f2b98031",
+  "relocation": {
+    "kind": "Documentation-only relocation; no discarded content",
+    "original_commit": "0039b1e5c38d6b8bd4a59e99c600dea7da5ec440",
+    "original_path": "FINAL_VERIFIER.md",
+    "preserved_path": "docs/reviews/v90-household-discovery-and-critique-gates/INITIAL_VERIFIER_NOTE.md",
+    "sha256": "9d238a46a220f492a10c8e5af6c2e1c33e616fa752d835ebf9a75b6205e26373",
+    "canonical_final_note": "docs/reviews/v90-household-discovery-and-critique-gates/FINAL_VERIFIER.md",
+    "canonical_final_note_sha256": "32910c21f32336e1d809db5f264ee406866067d54a1878bab0e9663987023682",
+    "reason": "An earlier verifier Markdown write landed at the repository root; preserve its exact bytes beside the canonical final evidence. The prior audit-input manifest remains an immutable pre-relocation snapshot. Runtime, artifacts, tests and gate receipts are unchanged."
+  },
+  "relocation_receipt_sha256": "bf9d127f17f7ff6f3aced1ed048e4de3a6c3e13183ecf88dc22170b06a785fc7",
+  "original_git_blob_equals_preserved_bytes": true,
+  "stray_root_note_absent": true,
+  "canonical_final_note_unchanged": true,
+  "immutable_pre_relocation_evidence": {
+    "audit-input-manifest.json": "bd0fe88b82a6a9f716b2084c78e8d828b407dcc295a171ee7aa8b781ce2e65db",
+    "FINAL_INTEGRATION_AUDIT.json": "ad57ad2836f4c27fe2082d36f82787c3bd158945382e9f0397d9beb53866eba3",
+    "verification.json": "180924efa954e366c5ac1ec02a6ff93f7aceb3ddb81308d1baec7a3ed15f3685",
+    "integration-freeze.json": "9952391f2f4799c068cb983a55629b13037ecdc01276517a4f7c53deae0fda5a"
+  },
+  "all16_gate_archives_identical_to_candidate_commit": true,
+  "all1635_protected_inputs_unchanged": true,
+  "pre_audit_pair_manifest_sha256": "0e9aa42040e47bc15215e0e5a37d350588c7979b06a51c561c8df5d4dccf454f",
+  "manifest_category_counts": {
+    "sources": 24,
+    "artifacts": 24,
+    "decision_files": 7,
+    "documentation": 8,
+    "review_files": 261
+  },
+  "manifest_present": 324,
+  "manifest_deleted": 14,
+  "manifest_total_bindings": 338,
+  "complete_baseline_delta_covered": true,
+  "changes_since_candidate_are_documentation_only": [
+    "FINAL_VERIFIER.md",
+    "docs/reviews/v90-household-discovery-and-critique-gates/INITIAL_VERIFIER_NOTE.md",
+    "docs/reviews/v90-household-discovery-and-critique-gates/review-manifest.json",
+    "docs/reviews/v90-household-discovery-and-critique-gates/verifier-note-relocation.json"
+  ],
+  "main_clean_and_unmerged": true,
+  "findings": [],
+  "historical_path_note": "The immutable audit-input manifest and FINAL_INTEGRATION_AUDIT remain correct pre-relocation evidence: their root FINAL_VERIFIER.md path is now preserved byte-for-byte at INITIAL_VERIFIER_NOTE.md. This addendum binds the relocation without rewriting the earlier snapshot or approval.",
+  "remaining_root_actions": [
+    "Add this new LAYOUT_REVIEW.md/json pair to the final manifest.",
+    "Complete the docs-only commit and final docs/whitespace checks.",
+    "Recheck owner instructions and reviewed state before local main merge."
+  ],
+  "tests_research_or_source_edits": false
+}
