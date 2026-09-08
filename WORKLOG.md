@@ -693,3 +693,14 @@ Investigate any effect of approved warnings on ranking before implementing the c
 Alchimie lost-action behavior needs a real baseline reproduction before a recovery fix.
 The local recurring loop remains ACTIVE. No push, deployment or external contact occurred.
 Clean up only the verified-merged V89 branch/worktree/scratch after this record is merged.
+
+## V90 baseline checkpoint (2026-09-08)
+
+Valid until: V90 changes the bound baseline — then treat as history.
+
+V90 starts above190d7fd with eight correctly directed household profiles,19 fresh
+unknown-input lookups and10 private BFF first guesses. Only Mop is already an approved
+Contexto target. The new source-bound kickoff separates necessary incoming counts from
+union adjacency and quality approval. It scopes household meaning/discovery, a necessary
+C3 diagnostic and actual Alchimie failure reproduction, with explicit all-six-game checks.
+No V90 source/content change, new word, edge or promotion is claimed by this kickoff.

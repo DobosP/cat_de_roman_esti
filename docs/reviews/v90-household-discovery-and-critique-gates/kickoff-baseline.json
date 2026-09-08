@@ -1,0 +1,430 @@
+{
+  "phase": "V90 kickoff only; no source/content change or promotion",
+  "date": "2026-09-08",
+  "baseline_commit": "190d7fdb86487c641d8a781ef7a5ce21f2b98031",
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "ea207d65a1846d2f9bb2945ca9320a8e5e7bdc5e9fe8c31113aaf4f749fdc3d6",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "4bd3cd515d21627fe42d07149bdf78951164ebfaa30df52fd1259ce26b8470d9",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "753c22890e14b8b049f62d249ee92a06b6631fb4589db97dbebd003eaf18b5fd",
+    "cat_de_roman_esti/wordgames/alchimie.py": "370a4b847de19f4256ada16d7da035a3be9da15ac90d4f3e0a6e70c5e8131712",
+    "scripts/critique_pack.py": "8ed430e2d44716e5a3af49ec2fa1d344dd6f50086c3746f43b89c8c1b97b5916",
+    "frontend/src/screens/Alchimie.tsx": "c855ebca0b4a9c1dc96b10ddbe6639d24fa18a644e2eb10887b44454499ddba7",
+    "frontend/src/gameActionRecovery.mjs": "b73851fd616aed6489139cd800bad2e8e6ab3480664470e765fd044ba9eb6267"
+  },
+  "directed_profiles": [
+    {
+      "label": "Făraș",
+      "id": "n_v31_cleaning_floor_faras",
+      "already_approved_target": false,
+      "incoming_non_distractor_ids": [
+        "n_v24_home_surfaces_podea",
+        "n_v31_cleaning_floor_aspirator",
+        "n_v88_cleaning_matura"
+      ],
+      "incoming_count": 3,
+      "numeric_incoming_floor_pass": false,
+      "outgoing_ids": [
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_floor_mop",
+        "n_v88_cleaning_matura"
+      ],
+      "union_adjacency_count_not_c3": 5,
+      "reachable": 2343,
+      "responsive": 250
+    },
+    {
+      "label": "Mop",
+      "id": "n_v31_cleaning_floor_mop",
+      "already_approved_target": true,
+      "incoming_non_distractor_ids": [
+        "n_v24_home_surfaces_podea",
+        "n_v31_cleaning_floor_faras",
+        "n_v31_cleaning_supply_detergent",
+        "n_v31_cleaning_water_galeata",
+        "n_v88_cleaning_matura"
+      ],
+      "incoming_count": 5,
+      "numeric_incoming_floor_pass": true,
+      "outgoing_ids": [
+        "n_v31_cleaning_floor_aspirator",
+        "n_v31_cleaning_water_galeata"
+      ],
+      "union_adjacency_count_not_c3": 6,
+      "reachable": 2343,
+      "responsive": 627
+    },
+    {
+      "label": "Aspirator",
+      "id": "n_v31_cleaning_floor_aspirator",
+      "already_approved_target": false,
+      "incoming_non_distractor_ids": [
+        "n_v24_home_surfaces_podea",
+        "n_v31_cleaning_floor_mop",
+        "n_v88_cleaning_matura"
+      ],
+      "incoming_count": 3,
+      "numeric_incoming_floor_pass": false,
+      "outgoing_ids": [
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_floor_faras"
+      ],
+      "union_adjacency_count_not_c3": 5,
+      "reachable": 2343,
+      "responsive": 358
+    },
+    {
+      "label": "Burete de vase",
+      "id": "n_v31_cleaning_dishes_burete_vase",
+      "already_approved_target": false,
+      "incoming_non_distractor_ids": [
+        "n_v24_action_home_a_spala",
+        "n_v31_cleaning_floor_aspirator",
+        "n_v31_cleaning_floor_faras",
+        "n_v31_cleaning_supply_detergent"
+      ],
+      "incoming_count": 4,
+      "numeric_incoming_floor_pass": false,
+      "outgoing_ids": [
+        "n_v31_cleaning_supply_detergent",
+        "n_v31_cleaning_water_galeata"
+      ],
+      "union_adjacency_count_not_c3": 5,
+      "reachable": 2343,
+      "responsive": 332
+    },
+    {
+      "label": "Mătură",
+      "id": "n_v88_cleaning_matura",
+      "already_approved_target": false,
+      "incoming_non_distractor_ids": [
+        "n_v31_cleaning_floor_faras"
+      ],
+      "incoming_count": 1,
+      "numeric_incoming_floor_pass": false,
+      "outgoing_ids": [
+        "n_v24_home_surfaces_podea",
+        "n_v31_cleaning_floor_aspirator",
+        "n_v31_cleaning_floor_faras",
+        "n_v31_cleaning_floor_mop"
+      ],
+      "union_adjacency_count_not_c3": 4,
+      "reachable": 2343,
+      "responsive": 81
+    },
+    {
+      "label": "Găleată",
+      "id": "n_v31_cleaning_water_galeata",
+      "already_approved_target": false,
+      "incoming_non_distractor_ids": [
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_floor_mop",
+        "n_v4gas_apa"
+      ],
+      "incoming_count": 3,
+      "numeric_incoming_floor_pass": false,
+      "outgoing_ids": [
+        "n_v31_cleaning_floor_mop",
+        "n_v31_cleaning_supply_detergent"
+      ],
+      "union_adjacency_count_not_c3": 4,
+      "reachable": 2343,
+      "responsive": 1488
+    },
+    {
+      "label": "Detergent",
+      "id": "n_v31_cleaning_supply_detergent",
+      "already_approved_target": false,
+      "incoming_non_distractor_ids": [
+        "n_v24_action_home_a_spala",
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_water_galeata"
+      ],
+      "incoming_count": 3,
+      "numeric_incoming_floor_pass": false,
+      "outgoing_ids": [
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_floor_mop"
+      ],
+      "union_adjacency_count_not_c3": 4,
+      "reachable": 2343,
+      "responsive": 624
+    },
+    {
+      "label": "Taburet",
+      "id": "n_v88_home_taburet",
+      "already_approved_target": false,
+      "incoming_non_distractor_ids": [
+        "n_v3muz_pian"
+      ],
+      "incoming_count": 1,
+      "numeric_incoming_floor_pass": false,
+      "outgoing_ids": [
+        "n_v24_home_seating_canapea",
+        "n_v24_home_seating_fotoliu",
+        "n_v24_home_seating_scaun",
+        "n_v3muz_pian"
+      ],
+      "union_adjacency_count_not_c3": 4,
+      "reachable": 2343,
+      "responsive": 968
+    }
+  ],
+  "unknown_inputs": [
+    {
+      "word": "murdărie",
+      "native_owner": null,
+      "projection_id": null
+    },
+    {
+      "word": "firimituri",
+      "native_owner": null,
+      "projection_id": null
+    },
+    {
+      "word": "păr",
+      "native_owner": null,
+      "projection_id": null
+    },
+    {
+      "word": "păr de animale",
+      "native_owner": null,
+      "projection_id": null
+    },
+    {
+      "word": "sac",
+      "native_owner": null,
+      "projection_id": null
+    },
+    {
+      "word": "sac de praf",
+      "native_owner": null,
+      "projection_id": null
+    },
+    {
+      "word": "filtru",
+      "native_owner": null,
+      "projection_id": null
+    },
+    {
+      "word": "curent",
+      "native_owner": null,
+      "projection_id": null
+    },
+    {
+      "word": "măturat",
+      "native_owner": null,
+      "projection_id": null
+    },
+    {
+      "word": "aspirare",
+      "native_owner": null,
+      "projection_id": null
+    },
+    {
+      "word": "pardoseală",
+      "native_owner": null,
+      "projection_id": null
+    },
+    {
+      "word": "parchet",
+      "native_owner": null,
+      "projection_id": null
+    },
+    {
+      "word": "gresie",
+      "native_owner": null,
+      "projection_id": null
+    },
+    {
+      "word": "covoraș",
+      "native_owner": null,
+      "projection_id": null
+    },
+    {
+      "word": "scame",
+      "native_owner": null,
+      "projection_id": null
+    },
+    {
+      "word": "cârpă",
+      "native_owner": null,
+      "projection_id": null
+    },
+    {
+      "word": "mâner",
+      "native_owner": null,
+      "projection_id": null
+    },
+    {
+      "word": "curățenie",
+      "native_owner": null,
+      "projection_id": null
+    },
+    {
+      "word": "gunoi",
+      "native_owner": null,
+      "projection_id": null
+    }
+  ],
+  "actual_bff_private_first_guesses": [
+    {
+      "word": "Praf",
+      "target_label": "Mătură",
+      "guess": {
+        "id": "ctxp_81703160cad7893fa1c9",
+        "label": "Praf",
+        "distance": 9,
+        "rank": 2256,
+        "temperature": "Inghetat",
+        "closeness": 4,
+        "attempt_number": 1
+      },
+      "attempts": 1,
+      "won": false
+    },
+    {
+      "word": "Praf",
+      "target_label": "Mop",
+      "guess": {
+        "id": "ctxp_81703160cad7893fa1c9",
+        "label": "Praf",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "attempts": 1,
+      "won": false
+    },
+    {
+      "word": "Covor",
+      "target_label": "Aspirator",
+      "guess": {
+        "id": "n_v24_home_textiles_covor",
+        "label": "Covor",
+        "distance": 4,
+        "rank": 36,
+        "temperature": "Cald",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "attempts": 1,
+      "won": false
+    },
+    {
+      "word": "Electricitate",
+      "target_label": "Aspirator",
+      "guess": {
+        "id": "n_v3sti_electricitate",
+        "label": "Electricitate",
+        "distance": 6,
+        "rank": 378,
+        "temperature": "Rece",
+        "closeness": 84,
+        "attempt_number": 1
+      },
+      "attempts": 1,
+      "won": false
+    },
+    {
+      "word": "Apă",
+      "target_label": "Aspirator",
+      "guess": {
+        "id": "n_v4gas_apa",
+        "label": "Apă",
+        "distance": 3,
+        "rank": 9,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "attempts": 1,
+      "won": false
+    },
+    {
+      "word": "Farfurie",
+      "target_label": "Burete de vase",
+      "guess": {
+        "id": "n_v30_kitchen_table_farfurie",
+        "label": "Farfurie",
+        "distance": 5,
+        "rank": 212,
+        "temperature": "Caldut",
+        "closeness": 91,
+        "attempt_number": 1
+      },
+      "attempts": 1,
+      "won": false
+    },
+    {
+      "word": "Apă",
+      "target_label": "Burete de vase",
+      "guess": {
+        "id": "n_v4gas_apa",
+        "label": "Apă",
+        "distance": 3,
+        "rank": 13,
+        "temperature": "Cald",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "attempts": 1,
+      "won": false
+    },
+    {
+      "word": "Chiuvetă",
+      "target_label": "Burete de vase",
+      "guess": {
+        "id": "n_v33_bathroom_fixture_chiuveta",
+        "label": "Chiuvetă",
+        "distance": 2,
+        "rank": 12,
+        "temperature": "Cald",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "attempts": 1,
+      "won": false
+    },
+    {
+      "word": "Scaun",
+      "target_label": "Taburet",
+      "guess": {
+        "id": "n_v24_home_seating_scaun",
+        "label": "Scaun",
+        "distance": 7,
+        "rank": 2189,
+        "temperature": "Inghetat",
+        "closeness": 7,
+        "attempt_number": 1
+      },
+      "attempts": 1,
+      "won": false
+    },
+    {
+      "word": "Tort Diplomat",
+      "target_label": "Frișcă",
+      "guess": {
+        "id": "n_v87_food_tort_diplomat",
+        "label": "Tort Diplomat",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "attempts": 1,
+      "won": false
+    }
+  ],
+  "limits": [
+    "The incoming count is necessary evidence, not recognition or quality approval.",
+    "Private target probes do not establish public selection or human enjoyment.",
+    "No V90 implementation, new words, graph links or rounds are delivered by kickoff."
+  ]
+}

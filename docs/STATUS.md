@@ -94,7 +94,8 @@ Mobile content: `sha256:f8f5c13f2cb302338f35adf38e311906856d24cb04f58592c77783a5
 
 - V90 starts household vocabulary and truthful directed-discovery work, a necessary
   incoming-neighbor critique floor, and an all-six-game review. Alchimie lost-action
-  behavior requires actual reproduction before choosing a fix. No V90 promotion yet.
+  behavior requires actual reproduction before choosing a fix. Its fresh kickoff binds
+  eight directed profiles, 19 unknown inputs and 10 private BFF probes. No V90 promotion yet.
 - The household screen finds 19/33 deliberately broad tested surfaces unrecognized,
   including murdărie/firimituri/pardoseală. This is a stress sample, not a player-frequency
   estimate. Electricitate→Aspirator remains cold378 while Apă is hot9; broader semantic
