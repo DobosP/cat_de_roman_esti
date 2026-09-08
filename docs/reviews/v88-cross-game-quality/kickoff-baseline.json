@@ -1,0 +1,291 @@
+{
+  "date": "2026-09-08",
+  "phase": "V88 kickoff baseline; no V88 gameplay/content changes yet",
+  "baseline_commit": "2878417ed43aaf790badfa09297ea122121b9449",
+  "runtime_baseline_commit": "fa8cffd4bc100eb867c992d346b4b93551a76bdd",
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "96d50f8b724b9d1d1ff5d02b5a9a206445d7d9edead778d6db173f00ac094bfa",
+    "cat_de_roman_esti/fixtures/games_pack.json": "536036f6d030be4e8750fb104325b67a9363535506d453ef8a0e0a824a3b63ab",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "53defb36ab442aee1135ae3dd0522559abe27234048f9accdfbd5c9fe75eccc3",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "f4e16944845311eeba231f866c5578a4f1de9ee40e08857cca575930a2bf1278",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "f0c346bff24fc821d56be1d41d15c7fca57c4473b637006679f712238a965ecf",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "da434a56703eaf2cbe5694c380fc27a3ee2edb9659c060bbb6ced2752d4020c6",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "8fc5829b07ae2bbcfcc4701c5539d35b09d3df5f2ccc25b19a2478bfcf938802",
+    "frontend/src/screens/Lant.tsx": "09b6f136ee5771560583f26e1205e4cc59c53deca1cf32e426c00c985e5ba217",
+    "scripts/build_review_artifact.py": "a8f8cd706cd15356a713b0042936b82e13f794ab10eebaf21c0b18d1409b4832"
+  },
+  "kg_counts": {
+    "nodes": 2406,
+    "edges": 9410,
+    "forms": 8603,
+    "puzzles": 180
+  },
+  "pack_meta": {
+    "pack_version": 1,
+    "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
+    "counts": {
+      "conexiuni": 232,
+      "contexto": 241,
+      "lant": 100,
+      "alchimie": 82
+    },
+    "id_high_water": {
+      "conexiuni": 361,
+      "contexto": 351,
+      "lant": 222,
+      "alchimie": 106
+    }
+  },
+  "ranking_counts": {
+    "total": 655,
+    "approved": 647,
+    "pilot_eligible": 485,
+    "by_game": {
+      "conexiuni": 232,
+      "contexto": 241,
+      "lant": 100,
+      "alchimie": 82
+    },
+    "eligible_by_game": {
+      "conexiuni": 74,
+      "contexto": 235,
+      "lant": 97,
+      "alchimie": 79
+    }
+  },
+  "derived_counts": {
+    "total": 336,
+    "by_game": {
+      "intrusul": 183,
+      "perechi": 153
+    },
+    "sources_by_game": {
+      "intrusul": 66,
+      "perechi": 51
+    },
+    "starter_by_game": {
+      "intrusul": 24,
+      "perechi": 26
+    }
+  },
+  "method": "Nine fresh in-process actual-BFF first guesses in isolated private target sessions, not public-selector journeys or human playtesting. Every session was deleted afterward.",
+  "observations": [
+    {
+      "guess": "Brioșă",
+      "target": "Pâine",
+      "target_id": "n_v4gas_paine",
+      "http_status": 200,
+      "response": {
+        "ok": true,
+        "won": false,
+        "attempts": 1,
+        "guess": {
+          "id": "n_v87_food_briosa",
+          "label": "Brioșă",
+          "distance": 4,
+          "rank": 424,
+          "temperature": "Rece",
+          "closeness": 82,
+          "attempt_number": 1
+        },
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #424."
+        }
+      }
+    },
+    {
+      "guess": "Chec",
+      "target": "Pâine",
+      "target_id": "n_v4gas_paine",
+      "http_status": 200,
+      "response": {
+        "ok": true,
+        "won": false,
+        "attempts": 1,
+        "guess": {
+          "id": "n_v87_food_chec",
+          "label": "Chec",
+          "distance": 3,
+          "rank": 193,
+          "temperature": "Caldut",
+          "closeness": 92,
+          "attempt_number": 1
+        },
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #193."
+        }
+      }
+    },
+    {
+      "guess": "Brioșă",
+      "target": "Zacuscă",
+      "target_id": "n_gas_zacusca",
+      "http_status": 200,
+      "response": {
+        "ok": true,
+        "won": false,
+        "attempts": 1,
+        "guess": {
+          "id": "n_v87_food_briosa",
+          "label": "Brioșă",
+          "distance": 3,
+          "rank": 206,
+          "temperature": "Caldut",
+          "closeness": 91,
+          "attempt_number": 1
+        },
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #206."
+        }
+      }
+    },
+    {
+      "guess": "Chec",
+      "target": "Zacuscă",
+      "target_id": "n_gas_zacusca",
+      "http_status": 200,
+      "response": {
+        "ok": true,
+        "won": false,
+        "attempts": 1,
+        "guess": {
+          "id": "n_v87_food_chec",
+          "label": "Chec",
+          "distance": 4,
+          "rank": 531,
+          "temperature": "Rece",
+          "closeness": 77,
+          "attempt_number": 1
+        },
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #531."
+        }
+      }
+    },
+    {
+      "guess": "tort",
+      "target": "Cremșnit",
+      "target_id": "n_v87_food_cremsnit",
+      "http_status": 200,
+      "response": {
+        "ok": true,
+        "won": false,
+        "attempts": 1,
+        "guess": {
+          "id": "ctxp_7de7b40dd74b4b0f44bf",
+          "label": "Tort",
+          "distance": 4,
+          "rank": 255,
+          "temperature": "Rece",
+          "closeness": 89,
+          "attempt_number": 1
+        },
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #255."
+        }
+      }
+    },
+    {
+      "guess": "Prăjitură",
+      "target": "Cremșnit",
+      "target_id": "n_v87_food_cremsnit",
+      "http_status": 200,
+      "response": {
+        "ok": true,
+        "won": false,
+        "attempts": 1,
+        "guess": {
+          "id": "n_v4gas_prajitura",
+          "label": "Prăjitură",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #2."
+        }
+      }
+    },
+    {
+      "guess": "Făină",
+      "target": "Biscuit",
+      "target_id": "n_v24_food_snack_biscuit",
+      "http_status": 200,
+      "response": {
+        "ok": true,
+        "won": false,
+        "attempts": 1,
+        "guess": {
+          "id": "n_v24_food_pantry_faina",
+          "label": "Făină",
+          "distance": 1,
+          "rank": 4,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #4."
+        }
+      }
+    },
+    {
+      "guess": "Unt",
+      "target": "Biscuit",
+      "target_id": "n_v24_food_snack_biscuit",
+      "http_status": 200,
+      "response": {
+        "ok": true,
+        "won": false,
+        "attempts": 1,
+        "guess": {
+          "id": "n_v24_food_breakfast_unt",
+          "label": "Unt",
+          "distance": 1,
+          "rank": 4,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #4."
+        }
+      }
+    },
+    {
+      "guess": "Zahăr",
+      "target": "Biscuit",
+      "target_id": "n_v24_food_snack_biscuit",
+      "http_status": 200,
+      "response": {
+        "ok": true,
+        "won": false,
+        "attempts": 1,
+        "guess": {
+          "id": "n_v24_food_pantry_zahar",
+          "label": "Zahăr",
+          "distance": 1,
+          "rank": 4,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        },
+        "feedback": {
+          "kind": "first",
+          "message": "Primul reper: #4."
+        }
+      }
+    }
+  ]
+}

@@ -91,7 +91,8 @@ Mobile content: `sha256:7473bfe7d42189a28cf933032705b288ff2933fd8eeaf30c65a2dba3
 
 - V88 starts a cross-game batch: investigate bread-family feedback, broaden playable
   content beyond Contexto and remove concrete content/reliability obstacles. Its new
-  implementation and full integration are not yet complete.
+  implementation and full integration are not yet complete. Kickoff and nine actual-BFF
+  baseline observations: `docs/reviews/v88-cross-game-quality/README.md`.
 - Pandișpan/Chec overlap and Brioșă's brioche/muffin meanings hold the two hidden targets.
   Native Brioșă→Pâine falls from rank 2/hot to 424/cold after its broad projection retires;
   former false Zacuscă affinities cool. Generic pastry, optional butter/dairy, reciprocal

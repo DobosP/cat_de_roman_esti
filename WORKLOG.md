@@ -577,3 +577,15 @@ The native recurring task was created and confirmed active. V88 begins on
 `feat/v88-cross-game-quality`, initially investigating breadth beyond Contexto,
 bread-family feedback, and concrete content-extension/reliability obstacles.
 Its first implementation and full integration are pending. No push or deployment.
+
+## V88 baseline checkpoint (2026-09-08)
+
+Valid until: V88 implementation changes the bound baseline — then treat as history.
+
+Created `feat/v88-cross-game-quality` from landing record `2878417`. Recorded nine
+fresh actual-BFF first guesses and exact artifact/source hashes. Bread feedback,
+Zacuscă negative controls, projection isolation and three Biscuit ingredient cues
+match the V87 record. This is a started version, not a completed release candidate.
+The initial scope includes cross-game content, Lanț action recovery and a possible
+projection-bound Alchimie review-tool extension. No runtime/content edits or full
+suite reruns in this checkpoint; documentation and whitespace checks pass.
