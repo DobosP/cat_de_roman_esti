@@ -517,3 +517,15 @@ V86 is ready on `feat/v86-preparation-and-route-quality` for its next landing re
 Shared main remains at `14e8895`. No push, deployment, real-device acceptance or human
 playtest occurred. Indirect oven/yeast/Sarmale and some butter/dairy feedback remain noisy;
 Biscuit and less defensible routes are deferred. Public-beta external gates remain.
+
+
+## V86 local landing and V87 start, 2026-09-08
+
+Valid until: the next landing or version changes these facts — then treat as history.
+
+Verified all 144 V86 manifest bindings at `7d8b177`, including 12 removed build paths,
+all seven lossless evidence archives and 16 actual final green receipts. These include
+1,353 backend tests and 53 accounts tests on each Python version, 177 native frontend
+tests and 148 browser checks. Landed that candidate into local main with this record.
+V87 begins a coherent batch of snack/ingredient feedback, reviewed playable content and
+action quality. Candidate quantities do not override the critique rubric. No push or deployment.

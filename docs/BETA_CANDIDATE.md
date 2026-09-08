@@ -2,9 +2,9 @@
 
 Valid until: the next verified quality wave — then refresh this living checklist.
 
-Target: public anonymous beta for Romanian players. **V85 is merged locally; V86 is a
-verified candidate with nine preparation concepts, 41 new links, six new playable rounds,
-clearer Lanț alternatives and persistent creation/replay recovery across all six games.**
+Target: public anonymous beta for Romanian players. **V86 is merged locally with nine
+preparation concepts, 41 new links, six new playable rounds, clearer Lanț alternatives and
+persistent creation/replay recovery across all six games. V87 starts the next quality batch.**
 Public rollout still requires the external checks below.
 Current facts and exact pins: [STATUS](STATUS.md).
 

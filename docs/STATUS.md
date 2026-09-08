@@ -1,12 +1,12 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-08 — V86 full integration GREEN; candidate ready for local landing. Production last checked 2026-08-27.
+Last verified: 2026-09-08 — V86 full integration GREEN; landed locally; V87 starts next. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-  V85 landed locally at `317ae7d`, followed by landing record `14e8895`.
-  V86 candidate: `feat/v86-preparation-and-route-quality`. No push or deployment.
+  V86 is merged into local main at `7d8b177`, following V85 and its record `14e8895`.
+  V87 starts from this verified content. No push or deployment.
 - V86 adds nine preparation concepts, 30 accepted forms and 41 directed links; no removals.
   Frișcă, Albuș, Gălbenuș, Zahăr pudră, Lapte praf, Amidon alimentar, Cremă de vanilie,
   Congelator and qualified Mixer de bucătărie provide specific preparation/cooling cues.
@@ -86,7 +86,8 @@ Mobile content: `sha256:bd2ccd079148398fc7732f9ade2ca6e0259d1613d3a7e5a8f97c791f
 
 ## Remaining gates
 
-- V86 is ready on its task branch for its next landing request.
+- V87 continues reviewed snack/ingredient feedback, playable content and action quality.
+  Its final implementation and integration are not yet complete.
 - Indirect Sarmale/oven/yeast feedback and some butter/dairy cues remain noisy. Bare
   temperature/cream/starch words retain their explicit boundaries. Frigider can colloquially
   mean a fridge-freezer; the new route counts distinct authored preparation/storage links.
