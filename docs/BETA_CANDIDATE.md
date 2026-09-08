@@ -4,8 +4,8 @@ Valid until: the next verified quality wave — then refresh this living checkli
 
 Target: public anonymous beta for Romanian players. **V90 implements native household
 vocabulary, two reviewed targets, a directed-neighbor critique check and recoverable
-Alchimie actions. All final gates are GREEN; V90 awaits local landing. Main remains
-landed V89 `143bfdb`.**
+Alchimie actions. All final gates are GREEN and V90 is landed locally through `13a78fd`
+(implementation `0039b1e`). V91 starts recovery, mobile clarity and existing-content review.**
 The recurring local iteration follows [ADR-0127](adr/0127-recurring-local-version-loop.md)
 until the owner stops it. No push or deployment occurred.
 Public rollout still requires the external checks below.

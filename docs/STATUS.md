@@ -1,12 +1,13 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-08 — V90 GREEN candidate; local landing pending. Production last checked 2026-08-27.
+Last verified: 2026-09-08 — V90 landed locally; V91 started; local loop active. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-  Local main records V89 `143bfdb` through `190d7fd`. V90 runs on
-  `feat/v90-household-discovery-and-critique-gates`; the local loop remains active (ADR-0127).
+  V90 is merged through `13a78fd`, including implementation `0039b1e`; it follows V89.
+  V91 starts on `feat/v91-recovery-and-mobile-clarity`; the local loop remains active
+  until stopped (ADR-0127).
 - V90 adds Praf, Firimitură and Scamă: three concepts, 17 directed links, ten grammatical
   forms and zero synonyms. Thirteen old node degree fields regenerate; every old semantic
   field, owner, stored form, edge and all 180 CLI puzzles remain unchanged.
@@ -82,8 +83,10 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
   recognized inputs and 240 Praf identity migrations. This is not full HTTP-body equality.
   No compared win flag changes; 17 new direct-link wins pass. Only Contexto's seeded start
   changes reachability; the other five are byte-identical. Full raw hashes/logs are retained.
-- Frozen runtime/test/rubric and preexisting review inputs: 1,635. Current evidence is in
-  `docs/reviews/v90-household-discovery-and-critique-gates/`; V89's sealed matrix remains history.
+- Final independent audits accept all 16 receipts, 1,635 frozen inputs and 340 final
+  present/deleted-file bindings. An earlier verifier note was preserved byte-for-byte
+  inside the review folder. Candidate evidence is sealed by `13a78fd`; later status notes
+  are documentation only. Evidence: `docs/reviews/v90-household-discovery-and-critique-gates/`.
 
 ## Production — last observed 2026-08-27
 
@@ -94,8 +97,9 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
 
 ## Remaining gates and costs
 
-- Finish the final receipt/manifest audit before local landing, then start V91 under
-  the existing loop. Human/player/device acceptance remains unrun.
+- V91 starts remaining Intrusul/Perechi recovery reproduction, shared mobile HUD/notice
+  clarity and existing easy-content review, including al_sport_083 and four C3 warnings.
+  No V91 implementation or promotion yet; human/player/device acceptance remains unrun.
 - Praf loses its broad earth approximation: 227 old-target ranks rise and 13 fall; Mop2→6
   remains hot. Other changed same-rank observations include closeness and 20 temperature
   shifts. The eight lower-rank existing-identity changes all concern Mop, not universal gains.

@@ -728,3 +728,27 @@ Two complete16800-request captures compare selected feedback fields, not full HT
 11120exact/5680changed, including2880newly accepted observations and240Praf identity
 migrations. Costs and initial harness/locator/stale-rubric errors remain explicit. The
 final receipt/manifest audit remains before local landing; no V90 merge is claimed yet.
+
+## V90 landing and V91 start (2026-09-08)
+
+Valid until: V91 completes — then treat this transition record as history.
+
+V90 implementation0039b1e5c38d6b8bd4a59e99c600dea7da5ec440 and documentation cleanup
+13a78fdd304e38c9b5e982784d94972b29977968 were fast-forwarded into local main after16green
+gates, independent source/content/history/integration reviews and a narrow layout audit.
+An early verifier Markdown draft had landed at repository root; its exact bytes were
+moved into V90 evidence, preserving the distinct canonical final note and prior audit.
+The final candidate manifest binds340 present/deleted files; all1635 frozen inputs and
+both1608backend/53accounts matrices plus193native/246browser checks remain exact.
+The first incomplete Python3.14 attempt remains excluded with its original logs/runner.
+
+V91's worktree exists on `feat/v91-recovery-and-mobile-clarity`. The read-only scout
+prioritizes remaining Intrusul/Perechi ownership failures for actual reproduction,
+shared mobile HUD/resume-notice clarity and an existing-stock recognition/discovery
+review. al_sport_083's easy seeds and three initially depleted entries are review
+questions, not a preapproved revision. Four approved C3 warnings and17 unknown input
+surfaces remain backlog; mined targets are distinct from curated approval.
+
+The local loop remains active. No push, deployment, accounts rollout or external contact
+occurred. Clean up only the verified-merged V90 branch/worktree/scratch after this record.
+Candidate hashes refer to13a78fd; this transition changes living documentation only.
