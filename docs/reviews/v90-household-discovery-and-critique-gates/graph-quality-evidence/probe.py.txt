@@ -1,0 +1,107 @@
+import dataclasses,hashlib,json,os,sys
+from contextlib import ExitStack
+from pathlib import Path
+from unittest.mock import patch
+root=Path.cwd();sys.path.insert(0,str(root));os.environ.update(DJANGO_SETTINGS_MODULE='cat_de_roman_esti.web.settings',CAT_ACCOUNTS_ENABLED='0',CAT_DEBUG='0')
+import django
+django.setup()
+from django.test import Client
+from cat_de_roman_esti.graph import Graph
+from cat_de_roman_esti.wordgames.service import WordGameService,normalize
+from cat_de_roman_esti.wordgames import contexto as C,contexto_projection as P
+from scripts import critique_pack as CP
+out=Path('/home/dobo/work/_temp/feat__v90-household-discovery-and-critique-gates/graph-quality')
+review=root/'docs/reviews/v90-household-discovery-and-critique-gates'
+sourcepaths=['cat_de_roman_esti/fixtures/kg_sample.json','cat_de_roman_esti/fixtures/games_pack.json','cat_de_roman_esti/wordgames/service.py','cat_de_roman_esti/wordgames/contexto.py','cat_de_roman_esti/wordgames/contexto_feedback.py','cat_de_roman_esti/wordgames/contexto_projection.py','scripts/critique_pack.py','docs/CRITIQUE_RUBRIC.md']
+sourcepaths += [str((review/x).relative_to(root)) for x in ['author-candidates/graph-proposal.json','author-candidates/viata_de_roman/candidates.json','praf-migration-proposal.json']]
+sha=lambda data:hashlib.sha256(data).hexdigest()
+bindings={p:sha((root/p).read_bytes()) for p in sourcepaths}
+assert bindings[str((review/'author-candidates/graph-proposal.json').relative_to(root))]=='672ea9f249ec9f18dbc51c24427580b61e98abbaef2b7b3a6d0fd5c557d395ba'
+assert bindings[str((review/'author-candidates/viata_de_roman/candidates.json').relative_to(root))]=='0a7d3cb1c78f19a5bb9568765ffb5ed96dfd321eade88fb3365afa37adada769'
+f=json.loads((root/sourcepaths[0]).read_text());q=json.loads((review/'author-candidates/graph-proposal.json').read_text());pack=json.loads((root/sourcepaths[1]).read_text())
+base=WordGameService(Graph.from_records(f['kg_nodes'],f['kg_edges']))
+newedges=[dict(id=f'independent_v90_{i}',src_id=e['src'],dst_id=e['dst'],**{k:v for k,v in e.items() if k not in {'src','dst'}}) for i,e in enumerate(q['edges'])]
+svc=WordGameService(Graph.from_records(f['kg_nodes']+q['nodes'],f['kg_edges']+newedges))
+oldterms=P.PROJECTION_TERMS
+with patch.object(P,'_EXISTING_KG_SURFACES',P._EXISTING_KG_SURFACES|{'praf'}):newterms=P._build_terms()
+assert newterms==tuple(t for t in oldterms if t.key!='praf') and len(newterms)==464
+assert len({t.domain for t in newterms})==26
+neighborhoods={k:v for k,v in P.PROJECTION_NEIGHBORHOODS.items() if k!='praf'}
+assert len(neighborhoods)==4
+lexical=[]
+for node in q['nodes']:
+ for word in [node['label_ro'],*node['aliases']]:
+  assert base.resolve(word) is None,(word,base.resolve(word))
+  assert svc.resolve(word)==node['id']
+  lexical.append({'word':word,'before':base.resolve(word),'after':svc.resolve(word)})
+old_owner_checks=0
+for node in base.graph.nodes.values():
+ for word in [node.label_ro,node.id,*node.aliases]:
+  assert base.resolve(word)==svc.resolve(word),word
+  old_owner_checks+=1
+result={'scope':'Independent in-memory prospective graph plus proposed Praf migration; Django test-client private sessions, no runtime source/fixture mutation or selector approval','source_sha256':bindings,'projection_rows':{'before':len(oldterms),'after':len(newterms),'other_rows_exact':True,'domains':26},'old_owner_checks':old_owner_checks,'lexical':lexical,'profiles':[],'first_guesses':[],'journeys':[],'custom_owner_absent':{}}
+client=Client()
+def hidden(body,tid,label):
+ assert not body.get('won')
+ def walk(v):
+  if isinstance(v,dict):
+   assert not set(v)&{'target','target_id','description','path','route'},set(v)
+   for a in v.values():walk(a)
+  elif isinstance(v,list):
+   for a in v:walk(a)
+  elif isinstance(v,str):assert v!=tid and normalize(v)!=normalize(label),(tid,v)
+ walk(body)
+words=['Praf','praful','prafului','Firimitură','firimituri','Scamă','scame','Covor','Electricitate','Apă','Farfurie','Detergent','Podea','Mătură','Mop','Aspirator','Făraș','A spăla','A aspira','A mătura','Casă','Bucătărie','Chiuvetă','Masă','Vase','Săpun','Pâine','Biscuit','Haină','Pătură','Pământ','Noroi','Bolovan','Praf de copt','Lapte praf','Sarmale','Fotbal','București','curățenie','gunoi','filtru','sac de praf']
+with ExitStack() as stack:
+ stack.enter_context(patch.object(C,'get_service',return_value=svc))
+ stack.enter_context(patch.object(P,'PROJECTION_TERMS',newterms))
+ stack.enter_context(patch.object(P,'PROJECTION_INDEX',{t.key:t for t in newterms}))
+ stack.enter_context(patch.object(P,'PROJECTION_NEIGHBORHOODS',neighborhoods))
+ stack.enter_context(patch.object(C,'PROJECTION_NEIGHBORHOODS',neighborhoods))
+ assert P.resolve_projection('praf') is None
+ for label,win,approach in [('Făraș','fărașele','mătură'),('Aspirator','aspiratoarele','covor'),('Burete de vase','bureții de vase','detergent')]:
+  tid=svc.resolve(label);node=svc.node(tid);dist=svc.distances_to(tid)
+  incoming=[]
+  for edge in svc.graph.edges:
+   if edge.is_distractor:continue
+   if edge.dst_id==tid and edge.src_id!=tid:incoming.append(edge.src_id)
+   if edge.bidirectional and edge.src_id==tid and edge.dst_id!=tid:incoming.append(edge.dst_id)
+  incoming=sorted(set(incoming));assert incoming==CP.contexto_incoming_ids(svc,tid)
+  profile={'target':tid,'label':label,'salience':node.salience,'incoming_ids':incoming,'incoming_labels':[svc.label(i) for i in incoming],'incoming_count':len(incoming),'reachable':len(dist),'responsive':sum(1<=d<=5 for d in dist.values()),'incoming_feedback':[],'existing_rounds':[r['id'] for r in pack['contexto'] if r['target']==tid]}
+  session=C._build_session(tid,'usor',None,category='viata_de_roman')
+  for nid in incoming:
+   profile['incoming_feedback'].append({'id':nid,'label':svc.label(nid),'anchor':C._feedback_anchor_id(svc,nid,tid),'feedback':dataclasses.asdict(C._score_feedback(svc,session,nid))})
+  result['profiles'].append(profile)
+  for word in words:
+   if svc.resolve(word)==tid:continue
+   gid=C.store.create(C._build_session(tid,'usor',None,category='viata_de_roman'))
+   try:
+    response=client.post(f'/api/wordgames/contexto/games/{gid}/guess',{'text':word},content_type='application/json');body=response.json();assert response.status_code==200,(label,word,response.status_code,body);hidden(body,tid,label)
+    result['first_guesses'].append({'target':label,'word':word,'response':body})
+   finally:C.store.delete(gid)
+  gid=C.store.create(C._build_session(tid,'usor',None,category='viata_de_roman'));url=f'/api/wordgames/contexto/games/{gid}';steps=[]
+  def call(name,path='',body=None):
+   response=client.get(url) if body is None else client.post(url+path,body,content_type='application/json');result=response.json();steps.append({'name':name,'status':response.status_code,'response':result});assert response.status_code==200,(name,result);return result
+  try:
+   hidden(call('initial'),tid,label)
+   for word in ['București','Fotbal','Stilou']:hidden(call(word,'/guess',{'text':word}),tid,label)
+   clue=call('earned warmer clue','/clue',{});hidden(clue,tid,label);assert clue['clues_used']==1 and clue['clue_kind']=='warmer'
+   hidden(call(approach,'/guess',{'text':approach}),tid,label)
+   before=call('native dust','/guess',{'text':'praf'});hidden(before,tid,label);assert before['guess']['id']=='n_v90_household_praf' and not before['won']
+   for word in ['PRAF','praful','prafului']:
+    repeat=call('same native owner '+word,'/guess',{'text':word});hidden(repeat,tid,label);assert repeat['attempts']==before['attempts'] and repeat['guesses']==before['guesses']
+   resumed=call('resume');hidden(resumed,tid,label);assert resumed['guesses']==before['guesses'] and resumed['clues_used']==1
+   final=call('exact target win','/guess',{'text':win});assert final['won'] and final['guess']['id']==tid and final['guess']['rank']==1,(label,win,final)
+   terminal=call('terminal resume');assert terminal['won'] and terminal['score']==final['score']
+   result['journeys'].append({'target':label,'checks_passed':True,'steps':steps})
+  finally:C.store.delete(gid)
+ # Custom owner absent keeps the deliberate loss of the approximation explicit.
+ assert base.resolve('praf') is None and P.resolve_projection('praf') is None
+ result['custom_owner_absent']={'old_native_owner':base.resolve('praf'),'retired_projection_resolves':P.resolve_projection('praf') is not None,'synthetic_fallback_absent':True}
+assert {p:sha((root/p).read_bytes()) for p in sourcepaths}==bindings
+result['first_guess_count']=len(result['first_guesses']);result['journey_requests']=sum(len(j['steps']) for j in result['journeys'])
+(out/'probes.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+for profile in result['profiles']:
+ print(profile['label'],profile['incoming_labels'],'reachable',profile['reachable'],'responsive',profile['responsive'])
+ print([(r['word'],r['response'].get('guess',{}).get('rank'),r['response'].get('guess',{}).get('temperature')) for r in result['first_guesses'] if r['target']==profile['label']])
+print('first_guesses',result['first_guess_count'],'journey_requests',result['journey_requests'],'old_owner_checks',old_owner_checks)

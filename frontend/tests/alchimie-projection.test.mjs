@@ -48,7 +48,7 @@ test("depleted ingredients leave the active workspace but remain in all", () => 
     screen,
     /if \(inventoryView === "all"\) return true;[\s\S]*?item\.recent && !item\.depleted[\s\S]*?item\.useful && !item\.depleted/,
   );
-  assert.match(screen, /disabled=\{creating \|\| won \|\| busy \|\| item\.depleted\}/);
+  assert.match(screen, /disabled=\{actionsLocked \|\| won \|\| item\.depleted\}/);
   assert.match(screen, /Nu mai produce elemente noi/);
   assert.match(screen, /inventory_summary\.depleted/);
 });
@@ -81,9 +81,9 @@ test("progressive hint types keep the first hint output-only", () => {
   assert.match(api, /hint_output: \{ label: string \} \| null/);
   assert.match(screen, /state\.hint_stage === "output"/);
   assert.match(screen, /Îți arată un rezultat apropiat/);
-  assert.match(
-    screen,
-    /if \(res\.hint\)[\s\S]*?setInventoryView\("useful"\)[\s\S]*?setSelected\(ids\)/,
-  );
-  assert.match(screen, /else \{[\s\S]*?setHintIds\(new Set\(\)\);[\s\S]*?setInventoryView\("useful"\)/);
+  const adoption = screen.slice(screen.indexOf("const applyAuthoritativeState"), screen.indexOf("const applyResumedGame"));
+  assert.match(adoption, /setSelected\(fresh\.earned_hint\?\.hint\?\.map\(\(item\) => item\.id\) \?\? \[\]\)/);
+  assert.match(adoption, /setHintIds\(new Set\(fresh\.earned_hint\?\.hint\?\.map/);
+  assert.match(adoption, /setInventoryView\("useful"\)/);
+  assert.match(screen, /state\.earned_hint\.message/);
 });

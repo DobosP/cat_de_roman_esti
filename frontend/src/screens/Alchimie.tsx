@@ -15,6 +15,7 @@ import {
   type Difficulty,
   type InventoryItem,
 } from "../api/alchimie";
+import { createGameActionOwner, recoverOwnedGameAction, type GameActionTicket } from "../gameActionRecovery.mjs";
 import { GameShell } from "../components/GameShell";
 import { ResultCard } from "../components/ResultCard";
 import { GameIntro } from "../components/GameIntro";
@@ -39,6 +40,8 @@ const GOLD = "#ffd166";
 const REACTION_LOG_LIMIT = 12;
 
 const isTerminalResume = (state: AlchimieState) => state.won === true;
+
+type ActionSync = { gameId: string; kind: "failed" | "changed" };
 
 type CraftedItem = InventoryItem & { parents: [Concept, Concept] };
 
@@ -132,32 +135,42 @@ export default function Alchimie({
   const [category, setCategory] = useState<string | null>(null);
   const [isRecord, setIsRecord] = useState(false);
   const [isPuzzleRecord, setIsPuzzleRecord] = useState(false);
-  const combineInFlight = useRef(false);
   const inventoryButtons = useRef(new Map<string, HTMLButtonElement>());
   const active = useActiveGame("alchimie");
+  const [actionSync, setActionSync] = useState<ActionSync | null>(null);
+  const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
+  useEffect(() => () => actionOwner.invalidate(), [actionOwner]);
+  const actionsLocked = creating || busy || loading || actionSync !== null;
   const recordOnce = useRecordScore("alchimie");
 
   const best = useMemo(() => bestScore(GAME_KEY), []);
 
+  const applyAuthoritativeState = useCallback((fresh: AlchimieState) => {
+    setState(fresh);
+    setSelected(fresh.earned_hint?.hint?.map((item) => item.id) ?? []);
+    setEmptyPairKey(null);
+    setEmptyRecoveryActive(false);
+    setFreshIds(new Set());
+    setHintIds(new Set(fresh.earned_hint?.hint?.map((item) => item.id) ?? []));
+    setInventoryView("useful");
+    setInventoryQuery("");
+    setLastMessage(null);
+  }, []);
+
   const applyResumedGame = useCallback(
     (s: AlchimieState, { terminal }: { terminal: boolean }) => {
+      actionOwner.invalidate();
+      setActionSync(null);
+      setBusy(false);
       setStartFailed(false);
-      setState(s);
+      applyAuthoritativeState(s);
       setDifficulty(s.difficulty);
       setCategory(s.board_category ?? null);
-      setSelected([]);
-      setEmptyPairKey(null);
-      setEmptyRecoveryActive(false);
-      setFreshIds(new Set());
-      setHintIds(new Set());
-      setInventoryView("useful");
-      setInventoryQuery("");
-      setLastMessage(null);
       setIsRecord(false);
       setIsPuzzleRecord(false);
       if (!terminal) onToast("Joc reluat.", "info");
     },
-    [onToast],
+    [actionOwner, applyAuthoritativeState, onToast],
   );
 
   const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
@@ -169,19 +182,24 @@ export default function Alchimie({
   });
 
   const exitSafely = useCallback(() => {
-    if (!startInFlight.current) onExit();
-  }, [onExit]);
+    if (startInFlight.current) return;
+    actionOwner.invalidate();
+    onExit();
+  }, [actionOwner, onExit]);
 
   const start = useCallback(
     async (opts: CreateOpts = {}) => {
       if (startInFlight.current) return;
       startInFlight.current = true;
+      actionOwner.invalidate();
       cancelResume();
       setStartFailed(false);
       setCreating(true);
       try {
         const s = await alchimieApi.create(opts);
         setState(s);
+        setActionSync(null);
+        setBusy(false);
         active.remember(s.game_id);
         dismissRecovery();
         setSelected([]);
@@ -201,7 +219,7 @@ export default function Alchimie({
         setCreating(false);
       }
     },
-    [active, cancelResume, dismissRecovery],
+    [active, actionOwner, cancelResume, dismissRecovery],
   );
 
   const won = state?.won ?? false;
@@ -272,7 +290,7 @@ export default function Alchimie({
 
   const toggle = useCallback(
     (id: string) => {
-      if (startInFlight.current || busy || won) return;
+      if (startInFlight.current || actionsLocked || won || actionOwner.hasPending()) return;
       sound.playSelect();
       if (emptyRecoveryActive) {
         const nextSelectionCount = selected.includes(id)
@@ -293,18 +311,18 @@ export default function Alchimie({
         return [...prev, id];
       });
     },
-    [busy, won, emptyRecoveryActive, selected],
+    [actionsLocked, actionOwner, won, emptyRecoveryActive, selected],
   );
 
   const clearSelection = useCallback(() => {
-    if (startInFlight.current) return;
+    if (startInFlight.current || actionsLocked || actionOwner.hasPending()) return;
     if (emptyRecoveryActive) {
       setLastMessage("Alambicul este gol. Alege două concepte.");
     }
     setSelected([]);
     setEmptyPairKey(null);
     setHintIds(new Set());
-  }, [emptyRecoveryActive]);
+  }, [actionsLocked, actionOwner, emptyRecoveryActive]);
 
   const removeFromBench = useCallback(
     (id: string) => {
@@ -315,22 +333,96 @@ export default function Alchimie({
     [toggle],
   );
 
+  const beginAction = useCallback((previous: AlchimieState) => {
+    if (startInFlight.current) return null;
+    const ticket = actionOwner.begin(previous.game_id);
+    if (!ticket) return null;
+    if (!actionOwner.owns(ticket)) {
+      actionOwner.finish(ticket);
+      setActionSync({ gameId: previous.game_id, kind: "changed" });
+      return null;
+    }
+    return ticket;
+  }, [actionOwner]);
+
+  const mayAdoptAction = useCallback((ticket: GameActionTicket) => {
+    if (!actionOwner.isCurrent(ticket)) return false;
+    if (!actionOwner.owns(ticket)) {
+      setActionSync({ gameId: ticket.gameId, kind: "changed" });
+      return false;
+    }
+    return true;
+  }, [actionOwner]);
+
+  const reconcileAction = useCallback(async (ticket: GameActionTicket) => {
+    const outcome = await recoverOwnedGameAction(
+      actionOwner, ticket, alchimieApi.get,
+      (error) => error instanceof ApiError && error.status === 404,
+    );
+    if (!mayAdoptAction(ticket)) return;
+    if (outcome.kind === "missing") {
+      if (ticket.savedId === ticket.gameId && !active.forgetIfCurrent(ticket.gameId)) {
+        setActionSync({ gameId: ticket.gameId, kind: "changed" });
+        return;
+      }
+      setActionSync(null);
+      setState(null);
+      setSelected([]);
+      onToast("Jocul nu mai este disponibil. Poți începe altul.", "info");
+      return;
+    }
+    if (outcome.kind !== "recovered") {
+      setActionSync({ gameId: ticket.gameId, kind: outcome.kind === "changed" ? "changed" : "failed" });
+      return;
+    }
+    setActionSync(null);
+    applyAuthoritativeState(outcome.state);
+    // GET has current inventory and an earned cue, not the lost combine verdict.
+    if (!outcome.state.won) setLastMessage("Joc sincronizat. Poți continua.");
+  }, [actionOwner, active, applyAuthoritativeState, mayAdoptAction, onToast]);
+
+  const retryActionSync = useCallback(async () => {
+    if (!state || busy || !actionSync) return;
+    if (actionSync.kind === "changed") {
+      actionOwner.invalidate();
+      setActionSync(null);
+      setState(null);
+      setLoading(true);
+      retryResume();
+      return;
+    }
+    if (state.game_id !== actionSync.gameId) return;
+    const ticket = beginAction(state);
+    if (!ticket) return;
+    setBusy(true);
+    try {
+      await reconcileAction(ticket);
+    } finally {
+      if (actionOwner.finish(ticket)) setBusy(false);
+    }
+  }, [state, busy, actionSync, actionOwner, beginAction, reconcileAction, retryResume]);
+
   const doCombine = useCallback(async () => {
     if (
       !state ||
       startInFlight.current ||
       selected.length !== 2 ||
-      busy ||
-      isEmptyRetry ||
-      combineInFlight.current
+      actionsLocked ||
+      isEmptyRetry
     ) {
       return;
     }
-    combineInFlight.current = true;
+    const ticket = beginAction(state);
+    if (!ticket) return;
     setBusy(true);
     const [a, b] = selected;
     try {
       const res = await alchimieApi.combine(state.game_id, a, b);
+      if (!mayAdoptAction(ticket)) return;
+      if (res.game_id !== ticket.gameId) {
+        await reconcileAction(ticket);
+        return;
+      }
       setState(res);
       const recoverableEmpty = res.discovered.length === 0 && !res.won;
       if (recoverableEmpty) {
@@ -361,93 +453,76 @@ export default function Alchimie({
         setFreshIds(new Set());
         sound.playUndo();
       }
-    } catch (err) {
-      sound.playError();
-      onToast(
-        err instanceof ApiError
-          ? err.message || `Combinație respinsă (${err.status}).`
-          : "Combinație respinsă.",
-        "error",
-      );
+    } catch {
+      await reconcileAction(ticket);
     } finally {
-      combineInFlight.current = false;
-      setBusy(false);
+      if (actionOwner.finish(ticket)) setBusy(false);
     }
-  }, [state, selected, busy, isEmptyRetry, onToast]);
+  }, [state, selected, actionsLocked, isEmptyRetry, beginAction, mayAdoptAction,
+    reconcileAction, actionOwner]);
 
   const doReset = useCallback(async () => {
-    if (startInFlight.current || !state || busy) return;
+    if (startInFlight.current || !state || actionsLocked) return;
+    const ticket = beginAction(state);
+    if (!ticket) return;
     setBusy(true);
     try {
-      const s = await alchimieApi.reset(state.game_id);
-      setState(s);
-      active.remember(s.game_id);
-      setSelected([]);
-      setEmptyPairKey(null);
-      setEmptyRecoveryActive(false);
-      setFreshIds(new Set());
-      setHintIds(new Set());
-      setInventoryView("useful");
-      setInventoryQuery("");
-      setLastMessage(null);
+      const fresh = await alchimieApi.reset(state.game_id);
+      if (!mayAdoptAction(ticket)) return;
+      if (fresh.game_id !== ticket.gameId) {
+        await reconcileAction(ticket);
+        return;
+      }
+      applyAuthoritativeState(fresh);
       sound.playUndo();
-    } catch (err) {
-      onToast(
-        err instanceof ApiError
-          ? `Nu am putut reseta (${err.status}).`
-          : "Nu am putut reseta.",
-        "error",
-      );
+    } catch {
+      await reconcileAction(ticket);
     } finally {
-      setBusy(false);
+      if (actionOwner.finish(ticket)) setBusy(false);
     }
-  }, [state, busy, active, onToast]);
+  }, [state, actionsLocked, beginAction, mayAdoptAction, applyAuthoritativeState,
+    reconcileAction, actionOwner]);
 
   const newGame = useCallback(() => {
     if (startInFlight.current) return;
-    if (!state?.won) active.forget();
+    if (state && !state.won && !busy && !actionSync && !actionOwner.hasPending()) {
+      active.forgetIfCurrent(state.game_id);
+    }
+    actionOwner.invalidate();
+    setActionSync(null);
+    setBusy(false);
     setSelected([]);
     setEmptyPairKey(null);
     setEmptyRecoveryActive(false);
     setInventoryView("useful");
     setInventoryQuery("");
     setState(null);
-  }, [active, state?.won]);
+  }, [active, state, busy, actionSync, actionOwner]);
 
   // Ask for a gentle nudge: the server points at a useful pair (it costs some score).
   const doHint = useCallback(async () => {
-    if (startInFlight.current || !state || busy || won) return;
+    if (startInFlight.current || !state || actionsLocked || won || !state.hint_available) return;
+    const ticket = beginAction(state);
+    if (!ticket) return;
     setBusy(true);
     try {
-      const res = await alchimieApi.hint(state.game_id);
-      setState(res);
-      setEmptyPairKey(null);
-      setEmptyRecoveryActive(false);
-      setLastMessage(res.message);
-      setInventoryQuery("");
-      if (res.hint) {
-        const ids = res.hint.map((c) => c.id);
-        setHintIds(new Set(ids));
-        setInventoryView("useful");
-        // Pre-select the suggested pair so the player can just press Combina.
-        setSelected(ids);
-        sound.playSelect();
-      } else {
-        setHintIds(new Set());
-        setInventoryView("useful");
+      const fresh = await alchimieApi.hint(state.game_id);
+      if (!mayAdoptAction(ticket)) return;
+      if (fresh.game_id !== ticket.gameId) {
+        await reconcileAction(ticket);
+        return;
       }
-    } catch (err) {
-      sound.playError();
-      onToast(
-        err instanceof ApiError
-          ? err.message || `Niciun indiciu (${err.status}).`
-          : "Niciun indiciu.",
-        "error",
-      );
+      applyAuthoritativeState(fresh);
+      // Defensive no-cue response remains visible, without pretending it was earned.
+      if (!fresh.earned_hint) setLastMessage(fresh.message);
+      sound.playSelect();
+    } catch {
+      await reconcileAction(ticket);
     } finally {
-      setBusy(false);
+      if (actionOwner.finish(ticket)) setBusy(false);
     }
-  }, [state, busy, won, onToast]);
+  }, [state, actionsLocked, won, beginAction, mayAdoptAction, applyAuthoritativeState,
+    reconcileAction, actionOwner]);
 
   const handleCopy = useCallback(async () => {
     if (!sharePayload) return;
@@ -528,7 +603,7 @@ export default function Alchimie({
       if (
         e.key === "Enter" &&
         selected.length === 2 &&
-        !busy &&
+        !actionsLocked &&
         !isEmptyRetry
       ) {
         e.preventDefault();
@@ -540,7 +615,7 @@ export default function Alchimie({
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [state, won, selected, busy, isEmptyRetry, doCombine, clearSelection]);
+  }, [state, won, selected, actionsLocked, isEmptyRetry, doCombine, clearSelection]);
 
   if (loading && !state) {
     return (
@@ -735,7 +810,7 @@ export default function Alchimie({
               <Slot
                 item={selectedItems[0]}
                 onRemove={removeFromBench}
-                disabled={creating || busy}
+                disabled={actionsLocked}
               />
               <span
                 className="faint"
@@ -747,7 +822,7 @@ export default function Alchimie({
               <Slot
                 item={selectedItems[1]}
                 onRemove={removeFromBench}
-                disabled={creating || busy}
+                disabled={actionsLocked}
               />
             </div>
             <div className="row wrap" style={{ gap: 8 }}>
@@ -755,7 +830,7 @@ export default function Alchimie({
                 <Button
                   type="button"
                   variant="secondary"
-                  disabled={creating || busy}
+                  disabled={actionsLocked}
                   onClick={clearSelection}
                   title="Golește alambicul (Esc)"
                 >
@@ -766,7 +841,7 @@ export default function Alchimie({
                 <Button
                   type="button"
                   variant="secondary"
-                  disabled={creating || busy}
+                  disabled={actionsLocked}
                   onClick={() => void doHint()}
                   title={
                     state.hint_stage === "output"
@@ -780,7 +855,7 @@ export default function Alchimie({
               )}
               <Button
                 type="button"
-                disabled={creating || busy || selected.length !== 2 || isEmptyRetry}
+                disabled={actionsLocked || selected.length !== 2 || isEmptyRetry}
                 onClick={doCombine}
                 title={
                   isEmptyRetry
@@ -795,6 +870,24 @@ export default function Alchimie({
             </div>
           </div>
         )}
+
+        {!won && actionSync ? (
+          <div className="card col alchemy-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
+            <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
+            <span>{actionSync.kind === "changed"
+              ? "Încarcă jocul curent pentru a continua."
+              : "Acțiunea poate fi deja salvată. Verifică jocul înainte de o nouă combinație, un indiciu sau o reluare."}</span>
+            <Button type="button" onClick={() => void retryActionSync()} disabled={busy}>
+              {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
+            </Button>
+          </div>
+        ) : null}
+
+        {!won && state.earned_hint ? (
+          <div className="card alchemy-earned-hint" role="status" style={{ padding: 12, borderColor: GOLD }}>
+            {state.earned_hint.message}
+          </div>
+        ) : null}
 
         {/* Last combine feedback */}
         <AnimatePresence mode="wait">
@@ -842,7 +935,7 @@ export default function Alchimie({
               selected={selected}
               freshIds={freshIds}
               inventoryById={inventoryById}
-              busy={creating || busy}
+              busy={actionsLocked}
               onSelect={toggle}
             />
 
@@ -871,7 +964,7 @@ export default function Alchimie({
                       selected={selected}
                       freshIds={freshIds}
                       inventoryById={inventoryById}
-                      busy={creating || busy}
+                      busy={actionsLocked}
                       onSelect={toggle}
                     />
                   ))}
@@ -979,7 +1072,7 @@ export default function Alchimie({
                     }}
                     transition={{ type: "spring", stiffness: 320, damping: 18 }}
                     onClick={() => toggle(item.id)}
-                    disabled={creating || won || busy || item.depleted}
+                    disabled={actionsLocked || won || item.depleted}
                     aria-pressed={isSel}
                     aria-label={accessibleLabel}
                     title={title}
@@ -1039,7 +1132,7 @@ export default function Alchimie({
             <Button
               type="button"
               variant="secondary"
-              disabled={creating || busy}
+              disabled={actionsLocked}
               onClick={doReset}
             >
               ↻ Reia același joc

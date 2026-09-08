@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import sys
 from copy import deepcopy
 from pathlib import Path
 
@@ -16,6 +17,7 @@ from cat_de_roman_esti.wordgames.service import get_service
 from tests import content_history as history
 from tests.content_scenarios import contexto_seed
 from tests.current_content import CURRENT_CONTENT
+from tests.v89_contexto_snapshot import v89_contexto_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "cat_de_roman_esti/fixtures"
@@ -75,8 +77,9 @@ def test_complete_v88_artifacts_reconstruct_and_reject_any_unreviewed_change(fil
 
 
 def test_all_658_old_pack_records_and_336_derived_boards_survive_exactly():
-    live = _read(FIXTURES / "games_pack.json")
-    previous = history.before_v89_pack(live)
+    current_pack = _read(FIXTURES / "games_pack.json")
+    live = history.before_v90_pack(current_pack)
+    previous = history.before_v89_pack(current_pack)
     games = ("conexiuni", "contexto", "lant", "alchimie")
     assert sum(len(previous[game]) for game in games) == 658
     for game in games:
@@ -88,11 +91,15 @@ def test_all_658_old_pack_records_and_336_derived_boards_survive_exactly():
     assert live["lant"] == previous["lant"] and len(live["lant"]) == 100
     assert live["alchimie"] == previous["alchimie"] and len(live["alchimie"]) == 83
     derived = _read(FIXTURES / "derived_catalog_v38.json")
-    assert derived["boards"] == history.before_v89_derived(derived)["boards"]
-    assert len(derived["boards"]) == 336
+    at_v89 = history.before_v90_derived(derived)
+    assert at_v89["boards"] == history.before_v89_derived(derived)["boards"]
+    assert len(at_v89["boards"]) == 336
     kg = _read(FIXTURES / "kg_sample.json")
-    assert kg == history.before_v89_fixture(kg)
-    assert _sha((ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json").read_bytes()) == (
+    assert history.before_v90_fixture(kg) == history.before_v89_fixture(kg)
+    mobile = history.before_v90_mobile(_read(
+        ROOT / "tests/fixtures/cat_mobile_app_pack_contract.json",
+    ))
+    assert _sha((json.dumps(mobile, ensure_ascii=False, indent=1) + "\n").encode()) == (
         "d2fbb9f550a05b6b128431ee55787b2b156846887f0bc8ce1908f09e6683b951"
     )
 
@@ -105,13 +112,13 @@ def test_only_reviewed_mop_round_is_approved_and_the_rejected_ids_cannot_be_sele
             new[0]["difficulty"], new[0]["status"]) == (
         "ct_viata_de_roman_353", MOP, "viata_de_roman", "usor", "approved",
     )
-    live = _read(FIXTURES / "games_pack.json")
+    live = history.before_v90_pack(_read(FIXTURES / "games_pack.json"))
     assert live["meta"]["id_high_water"]["contexto"] == 354
     assert all(row["id"] not in {"ct_viata_de_roman_352", "ct_viata_de_roman_354"}
                for row in live["contexto"])
     pool = get_pack().pool("contexto")
     assert {item.id for item in pool if item._pilot_eligible} >= {"ct_viata_de_roman_353"}
-    assert not {item.payload["target"] for item in pool} & {
+    assert not {item["target"] for item in live["contexto"] if item["status"] == "approved"} & {
         "n_v31_cleaning_floor_faras", "n_v31_cleaning_floor_aspirator",
     }
     assert get_pack().selectable_count("contexto") == CURRENT_CONTENT.contexto_eligible
@@ -155,7 +162,14 @@ def _private(body):
     assert MOP not in encoded and "Mop" not in encoded and "anchor_id" not in encoded
 
 
-def test_public_mop_journey_preserves_clue_privacy_repeat_resume_and_exact_win():
+@pytest.fixture
+def v89_mop_history(monkeypatch):
+    """Preserve V89's actual ranked public selector and retired dust scorer together."""
+    with v89_contexto_snapshot(monkeypatch, sys.modules[__name__]):
+        yield
+
+
+def test_public_mop_journey_preserves_clue_privacy_repeat_resume_and_exact_win(v89_mop_history):
     seed = contexto_seed(MOP, difficulty="usor", category="viata_de_roman")
     client = Client()
     initial = client.post(

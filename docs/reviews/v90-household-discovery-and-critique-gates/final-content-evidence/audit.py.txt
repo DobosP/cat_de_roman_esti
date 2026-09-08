@@ -1,0 +1,183 @@
+from __future__ import annotations
+import gzip,hashlib,json,os,subprocess,sys,types
+from collections import Counter
+from copy import deepcopy
+from pathlib import Path
+root=Path.cwd();sys.path.insert(0,str(root));os.environ.update(DJANGO_SETTINGS_MODULE='cat_de_roman_esti.web.settings',CAT_ACCOUNTS_ENABLED='0',CAT_DEBUG='0')
+import django
+django.setup()
+from tests import content_history as H
+from tests.current_content import CURRENT_CONTENT
+from tests.v89_contexto_snapshot import v89_contexto_snapshot
+from cat_de_roman_esti.wordgames import contexto as C,contexto_projection as P,packs,service
+from _pytest.monkeypatch import MonkeyPatch
+rev=root/'docs/reviews/v90-household-discovery-and-critique-gates';impact=rev/'impact';hist=rev/'history-tests'
+scratch=Path('/home/dobo/work/_temp/feat__v90-household-discovery-and-critique-gates/final-content-review')
+base='190d7fdb86487c641d8a781ef7a5ce21f2b98031'
+sha=lambda b:hashlib.sha256(b).hexdigest()
+prior=lambda p:subprocess.check_output(['git','show',base+':'+p])
+canon=lambda x:sha(json.dumps(x,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
+read=lambda p:json.loads(p.read_bytes())
+breceipt=read(impact/'baseline-receipt.json');freceipt=read(impact/'final-receipt.json');hreceipt=read(hist/'verification.json');summary=read(impact/'comparison-summary.json')
+archive_proofs=[]
+for receipt,folder in [(breceipt,impact),(freceipt,impact),(hreceipt,hist)]:
+ for name,record in receipt['archives'].items():
+  path=folder/record.get('path',record.get('archive'))
+  blob=path.read_bytes();raw=gzip.decompress(blob)
+  assert blob[4:8]==b'\x00'*4,name
+  assert sha(blob)==record['archive_sha256'],name
+  assert sha(raw)==record.get('decoded_sha256',record.get('sha256')),name
+  assert len(raw)==record.get('decoded_bytes',record.get('bytes')),name
+  if 'archive_bytes' in record:assert len(blob)==record['archive_bytes'],name
+  archive_proofs.append({'path':str(path.relative_to(root)),'raw_sha256':sha(raw),'archive_sha256':sha(blob)})
+for p,digest in hreceipt['sources_sha256'].items():assert sha((root/p).read_bytes())==digest,p
+for p,digest in breceipt['source_sha256'].items():assert sha(prior(p))==digest,p
+for p,digest in freceipt['source_sha256'].items():assert sha((root/p).read_bytes())==digest,p
+before=json.loads(gzip.decompress((impact/'raw/baseline-initial.json.gz').read_bytes()))
+after=json.loads(gzip.decompress((impact/'raw/candidate-final.json.gz').read_bytes()))
+comparison=json.loads(gzip.decompress((impact/'raw/comparison.json.gz').read_bytes()))
+oldpack=json.loads(prior('cat_de_roman_esti/fixtures/games_pack.json'));pack=read(root/'cat_de_roman_esti/fixtures/games_pack.json')
+assert before['source_sha256']==breceipt['source_sha256'] and after['source_sha256']==freceipt['source_sha256']
+assert before['audited_pack_sha256']==after['audited_pack_sha256']==canon(oldpack)
+assert gzip.decompress((impact/'raw/baseline-pack.json.gz').read_bytes())==prior('cat_de_roman_esti/fixtures/games_pack.json')
+inputs_sha=sha((impact/'inputs.json').read_bytes())
+assert before['inputs_sha256']==after['inputs_sha256']==breceipt['inputs_sha256']==freceipt['inputs_sha256']==inputs_sha
+ids={r['id'] for r in oldpack['contexto'] if r['status']=='approved'}
+assert len(ids)==240 and set(before['contexto'])==set(after['contexto'])==ids
+assert before['contexto_api_requests']==after['contexto_api_requests']==16800
+assert before['contexto_observations_reused']==after['contexto_observations_reused']==0
+assert len(before['inputs'])==len(after['inputs'])==70
+categories=Counter();exact=0;won_changes=0;diffs=[];praf_ranks=Counter();same_rank_fields=Counter();lower=[];higher=[]
+for word in before['inputs']:
+ for itemid in before['contexto']:
+  b=before['contexto'][itemid];a=after['contexto'][itemid]
+  assert b['target']==a['target'] and b['errors']==a['errors']==[]
+  assert set(b['words'])==set(a['words'])==set(before['inputs'])
+  x,y=b['words'][word],a['words'][word]
+  assert x['http']==y['http']==200
+  won_changes+=x['won']!=y['won']
+  if x==y:exact+=1;continue
+  diffs.append({'id':itemid,'target':b['target'],'word':word,'before':x,'after':y})
+  if not x['ok'] and y['ok']:kind='newly_accepted'
+  elif x['guess']['id']!=y['guess']['id']:kind='identity_changed'
+  elif x['guess']['rank']==y['guess']['rank']:
+   kind='same_rank_other_fields'
+   for field in x['guess']:
+    if x['guess'][field]!=y['guess'][field]:same_rank_fields[field]+=1
+  else:
+   assert isinstance(x['guess']['rank'],int) and isinstance(y['guess']['rank'],int)
+   kind='lower_rank' if y['guess']['rank']<x['guess']['rank'] else 'higher_rank'
+   (lower if kind=='lower_rank' else higher).append({'id':itemid,'word':word,'before':x['guess']['rank'],'after':y['guess']['rank']})
+  categories[kind]+=1
+  if word=='Praf':praf_ranks['lower' if y['guess']['rank']<x['guess']['rank'] else 'higher' if y['guess']['rank']>x['guess']['rank'] else 'equal']+=1
+assert diffs==comparison['contexto']['changes']
+assert exact==11120 and len(diffs)==5680 and won_changes==0
+expected={'newly_accepted':2880,'identity_changed':240,'same_rank_other_fields':2385,'lower_rank':8,'higher_rank':167}
+assert dict(categories)==expected
+assert summary['contexto']['change_categories']=={**expected,'won_flag_changes':0}
+assert comparison['contexto']['by_word']==summary['contexto']['by_word']
+for word,stats in comparison['contexto']['by_word'].items():
+ changed=sum(b['words'][word]!=after['contexto'][i]['words'][word] for i,b in before['contexto'].items())
+ assert stats['changed']==changed and stats['unchanged']==240-changed
+for section in ['pack','derived','alchimie','lant','direct_routes','lant_guidance']:
+ assert comparison[section]==summary[section],section
+assert before['alchimie']==after['alchimie'] and len(before['alchimie'])==83
+for row in before['alchimie'].values():
+ assert canon(row['projection'])==row['projection_sha256'] and row['target_reachable'] and all(row['bounds'].values()) and not row['errors']
+assert before['lant']==after['lant'] and len(before['lant'])==100
+assert before['derived']==after['derived']
+assert sum(len(v['boards']) for v in before['derived'].values())==336
+menu={i for i,b in before['lant_choices'].items() if b!=after['lant_choices'][i]}
+assert menu=={'lt_stiinta_216'}
+for i,b in before['lant_choices'].items():
+ a=after['lant_choices'][i]
+ assert set(b['shortest_hops_shown'])==set(a['shortest_hops_shown'])
+ assert b['within_bound'] and a['within_bound']
+assert sum(len(x['shortest_hops_shown']) for x in before['lant_choices'].values())==206
+mb=before['lant_choices']['lt_stiinta_216'];ma=after['lant_choices']['lt_stiinta_216']
+assert set(mb['shown_ids'])-set(ma['shown_ids'])=={'n_v84_food_aluat'}
+assert set(ma['shown_ids'])-set(mb['shown_ids'])=={'n_v31_cleaning_dishes_burete_vase'}
+assert 'n_v84_food_aluat' not in mb['shortest_hop_ids']
+for old,new in zip(before['direct_routes'],after['direct_routes'],strict=True):
+ assert old['source']==new['source'] and old['target']==new['target']
+ assert new['api']['won'] and new['api']['moves']==1 and new['api']['http']==200
+ assert not old.get('api',{}).get('won')
+# Current inventories and full historical row preservation from actual git objects.
+games=['conexiuni','contexto','lant','alchimie'];assert sum(map(lambda g:len(oldpack[g]),games))==659
+assert sum(len(pack[g]) for g in games)==661
+assert Counter(r['status'] for g in games for r in pack[g])=={'approved':653,'pending':8}
+for g in games:
+ b={r['id']:r for r in oldpack[g]};a={r['id']:r for r in pack[g]}
+ assert {i:a[i] for i in b}==b
+ assert set(a)-set(b)==({'ct_viata_de_roman_355','ct_viata_de_roman_356'} if g=='contexto' else set())
+kgpath=root/'cat_de_roman_esti/fixtures/kg_sample.json';kg=read(kgpath);oldkg=json.loads(prior('cat_de_roman_esti/fixtures/kg_sample.json'))
+assert kg['kg_puzzles']==oldkg['kg_puzzles'] and len(kg['kg_puzzles'])==180
+bn={r['id']:r for r in oldkg['kg_nodes']};an={r['id']:r for r in kg['kg_nodes']}
+be={r['id']:r for r in oldkg['kg_edges']};ae={r['id']:r for r in kg['kg_edges']}
+assert {i:ae[i] for i in be}==be and len(ae)-len(be)==17
+added_edges=[r for i,r in ae.items() if i not in be]
+degrees=Counter(n for e in added_edges for n in [e['src_id'],e['dst_id']]);degree_changes=[]
+for i,b in bn.items():
+ a=an[i];assert {k:v for k,v in a.items() if k!='degree'}=={k:v for k,v in b.items() if k!='degree'}
+ assert a['degree']==b['degree']+degrees[i]
+ if a['degree']!=b['degree']:degree_changes.append({'id':i,'before':b['degree'],'after':a['degree']})
+assert len(degree_changes)==13
+assert sum(len(n.get('aliases',[])) for n in an.values())-sum(len(n.get('aliases',[])) for n in bn.values())==10
+assert set(an)-set(bn)=={'n_v90_household_praf','n_v90_food_firimitura','n_v90_textile_scama'}
+derived=read(root/'cat_de_roman_esti/fixtures/derived_catalog_v38.json')
+assert derived['boards']==json.loads(prior('cat_de_roman_esti/fixtures/derived_catalog_v38.json'))['boards']
+# Verify every complete inverse against actual baseline bytes and exercise tamper rejection.
+inverses={'kg_sample.json':H.before_v90_fixture,'games_pack.json':H.before_v90_pack,'board_rankings_v37.json':H.before_v90_rankings,'derived_catalog_v38.json':H.before_v90_derived,'cat_mobile_app_pack_contract.json':H.before_v90_mobile}
+reconstructed={};tamper=0
+for filename,inverse in inverses.items():
+ p=('tests/fixtures/' if filename.startswith('cat_mobile') else 'cat_de_roman_esti/fixtures/')+filename
+ blob=(root/p).read_bytes();current=json.loads(blob);old=inverse(current);indent=2 if filename=='kg_sample.json' else 1
+ rendered=(json.dumps(old,ensure_ascii=False,indent=indent)+'\n').encode();assert rendered==prior(p),filename
+ assert sha(blob)==CURRENT_CONTENT.artifact_sha256[p]
+ assert blob==(root/'tests/fixtures'/filename).read_bytes()
+ reconstructed[filename]={'before_sha256':sha(rendered),'after_sha256':sha(blob)}
+ for place in ['header','old_row']:
+  value=deepcopy(current)
+  if place=='header':value['manifest' if filename.startswith('cat_mobile') else 'meta']['reviewer_tamper']=True
+  else:value[next(k for k,v in value.items() if isinstance(v,list))][0]['reviewer_tamper']=True
+  try:inverse(value)
+  except AssertionError:tamper+=1
+  else:raise AssertionError((filename,place))
+ assert current==json.loads(blob)
+assert tamper==10
+# The previous V89 inverse still yields the recorded V88 baselines, not weakened pins.
+v89receipt=read(root/'docs/reviews/v89-feedback-and-conexiuni-recovery/artifact-delta.json')
+for filename,func in [('kg_sample.json',H.before_v89_fixture),('games_pack.json',H.before_v89_pack),('board_rankings_v37.json',H.before_v89_rankings),('derived_catalog_v38.json',H.before_v89_derived)]:
+ old=func(read(root/'cat_de_roman_esti/fixtures'/filename));indent=2 if filename=='kg_sample.json' else 1
+ assert sha((json.dumps(old,ensure_ascii=False,indent=indent)+'\n').encode())==v89receipt['files'][filename]['baseline_sha256']
+# Test normal and exception teardown once, in this isolated process, not a matrix rerun.
+current_ids={i.id for i in packs.get_pack().pool('contexto')};current_terms=P.PROJECTION_TERMS
+scope_results=[]
+class ReviewScopeExit(Exception):pass
+for raised in [False,True]:
+ mp=MonkeyPatch()
+ try:
+  try:
+   with v89_contexto_snapshot(mp) as (old_svc,old_pack):
+    assert old_svc.resolve('praf') is None and P.resolve_projection('praf').public_id=='ctxp_81703160cad7893fa1c9'
+    assert old_pack.selectable_count('contexto')==236 and C.get_pack() is old_pack and C.get_service() is old_svc
+    old_eligible={i.id for i in old_pack.pool('contexto') if i._pilot_eligible}
+    expected_old={r['id'] for r in json.loads(prior('cat_de_roman_esti/fixtures/board_rankings_v37.json'))['boards'] if r['game']=='contexto' and r['pilot_eligible']}
+    assert old_eligible==expected_old
+    if raised:raise ReviewScopeExit()
+  except ReviewScopeExit:assert raised
+  assert P.PROJECTION_TERMS==current_terms and P.resolve_projection('praf') is None
+  assert C.get_service().resolve('praf')=='n_v90_household_praf'
+  assert packs.get_pack().selectable_count('contexto')==CURRENT_CONTENT.contexto_eligible==238
+  assert {i.id for i in packs.get_pack().pool('contexto')}==current_ids
+  scope_results.append({'exception_raised':raised,'restored_exact_current_terms_and_selector':True})
+ finally:mp.undo()
+# Root capture snapshots include selected feedback fields, not the full response bodies.
+observed_fields=sorted(next(iter(before['contexto'].values()))['words']['Praf'])
+root_sources=dict(hreceipt['sources_sha256'])
+for name in ['impact/baseline-receipt.json','impact/final-receipt.json','impact/comparison-summary.json','impact/capture.py.txt','impact/compare.py.txt','impact/inputs.json','content-delta.json','artifact-delta.json','history-tests/verification.json','plate-topology-review.json']:
+ root_sources[str((rev/name).relative_to(root))]=sha((rev/name).read_bytes())
+assert {p:sha((root/p).read_bytes()) for p in root_sources}==root_sources
+outcome={'decision':'accept_final_content_and_history_evidence','baseline_commit':base,'source_sha256':root_sources,'archive_checks':archive_proofs,'inventory':{'before':659,'after':661,'approved':653,'pending':8,'old_pack_records_exact':659,'old_alchimie_books_and_profiles_exact':83,'old_lant_profiles_exact':100,'derived_rows_exact':336,'puzzles_exact':180,'new_concepts':3,'new_edges':17,'new_forms':10,'new_synonyms_reviewed':0,'old_degree_deltas':degree_changes},'impact':{'observations_each':16800,'records':240,'words':70,'fresh_requests_each':16800,'reused_each':0,'exact_selected_observations':exact,'changed':len(diffs),'change_categories':dict(categories),'won_changes':won_changes,'same_rank_changed_guess_fields':dict(same_rank_fields),'praf_identity_rank_directions':dict(praf_ranks),'lower_rank_examples':lower,'higher_rank_max':max(higher,key=lambda r:r['after']-r['before']),'compared_top_level_fields':observed_fields,'scope_correction':'Exactness covers captured selected feedback fields only, not full HTTP response bodies. Privacy/lifecycle/full-body claims rely on separate tests.'},'lant_menu':{'changed_record':'lt_stiinta_216','removed_nonshortest':'n_v84_food_aluat','added_nonshortest':'n_v31_cleaning_dishes_burete_vase','shortest_shown_before_and_after':206,'shortest_sets_exact_for_all100':True,'all_within_bound':True},'artifact_reconstruction':reconstructed,'tamper_controls_passed':tamper,'v89_inverse_preserved':True,'historical_scope_checks':scope_results,'history_receipt':{'passed':367,'new_cases':53,'source_bindings_verified':len(hreceipt['sources_sha256'])},'integration_status':'Full matrices already running under orchestrator; not rerun or claimed complete by this review.'}
+(scratch/'independent-audit.json').write_text(json.dumps(outcome,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({'inventory':{k:v for k,v in outcome['inventory'].items() if k!='old_degree_deltas'},'impact':{k:v for k,v in outcome['impact'].items() if k not in ['lower_rank_examples']},'artifacts_reconstructed':len(reconstructed),'tamper_controls':tamper,'archives_verified':len(archive_proofs),'scope_teardown':scope_results},ensure_ascii=False,indent=2))

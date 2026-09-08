@@ -1,0 +1,45 @@
+{
+  "result": "incomplete; excluded from passing gates",
+  "observed_exec_exit_code": 143,
+  "command": [
+    "python3",
+    "/home/dobo/work/_temp/feat__v90-household-discovery-and-critique-gates/run_gate.py",
+    "backend314"
+  ],
+  "pytest_command": [
+    "/home/dobo/work/_temp/feat__v90-household-discovery-and-critique-gates/py314/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-o",
+    "addopts="
+  ],
+  "completed_receipt_present": false,
+  "cause": "Not established; do not label it a test failure, timeout or memory issue without evidence.",
+  "archives": {
+    "backend314.log": {
+      "path": "backend314.log.gz",
+      "gzip_mtime": 0,
+      "decoded_sha256": "6922b74a0d3f1d45fea7db93557fce93a6da37e8bc4265c541af393376c0cd71",
+      "archive_sha256": "311bb4c23f96da844ef55a91e60531e3684519ea05ba69a03202c3c3d2300d6c",
+      "decoded_bytes": 1481,
+      "archive_bytes": 98
+    },
+    "run_gate.py": {
+      "path": "run_gate.py.gz",
+      "gzip_mtime": 0,
+      "decoded_sha256": "04ebb6525fbb4c648009ab289a69e6c1671782ea26137b9d88cad29c4e7e5da7",
+      "archive_sha256": "e15ce92693a1c7f74890b6c6cb6f6c446a5bc894682fa8267e8dce15e15147cf",
+      "decoded_bytes": 3012,
+      "archive_bytes": 1277
+    },
+    "input-freeze.json": {
+      "path": "input-freeze.json.gz",
+      "gzip_mtime": 0,
+      "decoded_sha256": "9952391f2f4799c068cb983a55629b13037ecdc01276517a4f7c53deae0fda5a",
+      "archive_sha256": "6da17d067226b478fa64156c088afa0723a24ba19d23c01840261e7a4e405ad4",
+      "decoded_bytes": 230548,
+      "archive_bytes": 76010
+    }
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "baseline_main": "190d7fdb86487c641d8a781ef7a5ce21f2b98031",
+  "record_count": 242,
+  "score_or_eligibility_changes": [],
+  "approved_warning_count": 4,
+  "approved_warnings": [
+    {
+      "id": "ct_geografie_030",
+      "label": "Lacul Roșu",
+      "status": "approved",
+      "incoming_ids": [
+        "n_cheile_bicazului"
+      ],
+      "count": 1,
+      "findings": [
+        {
+          "check": "salience_floor",
+          "level": "WARN",
+          "detail": "Lacul Roșu salience 0.16 < 0.35 (normal floor)"
+        },
+        {
+          "check": "contexto_incoming_floor",
+          "level": "WARN",
+          "detail": "1 unique existing non-distractor incoming neighbors < 5, excluding the target itself (ids: n_cheile_bicazului); five recognizable predecessors are impossible; recognition still requires independent review"
+        }
+      ],
+      "profile": {
+        "romanian_familiarity": 18,
+        "play_quality": 29,
+        "pilot_score": 22,
+        "pilot_eligible": true
+      }
+    },
+    {
+      "id": "ct_geografie_031",
+      "label": "Peștera Scărișoara",
+      "status": "approved",
+      "incoming_ids": [
+        "n_speologie",
+        "n_v2geo_pestera"
+      ],
+      "count": 2,
+      "findings": [
+        {
+          "check": "salience_floor",
+          "level": "WARN",
+          "detail": "Peștera Scărișoara salience 0.18 < 0.20 (greu floor)"
+        },
+        {
+          "check": "contexto_incoming_floor",
+          "level": "WARN",
+          "detail": "2 unique existing non-distractor incoming neighbors < 5, excluding the target itself (ids: n_speologie, n_v2geo_pestera); five recognizable predecessors are impossible; recognition still requires independent review"
+        }
+      ],
+      "profile": {
+        "romanian_familiarity": 24,
+        "play_quality": 43,
+        "pilot_score": 32,
+        "pilot_eligible": true
+      }
+    },
+    {
+      "id": "ct_istorie_309",
+      "label": "Abdicarea Regelui Mihai",
+      "status": "approved",
+      "incoming_ids": [
+        "n_comunismul_in_romania",
+        "n_mihai_i",
+        "n_v3ist_monarhie",
+        "n_v4ist_republica"
+      ],
+      "count": 4,
+      "findings": [
+        {
+          "check": "contexto_incoming_floor",
+          "level": "WARN",
+          "detail": "4 unique existing non-distractor incoming neighbors < 5, excluding the target itself (ids: n_comunismul_in_romania, n_mihai_i, n_v3ist_monarhie, n_v4ist_republica); five recognizable predecessors are impossible; recognition still requires independent review"
+        }
+      ],
+      "profile": {
+        "romanian_familiarity": 63,
+        "play_quality": 63,
+        "pilot_score": 63,
+        "pilot_eligible": true
+      }
+    },
+    {
+      "id": "ct_muzica_070",
+      "label": "B.U.G. Mafia",
+      "status": "approved",
+      "incoming_ids": [
+        "n_muz_dupa_blocuri",
+        "n_muz_hip_hop_ro",
+        "n_muz_parazitii",
+        "n_v2muz_rap_romanesc"
+      ],
+      "count": 4,
+      "findings": [
+        {
+          "check": "contexto_incoming_floor",
+          "level": "WARN",
+          "detail": "4 unique existing non-distractor incoming neighbors < 5, excluding the target itself (ids: n_muz_dupa_blocuri, n_muz_hip_hop_ro, n_muz_parazitii, n_v2muz_rap_romanesc); five recognizable predecessors are impossible; recognition still requires independent review"
+        }
+      ],
+      "profile": {
+        "romanian_familiarity": 64,
+        "play_quality": 70,
+        "pilot_score": 66,
+        "pilot_eligible": true
+      }
+    }
+  ],
+  "pending_holds": [
+    {
+      "id": "ct_meme_net_238",
+      "label": "Shitpost",
+      "status": "pending",
+      "incoming_ids": [
+        "n_net_comentarii_online",
+        "n_net_internet_romanesc",
+        "n_net_meme_romanesc",
+        "n_net_parodie_online",
+        "n_net_sketch_online",
+        "n_v18mem_brainrot",
+        "n_v2mem_comedie_online",
+        "n_v4mem_mema"
+      ],
+      "count": 8,
+      "findings": [],
+      "profile": {
+        "romanian_familiarity": 81,
+        "play_quality": 90,
+        "pilot_score": 85,
+        "pilot_eligible": false
+      }
+    },
+    {
+      "id": "ct_societate_257",
+      "label": "Industrie",
+      "status": "pending",
+      "incoming_ids": [
+        "n_socx_automobile_dacia",
+        "n_socx_craiova",
+        "n_socx_electroputere_craiova",
+        "n_socx_industria_romaneasca",
+        "n_socx_pitesti",
+        "n_socx_universitatea_politehnica_bucuresti",
+        "n_socx_uzina_resita",
+        "n_v17soc_sectorul_it",
+        "n_v2soc_port",
+        "n_v4soc_fabrica",
+        "n_v4soc_firma",
+        "n_v4soc_munca",
+        "n_v4soc_serviciu"
+      ],
+      "count": 13,
+      "findings": [],
+      "profile": {
+        "romanian_familiarity": 71,
+        "play_quality": 82,
+        "pilot_score": 75,
+        "pilot_eligible": false
+      }
+    }
+  ],
+  "source_sha256": {
+    "scripts/critique_pack.py": "0e0399d38ccd381f71380317c89e3d2564597d7ce573119e48a98bd581a12f13",
+    "scripts/rank_games_pack.py": "612c40edab2ecdc8949333c10cc26e6162321aab9de40181ea42b35db554cb25",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/graph.py": "496b56900c46fec1f9aacbe3ab5c0bb220e06058d64da840aaadee405ab115b0",
+    "tests/test_contexto_incoming_critique.py": "f970c05392cca356e7ae914d31bcf60ffc68a9a60bed52cabcf9f8f718efb75e",
+    "tests/test_critique_pack.py": "6fd11a46f6a105ca1b554969e29cfa9cd7239d1177aeb2873afde44f8741d8aa"
+  },
+  "baseline_audit_sha256": "92fa773f6ad9428b32f870347247be369c6cf3559522ce39580234c38a2d6a80"
+}

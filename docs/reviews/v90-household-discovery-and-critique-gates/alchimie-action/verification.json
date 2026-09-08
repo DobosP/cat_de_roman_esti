@@ -1,0 +1,674 @@
+{
+  "version": 90,
+  "baseline": "190d7fdb86487c641d8a781ef7a5ce21f2b98031",
+  "runtime": {
+    "node": "24.20.0",
+    "npm": "11.19.0",
+    "python": "3.12.3"
+  },
+  "checks": [
+    {
+      "key": "ruff",
+      "command": "PYTHONPATH=. <python312> -m ruff check tests/test_v90_alchimie_hint_recovery.py cat_de_roman_esti/wordgames/alchimie.py",
+      "exit_code": 0,
+      "log": "ruff.log.gz"
+    },
+    {
+      "key": "install",
+      "command": "npm ci",
+      "cwd": "frontend",
+      "exit_code": 0,
+      "log": "npm-ci.log.gz"
+    },
+    {
+      "key": "baseline_initial",
+      "command": "node frontend/node_modules/@playwright/test/cli.js test --config <scratch>/alchimie/playwright.config.mjs",
+      "exit_code": 1,
+      "passed": 1,
+      "failed": 3,
+      "log": "baseline-initial-browser.log.gz",
+      "meaning": "Three wrong toast expectations; reset passed. Not final proof."
+    },
+    {
+      "key": "baseline_second",
+      "command": "node frontend/node_modules/@playwright/test/cli.js test --config <scratch>/alchimie/playwright.config.mjs",
+      "exit_code": 1,
+      "passed": 0,
+      "failed": 4,
+      "log": "baseline-second-browser.log.gz",
+      "meaning": "Game creation rejected stale rubric/ranking inputs during another lane edit. No recovery claim."
+    },
+    {
+      "key": "baseline_clean_main",
+      "command": "node frontend/node_modules/@playwright/test/cli.js test --config <scratch>/alchimie/playwright.config.mjs",
+      "exit_code": 0,
+      "passed": 4,
+      "failed": 0,
+      "duration_seconds": 15.4,
+      "log": "baseline-browser.log.gz",
+      "meaning": "Config and solution helper use clean main190d7fd; all four losses prove one committed POST and zero browser GETs before implementation."
+    },
+    {
+      "key": "backend_initial",
+      "command": "PYTHONPATH=. <python312> -m pytest tests/test_v90_alchimie_hint_recovery.py tests/test_wordgames_session_store.py -q -o addopts=",
+      "exit_code": 0,
+      "passed": 24,
+      "duration_seconds": 1.14,
+      "log": "backend-focused-initial.log.gz"
+    },
+    {
+      "key": "backend_focused",
+      "command": "PYTHONPATH=. <python312> -m pytest tests/test_v90_alchimie_hint_recovery.py tests/test_wordgames_alchimie.py tests/test_v82_alchimie_pair_memo.py tests/test_v84_alchimie_explanations.py tests/test_wordgames_session_store.py -q -o addopts=",
+      "exit_code": 0,
+      "passed": 74,
+      "duration_seconds": 130.63,
+      "log": "backend-focused.log.gz"
+    },
+    {
+      "key": "native_initial",
+      "command": "npm test",
+      "cwd": "frontend",
+      "exit_code": 1,
+      "passed": 188,
+      "failed": 5,
+      "log": "native-initial.log.gz",
+      "meaning": "Five existing source-shape checks required the new shared owner and centralized state adoption."
+    },
+    {
+      "key": "native",
+      "command": "npm test",
+      "cwd": "frontend",
+      "exit_code": 0,
+      "passed": 193,
+      "failed": 0,
+      "duration_ms": 1245.359832,
+      "log": "native.log.gz"
+    },
+    {
+      "key": "lint",
+      "command": "npm run lint",
+      "cwd": "frontend",
+      "exit_code": 0,
+      "log": "lint.log.gz"
+    },
+    {
+      "key": "build",
+      "command": "npm run build",
+      "cwd": "frontend",
+      "exit_code": 0,
+      "initial_gzip_kib": 118.88,
+      "limit_kib": 120,
+      "log": "build.log.gz",
+      "includes": [
+        "TypeScript noEmit",
+        "Vite build",
+        "bundle budget"
+      ]
+    },
+    {
+      "key": "browser_initial",
+      "command": "npm run test:e2e -- alchimie-action-recovery.spec.mjs",
+      "cwd": "frontend",
+      "port": 8188,
+      "exit_code": 1,
+      "passed": 28,
+      "failed": 4,
+      "reported_duration": "4.9m",
+      "log": "browser-initial.log.gz",
+      "spec_archive": "browser-initial-spec.mjs.txt.gz",
+      "meaning": "Only the four desktop/mobile unmount cases used the wrong accessible exit label. Runtime source unchanged."
+    },
+    {
+      "key": "browser",
+      "command": "npm run test:e2e -- alchimie-action-recovery.spec.mjs",
+      "cwd": "frontend",
+      "port": 8188,
+      "exit_code": 0,
+      "passed": 32,
+      "failed": 0,
+      "reported_duration": "2.4m",
+      "log": "browser.log.gz",
+      "spec_sha256": "42e12e20cf81ab10a4a1cc31d2203caeb11900de61360373a002512fe140c9c0",
+      "meaning": "Corrected exit locator and stronger settled screenshot assertions; runtime source unchanged."
+    }
+  ],
+  "sources": {
+    "frontend/src/screens/Alchimie.tsx": "b6802da5b5d32b7fdaca647a907a0a6881a5c3a09c34f14e87065edf4cfff403",
+    "frontend/src/api/alchimie.ts": "bc2ec047be8e4365da9c6c77eda70dc0b4a4c9d620e4d9d87ae412704325d6f2",
+    "cat_de_roman_esti/wordgames/alchimie.py": "4ffd2eaf65b5e942992d7d84b52b8e221f1e2c7dfb7edff19fe35e0e74236ec8",
+    "tests/test_v90_alchimie_hint_recovery.py": "4fa58353b5a3c61e3fb414683ef47a28687fb9c895bf55d8d9cfec053dbce464",
+    "frontend/e2e/alchimie-action-recovery.spec.mjs": "42e12e20cf81ab10a4a1cc31d2203caeb11900de61360373a002512fe140c9c0",
+    "frontend/tests/alchimie-empty-recovery.test.mjs": "e1a862dfd1a9aae059d39ede9aad0f0486709e6480f1475d86522ac41b26b66e",
+    "frontend/tests/alchimie-lineage.test.mjs": "8043562201588a955cdb92dec5e20a26e3c057d48b6f9d847f7e3d8649fa84ca",
+    "frontend/tests/alchimie-projection.test.mjs": "f0d760b388b83a6d065a593f3e3edd9fb0e54df3436783daa641eb94be93aca2",
+    "docs/adr/0136-reconcile-uncertain-alchimie-actions.md": "96cbeec7efb9d5b877bf0c9fb48188cd450345fbe3ed61e322140b5753d8c374",
+    "docs/MOBILE_CONTRACT.md": "07585fdbc3696efc9cc472e23c008844108c63d4554f3478027dbf56c0e1356a"
+  },
+  "development_gate_bindings": {
+    "frontend/src/screens/Alchimie.tsx": "b6802da5b5d32b7fdaca647a907a0a6881a5c3a09c34f14e87065edf4cfff403",
+    "frontend/src/api/alchimie.ts": "bc2ec047be8e4365da9c6c77eda70dc0b4a4c9d620e4d9d87ae412704325d6f2",
+    "frontend/src/gameActionRecovery.mjs": "b73851fd616aed6489139cd800bad2e8e6ab3480664470e765fd044ba9eb6267",
+    "frontend/src/gameActionRecovery.d.mts": "7aa55580ab260591cb72eac5809cb541bb4f0787065051d70a12fd9a7fbc0f3c",
+    "frontend/src/hooks/useActiveGame.ts": "08e3dc295f75ee5b11f14a86b7b2836f7af73d7f5238decf7c650004c391cd02",
+    "frontend/src/hooks/useRecordScore.ts": "303cda5da3e26595ed39a5f9b2028ed6634318fc6c4a02bb9480dc310f3fee4b",
+    "frontend/src/hooks/useSavedGameResume.ts": "dff224adb580b3996c9145decb87fce217125de2cf1350b2e144919bc81070a5",
+    "cat_de_roman_esti/wordgames/alchimie.py": "4ffd2eaf65b5e942992d7d84b52b8e221f1e2c7dfb7edff19fe35e0e74236ec8",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "tests/test_v90_alchimie_hint_recovery.py": "4fa58353b5a3c61e3fb414683ef47a28687fb9c895bf55d8d9cfec053dbce464",
+    "frontend/e2e/alchimie-action-recovery.spec.mjs": "42e12e20cf81ab10a4a1cc31d2203caeb11900de61360373a002512fe140c9c0",
+    "frontend/e2e/seeded-starts.json": "eaf3e13ecc4a158ad2afb31b90190a89be8fbd2ac1e8d45409a84cdcd30cc097",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "407fa2f42ec907f41998f33e81d4d58f7fc345cbc733bede710518c34e441ac0",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "898628613c710aebe4a8a478354b58a15529cd1719bd866f01fbf968f039173c",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "b02e2d79704185773066c518d50d700c8add08ea089599a1b4a4cbc792d8eb76"
+  },
+  "archives": [
+    {
+      "source": "npm-ci.log",
+      "archive": "npm-ci.log.gz",
+      "decoded_sha256": "0aa646ee640d36c363bd04ef0c5b079525d99977720dfea4b70f9287639324e9",
+      "archive_sha256": "1f5343f0580c28d6eb000dd66bf0ccad9aa59745a7dfbc4f3e135c80d0e236d2",
+      "decoded_bytes": 143
+    },
+    {
+      "source": "build-initial.log",
+      "archive": "build-initial.log.gz",
+      "decoded_sha256": "995344d7e93ac211a6d1f191f8dbee1c341fa9cbeb95ddd59f64bbe50a179a96",
+      "archive_sha256": "f0256e558550f773e786c10aee9b502be192665f7331a7d37d577ea2415610a5",
+      "decoded_bytes": 589
+    },
+    {
+      "source": "build.log",
+      "archive": "build.log.gz",
+      "decoded_sha256": "0e352a13460d4ac65dafb36849efadc289092a68c7a457a621a274bd33b92718",
+      "archive_sha256": "519aa0e92ca9d9fd7ef5a4bcd4a6d28d946a4b385ac93e2adb1039b38370090e",
+      "decoded_bytes": 3123
+    },
+    {
+      "source": "lint-final.log",
+      "archive": "lint-final.log.gz",
+      "decoded_sha256": "d34b1b2ca0a451934a453edd03cba1b10c796fe836aea0345c560ad15cc3da1a",
+      "archive_sha256": "5a84b15c472ab34be13863e6a510bbfa4542629b4e6bfef08af6be6bf40fe0ab",
+      "decoded_bytes": 589
+    },
+    {
+      "source": "lint.log",
+      "archive": "lint.log.gz",
+      "decoded_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "archive_sha256": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a",
+      "decoded_bytes": 53
+    },
+    {
+      "source": "native-initial.log",
+      "archive": "native-initial.log.gz",
+      "decoded_sha256": "27b283387f49670e52e03fd84cd8ed9b0a5d9680a755f0707a00314d250174e7",
+      "archive_sha256": "ff65903e7946abfbf052abe1a2b2030909f4299c4c5a49abae72a6429088df50",
+      "decoded_bytes": 75301
+    },
+    {
+      "source": "native.log",
+      "archive": "native.log.gz",
+      "decoded_sha256": "d8ce660d43c4507c57d98f5e99ff316c928b20bc69c80df6c275dd40df3996ed",
+      "archive_sha256": "cc085b183fcd9c29db2d42f405b4988453382f0dfc1d915bc8ab11b68b626e20",
+      "decoded_bytes": 16432
+    },
+    {
+      "source": "baseline-initial-browser.log",
+      "archive": "baseline-initial-browser.log.gz",
+      "decoded_sha256": "beba36d66c41d93ccb9f1fb1e8492b84dbbad775565212689c88f8bf780889d4",
+      "archive_sha256": "4ce8d35b4d2b7112fa69ec2723f4dff60ec5934a42fbbc3ddfc102916afaca2a",
+      "decoded_bytes": 9715
+    },
+    {
+      "source": "baseline-second-browser.log",
+      "archive": "baseline-second-browser.log.gz",
+      "decoded_sha256": "b1a81c18bed383b4026928e1217a4b58e34ba8bd8d52ab9ac5612cdc816630c5",
+      "archive_sha256": "0c8aaf2e592c96a38488093c1f95333f42c7a3cdf09145368098dbc5f897f378",
+      "decoded_bytes": 69249
+    },
+    {
+      "source": "baseline-browser.log",
+      "archive": "baseline-browser.log.gz",
+      "decoded_sha256": "f9786d2a0f085332ae3f5022ccba1ff260de90d7af57d1fa3f4dc29991b1f0e8",
+      "archive_sha256": "c458f58bb055d4b0accac1b81b34be67d86bf3e31a4265ec835701c8eeabee55",
+      "decoded_bytes": 1117
+    },
+    {
+      "source": "backend-focused-initial.log",
+      "archive": "backend-focused-initial.log.gz",
+      "decoded_sha256": "bea2c3ffee28f34e50c4af84e034d6764e0ae7ea662ae4fd16078529a19c320f",
+      "archive_sha256": "504ce33cd8aa8bdeee31dc966bf6612dfea4830a93ebc0bb48da2464c3b6f590",
+      "decoded_bytes": 99
+    },
+    {
+      "source": "backend-focused.log",
+      "archive": "backend-focused.log.gz",
+      "decoded_sha256": "f1a5b81ff4f0e0931143ff89b02c8b83a71959bce7506f14b6b040d2a0138203",
+      "archive_sha256": "24683b29feee8c2e50592a21eda4a96b004ac46a0d32e68b460b67388eaad101",
+      "decoded_bytes": 191
+    },
+    {
+      "source": "browser-initial.log",
+      "archive": "browser-initial.log.gz",
+      "decoded_sha256": "07f2e7ff3ac4308b4dd63f52066d9dc94d2ec7743c1b692fe7addf528b336563",
+      "archive_sha256": "b5b146d7b7d38b22e8ea884d9498697e25067c62626675216957ce689641bdd1",
+      "decoded_bytes": 17517
+    },
+    {
+      "source": "browser.log",
+      "archive": "browser.log.gz",
+      "decoded_sha256": "c20c0a5ecb80c63c3c3a3d7b6420affbd8959afc5af9c3b54a84954c37b6dd5a",
+      "archive_sha256": "67e87a2cb3bbc2c6be78436142f31a7b4879d0213ec1132a92e84814c8b83ae1",
+      "decoded_bytes": 5521
+    },
+    {
+      "source": "ruff.log",
+      "archive": "ruff.log.gz",
+      "decoded_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "archive_sha256": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd",
+      "decoded_bytes": 19
+    },
+    {
+      "source": "baseline-bindings.json",
+      "archive": "baseline-bindings.json.gz",
+      "decoded_sha256": "1d9bb216d140dd4843955377f94e518a7d58db9e36685a5d9389f75d0ff79aee",
+      "archive_sha256": "ca8503cb32f6fcd672c23a0ec20ac09ceb438beead4fa75e84a99043ddedfe50",
+      "decoded_bytes": 892
+    },
+    {
+      "source": "candidate-gate-bindings.json",
+      "archive": "candidate-gate-bindings.json.gz",
+      "decoded_sha256": "3c2998e8b8f8620d56181d6638947b9f096774b93a57e7ae6174de4986ea9100",
+      "archive_sha256": "1f1c266627460bb2f1003bff34b636ad85029f5d89ec955dd3dcbf58ac02b68c",
+      "decoded_bytes": 2028
+    },
+    {
+      "source": "baseline.spec.mjs",
+      "archive": "baseline.spec.mjs.gz",
+      "decoded_sha256": "f127f5de7eb4bc370d5196b495b1d63c087224a03108a5c0aa1d4728750f0adc",
+      "archive_sha256": "982df85234c7a011aac5a46b1663c80e2739277f659a945353ffe96cbef0b5f7",
+      "decoded_bytes": 3257
+    },
+    {
+      "source": "baseline-initial.spec.mjs.txt",
+      "archive": "baseline-initial.spec.mjs.txt.gz",
+      "decoded_sha256": "1440ac596db79f014faef15af95c407a2199724612108eefe8768a227bbe242c",
+      "archive_sha256": "764d45f277f3c7cde7c8175e4636601e93c10ad64e10e909a496fcf03f8bb563",
+      "decoded_bytes": 3360
+    },
+    {
+      "source": "baseline-gamehelpers.mjs",
+      "archive": "baseline-gamehelpers.mjs.gz",
+      "decoded_sha256": "39a9d1a3b5eb74a64c529766cd14ac03830fbce4c51eb9acd93f386c1ece49ad",
+      "archive_sha256": "0584c40e71a92775e9dfd3a6f7b5858c8eea2967de45fc473d048e7b68fb0474",
+      "decoded_bytes": 5503
+    },
+    {
+      "source": "playwright.config.mjs",
+      "archive": "playwright.config.mjs.gz",
+      "decoded_sha256": "eeb97d772289e3da8d99a3fb6502beac24f7c136ede97a10281c5dfd39edc1f2",
+      "archive_sha256": "414c35ad32fc1b05989f7ebfb79002f33a3670d3dd2fda2ac18c2e7b6e1dae79",
+      "decoded_bytes": 875
+    },
+    {
+      "source": "browser-initial-spec.mjs.txt",
+      "archive": "browser-initial-spec.mjs.txt.gz",
+      "decoded_sha256": "b6755d6c18add523c3468c463fc44a8406406841d91c974c982b78737804b347",
+      "archive_sha256": "9460e4ea7378b13fb6b6bb3f0557dcbcf20aaacdae78d64a6e9d171a8ac8aaa1",
+      "decoded_bytes": 17474
+    },
+    {
+      "source": "baseline-initial-results/.last-run.json",
+      "archive": "baseline-initial-results--.last-run.json.gz",
+      "decoded_sha256": "8e18504fcead76b355a54512af41e59500a53dd94818466024444c2bfa2728b7",
+      "archive_sha256": "e237cf867c484a52ec96bd9ad349513898a84462eb8aaad639671b6abe2a047d",
+      "decoded_bytes": 194
+    },
+    {
+      "source": "baseline-initial-results/baseline-baseline-lost-combine-desktop/error-context.md",
+      "archive": "baseline-initial-results--baseline-baseline-lost-combine-desktop--error-context.md.gz",
+      "decoded_sha256": "3d18d2a764a9f28fbba62dc5262fcaaa0cf1f845c98a71ddc483726877f44b75",
+      "archive_sha256": "ef556d2694208c6eb6ee73a177c1b6c7fbe9501b6b942f3de4dd1d4001d44b02",
+      "decoded_bytes": 6028
+    },
+    {
+      "source": "baseline-initial-results/baseline-baseline-lost-hint-desktop/error-context.md",
+      "archive": "baseline-initial-results--baseline-baseline-lost-hint-desktop--error-context.md.gz",
+      "decoded_sha256": "6eeb34ca943670397a1b472bb3163de0a761f5fc7d44a06b3cc2514a190e9f70",
+      "archive_sha256": "fd3f5ecc0f2b714a806df305af0e1d35c807f3fddf11d1093efca47e5031fa14",
+      "decoded_bytes": 5675
+    },
+    {
+      "source": "baseline-initial-results/baseline-baseline-lost-reset-desktop/baseline-reset.json",
+      "archive": "baseline-initial-results--baseline-baseline-lost-reset-desktop--baseline-reset.json.gz",
+      "decoded_sha256": "0bb7ee1672d37bef6e80b303791a88ff26e0e2aebfc9bd94445fbc2ebb828b23",
+      "archive_sha256": "35641fcede84792f1dd1c35069f14bc57b7233a3a9878f6e627af01e267e3231",
+      "decoded_bytes": 8518
+    },
+    {
+      "source": "baseline-initial-results/baseline-baseline-lost-win-desktop/error-context.md",
+      "archive": "baseline-initial-results--baseline-baseline-lost-win-desktop--error-context.md.gz",
+      "decoded_sha256": "99d7072a0b45232e086c6e113f65049ceb5de6b2bde654180494a5833dd5af64",
+      "archive_sha256": "efb8333a5a5b6b0f4839e08f59d7c98dcf5c29dfbc87c2b5b991bbf53095c732",
+      "decoded_bytes": 6451
+    },
+    {
+      "source": "baseline-second-results/.last-run.json",
+      "archive": "baseline-second-results--.last-run.json.gz",
+      "decoded_sha256": "c31510fab80294fb63ee79b97550baacc594d524fc2fc4b7124330cc45f8c98b",
+      "archive_sha256": "d6f8f97bb5529378b1170ad9e10f610b1ca13b7c87e30630186519a0fea02a28",
+      "decoded_bytes": 243
+    },
+    {
+      "source": "baseline-second-results/baseline-baseline-lost-combine-desktop/error-context.md",
+      "archive": "baseline-second-results--baseline-baseline-lost-combine-desktop--error-context.md.gz",
+      "decoded_sha256": "4e841a5f5371f3fe39279b6c7aee37f6390ae71ea311f826e3124271067e4a48",
+      "archive_sha256": "a907e0d4ba5b271bf48fae60c5eacfbc77c5e3b8f4e8c7cd04671b50080c7b24",
+      "decoded_bytes": 8917
+    },
+    {
+      "source": "baseline-second-results/baseline-baseline-lost-hint-desktop/error-context.md",
+      "archive": "baseline-second-results--baseline-baseline-lost-hint-desktop--error-context.md.gz",
+      "decoded_sha256": "94241ab467796d1e76b1d4f45cbba88529a052da76626ac5815a0da8f57b4f99",
+      "archive_sha256": "287737bd959aa92d1df616dd54128820969df7a9bf819b742c27e38b4506fbf7",
+      "decoded_bytes": 8914
+    },
+    {
+      "source": "baseline-second-results/baseline-baseline-lost-reset-desktop/error-context.md",
+      "archive": "baseline-second-results--baseline-baseline-lost-reset-desktop--error-context.md.gz",
+      "decoded_sha256": "ffdad4f0132a9cb619964abc3f133fc5a6d1a1cf9a5338b40af753575cf70d07",
+      "archive_sha256": "1e3bfcf0fe5d167b3d886abda908ce847f8e6bba3598406ef3df05fb09b71218",
+      "decoded_bytes": 8915
+    },
+    {
+      "source": "baseline-second-results/baseline-baseline-lost-win-desktop/error-context.md",
+      "archive": "baseline-second-results--baseline-baseline-lost-win-desktop--error-context.md.gz",
+      "decoded_sha256": "bde0e9521137d0cdffc836734b5332db9c9035161812dcd788772c7dd6717955",
+      "archive_sha256": "7e71c0716f793e14592d91efafdf9a5249e3f642ae7f314263f0da0476ca05e3",
+      "decoded_bytes": 8913
+    },
+    {
+      "source": "baseline-results/.last-run.json",
+      "archive": "baseline-results--.last-run.json.gz",
+      "decoded_sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "archive_sha256": "ef94fcdc04da4703dc723d02a781282e4b455e1b3176cc7862e6c14c9851bca9",
+      "decoded_bytes": 45
+    },
+    {
+      "source": "baseline-results/baseline-baseline-lost-combine-desktop/baseline-combine.json",
+      "archive": "baseline-results--baseline-baseline-lost-combine-desktop--baseline-combine.json.gz",
+      "decoded_sha256": "986838f4f1150f970aa536202f40e1631003fc6322a02c0f93d8aecc1f4b2259",
+      "archive_sha256": "5f654fdc1e0a101b8884000e316439ca96e4aa04210c22623c48233782394f20",
+      "decoded_bytes": 9609
+    },
+    {
+      "source": "baseline-results/baseline-baseline-lost-hint-desktop/baseline-hint.json",
+      "archive": "baseline-results--baseline-baseline-lost-hint-desktop--baseline-hint.json.gz",
+      "decoded_sha256": "57c5763000c07b58d8219d57b65dccde277dac1f4d3c7096921b2913d90acbe7",
+      "archive_sha256": "10238c7a0fdc8ddb9c7123888395e080ba0e7867027de1ff0f15470eccc8b103",
+      "decoded_bytes": 7366
+    },
+    {
+      "source": "baseline-results/baseline-baseline-lost-reset-desktop/baseline-reset.json",
+      "archive": "baseline-results--baseline-baseline-lost-reset-desktop--baseline-reset.json.gz",
+      "decoded_sha256": "9b485bf5606914bc66ffc69e9934ec361b801441691406e53c9624bcc3bd5a4a",
+      "archive_sha256": "fd0340821d32bac44e1240556e9af22a94d9f9f7268065d8ab008e0e5f9f0f70",
+      "decoded_bytes": 8518
+    },
+    {
+      "source": "baseline-results/baseline-baseline-lost-win-desktop/baseline-win.json",
+      "archive": "baseline-results--baseline-baseline-lost-win-desktop--baseline-win.json.gz",
+      "decoded_sha256": "54eef7165be7a5275aeee2d7ac36c1442946af0eff26656847a7479888f94383",
+      "archive_sha256": "8106fc9509538efb10ea9fee402b2288cdebf39e4a804c11010198009daca481",
+      "decoded_bytes": 13573
+    },
+    {
+      "source": "focused-initial-results/.last-run.json",
+      "archive": "focused-initial-results--.last-run.json.gz",
+      "decoded_sha256": "667b03397d7ecfc1ac5560789f7b3c8b2f13ec28baea4fea64a64502cfc5931f",
+      "archive_sha256": "f43e39e0ee2157b1d6ea5cb447731ec8035db7c269c40a71818626e005586bf9",
+      "decoded_bytes": 243
+    },
+    {
+      "source": "focused-initial-results/alchimie-action-recovery-u-6e565-s-owned-progress-for-resume-desktop/error-context.md",
+      "archive": "focused-initial-results--alchimie-action-recovery-u-6e565-s-owned-progress-for-resume-desktop--error-context.md.gz",
+      "decoded_sha256": "a9f045822b09b0d3c246623f76eb69b5debfb0d8ab9d586fd1371ac71ca071d6",
+      "archive_sha256": "c3128cfdc3f254536c87d6f8663df5bef66b1618a0a9ddbbc3f9bb5a77d96b64",
+      "decoded_bytes": 11679
+    },
+    {
+      "source": "focused-initial-results/alchimie-action-recovery-u-6e565-s-owned-progress-for-resume-mobile/error-context.md",
+      "archive": "focused-initial-results--alchimie-action-recovery-u-6e565-s-owned-progress-for-resume-mobile--error-context.md.gz",
+      "decoded_sha256": "a9f045822b09b0d3c246623f76eb69b5debfb0d8ab9d586fd1371ac71ca071d6",
+      "archive_sha256": "c3128cfdc3f254536c87d6f8663df5bef66b1618a0a9ddbbc3f9bb5a77d96b64",
+      "decoded_bytes": 11679
+    },
+    {
+      "source": "focused-initial-results/alchimie-action-recovery-u-9f691-s-owned-progress-for-resume-desktop/error-context.md",
+      "archive": "focused-initial-results--alchimie-action-recovery-u-9f691-s-owned-progress-for-resume-desktop--error-context.md.gz",
+      "decoded_sha256": "81a7e3c840deb6887730bc8cfcc1096d974b066f5fc5ed4ce0d1c30c5a489212",
+      "archive_sha256": "43f4cc51e668084c395077da182de8272846b49cd79217d0323d041069a1a886",
+      "decoded_bytes": 11675
+    },
+    {
+      "source": "focused-initial-results/alchimie-action-recovery-u-9f691-s-owned-progress-for-resume-mobile/error-context.md",
+      "archive": "focused-initial-results--alchimie-action-recovery-u-9f691-s-owned-progress-for-resume-mobile--error-context.md.gz",
+      "decoded_sha256": "81a7e3c840deb6887730bc8cfcc1096d974b066f5fc5ed4ce0d1c30c5a489212",
+      "archive_sha256": "43f4cc51e668084c395077da182de8272846b49cd79217d0323d041069a1a886",
+      "decoded_bytes": 11675
+    },
+    {
+      "source": "focused-results/.last-run.json",
+      "archive": "focused-results--.last-run.json.gz",
+      "decoded_sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "archive_sha256": "ef94fcdc04da4703dc723d02a781282e4b455e1b3176cc7862e6c14c9851bca9",
+      "decoded_bytes": 45
+    }
+  ],
+  "images": [
+    {
+      "source": "baseline-initial-results/baseline-baseline-lost-reset-desktop/baseline-reset.png",
+      "path": "baseline-initial-results--baseline-baseline-lost-reset-desktop--baseline-reset.png",
+      "sha256": "448ebde2c4310b876bc123ec3e634e1c513038097c58ee88f913365f6e4b0d6b",
+      "bytes": 388175
+    },
+    {
+      "source": "baseline-results/baseline-baseline-lost-combine-desktop/baseline-combine.png",
+      "path": "baseline-results--baseline-baseline-lost-combine-desktop--baseline-combine.png",
+      "sha256": "45a03e24e775b2a7078710ca874246d25a94976eac5f4bfd804399a586d6e3a4",
+      "bytes": 418231
+    },
+    {
+      "source": "baseline-results/baseline-baseline-lost-hint-desktop/baseline-hint.png",
+      "path": "baseline-results--baseline-baseline-lost-hint-desktop--baseline-hint.png",
+      "sha256": "e29f443ccf4c85993a67e1cec100b34322825935a1c5a299fe652d40044cc8cd",
+      "bytes": 419158
+    },
+    {
+      "source": "baseline-results/baseline-baseline-lost-reset-desktop/baseline-reset.png",
+      "path": "baseline-results--baseline-baseline-lost-reset-desktop--baseline-reset.png",
+      "sha256": "448ebde2c4310b876bc123ec3e634e1c513038097c58ee88f913365f6e4b0d6b",
+      "bytes": 388175
+    },
+    {
+      "source": "baseline-results/baseline-baseline-lost-win-desktop/baseline-win.png",
+      "path": "baseline-results--baseline-baseline-lost-win-desktop--baseline-win.png",
+      "sha256": "2d22d7fbe277d3a39c6cf5e6f64e333edd66716576b858d512e580e64cdc1963",
+      "bytes": 378574
+    },
+    {
+      "source": "focused-initial-results/alchimie-action-recovery-f-2d544-ons-and-retries-by-GET-only-desktop/read-only-recovery.png",
+      "path": "focused-initial-results--alchimie-action-recovery-f-2d544-ons-and-retries-by-GET-only-desktop--read-only-recovery.png",
+      "sha256": "c2614f7db38d680ae8ad6d4b7f25699476c52d2ee7cabac234895fbcba65fb6b",
+      "bytes": 388502
+    },
+    {
+      "source": "focused-initial-results/alchimie-action-recovery-f-2d544-ons-and-retries-by-GET-only-mobile/read-only-recovery.png",
+      "path": "focused-initial-results--alchimie-action-recovery-f-2d544-ons-and-retries-by-GET-only-mobile--read-only-recovery.png",
+      "sha256": "f926424be667c756ce0be676403d3907b8a9ce76843acf0ebec31851344ffac1",
+      "bytes": 720095
+    },
+    {
+      "source": "focused-initial-results/alchimie-action-recovery-l-55c6c-terminal-score-exactly-once-desktop/recovered-win.png",
+      "path": "focused-initial-results--alchimie-action-recovery-l-55c6c-terminal-score-exactly-once-desktop--recovered-win.png",
+      "sha256": "968e7712b9d2d9c6ee844b13be3438f1fbc6586ff4f5e02e17c969ea10990bf5",
+      "bytes": 327968
+    },
+    {
+      "source": "focused-initial-results/alchimie-action-recovery-l-55c6c-terminal-score-exactly-once-mobile/recovered-win.png",
+      "path": "focused-initial-results--alchimie-action-recovery-l-55c6c-terminal-score-exactly-once-mobile--recovered-win.png",
+      "sha256": "e55d6cef8983a3d30d00cf41d8bc7188b639a506fc7af9182f21efdb8f27669e",
+      "bytes": 456216
+    },
+    {
+      "source": "focused-initial-results/alchimie-action-recovery-l-a3d5e-sume-without-another-charge-desktop/recovered-hint-2.png",
+      "path": "focused-initial-results--alchimie-action-recovery-l-a3d5e-sume-without-another-charge-desktop--recovered-hint-2.png",
+      "sha256": "e05b54cad2cf11c83ba975f9f8ce9460b0a73282dfa131c49749dd6835b4f25d",
+      "bytes": 379804
+    },
+    {
+      "source": "focused-initial-results/alchimie-action-recovery-l-a3d5e-sume-without-another-charge-mobile/recovered-hint-2.png",
+      "path": "focused-initial-results--alchimie-action-recovery-l-a3d5e-sume-without-another-charge-mobile--recovered-hint-2.png",
+      "sha256": "68e3e812d2d1cb31cdb618bf4dd7f39bae1d198cc8cd9a78c7a52906ff6189a6",
+      "bytes": 728468
+    },
+    {
+      "source": "focused-initial-results/alchimie-action-recovery-l-cb234-sume-without-another-charge-desktop/recovered-hint-1.png",
+      "path": "focused-initial-results--alchimie-action-recovery-l-cb234-sume-without-another-charge-desktop--recovered-hint-1.png",
+      "sha256": "e7eb5ac597914c513a13d6916ee9e4dfa895fe07c20f3cbc6d8c067da1a45a01",
+      "bytes": 410462
+    },
+    {
+      "source": "focused-initial-results/alchimie-action-recovery-l-cb234-sume-without-another-charge-mobile/recovered-hint-1.png",
+      "path": "focused-initial-results--alchimie-action-recovery-l-cb234-sume-without-another-charge-mobile--recovered-hint-1.png",
+      "sha256": "285f79e3a9d7446336a21f973a4b5a9c1a0ae38c9925887de46ee71302110bbf",
+      "bytes": 772488
+    },
+    {
+      "source": "focused-initial-results/alchimie-action-recovery-l-dafaa-nventory-and-private-target-desktop/recovered-inventory.png",
+      "path": "focused-initial-results--alchimie-action-recovery-l-dafaa-nventory-and-private-target-desktop--recovered-inventory.png",
+      "sha256": "0d93cc9941e3692196f32e41ac758d2f8159c57ac1756afdcaee64383816d50f",
+      "bytes": 381788
+    },
+    {
+      "source": "focused-initial-results/alchimie-action-recovery-l-dafaa-nventory-and-private-target-mobile/recovered-inventory.png",
+      "path": "focused-initial-results--alchimie-action-recovery-l-dafaa-nventory-and-private-target-mobile--recovered-inventory.png",
+      "sha256": "ac47abb469e0143766ba870a52a2467a57d6255ac32187a3f642b5424a6b2027",
+      "bytes": 645774
+    },
+    {
+      "source": "focused-initial-results/alchimie-action-recovery-u-6e565-s-owned-progress-for-resume-desktop/test-failed-1.png",
+      "path": "focused-initial-results--alchimie-action-recovery-u-6e565-s-owned-progress-for-resume-desktop--test-failed-1.png",
+      "sha256": "26cb177c43caa5a6d657783397b62cd997790dd5d6ba65acc7f15f21e5cf4219",
+      "bytes": 415817
+    },
+    {
+      "source": "focused-initial-results/alchimie-action-recovery-u-6e565-s-owned-progress-for-resume-mobile/test-failed-1.png",
+      "path": "focused-initial-results--alchimie-action-recovery-u-6e565-s-owned-progress-for-resume-mobile--test-failed-1.png",
+      "sha256": "a3cdf4ae54c5866ac547ad605310bcde0c40fef60bc61792cdb70e91854417a1",
+      "bytes": 759323
+    },
+    {
+      "source": "focused-initial-results/alchimie-action-recovery-u-9f691-s-owned-progress-for-resume-desktop/test-failed-1.png",
+      "path": "focused-initial-results--alchimie-action-recovery-u-9f691-s-owned-progress-for-resume-desktop--test-failed-1.png",
+      "sha256": "26cb177c43caa5a6d657783397b62cd997790dd5d6ba65acc7f15f21e5cf4219",
+      "bytes": 415817
+    },
+    {
+      "source": "focused-initial-results/alchimie-action-recovery-u-9f691-s-owned-progress-for-resume-mobile/test-failed-1.png",
+      "path": "focused-initial-results--alchimie-action-recovery-u-9f691-s-owned-progress-for-resume-mobile--test-failed-1.png",
+      "sha256": "a3cdf4ae54c5866ac547ad605310bcde0c40fef60bc61792cdb70e91854417a1",
+      "bytes": 759323
+    },
+    {
+      "source": "focused-results/alchimie-action-recovery-f-2d544-ons-and-retries-by-GET-only-desktop/read-only-recovery.png",
+      "path": "focused-results--alchimie-action-recovery-f-2d544-ons-and-retries-by-GET-only-desktop--read-only-recovery.png",
+      "sha256": "c2614f7db38d680ae8ad6d4b7f25699476c52d2ee7cabac234895fbcba65fb6b",
+      "bytes": 388502
+    },
+    {
+      "source": "focused-results/alchimie-action-recovery-f-2d544-ons-and-retries-by-GET-only-mobile/read-only-recovery.png",
+      "path": "focused-results--alchimie-action-recovery-f-2d544-ons-and-retries-by-GET-only-mobile--read-only-recovery.png",
+      "sha256": "f926424be667c756ce0be676403d3907b8a9ce76843acf0ebec31851344ffac1",
+      "bytes": 720095
+    },
+    {
+      "source": "focused-results/alchimie-action-recovery-l-55c6c-terminal-score-exactly-once-desktop/recovered-win.png",
+      "path": "focused-results--alchimie-action-recovery-l-55c6c-terminal-score-exactly-once-desktop--recovered-win.png",
+      "sha256": "d14a3a50fd6365ab8c95fa2c78c8d2fd073bbe77b7b8555ae110361f3cc911cb",
+      "bytes": 328106
+    },
+    {
+      "source": "focused-results/alchimie-action-recovery-l-55c6c-terminal-score-exactly-once-mobile/recovered-win.png",
+      "path": "focused-results--alchimie-action-recovery-l-55c6c-terminal-score-exactly-once-mobile--recovered-win.png",
+      "sha256": "da47918f561ccfb916ff1850b91e1fafb819c26ac5a1e96dea4cafdd27bcf9a4",
+      "bytes": 450920
+    },
+    {
+      "source": "focused-results/alchimie-action-recovery-l-a3d5e-sume-without-another-charge-desktop/recovered-hint-2.png",
+      "path": "focused-results--alchimie-action-recovery-l-a3d5e-sume-without-another-charge-desktop--recovered-hint-2.png",
+      "sha256": "ec5b0ae088ec6b7c6b1631b1c022a9ca679bc7721e871a8041b5b612c4f7e79c",
+      "bytes": 379601
+    },
+    {
+      "source": "focused-results/alchimie-action-recovery-l-a3d5e-sume-without-another-charge-mobile/recovered-hint-2.png",
+      "path": "focused-results--alchimie-action-recovery-l-a3d5e-sume-without-another-charge-mobile--recovered-hint-2.png",
+      "sha256": "cc350832a6415b706e5cb319f48dead5f27b518207dd59d38041bab66d63914d",
+      "bytes": 723287
+    },
+    {
+      "source": "focused-results/alchimie-action-recovery-l-cb234-sume-without-another-charge-desktop/recovered-hint-1.png",
+      "path": "focused-results--alchimie-action-recovery-l-cb234-sume-without-another-charge-desktop--recovered-hint-1.png",
+      "sha256": "a41131a2218190f6a1e1f85067c0151c1e3d78251c6b94d74edc427460a904f6",
+      "bytes": 410031
+    },
+    {
+      "source": "focused-results/alchimie-action-recovery-l-cb234-sume-without-another-charge-mobile/recovered-hint-1.png",
+      "path": "focused-results--alchimie-action-recovery-l-cb234-sume-without-another-charge-mobile--recovered-hint-1.png",
+      "sha256": "caeeea359e097d6ce9fe90b39a51ab1ac1ae348c3c76064ea4abc38c241b165d",
+      "bytes": 765569
+    },
+    {
+      "source": "focused-results/alchimie-action-recovery-l-dafaa-nventory-and-private-target-desktop/recovered-inventory.png",
+      "path": "focused-results--alchimie-action-recovery-l-dafaa-nventory-and-private-target-desktop--recovered-inventory.png",
+      "sha256": "0d93cc9941e3692196f32e41ac758d2f8159c57ac1756afdcaee64383816d50f",
+      "bytes": 381788
+    },
+    {
+      "source": "focused-results/alchimie-action-recovery-l-dafaa-nventory-and-private-target-mobile/recovered-inventory.png",
+      "path": "focused-results--alchimie-action-recovery-l-dafaa-nventory-and-private-target-mobile--recovered-inventory.png",
+      "sha256": "ac47abb469e0143766ba870a52a2467a57d6255ac32187a3f642b5424a6b2027",
+      "bytes": 645774
+    }
+  ],
+  "initial_command_errors": [
+    {
+      "command": "npm run build",
+      "cwd": "repository root",
+      "exit_code": 254,
+      "log": "build-initial.log.gz"
+    },
+    {
+      "command": "npm run lint",
+      "cwd": "repository root",
+      "exit_code": 254,
+      "log": "lint-final.log.gz"
+    }
+  ],
+  "visual_qa": {
+    "inspected": [
+      "focused-results/alchimie-action-recovery-l-a3d5e-sume-without-another-charge-mobile/recovered-hint-2.png",
+      "focused-results/alchimie-action-recovery-l-55c6c-terminal-score-exactly-once-desktop/recovered-win.png",
+      "focused-results/alchimie-action-recovery-f-2d544-ons-and-retries-by-GET-only-mobile/read-only-recovery.png"
+    ],
+    "result": "Legible earned pair and selected bench; full settled1000-point result; visible read-only retry with locked actions. Mobile HUD retains existing horizontal scroll."
+  },
+  "limitations": [
+    "Focused lane checks precede final V90 graph/content integration; parent full matrices remain mandatory.",
+    "Agent visual checks are not human/device playtesting.",
+    "GET shows current state without identifying which request caused it.",
+    "Full raw logs, error contexts and screenshots are archived; bulky optional Playwright trace zips remain ephemeral."
+  ]
+}

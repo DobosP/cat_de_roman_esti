@@ -168,6 +168,8 @@ class AlchimieSession:
     fruitless_total: int = 0
     # Number of hints (nudges) the player has revealed; each costs a little score.
     hints_used: int = 0
+    # One already-earned public cue; cleared by a new experiment or reset.
+    earned_hint: dict[str, object] | None = None
     # Player- or server-selected board theme + curated-pack provenance (None for mined games).
     category: str | None = None
     pack_id: str | None = None
@@ -877,6 +879,8 @@ def _state_payload(game_id: str, session: AlchimieSession) -> dict[str, object]:
             ),
         },
     }
+    if session.earned_hint is not None:
+        payload["earned_hint"] = session.earned_hint
     if session.daily:
         payload["daily"] = session.daily
     if session.category:
@@ -1017,6 +1021,7 @@ class CombineView(ContractAPIView):
         # the 32-concept construction invariant was violated elsewhere.
         if len(session.attempted_pairs) >= MAX_ATTEMPTED_PAIRS:
             raise http_error(409, "Limita de experimente a jocului a fost atinsă.")
+        session.earned_hint = None
         session.attempted_pairs.add(pair)
         session.moves += 1
         # The category graph was used only to build this private, target-useful recipe
@@ -1084,6 +1089,7 @@ class HintGameView(ContractAPIView):
         pair = _useful_pair(session)
         session.fruitless_streak = 0
         if pair is None:
+            session.earned_hint = None
             # Defensive: no forward pair (shouldn't happen for built instances).
             payload = _state_payload(game_id, session)
             payload["hint"] = None
@@ -1129,6 +1135,11 @@ class HintGameView(ContractAPIView):
                 f"Indiciu: combină {get_service().label(a)} + "
                 f"{get_service().label(b)}."
             )
+        # Select only these freshly authored public fields, never a state snapshot or route.
+        session.earned_hint = {
+            key: payload[key] for key in ("hint", "hint_kind", "hint_output", "message")
+        }
+        payload["earned_hint"] = session.earned_hint
         return Response(payload)
 
 
@@ -1143,6 +1154,7 @@ class ResetGameView(ContractAPIView):
         session.fruitless_streak = 0
         session.fruitless_total = 0
         session.hints_used = 0
+        session.earned_hint = None
         session.attempted_pairs.clear()
         for s in session.seeds:
             session.add(s, None)

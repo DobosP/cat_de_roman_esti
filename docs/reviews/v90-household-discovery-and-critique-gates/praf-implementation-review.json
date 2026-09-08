@@ -1,0 +1,128 @@
+{
+  "reviewer": "v90_critique_independent",
+  "decision": "accept_actual_implementation",
+  "reviewed_at_utc": "2026-09-08T18:30:17.362485+00:00",
+  "proposal_sha256": "c80e098ad1c73a9a4208998995a943704e99ce5461176c8e748c560b0c9bde28",
+  "graph_proposal_sha256": "672ea9f249ec9f18dbc51c24427580b61e98abbaef2b7b3a6d0fd5c557d395ba",
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/games_pack.json": "c15e86de0916cb93be91bd4a13129e7665031b806d8be0957524e88e596c8ddf",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "e394d10a2b8f7109d19b6ef8191084b45eb3e3a0c1801c30375c69e5bb4e9eb0",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "ca978a9ab09c455440e1ae640b172e884ee3c716107ad10a3d16354173539b94",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "8dc809f1dbbb0452d3ae0eb4d5777b7d41c56582088e16eef20c33bf29e8d17a",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+    "cat_de_roman_esti/wordgames/derived_catalog.py": "64d9cc8503adbee8d566a0b27959cb679649a253b7f03b473420d77ce4d8ed2b",
+    "scripts/critique_pack.py": "0e0399d38ccd381f71380317c89e3d2564597d7ce573119e48a98bd581a12f13",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+  },
+  "implemented_scope": "Whole-module AST equality proves only native praf exclusion and removal of the dead3-target neighborhood. Contexto engine, feedback policy and service files are baseline-byte-exact.",
+  "checks": {
+    "whole_module_ast_exact_proposal": true,
+    "fresh_dossiers_exact": true,
+    "other_projection_rows_exact": 464,
+    "projection_domains": 26,
+    "native_audit_tuples_exact": 4,
+    "native_pairs_exact": 11,
+    "legacy_proxies_exact": 71,
+    "old_graph_node_semantic_fields_exact": 2413,
+    "old_graph_edges_exact": 9442,
+    "old_regenerated_degree_count": 13,
+    "new_concepts": 3,
+    "new_directed_links": 17,
+    "stored_new_forms": 10,
+    "reviewed_new_synonyms": 0,
+    "old_owner_surface_checks": 13457,
+    "first_guesses": 82,
+    "journey_requests": 26,
+    "nonwinning_private_typo_probes": 6,
+    "private_native_dust_exact_wins": 3,
+    "custom_owner_absent_unknown_zero_attempt_probes": 3,
+    "coherent_public_create": 1
+  },
+  "old_regenerated_degree_changes": [
+    {
+      "id": "n_v3sti_electricitate",
+      "before": 11,
+      "after": 12
+    },
+    {
+      "id": "n_v4gas_apa",
+      "before": 29,
+      "after": 30
+    },
+    {
+      "id": "n_v4gas_paine",
+      "before": 20,
+      "after": 21
+    },
+    {
+      "id": "n_v24_food_snack_biscuit",
+      "before": 14,
+      "after": 15
+    },
+    {
+      "id": "n_v24_home_textiles_patura",
+      "before": 6,
+      "after": 7
+    },
+    {
+      "id": "n_v24_home_textiles_covor",
+      "before": 6,
+      "after": 9
+    },
+    {
+      "id": "n_v29_clothing_everyday_haina",
+      "before": 8,
+      "after": 9
+    },
+    {
+      "id": "n_v30_kitchen_table_farfurie",
+      "before": 5,
+      "after": 6
+    },
+    {
+      "id": "n_v31_cleaning_floor_mop",
+      "before": 7,
+      "after": 8
+    },
+    {
+      "id": "n_v31_cleaning_floor_aspirator",
+      "before": 5,
+      "after": 10
+    },
+    {
+      "id": "n_v31_cleaning_floor_faras",
+      "before": 6,
+      "after": 8
+    },
+    {
+      "id": "n_v31_cleaning_dishes_burete_vase",
+      "before": 6,
+      "after": 8
+    },
+    {
+      "id": "n_v88_cleaning_matura",
+      "before": 5,
+      "after": 6
+    }
+  ],
+  "semantic_tradeoffs": [
+    "Praf is native n_v90_household_praf; retired synthetic ctxp_81703160cad7893fa1c9 and Pământ approximation are absent.",
+    "Old scoped rank2 is now direct native rank4 for Făraș/Aspirator. Both stay hot/nonwinning; no compensating scoring override was added.",
+    "Custom graphs lacking native dust return unknown/zero attempts for Praf/praful/prafului; no synthetic fallback is resurrected.",
+    "Praf de copt/Lapte praf/Pământ retain distinct owners; all13,457 baseline node-ID/label/form resolutions stay exact.",
+    "Six typo probes disclose no hidden native or projected-anchor answer; three exact native dust forms can win a private dust-target session without making dust eligible for the public catalog."
+  ],
+  "verification": "final-analyst/verification.json",
+  "verification_sha256": "30062908ea23412366fd5a3336338cb2018559531c6065104629f863f99f677b",
+  "remaining_limits": [
+    "No full backend/frontend matrix or all240old-target×70word impact audit is claimed by this bounded review.",
+    "Final promotion changes pack/sidecar digests; these exact staged receipts remain historical and final integration must bind the resulting state.",
+    "Private test-client forced targets are not evidence of public pending selection or human playtests.",
+    "Unknown Gunoi/Curățenie/Filtru/Sac de praf and generic projected action costs remain recorded.",
+    "Burete drop, new-node target holds and old V89rejections remain unchanged."
+  ]
+}

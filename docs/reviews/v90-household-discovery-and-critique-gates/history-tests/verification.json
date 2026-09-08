@@ -1,0 +1,146 @@
+{
+  "stage": "focused development checks after final V90 server artifact/runtime freeze; full integration matrices remain separate",
+  "baseline_commit": "190d7fdb86487c641d8a781ef7a5ce21f2b98031",
+  "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_v90_household_graph.py tests/test_v90_praf_migration.py tests/test_v89_feedback.py tests/test_v89_household_content.py tests/test_v88_everyday_graph.py tests/test_v88_bread_feedback.py tests/test_v87_snack_graph.py tests/test_v86_preparation_graph.py tests/test_v85_history.py tests/test_v83_food_feedback.py tests/test_v82_burta_feedback.py tests/test_v82_playable_content.py tests/test_v81_history.py tests/test_v81_nuca_feedback.py tests/test_v79_gem_feedback.py tests/test_v44_contexto_common_words.py tests/test_v47_contexto_pending_gate.py tests/test_v33_basic_words.py tests/test_v31_basic_words.py tests/test_v30_basic_words.py -q -o addopts=",
+  "exit_code": 0,
+  "result": {
+    "passed": 367,
+    "failed": 0,
+    "seconds": 185.36,
+    "files": 20,
+    "new_v90_cases": 53
+  },
+  "sources_sha256": {
+    "tests/test_v90_household_graph.py": "2e920f76ae87fdf342046ea8a783e9273208760abb8659a5abbc1a7c1dded545",
+    "tests/test_v90_praf_migration.py": "40fedb095b9ae338382bf4b72029898824674fb97732f8735c01b4e079d49b6c",
+    "tests/test_v89_feedback.py": "140472bf90b1d7faa7e32dcb567e97e13688386f6bd8aec024c9c6177409a951",
+    "tests/test_v89_household_content.py": "c75666c6b5842adbd920f131d7517696d6a16bfa9cf60b7002600e8d127d3232",
+    "tests/test_v88_everyday_graph.py": "6400e0379ae6ecb59f12eda194ff689ede489fb0089cdd57c9481a2a05a8a48b",
+    "tests/test_v88_bread_feedback.py": "e6992b63bc85ab421c81aad40246c1b6304b33533a4ece0ab7c5530a5cb662e4",
+    "tests/test_v87_snack_graph.py": "16f3d3ac300b9c1e9ec4e03951f731ecd2181c2d739ba87a90067cffc21641df",
+    "tests/test_v86_preparation_graph.py": "1409e4bea77b76d966d3f4ad218fdeb20d9ee08a33326a03164cb291ce4b2d67",
+    "tests/test_v85_history.py": "aca50f86c8fb4018ebec0b0a1047d9d30acf6fd92fd109d1d7dde5bc7fb26a7e",
+    "tests/test_v83_food_feedback.py": "b0ae19c7ed3aac5157d5c25c3910f1e8a39c967ed8575f974f946fa8d41c3f3c",
+    "tests/test_v82_burta_feedback.py": "8a2348a2e8c86aea0984538495dd78ca70729494ce00c264f8934ac324e1b1a7",
+    "tests/test_v82_playable_content.py": "b3aa9f6659a208571f1a0b761b9bcb4d5ab3b97e108bdd9d74d50f75821143b4",
+    "tests/test_v81_history.py": "8f30c24d5a98f0dc2787a3c2e68fc086ba1b5eea41f260e195444d9e45f1f05f",
+    "tests/test_v81_nuca_feedback.py": "f046673705d4f73c91957f94a69ce5d716a80bd7175f86bf467b23e44ab6a904",
+    "tests/test_v79_gem_feedback.py": "a21775c365c7d5cb10f187ee5856ec6a0597de33d9303459dd29bbbe25d2a154",
+    "tests/test_v44_contexto_common_words.py": "c19180d7ced4b0d164e650763447c493328b8169a32362d8f482c9669f80d128",
+    "tests/test_v47_contexto_pending_gate.py": "a54491a091e61068b3e83eb37a3c3b6321904b234677c8e42d44b0a0b542ae42",
+    "tests/test_v33_basic_words.py": "a4d95b9712df1ab2492f19f559632171918ca6e3ee13aa2472cd1d5fb79d5d39",
+    "tests/test_v31_basic_words.py": "dcd1d2f0c0cf65b30ab636d762ad2d6dab4ddd2d4627a5facf93280afcc4399a",
+    "tests/test_v30_basic_words.py": "920eb1dac09a7238b0bcefe01d15620664c1cd1c5ca756936b4004db3f9f8a63",
+    "tests/content_history.py": "26c7071b29ea1ea0cfcecc5f23300601724a424ad00ec111eee6f99a64f0c006",
+    "tests/current_content.py": "d7eaf6e9d6ad2f149dbad1621b095ee25a083547bf7a4cf0538a00cb0ad337ce",
+    "tests/v89_contexto_snapshot.py": "d690c2d6306fb30c2d488b3c635cef47709436d7b9cbc4167f9aad10afe4e4db",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "8dc809f1dbbb0452d3ae0eb4d5777b7d41c56582088e16eef20c33bf29e8d17a",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+    "cat_de_roman_esti/wordgames/lant.py": "cf22b4ff5dbb2d99f80ccdbb3e4c886751d0030c5cf6402dd993f1be2334f78b",
+    "scripts/household_graph_v90_data.py": "c934e1a01d4f57a9c7e3eb6b47089a012027ed1d5a69e17741e2612bb811767c",
+    "scripts/critique_pack.py": "0e0399d38ccd381f71380317c89e3d2564597d7ce573119e48a98bd581a12f13",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e32139529aacc88e2f453ac1cee1d8cd9a2cd1b16f3ee0551a5a76779192391e",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "b5beb978b911c952ef2632cb2d93bc695be19f226b4a4661d77e26b335413fab",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "6ac090bc2186bf00209913d1123ba3f54de9f7b02f9fa2a781f2dfcccbbf58a9",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f",
+    "docs/reviews/v90-household-discovery-and-critique-gates/artifact-delta.json": "a34b131a175d8900285fd5fc5fb84b47acb086be65275082310522891750661a",
+    "docs/reviews/v90-household-discovery-and-critique-gates/analyst.json": "5cdd33ea41ba27251bebf857ea761ad9cd40b52c2d93c9f8b0bf74136a8ea07f",
+    "docs/reviews/v90-household-discovery-and-critique-gates/verifier.json": "1ef65b2819c3c80a3977aad206697ca472df31f92247204532e4d1e26ef61920",
+    "docs/reviews/v90-household-discovery-and-critique-gates/final-gate/contexto_verdicts.json": "375fbf250d6403c3741174de9af10f24ff03628b17040e8ac70cded99de1f998",
+    "docs/reviews/v90-household-discovery-and-critique-gates/graph-factual-review.json": "3071621247423b4c181a966fbd98f35f62ff31d7e36768ae3c1ef451a8e74629",
+    "docs/reviews/v90-household-discovery-and-critique-gates/graph-quality-review.json": "bd1d350e2f59cbd97562ae4427835934b7a49e4425558cbe79afcbe5d94faaa6",
+    "docs/reviews/v90-household-discovery-and-critique-gates/praf-migration-proposal.json": "c80e098ad1c73a9a4208998995a943704e99ce5461176c8e748c560b0c9bde28",
+    "docs/reviews/v90-household-discovery-and-critique-gates/author-candidates/graph-proposal.json": "672ea9f249ec9f18dbc51c24427580b61e98abbaef2b7b3a6d0fd5c557d395ba",
+    "docs/reviews/v90-household-discovery-and-critique-gates/author-candidates/viata_de_roman/candidates.json": "0a7d3cb1c78f19a5bb9568765ffb5ed96dfd321eade88fb3365afa37adada769"
+  },
+  "archives": {
+    "focused-initial.log": {
+      "archive": "focused-initial.log.gz",
+      "sha256": "2f4194c1a51d116525fc8216ba91f0c2c74eab45d430926998a58019e4996c02",
+      "archive_sha256": "52fd48bd2a21283b9f007fccf03dbcf3358f087434c6891ff80433ef828db848",
+      "bytes": 512,
+      "archive_bytes": 91
+    },
+    "installed-lint-initial.log": {
+      "archive": "installed-lint-initial.log.gz",
+      "sha256": "53dff61e03e8eb01d8744df609350c50ac876cd42650ccf66d16a999ffbe5475",
+      "archive_sha256": "b4cd7b2bad302390013c0c8a3ee51c829ffae374e1e8e34f0ddfe65060e18f74",
+      "bytes": 2234,
+      "archive_bytes": 773
+    },
+    "installed-lint-fix.log": {
+      "archive": "installed-lint-fix.log.gz",
+      "sha256": "6f4e3c8cb6a43f32a8b47add0b65207f17bd814c84308623b3720ad789c0d769",
+      "archive_sha256": "a08b7a5eba3827fc8434cf36e68ffee89e77d59f2940429811f573020371c1e4",
+      "bytes": 39,
+      "archive_bytes": 59
+    },
+    "installed-lint-final.log": {
+      "archive": "installed-lint-final.log.gz",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "archive_sha256": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd",
+      "bytes": 19,
+      "archive_bytes": 39
+    },
+    "whitespace.log": {
+      "archive": "whitespace.log.gz",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "archive_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "bytes": 0,
+      "archive_bytes": 20
+    },
+    "new-case-inventory.log": {
+      "archive": "new-case-inventory.log.gz",
+      "sha256": "372743b35984d9ecbd1cb74fca942a783b73050ebf1eb02e01801a2602732013",
+      "archive_sha256": "80d6a6a941fc5072dc8bacc59a36868461841c06f769bb3316ad98937f495bb5",
+      "bytes": 6867,
+      "archive_bytes": 1116
+    },
+    "baseline-projections.json": {
+      "archive": "baseline-projections.json.gz",
+      "sha256": "e44bd7d65e543555834f220e1fec8061cfad125b92e7be4ab45248176e60435e",
+      "archive_sha256": "c3c7d33b962d134b9af86ec284f45e27a48d9d74304f330ab77d408f1cbbb578",
+      "bytes": 70907,
+      "archive_bytes": 12131
+    }
+  },
+  "lint": {
+    "exit_code": 0,
+    "note": "The initial installed-file lint reported two import-order findings; both were fixed before the first pytest run. Original output and the actual fix/final logs remain archived."
+  },
+  "whitespace_exit_code": 0,
+  "content_scope": {
+    "new_concepts": 3,
+    "new_grammatical_forms": 10,
+    "new_directed_edges": 17,
+    "exact_old_degree_changes": 13,
+    "new_round_ids": [
+      "ct_viata_de_roman_355",
+      "ct_viata_de_roman_356"
+    ],
+    "old_pack_records_preserved": 659,
+    "old_alchimie_records_preserved": 83,
+    "old_lant_records_preserved": 100,
+    "complete_derived_rows_preserved": 336,
+    "retired_projection": "ctxp_81703160cad7893fa1c9",
+    "remaining_projection_rows_exact": 464,
+    "newly_opened_kitchen_nodes": 7
+  },
+  "historical_isolation": {
+    "artifact_inverses": 5,
+    "v89_projection_rows": 465,
+    "v89_selectable_contexto": 236,
+    "v88_mature_targets": 235,
+    "scoped_v89_inputs": [
+      "KG",
+      "projection rows/index/policies",
+      "ranked pack and ranking sidecar"
+    ],
+    "cache_behavior": "Historical service and pack are built directly from exact reconstructed objects; the live singleton caches clear before/after each scope. Teardown explicitly asserts native V90 Praf and the actual current ranked pack return."
+  }
+}

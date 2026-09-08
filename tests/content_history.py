@@ -38,6 +38,10 @@ _V89_RECEIPT = Path(__file__).resolve().parents[1] / (
     "docs/reviews/v89-feedback-and-conexiuni-recovery/artifact-delta.json"
 )
 
+_V90_RECEIPT = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v90-household-discovery-and-critique-gates/artifact-delta.json"
+)
+
 
 def _reverse_reviewed_delta(current: dict, filename: str, receipt_path: Path) -> dict:
     """Peel only exact reviewed additions/corrections before checking old wave pins."""
@@ -75,9 +79,9 @@ def _reverse_reviewed_delta(current: dict, filename: str, receipt_path: Path) ->
     return restored
 
 
-def _before_v89(current: dict, filename: str) -> dict:
-    """Bind every current byte before peeling the V89 pack-only content delta."""
-    receipt = json.loads(_V89_RECEIPT.read_bytes())["files"][filename]
+def _reverse_bound_delta(current: dict, filename: str, receipt_path: Path) -> dict:
+    """Check complete canonical artifact bytes on both sides of an exact delta."""
+    receipt = json.loads(receipt_path.read_bytes())["files"][filename]
     indent = 2 if filename == "kg_sample.json" else 1
 
     def digest(value):
@@ -85,9 +89,38 @@ def _before_v89(current: dict, filename: str) -> dict:
         return hashlib.sha256(blob).hexdigest()
 
     assert digest(current) == receipt["after_sha256"]
-    restored = _reverse_reviewed_delta(current, filename, _V89_RECEIPT)
+    restored = _reverse_reviewed_delta(current, filename, receipt_path)
     assert digest(restored) == receipt["baseline_sha256"]
     return restored
+
+
+def _before_v90(current: dict, filename: str) -> dict:
+    return _reverse_bound_delta(current, filename, _V90_RECEIPT)
+
+
+def before_v90_fixture(current: dict) -> dict:
+    return _before_v90(current, "kg_sample.json")
+
+
+def before_v90_pack(current: dict) -> dict:
+    return _before_v90(current, "games_pack.json")
+
+
+def before_v90_rankings(current: dict) -> dict:
+    return _before_v90(current, "board_rankings_v37.json")
+
+
+def before_v90_derived(current: dict) -> dict:
+    return _before_v90(current, "derived_catalog_v38.json")
+
+
+def before_v90_mobile(current: dict) -> dict:
+    return _before_v90(current, "cat_mobile_app_pack_contract.json")
+
+
+def _before_v89(current: dict, filename: str) -> dict:
+    previous = _before_v90(current, filename)
+    return _reverse_bound_delta(previous, filename, _V89_RECEIPT)
 
 
 def before_v89_fixture(current: dict) -> dict:
@@ -275,9 +308,27 @@ def before_v87_projection_rows(current: list[tuple]) -> list[tuple]:
     return restored
 
 
+def before_v90_projection_rows(current: list[tuple]) -> list[tuple]:
+    """Restore the exact retired dust row and the complete 465-row V89 fingerprint."""
+    restored = list(current)
+    assert not any(row[0] == "praf" for row in restored)
+    assert restored[314][0] == "scoică"
+    restored.insert(314, (
+        "praf", "n_v24_nature_world_pamant", "peisaj", 1, "explicit",
+        "ctxp_81703160cad7893fa1c9",
+    ))
+    assert len(restored) == 465
+    assert hashlib.sha256(json.dumps(
+        restored, ensure_ascii=False, sort_keys=True, separators=(",", ":"),
+    ).encode()).hexdigest() == (
+        "2c47be5276ba580036413db1308075a5ec44db27e8af8146c5c37aca4f597320"
+    )
+    return restored
+
+
 def before_v88_projection_rows(current: list[tuple]) -> list[tuple]:
     """Restore the two exact V87 household cues replaced by native V88 owners."""
-    restored = list(current)
+    restored = before_v90_projection_rows(current)
     for index, successor, row in (
         (59, "birou de acasă", (
             "taburet", "n_v4soc_casa", "mobilier și casă", 1, "domain_fallback",
@@ -321,9 +372,26 @@ def before_v87_feedback_pairs(current: frozenset[tuple[str, str]]) -> frozenset[
     return current - added
 
 
+def before_v90_projection_neighborhoods(current: dict) -> dict:
+    """Restore V89's retired dust policy before older exact-scope checks."""
+    from cat_de_roman_esti.wordgames.contexto_projection import ProjectionNeighborhood
+
+    assert set(current) == {"gem", "burta", "tort", "ciocolata calda"}
+    return {
+        "praf": ProjectionNeighborhood(
+            "n_v24_nature_world_pamant", 0.60, include_direct_neighbors=False,
+            exact_target_ids=frozenset({
+                "n_v31_cleaning_floor_faras", "n_v31_cleaning_floor_mop",
+                "n_v31_cleaning_floor_aspirator",
+            }),
+        ),
+        **current,
+    }
+
+
 def before_v89_projection_neighborhoods(current: dict) -> dict:
     """Restore the exact V88 policies after validating the three closed dust scopes."""
-    restored = dict(current)
+    restored = before_v90_projection_neighborhoods(current)
     policy = restored.pop("praf")
     assert (policy.anchor_id, policy.min_strength, policy.include_direct_neighbors,
             policy.exact_target_ids) == (

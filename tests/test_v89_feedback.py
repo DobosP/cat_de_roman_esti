@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import sys
 from dataclasses import asdict
 
 import pytest
@@ -13,6 +14,7 @@ from cat_de_roman_esti.wordgames import contexto as C
 from cat_de_roman_esti.wordgames import contexto_projection as P
 from cat_de_roman_esti.wordgames.contexto_feedback import EXACT_TARGET_FEEDBACK_PAIRS
 from cat_de_roman_esti.wordgames.service import WordGameService, get_service
+from tests.v89_contexto_snapshot import v89_contexto_snapshot
 
 DIPLOMAT = "n_v87_food_tort_diplomat"
 FRISCA = "n_v86_food_frisca"
@@ -23,6 +25,13 @@ CLEANING = {
     "n_v31_cleaning_floor_mop",
     "n_v31_cleaning_floor_aspirator",
 }
+
+
+@pytest.fixture
+def v89_dust_history(monkeypatch):
+    """These exact V89 outcomes document the approximation retired by V90."""
+    with v89_contexto_snapshot(monkeypatch, sys.modules[__name__]):
+        yield
 
 
 def _post(client, path, word):
@@ -63,7 +72,7 @@ def test_diplomat_is_a_hot_nonwinning_whipped_cream_cue(word):
 
 
 @pytest.mark.parametrize("target", sorted(CLEANING))
-def test_projected_dust_is_hot_but_keeps_identity_and_never_wins(target):
+def test_projected_dust_is_hot_but_keeps_identity_and_never_wins(target, v89_dust_history):
     svc = get_service()
     assert svc.resolve("praf") is None
     term = P.resolve_projection("praf")
@@ -91,7 +100,7 @@ def test_projected_dust_is_hot_but_keeps_identity_and_never_wins(target):
         C.store.delete(gid)
 
 
-def test_dust_scope_is_exact_and_other_earth_terms_keep_their_meanings():
+def test_dust_scope_is_exact_and_other_earth_terms_keep_their_meanings(v89_dust_history):
     svc = get_service()
     term = P.resolve_projection("praf")
     policy = P.PROJECTION_NEIGHBORHOODS["praf"]
@@ -127,7 +136,7 @@ def test_native_diplomat_scope_and_projection_isolation_remain_closed():
     assert svc.link("n_v20gas_smantana", FRISCA) is None
 
 
-def test_missing_custom_fixture_anchors_keep_fallback_behavior():
+def test_missing_custom_fixture_anchors_keep_fallback_behavior(v89_dust_history):
     svc = get_service()
     for kept in [PAMANT, *sorted(CLEANING)]:
         custom = WordGameService(Graph.from_records([
@@ -158,7 +167,7 @@ def test_exact_diplomat_target_win_still_bypasses_feedback():
     ("n_v31_cleaning_floor_aspirator", False),
     ("n_v88_cleaning_matura", True),
 ])
-def test_projected_typo_filter_uses_only_the_exact_dust_scope(target, offered):
+def test_projected_typo_filter_uses_only_the_exact_dust_scope(target, offered, v89_dust_history):
     svc = get_service()
     assert svc.resolve("prafzz") is None and svc.resolve_fuzzy("prafzz") is None
     assert "Praf" in [term.label for term in P.suggest_projection("prafzz")]

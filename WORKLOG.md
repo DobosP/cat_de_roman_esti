@@ -704,3 +704,27 @@ Contexto target. The new source-bound kickoff separates necessary incoming count
 union adjacency and quality approval. It scopes household meaning/discovery, a necessary
 C3 diagnostic and actual Alchimie failure reproduction, with explicit all-six-game checks.
 No V90 source/content change, new word, edge or promotion is claimed by this kickoff.
+
+## V90 implemented candidate (2026-09-08)
+
+Valid until: V90 lands — then treat this candidate record as history.
+
+V90 adds3concepts/17links/10grammatical forms/0synonyms and promotes only Făraș355 and
+Aspirator356. Pack661=653approved+8pending; Contexto238eligible. All659old pack records,
+83Alchimie books,100Lanț route profiles,336derived rows and180CLI puzzles remain exact.
+One nonshortest water menu changes Aluat→Burete; all206shown shortest hops remain.
+The exact plate bridge opens7old kitchen nodes while the71proxy map stays unchanged.
+Praf's native ownership retires its approximation; other464projection rows stay exact.
+
+The C3 gate warns on4thin approved targets without score/eligibility changes. Alchimie
+uses one ownedGET for uncertain actions and one bounded earned public cue. Independent
+raw, final dossier, implementation, topology, UI and history/content reviews accept scope.
+367focused tests include53new graph/migration cases. Full frontend193native/246browser
+and Python3.12 1608backend/53accounts pass. One Python3.14 attempt ended143 incomplete;
+its original evidence is preserved. The same command then passed separately with1608
+backend/53accounts, completing all16 final gates. Only runner progress output changed.
+
+Two complete16800-request captures compare selected feedback fields, not full HTTP bodies:
+11120exact/5680changed, including2880newly accepted observations and240Praf identity
+migrations. Costs and initial harness/locator/stale-rubric errors remain explicit. The
+final receipt/manifest audit remains before local landing; no V90 merge is claimed yet.

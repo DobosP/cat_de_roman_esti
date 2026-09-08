@@ -1,0 +1,82 @@
+{
+  "schema": "v90-final-verifier-evidence-v1",
+  "reviewer": "v90_graph_factual",
+  "reviewed_on": "2026-09-08",
+  "decision": "promote_both_exact_pending_contexto_records",
+  "verifier_sha256": "1ef65b2819c3c80a3977aad206697ca472df31f92247204532e4d1e26ef61920",
+  "input_bindings": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/games_pack.json": "c15e86de0916cb93be91bd4a13129e7665031b806d8be0957524e88e596c8ddf",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "ca978a9ab09c455440e1ae640b172e884ee3c716107ad10a3d16354173539b94",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "e394d10a2b8f7109d19b6ef8191084b45eb3e3a0c1801c30375c69e5bb4e9eb0",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "8dc809f1dbbb0452d3ae0eb4d5777b7d41c56582088e16eef20c33bf29e8d17a",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+    "cat_de_roman_esti/wordgames/derived_catalog.py": "64d9cc8503adbee8d566a0b27959cb679649a253b7f03b473420d77ce4d8ed2b",
+    "scripts/critique_pack.py": "0e0399d38ccd381f71380317c89e3d2564597d7ce573119e48a98bd581a12f13",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "docs/reviews/v90-household-discovery-and-critique-gates/dossiers/ct_viata_de_roman_355.json": "6e2f2fba57ee471fedc43c39312788892975464b1b2efbf86b5839eafeab7025",
+    "docs/reviews/v90-household-discovery-and-critique-gates/dossiers/ct_viata_de_roman_356.json": "a67938ff8a808607c118ef15ed0ffe2f3456d8450b67d47b895a91b55b4239f2",
+    "docs/reviews/v90-household-discovery-and-critique-gates/author-candidates/graph-proposal.json": "672ea9f249ec9f18dbc51c24427580b61e98abbaef2b7b3a6d0fd5c557d395ba"
+  },
+  "bindings_unchanged_at_finish": true,
+  "counts": {
+    "first_guesses": 48,
+    "journey_requests": 24,
+    "targets": 2,
+    "applied_nodes_checked": 3,
+    "applied_edges_checked": 17,
+    "applied_forms_checked": 10
+  },
+  "final_probe_exit_code": 0,
+  "initial_probe_exit_code": 1,
+  "initial_failure": "The initial run completed all BFF assertions, session cleanup, binding checks and JSON write; its last console summary attempted an absent temperature key in the internal Feedback dataclass and exited1. No runtime/test/source change followed. Only summary printing was corrected, then all probes were rerun to observed exit0. Both scripts, logs and JSON captures are preserved losslessly.",
+  "method": "Actual applied graph and unpatched Django test-client BFF. Private sessions explicitly seeded with pending355/356; no claim that public selectors already choose pending rounds. All created sessions deleted. Separate author, independent analyst and this verifier roles remain distinct.",
+  "archives": [
+    {
+      "path": "docs/reviews/v90-household-discovery-and-critique-gates/final-verifier-evidence/initial_verifier_probe.py.gz",
+      "archive_sha256": "a4394bdfa8d9d707a43bdc342d79c63a323a4b229949ec4b40019ae74d0e5ec8",
+      "decoded_sha256": "ef707ba7e94824a84b3cbc1f2de9bf58031fa9829798532ad4fef0659e4037f3",
+      "decoded_bytes": 7986
+    },
+    {
+      "path": "docs/reviews/v90-household-discovery-and-critique-gates/final-verifier-evidence/initial-verifier-probes.log.gz",
+      "archive_sha256": "65cb3557d4e6c8226620334d68a964ff20e64a4c4ec96bba72d3936ddcc6dbde",
+      "decoded_sha256": "ffaf947d9f927e6a71a94d8b04b9df1710c9b4a5b89f12ff7605ae2c34db8543",
+      "decoded_bytes": 465
+    },
+    {
+      "path": "docs/reviews/v90-household-discovery-and-critique-gates/final-verifier-evidence/initial-verifier-probes.json.gz",
+      "archive_sha256": "ab5ca55f4596fd67f9742fabee775ccb0cfb25c917e014442fe3b2efb48db249",
+      "decoded_sha256": "0301390397b42bdf5828ad884ab47c738efbd73be18c3a42d81e6ea1613967e2",
+      "decoded_bytes": 94542
+    },
+    {
+      "path": "docs/reviews/v90-household-discovery-and-critique-gates/final-verifier-evidence/final_verifier_probe.py.gz",
+      "archive_sha256": "19060161805811177d8224be7c94bd9fbc76dff3b688dd1b60920ff89eb92569",
+      "decoded_sha256": "c38e04bc665fdeadd422457158c979559ecaea0b71b6d82f5127fe23085638f0",
+      "decoded_bytes": 7949
+    },
+    {
+      "path": "docs/reviews/v90-household-discovery-and-critique-gates/final-verifier-evidence/final-verifier-probes.log.gz",
+      "archive_sha256": "2698ae9b28605d0dafe6a518c079fb3e7b521485f539ab8e1e3c940689659d7d",
+      "decoded_sha256": "ec59dfea0e68a0fb60d60358ed8084b2fe8589abd59d183246a400a8c8c8e1eb",
+      "decoded_bytes": 3302
+    },
+    {
+      "path": "docs/reviews/v90-household-discovery-and-critique-gates/final-verifier-evidence/final-verifier-probes.json.gz",
+      "archive_sha256": "c35c9eeb2b740a2125ca8a3b5737fdb9e4b3cbfe801fcf20b170af84846dd644",
+      "decoded_sha256": "9e76b78518a14b8d66532e6707d7ccf1560a5ff4d2f6cb4522bce324bc505028",
+      "decoded_bytes": 94542
+    }
+  ],
+  "recognition_sources": "Original DEX historical entries and current original Romanian Leifheit/Kärcher pages freshly reopened during final review. Cross-generational/current familiarity is editorial corroboration, not measured population recognition.",
+  "limitations": [
+    "No human playtesting or real-device results.",
+    "All old-game impact comparisons, broad ownership/typo probes and full integration are root-owned gates.",
+    "The first factual review records source redirects and differing Leifheit renderings; those raw artifacts remain unchanged.",
+    "Existing V89 rejected352/354 and the raw Burete drop remain historical."
+  ]
+}

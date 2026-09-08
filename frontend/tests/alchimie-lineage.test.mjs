@@ -54,7 +54,7 @@ test("accepted empty combines use one persistent feedback path", () => {
   );
   const discovered = screen.indexOf("if (res.discovered.length > 0)");
   const empty = screen.indexOf("} else {", discovered);
-  const rejected = screen.indexOf("} catch (err)", empty);
+  const rejected = screen.indexOf("} catch {", empty);
   assert.notEqual(discovered, -1);
   assert.notEqual(empty, -1);
   assert.notEqual(rejected, -1);

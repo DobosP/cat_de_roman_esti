@@ -1,0 +1,1514 @@
+{
+  "baseline": "190d7fdb86487c641d8a781ef7a5ce21f2b98031",
+  "source_bindings": {
+    "frontend/src/screens/Alchimie.tsx": "c855ebca0b4a9c1dc96b10ddbe6639d24fa18a644e2eb10887b44454499ddba7",
+    "frontend/src/api/alchimie.ts": "5879972a4a4e913a4c777239128afd1a677dad107f1181ef9597ca876491b0c3",
+    "frontend/src/gameActionRecovery.mjs": "b73851fd616aed6489139cd800bad2e8e6ab3480664470e765fd044ba9eb6267",
+    "cat_de_roman_esti/wordgames/alchimie.py": "370a4b847de19f4256ada16d7da035a3be9da15ac90d4f3e0a6e70c5e8131712",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04",
+    "frontend/e2e/seeded-starts.json": "eaf3e13ecc4a158ad2afb31b90190a89be8fbd2ac1e8d45409a84cdcd30cc097",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "f39da2f1d69b587c0a5359f639947dea5f65080b226b1956fef75043aba9f402"
+  },
+  "run": "baseline-browser.log.gz",
+  "cases": [
+    {
+      "kind": "combine",
+      "before": {
+        "game_id": "f6122667-6d69-4943-b221-6fb709a16838",
+        "target": {
+          "id": null,
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": false
+        },
+        "inventory": [
+          {
+            "id": "n_spt_washington_bullets",
+            "label": "Washington Bullets",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v3spo_medalie",
+            "label": "Medalie",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_bazin_olimpic",
+            "label": "Bazin olimpic",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_tricolorii",
+            "label": "Tricolorii",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          }
+        ],
+        "inventory_summary": {
+          "active": 3,
+          "depleted": 3,
+          "total": 6
+        },
+        "discovered_count": 0,
+        "seed_count": 6,
+        "moves": 0,
+        "attempted_count": 0,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": false,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 7,
+          "routes": 4,
+          "max_results": 2
+        },
+        "board_category": "sport"
+      },
+      "committed": {
+        "game_id": "f6122667-6d69-4943-b221-6fb709a16838",
+        "target": {
+          "id": null,
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": false
+        },
+        "inventory": [
+          {
+            "id": "n_spt_washington_bullets",
+            "label": "Washington Bullets",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v3spo_medalie",
+            "label": "Medalie",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_bazin_olimpic",
+            "label": "Bazin olimpic",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_tricolorii",
+            "label": "Tricolorii",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v2spo_club_sportiv",
+            "label": "Club sportiv",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_spt_washington_bullets",
+                "label": "Washington Bullets"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "joacă la cluburi"
+              },
+              {
+                "source": {
+                  "id": "n_spt_washington_bullets",
+                  "label": "Washington Bullets"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "este club"
+              }
+            ],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          }
+        ],
+        "inventory_summary": {
+          "active": 3,
+          "depleted": 4,
+          "total": 7
+        },
+        "discovered_count": 1,
+        "seed_count": 6,
+        "moves": 1,
+        "attempted_count": 1,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": false,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 7,
+          "routes": 4,
+          "max_results": 2
+        },
+        "board_category": "sport",
+        "discovered": [
+          {
+            "id": "n_v2spo_club_sportiv",
+            "label": "Club sportiv"
+          }
+        ],
+        "already_tried": false,
+        "message": "Ai descoperit: Club sportiv."
+      },
+      "after": {
+        "game_id": "f6122667-6d69-4943-b221-6fb709a16838",
+        "target": {
+          "id": null,
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": false
+        },
+        "inventory": [
+          {
+            "id": "n_spt_washington_bullets",
+            "label": "Washington Bullets",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v3spo_medalie",
+            "label": "Medalie",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_bazin_olimpic",
+            "label": "Bazin olimpic",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_tricolorii",
+            "label": "Tricolorii",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v2spo_club_sportiv",
+            "label": "Club sportiv",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_spt_washington_bullets",
+                "label": "Washington Bullets"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "joacă la cluburi"
+              },
+              {
+                "source": {
+                  "id": "n_spt_washington_bullets",
+                  "label": "Washington Bullets"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "este club"
+              }
+            ],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          }
+        ],
+        "inventory_summary": {
+          "active": 3,
+          "depleted": 4,
+          "total": 7
+        },
+        "discovered_count": 1,
+        "seed_count": 6,
+        "moves": 1,
+        "attempted_count": 1,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": false,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 7,
+          "routes": 4,
+          "max_results": 2
+        },
+        "board_category": "sport"
+      },
+      "counts": {
+        "reads": 0,
+        "mutations": 1
+      },
+      "body": "←\nIeși\nAlchimie\nMod\nUșor\nCategorie\nSport\nCombinații\n0\nDescoperite\n0\nReguli și ajutor\nȚINTA DE FĂURIT\n◎\nLiga Campionilor la handbal\n\nCompetiția europeană majoră de club în care Cristina Neagu a strălucit.\n\n✨\nACUM\nPereche gata\nApasă Combină.\n2/2\nCristina Neagu\n×\n+\nWashington Bullets\n×\nGolește\n⚗ Combină\nINVENTAR · 3 ÎN JOC\n● pereche gata\n3 puse deoparte\nRecente 3\nUtile 3\nToate 6\n●\nWashington Bullets\nMedalie\nRecordul la 100 m liber din 2022\n●\nCristina Neagu\nBazin olimpic\n●\nTricolorii\n↻ Reia același joc\n⚗ Alt joc\n⚙ Schimbă opțiunile\n!\nRăspuns pierdut."
+    },
+    {
+      "kind": "hint",
+      "before": {
+        "game_id": "70f8fba1-7fbd-4cab-8800-1bf85f8fbe13",
+        "target": {
+          "id": null,
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": false
+        },
+        "inventory": [
+          {
+            "id": "n_spt_washington_bullets",
+            "label": "Washington Bullets",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v3spo_medalie",
+            "label": "Medalie",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_bazin_olimpic",
+            "label": "Bazin olimpic",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_tricolorii",
+            "label": "Tricolorii",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          }
+        ],
+        "inventory_summary": {
+          "active": 3,
+          "depleted": 3,
+          "total": 6
+        },
+        "discovered_count": 0,
+        "seed_count": 6,
+        "moves": 2,
+        "attempted_count": 2,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": false,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": true,
+        "recipe_summary": {
+          "pairs": 7,
+          "routes": 4,
+          "max_results": 2
+        },
+        "board_category": "sport"
+      },
+      "committed": {
+        "game_id": "70f8fba1-7fbd-4cab-8800-1bf85f8fbe13",
+        "target": {
+          "id": null,
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": false
+        },
+        "inventory": [
+          {
+            "id": "n_spt_washington_bullets",
+            "label": "Washington Bullets",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v3spo_medalie",
+            "label": "Medalie",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_bazin_olimpic",
+            "label": "Bazin olimpic",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_tricolorii",
+            "label": "Tricolorii",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          }
+        ],
+        "inventory_summary": {
+          "active": 3,
+          "depleted": 3,
+          "total": 6
+        },
+        "discovered_count": 0,
+        "seed_count": 6,
+        "moves": 2,
+        "attempted_count": 2,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": false,
+        "hints_used": 1,
+        "hint_stage": "pair",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 7,
+          "routes": 4,
+          "max_results": 2
+        },
+        "board_category": "sport",
+        "hint": null,
+        "hint_kind": "output",
+        "hint_output": {
+          "label": "Club sportiv"
+        },
+        "message": "Indiciu: caută mai întâi «Club sportiv»."
+      },
+      "after": {
+        "game_id": "70f8fba1-7fbd-4cab-8800-1bf85f8fbe13",
+        "target": {
+          "id": null,
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": false
+        },
+        "inventory": [
+          {
+            "id": "n_spt_washington_bullets",
+            "label": "Washington Bullets",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v3spo_medalie",
+            "label": "Medalie",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_bazin_olimpic",
+            "label": "Bazin olimpic",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_tricolorii",
+            "label": "Tricolorii",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          }
+        ],
+        "inventory_summary": {
+          "active": 3,
+          "depleted": 3,
+          "total": 6
+        },
+        "discovered_count": 0,
+        "seed_count": 6,
+        "moves": 2,
+        "attempted_count": 2,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": false,
+        "hints_used": 1,
+        "hint_stage": "pair",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 7,
+          "routes": 4,
+          "max_results": 2
+        },
+        "board_category": "sport"
+      },
+      "counts": {
+        "reads": 0,
+        "mutations": 1
+      },
+      "body": "←\nIeși\nAlchimie\nMod\nUșor\nCategorie\nSport\nCombinații\n2\nDescoperite\n0\nReguli și ajutor\nȚINTA DE FĂURIT\n◎\nLiga Campionilor la handbal\n\nCompetiția europeană majoră de club în care Cristina Neagu a strălucit.\n\n👆\nACUM\nAlege două concepte\nPornește din inventar.\n0/2\nalege…\n+\nalege…\n💡 Indiciu\n⚗ Combină\nINVENTAR · 3 ÎN JOC\n● pereche gata\n3 puse deoparte\nRecente 3\nUtile 3\nToate 6\n●\nWashington Bullets\n●\nCristina Neagu\n●\nTricolorii\n↻ Reia același joc\n⚗ Alt joc\n⚙ Schimbă opțiunile\ni\nJoc reluat.\n!\nRăspuns pierdut."
+    },
+    {
+      "kind": "reset",
+      "before": {
+        "game_id": "669a70ad-f62f-4c79-aa99-e62c8e386f2d",
+        "target": {
+          "id": null,
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": false
+        },
+        "inventory": [
+          {
+            "id": "n_spt_washington_bullets",
+            "label": "Washington Bullets",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v3spo_medalie",
+            "label": "Medalie",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_bazin_olimpic",
+            "label": "Bazin olimpic",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_tricolorii",
+            "label": "Tricolorii",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v2spo_club_sportiv",
+            "label": "Club sportiv",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_spt_washington_bullets",
+                "label": "Washington Bullets"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "joacă la cluburi"
+              },
+              {
+                "source": {
+                  "id": "n_spt_washington_bullets",
+                  "label": "Washington Bullets"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "este club"
+              }
+            ],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          }
+        ],
+        "inventory_summary": {
+          "active": 3,
+          "depleted": 4,
+          "total": 7
+        },
+        "discovered_count": 1,
+        "seed_count": 6,
+        "moves": 1,
+        "attempted_count": 1,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": false,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 7,
+          "routes": 4,
+          "max_results": 2
+        },
+        "board_category": "sport"
+      },
+      "committed": {
+        "game_id": "669a70ad-f62f-4c79-aa99-e62c8e386f2d",
+        "target": {
+          "id": null,
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": false
+        },
+        "inventory": [
+          {
+            "id": "n_spt_washington_bullets",
+            "label": "Washington Bullets",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v3spo_medalie",
+            "label": "Medalie",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_bazin_olimpic",
+            "label": "Bazin olimpic",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_tricolorii",
+            "label": "Tricolorii",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          }
+        ],
+        "inventory_summary": {
+          "active": 3,
+          "depleted": 3,
+          "total": 6
+        },
+        "discovered_count": 0,
+        "seed_count": 6,
+        "moves": 0,
+        "attempted_count": 0,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": false,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 7,
+          "routes": 4,
+          "max_results": 2
+        },
+        "board_category": "sport"
+      },
+      "after": {
+        "game_id": "669a70ad-f62f-4c79-aa99-e62c8e386f2d",
+        "target": {
+          "id": null,
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": false
+        },
+        "inventory": [
+          {
+            "id": "n_spt_washington_bullets",
+            "label": "Washington Bullets",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v3spo_medalie",
+            "label": "Medalie",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_bazin_olimpic",
+            "label": "Bazin olimpic",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_tricolorii",
+            "label": "Tricolorii",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          }
+        ],
+        "inventory_summary": {
+          "active": 3,
+          "depleted": 3,
+          "total": 6
+        },
+        "discovered_count": 0,
+        "seed_count": 6,
+        "moves": 0,
+        "attempted_count": 0,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": false,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 7,
+          "routes": 4,
+          "max_results": 2
+        },
+        "board_category": "sport"
+      },
+      "counts": {
+        "reads": 0,
+        "mutations": 1
+      },
+      "body": "←\nIeși\nAlchimie\nMod\nUșor\nCategorie\nSport\nCombinații\n1\nDescoperite\n1\nReguli și ajutor\nȚINTA DE FĂURIT\n◎\nLiga Campionilor la handbal\n\nCompetiția europeană majoră de club în care Cristina Neagu a strălucit.\n\n👆\nACUM\nAlege două concepte\nPornește din inventar.\n0/2\nalege…\n+\nalege…\n⚗ Combină\nULTIMA DESCOPERIRE\n1 reacție păstrată\nCristina Neagu + Washington Bullets →\nClub sportiv\nLegături descoperite: Club sportiv\nCristina Neagu — joacă la cluburi → Club sportiv\nWashington Bullets — este club → Club sportiv\nINVENTAR · 3 ÎN JOC\n● pereche gata\n4 puse deoparte\nRecente 3\nUtile 3\nToate 7\n●\nCristina Neagu\n●\nTricolorii\n●\nClub sportiv\n↻ Reia același joc\n⚗ Alt joc\n⚙ Schimbă opțiunile\ni\nJoc reluat.\n!\nNu am putut reseta (503)."
+    },
+    {
+      "kind": "win",
+      "before": {
+        "game_id": "17991f3b-3cb7-4ad5-b2cd-745e0cac961c",
+        "target": {
+          "id": null,
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": false
+        },
+        "inventory": [
+          {
+            "id": "n_spt_washington_bullets",
+            "label": "Washington Bullets",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v3spo_medalie",
+            "label": "Medalie",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_bazin_olimpic",
+            "label": "Bazin olimpic",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_tricolorii",
+            "label": "Tricolorii",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v2spo_club_sportiv",
+            "label": "Club sportiv",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_spt_washington_bullets",
+                "label": "Washington Bullets"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "joacă la cluburi"
+              },
+              {
+                "source": {
+                  "id": "n_spt_washington_bullets",
+                  "label": "Washington Bullets"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "este club"
+              }
+            ],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          }
+        ],
+        "inventory_summary": {
+          "active": 3,
+          "depleted": 4,
+          "total": 7
+        },
+        "discovered_count": 1,
+        "seed_count": 6,
+        "moves": 1,
+        "attempted_count": 1,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": false,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 7,
+          "routes": 4,
+          "max_results": 2
+        },
+        "board_category": "sport"
+      },
+      "committed": {
+        "game_id": "17991f3b-3cb7-4ad5-b2cd-745e0cac961c",
+        "target": {
+          "id": "n_spt_liga_campionilor_handbal",
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": true
+        },
+        "inventory": [
+          {
+            "id": "n_spt_washington_bullets",
+            "label": "Washington Bullets",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v3spo_medalie",
+            "label": "Medalie",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_bazin_olimpic",
+            "label": "Bazin olimpic",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_tricolorii",
+            "label": "Tricolorii",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v2spo_club_sportiv",
+            "label": "Club sportiv",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_spt_washington_bullets",
+                "label": "Washington Bullets"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "joacă la cluburi"
+              },
+              {
+                "source": {
+                  "id": "n_spt_washington_bullets",
+                  "label": "Washington Bullets"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "este club"
+              }
+            ],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_liga_campionilor_handbal",
+            "label": "Liga Campionilor la handbal",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_v2spo_club_sportiv",
+                "label": "Club sportiv"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_spt_liga_campionilor_handbal",
+                  "label": "Liga Campionilor la handbal"
+                },
+                "label": "a jucat în"
+              },
+              {
+                "source": {
+                  "id": "n_spt_liga_campionilor_handbal",
+                  "label": "Liga Campionilor la handbal"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "competiție de cluburi"
+              }
+            ],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          }
+        ],
+        "inventory_summary": {
+          "active": 2,
+          "depleted": 6,
+          "total": 8
+        },
+        "discovered_count": 2,
+        "seed_count": 6,
+        "moves": 2,
+        "attempted_count": 2,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": true,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 7,
+          "routes": 4,
+          "max_results": 2
+        },
+        "board_category": "sport",
+        "score": 1000,
+        "share": "cat_de_roman_esti · Alchimie · Sport\n⚗️ 2 combinatii · 1000 pct ✨",
+        "discovered": [
+          {
+            "id": "n_spt_liga_campionilor_handbal",
+            "label": "Liga Campionilor la handbal"
+          }
+        ],
+        "already_tried": false,
+        "message": "Ai descoperit tinta: Liga Campionilor la handbal!"
+      },
+      "after": {
+        "game_id": "17991f3b-3cb7-4ad5-b2cd-745e0cac961c",
+        "target": {
+          "id": "n_spt_liga_campionilor_handbal",
+          "label": "Liga Campionilor la handbal",
+          "description": "Competiția europeană majoră de club în care Cristina Neagu a strălucit.",
+          "revealed": true
+        },
+        "inventory": [
+          {
+            "id": "n_spt_washington_bullets",
+            "label": "Washington Bullets",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_v3spo_medalie",
+            "label": "Medalie",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_record_100m_liber_2022",
+            "label": "Recordul la 100 m liber din 2022",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_cristina_neagu",
+            "label": "Cristina Neagu",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_spt_bazin_olimpic",
+            "label": "Bazin olimpic",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_tricolorii",
+            "label": "Tricolorii",
+            "parents": null,
+            "links": [],
+            "recent": true,
+            "useful": true,
+            "ready": true,
+            "depleted": false
+          },
+          {
+            "id": "n_v2spo_club_sportiv",
+            "label": "Club sportiv",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_spt_washington_bullets",
+                "label": "Washington Bullets"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "joacă la cluburi"
+              },
+              {
+                "source": {
+                  "id": "n_spt_washington_bullets",
+                  "label": "Washington Bullets"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "este club"
+              }
+            ],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          },
+          {
+            "id": "n_spt_liga_campionilor_handbal",
+            "label": "Liga Campionilor la handbal",
+            "parents": [
+              {
+                "id": "n_spt_cristina_neagu",
+                "label": "Cristina Neagu"
+              },
+              {
+                "id": "n_v2spo_club_sportiv",
+                "label": "Club sportiv"
+              }
+            ],
+            "links": [
+              {
+                "source": {
+                  "id": "n_spt_cristina_neagu",
+                  "label": "Cristina Neagu"
+                },
+                "target": {
+                  "id": "n_spt_liga_campionilor_handbal",
+                  "label": "Liga Campionilor la handbal"
+                },
+                "label": "a jucat în"
+              },
+              {
+                "source": {
+                  "id": "n_spt_liga_campionilor_handbal",
+                  "label": "Liga Campionilor la handbal"
+                },
+                "target": {
+                  "id": "n_v2spo_club_sportiv",
+                  "label": "Club sportiv"
+                },
+                "label": "competiție de cluburi"
+              }
+            ],
+            "recent": true,
+            "useful": false,
+            "ready": false,
+            "depleted": true
+          }
+        ],
+        "inventory_summary": {
+          "active": 2,
+          "depleted": 6,
+          "total": 8
+        },
+        "discovered_count": 2,
+        "seed_count": 6,
+        "moves": 2,
+        "attempted_count": 2,
+        "difficulty": "usor",
+        "target_depth": 2,
+        "won": true,
+        "hints_used": 0,
+        "hint_stage": "output",
+        "hint_available": false,
+        "recipe_summary": {
+          "pairs": 7,
+          "routes": 4,
+          "max_results": 2
+        },
+        "board_category": "sport",
+        "score": 1000,
+        "share": "cat_de_roman_esti · Alchimie · Sport\n⚗️ 2 combinatii · 1000 pct ✨"
+      },
+      "counts": {
+        "reads": 0,
+        "mutations": 1
+      },
+      "body": "←\nIeși\nAlchimie\nMod\nUșor\nCategorie\nSport\nCombinații\n1\nDescoperite\n1\nReguli și ajutor\nȚINTA DE FĂURIT\n◎\nLiga Campionilor la handbal\n\nCompetiția europeană majoră de club în care Cristina Neagu a strălucit.\n\n✨\nACUM\nPereche gata\nApasă Combină.\n2/2\nCristina Neagu\n×\n+\n✦\nClub sportiv\n×\nGolește\n⚗ Combină\nULTIMA DESCOPERIRE\n1 reacție păstrată\nCristina Neagu + Washington Bullets →\nClub sportiv\nLegături descoperite: Club sportiv\nCristina Neagu — joacă la cluburi → Club sportiv\nWashington Bullets — este club → Club sportiv\nINVENTAR · 3 ÎN JOC\n● pereche gata\n4 puse deoparte\nRecente 3\nUtile 3\nToate 7\nWashington Bullets\nMedalie\nRecordul la 100 m liber din 2022\n●\nCristina Neagu\nBazin olimpic\n●\nTricolorii\n●\nClub sportiv\n↻ Reia același joc\n⚗ Alt joc\n⚙ Schimbă opțiunile\ni\nJoc reluat.\n!\nRăspuns pierdut."
+    }
+  ]
+}

@@ -99,6 +99,13 @@ V42 unlocks that hint after two consecutive distinct barren combines. From the f
 barren combine, `message` may append one deterministic generic strategy sentence; this is
 not a new field or score penalty, and repeated pairs advance neither dry counter.
 
+An optional `earned_hint` contains exactly the already-paid cue fields `hint`, `hint_kind`,
+`hint_output`, and `message`. GET and resume return this same cue without another charge.
+It is absent before a paid hint, after a new unique combine (productive or barren), and
+after reset; rejected actions and free repeated pairs preserve it. Later paid hints replace
+this single object. The existing POST hint fields remain compatible. See
+[ADR-0136](adr/0136-reconcile-uncertain-alchimie-actions.md) for retention and recovery policy.
+
 ### Lanț progress and help
 
 Successful `usor` and `normal` moves may add `progress: {kind, message}`, where `kind` is

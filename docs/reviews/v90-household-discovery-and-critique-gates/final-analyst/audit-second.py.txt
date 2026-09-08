@@ -1,0 +1,85 @@
+from __future__ import annotations
+import ast,dataclasses,hashlib,json,subprocess,sys,types
+from pathlib import Path
+root=Path.cwd();sys.path.insert(0,str(root))
+from cat_de_roman_esti.wordgames import contexto_projection as P,contexto_feedback as F
+from cat_de_roman_esti.wordgames.service import WordGameService
+from cat_de_roman_esti.graph import Graph
+from scripts import critique_pack as CP
+out=Path('/home/dobo/work/_temp/feat__v90-household-discovery-and-critique-gates/final-analyst')
+rev=root/'docs/reviews/v90-household-discovery-and-critique-gates'
+base='190d7fdb86487c641d8a781ef7a5ce21f2b98031'
+sha=lambda b:hashlib.sha256(b).hexdigest()
+prior=lambda p:subprocess.check_output(['git','show',base+':'+p])
+projection='cat_de_roman_esti/wordgames/contexto_projection.py'
+praf=json.loads((rev/'praf-migration-proposal.json').read_text())
+assert sha(prior(projection))==praf['source_sha256'][projection]
+before=ast.parse(prior(projection));after=ast.parse((root/projection).read_bytes())
+def name(n):
+ if isinstance(n,ast.Assign) and len(n.targets)==1 and isinstance(n.targets[0],ast.Name):return n.targets[0].id
+ if isinstance(n,ast.AnnAssign) and isinstance(n.target,ast.Name):return n.target.id
+ return None
+for node in before.body:
+ if name(node)=='_EXISTING_KG_SURFACES':
+  assert isinstance(node.value,ast.Call) and isinstance(node.value.args[0],(ast.Set,ast.Tuple,ast.List))
+  values=node.value.args[0].elts
+  assert all(not isinstance(v,ast.Constant) or v.value!='praf' for v in values)
+  index=next(i for i,v in enumerate(values) if isinstance(v,ast.Constant) and v.value=='taburet')+1
+  values.insert(index,ast.Constant(value='praf'))
+ if name(node)=='PROJECTION_NEIGHBORHOODS':
+  mapping=node.value;assert isinstance(mapping,ast.Dict)
+  index=next(i for i,key in enumerate(mapping.keys) if isinstance(key,ast.Constant) and key.value=='praf')
+  del mapping.keys[index];del mapping.values[index]
+assert ast.dump(before,include_attributes=False)==ast.dump(after,include_attributes=False)
+old=types.ModuleType('v90_independent_old_projection');old.__file__=str(root/projection);sys.modules[old.__name__]=old
+exec(compile(prior(projection),old.__file__,'exec'),old.__dict__)
+def term_row(term):return {**dataclasses.asdict(term),'key':term.key,'public_id':term.public_id}
+assert [term_row(t) for t in P.PROJECTION_TERMS]==[term_row(t) for t in old.PROJECTION_TERMS if t.key!='praf']
+assert len(P.PROJECTION_TERMS)==464 and len({t.domain for t in P.PROJECTION_TERMS})==26
+assert P.NATIVE_PROJECTION_REPLACEMENTS==old.NATIVE_PROJECTION_REPLACEMENTS and len(P.NATIVE_PROJECTION_REPLACEMENTS)==4
+assert P.PROJECTION_LEGIBILITY_AUDIT==old.PROJECTION_LEGIBILITY_AUDIT
+assert P.PROJECTION_DOMAIN_POLICIES.keys()==old.PROJECTION_DOMAIN_POLICIES.keys()
+assert {k:dataclasses.asdict(v) for k,v in P.PROJECTION_DOMAIN_POLICIES.items()}=={k:dataclasses.asdict(v) for k,v in old.PROJECTION_DOMAIN_POLICIES.items()}
+assert P.resolve_projection('praf') is None
+for p in ['cat_de_roman_esti/wordgames/contexto.py','cat_de_roman_esti/wordgames/contexto_feedback.py','cat_de_roman_esti/wordgames/service.py']:
+ assert (root/p).read_bytes()==prior(p),p
+assert len(F.EXACT_TARGET_FEEDBACK_PAIRS)==11 and len(F.COMMON_FEEDBACK_PROXIES)==71
+kgpath='cat_de_roman_esti/fixtures/kg_sample.json';packpath='cat_de_roman_esti/fixtures/games_pack.json'
+kg=json.loads((root/kgpath).read_bytes());oldkg=json.loads(prior(kgpath));proposal=json.loads((rev/'author-candidates/graph-proposal.json').read_text())
+oldnodes={n['id']:n for n in oldkg['kg_nodes']};nodes={n['id']:n for n in kg['kg_nodes']}
+oldedges={e['id']:e for e in oldkg['kg_edges']};edges={e['id']:e for e in kg['kg_edges']}
+assert {i:nodes[i] for i in oldnodes}==oldnodes
+assert {i:edges[i] for i in oldedges}==oldedges
+assert set(nodes)-set(oldnodes)=={n['id'] for n in proposal['nodes']}
+newedgekeys={(e['src_id'],e['dst_id'],e['relation']):e for i,e in edges.items() if i not in oldedges}
+assert len(newedgekeys)==17
+for n in proposal['nodes']:
+ for key,value in n.items():assert nodes[n['id']][key]==value,(n['id'],key)
+for e in proposal['edges']:
+ actual=newedgekeys[(e['src'],e['dst'],e['relation'])]
+ for key,value in e.items():
+  if key not in {'src','dst'}:assert actual[key]==value,(e,key)
+base_svc=WordGameService(Graph.from_records(oldkg['kg_nodes'],oldkg['kg_edges']));svc=WordGameService(Graph.from_records(kg['kg_nodes'],kg['kg_edges']))
+owner_checks=0
+for n in base_svc.graph.nodes.values():
+ for word in [n.label_ro,n.id,*n.aliases]:
+  assert base_svc.resolve(word)==svc.resolve(word),word
+  owner_checks+=1
+for word in ['Praf','PRAF','praful','prafului']:assert svc.resolve(word)=='n_v90_household_praf'
+assert svc.resolve('prafuri') is None
+assert base_svc.resolve('praf') is None and P.resolve_projection('praf') is None
+pack,loaded,strong,regions=CP.load_all(CP.PACKAGE_PACK,CP.PACKAGE_KG)
+ids=['ct_viata_de_roman_355','ct_viata_de_roman_356']
+_,_,selected=CP.run(pack,loaded,strong,regions,['contexto'],{'pending'},set(ids))
+assert len(selected)==2
+bindings={};dossiers={}
+for game,rec,findings in selected:
+ assert findings==[] and rec['status']=='pending'
+ dossier=json.loads((rev/'dossiers'/f"{rec['id']}.json").read_bytes())
+ actual=CP.build_dossier(rec,game,loaded,strong,findings,regions)
+ assert dossier==actual,rec['id']
+ bindings[rec['id']]=dossier['review_binding'];dossiers[rec['id']]=sha((rev/'dossiers'/f"{rec['id']}.json").read_bytes())
+paths=[projection,kgpath,packpath,'cat_de_roman_esti/wordgames/contexto.py','cat_de_roman_esti/wordgames/contexto_feedback.py','cat_de_roman_esti/wordgames/service.py','cat_de_roman_esti/wordgames/packs.py','cat_de_roman_esti/wordgames/derived_catalog.py','scripts/critique_pack.py','docs/CRITIQUE_RUBRIC.md']
+result={'baseline_main':base,'source_sha256':{p:sha((root/p).read_bytes()) for p in paths},'graph_proposal_sha256':sha((rev/'author-candidates/graph-proposal.json').read_bytes()),'migration_proposal_sha256':sha((rev/'praf-migration-proposal.json').read_bytes()),'whole_module_ast_exact_proposal':True,'other_projection_rows_exact':464,'projection_domains':26,'native_audit_tuples_exact':4,'native_pairs_exact':11,'legacy_proxies_exact':71,'old_graph_nodes_exact':len(oldnodes),'old_graph_edges_exact':len(oldedges),'added_nodes':3,'added_edges':17,'stored_new_forms':sum(len(n['aliases']) for n in proposal['nodes']),'old_native_owner_checks':owner_checks,'dossier_sha256':dossiers,'review_bindings':bindings,'fresh_dossiers_exact':True}
+(out/'implementation-audit.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps(result,ensure_ascii=False,indent=2))

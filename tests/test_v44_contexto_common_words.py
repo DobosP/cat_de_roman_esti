@@ -10,7 +10,14 @@ from pathlib import Path
 
 import pytest
 
-from tests.content_history import before_v88_fixture, before_v89_pack, before_v89_rankings
+from tests.content_history import (
+    before_v88_fixture,
+    before_v89_pack,
+    before_v89_rankings,
+    before_v90_fixture,
+    before_v90_pack,
+    before_v90_rankings,
+)
 from tests.current_content import CURRENT_CONTENT
 
 pytest.importorskip("django")
@@ -190,10 +197,21 @@ def test_every_proxy_anchor_reaches_every_selectable_unique_target() -> None:
     }
     mop = "n_v31_cleaning_floor_mop"
     assert len(historical_eligible) == len(historical_targets) == 235
-    assert historical_targets < targets and targets - historical_targets == {mop}
+    v89_pack = before_v90_pack(pack)
+    v89_rankings = before_v90_rankings(rankings)
+    v89_target_by_id = {row["id"]: row["target"] for row in v89_pack["contexto"]}
+    v89_targets = {
+        v89_target_by_id[row["id"]] for row in v89_rankings["boards"]
+        if row["game"] == "contexto" and row["pilot_eligible"]
+    }
+    assert len(v89_targets) == 236
+    assert historical_targets < v89_targets and v89_targets - historical_targets == {mop}
+    assert v89_targets <= targets
     svc = get_service()
-    fixture = _json(_PACKAGE_KG)
-    prior = before_v88_fixture(fixture)
+    live_fixture = _json(_PACKAGE_KG)
+    fixture = before_v90_fixture(live_fixture)
+    v89_svc = WordGameService(Graph.from_records(fixture["kg_nodes"], fixture["kg_edges"]))
+    prior = before_v88_fixture(live_fixture)
     prior_svc = WordGameService(Graph.from_records(prior["kg_nodes"], prior["kg_edges"]))
     opened_cleaning_ids = {
         "n_v31_cleaning_dishes_burete_vase", "n_v31_cleaning_supply_detergent",
@@ -220,15 +238,15 @@ def test_every_proxy_anchor_reaches_every_selectable_unique_target() -> None:
         assert targets <= set(svc.distances_from(anchor_id))
     for node_id in COMMON_FEEDBACK_PROXIES:
         assert historical_targets.isdisjoint(prior_svc.distances_from(node_id))
-        assert (not historical_targets.isdisjoint(svc.distances_from(node_id))) is (
+        assert (not historical_targets.isdisjoint(v89_svc.distances_from(node_id))) is (
             node_id in opened_cleaning_ids
         )
         # Removing Făraș→Mătură restores isolation from the exact 235 V88 targets.
         # Mop was already reachable inside the cleaning mesh before becoming public.
         assert historical_targets.isdisjoint(closed_svc.distances_from(node_id))
-    assert targets & set(COMMON_FEEDBACK_PROXIES) == {mop}
+    assert v89_targets & set(COMMON_FEEDBACK_PROXIES) == {mop}
     assert COMMON_FEEDBACK_PROXIES[mop] == "n_v24_home_surfaces_podea"
-    for graph_svc in (prior_svc, svc, closed_svc):
+    for graph_svc in (prior_svc, v89_svc, closed_svc):
         assert graph_svc.resolve("mop") == mop and graph_svc.distance(mop, mop) == 0
         assert {
             node_id for node_id in COMMON_FEEDBACK_PROXIES

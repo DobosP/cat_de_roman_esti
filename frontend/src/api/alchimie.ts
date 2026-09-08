@@ -76,6 +76,8 @@ export interface AlchimieState {
   hint_available: boolean;
   /** What the next progressive hint will reveal. */
   hint_stage: "output" | "pair";
+  /** One paid, public cue; cleared by a new unique experiment or reset. */
+  earned_hint?: EarnedHint;
   daily?: string;
   /** Server-selected board theme; playable Alchimie boards are always themed. */
   board_category?: string;
@@ -93,7 +95,7 @@ export interface CombineResult extends AlchimieState {
 }
 
 /** Returned by /hint — the base state plus the suggested pair (null if none). */
-export interface HintResult extends AlchimieState {
+export interface EarnedHint {
   /** The two concepts the nudge suggests combining, or null if unavailable. */
   hint: [Concept, Concept] | null;
   hint_kind: "output" | "category" | "pair" | "none";
@@ -101,6 +103,9 @@ export interface HintResult extends AlchimieState {
   hint_output: { label: string } | null;
   message: string;
 }
+
+/** Hint responses keep their original fields and the resumable earned cue. */
+export interface HintResult extends AlchimieState, EarnedHint {}
 
 /** Options for starting a new game. */
 export interface CreateOpts {

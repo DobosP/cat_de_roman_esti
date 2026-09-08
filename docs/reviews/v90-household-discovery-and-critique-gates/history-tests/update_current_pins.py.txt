@@ -1,0 +1,46 @@
+"""Install reviewed measurements as literal expectations, without touching historical pins."""
+import ast
+import json
+from collections.abc import Mapping
+from pathlib import Path
+
+from tests.current_content import CURRENT_CONTENT
+
+root=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates')
+scratch=Path('/home/dobo/work/_temp/feat__v90-household-discovery-and-critique-gates/history')
+measured=json.loads((scratch/'measured-pins.json').read_bytes())
+measured['game_inventory']={key:tuple(value) for key,value in measured['game_inventory'].items()}
+measured.update(contexto_approved=measured['game_inventory']['contexto'][1],
+                contexto_eligible=measured['ranking_counts']['eligible_by_game']['contexto'],
+                contexto_id_high_water=measured['pack_id_high_water']['contexto'])
+p=root/'tests/current_content.py';source=p.read_text();tree=ast.parse(source)
+call=next(statement.value for statement in tree.body if isinstance(statement,ast.Assign)
+          and any(isinstance(target,ast.Name) and target.id=='CURRENT_CONTENT' for target in statement.targets))
+lines=source.splitlines(keepends=True); offsets=[];total=0
+for line in lines:offsets.append(total);total+=len(line)
+
+def render(value,indent=4):
+ if isinstance(value,dict):
+  parts=['_frozen({']
+  for key,item in value.items():
+   prefix=' '*(indent+4)+repr(key)+': '
+   rendered=render(item,indent+4)
+   if isinstance(item,str) and len(prefix+rendered+',')>100:
+    parts.extend([prefix+'(', ' '*(indent+8)+rendered, ' '*(indent+4)+'),'])
+   else:parts.append(prefix+rendered+',')
+  parts.append(' '*indent+'})')
+  return '\n'.join(parts)
+ return repr(value)
+
+changes=[]
+for keyword in call.keywords:
+ name=keyword.arg
+ if name not in measured:continue
+ old=getattr(CURRENT_CONTENT,name);new=measured[name]
+ if old==new:continue
+ node=keyword.value
+ start=offsets[node.lineno-1]+node.col_offset;end=offsets[node.end_lineno-1]+node.end_col_offset
+ changes.append((start,end,render(new),name))
+for start,end,value,_ in reversed(changes):source=source[:start]+value+source[end:]
+p.write_text(source)
+print('Changed current snapshot fields:',[change[3] for change in changes])

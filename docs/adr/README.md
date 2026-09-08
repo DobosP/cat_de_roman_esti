@@ -40,9 +40,12 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0129 | [Portable projection-bound Alchimie reviews](0129-portable-alchimie-projection-reviews.md) | accepted |
 | 0130 | [Closed native bread-family feedback](0130-closed-native-bread-family-feedback.md) | accepted |
 | 0131 | [Everyday tools and cream-sense correction](0131-everyday-tools-and-cream-sense-correction.md) | accepted |
+| 0132 | [Recover uncertain Conexiuni actions](0132-reconcile-uncertain-conexiuni-actions.md) | accepted |
+| 0133 | [Closed dust and whipped-cream feedback](0133-closed-dust-and-whipped-cream-feedback.md) | partially superseded by 0135 |
+| 0134 | [Directed Contexto incoming-neighbor floor](0134-directed-contexto-neighbor-floor.md) | accepted |
+| 0135 | [Household discovery concepts and native Praf](0135-household-discovery-concepts.md) | accepted |
+| 0136 | [Recover uncertain Alchimie actions](0136-reconcile-uncertain-alchimie-actions.md) | accepted |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially
 superseded by ADR-0131 for the six cleaning-node topology boundary; their other scope remains.
-| 0132 | [Recover uncertain Conexiuni actions](0132-reconcile-uncertain-conexiuni-actions.md) | accepted |
-| 0133 | [Closed dust and whipped-cream feedback](0133-closed-dust-and-whipped-cream-feedback.md) | accepted |

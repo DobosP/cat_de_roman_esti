@@ -1,0 +1,52 @@
+import dataclasses,hashlib,json,os,sys
+from collections import Counter,defaultdict
+from pathlib import Path
+from unittest.mock import patch
+root=Path.cwd();sys.path.insert(0,str(root));os.environ.update(DJANGO_SETTINGS_MODULE='cat_de_roman_esti.web.settings',CAT_ACCOUNTS_ENABLED='0',CAT_DEBUG='0')
+import django
+django.setup()
+from cat_de_roman_esti.graph import Graph
+from cat_de_roman_esti.wordgames.service import WordGameService,normalize
+from cat_de_roman_esti.wordgames import contexto as C,contexto_projection as P,packs
+sys.path.insert(0,str(root/'scripts'))
+import critique_pack as CP
+out=root/'docs/reviews/v90-household-discovery-and-critique-gates/author-candidates'
+fixture=root/'cat_de_roman_esti/fixtures/kg_sample.json';packfile=root/'cat_de_roman_esti/fixtures/games_pack.json';proposal=out/'graph-proposal.json'
+f=json.loads(fixture.read_text());q=json.loads(proposal.read_text());pack=json.loads(packfile.read_text())
+newedges=[dict(id=f'author_v90_{i}',src_id=e['src'],dst_id=e['dst'],**{k:v for k,v in e.items() if k not in ('src','dst')}) for i,e in enumerate(q['edges'])]
+base=WordGameService(Graph.from_records(f['kg_nodes'],f['kg_edges']));svc=WordGameService(Graph.from_records(f['kg_nodes']+q['nodes'],f['kg_edges']+newedges))
+proof={'role':'author prospective in-memory graph screen only; no fixture/runtime mutation or gate approval','input_sha256':{str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [fixture,packfile,proposal,*[root/x for x in ['cat_de_roman_esti/graph.py','cat_de_roman_esti/wordgames/service.py','cat_de_roman_esti/wordgames/contexto.py','cat_de_roman_esti/wordgames/contexto_feedback.py','cat_de_roman_esti/wordgames/contexto_projection.py','cat_de_roman_esti/wordgames/packs.py','cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json']]]},'node_preflight':[],'lexical_forms':[],'directed_profiles':[],'first_guesses':[],'lant_scout':[]}
+for n in q['nodes']:
+ incoming=set(svc.predecessor_ids(n['id']));outgoing=set(svc.neighbor_ids(n['id']));adj=incoming|outgoing
+ proof['node_preflight'].append({'id':n['id'],'incident_neighbor_ids':sorted(adj),'incoming_ids':sorted(incoming),'same_category_neighbor_ids':sorted(i for i in adj if svc.node(i).category==n['category']),'four_incident_two_same_category_pass':len(adj)>=4 and sum(svc.node(i).category==n['category'] for i in adj)>=2})
+ for word in [n['label_ro'],*n['aliases']]:
+  term=P.resolve_projection(word);proof['lexical_forms'].append({'word':word,'old_native_owner':base.resolve(word),'prospective_native_owner':svc.resolve(word),'existing_projection_id':term.public_id if term else None,'existing_projection_anchor_id':term.anchor_id if term else None})
+words=['Praf','praful','prafului','Praf de copt','Lapte praf','Firimitură','firimituri','Scamă','scame','Pâine','Biscuit','Haină','Pătură','Covor','Făraș','Mătură','Mop','Aspirator','Electricitate','Farfurie','Apă','Burete de vase','Chiuvetă','Pământ','Noroi','Bolovan','Detergent','Podea','a spăla','Curățenie']
+for target_label in ['Făraș','Aspirator','Burete de vase','Mop','Mătură','Găleată','Detergent','Taburet']:
+ tid=svc.resolve(target_label);dist=svc.distances_to(tid);inc=set(svc.predecessor_ids(tid))-{tid};oldinc=set(base.predecessor_ids(tid))-{tid}
+ proof['directed_profiles'].append({'target':tid,'label':target_label,'old_incoming_ids':sorted(oldinc),'incoming_ids':sorted(inc),'incoming_labels':[svc.label(i) for i in sorted(inc)],'old_incoming_count':len(oldinc),'incoming_count':len(inc),'reachable':len(dist),'responsive':sum(1<=d<=packs.CONTEXTO_RESPONSIVE_MAX_HOPS for d in dist.values())})
+ with patch.object(C,'get_service',return_value=svc):session=C._build_session(tid,'usor',None)
+ for word in words:
+  nid=svc.resolve(word);term=P.resolve_projection(word)
+  if nid: score=C._score_feedback(svc,session,nid);result=dataclasses.asdict(score)
+  else:result={'not_native':True,'projection_id':term.public_id if term else None}
+  proof['first_guesses'].append({'word':word,'target':target_label,'result':result})
+starts=['Pâine','Biscuit','Haină','Pătură','Covor','Firimitură','Scamă'];targets=['Făraș','Aspirator','Mop','Mătură','Burete de vase']
+for start_label in starts:
+ for target_label in targets:
+  a,b=svc.resolve(start_label),svc.resolve(target_label);optimal=svc.distances_to(b).get(a);profile=packs.lant_branch_profile(svc,a,b,optimal) if optimal else None;dt=svc.distances_to(b)
+  hops=[i for i in svc.neighbor_ids(a) if dt.get(i)==optimal-1] if optimal else []
+  proof['lant_scout'].append({'start':a,'start_label':start_label,'target':b,'target_label':target_label,'optimal':optimal,'shortest_branch_profile':profile,'shortest_openers':[svc.label(i) for i in hops],'old_same_endpoint_records':[x['id'] for x in pack['lant'] if x['start']==a and x['target']==b]})
+# Full raw inventory plus durable rejection debt, not an approved-only sample.
+stock=[*pack['conexiuni'],*CP.load_rejection_tombstones()]
+quads={'floor_tools':['n_v88_cleaning_matura','n_v31_cleaning_floor_faras','n_v31_cleaning_floor_mop','n_v31_cleaning_floor_aspirator'],'household_textiles':['n_v24_home_textiles_patura','n_v24_home_textiles_covor','n_v24_home_bed_perna','n_v24_home_bed_saltea']}
+proof['conex_scout']={'inventory_boards':len(pack['conexiuni']),'tombstone_boards':len(stock)-len(pack['conexiuni']),'candidate_quad_matches':{}}
+for label,tiles in quads.items():
+ matches=[]
+ for board in stock:
+  for gid,gt in board['groups'].items():
+   overlap=set(tiles)&set(gt)
+   if len(overlap)>=3:matches.append({'board_id':board['id'],'group_id':gid,'overlap_count':len(overlap),'overlap_labels':[svc.label(i) for i in sorted(overlap)]})
+ proof['conex_scout']['candidate_quad_matches'][label]=matches
+(out/'prospective-screen.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n');(out/'screen-proposal.py.txt').write_bytes(Path(__file__).read_bytes())
+print(json.dumps({'node_preflight':proof['node_preflight'],'profiles':[{'label':r['label'],'before':r['old_incoming_count'],'after':r['incoming_count']} for r in proof['directed_profiles']],'possible_lant':[r for r in proof['lant_scout'] if r['shortest_branch_profile'] and r['shortest_branch_profile'][0]>=2 and r['shortest_branch_profile'][1]>=2],'conex':proof['conex_scout']},ensure_ascii=False,indent=2))

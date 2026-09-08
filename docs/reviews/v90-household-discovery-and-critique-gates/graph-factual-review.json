@@ -1,0 +1,520 @@
+{
+  "schema": "v90-independent-raw-graph-factual-review-v1",
+  "reviewer": "v90_graph_factual",
+  "role": "independent factual reviewer; did not author or alter proposal",
+  "reviewed_on": "2026-09-08",
+  "decision": "accept_facts_for_integration_review",
+  "graph_sha256": "672ea9f249ec9f18dbc51c24427580b61e98abbaef2b7b3a6d0fd5c557d395ba",
+  "candidate_sha256": "0a7d3cb1c78f19a5bb9568765ffb5ed96dfd321eade88fb3365afa37adada769",
+  "bindings": {
+    "docs/reviews/v90-household-discovery-and-critique-gates/author-candidates/graph-proposal.json": "672ea9f249ec9f18dbc51c24427580b61e98abbaef2b7b3a6d0fd5c557d395ba",
+    "docs/reviews/v90-household-discovery-and-critique-gates/author-candidates/viata_de_roman/candidates.json": "0a7d3cb1c78f19a5bb9568765ffb5ed96dfd321eade88fb3365afa37adada769",
+    "docs/reviews/v90-household-discovery-and-critique-gates/author-candidates/edge-source-map.json": "d5d5714ddc4b9c2639ecf9c7261ede8fdcb21dd4f06bc1dac5f7f31536719ad4",
+    "docs/reviews/v90-household-discovery-and-critique-gates/author-candidates/sources.json": "3a87a109157c176e81cd9d3c493d825a175b40b6de2b20fbb56950c42d92497c",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc"
+  },
+  "counts": {
+    "nodes_reviewed": 3,
+    "directed_edges_reviewed": 17,
+    "grammatical_forms_reviewed": 10,
+    "synonyms_reviewed": 0,
+    "contexto_candidate_refs_reviewed": 3
+  },
+  "nodes": [
+    {
+      "index": 0,
+      "id": "n_v90_household_praf",
+      "label_ro": "Praf",
+      "decision": "accept_scoped_meaning",
+      "rationale": "Accept the scoped fine-particle household dust meaning. DEX 2009 separates ordinary dust from specified powders and assigns the plural to its other senses. Dust need not be soil; suspended/settled is supported by the historical DLRLC physical sense. Salience 0.90 is editorial, not surveyed recognition.",
+      "sources": [
+        "dex-dust"
+      ],
+      "forms": [
+        {
+          "surface": "praful",
+          "decision": "accept_grammatical_form",
+          "grammar": "definite nominative/accusative singular",
+          "source": "dex-dust"
+        },
+        {
+          "surface": "prafului",
+          "decision": "accept_grammatical_form",
+          "grammar": "definite genitive/dative singular",
+          "source": "dex-dust"
+        }
+      ],
+      "form_evidence": "Independently read DOR-attributed inflection table on dexonline. These are morphological forms, not synonyms."
+    },
+    {
+      "index": 1,
+      "id": "n_v90_food_firimitura",
+      "label_ro": "Firimitură",
+      "decision": "accept_scoped_meaning",
+      "rationale": "Accept a tiny detached food piece, canonically bread and by extension other foods. Biscuit crumbs fit the extension. It is not dust, a synonym for bread, or a cooking ingredient recipe. Salience 0.90 is editorial.",
+      "sources": [
+        "dex-crumb"
+      ],
+      "forms": [
+        {
+          "surface": "firimituri",
+          "decision": "accept_grammatical_form",
+          "grammar": "indefinite plural; also genitive/dative singular",
+          "source": "dex-crumb"
+        },
+        {
+          "surface": "firimiturile",
+          "decision": "accept_grammatical_form",
+          "grammar": "definite nominative/accusative plural",
+          "source": "dex-crumb"
+        },
+        {
+          "surface": "firimiturii",
+          "decision": "accept_grammatical_form",
+          "grammar": "definite genitive/dative singular",
+          "source": "dex-crumb"
+        },
+        {
+          "surface": "firimiturilor",
+          "decision": "accept_grammatical_form",
+          "grammar": "definite genitive/dative plural",
+          "source": "dex-crumb"
+        }
+      ],
+      "form_evidence": "Independently read DOR-attributed inflection table on dexonline. These are morphological forms, not synonyms."
+    },
+    {
+      "index": 2,
+      "id": "n_v90_textile_scama",
+      "label_ro": "Scamă",
+      "decision": "accept_scoped_meaning",
+      "rationale": "Accept a short textile thread detached from fabric. Clothing/home textiles fit this sense. Historical dressings, botanical plural fluff, hair and generic fibre remain outside the owner. Salience 0.85 is editorial.",
+      "sources": [
+        "dex-lint"
+      ],
+      "forms": [
+        {
+          "surface": "scame",
+          "decision": "accept_grammatical_form",
+          "grammar": "indefinite plural; also genitive/dative singular",
+          "source": "dex-lint"
+        },
+        {
+          "surface": "scamele",
+          "decision": "accept_grammatical_form",
+          "grammar": "definite nominative/accusative plural",
+          "source": "dex-lint"
+        },
+        {
+          "surface": "scamei",
+          "decision": "accept_grammatical_form",
+          "grammar": "definite genitive/dative singular",
+          "source": "dex-lint"
+        },
+        {
+          "surface": "scamelor",
+          "decision": "accept_grammatical_form",
+          "grammar": "definite genitive/dative plural",
+          "source": "dex-lint"
+        }
+      ],
+      "form_evidence": "Independently read DOR-attributed inflection table on dexonline. These are morphological forms, not synonyms."
+    }
+  ],
+  "edges": [
+    {
+      "index": 0,
+      "src": "n_v90_household_praf",
+      "dst": "n_v31_cleaning_floor_faras",
+      "relation": "collected_with",
+      "label_ro": "se adună cu fărașul",
+      "strength": 0.85,
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "decision": "accept_as_authored",
+      "sources": [
+        "dex-faras",
+        "leifheit-dry",
+        "karcher-dirt-original"
+      ],
+      "rationale": "Dust swept from a floor is collected in a dustpan. The label names a collection tool, not the best way to capture every airborne particle.",
+      "strength_assessment": "Strong direct ordinary use; 0.85 acceptable editorial estimate."
+    },
+    {
+      "index": 1,
+      "src": "n_v90_household_praf",
+      "dst": "n_v88_cleaning_matura",
+      "relation": "swept_with",
+      "label_ro": "se strânge de pe podea cu mătura",
+      "strength": 0.85,
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "decision": "accept_as_authored",
+      "sources": [
+        "leifheit-dry",
+        "karcher-dirt-original"
+      ],
+      "rationale": "Floor dust can be gathered by sweeping. Sweeping can also stir dust up; the label promises collection, not total airborne-dust removal.",
+      "strength_assessment": "Strong direct use, 0.85; no universal efficiency claim."
+    },
+    {
+      "index": 2,
+      "src": "n_v90_household_praf",
+      "dst": "n_v31_cleaning_floor_mop",
+      "relation": "collected_with",
+      "label_ro": "poate fi colectat de pe podea de un mop cu microfibre",
+      "strength": 0.8,
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "decision": "accept_as_authored",
+      "sources": [
+        "vileda-mop"
+      ],
+      "rationale": "The original Romanian Turbo 2in1 page explicitly describes microfiber fringes collecting floor dust. The edge retains both may and microfiber qualifications.",
+      "strength_assessment": "0.80 is an acceptable qualified-use estimate; do not generalize to every mop."
+    },
+    {
+      "index": 3,
+      "src": "n_v90_household_praf",
+      "dst": "n_v31_cleaning_floor_aspirator",
+      "relation": "collected_with",
+      "label_ro": "se îndepărtează prin aspirare cu",
+      "strength": 0.9,
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "decision": "accept_as_authored",
+      "sources": [
+        "dex-vacuum",
+        "karcher-vacuum"
+      ],
+      "rationale": "The existing target is explicitly a household floor/carpet suction appliance. It collects ordinary dust. Neither the broad dictionary entry nor this edge licenses vacuuming every substance.",
+      "strength_assessment": "0.90 fits a defining household use; editorial, not a measured source score."
+    },
+    {
+      "index": 4,
+      "src": "n_v4gas_paine",
+      "dst": "n_v90_food_firimitura",
+      "relation": "crumbles_into",
+      "label_ro": "lasă bucățele mici când se taie sau se rupe",
+      "strength": 0.85,
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "decision": "accept_as_authored",
+      "sources": [
+        "dex-crumb"
+      ],
+      "rationale": "DEX explicitly defines a small bread fragment left by cutting or breaking; the direction bread to crumb and description are factual.",
+      "strength_assessment": "0.85 is a direct origin association."
+    },
+    {
+      "index": 5,
+      "src": "n_v24_food_snack_biscuit",
+      "dst": "n_v90_food_firimitura",
+      "relation": "crumbles_into",
+      "label_ro": "poate lăsa bucățele mici la rupere sau consum",
+      "strength": 0.85,
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "decision": "accept_as_authored",
+      "sources": [
+        "dex-crumb",
+        "karcher-carpet"
+      ],
+      "rationale": "DEX permits tiny pieces of other foods; original carpet care explicitly mentions biscuit crumbs. May leave crumbs on breaking/eating is a warranted synthesis.",
+      "strength_assessment": "0.85 is a direct food-fragment association, not a recipe weight."
+    },
+    {
+      "index": 6,
+      "src": "n_v90_food_firimitura",
+      "dst": "n_v31_cleaning_floor_faras",
+      "relation": "collected_with",
+      "label_ro": "se adună de pe podea cu fărașul",
+      "strength": 0.8,
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "decision": "accept_as_authored",
+      "sources": [
+        "leifheit-dry",
+        "dex-faras"
+      ],
+      "rationale": "The dry-cleaning page includes floor crumbs and broom/dustpan sets, and the dictionary defines the collection implement. The floor qualifier excludes food preparation.",
+      "strength_assessment": "0.80 is reasonable for collected dry debris; direction does not invent a reverse fact."
+    },
+    {
+      "index": 7,
+      "src": "n_v90_food_firimitura",
+      "dst": "n_v31_cleaning_floor_aspirator",
+      "relation": "collected_with",
+      "label_ro": "se îndepărtează de pe podele sau covoare cu",
+      "strength": 0.85,
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "decision": "accept_as_authored",
+      "sources": [
+        "karcher-carpet"
+      ],
+      "rationale": "Original care guidance names biscuit crumbs and routine/quick vacuum cleaning of carpets. The proposed floor/carpet collection use is supported.",
+      "strength_assessment": "0.85 is direct household collection; no claim that every wet or large food remnant should be vacuumed."
+    },
+    {
+      "index": 8,
+      "src": "n_v29_clothing_everyday_haina",
+      "dst": "n_v90_textile_scama",
+      "relation": "may_shed",
+      "label_ro": "poate lăsa fire textile scurte pe suprafață",
+      "strength": 0.8,
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "decision": "accept_as_authored",
+      "sources": [
+        "dex-lint",
+        "philips-fabric-sheet"
+      ],
+      "rationale": "DEX defines threads from fabric and has clothing-context examples. Philips confirms garments develop pills. The may-shed label is accepted as a modest fabric-to-loose-thread association, without identifying attached pills with loose floor lint.",
+      "strength_assessment": "0.80 is a qualified may association; not a claim about all garment materials."
+    },
+    {
+      "index": 9,
+      "src": "n_v24_home_textiles_patura",
+      "dst": "n_v90_textile_scama",
+      "relation": "may_shed",
+      "label_ro": "poate forma fire textile scurte desprinse",
+      "strength": 0.8,
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "decision": "accept_as_authored",
+      "sources": [
+        "dex-lint",
+        "jukki-blanket",
+        "philips-fabric-sheet"
+      ],
+      "rationale": "JUKKI explicitly anticipates scame during use of its bamboo/cotton blanket. DEX fixes the textile sense. Philips independently provides blanket-pilling context but is not used alone to prove detached lint.",
+      "strength_assessment": "0.80 is acceptable only with the existing may-form qualification; no all-blankets claim."
+    },
+    {
+      "index": 10,
+      "src": "n_v24_home_textiles_covor",
+      "dst": "n_v90_textile_scama",
+      "relation": "may_shed",
+      "label_ro": "unele covoare, mai ales din lână, lasă fire textile scurte",
+      "strength": 0.8,
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "decision": "accept_as_authored",
+      "sources": [
+        "ikea-carpet",
+        "dex-lint"
+      ],
+      "rationale": "IKEA Romanian wool-rug care explicitly says wool rugs produce scame naturally. The proposal says some carpets, especially wool, which preserves the material qualification.",
+      "strength_assessment": "0.80 reflects a qualified material association, not a quantified shedding rate."
+    },
+    {
+      "index": 11,
+      "src": "n_v90_textile_scama",
+      "dst": "n_v31_cleaning_floor_aspirator",
+      "relation": "collected_with",
+      "label_ro": "se îndepărtează de pe podele și covoare prin aspirare cu",
+      "strength": 0.85,
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "decision": "accept_as_authored",
+      "sources": [
+        "ikea-carpet",
+        "karcher-dirt-original"
+      ],
+      "rationale": "IKEA recommends vacuuming wool-rug lint; the original Kärcher article explicitly vacuums loose lint from floors and carpets. The edge keeps those locations and does not replace a garment shaver.",
+      "strength_assessment": "0.85 is a direct loose-debris collection relation."
+    },
+    {
+      "index": 12,
+      "src": "n_v24_home_textiles_covor",
+      "dst": "n_v31_cleaning_floor_aspirator",
+      "relation": "cleaned_with",
+      "label_ro": "se curăță periodic prin aspirare cu",
+      "strength": 0.85,
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "decision": "accept_as_authored",
+      "sources": [
+        "karcher-carpet",
+        "ikea-carpet"
+      ],
+      "rationale": "Both original care pages recommend regular vacuuming of carpets. The statement is periodic care, not complete deep cleaning or permission for every attachment.",
+      "strength_assessment": "0.85 is a strong routine-care association."
+    },
+    {
+      "index": 13,
+      "src": "n_v3sti_electricitate",
+      "dst": "n_v31_cleaning_floor_aspirator",
+      "relation": "powers",
+      "label_ro": "asigură energia de funcționare, din rețea sau acumulator",
+      "strength": 0.85,
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "decision": "accept_as_authored",
+      "sources": [
+        "karcher-manual",
+        "karcher-vacuum"
+      ],
+      "rationale": "Original VC manual Romanian pages 121–122 specify electrical connection and plugging into an outlet; the current family page specifies lithium-ion battery operation. The household target is electrically powered in both forms.",
+      "strength_assessment": "0.85 is a direct energy requirement. The generic DEX entry alone does not establish electricity."
+    },
+    {
+      "index": 14,
+      "src": "n_v30_kitchen_table_farfurie",
+      "dst": "n_v31_cleaning_dishes_burete_vase",
+      "relation": "cleaned_with",
+      "label_ro": "se poate spăla manual cu un burete de vase potrivit suprafeței",
+      "strength": 0.8,
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "decision": "accept_as_authored",
+      "sources": [
+        "dex-plate",
+        "fino-sponge"
+      ],
+      "rationale": "DEX establishes the ordinary serving-plate object; FINO includes dishes in manual sponge washing and warns about abrasive sides. Surface-appropriate and can preserve that limitation.",
+      "strength_assessment": "0.80 is a direct qualified manual-cleaning relation, not a claim that a sponge is mandatory."
+    },
+    {
+      "index": 15,
+      "src": "n_v4gas_apa",
+      "dst": "n_v31_cleaning_dishes_burete_vase",
+      "relation": "used_with",
+      "label_ro": "umezește și clătește buretele folosit la spălarea vaselor",
+      "strength": 0.8,
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "decision": "accept_as_authored",
+      "sources": [
+        "fino-sponge",
+        "vileda-sponge"
+      ],
+      "rationale": "FINO instructs rinsing/draining and discusses water during dishwashing; Vileda explicitly uses water and soap to wash the sponge. Wetting/rinsing is factual without a water-only disinfection claim.",
+      "strength_assessment": "0.80 is a direct co-use association, not an Alchimie production fact."
+    },
+    {
+      "index": 16,
+      "src": "n_v24_home_textiles_covor",
+      "dst": "n_v90_household_praf",
+      "relation": "may_shed",
+      "label_ro": "poate contribui cu fibre la praful din casă",
+      "strength": 0.7,
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "decision": "accept_as_authored",
+      "sources": [
+        "karcher-dirt-original"
+      ],
+      "rationale": "The independently opened original manufacturer article explicitly includes carpet fibres in household dust. May contribute with fibres preserves the part-of-mixture relationship; dust and lint are not synonyms.",
+      "strength_assessment": "0.70 is appropriately below defining tool associations because contribution depends on textile and setting; editorial only."
+    }
+  ],
+  "sources": {
+    "dex-dust": {
+      "url": "https://dexonline.ro/definitie/praf",
+      "access": "independently opened original dictionary or manufacturer page on 2026-09-08"
+    },
+    "dex-crumb": {
+      "url": "https://dexonline.ro/definitie/firimitur%C4%83",
+      "access": "independently opened original dictionary or manufacturer page on 2026-09-08"
+    },
+    "dex-lint": {
+      "url": "https://dexonline.ro/definitie/scama",
+      "access": "independently opened original dictionary or manufacturer page on 2026-09-08"
+    },
+    "dex-faras": {
+      "url": "https://dexonline.ro/definitie/f%C4%83ra%C8%99",
+      "access": "independently opened original dictionary or manufacturer page on 2026-09-08"
+    },
+    "dex-vacuum": {
+      "url": "https://dexonline.ro/definitie/aspirator/830471",
+      "access": "independently opened original dictionary or manufacturer page on 2026-09-08"
+    },
+    "dex-plate": {
+      "url": "https://dexonline.ro/intrare/farfurie/20222",
+      "access": "independently opened original dictionary or manufacturer page on 2026-09-08"
+    },
+    "leifheit-dry": {
+      "url": "https://leifheit.ro/ro/13-curatare-uscata",
+      "access": "independently opened original dictionary or manufacturer page on 2026-09-08"
+    },
+    "vileda-mop": {
+      "url": "https://www.viledaromania.ro/Mops/Cap-de-mop-Turbo-2in1/p/151609",
+      "access": "independently opened original dictionary or manufacturer page on 2026-09-08"
+    },
+    "karcher-vacuum": {
+      "url": "https://www.karcher.com/ro/ro/home-and-garden/produse/aspiratoare-c4250",
+      "access": "independently opened original dictionary or manufacturer page on 2026-09-08; current category supports battery operation and dust collection, but omits the authored carpet-fibre paragraph"
+    },
+    "karcher-carpet": {
+      "url": "https://www.karcher.com/ro/ro/home-and-garden/sfaturi-de-curatenie/curatarea-covoarelor-c3799",
+      "access": "independently opened original dictionary or manufacturer page on 2026-09-08"
+    },
+    "karcher-manual": {
+      "url": "https://www.kaercher.com/documents/manuals/raw/000/BTA-5328375-000-00.pdf",
+      "access": "independently opened original dictionary or manufacturer page on 2026-09-08"
+    },
+    "philips-lint": {
+      "url": "https://www.philips.ro/c-p/GCA2100_20/1000-series-fabric-shavers/overview",
+      "access": "Original URL opened, redirected to home-appliances.philips with zero extractable lines. Not relied on as proof of blanket shedding."
+    },
+    "ikea-carpet": {
+      "url": "https://www.ikea.com/ro/ro/p/tagspar-covor-fir-lung-verde-90576352/",
+      "access": "independently opened original dictionary or manufacturer page on 2026-09-08"
+    },
+    "karcher-robot": {
+      "url": "https://www.kaercher.com/ro/ro/home-and-garden/produse/aspiratoare-si-mopuri-robot-c4254",
+      "access": "independently opened original dictionary or manufacturer page on 2026-09-08; current page did not contain the authored lint paragraph; not relied on for edge 11"
+    },
+    "fino-sponge": {
+      "url": "https://www.fino.eu/ro/produse/curatenie-si-igiena/bureti-de-bucatarie/",
+      "access": "independently opened original dictionary or manufacturer page on 2026-09-08"
+    },
+    "vileda-sponge": {
+      "url": "https://www.viledaromania.ro/ScourersAndSponges/Vileda-Glitzi-PUR-Active-pentru-cl%C4%83tire-/p/129706",
+      "access": "independently opened original dictionary or manufacturer page on 2026-09-08"
+    },
+    "epack-sponge": {
+      "url": "https://epack.ro/bureti-spalatoare/",
+      "access": "independently opened original dictionary or manufacturer page on 2026-09-08"
+    },
+    "dex-sponge": {
+      "url": "https://dexonline.ro/definitie/burete",
+      "access": "independently opened original dictionary or manufacturer page on 2026-09-08"
+    },
+    "karcher-dirt-original": {
+      "url": "https://www.kaercher.com/ae/inside-kaercher/newsroom-en-copy-1/kaercher-stories/on-the-hunt-for-dirt.html",
+      "access": "Independently opened full original manufacturer article; English edition, not a second independent publisher.",
+      "evidence": "Household dust includes carpet fibres. Loose floor/rug/carpet lint can be vacuumed. The article separates dust, lint and hair; it does not make them lexical equivalents."
+    },
+    "philips-fabric-sheet": {
+      "url": "https://www.documents.philips.com/assets/20211003/7badb418cde44a7d9d06adb6013ae42b.pdf",
+      "access": "Independently opened original GC026/00 product sheet, page 1; printed issue date 2023-07-13.",
+      "evidence": "Garments and blankets can develop removable fabric pills. Pilling is contextual support only; DEX supplies the short textile-thread meaning, and no claim equates attached pills with loose floor lint."
+    },
+    "jukki-blanket": {
+      "url": "https://jukki.ro/shop/paturi-si-perne/bamboo-blankets/morning-dust-bamboo-blanket/",
+      "access": "Independently opened Romanian product/care text, original JUKKI brand/manufacturer page.",
+      "evidence": "The blanket uses bamboo/cotton fibres and its care text explicitly anticipates scame arising during use. This supports a may-form claim for some blankets."
+    }
+  },
+  "source_access_limits": [
+    "All 18 author URLs were independently opened. Original Philips GCA2100 URL redirects with zero extractable text; the accepted review instead uses original GC026/00 PDF and a Romanian JUKKI blanket page.",
+    "Current Kärcher vacuum and robot category pages omit the authored carpet-fibre/lint passages. Same-publisher English On the Hunt for Dirt was independently opened and supports these facts. The Romanian legacy dust article intermittently failed on follow-up. These editions are not counted as independent publishers.",
+    "A first Philips GC026 PDF URL appeared in search/open metadata but its follow-up returned 404. It is not the bound supporting PDF; the alternative original 20211003 URL opened with full text.",
+    "The author-reported transient Farfurie access issue did not recur: the canonical entry independently opened with DEX 2009 text."
+  ],
+  "holds_and_boundaries": [
+    "This accepts graph facts, not safe runtime application or any hidden-target promotion. Praf public projection identity/attempt continuity and all live score/typo/privacy behavior still require independent implementation review.",
+    "No prafuri: DEX limits that plural to other senses. No pulbere/colb, păr, murdărie, generic fibre, activity, diminutive or inferred synonym is approved here.",
+    "Praf de copt and Lapte praf remain existing distinct native owners. Bathroom Chiuvetă remains its existing native owner; no proposed edge touches it.",
+    "Scamă is not a universal name for hair, dust or plant fluff. Clothing pills may remain attached; the vacuum edge is limited to loose material on floors/carpets.",
+    "All edges are one-way and non-distractor. Sources establish semantic associations, not graph direction as a natural law or empirical numerical strengths.",
+    "No new node is proposed as a hidden target. Raw candidate keep/staging eligibility does not settle C1–C6, the prospective Burete plate-proxy debt, or rejection history.",
+    "No graph-truth judgment permits incidental crafting recipes or semantic shortcuts; root still must compare all old Alchimie/Lanț/derived content and all relevant Contexto feedback."
+  ],
+  "probe_notes": [
+    "The first local owner-inspection snippet incorrectly used the nodes key instead of kg_nodes and exited with KeyError before reading owners. The corrected read printed the scoped existing owners. A subsequent rg included nonexistent normalization.py and exited 2; neither was an application/test failure or mutation."
+  ]
+}

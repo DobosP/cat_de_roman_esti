@@ -1,0 +1,3544 @@
+{
+  "role": "author prospective in-memory graph screen only; no fixture/runtime mutation or gate approval",
+  "input_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04",
+    "docs/reviews/v90-household-discovery-and-critique-gates/author-candidates/graph-proposal.json": "672ea9f249ec9f18dbc51c24427580b61e98abbaef2b7b3a6d0fd5c557d395ba",
+    "cat_de_roman_esti/graph.py": "496b56900c46fec1f9aacbe3ab5c0bb220e06058d64da840aaadee405ab115b0",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "753c22890e14b8b049f62d249ee92a06b6631fb4589db97dbebd003eaf18b5fd",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+    "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json": "a52eed7f57b607568637960c07f490ded21867de6b47dbf833ce1d3ab52ef869"
+  },
+  "node_preflight": [
+    {
+      "id": "n_v90_household_praf",
+      "incident_neighbor_ids": [
+        "n_v24_home_textiles_covor",
+        "n_v31_cleaning_floor_aspirator",
+        "n_v31_cleaning_floor_faras",
+        "n_v31_cleaning_floor_mop",
+        "n_v88_cleaning_matura"
+      ],
+      "incoming_ids": [
+        "n_v24_home_textiles_covor"
+      ],
+      "same_category_neighbor_ids": [
+        "n_v24_home_textiles_covor",
+        "n_v31_cleaning_floor_aspirator",
+        "n_v31_cleaning_floor_faras",
+        "n_v31_cleaning_floor_mop",
+        "n_v88_cleaning_matura"
+      ],
+      "four_incident_two_same_category_pass": true
+    },
+    {
+      "id": "n_v90_food_firimitura",
+      "incident_neighbor_ids": [
+        "n_v24_food_snack_biscuit",
+        "n_v31_cleaning_floor_aspirator",
+        "n_v31_cleaning_floor_faras",
+        "n_v4gas_paine"
+      ],
+      "incoming_ids": [
+        "n_v24_food_snack_biscuit",
+        "n_v4gas_paine"
+      ],
+      "same_category_neighbor_ids": [
+        "n_v24_food_snack_biscuit",
+        "n_v4gas_paine"
+      ],
+      "four_incident_two_same_category_pass": true
+    },
+    {
+      "id": "n_v90_textile_scama",
+      "incident_neighbor_ids": [
+        "n_v24_home_textiles_covor",
+        "n_v24_home_textiles_patura",
+        "n_v29_clothing_everyday_haina",
+        "n_v31_cleaning_floor_aspirator"
+      ],
+      "incoming_ids": [
+        "n_v24_home_textiles_covor",
+        "n_v24_home_textiles_patura",
+        "n_v29_clothing_everyday_haina"
+      ],
+      "same_category_neighbor_ids": [
+        "n_v24_home_textiles_covor",
+        "n_v24_home_textiles_patura",
+        "n_v29_clothing_everyday_haina",
+        "n_v31_cleaning_floor_aspirator"
+      ],
+      "four_incident_two_same_category_pass": true
+    }
+  ],
+  "lexical_forms": [
+    {
+      "word": "Praf",
+      "old_native_owner": null,
+      "prospective_native_owner": "n_v90_household_praf",
+      "existing_projection_id": "ctxp_81703160cad7893fa1c9",
+      "existing_projection_anchor_id": "n_v24_nature_world_pamant"
+    },
+    {
+      "word": "praful",
+      "old_native_owner": null,
+      "prospective_native_owner": "n_v90_household_praf",
+      "existing_projection_id": null,
+      "existing_projection_anchor_id": null
+    },
+    {
+      "word": "prafului",
+      "old_native_owner": null,
+      "prospective_native_owner": "n_v90_household_praf",
+      "existing_projection_id": null,
+      "existing_projection_anchor_id": null
+    },
+    {
+      "word": "Firimitură",
+      "old_native_owner": null,
+      "prospective_native_owner": "n_v90_food_firimitura",
+      "existing_projection_id": null,
+      "existing_projection_anchor_id": null
+    },
+    {
+      "word": "firimituri",
+      "old_native_owner": null,
+      "prospective_native_owner": "n_v90_food_firimitura",
+      "existing_projection_id": null,
+      "existing_projection_anchor_id": null
+    },
+    {
+      "word": "firimiturile",
+      "old_native_owner": null,
+      "prospective_native_owner": "n_v90_food_firimitura",
+      "existing_projection_id": null,
+      "existing_projection_anchor_id": null
+    },
+    {
+      "word": "firimiturii",
+      "old_native_owner": null,
+      "prospective_native_owner": "n_v90_food_firimitura",
+      "existing_projection_id": null,
+      "existing_projection_anchor_id": null
+    },
+    {
+      "word": "firimiturilor",
+      "old_native_owner": null,
+      "prospective_native_owner": "n_v90_food_firimitura",
+      "existing_projection_id": null,
+      "existing_projection_anchor_id": null
+    },
+    {
+      "word": "Scamă",
+      "old_native_owner": null,
+      "prospective_native_owner": "n_v90_textile_scama",
+      "existing_projection_id": null,
+      "existing_projection_anchor_id": null
+    },
+    {
+      "word": "scame",
+      "old_native_owner": null,
+      "prospective_native_owner": "n_v90_textile_scama",
+      "existing_projection_id": null,
+      "existing_projection_anchor_id": null
+    },
+    {
+      "word": "scamele",
+      "old_native_owner": null,
+      "prospective_native_owner": "n_v90_textile_scama",
+      "existing_projection_id": null,
+      "existing_projection_anchor_id": null
+    },
+    {
+      "word": "scamei",
+      "old_native_owner": null,
+      "prospective_native_owner": "n_v90_textile_scama",
+      "existing_projection_id": null,
+      "existing_projection_anchor_id": null
+    },
+    {
+      "word": "scamelor",
+      "old_native_owner": null,
+      "prospective_native_owner": "n_v90_textile_scama",
+      "existing_projection_id": null,
+      "existing_projection_anchor_id": null
+    }
+  ],
+  "directed_profiles": [
+    {
+      "target": "n_v31_cleaning_floor_faras",
+      "label": "Făraș",
+      "old_incoming_ids": [
+        "n_v24_home_surfaces_podea",
+        "n_v31_cleaning_floor_aspirator",
+        "n_v88_cleaning_matura"
+      ],
+      "incoming_ids": [
+        "n_v24_home_surfaces_podea",
+        "n_v31_cleaning_floor_aspirator",
+        "n_v88_cleaning_matura",
+        "n_v90_food_firimitura",
+        "n_v90_household_praf"
+      ],
+      "incoming_labels": [
+        "Podea",
+        "Aspirator",
+        "Mătură",
+        "Firimitură",
+        "Praf"
+      ],
+      "old_incoming_count": 3,
+      "incoming_count": 5,
+      "reachable": 2353,
+      "responsive": 744
+    },
+    {
+      "target": "n_v31_cleaning_floor_aspirator",
+      "label": "Aspirator",
+      "old_incoming_ids": [
+        "n_v24_home_surfaces_podea",
+        "n_v31_cleaning_floor_mop",
+        "n_v88_cleaning_matura"
+      ],
+      "incoming_ids": [
+        "n_v24_home_surfaces_podea",
+        "n_v24_home_textiles_covor",
+        "n_v31_cleaning_floor_mop",
+        "n_v3sti_electricitate",
+        "n_v88_cleaning_matura",
+        "n_v90_food_firimitura",
+        "n_v90_household_praf",
+        "n_v90_textile_scama"
+      ],
+      "incoming_labels": [
+        "Podea",
+        "Covor",
+        "Mop",
+        "Electricitate",
+        "Mătură",
+        "Firimitură",
+        "Praf",
+        "Scamă"
+      ],
+      "old_incoming_count": 3,
+      "incoming_count": 8,
+      "reachable": 2353,
+      "responsive": 1427
+    },
+    {
+      "target": "n_v31_cleaning_dishes_burete_vase",
+      "label": "Burete de vase",
+      "old_incoming_ids": [
+        "n_v24_action_home_a_spala",
+        "n_v31_cleaning_floor_aspirator",
+        "n_v31_cleaning_floor_faras",
+        "n_v31_cleaning_supply_detergent"
+      ],
+      "incoming_ids": [
+        "n_v24_action_home_a_spala",
+        "n_v30_kitchen_table_farfurie",
+        "n_v31_cleaning_floor_aspirator",
+        "n_v31_cleaning_floor_faras",
+        "n_v31_cleaning_supply_detergent",
+        "n_v4gas_apa"
+      ],
+      "incoming_labels": [
+        "A spăla",
+        "Farfurie",
+        "Aspirator",
+        "Făraș",
+        "Detergent",
+        "Apă"
+      ],
+      "old_incoming_count": 4,
+      "incoming_count": 6,
+      "reachable": 2353,
+      "responsive": 1510
+    },
+    {
+      "target": "n_v31_cleaning_floor_mop",
+      "label": "Mop",
+      "old_incoming_ids": [
+        "n_v24_home_surfaces_podea",
+        "n_v31_cleaning_floor_faras",
+        "n_v31_cleaning_supply_detergent",
+        "n_v31_cleaning_water_galeata",
+        "n_v88_cleaning_matura"
+      ],
+      "incoming_ids": [
+        "n_v24_home_surfaces_podea",
+        "n_v31_cleaning_floor_faras",
+        "n_v31_cleaning_supply_detergent",
+        "n_v31_cleaning_water_galeata",
+        "n_v88_cleaning_matura",
+        "n_v90_household_praf"
+      ],
+      "incoming_labels": [
+        "Podea",
+        "Făraș",
+        "Detergent",
+        "Găleată",
+        "Mătură",
+        "Praf"
+      ],
+      "old_incoming_count": 5,
+      "incoming_count": 6,
+      "reachable": 2353,
+      "responsive": 647
+    },
+    {
+      "target": "n_v88_cleaning_matura",
+      "label": "Mătură",
+      "old_incoming_ids": [
+        "n_v31_cleaning_floor_faras"
+      ],
+      "incoming_ids": [
+        "n_v31_cleaning_floor_faras",
+        "n_v90_household_praf"
+      ],
+      "incoming_labels": [
+        "Făraș",
+        "Praf"
+      ],
+      "old_incoming_count": 1,
+      "incoming_count": 2,
+      "reachable": 2353,
+      "responsive": 256
+    },
+    {
+      "target": "n_v31_cleaning_water_galeata",
+      "label": "Găleată",
+      "old_incoming_ids": [
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_floor_mop",
+        "n_v4gas_apa"
+      ],
+      "incoming_ids": [
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_floor_mop",
+        "n_v4gas_apa"
+      ],
+      "incoming_labels": [
+        "Burete de vase",
+        "Mop",
+        "Apă"
+      ],
+      "old_incoming_count": 3,
+      "incoming_count": 3,
+      "reachable": 2353,
+      "responsive": 1498
+    },
+    {
+      "target": "n_v31_cleaning_supply_detergent",
+      "label": "Detergent",
+      "old_incoming_ids": [
+        "n_v24_action_home_a_spala",
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_water_galeata"
+      ],
+      "incoming_ids": [
+        "n_v24_action_home_a_spala",
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_water_galeata"
+      ],
+      "incoming_labels": [
+        "A spăla",
+        "Burete de vase",
+        "Găleată"
+      ],
+      "old_incoming_count": 3,
+      "incoming_count": 3,
+      "reachable": 2353,
+      "responsive": 652
+    },
+    {
+      "target": "n_v88_home_taburet",
+      "label": "Taburet",
+      "old_incoming_ids": [
+        "n_v3muz_pian"
+      ],
+      "incoming_ids": [
+        "n_v3muz_pian"
+      ],
+      "incoming_labels": [
+        "Pian"
+      ],
+      "old_incoming_count": 1,
+      "incoming_count": 1,
+      "reachable": 2353,
+      "responsive": 968
+    }
+  ],
+  "first_guesses": [
+    {
+      "word": "Praf",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 1,
+        "weighted_distance": 1.15,
+        "rank": 4,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "praful",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 1,
+        "weighted_distance": 1.15,
+        "rank": 4,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "prafului",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 1,
+        "weighted_distance": 1.15,
+        "rank": 4,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Praf de copt",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v87_food_praf_copt",
+        "distance": 3,
+        "weighted_distance": 3.55,
+        "rank": 39,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Lapte praf",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v86_food_lapte_praf",
+        "distance": 6,
+        "weighted_distance": 7.1499999999999995,
+        "rank": 1152,
+        "feedback_distance": 6
+      }
+    },
+    {
+      "word": "Firimitură",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v90_food_firimitura",
+        "distance": 1,
+        "weighted_distance": 1.2,
+        "rank": 5,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "firimituri",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v90_food_firimitura",
+        "distance": 1,
+        "weighted_distance": 1.2,
+        "rank": 5,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Scamă",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v90_textile_scama",
+        "distance": 2,
+        "weighted_distance": 2.19,
+        "rank": 9,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "scame",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v90_textile_scama",
+        "distance": 2,
+        "weighted_distance": 2.19,
+        "rank": 9,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Pâine",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v4gas_paine",
+        "distance": 2,
+        "weighted_distance": 2.3499999999999996,
+        "rank": 12,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Biscuit",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v24_food_snack_biscuit",
+        "distance": 2,
+        "weighted_distance": 2.3499999999999996,
+        "rank": 12,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Haină",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v29_clothing_everyday_haina",
+        "distance": 3,
+        "weighted_distance": 3.3899999999999997,
+        "rank": 25,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Pătură",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v24_home_textiles_patura",
+        "distance": 3,
+        "weighted_distance": 3.29,
+        "rank": 20,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Covor",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v24_home_textiles_covor",
+        "distance": 2,
+        "weighted_distance": 2.19,
+        "rank": 9,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Făraș",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v31_cleaning_floor_faras",
+        "distance": 0,
+        "weighted_distance": 0.0,
+        "rank": 1,
+        "feedback_distance": 0
+      }
+    },
+    {
+      "word": "Mătură",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v88_cleaning_matura",
+        "distance": 1,
+        "weighted_distance": 1.2,
+        "rank": 5,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Mop",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 1,
+        "weighted_distance": 1.03,
+        "rank": 3,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Aspirator",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 1,
+        "weighted_distance": 1.03,
+        "rank": 3,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Electricitate",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v3sti_electricitate",
+        "distance": 2,
+        "weighted_distance": 2.19,
+        "rank": 9,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Farfurie",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v4gas_masa",
+        "distance": 4,
+        "weighted_distance": 4.4399999999999995,
+        "rank": 107,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Apă",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v4gas_apa",
+        "distance": 4,
+        "weighted_distance": 4.12,
+        "rank": 64,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Burete de vase",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 4,
+        "weighted_distance": 4.130000000000001,
+        "rank": 67,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Chiuvetă",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v4via_baie",
+        "distance": 3,
+        "weighted_distance": 3.2399999999999998,
+        "rank": 18,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Pământ",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v24_nature_world_pamant",
+        "distance": 7,
+        "weighted_distance": 7.699999999999999,
+        "rank": 1761,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Noroi",
+      "target": "Făraș",
+      "result": {
+        "not_native": true,
+        "projection_id": "ctxp_c89dd916043693908936"
+      }
+    },
+    {
+      "word": "Bolovan",
+      "target": "Făraș",
+      "result": {
+        "not_native": true,
+        "projection_id": "ctxp_290e3606858168a62e12"
+      }
+    },
+    {
+      "word": "Detergent",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 4,
+        "weighted_distance": 4.130000000000001,
+        "rank": 67,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Podea",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 1,
+        "weighted_distance": 1.03,
+        "rank": 2,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "a spăla",
+      "target": "Făraș",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 4,
+        "weighted_distance": 4.130000000000001,
+        "rank": 66,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Curățenie",
+      "target": "Făraș",
+      "result": {
+        "not_native": true,
+        "projection_id": null
+      }
+    },
+    {
+      "word": "Praf",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 1,
+        "weighted_distance": 1.1,
+        "rank": 4,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "praful",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 1,
+        "weighted_distance": 1.1,
+        "rank": 4,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "prafului",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 1,
+        "weighted_distance": 1.1,
+        "rank": 4,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Praf de copt",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v87_food_praf_copt",
+        "distance": 3,
+        "weighted_distance": 3.5,
+        "rank": 71,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Lapte praf",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v86_food_lapte_praf",
+        "distance": 6,
+        "weighted_distance": 7.1000000000000005,
+        "rank": 1723,
+        "feedback_distance": 6
+      }
+    },
+    {
+      "word": "Firimitură",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v90_food_firimitura",
+        "distance": 1,
+        "weighted_distance": 1.15,
+        "rank": 5,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "firimituri",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v90_food_firimitura",
+        "distance": 1,
+        "weighted_distance": 1.15,
+        "rank": 5,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Scamă",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v90_textile_scama",
+        "distance": 1,
+        "weighted_distance": 1.15,
+        "rank": 5,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "scame",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v90_textile_scama",
+        "distance": 1,
+        "weighted_distance": 1.15,
+        "rank": 5,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Pâine",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v4gas_paine",
+        "distance": 2,
+        "weighted_distance": 2.3,
+        "rank": 18,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Biscuit",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v24_food_snack_biscuit",
+        "distance": 2,
+        "weighted_distance": 2.3,
+        "rank": 18,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Haină",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v29_clothing_everyday_haina",
+        "distance": 2,
+        "weighted_distance": 2.3499999999999996,
+        "rank": 22,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Pătură",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v24_home_textiles_patura",
+        "distance": 2,
+        "weighted_distance": 2.25,
+        "rank": 16,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Covor",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v24_home_textiles_covor",
+        "distance": 1,
+        "weighted_distance": 1.15,
+        "rank": 5,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Făraș",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 1,
+        "weighted_distance": 1.01,
+        "rank": 3,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Mătură",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v88_cleaning_matura",
+        "distance": 1,
+        "weighted_distance": 1.2,
+        "rank": 9,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Mop",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 1,
+        "weighted_distance": 1.01,
+        "rank": 3,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Aspirator",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v31_cleaning_floor_aspirator",
+        "distance": 0,
+        "weighted_distance": 0.0,
+        "rank": 1,
+        "feedback_distance": 0
+      }
+    },
+    {
+      "word": "Electricitate",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v3sti_electricitate",
+        "distance": 1,
+        "weighted_distance": 1.15,
+        "rank": 5,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Farfurie",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v4gas_masa",
+        "distance": 4,
+        "weighted_distance": 4.39,
+        "rank": 165,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Apă",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v4gas_apa",
+        "distance": 3,
+        "weighted_distance": 3.08,
+        "rank": 28,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Burete de vase",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 3,
+        "weighted_distance": 3.0900000000000003,
+        "rank": 31,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Chiuvetă",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v4via_baie",
+        "distance": 3,
+        "weighted_distance": 3.22,
+        "rank": 33,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Pământ",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v24_nature_world_pamant",
+        "distance": 6,
+        "weighted_distance": 6.66,
+        "rank": 1448,
+        "feedback_distance": 6
+      }
+    },
+    {
+      "word": "Noroi",
+      "target": "Aspirator",
+      "result": {
+        "not_native": true,
+        "projection_id": "ctxp_c89dd916043693908936"
+      }
+    },
+    {
+      "word": "Bolovan",
+      "target": "Aspirator",
+      "result": {
+        "not_native": true,
+        "projection_id": "ctxp_290e3606858168a62e12"
+      }
+    },
+    {
+      "word": "Detergent",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 3,
+        "weighted_distance": 3.0900000000000003,
+        "rank": 31,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Podea",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 1,
+        "weighted_distance": 1.01,
+        "rank": 2,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "a spăla",
+      "target": "Aspirator",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 3,
+        "weighted_distance": 3.0900000000000003,
+        "rank": 30,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Curățenie",
+      "target": "Aspirator",
+      "result": {
+        "not_native": true,
+        "projection_id": null
+      }
+    },
+    {
+      "word": "Praf",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 2,
+        "weighted_distance": 2.19,
+        "rank": 14,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "praful",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 2,
+        "weighted_distance": 2.19,
+        "rank": 14,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "prafului",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 2,
+        "weighted_distance": 2.19,
+        "rank": 14,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Praf de copt",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v87_food_praf_copt",
+        "distance": 4,
+        "weighted_distance": 4.59,
+        "rank": 300,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Lapte praf",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v86_food_lapte_praf",
+        "distance": 6,
+        "weighted_distance": 6.83,
+        "rank": 1541,
+        "feedback_distance": 6
+      }
+    },
+    {
+      "word": "Firimitură",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v90_food_firimitura",
+        "distance": 2,
+        "weighted_distance": 2.2399999999999998,
+        "rank": 18,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "firimituri",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v90_food_firimitura",
+        "distance": 2,
+        "weighted_distance": 2.2399999999999998,
+        "rank": 18,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Scamă",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v90_textile_scama",
+        "distance": 2,
+        "weighted_distance": 2.2399999999999998,
+        "rank": 18,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "scame",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v90_textile_scama",
+        "distance": 2,
+        "weighted_distance": 2.2399999999999998,
+        "rank": 18,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Pâine",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v4gas_paine",
+        "distance": 3,
+        "weighted_distance": 3.3899999999999997,
+        "rank": 67,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Biscuit",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v24_food_snack_biscuit",
+        "distance": 3,
+        "weighted_distance": 3.3899999999999997,
+        "rank": 67,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Haină",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v29_clothing_everyday_haina",
+        "distance": 2,
+        "weighted_distance": 2.06,
+        "rank": 9,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Pătură",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v24_home_textiles_patura",
+        "distance": 3,
+        "weighted_distance": 3.34,
+        "rank": 56,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Covor",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v24_home_textiles_covor",
+        "distance": 2,
+        "weighted_distance": 2.2399999999999998,
+        "rank": 18,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Făraș",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 2,
+        "weighted_distance": 2.0999999999999996,
+        "rank": 12,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Mătură",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v88_cleaning_matura",
+        "distance": 2,
+        "weighted_distance": 2.29,
+        "rank": 25,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Mop",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 2,
+        "weighted_distance": 2.0999999999999996,
+        "rank": 12,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Aspirator",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 2,
+        "weighted_distance": 2.0999999999999996,
+        "rank": 12,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Electricitate",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v3sti_electricitate",
+        "distance": 2,
+        "weighted_distance": 2.2399999999999998,
+        "rank": 18,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Farfurie",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v4gas_masa",
+        "distance": 2,
+        "weighted_distance": 2.21,
+        "rank": 16,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Apă",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v4gas_apa",
+        "distance": 1,
+        "weighted_distance": 1.2,
+        "rank": 6,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Burete de vase",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v31_cleaning_dishes_burete_vase",
+        "distance": 0,
+        "weighted_distance": 0.0,
+        "rank": 1,
+        "feedback_distance": 0
+      }
+    },
+    {
+      "word": "Chiuvetă",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v4via_baie",
+        "distance": 2,
+        "weighted_distance": 2.16,
+        "rank": 14,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Pământ",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v24_nature_world_pamant",
+        "distance": 6,
+        "weighted_distance": 6.720000000000001,
+        "rank": 1520,
+        "feedback_distance": 6
+      }
+    },
+    {
+      "word": "Noroi",
+      "target": "Burete de vase",
+      "result": {
+        "not_native": true,
+        "projection_id": "ctxp_c89dd916043693908936"
+      }
+    },
+    {
+      "word": "Bolovan",
+      "target": "Burete de vase",
+      "result": {
+        "not_native": true,
+        "projection_id": "ctxp_290e3606858168a62e12"
+      }
+    },
+    {
+      "word": "Detergent",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 1,
+        "weighted_distance": 1.02,
+        "rank": 4,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Podea",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 2,
+        "weighted_distance": 2.0999999999999996,
+        "rank": 11,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "a spăla",
+      "target": "Burete de vase",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 1,
+        "weighted_distance": 1.02,
+        "rank": 3,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Curățenie",
+      "target": "Burete de vase",
+      "result": {
+        "not_native": true,
+        "projection_id": null
+      }
+    },
+    {
+      "word": "Praf",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 1,
+        "weighted_distance": 1.2,
+        "rank": 6,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "praful",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 1,
+        "weighted_distance": 1.2,
+        "rank": 6,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "prafului",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 1,
+        "weighted_distance": 1.2,
+        "rank": 6,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Praf de copt",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v87_food_praf_copt",
+        "distance": 4,
+        "weighted_distance": 4.6,
+        "rank": 202,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Lapte praf",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v86_food_lapte_praf",
+        "distance": 7,
+        "weighted_distance": 7.800000000000001,
+        "rank": 1600,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Firimitură",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v90_food_firimitura",
+        "distance": 2,
+        "weighted_distance": 2.25,
+        "rank": 13,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "firimituri",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v90_food_firimitura",
+        "distance": 2,
+        "weighted_distance": 2.25,
+        "rank": 13,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Scamă",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v90_textile_scama",
+        "distance": 3,
+        "weighted_distance": 3.2399999999999998,
+        "rank": 30,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "scame",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v90_textile_scama",
+        "distance": 3,
+        "weighted_distance": 3.2399999999999998,
+        "rank": 30,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Pâine",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v4gas_paine",
+        "distance": 3,
+        "weighted_distance": 3.4,
+        "rank": 41,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Biscuit",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v24_food_snack_biscuit",
+        "distance": 3,
+        "weighted_distance": 3.4,
+        "rank": 41,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Haină",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v29_clothing_everyday_haina",
+        "distance": 3,
+        "weighted_distance": 3.09,
+        "rank": 18,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Pătură",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v24_home_textiles_patura",
+        "distance": 3,
+        "weighted_distance": 3.6,
+        "rank": 48,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Covor",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v24_home_textiles_covor",
+        "distance": 2,
+        "weighted_distance": 2.5,
+        "rank": 14,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Făraș",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 1,
+        "weighted_distance": 1.01,
+        "rank": 3,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Mătură",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v88_cleaning_matura",
+        "distance": 1,
+        "weighted_distance": 1.2,
+        "rank": 6,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Mop",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v31_cleaning_floor_mop",
+        "distance": 0,
+        "weighted_distance": 0.0,
+        "rank": 1,
+        "feedback_distance": 0
+      }
+    },
+    {
+      "word": "Aspirator",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 1,
+        "weighted_distance": 1.01,
+        "rank": 3,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Electricitate",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v3sti_electricitate",
+        "distance": 3,
+        "weighted_distance": 3.2399999999999998,
+        "rank": 30,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Farfurie",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v4gas_masa",
+        "distance": 4,
+        "weighted_distance": 4.25,
+        "rank": 67,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Apă",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v4gas_apa",
+        "distance": 2,
+        "weighted_distance": 2.04,
+        "rank": 8,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Burete de vase",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 2,
+        "weighted_distance": 2.05,
+        "rank": 11,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Chiuvetă",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v4via_baie",
+        "distance": 3,
+        "weighted_distance": 3.19,
+        "rank": 25,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Pământ",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v24_nature_world_pamant",
+        "distance": 7,
+        "weighted_distance": 7.5600000000000005,
+        "rank": 1541,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Noroi",
+      "target": "Mop",
+      "result": {
+        "not_native": true,
+        "projection_id": "ctxp_c89dd916043693908936"
+      }
+    },
+    {
+      "word": "Bolovan",
+      "target": "Mop",
+      "result": {
+        "not_native": true,
+        "projection_id": "ctxp_290e3606858168a62e12"
+      }
+    },
+    {
+      "word": "Detergent",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 2,
+        "weighted_distance": 2.05,
+        "rank": 11,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Podea",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 1,
+        "weighted_distance": 1.01,
+        "rank": 2,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "a spăla",
+      "target": "Mop",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 2,
+        "weighted_distance": 2.05,
+        "rank": 10,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Curățenie",
+      "target": "Mop",
+      "result": {
+        "not_native": true,
+        "projection_id": null
+      }
+    },
+    {
+      "word": "Praf",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 1,
+        "weighted_distance": 1.15,
+        "rank": 2,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "praful",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 1,
+        "weighted_distance": 1.15,
+        "rank": 2,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "prafului",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 1,
+        "weighted_distance": 1.15,
+        "rank": 2,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Praf de copt",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v87_food_praf_copt",
+        "distance": 4,
+        "weighted_distance": 4.75,
+        "rank": 43,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Lapte praf",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v86_food_lapte_praf",
+        "distance": 7,
+        "weighted_distance": 8.349999999999998,
+        "rank": 1152,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Firimitură",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v90_food_firimitura",
+        "distance": 2,
+        "weighted_distance": 2.4,
+        "rank": 6,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "firimituri",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v90_food_firimitura",
+        "distance": 2,
+        "weighted_distance": 2.4,
+        "rank": 6,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Scamă",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v90_textile_scama",
+        "distance": 3,
+        "weighted_distance": 3.39,
+        "rank": 10,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "scame",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v90_textile_scama",
+        "distance": 3,
+        "weighted_distance": 3.39,
+        "rank": 10,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Pâine",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v4gas_paine",
+        "distance": 3,
+        "weighted_distance": 3.55,
+        "rank": 13,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Biscuit",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v24_food_snack_biscuit",
+        "distance": 3,
+        "weighted_distance": 3.55,
+        "rank": 13,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Haină",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v29_clothing_everyday_haina",
+        "distance": 4,
+        "weighted_distance": 4.59,
+        "rank": 26,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Pătură",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v24_home_textiles_patura",
+        "distance": 3,
+        "weighted_distance": 3.5500000000000003,
+        "rank": 15,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Covor",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v24_home_textiles_covor",
+        "distance": 2,
+        "weighted_distance": 2.45,
+        "rank": 7,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Făraș",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 2,
+        "weighted_distance": 2.23,
+        "rank": 5,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Mătură",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v88_cleaning_matura",
+        "distance": 0,
+        "weighted_distance": 0.0,
+        "rank": 1,
+        "feedback_distance": 0
+      }
+    },
+    {
+      "word": "Mop",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 2,
+        "weighted_distance": 2.23,
+        "rank": 5,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Aspirator",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 2,
+        "weighted_distance": 2.23,
+        "rank": 5,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Electricitate",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v3sti_electricitate",
+        "distance": 3,
+        "weighted_distance": 3.39,
+        "rank": 10,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Farfurie",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v4gas_masa",
+        "distance": 5,
+        "weighted_distance": 5.640000000000001,
+        "rank": 108,
+        "feedback_distance": 5
+      }
+    },
+    {
+      "word": "Apă",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v4gas_apa",
+        "distance": 5,
+        "weighted_distance": 5.32,
+        "rank": 68,
+        "feedback_distance": 5
+      }
+    },
+    {
+      "word": "Burete de vase",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 4,
+        "weighted_distance": 4.61,
+        "rank": 31,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Chiuvetă",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v4via_baie",
+        "distance": 4,
+        "weighted_distance": 4.4399999999999995,
+        "rank": 21,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Pământ",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v24_nature_world_pamant",
+        "distance": 8,
+        "weighted_distance": 8.9,
+        "rank": 1764,
+        "feedback_distance": 8
+      }
+    },
+    {
+      "word": "Noroi",
+      "target": "Mătură",
+      "result": {
+        "not_native": true,
+        "projection_id": "ctxp_c89dd916043693908936"
+      }
+    },
+    {
+      "word": "Bolovan",
+      "target": "Mătură",
+      "result": {
+        "not_native": true,
+        "projection_id": "ctxp_290e3606858168a62e12"
+      }
+    },
+    {
+      "word": "Detergent",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 4,
+        "weighted_distance": 4.61,
+        "rank": 31,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Podea",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 2,
+        "weighted_distance": 2.23,
+        "rank": 4,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "a spăla",
+      "target": "Mătură",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 4,
+        "weighted_distance": 4.61,
+        "rank": 30,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Curățenie",
+      "target": "Mătură",
+      "result": {
+        "not_native": true,
+        "projection_id": null
+      }
+    },
+    {
+      "word": "Praf",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 2,
+        "weighted_distance": 2.2199999999999998,
+        "rank": 21,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "praful",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 2,
+        "weighted_distance": 2.2199999999999998,
+        "rank": 21,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "prafului",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 2,
+        "weighted_distance": 2.2199999999999998,
+        "rank": 21,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Praf de copt",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v87_food_praf_copt",
+        "distance": 5,
+        "weighted_distance": 5.62,
+        "rank": 676,
+        "feedback_distance": 5
+      }
+    },
+    {
+      "word": "Lapte praf",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v86_food_lapte_praf",
+        "distance": 6,
+        "weighted_distance": 6.780000000000001,
+        "rank": 1556,
+        "feedback_distance": 6
+      }
+    },
+    {
+      "word": "Firimitură",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v90_food_firimitura",
+        "distance": 3,
+        "weighted_distance": 3.2700000000000005,
+        "rank": 52,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "firimituri",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v90_food_firimitura",
+        "distance": 3,
+        "weighted_distance": 3.2700000000000005,
+        "rank": 52,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Scamă",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v90_textile_scama",
+        "distance": 3,
+        "weighted_distance": 3.3,
+        "rank": 57,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "scame",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v90_textile_scama",
+        "distance": 3,
+        "weighted_distance": 3.3,
+        "rank": 57,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Pâine",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v4gas_paine",
+        "distance": 3,
+        "weighted_distance": 3.44,
+        "rank": 113,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Biscuit",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v24_food_snack_biscuit",
+        "distance": 4,
+        "weighted_distance": 4.42,
+        "rank": 239,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Haină",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v29_clothing_everyday_haina",
+        "distance": 3,
+        "weighted_distance": 3.12,
+        "rank": 36,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Pătură",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v24_home_textiles_patura",
+        "distance": 4,
+        "weighted_distance": 4.4,
+        "rank": 231,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Covor",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v24_home_textiles_covor",
+        "distance": 3,
+        "weighted_distance": 3.3,
+        "rank": 57,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Făraș",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 2,
+        "weighted_distance": 2.0300000000000002,
+        "rank": 6,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Mătură",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v88_cleaning_matura",
+        "distance": 2,
+        "weighted_distance": 2.2199999999999998,
+        "rank": 21,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Mop",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 2,
+        "weighted_distance": 2.0300000000000002,
+        "rank": 6,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Aspirator",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 2,
+        "weighted_distance": 2.0300000000000002,
+        "rank": 6,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Electricitate",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v3sti_electricitate",
+        "distance": 3,
+        "weighted_distance": 3.3,
+        "rank": 57,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Farfurie",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v4gas_masa",
+        "distance": 3,
+        "weighted_distance": 3.2699999999999996,
+        "rank": 51,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Apă",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v4gas_apa",
+        "distance": 1,
+        "weighted_distance": 1.02,
+        "rank": 2,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Burete de vase",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 2,
+        "weighted_distance": 2.08,
+        "rank": 12,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Chiuvetă",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v4via_baie",
+        "distance": 2,
+        "weighted_distance": 2.52,
+        "rank": 33,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Pământ",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v24_nature_world_pamant",
+        "distance": 6,
+        "weighted_distance": 6.540000000000001,
+        "rank": 1505,
+        "feedback_distance": 6
+      }
+    },
+    {
+      "word": "Noroi",
+      "target": "Găleată",
+      "result": {
+        "not_native": true,
+        "projection_id": "ctxp_c89dd916043693908936"
+      }
+    },
+    {
+      "word": "Bolovan",
+      "target": "Găleată",
+      "result": {
+        "not_native": true,
+        "projection_id": "ctxp_290e3606858168a62e12"
+      }
+    },
+    {
+      "word": "Detergent",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 2,
+        "weighted_distance": 2.08,
+        "rank": 12,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Podea",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 2,
+        "weighted_distance": 2.0300000000000002,
+        "rank": 5,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "a spăla",
+      "target": "Găleată",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 2,
+        "weighted_distance": 2.08,
+        "rank": 11,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Curățenie",
+      "target": "Găleată",
+      "result": {
+        "not_native": true,
+        "projection_id": null
+      }
+    },
+    {
+      "word": "Praf",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 3,
+        "weighted_distance": 3.1999999999999997,
+        "rank": 23,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "praful",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 3,
+        "weighted_distance": 3.1999999999999997,
+        "rank": 23,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "prafului",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 3,
+        "weighted_distance": 3.1999999999999997,
+        "rank": 23,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Praf de copt",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v87_food_praf_copt",
+        "distance": 5,
+        "weighted_distance": 5.54,
+        "rank": 330,
+        "feedback_distance": 5
+      }
+    },
+    {
+      "word": "Lapte praf",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v86_food_lapte_praf",
+        "distance": 7,
+        "weighted_distance": 7.8100000000000005,
+        "rank": 1629,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Firimitură",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v90_food_firimitura",
+        "distance": 3,
+        "weighted_distance": 3.2499999999999996,
+        "rank": 30,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "firimituri",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v90_food_firimitura",
+        "distance": 3,
+        "weighted_distance": 3.2499999999999996,
+        "rank": 30,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Scamă",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v90_textile_scama",
+        "distance": 3,
+        "weighted_distance": 3.2499999999999996,
+        "rank": 30,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "scame",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v90_textile_scama",
+        "distance": 3,
+        "weighted_distance": 3.2499999999999996,
+        "rank": 30,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Pâine",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v4gas_paine",
+        "distance": 4,
+        "weighted_distance": 4.3999999999999995,
+        "rank": 126,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Biscuit",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v24_food_snack_biscuit",
+        "distance": 4,
+        "weighted_distance": 4.34,
+        "rank": 77,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Haină",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v29_clothing_everyday_haina",
+        "distance": 2,
+        "weighted_distance": 2.06,
+        "rank": 7,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Pătură",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v24_home_textiles_patura",
+        "distance": 4,
+        "weighted_distance": 4.34,
+        "rank": 77,
+        "feedback_distance": 4
+      }
+    },
+    {
+      "word": "Covor",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v24_home_textiles_covor",
+        "distance": 3,
+        "weighted_distance": 3.2499999999999996,
+        "rank": 30,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Făraș",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 3,
+        "weighted_distance": 3.0599999999999996,
+        "rank": 14,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Mătură",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v88_cleaning_matura",
+        "distance": 3,
+        "weighted_distance": 3.25,
+        "rank": 34,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Mop",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 3,
+        "weighted_distance": 3.0599999999999996,
+        "rank": 14,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Aspirator",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 3,
+        "weighted_distance": 3.0599999999999996,
+        "rank": 14,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Electricitate",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v3sti_electricitate",
+        "distance": 3,
+        "weighted_distance": 3.2499999999999996,
+        "rank": 30,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Farfurie",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v4gas_masa",
+        "distance": 3,
+        "weighted_distance": 3.2199999999999998,
+        "rank": 28,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "Apă",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v4gas_apa",
+        "distance": 2,
+        "weighted_distance": 2.05,
+        "rank": 5,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Burete de vase",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 1,
+        "weighted_distance": 1.02,
+        "rank": 4,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Chiuvetă",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v4via_baie",
+        "distance": 2,
+        "weighted_distance": 2.16,
+        "rank": 12,
+        "feedback_distance": 2
+      }
+    },
+    {
+      "word": "Pământ",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v24_nature_world_pamant",
+        "distance": 7,
+        "weighted_distance": 7.57,
+        "rank": 1579,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Noroi",
+      "target": "Detergent",
+      "result": {
+        "not_native": true,
+        "projection_id": "ctxp_c89dd916043693908936"
+      }
+    },
+    {
+      "word": "Bolovan",
+      "target": "Detergent",
+      "result": {
+        "not_native": true,
+        "projection_id": "ctxp_290e3606858168a62e12"
+      }
+    },
+    {
+      "word": "Detergent",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v31_cleaning_supply_detergent",
+        "distance": 0,
+        "weighted_distance": 0.0,
+        "rank": 1,
+        "feedback_distance": 0
+      }
+    },
+    {
+      "word": "Podea",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 3,
+        "weighted_distance": 3.0599999999999996,
+        "rank": 13,
+        "feedback_distance": 3
+      }
+    },
+    {
+      "word": "a spăla",
+      "target": "Detergent",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 1,
+        "weighted_distance": 1.02,
+        "rank": 3,
+        "feedback_distance": 1
+      }
+    },
+    {
+      "word": "Curățenie",
+      "target": "Detergent",
+      "result": {
+        "not_native": true,
+        "projection_id": null
+      }
+    },
+    {
+      "word": "Praf",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 9,
+        "weighted_distance": 11.27,
+        "rank": 2338,
+        "feedback_distance": 9
+      }
+    },
+    {
+      "word": "praful",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 9,
+        "weighted_distance": 11.27,
+        "rank": 2338,
+        "feedback_distance": 9
+      }
+    },
+    {
+      "word": "prafului",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v90_household_praf",
+        "distance": 9,
+        "weighted_distance": 11.27,
+        "rank": 2338,
+        "feedback_distance": 9
+      }
+    },
+    {
+      "word": "Praf de copt",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v87_food_praf_copt",
+        "distance": 8,
+        "weighted_distance": 10.039999999999997,
+        "rank": 2326,
+        "feedback_distance": 8
+      }
+    },
+    {
+      "word": "Lapte praf",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v86_food_lapte_praf",
+        "distance": 7,
+        "weighted_distance": 8.729999999999999,
+        "rank": 2093,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Firimitură",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v90_food_firimitura",
+        "distance": 10,
+        "weighted_distance": 12.519999999999998,
+        "rank": 2341,
+        "feedback_distance": 10
+      }
+    },
+    {
+      "word": "firimituri",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v90_food_firimitura",
+        "distance": 10,
+        "weighted_distance": 12.519999999999998,
+        "rank": 2341,
+        "feedback_distance": 10
+      }
+    },
+    {
+      "word": "Scamă",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v90_textile_scama",
+        "distance": 11,
+        "weighted_distance": 13.51,
+        "rank": 2343,
+        "feedback_distance": 11
+      }
+    },
+    {
+      "word": "scame",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v90_textile_scama",
+        "distance": 11,
+        "weighted_distance": 13.51,
+        "rank": 2343,
+        "feedback_distance": 11
+      }
+    },
+    {
+      "word": "Pâine",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v4gas_paine",
+        "distance": 6,
+        "weighted_distance": 7.799999999999999,
+        "rank": 1629,
+        "feedback_distance": 6
+      }
+    },
+    {
+      "word": "Biscuit",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v24_food_snack_biscuit",
+        "distance": 7,
+        "weighted_distance": 8.92,
+        "rank": 2189,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Haină",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v29_clothing_everyday_haina",
+        "distance": 7,
+        "weighted_distance": 8.33,
+        "rank": 1932,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Pătură",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v24_home_textiles_patura",
+        "distance": 7,
+        "weighted_distance": 8.92,
+        "rank": 2189,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Covor",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v24_home_textiles_covor",
+        "distance": 7,
+        "weighted_distance": 8.92,
+        "rank": 2189,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Făraș",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 7,
+        "weighted_distance": 8.92,
+        "rank": 2190,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Mătură",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v88_cleaning_matura",
+        "distance": 8,
+        "weighted_distance": 10.12,
+        "rank": 2330,
+        "feedback_distance": 8
+      }
+    },
+    {
+      "word": "Mop",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 7,
+        "weighted_distance": 8.92,
+        "rank": 2190,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Aspirator",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 7,
+        "weighted_distance": 8.92,
+        "rank": 2190,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Electricitate",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v3sti_electricitate",
+        "distance": 6,
+        "weighted_distance": 6.78,
+        "rank": 972,
+        "feedback_distance": 6
+      }
+    },
+    {
+      "word": "Farfurie",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v4gas_masa",
+        "distance": 7,
+        "weighted_distance": 8.74,
+        "rank": 2099,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Apă",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v4gas_apa",
+        "distance": 6,
+        "weighted_distance": 7.040000000000001,
+        "rank": 1038,
+        "feedback_distance": 6
+      }
+    },
+    {
+      "word": "Burete de vase",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 7,
+        "weighted_distance": 8.92,
+        "rank": 2190,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Chiuvetă",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v4via_baie",
+        "distance": 7,
+        "weighted_distance": 8.540000000000001,
+        "rank": 2031,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Pământ",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v24_nature_world_pamant",
+        "distance": 7,
+        "weighted_distance": 8.81,
+        "rank": 2128,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Noroi",
+      "target": "Taburet",
+      "result": {
+        "not_native": true,
+        "projection_id": "ctxp_c89dd916043693908936"
+      }
+    },
+    {
+      "word": "Bolovan",
+      "target": "Taburet",
+      "result": {
+        "not_native": true,
+        "projection_id": "ctxp_290e3606858168a62e12"
+      }
+    },
+    {
+      "word": "Detergent",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 7,
+        "weighted_distance": 8.92,
+        "rank": 2190,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Podea",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v24_home_surfaces_podea",
+        "distance": 7,
+        "weighted_distance": 8.92,
+        "rank": 2189,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "a spăla",
+      "target": "Taburet",
+      "result": {
+        "anchor_id": "n_v24_action_home_a_spala",
+        "distance": 7,
+        "weighted_distance": 8.92,
+        "rank": 2189,
+        "feedback_distance": 7
+      }
+    },
+    {
+      "word": "Curățenie",
+      "target": "Taburet",
+      "result": {
+        "not_native": true,
+        "projection_id": null
+      }
+    }
+  ],
+  "lant_scout": [
+    {
+      "start": "n_v4gas_paine",
+      "start_label": "Pâine",
+      "target": "n_v31_cleaning_floor_faras",
+      "target_label": "Făraș",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v4gas_paine",
+      "start_label": "Pâine",
+      "target": "n_v31_cleaning_floor_aspirator",
+      "target_label": "Aspirator",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v4gas_paine",
+      "start_label": "Pâine",
+      "target": "n_v31_cleaning_floor_mop",
+      "target_label": "Mop",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v4gas_paine",
+      "start_label": "Pâine",
+      "target": "n_v88_cleaning_matura",
+      "target_label": "Mătură",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v4gas_paine",
+      "start_label": "Pâine",
+      "target": "n_v31_cleaning_dishes_burete_vase",
+      "target_label": "Burete de vase",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        2,
+        2,
+        5
+      ],
+      "shortest_openers": [
+        "Pâine de casă",
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_food_snack_biscuit",
+      "start_label": "Biscuit",
+      "target": "n_v31_cleaning_floor_faras",
+      "target_label": "Făraș",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_food_snack_biscuit",
+      "start_label": "Biscuit",
+      "target": "n_v31_cleaning_floor_aspirator",
+      "target_label": "Aspirator",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_food_snack_biscuit",
+      "start_label": "Biscuit",
+      "target": "n_v31_cleaning_floor_mop",
+      "target_label": "Mop",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_food_snack_biscuit",
+      "start_label": "Biscuit",
+      "target": "n_v88_cleaning_matura",
+      "target_label": "Mătură",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_food_snack_biscuit",
+      "start_label": "Biscuit",
+      "target": "n_v31_cleaning_dishes_burete_vase",
+      "target_label": "Burete de vase",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        3
+      ],
+      "shortest_openers": [
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v29_clothing_everyday_haina",
+      "start_label": "Haină",
+      "target": "n_v31_cleaning_floor_faras",
+      "target_label": "Făraș",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "Scamă"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v29_clothing_everyday_haina",
+      "start_label": "Haină",
+      "target": "n_v31_cleaning_floor_aspirator",
+      "target_label": "Aspirator",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Scamă"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v29_clothing_everyday_haina",
+      "start_label": "Haină",
+      "target": "n_v31_cleaning_floor_mop",
+      "target_label": "Mop",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "A spăla"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v29_clothing_everyday_haina",
+      "start_label": "Haină",
+      "target": "n_v88_cleaning_matura",
+      "target_label": "Mătură",
+      "optimal": 4,
+      "shortest_branch_profile": [
+        1,
+        1,
+        3
+      ],
+      "shortest_openers": [
+        "Scamă"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v29_clothing_everyday_haina",
+      "start_label": "Haină",
+      "target": "n_v31_cleaning_dishes_burete_vase",
+      "target_label": "Burete de vase",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "A spăla"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_patura",
+      "start_label": "Pătură",
+      "target": "n_v31_cleaning_floor_faras",
+      "target_label": "Făraș",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        2,
+        2,
+        4
+      ],
+      "shortest_openers": [
+        "Covor",
+        "Scamă"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_patura",
+      "start_label": "Pătură",
+      "target": "n_v31_cleaning_floor_aspirator",
+      "target_label": "Aspirator",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        2,
+        2,
+        2
+      ],
+      "shortest_openers": [
+        "Covor",
+        "Scamă"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_patura",
+      "start_label": "Pătură",
+      "target": "n_v31_cleaning_floor_mop",
+      "target_label": "Mop",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "Covor"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_patura",
+      "start_label": "Pătură",
+      "target": "n_v88_cleaning_matura",
+      "target_label": "Mătură",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "Covor"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_patura",
+      "start_label": "Pătură",
+      "target": "n_v31_cleaning_dishes_burete_vase",
+      "target_label": "Burete de vase",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        2,
+        1,
+        3
+      ],
+      "shortest_openers": [
+        "Covor",
+        "Scamă"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_covor",
+      "start_label": "Covor",
+      "target": "n_v31_cleaning_floor_faras",
+      "target_label": "Făraș",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        2,
+        2,
+        2
+      ],
+      "shortest_openers": [
+        "Aspirator",
+        "Praf"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_covor",
+      "start_label": "Covor",
+      "target": "n_v31_cleaning_floor_aspirator",
+      "target_label": "Aspirator",
+      "optimal": 1,
+      "shortest_branch_profile": [
+        1,
+        1,
+        0
+      ],
+      "shortest_openers": [
+        "Aspirator"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_covor",
+      "start_label": "Covor",
+      "target": "n_v31_cleaning_floor_mop",
+      "target_label": "Mop",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Praf"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_covor",
+      "start_label": "Covor",
+      "target": "n_v88_cleaning_matura",
+      "target_label": "Mătură",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Praf"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_covor",
+      "start_label": "Covor",
+      "target": "n_v31_cleaning_dishes_burete_vase",
+      "target_label": "Burete de vase",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Aspirator"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_food_firimitura",
+      "start_label": "Firimitură",
+      "target": "n_v31_cleaning_floor_faras",
+      "target_label": "Făraș",
+      "optimal": 1,
+      "shortest_branch_profile": [
+        1,
+        1,
+        0
+      ],
+      "shortest_openers": [
+        "Făraș"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_food_firimitura",
+      "start_label": "Firimitură",
+      "target": "n_v31_cleaning_floor_aspirator",
+      "target_label": "Aspirator",
+      "optimal": 1,
+      "shortest_branch_profile": [
+        1,
+        1,
+        0
+      ],
+      "shortest_openers": [
+        "Aspirator"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_food_firimitura",
+      "start_label": "Firimitură",
+      "target": "n_v31_cleaning_floor_mop",
+      "target_label": "Mop",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Făraș"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_food_firimitura",
+      "start_label": "Firimitură",
+      "target": "n_v88_cleaning_matura",
+      "target_label": "Mătură",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Făraș"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_food_firimitura",
+      "start_label": "Firimitură",
+      "target": "n_v31_cleaning_dishes_burete_vase",
+      "target_label": "Burete de vase",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        2,
+        2,
+        2
+      ],
+      "shortest_openers": [
+        "Aspirator",
+        "Făraș"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_textile_scama",
+      "start_label": "Scamă",
+      "target": "n_v31_cleaning_floor_faras",
+      "target_label": "Făraș",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Aspirator"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_textile_scama",
+      "start_label": "Scamă",
+      "target": "n_v31_cleaning_floor_aspirator",
+      "target_label": "Aspirator",
+      "optimal": 1,
+      "shortest_branch_profile": [
+        1,
+        1,
+        0
+      ],
+      "shortest_openers": [
+        "Aspirator"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_textile_scama",
+      "start_label": "Scamă",
+      "target": "n_v31_cleaning_floor_mop",
+      "target_label": "Mop",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "Aspirator"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_textile_scama",
+      "start_label": "Scamă",
+      "target": "n_v88_cleaning_matura",
+      "target_label": "Mătură",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "Aspirator"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_textile_scama",
+      "start_label": "Scamă",
+      "target": "n_v31_cleaning_dishes_burete_vase",
+      "target_label": "Burete de vase",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Aspirator"
+      ],
+      "old_same_endpoint_records": []
+    }
+  ],
+  "conex_scout": {
+    "inventory_boards": 234,
+    "tombstone_boards": 122,
+    "candidate_quad_matches": {
+      "floor_tools": [
+        {
+          "board_id": "cx_viata_de_roman_362",
+          "group_id": "g2",
+          "overlap_count": 4,
+          "overlap_labels": [
+            "Aspirator",
+            "Făraș",
+            "Mop",
+            "Mătură"
+          ]
+        }
+      ],
+      "household_textiles": [
+        {
+          "board_id": "cx_viata_de_roman_293",
+          "group_id": "g2",
+          "overlap_count": 3,
+          "overlap_labels": [
+            "Pernă",
+            "Saltea",
+            "Pătură"
+          ]
+        }
+      ]
+    }
+  }
+}

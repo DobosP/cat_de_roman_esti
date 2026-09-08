@@ -1,0 +1,42 @@
+{
+  "phase": "Root runtime proposal only; no graph application or migration yet",
+  "baseline_commit": "190d7fdb86487c641d8a781ef7a5ce21f2b98031",
+  "graph_proposal_sha256": "672ea9f249ec9f18dbc51c24427580b61e98abbaef2b7b3a6d0fd5c557d395ba",
+  "source_sha256": {
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "753c22890e14b8b049f62d249ee92a06b6631fb4589db97dbebd003eaf18b5fd",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa"
+  },
+  "native_owner": "n_v90_household_praf",
+  "retired_projection": {
+    "surface": "Praf",
+    "key": "praf",
+    "public_id": "ctxp_81703160cad7893fa1c9",
+    "anchor": "n_v24_nature_world_pamant",
+    "domain": "peisaj",
+    "rank_penalty": 1
+  },
+  "changes": [
+    "Add only praf to _EXISTING_KG_SURFACES, following existing native-owner migrations.",
+    "Remove only PROJECTION_NEIGHBORHOODS[praf], which becomes unused once native resolution owns the word.",
+    "Leave the declared old term/anchor tuple as historical input metadata, skipped at runtime.",
+    "Keep all other projection rows, policies, 71 legacy proxies, 11 native exact pairs and four native audit tuples unchanged."
+  ],
+  "expected_runtime_projection_rows": 464,
+  "expected_domains": 26,
+  "id_and_attempt_contract": [
+    "Every fresh Praf/praful/prafului guess resolves to the one native node ID.",
+    "Case/diacritic/article repetitions of that native owner share one attempt; no simultaneous synthetic competitor exists.",
+    "Native Praf is nonwinning against cleaning-tool targets; only an exact target input wins.",
+    "The engine scoring formula is unchanged; direct graph feedback may move earlier rank2 scopes while remaining semantically reviewed.",
+    "The old Pământ fallback is retired with the approximation. Custom graphs missing the new native owner no longer get that synthetic fallback, consistent with other static native exclusions.",
+    "No persisted-game upgrade protocol is introduced: in-process stores are deployment-local. Existing V89 tests remain historical evidence via exact reconstruction, not silently changed expected outcomes."
+  ],
+  "required_evidence": [
+    "Independent graph factual and quality review plus this explicit ownership proposal.",
+    "All old native owners/forms unchanged; Praf de copt/Lapte praf and other earth/powder inputs remain distinct.",
+    "Complete 240-old-approved-target by70-word before/after comparison with exact response identities and costs.",
+    "Fresh public/typed input, repetition, clue/resume, exact wins, false-win prevention, native and projected typo privacy, custom-owner-absent behavior.",
+    "All six-game inventories/projections/routes and resource bounds checked; no hidden-target approval implied by native words."
+  ]
+}

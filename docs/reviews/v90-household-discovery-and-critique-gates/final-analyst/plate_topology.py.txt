@@ -1,0 +1,40 @@
+from __future__ import annotations
+import hashlib,json,subprocess,sys
+from pathlib import Path
+root=Path.cwd();sys.path.insert(0,str(root))
+from cat_de_roman_esti.graph import Graph
+from cat_de_roman_esti.wordgames.service import WordGameService
+from cat_de_roman_esti.wordgames.contexto_feedback import COMMON_FEEDBACK_PROXIES
+scratch=Path('/home/dobo/work/_temp/feat__v90-household-discovery-and-critique-gates/final-analyst')
+rev=root/'docs/reviews/v90-household-discovery-and-critique-gates'
+base='190d7fdb86487c641d8a781ef7a5ce21f2b98031'
+prior=lambda path:json.loads(subprocess.check_output(['git','show',base+':'+path]))
+oldkg=prior('cat_de_roman_esti/fixtures/kg_sample.json');oldpack=prior('cat_de_roman_esti/fixtures/games_pack.json')
+kgpath=root/'cat_de_roman_esti/fixtures/kg_sample.json';newkg=json.loads(kgpath.read_text())
+expected=json.loads((rev/'native-topology-audit.json').read_text())
+oldrank=prior('cat_de_roman_esti/fixtures/board_rankings_v37.json')
+eligible_ids={r['id'] for r in oldrank['boards'] if r['game']=='contexto' and r['pilot_eligible']}
+targets={r['target'] for r in oldpack['contexto'] if r['id'] in eligible_ids}
+assert len(targets)==expected['old_targets']==236
+bridge=next(e for e in newkg['kg_edges'] if e['id']=='de8797')
+assert bridge==expected['bridge']
+assert (bridge['src_id'],bridge['dst_id'],bridge['relation'])==('n_v30_kitchen_table_farfurie','n_v31_cleaning_dishes_burete_vase','cleaned_with')
+assert bridge['is_distractor']==0 and bridge['bidirectional']==0
+services={
+ 'before':WordGameService(Graph.from_records(oldkg['kg_nodes'],oldkg['kg_edges'])),
+ 'after':WordGameService(Graph.from_records(newkg['kg_nodes'],newkg['kg_edges'])),
+ 'without_bridge':WordGameService(Graph.from_records(newkg['kg_nodes'],[e for e in newkg['kg_edges'] if e['id']!='de8797']))
+}
+opened={name:sorted(node for node in COMMON_FEEDBACK_PROXIES if set(svc.distances_from(node))&targets) for name,svc in services.items()}
+assert opened['before']==expected['opened_before']
+assert opened['after']==expected['opened_after']
+assert opened['without_bridge']==opened['before']==expected['bridge_removed_opened']
+added=sorted(set(opened['after'])-set(opened['before']))
+assert len(added)==7 and added==sorted(x['id'] for x in expected['newly_opened'])
+# The representative baseline target is read from the reviewed exact dossier, not guessed.
+tid=json.loads((rev/'dossiers/ct_viata_de_roman_355.json').read_text())['target']['id']
+counts={name:len(svc.distances_to(tid)) for name,svc in services.items()}
+assert counts=={'before':2343,'after':2353,'without_bridge':2346},counts
+r={'decision':'accept_exact_plate_bridge_topology_consequence','baseline_commit':base,'source_sha256':{'cat_de_roman_esti/fixtures/kg_sample.json':hashlib.sha256(kgpath.read_bytes()).hexdigest(),'cat_de_roman_esti/wordgames/service.py':hashlib.sha256((root/'cat_de_roman_esti/wordgames/service.py').read_bytes()).hexdigest(),'cat_de_roman_esti/wordgames/contexto_feedback.py':hashlib.sha256((root/'cat_de_roman_esti/wordgames/contexto_feedback.py').read_bytes()).hexdigest()},'root_audit_sha256':hashlib.sha256((rev/'native-topology-audit.json').read_bytes()).hexdigest(),'old_unique_runtime_eligible_targets':len(targets),'proxy_mapping_count':len(COMMON_FEEDBACK_PROXIES),'opened_sets':opened,'newly_opened':[{'id':i,'label':services['after'].label(i)} for i in added],'exact_bridge':bridge,'representative_target':tid,'reachable_counts':counts,'semantics':'True qualified plate-to-dish-sponge manual-cleaning relation connects an old kitchen component through Farfurie; no proxy entries or scorer implementation are added. The consequence is broader native reachability for seven kitchen concepts, not seven new concepts, aliases, proxies or rounds.','judgment':'Accept the truthful directed bridge and disclose the topology change; do not pretend the six-node opening invariant still holds. All-target feedback/Alchimie/Lant/derived impacts and exact regressions remain integration gates. Burete hidden target stays dropped because its legacy Farfurie-to-Masa scoring proxy remains.'}
+(scratch/'plate-topology.json').write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({'opened_before':len(opened['before']),'opened_after':len(opened['after']),'without_bridge':len(opened['without_bridge']),'newly_opened':[services['after'].label(i) for i in added],'reachable':counts},ensure_ascii=False,indent=2))

@@ -109,9 +109,14 @@ embeddings; Semantle's uncurated pool is the cautionary tale.
   prime-time fame). `normal`: broadly known. `greu`: still A1-recognizable — ONLY the
   associative path may get harder, never the fame. An unknown target is not "hard",
   it is unfair (Semantle failure).
-- **C3 Dense, legible neighborhood.** ≥5 direct KG neighbors that are themselves
-  recognizable, so early guesses give a gradient (engine floors: reachable ≥120,
-  responsive ≥40 — necessary but not sufficient).
+- **C3 Dense, legible neighborhood.** ≥5 unique existing direct KG predecessors
+  (guess → target, non-distractor, excluding the target itself) that are themselves
+  recognizable, so early guesses give a gradient. Lint `contexto_incoming_floor`
+  fails pending targets below five and warns on approved stock for a separate owner
+  review. Bidirectional edges count in both directions; parallel edges count once.
+  The numeric pass does not establish recognition or approval, and outgoing-only
+  links and projected guesses cannot supply missing predecessors (ADR-0134).
+  Engine floors reachable ≥120 and responsive ≥40 remain necessary but insufficient.
 - **C4 Obvious opener exists.** At least one guess a naive player would try early
   (the category's most famous concept) must land warm (≤2 hops).
 - **C5 No polysemy.** Target label has one dominant sense for Romanians.
@@ -213,6 +218,7 @@ A verifier with web access confirms A1/A2/C2 by checking ≥2 independent signal
 | `duplicate_groups` | conexiuni | FAIL (new) / WARN (stock) | exact or three-of-four quad already in full inventory, selected batch, or durable rejection tombstones (pending gate), or approved stock (sweep/rank) |
 | `board_reskin` | conexiuni | FAIL (new) / WARN (stock) | board shares at least 8 of 16 concepts with one inventory, selected, or rejected-tombstone board (pending gate), or approved board (sweep/rank) |
 | `label_self_leak` | conexiuni | FAIL (new) / WARN (stock) | normalized group label repeats a complete member name or acronym |
+| `contexto_incoming_floor` | contexto | FAIL (new) / WARN (stock) | fewer than five unique existing non-distractor guess-to-target neighbors, excluding the target itself; numeric pass leaves recognition and owner holds unassessed |
 | `salience_floor` | contexto, lant, alchimie | WARN | target/endpoint salience below difficulty band (C6) |
 | `generic_region_link` | conexiuni, contexto | WARN | gameplay leans on a non-distinctive region association (A7): board pairs regions with generically-linked tiles; target is (or is polluted by) a pan-Romanian concept claiming a region |
 | `nondistinctive_region_link` | pack-wide | WARN | KG inventory of A7-suspect edges (≥2-region fan-out, or national-salience concept with a generic `related_to` region edge) — the edge-cleanup queue |

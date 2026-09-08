@@ -1,0 +1,327 @@
+{
+  "reviewer": "v90_critique_independent",
+  "role": "independent graph/raw quality and ownership-proposal reviewer",
+  "decision": "accept_graph_proposal_for_integration",
+  "reviewed_at_utc": "2026-09-08T16:22:27.164868+00:00",
+  "graph_proposal_sha256": "672ea9f249ec9f18dbc51c24427580b61e98abbaef2b7b3a6d0fd5c557d395ba",
+  "raw_candidate_sha256": "0a7d3cb1c78f19a5bb9568765ffb5ed96dfd321eade88fb3365afa37adada769",
+  "praf_migration_proposal_sha256": "c80e098ad1c73a9a4208998995a943704e99ce5461176c8e748c560b0c9bde28",
+  "counts": {
+    "concepts": 3,
+    "directed_links": 17,
+    "stored_grammatical_forms": 10,
+    "reviewed_synonyms": 0,
+    "raw_contexto_keep_for_pending": 2,
+    "raw_contexto_drop": 1,
+    "new_hidden_targets_among_authored_nodes": 0
+  },
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "753c22890e14b8b049f62d249ee92a06b6631fb4589db97dbebd003eaf18b5fd",
+    "scripts/critique_pack.py": "0e0399d38ccd381f71380317c89e3d2564597d7ce573119e48a98bd581a12f13",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "docs/reviews/v90-household-discovery-and-critique-gates/author-candidates/graph-proposal.json": "672ea9f249ec9f18dbc51c24427580b61e98abbaef2b7b3a6d0fd5c557d395ba",
+    "docs/reviews/v90-household-discovery-and-critique-gates/author-candidates/viata_de_roman/candidates.json": "0a7d3cb1c78f19a5bb9568765ffb5ed96dfd321eade88fb3365afa37adada769",
+    "docs/reviews/v90-household-discovery-and-critique-gates/praf-migration-proposal.json": "c80e098ad1c73a9a4208998995a943704e99ce5461176c8e748c560b0c9bde28"
+  },
+  "node_judgments": [
+    {
+      "id": "n_v90_household_praf",
+      "decision": "accept",
+      "reason": "Ordinary deposited/suspended household dust has a concrete lexical meaning and four useful tool links plus a qualified carpet-source link.1incoming/5incident neighbors; not a hidden-target candidate. Keep dust separate from food powders, earth and broad pulbere/prafuri synonyms."
+    },
+    {
+      "id": "n_v90_food_firimitura",
+      "decision": "accept",
+      "reason": "An ordinary small food fragment connects bread/biscuit breakage to dropped-debris collection.2incoming/4incident neighbors including two food nodes; useful independently of the round quota. Four grammatical forms introduce no synonym or variant ownership."
+    },
+    {
+      "id": "n_v90_textile_scama",
+      "decision": "accept",
+      "reason": "A short detached textile thread connects clothing/blanket/some carpets to loose-debris vacuuming.3incoming/4incident neighbors; nameable ordinary vocabulary, not a hidden-target endorsement or identity with hair/dust."
+    }
+  ],
+  "edge_judgments": [
+    {
+      "ref": "edge:0",
+      "edge_key": [
+        "n_v90_household_praf",
+        "n_v31_cleaning_floor_faras",
+        "collected_with"
+      ],
+      "decision": "accept",
+      "quality_reason": "Collecting dry floor dust in a dustpan is a legible use relation, not a claim that the tool generates dust."
+    },
+    {
+      "ref": "edge:1",
+      "edge_key": [
+        "n_v90_household_praf",
+        "n_v88_cleaning_matura",
+        "swept_with"
+      ],
+      "decision": "accept",
+      "quality_reason": "Sweeping floor dust with a broom is a specific action-to-tool relation in the stated direction."
+    },
+    {
+      "ref": "edge:2",
+      "edge_key": [
+        "n_v90_household_praf",
+        "n_v31_cleaning_floor_mop",
+        "collected_with"
+      ],
+      "decision": "accept",
+      "quality_reason": "The microfiber qualifier avoids claiming every mop is used dry; ordinary dust pickup is useful beside wet-floor approaches."
+    },
+    {
+      "ref": "edge:3",
+      "edge_key": [
+        "n_v90_household_praf",
+        "n_v31_cleaning_floor_aspirator",
+        "collected_with"
+      ],
+      "decision": "accept",
+      "quality_reason": "Dust collection is a defining vacuum use; no reverse or universal water relation is added."
+    },
+    {
+      "ref": "edge:4",
+      "edge_key": [
+        "n_v4gas_paine",
+        "n_v90_food_firimitura",
+        "crumbles_into"
+      ],
+      "decision": "accept",
+      "quality_reason": "Bread breakage produces crumbs; the direction gives the new food fragment an independent meaning beyond a cleaning target."
+    },
+    {
+      "ref": "edge:5",
+      "edge_key": [
+        "n_v24_food_snack_biscuit",
+        "n_v90_food_firimitura",
+        "crumbles_into"
+      ],
+      "decision": "accept",
+      "quality_reason": "Biscuit breakage/eating produces small food fragments; the conditional label avoids universal or manufacturing claims."
+    },
+    {
+      "ref": "edge:6",
+      "edge_key": [
+        "n_v90_food_firimitura",
+        "n_v31_cleaning_floor_faras",
+        "collected_with"
+      ],
+      "decision": "accept",
+      "quality_reason": "Dropped crumbs are dry sweepings that can be collected in a dustpan. This is a disclosed inference from sweepings/object use, not an exact quotation from my Leifheit fetch."
+    },
+    {
+      "ref": "edge:7",
+      "edge_key": [
+        "n_v90_food_firimitura",
+        "n_v31_cleaning_floor_aspirator",
+        "collected_with"
+      ],
+      "decision": "accept",
+      "quality_reason": "Vacuuming dropped crumbs on floors/carpets is a concrete cleaning use, not a food recipe."
+    },
+    {
+      "ref": "edge:8",
+      "edge_key": [
+        "n_v29_clothing_everyday_haina",
+        "n_v90_textile_scama",
+        "may_shed"
+      ],
+      "decision": "accept",
+      "quality_reason": "Clothing can shed textile threads; may_shed avoids equating a garment with lint or claiming every textile behaves identically."
+    },
+    {
+      "ref": "edge:9",
+      "edge_key": [
+        "n_v24_home_textiles_patura",
+        "n_v90_textile_scama",
+        "may_shed"
+      ],
+      "decision": "accept",
+      "quality_reason": "A blanket can carry or shed loose textile threads; the qualified edge gives an ordinary household textile approach."
+    },
+    {
+      "ref": "edge:10",
+      "edge_key": [
+        "n_v24_home_textiles_covor",
+        "n_v90_textile_scama",
+        "may_shed"
+      ],
+      "decision": "accept",
+      "quality_reason": "Some carpets, especially wool, shed fibres; the material qualifier must stay visible and no universal material claim is inferred."
+    },
+    {
+      "ref": "edge:11",
+      "edge_key": [
+        "n_v90_textile_scama",
+        "n_v31_cleaning_floor_aspirator",
+        "collected_with"
+      ],
+      "decision": "accept",
+      "quality_reason": "Loose floor/carpet lint may be vacuumed. This does not claim a floor vacuum removes attached fabric pills like a fabric shaver."
+    },
+    {
+      "ref": "edge:12",
+      "edge_key": [
+        "n_v24_home_textiles_covor",
+        "n_v31_cleaning_floor_aspirator",
+        "cleaned_with"
+      ],
+      "decision": "accept",
+      "quality_reason": "Carpet vacuum care is a specific ordinary association; it repairs a weak discovery route without reversing its direction."
+    },
+    {
+      "ref": "edge:13",
+      "edge_key": [
+        "n_v3sti_electricitate",
+        "n_v31_cleaning_floor_aspirator",
+        "powers"
+      ],
+      "decision": "accept",
+      "quality_reason": "Electrical operating energy is truthful for the household appliance from mains or battery. Broad DEX wording alone is not proof of power source."
+    },
+    {
+      "ref": "edge:14",
+      "edge_key": [
+        "n_v30_kitchen_table_farfurie",
+        "n_v31_cleaning_dishes_burete_vase",
+        "cleaned_with"
+      ],
+      "decision": "accept",
+      "quality_reason": "A plate can be washed with a suitable dish sponge. This graph truth remains useful even though current plate feedback is obscured by a legacy proxy."
+    },
+    {
+      "ref": "edge:15",
+      "edge_key": [
+        "n_v4gas_apa",
+        "n_v31_cleaning_dishes_burete_vase",
+        "used_with"
+      ],
+      "decision": "accept",
+      "quality_reason": "Water is used to wet/rinse a dish sponge. No water-only recipe or material requirement beyond that use is implied."
+    },
+    {
+      "ref": "edge:16",
+      "edge_key": [
+        "n_v24_home_textiles_covor",
+        "n_v90_household_praf",
+        "may_shed"
+      ],
+      "decision": "accept",
+      "quality_reason": "Some carpet fibres contribute to household dust. The may_shed label keeps this distinct from dust being identical to soil or lint."
+    }
+  ],
+  "strength_judgment": "The0.70–0.90weights are explicit editorial directness estimates, not measured source quantities; actual observed feedback is reviewed, and full old-game impact remains required.",
+  "raw_quality_verdicts": {
+    "contexto[0]": "keep",
+    "contexto[1]": "keep",
+    "contexto[2]": "drop"
+  },
+  "raw_quality_artifact_sha256": "f2ae83972fcbdc795f51ebf444efff91764686028e6ddb18f2ea4a315af7a255",
+  "proposal_migration_decision": {
+    "decision": "accept_proposal_require_final_implementation_evidence",
+    "native_owner": "n_v90_household_praf",
+    "retire_public_id": "ctxp_81703160cad7893fa1c9",
+    "retire_fallback": "n_v24_nature_world_pamant",
+    "rationale": "One ordinary dust owner is more legible than simultaneous native/synthetic identities or treating dust as earth. Exclude only praf via existing native-exclusion mechanism and remove only its dead3-target neighborhood. Keep the historical term tuple as input metadata, not a live identity. Do not preserve rank2 by adding a new scoring exception. Custom graphs lacking native dust deliberately lose the retired approximation; no deployment-spanning persisted-session compatibility is claimed.",
+    "prospective_verified": {
+      "other_projection_rows_exact": 464,
+      "domains": 26,
+      "first_guesses": 124,
+      "journey_requests": 39,
+      "old_native_owner_surface_checks": 13457,
+      "dust_forms_deduplicate": true,
+      "dust_nonwinning_against_tool_targets": true,
+      "clue_resume_exact_target_wins": true,
+      "custom_owner_absent_no_synthetic_projection": true
+    },
+    "required_before_landing": [
+      "Actual source change must remain exactly one native exclusion and one dead neighborhood removal; retain11nativepairs/71proxies/4nativeaudit tuples and all other464projection payloads.",
+      "Run complete240old-approved-target×70word impacts and inspect all material costs.",
+      "Verify actual native/projected typo privacy, private dust-target exact wins, custom-owner-absent BFF behavior and no false wins after implementation.",
+      "Preserve historical V89reconstruction and oldnative owners/powders; no automatic hidden-target approval.",
+      "All83Alchimiebooks/100Lanțprofiles/336derived rows and final frozen integration remain independently checked."
+    ]
+  },
+  "recognition_sources": [
+    {
+      "url": "https://dexonline.ro/definitie/f%C4%83ra%C8%99",
+      "supports": "Original DEX 1998/2009 and CADE 1926–1931 identify the established domestic dustpan object. Historical recognition signal, not measured player familiarity."
+    },
+    {
+      "url": "https://leifheit.ro/ro/13-curatare-uscata",
+      "supports": "Current Romanian broom/dustpan products independently confirm continuing ordinary household use. This reviewer’s fetch had no firimit match; no direct crumb sentence is claimed from that fetch."
+    },
+    {
+      "url": "https://dexonline.ro/definitie/aspirator/830471",
+      "supports": "Original DEX 2009 identifies the device for suction of dust and other materials; current household framing is supplied by the scoped native owner and manufacturer."
+    },
+    {
+      "url": "https://www.karcher.com/ro/ro/home-and-garden/produse/aspiratoare-c4250",
+      "supports": "Current original Romanian household-vacuum documentation confirms dust removal and carpet fibres as a component of household dust, with corded/cordless product uses. No universal water dependency is inferred."
+    },
+    {
+      "url": "https://dexonline.ro/definitie/burete",
+      "supports": "Original DEX 1998/2009 washing-object sense provides historical recognition while preserving fungal/marine ambiguity of bare burete."
+    },
+    {
+      "url": "https://www.fino.eu/ro/produse/curatenie-si-igiena/bureti-de-bucatarie/",
+      "supports": "Original current Romanian kitchen sponge description explicitly covers daily dish and utensil washing. Familiarity and factual correctness do not settle gameplay legibility."
+    },
+    {
+      "url": "https://dexonline.ro/definitie/praf",
+      "supports": "Original physical dust sense and articulated forms support a distinct dust owner; qualified food powders and medicinal plurals remain separate."
+    },
+    {
+      "url": "https://dexonline.ro/definitie/firimitur%C4%83",
+      "supports": "Original definition and DOOM paradigm support the ordinary food fragment and four proposed forms; no variant/synonym equivalence is inferred."
+    },
+    {
+      "url": "https://dexonline.ro/definitie/scama",
+      "supports": "Original textile-fibre sense and inflection support Scamă and its four proposed forms. The accented URL returned an error; this unaccented original entry opened successfully."
+    }
+  ],
+  "archives": {
+    "probes.json": {
+      "path": "graph-quality-evidence/probes.json.gz",
+      "raw_bytes": 189283,
+      "raw_sha256": "ebbaacef0cd286ee347ed29098f8d2f90f1809fad29ef3293db3c0f9a8d06c8b",
+      "archive_sha256": "fe63e4db9a8d47fbe1cd9cc028a62f4f5d42d875a33b284fee9b8538b2b341ff",
+      "gzip_mtime": 0
+    },
+    "probes.log": {
+      "path": "graph-quality-evidence/probes.log.gz",
+      "raw_bytes": 3844,
+      "raw_sha256": "0f4e373c8fd7c066c8edfb596af2b5fcb7e82d936d40d3dc66028b4e54d8ee34",
+      "archive_sha256": "5cf06049bdcb206b9777855d0977b7fda0941ac00074be219da74be3e1b311f8",
+      "gzip_mtime": 0
+    },
+    "raw-quality-schema-check.log": {
+      "path": "graph-quality-evidence/raw-quality-schema-check.log.gz",
+      "raw_bytes": 87,
+      "raw_sha256": "0463d219c48b1b3b622edbe9a8ace3e732683c9c7b374a80ab821dbf13f91776",
+      "archive_sha256": "10fe8b8860ba18a08fa21eb937680e33d2dcb719f6b679df6eaab2d474f48396",
+      "gzip_mtime": 0
+    }
+  },
+  "capture": {
+    "path": "graph-quality-evidence/probe.py.txt",
+    "sha256": "a66d709dd187b9fda84602a6184649fe015a9d44174b6b136bec3d6f1d5be611"
+  },
+  "source_access_notes": [
+    "Accented Scamă definition open returned an error; the same original entry at /definitie/scama opened successfully.",
+    "This reviewer’s Leifheit category fetch had no firimit substring. Separate factual reviewer reported crumb wording in its independently opened variant and labels edge6 as a sweepings/object-use inference; my review claims only current named broom/dustpan products from my fetch."
+  ],
+  "remaining_limits": [
+    "Raw keep is pending staging only; exact final dossiers and two independent gate judgments are still required.",
+    "Burete de vase has numeric6 but fails this review’s C3legibility judgment; keep true plate/water graph relations.",
+    "No Conexiuni/Lanț/Alchimie/Intrusul/Perechi additions are approved here.",
+    "No generated source/fixture/static writes, commit, push or global server interaction occurred in this review."
+  ]
+}

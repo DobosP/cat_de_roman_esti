@@ -39,28 +39,28 @@ test("only authoritative nonterminal empty responses retain the submitted pair",
     /recoverableEmpty && res\.hint_available[\s\S]*?Apasă „Indiciu” dacă te-ai blocat\./,
   );
 
-  const rejected = combine.slice(combine.indexOf("} catch (err)"));
+  const rejected = combine.slice(combine.indexOf("} catch {"));
   assert.doesNotMatch(rejected, /setSelected|setEmptyPairKey/);
 });
 
 test("button, keyboard, and action guard block an unchanged or duplicate submit", () => {
   assert.match(combine, /startInFlight\.current \|\|/);
-  assert.match(combine, /isEmptyRetry \|\|[\s\S]*?combineInFlight\.current/);
+  assert.match(combine, /actionsLocked \|\|[\s\S]*?isEmptyRetry/);
   assert.ok(
-    combine.indexOf("combineInFlight.current = true") <
+    combine.indexOf("const ticket = beginAction(state)") <
       combine.indexOf("alchimieApi.combine"),
   );
   assert.match(
     combine,
-    /finally \{[\s\S]*?combineInFlight\.current = false;[\s\S]*?setBusy\(false\)/,
+    /finally \{[\s\S]*?if \(actionOwner\.finish\(ticket\)\) setBusy\(false\)/,
   );
   assert.match(
     screen,
-    /e\.key === "Enter" &&[\s\S]{0,180}!busy &&[\s\S]{0,80}!isEmptyRetry/,
+    /e\.key === "Enter" &&[\s\S]{0,180}!actionsLocked &&[\s\S]{0,80}!isEmptyRetry/,
   );
   assert.match(
     screen,
-    /disabled=\{creating \|\| busy \|\| selected\.length !== 2 \|\| isEmptyRetry\}/,
+    /disabled=\{actionsLocked \|\| selected\.length !== 2 \|\| isEmptyRetry\}/,
   );
   const keyboardStart = screen.indexOf("// Keyboard: Enter combines");
   const keyboardEnd = screen.indexOf("if (loading && !state)", keyboardStart);
@@ -92,9 +92,7 @@ test("changing or clearing the bench dismisses only the immediate retry block", 
 
   for (const anchor of [
     "const start = useCallback",
-    "const doReset = useCallback",
     "const newGame = useCallback",
-    "const doHint = useCallback",
   ]) {
     const start = screen.indexOf(anchor);
     assert.notEqual(start, -1, `${anchor} exists`);
@@ -103,6 +101,13 @@ test("changing or clearing the bench dismisses only the immediate retry block", 
       screen.slice(start, start + 1200),
       /setEmptyRecoveryActive\(false\)/,
     );
+  }
+  const adoption = screen.slice(screen.indexOf("const applyAuthoritativeState"), screen.indexOf("const applyResumedGame"));
+  assert.match(adoption, /setEmptyPairKey\(null\)/);
+  assert.match(adoption, /setEmptyRecoveryActive\(false\)/);
+  for (const anchor of ["const doReset = useCallback", "const doHint = useCallback"]) {
+    const start = screen.indexOf(anchor);
+    assert.match(screen.slice(start, start + 1200), /applyAuthoritativeState\(fresh\)/);
   }
 });
 

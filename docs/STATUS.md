@@ -1,112 +1,110 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-08 — V89 landed locally; V90 started; local loop active. Production last checked 2026-08-27.
+Last verified: 2026-09-08 — V90 GREEN candidate; local landing pending. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-  V89 is merged at `143bfdb`, following V88 `000b0a2` and its landing record `b614bfe`.
-  V90 starts on `feat/v90-household-discovery-and-critique-gates`; the local loop
-  continues until stopped (ADR-0127).
-- Conexiuni reconciles lost guess/clue responses with one owned GET. Earned clues,
-  solved groups and wins/losses recover without replaying a mutation. Failed verification
-  retains a visible read-only retry and locks board actions; stale replies cannot adopt
-  another saved game. A lost first clue now preserves a 150-point finish instead of 50.
-- One new easy Cald sau Rece round: Mop (`ct_viata_de_roman_353`). The two independently
-  reviewed gate judgments reject staged Făraș352/Aspirator354: each has only three
-  recognizable incoming neighbors, below the five required by ADR-0071. Mop has five.
-  Initial screens incorrectly used combined incoming/outgoing counts; corrections and
-  original evidence remain archived. The rejected IDs remain consumed, with dossiers kept.
-- Tort Diplomat→Frișcă now gives rank2/hot, nonwinning feedback through one exact native
-  pair. Praf gets the same related feedback only for Făraș, Mop and Aspirator; its public
-  identity, Pământ fallback and all other scopes remain. Valid feedback does not approve
-  a hidden target. No graph concepts, directed links, forms, synonyms or projection rows added.
-- Served KG remains `fixture-v88-cross-game-quality`: 2,413 nodes / 9,442 edges /
-  8,631 aliases / 180 puzzles. `kg_real.json` remains a thin export, not the served graph.
-  V88's truthful fermented/sweet/whipped-cream distinctions remain intact.
+  Local main records V89 `143bfdb` through `190d7fd`. V90 runs on
+  `feat/v90-household-discovery-and-critique-gates`; the local loop remains active (ADR-0127).
+- V90 adds Praf, Firimitură and Scamă: three concepts, 17 directed links, ten grammatical
+  forms and zero synonyms. Thirteen old node degree fields regenerate; every old semantic
+  field, owner, stored form, edge and all 180 CLI puzzles remain unchanged.
+- Praf becomes native, retiring its synthetic ID/Pământ fallback and unused three-target
+  neighborhood. Other 464 projection rows, 26 domains, 71 scorer proxies, 11 native exact
+  pairs and four audit-only native tuples remain unchanged. Exact forms share one attempt;
+  dust remains nonwinning against tool targets. No scoring formula changes (ADR-0135).
+- Two new easy Cald sau Rece rounds are approved: Făraș355 and Aspirator356. Both final
+  independent judgments pass full C1–C6 on exact dossiers, with five/eight incoming cues.
+  V89 rejected IDs352/354 remain history. Burete is dropped before staging for weak dish
+  cues despite six incoming neighbors; the investigated Conexiuni/Lanț rounds stay held.
+- The plate→sponge edge de8797 opens exactly seven old kitchen nodes to the wider graph:
+  Oală, Tigaie, Cană, Castron, Farfurie, Furculiță and Lingură. Removing it restores the
+  six previously connected cleaning proxies; other sink boundaries remain. Reachability
+  grows 2343→2353 through three new/seven old nodes; the proxy mapping stays exact.
+- C3 now fails pending targets with fewer than five unique valid incoming neighbors and
+  warns on approved stock. Numerical counts do not certify recognition. Four approved
+  warnings leave existing scores/eligibility unchanged; A5 holds remain (ADR-0134).
+- Alchimie recovers uncertain combine/hint/reset/win responses through one owned GET.
+  A failed read retains a visible read-only retry and locks mutations. One already-paid
+  public clue survives GET/resume; new unique combines/reset clear it. Stale or cross-tab
+  responses cannot adopt another game or record an old result (ADR-0136).
+- Served KG: `fixture-v90-household-discovery`, 2,416 nodes / 9,459 edges /
+  8,641 stored aliases / 180 puzzles. `kg_real.json` remains a thin export, not the served KG.
 
 ## Inventory and invariants
 
 | Game | Total | Approved | Pending | Runtime eligible/preferred |
 |---|---:|---:|---:|---:|
 | Conexiuni | 234 | 234 | 0 | 76 eligible |
-| Cald sau Rece | 242 | 240 | 2 | 236 eligible |
+| Cald sau Rece | 244 | 242 | 2 | 238 eligible |
 | Lanțul Cuvintelor | 100 | 97 | 3 | 97 eligible |
 | Alchimie | 83 | 80 | 3 | 80 eligible |
 | Intrusul | 183 | 183 | 0 | 144 preferred |
 | Perechi | 153 | 153 | 0 | 113 preferred |
 
-Pack **659 = 651 approved + 8 pending**; original four-game ranking **489 eligible**.
-No new Conexiuni, Alchimie, Lanț, Intrusul or Perechi round is claimed in V89.
-All 658 old pack records, 83 Alchimie books/profiles, 100 Lanț profiles/menus and 336
-derived rows/payloads remain exact. All 465 projection rows / 26 domains,
-71 scorer proxies, native owners and graph bytes remain exact. Native exact feedback
-pairs grow 10→11; four preexisting projected neighborhoods gain the one closed Praf entry.
+Pack **661 = 653 approved + 8 pending**; original four-game ranking **491 eligible**.
+All 659 old pack records, 83 complete Alchimie books/profiles, 100 Lanț route profiles
+and 336 complete derived rows/payloads remain exact. One nonshortest water menu choice
+changes Aluat→Burete on lt_stiinta_216; all 206 shown shortest first hops remain.
 Sessions retain 7,200-second sliding TTL, 1,000 entries/game, locks, 64 KiB requests and
-bounded histories/caches. No scoring formula, backend session shape or shared action-helper change.
+bounded histories/caches. The new Alchimie cue is one bounded public object, not a history.
 
 ## Current artifact pins
 
-- `games_pack.json`: `c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04`
-- `board_rankings_v37.json`: `ea207d65a1846d2f9bb2945ca9320a8e5e7bdc5e9fe8c31113aaf4f749fdc3d6`
-- `derived_catalog_v38.json`: `4bd3cd515d21627fe42d07149bdf78951164ebfaa30df52fd1259ce26b8470d9`
-- `kg_sample.json`: `2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc`
-- `cat_mobile_app_pack_contract.json`: `d2fbb9f550a05b6b128431ee55787b2b156846887f0bc8ce1908f09e6683b951`
+- `games_pack.json`: `e32139529aacc88e2f453ac1cee1d8cd9a2cd1b16f3ee0551a5a76779192391e`
+- `board_rankings_v37.json`: `b5beb978b911c952ef2632cb2d93bc695be19f226b4a4661d77e26b335413fab`
+- `derived_catalog_v38.json`: `6ac090bc2186bf00209913d1123ba3f54de9f7b02f9fa2a781f2dfcccbbf58a9`
+- `kg_sample.json`: `d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109`
+- `cat_mobile_app_pack_contract.json`: `5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f`
+- Rubric: `3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101`
 
-Server KG content: `sha256:b8205c055288f2d2697076d0fac2d4852b6c690089ac373507e325979952b2b2`.
-Mobile content: `sha256:f8f5c13f2cb302338f35adf38e311906856d24cb04f58592c77783a519a61fd3`.
+Server KG content: `sha256:b005b9d24b9b7df0bd1869f8ade38ec62fd9080b2332444924dd40ad82a50486`.
+Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a24ea61de3`.
 
 ## Verification
 
-- Exact independent recovery/feedback reviews accept the bounded implementation.
-  All three deterministic dossiers have zero FAIL/WARN; final human-style agent judgment
-  still rejects two by directed C3. Supported import/artifact/promotion transactions pass.
-- Feedback: 15 focused tests pass. Independent whole-module AST comparison confirms just
-  one native pair and one projected-neighborhood entry. Eleven separate BFF probes pass;
-  author evidence independently confirms 253/256 responses and 81/84 controls unchanged.
-- Conexiuni lane: 193 native tests, lint/build and 26 desktop/mobile browser cases pass,
-  plus two stronger settled screenshot checks. Bundle is 118.92/120 KiB.
-- Initial lane checks: seven stale native source-shape assertions and eight browser locators
-  failed; exact original failures remain archived. Stronger screenshot assertions resolve
-  a blank mocked-animation capture. Three wrong-directory npm attempts ran no checks.
-- The focused history/content set passes 266 tests. Final impact: 7,169/7,170 old-round
-  observations unchanged; only Diplomat→Frișcă improves. All seeded start payloads stay exact.
-- Full frontend is green: **193 native /214 browser checks**, no retries; lint/typecheck/
-  build/bundle pass. Fixture/pack/pending/Ruff/docs/whitespace pass.
-- First full backend: **1,530 pass /one historical-scope failure**. The V44 pre-V88 sink
-  assertion included new Mop. The exact test-only correction passes 110 focused cases;
-  final full backends pass **1,531 tests each on Python 3.12.3 /3.14.6**, plus
-  **53 accounts tests each**. All 407 integration input hashes remain unchanged.
-  Final independent audit accepts all 16 receipts and 407 input hashes. The final
-  candidate manifest binds 237 present/deleted files, including its audit snapshot/pair.
-  Evidence is sealed by implementation commit `143bfdb`; later status notes are docs only.
-  `docs/reviews/v89-feedback-and-conexiuni-recovery/`.
+- Independent graph factual/quality, Praf implementation, topology, Alchimie and final
+  content/history reviews accept the bounded changes. Graph preflight: 324 beginner and
+  17 direct-link probes. Supported serial application/import/two promotions are GREEN.
+- Critique: 166 focused tests and all 242 pregraph profiles pass; no score/eligibility loss.
+  History/migration: 367 tests, including 53 new cases, pass; five artifact inverses and
+  normal/exception cache teardown restore exact V89 history and current V90 behavior.
+- Alchimie: 74 focused backend, 32 browser and two independent repeated-read-failure
+  cases pass. Source-shape/locator/stale-rubric and reviewer-harness failures are archived.
+- Full frontend is GREEN: **193 native /246 browser checks**, no retries; lint/typecheck/
+  build/bundle pass at **118.88/120 KiB**. Full Python3.12: **1,608 backend /53 accounts pass**.
+- Python3.14 also passes **1,608 backend /53 accounts**. Its first process ended143
+  without a summary and remains archived/excluded; cause unestablished. The same command
+  passed separately with periodic progress output. All 16 final gates are GREEN.
+- Final impact: 240 old approved records ×70 words, 16,800 fresh requests on each side.
+  **11,120 selected feedback observations are exact; 5,680 change**, including 2,880 newly
+  recognized inputs and 240 Praf identity migrations. This is not full HTTP-body equality.
+  No compared win flag changes; 17 new direct-link wins pass. Only Contexto's seeded start
+  changes reachability; the other five are byte-identical. Full raw hashes/logs are retained.
+- Frozen runtime/test/rubric and preexisting review inputs: 1,635. Current evidence is in
+  `docs/reviews/v90-household-discovery-and-critique-gates/`; V89's sealed matrix remains history.
 
 ## Production — last observed 2026-08-27
 
-- Last documented deployment remains anonymous V72 `6ee86935038744c0066cac6a50865f76eab93e37`,
+- Last documented deployment: anonymous V72 `6ee86935038744c0066cac6a50865f76eab93e37`,
   image `sha256:30b39c0bba954074de6cdecd377a9742f627f4900caccbae8805d132f5c317bd`.
-- Accounts/debug were off; health/config/assets and alias smoke passed. No production check,
-  push or deployment occurred in V89. Preserve `rollback-60c3fd5318a` for the next rollout.
-- Local Python3.12.3, fresh constrained Python3.14.6 and Node24 dependencies are available.
+- Accounts/debug were off. No production check, push, deployment or external contact
+  occurred in V90. Preserve `rollback-60c3fd5318a` for the next separately authorized rollout.
 
-## Remaining gates
+## Remaining gates and costs
 
-- V90 starts household vocabulary and truthful directed-discovery work, a necessary
-  incoming-neighbor critique floor, and an all-six-game review. Alchimie lost-action
-  behavior requires actual reproduction before choosing a fix. Its fresh kickoff binds
-  eight directed profiles, 19 unknown inputs and 10 private BFF probes. No V90 promotion yet.
-- The household screen finds 19/33 deliberately broad tested surfaces unrecognized,
-  including murdărie/firimituri/pardoseală. This is a stress sample, not a player-frequency
-  estimate. Electricitate→Aspirator remains cold378 while Apă is hot9; broader semantic
-  work remains. True Zacuscă→Bucătărie→Frigider→Frișcă remains warm24.
-- Cremșnit/Pișcot→Frișcă remain cold; their variant/indirect associations were not granted
-  the exact Diplomat pair. Brioșă/Pandișpan hidden targets and Diplomat Alchimie stay held.
-- Romanian-player sessions, real-device checks, feedback contact and operator/legal-page
-  verification remain unrun. Rollout requires separate authorization and live smoke/rollback
-  checks. Keep accounts out until the DEPLOY go-live checklist passes; see BETA_CANDIDATE.
+- Finish the final receipt/manifest audit before local landing, then start V91 under
+  the existing loop. Human/player/device acceptance remains unrun.
+- Praf loses its broad earth approximation: 227 old-target ranks rise and 13 fall; Mop2→6
+  remains hot. Other changed same-rank observations include closeness and 20 temperature
+  shifts. The eight lower-rank existing-identity changes all concern Mop, not universal gains.
+- Seventeen stress words remain unknown, including murdărie/pardoseală/curățenie/gunoi.
+  Burete's plate proxy and generic floor cues remain weak; truthful links do not approve it.
+- The four thin approved C3 warnings, earlier hidden-target holds, operator/legal checks,
+  feedback contact and rollout remain open. Keep accounts out until DEPLOY's checklist passes.
 
 ## Doc map
 
 - `README.md` / `AGENTS.md`: orientation; `docs/agent-map.md` / `docs/agent-testing.md`: routes/gates.
-- `docs/adr/` (newest 0133), `docs/reviews/`, WORKLOG: decisions, evidence and history.
+- `docs/adr/` (newest 0136), `docs/reviews/`, WORKLOG: decisions, evidence and history.

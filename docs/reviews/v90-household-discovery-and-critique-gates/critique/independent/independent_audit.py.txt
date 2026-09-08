@@ -1,0 +1,119 @@
+from __future__ import annotations
+import gzip
+import hashlib
+import json
+import subprocess
+import sys
+import types
+from pathlib import Path
+
+ROOT = Path.cwd()
+SCRATCH = Path('/home/dobo/work/_temp/feat__v90-household-discovery-and-critique-gates/critique-review')
+BASE = '190d7fdb86487c641d8a781ef7a5ce21f2b98031'
+sys.path.insert(0, str(ROOT))
+from scripts import critique_pack as cp, rank_games_pack as ranks
+
+sha = lambda data: hashlib.sha256(data).hexdigest()
+old_bytes = lambda path: subprocess.check_output(['git','show',f'{BASE}:{path}'])
+evidence_dir = ROOT/'docs/reviews/v90-household-discovery-and-critique-gates/critique'
+manifest = json.loads((evidence_dir/'verification.json').read_text())
+for path,digest in manifest['source_sha256'].items():
+    assert sha((ROOT/path).read_bytes()) == digest, path
+for path,digest in manifest['evidence_sha256'].items():
+    assert sha((evidence_dir/path).read_bytes()) == digest, path
+archives=[]
+for label,row in manifest['archives'].items():
+    archive=(evidence_dir/row['archive']).read_bytes()
+    raw=gzip.decompress(archive)
+    assert archive[4:8] == b'\x00'*4, label
+    assert sha(archive)==row['archive_sha256'],label
+    assert sha(raw)==row['raw_sha256'],label
+    assert len(raw)==row['raw_bytes'],label
+    archives.append({'name':label,'decoded_sha256':sha(raw),'archive_sha256':sha(archive)})
+baseline=json.loads(gzip.decompress((evidence_dir/'baseline-audit.json.gz').read_bytes()))
+for path,digest in baseline['sha256'].items():
+    assert sha(old_bytes(path))==digest,path
+for path in ['cat_de_roman_esti/fixtures/games_pack.json','cat_de_roman_esti/fixtures/kg_sample.json','scripts/rank_games_pack.py','cat_de_roman_esti/wordgames/service.py','cat_de_roman_esti/graph.py']:
+    assert (ROOT/path).read_bytes()==old_bytes(path),path
+# Execute the exact baseline critic, with its original embedded rubric digest.
+old_cp=types.ModuleType('independent_baseline_critique')
+old_cp.__file__=str(ROOT/'scripts/critique_pack.py')
+sys.modules[old_cp.__name__]=old_cp
+exec(compile(old_bytes('scripts/critique_pack.py'),old_cp.__file__,'exec'),old_cp.__dict__)
+old_cp.rubric_sha256=lambda:baseline['sha256']['docs/CRITIQUE_RUBRIC.md']
+pack,svc,strong,regions=cp.load_all(cp.PACKAGE_PACK,cp.PACKAGE_KG)
+pack_before=json.dumps(pack,sort_keys=True,ensure_ascii=False)
+_,_,current=cp.run(pack,svc,strong,regions,['contexto'],{'approved','pending'},None)
+_,_,old=old_cp.run(pack,svc,strong,regions,['contexto'],{'approved','pending'},None)
+old_map={rec['id']:(game,rec,findings) for game,rec,findings in old}
+author_map={r['id']:r for r in baseline['rows']}
+assert len(current)==len(old_map)==len(author_map)==242
+# Independent direct edge scan; does not use service predecessor/neighbor helpers.
+incoming={node:set() for node in svc.graph.nodes}
+for edge in svc.graph.edges:
+    if edge.is_distractor or edge.src_id==edge.dst_id:
+        continue
+    if edge.src_id not in incoming or edge.dst_id not in incoming:
+        continue
+    incoming[edge.dst_id].add(edge.src_id)
+    if edge.bidirectional:
+        incoming[edge.src_id].add(edge.dst_id)
+for target,ids in incoming.items():
+    assert cp.contexto_incoming_ids(svc,target)==sorted(ids),target
+
+demoted=ranks._owner_demotions()
+def profile(game,rec,dossier):
+    familiarity=ranks.romanian_familiarity(game,dossier,lambda node:ranks._service_salience(svc,node))
+    quality=ranks.play_quality(game,rec,dossier,lambda a,b:ranks._service_edge_strength(svc,a,b))
+    return {'romanian_familiarity':familiarity,'play_quality':quality,'pilot_score':ranks._bounded_score(.6*familiarity+.4*quality),'pilot_eligible':ranks._pilot_eligible(rec,game,dossier,svc,demoted)}
+rows=[]
+for game,rec,findings in current:
+    old_game,old_rec,old_findings=old_map[rec['id']]
+    assert (game,rec)==(old_game,old_rec)
+    ids=sorted(incoming[rec['target']])
+    assert ids==author_map[rec['id']]['incoming_ids']
+    actual_dossier=cp.build_dossier(rec,game,svc,strong,findings,regions)
+    old_dossier=old_cp.build_dossier(old_rec,old_game,svc,strong,old_findings,regions)
+    original=profile(old_game,old_rec,old_dossier)
+    actual=profile(game,rec,actual_dossier)
+    assert original==author_map[rec['id']]['old']==actual,rec['id']
+    diagnostic=[f for f in findings if f['check']=='contexto_incoming_floor']
+    assert len(diagnostic)==int(len(ids)<5)
+    if diagnostic:
+        assert diagnostic[0]['level']==('WARN' if rec['status']=='approved' else 'FAIL')
+    assert [f for f in findings if f['check']!='contexto_incoming_floor']==old_findings
+    ev=actual_dossier['incoming_neighbor_floor']
+    assert ev=={'minimum':5,'count':len(ids),'sample':[{'id':node,'label':svc.label(node)} for node in ids[:10]],'sample_truncated':len(ids)>10,'recognition_assessed':False}
+    old_cmp={k:v for k,v in old_dossier.items() if k not in {'review_binding','rubric_sha256','lint_findings'}}
+    new_cmp={k:v for k,v in actual_dossier.items() if k not in {'review_binding','rubric_sha256','lint_findings','incoming_neighbor_floor'}}
+    assert old_cmp==new_cmp,rec['id']
+    assert cp.dossier_review_binding(old_dossier)==old_dossier['review_binding']
+    assert cp.dossier_review_binding(actual_dossier)==actual_dossier['review_binding']
+    assert actual_dossier['review_binding']!=old_dossier['review_binding']
+    rows.append({'id':rec['id'],'target':rec['target'],'label':svc.label(rec['target']),'status':rec['status'],'incoming_ids':ids,'count':len(ids),'profile_before':original,'profile_after':actual,'new_diagnostic':diagnostic,'old_binding':old_dossier['review_binding'],'current_binding':actual_dossier['review_binding']})
+assert pack_before==json.dumps(pack,sort_keys=True,ensure_ascii=False)
+# Generated intermediates may rebind metadata, never rows or selection weights.
+artifacts=[]
+for path in ['cat_de_roman_esti/fixtures/board_rankings_v37.json','cat_de_roman_esti/fixtures/derived_catalog_v38.json']:
+    current_bytes=(ROOT/path).read_bytes()
+    prior=json.loads(old_bytes(path))
+    actual=json.loads(current_bytes)
+    assert actual['boards']==prior['boards'],path
+    assert (ROOT/'tests/fixtures'/Path(path).name).read_bytes()==current_bytes,path
+    artifacts.append({'path':path,'sha256':sha(current_bytes),'rows':len(actual['boards']),'boards_payload_unchanged':True,'changed_meta_keys':[key for key in actual['meta'] if actual['meta'][key]!=prior['meta'].get(key)]})
+archived='docs/reviews/v89-feedback-and-conexiuni-recovery/dossiers/ct_viata_de_roman_353.json'
+archived_bytes=(ROOT/archived).read_bytes()
+assert archived_bytes==old_bytes(archived)
+dossier=json.loads(archived_bytes)
+assert cp.dossier_review_binding(dossier)==dossier['review_binding']
+assert cp.REVIEW_BINDING_VERSION==old_cp.REVIEW_BINDING_VERSION==1
+assert 'incoming_neighbor_floor' not in dossier
+changes=subprocess.check_output(['git','diff','--name-only',BASE,'--','docs/reviews']).decode().splitlines()
+assert all('/v90-household-discovery-and-critique-gates/' in path for path in changes),changes
+warnings=[r for r in rows if r['new_diagnostic']]
+assert len(warnings)==4 and all(r['status']=='approved' and r['profile_after']['pilot_eligible'] for r in warnings)
+pending=[r for r in rows if r['status']=='pending']
+assert {r['id']:r['count'] for r in pending}=={'ct_meme_net_238':8,'ct_societate_257':13}
+result={'baseline_main':BASE,'source_sha256':manifest['source_sha256'],'records':len(rows),'raw_edge_nodes_checked':len(incoming),'score_or_eligibility_changes':0,'approved_warning_ids':[r['id'] for r in warnings],'rows':rows,'source_archives_verified':archives,'artifacts':artifacts,'binding_version':cp.REVIEW_BINDING_VERSION,'archived_dossier':{'path':archived,'sha256':sha(archived_bytes),'binding':dossier['review_binding']},'prior_review_changes':[]}
+(SCRATCH/'independent-audit.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({key:result[key] for key in ['baseline_main','records','raw_edge_nodes_checked','score_or_eligibility_changes','approved_warning_ids','artifacts','binding_version']},ensure_ascii=False,indent=2))

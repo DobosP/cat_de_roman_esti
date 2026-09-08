@@ -1,105 +1,145 @@
 # V90 — household discovery and critique gates
 
-Valid until: final V90 review supersedes this kickoff — then treat as history.
+Valid until: V90 is superseded — then treat as history; current state belongs in STATUS.
 
-Started 2026-09-08 above local main `190d7fdb86487c641d8a781ef7a5ce21f2b98031`,
-which records landed V89 `143bfdb`. Branch: `feat/v90-household-discovery-and-critique-gates`.
-**Phase: fresh measured baseline and scoped work; no V90 implementation or promotion yet.**
-The owner-authorized local version loop continues under
-[ADR-0127](../../adr/0127-recurring-local-version-loop.md) until stopped. Local main stays
-clean; no push, deployment, accounts rollout, contact or purchase is authorized by the loop.
+Implemented above local main `190d7fdb86487c641d8a781ef7a5ce21f2b98031`, which records
+landed V89 `143bfdb`. Branch: `feat/v90-household-discovery-and-critique-gates`.
+**Phase: implementation, promotions and all 16 final integration gates GREEN; local landing pending.**
+The owner-authorized local loop follows [ADR-0127](../../adr/0127-recurring-local-version-loop.md).
+No push, deployment, accounts rollout or external contact is part of this version.
+The original measured kickoff remains in `be4a441` and [kickoff-baseline.json](kickoff-baseline.json).
 
-## Player problems and intended work
+## Delivered scope
 
-1. **Recognize ordinary household guesses and make real discovery links useful.**
-   Investigate sourced dust, crumbs and textile lint, then safe ordinary forms. Praf already
-   has a projected public identity and three scoped targets; a native owner requires a
-   reviewed migration, complete identity/attempt/feedback controls and distinct Praf de copt
-   and Lapte praf ownership. Diminutives, activities and general words are not automatic
-   synonyms. Review concrete Covor/Electricitate→Aspirator and Farfurie/Apă→Burete relations
-   separately. Keep bathroom Chiuvetă ownership distinct from a proposed kitchen sink.
-   New nodes need useful wider meaning and the graph preflight, not a hidden-target quota.
-2. **Catch impossible directed neighborhoods before content review.** Introduce a necessary
-   numeric C3 check for fewer than five unique existing non-distractor incoming neighbors,
-   excluding the target itself. Pending failure and approved-stock warning/proposal need
-   explicit policy, tests and binding review. Recognition and semantic legibility remain
-   independent judgments; five neighbors never mean automatic approval. Inspect whether
-   warnings influence ranking/eligibility before changing approved-stock diagnostics.
-3. **Reproduce and, if confirmed, recover lost Alchimie actions.** Investigate committed
-   combine, reset and clue responses lost to the browser, failed verification, terminal
-   results and another tab's saved round. Reuse the owned-action mechanism where it fits
-   the actual contract. A clue may need bounded earned-state retention; prove what GET
-   currently exposes before choosing a change. Do not count a source-code suspicion as
-   a demonstrated bug or ship a speculative recovery flow.
+| Area | Actual V90 change |
+|---|---|
+| Native vocabulary | Praf, Firimitură, Scamă:3 concepts,10 stored grammatical forms,0 synonyms |
+| Directed graph |17 added links,0 removed;13 old degree fields regenerate, semantic fields stay exact |
+| Recognized normalized surfaces |12 previously unrecognized surfaces; Praf's canonical surface was already projected |
+| Cald sau Rece |Făraș355 and Aspirator356 independently promoted; eligibility236→238 |
+| Other five games' curated stock |0 new rounds; prior records and eligibility preserved |
+| Alchimie behavior |Owned recovery of combine/hint/reset/win, one resumable paid cue, persistent read-only retry |
+| Critique tooling |Necessary incoming-neighbor floor, bounded dossier evidence, approved-stock warnings only |
 
-[The V89 prospective scout](../v89-feedback-and-conexiuni-recovery/prospective-scout.md)
-is a research lead, not approval of any new word or edge. The
-[pending-floor follow-up](../v89-feedback-and-conexiuni-recovery/prospective-pending-floor.md)
-measures eight incoming neighbors for Shitpost and thirteen for Industrie; both numeric
-floors pass while their A5 holds remain. Current global pending strict checks are green.
-No exception is needed to retain these holds.
+Final pack **661 =653 approved +8 pending**, with **491 eligible** across its four games.
+Contexto has244 records/242 approved/238 eligible. Derived stock stays183 Intrusul and153
+Perechi, with144/113 preferred. No file churn, degree field or private probe is counted as
+new playable content. All180 terminal CLI puzzles remain exact.
 
-## Fresh exact baseline
+## Meaningful household links and native dust
 
-[kickoff-baseline.json](kickoff-baseline.json) binds eleven source/artifact files and records
-8 directed profiles, 19 fresh unknown-input lookups and 10 fresh private BFF first guesses.
-[The exact capture](capture-kickoff.py.txt) deletes every created session. Incoming count
-is explicitly separated from union adjacency; neither is a recognition or approval result.
-No public-selector or human-playtest claim follows from these private probes.
+[ADR-0135](../../adr/0135-household-discovery-concepts.md) records the exact three concepts,
+qualified one-way relations and Praf migration. Dictionary/manufacturer sources support
+dust collection, bread/biscuit crumbs, textile lint, carpet care, vacuum power and dish-
+sponge use. Strengths0.70–0.90 are editorial weights. Qualifiers avoid claims that every
+mop, textile or vacuum has the same behavior. Source redirects and varying Leifheit
+renderings are disclosed in [independent factual review](graph-factual-review.md);
+[quality review](graph-quality-review.md) separately assesses meaning and game usefulness.
 
-| Existing target | Incoming non-distractor neighbors | Already approved as Contexto target |
-|---|---:|---|
-| Făraș | 3 | No; V89 rejected352 |
-| Mop | 5 | Yes,353 |
-| Aspirator | 3 | No; V89 rejected354 |
-| Burete de vase | 4 | No |
-| Mătură | 1 | No |
-| Găleată | 3 | No |
-| Detergent | 3 | No |
-| Taburet | 1 | No |
+Praf becomes native, retiring synthetic ID `ctxp_81703160cad7893fa1c9`, its Pământ fallback
+and the unused three-target neighborhood. Other464 projection rows,26 domains,71 legacy
+proxies,11 exact native pairs and four native audit tuples remain exact. Praf/praful/
+prafului share one attempt and remain nonwinning for tool targets. Praf de copt, Lapte
+praf and other earth/powder words retain their owners; prafuri is not added as a dust form.
+Custom graphs without the new owner no longer receive the retired approximation.
+[Actual implementation review](praf-implementation-review.md) verifies exact AST edits,
+old owners, real BFF guesses, repeats, clues/resume, wins, typo privacy and missing-owner
+behavior. The three new nouns are not approved hidden targets themselves.
 
-Actual nonwinning ranks: Praf→Mătură2256 versus Praf→Mop2; Covor→Aspirator36,
-Electricitate→Aspirator378 versus Apă→Aspirator9; Farfurie→Burete212,
-Apă→Burete13 and Chiuvetă→Burete12; Scaun→Taburet2189. Diplomat→Frișcă stays2.
-These are measured costs and controls, not a demand to force every association hot.
-All19 tested stress surfaces still lack both native and projection owners: murdărie,
-firimituri, păr, păr de animale, sac, sac de praf, filtru, curent, măturat, aspirare,
-pardoseală, parchet, gresie, covoraș, scame, cârpă, mâner, curățenie and gunoi.
+The truthful plate→sponge link de8797 also opens seven old kitchen nodes through the
+existing cleaning bridge: Oală, Tigaie, Cană, Castron, Farfurie, Furculiță and Lingură.
+Six native proxy-owned nodes reached the old target set before; now13 do. Removing only
+that edge restores six. Reachability2343→2353 comprises three new/seven old nodes, while
+all71 scoring mappings remain unchanged. [Independent topology review](plate-topology-review.md)
+verifies this exact boundary; ADR-0038/0068 are partially superseded only for that scope.
 
-Served KG stays the V88 build: **2,413 nodes /9,442 edges /8,631 forms /180 puzzles**.
-Pack **659 =651 approved +8 pending**, original four-game eligibility489. Contexto has
-242records/240approved/236eligible; Conexiuni76eligible, Lanț97, Alchimie80. Derived
-stock is336 boards (183 Intrusul/153 Perechi), preferred144/113. Projection vocabulary
-is465 rows/26domains;71 legacy scorer proxies remain. V89 adds no graph words or links.
-Its final gates pass1,531 backend tests per Python runtime,53 accounts each,193 native
-frontend tests and214 browser checks. Baseline exact hashes are in the capture and STATUS.
+## Two reviewed targets, explicit holds
 
-## All-six-game outcomes and acceptance
+The supported importer stages only raw quality keeps Făraș/Aspirator as fresh355/356;
+Burete de vase drops before staging. Five/eight real incoming neighbors resolve the
+specific V89 deficit; old rejected IDs352/354 remain history. Full C1–C6 judgments in
+[analyst.json](analyst.json) and [verifier.json](verifier.json) bind the exact
+[dossiers](dossiers/) and [portable gate](final-gate/). Both promote. Final private BFF
+journeys verify useful dust/broom/crumb/carpet/power approaches, paid clues, native-form
+repeats, resume and exact plural wins; later public regression cases verify selection.
 
-- **Cald sau Rece:** meaningful recognized guesses and a coherent independently reviewed
-  playable batch. Reopen rejected Făraș/Aspirator only after real incoming facts and fresh
-  full C1–C6 review; preserve the V89 rejected records and consumed IDs. Measure old target
-  feedback, resolution, typo privacy, repeated attempts, clues/resume and exact wins.
-- **Conexiuni:** scout a distinct household/material board if strict predicates and full
-  inventory checks support it. V88 already used floor-cleaning tools; a renamed copy does
-  not qualify. Preserve all V89 recovery and clue-economy behavior.
-- **Lanțul Cuvintelor:** investigate an honest crumb/food or textile/cleaning route only
-  with multiple meaningful first hops and no forced hub. Preserve old route profiles,
-  all shortest choices and bounded menus; report zero additions if no candidate passes.
-- **Alchimie:** compare all83 old sparse recipe books/profiles against every new link;
-  reject incidental tool-only crafting or shortcuts. Independently review the chosen
-  uncertain-action fix after an actual baseline reproduction and complete browser checks.
-- **Intrusul/Perechi:** compare all336 derived rows and preferred/starter stock. New graph
-  nodes are not new derived boards; only rebuilt, judged playable rows count as additions.
+Burete has six numeric predecessors but its defining Farfurie cue still borrows Masă
+and is outranked by generic cleaning/clothing guesses. Truthful plate/water links remain;
+they do not grant hidden-target approval. Proposed Conexiuni groups reused existing
+quads; Lanț alternatives relied on generic textile or incidental tool associations.
+[Author evidence and holds](author-candidates/README.md) preserve those rejected options.
 
-Keep sessions at7,200-second sliding TTL/1,000entries per game with locks,64KiB requests
-and bounded histories/caches. Workers never push. Independent raw graph/factual/quality
-review, supported serial transactions, exact dossiers and two final promotion judgments
-remain required. Never overlap graph/import/promotion writes or hand-edit fixtures/static.
+## Better critique and recoverable Alchimie
 
-Run focused checks during development; freeze runtime/data/test pins before full matrices.
-Preserve initial failures and historical inverses; require both backend runtimes/accounts,
-content gates and applicable frontend/browser gates. Bind exact final hashes to real
-receipts, update STATUS/decisions in the same change, then land green work locally and
-clean only verified-merged artifacts before starting V91. Public release and human/device
-acceptance remain separate in [BETA_CANDIDATE](../../BETA_CANDIDATE.md).
+[ADR-0134](../../adr/0134-directed-contexto-neighbor-floor.md) adds the necessary numeric
+C3 floor: fewer than five unique existing non-distractor incoming neighbors, excluding
+self, fails pending candidates. Bidirectional links and parallel edges are handled
+correctly. Approved stock gets warnings only; all242 pregraph score/eligibility profiles
+remain exact. Four existing thin targets are flagged. The8/13-neighbor A5 holds remain
+pending. Dossiers carry exact counts and at most ten sorted examples, explicitly without
+recognition certification. [Independent critique audit](critique/INDEPENDENT_REVIEW.md)
+passes166 tests including fresh sidecars; archived dossier bindings remain intact.
+
+Alchimie's four actual baseline cases commit a discovery, reset, paid clue or win while
+the client sees503. No verifying GET occurs, leaving stale inventory/reset/clue/result UI.
+GET originally lacks earned clue content. [ADR-0136](../../adr/0136-reconcile-uncertain-alchimie-actions.md)
+uses the existing owner and one optional public `earned_hint` to recover without replaying
+POSTs. Failed reads lock mutations and retain a visible retry; stale/cross-tab/unmount/
+404 responses cannot adopt another game or record an old result. The transient combine
+verdict is not invented from GET. New unique experiments/reset clear the one stored cue;
+rejected/free repeated actions preserve it, and GET never charges another hint.
+
+[Lane evidence](alchimie-action/README.md) includes74 focused backend,193 native and32
+browser passes. [Independent review](ALCHIMIE_REVIEW.md) verifies43 archives/29 images
+and adds two successful desktop/mobile repeated-failure probes: four reads, one POST,
+one clue charge. Baseline result-UI absence is directly captured; non-recording follows
+its won-state effect, while the final win test directly asserts one played-game receipt.
+Session bounds stay7200s/1000 per game,64KiB requests,32 concepts/496 attempted pairs,
+one clue and12 browser journal entries. No shared owner or other consumer is changed.
+
+## Complete impact, history and integration
+
+[Impact evidence](impact/README.md) makes16,800 fresh requests on each side:240 old
+approved Contexto records ×70 words, without reuse. **11,120 selected feedback observations
+remain exact;5,680 change.** The capture compares selected status/confirmation/guess fields,
+not whole HTTP bodies. Changes comprise2880 newly accepted observations,240 Praf identity
+migrations,2385 same-rank changes (2365closeness/20temperature),8 lower and167 higher ranks
+with existing identity. No compared won flag changes. Praf's identity subset has227 higher
+and13 lower ranks; old Mop2→6 remains hot. These are measured gains/costs, not universal
+improvement. Seventeen stress words remain unknown. All17 new links support a direct
+Lanț move;13 links involve a formerly absent node, not13new nodes or rounds.
+
+All659 old pack records,83 full Alchimie books/profiles,100 Lanț route profiles and336
+complete derived rows/payloads stay exact. One nonshortest `lt_stiinta_216` menu entry
+changes Aluat→Burete; both shortest choices and all206 old shown shortest hops survive.
+Only Contexto's seeded-start reachability changes; five other starts remain byte-identical.
+[The five-artifact inverse](artifact-delta.json) and [history tests](history-tests/README.md)
+retain literal V89 graph/mobile/projection behavior in scoped fixtures and prove normal
+and exceptional teardown restore V90 caches. All367 focused tests, including53new cases,
+pass. [Independent final content audit](FINAL_CONTENT_REVIEW.md) checks every selected
+impact category, exact historical bytes, ten tamper controls and actual source/log bindings.
+
+Full frontend passes193 native and246 browser tests without retries; all other frontend
+gates pass at118.88/120KiB. Python3.12 passes1608 backend tests and53 accounts tests.
+The first Python3.14 process ended with143 before completion; [its original evidence](incomplete-integration/README.md)
+is excluded from successful gates. The unchanged command passed separately:1608 backend and53 accounts tests, with
+periodic progress output. [All16 actual receipts](verification.json) preserve exact
+commands, results and lossless logs. [The final manifest](review-manifest.json) binds
+the complete delta above190d7fd, including the earlier committed kickoff.
+[Root transaction logs](root-checks/README.md) retain each application stage.
+
+Initial source-shape, locator, reviewer harness and stale-rubric attempts remain archived.
+A root binding check used the wrong factual-review field name and the shell continued
+into the separately authorized supported graph apply; the corrected check proved both
+reviews matched the exact applied module. [The correction](root-binding-check-correction.json)
+records this accurately. Later dependent commands use fail-fast guards; no unreviewed
+payload or overlapping content transaction was introduced. Final frozen inputs total1635.
+
+[The prospective V91 scout](prospective-v91-scout.md) records untested Intrusul/Perechi
+ownership risks, observed mobile HUD/notice overlap, and existing-content review questions.
+It includes the easy Sport board al_sport_083 and four approved C3 warnings; it promises
+no new facts, revisions or counts and distinguishes curated approval from mined fallback.
+
+Human/player/device acceptance, operator/legal verification and separately authorized
+rollout remain open in [BETA_CANDIDATE](../../BETA_CANDIDATE.md). V91 starts after this
+version's complete green local landing; the loop remains active until stopped.

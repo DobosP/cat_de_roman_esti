@@ -159,8 +159,9 @@ def test_exact_v87_artifact_bytes_reconstruct_without_accepting_tampering(filena
 
 
 def test_old_native_owners_and_graph_survive_except_the_one_explicit_cream_correction():
-    current = _json(FIXTURE)
-    baseline = history.before_v88_fixture(current)
+    live = _json(FIXTURE)
+    current = history.before_v90_fixture(live)
+    baseline = history.before_v88_fixture(live)
     assert len(current["kg_nodes"]) - len(baseline["kg_nodes"]) == 7
     assert len(current["kg_edges"]) - len(baseline["kg_edges"]) == 32
     assert current["kg_puzzles"] == baseline["kg_puzzles"]
@@ -258,8 +259,9 @@ def test_only_the_two_reviewed_household_projections_retire():
     live = [(t.surface, t.anchor_id, t.domain, t.rank_penalty, t.mapping_kind, t.public_id)
             for t in P.PROJECTION_TERMS]
     previous = history.before_v88_projection_rows(live)
-    assert len(previous) == 467 and len(live) == 465
-    assert [row for row in previous if row[0] not in {"taburet", "mătură"}] == live
+    at_v88 = history.before_v90_projection_rows(live)
+    assert len(previous) == 467 and len(at_v88) == 465
+    assert [row for row in previous if row[0] not in {"taburet", "mătură"}] == at_v88
     for word, owner in (("taburet", "n_v88_home_taburet"), ("mătură", "n_v88_cleaning_matura")):
         assert P.resolve_projection(word) is None and get_service().resolve(word) == owner
     assert not any("smântână" in row[0] and "frișcă" in row[0] for row in previous)

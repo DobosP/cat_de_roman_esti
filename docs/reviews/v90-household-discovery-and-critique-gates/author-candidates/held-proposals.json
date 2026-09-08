@@ -1,0 +1,663 @@
+{
+  "role": "author holds only; no raw game staging or graph application",
+  "native_hidden_targets": [
+    {
+      "id": "n_v90_household_praf",
+      "reason": "Fewer than five incoming predecessors; new node knowledge utility is separate from target eligibility.",
+      "incoming_ids": [
+        "n_v24_home_textiles_covor"
+      ]
+    },
+    {
+      "id": "n_v90_food_firimitura",
+      "reason": "Fewer than five incoming predecessors; new node knowledge utility is separate from target eligibility.",
+      "incoming_ids": [
+        "n_v24_food_snack_biscuit",
+        "n_v4gas_paine"
+      ]
+    },
+    {
+      "id": "n_v90_textile_scama",
+      "reason": "Fewer than five incoming predecessors; new node knowledge utility is separate from target eligibility.",
+      "incoming_ids": [
+        "n_v24_home_textiles_covor",
+        "n_v24_home_textiles_patura",
+        "n_v29_clothing_everyday_haina"
+      ]
+    }
+  ],
+  "held_surfaces": [
+    "prafuri",
+    "pulbere",
+    "colb",
+    "firmitură",
+    "păr",
+    "curent",
+    "murdărie",
+    "sac",
+    "sac de praf",
+    "filtru",
+    "pardoseală",
+    "covoraș",
+    "cârpă",
+    "măturat",
+    "aspirare",
+    "parchet",
+    "gresie",
+    "curățenie",
+    "gunoi",
+    "mâner",
+    "Pulover",
+    "Chiuvetă de bucătărie"
+  ],
+  "conexiuni": {
+    "inventory_boards": 234,
+    "tombstone_boards": 122,
+    "candidate_quad_matches": {
+      "floor_tools": [
+        {
+          "board_id": "cx_viata_de_roman_362",
+          "group_id": "g2",
+          "overlap_count": 4,
+          "overlap_labels": [
+            "Aspirator",
+            "Făraș",
+            "Mop",
+            "Mătură"
+          ]
+        }
+      ],
+      "household_textiles": [
+        {
+          "board_id": "cx_viata_de_roman_293",
+          "group_id": "g2",
+          "overlap_count": 3,
+          "overlap_labels": [
+            "Pernă",
+            "Saltea",
+            "Pătură"
+          ]
+        }
+      ]
+    }
+  },
+  "incomplete_quad": {
+    "members": [
+      "Praf",
+      "Firimitură",
+      "Scamă"
+    ],
+    "held_fourth": "Murdărie",
+    "reason": "Three physical debris concepts do not justify padding a four-tile group with a catch-all abstraction or prove a unique full board."
+  },
+  "lant": [
+    {
+      "start": "n_v4gas_paine",
+      "start_label": "Pâine",
+      "target": "n_v31_cleaning_floor_faras",
+      "target_label": "Făraș",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v4gas_paine",
+      "start_label": "Pâine",
+      "target": "n_v31_cleaning_floor_aspirator",
+      "target_label": "Aspirator",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v4gas_paine",
+      "start_label": "Pâine",
+      "target": "n_v31_cleaning_floor_mop",
+      "target_label": "Mop",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v4gas_paine",
+      "start_label": "Pâine",
+      "target": "n_v88_cleaning_matura",
+      "target_label": "Mătură",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v4gas_paine",
+      "start_label": "Pâine",
+      "target": "n_v31_cleaning_dishes_burete_vase",
+      "target_label": "Burete de vase",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        2,
+        2,
+        5
+      ],
+      "shortest_openers": [
+        "Pâine de casă",
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_food_snack_biscuit",
+      "start_label": "Biscuit",
+      "target": "n_v31_cleaning_floor_faras",
+      "target_label": "Făraș",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_food_snack_biscuit",
+      "start_label": "Biscuit",
+      "target": "n_v31_cleaning_floor_aspirator",
+      "target_label": "Aspirator",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_food_snack_biscuit",
+      "start_label": "Biscuit",
+      "target": "n_v31_cleaning_floor_mop",
+      "target_label": "Mop",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_food_snack_biscuit",
+      "start_label": "Biscuit",
+      "target": "n_v88_cleaning_matura",
+      "target_label": "Mătură",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_food_snack_biscuit",
+      "start_label": "Biscuit",
+      "target": "n_v31_cleaning_dishes_burete_vase",
+      "target_label": "Burete de vase",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        3
+      ],
+      "shortest_openers": [
+        "Firimitură"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v29_clothing_everyday_haina",
+      "start_label": "Haină",
+      "target": "n_v31_cleaning_floor_faras",
+      "target_label": "Făraș",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "Scamă"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v29_clothing_everyday_haina",
+      "start_label": "Haină",
+      "target": "n_v31_cleaning_floor_aspirator",
+      "target_label": "Aspirator",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Scamă"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v29_clothing_everyday_haina",
+      "start_label": "Haină",
+      "target": "n_v31_cleaning_floor_mop",
+      "target_label": "Mop",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "A spăla"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v29_clothing_everyday_haina",
+      "start_label": "Haină",
+      "target": "n_v88_cleaning_matura",
+      "target_label": "Mătură",
+      "optimal": 4,
+      "shortest_branch_profile": [
+        1,
+        1,
+        3
+      ],
+      "shortest_openers": [
+        "Scamă"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v29_clothing_everyday_haina",
+      "start_label": "Haină",
+      "target": "n_v31_cleaning_dishes_burete_vase",
+      "target_label": "Burete de vase",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "A spăla"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_patura",
+      "start_label": "Pătură",
+      "target": "n_v31_cleaning_floor_faras",
+      "target_label": "Făraș",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        2,
+        2,
+        4
+      ],
+      "shortest_openers": [
+        "Covor",
+        "Scamă"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_patura",
+      "start_label": "Pătură",
+      "target": "n_v31_cleaning_floor_aspirator",
+      "target_label": "Aspirator",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        2,
+        2,
+        2
+      ],
+      "shortest_openers": [
+        "Covor",
+        "Scamă"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_patura",
+      "start_label": "Pătură",
+      "target": "n_v31_cleaning_floor_mop",
+      "target_label": "Mop",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "Covor"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_patura",
+      "start_label": "Pătură",
+      "target": "n_v88_cleaning_matura",
+      "target_label": "Mătură",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "Covor"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_patura",
+      "start_label": "Pătură",
+      "target": "n_v31_cleaning_dishes_burete_vase",
+      "target_label": "Burete de vase",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        2,
+        1,
+        3
+      ],
+      "shortest_openers": [
+        "Covor",
+        "Scamă"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_covor",
+      "start_label": "Covor",
+      "target": "n_v31_cleaning_floor_faras",
+      "target_label": "Făraș",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        2,
+        2,
+        2
+      ],
+      "shortest_openers": [
+        "Aspirator",
+        "Praf"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_covor",
+      "start_label": "Covor",
+      "target": "n_v31_cleaning_floor_aspirator",
+      "target_label": "Aspirator",
+      "optimal": 1,
+      "shortest_branch_profile": [
+        1,
+        1,
+        0
+      ],
+      "shortest_openers": [
+        "Aspirator"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_covor",
+      "start_label": "Covor",
+      "target": "n_v31_cleaning_floor_mop",
+      "target_label": "Mop",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Praf"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_covor",
+      "start_label": "Covor",
+      "target": "n_v88_cleaning_matura",
+      "target_label": "Mătură",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Praf"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v24_home_textiles_covor",
+      "start_label": "Covor",
+      "target": "n_v31_cleaning_dishes_burete_vase",
+      "target_label": "Burete de vase",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Aspirator"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_food_firimitura",
+      "start_label": "Firimitură",
+      "target": "n_v31_cleaning_floor_faras",
+      "target_label": "Făraș",
+      "optimal": 1,
+      "shortest_branch_profile": [
+        1,
+        1,
+        0
+      ],
+      "shortest_openers": [
+        "Făraș"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_food_firimitura",
+      "start_label": "Firimitură",
+      "target": "n_v31_cleaning_floor_aspirator",
+      "target_label": "Aspirator",
+      "optimal": 1,
+      "shortest_branch_profile": [
+        1,
+        1,
+        0
+      ],
+      "shortest_openers": [
+        "Aspirator"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_food_firimitura",
+      "start_label": "Firimitură",
+      "target": "n_v31_cleaning_floor_mop",
+      "target_label": "Mop",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Făraș"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_food_firimitura",
+      "start_label": "Firimitură",
+      "target": "n_v88_cleaning_matura",
+      "target_label": "Mătură",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Făraș"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_food_firimitura",
+      "start_label": "Firimitură",
+      "target": "n_v31_cleaning_dishes_burete_vase",
+      "target_label": "Burete de vase",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        2,
+        2,
+        2
+      ],
+      "shortest_openers": [
+        "Aspirator",
+        "Făraș"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_textile_scama",
+      "start_label": "Scamă",
+      "target": "n_v31_cleaning_floor_faras",
+      "target_label": "Făraș",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Aspirator"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_textile_scama",
+      "start_label": "Scamă",
+      "target": "n_v31_cleaning_floor_aspirator",
+      "target_label": "Aspirator",
+      "optimal": 1,
+      "shortest_branch_profile": [
+        1,
+        1,
+        0
+      ],
+      "shortest_openers": [
+        "Aspirator"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_textile_scama",
+      "start_label": "Scamă",
+      "target": "n_v31_cleaning_floor_mop",
+      "target_label": "Mop",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "Aspirator"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_textile_scama",
+      "start_label": "Scamă",
+      "target": "n_v88_cleaning_matura",
+      "target_label": "Mătură",
+      "optimal": 3,
+      "shortest_branch_profile": [
+        1,
+        1,
+        2
+      ],
+      "shortest_openers": [
+        "Aspirator"
+      ],
+      "old_same_endpoint_records": []
+    },
+    {
+      "start": "n_v90_textile_scama",
+      "start_label": "Scamă",
+      "target": "n_v31_cleaning_dishes_burete_vase",
+      "target_label": "Burete de vase",
+      "optimal": 2,
+      "shortest_branch_profile": [
+        1,
+        1,
+        1
+      ],
+      "shortest_openers": [
+        "Aspirator"
+      ],
+      "old_same_endpoint_records": []
+    }
+  ],
+  "lant_quality_hold": "Numeric alternative paths remain dominated by broad legacy household-textile or cleaning-tool co-occurrence links. No route is submitted; do not claim the five numeric passes as quality approval.",
+  "alchimie": "No authored round; exact old sparse recipe comparison required to detect incidental new common-neighbor crafting."
+}

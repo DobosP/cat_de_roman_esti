@@ -2,10 +2,10 @@
 
 Valid until: the next verified quality wave — then refresh this living checklist.
 
-Target: public anonymous beta for Romanian players. **V89 implements recoverable
-Conexiuni actions, one reviewed Mop round and four exact feedback corrections.
-Full integration is GREEN and V89 is landed locally at `143bfdb`. V90 starts household
-discovery and critique improvements; V88 remains in its ancestry at `000b0a2`.**
+Target: public anonymous beta for Romanian players. **V90 implements native household
+vocabulary, two reviewed targets, a directed-neighbor critique check and recoverable
+Alchimie actions. All final gates are GREEN; V90 awaits local landing. Main remains
+landed V89 `143bfdb`.**
 The recurring local iteration follows [ADR-0127](adr/0127-recurring-local-version-loop.md)
 until the owner stops it. No push or deployment occurred.
 Public rollout still requires the external checks below.
@@ -125,11 +125,21 @@ and Praf feedback; [ADR-0132](adr/0132-reconcile-uncertain-conexiuni-actions.md)
 recovery, earned clues and persistent read-only verification. No KG word, link or form is added.
 The following inventory is current; V88 evidence below remains its historical verification.
 
+V90 adds three concepts,17 directed links and ten grammatical forms, with zero synonyms.
+Two independently promoted Contexto targets (Făraș355/Aspirator356) bring eligibility238;
+pack661=653approved+8pending,491eligible overall. Praf becomes native, while a truthful
+plate/sponge bridge opens seven old kitchen nodes. A new C3 check warns on thin approved
+stock without changing eligibility. Alchimie recovers uncertain actions and one paid cue
+without mutation replay. Exact decisions and costs: [V90 review](reviews/v90-household-discovery-and-critique-gates/README.md)
+and [ADR-0134](adr/0134-directed-contexto-neighbor-floor.md),
+[ADR-0135](adr/0135-household-discovery-concepts.md),
+[ADR-0136](adr/0136-reconcile-uncertain-alchimie-actions.md).
+
 | Game | Total | Approved | Pending | Eligible / preferred |
 |---|---:|---:|---:|---:|
 | Alchimie | 83 | 80 | 3 | 80 eligible |
 | Conexiuni | 234 | 234 | 0 | 76 eligible |
-| Cald sau Rece | 242 | 240 | 2 | 236 eligible |
+| Cald sau Rece | 244 | 242 | 2 | 238 eligible |
 | Lanțul Cuvintelor | 100 | 97 | 3 | 97 eligible |
 | Intrusul | 183 | 183 | 0 | 144 preferred |
 | Perechi | 153 | 153 | 0 | 113 preferred |
@@ -189,6 +199,7 @@ improvements; the exact affected examples remain in the impact report.
 | V85 | Approximate ingredient guesses and misleading labels weakened otherwise familiar rounds | Eight concepts, 25 forms, 40 new links plus one relabelled relation; one served dairy clue corrected; four Contexto targets and one Lanț route. Full integration GREEN |
 | V86 | Weak preparation/cooling clues, hidden short routes and disappearing creation errors | Nine concepts, 30 forms, 41 links and six reviewed rounds; two exact feedback corrections; 59 old approved Lanț menus improve; all-six-game failure/replay recovery preserves state and action visibility. Full integration GREEN |
 | V87 | Weak snack-defining cues and lost paid/terminal action responses | Nine concepts, 31 forms, 50 directed links, six promoted Contexto targets and five bounded feedback repairs; owned authoritative recovery without mutation replay. Full 1,409 backend tests per runtime, 53 accounts each, 193 native/168 browser checks pass |
+| V90 | Household input gaps, weak directed discovery and lost Alchimie actions | Three concepts,17 links,10 forms,two targets; necessary C3 gate and owned Alchimie/clue recovery. Full frontend193/246 and both Python runtimes1608backend/53accounts pass; all16gatesGREEN. |
 | V89 | Lost Conexiuni actions, household feedback and directed-neighbor quality gaps | One Mop round, four exact feedback scopes, owned Conexiuni recovery; two candidates rejected under C3. Full integration GREEN: 1,531 backend tests per runtime, 53 accounts each, 193 native and 214 browser checks. |
 | V88 | Missing everyday tools, a false cream sense, inaccessible recipe-review tooling and lost Lanț actions | Seven concepts, 28 forms, 33 links added/one removed; one Alchimie and two Conexiuni rounds; portable projection-bound Alchimie review; owned Lanț action and earned-hint recovery. Frontend 193 native/188 browser checks GREEN; full backend 1,508 per runtime and accounts 53 each GREEN |
 

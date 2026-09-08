@@ -1,0 +1,22 @@
+import copy, hashlib, json, sys
+from pathlib import Path
+sys.path.insert(0, str(Path.cwd()))
+from scripts import critique_pack as cp, rank_games_pack as ranks
+pack, svc, strong, regions = cp.load_all(cp.PACKAGE_PACK, cp.PACKAGE_KG)
+_, _, selected = cp.run(pack, svc, strong, regions, ['contexto'], {'pending','approved'}, None)
+demoted = ranks._owner_demotions()
+rows = []
+for game, rec, findings in selected:
+    incoming = sorted({n for n in svc.predecessor_ids(rec['target']) if n != rec['target'] and svc.exists(n)}) if svc.exists(rec['target']) else []
+    old = cp.build_dossier(rec, game, svc, strong, findings, regions)
+    new = copy.deepcopy(old)
+    if len(incoming) < 5:
+        new['lint_findings'].append({'check': 'contexto_incoming_floor', 'level': 'WARN' if rec['status'] == 'approved' else 'FAIL', 'detail': 'proposed numeric audit'})
+    def profile(dossier):
+        familiarity = ranks.romanian_familiarity(game, dossier, lambda nid: ranks._service_salience(svc,nid))
+        quality = ranks.play_quality(game, rec, dossier, lambda a,b: ranks._service_edge_strength(svc,a,b))
+        return {'romanian_familiarity': familiarity, 'play_quality': quality, 'pilot_score': ranks._bounded_score(.6*familiarity+.4*quality), 'pilot_eligible': ranks._pilot_eligible(rec,game,dossier,svc,demoted)}
+    rows.append({'id':rec['id'], 'target':rec['target'], 'label':svc.label(rec['target']), 'status':rec['status'], 'incoming_ids':incoming, 'incoming_count':len(incoming), 'old':profile(old), 'with_proposed_finding':profile(new)})
+result={'baseline_main':'190d7fdb86487c641d8a781ef7a5ce21f2b98031','sha256':{str(p.relative_to(Path.cwd())):hashlib.sha256(p.read_bytes()).hexdigest() for p in [cp.PACKAGE_PACK,cp.PACKAGE_KG,cp.RUBRIC_PATH,Path.cwd()/'scripts/critique_pack.py',Path.cwd()/'scripts/rank_games_pack.py']},'rows':rows}
+Path('/home/dobo/work/_temp/feat__v90-household-discovery-and-critique-gates/critique/baseline-audit.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({'records':len(rows),'below_floor':[{'id':r['id'],'label':r['label'],'incoming':r['incoming_count'],'eligible':r['old']['pilot_eligible']} for r in rows if r['incoming_count']<5],'pending': [{'id':r['id'],'incoming':r['incoming_count']} for r in rows if r['status']=='pending'],'changed_rank_profiles':[r['id'] for r in rows if r['old'] != r['with_proposed_finding']]},ensure_ascii=False,indent=2))

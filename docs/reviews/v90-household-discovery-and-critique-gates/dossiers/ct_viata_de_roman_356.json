@@ -1,0 +1,153 @@
+{
+ "id": "ct_viata_de_roman_356",
+ "game": "contexto",
+ "category": "viata_de_roman",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "976564f0d7a20032e3a24a5214f3d828071d67401c9fbbdb17dbfc1dcdd2891f",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v31_cleaning_floor_aspirator",
+  "label": "Aspirator",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.94,
+  "degree": 2,
+  "incoming_degree": 8,
+  "description": "Aparat care trage praful și murdăria de pe podele și covoare."
+ },
+ "incoming_neighbor_floor": {
+  "minimum": 5,
+  "count": 8,
+  "sample": [
+   {
+    "id": "n_v24_home_surfaces_podea",
+    "label": "Podea"
+   },
+   {
+    "id": "n_v24_home_textiles_covor",
+    "label": "Covor"
+   },
+   {
+    "id": "n_v31_cleaning_floor_mop",
+    "label": "Mop"
+   },
+   {
+    "id": "n_v3sti_electricitate",
+    "label": "Electricitate"
+   },
+   {
+    "id": "n_v88_cleaning_matura",
+    "label": "Mătură"
+   },
+   {
+    "id": "n_v90_food_firimitura",
+    "label": "Firimitură"
+   },
+   {
+    "id": "n_v90_household_praf",
+    "label": "Praf"
+   },
+   {
+    "id": "n_v90_textile_scama",
+    "label": "Scamă"
+   }
+  ],
+  "sample_truncated": false,
+  "recognition_assessed": false
+ },
+ "reachable": 2353,
+ "strong_neighbors": [
+  {
+   "id": "n_v24_home_surfaces_podea",
+   "label": "Podea",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.84,
+   "degree": 7,
+   "incoming_degree": 2,
+   "description": "Concept cotidian din grupul «suprafețe și deschideri»: Podea.",
+   "strength": 0.99
+  },
+  {
+   "id": "n_v31_cleaning_floor_mop",
+   "label": "Mop",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.91,
+   "degree": 2,
+   "incoming_degree": 6,
+   "description": "Unealtă cu coadă și cap absorbant, folosită pentru a spăla podeaua.",
+   "strength": 0.96
+  },
+  {
+   "id": "n_v90_household_praf",
+   "label": "Praf",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.9,
+   "degree": 4,
+   "incoming_degree": 1,
+   "description": "Particule fine care plutesc în aer sau se depun pe suprafețe; aici, sensul de praf adunat la curățenie, nu pulberile alimentare.",
+   "strength": 0.9
+  },
+  {
+   "id": "n_v24_home_textiles_covor",
+   "label": "Covor",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.84,
+   "degree": 4,
+   "incoming_degree": 5,
+   "description": "Concept cotidian din grupul «textile din casă»: Covor.",
+   "strength": 0.85
+  },
+  {
+   "id": "n_v3sti_electricitate",
+   "label": "Electricitate",
+   "node_type": "concept",
+   "category": "stiinta",
+   "salience": 0.6206,
+   "degree": 12,
+   "incoming_degree": 8,
+   "description": "Fenomen legat de sarcini electrice și curent electric.",
+   "strength": 0.85
+  },
+  {
+   "id": "n_v90_food_firimitura",
+   "label": "Firimitură",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.9,
+   "degree": 2,
+   "incoming_degree": 2,
+   "description": "Bucățică foarte mică desprinsă din pâine sau din alt aliment, de exemplu dintr-un biscuit.",
+   "strength": 0.85
+  },
+  {
+   "id": "n_v90_textile_scama",
+   "label": "Scamă",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.85,
+   "degree": 1,
+   "incoming_degree": 3,
+   "description": "Fir textil scurt desprins dintr-o țesătură, întâlnit pe haine și pe textilele din casă.",
+   "strength": 0.85
+  },
+  {
+   "id": "n_v88_cleaning_matura",
+   "label": "Mătură",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.85,
+   "degree": 4,
+   "incoming_degree": 2,
+   "description": "Unealtă cu coadă și peri sau nuiele, folosită la strângerea prafului și a gunoiului de pe suprafețe.",
+   "strength": 0.8
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:9cf5aa49575af84a795641595d54c2db4ff149a6faea2481b17bf867f6f0a409"
+}

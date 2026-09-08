@@ -1,0 +1,271 @@
+{
+  "WORDS": [
+    "Praf",
+    "praful",
+    "prafului",
+    "prafuri",
+    "Praf de copt",
+    "Lapte praf",
+    "Firimitură",
+    "firimituri",
+    "firimiturile",
+    "firimiturii",
+    "firimiturilor",
+    "Scamă",
+    "scame",
+    "scamele",
+    "scamei",
+    "scamelor",
+    "Pâine",
+    "Biscuit",
+    "Haină",
+    "Covor",
+    "Pătură",
+    "Pulover",
+    "Făraș",
+    "Mătură",
+    "Mop",
+    "Aspirator",
+    "Electricitate",
+    "Farfurie",
+    "Apă",
+    "Burete de vase",
+    "Chiuvetă",
+    "Pământ",
+    "noroi",
+    "bolovan",
+    "Podea",
+    "Găleată",
+    "Detergent",
+    "a mătura",
+    "a aspira",
+    "a curăța",
+    "cârpă de praf",
+    "lavetă",
+    "perie de curățat",
+    "Tort Diplomat",
+    "Frișcă",
+    "Zacuscă",
+    "Cremșnit",
+    "Pișcot",
+    "Brioșă",
+    "Smântână",
+    "smântână pentru frișcă",
+    "Scaun",
+    "Taburet",
+    "murdărie",
+    "păr",
+    "păr de animale",
+    "sac",
+    "sac de praf",
+    "filtru",
+    "curent",
+    "măturat",
+    "aspirare",
+    "pardoseală",
+    "parchet",
+    "gresie",
+    "covoraș",
+    "cârpă",
+    "mâner",
+    "curățenie",
+    "gunoi"
+  ],
+  "NODES": [
+    {
+      "id": "n_v90_household_praf",
+      "label_ro": "Praf",
+      "category": "viata_de_roman",
+      "description": "Particule fine care plutesc în aer sau se depun pe suprafețe; aici, sensul de praf adunat la curățenie, nu pulberile alimentare.",
+      "aliases": [
+        "praful",
+        "prafului"
+      ],
+      "node_type": "concept",
+      "salience": 0.9
+    },
+    {
+      "id": "n_v90_food_firimitura",
+      "label_ro": "Firimitură",
+      "category": "gastronomie",
+      "description": "Bucățică foarte mică desprinsă din pâine sau din alt aliment, de exemplu dintr-un biscuit.",
+      "aliases": [
+        "firimituri",
+        "firimiturile",
+        "firimiturii",
+        "firimiturilor"
+      ],
+      "node_type": "concept",
+      "salience": 0.9
+    },
+    {
+      "id": "n_v90_textile_scama",
+      "label_ro": "Scamă",
+      "category": "viata_de_roman",
+      "description": "Fir textil scurt desprins dintr-o țesătură, întâlnit pe haine și pe textilele din casă.",
+      "aliases": [
+        "scame",
+        "scamele",
+        "scamei",
+        "scamelor"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    }
+  ],
+  "EDGES": [
+    {
+      "src": "n_v90_household_praf",
+      "dst": "n_v31_cleaning_floor_faras",
+      "relation": "collected_with",
+      "label_ro": "se adună cu fărașul",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.85
+    },
+    {
+      "src": "n_v90_household_praf",
+      "dst": "n_v88_cleaning_matura",
+      "relation": "swept_with",
+      "label_ro": "se strânge de pe podea cu mătura",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.85
+    },
+    {
+      "src": "n_v90_household_praf",
+      "dst": "n_v31_cleaning_floor_mop",
+      "relation": "collected_with",
+      "label_ro": "poate fi colectat de pe podea de un mop cu microfibre",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v90_household_praf",
+      "dst": "n_v31_cleaning_floor_aspirator",
+      "relation": "collected_with",
+      "label_ro": "se îndepărtează prin aspirare cu",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.9
+    },
+    {
+      "src": "n_v4gas_paine",
+      "dst": "n_v90_food_firimitura",
+      "relation": "crumbles_into",
+      "label_ro": "lasă bucățele mici când se taie sau se rupe",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.85
+    },
+    {
+      "src": "n_v24_food_snack_biscuit",
+      "dst": "n_v90_food_firimitura",
+      "relation": "crumbles_into",
+      "label_ro": "poate lăsa bucățele mici la rupere sau consum",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.85
+    },
+    {
+      "src": "n_v90_food_firimitura",
+      "dst": "n_v31_cleaning_floor_faras",
+      "relation": "collected_with",
+      "label_ro": "se adună de pe podea cu fărașul",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v90_food_firimitura",
+      "dst": "n_v31_cleaning_floor_aspirator",
+      "relation": "collected_with",
+      "label_ro": "se îndepărtează de pe podele sau covoare cu",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.85
+    },
+    {
+      "src": "n_v29_clothing_everyday_haina",
+      "dst": "n_v90_textile_scama",
+      "relation": "may_shed",
+      "label_ro": "poate lăsa fire textile scurte pe suprafață",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_home_textiles_patura",
+      "dst": "n_v90_textile_scama",
+      "relation": "may_shed",
+      "label_ro": "poate forma fire textile scurte desprinse",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_home_textiles_covor",
+      "dst": "n_v90_textile_scama",
+      "relation": "may_shed",
+      "label_ro": "unele covoare, mai ales din lână, lasă fire textile scurte",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v90_textile_scama",
+      "dst": "n_v31_cleaning_floor_aspirator",
+      "relation": "collected_with",
+      "label_ro": "se îndepărtează de pe podele și covoare prin aspirare cu",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.85
+    },
+    {
+      "src": "n_v24_home_textiles_covor",
+      "dst": "n_v31_cleaning_floor_aspirator",
+      "relation": "cleaned_with",
+      "label_ro": "se curăță periodic prin aspirare cu",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.85
+    },
+    {
+      "src": "n_v3sti_electricitate",
+      "dst": "n_v31_cleaning_floor_aspirator",
+      "relation": "powers",
+      "label_ro": "asigură energia de funcționare, din rețea sau acumulator",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.85
+    },
+    {
+      "src": "n_v30_kitchen_table_farfurie",
+      "dst": "n_v31_cleaning_dishes_burete_vase",
+      "relation": "cleaned_with",
+      "label_ro": "se poate spăla manual cu un burete de vase potrivit suprafeței",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v4gas_apa",
+      "dst": "n_v31_cleaning_dishes_burete_vase",
+      "relation": "used_with",
+      "label_ro": "umezește și clătește buretele folosit la spălarea vaselor",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_home_textiles_covor",
+      "dst": "n_v90_household_praf",
+      "relation": "may_shed",
+      "label_ro": "poate contribui cu fibre la praful din casă",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.7
+    }
+  ]
+}

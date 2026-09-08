@@ -1,0 +1,108 @@
+{
+  "reviewer": "v90_critique_independent",
+  "role": "independent implementation reviewer",
+  "decision": "accept",
+  "reviewed_at_utc": "2026-09-08T16:12:45.285518+00:00",
+  "baseline_main": "190d7fdb86487c641d8a781ef7a5ce21f2b98031",
+  "scope": "Incoming-neighbor critique implementation and coherent pre-graph V90 sidecars; no content or graph approval and no full integration claim.",
+  "source_sha256": {
+    "scripts/critique_pack.py": "0e0399d38ccd381f71380317c89e3d2564597d7ce573119e48a98bd581a12f13",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "tests/test_contexto_incoming_critique.py": "f970c05392cca356e7ae914d31bcf60ffc68a9a60bed52cabcf9f8f718efb75e",
+    "tests/test_critique_pack.py": "6fd11a46f6a105ca1b554969e29cfa9cd7239d1177aeb2873afde44f8741d8aa",
+    "docs/adr/0134-directed-contexto-neighbor-floor.md": "e55e05934670168be6f74c1013caf22471b4d688b3f74408e0860e6763d4e375",
+    "scripts/rank_games_pack.py": "612c40edab2ecdc8949333c10cc26e6162321aab9de40181ea42b35db554cb25",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/graph.py": "496b56900c46fec1f9aacbe3ab5c0bb220e06058d64da840aaadee405ab115b0",
+    "tests/test_build_review_artifact.py": "b996a52c0cf37d6cbbc30c9d07026212c40446b86dcadd3f774fb1d681c46dd0",
+    "tests/test_board_rankings_v37.py": "da9a8bd3a0d58bfb82e968aefcc0e36094da82750e02a827972d5d3fd4d3271d",
+    "scripts/build_review_artifact.py": "963c5671281934fa95ff30cda8a04344204f9ab78f0ffe191acc90d02984cd20",
+    "scripts/apply_rereview.py": "3da2a214612674f22edfeec11ffeebed02a9489ea93df78b812631e0a220ea5b",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+    "cat_de_roman_esti/wordgames/derived_catalog.py": "91c196ada2c9709751cc9defa304079826b587c3550371f874420ffc528240f2",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "407fa2f42ec907f41998f33e81d4d58f7fc345cbc733bede710518c34e441ac0",
+    "tests/fixtures/board_rankings_v37.json": "407fa2f42ec907f41998f33e81d4d58f7fc345cbc733bede710518c34e441ac0",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "898628613c710aebe4a8a478354b58a15529cd1719bd866f01fbf968f039173c",
+    "tests/fixtures/derived_catalog_v38.json": "898628613c710aebe4a8a478354b58a15529cd1719bd866f01fbf968f039173c"
+  },
+  "findings": [],
+  "checks": {
+    "directed_raw_edge_scan_nodes": 2413,
+    "all_existing_contexto_profiles": 242,
+    "changed_profiles": 0,
+    "numeric_floor": 5,
+    "bounded_dossier_sample_limit": 10,
+    "recognition_assessed": false,
+    "approved_warning_counts": {
+      "ct_geografie_030": 1,
+      "ct_geografie_031": 2,
+      "ct_istorie_309": 4,
+      "ct_muzica_070": 4
+    },
+    "pending_counts": {
+      "ct_meme_net_238": 8,
+      "ct_societate_257": 13
+    },
+    "automatic_demotion": false,
+    "ranking_rows_unchanged": 659,
+    "derived_rows_unchanged": 336,
+    "binding_version_unchanged": 1,
+    "prior_review_changes": [],
+    "author_gzip_archives_verified": 11
+  },
+  "test_receipts": [
+    {
+      "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_contexto_incoming_critique.py tests/test_critique_pack.py tests/test_build_review_artifact.py tests/test_board_rankings_v37.py -q -o addopts=",
+      "exit_code": 0,
+      "passed": 166,
+      "seconds": 88.9,
+      "deselected": 0,
+      "formerly_omitted_checks": [
+        "tests/test_board_rankings_v37.py::test_artifact_is_complete_exactly_bound_and_byte_identical",
+        "tests/test_board_rankings_v37.py::test_default_checker_is_green_and_prints_a_human_audit"
+      ],
+      "log": "independent/targeted-tests.log.gz"
+    },
+    {
+      "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python <scratch>/critique-review/independent_audit.py",
+      "exit_code": 0,
+      "log": "independent/independent-audit.log.gz"
+    }
+  ],
+  "archives": {
+    "targeted-tests.log": {
+      "path": "independent/targeted-tests.log.gz",
+      "raw_bytes": 271,
+      "raw_sha256": "1cbd3a766cf05c83b33f0fcd47c42123d8a8e02b009fdfa06484a246c43affa0",
+      "archive_sha256": "b32f628cc3fe077e2eb948e292ab4da20d49e17a266fc06af084c315fa5312e1",
+      "gzip_mtime": 0
+    },
+    "independent-audit.log": {
+      "path": "independent/independent-audit.log.gz",
+      "raw_bytes": 925,
+      "raw_sha256": "dd140341f3a50501a3592f1471ef2ab8021c5c1b6ce90c3f2f7b797309a55ffd",
+      "archive_sha256": "25890bd47ba5778118ba7e7aec6b1709efeda02f34999fc97eb36f96ff8e2871",
+      "gzip_mtime": 0
+    },
+    "independent-audit.json": {
+      "path": "independent/independent-audit.json.gz",
+      "raw_bytes": 286305,
+      "raw_sha256": "20c2b47170828bcbd731fb9c34f0833d7ec7aedb0841cb0d6736ea6b36bb3258",
+      "archive_sha256": "f56bef69d411e133c186455aff9cd658b3d91d71b1d3776a0ac0221f63fe14bd",
+      "gzip_mtime": 0
+    }
+  },
+  "audit_script": {
+    "path": "independent/independent_audit.py.txt",
+    "sha256": "f7c7e2b46ea3c6601fce7910796d3f5d77a10d29bcccc4ad8d01d90b0c455ac3"
+  },
+  "author_verification_sha256": "da95f5c2ae5d8b64a7f343b2e43dc5a71dd3337e737ba769a8cefedf94279fc3",
+  "limitations": [
+    "The count is a necessary numeric check, not a recognition or semantic judgment.",
+    "The four approved-stock warnings remain review debt under G4.",
+    "A later graph/content change requires new final integration and current bindings; these receipts preserve this intermediate exactly.",
+    "No new gameplay content is approved and no human playtest or public release is claimed."
+  ]
+}

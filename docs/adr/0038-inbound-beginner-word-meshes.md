@@ -1,7 +1,7 @@
 # ADR-0038: Add inbound-reachable beginner word meshes
 
 Date: 2026-07-18
-Status: accepted
+Status: partially superseded by ADR-0135 (seven kitchen-node sink boundary)
 
 ## Decision
 Add eighteen first-class easy concepts for farm animals, clothing, and kitchen/table
@@ -28,3 +28,10 @@ All old Contexto scores, 201 Lanț profiles, and 98 Alchimie profiles remain unc
 deterministic regeneration changes six gastronomy puzzles to exercise the kitchen mesh.
 Both critique reports and the 794-record pack remain byte-identical. The public mobile
 contract moves to `fixture-v30-farm-wardrobe-kitchen`; session TTL and caps do not change.
+
+## Partial supersession
+
+[ADR-0135](0135-household-discovery-concepts.md) adds the reviewed Farfurie→Burete
+relation, opening exactly the seven old kitchen concepts to the wider graph through
+the existing cleaning bridge. Its exact removal restores the prior boundary. The other
+mesh scopes and original V30 evidence remain unchanged historical decisions.

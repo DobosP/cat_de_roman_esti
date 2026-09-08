@@ -1,7 +1,8 @@
 # ADR-0068: Repair Contexto common-word feedback and require unique targets
 
-- Status: partially superseded by ADR-0074 (projection inventory) and ADR-0131
-  (six cleaning-node topology premise); other policy retained
+- Status: partially superseded by ADR-0074 (projection inventory), ADR-0131
+  (six cleaning-node topology premise) and ADR-0135 (seven kitchen-node boundary);
+  other policy retained
 - Date: 2026-07-30
 
 ## Context
@@ -52,3 +53,10 @@ The proxy inventory is intentionally closed: adding another scorer proxy, alias,
 surface, or target requires the same collision, semantic-anchor, non-winning, reachability,
 and exact-binding tests. A custom fixture missing a reviewed mature anchor falls back to
 the submitted node's ordinary graph behavior.
+
+## Further topology supersession
+
+[ADR-0135](0135-household-discovery-concepts.md) records the one reviewed plate/sponge
+bridge that also opens seven old kitchen nodes. Its exact control preserves the other
+old sink boundaries. The71 Contexto scorer mappings remain unchanged; native graph
+connectivity is measured separately from effective feedback.

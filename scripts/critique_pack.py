@@ -24,6 +24,9 @@ association language instead of a testable shared property;
 selected batch or the durable rejection tombstones; ``board_reskin`` catches
 half-board concept recycling, including previously rejected boards;
 ``label_self_leak`` catches labels that repeat one of their answers;
+``contexto_incoming_floor`` blocks pending targets with fewer than five unique
+incoming non-distractor neighbors and warns on approved stock; recognition still
+requires independent review;
 ``salience_floor`` flags Contexto/Lant/Alchimie targets below their difficulty band;
 ``lant_playability`` blocks Lanț records that fail the runtime's exact-distance or
 shortest-path choice floors; ``lant_rejection_debt`` blocks exact directed start/target
@@ -89,6 +92,9 @@ REVIEW_BINDING_VERSION = 1
 
 # Rubric C6: WARN floor for target/endpoint salience per declared difficulty.
 SALIENCE_FLOORS = {"usor": 0.60, "normal": 0.35, "greu": 0.20}
+# Rubric C3: necessary numerical floor, not a recognition or approval judgment.
+CONTEXTO_INCOMING_FLOOR = 5
+CONTEXTO_INCOMING_SAMPLE_LIMIT = 10
 # Rubric B5: an edge this strong makes a cross-group pair "plausibly confusable".
 STRONG_EDGE = 0.6
 # Rubric B5: this many disjoint strong pairs between two groups = a mirror.
@@ -874,6 +880,37 @@ def check_target_salience(rec: dict, svc: WordGameService, *targets: str) -> lis
     return findings
 
 
+def contexto_incoming_ids(svc: WordGameService, target: str) -> list[str]:
+    """Unique existing guess-to-target neighbors, excluding the answer itself.
+
+    The service already expands bidirectional edges, deduplicates parallel edges,
+    and removes distractors. Do not substitute outgoing or union adjacency here.
+    """
+    if not svc.exists(target):
+        return []
+    return sorted({
+        node_id for node_id in svc.predecessor_ids(target)
+        if node_id != target and svc.exists(node_id)
+    })
+
+
+def check_contexto_incoming_floor(rec: dict, svc: WordGameService) -> list[dict]:
+    """Fail an impossible pending C3 claim; queue approved stock for review only."""
+    incoming = contexto_incoming_ids(svc, str(rec.get("target", "")))
+    if len(incoming) >= CONTEXTO_INCOMING_FLOOR:
+        return []
+    # At most four IDs: the finding stays bounded even on a large graph.
+    return [{
+        "check": "contexto_incoming_floor",
+        "level": "WARN" if rec.get("status") == "approved" else "FAIL",
+        "detail": f"{len(incoming)} unique existing non-distractor incoming neighbors "
+                  f"< {CONTEXTO_INCOMING_FLOOR}, excluding the target itself "
+                  f"(ids: {', '.join(incoming) or 'none'}); "
+                  "five recognizable predecessors are impossible; "
+                  "recognition still requires independent review",
+    }]
+
+
 def check_lant_playability(rec: dict, svc: WordGameService) -> list[dict]:
     """Expose the runtime Lanț validator as a fail-closed promotion lint."""
     return [
@@ -1216,6 +1253,17 @@ def build_dossier(rec: dict, game: str, svc: WordGameService, strong: dict,
     elif game == "contexto":
         target = rec["target"]
         dossier["target"] = node_brief(svc, target)
+        incoming = contexto_incoming_ids(svc, target)
+        dossier["incoming_neighbor_floor"] = {
+            "minimum": CONTEXTO_INCOMING_FLOOR,
+            "count": len(incoming),
+            "sample": [
+                _concept_ref(svc, node_id)
+                for node_id in incoming[:CONTEXTO_INCOMING_SAMPLE_LIMIT]
+            ],
+            "sample_truncated": len(incoming) > CONTEXTO_INCOMING_SAMPLE_LIMIT,
+            "recognition_assessed": False,
+        }
         dossier["reachable"] = len(svc.distances_to(target))
         neigh = []
         for predecessor in svc.predecessor_ids(target):
@@ -1368,6 +1416,7 @@ def run(pack: dict, svc: WordGameService, strong: dict, regions: dict,
                         })
             elif game == "contexto":
                 findings = check_target_salience(rec, svc, rec["target"])
+                findings.extend(check_contexto_incoming_floor(rec, svc))
             elif game == "lant":
                 findings = check_target_salience(rec, svc, rec["start"], rec["target"])
                 findings.extend(check_lant_playability(rec, svc))
@@ -1488,6 +1537,7 @@ def main(argv: list[str]) -> int:
     report = {
         "thresholds": {
             "salience_floors": SALIENCE_FLOORS, "strong_edge": STRONG_EDGE,
+            "contexto_incoming_floor": CONTEXTO_INCOMING_FLOOR,
             "mirror_pairs": MIRROR_PAIRS, "red_herring_warn": RED_HERRING_WARN,
             "red_herring_fail": RED_HERRING_FAIL, "member_overuse": MEMBER_OVERUSE,
             "board_overlap_fail": BOARD_OVERLAP_FAIL,

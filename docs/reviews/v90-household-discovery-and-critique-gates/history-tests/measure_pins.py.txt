@@ -1,0 +1,72 @@
+"""Measure final artifact/runtime expectations after the orchestrator's freeze."""
+import hashlib
+import json
+import os
+from collections import Counter
+from pathlib import Path
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django
+django.setup()
+from django.test import Client
+from cat_de_roman_esti.wordgames import contexto as C
+from cat_de_roman_esti.wordgames import contexto_projection as P
+from cat_de_roman_esti.wordgames.packs import _closure_generations, _opening_pairs
+from cat_de_roman_esti.wordgames.service import get_service
+from tests.content_history import before_v84_pack
+from tests.current_content import CURRENT_CONTENT
+
+root = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates')
+files = ['cat_de_roman_esti/fixtures/'+n for n in (
+ 'kg_sample.json','games_pack.json','board_rankings_v37.json','derived_catalog_v38.json')]
+files.append('tests/fixtures/cat_mobile_app_pack_contract.json')
+raw = {Path(f).name:json.loads((root/f).read_bytes()) for f in files}
+kg,pack,rank,derived,mobile=(raw[Path(f).name] for f in files)
+sha=lambda blob:hashlib.sha256(blob).hexdigest()
+canonical=lambda value:sha(json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
+pretty=lambda value:sha((json.dumps(value,ensure_ascii=False,indent=1)+'\n').encode())
+svc=get_service()
+contexto={r['id']:sorted(svc.distances_to(r['target']).items()) for r in pack['contexto']}
+historical_pack=before_v84_pack(pack)
+closure={r['id']:{'opening_pairs':_opening_pairs(svc,r['seeds'],r.get('category')),
+                   'generations':sorted(_closure_generations(svc,r['seeds'],r.get('category')).items())}
+         for r in historical_pack['alchimie']}
+family=C._build_session('n_v4soc_familie','usor',None)
+family_ranks={C._score_feedback(svc,family,svc.resolve(w)).rank for w in ('mamă','tată','bunică','bunic','frate','soră')}
+assert len(family_ranks)==1
+clatite=C.store.create(C._build_session(svc.resolve('clătite'),'usor',None))
+client=Client()
+try:
+ openers={}
+ for word in CURRENT_CONTENT.clatite_opener_ranks:
+  response=client.post(f'/api/wordgames/contexto/games/{clatite}/guess',{'text':word},content_type='application/json')
+  assert response.status_code==200
+  openers[word]=response.json()['guess']['rank']
+finally:C.store.delete(clatite)
+result={
+ 'artifact_sha256':{f:sha((root/f).read_bytes()) for f in files},
+ 'build_version':kg['meta']['build_version'],
+ 'payload_sha256':{
+  'ranking_rows':pretty(rank['boards']),'frozen_derived_boards':pretty(derived['boards']),
+  'kg_nodes_without_aliases':canonical([{k:v for k,v in n.items() if k!='aliases'} for n in kg['kg_nodes']]),
+  'kg_edges':canonical(kg['kg_edges']),'kg_puzzles':canonical(kg['kg_puzzles']),
+  'contexto_profile':canonical(contexto),'alchimie_closure_profile':canonical(closure),
+  'mobile_content':mobile['manifest']['content_hash'].removeprefix('sha256:'),
+ },
+ 'kg_counts':{'nodes':len(kg['kg_nodes']),'edges':len(kg['kg_edges']),
+              'aliases':sum(len(n.get('aliases',[])) for n in kg['kg_nodes']),'puzzles':len(kg['kg_puzzles'])},
+ 'mobile_counts':mobile['manifest']['counts'], 'pack_counts':pack['meta']['counts'],
+ 'pack_id_high_water':pack['meta']['id_high_water'],
+ 'status_counts':dict(Counter(r['status'] for game in ('conexiuni','contexto','lant','alchimie') for r in pack[game])),
+ 'game_inventory':{g:[len(pack[g]),sum(r['status']=='approved' for r in pack[g]),sum(r['status']=='pending' for r in pack[g])]
+                    for g in ('conexiuni','contexto','lant','alchimie')},
+ 'ranking_counts':rank['meta']['counts'],'derived_counts':derived['meta']['counts'],
+ 'feedback_observations':{
+  'food_responsive':C._responsive_count(svc.distances_to('n_v4gas_mancare')),
+  'food_direct_projections':sum(t.anchor_id=='n_v4gas_mancare' for t in P.PROJECTION_TERMS),
+  'family_member_rank':next(iter(family_ranks)),
+ },
+ 'clatite_opener_ranks':openers,'projection_terms':len(P.PROJECTION_TERMS),
+ 'projection_domains':len({t.domain for t in P.PROJECTION_TERMS}),
+}
+print(json.dumps(result,ensure_ascii=False,indent=2))

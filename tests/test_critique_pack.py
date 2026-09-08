@@ -993,7 +993,9 @@ def test_run_over_real_pack_is_bounded_and_typed(loaded):
     for info in items.values():
         assert info["game"] == "contexto"
         for finding in info["findings"]:
-            assert finding["check"] in ("salience_floor", "generic_region_link")
+            assert finding["check"] in (
+                "salience_floor", "generic_region_link", "contexto_incoming_floor",
+            )
             assert finding["level"] == "WARN"
 
 

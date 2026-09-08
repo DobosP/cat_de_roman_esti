@@ -1,0 +1,112 @@
+#!/usr/bin/env python3
+"""Compare complete read-only captures; never promote or regenerate content."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+
+parser = argparse.ArgumentParser()
+parser.add_argument("baseline", type=Path)
+parser.add_argument("candidate", type=Path)
+parser.add_argument("out", type=Path)
+args = parser.parse_args()
+before, after = [json.loads(path.read_text()) for path in (args.baseline, args.candidate)]
+assert before["inputs_sha256"] == after["inputs_sha256"]
+assert "direct_routes" in before and "direct_routes" in after, "capture incomplete"
+report = {
+    "captures": {str(path.name): hashlib.sha256(path.read_bytes()).hexdigest() for path in (args.baseline, args.candidate)},
+    "pack": {}, "derived": {}, "alchimie": {}, "lant": {}, "contexto": {},
+}
+
+for game, initial in before["pack"].items():
+    current = after["pack"][game]
+    report["pack"][game] = {
+        "old_records": len(initial["records"]),
+        "old_records_changed": [key for key, value in initial["records"].items() if current["records"].get(key) != value],
+        "records_added": sorted(set(current["records"]) - set(initial["records"])),
+        "eligible_before_after": [len(initial["eligible"]), len(current["eligible"])],
+        "eligible_removed": sorted(set(initial["eligible"]) - set(current["eligible"])),
+    }
+for game, initial in before["derived"].items():
+    current = after["derived"][game]
+    report["derived"][game] = {
+        "old_boards": len(initial["boards"]),
+        "old_board_metadata_changed": [key for key, value in initial["boards"].items() if current["boards"].get(key) != value],
+        "old_payloads_changed": [key for key, value in initial["payloads"].items() if current["payloads"].get(key) != value],
+        "boards_added": sorted(set(current["boards"]) - set(initial["boards"])),
+        "preferred_before_after": [len(initial["preferred"]), len(current["preferred"])],
+        "preferred_removed": sorted(set(initial["preferred"]) - set(current["preferred"])),
+        "starter_removed": sorted(set(initial["starter"]) - set(current["starter"])),
+    }
+changes = []
+for key, initial in before["alchimie"].items():
+    current = after["alchimie"][key]
+    if initial["projection_sha256"] != current.get("projection_sha256"):
+        changes.append({
+            "id": key,
+            "before": initial,
+            "after": current,
+        })
+report["alchimie"] = {
+    "old_records": len(before["alchimie"]),
+    "projection_changes": changes,
+    "invalid_after": {key: row["errors"] for key, row in after["alchimie"].items() if row["errors"]},
+    "missing_projections_after": [key for key, row in after["alchimie"].items() if row.get("projection") is None],
+    "target_unreachable_after": [key for key, row in after["alchimie"].items() if not row.get("target_reachable", False)],
+    "bounds_failures_after": {key: row["bounds"] for key, row in after["alchimie"].items() if "bounds" in row and not all(row["bounds"].values())},
+}
+report["lant"] = {
+    "old_records": len(before["lant"]),
+    "changed": {key: {"before": value, "after": after["lant"][key]} for key, value in before["lant"].items() if after["lant"][key] != value},
+    "invalid_after": {key: row["errors"] for key, row in after["lant"].items() if row["errors"]},
+}
+report["contexto"]["old_records"] = len(before["contexto"])
+report["contexto"]["invalid_after"] = {key: row["errors"] for key, row in after["contexto"].items() if row["errors"]}
+report["contexto"]["by_word"] = {}
+report["contexto"]["changes"] = []
+for word, resolution in before["inputs"].items():
+    changed = []
+    for key, old in before["contexto"].items():
+        initial = old["words"][word]
+        current = after["contexto"][key]["words"][word]
+        if initial != current:
+            changed.append(key)
+            report["contexto"]["changes"].append({"id": key, "target": old["target"], "word": word, "before": initial, "after": current})
+    after_rows = [after["contexto"][key]["words"][word] for key in before["contexto"]]
+    report["contexto"]["by_word"][word] = {
+        "resolution_before": resolution, "resolution_after": after["inputs"][word],
+        "changed": len(changed), "unchanged": len(before["contexto"]) - len(changed),
+        "accepted_after": sum(bool(row["ok"]) for row in after_rows),
+        "wins_after": sum(bool(row["won"]) for row in after_rows),
+        "hot_after": sum(row["guess"]["temperature"] == "Fierbinte" for row in after_rows),
+    }
+report["direct_routes"] = {
+    "count": len(after["direct_routes"]),
+    "absent_node_before": sum(bool(row.get("missing_node")) for row in before["direct_routes"]),
+    "new_wins": sum(bool(current.get("api", {}).get("won")) and not old.get("api", {}).get("won") for old, current in zip(before["direct_routes"], after["direct_routes"], strict=True)),
+    "failures_after": [row for row in after["direct_routes"] if not row.get("api", {}).get("won") or row["api"].get("moves") != 1],
+}
+report["lant_guidance"] = {
+    "old_records": len(before["lant_choices"]),
+    "changed": {key: {"before": value, "after": after["lant_choices"][key]}
+                for key, value in before["lant_choices"].items()
+                if after["lant_choices"][key] != value},
+    "shortest_options_shown_before_after": [
+        sum(len(row["shortest_hops_shown"]) for row in capture["lant_choices"].values())
+        for capture in (before, after)
+    ],
+    "boards_with_fewer_shortest_options_shown": [
+        key for key, value in before["lant_choices"].items()
+        if len(after["lant_choices"][key]["shortest_hops_shown"]) < len(value["shortest_hops_shown"])
+    ],
+    "bounds_failures_after": [key for key, value in after["lant_choices"].items()
+                              if not value["within_bound"]],
+}
+args.out.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n")
+summary = {key: value for key, value in report.items() if key not in {"contexto", "alchimie", "lant_guidance"}}
+summary["alchimie"] = {key: value for key, value in report["alchimie"].items() if key != "projection_changes"}
+summary["alchimie"]["changed_ids"] = [row["id"] for row in changes]
+summary["contexto"] = {key: value for key, value in report["contexto"].items() if key != "changes"}
+summary["lant_guidance"] = {key: value for key, value in report["lant_guidance"].items() if key != "changed"}
+summary["lant_guidance"]["changed_ids"] = sorted(report["lant_guidance"]["changed"])
+print(json.dumps(summary, ensure_ascii=False, indent=2))

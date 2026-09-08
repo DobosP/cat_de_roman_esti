@@ -1,6 +1,6 @@
 # ADR-0133: Improve specific dust and whipped-cream cues without broad retargeting
 
-- Status: accepted
+- Status: partially superseded by ADR-0135 for Praf ownership/fallback
 - Date: 2026-09-08
 
 ## Context
@@ -45,3 +45,10 @@ old-target responses on unchanged graph bytes. Existing pastry and household ran
 costs outside these four word/target scopes remain visible. Household round approval
 still requires its own full rubric, bound dossiers and independent promotion judgments.
 Evidence is in `docs/reviews/v89-feedback-and-conexiuni-recovery/`.
+
+## Partial supersession
+
+[ADR-0135](0135-household-discovery-concepts.md) replaces the projected Praf identity and
+its three-target neighborhood with a native dust owner and reviewed direct graph uses.
+The native Tort Diplomat→Frișcă pair remains accepted and unchanged. The original
+V89 proposal, implementation and projection-only tests remain historical evidence.

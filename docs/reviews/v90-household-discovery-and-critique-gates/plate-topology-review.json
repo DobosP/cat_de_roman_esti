@@ -1,0 +1,123 @@
+{
+  "decision": "accept_exact_plate_bridge_topology_consequence",
+  "baseline_commit": "190d7fdb86487c641d8a781ef7a5ce21f2b98031",
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363"
+  },
+  "root_audit_sha256": "17b8629c2c25f62de4f0fc4ab7b7cf3f9fb70eadc8775f1db5a57d0f836d5087",
+  "old_unique_runtime_eligible_targets": 236,
+  "proxy_mapping_count": 71,
+  "opened_sets": {
+    "before": [
+      "n_v31_cleaning_dishes_burete_vase",
+      "n_v31_cleaning_floor_aspirator",
+      "n_v31_cleaning_floor_faras",
+      "n_v31_cleaning_floor_mop",
+      "n_v31_cleaning_supply_detergent",
+      "n_v31_cleaning_water_galeata"
+    ],
+    "after": [
+      "n_v30_kitchen_cookware_oala",
+      "n_v30_kitchen_cookware_tigaie",
+      "n_v30_kitchen_drink_cana",
+      "n_v30_kitchen_table_castron",
+      "n_v30_kitchen_table_farfurie",
+      "n_v30_kitchen_utensil_furculita",
+      "n_v30_kitchen_utensil_lingura",
+      "n_v31_cleaning_dishes_burete_vase",
+      "n_v31_cleaning_floor_aspirator",
+      "n_v31_cleaning_floor_faras",
+      "n_v31_cleaning_floor_mop",
+      "n_v31_cleaning_supply_detergent",
+      "n_v31_cleaning_water_galeata"
+    ],
+    "without_bridge": [
+      "n_v31_cleaning_dishes_burete_vase",
+      "n_v31_cleaning_floor_aspirator",
+      "n_v31_cleaning_floor_faras",
+      "n_v31_cleaning_floor_mop",
+      "n_v31_cleaning_supply_detergent",
+      "n_v31_cleaning_water_galeata"
+    ]
+  },
+  "newly_opened": [
+    {
+      "id": "n_v30_kitchen_cookware_oala",
+      "label": "Oală"
+    },
+    {
+      "id": "n_v30_kitchen_cookware_tigaie",
+      "label": "Tigaie"
+    },
+    {
+      "id": "n_v30_kitchen_drink_cana",
+      "label": "Cană"
+    },
+    {
+      "id": "n_v30_kitchen_table_castron",
+      "label": "Castron"
+    },
+    {
+      "id": "n_v30_kitchen_table_farfurie",
+      "label": "Farfurie"
+    },
+    {
+      "id": "n_v30_kitchen_utensil_furculita",
+      "label": "Furculiță"
+    },
+    {
+      "id": "n_v30_kitchen_utensil_lingura",
+      "label": "Lingură"
+    }
+  ],
+  "exact_bridge": {
+    "id": "de8797",
+    "src_id": "n_v30_kitchen_table_farfurie",
+    "dst_id": "n_v31_cleaning_dishes_burete_vase",
+    "relation": "cleaned_with",
+    "label_ro": "se poate spăla manual cu un burete de vase potrivit suprafeței",
+    "strength": 0.8,
+    "is_distractor": 0,
+    "bidirectional": 0
+  },
+  "representative_target": "n_v31_cleaning_floor_faras",
+  "reachable_counts": {
+    "before": 2343,
+    "after": 2353,
+    "without_bridge": 2346
+  },
+  "semantics": "True qualified plate-to-dish-sponge manual-cleaning relation connects an old kitchen component through Farfurie; no proxy entries or scorer implementation are added. The consequence is broader native reachability for seven kitchen concepts, not seven new concepts, aliases, proxies or rounds.",
+  "judgment": "Accept the truthful directed bridge and disclose the topology change; do not pretend the six-node opening invariant still holds. All-target feedback/Alchimie/Lant/derived impacts and exact regressions remain integration gates. Burete hidden target stays dropped because its legacy Farfurie-to-Masa scoring proxy remains.",
+  "reviewer": "v90_critique_independent",
+  "archives": {
+    "plate-topology-initial.log": {
+      "path": "final-analyst/plate-topology-initial.log.gz",
+      "raw_bytes": 292,
+      "raw_sha256": "a89ba3d76d0c936c588284675305ca54910b92e0f9b38d7cddab3fce0f94645a",
+      "archive_sha256": "e0b15e386e35c43eabffc18f4da99f293dfbf6d3a815674f1e851ab14ae752db",
+      "gzip_mtime": 0
+    },
+    "plate-topology.log": {
+      "path": "final-analyst/plate-topology.log.gz",
+      "raw_bytes": 288,
+      "raw_sha256": "2c0bad90f3a5f96074e5f8708bcadd09294d9a982aca741209ecf1898700bb47",
+      "archive_sha256": "7adaaf0218ad94d6f761a79e5a9b1256338c7239893e941d38505bede8aeecb2",
+      "gzip_mtime": 0
+    }
+  },
+  "scripts": {
+    "plate_topology_initial.py": {
+      "path": "final-analyst/plate_topology_initial.py.txt",
+      "sha256": "936767e01d8add7374deafd6c792edae30d4b07effb12ebe45e02b0135fc766d"
+    },
+    "plate_topology.py": {
+      "path": "final-analyst/plate_topology.py.txt",
+      "sha256": "a4133635c0422a3d62ceeaa3aec89b1d2ee45c1d36d6bc3afbb3caa469740dae"
+    }
+  },
+  "initial_probe_correction": "The reviewer initially selected all237 unique approved targets rather than236 old runtime-eligible targets. The explicit baseline ranking eligibility selection excludes held Refren viral and matches the root audit scope; initial script/log are preserved.",
+  "analyst_artifact_sha256": "5cdd33ea41ba27251bebf857ea761ad9cd40b52c2d93c9f8b0bf74136a8ea07f",
+  "analyst_judgment_change": false
+}

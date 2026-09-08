@@ -1,0 +1,9 @@
+{
+  "phase": "Pre-apply root binding check correction",
+  "initial_issue": "Root checked nonexistent graph_proposal_sha256 on the factual review; its actual field is graph_sha256. The shell did not stop after that assertion and the separately authorized supported graph apply began. No parallel mutation was started.",
+  "corrected_result": "The factual graph_sha256 and quality graph_proposal_sha256 both match the already accepted exact module payload. No evidence or graph payload was changed.",
+  "graph_sha256": "672ea9f249ec9f18dbc51c24427580b61e98abbaef2b7b3a6d0fd5c557d395ba",
+  "factual_review_sha256": "3071621247423b4c181a966fbd98f35f62ff31d7e36768ae3c1ef451a8e74629",
+  "quality_review_sha256": "bd1d350e2f59cbd97562ae4427835934b7a49e4425558cbe79afcbe5d94faaa6",
+  "future_dependency_control": "Use fail-fast shell guards before dependent commands; observe supported apply completion before the next mutation."
+}

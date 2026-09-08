@@ -860,6 +860,7 @@ _EXISTING_KG_SURFACES = frozenset(
         "brioșă",
         "mătură",
         "taburet",
+        "praf",
         "compot",
         "interfon",
         "tricou",
@@ -1226,16 +1227,6 @@ class ProjectionNeighborhood:
 # Socată edge and all multi-hop routes. Named filled pastries use exact-target-only
 # feedback; elsewhere Gem's existing anchor is retained.
 PROJECTION_NEIGHBORHOODS: dict[str, ProjectionNeighborhood] = {
-    # Fine household dust is relevant only to these reviewed cleaning targets.
-    # Keep the landscape meaning and public identity everywhere else.
-    "praf": ProjectionNeighborhood(
-        "n_v24_nature_world_pamant", min_strength=0.60, include_direct_neighbors=False,
-        exact_target_ids=frozenset({
-            "n_v31_cleaning_floor_faras",
-            "n_v31_cleaning_floor_mop",
-            "n_v31_cleaning_floor_aspirator",
-        }),
-    ),
     "gem": ProjectionNeighborhood(
         "n_v17gas_dulceata", min_strength=0.60,
         exact_target_ids=frozenset({"n_v21gas_cornulete", "n_v17gas_gogosi"}),

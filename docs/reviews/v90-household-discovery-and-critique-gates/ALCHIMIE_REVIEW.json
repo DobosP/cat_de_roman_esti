@@ -1,0 +1,194 @@
+{
+  "version": 90,
+  "decision": "accept",
+  "independent": true,
+  "reviewed_at_utc": "2026-09-08T16:28:45.553729+00:00",
+  "valid_until": "Any reviewed Alchimie behavior source or test changes; final V90 graph/content integration remains a separate gate.",
+  "baseline": "190d7fdb86487c641d8a781ef7a5ce21f2b98031",
+  "reviewed_branch_head": "be4a4415605feaf7323f38503e805c35aa52dee1",
+  "scope": "Independent Alchimie recovery source, privacy/bounds, development evidence and desktop/mobile visual review. No implementation authorship or source mutation.",
+  "findings": [],
+  "behavior_source_bindings": {
+    "frontend/src/screens/Alchimie.tsx": "b6802da5b5d32b7fdaca647a907a0a6881a5c3a09c34f14e87065edf4cfff403",
+    "frontend/src/api/alchimie.ts": "bc2ec047be8e4365da9c6c77eda70dc0b4a4c9d620e4d9d87ae412704325d6f2",
+    "cat_de_roman_esti/wordgames/alchimie.py": "4ffd2eaf65b5e942992d7d84b52b8e221f1e2c7dfb7edff19fe35e0e74236ec8",
+    "tests/test_v90_alchimie_hint_recovery.py": "4fa58353b5a3c61e3fb414683ef47a28687fb9c895bf55d8d9cfec053dbce464",
+    "frontend/e2e/alchimie-action-recovery.spec.mjs": "42e12e20cf81ab10a4a1cc31d2203caeb11900de61360373a002512fe140c9c0",
+    "frontend/tests/alchimie-empty-recovery.test.mjs": "e1a862dfd1a9aae059d39ede9aad0f0486709e6480f1475d86522ac41b26b66e",
+    "frontend/tests/alchimie-lineage.test.mjs": "8043562201588a955cdb92dec5e20a26e3c057d48b6f9d847f7e3d8649fa84ca",
+    "frontend/tests/alchimie-projection.test.mjs": "f0d760b388b83a6d065a593f3e3edd9fb0e54df3436783daa641eb94be93aca2",
+    "docs/adr/0136-reconcile-uncertain-alchimie-actions.md": "96cbeec7efb9d5b877bf0c9fb48188cd450345fbe3ed61e322140b5753d8c374",
+    "docs/MOBILE_CONTRACT.md": "07585fdbc3696efc9cc472e23c008844108c63d4554f3478027dbf56c0e1356a"
+  },
+  "behavior_bindings_unchanged_at_seal": true,
+  "lane_record_bindings": {
+    "verification.json": "3c2ea75a824d457ba71c2c2ecbb2d263d585e070b723830920ff500fb4b2c4e4",
+    "baseline-proof.json": "203676422558eee7d0264636608ebb582623a8fc8fcbd443bd236b119b7fce54",
+    "preserved-behavior.json": "68d6643278215661bc1b5494820babb5eaa0a501d6f46b308d66ce90d9f17407",
+    "README.md": "8b89de27c79725dc6ac734e83d71ac25e2b1110f7abb6a5698b9473e0c91b89f"
+  },
+  "audit": {
+    "candidate_sources": 10,
+    "baseline_sources": 8,
+    "pregraph_development_bindings": 18,
+    "unchanged_shared_or_other_sources": 14,
+    "lossless_archives_and_raw_matches": 43,
+    "original_images_and_raw_matches": 29,
+    "completed_baseline_cases": 4,
+    "issues": []
+  },
+  "reviewed_invariants": [
+    "One owned GET after uncertain combine/hint/reset; no POST replay callback.",
+    "Synchronous lock and saved-id guards cover current, changed, stale, missing and unmounted actions.",
+    "Failed verification retains persistent retry and locks all bench/mutation controls; fresh-game navigation remains available.",
+    "GET restores server inventory/earned cue/terminal state with neutral feedback; it does not invent lost discovered/already_tried verdicts.",
+    "One earned_hint contains exactly four server-authored public fields; no private target/output id or recipe/route is exposed.",
+    "Successful paid hints replace one cue; GET/rejected/free-repeat preserve; accepted unique combine, win and reset clear it; defensive no-forward hint does not charge.",
+    "TTL7200s,1000sessions/game,session locks,64KiB request cap,32projected concepts,496unique pairs,12browser reactions remain unchanged.",
+    "Existing score receipt remains once per game; stale action replies cannot adopt terminal state or erase another saved pointer."
+  ],
+  "independent_probe": {
+    "command": "PATH=/home/dobo/.nvm/versions/node/v24.19.0/bin:/home/dobo/work/cat_de_roman_esti/.venv/bin:$PATH CDR_E2E_PORT=8189 node <worktree>/frontend/node_modules/@playwright/test/cli.js test --config <scratch>/alchimie-review/playwright.config.mjs",
+    "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates",
+    "node": "24.19.0",
+    "python": "3.12.3",
+    "port": 8189,
+    "port_unbound_before_and_after": true,
+    "existing_server_reused": false,
+    "exit_code": 0,
+    "passed": 2,
+    "failed": 0,
+    "duration_seconds": 15.9,
+    "retries": 0,
+    "first_attempt": true,
+    "receipts": [
+      {
+        "project": "desktop",
+        "counts": {
+          "reads": 4,
+          "mutations": 1
+        },
+        "hints_used": 1,
+        "earned_hint": {
+          "hint": null,
+          "hint_kind": "output",
+          "hint_output": {
+            "label": "Club sportiv"
+          },
+          "message": "Indiciu: caută mai întâi «Club sportiv»."
+        },
+        "bench_preserved_after_failed_reads": 3,
+        "successful_read_cleared_selection": true
+      },
+      {
+        "project": "mobile",
+        "counts": {
+          "reads": 4,
+          "mutations": 1
+        },
+        "hints_used": 1,
+        "earned_hint": {
+          "hint": null,
+          "hint_kind": "output",
+          "hint_output": {
+            "label": "Club sportiv"
+          },
+          "message": "Indiciu: caută mai întâi «Club sportiv»."
+        },
+        "bench_preserved_after_failed_reads": 3,
+        "successful_read_cleared_selection": true
+      }
+    ]
+  },
+  "visual_qa": {
+    "inspected": [
+      "focused-results--alchimie-action-recovery-f-2d544-ons-and-retries-by-GET-only-desktop--read-only-recovery.png",
+      "focused-results--alchimie-action-recovery-f-2d544-ons-and-retries-by-GET-only-mobile--read-only-recovery.png",
+      "focused-results--alchimie-action-recovery-l-55c6c-terminal-score-exactly-once-desktop--recovered-win.png",
+      "focused-results--alchimie-action-recovery-l-55c6c-terminal-score-exactly-once-mobile--recovered-win.png",
+      "focused-results--alchimie-action-recovery-l-a3d5e-sume-without-another-charge-desktop--recovered-hint-2.png",
+      "focused-results--alchimie-action-recovery-l-a3d5e-sume-without-another-charge-mobile--recovered-hint-2.png",
+      "focused-results--alchimie-action-recovery-l-cb234-sume-without-another-charge-desktop--recovered-hint-1.png",
+      "focused-results--alchimie-action-recovery-l-cb234-sume-without-another-charge-mobile--recovered-hint-1.png",
+      "focused-results--alchimie-action-recovery-l-dafaa-nventory-and-private-target-desktop--recovered-inventory.png",
+      "focused-results--alchimie-action-recovery-l-dafaa-nventory-and-private-target-mobile--recovered-inventory.png"
+    ],
+    "result": "All ten final desktop/mobile captures show settled readable content. Paid output/pair cues appear once; pair bench is selected; 1000-point result and verification retry are legible. The mobile sticky HUD/bench and horizontal HUD scrolling are existing behavior."
+  },
+  "evidence_clarifications": [
+    "The authored 32-case browser run covers initial failed verification followed by a successful manual retry. The independent two-case probe adds two further failed manual retries, synchronous double-click read ownership, and explicit occupied-bench/clear/Escape locks.",
+    "The baseline directly captures missing result UI, zero browser verification GETs and paid clue absence from GET; lack of score recording also follows from the unchanged won-state effect, while the final recovered-win browser case explicitly checks local played=1.",
+    "Five initial native source-shape failures and four initial browser accessible-name failures are preserved; initial/final browser specs differ only by corrected exit name and waiting for the transient resume toast to disappear."
+  ],
+  "archives": [
+    {
+      "path": "alchimie-independent/audit.py.gz",
+      "raw_source": "audit.py",
+      "decoded_sha256": "18825587c2e6949c2184a58399471e661faeee1c062ef7aabdade7c7a02e76bb",
+      "archive_sha256": "b7235be8b82952962e490a61b0d54e0faf76ca639b0e7456f0946161f3f08f9e",
+      "decoded_bytes": 6219
+    },
+    {
+      "path": "alchimie-independent/audit.json.gz",
+      "raw_source": "audit.json",
+      "decoded_sha256": "a731e6f3ce3ba43dcadd5c519bd3cd42f0a25d52a58b4fdbe878cd1173c6dfaf",
+      "archive_sha256": "1783b902d5f9a6db2085724f9fa84aa7b3070f32c90a28e2400bf5b0bac8165c",
+      "decoded_bytes": 5536
+    },
+    {
+      "path": "alchimie-independent/audit.log.gz",
+      "raw_source": "audit.log",
+      "decoded_sha256": "9ed79ded3f47c345805091312e61f80eb30d23b0913177902ac69c40bc6f98cd",
+      "archive_sha256": "23aeb9ccacbc96d9f39247715acaac5f7a791ec1dc09b27db53e472535c75dda",
+      "decoded_bytes": 1863
+    },
+    {
+      "path": "alchimie-independent/repeated-verification.spec.mjs.gz",
+      "raw_source": "repeated-verification.spec.mjs",
+      "decoded_sha256": "263c9a9be594c538fdb379e0d18d0c29f2ee4539b7c7443ad228d08d834663aa",
+      "archive_sha256": "90b22d2d34332e0d3ee7105ca6185514103f889f833cab9df991501d8ad383bf",
+      "decoded_bytes": 4500
+    },
+    {
+      "path": "alchimie-independent/playwright.config.mjs.gz",
+      "raw_source": "playwright.config.mjs",
+      "decoded_sha256": "7c8a61d0910acb6d25ec1f71ae1167003bc888436fb61612fa6f10cc5116f830",
+      "archive_sha256": "c59f8984f612cc71b2ae19b5ef9fdee1a85a2deb02b642d63b0cb4502e8e85ed",
+      "decoded_bytes": 449
+    },
+    {
+      "path": "alchimie-independent/repeated-verification.log.gz",
+      "raw_source": "repeated-verification.log",
+      "decoded_sha256": "6448eb91fe4b75cbdf6a846a936d05541baa65d76fa61ae811a4ed2e92afc879",
+      "archive_sha256": "e2674f89df0bbfd2dfc722c344cf3476a14f98bffa69e6cad24c286275e44489",
+      "decoded_bytes": 1143
+    },
+    {
+      "path": "alchimie-independent/results--repeated-verification-repe-e2bb3-es-not-replay-the-paid-clue-desktop--receipt.json.gz",
+      "raw_source": "results/repeated-verification-repe-e2bb3-es-not-replay-the-paid-clue-desktop/receipt.json",
+      "decoded_sha256": "d8c76210b503467d6edc919f4d6e87d03adbe9c7237836160f77f6938da05971",
+      "archive_sha256": "42b0cf721758b56444cf1b965dc0e6800640f08db676abfbe99cd90b68a2ab88",
+      "decoded_bytes": 378
+    },
+    {
+      "path": "alchimie-independent/results--repeated-verification-repe-e2bb3-es-not-replay-the-paid-clue-mobile--receipt.json.gz",
+      "raw_source": "results/repeated-verification-repe-e2bb3-es-not-replay-the-paid-clue-mobile/receipt.json",
+      "decoded_sha256": "e2896f4baf4741fa23b09b9a812d72e61da5c5e2d3b5aa1be3f2a85fa0b693aa",
+      "archive_sha256": "42ff60da32f5807ce5c7b8db7806b4458adcfe3f3f4e2cfba4fe4004fc4587eb",
+      "decoded_bytes": 377
+    },
+    {
+      "path": "alchimie-independent/results--.last-run.json.gz",
+      "raw_source": "results/.last-run.json",
+      "decoded_sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "archive_sha256": "ef94fcdc04da4703dc723d02a781282e4b455e1b3176cc7862e6c14c9851bca9",
+      "decoded_bytes": 45
+    }
+  ],
+  "limitations": [
+    "This accepts the bounded Alchimie lane; it is not final V90 integration acceptance.",
+    "Development graph/content/static bindings were verified before root graph application and are historical evidence after it.",
+    "No full backend/frontend matrix rerun, production action, human playtest or real-device test was performed by this reviewer.",
+    "GET confirms the current session, not which browser request caused a mutation."
+  ]
+}

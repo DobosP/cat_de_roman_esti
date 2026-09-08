@@ -1,0 +1,495 @@
+{
+  "schema_version": 2,
+  "date": "2026-09-08",
+  "baseline_commit": "190d7fdb86487c641d8a781ef7a5ce21f2b98031",
+  "candidate_branch": "feat/v90-household-discovery-and-critique-gates",
+  "result": "passed",
+  "checks": {
+    "backend312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates",
+      "exit_code": 0,
+      "elapsed_seconds": 1043.18,
+      "log_sha256": "53f860f0c8d21a8b294e9a2a8e4c0324de0beaf4291391b4bb2e7858a39fb63d",
+      "tail": [
+        "........................................................................ [ 58%]",
+        "........................................................................ [ 62%]",
+        "........................................................................ [ 67%]",
+        "........................................................................ [ 71%]",
+        "........................................................................ [ 76%]",
+        "........................................................................ [ 80%]",
+        "........................................................................ [ 85%]",
+        "........................................................................ [ 89%]",
+        "........................................................................ [ 94%]",
+        "........................................................................ [ 98%]",
+        "........................                                                 [100%]",
+        "1608 passed in 1039.77s (0:17:19)"
+      ],
+      "archive": {
+        "path": "integration-logs/backend312.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "53f860f0c8d21a8b294e9a2a8e4c0324de0beaf4291391b4bb2e7858a39fb63d",
+        "archive_sha256": "b1225b51aba337f786beb8577403f2947aeaf0331ae2338fb1afb970ce6f99f3",
+        "decoded_bytes": 1874,
+        "archive_bytes": 149
+      }
+    },
+    "accounts312": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates",
+      "exit_code": 0,
+      "elapsed_seconds": 9.32,
+      "log_sha256": "2b3c13600687dbc721620cbfeb3d62a02a61dac23a3b08564fa267bc9d163223",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 7.22s"
+      ],
+      "archive": {
+        "path": "integration-logs/accounts312.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "2b3c13600687dbc721620cbfeb3d62a02a61dac23a3b08564fa267bc9d163223",
+        "archive_sha256": "f346ede9b47bd0dd7f6c90d933371231ba85048e4c4ac63f85d730bea8154698",
+        "decoded_bytes": 99,
+        "archive_bytes": 52
+      }
+    },
+    "backend314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v90-household-discovery-and-critique-gates/py314/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates",
+      "exit_code": 0,
+      "elapsed_seconds": 854.67,
+      "log_sha256": "c759d22b559bbc15854c6a2e9e6720fdd4bd5de1bcc32c679b28e978c9f23a87",
+      "tail": [
+        "........................................................................ [ 58%]",
+        "........................................................................ [ 62%]",
+        "........................................................................ [ 67%]",
+        "........................................................................ [ 71%]",
+        "........................................................................ [ 76%]",
+        "........................................................................ [ 80%]",
+        "........................................................................ [ 85%]",
+        "........................................................................ [ 89%]",
+        "........................................................................ [ 94%]",
+        "........................................................................ [ 98%]",
+        "........................                                                 [100%]",
+        "1608 passed in 850.56s (0:14:10)"
+      ],
+      "archive": {
+        "path": "integration-logs/backend314.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "c759d22b559bbc15854c6a2e9e6720fdd4bd5de1bcc32c679b28e978c9f23a87",
+        "archive_sha256": "85f80ee7d2f1c4fd65d1928da747713fa195fea924776a6482ce056d1d75063a",
+        "decoded_bytes": 1873,
+        "archive_bytes": 150
+      }
+    },
+    "accounts314": {
+      "command": [
+        "/home/dobo/work/_temp/feat__v90-household-discovery-and-critique-gates/py314/bin/python",
+        "-m",
+        "pytest",
+        "tests/accounts",
+        "-q",
+        "-o",
+        "addopts="
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates",
+      "exit_code": 0,
+      "elapsed_seconds": 10.55,
+      "log_sha256": "23377abdbc371b101591b1be2c0d43eda4a572275d876bc68f9a66dd6fe36609",
+      "tail": [
+        ".....................................................                    [100%]",
+        "53 passed in 7.64s"
+      ],
+      "archive": {
+        "path": "integration-logs/accounts314.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "23377abdbc371b101591b1be2c0d43eda4a572275d876bc68f9a66dd6fe36609",
+        "archive_sha256": "8bae973dc889b9e344d560333b3b6efd64ba3f4a37aee9a3ee0f9d1e02bf1c82",
+        "decoded_bytes": 99,
+        "archive_bytes": 52
+      }
+    },
+    "frontend_native": {
+      "command": [
+        "npm",
+        "test"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 2.06,
+      "log_sha256": "6c3713f6faab5dd7a953f75fd2d2baded48cb760ef5ffeb0f007321ed9ab659d",
+      "tail": [
+        "✔ the starter chip appears on Intrusul/Perechi cards only pre-graduation (0.276271ms)",
+        "✔ the hero tagline names the cultural range and keeps the h1 untouched (0.270649ms)",
+        "✔ meta-loop CSS lives under its V42 anchor and keeps the diploma action >=44px (0.325423ms)",
+        "✔ optional account controls stay outside the initial bundle graph (0.238129ms)",
+        "ℹ tests 193",
+        "ℹ suites 0",
+        "ℹ pass 193",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 1330.613162"
+      ],
+      "archive": {
+        "path": "integration-logs/frontend_native.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "6c3713f6faab5dd7a953f75fd2d2baded48cb760ef5ffeb0f007321ed9ab659d",
+        "archive_sha256": "d850ef0f4fc3af2aa5991886861e16f82efec30b1e2f0496bd0d2abcdf483c92",
+        "decoded_bytes": 16433,
+        "archive_bytes": 6658
+      }
+    },
+    "frontend_lint": {
+      "command": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 16.95,
+      "log_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 lint",
+        "> eslint .",
+        ""
+      ],
+      "archive": {
+        "path": "integration-logs/frontend_lint.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+        "archive_sha256": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a",
+        "decoded_bytes": 53,
+        "archive_bytes": 70
+      }
+    },
+    "frontend_typecheck": {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 8.26,
+      "log_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 typecheck",
+        "> tsc --noEmit",
+        ""
+      ],
+      "archive": {
+        "path": "integration-logs/frontend_typecheck.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "69c6357d5a848645bd3d736f15c599e33184da35a1a7cb650c00926edffcfa10",
+        "archive_sha256": "d0e30d1dc915362da5e6d51943f265c1840c3182f61f2cd8a65a8159c982ac05",
+        "decoded_bytes": 62,
+        "archive_bytes": 82
+      }
+    },
+    "frontend_build": {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 12.19,
+      "log_sha256": "7d495987eed71f9dcb7b1aab1485e8990bedb8eea8716f6b22d4a7a7276d3836",
+      "tail": [
+        "../cat_de_roman_esti/web/static/assets/index-0j7rQ1dS.js                             348.35 kB │ gzip: 114.53 kB",
+        "",
+        "✓ built in 2.98s",
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 check:bundle",
+        "> node scripts/check-bundle-budget.mjs",
+        "",
+        "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+        "   110.50 KiB  assets/index-0j7rQ1dS.js",
+        "     8.38 KiB  assets/index-CkVCIp7R.css",
+        "   118.88 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ],
+      "archive": {
+        "path": "integration-logs/frontend_build.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "7d495987eed71f9dcb7b1aab1485e8990bedb8eea8716f6b22d4a7a7276d3836",
+        "archive_sha256": "ef39fbfc7bb337597c6ec7bb048fd15094a46d95882ebfa2161c199f4a270f3b",
+        "decoded_bytes": 3123,
+        "archive_bytes": 972
+      }
+    },
+    "frontend_bundle": {
+      "command": [
+        "npm",
+        "run",
+        "check:bundle"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 0.33,
+      "log_sha256": "6e8f18e0e386c21e5cf08e3d000e4985eae9bbb3767d71bc07fbf915bc830ea1",
+      "tail": [
+        "",
+        "> cat-de-roman-esti-frontend@0.1.0 check:bundle",
+        "> node scripts/check-bundle-budget.mjs",
+        "",
+        "Initial JS/CSS gzip budget (limit 120.0 KiB):",
+        "   110.50 KiB  assets/index-0j7rQ1dS.js",
+        "     8.38 KiB  assets/index-CkVCIp7R.css",
+        "   118.88 KiB  total",
+        "Romanian font subsets: 4 (Latin + Latin Extended only)"
+      ],
+      "archive": {
+        "path": "integration-logs/frontend_bundle.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "6e8f18e0e386c21e5cf08e3d000e4985eae9bbb3767d71bc07fbf915bc830ea1",
+        "archive_sha256": "d5f1a75a9473e05f1b78912cbfe9e22f00fb592f75872ac984466a7ad63e160f",
+        "decoded_bytes": 292,
+        "archive_bytes": 229
+      }
+    },
+    "browser": {
+      "command": [
+        "npm",
+        "run",
+        "test:e2e"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates/frontend",
+      "exit_code": 0,
+      "elapsed_seconds": 937.24,
+      "log_sha256": "2ae6f487599f5b3d4edc0c71bcc42b4a441e5bba184c12433c20bd4c22d49cca",
+      "tail": [
+        "  ✓  237 [mobile] › e2e/start-failure.spec.mjs:93:3 › intrusul retains its completed result when replay creation fails (2.9s)",
+        "  ✓  238 [mobile] › e2e/start-failure.spec.mjs:50:3 › perechi keeps a failed new start visible and retries the selected options (3.1s)",
+        "  ✓  239 [mobile] › e2e/start-failure.spec.mjs:93:3 › perechi retains its completed result when replay creation fails (3.9s)",
+        "  ✓  240 [mobile] › e2e/start-failure.spec.mjs:50:3 › conexiuni keeps a failed new start visible and retries the selected options (3.4s)",
+        "  ✓  241 [mobile] › e2e/start-failure.spec.mjs:93:3 › conexiuni retains its completed result when replay creation fails (7.8s)",
+        "  ✓  242 [mobile] › e2e/start-failure.spec.mjs:50:3 › contexto keeps a failed new start visible and retries the selected options (3.0s)",
+        "  ✓  243 [mobile] › e2e/start-failure.spec.mjs:93:3 › contexto retains its completed result when replay creation fails (3.4s)",
+        "  ✓  244 [mobile] › e2e/start-failure.spec.mjs:50:3 › lant keeps a failed new start visible and retries the selected options (3.1s)",
+        "  ✓  245 [mobile] › e2e/start-failure.spec.mjs:93:3 › lant retains its completed result when replay creation fails (3.3s)",
+        "  ✓  246 [mobile] › e2e/start-failure.spec.mjs:143:1 › alchimie retains its live round and blocks actions while another round is pending (2.8s)",
+        "",
+        "  246 passed (15.6m)"
+      ],
+      "archive": {
+        "path": "integration-logs/browser.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "2ae6f487599f5b3d4edc0c71bcc42b4a441e5bba184c12433c20bd4c22d49cca",
+        "archive_sha256": "b3af86aa4b4e222cd7202980a4d1c00ac028171913ca999cd902cfb06f525321",
+        "decoded_bytes": 37360,
+        "archive_bytes": 4723
+      }
+    },
+    "fixture": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_fixture.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates",
+      "exit_code": 0,
+      "elapsed_seconds": 0.47,
+      "log_sha256": "7288da0ce0aa0ca26c0e0de86fefb06222095f40af6798781de22f9a60072576",
+      "tail": [
+        "  [  ok] alias_unique                 0 error(s)",
+        "  [  ok] label_style                  0 error(s)",
+        "  [  ok] meta_counts                  0 error(s)",
+        "  [  ok] puzzle_par                   0 error(s)",
+        "  [  ok] puzzle_hop_band              0 error(s)",
+        "  [  ok] puzzle_hints                 0 error(s)",
+        "  [  ok] puzzle_ids_resolve           0 error(s)",
+        "  [  ok] puzzle_shortest_path         0 error(s)",
+        "  [  ok] puzzle_category_scope        0 error(s)",
+        "  [  ok] puzzle_distractor_shortcut   0 error(s)",
+        "------------------------------------------------------------",
+        "GREEN: fixture is valid (0 errors)"
+      ],
+      "archive": {
+        "path": "integration-logs/fixture.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "7288da0ce0aa0ca26c0e0de86fefb06222095f40af6798781de22f9a60072576",
+        "archive_sha256": "06384813e1d798780ed02d2b55d57412d8ffb6ffd848f1944d1c54d8f46b3334",
+        "decoded_bytes": 1046,
+        "archive_bytes": 326
+      }
+    },
+    "pack": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/validate_games_pack.py"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates",
+      "exit_code": 0,
+      "elapsed_seconds": 14.38,
+      "log_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+      "tail": [
+        "  copies_identical         ok",
+        "  structure                ok",
+        "  item_shape               ok",
+        "  unique_ids               ok",
+        "  playability              ok",
+        "  meta_counts              ok",
+        "  id_high_water            ok",
+        "",
+        "games pack GREEN"
+      ],
+      "archive": {
+        "path": "integration-logs/pack.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "c66f89c65013cff0adfdae12c1a567552a51e37e373776bb9d1ca40c8e1f914f",
+        "archive_sha256": "09f01c42a2829a3b8877e60802bae8967baeb530df5220cbc675238466da65a4",
+        "decoded_bytes": 228,
+        "archive_bytes": 128
+      }
+    },
+    "pending": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "scripts/critique_pack.py",
+        "--status",
+        "pending",
+        "--strict"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates",
+      "exit_code": 0,
+      "elapsed_seconds": 0.62,
+      "log_sha256": "f19d308c2a43b0b95b9b12f3458a99e9f64ce7c982f4f113f1997cbbcffae852",
+      "tail": [
+        "critique_pack: 8 item(s) checked, 0 flagged, 0 FAIL finding(s)",
+        "  member_overuse       WARN x65",
+        "  nondistinctive_region_link WARN x16"
+      ],
+      "archive": {
+        "path": "integration-logs/pending.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "f19d308c2a43b0b95b9b12f3458a99e9f64ce7c982f4f113f1997cbbcffae852",
+        "archive_sha256": "beccbf15577ac4c2020c302579819da43b23a3548cab6e7afe5fc83ca4af4959",
+        "decoded_bytes": 133,
+        "archive_bytes": 135
+      }
+    },
+    "ruff": {
+      "command": [
+        "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates",
+      "exit_code": 0,
+      "elapsed_seconds": 0.06,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "tail": [
+        "All checks passed!"
+      ],
+      "archive": {
+        "path": "integration-logs/ruff.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "archive_sha256": "47f394a1497b1873bc6e6d6f9bb92aa51b990821f1ddd7770a933ffd29c456cd",
+        "decoded_bytes": 19,
+        "archive_bytes": 39
+      }
+    },
+    "docs": {
+      "command": [
+        "python3",
+        "/home/dobo/work/agent-ops/scripts/check_docs.py",
+        "."
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates",
+      "exit_code": 0,
+      "elapsed_seconds": 0.06,
+      "log_sha256": "585e66935f6d4b5e31abd6222c8e887a499e62105ec98804c9d4b1edbe4528f2",
+      "tail": [
+        "",
+        "## dead links",
+        "(none)",
+        "",
+        "## stale model terms",
+        "(none)",
+        "",
+        "## retired ops verbs",
+        "(none)",
+        "",
+        "## orphan docs",
+        "(none)"
+      ],
+      "archive": {
+        "path": "integration-logs/docs.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "585e66935f6d4b5e31abd6222c8e887a499e62105ec98804c9d4b1edbe4528f2",
+        "archive_sha256": "5275c9985bfc6e975d045169d80dae725eec34e1910c807099684983f76cfca6",
+        "decoded_bytes": 272,
+        "archive_bytes": 195
+      }
+    },
+    "whitespace": {
+      "command": [
+        "git",
+        "diff",
+        "HEAD",
+        "--check"
+      ],
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates",
+      "exit_code": 0,
+      "elapsed_seconds": 0.11,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tail": [],
+      "archive": {
+        "path": "integration-logs/whitespace.log.gz",
+        "encoding": "gzip",
+        "gzip_mtime": 0,
+        "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "archive_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "decoded_bytes": 0,
+        "archive_bytes": 20
+      }
+    }
+  },
+  "input_freeze_sha256": "9952391f2f4799c068cb983a55629b13037ecdc01276517a4f7c53deae0fda5a",
+  "scope_note": "Final Python3.12 and the standalone Python3.14 rerun each pass1608backend/53accounts; frontend193native/246browser, no browser retries. First Python3.14 process ended143 without a completion summary and is excluded/preserved. Only runner progress reporting changed for the rerun; all1635 frozen runtime/test/rubric/preexisting-review inputs stayed exact."
+}

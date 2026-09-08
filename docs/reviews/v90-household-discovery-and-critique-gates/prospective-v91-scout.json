@@ -1,0 +1,233 @@
+{
+  "type": "prospective_scout",
+  "version_considered": 91,
+  "written_at_utc": "2026-09-08T19:32:32.174306+00:00",
+  "valid_until": "V91 kickoff rebaselines landed V90 sources and observed behavior; this is neither implementation authorization nor a final content verdict.",
+  "method": "Read-only source and existing-evidence inspection; no server, test, new research, fixture/metadata/source change, commit or push.",
+  "source_sha256": {
+    "docs/STATUS.md": "8f7b8aa2eac890f6f432ff2eec15e6dacc4b034d274eaf9d86777e20084b013d",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "docs/BETA_CANDIDATE.md": "58c2094734eb65e052627a9c7fb163b8d8165fc2c05a28c9f13c828c9e965898",
+    "frontend/src/screens/Intrusul.tsx": "57cdc75c05468e692eeb12b3591e5ca7eb3ece5b3806432950bd63936e90f11e",
+    "frontend/src/screens/Perechi.tsx": "5741f63a8edd39bf9f6886004f222f9ea6f1aca6536fadb046b03ee02cf18d37",
+    "frontend/src/screens/Alchimie.tsx": "b6802da5b5d32b7fdaca647a907a0a6881a5c3a09c34f14e87065edf4cfff403",
+    "frontend/src/gameActionRecovery.mjs": "b73851fd616aed6489139cd800bad2e8e6ab3480664470e765fd044ba9eb6267",
+    "frontend/src/asyncControl.mjs": "452b9a553cbf319268d32b4f17a0ba70c8692ca43f3fcfd055ccf241412cf211",
+    "frontend/src/hooks/useActiveGame.ts": "08e3dc295f75ee5b11f14a86b7b2836f7af73d7f5238decf7c650004c391cd02",
+    "frontend/src/hooks/useRecordScore.ts": "303cda5da3e26595ed39a5f9b2028ed6634318fc6c4a02bb9480dc310f3fee4b",
+    "frontend/src/hooks/useSavedGameResume.ts": "dff224adb580b3996c9145decb87fce217125de2cf1350b2e144919bc81070a5",
+    "frontend/src/scores.ts": "ec724ecaecf66f54f6a3a3a37ba8f5aaf89e9556fefbd4528c4296948c33321a",
+    "frontend/src/components/GameShell.tsx": "ad6fdffdb0948644d0c0a2baaff812056ef16f0e504b50ef78593457d485924f",
+    "frontend/src/components/Hud.tsx": "9abbb288c030e054392ff16597ad2df7aec834558707f05906fbc03a0af6002d",
+    "frontend/src/styles/arcade.css": "a4bd0e004173f408cb301301bf27d9d15a7443c71355e4f080accc2c9715ac8e",
+    "frontend/src/App.tsx": "8e879fc2b334d2039876bc3a8852da239f12457336175291dc26159308571a04",
+    "frontend/node_modules/@roedu/ui/dist/roedu-ui.css": "f5fd84e260cb6fdc7c6342be05376780e339b2d26abf83750b3204f3f47d04bf",
+    "frontend/tests/v38-recovery.test.mjs": "d16cceded3f6448e921a8aa5896c5f2f6e9871de91616870d77911e42c866561",
+    "frontend/e2e/lifecycle.spec.mjs": "bc481bee20ef9e81c1767a7d59f014e46fb42f7e4410d8c833432ca1faf60bfd",
+    "frontend/e2e/seeded-starts.json": "818ecf1bd65050208694424b6526d141053d871a1e87643570d67562b2222412",
+    "cat_de_roman_esti/wordgames/intrusul.py": "5293a4bdae57d4f1f074d993f832ad8f679d6da0ba7d4d53f285909bcaa86299",
+    "cat_de_roman_esti/wordgames/perechi.py": "7403989c163d6f040229348ac87b5e738628ee3e30576202f8b316cd2d257e63",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e32139529aacc88e2f453ac1cee1d8cd9a2cd1b16f3ee0551a5a76779192391e",
+    "docs/reviews/v90-household-discovery-and-critique-gates/README.md": "4298aa23fdb75080f768d83a9113c0015180a74c0389226bbe55f9625ff58731",
+    "docs/reviews/v90-household-discovery-and-critique-gates/kickoff-baseline.json": "eb306ac0a017daa83da71ae8bb881c1dd27096ba92fd09550cb3a59a195d90cc",
+    "docs/reviews/v90-household-discovery-and-critique-gates/impact/comparison-summary.json": "c006e464ded3cc17c1e79ae26147f9e54ded219161fe7ed19fc79eb2aa9d5e30",
+    "docs/reviews/v90-household-discovery-and-critique-gates/critique/README.md": "93174081fe446d5a98a28c98c69352af28d623208a3568a27a30ff1ce3eba2fd",
+    "docs/reviews/v90-household-discovery-and-critique-gates/critique/implementation-audit.json": "bb427e9af12635feb74ab6624546bf597431735debb10daab41060787b0339e6",
+    "docs/reviews/v90-household-discovery-and-critique-gates/graph-quality-review.md": "f5ec387bc0be40368a311be1fdc99a73982a4d606fe925f2a5c80fee526d9d82",
+    "docs/reviews/v89-feedback-and-conexiuni-recovery/README.md": "4c6251e88b4d50557522e7e063d1670bf46513e589a6395dc8d78e1701556daa",
+    "docs/reviews/v89-feedback-and-conexiuni-recovery/conex-action/README.md": "66d5b575b34aa9e7ed2eb2fec5e83910e99d7a83dd50240bc1300133ac872ebb"
+  },
+  "image_sha256": {
+    "docs/reviews/v89-feedback-and-conexiuni-recovery/conex-action/initial-recovered-loss-mobile.png": "21027fb4bd606125541364bc53c2a73df61d8f775cfd17ee07a12c6d89bdc343",
+    "docs/reviews/v89-feedback-and-conexiuni-recovery/conex-action/behavior-recovered-clue-mobile.png": "562b1dfc5a8243536282f83cd3586052edcb9196ac7d99fe0b65e0825067298f",
+    "docs/reviews/v90-household-discovery-and-critique-gates/alchimie-action/focused-results--alchimie-action-recovery-l-a3d5e-sume-without-another-charge-desktop--recovered-hint-2.png": "ec5b0ae088ec6b7c6b1631b1c022a9ca679bc7721e871a8041b5b612c4f7e79c",
+    "docs/reviews/v90-household-discovery-and-critique-gates/alchimie-action/focused-results--alchimie-action-recovery-l-a3d5e-sume-without-another-charge-mobile--recovered-hint-2.png": "cc350832a6415b706e5cb319f48dead5f27b518207dd59d38041bab66d63914d"
+  },
+  "priorities": [
+    {
+      "rank": 1,
+      "focus": "Finish owned uncertain-action recovery for Intrusul/Perechi after reproduction",
+      "observed": [
+        "Both screens already call one recoverAuthoritative GET after failed tile/hint POST and share a synchronous action lock.",
+        "Neither direct POST adoption nor recovery adoption validates a ticket, returned game_id or saved pointer.",
+        "Failed GET sets retry wording but finally releases busy; no persistent GET-only retry region or missing-game distinction is present.",
+        "Conditional score-pointer deletion and receipt deduplication exist; they do not establish action ownership before state adoption.",
+        "GET already retains one paid Intrusul clue/Perechi hint; both servers allow at most one hint."
+      ],
+      "hypotheses": [
+        "A tab whose pointer changed may still mutate/adopt its old round; a late terminal reply may display/record that old result while another round is saved.",
+        "Failed verification permits another mutation against stale UI; a missing session lacks an in-place confirmed-404 path.",
+        "Perechi focus callbacks may target stale tiles after a superseding action/read."
+      ],
+      "not_claimed": [
+        "No reproduced player-visible failure in this scout.",
+        "No second paid clue charge asserted: server caps it at one.",
+        "No duplicate-score bug asserted; receipt guards remain.",
+        "No stale-unmounted score write asserted; a React callback alone does not prove a post-unmount effect."
+      ],
+      "acceptance": [
+        "Source-bound committed/uncommitted lost action baseline before choosing fixes; guess/match/clue/win/loss cases.",
+        "Held POST/GET and changed/null/foreign saved pointer, wrong response identity, unmount and owned/stale404; one GET and no POST replay.",
+        "Failed and repeatedly failed reads persist with locked tile/hint controls; retry reads only, then restores exact GET state.",
+        "Once-only result ledger and preserved replay/starter/daily behavior; Perechi keyboard focus after solved tiles and recovery.",
+        "Keep TTL7200s,1000sessions/game,locks,64KiB requests,existing bounded state and one-hint economy."
+      ]
+    },
+    {
+      "rank": 2,
+      "focus": "Small shared all-six mobile header and resume-notice improvement",
+      "observed": [
+        "Two existing V89 mobile screenshots visibly place the resume toast over Exit/title/HUD.",
+        "GameShell status clips overflow; mobile HUD is single-line, horizontally scrollable, focusable, and hides the scrollbar.",
+        "The shared toast is fixed near safe-area top at z-index1000; header is sticky at safe-area top at z-index12; App keeps a toast for3600ms.",
+        "V90 settled Alchimie screenshots avoid the toast but still show later HUD badges outside initial view."
+      ],
+      "hypotheses": [
+        "Players may miss remaining attempts/progress or fail to discover horizontal scrolling.",
+        "A compact two-row/status-priority treatment and inline resume confirmation may improve immediate comprehension; actual design must be compared after rebaseline."
+      ],
+      "acceptance": [
+        "All six intro/live/resume/recovery/result states at320/390/640px and text zoom, with long Romanian labels.",
+        "Inspect while notice is present as well as after it leaves; Exit/title/essential counters and primary actions stay visible and clickable.",
+        "Keyboard access, accessible notice/status semantics, safe-area/sticky offsets, no new viewport overflow, and unchanged game behavior."
+      ]
+    },
+    {
+      "rank": 3,
+      "focus": "Review existing discovery quality before another noun batch",
+      "observed": [
+        "Four approved Contexto C3 warning records remain eligible; numeric deficiencies are1,2,4,4.",
+        "An approved easy Alchimie Sport board contains specialist-looking seed labels and three initially depleted seeds in its exact public seeded payload.",
+        "Seventeen original household stress surfaces remain unresolved after V90; this is a deliberately broad stress list, not usage frequency."
+      ],
+      "hypotheses": [
+        "al_sport_083 may warrant A1/E1 review for broad Romanian recognition and useful-seed presentation, with E2/E3 opening/target legibility checked separately.",
+        "The two geography C3 records with one/two incoming neighbors may offer a more urgent review focus than new hidden targets."
+      ],
+      "acceptance": [
+        "Rebuild exact stock dossiers after V90 landing, apply full rubric and independent recognition/source checks, then propose keep/revise/demote; no automatic demotion.",
+        "For al_sport_083, explicitly assess all six seeds, cross-generational recognition of Washington Bullets and the dated swimming-record label, three depleted seeds, and intuitive first pairs.",
+        "For the four C3 warnings, assess recognizable incoming approaches and genuine facts; never add links merely to reach five.",
+        "If later household research is selected, start with the distinct senses of pardoseală/parchet/gresie/murdărie/curățenie/gunoi; do not treat them as approved aliases/edges or promise a target count.",
+        "Separate recognition, native/projection ownership, curated approval and graph-mined eligibility; measure actual selector provenance for any new noun."
+      ]
+    }
+  ],
+  "household_unknown_stress_words": [
+    "murdărie",
+    "păr",
+    "păr de animale",
+    "sac",
+    "sac de praf",
+    "filtru",
+    "curent",
+    "măturat",
+    "aspirare",
+    "pardoseală",
+    "parchet",
+    "gresie",
+    "covoraș",
+    "cârpă",
+    "mâner",
+    "curățenie",
+    "gunoi"
+  ],
+  "excluded_negative_control": "prafuri is also unresolved in the70-word impact set but is not one of the17 remaining original19 stress surfaces.",
+  "approved_C3_review_queue": [
+    {
+      "id": "ct_geografie_030",
+      "target": "Lacul Roșu",
+      "incoming_count": 1,
+      "status": "approved",
+      "pilot_eligible": true
+    },
+    {
+      "id": "ct_geografie_031",
+      "target": "Peștera Scărișoara",
+      "incoming_count": 2,
+      "status": "approved",
+      "pilot_eligible": true
+    },
+    {
+      "id": "ct_istorie_309",
+      "target": "Abdicarea Regelui Mihai",
+      "incoming_count": 4,
+      "status": "approved",
+      "pilot_eligible": true
+    },
+    {
+      "id": "ct_muzica_070",
+      "target": "B.U.G. Mafia",
+      "incoming_count": 4,
+      "status": "approved",
+      "pilot_eligible": true
+    }
+  ],
+  "alchimie_existing_review_candidate": {
+    "record": {
+      "difficulty": "usor",
+      "seeds": [
+        "n_spt_washington_bullets",
+        "n_v3spo_medalie",
+        "n_spt_record_100m_liber_2022",
+        "n_spt_cristina_neagu",
+        "n_spt_bazin_olimpic",
+        "n_spt_tricolorii"
+      ],
+      "target": "n_spt_liga_campionilor_handbal",
+      "target_depth": 2,
+      "id": "al_sport_083",
+      "category": "sport",
+      "source": "ai",
+      "status": "approved"
+    },
+    "seed_labels": [
+      {
+        "id": "n_spt_washington_bullets",
+        "label": "Washington Bullets",
+        "useful": true,
+        "depleted": false
+      },
+      {
+        "id": "n_v3spo_medalie",
+        "label": "Medalie",
+        "useful": false,
+        "depleted": true
+      },
+      {
+        "id": "n_spt_record_100m_liber_2022",
+        "label": "Recordul la 100 m liber din 2022",
+        "useful": false,
+        "depleted": true
+      },
+      {
+        "id": "n_spt_cristina_neagu",
+        "label": "Cristina Neagu",
+        "useful": true,
+        "depleted": false
+      },
+      {
+        "id": "n_spt_bazin_olimpic",
+        "label": "Bazin olimpic",
+        "useful": false,
+        "depleted": true
+      },
+      {
+        "id": "n_spt_tricolorii",
+        "label": "Tricolorii",
+        "useful": true,
+        "depleted": false
+      }
+    ],
+    "target_label": "Liga Campionilor la handbal",
+    "initial_inventory_summary": {
+      "active": 3,
+      "depleted": 3,
+      "total": 6
+    },
+    "screenshot_opening": "Washington Bullets + Cristina Neagu → Club sportiv; displayed target Liga Campionilor la handbal.",
+    "judgment": "A1/E1 review question only, no recognition failure or demotion determined."
+  },
+  "target_approval_caveat": "New graph nouns are not new approved curated hidden-target records. Contexto CreateGameView falls back to _pick_target when curated selection returns None; its normal pool includes graph all_ids and selection has reachability/warm-band fallbacks. Absence of a curated target record does not prove a noun can never become a mined target. No current new-noun selection is asserted without measurement."
+}

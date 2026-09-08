@@ -1,0 +1,35 @@
+import hashlib,json,os,subprocess,sys,time
+from pathlib import Path
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v90-household-discovery-and-critique-gates')
+OUT=Path('/home/dobo/work/_temp/feat__v90-household-discovery-and-critique-gates/integration');OUT.mkdir(exist_ok=True)
+PY312='/home/dobo/work/cat_de_roman_esti/.venv/bin/python'
+PY314='/home/dobo/work/_temp/feat__v90-household-discovery-and-critique-gates/py314/bin/python'
+env=os.environ.copy();env.update(PYTHONPATH=str(ROOT),CAT_ACCOUNTS_ENABLED='0',CAT_DEBUG='0',ROEDU_API_URL='',ROEDU_API_KEY='');env['PATH']='/home/dobo/work/cat_de_roman_esti/.venv/bin:/home/dobo/.vite-plus/bin:'+env.get('PATH','')
+mode=sys.argv[1]
+if mode in ('backend312','backend314'):
+ py=PY312 if mode.endswith('312') else PY314
+ jobs=[(mode,[py,'-m','pytest','-q','-o','addopts='],ROOT,{}),(mode.replace('backend','accounts'),[py,'-m','pytest','tests/accounts','-q','-o','addopts='],ROOT,{'CAT_ACCOUNTS_ENABLED':'1','CAT_DEBUG':'1'})]
+elif mode in ('frontend','frontend_checks','frontend_remaining'):
+ jobs=[(key,['npm',*args],ROOT/'frontend',{}) for key,args in [('frontend_native',['test']),('frontend_lint',['run','lint']),('frontend_typecheck',['run','typecheck']),('frontend_build',['run','build']),('frontend_bundle',['run','check:bundle'])]]
+ if mode=='frontend_remaining': jobs=jobs[1:]
+ if mode in ('frontend','frontend_remaining'): jobs.append(('browser',['npm','run','test:e2e'],ROOT/'frontend',{'CDR_E2E_PORT':'8187','CDR_E2E_OUTPUT_DIR':str(OUT/'browser-results')}))
+elif mode=='browser':
+ jobs=[('browser',['npm','run','test:e2e'],ROOT/'frontend',{'CDR_E2E_PORT':'8187','CDR_E2E_OUTPUT_DIR':str(OUT/'browser-results')})]
+elif mode=='docs_final':
+ jobs=[(key,cmd,ROOT,{}) for key,cmd in [('ruff',[PY312,'-m','ruff','check']),('docs',['python3','/home/dobo/work/agent-ops/scripts/check_docs.py','.']),('whitespace',['git','diff','HEAD','--check'])]]
+elif mode=='fast':
+ jobs=[(key,cmd,ROOT,{}) for key,cmd in [('fixture',[PY312,'scripts/validate_fixture.py']),('pack',[PY312,'scripts/validate_games_pack.py']),('pending',[PY312,'scripts/critique_pack.py','--status','pending','--strict']),('ruff',[PY312,'-m','ruff','check']),('docs',['python3','/home/dobo/work/agent-ops/scripts/check_docs.py','.']),('whitespace',['git','diff','HEAD','--check'])]]
+else: raise SystemExit('unknown gate')
+for key,cmd,cwd,extra in jobs:
+ print('START',key,flush=True);start=time.monotonic();log=OUT/(key+'.log')
+ with log.open('w') as h:
+  proc=subprocess.Popen(cmd,cwd=cwd,env=env|extra,stdout=h,stderr=subprocess.STDOUT)
+  while True:
+   try:
+    rc=proc.wait(timeout=30);break
+   except subprocess.TimeoutExpired:
+    print('RUNNING',key,round(time.monotonic()-start,1),'seconds',log.stat().st_size,'log bytes',flush=True)
+  r=subprocess.CompletedProcess(cmd,rc)
+ blob=log.read_bytes();receipt={'command':cmd,'cwd':str(cwd),'exit_code':r.returncode,'elapsed_seconds':round(time.monotonic()-start,2),'log_sha256':hashlib.sha256(blob).hexdigest(),'tail':blob.decode(errors='replace').splitlines()[-12:]}
+ log.with_suffix('.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n');print('END',key,r.returncode,receipt['elapsed_seconds'],flush=True)
+ if r.returncode:raise SystemExit(r.returncode)

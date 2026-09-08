@@ -1,0 +1,35 @@
+import hashlib, json, sys
+from pathlib import Path
+sys.path.insert(0, str(Path.cwd()))
+from scripts import critique_pack as cp, rank_games_pack as ranks
+scratch = Path('/home/dobo/work/_temp/feat__v90-household-discovery-and-critique-gates/critique')
+baseline = json.loads((scratch/'baseline-audit.json').read_text())
+pack, svc, strong, regions = cp.load_all(cp.PACKAGE_PACK, cp.PACKAGE_KG)
+for path in [cp.PACKAGE_PACK, cp.PACKAGE_KG]:
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == baseline['sha256'][str(path.relative_to(Path.cwd()))]
+old = {row['id']:row for row in baseline['rows']}
+_, _, selected = cp.run(pack, svc, strong, regions, ['contexto'], {'pending','approved'}, None)
+assert {rec['id'] for _,rec,_ in selected} == set(old)
+demoted = ranks._owner_demotions()
+changes, warnings, pending = [], [], []
+for game, rec, findings in selected:
+    dossier = cp.build_dossier(rec, game, svc, strong, findings, regions)
+    familiarity = ranks.romanian_familiarity(game,dossier,lambda nid:ranks._service_salience(svc,nid))
+    quality = ranks.play_quality(game,rec,dossier,lambda a,b:ranks._service_edge_strength(svc,a,b))
+    actual = {'romanian_familiarity':familiarity,'play_quality':quality,'pilot_score':ranks._bounded_score(.6*familiarity+.4*quality),'pilot_eligible':ranks._pilot_eligible(rec,game,dossier,svc,demoted)}
+    if actual != old[rec['id']]['old']:
+        changes.append({'id':rec['id'],'before':old[rec['id']]['old'],'after':actual})
+    incoming = cp.contexto_incoming_ids(svc,rec['target'])
+    assert incoming == old[rec['id']]['incoming_ids']
+    row = {'id':rec['id'],'label':svc.label(rec['target']),'status':rec['status'],'incoming_ids':incoming,'count':len(incoming),'findings':findings,'profile':actual}
+    if any(f['check']=='contexto_incoming_floor' for f in findings):
+        warnings.append(row)
+    if rec['status']=='pending':
+        pending.append(row)
+assert changes == []
+assert len(warnings) == 4 and all(r['status']=='approved' and r['profile']['pilot_eligible'] for r in warnings)
+assert [r['count'] for r in pending] == [8,13]
+paths = ['scripts/critique_pack.py','scripts/rank_games_pack.py','docs/CRITIQUE_RUBRIC.md','cat_de_roman_esti/wordgames/service.py','cat_de_roman_esti/graph.py','tests/test_contexto_incoming_critique.py','tests/test_critique_pack.py']
+result = {'baseline_main':baseline['baseline_main'],'record_count':len(selected),'score_or_eligibility_changes':changes,'approved_warning_count':len(warnings),'approved_warnings':warnings,'pending_holds':pending,'source_sha256':{p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in paths},'baseline_audit_sha256':hashlib.sha256((scratch/'baseline-audit.json').read_bytes()).hexdigest()}
+(scratch/'implementation-audit.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({'records':len(selected),'changes':len(changes),'approved_warnings':len(warnings),'pending_holds':[r['id'] for r in pending]},indent=2))

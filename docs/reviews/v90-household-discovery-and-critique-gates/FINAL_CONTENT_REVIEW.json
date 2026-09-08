@@ -1,0 +1,433 @@
+{
+  "reviewer": "v90_critique_independent",
+  "role": "final content impact and historical reconstruction reviewer",
+  "decision": "accept",
+  "reviewed_at_utc": "2026-09-08T19:09:12.448044+00:00",
+  "baseline_commit": "190d7fdb86487c641d8a781ef7a5ce21f2b98031",
+  "source_sha256": {
+    "tests/test_v90_household_graph.py": "2e920f76ae87fdf342046ea8a783e9273208760abb8659a5abbc1a7c1dded545",
+    "tests/test_v90_praf_migration.py": "40fedb095b9ae338382bf4b72029898824674fb97732f8735c01b4e079d49b6c",
+    "tests/test_v89_feedback.py": "140472bf90b1d7faa7e32dcb567e97e13688386f6bd8aec024c9c6177409a951",
+    "tests/test_v89_household_content.py": "c75666c6b5842adbd920f131d7517696d6a16bfa9cf60b7002600e8d127d3232",
+    "tests/test_v88_everyday_graph.py": "6400e0379ae6ecb59f12eda194ff689ede489fb0089cdd57c9481a2a05a8a48b",
+    "tests/test_v88_bread_feedback.py": "e6992b63bc85ab421c81aad40246c1b6304b33533a4ece0ab7c5530a5cb662e4",
+    "tests/test_v87_snack_graph.py": "16f3d3ac300b9c1e9ec4e03951f731ecd2181c2d739ba87a90067cffc21641df",
+    "tests/test_v86_preparation_graph.py": "1409e4bea77b76d966d3f4ad218fdeb20d9ee08a33326a03164cb291ce4b2d67",
+    "tests/test_v85_history.py": "aca50f86c8fb4018ebec0b0a1047d9d30acf6fd92fd109d1d7dde5bc7fb26a7e",
+    "tests/test_v83_food_feedback.py": "b0ae19c7ed3aac5157d5c25c3910f1e8a39c967ed8575f974f946fa8d41c3f3c",
+    "tests/test_v82_burta_feedback.py": "8a2348a2e8c86aea0984538495dd78ca70729494ce00c264f8934ac324e1b1a7",
+    "tests/test_v82_playable_content.py": "b3aa9f6659a208571f1a0b761b9bcb4d5ab3b97e108bdd9d74d50f75821143b4",
+    "tests/test_v81_history.py": "8f30c24d5a98f0dc2787a3c2e68fc086ba1b5eea41f260e195444d9e45f1f05f",
+    "tests/test_v81_nuca_feedback.py": "f046673705d4f73c91957f94a69ce5d716a80bd7175f86bf467b23e44ab6a904",
+    "tests/test_v79_gem_feedback.py": "a21775c365c7d5cb10f187ee5856ec6a0597de33d9303459dd29bbbe25d2a154",
+    "tests/test_v44_contexto_common_words.py": "c19180d7ced4b0d164e650763447c493328b8169a32362d8f482c9669f80d128",
+    "tests/test_v47_contexto_pending_gate.py": "a54491a091e61068b3e83eb37a3c3b6321904b234677c8e42d44b0a0b542ae42",
+    "tests/test_v33_basic_words.py": "a4d95b9712df1ab2492f19f559632171918ca6e3ee13aa2472cd1d5fb79d5d39",
+    "tests/test_v31_basic_words.py": "dcd1d2f0c0cf65b30ab636d762ad2d6dab4ddd2d4627a5facf93280afcc4399a",
+    "tests/test_v30_basic_words.py": "920eb1dac09a7238b0bcefe01d15620664c1cd1c5ca756936b4004db3f9f8a63",
+    "tests/content_history.py": "26c7071b29ea1ea0cfcecc5f23300601724a424ad00ec111eee6f99a64f0c006",
+    "tests/current_content.py": "d7eaf6e9d6ad2f149dbad1621b095ee25a083547bf7a4cf0538a00cb0ad337ce",
+    "tests/v89_contexto_snapshot.py": "d690c2d6306fb30c2d488b3c635cef47709436d7b9cbc4167f9aad10afe4e4db",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "8dc809f1dbbb0452d3ae0eb4d5777b7d41c56582088e16eef20c33bf29e8d17a",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "cat_de_roman_esti/wordgames/packs.py": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db",
+    "cat_de_roman_esti/wordgames/lant.py": "cf22b4ff5dbb2d99f80ccdbb3e4c886751d0030c5cf6402dd993f1be2334f78b",
+    "scripts/household_graph_v90_data.py": "c934e1a01d4f57a9c7e3eb6b47089a012027ed1d5a69e17741e2612bb811767c",
+    "scripts/critique_pack.py": "0e0399d38ccd381f71380317c89e3d2564597d7ce573119e48a98bd581a12f13",
+    "docs/CRITIQUE_RUBRIC.md": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/fixtures/games_pack.json": "e32139529aacc88e2f453ac1cee1d8cd9a2cd1b16f3ee0551a5a76779192391e",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "b5beb978b911c952ef2632cb2d93bc695be19f226b4a4661d77e26b335413fab",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "6ac090bc2186bf00209913d1123ba3f54de9f7b02f9fa2a781f2dfcccbbf58a9",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f",
+    "docs/reviews/v90-household-discovery-and-critique-gates/artifact-delta.json": "a34b131a175d8900285fd5fc5fb84b47acb086be65275082310522891750661a",
+    "docs/reviews/v90-household-discovery-and-critique-gates/analyst.json": "5cdd33ea41ba27251bebf857ea761ad9cd40b52c2d93c9f8b0bf74136a8ea07f",
+    "docs/reviews/v90-household-discovery-and-critique-gates/verifier.json": "1ef65b2819c3c80a3977aad206697ca472df31f92247204532e4d1e26ef61920",
+    "docs/reviews/v90-household-discovery-and-critique-gates/final-gate/contexto_verdicts.json": "375fbf250d6403c3741174de9af10f24ff03628b17040e8ac70cded99de1f998",
+    "docs/reviews/v90-household-discovery-and-critique-gates/graph-factual-review.json": "3071621247423b4c181a966fbd98f35f62ff31d7e36768ae3c1ef451a8e74629",
+    "docs/reviews/v90-household-discovery-and-critique-gates/graph-quality-review.json": "bd1d350e2f59cbd97562ae4427835934b7a49e4425558cbe79afcbe5d94faaa6",
+    "docs/reviews/v90-household-discovery-and-critique-gates/praf-migration-proposal.json": "c80e098ad1c73a9a4208998995a943704e99ce5461176c8e748c560b0c9bde28",
+    "docs/reviews/v90-household-discovery-and-critique-gates/author-candidates/graph-proposal.json": "672ea9f249ec9f18dbc51c24427580b61e98abbaef2b7b3a6d0fd5c557d395ba",
+    "docs/reviews/v90-household-discovery-and-critique-gates/author-candidates/viata_de_roman/candidates.json": "0a7d3cb1c78f19a5bb9568765ffb5ed96dfd321eade88fb3365afa37adada769",
+    "docs/reviews/v90-household-discovery-and-critique-gates/impact/baseline-receipt.json": "236176dbbe30fa600433db3efd82ed96257271265a2924d7cd138e919b5d37c7",
+    "docs/reviews/v90-household-discovery-and-critique-gates/impact/final-receipt.json": "db957bc7ffe24821ca28a2d9754caecf5da9d1021551bcdbc58fa3364fe30dea",
+    "docs/reviews/v90-household-discovery-and-critique-gates/impact/comparison-summary.json": "c006e464ded3cc17c1e79ae26147f9e54ded219161fe7ed19fc79eb2aa9d5e30",
+    "docs/reviews/v90-household-discovery-and-critique-gates/impact/capture.py.txt": "b45fd8cf3899eda8f28f0a0aca89cab60d9edb8058f3acd9139a90ed3aa653fa",
+    "docs/reviews/v90-household-discovery-and-critique-gates/impact/compare.py.txt": "1807f55b581f4b4db37e5267f29261046556133abc4620c91cd33e12cd8269a1",
+    "docs/reviews/v90-household-discovery-and-critique-gates/impact/inputs.json": "bf7112ac51c33257ba0b637b1183dc14f2fd6f46f6360fb140e68d94bc848d65",
+    "docs/reviews/v90-household-discovery-and-critique-gates/content-delta.json": "d5101267047d32879d5632b767faee0a6e77c21062c4b9692f555b217c9efa21",
+    "docs/reviews/v90-household-discovery-and-critique-gates/history-tests/verification.json": "7cd9db30b212894fe591192b8eb7f6d54bd5e5fd0c455e92c71940c02c29c81a",
+    "docs/reviews/v90-household-discovery-and-critique-gates/plate-topology-review.json": "7b1d36e6c6143f107704736eb65ff10ed78d5b2d20cc68e570398504d96e453e"
+  },
+  "findings": [],
+  "resolved_scope_correction": {
+    "location": "impact capture exactness wording",
+    "finding": "The capture records selected feedback fields, not whole HTTP response bodies.",
+    "resolution": "Use exact selected feedback observations for11120; separate API/browser tests support full-body privacy and lifecycle claims. Orchestrator acknowledged and will update Markdown wording; frozen historical JSON is not rewritten.",
+    "captured_fields": [
+      "attempts",
+      "guess",
+      "http",
+      "needs_confirmation",
+      "ok",
+      "resolved_label",
+      "won"
+    ],
+    "nested_guess_fields": [
+      "id",
+      "label",
+      "rank",
+      "distance",
+      "temperature",
+      "closeness"
+    ]
+  },
+  "inventory": {
+    "before": 659,
+    "after": 661,
+    "approved": 653,
+    "pending": 8,
+    "old_pack_records_exact": 659,
+    "old_alchimie_books_and_profiles_exact": 83,
+    "old_lant_profiles_exact": 100,
+    "derived_rows_exact": 336,
+    "puzzles_exact": 180,
+    "new_concepts": 3,
+    "new_edges": 17,
+    "new_forms": 10,
+    "new_synonyms_reviewed": 0,
+    "old_degree_deltas": [
+      {
+        "id": "n_v3sti_electricitate",
+        "before": 11,
+        "after": 12
+      },
+      {
+        "id": "n_v4gas_apa",
+        "before": 29,
+        "after": 30
+      },
+      {
+        "id": "n_v4gas_paine",
+        "before": 20,
+        "after": 21
+      },
+      {
+        "id": "n_v24_food_snack_biscuit",
+        "before": 14,
+        "after": 15
+      },
+      {
+        "id": "n_v24_home_textiles_patura",
+        "before": 6,
+        "after": 7
+      },
+      {
+        "id": "n_v24_home_textiles_covor",
+        "before": 6,
+        "after": 9
+      },
+      {
+        "id": "n_v29_clothing_everyday_haina",
+        "before": 8,
+        "after": 9
+      },
+      {
+        "id": "n_v30_kitchen_table_farfurie",
+        "before": 5,
+        "after": 6
+      },
+      {
+        "id": "n_v31_cleaning_floor_mop",
+        "before": 7,
+        "after": 8
+      },
+      {
+        "id": "n_v31_cleaning_floor_aspirator",
+        "before": 5,
+        "after": 10
+      },
+      {
+        "id": "n_v31_cleaning_floor_faras",
+        "before": 6,
+        "after": 8
+      },
+      {
+        "id": "n_v31_cleaning_dishes_burete_vase",
+        "before": 6,
+        "after": 8
+      },
+      {
+        "id": "n_v88_cleaning_matura",
+        "before": 5,
+        "after": 6
+      }
+    ]
+  },
+  "impact": {
+    "observations_each": 16800,
+    "records": 240,
+    "words": 70,
+    "fresh_requests_each": 16800,
+    "reused_each": 0,
+    "exact_selected_observations": 11120,
+    "changed": 5680,
+    "change_categories": {
+      "identity_changed": 240,
+      "newly_accepted": 2880,
+      "same_rank_other_fields": 2385,
+      "lower_rank": 8,
+      "higher_rank": 167
+    },
+    "won_changes": 0,
+    "same_rank_changed_guess_fields": {
+      "closeness": 2365,
+      "temperature": 20
+    },
+    "praf_identity_rank_directions": {
+      "higher": 227,
+      "lower": 13
+    },
+    "lower_rank_examples": [
+      {
+        "id": "ct_viata_de_roman_353",
+        "word": "Praf de copt",
+        "before": 308,
+        "after": 202
+      },
+      {
+        "id": "ct_viata_de_roman_353",
+        "word": "Pâine",
+        "before": 145,
+        "after": 41
+      },
+      {
+        "id": "ct_viata_de_roman_353",
+        "word": "Biscuit",
+        "before": 66,
+        "after": 41
+      },
+      {
+        "id": "ct_viata_de_roman_353",
+        "word": "Covor",
+        "before": 66,
+        "after": 14
+      },
+      {
+        "id": "ct_viata_de_roman_353",
+        "word": "Pătură",
+        "before": 66,
+        "after": 48
+      },
+      {
+        "id": "ct_viata_de_roman_353",
+        "word": "Electricitate",
+        "before": 266,
+        "after": 30
+      },
+      {
+        "id": "ct_viata_de_roman_353",
+        "word": "Farfurie",
+        "before": 201,
+        "after": 67
+      },
+      {
+        "id": "ct_viata_de_roman_353",
+        "word": "smântână pentru frișcă",
+        "before": 1586,
+        "after": 1095
+      }
+    ],
+    "higher_rank_max": {
+      "id": "ct_viata_de_roman_353",
+      "word": "Taburet",
+      "before": 308,
+      "after": 335
+    },
+    "compared_top_level_fields": [
+      "attempts",
+      "guess",
+      "http",
+      "needs_confirmation",
+      "ok",
+      "resolved_label",
+      "won"
+    ],
+    "scope_correction": "Exactness covers captured selected feedback fields only, not full HTTP response bodies. Privacy/lifecycle/full-body claims rely on separate tests."
+  },
+  "history": {
+    "five_artifacts_match_actual_baseline_bytes": {
+      "kg_sample.json": {
+        "before_sha256": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+        "after_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109"
+      },
+      "games_pack.json": {
+        "before_sha256": "c8b310f56f3983dc8f4e6a523a85a9af79a3cf244d770474f6db6ac8266e0f04",
+        "after_sha256": "e32139529aacc88e2f453ac1cee1d8cd9a2cd1b16f3ee0551a5a76779192391e"
+      },
+      "board_rankings_v37.json": {
+        "before_sha256": "ea207d65a1846d2f9bb2945ca9320a8e5e7bdc5e9fe8c31113aaf4f749fdc3d6",
+        "after_sha256": "b5beb978b911c952ef2632cb2d93bc695be19f226b4a4661d77e26b335413fab"
+      },
+      "derived_catalog_v38.json": {
+        "before_sha256": "4bd3cd515d21627fe42d07149bdf78951164ebfaa30df52fd1259ce26b8470d9",
+        "after_sha256": "6ac090bc2186bf00209913d1123ba3f54de9f7b02f9fa2a781f2dfcccbbf58a9"
+      },
+      "cat_mobile_app_pack_contract.json": {
+        "before_sha256": "d2fbb9f550a05b6b128431ee55787b2b156846887f0bc8ce1908f09e6683b951",
+        "after_sha256": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f"
+      }
+    },
+    "tamper_controls_passed": 10,
+    "old_v89_inverse_hashes_preserved": true,
+    "scoped_fixture_teardown": [
+      {
+        "exception_raised": false,
+        "restored_exact_current_terms_and_selector": true
+      },
+      {
+        "exception_raised": true,
+        "restored_exact_current_terms_and_selector": true
+      }
+    ],
+    "historical_target_boundaries": {
+      "v88_mature": 235,
+      "v89_runtime_eligible": 236,
+      "v90_runtime_eligible": 238
+    },
+    "reviewed_scope": "Existing V89 dust/Mop tests use the exact reconstructed graph,465projections and ranked236-target selector only. V44keeps old235/236topology claims on corresponding historical services; current238anchor reachability remains explicitly checked. Original assertions and pins remain, with V90separately covered by new exact tests.",
+    "current_content_pins": "Current values remain literal immutable snapshots. Final5artifact hashes and current661/653/8 inventory agree with actual files; older hashes live in exact inverses, not dynamically recomputed expectations."
+  },
+  "lant_menu": {
+    "changed_record": "lt_stiinta_216",
+    "removed_nonshortest": "n_v84_food_aluat",
+    "added_nonshortest": "n_v31_cleaning_dishes_burete_vase",
+    "shortest_shown_before_and_after": 206,
+    "shortest_sets_exact_for_all100": true,
+    "all_within_bound": true
+  },
+  "degree_and_topology": {
+    "old_degree_deltas": [
+      {
+        "id": "n_v3sti_electricitate",
+        "before": 11,
+        "after": 12
+      },
+      {
+        "id": "n_v4gas_apa",
+        "before": 29,
+        "after": 30
+      },
+      {
+        "id": "n_v4gas_paine",
+        "before": 20,
+        "after": 21
+      },
+      {
+        "id": "n_v24_food_snack_biscuit",
+        "before": 14,
+        "after": 15
+      },
+      {
+        "id": "n_v24_home_textiles_patura",
+        "before": 6,
+        "after": 7
+      },
+      {
+        "id": "n_v24_home_textiles_covor",
+        "before": 6,
+        "after": 9
+      },
+      {
+        "id": "n_v29_clothing_everyday_haina",
+        "before": 8,
+        "after": 9
+      },
+      {
+        "id": "n_v30_kitchen_table_farfurie",
+        "before": 5,
+        "after": 6
+      },
+      {
+        "id": "n_v31_cleaning_floor_mop",
+        "before": 7,
+        "after": 8
+      },
+      {
+        "id": "n_v31_cleaning_floor_aspirator",
+        "before": 5,
+        "after": 10
+      },
+      {
+        "id": "n_v31_cleaning_floor_faras",
+        "before": 6,
+        "after": 8
+      },
+      {
+        "id": "n_v31_cleaning_dishes_burete_vase",
+        "before": 6,
+        "after": 8
+      },
+      {
+        "id": "n_v88_cleaning_matura",
+        "before": 5,
+        "after": 6
+      }
+    ],
+    "seven_kitchen_nodes": [
+      "Oală",
+      "Tigaie",
+      "Cană",
+      "Castron",
+      "Farfurie",
+      "Furculiță",
+      "Lingură"
+    ],
+    "bridge": "de8797",
+    "proxy_mapping_count_unchanged": 71,
+    "independent_prior_review": "plate-topology-review.json",
+    "independent_prior_review_sha256": "7b1d36e6c6143f107704736eb65ff10ed78d5b2d20cc68e570398504d96e453e",
+    "current_exact_regression": "tests/test_v90_household_graph.py::test_plate_sponge_direction_opens_exactly_seven_old_kitchen_nodes_and_removal_reverses_it"
+  },
+  "focused_evidence": {
+    "source_bindings_verified": 46,
+    "lossless_archives_verified": 14,
+    "original_pytest_receipt": "history-tests/verification.json",
+    "original_test_result": "367 passed in185.36s",
+    "new_case_inventory": "53tests collected in0.57s",
+    "pytest_rerun_by_this_review": false,
+    "normal_and_exception_cache_teardown_exercised_by_this_review": true
+  },
+  "independent_command": {
+    "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python <scratch>/final-content-review/audit.py",
+    "exit_code": 0,
+    "script": "final-content-evidence/audit.py.txt",
+    "script_sha256": "11e8a17c471bf53adde1e0233e20ef66f08816a8234b636047feb37e7621c85e"
+  },
+  "archives": {
+    "independent-audit.json": {
+      "path": "final-content-evidence/independent-audit.json.gz",
+      "raw_bytes": 17091,
+      "raw_sha256": "bcc5cbd2c9e6b15483ac91c5e8869053e1372ac97a9677d49f52c4fb27e9607b",
+      "archive_sha256": "5e5931b51aa9125be9da35bd23fc241ee5ebc0ee160b7f514f88cfdac173cfed",
+      "gzip_mtime": 0
+    },
+    "audit.log": {
+      "path": "final-content-evidence/audit.log.gz",
+      "raw_bytes": 1750,
+      "raw_sha256": "538173b9256e222754c20de8e076e741e2fdd2cc4917f9ec76a35758daf3290e",
+      "archive_sha256": "c01b90990d65e56c0b913b775a64eac330b2835a620f08b7f46de6897c21077a",
+      "gzip_mtime": 0
+    }
+  },
+  "quality_judgment": "The source-qualified graph and native dust identity are meaningful improvements, with accepted tradeoffs. Lower rank is not automatically better quality: all8stable-identity lower ranks occur onMop, including indirect food/cream cues. Dust’s old earth approximation is deliberately retired;227of240old-target Praf ranks increase while13decrease. The observed175other rank movements,20temperature shifts at unchanged rank and broader kitchen topology must remain disclosed. No false-win change or legacy content/shortest-choice loss was found in the bounded evidence.",
+  "remaining_limits": [
+    "Full integration matrices and the final16receipt/manifest audit are still separate; this review neither reran them nor claims they passed.",
+    "The70-word sample is declared stress coverage, not population vocabulary coverage or a uniform semantic-quality score.",
+    "The exact old records/projections do not prove every possible game journey or all reachable guesses unchanged.",
+    "Burete and otherheld scouts remain held; the only new curated rounds are Făraș355/Aspirator356.",
+    "No human playtesting, public release, deployment or remote action is claimed."
+  ]
+}

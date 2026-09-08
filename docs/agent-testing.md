@@ -6,7 +6,7 @@ Last verified: 2026-09-08
 - Interpreter: `~/work/cat_de_roman_esti/.venv/bin/python` (Python 3.12.3; Django 5.2.16, pytest 9.1.1,
   pytest-django). It is gitignored and lives only in the shared checkout.
 - From a task worktree, prefix every command with `PYTHONPATH=.`.
-- V89 integration uses Python 3.12.3 and a fresh constrained Python 3.14.6 environment;
+- V90 integration uses Python 3.12.3 and a fresh constrained Python 3.14.6 environment;
   exact completed gate results belong in [STATUS](STATUS.md).
 - Fresh venv: `pip install -c constraints.txt -e ".[dev,web]"` (ci.yml:48).
 - Never use the `romania_scraper` venv: it has no Django, so collection gives 7 errors and only
