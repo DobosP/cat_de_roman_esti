@@ -1,0 +1,277 @@
+{
+  "phase": "V89 kickoff, not candidate approval",
+  "date": "2026-09-08",
+  "baseline_commit": "b614bfe735a27b9703025420daf603118f6a7f74",
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "2964951e3f68be7b49abb7f727b97d700a42d7e3527b117ef8b6c2830103f9fc",
+    "cat_de_roman_esti/fixtures/games_pack.json": "4c7030bd86e966162f4ac51ef00cf3bb649ff7a9d59c8c34e180cb7ff53e1636",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "961aece7245e2772b8d36f9c3181c1150c8f6a22c4c72a3000fd6616ac9cacb8",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "ba46d827dbe6e001a10bdd801d396abd67dfb4245c48b48b16024bf468c72d65",
+    "cat_de_roman_esti/wordgames/conexiuni.py": "2bdb6bfe8955fe80c8b1d79e005f65ad0d18108db976ac5105436d543ff3a1f1",
+    "frontend/src/screens/Conexiuni.tsx": "f75bd199ceeb7d4732b896e0f9a9d8553e536f3fb06cfa12168b1ddf9ab0a866",
+    "frontend/src/gameActionRecovery.mjs": "b73851fd616aed6489139cd800bad2e8e6ab3480664470e765fd044ba9eb6267"
+  },
+  "candidate_profiles": [
+    {
+      "label": "Mătură",
+      "id": "n_v88_cleaning_matura",
+      "already_approved_target": false,
+      "reachable": 2343,
+      "responsive": 81,
+      "technical_floor_pass": true,
+      "incoming": [
+        "n_v31_cleaning_floor_faras"
+      ],
+      "outgoing": [
+        "n_v24_home_surfaces_podea",
+        "n_v31_cleaning_floor_aspirator",
+        "n_v31_cleaning_floor_faras",
+        "n_v31_cleaning_floor_mop"
+      ],
+      "distinct_direct_neighbors": 4
+    },
+    {
+      "label": "Făraș",
+      "id": "n_v31_cleaning_floor_faras",
+      "already_approved_target": false,
+      "reachable": 2343,
+      "responsive": 250,
+      "technical_floor_pass": true,
+      "incoming": [
+        "n_v24_home_surfaces_podea",
+        "n_v31_cleaning_floor_aspirator",
+        "n_v88_cleaning_matura"
+      ],
+      "outgoing": [
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_floor_mop",
+        "n_v88_cleaning_matura"
+      ],
+      "distinct_direct_neighbors": 5
+    },
+    {
+      "label": "Mop",
+      "id": "n_v31_cleaning_floor_mop",
+      "already_approved_target": false,
+      "reachable": 2343,
+      "responsive": 627,
+      "technical_floor_pass": true,
+      "incoming": [
+        "n_v24_home_surfaces_podea",
+        "n_v31_cleaning_floor_faras",
+        "n_v31_cleaning_supply_detergent",
+        "n_v31_cleaning_water_galeata",
+        "n_v88_cleaning_matura"
+      ],
+      "outgoing": [
+        "n_v31_cleaning_floor_aspirator",
+        "n_v31_cleaning_water_galeata"
+      ],
+      "distinct_direct_neighbors": 6
+    },
+    {
+      "label": "Aspirator",
+      "id": "n_v31_cleaning_floor_aspirator",
+      "already_approved_target": false,
+      "reachable": 2343,
+      "responsive": 358,
+      "technical_floor_pass": true,
+      "incoming": [
+        "n_v24_home_surfaces_podea",
+        "n_v31_cleaning_floor_mop",
+        "n_v88_cleaning_matura"
+      ],
+      "outgoing": [
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_floor_faras"
+      ],
+      "distinct_direct_neighbors": 5
+    },
+    {
+      "label": "Găleată",
+      "id": "n_v31_cleaning_water_galeata",
+      "already_approved_target": false,
+      "reachable": 2343,
+      "responsive": 1488,
+      "technical_floor_pass": true,
+      "incoming": [
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_floor_mop",
+        "n_v4gas_apa"
+      ],
+      "outgoing": [
+        "n_v31_cleaning_floor_mop",
+        "n_v31_cleaning_supply_detergent"
+      ],
+      "distinct_direct_neighbors": 4
+    },
+    {
+      "label": "Detergent",
+      "id": "n_v31_cleaning_supply_detergent",
+      "already_approved_target": false,
+      "reachable": 2343,
+      "responsive": 624,
+      "technical_floor_pass": true,
+      "incoming": [
+        "n_v24_action_home_a_spala",
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_water_galeata"
+      ],
+      "outgoing": [
+        "n_v31_cleaning_dishes_burete_vase",
+        "n_v31_cleaning_floor_mop"
+      ],
+      "distinct_direct_neighbors": 4
+    },
+    {
+      "label": "Burete de vase",
+      "id": "n_v31_cleaning_dishes_burete_vase",
+      "already_approved_target": false,
+      "reachable": 2343,
+      "responsive": 332,
+      "technical_floor_pass": true,
+      "incoming": [
+        "n_v24_action_home_a_spala",
+        "n_v31_cleaning_floor_aspirator",
+        "n_v31_cleaning_floor_faras",
+        "n_v31_cleaning_supply_detergent"
+      ],
+      "outgoing": [
+        "n_v31_cleaning_supply_detergent",
+        "n_v31_cleaning_water_galeata"
+      ],
+      "distinct_direct_neighbors": 5
+    },
+    {
+      "label": "Taburet",
+      "id": "n_v88_home_taburet",
+      "already_approved_target": false,
+      "reachable": 2343,
+      "responsive": 968,
+      "technical_floor_pass": true,
+      "incoming": [
+        "n_v3muz_pian"
+      ],
+      "outgoing": [
+        "n_v24_home_seating_canapea",
+        "n_v24_home_seating_fotoliu",
+        "n_v24_home_seating_scaun",
+        "n_v3muz_pian"
+      ],
+      "distinct_direct_neighbors": 4
+    }
+  ],
+  "actual_bff_private_first_guesses": [
+    {
+      "word": "Făraș",
+      "target": "Mătură",
+      "guess": {
+        "id": "n_v31_cleaning_floor_faras",
+        "label": "Făraș",
+        "distance": 2,
+        "rank": 4,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "won": false,
+      "attempts": 1
+    },
+    {
+      "word": "Podea",
+      "target": "Mop",
+      "guess": {
+        "id": "n_v24_home_surfaces_podea",
+        "label": "Podea",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "won": false,
+      "attempts": 1
+    },
+    {
+      "word": "Mătură",
+      "target": "Aspirator",
+      "guess": {
+        "id": "n_v88_cleaning_matura",
+        "label": "Mătură",
+        "distance": 1,
+        "rank": 4,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "won": false,
+      "attempts": 1
+    },
+    {
+      "word": "Apă",
+      "target": "Găleată",
+      "guess": {
+        "id": "n_v4gas_apa",
+        "label": "Apă",
+        "distance": 1,
+        "rank": 2,
+        "temperature": "Fierbinte",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "won": false,
+      "attempts": 1
+    },
+    {
+      "word": "Scaun",
+      "target": "Taburet",
+      "guess": {
+        "id": "n_v24_home_seating_scaun",
+        "label": "Scaun",
+        "distance": 7,
+        "rank": 2189,
+        "temperature": "Inghetat",
+        "closeness": 7,
+        "attempt_number": 1
+      },
+      "won": false,
+      "attempts": 1
+    },
+    {
+      "word": "Tort Diplomat",
+      "target": "Frișcă",
+      "guess": {
+        "id": "n_v87_food_tort_diplomat",
+        "label": "Tort Diplomat",
+        "distance": 5,
+        "rank": 345,
+        "temperature": "Rece",
+        "closeness": 85,
+        "attempt_number": 1
+      },
+      "won": false,
+      "attempts": 1
+    },
+    {
+      "word": "Zacuscă",
+      "target": "Frișcă",
+      "guess": {
+        "id": "n_gas_zacusca",
+        "label": "Zacuscă",
+        "distance": 3,
+        "rank": 24,
+        "temperature": "Cald",
+        "closeness": 99,
+        "attempt_number": 1
+      },
+      "won": false,
+      "attempts": 1
+    }
+  ],
+  "limits": [
+    "Eight technical profiles do not establish C1-C6 quality or five recognizable direct neighbors.",
+    "Seven fresh private target guesses are not public-selector or human playtest evidence.",
+    "No V89 gameplay/content changes, promotions or new words are delivered."
+  ]
+}

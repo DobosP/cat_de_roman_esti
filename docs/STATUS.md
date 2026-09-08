@@ -91,7 +91,9 @@ Mobile content: `sha256:f8f5c13f2cb302338f35adf38e311906856d24cb04f58592c77783a5
 ## Remaining gates
 
 - V89 starts Conexiuni action recovery, household Contexto candidate review and a focused
-  audit of remaining feedback costs. Its implementation and full verification are pending.
+  audit of remaining feedback costs. Eight technical profiles and seven private-BFF
+  baselines are recorded in `docs/reviews/v89-feedback-and-conexiuni-recovery/README.md`;
+  its implementation and full verification are pending.
 - Facts improved without universal rank improvement: reverse pastry guesses toward Frișcă and
   some native household-context guesses cool. Smântână remains warm for Frișcă; qualified
   whipping cream is hot. No semantic quality claim follows from the 8,540 changed observations.

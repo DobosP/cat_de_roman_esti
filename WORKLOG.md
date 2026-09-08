@@ -639,3 +639,14 @@ clue/group/terminal replies, review existing household Contexto targets, and ass
 remaining pastry/household feedback costs without restoring broad false affinities.
 No V89 promotion or implementation is claimed by this start. The owner-authorized native
 loop remains active until stopped. Clean up only the verified-merged V88 task artifacts.
+
+## V89 baseline checkpoint (2026-09-08)
+
+Valid until: V89 changes the bound baseline — then treat as history.
+
+V89 starts above `b614bfe`, with eight source-bound household target profiles and seven
+fresh private-BFF first guesses. A direct-neighbor screen narrows the first review set to
+Făraș, Mop, Aspirator and Burete de vase; the other four remain held for missing-neighbor,
+sense or cue issues. No V89 source/content edits or promotions yet. The kickoff prioritizes
+Conexiuni response-loss recovery and bounded pastry/household feedback review. Docs and
+whitespace checks pass; no full suite rerun for this documentation-only checkpoint.
