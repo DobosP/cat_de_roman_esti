@@ -1,12 +1,12 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-08 — V88 full integration GREEN; ready for local landing. Production last checked 2026-08-27.
+Last verified: 2026-09-08 — V88 landed locally; V89 started; verified local loop active. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-  V87 is merged at `fa8cffd`, with landing record `2878417`. V88 remains on
-  `feat/v88-cross-game-quality`; the owner-authorized local loop continues (ADR-0127).
+  V88 is merged at `000b0a2`, following V87 and its landing record `2878417`.
+  V89 starts on `feat/v89-feedback-and-conexiuni-recovery`; the local loop continues (ADR-0127).
 - V88 adds Compas, Echer, Raportor, Mătură, Taburet, Cratiță and qualified Smântână dulce
   pentru frișcă: seven concepts, 28 forms (25 grammatical + three qualified), zero synonyms.
   It adds 33 directed links and removes exactly the unsupported fermented-cream→Frișcă
@@ -90,7 +90,8 @@ Mobile content: `sha256:f8f5c13f2cb302338f35adf38e311906856d24cb04f58592c77783a5
 
 ## Remaining gates
 
-- V88 is green on its task branch. Local landing and the next version follow the active loop.
+- V89 starts Conexiuni action recovery, household Contexto candidate review and a focused
+  audit of remaining feedback costs. Its implementation and full verification are pending.
 - Facts improved without universal rank improvement: reverse pastry guesses toward Frișcă and
   some native household-context guesses cool. Smântână remains warm for Frișcă; qualified
   whipping cream is hot. No semantic quality claim follows from the 8,540 changed observations.

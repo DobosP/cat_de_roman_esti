@@ -4,8 +4,8 @@ Valid until: the next verified quality wave — then refresh this living checkli
 
 Target: public anonymous beta for Romanian players. **V88 is implemented with seven new
 concepts, three reviewed rounds across Alchimie/Conexiuni and recoverable Lanț actions;
-full integration is GREEN and V88 is ready for local landing.** Local main records
-landed V87 `fa8cffd` through `2878417`.
+full integration is GREEN and V88 is landed locally at `000b0a2`. V89 starts the next
+feedback and Conexiuni-recovery batch.**
 The recurring local iteration follows [ADR-0127](adr/0127-recurring-local-version-loop.md)
 until the owner stops it. No push or deployment occurred.
 Public rollout still requires the external checks below.

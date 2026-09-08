@@ -622,3 +622,20 @@ and excluded. The unchanged complete rerun passed. No push or deployment.
 
 Complete evidence: `docs/reviews/v88-cross-game-quality/README.md`. The recurring local
 loop remains active; human/device acceptance and production rollout are still separate.
+
+## V88 landing and V89 start (2026-09-08)
+
+Valid until: the next version landing — then treat as history.
+
+V88 `000b0a25c25d48874e145fb3a8eebb1a38c791ba` was fast-forwarded into local main after
+all 16 green integration gates and an independent final audit. The final manifest binds
+297 present/deleted files, including the two final audit records and the earlier V88
+kickoff commit. Full results are 1,508 backend tests per runtime, 53 accounts each,
+193 native frontend and 188 browser cases. Initial failures and the interrupted run
+remain separate, exact evidence. No push or deployment.
+
+V89 starts `feat/v89-feedback-and-conexiuni-recovery`: reproduce Conexiuni lost paid
+clue/group/terminal replies, review existing household Contexto targets, and assess the
+remaining pastry/household feedback costs without restoring broad false affinities.
+No V89 promotion or implementation is claimed by this start. The owner-authorized native
+loop remains active until stopped. Clean up only the verified-merged V88 task artifacts.
