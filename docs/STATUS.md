@@ -1,13 +1,13 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-09 — V91 verified for local landing; automatic iteration is stopped. Production last checked 2026-08-27.
+Last verified: 2026-09-09 — V91 landed locally; automatic iteration is stopped. Production last checked 2026-08-27.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-  V90 is landed locally through `e2e0363`, including implementation `0039b1e`.
-  V91 on `feat/v91-recovery-and-mobile-clarity` is the final authorized version.
-  Automatic recurrence is paused; land V91 when green, then stop. No V92 (ADR-0137).
+  V91 is locally landed at `48cd5b8`, following V90 baseline `e2e0363`.
+  This is the final authorized version. Automatic recurrence is paused; the loop is
+  stopped and V92 was not started (ADR-0137).
 - Intrusul and Perechi now retain visible verification after failed recovery reads.
   Mutations stay locked; each retry reads once. Original saved-pointer ownership survives
   retries, including another tab removing its pointer. Successful replies also require
@@ -88,7 +88,8 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
   the two test-only amendments; serving runtime/data and final UI assets stayed exact.
 - Evidence: `docs/reviews/v91-recovery-and-mobile-clarity/verification.json`, immutable
   review inputs, independent audits and final file ledger. Human/player/device acceptance
-  remains unrun. V90 evidence stays in its historical review folder.
+  remains unrun. The candidate ledger is sealed at `48cd5b8`; later landing notes are
+  documentation only. V90 evidence stays in its historical review folder.
 
 ## Production and remaining work
 
@@ -96,7 +97,7 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
  image `sha256:30b39c0bba954074de6cdecd377a9742f627f4900caccbae8805d132f5c317bd`.
  No production check, push or deployment in V91. Accounts remain outside this scope.
  Preserve `rollback-60c3fd5318a` for the next separately authorized rollout.
-- V91 is verified for local landing and cleanup. Stop there; no further version is authorized.
+- V91 is landed locally and the loop is stopped. No further version is authorized.
  Human/player/device acceptance, operator/legal checks, feedback contact and rollout remain.
 - Three Neagu edge labels have a factually reviewed past-tense proposal, unapplied in V91.
  Four thin approved Contexto neighborhoods and 17 unknown household surfaces remain open.

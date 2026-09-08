@@ -795,3 +795,17 @@ Serving code/data/assets remain unchanged through these test-only amendments.
 Evidence is under docs/reviews/v91-recovery-and-mobile-clarity/. Land locally, clean only
 this verified worktree/branch/scratch, keep recurrence paused and do not start V92. No push,
 deployment, accounts rollout or human/device acceptance is claimed.
+
+## V91 local landing and loop stop (2026-09-09)
+
+Valid until: a separately authorized version supersedes this landing — then treat as history.
+
+V91 implementation/evidence `48cd5b81fa42b485c29fd22c39cb9f55be2224ce` is merged into local main following V90.
+The independent closure audit accepted all480 original ledger bindings,2091 frozen
+inputs and16 green gates. The final ledger adds only its three closure artifacts,
+retaining all480 prior bindings unchanged (483 total, excluding the ledger itself).
+A preserved unified diff was losslessly wrapped in gzip so its meaningful context
+spaces do not fail the staged whitespace gate; its original decoded hash remains exact.
+These landing notes change documentation only. The native heartbeat remains PAUSED;
+no V92, push or deployment was started. Only this verified-merged task's branch,
+worktree and scratch qualify for the required same-session cleanup.

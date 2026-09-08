@@ -4,7 +4,9 @@ Valid until: a later change supersedes these bound V91 observations — then tre
 
 Baseline is local main `e2e03638b90fc9248c33f70eedaa8c9c5fbd87ad`, containing landed V90.
 V91 is the final authorized version under [ADR-0137](../../adr/0137-finish-v91-and-stop-iteration-loop.md).
-The automatic loop is paused. Finish the green local merge and cleanup, then stop; no V92.
+V91 is locally merged as `48cd5b81fa42b485c29fd22c39cb9f55be2224ce`.
+The automatic loop is paused and stopped; V92 was not started. The candidate ledger and
+all sealed evidence are recorded in that commit; later landing notes are documentation only.
 No push or deployment is part of this work. All 16 final local gates pass; the
 [completed gate receipt](verification.json) records the exact commands and raw log hashes.
 The final file ledger is `review-manifest.json`.
