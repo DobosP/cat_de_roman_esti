@@ -470,3 +470,50 @@ receipts, including 1,299 backend tests and 53 accounts tests on each Python ver
 with this documentation record. V86 begins another batch of player-visible fixes,
 reviewed concepts/links and playable content; remaining preparation/cooling feedback and
 Lanț suggestion coverage are initial investigation candidates. No push or deployment.
+
+
+## V86 preparation, route and replay quality, 2026-09-08
+
+Valid until: the reviewed content, behavior or validation bindings change — then treat as history.
+
+V85 landed at `317ae7d`, followed by local landing record `14e8895`. V86 adds nine native
+preparation concepts, 30 accepted forms and 41 one-way links, with no removals. Existing
+owners/forms, 9,319 edge records and all 180 puzzles remain exact; only 21 old node degrees
+change. Congelator replaces its approximate Frigider projection, while qualified kitchen
+mixer and starch keep their sense boundaries. Forms are not counted as synonyms.
+
+Five Contexto rounds (Brânză, Lapte, Savarină, Frișcă, Cremă de vanilie) and one Lanț round
+(Frigider→Înghețată) receive complete independent bound promotion reviews. Two salience
+warnings are explicitly justified; all eight prior pending holds remain. Eligibility grows
+224→229 and 96→97. Two closed feedback pairs repair natural Ecler/vanilla-cream and
+Savarină/whipped-cream guesses without winning or reversing graph directions.
+
+Lanț reserves two available shortest continuations within its old menu limits. Among 96 old
+approved rounds, 59 menus improve; visible shortest first hops total 107→198, starts showing
+none fall 32→0, and all 96 show at least two. No previously shown shortest option disappears.
+All 643 old source records, 336 derived rows, 82 Alchimie projections and 99 Lanț profiles
+remain exact. The 9,120-observation comparison per checkout separates stock and rank changes.
+
+All six games persist creation errors beside retry actions and retain selected options,
+old results/progress and scores. Existing intro/round DOM stays mounted during creation;
+synchronous flight guards and disabled/inert controls prevent old-game mutations or duplicate
+starts. Shared ResultCard and the live Alchimie footer reserve responsive notice space so
+retry does not move outside a short viewport. Saved-game recovery remains separate.
+
+Full gates pass: 1,353 backend tests on Python 3.12.3 (666.27s) and 3.14.4 (515.00s),
+53 accounts tests each, 177 native frontend tests and 148 browser checks (8.6m).
+Validators, pending gate, Ruff, docs/whitespace and frontend lint/typecheck/build/bundle pass;
+initial transfer is 118.87/120 KiB. Focused evidence includes 45 preparation checks,
+65 Lanț checks and 128 compatibility checks. Desktop/mobile screenshots were inspected.
+
+Initial UI review/testing caught offscreen error placement, intro remount scroll loss and
+retry-button displacement; those were repaired. Sticky/partially visible rules caused two
+incorrect setup assumptions, corrected with strict notice/button viewport checks retained.
+Four old native source-shape assertions were updated to require stronger creating/flight
+guards while retaining the original behavior checks. Exact initial and final receipts remain
+in the V86 archive; neither full Python matrix nor the final browser run required a retry.
+
+V86 is ready on `feat/v86-preparation-and-route-quality` for its next landing request.
+Shared main remains at `14e8895`. No push, deployment, real-device acceptance or human
+playtest occurred. Indirect oven/yeast/Sarmale and some butter/dairy feedback remain noisy;
+Biscuit and less defensible routes are deferred. Public-beta external gates remain.

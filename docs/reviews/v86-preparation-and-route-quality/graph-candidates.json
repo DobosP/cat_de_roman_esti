@@ -1,0 +1,897 @@
+{
+  "schema_version": 1,
+  "status": "authored proposal; independent review and impact required before apply",
+  "baseline_commit": "14e8895",
+  "baseline_fixture_sha256": "b7d28b990d37164d8e41a93965a5824162ded56b2907ac03388fee717eb144b2",
+  "nodes": [
+    {
+      "id": "n_v86_food_frisca",
+      "label_ro": "Frișcă",
+      "category": "gastronomie",
+      "description": "Smântână dulce aerată prin batere, folosită la umplerea și decorarea deserturilor.",
+      "aliases": [
+        "frișcă bătută",
+        "frișcă naturală",
+        "frișcă de smântână"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    },
+    {
+      "id": "n_v86_food_albus",
+      "label_ro": "Albuș",
+      "category": "gastronomie",
+      "description": "Partea transparentă a oului, care poate fi bătută spumă pentru unele preparate.",
+      "aliases": [
+        "albușul",
+        "albușului",
+        "albușuri",
+        "albușurile"
+      ],
+      "node_type": "concept",
+      "salience": 0.8
+    },
+    {
+      "id": "n_v86_food_galbenus",
+      "label_ro": "Gălbenuș",
+      "category": "gastronomie",
+      "description": "Partea galbenă din centrul oului, folosită separat în creme și aluaturi.",
+      "aliases": [
+        "gălbenușul",
+        "gălbenușului",
+        "gălbenușuri",
+        "gălbenușurile"
+      ],
+      "node_type": "concept",
+      "salience": 0.8
+    },
+    {
+      "id": "n_v86_food_zahar_pudra",
+      "label_ro": "Zahăr pudră",
+      "category": "gastronomie",
+      "description": "Zahăr măcinat foarte fin, folosit în creme și pentru pudrarea deserturilor.",
+      "aliases": [
+        "zahărul pudră",
+        "zahărului pudră",
+        "zahăr pudră fin"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    },
+    {
+      "id": "n_v86_food_lapte_praf",
+      "label_ro": "Lapte praf",
+      "category": "gastronomie",
+      "description": "Produs alimentar obținut prin deshidratarea laptelui, folosit și la deserturi.",
+      "aliases": [
+        "laptele praf",
+        "laptelui praf",
+        "lapte praf integral"
+      ],
+      "node_type": "concept",
+      "salience": 0.8
+    },
+    {
+      "id": "n_v86_food_amidon",
+      "label_ro": "Amidon alimentar",
+      "category": "gastronomie",
+      "description": "Ingredient bogat în amidon, folosit la îngroșarea unor sosuri și creme.",
+      "aliases": [
+        "amidonul alimentar",
+        "amidonului alimentar",
+        "amidon de porumb"
+      ],
+      "node_type": "concept",
+      "salience": 0.7
+    },
+    {
+      "id": "n_v86_food_crema_vanilie",
+      "label_ro": "Cremă de vanilie",
+      "category": "gastronomie",
+      "description": "Cremă aromată cu vanilie, folosită ca umplutură în eclere și alte prăjituri.",
+      "aliases": [
+        "cremei de vanilie",
+        "creme de vanilie",
+        "cremele de vanilie"
+      ],
+      "node_type": "concept",
+      "salience": 0.75
+    },
+    {
+      "id": "n_v86_kitchen_congelator",
+      "label_ro": "Congelator",
+      "category": "gastronomie",
+      "description": "Aparat sau compartiment frigorific pentru congelarea și păstrarea alimentelor congelate.",
+      "aliases": [
+        "congelatorul",
+        "congelatorului",
+        "congelatoare",
+        "congelatoarele"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    },
+    {
+      "id": "n_v86_kitchen_mixer",
+      "label_ro": "Mixer de bucătărie",
+      "category": "gastronomie",
+      "description": "Aparat electric cu palete sau accesorii pentru amestecarea și baterea ingredientelor.",
+      "aliases": [
+        "mixerul de bucătărie",
+        "mixerului de bucătărie",
+        "mixere de bucătărie"
+      ],
+      "node_type": "concept",
+      "salience": 0.85
+    }
+  ],
+  "edges": [
+    {
+      "src": "n_v4gas_ou",
+      "dst": "n_v86_food_albus",
+      "relation": "has_part",
+      "label_ro": "conține",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v4gas_ou",
+      "dst": "n_v86_food_galbenus",
+      "relation": "has_part",
+      "label_ro": "conține",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_albus",
+      "dst": "n_gas_cozonac",
+      "relation": "ingredient_variant",
+      "label_ro": "bătut în unele umpluturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_albus",
+      "dst": "n_v18gas_amandina",
+      "relation": "ingredient_variant",
+      "label_ro": "bătut în unele blaturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_albus",
+      "dst": "n_v17gas_pasca",
+      "relation": "ingredient_variant",
+      "label_ro": "bătut în unele rețete fără aluat de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_galbenus",
+      "dst": "n_v86_food_crema_vanilie",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient în unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_galbenus",
+      "dst": "n_v3gas_inghetata",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient în unele baze pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_galbenus",
+      "dst": "n_gas_cozonac",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient în unele aluaturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_food_pantry_zahar",
+      "dst": "n_v86_food_zahar_pudra",
+      "relation": "processed_into",
+      "label_ro": "se macină fin pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_zahar_pudra",
+      "dst": "n_v86_food_frisca",
+      "relation": "ingredient_variant",
+      "label_ro": "îndulcește unele variante de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_zahar_pudra",
+      "dst": "n_v21gas_cornulete",
+      "relation": "ingredient_variant",
+      "label_ro": "folosit la pudrarea unor",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_zahar_pudra",
+      "dst": "n_v17gas_gogosi",
+      "relation": "ingredient_variant",
+      "label_ro": "folosit la pudrarea unor",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_zahar_pudra",
+      "dst": "n_v18gas_amandina",
+      "relation": "ingredient_variant",
+      "label_ro": "îndulcește unele creme pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v4gas_lapte",
+      "dst": "n_v86_food_lapte_praf",
+      "relation": "processed_into",
+      "label_ro": "se deshidratează pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_lapte_praf",
+      "dst": "n_v85_food_ciocolata",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient în unele rețete de casă de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_lapte_praf",
+      "dst": "n_v3gas_inghetata",
+      "relation": "ingredient_variant",
+      "label_ro": "ingredient în unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_lapte_praf",
+      "dst": "n_v3gas_cafea",
+      "relation": "ingredient_variant",
+      "label_ro": "adăugat în unele băuturi cu",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v20gas_smantana",
+      "dst": "n_v86_food_frisca",
+      "relation": "processed_into",
+      "label_ro": "sortimentele dulci potrivite se bat pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_vanilie",
+      "dst": "n_v86_food_frisca",
+      "relation": "ingredient_variant",
+      "label_ro": "aromatizează unele variante de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_frisca",
+      "dst": "n_v21gas_savarina",
+      "relation": "part_of",
+      "label_ro": "umple și decorează",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_frisca",
+      "dst": "n_v21gas_ecler",
+      "relation": "ingredient_variant",
+      "label_ro": "folosită în unele umpluturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_frisca",
+      "dst": "n_v3gas_inghetata",
+      "relation": "ingredient_variant",
+      "label_ro": "încorporată în unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_home_appliances_frigider",
+      "dst": "n_v86_food_frisca",
+      "relation": "stores",
+      "label_ro": "păstrează la rece",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v85_food_vanilie",
+      "dst": "n_v86_food_crema_vanilie",
+      "relation": "part_of",
+      "label_ro": "aromatizează",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v4gas_lapte",
+      "dst": "n_v86_food_crema_vanilie",
+      "relation": "ingredient_variant",
+      "label_ro": "bază pentru unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_amidon",
+      "dst": "n_v86_food_crema_vanilie",
+      "relation": "ingredient_variant",
+      "label_ro": "îngroașă unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_food_pantry_zahar",
+      "dst": "n_v86_food_crema_vanilie",
+      "relation": "ingredient_variant",
+      "label_ro": "îndulcește unele rețete de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_crema_vanilie",
+      "dst": "n_v21gas_ecler",
+      "relation": "ingredient_variant",
+      "label_ro": "umple unele variante de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_amidon",
+      "dst": "n_v21gas_ecler",
+      "relation": "ingredient_variant",
+      "label_ro": "folosit în unele aluaturi de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_amidon",
+      "dst": "n_v3gas_inghetata",
+      "relation": "ingredient_variant",
+      "label_ro": "îngroașă unele baze pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_food_amidon",
+      "dst": "n_v2gas_sosuri",
+      "relation": "ingredient_variant",
+      "label_ro": "îngroașă unele",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v2lim_porumb",
+      "dst": "n_v86_food_amidon",
+      "relation": "raw_material_for",
+      "label_ro": "sursă pentru unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_kitchen_congelator",
+      "dst": "n_v3gas_inghetata",
+      "relation": "stores",
+      "label_ro": "păstrează congelată",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_kitchen_congelator",
+      "dst": "n_v4gas_paine",
+      "relation": "stores",
+      "label_ro": "poate păstra congelată",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_kitchen_congelator",
+      "dst": "n_v4gas_lapte",
+      "relation": "stores",
+      "label_ro": "poate congela unele sortimente de",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_kitchen_congelator",
+      "dst": "n_v24_food_small_fruit_capsuna",
+      "relation": "stores",
+      "label_ro": "poate păstra congelată",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v24_home_appliances_frigider",
+      "dst": "n_v86_kitchen_congelator",
+      "relation": "has_part",
+      "label_ro": "unele modele au compartiment de tip",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_kitchen_mixer",
+      "dst": "n_v86_food_frisca",
+      "relation": "preparation_tool",
+      "label_ro": "folosit la baterea smântânii pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_kitchen_mixer",
+      "dst": "n_v86_food_albus",
+      "relation": "preparation_tool",
+      "label_ro": "bate spumă",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_kitchen_mixer",
+      "dst": "n_v84_food_aluat",
+      "relation": "preparation_tool",
+      "label_ro": "cu accesorii potrivite amestecă",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    },
+    {
+      "src": "n_v86_kitchen_mixer",
+      "dst": "n_gas_cozonac",
+      "relation": "preparation_tool",
+      "label_ro": "poate frământa aluatul pentru",
+      "bidirectional": 0,
+      "is_distractor": 0,
+      "strength": 0.8
+    }
+  ],
+  "remove_edges": [],
+  "sources": {
+    "egg_parts": {
+      "url": "https://dexonline.ro/definitie/g%C4%83lbenu%C8%99/902347",
+      "evidence": "Dictionary distinguishes yolk inside the egg and surrounding white; not interchangeable ingredients."
+    },
+    "cozonac": {
+      "url": "https://jamilacuisine.ro/cozonac-cu-aluat-oparit-cozonaci-babani-si-pufosi-reteta-video/",
+      "evidence": "The recipe puts yolks into dough and whipped whites into the walnut/cocoa filling. Author kneads using a mixer; variants are not universal."
+    },
+    "amandina": {
+      "url": "https://jamilacuisine.ro/prajitura-amandina-amandine-facute-in-casa/",
+      "evidence": "Cocoa sponge uses eggs; cream uses powdered sugar. Separate whipped whites are directly confirmed by the national-TV recipe source."
+    },
+    "amandina_whites": {
+      "url": "https://www.protv.ro/articol/39442-reteta-amandina",
+      "evidence": "The demonstrated recipe mixes the separately prepared egg-white and yolk masses into the sponge."
+    },
+    "pasca_whites": {
+      "url": "https://bucate-aromate.ro/2015/03/pasca-fara-aluat-cu-branza-de-vaci-si-multe-stafide/",
+      "evidence": "Original recipe beats whites to stiff foam then folds them into a crustless sweet-cheese Easter bake."
+    },
+    "vanilla_cream": {
+      "url": "https://www.oetker.ro/retete/r/crema-de-vanilie-cu-amidon",
+      "evidence": "Manufacturer recipe lists five yolks, milk, sugar, starch and a vanilla pod for the pastry cream. Each is a direct ingredient in this variant."
+    },
+    "yolk_icecream": {
+      "url": "https://jamilacuisine.ro/inghetata-de-vanilie-reteta-video/",
+      "evidence": "Author recipe uses six yolks with milk, cream and vanilla for a cooked custard subsequently frozen."
+    },
+    "powdered_sugar": {
+      "url": "https://cio.ro/produse/zahar-pudra-500g",
+      "evidence": "Producer states that powdered sugar is finely milled sugar and names doughnuts and crescent cookies among its dusting uses."
+    },
+    "chantilly": {
+      "url": "https://www.dulceromanie.ro/mix-and-match/crema-chantilly",
+      "evidence": "Test-kitchen recipe combines cream, powdered sugar and actual vanilla-pod seeds into an aerated cream. It is one whipped-cream variant, not a synonym claim."
+    },
+    "milk_powder_process": {
+      "url": "https://rei.gov.ro/teza-doctorat-document/8291115e5e594d9c34e-Teza-de-doctorat-Ienovan_signed.pdf",
+      "evidence": "Institutionally archived dairy research defines milk powder as dehydrated milk. Only the production relation is used."
+    },
+    "milk_powder_uses": {
+      "url": "https://www.oetker.ro/produsele/p/lapte-praf-250g",
+      "evidence": "Producer names use in homemade chocolate and coffee drinks; generic powdered milk is not made an alias for infant formula."
+    },
+    "milk_powder_icecream": {
+      "url": "https://gelaterialaromana.ro/wp-content/uploads/2023/03/lista-ingrediente-la-romana-06032023.pdf",
+      "evidence": "Gelateria original ingredient list contains skimmed milk powder in named ice-cream bases. No nutritional or superiority claim is used."
+    },
+    "whipped_cream": {
+      "url": "https://www.hendi.ro/blog/cum-se-face-frisca-iata-cele-mai-simple-metode",
+      "evidence": "Equipment producer explains whipping chilled suitable sweet cream with a mixer, optional powdered sugar/vanilla, and keeping the finished foam cold. Fermented sour cream is not promised to whip."
+    },
+    "savarina": {
+      "url": "https://jamilacuisine.ro/savarine-de-casa-reteta-video/",
+      "evidence": "Author recipe decorates soaked savarinas with abundant whipped cream."
+    },
+    "eclairs": {
+      "url": "https://jamilacuisine.ro/eclere-pas-cu-pas-reteta-video/",
+      "evidence": "Author recipe fills eclairs with vanilla cream and offers whipped cream as an optional addition."
+    },
+    "whipped_starch_icecream": {
+      "url": "https://www.auchan.ro/inspiratie-si-savoare/retete-cu-imagini/inghetata",
+      "evidence": "Retailer recipe for caramel ice cream thickens milk using corn starch and folds beaten whipped cream into the cooled base before freezing."
+    },
+    "starch_eclairs": {
+      "url": "https://www.oetker.ro/retete/r/mini-eclere",
+      "evidence": "Manufacturer uses starch in this mini-eclair dough variant and whips a cream filling. The starch link does not claim every eclair needs starch or yeast."
+    },
+    "starch_product": {
+      "url": "https://www.oetker-professional.ro/produsele-noastre/gustin-amidon-alimentar-fin",
+      "evidence": "Producer identifies corn starch and use in sauces; the graph keeps the culinary qualifier and does not capture laundry/industrial starch."
+    },
+    "freezer_manual": {
+      "url": "https://documents.beko.com/Refrigerator/7202947607/ro-RO/3450429551106844043.html",
+      "evidence": "Manufacturer refrigerator/freezer manual assigns ice cream to freezer shelves and distinguishes the refrigerating compartment; supports a freezer component in some refrigerators, not ordinary fridge shelves freezing ice cream."
+    },
+    "freezer_storage": {
+      "url": "https://www.arctic.ro/blog/idei-practice/congelarea-alimentelor-ce-mancare-se-poate-congela",
+      "evidence": "Producer lists frozen bread and selected pasteurized/semi-skimmed milk, and discusses berries generically. The whole-milk texture caveat remains; explicit strawberry processing is corroborated separately. No times or safety advice enter the graph."
+    },
+    "mixer": {
+      "url": "https://www.philips.ro/c-p/HR3745_00/viva-collection-mixer",
+      "evidence": "Manufacturer documents beating egg whites and dough attachments; equipment-to-ingredient labels describe actions, not physical creation of an ingredient."
+    },
+    "freezer_strawberries": {
+      "url": "https://comprodcoop.ro/capsune-congelate/",
+      "evidence": "Original Romanian producer explicitly describes strawberries passing through a continuous freezer, then being packaged and stored frozen. Only processing/storage evidence is used; its health claims are excluded."
+    },
+    "milk_powder_definition": {
+      "url": "https://legislatie.just.ro/Public/DetaliiDocument/175376",
+      "evidence": "Original government text, Annex1 point2, defines milk powder as a dehydrated solid produced by removing water from milk. This corroborates the production definition only, without a present-day compliance claim."
+    },
+    "milk_powder_icecream_alternate": {
+      "url": "https://gelaterialaromana.ro/wp-content/uploads/2025/03/meniu-romania-mar-2025.pdf",
+      "evidence": "Same producer original March2025 indexed menu lists skimmed milk powder in milk-chocolate and salted-caramel ice-cream bases. This corroboration uses indexed original recipe text; complete direct PDF access is not claimed."
+    }
+  },
+  "edge_source_bindings": [
+    {
+      "edge_index": 0,
+      "sources": [
+        "egg_parts"
+      ]
+    },
+    {
+      "edge_index": 1,
+      "sources": [
+        "egg_parts"
+      ]
+    },
+    {
+      "edge_index": 2,
+      "sources": [
+        "cozonac"
+      ]
+    },
+    {
+      "edge_index": 3,
+      "sources": [
+        "amandina_whites"
+      ]
+    },
+    {
+      "edge_index": 4,
+      "sources": [
+        "pasca_whites"
+      ]
+    },
+    {
+      "edge_index": 5,
+      "sources": [
+        "vanilla_cream"
+      ]
+    },
+    {
+      "edge_index": 6,
+      "sources": [
+        "yolk_icecream"
+      ]
+    },
+    {
+      "edge_index": 7,
+      "sources": [
+        "cozonac"
+      ]
+    },
+    {
+      "edge_index": 8,
+      "sources": [
+        "powdered_sugar"
+      ]
+    },
+    {
+      "edge_index": 9,
+      "sources": [
+        "chantilly"
+      ]
+    },
+    {
+      "edge_index": 10,
+      "sources": [
+        "powdered_sugar"
+      ]
+    },
+    {
+      "edge_index": 11,
+      "sources": [
+        "powdered_sugar"
+      ]
+    },
+    {
+      "edge_index": 12,
+      "sources": [
+        "amandina"
+      ]
+    },
+    {
+      "edge_index": 13,
+      "sources": [
+        "milk_powder_process",
+        "milk_powder_definition"
+      ]
+    },
+    {
+      "edge_index": 14,
+      "sources": [
+        "milk_powder_uses"
+      ]
+    },
+    {
+      "edge_index": 15,
+      "sources": [
+        "milk_powder_icecream",
+        "milk_powder_icecream_alternate"
+      ]
+    },
+    {
+      "edge_index": 16,
+      "sources": [
+        "milk_powder_uses"
+      ]
+    },
+    {
+      "edge_index": 17,
+      "sources": [
+        "whipped_cream"
+      ]
+    },
+    {
+      "edge_index": 18,
+      "sources": [
+        "chantilly"
+      ]
+    },
+    {
+      "edge_index": 19,
+      "sources": [
+        "savarina"
+      ]
+    },
+    {
+      "edge_index": 20,
+      "sources": [
+        "eclairs"
+      ]
+    },
+    {
+      "edge_index": 21,
+      "sources": [
+        "whipped_starch_icecream"
+      ]
+    },
+    {
+      "edge_index": 22,
+      "sources": [
+        "whipped_cream"
+      ]
+    },
+    {
+      "edge_index": 23,
+      "sources": [
+        "vanilla_cream"
+      ]
+    },
+    {
+      "edge_index": 24,
+      "sources": [
+        "vanilla_cream"
+      ]
+    },
+    {
+      "edge_index": 25,
+      "sources": [
+        "vanilla_cream"
+      ]
+    },
+    {
+      "edge_index": 26,
+      "sources": [
+        "vanilla_cream"
+      ]
+    },
+    {
+      "edge_index": 27,
+      "sources": [
+        "eclairs"
+      ]
+    },
+    {
+      "edge_index": 28,
+      "sources": [
+        "starch_eclairs"
+      ]
+    },
+    {
+      "edge_index": 29,
+      "sources": [
+        "whipped_starch_icecream"
+      ]
+    },
+    {
+      "edge_index": 30,
+      "sources": [
+        "starch_product"
+      ]
+    },
+    {
+      "edge_index": 31,
+      "sources": [
+        "starch_product"
+      ]
+    },
+    {
+      "edge_index": 32,
+      "sources": [
+        "freezer_manual"
+      ]
+    },
+    {
+      "edge_index": 33,
+      "sources": [
+        "freezer_storage"
+      ]
+    },
+    {
+      "edge_index": 34,
+      "sources": [
+        "freezer_storage"
+      ]
+    },
+    {
+      "edge_index": 35,
+      "sources": [
+        "freezer_storage",
+        "freezer_strawberries"
+      ]
+    },
+    {
+      "edge_index": 36,
+      "sources": [
+        "freezer_manual"
+      ]
+    },
+    {
+      "edge_index": 37,
+      "sources": [
+        "whipped_cream"
+      ]
+    },
+    {
+      "edge_index": 38,
+      "sources": [
+        "mixer"
+      ]
+    },
+    {
+      "edge_index": 39,
+      "sources": [
+        "mixer"
+      ]
+    },
+    {
+      "edge_index": 40,
+      "sources": [
+        "cozonac"
+      ]
+    }
+  ],
+  "summary": {
+    "concepts": 9,
+    "forms": 30,
+    "new_links": 41,
+    "allowed_directions": 41,
+    "old_labels_aliases_checked": 10930,
+    "deferred_terms_checked": 70,
+    "explicit_surface_collisions": 0,
+    "deferred_collisions": 0,
+    "incident_neighbors": {
+      "n_v86_food_frisca": 8,
+      "n_v86_food_albus": 5,
+      "n_v86_food_galbenus": 4,
+      "n_v86_food_zahar_pudra": 5,
+      "n_v86_food_lapte_praf": 4,
+      "n_v86_food_amidon": 5,
+      "n_v86_food_crema_vanilie": 6,
+      "n_v86_kitchen_congelator": 5,
+      "n_v86_kitchen_mixer": 4
+    },
+    "incoming_neighbors": {
+      "n_v86_food_frisca": 5,
+      "n_v86_food_albus": 2,
+      "n_v86_food_galbenus": 1,
+      "n_v86_food_zahar_pudra": 1,
+      "n_v86_food_lapte_praf": 1,
+      "n_v86_food_amidon": 1,
+      "n_v86_food_crema_vanilie": 5,
+      "n_v86_kitchen_congelator": 1,
+      "n_v86_kitchen_mixer": 0
+    }
+  },
+  "retire_projection_surfaces": [
+    "congelator"
+  ],
+  "preserve_projection_surfaces": [
+    "mixer"
+  ],
+  "limits": [
+    "The existing fridge node gains a freezer-compartment association only for some models; ordinary refrigeration does not freeze ice cream.",
+    "Storage edges do not prescribe temperatures or storage durations. Whole milk may change texture when frozen; the milk edge is qualified.",
+    "Whipped cream is made from suitable sweet cream, not every fermented sour cream.",
+    "No ingredient arrows are reversed to make native inputs eligible hidden targets.",
+    "Recipe variant labels are literal; machine mixing is optional, and hand methods remain possible.",
+    "Bare rece/răcire/congelare, mixer and industrial/laundry amidon are not given new native owners.",
+    "Cacao/Vanilie remain source-only; no new curated board is claimed by this authoring module.",
+    "Powdered milk in biscuit salami was considered but deferred: the inspected recipe uses it for a special coating rather than the ordinary core."
+  ]
+}

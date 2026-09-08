@@ -85,6 +85,7 @@ _BEGINNER_PREFERRED_POOL = 3
 # corridor slots; unreachable or extra corridor nodes never pad the visual count.
 _MAX_VISIBLE_CHOICES = 6
 _CORRIDOR_CHOICE_QUOTA = 3
+_SHORTEST_CHOICE_RESERVE = 2
 
 # Every accepted hop is retained and echoed as earned path history. Sixty-four moves
 # leave more than ten times the hardest six-hop par for exploration while bounding a
@@ -412,7 +413,19 @@ def _visible_choice_nodes(session: LantSession) -> list[str]:
         key=lambda node_id: _hop_quality(cur, node_id),
     )
 
-    chosen = on_route[:_CORRIDOR_CHOICE_QUOTA]
+    # Preserve two useful alternatives before local familiarity can crowd them out
+    # with longer corridor hops.  The remaining corridor slot keeps the existing
+    # semantic-quality ranking; no distance or route class reaches the public menu.
+    remaining = dist_to_target.get(cur)
+    shortest = [
+        node_id for node_id in on_route
+        if remaining is not None and dist_to_target[node_id] == remaining - 1
+    ]
+    chosen = shortest[:_SHORTEST_CHOICE_RESERVE]
+    chosen.extend(
+        [node_id for node_id in on_route if node_id not in chosen]
+        [: _CORRIDOR_CHOICE_QUOTA - len(chosen)]
+    )
     chosen.extend(detours[: _MAX_VISIBLE_CHOICES - len(chosen)])
 
     # Alphabetical display order does not leak the private route/detour ranking.

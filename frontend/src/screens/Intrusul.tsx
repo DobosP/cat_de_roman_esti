@@ -5,7 +5,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, m } from "framer-motion";
 import { Button, type ToastKind } from "@roedu/ui";
-import { ApiError } from "../api/client";
 import {
   acquireFlight,
   recoverAuthoritative,
@@ -55,6 +54,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   const startInFlight = useRef(false);
   const actionInFlight = useRef(false);
   const [state, setState] = useState<IntrusulState | null>(null);
+  const [startFailed, setStartFailed] = useState(false);
   const [loading, setLoading] = useState(() => active.peek() !== null);
   const [busy, setBusy] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
@@ -72,6 +72,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   }, [onExit]);
 
   const applyResumedGame = useCallback((fresh: IntrusulState) => {
+    setStartFailed(false);
     setState(fresh);
     setFeedback(
       fresh.won || fresh.lost
@@ -91,10 +92,8 @@ export default function Intrusul({ onExit, onToast }: Props) {
     async ({ daily, previousGameId }: StartOpts = {}) => {
       if (!acquireFlight(startInFlight)) return;
       cancelResume();
+      setStartFailed(false);
       setLoading(true);
-      setFeedback(null);
-      setRecordHit(false);
-      setPuzzleRecordHit(false);
       const opts: CreateIntrusulOpts = daily
         ? { daily }
         : {
@@ -107,19 +106,17 @@ export default function Intrusul({ onExit, onToast }: Props) {
         setState(fresh);
         active.remember(fresh.game_id);
         dismissRecovery();
-      } catch (error) {
-        onToast(
-          error instanceof ApiError
-            ? error.message || `Nu am putut porni jocul (${error.status}).`
-            : "Nu am putut porni jocul.",
-          "error",
-        );
+        setFeedback(null);
+        setRecordHit(false);
+        setPuzzleRecordHit(false);
+      } catch {
+        setStartFailed(true);
       } finally {
         releaseFlight(startInFlight);
         setLoading(false);
       }
     },
-    [active, cancelResume, dismissRecovery, onToast],
+    [active, cancelResume, dismissRecovery],
   );
 
   const puzzleKey = useMemo(() => {
@@ -249,6 +246,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
         <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
           <GameShell onExit={exitSafely} accent={DEF.accent} busy={loading} />
           <GameIntro
+            startFailed={startFailed}
             resumeRecovery={resumeRecovery ? {
               kind: resumeRecovery.kind,
               canRetry: resumeRecovery.kind === "failed" || resumeRecovery.hasCurrent,
@@ -382,6 +380,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
 
         {finished && state.solution && (
           <ResultCard
+              startFailed={startFailed}
             icon={state.won ? "🎯" : "🔎"}
             title={state.won ? "L-ai găsit!" : "Acesta era intrusul"}
             accent={DEF.accent}

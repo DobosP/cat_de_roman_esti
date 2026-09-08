@@ -18,6 +18,7 @@ import {
 import { GameShell } from "../components/GameShell";
 import { ResultCard } from "../components/ResultCard";
 import { GameIntro } from "../components/GameIntro";
+import { StartFailureNotice } from "../components/StartFailureNotice";
 import { Hud, StatBadge } from "../components/Hud";
 import { NextMove } from "../components/PlayGuide";
 import { DifficultyPicker } from "../components/DifficultyPicker";
@@ -112,7 +113,10 @@ export default function Alchimie({
   onToast: (m: string, k?: ToastKind) => void;
 }) {
   const [state, setState] = useState<AlchimieState | null>(null);
+  const [startFailed, setStartFailed] = useState(false);
+  const startInFlight = useRef(false);
   const [loading, setLoading] = useState(false);
+  const [creating, setCreating] = useState(false);
   const [busy, setBusy] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [emptyPairKey, setEmptyPairKey] = useState<string | null>(null);
@@ -137,6 +141,7 @@ export default function Alchimie({
 
   const applyResumedGame = useCallback(
     (s: AlchimieState, { terminal }: { terminal: boolean }) => {
+      setStartFailed(false);
       setState(s);
       setDifficulty(s.difficulty);
       setCategory(s.board_category ?? null);
@@ -163,10 +168,17 @@ export default function Alchimie({
     onResume: applyResumedGame,
   });
 
+  const exitSafely = useCallback(() => {
+    if (!startInFlight.current) onExit();
+  }, [onExit]);
+
   const start = useCallback(
     async (opts: CreateOpts = {}) => {
+      if (startInFlight.current) return;
+      startInFlight.current = true;
       cancelResume();
-      setLoading(true);
+      setStartFailed(false);
+      setCreating(true);
       try {
         const s = await alchimieApi.create(opts);
         setState(s);
@@ -182,18 +194,14 @@ export default function Alchimie({
         setLastMessage(null);
         setIsRecord(false);
         setIsPuzzleRecord(false);
-      } catch (err) {
-        onToast(
-          err instanceof ApiError
-            ? `Nu am putut porni jocul (${err.status}).`
-            : "Nu am putut porni jocul.",
-          "error",
-        );
+      } catch {
+        setStartFailed(true);
       } finally {
-        setLoading(false);
+        startInFlight.current = false;
+        setCreating(false);
       }
     },
-    [active, cancelResume, dismissRecovery, onToast],
+    [active, cancelResume, dismissRecovery],
   );
 
   const won = state?.won ?? false;
@@ -264,7 +272,7 @@ export default function Alchimie({
 
   const toggle = useCallback(
     (id: string) => {
-      if (busy || won) return;
+      if (startInFlight.current || busy || won) return;
       sound.playSelect();
       if (emptyRecoveryActive) {
         const nextSelectionCount = selected.includes(id)
@@ -289,6 +297,7 @@ export default function Alchimie({
   );
 
   const clearSelection = useCallback(() => {
+    if (startInFlight.current) return;
     if (emptyRecoveryActive) {
       setLastMessage("Alambicul este gol. Alege două concepte.");
     }
@@ -299,6 +308,7 @@ export default function Alchimie({
 
   const removeFromBench = useCallback(
     (id: string) => {
+      if (startInFlight.current) return;
       toggle(id);
       requestAnimationFrame(() => inventoryButtons.current.get(id)?.focus());
     },
@@ -308,6 +318,7 @@ export default function Alchimie({
   const doCombine = useCallback(async () => {
     if (
       !state ||
+      startInFlight.current ||
       selected.length !== 2 ||
       busy ||
       isEmptyRetry ||
@@ -365,7 +376,7 @@ export default function Alchimie({
   }, [state, selected, busy, isEmptyRetry, onToast]);
 
   const doReset = useCallback(async () => {
-    if (!state || busy) return;
+    if (startInFlight.current || !state || busy) return;
     setBusy(true);
     try {
       const s = await alchimieApi.reset(state.game_id);
@@ -393,6 +404,7 @@ export default function Alchimie({
   }, [state, busy, active, onToast]);
 
   const newGame = useCallback(() => {
+    if (startInFlight.current) return;
     if (!state?.won) active.forget();
     setSelected([]);
     setEmptyPairKey(null);
@@ -404,7 +416,7 @@ export default function Alchimie({
 
   // Ask for a gentle nudge: the server points at a useful pair (it costs some score).
   const doHint = useCallback(async () => {
-    if (!state || busy || won) return;
+    if (startInFlight.current || !state || busy || won) return;
     setBusy(true);
     try {
       const res = await alchimieApi.hint(state.game_id);
@@ -502,6 +514,7 @@ export default function Alchimie({
   useEffect(() => {
     if (!state || won) return;
     const onKey = (e: KeyboardEvent) => {
+      if (startInFlight.current) return;
       const target = e.target instanceof Element ? e.target : null;
       if (
         e.defaultPrevented ||
@@ -529,7 +542,7 @@ export default function Alchimie({
     return () => window.removeEventListener("keydown", onKey);
   }, [state, won, selected, busy, isEmptyRetry, doCombine, clearSelection]);
 
-  if (loading) {
+  if (loading && !state) {
     return (
       <div className="screen-pad fill center">
         <Spinner size="lg" label="Se încarcă…" />
@@ -540,11 +553,13 @@ export default function Alchimie({
   // ---- Intro: difficulty picker + daily challenge + personal best. ----
   if (!state) {
     return (
-      <div className="screen-pad fill">
-        <div className="container col game-container" style={{ gap: 18 }}>
-          <GameShell onExit={onExit} accent={DEF.accent} />
+      <div className="screen-pad fill" aria-busy={creating}>
+        {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
+        <div inert={creating} className="container col game-container" style={{ gap: 18 }}>
+          <GameShell onExit={exitSafely} accent={DEF.accent} busy={creating} />
 
           <GameIntro
+            startFailed={startFailed}
             resumeRecovery={resumeRecovery ? {
               kind: resumeRecovery.kind,
               canRetry: resumeRecovery.kind === "failed" || resumeRecovery.hasCurrent,
@@ -570,7 +585,7 @@ export default function Alchimie({
             onStart={() => void start({ difficulty, category: category ?? undefined })}
             onDaily={() => void start({ difficulty, daily: todayLocal() })}
             dailyLabel="Provocarea zilei"
-            starting={loading}
+            starting={creating || loading}
           >
             <DifficultyPicker
               options={DIFFICULTIES}
@@ -598,10 +613,11 @@ export default function Alchimie({
   }
 
   return (
-    <div className="screen-pad fill" style={{ overflowY: "auto" }}>
-      <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
+    <div className="screen-pad fill" style={{ overflowY: "auto" }} aria-busy={creating}>
+      {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
+      <div inert={creating} className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
         {/* Header */}
-        <GameShell onExit={onExit} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY}>
+        <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY} busy={creating}>
           <Hud>
             {state.daily ? (
               <StatBadge
@@ -719,7 +735,7 @@ export default function Alchimie({
               <Slot
                 item={selectedItems[0]}
                 onRemove={removeFromBench}
-                disabled={busy}
+                disabled={creating || busy}
               />
               <span
                 className="faint"
@@ -731,7 +747,7 @@ export default function Alchimie({
               <Slot
                 item={selectedItems[1]}
                 onRemove={removeFromBench}
-                disabled={busy}
+                disabled={creating || busy}
               />
             </div>
             <div className="row wrap" style={{ gap: 8 }}>
@@ -739,7 +755,7 @@ export default function Alchimie({
                 <Button
                   type="button"
                   variant="secondary"
-                  disabled={busy}
+                  disabled={creating || busy}
                   onClick={clearSelection}
                   title="Golește alambicul (Esc)"
                 >
@@ -750,7 +766,7 @@ export default function Alchimie({
                 <Button
                   type="button"
                   variant="secondary"
-                  disabled={busy}
+                  disabled={creating || busy}
                   onClick={() => void doHint()}
                   title={
                     state.hint_stage === "output"
@@ -764,7 +780,7 @@ export default function Alchimie({
               )}
               <Button
                 type="button"
-                disabled={busy || selected.length !== 2 || isEmptyRetry}
+                disabled={creating || busy || selected.length !== 2 || isEmptyRetry}
                 onClick={doCombine}
                 title={
                   isEmptyRetry
@@ -826,7 +842,7 @@ export default function Alchimie({
               selected={selected}
               freshIds={freshIds}
               inventoryById={inventoryById}
-              busy={busy}
+              busy={creating || busy}
               onSelect={toggle}
             />
 
@@ -855,7 +871,7 @@ export default function Alchimie({
                       selected={selected}
                       freshIds={freshIds}
                       inventoryById={inventoryById}
-                      busy={busy}
+                      busy={creating || busy}
                       onSelect={toggle}
                     />
                   ))}
@@ -963,7 +979,7 @@ export default function Alchimie({
                     }}
                     transition={{ type: "spring", stiffness: 320, damping: 18 }}
                     onClick={() => toggle(item.id)}
-                    disabled={won || busy || item.depleted}
+                    disabled={creating || won || busy || item.depleted}
                     aria-pressed={isSel}
                     aria-label={accessibleLabel}
                     title={title}
@@ -1017,11 +1033,13 @@ export default function Alchimie({
 
         {/* Footer actions stay in-play only; ResultCard owns the terminal actions. */}
         {!won && (
-          <div className="row center wrap" style={{ gap: 12, marginTop: 8 }}>
+          <>
+            <StartFailureNotice failed={startFailed} reserveSpace />
+            <div className="row center wrap" style={{ gap: 12, marginTop: 8 }}>
             <Button
               type="button"
               variant="secondary"
-              disabled={busy}
+              disabled={creating || busy}
               onClick={doReset}
             >
               ↻ Reia același joc
@@ -1030,7 +1048,7 @@ export default function Alchimie({
               type="button"
               variant="secondary"
               className="alchimie-other-board"
-              disabled={busy || loading}
+              disabled={creating || busy}
               onClick={() =>
                 void start({
                   difficulty: state.difficulty,
@@ -1043,18 +1061,21 @@ export default function Alchimie({
             <Button
               type="button"
               variant="secondary"
-              disabled={busy}
+              disabled={creating || busy}
               onClick={newGame}
             >
               ⚙ Schimbă opțiunile
             </Button>
-          </div>
+            </div>
+          </>
         )}
 
         {/* Win banner */}
         <AnimatePresence>
           {won && (
             <ResultCard
+              startFailed={startFailed}
+              actionsBusy={creating}
               icon="★"
               title="Ai făurit ținta!"
               accent={GOLD}
@@ -1070,7 +1091,7 @@ export default function Alchimie({
                 })
               }
               onOptions={newGame}
-              onExit={onExit}
+              onExit={exitSafely}
             >
               <>
                 <strong style={{ color: "var(--text)" }}>{state.target.label}</strong> în{" "}

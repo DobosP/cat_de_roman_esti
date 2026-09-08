@@ -26,8 +26,11 @@ from cat_de_roman_esti.wordgames.service import WordGameService, get_service  # 
 from tests.content_history import (  # noqa: E402
     before_v85_fixture,
     before_v85_projection_rows,
+    before_v86_fixture,
+    before_v86_projection_rows,
 )
 from tests.content_scenarios import contexto_seed  # noqa: E402
+from tests.current_content import CURRENT_CONTENT  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 REVIEW = ROOT / "docs/reviews/v85-ingredient-feedback-and-board-clarity"
@@ -149,14 +152,17 @@ def test_exact_reviewed_concepts_forms_and_graph_records_are_served():
 
 def test_full_v84_graph_reconstructs_and_every_old_exact_owner_is_preserved():
     current = _json(FIXTURE)
+    v85 = before_v86_fixture(current)
     baseline = before_v85_fixture(current)
     encoded = (json.dumps(baseline, ensure_ascii=False, indent=2) + "\n").encode()
     assert hashlib.sha256(encoded).hexdigest() == (
         "3fb0f97c5b4c813eb72d8fd3589c4ce92f724d0565db840c1bc3909458a60ab0"
     )
     assert FIXTURE.read_bytes() == (ROOT / "tests/fixtures/kg_sample.json").read_bytes()
-    assert len(current["kg_nodes"]) - len(baseline["kg_nodes"]) == 8
-    assert len(current["kg_edges"]) - len(baseline["kg_edges"]) == 40
+    # Preserve this wave's exact delta on its reconstructed graph; later native
+    # concepts have separate full-artifact and old-owner preservation contracts.
+    assert len(v85["kg_nodes"]) - len(baseline["kg_nodes"]) == 8
+    assert len(v85["kg_edges"]) - len(baseline["kg_edges"]) == 40
     assert current["kg_puzzles"] == baseline["kg_puzzles"]
     assert not any(edge["id"] == "de5559" for edge in current["kg_edges"])
     assert all(edge in current["kg_edges"] for edge in baseline["kg_edges"]
@@ -473,12 +479,15 @@ def test_actual_recipe_projection_combines_reviewed_ingredients_and_explains_ear
 
 def test_native_replacement_metadata_has_no_resolution_or_scoring_role(monkeypatch):
     terms = [asdict(term) for term in P.PROJECTION_TERMS]
-    restored = before_v85_projection_rows([
+    current_rows = [
         (term.surface, term.anchor_id, term.domain, term.rank_penalty,
          term.mapping_kind, term.public_id) for term in P.PROJECTION_TERMS
-    ])
+    ]
+    v85_rows = before_v86_projection_rows(current_rows)
+    restored = before_v85_projection_rows(current_rows)
     retained = {row[0]: row for row in restored if row[0] not in {"cacao", "scorțișoară"}}
-    assert len(restored) == 471 and len(retained) == len(P.PROJECTION_TERMS) == 469
+    assert len(restored) == 471 and len(retained) == len(v85_rows) == 469
+    assert len(P.PROJECTION_TERMS) == CURRENT_CONTENT.projection_terms
     for term in P.PROJECTION_TERMS:
         assert retained[term.surface] == (
             term.surface, term.anchor_id, term.domain, term.rank_penalty,

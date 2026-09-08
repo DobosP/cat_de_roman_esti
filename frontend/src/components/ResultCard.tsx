@@ -10,6 +10,7 @@ import type { ReactNode } from "react";
 import { m } from "framer-motion";
 import { Badge, Button } from "@roedu/ui";
 import { Confetti } from "./Confetti";
+import { StartFailureNotice } from "./StartFailureNotice";
 
 export function ResultCard({
   icon,
@@ -29,6 +30,7 @@ export function ResultCard({
   replayLabel = "Încă unul →",
   optionsLabel = "Schimbă opțiunile",
   actionsBusy = false,
+  startFailed = false,
 }: {
   /** Big celebratory glyph. */
   icon: ReactNode;
@@ -60,6 +62,8 @@ export function ResultCard({
   optionsLabel?: string;
   /** Disable result actions while a replay/create request is in flight. */
   actionsBusy?: boolean;
+  /** Persistent failed replay feedback, beside the action that can retry it. */
+  startFailed?: boolean;
 }) {
   const ring = won ? accent : "var(--surface-border-strong)";
   return (
@@ -138,6 +142,7 @@ export function ResultCard({
         </div>
       )}
 
+      <StartFailureNotice failed={startFailed} reserveSpace={Boolean(onReplay)} />
       <div className="row center wrap" style={{ gap: 12, marginTop: 12, position: "relative" }}>
         {shareText && onCopy && (
           <Button onClick={onCopy} disabled={actionsBusy}>

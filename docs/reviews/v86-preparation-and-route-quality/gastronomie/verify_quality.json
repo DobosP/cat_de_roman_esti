@@ -1,0 +1,37 @@
+{
+  "category": "gastronomie",
+  "candidate_sha256": "sha256:5feb68e6782b735650ccc99a28ccae0e0dab8a1013b57105bafab3e034b91648",
+  "instances": [
+    {
+      "ref": "contexto[0]",
+      "verdict": "keep",
+      "note": "C1/C2/C5: Brânză is a concrete everyday food with a dominant ordinary sense; dictionary and Romanian dairy reporting support recognition, and salience 0.9238 meets easy. No prior target. C3: 14 incoming, 2321 reachable, 2009 responsive; multiple concrete dairy/recipe cues. C4: Telemea 3, Urdă 4, Cașcaval 5 and Lapte 7 are hot; Mâncare 2 is the safe clue. Exact win, repeat and resume pass. Remaining noise: Sarmale 26 is warm, and Unt 373 is cold. Strong defining core supports pending staging; no claim of complete dairy realism."
+    },
+    {
+      "ref": "contexto[1]",
+      "verdict": "keep",
+      "note": "C1/C2/C5: Lapte is ordinary concrete food vocabulary, reinforced by the longstanding school milk program; salience 0.9202 meets easy. No prior target. C3: 14 incoming, 2321 reachable, 2133 responsive. C4: Pahar 2, Lapte și corn 4, Brânză 5 and Smântână 7 are hot. Safe Pahar 2 clue, repeat/resume and exact win pass. Refrigerator 41 is warm, while Sarmale 23 is also warm and Stilou 158 lukewarm; these are retained limits, not evidence that a pen is a milk ingredient. Core supports pending staging."
+    },
+    {
+      "ref": "contexto[2]",
+      "verdict": "keep",
+      "note": "C1/C2/C5: Savarină is a familiar concrete pastry, supported by 2013 recipe and 2016/2025 national-TV demonstrations. Salience 0.55 requires explicit easy-band judge review; it is not silently changed. C3 now has 5 incoming, 2321 reachable, 1490 responsive after the factual Frișcă link. C4: Prăjitură/Amandină/Ecler 2, Desert 5 and Frișcă 5 are hot. The safe pastry clue, repeat/resume and exact win pass. No alcohol guess is needed. Yeast/oven 51 remain warm rather than direct, sugar is weak, and Sarmale 83 is lukewarm. Stage pending for bound review."
+    },
+    {
+      "ref": "contexto[3]",
+      "verdict": "keep",
+      "note": "C1/C2/C5: Frișcă is a familiar named whipped topping; the graph explicitly uses suitable sweet dairy cream, with optional sugar/vanilla variants and no synonym claim for sour cream. Salience 0.85 meets easy. C3: 5 incoming, 2321 reachable, 935 responsive. C4: Smântână, Zahăr pudră, Vanilie, Frigider and qualified Mixer all rank 2/hot. The independently accepted exact reverse association now makes Savarină 2/hot/nonwinning instead of 140/lukewarm; graph directions stay fixed. Frigider 2 clue, repeat/resume and exact win pass after correction. Sarmale 30 remains warm and Ecler 202 lukewarm; direct core remains substantially clearer. Stage pending, not automatic approval."
+    },
+    {
+      "ref": "contexto[4]",
+      "verdict": "keep",
+      "note": "C1/C2/C5: Cremă de vanilie is a concrete, familiar pastry filling; the qualifier removes bare-cream ambiguity. Manufacturer recipes and the established eclair recipe document the recognizable name and actual ingredients. Salience 0.75 meets easy. C3: 5 incoming, 2321 reachable, 1274 responsive. C4: Lapte, Zahăr, Vanilie, Gălbenuș and Amidon alimentar all rank 2/hot. The accepted exact reverse association repairs Ecler 322/cold to 2/hot/nonwinning while preserving its identity and every graph direction. Lapte 2 clue, repeat/resume and exact win pass after correction. Butter 316/cold and Sarmale 30/warm remain imperfect. Stage pending for independent bound judgment."
+    },
+    {
+      "ref": "lant[0]",
+      "verdict": "keep",
+      "note": "D1/D2: Familiar Frigider→Înghețată endpoints with two distinct honest bridges: Frigider→Frișcă→Înghețată (chilled ingredient/preparation), and Frigider→Congelator→Înghețată (freezer compartment/storage). Manufacturer instructions distinguish ordinary refrigeration from freezer storage; no claim that ordinary fridge shelves freeze ice cream. D3: 2 first hops, narrowest layer 2, 2 intermediates; both are now visible in the bounded initial menu and both real API paths win in 2 moves with resume. Direct target guessing is rejected without consuming a move. D4/D5: meaningful easy two-step discovery; the familiar ice-cream endpoint needs an explicit salience 0.2826 exception, not obscurity-based difficulty. No old exact/reverse pair. Stage pending; final dossier binding required."
+    }
+  ],
+  "coverage_note": "Complete independent raw quality screen of all six refs. 153 initial first-guess probes covered all five targets, then only the two corrected target scopes were re-probed (54 requests). Five initial clue/repeat/resume/exact-win journeys and two focused post-correction repeats passed; both Lanț branches passed. These are private real endpoints over the applied graph, not public selector tests or final promotion verdicts. Source-backed recognition, explicit salience exceptions and remaining noise are recorded in QUALITY_SCREEN.md. All pre-correction evidence is retained."
+}

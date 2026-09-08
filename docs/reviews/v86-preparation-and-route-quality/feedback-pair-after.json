@@ -1,0 +1,48 @@
+{
+  "scope": "Focused after-probes of the two accepted exact feedback pairs",
+  "feedback_source_sha256": "206257795327a499a3be19cc3608c0d9320777e6e7ad4da839d10079a524b87d",
+  "kg_sha256": "b612eda1fb8712fb57f1e16ca2a4fed3e5f6cec847c977ab45ee420c575ffa1a",
+  "pairs": [
+    {
+      "source": "n_v21gas_ecler",
+      "target": "n_v86_food_crema_vanilie",
+      "observation": {
+        "ok": true,
+        "won": false,
+        "needs_confirmation": false,
+        "guess": {
+          "id": "n_v21gas_ecler",
+          "label": "Ecler",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        }
+      }
+    },
+    {
+      "source": "n_v21gas_savarina",
+      "target": "n_v86_food_frisca",
+      "observation": {
+        "ok": true,
+        "won": false,
+        "needs_confirmation": false,
+        "guess": {
+          "id": "n_v21gas_savarina",
+          "label": "Savarină",
+          "distance": 1,
+          "rank": 2,
+          "temperature": "Fierbinte",
+          "closeness": 99,
+          "attempt_number": 1
+        }
+      }
+    }
+  ],
+  "new_target_probe_counts": {
+    "n_v86_food_frisca": 27,
+    "n_v86_food_crema_vanilie": 27
+  },
+  "journey_evidence": "gastronomie/quality-journeys-after-feedback.json"
+}

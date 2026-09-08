@@ -6,7 +6,7 @@
 // Server-authoritative: the grouping + solution live on the server; this component renders
 // what it returns and surfaces a personal best + a shareable result on finish.
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, m } from "framer-motion";
 import { ApiError } from "../api/client";
 import {
@@ -84,6 +84,8 @@ const unsolvedTileIds = (fresh: ConexiuniState) => {
 export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const active = useActiveGame(GAME_KEY);
   const [state, setState] = useState<ConexiuniState | null>(null);
+  const [startFailed, setStartFailed] = useState(false);
+  const startInFlight = useRef(false);
   const [loading, setLoading] = useState(() => active.peek() !== null);
   const [busy, setBusy] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
@@ -166,6 +168,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
 
   const applyResumedGame = useCallback(
     (s: ConexiuniState, { terminal }: { terminal: boolean }) => {
+      setStartFailed(false);
       setState(s);
       setDifficulty(s.difficulty);
       setCategory(s.board_category ?? null);
@@ -191,10 +194,11 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
 
   const start = useCallback(
     async (mode: StartMode) => {
+      if (startInFlight.current) return;
+      startInFlight.current = true;
       cancelResume();
+      setStartFailed(false);
       setLoading(true);
-      setRecordHit(false);
-      setPuzzleRecordHit(false);
       try {
         const s =
           mode.kind === "daily"
@@ -207,23 +211,21 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         setState(s);
         active.remember(s.game_id);
         dismissRecovery();
+        setRecordHit(false);
+        setPuzzleRecordHit(false);
         setSelected([]);
         setBlockedGuess(null);
         setHint(null);
         setShuffleNonce(0);
         setShake(0);
-      } catch (err) {
-        onToast(
-          err instanceof ApiError
-            ? `Nu am putut porni jocul (${err.status}).`
-            : "Nu am putut porni jocul.",
-          "error",
-        );
+      } catch {
+        setStartFailed(true);
       } finally {
+        startInFlight.current = false;
         setLoading(false);
       }
     },
-    [active, cancelResume, dismissRecovery, onToast, category, difficulty],
+    [active, cancelResume, dismissRecovery, category, difficulty],
   );
 
   const puzzleKey = useMemo(() => {
@@ -426,6 +428,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   // A live-board exit is permanent. A terminal board keeps its pointer until the queued
   // score completion settles, so closing this document cannot lose an unrecorded result.
   const handleExit = useCallback(() => {
+    if (startInFlight.current) return;
     if (!finished) active.forget();
     setSelected([]);
     setBlockedGuess(null);
@@ -468,9 +471,10 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     return (
       <div className="screen-pad fill" style={{ overflowY: "auto" }}>
         <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
-          <GameShell onExit={handleExit} accent={DEF.accent} />
+          <GameShell onExit={handleExit} accent={DEF.accent} busy={loading} />
 
           <GameIntro
+            startFailed={startFailed}
             resumeRecovery={resumeRecovery ? {
               kind: resumeRecovery.kind,
               canRetry: resumeRecovery.kind === "failed" || resumeRecovery.hasCurrent,
@@ -528,7 +532,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     <div className="screen-pad fill" style={{ overflowY: "auto" }}>
       <div className="container col game-container" style={{ gap: 16, paddingBottom: 32 }}>
         {/* Header */}
-        <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY}>
+        <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY} busy={loading}>
           <Hud>
             {state.daily && (
               <StatBadge label="ZILNIC" value={state.daily} accent={DEF.accent} title="Provocarea zilei" />
@@ -777,6 +781,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         <AnimatePresence>
           {finished && (
             <ResultCard
+              startFailed={startFailed}
+              actionsBusy={loading}
               icon={state.won ? "🎉" : "💔"}
               title={state.won ? "Ai găsit toate grupurile!" : "Ai rămas fără vieți."}
               accent={DEF.accent}
@@ -788,6 +794,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               onCopy={copyShare}
               onReplay={() => void start({ kind: "seed", difficulty })}
               onOptions={() => {
+                if (startInFlight.current) return;
                 setState(null);
               }}
               onExit={handleExit}

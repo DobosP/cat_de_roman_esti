@@ -1,0 +1,217 @@
+#!/usr/bin/env python3
+"""Read-only six-game impact capture, imported from one explicit checkout per process."""
+import argparse
+import dataclasses
+import hashlib
+import json
+import os
+from pathlib import Path
+import sys
+import time
+
+
+def digest(value):
+    return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--root", type=Path, required=True)
+parser.add_argument("--out", type=Path, required=True)
+parser.add_argument("--inputs", type=Path, required=True)
+parser.add_argument("--baseline-pack", type=Path)
+parser.add_argument("--reuse-profiles", type=Path, help="Reuse only source-identical six-game profiles when expanding baseline inputs")
+args = parser.parse_args()
+root = args.root.resolve()
+sys.path.insert(0, str(root))
+os.environ["DJANGO_SETTINGS_MODULE"] = "cat_de_roman_esti.web.settings"
+os.environ["CAT_ACCOUNTS_ENABLED"] = "0"
+os.environ["ROEDU_API_URL"] = ""
+os.environ["ROEDU_API_KEY"] = ""
+import django
+django.setup()
+from django.test import Client
+from cat_de_roman_esti.wordgames import alchimie, contexto, derived_catalog, lant, packs
+from cat_de_roman_esti.wordgames.contexto_projection import resolve_projection
+from cat_de_roman_esti.wordgames.service import get_service
+
+started = time.monotonic()
+inputs = json.loads(args.inputs.read_text())
+raw_pack = json.loads((root / "cat_de_roman_esti/fixtures/games_pack.json").read_text())
+audited_pack = json.loads(args.baseline_pack.read_text()) if args.baseline_pack else raw_pack
+raw_derived = json.loads((root / "cat_de_roman_esti/fixtures/derived_catalog_v38.json").read_text())
+svc = get_service()
+pack = packs.get_pack()
+catalog = derived_catalog.get_derived_catalog()
+client = Client()
+result = {
+    "root": str(root),
+    "inputs_sha256": hashlib.sha256(args.inputs.read_bytes()).hexdigest(),
+    "source_sha256": {str(path.relative_to(root)): hashlib.sha256(path.read_bytes()).hexdigest() for path in [
+        root / "cat_de_roman_esti/fixtures/kg_sample.json",
+        root / "cat_de_roman_esti/fixtures/games_pack.json",
+        root / "cat_de_roman_esti/fixtures/board_rankings_v37.json",
+        root / "cat_de_roman_esti/fixtures/derived_catalog_v38.json",
+        root / "cat_de_roman_esti/wordgames/contexto.py",
+        root / "cat_de_roman_esti/wordgames/contexto_projection.py",
+        root / "cat_de_roman_esti/wordgames/alchimie.py",
+        root / "cat_de_roman_esti/wordgames/lant.py",
+        root / "cat_de_roman_esti/wordgames/contexto_feedback.py",
+    ]},
+}
+
+
+def checkpoint(message):
+    result["elapsed_seconds"] = round(time.monotonic() - started, 3)
+    args.out.write_text(json.dumps(result, ensure_ascii=False, separators=(",", ":")) + "\n")
+    print(message, flush=True)
+
+
+if args.reuse_profiles:
+    reused = json.loads(args.reuse_profiles.read_bytes())
+    assert reused["source_sha256"] == result["source_sha256"], "cannot reuse profiles after a source change"
+    for name in ("pack", "derived", "lant", "lant_choices", "alchimie"):
+        result[name] = reused[name]
+    checkpoint("reused exact source-bound six-game profiles")
+else:
+    result["pack"] = {}
+    for game in packs.GAME_KINDS:
+        pool = pack.pool(game)
+        result["pack"][game] = {
+            "records": {row["id"]: digest(row) for row in raw_pack[game]},
+            "approved": [item.id for item in pool],
+            "eligible": [item.id for item in pool if item._pilot_eligible],
+            "ranked": pack.ranked,
+        }
+    result["derived"] = {}
+    for game in derived_catalog.DERIVED_GAMES:
+        boards = catalog.pool(game)
+        result["derived"][game] = {
+            "boards": {row["id"]: digest(row) for row in raw_derived["boards"] if row["game"] == game},
+            "payloads": {row["id"]: digest(row["payload"]) for row in raw_derived["boards"] if row["game"] == game},
+            "preferred": sorted(board._catalog_id for board in catalog._preferred_shelf(boards)),
+            "starter": sorted(board._catalog_id for board in boards if board._starter_eligible),
+        }
+    result["lant"] = {
+        row["id"]: {
+            "errors": packs.validate_payload(row, "lant", svc),
+            "distance": svc.distance(row["start"], row["target"]),
+            "profile": list(packs.lant_branch_profile(svc, row["start"], row["target"], row["optimal"])),
+        }
+        for row in audited_pack["lant"]
+    }
+    result["lant_choices"] = {}
+    for row in audited_pack["lant"]:
+        session = lant.LantSession(start=row["start"], target=row["target"], optimal=row["optimal"],
+                                   difficulty=row["difficulty"], category=row["category"], chain=[row["start"]])
+        game_id = lant.store.create(session)
+        try:
+            response = client.get(f"/api/wordgames/lant/games/{game_id}")
+            assert response.status_code == 200
+            payload = response.json()
+            shown = [lant._resolve_neighbor(choice["label"], row["start"], row["target"])
+                     for choice in payload["choices"]]
+            assert all(node_id and svc.link(row["start"], node_id) for node_id in shown)
+            shortest = {node_id for node_id in svc.neighbor_ids(row["start"])
+                        if svc.distance(node_id, row["target"]) == row["optimal"] - 1}
+            result["lant_choices"][row["id"]] = {
+                "choices": payload["choices"], "shown_ids": shown,
+                "shortest_hop_ids": sorted(shortest),
+                "shortest_hops_shown": sorted(shortest.intersection(shown)),
+                "within_bound": len(shown) <= lant._MAX_VISIBLE_CHOICES,
+            }
+        finally:
+            lant.store.delete(game_id)
+    checkpoint("captured pack, frozen boards, all Lanț profiles and actual initial suggestions")
+
+    result["alchimie"] = {}
+    for index, row in enumerate(audited_pack["alchimie"], 1):
+        projection = alchimie._build_recipe_projection(row["seeds"], row["target"], row.get("category"))
+        evidence = {"errors": packs.validate_payload(row, "alchimie", svc)}
+        if projection is None:
+            evidence["projection"] = None
+        else:
+            evidence["projection"] = {
+                "par": projection.par,
+                "recipes": [{"pair": list(pair), "results": list(outputs)} for pair, outputs in sorted(projection.recipes.items())],
+                "routes": [[{"pair": list(pair), "results": list(outputs)} for pair, outputs in route] for route in projection.routes],
+            }
+            evidence["projection_sha256"] = digest(evidence["projection"])
+            owned = set(row["seeds"])
+            for _ in range(alchimie.MAX_RECIPE_PAIRS + 1):
+                expanded = owned | {out for pair, outputs in projection.recipes.items() if set(pair) <= owned for out in outputs}
+                if expanded == owned:
+                    break
+                owned = expanded
+            evidence["target_reachable"] = row["target"] in owned
+            evidence["opening_pairs"] = sum(set(pair) <= set(row["seeds"]) and bool(set(outputs) - set(row["seeds"])) for pair, outputs in projection.recipes.items())
+            evidence["bounds"] = {
+                "routes": len(projection.routes) <= alchimie.MAX_TARGET_ROUTES,
+                "pairs": len(projection.recipes) <= alchimie.MAX_RECIPE_PAIRS,
+                "concepts": len(owned) <= alchimie.MAX_PROJECTED_CONCEPTS,
+                "results": max(map(len, projection.recipes.values()), default=0) <= alchimie.MAX_RESULTS_PER_RECIPE,
+                "par": projection.par == row["target_depth"],
+            }
+        result["alchimie"][row["id"]] = evidence
+        if index % 20 == 0:
+            checkpoint(f"captured {index} Alchimie projections")
+    checkpoint("captured all Alchimie projections")
+
+words = []
+seen_word_keys = set()
+for word in inputs["WORDS"] + [row["label_ro"] for row in inputs["NODES"]]:
+    if word.casefold() not in seen_word_keys:
+        words.append(word)
+        seen_word_keys.add(word.casefold())
+result["inputs"] = {}
+for word in words:
+    term = resolve_projection(word)
+    result["inputs"][word] = {
+        "native_id": svc.resolve(word),
+        "projection": {"id": term.public_id, "anchor": term.anchor_id} if term else None,
+    }
+result["contexto"] = {}
+for index, row in enumerate([row for row in audited_pack["contexto"] if row["status"] == "approved"], 1):
+    template = contexto._build_session(row["target"], row["difficulty"], None, category=row["category"])
+    evidence = {"target": row["target"], "errors": packs.validate_payload(row, "contexto", svc), "words": {}}
+    for word in words:
+        session = dataclasses.replace(template, guesses={}, order=[])
+        game_id = contexto.store.create(session)
+        try:
+            response = client.post(f"/api/wordgames/contexto/games/{game_id}/guess", {"text": word}, content_type="application/json")
+            data = response.json()
+            guess = data.get("guess", {})
+            evidence["words"][word] = {
+                "http": response.status_code, "ok": data.get("ok"), "won": data.get("won"),
+                "attempts": data.get("attempts"), "needs_confirmation": data.get("needs_confirmation", False),
+                "resolved_label": data.get("resolved_label"),
+                "guess": {key: guess.get(key) for key in ("id", "label", "rank", "distance", "temperature", "closeness")},
+            }
+        finally:
+            contexto.store.delete(game_id)
+    result["contexto"][row["id"]] = evidence
+    if index % 50 == 0:
+        checkpoint(f"captured {index} Contexto records × {len(words)} inputs")
+checkpoint("captured all approved Contexto inputs")
+
+result["direct_routes"] = []
+for edge in inputs["EDGES"]:
+    directions = [(edge["src"], edge["dst"])]
+    if edge.get("bidirectional"):
+        directions.append((edge["dst"], edge["src"]))
+    for source, target in directions:
+        evidence = {"source": source, "target": target}
+        if not svc.exists(source) or not svc.exists(target):
+            evidence["missing_node"] = True
+        else:
+            link = svc.link(source, target)
+            evidence["link"] = None if link is None else {"label": link.label_ro, "distance": svc.distance(source, target)}
+            session = lant.LantSession(source, target, optimal=1, chain=[source])
+            game_id = lant.store.create(session)
+            try:
+                response = client.post(f"/api/wordgames/lant/games/{game_id}/move", {"text": svc.label(target)}, content_type="application/json")
+                data = response.json()
+                evidence["api"] = {"http": response.status_code, "won": data.get("won"), "moves": data.get("moves"), "current": data.get("current")}
+            finally:
+                lant.store.delete(game_id)
+        result["direct_routes"].append(evidence)
+checkpoint(f"complete: {len(result['direct_routes'])} oriented direct route probes")

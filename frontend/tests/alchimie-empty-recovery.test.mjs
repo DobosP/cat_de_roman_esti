@@ -44,6 +44,7 @@ test("only authoritative nonterminal empty responses retain the submitted pair",
 });
 
 test("button, keyboard, and action guard block an unchanged or duplicate submit", () => {
+  assert.match(combine, /startInFlight\.current \|\|/);
   assert.match(combine, /isEmptyRetry \|\|[\s\S]*?combineInFlight\.current/);
   assert.ok(
     combine.indexOf("combineInFlight.current = true") <
@@ -59,7 +60,14 @@ test("button, keyboard, and action guard block an unchanged or duplicate submit"
   );
   assert.match(
     screen,
-    /disabled=\{busy \|\| selected\.length !== 2 \|\| isEmptyRetry\}/,
+    /disabled=\{creating \|\| busy \|\| selected\.length !== 2 \|\| isEmptyRetry\}/,
+  );
+  const keyboardStart = screen.indexOf("// Keyboard: Enter combines");
+  const keyboardEnd = screen.indexOf("if (loading && !state)", keyboardStart);
+  assert.ok(keyboardStart >= 0 && keyboardEnd > keyboardStart);
+  assert.match(
+    screen.slice(keyboardStart, keyboardEnd),
+    /if \(startInFlight\.current\) return;/,
   );
 });
 

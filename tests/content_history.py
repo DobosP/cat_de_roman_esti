@@ -23,6 +23,9 @@ _V84_RECEIPT = Path(__file__).resolve().parents[1] / (
 _V85_RECEIPT = Path(__file__).resolve().parents[1] / (
     "docs/reviews/v85-ingredient-feedback-and-board-clarity/artifact-delta.json"
 )
+_V86_RECEIPT = Path(__file__).resolve().parents[1] / (
+    "docs/reviews/v86-preparation-and-route-quality/artifact-delta.json"
+)
 
 
 def _reverse_reviewed_delta(current: dict, filename: str, receipt_path: Path) -> dict:
@@ -61,24 +64,45 @@ def _reverse_reviewed_delta(current: dict, filename: str, receipt_path: Path) ->
     return restored
 
 
+def before_v86_fixture(current: dict) -> dict:
+    return _reverse_reviewed_delta(current, "kg_sample.json", _V86_RECEIPT)
+
+
+def before_v86_pack(current: dict) -> dict:
+    return _reverse_reviewed_delta(current, "games_pack.json", _V86_RECEIPT)
+
+
+def before_v86_rankings(current: dict) -> dict:
+    return _reverse_reviewed_delta(current, "board_rankings_v37.json", _V86_RECEIPT)
+
+
+def before_v86_derived(current: dict) -> dict:
+    return _reverse_reviewed_delta(current, "derived_catalog_v38.json", _V86_RECEIPT)
+
+
 def before_v85_fixture(current: dict) -> dict:
-    return _reverse_reviewed_delta(current, "kg_sample.json", _V85_RECEIPT)
+    return _before_v85(current, "kg_sample.json")
 
 
 def before_v85_pack(current: dict) -> dict:
-    return _reverse_reviewed_delta(current, "games_pack.json", _V85_RECEIPT)
+    return _before_v85(current, "games_pack.json")
 
 
 def before_v85_rankings(current: dict) -> dict:
-    return _reverse_reviewed_delta(current, "board_rankings_v37.json", _V85_RECEIPT)
+    return _before_v85(current, "board_rankings_v37.json")
 
 
 def before_v85_derived(current: dict) -> dict:
-    return _reverse_reviewed_delta(current, "derived_catalog_v38.json", _V85_RECEIPT)
+    return _before_v85(current, "derived_catalog_v38.json")
+
+
+def _before_v85(current: dict, filename: str) -> dict:
+    previous = _reverse_reviewed_delta(current, filename, _V86_RECEIPT)
+    return _reverse_reviewed_delta(previous, filename, _V85_RECEIPT)
 
 
 def _before_v84(current: dict, filename: str) -> dict:
-    previous = _reverse_reviewed_delta(current, filename, _V85_RECEIPT)
+    previous = _before_v85(current, filename)
     return _reverse_reviewed_delta(previous, filename, _V84_RECEIPT)
 
 
@@ -112,7 +136,7 @@ def before_v84_projection_rows(current: list[tuple]) -> list[tuple]:
 
 def before_v85_projection_rows(current: list[tuple]) -> list[tuple]:
     """Restore only V85's two native replacements to their exact V84 positions."""
-    restored = list(current)
+    restored = before_v86_projection_rows(current)
     for index, successor, row in (
         (29, "piper", (
             "scorțișoară", "n_v4gas_mancare", "ingrediente", 1, "domain_fallback",
@@ -126,6 +150,18 @@ def before_v85_projection_rows(current: list[tuple]) -> list[tuple]:
         assert not any(existing[0] == row[0] for existing in restored)
         assert restored[index][0] == successor
         restored.insert(index, row)
+    return restored
+
+
+def before_v86_projection_rows(current: list[tuple]) -> list[tuple]:
+    """Restore the exact Congelator projection retired by its V86 native concept."""
+    restored = list(current)
+    assert not any(row[0] == "congelator" for row in restored)
+    assert restored[86][0] == "hotă de bucătărie"
+    restored.insert(86, (
+        "congelator", "n_v24_home_appliances_frigider", "ustensile de bucătărie",
+        0, "explicit", "ctxp_ab9722a1b626f7b1d9ca",
+    ))
     return restored
 
 

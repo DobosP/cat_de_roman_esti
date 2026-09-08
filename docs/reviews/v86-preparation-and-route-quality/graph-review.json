@@ -1,0 +1,219 @@
+{
+  "reviewer": "root-v86-independent-graph",
+  "date": "2026-09-08",
+  "verdict": "accept",
+  "candidate_sha256": "01069c928a5bd4087a2716575b928ad281d461036b2e0213ab4c090a8b32656f",
+  "module_sha256": "1f2afac7903fd529245ed326e2bd229ba3d50a80c57f263633d8b741486c5950",
+  "baseline_fixture_sha256": "b7d28b990d37164d8e41a93965a5824162ded56b2907ac03388fee717eb144b2",
+  "coverage": {
+    "node_ids": [
+      "n_v86_food_frisca",
+      "n_v86_food_albus",
+      "n_v86_food_galbenus",
+      "n_v86_food_zahar_pudra",
+      "n_v86_food_lapte_praf",
+      "n_v86_food_amidon",
+      "n_v86_food_crema_vanilie",
+      "n_v86_kitchen_congelator",
+      "n_v86_kitchen_mixer"
+    ],
+    "forms": [
+      [
+        "n_v86_food_frisca",
+        "frișcă bătută"
+      ],
+      [
+        "n_v86_food_frisca",
+        "frișcă naturală"
+      ],
+      [
+        "n_v86_food_frisca",
+        "frișcă de smântână"
+      ],
+      [
+        "n_v86_food_albus",
+        "albușul"
+      ],
+      [
+        "n_v86_food_albus",
+        "albușului"
+      ],
+      [
+        "n_v86_food_albus",
+        "albușuri"
+      ],
+      [
+        "n_v86_food_albus",
+        "albușurile"
+      ],
+      [
+        "n_v86_food_galbenus",
+        "gălbenușul"
+      ],
+      [
+        "n_v86_food_galbenus",
+        "gălbenușului"
+      ],
+      [
+        "n_v86_food_galbenus",
+        "gălbenușuri"
+      ],
+      [
+        "n_v86_food_galbenus",
+        "gălbenușurile"
+      ],
+      [
+        "n_v86_food_zahar_pudra",
+        "zahărul pudră"
+      ],
+      [
+        "n_v86_food_zahar_pudra",
+        "zahărului pudră"
+      ],
+      [
+        "n_v86_food_zahar_pudra",
+        "zahăr pudră fin"
+      ],
+      [
+        "n_v86_food_lapte_praf",
+        "laptele praf"
+      ],
+      [
+        "n_v86_food_lapte_praf",
+        "laptelui praf"
+      ],
+      [
+        "n_v86_food_lapte_praf",
+        "lapte praf integral"
+      ],
+      [
+        "n_v86_food_amidon",
+        "amidonul alimentar"
+      ],
+      [
+        "n_v86_food_amidon",
+        "amidonului alimentar"
+      ],
+      [
+        "n_v86_food_amidon",
+        "amidon de porumb"
+      ],
+      [
+        "n_v86_food_crema_vanilie",
+        "cremei de vanilie"
+      ],
+      [
+        "n_v86_food_crema_vanilie",
+        "creme de vanilie"
+      ],
+      [
+        "n_v86_food_crema_vanilie",
+        "cremele de vanilie"
+      ],
+      [
+        "n_v86_kitchen_congelator",
+        "congelatorul"
+      ],
+      [
+        "n_v86_kitchen_congelator",
+        "congelatorului"
+      ],
+      [
+        "n_v86_kitchen_congelator",
+        "congelatoare"
+      ],
+      [
+        "n_v86_kitchen_congelator",
+        "congelatoarele"
+      ],
+      [
+        "n_v86_kitchen_mixer",
+        "mixerul de bucătărie"
+      ],
+      [
+        "n_v86_kitchen_mixer",
+        "mixerului de bucătărie"
+      ],
+      [
+        "n_v86_kitchen_mixer",
+        "mixere de bucătărie"
+      ]
+    ],
+    "edge_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40
+    ],
+    "removals": []
+  },
+  "findings": [
+    "All nine native labels and 30 accepted forms have clear culinary senses. Egg parts stay distinct; powdered milk is not infant-formula ownership; starch and mixer keep qualified names. Existing plain mixer projection is preserved.",
+    "Edges 0–7: egg parts and variant-specific yolk/white preparation roles are explicitly supported by dictionary and original cozonac, amandina, crustless-pasca, cream and ice-cream recipes. No ingredient arrow is reversed.",
+    "Edges 8–16: powdered sugar milling/dusting/cream uses and milk dehydration are direct definitions or documented uses. Powdered milk is a variant chocolate/ice-cream ingredient and coffee addition, not a universal ingredient or nutrition claim.",
+    "Edges 17–31: suitable sweet cream, sugar, real vanilla, chilling and a mixer explain whipped cream; five familiar ingredients explain vanilla cream. Starch in eclair dough and ice cream is explicitly variant-qualified. Cream filling and dessert peer identities are not collapsed.",
+    "Edges 32–36: freezer/ice-cream storage is distinct from refrigeration; optional freezer compartments, frozen bread, qualified milk and strawberries have manufacturer/producer evidence. No storage temperatures/durations or quality guarantees are authored.",
+    "Edges 37–40: mixer labels describe beating/mixing with suitable attachments, not manufacturing egg whites or requiring a machine for every cozonac.",
+    "All 41 links are one-way, specific and nonduplicate. Nine concepts have at least four incident neighbors; only the two cream concepts have five incoming clues. Source-only concepts are not automatically hidden targets."
+  ],
+  "source_access": {
+    "direct_or_indexed_original_content": "Original recipe, manufacturer, producer, dictionary and government sources inspected; source bindings are included in the exact candidate. Indexed original text was used when dynamic pages or PDFs did not return their content.",
+    "corroborated_unavailable": [
+      "Original Arctic manual URL redirected and was replaced by the Beko refrigerator/freezer manual.",
+      "The institutional milk PDF was unavailable; the original government dehydration definition independently corroborates edge13.",
+      "Complete original La Romana PDF access was unavailable on follow-up; indexed March2025 original ingredient text corroborates edge15.",
+      "Arctic lists berries generically; COMPRODCOOP explicitly corroborates strawberry freezing/storage for edge35."
+    ],
+    "excluded_claims": "Recipe marketing, health superiority, storage-time claims and product recommendations are not part of this graph."
+  },
+  "preflight": {
+    "result": "passed",
+    "concepts": 9,
+    "forms": 30,
+    "links": 41,
+    "beginner_probes": 324,
+    "intuitive_link_probes": 41
+  },
+  "conditions": [
+    "Measure actual feedback and six-game impact after applying.",
+    "Use separate bound reviews for any playable promotions.",
+    "Keep every prior owner/form and approved payload, all session bounds and historical evidence exact where claimed."
+  ]
+}

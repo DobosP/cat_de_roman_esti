@@ -10,6 +10,7 @@ import { m } from "framer-motion";
 import { Badge, Button } from "@roedu/ui";
 import type { ScoreEntry } from "../scores";
 import { PlayGuide, type PlayGuideStep } from "./PlayGuide";
+import { StartFailureNotice } from "./StartFailureNotice";
 
 export interface ResumeRecoveryNotice {
   kind: "failed" | "changed";
@@ -32,6 +33,7 @@ export function GameIntro({
   onDaily,
   dailyLabel = "Provocarea zilei",
   starting = false,
+  startFailed = false,
   resumeRecovery,
 }: {
   icon: ReactNode;
@@ -54,12 +56,16 @@ export function GameIntro({
   dailyLabel?: string;
   /** Disables actions while the game is being created. */
   starting?: boolean;
+  /** Keep a failed new-round request visible beside its existing retry actions. */
+  startFailed?: boolean;
   /** Persistent recovery for a saved game that could not safely be adopted. */
   resumeRecovery?: ResumeRecoveryNotice | null;
 }) {
   return (
     <m.div
       className="card game-intro"
+      inert={starting}
+      aria-busy={starting}
       initial={{ opacity: 0, y: 18, scale: 0.98 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
@@ -104,6 +110,7 @@ export function GameIntro({
         </div>
       )}
 
+      <StartFailureNotice failed={startFailed} />
       <div className="row center wrap game-intro-actions" style={{ gap: 12, marginTop: 6 }}>
         <Button autoFocus onClick={onStart} disabled={starting} size="lg">
           {startLabel}

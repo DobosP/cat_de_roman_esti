@@ -116,7 +116,10 @@ export default function Lant({
 }) {
   const active = useActiveGame(GAME_KEY);
   const [state, setState] = useState<LantState | null>(null);
+  const [startFailed, setStartFailed] = useState(false);
+  const startInFlight = useRef(false);
   const [loading, setLoading] = useState(() => active.peek() !== null);
+  const [creating, setCreating] = useState(false);
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
   const [shake, setShake] = useState(0);
@@ -171,6 +174,7 @@ export default function Lant({
       setScored(null);
       setDifficulty(fresh.difficulty);
       setCategory(fresh.board_category ?? null);
+      setStartFailed(false);
       setState(fresh);
       setText("");
       if (!terminal) onToast("Joc reluat.", "info");
@@ -186,14 +190,17 @@ export default function Lant({
     onResume: applyResumedGame,
   });
 
+  const exitSafely = useCallback(() => {
+    if (!startInFlight.current) onExit();
+  }, [onExit]);
+
   const start = useCallback(
     async (opts?: { difficulty?: Difficulty; daily?: string }) => {
+      if (startInFlight.current) return;
+      startInFlight.current = true;
       cancelResume();
-      setLoading(true);
-      setHint(null);
-      setProgress(null);
-      setRecovery(null);
-      setScored(null);
+      setStartFailed(false);
+      setCreating(true);
       try {
         const fresh = await createLant({
           difficulty: opts?.difficulty ?? difficulty,
@@ -203,20 +210,20 @@ export default function Lant({
         });
         active.remember(fresh.game_id);
         dismissRecovery();
+        setHint(null);
+        setProgress(null);
+        setRecovery(null);
+        setScored(null);
         setState(fresh);
         setText("");
-      } catch (err) {
-        onToast(
-          err instanceof ApiError
-            ? `Nu am putut porni jocul (${err.status}).`
-            : "Nu am putut porni jocul.",
-          "error",
-        );
+      } catch {
+        setStartFailed(true);
       } finally {
-        setLoading(false);
+        startInFlight.current = false;
+        setCreating(false);
       }
     },
-    [onToast, difficulty, category, active, cancelResume, dismissRecovery],
+    [difficulty, category, active, cancelResume, dismissRecovery],
   );
 
   // Record the score exactly once when the game is won.
@@ -253,6 +260,7 @@ export default function Lant({
   useEffect(() => {
     if (!state?.won) return;
     const onKey = (e: KeyboardEvent) => {
+      if (startInFlight.current) return;
       const target = e.target instanceof Element ? e.target : null;
       if (
         e.defaultPrevented ||
@@ -388,7 +396,7 @@ export default function Lant({
     else onToast("Nu am putut copia.", "error");
   }
 
-  if (loading) {
+  if (loading && !state) {
     return (
       <div className="screen-pad fill center">
         <Spinner size="lg" label="Se încarcă…" />
@@ -399,11 +407,13 @@ export default function Lant({
   // Intro: difficulty picker + daily challenge.
   if (!state) {
     return (
-      <div className="screen-pad fill">
-        <div className="container col game-container" style={{ gap: 18 }}>
-          <GameShell onExit={onExit} accent={DEF.accent} />
+      <div className="screen-pad fill" aria-busy={creating}>
+        {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
+        <div inert={creating} className="container col game-container" style={{ gap: 18 }}>
+          <GameShell onExit={exitSafely} accent={DEF.accent} busy={creating} />
 
           <GameIntro
+            startFailed={startFailed}
             resumeRecovery={resumeRecovery ? {
               kind: resumeRecovery.kind,
               canRetry: resumeRecovery.kind === "failed" || resumeRecovery.hasCurrent,
@@ -450,7 +460,7 @@ export default function Lant({
             onStart={() => void start({ difficulty })}
             onDaily={() => void start({ difficulty, daily: todayLocal() })}
             dailyLabel="Provocarea zilei"
-            starting={loading}
+            starting={creating || loading}
           >
             <DifficultyPicker
               options={DIFFICULTIES.map((d) => ({ id: d.key, label: d.label, hint: d.hint }))}
@@ -478,10 +488,11 @@ export default function Lant({
   }
 
   return (
-    <div className="screen-pad fill">
-      <div className="container col game-container" style={{ gap: 18 }}>
+    <div className="screen-pad fill" aria-busy={creating}>
+      {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
+      <div inert={creating} className="container col game-container" style={{ gap: 18 }}>
         {/* header */}
-        <GameShell onExit={onExit} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY}>
+        <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY} busy={creating}>
           <Hud>
             {state.daily && (
               <StatBadge
@@ -628,6 +639,8 @@ export default function Lant({
         {/* input + actions OR win */}
         {won ? (
           <ResultCard
+              startFailed={startFailed}
+              actionsBusy={creating}
             icon={state.moves <= state.optimal ? "★" : "✦"}
             title={state.moves <= state.optimal ? "Lanț perfect!" : "Ai reușit!"}
             accent={TARGET_COLOR}
@@ -638,9 +651,10 @@ export default function Lant({
             onCopy={() => void handleCopy()}
             onReplay={() => void start({ difficulty: state.difficulty })}
             onOptions={() => {
+              if (startInFlight.current) return;
               setState(null);
             }}
-            onExit={onExit}
+            onExit={exitSafely}
             replayLabel="Încă un lanț →"
           >
             Ai ajuns la <strong style={{ color: "var(--text)" }}>{state.target.label}</strong>{" "}

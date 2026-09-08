@@ -48,7 +48,7 @@ test("depleted ingredients leave the active workspace but remain in all", () => 
     screen,
     /if \(inventoryView === "all"\) return true;[\s\S]*?item\.recent && !item\.depleted[\s\S]*?item\.useful && !item\.depleted/,
   );
-  assert.match(screen, /disabled=\{won \|\| busy \|\| item\.depleted\}/);
+  assert.match(screen, /disabled=\{creating \|\| won \|\| busy \|\| item\.depleted\}/);
   assert.match(screen, /Nu mai produce elemente noi/);
   assert.match(screen, /inventory_summary\.depleted/);
 });

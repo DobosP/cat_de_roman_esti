@@ -1,0 +1,48 @@
+{
+  "baseline_commit": "14e8895a220d4c78ba34c2b3772f397064cca5b0",
+  "graph_candidate_sha256": "01069c928a5bd4087a2716575b928ad281d461036b2e0213ab4c090a8b32656f",
+  "input_sha256": "8e61c1cd93e22ae18d1eca2a100bd2ee6a01319285d9176aed3796122ff2ecc4",
+  "captures": {
+    "baseline-candidate-inputs.json": {
+      "sha256": "4a226d742d81695030c5e99335e0eb03d60851d54a4ba76fa13e8e6a49f196b9",
+      "elapsed_seconds": 160.05,
+      "source_sha256": {
+        "cat_de_roman_esti/fixtures/kg_sample.json": "b7d28b990d37164d8e41a93965a5824162ded56b2907ac03388fee717eb144b2",
+        "cat_de_roman_esti/fixtures/games_pack.json": "835937cc369918a0070a8d09a35f3982f21f74275476f061aa6c05242d270b4d",
+        "cat_de_roman_esti/fixtures/board_rankings_v37.json": "21ff49faabb631e2a62cd07e15a6f1de69b7cb9ad04f900344771b7fefeeac0b",
+        "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "66f4aebe9d64f638cfc8d48d51692b27a0f846d56e072a9a028a33b72d6e1ec7",
+        "cat_de_roman_esti/wordgames/contexto.py": "cb2ad03fc5d3b4ec0367cb82de63a7f915471bfd270b9d6b0071507fd3102118",
+        "cat_de_roman_esti/wordgames/contexto_projection.py": "d6ac7ca86db042ea291ad60cdde0e2e9b88354a76ed34bbed9a3579002ab7c81",
+        "cat_de_roman_esti/wordgames/alchimie.py": "370a4b847de19f4256ada16d7da035a3be9da15ac90d4f3e0a6e70c5e8131712",
+        "cat_de_roman_esti/wordgames/lant.py": "6241294ae8744fd4a46f8b8e9aae3bdd9227c719bdf0fa0e4b05528dfbdd2d37",
+        "cat_de_roman_esti/wordgames/contexto_feedback.py": "b783941257c4955e2dafaa90cfaba08e258f82dca587b689c4fd87236a2ccb6c"
+      }
+    },
+    "final-candidate.json": {
+      "sha256": "832d9d41811545ae3e65c8e8435ab0ee9e42dcde1e9dfa07f092261a52901183",
+      "elapsed_seconds": 115.179,
+      "source_sha256": {
+        "cat_de_roman_esti/fixtures/kg_sample.json": "b612eda1fb8712fb57f1e16ca2a4fed3e5f6cec847c977ab45ee420c575ffa1a",
+        "cat_de_roman_esti/fixtures/games_pack.json": "b9c8771294abbb2242ca006f64b8bb8dd5e4ae175345383c608c53455015b25d",
+        "cat_de_roman_esti/fixtures/board_rankings_v37.json": "7e46c05207ef102aa7ff877d019235dede5d5e78c0afb19bd005fa413bd384cf",
+        "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "55cfcd131f91e5f712c4fcf6b6324a167d0aaca24b59301b86c79a1462d7f68e",
+        "cat_de_roman_esti/wordgames/contexto.py": "cb2ad03fc5d3b4ec0367cb82de63a7f915471bfd270b9d6b0071507fd3102118",
+        "cat_de_roman_esti/wordgames/contexto_projection.py": "032c83a5ed32b06026c5ed1ad71f0e890799b0d5fde6e89df9194564209165d8",
+        "cat_de_roman_esti/wordgames/alchimie.py": "370a4b847de19f4256ada16d7da035a3be9da15ac90d4f3e0a6e70c5e8131712",
+        "cat_de_roman_esti/wordgames/lant.py": "4476748cd4a1a41c12f53080b036b246f762ffc8fa9512d233bf7821b0faf123",
+        "cat_de_roman_esti/wordgames/contexto_feedback.py": "206257795327a499a3be19cc3608c0d9320777e6e7ad4da839d10079a524b87d"
+      }
+    }
+  },
+  "per_checkout": {
+    "old_contexto_records": 228,
+    "distinct_old_contexto_targets": 225,
+    "input_words": 40,
+    "first_guess_requests": 9120,
+    "alchimie_projections": 82,
+    "lant_profiles_and_initial_menus": 99,
+    "derived_boards": 336,
+    "new_directed_link_journeys": 41
+  },
+  "note": "Baseline expansion reused only source-identical completed six-game profiles. The final candidate ran once after graph/runtime and final promotions/sidecars were frozen. Raw matrices remain in task scratch; compact deltas, source bindings and reproducible scripts are archived."
+}

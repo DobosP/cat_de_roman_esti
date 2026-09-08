@@ -30,3 +30,6 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0119 | [In-round help and earned link explanations](0119-in-round-help-and-earned-link-explanations.md) | accepted |
 | 0120 | [Native ingredients and audited vocabulary](0120-native-ingredients-and-audited-vocabulary.md) | accepted |
 | 0121 | [Exact labels and stable board identities](0121-exact-label-corrections-with-stable-board-identities.md) | accepted |
+| 0122 | [Visible alternative routes in Lanț](0122-visible-alternative-routes-in-lant.md) | accepted |
+| 0123 | [Reviewed preparation and cooling concepts](0123-reviewed-preparation-and-cooling-concepts.md) | accepted |
+| 0124 | [Persistent game creation failures](0124-persist-new-game-creation-failures.md) | accepted |

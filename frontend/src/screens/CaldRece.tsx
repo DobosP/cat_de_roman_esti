@@ -194,6 +194,8 @@ export default function CaldRece({
   onToast: (message: string, kind?: ToastKind) => void;
 }) {
   const [state, setState] = useState<ContextoState | null>(null);
+  const [startFailed, setStartFailed] = useState(false);
+  const startInFlight = useRef(false);
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
   const [latestId, setLatestId] = useState<string | null>(null);
@@ -216,6 +218,7 @@ export default function CaldRece({
 
   const applyResumedGame = useCallback(
     (saved: ContextoState, { terminal }: { terminal: boolean }) => {
+      setStartFailed(false);
       setState(saved);
       setDifficulty(saved.difficulty);
       setCategory(saved.board_category ?? null);
@@ -244,7 +247,10 @@ export default function CaldRece({
 
   const start = useCallback(
     async (opts: CreateOpts = {}) => {
+      if (startInFlight.current) return;
+      startInFlight.current = true;
       cancelResume();
+      setStartFailed(false);
       setBusy(true);
       try {
         const fresh = await contextoApi.createGame(opts);
@@ -261,18 +267,14 @@ export default function CaldRece({
         setIsPuzzleRecord(false);
         setShowIntro(false);
         inputRef.current?.focus();
-      } catch (err) {
-        onToast(
-          err instanceof ApiError
-            ? `Nu am putut porni jocul (${err.status}).`
-            : "Nu am putut porni jocul. Verifică serverul.",
-          "error",
-        );
+      } catch {
+        setStartFailed(true);
       } finally {
+        startInFlight.current = false;
         setBusy(false);
       }
     },
-    [active, cancelResume, dismissRecovery, onToast],
+    [active, cancelResume, dismissRecovery],
   );
 
   const won = state?.won ?? false;
@@ -488,6 +490,7 @@ export default function CaldRece({
   }, [sharePayload, onToast]);
 
   const showOptions = useCallback(() => {
+    if (startInFlight.current) return;
     if (!finished) active.forget();
     setConfirmReveal(false);
     setFeedback(null);
@@ -498,6 +501,7 @@ export default function CaldRece({
   // Live-board exits are permanent. Terminal cleanup is conditional on its own ID: scored
   // wins wait for completion, while a no-score giveup is cleared by its terminal effect.
   const handleExit = useCallback(() => {
+    if (startInFlight.current) return;
     if (!finished) active.forget();
     setConfirmReveal(false);
     setFeedback(null);
@@ -538,10 +542,11 @@ export default function CaldRece({
           style={{ gap: 18, paddingBlock: 8 }}
         >
           <div style={{ width: "100%" }}>
-            <GameShell onExit={handleExit} accent={DEF.accent} />
+            <GameShell onExit={handleExit} accent={DEF.accent} busy={busy} />
           </div>
 
           <GameIntro
+            startFailed={startFailed}
             resumeRecovery={resumeRecovery ? {
               kind: resumeRecovery.kind,
               canRetry: resumeRecovery.kind === "failed" || resumeRecovery.hasCurrent,
@@ -607,7 +612,7 @@ export default function CaldRece({
     <div className="screen-pad fill">
       <div className="container col game-container" style={{ gap: 16, paddingBlock: 8 }}>
         {/* header */}
-        <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY}>
+        <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY} busy={busy && finished}>
           <Hud>
             <StatBadge
               label="Mod"
@@ -944,6 +949,8 @@ export default function CaldRece({
         <AnimatePresence>
           {finished && state?.target && (
             <ResultCard
+              startFailed={startFailed}
+              actionsBusy={busy}
               icon={won ? "🎯" : "🫥"}
               title={won ? "Ai găsit conceptul!" : "Conceptul secret era:"}
               accent={won ? "var(--good)" : "var(--warn)"}

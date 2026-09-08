@@ -1,0 +1,25 @@
+{
+  "command": "PYTHONPATH=. /home/dobo/work/cat_de_roman_esti/.venv/bin/python -m pytest tests/test_wordgames_lant.py tests/test_v86_lant_choice_coverage.py -q -o addopts=''",
+  "exit_code": 0,
+  "passed": 65,
+  "seconds": 158.8,
+  "log_sha256": "d4f768f420fb3f7b68a40294a68501ac1a94ed9c28086183df7ee9b4f049fad1",
+  "bindings": {
+    "cat_de_roman_esti/wordgames/lant.py": "4476748cd4a1a41c12f53080b036b246f762ffc8fa9512d233bf7821b0faf123",
+    "tests/test_v86_lant_choice_coverage.py": "e53119675d568f0bd30149aa6be10d60491a85afa1552e863785dddea5b94e3a"
+  },
+  "baseline_commit": "14e8895",
+  "baseline_lant_source_sha256": "6241294ae8744fd4a46f8b8e9aae3bdd9227c719bdf0fa0e4b05528dfbdd2d37",
+  "policy_diff_sha256": "73d68eea173312206e23040ed5c9dbe1a0303377806f60cddc9acba4b4cf7860",
+  "capture_bindings": {
+    "menus-before.json": "466b6112f4fbb446d655df5ee869aa571963eecc7d30a06b564d77f01a021a10",
+    "menus-after.json": "7488abc8595028b878c58f047e27db3e8d9a60c3c4173c60146c3b331f481a2f",
+    "menu-delta.json": "2139a984de22f0e9b5d6f3ffc52b9c4620f9f22d3c08f3aa672083e7b03d0c44"
+  },
+  "policy_diff_archive": {
+    "path": "policy.diff.gz",
+    "compression": "gzip",
+    "archive_sha256": "33701c14b572adbd70de8724038e75ba64e323673eede9a412f341c6e01dc059",
+    "decoded_sha256": "73d68eea173312206e23040ed5c9dbe1a0303377806f60cddc9acba4b4cf7860"
+  }
+}

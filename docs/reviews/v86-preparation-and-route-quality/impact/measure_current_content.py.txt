@@ -1,0 +1,30 @@
+"""Print candidate expected values for manual review; never edit test expectations."""
+import hashlib,json,os,sys
+from pathlib import Path
+root=Path(sys.argv[1]);out=Path(sys.argv[2]);sys.path.insert(0,str(root));os.environ['DJANGO_SETTINGS_MODULE']='cat_de_roman_esti.web.settings';os.environ['CAT_ACCOUNTS_ENABLED']='0';os.environ['ROEDU_API_URL']='';os.environ['ROEDU_API_KEY']=''
+import django
+django.setup()
+from cat_de_roman_esti.wordgames import contexto as C
+from cat_de_roman_esti.wordgames.packs import _closure_generations,_opening_pairs
+from cat_de_roman_esti.wordgames.service import get_service
+from cat_de_roman_esti.wordgames.contexto_projection import PROJECTION_TERMS
+from tests.content_history import before_v84_pack
+paths=['cat_de_roman_esti/fixtures/kg_sample.json','cat_de_roman_esti/fixtures/games_pack.json','cat_de_roman_esti/fixtures/board_rankings_v37.json','cat_de_roman_esti/fixtures/derived_catalog_v38.json','tests/fixtures/cat_mobile_app_pack_contract.json']
+fixture,pack,ranking,derived,mobile=[json.loads((root/path).read_bytes()) for path in paths]
+def canonical(value):return hashlib.sha256(json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+def pretty(value):return hashlib.sha256((json.dumps(value,ensure_ascii=False,indent=1)+'\n').encode()).hexdigest()
+svc=get_service();historical=before_v84_pack(pack)
+profiles={r['id']:sorted(svc.distances_to(r['target']).items()) for r in pack['contexto']}
+closures={r['id']:{'opening_pairs':_opening_pairs(svc,r['seeds'],r.get('category')),'generations':sorted(_closure_generations(svc,r['seeds'],r.get('category')).items())} for r in historical['alchimie']}
+food='n_v4gas_mancare';family=C._build_session('n_v4soc_familie','usor',None);family_ranks={C._score_feedback(svc,family,svc.resolve(word)).rank for word in ('mamă','tată','bunică','bunic','frate','soră')};assert len(family_ranks)==1
+clatite=C._build_session('n_v3gas_clatite','usor',None)
+clatite_ranks={}
+from django.test import Client
+client=Client()
+for word in ('făină','ou','gem','dulceață','lapte','brânză','smântână'):
+ gid=C.store.create(C._build_session('n_v3gas_clatite','usor',None))
+ try:
+  response=client.post(f'/api/wordgames/contexto/games/{gid}/guess',{'text':word},content_type='application/json');assert response.status_code==200;b=response.json();assert b['ok'] and not b['won'];clatite_ranks[word]={'rank':b['guess']['rank'],'distance':b['guess']['distance'],'temperature':b['guess']['temperature']}
+ finally:C.store.delete(gid)
+r={'artifact_sha256':{path:hashlib.sha256((root/path).read_bytes()).hexdigest() for path in paths},'build_version':fixture['meta']['build_version'],'kg_counts':{'nodes':len(fixture['kg_nodes']),'edges':len(fixture['kg_edges']),'aliases':sum(len(n.get('aliases',[])) for n in fixture['kg_nodes']),'puzzles':len(fixture['kg_puzzles'])},'pack_meta':pack['meta'],'ranking_meta':ranking['meta'],'derived_meta':derived['meta'],'mobile_top_keys':list(mobile),'mobile_manifest':mobile.get('manifest'),'payload_sha256':{'ranking_rows':pretty(ranking['boards']),'frozen_derived_boards':pretty(derived['boards']),'kg_nodes_without_aliases':canonical([{k:v for k,v in n.items() if k!='aliases'} for n in fixture['kg_nodes']]),'kg_edges':canonical(fixture['kg_edges']),'kg_puzzles':canonical(fixture['kg_puzzles']),'contexto_profile':canonical(profiles),'alchimie_closure_profile':canonical(closures)},'feedback_observations':{'food_responsive':C._responsive_count(svc.distances_to(food)),'food_direct_projections':sum(t.anchor_id==food for t in PROJECTION_TERMS),'family_member_rank':next(iter(family_ranks))},'clatite_openers':clatite_ranks,'projection_terms':len(PROJECTION_TERMS),'projection_domains':len({t.domain for t in PROJECTION_TERMS})}
+out.write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\n');print(json.dumps(r,ensure_ascii=False,indent=2))

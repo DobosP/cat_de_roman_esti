@@ -88,9 +88,16 @@ def test_projection_inventory_and_prior_policies_remain_exact():
     nuca = INGREDIENT_FEEDBACK_POLICIES["n_v81_food_pantry_nuca"]
     assert (nuca.fallback_anchor_id, nuca.min_strength) == (MIERE, 0.90)
     assert isinstance(EXACT_TARGET_FEEDBACK_PAIRS, frozenset)
-    assert EXACT_TARGET_FEEDBACK_PAIRS == frozenset(
+    v83_pairs = frozenset(
         (source, target) for source, targets in NATIVE_TARGETS.items() for target in targets
     )
+    assert len(v83_pairs) == 4
+    v86_pairs = frozenset({
+        ("n_v21gas_ecler", "n_v86_food_crema_vanilie"),
+        ("n_v21gas_savarina", "n_v86_food_frisca"),
+    })
+    assert EXACT_TARGET_FEEDBACK_PAIRS - v86_pairs == v83_pairs
+    assert EXACT_TARGET_FEEDBACK_PAIRS == v83_pairs | v86_pairs
     assert set(PROJECTION_NEIGHBORHOODS) == {"gem", "burta"}
     gem = PROJECTION_NEIGHBORHOODS["gem"]
     assert (gem.anchor_id, gem.min_strength, gem.include_direct_neighbors) == (DULCEATA, 0.60, True)

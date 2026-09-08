@@ -70,5 +70,11 @@ test("recovery clears on explicit input and lifecycle transitions", () => {
   );
   assert.match(screen, /const handleClue[\s\S]{0,180}setRecovery\(null\);/);
   assert.match(screen, /const handleGiveUp[\s\S]{0,180}setRecovery\(null\);/);
-  assert.match(screen, /const showOptions[\s\S]{0,120}setRecovery\(null\);/);
+  const optionsStart = screen.indexOf("const showOptions = useCallback");
+  const optionsEnd = screen.indexOf("const handleExit = useCallback", optionsStart);
+  assert.ok(optionsStart >= 0 && optionsEnd > optionsStart);
+  const options = screen.slice(optionsStart, optionsEnd);
+  assert.match(options, /if \(startInFlight\.current\) return;/);
+  assert.match(options, /if \(!finished\) active\.forget\(\);/);
+  assert.match(options, /setRecovery\(null\);\s*setShowIntro\(true\);/);
 });

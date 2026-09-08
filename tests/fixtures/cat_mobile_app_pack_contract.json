@@ -4,12 +4,12 @@
   "app": "cat_de_roman_esti",
   "schema_version": 1,
   "manifest_version": 1,
-  "build_version": "fixture-v85-ingredient-feedback-and-board-clarity",
+  "build_version": "fixture-v86-preparation-and-route-quality",
   "generated_at": "2026-06-21T00:00:00Z",
-  "content_hash": "sha256:39da1d1b2ed32509d4ce6974251304454aa8d5b84976f9e475bd381626571c2c",
+  "content_hash": "sha256:bd2ccd079148398fc7732f9ade2ca6e0259d1613d3a7e5a8f97c791f746e9c82",
   "counts": {
-   "nodes": 2388,
-   "edges": 9319,
+   "nodes": 2397,
+   "edges": 9360,
    "puzzles": 180
   }
  },
@@ -9321,6 +9321,42 @@
   {
    "id": "n_v85_food_vanilie",
    "label_ro": "Vanilie"
+  },
+  {
+   "id": "n_v86_food_albus",
+   "label_ro": "Albuș"
+  },
+  {
+   "id": "n_v86_food_amidon",
+   "label_ro": "Amidon alimentar"
+  },
+  {
+   "id": "n_v86_food_crema_vanilie",
+   "label_ro": "Cremă de vanilie"
+  },
+  {
+   "id": "n_v86_food_frisca",
+   "label_ro": "Frișcă"
+  },
+  {
+   "id": "n_v86_food_galbenus",
+   "label_ro": "Gălbenuș"
+  },
+  {
+   "id": "n_v86_food_lapte_praf",
+   "label_ro": "Lapte praf"
+  },
+  {
+   "id": "n_v86_food_zahar_pudra",
+   "label_ro": "Zahăr pudră"
+  },
+  {
+   "id": "n_v86_kitchen_congelator",
+   "label_ro": "Congelator"
+  },
+  {
+   "id": "n_v86_kitchen_mixer",
+   "label_ro": "Mixer de bucătărie"
   },
   {
    "id": "n_varful_moldoveanu",
@@ -54659,9 +54695,64 @@
    "dst_id": "n_moldova_reg"
   },
   {
+   "id": "de8659",
+   "src_id": "n_v4gas_ou",
+   "dst_id": "n_v86_food_albus"
+  },
+  {
    "id": "de866",
    "src_id": "n_net_mircea_bravo",
    "dst_id": "n_net_umor_autoironic"
+  },
+  {
+   "id": "de8660",
+   "src_id": "n_v4gas_ou",
+   "dst_id": "n_v86_food_galbenus"
+  },
+  {
+   "id": "de8661",
+   "src_id": "n_v86_food_albus",
+   "dst_id": "n_gas_cozonac"
+  },
+  {
+   "id": "de8662",
+   "src_id": "n_v86_food_albus",
+   "dst_id": "n_v18gas_amandina"
+  },
+  {
+   "id": "de8663",
+   "src_id": "n_v86_food_albus",
+   "dst_id": "n_v17gas_pasca"
+  },
+  {
+   "id": "de8664",
+   "src_id": "n_v86_food_galbenus",
+   "dst_id": "n_v86_food_crema_vanilie"
+  },
+  {
+   "id": "de8665",
+   "src_id": "n_v86_food_galbenus",
+   "dst_id": "n_v3gas_inghetata"
+  },
+  {
+   "id": "de8666",
+   "src_id": "n_v86_food_galbenus",
+   "dst_id": "n_gas_cozonac"
+  },
+  {
+   "id": "de8667",
+   "src_id": "n_v24_food_pantry_zahar",
+   "dst_id": "n_v86_food_zahar_pudra"
+  },
+  {
+   "id": "de8668",
+   "src_id": "n_v86_food_zahar_pudra",
+   "dst_id": "n_v86_food_frisca"
+  },
+  {
+   "id": "de8669",
+   "src_id": "n_v86_food_zahar_pudra",
+   "dst_id": "n_v21gas_cornulete"
   },
   {
    "id": "de867",
@@ -54669,14 +54760,164 @@
    "dst_id": "n_net_sketch_online"
   },
   {
+   "id": "de8670",
+   "src_id": "n_v86_food_zahar_pudra",
+   "dst_id": "n_v17gas_gogosi"
+  },
+  {
+   "id": "de8671",
+   "src_id": "n_v86_food_zahar_pudra",
+   "dst_id": "n_v18gas_amandina"
+  },
+  {
+   "id": "de8672",
+   "src_id": "n_v4gas_lapte",
+   "dst_id": "n_v86_food_lapte_praf"
+  },
+  {
+   "id": "de8673",
+   "src_id": "n_v86_food_lapte_praf",
+   "dst_id": "n_v85_food_ciocolata"
+  },
+  {
+   "id": "de8674",
+   "src_id": "n_v86_food_lapte_praf",
+   "dst_id": "n_v3gas_inghetata"
+  },
+  {
+   "id": "de8675",
+   "src_id": "n_v86_food_lapte_praf",
+   "dst_id": "n_v3gas_cafea"
+  },
+  {
+   "id": "de8676",
+   "src_id": "n_v20gas_smantana",
+   "dst_id": "n_v86_food_frisca"
+  },
+  {
+   "id": "de8677",
+   "src_id": "n_v85_food_vanilie",
+   "dst_id": "n_v86_food_frisca"
+  },
+  {
+   "id": "de8678",
+   "src_id": "n_v86_food_frisca",
+   "dst_id": "n_v21gas_savarina"
+  },
+  {
+   "id": "de8679",
+   "src_id": "n_v86_food_frisca",
+   "dst_id": "n_v21gas_ecler"
+  },
+  {
    "id": "de868",
    "src_id": "n_net_bunica_mircea_bravo",
    "dst_id": "n_net_umor_autoironic"
   },
   {
+   "id": "de8680",
+   "src_id": "n_v86_food_frisca",
+   "dst_id": "n_v3gas_inghetata"
+  },
+  {
+   "id": "de8681",
+   "src_id": "n_v24_home_appliances_frigider",
+   "dst_id": "n_v86_food_frisca"
+  },
+  {
+   "id": "de8682",
+   "src_id": "n_v85_food_vanilie",
+   "dst_id": "n_v86_food_crema_vanilie"
+  },
+  {
+   "id": "de8683",
+   "src_id": "n_v4gas_lapte",
+   "dst_id": "n_v86_food_crema_vanilie"
+  },
+  {
+   "id": "de8684",
+   "src_id": "n_v86_food_amidon",
+   "dst_id": "n_v86_food_crema_vanilie"
+  },
+  {
+   "id": "de8685",
+   "src_id": "n_v24_food_pantry_zahar",
+   "dst_id": "n_v86_food_crema_vanilie"
+  },
+  {
+   "id": "de8686",
+   "src_id": "n_v86_food_crema_vanilie",
+   "dst_id": "n_v21gas_ecler"
+  },
+  {
+   "id": "de8687",
+   "src_id": "n_v86_food_amidon",
+   "dst_id": "n_v21gas_ecler"
+  },
+  {
+   "id": "de8688",
+   "src_id": "n_v86_food_amidon",
+   "dst_id": "n_v3gas_inghetata"
+  },
+  {
+   "id": "de8689",
+   "src_id": "n_v86_food_amidon",
+   "dst_id": "n_v2gas_sosuri"
+  },
+  {
    "id": "de869",
    "src_id": "n_net_bunica_mircea_bravo",
    "dst_id": "n_net_vlog_de_familie"
+  },
+  {
+   "id": "de8690",
+   "src_id": "n_v2lim_porumb",
+   "dst_id": "n_v86_food_amidon"
+  },
+  {
+   "id": "de8691",
+   "src_id": "n_v86_kitchen_congelator",
+   "dst_id": "n_v3gas_inghetata"
+  },
+  {
+   "id": "de8692",
+   "src_id": "n_v86_kitchen_congelator",
+   "dst_id": "n_v4gas_paine"
+  },
+  {
+   "id": "de8693",
+   "src_id": "n_v86_kitchen_congelator",
+   "dst_id": "n_v4gas_lapte"
+  },
+  {
+   "id": "de8694",
+   "src_id": "n_v86_kitchen_congelator",
+   "dst_id": "n_v24_food_small_fruit_capsuna"
+  },
+  {
+   "id": "de8695",
+   "src_id": "n_v24_home_appliances_frigider",
+   "dst_id": "n_v86_kitchen_congelator"
+  },
+  {
+   "id": "de8696",
+   "src_id": "n_v86_kitchen_mixer",
+   "dst_id": "n_v86_food_frisca"
+  },
+  {
+   "id": "de8697",
+   "src_id": "n_v86_kitchen_mixer",
+   "dst_id": "n_v86_food_albus"
+  },
+  {
+   "id": "de8698",
+   "src_id": "n_v86_kitchen_mixer",
+   "dst_id": "n_v84_food_aluat"
+  },
+  {
+   "id": "de8699",
+   "src_id": "n_v86_kitchen_mixer",
+   "dst_id": "n_gas_cozonac"
   },
   {
    "id": "de87",

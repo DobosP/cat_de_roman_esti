@@ -20,7 +20,14 @@ test("the footer offers a fresh board without leaving the game", () => {
     footer,
     /className="alchimie-other-board"[\s\S]{0,400}?void start\(\{[\s\S]{0,120}?difficulty: state\.difficulty,[\s\S]{0,120}?category: state\.board_category \?\? undefined,/,
   );
-  assert.match(footer, /className="alchimie-other-board"[\s\S]{0,120}?disabled=\{busy \|\| loading\}/);
+  assert.match(footer, /className="alchimie-other-board"[\s\S]{0,120}?disabled=\{creating \|\| busy\}/);
+  const startIndex = screen.indexOf("const start = useCallback");
+  const startEnd = screen.indexOf("const won =", startIndex);
+  assert.ok(startIndex >= 0 && startEnd > startIndex);
+  const startAction = screen.slice(startIndex, startEnd);
+  assert.match(startAction, /if \(startInFlight\.current\) return;/);
+  assert.match(startAction, /startInFlight\.current = true;[\s\S]*?setCreating\(true\);[\s\S]*?alchimieApi\.create/);
+  assert.match(startAction, /finally \{\s*startInFlight\.current = false;\s*setCreating\(false\);/);
   assert.match(footer, /\{!won && \(/);
   assert.match(
     screen,

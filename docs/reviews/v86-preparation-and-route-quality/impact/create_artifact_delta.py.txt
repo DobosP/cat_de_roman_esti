@@ -1,0 +1,67 @@
+"""Capture exact reversible content changes from an explicit committed baseline.
+
+Writes review evidence only. Neither baseline nor current serving artifacts are changed.
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import subprocess
+from pathlib import Path
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--root', required=True, type=Path)
+parser.add_argument('--baseline', required=True)
+parser.add_argument('--out', required=True, type=Path)
+args = parser.parse_args()
+root = args.root.resolve()
+baseline = subprocess.check_output(['git', 'rev-parse', args.baseline], cwd=root, text=True).strip()
+filenames = ['kg_sample.json', 'games_pack.json', 'board_rankings_v37.json', 'derived_catalog_v38.json']
+report = {'schema_version': 1, 'baseline_commit': baseline, 'files': {}}
+
+for filename in filenames:
+    relative = 'cat_de_roman_esti/fixtures/' + filename
+    old_blob = subprocess.check_output(['git', 'show', f'{baseline}:{relative}'], cwd=root)
+    new_blob = (root / relative).read_bytes()
+    old, new = json.loads(old_blob), json.loads(new_blob)
+    old_tables = {name for name, value in old.items() if isinstance(value, list)}
+    new_tables = {name for name, value in new.items() if isinstance(value, list)}
+    assert old_tables == new_tables, (filename, 'changed table schema')
+    evidence = {
+        'baseline_sha256': hashlib.sha256(old_blob).hexdigest(),
+        'after_sha256': hashlib.sha256(new_blob).hexdigest(),
+        'head_before': {k: v for k, v in old.items() if k not in old_tables},
+        'head_after': {k: v for k, v in new.items() if k not in new_tables},
+        'tables': {},
+    }
+    for table in [name for name in old if name in old_tables]:
+        previous, current = old[table], new[table]
+        old_by_id = {row['id']: row for row in previous}
+        new_by_id = {row['id']: row for row in current}
+        assert len(old_by_id) == len(previous) and len(new_by_id) == len(current)
+        added = [row for row in current if row['id'] not in old_by_id]
+        removed = [{'index': i, 'row': row} for i, row in enumerate(previous) if row['id'] not in new_by_id]
+        changed = {row['id']: {'before': row, 'after': new_by_id[row['id']]}
+                   for row in previous if row['id'] in new_by_id and row != new_by_id[row['id']]}
+        provisional_order = [row['id'] for row in current if row['id'] in old_by_id]
+        for removal in removed:
+            provisional_order.insert(removal['index'], removal['row']['id'])
+        old_order = [row['id'] for row in previous]
+        evidence['tables'][table] = {
+            'added': added,
+            'removed': removed,
+            'changed': changed,
+            'baseline_order': old_order if old_order != provisional_order else None,
+        }
+    report['files'][filename] = evidence
+
+args.out.parent.mkdir(parents=True, exist_ok=True)
+temporary = args.out.with_suffix(args.out.suffix + '.tmp')
+temporary.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+temporary.replace(args.out)
+print(json.dumps({name: {
+    'baseline_sha256': item['baseline_sha256'], 'after_sha256': item['after_sha256'],
+    'tables': {table: {key: len(value) for key, value in delta.items() if key != 'baseline_order'}
+               for table, delta in item['tables'].items()}
+} for name, item in report['files'].items()}, indent=2))

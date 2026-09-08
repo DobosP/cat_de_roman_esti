@@ -1,0 +1,86 @@
+{
+ "id": "ct_gastronomie_343",
+ "game": "contexto",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "a3873cac4e943067e5f474dbc2cee608a09b57c1e931768353b23324e71d7958",
+ "kg_sha256": "b612eda1fb8712fb57f1e16ca2a4fed3e5f6cec847c977ab45ee420c575ffa1a",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Savarină salience 0.55 < 0.60 (usor floor)"
+  }
+ ],
+ "target": {
+  "id": "n_v21gas_savarina",
+  "label": "Savarină",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.55,
+  "degree": 4,
+  "incoming_degree": 5,
+  "description": "Prăjitură clasică de cofetărie: aluat bine însiropat, glazură și mult frișcă deasupra. Face parte din trioul nostalgic al cofetăriilor românești, alături de amandină și ecler."
+ },
+ "reachable": 2321,
+ "strong_neighbors": [
+  {
+   "id": "n_v18gas_amandina",
+   "label": "Amandină",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.56,
+   "degree": 5,
+   "incoming_degree": 9,
+   "description": "Prăjitură clasică de cofetărie românească: blat de cacao însiropat, cremă de ciocolată și glazură de fondant. Reper al cofetăriilor de cartier de zeci de ani.",
+   "strength": 0.85
+  },
+  {
+   "id": "n_v21gas_ecler",
+   "label": "Ecler",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.55,
+   "degree": 3,
+   "incoming_degree": 8,
+   "description": "Prăjitură de cofetărie din aluat opărit, umplută cu cremă de vanilie și glazurată cu ciocolată sau fondant. Un clasic al cofetăriilor românești, cerut și astăzi la felie cu amandina și savarina.",
+   "strength": 0.85
+  },
+  {
+   "id": "n_v4gas_prajitura",
+   "label": "Prăjitură",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.67,
+   "degree": 12,
+   "incoming_degree": 12,
+   "description": "Preparat dulce copt sau asamblat, servit ca desert.",
+   "strength": 0.85
+  },
+  {
+   "id": "n_v2gas_desert",
+   "label": "Desert",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.8464,
+   "degree": 24,
+   "incoming_degree": 24,
+   "description": "Fel dulce servit la finalul mesei sau la sărbători.",
+   "strength": 0.8
+  },
+  {
+   "id": "n_v86_food_frisca",
+   "label": "Frișcă",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.85,
+   "degree": 3,
+   "incoming_degree": 5,
+   "description": "Smântână dulce aerată prin batere, folosită la umplerea și decorarea deserturilor.",
+   "strength": 0.8
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:44cd0ad635886e7c125bf8aaf40cf293c8f2c1c63000238ab7f45713447cf1cc"
+}

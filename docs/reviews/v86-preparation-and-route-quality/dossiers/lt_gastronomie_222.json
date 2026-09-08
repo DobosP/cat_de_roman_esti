@@ -1,0 +1,134 @@
+{
+ "id": "lt_gastronomie_222",
+ "game": "lant",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "852d33b8577ccde4c765226850fbee84033ebe695feffde17accf84c4d6901a5",
+ "kg_sha256": "b612eda1fb8712fb57f1e16ca2a4fed3e5f6cec847c977ab45ee420c575ffa1a",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Înghețată salience 0.28 < 0.60 (usor floor)"
+  }
+ ],
+ "start": {
+  "id": "n_v24_home_appliances_frigider",
+  "label": "Frigider",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.9,
+  "degree": 4,
+  "incoming_degree": 3,
+  "description": "Concept cotidian din grupul «obiecte utile în casă»: Frigider."
+ },
+ "target": {
+  "id": "n_v3gas_inghetata",
+  "label": "Înghețată",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.2826,
+  "degree": 4,
+  "incoming_degree": 11,
+  "description": "Desert rece, cremos, din lapte sau apă, zahăr și arome."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v24_home_appliances_frigider",
+     "label": "Frigider"
+    },
+    {
+     "id": "n_v86_food_frisca",
+     "label": "Frișcă"
+    },
+    {
+     "id": "n_v3gas_inghetata",
+     "label": "Înghețată"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v24_home_appliances_frigider",
+      "label": "Frigider"
+     },
+     "to": {
+      "id": "n_v86_food_frisca",
+      "label": "Frișcă"
+     },
+     "relation": "stores",
+     "label": "păstrează la rece",
+     "strength": 0.8
+    },
+    {
+     "from": {
+      "id": "n_v86_food_frisca",
+      "label": "Frișcă"
+     },
+     "to": {
+      "id": "n_v3gas_inghetata",
+      "label": "Înghețată"
+     },
+     "relation": "ingredient_variant",
+     "label": "încorporată în unele rețete de",
+     "strength": 0.8
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v24_home_appliances_frigider",
+     "label": "Frigider"
+    },
+    {
+     "id": "n_v86_kitchen_congelator",
+     "label": "Congelator"
+    },
+    {
+     "id": "n_v3gas_inghetata",
+     "label": "Înghețată"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v24_home_appliances_frigider",
+      "label": "Frigider"
+     },
+     "to": {
+      "id": "n_v86_kitchen_congelator",
+      "label": "Congelator"
+     },
+     "relation": "has_part",
+     "label": "unele modele au compartiment de tip",
+     "strength": 0.8
+    },
+    {
+     "from": {
+      "id": "n_v86_kitchen_congelator",
+      "label": "Congelator"
+     },
+     "to": {
+      "id": "n_v3gas_inghetata",
+      "label": "Înghețată"
+     },
+     "relation": "stores",
+     "label": "păstrează congelată",
+     "strength": 0.8
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "29781ef5daa65b0637425ea258702f9f644486807ea61e49020be66d168e0ca3",
+ "review_binding": "sha256:45f5b6d5b9060387fe79e0b8974a88159eeabc8740e72f0279c9cb336f4e234e"
+}

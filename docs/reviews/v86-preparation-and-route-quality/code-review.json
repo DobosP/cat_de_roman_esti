@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "reviewer": "v84_graph_research",
+  "reviewed_date": "2026-09-08",
+  "baseline_commit": "14e8895a220d4c78ba34c2b3772f397064cca5b0",
+  "verdict": "accept",
+  "scope": "Independent source review of frozen V86 start-failure handling and placement, Lanț shortest-choice reserve, and two closed Contexto feedback pairs. No app/test edits and no tests run by this reviewer.",
+  "source_freeze_confirmation": "Root forwarded UI author SOURCE FREEZE before final hashes were collected and rechecked.",
+  "source_sha256": {
+    "frontend/src/components/StartFailureNotice.tsx": "9173344447b28a92852ad1163da11c18ec8b623883a6a608e7348ca8ae53f5ca",
+    "frontend/src/components/GameIntro.tsx": "a5f16bbda02c996e274b5063a74b32c15708080cf35dd576c3393c2de680f9c6",
+    "frontend/src/components/GameShell.tsx": "ad6fdffdb0948644d0c0a2baaff812056ef16f0e504b50ef78593457d485924f",
+    "frontend/src/components/ResultCard.tsx": "305908657bdbdf605721a4569238423c1b7ccde10835ab0ffc87473850170cf9",
+    "frontend/src/screens/Alchimie.tsx": "c855ebca0b4a9c1dc96b10ddbe6639d24fa18a644e2eb10887b44454499ddba7",
+    "frontend/src/screens/CaldRece.tsx": "7536a3f87727278118ec946b09764df6669b16632f462d2dc9aca82ceec22603",
+    "frontend/src/screens/Conexiuni.tsx": "f75bd199ceeb7d4732b896e0f9a9d8553e536f3fb06cfa12168b1ddf9ab0a866",
+    "frontend/src/screens/Intrusul.tsx": "57cdc75c05468e692eeb12b3591e5ca7eb3ece5b3806432950bd63936e90f11e",
+    "frontend/src/screens/Lant.tsx": "09b6f136ee5771560583f26e1205e4cc59c53deca1cf32e426c00c985e5ba217",
+    "frontend/src/screens/Perechi.tsx": "5741f63a8edd39bf9f6886004f222f9ea6f1aca6536fadb046b03ee02cf18d37",
+    "cat_de_roman_esti/wordgames/lant.py": "4476748cd4a1a41c12f53080b036b246f762ffc8fa9512d233bf7821b0faf123",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "206257795327a499a3be19cc3608c0d9320777e6e7ad4da839d10079a524b87d",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "032c83a5ed32b06026c5ed1ad71f0e890799b0d5fde6e89df9194564209165d8",
+    "frontend/e2e/start-failure.spec.mjs": "acbc24ebbaeff4c0b36804899a1ffcceb2c4bf1c0627ad26acbfc1c0189b038f"
+  },
+  "consulted_test_sha256": {
+    "tests/test_v86_lant_choice_coverage.py": "e53119675d568f0bd30149aa6be10d60491a85afa1552e863785dddea5b94e3a",
+    "tests/test_v86_preparation_graph.py": "be04b0d2cb561c43b26a4f6cc905167523fe497badabb239fc8c128c6b0d9763"
+  },
+  "source_set_sha256": "a9a12192d523d417419f9960fdfdb3cd50cfc594b7d5b1dfa32ca9b9ace5d58a",
+  "current_blockers": [],
+  "resolved_findings": [
+    {
+      "id": "replay_notice_outside_viewport",
+      "priority": "P2",
+      "original_locations": [
+        "frontend/src/components/GameShell.tsx",
+        "frontend/src/screens/CaldRece.tsx",
+        "frontend/src/screens/Conexiuni.tsx",
+        "frontend/src/screens/Intrusul.tsx",
+        "frontend/src/screens/Perechi.tsx"
+      ],
+      "problem": "A header-only error notice remained above the viewport after a failed replay at the bottom of a long result. Alert semantics did not make it visible to sighted players.",
+      "resolution": "GameShell banner removed. ResultCard renders the notice immediately before replay controls; Alchimie live Alt joc has its own adjacent notice. Both locations reserve the same responsive text/padding space before failure, preventing a new error from pushing the clicked retry button below a short viewport. Intro stays compact.",
+      "verification": "Final source inspected; strict notice and retry-button viewport assertions remain in the frozen browser test. Root relayed the author’s latest 16/16 focused rerun plus 10 unchanged initial-start cases passing in the preceding run."
+    }
+  ],
+  "acceptance_evidence": {
+    "notice_accessibility": "Reserved placeholder is visibility:hidden, aria-hidden and has no alert role or focusable controls. On failure it becomes the visible alert with unchanged responsive dimensions; generic Romanian text excludes technical error details.",
+    "previous_round_and_scroll": "Alchimie and Lanț separate creating from saved-resume loading and retain intro/round DOM during creation. Other four screens also retain prior state. Replacement-only feedback, record flags, history and local active-game pointer update only after successful create.",
+    "promise_and_controls": "All six creation paths guard synchronously against duplicate flights, clear the failure on a retry, catch failure without clearing prior round data and release pending state in finally. Pending intro controls are inert/disabled, completed replay controls are disabled, and exit/options handlers are guarded. Live Alchimie disables and synchronously guards gameplay mutations while a replacement is pending.",
+    "lant_reserve": "Up to two shortest on-corridor hops are selected before the remaining corridor quality slot. Existing three-corridor and six-total caps, reachable direct-edge filtering, visited-node exclusion, normalized-label deduplication and deterministic alphabetical public ordering remain. No route class, distance or node IDs are added to public choices.",
+    "contexto_pairs": "Only Ecler→Cremă de vanilie and Savarină→Frișcă join the exact-target pair set. Existing scorer checks source/target existence, preserves submitted public identity, prevents a proxied win and bypasses proxying for exact-self wins. No neighbor expansion or reverse graph edge is introduced; missing custom-graph targets fall back safely.",
+    "consulted_tests": "Read targeted tests for exact whole-graph feedback closure/custom targets, direct private Lanț menus and deterministic caps, plus first-start/replay/live replacement browser cases. Did not rerun them."
+  },
+  "limits": [
+    "Independent acceptance binds only the exact source hashes above; subsequent source changes require renewed review.",
+    "Focused browser counts are attributed to the UI author via root, not independently executed here.",
+    "The final complete frontend/browser matrix was still running when this review was archived; this is not a final integration or deployment approval."
+  ]
+}

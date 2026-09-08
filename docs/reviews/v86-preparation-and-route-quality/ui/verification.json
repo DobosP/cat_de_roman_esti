@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "reviewed_date": "2026-09-08",
+  "author": "v85_board_clarity (implementation author; self-test and rendered visual QA, not an independent code review)",
+  "source_freeze": true,
+  "runs": [
+    {
+      "id": "initial",
+      "command": "PATH=/home/dobo/work/cat_de_roman_esti/.venv/bin:/home/dobo/.vite-plus/bin:$PATH CDR_E2E_PORT=8188 CDR_E2E_OUTPUT_DIR=<task scratch>/ui/<run>-browser-results npx playwright test e2e/start-failure.spec.mjs",
+      "exit_code": 1,
+      "selected": 26,
+      "passed": 19,
+      "failed": 7,
+      "reported_duration": "3.2m",
+      "log": "runs/initial-browser.log.gz",
+      "product_failures": [
+        "Desktop Lanț first-create failure remounted its long intro via the loading spinner and reset scroll, leaving the notice below the viewport."
+      ],
+      "setup_failures": [
+        "Six mobile replay setups assumed the game header should leave the viewport; the header is intentionally sticky. These failed before the replay-failure action."
+      ],
+      "log_sha256": "b1eb076ad71fc7dd52af66011376d2f1a3c915717f44c8d9ca572a9ff87d2d11",
+      "compression": "gzip",
+      "archive_sha256": "b8826d644ed22ae07f345390c82ef31f8a6bcaab134745ffc5482f9db5132315"
+    },
+    {
+      "id": "retained-intro",
+      "command": "PATH=/home/dobo/work/cat_de_roman_esti/.venv/bin:/home/dobo/.vite-plus/bin:$PATH CDR_E2E_PORT=8188 CDR_E2E_OUTPUT_DIR=<task scratch>/ui/<run>-browser-results npx playwright test e2e/start-failure.spec.mjs",
+      "exit_code": 1,
+      "selected": 26,
+      "passed": 22,
+      "failed": 4,
+      "reported_duration": "2.6m",
+      "log": "runs/retained-intro-browser.log.gz",
+      "product_failures": [
+        "Desktop live Alchimie notice insertion pushed Alt joc below the viewport.",
+        "Mobile Lanț replay notice insertion pushed the replay action below the viewport."
+      ],
+      "setup_failures": [
+        "Two desktop replay setups required the entire rules block to be offscreen although the result was genuinely scrolled."
+      ],
+      "log_sha256": "bb8da99f7e2556c56c55f8f435f3abcbb0069d2b411cefc35906b11598590e77",
+      "compression": "gzip",
+      "archive_sha256": "0ad6da11908c826ee73d93a06bee73586816ea5fd3c38bbeacfeb8f84c3fbfa6"
+    },
+    {
+      "id": "final-focused",
+      "command": "PATH=/home/dobo/work/cat_de_roman_esti/.venv/bin:/home/dobo/.vite-plus/bin:$PATH CDR_E2E_PORT=8188 CDR_E2E_OUTPUT_DIR=<task scratch>/ui/<run>-browser-results npx playwright test e2e/start-failure.spec.mjs --grep 'retains|lant keeps'",
+      "exit_code": 0,
+      "selected": 16,
+      "passed": 16,
+      "failed": 0,
+      "reported_duration": "1.4m",
+      "log": "runs/final-focused-browser.log.gz",
+      "coverage": [
+        "All six desktop and all six mobile completed-result failures and retries.",
+        "Desktop and mobile held live Alchimie replacement; old action, Enter, Escape and exit attempts leave the old session and pointer unchanged.",
+        "Desktop and mobile Lanț first-create scroll regression."
+      ],
+      "scope_note": "Only affected and previously unexercised scenarios were rerun after the final layout fix. The other ten first-start cases passed in the preceding run; the complete root matrix separately reruns all 26.",
+      "log_sha256": "609b8da12eb886f40a4976ce59f6a41257985ab01f828f6348ff6c69a2b59da9",
+      "compression": "gzip",
+      "archive_sha256": "ebb76f8f84ec27314999c50ba52d1c5342f8cf9917e2b2ee2e938932adf15e90"
+    }
+  ],
+  "no_playwright_retries_or_timeout_relaxations": true,
+  "final_build": {
+    "command": "PATH=/home/dobo/.vite-plus/bin:$PATH npm run build",
+    "exit_code": 0,
+    "log": "runs/final-build.log.gz",
+    "log_sha256": "42e3b7360217d2dd6f35b9c1227c4dfa9977861377ead24f2a57de2ca19b9cf3",
+    "initial_gzip_kib": 118.87,
+    "limit_kib": 120,
+    "threshold_changed": false,
+    "compression": "gzip",
+    "archive_sha256": "9993f8b10433ef08bc5a8df45dd398b4866b0ab93703b1324103a4bbd6987a05"
+  },
+  "final_lint": {
+    "command": "PATH=/home/dobo/.vite-plus/bin:$PATH npm run lint",
+    "exit_code": 0,
+    "log": "runs/final-lint.log.gz",
+    "log_sha256": "0830e0b98e518b5bbf0393fc765de68afcee547ec24a9fa7a6c9bc8fdf385c39",
+    "compression": "gzip",
+    "archive_sha256": "1136681d23cbf174533564ab3c7859cb66cc0401f043b3534430619d419f420a"
+  },
+  "source_bindings": {
+    "frontend/src/components/GameIntro.tsx": "a5f16bbda02c996e274b5063a74b32c15708080cf35dd576c3393c2de680f9c6",
+    "frontend/src/components/ResultCard.tsx": "305908657bdbdf605721a4569238423c1b7ccde10835ab0ffc87473850170cf9",
+    "frontend/src/components/StartFailureNotice.tsx": "9173344447b28a92852ad1163da11c18ec8b623883a6a608e7348ca8ae53f5ca",
+    "frontend/src/screens/Alchimie.tsx": "c855ebca0b4a9c1dc96b10ddbe6639d24fa18a644e2eb10887b44454499ddba7",
+    "frontend/src/screens/CaldRece.tsx": "7536a3f87727278118ec946b09764df6669b16632f462d2dc9aca82ceec22603",
+    "frontend/src/screens/Conexiuni.tsx": "f75bd199ceeb7d4732b896e0f9a9d8553e536f3fb06cfa12168b1ddf9ab0a866",
+    "frontend/src/screens/Lant.tsx": "09b6f136ee5771560583f26e1205e4cc59c53deca1cf32e426c00c985e5ba217",
+    "frontend/src/screens/Intrusul.tsx": "57cdc75c05468e692eeb12b3591e5ca7eb3ece5b3806432950bd63936e90f11e",
+    "frontend/src/screens/Perechi.tsx": "5741f63a8edd39bf9f6886004f222f9ea6f1aca6536fadb046b03ee02cf18d37",
+    "frontend/e2e/start-failure.spec.mjs": "acbc24ebbaeff4c0b36804899a1ffcceb2c4bf1c0627ad26acbfc1c0189b038f",
+    "docs/adr/0124-persist-new-game-creation-failures.md": "7b5f7a6367d32d462125bb411444675b7e488798c563e46d1c1a4c57bf4167ed"
+  },
+  "built_manifest_sha256": "b921bcfa235e2ee811ffd009c9c5df44f9dea0bccd49f439dc8d6b7634cc3b6d",
+  "game_shell_exact_baseline": true,
+  "screenshots": {
+    "screenshots/desktop-alchimie-live-failure.png": {
+      "sha256": "be3867d370b3efa5a234cf7a0c3d89d17e2305d74f2fe335866c91adf3d681dc",
+      "visually_inspected": true
+    },
+    "screenshots/mobile-alchimie-live-failure.png": {
+      "sha256": "372452ea79e4dac1874bbfdc56f82b523088d74105794866fac7000134c7c7aa",
+      "visually_inspected": true
+    },
+    "screenshots/desktop-lant-intro-failure.png": {
+      "sha256": "3e0091c595d4e53caf9baac97e90a6e02e64003f331d944ec52ebc941dbb3280",
+      "visually_inspected": true
+    },
+    "screenshots/mobile-alchimie-replay-failure.png": {
+      "sha256": "a58a07d7d7b4204c8a802eefde79eb4bf0a389b360d532b823d95d93ad0a6387",
+      "visually_inspected": true
+    }
+  },
+  "confirmed_invariants": [
+    "A single relevant failure alert appears next to current retry actions.",
+    "Failure preserves selected options, saved pointer, old round/result and local score history.",
+    "Hidden reserved error text has no alert role and is excluded from accessibility.",
+    "No new API/session fields, scores, request bounds or server TTL/cap changes.",
+    "No forced scrolling, overlay or new retry route.",
+    "Saved-resume recovery remains a separate flow."
+  ],
+  "remaining_gate": "The full native/browser/backend release matrix belongs to the root integration receipts.",
+  "native_guard_expectation_update": {
+    "command": "PATH=/home/dobo/.vite-plus/bin:$PATH npm test",
+    "exit_code": 0,
+    "passed": 177,
+    "failed": 0,
+    "skipped": 0,
+    "duration_ms": 1117.160469,
+    "log": "runs/native-after-guard-expectations.log.gz",
+    "log_sha256": "08453a7ee769abae9c5a818299f3e848077f29d4c1bdc6d06b5488d6298a2f1c",
+    "test_sources": {
+      "frontend/tests/alchimie-empty-recovery.test.mjs": "e07b83db669e622010da34994f29d33dc94a4a4f9a440b438b95aece025a686c",
+      "frontend/tests/alchimie-projection.test.mjs": "66d9f5c76a64a0e3f9b54a1965a27939939ffe1b5b4b70a7cdd35c388481523d",
+      "frontend/tests/cald-rece-recovery.test.mjs": "17e6e3bc7e0cd683e56611f741abef7e5c07a1e317da9ec9c19b22d14332fb07",
+      "frontend/tests/v42-alchimie-fresh-board.test.mjs": "58208b2840e03e36a6f77b596e77fbe6321ca1886415ea04087cf9768d7cb2db"
+    },
+    "reason": "Four historical source-shape assertions were stale after the stronger creating/flight guards. The updated checks preserve all old empty/depleted/recovery behaviors and require the new guards; the CaldRece check uses a bounded function slice instead of a wider character window.",
+    "application_or_asset_edits": false,
+    "compression": "gzip",
+    "archive_sha256": "b5999e9efc333e462e981a87c872990fd1f21e896a9ba0e0e6f3e86530b39e72"
+  },
+  "archive_note": "Raw log bytes are preserved losslessly in gzip. log_sha256 binds decompressed original bytes; archive_sha256 binds the committed archive. This avoids treating tool-emitted trailing spaces as authored source whitespace."
+}

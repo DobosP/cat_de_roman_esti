@@ -1,6 +1,6 @@
 # ADR-0117: Food input forms and bounded feedback in one playable batch
 
-- Status: accepted
+- Status: accepted; exact-target inventory extended-by ADR-0123
 - Date: 2026-09-07
 
 Partially supersedes ADR-0110 only for the two additional exact-target Gem associations.

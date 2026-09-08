@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "reviewer": "v86_independent_quality_scout",
+  "verdict": "accept_for_implementation",
+  "pair_set_sha256": "4b12a79042a04c1c22f57e2fb2398a210360c980ca296dd43406f69ae4277584",
+  "pairs": [
+    {
+      "source": "n_v21gas_ecler",
+      "target": "n_v86_food_crema_vanilie",
+      "rationale": "Vanilla cream is a directly documented eclair filling. A hot association in the reverse guessing direction is honest while preserving the pastry identity; the exact pair does not require every eclair variant to contain vanilla.",
+      "sources": [
+        "https://jamilacuisine.ro/eclere-pas-cu-pas-reteta-video/",
+        "https://www.oetker.ro/retete/r/crema-de-vanilie-cu-amidon"
+      ]
+    },
+    {
+      "source": "n_v21gas_savarina",
+      "target": "n_v86_food_frisca",
+      "rationale": "Whipped cream is the familiar savarina filling and decoration. This is a defining pastry/cream association, not a generic rule mapping all desserts to cream.",
+      "sources": [
+        "https://jamilacuisine.ro/savarine-de-casa-reteta-video/",
+        "https://www.protv.ro/articol/39903-reteta-de-savarina"
+      ]
+    }
+  ],
+  "scope": "Exactly two source/target observations through the existing closed-pair mechanism. No graph-edge reversal, new proxy, scoring formula or session-bound change. Both target identities are new and absent from the old 228-record impact scope.",
+  "required_checks": [
+    "Original guess IDs and labels remain exact",
+    "Each pair is hot and nonwinning; exact target still wins",
+    "All non-pair target behavior remains unchanged",
+    "Repeat/resume and private clue behavior remain consistent"
+  ],
+  "before_evidence": "feedback-pair-before.json",
+  "status_note": "Editorial acceptance only; implementation and focused after-probes follow separately."
+}

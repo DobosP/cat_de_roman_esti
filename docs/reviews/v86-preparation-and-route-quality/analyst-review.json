@@ -1,0 +1,82 @@
+{
+  "reviewer": "root-v86-analyst",
+  "role": "analyst",
+  "input_ids": [
+    "ct_gastronomie_341",
+    "ct_gastronomie_342",
+    "ct_gastronomie_343",
+    "ct_gastronomie_344",
+    "ct_gastronomie_345",
+    "lt_gastronomie_222"
+  ],
+  "items": [
+    {
+      "id": "ct_gastronomie_341",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:96a26c01a7ef36f8fbda41f837e9db504ee80fbfda34e4cb2344be867455883c",
+      "rationale": "Brânză is an ordinary concrete food with a dominant everyday sense and easy-band salience 0.9238. Fourteen incoming associations include recognizable dairy types, milk and cheese-filled dishes; Telemea 3/Urdă 4/Cașcaval 5/Lapte 7 provide hot natural openers. The generic target is distinct from served cheese types and no source/sense owner changes. Exact typed win, private answers, repeats and resume are demonstrated. Butter 373/cold and Sarmale 26/warm are remaining imperfections, but the defining dairy core is strong. No A 5/A 6 trigger. Promote this familiar round.",
+      "sources": [
+        "https://laptariacucaimac.ro/",
+        "https://www.oetker.ro/retete/r/tort-cu-branza-proaspata-si-ananas"
+      ]
+    },
+    {
+      "id": "ct_gastronomie_342",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:8e81b4c1d35abd2d3f2ecff11f877f569960501a697b1501629ee3b73c959646",
+      "rationale": "Lapte is a concrete everyday food, not a thematic abstraction; its salience 0.9202 supports easy recognition. Fourteen incoming cues include a glass, familiar dairy products, the school milk context and specific preparations. Pahar 2, Lapte și corn 4, Brânză 5 and Smântână 7 are hot and provide several natural routes. The new powdered milk identity stays distinct; the qualified freezer edge does not promise every milk freezes unchanged. Private clue/repeat/resume/exact-win checks pass. Sarmale 23/warm and pen 158/lukewarm remain noise. No duplicate target or editorial trigger. Promote.",
+      "sources": [
+        "https://laptariacucaimac.ro/",
+        "https://www.oetker.ro/produsele/p/lapte-praf-250g"
+      ]
+    },
+    {
+      "id": "ct_gastronomie_343",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:44cd0ad635886e7c125bf8aaf40cf293c8f2c1c63000238ab7f45713447cf1cc",
+      "rationale": "Savarină is a recognizable concrete confectionery pastry. I explicitly accept the 0.55 salience WARN on the original 2013 recipe and ordinary pastry recognition, without changing salience or using obscurity as difficulty. Five incoming cues now include its defining whipped cream; Prăjitură/Amandină/Ecler 2 and Frișcă 5 are hot. No alcohol-based guess or framing is necessary. The independent source screen and actual clue/repeat/resume/win journeys pass. Sugar and preparation cues remain incomplete; yeast/oven 51 are warm and Sarmale 83 lukewarm. This is not an alias/reskin of Ecler or Amandină. Promote.",
+      "sources": [
+        "https://jamilacuisine.ro/savarine-de-casa-reteta-video/",
+        "https://jamilacuisine.ro/cum-se-bate-corect-frisca-naturala-tutorial-video/"
+      ]
+    },
+    {
+      "id": "ct_gastronomie_344",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:45848c77620d1c649504853749727c2262958592e885d74fc36dfc154d4b0d92",
+      "rationale": "Frișcă is an ordinary concrete whipped topping, with the authored sweet-dairy-cream sense and salience 0.85. Its five incoming cues—suitable Smântână, Zahăr pudră, Vanilie, Frigider and qualified Mixer—are all recognizable and rank 2/hot. The recipe-backed Savarină reverse clue now returns nonwinning rank 2 through the existing exact-target mechanism while retaining its identity; it does not reverse any Lanț link. Actual private clue, repeat, resume and exact wins pass. Sour cream is not made a synonym; Sarmale 30/warm and Ecler 202/lukewarm remain explicit imperfections. No duplicate or editorial trigger. Promote.",
+      "sources": [
+        "https://jamilacuisine.ro/cum-se-bate-corect-frisca-naturala-tutorial-video/",
+        "https://www.dulceromanie.ro/mix-and-match/crema-chantilly",
+        "https://jamilacuisine.ro/savarine-de-casa-reteta-video/"
+      ]
+    },
+    {
+      "id": "ct_gastronomie_345",
+      "game": "contexto",
+      "verdict": "promote",
+      "review_binding": "sha256:e1f6987ea8a8a79be116fcff988aa46f46e8569d6915614a6d71e29ee9b81329",
+      "rationale": "Cremă de vanilie is a familiar concrete filling with an unambiguous qualified name and salience 0.75. The five direct ingredient parents are recognizable and all rank 2/hot; actual manufacturer recipes document the yolk/milk/sugar/vanilla/starch variant. The natural Ecler reverse guess is repaired from 322/cold to 2/hot without winning, changing its identity or adding a reverse graph move. Private clue/repeat/resume and exact wins pass. The root judgment accepts this strong defining core while retaining butter 316/cold and Sarmale 30/warm as quality debt. Bare cream is not silently made an alias. Fresh target, no A 5/A 6 trigger. Promote.",
+      "sources": [
+        "https://www.oetker.ro/retete/r/crema-de-vanilie-cu-amidon",
+        "https://jamilacuisine.ro/eclere-pas-cu-pas-reteta-video/"
+      ]
+    },
+    {
+      "id": "lt_gastronomie_222",
+      "game": "lant",
+      "verdict": "promote",
+      "review_binding": "sha256:45f5b6d5b9060387fe79e0b8974a88159eeabc8740e72f0279c9cb336f4e234e",
+      "rationale": "Frigider and Înghețată are independently familiar endpoints. I explicitly accept the historical ice-cream 0.2826 salience WARN because the word is universally ordinary, without modifying salience. Two distinct two-hop bridges are documented: chilled Frișcă incorporated in an ice-cream recipe, and a Congelator compartment storing the frozen dessert. Profile 2/2/2 has no forced single intermediate; both real typed paths, resume and non-consuming direct-target rejection pass. The new generic menu policy exposes both alternatives. Ordinary speech sometimes calls an entire fridge-freezer frigider; this is a real comprehension caveat. Accept as two authored direct relations whose visible labels distinguish preparation and storage, not as a claim that a fridge appliance can never contain ice cream. No exact/reverse pair reuse or generic regional bridge. Promote the easy round with that stated limitation.",
+      "sources": [
+        "https://documents.beko.com/Refrigerator/7202947607/ro-RO/3450429551106844043.html",
+        "https://www.hendi.ro/blog/cum-se-face-frisca-iata-cele-mai-simple-metode",
+        "https://www.auchan.ro/inspiratie-si-savoare/retete-cu-imagini/inghetata"
+      ]
+    }
+  ]
+}

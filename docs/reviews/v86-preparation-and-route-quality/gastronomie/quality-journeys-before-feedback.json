@@ -1,0 +1,145 @@
+{
+  "candidate_sha256": "sha256:5feb68e6782b735650ccc99a28ccae0e0dab8a1013b57105bafab3e034b91648",
+  "kg_sha256": "b612eda1fb8712fb57f1e16ca2a4fed3e5f6cec847c977ab45ee420c575ffa1a",
+  "contexto": [
+    {
+      "target": "n_v2gas_branza",
+      "clue": {
+        "label": "Mâncare",
+        "rank": 2,
+        "message": "Mai cald: Mâncare (#2)."
+      },
+      "won": true,
+      "attempts": 5,
+      "repeat_and_resume": true
+    },
+    {
+      "target": "n_v4gas_lapte",
+      "clue": {
+        "label": "Pahar",
+        "rank": 2,
+        "message": "Mai cald: Pahar (#2)."
+      },
+      "won": true,
+      "attempts": 5,
+      "repeat_and_resume": true
+    },
+    {
+      "target": "n_v21gas_savarina",
+      "clue": {
+        "label": "Prăjitură",
+        "rank": 2,
+        "message": "Mai cald: Prăjitură (#2)."
+      },
+      "won": true,
+      "attempts": 5,
+      "repeat_and_resume": true
+    },
+    {
+      "target": "n_v86_food_frisca",
+      "clue": {
+        "label": "Frigider",
+        "rank": 2,
+        "message": "Mai cald: Frigider (#2)."
+      },
+      "won": true,
+      "attempts": 5,
+      "repeat_and_resume": true
+    },
+    {
+      "target": "n_v86_food_crema_vanilie",
+      "clue": {
+        "label": "Lapte",
+        "rank": 2,
+        "message": "Mai cald: Lapte (#2)."
+      },
+      "won": true,
+      "attempts": 5,
+      "repeat_and_resume": true
+    }
+  ],
+  "lant": [
+    {
+      "via": "n_v86_food_frisca",
+      "label": "Frișcă",
+      "initial_choices": [
+        {
+          "label": "Aragaz",
+          "relation": "obiecte utile în casă"
+        },
+        {
+          "label": "Bucătărie",
+          "relation": "se află în bucătărie"
+        },
+        {
+          "label": "Congelator",
+          "relation": "unele modele au compartiment de…"
+        },
+        {
+          "label": "Frișcă",
+          "relation": "păstrează la rece"
+        }
+      ],
+      "path": [
+        {
+          "id": "n_v24_home_appliances_frigider",
+          "label": "Frigider"
+        },
+        {
+          "id": "n_v86_food_frisca",
+          "label": "Frișcă",
+          "relation": "păstrează la rece"
+        },
+        {
+          "id": "n_v3gas_inghetata",
+          "label": "Înghețată",
+          "relation": "încorporată în unele rețete de"
+        }
+      ],
+      "won": true,
+      "moves": 2,
+      "direct_target_rejected": true
+    },
+    {
+      "via": "n_v86_kitchen_congelator",
+      "label": "Congelator",
+      "initial_choices": [
+        {
+          "label": "Aragaz",
+          "relation": "obiecte utile în casă"
+        },
+        {
+          "label": "Bucătărie",
+          "relation": "se află în bucătărie"
+        },
+        {
+          "label": "Congelator",
+          "relation": "unele modele au compartiment de…"
+        },
+        {
+          "label": "Frișcă",
+          "relation": "păstrează la rece"
+        }
+      ],
+      "path": [
+        {
+          "id": "n_v24_home_appliances_frigider",
+          "label": "Frigider"
+        },
+        {
+          "id": "n_v86_kitchen_congelator",
+          "label": "Congelator",
+          "relation": "unele modele au compartiment de tip"
+        },
+        {
+          "id": "n_v3gas_inghetata",
+          "label": "Înghețată",
+          "relation": "păstrează congelată"
+        }
+      ],
+      "won": true,
+      "moves": 2,
+      "direct_target_rejected": true
+    }
+  ]
+}

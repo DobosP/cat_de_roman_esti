@@ -31,13 +31,15 @@ INGREDIENT_FEEDBACK_POLICIES: dict[str, IngredientFeedbackPolicy] = {
     ),
 }
 
-# Reviewed ingredient associations for these exact dishes only. Each submitted
-# ingredient keeps its own identity and cannot win by borrowing the target's feedback.
+# Reviewed culinary associations for these exact targets only. Each submitted
+# concept keeps its own identity and cannot win by borrowing the target's feedback.
 EXACT_TARGET_FEEDBACK_PAIRS: frozenset[tuple[str, str]] = frozenset({
     ("n_v24_food_pantry_ulei", "n_v17gas_gogosi"),
     ("n_v24_food_pantry_ulei", "n_v3gas_cartofi_prajiti"),
     ("n_v4gas_sare", "n_gas_telemea"),
     ("n_v24_food_salad_veg_ardei", "n_gas_ardei_umpluti"),
+    ("n_v21gas_ecler", "n_v86_food_crema_vanilie"),
+    ("n_v21gas_savarina", "n_v86_food_frisca"),
 })
 
 # (mature feedback anchor, everyday node ids).  Grouping keeps the intended semantic

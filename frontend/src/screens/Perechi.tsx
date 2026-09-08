@@ -4,7 +4,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, m } from "framer-motion";
 import { Button, type ToastKind } from "@roedu/ui";
-import { ApiError } from "../api/client";
 import {
   acquireFlight,
   recoverAuthoritative,
@@ -61,6 +60,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   const pendingFocus = useRef<PendingFocus>(null);
   const focusedTileBeforeMutation = useRef<string | null>(null);
   const [state, setState] = useState<PerechiState | null>(null);
+  const [startFailed, setStartFailed] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
   const [checking, setChecking] = useState<[string, string] | null>(null);
   const [loading, setLoading] = useState(() => active.peek() !== null);
@@ -107,6 +107,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   }, [finished, state?.solved_count]);
 
   const applyResumedGame = useCallback((fresh: PerechiState) => {
+    setStartFailed(false);
     setState(fresh);
     setSelected(null);
     setChecking(null);
@@ -124,12 +125,8 @@ export default function Perechi({ onExit, onToast }: Props) {
     async ({ daily, previousGameId }: StartOpts = {}) => {
       if (!acquireFlight(startInFlight)) return;
       cancelResume();
+      setStartFailed(false);
       setLoading(true);
-      setSelected(null);
-      setChecking(null);
-      setFeedback(null);
-      setRecordHit(false);
-      setPuzzleRecordHit(false);
       const opts: CreatePerechiOpts = daily
         ? { daily }
         : {
@@ -142,19 +139,19 @@ export default function Perechi({ onExit, onToast }: Props) {
         setState(fresh);
         active.remember(fresh.game_id);
         dismissRecovery();
-      } catch (error) {
-        onToast(
-          error instanceof ApiError
-            ? error.message || `Nu am putut porni jocul (${error.status}).`
-            : "Nu am putut porni jocul.",
-          "error",
-        );
+        setSelected(null);
+        setChecking(null);
+        setFeedback(null);
+        setRecordHit(false);
+        setPuzzleRecordHit(false);
+      } catch {
+        setStartFailed(true);
       } finally {
         releaseFlight(startInFlight);
         setLoading(false);
       }
     },
-    [active, cancelResume, dismissRecovery, onToast],
+    [active, cancelResume, dismissRecovery],
   );
 
   const puzzleKey = useMemo(() => {
@@ -330,6 +327,7 @@ export default function Perechi({ onExit, onToast }: Props) {
         <div className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
           <GameShell onExit={exitSafely} accent={DEF.accent} busy={loading} />
           <GameIntro
+            startFailed={startFailed}
             resumeRecovery={resumeRecovery ? {
               kind: resumeRecovery.kind,
               canRetry: resumeRecovery.kind === "failed" || resumeRecovery.hasCurrent,
@@ -503,6 +501,7 @@ export default function Perechi({ onExit, onToast }: Props) {
         {finished && state.solution && (
           <div ref={resultFocusRef}>
             <ResultCard
+              startFailed={startFailed}
               icon={state.won ? "✨" : "🧠"}
               title={state.won ? "Toate se potrivesc!" : "Acestea erau perechile"}
               accent={DEF.accent}
