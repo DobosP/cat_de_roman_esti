@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-09 — V91 landed locally; automatic iteration is stopped. Production last checked 2026-08-27.
+Last verified: 2026-09-09 — V91 landed locally and deployed to production `13e49b2`; automatic iteration is stopped.
 
 ## Current state
 
@@ -93,10 +93,16 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
 
 ## Production and remaining work
 
-- Last documented deployment: anonymous V72 `6ee86935038744c0066cac6a50865f76eab93e37`,
- image `sha256:30b39c0bba954074de6cdecd377a9742f627f4900caccbae8805d132f5c317bd`.
- No production check, push or deployment in V91. Accounts remain outside this scope.
- Preserve `rollback-60c3fd5318a` for the next separately authorized rollout.
+- Last documented deployment: anonymous **V91** `13e49b2c1148bb0aab35cc1e3b023b5bd29c142d`
+ (2026-09-09), image `sha256:91d425c6d14065be7413762608309f8d924a86611e9e2e4a2072ce59abb041b9`,
+ tagged `release-13e49b2c1148`. Fast-forwarded from V72 `6ee8693` (74 commits); compose,
+ Dockerfile and dependencies were unchanged, so only code and content shipped.
+ Rollback: `cat-de-roman-esti:rollback-6ee869350387` retained on the host, plus the older
+ `rollback-60c3fd5318a`. Accounts stayed out of scope (`accounts_enabled: false` verified live).
+- Post-deploy smoke GREEN (2026-09-09): `/healthz` 200; `/api/me` accounts off; `/api/health`
+ `concepts=2416` equal to `/api/manifest` `counts.nodes=2416`; `/api/categories` 14/14 with
+ availability and zero empty categories; both mandatory Intrusul/Perechi `seed=38` POSTs 200
+ with real boards. `CAT_KG_FIXTURE` confirmed on `kg_sample.json`. HSTS still 0 (open follow-up).
 - V91 is landed locally and the loop is stopped. No further version is authorized.
  Human/player/device acceptance, operator/legal checks, feedback contact and rollout remain.
 - Three Neagu edge labels have a factually reviewed past-tense proposal, unapplied in V91.
