@@ -1,0 +1,31 @@
+{
+  "additional_checks": {
+    "concepts": 111,
+    "crafted_discoveries": 58,
+    "crafted_intermediates": 23,
+    "exact_rebuilt_catalog": true,
+    "historical_catalog_sha256": "fd3f5547e2a771b8d6d6caae7cf2d18335ce97d512a37446daa3062acb638a8c",
+    "historical_prefix_migrations": 39,
+    "historical_recipe_hash": "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+    "independent_audit_byte_identical": true,
+    "opening_pairs": 7,
+    "optional_goals": 19,
+    "possible_starting_pairs": 28,
+    "randomized_complete_world_replays": 100,
+    "randomized_current_checkpoint_replays": 100,
+    "randomized_historical_full_save_migrations": 100,
+    "recipe_hash": "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+    "recipes": 116,
+    "results_with_alternatives": 40,
+    "starting_supplies": 8,
+    "terminal_discoveries": 35,
+    "unlocked_supplies": 45
+  },
+  "audit_sha256": "07bfae670c17401d5646b60d2766abb3ff1b7dc5d1d21ebbd31ba286b87d88b7",
+  "catalog_sha256": "2ca7f281c801a4c2e044134c94dfcb29ff5e51a9c2d4982ba3076818f1040a6d",
+  "kind": "alchimie-discovery-world-final-v1",
+  "rationale": "Independently rebuilt the catalog byte-for-byte from the exact candidate and both semantic reviews; independently reran the serving audit to a separate byte-identical artifact, including all current runtime source bindings. Added 100 randomized complete-world playthroughs while changing optional goals between crafts: every run reached 111 owned concepts, 58 successful discoveries, all 19 goals, and all 116 canonical pairs repeated the same result. Replaying each complete current checkpoint preserved exact inventory and supplies. Built 100 randomized full historical checkpoints from the 2257766 published catalog and migrated each through the actual restore_session implementation; every earned concept and successful pair remained intact, the fingerprint upgraded, and the expanded world remained incomplete. Also independently checked all 39 prefixes of one historical playthrough. The 58 crafted discoveries remain distinct from 45 later pantry supplies and 8 starters. Every new recipe and 36 added concept descriptions retain the completed independent semantic judgments; old 57 rules and 75 concept records remain unchanged. Some broad culinary pairs are simplified canonical game associations, not claims of uniquely determined full cooking procedures.",
+  "reviewer": "more_factual-independent-review",
+  "role": "factual",
+  "verdict": "accept"
+}

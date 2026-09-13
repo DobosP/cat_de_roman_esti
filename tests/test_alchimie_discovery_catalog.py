@@ -73,9 +73,10 @@ def test_catalog_validates_with_serving_loader(reviewed_files):
     assert len(world.concepts) == B.audit(catalog)["concepts"]
 
 
-def test_four_editorial_descriptions_preserve_original_provenance(candidate):
+def test_editorial_descriptions_keep_original_fixes_and_provenance(candidate):
+    old_ids = {c["id"] for c in json.loads(B.BASELINE.read_bytes())["concepts"]}
     corrected = {c["label"] for c in candidate["concepts"]
-                 if c["description"] != c["snapshot"]["description"]}
+                 if c["id"] in old_ids and c["description"] != c["snapshot"]["description"]}
     assert corrected == {"Compot", "Ardei umpluți", "Sarmale", "Paste"}
     for concept in candidate["concepts"]:
         assert concept["source"] == concept["snapshot"]["source"]
@@ -261,3 +262,39 @@ def test_package_write_requires_final_review_gate(monkeypatch, tmp_path, reviewe
     with pytest.raises(ValueError, match="two final reviews"):
         B.main()
     assert target.read_text() == "untouched"
+
+
+def test_expansion_preserves_all_prior_recipes_goals_and_collections(candidate):
+    old = json.loads(B.BASELINE.read_bytes())
+    before, after = B.audit(old), B.audit(candidate)
+    assert after["concepts"] >= before["concepts"] + 25
+    assert after["discoverable_results"] >= before["discoverable_results"] + 15
+    assert after["recipes"] >= before["recipes"] + 30
+    assert candidate["compatible_versions"] == B.compatible_versions(candidate)
+    assert candidate["compatible_versions"][0]["recipe_hash"] == (
+        "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c"
+    )
+
+
+@pytest.mark.parametrize("mutation", [
+    lambda c: c["recipes"].pop(0),
+    lambda c: c["recipes"][0].update(result=c["recipes"][4]["result"]),
+    lambda c: c["world"]["starter_ids"].pop(),
+    lambda c: c["unlocks"][0].update(after_discoveries=4),
+    lambda c: c["goals"].pop(0),
+    lambda c: c["concepts"].pop(0),
+])
+def test_incompatible_editorial_changes_cannot_claim_old_save_support(candidate, mutation):
+    mutation(candidate)
+    with pytest.raises(ValueError, match="original"):
+        B.compatible_versions(candidate)
+
+
+def test_archived_save_authority_is_bound_to_the_actual_reviewed_bytes(monkeypatch, tmp_path):
+    edited = tmp_path / "edited-history.json"
+    old = json.loads(B.BASELINE.read_bytes())
+    old["recipes"][0]["result"] = "invented"
+    edited.write_bytes(B.json_bytes(old))
+    monkeypatch.setattr(B, "BASELINE", edited)
+    with pytest.raises(ValueError, match="archive changed"):
+        B.candidate()

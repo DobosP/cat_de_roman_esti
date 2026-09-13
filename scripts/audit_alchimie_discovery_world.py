@@ -31,6 +31,7 @@ RUNTIME_SOURCES = (
     "scripts/alchimie_discovery_recipe_source.py",
     "scripts/build_alchimie_discovery_world.py",
     "scripts/audit_alchimie_discovery_world.py",
+    "docs/reviews/v92-alchimie-discovery-world/candidates.json",
 )
 
 
@@ -77,6 +78,29 @@ def audit(path: Path) -> dict:
     counts = Counter(r.result for r in world.recipes.values())
     input_ids = {item for pair in world.recipes for item in pair}
     starters = set(world.catalog.world.starter_ids)
+    migrations = []
+    for previous in world.compatible_versions.values():
+        old = previous.mechanics
+        owned = set(old.starters)
+        pairs = []
+        while True:
+            recipe = next((r for r in old.recipes
+                           if set(r.pair) <= owned and r.result not in owned), None)
+            if recipe is None:
+                break
+            pairs.append(recipe.pair)
+            owned.add(recipe.result)
+            for unlock in old.unlocks:
+                if len(pairs) >= unlock.after:
+                    owned.update(unlock.concepts)
+            # Every prefix, not just the completed collection, must survive restoration.
+            restored = E.restore_session(world, E.Progress(
+                world_id=previous.world_id, recipe_hash=previous.recipe_hash, discoveries=pairs,
+            ))
+            assert owned <= restored.owned.keys()
+            assert restored.discoveries == [tuple(pair) for pair in pairs]
+        migrations.append({"recipe_hash": previous.recipe_hash, "previous_owned": len(owned),
+                           "prefixes_preserved": len(pairs), "all_earned_concepts_preserved": True})
     return {
         "kind": "alchimie-discovery-world-audit-v1",
         "verdict": "accept",
@@ -100,6 +124,7 @@ def audit(path: Path) -> dict:
                      "explanation": r.explanation, "sources": r.sources}
                     for pair, r in world.recipes.items()],
         "goal_replays": goal_results,
+        "compatible_save_replays": migrations,
         "checks": {"all_concepts_reachable": True, "all_goals_reachable": True,
                    "goal_independent_recipes": True, "complete_replay_restoration": True,
                    "concept_snapshots_match_graph": True, "undiscovered_target_ids_hidden": True,

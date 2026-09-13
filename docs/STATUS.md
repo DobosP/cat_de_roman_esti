@@ -1,38 +1,38 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-13 — V92 persistent Alchimie world; all local integration gates green.
+Last verified: 2026-09-13 — V92 concept expansion; all local integration gates green.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-- The owner authorized the remaining shared Alchimie discovery world on 2026-09-13.
-  V92 continues on `feat/v92-alchimie-gui` from `c0f3945`; no V93, recurrence or deployment.
-- New default **Explorează** mode: **Bucătăria românească**, a persistent collection of
-  **75 concepts**, **57 canonical recipes**, **39 crafted discoveries**, **9 optional goals**.
-  Eight starters and 28 later pantry supplies are distinct from crafted discoveries.
-- Four pantry milestones unlock automatically after **3/8/16/24** crafted results.
-  Every concept is reachable. Eighteen results have alternate recipes; twelve crafted
-  results are reusable intermediates and 27 are terminal dishes. Initial coverage is 7/28.
-- Pair results are identical across all exploration goals; goals never stop crafting.
-  Empty/repeated experiments and progressive hints are free. Exploration creates no
-  score, ranking or account record. Existing scored challenges remain under **Provocări**;
-  daily-circuit links and existing challenge saves retain their challenge flow.
-- Two taps/drag craft immediately. Usable results carry forward, fresh dishes stay visible,
-  and search, the full collection and recipe journal remain available. Free hints first
-  name a reachable result, then reveal its owned pair. Optional goals require no setup.
-- Browser checkpoints preserve successful recipes and goals, including server-expiry
-  restoration. World ID plus recipe fingerprint prevent silent changes to saved results;
-  copy edits remain compatible. Concurrent-tab merges and uncertain-action GET recovery
-  preserve earned discoveries. Invalid saves remain intact; storage limitations are visible.
-- The generator accepted complete independent factual/quality reviews for all 57 recipes,
-  then two final reviews bound exact catalog bytes and the runtime replay audit before apply.
-  Full KG snapshots/provenance remain intact; four world-local descriptions were corrected.
-- Thirty exploration results never appeared as crafted outputs in the old challenge books;
-  48 concepts and 54 canonical recipe triples were absent from all 80 old live books.
-  All IDs already existed in the unchanged KG. This adds playable content, not KG vocabulary.
-- The prior 50 reviewed challenge recipes and free-miss scoring remain unchanged.
-  Those short challenges still have 19 single-ending-pair rounds and scoped recipe differences.
-  The earlier V92 six-game GUI work remains; decision/evidence: [ADR-0145](adr/0145-persistent-alchimie-discovery-world.md).
+- The owner requested more Alchimie concepts. V92 continues on `feat/v92-alchimie-gui`
+  from `2257766`; no V93, recurring iteration, publication or deployment.
+- **Bucătăria românească** now has **111 concepts (+36)**, **116 recipes (+59)** and
+  **19 optional goals (+10)**. The additions are **19 crafted discoveries + 17 pantry supplies**.
+  Total crafted results: **58**; initial starters: **8**; later supplies: **45**.
+- The original 75 concept records, 57 recipe records, starters, four pantry tiers and
+  nine goals remain exact. New pantry tiers unlock at **30/36** crafted discoveries;
+  original thresholds **3/8/16/24** remain. Previously completed collections can continue.
+- Reusable crafted concepts grow **12→23**, and results with alternative recipes **18→40**.
+  Seven old terminal discoveries gain uses: bread, roast meat, bean spread, salad, garlic
+  sauce, pasta and jam. Thirty-five crafted dishes remain terminal. All 111 items are reachable.
+- New discoveries include sandvișuri, clătite, pizza, șnițele, zacuscă, urdă, mucenici,
+  cornulețe, halva and plăcinte. All IDs already existed in the unchanged KG. New world
+  definitions are reviewed; original source snapshots/provenance remain intact.
+- Reviewed historical mechanics allow old checkpoints to upgrade without losing earned
+  concepts, recipes or goals. Live sessions upgrade before reads and mutations. Unknown
+  versions still fail; an old fingerprint cannot claim newly added recipes.
+- State adds bounded `compatible_recipe_hashes`; browser saves merge across versions only
+  along explicit server compatibility and retain the newer book. No client guesses which
+  recipes remain valid. Existing same-version recovery and saved collections remain supported.
+- Both semantic reviews cover all 116 recipes: 57 byte-matched inherited judgments plus
+  59 new reviews, with 36 new concept descriptions checked. Two final reviews bind the
+  exact catalog and runtime replay before the generator's atomic package write.
+- Direct two-tap/drag input, free hints, automatic supplies, optional goals, search and
+  collection/journal remain. Goals never change pair results or stop exploration.
+- Scored **Provocări**, daily routing, earlier 50 challenge additions and other games
+  remain unchanged. Challenge books retain their scoped rules. Decision/evidence:
+  [ADR-0146](adr/0146-expand-alchimie-and-preserve-collections.md).
 
 ## Inventory and invariants
 
@@ -49,14 +49,14 @@ Pack **661 = 653 approved + 8 pending**, with **491 eligible** original four-gam
 KG remains `fixture-v90-household-discovery`: **2416 nodes/9459 links/8641 forms/180 puzzles**.
 Graph/pack concepts, links, forms, puzzles, rounds, approvals, eligibility and the 336
 frozen derived boards remain exact. The earlier challenge catalog adds 50 rules; exploration
-has a separate 57-recipe world.
+has a separate 116-recipe world.
 Sessions retain 7200-second sliding TTL, 1000 entries/game, locks, 64 KiB requests and bounded
 histories/caches. Exploration has its own capped store and <=128 concepts/512 recipes/128-craft
 checkpoints. Private recipes, routes and unearned target IDs remain server-controlled.
 
 ## Current artifact pins
 
-- Discovery world: `fd3f5547e2a771b8d6d6caae7cf2d18335ce97d512a37446daa3062acb638a8c`
+- Discovery world: `2ca7f281c801a4c2e044134c94dfcb29ff5e51a9c2d4982ba3076818f1040a6d`
 - Recipe extensions: `ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301`
 - `games_pack.json`: `6bf27de5da270258290ecb4ed41c3ef60a609e3e153855f38b7556a7f2aedeca`
 - `board_rankings_v37.json`: `01fc906e390b8d3135f1856930458aa86873a525049b419eceb8652c72f717f8`
@@ -70,16 +70,16 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
 
 ## Verification
 
-- Final Python 3.12 backend **1787 pass**, accounts **53 pass**; fixture/pack validators
-  GREEN, Ruff and whitespace pass. Focused API/catalog/mobile **93 pass**, generator **61 pass**.
-- Frontend native **204 pass**, browser **442 pass**, lint/typecheck/build GREEN at
-  **119.22/120 KiB** initial gzip. Browser run used four workers and zero retries.
-- Python 3.14 was not rerun. Desktop/mobile preview screenshots were inspected; no human
-  playtest or physical-device acceptance is claimed.
-- Independent final replay covers every recipe under free exploration and all nine goals,
-  plus 100 randomized goal-switching complete playthroughs. Every run reaches all 75 items.
-- Evidence: [discovery world review](reviews/v92-alchimie-discovery-world/README.md),
-  exact candidate, semantic/final judgments, runtime fingerprints, comparison and verification.
+- Final Python 3.12 backend **1805 pass**, accounts **53 pass**, focused API/catalog/mobile
+  **111 pass**. Ruff, whitespace and fixture/pack validators are GREEN. Python 3.14 was not rerun.
+- Frontend native **209 pass**, lint/typecheck/build GREEN at **119.23/120 KiB** initial gzip.
+  Full browser **444 pass** (four workers, zero retries); exploration focus **22 pass**,
+  including actual original-checkpoint migration. Local preview restored its existing collection.
+- Serving audit exhausts all recipes for free play and 19 goals and preserves every one
+  of 39 historical save prefixes. Independent migration review covered 780 randomized
+  prefixes; factual review covered 100 complete new runs, current restores and old migrations.
+- Evidence: [concept expansion review](reviews/v92-alchimie-more-concepts/README.md),
+  exact candidate, editorial delta, semantic/final reviews, live audit and verification receipt.
 
 ## Production and remaining work
 
@@ -97,4 +97,4 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
 ## Doc map
 
 - `README.md`/`AGENTS.md`: orientation; `docs/agent-map.md`/`docs/agent-testing.md`: routes/gates.
-- `docs/adr/` (newest 0145), `docs/reviews/`, WORKLOG: decisions, evidence and history.
+- `docs/adr/` (newest 0146), `docs/reviews/`, WORKLOG: decisions, evidence and history.

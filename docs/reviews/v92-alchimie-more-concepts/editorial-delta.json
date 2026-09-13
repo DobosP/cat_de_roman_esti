@@ -1,0 +1,572 @@
+{
+  "baseline_candidate_sha256": "559abb0b475665f73b010b1a0acdc7650576d829819a50a2e99bdd50700f8fae",
+  "candidate_sha256": "fc863ff35cebe88d1b2364fc3693f7d765bb33606d9a3191b1d8532540c37209",
+  "before": {
+    "concepts": 75,
+    "recipes": 57,
+    "crafted_results": 39,
+    "reusable_crafted_results": 12,
+    "terminal_results": 27,
+    "starters": 8,
+    "supplies": 28,
+    "goals": 9,
+    "results_with_alternatives": 18
+  },
+  "after": {
+    "concepts": 111,
+    "recipes": 116,
+    "crafted_results": 58,
+    "reusable_crafted_results": 23,
+    "terminal_results": 35,
+    "starters": 8,
+    "supplies": 45,
+    "goals": 19,
+    "results_with_alternatives": 40
+  },
+  "all_old_recipe_records_exact": true,
+  "old_starters_exact": true,
+  "old_tiers_exact": true,
+  "old_goals_exact": true,
+  "added_concepts": [
+    "Alivenci",
+    "Arpacaș",
+    "Cartof",
+    "Cartofi prăjiți",
+    "Cașcaval",
+    "Cașcaval pane",
+    "Ceapă",
+    "Chiftele",
+    "Ciorbă de perișoare",
+    "Clătite",
+    "Colivă",
+    "Cornulețe",
+    "Căpșună",
+    "Dovleac",
+    "Firimitură",
+    "Frigărui",
+    "Grătar",
+    "Halva",
+    "Iaurt",
+    "Miere",
+    "Mucenici",
+    "Oală",
+    "Piftie",
+    "Pizza",
+    "Plăcinte",
+    "Prună",
+    "Sandviș",
+    "Scorțișoară",
+    "Semințe de floarea-soarelui",
+    "Tigaie",
+    "Turtă dulce",
+    "Untură",
+    "Urdă",
+    "Zacuscă",
+    "Zer",
+    "Șnițel"
+  ],
+  "added_crafted_results": [
+    "Alivenci",
+    "Cartofi prăjiți",
+    "Cașcaval pane",
+    "Chiftele",
+    "Ciorbă de perișoare",
+    "Clătite",
+    "Colivă",
+    "Cornulețe",
+    "Frigărui",
+    "Halva",
+    "Mucenici",
+    "Piftie",
+    "Pizza",
+    "Plăcinte",
+    "Sandviș",
+    "Turtă dulce",
+    "Urdă",
+    "Zacuscă",
+    "Șnițel"
+  ],
+  "previous_terminal_results_now_reusable": [
+    "Dulceață",
+    "Fasole bătută",
+    "Friptură",
+    "Mujdei",
+    "Paste",
+    "Pâine",
+    "Salată"
+  ],
+  "added_recipes": [
+    {
+      "id": "sandvis-branza",
+      "pair": [
+        "Brânză",
+        "Pâine"
+      ],
+      "result": "Sandviș"
+    },
+    {
+      "id": "sandvis-telemea",
+      "pair": [
+        "Telemea",
+        "Pâine"
+      ],
+      "result": "Sandviș"
+    },
+    {
+      "id": "sandvis-friptura",
+      "pair": [
+        "Friptură",
+        "Pâine"
+      ],
+      "result": "Sandviș"
+    },
+    {
+      "id": "sandvis-fasole",
+      "pair": [
+        "Fasole bătută",
+        "Pâine"
+      ],
+      "result": "Sandviș"
+    },
+    {
+      "id": "sandvis-salata",
+      "pair": [
+        "Salată",
+        "Pâine"
+      ],
+      "result": "Sandviș"
+    },
+    {
+      "id": "sandvis-zacusca",
+      "pair": [
+        "Zacuscă",
+        "Pâine"
+      ],
+      "result": "Sandviș"
+    },
+    {
+      "id": "sandvis-cascaval",
+      "pair": [
+        "Cașcaval",
+        "Pâine"
+      ],
+      "result": "Sandviș"
+    },
+    {
+      "id": "sandvis-snitel",
+      "pair": [
+        "Șnițel",
+        "Pâine"
+      ],
+      "result": "Sandviș"
+    },
+    {
+      "id": "sandvis-chiftele",
+      "pair": [
+        "Chiftele",
+        "Pâine"
+      ],
+      "result": "Sandviș"
+    },
+    {
+      "id": "clatite-tigaie",
+      "pair": [
+        "Tigaie",
+        "Aluat"
+      ],
+      "result": "Clătite"
+    },
+    {
+      "id": "pizza-rosie",
+      "pair": [
+        "Roșie",
+        "Aluat"
+      ],
+      "result": "Pizza"
+    },
+    {
+      "id": "pizza-cascaval",
+      "pair": [
+        "Cașcaval",
+        "Aluat"
+      ],
+      "result": "Pizza"
+    },
+    {
+      "id": "cartofi-ulei",
+      "pair": [
+        "Ulei",
+        "Cartof"
+      ],
+      "result": "Cartofi prăjiți"
+    },
+    {
+      "id": "cartofi-tigaie",
+      "pair": [
+        "Cartof",
+        "Tigaie"
+      ],
+      "result": "Cartofi prăjiți"
+    },
+    {
+      "id": "snitel-faina",
+      "pair": [
+        "Făină",
+        "Carne"
+      ],
+      "result": "Șnițel"
+    },
+    {
+      "id": "snitel-firimitura",
+      "pair": [
+        "Carne",
+        "Firimitură"
+      ],
+      "result": "Șnițel"
+    },
+    {
+      "id": "cascaval-pane-ou",
+      "pair": [
+        "Cașcaval",
+        "Ou"
+      ],
+      "result": "Cașcaval pane"
+    },
+    {
+      "id": "cascaval-pane-firimitura",
+      "pair": [
+        "Cașcaval",
+        "Firimitură"
+      ],
+      "result": "Cașcaval pane"
+    },
+    {
+      "id": "chiftele-ou",
+      "pair": [
+        "Carne",
+        "Ou"
+      ],
+      "result": "Chiftele"
+    },
+    {
+      "id": "chiftele-usturoi",
+      "pair": [
+        "Carne",
+        "Usturoi"
+      ],
+      "result": "Chiftele"
+    },
+    {
+      "id": "frigarui-ceapa",
+      "pair": [
+        "Carne",
+        "Ceapă"
+      ],
+      "result": "Frigărui"
+    },
+    {
+      "id": "friptura-tigaie",
+      "pair": [
+        "Tigaie",
+        "Carne"
+      ],
+      "result": "Friptură"
+    },
+    {
+      "id": "friptura-gratar",
+      "pair": [
+        "Grătar",
+        "Carne"
+      ],
+      "result": "Friptură"
+    },
+    {
+      "id": "perisoare-orez",
+      "pair": [
+        "Orez",
+        "Carne"
+      ],
+      "result": "Ciorbă de perișoare"
+    },
+    {
+      "id": "piftie-supa",
+      "pair": [
+        "Supă",
+        "Gelatină alimentară"
+      ],
+      "result": "Piftie"
+    },
+    {
+      "id": "piftie-carne",
+      "pair": [
+        "Carne",
+        "Gelatină alimentară"
+      ],
+      "result": "Piftie"
+    },
+    {
+      "id": "zacusca-rosie",
+      "pair": [
+        "Ardei",
+        "Roșie"
+      ],
+      "result": "Zacuscă"
+    },
+    {
+      "id": "zacusca-fasole",
+      "pair": [
+        "Ardei",
+        "Fasole"
+      ],
+      "result": "Zacuscă"
+    },
+    {
+      "id": "fasole-mujdei",
+      "pair": [
+        "Mujdei",
+        "Fasole"
+      ],
+      "result": "Fasole bătută"
+    },
+    {
+      "id": "urda-oala",
+      "pair": [
+        "Oală",
+        "Zer"
+      ],
+      "result": "Urdă"
+    },
+    {
+      "id": "urda-lamaie",
+      "pair": [
+        "Lămâie",
+        "Zer"
+      ],
+      "result": "Urdă"
+    },
+    {
+      "id": "papanasi-urda-faina",
+      "pair": [
+        "Urdă",
+        "Făină"
+      ],
+      "result": "Papanași"
+    },
+    {
+      "id": "papanasi-urda-gris",
+      "pair": [
+        "Urdă",
+        "Griș"
+      ],
+      "result": "Papanași"
+    },
+    {
+      "id": "poale-brau-urda",
+      "pair": [
+        "Urdă",
+        "Aluat"
+      ],
+      "result": "Poale-n brâu"
+    },
+    {
+      "id": "urda-smantana",
+      "pair": [
+        "Urdă",
+        "Smântână"
+      ],
+      "result": "Brânză cu smântână"
+    },
+    {
+      "id": "mucenici-miere",
+      "pair": [
+        "Miere",
+        "Aluat"
+      ],
+      "result": "Mucenici"
+    },
+    {
+      "id": "mucenici-paste",
+      "pair": [
+        "Paste",
+        "Nucă"
+      ],
+      "result": "Mucenici"
+    },
+    {
+      "id": "alivenci-branza",
+      "pair": [
+        "Brânză",
+        "Mălai"
+      ],
+      "result": "Alivenci"
+    },
+    {
+      "id": "alivenci-smantana",
+      "pair": [
+        "Smântână",
+        "Mălai"
+      ],
+      "result": "Alivenci"
+    },
+    {
+      "id": "cornulete-dulceata",
+      "pair": [
+        "Dulceață",
+        "Aluat"
+      ],
+      "result": "Cornulețe"
+    },
+    {
+      "id": "cornulete-untura",
+      "pair": [
+        "Untură",
+        "Aluat"
+      ],
+      "result": "Cornulețe"
+    },
+    {
+      "id": "cornulete-smantana",
+      "pair": [
+        "Smântână",
+        "Aluat"
+      ],
+      "result": "Cornulețe"
+    },
+    {
+      "id": "turta-faina",
+      "pair": [
+        "Miere",
+        "Făină"
+      ],
+      "result": "Turtă dulce"
+    },
+    {
+      "id": "turta-scortisoara",
+      "pair": [
+        "Miere",
+        "Scorțișoară"
+      ],
+      "result": "Turtă dulce"
+    },
+    {
+      "id": "halva-zahar",
+      "pair": [
+        "Zahăr",
+        "Semințe de floarea-soarelui"
+      ],
+      "result": "Halva"
+    },
+    {
+      "id": "halva-miere",
+      "pair": [
+        "Miere",
+        "Semințe de floarea-soarelui"
+      ],
+      "result": "Halva"
+    },
+    {
+      "id": "coliva-nuca",
+      "pair": [
+        "Nucă",
+        "Arpacaș"
+      ],
+      "result": "Colivă"
+    },
+    {
+      "id": "coliva-zahar",
+      "pair": [
+        "Zahăr",
+        "Arpacaș"
+      ],
+      "result": "Colivă"
+    },
+    {
+      "id": "placinte-dovleac",
+      "pair": [
+        "Dovleac",
+        "Aluat"
+      ],
+      "result": "Plăcinte"
+    },
+    {
+      "id": "placinte-telemea",
+      "pair": [
+        "Telemea",
+        "Aluat"
+      ],
+      "result": "Plăcinte"
+    },
+    {
+      "id": "placinte-pruna",
+      "pair": [
+        "Prună",
+        "Aluat"
+      ],
+      "result": "Plăcinte"
+    },
+    {
+      "id": "dulceata-pruna",
+      "pair": [
+        "Prună",
+        "Zahăr"
+      ],
+      "result": "Dulceață"
+    },
+    {
+      "id": "dulceata-capsuna",
+      "pair": [
+        "Zahăr",
+        "Căpșună"
+      ],
+      "result": "Dulceață"
+    },
+    {
+      "id": "compot-pruna",
+      "pair": [
+        "Prună",
+        "Apă"
+      ],
+      "result": "Compot"
+    },
+    {
+      "id": "compot-capsuna",
+      "pair": [
+        "Căpșună",
+        "Apă"
+      ],
+      "result": "Compot"
+    },
+    {
+      "id": "inghetata-iaurt",
+      "pair": [
+        "Iaurt",
+        "Congelator"
+      ],
+      "result": "Înghețată"
+    },
+    {
+      "id": "gogosi-iaurt",
+      "pair": [
+        "Iaurt",
+        "Aluat"
+      ],
+      "result": "Gogoși"
+    },
+    {
+      "id": "supa-oala",
+      "pair": [
+        "Oală",
+        "Legume"
+      ],
+      "result": "Supă"
+    },
+    {
+      "id": "mamaliga-oala",
+      "pair": [
+        "Oală",
+        "Mălai"
+      ],
+      "result": "Mămăligă"
+    }
+  ]
+}

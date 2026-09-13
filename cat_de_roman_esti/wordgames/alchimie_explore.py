@@ -123,6 +123,7 @@ def state_payload(game_id: str, session: ExploreSession) -> dict:
     next_unlock = pending[0] if pending else None
     return {
         "game_id": game_id, "revision": session.revision, "mode": "explore",
+        "compatible_recipe_hashes": list(world.compatible_versions),
         "world": {
             "id": world.id, "title": world.catalog.world.title,
             "description": world.catalog.world.description,
@@ -146,6 +147,71 @@ def state_payload(game_id: str, session: ExploreSession) -> dict:
         "progress": {"world_id": world.id, "recipe_hash": world.recipe_hash,
                      "discoveries": [list(p) for p in session.discoveries]},
     }
+
+
+def restore_session(world: DiscoveryWorld, progress: Progress | None,
+                    goal_id: str | None = None) -> ExploreSession:
+    """Validate saves against their original rules, then preserve them in the new world."""
+    session = ExploreSession(world=world, goal_id=goal_id)
+    session.owned.update(dict.fromkeys(world.catalog.world.starter_ids))
+    if progress is None:
+        return session
+    version = world.compatible_versions.get(progress.recipe_hash)
+    if progress.world_id != world.id or (progress.recipe_hash != world.recipe_hash and not version):
+        raise http_error(409, "Colecția aparține altei versiuni. Salvarea rămâne păstrată.")
+    mechanics = version.mechanics.model_dump() if version else world.mechanics
+    recipes = {tuple(r["pair"]): r["result"] for r in mechanics["recipes"]}
+    owned = set(mechanics["starters"])
+    crafted: set[str] = set()
+    validated: list[tuple[str, str]] = []
+    for raw_pair in progress.discoveries:
+        if len(raw_pair) != 2:
+            raise http_error(400, "Colecția salvată conține o combinație invalidă.")
+        pair = tuple(sorted(raw_pair))
+        if pair[0] == pair[1] or not set(pair) <= owned:
+            raise http_error(400, "Colecția salvată folosește ingrediente încă nedescoperite.")
+        result = recipes.get(pair)
+        if result is None:
+            raise http_error(400, "Colecția salvată conține o rețetă necunoscută.")
+        if result not in owned:
+            owned.add(result)
+            crafted.add(result)
+            validated.append(pair)
+            for unlock in mechanics["unlocks"]:
+                if len(crafted) >= unlock["after"]:
+                    owned.update(unlock["concepts"])
+    for pair in validated:
+        session.craft(pair)
+    # Compatible archives are strictly additive; no earned concept may disappear.
+    if not owned <= session.owned.keys():
+        raise http_error(409, "Colecția nu poate fi actualizată. Salvarea rămâne păstrată.")
+    return session
+
+
+def _upgrade_session(session: ExploreSession) -> None:
+    """Existing tabs receive additive content before reads and mutations, atomically."""
+    try:
+        current = get_world()
+    except (OSError, ValueError):
+        return  # An already validated pinned world remains playable during a failed update.
+    if current.recipe_hash == session.world.recipe_hash:
+        return
+    if (current.id != session.world.id
+            or session.world.recipe_hash not in current.compatible_versions):
+        return  # Incompatible versions require explicit migration; never replace earned results.
+    fresh = restore_session(current, Progress(
+        world_id=session.world.id, recipe_hash=session.world.recipe_hash,
+        discoveries=[list(pair) for pair in session.discoveries],
+    ), session.goal_id)
+    if fresh.goal_id not in current.goals:
+        fresh.goal_id = None
+    session.world, session.owned = fresh.world, fresh.owned
+    session.discoveries, session.unlocked = fresh.discoveries, fresh.unlocked
+    session.goal_id = fresh.goal_id
+    # Existing hints remain valid because every previous pair/result is preserved.
+    if session.hint_pair is None:
+        session.hint_stage = 0  # A previously complete collection can now explore again.
+    session.revision += 1
 
 
 def _useful_pair(session: ExploreSession) -> tuple[str, str] | None:
@@ -179,20 +245,7 @@ class CreateExploreView(ContractAPIView):
             raise http_error(503, "Lumea de explorat nu este disponibilă momentan.") from exc
         if body.goal_id is not None and body.goal_id not in world.goals:
             raise http_error(400, "Obiectiv necunoscut.")
-        session = ExploreSession(world=world, goal_id=body.goal_id)
-        session.owned.update(dict.fromkeys(world.catalog.world.starter_ids))
-        if body.progress:
-            if (body.progress.world_id != world.id
-                    or body.progress.recipe_hash != world.recipe_hash):
-                raise http_error(409, "Colecția aparține altei versiuni. Salvarea rămâne păstrată.")
-            for raw_pair in body.progress.discoveries:
-                if len(raw_pair) != 2:
-                    raise http_error(400, "Colecția salvată conține o combinație invalidă.")
-                pair = tuple(sorted(raw_pair))
-                result, _new, _supplies = session.craft(pair)
-                # Duplicate valid recipes allow safe union of concurrent local checkpoints.
-                if result is None:
-                    raise http_error(400, "Colecția salvată conține o rețetă necunoscută.")
+        session = restore_session(world, body.progress, body.goal_id)
         try:
             game_id = store.create(session)
         except SessionCapacityError as exc:
@@ -204,6 +257,7 @@ class GetExploreView(ContractAPIView):
     @extend_schema(operation_id="alchimie_explore_get", tags=["alchimie"])
     @_atomic_session
     def get(self, request, game_id: str, session: ExploreSession):
+        _upgrade_session(session)
         return Response(state_payload(game_id, session))
 
 
@@ -212,6 +266,7 @@ class CombineExploreView(ContractAPIView):
     @_atomic_session
     def post(self, request, game_id: str, session: ExploreSession):
         body = parse_body(request, PairBody)
+        _upgrade_session(session)
         result, new, supplies = session.craft(tuple(sorted((body.a, body.b))))
         session.revision += 1
         if result is None:
@@ -235,6 +290,7 @@ class HintExploreView(ContractAPIView):
     @extend_schema(operation_id="alchimie_explore_hint", tags=["alchimie"])
     @_atomic_session
     def post(self, request, game_id: str, session: ExploreSession):
+        _upgrade_session(session)
         if session.hint_pair is None:
             session.hint_pair = _useful_pair(session)
         session.hint_stage = min(2, session.hint_stage + 1)
@@ -247,6 +303,7 @@ class GoalExploreView(ContractAPIView):
     @_atomic_session
     def post(self, request, game_id: str, session: ExploreSession):
         body = parse_body(request, GoalBody)
+        _upgrade_session(session)
         if body.goal_id is not None and body.goal_id not in session.world.goals:
             raise http_error(400, "Obiectiv necunoscut.")
         session.goal_id = body.goal_id

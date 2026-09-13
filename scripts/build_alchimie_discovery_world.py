@@ -19,11 +19,17 @@ import alchimie_discovery_recipe_source as SOURCE  # noqa: E402
 from content_file_transaction import atomic_write  # noqa: E402
 
 from cat_de_roman_esti.graph import Node  # noqa: E402
+from cat_de_roman_esti.wordgames.discovery_world import (  # noqa: E402
+    mechanics_for,
+    mechanics_hash,
+)
 from cat_de_roman_esti.wordgames.recipe_extensions import record_snapshot  # noqa: E402
 
 CATALOG = ROOT / "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json"
 REVIEW_KIND = "alchimie-discovery-world-review-v1"
 FINAL_REVIEW_KIND = "alchimie-discovery-world-final-v1"
+BASELINE = ROOT / "docs/reviews/v92-alchimie-discovery-world/candidates.json"
+BASELINE_SHA = "559abb0b475665f73b010b1a0acdc7650576d829819a50a2e99bdd50700f8fae"
 RUNTIME_SOURCES = (
     "cat_de_roman_esti/wordgames/discovery_world.py",
     "cat_de_roman_esti/wordgames/alchimie_explore.py",
@@ -33,6 +39,7 @@ RUNTIME_SOURCES = (
     "scripts/build_alchimie_discovery_world.py",
     "scripts/alchimie_discovery_recipe_source.py",
     "scripts/audit_alchimie_discovery_world.py",
+    "docs/reviews/v92-alchimie-discovery-world/candidates.json",
 )
 
 
@@ -55,7 +62,36 @@ def bindings() -> dict:
         "kg_sha256": file_sha(ROOT / "cat_de_roman_esti/fixtures/kg_sample.json"),
         "rubric_sha256": file_sha(ROOT / "docs/CRITIQUE_RUBRIC.md"),
         "editorial_source_sha256": file_sha(Path(SOURCE.__file__)),
+        "previous_world_sha256": file_sha(BASELINE),
     }
+
+
+def compatible_versions(artifact: dict) -> list[dict]:
+    """Derive upgrade authority from immutable, previously reviewed content."""
+    require(file_sha(BASELINE) == BASELINE_SHA, "previous world archive changed")
+    previous = json.loads(BASELINE.read_bytes())
+    require(previous["world"]["id"] == artifact["world"]["id"], "changed world identity")
+    require(previous["world"]["starter_ids"] == artifact["world"]["starter_ids"],
+            "changed original starting inventory")
+    require(all(u in artifact["unlocks"] for u in previous["unlocks"]),
+            "changed original pantry milestones")
+    require(all(g in artifact["goals"] for g in previous["goals"]),
+            "changed original goals")
+    require({c["id"] for c in previous["concepts"]} <= {c["id"] for c in artifact["concepts"]},
+            "removed original concepts")
+    pairs = {tuple(r["pair"]): r["result"] for r in artifact["recipes"]}
+    require(all(pairs.get(tuple(r["pair"])) == r["result"] for r in previous["recipes"]),
+            "changed original recipe result")
+
+    def mechanics(value):
+        return mechanics_for(value["world"]["starter_ids"],
+                             {tuple(r["pair"]): r["result"] for r in value["recipes"]},
+                             [(u["after_discoveries"], u["concept_ids"]) for u in value["unlocks"]])
+    old = mechanics(previous)
+    if mechanics_hash(old) == mechanics_hash(mechanics(artifact)):
+        return []
+    return [{"world_id": previous["world"]["id"], "recipe_hash": mechanics_hash(old),
+             "source_sha256": BASELINE_SHA, "mechanics": old}]
 
 
 def candidate() -> dict:
@@ -99,6 +135,7 @@ def candidate() -> dict:
                   for gid, label, title in SOURCE.GOALS],
     }
     audit(artifact)
+    artifact["compatible_versions"] = compatible_versions(artifact)
     return artifact
 
 

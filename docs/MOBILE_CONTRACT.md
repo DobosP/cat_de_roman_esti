@@ -137,6 +137,15 @@ catalog or exhausted session capacity 503. Clients retain a save on failure. Pro
 local to the browser and requires server validation; the existing KG/mobile content
 manifest and old challenge routes are unchanged. See [ADR-0145](adr/0145-persistent-alchimie-discovery-world.md).
 
+The reviewed additive expansion ([ADR-0146](adr/0146-expand-alchimie-and-preserve-collections.md))
+adds `compatible_recipe_hashes` to state, a bounded list of at most eight supported older
+fingerprints. A known historical checkpoint is validated under its original recipes and
+unlocks, then replayed into the current world. Restoration returns the current fingerprint
+and preserves earned concepts and goals. Existing sessions upgrade before reads/mutations
+when compatible; unrelated fingerprints still return 409 on restore. New recipes cannot
+be claimed under old save authority. Client unions across fingerprints require an explicit
+compatibility direction, keep the newer book, and remain subject to server replay.
+
 ### Lanț progress and help
 
 Successful `usor` and `normal` moves may add `progress: {kind, message}`, where `kind` is

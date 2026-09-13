@@ -34,6 +34,7 @@ export interface ExplorationState {
     pair: [Concept, Concept] | null;
   } | null;
   progress: ExplorationProgress;
+  compatible_recipe_hashes: string[];
   unlocked: { id: string; title: string; after_discoveries: number }[];
   next_unlock: { title: string; after_discoveries: number; remaining: number } | null;
 }

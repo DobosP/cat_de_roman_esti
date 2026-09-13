@@ -8,6 +8,24 @@ const word = (page, label) => page.locator(".alchemy-inventory-grid").getByRole(
 const responseTo = (page, path, method = "POST") => page.waitForResponse((response) => response.request().method() === method && new URL(response.url()).pathname === path);
 const saved = (page) => page.evaluate((key) => JSON.parse(localStorage.getItem(key) || "null"), SAVE);
 
+// The original 75-concept world shipped in 2257766. This historical checkpoint must
+// keep its original fingerprint; changing it would hide a broken upgrade path.
+const LEGACY_COLLECTION = {
+  version: 1,
+  game_id: "expired-original-kitchen-session",
+  revision: 3,
+  goal_id: "paine",
+  progress: {
+    world_id: "bucataria-romaneasca-v1",
+    recipe_hash: "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+    discoveries: [
+      ["n_v24_food_pantry_faina", "n_v4gas_apa"],
+      ["n_v84_food_aluat", "n_v84_food_cuptor"],
+      ["n_v24_food_pantry_faina", "n_v4gas_ou"],
+    ],
+  },
+};
+
 async function begin(page) {
   await page.goto("/alchimie");
   await expect(page.getByRole("heading", { name: "O lume de descoperit." })).toBeVisible();
@@ -184,6 +202,42 @@ test("a checkpoint from a different recipe book is retained when restore is reje
   expect((await restore).status()).toBe(409);
   await expect(page.getByRole("alert")).toContainText("Colecția salvată nu poate fi încărcată.");
   expect(await saved(page)).toEqual(original);
+});
+
+test("the original kitchen collection upgrades without losing recipes, pantry supplies or its chosen goal", async ({ page }) => {
+  await page.goto("/alchimie");
+  await page.evaluate(({ key, collection }) => localStorage.setItem(key, JSON.stringify(collection)), {
+    key: SAVE, collection: LEGACY_COLLECTION,
+  });
+  const restore = responseTo(page, BASE);
+  await page.reload();
+  const response = await restore;
+  expect(response.status()).toBe(200);
+  const restored = await response.json();
+  expect(restored.progress.world_id).toBe(LEGACY_COLLECTION.progress.world_id);
+  expect(restored.progress.recipe_hash).not.toBe(LEGACY_COLLECTION.progress.recipe_hash);
+  expect(restored.compatible_recipe_hashes).toContain(LEGACY_COLLECTION.progress.recipe_hash);
+  expect(restored.world.total_concepts).toBeGreaterThan(75);
+  expect(restored.world.total_recipes).toBeGreaterThan(57);
+  expect(restored.discovered_count).toBe(3);
+  expect(restored.goal_id).toBe("paine");
+  expect(restored.goals.find((goal) => goal.id === "paine").completed).toBe(true);
+  const owned = restored.inventory.map((item) => item.id);
+  for (const id of [
+    "n_v84_food_aluat", "n_v4gas_paine", "n_v3gas_paste",
+    "n_v4gas_fruct", "n_v24_food_pantry_zahar", "n_v24_food_imported_fruit_lamaie",
+    "n_v24_food_salad_veg_castravete", "n_v4gas_legume",
+  ]) expect(owned).toContain(id);
+  expect(restored.progress.discoveries).toEqual(LEGACY_COLLECTION.progress.discoveries);
+  await expect.poll(async () => (await saved(page))?.progress.recipe_hash).toBe(restored.progress.recipe_hash);
+  expect((await saved(page)).compatible_recipe_hashes).toContain(LEGACY_COLLECTION.progress.recipe_hash);
+  await expect(page.getByRole("alert")).toHaveCount(0);
+  await expect(page.getByLabel("Obiectiv opțional", { exact: true })).toHaveValue("paine");
+  const next = await discover(page, restored);
+  expect(next.discovered_count).toBe(4);
+  await page.reload();
+  await expect(page.getByLabel("Obiectiv opțional", { exact: true })).toBeEnabled();
+  expect((await saved(page)).progress).toEqual(next.progress);
 });
 
 test("the daily circuit opens scored challenges while the arcade card opens exploration", async ({ page }) => {

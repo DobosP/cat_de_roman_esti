@@ -16,6 +16,7 @@ const storage = () => {
 const HASH = "a".repeat(64);
 const state = (overrides = {}) => ({
   game_id: "world-session", revision: 1, goal_id: null,
+  compatible_recipe_hashes: [],
   progress: { world_id: "kitchen-v1", recipe_hash: HASH, discoveries: [["flour", "water"]] }, ...overrides,
 });
 
@@ -47,6 +48,78 @@ test("an older revision cannot replace a more advanced tab", async () => {
   assert.equal(read(store).value.revision, 5);
 });
 
+test("a server-restored collection replaces its exact old-book checkpoint with the current binding", async () => {
+  const store = storage();
+  const original = await save(state({ revision: 5, goal_id: "bread" }), null, store, null);
+  const restored = state({
+    game_id: "migrated-session", revision: 0, goal_id: "bread",
+    compatible_recipe_hashes: [HASH],
+    progress: { ...state().progress, recipe_hash: "b".repeat(64) },
+  });
+  assert.equal((await save(restored, original.raw, store, null)).kind, "saved");
+  const current = read(store).value;
+  assert.deepEqual(current.progress, restored.progress);
+  assert.equal(current.goal_id, "bread");
+  assert.equal(current.game_id, "migrated-session");
+  assert.deepEqual(current.compatible_recipe_hashes, [HASH]);
+});
+
+test("a late old-version discovery joins a compatible migrated checkpoint without downgrading it", async () => {
+  const store = storage();
+  const original = await save(state(), null, store, null);
+  const restored = state({
+    game_id: "migrated-session", revision: 0,
+    compatible_recipe_hashes: [HASH],
+    progress: { ...state().progress, recipe_hash: "b".repeat(64) },
+  });
+  await save(restored, original.raw, store, null);
+  const late = state({ revision: 9, progress: {
+    ...state().progress, discoveries: [["flour", "water"], ["dough", "heat"]],
+  } });
+  assert.equal((await save(late, original.raw, store, null)).kind, "merged");
+  const current = read(store).value;
+  assert.equal(current.game_id, restored.game_id);
+  assert.equal(current.progress.recipe_hash, restored.progress.recipe_hash);
+  assert.deepEqual(current.progress.discoveries, late.progress.discoveries);
+  assert.deepEqual(current.compatible_recipe_hashes, [HASH]);
+  assert.equal(current.needs_restore, true);
+});
+
+test("a newer response upgrades a concurrent old-book union and keeps compatibility for later replies", async () => {
+  const store = storage();
+  const original = await save(state(), null, store, null);
+  await save(state({ revision: 2, goal_id: "bread", progress: {
+    ...state().progress, discoveries: [["flour", "water"], ["flour", "egg"]],
+  } }), original.raw, store, null);
+  const restored = state({
+    game_id: "migrated-session", revision: 0, compatible_recipe_hashes: [HASH],
+    progress: { ...state().progress, recipe_hash: "b".repeat(64), discoveries: [["flour", "water"], ["dough", "heat"]] },
+  });
+  assert.equal((await save(restored, original.raw, store, null)).kind, "merged");
+  const current = read(store).value;
+  assert.equal(current.game_id, restored.game_id);
+  assert.equal(current.goal_id, "bread");
+  assert.equal(current.progress.recipe_hash, restored.progress.recipe_hash);
+  assert.deepEqual(current.progress.discoveries, [["flour", "water"], ["flour", "egg"], ["dough", "heat"]]);
+  assert.deepEqual(current.compatible_recipe_hashes, [HASH]);
+  assert.equal(current.needs_restore, true);
+});
+
+test("an unrelated recipe book cannot overwrite or merge with a migrated checkpoint", async () => {
+  const store = storage();
+  const original = await save(state(), null, store, null);
+  const restored = state({
+    game_id: "migrated-session", compatible_recipe_hashes: [HASH],
+    progress: { ...state().progress, recipe_hash: "b".repeat(64) },
+  });
+  const migrated = await save(restored, original.raw, store, null);
+  const unrelated = state({ progress: {
+    ...state().progress, recipe_hash: "c".repeat(64), discoveries: [["egg", "milk"]],
+  } });
+  assert.equal((await save(unrelated, original.raw, store, null)).kind, "changed");
+  assert.equal(store.getItem(key), migrated.raw);
+});
+
 test("concurrent discoveries in separate sessions form a replayable union", async () => {
   const store = storage();
   const original = await save(state(), null, store, null);
@@ -73,6 +146,18 @@ test("a checkpoint requires the exact lowercase recipe-book binding", () => {
   for (const recipe_hash of [undefined, "a".repeat(63), "A".repeat(64), "z".repeat(64)]) {
     const store = storage();
     store.setItem(key, JSON.stringify({ version: 1, ...state({ progress: { world_id: "kitchen-v1", recipe_hash, discoveries: [] } }) }));
+    assert.equal(read(store).kind, "invalid");
+  }
+});
+
+test("legacy saves remain readable while compatibility metadata stays bounded and well formed", () => {
+  const store = storage();
+  const legacy = { version: 1, ...state() };
+  delete legacy.compatible_recipe_hashes;
+  store.setItem(key, JSON.stringify(legacy));
+  assert.equal(read(store).kind, "saved");
+  for (const compatible_recipe_hashes of [null, {}, ["x"], [HASH], ["b".repeat(64), "b".repeat(64)], Array.from({ length: 9 }, (_, i) => String(i).repeat(64))]) {
+    store.setItem(key, JSON.stringify({ ...legacy, compatible_recipe_hashes }));
     assert.equal(read(store).kind, "invalid");
   }
 });

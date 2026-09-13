@@ -72,6 +72,29 @@ class Review(Record):
     sha256: Sha
 
 
+class MechanicRecipe(Record):
+    pair: list[Identifier] = Field(min_length=2, max_length=2)
+    result: Identifier
+
+
+class MechanicUnlock(Record):
+    after: int = Field(ge=1, le=MAX_CONCEPTS)
+    concepts: list[Identifier] = Field(min_length=1, max_length=12)
+
+
+class Mechanics(Record):
+    starters: list[Identifier] = Field(min_length=2, max_length=12)
+    recipes: list[MechanicRecipe] = Field(min_length=2, max_length=MAX_RECIPES)
+    unlocks: list[MechanicUnlock] = Field(max_length=8)
+
+
+class CompatibleVersion(Record):
+    world_id: Identifier
+    recipe_hash: Sha
+    source_sha256: Sha
+    mechanics: Mechanics
+
+
 class Catalog(BaseModel):
     # Generator may append audit metadata. All serving records are strict.
     model_config = ConfigDict(strict=True)
@@ -84,6 +107,26 @@ class Catalog(BaseModel):
     candidate_sha256: Sha
     bindings: dict[str, Sha]
     reviews: list[Review] = Field(min_length=2, max_length=2)
+    compatible_versions: list[CompatibleVersion] = Field(default_factory=list, max_length=8)
+
+
+def mechanics_for(starters, recipes, unlocks) -> dict:
+    """Canonical mechanics shared by current fingerprints and archived save versions."""
+    return {
+        "starters": sorted(starters),
+        "recipes": [{"pair": list(pair), "result": result}
+                    for pair, result in sorted(recipes.items())],
+        "unlocks": sorted(
+            [{"after": after, "concepts": sorted(ids)} for after, ids in unlocks],
+            key=lambda u: (u["after"], u["concepts"]),
+        ),
+    }
+
+
+def mechanics_hash(mechanics: dict) -> str:
+    return hashlib.sha256(json.dumps(
+        mechanics, sort_keys=True, separators=(",", ":"),
+    ).encode()).hexdigest()
 
 
 @dataclass(frozen=True)
@@ -98,20 +141,21 @@ class DiscoveryWorld:
         return self.catalog.world.id
 
     @cached_property
+    def mechanics(self) -> dict:
+        return mechanics_for(
+            self.catalog.world.starter_ids,
+            {pair: recipe.result for pair, recipe in self.recipes.items()},
+            [(u.after_discoveries, u.concept_ids) for u in self.catalog.unlocks],
+        )
+
+    @cached_property
     def recipe_hash(self) -> str:
         """Bind portable progress to mechanics, permitting harmless copy/goal edits."""
-        mechanics = {
-            "starters": sorted(self.catalog.world.starter_ids),
-            "recipes": [{"pair": list(pair), "result": recipe.result}
-                        for pair, recipe in sorted(self.recipes.items())],
-            "unlocks": sorted(
-                [{"after": u.after_discoveries, "concepts": sorted(u.concept_ids)}
-                 for u in self.catalog.unlocks], key=lambda u: (u["after"], u["concepts"]),
-            ),
-        }
-        return hashlib.sha256(json.dumps(
-            mechanics, sort_keys=True, separators=(",", ":"),
-        ).encode()).hexdigest()
+        return mechanics_hash(self.mechanics)
+
+    @cached_property
+    def compatible_versions(self) -> dict[str, CompatibleVersion]:
+        return {v.recipe_hash: v for v in self.catalog.compatible_versions}
 
 
 def _require(condition: bool, message: str) -> None:
@@ -181,9 +225,55 @@ def validate_world(raw: dict, *, check_graph: bool = True) -> DiscoveryWorld:
     _require(all(any(seed in pair for pair in recipes) for seed in supplied),
              "unused starter or supply")
     world = DiscoveryWorld(catalog, concepts, recipes, goals)
+    _validate_compatibility(world)
     if check_graph:
         _check_graph(world)
     return world
+
+
+def _validate_compatibility(world: DiscoveryWorld) -> None:
+    """Accept only explicit additive archives, never arbitrary old fingerprints."""
+    versions = world.catalog.compatible_versions
+    _require(len(world.compatible_versions) == len(versions), "duplicate compatible version")
+    current = world.mechanics
+    for version in versions:
+        old = version.mechanics.model_dump()
+        old_pairs = {tuple(r.pair): r.result for r in version.mechanics.recipes}
+        canonical = mechanics_for(
+            old["starters"], old_pairs,
+            [(u.after, u.concepts) for u in version.mechanics.unlocks],
+        )
+        _require(old == canonical and mechanics_hash(old) == version.recipe_hash,
+                 "invalid archived mechanics fingerprint")
+        _require(version.world_id == world.id and version.recipe_hash != world.recipe_hash,
+                 "invalid compatible world identity")
+        _require(old["starters"] == current["starters"], "changed historical starters")
+        _require(len(old_pairs) == len(old["recipes"]) and all(
+            pair in world.recipes and world.recipes[pair].result == result
+            for pair, result in old_pairs.items()
+        ), "changed historical recipe")
+        _require(all(u in current["unlocks"] for u in old["unlocks"]),
+                 "changed historical supplies")
+        supplied = [n for u in old["unlocks"] for n in u["concepts"]]
+        _require(len(supplied) == len(set(supplied)) and not set(supplied) & set(old["starters"]),
+                 "duplicate historical supply")
+        owned = set(old["starters"])
+        crafted: set[str] = set()
+        while True:
+            previous = len(owned)
+            for pair, result in old_pairs.items():
+                if set(pair) <= owned and result not in owned:
+                    owned.add(result)
+                    crafted.add(result)
+            for unlock in old["unlocks"]:
+                if len(crafted) >= unlock["after"]:
+                    owned.update(unlock["concepts"])
+            if len(owned) == previous:
+                break
+        expected = set(old["starters"]) | set(supplied) | set(old_pairs.values())
+        expected.update(n for pair in old_pairs for n in pair)
+        _require(owned == expected and all(len(crafted) >= u["after"] for u in old["unlocks"]),
+                 "unreachable historical mechanics")
 
 
 def _check_graph(world: DiscoveryWorld) -> None:

@@ -251,3 +251,96 @@ def test_supply_threshold_changes_invalidate_replay_fingerprint(world):
     updated["unlocks"][0]["after_discoveries"] = 1
     changed_world = validate_world(updated, check_graph=False)
     assert changed_world.recipe_hash != world.recipe_hash
+
+
+def expanded_world(world):
+    raw = example_catalog()
+    raw["concepts"].extend([
+        {"id": n, "label": n.upper(), "description": "", "source": "",
+         "redistributable": False, "snapshot": {}} for n in ("f", "t")
+    ])
+    raw["unlocks"].append({"id": "extra-pantry", "after_discoveries": 3,
+                           "concept_ids": ["f"], "title": "New supplies"})
+    raw["recipes"].append({"id": "new-dish", "pair": ["f", "q"], "result": "t",
+                           "explanation": "A new use for Q.",
+                           "sources": ["https://example.org/new-dish"]})
+    raw["compatible_versions"] = [{"world_id": world.id, "recipe_hash": world.recipe_hash,
+                                    "source_sha256": "a" * 64, "mechanics": world.mechanics}]
+    return validate_world(raw, check_graph=False)
+
+
+def test_every_old_collection_prefix_restores_without_losing_discoveries(world, monkeypatch):
+    state = post(data={"goal_id": "first-goal"})
+    checkpoints = [state]
+    for pair in (("a", "b"), ("x", "c"), ("x", "d"), ("y", "e"), ("z", "e")):
+        state = craft(state, *pair)
+        checkpoints.append(state)
+    new = expanded_world(world)
+    monkeypatch.setattr(E, "get_world", lambda: new)
+    for old in checkpoints:
+        restored = post(data={"progress": old["progress"], "goal_id": old["goal_id"]})
+        assert restored["progress"]["discoveries"] == old["progress"]["discoveries"]
+        assert restored["discovered_count"] == old["discovered_count"]
+        assert restored["goal_id"] == old["goal_id"]
+        assert {i["id"] for i in old["inventory"]} <= {i["id"] for i in restored["inventory"]}
+        assert restored["progress"]["recipe_hash"] == new.recipe_hash
+        assert restored["compatible_recipe_hashes"] == [world.recipe_hash]
+
+
+def test_completed_collection_gets_more_content_and_clears_old_completion_hint(world, monkeypatch):
+    state = post()
+    for pair in (("a", "b"), ("x", "c"), ("x", "d"), ("y", "e"), ("z", "e")):
+        state = craft(state, *pair)
+    base = f"{BASE}/{state['game_id']}"
+    completed = post(base + "/hint")
+    assert completed["hint"]["stage"] == "complete"
+    monkeypatch.setattr(E, "get_world", lambda: expanded_world(world))
+    upgraded = Client().get(base).json()
+    assert upgraded["game_id"] == state["game_id"]
+    assert not upgraded["complete"] and upgraded["hint"] is None
+    assert upgraded["revision"] == completed["revision"] + 1
+    assert upgraded["discovered_count"] == 5
+    assert next(i for i in upgraded["inventory"] if i["id"] == "q")["ready"]
+    assert craft(upgraded, "q", "f")["complete"]
+
+
+def test_live_mutation_upgrades_before_crafting_and_keeps_an_earned_hint(world, monkeypatch):
+    state = post()
+    hinted = post(f"{BASE}/{state['game_id']}/hint")
+    new = expanded_world(world)
+    monkeypatch.setattr(E, "get_world", lambda: new)
+    miss = craft(state, "a", "c")
+    assert miss["hint"] == hinted["hint"]
+    assert miss["progress"]["recipe_hash"] == new.recipe_hash
+    assert miss["world"]["total_concepts"] == 12
+
+
+def test_old_fingerprint_cannot_claim_new_recipe_or_unearned_new_supplies(world, monkeypatch):
+    old = post()
+    for pair in (("a", "b"), ("x", "c"), ("x", "d"), ("z", "e")):
+        old = craft(old, *pair)
+    monkeypatch.setattr(E, "get_world", lambda: expanded_world(world))
+    forged = deepcopy(old["progress"])
+    forged["discoveries"].append(["q", "f"])
+    post(data={"progress": forged}, status=400)
+
+
+@pytest.mark.parametrize("change", [
+    lambda raw: raw["compatible_versions"][0].update(recipe_hash="0" * 64),
+    lambda raw: raw["compatible_versions"][0].update(world_id="unrelated"),
+    lambda raw: raw["compatible_versions"].append(deepcopy(raw["compatible_versions"][0])),
+    lambda raw: raw["recipes"][0].update(result="z"),
+    lambda raw: raw["unlocks"][0].update(after_discoveries=1),
+])
+def test_compatibility_rejects_forged_hashes_or_changed_original_mechanics(world, change):
+    raw = expanded_world(world).catalog.model_dump()
+    change(raw)
+    with pytest.raises(ValueError):
+        validate_world(raw, check_graph=False)
+
+
+def test_compatible_world_can_reorder_displayed_starters(world):
+    expanded = expanded_world(world)
+    raw = expanded.catalog.model_dump()
+    raw["world"]["starter_ids"].reverse()
+    assert validate_world(raw, check_graph=False).recipe_hash == expanded.recipe_hash

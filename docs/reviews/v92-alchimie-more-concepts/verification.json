@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-13",
+  "baseline": "2257766",
+  "branch": "feat/v92-alchimie-gui",
+  "version": "V92 more Alchimie concepts and compatible collections",
+  "environment": {
+    "python": "3.12.3",
+    "node": "24.19.0",
+    "python_3_14": "not rerun"
+  },
+  "catalog_sha256": "2ca7f281c801a4c2e044134c94dfcb29ff5e51a9c2d4982ba3076818f1040a6d",
+  "candidate_sha256": "fc863ff35cebe88d1b2364fc3693f7d765bb33606d9a3191b1d8532540c37209",
+  "live_audit_sha256": "07bfae670c17401d5646b60d2766abb3ff1b7dc5d1d21ebbd31ba286b87d88b7",
+  "frontend_receipt_sha256": "edaa14caa7e7d5d1e8655ed37b52185c40e7b24e1096f17aab8605e6d9989c9e",
+  "checks": [
+    {
+      "command": "PYTHONPATH=. <venv>/bin/python -m pytest -o addopts=\"\" -q --basetemp=<task-scratch>/pytest-full",
+      "result": "1805 passed in 318.01s",
+      "log_sha256": "75f6c05f9581024c7551c9099169ea9ca6b7ddfe7258417da1ee684fb0e45f89"
+    },
+    {
+      "command": "CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=. <venv>/bin/python -m pytest -o addopts=\"\" -q tests/accounts --basetemp=<task-scratch>/pytest-accounts",
+      "result": "53 passed in 2.62s",
+      "log_sha256": "326a1c068ae5696a810ee7600a41be770628168bc86f889e44beebeaf78216ae"
+    },
+    {
+      "command": "pytest tests/test_alchimie_explore.py tests/test_alchimie_discovery_catalog.py tests/test_mobile_contract.py",
+      "result": "111 passed in 4.92s",
+      "log_sha256": "1239c1661c91419b475e15cfb60605cdbf3a82c45154a2a260d0dbbdc8f18cff"
+    },
+    {
+      "command": "npm test",
+      "result": "209 passed"
+    },
+    {
+      "command": "npm run lint; npm run typecheck; npm run build",
+      "result": "Pass; initial gzip 119.23 of 120 KiB."
+    },
+    {
+      "command": "npm run test:e2e -- e2e/alchimie-exploration.spec.mjs --workers=4",
+      "result": "22 passed in 21.1s",
+      "log_sha256": "728b4691d3e98f8e54692a826b2c811bc34587080392a842d51d29eb04ecadb2"
+    },
+    {
+      "command": "npm run test:e2e -- --workers=4",
+      "result": "444 passed in 4.2m",
+      "retries": 0,
+      "log_sha256": "4c2d21ea7c3e712bc36d43880f2bb9609b85fc3892ad0fd0e5fe83c91874e036"
+    },
+    {
+      "command": "validate_fixture.py; validate_games_pack.py",
+      "result": "Both GREEN; 0 fixture errors."
+    },
+    {
+      "command": "python -m ruff check; git diff --check",
+      "result": "pass"
+    },
+    {
+      "command": "check_docs.py .",
+      "result": "dead_links=0 stale_terms=0 retired_verbs=0 orphans=0"
+    },
+    {
+      "command": "audit_alchimie_discovery_world.py --catalog <proposal> --output <live-audit>",
+      "result": "All 111 concepts and 116 recipes across free play and 19 goals; all 39 historical prefixes preserved."
+    },
+    {
+      "command": "independent migration review",
+      "result": "780 historical prefixes across 20 randomized orders; old authority rejects new recipes even with owned inputs."
+    },
+    {
+      "command": "independent factual replay",
+      "result": "100 random complete new runs, 100 current restores, 100 historical migrations and 39 prefixes pass."
+    },
+    {
+      "command": "compare published catalog against2257766",
+      "result": "All 75 old concepts, 57 old recipes, nine goals and four supply tiers are byte-equivalent."
+    },
+    {
+      "command": "local preview resume",
+      "result": "Existing one-discovery collection restored and shows 9/111 owned concepts with all 19 goals."
+    }
+  ],
+  "runtime_sources": [
+    {
+      "path": "cat_de_roman_esti/wordgames/discovery_world.py",
+      "sha256": "7c92c7062bbb4439da3a0eb637b0bc680c2aa3aa27d6a803512d706cf0274408"
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/alchimie_explore.py",
+      "sha256": "262d9347aec5a2859b2e1064dc935bb541933b862a505ef8a2173340c46e8843"
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/service.py",
+      "sha256": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"
+    },
+    {
+      "path": "cat_de_roman_esti/wordgames/_session_endpoint.py",
+      "sha256": "d6f5f7ed35fefc9394da4c72fe9d65f76cf7c82df832c5b3d14f7df04ec4f29f"
+    },
+    {
+      "path": "cat_de_roman_esti/web/urls.py",
+      "sha256": "ead8b6ca81be580a1006f81e14d106723e826d248117cea14ecc162a9768d61f"
+    },
+    {
+      "path": "scripts/alchimie_discovery_recipe_source.py",
+      "sha256": "03c800ba1436456710103d0043f1defa18e8972c219842f8f908f7c2026a4970"
+    },
+    {
+      "path": "scripts/build_alchimie_discovery_world.py",
+      "sha256": "3396dbcc567e64d354bb1de907caaa1dfaa620d6957212690ecdcfd8142d1c7f"
+    },
+    {
+      "path": "scripts/audit_alchimie_discovery_world.py",
+      "sha256": "6e64f3aa43d468be7d29d553018580a1b75a595a83e46cfff3af9d35c1743d88"
+    },
+    {
+      "path": "docs/reviews/v92-alchimie-discovery-world/candidates.json",
+      "sha256": "559abb0b475665f73b010b1a0acdc7650576d829819a50a2e99bdd50700f8fae"
+    }
+  ],
+  "frontend_source_sha256": {
+    "frontend/src/api/alchimieExplore.ts": "8b98b002657ec0bc69cb53cf5da1e19115f617a50cd07caa96af25c66586d42a",
+    "frontend/src/explorationSave.ts": "735f10705e8f5aa9898a4c911e16d03668e0f990f1325380b2e7857d21f00032",
+    "frontend/tests/exploration-save.test.mjs": "6ad37e8ad8bdc9e1f704ceee7d4c4c3541aec84cd3fc9ab649d2faaebd97eb55",
+    "frontend/e2e/alchimie-exploration.spec.mjs": "354eaa675f47832cac2c9f26b5c314da19eb5601e5e73fb100195c9d86f658a6",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "0f9d94e891057818f748864c516579d695da9644fb005e78c04d2bef9071392d",
+    "cat_de_roman_esti/web/static/assets/Alchimie-CgpcZFsu.js": "5c01061a4f46cb39560f6a1d678c73704ac7aa90bebb6f4d2e709448da38d8d3"
+  },
+  "reviews": {
+    "factual-review.json": "8ddfe9bdb741a45bc332b1e54dfad8f2fdd6c5f2195f4a864aebce585d1c27ca",
+    "final-factual-review.json": "edd82d308813ca9f2d21051ed06a8d4b30c798f5275d168e0392a327ff48ede3",
+    "final-quality-review.json": "3aa6e2a41edcfc1f6d286ee229a52470c370fb6ca83f035ccd25e0e7f64d4573",
+    "quality-review.json": "e366215f7a3bb99c15b9f5e98c147ab7b6750b9e8c97576974aaa147080c397d"
+  },
+  "metrics": {
+    "concepts": 111,
+    "starting_supplies": 8,
+    "unlocked_supplies": 45,
+    "crafted_discoveries": 58,
+    "recipes": 116,
+    "results_with_alternatives": 40,
+    "crafted_intermediates": 23,
+    "terminal_discoveries": 35,
+    "opening_pairs": 7,
+    "possible_starting_pairs": 28,
+    "optional_goals": 19
+  },
+  "compatible_save_replays": [
+    {
+      "recipe_hash": "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+      "previous_owned": 75,
+      "prefixes_preserved": 39,
+      "all_earned_concepts_preserved": true
+    }
+  ],
+  "intermediate_findings": [
+    {
+      "scope": "editorial draft",
+      "resolution": "rejected oven-to-crumb shortcut; supplied crumb ingredient instead; urda/semolina recipe states sourced baked variant"
+    },
+    {
+      "scope": "focused backend",
+      "result": "102 passed /1 outdated description-count assertion failed",
+      "resolution": "the original inventory still requires exactly its four reviewed overrides; added descriptions are independently reviewed"
+    },
+    {
+      "scope": "first local lint",
+      "result": "syntax typo and line lengths",
+      "resolution": "fixed before focused/runtime audit and final gates"
+    }
+  ],
+  "production_changed": false,
+  "human_playtest": "not performed",
+  "physical_device_acceptance": "not performed",
+  "scope_limits": [
+    "Finite kitchen world, not all conceivable ingredient pairs",
+    "35 terminal crafted results remain",
+    "Browser-local persistence without account synchronization",
+    "Legacy challenge content remains separately scoped"
+  ]
+}

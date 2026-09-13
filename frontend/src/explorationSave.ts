@@ -10,6 +10,8 @@ export interface ExplorationSave {
   revision: number;
   progress: ExplorationProgress;
   goal_id: string | null;
+  /** Older books whose recipes the server guarantees this version preserves. */
+  compatible_recipe_hashes?: string[];
   /** A cross-tab union must be replayed before its saved session is used. */
   needs_restore?: boolean;
 }
@@ -40,6 +42,11 @@ export function readExplorationSave(storage: SaveStorage | null = browserStorage
       (value.goal_id !== null && !validId(value.goal_id)) ||
       (value.needs_restore !== undefined && typeof value.needs_restore !== "boolean") ||
       !validId(value.progress?.world_id) || !/^[a-f0-9]{64}$/.test(value.progress.recipe_hash) ||
+      (value.compatible_recipe_hashes !== undefined && (
+        !Array.isArray(value.compatible_recipe_hashes) || value.compatible_recipe_hashes.length > 8 ||
+        new Set(value.compatible_recipe_hashes).size !== value.compatible_recipe_hashes.length ||
+        value.compatible_recipe_hashes.some((hash) => typeof hash !== "string" || !/^[a-f0-9]{64}$/.test(hash) || hash === value.progress.recipe_hash)
+      )) ||
       !Array.isArray(value.progress.discoveries) ||
       value.progress.discoveries.length > 128 || value.progress.discoveries.some((pair) =>
         !Array.isArray(pair) || pair.length !== 2 || !pair.every(validId) || pair[0] === pair[1])) {
@@ -52,8 +59,19 @@ export function readExplorationSave(storage: SaveStorage | null = browserStorage
 type SaveResult = { kind: "saved" | "merged"; raw: string } | { kind: "changed" | "unavailable" };
 
 /** Preserve both valid recipe sequences if separate live sessions advanced at once. */
-export function mergeExplorationProgress(a: ExplorationProgress, b: ExplorationProgress): ExplorationProgress | null {
-  if (a.world_id !== b.world_id || a.recipe_hash !== b.recipe_hash) return null;
+export function mergeExplorationProgress(
+  a: ExplorationProgress, b: ExplorationProgress,
+  aCompatible: string[] = [], bCompatible: string[] = [],
+): ExplorationProgress | null {
+  if (a.world_id !== b.world_id) return null;
+  let recipeHash = a.recipe_hash;
+  if (a.recipe_hash !== b.recipe_hash) {
+    const aPreservesB = aCompatible.includes(b.recipe_hash);
+    const bPreservesA = bCompatible.includes(a.recipe_hash);
+    // Only an explicit, unambiguous server compatibility declaration can upgrade a union.
+    if (aPreservesB === bPreservesA) return null;
+    recipeHash = aPreservesB ? a.recipe_hash : b.recipe_hash;
+  }
   const pairs = new Set<string>();
   const discoveries: [string, string][] = [];
   for (const pair of [...a.discoveries, ...b.discoveries]) {
@@ -62,7 +80,7 @@ export function mergeExplorationProgress(a: ExplorationProgress, b: ExplorationP
     pairs.add(key);
     discoveries.push(pair);
   }
-  return discoveries.length <= 128 ? { world_id: a.world_id, recipe_hash: a.recipe_hash, discoveries } : null;
+  return discoveries.length <= 128 ? { world_id: a.world_id, recipe_hash: recipeHash, discoveries } : null;
 }
 
 /** A browser lock serializes compare-and-write across tabs when supported. */
@@ -82,14 +100,22 @@ export async function saveExplorationState(
     let value: ExplorationSave = {
       version: 1, game_id: state.game_id, revision: state.revision,
       progress: state.progress, goal_id: state.goal_id,
+      compatible_recipe_hashes: state.compatible_recipe_hashes ?? [],
     };
     let kind: "saved" | "merged" = "saved";
     if (current.raw !== expectedRaw || (current.kind === "saved" && current.value.game_id === state.game_id && current.value.revision > state.revision)) {
       if (current.kind !== "saved") return { kind: "changed" };
-      const progress = mergeExplorationProgress(current.value.progress, state.progress);
+      const progress = mergeExplorationProgress(
+        current.value.progress, state.progress,
+        current.value.compatible_recipe_hashes, state.compatible_recipe_hashes,
+      );
       if (!progress) return { kind: "changed" };
       if (progress.discoveries.length === current.value.progress.discoveries.length) return { kind: "changed" };
-      value = { ...current.value, progress, needs_restore: true };
+      const stateIsNewerBook = progress.recipe_hash !== current.value.progress.recipe_hash;
+      value = {
+        ...(stateIsNewerBook ? value : current.value),
+        goal_id: current.value.goal_id, progress, needs_restore: true,
+      };
       kind = "merged";
     }
     const raw = JSON.stringify(value);

@@ -1,0 +1,69 @@
+{
+  "scope": "V92 additional concepts: browser collection compatibility and frontend verification",
+  "verified_at_utc": "2026-09-13T14:56:25.839816+00:00",
+  "source_sha256": {
+    "frontend/src/api/alchimieExplore.ts": "8b98b002657ec0bc69cb53cf5da1e19115f617a50cd07caa96af25c66586d42a",
+    "frontend/src/explorationSave.ts": "735f10705e8f5aa9898a4c911e16d03668e0f990f1325380b2e7857d21f00032",
+    "frontend/tests/exploration-save.test.mjs": "6ad37e8ad8bdc9e1f704ceee7d4c4c3541aec84cd3fc9ab649d2faaebd97eb55",
+    "frontend/e2e/alchimie-exploration.spec.mjs": "354eaa675f47832cac2c9f26b5c314da19eb5601e5e73fb100195c9d86f658a6",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "0f9d94e891057818f748864c516579d695da9644fb005e78c04d2bef9071392d",
+    "cat_de_roman_esti/web/static/assets/Alchimie-CgpcZFsu.js": "5c01061a4f46cb39560f6a1d678c73704ac7aa90bebb6f4d2e709448da38d8d3"
+  },
+  "checks": {
+    "native": {
+      "command": "npm test",
+      "passed": 209,
+      "failed": 0
+    },
+    "lint": {
+      "command": "npm run lint",
+      "passed": true
+    },
+    "typecheck": {
+      "command": "npm run typecheck",
+      "passed": true
+    },
+    "build": {
+      "command": "npm run build",
+      "passed": true,
+      "initial_gzip_kib": 119.23,
+      "limit_kib": 120
+    },
+    "browser_focused": {
+      "command": "npm run test:e2e -- e2e/alchimie-exploration.spec.mjs --workers=4",
+      "passed": 22,
+      "failed": 0,
+      "duration_seconds": 21.1,
+      "log": "browser-focused.log"
+    },
+    "browser_full": {
+      "command": "npm run test:e2e -- --workers=4",
+      "passed": 444,
+      "failed": 0,
+      "duration_reported": "4.2m",
+      "log": "browser-full.log"
+    }
+  },
+  "browser_environment": {
+    "CDR_E2E_PORT": 8148,
+    "workers": 4,
+    "retries": 0,
+    "projects": [
+      "desktop",
+      "mobile"
+    ]
+  },
+  "log_sha256": {
+    "browser-focused.log": "728b4691d3e98f8e54692a826b2c811bc34587080392a842d51d29eb04ecadb2",
+    "browser-full.log": "4c2d21ea7c3e712bc36d43880f2bb9609b85fc3892ad0fd0e5fe83c91874e036"
+  },
+  "legacy_checkpoint_recipe_hash": "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+  "preservation_verified": [
+    "three original discoveries",
+    "first pantry unlock",
+    "completed optional bread goal",
+    "new world fingerprint persisted",
+    "further crafting and reload"
+  ],
+  "browser_failures_requiring_source_changes": []
+}
