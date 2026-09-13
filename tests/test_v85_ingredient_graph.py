@@ -21,6 +21,7 @@ from cat_de_roman_esti.wordgames import alchimie as A  # noqa: E402
 from cat_de_roman_esti.wordgames import contexto as C  # noqa: E402
 from cat_de_roman_esti.wordgames import contexto_projection as P  # noqa: E402
 from cat_de_roman_esti.wordgames import lant as L  # noqa: E402
+from cat_de_roman_esti.wordgames.lant_relations import caption as relation_caption  # noqa: E402
 from cat_de_roman_esti.wordgames.packs import get_pack  # noqa: E402
 from cat_de_roman_esti.wordgames.service import WordGameService, get_service  # noqa: E402
 from tests.content_history import (  # noqa: E402
@@ -385,7 +386,7 @@ def test_all_45_reviewed_directions_work_as_real_lant_moves():
 @pytest.mark.parametrize(("start", "target"), [
     ("n_v17gas_mucenici", "n_moldova_reg"), ("n_moldova_reg", "n_v17gas_mucenici"),
 ])
-def test_relabelled_mucenici_relation_keeps_both_moves_and_explains_baked_variant(start, target):
+def test_mucenici_keeps_raw_baked_variant_and_safe_display_in_both_moves(start, target):
     svc, client = get_service(), Client()
     gid = L.store.create(L.LantSession(
         start=start, target=target, optimal=1, difficulty="usor", chain=[start],
@@ -394,7 +395,8 @@ def test_relabelled_mucenici_relation_keeps_both_moves_and_explains_baked_varian
     try:
         body = _post(client, url + "/move", text=svc.label(target))
         assert body["ok"] and body["won"] and body["moves"] == 1
-        assert body["relation"] == "varianta coaptă, moldovenească"
+        assert svc.link(start, target).label_ro == "varianta coaptă, moldovenească"
+        assert body["relation"] == relation_caption(svc, start, target)
         assert "varianta fiartă" not in json.dumps(body, ensure_ascii=False)
         assert client.get(url).json()["path"] == body["path"]
     finally:

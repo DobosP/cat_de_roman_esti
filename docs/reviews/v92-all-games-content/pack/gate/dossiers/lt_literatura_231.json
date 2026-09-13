@@ -1,0 +1,179 @@
+{
+ "id": "lt_literatura_231",
+ "game": "lant",
+ "category": "literatura",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "515dc08f62fc16121f4ffe78d368f489d8a8642aa4d2b2090ea01fd6aebd1df4",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "display_rules_sha256": "7048444ef3ef01d2c524a7ef79874324cf3f89c195fb473008e5631b40b84781",
+ "start": {
+  "id": "n_v20lit_scrisoarea_iii",
+  "label": "Scrisoarea III",
+  "node_type": "work",
+  "category": "literatura",
+  "salience": 0.72,
+  "degree": 4,
+  "incoming_degree": 4,
+  "description": "Poem de Mihai Eminescu publicat în 1881 în Convorbiri literare, celebru pentru dialogul dintre Mircea cel Bătrân și sultanul Baiazid înaintea bătăliei de la Rovine. Partea a doua este o satiră a politicienilor vremii."
+ },
+ "target": {
+  "id": "n_v21lit_floare_albastra",
+  "label": "Floare albastră",
+  "node_type": "work",
+  "category": "literatura",
+  "salience": 0.7,
+  "degree": 4,
+  "incoming_degree": 4,
+  "description": "Poezie de Mihai Eminescu publicată în 1873 în „Convorbiri literare”, construită pe motivul romantic european al florii albastre."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 3,
+  "narrowest_shortest_path_layer": 3,
+  "total_intermediate_shortest_path_nodes": 3
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v20lit_scrisoarea_iii",
+     "label": "Scrisoarea III"
+    },
+    {
+     "id": "n_mihai_eminescu",
+     "label": "Mihai Eminescu"
+    },
+    {
+     "id": "n_v21lit_floare_albastra",
+     "label": "Floare albastră"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v20lit_scrisoarea_iii",
+      "label": "Scrisoarea III"
+     },
+     "to": {
+      "id": "n_mihai_eminescu",
+      "label": "Mihai Eminescu"
+     },
+     "relation": "created_by",
+     "label": "scrisă de Eminescu",
+     "display_label": "autor și poezie",
+     "strength": 0.95
+    },
+    {
+     "from": {
+      "id": "n_mihai_eminescu",
+      "label": "Mihai Eminescu"
+     },
+     "to": {
+      "id": "n_v21lit_floare_albastra",
+      "label": "Floare albastră"
+     },
+     "relation": "created_by",
+     "label": "scrisă de",
+     "display_label": "autor și poezie",
+     "strength": 0.95
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v20lit_scrisoarea_iii",
+     "label": "Scrisoarea III"
+    },
+    {
+     "id": "n_convorbiri_literare",
+     "label": "Convorbiri literare"
+    },
+    {
+     "id": "n_v21lit_floare_albastra",
+     "label": "Floare albastră"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v20lit_scrisoarea_iii",
+      "label": "Scrisoarea III"
+     },
+     "to": {
+      "id": "n_convorbiri_literare",
+      "label": "Convorbiri literare"
+     },
+     "relation": "associated_with",
+     "label": "publicată în Convorbiri literare",
+     "display_label": "poezie și revistă",
+     "strength": 0.7
+    },
+    {
+     "from": {
+      "id": "n_convorbiri_literare",
+      "label": "Convorbiri literare"
+     },
+     "to": {
+      "id": "n_v21lit_floare_albastra",
+      "label": "Floare albastră"
+     },
+     "relation": "associated_with",
+     "label": "publicată în",
+     "display_label": "poezie și revistă",
+     "strength": 0.65
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v20lit_scrisoarea_iii",
+     "label": "Scrisoarea III"
+    },
+    {
+     "id": "n_romantism",
+     "label": "Romantism"
+    },
+    {
+     "id": "n_v21lit_floare_albastra",
+     "label": "Floare albastră"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v20lit_scrisoarea_iii",
+      "label": "Scrisoarea III"
+     },
+     "to": {
+      "id": "n_romantism",
+      "label": "Romantism"
+     },
+     "relation": "part_of",
+     "label": "poem romantic",
+     "display_label": "poezie și curent literar",
+     "strength": 0.6
+    },
+    {
+     "from": {
+      "id": "n_romantism",
+      "label": "Romantism"
+     },
+     "to": {
+      "id": "n_v21lit_floare_albastra",
+      "label": "Floare albastră"
+     },
+     "relation": "associated_with",
+     "label": "poezie romantică",
+     "display_label": "poezie și curent literar",
+     "strength": 0.85
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:aac64032762abfc6cfde9747677ee46d661a2257993d6a5bb22c7c18cd766a09"
+}

@@ -1,0 +1,108 @@
+{
+ "id": "ct_viata_de_roman_363",
+ "game": "contexto",
+ "category": "viata_de_roman",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "0a9f70c6b58e580a0ac76e12d95719538667e63433a80149f4bfefed85323dd3",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v4via_cheie",
+  "label": "cheie",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.602,
+  "degree": 5,
+  "incoming_degree": 5,
+  "description": "Obiect metalic folosit pentru încuierea și descuierea unei uși."
+ },
+ "incoming_neighbor_floor": {
+  "minimum": 5,
+  "count": 5,
+  "sample": [
+   {
+    "id": "n_v2via_casa_parinteasca",
+    "label": "Casa părintească"
+   },
+   {
+    "id": "n_v4via_usa",
+    "label": "ușă"
+   },
+   {
+    "id": "n_vdr_cheia_de_la_gat",
+    "label": "Cheia de la gât"
+   },
+   {
+    "id": "n_vdr_interfon",
+    "label": "Interfonul"
+   },
+   {
+    "id": "n_vdr_scara_blocului",
+    "label": "Scara blocului"
+   }
+  ],
+  "sample_truncated": false,
+  "recognition_assessed": false
+ },
+ "reachable": 2353,
+ "strong_neighbors": [
+  {
+   "id": "n_v2via_casa_parinteasca",
+   "label": "Casa părintească",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.741,
+   "degree": 14,
+   "incoming_degree": 14,
+   "description": "Locuința familiei de origine, asociată cu vizite, amintiri și lucruri păstrate.",
+   "strength": 0.76
+  },
+  {
+   "id": "n_vdr_cheia_de_la_gat",
+   "label": "Cheia de la gât",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.7501,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Cheia purtată de copii la gât când mergeau singuri acasă de la școală.",
+   "strength": 0.75
+  },
+  {
+   "id": "n_vdr_scara_blocului",
+   "label": "Scara blocului",
+   "node_type": "place",
+   "category": "viata_de_roman",
+   "salience": 0.8591,
+   "degree": 12,
+   "incoming_degree": 12,
+   "description": "Spațiul comun unde se întâlnesc cutiile poștale, ecoul și anunțurile vecinilor.",
+   "strength": 0.72
+  },
+  {
+   "id": "n_vdr_interfon",
+   "label": "Interfonul",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.632,
+   "degree": 9,
+   "incoming_degree": 9,
+   "description": "Sistemul de acces la scară, cu apeluri, coduri și uși care tot se blochează.",
+   "strength": 0.66
+  },
+  {
+   "id": "n_v4via_usa",
+   "label": "ușă",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.6855,
+   "degree": 40,
+   "incoming_degree": 7,
+   "description": "Element mobil care închide sau deschide intrarea într-o cameră ori locuință.",
+   "strength": 0.65
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:ea45dea3fad27e9dc580a04b4defd96688bb589f36abad75769ccd74647161b5"
+}

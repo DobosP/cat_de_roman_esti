@@ -1,0 +1,133 @@
+{
+ "id": "lt_geografie_228",
+ "game": "lant",
+ "category": "geografie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "fa15ab5bb7c4d4421fef34a29dff28be87bf85393f3681ad5e37340cf4139e9c",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "display_rules_sha256": "7048444ef3ef01d2c524a7ef79874324cf3f89c195fb473008e5631b40b84781",
+ "start": {
+  "id": "n_carpati",
+  "label": "Carpați",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.7269,
+  "degree": 41,
+  "incoming_degree": 46,
+  "description": "Lanț muntos care străbate România în formă de arc."
+ },
+ "target": {
+  "id": "n_dunarea",
+  "label": "Dunărea",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.8949,
+  "degree": 32,
+  "incoming_degree": 37,
+  "description": "Cel mai mare fluviu al României, granița sudică."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_carpati",
+     "label": "Carpați"
+    },
+    {
+     "id": "n_v20geo_jiu",
+     "label": "Jiu"
+    },
+    {
+     "id": "n_dunarea",
+     "label": "Dunărea"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_carpati",
+      "label": "Carpați"
+     },
+     "to": {
+      "id": "n_v20geo_jiu",
+      "label": "Jiu"
+     },
+     "relation": "associated_with",
+     "label": "străbate prin defileu",
+     "display_label": "munți și râu",
+     "strength": 0.75
+    },
+    {
+     "from": {
+      "id": "n_v20geo_jiu",
+      "label": "Jiu"
+     },
+     "to": {
+      "id": "n_dunarea",
+      "label": "Dunărea"
+     },
+     "relation": "associated_with",
+     "label": "se varsă în",
+     "display_label": "afluent și fluviu",
+     "strength": 0.9
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_carpati",
+     "label": "Carpați"
+    },
+    {
+     "id": "n_olt",
+     "label": "Olt"
+    },
+    {
+     "id": "n_dunarea",
+     "label": "Dunărea"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_carpati",
+      "label": "Carpați"
+     },
+     "to": {
+      "id": "n_olt",
+      "label": "Olt"
+     },
+     "relation": "related_to",
+     "label": "este străpuns de",
+     "display_label": "munți și râu",
+     "strength": 0.45
+    },
+    {
+     "from": {
+      "id": "n_olt",
+      "label": "Olt"
+     },
+     "to": {
+      "id": "n_dunarea",
+      "label": "Dunărea"
+     },
+     "relation": "related_to",
+     "label": "afluent al",
+     "display_label": "afluent și fluviu",
+     "strength": 0.7
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:b2ee1c1fd9503a3d4f9cb54f5c2a50682a5fae1464fb5b7042f7d19bbb87e9a8"
+}

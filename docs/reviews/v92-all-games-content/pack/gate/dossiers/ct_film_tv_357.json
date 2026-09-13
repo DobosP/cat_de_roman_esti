@@ -1,0 +1,108 @@
+{
+ "id": "ct_film_tv_357",
+ "game": "contexto",
+ "category": "film_tv",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "f15331006c17efe158cbf0f139195944d37f6d461c430dacd9571092e96a5618",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v4fil_televizor",
+  "label": "televizor",
+  "node_type": "concept",
+  "category": "film_tv",
+  "salience": 0.8127,
+  "degree": 5,
+  "incoming_degree": 5,
+  "description": "Aparat pe care se urmăresc programe TV, filme și emisiuni."
+ },
+ "incoming_neighbor_floor": {
+  "minimum": 5,
+  "count": 5,
+  "sample": [
+   {
+    "id": "n_ftv_pro_tv",
+    "label": "Pro TV"
+   },
+   {
+    "id": "n_ftv_tvr",
+    "label": "TVR"
+   },
+   {
+    "id": "n_v2fil_emisiune_tv",
+    "label": "Emisiune TV"
+   },
+   {
+    "id": "n_v2fil_televiziune",
+    "label": "Televiziune"
+   },
+   {
+    "id": "n_vdr_teletext",
+    "label": "Teletextul"
+   }
+  ],
+  "sample_truncated": false,
+  "recognition_assessed": false
+ },
+ "reachable": 2353,
+ "strong_neighbors": [
+  {
+   "id": "n_v2fil_televiziune",
+   "label": "Televiziune",
+   "node_type": "concept",
+   "category": "film_tv",
+   "salience": 0.9631,
+   "degree": 19,
+   "incoming_degree": 19,
+   "description": "Mediu audiovizual prin care sunt difuzate posturi și programe TV.",
+   "strength": 0.9
+  },
+  {
+   "id": "n_v2fil_emisiune_tv",
+   "label": "Emisiune TV",
+   "node_type": "concept",
+   "category": "film_tv",
+   "salience": 0.9477,
+   "degree": 23,
+   "incoming_degree": 23,
+   "description": "Program difuzat la televizor, cu divertisment, interviuri, concursuri sau reality.",
+   "strength": 0.84
+  },
+  {
+   "id": "n_ftv_pro_tv",
+   "label": "Pro TV",
+   "node_type": "org",
+   "category": "film_tv",
+   "salience": 0.9055,
+   "degree": 26,
+   "incoming_degree": 26,
+   "description": "Post TV comercial românesc, important pentru seriale și divertisment pop.",
+   "strength": 0.78
+  },
+  {
+   "id": "n_ftv_tvr",
+   "label": "TVR",
+   "node_type": "org",
+   "category": "film_tv",
+   "salience": 0.876,
+   "degree": 20,
+   "incoming_degree": 20,
+   "description": "Televiziunea publică din România, reper istoric pentru emisiuni și filme TV.",
+   "strength": 0.78
+  },
+  {
+   "id": "n_vdr_teletext",
+   "label": "Teletextul",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.34,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Serviciu TV cu pagini de text pentru știri, program și rezultate, folosit înaintea internetului.",
+   "strength": 0.75
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:d61144d35ae14a3b0667770329096f1efe763aa38b5e0f2dd700aeb0df4349e5"
+}

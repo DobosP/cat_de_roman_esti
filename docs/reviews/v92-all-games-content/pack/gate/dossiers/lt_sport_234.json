@@ -1,0 +1,133 @@
+{
+ "id": "lt_sport_234",
+ "game": "lant",
+ "category": "sport",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "d17338d9b826e75ade0b34f6a39a938f1d34388b6937f0fdd90b4676565f8310",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "display_rules_sha256": "7048444ef3ef01d2c524a7ef79874324cf3f89c195fb473008e5631b40b84781",
+ "start": {
+  "id": "n_spt_david_popovici",
+  "label": "David Popovici",
+  "node_type": "person",
+  "category": "sport",
+  "salience": 0.9174,
+  "degree": 13,
+  "incoming_degree": 13,
+  "description": "Înotător român, campion mondial și olimpic la probele de liber."
+ },
+ "target": {
+  "id": "n_v19spo_jo_paris_2024",
+  "label": "Jocurile Olimpice Paris 2024",
+  "node_type": "event",
+  "category": "sport",
+  "salience": 0.75,
+  "degree": 6,
+  "incoming_degree": 6,
+  "description": "Jocurile Olimpice de vară din 2024, găzduite de Paris. România a cucerit aici aurul lui David Popovici la 200 m liber, aurul optului feminin la canotaj și bronzul Anei Bărbosu la sol."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_spt_david_popovici",
+     "label": "David Popovici"
+    },
+    {
+     "id": "n_v17spo_aur_paris_2024",
+     "label": "Aurul de la Paris 2024"
+    },
+    {
+     "id": "n_v19spo_jo_paris_2024",
+     "label": "Jocurile Olimpice Paris 2024"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_spt_david_popovici",
+      "label": "David Popovici"
+     },
+     "to": {
+      "id": "n_v17spo_aur_paris_2024",
+      "label": "Aurul de la Paris 2024"
+     },
+     "relation": "associated_with",
+     "label": "câștigat de",
+     "display_label": "sportiv și medalie de aur",
+     "strength": 0.93
+    },
+    {
+     "from": {
+      "id": "n_v17spo_aur_paris_2024",
+      "label": "Aurul de la Paris 2024"
+     },
+     "to": {
+      "id": "n_v19spo_jo_paris_2024",
+      "label": "Jocurile Olimpice Paris 2024"
+     },
+     "relation": "part_of",
+     "label": "cucerit la",
+     "display_label": "medalie și ediție olimpică",
+     "strength": 0.9
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_spt_david_popovici",
+     "label": "David Popovici"
+    },
+    {
+     "id": "n_spt_lotul_olimpic_romania",
+     "label": "Lotul olimpic al României"
+    },
+    {
+     "id": "n_v19spo_jo_paris_2024",
+     "label": "Jocurile Olimpice Paris 2024"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_spt_david_popovici",
+      "label": "David Popovici"
+     },
+     "to": {
+      "id": "n_spt_lotul_olimpic_romania",
+      "label": "Lotul olimpic al României"
+     },
+     "relation": "related_to",
+     "label": "l-a inclus",
+     "display_label": "sportiv și lot olimpic",
+     "strength": 0.74
+    },
+    {
+     "from": {
+      "id": "n_spt_lotul_olimpic_romania",
+      "label": "Lotul olimpic al României"
+     },
+     "to": {
+      "id": "n_v19spo_jo_paris_2024",
+      "label": "Jocurile Olimpice Paris 2024"
+     },
+     "relation": "associated_with",
+     "label": "delegația României la",
+     "display_label": "lot olimpic și competiție",
+     "strength": 0.8
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:ac884502518ee2e9b4eb463ccaf63520719db5ad2a9e653cf884311b08fa5fa9"
+}

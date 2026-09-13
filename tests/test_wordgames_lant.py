@@ -888,8 +888,11 @@ def test_visible_homonym_chip_binds_to_its_unvisited_authored_node(monkeypatch):
     # General homonym ranking would revisit the stronger/closer old node.
     assert lant._resolve_neighbor("DUPLICAT", "current", "target") == "visited"
     assert lant._visible_choice_nodes(session) == ["authored"]
+    assert svc.link("current", "authored").label_ro == "cale afișată"
+    assert svc.link("current", "visited").label_ro == "cale veche"
+    # Synthetic edge text is unreviewed; the visible identity still owns the chip.
     assert lant._visible_choices(session) == [
-        {"label": "DUPLICAT", "relation": "cale afișată"}
+        {"label": "DUPLICAT", "relation": "legătură directă"}
     ]
 
     moved = c.post(
@@ -899,7 +902,7 @@ def test_visible_homonym_chip_binds_to_its_unvisited_authored_node(monkeypatch):
     ).json()
     assert moved["ok"] is True
     assert moved["current"]["id"] == "authored"
-    assert moved["relation"] == "cale afișată"
+    assert moved["relation"] == "legătură directă"
 
 
 # --------------------------------------------------------------------- hardening: hint
@@ -1693,7 +1696,8 @@ def test_hint_prefers_a_longer_unvisited_safe_route_before_backtracking(monkeypa
 
     first = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
     assert first["stage"] == "direction"
-    assert first["relation"] == "ocol sigur"
+    assert svc.link("detour", "scenic").label_ro == "ocol sigur"
+    assert first["relation"] == "legătură directă"
     assert first["remaining"] == 3
     second = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
     assert second["stage"] == "alternatives"

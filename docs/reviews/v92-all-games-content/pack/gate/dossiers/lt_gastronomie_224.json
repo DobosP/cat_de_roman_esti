@@ -1,0 +1,133 @@
+{
+ "id": "lt_gastronomie_224",
+ "game": "lant",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "c6c170bbc4fcb7669bc6e947c67d01e4d57dcce834ac96cced4330e123ebe5c3",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "display_rules_sha256": "7048444ef3ef01d2c524a7ef79874324cf3f89c195fb473008e5631b40b84781",
+ "start": {
+  "id": "n_v24_food_pantry_zahar",
+  "label": "Zahăr",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.88,
+  "degree": 9,
+  "incoming_degree": 1,
+  "description": "Concept cotidian din grupul «ingrediente de bază»: Zahăr."
+ },
+ "target": {
+  "id": "n_v87_food_cremsnit",
+  "label": "Cremșnit",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.75,
+  "degree": 1,
+  "incoming_degree": 5,
+  "description": "Prăjitură din foi de aluat și cremă de vanilie, cunoscută și ca cremeș."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v24_food_pantry_zahar",
+     "label": "Zahăr"
+    },
+    {
+     "id": "n_v86_food_crema_vanilie",
+     "label": "Cremă de vanilie"
+    },
+    {
+     "id": "n_v87_food_cremsnit",
+     "label": "Cremșnit"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v24_food_pantry_zahar",
+      "label": "Zahăr"
+     },
+     "to": {
+      "id": "n_v86_food_crema_vanilie",
+      "label": "Cremă de vanilie"
+     },
+     "relation": "ingredient_variant",
+     "label": "îndulcește unele rețete de",
+     "display_label": "cremă și îndulcitor",
+     "strength": 0.8
+    },
+    {
+     "from": {
+      "id": "n_v86_food_crema_vanilie",
+      "label": "Cremă de vanilie"
+     },
+     "to": {
+      "id": "n_v87_food_cremsnit",
+      "label": "Cremșnit"
+     },
+     "relation": "part_of",
+     "label": "umplutură pentru",
+     "display_label": "prăjitură și umplutură",
+     "strength": 0.8
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v24_food_pantry_zahar",
+     "label": "Zahăr"
+    },
+    {
+     "id": "n_v86_food_zahar_pudra",
+     "label": "Zahăr pudră"
+    },
+    {
+     "id": "n_v87_food_cremsnit",
+     "label": "Cremșnit"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v24_food_pantry_zahar",
+      "label": "Zahăr"
+     },
+     "to": {
+      "id": "n_v86_food_zahar_pudra",
+      "label": "Zahăr pudră"
+     },
+     "relation": "processed_into",
+     "label": "se macină fin pentru",
+     "display_label": "zahăr și formă măcinată",
+     "strength": 0.8
+    },
+    {
+     "from": {
+      "id": "n_v86_food_zahar_pudra",
+      "label": "Zahăr pudră"
+     },
+     "to": {
+      "id": "n_v87_food_cremsnit",
+      "label": "Cremșnit"
+     },
+     "relation": "ingredient_variant",
+     "label": "pudrează unele variante de",
+     "display_label": "prăjitură și pudră dulce",
+     "strength": 0.8
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:e77d0678a9fbd49349d7d511a305c62ea90cce7ca20d83c47cf08e0d3b205535"
+}

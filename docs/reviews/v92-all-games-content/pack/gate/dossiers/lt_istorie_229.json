@@ -1,0 +1,133 @@
+{
+ "id": "lt_istorie_229",
+ "game": "lant",
+ "category": "istorie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "7847f1f4c75a7b2a64c688dc2101674d315d3e1c8d4f5b985c8e0974dedebd17",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "display_rules_sha256": "7048444ef3ef01d2c524a7ef79874324cf3f89c195fb473008e5631b40b84781",
+ "start": {
+  "id": "n_transilvania",
+  "label": "Transilvania",
+  "node_type": "place",
+  "category": "istorie",
+  "salience": 0.9779,
+  "degree": 62,
+  "incoming_degree": 65,
+  "description": "Regiune istorica romaneasca."
+ },
+ "target": {
+  "id": "n_v11ist_revolutia_1848",
+  "label": "Revoluția 1848",
+  "node_type": "event",
+  "category": "istorie",
+  "salience": 0.66,
+  "degree": 9,
+  "incoming_degree": 8,
+  "description": "Val de revoluții pașoptiste în Țările Române și Transilvania."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_transilvania",
+     "label": "Transilvania"
+    },
+    {
+     "id": "n_istx_adunarea_blaj",
+     "label": "Adunarea de la Blaj"
+    },
+    {
+     "id": "n_v11ist_revolutia_1848",
+     "label": "Revoluția 1848"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_transilvania",
+      "label": "Transilvania"
+     },
+     "to": {
+      "id": "n_istx_adunarea_blaj",
+      "label": "Adunarea de la Blaj"
+     },
+     "relation": "located_in",
+     "label": "are loc în",
+     "display_label": "adunare istorică și regiune",
+     "strength": 0.86
+    },
+    {
+     "from": {
+      "id": "n_istx_adunarea_blaj",
+      "label": "Adunarea de la Blaj"
+     },
+     "to": {
+      "id": "n_v11ist_revolutia_1848",
+      "label": "Revoluția 1848"
+     },
+     "relation": "associated_with",
+     "label": "moment central în",
+     "display_label": "adunare și revoluție",
+     "strength": 0.7
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_transilvania",
+     "label": "Transilvania"
+    },
+    {
+     "id": "n_avram_iancu",
+     "label": "Avram Iancu"
+    },
+    {
+     "id": "n_v11ist_revolutia_1848",
+     "label": "Revoluția 1848"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_transilvania",
+      "label": "Transilvania"
+     },
+     "to": {
+      "id": "n_avram_iancu",
+      "label": "Avram Iancu"
+     },
+     "relation": "located_in",
+     "label": "a condus revolutia in",
+     "display_label": "regiune și revoluționar",
+     "strength": 0.78
+    },
+    {
+     "from": {
+      "id": "n_avram_iancu",
+      "label": "Avram Iancu"
+     },
+     "to": {
+      "id": "n_v11ist_revolutia_1848",
+      "label": "Revoluția 1848"
+     },
+     "relation": "associated_with",
+     "label": "revoluționar în",
+     "display_label": "revoluționar și revoluție",
+     "strength": 0.6
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:499e1af8a0d0156d8dead70bcd5fd78d4282a53e223c853808cc58e8dba65374"
+}

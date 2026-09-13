@@ -18,6 +18,7 @@ from cat_de_roman_esti.wordgames import alchimie as A
 from cat_de_roman_esti.wordgames import contexto as C
 from cat_de_roman_esti.wordgames import contexto_projection as P
 from cat_de_roman_esti.wordgames import lant as L
+from cat_de_roman_esti.wordgames.lant_relations import caption as relation_caption
 from cat_de_roman_esti.wordgames.packs import get_pack
 from cat_de_roman_esti.wordgames.service import WordGameService, get_service
 from tests.content_scenarios import contexto_seed
@@ -229,6 +230,7 @@ def test_all_41_v86_links_keep_their_exact_historical_direction_contract(monkeyp
     for edge in edges:
         start, target = edge["src"], edge["dst"]
         assert svc.link(start, target) is not None and svc.link(target, start) is None
+        assert svc.link(start, target).label_ro == edge["label_ro"]
         for source, destination, valid in ((start, target, True), (target, start, False)):
             gid = L.store.create(L.LantSession(
                 start=source, target=destination, optimal=1, difficulty="usor", chain=[source],
@@ -243,7 +245,7 @@ def test_all_41_v86_links_keep_their_exact_historical_direction_contract(monkeyp
                     [source, destination] if valid else [source]
                 )
                 if valid:
-                    assert body["relation"] == edge["label_ro"]
+                    assert body["relation"] == relation_caption(svc, source, destination)
                 else:
                     assert body["last_error"] == "Nu exista o legatura directa"
             finally:

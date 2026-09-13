@@ -1,66 +1,66 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-13 — larger V92 vocabulary; all local integration gates green.
+Last verified: 2026-09-14 — V92 all-game content expansion; all local integration gates green.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-- The owner again requested more Alchimie concepts. V92 continues on
-  `feat/v92-alchimie-gui` from `8f97bd9`; no V93, recurrence, publication or deployment.
-- **Bucătăria românească** now has **221 concepts (+110)**, **285 recipes (+169)** and
-  **32 optional goals (+13)**. Craftable discoveries grow **58→117**; later pantry
-  supplies grow **45→96**. Eight starters remain. All twelve supply tiers are reachable.
-- The book contains **174 KG identities and 47 reviewed world-local definitions**.
-  The shared KG remains unchanged. New foundations include mayonnaise, choux pastry,
-  laminated pastry, caramel, sauces, vegetable purées, chickpeas and aubergines.
-- Original 111 concept records, 116 recipes, six supply tiers, starters and 19 goals
-  remain exact. Recipe outcomes remain consistent across optional goals and input order.
-  Both previous saved-collection formats (75/111 concepts) upgrade without losing progress.
-- Reusable crafted concepts grow **23→47**; results with alternative recipes **40→77**.
-  Seventy crafted dishes remain terminal. Productive initial pairs grow **7→9 of 28**.
-  Direct crafting, free hints, searchable collection and recipe journal remain available.
-- Definitions may now be authored inside the exploration catalog under `alw_food_` IDs,
-  with original text, primary references and exact provenance snapshots. Runtime rejects
-  KG identity/alias shadowing, indistinguishable labels, missing sources and altered metadata.
-- Both independent semantic reviews cover all 285 recipes AND all 221 concept digests.
-  Exact prior records inherit explicit reviewed judgments; every new definition is checked.
-  Two final reviews bind exact catalog bytes and the live replay audit before package write.
-- Bounded capacity is now **256 concepts / 256 saved crafts / 96 later supplies / 12 tiers**.
-  Per-tier supplies stay <=12; limits remain 512 recipes, 32 goals, eight historical books
-  and a 2 MiB catalog. Browser saves enforce their existing 64 KiB limit as UTF-8 bytes.
-- The generator carries the previous book's reviewed compatibility history forward.
-  Unknown versions and new recipes claimed under old authority still fail. Live sessions
-  upgrade atomically; browser unions retain the newer compatible book.
-- Scored **Provocări**, earlier challenge content, daily routing and the other five games
-  remain unchanged. Decision/evidence: [ADR-0147](adr/0147-grow-alchimie-with-reviewed-vocabulary.md).
+- The owner requested comparable content growth across all games, with quality preserved.
+  V92 continues on `feat/v92-alchimie-gui` from `75584bf`; no V93 or automatic recurrence.
+- **70 new rounds/targets**: Conexiuni +4, Cald sau Rece +8, Lanț +13, Intrusul +25,
+  Perechi +20. The accepted additions use familiar words, practical associations and
+  Romanian culture. Twelve weaker pack proposals were excluded after independent review.
+- Conexiuni adds precise functional groups and wordplay; Contexto adds Televizor, Florin
+  Piersic, Amza Pellea, Sare, Usturoi, Minge, Cheie and Ghiozdan. Lanț adds routes with
+  alternative bridges through geography, literature, history, sport, film and food.
+- Intrusul and Perechi gain a separate authored supplement, with exact predicates, sources,
+  independent factual/quality reviews and final reviews of live API replay. Original
+  336 board records remain exact. Starter shelves grow 24→43 and 26→42 respectively.
+- New quick-game content exposes 92 previously unseen concepts in Intrusul and 130 in
+  Perechi; 73 of 80 intended pairs are new to Perechi. No new shared KG concept is claimed.
+  Existing graph gates, score formulas, source balancing, hints and repeat rules remain.
+- Lanț captions now describe connections consistently in either supported direction.
+  Sixty-eight exact edge snapshots have specific reviewed captions; unmapped edges use
+  neutral relation-type wording. Choices, hints, moves and saved paths use the same text.
+  This prevents reversed verbs from asserting false relationships; graph topology is exact.
+- Alchimie's **Bucătăria românească** retains **221 concepts, 285 recipes, 32 optional
+  goals and 117 craftable discoveries**, with eight starters and 96 later supplies.
+  All twelve tiers remain reachable; 47 crafted concepts are reusable, 77 results have
+  alternative recipes. The 75/111-concept collection migrations remain supported.
+- V92's direct crafting, free exploration hints, searchable collection, recipe journal
+  and simplified interfaces for the other five games remain. Scored Alchimie challenges
+  and its exploration/recipe artifacts are unchanged by this wave.
+- Decision/evidence: [ADR-0148](adr/0148-expand-all-game-content-with-independent-review.md),
+  [all-game review](reviews/v92-all-games-content/README.md). Kitchen history: ADR-0147.
 
 ## Inventory and invariants
 
 | Game | Total | Approved | Pending | Runtime eligible/preferred |
 |---|---:|---:|---:|---|
-| Conexiuni | 234 | 234 | 0 | 76 eligible |
-| Cald sau Rece | 244 | 242 | 2 | 238 eligible |
-| Lanțul Cuvintelor | 100 | 97 | 3 | 97 eligible |
+| Conexiuni | 238 | 238 | 0 | 80 eligible |
+| Cald sau Rece | 252 | 250 | 2 | 246 eligible |
+| Lanțul Cuvintelor | 113 | 110 | 3 | 110 eligible |
 | Alchimie | 83 | 80 | 3 | 80 eligible |
-| Intrusul | 183 | 183 | 0 | 144 preferred |
-| Perechi | 153 | 153 | 0 | 113 preferred |
+| Intrusul | 208 | 208 | 0 | 169 preferred |
+| Perechi | 173 | 173 | 0 | 133 preferred |
 
-Pack **661 = 653 approved + 8 pending**, with **491 eligible** original four-game records.
+Pack **686 = 678 approved + 8 pending**, with **516 eligible** four-game records.
+All 661 previous pack records and all 336 original quick-game board records remain exact.
 KG remains `fixture-v90-household-discovery`: **2416 nodes/9459 links/8641 forms/180 puzzles**.
-Graph/pack concepts, links, forms, puzzles, rounds, approvals, eligibility and the 336
-frozen derived boards remain exact. The earlier challenge catalog adds 50 rules; exploration
-has a separate 285-recipe world, including 47 authored definitions outside the shared graph.
+The authored supplement adds 45 boards; Alchimie retains 47 world-local definitions.
 Sessions retain 7200-second sliding TTL, 1000 entries/game, locks, 64 KiB requests and bounded
-histories/caches. Exploration has its own capped store and <=256 concepts/512 recipes/256-craft
-checkpoints. Private recipes, routes and unearned target IDs remain server-controlled.
+histories/caches. Exploration retains <=256 concepts/512 recipes/256 saved crafts. Quick
+supplements are capped at 256 boards/2 MiB and fail closed on bound-source or artifact drift.
+Private recipes, routes, hidden answers and source/catalog IDs remain server-controlled.
 
 ## Current artifact pins
 
 - Discovery world: `baafc2fc656dfe501dbe5be03ce2bd536e086b71f1711d0cf8c77ed56a03e1df`
 - Recipe extensions: `ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301`
-- `games_pack.json`: `6bf27de5da270258290ecb4ed41c3ef60a609e3e153855f38b7556a7f2aedeca`
-- `board_rankings_v37.json`: `01fc906e390b8d3135f1856930458aa86873a525049b419eceb8652c72f717f8`
-- `derived_catalog_v38.json`: `53fb3e4555205179072bd54a45f5b1b185de064625893dcf288902574a075e64`
+- Quick supplement: `36f5fc575ed5ae36735d792dd71df5860d917dba1b3b58090f792afd4f3b0d39`
+- `games_pack.json`: `62c1eaaa7bb72674cf59a66f9b543d911749d52973155f6b201d796d97d6ea4a`
+- `board_rankings_v37.json`: `6f2662615b686a492b41f2d689a7ba6b380b62d7b8cecc5e7a3c9788d1dce641`
+- `derived_catalog_v38.json`: `09e6b1caa3ed586264a85d3d9807f0173384c02c80102dae072d14665432f2aa`
 - `kg_sample.json`: `d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109`
 - `cat_mobile_app_pack_contract.json`: `5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f`
 - Rubric: `3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101`
@@ -70,18 +70,18 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
 
 ## Verification
 
-- Final Python 3.12 backend **1837 pass**, accounts **53 pass**, focused API/catalog/mobile
-  **143 pass**. Ruff, whitespace and fixture/pack validators are GREEN. Python 3.14 was not rerun.
-- Frontend native **212 pass**, browser **446 pass**, lint/typecheck/build GREEN at
-  **119.23/120 KiB** initial gzip. Exploration focus **24 pass**; four workers, zero retries.
-- Tests restore a synthetic 256-concept collection with more than 128 earned crafts and
-  reject excessive saves, forged provenance and ambiguous labels. Both real historical
-  collections migrate in browser tests; the local preview retained its existing discovery.
-- Serving audit exhausts all 285 recipes for free play and 32 goals, then all 39/58 historical
-  prefixes. Independent factual replay passed 50 complete worlds, 50 current restores,
-  100 historical migrations and 100 live-session upgrades. No human playtest is claimed.
-- Evidence: [large vocabulary review](reviews/v92-alchimie-large-concepts/README.md),
-  exact candidate, provenance, semantic/final judgments, live audit and verification receipt.
+- Python 3.12 backend **1934 pass**, accounts **53 pass**, browser **446 pass**, frontend
+  native **212 pass**. Ruff, lint/typecheck, whitespace, docs and fixture/pack validators
+  GREEN. Frontend product sources/static assets are unchanged; Python 3.14 was not rerun.
+- Focused quick-game/API tests **120 pass**; new runtime integrity checks **23 pass**;
+  historical reconstruction and caption checks **124 pass**, further Lanț checks **213 pass**.
+- Independent quick reviews replay all 45 natural-seed rounds, hidden answers, correct
+  wins and terminal GETs; additional replays verify free repeats and earned hints.
+  Lanț review solves all 34 representative paths/68 moves of the 13 new rounds.
+- Historical assertions retain original hashes by reconstructing exact predecessor bytes.
+  Automated correctness and editorial review do not establish human enjoyment or device acceptance.
+- Exact checks and source pins: [verification](reviews/v92-all-games-content/verification.json).
+  Local preview is on port **8144**; all six lobby entries and health are available.
 
 ## Production and remaining work
 
@@ -89,14 +89,14 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
   2026-09-09. V92 has not been pushed or deployed; current work is isolated on its task branch.
 - Last documented production smoke: health 200, accounts off, 2416 concepts, 14/14
   categories available and real Intrusul/Perechi seed-38 boards. HSTS follow-up remains open.
-- Next: owner playtesting of the finite kitchen world, then local integration. Further themes
-  and more reuse for terminal dishes are content follow-ups. Cross-device synchronization,
-  human playtesting and physical-device acceptance are not part of this delivery.
-- Existing content follow-ups remain: three proposed Neagu past-tense labels, four thin
-  Contexto neighborhoods, 17 unknown household surfaces and earlier hidden-target/A5 holds.
-  Keep accounts out until the DEPLOY checklist passes.
+- Next: owner playtesting of the expanded arcade, then local integration. More specific
+  Lanț captions, deeper Contexto neighborhoods and more reuse for terminal kitchen dishes
+  remain content follow-ups. Cross-device synchronization remains outside this delivery.
+- Existing KG debt includes the excluded museum description and Dem/Monstrul association,
+  three proposed Neagu labels, four thin Contexto neighborhoods and 17 unknown household
+  surfaces. Earlier hidden-target/A5 holds remain. Keep accounts out until DEPLOY gates pass.
 
 ## Doc map
 
 - `README.md`/`AGENTS.md`: orientation; `docs/agent-map.md`/`docs/agent-testing.md`: routes/gates.
-- `docs/adr/` (newest 0147), `docs/reviews/`, WORKLOG: decisions, evidence and history.
+- `docs/adr/` (newest 0148), `docs/reviews/`, WORKLOG: decisions, evidence and history.

@@ -1,0 +1,112 @@
+{
+ "id": "ct_sport_362",
+ "game": "contexto",
+ "category": "sport",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "9977bc04ebfd45426fb4ac846cfa0edb7a2dee45607997f997ed7dee17f12fad",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v3spo_minge",
+  "label": "Minge",
+  "node_type": "concept",
+  "category": "sport",
+  "salience": 0.8668,
+  "degree": 6,
+  "incoming_degree": 6,
+  "description": "Obiect rotund folosit în multe sporturi de echipă sau individuale."
+ },
+ "incoming_neighbor_floor": {
+  "minimum": 5,
+  "count": 6,
+  "sample": [
+   {
+    "id": "n_fotbal",
+    "label": "Fotbal"
+   },
+   {
+    "id": "n_tenis",
+    "label": "Tenis"
+   },
+   {
+    "id": "n_v11spo_oina",
+    "label": "Oină"
+   },
+   {
+    "id": "n_v2spo_baschet",
+    "label": "Baschet"
+   },
+   {
+    "id": "n_v3spo_handbal",
+    "label": "Handbal"
+   },
+   {
+    "id": "n_v3spo_volei",
+    "label": "Volei"
+   }
+  ],
+  "sample_truncated": false,
+  "recognition_assessed": false
+ },
+ "reachable": 2353,
+ "strong_neighbors": [
+  {
+   "id": "n_fotbal",
+   "label": "Fotbal",
+   "node_type": "concept",
+   "category": "personalitati",
+   "salience": 0.5121,
+   "degree": 25,
+   "incoming_degree": 25,
+   "description": "Sport de echipa cu mingea.",
+   "strength": 0.78
+  },
+  {
+   "id": "n_v2spo_baschet",
+   "label": "Baschet",
+   "node_type": "concept",
+   "category": "sport",
+   "salience": 0.9357,
+   "degree": 13,
+   "incoming_degree": 13,
+   "description": "Sport de echipă în care mingea trebuie aruncată prin coș.",
+   "strength": 0.78
+  },
+  {
+   "id": "n_v3spo_handbal",
+   "label": "Handbal",
+   "node_type": "concept",
+   "category": "sport",
+   "salience": 0.8007,
+   "degree": 9,
+   "incoming_degree": 9,
+   "description": "Sport de echipă în care mingea este pasată cu mâna și aruncată la poartă.",
+   "strength": 0.77
+  },
+  {
+   "id": "n_v3spo_volei",
+   "label": "Volei",
+   "node_type": "concept",
+   "category": "sport",
+   "salience": 0.7494,
+   "degree": 9,
+   "incoming_degree": 9,
+   "description": "Sport de echipă cu fileu, în care mingea este trimisă peste plasă.",
+   "strength": 0.77
+  },
+  {
+   "id": "n_tenis",
+   "label": "Tenis",
+   "node_type": "concept",
+   "category": "personalitati",
+   "salience": 0.4491,
+   "degree": 23,
+   "incoming_degree": 23,
+   "description": "Sport cu racheta jucat individual sau in dublu.",
+   "strength": 0.72
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:d764b00b81ddc2eed4e8a3284745cd36c0333aeb99aea9d5898189eaba90235f"
+}

@@ -1,0 +1,179 @@
+{
+ "id": "lt_stiinta_235",
+ "game": "lant",
+ "category": "stiinta",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "40b6010bfffd87def56a0d2c2550eb3f869486a37fd4a94a010f38a2c836db6c",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "display_rules_sha256": "7048444ef3ef01d2c524a7ef79874324cf3f89c195fb473008e5631b40b84781",
+ "start": {
+  "id": "n_v2sti_avion",
+  "label": "Avion",
+  "node_type": "concept",
+  "category": "stiinta",
+  "salience": 0.8837,
+  "degree": 18,
+  "incoming_degree": 21,
+  "description": "Aparat de zbor mai greu decât aerul, cu aripi și propulsie proprie."
+ },
+ "target": {
+  "id": "n_bucuresti",
+  "label": "București",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.6721,
+  "degree": 103,
+  "incoming_degree": 108,
+  "description": "Capitala României, în Muntenia."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 3,
+  "narrowest_shortest_path_layer": 3,
+  "total_intermediate_shortest_path_nodes": 3
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v2sti_avion",
+     "label": "Avion"
+    },
+    {
+     "id": "n_muzeul_aviatiei_romane",
+     "label": "Muzeul Național al Aviației Române"
+    },
+    {
+     "id": "n_bucuresti",
+     "label": "București"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v2sti_avion",
+      "label": "Avion"
+     },
+     "to": {
+      "id": "n_muzeul_aviatiei_romane",
+      "label": "Muzeul Național al Aviației Române"
+     },
+     "relation": "related_to",
+     "label": "expus în muzeu",
+     "display_label": "avion și muzeu de aviație",
+     "strength": 0.64
+    },
+    {
+     "from": {
+      "id": "n_muzeul_aviatiei_romane",
+      "label": "Muzeul Național al Aviației Române"
+     },
+     "to": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "relation": "located_in",
+     "label": "se afla in",
+     "display_label": "muzeu și oraș",
+     "strength": 0.85
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v2sti_avion",
+     "label": "Avion"
+    },
+    {
+     "id": "n_aeroportul_baneasa",
+     "label": "Aeroportul Băneasa Aurel Vlaicu"
+    },
+    {
+     "id": "n_bucuresti",
+     "label": "București"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v2sti_avion",
+      "label": "Avion"
+     },
+     "to": {
+      "id": "n_aeroportul_baneasa",
+      "label": "Aeroportul Băneasa Aurel Vlaicu"
+     },
+     "relation": "related_to",
+     "label": "aterizează la aeroport",
+     "display_label": "avion și aeroport",
+     "strength": 0.6
+    },
+    {
+     "from": {
+      "id": "n_aeroportul_baneasa",
+      "label": "Aeroportul Băneasa Aurel Vlaicu"
+     },
+     "to": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "relation": "located_in",
+     "label": "se afla in",
+     "display_label": "aeroport și oraș",
+     "strength": 0.9
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v2sti_avion",
+     "label": "Avion"
+    },
+    {
+     "id": "n_v17geo_aeroportul_otopeni",
+     "label": "Aeroportul Henri Coandă"
+    },
+    {
+     "id": "n_bucuresti",
+     "label": "București"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v2sti_avion",
+      "label": "Avion"
+     },
+     "to": {
+      "id": "n_v17geo_aeroportul_otopeni",
+      "label": "Aeroportul Henri Coandă"
+     },
+     "relation": "associated_with",
+     "label": "poarta aeriană a țării",
+     "display_label": "avion și aeroport",
+     "strength": 0.6
+    },
+    {
+     "from": {
+      "id": "n_v17geo_aeroportul_otopeni",
+      "label": "Aeroportul Henri Coandă"
+     },
+     "to": {
+      "id": "n_bucuresti",
+      "label": "București"
+     },
+     "relation": "associated_with",
+     "label": "deservește Capitala",
+     "display_label": "Capitală și aeroport",
+     "strength": 0.85
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:c4ddf1d08714d996381f6e80c0db19bc34ba07fabe9bd7df26d6e1807c4188e5"
+}

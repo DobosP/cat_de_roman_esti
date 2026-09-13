@@ -1,0 +1,61 @@
+"""Apply only two authorized label corrections into a separate raw batch.
+
+Original candidates and completed raw reviews remain immutable. No package fixture
+is written. The corrected category requires fresh factual and quality judgments.
+"""
+from pathlib import Path
+import copy
+import hashlib
+import json
+
+ROOT = Path(__file__).parent
+SOURCE = ROOT / 'candidates'
+DESTINATION = ROOT / 'final-candidates'
+CHANGES = (
+    (1, 'Se mănâncă de obicei cu lingura', 'Se pot servi cu lingura'),
+    (3, 'Căi pentru mersul pe jos', 'Căi folosite și pentru mersul pe jos'),
+)
+
+
+def sha(blob):
+    return hashlib.sha256(blob).hexdigest()
+
+
+receipts = []
+for source in sorted(SOURCE.glob('*/candidates.json')):
+    before = source.read_bytes()
+    destination = DESTINATION / source.parent.name / source.name
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    if source.parent.name == 'viata_de_roman':
+        original = json.loads(before)
+        revised = copy.deepcopy(original)
+        for index, old_label, new_label in CHANGES:
+            group = revised['conexiuni'][2]['groups'][index]
+            assert group['label'] == old_label
+            group['label'] = new_label
+        after = (json.dumps(revised, ensure_ascii=False, indent=2) + '\n').encode()
+        restored = copy.deepcopy(revised)
+        for index, old_label, _ in CHANGES:
+            restored['conexiuni'][2]['groups'][index]['label'] = old_label
+        assert restored == original
+        assert (json.dumps(restored, ensure_ascii=False, indent=2) + '\n').encode() == before
+    else:
+        after = before
+        old_factual = source.with_name('verify_factual.json')
+        if old_factual.exists():
+            destination.with_name('verify_factual.json').write_bytes(old_factual.read_bytes())
+    destination.write_bytes(after)
+    assert source.read_bytes() == before
+    receipts.append({'category': source.parent.name, 'before_sha256': sha(before),
+                     'after_sha256': sha(after), 'changed': before != after})
+
+assert sum(row['changed'] for row in receipts) == 1
+receipt = {'kind': 'v92-bounded-candidate-label-correction-v1', 'changes': [
+    {'path': f'viata_de_roman/conexiuni[2]/groups[{index}]/label',
+     'before': old_label, 'after': new_label}
+    for index, old_label, new_label in CHANGES], 'categories': receipts,
+    'scope': 'Exactly two labels changed; all raw records/IDs/tiles/difficulties retained. '
+             'Original candidates and original review files were not changed.'}
+(ROOT / 'label-correction-receipt.json').write_text(
+    json.dumps(receipt, ensure_ascii=False, indent=2) + '\n')
+print(json.dumps(receipt, ensure_ascii=False, indent=2))

@@ -32,6 +32,7 @@ from ..web.http import (
 from ._progress import excluded_pack_ids, record_finished
 from ._session_endpoint import atomic_session
 from .categories import category_label, is_known
+from .lant_relations import caption as relation_caption
 from .packs import (
     CURATED_DAILY_MIN_POOL,
     LANT_MIN_FIRST_HOP_CHOICES,
@@ -224,8 +225,8 @@ def _concept(node_id: str) -> dict[str, str]:
 
 
 def _short_relation(a: str, b: str) -> str:
-    """Return a concise local-choice label without changing edge semantics."""
-    label = " ".join(get_service().link_label(a, b).split()) or "legătură directă"
+    """Describe the association without reversing an unreviewed directional verb."""
+    label = relation_caption(get_service(), a, b) or "legătură directă"
     if len(label) <= 34:
         return label
     head = label[:33].rsplit(" ", 1)[0]
@@ -450,7 +451,7 @@ def _path(session: LantSession) -> list[dict[str, str]]:
     for i, nid in enumerate(session.chain):
         step: dict[str, str] = {"id": nid, "label": svc.label(nid)}
         if i > 0:
-            step["relation"] = svc.link_label(session.chain[i - 1], nid)
+            step["relation"] = relation_caption(svc, session.chain[i - 1], nid)
         out.append(step)
     return out
 
@@ -902,7 +903,7 @@ class MoveView(ContractAPIView):
         result = {
             "ok": True,
             "current": _concept(guess),
-            "relation": svc.link_label(prev, guess),
+            "relation": relation_caption(svc, prev, guess),
             "path": _path(session),
             "moves": session.moves,
             "won": session.won,

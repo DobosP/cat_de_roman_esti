@@ -1,6 +1,6 @@
-"""Intrusul — a bounded 3+1 game over the private V38 derived catalog.
+"""Intrusul — a bounded 3+1 game over private reviewed board catalogs.
 
-Four familiar concepts are visible.  Three belong to one reviewed Conexiuni group;
+Four familiar concepts are visible. Three satisfy one reviewed group predicate;
 the player taps the intruder.  The answer, trio membership, source provenance, and all
 ranking inputs remain server-side until the game ends.  A wrong tap is useful evidence,
 not a trap: it stays free on repeat, and one short authored-group hint unlocks after the

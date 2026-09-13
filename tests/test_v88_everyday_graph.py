@@ -18,6 +18,7 @@ from cat_de_roman_esti.wordgames import conexiuni as X
 from cat_de_roman_esti.wordgames import contexto as C
 from cat_de_roman_esti.wordgames import contexto_projection as P
 from cat_de_roman_esti.wordgames import lant as L
+from cat_de_roman_esti.wordgames.lant_relations import caption as relation_caption
 from cat_de_roman_esti.wordgames.packs import get_pack
 from cat_de_roman_esti.wordgames.service import WordGameService, get_service
 from tests import content_history as history
@@ -232,6 +233,7 @@ def test_each_new_direction_is_playable_and_reverse_moves_need_their_own_reviewe
     forward_pairs = {(edge["src"], edge["dst"]) for edge in edges}
     svc, client = get_service(), Client()
     start, target = row["src"], row["dst"]
+    assert svc.link(start, target).label_ro == row["label_ro"]
     for source, destination, valid in (
         (start, target, True), (target, start, (target, start) in forward_pairs),
     ):
@@ -248,7 +250,7 @@ def test_each_new_direction_is_playable_and_reverse_moves_need_their_own_reviewe
                 [source, destination] if valid else [source]
             )
             if valid:
-                assert body["relation"] == svc.link(source, destination).label_ro
+                assert body["relation"] == relation_caption(svc, source, destination)
             else:
                 assert body["last_error"] == "Nu exista o legatura directa"
         finally:

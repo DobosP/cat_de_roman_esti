@@ -1,0 +1,703 @@
+{
+  "reviewer": "games_factual",
+  "role": "factual",
+  "date": "2026-09-14",
+  "candidate_sha256": "521566874aa3e2dc0fda176fa5bca3ec8ccf90126bc91f821ddcee9ee4ccffa2",
+  "module_sha256": "7048444ef3ef01d2c524a7ef79874324cf3f89c195fb473008e5631b40b84781",
+  "verdict": "accept_caption_semantics_and_edge_binding",
+  "scope": "Exact68 curated noun captions accepted. Override snapshot binds full Edge fields; node identity is additionally protected by the full KG and final dossier binding, not an independent per-node check in this helper. Final API integration and allocated dossiers remain separate gates.",
+  "checks": {
+    "rows": 68,
+    "unique_pair_keys": 68,
+    "reverse": {
+      "exact": 60,
+      "missing": 6,
+      "fallback": 2
+    },
+    "changed_edge_fallback_checks": 340,
+    "max_caption_chars": 30
+  },
+  "development_note": "Initial mutation check accidentally replaced an existing se varsă în label with the identical value; corrected probe now asserts actual edge inequality before expecting fallback. No module or game change was needed.",
+  "items": [
+    {
+      "id": "caption-253474a2c7f3c20a",
+      "pair": [
+        "n_v11fil_romanii_au_talent",
+        "n_v20fil_pavel_bartos"
+      ],
+      "caption": "emisiune și prezentator",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-01e5cbff9f1ecb70",
+      "pair": [
+        "n_v20fil_pavel_bartos",
+        "n_v11fil_vocea_romaniei"
+      ],
+      "caption": "emisiune și prezentator",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-771e418895771699",
+      "pair": [
+        "n_v11fil_romanii_au_talent",
+        "n_ftv_pro_tv"
+      ],
+      "caption": "emisiune și post TV",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-74c83e1979efde21",
+      "pair": [
+        "n_ftv_pro_tv",
+        "n_v11fil_vocea_romaniei"
+      ],
+      "caption": "emisiune și post TV",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-822284042aa4e6b8",
+      "pair": [
+        "n_v11fil_romanii_au_talent",
+        "n_v2fil_concurs_tv"
+      ],
+      "caption": "emisiune și tip de concurs",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-bc0313840d5816da",
+      "pair": [
+        "n_v2fil_concurs_tv",
+        "n_v11fil_vocea_romaniei"
+      ],
+      "caption": "emisiune și tip de concurs",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-6ef8b08599d022c6",
+      "pair": [
+        "n_v24_food_pantry_zahar",
+        "n_v86_food_crema_vanilie"
+      ],
+      "caption": "cremă și îndulcitor",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-2a6b4255e5d7ebf5",
+      "pair": [
+        "n_v86_food_crema_vanilie",
+        "n_v87_food_cremsnit"
+      ],
+      "caption": "prăjitură și umplutură",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-5c4d79209c9908df",
+      "pair": [
+        "n_v24_food_pantry_zahar",
+        "n_v86_food_zahar_pudra"
+      ],
+      "caption": "zahăr și formă măcinată",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-0901fb095d543e9c",
+      "pair": [
+        "n_v86_food_zahar_pudra",
+        "n_v87_food_cremsnit"
+      ],
+      "caption": "prăjitură și pudră dulce",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-a6203b3e4c845abc",
+      "pair": [
+        "n_marea_neagra",
+        "n_delta_dunarii"
+      ],
+      "caption": "mare și deltă",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-e14ccd64f32c6d3b",
+      "pair": [
+        "n_delta_dunarii",
+        "n_dunarea"
+      ],
+      "caption": "fluviu și deltă",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-54980992748e7e8f",
+      "pair": [
+        "n_marea_neagra",
+        "n_v17geo_canal_dunare_marea_neagra"
+      ],
+      "caption": "mare și canal navigabil",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-05744ed560b0eace",
+      "pair": [
+        "n_v17geo_canal_dunare_marea_neagra",
+        "n_dunarea"
+      ],
+      "caption": "fluviu și canal navigabil",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-a99532314776a01c",
+      "pair": [
+        "n_marea_neagra",
+        "n_v4geo_fluviu"
+      ],
+      "caption": "fluviu și mare",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-2c9b8c4308b696df",
+      "pair": [
+        "n_v4geo_fluviu",
+        "n_dunarea"
+      ],
+      "caption": "fluviu și exemplu",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-f4bb26024a6a19e3",
+      "pair": [
+        "n_sibiu",
+        "n_muzeul_brukenthal"
+      ],
+      "caption": "muzeu și oraș",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-c82e6b404f0ec446",
+      "pair": [
+        "n_muzeul_brukenthal",
+        "n_v2art_muzeu"
+      ],
+      "caption": "muzeu și categorie",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-742be1fc8ca19f48",
+      "pair": [
+        "n_sibiu",
+        "n_v20art_muzeul_astra"
+      ],
+      "caption": "muzeu și oraș",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-b5f6933a19898b7f",
+      "pair": [
+        "n_v20art_muzeul_astra",
+        "n_v2art_muzeu"
+      ],
+      "caption": "muzeu și categorie",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-8ba69221bf3ed9ec",
+      "pair": [
+        "n_iasi",
+        "n_junimea"
+      ],
+      "caption": "oraș și societate literară",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-7c04de32fa9815fc",
+      "pair": [
+        "n_junimea",
+        "n_ion_creanga"
+      ],
+      "caption": "scriitor și societate literară",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-f7adbc9a24d1d511",
+      "pair": [
+        "n_iasi",
+        "n_moldova"
+      ],
+      "caption": "capitală istorică și regiune",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-5b26a87ccd014120",
+      "pair": [
+        "n_moldova",
+        "n_ion_creanga"
+      ],
+      "caption": "scriitor și regiune natală",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-0d2e7b2e1e31417f",
+      "pair": [
+        "n_iasi",
+        "n_mihai_eminescu"
+      ],
+      "caption": "scriitor și oraș",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-bb6e682c64d64179",
+      "pair": [
+        "n_mihai_eminescu",
+        "n_ion_creanga"
+      ],
+      "caption": "prieteni scriitori",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-b602490008e32013",
+      "pair": [
+        "n_carpati",
+        "n_v20geo_jiu"
+      ],
+      "caption": "munți și râu",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-f251b0d3205b1078",
+      "pair": [
+        "n_v20geo_jiu",
+        "n_dunarea"
+      ],
+      "caption": "afluent și fluviu",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-d4fdf26272df56ea",
+      "pair": [
+        "n_carpati",
+        "n_olt"
+      ],
+      "caption": "munți și râu",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-84449d1763233c0e",
+      "pair": [
+        "n_olt",
+        "n_dunarea"
+      ],
+      "caption": "afluent și fluviu",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-2b3a3e156adc677c",
+      "pair": [
+        "n_transilvania",
+        "n_istx_adunarea_blaj"
+      ],
+      "caption": "adunare istorică și regiune",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-8399608792e00ce0",
+      "pair": [
+        "n_istx_adunarea_blaj",
+        "n_v11ist_revolutia_1848"
+      ],
+      "caption": "adunare și revoluție",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-8adc82c0bb3642d2",
+      "pair": [
+        "n_transilvania",
+        "n_avram_iancu"
+      ],
+      "caption": "regiune și revoluționar",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-70420dedea823714",
+      "pair": [
+        "n_avram_iancu",
+        "n_v11ist_revolutia_1848"
+      ],
+      "caption": "revoluționar și revoluție",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-8dbb20e2d19cfc03",
+      "pair": [
+        "n_ion_creanga",
+        "n_v23lit_capra_cu_trei_iezi"
+      ],
+      "caption": "autor și poveste",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-940960896535ceb2",
+      "pair": [
+        "n_v23lit_capra_cu_trei_iezi",
+        "n_v3lit_carte"
+      ],
+      "caption": "poveste și carte",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-6417a25bc141569e",
+      "pair": [
+        "n_ion_creanga",
+        "n_v23lit_povestea_porcului"
+      ],
+      "caption": "autor și poveste",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-97d8e038157e24e4",
+      "pair": [
+        "n_v23lit_povestea_porcului",
+        "n_v3lit_carte"
+      ],
+      "caption": "poveste și carte",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-01ac1cd653e320c3",
+      "pair": [
+        "n_ion_creanga",
+        "n_v23lit_punguta_cu_doi_bani"
+      ],
+      "caption": "autor și poveste",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-42ca92a3be5e8e81",
+      "pair": [
+        "n_v23lit_punguta_cu_doi_bani",
+        "n_v3lit_carte"
+      ],
+      "caption": "poveste și carte",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-56b1476021988c61",
+      "pair": [
+        "n_v20lit_scrisoarea_iii",
+        "n_mihai_eminescu"
+      ],
+      "caption": "autor și poezie",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-2c6706c8a8342b3f",
+      "pair": [
+        "n_mihai_eminescu",
+        "n_v21lit_floare_albastra"
+      ],
+      "caption": "autor și poezie",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-db4ea0bd3114eaec",
+      "pair": [
+        "n_v20lit_scrisoarea_iii",
+        "n_convorbiri_literare"
+      ],
+      "caption": "poezie și revistă",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-130f46bf334d1b04",
+      "pair": [
+        "n_convorbiri_literare",
+        "n_v21lit_floare_albastra"
+      ],
+      "caption": "poezie și revistă",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-7ecc1e690c335af0",
+      "pair": [
+        "n_v20lit_scrisoarea_iii",
+        "n_romantism"
+      ],
+      "caption": "poezie și curent literar",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-a753d8e19e7eda50",
+      "pair": [
+        "n_romantism",
+        "n_v21lit_floare_albastra"
+      ],
+      "caption": "poezie și curent literar",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-caf27d650dd2f283",
+      "pair": [
+        "n_spt_romania_argentina_1994",
+        "n_spt_world_cup_1994"
+      ],
+      "caption": "meci și turneu",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-8602af5d5fc56a85",
+      "pair": [
+        "n_spt_world_cup_1994",
+        "n_v17spo_anghel_iordanescu"
+      ],
+      "caption": "selecționer și turneu",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-99f5a27bbd3c5025",
+      "pair": [
+        "n_spt_romania_argentina_1994",
+        "n_spt_tricolorii"
+      ],
+      "caption": "meci și echipă națională",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-6c553725256c4431",
+      "pair": [
+        "n_spt_tricolorii",
+        "n_v17spo_anghel_iordanescu"
+      ],
+      "caption": "echipă și selecționer",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-223946ea9963f720",
+      "pair": [
+        "n_spt_romania_argentina_1994",
+        "n_gheorghe_hagi"
+      ],
+      "caption": "fotbalist și meci",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-2f04b9e54134d72d",
+      "pair": [
+        "n_gheorghe_hagi",
+        "n_v17spo_anghel_iordanescu"
+      ],
+      "caption": "fotbalist și antrenor",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-5b079f342745ae07",
+      "pair": [
+        "n_spt_helmut_duckadam",
+        "n_spt_finala_sevilla_1986"
+      ],
+      "caption": "portar și finală",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-e38f4c5acfbd9740",
+      "pair": [
+        "n_spt_finala_sevilla_1986",
+        "n_v21spo_emeric_ienei"
+      ],
+      "caption": "antrenor și finală",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-10350993dd2041ae",
+      "pair": [
+        "n_spt_helmut_duckadam",
+        "n_spt_steaua_1986"
+      ],
+      "caption": "echipă și portar",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-8b3381eb09f501f0",
+      "pair": [
+        "n_spt_steaua_1986",
+        "n_v21spo_emeric_ienei"
+      ],
+      "caption": "echipă și antrenor",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-52595ea2b36ec0e2",
+      "pair": [
+        "n_spt_helmut_duckadam",
+        "n_spt_cupa_campionilor_1986"
+      ],
+      "caption": "portar și competiție",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-3cce9cabfc4ab889",
+      "pair": [
+        "n_spt_cupa_campionilor_1986",
+        "n_v21spo_emeric_ienei"
+      ],
+      "caption": "antrenor și competiție",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-76f8a51d6b349fef",
+      "pair": [
+        "n_spt_david_popovici",
+        "n_v17spo_aur_paris_2024"
+      ],
+      "caption": "sportiv și medalie de aur",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-572eea77afbbc3fc",
+      "pair": [
+        "n_v17spo_aur_paris_2024",
+        "n_v19spo_jo_paris_2024"
+      ],
+      "caption": "medalie și ediție olimpică",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-95fb2e8806c8fcae",
+      "pair": [
+        "n_spt_david_popovici",
+        "n_spt_lotul_olimpic_romania"
+      ],
+      "caption": "sportiv și lot olimpic",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-3837271065a70528",
+      "pair": [
+        "n_spt_lotul_olimpic_romania",
+        "n_v19spo_jo_paris_2024"
+      ],
+      "caption": "lot olimpic și competiție",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-df1856cd645e6525",
+      "pair": [
+        "n_v2sti_avion",
+        "n_muzeul_aviatiei_romane"
+      ],
+      "caption": "avion și muzeu de aviație",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-125c9355939cf4a8",
+      "pair": [
+        "n_muzeul_aviatiei_romane",
+        "n_bucuresti"
+      ],
+      "caption": "muzeu și oraș",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-8624f747f27ef025",
+      "pair": [
+        "n_v2sti_avion",
+        "n_aeroportul_baneasa"
+      ],
+      "caption": "avion și aeroport",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-27d7c45725e06000",
+      "pair": [
+        "n_aeroportul_baneasa",
+        "n_bucuresti"
+      ],
+      "caption": "aeroport și oraș",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-c3f6c713a4e0b568",
+      "pair": [
+        "n_v2sti_avion",
+        "n_v17geo_aeroportul_otopeni"
+      ],
+      "caption": "avion și aeroport",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    },
+    {
+      "id": "caption-ffb1bce4b2fb6f47",
+      "pair": [
+        "n_v17geo_aeroportul_otopeni",
+        "n_bucuresti"
+      ],
+      "caption": "Capitală și aeroport",
+      "verdict": "accept",
+      "rationale": "Both named endpoints satisfy the orientation-independent noun roles in this exact pair; no traversal direction, exclusive ownership, new historical date or geographic location is inferred. Existing fact support is retained from the full raw candidate review; exact Edge metadata binding independently replayed."
+    }
+  ]
+}

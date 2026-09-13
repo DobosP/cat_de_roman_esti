@@ -1,0 +1,200 @@
+{
+ "id": "cx_viata_de_roman_367",
+ "game": "conexiuni",
+ "category": "viata_de_roman",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "0ffcc3876a00c2d4165f5bf73cc2fdf421c759efc1e77c2e9f410700a8daa071",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 0
+ },
+ "groups": [
+  {
+   "label": "Îmbrăcăminte care acoperă trunchiul",
+   "members": [
+    {
+     "id": "n_v29_clothing_everyday_camasa",
+     "label": "Cămașă",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9,
+     "degree": 3,
+     "incoming_degree": 2,
+     "description": "Haină pentru partea de sus a corpului, de obicei cu guler și nasturi."
+    },
+    {
+     "id": "n_v30_clothing_everyday_rochie",
+     "label": "Rochie",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.92,
+     "degree": 2,
+     "incoming_degree": 2,
+     "description": "Haină dintr-o singură piesă care acoperă trunchiul și o parte din picioare."
+    },
+    {
+     "id": "n_v30_clothing_outer_geaca",
+     "label": "Geacă",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.92,
+     "degree": 2,
+     "incoming_degree": 3,
+     "description": "Haină scurtă purtată peste alte haine pentru protecție și căldură."
+    },
+    {
+     "id": "n_v33_bathroom_clothing_halat_baie",
+     "label": "Halat de baie",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9,
+     "degree": 2,
+     "incoming_degree": 3,
+     "description": "Îmbrăcăminte largă purtată înainte sau după baie."
+    }
+   ]
+  },
+  {
+   "label": "Se pot servi cu lingura",
+   "members": [
+    {
+     "id": "n_v4gas_supa",
+     "label": "Supă",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.7811,
+     "degree": 6,
+     "incoming_degree": 6,
+     "description": "Preparat lichid fiert, de obicei cu legume, carne sau găluște."
+    },
+    {
+     "id": "n_v42gas_ciorba_fasole",
+     "label": "Ciorbă de fasole",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.68,
+     "degree": 2,
+     "incoming_degree": 2,
+     "description": "Ciorbă românească de fasole boabe, adesea servită în pâine sau cu ceapă roșie."
+    },
+    {
+     "id": "n_v3gas_inghetata",
+     "label": "Înghețată",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.2826,
+     "degree": 4,
+     "incoming_degree": 12,
+     "description": "Desert rece, cremos, din lapte sau apă, zahăr și arome."
+    },
+    {
+     "id": "n_v24_food_breakfast_iaurt",
+     "label": "Iaurt",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.88,
+     "degree": 2,
+     "incoming_degree": 2,
+     "description": "Concept cotidian din grupul «alimente pentru micul dejun»: Iaurt."
+    }
+   ]
+  },
+  {
+   "label": "Recipiente pentru lichide",
+   "members": [
+    {
+     "id": "n_v29_kitchen_table_pahar",
+     "label": "Pahar",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.92,
+     "degree": 3,
+     "incoming_degree": 1,
+     "description": "Recipient mic din care se beau apă și alte băuturi."
+    },
+    {
+     "id": "n_v30_kitchen_drink_cana",
+     "label": "Cană",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.93,
+     "degree": 2,
+     "incoming_degree": 2,
+     "description": "Recipient cu toartă din care se beau apă, lapte, ceai sau alte băuturi."
+    },
+    {
+     "id": "n_v31_cleaning_water_galeata",
+     "label": "Găleată",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.91,
+     "degree": 2,
+     "incoming_degree": 3,
+     "description": "Recipient cu mâner folosit pentru a duce apă sau alte lichide."
+    },
+    {
+     "id": "n_v32_garden_water_stropitoare",
+     "label": "Stropitoare",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.91,
+     "degree": 2,
+     "incoming_degree": 4,
+     "description": "Recipient cu mâner și cioc perforat, folosit pentru a uda plante."
+    }
+   ]
+  },
+  {
+   "label": "Căi folosite și pentru mersul pe jos",
+   "members": [
+    {
+     "id": "n_v29_city_street_trotuar",
+     "label": "Trotuar",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.9,
+     "degree": 2,
+     "incoming_degree": 2,
+     "description": "Parte ridicată a străzii rezervată mersului pe jos."
+    },
+    {
+     "id": "n_v4geo_poteca",
+     "label": "potecă",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.3844,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Traseu îngust de mers pe jos, frecvent în zone montane."
+    },
+    {
+     "id": "n_v4geo_carare",
+     "label": "cărare",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.3736,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Drum îngust pentru mers pe jos prin natură sau sate."
+    },
+    {
+     "id": "n_v4geo_strada",
+     "label": "stradă",
+     "node_type": "concept",
+     "category": "geografie",
+     "salience": 0.8788,
+     "degree": 7,
+     "incoming_degree": 11,
+     "description": "Cale urbană de circulație mărginită de clădiri."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:e01f771284b66bf6a11e0056e37e1d4bccab29ac354bcb95caa7a50660bc54a7"
+}

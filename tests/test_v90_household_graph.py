@@ -15,6 +15,7 @@ from django.test import Client
 from cat_de_roman_esti.graph import Graph
 from cat_de_roman_esti.wordgames import contexto as C
 from cat_de_roman_esti.wordgames import lant as L
+from cat_de_roman_esti.wordgames.lant_relations import caption as relation_caption
 from cat_de_roman_esti.wordgames.packs import get_pack
 from cat_de_roman_esti.wordgames.service import WordGameService, get_service
 from tests import content_history as history
@@ -224,6 +225,7 @@ def test_all17_directed_links_are_playable_and_reverse_moves_need_their_own_real
     old = history.before_v90_fixture(_read(FIXTURES / "kg_sample.json"))
     old_service = WordGameService(Graph.from_records(old["kg_nodes"], old["kg_edges"]))
     client, svc = Client(), get_service()
+    assert svc.link(row["src"], row["dst"]).label_ro == row["label_ro"]
     for start, target, valid in (
         (row["src"], row["dst"], True),
         (row["dst"], row["src"], old_service.link(row["dst"], row["src"]) is not None),
@@ -240,7 +242,7 @@ def test_all17_directed_links_are_playable_and_reverse_moves_need_their_own_real
             expected_path = [start, target] if valid else [start]
             assert [step["id"] for step in resumed["path"]] == expected_path
             if valid:
-                assert body["relation"] == svc.link(start, target).label_ro
+                assert body["relation"] == relation_caption(svc, start, target)
         finally:
             L.store.delete(gid)
 

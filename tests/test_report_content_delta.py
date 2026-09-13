@@ -31,6 +31,7 @@ def documents() -> dict:
             {"id": "ct2", "target": "nut", "status": "approved"},
         ]},
         "derived": {"boards": [{"id": "vi1", "game": "intrusul", "payload": [1, 2]}]},
+        "quick": None,
         "rankings": {"boards": [
             {"id": "ct1", "game": "contexto", "status": "pending", "pilot_eligible": False},
             {"id": "ct2", "game": "contexto", "status": "approved", "pilot_eligible": True},
@@ -97,6 +98,22 @@ def test_missing_historical_sidecars_are_not_false_zero_eligibility():
     report = delta.compare(delta.inventory(before), delta.inventory(documents()))
     assert report["pack"]["contexto"]["declared_ranked_eligible"] is None
     assert report["derived"]["intrusul"]["added_ids"] == ["vi1"]
+
+
+def test_authored_supplement_counts_as_growth_without_changing_frozen_boards():
+    before = documents()
+    after = copy.deepcopy(before)
+    after["quick"] = {"boards": [
+        {"id": "iq1", "game": "intrusul", "payload": [3, 4]},
+        {"id": "pq1", "game": "perechi", "payload": [5, 6]},
+    ]}
+    report = delta.compare(delta.inventory(before), delta.inventory(after))
+    assert report["derived"]["intrusul"]["added_ids"] == ["iq1"]
+    assert report["derived"]["intrusul"]["unchanged_count"] == 1
+    assert report["derived"]["perechi"]["added_ids"] == ["pq1"]
+    after["quick"]["boards"].append(after["derived"]["boards"][0])
+    with pytest.raises(ValueError, match="collide with the frozen catalog"):
+        delta.inventory(after)
 
 
 @pytest.mark.parametrize("invalid", ["duplicate_node", "duplicate_form", "stale_rank_status"])

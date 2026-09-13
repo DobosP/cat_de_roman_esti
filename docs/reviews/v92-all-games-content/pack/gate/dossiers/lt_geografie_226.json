@@ -1,0 +1,139 @@
+{
+ "id": "lt_geografie_226",
+ "game": "lant",
+ "category": "geografie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "60f040645c94b83a7f2106f140f851206231a6415b466ae6d5ed85faab32c872",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Sibiu salience 0.31 < 0.60 (usor floor)"
+  }
+ ],
+ "display_rules_sha256": "7048444ef3ef01d2c524a7ef79874324cf3f89c195fb473008e5631b40b84781",
+ "start": {
+  "id": "n_sibiu",
+  "label": "Sibiu",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.3144,
+  "degree": 12,
+  "incoming_degree": 14,
+  "description": "Oras din Transilvania, fost centru sas, capitala culturala europeana in 2007."
+ },
+ "target": {
+  "id": "n_v2art_muzeu",
+  "label": "Muzeu",
+  "node_type": "concept",
+  "category": "arta_cultura",
+  "salience": 0.8507,
+  "degree": 8,
+  "incoming_degree": 13,
+  "description": "Instituție care păstrează și expune colecții de artă, istorie sau știință."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 2,
+  "narrowest_shortest_path_layer": 2,
+  "total_intermediate_shortest_path_nodes": 2
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_sibiu",
+     "label": "Sibiu"
+    },
+    {
+     "id": "n_muzeul_brukenthal",
+     "label": "Muzeul Național Brukenthal"
+    },
+    {
+     "id": "n_v2art_muzeu",
+     "label": "Muzeu"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_sibiu",
+      "label": "Sibiu"
+     },
+     "to": {
+      "id": "n_muzeul_brukenthal",
+      "label": "Muzeul Național Brukenthal"
+     },
+     "relation": "located_in",
+     "label": "se află în",
+     "display_label": "muzeu și oraș",
+     "strength": 0.92
+    },
+    {
+     "from": {
+      "id": "n_muzeul_brukenthal",
+      "label": "Muzeul Național Brukenthal"
+     },
+     "to": {
+      "id": "n_v2art_muzeu",
+      "label": "Muzeu"
+     },
+     "relation": "is_a",
+     "label": "este muzeu",
+     "display_label": "muzeu și categorie",
+     "strength": 0.94
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_sibiu",
+     "label": "Sibiu"
+    },
+    {
+     "id": "n_v20art_muzeul_astra",
+     "label": "Muzeul ASTRA"
+    },
+    {
+     "id": "n_v2art_muzeu",
+     "label": "Muzeu"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_sibiu",
+      "label": "Sibiu"
+     },
+     "to": {
+      "id": "n_v20art_muzeul_astra",
+      "label": "Muzeul ASTRA"
+     },
+     "relation": "located_in",
+     "label": "în Dumbrava Sibiului",
+     "display_label": "muzeu și oraș",
+     "strength": 0.9
+    },
+    {
+     "from": {
+      "id": "n_v20art_muzeul_astra",
+      "label": "Muzeul ASTRA"
+     },
+     "to": {
+      "id": "n_v2art_muzeu",
+      "label": "Muzeu"
+     },
+     "relation": "is_a",
+     "label": "muzeu în aer liber",
+     "display_label": "muzeu și categorie",
+     "strength": 0.8
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:a48628dc65b6227370a1bbe1c73bb62106392b7f919ad3689b6b0e2460a8a6c8"
+}

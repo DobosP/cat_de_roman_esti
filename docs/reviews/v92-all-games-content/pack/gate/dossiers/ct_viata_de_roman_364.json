@@ -1,0 +1,108 @@
+{
+ "id": "ct_viata_de_roman_364",
+ "game": "contexto",
+ "category": "viata_de_roman",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "1ef732a3f47ef8f62e3581b0072352ed9d4b9813413b173dc6c3dc179caf2e04",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v23via_ghiozdan",
+  "label": "Ghiozdan",
+  "node_type": "concept",
+  "category": "viata_de_roman",
+  "salience": 0.84,
+  "degree": 11,
+  "incoming_degree": 5,
+  "description": "Geantă purtată pe spate în care elevii își duc la școală manualele, caietele și rechizitele."
+ },
+ "incoming_neighbor_floor": {
+  "minimum": 5,
+  "count": 5,
+  "sample": [
+   {
+    "id": "n_v23via_abecedar",
+    "label": "Abecedar"
+   },
+   {
+    "id": "n_v23via_penar",
+    "label": "Penar"
+   },
+   {
+    "id": "n_v3lit_carte",
+    "label": "Carte"
+   },
+   {
+    "id": "n_v3soc_scoala",
+    "label": "Școală"
+   },
+   {
+    "id": "n_v4soc_copil",
+    "label": "copil"
+   }
+  ],
+  "sample_truncated": false,
+  "recognition_assessed": false
+ },
+ "reachable": 2353,
+ "strong_neighbors": [
+  {
+   "id": "n_v3soc_scoala",
+   "label": "Școală",
+   "node_type": "concept",
+   "category": "societate",
+   "salience": 0.9181,
+   "degree": 26,
+   "incoming_degree": 30,
+   "description": "Instituție de învățământ pentru educația copiilor și tinerilor.",
+   "strength": 0.88
+  },
+  {
+   "id": "n_v3lit_carte",
+   "label": "Carte",
+   "node_type": "concept",
+   "category": "literatura",
+   "salience": 0.973,
+   "degree": 30,
+   "incoming_degree": 35,
+   "description": "Obiect tipărit sau digital care conține un text literar ori informativ.",
+   "strength": 0.82
+  },
+  {
+   "id": "n_v4soc_copil",
+   "label": "copil",
+   "node_type": "concept",
+   "category": "societate",
+   "salience": 0.909,
+   "degree": 26,
+   "incoming_degree": 22,
+   "description": "Persoană aflată la vârsta copilăriei sau fiu ori fiică.",
+   "strength": 0.82
+  },
+  {
+   "id": "n_v23via_penar",
+   "label": "Penar",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.78,
+   "degree": 5,
+   "incoming_degree": 5,
+   "description": "Etui pentru instrumentele de scris, întâlnit în mod obișnuit printre rechizitele unui elev.",
+   "strength": 0.8
+  },
+  {
+   "id": "n_v23via_abecedar",
+   "label": "Abecedar",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.86,
+   "degree": 5,
+   "incoming_degree": 5,
+   "description": "Manual școlar folosit la începutul învățării cititului și scrisului, organizat în jurul literelor și al textelor scurte.",
+   "strength": 0.78
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:7ff5be239284a049358500da0552485ef885599b370f0809b601db5e66da3742"
+}

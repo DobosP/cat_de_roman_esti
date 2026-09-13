@@ -38,7 +38,7 @@ MAX_VARIANTS_PER_SOURCE = 3
 _PREFERRED_STANDARD_SCORE = 55
 # Updated only with a reviewed, generator-produced bundled artifact.
 DEFAULT_DERIVED_CATALOG_SHA256 = (
-    "53fb3e4555205179072bd54a45f5b1b185de064625893dcf288902574a075e64"
+    "09e6b1caa3ed586264a85d3d9807f0173384c02c80102dae072d14665432f2aa"
 )
 
 _META_FIELDS = {
@@ -658,4 +658,6 @@ def load_derived_catalog(
 
 @lru_cache(maxsize=1)
 def get_derived_catalog() -> DerivedCatalog:
-    return load_derived_catalog()
+    from .quick_catalog import extend_catalog
+
+    return extend_catalog(load_derived_catalog())

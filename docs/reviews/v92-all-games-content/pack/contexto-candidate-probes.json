@@ -1,0 +1,3621 @@
+{
+  "scope": "Fresh one-guess BFF sessions; fixed targets do not imply approval or runtime eligibility.",
+  "source_sha256": {
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "cat_de_roman_esti/wordgames/contexto.py": "0766d483e1ba83b4725811b0d46dc6803ea22ccbc4415b41fc9b519fdd0fa4aa",
+    "cat_de_roman_esti/wordgames/contexto_projection.py": "8dc809f1dbbb0452d3ae0eb4d5777b7d41c56582088e16eef20c33bf29e8d17a",
+    "cat_de_roman_esti/wordgames/contexto_feedback.py": "671b3fe423eed306e63fd2f67dada5243b8787e299cb8fdcede00c2eb323b363",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"
+  },
+  "fresh_sessions": 260,
+  "targets": [
+    {
+      "target": "n_v17art_muzeul_satului",
+      "label": "Muzeul Național al Satului „Dimitrie Gusti”",
+      "candidate_sha256": "b1b46541280d34bcbf8c932365aba26ad4d7d5d03a201a3c045dbd0a8bfdb642",
+      "probes": [
+        {
+          "text": "muzeu",
+          "accepted": true,
+          "label": "Muzeu",
+          "rank": 176,
+          "distance": 3,
+          "temperature": "Caldut",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "București",
+          "accepted": true,
+          "label": "București",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "sat",
+          "accepted": true,
+          "label": "sat",
+          "rank": 203,
+          "distance": 3,
+          "temperature": "Caldut",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Dimitrie Gusti",
+          "accepted": true,
+          "label": "Dimitrie Gusti",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "tradiție",
+          "accepted": true,
+          "label": "Tradiție",
+          "rank": 82,
+          "distance": 2,
+          "temperature": "Caldut",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "folclor",
+          "accepted": true,
+          "label": "Folclor",
+          "rank": 69,
+          "distance": 2,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Muzeul ASTRA",
+          "accepted": true,
+          "label": "Muzeul ASTRA",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Folclor românesc",
+          "accepted": true,
+          "label": "Folclor românesc",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Muzeul Național al Țăranului Român",
+          "accepted": true,
+          "label": "Muzeul Național al Țăranului Român",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Poarta maramureșeană",
+          "accepted": true,
+          "label": "Poarta maramureșeană",
+          "rank": 7,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Muzeul Național al Satului „Dimitrie Gusti”",
+          "accepted": true,
+          "label": "Muzeul Național al Satului „Dimitrie Gusti”",
+          "rank": 1,
+          "distance": 0,
+          "temperature": "Gasit",
+          "won": true,
+          "confirmation": null
+        }
+      ],
+      "incoming": [
+        {
+          "id": "n_bucuresti",
+          "label": "București",
+          "edge": "located_in",
+          "strength": 0.85
+        },
+        {
+          "id": "n_folclor_romanesc",
+          "label": "Folclor românesc",
+          "edge": "associated_with",
+          "strength": 0.65
+        },
+        {
+          "id": "n_v11art_muzeul_taranului",
+          "label": "Muzeul Național al Țăranului Român",
+          "edge": "related_to",
+          "strength": 0.6
+        },
+        {
+          "id": "n_v20art_muzeul_astra",
+          "label": "Muzeul ASTRA",
+          "edge": "related_to",
+          "strength": 0.7
+        },
+        {
+          "id": "n_v20art_poarta_maramureseana",
+          "label": "Poarta maramureșeană",
+          "edge": "associated_with",
+          "strength": 0.5
+        },
+        {
+          "id": "n_v21per_dimitrie_gusti",
+          "label": "Dimitrie Gusti",
+          "edge": "created_by",
+          "strength": 0.9
+        }
+      ]
+    },
+    {
+      "target": "n_v4fil_televizor",
+      "label": "televizor",
+      "candidate_sha256": "646b5abee292594a62e7f85c3608a98dafc0ed9791976d7c84746259965fde46",
+      "probes": [
+        {
+          "text": "ecran",
+          "accepted": true,
+          "label": "ecran",
+          "rank": 14,
+          "distance": 2,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "telecomandă",
+          "accepted": true,
+          "label": "telecomandă",
+          "rank": 17,
+          "distance": 2,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Pro TV",
+          "accepted": true,
+          "label": "Pro TV",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "TVR",
+          "accepted": true,
+          "label": "TVR",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "emisiune",
+          "accepted": false,
+          "label": null,
+          "rank": null,
+          "distance": null,
+          "temperature": null,
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "film",
+          "accepted": true,
+          "label": "Film",
+          "rank": 80,
+          "distance": 3,
+          "temperature": "Caldut",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "televiziune",
+          "accepted": true,
+          "label": "Televiziune",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "serial",
+          "accepted": true,
+          "label": "Serial TV",
+          "rank": 28,
+          "distance": 2,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Emisiune TV",
+          "accepted": true,
+          "label": "Emisiune TV",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Televiziune",
+          "accepted": true,
+          "label": "Televiziune",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Teletextul",
+          "accepted": true,
+          "label": "Teletextul",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "televizor",
+          "accepted": true,
+          "label": "televizor",
+          "rank": 1,
+          "distance": 0,
+          "temperature": "Gasit",
+          "won": true,
+          "confirmation": null
+        }
+      ],
+      "incoming": [
+        {
+          "id": "n_ftv_pro_tv",
+          "label": "Pro TV",
+          "edge": "related_to",
+          "strength": 0.78
+        },
+        {
+          "id": "n_ftv_tvr",
+          "label": "TVR",
+          "edge": "related_to",
+          "strength": 0.78
+        },
+        {
+          "id": "n_v2fil_emisiune_tv",
+          "label": "Emisiune TV",
+          "edge": "related_to",
+          "strength": 0.84
+        },
+        {
+          "id": "n_v2fil_televiziune",
+          "label": "Televiziune",
+          "edge": "related_to",
+          "strength": 0.9
+        },
+        {
+          "id": "n_vdr_teletext",
+          "label": "Teletextul",
+          "edge": "associated_with",
+          "strength": 0.75
+        }
+      ]
+    },
+    {
+      "target": "n_ftv_florin_piersic",
+      "label": "Florin Piersic",
+      "candidate_sha256": "646b5abee292594a62e7f85c3608a98dafc0ed9791976d7c84746259965fde46",
+      "probes": [
+        {
+          "text": "actor",
+          "accepted": true,
+          "label": "Actor",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "film",
+          "accepted": true,
+          "label": "Film",
+          "rank": 134,
+          "distance": 3,
+          "temperature": "Caldut",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Cluj-Napoca",
+          "accepted": true,
+          "label": "Cluj-Napoca",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Mărgelatu",
+          "accepted": true,
+          "label": "Mărgelatu",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Draga Olteanu Matei",
+          "accepted": true,
+          "label": "Draga Olteanu Matei",
+          "rank": 7,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Amza Pellea",
+          "accepted": true,
+          "label": "Amza Pellea",
+          "rank": 21,
+          "distance": 2,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "teatru",
+          "accepted": true,
+          "label": "Teatru",
+          "rank": 52,
+          "distance": 2,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Teatrul românesc",
+          "accepted": true,
+          "label": "Teatrul românesc",
+          "rank": 8,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Cinematografia românească",
+          "accepted": true,
+          "label": "Cinematografia românească",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Sebastian Papaiani",
+          "accepted": true,
+          "label": "Sebastian Papaiani",
+          "rank": 10,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Florin Piersic Jr.",
+          "accepted": true,
+          "label": "Florin Piersic Jr.",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Victor Rebengiuc",
+          "accepted": true,
+          "label": "Victor Rebengiuc",
+          "rank": 8,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Actor",
+          "accepted": true,
+          "label": "Actor",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Florin Piersic",
+          "accepted": true,
+          "label": "Florin Piersic",
+          "rank": 1,
+          "distance": 0,
+          "temperature": "Gasit",
+          "won": true,
+          "confirmation": null
+        }
+      ],
+      "incoming": [
+        {
+          "id": "n_artx_teatru_romanesc",
+          "label": "Teatrul românesc",
+          "edge": "related_to",
+          "strength": 0.7
+        },
+        {
+          "id": "n_cinematografia_romaneasca",
+          "label": "Cinematografia românească",
+          "edge": "related_to",
+          "strength": 0.74
+        },
+        {
+          "id": "n_cluj_napoca",
+          "label": "Cluj-Napoca",
+          "edge": "located_in",
+          "strength": 0.76
+        },
+        {
+          "id": "n_ftv_draga_olteanu_matei",
+          "label": "Draga Olteanu Matei",
+          "edge": "contemporary_of",
+          "strength": 0.72
+        },
+        {
+          "id": "n_ftv_sebastian_papaiani",
+          "label": "Sebastian Papaiani",
+          "edge": "contemporary_of",
+          "strength": 0.62
+        },
+        {
+          "id": "n_v17fil_margelatu",
+          "label": "Mărgelatu",
+          "edge": "related_to",
+          "strength": 0.92
+        },
+        {
+          "id": "n_v19fil_florin_piersic_jr",
+          "label": "Florin Piersic Jr.",
+          "edge": "related_to",
+          "strength": 0.9
+        },
+        {
+          "id": "n_v21fil_victor_rebengiuc",
+          "label": "Victor Rebengiuc",
+          "edge": "contemporary_of",
+          "strength": 0.7
+        },
+        {
+          "id": "n_v2fil_actor",
+          "label": "Actor",
+          "edge": "is_a",
+          "strength": 0.88
+        }
+      ]
+    },
+    {
+      "target": "n_ftv_amza_pellea",
+      "label": "Amza Pellea",
+      "candidate_sha256": "646b5abee292594a62e7f85c3608a98dafc0ed9791976d7c84746259965fde46",
+      "probes": [
+        {
+          "text": "actor",
+          "accepted": true,
+          "label": "Actor",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "film",
+          "accepted": true,
+          "label": "Film",
+          "rank": 11,
+          "distance": 2,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Nea Mărin Miliardar",
+          "accepted": true,
+          "label": "Nea Mărin Miliardar",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Mihai Viteazul",
+          "accepted": true,
+          "label": "Mihai Viteazul",
+          "rank": 12,
+          "distance": 2,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Oltenia",
+          "accepted": true,
+          "label": "Oltenia",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Dem Rădulescu",
+          "accepted": true,
+          "label": "Dem Rădulescu",
+          "rank": 10,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "comedie",
+          "accepted": true,
+          "label": "Comedie",
+          "rank": 12,
+          "distance": 2,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Cinematografia românească",
+          "accepted": true,
+          "label": "Cinematografia românească",
+          "rank": 8,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Draga Olteanu Matei",
+          "accepted": true,
+          "label": "Draga Olteanu Matei",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Toma Caragiu",
+          "accepted": true,
+          "label": "Toma Caragiu",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Mihai Viteazul (film)",
+          "accepted": true,
+          "label": "Mihai Viteazul (film)",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Sergiu Nicolaescu",
+          "accepted": true,
+          "label": "Sergiu Nicolaescu",
+          "rank": 9,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Actor",
+          "accepted": true,
+          "label": "Actor",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Amza Pellea",
+          "accepted": true,
+          "label": "Amza Pellea",
+          "rank": 1,
+          "distance": 0,
+          "temperature": "Gasit",
+          "won": true,
+          "confirmation": null
+        }
+      ],
+      "incoming": [
+        {
+          "id": "n_cinematografia_romaneasca",
+          "label": "Cinematografia românească",
+          "edge": "related_to",
+          "strength": 0.74
+        },
+        {
+          "id": "n_ftv_dem_radulescu",
+          "label": "Dem Rădulescu",
+          "edge": "contemporary_of",
+          "strength": 0.7
+        },
+        {
+          "id": "n_ftv_draga_olteanu_matei",
+          "label": "Draga Olteanu Matei",
+          "edge": "contemporary_of",
+          "strength": 0.78
+        },
+        {
+          "id": "n_ftv_nea_marin_miliardar",
+          "label": "Nea Mărin Miliardar",
+          "edge": "related_to",
+          "strength": 0.98
+        },
+        {
+          "id": "n_ftv_toma_caragiu",
+          "label": "Toma Caragiu",
+          "edge": "contemporary_of",
+          "strength": 0.78
+        },
+        {
+          "id": "n_oltenia",
+          "label": "Oltenia",
+          "edge": "related_to",
+          "strength": 0.78
+        },
+        {
+          "id": "n_v17fil_mihai_viteazul_film",
+          "label": "Mihai Viteazul (film)",
+          "edge": "related_to",
+          "strength": 0.9
+        },
+        {
+          "id": "n_v17fil_sergiu_nicolaescu",
+          "label": "Sergiu Nicolaescu",
+          "edge": "contemporary_of",
+          "strength": 0.72
+        },
+        {
+          "id": "n_v2fil_actor",
+          "label": "Actor",
+          "edge": "is_a",
+          "strength": 0.88
+        }
+      ]
+    },
+    {
+      "target": "n_ftv_dem_radulescu",
+      "label": "Dem Rădulescu",
+      "candidate_sha256": "646b5abee292594a62e7f85c3608a98dafc0ed9791976d7c84746259965fde46",
+      "probes": [
+        {
+          "text": "actor",
+          "accepted": true,
+          "label": "Actor",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "film",
+          "accepted": true,
+          "label": "Film",
+          "rank": 14,
+          "distance": 2,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "comedie",
+          "accepted": true,
+          "label": "Comedie",
+          "rank": 24,
+          "distance": 2,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "B.D. la munte și la mare",
+          "accepted": true,
+          "label": "B.D. la munte și la mare",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Jean Constantin",
+          "accepted": true,
+          "label": "Jean Constantin",
+          "rank": 10,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Toma Caragiu",
+          "accepted": true,
+          "label": "Toma Caragiu",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "teatru",
+          "accepted": true,
+          "label": "Teatru",
+          "rank": 42,
+          "distance": 2,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Teatrul românesc",
+          "accepted": true,
+          "label": "Teatrul românesc",
+          "rank": 7,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Cinematografia românească",
+          "accepted": true,
+          "label": "Cinematografia românească",
+          "rank": 7,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Amza Pellea",
+          "accepted": true,
+          "label": "Amza Pellea",
+          "rank": 9,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Marin Moraru",
+          "accepted": true,
+          "label": "Marin Moraru",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Operațiunea Monstrul",
+          "accepted": true,
+          "label": "Operațiunea Monstrul",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "I.L. Caragiale",
+          "accepted": true,
+          "label": "I.L. Caragiale",
+          "rank": 12,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Alexandru Arșinel",
+          "accepted": true,
+          "label": "Alexandru Arșinel",
+          "rank": 11,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Actor",
+          "accepted": true,
+          "label": "Actor",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Dem Rădulescu",
+          "accepted": true,
+          "label": "Dem Rădulescu",
+          "rank": 1,
+          "distance": 0,
+          "temperature": "Gasit",
+          "won": true,
+          "confirmation": null
+        }
+      ],
+      "incoming": [
+        {
+          "id": "n_artx_teatru_romanesc",
+          "label": "Teatrul românesc",
+          "edge": "related_to",
+          "strength": 0.72
+        },
+        {
+          "id": "n_cinematografia_romaneasca",
+          "label": "Cinematografia românească",
+          "edge": "related_to",
+          "strength": 0.72
+        },
+        {
+          "id": "n_ftv_amza_pellea",
+          "label": "Amza Pellea",
+          "edge": "contemporary_of",
+          "strength": 0.7
+        },
+        {
+          "id": "n_ftv_bd_la_munte_si_la_mare",
+          "label": "B.D. la munte și la mare",
+          "edge": "related_to",
+          "strength": 0.94
+        },
+        {
+          "id": "n_ftv_jean_constantin",
+          "label": "Jean Constantin",
+          "edge": "contemporary_of",
+          "strength": 0.66
+        },
+        {
+          "id": "n_ftv_marin_moraru",
+          "label": "Marin Moraru",
+          "edge": "contemporary_of",
+          "strength": 0.74
+        },
+        {
+          "id": "n_ftv_operatiunea_monstrul",
+          "label": "Operațiunea Monstrul",
+          "edge": "related_to",
+          "strength": 0.86
+        },
+        {
+          "id": "n_ftv_toma_caragiu",
+          "label": "Toma Caragiu",
+          "edge": "contemporary_of",
+          "strength": 0.82
+        },
+        {
+          "id": "n_ion_luca_caragiale",
+          "label": "I.L. Caragiale",
+          "edge": "influenced",
+          "strength": 0.5
+        },
+        {
+          "id": "n_v20fil_alexandru_arsinel",
+          "label": "Alexandru Arșinel",
+          "edge": "contemporary_of",
+          "strength": 0.55
+        },
+        {
+          "id": "n_v2fil_actor",
+          "label": "Actor",
+          "edge": "is_a",
+          "strength": 0.88
+        }
+      ]
+    },
+    {
+      "target": "n_v4gas_apa",
+      "label": "Apă",
+      "candidate_sha256": "7d5f47ae4767b5b0a027b20c689d8191a77344bc51582847fb0078c22b6ceaa8",
+      "probes": [
+        {
+          "text": "sete",
+          "accepted": true,
+          "label": "Sete",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "pahar",
+          "accepted": true,
+          "label": "Pahar",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "ploaie",
+          "accepted": true,
+          "label": "Ploaie",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "râu",
+          "accepted": true,
+          "label": "râu",
+          "rank": 973,
+          "distance": 4,
+          "temperature": "Foarte rece",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "mare",
+          "accepted": true,
+          "label": "mare",
+          "rank": 1726,
+          "distance": 5,
+          "temperature": "Inghetat",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "lichid",
+          "accepted": true,
+          "label": "lichid",
+          "rank": 50,
+          "distance": 2,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "gheață",
+          "accepted": false,
+          "label": null,
+          "rank": null,
+          "distance": null,
+          "temperature": null,
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "robinet",
+          "accepted": true,
+          "label": "Robinet",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "mâncare",
+          "accepted": true,
+          "label": "Mâncare",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "pâine",
+          "accepted": true,
+          "label": "Pâine",
+          "rank": 92,
+          "distance": 2,
+          "temperature": "Caldut",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Borș",
+          "accepted": true,
+          "label": "Borș",
+          "rank": 15,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Pâine de casă",
+          "accepted": true,
+          "label": "Pâine de casă",
+          "rank": 17,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Supă cu găluște",
+          "accepted": true,
+          "label": "Supă cu găluște",
+          "rank": 11,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Mecanica fluidelor",
+          "accepted": true,
+          "label": "Mecanica fluidelor",
+          "rank": 11,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Socată",
+          "accepted": true,
+          "label": "Socată",
+          "rank": 20,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Sete",
+          "accepted": true,
+          "label": "Sete",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Grindină",
+          "accepted": true,
+          "label": "Grindină",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Ploaie",
+          "accepted": true,
+          "label": "Ploaie",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Zăpadă",
+          "accepted": true,
+          "label": "Zăpadă",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Pahar",
+          "accepted": true,
+          "label": "Pahar",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Ciorbă",
+          "accepted": true,
+          "label": "Ciorbă",
+          "rank": 10,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Biologie",
+          "accepted": true,
+          "label": "Biologie",
+          "rank": 13,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Chimie",
+          "accepted": true,
+          "label": "Chimie",
+          "rank": 9,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Laborator",
+          "accepted": true,
+          "label": "Laborator",
+          "rank": 17,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Experiment",
+          "accepted": true,
+          "label": "Experiment",
+          "rank": 19,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Întreținerea",
+          "accepted": true,
+          "label": "Întreținerea",
+          "rank": 16,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Mâncare",
+          "accepted": true,
+          "label": "Mâncare",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "baie",
+          "accepted": true,
+          "label": "baie",
+          "rank": 21,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Apometrele",
+          "accepted": true,
+          "label": "Apometrele",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Gospodăria bunicilor",
+          "accepted": true,
+          "label": "Gospodăria bunicilor",
+          "rank": 13,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Apă",
+          "accepted": true,
+          "label": "Apă",
+          "rank": 1,
+          "distance": 0,
+          "temperature": "Gasit",
+          "won": true,
+          "confirmation": null
+        }
+      ],
+      "incoming": [
+        {
+          "id": "n_gas_bors",
+          "label": "Borș",
+          "edge": "part_of",
+          "strength": 0.76
+        },
+        {
+          "id": "n_gas_paine_de_casa",
+          "label": "Pâine de casă",
+          "edge": "part_of",
+          "strength": 0.68
+        },
+        {
+          "id": "n_gas_supa_galuste",
+          "label": "Supă cu găluște",
+          "edge": "part_of",
+          "strength": 0.82
+        },
+        {
+          "id": "n_stix_mecanica_fluidelor",
+          "label": "Mecanica fluidelor",
+          "edge": "related_to",
+          "strength": 0.82
+        },
+        {
+          "id": "n_v18gas_socata",
+          "label": "Socată",
+          "edge": "related_to",
+          "strength": 0.55
+        },
+        {
+          "id": "n_v24_feeling_needs_sete",
+          "label": "Sete",
+          "edge": "satisfied_by",
+          "strength": 0.99
+        },
+        {
+          "id": "n_v24_weather_precipitation_grindina",
+          "label": "Grindină",
+          "edge": "beginner_exit",
+          "strength": 0.86
+        },
+        {
+          "id": "n_v24_weather_precipitation_ploaie",
+          "label": "Ploaie",
+          "edge": "beginner_exit",
+          "strength": 0.86
+        },
+        {
+          "id": "n_v24_weather_precipitation_zapada",
+          "label": "Zăpadă",
+          "edge": "beginner_exit",
+          "strength": 0.86
+        },
+        {
+          "id": "n_v29_kitchen_table_pahar",
+          "label": "Pahar",
+          "edge": "contains_drink",
+          "strength": 0.99
+        },
+        {
+          "id": "n_v2gas_ciorba",
+          "label": "Ciorbă",
+          "edge": "part_of",
+          "strength": 0.84
+        },
+        {
+          "id": "n_v2sti_biologie",
+          "label": "Biologie",
+          "edge": "related_to",
+          "strength": 0.78
+        },
+        {
+          "id": "n_v2sti_chimie",
+          "label": "Chimie",
+          "edge": "related_to",
+          "strength": 0.85
+        },
+        {
+          "id": "n_v2sti_laborator",
+          "label": "Laborator",
+          "edge": "related_to",
+          "strength": 0.68
+        },
+        {
+          "id": "n_v3sti_experiment",
+          "label": "Experiment",
+          "edge": "related_to",
+          "strength": 0.67
+        },
+        {
+          "id": "n_v3via_intretinerea",
+          "label": "Întreținerea",
+          "edge": "related_to",
+          "strength": 0.72
+        },
+        {
+          "id": "n_v4gas_mancare",
+          "label": "Mâncare",
+          "edge": "beginner_repair",
+          "strength": 0.96
+        },
+        {
+          "id": "n_v4via_baie",
+          "label": "baie",
+          "edge": "associated_with",
+          "strength": 0.5
+        },
+        {
+          "id": "n_vdr_apometre",
+          "label": "Apometrele",
+          "edge": "related_to",
+          "strength": 0.86
+        },
+        {
+          "id": "n_vdr_gospodaria_bunicilor",
+          "label": "Gospodăria bunicilor",
+          "edge": "related_to",
+          "strength": 0.78
+        }
+      ]
+    },
+    {
+      "target": "n_v4gas_sare",
+      "label": "Sare",
+      "candidate_sha256": "7d5f47ae4767b5b0a027b20c689d8191a77344bc51582847fb0078c22b6ceaa8",
+      "probes": [
+        {
+          "text": "condiment",
+          "accepted": true,
+          "label": "Condiment",
+          "rank": 77,
+          "distance": 2,
+          "temperature": "Caldut",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "mâncare",
+          "accepted": true,
+          "label": "Mâncare",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "piper",
+          "accepted": true,
+          "label": "Piper",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "murături",
+          "accepted": true,
+          "label": "Murături",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "saramură",
+          "accepted": true,
+          "label": "Saramură",
+          "rank": 35,
+          "distance": 2,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "salină",
+          "accepted": false,
+          "label": null,
+          "rank": null,
+          "distance": null,
+          "temperature": null,
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "mare",
+          "accepted": true,
+          "label": "mare",
+          "rank": 1452,
+          "distance": 4,
+          "temperature": "Foarte rece",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "zahăr",
+          "accepted": true,
+          "label": "Zahăr",
+          "rank": 574,
+          "distance": 4,
+          "temperature": "Rece",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Mici",
+          "accepted": true,
+          "label": "Mici",
+          "rank": 8,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Murături",
+          "accepted": true,
+          "label": "Murături",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Pufuleți",
+          "accepted": true,
+          "label": "Pufuleți",
+          "rank": 11,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Salina Turda",
+          "accepted": true,
+          "label": "Salina Turda",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Sosuri",
+          "accepted": true,
+          "label": "Sosuri",
+          "rank": 10,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Masa în familie",
+          "accepted": true,
+          "label": "Masa în familie",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Friptură",
+          "accepted": true,
+          "label": "Friptură",
+          "rank": 7,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Mâncare",
+          "accepted": true,
+          "label": "Mâncare",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Gospodăria bunicilor",
+          "accepted": true,
+          "label": "Gospodăria bunicilor",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Tăiatul porcului de Ignat",
+          "accepted": true,
+          "label": "Tăiatul porcului de Ignat",
+          "rank": 8,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Sare",
+          "accepted": true,
+          "label": "Sare",
+          "rank": 1,
+          "distance": 0,
+          "temperature": "Gasit",
+          "won": true,
+          "confirmation": null
+        }
+      ],
+      "incoming": [
+        {
+          "id": "n_gas_mici",
+          "label": "Mici",
+          "edge": "part_of",
+          "strength": 0.7
+        },
+        {
+          "id": "n_gas_muraturi",
+          "label": "Murături",
+          "edge": "part_of",
+          "strength": 0.82
+        },
+        {
+          "id": "n_v17gas_pufuleti",
+          "label": "Pufuleți",
+          "edge": "related_to",
+          "strength": 0.5
+        },
+        {
+          "id": "n_v17geo_salina_turda",
+          "label": "Salina Turda",
+          "edge": "associated_with",
+          "strength": 0.85
+        },
+        {
+          "id": "n_v2gas_sosuri",
+          "label": "Sosuri",
+          "edge": "part_of",
+          "strength": 0.65
+        },
+        {
+          "id": "n_v2via_masa_in_familie",
+          "label": "Masa în familie",
+          "edge": "related_to",
+          "strength": 0.76
+        },
+        {
+          "id": "n_v3gas_friptura",
+          "label": "Friptură",
+          "edge": "part_of",
+          "strength": 0.72
+        },
+        {
+          "id": "n_v4gas_mancare",
+          "label": "Mâncare",
+          "edge": "beginner_repair",
+          "strength": 0.96
+        },
+        {
+          "id": "n_vdr_gospodaria_bunicilor",
+          "label": "Gospodăria bunicilor",
+          "edge": "related_to",
+          "strength": 0.75
+        },
+        {
+          "id": "n_vdr_taiatul_porcului",
+          "label": "Tăiatul porcului de Ignat",
+          "edge": "related_to",
+          "strength": 0.7
+        }
+      ]
+    },
+    {
+      "target": "n_v4gas_ou",
+      "label": "Ou",
+      "candidate_sha256": "7d5f47ae4767b5b0a027b20c689d8191a77344bc51582847fb0078c22b6ceaa8",
+      "probes": [
+        {
+          "text": "găină",
+          "accepted": true,
+          "label": "Găină",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "albuș",
+          "accepted": true,
+          "label": "Albuș",
+          "rank": 115,
+          "distance": 3,
+          "temperature": "Caldut",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "gălbenuș",
+          "accepted": true,
+          "label": "Gălbenuș",
+          "rank": 115,
+          "distance": 3,
+          "temperature": "Caldut",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "clătite",
+          "accepted": true,
+          "label": "Clătite",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Paște",
+          "accepted": false,
+          "label": null,
+          "rank": null,
+          "distance": null,
+          "temperature": null,
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "cozonac",
+          "accepted": true,
+          "label": "Cozonac",
+          "rank": 28,
+          "distance": 2,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "mâncare",
+          "accepted": true,
+          "label": "Mâncare",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "pui",
+          "accepted": false,
+          "label": null,
+          "rank": null,
+          "distance": null,
+          "temperature": null,
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Masa de Paște",
+          "accepted": true,
+          "label": "Masa de Paște",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Ouă roșii",
+          "accepted": true,
+          "label": "Ouă roșii",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Salată de boeuf",
+          "accepted": true,
+          "label": "Salată de boeuf",
+          "rank": 8,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Tochitură moldovenească",
+          "accepted": true,
+          "label": "Tochitură moldovenească",
+          "rank": 9,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Brunch",
+          "accepted": true,
+          "label": "Brunch",
+          "rank": 10,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Șnițel",
+          "accepted": true,
+          "label": "Șnițel",
+          "rank": 7,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Găină",
+          "accepted": true,
+          "label": "Găină",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Clătite",
+          "accepted": true,
+          "label": "Clătite",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Mâncare",
+          "accepted": true,
+          "label": "Mâncare",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Ou",
+          "accepted": true,
+          "label": "Ou",
+          "rank": 1,
+          "distance": 0,
+          "temperature": "Gasit",
+          "won": true,
+          "confirmation": null
+        }
+      ],
+      "incoming": [
+        {
+          "id": "n_gas_masa_paste",
+          "label": "Masa de Paște",
+          "edge": "part_of",
+          "strength": 0.82
+        },
+        {
+          "id": "n_gas_oua_rosii",
+          "label": "Ouă roșii",
+          "edge": "related_to",
+          "strength": 0.9
+        },
+        {
+          "id": "n_gas_salata_boeuf",
+          "label": "Salată de boeuf",
+          "edge": "part_of",
+          "strength": 0.62
+        },
+        {
+          "id": "n_v11gas_tochitura_moldoveneasca",
+          "label": "Tochitură moldovenească",
+          "edge": "associated_with",
+          "strength": 0.6
+        },
+        {
+          "id": "n_v19gas_brunch",
+          "label": "Brunch",
+          "edge": "related_to",
+          "strength": 0.5
+        },
+        {
+          "id": "n_v20gas_snitel",
+          "label": "Șnițel",
+          "edge": "associated_with",
+          "strength": 0.7
+        },
+        {
+          "id": "n_v29_animal_farm_gaina",
+          "label": "Găină",
+          "edge": "produces_food",
+          "strength": 0.99
+        },
+        {
+          "id": "n_v3gas_clatite",
+          "label": "Clătite",
+          "edge": "part_of",
+          "strength": 0.76
+        },
+        {
+          "id": "n_v4gas_mancare",
+          "label": "Mâncare",
+          "edge": "beginner_repair",
+          "strength": 0.96
+        }
+      ]
+    },
+    {
+      "target": "n_v4gas_usturoi",
+      "label": "Usturoi",
+      "candidate_sha256": "7d5f47ae4767b5b0a027b20c689d8191a77344bc51582847fb0078c22b6ceaa8",
+      "probes": [
+        {
+          "text": "mujdei",
+          "accepted": true,
+          "label": "Mujdei",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "sos",
+          "accepted": true,
+          "label": "Sosuri",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "ceapă",
+          "accepted": true,
+          "label": "Ceapă",
+          "rank": 140,
+          "distance": 3,
+          "temperature": "Caldut",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "legume",
+          "accepted": true,
+          "label": "Legume",
+          "rank": 51,
+          "distance": 3,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "mici",
+          "accepted": true,
+          "label": "Mici",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "grătar",
+          "accepted": true,
+          "label": "Grătar",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "aromă",
+          "accepted": false,
+          "label": null,
+          "rank": null,
+          "distance": null,
+          "temperature": null,
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Mici",
+          "accepted": true,
+          "label": "Mici",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Mujdei",
+          "accepted": true,
+          "label": "Mujdei",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Cârnați de Pleșcoi",
+          "accepted": true,
+          "label": "Cârnați de Pleșcoi",
+          "rank": 7,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Grătar",
+          "accepted": true,
+          "label": "Grătar",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Sosuri",
+          "accepted": true,
+          "label": "Sosuri",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Fasole bătută",
+          "accepted": true,
+          "label": "Fasole bătută",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Usturoi",
+          "accepted": true,
+          "label": "Usturoi",
+          "rank": 1,
+          "distance": 0,
+          "temperature": "Gasit",
+          "won": true,
+          "confirmation": null
+        }
+      ],
+      "incoming": [
+        {
+          "id": "n_gas_mici",
+          "label": "Mici",
+          "edge": "related_to",
+          "strength": 0.66
+        },
+        {
+          "id": "n_gas_mujdei",
+          "label": "Mujdei",
+          "edge": "part_of",
+          "strength": 0.9
+        },
+        {
+          "id": "n_v17gas_carnati_plescoi",
+          "label": "Cârnați de Pleșcoi",
+          "edge": "related_to",
+          "strength": 0.6
+        },
+        {
+          "id": "n_v2gas_gratar",
+          "label": "Grătar",
+          "edge": "related_to",
+          "strength": 0.72
+        },
+        {
+          "id": "n_v2gas_sosuri",
+          "label": "Sosuri",
+          "edge": "part_of",
+          "strength": 0.78
+        },
+        {
+          "id": "n_v42gas_fasole_batuta",
+          "label": "Fasole bătută",
+          "edge": "related_to",
+          "strength": 0.7
+        }
+      ]
+    },
+    {
+      "target": "n_v24_food_pantry_faina",
+      "label": "Făină",
+      "candidate_sha256": "7d5f47ae4767b5b0a027b20c689d8191a77344bc51582847fb0078c22b6ceaa8",
+      "probes": [
+        {
+          "text": "grâu",
+          "accepted": true,
+          "label": "Grâu",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "aluat",
+          "accepted": true,
+          "label": "Aluat",
+          "rank": 186,
+          "distance": 4,
+          "temperature": "Caldut",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "pâine",
+          "accepted": true,
+          "label": "Pâine",
+          "rank": 45,
+          "distance": 3,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "cozonac",
+          "accepted": true,
+          "label": "Cozonac",
+          "rank": 56,
+          "distance": 3,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "prăjitură",
+          "accepted": true,
+          "label": "Prăjitură",
+          "rank": 241,
+          "distance": 4,
+          "temperature": "Rece",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "clătite",
+          "accepted": true,
+          "label": "Clătite",
+          "rank": 337,
+          "distance": 4,
+          "temperature": "Rece",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "cereale",
+          "accepted": true,
+          "label": "Cereale",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "mălai",
+          "accepted": true,
+          "label": "Mălai",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Zahăr",
+          "accepted": true,
+          "label": "Zahăr",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Mâncare",
+          "accepted": true,
+          "label": "Mâncare",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Grâu",
+          "accepted": true,
+          "label": "Grâu",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Griș",
+          "accepted": true,
+          "label": "Griș",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Mălai",
+          "accepted": true,
+          "label": "Mălai",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Secară",
+          "accepted": true,
+          "label": "Secară",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Făină",
+          "accepted": true,
+          "label": "Făină",
+          "rank": 1,
+          "distance": 0,
+          "temperature": "Gasit",
+          "won": true,
+          "confirmation": null
+        }
+      ],
+      "incoming": [
+        {
+          "id": "n_v24_food_pantry_zahar",
+          "label": "Zahăr",
+          "edge": "used_together",
+          "strength": 0.9
+        },
+        {
+          "id": "n_v4gas_mancare",
+          "label": "Mâncare",
+          "edge": "beginner_entry",
+          "strength": 0.86
+        },
+        {
+          "id": "n_v84_food_grau",
+          "label": "Grâu",
+          "edge": "processed_into",
+          "strength": 0.8
+        },
+        {
+          "id": "n_v84_food_gris",
+          "label": "Griș",
+          "edge": "same_category",
+          "strength": 0.8
+        },
+        {
+          "id": "n_v84_food_malai",
+          "label": "Mălai",
+          "edge": "same_category",
+          "strength": 0.8
+        },
+        {
+          "id": "n_v84_food_secara",
+          "label": "Secară",
+          "edge": "processed_into",
+          "strength": 0.8
+        }
+      ]
+    },
+    {
+      "target": "n_v3spo_minge",
+      "label": "Minge",
+      "candidate_sha256": "a4b4bf6fa5f728422d2940733599c974dd79747e96ce86999cf50b5b013ed346",
+      "probes": [
+        {
+          "text": "fotbal",
+          "accepted": true,
+          "label": "Fotbal",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "tenis",
+          "accepted": true,
+          "label": "Tenis",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "baschet",
+          "accepted": true,
+          "label": "Baschet",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "volei",
+          "accepted": true,
+          "label": "Volei",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "handbal",
+          "accepted": true,
+          "label": "Handbal",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "sport",
+          "accepted": true,
+          "label": "sport",
+          "rank": 134,
+          "distance": 3,
+          "temperature": "Caldut",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "teren",
+          "accepted": true,
+          "label": "teren",
+          "rank": 130,
+          "distance": 3,
+          "temperature": "Caldut",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "jucător",
+          "accepted": true,
+          "label": "jucător",
+          "rank": 25,
+          "distance": 2,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Fotbal",
+          "accepted": true,
+          "label": "Fotbal",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Tenis",
+          "accepted": true,
+          "label": "Tenis",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Oină",
+          "accepted": true,
+          "label": "Oină",
+          "rank": 7,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Baschet",
+          "accepted": true,
+          "label": "Baschet",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Handbal",
+          "accepted": true,
+          "label": "Handbal",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Volei",
+          "accepted": true,
+          "label": "Volei",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Minge",
+          "accepted": true,
+          "label": "Minge",
+          "rank": 1,
+          "distance": 0,
+          "temperature": "Gasit",
+          "won": true,
+          "confirmation": null
+        }
+      ],
+      "incoming": [
+        {
+          "id": "n_fotbal",
+          "label": "Fotbal",
+          "edge": "related_to",
+          "strength": 0.78
+        },
+        {
+          "id": "n_tenis",
+          "label": "Tenis",
+          "edge": "related_to",
+          "strength": 0.72
+        },
+        {
+          "id": "n_v11spo_oina",
+          "label": "Oină",
+          "edge": "associated_with",
+          "strength": 0.55
+        },
+        {
+          "id": "n_v2spo_baschet",
+          "label": "Baschet",
+          "edge": "related_to",
+          "strength": 0.78
+        },
+        {
+          "id": "n_v3spo_handbal",
+          "label": "Handbal",
+          "edge": "related_to",
+          "strength": 0.77
+        },
+        {
+          "id": "n_v3spo_volei",
+          "label": "Volei",
+          "edge": "related_to",
+          "strength": 0.77
+        }
+      ]
+    },
+    {
+      "target": "n_v11spo_arena_nationala",
+      "label": "Arena Națională",
+      "candidate_sha256": "a4b4bf6fa5f728422d2940733599c974dd79747e96ce86999cf50b5b013ed346",
+      "probes": [
+        {
+          "text": "fotbal",
+          "accepted": true,
+          "label": "Fotbal",
+          "rank": 72,
+          "distance": 2,
+          "temperature": "Caldut",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "stadion",
+          "accepted": true,
+          "label": "stadion",
+          "rank": 222,
+          "distance": 3,
+          "temperature": "Caldut",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "București",
+          "accepted": true,
+          "label": "București",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "FCSB",
+          "accepted": true,
+          "label": "FCSB",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Rapid București",
+          "accepted": true,
+          "label": "Rapid București",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Tricolorii",
+          "accepted": true,
+          "label": "Tricolorii",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "meci",
+          "accepted": true,
+          "label": "Meci",
+          "rank": 134,
+          "distance": 2,
+          "temperature": "Caldut",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Finală sportivă",
+          "accepted": true,
+          "label": "Finală sportivă",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Arena Națională",
+          "accepted": true,
+          "label": "Arena Națională",
+          "rank": 1,
+          "distance": 0,
+          "temperature": "Gasit",
+          "won": true,
+          "confirmation": null
+        }
+      ],
+      "incoming": [
+        {
+          "id": "n_bucuresti",
+          "label": "București",
+          "edge": "located_in",
+          "strength": 0.88
+        },
+        {
+          "id": "n_spt_tricolorii",
+          "label": "Tricolorii",
+          "edge": "associated_with",
+          "strength": 0.75
+        },
+        {
+          "id": "n_v11spo_rapid_bucuresti",
+          "label": "Rapid București",
+          "edge": "associated_with",
+          "strength": 0.5
+        },
+        {
+          "id": "n_v18spo_fcsb",
+          "label": "FCSB",
+          "edge": "located_in",
+          "strength": 0.8
+        },
+        {
+          "id": "n_v2spo_finala_sportiva",
+          "label": "Finală sportivă",
+          "edge": "associated_with",
+          "strength": 0.55
+        }
+      ]
+    },
+    {
+      "target": "n_v2sti_avion",
+      "label": "Avion",
+      "candidate_sha256": "fdfc3784267371de8e53e8c10ade2362c6de4aa369315851886baa0f08d4c861",
+      "probes": [
+        {
+          "text": "zbor",
+          "accepted": false,
+          "label": null,
+          "rank": null,
+          "distance": null,
+          "temperature": null,
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "aeroport",
+          "accepted": true,
+          "label": "Aeroport",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "pilot",
+          "accepted": false,
+          "label": null,
+          "rank": null,
+          "distance": null,
+          "temperature": null,
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Coandă",
+          "accepted": true,
+          "label": "Henri Coandă",
+          "rank": 14,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Traian Vuia",
+          "accepted": true,
+          "label": "Traian Vuia",
+          "rank": 11,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "aer",
+          "accepted": true,
+          "label": "aer",
+          "rank": 15,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "transport",
+          "accepted": false,
+          "label": null,
+          "rank": null,
+          "distance": null,
+          "temperature": null,
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "cer",
+          "accepted": true,
+          "label": "Cer",
+          "rank": 1346,
+          "distance": 4,
+          "temperature": "Foarte rece",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Aerodinamică",
+          "accepted": true,
+          "label": "Aerodinamică",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Aeroportul Băneasa Aurel Vlaicu",
+          "accepted": true,
+          "label": "Aeroportul Băneasa Aurel Vlaicu",
+          "rank": 19,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Aurel Vlaicu",
+          "accepted": true,
+          "label": "Aurel Vlaicu",
+          "rank": 10,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Aviație",
+          "accepted": true,
+          "label": "Aviație",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Avionul Vlaicu I",
+          "accepted": true,
+          "label": "Avionul Vlaicu I",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Coandă-1910",
+          "accepted": true,
+          "label": "Coandă-1910",
+          "rank": 11,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Henri Coandă",
+          "accepted": true,
+          "label": "Henri Coandă",
+          "rank": 14,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Muzeul Național al Aviației Române",
+          "accepted": true,
+          "label": "Muzeul Național al Aviației Române",
+          "rank": 17,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Elie Carafoli",
+          "accepted": true,
+          "label": "Elie Carafoli",
+          "rank": 16,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "IAR 80",
+          "accepted": true,
+          "label": "IAR 80",
+          "rank": 13,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Aeroportul Henri Coandă",
+          "accepted": true,
+          "label": "Aeroportul Henri Coandă",
+          "rank": 19,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Dumitru Prunariu",
+          "accepted": true,
+          "label": "Dumitru Prunariu",
+          "rank": 22,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "City break-ul",
+          "accepted": true,
+          "label": "City break-ul",
+          "rank": 19,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Aeroport",
+          "accepted": true,
+          "label": "Aeroport",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Gară",
+          "accepted": true,
+          "label": "Gară",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Stație",
+          "accepted": true,
+          "label": "Stație",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Gravitație",
+          "accepted": true,
+          "label": "Gravitație",
+          "rank": 18,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Vlaicu II",
+          "accepted": true,
+          "label": "Vlaicu II",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Vuia I",
+          "accepted": true,
+          "label": "Vuia I",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Avion",
+          "accepted": true,
+          "label": "Avion",
+          "rank": 1,
+          "distance": 0,
+          "temperature": "Gasit",
+          "won": true,
+          "confirmation": null
+        }
+      ],
+      "incoming": [
+        {
+          "id": "n_aerodinamica",
+          "label": "Aerodinamică",
+          "edge": "related_to",
+          "strength": 0.92
+        },
+        {
+          "id": "n_aeroportul_baneasa",
+          "label": "Aeroportul Băneasa Aurel Vlaicu",
+          "edge": "related_to",
+          "strength": 0.6
+        },
+        {
+          "id": "n_aurel_vlaicu",
+          "label": "Aurel Vlaicu",
+          "edge": "related_to",
+          "strength": 0.84
+        },
+        {
+          "id": "n_aviatie",
+          "label": "Aviație",
+          "edge": "related_to",
+          "strength": 0.88
+        },
+        {
+          "id": "n_avionul_vlaicu",
+          "label": "Avionul Vlaicu I",
+          "edge": "is_a",
+          "strength": 0.9
+        },
+        {
+          "id": "n_coanda_1910",
+          "label": "Coandă-1910",
+          "edge": "is_a",
+          "strength": 0.82
+        },
+        {
+          "id": "n_henri_coanda",
+          "label": "Henri Coandă",
+          "edge": "related_to",
+          "strength": 0.78
+        },
+        {
+          "id": "n_muzeul_aviatiei_romane",
+          "label": "Muzeul Național al Aviației Române",
+          "edge": "related_to",
+          "strength": 0.64
+        },
+        {
+          "id": "n_traian_vuia",
+          "label": "Traian Vuia",
+          "edge": "related_to",
+          "strength": 0.82
+        },
+        {
+          "id": "n_v11sti_elie_carafoli",
+          "label": "Elie Carafoli",
+          "edge": "associated_with",
+          "strength": 0.68
+        },
+        {
+          "id": "n_v11sti_iar_80",
+          "label": "IAR 80",
+          "edge": "is_a",
+          "strength": 0.8
+        },
+        {
+          "id": "n_v17geo_aeroportul_otopeni",
+          "label": "Aeroportul Henri Coandă",
+          "edge": "associated_with",
+          "strength": 0.6
+        },
+        {
+          "id": "n_v17per_dumitru_prunariu",
+          "label": "Dumitru Prunariu",
+          "edge": "related_to",
+          "strength": 0.55
+        },
+        {
+          "id": "n_v19via_city_break",
+          "label": "City break-ul",
+          "edge": "associated_with",
+          "strength": 0.6
+        },
+        {
+          "id": "n_v24_transport_terminals_aeroport",
+          "label": "Aeroport",
+          "edge": "serves_transport",
+          "strength": 0.99
+        },
+        {
+          "id": "n_v24_transport_terminals_gara",
+          "label": "Gară",
+          "edge": "beginner_exit",
+          "strength": 0.86
+        },
+        {
+          "id": "n_v24_transport_terminals_statie",
+          "label": "Stație",
+          "edge": "beginner_exit",
+          "strength": 0.86
+        },
+        {
+          "id": "n_v3sti_gravitatie",
+          "label": "Gravitație",
+          "edge": "related_to",
+          "strength": 0.62
+        },
+        {
+          "id": "n_v4sti_aer",
+          "label": "aer",
+          "edge": "related_to",
+          "strength": 0.7
+        },
+        {
+          "id": "n_vlaicu_ii",
+          "label": "Vlaicu II",
+          "edge": "is_a",
+          "strength": 0.86
+        },
+        {
+          "id": "n_vuia_i",
+          "label": "Vuia I",
+          "edge": "is_a",
+          "strength": 0.86
+        }
+      ]
+    },
+    {
+      "target": "n_v2sti_calculator",
+      "label": "Calculator",
+      "candidate_sha256": "fdfc3784267371de8e53e8c10ade2362c6de4aa369315851886baa0f08d4c861",
+      "probes": [
+        {
+          "text": "tastatură",
+          "accepted": true,
+          "label": "Tastatură",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "ecran",
+          "accepted": true,
+          "label": "ecran",
+          "rank": 1812,
+          "distance": 6,
+          "temperature": "Inghetat",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "internet",
+          "accepted": true,
+          "label": "Internet",
+          "rank": 76,
+          "distance": 3,
+          "temperature": "Caldut",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "mouse",
+          "accepted": false,
+          "label": null,
+          "rank": null,
+          "distance": null,
+          "temperature": null,
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "program",
+          "accepted": false,
+          "label": null,
+          "rank": null,
+          "distance": null,
+          "temperature": null,
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "electricitate",
+          "accepted": true,
+          "label": "Electricitate",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Grigore Moisil",
+          "accepted": true,
+          "label": "Grigore Moisil",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "tehnologie",
+          "accepted": false,
+          "label": null,
+          "rank": null,
+          "distance": null,
+          "temperature": null,
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Cibernetică",
+          "accepted": true,
+          "label": "Cibernetică",
+          "rank": 7,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Ștefan Odobleja",
+          "accepted": true,
+          "label": "Ștefan Odobleja",
+          "rank": 12,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "George Buhnici",
+          "accepted": true,
+          "label": "George Buhnici",
+          "rank": 10,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Sala de internet",
+          "accepted": true,
+          "label": "Sala de internet",
+          "rank": 8,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Yahoo Messenger",
+          "accepted": true,
+          "label": "Yahoo Messenger",
+          "rank": 9,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Inteligență artificială",
+          "accepted": true,
+          "label": "Inteligență artificială",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Robotică",
+          "accepted": true,
+          "label": "Robotică",
+          "rank": 11,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Victor Toma",
+          "accepted": true,
+          "label": "Victor Toma",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Matematică",
+          "accepted": true,
+          "label": "Matematică",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Electricitate",
+          "accepted": true,
+          "label": "Electricitate",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Calculator",
+          "accepted": true,
+          "label": "Calculator",
+          "rank": 1,
+          "distance": 0,
+          "temperature": "Gasit",
+          "won": true,
+          "confirmation": null
+        }
+      ],
+      "incoming": [
+        {
+          "id": "n_cibernetica",
+          "label": "Cibernetică",
+          "edge": "related_to",
+          "strength": 0.73
+        },
+        {
+          "id": "n_stefan_odobleja",
+          "label": "Ștefan Odobleja",
+          "edge": "related_to",
+          "strength": 0.58
+        },
+        {
+          "id": "n_stix_grigore_moisil",
+          "label": "Grigore Moisil",
+          "edge": "related_to",
+          "strength": 0.8
+        },
+        {
+          "id": "n_v11mem_george_buhnici",
+          "label": "George Buhnici",
+          "edge": "related_to",
+          "strength": 0.65
+        },
+        {
+          "id": "n_v17mem_sala_de_internet",
+          "label": "Sala de internet",
+          "edge": "associated_with",
+          "strength": 0.72
+        },
+        {
+          "id": "n_v17mem_yahoo_messenger",
+          "label": "Yahoo Messenger",
+          "edge": "associated_with",
+          "strength": 0.7
+        },
+        {
+          "id": "n_v17sti_inteligenta_artificiala",
+          "label": "Inteligență artificială",
+          "edge": "associated_with",
+          "strength": 0.8
+        },
+        {
+          "id": "n_v17sti_robotica",
+          "label": "Robotică",
+          "edge": "associated_with",
+          "strength": 0.6
+        },
+        {
+          "id": "n_v21sti_victor_toma",
+          "label": "Victor Toma",
+          "edge": "related_to",
+          "strength": 0.9
+        },
+        {
+          "id": "n_v2sti_matematica",
+          "label": "Matematică",
+          "edge": "related_to",
+          "strength": 0.78
+        },
+        {
+          "id": "n_v3sti_electricitate",
+          "label": "Electricitate",
+          "edge": "related_to",
+          "strength": 0.76
+        }
+      ]
+    },
+    {
+      "target": "n_v4via_cheie",
+      "label": "cheie",
+      "candidate_sha256": "9426a103320d95d5dbbe8556db418a97a45797c25ccff476492a94d21cf719ed",
+      "probes": [
+        {
+          "text": "ușă",
+          "accepted": true,
+          "label": "ușă",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "încuietoare",
+          "accepted": false,
+          "label": null,
+          "rank": null,
+          "distance": null,
+          "temperature": null,
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "casă",
+          "accepted": true,
+          "label": "casă",
+          "rank": 7,
+          "distance": 2,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "interfon",
+          "accepted": true,
+          "label": "Interfonul",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "apartament",
+          "accepted": true,
+          "label": "apartament",
+          "rank": 39,
+          "distance": 3,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "lacăt",
+          "accepted": false,
+          "label": null,
+          "rank": null,
+          "distance": null,
+          "temperature": null,
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "metal",
+          "accepted": true,
+          "label": "metal",
+          "rank": 1074,
+          "distance": 5,
+          "temperature": "Foarte rece",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Casa părintească",
+          "accepted": true,
+          "label": "Casa părintească",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Cheia de la gât",
+          "accepted": true,
+          "label": "Cheia de la gât",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Interfonul",
+          "accepted": true,
+          "label": "Interfonul",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Scara blocului",
+          "accepted": true,
+          "label": "Scara blocului",
+          "rank": 4,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "cheie",
+          "accepted": true,
+          "label": "cheie",
+          "rank": 1,
+          "distance": 0,
+          "temperature": "Gasit",
+          "won": true,
+          "confirmation": null
+        }
+      ],
+      "incoming": [
+        {
+          "id": "n_v2via_casa_parinteasca",
+          "label": "Casa părintească",
+          "edge": "related_to",
+          "strength": 0.76
+        },
+        {
+          "id": "n_v4via_usa",
+          "label": "ușă",
+          "edge": "associated_with",
+          "strength": 0.65
+        },
+        {
+          "id": "n_vdr_cheia_de_la_gat",
+          "label": "Cheia de la gât",
+          "edge": "instance_of",
+          "strength": 0.75
+        },
+        {
+          "id": "n_vdr_interfon",
+          "label": "Interfonul",
+          "edge": "related_to",
+          "strength": 0.66
+        },
+        {
+          "id": "n_vdr_scara_blocului",
+          "label": "Scara blocului",
+          "edge": "related_to",
+          "strength": 0.72
+        }
+      ]
+    },
+    {
+      "target": "n_v23via_ghiozdan",
+      "label": "Ghiozdan",
+      "candidate_sha256": "9426a103320d95d5dbbe8556db418a97a45797c25ccff476492a94d21cf719ed",
+      "probes": [
+        {
+          "text": "școală",
+          "accepted": true,
+          "label": "Școală",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "elev",
+          "accepted": true,
+          "label": "elev",
+          "rank": 10,
+          "distance": 2,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "carte",
+          "accepted": true,
+          "label": "Carte",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "caiet",
+          "accepted": true,
+          "label": "Caiet",
+          "rank": 25,
+          "distance": 2,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "penar",
+          "accepted": true,
+          "label": "Penar",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "creion",
+          "accepted": true,
+          "label": "Creion",
+          "rank": 25,
+          "distance": 2,
+          "temperature": "Cald",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "copil",
+          "accepted": true,
+          "label": "copil",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "abecedar",
+          "accepted": true,
+          "label": "Abecedar",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Abecedar",
+          "accepted": true,
+          "label": "Abecedar",
+          "rank": 6,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Penar",
+          "accepted": true,
+          "label": "Penar",
+          "rank": 5,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Carte",
+          "accepted": true,
+          "label": "Carte",
+          "rank": 3,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Școală",
+          "accepted": true,
+          "label": "Școală",
+          "rank": 2,
+          "distance": 1,
+          "temperature": "Fierbinte",
+          "won": false,
+          "confirmation": null
+        },
+        {
+          "text": "Ghiozdan",
+          "accepted": true,
+          "label": "Ghiozdan",
+          "rank": 1,
+          "distance": 0,
+          "temperature": "Gasit",
+          "won": true,
+          "confirmation": null
+        }
+      ],
+      "incoming": [
+        {
+          "id": "n_v23via_abecedar",
+          "label": "Abecedar",
+          "edge": "same_category",
+          "strength": 0.78
+        },
+        {
+          "id": "n_v23via_penar",
+          "label": "Penar",
+          "edge": "same_category",
+          "strength": 0.8
+        },
+        {
+          "id": "n_v3lit_carte",
+          "label": "Carte",
+          "edge": "related_to",
+          "strength": 0.82
+        },
+        {
+          "id": "n_v3soc_scoala",
+          "label": "Școală",
+          "edge": "related_to",
+          "strength": 0.88
+        },
+        {
+          "id": "n_v4soc_copil",
+          "label": "copil",
+          "edge": "related_to",
+          "strength": 0.82
+        }
+      ]
+    }
+  ]
+}

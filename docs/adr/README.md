@@ -58,6 +58,12 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0146 | [Expand Alchimie and preserve collections](0146-expand-alchimie-and-preserve-collections.md) | partially superseded by 0147 for larger vocabulary, bounds and history |
 | 0147 | [Grow Alchimie with reviewed vocabulary](0147-grow-alchimie-with-reviewed-vocabulary.md) | accepted |
 
+| 0148 | [Expand all game content with independent review](0148-expand-all-game-content-with-independent-review.md) | accepted |
+
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially
 superseded by ADR-0131 for the six cleaning-node topology boundary; their other scope remains.
+
+Earlier decisions affected by V92: [ADR-0052](0052-derived-beginner-games.md) and
+[ADR-0054](0054-refine-derived-pilot-before-expansion.md) are partially superseded by
+ADR-0148 for authored quick-game catalog expansion; their selection and safety rules remain.

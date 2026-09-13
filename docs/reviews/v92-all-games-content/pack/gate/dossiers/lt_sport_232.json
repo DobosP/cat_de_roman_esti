@@ -1,0 +1,179 @@
+{
+ "id": "lt_sport_232",
+ "game": "lant",
+ "category": "sport",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "a01a81ba74f8d81028d6dc93951285d95c607a8d022072d14b5bebc505b6a5f2",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "display_rules_sha256": "7048444ef3ef01d2c524a7ef79874324cf3f89c195fb473008e5631b40b84781",
+ "start": {
+  "id": "n_spt_romania_argentina_1994",
+  "label": "România - Argentina 1994",
+  "node_type": "event",
+  "category": "sport",
+  "salience": 0.9456,
+  "degree": 9,
+  "incoming_degree": 9,
+  "description": "Victoria cu 3-2 din optimile Mondialului, unul dintre cele mai iubite meciuri ale României."
+ },
+ "target": {
+  "id": "n_v17spo_anghel_iordanescu",
+  "label": "Anghel Iordănescu",
+  "node_type": "person",
+  "category": "sport",
+  "salience": 0.7,
+  "degree": 8,
+  "incoming_degree": 8,
+  "description": "Antrenor și fost fotbalist, selecționerul care a dus Generația de Aur până în sferturile Cupei Mondiale din 1994. A fost antrenor secund la Steaua în 1986 și a condus naționala României în trei mandate."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 3,
+  "narrowest_shortest_path_layer": 3,
+  "total_intermediate_shortest_path_nodes": 3
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_spt_romania_argentina_1994",
+     "label": "România - Argentina 1994"
+    },
+    {
+     "id": "n_spt_world_cup_1994",
+     "label": "Cupa Mondială 1994"
+    },
+    {
+     "id": "n_v17spo_anghel_iordanescu",
+     "label": "Anghel Iordănescu"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_spt_romania_argentina_1994",
+      "label": "România - Argentina 1994"
+     },
+     "to": {
+      "id": "n_spt_world_cup_1994",
+      "label": "Cupa Mondială 1994"
+     },
+     "relation": "part_of",
+     "label": "include meciul",
+     "display_label": "meci și turneu",
+     "strength": 0.95
+    },
+    {
+     "from": {
+      "id": "n_spt_world_cup_1994",
+      "label": "Cupa Mondială 1994"
+     },
+     "to": {
+      "id": "n_v17spo_anghel_iordanescu",
+      "label": "Anghel Iordănescu"
+     },
+     "relation": "associated_with",
+     "label": "a dus România la",
+     "display_label": "selecționer și turneu",
+     "strength": 0.88
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_spt_romania_argentina_1994",
+     "label": "România - Argentina 1994"
+    },
+    {
+     "id": "n_spt_tricolorii",
+     "label": "Tricolorii"
+    },
+    {
+     "id": "n_v17spo_anghel_iordanescu",
+     "label": "Anghel Iordănescu"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_spt_romania_argentina_1994",
+      "label": "România - Argentina 1994"
+     },
+     "to": {
+      "id": "n_spt_tricolorii",
+      "label": "Tricolorii"
+     },
+     "relation": "related_to",
+     "label": "victorie a tricolorilor",
+     "display_label": "meci și echipă națională",
+     "strength": 0.92
+    },
+    {
+     "from": {
+      "id": "n_spt_tricolorii",
+      "label": "Tricolorii"
+     },
+     "to": {
+      "id": "n_v17spo_anghel_iordanescu",
+      "label": "Anghel Iordănescu"
+     },
+     "relation": "associated_with",
+     "label": "selecționer al",
+     "display_label": "echipă și selecționer",
+     "strength": 0.86
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_spt_romania_argentina_1994",
+     "label": "România - Argentina 1994"
+    },
+    {
+     "id": "n_gheorghe_hagi",
+     "label": "Gheorghe Hagi"
+    },
+    {
+     "id": "n_v17spo_anghel_iordanescu",
+     "label": "Anghel Iordănescu"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_spt_romania_argentina_1994",
+      "label": "România - Argentina 1994"
+     },
+     "to": {
+      "id": "n_gheorghe_hagi",
+      "label": "Gheorghe Hagi"
+     },
+     "relation": "related_to",
+     "label": "a condus jocul",
+     "display_label": "fotbalist și meci",
+     "strength": 0.82
+    },
+    {
+     "from": {
+      "id": "n_gheorghe_hagi",
+      "label": "Gheorghe Hagi"
+     },
+     "to": {
+      "id": "n_v17spo_anghel_iordanescu",
+      "label": "Anghel Iordănescu"
+     },
+     "relation": "associated_with",
+     "label": "l-a avut lider pe",
+     "display_label": "fotbalist și antrenor",
+     "strength": 0.78
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:f10ddb2d57ef41d917e96a761296c98be6485b8324eec946edc866f5d7f0504a"
+}

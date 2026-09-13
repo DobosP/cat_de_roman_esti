@@ -1,0 +1,86 @@
+{
+  "kind": "v92-all-games-integration-v1",
+  "verified_date": "2026-09-14",
+  "baseline_commit": "75584bf9ef0b8dac6d309fc4e447851c4ff07750",
+  "branch": "feat/v92-alchimie-gui",
+  "passed": true,
+  "added_rounds": {
+    "conexiuni": 4,
+    "contexto": 8,
+    "lant": 13,
+    "intrusul": 25,
+    "perechi": 20
+  },
+  "new_shared_kg_concepts": 0,
+  "excluded_pack_proposals": 12,
+  "checks": {
+    "backend_python312": {
+      "passed": 1934,
+      "log_sha256": "9e895ef5baa62f1337b3d4f5b99dc55001c378eb456a327440439ad7f2db18eb"
+    },
+    "accounts": {
+      "passed": 53,
+      "log_sha256": "1e9e0ba5973964a849ca3f5e9e3c57ae17a5b2f49c0edb028cae99ec43a70cfc"
+    },
+    "browser_chromium_desktop_mobile": {
+      "passed": 446,
+      "log_sha256": "494c847f3160a8b6056d3af8563170cd071bd80d187b71cbce597005909908f8"
+    },
+    "frontend_native": {
+      "passed": 212,
+      "log_sha256": "d538781453231152fa266755a9e112f03aaa02224c0953750d11b7e10488073a"
+    },
+    "focused_quick_and_api": {
+      "passed": 120,
+      "log_sha256": "8ed3a811f3e62f4a07cc1fe7c19a09961371e79e430cdae321b756b69d4bc552"
+    }
+  },
+  "other_completed_gates": [
+    "Ruff",
+    "git diff --check",
+    "validate_fixture.py",
+    "validate_games_pack.py",
+    "frontend lint",
+    "frontend typecheck",
+    "check_docs.py"
+  ],
+  "artifact_sha256": {
+    "cat_de_roman_esti/fixtures/games_pack.json": "62c1eaaa7bb72674cf59a66f9b543d911749d52973155f6b201d796d97d6ea4a",
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": "6f2662615b686a492b41f2d689a7ba6b380b62d7b8cecc5e7a3c9788d1dce641",
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": "09e6b1caa3ed586264a85d3d9807f0173384c02c80102dae072d14665432f2aa",
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": "36f5fc575ed5ae36735d792dd71df5860d917dba1b3b58090f792afd4f3b0d39",
+    "cat_de_roman_esti/fixtures/kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "tests/fixtures/cat_mobile_app_pack_contract.json": "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f"
+  },
+  "quick_live_audit_sha256": "6709af51085192b8359d94567674de871515bd80aecf66f1863f9c4e5ccac080",
+  "reviewed_runtime_source_sha256": {
+    "cat_de_roman_esti/wordgames/quick_catalog.py": "c9149b6a724f532c0393ae102012ffa8321a489c76030be6793dcd9c6d5b3689",
+    "cat_de_roman_esti/wordgames/derived_catalog.py": "f4a5163354b19f1b9217ac58bc495da3d6c624cb8a363ad2942907dd5e0321ca",
+    "cat_de_roman_esti/wordgames/intrusul.py": "e37056d451a9217501b92cb1eabfc7b99535b3f9270d96497d6ae852e8a0a82d",
+    "cat_de_roman_esti/wordgames/perechi.py": "36dfc64b921e73801853f302eac688405067fa6164691a10854a2ab00ced227c",
+    "cat_de_roman_esti/wordgames/service.py": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea",
+    "scripts/build_quick_content_v92.py": "6c3fdd4517b7581133396ccff9912f87d2455958850968974c874b93b69ebb21",
+    "scripts/audit_quick_content_v92.py": "47e49f6c4b01b6158fa4faaccfd2062dd5fd2d61ff26223b3801311ce25616d2",
+    "scripts/quick_game_content_source_v92.py": "c318d7bef526aac65a9b4a4e3b9837849f86587a97027aff3d9e546181bdc767"
+  },
+  "archived_review_files_verified": 92,
+  "preserved_from_baseline": [
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json",
+    "cat_de_roman_esti/fixtures/kg_sample.json",
+    "tests/fixtures/cat_mobile_app_pack_contract.json"
+  ],
+  "frontend_product_and_static_unchanged": true,
+  "historical_tests": "Exact V92 inverse restores complete 75584bf artifacts before prior wave assertions; original historical pins retained. API caption expectations updated with raw KG assertions preserved.",
+  "preview": {
+    "port": 8144,
+    "health_status": 200,
+    "six_lobby_entries": true
+  },
+  "limitations": [
+    "No human playtest",
+    "No physical-device acceptance",
+    "Python 3.14 not rerun in this pass",
+    "No deployment or push"
+  ]
+}

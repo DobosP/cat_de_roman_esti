@@ -11,6 +11,7 @@ from pathlib import Path
 import pytest
 
 from scripts import apply_sport_seed_revision_v91 as migration
+from tests.content_history import before_v91_artifact
 
 ALCHIMIE_SOURCE = "cat_de_roman_esti/wordgames/alchimie.py"
 
@@ -43,11 +44,14 @@ def isolated(tmp_path):
     for name in (*migration.INPUT_SHA256, "quality-review.json", "factual-review.json"):
         shutil.copyfile(migration.ROOT / migration.REVIEW_DIR / name, review_dir / name)
     proposal = json.loads((review_dir / "replacement-proposal.json").read_bytes())
-    pack = json.loads((tmp_path / migration.PACK_PATHS[0]).read_bytes())
-    for index, row in enumerate(pack["alchimie"]):
-        if row["id"] == migration.ITEM_ID:
-            assert row in (proposal["before"], proposal["after"])
-            pack["alchimie"][index] = proposal["before"]
+    # Peel the exact later content wave and V91 seed revision before applying the
+    # frozen migration again. Current stock also contains V92's 25 new records.
+    pack = before_v91_artifact(
+        json.loads((tmp_path / migration.PACK_PATHS[0]).read_bytes()), "games_pack.json"
+    )
+    assert next(row for row in pack["alchimie"] if row["id"] == migration.ITEM_ID) == (
+        proposal["before"]
+    )
     for relative in migration.PACK_PATHS:
         path = tmp_path / relative
         path.parent.mkdir(parents=True, exist_ok=True)

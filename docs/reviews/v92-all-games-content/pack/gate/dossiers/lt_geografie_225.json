@@ -1,0 +1,179 @@
+{
+ "id": "lt_geografie_225",
+ "game": "lant",
+ "category": "geografie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "dcea561fa0c66c39c3b3798a7e21fa4ed0eaf471f311a1b3e25333d10b6efd79",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "display_rules_sha256": "7048444ef3ef01d2c524a7ef79874324cf3f89c195fb473008e5631b40b84781",
+ "start": {
+  "id": "n_marea_neagra",
+  "label": "Marea Neagră",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.6416,
+  "degree": 26,
+  "incoming_degree": 27,
+  "description": "Mare la est de România, litoralul românesc."
+ },
+ "target": {
+  "id": "n_dunarea",
+  "label": "Dunărea",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.8949,
+  "degree": 32,
+  "incoming_degree": 37,
+  "description": "Cel mai mare fluviu al României, granița sudică."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 5,
+  "narrowest_shortest_path_layer": 5,
+  "total_intermediate_shortest_path_nodes": 5
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_marea_neagra",
+     "label": "Marea Neagră"
+    },
+    {
+     "id": "n_delta_dunarii",
+     "label": "Delta Dunării"
+    },
+    {
+     "id": "n_dunarea",
+     "label": "Dunărea"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_marea_neagra",
+      "label": "Marea Neagră"
+     },
+     "to": {
+      "id": "n_delta_dunarii",
+      "label": "Delta Dunării"
+     },
+     "relation": "located_in",
+     "label": "se varsă în",
+     "display_label": "mare și deltă",
+     "strength": 0.85
+    },
+    {
+     "from": {
+      "id": "n_delta_dunarii",
+      "label": "Delta Dunării"
+     },
+     "to": {
+      "id": "n_dunarea",
+      "label": "Dunărea"
+     },
+     "relation": "located_in",
+     "label": "formează",
+     "display_label": "fluviu și deltă",
+     "strength": 0.9
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_marea_neagra",
+     "label": "Marea Neagră"
+    },
+    {
+     "id": "n_v17geo_canal_dunare_marea_neagra",
+     "label": "Canalul Dunăre-Marea Neagră"
+    },
+    {
+     "id": "n_dunarea",
+     "label": "Dunărea"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_marea_neagra",
+      "label": "Marea Neagră"
+     },
+     "to": {
+      "id": "n_v17geo_canal_dunare_marea_neagra",
+      "label": "Canalul Dunăre-Marea Neagră"
+     },
+     "relation": "associated_with",
+     "label": "se varsă în mare",
+     "display_label": "mare și canal navigabil",
+     "strength": 0.85
+    },
+    {
+     "from": {
+      "id": "n_v17geo_canal_dunare_marea_neagra",
+      "label": "Canalul Dunăre-Marea Neagră"
+     },
+     "to": {
+      "id": "n_dunarea",
+      "label": "Dunărea"
+     },
+     "relation": "associated_with",
+     "label": "pornește din Dunăre",
+     "display_label": "fluviu și canal navigabil",
+     "strength": 0.85
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_marea_neagra",
+     "label": "Marea Neagră"
+    },
+    {
+     "id": "n_v4geo_fluviu",
+     "label": "fluviu"
+    },
+    {
+     "id": "n_dunarea",
+     "label": "Dunărea"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_marea_neagra",
+      "label": "Marea Neagră"
+     },
+     "to": {
+      "id": "n_v4geo_fluviu",
+      "label": "fluviu"
+     },
+     "relation": "related_to",
+     "label": "se varsă în",
+     "display_label": "fluviu și mare",
+     "strength": 0.78
+    },
+    {
+     "from": {
+      "id": "n_v4geo_fluviu",
+      "label": "fluviu"
+     },
+     "to": {
+      "id": "n_dunarea",
+      "label": "Dunărea"
+     },
+     "relation": "related_to",
+     "label": "exemplu major",
+     "display_label": "fluviu și exemplu",
+     "strength": 0.9
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:a3b6ebf3c12bbd638c1ca7c59bee3367819b04a37d76df6c39dabe726aee535e"
+}

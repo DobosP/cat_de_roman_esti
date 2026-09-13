@@ -1,0 +1,190 @@
+{
+ "id": "lt_geografie_227",
+ "game": "lant",
+ "category": "geografie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "bf87d82625bd3f25625d3a936c7306af4c3f818f450a8e63cb30a921e97cfbb8",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Iași salience 0.51 < 0.60 (usor floor)"
+  },
+  {
+   "check": "salience_floor",
+   "level": "WARN",
+   "detail": "Ion Creangă salience 0.56 < 0.60 (usor floor)"
+  }
+ ],
+ "display_rules_sha256": "7048444ef3ef01d2c524a7ef79874324cf3f89c195fb473008e5631b40b84781",
+ "start": {
+  "id": "n_iasi",
+  "label": "Iași",
+  "node_type": "place",
+  "category": "geografie",
+  "salience": 0.5139,
+  "degree": 20,
+  "incoming_degree": 19,
+  "description": "Oras din Moldova, fosta capitala a Principatului Moldovei si important centru cultural."
+ },
+ "target": {
+  "id": "n_ion_creanga",
+  "label": "Ion Creangă",
+  "node_type": "person",
+  "category": "literatura",
+  "salience": 0.5583,
+  "degree": 19,
+  "incoming_degree": 18,
+  "description": "Scriitor roman, autor al Amintirilor din copilarie."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 3,
+  "narrowest_shortest_path_layer": 3,
+  "total_intermediate_shortest_path_nodes": 3
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_iasi",
+     "label": "Iași"
+    },
+    {
+     "id": "n_junimea",
+     "label": "Junimea"
+    },
+    {
+     "id": "n_ion_creanga",
+     "label": "Ion Creangă"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_iasi",
+      "label": "Iași"
+     },
+     "to": {
+      "id": "n_junimea",
+      "label": "Junimea"
+     },
+     "relation": "related_to",
+     "label": "a gazduit societatea",
+     "display_label": "oraș și societate literară",
+     "strength": 0.7
+    },
+    {
+     "from": {
+      "id": "n_junimea",
+      "label": "Junimea"
+     },
+     "to": {
+      "id": "n_ion_creanga",
+      "label": "Ion Creangă"
+     },
+     "relation": "part_of",
+     "label": "membru al",
+     "display_label": "scriitor și societate literară",
+     "strength": 0.65
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_iasi",
+     "label": "Iași"
+    },
+    {
+     "id": "n_moldova",
+     "label": "Moldova"
+    },
+    {
+     "id": "n_ion_creanga",
+     "label": "Ion Creangă"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_iasi",
+      "label": "Iași"
+     },
+     "to": {
+      "id": "n_moldova",
+      "label": "Moldova"
+     },
+     "relation": "related_to",
+     "label": "capitala istorica a",
+     "display_label": "capitală istorică și regiune",
+     "strength": 0.7
+    },
+    {
+     "from": {
+      "id": "n_moldova",
+      "label": "Moldova"
+     },
+     "to": {
+      "id": "n_ion_creanga",
+      "label": "Ion Creangă"
+     },
+     "relation": "located_in",
+     "label": "s-a nascut in",
+     "display_label": "scriitor și regiune natală",
+     "strength": 0.65
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_iasi",
+     "label": "Iași"
+    },
+    {
+     "id": "n_mihai_eminescu",
+     "label": "Mihai Eminescu"
+    },
+    {
+     "id": "n_ion_creanga",
+     "label": "Ion Creangă"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_iasi",
+      "label": "Iași"
+     },
+     "to": {
+      "id": "n_mihai_eminescu",
+      "label": "Mihai Eminescu"
+     },
+     "relation": "related_to",
+     "label": "legat de Iași",
+     "display_label": "scriitor și oraș",
+     "strength": 0.66
+    },
+    {
+     "from": {
+      "id": "n_mihai_eminescu",
+      "label": "Mihai Eminescu"
+     },
+     "to": {
+      "id": "n_ion_creanga",
+      "label": "Ion Creangă"
+     },
+     "relation": "contemporary_of",
+     "label": "prieten cu",
+     "display_label": "prieteni scriitori",
+     "strength": 0.7
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:30510ce8c38f8efb004df73492aeb0655feadabcec2f64ff400a5fb50aebdf9b"
+}

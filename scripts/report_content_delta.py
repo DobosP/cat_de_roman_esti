@@ -22,6 +22,7 @@ FILES = {
     "kg": FIXTURES + "kg_sample.json",
     "pack": FIXTURES + "games_pack.json",
     "derived": FIXTURES + "derived_catalog_v38.json",
+    "quick": FIXTURES + "quick_games_v92.json",
     "rankings": FIXTURES + "board_rankings_v37.json",
 }
 PACK_GAMES = ("conexiuni", "contexto", "lant", "alchimie")
@@ -59,6 +60,10 @@ def inventory(documents: dict[str, dict | None]) -> dict:
                 raise ValueError(f"nodes: duplicate form {key!r}")
             forms[key] = form
     derived = index_rows((documents.get("derived") or {}).get("boards", []), "derived")
+    quick = index_rows((documents.get("quick") or {}).get("boards", []), "quick")
+    if derived.keys() & quick.keys():
+        raise ValueError("quick: board ids collide with the frozen catalog")
+    derived.update(quick)
     if any(row.get("game") not in DERIVED_GAMES for row in derived.values()):
         raise ValueError("derived: unknown game")
     ranking_doc = documents.get("rankings")
@@ -191,7 +196,7 @@ def text_report(report: dict) -> str:
         for kind, delta in sections.items():
             line(f"{game} {kind}", delta)
     for game, delta in report["derived"].items():
-        line(f"{game} frozen boards", delta)
+        line(f"{game} catalog boards", delta)
     lines.extend(report["notes"])
     return "\n".join(lines)
 
@@ -231,6 +236,7 @@ def main(argv: list[str] | None = None) -> int:
             "Approved additions include new records and promotions of existing records.",
             "Ranked eligibility is declared by the sidecar; run content/runtime gates separately.",
             "Missing historical derived catalogs count as zero; missing rankings are unknown.",
+            "Quick-game boards include the frozen V38 catalog and reviewed authored supplements.",
         ],
     })
     print(text_report(report) if args.text else json.dumps(report, ensure_ascii=False, indent=2))

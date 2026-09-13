@@ -1,0 +1,68 @@
+import os,sys,json,hashlib,subprocess
+from pathlib import Path
+from unittest.mock import patch
+
+ROOT=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/feat__v92-alchimie-gui')
+OUT=Path(__file__).parent
+sys.path[:0]=[str(ROOT),str(ROOT/'scripts')]
+os.environ.setdefault('DJANGO_SETTINGS_MODULE','cat_de_roman_esti.web.settings')
+import django
+django.setup()
+from django.test import Client
+from cat_de_roman_esti.wordgames import intrusul as I,perechi as P,quick_catalog as Q
+from cat_de_roman_esti.wordgames.derived_catalog import DerivedCatalog,load_derived_catalog
+from scripts.audit_quick_content_v92 import all_strings
+from scripts.build_quick_content_v92 import runtime_source_hashes
+
+proposal=OUT/'quick-proposal.json';audit_path=OUT/'quick-live-audit.json'
+raw=json.loads(proposal.read_bytes());audit=json.loads(audit_path.read_bytes())
+independent=json.loads((OUT/'quick-independent-quality-live-audit.json').read_bytes())
+assert independent==audit
+assert audit['runtime_sources']==runtime_source_hashes()
+assert hashlib.sha256(proposal.read_bytes()).hexdigest()=='36f5fc575ed5ae36735d792dd71df5860d917dba1b3b58090f792afd4f3b0d39'
+candidate=json.loads((OUT/'quick-candidates.json').read_bytes())
+assert raw['authored']==candidate['boards'] and raw['excluded']==[]
+baseline=json.loads(subprocess.check_output(['git','show','75584bf:cat_de_roman_esti/fixtures/derived_catalog_v38.json'],cwd=ROOT))
+current=json.loads((ROOT/'cat_de_roman_esti/fixtures/derived_catalog_v38.json').read_bytes())
+assert baseline['boards']==current['boards']
+base=load_derived_catalog();extra=Q.validate_catalog(raw,base);combined=DerivedCatalog([*base._boards,*extra])
+seeds={r['id']:r['public_seed'] for r in audit['replays']};results=[]
+for board in extra:
+ module=I if board.game=='intrusul' else P;url=f'/api/wordgames/{board.game}/games';client=Client();gid=None
+ hidden_labels={board.payload['group_label']} if board.game=='intrusul' else {p['group_label'] for p in board.payload['pairs']}
+ private={board._source_id,board._catalog_id}
+ with patch.object(module,'_catalog_or_503',return_value=combined):
+  try:
+   response=client.post(f'{url}?seed={seeds[board._catalog_id]}&category={board.category}');assert response.status_code==200
+   first=response.json();gid=first['game_id'];fetched=client.get(f'{url}/{gid}').json()
+   assert not (hidden_labels|private)&all_strings(fetched) and 'solution' not in fetched
+   if board.game=='intrusul':
+    endpoint=f'{url}/{gid}/guess';wrong={'id':board.payload['members'][0]}
+    response=client.post(endpoint,wrong,content_type='application/json');assert response.status_code==200
+    after=response.json();assert not after['won'] and after['mistakes']==1
+    repeated=client.post(endpoint,wrong,content_type='application/json').json();assert repeated['mistakes']==1
+    hint=client.post(f'{url}/{gid}/hint').json()
+    assert hint['clue']['label']==board.payload['group_label'] and 'solution' not in hint
+    fetched=client.get(f'{url}/{gid}').json();assert fetched['clue']['label']==board.payload['group_label'] and 'solution' not in fetched
+    result=client.post(endpoint,{'id':board.payload['intruder']},content_type='application/json').json()
+   else:
+    endpoint=f'{url}/{gid}/match';pairs=board.payload['pairs']
+    wrong={'ids':[pairs[0]['members'][0],pairs[1]['members'][0]]}
+    after=client.post(endpoint,wrong,content_type='application/json').json();assert after['mistakes']==1
+    repeated=client.post(endpoint,{'ids':list(reversed(wrong['ids']))},content_type='application/json').json();assert repeated['mistakes']==1
+    second={'ids':[pairs[0]['members'][0],pairs[2]['members'][0]]}
+    after=client.post(endpoint,second,content_type='application/json').json();assert after['mistakes']==2
+    hint=client.post(f'{url}/{gid}/hint').json();revealed=hint['hint']['label'];assert revealed in hidden_labels
+    remaining=hidden_labels-{revealed};assert not remaining&all_strings(hint) and 'solution' not in hint
+    fetched=client.get(f'{url}/{gid}').json();assert fetched['hint']['label']==revealed and not remaining&all_strings(fetched) and 'solution' not in fetched
+    for pair in pairs:
+     result=client.post(endpoint,{'ids':list(reversed(pair['members']))},content_type='application/json').json()
+   assert result['won'] and result['score']==650
+   assert not private&all_strings(result)
+   fetched=client.get(f'{url}/{gid}').json();assert fetched['won'] and fetched['score']==650
+   results.append({'id':board._catalog_id,'game':board.game,'wrong_and_repeat_free':True,'earned_hint_only':True,'pre_win_get_private':True,'final_score':650})
+  finally:
+   if gid:module.store.delete(gid)
+result={'kind':'independent-quick-quality-final-replay-v1','catalog_sha256':hashlib.sha256(proposal.read_bytes()).hexdigest(),'audit_sha256':hashlib.sha256(audit_path.read_bytes()).hexdigest(),'runtime_sources':runtime_source_hashes(),'exact_base_boards':336,'tested_additions':45,'replays':results}
+(OUT/'quick-quality-final-replay.json').write_bytes(Q.json_bytes(result))
+print(json.dumps({'exact_base_boards':336,'tested_additions':45,'all_wrong_repeat_hint_get_win_sequences_passed':True}))

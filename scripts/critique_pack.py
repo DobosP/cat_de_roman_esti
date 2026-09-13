@@ -1031,6 +1031,8 @@ def representative_shortest_paths(
     svc: WordGameService, start: str, target: str, optimal: int, limit: int = 3,
 ) -> list[dict]:
     '''Return bounded deterministic shortest paths with judge-visible edge semantics.'''
+    from cat_de_roman_esti.wordgames.lant_relations import caption
+
     if optimal < 1 or limit < 1:
         return []
     to_target = svc.distances_to(target)
@@ -1073,6 +1075,7 @@ def representative_shortest_paths(
                 'to': _concept_ref(svc, dst),
                 'relation': edge.relation if edge else '',
                 'label': edge.label_ro if edge else '',
+                'display_label': caption(svc, src, dst),
                 'strength': round(edge.strength, 2) if edge else 0.0,
             })
         evidence.append({'nodes': [_concept_ref(svc, nid) for nid in path], 'edges': edges})
@@ -1277,6 +1280,9 @@ def build_dossier(rec: dict, game: str, svc: WordGameService, strong: dict,
             neigh, key=lambda item: (-item["strength"], item["id"])
         )[:10]
     elif game == "lant":
+        from cat_de_roman_esti.wordgames import lant_relations
+
+        dossier["display_rules_sha256"] = normalized_text_sha256(Path(lant_relations.__file__))
         dossier["start"] = node_brief(svc, rec["start"])
         dossier["target"] = node_brief(svc, rec["target"])
         dossier["optimal"] = rec.get("optimal")

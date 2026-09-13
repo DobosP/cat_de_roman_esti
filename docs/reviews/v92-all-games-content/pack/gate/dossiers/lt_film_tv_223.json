@@ -1,0 +1,179 @@
+{
+ "id": "lt_film_tv_223",
+ "game": "lant",
+ "category": "film_tv",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "03861d71a1af71a0d3460bb9a426f8ff98a14db6e58686545f68f6d4628c0a82",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "display_rules_sha256": "7048444ef3ef01d2c524a7ef79874324cf3f89c195fb473008e5631b40b84781",
+ "start": {
+  "id": "n_v11fil_romanii_au_talent",
+  "label": "Românii au talent",
+  "node_type": "work",
+  "category": "film_tv",
+  "salience": 0.88,
+  "degree": 4,
+  "incoming_degree": 4,
+  "description": "Talent-show de la Pro TV, adaptarea locală a formatului Got Talent."
+ },
+ "target": {
+  "id": "n_v11fil_vocea_romaniei",
+  "label": "Vocea României",
+  "node_type": "work",
+  "category": "film_tv",
+  "salience": 0.78,
+  "degree": 5,
+  "incoming_degree": 5,
+  "description": "Concurs vocal TV, versiunea românească a formatului The Voice."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 3,
+  "narrowest_shortest_path_layer": 3,
+  "total_intermediate_shortest_path_nodes": 3
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_v11fil_romanii_au_talent",
+     "label": "Românii au talent"
+    },
+    {
+     "id": "n_v20fil_pavel_bartos",
+     "label": "Pavel Bartoș"
+    },
+    {
+     "id": "n_v11fil_vocea_romaniei",
+     "label": "Vocea României"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v11fil_romanii_au_talent",
+      "label": "Românii au talent"
+     },
+     "to": {
+      "id": "n_v20fil_pavel_bartos",
+      "label": "Pavel Bartoș"
+     },
+     "relation": "associated_with",
+     "label": "gazda Românii au talent",
+     "display_label": "emisiune și prezentator",
+     "strength": 0.9
+    },
+    {
+     "from": {
+      "id": "n_v20fil_pavel_bartos",
+      "label": "Pavel Bartoș"
+     },
+     "to": {
+      "id": "n_v11fil_vocea_romaniei",
+      "label": "Vocea României"
+     },
+     "relation": "associated_with",
+     "label": "a prezentat Vocea României",
+     "display_label": "emisiune și prezentator",
+     "strength": 0.75
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v11fil_romanii_au_talent",
+     "label": "Românii au talent"
+    },
+    {
+     "id": "n_ftv_pro_tv",
+     "label": "Pro TV"
+    },
+    {
+     "id": "n_v11fil_vocea_romaniei",
+     "label": "Vocea României"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v11fil_romanii_au_talent",
+      "label": "Românii au talent"
+     },
+     "to": {
+      "id": "n_ftv_pro_tv",
+      "label": "Pro TV"
+     },
+     "relation": "part_of",
+     "label": "difuzat de Pro TV",
+     "display_label": "emisiune și post TV",
+     "strength": 0.85
+    },
+    {
+     "from": {
+      "id": "n_ftv_pro_tv",
+      "label": "Pro TV"
+     },
+     "to": {
+      "id": "n_v11fil_vocea_romaniei",
+      "label": "Vocea României"
+     },
+     "relation": "part_of",
+     "label": "difuzat de Pro TV",
+     "display_label": "emisiune și post TV",
+     "strength": 0.85
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_v11fil_romanii_au_talent",
+     "label": "Românii au talent"
+    },
+    {
+     "id": "n_v2fil_concurs_tv",
+     "label": "Concurs TV"
+    },
+    {
+     "id": "n_v11fil_vocea_romaniei",
+     "label": "Vocea României"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_v11fil_romanii_au_talent",
+      "label": "Românii au talent"
+     },
+     "to": {
+      "id": "n_v2fil_concurs_tv",
+      "label": "Concurs TV"
+     },
+     "relation": "is_a",
+     "label": "este concurs TV",
+     "display_label": "emisiune și tip de concurs",
+     "strength": 0.8
+    },
+    {
+     "from": {
+      "id": "n_v2fil_concurs_tv",
+      "label": "Concurs TV"
+     },
+     "to": {
+      "id": "n_v11fil_vocea_romaniei",
+      "label": "Vocea României"
+     },
+     "relation": "is_a",
+     "label": "este concurs TV",
+     "display_label": "emisiune și tip de concurs",
+     "strength": 0.8
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:7e0a8be984e8cf7fb259ddf396cc691bebfc8182f792c74be35a5e4f0ea9f78b"
+}

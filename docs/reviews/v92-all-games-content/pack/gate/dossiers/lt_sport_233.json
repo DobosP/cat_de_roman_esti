@@ -1,0 +1,179 @@
+{
+ "id": "lt_sport_233",
+ "game": "lant",
+ "category": "sport",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "c24c45270d3ed6a1c97e6e1e367ec6e8847cd459af9b73760e74aa4a921e0ac0",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "display_rules_sha256": "7048444ef3ef01d2c524a7ef79874324cf3f89c195fb473008e5631b40b84781",
+ "start": {
+  "id": "n_spt_helmut_duckadam",
+  "label": "Helmut Duckadam",
+  "node_type": "person",
+  "category": "sport",
+  "salience": 0.9224,
+  "degree": 11,
+  "incoming_degree": 11,
+  "description": "Portarul Stelei care a apărat patru penalty-uri în finala de la Sevilla."
+ },
+ "target": {
+  "id": "n_v21spo_emeric_ienei",
+  "label": "Emeric Ienei",
+  "node_type": "person",
+  "category": "sport",
+  "salience": 0.72,
+  "degree": 4,
+  "incoming_degree": 4,
+  "description": "Antrenorul care a condus Steaua București la câștigarea Cupei Campionilor Europeni în 1986 și fost selecționer al naționalei. A murit pe 5 noiembrie 2025, la 88 de ani, fiind omagiat ca unul dintre cei mai mari antrenori români."
+ },
+ "optimal": 2,
+ "branch_profile": {
+  "valid_first_hops": 3,
+  "narrowest_shortest_path_layer": 3,
+  "total_intermediate_shortest_path_nodes": 3
+ },
+ "representative_shortest_paths": [
+  {
+   "nodes": [
+    {
+     "id": "n_spt_helmut_duckadam",
+     "label": "Helmut Duckadam"
+    },
+    {
+     "id": "n_spt_finala_sevilla_1986",
+     "label": "Finala de la Sevilla"
+    },
+    {
+     "id": "n_v21spo_emeric_ienei",
+     "label": "Emeric Ienei"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_spt_helmut_duckadam",
+      "label": "Helmut Duckadam"
+     },
+     "to": {
+      "id": "n_spt_finala_sevilla_1986",
+      "label": "Finala de la Sevilla"
+     },
+     "relation": "related_to",
+     "label": "l-a consacrat",
+     "display_label": "portar și finală",
+     "strength": 0.94
+    },
+    {
+     "from": {
+      "id": "n_spt_finala_sevilla_1986",
+      "label": "Finala de la Sevilla"
+     },
+     "to": {
+      "id": "n_v21spo_emeric_ienei",
+      "label": "Emeric Ienei"
+     },
+     "relation": "related_to",
+     "label": "a condus echipa la Sevilla",
+     "display_label": "antrenor și finală",
+     "strength": 0.85
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_spt_helmut_duckadam",
+     "label": "Helmut Duckadam"
+    },
+    {
+     "id": "n_spt_steaua_1986",
+     "label": "Steaua 1986"
+    },
+    {
+     "id": "n_v21spo_emeric_ienei",
+     "label": "Emeric Ienei"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_spt_helmut_duckadam",
+      "label": "Helmut Duckadam"
+     },
+     "to": {
+      "id": "n_spt_steaua_1986",
+      "label": "Steaua 1986"
+     },
+     "relation": "part_of",
+     "label": "l-a avut portar",
+     "display_label": "echipă și portar",
+     "strength": 0.94
+    },
+    {
+     "from": {
+      "id": "n_spt_steaua_1986",
+      "label": "Steaua 1986"
+     },
+     "to": {
+      "id": "n_v21spo_emeric_ienei",
+      "label": "Emeric Ienei"
+     },
+     "relation": "associated_with",
+     "label": "antrenorul Stelei din 1986",
+     "display_label": "echipă și antrenor",
+     "strength": 0.95
+    }
+   ]
+  },
+  {
+   "nodes": [
+    {
+     "id": "n_spt_helmut_duckadam",
+     "label": "Helmut Duckadam"
+    },
+    {
+     "id": "n_spt_cupa_campionilor_1986",
+     "label": "Cupa Campionilor 1986"
+    },
+    {
+     "id": "n_v21spo_emeric_ienei",
+     "label": "Emeric Ienei"
+    }
+   ],
+   "edges": [
+    {
+     "from": {
+      "id": "n_spt_helmut_duckadam",
+      "label": "Helmut Duckadam"
+     },
+     "to": {
+      "id": "n_spt_cupa_campionilor_1986",
+      "label": "Cupa Campionilor 1986"
+     },
+     "relation": "related_to",
+     "label": "are eroul",
+     "display_label": "portar și competiție",
+     "strength": 0.86
+    },
+    {
+     "from": {
+      "id": "n_spt_cupa_campionilor_1986",
+      "label": "Cupa Campionilor 1986"
+     },
+     "to": {
+      "id": "n_v21spo_emeric_ienei",
+      "label": "Emeric Ienei"
+     },
+     "relation": "related_to",
+     "label": "a câștigat CCE ca antrenor",
+     "display_label": "antrenor și competiție",
+     "strength": 0.9
+    }
+   ]
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:9885c0523a0d90200d7937c8566e35f24da813ba42d7a7fff8e1dd3189226105"
+}

@@ -1,0 +1,200 @@
+{
+ "id": "cx_viata_de_roman_365",
+ "game": "conexiuni",
+ "category": "viata_de_roman",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "dde718a8b53b4d2bfa9b055f01c5eba89e4756b5fbaa9628f22bde2c267ea9f8",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 0
+ },
+ "groups": [
+  {
+   "label": "Cereale cultivate pentru boabe",
+   "members": [
+    {
+     "id": "n_v84_food_grau",
+     "label": "Grâu",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.85,
+     "degree": 6,
+     "incoming_degree": 3,
+     "description": "Cereală ale cărei boabe sunt măcinate pentru făină și griș."
+    },
+    {
+     "id": "n_v84_food_orz",
+     "label": "Orz",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.7,
+     "degree": 4,
+     "incoming_degree": 3,
+     "description": "Cereală ale cărei boabe sunt folosite inclusiv la obținerea arpacașului."
+    },
+    {
+     "id": "n_v84_food_ovaz",
+     "label": "Ovăz",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.85,
+     "degree": 4,
+     "incoming_degree": 3,
+     "description": "Cereală alimentară și furajeră folosită și în unele sortimente de biscuiți."
+    },
+    {
+     "id": "n_v84_food_secara",
+     "label": "Secară",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.65,
+     "degree": 5,
+     "incoming_degree": 3,
+     "description": "Cereală din ale cărei boabe se obține făină pentru pâine."
+    }
+   ]
+  },
+  {
+   "label": "Miezuri comestibile în coajă tare",
+   "members": [
+    {
+     "id": "n_v81_food_pantry_nuca",
+     "label": "Nucă",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.9,
+     "degree": 6,
+     "incoming_degree": 2,
+     "description": "Fructul nucului, cu coajă tare și miez comestibil folosit în preparate dulci."
+    },
+    {
+     "id": "n_v85_food_migdale",
+     "label": "Migdale",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.75,
+     "degree": 5,
+     "incoming_degree": 3,
+     "description": "Miezuri comestibile de migdal dulce, folosite ca gustare și în patiserie."
+    },
+    {
+     "id": "n_v85_food_alune_padure",
+     "label": "Alune de pădure",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.75,
+     "degree": 5,
+     "incoming_degree": 3,
+     "description": "Fructe cu coajă lemnoasă și miez comestibil, distincte de arahide."
+    },
+    {
+     "id": "n_v18gas_fistic",
+     "label": "Fistic",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.58,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Aroma-vedetă a anilor 2024–2025: de la ciocolata Dubai la înghețată, creme și lattea de fistic. Cererea uriașă a scumpit fisticul pe piața mondială în 2025."
+    }
+   ]
+  },
+  {
+   "label": "Au dinți, dar nu sunt animale",
+   "members": [
+    {
+     "id": "n_v31_hygiene_hair_pieptene",
+     "label": "Pieptene",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.91,
+     "degree": 2,
+     "incoming_degree": 2,
+     "description": "Obiect cu dinți apropiați, folosit pentru a descurca și aranja părul."
+    },
+    {
+     "id": "n_v32_workshop_cut_fierastrau",
+     "label": "Fierăstrău",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.92,
+     "degree": 2,
+     "incoming_degree": 2,
+     "description": "Unealtă cu lamă dințată, folosită pentru a tăia lemn sau alte materiale."
+    },
+    {
+     "id": "n_v32_garden_soil_grebla",
+     "label": "Greblă",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9,
+     "degree": 2,
+     "incoming_degree": 3,
+     "description": "Unealtă cu dinți și coadă, folosită pentru a strânge frunze și a netezi pământul."
+    },
+    {
+     "id": "n_v30_kitchen_utensil_furculita",
+     "label": "Furculiță",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.93,
+     "degree": 2,
+     "incoming_degree": 3,
+     "description": "Ustensilă cu mâner și dinți, folosită pentru a prinde bucăți de mâncare."
+    }
+   ]
+  },
+  {
+   "label": "Electrocasnice care păstrează ori prepară alimente",
+   "members": [
+    {
+     "id": "n_v86_kitchen_mixer",
+     "label": "Mixer de bucătărie",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.85,
+     "degree": 4,
+     "incoming_degree": 1,
+     "description": "Aparat electric cu palete sau accesorii pentru amestecarea și baterea ingredientelor."
+    },
+    {
+     "id": "n_v19gas_air_fryer",
+     "label": "Air fryer",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.6,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Friteuza cu aer cald a devenit electrocasnicul-vedetă al bucătăriilor românești în anii 2020, cu un val uriaș de rețete adaptate, de la cartofi fără ulei la aripioare. Creatorii culinari români publică serii întregi de rețete la air fryer."
+    },
+    {
+     "id": "n_v24_home_appliances_frigider",
+     "label": "Frigider",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9,
+     "degree": 6,
+     "incoming_degree": 3,
+     "description": "Concept cotidian din grupul «obiecte utile în casă»: Frigider."
+    },
+    {
+     "id": "n_v86_kitchen_congelator",
+     "label": "Congelator",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.85,
+     "degree": 4,
+     "incoming_degree": 1,
+     "description": "Aparat sau compartiment frigorific pentru congelarea și păstrarea alimentelor congelate."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:1e00b3cdab84dcc75b143c1d160e8e1a1c1f1f494ef101c3a8f5635f97874075"
+}

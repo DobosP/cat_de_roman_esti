@@ -1,0 +1,123 @@
+{
+ "id": "ct_gastronomie_361",
+ "game": "contexto",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "2e1610a95df25aebc67d372846e4183dd050583d193c90b9376d4df94908f2ff",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v4gas_usturoi",
+  "label": "Usturoi",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.7023,
+  "degree": 6,
+  "incoming_degree": 6,
+  "description": "Ingredient aromat folosit la mujdei, sosuri și preparate cu carne."
+ },
+ "incoming_neighbor_floor": {
+  "minimum": 5,
+  "count": 6,
+  "sample": [
+   {
+    "id": "n_gas_mici",
+    "label": "Mici"
+   },
+   {
+    "id": "n_gas_mujdei",
+    "label": "Mujdei"
+   },
+   {
+    "id": "n_v17gas_carnati_plescoi",
+    "label": "Cârnați de Pleșcoi"
+   },
+   {
+    "id": "n_v2gas_gratar",
+    "label": "Grătar"
+   },
+   {
+    "id": "n_v2gas_sosuri",
+    "label": "Sosuri"
+   },
+   {
+    "id": "n_v42gas_fasole_batuta",
+    "label": "Fasole bătută"
+   }
+  ],
+  "sample_truncated": false,
+  "recognition_assessed": false
+ },
+ "reachable": 2353,
+ "strong_neighbors": [
+  {
+   "id": "n_gas_mujdei",
+   "label": "Mujdei",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.7993,
+   "degree": 11,
+   "incoming_degree": 11,
+   "description": "Sos de usturoi zdrobit, nelipsit lângă pește, cartofi, fripturi sau ciorbă de burtă.",
+   "strength": 0.9
+  },
+  {
+   "id": "n_v2gas_sosuri",
+   "label": "Sosuri",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.7846,
+   "degree": 12,
+   "incoming_degree": 13,
+   "description": "Adaosuri lichide sau cremoase care completează mâncarea.",
+   "strength": 0.78
+  },
+  {
+   "id": "n_v2gas_gratar",
+   "label": "Grătar",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.9125,
+   "degree": 13,
+   "incoming_degree": 13,
+   "description": "Tehnică și ocazie socială de fript carne sau legume pe jar.",
+   "strength": 0.72
+  },
+  {
+   "id": "n_v42gas_fasole_batuta",
+   "label": "Fasole bătută",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.6,
+   "degree": 2,
+   "incoming_degree": 2,
+   "description": "Pastă de fasole cu usturoi și ceapă călită, mâncare de post iubită.",
+   "strength": 0.7
+  },
+  {
+   "id": "n_gas_mici",
+   "label": "Mici",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.9765,
+   "degree": 20,
+   "incoming_degree": 21,
+   "description": "Mititei fripți pe grătar, asociați popular cu muștar, pâine și ieșiri de 1 Mai.",
+   "strength": 0.66
+  },
+  {
+   "id": "n_v17gas_carnati_plescoi",
+   "label": "Cârnați de Pleșcoi",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.48,
+   "degree": 6,
+   "incoming_degree": 6,
+   "description": "Cârnați picanți din carne de oaie, cu usturoi și ardei iute, produși tradițional în zona Buzăului. Produs românesc cu indicație geografică protejată în UE.",
+   "strength": 0.6
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:3677a346977f9908006c0f5ac29e47a308dcbce981f41014e9d45973a8c9a066"
+}

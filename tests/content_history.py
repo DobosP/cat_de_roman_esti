@@ -47,6 +47,135 @@ _V91_RECEIPT = Path(__file__).resolve().parents[1] / (
 )
 
 
+# The V92 expansion adds exactly 4 Conexiuni, 8 Contexto and 13 Lanț records.
+# Pin complete current bytes before peeling it; never replace historical wave hashes.
+_V92_ARTIFACT_HASHES = {
+    "kg_sample.json": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+    "games_pack.json": "62c1eaaa7bb72674cf59a66f9b543d911749d52973155f6b201d796d97d6ea4a",
+    "board_rankings_v37.json": "6f2662615b686a492b41f2d689a7ba6b380b62d7b8cecc5e7a3c9788d1dce641",
+    "derived_catalog_v38.json": "09e6b1caa3ed586264a85d3d9807f0173384c02c80102dae072d14665432f2aa",
+    "cat_mobile_app_pack_contract.json": (
+        "5832ca01b97e949e3cf8cd0ecaf2a27b6be58a8a6fc2e9e1426f338f22272f7f"
+    ),
+}
+_V92_ADDED_IDS = {
+    "conexiuni": (
+        "cx_limba_364",
+        "cx_viata_de_roman_365",
+        "cx_viata_de_roman_366",
+        "cx_viata_de_roman_367",
+    ),
+    "contexto": (
+        "ct_film_tv_357",
+        "ct_film_tv_358",
+        "ct_film_tv_359",
+        "ct_gastronomie_360",
+        "ct_gastronomie_361",
+        "ct_sport_362",
+        "ct_viata_de_roman_363",
+        "ct_viata_de_roman_364",
+    ),
+    "lant": (
+        "lt_film_tv_223",
+        "lt_gastronomie_224",
+        "lt_geografie_225",
+        "lt_geografie_226",
+        "lt_geografie_227",
+        "lt_geografie_228",
+        "lt_istorie_229",
+        "lt_literatura_230",
+        "lt_literatura_231",
+        "lt_sport_232",
+        "lt_sport_233",
+        "lt_sport_234",
+        "lt_stiinta_235",
+    ),
+    "alchimie": (),
+}
+# Exact (V91 weight, V92 weight) transitions caused by the larger ranked shelves.
+_V92_WEIGHT_CHANGES = {
+    "ct_gastronomie_131": (3, 2),
+    "ct_gastronomie_132": (3, 2),
+    "ct_geografie_028": (3, 2),
+    "ct_limba_046": (2, 1),
+    "ct_limba_223": (5, 4),
+    "ct_literatura_230": (2, 1),
+    "ct_muzica_241": (4, 3),
+    "ct_muzica_244": (4, 3),
+    "ct_personalitati_075": (4, 3),
+    "cx_gastronomie_173": (5, 4),
+    "cx_gastronomie_297": (5, 4),
+    "cx_gastronomie_301": (5, 4),
+    "cx_istorie_034": (3, 2),
+    "cx_istorie_117": (2, 1),
+    "cx_istorie_118": (4, 3),
+    "cx_literatura_128": (3, 2),
+    "cx_meme_net_045": (4, 3),
+    "cx_meme_net_267": (4, 3),
+    "cx_viata_de_roman_313": (5, 4),
+    "lt_arta_cultura_003": (2, 1),
+    "lt_arta_cultura_092": (3, 2),
+    "lt_film_tv_011": (3, 2),
+    "lt_film_tv_098": (4, 3),
+    "lt_gastronomie_221": (5, 4),
+    "lt_istorie_171": (4, 3),
+    "lt_muzica_055": (3, 2),
+    "lt_muzica_137": (5, 4),
+    "lt_muzica_141": (4, 3),
+    "lt_personalitati_067": (3, 2),
+    "lt_personalitati_143": (5, 4),
+    "lt_personalitati_149": (2, 1),
+    "lt_societate_150": (4, 3),
+    "lt_sport_080": (3, 2),
+    "lt_stiinta_203": (2, 1),
+    "lt_viata_de_roman_089": (4, 3),
+}
+
+
+def before_v92_artifact(current: dict, filename: str) -> dict:
+    """Peel the exact reviewed V92 delta and reproduce complete 75584bf artifact bytes."""
+    indent = 2 if filename == "kg_sample.json" else 1
+
+    def digest(value):
+        blob = (json.dumps(value, ensure_ascii=False, indent=indent) + "\n").encode()
+        return hashlib.sha256(blob).hexdigest()
+
+    assert filename in _V92_ARTIFACT_HASHES
+    assert digest(current) == _V92_ARTIFACT_HASHES[filename]
+    restored = deepcopy(current)
+    previous = json.loads(_V91_RECEIPT.read_bytes())["files"][filename]
+    if filename == "games_pack.json":
+        assert sum(len(ids) for ids in _V92_ADDED_IDS.values()) == 25
+        for game, added in _V92_ADDED_IDS.items():
+            rows = restored[game]
+            assert {row["id"] for row in rows if row["id"] in added} == set(added)
+            assert all(row["status"] == "approved" for row in rows if row["id"] in added)
+            restored[game] = [row for row in rows if row["id"] not in added]
+    elif filename == "board_rankings_v37.json":
+        added = {item_id for ids in _V92_ADDED_IDS.values() for item_id in ids}
+        rows = restored["boards"]
+        assert {row["id"] for row in rows if row["id"] in added} == added
+        restored["boards"] = [row for row in rows if row["id"] not in added]
+        ranks: Counter[str] = Counter()
+        changed = set()
+        for row in restored["boards"]:
+            ranks[row["game"]] += 1
+            row["rank"] = ranks[row["game"]]
+            if row["id"] in _V92_WEIGHT_CHANGES:
+                before, after = _V92_WEIGHT_CHANGES[row["id"]]
+                assert row["selection_weight"] == after
+                row["selection_weight"] = before
+                changed.add(row["id"])
+        assert changed == set(_V92_WEIGHT_CHANGES)
+    # The core derived board payloads, shared KG and mobile rows are not rewritten.
+    # Their only potential inverse is the exact historical non-table metadata.
+    head = {key for key, value in restored.items() if not isinstance(value, list)}
+    assert head == set(previous["head_after"])
+    restored.update(deepcopy(previous["head_after"]))
+    assert digest(restored) == previous["after_sha256"]
+    return restored
+
+
 def _reverse_reviewed_delta(current: dict, filename: str, receipt_path: Path) -> dict:
     """Peel only exact reviewed additions/corrections before checking old wave pins."""
     receipt = json.loads(receipt_path.read_bytes())["files"][filename]
@@ -100,7 +229,8 @@ def _reverse_bound_delta(current: dict, filename: str, receipt_path: Path) -> di
 
 def before_v91_artifact(current: dict, filename: str) -> dict:
     """Restore exact V90 content before checking earlier historical receipts."""
-    return _reverse_bound_delta(current, filename, _V91_RECEIPT)
+    previous = before_v92_artifact(current, filename)
+    return _reverse_bound_delta(previous, filename, _V91_RECEIPT)
 
 
 def _before_v90(current: dict, filename: str) -> dict:

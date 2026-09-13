@@ -1,0 +1,9 @@
+{
+  "audit_sha256": "6709af51085192b8359d94567674de871515bd80aecf66f1863f9c4e5ccac080",
+  "catalog_sha256": "36f5fc575ed5ae36735d792dd71df5860d917dba1b3b58090f792afd4f3b0d39",
+  "kind": "quick-content-final-v1",
+  "rationale": "Independently rebuilt the exact candidate and 45-board proposal from both complete semantic reviews; bytes match the reviewed catalog. Replayed the original live audit through all 25 Intrusul and 20 Perechi boards, obtaining exactly the same audit result. A second 45-board pass used the actual runtime catalog loader and natural category/seed selection, changing only the unpublished catalog file path to the exact reviewed proposal: all boards select correctly, unearned group labels/private source IDs remain hidden, all wins score 1000 and terminal GET state persists. All 336 frozen core payload rows match baseline commit 75584bf exactly, and shared KG bytes remain unchanged. Current pack/core metadata and all eight runtime source hashes match the original bound audit. Earlier semantic corrections and recognition/source qualifications remain accepted; no new facts or unreviewed board were added after raw review. Exact structural and semantic scope is 25 odd-one-out predicates plus 20 matching boards, not 45 new global concepts or measured human enjoyment. This accepts local package publication of these exact bytes only; deployment and broad integration are separate root responsibilities.",
+  "reviewer": "games_factual",
+  "role": "factual",
+  "verdict": "accept"
+}

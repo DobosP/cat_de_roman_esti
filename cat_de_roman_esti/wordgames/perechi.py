@@ -1,4 +1,4 @@
-"""Perechi — match four hidden pairs derived from reviewed Conexiuni boards.
+"""Perechi — match four hidden pairs from reviewed derived and authored boards.
 
 The server owns the four-pair mapping, source provenance, ranking, and recent-source
 ring.  Public state exposes eight shuffled tiles and only labels for pairs the player

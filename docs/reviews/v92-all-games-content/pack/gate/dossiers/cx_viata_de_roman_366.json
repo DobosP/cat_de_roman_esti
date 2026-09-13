@@ -1,0 +1,200 @@
+{
+ "id": "cx_viata_de_roman_366",
+ "game": "conexiuni",
+ "category": "viata_de_roman",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "856559dfe2921fbb119e4b7ab9a41683cd56b4735706ffa5241c67bb5c71373f",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 0
+ },
+ "groups": [
+  {
+   "label": "Produse consumabile pentru igiena personală",
+   "members": [
+    {
+     "id": "n_v31_hygiene_bath_sapun",
+     "label": "Săpun",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.94,
+     "degree": 2,
+     "incoming_degree": 3,
+     "description": "Produs folosit cu apă pentru a spăla mâinile și corpul."
+    },
+    {
+     "id": "n_v31_hygiene_hair_sampon",
+     "label": "Șampon",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.92,
+     "degree": 2,
+     "incoming_degree": 3,
+     "description": "Produs lichid folosit cu apă pentru a spăla părul."
+    },
+    {
+     "id": "n_v31_hygiene_oral_pasta_dinti",
+     "label": "Pastă de dinți",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.94,
+     "degree": 2,
+     "incoming_degree": 3,
+     "description": "Produs pus pe periuță pentru a curăța dinții și gura."
+    },
+    {
+     "id": "n_v33_bathroom_supply_hartie_igienica",
+     "label": "Hârtie igienică",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.93,
+     "degree": 2,
+     "incoming_degree": 3,
+     "description": "Produs moale din hârtie, folosit pentru igiena după folosirea toaletei."
+    }
+   ]
+  },
+  {
+   "label": "Componente ale construcției unei case",
+   "members": [
+    {
+     "id": "n_v24_home_structure_acoperis",
+     "label": "Acoperiș",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.84,
+     "degree": 3,
+     "incoming_degree": 1,
+     "description": "Concept cotidian din grupul «părți ale casei»: Acoperiș."
+    },
+    {
+     "id": "n_v24_home_structure_perete",
+     "label": "Perete",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.84,
+     "degree": 2,
+     "incoming_degree": 2,
+     "description": "Concept cotidian din grupul «părți ale casei»: Perete."
+    },
+    {
+     "id": "n_v24_home_surfaces_fereastra",
+     "label": "Fereastră",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.84,
+     "degree": 2,
+     "incoming_degree": 2,
+     "description": "Concept cotidian din grupul «suprafețe și deschideri»: Fereastră."
+    },
+    {
+     "id": "n_v4via_usa",
+     "label": "ușă",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.6855,
+     "degree": 40,
+     "incoming_degree": 7,
+     "description": "Element mobil care închide sau deschide intrarea într-o cameră ori locuință."
+    }
+   ]
+  },
+  {
+   "label": "Ingrediente pentru îngroșarea sau închegarea preparatelor",
+   "members": [
+    {
+     "id": "n_v87_food_gelatina",
+     "label": "Gelatină alimentară",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.8,
+     "degree": 4,
+     "incoming_degree": 0,
+     "description": "Ingredient proteic cu rol de gelifiant, folosit la închegarea unor preparate culinare."
+    },
+    {
+     "id": "n_v86_food_amidon",
+     "label": "Amidon alimentar",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.7,
+     "degree": 5,
+     "incoming_degree": 1,
+     "description": "Ingredient bogat în amidon, folosit la îngroșarea unor sosuri și creme."
+    },
+    {
+     "id": "n_v84_food_cheag",
+     "label": "Cheag alimentar",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.65,
+     "degree": 4,
+     "incoming_degree": 0,
+     "description": "Coagulant folosit la prelucrarea laptelui pentru anumite brânzeturi."
+    },
+    {
+     "id": "n_v86_food_galbenus",
+     "label": "Gălbenuș",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.8,
+     "degree": 5,
+     "incoming_degree": 1,
+     "description": "Partea galbenă din centrul oului, folosită separat în creme și aluaturi."
+    }
+   ]
+  },
+  {
+   "label": "Părți ale unei cărți",
+   "members": [
+    {
+     "id": "n_v4lit_coperta",
+     "label": "copertă",
+     "node_type": "concept",
+     "category": "literatura",
+     "salience": 0.4126,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Învelișul exterior al unei cărți."
+    },
+    {
+     "id": "n_v4lit_pagina",
+     "label": "pagină",
+     "node_type": "concept",
+     "category": "literatura",
+     "salience": 0.62,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Față de foaie numerotată dintr-o carte sau revistă."
+    },
+    {
+     "id": "n_v3lit_capitol",
+     "label": "Capitol",
+     "node_type": "concept",
+     "category": "literatura",
+     "salience": 0.2016,
+     "degree": 3,
+     "incoming_degree": 3,
+     "description": "Diviziune principală a unei cărți sau a unui roman."
+    },
+    {
+     "id": "n_v4lit_titlu",
+     "label": "titlu",
+     "node_type": "concept",
+     "category": "literatura",
+     "salience": 0.8015,
+     "degree": 5,
+     "incoming_degree": 5,
+     "description": "Numele unei opere, cărți sau părți de text."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:f8431bdde18da1e744fc62bd4ea6c96fee8c2190aeae1110c15ba6bf69545359"
+}

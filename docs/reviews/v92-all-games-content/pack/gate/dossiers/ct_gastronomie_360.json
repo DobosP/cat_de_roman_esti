@@ -1,0 +1,172 @@
+{
+ "id": "ct_gastronomie_360",
+ "game": "contexto",
+ "category": "gastronomie",
+ "difficulty": "usor",
+ "status": "pending",
+ "record_sha256": "c6f7021cd70ae4c62f146ca7f4e0dd4527291f5d925db112d5af5eeaa1622a26",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "target": {
+  "id": "n_v4gas_sare",
+  "label": "Sare",
+  "node_type": "concept",
+  "category": "gastronomie",
+  "salience": 0.9041,
+  "degree": 10,
+  "incoming_degree": 10,
+  "description": "Mineral alimentar folosit pentru gust și conservare."
+ },
+ "incoming_neighbor_floor": {
+  "minimum": 5,
+  "count": 10,
+  "sample": [
+   {
+    "id": "n_gas_mici",
+    "label": "Mici"
+   },
+   {
+    "id": "n_gas_muraturi",
+    "label": "Murături"
+   },
+   {
+    "id": "n_v17gas_pufuleti",
+    "label": "Pufuleți"
+   },
+   {
+    "id": "n_v17geo_salina_turda",
+    "label": "Salina Turda"
+   },
+   {
+    "id": "n_v2gas_sosuri",
+    "label": "Sosuri"
+   },
+   {
+    "id": "n_v2via_masa_in_familie",
+    "label": "Masa în familie"
+   },
+   {
+    "id": "n_v3gas_friptura",
+    "label": "Friptură"
+   },
+   {
+    "id": "n_v4gas_mancare",
+    "label": "Mâncare"
+   },
+   {
+    "id": "n_vdr_gospodaria_bunicilor",
+    "label": "Gospodăria bunicilor"
+   },
+   {
+    "id": "n_vdr_taiatul_porcului",
+    "label": "Tăiatul porcului de Ignat"
+   }
+  ],
+  "sample_truncated": false,
+  "recognition_assessed": false
+ },
+ "reachable": 2353,
+ "strong_neighbors": [
+  {
+   "id": "n_v4gas_mancare",
+   "label": "Mâncare",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.9301,
+   "degree": 38,
+   "incoming_degree": 15,
+   "description": "Concept general pentru alimente și preparate consumate zilnic.",
+   "strength": 0.96
+  },
+  {
+   "id": "n_v17geo_salina_turda",
+   "label": "Salina Turda",
+   "node_type": "place",
+   "category": "geografie",
+   "salience": 0.5,
+   "degree": 4,
+   "incoming_degree": 4,
+   "description": "Veche mină de sare din Turda, exploatată din Evul Mediu și transformată într-un spectaculos parc subteran cu roată panoramică și lac cu bărci. Este printre cele mai vizitate atracții turistice din Transilvania.",
+   "strength": 0.85
+  },
+  {
+   "id": "n_gas_muraturi",
+   "label": "Murături",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.8914,
+   "degree": 23,
+   "incoming_degree": 24,
+   "description": "Legume conservate în saramură sau oțet, puse lângă fripturi, fasole sau șaorma.",
+   "strength": 0.82
+  },
+  {
+   "id": "n_v2via_masa_in_familie",
+   "label": "Masa în familie",
+   "node_type": "concept",
+   "category": "viata_de_roman",
+   "salience": 0.8844,
+   "degree": 12,
+   "incoming_degree": 12,
+   "description": "Masa împărțită cu rudele, cu mâncare gătită și conversații domestice.",
+   "strength": 0.76
+  },
+  {
+   "id": "n_vdr_gospodaria_bunicilor",
+   "label": "Gospodăria bunicilor",
+   "node_type": "place",
+   "category": "viata_de_roman",
+   "salience": 0.9146,
+   "degree": 20,
+   "incoming_degree": 20,
+   "description": "Curtea cu grădină, coteț, magazie, butoi și lucruri păstrate pentru orice nevoie.",
+   "strength": 0.75
+  },
+  {
+   "id": "n_v3gas_friptura",
+   "label": "Friptură",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.8598,
+   "degree": 7,
+   "incoming_degree": 7,
+   "description": "Carne gătită la cuptor, tigaie sau grătar, servită ca fel principal.",
+   "strength": 0.72
+  },
+  {
+   "id": "n_gas_mici",
+   "label": "Mici",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.9765,
+   "degree": 20,
+   "incoming_degree": 21,
+   "description": "Mititei fripți pe grătar, asociați popular cu muștar, pâine și ieșiri de 1 Mai.",
+   "strength": 0.7
+  },
+  {
+   "id": "n_vdr_taiatul_porcului",
+   "label": "Tăiatul porcului de Ignat",
+   "node_type": "event",
+   "category": "viata_de_roman",
+   "salience": 0.8064,
+   "degree": 12,
+   "incoming_degree": 12,
+   "description": "Obicei rural de iarnă înaintea Crăciunului, legat de pregătirea cărnii.",
+   "strength": 0.7
+  },
+  {
+   "id": "n_v2gas_sosuri",
+   "label": "Sosuri",
+   "node_type": "concept",
+   "category": "gastronomie",
+   "salience": 0.7846,
+   "degree": 12,
+   "incoming_degree": 13,
+   "description": "Adaosuri lichide sau cremoase care completează mâncarea.",
+   "strength": 0.65
+  }
+ ],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:d02a4d530498346a518734fc0357b647b09e6fd545edac8cb4f928e8fd5975a9"
+}

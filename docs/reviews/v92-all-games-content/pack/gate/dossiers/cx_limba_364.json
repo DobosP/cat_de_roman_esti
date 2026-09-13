@@ -1,0 +1,200 @@
+{
+ "id": "cx_limba_364",
+ "game": "conexiuni",
+ "category": "limba",
+ "difficulty": "normal",
+ "status": "pending",
+ "record_sha256": "e9312f21772161eb8da935c46ed5efc8a4456265afbdfc4f3075b50d25d6b5c7",
+ "kg_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109",
+ "lint_findings": [],
+ "fairness": {
+  "unfair_tiles": [],
+  "contested_tiles": [],
+  "engine_unfair_raw": 0
+ },
+ "groups": [
+  {
+   "label": "Au coadă, vie sau de unealtă",
+   "members": [
+    {
+     "id": "n_v29_animal_pets_pisica",
+     "label": "Pisică",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.94,
+     "degree": 2,
+     "incoming_degree": 2,
+     "description": "Animal domestic agil, cunoscut pentru tors și pentru vânătoarea șoarecilor."
+    },
+    {
+     "id": "n_v29_animal_pets_caine",
+     "label": "Câine",
+     "node_type": "concept",
+     "category": "stiinta",
+     "salience": 0.94,
+     "degree": 3,
+     "incoming_degree": 1,
+     "description": "Animal domestic ținut adesea lângă oameni, cunoscut pentru lătrat."
+    },
+    {
+     "id": "n_v30_kitchen_cookware_tigaie",
+     "label": "Tigaie",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.93,
+     "degree": 2,
+     "incoming_degree": 3,
+     "description": "Vas de gătit puțin adânc, cu mâner, folosit mai ales pentru prăjire."
+    },
+    {
+     "id": "n_v32_garden_soil_lopata",
+     "label": "Lopată",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.92,
+     "degree": 2,
+     "incoming_degree": 3,
+     "description": "Unealtă cu coadă și lamă lată, folosită pentru a muta pământ."
+    }
+   ]
+  },
+  {
+   "label": "Au foi, de hârtie sau alimentare",
+   "members": [
+    {
+     "id": "n_v3lit_carte",
+     "label": "Carte",
+     "node_type": "concept",
+     "category": "literatura",
+     "salience": 0.973,
+     "degree": 30,
+     "incoming_degree": 35,
+     "description": "Obiect tipărit sau digital care conține un text literar ori informativ."
+    },
+    {
+     "id": "n_v24_school_writing_caiet",
+     "label": "Caiet",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.94,
+     "degree": 6,
+     "incoming_degree": 1,
+     "description": "Concept cotidian din grupul «obiecte pentru scris»: Caiet."
+    },
+    {
+     "id": "n_v2lim_varza",
+     "label": "Varză",
+     "node_type": "concept",
+     "category": "limba",
+     "salience": 0.7009,
+     "degree": 7,
+     "incoming_degree": 7,
+     "description": "Legumă cu frunze suprapuse, numită regional și curechi."
+    },
+    {
+     "id": "n_v2gas_placinte",
+     "label": "Plăcinte",
+     "node_type": "concept",
+     "category": "gastronomie",
+     "salience": 0.6308,
+     "degree": 11,
+     "incoming_degree": 12,
+     "description": "Preparate coapte din aluat, cu umpluturi dulci sau sărate."
+    }
+   ]
+  },
+  {
+   "label": "Au roți",
+   "members": [
+    {
+     "id": "n_v42vdr_pegas",
+     "label": "Bicicleta Pegas",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.6,
+     "degree": 1,
+     "incoming_degree": 1,
+     "description": "Bicicleta românească legendară a copilăriei, azi obiect de cult."
+    },
+    {
+     "id": "n_v32_garden_transport_roaba",
+     "label": "Roabă",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.9,
+     "degree": 2,
+     "incoming_degree": 2,
+     "description": "Cărucior cu o roată și două mânere, folosit pentru a transporta pământ sau unelte."
+    },
+    {
+     "id": "n_v24_transport_personal_masina",
+     "label": "Mașină",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.94,
+     "degree": 4,
+     "incoming_degree": 1,
+     "description": "Concept cotidian din grupul «transport personal»: Mașină."
+    },
+    {
+     "id": "n_v24_transport_rail_tren",
+     "label": "Tren",
+     "node_type": "concept",
+     "category": "societate",
+     "salience": 0.94,
+     "degree": 5,
+     "incoming_degree": 2,
+     "description": "Concept cotidian din grupul «transport pe șine»: Tren."
+    }
+   ]
+  },
+  {
+   "label": "Sporturi în care mingea trece peste fileu",
+   "members": [
+    {
+     "id": "n_tenis",
+     "label": "Tenis",
+     "node_type": "concept",
+     "category": "personalitati",
+     "salience": 0.4491,
+     "degree": 23,
+     "incoming_degree": 23,
+     "description": "Sport cu racheta jucat individual sau in dublu."
+    },
+    {
+     "id": "n_v3spo_volei",
+     "label": "Volei",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.7494,
+     "degree": 9,
+     "incoming_degree": 9,
+     "description": "Sport de echipă cu fileu, în care mingea este trimisă peste plasă."
+    },
+    {
+     "id": "n_v18spo_tenis_de_masa",
+     "label": "Tenis de masă",
+     "node_type": "concept",
+     "category": "sport",
+     "salience": 0.42,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Sport de rachetă jucat pe masă, foarte popular în România. Echipa feminină a țării este una dintre cele mai puternice din Europa."
+    },
+    {
+     "id": "n_v18via_padel",
+     "label": "Padelul",
+     "node_type": "concept",
+     "category": "viata_de_roman",
+     "salience": 0.5,
+     "degree": 4,
+     "incoming_degree": 4,
+     "description": "Sport cu racheta între tenis și squash, în plin boom în România: peste 300 de terenuri în 2025 și un turneu internațional FIP găzduit la Timișoara."
+    }
+   ]
+  }
+ ],
+ "cross_group_strong_edges": [],
+ "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+ "review_binding": "sha256:159dcf90348910851f646df00d8a7a1e7cead7c5b8820b7c5a9c72eb97a16897"
+}

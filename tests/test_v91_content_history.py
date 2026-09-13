@@ -13,7 +13,7 @@ import pytest
 
 from cat_de_roman_esti.wordgames import alchimie
 from cat_de_roman_esti.wordgames.service import get_service
-from tests.content_history import before_v91_artifact
+from tests.content_history import before_v91_artifact, before_v92_artifact
 from tests.current_content import CURRENT_CONTENT
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -63,8 +63,9 @@ def test_exact_v90_artifact_inverse_rejects_unreviewed_changes(filename):
 
 
 def test_only_reviewed_sport_seeds_change_and_all_other660_records_remain_exact():
-    current = read(ROOT / "cat_de_roman_esti/fixtures/games_pack.json")
-    previous = before_v91_artifact(current, "games_pack.json")
+    live = read(ROOT / "cat_de_roman_esti/fixtures/games_pack.json")
+    current = before_v92_artifact(live, "games_pack.json")
+    previous = before_v91_artifact(live, "games_pack.json")
     proposal = read(REVIEW / "content/replacement-proposal.json")
     changed = []
     total = 0
@@ -110,3 +111,59 @@ def test_live83_recipe_books_match_exact_reviewed_candidate():
         }
     assert len(actual) == 83
     assert json.loads(json.dumps(actual)) == expected
+
+
+@pytest.mark.parametrize("filename", BASELINE)
+def test_v92_inverse_restores_exact_reviewed_v91_after_artifact(filename):
+    directory = "tests/fixtures" if filename.startswith("cat_mobile") else (
+        "cat_de_roman_esti/fixtures"
+    )
+    current = read(ROOT / directory / filename)
+    untouched = deepcopy(current)
+    restored = before_v92_artifact(current, filename)
+    receipt = read(REVIEW / "artifact-delta.json")["files"][filename]
+    indent = 2 if filename == "kg_sample.json" else 1
+    blob = (json.dumps(restored, ensure_ascii=False, indent=indent) + "\n").encode()
+    assert hashlib.sha256(blob).hexdigest() == receipt["after_sha256"]
+    assert current == untouched
+    if filename == "games_pack.json":
+        assert {game: len(current[game]) - len(restored[game])
+                for game in ("conexiuni", "contexto", "lant", "alchimie")} == {
+                    "conexiuni": 4, "contexto": 8, "lant": 13, "alchimie": 0,
+                }
+        for game in ("conexiuni", "contexto", "lant", "alchimie"):
+            live_rows = {row["id"]: row for row in current[game]}
+            assert all(row == live_rows[row["id"]] for row in restored[game])
+    elif filename == "board_rankings_v37.json":
+        assert len(current["boards"]) - len(restored["boards"]) == 25
+        live_rows = {row["id"]: row for row in current["boards"]}
+        assert sum(row["selection_weight"] != live_rows[row["id"]]["selection_weight"]
+                   for row in restored["boards"]) == 35
+        for row in restored["boards"]:
+            assert {k: v for k, v in row.items() if k not in {"rank", "selection_weight"}} == {
+                k: v for k, v in live_rows[row["id"]].items()
+                if k not in {"rank", "selection_weight"}
+            }
+    elif filename == "derived_catalog_v38.json":
+        assert current["boards"] == restored["boards"]
+        assert len(restored["boards"]) == 336
+    else:
+        assert current == restored
+
+
+@pytest.mark.parametrize("change", ["added_row", "missing_added", "rank_weight", "extra_row"])
+def test_v92_inverse_rejects_tampering_before_stripping_new_content(change):
+    filename = "board_rankings_v37.json" if change == "rank_weight" else "games_pack.json"
+    current = read(ROOT / "cat_de_roman_esti/fixtures" / filename)
+    if change == "added_row":
+        row = next(row for row in current["lant"] if row["id"] == "lt_film_tv_223")
+        row["start"] = "n_unreviewed"
+    elif change == "missing_added":
+        current["conexiuni"] = [r for r in current["conexiuni"] if r["id"] != "cx_limba_364"]
+    elif change == "rank_weight":
+        row = next(row for row in current["boards"] if row["id"] == "cx_gastronomie_173")
+        row["selection_weight"] = 5
+    else:
+        current["contexto"].append({**current["contexto"][-1], "id": "ct_unreviewed_999"})
+    with pytest.raises(AssertionError):
+        before_v92_artifact(current, filename)
