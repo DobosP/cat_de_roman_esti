@@ -1,29 +1,33 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-13 — V92 Alchimie GUI candidate is green locally; ready for owner playtesting.
+Last verified: 2026-09-13 — V92 direct crafting is green locally; ready for owner playtesting.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-- The owner explicitly requested V92 on 2026-09-13, focused on rebuilding the confusing
-  Alchimie interface. Candidate branch: `feat/v92-alchimie-gui`, baseline `6208eae`.
-  The automatic version loop remains stopped; this request covers V92 only (ADR-0141).
-- Alchimie now has a compact target and one workbench: mixing controls beside the
-  inventory on desktop, stacked in normal flow on phones. The target carries theme,
-  difficulty and daily date; the header keeps the combination count. Help and discovery
-  history follow the main play area. Numbered slots and larger word tiles wrap full labels.
-- Two selections stay stable when a third word is chosen. A clear message explains
-  replacement; removing a slot returns focus to its inventory button or panel. Editing
-  the pair clears stale selection guidance. Existing empty-pair retry blocking remains.
-- Successful combines preserve the inventory filter. Feedback and immediate use buttons
-  appear inside the bench; earned discoveries remain reusable from their history.
-  Filters clear search; an empty search offers a clear button. Ready labels explain that
-  a suitable partner exists, without suggesting every marked pair will produce a result.
-- Available hints show their 150-point penalty before use. Paid cues and uncertain-action
-  GET recovery retain their existing ownership and charging rules. Other games are unchanged.
-- At 390×844, real seed-38 measurement moves the first word from y=744 to y=613.75.
-  Six starting words fit completely (V91: four). This is browser emulation, not player
-  acceptance. GUI-only scope adds no content. Decision: [ADR-0141](adr/0141-rebuild-alchimie-workbench.md).
+- V92 continues on `feat/v92-alchimie-gui`. The owner clarified that the primary problem
+  was too many buttons/actions. This revision supersedes the first GUI candidate `e609de6`
+  with direct crafting informed by the official Infinite Craft and Little Alchemy 2 interfaces.
+  The automatic version loop remains stopped; this is still V92 (ADR-0142).
+- Tap a word, then another: the second tap immediately combines them. Desktop dragging
+  one owned word onto another invokes the same guarded action. There is no Combine button,
+  two-slot form, Golește button or mandatory use-result step. Tapping the active word cancels.
+- The sole useful new discovery automatically stays selected for the next combination.
+  A failed attempt keeps the first word; a different partner takes one tap. An unchanged
+  failed pair is blocked locally. Multiple useful discoveries require an explicit choice.
+- Default play exposes three controls outside word tiles: exit, search and options.
+  Filters, history, rules and round actions begin collapsed. Intro difficulty/category
+  settings are optional. The target, active word, result and inventory occupy one compact area.
+- Available hints still show their 150-point penalty. Pair hints select only the first
+  suggested word and highlight both; neither hints nor resume cause an automatic mutation.
+  Lost replies retain GET-only recovery, ownership checks and paid-cue persistence.
+- Keyboard crafting uses native Enter/Space. If a discovery removes the focused word,
+  focus follows the carried word or inventory panel, preserving deliberate navigation
+  elsewhere during the request. Carried selection is announced; terminal focus stays owned.
+- Real seed-38 phone journey: **3 word taps / 2 combinations / 1000 points**, versus six
+  actions for the first candidate. The first word starts at **y=367.91** at 390×844
+  (first candidate: 613.75); six words fit. These are emulated-browser measurements,
+  not human playtesting. Decision: [ADR-0142](adr/0142-direct-alchimie-crafting.md).
 
 ## Inventory and invariants
 
@@ -57,21 +61,22 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
 
 ## Verification
 
-- Node 24.19.0: clean `npm ci`, **193 native tests**, ESLint, typecheck/build/bundle pass.
-  Initial JS/CSS is **119.09/120 KiB gzip**; Alchimie CSS stays in its lazy game chunk.
-- Final full browser gate: **356 passed**, four workers, zero retries. The focused
-  workbench/header gate also passes **16 checks** (320px, 200% text, long Romanian
-  labels, short viewport, selection recovery, search and immediate earned-result use).
-- Python 3.12: **1652 backend/53 accounts tests** pass; both content validators, Ruff,
-  documentation checks and whitespace pass. Python 3.14 was not rerun for this GUI-only change.
-- First full browser run had 352 passes and two stressed-header overflow failures.
-  The wrapping fix passes both focused and final full gates; original failures are not
-  counted as passing evidence. Independent review found no substantive new regressions.
-- Evidence: [V92 review](reviews/v92-alchimie-gui/README.md), screenshots, geometry,
-  content delta and [verification receipt](reviews/v92-alchimie-gui/verification.json).
-- Content delta against `6208eae`: zero additions, removals or revisions in every
-  concept/connection/form/puzzle/round/approval/eligibility/derived-board category.
-- Earlier V91 verification is archived in WORKLOG and its original review directory.
+- Node 24.19.0: **195 native checks**, ESLint, typecheck/build and **119.09/120 KiB**
+  initial gzip budget pass. Styles remain scoped to the lazy Alchimie screen.
+- **368 final browser checks pass**, four workers, zero retries; **26 focused workbench
+  checks pass** with actual touchscreen taps, native drag, three-tap completion, retries,
+  passive paid hints, keyboard focus restoration, no focus stealing and 320px/200% text.
+  Commands and fingerprints: [verification](reviews/v92-direct-crafting/verification.json).
+- A first focused run found duplicate replay-failure notices (108 pass/2 fail); the
+  correction passed both regression cases. A pre-focus-fix full run passed 364 cases;
+  independent review then reproduced lost keyboard focus after a submitting word vanished.
+- Backend and content are unchanged from `e609de6`. Its **1652 backend/53 accounts**
+  tests and both content validators remain baseline evidence; they were not rerun for
+  this further GUI-only correction. New browser tests exercise the real BFF contracts.
+- Content delta from `e609de6`: zero concept, connection, form, puzzle, round, approval,
+  eligibility and derived-board changes. API wrappers and backend source have no diff.
+- Previous V92 layout evidence remains historical in `reviews/v92-alchimie-gui/`.
+  Current evidence: [direct-crafting review](reviews/v92-direct-crafting/README.md).
 
 ## Production and remaining work
 
@@ -88,4 +93,4 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
 ## Doc map
 
 - `README.md`/`AGENTS.md`: orientation; `docs/agent-map.md`/`docs/agent-testing.md`: routes/gates.
-- `docs/adr/` (newest 0141), `docs/reviews/`, WORKLOG: decisions, evidence and history.
+- `docs/adr/` (newest 0142), `docs/reviews/`, WORKLOG: decisions, evidence and history.

@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { games, activeKey, gameURL, deterministicStarts, solution, start, solve } from "./games.mjs";
+import { games, activeKey, gameURL, deterministicStarts, solution, start, solve, openAlchemyDisclosure } from "./games.mjs";
 
 const SCORE_KEY = "cat_wordgame_scores_v1";
 const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -52,6 +52,7 @@ for (const game of games) {
     await deterministicStarts(page, game);
     await page.goto(game.path);
     if (!game.derived) {
+      if (game.key === "alchimie") await openAlchemyDisclosure(page, ".alchemy-setup-options");
       await page.getByRole("group", { name: "DIFICULTATE" })
         .getByRole("button", { name: /^Normal/ }).click();
       await page.getByRole("group", { name: "CATEGORIE" }).getByRole("button").nth(1).click();
@@ -95,6 +96,7 @@ for (const game of games) {
     await page.clock.install();
     await deterministicStarts(page, game);
     await start(page, game);
+    if (game.key === "alchimie") await openAlchemyDisclosure(page, ".alchemy-menu");
     await page.getByText("Reguli și ajutor", { exact: true }).click();
     await solve(page, game, solution(game).steps);
     await expect.poll(async () => {
@@ -147,15 +149,16 @@ test("alchimie retains its live round and blocks actions while another round is 
   await deterministicStarts(page, game);
   const initial = await start(page, game);
   const firstStep = solution(game).steps[0];
-  await page.getByRole("button", { name: /^Toate / }).click();
-  for (const label of firstStep.labels) {
-    await page.locator(game.board).getByRole("button", {
-      name: new RegExp(`^${escapeRegex(label)}(?:,|$)`),
-    }).click();
-  }
-  const combine = page.locator('button[aria-label="Combină cele două concepte selectate"]');
+  await page.locator(game.board).getByRole("button", {
+    name: new RegExp(`^${escapeRegex(firstStep.labels[0])}(?:,|$)`),
+  }).click();
+  // The next ingredient is the combine action; selecting it would immediately POST.
+  const partner = page.locator(game.board).getByRole("button", {
+    name: new RegExp(`^${escapeRegex(firstStep.labels[1])}(?:,|$)`),
+  });
   const another = page.locator("button.alchimie-other-board");
-  await expect(combine).toBeEnabled();
+  await expect(partner).toBeEnabled();
+  await openAlchemyDisclosure(page, ".alchemy-menu");
   const originalScores = await scoreState(page);
   let release;
   let entered;
@@ -176,10 +179,10 @@ test("alchimie retains its live round and blocks actions while another round is 
   await another.click();
   await requested;
   try {
-    await expect(combine).toBeDisabled();
+    await expect(partner).toBeDisabled();
     await expect(another).toBeDisabled();
     await expect(page.locator(".game-shell-header button")).toBeDisabled();
-    await combine.dispatchEvent("click");
+    await partner.dispatchEvent("click");
     await another.dispatchEvent("click");
     await page.locator(".game-shell-header button").dispatchEvent("click");
     await page.keyboard.press("Enter");
@@ -195,8 +198,8 @@ test("alchimie retains its live round and blocks actions while another round is 
   await assertPersistentFailure(page);
   await expect(another).toBeEnabled();
   await expect(another).toBeInViewport();
-  await expect(combine).toBeEnabled();
-  await expect(page.getByRole("button", { name: /^Scoate .* din alambic$/ })).toHaveCount(2);
+  await expect(partner).toBeEnabled();
+  await expect(page.getByRole("button", { name: /^Scoate .* din alambic$/ })).toHaveCount(1);
   expect(await scoreState(page)).toBe(originalScores);
   expect(await (await request.get(gameURL(game, initial.game_id))).json()).toEqual(initial);
 

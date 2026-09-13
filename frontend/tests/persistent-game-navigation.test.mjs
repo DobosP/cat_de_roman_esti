@@ -42,7 +42,6 @@ test("narrow screens keep exit visible and offset every second sticky game surfa
   for (const selector of [
     "connections-coach-stack",
     "contexto-sticky-controls",
-    "alchemy-bench",
     "word-hop-input",
   ]) {
     assert.match(
@@ -52,6 +51,9 @@ test("narrow screens keep exit visible and offset every second sticky game surfa
       ),
     );
   }
+  const alchimieCss = read("../src/styles/alchimie.css");
+  assert.match(alchimieCss, /\.alchemy-game \.game-shell-header \{[^}]*?position: static/);
+  assert.match(alchimieCss, /\.alchemy-screen \.alchemy-bench \{[^}]*?position: static/);
   assert.doesNotMatch(css, /\.game-shell-title \{\s*display: none/);
   assert.doesNotMatch(css, /\.game-shell-title \{[^}]*clip:/);
 });

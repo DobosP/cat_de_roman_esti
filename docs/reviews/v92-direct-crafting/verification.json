@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-13",
+  "version": "V92 correction: direct crafting",
+  "baseline": "e609de69ee0bfc6456d3de644a59ca7d4150cc1b",
+  "branch": "feat/v92-alchimie-gui",
+  "environment": {
+    "node": "24.19.0",
+    "python_serving_runtime": "3.12.3",
+    "browser": "Chromium desktop and mobile emulation"
+  },
+  "checks": [
+    {
+      "command": "npm test",
+      "result": "195 passed"
+    },
+    {
+      "command": "npm run lint",
+      "result": "pass"
+    },
+    {
+      "command": "npm run build",
+      "result": "typecheck, build, 119.09/120 KiB initial gzip budget pass"
+    },
+    {
+      "command": "npm run test:e2e -- alchimie-workbench.spec.mjs --workers=4",
+      "result": "26 passed in 19.2s; zero retries"
+    },
+    {
+      "command": "npm run test:e2e -- --workers=4",
+      "result": "368 passed (4.1m)",
+      "retries": 0
+    },
+    {
+      "command": "python3 scripts/report_content_delta.py --baseline e609de6 --json",
+      "result": "zero content changes"
+    },
+    {
+      "command": "git diff e609de6 -- cat_de_roman_esti/wordgames frontend/src/api cat_de_roman_esti/fixtures",
+      "result": "empty"
+    },
+    {
+      "command": "python3 <agent-ops>/scripts/check_docs.py .",
+      "result": "dead_links=0 stale_terms=0 retired_verbs=0 orphans=0"
+    },
+    {
+      "command": "git diff --check",
+      "result": "pass"
+    }
+  ],
+  "backend_evidence": {
+    "reference": "../v92-alchimie-gui/verification.json",
+    "backend_tests": 1652,
+    "accounts_tests": 53,
+    "scope": "Prior passing baseline, not rerun: backend/API/content bytes unchanged; new browser gate exercises actual BFF."
+  },
+  "earlier_runs": [
+    {
+      "scope": "first affected browser run",
+      "passed": 108,
+      "failed": 2,
+      "cause": "duplicate terminal replay-failure notice; fixed"
+    },
+    {
+      "scope": "targeted replay/direct-craft rerun",
+      "passed": 24,
+      "failed": 0
+    },
+    {
+      "scope": "pre-focus-fix full browser run",
+      "passed": 364,
+      "failed": 0,
+      "followup": "Independent review reproduced BODY focus after submitting word vanished; guarded focus restoration and two new cases added."
+    }
+  ],
+  "independent_review": "Direct inputs/drag preserve action ownership; confirmed keyboard focus issue fixed and regression-tested, including no stealing deliberate focus.",
+  "sha256": {
+    "frontend/src/screens/Alchimie.tsx": "784323fb60af7d3730247ad8bef81791094b285ff45156728ec1b0d4e71f67ce",
+    "frontend/src/styles/alchimie.css": "1f7a4489dd4c5c3fe5b581f7d2d15ac164fdfaa231e9eaf4d8f1116ad6c8646a",
+    "frontend/e2e/alchimie-workbench.spec.mjs": "747ed073223964f9baf4294925c9999d7527838b15db834641cc090a8c60db0f",
+    "frontend/e2e/games.mjs": "faf3fe6f891c6a075cc3fb1d4a19f892c15494ca6e6e67900cc85bbb27bf5873",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "221ef545d0d7ac81a807017e928d5f4cff23d0a55d6ff3fc253b99111b5f5377"
+  },
+  "interaction": "interaction.json",
+  "sources": [
+    "https://neal.fun/infinite-craft/",
+    "https://littlealchemy2.com/",
+    "https://help.littlealchemy2.com/general/duplicating-items",
+    "https://help.littlealchemy2.com/general/item-info"
+  ],
+  "human_playtesting": "not performed",
+  "physical_device_acceptance": "not performed",
+  "production_changed": false,
+  "recurring_iteration": "stopped"
+}

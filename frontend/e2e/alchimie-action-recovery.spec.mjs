@@ -1,12 +1,11 @@
 import { test, expect } from "@playwright/test";
-import { games, activeKey, gameURL, deterministicStarts, solution, start, act } from "./games.mjs";
+import { games, activeKey, gameURL, deterministicStarts, solution, start, act, openAlchemyDisclosure } from "./games.mjs";
 
 const game = games.find(({ key }) => key === "alchimie");
 const verify = (page) => page.getByRole("button", { name: "Verifică jocul", exact: true });
 const currentGame = (page) => page.getByRole("button", { name: "Încarcă jocul curent", exact: true });
 const hintButton = (page) => page.getByRole("button", { name: "💡 Indiciu", exact: true });
 const resetButton = (page) => page.getByRole("button", { name: /Reia același joc/ });
-const combineButton = (page) => page.getByRole("button", { name: "Combină cele două concepte selectate" });
 const steps = () => solution(game).steps;
 const remembered = (page) => page.evaluate((key) => localStorage.getItem(key), activeKey(game));
 const played = (page) => page.evaluate(() => JSON.parse(localStorage.getItem("cat_wordgame_scores_v1") || "{}").alchimie?.played ?? 0);
@@ -126,6 +125,7 @@ test("lost productive combine restores the exact earned inventory and private ta
   expect(fresh.discovered).toBeUndefined();
   expect(fresh.already_tried).toBeUndefined();
   expect(fresh.moves).toBe(1);
+  await openAlchemyDisclosure(page, ".alchemy-library-tools");
   await page.getByRole("button", { name: /^Toate / }).click();
   for (const item of committed().discovered) {
     await expect(page.locator(game.board).getByRole("button", { name: new RegExp(`^${item.label}(?:,|$)`) })).toBeVisible();
@@ -171,7 +171,7 @@ for (const { kind, hints, solved } of [
     expect(fresh.hint_available).toBe(false);
     await expect(page.locator(".alchemy-earned-hint")).toHaveText(fresh.earned_hint.message);
     await expect(hintButton(page)).toHaveCount(0);
-    await expect(page.getByRole("button", { name: /^Scoate .* din alambic$/ })).toHaveCount(kind === "pair" ? 2 : 0);
+    await expect(page.getByRole("button", { name: /^Scoate .* din alambic$/ })).toHaveCount(kind === "pair" ? 1 : 0);
     expect(counts).toEqual({ reads: 1, mutations: 1 });
     await settledScreenshot(page, `recovered-hint-${kind}.png`, page.locator(".alchemy-earned-hint"));
     await page.reload();
@@ -182,6 +182,19 @@ for (const { kind, hints, solved } of [
     expect(resumed.target.id).toBeNull();
     expect(resumed.target.revealed).toBe(false);
     expect(counts).toEqual({ reads: 2, mutations: 1 });
+    if (kind === "pair") {
+      const [anchor, partner] = fresh.earned_hint.hint;
+      await expect(page.getByRole("button", { name: `Scoate ${anchor.label} din alambic`, exact: true })).toBeVisible();
+      for (const item of [anchor, partner]) {
+        await expect(page.locator(game.board).getByRole("button", { name: new RegExp(`^${item.label}(?:,|$)`) }))
+          .toHaveClass(/alchemy-word--hint/);
+      }
+      const response = responseFor(page, initial.game_id, "combine");
+      await page.locator(game.board).getByRole("button", { name: new RegExp(`^${partner.label}(?:,|$)`) }).click();
+      expect((await response).status()).toBe(200);
+      expect(counts).toEqual({ reads: 2, mutations: 2 });
+      expect((await serverState(request, initial.game_id)).hints_used).toBe(hints);
+    }
   });
 }
 
@@ -191,6 +204,7 @@ test("lost reset restores original seeds, clears cue and experiment memory once"
   const counts = traffic(page, initial.game_id);
   const committed = await loseCommittedResponse(page, initial.game_id, "reset");
   const response = responseFor(page, initial.game_id, "reset");
+  await openAlchemyDisclosure(page, ".alchemy-menu");
   await resetButton(page).click();
   expect((await response).status()).toBe(503);
   await expect(page.getByText("Joc sincronizat. Poți continua.", { exact: true })).toBeVisible();
@@ -235,7 +249,8 @@ test("failed verification persists, locks mutations and retries by GET only", as
   expect((await askHint(page, initial.game_id)).status()).toBe(503);
   await expect(verify(page)).toBeEnabled();
   for (const button of await page.locator(`${game.board} button`).all()) await expect(button).toBeDisabled();
-  await expect(combineButton(page)).toBeDisabled();
+  await expect(page.getByRole("button", { name: "Combină cele două concepte selectate" })).toHaveCount(0);
+  await openAlchemyDisclosure(page, ".alchemy-menu");
   await expect(resetButton(page)).toBeDisabled();
   await expect(hintButton(page)).toBeDisabled();
   await page.keyboard.press("Enter");
@@ -359,6 +374,7 @@ test("failed verification can start a fresh round without replaying the old acti
   await page.route(`**${gameURL(game, initial.game_id)}`, (route) => route.fulfill({ status: 503, contentType: "application/json", body: "{}" }), { times: 1 });
   await askHint(page, initial.game_id);
   await expect(verify(page)).toBeEnabled();
+  await openAlchemyDisclosure(page, ".alchemy-menu");
   await page.locator(".alchimie-other-board").click();
   await expect(verify(page)).toHaveCount(0);
   await expect.poll(() => remembered(page)).not.toBe(initial.game_id);

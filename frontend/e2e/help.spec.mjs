@@ -1,17 +1,18 @@
 import { test, expect } from "@playwright/test";
 import { GAME_HELP } from "../src/gameHelp.mjs";
-import { games, gameURL, deterministicStarts, tabTo, start, act, solution } from "./games.mjs";
+import { games, gameURL, deterministicStarts, tabTo, start, act, solution, openAlchemyDisclosure } from "./games.mjs";
 
 for (const game of games) {
   test(`${game.key} rules preserve the round and focused choices`, async ({ page, request }, testInfo) => {
     await deterministicStarts(page, game);
     const initial = await start(page, game);
+    if (game.key === "alchimie") await openAlchemyDisclosure(page, ".alchemy-menu");
     const help = page.locator("details.game-help");
     const toggle = help.locator("summary");
     await expect(help).not.toHaveAttribute("open");
 
     // A ready selection used to make global Enter handlers consume the help key.
-    const selectedCount = { alchimie: 2, conexiuni: 4, perechi: 1 }[game.key] ?? 0;
+    const selectedCount = { alchimie: 1, conexiuni: 4, perechi: 1 }[game.key] ?? 0;
     for (let index = 0; index < selectedCount; index += 1) {
       await page.locator(game.board).getByRole("button").nth(index).click();
     }
@@ -64,6 +65,7 @@ test("Alchimie shows earned connection directions and keeps them after reload", 
   const items = earned.inventory.filter((item) => item.links.length > 0);
   expect(items.length).toBeGreaterThan(0);
   async function visibleLinks() {
+    await openAlchemyDisclosure(page, ".alchemy-discoveries");
     for (const item of items) {
       const evidence = page.locator(".alchemy-earned-links").filter({
         has: page.getByText(`Legături descoperite: ${item.label}`, { exact: true }),

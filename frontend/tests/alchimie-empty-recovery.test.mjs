@@ -6,9 +6,16 @@ const screen = readFileSync(
   new URL("../src/screens/Alchimie.tsx", import.meta.url),
   "utf8",
 );
-const combineStart = screen.indexOf("const doCombine = useCallback");
-const combineEnd = screen.indexOf("const doReset = useCallback", combineStart);
-const combine = screen.slice(combineStart, combineEnd);
+function callback(name) {
+  const start = screen.indexOf(`  const ${name} = useCallback`);
+  assert.notEqual(start, -1, `${name} exists`);
+  const end = screen.indexOf("\n  const ", start + 1);
+  assert.ok(end > start, `${name} has a following declaration`);
+  return screen.slice(start, end);
+}
+
+const combine = callback("doCombine");
+const toggle = callback("toggle");
 
 test("empty reaction recovery uses an unordered pair key", () => {
   assert.match(
@@ -16,23 +23,23 @@ test("empty reaction recovery uses an unordered pair key", () => {
     /function pairKey[\s\S]*?ids\.length === 2[\s\S]*?JSON\.stringify\(\[\.\.\.ids\]\.sort\(\)\)/,
   );
   assert.match(
-    screen,
-    /selectedPairKey !== null && selectedPairKey === emptyPairKey/,
+    combine,
+    /pairKey\(pair\) === emptyPairKey[\s\S]*?return;/,
   );
 });
 
-test("only authoritative nonterminal empty responses retain the submitted pair", () => {
+test("an authoritative empty response retains one ingredient for the next tap", () => {
   assert.match(
     combine,
     /const recoverableEmpty = res\.discovered\.length === 0 && !res\.won/,
   );
   assert.match(
     combine,
-    /if \(recoverableEmpty\) \{[\s\S]*?setSelected\(\[a, b\]\);[\s\S]*?setEmptyPairKey\(pairKey\(\[a, b\]\)\);[\s\S]*?setEmptyRecoveryActive\(true\);[\s\S]*?\} else \{[\s\S]*?setSelected\(\[\]\);[\s\S]*?setEmptyPairKey\(null\);[\s\S]*?setEmptyRecoveryActive\(false\)/,
+    /if \(recoverableEmpty\) \{[\s\S]*?setSelected\(\[a\]\);[\s\S]*?setEmptyPairKey\(pairKey\(\[a, b\]\)\);/,
   );
   assert.match(
     combine,
-    /recoverableEmpty && !res\.already_tried[\s\S]*?Perechea rămâne în alambic — schimbă un ingredient\./,
+    /recoverableEmpty && !res\.already_tried[\s\S]*?Primul cuvânt rămâne ales\. Atinge alt partener\./,
   );
   assert.match(
     combine,
@@ -40,92 +47,73 @@ test("only authoritative nonterminal empty responses retain the submitted pair",
   );
 
   const rejected = combine.slice(combine.indexOf("} catch {"));
+  assert.match(rejected, /await reconcileAction\(ticket\)/);
   assert.doesNotMatch(rejected, /setSelected|setEmptyPairKey/);
 });
 
-test("button, keyboard, and action guard block an unchanged or duplicate submit", () => {
+test("a second distinct ingredient submits through the single owned action path", () => {
+  assert.match(toggle, /startInFlight\.current \|\| actionsLocked \|\| won \|\| actionOwner\.hasPending\(\)/);
+  assert.match(toggle, /void doCombine\(\[selected\[0\], id\]\)/);
+  assert.doesNotMatch(toggle, /alchimieApi\.combine/);
   assert.match(combine, /startInFlight\.current \|\|/);
-  assert.match(combine, /actionsLocked \|\|[\s\S]*?isEmptyRetry/);
+  assert.match(combine, /actionsLocked \|\|[\s\S]*?pair\.length !== 2[\s\S]*?pair\[0\] === pair\[1\]/);
+  assert.match(combine, /pair\.some\(\(id\) => !state\.inventory\.some\(\(item\) => item\.id === id && !item\.depleted\)\)/);
   assert.ok(
     combine.indexOf("const ticket = beginAction(state)") <
       combine.indexOf("alchimieApi.combine"),
   );
+  assert.match(combine, /const \[a, b\] = pair/);
+  assert.match(combine, /if \(!ticket\) return/);
+  assert.match(combine, /if \(!mayAdoptAction\(ticket\)\) return/);
+  assert.match(combine, /res\.game_id !== ticket\.gameId[\s\S]*?await reconcileAction\(ticket\)/);
   assert.match(
     combine,
     /finally \{[\s\S]*?if \(actionOwner\.finish\(ticket\)\) setBusy\(false\)/,
   );
-  assert.match(
-    screen,
-    /e\.key === "Enter" &&[\s\S]{0,180}!actionsLocked &&[\s\S]{0,80}!isEmptyRetry/,
-  );
-  assert.match(
-    screen,
-    /disabled=\{actionsLocked \|\| selected\.length !== 2 \|\| isEmptyRetry\}/,
-  );
-  const keyboardStart = screen.indexOf("// Keyboard: Enter combines");
-  const keyboardEnd = screen.indexOf("if (loading && !state)", keyboardStart);
+});
+
+test("a sole useful discovery becomes the next anchor without another selection", () => {
+  assert.match(combine, /const usableDiscoveries = res\.inventory\.filter\(\(item\) =>\s*item\.useful && !item\.depleted && res\.discovered\.some\(\(fresh\) => fresh\.id === item\.id\)/);
+  assert.match(combine, /setSelected\(!res\.won && usableDiscoveries\.length === 1 \? \[usableDiscoveries\[0\]\.id\] : \[\]\)/);
+  assert.match(combine, /setEmptyPairKey\(null\)/);
+});
+
+test("cancelling the anchor or changing games clears the immediate retry block", () => {
+  assert.match(toggle, /selected\[0\] === id[\s\S]*?clearSelection\(\)/);
+  const clear = callback("clearSelection");
+  assert.match(clear, /startInFlight\.current \|\| actionsLocked \|\| actionOwner\.hasPending\(\)/);
+  assert.match(clear, /setSelected\(\[\]\)/);
+  assert.match(clear, /setEmptyPairKey\(null\)/);
+
+  for (const name of ["start", "newGame", "applyAuthoritativeState"]) {
+    assert.match(callback(name), /setEmptyPairKey\(null\)/);
+  }
+  for (const name of ["doReset", "doHint"]) {
+    assert.match(callback(name), /applyAuthoritativeState\(fresh\)/);
+  }
+});
+
+test("Escape cancels without a global Enter submit or a separate combine button", () => {
+  const keyboardStart = screen.indexOf("const onKey = (event: KeyboardEvent)");
+  const keyboardEnd = screen.indexOf('window.addEventListener("keydown", onKey)', keyboardStart);
   assert.ok(keyboardStart >= 0 && keyboardEnd > keyboardStart);
-  assert.match(
-    screen.slice(keyboardStart, keyboardEnd),
-    /if \(startInFlight\.current\) return;/,
-  );
+  const keyboard = screen.slice(keyboardStart, keyboardEnd);
+  assert.match(keyboard, /startInFlight\.current/);
+  assert.match(keyboard, /event\.defaultPrevented/);
+  assert.match(keyboard, /event\.key === "Escape"/);
+  assert.match(keyboard, /clearSelection\(\)/);
+  assert.doesNotMatch(keyboard, /doCombine|"Enter"/);
+  assert.doesNotMatch(screen, /onClick=\{doCombine\}|aria-label="Combină cele două concepte selectate"|>\s*Golește\s*</);
 });
 
-test("changing or clearing the bench dismisses only the immediate retry block", () => {
-  const toggle = screen.slice(
-    screen.indexOf("const toggle = useCallback"),
-    screen.indexOf("const doCombine = useCallback"),
-  );
-  assert.match(toggle, /setEmptyPairKey\(null\)[\s\S]*?setSelected/);
-  assert.match(
-    toggle,
-    /if \(emptyRecoveryActive\)[\s\S]*?const nextSelectionCount[\s\S]*?selected\.length - 1[\s\S]*?Math\.min\(selected\.length \+ 1, 2\)/,
-  );
-  assert.match(
-    toggle,
-    /nextSelectionCount === 0[\s\S]*?Alambicul este gol\.[\s\S]*?nextSelectionCount === 1[\s\S]*?Un concept este ales\.[\s\S]*?Perechea nouă este gata\. Apasă Combină\./,
-  );
-  assert.match(
-    toggle,
-    /const clearSelection[\s\S]*?Alambicul este gol\.[\s\S]*?setSelected\(\[\]\);[\s\S]*?setEmptyPairKey\(null\)/,
-  );
-
-  for (const anchor of [
-    "const start = useCallback",
-    "const newGame = useCallback",
-  ]) {
-    const start = screen.indexOf(anchor);
-    assert.notEqual(start, -1, `${anchor} exists`);
-    assert.match(screen.slice(start, start + 1200), /setEmptyPairKey\(null\)/);
-    assert.match(
-      screen.slice(start, start + 1200),
-      /setEmptyRecoveryActive\(false\)/,
-    );
-  }
-  const adoption = screen.slice(screen.indexOf("const applyAuthoritativeState"), screen.indexOf("const applyResumedGame"));
-  assert.match(adoption, /setEmptyPairKey\(null\)/);
-  assert.match(adoption, /setEmptyRecoveryActive\(false\)/);
-  for (const anchor of ["const doReset = useCallback", "const doHint = useCallback"]) {
-    const start = screen.indexOf(anchor);
-    assert.match(screen.slice(start, start + 1200), /applyAuthoritativeState\(fresh\)/);
-  }
-});
-
-test("the guide explains recovery and either occupied slot can be removed", () => {
-  assert.match(screen, /isEmptyRetry[\s\S]{0,100}\? "Schimbă un ingredient"/);
-  assert.match(screen, /Perechea aceasta nu a descoperit nimic\./);
-  assert.match(screen, /ready=\{selected\.length === 2 && !isEmptyRetry\}/);
+test("removing the anchor preserves keyboard focus and a 44px touch target", () => {
   assert.match(
     screen,
     /<Slot[\s\S]{0,160}item=\{selectedItems\[0\]\}[\s\S]{0,160}onRemove=\{removeFromBench\}/,
   );
   assert.match(
-    screen,
-    /<Slot[\s\S]{0,160}item=\{selectedItems\[1\]\}[\s\S]{0,160}onRemove=\{removeFromBench\}/,
-  );
-  assert.match(
-    screen,
-    /const removeFromBench[\s\S]*?requestAnimationFrame\(\(\) => \{[\s\S]*?const button = inventoryButtons\.current\.get\(id\);[\s\S]*?if \(button && !button\.disabled\) button\.focus\(\);[\s\S]*?else inventoryPanel\.current\?\.focus\(\);/,
+    callback("removeFromBench"),
+    /requestAnimationFrame\(\(\) => \{[\s\S]*?const button = inventoryButtons\.current\.get\(id\);[\s\S]*?if \(button && !button\.disabled\) button\.focus\(\);[\s\S]*?else inventoryPanel\.current\?\.focus\(\);/,
   );
   assert.match(screen, /<section ref=\{inventoryPanel\} tabIndex=\{-1\}[^>]*aria-label="Inventar"/);
   assert.match(
@@ -134,7 +122,7 @@ test("the guide explains recovery and either occupied slot can be removed", () =
   );
 
   const slot = screen.slice(screen.indexOf("function Slot"));
-  assert.match(slot, /if \(!item\)[\s\S]*?<span/);
+  assert.match(slot, /if \(!item\) return null/);
   assert.match(slot, /<button[\s\S]*?type="button"/);
   assert.match(slot, /onClick=\{\(\) => onRemove\(item\.id\)\}/);
   assert.match(slot, /aria-label=\{`Scoate \$\{item\.label\} din alambic`\}/);

@@ -6,6 +6,7 @@ const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
 const guide = read("../src/components/PlayGuide.tsx");
 const intro = read("../src/components/GameIntro.tsx");
 const css = read("../src/styles/arcade.css");
+const alchimieCss = read("../src/styles/alchimie.css");
 const alchimie = read("../src/screens/Alchimie.tsx");
 const caldRece = read("../src/screens/CaldRece.tsx");
 const lant = read("../src/screens/Lant.tsx");
@@ -21,8 +22,12 @@ test("all games teach the loop with a semantic three-step guide", () => {
 
   for (const screen of [alchimie, intrusul, perechi, caldRece, lant, conexiuni]) {
     assert.match(screen, /steps=\{\[/);
+  }
+  for (const screen of [intrusul, perechi, caldRece, lant, conexiuni]) {
     assert.match(screen, /<NextMove/);
   }
+  assert.match(alchimie, /className="alchemy-craft-cue" id="alchemy-instructions"/);
+  assert.match(alchimie, /Atinge un cuvânt, apoi altul\. Se combină imediat\./);
   // The four configurable games default to easy; derived V38 boards carry their
   // reviewed difficulty from the server instead of accepting a client override.
   for (const screen of [alchimie, caldRece, lant, conexiuni]) {
@@ -35,13 +40,9 @@ test("mobile layout wraps status and keeps category rails compact with 44px targ
   assert.match(css, /@media \(pointer: coarse\)[\s\S]*?\.chip \{[\s\S]*?min-height: 44px/);
   assert.match(css, /@media \(max-width: 640px\)[\s\S]*?\.hud \{\s*width: 100%;\s*flex-wrap: wrap;/);
   assert.match(css, /\.category-picker-options \{[\s\S]*?flex-wrap: nowrap;[\s\S]*?overflow-x: auto/);
-  assert.match(css, /\.alchemy-bench \{[\s\S]*?position: sticky/);
+  assert.match(alchimieCss, /\.alchemy-screen \.alchemy-bench[^}]*?position: static/);
   assert.match(alchimie, /className="alchemy-slot-label"/);
-  assert.match(css, /\.alchemy-slot-label \{[\s\S]*?text-overflow: ellipsis/);
-  assert.match(
-    css,
-    /\.alchemy-bench > \.row:first-child \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\) auto minmax\(0, 1fr\)/,
-  );
+  assert.match(alchimieCss, /\.alchemy-slot-label \{[^}]*?white-space: normal[^}]*?overflow-wrap: anywhere/);
   assert.match(css, /\.connections-coach-stack \{[\s\S]*?position: sticky/);
   const coach = conexiuni.indexOf('className="connections-coach-stack"');
   const coachEnd = conexiuni.indexOf("\n          </div>\n        )}", coach);
@@ -71,13 +72,13 @@ test("Romanian labels wrap on a responsive Connections board and long paths scro
 
 test("global shortcuts ignore focused controls instead of double-submitting", () => {
   const selector = /target\?\.closest\(\s*'button, a, input, textarea, select, summary, \[role="button"\], \[contenteditable="true"\]'/;
-  for (const screen of [alchimie, lant, conexiuni]) {
+  for (const screen of [lant, conexiuni]) {
     assert.match(screen, /e\.defaultPrevented/);
     assert.match(screen, selector);
   }
-  for (const screen of [alchimie, conexiuni]) {
-    assert.match(screen, /e\.key === "Enter" &&\s*target\?\.closest/);
-  }
+  assert.match(conexiuni, /e\.key === "Enter" &&\s*target\?\.closest/);
+  assert.match(alchimie, /event\.defaultPrevented \|\| startInFlight\.current/);
+  assert.doesNotMatch(alchimie, /(?:event|e)\.key === "Enter"/);
 });
 
 test("touch users get visible rank meaning and important feedback is announced", () => {

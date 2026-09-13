@@ -1,9 +1,9 @@
 // Alchimie — Infinite-Craft over the Romanian KG. Text-only: the inventory is a grid of
-// clickable concept chips; pick two and "Combina" to discover their shared neighbour(s).
+// clickable concepts: a first tap selects, a second tap crafts their shared neighbour(s).
 // Server-authoritative: we render whatever the backend returns and never know the target
 // id until the server reveals it on a win.
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, m } from "framer-motion";
 import { Button, Spinner, type ToastKind } from "@roedu/ui";
 import {
@@ -22,7 +22,6 @@ import { ResultCard } from "../components/ResultCard";
 import { GameIntro } from "../components/GameIntro";
 import { StartFailureNotice } from "../components/StartFailureNotice";
 import { Hud, StatBadge } from "../components/Hud";
-import { NextMove } from "../components/PlayGuide";
 import { DifficultyPicker } from "../components/DifficultyPicker";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
@@ -125,7 +124,6 @@ export default function Alchimie({
   const [busy, setBusy] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [emptyPairKey, setEmptyPairKey] = useState<string | null>(null);
-  const [emptyRecoveryActive, setEmptyRecoveryActive] = useState(false);
   // ids discovered by the most recent combine — used to animate them in.
   const [freshIds, setFreshIds] = useState<Set<string>>(new Set());
   // The pair the most recent nudge suggested — gets a glowing outline.
@@ -139,6 +137,11 @@ export default function Alchimie({
   const [isPuzzleRecord, setIsPuzzleRecord] = useState(false);
   const inventoryButtons = useRef(new Map<string, HTMLButtonElement>());
   const inventoryPanel = useRef<HTMLElement>(null);
+  const pendingCraftFocus = useRef<{ gameId: string; origin: HTMLElement; targetId: string | null } | null>(null);
+  const dragSource = useRef<{ id: string; gameId: string } | null>(null);
+  const [dragOverId, setDragOverId] = useState<string | null>(null);
+  const [toolsOpen, setToolsOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const active = useActiveGame("alchimie");
   const [actionSync, setActionSync] = useState<ActionSync | null>(null);
   const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
@@ -149,10 +152,10 @@ export default function Alchimie({
   const best = useMemo(() => bestScore(GAME_KEY), []);
 
   const applyAuthoritativeState = useCallback((fresh: AlchimieState) => {
+    pendingCraftFocus.current = null;
     setState(fresh);
-    setSelected(fresh.earned_hint?.hint?.map((item) => item.id) ?? []);
+    setSelected(fresh.earned_hint?.hint?.slice(0, 1).map((item) => item.id) ?? []);
     setEmptyPairKey(null);
-    setEmptyRecoveryActive(false);
     setFreshIds(new Set());
     setHintIds(new Set(fresh.earned_hint?.hint?.map((item) => item.id) ?? []));
     setInventoryView("useful");
@@ -201,13 +204,16 @@ export default function Alchimie({
       try {
         const s = await alchimieApi.create(opts);
         setState(s);
+        setToolsOpen(false);
+        setMenuOpen(false);
+        dragSource.current = null;
+        setDragOverId(null);
         setActionSync(null);
         setBusy(false);
         active.remember(s.game_id);
         dismissRecovery();
         setSelected([]);
         setEmptyPairKey(null);
-        setEmptyRecoveryActive(false);
         setFreshIds(new Set());
         setHintIds(new Set());
         setInventoryView("useful");
@@ -226,9 +232,6 @@ export default function Alchimie({
   );
 
   const won = state?.won ?? false;
-  const selectedPairKey = pairKey(selected);
-  const isEmptyRetry =
-    selectedPairKey !== null && selectedPairKey === emptyPairKey;
 
   const puzzleKey = useMemo(() => {
     if (!state?.won || !state.target.id) return null;
@@ -290,61 +293,6 @@ export default function Alchimie({
       current = false;
     };
   }, [state, puzzleKey, recordOnce, active]);
-
-  const toggle = useCallback(
-    (id: string) => {
-      if (startInFlight.current || actionsLocked || won || actionOwner.hasPending()) return;
-      if (selected.length === 2 && !selected.includes(id)) {
-        setLastMessage("Ai ales deja două cuvinte. Scoate unul din alambic pentru a-l înlocui.");
-        return;
-      }
-      sound.playSelect();
-      if (!emptyRecoveryActive) setLastMessage(null);
-      if (emptyRecoveryActive) {
-        const nextSelectionCount = selected.includes(id)
-          ? selected.length - 1
-          : Math.min(selected.length + 1, 2);
-        setLastMessage(
-          nextSelectionCount === 0
-            ? "Alambicul este gol. Alege două concepte."
-            : nextSelectionCount === 1
-              ? "Un concept este ales. Alege încă unul."
-              : "Perechea nouă este gata. Apasă Combină.",
-        );
-      }
-      setEmptyPairKey(null);
-      setSelected((prev) => {
-        if (prev.includes(id)) return prev.filter((x) => x !== id);
-        if (prev.length >= 2) return prev;
-        return [...prev, id];
-      });
-    },
-    [actionsLocked, actionOwner, won, emptyRecoveryActive, selected],
-  );
-
-  const clearSelection = useCallback(() => {
-    if (startInFlight.current || actionsLocked || actionOwner.hasPending()) return;
-    if (!emptyRecoveryActive) setLastMessage(null);
-    if (emptyRecoveryActive) {
-      setLastMessage("Alambicul este gol. Alege două concepte.");
-    }
-    setSelected([]);
-    setEmptyPairKey(null);
-    setHintIds(new Set());
-  }, [actionsLocked, actionOwner, emptyRecoveryActive]);
-
-  const removeFromBench = useCallback(
-    (id: string) => {
-      if (startInFlight.current) return;
-      toggle(id);
-      requestAnimationFrame(() => {
-        const button = inventoryButtons.current.get(id);
-        if (button && !button.disabled) button.focus();
-        else inventoryPanel.current?.focus();
-      });
-    },
-    [toggle],
-  );
 
   const beginAction = useCallback((previous: AlchimieState) => {
     if (startInFlight.current) return null;
@@ -415,20 +363,29 @@ export default function Alchimie({
     }
   }, [state, busy, actionSync, actionOwner, beginAction, reconcileAction, retryResume]);
 
-  const doCombine = useCallback(async () => {
+  const doCombine = useCallback(async (pair: readonly string[]) => {
     if (
       !state ||
       startInFlight.current ||
-      selected.length !== 2 ||
+      state.won ||
       actionsLocked ||
-      isEmptyRetry
+      pair.length !== 2 ||
+      pair[0] === pair[1] ||
+      pair.some((id) => !state.inventory.some((item) => item.id === id && !item.depleted))
     ) {
+      return;
+    }
+    if (pairKey(pair) === emptyPairKey) {
+      setLastMessage("Ai încercat deja această pereche. Atinge un alt partener.");
       return;
     }
     const ticket = beginAction(state);
     if (!ticket) return;
+    const [a, b] = pair;
+    const focusOrigin = document.activeElement;
     setBusy(true);
-    const [a, b] = selected;
+    setSelected([a]);
+    setLastMessage(null);
     try {
       const res = await alchimieApi.combine(state.game_id, a, b);
       if (!mayAdoptAction(ticket)) return;
@@ -438,19 +395,31 @@ export default function Alchimie({
       }
       setState(res);
       const recoverableEmpty = res.discovered.length === 0 && !res.won;
+      let focusTargetId: string | null = null;
+      let carriedLabel: string | null = null;
       if (recoverableEmpty) {
-        setSelected([a, b]);
+        setSelected([a]);
         setEmptyPairKey(pairKey([a, b]));
-        setEmptyRecoveryActive(true);
+        focusTargetId = a;
       } else {
-        setSelected([]);
+        const usableDiscoveries = res.inventory.filter((item) =>
+          item.useful && !item.depleted && res.discovered.some((fresh) => fresh.id === item.id),
+        );
+        setSelected(!res.won && usableDiscoveries.length === 1 ? [usableDiscoveries[0].id] : []);
+        if (!res.won && usableDiscoveries.length === 1) {
+          focusTargetId = usableDiscoveries[0].id;
+          carriedLabel = usableDiscoveries[0].label;
+        }
         setEmptyPairKey(null);
-        setEmptyRecoveryActive(false);
+      }
+      if (!res.won && focusOrigin instanceof HTMLElement && focusOrigin.matches(".alchemy-word, .alchemy-reaction-result")) {
+        pendingCraftFocus.current = { gameId: res.game_id, origin: focusOrigin, targetId: focusTargetId };
       }
       setHintIds(new Set());
       let feedback = res.message;
+      if (carriedLabel) feedback += ` ${carriedLabel} rămâne ales.`;
       if (recoverableEmpty && !res.already_tried) {
-        feedback += " Perechea rămâne în alambic — schimbă un ingredient.";
+        feedback += " Primul cuvânt rămâne ales. Atinge alt partener.";
       }
       if (recoverableEmpty && res.hint_available) {
         feedback += " Apasă „Indiciu” dacă te-ai blocat.";
@@ -470,8 +439,42 @@ export default function Alchimie({
     } finally {
       if (actionOwner.finish(ticket)) setBusy(false);
     }
-  }, [state, selected, actionsLocked, isEmptyRetry, beginAction, mayAdoptAction,
+  }, [state, actionsLocked, emptyPairKey, beginAction, mayAdoptAction,
     reconcileAction, actionOwner]);
+
+  const clearSelection = useCallback(() => {
+    if (startInFlight.current || actionsLocked || actionOwner.hasPending()) return;
+    setSelected([]);
+    setEmptyPairKey(null);
+    setHintIds(new Set());
+    setLastMessage(null);
+  }, [actionsLocked, actionOwner]);
+
+  const toggle = useCallback((id: string) => {
+    if (startInFlight.current || actionsLocked || won || actionOwner.hasPending()) return;
+    const item = state?.inventory.find((owned) => owned.id === id);
+    if (!item || item.depleted) return;
+    if (selected[0] === id) {
+      clearSelection();
+    } else if (selected[0]) {
+      void doCombine([selected[0], id]);
+    } else {
+      sound.playSelect();
+      setSelected([id]);
+      setEmptyPairKey(null);
+      setLastMessage(null);
+    }
+  }, [state, selected, actionsLocked, won, actionOwner, clearSelection, doCombine]);
+
+  const removeFromBench = useCallback((id: string) => {
+    if (startInFlight.current || actionsLocked || actionOwner.hasPending()) return;
+    clearSelection();
+    requestAnimationFrame(() => {
+      const button = inventoryButtons.current.get(id);
+      if (button && !button.disabled) button.focus();
+      else inventoryPanel.current?.focus();
+    });
+  }, [actionsLocked, actionOwner, clearSelection]);
 
   const doReset = useCallback(async () => {
     if (startInFlight.current || !state || actionsLocked) return;
@@ -505,7 +508,6 @@ export default function Alchimie({
     setBusy(false);
     setSelected([]);
     setEmptyPairKey(null);
-    setEmptyRecoveryActive(false);
     setInventoryView("useful");
     setInventoryQuery("");
     setState(null);
@@ -556,6 +558,21 @@ export default function Alchimie({
     () => new Map(inventory.map((item) => [item.id, item])),
     [inventory],
   );
+  useLayoutEffect(() => {
+    const pending = pendingCraftFocus.current;
+    if (!pending || busy) return;
+    pendingCraftFocus.current = null;
+    if (!state || state.game_id !== pending.gameId || won || actionsLocked) return;
+    const focused = document.activeElement;
+    // A removed/depleted word can lose focus. Respect navigation to another control
+    // while the request was pending, and leave terminal focus to ResultCard.
+    if (focused !== document.body && focused !== pending.origin) return;
+    if (focused === pending.origin && pending.origin.isConnected &&
+      !(pending.origin instanceof HTMLButtonElement && pending.origin.disabled)) return;
+    const target = pending.targetId ? inventoryButtons.current.get(pending.targetId) : null;
+    if (target && !target.disabled) target.focus({ preventScroll: true });
+    else inventoryPanel.current?.focus({ preventScroll: true });
+  }, [state, busy, won, actionsLocked]);
   const inventoryCounts = useMemo(
     () => ({
       recent: inventory.filter((item) => item.recent && !item.depleted).length,
@@ -596,38 +613,19 @@ export default function Alchimie({
         ) ?? null)
       : null;
 
-  // Keyboard: Enter combines a ready pair, Escape clears the bench. Enter on
-  // native interactive controls retains its normal action.
+  // Native button activation handles both taps and keyboard crafting. Escape only cancels.
   useEffect(() => {
     if (!state || won) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (startInFlight.current) return;
-      const target = e.target instanceof Element ? e.target : null;
-      if (
-        e.defaultPrevented ||
-        (e.key === "Enter" &&
-          target?.closest(
-            'button, a, input, textarea, select, summary, [role="button"], [contenteditable="true"]',
-          ))
-      ) {
-        return;
-      }
-      if (
-        e.key === "Enter" &&
-        selected.length === 2 &&
-        !actionsLocked &&
-        !isEmptyRetry
-      ) {
-        e.preventDefault();
-        void doCombine();
-      } else if (e.key === "Escape" && selected.length > 0) {
-        e.preventDefault();
+    const onKey = (event: KeyboardEvent) => {
+      if (event.defaultPrevented || startInFlight.current) return;
+      if (event.key === "Escape" && selected.length > 0) {
+        event.preventDefault();
         clearSelection();
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [state, won, selected, actionsLocked, isEmptyRetry, doCombine, clearSelection]);
+  }, [state, won, selected, clearSelection]);
 
   if (loading && !state) {
     return (
@@ -660,13 +658,13 @@ export default function Alchimie({
             best={best}
             description={
               <p style={{ margin: 0 }}>
-                Două cuvinte, o legătură comună. Descoperă cuvinte noi până creezi ținta.
+                Atinge un cuvânt, apoi altul: se combină imediat. Descoperă cuvinte noi până creezi ținta.
               </p>
             }
             steps={[
-              { icon: "👆", label: "Alege două" },
-              { icon: "⚗️", label: "Combină" },
-              { icon: "✨", label: "Descoperă" },
+              { icon: "👆", label: "Atinge un cuvânt" },
+              { icon: "👆", label: "Atinge altul" },
+              { icon: "✨", label: "Descoperă automat" },
             ]}
             startLabel="Joacă →"
             onStart={() => void start({ difficulty, category: category ?? undefined })}
@@ -674,6 +672,9 @@ export default function Alchimie({
             dailyLabel="Provocarea zilei"
             starting={creating || loading}
           >
+            <details className="alchemy-setup-options">
+              <summary>{DIFFICULTY_LABEL[difficulty]} · {category ? categoryLabel(category) : "Toate temele"} · Personalizează</summary>
+              <div className="alchemy-setup-content">
             <DifficultyPicker
               options={DIFFICULTIES}
               value={difficulty}
@@ -693,6 +694,8 @@ export default function Alchimie({
               onInvalid={() => setCategory(null)}
               accent={DEF.accent}
             />
+              </div>
+            </details>
           </GameIntro>
         </div>
       </div>
@@ -732,89 +735,24 @@ export default function Alchimie({
               className="card alchemy-bench"
               aria-label="Alambic"
             >
-              <NextMove
-                icon={isEmptyRetry ? "↔" : selected.length === 2 ? "✨" : "👆"}
-                className="alchemy-coach"
-                title={
-                  isEmptyRetry
-                    ? "Schimbă un ingredient"
-                    : selected.length === 0
-                      ? "Alege două cuvinte"
-                      : selected.length === 1
-                        ? "Mai alege unul"
-                        : "Pereche gata"
-                }
-                detail={
-                  isEmptyRetry
-                    ? "Perechea aceasta nu a descoperit nimic."
-                    : selected.length === 1
-                      ? `${selectedItems[0]?.label ?? "Primul concept"} este ales.`
-                      : selected.length === 2
-                        ? "Scoate un cuvânt cu × ca să-l schimbi."
-                        : "Atinge cuvintele din inventar."
-                }
-                progress={isEmptyRetry ? "schimbă 1" : `${selected.length}/2`}
-                accent={DEF.accent}
-                ready={selected.length === 2 && !isEmptyRetry}
-                announce={false}
-              />
-
-              <div
-                className="alchemy-slots"
-              >
-                <Slot
-                  item={selectedItems[0]}
-                  number={1}
-                  onRemove={removeFromBench}
-                  disabled={actionsLocked}
-                />
-                <span
-                  className="faint"
-                  style={{ fontSize: "1.4rem" }}
-                  aria-hidden
-                >
-                  +
-                </span>
-                <Slot
-                  item={selectedItems[1]}
-                  number={2}
-                  onRemove={removeFromBench}
-                  disabled={actionsLocked}
-                />
-              </div>
-              <div className="alchemy-bench-actions">
-                {selected.length > 0 && (
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    disabled={actionsLocked}
-                    onClick={clearSelection}
-                    title="Golește alambicul (Esc)"
-                  >
-                    Golește
-                  </Button>
+              <div className="alchemy-craft-cue" id="alchemy-instructions">
+                {selectedItems[0] ? (
+                  <>
+                    <Slot item={selectedItems[0]} onRemove={removeFromBench} disabled={actionsLocked} />
+                    <span className="alchemy-craft-plus" aria-hidden>+</span>
+                    <span className="alchemy-craft-prompt">Atinge un alt cuvânt</span>
+                  </>
+                ) : (
+                  <p className="alchemy-craft-prompt">Atinge un cuvânt, apoi altul. Se combină imediat.</p>
                 )}
-                <Button
-                  type="button"
-                  disabled={actionsLocked || selected.length !== 2 || isEmptyRetry}
-                  onClick={doCombine}
-                  title={
-                    isEmptyRetry
-                      ? "Schimbă un ingredient înainte de o nouă combinare"
-                      : "Combină cele două concepte (Enter)"
-                  }
-                  aria-label="Combină cele două concepte selectate"
-                  style={{ borderColor: DEF.accent }}
-                >
-                  {busy ? "Se verifică…" : "⚗ Combină"}
-                </Button>
               </div>
+              {busy && <span role="status" className="alchemy-working">Se verifică…</span>}
               {/* Last combine feedback */}
               <AnimatePresence mode="wait">
                 {lastMessage && !won && (
                   <m.p
                     key={lastMessage + state.moves}
-                    className={`alchemy-feedback${isEmptyRetry ? " alchemy-feedback--empty" : ""}`}
+                    className={`alchemy-feedback${emptyPairKey ? " alchemy-feedback--empty" : ""}`}
                     initial={{ opacity: 0, y: 4 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
@@ -827,22 +765,6 @@ export default function Alchimie({
                 )}
               </AnimatePresence>
 
-              {freshIds.size > 0 && (
-                <div className="alchemy-quick-results" aria-label="Cuvinte noi">
-                  {inventory.filter((item) => freshIds.has(item.id)).map((item) => (
-                    <button
-                      key={item.id}
-                      type="button"
-                      className="chip"
-                      disabled={actionsLocked || item.depleted}
-                      aria-pressed={selected.includes(item.id)}
-                      onClick={() => toggle(item.id)}
-                    >
-                      {item.depleted ? `✦ Descoperit: ${item.label}` : `Folosește ${item.label}`}
-                    </button>
-                  ))}
-                </div>
-              )}
               {!won && actionSync ? (
                 <div className="card col alchemy-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
                   <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
@@ -891,55 +813,65 @@ export default function Alchimie({
               <h3>Cuvintele tale</h3>
               <span className="alchemy-selection-count">{state.inventory_summary.active} utile</span>
             </div>
-            <div
-              className="alchemy-inventory-tabs"
-              role="group"
-              aria-label="Filtrează inventarul"
-            >
-              {(["useful", "recent", "all"] as InventoryView[]).map((view) => (
-                <button
-                  key={view}
-                  type="button"
-                  aria-pressed={inventoryView === view}
-                  className="chip alchemy-inventory-tab"
-                  onClick={() => {
-                    sound.playSelect();
-                    setInventoryView(view);
-                    setInventoryQuery("");
-                  }}
-                  style={{
-                    borderColor: inventoryView === view ? DEF.accent : undefined,
-                    color: inventoryView === view ? "var(--text)" : undefined,
-                  }}
+            <details className="alchemy-library-tools" open={toolsOpen} onToggle={(event) => setToolsOpen(event.currentTarget.open)}>
+              <summary>Caută și filtrează</summary>
+              <div className="alchemy-library-content">
+                <p className="alchemy-inventory-note">
+                  Utile arată cuvintele care mai pot produce descoperiri. În Toate găsești și cuvintele puse deoparte.
+                  {state.inventory_summary.depleted > 0 && ` Puse deoparte: ${state.inventory_summary.depleted}.`}
+                </p>
+
+                <div
+                  className="alchemy-inventory-tabs"
+                  role="group"
+                  aria-label="Filtrează inventarul"
                 >
-                  {INVENTORY_VIEW_LABEL[view]} {inventoryCounts[view]}
-                </button>
-              ))}
-            </div>
-            <div className="alchemy-search-row">
-              <input
-                type="search"
-                className="field alchemy-inventory-search"
-                value={inventoryQuery}
-                onChange={(event) => setInventoryQuery(event.target.value)}
-                onKeyDown={(event) => {
-                  if (event.key === "Escape" && inventoryQuery) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    setInventoryQuery("");
-                  }
-                }}
-                placeholder="Caută în toate…"
-                aria-label="Caută în toate conceptele descoperite"
-                autoComplete="off"
-                spellCheck={false}
-              />
-              {inventoryQuery && (
-                <button className="alchemy-clear-search" type="button" onClick={() => setInventoryQuery("")}>
-                  Șterge căutarea
-                </button>
-              )}
-            </div>
+                  {(["useful", "recent", "all"] as InventoryView[]).map((view) => (
+                    <button
+                      key={view}
+                      type="button"
+                      aria-pressed={inventoryView === view}
+                      className="chip alchemy-inventory-tab"
+                      onClick={() => {
+                        sound.playSelect();
+                        setInventoryView(view);
+                        setInventoryQuery("");
+                      }}
+                      style={{
+                        borderColor: inventoryView === view ? DEF.accent : undefined,
+                        color: inventoryView === view ? "var(--text)" : undefined,
+                      }}
+                    >
+                      {INVENTORY_VIEW_LABEL[view]} {inventoryCounts[view]}
+                    </button>
+                  ))}
+                </div>
+                <div className="alchemy-search-row">
+                  <input
+                    type="search"
+                    className="field alchemy-inventory-search"
+                    value={inventoryQuery}
+                    onChange={(event) => setInventoryQuery(event.target.value)}
+                    onKeyDown={(event) => {
+                      if (event.key === "Escape" && inventoryQuery) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        setInventoryQuery("");
+                      }
+                    }}
+                    placeholder="Caută în toate…"
+                    aria-label="Caută în toate conceptele descoperite"
+                    autoComplete="off"
+                    spellCheck={false}
+                  />
+                  {inventoryQuery && (
+                    <button className="alchemy-clear-search" type="button" onClick={() => setInventoryQuery("")}>
+                      Șterge căutarea
+                    </button>
+                  )}
+                </div>
+              </div>
+            </details>
             <div className="alchemy-inventory-grid">
               <AnimatePresence initial={false}>
                 {visibleInventory.map((item) => {
@@ -947,6 +879,7 @@ export default function Alchimie({
                   const isFresh = freshIds.has(item.id);
                   const isHint = hintIds.has(item.id);
                   const isCrafted = item.parents !== null;
+                  const isTried = selected.length === 1 && pairKey([selected[0], item.id]) === emptyPairKey;
                   const title = item.depleted
                     ? "Nu mai produce elemente noi"
                     : item.ready
@@ -977,11 +910,39 @@ export default function Alchimie({
                       }}
                       transition={{ type: "spring", stiffness: 320, damping: 18 }}
                       onClick={() => toggle(item.id)}
+                      draggable={!actionsLocked && !won && !item.depleted}
+                      onDragStartCapture={(event) => {
+                        if (actionsLocked || won || item.depleted || actionOwner.hasPending()) {
+                          event.preventDefault();
+                          return;
+                        }
+                        dragSource.current = { id: item.id, gameId: state.game_id };
+                        event.dataTransfer.setData("text/plain", item.id);
+                        event.dataTransfer.effectAllowed = "copy";
+                      }}
+                      onDragOver={(event) => {
+                        if (!actionsLocked && !won && !item.depleted && dragSource.current?.gameId === state.game_id && dragSource.current.id !== item.id) {
+                          event.preventDefault();
+                          event.dataTransfer.dropEffect = "copy";
+                          setDragOverId(item.id);
+                        }
+                      }}
+                      onDragLeave={() => setDragOverId(null)}
+                      onDragEndCapture={() => { dragSource.current = null; setDragOverId(null); }}
+                      onDrop={(event) => {
+                        event.preventDefault();
+                        const source = dragSource.current;
+                        dragSource.current = null;
+                        setDragOverId(null);
+                        if (source?.gameId === state.game_id && source.id === event.dataTransfer.getData("text/plain")) {
+                          void doCombine([source.id, item.id]);
+                        }
+                      }}
                       disabled={actionsLocked || won || item.depleted}
                       aria-pressed={isSel}
                       aria-label={accessibleLabel}
                       title={title}
-                      className={`chip alchemy-word${isSel ? " alchemy-word--selected" : ""}${isFresh ? " alchemy-word--fresh" : ""}`}
+                      className={`chip alchemy-word${isSel ? " alchemy-word--selected" : ""}${isFresh ? " alchemy-word--fresh" : ""}${isHint ? " alchemy-word--hint" : ""}${isTried ? " alchemy-word--tried" : ""}${dragOverId === item.id ? " alchemy-word--drop" : ""}`}
                       style={{
                         cursor: won ? "default" : "pointer",
                         borderColor: isSel
@@ -1012,13 +973,11 @@ export default function Alchimie({
                       }}
                     >
                       <span className="alchemy-word-label">{item.label}</span>
-                      <span className="alchemy-word-meta" aria-hidden="true">
-                        {isSel ? `✓ În alambic · ${selected.indexOf(item.id) + 1}`
-                          : item.depleted ? "Pus deoparte"
-                            : isFresh ? "✦ Nou descoperit"
-                              : item.ready ? "Are o pereche aici"
-                                : isCrafted ? "Descoperit" : "De început"}
-                      </span>
+                      {(isSel || isFresh || isTried || item.depleted) && (
+                        <span className="alchemy-word-meta" aria-hidden="true">
+                          {isSel ? "✓ Ales" : item.depleted ? "Pus deoparte" : isTried ? "Încercat" : "✦ Nou"}
+                        </span>
+                      )}
                     </m.button>
                   );
                 })}
@@ -1034,120 +993,119 @@ export default function Alchimie({
                 </p>
               )}
             </div>
-            <p className="alchemy-inventory-note">
-              „Are o pereche aici” înseamnă că există un partener potrivit în inventar; nu orice două cuvinte marcate se combină.
-              {state.inventory_summary.depleted > 0 && ` ${state.inventory_summary.depleted} puse deoparte: le găsești în Toate.`}
-            </p>
           </section>
 
         </div>
 
-        {/* Server-authored lineage: latest stays visible, older reactions opt in. */}
-        {!won && reactionLog.length > 0 && (
-          <section
-            className="card col alchemy-discoveries"
-            aria-labelledby="alchemy-reaction-log-title"
-            style={{ gap: 10, padding: 14 }}
-          >
-            <div className="row spread wrap" style={{ gap: 8, alignItems: "center" }}>
-              <span
-                id="alchemy-reaction-log-title"
-                className="faint"
-                style={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}
-              >
-                ULTIMA DESCOPERIRE
-              </span>
-              <span className="muted" style={{ fontSize: "0.78rem" }}>
-                {reactionLog.length === 1
-                  ? "1 reacție păstrată"
-                  : reactionLog.length + " reacții păstrate"}
-              </span>
-            </div>
-
-            <ReactionRow
-              reaction={reactionLog[0]}
-              selected={selected}
-              freshIds={freshIds}
-              inventoryById={inventoryById}
-              busy={actionsLocked}
-              onSelect={toggle}
-            />
-
-            {reactionLog.length > 1 && (
-              <details className="alchemy-reaction-log">
-                <summary
-                  className="chip alchemy-reaction-log-toggle"
-                  style={{
-                    cursor: "pointer",
-                    minHeight: 44,
-                    width: "fit-content",
-                    maxWidth: "100%",
-                  }}
-                >
-                  Vezi jurnalul ({reactionLog.length})
-                </summary>
-                <div className="col" style={{ gap: 8, marginTop: 10 }}>
-                  {reactionLog.slice(1).map((reaction) => (
-                    <ReactionRow
-                      key={
-                        reaction.ingredientKey +
-                        ":" +
-                        reaction.results.map((item) => item.id).join(",")
-                      }
-                      reaction={reaction}
-                      selected={selected}
-                      freshIds={freshIds}
-                      inventoryById={inventoryById}
-                      busy={actionsLocked}
-                      onSelect={toggle}
-                    />
-                  ))}
+        {!won && <StartFailureNotice failed={startFailed} />}
+        <details className="alchemy-menu" open={menuOpen} onToggle={(event) => setMenuOpen(event.currentTarget.open)}>
+          <summary>Opțiuni de joc</summary>
+          <div className="alchemy-menu-content">
+            {/* Server-authored lineage is available on request. */}
+            {!won && reactionLog.length > 0 && (
+              <details className="alchemy-discoveries">
+                <summary>Descoperiri</summary>
+                <div className="row spread wrap" style={{ gap: 8, alignItems: "center" }}>
+                  <span
+                    id="alchemy-reaction-log-title"
+                    className="faint"
+                    style={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}
+                  >
+                    ULTIMA DESCOPERIRE
+                  </span>
+                  <span className="muted" style={{ fontSize: "0.78rem" }}>
+                    {reactionLog.length === 1
+                      ? "1 reacție păstrată"
+                      : reactionLog.length + " reacții păstrate"}
+                  </span>
                 </div>
+
+                <ReactionRow
+                  reaction={reactionLog[0]}
+                  selected={selected}
+                  freshIds={freshIds}
+                  inventoryById={inventoryById}
+                  busy={actionsLocked}
+                  onSelect={toggle}
+                />
+
+                {reactionLog.length > 1 && (
+                  <details className="alchemy-reaction-log">
+                    <summary
+                      className="chip alchemy-reaction-log-toggle"
+                      style={{
+                        cursor: "pointer",
+                        minHeight: 44,
+                        width: "fit-content",
+                        maxWidth: "100%",
+                      }}
+                    >
+                      Vezi jurnalul ({reactionLog.length})
+                    </summary>
+                    <div className="col" style={{ gap: 8, marginTop: 10 }}>
+                      {reactionLog.slice(1).map((reaction) => (
+                        <ReactionRow
+                          key={
+                            reaction.ingredientKey +
+                            ":" +
+                            reaction.results.map((item) => item.id).join(",")
+                          }
+                          reaction={reaction}
+                          selected={selected}
+                          freshIds={freshIds}
+                          inventoryById={inventoryById}
+                          busy={actionsLocked}
+                          onSelect={toggle}
+                        />
+                      ))}
+                    </div>
+                  </details>
+                )}
               </details>
             )}
-          </section>
-        )}
 
-        <GameHelp game={GAME_KEY} />
+            <GameHelp game={GAME_KEY} />
 
-        {/* Footer actions stay in-play only; ResultCard owns the terminal actions. */}
-        {!won && (
-          <>
-            <StartFailureNotice failed={startFailed} reserveSpace />
-            <div className="row center wrap" style={{ gap: 12, marginTop: 8 }}>
-              <Button
-                type="button"
-                variant="secondary"
-                disabled={actionsLocked}
-                onClick={doReset}
-              >
-                ↻ Reia același joc
-              </Button>
-              <Button
-                type="button"
-                variant="secondary"
-                className="alchimie-other-board"
-                disabled={creating || busy}
-                onClick={() =>
-                  void start({
-                    difficulty: state.difficulty,
-                    category: state.board_category ?? undefined,
-                  })
-                }
-              >
-                ⚗ Alt joc
-              </Button>
-              <Button
-                type="button"
-                variant="secondary"
-                disabled={creating || busy}
-                onClick={newGame}
-              >
-                ⚙ Schimbă opțiunile
-              </Button>
-            </div>
-          </>
-        )}
+            {/* Footer actions stay in-play only; ResultCard owns the terminal actions. */}
+            {!won && (
+              <>
+                <div className="row center wrap" style={{ gap: 12, marginTop: 8 }}>
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    disabled={actionsLocked}
+                    onClick={doReset}
+                  >
+                    ↻ Reia același joc
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    className="alchimie-other-board"
+                    disabled={creating || busy}
+                    onClick={() =>
+                      void start({
+                        difficulty: state.difficulty,
+                        category: state.board_category ?? undefined,
+                      })
+                    }
+                  >
+                    ⚗ Alt joc
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    disabled={creating || busy}
+                    onClick={newGame}
+                  >
+                    ⚙ Schimbă opțiunile
+                  </Button>
+                </div>
+              </>
+            )}
+
+          </div>
+        </details>
 
         {/* Win banner */}
         <AnimatePresence>
@@ -1286,30 +1244,14 @@ function EarnedLinks({ item }: { item: InventoryItem }) {
 
 function Slot({
   item,
-  number,
   onRemove,
   disabled,
 }: {
   item: InventoryItem | undefined;
-  number: number;
   onRemove: (id: string) => void;
   disabled: boolean;
 }) {
-  if (!item) {
-    return (
-      <span
-        className="chip faint alchemy-slot"
-        style={{
-          borderStyle: "dashed",
-          minWidth: 90,
-          justifyContent: "center",
-        }}
-      >
-        <span className="alchemy-slot-number" aria-hidden>{number}</span>
-        <span>Alege un cuvânt</span>
-      </span>
-    );
-  }
+  if (!item) return null;
   return (
     <button
       type="button"
@@ -1320,7 +1262,6 @@ function Slot({
       title={`Scoate ${item.label} din alambic`}
       aria-label={`Scoate ${item.label} din alambic`}
     >
-      <span className="alchemy-slot-number" aria-hidden>{number}</span>
       <span className="alchemy-slot-label">{item.label}</span>
       <span aria-hidden>×</span>
     </button>

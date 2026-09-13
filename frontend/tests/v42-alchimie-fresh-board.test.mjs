@@ -11,7 +11,10 @@ const footer = screen.slice(
   screen.indexOf("{/* Win banner */}"),
 );
 
-test("the footer offers a fresh board without leaving the game", () => {
+test("closed game options offer a fresh board without leaving the game", () => {
+  assert.match(screen, /const \[menuOpen, setMenuOpen\] = useState\(false\)/);
+  assert.match(screen, /<details className="alchemy-menu" open=\{menuOpen\}/);
+  assert.ok(screen.indexOf('<details className="alchemy-menu"') < screen.indexOf("{/* Footer actions"));
   assert.match(footer, /↻ Reia același joc/);
   assert.match(footer, /⚗ Alt joc/);
   assert.match(footer, /⚙ Schimbă opțiunile/);

@@ -1,6 +1,6 @@
 # ADR-0141: Rebuild the Alchimie workbench around the next playable action
 
-- Status: accepted
+- Status: superseded by [ADR-0142](0142-direct-alchimie-crafting.md) for crafting interaction and default controls/layout; safety boundaries retained
 - Date: 2026-09-13
 
 ## Context and authority

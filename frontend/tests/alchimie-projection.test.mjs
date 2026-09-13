@@ -5,7 +5,7 @@ import test from "node:test";
 const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
 const screen = read("../src/screens/Alchimie.tsx");
 const api = read("../src/api/alchimie.ts");
-const css = read("../src/styles/arcade.css");
+const css = read("../src/styles/alchimie.css");
 
 test("inventory offers short recent/useful/all views from server metadata", () => {
   assert.match(api, /recent: boolean/);
@@ -20,6 +20,15 @@ test("inventory offers short recent/useful/all views from server metadata", () =
   assert.match(screen, /aria-pressed=\{inventoryView === view\}/);
   assert.doesNotMatch(screen, /role="tab(?:list)?"/);
   assert.match(screen, /visibleInventory\.map/);
+  assert.match(screen, /useState<InventoryView>\("useful"\)/);
+  assert.match(screen, /const \[toolsOpen, setToolsOpen\] = useState\(false\)/);
+  const toolsStart = screen.indexOf('<details className="alchemy-library-tools"');
+  const toolsEnd = screen.indexOf("</details>", toolsStart);
+  const tools = screen.slice(toolsStart, toolsEnd);
+  assert.match(tools, /<summary>Caută și filtrează<\/summary>/);
+  assert.match(tools, /aria-label="Filtrează inventarul"/);
+  assert.match(tools, /type="search"/);
+  assert.ok(screen.indexOf('className="alchemy-inventory-grid"') > toolsEnd);
 });
 
 test("compact search opens the full accent-insensitive encyclopedia", () => {
@@ -39,7 +48,7 @@ test("compact search opens the full accent-insensitive encyclopedia", () => {
   assert.match(css, /\.alchemy-inventory-search[\s\S]*?min-height: 44px/);
   assert.match(
     css,
-    /@media \(max-width: 640px\)[\s\S]*?\.alchemy-inventory-search[\s\S]*?width: 100%/,
+    /\.alchemy-screen \.alchemy-inventory-search \{[^}]*?width: 100%[^}]*?min-width: 0/,
   );
 });
 
@@ -53,14 +62,14 @@ test("depleted ingredients leave the active workspace but remain in all", () => 
   assert.match(screen, /inventory_summary\.depleted/);
 });
 
-test("ready descriptions explain an available partner without implying every pair works", () => {
+test("word tiles keep concise states while server readiness stays accessible", () => {
   assert.match(screen, /item\.ready[\s\S]*?gata pentru o combinație utilă/);
   assert.match(screen, /aria-label=\{accessibleLabel\}/);
   assert.match(
     screen,
-    /<span className="alchemy-word-meta" aria-hidden="true">[\s\S]*?item\.ready \? "Are o pereche aici"/,
+    /\(isSel \|\| isFresh \|\| isTried \|\| item\.depleted\) && \([\s\S]*?<span className="alchemy-word-meta" aria-hidden="true">/,
   );
-  assert.match(screen, /există un partener potrivit în inventar; nu orice două cuvinte marcate se combină/);
+  assert.match(screen, /isSel \? "✓ Ales" : item\.depleted \? "Pus deoparte" : isTried \? "Încercat" : "✦ Nou"/);
   assert.doesNotMatch(screen, /<span aria-hidden="true">● ?<\/span>/);
   assert.match(screen, /item\.depleted[\s\S]*?\$\{item\.label\}, pus deoparte/);
 });
@@ -71,9 +80,11 @@ test("combine contract exposes only bounded memory count and current retry verdi
   assert.doesNotMatch(api, /attempted_pairs|attempted_partner|recipe_ids/);
 });
 
-test("mobile inventory is a two-column 44px chip grid", () => {
-  assert.match(css, /\.alchemy-inventory-grid[\s\S]*?minmax\(128px, 1fr\)/);
-  assert.match(css, /\.alchemy-inventory-grid > \.chip[\s\S]*?min-height: 44px/);
+test("inventory uses touch-sized tiles and two columns on mobile", () => {
+  assert.match(css, /\.alchemy-inventory-grid \{[^}]*?repeat\(3, minmax\(0, 1fr\)\)/);
+  const tileRules = [...css.matchAll(/\.alchemy-inventory-grid > \.alchemy-word \{[^}]*?min-height: (\d+)px/g)];
+  assert.ok(tileRules.length >= 2, "desktop and mobile tile sizes are declared");
+  for (const [, minHeight] of tileRules) assert.ok(Number(minHeight) >= 44);
   assert.match(
     css,
     /@media \(max-width: 640px\)[\s\S]*?\.alchemy-inventory-grid[\s\S]*?repeat\(2, minmax\(0, 1fr\)\)/,
@@ -86,8 +97,9 @@ test("progressive hint types keep the first hint output-only", () => {
   assert.match(screen, /state\.hint_stage === "output"/);
   assert.match(screen, /Îți arată un rezultat apropiat/);
   const adoption = screen.slice(screen.indexOf("const applyAuthoritativeState"), screen.indexOf("const applyResumedGame"));
-  assert.match(adoption, /setSelected\(fresh\.earned_hint\?\.hint\?\.map\(\(item\) => item\.id\) \?\? \[\]\)/);
+  assert.match(adoption, /setSelected\(fresh\.earned_hint\?\.hint\?\.slice\(0, 1\)\.map\(\(item\) => item\.id\) \?\? \[\]\)/);
   assert.match(adoption, /setHintIds\(new Set\(fresh\.earned_hint\?\.hint\?\.map/);
   assert.match(adoption, /setInventoryView\("useful"\)/);
+  assert.doesNotMatch(adoption, /doCombine|alchimieApi\.combine/);
   assert.match(screen, /state\.earned_hint\.message/);
 });

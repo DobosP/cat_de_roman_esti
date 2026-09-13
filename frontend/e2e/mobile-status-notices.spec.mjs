@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { games, deterministicStarts, start, solve, solution, tabTo } from "./games.mjs";
+import { games, deterministicStarts, start, solve, solution, tabTo, openAlchemyDisclosure } from "./games.mjs";
 
 async function settle(page) {
   await page.evaluate(async () => {
@@ -126,6 +126,7 @@ test("long Romanian status stays readable with text zoom and a short viewport", 
   await layout(page, testInfo, "long-labels-200-percent");
   await testInfo.attach("long-labels-200-percent", { body: await page.screenshot(), contentType: "image/png" });
   await page.setViewportSize({ width: 320, height: 480 });
+  await openAlchemyDisclosure(page, ".alchemy-library-tools");
   await page.getByRole("searchbox", { name: "Caută în toate conceptele descoperite" }).focus();
   await expect(page.getByRole("searchbox", { name: "Caută în toate conceptele descoperite" })).toBeInViewport();
   await layout(page, testInfo, "short-viewport-focused-input");

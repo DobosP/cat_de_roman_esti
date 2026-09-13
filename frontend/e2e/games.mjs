@@ -53,6 +53,17 @@ async function activate(page, target, keyboard) {
   await page.keyboard.press("Space");
 }
 
+export async function openAlchemyDisclosure(page, selector, { keyboard = false } = {}) {
+  if (selector === ".alchemy-discoveries") {
+    await openAlchemyDisclosure(page, ".alchemy-menu", { keyboard });
+  }
+  const details = page.locator(selector);
+  if (await details.getAttribute("open") === null) {
+    await activate(page, details.locator(":scope > summary"), keyboard);
+  }
+  await expect(details).toHaveAttribute("open", "");
+}
+
 export async function start(page, game, { keyboard = false } = {}) {
   await page.goto(game.path);
   const response = page.waitForResponse((r) =>
@@ -81,16 +92,23 @@ export async function act(page, game, step, { keyboard = false } = {}) {
       for (const slot of await page.getByRole("button", { name: /^Scoate .* din alambic$/ }).all()) {
         await activate(page, slot, keyboard);
       }
-      await activate(page, page.getByRole("button", { name: /^Toate / }), keyboard);
+      for (const label of step.labels) {
+        const item = page.locator(game.board).getByRole("button", {
+          name: new RegExp(`^${escapeRegex(label)}(?:,|$)`),
+        });
+        if (await item.count() === 0) {
+          await openAlchemyDisclosure(page, ".alchemy-library-tools", { keyboard });
+          await activate(page, page.getByRole("button", { name: /^Toate / }), keyboard);
+          break;
+        }
+      }
     }
     for (const label of step.labels) {
       await activate(page, page.locator(game.board).getByRole("button", {
         name: new RegExp(`^${escapeRegex(label)}(?:,|$)`),
       }), keyboard);
     }
-    if (game.key === "alchimie") {
-      await activate(page, page.getByRole("button", { name: "Combină cele două concepte selectate" }), keyboard);
-    } else if (game.key === "conexiuni") {
+    if (game.key === "conexiuni") {
       await activate(page, page.getByRole("button", { name: "Verifică", exact: true }), keyboard);
     }
   }
