@@ -809,3 +809,35 @@ spaces do not fail the staged whitespace gate; its original decoded hash remains
 These landing notes change documentation only. The native heartbeat remains PAUSED;
 no V92, push or deployment was started. Only this verified-merged task's branch,
 worktree and scratch qualify for the required same-session cleanup.
+
+## V91 verification archive (moved 2026-09-13)
+
+Valid until: V92 integration — then treat as history.
+
+## Verification
+
+- All 16 final local gates are GREEN. Python 3.12 and 3.14 each pass **1652 backend/53
+  accounts tests**. Frontend passes **193 native/342 browser checks**, lint/typecheck/
+  build/bundle, with two isolated browser workers and zero retries at **119.08/120KiB**.
+- Independent factual/quality judges accept the exact Sport revision. The writer's 37
+  guard/transaction tests and real serial application pass. Independent migration/history
+  audit passes 85 tests; all 83 live books match the exact reviewed candidate.
+- Four fresh public seed 38 Sport journeys all win at par 2/1000 points: 16 actual BFF
+  requests, four sessions deleted. Only Alchimie's six-game seeded start changes.
+- Recovery passes 80 focused browser cases and 26 native checks; independent review adds
+  four Back and two removed-pointer checks. Six archives retain 199 exact raw entries.
+  Mobile passes 14 focused browser/10 native checks with 255 verified raw/decoded bindings.
+- Two stale backend expectations were corrected while preserving complete V87/V90 checks.
+  The first red run was deliberately interrupted after 1265 passes/two failures; it is
+  excluded. Both subsequent complete Python matrices pass. Current approved books have
+  554 recipes/76 two-result recipes/median 0.68; V90 retains 555/77/0.67 in history.
+- Initial full browser 338 pass/two failures exposed old hint setup after Sport's new opener.
+  The test-only correction preserves all six original solution fields and explicitly
+  covers output/pair/category clues: 34 focused and 342 final full checks pass.
+- Original failures, non-reproductions, traces, intermediate catalog-pin 503 and earlier
+  recovery-run 143 are retained with precise scope. Separate freeze receipts account for
+  the two test-only amendments; serving runtime/data and final UI assets stayed exact.
+- Evidence: `docs/reviews/v91-recovery-and-mobile-clarity/verification.json`, immutable
+  review inputs, independent audits and final file ledger. Human/player/device acceptance
+  remains unrun. The candidate ledger is sealed at `48cd5b8`; later landing notes are
+  documentation only. V90 evidence stays in its historical review folder.

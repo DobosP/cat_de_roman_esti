@@ -53,11 +53,15 @@ test("depleted ingredients leave the active workspace but remain in all", () => 
   assert.match(screen, /inventory_summary\.depleted/);
 });
 
-test("ready markers explain their meaning without polluting accessible names", () => {
+test("ready descriptions explain an available partner without implying every pair works", () => {
   assert.match(screen, /item\.ready[\s\S]*?gata pentru o combinație utilă/);
   assert.match(screen, /aria-label=\{accessibleLabel\}/);
-  assert.match(screen, /<span aria-hidden="true">● <\/span>/);
-  assert.match(screen, /<span aria-hidden="true">●<\/span> pereche gata/);
+  assert.match(
+    screen,
+    /<span className="alchemy-word-meta" aria-hidden="true">[\s\S]*?item\.ready \? "Are o pereche aici"/,
+  );
+  assert.match(screen, /există un partener potrivit în inventar; nu orice două cuvinte marcate se combină/);
+  assert.doesNotMatch(screen, /<span aria-hidden="true">● ?<\/span>/);
   assert.match(screen, /item\.depleted[\s\S]*?\$\{item\.label\}, pus deoparte/);
 });
 

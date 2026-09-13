@@ -50,6 +50,7 @@ are indexed by their filenames (0001–0097); new numbers are claimed here befor
 | 0138 | [Owned Intrusul and Perechi action recovery](0138-owned-intrusul-perechi-recovery.md) | accepted |
 | 0139 | [Visible mobile status and notices](0139-visible-mobile-status-and-notices.md) | accepted |
 | 0140 | [Reviewed Sport seed revision](0140-reviewed-sport-seed-revision.md) | accepted |
+| 0141 | [Alchimie workbench GUI rebuild](0141-rebuild-alchimie-workbench.md) | accepted |
 
 Earlier decisions affected by V88: [ADR-0039](0039-hygiene-anatomy-cleaning-word-meshes.md)
 and [ADR-0068](0068-contexto-common-word-feedback-and-unique-targets.md) are partially

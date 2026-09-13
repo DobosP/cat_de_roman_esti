@@ -16,7 +16,17 @@ test("every live game has concise guidance for goal, feedback and recovery", () 
     for (const text of Object.values(GAME_HELP[key])) {
       assert.ok(text.length > 30 && text.length < 220, `${key}: keep each explanation short`);
     }
-    assert.match(read(`../src/screens/${screen}.tsx`), /<GameShell[^>]*helpGame=\{GAME_KEY\}/);
+    const source = read(`../src/screens/${screen}.tsx`);
+    if (key === "alchimie") {
+      assert.match(source, /<GameHelp game=\{GAME_KEY\} \/>/);
+      assert.doesNotMatch(source, /<GameShell[^>]*helpGame=/);
+      assert.ok(
+        source.indexOf("<GameHelp game={GAME_KEY}") > source.indexOf('aria-label="Inventar"'),
+        "Alchimie keeps optional rules below the main workspace",
+      );
+    } else {
+      assert.match(source, /<GameShell[^>]*helpGame=\{GAME_KEY\}/);
+    }
   }
 });
 

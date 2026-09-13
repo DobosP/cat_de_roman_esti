@@ -125,8 +125,9 @@ test("the guide explains recovery and either occupied slot can be removed", () =
   );
   assert.match(
     screen,
-    /const removeFromBench[\s\S]*?requestAnimationFrame\(\(\) => inventoryButtons\.current\.get\(id\)\?\.focus\(\)\)/,
+    /const removeFromBench[\s\S]*?requestAnimationFrame\(\(\) => \{[\s\S]*?const button = inventoryButtons\.current\.get\(id\);[\s\S]*?if \(button && !button\.disabled\) button\.focus\(\);[\s\S]*?else inventoryPanel\.current\?\.focus\(\);/,
   );
+  assert.match(screen, /<section ref=\{inventoryPanel\} tabIndex=\{-1\}[^>]*aria-label="Inventar"/);
   assert.match(
     screen,
     /ref=\{\(node\) => \{[\s\S]{0,180}inventoryButtons\.current\.set\(item\.id, node\)/,

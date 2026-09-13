@@ -17,6 +17,7 @@ import {
 } from "../api/alchimie";
 import { createGameActionOwner, recoverOwnedGameAction, type GameActionTicket } from "../gameActionRecovery.mjs";
 import { GameShell } from "../components/GameShell";
+import { GameHelp } from "../components/GameHelp";
 import { ResultCard } from "../components/ResultCard";
 import { GameIntro } from "../components/GameIntro";
 import { StartFailureNotice } from "../components/StartFailureNotice";
@@ -29,9 +30,10 @@ import { useSavedGameResume } from "../hooks/useSavedGameResume";
 import { gameByKey } from "../games";
 import { sound } from "../sound";
 import { bestScore } from "../scores";
-import { categoryColor, categoryLabel } from "../categories";
+import { categoryLabel } from "../categories";
 import { CategoryPicker } from "../components/CategoryPicker";
 import { buildSharePayload, copyResult, stableKey, todayLocal } from "../share";
+import "../styles/alchimie.css";
 
 const GAME_KEY = "alchimie";
 const DEF = gameByKey("alchimie");
@@ -136,6 +138,7 @@ export default function Alchimie({
   const [isRecord, setIsRecord] = useState(false);
   const [isPuzzleRecord, setIsPuzzleRecord] = useState(false);
   const inventoryButtons = useRef(new Map<string, HTMLButtonElement>());
+  const inventoryPanel = useRef<HTMLElement>(null);
   const active = useActiveGame("alchimie");
   const [actionSync, setActionSync] = useState<ActionSync | null>(null);
   const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
@@ -291,7 +294,12 @@ export default function Alchimie({
   const toggle = useCallback(
     (id: string) => {
       if (startInFlight.current || actionsLocked || won || actionOwner.hasPending()) return;
+      if (selected.length === 2 && !selected.includes(id)) {
+        setLastMessage("Ai ales deja două cuvinte. Scoate unul din alambic pentru a-l înlocui.");
+        return;
+      }
       sound.playSelect();
+      if (!emptyRecoveryActive) setLastMessage(null);
       if (emptyRecoveryActive) {
         const nextSelectionCount = selected.includes(id)
           ? selected.length - 1
@@ -307,7 +315,7 @@ export default function Alchimie({
       setEmptyPairKey(null);
       setSelected((prev) => {
         if (prev.includes(id)) return prev.filter((x) => x !== id);
-        if (prev.length >= 2) return [prev[1], id];
+        if (prev.length >= 2) return prev;
         return [...prev, id];
       });
     },
@@ -316,6 +324,7 @@ export default function Alchimie({
 
   const clearSelection = useCallback(() => {
     if (startInFlight.current || actionsLocked || actionOwner.hasPending()) return;
+    if (!emptyRecoveryActive) setLastMessage(null);
     if (emptyRecoveryActive) {
       setLastMessage("Alambicul este gol. Alege două concepte.");
     }
@@ -328,7 +337,11 @@ export default function Alchimie({
     (id: string) => {
       if (startInFlight.current) return;
       toggle(id);
-      requestAnimationFrame(() => inventoryButtons.current.get(id)?.focus());
+      requestAnimationFrame(() => {
+        const button = inventoryButtons.current.get(id);
+        if (button && !button.disabled) button.focus();
+        else inventoryPanel.current?.focus();
+      });
     },
     [toggle],
   );
@@ -445,7 +458,6 @@ export default function Alchimie({
       setLastMessage(feedback);
       if (res.discovered.length > 0) {
         setFreshIds(new Set(res.discovered.map((d: Concept) => d.id)));
-        setInventoryView("recent");
         setInventoryQuery("");
         if (!res.won) sound.playHop();
         // win sound handled by the won effect
@@ -584,8 +596,8 @@ export default function Alchimie({
         ) ?? null)
       : null;
 
-  // Keyboard: Enter combines a ready pair, Escape clears the bench. Ignored while
-  // typing in an input (none here) or once the game is finished.
+  // Keyboard: Enter combines a ready pair, Escape clears the bench. Enter on
+  // native interactive controls retains its normal action.
   useEffect(() => {
     if (!state || won) return;
     const onKey = (e: KeyboardEvent) => {
@@ -628,7 +640,7 @@ export default function Alchimie({
   // ---- Intro: difficulty picker + daily challenge + personal best. ----
   if (!state) {
     return (
-      <div className="screen-pad fill" aria-busy={creating}>
+      <div className="screen-pad fill alchemy-screen alchemy-intro" aria-busy={creating}>
         {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
         <div inert={creating} className="container col game-container" style={{ gap: 18 }}>
           <GameShell onExit={exitSafely} accent={DEF.accent} busy={creating} />
@@ -648,7 +660,7 @@ export default function Alchimie({
             best={best}
             description={
               <p style={{ margin: 0 }}>
-                Combină două concepte și ajungi la ținta afișată.
+                Două cuvinte, o legătură comună. Descoperă cuvinte noi până creezi ținta.
               </p>
             }
             steps={[
@@ -688,230 +700,352 @@ export default function Alchimie({
   }
 
   return (
-    <div className="screen-pad fill" style={{ overflowY: "auto" }} aria-busy={creating}>
+    <div className="screen-pad fill alchemy-screen" style={{ overflowY: "auto" }} aria-busy={creating}>
       {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
-      <div inert={creating} className="container col game-container" style={{ gap: 18, paddingBottom: 32 }}>
+      <div inert={creating} className="container col game-container alchemy-game">
         {/* Header */}
-        <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} helpGame={GAME_KEY} busy={creating}>
+        <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} busy={creating}>
           <Hud>
-            {state.daily ? (
-              <StatBadge
-                label="Zi"
-                value={state.daily}
-                accent={DEF.accent}
-                title="Provocarea zilei"
-              />
-            ) : (
-              <StatBadge
-                label="Mod"
-                value={DIFFICULTY_LABEL[state.difficulty]}
-                accent={DEF.accent}
-                title="Dificultate"
-              />
-            )}
-            {state.board_category && (
-              <StatBadge
-                label="Categorie"
-                value={categoryLabel(state.board_category)}
-                accent={categoryColor(state.board_category)}
-              />
-            )}
             <StatBadge label="Combinații" value={state.moves} accent={DEF.accent} />
-            <StatBadge
-              label="Descoperite"
-              value={state.discovered_count}
-              accent={DEF.accent}
-            />
-            {state.hints_used > 0 && (
-              <StatBadge
-                label="Indicii"
-                value={state.hints_used}
-                accent={DEF.accent}
-                title="Indicii folosite"
-              />
-            )}
           </Hud>
         </GameShell>
 
-        {/* Target */}
-        <m.div
-          className="card"
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          style={{
-            padding: 18,
-            borderColor: won ? GOLD : DEF.accent,
-            boxShadow: won
-              ? `0 0 50px -16px ${GOLD}`
-              : `0 0 36px -20px ${DEF.accent}`,
-          }}
-        >
-          <div className="col" style={{ gap: 6 }}>
-            <span
-              className="faint"
-              style={{ letterSpacing: "0.08em", fontSize: "0.72rem" }}
-            >
-              {won ? "ȚINTA FĂURITĂ" : "ȚINTA DE FĂURIT"}
-            </span>
-            <div className="row" style={{ gap: 10, alignItems: "baseline" }}>
-              <span style={{ fontSize: "1.5rem" }} aria-hidden>
-                {won ? "★" : "◎"}
+        <section className={`alchemy-target${won ? " alchemy-target--won" : ""}`} aria-label="Ținta de făurit">
+          <span className="alchemy-target-icon" aria-hidden>{won ? "★" : "◎"}</span>
+          <div className="alchemy-target-copy">
+            <div className="alchemy-target-meta">
+              <span className="alchemy-eyebrow">{won ? "ȚINTA FĂURITĂ" : "SCOPUL TĂU · CREEAZĂ"}</span>
+              <span className="alchemy-theme">
+                {state.board_category && `${categoryLabel(state.board_category)} · `}{DIFFICULTY_LABEL[state.difficulty]}
+                {state.daily && ` · ${state.daily}`}
               </span>
-              <h2 style={{ margin: 0, color: won ? GOLD : "var(--text)" }}>
-                {state.target.label}
-              </h2>
             </div>
-            {state.target.description && (
-              <p className="muted" style={{ margin: 0, fontSize: "0.9rem" }}>
-                {state.target.description}
-              </p>
-            )}
+            <h2>{state.target.label}</h2>
+            {state.target.description && <p>{state.target.description}</p>}
           </div>
-        </m.div>
+        </section>
 
-        {!won && (
-          <NextMove
-            icon={isEmptyRetry ? "↔" : selected.length === 2 ? "✨" : "👆"}
-            title={
-              isEmptyRetry
-                ? "Schimbă un ingredient"
-                : selected.length === 0
-                ? "Alege două concepte"
-                : selected.length === 1
-                  ? "Mai alege unul"
-                  : "Pereche gata"
-            }
-            detail={
-              isEmptyRetry
-                ? "Perechea aceasta nu a descoperit nimic."
-                : selected.length === 1
-                ? `${selectedItems[0]?.label ?? "Primul concept"} este ales.`
-                : selected.length === 2
-                  ? "Apasă Combină."
-                  : "Pornește din inventar."
-            }
-            progress={isEmptyRetry ? "schimbă 1" : `${selected.length}/2`}
-            accent={DEF.accent}
-            ready={selected.length === 2 && !isEmptyRetry}
-            announce={false}
-          />
-        )}
-
-        {/* Combine bench */}
-        {!won && (
-          <div
-            className="card row spread wrap alchemy-bench"
-            style={{ padding: 14, gap: 12, alignItems: "center" }}
-          >
+        <div className="alchemy-workspace">
+          {/* Combine bench */}
+          {!won && (
             <div
-              className="row wrap"
-              style={{ gap: 8, alignItems: "center", minHeight: 38 }}
+              className="card alchemy-bench"
+              aria-label="Alambic"
             >
-              <Slot
-                item={selectedItems[0]}
-                onRemove={removeFromBench}
-                disabled={actionsLocked}
-              />
-              <span
-                className="faint"
-                style={{ fontSize: "1.4rem" }}
-                aria-hidden
-              >
-                +
-              </span>
-              <Slot
-                item={selectedItems[1]}
-                onRemove={removeFromBench}
-                disabled={actionsLocked}
-              />
-            </div>
-            <div className="row wrap" style={{ gap: 8 }}>
-              {selected.length > 0 && (
-                <Button
-                  type="button"
-                  variant="secondary"
-                  disabled={actionsLocked}
-                  onClick={clearSelection}
-                  title="Golește alambicul (Esc)"
-                >
-                  Golește
-                </Button>
-              )}
-              {state.hint_available && (
-                <Button
-                  type="button"
-                  variant="secondary"
-                  disabled={actionsLocked}
-                  onClick={() => void doHint()}
-                  title={
-                    state.hint_stage === "output"
-                      ? "Îți arată un rezultat apropiat"
-                      : "Îți arată o pereche utilă"
-                  }
-                  style={{ borderColor: GOLD, color: GOLD }}
-                >
-                  💡 Indiciu
-                </Button>
-              )}
-              <Button
-                type="button"
-                disabled={actionsLocked || selected.length !== 2 || isEmptyRetry}
-                onClick={doCombine}
+              <NextMove
+                icon={isEmptyRetry ? "↔" : selected.length === 2 ? "✨" : "👆"}
+                className="alchemy-coach"
                 title={
                   isEmptyRetry
-                    ? "Schimbă un ingredient înainte de o nouă combinare"
-                    : "Combină cele două concepte (Enter)"
+                    ? "Schimbă un ingredient"
+                    : selected.length === 0
+                      ? "Alege două cuvinte"
+                      : selected.length === 1
+                        ? "Mai alege unul"
+                        : "Pereche gata"
                 }
-                aria-label="Combină cele două concepte selectate"
-                style={{ borderColor: DEF.accent }}
+                detail={
+                  isEmptyRetry
+                    ? "Perechea aceasta nu a descoperit nimic."
+                    : selected.length === 1
+                      ? `${selectedItems[0]?.label ?? "Primul concept"} este ales.`
+                      : selected.length === 2
+                        ? "Scoate un cuvânt cu × ca să-l schimbi."
+                        : "Atinge cuvintele din inventar."
+                }
+                progress={isEmptyRetry ? "schimbă 1" : `${selected.length}/2`}
+                accent={DEF.accent}
+                ready={selected.length === 2 && !isEmptyRetry}
+                announce={false}
+              />
+
+              <div
+                className="alchemy-slots"
               >
-                {busy ? "…" : "⚗ Combină"}
-              </Button>
+                <Slot
+                  item={selectedItems[0]}
+                  number={1}
+                  onRemove={removeFromBench}
+                  disabled={actionsLocked}
+                />
+                <span
+                  className="faint"
+                  style={{ fontSize: "1.4rem" }}
+                  aria-hidden
+                >
+                  +
+                </span>
+                <Slot
+                  item={selectedItems[1]}
+                  number={2}
+                  onRemove={removeFromBench}
+                  disabled={actionsLocked}
+                />
+              </div>
+              <div className="alchemy-bench-actions">
+                {selected.length > 0 && (
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    disabled={actionsLocked}
+                    onClick={clearSelection}
+                    title="Golește alambicul (Esc)"
+                  >
+                    Golește
+                  </Button>
+                )}
+                <Button
+                  type="button"
+                  disabled={actionsLocked || selected.length !== 2 || isEmptyRetry}
+                  onClick={doCombine}
+                  title={
+                    isEmptyRetry
+                      ? "Schimbă un ingredient înainte de o nouă combinare"
+                      : "Combină cele două concepte (Enter)"
+                  }
+                  aria-label="Combină cele două concepte selectate"
+                  style={{ borderColor: DEF.accent }}
+                >
+                  {busy ? "Se verifică…" : "⚗ Combină"}
+                </Button>
+              </div>
+              {/* Last combine feedback */}
+              <AnimatePresence mode="wait">
+                {lastMessage && !won && (
+                  <m.p
+                    key={lastMessage + state.moves}
+                    className={`alchemy-feedback${isEmptyRetry ? " alchemy-feedback--empty" : ""}`}
+                    initial={{ opacity: 0, y: 4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    role="status"
+                    aria-live="polite"
+                    aria-atomic="true"
+                  >
+                    {lastMessage}
+                  </m.p>
+                )}
+              </AnimatePresence>
+
+              {freshIds.size > 0 && (
+                <div className="alchemy-quick-results" aria-label="Cuvinte noi">
+                  {inventory.filter((item) => freshIds.has(item.id)).map((item) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      className="chip"
+                      disabled={actionsLocked || item.depleted}
+                      aria-pressed={selected.includes(item.id)}
+                      onClick={() => toggle(item.id)}
+                    >
+                      {item.depleted ? `✦ Descoperit: ${item.label}` : `Folosește ${item.label}`}
+                    </button>
+                  ))}
+                </div>
+              )}
+              {!won && actionSync ? (
+                <div className="card col alchemy-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
+                  <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
+                  <span>{actionSync.kind === "changed"
+                    ? "Încarcă jocul curent pentru a continua."
+                    : "Acțiunea poate fi deja salvată. Verifică jocul înainte de o nouă combinație, un indiciu sau o reluare."}</span>
+                  <Button type="button" onClick={() => void retryActionSync()} disabled={busy}>
+                    {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
+                  </Button>
+                </div>
+              ) : null}
+
+              {!won && state.earned_hint ? (
+                <div className="card alchemy-earned-hint" role="status" style={{ padding: 12, borderColor: GOLD }}>
+                  {state.earned_hint.message}
+                </div>
+              ) : null}
+
+              {state.hint_available && (
+                <div className="alchemy-assistance">
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    disabled={actionsLocked}
+                    onClick={() => void doHint()}
+                    title={
+                      state.hint_stage === "output"
+                        ? "Îți arată un rezultat apropiat"
+                        : "Îți arată o pereche utilă"
+                    }
+                    aria-describedby="alchemy-hint-cost"
+                    style={{ borderColor: GOLD, color: GOLD }}
+                  >
+                    💡 Indiciu
+                  </Button>
+                  <span id="alchemy-hint-cost">Folosește un indiciu · penalizare de 150 puncte.</span>
+                </div>
+              )}
             </div>
-          </div>
-        )}
-
-        {!won && actionSync ? (
-          <div className="card col alchemy-sync-recovery" role="alert" style={{ gap: 8, padding: 12 }}>
-            <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
-            <span>{actionSync.kind === "changed"
-              ? "Încarcă jocul curent pentru a continua."
-              : "Acțiunea poate fi deja salvată. Verifică jocul înainte de o nouă combinație, un indiciu sau o reluare."}</span>
-            <Button type="button" onClick={() => void retryActionSync()} disabled={busy}>
-              {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
-            </Button>
-          </div>
-        ) : null}
-
-        {!won && state.earned_hint ? (
-          <div className="card alchemy-earned-hint" role="status" style={{ padding: 12, borderColor: GOLD }}>
-            {state.earned_hint.message}
-          </div>
-        ) : null}
-
-        {/* Last combine feedback */}
-        <AnimatePresence mode="wait">
-          {lastMessage && !won && (
-            <m.p
-              key={lastMessage + state.moves}
-              className="muted center"
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              style={{ margin: 0, fontSize: "0.92rem" }}
-              role="status"
-              aria-live="polite"
-              aria-atomic="true"
-            >
-              {lastMessage}
-            </m.p>
           )}
-        </AnimatePresence>
+
+          {/* Inventory */}
+          <section ref={inventoryPanel} tabIndex={-1} className="card col alchemy-inventory-panel" aria-label="Inventar">
+            <div className="alchemy-panel-heading">
+              <span className="alchemy-step" aria-hidden>Aa</span>
+              <h3>Cuvintele tale</h3>
+              <span className="alchemy-selection-count">{state.inventory_summary.active} utile</span>
+            </div>
+            <div
+              className="alchemy-inventory-tabs"
+              role="group"
+              aria-label="Filtrează inventarul"
+            >
+              {(["useful", "recent", "all"] as InventoryView[]).map((view) => (
+                <button
+                  key={view}
+                  type="button"
+                  aria-pressed={inventoryView === view}
+                  className="chip alchemy-inventory-tab"
+                  onClick={() => {
+                    sound.playSelect();
+                    setInventoryView(view);
+                    setInventoryQuery("");
+                  }}
+                  style={{
+                    borderColor: inventoryView === view ? DEF.accent : undefined,
+                    color: inventoryView === view ? "var(--text)" : undefined,
+                  }}
+                >
+                  {INVENTORY_VIEW_LABEL[view]} {inventoryCounts[view]}
+                </button>
+              ))}
+            </div>
+            <div className="alchemy-search-row">
+              <input
+                type="search"
+                className="field alchemy-inventory-search"
+                value={inventoryQuery}
+                onChange={(event) => setInventoryQuery(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Escape" && inventoryQuery) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    setInventoryQuery("");
+                  }
+                }}
+                placeholder="Caută în toate…"
+                aria-label="Caută în toate conceptele descoperite"
+                autoComplete="off"
+                spellCheck={false}
+              />
+              {inventoryQuery && (
+                <button className="alchemy-clear-search" type="button" onClick={() => setInventoryQuery("")}>
+                  Șterge căutarea
+                </button>
+              )}
+            </div>
+            <div className="alchemy-inventory-grid">
+              <AnimatePresence initial={false}>
+                {visibleInventory.map((item) => {
+                  const isSel = selected.includes(item.id);
+                  const isFresh = freshIds.has(item.id);
+                  const isHint = hintIds.has(item.id);
+                  const isCrafted = item.parents !== null;
+                  const title = item.depleted
+                    ? "Nu mai produce elemente noi"
+                    : item.ready
+                      ? `${parentsOf(item) ?? "Concept de start"} · Pereche utilă gata`
+                      : (parentsOf(item) ?? "Concept de start");
+                  const accessibleLabel = item.depleted
+                    ? `${item.label}, pus deoparte`
+                    : item.ready
+                      ? `${item.label}, gata pentru o combinație utilă`
+                      : item.label;
+                  return (
+                    <m.button
+                      key={item.id}
+                      ref={(node) => {
+                        if (node) inventoryButtons.current.set(item.id, node);
+                        else inventoryButtons.current.delete(item.id);
+                      }}
+                      type="button"
+                      layout
+                      initial={isFresh ? { scale: 0.4, opacity: 0 } : false}
+                      animate={{
+                        scale: 1,
+                        opacity: 1,
+                        // Suggested-by-hint chips give a soft attention pulse.
+                        ...(isHint && !isSel
+                          ? { scale: [1, 1.08, 1] }
+                          : {}),
+                      }}
+                      transition={{ type: "spring", stiffness: 320, damping: 18 }}
+                      onClick={() => toggle(item.id)}
+                      disabled={actionsLocked || won || item.depleted}
+                      aria-pressed={isSel}
+                      aria-label={accessibleLabel}
+                      title={title}
+                      className={`chip alchemy-word${isSel ? " alchemy-word--selected" : ""}${isFresh ? " alchemy-word--fresh" : ""}`}
+                      style={{
+                        cursor: won ? "default" : "pointer",
+                        borderColor: isSel
+                          ? DEF.accent
+                          : isHint
+                            ? GOLD
+                            : isFresh
+                              ? GOLD
+                              : "var(--surface-border)",
+                        background: isSel
+                          ? "color-mix(in srgb, var(--surface) 70%, " +
+                          DEF.accent +
+                          ")"
+                          : isFresh
+                            ? "color-mix(in srgb, var(--surface) 80%, " +
+                            GOLD +
+                            ")"
+                            : undefined,
+                        color: isSel || isFresh ? "var(--text)" : undefined,
+                        fontWeight: isCrafted ? 600 : 500,
+                        opacity: item.depleted ? 0.5 : 1,
+                        boxShadow:
+                          isFresh || isHint
+                            ? `0 0 16px -4px ${GOLD}`
+                            : item.ready
+                              ? `0 0 12px -8px ${DEF.accent}`
+                              : undefined,
+                      }}
+                    >
+                      <span className="alchemy-word-label">{item.label}</span>
+                      <span className="alchemy-word-meta" aria-hidden="true">
+                        {isSel ? `✓ În alambic · ${selected.indexOf(item.id) + 1}`
+                          : item.depleted ? "Pus deoparte"
+                            : isFresh ? "✦ Nou descoperit"
+                              : item.ready ? "Are o pereche aici"
+                                : isCrafted ? "Descoperit" : "De început"}
+                      </span>
+                    </m.button>
+                  );
+                })}
+              </AnimatePresence>
+              {!normalizedInventoryQuery && visibleInventory.length === 0 && (
+                <p className="alchemy-empty-inventory">
+                  Niciun cuvânt în acest filtru. <button type="button" onClick={() => setInventoryView("useful")}>Vezi cuvintele utile</button>
+                </p>
+              )}
+              {normalizedInventoryQuery && visibleInventory.length === 0 && (
+                <p className="faint center" style={{ gridColumn: "1 / -1", margin: 8 }}>
+                  Niciun concept găsit.
+                </p>
+              )}
+            </div>
+            <p className="alchemy-inventory-note">
+              „Are o pereche aici” înseamnă că există un partener potrivit în inventar; nu orice două cuvinte marcate se combină.
+              {state.inventory_summary.depleted > 0 && ` ${state.inventory_summary.depleted} puse deoparte: le găsești în Toate.`}
+            </p>
+          </section>
+
+        </div>
 
         {/* Server-authored lineage: latest stays visible, older reactions opt in. */}
         {!won && reactionLog.length > 0 && (
           <section
-            className="card col"
+            className="card col alchemy-discoveries"
             aria-labelledby="alchemy-reaction-log-title"
             style={{ gap: 10, padding: 14 }}
           >
@@ -974,191 +1108,43 @@ export default function Alchimie({
           </section>
         )}
 
-        {/* Inventory */}
-        <section className="col" style={{ gap: 10 }} aria-label="Inventar">
-          <div className="row spread wrap" style={{ gap: 8, alignItems: "center" }}>
-            <span
-              className="faint"
-              style={{ letterSpacing: "0.06em", fontSize: "0.72rem" }}
-            >
-              INVENTAR · {state.inventory_summary.active} ÎN JOC
-            </span>
-            <span className="row wrap" style={{ gap: 10 }}>
-              <span className="muted" style={{ fontSize: "0.76rem" }}>
-                <span aria-hidden="true">●</span> pereche gata
-              </span>
-              {state.inventory_summary.depleted > 0 && (
-                <span className="muted" style={{ fontSize: "0.76rem" }}>
-                  {state.inventory_summary.depleted} puse deoparte
-                </span>
-              )}
-            </span>
-          </div>
-          <div
-            className="alchemy-inventory-tabs"
-            role="group"
-            aria-label="Filtrează inventarul"
-          >
-            {(["recent", "useful", "all"] as InventoryView[]).map((view) => (
-              <button
-                key={view}
-                type="button"
-                aria-pressed={inventoryView === view}
-                className="chip alchemy-inventory-tab"
-                onClick={() => {
-                  sound.playSelect();
-                  setInventoryView(view);
-                }}
-                style={{
-                  borderColor: inventoryView === view ? DEF.accent : undefined,
-                  color: inventoryView === view ? "var(--text)" : undefined,
-                }}
-              >
-                {INVENTORY_VIEW_LABEL[view]} {inventoryCounts[view]}
-              </button>
-            ))}
-          </div>
-          <input
-            type="search"
-            className="field alchemy-inventory-search"
-            value={inventoryQuery}
-            onChange={(event) => setInventoryQuery(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Escape" && inventoryQuery) {
-                event.preventDefault();
-                event.stopPropagation();
-                setInventoryQuery("");
-              }
-            }}
-            placeholder="Caută în toate…"
-            aria-label="Caută în toate conceptele descoperite"
-            autoComplete="off"
-            spellCheck={false}
-          />
-          <div className="alchemy-inventory-grid">
-            <AnimatePresence initial={false}>
-              {visibleInventory.map((item) => {
-                const isSel = selected.includes(item.id);
-                const isFresh = freshIds.has(item.id);
-                const isHint = hintIds.has(item.id);
-                const isCrafted = item.parents !== null;
-                const title = item.depleted
-                  ? "Nu mai produce elemente noi"
-                  : item.ready
-                    ? `${parentsOf(item) ?? "Concept de start"} · Pereche utilă gata`
-                    : (parentsOf(item) ?? "Concept de start");
-                const accessibleLabel = item.depleted
-                  ? `${item.label}, pus deoparte`
-                  : item.ready
-                    ? `${item.label}, gata pentru o combinație utilă`
-                    : item.label;
-                return (
-                  <m.button
-                    key={item.id}
-                    ref={(node) => {
-                      if (node) inventoryButtons.current.set(item.id, node);
-                      else inventoryButtons.current.delete(item.id);
-                    }}
-                    type="button"
-                    layout
-                    initial={isFresh ? { scale: 0.4, opacity: 0 } : false}
-                    animate={{
-                      scale: 1,
-                      opacity: 1,
-                      // Suggested-by-hint chips give a soft attention pulse.
-                      ...(isHint && !isSel
-                        ? { scale: [1, 1.08, 1] }
-                        : {}),
-                    }}
-                    transition={{ type: "spring", stiffness: 320, damping: 18 }}
-                    onClick={() => toggle(item.id)}
-                    disabled={actionsLocked || won || item.depleted}
-                    aria-pressed={isSel}
-                    aria-label={accessibleLabel}
-                    title={title}
-                    className="chip"
-                    style={{
-                      cursor: won ? "default" : "pointer",
-                      borderColor: isSel
-                        ? DEF.accent
-                        : isHint
-                          ? GOLD
-                          : isFresh
-                            ? GOLD
-                            : "var(--surface-border)",
-                      background: isSel
-                        ? "color-mix(in srgb, var(--surface) 70%, " +
-                          DEF.accent +
-                          ")"
-                        : isFresh
-                          ? "color-mix(in srgb, var(--surface) 80%, " +
-                            GOLD +
-                            ")"
-                          : undefined,
-                      color: isSel || isFresh ? "var(--text)" : undefined,
-                      fontWeight: isCrafted ? 600 : 500,
-                      opacity: item.depleted ? 0.5 : 1,
-                      boxShadow:
-                        isFresh || isHint
-                          ? `0 0 16px -4px ${GOLD}`
-                          : item.ready
-                            ? `0 0 12px -8px ${DEF.accent}`
-                            : undefined,
-                    }}
-                  >
-                    {item.ready && !item.depleted ? (
-                      <span aria-hidden="true">● </span>
-                    ) : isCrafted ? (
-                      <span aria-hidden="true">✦ </span>
-                    ) : null}
-                    {item.label}
-                  </m.button>
-                );
-              })}
-            </AnimatePresence>
-            {normalizedInventoryQuery && visibleInventory.length === 0 && (
-              <p className="faint center" style={{ gridColumn: "1 / -1", margin: 8 }}>
-                Niciun concept găsit.
-              </p>
-            )}
-          </div>
-        </section>
+        <GameHelp game={GAME_KEY} />
 
         {/* Footer actions stay in-play only; ResultCard owns the terminal actions. */}
         {!won && (
           <>
             <StartFailureNotice failed={startFailed} reserveSpace />
             <div className="row center wrap" style={{ gap: 12, marginTop: 8 }}>
-            <Button
-              type="button"
-              variant="secondary"
-              disabled={actionsLocked}
-              onClick={doReset}
-            >
-              ↻ Reia același joc
-            </Button>
-            <Button
-              type="button"
-              variant="secondary"
-              className="alchimie-other-board"
-              disabled={creating || busy}
-              onClick={() =>
-                void start({
-                  difficulty: state.difficulty,
-                  category: state.board_category ?? undefined,
-                })
-              }
-            >
-              ⚗ Alt joc
-            </Button>
-            <Button
-              type="button"
-              variant="secondary"
-              disabled={creating || busy}
-              onClick={newGame}
-            >
-              ⚙ Schimbă opțiunile
-            </Button>
+              <Button
+                type="button"
+                variant="secondary"
+                disabled={actionsLocked}
+                onClick={doReset}
+              >
+                ↻ Reia același joc
+              </Button>
+              <Button
+                type="button"
+                variant="secondary"
+                className="alchimie-other-board"
+                disabled={creating || busy}
+                onClick={() =>
+                  void start({
+                    difficulty: state.difficulty,
+                    category: state.board_category ?? undefined,
+                  })
+                }
+              >
+                ⚗ Alt joc
+              </Button>
+              <Button
+                type="button"
+                variant="secondary"
+                disabled={creating || busy}
+                onClick={newGame}
+              >
+                ⚙ Schimbă opțiunile
+              </Button>
             </div>
           </>
         )}
@@ -1300,10 +1286,12 @@ function EarnedLinks({ item }: { item: InventoryItem }) {
 
 function Slot({
   item,
+  number,
   onRemove,
   disabled,
 }: {
   item: InventoryItem | undefined;
+  number: number;
   onRemove: (id: string) => void;
   disabled: boolean;
 }) {
@@ -1317,7 +1305,8 @@ function Slot({
           justifyContent: "center",
         }}
       >
-        alege…
+        <span className="alchemy-slot-number" aria-hidden>{number}</span>
+        <span>Alege un cuvânt</span>
       </span>
     );
   }
@@ -1331,7 +1320,7 @@ function Slot({
       title={`Scoate ${item.label} din alambic`}
       aria-label={`Scoate ${item.label} din alambic`}
     >
-      {item.parents ? <span aria-hidden>✦</span> : null}
+      <span className="alchemy-slot-number" aria-hidden>{number}</span>
       <span className="alchemy-slot-label">{item.label}</span>
       <span aria-hidden>×</span>
     </button>

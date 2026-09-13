@@ -59,7 +59,8 @@ test("Romanian-first shell copy keeps the brand and game rules truthful", () => 
   assert.match(index, /<title>Cât de român ești\?<\/title>/);
   assert.match(home, /\["Cât", "de", "român", "ești\?"\]/);
   assert.doesNotMatch(home, /330/);
-  assert.match(alchimie, /ajungi\s+la ținta afișată/);
+  assert.match(alchimie, /Descoperă cuvinte noi până creezi ținta\./);
+  assert.match(alchimie, /<h2>\{state\.target\.label\}<\/h2>/);
   assert.doesNotMatch(alchimie, /ținta ascunsă/i);
   assert.match(intro, /Categoria se aplică doar jocurilor libere/);
   assert.match(account, /Continuă fără cont/);

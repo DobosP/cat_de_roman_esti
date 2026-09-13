@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-13",
+  "baseline": "6208eae22429d9b976a7c88477913010997eb3de",
+  "branch": "feat/v92-alchimie-gui",
+  "scope": "Alchimie GUI only; recurring iteration remains stopped",
+  "environment": {
+    "node": "24.19.0",
+    "python": "3.12.3",
+    "browser_projects": [
+      "desktop Chromium",
+      "mobile Chromium emulation"
+    ]
+  },
+  "checks": [
+    {
+      "command": "npm ci",
+      "result": "pass"
+    },
+    {
+      "command": "npm test",
+      "result": "193 passed"
+    },
+    {
+      "command": "npm run lint",
+      "result": "pass"
+    },
+    {
+      "command": "npm run build",
+      "result": "typecheck, build and 119.09/120 KiB initial gzip budget pass"
+    },
+    {
+      "command": "npm run test:e2e -- alchimie-workbench.spec.mjs mobile-status-notices.spec.mjs --grep 'workbench|ingredient|productive|search mode|full bench|long Romanian status' --workers=2",
+      "result": "16 passed, zero retries"
+    },
+    {
+      "command": "npm run test:e2e -- --workers=4",
+      "result": "356 passed (3.9m)",
+      "retries": 0
+    },
+    {
+      "command": "PYTHONPATH=. <shared-venv>/bin/python -m pytest -o addopts=\"\" -q",
+      "result": "1652 passed in 411.47s"
+    },
+    {
+      "command": "CAT_ACCOUNTS_ENABLED=1 CAT_DEBUG=1 PYTHONPATH=. <shared-venv>/bin/python -m pytest -o addopts=\"\" -q tests/accounts",
+      "result": "53 passed in 3.48s"
+    },
+    {
+      "command": "PYTHONPATH=. <shared-venv>/bin/python scripts/validate_fixture.py",
+      "result": "GREEN, 0 errors"
+    },
+    {
+      "command": "PYTHONPATH=. <shared-venv>/bin/python scripts/validate_games_pack.py",
+      "result": "games pack GREEN"
+    },
+    {
+      "command": "PYTHONPATH=. <shared-venv>/bin/python -m ruff check",
+      "result": "All checks passed"
+    },
+    {
+      "command": "python3 scripts/report_content_delta.py --baseline 6208eae --json",
+      "result": "zero content changes; content-delta.json"
+    },
+    {
+      "command": "python3 <agent-ops>/scripts/check_docs.py .",
+      "result": "dead_links=0 stale_terms=0 retired_verbs=0 orphans=0"
+    },
+    {
+      "command": "git diff --check",
+      "result": "pass"
+    }
+  ],
+  "development_failures": [
+    "Initial workbench run: clear-search test selector assumed a grid descendant; corrected to the search row control.",
+    "Initial workbench run: 320px/200% action row overflow; corrected wrapping.",
+    "First full browser run: 352 passed, 2 long-header zoom cases failed; both corrected and rechecked before final full run."
+  ],
+  "independent_review": "No substantive functional or accessibility regressions found; APIs unchanged, CSS scoped and lazy.",
+  "sha256": {
+    "frontend/src/screens/Alchimie.tsx": "2437ba567d42c5954691ced25ee9d97d79756fcbdb5c07c780a5ebbd9dfe7630",
+    "frontend/src/styles/alchimie.css": "9d44f31082fa2f2b2b45f484df81d9cb96ed904851d187ad919fbe59a93fe1e9",
+    "frontend/e2e/alchimie-workbench.spec.mjs": "40e2943e7574fed3a8f0df3015abe98413b92f220bf34c9cbe8fb855d9e0ca90",
+    "cat_de_roman_esti/web/static/.vite/manifest.json": "276e7ff2dbb5faf647ec3798c98ac9b056e6d7cc6ef6d8d4f4a499eee9913237",
+    "docs/reviews/v92-alchimie-gui/v91-mobile.png": "d1b1ed08b9e409e797e7a0dd4d56223cc16c812edc3e8da455bbc5a1a41d2e44",
+    "docs/reviews/v92-alchimie-gui/v92-mobile.png": "22543f730a5173d4d3888aa12a3b30316aeed9d8bb4a629adf9f346c2c28cb6c",
+    "docs/reviews/v92-alchimie-gui/v92-desktop.png": "ed156c23a0355ce34b01522d8ef1165dd71d823eced20dfabd9f80ba361ca319"
+  },
+  "production_changed": false,
+  "player_acceptance": "not performed",
+  "physical_device_acceptance": "not performed",
+  "python_3_14": "not rerun for this frontend-only candidate"
+}
