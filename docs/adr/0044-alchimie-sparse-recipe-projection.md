@@ -1,7 +1,7 @@
 # ADR-0044: Project sparse target-useful Alchimie recipes
 
 Date: 2026-07-18
-Status: accepted; three-fruitless hint threshold superseded-by ADR-0062
+Status: partially superseded by [ADR-0144](0144-reviewed-alchimie-recipe-freedom.md) for the target-route-only runtime book and empty-attempt score penalties; core search limits retained. Three-fruitless hint threshold superseded-by ADR-0062.
 
 ## Decision
 

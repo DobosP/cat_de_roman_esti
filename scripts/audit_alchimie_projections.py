@@ -36,6 +36,8 @@ SCHEMA = "alchimie-live-projection-audit-v1"
 RUNTIME_SOURCES = (
     _ROOT / "cat_de_roman_esti/wordgames/alchimie.py",
     _ROOT / "cat_de_roman_esti/wordgames/packs.py",
+    _ROOT / "cat_de_roman_esti/wordgames/recipe_extensions.py",
+    _ROOT / "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json",
 )
 
 
@@ -88,6 +90,7 @@ def _runtime_source_manifest() -> tuple[list[dict[str, str]], str]:
             "sha256": _sha256(path.read_bytes()),
         }
         for path in RUNTIME_SOURCES
+        if path.name != "alchimie_recipe_extensions_v92.json" or path.is_file()
     ]
     return entries, _sha256(_canonical_json(entries))
 
@@ -143,6 +146,7 @@ def build_artifact(
     source_pack_sha256: str | None = None,
     expected_dossier_kg_sha256: str | None = None,
     expected_dossier_rubric_sha256: str | None = None,
+    use_recipe_extensions: bool = True,
 ) -> dict:
     """Return deterministic live-projection evidence for one exact Alchimie batch."""
     if not ids or ids != sorted(ids) or len(ids) != len(set(ids)):
@@ -194,7 +198,9 @@ def build_artifact(
         seeds = [str(seed) for seed in record["seeds"]]
         target = str(record["target"])
         category = str(record.get("category") or "") or None
-        projection = alchimie._build_recipe_projection(seeds, target, category)
+        builder = (alchimie._build_playable_recipe_projection if use_recipe_extensions
+                   else alchimie._build_recipe_projection)
+        projection = builder(seeds, target, category)
         if projection is None:
             raise SystemExit(f"runtime cannot project Alchimie record: {item_id}")
         exact_par = packs.minimum_alchimie_actions(svc, seeds, target, category)
@@ -329,6 +335,11 @@ def rebuild_archived_artifact(artifact: dict, dossier_dir: Path) -> dict:
         source_pack_sha256=artifact.get("pack_sha256"),
         expected_dossier_kg_sha256=artifact.get("kg_sha256"),
         expected_dossier_rubric_sha256=artifact.get("rubric_sha256"),
+        # Replay pre-registry reviews against their unchanged sparse core.
+        use_recipe_extensions=any(
+            source.get("path", "").endswith("/alchimie_recipe_extensions_v92.json")
+            for source in artifact.get("runtime_sources", []) if isinstance(source, dict)
+        ),
     )
     for key in (
         "kg_sha256",

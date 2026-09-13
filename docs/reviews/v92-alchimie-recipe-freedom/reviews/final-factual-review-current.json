@@ -1,0 +1,9 @@
+{
+  "kind": "alchimie-recipe-extension-final-review-v1",
+  "reviewer": "craft_content_models-factual",
+  "role": "factual",
+  "catalog_sha256": "ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301",
+  "live_audit_sha256": "c02729949a3ca4363c959935d19bd1c9a78023200d1130c7ad2d54c1781027ad",
+  "verdict": "accept",
+  "rationale": "I inspected the current changes to audit_alchimie_projections.py and apply_rereview.py: only the specifically named optional catalog may be omitted from their runtime manifests; required source paths now reach read_bytes and fail when absent. An independent in-memory negative check confirms the audit manifest raises FileNotFoundError for an absent required runtime file and omits only the absent optional catalog. All nine current runtime hashes match final-live-audit.json; compared with my prior accepted audit, only these two script hashes changed. Every non-source audit field is identical, and the actual packaged catalog bytes equal the previously reviewed exact proposal ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301. I independently replayed the audit against that packaged catalog and obtained exact equality with final-live-audit.json. Therefore my earlier factual judgments and bounded-scope assessment remain valid: 50 unchanged accepted additions on 28 boards, all 80 core books/routes/par and concept counts preserved, hidden target IDs, no new factual inventory, 190 to 223 productive openings and 178 to 195 target-ending pairs. Craft runtime, loader, scoring and generator hashes are unchanged; unsuccessful/repeated attempts remain free with the previously checked successful-craft and hint costs. This confirms only the existing target-round repair, not a sandbox or complete freedom; twelve single-opening and nineteen single-ending boards remain. The earlier final review is preserved unchanged as the initial-apply receipt."
+}

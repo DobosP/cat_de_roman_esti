@@ -47,6 +47,8 @@ ALCHIMIE_PROJECTION_SCHEMA = "alchimie-live-projection-audit-v1"
 ALCHIMIE_RUNTIME_SOURCES = (
     _REPO_ROOT / "cat_de_roman_esti/wordgames/alchimie.py",
     _REPO_ROOT / "cat_de_roman_esti/wordgames/packs.py",
+    _REPO_ROOT / "cat_de_roman_esti/wordgames/recipe_extensions.py",
+    _REPO_ROOT / "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json",
 )
 ALCHIMIE_AUDIT_GENERATOR = _REPO_ROOT / "scripts/audit_alchimie_projections.py"
 
@@ -217,6 +219,7 @@ def validate_live_alchimie_projection_source(batch: dict, path: Path) -> None:
             "sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
         }
         for source in ALCHIMIE_RUNTIME_SOURCES
+        if source.name != "alchimie_recipe_extensions_v92.json" or source.is_file()
     ]
     expected_runtime_manifest = hashlib.sha256(
         json.dumps(

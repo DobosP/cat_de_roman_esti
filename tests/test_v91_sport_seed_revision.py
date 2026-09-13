@@ -3,12 +3,25 @@
 from __future__ import annotations
 
 import copy
+import gzip
 import json
 import shutil
+from pathlib import Path
 
 import pytest
 
 from scripts import apply_sport_seed_revision_v91 as migration
+
+ALCHIMIE_SOURCE = "cat_de_roman_esti/wordgames/alchimie.py"
+
+
+def _historical_alchimie_source():
+    # Exact e46bf3d bytes: the V91 migration pins this source, independently of later
+    # runtime improvements. The fixture uses gzip mtime=0 and no embedded filename.
+    path = Path(__file__).parent / "fixtures/alchimie_v91_source.py.gz"
+    raw = gzip.decompress(path.read_bytes())
+    assert migration._sha(raw) == migration.SOURCE_BINDINGS[ALCHIMIE_SOURCE]
+    return raw
 
 
 def _write(path, value):
@@ -21,7 +34,10 @@ def isolated(tmp_path):
     for relative in {*migration.SOURCE_BINDINGS, *map(str, migration.KG_PATHS)}:
         destination = tmp_path / relative
         destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(migration.ROOT / relative, destination)
+        if relative == ALCHIMIE_SOURCE:
+            destination.write_bytes(_historical_alchimie_source())
+        else:
+            shutil.copyfile(migration.ROOT / relative, destination)
     review_dir = tmp_path / migration.REVIEW_DIR
     review_dir.mkdir(parents=True)
     for name in (*migration.INPUT_SHA256, "quality-review.json", "factual-review.json"):
@@ -58,6 +74,13 @@ def test_default_dry_run_rebuilds_exact_live_review_without_writes(isolated, cap
     migration.apply_revision(root=isolated)
     assert _snapshot(isolated) == before
     assert "dry run, no writes" in capsys.readouterr().out
+
+
+def test_current_runtime_is_rejected_as_stale_without_changing_pack_mirrors(isolated):
+    current = (migration.ROOT / ALCHIMIE_SOURCE).read_bytes()
+    assert migration._sha(current) != migration.SOURCE_BINDINGS[ALCHIMIE_SOURCE]
+    (isolated / ALCHIMIE_SOURCE).write_bytes(current)
+    _reject_unchanged(isolated, "stale source: " + ALCHIMIE_SOURCE)
 
 
 def test_validated_write_changes_only_seeds_in_one_record_and_rejects_reapplication(isolated):

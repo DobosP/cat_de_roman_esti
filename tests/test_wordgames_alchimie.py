@@ -211,7 +211,7 @@ def test_combine_with_no_discovery_counts_move(client: Client) -> None:
         body = res.json()
         if not body["discovered"]:
             barren = (a, b)
-            assert body["message"] == "Nicio combinatie noua."
+            assert body["message"] == "Perechea nu are o rețetă în această rundă. Fără penalizare."
             assert body["already_tried"] is False
             assert body["moves"] >= 1
             break
@@ -531,11 +531,12 @@ def test_dead_pair_whisper_starts_late_rotates_and_stays_generic(
     messages = [_combine(client, gid, pair)["message"] for pair in pairs[:needed]]
     # The first few dead pairs stay silent; the whisper is for a genuine dry spell.
     early = messages[: A.WHISPER_AFTER_FRUITLESS - 1]
-    assert early == ["Nicio combinatie noua."] * len(early)
+    assert early == ["Perechea nu are o rețetă în această rundă. Fără penalizare."] * len(early)
 
     late = messages[A.WHISPER_AFTER_FRUITLESS - 1 :]
-    whispers = [message.removeprefix("Nicio combinatie noua. ") for message in late]
-    assert all(message.startswith("Nicio combinatie noua. ") for message in late)
+    prefix = "Perechea nu are o rețetă în această rundă. Fără penalizare. "
+    whispers = [message.removeprefix(prefix) for message in late]
+    assert all(message.startswith(prefix) for message in late)
     # Deterministic rotation that wraps back to the first whisper.
     assert whispers == [
         A.DEAD_PAIR_WHISPERS[index % len(A.DEAD_PAIR_WHISPERS)]
@@ -549,13 +550,15 @@ def test_dead_pair_whisper_starts_late_rotates_and_stays_generic(
     # Reset restarts the game, so the dry spell (and its whisper) starts over.
     client.post(f"{BASE}/games/{gid}/reset")
     assert session.fruitless_total == 0
-    assert _combine(client, gid, pairs[0])["message"] == "Nicio combinatie noua."
+    assert _combine(client, gid, pairs[0])["message"] == (
+        "Perechea nu are o rețetă în această rundă. Fără penalizare."
+    )
 
 
 def test_repeated_barren_pair_is_authoritative_free_and_resettable(
     client: Client,
 ) -> None:
-    """One unordered barren experiment costs once; reset intentionally forgets it."""
+    """One unordered barren experiment counts once without score cost; reset forgets it."""
     state = _create(client, seed=7)
     gid = state["game_id"]
     inventory = state["inventory"]
@@ -575,7 +578,7 @@ def test_repeated_barren_pair_is_authoritative_free_and_resettable(
     first = first_res.json()
     assert first["discovered"] == []
     assert first["inventory"] == inventory
-    assert first["message"] == "Nicio combinatie noua."
+    assert first["message"] == "Perechea nu are o rețetă în această rundă. Fără penalizare."
     assert first["already_tried"] is False
     assert first["moves"] == first["attempted_count"] == 1
     assert first["hint_available"] is False

@@ -242,6 +242,7 @@ export default function Alchimie({
       .join(",");
     return stableKey([
       GAME_KEY,
+      "productive-crafts-v92",
       state.daily ? `daily-${state.daily}` : state.difficulty,
       state.target.id,
       seeds,
@@ -659,6 +660,7 @@ export default function Alchimie({
             description={
               <p style={{ margin: 0 }}>
                 Atinge un cuvânt, apoi altul: se combină imediat. Descoperă cuvinte noi până creezi ținta.
+                {" "}Perechile fără rezultat nu scad scorul.
               </p>
             }
             steps={[

@@ -186,12 +186,12 @@ class AlchimieSession:
 
     @property
     def score(self) -> int:
-        """Reward few combines. Perfect (==target depth) gives 1000; floor of 100.
+        """Reward efficient discoveries without charging for empty experiments.
 
-        Each combine beyond the optimal depth costs 120 pts; each revealed hint costs
-        150 pts. Score never drops below the 100 floor for a finished game.
+        Each successful craft beyond par costs 120 points; a requested hint costs 150.
+        Empty and repeated pairs cost nothing. Keep the existing 100-point floor.
         """
-        extra = max(0, self.moves - self.target_depth)
+        extra = max(0, self.moves - self.fruitless_total - self.target_depth)
         return max(100, 1000 - 120 * extra - 150 * self.hints_used)
 
     def add(self, node_id: str, parents: tuple[str, str] | None) -> None:
@@ -350,6 +350,33 @@ def _build_recipe_projection(
     svc = get_service()
     service_ref = _projection_service_cache_ref(svc)
     return _build_recipe_projection_cached(tuple(seeds), target, category, service_ref)
+
+
+def _build_playable_recipe_projection(
+    seeds: list[str], target: str, category: str | None,
+) -> RecipeProjection | None:
+    """Preserve the historical core and add only exact, independently reviewed recipes.
+
+    The core builder remains available for historical reconstruction. Serving and
+    current-content audits use this wrapper so they see the same extended book.
+    """
+    from .recipe_extensions import extend_recipes
+
+    core = _build_recipe_projection(seeds, target, category)
+    if core is None:
+        return None
+    recipes = extend_recipes(
+        get_service(), seeds, target, category, core.recipes, core.routes, core.par,
+    )
+    if recipes == core.recipes:
+        return core
+    plan = _minimum_projected_plan(set(seeds), target, recipes, max_actions=core.par)
+    if plan is None or len(plan) != core.par:
+        raise ValueError("Reviewed Alchimie recipes must preserve the exact target par")
+    return RecipeProjection(
+        recipes=recipes, routes=core.routes, par=core.par,
+        candidate_quality=core.candidate_quality,
+    )
 
 
 def _projection_service_cache_ref(svc: WordGameService) -> _ProjectionServiceRef:
@@ -613,7 +640,7 @@ def _build_session(
         raise http_error(503, "Nu exista inca jocuri pentru aceasta categorie.")
 
     def _finish(seeds: list[str], target: str) -> AlchimieSession | None:
-        projection = _build_recipe_projection(seeds, target, category)
+        projection = _build_playable_recipe_projection(seeds, target, category)
         if projection is None:
             return None
         session = AlchimieSession(
@@ -829,7 +856,10 @@ def _target_payload(session: AlchimieSession) -> dict[str, object]:
 def _share_line(session: AlchimieSession) -> str:
     """A short Wordle-style shareable result line for a won game."""
     # "Perfect" == solved in the optimal number of combines with no hints.
-    perfect = session.moves <= session.target_depth and session.hints_used == 0
+    perfect = (
+        session.moves - session.fruitless_total <= session.target_depth
+        and session.hints_used == 0
+    )
     medal = "✨" if perfect else "⚗️"
     header = "cat_de_roman_esti · Alchimie"
     if session.category:
@@ -941,7 +971,7 @@ class CreateGameView(ContractAPIView):
         if curated is not None:
             curated_seeds = [str(s) for s in curated.payload["seeds"]]
             curated_target = str(curated.payload["target"])
-            projection = _build_recipe_projection(
+            projection = _build_playable_recipe_projection(
                 curated_seeds, curated_target, curated.category
             )
             if (
@@ -1049,7 +1079,12 @@ class CombineView(ContractAPIView):
             session.fruitless_total += 1
 
         if not discovered:
-            message = "Nicio combinatie noua."
+            known = session.recipes.get(pair, ())
+            if known:
+                names = ", ".join(svc.label(node) for node in known)
+                message = f"Ai deja rezultatul: {names}. Fără penalizare."
+            else:
+                message = "Perechea nu are o rețetă în această rundă. Fără penalizare."
             whisper = _dead_pair_whisper(session)
             if whisper:
                 message += f" {whisper}"

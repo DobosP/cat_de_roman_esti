@@ -1,4 +1,4 @@
-"""V34 Alchimie sparse-recipe, inventory, and deterministic-quality contracts."""
+"""Historical/core sparse projection contracts; V92 live extensions have separate tests."""
 
 from __future__ import annotations
 

@@ -1,37 +1,37 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-09-13 — V92 interfaces are green locally across all six games; ready for owner playtesting.
+Last verified: 2026-09-13 — V92 reviewed Alchimie recipe additions and free misses are green locally.
 
 ## Current state
 
 - Six-game anonymous Romanian arcade, Django BFF + React SPA; terminal CLI retained.
-- V92 continues on `feat/v92-alchimie-gui`. The owner explicitly expanded the interface
-  review to all five other games after the Alchimie correction. This pass starts from
-  `f57162d`; no V93 or recurring version loop is started (ADR-0143).
-- Intrusul keeps one-tap answers and Perechi two-tap matching. Compact instructions
-  and balanced grids prioritize the board. Retapping cancels a Perechi selection;
-  redundant Golește is removed. Solved pairs follow remaining tiles. Locked hint states
-  are text; available hints show their 150-point cost and retain earned feedback.
-- Conexiuni keeps four columns on phones and places shuffle/clear/check below the board.
-  Checking stays explicit because mistakes are limited. The fourth selected tile never
-  submits automatically. Lives, selection count, one-away feedback and earned clues
-  remain visible; available clues show the existing 100-point cost.
-- Cald sau Rece prioritizes the guess field, inline rank meaning and ranked words.
-  Input focus supports repeated guesses while respecting navigation elsewhere. Options
-  contain reveal, ordering and a clearly named new-round action. Reveal still needs
-  confirmation, with safe cancel focused and reachable. Hint cost remains 120 points.
-- Lanț puts current word, target and legal next choices together. Exact earned hint
-  choices now take one tap; uncertain spelling suggestions remain edit-only. History
-  and the original-start optimal benchmark move into options, with no invented distance.
-  Undo stays available. Owned action focus follows consumed choices without stealing it.
-- All five games use closed optional rules/tools; configurable setup choices are
-  optional. Consumed quick-game hints restore lost keyboard focus to an eligible word,
-  while deliberate focus moves and passive saved-hint restoration remain untouched.
-- Alchimie direct crafting from `f57162d` is unchanged: two word taps combine, a sole
-  useful result carries forward, failed attempts keep the first word, drag/keyboard
-  use the same guarded path. Its previous three-tap seed-38 win remains baseline evidence.
-- References: NYT Connections, official Contexto, Wikispeedia, Wordwall and Sporcle.
-  Details and inspection limits: [ADR-0143](adr/0143-simplify-the-five-other-games.md).
+- The owner extended V92 from interface work into Alchimie recipe quality and the balance
+  between exploration and targets. Work continues on `feat/v92-alchimie-gui` from `e46bf3d`.
+  Automatic iteration remains stopped; no V93 or deployment is authorized (ADR-0144).
+- Alchimie now has **50 independently reviewed recipe additions across 28 rounds**,
+  generated into a separate bound catalog. All 80 original recipe cores, routes, seeds,
+  targets and exact pars remain intact. Other games' content and behavior are unchanged.
+- Live recipes increase **554→604**. Productive pairs among initially selectable words
+  rise **190/476 (39.9%)→223/502 (44.4%)**; raw all-seed coverage is 15.5%→18.2% and
+  includes sidelined words. Median openings rise 2→3; single-opening rounds fall 16→12.
+- Single productive winning-sequence rounds fall **5→3**. Nineteen rounds still have
+  one final pair; median discoverable concepts stays 4.5. This remains short target
+  challenges, with no new free-play world, side discoveries or automatic AI generation.
+- The easy seed-38 Sport round accepts every football-club pairing: **4/15→7/15**
+  productive openings. It still has three discoveries and two final approaches.
+- Empty and repeated experiments cost **0 points**. Extra successful crafts beyond par
+  still cost 120 and hints 150; the floor stays 100. The client separates the new scoring
+  basis from older local puzzle records. Feedback distinguishes missing recipes from
+  results already owned. Target/session/privacy gates remain server-authoritative.
+- Two semantic and two final bound reviews accepted the exact catalog and live audit.
+  Serving matches exact core and graph metadata, and never automatically enables an
+  arbitrary graph triangle. Pending-board gates bind the new loader/catalog; old reviews
+  retain historical core reconstruction and original hashes (ADR-0144).
+- The earlier V92 direct Alchimie input and five-game GUI improvements remain; their
+  historical evidence is under `reviews/v92-direct-crafting/` and `reviews/v92-other-interfaces/`.
+- Design direction: a future curated, target-independent discovery world with optional
+  goals. Reference evidence and the limits of this first pass are in
+  [ADR-0144](adr/0144-reviewed-alchimie-recipe-freedom.md).
 
 ## Inventory and invariants
 
@@ -46,12 +46,14 @@ Last verified: 2026-09-13 — V92 interfaces are green locally across all six ga
 
 Pack **661 = 653 approved + 8 pending**, with **491 eligible** original four-game records.
 KG remains `fixture-v90-household-discovery`: **2416 nodes/9459 links/8641 forms/180 puzzles**.
-V92 changes no content: all concepts, links, forms, puzzles, curated rounds, approvals,
-eligibility and the 336 frozen derived boards match baseline `6208eae` exactly.
+Graph/pack concepts, links, forms, puzzles, rounds, approvals, eligibility and the 336
+frozen derived boards remain exact. The separate recipe catalog adds 50 serving rules.
 Sessions retain 7200-second sliding TTL, 1000 entries/game, locks, 64 KiB requests and bounded
 histories/caches. Private recipes, routes and target IDs remain server-controlled.
 
 ## Current artifact pins
+
+- Recipe extensions: `ab58dbf9a36561503032508f58338352fd634d054ae99629ab68fd18b42ea301`
 
 - `games_pack.json`: `6bf27de5da270258290ecb4ed41c3ef60a609e3e153855f38b7556a7f2aedeca`
 - `board_rankings_v37.json`: `01fc906e390b8d3135f1856930458aa86873a525049b419eceb8652c72f717f8`
@@ -65,22 +67,20 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
 
 ## Verification
 
-- Node 24.19.0: **195 native checks**, ESLint, typecheck/build and **119.18/120 KiB**
-  initial gzip budget pass. New styles/components load through the game screens.
-- Focused interface/accessibility gate: **50 passed**. Consumed-hint focus follow-up:
-  **18 passed**, covering both quick games, keyboard restoration and no focus stealing.
-  Final complete six-game gate: **414 passed**, four workers, zero retries.
-  Commands and fingerprints: [verification](reviews/v92-other-interfaces/verification.json).
-- The first focused run had 42 passes and four test-only casing mismatches; assertions
-  now follow server-authored labels. Review also reproduced/fixed lost or stolen focus
-  and made reveal confirmation reachable on short screens. Two stale replay fixtures
-  were corrected to exercise genuinely scrolled compact results; final focused/full gates pass.
-- Backend, API wrappers, content and Alchimie source have no diff from `f57162d`.
-  Prior **1652 backend/53 accounts** tests and validators remain baseline evidence;
-  this GUI-only pass uses new real BFF browser journeys rather than rerunning those suites.
-- Content delta from `f57162d`: zero concept/connection/form/puzzle/round/approval/
-  eligibility/derived-board changes. Human playtesting and physical-device acceptance
-  remain unrun. Current review: [other interfaces](reviews/v92-other-interfaces/README.md).
+- Final Python 3.12 gates: **1702 backend / 53 accounts tests pass**. Fixture and pack
+  validators are GREEN, Ruff and whitespace pass. Python 3.14 was not rerun in this pass.
+- Frontend Node 24.19.0: **195 native / 422 browser checks pass**, lint/typecheck/build
+  GREEN, initial JS/CSS **119.19/120 KiB gzip**. Browser run uses four workers, zero retries.
+- Targeted recipe/action/history gates pass 145 checks; the generator/loader covers
+  45 guard tests. V91 migration history passes 38 with exact frozen source bytes and
+  explicit rejection of the newer runtime; old hashes and review files are unchanged.
+- Both reviewers independently reproduced all 80 final serving books and current source
+  hashes. Private target IDs stay hidden; concepts/core recipes/routes/par and bounds
+  remain exact. The final catalog is byte-identical to the approved proposal.
+- Earlier full Python run: 1671 pass / 30 old-source fixture failures. The historical
+  setup fix retains the migration's original hash gates; the complete final run passes.
+- Evidence: [recipe freedom review](reviews/v92-alchimie-recipe-freedom/README.md),
+  exact before/after inventories, candidate judgments, live audit and verification receipt.
 
 ## Production and remaining work
 
@@ -88,8 +88,8 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
   2026-09-09. V92 has not been pushed or deployed; current work is isolated on its task branch.
 - Last documented production smoke: health 200, accounts off, 2416 concepts, 14/14
   categories available and real Intrusul/Perechi seed-38 boards. HSTS follow-up remains open.
-- Next: review the V92 play feel with the owner, then integrate the candidate. Physical
-  device/player acceptance remains unrun. Recurring iteration remains stopped.
+- Next: owner playtesting, then local integration. A broader persistent discovery world
+  remains design/content work; no such mode is claimed here. Device/player acceptance is unrun.
 - Existing content follow-ups remain: three proposed Neagu past-tense labels, four thin
   Contexto neighborhoods, 17 unknown household surfaces and earlier hidden-target/A5 holds.
   Keep accounts out until the DEPLOY checklist passes.
@@ -97,4 +97,4 @@ Mobile content: `sha256:83cab839a30b48eeb2ef33b3089e31dae8ec3a82e3d6d9e2e4d5c2a2
 ## Doc map
 
 - `README.md`/`AGENTS.md`: orientation; `docs/agent-map.md`/`docs/agent-testing.md`: routes/gates.
-- `docs/adr/` (newest 0143), `docs/reviews/`, WORKLOG: decisions, evidence and history.
+- `docs/adr/` (newest 0144), `docs/reviews/`, WORKLOG: decisions, evidence and history.
